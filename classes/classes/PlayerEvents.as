@@ -2206,8 +2206,6 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 
 			//Turn to Bicorn
 			var CurentColor:String;
-			var bicornColorPalette:Array = ["black", "midnight black", "midnight"];
-			var bicornHairPalette:Array = ["silver","black", "midnight black", "midnight"];
 			if ((player.horns.type == Horns.BICORN || player.horns.type == Horns.UNICORN) && player.cor > 89 && !player.hasPerk(PerkLib.AvatorOfCorruption)) {
 				outputText("\nA sudden wave of pleasure strike you making you moan");
 				if (player.horns.type == Horns.UNICORN) {
@@ -2215,13 +2213,13 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					transformations.HornsBicorn.applyEffect(false);
 				}
 				if (!InCollection(player.hairColor, UnicornRace.BicornHairColors)) {
-					CurentColor = randomChoice(bicornHairPalette);
+					CurentColor = randomChoice(UnicornRace.BicornHairColors);
 					outputText(" You feel a tingling in your hairs as the strands turns "+CurentColor+".");
 					player.hairColor = CurentColor;
 				}
 				if (!InCollection(player.furColor, UnicornRace.BicornFurColors)) {
-					CurentColor = randomChoice(bicornColorPalette);
-					outputText(" Your fur tingle and you coo in delight as it turn "+CurentColor+".");
+					CurentColor = randomChoice(UnicornRace.BicornFurColors);
+					outputText(" Your fur tingles and you coo in delight as it turns "+CurentColor+".");
 					player.furColor = CurentColor;
 				}
 				if (CoC.instance.transformations.EyesChangeColor(["red"]).isPossible()) {
@@ -2229,8 +2227,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					player.eyes.colour = "red";
 				}
 				if (player.wings.type == Wings.FEATHERED_ALICORN) {
-					outputText(" Your wings aren’t spared either all the feather falling off to reveal a membranous demonic pair of bat wings.");
-					player.wings.type = Wings.NIGHTMARE;
+					CoC.instance.transformations.WingsNightmare.applyEffect();
 				}
 				outputText("\n\n<b>You giggle in delight of your own corruption as you fall from grace into a ");
 				if (player.wings.type == Wings.NIGHTMARE) outputText("nightmare");
@@ -2255,8 +2252,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			//Fixing wings
 			if (player.horns.type == Horns.BICORN && player.wings.type == Wings.FEATHERED_ALICORN) {
-				outputText("\n\nYour wings changes as all the feather falling off to reveal a membranous demonic pair of bat wings.");
-				CoC.instance.transformations.WingsNightmare.applyEffect(false);
+				CoC.instance.transformations.WingsNightmare.applyEffect();
 				needNext = true;
 			}
 			//Losing horn

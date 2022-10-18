@@ -3109,7 +3109,7 @@ private function normalSheilaPregNotifREPEATEDED():void {
 	menu();
 	//[Help(requires >80 speed, centaur >= 5', naga, or big wings and archery)][Walk With Her][Let Her Go]
 	addButton(0,"Help",normalSheilaPregNotifREPEATEDEDHelpABitchOut).disableIf(!(player.spe > 80 && player.hasPerk(PerkLib.Runner)
-		|| player.isTaur() || player.isNaga() || player.canFly && player.hasKeyItem("Bow") >= 0),
+		|| player.isTaur() || player.isNaga() || player.canFly && player.isBowTypeWeapon()),
 		"Requires: high speed and 'Runner' perk, or Taur/Naga body, or wings and a bow.");
 	addButton(1,"WalkWithHer",normalSheilaPregNotifREPEATEDEDWalkWithHer);
 	addButton(2,"Let Her Go",normalSheilaPregNotifREPEATEDEDLetHerGo);
@@ -3203,7 +3203,7 @@ private function normalSheilaPregNotifREPEATEDEDHelpABitchOut():void {
 	}
 	//(else wings and archery skill)
 	//less QQ, more pew pew
-	else if(player.canFly() && player.hasKeyItem("Bow") >= 0) {
+	else if(player.canFly() && player.isBowTypeWeapon()) {
 		outputText("\n\n\"<i>Just wander around and flush game; point out animals you see.</i>\"");
 		
 		outputText("\n\n[sheilaname] looks a little confused, but glumly nods.  \"<i>Alright, [name]; we'll do it your way.</i>\"  She begins to walk, then turns back when you don't follow.  \"<i>Are you com-</i>\"");

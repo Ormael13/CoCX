@@ -1104,8 +1104,8 @@ public final class Mutations extends MutationsHelper {
             outputText("  Your [clit] engorges, ");
             if (player.clitLength < 3) outputText("parting your lips.");
             else outputText("bursting free of your lips and bobbing under its own weight.");
-            if (player.vaginas[0].vaginalWetness <= VaginaClass.WETNESS_NORMAL) outputText("  Wetness builds inside you as your " + player.vaginaDescript(0) + " tingles and aches to be filled.");
-            else if (player.vaginas[0].vaginalWetness <= VaginaClass.WETNESS_SLICK) outputText("  A trickle of wetness escapes your " + player.vaginaDescript(0) + " as your body reacts to the desire burning inside you.");
+            if (player.vaginas[0].vaginalWetness <= VaginaClass.WETNESS_NORMAL) outputText("  Wetness builds inside you as your [vagina] tingles and aches to be filled.");
+            else if (player.vaginas[0].vaginalWetness <= VaginaClass.WETNESS_SLICK) outputText("  A trickle of wetness escapes your [vagina] as your body reacts to the desire burning inside you.");
             else if (player.vaginas[0].vaginalWetness <= VaginaClass.WETNESS_DROOLING) outputText("  Wet fluids leak down your thighs as your body reacts to this new stimulus.");
             else outputText("  Slick fluids soak your thighs as your body reacts to this new stimulus.");
         }
@@ -1299,7 +1299,7 @@ public final class Mutations extends MutationsHelper {
             }
             if (rando >= 90 && changeLimit != 0) {
                 if (InCollection(player.skinColor, DemonRace.DemonSkinColors)) {
-                    if (player.vaginas.length > 0) {
+                    if (player.hasVagina()) {
                         outputText("[pg]Your heart begins beating harder and harder as heat floods to your groin.  You feel your clit peeking out from under its hood, growing larger and longer as it takes in more and more blood.");
                         if (player.clitLength > 3 && !player.hasPerk(PerkLib.BigClit)) outputText("  After some time it shrinks, returning to its normal aroused size.  You guess it can't get any bigger.");
                         if (player.clitLength > 5 && player.hasPerk(PerkLib.BigClit)) outputText("  Eventually it shrinks back down to its normal (but still HUGE) size.  You guess it can't get any bigger.");
@@ -2522,6 +2522,7 @@ public final class Mutations extends MutationsHelper {
             //Kill pussies!
             if (player.vaginas.length > 0) {
                 outputText("[pg]Your vagina clenches in pain, doubling you over.  You slip a hand down to check on it, only to feel the slit growing smaller and smaller until it disappears, taking your clit with it! <b> Your vagina is gone!</b>");
+                player.clitLength = .25;
                 player.removeVagina(0, 1);
             }
             //Dickz
@@ -2586,8 +2587,8 @@ public final class Mutations extends MutationsHelper {
             if (player.vaginas.length > 0) {
                 outputText("Your vagina clenches in pain, doubling you over.  You slip a hand down to check on it, only to feel the slit growing smaller and smaller until it disappears, taking your clit with it![pg]");
                 if (player.bRows() > 1 || player.butt.type > 5 || player.hips.type > 5) outputText("  ");
+                player.clitLength = .25;
                 player.removeVagina(0, 1);
-                player.clitLength = .5;
             }
             //Kill extra boobages
             if (player.bRows() > 1) {
@@ -4920,7 +4921,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Gorgon hair
-        if ((type == 0 || type == 3) && player.ears.type == Ears.SNAKE && transformations.HairGorgon.isPossible() && changes < changeLimit && rand(4) == 0) {
+        if (type == 0 && player.ears.type == Ears.SNAKE && transformations.HairGorgon.isPossible() && changes < changeLimit && rand(4) == 0) {
 		    outputText("[pg]");
 		    transformations.HairGorgon.applyEffect();
             changes++;
@@ -5184,8 +5185,8 @@ public final class Mutations extends MutationsHelper {
         //Reset vaginal virginity to correct state
         if (player.gender >= 2) {
             transformations.VaginaHuman().applyEffect(false);
+            player.clitLength = .25;
         }
-        player.clitLength = .25;
         //Tighten butt!
         player.butt.type = 2;
         player.hips.type = 2;
@@ -9560,9 +9561,8 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
 
-        var raiju_hair:Array = ["purple", "light blue", "yellow", "white", "lilac", "green", "stormy blue"];
-        if (!InCollection(player.hairColor, raiju_hair) && changes < changeLimit && rand(3) == 0) {
-            player.hairColor = randomChoice(raiju_hair);
+        if (!InCollection(player.hairColor, RaijuRace.RaijuHairColors) && changes < changeLimit && rand(3) == 0) {
+            player.hairColor = randomChoice(RaijuRace.RaijuHairColors);
             outputText("[pg]Your hair stands up on end as bolts of lightning run through each strand, changing them to a <b>[haircolor] color!</b>");
         }
         if (player.lowerBody != LowerBody.RAIJU && changes < changeLimit && rand(3) == 0) {
@@ -9851,12 +9851,11 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         if (player.eyes.type != Eyes.MONOEYE && changes < changeLimit && rand(3) == 0) {
+            outputText("[pg]");
             if (transformations.EyesHuman.isPresent()) {
-                outputText("[pg]You gasp in discomfort as your vision troubles and blurr for a moment. You pass your hand to feel for your face and discover to your absolute surprise you can't feel your nose ridge heck as you poke yourself in the eye and recoil back in surprise. Seems your eyes merged together into one single all encompassing eye like that of some cyclopean creature.\n");
-			transformations.EyesMonoeye.applyEffect();
+                transformations.EyesMonoeye.applyEffect();
             }
 			else {
-                outputText("[pg]");
                 transformations.EyesHuman.applyEffect();
             }
             changes++;
@@ -9877,8 +9876,8 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
 		if (player.wings.type == Wings.NONE && player.lowerBody == LowerBody.HUMAN && player.lowerBody != LowerBody.GAZER && player.rearBody.type == RearBody.TENTACLE_EYESTALKS && player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 2 && changes < changeLimit && rand(3) == 0 && type == 1) {
-            outputText("[pg]You feel so tired you could fall on your knees but to your surprise you don't. Instead of actually hitting the ground you simply float in the air. Your legs begin to sweat and drip at high rate until they cover in some kind of oily black fluids just like those of a gazer. You are now naturally levitating.");
-			transformations.WingsLevitation.applyEffect();
+            outputText("[pg]");
+            transformations.WingsLevitation.applyEffect();
             outputText("[pg]");
             transformations.LowerBodyGazer.applyEffect();
             changes++;
@@ -9889,7 +9888,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
 		if (changes < changeLimit && player.lowerBody == LowerBody.GAZER && player.arms.type == Arms.HUMAN && player.arms.type != Arms.GAZER && rand(3) == 0 && type == 1) {
-            outputText("[pg]Your arms begin to sweat and drip at high rate until they cover in some kind of oily ink black mucus. It drops from your hands down to the ground oozing like tar. You would say ew but for some reason it doesn't smell so bad, heck taking a whiff it almost smells like perfume or rather aphrodisiacs. Heck thinking on it now from a far glance it looks like you are wearing sleeved gloves. Your arms are now covered from the forearm to the digits into tar like fluids.");
+            outputText("[pg]");
 			transformations.ArmsGazer.applyEffect();
             changes++;
         }
@@ -9933,7 +9932,7 @@ public final class Mutations extends MutationsHelper {
         clearOutput();
         var changes:Number = 0;
         var changeLimit:Number = 1;
-        var Ratatoskr_Colour:Array = ["brown","light brown","caramel","chocolate","russet"];
+        var Ratatoskr_Colour:Array = RatatoskrRace.RatatoskrHairColors;
         if (rand(2) == 0) changeLimit++;
         if (rand(3) == 0) changeLimit++;
         changeLimit += player.additionalTransformationChances;
@@ -9970,7 +9969,7 @@ public final class Mutations extends MutationsHelper {
         //Physical
         if (!InCollection(player.hairColor, Ratatoskr_Colour) && changes < changeLimit && rand(3) == 0) {
             player.hairColor = randomChoice(Ratatoskr_Colour);
-            outputText("[pg]Your hair tingles as the strands turns <b>[haircolor]!</b>");
+            outputText("[pg]Your hair tingles as the strands turn <b>[haircolor]!</b>");
         }
         if (!player.isFurCovered() && changes < changeLimit && rand(3) == 0) {
             var color1:String = randomChoice(Ratatoskr_Colour);
@@ -9987,7 +9986,7 @@ public final class Mutations extends MutationsHelper {
         }
 		if (rand(2) == 0 && player.tallness > 42) {
             changes++;
-            outputText("[pg]Wait is it just you or did the ground get closer? No way, you did become smaller!");
+            outputText("[pg]Wait, is it just you or did the ground get closer? No way, you did become smaller!");
             player.tallness -= (1 + rand(5));
         }
         if (player.lowerBody != LowerBody.SQUIRREL && changes < changeLimit && rand(3) == 0) {
@@ -10107,10 +10106,8 @@ public final class Mutations extends MutationsHelper {
 
         //get partial fur from full if pc face is human
         if (player.isFurCovered() && rand(3) == 0 && changes < changeLimit && (player.skin.coverage == Skin.COVERAGE_COMPLETE || player.skin.coverage == Skin.COVERAGE_HIGH)) {
-            var color2:String = randomChoice(kamaitachi_hair);
-            outputText("[pg]What used to be a dense coat of fur begins to fall in patches on the ground leaving you with just enough fur to cover some area of your body.  <b>Some area of your body are now partially covered with fur!</b>");
-            player.skin.coverage = Skin.COVERAGE_LOW;
-            player.coatColor = color2;
+            outputText("[pg]");
+            transformations.SkinFur(Skin.COVERAGE_LOW, {colors:kamaitachi_hair})
             changes++;
         }
 
@@ -10330,9 +10327,10 @@ public final class Mutations extends MutationsHelper {
         //-hair morphs to anemone tentacles, retains color, hair shrinks back to med-short('shaggy') and stops growing, lengthening treatments don't work and goblins won't cut it, but more anemone items can lengthen it one level at a time
 
         if (player.gills.type == Gills.ANEMONE && transformations.HairAnemone.isPossible() && changes < changeLimit && rand(5) == 0) {
+            if (flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] == 0)
+                changes++;
             outputText("[pg]");
             transformations.HairAnemone.applyEffect();
-            changes++;
             changes++;
             changes++;
             //(reset hair to 'shaggy', add tentacle hair status, stop hair growth)
@@ -12706,13 +12704,13 @@ public final class Mutations extends MutationsHelper {
                     player.vaginas[0].vaginalLooseness--;
                 } else {
                     outputText("[pg]A tightness in your groin is the only warning you get before your <b>[vagina] disappears forever</b>!");
-                    //Goodbye womanhood!
-                    player.removeVagina(0, 1);
                     if (player.cocks.length == 0) {
                         outputText("  Strangely, your clit seems to have resisted the change, and is growing larger by the moment. Eventually it ends, <b>leaving you with a completely human penis.</b>");
                         player.createCock(player.clitLength + 2);
                         player.clitLength = .25;
                     }
+                    //Goodbye womanhood!
+                    player.removeVagina(0, 1);
                 }
                 changes++;
             }
@@ -13079,13 +13077,13 @@ public final class Mutations extends MutationsHelper {
                     player.vaginas[0].vaginalLooseness--;
                 } else {
                     outputText("[pg]A tightness in your groin is the only warning you get before your <b>[vagina] disappears forever</b>!");
-                    //Goodbye womanhood!
-                    player.removeVagina(0, 1);
                     if (player.cocks.length == 0) {
                         outputText("  Strangely, your clit seems to have resisted the change, and is growing larger by the moment. Eventually it ends, <b>leaving you with a completely human penis.</b>");
                         transformations.CockHuman(0, player.clitLength + 2).applyEffect(false);
                         player.clitLength = .25;
                     }
+                    //Goodbye womanhood!
+                    player.removeVagina(0, 1);
                 }
                 changes++;
             }
@@ -15599,12 +15597,12 @@ public final class Mutations extends MutationsHelper {
                 } else {
                     outputText("[pg]A tightness in your groin is the only warning you get before your <b>[vagina] disappears forever</b>!");
                     //Goodbye womanhood!
-                    player.removeVagina(0, 1);
                     if (player.cocks.length == 0) {
                         outputText("  Strangely, your clit seems to have resisted the change, and is growing larger by the moment. Eventually it ends, <b>leaving you with a completely human penis.</b>");
                         transformations.CockHuman().applyEffect(false);
                         player.clitLength = .25;
                     }
+                    player.removeVagina(0, 1);
                 }
                 changes++;
             }
@@ -16251,3 +16249,4 @@ public final class Mutations extends MutationsHelper {
     }
 }
 }
+

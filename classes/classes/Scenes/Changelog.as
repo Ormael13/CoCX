@@ -339,8 +339,25 @@ public class Changelog extends BaseContent
 			outputText("-Minoking new bug fixed. Ayo armor lingering buff fixed. Epic Elementals in S.P.Turn fixed (Svalkash PR#286)\n");
 			outputText("-Cat subraces reworked to allow more flexible part mixing (character is considered subrace that has the most distinctive parts). (aimozg)");
 			outputText("-Fixed Bicorn horns giving Alicorn score instead of Nightmare. (aimozg)\n");
-			outputText("-Regular Nipples added to metamorph. Racial sorting is now persistant to the one you set. MB is now blocked from being encountered until you meet and agree to the visit to the factory with Marae Jiangshi \"armour\" now forces itself onto the player after it saves and removes the current set. Mouse Cocoa TF colour selection null fix. Kirin added to Heart Of The Storm IM Races qualifier. (Jtecx PR#284)\n");
+			outputText("-Regular Nipples added to metamorph. Racial sorting is now persistant to the one you set. MB is now blocked from being encountered until you meet and agree to the visit to the factory with Marae. Jiangshi \"armour\" now forces itself onto the player after it saves and removes the current set. Mouse Cocoa TF colour selection null fix. Kirin added to Heart Of The Storm IM Races qualifier. (Jtecx PR#284)\n");
 			outputText("-Kraken display fix and small Tidarion rebalance. (Svalkash PR#288)\n");
+			outputText("-Hydra TF no longer grants snake (gorgon) hair (since they now negatively affect hydra score).\n");
+			outputText("-A bunch of metamorph and transformation fixes been piling up for a few months now (EragonX)\n");
+			outputText("-Smol bugfix to nat metamorph auto-proccing + facemem typo (Jtex)\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
 			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
 			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
@@ -442,17 +459,17 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -488,6 +505,15 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

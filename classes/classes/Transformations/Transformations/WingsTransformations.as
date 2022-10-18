@@ -112,10 +112,15 @@ public class WingsTransformations extends MutationsHelper {
 			function (doOutput: Boolean): void {
 				var desc: String = "";
 
-				TransformationUtils.applyTFIfNotPresent(transformations.WingsNone, doOutput);
 
-				desc += "Pain lances through your back, the muscles knotting oddly and pressing up to bulge your [skin.type]. It hurts, oh gods does it hurt, but you can't get a good angle to feel at the source of your agony. A loud crack splits the air, and then your body is forcing a pair of narrow limbs through a gap in your [armor]. "+
-						"Blood pumps through the new appendages, easing the pain as they fill out and grow. Tentatively, you find yourself flexing muscles you didn't know you had, and <b>you're able to curve the new growths far enough around to behold your brand new, white wings.</b>";
+				if (player.wings.type == Wings.FEATHERED_ALICORN) {
+					desc += " Your wings aren’t spared either all the feather falling off to reveal a membranous demonic pair of bat wings.";
+				} else {
+					TransformationUtils.applyTFIfNotPresent(transformations.WingsNone, doOutput);
+
+					desc += "Pain lances through your back, the muscles knotting oddly and pressing up to bulge your [skin.type]. It hurts, oh gods does it hurt, but you can't get a good angle to feel at the source of your agony. A loud crack splits the air, and then your body is forcing a pair of narrow limbs through a gap in your [armor]. "+
+							"Blood pumps through the new appendages, easing the pain as they fill out and grow. Tentatively, you find yourself flexing muscles you didn't know you had, and <b>you're able to curve the new growths far enough around to behold your brand new, white wings.</b>";
+				}
 				player.wings.type = Wings.NIGHTMARE;
 
 				if (doOutput) outputText(desc);

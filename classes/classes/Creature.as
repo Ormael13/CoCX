@@ -3106,7 +3106,7 @@ public class Creature extends Utils
 		//create vagoo
 		public function createVagina(virgin:Boolean = true, vaginalWetness:Number = 1, vaginalLooseness:Number = 0):Boolean
 		{
-			if (vaginas.length >= 2)
+			if (vaginas.length >= 1)
 				return false;
 			var newVagina:VaginaClass = new VaginaClass(vaginalWetness,vaginalLooseness,virgin);
 			newVagina.host = this;
