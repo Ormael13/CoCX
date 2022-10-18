@@ -363,12 +363,12 @@ private function changeEggs():void
 }
 
 public var eggColors:Array = [
-"Black",
-"Blue",
-"Brown",
-"Pink",
-"Purple",
-"White",
+"Black(Ltx)",
+"Blue(-Vg)",
+"Brown(Ass)",
+"Pink(-Dk)",
+"Purple(Hip)",
+"White(Nip)",
 ];
 
 private var _eggTypes:Array;
