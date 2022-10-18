@@ -5073,7 +5073,7 @@ public class Combat extends BaseContent {
      * @param IsFeralCombat
      * @return damage calulation
      */
-	private function meleeDamageNoLagSingle(IsFeralCombat:Boolean = false):Number {
+	public function meleeDamageNoLagSingle(IsFeralCombat:Boolean = false):Number {
 		var damage:Number = 0;
 		//------------
 		// DAMAGE

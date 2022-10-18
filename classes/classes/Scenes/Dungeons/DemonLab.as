@@ -11,6 +11,7 @@ import classes.Scenes.Dungeons.DemonLab.IncubusScientist;
 import classes.Scenes.Dungeons.DemonLab.LabGuard;
 import classes.Scenes.Dungeons.DemonLab.MutantIncubus;
 import classes.Scenes.Dungeons.DemonLab.ProjectNightwalker;
+import classes.Scenes.Dungeons.DemonLab.ProjectTyrant;
 import classes.Scenes.NPCs.DivaScene;
 import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.SceneLib;
@@ -638,6 +639,8 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
             outputText("On the creature’s back sits a heavily muscled Incubus. His green eyes glare at you, and he shakes his head, pointing a light crossbow at you. \n\n");
             outputText("“<i>Tyrant? Kill!</i>”\n\n");
             outputText("You are now fighting Project Tyrant. \n\n");
+            startCombat(new ProjectTyrant());
+            return;
         }
         if (TyrantLabState == 2) {
             outputText("The lab that had once contained “<i>Project Tyrant</i>” is now empty and still. Some sort of serum sits abandoned in several different vials around the room, and the entire place reeks of antiseptic and blood. Tables adorned with odd, extremely sharp knives litter the middle of the lab, with massive cuffs on the corners. These devices were clearly made to hold down the people they were experimenting on, and the smell of blood intensifies as you near them.  \n\n");
