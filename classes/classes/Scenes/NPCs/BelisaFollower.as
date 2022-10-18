@@ -307,7 +307,6 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 	}
 	
 	public function BelisaTalk():void {
-		if (flags[kFLAGS.KIHA_FOLLOWER] == 1 && !KihaFollower.BelisaInteractionHappened && rand(10) == 0)
 		clearOutput();
 		outputText("<i>\"You...Just want to...talk?\"</i> She looks at you, confused, as if the thought hadn’t even occurred to her. <i>\"You...Don’t want to…?\"</i> She rolls her eyes, making a ‘jerk-off’ motion with one hand. You tell her that you have no intention of approaching her sexually right now, and she relaxes a little, smiling. <i>\"Okay then...What do you want to talk about?\"</i>\n\n");
 		menu();

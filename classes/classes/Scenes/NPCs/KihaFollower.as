@@ -2942,6 +2942,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
 
     //First time, ALWAYS started from Sidonie?
     public function sidonieInteractionFirst():void {
+        SidonieInteractionHappened = true;
         clearOutput();
         outputText("As you near Sidonie’s workbench, you hear Sidonie’s voice, loud and clearly angry, near the campfire. As you get near, you see Kiha, sitting at the campfire with some freshly cooked meat in her hands, looking up at Sidonie with a guarded expression on her face. \n"
             + "\n"
@@ -2986,6 +2987,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
     }
 
     public function belisaInteractionFirst(fromBelisa:Boolean):void {
+        BelisaInteractionHappened = true;
         clearOutput();
         outputText("As you walk towards your " + (fromBelisa ? "spider girl" : "dragoness") + "’s part of camp, you hear Belisa’s shrill voice, coming from near her silk home. \n"
             + "\n"
