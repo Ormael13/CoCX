@@ -234,7 +234,7 @@ package classes.GeneticMemories {
 			id: "Oni Teeth Face",
 			name: "Oni Teeth",
 			cost: 100,
-			title: "Oni Teeh",
+			title: "Oni Teeth",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.FaceOniTeeth;
 			}
