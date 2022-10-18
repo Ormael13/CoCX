@@ -116,7 +116,6 @@ public class ProjectTyrant extends Monster {
         takePhysDamage(SceneLib.combat.meleeDamageNoLagSingle(false));
     }
 
-
     public function BlackMortar():void {
         var dmg1:Number;
         outputText("The demon on top grins, whistling, and you see the unholy mount tense up. A massive glob of black goop is launched from the Drider’s backside like a mortar shell. \n\n");
