@@ -4993,7 +4993,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Gorgon hair
-        if ((type == 0 || type == 3) && player.ears.type == Ears.SNAKE && transformations.HairGorgon.isPossible() && changes < changeLimit && rand(4) == 0) {
+        if (type == 0 && player.ears.type == Ears.SNAKE && transformations.HairGorgon.isPossible() && changes < changeLimit && rand(4) == 0) {
 		    outputText("[pg]");
 		    transformations.HairGorgon.applyEffect();
             changes++;
@@ -16321,3 +16321,4 @@ public final class Mutations extends MutationsHelper {
     }
 }
 }
+
