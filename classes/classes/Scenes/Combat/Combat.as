@@ -1061,8 +1061,8 @@ public class Combat extends BaseContent {
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.AlterBindScroll1)) {
-			if (player.statStore.hasBuff("NoLimiterState")) bd = buttons.add("No limiter", returnToNormalState).hint("Toggle off No limiter.");
-			else bd = buttons.add("No limiter", noLimiterState).hint("Toggle on No limiter. (STR+++, ?Lib-?)");
+			if (player.statStore.hasBuff("NoLimiterState")) bd = buttons.add("No Limiter", returnToNormalState).hint("Toggle off No Limiter.");
+			else bd = buttons.add("No Limiter", noLimiterState).hint("Toggle on No Limiter. (STR+++, ?Lib-?)");
 		}
 		if (player.hasPerk(PerkLib.ElementalBody)) {
             var element:int = ElementalRace.getElement(player);
@@ -14649,17 +14649,17 @@ public class Combat extends BaseContent {
 	
 	public function noLimiterState():void {
 		clearOutput();
-		outputText("No limiter on!\n\n");
+		outputText("No Limiter on!\n\n");
 		var tempStr:Number = player.str;
 		mainView.statsView.showStatUp('str');
-		player.buff("NoLimiterState").addStats({"str":tempStr}).withText("No limiter").combatPermanent();
+		player.buff("NoLimiterState").addStats({"str":tempStr}).withText("No Limiter").combatPermanent();
 		statScreenRefresh();
 		menu();
 		addButton(0, "Next", combatMenu, false);
 	}
 	public function returnToNormalState():void {
 		clearOutput();
-		outputText("No limiter off!\n\n");
+		outputText("No Limiter off!\n\n");
 		player.statStore.removeBuffs("NoLimiterState");
 		menu();
 		addButton(0, "Next", combatMenu, false);
