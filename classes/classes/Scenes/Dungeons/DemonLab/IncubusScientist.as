@@ -49,7 +49,7 @@ public class IncubusScientist extends Monster {
         }
     }
 
-    private var ShieldHits:int;
+    public var ShieldHits:int;
     private var ShieldCooldown:Number;
 
     private function ShieldsUp():void {
@@ -58,7 +58,7 @@ public class IncubusScientist extends Monster {
     }
 
     //TODO: hook these two functions somehow
-    private function ShieldsHitMelee():void {
+    public function ShieldsHitMelee():void {
         outputText("Your [weapon] slams hard into the blue light, sliding off it with a shower of sparks. \n\n");
         --ShieldHits;
         if (ShieldHits == 3) {
@@ -73,7 +73,7 @@ public class IncubusScientist extends Monster {
         }
     }
 
-    private function ShieldsHitRanged():void {
+    public function ShieldsHitRanged():void {
         outputText("Your [weapon] slams hard into the blue light, sliding off it with a shower of sparks. \n\n");
         --ShieldHits;
         if (ShieldHits == 3) {

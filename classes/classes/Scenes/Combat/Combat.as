@@ -35,6 +35,7 @@ import classes.Scenes.Areas.VolcanicCrag.GolemsTrueFire;
 import classes.Scenes.Camp.TrainingDummy;
 import classes.Scenes.Dungeons.D3.*;
 import classes.Scenes.Dungeons.DeepCave.*;
+import classes.Scenes.Dungeons.DemonLab.IncubusScientist;
 import classes.Scenes.Dungeons.EbonLabyrinth.*;
 import classes.Scenes.Dungeons.HelDungeon.*;
 import classes.Scenes.Monsters.*;
@@ -2793,6 +2794,12 @@ public class Combat extends BaseContent {
             if (monster as DriderIncubus) taintedMindAttackAttempt();
             return;
         }
+        //Incubus Scientist
+        if (monster is IncubusScientist && (monster as IncubusScientist).ShieldHits > 0) {
+            (monster as IncubusScientist).ShieldsHitRanged();
+            enemyAI();
+            return;
+        }
         flags[kFLAGS.LAST_ATTACK_TYPE] = LAST_ATTACK_BOW;
         if (player.vehicles == vehicles.HB_MECH) {
             if (player.hasKeyItem("HB Rapid Reload") >= 0) {
@@ -4500,7 +4507,12 @@ public class Combat extends BaseContent {
             enemyAI();
             return;
         }
-
+        //Incubus Scientist
+        if (monster is IncubusScientist && (monster as IncubusScientist).ShieldHits > 0) {
+            (monster as IncubusScientist).ShieldsHitMelee();
+            enemyAI();
+            return;
+        }
         //Determine if dodged!
         if ((player.playerIsBlinded() && rand(2) == 0) || monster.speedDodge(player) > 0) {
             //Akbal dodges special education
