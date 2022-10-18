@@ -2409,7 +2409,7 @@ public final class Mutations extends MutationsHelper {
         if (!large)player.refillHunger(20);
         else player.refillHunger(60);
         if (player.blockingBodyTransformations()) {
-            outputText("[pg]Your hips begin to tingles but as you are immunised to transformatives, nothing happens.");
+            outputText("[pg]Your butt begins to tingle, but, as you are immunised to transformatives, nothing happens.");
             return;
         }
         if (!large) {
@@ -2433,7 +2433,7 @@ public final class Mutations extends MutationsHelper {
         if (!large)player.refillHunger(20);
         else player.refillHunger(60);
         if (player.blockingBodyTransformations()) {
-            outputText("[pg]Your hips begin to tingle but as you are immunised to transformatives, nothing happens.");
+            outputText("[pg]Your hips begin to tingle, but, as you are immunised to transformatives, nothing happens.");
             return;
         }
         if (!large || player.hips.type > 20) {
@@ -15027,7 +15027,6 @@ public final class Mutations extends MutationsHelper {
         //init variables
         var changes:Number = 0;
         var changeLimit:Number = 1;
-        var x:int = 0;
         //Temporary storage
         //var temp2:Number = 0;
         //var temp3:Number = 0;
@@ -16249,4 +16248,3 @@ public final class Mutations extends MutationsHelper {
     }
 }
 }
-
