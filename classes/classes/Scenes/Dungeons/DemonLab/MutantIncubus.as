@@ -103,10 +103,10 @@ public class MutantIncubus extends Monster {
             outputText("Using your cat-like flexibility, you manage to bend your spine backwards. Throwing yourself into a sideways flip, you manage to sidestep the creature's clumsy charge.");
         } else {
             outputText("You try to dodge, but the creature’s fist is too fast, hitting you square in the chest. You’re sent tumbling back.");
-            eOneAttack();
+            SceneLib.combat.CommasForDigits(eOneAttack());
             outputText("As it keeps charging through, a few of the drider’s legs come down onto your prone frame, trampling you. ");
-            eOneAttack();
-            eOneAttack();
+            SceneLib.combat.CommasForDigits(eOneAttack());
+            SceneLib.combat.CommasForDigits(eOneAttack());
             outputText("\n");
         }
     }

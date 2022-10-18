@@ -10,7 +10,6 @@ import classes.Monster;
 import classes.PerkLib;
 import classes.Scenes.Dungeons.DemonLab;
 import classes.Scenes.SceneLib;
-import classes.StatusEffects;
 import classes.VaginaClass;
 import classes.internals.WeightedDrop;
 
@@ -85,47 +84,52 @@ public class LabGuard extends Monster {
         SceneLib.dungeons.demonLab.BadEndExperiment(); //TODO
     }
 
+    public var shieldWall:Boolean = false;
+
     private function CorShields():void {
-        if (!DemonLab.TyrantFollower) {
-            outputText("You see the demons in front crouching, planting their shields and readying counterattacks. Melee combat seems to be unadvised, unless you want to end up a pincushion!\n\n(While effect is up, melee attacks deal half damage to the horde, and using melee will allow them to counterattack. Counterattacks deal the same melee damage as their normal attack, and hit anywhere from 2-5 times).");
-        }
         if (DemonLab.TyrantFollower) {
             outputText("The shieldwall demons brace themselves for impact, but your Drider lover whoops, her massive, armoured frame slamming into the wall, sending demon soldiers scattering every which way. ");
+        } else {
+            outputText("You see the demons in front crouching, planting their shields and readying counterattacks. Melee combat seems to be unadvised, unless you want to end up a pincushion!");
+            shieldWall = true;
         }
     }
 
     private function CorVolley():void {
-        if (!DemonLab.KihaFollower) {
-            outputText("The rangers in the middle of the demon’s formation cackle loudly, and you realise, as the warriors in front crouch, that there are a lot of guns aimed at you. ");
-            //If you have a shield
-            outputText("You cover yourself with [shield], but some of the bullets find their mark. ");
-            //otherwise
-            outputText("The hail of bullets is too much to dodge entirely! You duck and weave, but some find their mark. [damage]");
-        }
         if (DemonLab.KihaFollower) {
             outputText("As the ranged weapons begin to poke out from behind the demonic horde, your dragoness lover takes to the air, unleashing a massive blast of flame. Screams and explosions erupt from the demonic lines, and many of those that weren’t hit are either blinded, or shoot instinctively at your dragoness. Kiha swerves in midair, taking no visible hits as she flies back towards more friendly airspace. ");
+        } else {
+            outputText("The rangers in the middle of the demon’s formation cackle loudly, and you realise, as the warriors in front crouch, that there are a lot of guns aimed at you. ");
+            if (player.shield.isNothing) {
+                outputText("The hail of bullets is too much to dodge entirely! You duck and weave, but some find their mark.");
+                player.takePhysDamage(int(spe * 25) - rand(player.tou) - player.armorDef);
+            } else {
+                outputText("You cover yourself with [shield], but some of the bullets find their mark. ");
+                player.takePhysDamage(int(spe * 20) - rand(player.tou) - player.armorDef);
+            }
         }
     }
 
     private function CorSupport():void {
-        if (!DemonLab.DivaFollower) {
-            outputText("You hear a little chuckle, a demonic laugh that sends the [skin] on the back of your neck crawling. You see the demonic soldiers you’d just injured being pulled back behind the front, and you can hear gasps, moans and whispers, oddly as loud as the sounds of battle. Your vision blurs for a moment, and you can feel a throbbing in your groin. The sounds fade, leaving you flushed, and the soldiers who’d been pulled back are elbowing their way to the front, faces red, dicks or clits engorged, and a smile on each ‘healed’ face. You notice many of the injuries they’ve sustained are gone. ");
-            var hpChange2:int = inte;
-            createStatusEffect(StatusEffects.MonsterRegen2, 7, hpChange2, 0, 0);
-            var temp:Number = 0;
-            temp += inteligencescalingbonus();
-            addHP(temp * 4);
-        }
         if (DemonLab.DivaFollower) {
             outputText("A suggestive giggle fills the air, and you notice several demons retreating from the front lines, pulled back into their succubi allies. However, before they can have more than a moment’s relief, Diva swoops down from the ceiling, picking up a succubus in her hands and chomping down on the unfortunate demon’s neck. Unlike her usual, sensual bites, this is a savage chomp, straight to the jugular. Diva spins in midair, throwing the bleeding demon down into the horde, disrupting the temptress’ attempts to heal their allies. Several blasts of various magics shoot from the demons in retaliation, but your nimble Draculina is already gone, her wings carrying her out of the magic’s range. ");
             outputText("“<i>Tremble in fear, demon scum!</i>” She calls haughtily. “<i>Fear what thou hast wrought!</i>”");
+        } else {
+            outputText("You hear a little chuckle, a demonic laugh that sends the [skin] on the back of your neck crawling. You see the demonic soldiers you’d just injured being pulled back behind the front, and you can hear gasps, moans and whispers, oddly as loud as the sounds of battle. Your vision blurs for a moment, and you can feel a throbbing in your groin. The sounds fade, leaving you flushed, and the soldiers who’d been pulled back are elbowing their way to the front, faces red, dicks or clits engorged, and a smile on each ‘healed’ face. You notice many of the injuries they’ve sustained are gone. ");
+            addHP(inteligencescalingbonus() * 4);
+            player.takeLustDamage(5 + (player.lib / 10) + (player.cor / 10) + rand(10));
         }
     }
 
     private function FrontlineAttack():void {
         outputText("A half-dozen demons break formation, frontline warriors advancing fast. They stab and slash, coming from multiple angles, different weapons and heights whipping towards you.");
-        outputText("Unable to block so many different attacks, they open some injuries on your [skin].");
-        createStatusEffect(StatusEffects.Attacks, 2 + rand(2), 0, 0, 0);
+        if (player.getEvasionRoll()) {
+            outputText("Weaving like a leaf in the storm" + (player.shield.isNothing ? "" : ", blocking several strikes with your [shield]") + ", you somehow manage to avoid harm.")
+        } else {
+            outputText("Unable to block so many different attacks, they open some injuries on your [skin].");
+            for (var i:int = 0; i < 3 + rand(2); ++i)
+                SceneLib.combat.CommasForDigits(eOneAttack());
+        }
     }
 
     private function SeductionAttack():void {
@@ -135,16 +139,19 @@ public class LabGuard extends Monster {
         if (player.hasCock()) outputText("  You can all but feel your [cock] jamming into the tight passage of a succubus, her walls pressing around you, milking your rod for all the slut’s worth. You can feel your hands around her neck, forcing the bitch to wail as you ravage her cunt, forcing her lips wide as you spurt your load inside…");
         if (player.hasVagina()) outputText(" Your labia quivers at the sight, your knees shake as you can all but feel the throbbing rods inside you, veins pulsing. Warmth spreads to your womb as you can feel the twitch, as the demon’s sperm erupts into…");
         outputText("You shake yourself, [weapon] lashing at the two demons who broke formation, arms wide as if to embrace you. They flee back to the lines, but you can feel your arousal growing, the pink mists of lust magic in the air around you. ");
-        player.dynStats("lus", 200);
+        player.takeLustDamage(200 + (player.lib / 8) + (player.cor / 4) + rand(10));
     }
 
-    //TODO: use?
     private function ThrownWeapons():void {
-        outputText("The demons in the front line duck, and your eyes widen as succubi and incubi alike unleash a barrage of thrown weapons. Spears, axes, throwing knives, rocks, even a dildo or two, thrown from the back. One bounces off your forehead, leaving a sticky splatter.\n\n"
-            + "(up to 10 attacks, randomly chosen between lust and physical damage)");
+        outputText("The demons in the front line duck, and your eyes widen as succubi and incubi alike unleash a barrage of thrown weapons. Spears, axes, throwing knives, rocks, even a dildo or two, thrown from the back. One bounces off your forehead, leaving a sticky splatter.  ");
+        for (var i:int = 0; i < 10; ++i) {
+            if (rand(2) == 0)  SceneLib.combat.CommasForDigits(eOneAttack());
+            else player.takeLustDamage(10 + (player.lib / 20) + (player.cor / 20) + rand(10));
+        }
     }
 
     override protected function performCombatAction():void {
+        if (shieldWall) shieldWall = false;
         clearOutput();
         CorShields();
         CorVolley();
@@ -156,6 +163,9 @@ public class LabGuard extends Monster {
                 break;
             case 1:
                 SeductionAttack();
+                break;
+            case 2:
+                ThrownWeapons();
                 break;
         }
     }

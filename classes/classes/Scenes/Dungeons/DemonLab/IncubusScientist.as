@@ -91,18 +91,32 @@ public class IncubusScientist extends Monster {
         }
     }
 
+    private function serum():void {
+        clearOutput();
+        outputText("The demon scientist reaches into his lab coat, pulling out a hypodermic needle.\n"
+            + "“<i>The side effects are nasty...but I need the power now.</i>” He sticks himself, and he inhales sharply. He doesn’t look any different, but as he cocks his weapon, you notice the vein pulsing on his forehead. He’s way faster now!");
+        buff("Serum").addStats({"spe": 200, "str": -100, "int": -100});
+        createPerk(PerkLib.Evade, 0, 0, 0, 0);
+        createPerk(PerkLib.ImprovedEvade, 0, 0, 0, 0);
+        createPerk(PerkLib.GreaterEvade, 0, 0, 0, 0);
+    }
+
     override public function defeated(hpVictory:Boolean):void {
         if (DungeonAbstractContent.dungeonLoc == DungeonAbstractContent.DUNGEON_LAB_ENTRANCE) SceneLib.dungeons.demonLab.AfterFirstFight();
         else cleanupAfterCombat();
     }
 
     override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void {
-        SceneLib.dungeons.demonLab.BadEndExperiment(); //TODO
+        SceneLib.dungeons.demonLab.BadEndExperiment();
     }
 
     override protected function performCombatAction():void {
         clearOutput();
         if (ShieldCooldown > 0) --ShieldCooldown;
+        if (HP < maxHP() * 0.6) {
+            serum();
+            return;
+        }
         var choice0:Number = rand(2);
         switch (choice0) {
             case 0:

@@ -36,6 +36,7 @@ import classes.Scenes.Camp.TrainingDummy;
 import classes.Scenes.Dungeons.D3.*;
 import classes.Scenes.Dungeons.DeepCave.*;
 import classes.Scenes.Dungeons.DemonLab.IncubusScientist;
+import classes.Scenes.Dungeons.DemonLab.LabGuard;
 import classes.Scenes.Dungeons.EbonLabyrinth.*;
 import classes.Scenes.Dungeons.HelDungeon.*;
 import classes.Scenes.Monsters.*;
@@ -5382,6 +5383,15 @@ public class Combat extends BaseContent {
                         monster.removeStatusEffect(StatusEffects.MirroredAttack);
                     }
                 }
+                //Lab Guard tanking
+                if (monster is LabGuard && (monster as LabGuard).shieldWall && !monster.hasStatusEffect(StatusEffects.Stunned)) {
+                    CommasForDigits(monster.eOneAttack());
+                    if (player.HP <= player.minHP()) {
+                        doNext(endHpLoss);
+                        return;
+                    }
+                    damage /= 2;
+                }
                 if (player.weapon is HuntsmansCane) {
                     outputText(randomChoice("You swing your cane through the air. The light wood lands with a loud CRACK that is probably more noisy than painful. ",
                             "You brandish your cane like a sword, slicing it through the air. It thumps against your adversary, but doesn’t really seem to harm them much. "));
@@ -6365,6 +6375,15 @@ public class Combat extends BaseContent {
                     return;
                 }
                 // Stunning the doppleganger should now "buy" you another round.
+            }
+            //Lab Guard tanking
+            if (monster is LabGuard && (monster as LabGuard).shieldWall && !monster.hasStatusEffect(StatusEffects.Stunned)) {
+                CommasForDigits(monster.eOneAttack());
+                if (player.HP <= player.minHP()) {
+                    doNext(endHpLoss);
+                    return;
+                }
+                damage /= 2;
             }
             if ((damage <= 0) && ((MDOCount == maxCurrentRangeAttacks()) && (MSGControllForEvasion) && (!MSGControll))) {
                 //damage = 0;
