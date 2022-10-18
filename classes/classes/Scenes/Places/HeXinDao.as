@@ -222,7 +222,7 @@ public class HeXinDao extends BaseContent
              addButton(7, "HighSFRBot", buyItem2,consumables.HGSFRPB, sayLine2(consumables.HGSFRPB,"It's a rather useful item. I sell this to all cultivators at Soul Exalt stage or higher, this bottle of pills can help you restore some of your soulforce and would provide much more than the mid-grade one.")).hint("Bottle of High-grade Soulforce Recovery Pill.").disableIf(!hasSoulExalt);
              addButton(8, "SupSFRBotl", buyItem2,consumables.SGSFRPB, sayLine2(consumables.SGSFRPB,"It's a rather useful item. I sell this to all cultivators at Soul King stage or higher, this bottle of pills can help you restore some of your soulforce and would provide much more than the high-grade one.")).hint("Bottle of Superior-grade Soulforce Recovery Pill.").disableIf(!hasSoulKing);
 
-             addButton(10, "E.P.Bottle", buyItem2,useables.E_P_BOT, sayLine2(useables.E_P_BOT,"These bottles can be used to organize SoulForce pills. Due to the nature of the pills, they must be consumed shortly after opening the bottle, or it won't work. Some cultivators have theorized on the properties of the pills for a long time, but no definitive answer has been reached.")).hint("Empty Pills Bottle.");
+             addButton(10, "E.P.Bottle", buyItem2,useables.E_P_BOT, sayLine2(useables.E_P_BOT,"These bottles can be used to organize SoulForce pills. Due to the nature of the pills, they must be consumed shortly after opening the bottle, or it won't work. Some cultivators have theorized on the properties of the pills for a long time, but no definitive answer has been reached.")).hint("Empty Pill Bottle.");
 
              addButton(14, "Back", golemmerchant);
             statScreenRefresh();

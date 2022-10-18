@@ -2717,7 +2717,7 @@ public class Camp extends NPCAwareContent{
 
 	private function fillUpPillBottle(pills:ItemType, result:ItemType, grade:String):void {
 		clearOutput();
-		outputText("You pick up one of your empty pills bottle and starts to put in some of your loose "+grade+"-grade soulforce recovery pills. Then you close the bottle and put it into your backpack.");
+		outputText("You pick up one of your empty pill bottles and start to put in some of your loose "+grade+"-grade soulforce recovery pills. Then you close the bottle and put it into your backpack.");
 		player.destroyItems(useables.E_P_BOT, 1);
 		player.destroyItems(pills, 10);
 		inventory.takeItem(result, campMiscActions);
@@ -2766,7 +2766,7 @@ public class Camp extends NPCAwareContent{
 							outputText(cloneDaos[d][1]);
 					}
 				} else outputText("Nothing");
-				outputText("\n\n")
+				outputText("\n\n");
 			}
 			//}
 		}
@@ -2918,7 +2918,7 @@ public class Camp extends NPCAwareContent{
 
 	private function cloneContemplateDao(clone:int):void {
 		clearOutput();
-		outputText("Maybe your clone ("+clone+") could contemplate one of Daos you knew while you adventure outside the [camp]? But which one it should be?");
+		outputText("Maybe your clone ("+clone+") could contemplate one of the Daos you know while you adventure outside the [camp]? But which one it should be?");
 		menu();
 		var btn:int = 0;
 		for (var d:int = 0; d < cloneDaos.length; ++d) {
