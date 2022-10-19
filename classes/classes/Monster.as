@@ -1601,9 +1601,10 @@ import flash.utils.getQualifiedClassName;
 
 		/**
 		 * try to hit, apply damage
+		 * @param display Whether to print the number or not
 		 * @return damage
 		 */
-		public function eOneAttack():int
+		public function eOneAttack(display:Boolean = false):int
 		{
 			//Determine damage - str modified by enemy toughness!
 			if (hasStatusEffect(StatusEffects.FlameBlade)) {
@@ -1616,7 +1617,7 @@ import flash.utils.getQualifiedClassName;
 			}
 			else {
 				var damage:int = calcDamage();
-				if (damage > 0) player.takePhysDamage(damage);
+				if (damage > 0) damage = player.takePhysDamage(damage, display);
 			}
 			return damage;
 		}

@@ -5385,7 +5385,7 @@ public class Combat extends BaseContent {
                 }
                 //Lab Guard tanking
                 if (monster is LabGuard && (monster as LabGuard).shieldWall && !monster.hasStatusEffect(StatusEffects.Stunned)) {
-                    CommasForDigits(monster.eOneAttack());
+                    monster.eOneAttack(true);
                     if (player.HP <= player.minHP()) {
                         doNext(endHpLoss);
                         return;
@@ -6378,7 +6378,7 @@ public class Combat extends BaseContent {
             }
             //Lab Guard tanking
             if (monster is LabGuard && (monster as LabGuard).shieldWall && !monster.hasStatusEffect(StatusEffects.Stunned)) {
-                CommasForDigits(monster.eOneAttack());
+                monster.eOneAttack(true);
                 if (player.HP <= player.minHP()) {
                     doNext(endHpLoss);
                     return;

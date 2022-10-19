@@ -60,10 +60,10 @@ public class ProjectTyrant extends Monster {
             outputText("You throw yourself to the side, narrowly dodging the creature’s attack.");
         } else {
             outputText("You try to dodge, but the creature’s fist is too fast, hitting you square in the chest. You’re sent tumbling back.");
-            eOneAttack();
+            eOneAttack(true);
             outputText("As it keeps charging through, a few of the drider’s legs come down onto your prone frame, trampling you. ");
-            eOneAttack();
-            eOneAttack();
+            eOneAttack(true);
+            eOneAttack(true);
         }
     }
 

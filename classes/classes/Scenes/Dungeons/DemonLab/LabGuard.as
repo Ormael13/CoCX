@@ -128,7 +128,7 @@ public class LabGuard extends Monster {
         } else {
             outputText("Unable to block so many different attacks, they open some injuries on your [skin].");
             for (var i:int = 0; i < 3 + rand(2); ++i)
-                eOneAttack();
+                eOneAttack(true);
         }
     }
 
@@ -145,7 +145,7 @@ public class LabGuard extends Monster {
     private function ThrownWeapons():void {
         outputText("The demons in the front line duck, and your eyes widen as succubi and incubi alike unleash a barrage of thrown weapons. Spears, axes, throwing knives, rocks, even a dildo or two, thrown from the back. One bounces off your forehead, leaving a sticky splatter.  ");
         for (var i:int = 0; i < 10; ++i) {
-            if (rand(2) == 0)  eOneAttack();
+            if (rand(2) == 0)  eOneAttack(true);
             else player.takeLustDamage(10 + (player.lib / 20) + (player.cor / 20) + rand(10));
         }
     }

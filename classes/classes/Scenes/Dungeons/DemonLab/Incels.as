@@ -87,7 +87,7 @@ public class Incels extends Monster {
         var hit:int = 0;
         for (var i:int = 0; i < 6; ++i) {
             if (player.getEvasionRoll()) {
-                eOneAttack();
+                eOneAttack(true);
                 ++hit;
             }
         }
