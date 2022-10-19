@@ -5047,7 +5047,7 @@ public class Combat extends BaseContent {
         }
     }
 
-    public function CommasForDigits(damage:Number, text:String = ""):void {
+    public function CommasForDigits(damage:Number, lustColor:Boolean = false, text:String = ""):void {
         var damagemsg:Array = new Array(String(damage).length);
         var damageTemp:Number = damage;
         outputText("<b>(</b>");
@@ -5060,7 +5060,7 @@ public class Combat extends BaseContent {
                 if (j != 0) outputText(",");
                 k = 3;
             }
-            outputText("<b>[font-damage]" + text + String(damagemsg[damagemsg.length - j - 1]) + "[/font]</b>");
+            outputText("<b>[font-" + (damage < 0 ? "heal" : damage == 0 ? "miss" : lustColor ? "lust" : "damage") + "]" + text + String(damagemsg[damagemsg.length - j - 1]) + "[/font]</b>");
             k--;
         }
         outputText("<b>)</b>");
@@ -7296,13 +7296,7 @@ public class Combat extends BaseContent {
 			else monster.wrath += WrathGains;
             if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
         }
-        if (display) {
-            if (damage > 0) {
-                if (damage > 1000) CommasForDigits(damage);
-                else outputText("<b>([font-damage]" + damage + "[/font])</b>"); //Damage
-            } else if (damage == 0) outputText("<b>([font-miss]" + damage + "[/font])</b>"); //Miss/block
-            else if (damage < 0) outputText("<b>([font-heal]" + damage + "[/font])</b>"); //Heal
-        }
+        if (display) CommasForDigits(damage);
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
         //Keep shit in bounds.
@@ -7387,13 +7381,7 @@ public class Combat extends BaseContent {
             else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
             if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
         }
-        if (display) {
-            if (damage > 0) {
-                if (damage > 1000) CommasForDigits(damage);
-                else outputText("<b>([font-damage]" + damage + "[/font])</b>"); //Damage
-            } else if (damage == 0) outputText("<b>([font-miss]" + damage + "[/font])</b>"); //Miss/block
-            else if (damage < 0) outputText("<b>([font-heal]" + damage + "[/font])</b>"); //Heal
-        }
+        if (display) CommasForDigits(damage);
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
         //Keep shit in bounds.
@@ -7470,13 +7458,7 @@ public class Combat extends BaseContent {
             else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
             if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
         }
-        if (display) {
-            if (damage > 0) {
-                if (damage > 1000) CommasForDigits(damage);
-                else outputText("<b>([font-damage]" + damage + "[/font])</b>"); //Damage
-            } else if (damage == 0) outputText("<b>([font-miss]" + damage + "[/font])</b>"); //Miss/block
-            else if (damage < 0) outputText("<b>([font-heal]" + damage + "[/font])</b>"); //Heal
-        }
+        if (display) CommasForDigits(damage);
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
         //Keep shit in bounds.
@@ -7533,13 +7515,7 @@ public class Combat extends BaseContent {
             else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
             if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
         }
-        if (display) {
-            if (damage > 0) {
-                if (damage > 1000) CommasForDigits(damage);
-                else outputText("<b>([font-damage]" + damage + "[/font])</b>"); //Damage
-            } else if (damage == 0) outputText("<b>([font-miss]" + damage + "[/font])</b>"); //Miss/block
-            else if (damage < 0) outputText("<b>([font-heal]" + damage + "[/font])</b>"); //Heal
-        }
+        if (display) CommasForDigits(damage);
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
         //Keep shit in bounds.
@@ -7595,13 +7571,7 @@ public class Combat extends BaseContent {
             else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
             if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
         }
-        if (display) {
-            if (damage > 0) {
-                if (damage > 1000) CommasForDigits(damage);
-                else outputText("<b>([font-damage]" + damage + "[/font])</b>"); //Damage
-            } else if (damage == 0) outputText("<b>([font-miss]" + damage + "[/font])</b>"); //Miss/block
-            else if (damage < 0) outputText("<b>([font-heal]" + damage + "[/font])</b>"); //Heal
-        }
+        if (display) CommasForDigits(damage);
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
         //Keep shit in bounds.
@@ -7646,13 +7616,7 @@ public class Combat extends BaseContent {
             else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
             if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
         }
-        if (display) {
-            if (damage > 0) {
-                if (damage > 1000) CommasForDigits(damage);
-                else outputText("<b>([font-damage]" + damage + "[/font])</b>"); //Damage
-            } else if (damage == 0) outputText("<b>([font-miss]" + damage + "[/font])</b>"); //Miss/block
-            else if (damage < 0) outputText("<b>([font-heal]" + damage + "[/font])</b>"); //Heal
-        }
+        if (display) CommasForDigits(damage);
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
         //Keep shit in bounds.
@@ -7691,13 +7655,7 @@ public class Combat extends BaseContent {
             else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
             if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
         }
-        if (display) {
-            if (damage > 0) {
-                if (damage > 1000) CommasForDigits(damage);
-                else outputText("<b>([font-damage]" + damage + "[/font])</b>"); //Damage
-            } else if (damage == 0) outputText("<b>([font-miss]" + damage + "[/font])</b>"); //Miss/block
-            else if (damage < 0) outputText("<b>([font-heal]" + damage + "[/font])</b>"); //Heal
-        }
+        if (display) CommasForDigits(damage);
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
         //Keep shit in bounds.
@@ -7732,13 +7690,7 @@ public class Combat extends BaseContent {
             else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
             if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
         }
-        if (display) {
-            if (damage > 0) {
-                if (damage > 1000) CommasForDigits(damage);
-                else outputText("<b>([font-damage]" + damage + "[/font])</b>"); //Damage
-            } else if (damage == 0) outputText("<b>([font-miss]" + damage + "[/font])</b>"); //Miss/block
-            else if (damage < 0) outputText("<b>([font-heal]" + damage + "[/font])</b>"); //Heal
-        }
+        if (display) CommasForDigits(damage);
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
         //Keep shit in bounds.
@@ -7777,13 +7729,7 @@ public class Combat extends BaseContent {
             else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
             if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
         }
-        if (display) {
-            if (damage > 0) {
-                if (damage > 1000) CommasForDigits(damage);
-                else outputText("<b>([font-damage]" + damage + "[/font])</b>"); //Damage
-            } else if (damage == 0) outputText("<b>([font-miss]" + damage + "[/font])</b>"); //Miss/block
-            else if (damage < 0) outputText("<b>([font-heal]" + damage + "[/font])</b>"); //Heal
-        }
+        if (display) CommasForDigits(damage);
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
         //Keep shit in bounds.
@@ -7818,13 +7764,7 @@ public class Combat extends BaseContent {
             else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
             if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
         }
-        if (display) {
-            if (damage > 0) {
-                if (damage > 1000) CommasForDigits(damage);
-                else outputText("<b>([font-damage]" + damage + "[/font])</b>"); //Damage
-            } else if (damage == 0) outputText("<b>([font-miss]" + damage + "[/font])</b>"); //Miss/block
-            else if (damage < 0) outputText("<b>([font-heal]" + damage + "[/font])</b>"); //Heal
-        }
+        if (display) CommasForDigits(damage);
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
         //Keep shit in bounds.
@@ -7859,13 +7799,7 @@ public class Combat extends BaseContent {
             else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
             if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
         }
-        if (display) {
-            if (damage > 0) {
-                if (damage > 1000) CommasForDigits(damage);
-                else outputText("<b>([font-damage]" + damage + "[/font])</b>"); //Damage
-            } else if (damage == 0) outputText("<b>([font-miss]" + damage + "[/font])</b>"); //Miss/block
-            else if (damage < 0) outputText("<b>([font-heal]" + damage + "[/font])</b>"); //Heal
-        }
+        if (display) CommasForDigits(damage);
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
         //Keep shit in bounds.
@@ -7934,13 +7868,7 @@ public class Combat extends BaseContent {
 			else monster.wrath += WrathGains;
             if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
         }
-        if (display) {
-            if (damage > 0) {
-                if (damage > 1000) CommasForDigits(damage);
-                else outputText("<b>([font-damage]" + damage + "[/font])</b>"); //Damage
-            } else if (damage == 0) outputText("<b>([font-miss]" + damage + "[/font])</b>"); //Miss/block
-            else if (damage < 0) outputText("<b>([font-heal]" + damage + "[/font])</b>"); //Heal
-        }
+        if (display) CommasForDigits(damage);
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
         //Keep shit in bounds.

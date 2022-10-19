@@ -50,7 +50,7 @@ use namespace CoC;
 			td = Math.round(td);
 			td = td * (EngineCore.lustPercent() / 100);
 			if (!hasStatusEffect(StatusEffects.LingeringSlime)) createStatusEffect(StatusEffects.LingeringSlime, 0, 0, 0, 0);
-			outputText("\nLust swells up in your body as the substance splash on you. <b>(<font color=\"#ff00ff\">" + (Math.round(td * 10) / 10) + "</font>)</b> lust damage.");
+			outputText("\nLust swells up in your body as the substance splash on you. <b>([font-lust]" + (Math.round(td * 10) / 10) + "</font>)</b> lust damage.");
 			player.dynStats("lus", td, "scale", false);
 		}
 

@@ -2540,10 +2540,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.DefensiveStaffChanneling) && (isStaffTypeWeapon() || isPartiallyStaffTypeWeapon())) magicmult *= 0.5;
 			if (damage * magicmult <= mana) {
 				mana -= (damage * magicmult);
-				if (display) {
-					if (damage > 0) SceneLib.combat.CommasForDigits(damage, "Absorbed ");
-					else outputText("<b>([font-miss]Absorbed " + damage + "</font>)</b>");
-				}
+				if (display) SceneLib.combat.CommasForDigits(damage, false, "Absorbed ");
 				game.mainView.statsView.showStatDown('mana');
 				dynStats("lus", 0); //Force display arrow.
 				return 0;
@@ -2551,10 +2548,7 @@ use namespace CoC;
 			else {
 				var partial:Number = Math.round(mana / magicmult);
 				damage -= partial;
-				if (display) {
-					if (damage > 0) SceneLib.combat.CommasForDigits(partial, "Absorbed ");
-					else outputText("<b>([font-miss]Absorbed " + partial + "</font>)</b>");
-				}
+				if (display) SceneLib.combat.CommasForDigits(partial, false, "Absorbed ");
 				mana = 0;
 				game.mainView.statsView.showStatDown('mana');
 				dynStats("lus", 0); //Force display arrow.
@@ -2564,19 +2558,13 @@ use namespace CoC;
 		public function bloodShieldAbsorb(damage:Number, display:Boolean = false):Number{
 			if (damage <= statusEffectv1(StatusEffects.BloodShield)) {
 				addStatusValue(StatusEffects.BloodShield,1,-damage);
-				if (display) {
-					if (damage > 0) SceneLib.combat.CommasForDigits(damage, "Absorbed ");
-					else outputText("<b>([font-miss]Absorbed " + damage + "</font>)</b>");
-				}
+				if (display) SceneLib.combat.CommasForDigits(damage, false, "Absorbed ");
 				return 0;
 			}
 			else {
 				var partial:Number = statusEffectv1(StatusEffects.BloodShield);
 				damage -= partial;
-				if (display) {
-					if (damage > 0) SceneLib.combat.CommasForDigits(partial, "Absorbed ");
-					else outputText("<b>([font-miss]Absorbed " + partial + "</font>)</b>");
-				}
+				if (display) SceneLib.combat.CommasForDigits(partial, false, "Absorbed ");
 				removeStatusEffect(StatusEffects.BloodShield);
 				return damage;
 			}
@@ -2677,10 +2665,7 @@ use namespace CoC;
 					//game.HPChange(-damage, display);
 					damage = Math.round(damage);
 					HP -= damage;
-					if (display) {
-						if (damage > 0) SceneLib.combat.CommasForDigits(damage);
-						else outputText("<b>([font-miss]" + damage + "</font>)</b>");
-					}
+					if (display) SceneLib.combat.CommasForDigits(damage);
 					game.mainView.statsView.showStatDown('hp');
 					dynStats("lus", 0); //Force display arrow.
 				}
@@ -7100,7 +7085,7 @@ use namespace CoC;
 			}
 		}
 
-		public override function takeLustDamage(lustDmg:Number, display:Boolean = true, applyRes:Boolean = true):Number{
+		public override function takeLustDamage(lustDmg:Number, display:Boolean = false, applyRes:Boolean = true):Number{
 			var x:Number = super.takeLustDamage(lustDmg, display, applyRes);
 			raijuSuperchargedCheck();
 			return x;
