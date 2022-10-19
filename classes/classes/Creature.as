@@ -2173,9 +2173,10 @@ public class Creature extends Utils
         * @param    minSize     Minimum size, 0/-1 = no checking
         * @param    maxSize     Maximum size, -1 = no checking
         * @param    compareBy   The measurement to compare by, "area", "length" or "thickness"
+        * @param    knot        Knot checks. 0 = no checks, -1 = no knot, 1 = must have knot
         * @return   The number of the biggest (comparing by 'compareBy') matching dick, -1 if no any
         */
-        public function findCockWithType(type:CockTypesEnum, biggest:int = 1, minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area"):int {
+        public function findCockWithType(type:CockTypesEnum, biggest:int = 1, minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area", knot:int = 0):int {
             if (compareBy != "area" && compareBy != "length" && compareBy != "thickness") //sanity check
                 throw new Error("Wrong compareBy value!");
             var sorted:Array = [];
@@ -2186,7 +2187,8 @@ public class Creature extends Utils
                                 compareBy == "thickness" ? cocks[num].cockThickness :
                                 cockArea(num);
                 if ((nsize >= minSize || minSize < 0) && (nsize < maxSize || maxSize < 0)
-                && (type == CockTypesEnum.UNDEFINED || cocks[num].cockType == type || tent && cockIsTentacle(num))) {
+                        && (type == CockTypesEnum.UNDEFINED || cocks[num].cockType == type || tent && cockIsTentacle(num))
+                        && (knot == 0 || knot == 1 && cocks[num].hasKnot() || knot == -1 && !cocks[num].hasKnot())) {
                     var j:int;
                     for (j = 0; j < sorted.length; ++j) {
                         var jsize:Number = compareBy == "length" ? cocks[sorted[j]].cockLength :

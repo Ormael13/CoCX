@@ -253,7 +253,7 @@ public class BehemothScene extends BaseContent
 				addButtonIfTrue(5, "Watersports", watersportsWithBehemoth, "Have sex with the behemoth enough times to unlock this!", timesSexed() >= 3, "Do some urine activity with him.");
 			addButtonIfTrue(6, "Get Pollinated", SceneLib.uniqueSexScene.alrauneGetPollinatedScene,
 				"Req. to be an alraune.", player.isAlraune());
-			addButton(14, "Nevermind", CoC.instance.inCombat ? cleanupAfterCombat : camp.returnToCampUseOneHour);
+			addButton(14, "Never mind", CoC.instance.inCombat ? cleanupAfterCombat : camp.returnToCampUseOneHour);
 		}
 		
 		private function analPitchBehemoth():void {

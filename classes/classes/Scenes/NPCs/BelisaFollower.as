@@ -307,7 +307,6 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 	}
 	
 	public function BelisaTalk():void {
-		if (flags[kFLAGS.KIHA_FOLLOWER] == 1 && !KihaFollower.BelisaInteractionHappened && rand(10) == 0)
 		clearOutput();
 		outputText("<i>\"You...Just want to...talk?\"</i> She looks at you, confused, as if the thought hadn’t even occurred to her. <i>\"You...Don’t want to…?\"</i> She rolls her eyes, making a ‘jerk-off’ motion with one hand. You tell her that you have no intention of approaching her sexually right now, and she relaxes a little, smiling. <i>\"Okay then...What do you want to talk about?\"</i>\n\n");
 		menu();
@@ -683,7 +682,7 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 		addButton(6, armors.DWARMOR.shortName, belisaBuy, armors.DWARMOR, 2160);
 		addButton(7, weapons.TKNIVES.shortName, belisaBuy, weapons.TKNIVES, 800);
 		if (BelisaInCamp) addButton(14, "Back", BelisaMainCampMenu);
-		else addButton(14, "Nevermind", Encounterback);
+		else addButton(14, "Never mind", Encounterback);
 	}
 	public function BuyHolyBands():void {
 		clearOutput();
@@ -848,7 +847,7 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 		if (HolyBand6 > 0) addButton(13, "Royal Blue", BelisaHolyBandsManagmentBrownAndBeigeRemove).hint("Take off Brown and Beige Holy Band.");
 		if (HolyBand7 > 0) addButton(9, "Royal Blue", BelisaHolyBandsManagmentRoyalBlueRemove).hint("Take off one Royal Blue Holy Band.");
 		if (BelisaInCamp) addButton(14, "Back", BelisaMainCampMenu);
-		else addButton(14, "Nevermind", Encounterback);
+		else addButton(14, "Never mind", Encounterback);
 	}
 	private function BelisaHolyBandsManagmentAdd():void {
 		clearOutput();

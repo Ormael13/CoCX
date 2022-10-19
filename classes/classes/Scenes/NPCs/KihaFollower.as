@@ -1406,11 +1406,11 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         else outputText("tree");
         outputText(" and sigh in contentment, happy to let Kiha tend to the omnipresent beast that hangs down with your [legs].  The heavy, sensitive burden that is your [cock biggest] is always making it hard to move, and worse, it practically immobilizes you when it gets hard.  But in moments like this, you're glad you have so much sensitive dick for Kiha's hands to explore");
         if (player.cocks[x].cockType == CockTypesEnum.HORSE) outputText(", particularly your medial ring and the sensitive edge of your flare.");
-        else if (player.hasKnot(x)) outputText(", particularly your massive, bulging canid knot.");
         else if (player.cocks[x].cockType == CockTypesEnum.DEMON) outputText(", particularly the hundreds of demonic nodules that ring your shaft.");
         else if (player.cocks[x].cockType == CockTypesEnum.ANEMONE) outputText(", particularly the groups of aphrodisiac laced tentacles under your crown.");
         else if (player.cocks[x].cockType == CockTypesEnum.TENTACLE) outputText(", particularly the underside of your tentacle's mushroom-like tip.");
         else if (player.cocks[x].cockType == CockTypesEnum.CAT) outputText(", particularly the hundreds of rubbery spines covering your feline maleness.");
+        else if (player.hasKnot(x)) outputText(", particularly your massive, bulging canid knot.");
         else outputText(".");
         outputText("  The whole world seems to spin as Kiha's attentions bring you to ever-higher levels of pleasure, and you grab hold of her hips to steady yourself when you nearly slide off your resting place.  She ");
         if (player.cocks[x].cockLength > 48) outputText("pulls your cockhead down and ");
@@ -2082,7 +2082,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         menu();
         if (player.hasItem(undergarments.SSPANTY)) addButton(0, undergarments.SSPANTY.shortName, giveKihaUndergarments, 1);
         if (player.hasItem(undergarments.SS_LOIN)) addButton(1, undergarments.SS_LOIN.shortName, giveKihaUndergarments, 2);
-        addButton(4, "Nevermind", warmLoverKihaIntro);
+        addButton(4, "Never mind", warmLoverKihaIntro);
     }
 
     private function giveKihaUndergarments(type:int):void {
@@ -2785,7 +2785,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         outputText("You rest your head on Kiha's shoulder, trying to calm her down. After a few minutes, you ask her about what happened. For a few moments, Kiha is stone-still, muscles tense and teeth grinding.\n\n");
         outputText("<i>\"They took us to some lab. I don't know where it is now, but it's somewhere in the mountains, hidden away. Fuckers thought that they could just do whatever they wanted to us...So when their imps came in to have their playtime...I fucking killed them.</i>\"\n\n");
         outputText("Kiha shudders violently, shrugging you off. \"<i>...Look...I don't know what happened to them. To any of them. They took me away, took their revenge for the imps, and then...There was heat. So much heat...\"</i> you put a hand on Kiha's shoulder. She doesn't need to go on.\n\n");
-        outputText("Kiha nuzzles your hand, shivering. <i>\"There was an alarm, blaring. I remember...Just...</i> feeling <i> that was the time. So I bit off the demon dick...that was...</i>\" Kiha shudders in disgust. <i>\"Well...In my mouth...and I just...Tore open his throat and ran. I remember a bunch of...creatures. With long claws, with nothing between their legs. Demons everywhere...but they didn't seem to notice me in the chaos.</i>\" Kiha looks down in shame. \"<i> I just...Ran. A warrior of my village, now a mighty dragon, and...I just...Ran and hid. There was no fight, no glory, just...</i> Kiha hangs her head in shame.\n\n");
+        outputText("Kiha nuzzles your hand, shivering. \"<i>There was an alarm, blaring. I remember...Just...<b> feeling </b> that was the time. So I bit off the demon dick...that was...</i>\" Kiha shudders in disgust. <i>\"Well...In my mouth...and I just...Tore open his throat and ran. I remember a bunch of...creatures. With long claws, with nothing between their legs. Demons everywhere...but they didn't seem to notice me in the chaos.</i>\" Kiha looks down in shame. \"<i> I just...Ran. A warrior of my village, now a mighty dragon, and...I just...Ran and hid. There was no fight, no glory, just...</i> Kiha hangs her head in shame.\n\n");
         outputText("You wrap your arms around Kiha, holding her close as the dragoness shivers. It takes some time before she can speak again, but she continues. <i>\" So...That's why I want to kill Lethice...But...I don't know if I'll ever be able to go back to that place...even if I kill her.Even if I'm strong enough to wipe her out...</i>\"\n\n");
         outputText("You tell Kiha that you understand. She shakes her head. <i>\" But...You don't. My friends and family could still be there. They could be alive...No. They're gone. Even if they live, they're probably...like me, but...Enslaved to those...</i>\" She hugs herself. <i>\" Even if I knew where the lab is...I don't think I could storm it alone...So...If I can't save them, at least I can remember...and honor the chance I have. I can keep their memories alive...and make sure they didn't die in vain.</i>\"\n\n");
         outputText("You knew that Kiha had had it rough, but...Seeing this place...You realise how hard it must be for Kiha, not just to be here, to remember...but also to bare her heart like this. Even to you. You open your mouth to say something, but think better of it. Kiha rests her head on your shoulder, and you ignore the trickle, droplets flowing down your back. Silently, Kiha cries, for once, completely dropping her confident, strong facade while you hold her shaking body. You don't know how long it is, just the two of you, underneath that ancient apple tree, but you don't really care either. You know that once this is over, Kiha will cover her heart again, that facade of power and control coming back to protect her. But for now, Kiha's a victim, the scared girl she once was bleeding through the years of abuse and training.\n\n");
@@ -2942,6 +2942,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
 
     //First time, ALWAYS started from Sidonie?
     public function sidonieInteractionFirst():void {
+        SidonieInteractionHappened = true;
         clearOutput();
         outputText("As you near Sidonie’s workbench, you hear Sidonie’s voice, loud and clearly angry, near the campfire. As you get near, you see Kiha, sitting at the campfire with some freshly cooked meat in her hands, looking up at Sidonie with a guarded expression on her face. \n"
             + "\n"
@@ -2986,6 +2987,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
     }
 
     public function belisaInteractionFirst(fromBelisa:Boolean):void {
+        BelisaInteractionHappened = true;
         clearOutput();
         outputText("As you walk towards your " + (fromBelisa ? "spider girl" : "dragoness") + "’s part of camp, you hear Belisa’s shrill voice, coming from near her silk home. \n"
             + "\n"

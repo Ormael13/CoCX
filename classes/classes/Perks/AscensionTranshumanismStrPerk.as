@@ -19,7 +19,7 @@ package classes.Perks
 		
 		public function AscensionTranshumanismStrPerk()
 		{
-			super("Ascension: Transhumanism (Str)", "Ascension: Transhumanism (Str)", "", "Increases maximum base/core Str by 8.");
+			super("Ascension: Transhumanism (Str)", "Ascension: Transhumanism (Str)", "", "Increases maximum base/core Str by 16.");
 		}
 		
 		override public function keepOnAscension(respec:Boolean = false):Boolean

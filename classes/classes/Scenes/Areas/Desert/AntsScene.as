@@ -234,7 +234,7 @@ public class AntsScene extends BaseContent
 		}
 
 //The Challenges
-		private function antColonyChallenge():void
+		public function antColonyChallenge():void
 		{
 			clearOutput();
 			spriteSelect(SpriteDb.s_antguards);
@@ -260,6 +260,10 @@ public class AntsScene extends BaseContent
 			else {
 				outputText("Your feet bring you back to the ant colony and the guard motions you down the only lit tunnel once more.  You enter the colosseum, and as you step out into the cavern, you are greeted, again, by a thin male ant-morph holding a clipboard.  He looks up at you.");
 				outputText("\n\n\"<i>Oh good, you're here.  I was beginning to think you were a coward.</i>\"  Before you can respond to his insult, he cuts you off.  \"<i>We're ready to start when you are.  Let's hope you survive longer than the last guy.</i>\"");
+				if (player.hasPerk(PerkLib.SoulSense) && !flags[kFLAGS.SOUL_SENSE_ANTHILL]) {
+					outputText("\n\n<b>Now you can find the colony using soul sense!</b>\n\n");
+					flags[kFLAGS.SOUL_SENSE_ANTHILL] = 1;
+				}
 			}
 			//[Fight] [Leave]
 			simpleChoices("Fight", antColiseumFight, "", null, "", null, "", null, "Leave", leaveAntColony);

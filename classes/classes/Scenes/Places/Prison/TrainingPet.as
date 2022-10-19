@@ -1057,7 +1057,7 @@ package classes.Scenes.Places.Prison
 					addButton(0,"Accept",prisonCaptorPetTrainingCrateCallOut,3);
 					if(player.fatigue < player.maxFatigue() - 20)
 					{
-						addButton(1,"Nevermind",prisonCaptorPetTrainingCrateCallOut,4);
+						addButton(1,"Never mind",prisonCaptorPetTrainingCrateCallOut,4);
 					}
 					return;
 				}
@@ -1219,7 +1219,7 @@ package classes.Scenes.Places.Prison
 						}
 						if(player.esteem > 2)
 						{
-							addButton(2,"Nevermind",prisonCaptorPetTrainingCrateLeash,2);
+							addButton(2,"Never mind",prisonCaptorPetTrainingCrateLeash,2);
 						}
 					}
 					return;
@@ -1357,7 +1357,7 @@ package classes.Scenes.Places.Prison
 				prison.changeEsteem(1, prison.inPrison);
 				menu();
 				addButton(0, "Beg...", prisonCaptorFeedingBJTrainingPerformPuppyFinale, "beg");
-				addButton(1, "Nevermind...", prisonCaptorFeedingBJTrainingPerformPuppyFinale, "nevermind");
+				addButton(1, "Never mind...", prisonCaptorFeedingBJTrainingPerformPuppyFinale, "never mind");
 				addButton(2, "Never again", prisonCaptorFeedingBJTrainingPerformPuppyFinale, "optout");
 				return;
 			}
@@ -1490,7 +1490,7 @@ package classes.Scenes.Places.Prison
 				prison.changeEsteem(3, prison.inPrison);
 				shortName = consumables.C_BREAD;
 			}
-			else if(branchChoice == "nevermind")
+			else if(branchChoice == "never mind")
 			{
 				outputText("You look away from her indecisively and finally lift your hands from the floor. When you unravel your paws and cross your arms in a meek show of reticence, she lets slip an affectionate laugh.\n\n");
 				outputText("\"<i>You're a bit late to play shy, dear, but alright. Enjoy your bowl, okay?</i>\" She finishes with expected sincerity, and you can't help but glance back at her as she turns to depart. There's a violet glint as she gives you a parting wink, and you feel yourself blush as you look down at your reward.\n\n");

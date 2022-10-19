@@ -54,26 +54,16 @@ public class ProjectTyrant extends Monster {
 
     private function SlamTrample():void {
         outputText("The hulking frame in front of you charges, fists held high. \n");
-
         //Miss:
         //Determine if evaded
-        if (player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
-            outputText("Using your talent for evasion, you manage to sidestep the creature's clumsy charge.");
-        }
-        //("Misdirection"
-        else if (player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
-            outputText("Using your talent for misdirection, you manage to sidestep the creature's clumsy charge.");
-
-        }
-        //Determine if cat'ed
-        else if (player.hasPerk(PerkLib.Flexibility) && rand(100) < 6) {
-            outputText("Using your cat-like flexibility, you manage to bend your spine backwards. Throwing yourself into a sideways flip, you manage to sidestep the creature's clumsy charge.");
+        if (player.getEvasionRoll()) {
+            outputText("You throw yourself to the side, narrowly dodging the creature’s attack.");
         } else {
             outputText("You try to dodge, but the creature’s fist is too fast, hitting you square in the chest. You’re sent tumbling back.");
-            createStatusEffect(StatusEffects.Attacks, 1, 0, 0, 0);
+            eOneAttack();
             outputText("As it keeps charging through, a few of the drider’s legs come down onto your prone frame, trampling you. ");
-            createStatusEffect(StatusEffects.Attacks, 2, 0, 0, 0);
-            outputText("\n");
+            eOneAttack();
+            eOneAttack();
         }
     }
 
@@ -81,7 +71,7 @@ public class ProjectTyrant extends Monster {
         outputText("The Drider-monster charges again. You ready yourself to dodge the meaty fists, but instead, it charges head-on into you, shoulder first. You’re thrown back by the impact, but as you hit the ground, you feel an immense weight press down on you. You are pinned underneath the Drider-beast’s weight, and it begins to crush you! \n\n");
         var damage:Number = ((str + tou) * 1.2) + rand(50);
         player.takePhysDamage(damage * 1.2, true);
-        player.createStatusEffect(StatusEffects.Pounced, 2, 0, 0, 0);
+        player.createStatusEffect(StatusEffects.Pounced, 5, 0, 0, 0);
     }
 
     public function TackleGrappleStruggle():void {
@@ -93,47 +83,56 @@ public class ProjectTyrant extends Monster {
 
     public function TackleGrappleWait():void {
         clearOutput();
-        player.removeStatusEffect(StatusEffects.Pounced);
         TackleGrappleFail();
         SceneLib.combat.enemyAIImpl();
     }
 
     public function TackleGrappleFail():void {
+        player.addStatusValue(StatusEffects.Pounced, 1, -1);
+        if (player.getStatusValue(StatusEffects.Pounced, 1) == 0)
+            player.removeStatusEffect(StatusEffects.Pounced);
         outputText("The Drider-thing’s bulk presses down on you, crushing your body. You can feel your bones beginning to crack! \n\n");
         outputText(" \n\n");
         var damage:Number = ((str + tou) * 1.2) + rand(50);
         player.takePhysDamage(damage * 1.2, true);
-        var dmg0:Number = 0;
-        dmg0 += this.spe * 2;
-        dmg0 += eBaseSpeedDamage() * 2;
-        dmg0 += this.weaponAttack * 1;
-        outputText("As you struggle with the creature, the Incubus on top of it cackles, shooting at your exposed upper body! \n\n");
-        player.takePhysDamage(dmg0, true);
-        player.takePhysDamage(dmg0, true);
-        player.takePhysDamage(dmg0, true);
+        if (HP >= 0.7 * maxHP()) {
+            var dmg0:Number = 0;
+            dmg0 += this.spe * 2;
+            dmg0 += eBaseSpeedDamage() * 2;
+            dmg0 += this.weaponAttack * 1;
+            outputText("As you struggle with the creature, the Incubus on top of it cackles, shooting at your exposed upper body! \n\n");
+            player.takePhysDamage(dmg0, true);
+            player.takePhysDamage(dmg0, true);
+            player.takePhysDamage(dmg0, true);
+        } else {
+            outputText(" The Incubus on top chuckles to himself, and you can see the edges of a sickly purple glow. The Drider-monster’s injuries are closing.");
+            createStatusEffect(StatusEffects.MonsterRegen2, 3, maxHP() * 0.1, 0, 0);
+        }
     }
 
     public function TackleGrappleSuccess():void {
-        outputText("with a roar of effort, you get your [legs] underneath you. The creature’s arms are there to try and grab you, but you pull the other way, slipping underneath the creature’s Spider body. As it looks about in confusion, you slip out from underneath it, striking one of the beast’s legs with your [weapon] as you pass. \n\n");
+        player.removeStatusEffect(StatusEffects.Pounced);
+        outputText("With a roar of effort, you get your [legs] underneath you. The creature’s arms are there to try and grab you, but you pull the other way, slipping underneath the creature’s Spider body. As it looks about in confusion, you slip out from underneath it, striking one of the beast’s legs with your [weapon] as you pass. ");
+        takePhysDamage(SceneLib.combat.meleeDamageNoLagSingle(false));
     }
 
-
     public function BlackMortar():void {
+        var dmg1:Number;
         outputText("The demon on top grins, whistling, and you see the unholy mount tense up. A massive glob of black goop is launched from the Drider’s backside like a mortar shell. \n\n");
-        if ((rand(player.spe) > this.spe / 2)) {
+        if (player.getEvasionRoll()) {
             outputText("You break into a sweat as you throw yourself to the side. You evade the worst of the acidic goop, but a bit still splashes you.");
-            var dmg1:Number = this.inte * 0.2;
+            dmg1 = this.inte * 0.2;
             dmg1 += eBaseIntelligenceDamage() * 0.1;
             dmg1 = Math.round(dmg1);
-            dmg1 = player.takeAcidDamage(dmg1, true);
+            player.takeAcidDamage(dmg1, true);
         } else {
             outputText("You gasp as the sticky mess engulfs you, burning like acid on impact. ");
-            var dmg1:Number = this.inte * 0.2;
+            dmg1 = this.inte * 0.2;
             dmg1 += eBaseIntelligenceDamage() * 0.2;
             dmg1 = Math.round(dmg1);
-            dmg1 = player.takeAcidDamage(dmg1, true);
+            player.takeAcidDamage(dmg1, true);
             if (player.hasStatusEffect(StatusEffects.AcidDoT)) player.addStatusValue(StatusEffects.AcidDoT, 1, 1);
-            else player.createStatusEffect(StatusEffects.AcidDoT, 5, 10, 0, 0);
+            else player.createStatusEffect(StatusEffects.AcidDoT, 3, 10, 0, 0);
             player.buff("Goop Web").addStats({"spe": -25}).withText("Goop Web").combatPermanent();
         }
     }

@@ -4264,6 +4264,7 @@ use namespace CoC;
 
 		public function get corruptionTolerance():int {
 			var temp:int = perkv1(PerkLib.AscensionTolerance) * 5;
+			if (CoC.instance.gameSettings.sceneHunter_inst.other) temp *= 2;
 			if (flags[kFLAGS.MEANINGLESS_CORRUPTION] > 0) temp += 100;
 			return temp;
 		}

@@ -1713,7 +1713,7 @@ public class Holidays extends BaseContent {
             }
             //{Bimbo Champagne}
             else if (itype == consumables.BIMBOCH) {
-                outputText("\n\nPastie giggles as her body starts to slowly show the effects of the liquid she just drank.  \"<i>Hihihi... I feel kinda funny,</i>\" she says, and you start to see the changes the champagne is starting to have on her body.  Her hair starts turning blonde, and her position in mid-air changes somewhat... almost as if she was imitating standing on \"<i>fuck-me</i>\" pumps, and, slowly, her little cupid dress stretches, as you become aware that her body is starting to become curvier, especially in the chest area.  \"<i>Hahaha... it's, like, I'm hitting three puberties at once!  Ummm... pu... puber, ah, nevermind.  Look, look!  It's gonna rip!</i>\" The seams in the little dress indeed pop, exposing a significant amount of the little girl's cleavage, now very significant.  True, compared to your body size her breasts are still nothing, but on her little body they're very prominent.  She even seems to have trouble flying from the added mass!  Her hips gained the slightest bit of curve, too, and Pastie's hair is now completely blonde."
+                outputText("\n\nPastie giggles as her body starts to slowly show the effects of the liquid she just drank.  \"<i>Hihihi... I feel kinda funny,</i>\" she says, and you start to see the changes the champagne is starting to have on her body.  Her hair starts turning blonde, and her position in mid-air changes somewhat... almost as if she was imitating standing on \"<i>fuck-me</i>\" pumps, and, slowly, her little cupid dress stretches, as you become aware that her body is starting to become curvier, especially in the chest area.  \"<i>Hahaha... it's, like, I'm hitting three puberties at once!  Ummm... pu... puber, ah, never mind.  Look, look!  It's gonna rip!</i>\" The seams in the little dress indeed pop, exposing a significant amount of the little girl's cleavage, now very significant.  True, compared to your body size her breasts are still nothing, but on her little body they're very prominent.  She even seems to have trouble flying from the added mass!  Her hips gained the slightest bit of curve, too, and Pastie's hair is now completely blonde."
                     + "\n\n\"<i>Uhh, like... baby, you know, the usual drink gets me hot, and this one is as special as my new titties!  Would you mind helping me out?</i>\""
                     + "\n\nYou wonder if the sluttification has passed to everywhere on her body... there's a good chance a small member that's normally impossible for her entire body to fit may actually slip inside her now.  And you doubt she'd turn away a chance to get some cum or pussy juice, too.");
 
@@ -3935,26 +3935,6 @@ public class Holidays extends BaseContent {
                     if (player.cocks[x].cockType == CockTypesEnum.HUMAN) outputText("  Your normal, unaltered cock seems to take on a slight blue tint, although you can confirm it's not going numb.  Quite the contrary, it seems to be getting more sensitive as Nieve's lips roll over it.");
                     //(Equine)
                     else if (player.cocks[x].cockType == CockTypesEnum.HORSE) outputText("  Nieve fawns over your horsecock like a cultist praying to a god.  She sucks and kisses, running the tip of her tongue all along the sides until she reaches the sheathe, and then right back up the other side.");
-                    //(Canine)
-                    else if (player.hasKnot(x)) {
-                        outputText("  Nieve eyes the knot on your cock as though it were a challenge.  She inches down your shaft, getting ever closer.");
-                        //(Cocksize >40)
-                        if (player.cockArea(x) >= 40) outputText("  Eventually, though, she admits defeat and goes back to working your shaft, though she eyes that knot from time to time with no small amount of anger.");
-                        //(Cocksize <40)
-                        else outputText("  It takes her a few good minutes, but eventually she works her way down and takes the entire knot into her mouth.  She raises her hands in triumph and lets out a \"<i>Mmmmrrrrrpphhh!</i>\" before pulling back for a breath, inadvertently exposing your wet hard cock to the cold, wintery air.");
-                    }
-                        /*Cock types
-                    0 - human
-                    1 - horse
-                    2 - dog
-                    3 - demon
-                    4 - tentacle?
-                    5 - CAT
-                    6 - Lizard/Naga?
-                    7 - ANEMONE!
-                    8 - ugliest wang ever (kangaroo)
-                    9 - dragon
-                    */
                     //(Demonic)
                     else if (player.cocks[x].cockType == CockTypesEnum.DEMON) outputText("  Your purple, demonic shaft pulses and throbs, seemingly immune to the unnatural cold of Nieve's mouth. Seemingly oblivious to its nature, Nieve slavers over each nodule, giving every ridge and bump a kiss and more than just a lick.");
                     //(Tentacle)
@@ -3967,6 +3947,14 @@ public class Holidays extends BaseContent {
                     else if (player.cocks[x].cockType == CockTypesEnum.ANEMONE) outputText("  Nieve giggles whenever one of your wriggling tentacles stings her, seemingly immune to its effects, and kisses it back.  Soon after she devours your whole length, delighted to feel the sting of your cock in the back of her throat.");
                     //(Kangaroo)
                     else if (player.cocks[x].cockType == CockTypesEnum.KANGAROO) outputText("  It takes Nieve a little while to catch on that your cock isn't quite human, and by the time she figures it out, she mutters, \"<i>Huh, that's strange... I thought kangaroos had balls above the cock,</i>\" before shrugging and getting back to work.");
+                    //(Canine)
+                    else if (player.hasKnot(x)) {
+                        outputText("  Nieve eyes the knot on your cock as though it were a challenge.  She inches down your shaft, getting ever closer.");
+                        //(Cocksize >40)
+                        if (player.cockArea(x) >= 40) outputText("  Eventually, though, she admits defeat and goes back to working your shaft, though she eyes that knot from time to time with no small amount of anger.");
+                        //(Cocksize <40)
+                        else outputText("  It takes her a few good minutes, but eventually she works her way down and takes the entire knot into her mouth.  She raises her hands in triumph and lets out a \"<i>Mmmmrrrrrpphhh!</i>\" before pulling back for a breath, inadvertently exposing your wet hard cock to the cold, wintery air.");
+                    }
                     //(If you add dicks later, placeholder text:)
                     else outputText("  Nieve works on your mutant cock, spending time working every unique little facet of it.");
                 }

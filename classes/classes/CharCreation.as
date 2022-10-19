@@ -19,7 +19,6 @@ import classes.BodyParts.Wings;
 import classes.GeneticMemories.*;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
-import classes.Items.*;
 import classes.Scenes.Areas.Desert.SandWitchScene;
 import classes.Scenes.Metamorph;
 import classes.Scenes.NPCs.JojoScene;
@@ -1517,12 +1516,10 @@ import coc.view.MainView;
 			clearOutput();
 			if (customPlayerProfile != null) {
 				customPlayerProfile();
-				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) doNext(chooseTimescale);
-				else doNext(startTheGame);
+				doNext(chooseTimescale);
 				return;
 			}
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) chooseTimescale();
-			else startTheGame();
+			chooseTimescale();
 		}
 
 		public function arrival():void {
@@ -1876,12 +1873,12 @@ import coc.view.MainView;
 
 			} else addButtonDisabled(6, "Perm Met.", "Spend Ascension Perk Points to make certain Metamorphs permanent.\n\n<b>In order to be able to select Metamorphs to make permanent, you need to buy Transcendental Genetic Memory from Rare Perks 2 first!</b>");
 			if (player.ascensionPerkPoints >= 5) addButton(7, "Past Life", historyTopastlife).hint("Spend Ascension Points to change current possessed History perk into Past Life perk (5 points).", "Perk Selection");
-			else addButtonDisabled(7, "Past Life", "You not have enough Ascension Perk Points to use this option.");
+			else addButtonDisabled(7, "Past Life", "You don't have enough Ascension Perk Points to use this option.");
 			if (player.hasPerk(PerkLib.AscensionCruelChimerasThesis) && flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3) {
 				if (player.ascensionPerkPoints >= 10) addButton(8, "Bloodline", bloodlineACQ).hint("Spend Ascension Points to change current possessed Descendant perk into Bloodline perk (10 points).", "Perk Selection");
-				else addButtonDisabled(8, "Bloodline", "You not have enough Ascension Perk Points to use this option.");
+				else addButtonDisabled(8, "Bloodline", "You don't have enough Ascension Perk Points to use this option.");
 			}
-			else addButtonDisabled(8, "???", "You not have Ascended enough times or/and have required ascension perk to use this option.");
+			else addButtonDisabled(8, "???", "You don't have Ascended enough times or/and have required ascension perk to use this option.");
 			addButton(10, "Rename", renamePrompt).hint("Change your name at no charge.");
 			if (!migration) addButton(14, "Reincarnate", reincarnatePrompt).hint("Reincarnate and start an entirely new adventure.");
 			else addButton(14, "Return", returnFromUpdateAscension).hint("Go back to your camp after updating your Ascension perks. (Only available during updates that refund points like this)");
@@ -2305,7 +2302,9 @@ import coc.view.MainView;
 					addButtonDisabled(btn, "Nat.MetaMph", "You do not have enough point to acquire Natural Metamorph.");
 				}
 				else{
-					addButton(btn,"Nat. Metamorph", curry(perkRPConfirm, 1,PerkLib.AscensionNaturalMetamorph, 30, 2));
+					addButton(btn, "Nat.MetaMph", curry(perkRPConfirm, 1, PerkLib.AscensionNaturalMetamorph, 30, 2))
+						.hint("Gain free perks Genetic Memory, Metamorph, MetamorphEx at the start of the game\n\n"
+							+ "Cost: 30 points.");
 				}
 			}
 			else{
@@ -2315,7 +2314,9 @@ import coc.view.MainView;
 						addButtonDisabled(btn, "Gen. Memory", "You do not have enough point to acquire Genetic Memory.");
 					}
 					else{
-						addButton(btn, "Gen. Memory", curry(perkRPConfirm, 1, PerkLib.AscensionTrancendentalGeneticMemoryStageX, pCost *1, 2));
+						addButton(btn, "Gen. Memory", curry(perkRPConfirm, 1, PerkLib.AscensionTrancendentalGeneticMemoryStageX, pCost * 1, 2))
+							.hint("Unlocks an ascension menu to make some metamorphs permanent and have them unlocked in your next runs.\n\n"
+								+ "Cost: " + pCost * 1 + " points.");
 					}
 				}
 				else {
@@ -2336,7 +2337,9 @@ import coc.view.MainView;
 						else{
 							player.changeStatusValue(StatusEffects.TranscendentalGeneticMemory, 1, 15 * tier);
 						}
-						addButton(btn, "Gen. Memory", curry(perkRPConfirm, tier, PerkLib.AscensionTrancendentalGeneticMemoryStageX, pCost *1, 2));
+						addButton(btn, "Gen. Memory", curry(perkRPConfirm, tier, PerkLib.AscensionTrancendentalGeneticMemoryStageX, pCost * tier, 2))
+							.hint("Increases the maximum number of permed metamorphs."
+								+ "Cost: " + pCost * tier + " points.");
 					}
 				}
 			}
@@ -2451,7 +2454,7 @@ import coc.view.MainView;
 			}
 			else {
 				clearOutput();
-				outputText("You not have any History perk to change into Past Life perk.");
+				outputText("You don't have any History perk to change into Past Life perk.");
 			}
 			doNext(ascensionMenu);
 		}
@@ -2515,7 +2518,7 @@ import coc.view.MainView;
 
 			else {
 				clearOutput();
-				outputText("You not have any Descendant perks to change into Bloodline perks.");
+				outputText("You don't have any Descendant perks to change into Bloodline perks.");
 			}
 			doNext(ascensionMenu);
 		}

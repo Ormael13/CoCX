@@ -476,7 +476,7 @@ public class SaveUpdater extends NPCAwareContent {
 		}
 		if (flags[kFLAGS.MOD_SAVE_VERSION] == 2) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 3;
-			outputText("Ups looks like you not have achievements feature unlocked yet. So now you can get them.");
+			outputText("Ups looks like you don't have achievements feature unlocked yet. So now you can get them.");
 			outputText("\n\nDrill is as always. So not all achievements would be automaticaly gained but who of people playing this won't play again and again and...you get my drift right?");
 			updateAchievements();
 			outputText("\n\nAchievements are saved in a special savefile so no matter what savefile you're on, any earned achievements will be added to that special savefile. And now got catch them all traine...burp I mean fellow players ^^");
@@ -717,7 +717,7 @@ public class SaveUpdater extends NPCAwareContent {
 		if (flags[kFLAGS.MOD_SAVE_VERSION] == 18) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 19;
 			clearOutput();
-			outputText("Small reorganizing of the house interiors...err I mean mod interiors so not mind it if you not have Soul Cultivator PC. I heard you all likes colors, colors on EVERYTHING ever your belowed lil PC's eyes. So go ahead and pick them. Not much change from addition to appearance screen this small detail. But in future if scene will allow there will be addition of parser for using eyes color too.");
+			outputText("Small reorganizing of the house interiors...err I mean mod interiors so not mind it if you don't have Soul Cultivator PC. I heard you all likes colors, colors on EVERYTHING ever your belowed lil PC's eyes. So go ahead and pick them. Not much change from addition to appearance screen this small detail. But in future if scene will allow there will be addition of parser for using eyes color too.");
 			if (player.hasPerk(PerkLib.SoulExalt)) {
 				player.removePerk(PerkLib.SoulExalt);
 				player.createPerk(PerkLib.SoulScholar, 0, 0, 0, 0);
@@ -1743,7 +1743,7 @@ public class SaveUpdater extends NPCAwareContent {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.016;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.017) {
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02562] = 0; //Izma fishery cleanup.
+				flags[kFLAGS.SOUL_SENSE_ANTHILL] = 0; //Izma fishery cleanup.
 				// convert old buff tags to new ("item_"+itemid)
 				const ItemBuffsRename:Array = [
 					["RingOfWisdom", jewelries.RINGWIS.tagForBuffs],

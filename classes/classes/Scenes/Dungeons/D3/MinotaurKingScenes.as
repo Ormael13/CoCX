@@ -75,7 +75,7 @@ public class MinotaurKingScenes extends BaseContent
 			clearOutput();
 			if (SceneLib.shouldraFollower.followerShouldra()) {
 				outputText("You ask your ghostly partner to take care of the cow slut and help her find her way to the camp. This place will become a huge mess soon.");
-				outputText("\n\n<i>\"But... I wanted to watch your fight with Lettice! Maybe you'll even got a chance to... ah, nevermind.\"</i>");
+				outputText("\n\n<i>\"But... I wanted to watch your fight with Lettice! Maybe you'll even got a chance to... ah, never mind.\"</i>");
 				outputText("\n\nShouldra clearly doesn't want to leave you, but you insist - someone has to show the way to the poor cowgirl. And you obviously can't do it right now.\n\n");
 				if (SceneLib.marbleScene.marbleFollower())
 					outputText("\n\n<i>\"But... How will I explain this to Marble? 'Hey, look, there's another cow who will live here. And she's aso a mindless milk-leaking corrupted bitch. Deal with it.'\"</i> The ghost girl even exits your body to imitate your lover.");
@@ -205,8 +205,8 @@ public class MinotaurKingScenes extends BaseContent
 			}
 			outputText(". If you didn’t have better things to do, or his scent toying with your mind, driving your ardor higher and higher the longer you breath it in, you could savor this for hours. But you’re dizzy with need and in a hurry.");
 			outputText("\n\nDeciding to give yourself a little reward, you lean forward and slip your tongue against the pre-soaked surface of the King’s majestic cock, trembling in orgiastic ecstasy as the taste pushes you over the edge.");
-			if (player.hasKnot()) outputText(" Your knot balloons.");
-			else if (player.horseCocks() > 0) outputText(" Your flare expands right on cue, matching the one pressing back against your tongue.");
+			if (player.horseCocks() > 0) outputText(" Your flare expands right on cue, matching the one pressing back against your tongue.");
+			else if (player.hasKnot()) outputText(" Your knot balloons.");
 			else outputText(" His flare blooms with all the force of a mushroom cloud, nearly pushing your tongue back into your mouth.");
 			outputText(" You erupt a split-second before he does, squirting thick ropes of jism into his sucking asshole. Then he goes off, shooting a torrent of spunk twenty feet into the air. Horned goblins dance in the deluge, tongues extended and hands cupped to catch as much as possible.");
 			outputText("\n\nSome lands in your mouth while you’re moaning and cumming, hot and fresh, somehow making your orgasm hotter still, juicier than you can truly comprehend.");

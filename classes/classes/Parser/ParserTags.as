@@ -4,6 +4,7 @@ import classes.CoC;
 import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
 import classes.Measurements;
+import classes.PerkLib;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects;
 import classes.Scenes.NPCs.Forgefather;
@@ -565,6 +566,7 @@ public class ParserTags {
      * object. If that fails, we just fall back to returning 0
      */
     internal static var conditionalOptions:Object = {
+        "analLooseness" : function ():* { return CoC.instance.player.ass.analLooseness; },
         "strength"      : function ():* { return CoC.instance.player.str; },
         "toughness"     : function ():* { return CoC.instance.player.tou; },
         "speed"         : function ():* { return CoC.instance.player.spe; },
@@ -600,9 +602,11 @@ public class ParserTags {
         "isgoo"         : function ():* { return CoC.instance.player.isGoo(); },
         "isbiped"       : function ():* { return CoC.instance.player.isBiped(); },
         "isscylla"      : function ():* { return CoC.instance.player.isScylla(); },
+        "hasarmor"      : function ():* { return !CoC.instance.player.armor.isNothing },
         "hasbreasts"    : function ():* { return (CoC.instance.player.biggestTitSize() >= 1); },
         "hasballs"      : function ():* { return (CoC.instance.player.hasBalls()); },
         "hascock"       : function ():* { return CoC.instance.player.hasCock(); },
+        "isbimbo"       : function ():* { return CoC.instance.player.hasPerk(PerkLib.BimboBrains) || CoC.instance.player.hasPerk(PerkLib.FutaFaculties); },
         "isherm"        : function ():* { return (CoC.instance.player.gender == 3); },
         "cumnormal"     : function ():* { return (CoC.instance.player.cumQ() <= 150); },
         "cummedium"     : function ():* { return (CoC.instance.player.cumQ() > 150 && CoC.instance.player.cumQ() <= 350); },

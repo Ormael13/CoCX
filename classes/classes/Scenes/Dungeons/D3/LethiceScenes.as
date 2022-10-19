@@ -866,7 +866,7 @@ public class LethiceScenes extends BaseContent
 		{
 			clearOutput();
 			outputText("<b>Weeks later...</b>\nThey had it. The damned bastards had it. Syrena, the head researcher had figured out how to open a stable portal months ago, but for whatever reason, she kept it from Lethice. There’s a shortage of evidence about what she was actually scheming, but you’d guess she was planning to take a cadre of loyal demons to an untainted plane and set herself up as a queen.");
-			outputText("\n\nNo room for loyalty among demons, you suppose. Still, with the information in these books, you can go home. Taking them back to your camp, you work the rituals on the portal to Ingnam{, assisted by your follower{s}}, and before you know it, the portal’s hazy mists resolve into a perfectly circle opening, one that leads to a familiar cave.");
+			outputText("\n\nNo room for loyalty among demons, you suppose. Still, with the information in these books, you can go home. Taking them back to your camp, you work the rituals on the portal to Ingnam" + (camp.followersCount() > 0 ? ", assisted by your follower" + (camp.followersCount() > 1 ? "s" : "") : "") + ", and before you know it, the portal’s hazy mists resolve into a perfectly circular opening, one that leads to a familiar cave.");
 			outputText("\n\nWill you seek vengeance or justice or with your return?");
 
 			menu();

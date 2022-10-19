@@ -1452,33 +1452,33 @@ use namespace CoC;
 				addButton(0, "Weapon (M)", unequipWeapon)
 						.itemHints(player.weapon)
 						.disableIf(!player.weapon.canUnequip(false))
-						.disableIf(player.weapon.isNothing || player.hasPerk(PerkLib.Rigidity), "You not have melee weapon equipped.");
+						.disableIf(player.weapon.isNothing || player.hasPerk(PerkLib.Rigidity), "You don't have melee weapon equipped.");
 				addButton(1, "Weapon (R)", unequipWeaponRange)
 						.itemHints(player.weaponRange)
 						.disableIf(!player.weaponRange.canUnequip(false))
-						.disableIf(player.weaponRange.isNothing || player.hasPerk(PerkLib.Rigidity), "You not have range weapon equipped.");
+						.disableIf(player.weaponRange.isNothing || player.hasPerk(PerkLib.Rigidity), "You don't have range weapon equipped.");
 				addButton(2, "Shield", unequipShield)
 						.itemHints(player.shield)
 						.disableIf(!player.shield.canUnequip(false))
-						.disableIf(player.shield.isNothing || player.hasPerk(PerkLib.Rigidity), "You not have shield equipped.");
+						.disableIf(player.shield.isNothing || player.hasPerk(PerkLib.Rigidity), "You don't have shield equipped.");
 				addButton(3, "Flying Sword", unequipFlyingSwords)
 						.itemHints(player.weaponFlyingSwords)
 						.disableIf(!player.weaponFlyingSwords.canUnequip(false))
-						.disableIf(player.weaponFlyingSwords == FlyingSwordsLib.NOTHING, "You not have shield equipped.")
-						.disableIf(!player.hasPerk(PerkLib.FlyingSwordPath), "You not have flying sword equipped. (Req. perk: Flying Swords Control)");
+						.disableIf(player.weaponFlyingSwords == FlyingSwordsLib.NOTHING, "You don't have shield equipped.")
+						.disableIf(!player.hasPerk(PerkLib.FlyingSwordPath), "You don't have flying sword equipped. (Req. perk: Flying Swords Control)");
 				addButton(5, "Armour", unequipArmor)
 						.itemHints(player.armor)
 						.disableIf(!player.armor.canUnequip(false))
 						.disableIf(player.hasPerk(PerkLib.Rigidity), "Your body stiffness prevents you from unequipping this armor.")
-						.disableIf(player.armor.isNothing, "You not have armor equipped.");
+						.disableIf(player.armor.isNothing, "You don't have armor equipped.");
 				addButton(6, "Upperwear", unequipUpperwear)
 						.itemHints(player.upperGarment)
 						.disableIf(!player.upperGarment.canUnequip(false))
-						.disableIf(player.upperGarment.isNothing || player.hasPerk(PerkLib.Rigidity), "You not have upperwear equipped.");
+						.disableIf(player.upperGarment.isNothing || player.hasPerk(PerkLib.Rigidity), "You don't have upperwear equipped.");
 				addButton(7, "Lowerwear", unequipLowerwear)
 						.itemHints(player.lowerGarment)
 						.disableIf(!player.lowerGarment.canUnequip(false))
-						.disableIf(player.lowerGarment.isNothing || player.hasPerk(PerkLib.Rigidity), "You not have lowerwear equipped.");
+						.disableIf(player.lowerGarment.isNothing || player.hasPerk(PerkLib.Rigidity), "You don't have lowerwear equipped.");
 				addButton(8, "Vehicle", unequipVehicle)
 						.itemHints(player.vehicles)
 						.disableIf(!player.vehicles.canUnequip(false))
@@ -1491,38 +1491,38 @@ use namespace CoC;
 						.itemHints(player.headJewelry)
 						.disableIf(!player.headJewelry.canUnequip(false))
 						.disableIf(player.hasPerk(PerkLib.Rigidity), "Your body stiffness prevents you from unequipping this head accessory.")
-						.disableIf(player.headJewelry.isNothing, "You not have equipped any head accessory.");
+						.disableIf(player.headJewelry.isNothing, "You don't have equipped any head accessory.");
 				addButton(1, "Necklace", unequipNecklace)
 						.itemHints(player.necklace)
 						.disableIf(!player.necklace.canUnequip(false))
-						.disableIf(player.necklace.isNothing, "You not have equipped any necklace.");
+						.disableIf(player.necklace.isNothing, "You don't have equipped any necklace.");
 				addButton(2, "Acc 1", unequipMiscJewel1)
 						.itemHints(player.miscJewelry1)
 						.disableIf(!player.miscJewelry1.canUnequip(false))
-						.disableIf(player.miscJewelry1.isNothing, "You not have equipped any accessory.");
+						.disableIf(player.miscJewelry1.isNothing, "You don't have equipped any accessory.");
 				addButton(3, "Acc 2", unequipMiscJewel2)
 						.itemHints(player.miscJewelry2)
 						.disableIf(!player.miscJewelry2.canUnequip(false))
-						.disableIf(player.miscJewelry2.isNothing, "You not have equipped any accessory.");
+						.disableIf(player.miscJewelry2.isNothing, "You don't have equipped any accessory.");
 				addButton(5, "Ring 1", unequipJewel1)
 						.itemHints(player.jewelry1)
 						.disableIf(!player.jewelry1.canUnequip(false))
-						.disableIf(player.jewelry1.isNothing, "You not have equipped any ring.");
+						.disableIf(player.jewelry1.isNothing, "You don't have equipped any ring.");
 				addButton(6, "Ring 3", unequipJewel3)
 						.itemHints(player.jewelry3)
 						.disableIf(!player.jewelry3.canUnequip(false))
-						.disableIf(player.jewelry3.isNothing, "You not have equipped any ring.")
-						.disableIf(!player.hasPerk(PerkLib.ThirdRing), "You not have equipped any ring. (Req. lvl 60+ perk: Third Ring)");
+						.disableIf(player.jewelry3.isNothing, "You don't have equipped any ring.")
+						.disableIf(!player.hasPerk(PerkLib.ThirdRing), "You don't have equipped any ring. (Req. lvl 60+ perk: Third Ring)");
 				addButton(10, "Ring 2", unequipJewel2)
 						.itemHints(player.jewelry2)
 						.disableIf(!player.jewelry2.canUnequip(false))
-						.disableIf(player.jewelry2.isNothing, "You not have equipped any ring.")
-						.disableIf(!player.hasPerk(PerkLib.SecondRing), "You not have equipped any ring. (Req. lvl 30+ perk: Second Ring)");
+						.disableIf(player.jewelry2.isNothing, "You don't have equipped any ring.")
+						.disableIf(!player.hasPerk(PerkLib.SecondRing), "You don't have equipped any ring. (Req. lvl 30+ perk: Second Ring)");
 				addButton(11, "Ring 4", unequipJewel4)
 						.itemHints(player.jewelry4)
 						.disableIf(!player.jewelry4.canUnequip(false))
-						.disableIf(player.jewelry4.isNothing, "You not have equipped any ring.")
-						.disableIf(!player.hasPerk(PerkLib.FourthRing), "You not have equipped any ring. (Req. lvl 90+ perk: Fourth Ring)");
+						.disableIf(player.jewelry4.isNothing, "You don't have equipped any ring.")
+						.disableIf(!player.hasPerk(PerkLib.FourthRing), "You don't have equipped any ring. (Req. lvl 90+ perk: Fourth Ring)");
 				addButton(13, "-1-", manageEquipment, page - 1);
 			}
 			/*if (player.jewelry != JewelryLib.NOTHING) {

@@ -434,7 +434,7 @@ private function buyBackpack():void {
 	menu();
 	if (player.keyItemvX("Backpack", 1) < 2) addButton(0, "Small", buyBackpackConfirmation, 2, "Small", 100, "Grants additional two slot. \n\nCost: 100 gems");
 	if (player.keyItemvX("Backpack", 1) < 4) addButton(1, "Medium", buyBackpackConfirmation, 4, "Medium", 200, "Grants additional four slots. \n\nCost: 200 gems");
-	addButton(14, "Nevermind", oswaldPawnMenu2);
+	addButton(14, "Never mind", oswaldPawnMenu2);
 }
 private function buyBackpackConfirmation(size:int = 2, sizeDesc:String = "Small", price:int = 100):void {
 	spriteSelect(SpriteDb.s_oswald);

@@ -669,7 +669,7 @@ private function buyBackpack():void {
 	if (player.keyItemvX("Backpack", 1) < 8) addButton(3, "X Large", buyBackpackConfirmation, 8, "X Large", 400, "Grants additional eight slots. \n\nCost: 400 gems");
 	if (player.keyItemvX("Backpack", 1) < 10) addButton(4, "XX Large", buyBackpackConfirmation, 10, "XX Large", 500, "Grants additional ten slots. \n\nCost: 500 gems");
 	if (player.keyItemvX("Backpack", 1) < 12) addButton(5, "XXX Large", buyBackpackConfirmation, 12, "XXX Large", 600, "Grants additional twelve slots. \n\nCost: 600 gems");
-	addButton(14, "Nevermind", benoitsBuyMenu);
+	addButton(14, "Never mind", benoitsBuyMenu);
 }
 private function buyBackpackConfirmation(size:int = 2, sizeDesc:String = "Small", price:int = 100):void {
 	clearOutput();

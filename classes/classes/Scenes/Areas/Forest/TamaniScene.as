@@ -854,10 +854,10 @@ internal function getRapedByTamaniYouHypnoSlut():void {
 			outputText("  Swelling wider inside the wet hole, your [cock "+y1+"] tingles and clenches, about to unload.\n\n");
 	
 			outputText("An intense orgasm rolls through you, making your body clench as your piston your [cock "+x1+"] forwards, burying it deeply inside the goblin-shaped cum-receptacle.  ");
-			if (player.hasKnot(x)) outputText("Your knot balloons inside her, locking her in place");
-			else if (player.cocks[x].cockType == CockTypesEnum.HORSE) outputText("Your flare widens, actually holding itself inside Tamani's womb");
+			if (player.cocks[x].cockType == CockTypesEnum.HORSE) outputText("Your flare widens, actually holding itself inside Tamani's womb");
 			else if (player.cocks[x].cockType == CockTypesEnum.DEMON) outputText("The corrupted nodules along your [cock "+x1+"] pulsate in rippling, wave-like motions, massaging the interior of Tamani's twat");
 			else if (player.cocks[x].cockType == CockTypesEnum.TENTACLE) outputText("Your tentacle-cock's tip widens, becoming mushroom-like inside Tamani's womb");
+			else if (player.hasKnot(x)) outputText("Your knot balloons inside her, locking her in place");
 			else outputText("Your sensitive head swells slightly in time with the contractions of your orgasm");
 			outputText(" as you begin to fill your wife's womb with seed.   The orgasm is intense");
 			if (player.cumQ() < 50) outputText(", but brief, and after a few moments of spasming pleasure, the flood of cum slows to a trickle.");

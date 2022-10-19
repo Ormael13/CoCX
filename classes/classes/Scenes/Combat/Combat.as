@@ -35,6 +35,8 @@ import classes.Scenes.Areas.VolcanicCrag.GolemsTrueFire;
 import classes.Scenes.Camp.TrainingDummy;
 import classes.Scenes.Dungeons.D3.*;
 import classes.Scenes.Dungeons.DeepCave.*;
+import classes.Scenes.Dungeons.DemonLab.IncubusScientist;
+import classes.Scenes.Dungeons.DemonLab.LabGuard;
 import classes.Scenes.Dungeons.EbonLabyrinth.*;
 import classes.Scenes.Dungeons.HelDungeon.*;
 import classes.Scenes.Monsters.*;
@@ -1061,8 +1063,8 @@ public class Combat extends BaseContent {
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.AlterBindScroll1)) {
-			if (player.statStore.hasBuff("NoLimiterState")) bd = buttons.add("No limiter", returnToNormalState).hint("Toggle off No limiter.");
-			else bd = buttons.add("No limiter", noLimiterState).hint("Toggle on No limiter. (STR+++, ?Lib-?)");
+			if (player.statStore.hasBuff("NoLimiterState")) bd = buttons.add("No Limiter", returnToNormalState).hint("Toggle off No Limiter.");
+			else bd = buttons.add("No Limiter", noLimiterState).hint("Toggle on No Limiter. (STR+++, ?Lib-?)");
 		}
 		if (player.hasPerk(PerkLib.ElementalBody)) {
             var element:int = ElementalRace.getElement(player);
@@ -1978,7 +1980,7 @@ public class Combat extends BaseContent {
             return;
         }
         //Determine if dodged!
-        if ((player.playerIsBlinded() && rand(2) == 0) || monster.speedDodge(player) > 0) {
+        if ((player.playerIsBlinded() && rand(2) == 0) || monster.getEvasionRoll(false, player.spe)) {
             //Akbal dodges special education
             if (monster is Akbal) outputText("Akbal moves like lightning, weaving in and out of your furious strikes with the speed and grace befitting his jaguar body.\n");
             else if (monster is Shouldra) outputText("You wait patiently for your opponent to drop her guard. She ducks in and throws a right cross, which you roll away from before smacking your " + weapon + " against her side. Astonishingly, the attack appears to phase right through her, not affecting her in the slightest. You glance down to your " + weapon + " as if betrayed.\n");
@@ -2791,6 +2793,12 @@ public class Combat extends BaseContent {
         }
         if (player.hasStatusEffect(StatusEffects.TaintedMind)) {
             if (monster as DriderIncubus) taintedMindAttackAttempt();
+            return;
+        }
+        //Incubus Scientist
+        if (monster is IncubusScientist && (monster as IncubusScientist).ShieldHits > 0) {
+            (monster as IncubusScientist).ShieldsHitRanged();
+            enemyAI();
             return;
         }
         flags[kFLAGS.LAST_ATTACK_TYPE] = LAST_ATTACK_BOW;
@@ -4500,9 +4508,14 @@ public class Combat extends BaseContent {
             enemyAI();
             return;
         }
-
+        //Incubus Scientist
+        if (monster is IncubusScientist && (monster as IncubusScientist).ShieldHits > 0) {
+            (monster as IncubusScientist).ShieldsHitMelee();
+            enemyAI();
+            return;
+        }
         //Determine if dodged!
-        if ((player.playerIsBlinded() && rand(2) == 0) || monster.speedDodge(player) > 0) {
+        if ((player.playerIsBlinded() && rand(2) == 0) || monster.getEvasionRoll(false, player.spe)) {
             //Akbal dodges special education
             if (monster is Akbal) outputText("Akbal moves like lightning, weaving in and out of your furious strikes with the speed and grace befitting his jaguar body.\n");
             else if (monster is Shouldra) outputText("You wait patiently for your opponent to drop her guard. She ducks in and throws a right cross, which you roll away from before smacking your [weapon] against her side. Astonishingly, the attack appears to phase right through her, not affecting her in the slightest. You glance down to your [weapon] as if betrayed.\n");
@@ -5060,7 +5073,7 @@ public class Combat extends BaseContent {
      * @param IsFeralCombat
      * @return damage calulation
      */
-	private function meleeDamageNoLagSingle(IsFeralCombat:Boolean = false):Number {
+	public function meleeDamageNoLagSingle(IsFeralCombat:Boolean = false):Number {
 		var damage:Number = 0;
 		//------------
 		// DAMAGE
@@ -5369,6 +5382,15 @@ public class Combat extends BaseContent {
                         damage = 0;
                         monster.removeStatusEffect(StatusEffects.MirroredAttack);
                     }
+                }
+                //Lab Guard tanking
+                if (monster is LabGuard && (monster as LabGuard).shieldWall && !monster.hasStatusEffect(StatusEffects.Stunned)) {
+                    CommasForDigits(monster.eOneAttack());
+                    if (player.HP <= player.minHP()) {
+                        doNext(endHpLoss);
+                        return;
+                    }
+                    damage /= 2;
                 }
                 if (player.weapon is HuntsmansCane) {
                     outputText(randomChoice("You swing your cane through the air. The light wood lands with a loud CRACK that is probably more noisy than painful. ",
@@ -6185,7 +6207,7 @@ public class Combat extends BaseContent {
     }
 
     public function isFireTypeWeapon():Boolean {
-        return ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.TIDAR || player.weapon == weapons.RDAGGER) && (player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "ruby")) || (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) || (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) || player.hasStatusEffect(StatusEffects.FlameBlade);
+        return ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && (player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "ruby")) || (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) || (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) || player.hasStatusEffect(StatusEffects.FlameBlade) || player.weapon == weapons.TIDAR;
     }
 
     public function isIceTypeWeapon():Boolean {
@@ -6353,6 +6375,15 @@ public class Combat extends BaseContent {
                     return;
                 }
                 // Stunning the doppleganger should now "buy" you another round.
+            }
+            //Lab Guard tanking
+            if (monster is LabGuard && (monster as LabGuard).shieldWall && !monster.hasStatusEffect(StatusEffects.Stunned)) {
+                CommasForDigits(monster.eOneAttack());
+                if (player.HP <= player.minHP()) {
+                    doNext(endHpLoss);
+                    return;
+                }
+                damage /= 2;
             }
             if ((damage <= 0) && ((MDOCount == maxCurrentRangeAttacks()) && (MSGControllForEvasion) && (!MSGControll))) {
                 //damage = 0;
@@ -14649,17 +14680,17 @@ public class Combat extends BaseContent {
 	
 	public function noLimiterState():void {
 		clearOutput();
-		outputText("No limiter on!\n\n");
+		outputText("No Limiter on!\n\n");
 		var tempStr:Number = player.str;
 		mainView.statsView.showStatUp('str');
-		player.buff("NoLimiterState").addStats({"str":tempStr}).withText("No limiter").combatPermanent();
+		player.buff("NoLimiterState").addStats({"str":tempStr}).withText("No Limiter").combatPermanent();
 		statScreenRefresh();
 		menu();
 		addButton(0, "Next", combatMenu, false);
 	}
 	public function returnToNormalState():void {
 		clearOutput();
-		outputText("No limiter off!\n\n");
+		outputText("No Limiter off!\n\n");
 		player.statStore.removeBuffs("NoLimiterState");
 		menu();
 		addButton(0, "Next", combatMenu, false);

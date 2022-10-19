@@ -1704,7 +1704,7 @@ public class Prison extends BaseContent implements TimeAwareInterface
 				addButton(3, "Sneak", sneak);
 				addButton(4, "Run", run);
 				addButton(5, "Quest", quest);
-				addButton(14, "Nevermind", playerMenu);
+				addButton(14, "Never mind", playerMenu);
 			/*}
 			else
 			{

@@ -197,12 +197,12 @@ public class CampMakeWinions extends BaseContent
 			if (player.hasPerk(PerkLib.TemporalGolemsRestructurationEx)) addButton(10, "T.S.Golem(20x)", makeTemporalStoneGolemsMore).hint("Make twenty of most simple golems.  <b>They will crumble after one attack!</b>\n\nCost: 20 Golem Core, " + temporalGolemMakingCost() * 20 + " Mana");
 			else addButtonDisabled(10, "T.S.Golem(20x)", "Req. Temporal Golems Restructuration (Ex) perk.");
 			if (player.hasItem(useables.GOLCORE, 1) && (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] < maxReusableGolemCoresBagSize())) addButton(11, "PutInCore", putInGolemCoreIntoGolemBag).hint("Put in one golem core into 'golem bag'.")
-			else addButtonDisabled(11, "PutInCore", "You not have any golem core in your inventory to put in 'golem bag'.");
+			else addButtonDisabled(11, "PutInCore", "You don't have any golem core in your inventory to put in 'golem bag'.");
 			if (flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] > 0) addButton(12, "TakeOutCore", takeOutGolemCoreFromGolemBag).hint("Take out one golem core from 'golem bag'.");
 			else addButtonDisabled(12, "TakeOutCore", "Your 'golem bag' not have any golem cores in it.");
 			if (player.hasKeyItem("Golems, Animations and You") >= 0) {
 				if (counterOfPermanentGolems() > 0) addButton(13, "Upgrades", upgradesForPermanentGolems).hint("Options to upgrade permanent golems.");
-				else addButtonDisabled(13, "Upgrades", "You not have any permanent golem created yet.");
+				else addButtonDisabled(13, "Upgrades", "You don't have any permanent golem created yet.");
 			}
 			else addButtonDisabled(13, "Upgrades", "Req. 'Golems, Animations and You' manual.");
 			addButton(14, "Back", camp.campWinionsArmySim);
@@ -1475,7 +1475,7 @@ public class CampMakeWinions extends BaseContent
 			outputText("Do you like to convert elemental shard into energy stored in conduit? (Excess energy will be lost)\n\n");
 			menu();
 			if (player.hasItem(useables.ELSHARD, 1)) addButton(1, "Yes", elementalShardsConversionGo);
-			else addButtonDisabled(1, "Yes", "You not have any Elemental Shards to convert currently.");
+			else addButtonDisabled(1, "Yes", "You don't have any Elemental Shards to convert currently.");
 			addButton(3, "Back", accessSummonElementalsMainMenu);
 		}
 		private function elementalShardsConversionGo():void {
@@ -1682,7 +1682,7 @@ public class CampMakeWinions extends BaseContent
 
 		private function summoningEpicElementalsSubmenu():void {
 			clearOutput();
-			outputText("If you not have matching item, two elemental shards and enough fatigue (200+) it will be impossible to summon any epic elementals.\n\n");
+			outputText("If you don't have matching item, two elemental shards and enough fatigue (200+) it will be impossible to summon any epic elementals.\n\n");
 			menu();
 			if (player.hasItem(useables.ELSHARD, 2) && (player.fatigue + 200 <= player.maxFatigue())) {
 				if (player.statusEffectv1(StatusEffects.SummonedElementalsAirE) < 1) addButton(0, "Air", summonElementalAirEpic);

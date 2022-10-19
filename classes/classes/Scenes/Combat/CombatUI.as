@@ -21,6 +21,7 @@ import classes.Scenes.Areas.Forest.Alraune;
 import classes.Scenes.Areas.Forest.WoodElvesHuntingParty;
 import classes.Scenes.Areas.HighMountains.Izumi;
 import classes.Scenes.Dungeons.D3.*;
+import classes.Scenes.Dungeons.DemonLab.ProjectTyrant;
 import classes.Scenes.NPCs.*;
 import classes.Scenes.SceneLib;
 import classes.StatusEffectClass;
@@ -798,9 +799,15 @@ public class CombatUI extends BaseCombatContent {
 			btnBoundWait.call((monster as Izumi).titSmotherWait);
 		}
 		if (player.hasStatusEffect(StatusEffects.Pounced)) {
-			outputText("\n<b>You’re trapped underneath the giant Drider, and all you can see is her armored undercarriage. Eight legs jab down at you, steel glinting dangerously. You need to get out of here, or you’ll end up crushed!</b>");
-			btnStruggle.call((monster as Tyrantia).tyrantiaPouncedStruggle);
-			btnBoundWait.call((monster as Tyrantia).tyrantiaPouncedWait);
+			if (monster is Tyrantia) {
+				outputText("\n<b>You’re trapped underneath the giant Drider, and all you can see is her armored undercarriage. Eight legs jab down at you, steel glinting dangerously. You need to get out of here, or you’ll end up crushed!</b>");
+				btnStruggle.call((monster as Tyrantia).tyrantiaPouncedStruggle);
+				btnBoundWait.call((monster as Tyrantia).tyrantiaPouncedWait);
+			} else if (monster is ProjectTyrant) {
+				outputText("You are pinned underneath the Drider-beast’s weight, and it begins to crush you!");
+				btnStruggle.call((monster as ProjectTyrant).TackleGrappleStruggle);
+				btnBoundWait.call((monster as ProjectTyrant).TackleGrappleWait);
+			}
 		}
 		if (player.hasStatusEffect(StatusEffects.Tentagrappled)) {
 			btnStruggle.call((monster as SuccubusGardener).grappleStruggle);

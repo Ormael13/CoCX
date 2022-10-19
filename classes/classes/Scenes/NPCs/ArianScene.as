@@ -1328,7 +1328,7 @@ private function arianSexingTalk():void {
 		
 		//if PC has no cock)
 		if(!player.hasCock()) {
-			outputText("\n\nBut [arian ey] sighs in disappointment when [arian ey] sees no bulge.  \"<i>Maybe... you could grow your dick back and... nevermind....</i>\"  Arian averts [arian eir] eyes.");
+			outputText("\n\nBut [arian ey] sighs in disappointment when [arian ey] sees no bulge.  \"<i>Maybe... you could grow your dick back and... never mind....</i>\"  Arian averts [arian eir] eyes.");
 			outputText("\n\nYou tell [arian em] you'll think about it.");
 		}
 		else {

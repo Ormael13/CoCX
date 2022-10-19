@@ -558,7 +558,7 @@ private function MakingAlicornumPotion():void {
 		return;
 	}
 	else if (!(player.hasItem(consumables.UNICORN, 1) && (player.hasItem(consumables.LG_SFRP, 20) || (player.hasItem(consumables.LGSFRPB, 2))))) {
-		outputText("\"<i>I'm sorry but you don't have the materials I need. I need vial of Unicornum and two bottles of Low-grade Soulforce Recovery Pills. In case you not have two bottles then twenty Low-grade Soulforce Recovery Pills would work too,</i>\" Evangeline says.");
+		outputText("\"<i>I'm sorry but you don't have the materials I need. I need vial of Unicornum and two bottles of Low-grade Soulforce Recovery Pills. In case you don't have two bottles then twenty Low-grade Soulforce Recovery Pills would work too,</i>\" Evangeline says.");
 		doNext(evangelineAlchemyMenu);
 		return;
 	}

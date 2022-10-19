@@ -132,8 +132,8 @@ private function talkToBaker():void {
 	outputText("</i>\"");
 	outputText("\n\nDespite his unrefined appearance and poor language ability, he seems eager to talk about his job.");
 
-	//[Brownie][Cookie][Cupcake][Doughnut][Pound Cake][Fox Berry][Ringtail Fig][Mouse Cocoa][Nevermind]
-	//[Nevermind] goes back to bakery main menu and is spacebar default
+	//[Brownie][Cookie][Cupcake][Doughnut][Pound Cake][Fox Berry][Ringtail Fig][Mouse Cocoa][Never mind]
+	//[Never mind] goes back to bakery main menu and is spacebar default
 	//all purchases offered after talking should spacebar to [No] and go to normal purchase output if [Yes], returning to bakery main menu afterward
 	menu();
 	addButton(0,"Brownie",talkAboutBrownies);
@@ -145,7 +145,7 @@ private function talkToBaker():void {
 	addButton(6,"Ringtail Fig",talkAFig);
 	addButton(7,"Mouse Cocoa", talkAboutMouseCocoa);
 	addButton(8,"R.Rvr Root",talkAboutRoot);
-	addButton(14,"Nevermind", talkBakeryMenu);
+	addButton(14,"Never mind", talkBakeryMenu);
 }
 
 //[Bakery - Talk - Baker - Brownie]

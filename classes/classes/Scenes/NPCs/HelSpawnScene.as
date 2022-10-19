@@ -198,8 +198,11 @@ private function heliaLoveFollowup():void {
 	}
 	outputText("  So what do you say, [name]?  Let's have a kid!</i>\"");
 	menu();
-	if(player.hasCock() && player.cockThatFits(helFollower.helCapacity()) >= 0) addButton(0,"Have A Kid",haveAKid);
-	else if(player.hasCock()) outputText("  <b>Unfortunately, you're too big to squeeze inside Helia to do the business yourself.  You might need to shrink down some.</b>");
+	addButton(0,"Have A Kid",haveAKid)
+		.disableIf(player.cockThatFits(helFollower.helCapacity()) < 0,
+			"Unfortunately, you're too big to squeeze inside Helia to do the business yourself.  You might need to shrink down some.")
+		.disableIf(!player.hasCock(), "And how exactly are you going to do this without a dick?!")
+		.disableIf(player.isGargoyle(), "You're made of stone. You can't impregnate <b>anyone</b> anymore.");
 	addButton(1,"Another Dad",getAnotherDad);
 	addButton(2,"No Or Later",noKidsHel);
 }
@@ -294,7 +297,7 @@ private function getAnotherDad():void {
 	}
 	//[Another Dad] (PC has a dick)
 	else {
-		outputText("\"<i>W-wha?</i>\" Hel says, cocking an eyebrow.  \"<i>You sure, [name]?  I-if you don't want to be the dad, I guess I understand.  But why?  Am I not... no, nevermind.  I don't want to know.  Okay, uh, we can find someone with a cock.  ");
+		outputText("\"<i>W-wha?</i>\" Hel says, cocking an eyebrow.  \"<i>You sure, [name]?  I-if you don't want to be the dad, I guess I understand.  But why?  Am I not... no, never mind.  I don't want to know.  Okay, uh, we can find someone with a cock.  ");
 		if(player.statusEffectv1(StatusEffects.TelAdre) >= 1) outputText("There's Miko and Mai from the bar.  Mai's said she wanted a kid, but can't take care of one... she'd probably be willing to fuck one into me!  If that's not alright, then... lemme think.  ");
 		outputText("Uh, maybe not a minotaur... they always plug more minotaurs, and I don't want a bull coming out of my twat.  Uh, maybe I could track down one of the spider boys from the swamp and jump on </i>his<i> dick.  They're pretty cute, right?  Dunno how that'd affect a child, though.  Maybe he'd end up with like, extra eyes, or chitin?  Still, better than an imp or some shit.  So what do you think?</i>\"");
 	}
@@ -318,7 +321,7 @@ private function maiWouldBeTheBestInseminator():void {
 	outputText("You tell Hel that you think Mai would make a lovely father.  Helia nods her agreement, saying, \"<i>Yeah, I agree.  She's a beauty, and I'm sure our child will be stunning... you wouldn't mind if she visited, right?  I mean, you and I will be raising our kid - and he'll be ours for sure - but I'm sure Mai will want to at least visit her kid.</i>\"");
 	outputText("\n\nYou nod, and say that's fine.  Hel beams at you, giving you a peck on the cheek before running back to camp, saying she's going to go track down the foxy sisters as soon as she can.  You suppose the next time you see her, Hel's probably going to be pregnant with the child you'll be helping to raise.");
 	if (!recalling) {
-		helScene.pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_SALAMANDER); //Yes, it's Mai's baby, but that's already tracked separately
+		helScene.pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_SALAMANDER, true); //Yes, it's Mai's baby, but that's already tracked separately
 		flags[kFLAGS.HEL_NTR_TRACKER] = 1;
 		flags[kFLAGS.HELSPAWN_DADDY] = 2;
 		doNext(playerMenu);
@@ -333,7 +336,7 @@ private function spiderboyWouldBeBestDad():void {
 	helScene.helSprite();
 	outputText("You tell Helia to go find a spider boy to jump.  She beams at you, and skips off toward the swamp calling, \"<i>Thank you, thank you thank you, [name]!</i>\" over her shoulder as she goes.  You suppose the next time you see her, Hel's probably going to be pregnant with the child you'll be helping to raise.");
 	if (!recalling) {
-		helScene.pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_SALAMANDER); //Yes, it's the spider's baby, but that's already tracked separately
+		helScene.pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_SALAMANDER, true); //Yes, it's the spider's baby, but that's already tracked separately
 		flags[kFLAGS.HEL_NTR_TRACKER] = 1;
 		flags[kFLAGS.HELSPAWN_DADDY] = 1;
 		doNext(playerMenu);

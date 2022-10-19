@@ -86,8 +86,7 @@ public class MutantIncubus extends Monster {
         SceneLib.dungeons.demonLab.BadEndExperiment(); //TODO
     }
 
-    //TODO: call this
-    public function BladeFlurry():void {
+    private function BladeFlurry():void {
         clearOutput();
         outputText("The mutant Incubus rushes towards you, blades outstretched. \n\n");
         //Miss:
@@ -98,55 +97,54 @@ public class MutantIncubus extends Monster {
         //("Misdirection"
         else if (player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
             outputText("Using your talent for misdirection, you manage to sidestep the creature's clumsy charge.");
-
         }
         //Determine if cat'ed
         else if (player.hasPerk(PerkLib.Flexibility) && rand(100) < 6) {
             outputText("Using your cat-like flexibility, you manage to bend your spine backwards. Throwing yourself into a sideways flip, you manage to sidestep the creature's clumsy charge.");
         } else {
             outputText("You try to dodge, but the creature’s fist is too fast, hitting you square in the chest. You’re sent tumbling back.");
-            createStatusEffect(StatusEffects.Attacks, 1, 0, 0, 0);
+            eOneAttack();
             outputText("As it keeps charging through, a few of the drider’s legs come down onto your prone frame, trampling you. ");
-            createStatusEffect(StatusEffects.Attacks, 2, 0, 0, 0);
+            eOneAttack();
+            eOneAttack();
             outputText("\n");
         }
     }
 
-    //TODO: call this
-    public function HandStab():void {
+    private function HandStab():void {
         clearOutput();
-        {
-            outputText(capitalA + short + " steps in, stabbing at your chest with one blade. You move, but it was a feint! His other rapier is headed right towards your [weapon] hand.  ");
-            //Blind dodge change
-            if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
-                outputText("The Incubus's blind stab misses outright.");
-            }
-            //Determine if dodged!
-            else if (player.speedDodge(this) > 0) {
-                outputText("You pull your weapon back and the stab whiffs, hitting nothing but air.");
-            }
-            //Determine if evaded
-            else if (player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
-                outputText("You pull your weapon back evasively and the stab goes wide, missing entirely!");
-            }
-            //Shield Ward
-            else if (player.hasPerk(PerkLib.ShieldWard) && rand(2) == 0) {
-                outputText("You intercept the Incubus's blade with your shield.");
-            } else if (player.weaponName == "spiked gauntlet" || player.weaponName == "hooked gauntlets" || player.weapon == weapons.AETHERD) {
-                outputText("The rapier hits your ");
-                if (player.weaponName == "spiked gauntlet") outputText("gauntlet, but your armored hand is too tough for the rapier to pierce.\n");
-                else outputText("gauntlet, but your armored hand is too tough for the rapier to pierce\n");
-            } else {
-                outputText("You don't react fast enough, the rapier piercing your hand! You let out a cry of pain, dropping your [weapon] to the ground. You can't give this slippery incubus the opening and pick it up, and your hand is bleeding from the attack.");
-                flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = player.weapon.id;
-                player.setWeapon(WeaponLib.FISTS);
-                //No longer appears to be used				flags[kFLAGS.PLAYER_DISARMED_WEAPON_ATTACK] = player.weaponAttack;
-                //				player.weapon.unequip(player,false,true);
-                player.createStatusEffect(StatusEffects.Disarmed, 50, 0, 0, 0);
-                player.createStatusEffect(StatusEffects.IzmaBleed, 2, 0, 0, 0);
-            }
+        outputText(capitalA + short + " steps in, stabbing at your chest with one blade. You move, but it was a feint! His other rapier is headed right towards your [weapon] hand.  ");
+        //Blind dodge change
+        if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
+            outputText("The Incubus's blind stab misses outright.");
         }
+        //Determine if dodged!
+        else if (player.speedDodge(this) > 0) {
+            outputText("You pull your weapon back and the stab whiffs, hitting nothing but air.");
+        }
+        //Determine if evaded
+        else if (player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
+            outputText("You pull your weapon back evasively and the stab goes wide, missing entirely!");
+        }
+        //Shield Ward
+        else if (player.hasPerk(PerkLib.ShieldWard) && rand(2) == 0) {
+            outputText("You intercept the Incubus's blade with your shield.");
+        } else if (player.weaponName == "spiked gauntlet" || player.weaponName == "hooked gauntlets" || player.weapon == weapons.AETHERD) {
+            outputText("The rapier hits your ");
+            if (player.weaponName == "spiked gauntlet") outputText("gauntlet, but your armored hand is too tough for the rapier to pierce.\n");
+            else outputText("gauntlet, but your armored hand is too tough for the rapier to pierce\n");
+        } else {
+            outputText("You don't react fast enough, the rapier piercing your hand! You let out a cry of pain, dropping your [weapon] to the ground. You can't give this slippery incubus the opening and pick it up, and your hand is bleeding from the attack.");
+            player.createStatusEffect(StatusEffects.Disarmed, 50, 0, 0, 0);
+            flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = player.weapon.id;
+            player.setWeapon(WeaponLib.FISTS);
+            player.createStatusEffect(StatusEffects.IzmaBleed, 2, 0, 0, 0);
+        }
+    }
 
+    override protected function performCombatAction():void {
+        if (rand(2) == 0) HandStab();
+        else BladeFlurry();
     }
 }
 

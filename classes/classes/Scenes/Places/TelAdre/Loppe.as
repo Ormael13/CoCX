@@ -364,7 +364,7 @@ private function talkWithLoppeAboutLoppe():void {
 	outputText("\n\n\"<i>I have always had a very active sex drive.  I didn't know if I was going to win, but I had to try anyways.  The demon said she was very pleased with my choice, and would give me a boon.  So she turned me into this human-bunny-horse hybrid and gave me an even higher sex drive so I'd be a match for her.</i>\"  Loppe's face turns grim.");
 
 	outputText("\n\n\"<i>That was a huge mistake... for her.  Under her lust-boosting spell, I just went absolutely nuts.  We had sex for hours on end; by the time I was done with her, she was knocked out cold in a pool of our mixed fluids and I set my eyes on my mother... still bound...</i>\"  She bites her lower lip.");
-	outputText("\n\n\"<i>I nearly... nevermind.  I'm not going into any more detail about that.  Thanks for the chat.</i>\"");
+	outputText("\n\n\"<i>I nearly... never mind.  I'm not going into any more detail about that.  Thanks for the chat.</i>\"");
 	outputText("\n\nSurprised at the abrupt end, you rise when Loppe does, and return her thanks.");
 	outputText("\n\n\"<i>I guess I'll see you later then.</i>\"");
 	//set LoppeChat = 1
@@ -1330,7 +1330,7 @@ private function getFuckedInYerTwatYaCunt():void {
 	outputText("\n\nSidling up to you lover as best you can, you snuggle into her soft embrace.  A little rest can't hurt, right?  You take a look at the room around you, observing the copious smears of fluid all over the bedding and the floor - she's lucky her cock was buried in your cunt, or you're certain the walls and ceilings would be drenched in the stuff as well.  Wondering how lucky you yourself are to be so thoroughly worn out, you close your eyes and sink into oblivion.");
 
 	outputText("\n\n<b>Two hours later...</b>");
-	outputText("\n\nWhen you awaken, you feel much better.  You automatically right yourself, and find to your surprise that it's as effortless an action as always - your absurdly distended gut is gone.  In fact, you've been tucked carefully into clean, dry linen, and the floor is bare.  The stench of sex that should be suffocating you is entirely absent; you could hardly believe there was sex in here at all, nevermind the unmasked fuckfest you just had.");
+	outputText("\n\nWhen you awaken, you feel much better.  You automatically right yourself, and find to your surprise that it's as effortless an action as always - your absurdly distended gut is gone.  In fact, you've been tucked carefully into clean, dry linen, and the floor is bare.  The stench of sex that should be suffocating you is entirely absent; you could hardly believe there was sex in here at all, never mind the unmasked fuckfest you just had.");
 	outputText("\n\n\"<i>Oh, you're awake.  Great!  I brought something to eat,</i>\" Loppe says, casually walking towards you with a tray containing a sandwich and some milk.");
 
 	outputText("\n\nYour belly rumbles, reminding you that even if you don't look like it, you still just woke up after a marathon sex session, and you gratefully accept her offer of food.");
