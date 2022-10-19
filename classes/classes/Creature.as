@@ -899,7 +899,7 @@ public class Creature extends Utils
 			var prevSens:Number  = sens;
 			var prevLust:Number  = lust;
 			var prevCor:Number  = cor;
-			modStats(argz.str, argz.tou, argz.spe, argz.inte, argz.wis, argz.lib, argz.sens, argz.lust, argz.cor, argz.scale, argz.max);
+			modStats(argz.str, argz.tou, argz.spe, argz.inte, argz.wis, argz.lib, argz.sens, argz.lust, argz.cor, argz.scale);
 			End("Creature","dynStats");
 			//trace("dynStats("+args.join(", ")+") => ("+[str,tou,spe,inte,wis,lib,sens,lust,cor].join(", ")+")");
 			return {
@@ -914,11 +914,7 @@ public class Creature extends Utils
 				cor:cor-prevCor
 			};
 		}
-		public function modStats(dstr:Number, dtou:Number, dspe:Number, dint:Number, dwis:Number, dlib:Number, dsens:Number, dlust:Number, dcor:Number, scale:Boolean, max:Boolean):void {
-			var maxes:Object;
-			//if (max) {
-			//	maxes.lust = maxLust();
-			//}
+		public function modStats(dstr:Number, dtou:Number, dspe:Number, dint:Number, dwis:Number, dlib:Number, dsens:Number, dlust:Number, dcor:Number, scale:Boolean):void {
 			var mins:Object = getAllMinStats();
 			mins.lust = minLust();
 			var oldHPratio:Number = hp100/100;
@@ -4362,30 +4358,6 @@ public class Creature extends Utils
 			return getEvasionReason(useMonster, attackSpeed) != null;
 		}
 
-		//private function evasionCalc():void { //In development
-			//var evasionValue:Number = 0;
-			//evasionValue += Math.min( 40, spe/25);
-			//if (hasPerk(PerkLib.Flexibility)) evasionValue += 5;
-			//if (hasPerk(PerkLib.CatlikeNimbleness)) evasionValue += 5;
-			//if (hasPerk(PerkLib.CatlikeNimblenessEvolved)) evasionValue += 5;
-			//if (hasPerk(PerkLib.CatlikeNimblenessFinalForm)) evasionValue += 5;
-			//if (hasPerk(PerkLib.ElvenSense)) evasionValue += 5;
-			//if (hasPerk(PerkLib.Evade)) evasionValue += 5;
-			//if (hasPerk(PerkLib.ImprovedEvade)) evasionValue += 10;
-			//if (hasPerk(PerkLib.GreaterEvade)) evasionValue += 15;
-			//if (hasPerk(PerkLib.Spectre && hasPerk(PerkLib.Incorporeality) >= 0)) evasionValue += 10;
-			//if (hasPerk(PerkLib.AdvancedAerialCombat) && isFlying()) evasionValue += 5;
-			//if (hasPerk(PerkLib.GreaterAerialCombat) && isFlying()) evasionValue += 15;
-			//if (game.player.hasKeyItem("Spring Boots") >= 0 && tallness < 48 && isBiped()) evasionValue += 10;
-			//if (game.player.hasKeyItem("Rocket Boots") >= 0 && tallness < 48 && isBiped()) evasionValue += 20;
-			//if (game.player.hasKeyItem("Nitro Boots") >= 0 && tallness < 48 && isBiped()) evasionValue += 30;
-			//if (hasPerk(PerkLib.Unhindered) && (armorName == "arcane bangles" || armorName == "practically indecent steel armor"
-			//|| armorName == "revealing chainmail bikini" || armorName == "slutty swimwear" || armorName == "barely-decent bondage straps"
-			//|| armorName == "berserker armor" || armorName == "nothing")) evasionValue += 10;
-			//if (hasPerk(PerkLib.Misdirection) && (armorName == "red, high-society bodysuit"
-			//|| armorName == "Fairy Queen Regalia")) evasionValue += 10;
-		//}
-
 		public function get vagorass():IOrifice {
 			return hasVagina() ? vaginas[0] : ass;
 		}
@@ -4394,7 +4366,7 @@ public class Creature extends Utils
 		 * Generate increments for stats
 		 *
 		 * @return Object of (newStat-oldStat) with keys str, tou, spe, inte, wis, lib, sens, lust, cor
-		 * and flags scale, max
+		 * and flags scale
 		 * */
 		public static function parseDynStatsArgs(c:Creature, args:Array):Object {
 			// Check num of args, we should have a multiple of 2
@@ -4413,8 +4385,7 @@ public class Creature extends Utils
 				sen: [ 0, "+"],
 				lus: [ 0, "+"],
 				cor: [ 0, "+"],
-				scale: [ true, "="],
-				max: [ true, "="]
+				scale: [ true, "="]
 			};
 			var aliases:Object = {
 				"strength":"str",
@@ -4487,8 +4458,7 @@ public class Creature extends Utils
 				sens    : newSens - c.sens,
 				lust    : newLust - c.lust,
 				cor     : newCor - c.cor,
-				scale   : argDefs.scale[0],
-				max     : argDefs.max[0]
+				scale   : argDefs.scale[0]
 			};
 		}
 

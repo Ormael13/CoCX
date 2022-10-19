@@ -6878,7 +6878,7 @@ use namespace CoC;
 			}
 		}
 
-		override public function modStats(dstr:Number, dtou:Number, dspe:Number, dinte:Number, dwis:Number, dlib:Number, dsens:Number, dlust:Number, dcor:Number, scale:Boolean, max:Boolean):void {
+		override public function modStats(dstr:Number, dtou:Number, dspe:Number, dinte:Number, dwis:Number, dlib:Number, dsens:Number, dlust:Number, dcor:Number, scale:Boolean):void {
 			//Easy mode cuts lust gains!
 			if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 && dlust > 0 && scale) dlust /= 10;
 			//Set original values to begin tracking for up/down values if
@@ -6941,25 +6941,9 @@ use namespace CoC;
 				if(hasPerk(PerkLib.Lusty)) dlib += dlib * perkv1(PerkLib.Lusty);
 				if(hasPerk(PerkLib.Sensitive)) dsens += dsens * perkv1(PerkLib.Sensitive);
 				// Uma's Str Cap from Perks (Moved to max stats)
-				/*if (hasPerk(PerkLib.ChiReflowSpeed))
-				{
-					if (str > UmasShop.NEEDLEWORK_SPEED_STRENGTH_CAP)
-					{
-						str = UmasShop.NEEDLEWORK_SPEED_STRENGTH_CAP;
-					}
-				}
-				if (hasPerk(PerkLib.ChiReflowDefense))
-				{
-					if (spe > UmasShop.NEEDLEWORK_DEFENSE_SPEED_CAP)
-					{
-						spe = UmasShop.NEEDLEWORK_DEFENSE_SPEED_CAP;
-					}
-				}*/
 			}
 			//Change original stats
-			super.modStats(dstr,dtou,dspe,dinte,dwis,dlib,dsens,dlust,dcor,false,max);
-			//Refresh the stat pane with updated values
-			//mainView.statsView.showUpDown();
+			super.modStats(dstr,dtou,dspe,dinte,dwis,dlib,dsens,dlust,dcor,false);
 			if (dlust != 0){
 				raijuSuperchargedCheck();
 			}
