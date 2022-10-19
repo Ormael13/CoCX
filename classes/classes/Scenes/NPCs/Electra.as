@@ -67,7 +67,7 @@ use namespace CoC;
 				}
 				outputText(" You are slashed for ");
 				player.takePhysDamage(damage, true);
-				player.dynStats("lus", damageLust, "scale", false);
+				player.takeLustDamage(damageLust, true);
 				outputText(" damage. The lingering electricity on her claws leaves you aroused. <b>(<font color=\"#ff00ff\">" + damageLust + "</font>)</b> lust damage.");
 			}
 		}
@@ -89,11 +89,11 @@ use namespace CoC;
 					if (flags[kFLAGS.ELECTRA_LVL_UP] >= 7) discharge += 2;
 					if (flags[kFLAGS.ELECTRA_LVL_UP] >= 11) discharge += 2;
 				}
-				player.dynStats("lus", discharge);
+				player.takeLustDamage(discharge, true);
 			}
 			else {
 				player.createStatusEffect(StatusEffects.RaijuStaticDischarge, 0, 0, 0, 0);
-				player.dynStats("lus", discharge);
+				player.takeLustDamage(discharge, true);
 			}
 			outputText("\n\n");
 		}
@@ -109,7 +109,7 @@ use namespace CoC;
 				if (flags[kFLAGS.ELECTRA_LVL_UP] >= 7) damageLust += Math.round(this.lib / 20);
 				if (flags[kFLAGS.ELECTRA_LVL_UP] >= 11) damageLust += Math.round(this.lib / 20);
 			}
-			player.dynStats("lus", damageLust, "scale", false);
+			player.takeLustDamage(damageLust, true);
 			outputText(" gleefully fingers herself while looking at you with a half crazed look.\n\n");
 			outputText("\"<i>Do you know... How frustrating it is to be dependant on someone else to achieve release? Ohhhh soon you will find out!</i>\"\n\n");
 			outputText("The display left you aroused but likely she's preparing something. <b>(<font color=\"#ff00ff\">" + damageLust + "</font>)</b> lust damage.\n\n");
@@ -133,7 +133,7 @@ use namespace CoC;
 					if (flags[kFLAGS.ELECTRA_LVL_UP] >= 11) damageLust += lust;
 				}
 				damageLust = Math.round(damageLust);
-				player.dynStats("lus", damageLust, "scale", false);
+				player.takeLustDamage(damageLust, true);
 				outputText(" You are zapped clean but instead of feeling pain, you feel intense electric pleasure coursing through your body as the Raiju shares some of her unbridled arousal. <b>(<font color=\"#ff00ff\">" + damageLust + "</font>)</b> lust damage.");
 			}
 			lust -= lust * 0.2;

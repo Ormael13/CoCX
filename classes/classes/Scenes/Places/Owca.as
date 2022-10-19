@@ -1075,7 +1075,7 @@ private function enslaveVapulaWithYourWang():void {
 	//[Vapula added as follwer.]
 	flags[kFLAGS.VAPULA_FOLLOWER] = 1;
 	flags[kFLAGS.VAPULA_HAREM_FUCK] = 1;
-	if(player.lust < 0.8 * player.maxLust())  dynStats("lus", 0.8 * player.maxLust() - player.lust);
+	if(player.lust < 0.8 * player.maxLust())  dynStats("lus", 0.8 * player.maxLust() - player.lust, "scale", false);
 	enslaveVapulaShared();
 }
 

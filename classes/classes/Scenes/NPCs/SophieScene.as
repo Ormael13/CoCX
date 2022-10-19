@@ -179,7 +179,7 @@ public class SophieScene extends BaseContent implements TimeAwareInterface {
 					outputText("\nSophie sits by herself on your comfy bedroll.  The feathery female seems to have taken a liking to your place of rest.  Your well-endowed monster-girl lover clearly desires to be as close to you, or at least your fatherly scent, as much as possible.  Lost in her lusty fantasies, she caresses the gentle bump in her belly, the telltale sign that your virile seed has worked its magic on her egg-bearing womb.  One of her hands idly slips between her legs, fingers gently playing with her wet snatch as her other rubs her tummy.");
 					outputText("\n\nFinally noticing your gaze on her body, Sophie looks up at you with an amorous smile, her thick, fertile thighs spreading and showing off her tight puffy pussy to you.  The matron puts her pregnant body on display for you, to show you the result of your virility and to entice you into playing with her hot, lusty form.\n");
 				}
-				dynStats("lus", 3);
+				dynStats("lus", 3, "scale", false);
 			}
 			//Medium Bump*
 			else if (triggeredEvent == 2) {
@@ -191,7 +191,7 @@ public class SophieScene extends BaseContent implements TimeAwareInterface {
 					outputText("\nAs usual, Sophie is laying on your bedroll.  Each day the fertile swell in her stomach seems to grow bigger with the egg inside.  The positively pregnant woman idly strokes her egg-bearing belly with motherly affection.  She even coos to the growing bump as she caresses her body, clearly loving the fact that she is pregnant with another egg.  It's not long before she catches sight of you; a big silly smile breaking across her lips as she hurriedly gets up from your blankets and bounds over to you.  With each step, her voluptuous body jiggles and bounces, her big bountiful bosom heaving and shaking, her ripe round rump quivering like jelly as she sways her fecund hips for you.");
 					outputText("\n\n\"<i>Hey there [name].  Look at me!  That egg has gotten so big inside me.  You have no idea how good this feels,</i>\" the confident woman tweets as she presses her curvaceous body against you, making sure you can feel her big soft tits and growing baby bump.  From how her body feels, you're sure her already bountiful breasts have only gotten bigger thanks to her pregnancy.  \"<i>Maybe in a month or so, I'll let you do it all over again...</i>\"\n");
 				}
-				dynStats("lus", 5);
+				dynStats("lus", 5, "scale", false);
 			}
 			//Big Belly Bump*
 			else if (triggeredEvent == 3) {
@@ -203,7 +203,7 @@ public class SophieScene extends BaseContent implements TimeAwareInterface {
 					outputText("\nOnce again, your pregnant harpy lounges on your bedroll, her face buried in your pillow and taking deep breaths of your scent.  Even with her in such a - vulnerable... position, face down and ass up, you can clearly see the big, round bulge of her egg-laden belly.  With the feathery slut so gravid, you're sure it won't be long until she lays that womb-straining egg.  As if sensing your gaze, Sophie starts to sway her round spankable ass, her legs seeming to spread a little wider as well.  Your suspicions prove correct when she looks back at you; her pursed lips blowing you a kiss as she looks at you with lusty eyes.");
 					outputText("\n\nThe amorous harpy practically leaps out of your bed, her voluptuous body bouncing with each step as she bounds over to you.  Despite her heavily pregnant state, Sophie seems to carry herself well, the milfy harpy well adapted at being heavy with egg.  Taking advantage of your momentary distraction, she flounces at you, tackling you and cuddling you happily.  She presses her egg-heavy belly and massive, perky tits against you and says, \"<i>It's gonna be time soon...  Before you know it, I'll be popping out this big, swollen egg, and you'll be right there to see it!</i>\"  Leaning in, she plants a big wet kiss on your cheek before sliding her hands down to her round bulging belly.  \"<i>It's going to be a really big egg too!  Don't worry, I'm good at laying eggs, and my pussy is going to be ready for you as soon as it comes out!</i>\"\n");
 				}
-				dynStats("lus", 5);
+				dynStats("lus", 5, "scale", false);
 			}
 		}
 
@@ -291,7 +291,7 @@ public function meetSophieRepeat():void {
 			outputText("During your exploration of the mountains you wind up passing close to the harpy nests again.  You hear a faint buzzing on the breeze but ignore it, focusing instead on climbing the rocky mountain.  Pulling yourself up a ledge, you find yourself face-to-face with Sophie the harpy once again.  She's pinching one of her nipples and stroking around the entrance to her sodden twat.  It's flushed bright pink with desire and Sophie explains in between pleasured gasps, \"<i>I've been thinking about you since the last time I saw you, cutey.  I'm normally a horny bundle of fuck anyway, but I'd sure love for a virile " + player.mf("boy","breeder") + " like yourself to fertilize my eggs.</i>\"  She spreads her legs wide and leans back, giving you an offer that's part suggestion, part command, \"<i>Come here and put it inside me.  I promise I'll be tighter than a virgin and wetter than a succubus.</i>\"\n\n");
 		}
 		outputText("(Her words sink into you, and a desire to go with her threatens to overcome your self-control.  You take a deep breath and clear your head.  Do you go with her, turn her down, or try to take control and be the dominant one?  You'll probably have to fight her in order to dominate her...)");
-		dynStats("lus", 20);
+		dynStats("lus", 20, "scale", false);
 		//[Yes – consentacle sex] [No – sad harpy]
 		simpleChoices("Yes", consensualSexSelector, "No", shootDownSophieSex, "Feed Her", milk, "Dominate", fightSophie, "", null);
 	}
@@ -375,7 +375,7 @@ private function shootDownSophieSex():void {
 	outputText("Sophie pouts for a moment, leaning forward to better display her cleavage. \"<i>Really?  Well if you change your mind, come back and visit me.</i>\"  She turns around and fluffs her tail-feathers at you in what is clearly a dismissal.  You climb down, careful to avoid any other nests as you head back to check on your camp and its portal.");
 	doNext(camp.returnToCampUseOneHour);
 	if(player.lib > 25) dynStats("lib", -1);
-	if(player.lust > 50) dynStats("lus", -5);
+	if(player.lust > 50) dynStats("lus", -5, "scale", false);
 }
 
 //[Sex]
@@ -437,7 +437,7 @@ private function sophieMeetingGotLost():void {
 	else {
 		outputText("Mmm, it's a shame you don't have a penis, or you could show me what I was missing.</i>\"  The sexually deprived bird-woman plies you with questions about the world for the better part of an hour, masturbating to several mid-conversation orgasms.  Once she exhausts herself, she thanks you and leans down for her nap.  Her tail-feathers fluff in what is clearly a dismissal.");
 		//(+10 + libmod lust, +1 int up to 50 int))
-		dynStats("lus", (10+player.lib/4));
+		dynStats("lus", (10+player.lib/4), "scale", false);
 		if(player.inte < 50) dynStats("int", 1);
 		//[Go to camp if neither of the above]
 		doNext(camp.returnToCampUseOneHour);
@@ -453,7 +453,7 @@ private function tellSophieYoureForagingForStuff():void {
 	outputText("It takes a little while to make her understand the situation, but after a lengthy explanation the harpy finally gets it.   She doesn't comprehend your reasons, but at least she knows how important your mission is to you.   Sophie sighs, clearly bored with the discussion, and spreads her sizable thighs to begin circling a finger around the large, puffy entrance to her pussy.  Your eyes widen a bit at her brazen masturbation while your body heats with arousal of its own.  Though her posture is open, the shameless harpy doesn't seem to want a partner.  You take the hint that she's through talking and climb back down.\n\n");
 
 	//(+10 + libmod lust, +1 int up to 50 int))
-	dynStats("lus", (10+player.lib/4));
+	dynStats("lus", (10+player.lib/4), "scale", false);
 	if(player.inte < 50) dynStats("int", 1);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -532,7 +532,7 @@ private function cramANippleInIt():void {
 			outputText("</i>\"");
 			if(player.cockTotal() > 0) {
 				outputText("  The harpy laughs and caresses your backside tenderly as she whispers, \"<i>It's been a long time, you know...</i>\"\n\n");
-				dynStats("lus", 25);
+				dynStats("lus", 25, "scale", false);
 			}
 			else outputText("\n\n");
 		}
@@ -544,7 +544,7 @@ private function cramANippleInIt():void {
 		if(player.cockTotal() > 0) {
 			outputText("  Maybe you'll let me try your 'other' milk next time?</i>\"  The harpie laughs and caresses your backside tenderly as she whispers, \"<i>It's been a long time, you know...</i>\"\n\n");
 			//(+25 lust)
-			dynStats("lus", 25);
+			dynStats("lus", 25, "scale", false);
 
 			// Only progress the recruitment path if Sophie sees the players cock.
 			if (!mocking) flags[kFLAGS.SOPHIE_FOLLOWER_PROGRESS]++;
@@ -555,7 +555,7 @@ private function cramANippleInIt():void {
 	player.boostLactation(.1);
 	outputText("The busty harpy rubs her full belly as she disentangles herself from you.  She accidentally gives a cute little burp and colors crimson.  To hide her embarrassment, she turns and dismisses you with a wave of her tail-feathers.  It looks like Sophie was rather happy with how things turned out.");
 	if(player.cor > 60) outputText("  You give her wide ass a playful slap and start climbing down before she can retaliate.");
-	dynStats("lus", -50);
+	dynStats("lus", -50, "scale", false);
 	//increment times bfed.
 	flags[kFLAGS.BREASTFEAD_SOPHIE_COUNTER]++;
     if (CoC.instance.inCombat)

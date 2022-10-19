@@ -772,7 +772,7 @@ public function milkJojoFirst():void {
 		if(flags[kFLAGS.TIMES_COCK_MILKED] > 0) outputText("You know from experience that machine usually takes an hour before it will allow release");
 		else outputText("You figure the machine will probably pump him for quite a while before it allows release");
 		outputText(", and while you're getting quite turned on from the show, you lack the equipment to take care of your lusts in a satisfactory way.  Meanwhile, Jojo is just moaning, squirming, and twitching each time he's brought close to orgasm.  You sit down and watch the machinery take your mouse-toy to task, wishing you had similar endowments you could be taking care of right now.\n\n");
-		if (!recalling) dynStats("lus", 50);
+		if (!recalling) dynStats("lus", 50, "scale", false);
 	}
 
 	function sharedEnd(cock:Boolean):void {
@@ -1046,12 +1046,12 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 	if (doClear) clearOutput();
 	if (flags[kFLAGS.JOJO_LAST_MEDITATION] == model.time.days) {
 		outputText("Jojo smiles and meditates with you.  The experience is calming, but it's so soon after your last session that you don't get much benefit from it.");
-		dynStats("lus", -30);
+		dynStats("lus", -30, "scale", false);
 	}
 	else {
 		outputText("The mouse monk leads you to a quiet spot away from the portal and the two of you sit down, him cross-legged and you mimicking to the best of your ability, back to back.  You close your eyes and meditate for half-an hour, centering your body and mind.  Afterwards, he guides you through stretches and exercises to help keep your bodies fit and healthy.\n\nWhen you are done, Jojo nods to you, and climbs back onto his rock, still thinking.");
 		//Reduces lust
-		dynStats("lus", -30);
+		dynStats("lus", -30, "scale", false);
 		var cleanse:int = -2; //Corruption reduction - faster at high corruption
 		if (player.cor > 80)
 			cleanse -= 3;

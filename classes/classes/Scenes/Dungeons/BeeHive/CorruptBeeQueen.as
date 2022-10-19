@@ -18,7 +18,7 @@ public class CorruptBeeQueen extends BeeGuards {
 			//Hit:
 			else {
 				outputText("The attack leaves you extremely aroused and somewhat sticky with her honey. ");
-				player.dynStats("lus", 80 + rand(40));
+				player.takeLustDamage(80 + rand(40), true);
 				player.buff("Corrupted Queen Bee Honey").addStats( {"spe":-10} ).withText("Corrupted Queen Bee Honey").combatPermanent();
 			}
 		}
@@ -27,7 +27,7 @@ public class CorruptBeeQueen extends BeeGuards {
 			outputText("Her mighty voice rings in the room and in your head as she psychically assaults you.\n\n");
 			outputText("\"<i>I am the queen and I order you to zzzubmit to your dezzzire and become my zzzlave! OBEY!!!</i>\"\n\n");
 			outputText("Her order arouses you although you manage to resist most of its compelling effect. ");
-			player.dynStats("lus", 120 + rand(60));
+			player.takeLustDamage(120 + rand(60), true);
 		}
 		
 		public function corruptBeeQueenCrush():void {

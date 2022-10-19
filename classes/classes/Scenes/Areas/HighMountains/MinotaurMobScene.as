@@ -52,7 +52,7 @@ public class MinotaurMobScene extends BaseContent implements TimeAwareInterface 
 public function meetMinotaurSons():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_minotaurSons);
-	dynStats("lus", 10);
+	dynStats("lus", 10, "scale", false);
 	flags[kFLAGS.MINOTAUR_SONS_TIMES_MET]++;
 	if (player.hasPerk(PerkLib.SoulSense) && flags[kFLAGS.SOUL_SENSE_MINOTAUR_SONS] < 2) flags[kFLAGS.SOUL_SENSE_MINOTAUR_SONS]++;
 	if (flags[kFLAGS.SOUL_SENSE_MINOTAUR_SONS] == 2) {
@@ -266,7 +266,7 @@ private function fightOTaurs():void {
 //[Submit]
 private function submitToMinotaurMob():void {
 	player.lust = player.maxLust();
-	dynStats("lus", 1);
+	dynStats("lus", 1, "scale", false);
 	minotaurDeFeet();
 	spriteSelect(SpriteDb.s_minotaurSons);
 }
@@ -623,8 +623,8 @@ internal function victoryMinotaurGang():void {
 	else outputText("The last minotaur sinks to his knees, pulling aside his loincloth with thread-rending strength to expose the pulsating, needy shaft to the air.  He begins to masturbate himself just like his brother, spilling his pre-seed over the ground into the messy, growing puddle.  The smell hangs thick in the air, but you've won and kept enough of your wits about you to walk away if you want.\n\n");
 	//+lust regardless
 	if(player.lust < 33) player.lust = 33;
-	else dynStats("lus", 20);
-	dynStats("lus", 1);
+	else dynStats("lus", 20, "scale", false);
+	dynStats("lus", 1, "scale", false);
 	outputText("Your body is burning up, buzzing with growing lust from the obscenity going on a few feet away from you.  What do you do?");
 	victorySexMenu();
 }

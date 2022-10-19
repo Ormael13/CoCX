@@ -370,7 +370,7 @@ public function nomnomnom(name:String,price:Number):void {
 		else if(player.femininity <= 25) outputText("females squirm");
 		else outputText("other patrons squirm and fill out their pants");
 		outputText(", none of them tries to make a move.  Pity.");
-		dynStats("lus", (20+player.lib/10));
+		dynStats("lus", (20+player.lib/10), "scale", false);
 		player.minoCumAddiction(10);
 		player.refillHunger(20);
 	}

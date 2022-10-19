@@ -46,7 +46,7 @@ public final class GroPlus extends Consumable {
 				outputText("You feel your testicles shift, pulling the skin of your " + player.sackDescript() + " a little bit as they grow to " + player.ballsDescriptLight() + ".  ");
 			}
 			if (player.ballSize > 10) outputText("Walking gets even tougher with the swollen masses between your legs.  Maybe this was a bad idea.");
-			player.dynStats("lus", 10 * dose);
+			player.dynStats("lus", 10 * dose, "scale", false);
 			if (dose > 1 && !CoC.instance.debug) player.consumeItem(game.consumables.GROPLUS, dose - 1); //eat up more gros
 			SceneLib.inventory.itemGoNext();
 		}
@@ -71,7 +71,7 @@ public final class GroPlus extends Consumable {
 				d = dose;
 				outputText("You sink the needle into the flesh of your " + player.allBreastsDescript() + " injecting one of the rows with a portion of the chemical.");
 				while (d --> 0) player.growTits(Utils.rand(5) + 1, row1, d == 1, 4);
-				player.dynStats("lus", 10 * dose);
+				player.dynStats("lus", 10 * dose, "scale", false);
 				if (dose > 1 && !CoC.instance.debug) player.consumeItem(game.consumables.GROPLUS, dose - 1); //eat up more gros
 				game.mainViewManager.updateCharviewIfNeeded();
 				SceneLib.inventory.itemGoNext();
@@ -85,7 +85,7 @@ public final class GroPlus extends Consumable {
 			outputText("You sink the needle into your clit, nearly crying with how much it hurts.  You push down the plunger and the pain vanishes as your clit starts to grow.\n\n");
 			player.clitLength+= dose;
 			outputText("Your " + player.clitDescript() + " stops growing after an inch of new flesh surges free of your netherlips.  It twitches, feeling incredibly sensitive.");
-			player.dynStats("lus", 10 * dose);
+			player.dynStats("lus", 10 * dose, "scale", false);
 			player.addCurse("sen", 2 * dose, 1);
 			if (dose > 1 && !CoC.instance.debug) player.consumeItem(game.consumables.GROPLUS, dose - 1); //eat up more gros
 			SceneLib.inventory.itemGoNext();
@@ -127,7 +127,7 @@ public final class GroPlus extends Consumable {
 					player.growCock(dick, 4 * dose);
                     player.thickenCock(dick, 1 * dose); //AFTER growth!!!
 				}
-				player.dynStats("lus", 10 * dose);
+				player.dynStats("lus", 10 * dose, "scale", false);
 				player.addCurse("sen", 2 * dose, 1);
 				if (dose > 1 && !CoC.instance.debug) player.consumeItem(game.consumables.GROPLUS, dose - 1); //eat up more gros
 				SceneLib.inventory.itemGoNext();
@@ -144,7 +144,7 @@ public final class GroPlus extends Consumable {
 			outputText("Your nipples engorge, prodding hard against the inside of your " + player.armorName + ".  Abruptly you realize they've grown more than an additional quarter-inch.\n\n");
 			while (d --> 0) {
 				player.nippleLength += (Utils.rand(2) + 3) / 10;
-				player.dynStats("lus", 15);
+				player.dynStats("lus", 15, "scale", false);
 				//NIPPLECUNTZZZ
 				if (game.transformations.NipplesFuckable.isPossible() && Utils.rand(4) == 0) {
 					game.transformations.NipplesFuckable.applyEffect();

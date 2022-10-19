@@ -67,7 +67,7 @@ public class SharkGirlScene extends AbstractBoatContent {
         //Lust win
         else {
             outputText("The shark-girl begins masturbating, giving up on dominating you.  The sight is truly entrancing.\n\n");
-            dynStats("lus", 15);
+            dynStats("lus", 15, "scale", false);
         }
         if (player.lust >= 33 && player.gender > 0) {
             outputText("Do you have your way with her or leave?");
@@ -412,7 +412,7 @@ public class SharkGirlScene extends AbstractBoatContent {
 
         outputText("Damn that was hot!  You'll need to sate yourself once you get back to camp for sure.  Maybe you should give this dildo a whirl?  It still smells of your victim.");
 
-        player.dynStats("lus", (20 + player.lib / 5 + player.cor / 10));
+        player.dynStats("lus", (20 + player.lib / 5 + player.cor / 10), "scale", false);
         cleanupAfterCombat();
     }
 }

@@ -113,7 +113,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 				if (doOutput) outputText(desc);
 				player.vaginas[0].vaginalLooseness--;
-				dynStats("lus", 25);
+				dynStats("lus", 25, "scale", false);
 				MutagenBonus("lib", 2);
 				},
 				// is possible
@@ -131,7 +131,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 				if (doOutput) outputText(desc);
 				player.ass.analLooseness--;
-				dynStats("lus", 25);
+				dynStats("lus", 25, "scale", false);
 				MutagenBonus("lib", 2);
 			},
 			// is possible

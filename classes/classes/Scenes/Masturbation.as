@@ -352,7 +352,7 @@ public class Masturbation extends BaseContent {
 			if (player.gender == 0) {
 				genderlessMasturbate();
 				flags[kFLAGS.TIMES_MASTURBATED]++;
-				dynStats("lus", -50);
+				dynStats("lus", -50, "scale", false);
 				doNext(camp.returnToCampUseOneHour);
 				return;
 			}
@@ -2196,7 +2196,7 @@ public class Masturbation extends BaseContent {
 		clearOutput();
 		if (!player.hasPerk(PerkLib.Flexibility)) {
 			outputText("You undress from your [armor] and take a seat down on the ground. You spread your legs and look down at your sex. It's aching for something more than just your fingers, and you have a craving to taste the lustful juices leaking out. A very perverted idea of cats flashes through your brain, putting a naughty smile on your face. You lay on your side and spread your legs, giving you a perfect view of your [vagina] You lean your head down towards the pleasure-hole, only to be stopped half-way there. You stick your tongue out, trying to add a few more inches, but this doesn't do anything except increase your appetite and your lust as a drop of warm saliva falls onto your [vagina]. You stretch and wriggle your tongue out in a fruitless effort to taste your dripping wet cunt, craving the feeling of your tongue caressing your lips and penetrating into your depths... but it is not to be. You sit back up, frustrated and even more aroused than you were before.");
-			dynStats("lus", 15);
+			dynStats("lus", 15, "scale", false);
 			doNext(camp.returnToCampUseOneHour);
 			return;
 		}
@@ -2270,7 +2270,7 @@ public class Masturbation extends BaseContent {
 				//Fails [Herm has a 50/50 chance of getting either.]
 				//[Male]
 				outputText("You undress from your [armor] and take a seat down on the ground, your [cock] pointing straight at your face. You stroke the erect member a few times, but then remember the cats back at the village. You stare at your [cock]; the more you look at the cock, the more your mouth craves to suck on it. You open your mouth as wide as you can and lean towards your cock, only to be stopped halfway to the tip. You stick your tongue out and try to lick the head. You pretend you're rolling your tongue around the head, but this only makes your cock harder in eagerness. You throw your head forward in an attempt to flick your tongue against it, but the [cock] is pulled back as you go forward. You slump your back onto the ground and let out a frustrated groan. The only thing you've managed to do is make yourself more aroused than when you started.");
-				dynStats("lus", 15);
+				dynStats("lus", 15, "scale", false);
 				doNext(camp.returnToCampUseOneHour);
 				return;
 			}
@@ -2346,7 +2346,7 @@ public class Masturbation extends BaseContent {
 		public function meditate(description:String = "rock"):void {
 			clearOutput();
 			outputText("You find a flat, comfortable " + description + " to sit down on and meditate.  As always, meditation brings a sense of peace and calm to you, but it eats up one hour of the day.");
-			dynStats("lus", -50);
+			dynStats("lus", -50, "scale", false);
 			dynStats("cor", -.3 - 0.3 * player.countCockSocks("alabaster"));
 			if (player.hasPerk(PerkLib.Enlightened) && player.cor < 10) HPChange(50, true);
 			fatigue( -10);

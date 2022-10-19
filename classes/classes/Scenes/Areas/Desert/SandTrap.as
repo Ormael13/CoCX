@@ -56,9 +56,7 @@ public class SandTrap extends Monster
 			else {
 				var damage:Number = (10 + player.lib/10);
 				outputText("  Despite ducking away from the jet of fluid as best you can, you cannot avoid some of the stuff splashing upon your arms and face.  The substance feels oddly warm and oily, and though you quickly try to wipe it off it sticks resolutely to your skin and the smell hits your nose.  Your heart begins to beat faster as warmth radiates out from it; you feel languid, light-headed and sensual, eager to be touched and led by the hand to a sandy bed...  Shaking your head, you try to stifle what the foreign pheromones are making you feel.");
-				player.dynStats("lus", damage);
-				damage = Math.round(damage * EngineCore.lustPercent()/10)/10;
-				outputText(" <b>(<font color=\"#ff00ff\">" + damage +" lust</font>)</b>");
+				player.takeLustDamage(damage, true);
 			}
 		}
 

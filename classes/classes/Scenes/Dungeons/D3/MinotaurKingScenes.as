@@ -227,7 +227,7 @@ public class MinotaurKingScenes extends BaseContent
 
 			if (!recalling) {
 				player.sexReward("no", "Dick");
-				dynStats("lus", 10);
+				dynStats("lus", 10, "scale", false);
 				flags[kFLAGS.MINOTAURKING_FUCKED] = 1;
 				cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			}

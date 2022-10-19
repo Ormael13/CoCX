@@ -196,35 +196,35 @@ public function approachBimboSophieInCamp(output:Boolean = true):void {
 			outputText("\n\nYou KNOW Sophie is trying to compel you to do what she wants, but she's not quite as good at it since she became a bimbo.  Do you fuck her pussy?  Her entire mound, labia and all, is slick with her moisture and shining gold layers of aphrodisiac lipstick.  Fucking that would be heavenly, but it would likely take the better part of the day and likely get her pregnant.  You could always just wipe it off with a piece of cloth and do something else instead.");
 			//Normal Menu + Impregnate
 			//Big lust boost
-			dynStats("lus", 20);
+			dynStats("lus", 20, "scale", false);
 		}
 		else if (pregnancy.isPregnant) {
 			switch (pregnancy.event) {
 				case 3: //Medium Bump*
 					outputText("As usual, Sophie is laying on your bedroll.  Each day the fertile swell in her stomach seems to grow bigger with the egg inside.  The positively pregnant woman idly strokes her egg-bearing belly with motherly affection.  She even coos to the growing bump as she caresses her body, clearly loving the fact that she is pregnant with another egg.  It's not long before she catches sight of you; a big silly smile breaking across her puffy lips as she hurriedly gets up from your blankets and bounds over to you.  With each step, her voluptuous body jiggles and bounces, her big bountiful bosom heaving and shaking, her ripe round rump quivering like jelly as she sways her fecund hips for you.");
 					outputText("\n\n\"<i>There you are [name]!  Like, look at me!  Your egg is getting soooo big inside me!  Like, just look at how big and sexy I am!</i>\" the bimbo brained woman tweets as she presses her curvaceous body against you, making sure you can feel her big soft tits and growing baby bump.  From how her body feels, you're sure her already bountiful bimbo-like breasts have only gotten bigger thanks to her pregnancy.  \"<i>Thanks for getting me all pregnant and stuff!</i>\"");
-					dynStats("lus", 5);
+					dynStats("lus", 5, "scale", false);
 					break;
 				case 4: //Big Belly Bump*
 					outputText("Once again, your pregnant bimbo lounges on your bedroll, her face buried in your pillow and taking deep breaths of your scent.  Even with her in such a - vulnerable... position, face down and ass up, you can clearly see the big, round bulge of her egg-laden belly.  With your feathery slut so gravid, you're sure it won't be long until she lays that womb-straining egg.  As if sensing your gaze, Sophie starts to sway her round spankable ass, her legs seeming to spread a little wider as well.  Your suspicions prove correct when she looks back at you; her plump bimbo lips blowing you a kiss as she looks at you with lusty eyes.");
 					outputText("\n\nThe amorous harpy practically leaps out of your bed, her voluptuous body bouncing with each step as she bounds over to you.  Despite her heavily pregnant state, Sophie seems to carry herself well, the milfy harpy well adapted at being heavy with egg.  Taking advantage of your momentary distraction, the excited, happy bimbo flounces at you, tackling you and cuddling you happily.  She presses her egg-heavy belly and massive, perky tits against you and says, \"<i>Ohhh!  It's gonna be soon, momma Sophie's gonna like, lay this nice big egg for you, babe!</i>\"  Leaning in, she plants a big wet kiss on your cheek before sliding her hands down to her round bulging belly.  \"<i>It's going to be a really big egg too!  Don't worry, I'm good at laying eggs, and my pussy's going to stay niiice and tight for you, babe!</i>\"");
-					dynStats("lus", 5);
+					dynStats("lus", 5, "scale", false);
 					break;
 				default:
 					outputText("Sophie sits by herself on your comfy bedroll.  The feathery female seems to have taken a liking to your place of rest.  Your bird-brained love-slave clearly desires to be close to you, or at least your fatherly scent, as much as possible.  Lost in her lusty fantasies, she caresses the gentle bump in her belly, the telltale sign that your virile seed has worked its magic on her egg-bearing womb.  One of her hands idly slips between her legs, fingers gently playing with her wet snatch as her other rubs her tummy.");
 					outputText("\n\nFinally noticing your gaze on her body, Sophie looks up at you with an amorous smile, her thick, fertile thighs spreading and showing off her tight puffy pussy to you.  The blond bimbo puts her pregnant body on display for you, to show you the result of your virility and to entice you into playing with her hot, lusty form.");
-					dynStats("lus", 3);
+					dynStats("lus", 3, "scale", false);
 			}
 		}
 		else {
 			var choice:Number = rand(3);
 			if(choice == 0) {
 				outputText("Sophie flutters her wings, kicking up a small cloud of dust around herself as she shifts position to present her huge F-cup breasts to you.  She's not wearing a stitch of clothing, and you can see the sticky, soaking fluids of her lust running down her thick thighs unimpeded.  The harpy twists around, leaning over to show just how big and round her jiggling ass has become, the bulging cheeks framed by blond, feathery hair, draped over her derriere.  She asks, \"<i>Mmm, baby, I'm hooooorny, could we, like, fuck or something?</i>\"");
-				dynStats("lus", 5);
+				dynStats("lus", 5, "scale", false);
 			}
 			else if(choice == 1) {
 				outputText("The harpy is reclining with her feathers splayed out behind her.  Her legs hang akimbo, the thick thighs shaking slightly.  As you move closer, you get to see just what's making her twitch.  She's got two of her long, gold-lacquered nails tracing over her puffy nether-lips.  The fingertips trace in lazy circles around her plump, fat little clit, occasionally brushing by it with the gentlest of touches.  Girl-spunk rushes over the harpy's curvy ass to puddle on the ground below as she arches her spine, lifting her heaving, heavy globes up into the air.  You swear it almost looks like she's putting on a show for you!  Her nipples are puffy and hard, nearly as thick as your thumbs, and they proudly display her lusty state to the world.  The big nubs look suckably full, begging for a pair of lips around them.  Leaning up, the bimbo puckers her lips and blows you a kiss with her cum-stained hand.  \"<i>Is there something momma Sophie could, like, touch or play with to make you happy, babe?</i>\"");
-				dynStats("lus", 15);
+				dynStats("lus", 15, "scale", false);
 			}
 			else {
 				outputText("Sophie leans down when you approach, hiding most of her body behind the pendulous weight of her massive breasts.  The weighty orbs sway back and forth, the sweat-soaked skin sliding in a delicious rhythm, nearly dragging her heavy nipples through the dirt.  You find yourself transfixed by the sight, enraptured by the bimbo's hypnotic body while she jiggles and shakes for your pleasure.\n\n");
@@ -236,7 +236,7 @@ public function approachBimboSophieInCamp(output:Boolean = true):void {
 				if(player.cor < 33) outputText("  You find yourself nodding and blushing heavily as you drink in the bimbo's body.");
 				else if(player.cor < 66) outputText("  You find yourself nodding and giving a lewd grin as you drink in the bimbo's body.");
 				else outputText("  You nod vigorously, giving the harpy a lecherous leer as you take in her body.");
-				dynStats("lus", 10);
+				dynStats("lus", 10, "scale", false);
 			}
 		}
 		}
@@ -527,11 +527,11 @@ public function bimboSophieLustStickSurprise():void {
 		outputText("Sophie flounces into your arms and kisses you on the lips before you can react.  ");
 		if(!player.hasCock()) {
 			outputText("You smirk and pry the enthusiastic bimbo out of your arms, for now.");
-			dynStats("lus", 1);
+			dynStats("lus", 1, "scale", false);
 		}
 		else {
 			outputText("You shiver, " + sMultiCockDesc() + " growing hard and ready to submit to the feathery blond's love.  Perhaps you'll take care of that soon...");
-			dynStats("lus", 15);
+			dynStats("lus", 15, "scale", false);
 		}
 		sophieScene.luststickApplication(5);
 	}
@@ -540,11 +540,11 @@ public function bimboSophieLustStickSurprise():void {
 		outputText("During an idle moment, you feel heavy breasts squeezing against your back.  Sophie caresses your " + chestDesc() + " and nibbles at your ear.  She asks, \"<i>Can we like, fuck soon, babe?  I've been so wet here all by myself, just stroking my pussy and dreaming of you.</i>\"  You can't help but turn and smile at her, but as soon as you do, she plants a kiss full on your lips.  ");
 		if(!player.hasCock()) {
 			outputText("Pushing her back, you give her ass a slap and mouth, 'Soon'.");
-			dynStats("lus", 1);
+			dynStats("lus", 1, "scale", false);
 		}
 		else {
 			outputText("Pushing her back, you try not to make contact against her with " + oMultiCockDesc() + ".  Your lips tingle dangerously, and you know you'll be lusting after harpies for at least a few hours.");
-			dynStats("lus", 15);
+			dynStats("lus", 15, "scale", false);
 		}
 		sophieScene.luststickApplication(5);
 	}
@@ -552,10 +552,10 @@ public function bimboSophieLustStickSurprise():void {
 		sophieSprite();
 		if(player.hasCock()) {
 			outputText("While standing there, drinking a sip of water, strong hands pull down your [armor].  Plump lips wrap around " + oMultiCockDesc() + " and smother it in plush, warm slipperiness.  You look down at your bimbo harpy and sigh while " + oMultiCockDesc() + " grows harder in her lips.  She pops off and asks, \"<i>Like, wanna fuck?</i>\"  You sigh and try to resist the images of yourself mounting the harpy that flood your mind.  It might be time to fuck her soon...");
-			dynStats("lus", 15);
+			dynStats("lus", 15, "scale", false);
 		}
 		else {
-			dynStats("lus", 10);
+			dynStats("lus", 10, "scale", false);
 			outputText("While standing there, drinking a sip of water, strong hands pull down your [armor].  Plump lips slide over your ");
 			if(player.hasVagina()) outputText("vulva, sucking at your clitoral hood.  Those gold, slobbery pussy-lickers look good on your groin, and you find yourself releasing your wetness from her oral attentions.  It might be time to fuck her soon...");
 			else outputText("smooth groin, eventually licking at your [asshole].  Those gold, slobbery lickers look good pressed against you.  It might be time to fuck her soon...");
@@ -566,11 +566,11 @@ public function bimboSophieLustStickSurprise():void {
 		sophieSprite();
 		outputText("Sophie glides down from atop a rock, landing roughly atop you.  She plants a wet, smacking kiss on you and asks, \"<i>Didja miss me?  I totally missed you!</i>\"  ");
 		if(player.hasCock()) {
-			dynStats("lus", 15);
+			dynStats("lus", 15, "scale", false);
 			outputText(SMultiCockDesc() + " seems to wiggle inside your [armor].  Damn, she feels really good on you!  Maybe you should screw the slutty bimbo soon?  ");
 		}
 		outputText("You nod and Sophie gets up, beaming a radiant smile as she prances away, her booty swaying enticingly behind her.");
-		dynStats("lus", 2);
+		dynStats("lus", 2, "scale", false);
 		sophieScene.luststickApplication(5);
 	}
 	outputText("\n");
@@ -1663,7 +1663,7 @@ public function sophieBirthsEgg():void {
 	outputText("\n\nYou stick around long enough to make sure Sophie and her egg are okay before you go.");
 	if(flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] == 0) outputText("  Can you handle having another harpy living in your camp?\n");
 	else outputText("  Just how many harpies can your camp hold?\n");
-	dynStats("lus", (10+player.lib/10));
+	dynStats("lus", (10+player.lib/10), "scale", false);
 }
 
 //Egg Hatched Notification
@@ -1856,7 +1856,7 @@ private function yesToSophieIncest():void {
 	if(bimboSophie()) outputText("personal bimbo ");
 	else outputText("lusty matron ");
 	outputText("is more than happy to return the sudden affection, her hands running over your body as she grinds against you teasingly.  With a firm open-palm spank to her rump, you release her, telling both harpies that you will play with them again very soon.  The two horny girls giggle together before talking about all the fun they will have.");
-	dynStats("lus", 5);
+	dynStats("lus", 5, "scale", false);
 	flags[kFLAGS.SOPHIE_FAMILY_INCEST] = 1;
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -1908,7 +1908,7 @@ public function sophieAndIzmaPlay():void {
 	if(flags[kFLAGS.TIMES_SOPHIE_AND_IZMA_FUCKED] == 1) {
 		outputText("\n\n(Regardless, you could probably suggest that Sophie try this again in the future...)");
 	}
-	dynStats("lus", 10+player.lib/10);
+	dynStats("lus", 10+player.lib/10, "scale", false);
 	//[Interrupt] [Watch]
 	menu();
 	addButton(0,"Interrupt",interruptSophieIzma);

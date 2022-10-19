@@ -387,7 +387,7 @@ public class FetishCultistScene extends AbstractLakeContent
 				outputText("The ordeal has also left you with a slightly dulled mind, and some of the desire you felt still lingers.");
 				player.sexReward("no");
 				player.addCurse("int", 2, 2);
-				dynStats("lus", 10);
+				dynStats("lus", 10, "scale", false);
 				cleanupAfterCombat();
 			}
 		}
@@ -618,7 +618,7 @@ public class FetishCultistScene extends AbstractLakeContent
 					outputText("\"<i>Uh, hey, I've got some toys that we could play with,</i>\" she says a bit nervously.  \"<i>Do you want to play with some vibrators?</i>\"\n\n");
 				}
 				//increase PC's lust thanks to foreplay
-				dynStats("lus", 30);
+				dynStats("lus", 30, "scale", false);
 				//player chooses between; penetrate vagina, vibrator vagina, never mind.  Options as appropriate.
 				menu();
 				addButtonIfTrue(0, "FuckHerVag", plugSwimsuitVag, "Req. a cock", player.hasCock());

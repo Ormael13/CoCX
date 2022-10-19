@@ -39,7 +39,7 @@ public function interactWithAuntNancy():void {
 
 		outputText("Aunt Nancy sighs.  \"<i>Sorry. I don't mean to bore you with an old woman's rambling.  I... I just miss him, so much, and I get a little... lonely, sometimes.</i>\"  She looks at you, with a strange, half-hungry, half-desperate look in her eyes.  \"<i>Would you mind... coming home with me?  You seem a little tense, and I'd like to give you a massage.</i>\"\n\n");
 		//[Gain 20 Lust.] (I remain steadfastly unaroused; maudlin self-pity isn't sexy.  -Z)
-		dynStats("lus", 10);
+		dynStats("lus", 10, "scale", false);
 		simpleChoices("Agree", timeForAuntNancySpiderCooch, "Decline", declineAuntNancyMassage, "", null, "", null, "", null);
 	}
 	//[If Time >= 1400 - (100*(Relationship with Aunt Nancy/30), Relationship with Aunt Nancy >= 30, and PillowTalk= 1]
@@ -179,7 +179,7 @@ private function timeForAuntNancySpiderCooch():void {
 	outputText("Then, she lets go of you and skitters easily up to her door, opening it and slipping inside.");
 	//[Gain 30 Lust, New Page]
 	player.lust += 29;
-	dynStats("lus", 1);
+	dynStats("lus", 1, "scale", false);
 	doNext(auntNancyPoonPartII);
 }
 private function auntNancyPoonPartII():void {

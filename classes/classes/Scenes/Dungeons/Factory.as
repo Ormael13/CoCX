@@ -148,7 +148,7 @@ use namespace CoC;
 			spriteSelect(SpriteDb.s_mrsCoffee);
 			clearOutput();
 			outputText("You take a sip of the rich creamy coffee and suddenly feel refreshed. As you replace the coffeepot, the busty coffee-maker comes to life, grabbing her thick dusky nipples and squeezing out a trickle of scaldingly hot liquid. You can see her eyes roll up into her head from what you assume to be pleasure as she automatically refills the missing coffee, mouth open with ecstasy.  Her movements gradually slow as she quivers almost imperceptibly. A contented smile graces her features as immobility overtakes her, freezing her back in place.  You wonder if 'Mrs. Coffee' was created, or a victim of this place's dark master.");
-			dynStats("lus", 1);
+			dynStats("lus", 1, "scale", false);
 			HPChange(35, false);
 			player.refillHunger(10);
 			doNext(roomBreakRoom);
@@ -583,7 +583,7 @@ use namespace CoC;
 			outputText(".");
 			outputText("\n\nYou turn away with a bemused sigh.  When you glance back, she has vanished!");
 			if (!recalling) {
-				dynStats("lus", -50);
+				dynStats("lus", -50, "scale", false);
 				cleanupAfterCombat();
 			}
 			else doNext(recallWakeUp);
@@ -603,7 +603,7 @@ use namespace CoC;
 			if(player.cor > 75) outputText("giving it a long lick to taste the succubi's delicious flavor ");
 			outputText("and put it away.  When you glance back towards the Succubus, she's gone, leaving you alone and horny...");
 			if (!recalling) {
-				dynStats("lus", (20 + (player.lib/5) + (player.cor/10)));
+				dynStats("lus", (20 + (player.lib/5) + (player.cor/10)), "scale", false);
 				cleanupAfterCombat();
 			}
 			else doNext(recallWakeUp);

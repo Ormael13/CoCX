@@ -87,14 +87,14 @@ public class MinotaurBlood extends Consumable {
 			//Chance of ball growth if not 3" yet
 			if (player.balls == 0) {
 				CoC.instance.transformations.BallsDuo.applyEffect();
-				dynStats("lus", 5);
+				dynStats("lus", 5, "scale", false);
 				player.MutagenBonus("lib", 2);
 			}
 			else {
 				player.ballSize++;
 				if (player.ballSize <= 2) outputText("\n\nA flash of warmth passes through you and a sudden weight develops in your groin.  You pause to examine the changes and your roving fingers discover your " +  Appearance.ballsDescription(false, true, player) + " have grown larger than a human's.");
 				if (player.ballSize > 2) outputText("\n\nA sudden onset of heat envelops your groin, focusing on your " + Appearance.sackDescript(player) + ".  Walking becomes difficult as you discover your " + Appearance.ballsDescription(false, true, player) + " have enlarged again.");
-				dynStats("lus", 3);
+				dynStats("lus", 3, "scale", false);
 				player.MutagenBonus("lib", 1);
 			}
 			changes++;
@@ -270,7 +270,7 @@ public class MinotaurBlood extends Consumable {
 							outputText("\n\nYou feel a pressure in your head around your horns, but they don't grow any larger.  ");
 							outputText("Your headache clears as lust washes through you unnaturally.  You feel as if you haven't cum in months.");
 							player.hoursSinceCum += 200;
-							dynStats("lus", 20);
+							dynStats("lus", 20, "scale", false);
 						}
 						else {
 							outputText("\n\nYour small horns get a bit bigger, stopping as medium sized nubs.");
@@ -295,7 +295,7 @@ public class MinotaurBlood extends Consumable {
 						if (rand(2) == 0 && changes < changeLimit) {
 							outputText("  Your headache clears as lust washes through you unnaturally.  You feel as if you haven't cum in months.");
 							player.hoursSinceCum += 200;
-							dynStats("lus", 20);
+							dynStats("lus", 20, "scale", false);
 						}
 						changes++;
 					}
@@ -366,7 +366,7 @@ public class MinotaurBlood extends Consumable {
 				player.hoursSinceCum += 200;
 			}
 			EngineCore.HPChange(50, true);
-			dynStats("lus", 50);
+			dynStats("lus", 50, "scale", false);
 		}
 		player.refillHunger(25);
 		return false;
@@ -379,7 +379,7 @@ public class MinotaurBlood extends Consumable {
 		if (selectedCockValue != -1) {
 			CoC.instance.transformations.CockHorse(selectedCockValue).applyEffect();
 			player.growCock(selectedCockValue, 4);
-			dynStats("lus", 35);
+			dynStats("lus", 35, "scale", false);
 			player.addCurse("spe", 4,1);
 			player.MutagenBonus("lib", 5);
 			return true;

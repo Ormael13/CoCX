@@ -43,7 +43,7 @@ public class DryadScene extends BaseContent {
         clearOutput();
         outputText("Crouching down beside her, you run your hands up her legs pulling her dress up while doing so.   Seeing her girly parts exposed, you remove your armor and whip out your member.  You roll her onto her stomach and place both hands on her hips.   Throwing caution into the wind, you roughly plow her and immediately regret it.   Your [cock] receives numerous splinters and pull out receiving even more.   You stagger from the pain and limp back to camp. ");
         //TODO: maybe add something alternative for "tougher" cocks? Or alt scene for dryads.
-        player.dynStats("lus", -10);
+        player.dynStats("lus", -10, "scale", false);
         player.takeDamage(20);
         player.addCurse("lib", 2, 2);
         cleanupAfterCombat();

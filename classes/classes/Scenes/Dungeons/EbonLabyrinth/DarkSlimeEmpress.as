@@ -28,7 +28,7 @@ use namespace CoC;
 			outputText(". ");
 			if (player.isLactating()) outputText("One of them even made suction cup tentacles in order to milk your breasts. ");
 			outputText("You’re being violated from all sides and in all possible ways by a full harem of jelly girls!\n\n");
-			player.dynStats("lus", 17 + rand(7) + this.sens / 5, "scale", false);
+			player.takeLustDamage(17 + rand(7) + this.sens / 5, true);
 			if (!hasStatusEffect(StatusEffects.LingeringSlime)) createStatusEffect(StatusEffects.LingeringSlime, 0, 0, 0, 0);
 		}
 
@@ -48,10 +48,9 @@ use namespace CoC;
 			td += player.lib / 8;
 			td += player.effectiveSensitivity() / 8;
 			td = Math.round(td);
-			td = td * (EngineCore.lustPercent() / 100);
 			if (!hasStatusEffect(StatusEffects.LingeringSlime)) createStatusEffect(StatusEffects.LingeringSlime, 0, 0, 0, 0);
-			outputText("\nLust swells up in your body as the substance splash on you. <b>([font-lust]" + (Math.round(td * 10) / 10) + "</font>)</b> lust damage.");
-			player.dynStats("lus", td, "scale", false);
+			outputText("\nLust swells up in your body as the substance splash on you.");
+			player.takeLustDamage(td, true);
 		}
 
 		private function gooGroupGrapple():void
@@ -67,7 +66,7 @@ use namespace CoC;
 		override protected function performCombatAction():void {
 			if (hasStatusEffect(StatusEffects.LingeringSlime)) {
 				outputText("Small stains of lingering slimes cling to your body, insidiously pouring you with aphrodisiacs.\n\n");
-				player.dynStats("lus", (10 + int(player.lib / 12 + player.cor / 14)));
+				player.takeLustDamage((10 + int(player.lib / 12 + player.cor / 14)), true);
 				removeStatusEffect(StatusEffects.LingeringSlime);
 			}
 			super.performCombatAction();

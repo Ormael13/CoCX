@@ -154,7 +154,7 @@ import classes.internals.*;
 			outputText("Aiko moves her fingers through the air in a circle, conjuring up a corrupt purple flame. She twists her upper body into a batter’s stance and strikes it at you ferociously, making the fireball rocket toward you like a missile, bursting on impact! The flames burn intensely as they engulf you, but the more it burns, the more you start to LIKE it.  ");
 			player.takeFireDamage(int(str/2) + rand(15), true);
 			//if masochist, take more damage
-			(player.hasPerk(PerkLib.Masochist) ?  player.takeLustDamage(15 + player.effectiveSensitivity() / 5, true) : player.takeLustDamage((10 + player.effectiveSensitivity() / 5)*2, true));
+			(player.hasPerk(PerkLib.Masochist) ?  player.takeLustDamage(15 + player.effectiveSensitivity() / 5, true) : player.takeLustDamage((10 + player.effectiveSensitivity() / 5)*2, true), true);
 		}
 		
 		private function aikoTerrorize():void

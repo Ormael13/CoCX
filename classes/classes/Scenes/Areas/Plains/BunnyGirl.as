@@ -47,7 +47,7 @@ public function bunnbunbunMeet():void {
 }
 
 private function sexMenu():void {
-	dynStats("lus", 5+player.lib/20);
+	dynStats("lus", 5 + player.lib / 20, "scale", false);
 	outputText("(If you’re going to have sex with her, which of her body parts will you use?");
 	//texts
 	if (player.cockThatFits(40) >= 0)
@@ -761,7 +761,7 @@ private function freeHerOhGodWhyDidYouDoThis():void {
 
 	outputText("\n\nThe frantic pace of her initial discharge ebbs as her hulking testes visibly shrink.  She leans up against the wobbling factories, resting atop them like they were hefty, liquid pillows.  It'll take her a while to finish emptying herself completely, but for the time being, she seems content.  You give her fluffy tail a playful poof and head back to camp, stooping to retrieve one of the girl's eggs from the ground as you go.\n\n");
 	//[End Encounter, gain neon pink egg]
-	dynStats("lus", 25);
+	dynStats("lus", 25, "scale", false);
 	inventory.takeItem(consumables.NPNKEGG, camp.returnToCampUseOneHour);
 }
 

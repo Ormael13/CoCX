@@ -417,7 +417,7 @@ public function ayanePregUpdate():Boolean
 				outputText("\nAyane's belly seems to be swelling; it looks like your seed took after all.  The kitsune makes no obvious sign that she's noticed the weight she's putting on, and you don't think it would be wise to draw attention to it, even if it is \"<i>only</i>\" a pregnancy bulge.\n");
 				return true;
 		case 2: outputText("\nAyane's belly grows ever bigger, making her pregnancy noticeable.  Her swollen midriff suits her well; to be honest she looks pretty sexy like that.\n");
-				dynStats("lus", (5 + player.lib / 20));
+				dynStats("lus", (5 + player.lib / 20), "scale", false);
 				return true;
 		case 4: outputText("\nAyane's belly has grown quite a bit.  Anyone can tell she's pregnant with a single glance.  ");
 				outputText("Ayane catches you looking and blushes <i>W-what is it?</i> You reply merely that she carries a baby bump very well; she looks good pregnant. \n<i>Oh, uh...  Thanks I guess?</i> she replies, looking away nervously.\n");

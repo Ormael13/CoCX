@@ -85,7 +85,7 @@ public class WoodElvesHuntingParty extends Monster
 			outputText("While you're distracted, out of nowhere one closes the gap forcing you to block her strike. Using your confusion as an opportunity she crosses the distance between your weapon in a flash and delivers a surprise kiss before leaping back out of striking range.\n\n");
 			outputText("\"<i>Aw why all the violence when we could be having so much fun right now? Why don't you drop your weapon already so we can get to the nice and cuddly part?~♥</i>\"\n\n");
 			outputText("The elves giggle at this suggestion which only adds to both the humiliation and your arousal.");
-			player.dynStats("lus", 40 + rand(20));
+			player.takeLustDamage(40 + rand(20), true);
 		}
 		
 		public function Disarm():void

@@ -19,7 +19,7 @@ import classes.internals.ChainedDrop;
 				outputText("The arousal and pleasure spike from the aphrodisiac in the sting leaves you stunned.");
 				if (!player.hasPerk(PerkLib.Resolute)) player.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 				createStatusEffect(StatusEffects.AbilityCooldown1,5,0,0,0);
-				player.dynStats("lus", 120 + rand(60));
+				player.takeLustDamage(120 + rand(60), true);
 			}
 		}
 		
@@ -33,7 +33,7 @@ import classes.internals.ChainedDrop;
 				var damage:Number = weaponAttack + str * 2 + rand(str);
 				damage = player.takePhysDamage(damage, true);
 				outputText("What's worse, she applied venom on it!");
-				player.dynStats("lus", 20 + rand(10));
+				player.takeLustDamage(20 + rand(10), true);
 			}
 		}
 		

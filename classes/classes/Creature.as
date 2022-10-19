@@ -1029,10 +1029,11 @@ public class Creature extends Utils
 			return (damage > 0 && damage < 1) ? 1 : damage;
 		}
 		public function takeLustDamage(lustDmg:Number, display:Boolean = false, applyRes:Boolean = true):Number{
-			if (applyRes) lustDmg *= lustPercent()/100;
-			lust = boundFloat(minLust(),lust+Math.round(lustDmg),maxLust());
-			SceneLib.combat.CommasForDigits(lustDmg, true);
-			return (lustDmg > 0 && lustDmg < 1) ? 1 : lustDmg;
+			if (applyRes) lustDmg *= lustPercent()/100; //the same as dynStats("lus", lustDmg, applyRes);
+			var ldi:int = int(lustDmg);
+			dynStats("lus", ldi, false);
+			SceneLib.combat.CommasForDigits(ldi, true);
+			return ldi;
 		}
 		/**
 		 * Get the remaining fatigue of the Creature.

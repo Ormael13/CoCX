@@ -47,7 +47,7 @@ import classes.internals.*;
 			if (hasStatusEffect(StatusEffects.CreepingDoom)) lustDmg *= 2;
 			outputText("Alvina moans a word of power, squirting in orgasmic pleasure as a nova of black magic explodes from her. Unable to dodge, you are squarely hit by the energy wave and feel your arousal and sensitivity rise.\n\n");
 			lustDmg = Math.round(lustDmg);
-			player.dynStats("lus", lustDmg, "scale", false);
+			player.takeLustDamage(lustDmg, true);
 			player.addCurse("sens", 10, 2);
 		}
 

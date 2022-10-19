@@ -47,19 +47,19 @@ use namespace CoC;
 			var dmg1:Number = 0;
 			dmg1 += eBaseIntelligenceDamage() * 0.8;
 			player.takeLightningDamage(dmg1, true);
-			player.dynStats("lus", 3+(player.effectiveLibido()/10)+rand(6));
+			player.takeLustDamage(3+(player.effectiveLibido()/10)+rand(6), true);
 		}
 		
 		private function vegotW():void {
 			if (hasStatusEffect(StatusEffects.lustStorm)) {
 				outputText("The Raiju King continues building up the energy before he thrusts his hands forward, causing strikes of lightning to hit the ground around you! ");
 				player.takeLightningDamage(vegotW1() * 3, true);
-				player.dynStats("lus", vegotW2() * 3);
+				player.takeLustDamage(vegotW2() * 3, true);
 			}
 			else {
 				outputText("The Raiju King clenches his fists as electricity builds up within his body. Clouds begin forming from above, blocking out the ceiling, thunder rumbles. The storm encroaches! ");
 				player.takeLightningDamage(vegotW1() * 2, true);
-				player.dynStats("lus", vegotW2() * 2);
+				player.takeLustDamage(vegotW2() * 2, true);
 				createStatusEffect(StatusEffects.lustStorm, 0, 0, 0, 0);
 			}
 		}
@@ -115,7 +115,7 @@ use namespace CoC;
 			if (hasStatusEffect(StatusEffects.lustStorm)) {
 				outputText("You're struck by lightning as lust storm rages on.");
 				player.takeLightningDamage(vegotW1(), true);
-				player.dynStats("lus", vegotW2());
+				player.takeLustDamage(vegotW2(), true);
 				outputText("\n\n");
 			}
 			if (hasStatusEffect(StatusEffects.Uber)) vegotR();

@@ -35,7 +35,7 @@ public class ImpLord extends Imp
 			}
 			damage = Math.round(damage);
 			player.takeFireDamage(damage, true);
-			player.dynStats("lus", 20 + player.cor / 10);
+			player.takeLustDamage(20 + player.cor / 10, true);
 		}
 		
 		//Heavy Attack
@@ -56,7 +56,7 @@ public class ImpLord extends Imp
 		{
 			outputText("Lowering his loincloth the imp reveals his inhumanly thick shaft.  He smirks and licks his lips as he gives his cock a squeeze, milking a few beads of clear pre from the tip.  You shake your head and try to ignore your growing need.");
 			//[+Lust]
-			player.dynStats("lus", 5 + player.lib / 5 + player.cor / 5);
+			player.takeLustDamage(5 + player.lib / 5 + player.cor / 5, true);
 		}
 
 		//Lust and Light Attack
@@ -66,7 +66,7 @@ public class ImpLord extends Imp
 			var damage:int = 3 + rand(10);
 			player.takePhysDamage(damage, true);
 			//[-HP(minor) // +Lust]
-			player.dynStats("lus", 5 + player.effectiveSensitivity() / 4 + player.cor / 10);
+			player.takeLustDamage(5 + player.effectiveSensitivity() / 4 + player.cor / 10, true);
 		}
         override protected function performCombatAction():void
 		{

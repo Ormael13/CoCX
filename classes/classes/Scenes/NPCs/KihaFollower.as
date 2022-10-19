@@ -292,7 +292,7 @@ public class KihaFollower extends NPCAwareContent implements TimeAwareInterface,
         monster.createStatusEffect(StatusEffects.MissFirstRound, 0, 0, 0, 0);
         HPChange(100, false);
         fatigue(-30);
-        dynStats("lus", -40);
+        dynStats("lus", -40, "scale", false);
     }
 
     //Let Them (Z)
@@ -326,7 +326,7 @@ public class KihaFollower extends NPCAwareContent implements TimeAwareInterface,
         //st - say, 100 hp, -30 fatigue, and -40 lust - then have her cover for you for the first few rounds if you lost to her so you can blitz them or heal. -Z)
         HPChange(100, false);
         fatigue(-30);
-        dynStats("lus", -40);
+        dynStats("lus", -40, "scale", false);
     }
 
     //Leave Her (Z)
@@ -2101,7 +2101,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
             player.consumeItem(undergarments.SS_LOIN, 1);
         }
         outputText("\n\n\"<i>How do I look?</i>\" Kiha asks. You admit that she's quite sexy and you swear you can see the blush in her face. You wrap your arms around Kiha and deliver a passionate kiss to her cheeks while grinding your " + player.clothedOrNakedLower("garbed", "naked") + " crotch against her silk-covered groin. \"<i>Don't you stop, my idiot!</i>\" Kiha chuckles. You smile and break the hug and kiss.");
-        dynStats("lus", 30);
+        dynStats("lus", 30, "scale", false);
         flags[kFLAGS.KIHA_UNDERGARMENTS] = type;
         doNext(warmLoverKihaIntro);
     }

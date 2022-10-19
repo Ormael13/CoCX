@@ -1486,7 +1486,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
             outputText("\n\n\"<i>Here's your egg.</i>\"  Ember holds out the egg for you, averting her eyes.  With a smile, you take it from her hands and thank her for her generosity.");
             outputText("\n\nEmber mumbles quietly, \"<i>Next time, fertilize it for me will you?</i>\"  You start at that; did she really just say it aloud?  But, knowing her temper, you decide against asking.  ");
             //git a dragon egg, small libido-based lust damage
-            dynStats("lus", 10 + player.lib / 10);
+            dynStats("lus", 10 + player.lib / 10, "scale", false);
             inventory.takeItem(consumables.DRGNEGG, camp.returnToCampUseOneHour);
         }
         //(Medium Affection)
@@ -1540,7 +1540,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
             outputText("\n\nEmber sighs, realising she's fighting a losing battle.  \"<i>At least I know what to expect when I'm finally laying a fertilized one.</i>\"  Moments after her comment, her face lights with awareness and embarrassment.  \"<i>I... I mean...</i>\"");
             outputText("\n\nYou just smile and tell her you understand exactly what she meant.  One quick kiss and you head back to the camp proper, leaving one adorably flustered dragon behind you.  ");
             //git a dragon egg, small libido-based lust damage
-            dynStats("lus", 10 + player.lib / 10);
+            dynStats("lus", 10 + player.lib / 10, "scale", false);
             inventory.takeItem(consumables.DRGNEGG, camp.returnToCampUseOneHour);
         }
     }
@@ -1862,7 +1862,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
         }
         emberAffection(1);
         //reset Dragonbreath counter to ready, increase lust slightly if low or med affection, add heat/rut if high dragon-score, damage toughness slightly if high affection and low PC corruption
-        if (emberAffection() < 75) dynStats("lus", 20);
+        if (emberAffection() < 75) dynStats("lus", 20, "scale", false);
         fatigue(-50);
         player.slimeFeed();
         HPChange(player.maxHP() * .33, false);
@@ -2216,7 +2216,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
         //(+Affection, lust, reset hours since cum, slimefeed)
         player.sexReward("cum", "Lips");
         emberAffection(6);
-        dynStats("lus", 10 + player.lib / 10);
+        dynStats("lus", 10 + player.lib / 10, "scale", false);
         doNext(camp.returnToCampUseOneHour);
     }
 
@@ -2562,7 +2562,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
         //Moderate lust gain and slimefeed, ala blowing Urta or drinking Lover Urta's fluids at Tel'Adre*/
         player.sexReward("vaginalFluids");
         emberAffection(6);
-        dynStats("lus", 10 + player.lib / 10);
+        dynStats("lus", 10 + player.lib / 10, "scale", false);
         doNext(camp.returnToCampUseOneHour);
     }
 
@@ -3008,7 +3008,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
             outputText("humping against you, smearing your thigh with dragon pre.");
         else outputText("tightly pressing her drooling, puffy netherlips on your thighs.");
         outputText("  \"<i>I need you, [name].  I need you so badly... can you see how badly I need you?</i>\" Ember asks, panting in barely contained lust.  \"<i>I want to fuck you so badly... Let's make a baby now!</i>\"");
-        dynStats("lus", 10 + player.lib / 10);
+        dynStats("lus", 10 + player.lib / 10, "scale", false);
         outputText("\n\nWhat do you say?");
         //[Accept] [Deny]
         simpleChoices("Accept", timeToPuffTheMagicDragon, "Deny", fuckOffEmberIWantANap, "", null, "", null, "", null);
@@ -3017,7 +3017,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
     //[=Deny=]
     private function fuckOffEmberIWantANap():void {
         clearOutput();
-        dynStats("lus", 10 + player.lib / 10);
+        dynStats("lus", 10 + player.lib / 10, "scale", false);
         outputText("Oh, your ");
         if (player.hasVagina()) outputText("[vagina]");
         if (player.gender == 3) outputText(" and ");
@@ -3324,7 +3324,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
                 } else {
                     outputText("\nEmber's belly grows ever bigger, making her pregnancy noticeable.  Her swollen midriff suits her well; to be honest she looks pretty sexy like that.\n");
                 }
-                dynStats("lus", (5 + player.lib / 20));
+                dynStats("lus", (5 + player.lib / 20), "scale", false);
                 return true;
             case 4:
                 outputText("\nEmber's belly has grown quite a bit.  Anyone can tell she's pregnant with a single glance.  ");
@@ -4291,7 +4291,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
                 outputText("\n\nEmber looks at you through half-lidded eyes and extends an arm towards you, inviting you to join [ember em].  You can't help but stare at the dragon, wondering yet again if [ember ey] is deliberately trying to provoke you, or you've just been in this over-sexed excuse for a world too long.  Deciding to just leave it in [ember eir] hands, you quietly approach and join the dragon in your " + camp.bedDesc() + "... and you can't help but wonder how it is you've become so blase about that.");
                 outputText("\n\nEmber slowly wraps you in an embrace, clutching you tightly against [ember em] and whispers into your ear, \"<i>Good night, [name].</i>\" Then closes [ember eir] eyes and sighs as sleep finally overtakes [ember em].");
                 outputText("\n\nYou have a hard time getting to sleep after these earlier scenes you've witnessed... and when you finally manage to shut your eyes all you can see is Ember... in various positions, beckoning you to join [ember em] and sate yourself...");
-                dynStats("lus", 30);
+                dynStats("lus", 30, "scale", false);
             } else if (chooser == 2 && rand(2) == 0 && flags[kFLAGS.TIMES_SLEPT_WITH_EMBER] > 0) { //Bathtime, very LOOOOOOOOOOONG
                 outputText("\n\nWondering if maybe Ember would like some company for the night, you approach the dragon's den, smiling wistfully at the ironies of life. Back in the village, tales of those who entered a dragon's den typically ended in the foolish intruder's gruesome death; here and now, though, there's few places that feel quite as safe.");
                 outputText("\n\nEmber, seeing you approach, turns to greet you, rubbing [ember eir] sleepy eyes.  \"<i>[name]?  What do you want?</i>\"");

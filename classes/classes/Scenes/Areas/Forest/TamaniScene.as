@@ -262,7 +262,7 @@ private function tamaniFirstTimeRefusal():void {
 	//[Fuck Her (Goes to fuck her - consensual first time)]
 	//[No means no]
 	simpleChoices("Fuck Her", tamaniFirstTimeConsentual, "No", tamaniSecondRefusal, "", null, "", null, "", null);
-	dynStats("lus", 5);
+	dynStats("lus", 5, "scale", false);
 }
 //[No Means No]
 private function tamaniSecondRefusal(): void {
@@ -288,7 +288,7 @@ private function tamaniMaleRepeatEncounter():void {
 		return;
 	}
 	//(+1 lust per 10 sensitivity)
-	dynStats("lus", player.sens / 10);
+	dynStats("lus", player.sens / 10, "scale", false);
 	if (player.hasPerk(PerkLib.SoulSense) && flags[kFLAGS.SOUL_SENSE_TAMANI] < 2) flags[kFLAGS.SOUL_SENSE_TAMANI]++;
 	if (flags[kFLAGS.SOUL_SENSE_TAMANI] == 2) {
 		flags[kFLAGS.SOUL_SENSE_TAMANI]++;
@@ -447,7 +447,7 @@ internal function tamaniSexLetHer():void {
 		//(Noncombat end:
 		else {
 			player.sexReward("vaginalFluids","Dick");
-			dynStats("lus", +10);
+			dynStats("lus", +10, "scale", false);
 			doNext(camp.returnToCampUseOneHour);
 		}
 	}
@@ -538,7 +538,7 @@ internal function tamaniSexLetHer():void {
 		else {
 			outputText("You lie there, recovering from the intense sex.  After a little while you manage to get up and redress, but the scent of horny goblin stays with you for hours.");
 			player.sexReward("vaginalFluids","Dick");
-			dynStats("lus", +10);
+			dynStats("lus", +10, "scale", false);
 			doNext(camp.returnToCampUseOneHour);
 		}
 	}
@@ -658,7 +658,7 @@ internal function tamaniSexWon():void {
 
 		outputText("Tamani wiggles in the sexiest way as she leaves, arousing your body all over again...");
 		player.sexReward("vaginalFluids","Dick");
-		dynStats("lus", 35);
+		dynStats("lus", 35, "scale", false);
         if (CoC.instance.inCombat) cleanupAfterCombat();
         else doNext(camp.returnToCampUseOneHour);
 	}
@@ -713,7 +713,7 @@ private function tamaniPregnantFuck():void {
 
 			outputText("\"<i>Thanks for the good fuck, " + player.mf("stud", "lover") + ",</i>\" she says, smiling cruelly as you find yourself getting hard again from her drug-laced kisses.  Tamani doesn't hang around to help though; she waddles off, cradling her belly and smiling.\n\n");
 			player.sexReward("vaginalFluids", "Dick");
-			dynStats("lus", 25);
+			dynStats("lus", 25, "scale", false);
 		}
 		//(Doesn't Fit)
 		else {
@@ -762,7 +762,7 @@ private function tamaniPoopsOutBabies():void {
 	}
 	outputText("  She looks up at you and whispers breathily, \"<i>Come fuck me a little later, I'll give you even more beautiful little girls.  These " + num2Text(flags[kFLAGS.TAMANI_PREGNANCY_COUNT]) + " will be fully grown in a week or two and out man-hunting, but none of them will please you like me, I promise.</i>\"\n\n");
 	outputText("Tamani sighs and relaxes, enjoying the breastfeeding and waving you away.  You shrug and head back to camp, more than a little aroused.");
-	dynStats("lus", player.lib / 10 + player.cor / 10);
+	dynStats("lus", player.lib / 10 + player.cor / 10, "scale", false);
 	tamaniGivesBirth();
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -1041,7 +1041,7 @@ private function acceptTamaniFacesits():void {
 	outputText("\n\n\"<i>FFFFFFFNNNNNnnnnnnnn!</i>\" the green whore cries out, her thighs clamping down on the sides of your head like a vice.  Her asshole grips down on your invading fingers, holding them in place, and her pussy undulates around your tongue like a living thing, more and more of her juices gushing out as the little slut comes <b>hard</b> before she just... goes limp.");
 	outputText("\n\nYou withdraw your fingers from her ass and let go of her clit, and the little green fuck-doll topples over, falling into the dirt and muttering something incoherently. You sit up and look, admiring the sight of her fat green ass sticking up in the air with her juices still dripping down her thighs, and decide to walk away from the clearly unconscious goblin.");
 	if (!recalling) {
-		dynStats("lus", 20 + player.lib / 20);
+		dynStats("lus", 20 + player.lib / 20, "scale", false);
 		doNext(camp.returnToCampUseOneHour);
 	}
 	else doNext(recallWakeUp);

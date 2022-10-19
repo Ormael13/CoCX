@@ -74,7 +74,7 @@ public class Alraune extends Monster
 			}
 			outputText("Unable to take your gaze away from her lewd show, you feel yourself getting more aroused. ");
 			var lustDmg:int = rand(player.lib / 20) + rand(this.lib / 10) + 10;
-			player.dynStats("lus", lustDmg);
+			player.takeLustDamage(lustDmg, true);
 			outputText("\n\n");
 		}
 		
@@ -93,7 +93,7 @@ public class Alraune extends Monster
 				lustDmg = Math.round(lustDmg);
 				outputText("You are hit by a pumpkin for " + damage + " damage! " + lustDmg + " lust damage!");
 				damage = player.takePhysDamage(damage, true);
-				player.dynStats("lus", lustDmg);
+				player.takeLustDamage(lustDmg, true);
 				outputText("\n");
 			}
 		}

@@ -2670,10 +2670,10 @@ use namespace CoC;
 					dynStats("lus", 0); //Force display arrow.
 				}
 				if (flags[kFLAGS.MINOTAUR_CUM_REALLY_ADDICTED_STATE] > 0) {
-					dynStats("lus", int(damage / 2));
+					dynStats("lus", int(damage / 2), "scale", false);
 				}
 				if (damagetype == 0 && flags[kFLAGS.YAMATA_MASOCHIST] > 1 && flags[kFLAGS.AIKO_BOSS_COMPLETE] < 1) {
-					dynStats("lus", int(damage / 8));
+					dynStats("lus", int(damage / 8), "scale", false);
 				}
 				//Prevent negatives
 				if (HP < minHP()){

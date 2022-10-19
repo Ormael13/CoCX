@@ -126,7 +126,7 @@ public class MaraFruit extends Consumable{
 				}
 				temp = choices[rand(choices.length)];
 				CoC.instance.transformations.CockTentacle(temp).applyEffect();
-				dynStats("lus", 10);
+				dynStats("lus", 10, "scale", false);
 				player.addCurse("sen", 3,1);
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.breastRows.length > 0) {

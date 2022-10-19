@@ -33,7 +33,7 @@ package classes.Scenes.Monsters
 		}
 		public function corruptedGolemsLustAttack():void {
 			outputText("Two of them smirks and licks their lips while gives their cocks a squeeze, milking a few beads of clear pre from the tip.  You shake your head and try to ignore your growing need.");
-			player.dynStats("lus", 20 + player.lib / 3 + player.cor / 3);
+			player.takeLustDamage(20 + player.lib / 3 + player.cor / 3, true);
 		}
 		
 		override protected function performCombatAction():void

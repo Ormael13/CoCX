@@ -39,7 +39,7 @@ use namespace CoC;
 			outputText(" to the stone floor as [onyx ey] lowers a hand to your " + (player.hasCock() ? "[cock]" : "[cunt]"));
 			outputText(".\n\n[onyx Ey] gently and slowly " + (player.hasCock() ? "strokes" : "fingers") + " you until you're quite aroused and nearly as hot as [onyx ey] is, fawning over you for some time, wanting you to feel [onyx eir] appreciation and affection while getting you ready for what comes next.\n\n");
 			sceneHunter.print("Most scenes have variations for Gargoyle PC.");
-			player.dynStats("lus", 50);
+			player.dynStats("lus", 50, "scale", false);
 			//menu
 			menu();
 			addButtonIfTrue(0, "Tail Fuck", KrystalOnyxTailFuck, "Req. a vagina",

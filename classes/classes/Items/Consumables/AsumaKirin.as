@@ -61,7 +61,7 @@ public class AsumaKirin extends Consumable {
 			if ((player.kirinCocks() + player.demonCocks()) < player.cocks.length) {
 				var temp:int = player.findFirstCockNotInType([CockTypesEnum.HORSE, CockTypesEnum.DEMON]);
 				CoC.instance.transformations.CockKirin(temp).applyEffect();
-				dynStats("lus", 35);
+				dynStats("lus", 35, "scale", false);
 				player.addCurse("sen", 4, 1);
 				player.MutagenBonus("lib", 5);
 				if (player.cocks[temp].cockThickness <= 2) player.thickenCock(temp, 1);
@@ -116,7 +116,7 @@ public class AsumaKirin extends Consumable {
 				if (player.cor >= 30 && player.cor < 60) outputText("  You wonder why you thought such odd things, but they have a certain appeal.");
 				if (player.cor >= 60 && player.cor < 90) outputText("  You relish your twisted fantasies, hoping to dream of them again.");
 				if (player.cor >= 90) outputText("  You flush hotly and give a twisted smile, resolving to find a fitting subject to rape and relive your fantasies.");
-				dynStats("lus", 10);
+				dynStats("lus", 10, "scale", false);
 				player.MutagenBonus("lib", 1);
 			}
 			//Chance of ball growth if not 3" yet
@@ -125,7 +125,7 @@ public class AsumaKirin extends Consumable {
 					player.balls = 2;
 					player.ballSize = 1;
 					outputText("\n\nA nauseating pressure forms just under the base of your maleness.  With agonizing pain the flesh bulges and distends, pushing out a rounded lump of flesh that you recognize as a testicle!  A moment later relief overwhelms you as the second drops into your newly formed sack.");
-					dynStats("lus", 5);
+					dynStats("lus", 5, "scale", false);
 					player.MutagenBonus("lib", 2);
 					Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
 				}
@@ -133,7 +133,7 @@ public class AsumaKirin extends Consumable {
 					player.ballSize++;
 					if (player.ballSize <= 2) outputText("\n\nA flash of warmth passes through you and a sudden weight develops in your groin.  You pause to examine the changes and your roving fingers discover your " + Appearance.ballsDescription(false, true, player) + " have grown larger than a human's.");
 					if (player.ballSize > 2) outputText("\n\nA sudden onset of heat envelops your groin, focusing on your [sack].  Walking becomes difficult as you discover your " + Appearance.ballsDescription(false, true, player) + " have enlarged again.");
-					dynStats("lus", 3);
+					dynStats("lus", 3, "scale", false);
 					player.MutagenBonus("lib", 1);
 				}
 				changes++;
@@ -255,7 +255,7 @@ public class AsumaKirin extends Consumable {
 		if (changes == 0) {
 			outputText("\n\nInhuman vitality spreads through your body, invigorating you!\n");
 			EngineCore.HPChange(50, true);
-			dynStats("lus", 3);
+			dynStats("lus", 3, "scale", false);
 		}
 		if (!player.skin.hasLightningShapedTattoo() && rand(3) == 0 && changes < changeLimit) {
 			outputText("[pg]");

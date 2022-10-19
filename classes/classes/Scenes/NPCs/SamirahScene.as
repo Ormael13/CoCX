@@ -442,7 +442,7 @@ public function nagaDefaultSexScene():void {
 		outputText(capitalizeFirstLetter(name) + " grips your head tightly to her and suddenly thrusts her hips in orgasm, her girl cum coating your tongue and mouth.\n\n");
 		outputText("You uncoil yourself and slowly gather your things, " + name + " lying on the sand panting.\n\n");
 		outputText("\"<i>We should do this more often,</i>\" she says before you head off.\n\n");
-		dynStats("lus", player.lib / 5);
+		dynStats("lus", player.lib / 5, "scale", false);
 		doNext(camp.returnToCampUseOneHour);
 	}
 }

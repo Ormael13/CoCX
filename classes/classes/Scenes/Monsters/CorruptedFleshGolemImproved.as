@@ -26,7 +26,7 @@ package classes.Scenes.Monsters
 			else outputText("The corrupted golem mutters something. Before you have time to react the demonic golem's hand is filled with a bright red fire that she hurls at you.  The flames lick at your body leaving a painful burn on you torso, as well as an arousing heat in your groin. ");
 			damage = Math.round(damage);
 			player.takeFireDamage(damage, true);
-			player.dynStats("lus", 20 + player.cor / 10);
+			player.takeLustDamage(20 + player.cor / 10, true);
 		}
 		
 		override protected function performCombatAction():void

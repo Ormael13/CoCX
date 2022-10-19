@@ -198,9 +198,9 @@ use namespace CoC;
 			doYesNo(reallyRetry, declineRetry);
 		}
 		public function reallyRetry():void {
-			dynStats("lus", 0, "scale", false);
 			player.fatigue = 0;
 			player.HP = player.maxHP();
+			player.lust = player.minLust();
 			statScreenRefresh();
 			//Restart dungeon, resets all encounters.
 			flags[kFLAGS.HEL_HARPIES_DEFEATED] = 0;

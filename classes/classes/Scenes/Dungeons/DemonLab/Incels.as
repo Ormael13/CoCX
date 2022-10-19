@@ -98,7 +98,7 @@ public class Incels extends Monster {
 
     private function DraftSupportStart():void {
         outputText("You notice the pink gas spilling from the lab as it washes over the horde. The reaction is immediate, the animalistic creatures letting out wails of anger, some even scratching at their bodies as if to rid themselves of the effects. As the gas washes over you, blood rushes to your cheeks.")
-        player.dynStats("lus", Math.round(60 + (player.lib * 1.1)));
+        player.takeLustDamage(Math.round(60 + (player.lib * 1.1)), true);
         //add lust to the incels
     }
 

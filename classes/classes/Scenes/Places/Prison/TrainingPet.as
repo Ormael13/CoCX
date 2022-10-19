@@ -1503,7 +1503,7 @@ package classes.Scenes.Places.Prison
 			
 			player.slimeFeed();
 			player.refillHunger(5);
-			dynStats("lus", lustChange);
+			dynStats("lus", lustChange, "scale", false);
 			prison.changeEsteem(-5, prison.inPrison);
 			prison.changeObey(2, prison.inPrison);
 			flags[kFLAGS.PRISON_TRAINING_LEVEL]++;

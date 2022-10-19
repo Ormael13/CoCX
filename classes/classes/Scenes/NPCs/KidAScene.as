@@ -424,7 +424,7 @@ public class KidAScene extends BaseContent implements TimeAwareInterface
 				else outputText("become a hindrance");
 				outputText("... though the part between her own legs is still pointed at you.");
 				//(lust + 10, KidXP + 2)
-				dynStats("lus", 20);
+				dynStats("lus", 20, "scale", false);
 				kidAXP(4);
 			}
 			//[Scarred Blade]
@@ -570,7 +570,7 @@ public class KidAScene extends BaseContent implements TimeAwareInterface
 			//pass 2 hr, remove 100 lust and add 30 base lust before resistance, set Kidswag = 3
 			if (!recalling) {
 				player.sexReward("vaginalFluids", "Dick");
-				dynStats("lus", 30);
+				dynStats("lus", 30, "scale", false);
 				if (flags[kFLAGS.ANEMONE_KID] < 3) flags[kFLAGS.ANEMONE_KID] = 3;
 				doNext(camp.returnToCampUseTwoHours);
 			} else doNext(recallWakeUp);

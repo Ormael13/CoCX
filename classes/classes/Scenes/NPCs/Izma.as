@@ -86,7 +86,7 @@ import classes.Scenes.SceneLib;
 		private function IzmaSpecials3():void {
 			outputText("Rather than move to attack you, Izma grins at you and grabs her breasts, massaging them as she caresses her long penis with one knee. Her tail thrashes and thumps the sand heavily behind her as she simulates an orgasm, moaning loudly into the air. The whole display leaves you more aroused than before.");
 			//(lust gain)
-			player.dynStats("lus", (20 + player.lib/5));
+			player.takeLustDamage((20 + player.lib/5), true);
 		}
 
 		private function IzmaAI():void {

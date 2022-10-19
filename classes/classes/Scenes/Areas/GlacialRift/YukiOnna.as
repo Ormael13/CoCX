@@ -20,7 +20,7 @@ public class YukiOnna extends Monster
 			player.takeIceDamage(kissdmg, true);
 			var kisslust:Number = (inte / 5) + rand(10);
 			kisslust = Math.round(kisslust);
-			player.dynStats("lus", kisslust, "scale", false);
+			player.takeLustDamage(kisslust, true);
 		}
 		
 		public function IceArmor():void {

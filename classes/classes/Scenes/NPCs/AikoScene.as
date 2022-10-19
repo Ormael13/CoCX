@@ -1766,7 +1766,7 @@ private function aikoFootjob():void
 		outputText("<i>\"Hehehe, I guess next time you won’t be so selfish then,\"</i> she says, pressing her foot down on your groin. No! You’re so close! If she would just keep stroking you for a little longer, you would be able to cum!\n\n"
 		+"<i>\"I told you, it’s rude to ask a lady to get you off and not offer a little foreplay in exchange,\"</i> she says, echoing her sentiments from previously. She gives a slight huff and laughs at you vindictively, turning to leave you wallowing in your own pathetic shame as she disappears into the woods.\n\n"
 		+"You grasp at your [cocks] and desperately try to finish yourself off, but your own furious strokes can’t seem to compare to the degrading ministrations of Aiko’s foot. With a growl of despair, you throw yourself back, realizing that ordinary pleasure just won’t be able to cut it for you until the effects of her flames wear off. You lay there for a long while before making your way back to camp, your painful arousal making it a bit awkward to walk the way your [cocks] [if(player.cocks.length>1)are|is] pressing up against the inside of your [armor].");
-		player.dynStats("lus", 50);
+		player.dynStats("lus", 50, "scale", false);
 	} else {
 		outputText("<i>\"That’s a good little masochist…\"</i> she says quietly, wrapping [if(player.cocks.length==1)one of] her free tails around the base[if(player.cocks.length>1)s] of your [cocks] and constricting tightly like [if(player.cocks.length==1)a ]fluffy cock ring[if(player.cocks.length>1)s], increasing the speed of her rough stroking. Her toes curl around your [cock], her foot becoming a blur as it vibrates across your [cock] with a furious speed that would chafe if not for the copious amounts of lubrication acting as a buffer. The base[if(player.cocks.length>1)s] of your [cocks]distends as more and more cum pools into your shaft[if(player.cocks.length>1)s] below the tight grip of her tail[if(player.cocks.length>1)s].\n\n"
 		+"Your [cocks] twitch[if(player.cocks.length==1)es] in vain as you feel load after load backing up inside you. Aiko laughs at your suffering, sliding her foot down to the base of your [cock] and experimentally prodding at the swollen flesh. The feeling sends a shock of pleasure up your spine, and you begin to beg her to end this torment and let you cum!\n\n"
@@ -1799,7 +1799,7 @@ private function aikoWhipping():void {
 		+"Your raucous moans die out suddenly as the glorious torment ceases, and you shiver with unfulfilled desire as the vixen releases you from her grip. Even the tiniest touch would be enough to send you over the edge, but your worn and battered muscles won’t move an inch! You plead with her desperately, your voice growing hoarse, but all she does is push your head back into the dirt with her index finger, whispering, <i>\"Not today, my little masochist slut...\"</i>"
 		+"She leaves you helpless on the ground, motionless save for the needy heave of your [allbreast]. Letting out a pathetic whimper, you finally black out from exhaustion, your needs unmet.\n\n"
 		+"When you come to about an hour later, Aiko is nowhere to be seen. Your muscles are agonizingly sore, and your body is still flushed with arousal, but you already know you’ll be a bit tougher for the ordeal.");
-		player.dynStats("lus", 50);
+		player.dynStats("lus", 50, "scale", false);
 		player.dynStats("tou", 2, "sen", -12);
 		player.fatigue += 30;
 	} else {

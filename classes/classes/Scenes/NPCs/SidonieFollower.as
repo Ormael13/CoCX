@@ -335,7 +335,7 @@ package classes.Scenes.NPCs
 				else outputText("" + player.skinFurScales() + " ");
 				outputText("fueling the desire between you two even more. Once you’ve foreplayed enough, you lie on Sidonie’s arms, her erection poking your thigh.\n\n");
 				outputText("\"<i>Okay, frisky " + player.mf("boy", "girl") + ",</i>\" she asks you, planting a soft kiss on your neck, \"<i>What’s on your mind?</i>\"\n\n");
-				dynStats("lus", 33);
+				dynStats("lus", 33, "scale", false);
 			}
 			else {
 				outputText("You walk casually near the horse-morph place, and manage to see that she has interrupted her daily routine. Judging about how she has her shirt unbuttoned and folded over her shoulder, having only a white, sleeveless piece covering her ample bosom.\n\n");
@@ -377,7 +377,7 @@ package classes.Scenes.NPCs
 				outputText("fueling the desire between you two even more. Once you’ve foreplayed enough, you lie on Sidonie’s arms, her erection poking your thigh.\n\n");
 				outputText("\"<i>Okay, frisky " + player.mf("boy","girl") + ".</i>\", shes ask you, planting a soft kiss on your neck, \"<i>What’s on your mind?</i>\"\n\n");
 				flags[kFLAGS.SIDONIE_SEX_MENU] = 1;
-				dynStats("lus", 33);
+				dynStats("lus", 33, "scale", false);
 			}
 			menu();
 			addButton(0, "Get fucked", SidonieSexGetFucked);

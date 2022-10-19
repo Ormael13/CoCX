@@ -18,7 +18,7 @@ import classes.internals.*;
 	{
 		public function lactaBovinaBoobSlam():void {
 			outputText("The cow girl runs towards you and rams her massive chest into your face. While its pillow-like nature prevents you from taking damage from this unconventional attack it leaves you more than slightly aroused. ");
-			player.dynStats("lus", Math.round(player.lib + rand(player.lib) * 0.6));
+			player.takeLustDamage(Math.round(player.lib + rand(player.lib) * 0.6), true);
 		}
 		public function lactaBovinaHoofs():void {
 			outputText("The cow girl kicks you with her hoof. Her curvy form turns out to be deceptively muscular as the blow sends you flying back a few feet");
@@ -32,12 +32,12 @@ import classes.internals.*;
 		}
 		public function lactaBovinaSwingThoseMilkJugs():void {
 			outputText("The cow girl giggles and swings her massive udders from one side to another trying to catch your attention. It'd be hard not to pay attention to this spectacle. ");
-			player.dynStats("lus", Math.round(player.lib + rand(player.lib)*0.2));
+			player.takeLustDamage(Math.round(player.lib + rand(player.lib)*0.2), true);
 		}
 		public function lactaBovinaMilkBlast():void {
 			outputText("The cow girl grabs her breast with both hand and press causing her nubs to shoot a pair of massive streams of milk straight at you! ");
 			var dmg2:Number = player.lib + rand(player.lib) + this.lib + this.sens;
-			player.dynStats("lus", dmg2);
+			player.takeLustDamage(dmg2, true);
 			player.takePhysDamage((dmg2 * 10), true);
 			player.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 		}

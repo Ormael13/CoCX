@@ -1214,7 +1214,7 @@ package classes.Scenes.Places.Prison
 						outputText("As the door closes behind her, your restraints reappear.\n\n");
 					}
 					lustChange = 40;
-					dynStats("lus", lustChange);
+					dynStats("lus", lustChange, "scale", false);
 					prison.changeEsteem(1,prison.inPrison);
 					doNext(playerMenu);
 					return;
@@ -2087,7 +2087,7 @@ package classes.Scenes.Places.Prison
 			prison.changeEsteem(-3,prison.inPrison);
 			prison.changeObey(1.5,prison.inPrison);
 			lustChange = 100;
-			dynStats("lus", lustChange);
+			dynStats("lus", lustChange, "scale", false);
 			flags[kFLAGS.PRISON_TRAINING_LEVEL]++;
 			if(flags[kFLAGS.PRISON_TRAINING_LEVEL] > 4 && ((fastLearner && player.obey >= 25) || (player.obey > 25 + rand(6) - (flags[kFLAGS.PRISON_TRAINING_LEVEL] * 2))))
 			{
@@ -2838,7 +2838,7 @@ package classes.Scenes.Places.Prison
 			player.slimeFeed();
 			player.refillHunger(15);
 			lustChange = 75;
-			dynStats("lus", lustChange);
+			dynStats("lus", lustChange, "scale", false);
 			prison.changeEsteem(-5,prison.inPrison);
 			prison.changeObey(2,prison.inPrison);
 			flags[kFLAGS.PRISON_TRAINING_LEVEL]++;
@@ -3606,7 +3606,7 @@ package classes.Scenes.Places.Prison
 			
 			player.slimeFeed();
 			player.refillHunger(15);
-			dynStats("lus", 30);
+			dynStats("lus", 30, "scale", false);
 			outputText("You consider how you should respond to Mistress Elly.\n\n");
 			if(player.hunger <= 0 && (player.esteem < 30 || player.esteem < 50 && player.obey > 45))
 			{

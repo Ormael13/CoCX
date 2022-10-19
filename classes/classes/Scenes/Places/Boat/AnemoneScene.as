@@ -46,14 +46,14 @@ public class AnemoneScene extends BaseContent {
             var anemone:Anemone = new Anemone();
             startCombat(anemone);
             //(gain lust, temp lose spd/str)
-            dynStats("lus", 4);
+            dynStats("lus", 4, "scale", false);
             anemone.applyVenom(1);
         }
         if (flags[kFLAGS.ANEMONE_OR_SEA_ANEMONE] == 2) {
             var seaanemone:SeaAnemone = new SeaAnemone();
             startCombat(seaanemone);
             //(gain lust, temp lose spd/str)
-            dynStats("lus", 8);
+            dynStats("lus", 8, "scale", false);
             seaanemone.applyVenom(1);
         }
     }
@@ -358,7 +358,7 @@ public class AnemoneScene extends BaseContent {
             outputText("the anemone lashes out with a slap that knocks the expression off your face and makes your eardrums sing.  <i>\"Dumb!\"</i> she shouts, turning sharply; her tentacles lash past you as she about-faces.  She dives down below the surface and kicks water into your face spitefully as she swims away.  You sputter and rub your jaw a bit, then stand up and walk dizzily back to camp.");
             //(1 hour pass, lose 1/10th of max hp from current hp, lose 20 lust)
             player.takePhysDamage(10);
-            dynStats("lus", -20);
+            dynStats("lus", -20, "scale", false);
             cleanupAfterCombat();
             return;
         }
@@ -578,7 +578,7 @@ public class AnemoneScene extends BaseContent {
             var anemone:Anemone = new Anemone();
             startCombat(anemone);
             //(gain lust, temp lose spd/str)
-            dynStats("lus", 4);
+            dynStats("lus", 4, "scale", false);
             anemone.applyVenom(1);
             return;
         }
@@ -594,7 +594,7 @@ public class AnemoneScene extends BaseContent {
         var anemone:Anemone = new Anemone();
         startCombat(anemone);
         //(gain lust, temp lose spd/str)
-        dynStats("lus", 4);
+        dynStats("lus", 4, "scale", false);
         anemone.applyVenom(1);
     }
 
@@ -834,7 +834,7 @@ public class AnemoneScene extends BaseContent {
         if (flags[kFLAGS.ANEMONE_OR_SEA_ANEMONE] == 2) outputText("ocean");
         outputText("bed into her stricken face and stomp off, mad as hell.");
         //-30 lust)
-        dynStats("lus", -20);
+        dynStats("lus", -20, "scale", false);
         cleanupAfterCombat();
     }
 
