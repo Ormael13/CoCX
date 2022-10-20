@@ -389,7 +389,7 @@ private function drinkLustWithYourHamhock():void {
 	outputText("You take her by the hand and lead her into one of the empty saunas. \"<i>[name]...</i>\" You grab her by the hips and lean her against the wall, throwing off her towel and revealing her velvety skin underneath. Reaching down, you grab a handful of her luxurious ass, squeezing and slapping it lightly. Lottie moans into your shoulder and reaches towards your groin, removing your [armor]. She begins stroking " + oMultiCockDesc() + " lightly, picking up the pace as you continue to work on her pert rump. You can't help but lust over her full figure, using one of your hands to firmly grope her pillowy jugs and reaching your other towards her glistening pussy. You move your hand over her cushiony rack, before burying your head into her bosom and eagerly sucking on one of her nipples, fondling the other between your thumb and forefinger. Your other hand is already fast at work, fingering her hot cunt. You can feel her legs about to buckle beneath their own weight. Lottie moans in between short, hot breaths, \"<i>Y-you're... really amazing, " + player.mf("guy","lady") + ".</i>\"  You give her chubby ass a hard slap in agreement.  Lottie squeals in glee, jerking your [cock] as it pokes into her soft stomach. The sensation of your tip rubbing against her velvety skin drives you wild.\n\n");
 
 	outputText("You tell Lottie you've decided you're going to take her for a vigorous work-out. She can only pant with anticipation.");
-	dynStats("lus", 99);
+	dynStats("lus", 99, "scale", false);
 	flags[kFLAGS.LOTTIE_SEX_COUNT]++;
 	menu();
 	addButton(0, "Oral", getSuckedOffByAHamSandwich);
@@ -729,14 +729,14 @@ private function genericTalks():void {
 	//[If Neither, Encouragement 30 - 70]
 	else if (lottieMorale() <= 70) {
 		outputText("Her ears perk up at your eagerness to talk, though she doesn't seem to have much on her mind. Regardless, you ask how she's been doing. \"<i>Haha, a bit curious, are we?</i>\" Lottie looks up at you and grins. \"<i>Well, I'm afraid nothing's really happened since we last met y'know? Maybe today we can get some results!</i>\" she stands up, pumping her fist in the air and wiggling her plump ass. \"<i>And if you want... we could go do some yoga, eheh...</i>\" She's clearly quite antsy. You chuckle at her comment, though you feel a familiar sensation stirring in your groin.");
-		dynStats("lus", 2);
+		dynStats("lus", 2, "scale", false);
 		outputText("Without much to go on, you can't really comment on her progress.");
 		doNext(camp.returnToCampUseOneHour);
 	}
 	//[If Neither, Encouragement 70 - 100]
 	else {
 		outputText("Her ears perk up at your eagerness to talk, though she doesn't seem to have much on her mind. Regardless, you ask how she's been doing. \"<i>Haha, you really that interested in me, babe?</i>\" Lottie looks up at you and grins. \"<i>Well, I'm afraid nothing's really happened since we last met y'know? I don't mind, but hey – you get what you get!</i>\" she stands up, grinning slyly before turning around and wiggling her plump ass at you. \"<i>And if you want... we could go do some yoga, eheh...</i>\" She's clearly quite antsy. You reach over and slap her bouncing butt, Lottie squealing in return. You both chuckle at her comment, though you feel a familiar sensation stirring in your groin.\n\n");
-		dynStats("lus", 2);
+		dynStats("lus", 2, "scale", false);
 		outputText("Without much to go on, you can't really comment on her progress.");
 		doNext(camp.returnToCampUseOneHour);
 	}
@@ -1432,7 +1432,7 @@ private function togetherLottieYoga():void {
 	lottieMorale(4);
 	lottieTone(1);
 	fatigue(5);
-	dynStats("lus", 80);
+	dynStats("lus", 80, "scale", false);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -1454,7 +1454,7 @@ private function jumpInPoolBeforeLottieSeesYourWingWang():void {
 	outputText(" decided to say hello. Needless to say, you decide it'd be better if you swam alone – nothing's wrong with the occasional chubby-assed slut wandering now and then, but it's a pain to not be distracted. Lottie wades at the other end of the pool, doing the occasional stretch before breaking into laps. You take a page from her book and begin to work back and forth from either end, making sure not to stare at Lottie's massive chest as it bounces into the air every so often after a stroke. After a considerable amount of time, you both finish considerably more exhausted than before. She seems to have lightened up since your initial reaction to her body, so you shrug it off and head home.");
 	//ENCOURAGEMENT -1, FIGURE +2, MUSCLE TONE +2, LUST +9001
 	outputText(player.modTone(player.maxToneCap(),2));
-	dynStats("lus", 40);
+	dynStats("lus", 40, "scale", false);
 	lottieTone(2);
 	lottieMorale(-1);
 	fatigue(5);
@@ -1472,7 +1472,7 @@ private function waitAndShowLottieYourPoolBoner():void {
 
 	outputText("A while later and you've both finished off several laps of the pool, exhausted from your progress. Lottie flashes you a large smile before you part ways, leaving you still somewhat aroused from the experience.");
 	outputText(player.modTone(player.maxToneCap(),2));
-	dynStats("lus", 80);
+	dynStats("lus", 80, "scale", false);
 	lottieTone(2);
 	lottieMorale(2);
 	fatigue(5);
@@ -1626,7 +1626,7 @@ public function lottieFuck():void {
 
 		outputText("You turn Lottie around to face you, telling her you've decided you're going to take her for a vigorous work out. \"<i>I'll work you out, babe,</i>\" she moans in response.");
 	}
-	dynStats("lus", 50);
+	dynStats("lus", 50, "scale", false);
 	//menu
 	sceneHunter.print("The array of selectable scenes depends on her current morale.");
 	menu();

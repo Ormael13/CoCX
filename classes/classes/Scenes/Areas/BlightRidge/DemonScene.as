@@ -518,7 +518,7 @@ import classes.Scenes.SceneLib;
 			if(player.cocks.length > 0) outputText(" and a thick layer of spunk");
 			outputText(".");
 			outputText("[pg]You turn away with a bemused sigh.  When you glance back, she has vanished!");
-			dynStats("lus", -50);
+			dynStats("lus", -50, "scale", false);
 			player.sexReward("Default","Nipples");
 			player.sexReward("Default","Tits");
 			cleanupAfterCombat();

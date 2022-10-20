@@ -1647,7 +1647,7 @@ use namespace CoC;
 			}
 			else {
 				outputText("As you're minding your own business, you spot a large imp.  He is playing with himself, loincloth discarded next to him.  You could make out his cunt, as the result of your breastfeeding session.  However, you notice some difference.  He has a cock instead of clit, perhaps he has partially recovered.  Clearly, he's a maleherm now.  You blush as the imp finally reaches orgasm, his cum and femspunk splattering everywhere.");
-				dynStats("lus", 20);
+				dynStats("lus", 20, "scale", false);
 				flags[kFLAGS.IMP_LORD_MALEHERM_PROGRESS] = 10;
 			}
 			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_IMPS);

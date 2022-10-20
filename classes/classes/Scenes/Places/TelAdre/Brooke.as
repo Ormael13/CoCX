@@ -695,7 +695,7 @@ public function goDownOnBrooke():void {
 
 	outputText("\n\nYour drying goes by without incident, and before the end of the hour, your gear is back on and you're out of the gym.");
 	// Lust increased by 30.
-	dynStats("lus", 30);
+	dynStats("lus", 30, "scale", false);
 	brookeAffection(10);
 	doNext(camp.returnToCampUseOneHour);
 }

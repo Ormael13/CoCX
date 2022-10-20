@@ -251,7 +251,7 @@ private function joeyAndrogyny():void {
 
 	outputText("Thanking the cute bunny-boy for his help, you hand over the payment and head back to check on camp.");
 	player.createPerk(PerkLib.Androgyny,0,0,0,0);
-	dynStats("lus", 5);
+	dynStats("lus", 5, "scale", false);
 	doNext(camp.returnToCampUseOneHour);
 }
 //[Joey]
@@ -458,7 +458,7 @@ private function suckOffJoeysGardenHose():void {
 	outputText("\"<i>I cleaned out your balls; you can clean up the floor,</i>\" you joke as you leave, kissing him one last time on the mouth before you go.\n\n");
 	outputText("Joey blushes again and begins looking for a mop.");
 	player.sexReward("cum", "Lips", false);
-	dynStats("lus", 70);
+	dynStats("lus", 70, "scale", false);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -828,7 +828,7 @@ private function joeySweetMassage():void {
 	outputText("\n\nJoey hops off of you and you notice his cute femboy feet round the table, heading towards a small counter nearby hosting a large number of bottles.  You hear the sounds of a cork being pulled from one such bottle, followed by the bunny-boy gulping down its contents.  Then, surprisingly, he bends over, letting his thong pool around his ankles and revealing his cute, pink asshole.  He retrieves something else from the table and pulls it into view... a large multihued egg!  Joey places the egg at his butthole, which contracts in anticipation.  Slowly he works it inside, a task that you're sure would put the average anal acrobat to the test, but Joey is clearly no amateur.  The egg disappears completely within a couple minutes, swallowed up by that sweet little pucker.  Joey pulls his thong back up and turns towards you, his modest erection raging right in front of your face.");
 
 	outputText("\n\nRather than the usual stream of off-white jism, what starts pouring out the tip of his cock is a rich brown color.  It's viscous, and when it dribbles down onto the floor it forms a velvety pool.  Your masseuse scoops some of it up with two fingers and slips them into his mouth, closing his eyes as if he's enjoying an incredibly tasty treat.  \"<i>Mmm,</i>\" he moans, \"<i>chocolate.  This is what makes the sweet massage so sweet.  It's just as good as my creamy lotion, and twice as tasty.</i>\"  Joey turns away, retrieving another large egg from the table.  You wonder briefly if he has room for two of the two huge eggs in his ass, before he asks, \"<i>Would you like an egg too?  They don't have anything to do with the massage, but I just </i>love<i> feeling so full, don't you?</i>\"");
-	dynStats("lus", 25);
+	dynStats("lus", 25, "scale", false);
 	//[Yes (gives the chocolate-egg stuffed ass from the Easter bunny)] [No (This just skips the "If Yes" paragraphs)]
 	menu();
 	addButton(0,"Yes",eggsInButtStart,true);

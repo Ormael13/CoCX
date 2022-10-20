@@ -159,7 +159,7 @@ public class KitsuneScene extends BaseContent
 			if (!firstTime) {
 				outputText("The flame suddenly darts off into the darkness of the trees, and you find yourself unable to resist giving chase.  It feels as though you are being drawn to it by some otherworldly force, but every time your suspicions begin to grow, the flame pauses to float around you, tickling your erogenous zones and then pressing onward.");
 				//+15 Lust
-				dynStats("lus", 15);
+				dynStats("lus", 15, "scale", false);
 			}
 			if ((player.lust >= player.maxLust() || player.inte < 20) && !firstTime) {
 				mansion(false, false);
@@ -2468,7 +2468,7 @@ public class KitsuneScene extends BaseContent
 			clearOutput();
 			outputText("The thought of how many gems you'll be able to get for it is enough to quickly suppress those feelings, avarice winning out over guilt.");
 			//+10 COR, add Gold Statue to inventory, Advance 1hr and return to camp
-			dynStats("lus", 10);
+			dynStats("lus", 10, "scale", false);
 			inventory.takeItem(useables.GLDSTAT, camp.returnToCampUseOneHour);
 			flags[kFLAGS.TOOK_KITSUNE_STATUE] = 1;
 		}

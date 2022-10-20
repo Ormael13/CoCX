@@ -671,7 +671,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 						outputText("</i>\" she teases, but her body language ");
 						if (flags[kFLAGS.AMILY_WANG_LENGTH] > 0) {
 							outputText("and the erection tenting her pants ");
-							dynStats("lus", 5);
+							dynStats("lus", 5, "scale", false);
 						}
 						outputText("suggests that it's no joking matter.\n\n");
 					}
@@ -2118,7 +2118,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("\"<i>Fair is fair.</i>\" She growls, but she's blushing faintly. Clumsy with unfamiliarity, she nonetheless does her best to remove your [armor] in as erotic a fashion as she can manage, and you catch her nimble little fingers hesitantly stroking across the more interesting parts of your anatomy more than once. When you stand before her naked, she carefully looks you over and takes several deep breaths through her nose.\n\n");
 
 			outputText("\"<i>Just making sure that you haven't... you know, picked up something you shouldn't.</i>\" She explains softly.\n\n");
-			dynStats("lus", 5);
+			dynStats("lus", 5, "scale", false);
 			amilySexPtII();
 		}
 
@@ -2143,7 +2143,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			amilySprite();
 			var x:Number = player.cockThatFits(61);
 			outputText("You stay right where you are, not wanting to spoil the show. By the time that she is visibly starting to drip girlcum and approaches you, clearly ready to move on to the main event, your " + cockDescript(x) + " is iron-hard.\n\n");
-			dynStats("lus", 50);
+			dynStats("lus", 50, "scale", false);
 			continueAmilySmex();
 		}
 
@@ -2172,7 +2172,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				outputText("  It's quite an unusual experience; though her lips proper are as naked as your own, there is fur around them, soft and fine and just close enough to tickle the edges of your own lips, to say nothing of the unusual sensation of kissing someone with a muzzle.  Amily doesn't seem bothered at all. In fact, she kisses you back, and quite eagerly so, too.");
 			outputText("\n\n");
 			continueAmilySmex();
-			dynStats("lus", 5);
+			dynStats("lus", 5, "scale", false);
 			//AffectionGAIN!
 			flags[kFLAGS.AMILY_AFFECTION] += 1+rand(3);
 		}
@@ -2227,7 +2227,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 		}
 
 		private function AmilyMidSexLevel2():void {
-			dynStats("lus", 5);
+			dynStats("lus", 5, "scale", false);
 			amilySprite();
 			outputText("By the time Amily is completely naked, she is clearly excited about what is coming up; you even think she's wet already. She stares at you with a mischievous, turned-on smile, waiting to see what you will do now that it is your turn to strip.\n\n");
 
@@ -2254,7 +2254,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 		}
 
 		private function continueWithMoreMidLevelAmilySex():void {
-			dynStats("lus", 5);
+			dynStats("lus", 5, "scale", false);
 			amilySprite();
 			outputText("Once you are both naked, you embrace and begin with a deep kiss. Slowly you both sink down and start exploring each other's bodies. You feel Amily's hands caressing you while you lightly kiss her breasts, one of your hands slowly drifting down to her cute ass and lightly squeezing it. Looking into her eyes, you see a sparkle in them before she surprises you and somehow manages to turn you onto your back. Now she's sitting on your belly, with your already hard cock being fondled by her rather flexible tail. Grinning at you, she seems to plan on teasing you as long as possible before allowing you to enter her.\n\n");
 			simpleChoices("Play Along", playAlongWithAmilyWhataDumbBitch, "Please Her", workToPleaseTheCunt, "", null, "", null, "", null);
@@ -2666,7 +2666,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				outputText("She desperately gropes and nuzzles you, trying to find some sign - ANY sign - of genitalia, but, of course, she can't. She promptly bursts into big, wet, noisy tears, blubbering like a little baby. \"<i>Why? Why are you punishing me like this, [master]? Haven't I been a good little slut for you? Haven't I done everything I could to please you? I've degraded myself without hesitation for the glories of sex - why have you stolen that from me?!</i>\"\n\n");
 
 				outputText("As she collapses onto the ground, crying her heart out, you silently redress yourself and slink away. All this blubbering has turned you off, and it's obvious that nothing can be done until you've grown a cock, a pussy, or both.");
-				dynStats("lus", -20);
+				dynStats("lus", -20, "scale", false);
 				if (flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] == 0) doNext(playerMenu);
 				else doNext(SceneLib.farm.farmCorruption.rootScene);
 			}
@@ -3540,7 +3540,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				else {
 					outputText("She looks thoughtful for a moment, then shakes her head reluctantly. \"<i>I'm sorry darling, I really am, but I think I've got big enough breasts as it is.</i>\" She then smirks, and playfully jiggles her abundant cleavage. \"<i>Don't you agree?</i>\" she teases.\n\n");
 					outputText("Swallowing hard, you have to agree, which makes Amily laugh.");
-					dynStats("lus", 5);
+					dynStats("lus", 5, "scale", false);
 				}
 			}
 			//CORRUPT UNZ
@@ -3772,7 +3772,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				//(If Amily's butt size is smaller than "jiggles with every step":
 				if(flags[kFLAGS.AMILY_ASS_SIZE] < maxSizePure || ( flags[kFLAGS.AMILY_ASS_SIZE] < maxSizeHypr && flags[kFLAGS.HYPER_HAPPY])) {
 					outputText("\"<i>So, you want me to have a little more junk in the trunk, huh?</i>\" She giggles. \"<i>Well, I guess a little padding down there wouldn't hurt...</i>\" She takes the egg from you, her prominent front-teeth effortlessly biting off the top, whereupon she sucks down the contents in a practiced gulp. Crushing the shell in her hand, her hands then press themselves to her butt as she spins around so that it faces you, trying to look over her shoulder as it visibly swells, straining her pants. She pats it a few times, then shakes her head. \"<i>I'm going to have to go and let these pants out a little now.</i>\" She apologizes, and then walks away.\n\n");
-					dynStats("lus", 5);
+					dynStats("lus", 5, "scale", false);
 					if(player.hasItem(consumables.BROWNEG)) {
 						player.consumeItem(consumables.BROWNEG);
 						flags[kFLAGS.AMILY_ASS_SIZE] += 1 + rand(2);
@@ -3801,7 +3801,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				//(If Amily's butt size is smaller than "jiggles with every step":
 				if(flags[kFLAGS.AMILY_ASS_SIZE] < maxSizeCorr || ( flags[kFLAGS.AMILY_ASS_SIZE] < maxSizeHypr && flags[kFLAGS.HYPER_HAPPY])) {
 					outputText("\"<i>So, [master] would like " + player.mf("his","her") + " toy to have a little more padding around her horny puss and asshole?</i>\" she giggles. \"<i>I obey.</i>\" She takes the egg from you, her prominent front-teeth effortlessly biting off the top, whereupon she sucks down the contents in a practiced gulp. Crushing the shell in her hand, her hands then press themselves to her butt as she spins around so that it faces you, trying to look over her shoulder as it visibly swells, jiggling slightly. She pats it a few times, then shakes her head. \"<i>Will you be using your newly-improved cum-dumpster now?</i>\" she asks.\n\n");
-					dynStats("lus", 5);
+					dynStats("lus", 5, "scale", false);
 					if(player.hasItem(consumables.BROWNEG)) {
 						player.consumeItem(consumables.BROWNEG);
 						flags[kFLAGS.AMILY_ASS_SIZE] += 1 + rand(2);
@@ -3858,7 +3858,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				//(If Amily has "full, womanly hips":
 				else {
 					outputText("She looks at you with one eyebrow quirked. \"<i>Any bigger, and I won't be able to run anymore. No thank you; I feel like enough woman already, and they aren't messing with my speed.</i>\" She turns and saunters off, as quickly as she can, but with a deliberate swaying of her hips, as if to prove both her points.");
-					dynStats("lus", 4);
+					dynStats("lus", 4, "scale", false);
 				}
 			}
 			//Corrupt
@@ -3886,7 +3886,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				//(If Amily has "full, womanly hips":
 				else {
 					outputText("She chomps down on the proferred egg, but nothing happens. \"<i>Slut's body is at its limits [master].  Her huge breeding hips can't widen any further.  Would you like to fuck?</i>\" she asks, rocking her considerable mass back and forth hypnotically.");
-					dynStats("lus", 4);
+					dynStats("lus", 4, "scale", false);
 				}
 			}
 			doNext(amilyFollowerEncounter);
@@ -5360,7 +5360,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 					if(player.hasVagina()) outputText("earning a clench from your " + vaginaDescript(0));
 					outputText(".  \"<i>I'm so glad you've recovered a gender!</i>\"\n\nAmily turns and stalks off with a spring in her step.  Clearly she's happy, but she still needs some time to get used to it.");
 					//{normal encounter options}
-					dynStats("lus", 25+player.sens/10);
+					dynStats("lus", 25+player.sens/10, "scale", false);
 				}
 			}
 			doNext(camp.returnToCampUseOneHour);
@@ -5660,7 +5660,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				//-(else)
 				else outputText("You think about some of the more interesting potions you found while exploring; perhaps you could use some of them...");
 			}
-			dynStats("lus", 25);
+			dynStats("lus", 25, "scale", false);
 			doNext(camp.returnToCampUseOneHour);
 			//FLAG THAT THIS SHIT WENT DOWN
 			flags[kFLAGS.AMILY_CORRUPT_FLIPOUT] = 1;
@@ -5965,7 +5965,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				outputText("\"<i>I fought it off and ran,</i>\" she says, panting and masturbating harder. \"<i>Oh, [master]! Recalling all of this is making me soooo horny.</i>\" She looks at you pleadingly. \"<i>Can you fuck me? Please? Fuck your slutty mousy cumslut? Pretty please with sugar on top?</i>\" she begs, still masturbating.\n\n");
 
 				outputText("You laugh and tell her you'll think about it, before leaving her to finish herself off. She just pouts and continues masturbating.\n\n");
-				dynStats("lus", (5+player.lib/20));
+				dynStats("lus", (5+player.lib/20), "scale", false);
 			}
 			//Conversation: Sand Witches
 			else if(convo == 2) {
@@ -6052,7 +6052,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				outputText("She looks at you with lust-filled eyes. \"<i>[Master], let's fuck like them; spank me, hit me and then fuck me. Cum all over me, make me feel like the cumslut that I am,</i>\" she begs, openly panting.\n\n");
 
 				outputText("You smile and tell her that you'll call for her when you want to fuck her. You dismiss her with a wave, and she begins masturbating.\n\n");
-				dynStats("lus", (5+player.lib/20));
+				dynStats("lus", (5+player.lib/20), "scale", false);
 			}
 			//Conversation: Goblins
 			else if(convo == 7) {
@@ -6070,7 +6070,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				outputText("</i>\"\n\n");
 
 				outputText("You step closer and pat her head approvingly, telling her she's a good girl. Amily takes the opportunity to nuzzle your crotch affectionately. Then you dismiss her with a wave.\n\n");
-				dynStats("lus", (5+player.lib/20));
+				dynStats("lus", (5+player.lib/20), "scale", false);
 			}
 			//Conversation: What was life in her village like?
 			else if(convo == 8) {

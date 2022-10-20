@@ -3753,7 +3753,7 @@ public class Camp extends NPCAwareContent{
 		if (player.ballSize < 1) player.ballSize = 1;
 		outputText("You feel your scrotum shift, shrinking down along with your [balls].  ");
 		outputText("Within a few seconds the paste has been totally absorbed and the shrinking stops.  ");
-		dynStats("lus", -10);
+		dynStats("lus", -10, "scale", false);
 		player.consumeItem(consumables.REDUCTO, 1);
 		doNext(camp.returnToCampUseOneHour);
 	}

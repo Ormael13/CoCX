@@ -117,7 +117,7 @@ public class DemonDragonGroup extends Monster {
     public function DragonDemonHaremTease():void {
         outputText("The four demonic dragonesses look at each other, flicking their long tongues out. The male steps back, bringing one hand to his tapered draconic cock, while the two closest dragonesses lean in, holding their spears with their flexible tails as they make out in front of him. Their sloppy kisses send drool down their cleavage, and they rub the male’s extended cock with their thighs. Distracted by the lewd display, you notice that the other two are rubbing their ribbed spear shafts across their muffs, moaning as they bite their lips. ")
         outputText("<i>“Wouldn’t you rather join us?”</i> One of the outer women coos. <i>“Put down your weapon. That’s all you’d need to do.”</i> ")
-        player.dynStats("lus", Math.round(120 + (player.lib * 1.4)));
+        player.takeLustDamage(Math.round(120 + (player.lib * 1.4)), true);
     }
 
     //TODO: use!

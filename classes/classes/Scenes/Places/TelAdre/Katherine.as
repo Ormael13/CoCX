@@ -2106,7 +2106,7 @@ private function useRedoctoOnKatsKnot():void {
 	//use 1x Reducto, reduce Kat knot size by 2, increase PC lust value, go to Kat sex menu
 	knotSize -= 2;
 	if (knotSize < 2) knotSize = 2;
-	dynStats("lus", 10 + player.lib / 20);
+	dynStats("lus", 10 + player.lib / 20, "scale", false);
 	player.consumeItem(consumables.REDUCTO);
 	katSexMenu();
 }
@@ -2140,7 +2140,7 @@ private function useReductoOnKatsKock():void {
 	cockLength -= 2;
 	var dickMin:int = (flags[kFLAGS.KATHERINE_UNLOCKED] >= 4 ? 6 : 8); //If she's employed she'll go as low as 6 inches
 	if (cockLength < dickMin) cockLength = dickMin;
-	dynStats("lus", 10 + player.lib / 20);
+	dynStats("lus", 10 + player.lib / 20, "scale", false);
 	player.consumeItem(consumables.REDUCTO);
 	katSexMenu();
 }
@@ -2155,7 +2155,7 @@ private function reductoBallSize():void {
 	//use 1x Reducto, reduce Kat ball size by two inches, increase PC lust by small value, go to Kat sex menu
 	ballSize -= 2;
 	if (ballSize < 1) ballSize = 1;
-	dynStats("lus", 10 + player.lib / 20);
+	dynStats("lus", 10 + player.lib / 20, "scale", false);
 	player.consumeItem(consumables.REDUCTO);
 	katSexMenu();
 }
@@ -2183,7 +2183,7 @@ private function useRreductoOnKatsBreasts():void {
 		outputText("\"<i>Oh thank Marae.  And thank you too " + playerText() + ".  I can feel some of the muscles in my lower back starting to relax.</i>\"");
 	else outputText("\"<i>Yes, I think I’ll get used to these smaller sweater puppies pretty quickly.</i>\"");
 	outputText("\n\nShe lies back on the bed and spreads her legs wide, her cock" + cockMultiple("", "s") + " aimed at the ceiling.  \"<i>Now since you’ve pawed my breasts and got me all excited I hope you aren’t planning on leaving anytime soon.</i>\"");
-	dynStats("lus", 10 + player.lib / 20);
+	dynStats("lus", 10 + player.lib / 20, "scale", false);
 	player.consumeItem(consumables.REDUCTO);
 	katSexMenu();
 }
@@ -2195,7 +2195,7 @@ private function giveKatABulbousPepper():void {
 	if (!hasCock()) {
 		outputText("\"<i>I'm pretty sure that won't have any effect on me,</i>\" she replies.  \"<i>But they do taste nice, so as long as you don't mind...</i>\"  She smiles and and takes the pepper, munching it down.  With a moan she " + clothesLowerChoice("pushes a hand down her shorts", "hikes up her skirt", "opens the folds of her bodysuit", "hikes up her dress", "parts her robe") + " and starts rubbing her clit.\n\n");
 		outputText("\"<i>Oh please " + playerText() + ", don't leave me to deal with this feeling on my own.</i>\"");
-		dynStats("lus", 10 + player.lib / 20);
+		dynStats("lus", 10 + player.lib / 20, "scale", false);
 		player.consumeItem(consumables.BULBYPP);
 		katSexMenu();
 	}
@@ -2209,7 +2209,7 @@ private function giveKatABulbousPepper():void {
         }
 		outputText("\n\nKath rubs her newly formed balls and you see a " + cockAdj() + "bulge developing as her " + cockMultiple("cock stands", "twin cocks stand") + " to attention.  She gives you a toothy smile and asks, \"<i>So... you wanna give them a test run?</i>\"\n\n");
 		ballSize = 1;
-		dynStats("lus", 10 + player.lib / 20);
+		dynStats("lus", 10 + player.lib / 20, "scale", false);
 		player.consumeItem(consumables.BULBYPP);
 		katSexMenu();
 	}
@@ -2224,7 +2224,7 @@ private function giveKatABulbousPepper():void {
 		outputText("She throws you a sultry look.  \"<i>So... you wanna give them a test run?</i>\" she purrs.\n\n");
 		ballSize += 2;
 		if (ballSize > 5) ballSize = 5;
-		dynStats("lus", 10 + player.lib / 20);
+		dynStats("lus", 10 + player.lib / 20, "scale", false);
 		player.consumeItem(consumables.BULBYPP);
 		katSexMenu();
     }
@@ -2246,7 +2246,7 @@ private function giveKatABulbousPepper():void {
 		addSubmissive(KBIT_SUB_GROW_BIG_BALLS); //Have made her supersize her balls at least once
 		ballSize += 2;
 		if (ballSize > 9) ballSize = 9;
-		dynStats("lus", 10 + player.lib / 20);
+		dynStats("lus", 10 + player.lib / 20, "scale", false);
 		player.consumeItem(consumables.BULBYPP);
 		katSexMenu();
 	}
@@ -2319,7 +2319,7 @@ private function giveKatADoublePepper():void {
 		}
 		outputText(".\n\n\"<i>Oh dear...  I think that was maybe a bit too spicy.  You want to help me out with this?</i>\" she purrs, already starting to stroke her twin shafts.\n\n");
 	}
-	dynStats("lus", 10 + player.lib / 20);
+	dynStats("lus", 10 + player.lib / 20, "scale", false);
 	player.consumeItem(consumables.DBLPEPP);
 	katSexMenu();
 }
@@ -2332,7 +2332,7 @@ private function giveKatAOverlyLargePepper():void {
 		outputText("You wave an overly large canine pepper in front of Katherine's nose and she drinks in the spicy scent.\n\n");
 		outputText("\"<i>I'm pretty sure that won't have any effect on me,</i>\" she says.  \"<i>But they do taste nice, so as long as you don't mind...</i>\"  She smiles and and takes the pepper, munching it down.  With a moan she " + clothesLowerChoice("pushes a hand down her shorts", "hikes up her skirt", "opens the folds of her bodysuit", "hikes up her dress", "parts her robe") + " and starts rubbing her clit.\n\n");
 		outputText("\"<i>Oh please " + playerText() + ", don't leave me to deal with this feeling on my own.</i>\"");
-		dynStats("lus", 10 + player.lib / 20);
+		dynStats("lus", 10 + player.lib / 20, "scale", false);
 		player.consumeItem(consumables.LARGEPP);
 		katSexMenu();
 	}
@@ -2346,7 +2346,7 @@ private function giveKatAOverlyLargePepper():void {
 			flags[kFLAGS.KATHERINE_DICK_FORM] = 0;
 		}
 		outputText("She moans softly, licks her lips and smiles at you.  \"<i>Care to have a test run?  Be a shame to let the chance go to waste...</i>\" she purrs.\n\n");
-		dynStats("lus", 10 + player.lib / 20);
+		dynStats("lus", 10 + player.lib / 20, "scale", false);
 		cockLength += 2;
 		if (cockLength > 16) cockLength = 16;
 		player.consumeItem(consumables.LARGEPP);
@@ -2375,7 +2375,7 @@ private function giveKatAOverlyLargePepper():void {
 		}
 		outputText("  Kath smiles and strokes " + cockMultiple("her", "each") + cockAdj() + "shaft with one hand" + cockMultiple(" while straightening her tail with the other", "") + ".\n\n");
 		outputText("\"<i>I wasn’t sure I wanted this, but it feels good.  Do you like it?</i>\" she asks, " + cockMultiple("pointing her cock", "leveling both her cocks") + " at you.  \"<i>Maybe you could show me how much, hmmm?  Be a shame to let the chance go to waste...</i>\" she purrs.\n\n");
-		dynStats("lus", 10 + player.lib / 20);
+		dynStats("lus", 10 + player.lib / 20, "scale", false);
 		addSubmissive(KBIT_SUB_GROW_BIG_DICK); //Have made her supersize her cock(s) at least once
 		cockLength += 2;
 		if (cockLength > 20) cockLength = 20;
@@ -2447,7 +2447,7 @@ private function giveKatDefurFormula():void {
 	}
 	furry = false;
 	addSubmissive(KBIT_SUB_CAT_GIRL); //Have defurred her at least once
-	dynStats("lus", 10 + player.lib / 20);
+	dynStats("lus", 10 + player.lib / 20, "scale", false);
 	player.consumeItem(consumables.P_S_MLK);
 	player.consumeItem(consumables.GLDSEED);
 	if (player.hasItem(consumables.BLACKEG))
@@ -2463,7 +2463,7 @@ private function giveKatAKnottyPepper():void {
 	if (!hasCock()) {
 		outputText("\"<i>I'm pretty sure that won't have any effect on me,</i>\" she says.  \"<i>But they do taste nice, so as long as you don't mind...</i>\"  She smiles and and takes the pepper, munching it down.  With a moan she " + clothesLowerChoice("pushes a hand down her shorts", "hikes up her skirt", "opens the folds of her bodysuit", "hikes up her dress", "parts her robe") + " and starts rubbing her clit.\n\n");
 		outputText("\"<i>Oh please " + playerText() + ", don't leave me to deal with this feeling on my own.</i>\"");
-		dynStats("lus", 10 + player.lib / 20);
+		dynStats("lus", 10 + player.lib / 20, "scale", false);
 		player.consumeItem(consumables.KNOTTYP);
 	}
 	else if (knotSize >= 6) { //Original size - it won’t grow any further
@@ -2478,7 +2478,7 @@ private function giveKatAKnottyPepper():void {
 			else outputText("Her cock stretches outwards, absorbing its barbs and getting fatter along its whole length.  In a few moments Kath is once again sporting a " + cockAdj() + " canine cock.");
 			flags[kFLAGS.KATHERINE_DICK_FORM] = 0;
 		}
-		dynStats("lus", 10 + player.lib / 20);
+		dynStats("lus", 10 + player.lib / 20, "scale", false);
 		player.consumeItem(consumables.KNOTTYP);
 	}
 	else if (knotSize >= 4) { //Need submissiveness 1+ to grow
@@ -2504,7 +2504,7 @@ private function giveKatAKnottyPepper():void {
 			knotSize += 2;
 			if (knotSize > 6) knotSize = 6;
 			addSubmissive(KBIT_SUB_GROW_KNOT); //Have regrown her knot to full size at least once
-			dynStats("lus", 10 + player.lib / 20);
+			dynStats("lus", 10 + player.lib / 20, "scale", false);
 			player.consumeItem(consumables.KNOTTYP);
 		}
 	}
@@ -2522,7 +2522,7 @@ private function giveKatAKnottyPepper():void {
 		outputText("Kath watches it happen almost without any reaction.  You would guess she’s eaten so many her body has developed a resistance to the effects.  Apart from the knot" + cockMultiple(", which is slowly shrinking, the only indication that she just ate a magic imbued pepper is her rock solid erection.", "s, which are slowly shrinking, the only indications that she just ate a magic imbued pepper are her rock solid twin erections."));
 		knotSize += 2;
 		if (knotSize > 4) knotSize = 4;
-		dynStats("lus", 10 + player.lib / 20);
+		dynStats("lus", 10 + player.lib / 20, "scale", false);
 		player.consumeItem(consumables.KNOTTYP);
 	}
 	if (hasCock()) outputText("\n\nHer tail flicks against your leg.  She looks down at her erection" + cockMultiple("", "s") + ", looks to you and then looks back at her erection" + cockMultiple("", "s") + " again.");
@@ -2640,7 +2640,7 @@ private function useIncubiDraftOnKath():void {
 			return;
 		}
 	}
-	dynStats("lus", 10 + player.lib / 20);
+	dynStats("lus", 10 + player.lib / 20, "scale", false);
 	player.consumeItem(consumables.P_DRAFT);
 	katSexMenu();
 }
@@ -2691,7 +2691,7 @@ private function giveKatPureSuccubusDelight():void {
 		katherineMenu();
 		return;
 	}
-	dynStats("lus", 10 + player.lib / 20);
+	dynStats("lus", 10 + player.lib / 20, "scale", false);
 	flags[kFLAGS.KATHERINE_HOURS_SINCE_CUM] += 24;
 	player.consumeItem(consumables.PSDELIT);
 	katSexMenu();
@@ -2729,7 +2729,7 @@ private function giveKatPureSuccubusMilk():void {
 			outputText("She starts to grind her breasts against you, then she shifts her hips forward and starts to grind her " + (hasCock() ? "cock" : "pussy") + " against you too.  She purrs and says, \"<i>I’ve never had to push my hips this far forward to reach you.  I think I need to experiment a little to get the hang of it.</i>\"\n\n");
 		}
 		outputText("Kath seems to be in a loving mood, why disappoint her?\n\n");
-		dynStats("lus", 10 + player.lib / 20);
+		dynStats("lus", 10 + player.lib / 20, "scale", false);
 		player.consumeItem(consumables.P_S_MLK);
 	}
 	else if (breasts.cupSize < BreastCup.EE && kathSubEnough) { //Allows E-Cup, big E-Cup and EE-Cup
@@ -2741,7 +2741,7 @@ private function giveKatPureSuccubusMilk():void {
 		outputText("You kiss her and work your fingers into her mammaries.  Kath mewls and asks, \"<i>I suppose you want me to show these off, huh?</i>\"  You squeeze a little harder" + (breasts.lactating() ? ", forcing out a bit more of her milk" : "") + ".  \"<i>Okay " + playerText() + ".  When I’m off duty everyone in town will think I’m a big breasted slut.  Guys will try to hire me on the street.  But you’d better fuck me all the time, cause I’m going to be <b>horny</b>.</i>\"\n\n");
 		breasts.cupSize++;
 		addSubmissive(KBIT_SUB_GROW_BIG_BOOBS); //Have grown her breasts to E-Cup or larger
-		dynStats("lus", 10 + player.lib / 20);
+		dynStats("lus", 10 + player.lib / 20, "scale", false);
 		player.consumeItem(consumables.P_S_MLK);
 	}
 	else if (kathSubEnough) { //Too big, even for more submissive Kath
@@ -2865,7 +2865,7 @@ private function giveKatRefuzzFormulaChange():void {
 	if (hasCock()) outputText((hasBalls() ? "balls are" : "prostate's") + " empty and my ");
 	outputText("pussy’s drenched.</i>\"\n\n");
 	furry = true;
-	dynStats("lus", 10 + player.lib / 20);
+	dynStats("lus", 10 + player.lib / 20, "scale", false);
 	player.consumeItem(consumables.W_FRUIT);
 	player.consumeItem(consumables.EXTSERM);
 	if (player.hasItem(consumables.BEEHONY))
@@ -2929,7 +2929,7 @@ private function giveKatWhiskerFruit():void {
 	else outputText("her nipples have grow as hard as diamonds.\n\n");
 	if (!hasCock() || !hasDogCock()) {
 		outputText("She takes the fruit and gives you a big grin as she bites into it, sucking up all the juices.  Kath leans back on the bed and thrusts her chest toward you.  \"<i>Oh Marae, do those ever put me in the mood.</i>\"  She licks her lips seductively, closes her eyes and shudders with pent up energy.  In a barely controlled whisper she asks, \"<i>How do you want me?</i>\"");
-		dynStats("lus", 10 + player.lib / 20);
+		dynStats("lus", 10 + player.lib / 20, "scale", false);
 		player.consumeItem(consumables.W_FRUIT);
 		katSexMenu();
 		return;
@@ -2966,7 +2966,7 @@ private function giveKatWhiskerFruit():void {
 		addSubmissive(KBIT_SUB_CAT_DICK); //Have given her a cat dick at least once
 		knotSize -= 2;
 		if (knotSize < 2) knotSize = 2;
-		dynStats("lus", 10 + player.lib / 20);
+		dynStats("lus", 10 + player.lib / 20, "scale", false);
 		player.consumeItem(consumables.W_FRUIT);
 	}
 	katSexMenu();
@@ -4441,7 +4441,7 @@ public function giveKatOralPenisWingWang():void {
 	player.sexReward("cum", "Lips");
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 	experience(KBIT_TRIED_RECEIVE_ORAL);
-	dynStats("lus", 25);
+	dynStats("lus", 25, "scale", false);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -4502,7 +4502,7 @@ public function giveKatOralPussyLicking():void { //This version assumes Kath has
 	orgasm(); //minus lust, slimefeed, Player returns to camp
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 	player.sexReward("cum", "Lips");
-	dynStats("lus", 25);
+	dynStats("lus", 25, "scale", false);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -5324,7 +5324,7 @@ public function handjobbiesFurrDemCatFurries():void
 		outputText("\n\nWith training over for now you get Katherine to pack up her equipment and lead her back to Tel'Adre.  When you reach her alley Kath throws herself on the pile of softer scraps she's collected and says <i>\"Please come back soon [name], I'll do better next time.\"</i>");
 	orgasm();
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
-	dynStats("lus", 33);
+	dynStats("lus", 33, "scale", false);
 	if (flags[kFLAGS.KATHERINE_UNLOCKED] == - 1)
 		doNext(firstTimeWithKatherinePartTwoUltraChampionshipEditionHyperTurbo);
 	else doNext(camp.returnToCampUseOneHour);
@@ -5583,7 +5583,7 @@ private function bathTimeFrustrated():void { //You took away her cock. This is y
 	outputText("You look at Kath's face and see that the lust in her eyes has faded - for once - and her lips are starting to turn blue.  From her expression you guess you're in no better shape.\n\n");
 	outputText("By the time you drag yourself and Kath out of the frigid water and towel yourselves off any thoughts of lovemaking are pushed aside in favor of warmth.  You wrap your arms around Kath and the two of you shiver until you can sense your fingers and toes once more.\n\n");
 	outputText("The sun has moved a decent distance across the sky and you decide that despite the unsatisfying expedition there's nothing for it but to return Kath to Tel'Adre and then head back to camp.\n\n");
-	dynStats("lus", 20 + player.lib / 20);
+	dynStats("lus", 20 + player.lib / 20, "scale", false);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -5725,7 +5725,7 @@ private function bathTimePenetratedNormalEnd():void {
 	if (!hasAlready(KBIT_TRIED_BATH))
 		outputText("  It looks like Kath enjoyed her bath, so you suspect if you ever ask her to come out to the lake she'll jump at the chance.");
 	player.sexReward("cum", "Lips");
-	dynStats("lus", 10 + player.lib / 20);
+	dynStats("lus", 10 + player.lib / 20, "scale", false);
 	orgasm();
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;
 	experience(KBIT_TRIED_BATH);
@@ -5759,7 +5759,7 @@ private function bathTimePenetratedDenial():void {
 		outputText("Katherine’s sperm just keeps flowing from her cockhead" + cockMultiple(" in one continuous stream", "s in two continuous streams") + ".  You could probably have got her a job with Tel’Adre’s fire department, no training required.  When she finally finishes there’s a river of cum flowing across the dry sand.");
 
 	outputText("\n\nYou have to carry her the rest of the way, but when you reach the gates Katherine gives you a kiss and tells you she wants you to come and see her soon.  You grin and shake your head - this girl is insatiable.\n\n");
-	dynStats("lus", 10 + player.lib / 20);
+	dynStats("lus", 10 + player.lib / 20, "scale", false);
 	player.sexReward("no", "Vaginal");
 	orgasm();
 	flags[kFLAGS.KATHERINE_TIMES_SEXED]++;

@@ -118,7 +118,7 @@ public function encounterRogarSwamp():void {
 			outputText("Ro'gar looks at you and blinks.  He sets his mug aside and smiles.  \"<i>Sorry, honey, but you're not my type.  Mighty kind of ya though.</i>\"  You furrow your brow in disappointment at his rejection.  \"<i>Ya ain't the drinking type are ya?</i>\" he continues.  \"<i>Should'a known this would'a been too strong.  'Pologies.  You should sleep it off.</i>\"  Blinking, you find yourself being gently but quickly removed from Ro'gar's hut.  The door closes behind you with a \"<i>Take care now,</i>\" and you're left standing in the swamp with a bewildered look on your face.  Maybe you did have too much to drink.  You stumble a bit as you make your way to camp, earning another faceful of mud and disappointment on the way.\n\n");
 			//set Ro'gar phase = 2
 			flags[kFLAGS.ROGAR_PHASE] = 2;
-			dynStats("lus", 30);
+			dynStats("lus", 30, "scale", false);
 			doNext(camp.returnToCampUseTwoHours);
 			return;
 		}
@@ -202,7 +202,7 @@ public function encounterRogarSwamp():void {
 				if(player.inte >= 30) {
 					outputText("After brainstorming for a few moments you are struck by an idea on how to help him cross the desert.  You explain how the more sensitive natives wear cloaks with hoods to protect themselves from the harsh sun.  \"<i>That's brilliant!</i>\" Ro'gar exclaims, getting to his feet and wrapping his large arms around you in a tight bear hug.  You give out a slight wheeze as he crushes you with excitement.  He eventually lets you go, though your spine tingles from the scent of musky sweat.\n\n");
 					//<Lust increased very slightly.>
-					dynStats("lus", 15);
+					dynStats("lus", 15, "scale", false);
 				}
 				//((Intellect less than 30))
 				else {
@@ -232,7 +232,7 @@ public function encounterRogarSwamp():void {
 					outputText("You wander toward your camp through the swamp, making it there without any problems beside the heat in your loins.");
 
 					//+lust, set Ro'gar phase = 3
-					dynStats("lus", 30);
+					dynStats("lus", 30, "scale", false);
 					flags[kFLAGS.ROGAR_PHASE] = 3;
 					doNext(camp.returnToCampUseOneHour);
 				}
@@ -270,7 +270,7 @@ private function waitForChunkyOrcLoe():void {
 				outputText("  Even your [feet] and fingers curl as you smell the sweat and musk of Ro'gar's closeness, the animalistic scent arousing you.");
 			}
 			else if(player.hasCock()) outputText("  " + SMultiCockDesc() + " stirs to life, making it obvious how much you are enjoying the rub down, then begins to drool with lust.  Through lidded eyes you faintly make out Ro'gar's toothy smirk becoming a hungry grin.");
-			dynStats("lus", 5 + player.lib/20 + player.sens/20);
+			dynStats("lus", 5 + player.lib/20 + player.sens/20, "scale", false);
 			outputText("\n\n");
 		}
 		outputText("\"<i>Clean as a whistle.</i>\"  Ro'gar chuckles as he drops the towel in the bucket with a splash.  His face beams with pride at his work, chest puffing out as he looks you over.  He eyes you up and down again, and your curious look just makes him snicker.  \"<i>Don't meet too many friendly folk 'round here, but it would be nice to have a " + player.mf("feller","lass") + " to talk with.</i>\"  After a few moments of awkward rummaging through his pocket he pulls out a scrunched up piece of paper and hands it to you.  \"<i>This's so you can find me.</i>\"  Ro'gar grins from ear to pointy ear.  You unfold the paper, and see a crudely drawn map that vaguely explains how to get to Ro'gar's hut.  You wonder if making this map was why he took so long.  \"<i>Y'all take care now, y'hear!</i>\" he hollers, turning summarily and walking away, waving over his shoulder at you as he tromps through his natural habitat.  You wander back to your camp, wondering if you should see him again.\n\n");
@@ -337,7 +337,7 @@ private function okayBroLetsHaveAGayCarwash():void {
 	outputText(" parts against" + (player.armorDescript() != "gear" ? " the fabric of your clothes" : " your hand") + ".\n\n");
 	//<Lust increased, slimefeed,
 	player.slimeFeed();
-	dynStats("lus", 40);
+	dynStats("lus", 40, "scale", false);
 	// set Dirt Mc Girt flag = 2 and Ro'gar phase = 2>
 	flags[kFLAGS.ROGAR_DIRT] = 2;
 	flags[kFLAGS.ROGAR_PHASE] = 2;
@@ -430,7 +430,7 @@ public function rogarThirdPhase():void {
 				//Lust increased, set Ro'gar phase = 4 and Ro'roh Raggy = 0 if M or H, set Crying Game to 1 if F or U]
 				flags[kFLAGS.ROGAR_PHASE] = 4;
 				flags[kFLAGS.ROGAR_WARNING] = 0;
-				dynStats("lus", 30);
+				dynStats("lus", 30, "scale", false);
 				doNext(camp.returnToCampUseOneHour);
 			}
 		}
@@ -480,7 +480,7 @@ public function rogarPhaseFour():void {
 			//and give choices
 			//[Get Anal][Give Anal][Frot][Drink with your Bro! (requires 1x Bro Brew)][No Thanks]
 			rogarFuckMenu();
-			dynStats("lus", 10);
+			dynStats("lus", 10, "scale", false);
 		}
 	}
 }
@@ -809,7 +809,7 @@ private function frotWithRogar():void {
 	outputText("The pair of you pant as you lean against the wall.  You manage to pick your head up to smile at the orc and rub Ro'gar's cum-covered chest, smearing your own spooge with your finger; the orc does the same with his cum on your chest.  You dip your cum-coated finger into his mouth as he mirrors the action with you, before falling into a lust-driven make-out session flavored with cum and saliva.  As you break the sloppy kiss, you can feel your slick, cum-covered, flaccid cocks pressing against each other.  With a laugh, you break the embrace.  Pleased grins flash back and forth as you get dressed and ready to leave.  Ro'gar remains nude and waves you off from the doorway, still covered in cum.");
 	//lose 100 lust, gain a little back, slimefeed?
 	player.orgasm();
-	dynStats("lus", 20);
+	dynStats("lus", 20, "scale", false);
 	doNext(camp.returnToCampUseOneHour);
 }
 

@@ -45,7 +45,7 @@ package classes.Scenes.Areas.Mountain
 				outputText("As you are exploring, a rather pungent, peaty smell assails your nostrils. You hear a strange rustling and an off-kilter squishing noise in the distance. As you explore the area you come upon a most grotesque sight. Before you is a cohesive mass of writhing, wriggling worms! While normally solitary creatures, these appear to have coalesced into a monstrous living colony!\n\n");
 				outputText("You have never before seen such a bizarre freak of nature. You see the mass of annelids creep about across your path. It stops and spreads slightly in your direction before halting. The stench of the mass is indescribable and a thick, viscous slime covers each of the countless worms forming the collective.\n\n");
 				outputText("You stop dead in your tracks, wondering what this swarm will do. After a few tense moments, the mass crawls away in a direction opposite of both you and your current path. You breathe a sigh of relief as you are confident that no good could have come from confronting such a zoological travesty.");
-				dynStats("lus", -10);
+				dynStats("lus", -10, "scale", false);
 				player.createStatusEffect(StatusEffects.MetWorms, 0, 0, 0, 0);
 				doNext(camp.returnToCampUseOneHour);
 			}
@@ -231,7 +231,7 @@ package classes.Scenes.Areas.Mountain
 				outputText("While your fluids bathe the [monster name] in your salty lust, the worms take no interest in your foe and scurry off.\n");
 			}
 			awardAchievement("Cum Cannon", kACHIEVEMENTS.COMBAT_CUM_CANNON);
-			dynStats("lus", -20);
+			dynStats("lus", -20, "scale", false);
 			enemyAI();
 		}
 

@@ -729,7 +729,7 @@ public class CeraphScene extends NPCAwareContent
 			outputText("The perverse sexuality fills you with need, but Ceraph only smirks and puts her foot against your cheek, shoving your face into the sex-fluid-filled mud.  She mutters, \"<i>It looks like you managed to save a few brain-cells this time slut.  Because you've been so disobedient you don't get to cum with me.  You can lay here and ache for sex for a few hours I think.</i>\"\n\n");
 
 			outputText("Her whip uncurls itself from around you, but by some sorcerous trick, you're unable to separate your limbs and free yourself.  Ceraph snickers and gives your rump a crack with her whip before sauntering off, leaving you to lie there, growing more and more sexually frustrated.  Eventually you doze off into a sort of half-sleep, dreaming of being dominated as the demon's fluids dry on your face.");
-			dynStats("lus", 200);
+			dynStats("lus", 200, "scale", false);
             if (CoC.instance.inCombat)
                 cleanupAfterCombat();
 			else doNext(camp.returnToCampUseOneHour);
@@ -895,7 +895,7 @@ public class CeraphScene extends NPCAwareContent
 			if (player.cor > 66) outputText("grab your equipment and ");
 			outputText("beat a hasty retreat from the trickster of fetishes.  Her masturbatory moans chase you down the mountainside back towards your camp, spiking the already-burning furnace of your lust.");
 			//(+10 lust + 10lust/piercing)
-			dynStats("lus", (10 + flags[kFLAGS.PC_FETISH] * 10));
+			dynStats("lus", (10 + flags[kFLAGS.PC_FETISH] * 10), "scale", false);
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -961,7 +961,7 @@ public class CeraphScene extends NPCAwareContent
 			player.consumeItem(consumables.BIMBOLQ);
 			player.takePhysDamage(4);
 			flags[kFLAGS.PC_FETISH] = 0;
-			dynStats("lus", -20);
+			dynStats("lus", -20, "scale", false);
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -974,7 +974,7 @@ public class CeraphScene extends NPCAwareContent
 			if (SceneLib.exgartuan.dickPresent()) {
 				outputText("A disembodied voice roars out, \"<i>FUCK NO!  You are NOT giving me to that crazy bitch!</i>\"  Exgartuan doesn't seem to want to run the risk of being taken by Ceraph, and he completely assumes control of your [legs] to make you flee with all due haste.  He taunts, \"<i>Rip off your own little dick, why doncha!  You'd look better with just a pussy anyhow ya dried out old sow!</i>\"\n\n");
 				outputText("Ceraph seems perturbed but doesn't bother to pursue you.");
-				dynStats("lus", -20);
+				dynStats("lus", -20, "scale", false);
 				doNext(camp.returnToCampUseOneHour);
 				return;
 			}
@@ -1285,14 +1285,14 @@ public class CeraphScene extends NPCAwareContent
 					outputText("You feel your tits dragging across the smooth cave floor... a dozen pairs arranged by size, starting with a meager pair of A-cups at the tip of your tail, up to DD cups not far below your waist.  The well-arranged boobs swell up your thighs, hitting F-cups by your hips.  Three more rows of mammoth mammaries hang from your torso, straining your poor back with their obscene weight.  You want to clutch at them, but you have no arms, and every movement is an agony of pleasure, dragging nipples, tit-pussies, and teats beneath you.  Juices run unhindered from your cloaca, your poor, neglected pussy unable to deal with the erotic sensations.");
 					outputText("\n\nIn a panic, you wriggle your tit-tail, propelling yourself around the confines of your small chamber.  The door is locked, as always, but you press your tight, hard nipples against it anyhow.  Mistress has kept you pent-up for so long, trapped away in this little box.  You regret everything!  You'll never doubt her again!  She was so right... nipples can feel so wonderfully, exquisitely pleasureable, but you can't take it any longer.  Every movement, every sinuous slide, they feel so good.  You can cum just from pacing about, but you know you'll just wind up a twisted, curling mass of squirming nipple-flesh, your tail half-tied in knots as it tries to rub each pair of breasts against another. You know because you've done it countless times already.");
 					outputText("\n\nA spiral of pain twists through your pleasure-wounded psyche, and you remember yourself, not the demon-enslaved naga.  Still, conjoined as your minds are, you're able to recognize that one of those many breasts used to be yours.  Ceraph has put it to good use.  The realization jars you to wakefulness, and you're forced to try and go to sleep with the knowledge that somewhere, your breasts are being used to break a naga.  Sleep does not return easily.");
-					dynStats("lus", 5 + player.lib / 5);
+					dynStats("lus", 5 + player.lib / 5, "scale", false);
 				}
 				//Milk Dispenser
 				else if (subChoice == 1) {
 					outputText("You dream about your tits.  Not your current [chest], but the ones from before.  Before Ceraph took them.  You can't see anything.  You can't hear anything.  There's something sucking on your nipples - slowly, incessantly tugging.  Trickles of warm wetness express from your milky tits with every pull.  There's a subtle relief mixed with erotic pleasure, and as the sucking action repeats itself, you come to realize that it's mechanical.  Something is milking your tits!  It never stops or slows.  The milking simply continues.");
 					outputText("\n\nSuddenly, from out of nowhere, you hear a voice in the silence, \"<i>Well, I can't thank [name] enough for these.  No shortage of milk here!</i>\"  Then, there is brightness.  The appearance of light reveals a strange, disembodied view of a demon standing next to a tank. It's Ceraph!  She holds a cup of coffee, and as she pulls a lever, creamy breast milk flows into the mocha-colored beverage, lightening it significantly. Your tits, hooked up to some kind of odd machinery, tremble and shake as fluids are fed into them by transparent cables.  The speed of the milking increases, gallons gushing from your tender teats in mere seconds.  Faster and faster the liquids flow, a veritable waterfall of lactic cream.");
 					outputText("\n\nErotic energy sizzles through your nipples as the milking goes faster and faster, the pleasure unbearable.  Sadly, just when you feel on the cusp of orgasm, the machine shuts down, and the vision fades.  There will be no relief for you tonight.");
-					dynStats("lus", 5 + player.lib / 5);
+					dynStats("lus", 5 + player.lib / 5, "scale", false);
 				}
 				//Tit Volleyball
 				else {
@@ -1311,7 +1311,7 @@ public class CeraphScene extends NPCAwareContent
 					outputText("\n\nAs Ceraph groans, the incubi high-five each other, and your prone breast slowly dribbles milk into the sand, the dream fades, and you wake up.  You stare blankly for a moment, trying to piece together what just happened");
 					if (silly()) outputText(" and what possible ramifications it has for your mental health");
 					outputText(", until you dismiss it as corruption and toss over, entering a peaceful, dreamless sleep.");
-					dynStats("lus", 5 + player.lib / 5);
+					dynStats("lus", 5 + player.lib / 5, "scale", false);
 				}
 			}
 			//COCKUUUU

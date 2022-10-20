@@ -53,7 +53,7 @@ import classes.internals.*;
 			var lustDmg:Number = player.lustVuln * ((this.inte / 10) + rand(player.lib + player.cor) / 5);
 			lustDmg *= 2;
 			lustDmg = Math.round(lustDmg);
-			player.dynStats("lus", lustDmg, "scale", false);
+			player.takeLustDamage(lustDmg, true);
 		}
 		
 		public function KitsuneCastsComet():void {

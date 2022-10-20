@@ -71,7 +71,7 @@ public class ValaScene extends BaseContent implements SaveableState
 
 		//[Sex]
 		public function ValaGetsSexed():void {
-			if (!recalling) dynStats("lus", 33);
+			if (!recalling) dynStats("lus", 33, "scale", false);
             clearOutput();
             sceneHunter.selectGender(curry(sceneHunter.callFitNofit, dickF, 60), vagF);
 
@@ -242,7 +242,7 @@ public class ValaScene extends BaseContent implements SaveableState
 		//Vala
 		public function useVala():void {
 			clearOutput();
-			if (!recalling) dynStats("lus", 60);
+			if (!recalling) dynStats("lus", 60, "scale", false);
             outputText("You shrug. The girl is so hopelessly lost in pleasure that you doubt she could ever return to the real world anyway. There doesn't seem to be any more demons around, and it'd be a good idea to relieve the tension that's been building in your gut since you stepped into this wretched place. Besides, you chuckle as you strip off your [armor], you've always wondered what it'd be like to take a fairy.\n\n");
 			sceneHunter.selectGender(dickF, vagF, null, hermF);
 			//==================================================
@@ -303,7 +303,7 @@ public class ValaScene extends BaseContent implements SaveableState
 		//[Wake]
 		public function wakeValaUpBeforeYouGoGo():void {
 			clearOutput();
-			if (!recalling) dynStats("lus", 999);
+			if (!recalling) dynStats("lus", 999, "scale", false);
 			sceneHunter.selectGender(dickF, vagF, null, hermF);
 			//=====================================================
 			function dickF():void {

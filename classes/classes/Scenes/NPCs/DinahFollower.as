@@ -585,14 +585,14 @@ public class DinahFollower extends NPCAwareContent
 			outputText("You offer Dinah a bottle of purified succubus milk and tell her that you'd like her to make her bust bigger.");
 			if (flags[kFLAGS.DINAH_CUP_SIZE] < 28) {
 				outputText("\n\n\"<i>Alright, if you say so.</i>\"  Dinah lifts the bottle to her mouth, and drinks the substance down.  She then drops the empty bottle, allowing it to smash on the ground, clutching her breasts and moaning ecstatically as they visibly swell, her clothes growing tighter as they do. When they finish, she squeezes them with glee. \"<i>Mmm... That feels nice. Did you want something else?</i>\"\n\n");
-				dynStats("lus", 10);
+				dynStats("lus", 10, "scale", false);
 				player.consumeItem(consumables.P_S_MLK);
 				flags[kFLAGS.DINAH_CUP_SIZE]++;
 			}
 			else {
 				outputText("She looks thoughtful for a moment, then shakes her head reluctantly. \"<i>I'm sorry, but I think I've got big enough breasts as it is.</i>\" She then smirks, and playfully jiggles her abundant cleavage. \"<i>Don't you agree?</i>\" she teases.\n\n");
 				outputText("Swallowing hard, you have to agree, which makes Dinah laugh.");
-				dynStats("lus", 5);
+				dynStats("lus", 5, "scale", false);
 			}
 			doNext(giveDinahItem);
 		}
@@ -602,7 +602,7 @@ public class DinahFollower extends NPCAwareContent
 			outputText("You hold out a brown egg, telling her that it will make her butt grow.\n\n");
 			if (flags[kFLAGS.DINAH_ASS_HIPS_SIZE] < 35) {
 				outputText("\"<i>So, you want me to have a little more junk in the trunk, huh?</i>\" She giggles. \"<i>Well, I guess a little padding down there wouldn't hurt...</i>\" She takes the egg from you, her teeth effortlessly biting off the top, whereupon she sucks down the contents in a practiced gulp. Crushing the shell in her hand, her hands then press themselves to her butt as she spins around so that it faces you, trying to look over her shoulder as it visibly swells, straining her pants. She pats it a few times, then shakes her head. \"<i>I'm going to have to go and let these pants out a little now.</i>\" She apologizes, and then walks away.\n\n");
-				dynStats("lus", 10);
+				dynStats("lus", 10, "scale", false);
 				if (player.hasItem(consumables.BROWNEG)) {
 					player.consumeItem(consumables.BROWNEG);
 					flags[kFLAGS.DINAH_ASS_HIPS_SIZE] += 1+rand(2);
@@ -622,7 +622,7 @@ public class DinahFollower extends NPCAwareContent
 			outputText("You hold out a purple egg, telling her that it will make her hips grow.\n\n");
 			if (flags[kFLAGS.DINAH_HIPS_ASS_SIZE] < 20) {
 				outputText("She looks at it thoughtfully. \"<i>Wider hips...? Well, if you really want, I guess I can try it.</i>\" She takes the egg from you, her teeth effortlessly biting off the top, whereupon she sucks down the contents in a practiced gulp. Crushing the shell in her hand, she almost loses her balance as her hips suddenly jut wider, the growth happening much faster than she expected. \"<i>I'm going to have to get used to walking like this, now.</i>\" She mutters, and then she awkwardly walks away.\n\n");
-				dynStats("lus", 10);
+				dynStats("lus", 10, "scale", false);
 				if (player.hasItem(consumables.PURPLEG)) {
 					player.consumeItem(consumables.PURPLEG);
 					flags[kFLAGS.DINAH_HIPS_ASS_SIZE] += 1+rand(2);

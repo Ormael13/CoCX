@@ -60,7 +60,7 @@ use namespace CoC;
 			else outputText("rushes towards you face first and you back away feeling for two new pinpricks that start heating");
 			outputText(" up. Were you poisoned just now?! This might be a very bad thing.\n\n");
 			player.takePhysDamage(this.str, true);
-			player.dynStats("lus", 60);
+			player.takeLustDamage(60, true);
 			if (!player.hasPerk(PerkLib.Insanity) || !player.hasStatusEffect(StatusEffects.AlterBindScroll3)) {
 				player.buff("Poison").addStats({"tou":-20, "int":-20, "wis":-20}).withText("Poisoned!").forHours(24);
 				showStatDown( 'tou' );

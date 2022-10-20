@@ -109,7 +109,7 @@ public class Goblin extends Monster
 			if (this is GoblinWarrior) lustDmg *= 1.6;
 			if (this is GoblinShaman) lustDmg *= 1.6;
 			if (this is Priscilla) lustDmg *= 2;
-			player.dynStats("lus", lustDmg);
+			player.takeLustDamage(lustDmg, true);
 			outputText("  The display distracts you long enough to prevent you from taking advantage of her awkward pose, leaving you more than a little flushed.\n\n");
 		}
 		

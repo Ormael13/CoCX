@@ -569,7 +569,7 @@ import classes.StatusEffects;
 			outputText("\"<i>[name]! Hang on!</i>\"\n\n");
 			outputText("She quickly grabs you and shoves you down onto one of her leaking nipples. The restorative milk squirts into your mouth, giving you a burst of energy and healing some of your wounds.\n\n");
 			HPChange(Math.round(player.maxHP() * .25), true);
-            dynStats("lus", 5);
+            dynStats("lus", 5, "scale", false);
             fatigue(-50);
 		}
 		

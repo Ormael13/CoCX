@@ -98,7 +98,7 @@ use namespace CoC;
 		private function minotaurCumPress():void
 		{
 			outputText("The minotaur lord tugs on the end of the chain, pulling you toward him, making you spin round and round so many times that you're dazed and dizzy.  You can feel the links coming free of your " + player.skinFurScales() + ", and the closer you get, the more freedom of movement you have.  Yet, the dizziness makes it hard to do anything other than stumble.  You splat into something wet, sticky, and spongy.  You gasp, breathing a heavy gasp of minotaur musk that makes your head spin in a whole different way.  You pry yourself away from the sweaty, sperm-soaked nuts you landed on and look up, admiring the towering horse-cock with its three-rings of pre-puce along its length.  A droplet of pre-cum as fat as your head smacks into your face, staggering you back and dulling your senses with narcotic lust.");
-			player.dynStats("lus", 22 + player.lib / 8 + player.effectiveSensitivity() / 8);
+			player.takeLustDamage(22 + player.lib / 8 + player.effectiveSensitivity() / 8, true);
 			outputText("You tumble to your knees a few feet away, compulsively licking it up.  Once it's gone, ");
 			if (player.lust >= player.maxOverLust()) outputText("you rise up, horny and hungry for more.");
 			else {
@@ -127,13 +127,13 @@ use namespace CoC;
 				outputText(" slapping into your face before you can react!  You wipe the slick snot-like stuff out of your eyes and nose, ");
 				if (player.lust >= 70) outputText("swallowing it into your mouth without thinking.  You greedily guzzle the potent, narcotic aphrodisiac down, even going so far as to lick it from each of your fingers in turn, sucking every drop into your waiting gullet.");
 				else outputText("feeling your heart hammer lustily.");
-				player.dynStats("lus", 15 + player.lib / 8 + player.effectiveSensitivity() / 8);
+				player.takeLustDamage(15 + player.lib / 8 + player.effectiveSensitivity() / 8, true);
 			}
 			else {
 				outputText(" right past your head, but the smell alone is enough to make you weak at the knees.");
 				if (flags[kFLAGS.URTA_QUEST_STATUS] == 0.75) outputText("  The animalistic scent of it seems to get inside you, the musky aroma burning a path of liquid heat to your groin, stiffening your horse-cock to absurd degrees.");
 				else outputText("  The animalistic scent of it seems to get inside you, the musky aroma burning a path of liquid heat to your groin.");
-				player.dynStats("lus", 11 + player.lib / 10);
+				player.takeLustDamage(11 + player.lib / 10, true);
 			}
 			//(1)
 			if (player.lust <= 75) outputText("  You shiver with need, wanting nothing more than to bury your face under that loincloth and slurp out every drop of goopey goodness.");

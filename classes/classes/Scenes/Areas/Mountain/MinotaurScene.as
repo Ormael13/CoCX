@@ -328,11 +328,11 @@ private function bumRapeaMinotaur():void {
 	}
 	if(player.cumQ() > 250 && player.cumQ() <= 500) {
 		outputText("With long deep strokes you bury your " + cockDescript(x) + " inside him, groaning as your own pressure releases, violent muscular contractions forcing out long blasts of seed.   By the second or third squeeze you can feel the slick hotness begin to fill back around your still-orgasming cock.  A few more pleasurable squeezes later you feel cum squirt out of the minotaur with every pulse of your manhood.  The beast twitches beneath you, gripping you like a vice as his own orgasm is unleashed.  His ass seems to milk your " + cockDescript(x) + " of any remaining seed as he squirms, explosively orgasming against the ground. You feel the stuff splatter against your legs as his " + monster.ballsDescriptLight() + " empty, the strong scent making you swoon dizzily, euphoric with the minotaur's drug-like cum-musk and your own orgasm.\n\nEventually you pull free, giggling in pleasure as your victim falls unconscious in a small lake of his own spooge. ");
-		dynStats("lus", 10+player.lib/10);
+		dynStats("lus", 10+player.lib/10, "scale", false);
 	}
 	if(player.cumQ() > 500) {
 		outputText("With long deep strokes you bury your " + cockDescript(x) + " inside him, your body trembling as the building pressure of your orgasm peaks, at last allowing you erupt a thick river of jism inside your victim.  You feel it back-flow around your " + cockDescript(x) + " with the first spurt, lubricating the passage as your first blast finally tapers off.  A moment later you begin the next, filling his rectum as your cum begins to drool out and down his thighs and " + monster.ballsDescriptLight() + ".  Each successive blast makes more and more of your spunk squirt free from his backside, distending his belly slightly from the quantity and pressure.  You squeeze your eyes closed from the pleasure, tongue hanging out of your mouth in a dopey, pleasure-filled haze, as you feel him tense underneath you.  His ass clamps down hard on your " + cockDescript(x) + " squeezing out an even thicker flow from you, even as you feel his balls tremble with the beginnings of his own orgasm.  With an explosive splattering sound, you hear him begin cumming, his " + monster.ballsDescriptLight() + " shrinking as they empty out on the ground, splattering everywhere, and coating the minotaur and your bottom half with seed.  The scent of the minotaur's musk seems to triple in the air, making it difficult to stand, but easier to keep cumming, distending the minotaur's belly until he looks very pregnant.\n\nWith an ecstatic sigh you pull free, stumbling away as the minotaur passes out in a lake of his own spooge.  You attempt to clean yourself up, licking your fingers and swooning from the heavenly taste as it fills your mind with a fog of lust.");
-		dynStats("lus", 15+player.lib/7);
+		dynStats("lus", 15+player.lib/7, "scale", false);
 	}
 	player.sexReward("no", "Dick");
 	cleanupAfterCombat();
@@ -434,20 +434,20 @@ public function minoPheromones():void {
 		outputText("slapping into your face before you can react!  You wipe the slick snot-like stuff out of your eyes and nose, ");
 		if(player.lust > player.maxLust() * 0.75) {
 			outputText("swallowing it into your mouth without thinking.  ");
-			dynStats("lus", 10 + player.lib/10);
+			dynStats("lus", 10 + player.lib/10, "scale", false);
 		}
 		else {
 			outputText("feeling your heart beat with desire as your tongue licks the residue from your lips.  ");
-			dynStats("lus", 5 + player.lib/20);
+			dynStats("lus", 5 + player.lib/20, "scale", false);
 		}
 	}
 	else outputText("right past your head.  ");
 	outputText("The animalistic scent of it seems to get inside you, the musky aroma burning a path of liquid heat to your groin.");
-	dynStats("lus", 10 + player.lib/20);
+	dynStats("lus", 10 + player.lib/20, "scale", false);
 	if(player.hasPerk(PerkLib.MinotaurCumAddict) || flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 2) {
 		if(rand(2) == 0) outputText("\n<b>You shiver with need, wanting nothing more than to bury your face under that loincloth and slurp out every drop of goopey goodness.</b>");
 		else outputText("\n<b>You groan and lick your lips over and over, craving the taste of him in your mouth.</b>");
-		dynStats("lus", 5+rand(5));
+		dynStats("lus", 5+rand(5), "scale", false);
 	}
 	//YOU LOSE!
 	if (player.lust >= player.maxOverLust())
@@ -471,7 +471,7 @@ public function minoPheromones():void {
 		clearOutput();
 		spriteSelect(SpriteDb.s_minotaur);
 		outputText("As you take the winding path up through the rocky trail, you come upon the opening to a cave. Peering inside, the stench of an overpowering musk washes over you. The primal scent excites you, causing you to become aroused almost immediately.  Not thinking as clearly as you normally might, you slowly sneak your way into the cave. Signs of life litter the cave floor.\n\n");
-		dynStats("lus", 10 + player.lib / 5);
+		dynStats("lus", 10 + player.lib / 5, "scale", false);
 
 		//Detect minotaur coming
 		if (rand(30) + player.inte / 5 > 18) {
@@ -670,7 +670,7 @@ private function takeMinoCumDirectly():void {
 	//(-80 lust, then + 25, +(1-5 sensitivity based on current level), +corruption)
 	dynStats("sen", 1, "lus", -80, "cor", 1);
 	//A bit of post happy arousal
-	dynStats("lus", 25);
+	dynStats("lus", 25, "scale", false);
 	//bonus sensitivity if unsensitive.
 	if(player.sens < 80) dynStats("sen", 1);
 	if(player.sens < 60) dynStats("sen", 1);
@@ -748,10 +748,10 @@ public function minoCumUpdate():Boolean {
 		}
 		//3 lust an hour if in withdrawl, 1 if in need
 		if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 3 && flags[kFLAGS.TIME_SINCE_LAST_CONSUMED_MINOTAUR_CUM] >= 48) {
-			dynStats("lus", 2);
+			dynStats("lus", 2, "scale", false);
 		}
 		if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 2 && flags[kFLAGS.TIME_SINCE_LAST_CONSUMED_MINOTAUR_CUM] >= 48) {
-			dynStats("lus", 1);
+			dynStats("lus", 1, "scale", false);
 		}
 	}
 
@@ -785,7 +785,7 @@ public function minoAddictionFuck():void {
 	outputText("He tosses aside the fruit, forgotten as his veiny shaft forces aside his loincloth, proud and dripping.   You NEED him, and you drop to your knees and masturbate, knowing that soon he'll be filling you full of what you need.   The blatant sexual show does the trick, and you shudder as the drooling horse-cock gets closer and closer to you.   At the last moment the minotaur picks you up, and tosses you backwards, into a cave.  Your hope sinks, but then he starts to advance upon you again, and you know the time for waiting is over...");
 
 	//(Max lust, load minotaur dicks & balls into monster stats and throw to rape-scenes.)
-	dynStats("lus", 3000);
+	dynStats("lus", 3000, "scale", false);
 	monster = new Minotaur();
 	doNext(SceneLib.combat.endLustLoss);
 }
@@ -1301,7 +1301,7 @@ private function getMinoHawtDawged():void {
 	if(player.tailType > Tail.NONE) outputText("your tail, ");
 	outputText("your back, and even your hair with gushes of his sticky, musk-smothered seed. Your entire backside flushes with the heat of his orgasm as it starts to die down, a few last drools of the hot stuff spilling out of his cock, and he withdraws from your butt, leaving you one last gift of a single spurt lodged between your fat cheeks and slowly dripping out. The Minotaur's cum seems to make your head swim, and everything starts to go foggy...");
 	//{Loss message 'when you wake up you'll be missing gems' blah blah}
-	dynStats("lus", 15+rand(player.lib/2));
+	dynStats("lus", 15+rand(player.lib/2), "scale", false);
 	player.sexReward("cum","Anal");
 	if (inDungeon)
         rapeEndingEL();

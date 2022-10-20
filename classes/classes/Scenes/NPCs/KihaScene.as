@@ -468,7 +468,7 @@ private function tsundereMasturbationChristmasCarol():void {
 
 	outputText("\"<i>I... hate you... </i>\" she whispers, before turning in for a deep slumber.  You watch her soft face as she snores, graceful as a pig, before walking back to camp.");
 	player.sexReward("no", "Default");
-	if(!player.hasCock()) dynStats("lus", 120);
+	if(!player.hasCock()) dynStats("lus", 120, "scale", false);
 	cleanupAfterCombat();
 }
 //*Victory Tail-dildo, for girls - Fencrafted for maximum pomf (Zed)

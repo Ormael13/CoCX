@@ -357,7 +357,7 @@ public class HellHoundScene extends BaseContent
 			if (player.cor < 20 + player.corruptionTolerance) {
 				sceneHunter.print("Check failed: mid-to-high corruption.");
 				outputText("The corrupt juice burns on your tongue, far worse than the hottest spicy dish you have ever had. You instantly back off from his member, cursing this abomination of nature. Leaving the submissive creature as it is, you head back for your camp.");
-				dynStats("lus", -99);
+				dynStats("lus", -99, "scale", false);
 				cleanupAfterCombat();
 				return;
 			}
@@ -371,7 +371,7 @@ public class HellHoundScene extends BaseContent
 					sceneHunter.print("Check failed: high corruption or Masochist perk.");
 					outputText("As you bottom out on his sheath, you lean forward to engulf more of his hot cocks inside you. The hellhound enjoys the treatment you are giving him. As a result, the flames along his eyes and snout flicker back to life. Just as your hardening clit presses against the top of his ballsack, the hellhound's natural flames lick across your sex. The magical fire fills you with arousal, but also applies intense pain to your most sensitive spot. You practically jump off the corrupt creature, pulling the dicks from your holes in great speed. Nearly blacking out from the sensations, you cover your burnt button, not daring to touch it. You curse the creature, loudly swearing at the hellhound. In your fury, you barely notice that he looks disappointed and maybe even somewhat sorry.");
 					player.takeFireDamage(20);
-					dynStats("lus", -99);
+					dynStats("lus", -99, "scale", false);
 					//--> deals 20dmg (lowering hp to a minimum of 1), introduces inability to masturbate
 					cleanupAfterCombat();
 					return;

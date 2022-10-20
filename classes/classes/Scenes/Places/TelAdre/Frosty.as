@@ -382,7 +382,7 @@ public class Frosty extends TelAdreAbstractContent {
         outputText("\n\nFrosty proceeds to try and have the minotaur sign the papers as you go out back into the city.");
         //[Player is back at camp]
         frostyPoints(-1);
-        dynStats("lus", 33);
+        dynStats("lus", 33, "scale", false);
         player.sexReward("vaginalFluids", "Lips", false);
         doNext(camp.returnToCampUseOneHour);
     }
@@ -538,7 +538,7 @@ public class Frosty extends TelAdreAbstractContent {
             + "\"<i>Thank you... *sob*... thank you, sweet, merciful Marae...</i>\" She weakly gets on her feet and gently walks her way back to the stand, her steps staggered as she tries to walk in a way that doesn’t hurt too much."
             + "\n\n"
             + "\"<i>Hey! Nice ass, honey!</i>\" A passing by red mouse girl sees Frosty’s red and checkered ass and gives the bottom a nice hard clawed hand slap on the toosh. Frosty yelps like a bitch and zooms into the bakery, leaving the Mouse-girl in the wake of a pink whoosh. You smirk at the confused mouse-girl whose fur is now wind blown to one side. Maybe Frosty has some creams or potions in the bakery to heal what you just did to her.");
-        dynStats("lus", 20);
+        dynStats("lus", 20, "scale", false);
         ++flags[kFLAGS.FROSTY_TIMES_SPANKED];
         outputText("\n\n");
         doNext(camp.returnToCampUseOneHour);

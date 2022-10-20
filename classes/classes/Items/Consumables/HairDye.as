@@ -122,7 +122,7 @@ public class HairDye extends Consumable
 			outputText("You now have " +bm.color+" "+bm.name+"!");
 			if (game.player.lust > 50) {
 				outputText("\n\nThe cool water calms your urges somewhat, letting you think more clearly.");
-				game.player.dynStats("lus", -15);
+				game.player.dynStats("lus", -15, "scale", false);
 			}
 			if (!itemReq.isNothing && itemCnt > 0) player.consumeItem(itemReq, itemCnt);
 			CoC.instance.mainViewManager.updateCharviewIfNeeded();

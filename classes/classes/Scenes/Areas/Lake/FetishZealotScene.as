@@ -253,7 +253,7 @@ public class FetishZealotScene extends AbstractLakeContent
 					outputText("\n\nYou find that your [armor] are back to normal, and there is no sign of the strange clothes you were wearing before.");
 				}
 				outputText("  The ordeal has also left you with a slightly dulled mind, and some of the desire you felt still lingers.");
-				dynStats("lus", player.cor / 20 + player.lib / 10);
+				dynStats("lus", player.cor / 20 + player.lib / 10, "scale", false);
 				cleanupAfterCombat();
 			}
 		}

@@ -37,12 +37,12 @@ public function encounterFaerie():void {
 				outputText("\n\nYou grasp the dizzy faerie out of the air with ease, smiling as you feel the flood of wetness between her thighs moistening your hand.  She wriggles and moans, \"<i>No, not again!  I want another cum-bath so bad... but I'm losing myself to it.  It's hard to keep flowers pollinated when you're jilling off half the day and waiting for a nice hard cock to wander your way...</i>\"\n\nShe wants to get you off almost as you do.  Do you make her service you again?");
 			}
 			else outputText("\n\nYou lazily make a grab for her and easily snatch her out of the air.  Her body is sticky with a mix of desire and cum from your last encounter.  You can feel her humping against your pinky while she begs, \"<i>Come on, let me crawl into your [armor] and wrap myself around your shaft.  I promise I'll only drink a little pre-cum this time, just enough to let me get off.  I'll be a good faerie slut, just let me get you off!</i>\"\n\nDo you let the faerie get you off?");
-			dynStats("lus", player.lib/10+2);
+			dynStats("lus", player.lib/10+2, "scale", false);
 			doYesNo(faerieCaptureHJ, letFaerieGo);
 			if(player.statusEffectv1(StatusEffects.FaerieFucked) < 5) addButton(2, "Never", disableFaerieEncounterForGood);
 			return;
 		}
-		dynStats("lus", player.lib/10+2);
+		dynStats("lus", player.lib/10+2, "scale", false);
 		if(player.lust >= 90) {
 			outputText("\n\nYou groan miserably with frustration. Desperate for stimulation, you sink to your knees and start jacking off, the faerie's visage still fresh in your mind. You catch a fleeting glimpse of yourself tightly gripping the faerie's legs in each of your fists, dragging her toward ");
 			if(player.cockTotal() == 1) outputText("your dick");
@@ -209,7 +209,7 @@ private function faerieDoNothing():void {
 	}
 	else {
 		outputText("The faerie flies close to your ear and speaks in a volume that would be a whisper from another human, \"You've got some sexy parts girl, but you're too big for me. I hope you find someone to get you off, so I can watch.\" Then she flies in front of you, cutely kisses the bridge of your nose, and flies off.");
-		dynStats("lus", 5);
+		dynStats("lus", 5, "scale", false);
 		doNext(camp.returnToCampUseOneHour);
 	}
 }

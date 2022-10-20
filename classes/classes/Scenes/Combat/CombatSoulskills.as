@@ -577,7 +577,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
 			var damage1:Number = damage;
 			damage = combat.FireTypeDamageBonus(damage);
-			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1);
+			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1, "scale", false);
 			damage += damage1;
 			damage *= 1.1;
 		}
@@ -690,7 +690,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
 			damage = combat.FireTypeDamageBonus(damage);
-			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1);
+			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1, "scale", false);
 			damage *= 1.1;
 		}
 		//soulskill mod effect
@@ -993,7 +993,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
 			damage = combat.FireTypeDamageBonus(damage);
-			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1);
+			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1, "scale", false);
 			damage *= 1.1;
 		}
 		damage *= soulskillMod();
@@ -1153,7 +1153,7 @@ public class CombatSoulskills extends BaseCombatContent {
 				doFireDamage(damage, true, true);
 				damage *= 2;
 			}
-			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1);
+			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1, "scale", false);
 			damage = Math.round(damage * 1.1);
 		}
 		else {
@@ -1214,7 +1214,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
 			damage = combat.FireTypeDamageBonus(damage);
-			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1);
+			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1, "scale", false);
 			damage *= 1.1;
 		}
 		//other bonuses

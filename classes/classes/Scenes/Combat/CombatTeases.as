@@ -1519,7 +1519,7 @@ public class CombatTeases extends BaseCombatContent {
 			if (flags[kFLAGS.PC_FETISH] >= 1 && !SceneLib.urtaQuest.isUrta()) {
 				if (player.lust < (player.maxLust() * 0.75)) outputText("\nFlaunting your body in such a way gets you a little hot and bothered.");
 				else outputText("\nIf you keep exposing yourself you're going to get too horny to fight back.  This exhibitionism fetish makes it hard to resist just stripping naked and giving up.");
-				if (!justText) dynStats("lus", 7 + rand(6));
+				if (!justText) player.takeLustDamage(7 + rand(6), true);
 			}
 			// Similar to fetish check, only add XP if the player IS the player...
 			if (!justText && !SceneLib.urtaQuest.isUrta()) player.SexXP(1 + bonusExpAfterSuccesfullTease());

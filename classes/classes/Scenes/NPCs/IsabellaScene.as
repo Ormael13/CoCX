@@ -197,7 +197,7 @@ public function isabellaGreeting():void {
 	else if(flags[kFLAGS.ISABELLA_MET_SHORT_PC] > 0 && flags[kFLAGS.ISABELLA_OKAY_WITH_TALL_FOLKS] == 0 && player.tallness > 78) {
 		outputText("You easily brush through the tall grasses and stride into Isabella the cow-girl's camp.  It looks like she was sitting in her chair mending a blanket when you arrived, and you take a moment to watch her hunched posture squeeze her breasts tightly against the gauzy silk top she's so fond of wearing.  The outline of a single areola is clearly visible through the diaphanous material, but most striking is that each areola has four VERY prominent nipple-tips.  She looks at you, first in fright, and then in embarrassment as she recognizes you AND realizes what you were doing in a single instant.\n\n");
 		//(+lust!)
-		dynStats("lus", 10+rand(10));
+		dynStats("lus", 10+rand(10), "scale", false);
 		outputText("Isabella complains, \"<i>Vere you just checking me out?  Vell I must confess, I liked you better ven you were shorter.  Maybe if you ask nicely I might give you a peak and a drink.  That vould be nice, nein?\n\n");
         isabellaFollowerScene.isabellaAffection(-5); //unhappy, but she knows you already
 		flags[kFLAGS.ISABELLA_OKAY_WITH_TALL_FOLKS]++;
@@ -652,7 +652,7 @@ public function volunteerToSlurpCowCunt():void {
 		outputText("Isabella sighs contentedly and says, \"<i>Thank you, [name].  You're a wonderful pussy licker.  Perhaps one of these times I will keep you for myself, huh?  I kid, I kid.</i>\"  She blushes heavily, as if realizing what she just said and turns to busy herself with cleaning up.  You get dressed, having some difficulty hiding the lust the act inspired in you.\n\n");
 	}
 	//(+lots of lust)
-	dynStats("lus", (10+player.lib/10));
+	dynStats("lus", (10+player.lib/10), "scale", false);
 	player.slimeFeed();
 	if(player.hasCock()) {
 		outputText("The cow-girl suddenly glances back at your crotch ");

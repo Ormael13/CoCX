@@ -44,7 +44,7 @@ public class YvonneArmorShop extends Shop {
         spriteSelect(SpriteDb.s_yvonne);
         clearOutput();
         display("yvonneFlirt/intro");
-        dynStats("lus", (10 + player.lib / 10));
+        dynStats("lus", (10 + player.lib / 10), "scale", false);
         if (player.cockTotal() == 0 || ((player.tallness > 65 ||player.cockThatFits(75) == -1)&&!flags[kFLAGS.LOW_STANDARDS_FOR_ALL]) ) {
             display("yvonneFlirt/noGo");
             doNext(inside);

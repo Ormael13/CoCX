@@ -17,7 +17,7 @@ public class HeroslayerOmnibus extends Monster
 			outputText("The demoness blinks her eyes closed and knits her eyebrows in concentration.  The red orbs open wide and she smiles, licking her lips.   The air around her grows warmer, and muskier, as if her presence has saturated it with lust.");
 			if (hasStatusEffect(StatusEffects.LustAura)) {
 				outputText("  Your eyes cross with unexpected feelings as the taste of desire in the air worms its way into you.  The intense aura quickly subsides, but it's already done its job.");
-				player.dynStats("lus", (8 + int(player.lib / 20 + player.cor / 25)));
+				player.takeLustDamage((8 + int(player.lib / 20 + player.cor / 25)), true);
 			}
 			else {
 				createStatusEffect(StatusEffects.LustAura, 0, 0, 0, 0);
@@ -110,7 +110,7 @@ public class HeroslayerOmnibus extends Monster
 					//(Direct Hit)
 					else {
 						outputText("She throws her hands out, palms facing you, and a rush of purple flame washes towards you.  Too busy with your own attack to effectively dodge, you're hit full on by the purple fire.  Incredibly, it doesn't burn.  The fire actually seems to flow inside you, disappearing into your skin.  You stumble, confused for a second, but then it hits you.  Every inch of your body is buzzing with pleasure, practically squirming and convulsing with sexual delight.  You collapse, twitching and heaving, feeling the constant sensation of sexual release running from your head to your [feet].");
-						player.dynStats("lus", 1000);
+						player.takeLustDamage(1000, true);
 						if (player.lust >= player.maxOverLust()) outputText("  Too horny and pleasured to resist, you lie down and tremble, occasionally rubbing yourself to enhance the bliss.");
 					}
 				}

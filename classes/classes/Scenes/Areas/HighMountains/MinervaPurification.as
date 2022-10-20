@@ -393,7 +393,7 @@ public class MinervaPurification extends BaseContent
 			if (player.gender == 1) {
 				outputText("You don't have to think very hard to know your answer. With such a voluptuous woman asking you to be the father of her children you couldn't possibly say no. You slide your arms around her, your hands reaching back and grabbing her round juicy rump and squeezing her, drawing a surprised gasp from Minerva. Her wide brood-motherly hips feel so enticing against yours that your [cock] starts to swell. Grinning devilishly you tell her you can't wait to get started siring a new race with her right away, whispering to her that you think she would make a very sexy mom.");
 				outputText("\n\nMinerva can't help but grin and giggle before pulling you down onto the soft moss by the spring and welcoming you into your warm embrace.");
-				dynStats("lus", 20);
+				dynStats("lus", 20, "scale", false);
 				pureMinervaSexMenu();
 				return;
 			}
@@ -401,11 +401,11 @@ public class MinervaPurification extends BaseContent
 			else if (player.gender == 2) {
 				if (!player.isPregnant()) {
 					outputText("You don't have to think very hard to know your answer. With such a voluptuous and, judging from what she is packing between her legs, potently virile herm asking you to be the mother of her children, you couldn't possibly say no. You slide your arms down and give her bulging package a playful squeeze, only to feel it start to harden right away under your fingers. At your touch Minerva grins and lets out a long coo, before kissing you deeply and pushing you down onto the soft moss covered ground \"<i>I'm so glad you want to start right now.</i>\" she says as she pushes her hips against you, pressing the heavy growing bulge of her erection against your body, letting you know just how happy she is.");
-					dynStats("lus", 20);
+					dynStats("lus", 20, "scale", false);
 				}
 				else {
 					outputText("You don't have to think very hard to know your answer. With such a voluptuous and, judging from what she is packing between her legs, potently virile herm asking you to be the mother of her children, you couldn't possibly say no. You slide your arms down and give her bulging package a playful squeeze only feel it start to harden right away under your fingers. At your touch Minerva grins and lets out a long coo before kissing you deeply. Pulling back after the kiss she smiles at you and touches your belly. \"<i>I'm so glad you're eager, my love, but I'm afraid we must wait until you have birthed your current child, though.... I'd still be more than happy to make love to you.</i>\" she gives you a naughty grin and starts pushing you gently down onto the soft moss that covers the ground. The golden siren presses her hips against you, grinding the heavy growing bulge of her erection against your body, letting you know just how happy she is.");
-					dynStats("lus", 10);
+					dynStats("lus", 10, "scale", false);
 				}
 				pureMinervaSexMenu();
 				return;
@@ -419,7 +419,7 @@ public class MinervaPurification extends BaseContent
 				else {
 					outputText("\n\n\"<i>Well... it would be kind of hard for me to get you pregnant when you're renting out your womb already, wouldn't it, hun?</i>\" Minerva jokes. \"<i>Though, as soon as it's empty, I would be honored if you let me give you another child.</i>\" she adds before bringing your hand to her tight, toned tummy. \"<i>But, until then... how about you sire a beautiful baby in mine?</i>\" she finishes before pulling you down onto the soft moss that covers the ground and welcoming you into her warm, tender embrace.");
 				}
-				dynStats("lus", 20);
+				dynStats("lus", 20, "scale", false);
 				pureMinervaSexMenu();
 				return;
 			}
@@ -438,7 +438,7 @@ public class MinervaPurification extends BaseContent
 			else if (player.gender == 3) outputText("her warm hand reaches down to grab the bulge in your [armor], squeezing your maleness teasingly. At the same time she guides your hand between her legs where you can clearly feel her surprisingly hot nethers pressing against your fingers.");
 			else outputText("her warm hand reaches down and slips into your [armor] only to feel nothing. \"<i>Wait, you don't have anything to help either of us with having a child,</i>\" she says. She adds \"<i>Come back when you've got a gender, okay?</i>\"");
 			outputText("\n\nYou gently pull her hand away from your groin and give her a lingering kiss and a farewell before you leave the tower to make your way back to camp.");
-			dynStats("lus", 30);
+			dynStats("lus", 30, "scale", false);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -532,7 +532,7 @@ public class MinervaPurification extends BaseContent
 			outputText("\n\nLooking her over as she bathes, your eyes dart over her new, very curvy, and very wet from. Her gold and white skin glistening with water that seems to cling to her sharky skin and giving a new level of definition to her toned curvaceous form. Trickles of water flow down from her heaving, heavy-yet round, full, and undoubtedly milk-filled breasts");
 			if (minervaScene.pregnancy.type == PregnancyStore.PREGNANCY_PLAYER) outputText(" before slipping down and running over her swollen pregnant tummy");
 			outputText(". The water slides down her back from her wet red and gold hair, flowing down over the curvature of her broodmotherly hips and round squeezable ass. Your eyes seemed glued to her new body as she washes it, you can't help but feel arousal start to swell in your loins. The sight of her amazing childbearing body silently calling you to, telling you ");
-			dynStats("lus", 10);
+			dynStats("lus", 10, "scale", false);
 			if (player.hasCock()) {outputText("what a willing and fertile female she is and that you must do your duty as a seed bearing ");
 				if (!player.hasVagina()) outputText("male");
 				else outputText("herm");
@@ -1058,7 +1058,7 @@ public class MinervaPurification extends BaseContent
 			outputText("You can be sure that I'll be eagerly looking forward to your next visit my love.</i>\" You give her a last-minute hug, promising that you'll be back as soon as time permits.");
 			player.sexReward("vaginalFluids","Dick");
 			minervaScene.tryToImpregnateMinerva();
-			dynStats("lus", 20);
+			dynStats("lus", 20, "scale", false);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -1124,7 +1124,7 @@ public class MinervaPurification extends BaseContent
 			dynStats("sen", -1);
 			player.sexReward("Default","Default",true,false);
 			minervaScene.tryToImpregnateMinerva();
-			dynStats("lus", 20);
+			dynStats("lus", 20, "scale", false);
             if (CoC.instance.inCombat) cleanupAfterCombat();
             else doNext(camp.returnToCampUseOneHour);
 		}
@@ -1390,7 +1390,7 @@ public class MinervaPurification extends BaseContent
 			
 			outputText("\n\nFor a long while, you just lay there, cuddled up with the mostly naked siren, the two of you idly chatting about various things that come to mind. Eventually, you must leave the gentle embrace and return to your duties as a Champion. Disentangling yourself from Minerva, you straighten your clothes out and, with a smile, tell her you had a wonderful time. Grinning up at you, Minerva climbs back onto her feet and pulls you into a deep, tongue-tangling goodbye kiss. \"<i>It was amazing, we have to do this again. Perhaps next time, I can do you, hmm?</i>\" she suggests, not wanting to be greedy and get all the pleasure. Giving you another peck on the cheek, the siren sends you on your way after telling you to come back and visit soon.");
 			
-			dynStats("lus", 20);
+			dynStats("lus", 20, "scale", false);
             if (CoC.instance.inCombat) cleanupAfterCombat();
             else doNext(camp.returnToCampUseOneHour);
 		}

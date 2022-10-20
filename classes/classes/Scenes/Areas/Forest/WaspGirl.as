@@ -70,7 +70,7 @@ import classes.internals.ChainedDrop;
 				if (player.gender == 1) outputText("or dripping honey-slicked cunts beckoning you. ");
 				if (player.gender == 2) outputText("planting your aching sex over her face while you lick her sweet honeypot. ");
 				if (player.gender == 3) outputText("or cocks, tits, and puffy nipples. ");
-				player.dynStats("lus", 50);
+				player.takeLustDamage(50, true);
 				if (player.lust > player.lust100 * 0.6) {
 					outputText(" You shake your head and struggle to stay focused,");
 					if (player.gender == 1 || player.gender == 3) outputText(" but it's difficult with the sensitive bulge in your groin.");

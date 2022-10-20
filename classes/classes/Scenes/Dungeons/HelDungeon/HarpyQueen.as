@@ -41,7 +41,7 @@ public class HarpyQueen extends Monster
 		public function lustSpikeAttack():void {
 			outputText("The Harpy Queen draws a strange arcane circle in the air, lines of magic remaining wherever the tip of her staff goes.  You try to rush her, but the circle seems to have created some kind of barrier around her.  You can only try to force it open - but too late!  A great pink bolt shoots out of the circle, slamming into your chest.  You suddenly feel light-headed and so very, very horny...");
 			//(Effect: Heavy Lust Damage)
-			player.dynStats("lus", (50 + rand(this.lib / 4)));
+			player.takeLustDamage((50 + rand(this.lib / 4)), true);
 		}
 
 		//ATTACK THREE: Wind Slam!

@@ -36,7 +36,7 @@ public class TrappedSatyrScene extends BaseContent {
                 ? "disgusted by the strange thoughts this place seems to put into your mind"
                 : "not feeling inclined to rape some satyr butt right now") +
             ", and silently leave him to his pleasures.");
-        dynStats("lus", 5 + player.lib / 20);
+        dynStats("lus", 5 + player.lib / 20, "scale", false);
         doNext(camp.returnToCampUseOneHour);
     }
 

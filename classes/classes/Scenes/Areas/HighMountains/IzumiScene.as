@@ -308,7 +308,7 @@ import classes.Stats.Buff;
 			showStatUp('spe');
 			showStatUp('sens');
 			showStatUp('lib');
-			dynStats("lus", lustMod);
+			dynStats("lus", lustMod, "scale", false);
 		}
 
 		// Actual introduction scene content for pipesmokin

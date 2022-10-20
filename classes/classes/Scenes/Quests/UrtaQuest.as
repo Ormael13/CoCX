@@ -871,7 +871,7 @@ private function snuggleWithUrta(truth:Boolean):void {
 	else outputText("lascivious caress");
 	outputText(" before pulling you tighter into " + player2.mf("his","her") + " embrace.  Eager to forget your embarrassment, you focus on holding " + player2.mf("him","her") + " tight and close.  Your prick slowly slides back into its sheath from the lack of stimulus as you focus on how safe and content you feel to be here, being held like this.");
 	outputText("\n\nTo your own surprise, you find your eyes growing heavier and heavier.  But you don't want to let your " + player2.short + " go yet... besides, may as well start searching from here in the morning, right?  So, you and " + player2.short + " carefully lay yourselves back down and quietly drift off to sleep, still holding fast to each other as you do.  The last sounds you hear for the night are your lover breathing, accompanied by the beating of " + player2.mf("his","her") + " heart, and you idly hope that " + player2.mf("he","she") + " can hear the same sounds from you...");
-	dynStats("lus", 14);
+	dynStats("lus", 14, "scale", false);
 	menu();
 	addButton(0,"Next",morningAfterCampVisitEmbark, truth);
 }
@@ -1111,7 +1111,7 @@ private function urtaSecondWind():void {
 	monster.createStatusEffect(StatusEffects.UrtaSecondWinded,3,0,0,0);
 	HPChange(Math.round(player.maxHP()*0.75),false);
 	fatigue(-200);
-	dynStats("lus", -200);
+	dynStats("lus", -200, "scale", false);
 	outputText("Closing your eyes for a moment, you focus all of your willpower on pushing yourself to your absolute limits, forcing your lusts down and drawing on reserves of energy you didn't know you had!\n\n");
     SceneLib.combat.enemyAIImpl();
 }
@@ -1810,7 +1810,7 @@ private function urtaSleepsNaked():void {
 	outputText("You bed down for the night, languidly removing your armor and stretching in the pale moonlight.  The cool air feels wonderful on your skin, particularly after being bound up in that restricting armor all day.  You yawn and wrap yourself up in a blanket, swifly falling asleep in the soft grasses at the edges of the plains, comforted by the gentle hooting of the owls in the woods to the west.");
 	HPChange(player.maxHP(),false);
 	fatigue(-100);
-	dynStats("lus", 10);
+	dynStats("lus", 10, "scale", false);
 	menu();
 	addButton(0,"Next",urtaGetsTentaRaped);
 }
@@ -2091,7 +2091,7 @@ public function milkyUrtaTic():void {
 	outputText("\n\n");
 	player.addStatusValue(StatusEffects.MilkyUrta,1,-1);
 	if(player.statusEffectv1(StatusEffects.MilkyUrta) <= 0) player.removeStatusEffect(StatusEffects.MilkyUrta);
-	dynStats("lus", 10);
+	dynStats("lus", 10, "scale", false);
 }
 
 //Drink Bottle of Mino Cum*

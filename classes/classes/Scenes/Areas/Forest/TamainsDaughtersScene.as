@@ -1089,7 +1089,7 @@ internal function combatWinAgainstDaughters():void {
 	}
 	else {
 		outputText("You smile in satisfaction as your daughters collapse in upon themselves, devolving into a frenzied orgy.  It looks like they're too distracted to continue fighting.  They're putting on quite a show...\n\n");
-		dynStats("lus", 5);
+		dynStats("lus", 5, "scale", false);
 		if(player.lust >= 33 && player.hasCock()) {
 			outputText("You could still fuck them, but things might get out of hand...\n\nDo you fuck them?");
 			doYesNo(fuckYoDaughtersHomie, cleanupAfterCombat);

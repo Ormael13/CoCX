@@ -2173,7 +2173,7 @@ public class Combat extends BaseContent {
             if (player.gender == 3) outputText("aching cock and thirsty pussy towards the nearest thing willing to fuck it.");
             if (player.gender == 0) outputText("groin, before remember there is nothing there to caress.");
         }
-        dynStats("lus", 10 + player.effectiveSensitivity() / 10);
+        player.takeLustDamage(10 + player.effectiveSensitivity() / 10, true);
     }
 
     internal function wait():void {
@@ -2189,7 +2189,7 @@ public class Combat extends BaseContent {
         } else if (monster.hasStatusEffect(StatusEffects.MinotaurEntangled)) {
             clearOutput();
             outputText("You sigh and relax in the chains, eying the well-endowed minotaur as you await whatever rough treatment he desires to give.  His musky, utterly male scent wafts your way on the wind, and you feel droplets of your lust dripping down your thighs.  You lick your lips as you watch the pre-cum drip from his balls, eager to get down there and worship them.  Why did you ever try to struggle against this fate?\n\n");
-            dynStats("lus", 30 + rand(5), "scale", false);
+            player.takeLustDamage(30 + rand(5), true);
         } else if (player.hasStatusEffect(StatusEffects.Whispered)) {
             clearOutput();
             outputText("You shake off the mental compulsions and ready yourself to fight!\n\n");
@@ -2233,13 +2233,13 @@ public class Combat extends BaseContent {
             if (monster is CaiLin && flags[kFLAGS.CAILIN_AFFECTION] >= 10) outputText("Cai'Lin");
             else outputText("The [monster name]");
             outputText("'s grip on you tightens as you relax into the stimulating pressure.");
-            dynStats("lus", player.effectiveSensitivity() / 5 + 5);
+            player.takeLustDamage(player.effectiveSensitivity() / 5 + 5, true);
             player.takePhysDamage(5 + rand(5));
             skipMonsterAction = true;
         } else if (player.hasStatusEffect(StatusEffects.ScyllaBind)) {
             clearOutput();
             outputText("You're being squeezed tightly by the scylla’s powerful tentacles. That's without mentioning the fact she's rubbing your sensitive place quite a bit, giving you a knowing grin.");
-            dynStats("lus", player.effectiveSensitivity() / 4 + 20);
+            player.takeLustDamage(player.effectiveSensitivity() / 4 + 20, true);
             player.takePhysDamage(100 + rand(40));
             skipMonsterAction = true;
         } else if (player.hasStatusEffect(StatusEffects.WolfHold)) {
@@ -2264,7 +2264,7 @@ public class Combat extends BaseContent {
 				outputText("\n\nHe leans in close to you, sniffing you intently as he gives you a long lick across your cheek.");
 				var licklust:Number = (monster.inte / 5) + rand(10);
 				licklust = Math.round(licklust);
-				player.dynStats("lus", licklust, "scale", false);
+				player.takeLustDamage(licklust, true);
 			}
             if (player.statusEffectv1(StatusEffects.TrollHold) < 2) skipMonsterAction = true;
         } else if (player.hasStatusEffect(StatusEffects.PossessionWendigo)) {
@@ -2284,7 +2284,7 @@ public class Combat extends BaseContent {
             else if (player.hasVagina())
                 outputText("The creature continues sucking your clit and now has latched two more suckers on your nipples, amplifying your growing lust. You must escape or you will become a mere toy to this thing!");
             else outputText("The creature continues probing at your asshole and has now latched " + num2Text(player.totalNipples()) + " more suckers onto your nipples, amplifying your growing lust.  You must escape or you will become a mere toy to this thing!");
-            dynStats("lus", (8 + player.effectiveSensitivity() / 10));
+            player.takeLustDamage((8 + player.effectiveSensitivity() / 10), true);
             skipMonsterAction = true;
         } else if (player.hasStatusEffect(StatusEffects.GiantGrabbed)) {
             clearOutput();
@@ -2413,7 +2413,7 @@ public class Combat extends BaseContent {
                 if (monster is CaiLin && flags[kFLAGS.CAILIN_AFFECTION] >= 10) outputText("Cai'Lin");
                 else outputText("The [monster name]");
                 outputText("'s grip on you tightens as you struggle to break free from the stimulating pressure.");
-                dynStats("lus", player.effectiveSensitivity() / 10 + 2);
+                player.takeLustDamage(player.effectiveSensitivity() / 10 + 2, true);
                 if (monster is Naga) player.takePhysDamage(7 + rand(5));
                 if (monster is Gorgon) player.takePhysDamage(17 + rand(15));
                 if (monster is CaiLin) player.takePhysDamage(10 + rand(8));
@@ -2430,7 +2430,7 @@ public class Combat extends BaseContent {
                 player.removeStatusEffect(StatusEffects.ScyllaBind);
             } else {
                 outputText("Despite all of your struggles, she manages to maintain her hold on you.");
-                dynStats("lus", player.effectiveSensitivity() / 5 + 5);
+                player.takeLustDamage(player.effectiveSensitivity() / 5 + 5, true);
                 player.takePhysDamage(100 + rand(80));
             }
             skipMonsterAction = true;
@@ -2472,7 +2472,7 @@ public class Combat extends BaseContent {
 				player.takePhysDamage(7 + rand(5));
 				var licklust:Number = (monster.inte / 5) + rand(10) + player.statusEffectv3(StatusEffects.TrollHold);
 				licklust = Math.round(licklust);
-				player.dynStats("lus", licklust, "scale", false);
+				player.takeLustDamage(licklust, true);
 				if (monster as CorruptedMaleTroll) player.addStatusValue(StatusEffects.TrollHold, 3, 1);
 			}
             if (player.statusEffectv1(StatusEffects.TrollHold) < 2) skipMonsterAction = true;
@@ -2512,7 +2512,7 @@ public class Combat extends BaseContent {
                 else if (player.hasVagina())
                     outputText("The creature continues sucking your clit and now has latched two more suckers on your nipples, amplifying your growing lust. You must escape or you will become a mere toy to this thing!");
                 else outputText("The creature continues probing at your asshole and has now latched " + num2Text(player.totalNipples()) + " more suckers onto your nipples, amplifying your growing lust.  You must escape or you will become a mere toy to this thing!");
-                dynStats("lus", (3 + player.effectiveSensitivity() / 10 + player.lib / 20));
+                player.takeLustDamage((3 + player.effectiveSensitivity() / 10 + player.lib / 20), true);
                 skipMonsterAction = true;
             }
         }
@@ -4155,7 +4155,7 @@ public class Combat extends BaseContent {
         if (player.weaponRange == weaponsrange.LBLASTR) {
             outputText("You moo in pleasures as milk flows from your udders, pumped by the suction cup all the way to the tank on your back. Almost immediately fresh cream fills your blasters, you're ready to resume shooting!");
             var lustDmg:int = rand(player.lib / 10) + 20;
-            player.dynStats("lus", lustDmg);
+            player.takeLustDamage(lustDmg, true);
         } else outputText("You open the magazine of your " + player.weaponRangeName + " to reload the ammunition.");
     }
 
@@ -5047,7 +5047,7 @@ public class Combat extends BaseContent {
         }
     }
 
-    public function CommasForDigits(damage:Number, text:String = ""):void {
+    public function CommasForDigits(damage:Number, lustColor:Boolean = false, text:String = ""):void {
         var damagemsg:Array = new Array(String(damage).length);
         var damageTemp:Number = damage;
         outputText("<b>(</b>");
@@ -5060,7 +5060,7 @@ public class Combat extends BaseContent {
                 if (j != 0) outputText(",");
                 k = 3;
             }
-            outputText("<b>[font-damage]" + text + String(damagemsg[damagemsg.length - j - 1]) + "[/font]</b>");
+            outputText("<b>[font-" + (damage < 0 ? "heal" : damage == 0 ? "miss" : lustColor ? "lust" : "damage") + "]" + text + String(damagemsg[damagemsg.length - j - 1]) + "[/font]</b>");
             k--;
         }
         outputText("<b>)</b>");
@@ -5385,7 +5385,7 @@ public class Combat extends BaseContent {
                 }
                 //Lab Guard tanking
                 if (monster is LabGuard && (monster as LabGuard).shieldWall && !monster.hasStatusEffect(StatusEffects.Stunned)) {
-                    CommasForDigits(monster.eOneAttack());
+                    monster.eOneAttack(true);
                     if (player.HP <= player.minHP()) {
                         doNext(endHpLoss);
                         return;
@@ -5813,7 +5813,7 @@ public class Combat extends BaseContent {
                     } else {
                         outputText("\n\nYou can’t... there is a reason why you keep raising your weapon against your master, but what was it? It can’t be that you think you can defeat such a powerful, godly alpha male as him. And it would feel so much better to supplicate yourself before the glow, lose yourself in it forever, serve it with your horny slut body, the only thing someone as low and helpless as you could possibly offer him. Master’s mouth is moving but you can no longer tell where his voice ends and the one in your head begins... only there is a reason you cling to like you cling onto your [weapon], whatever it is, however stupid and distant it now seems, a reason to keep fighting...");
                     }
-                    dynStats("lus", 25);
+                    player.takeLustDamage(25, true);
                 }
                 outputText(" ");
                 outputText("\n\n"); //Move to next attack line
@@ -6378,7 +6378,7 @@ public class Combat extends BaseContent {
             }
             //Lab Guard tanking
             if (monster is LabGuard && (monster as LabGuard).shieldWall && !monster.hasStatusEffect(StatusEffects.Stunned)) {
-                CommasForDigits(monster.eOneAttack());
+                monster.eOneAttack(true);
                 if (player.HP <= player.minHP()) {
                     doNext(endHpLoss);
                     return;
@@ -7296,13 +7296,7 @@ public class Combat extends BaseContent {
 			else monster.wrath += WrathGains;
             if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
         }
-        if (display) {
-            if (damage > 0) {
-                if (damage > 1000) CommasForDigits(damage);
-                else outputText("<b>([font-damage]" + damage + "[/font])</b>"); //Damage
-            } else if (damage == 0) outputText("<b>([font-miss]" + damage + "[/font])</b>"); //Miss/block
-            else if (damage < 0) outputText("<b>([font-heal]" + damage + "[/font])</b>"); //Heal
-        }
+        if (display) CommasForDigits(damage);
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
         //Keep shit in bounds.
@@ -7387,13 +7381,7 @@ public class Combat extends BaseContent {
             else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
             if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
         }
-        if (display) {
-            if (damage > 0) {
-                if (damage > 1000) CommasForDigits(damage);
-                else outputText("<b>([font-damage]" + damage + "[/font])</b>"); //Damage
-            } else if (damage == 0) outputText("<b>([font-miss]" + damage + "[/font])</b>"); //Miss/block
-            else if (damage < 0) outputText("<b>([font-heal]" + damage + "[/font])</b>"); //Heal
-        }
+        if (display) CommasForDigits(damage);
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
         //Keep shit in bounds.
@@ -7470,13 +7458,7 @@ public class Combat extends BaseContent {
             else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
             if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
         }
-        if (display) {
-            if (damage > 0) {
-                if (damage > 1000) CommasForDigits(damage);
-                else outputText("<b>([font-damage]" + damage + "[/font])</b>"); //Damage
-            } else if (damage == 0) outputText("<b>([font-miss]" + damage + "[/font])</b>"); //Miss/block
-            else if (damage < 0) outputText("<b>([font-heal]" + damage + "[/font])</b>"); //Heal
-        }
+        if (display) CommasForDigits(damage);
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
         //Keep shit in bounds.
@@ -7533,13 +7515,7 @@ public class Combat extends BaseContent {
             else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
             if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
         }
-        if (display) {
-            if (damage > 0) {
-                if (damage > 1000) CommasForDigits(damage);
-                else outputText("<b>([font-damage]" + damage + "[/font])</b>"); //Damage
-            } else if (damage == 0) outputText("<b>([font-miss]" + damage + "[/font])</b>"); //Miss/block
-            else if (damage < 0) outputText("<b>([font-heal]" + damage + "[/font])</b>"); //Heal
-        }
+        if (display) CommasForDigits(damage);
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
         //Keep shit in bounds.
@@ -7595,13 +7571,7 @@ public class Combat extends BaseContent {
             else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
             if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
         }
-        if (display) {
-            if (damage > 0) {
-                if (damage > 1000) CommasForDigits(damage);
-                else outputText("<b>([font-damage]" + damage + "[/font])</b>"); //Damage
-            } else if (damage == 0) outputText("<b>([font-miss]" + damage + "[/font])</b>"); //Miss/block
-            else if (damage < 0) outputText("<b>([font-heal]" + damage + "[/font])</b>"); //Heal
-        }
+        if (display) CommasForDigits(damage);
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
         //Keep shit in bounds.
@@ -7646,13 +7616,7 @@ public class Combat extends BaseContent {
             else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
             if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
         }
-        if (display) {
-            if (damage > 0) {
-                if (damage > 1000) CommasForDigits(damage);
-                else outputText("<b>([font-damage]" + damage + "[/font])</b>"); //Damage
-            } else if (damage == 0) outputText("<b>([font-miss]" + damage + "[/font])</b>"); //Miss/block
-            else if (damage < 0) outputText("<b>([font-heal]" + damage + "[/font])</b>"); //Heal
-        }
+        if (display) CommasForDigits(damage);
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
         //Keep shit in bounds.
@@ -7691,13 +7655,7 @@ public class Combat extends BaseContent {
             else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
             if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
         }
-        if (display) {
-            if (damage > 0) {
-                if (damage > 1000) CommasForDigits(damage);
-                else outputText("<b>([font-damage]" + damage + "[/font])</b>"); //Damage
-            } else if (damage == 0) outputText("<b>([font-miss]" + damage + "[/font])</b>"); //Miss/block
-            else if (damage < 0) outputText("<b>([font-heal]" + damage + "[/font])</b>"); //Heal
-        }
+        if (display) CommasForDigits(damage);
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
         //Keep shit in bounds.
@@ -7732,13 +7690,7 @@ public class Combat extends BaseContent {
             else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
             if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
         }
-        if (display) {
-            if (damage > 0) {
-                if (damage > 1000) CommasForDigits(damage);
-                else outputText("<b>([font-damage]" + damage + "[/font])</b>"); //Damage
-            } else if (damage == 0) outputText("<b>([font-miss]" + damage + "[/font])</b>"); //Miss/block
-            else if (damage < 0) outputText("<b>([font-heal]" + damage + "[/font])</b>"); //Heal
-        }
+        if (display) CommasForDigits(damage);
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
         //Keep shit in bounds.
@@ -7777,13 +7729,7 @@ public class Combat extends BaseContent {
             else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
             if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
         }
-        if (display) {
-            if (damage > 0) {
-                if (damage > 1000) CommasForDigits(damage);
-                else outputText("<b>([font-damage]" + damage + "[/font])</b>"); //Damage
-            } else if (damage == 0) outputText("<b>([font-miss]" + damage + "[/font])</b>"); //Miss/block
-            else if (damage < 0) outputText("<b>([font-heal]" + damage + "[/font])</b>"); //Heal
-        }
+        if (display) CommasForDigits(damage);
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
         //Keep shit in bounds.
@@ -7818,13 +7764,7 @@ public class Combat extends BaseContent {
             else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
             if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
         }
-        if (display) {
-            if (damage > 0) {
-                if (damage > 1000) CommasForDigits(damage);
-                else outputText("<b>([font-damage]" + damage + "[/font])</b>"); //Damage
-            } else if (damage == 0) outputText("<b>([font-miss]" + damage + "[/font])</b>"); //Miss/block
-            else if (damage < 0) outputText("<b>([font-heal]" + damage + "[/font])</b>"); //Heal
-        }
+        if (display) CommasForDigits(damage);
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
         //Keep shit in bounds.
@@ -7859,13 +7799,7 @@ public class Combat extends BaseContent {
             else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
             if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
         }
-        if (display) {
-            if (damage > 0) {
-                if (damage > 1000) CommasForDigits(damage);
-                else outputText("<b>([font-damage]" + damage + "[/font])</b>"); //Damage
-            } else if (damage == 0) outputText("<b>([font-miss]" + damage + "[/font])</b>"); //Miss/block
-            else if (damage < 0) outputText("<b>([font-heal]" + damage + "[/font])</b>"); //Heal
-        }
+        if (display) CommasForDigits(damage);
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
         //Keep shit in bounds.
@@ -7934,13 +7868,7 @@ public class Combat extends BaseContent {
 			else monster.wrath += WrathGains;
             if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
         }
-        if (display) {
-            if (damage > 0) {
-                if (damage > 1000) CommasForDigits(damage);
-                else outputText("<b>([font-damage]" + damage + "[/font])</b>"); //Damage
-            } else if (damage == 0) outputText("<b>([font-miss]" + damage + "[/font])</b>"); //Miss/block
-            else if (damage < 0) outputText("<b>([font-heal]" + damage + "[/font])</b>"); //Heal
-        }
+        if (display) CommasForDigits(damage);
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
         //Keep shit in bounds.
@@ -8232,7 +8160,7 @@ public class Combat extends BaseContent {
                 var tentaround:Number = player.statusEffectv2(StatusEffects.LethicesRapeTentacles);
                 if (tentaround == 1) {
                     outputText("Taking advantage of your helpless state, the tentacles wind deeper under your [armor], caressing your [nipples] and coating your [butt] in slippery goo. One even seeks out your crotch, none-too-gently prodding around for weak points.\n\n");
-                    dynStats("lus", 5);
+                    player.takeLustDamage(5, true);
                 } else if (tentaround == 2) {
                     outputText("Now that they’ve settled in, the tentacles go to work on your body, rudely molesting every sensitive place they can find.");
                     if (player.hasCock()) outputText(" They twirl and writhe around your [cocks].");
@@ -8244,10 +8172,10 @@ public class Combat extends BaseContent {
                         if (player.isLactating()) outputText(", squeezing out small jets of milk");
                     }
                     outputText(". Worst of all is the tentacle slithering between your buttcheeks. It keeps stopping to rub around the edge of your [asshole]. You really ought to break free...\n\n");
-                    dynStats("lus", 5);
+                    player.takeLustDamage(5, true);
                 } else if (tentaround == 3) {
                     outputText("Another inky length rises up from the floor and slaps against your face, inexpertly attempting to thrust itself inside your mouth. Resenting its temerity, you steadfastly hold your lips closed and turn your head away. The corrupt magics powering this spell won’t let you get off so easily, though. The others redouble their efforts, inundating you with maddening pleasure. You can’t help but gasp and moan, giving the oiled feeler all the opening it needs to enter your maw.\n\n");
-                    dynStats("lus", 5);
+                    player.takeLustDamage(5, true);
                 } else if (tentaround == 4) {
                     outputText("If you thought having one tentacle in your mouth was bad, then the two floating in front of you are potentially terrifying. Unfortunately, they turn out to be mere distractions. The tendril plying your buns rears back and stabs inside, splitting your sphincter");
                     if (player.hasVagina()) {
@@ -8258,7 +8186,7 @@ public class Combat extends BaseContent {
                     if (player.hasFuckableNipples()) outputText(" Your [nipples] are similarly entered.");
                     if (player.hasCock()) outputText(" And [eachCock] is suddenly coated in slimy, extraplanar oil and pumped with rapid, sure strokes.");
                     outputText(" There’s too much. If you don’t break free, you’re going to wind up losing to a simple spell!\n\n");
-                    dynStats("lus", 10);
+                    player.takeLustDamage(10, true);
                 } else {
                     outputText("You’ve really fucked up now. An entire throne room full of demons is watching a bunch of summoned tentacles rape you in every hole, bouncing your body back and forth with the force of their thrusts, repeatedly spilling their corruptive payloads into your receptive holes. The worst part is");
                     if (player.cor >= 50) outputText(" how much of a bitch it makes you look like... and how good it feels to be Lethice’s bitch.");
@@ -8272,7 +8200,7 @@ public class Combat extends BaseContent {
                 else {
                     outputText(" Damn, they got you! They yank your arms and [legs] taut, holding you helpless in the air for their brothers to further violate. You can already feel a few oily tendrils sneaking under your [armor].\n\n");
                     player.changeStatusValue(StatusEffects.LethicesRapeTentacles, 3, 1);
-                    dynStats("lus", 5);
+                    player.takeLustDamage(5, true);
                 }
             }
             if (player.statusEffectv1(StatusEffects.LethicesRapeTentacles) <= 0) {
@@ -8355,9 +8283,9 @@ public class Combat extends BaseContent {
             else {
                 outputText("<b>The smooth stones start vibrating again, sending another wave of teasing bliss throughout your body.  The witches snicker at you as you try to withstand their attack.\n\n</b>");
             }
-            dynStats("lus", player.statusEffectv1(StatusEffects.LustStones) + 4);
+            player.takeLustDamage(player.statusEffectv1(StatusEffects.LustStones) + 4, true);
         }
-		if (player.hasStatusEffect(StatusEffects.LustTransferance)) dynStats("lus", player.statusEffectv1(StatusEffects.LustTransferance) + 4);
+		if (player.hasStatusEffect(StatusEffects.LustTransferance)) player.takeLustDamage(player.statusEffectv1(StatusEffects.LustTransferance) + 4, true);
         if (player.hasStatusEffect(StatusEffects.WebSilence)) {
             if (player.statusEffectv1(StatusEffects.WebSilence) >= 2 || rand(20) + 1 + player.str / 10 >= 15) {
                 outputText("You rip off the webbing that covers your mouth with a cry of pain, finally able to breathe normally again!  Now you can cast spells!\n\n");
@@ -8856,36 +8784,36 @@ public class Combat extends BaseContent {
         }
         if (player.hasStatusEffect(StatusEffects.Bound) && flags[kFLAGS.PC_FETISH] >= 2) {
             outputText("The feel of tight leather completely immobilizing you turns you on more and more.  Would it be so bad to just wait and let her play with you like this?\n\n");
-            dynStats("lus", 3);
+            player.takeLustDamage(3, true);
         }
         if (player.hasStatusEffect(StatusEffects.GooArmorBind)) {
             if (flags[kFLAGS.PC_FETISH] >= 2) {
                 outputText("The feel of the all-encapsulating goo immobilizing your helpless body turns you on more and more.  Maybe you should just wait for it to completely immobilize you and have you at its mercy.\n\n");
-                dynStats("lus", 3);
+                player.takeLustDamage(3, true);
             } else outputText("You're utterly immobilized by the goo flowing around you.  You'll have to struggle free!\n\n");
         }
         if (player.hasStatusEffect(StatusEffects.HarpyBind)) {
             if (flags[kFLAGS.PC_FETISH] >= 2) {
                 outputText("The harpies are holding you down and restraining you, making the struggle all the sweeter!\n\n");
-                dynStats("lus", 3);
+                player.takeLustDamage(3, true);
             } else outputText("You're restrained by the harpies so that they can beat on you with impunity.  You'll need to struggle to break free!\n\n");
         }
         if ((player.hasStatusEffect(StatusEffects.NagaBind) || player.hasStatusEffect(StatusEffects.ScyllaBind)) && flags[kFLAGS.PC_FETISH] >= 2) {
             outputText("Coiled tightly by [themonster] and utterly immobilized, you can't help but become aroused thanks to your bondage fetish.\n\n");
-            dynStats("lus", 5);
+            player.takeLustDamage(5, true);
         }
         if (player.hasStatusEffect(StatusEffects.TentacleBind)) {
             outputText("You are firmly trapped in the tentacle's coils.  <b>The only thing you can try to do is struggle free!</b>\n\n");
             if (flags[kFLAGS.PC_FETISH] >= 2) {
                 outputText("Wrapped tightly in the tentacles, you find it hard to resist becoming more and more aroused...\n\n");
-                dynStats("lus", 3);
+                player.takeLustDamage(3, true);
             }
         }
         if (player.hasStatusEffect(StatusEffects.DriderKiss)) {
             //(VENOM OVER TIME: WEAK)
             if (player.statusEffectv1(StatusEffects.DriderKiss) == 0) {
                 outputText("Your heart hammers a little faster as a vision of the drider's nude, exotic body on top of you assails you.  It'll only get worse if she kisses you again...\n\n");
-                dynStats("lus", 8);
+                player.takeLustDamage(8, true);
             }
             //(VENOM OVER TIME: MEDIUM)
             else if (player.statusEffectv1(StatusEffects.DriderKiss) == 1) {
@@ -8893,12 +8821,12 @@ public class Combat extends BaseContent {
                 if (player.gender > 0) outputText("loins tingle and leak, hungry for the drider's every touch.");
                 else outputText("asshole tingles and twitches, aching to be penetrated.");
                 outputText("  Gods, her venom is getting you so hot.  You've got to end this quickly!\n\n");
-                dynStats("lus", 15);
+                player.takeLustDamage(15, true);
             }
             //(VENOM OVER TIME: MAX)
             else {
                 outputText("You have to keep pulling your hands away from your crotch - it's too tempting to masturbate here on the spot and beg the drider for more of her sloppy kisses.  Every second that passes, your arousal grows higher.  If you don't end this fast, you don't think you'll be able to resist much longer.  You're too turned on... too horny... too weak-willed to resist much longer...\n\n");
-                dynStats("lus", 25);
+                player.takeLustDamage(25, true);
             }
         }
         if (player.hasStatusEffect(StatusEffects.AikoLightningArrow)) {
@@ -8933,7 +8861,7 @@ public class Combat extends BaseContent {
             } else if (rand(5) == 0) {
                 if (rand(2) == 0) outputText("A fantasy springs up from nowhere, dominating your thoughts for a few moments.  In it, you're lying down in a soft nest.  Gold-rimmed lips are noisily slurping around your [cock], smearing it with her messy aphrodisiac until you're completely coated in it.  She looks up at you knowingly as the two of you get ready to breed the night away...\n\n");
                 else outputText("An idle daydream flutters into your mind.  In it, you're fucking a harpy's asshole, clutching tightly to her wide, feathery flanks as the tight ring of her pucker massages your [cock].  She moans and turns around to kiss you on the lips, ensuring your hardness.  Before long her feverish grunts of pleasure intensify, and you feel the egg she's birthing squeezing against you through her internal walls...\n\n");
-                dynStats("lus", 20);
+                player.takeLustDamage(20, true);
             }
         }
         if (player.hasStatusEffect(StatusEffects.StoneLust)) {
@@ -8945,29 +8873,29 @@ public class Combat extends BaseContent {
             } else {
                 outputText("The orb continues vibrating in your ass, doing its best to arouse you.\n\n");
             }
-            dynStats("lus", 7 + int(player.effectiveSensitivity()) / 10);
+            player.takeLustDamage(7 + int(player.effectiveSensitivity()) / 10, true);
         }
         if (player.hasStatusEffect(StatusEffects.RaijuStaticDischarge)) {
             outputText("The raiju electricity stored in your body continuously tingle around your genitals!\n\n");
-            dynStats("lus", 14 + int(player.effectiveSensitivity()) / 8);
+            player.takeLustDamage(14 + int(player.effectiveSensitivity()) / 8, true);
         }
         if (player.hasStatusEffect(StatusEffects.KissOfDeath)) {
             //Effect
             outputText("Your lips burn with an unexpected flash of heat.  They sting and burn with unholy energies as a puff of ectoplasmic gas escapes your lips.  That puff must be a part of your soul!  It darts through the air to [themonster], who slurps it down like a delicious snack.  You feel feverishly hot and exhausted...\n\n");
-            dynStats("lus", 5);
+            player.takeLustDamage(5, true);
             player.takePhysDamage(15);
         }
         if (player.hasStatusEffect(StatusEffects.DemonSeed)) {
             outputText("You feel something shift inside you, making you feel warm.  Finding the desire to fight this... hunk gets harder and harder.\n\n");
-            dynStats("lus", (player.statusEffectv1(StatusEffects.DemonSeed) + int(player.effectiveSensitivity() / 30) + int(player.lib / 30) + int(player.cor / 30)));
+            player.takeLustDamage((player.statusEffectv1(StatusEffects.DemonSeed) + int(player.effectiveSensitivity() / 30) + int(player.lib / 30) + int(player.cor / 30)), true);
         }
         if (player.inHeat && player.vaginas.length > 0 && monster.cockTotal() > 0) {
-            dynStats("lus", (rand(player.lib / 5) + 3 + rand(5)));
+            player.takeLustDamage((rand(player.lib / 5) + 3 + rand(5)), true);
             outputText("Your " + vaginaDescript(0) + " clenches with an instinctual desire to be touched and filled.  ");
             outputText("If you don't end this quickly you'll give in to your heat.\n\n");
         }
         if (player.inRut && player.cockTotal() > 0 && monster.hasVagina()) {
-            dynStats("lus", (rand(player.lib / 5) + 3 + rand(5)));
+            player.takeLustDamage((rand(player.lib / 5) + 3 + rand(5)), true);
             if (player.cockTotal() > 1) outputText("Each of y");
             else outputText("Y");
             if (monster.plural) outputText("our [cocks] dribbles pre-cum as you think about plowing [themonster] right here and now, fucking [monster his] [monster cunt]s until they're totally fertilized and pregnant.\n\n");
@@ -9007,7 +8935,7 @@ public class Combat extends BaseContent {
                 outputText("With your knowledge of medicine, you manage to cleanse the heat and rut drug from your system.\n\n");
                 player.removeStatusEffect(StatusEffects.TemporaryHeat);
             } else {
-                dynStats("lus", (player.lib / 12 + 5 + rand(5)) * player.statusEffectv2(StatusEffects.TemporaryHeat));
+                player.takeLustDamage((player.lib / 12 + 5 + rand(5)) * player.statusEffectv2(StatusEffects.TemporaryHeat), true);
                 if (player.hasVagina()) {
                     outputText("Your " + vaginaDescript(0) + " clenches with an instinctual desire to be touched and filled.  ");
                 } else if (player.cockTotal() > 0) {
@@ -9034,7 +8962,7 @@ public class Combat extends BaseContent {
         //Bondage straps + bondage fetish
         if (flags[kFLAGS.PC_FETISH] >= 2 && player.armorName == "barely-decent bondage straps") {
             outputText("The feeling of the tight, leather straps holding tightly to your body while exposing so much of it turns you on a little bit more.\n\n");
-            dynStats("lus", 2);
+            player.takeLustDamage(2, true);
         }
         // Drider incubus venom
         if (player.hasStatusEffect(StatusEffects.DriderIncubusVenom)) {
@@ -13507,7 +13435,7 @@ public class Combat extends BaseContent {
     public function taintedMindAttackAttempt():void {
         clearOutput();
         outputText("You ready an attack, but find your hands groping your own body instead. Somehow the demon’s magic has made it impossible to strike at him, crossing wires that weren’t meant to be crossed. Frowning, you look down at your more aroused form, determined not to fall for this a second time.");
-        player.dynStats("lus", 15);
+        player.takeLustDamage(15, true);
         enemyAI();
     }
 

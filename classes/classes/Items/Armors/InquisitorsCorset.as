@@ -29,7 +29,7 @@ import classes.PerkLib;
 			outputText("\n\n");
 			outputText("You feel sexy... and pious.\n\n(<b>Perk Gained - Blood Mage</b>: Spells consume HP (minimum 5) instead of mana!)\n\n");
 			//+lust
-			game.player.dynStats("lus", 5);
+			game.player.dynStats("lus", 5, "scale", false);
 		}
 	}
 }

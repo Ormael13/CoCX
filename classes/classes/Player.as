@@ -2540,10 +2540,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.DefensiveStaffChanneling) && (isStaffTypeWeapon() || isPartiallyStaffTypeWeapon())) magicmult *= 0.5;
 			if (damage * magicmult <= mana) {
 				mana -= (damage * magicmult);
-				if (display) {
-					if (damage > 0) SceneLib.combat.CommasForDigits(damage, "Absorbed ");
-					else outputText("<b>([font-miss]Absorbed " + damage + "</font>)</b>");
-				}
+				if (display) SceneLib.combat.CommasForDigits(damage, false, "Absorbed ");
 				game.mainView.statsView.showStatDown('mana');
 				dynStats("lus", 0); //Force display arrow.
 				return 0;
@@ -2551,10 +2548,7 @@ use namespace CoC;
 			else {
 				var partial:Number = Math.round(mana / magicmult);
 				damage -= partial;
-				if (display) {
-					if (damage > 0) SceneLib.combat.CommasForDigits(partial, "Absorbed ");
-					else outputText("<b>([font-miss]Absorbed " + partial + "</font>)</b>");
-				}
+				if (display) SceneLib.combat.CommasForDigits(partial, false, "Absorbed ");
 				mana = 0;
 				game.mainView.statsView.showStatDown('mana');
 				dynStats("lus", 0); //Force display arrow.
@@ -2564,19 +2558,13 @@ use namespace CoC;
 		public function bloodShieldAbsorb(damage:Number, display:Boolean = false):Number{
 			if (damage <= statusEffectv1(StatusEffects.BloodShield)) {
 				addStatusValue(StatusEffects.BloodShield,1,-damage);
-				if (display) {
-					if (damage > 0) SceneLib.combat.CommasForDigits(damage, "Absorbed ");
-					else outputText("<b>([font-miss]Absorbed " + damage + "</font>)</b>");
-				}
+				if (display) SceneLib.combat.CommasForDigits(damage, false, "Absorbed ");
 				return 0;
 			}
 			else {
 				var partial:Number = statusEffectv1(StatusEffects.BloodShield);
 				damage -= partial;
-				if (display) {
-					if (damage > 0) SceneLib.combat.CommasForDigits(partial, "Absorbed ");
-					else outputText("<b>([font-miss]Absorbed " + partial + "</font>)</b>");
-				}
+				if (display) SceneLib.combat.CommasForDigits(partial, false, "Absorbed ");
 				removeStatusEffect(StatusEffects.BloodShield);
 				return damage;
 			}
@@ -2677,18 +2665,15 @@ use namespace CoC;
 					//game.HPChange(-damage, display);
 					damage = Math.round(damage);
 					HP -= damage;
-					if (display) {
-						if (damage > 0) SceneLib.combat.CommasForDigits(damage);
-						else outputText("<b>([font-miss]" + damage + "</font>)</b>");
-					}
+					if (display) SceneLib.combat.CommasForDigits(damage);
 					game.mainView.statsView.showStatDown('hp');
 					dynStats("lus", 0); //Force display arrow.
 				}
 				if (flags[kFLAGS.MINOTAUR_CUM_REALLY_ADDICTED_STATE] > 0) {
-					dynStats("lus", int(damage / 2));
+					dynStats("lus", int(damage / 2), "scale", false);
 				}
 				if (damagetype == 0 && flags[kFLAGS.YAMATA_MASOCHIST] > 1 && flags[kFLAGS.AIKO_BOSS_COMPLETE] < 1) {
-					dynStats("lus", int(damage / 8));
+					dynStats("lus", int(damage / 8), "scale", false);
 				}
 				//Prevent negatives
 				if (HP < minHP()){
@@ -6893,7 +6878,7 @@ use namespace CoC;
 			}
 		}
 
-		override public function modStats(dstr:Number, dtou:Number, dspe:Number, dinte:Number, dwis:Number, dlib:Number, dsens:Number, dlust:Number, dcor:Number, scale:Boolean, max:Boolean):void {
+		override public function modStats(dstr:Number, dtou:Number, dspe:Number, dinte:Number, dwis:Number, dlib:Number, dsens:Number, dlust:Number, dcor:Number, scale:Boolean):void {
 			//Easy mode cuts lust gains!
 			if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 && dlust > 0 && scale) dlust /= 10;
 			//Set original values to begin tracking for up/down values if
@@ -6956,25 +6941,9 @@ use namespace CoC;
 				if(hasPerk(PerkLib.Lusty)) dlib += dlib * perkv1(PerkLib.Lusty);
 				if(hasPerk(PerkLib.Sensitive)) dsens += dsens * perkv1(PerkLib.Sensitive);
 				// Uma's Str Cap from Perks (Moved to max stats)
-				/*if (hasPerk(PerkLib.ChiReflowSpeed))
-				{
-					if (str > UmasShop.NEEDLEWORK_SPEED_STRENGTH_CAP)
-					{
-						str = UmasShop.NEEDLEWORK_SPEED_STRENGTH_CAP;
-					}
-				}
-				if (hasPerk(PerkLib.ChiReflowDefense))
-				{
-					if (spe > UmasShop.NEEDLEWORK_DEFENSE_SPEED_CAP)
-					{
-						spe = UmasShop.NEEDLEWORK_DEFENSE_SPEED_CAP;
-					}
-				}*/
 			}
 			//Change original stats
-			super.modStats(dstr,dtou,dspe,dinte,dwis,dlib,dsens,dlust,dcor,false,max);
-			//Refresh the stat pane with updated values
-			//mainView.statsView.showUpDown();
+			super.modStats(dstr,dtou,dspe,dinte,dwis,dlib,dsens,dlust,dcor,false);
 			if (dlust != 0){
 				raijuSuperchargedCheck();
 			}
@@ -7100,7 +7069,7 @@ use namespace CoC;
 			}
 		}
 
-		public override function takeLustDamage(lustDmg:Number, display:Boolean = true, applyRes:Boolean = true):Number{
+		public override function takeLustDamage(lustDmg:Number, display:Boolean = false, applyRes:Boolean = true):Number{
 			var x:Number = super.takeLustDamage(lustDmg, display, applyRes);
 			raijuSuperchargedCheck();
 			return x;

@@ -46,7 +46,7 @@ use namespace CoC;
 				damage += this.wis * 2;
 				damage = Math.round(damage);
 				damage = player.takePoisonDamage(damage, true);
-				player.dynStats("lus", 7 + rand(5) + player.effectiveSensitivity() / 5);
+				player.takeLustDamage(7 + rand(5) + player.effectiveSensitivity() / 5, true);
 			}
 		}
 		private function Dragonbreath():void

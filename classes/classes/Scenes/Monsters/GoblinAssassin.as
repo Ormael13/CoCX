@@ -64,13 +64,13 @@ public class GoblinAssassin extends Monster
 			{
 				//Miss:
 				outputText("\nYou’ve already prepared, however, as you hold your breath and grab the goblin by her sides. Unhindered by her advance, you take the opportunity to move backwards, throwing the goblin off balance and leaving you only faintly smelling of her pussy.");
-				player.dynStats("lus", rand(player.lib/10)+4);
+				player.takeLustDamage(rand(player.lib/10)+4, true);
 			}
 			//Hit:
 			else
 			{
 				outputText("\nYou’re far too distracted to notice the needle injected into the back of your neck, but by the time she flips back into her original position you already feel the contents of the syringe beginning to take effect.");
-				player.dynStats("lus", rand(player.lib/4)+20);
+				player.takeLustDamage(rand(player.lib/4)+20, true);
 			}
 		}
 		//Dual Shot

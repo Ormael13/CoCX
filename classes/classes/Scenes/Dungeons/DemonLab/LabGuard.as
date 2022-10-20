@@ -117,7 +117,7 @@ public class LabGuard extends Monster {
         } else {
             outputText("You hear a little chuckle, a demonic laugh that sends the [skin] on the back of your neck crawling. You see the demonic soldiers you’d just injured being pulled back behind the front, and you can hear gasps, moans and whispers, oddly as loud as the sounds of battle. Your vision blurs for a moment, and you can feel a throbbing in your groin. The sounds fade, leaving you flushed, and the soldiers who’d been pulled back are elbowing their way to the front, faces red, dicks or clits engorged, and a smile on each ‘healed’ face. You notice many of the injuries they’ve sustained are gone. ");
             addHP(inteligencescalingbonus() * 4);
-            player.takeLustDamage(5 + (player.lib / 10) + (player.cor / 10) + rand(10));
+            player.takeLustDamage(5 + (player.lib / 10) + (player.cor / 10) + rand(10), true);
         }
     }
 
@@ -128,7 +128,7 @@ public class LabGuard extends Monster {
         } else {
             outputText("Unable to block so many different attacks, they open some injuries on your [skin].");
             for (var i:int = 0; i < 3 + rand(2); ++i)
-                eOneAttack();
+                eOneAttack(true);
         }
     }
 
@@ -139,14 +139,14 @@ public class LabGuard extends Monster {
         if (player.hasCock()) outputText("  You can all but feel your [cock] jamming into the tight passage of a succubus, her walls pressing around you, milking your rod for all the slut’s worth. You can feel your hands around her neck, forcing the bitch to wail as you ravage her cunt, forcing her lips wide as you spurt your load inside…");
         if (player.hasVagina()) outputText(" Your labia quivers at the sight, your knees shake as you can all but feel the throbbing rods inside you, veins pulsing. Warmth spreads to your womb as you can feel the twitch, as the demon’s sperm erupts into…");
         outputText("You shake yourself, [weapon] lashing at the two demons who broke formation, arms wide as if to embrace you. They flee back to the lines, but you can feel your arousal growing, the pink mists of lust magic in the air around you. ");
-        player.takeLustDamage(200 + (player.lib / 8) + (player.cor / 4) + rand(10));
+        player.takeLustDamage(200 + (player.lib / 8) + (player.cor / 4) + rand(10), true);
     }
 
     private function ThrownWeapons():void {
         outputText("The demons in the front line duck, and your eyes widen as succubi and incubi alike unleash a barrage of thrown weapons. Spears, axes, throwing knives, rocks, even a dildo or two, thrown from the back. One bounces off your forehead, leaving a sticky splatter.  ");
         for (var i:int = 0; i < 10; ++i) {
-            if (rand(2) == 0)  eOneAttack();
-            else player.takeLustDamage(10 + (player.lib / 20) + (player.cor / 20) + rand(10));
+            if (rand(2) == 0)  eOneAttack(true);
+            else player.takeLustDamage(10 + (player.lib / 20) + (player.cor / 20) + rand(10), true);
         }
     }
 
