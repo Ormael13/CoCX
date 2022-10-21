@@ -231,59 +231,59 @@ public class DilapidatedShrine extends BaseContent
 				else{//"Staff", "Tome", "Scythe", "Ribbon"
 					switch (wType[1]){
 						case ItemConstants.WT_GAUNTLET:
-							player.gauntletXP(40);
+							combat.gauntletXP(40);
 							break;
 						case ItemConstants.WT_SWORD:
-							player.swordXP(40);
+                            combat.swordXP(40);
 							break;
 						case ItemConstants.WT_AXE:
-							player.axeXP(40);
+                            combat.axeXP(40);
 							break;
 						case ItemConstants.WT_MACE_HAMMER:
-							player.macehammerXP(40);
+                            combat.macehammerXP(40);
 							break;
 						case ItemConstants.WT_DUELING:
-							player.duelingswordXP(40);
+                            combat.duelingswordXP(40);
 							break;
 						case ItemConstants.WT_POLEARM:
-							player.polearmXP(40);
+                            combat.polearmXP(40);
 							break;
 						case ItemConstants.WT_SPEAR:
-							player.spearXP(40);
+                            combat.spearXP(40);
 							break;
 						case ItemConstants.WT_DAGGER:
-							player.daggerXP(40);
+                            combat.daggerXP(40);
 							break;
 						case ItemConstants.WT_WHIP:
-							player.whipXP(40);
+                            combat.whipXP(40);
 							break;
 						case ItemConstants.WT_THROWING:
-							player.throwingXP(40);
+                            combat.throwingXP(40);
 							break;
 						case ItemConstants.WT_BOW:
-							player.archeryXP(40);
+                            combat.archeryXP(40);
 							break;
 						case ItemConstants.WT_CROSSBOW:
-							player.archeryXP(40);
+                            combat.archeryXP(40);
 							break;
 						case ItemConstants.WT_2H_FIREARM:
-							player.firearmsXP(40);
+                            combat.firearmsXP(40);
 							break;
 						case ItemConstants.WT_RIFLE:
-							player.firearmsXP(40);
+                            combat.firearmsXP(40);
 							break;
 						case ItemConstants.WT_PISTOL:
-							player.firearmsXP(40);
+                            combat.firearmsXP(40);
 							break;
 						case ItemConstants.WT_DUAL_FIREARMS:
-							player.firearmsXP(40);
-							player.dualWieldFirearmsXP(40);
+                            combat.firearmsXP(40);
+                            combat.dualWieldFirearmsXP(40);
 							break;
 						case ItemConstants.WT_EXOTIC:
-							player.exoticXP(40);
+                            combat.exoticXP(40);
 							break;
 						case ItemConstants.WT_RIBBON:
-							player.exoticXP(40);
+                            combat.exoticXP(40);
 							break;
 						}
 					player.destroyItems(wType[0],1);
