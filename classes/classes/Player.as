@@ -5671,7 +5671,6 @@ use namespace CoC;
             }
 			// Massive Weapon attack count
             if(combatMasteryPos == 21){
-                if(combatMastery[combatMasteryPos].level >= 15) rval += 1;
                 if(combatMastery[combatMasteryPos].level >= 30) rval += 1;
             }
 
