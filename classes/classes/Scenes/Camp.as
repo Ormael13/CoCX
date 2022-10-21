@@ -2158,7 +2158,7 @@ public class Camp extends NPCAwareContent{
 			[consumables.HG_SFRP, consumables.HGSFRPB, "high"],
 			[consumables.SG_SFRP, consumables.SGSFRPB, "superior"],
 		];
-		fillUpPillBottle.apply(null, bottles[0]);
+		//fillUpPillBottle.apply(null, bottles[0]);
 		for (var i:int = 0; i < bottles.length; ++i) {
 			addButton(5 + i, "FillBottle(" + bottles[i][2].charAt(0).toUpperCase() + ")", fillUpPillBottle.apply, null, bottles[i])
 				.hint("Fill up one of your pill bottles with "+bottles[i][2]+"-grade soulforce recovery pills.")
