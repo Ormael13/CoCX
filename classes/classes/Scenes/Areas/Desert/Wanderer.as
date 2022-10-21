@@ -100,7 +100,7 @@ private function wandererDemonEpilogue():void {
 			outputText("\"<i>I stopped by and I wanted to thank you for this,</i>\" Lucia purrs, balancing a purple crystal along her knuckles.  It sparkles and glitters with a light in the sunlight as she speaks, \"<i>You see, when a human or other mortal creature finally begins to desire corruption and pleasure more than everything else, they can become a demon.  The process leaves behind a single crystal of lethicite – this crystal.  It's a power source beyond anything you can comprehend, and I have you to thank for giving it to me.</i>\"\n\n");
 			outputText("Lucia places a small bottle in your hand.  \"<i>So thank you, and have this present.  Perhaps you can create some lethicite for us later... oh, and before I forget, Marcus is loving his new existence.</i>\"\n\n");
 			outputText("She steps away and blows a kiss as her wings unfurl.  With a powerful downstroke she scatters sand everywhere, forcing you to throw an arm in front of your eyes.  When the debris settles, she's gone.\n\n");
-			dynStats("lus", 5);
+			dynStats("lus", 5, "scale", false);
 			inventory.takeItem(consumables.SDELITE, camp.returnToCampUseOneHour);
 			player.statusEffectByType(StatusEffects.WandererDemon).value1 = 1;
 		}
@@ -131,7 +131,7 @@ private function wandererEpilogueHuman():void {
 			if(player.cor < 33) outputText("You duck back behind a dune, blushing furiously.");
 			else if(player.cor < 66) outputText("You blush crimson as you swear you see Lucia look right at you and wink.");
 			else outputText("You openly leer at the crude display, whistling lewdly at the blissful couple.  Marcus looks up and gives a cocky smile, while Lucia licks her lips and gives you a predatory grin.");
-			dynStats("lus", 10);
+			dynStats("lus", 10, "scale", false);
 			//Value 1 is used to track the status of the end state.
 			player.statusEffectByType(StatusEffects.WandererHuman).value1 = 1;
 			doNext(camp.returnToCampUseOneHour);

@@ -42,7 +42,7 @@ public class IgnisArenaSeer extends Monster
 			outputText(" ");
 			var lustDmg:Number = player.lustVuln * ((this.inte / 10) + rand(player.lib + player.cor) / 5);
 			lustDmg = Math.round(lustDmg);
-			player.dynStats("lus", lustDmg, "scale", false);
+			player.takeLustDamage(lustDmg, true);
 			if (!hasStatusEffect(StatusEffects.IgnisCounter)) createStatusEffect(StatusEffects.IgnisCounter, 1, 0, 0, 0);
 			else addStatusValue(StatusEffects.IgnisCounter, 1, 1);
 		}

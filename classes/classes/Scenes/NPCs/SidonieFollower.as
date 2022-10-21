@@ -335,7 +335,7 @@ package classes.Scenes.NPCs
 				else outputText("" + player.skinFurScales() + " ");
 				outputText("fueling the desire between you two even more. Once you’ve foreplayed enough, you lie on Sidonie’s arms, her erection poking your thigh.\n\n");
 				outputText("\"<i>Okay, frisky " + player.mf("boy", "girl") + ",</i>\" she asks you, planting a soft kiss on your neck, \"<i>What’s on your mind?</i>\"\n\n");
-				dynStats("lus", 33);
+				dynStats("lus", 33, "scale", false);
 			}
 			else {
 				outputText("You walk casually near the horse-morph place, and manage to see that she has interrupted her daily routine. Judging about how she has her shirt unbuttoned and folded over her shoulder, having only a white, sleeveless piece covering her ample bosom.\n\n");
@@ -377,7 +377,7 @@ package classes.Scenes.NPCs
 				outputText("fueling the desire between you two even more. Once you’ve foreplayed enough, you lie on Sidonie’s arms, her erection poking your thigh.\n\n");
 				outputText("\"<i>Okay, frisky " + player.mf("boy","girl") + ".</i>\", shes ask you, planting a soft kiss on your neck, \"<i>What’s on your mind?</i>\"\n\n");
 				flags[kFLAGS.SIDONIE_SEX_MENU] = 1;
-				dynStats("lus", 33);
+				dynStats("lus", 33, "scale", false);
 			}
 			menu();
 			addButton(0, "Get fucked", SidonieSexGetFucked);
@@ -412,6 +412,7 @@ package classes.Scenes.NPCs
 			else outputText("backside enticingly to her");
 			outputText(", which is answered by a playful buttslap. Soon, strong arms grab your butt and spread apart your buttcheeks, leaving your pucker vulnerable to the horse-girl desires. Then you feel it. The unmistakable sensation of her wide flare poing your tailhole, her cumslit soaking the [player.skin.coat.color] " + player.skinFurScales() + " of your butt.\n\n");
 			outputText("Done with the foreplay, Sidonie starts pushing her massive meat pole in, taking your breath aways as she impales you in that delicious horsecock. Your anal walls are forced apart, as inch after inch of her cock make its way inside you, her flare spreading your inner muscles. Seeing how you seem to have some issues taking a cock as big as hers, she goes slow and gently, bit by bit, sheathing her cock in your ass slow enough to don’t force your body, but fast enough to be unbelievably wonderful. ");
+			player.buttChange(60, true);
 			outputText("The sensation of her meat spearing you takes away any kind of pain that you may have, and replaces it with a sheer feeling of pleasure. Once all off her equine member is in, the horse-girl gives you a moment of reprieve to get used to its sheer size, and then starts fucking your doggie-style!\n\n");
 			outputText("Her hands take a strong grip on your hips, and she pushes her erection deep enough so her hips collide against you butt. You’re utterly filled with her meat, and you’re loving every fucking second of it, feeling her hot rod pulsating inside your slutty ass. Then, she slides her meat out, leaving your bum painfully empty, locked to her dick only by the wide flare resting inside your tailhole. Thankfully, she doesn’t let you empty for long, her dick quicking ramming her way inside again, ");
 			outputText("with such force that you collapse on the bed, your [legs] spread apart as you’re reduced into a slutty, moaning mess under the horse-girl continuous anal assault. Your ");

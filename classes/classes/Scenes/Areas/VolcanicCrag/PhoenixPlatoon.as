@@ -44,7 +44,7 @@ import classes.internals.WeightedDrop;
 		public function phoenixPlatoonLustbang():void {
 			outputText("\"<i>LUSTBANGS OUT!</i>\" one of the rear-most phoenixes shouts, causing all the other warriors to duck down behind their shields.  Oh, shit!  Few large glass spheres rolls out from the shield wall, and immediately explodes in a great pink cloud.  You cough and wave your arms, but by the time the cloud has dissipated, you feel lightheaded and lusty, barely able to resist the urge to throw yourself at the phoenixes and beg for their cocks and cunts.");
 			//(Effect: Large lust increase)
-			player.dynStats("lus", Math.round(120+(player.lib*1.4)));
+			player.takeLustDamage(Math.round(120+(player.lib*1.4)), true);
 		}
 		
 		override protected function performCombatAction():void

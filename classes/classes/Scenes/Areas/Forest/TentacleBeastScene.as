@@ -76,7 +76,7 @@ public function encounter():void {
 		outputText("At a loss for words, you meekly offer the creature some of your food you have packed for your journey. The creature slaps it out of your hand, almost breaking your wrist.\n\n\"<i>I can't eat that shit!</i>\" roars the abomination. \"<i>Do I look like I have a fucking mouth to chew that with?! NOOOOOO! I feed off dicks and wayward women! Cum and tit milk! YOU have NEITHER!!!</i>\"  ");
 		outputText("The beast slaps you squarely on the ass as if to push you along. \"<i>Get the fuck out of here!</i>\" it screams. \"<i>Get lost, so I can hunt myself a REAL meal!!!</i>\"");
 		outputText("You walk away from the creature, which hides back in the brush. After you trek a bit, you wonder if what happened really DID happen...");
-		dynStats("lus", -5);
+		dynStats("lus", -5, "scale", false);
 		doNext(camp.returnToCampUseOneHour);
 		return;
 	}

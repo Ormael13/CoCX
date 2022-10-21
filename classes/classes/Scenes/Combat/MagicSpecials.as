@@ -1620,7 +1620,7 @@ public class MagicSpecials extends BaseCombatContent {
 			damage = Math.round(0.5 * damage);
 		}
 		//Miss:
-		if((player.playerIsBlinded() && rand(2) == 0) || (monster.speedDodge(player) > 0)) {
+		if((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe))) {
 			outputText("  Despite the heavy impact caused by your attack, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
@@ -1875,7 +1875,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		outputText("You spit a blob of neon blue acid at [themonster] your corrosive fluids burning at "+((monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType)) ? "their" : "[monster his]")+" flesh.");
 		//Miss:
-		if((player.playerIsBlinded() && rand(2) == 0) || (monster.speedDodge(player) > 0)) {
+		if((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe))) {
 			outputText("  Despite the heavy impact caused by your attack, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
@@ -1961,7 +1961,7 @@ public class MagicSpecials extends BaseCombatContent {
 			damage = Math.round(0.5 * damage);
 		}
 		//Miss:
-		if((player.playerIsBlinded() && rand(2) == 0) || (monster.speedDodge(player) > 0)) {
+		if((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe))) {
 			outputText("  Despite the heavy impact caused by your attack, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
@@ -2071,7 +2071,7 @@ public class MagicSpecials extends BaseCombatContent {
 			damage = Math.round(0.5 * damage);
 		}
 		//Miss:
-		if((player.playerIsBlinded() && rand(2) == 0) || (monster.speedDodge(player) > 0)) {
+		if((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe))) {
 			outputText("  Despite the heavy impact caused by your roar, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
@@ -2169,7 +2169,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		outputText("Tapping into the power deep within you, you let loose a bellowing roar at your enemy, so forceful that even the environs crumble around [monster him].  [Themonster] does [monster his] best to avoid it, but the wave of force is too fast.");
 		//Miss:
-		if((player.playerIsBlinded() && rand(2) == 0) || (monster.speedDodge(player) > 0)) {
+		if((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe))) {
 			outputText("  Despite the heavy impact caused by your roar, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
@@ -2252,7 +2252,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		outputText("Tapping into the power deep within you, you let loose a bellowing roar at your enemy, so forceful that even the environs crumble around [monster him].  [Themonster] does [monster his] best to avoid it, but the wave of force is too fast.");
 		//Miss:
-		if((player.playerIsBlinded() && rand(2) == 0) || (monster.speedDodge(player) > 0)) {
+		if((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe))) {
 			outputText("  Despite the heavy impact caused by your roar, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
@@ -2505,7 +2505,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		outputText("Tapping into the power deep within you, you let loose a bellowing roar at your enemy, so forceful that even the environs crumble around [monster him].  [Themonster] does [monster his] best to avoid it, but the wave of force is too fast.<b>Your opponent is now wet with water!</b>");
 		//Miss:
-		if((player.playerIsBlinded() && rand(2) == 0) || (monster.speedDodge(player) > 0)) {
+		if((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe))) {
 			outputText("  Despite the heavy impact caused by your roar, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
@@ -2587,7 +2587,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		outputText("Tapping into the power deep within you, you let loose a bellowing roar at your enemy, so forceful that even the environs crumble around [monster him].  [Themonster] does [monster his] best to avoid it, but the wave of force is too fast.");
 		//Miss:
-		if((player.playerIsBlinded() && rand(2) == 0) || (monster.speedDodge(player) > 0)) {
+		if((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe))) {
 			outputText("  Despite the heavy impact caused by your roar, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
@@ -2728,7 +2728,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			outputText("You wreel back your head, sucking in a large breath of air before letting out all the collected energy. You let loose a bellowing roar at [themonster], so forceful that even the landscape begins to warp around the blast. [Themonster] attempts to dodge but the sheer size and speed is to immense to avoid as they are slammed with Fire, Ice, Lightning and Darkness. ");
 			//Miss:
-			if((player.playerIsBlinded() && rand(2) == 0) || (monster.speedDodge(player) > 0)) {
+			if((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe))) {
 				outputText("  Despite the heavy impact caused by your roar, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 			}
 			//Special enemy avoidances
@@ -5049,7 +5049,7 @@ public class MagicSpecials extends BaseCombatContent {
 			damage = Math.round(0.5 * damage);
 		}
 		//Miss:
-		if((player.playerIsBlinded() && rand(2) == 0) || (monster.speedDodge(player) > 0)) {
+		if((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe))) {
 			outputText("  Against all odds, [themonster] manages to avoid your deadly winds. [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
@@ -5131,7 +5131,7 @@ public class MagicSpecials extends BaseCombatContent {
 			damage = Math.round(0.5 * damage);
 		}
 		//Miss:
-		if((player.playerIsBlinded() && rand(2) == 0) || (monster.speedDodge(player) > 0)) {
+		if((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe))) {
 			outputText("  Against all odds, [themonster] manages to avoid your deadly winds. [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
@@ -5545,7 +5545,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("too resolute to be stunned by your attack.</b>");
 		}*/
 		outputText("Your elemental unleash a barrage of star shaped bolts of arcane energy, blasting your opponent. ");
-		doDamage(damage, true, true);
+		doMagicDamage(damage, true, true);
 		outputText("\n\n");
 		//checkMinionsAchievementDamage(damage);
 		enemyAI();
@@ -5988,7 +5988,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("too resolute to be stunned by your attack.</b>");
 		}*/
 		outputText("Your purity elemental produces a ray of hyper condensed and pure light and aims it straight at [themonster] doing ");
-		doDamage(damage, true, true);outputText(" damage.\n\n");
+		doMagicDamage(damage, true, true);outputText(" damage.\n\n");
 		//checkMinionsAchievementDamage(damage);
 		enemyAI();
 	}
@@ -6047,7 +6047,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("too resolute to be stunned by your attack.</b>");
 		}*/
 		outputText("Your corruption elemental condenses corruption from air into solid matter, striking your opponent with them doing ");
-		doDamage(damage, true, true);
+		doMagicDamage(damage, true, true);
 		outputText(" damage.\n\n");
 		//checkMinionsAchievementDamage(damage);
 		enemyAI();
@@ -6225,7 +6225,7 @@ public class MagicSpecials extends BaseCombatContent {
 //	if (player.hasPerk(PerkLib.ColdMastery)) damage *= 2;
 //	if (player.hasPerk(PerkLib.ColdAffinity)) damage *= 2;
 		damage = Math.round(damage);
-		doDamage(damage);
+		doIceDamage(damage);
 		outputText(" <b>(<font color=\"#800000\">" + damage + "</font>)</b>\n\n");
 		player.removeStatusEffect(StatusEffects.IcePrisonSpell);
 		SceneLib.arianScene.clearTalisman();

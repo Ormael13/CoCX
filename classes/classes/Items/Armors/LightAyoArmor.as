@@ -13,7 +13,6 @@ package classes.Items.Armors
 		
 		public function LightAyoArmor() {//80 * armor + mres
 			super("LAyoArm","LAyoArm","light ayo armor","a light ayo armor",60,10,5600,"This suit of armor is more than typical heavy armor - it have added pieces of Ayo Tech that increase it properties as long user is capable to feed it on regular basis with soulforce.","Light Ayo");
-			withBuffs({"str": -10, "spe": -10});
 		}
 		
 		override public function get def():Number {
@@ -25,6 +24,13 @@ package classes.Items.Armors
 			if (game.flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] > 0) return 10;
 			else return 6;
 		}
+
+		override public function afterEquip(doOutput:Boolean):void {
+			game.flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] = 0;
+			game.player.buff("Ayo Armor").remove();
+			game.player.buff("Ayo Armor").addStats( {"str": -10, "spe": -10} );
+			super.afterEquip(doOutput);
+		}
 		
 		override public function afterUnequip(doOutput:Boolean):void {
 			if (game.flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] > 0) {
@@ -32,6 +38,7 @@ package classes.Items.Armors
 				if (game.player.soulforce > game.player.maxSoulforce()) game.player.soulforce = game.player.maxSoulforce();
 				game.flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] = 0;
 			}
+			game.player.buff("Ayo Armor").remove();
 			super.afterUnequip(doOutput);
 		}
 		

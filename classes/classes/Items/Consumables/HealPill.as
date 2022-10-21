@@ -45,7 +45,7 @@ import classes.PerkLib;
 			
 			if (rand > 90) {
 				outputText("You shudder as a small orgasm passes through you. When you recover you actually feel more aroused.");
-				dynStats("lus", 5);
+				dynStats("lus", 5, "scale", false);
 			}
 			
 			return false;

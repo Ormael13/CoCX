@@ -1370,7 +1370,7 @@ public class Camp extends NPCAwareContent{
 			}
 			//Chi Chi
 			if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2 && flags[kFLAGS.CHI_CHI_FOLLOWER] != 5 && !player.hasStatusEffect(StatusEffects.ChiChiOff)) {
-				outputText("You can see Chi Chi not so far from Jojo. She’s busy practicing her many combos on a dummy. Said dummy will more than likely have to be replaced within twenty four hours.\n\n");
+				outputText("You can see Chi Chi " + (player.hasStatusEffect(StatusEffects.PureCampJojo) ?  "not so far from Jojo's place" : "near the center of your camp") + ". She’s busy practicing her many combos on a dummy. Said dummy will more than likely have to be replaced within the next twenty-four hours.\n\n");
 				if (player.statusEffectv4(StatusEffects.CampLunaMishaps2) > 0) buttons.add("Chi Chi", SceneLib.chichiScene.ChiChiCampMainMenu2).disableIf(player.statusEffectv4(StatusEffects.CampLunaMishaps2) > 0, "Wet.");
 				else buttons.add("Chi Chi", SceneLib.chichiScene.ChiChiCampMainMenu2).disableIf(player.statusEffectv2(StatusEffects.CampSparingNpcsTimers2) > 0, "Training.");
 			}
@@ -2152,14 +2152,19 @@ public class Camp extends NPCAwareContent{
 		else addButtonDisabled(3, "Hot Spring", "Would you kindly build it first?");
 		if (player.hasPerk(PerkLib.CursedTag)) addButton(4, "AlterBindScroll", AlterBindScroll).hint("Alter Bind Scroll - DIY aka modify your cursed tag").disableIf(isNightTime, "It's too dark to modify your scroll.");
 		else addButtonDisabled(4, "Alter Bind Scroll", "Req. to be Jiangshi and having Cursed Tag perk.");
-		if (player.hasItem(consumables.LG_SFRP, 10) && (player.hasItem(useables.E_P_BOT, 1))) addButton(5, "Fill bottle", fillUpPillBottle00).hint("Fill up one of your pill bottles with low-grade soulforce recovery pills.");
-		else addButtonDisabled(5, "Fill bottle", "You need one empty pill bottle and ten low-grade soulforce recovery pills.");
-		if (player.hasItem(consumables.MG_SFRP, 10) && (player.hasItem(useables.E_P_BOT, 1))) addButton(6, "Fill bottle", fillUpPillBottle01).hint("Fill up one of your pill bottles with mid-grade soulforce recovery pills.");
-		else addButtonDisabled(6, "Fill bottle", "You need one empty pill bottle and ten mid-grade soulforce recovery pills.");
-		if (player.hasItem(consumables.HG_SFRP, 10) && (player.hasItem(useables.E_P_BOT, 1))) addButton(7, "Fill bottle", fillUpPillBottle02).hint("Fill up one of your pill bottles with high-grade soulforce recovery pills.");
-		else addButtonDisabled(7, "Fill bottle", "You need one empty pill bottle and ten high-grade soulforce recovery pills.");
-		if (player.hasItem(consumables.SG_SFRP, 10) && (player.hasItem(useables.E_P_BOT, 1))) addButton(8, "Fill bottle", fillUpPillBottle03).hint("Fill up one of your pill bottles with superior-grade soulforce recovery pills.");
-		else addButtonDisabled(8, "Fill bottle", "You need one empty pill bottle and ten high-grade soulforce recovery pills.");
+		var bottles:Array = [
+			[consumables.LG_SFRP, consumables.LGSFRPB, "low"],
+			[consumables.MG_SFRP, consumables.MGSFRPB, "mid"],
+			[consumables.HG_SFRP, consumables.HGSFRPB, "high"],
+			[consumables.SG_SFRP, consumables.SGSFRPB, "superior"],
+		];
+		fillUpPillBottle.apply(null, bottles[0]);
+		for (var i:int = 0; i < bottles.length; ++i) {
+			addButton(5 + i, "FillBottle(" + bottles[i][2].charAt(0).toUpperCase() + ")", fillUpPillBottle.apply, null, bottles[i])
+				.hint("Fill up one of your pill bottles with "+bottles[i][2]+"-grade soulforce recovery pills.")
+				.disableIf(!player.hasItem(bottles[i][0], 10) || !player.hasItem(useables.E_P_BOT, 1),
+					"You need one empty pill bottle and ten "+bottles[i][2]+"-grade soulforce recovery pills.");
+		}
 		if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) addButton(10, "Clone", VisitClone).hint("Check on your clone(s).");
 		else addButtonDisabled(10, "Clone", "Would you kindly go face F class Heaven Tribulation first?");
 		if (player.hasItem(useables.ENECORE, 1) && flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] < 200) addButton(12, "E.Core", convertingEnergyCoreIntoFlagValue).hint("Convert Energy Core item into flag value.");
@@ -2663,119 +2668,83 @@ public class Camp extends NPCAwareContent{
 	}
 	
 	private function AlterBindScroll():void {
+		var statusNames:Array = [
+			[StatusEffects.AlterBindScroll1, "No Limiter"],
+			[StatusEffects.AlterBindScroll2, "Unliving Leech"],
+			[StatusEffects.AlterBindScroll3, "Undead Resistance"],
+			[StatusEffects.AlterBindScroll4, "Vital Sense"],
+			[StatusEffects.AlterBindScroll5, "Zombified"],
+		];
+		var i:int;
 		clearOutput();
 		var limitOnAltering:Number = 1;
-		var currentAltering:Number = 0;
 		if (player.hasPerk(PerkLib.ImprovedCursedTag)) limitOnAltering += 1;
 		if (player.hasPerk(PerkLib.GreaterCursedTag)) limitOnAltering += 3;
-		if (player.hasStatusEffect(StatusEffects.AlterBindScroll1)) currentAltering += 1;
-		if (player.hasStatusEffect(StatusEffects.AlterBindScroll2)) currentAltering += 1;
-		if (player.hasStatusEffect(StatusEffects.AlterBindScroll3)) currentAltering += 1;
-		if (player.hasStatusEffect(StatusEffects.AlterBindScroll4)) currentAltering += 1;
-		if (player.hasStatusEffect(StatusEffects.AlterBindScroll5)) currentAltering += 1;
+		var currentAltering:Number = 0;
+		for (i = 0; i < statusNames.length; ++i) {
+			if (player.hasStatusEffect(statusNames[i][0])) ++currentAltering;
+		}
 		outputText("Would you like to alter your curse tag, and if so, with what changes?\n\n");
 		outputText("Current active powers / Limit of active powers: "+currentAltering+" / "+limitOnAltering+"\n\n");
-		//displayHeader("Active powers:");
-		//outputText("\n");
 		outputText("<u><b>Active powers:</b></u>\n");
-		if (player.hasStatusEffect(StatusEffects.AlterBindScroll1)) outputText("<b>-No limiter</b>\n");
-		if (player.hasStatusEffect(StatusEffects.AlterBindScroll2)) outputText("<b>-Unliving Leech</b>\n");
-		if (player.hasStatusEffect(StatusEffects.AlterBindScroll3)) outputText("<b>-Undead resistance</b>\n");
-		if (player.hasStatusEffect(StatusEffects.AlterBindScroll4)) outputText("<b>-Vital Sense</b>\n");
-		if (player.hasStatusEffect(StatusEffects.AlterBindScroll5)) outputText("<b>-Zombified</b>\n");
-		//outputText("\n");
-		//displayHeader("Effects of each powers:");
+		for (i = 0; i < statusNames.length; ++i) {
+			if (player.hasStatusEffect(statusNames[i][0])) outputText("<b>- " + statusNames[i][1] + "</b>\n")
+		}
 		outputText("\n<u><b>Effects of each powers:</b></u>\n");
-		//outputText("\n");
-		outputText("No limiter -> <i>Your zombified body is extremely resilient to physical damage and thus grants you +40% damage reduction. Furthermore the absence of a brain limiter allows you to push your limb strength beyond their normal capacity increasing your total strength by 100% of its value at the cost of your body integrity, taking light libido weakening on each attack. This is a togglable ability.</i>\n");
+		outputText("No Limiter -> <i>Your zombified body is extremely resilient to physical damage and thus grants you +40% damage reduction. Furthermore the absence of a brain limiter allows you to push your limb strength beyond their normal capacity increasing your total strength by 100% of its value at the cost of your body integrity, taking light libido weakening on each attack. This is a togglable ability.</i>\n");
 		outputText("Unliving Leech -> <i>Double the benefits of Life Leech and the power cap on Energy harvested from Energy Dependant.</i>\n");
-		outputText("Undead resistance -> <i>Gain Immunity to Cold, Poison and Fatigue damage.</i>\n");
+		outputText("Undead Resistance -> <i>Gain Immunity to Cold, Poison and Fatigue damage.</i>\n");
 		outputText("Vital Sense -> <i>You sense and see your opponents strong vital points which grants you increased critical damage. Increase critical strike damage multiplier by 1 time.</i>\n");
 		outputText("Zombified -> <i>You are immune to mental attacks that would affect living sane beings. Furthermore you have unlimited fatigue.</i>\n");
 		menu();
-		if (limitOnAltering > currentAltering && !player.hasStatusEffect(StatusEffects.AlterBindScroll1)) addButton(0, "No limiter", AlterBindScrollNoLimiter).hint("You not have this power active. Do you want to activate it?");
-		else {
-			if (player.hasStatusEffect(StatusEffects.AlterBindScroll1)) addButton(0, "No limiter", AlterBindScrollNoLimiter).hint("You already have this power active. Do you want to deactivate it?");
-			else addButtonDisabled(0, "No limiter", "You already have the maximum amount of powers active as you can maintain without breaking yourself.");
-		}
-		if (limitOnAltering > currentAltering && !player.hasStatusEffect(StatusEffects.AlterBindScroll2)) addButton(1, "Unliving Leech", AlterBindScrollUnlivingLeech).hint("You not have this power active. Do you want to activate it?");
-		else {
-			if (player.hasStatusEffect(StatusEffects.AlterBindScroll2)) addButton(1, "Unliving Leech", AlterBindScrollUnlivingLeech).hint("You already have this power active. Do you want to deactivate it?");
-			else addButtonDisabled(1, "Unliving Leech", "You already have the maximum amount of powers active as you can maintain without breaking yourself.");
-		}
-		if (limitOnAltering > currentAltering && !player.hasStatusEffect(StatusEffects.AlterBindScroll3)) addButton(2, "Undead resistance", AlterBindScrollUndeadResistance).hint("You not have this power active. Do you want to activate it?");
-		else {
-			if (player.hasStatusEffect(StatusEffects.AlterBindScroll3)) addButton(2, "Undead resistance", AlterBindScrollUndeadResistance).hint("You already have this power active. Do you want to deactivate it?");
-			else addButtonDisabled(2, "Undead resistance", "You already have the maximum amount of powers active as you can maintain without breaking yourself.");
-		}
-		if (limitOnAltering > currentAltering && !player.hasStatusEffect(StatusEffects.AlterBindScroll4)) addButton(3, "Vital Sense", AlterBindScrollVitalSense).hint("You not have this power active. Do you want to activate it?");
-		else {
-			if (player.hasStatusEffect(StatusEffects.AlterBindScroll4)) addButton(3, "Vital Sense", AlterBindScrollVitalSense).hint("You already have this power active. Do you want to deactivate it?");
-			else addButtonDisabled(3, "Vital Sense", "You already have the maximum amount of powers active as you can maintain without breaking yourself.");
-		}
-		if (limitOnAltering > currentAltering && !player.hasStatusEffect(StatusEffects.AlterBindScroll5)) addButton(4, "Zombified", AlterBindScrollZombified).hint("You not have this power active. Do you want to activate it?");
-		else {
-			if (player.hasStatusEffect(StatusEffects.AlterBindScroll5)) addButton(4, "Zombified", AlterBindScrollZombified).hint("You already have this power active. Do you want to deactivate it?");
-			else addButtonDisabled(4, "Zombified", "You already have the maximum amount of powers active as you can maintain without breaking yourself.");
+		for (i = 0; i < statusNames.length; ++i) {
+			addButton(i, statusNames[i][1], alterBindScrollToggle, statusNames[i][0]);
+			if (player.hasStatusEffect(statusNames[i][0])) {
+				button(i).hint("You already have this power active. Do you want to deactivate it?");
+			} else {
+				if (currentAltering < limitOnAltering) button(i).hint("You don't have this power active. Do you want to activate it?");
+				else button(i).disable("You already have the maximum amount of powers active as you can maintain without breaking yourself.");
+			}
 		}
 		addButton(14, "Back", campMiscActions);
 	}
-	private function AlterBindScrollNoLimiter():void {
-		if (player.hasStatusEffect(StatusEffects.AlterBindScroll1)) player.removeStatusEffect(StatusEffects.AlterBindScroll1);
-		else player.createStatusEffect(StatusEffects.AlterBindScroll1,0,0,0,0);
-		doNext(AlterBindScroll);
-	}
-	private function AlterBindScrollUnlivingLeech():void {
-		if (player.hasStatusEffect(StatusEffects.AlterBindScroll2)) player.removeStatusEffect(StatusEffects.AlterBindScroll2);
-		else player.createStatusEffect(StatusEffects.AlterBindScroll2,0,0,0,0);
-		doNext(AlterBindScroll);
-	}
-	private function AlterBindScrollUndeadResistance():void {
-		if (player.hasStatusEffect(StatusEffects.AlterBindScroll3)) player.removeStatusEffect(StatusEffects.AlterBindScroll3);
-		else player.createStatusEffect(StatusEffects.AlterBindScroll3,0,0,0,0);
-		doNext(AlterBindScroll);
-	}
-	private function AlterBindScrollVitalSense():void {
-		if (player.hasStatusEffect(StatusEffects.AlterBindScroll4)) player.removeStatusEffect(StatusEffects.AlterBindScroll4);
-		else player.createStatusEffect(StatusEffects.AlterBindScroll4,0,0,0,0);
-		doNext(AlterBindScroll);
-	}
-	private function AlterBindScrollZombified():void {
-		if (player.hasStatusEffect(StatusEffects.AlterBindScroll5)) player.removeStatusEffect(StatusEffects.AlterBindScroll5);
-		else player.createStatusEffect(StatusEffects.AlterBindScroll5,0,0,0,0);
-		doNext(AlterBindScroll);
+
+	private function alterBindScrollToggle(status:StatusEffectType):void {
+		if (player.hasStatusEffect(status)) player.removeStatusEffect(status);
+		else player.createStatusEffect(status,0,0,0,0);
+		AlterBindScroll();
 	}
 
-	private function fillUpPillBottle00():void {
+	private function fillUpPillBottle(pills:ItemType, result:ItemType, grade:String):void {
 		clearOutput();
-		outputText("You pick up one of your empty pills bottle and starts to put in some of your loose low-grade soulforce recovery pills. Then you close the bottle and puts into backpack.");
+		outputText("You pick up one of your empty pill bottles and start to put in some of your loose "+grade+"-grade soulforce recovery pills. Then you close the bottle and put it into your backpack.");
 		player.destroyItems(useables.E_P_BOT, 1);
-		player.destroyItems(consumables.LG_SFRP, 10);
-		inventory.takeItem(consumables.LGSFRPB, campMiscActions);
+		player.destroyItems(pills, 10);
+		inventory.takeItem(result, campMiscActions);
 	}
-	private function fillUpPillBottle01():void {
-		clearOutput();
-		outputText("You pick up one of your empty pills bottle and starts to put in some of your loose mid-grade soulforce recovery pills. Then you close the bottle and puts into backpack.");
-		player.destroyItems(useables.E_P_BOT, 1);
-		player.destroyItems(consumables.MG_SFRP, 10);
-		inventory.takeItem(consumables.MGSFRPB, campMiscActions);
-	}
-	private function fillUpPillBottle02():void {
-		clearOutput();
-		outputText("You pick up one of your empty pills bottle and starts to put in some of your loose high-grade soulforce recovery pills. Then you close the bottle and puts into backpack.");
-		player.destroyItems(useables.E_P_BOT, 1);
-		player.destroyItems(consumables.HG_SFRP, 10);
-		inventory.takeItem(consumables.HGSFRPB, campMiscActions);
-	}
-	private function fillUpPillBottle03():void {
-		clearOutput();
-		outputText("You pick up one of your empty pills bottle and starts to put in some of your loose superior-grade soulforce recovery pills. Then you close the bottle and puts into backpack.");
-		player.destroyItems(useables.E_P_BOT, 1);
-		player.destroyItems(consumables.SG_SFRP, 10);
-		inventory.takeItem(consumables.SGSFRPB, campMiscActions);
-	}
+
+	private static var cloneStatuses:Array = [
+		StatusEffects.PCClone1st,
+		StatusEffects.PCClone2nd,
+		StatusEffects.PCClone3rd,
+		StatusEffects.PCClone4th,
+	];
+	private static var cloneDaos:Array = [
+		[11, "Fire"],
+		[12, "Ice"],
+		[13, "Lightning"],
+		[14, "Darkness"],
+		[15, "Poison"],
+		[16, "Wind"],
+		[17, "Blood"],
+		[18, "Water"],
+		[19, "Earth"],
+		[20, "Acid"],
+	];
 
 	private function VisitClone():void {
+		var clone:int;
+
 		clearOutput();
 		if (player.hasStatusEffect(StatusEffects.PCClone) && player.statusEffectv4(StatusEffects.PCClone) > 0) {
 			/*if (player.statusEffectv4(StatusEffects.PCClone) < 4) {
@@ -2786,59 +2755,19 @@ public class Camp extends NPCAwareContent{
 				outputText(". Would you work on completing it?");
 			}
 			else {*/		//that part will be later used for primaltwin - note for Svalkash
-				outputText("Your clone"+(player.statusEffectv4(StatusEffects.PCClone) > 0 ? "s are":" is")+" wandering around [camp]. What would you ask "+(player.statusEffectv4(StatusEffects.PCClone) > 0 ? "them":"" + player.mf("him","her") + "")+" to do?\n\n");
-				outputText("Current clone (1) task: ");
-				if (player.statusEffectv1(StatusEffects.PCClone1st) > 10 && player.statusEffectv1(StatusEffects.PCClone1st) < 21) outputText("Contemplating Dao of ");
-				if (player.statusEffectv1(StatusEffects.PCClone1st) == 20) outputText("Acid");
-				else if (player.statusEffectv1(StatusEffects.PCClone1st) == 19) outputText("Earth");
-				else if (player.statusEffectv1(StatusEffects.PCClone1st) == 18) outputText("Water");
-				else if (player.statusEffectv1(StatusEffects.PCClone1st) == 17) outputText("Blood");
-				else if (player.statusEffectv1(StatusEffects.PCClone1st) == 16) outputText("Wind");
-				else if (player.statusEffectv1(StatusEffects.PCClone1st) == 15) outputText("Poison");
-				else if (player.statusEffectv1(StatusEffects.PCClone1st) == 14) outputText("Darkness");
-				else if (player.statusEffectv1(StatusEffects.PCClone1st) == 13) outputText("Lightning");
-				else if (player.statusEffectv1(StatusEffects.PCClone1st) == 12) outputText("Ice");
-				else if (player.statusEffectv1(StatusEffects.PCClone1st) == 11) outputText("Fire");
-				else outputText("Nothing");
-				outputText("Current clone (2) task: ");
-				if (player.statusEffectv1(StatusEffects.PCClone2nd) > 10 && player.statusEffectv1(StatusEffects.PCClone2nd) < 21) outputText("Contemplating Dao of ");
-				if (player.statusEffectv1(StatusEffects.PCClone2nd) == 20) outputText("Acid");
-				else if (player.statusEffectv1(StatusEffects.PCClone2nd) == 19) outputText("Earth");
-				else if (player.statusEffectv1(StatusEffects.PCClone2nd) == 18) outputText("Water");
-				else if (player.statusEffectv1(StatusEffects.PCClone2nd) == 17) outputText("Blood");
-				else if (player.statusEffectv1(StatusEffects.PCClone2nd) == 16) outputText("Wind");
-				else if (player.statusEffectv1(StatusEffects.PCClone2nd) == 15) outputText("Poison");
-				else if (player.statusEffectv1(StatusEffects.PCClone2nd) == 14) outputText("Darkness");
-				else if (player.statusEffectv1(StatusEffects.PCClone2nd) == 13) outputText("Lightning");
-				else if (player.statusEffectv1(StatusEffects.PCClone2nd) == 12) outputText("Ice");
-				else if (player.statusEffectv1(StatusEffects.PCClone2nd) == 11) outputText("Fire");
-				else outputText("Nothing");
-				outputText("Current clone (3) task: ");
-				if (player.statusEffectv1(StatusEffects.PCClone3rd) > 10 && player.statusEffectv1(StatusEffects.PCClone3rd) < 21) outputText("Contemplating Dao of ");
-				if (player.statusEffectv1(StatusEffects.PCClone3rd) == 20) outputText("Acid");
-				else if (player.statusEffectv1(StatusEffects.PCClone3rd) == 19) outputText("Earth");
-				else if (player.statusEffectv1(StatusEffects.PCClone3rd) == 18) outputText("Water");
-				else if (player.statusEffectv1(StatusEffects.PCClone3rd) == 17) outputText("Blood");
-				else if (player.statusEffectv1(StatusEffects.PCClone3rd) == 16) outputText("Wind");
-				else if (player.statusEffectv1(StatusEffects.PCClone3rd) == 15) outputText("Poison");
-				else if (player.statusEffectv1(StatusEffects.PCClone3rd) == 14) outputText("Darkness");
-				else if (player.statusEffectv1(StatusEffects.PCClone3rd) == 13) outputText("Lightning");
-				else if (player.statusEffectv1(StatusEffects.PCClone3rd) == 12) outputText("Ice");
-				else if (player.statusEffectv1(StatusEffects.PCClone3rd) == 11) outputText("Fire");
-				else outputText("Nothing");
-				outputText("Current clone (4) task: ");
-				if (player.statusEffectv1(StatusEffects.PCClone4th) > 10 && player.statusEffectv1(StatusEffects.PCClone4th) < 21) outputText("Contemplating Dao of ");
-				if (player.statusEffectv1(StatusEffects.PCClone4th) == 20) outputText("Acid");
-				else if (player.statusEffectv1(StatusEffects.PCClone4th) == 19) outputText("Earth");
-				else if (player.statusEffectv1(StatusEffects.PCClone4th) == 18) outputText("Water");
-				else if (player.statusEffectv1(StatusEffects.PCClone4th) == 17) outputText("Blood");
-				else if (player.statusEffectv1(StatusEffects.PCClone4th) == 16) outputText("Wind");
-				else if (player.statusEffectv1(StatusEffects.PCClone4th) == 15) outputText("Poison");
-				else if (player.statusEffectv1(StatusEffects.PCClone4th) == 14) outputText("Darkness");
-				else if (player.statusEffectv1(StatusEffects.PCClone4th) == 13) outputText("Lightning");
-				else if (player.statusEffectv1(StatusEffects.PCClone4th) == 12) outputText("Ice");
-				else if (player.statusEffectv1(StatusEffects.PCClone4th) == 11) outputText("Fire");
-				else outputText("Nothing");
+			outputText("Your clone" + (player.statusEffectv4(StatusEffects.PCClone) > 0 ? "s are" : " is") + " wandering around [camp]. What would you ask "
+				+ (player.statusEffectv4(StatusEffects.PCClone) > 0 ? "them" : "[him]") + " to do?\n\n");
+			for (clone = 0; clone < cloneStatuses.length; ++clone) {
+				outputText("Current clone (" + clone + ") task: ");
+				if (player.statusEffectv1(cloneStatuses[clone]) > 10 && player.statusEffectv1(cloneStatuses[clone]) < 21) {
+					outputText("Contemplating Dao of ");
+					for (var d:int = 0; d < cloneDaos.length; ++d) {
+						if (player.statusEffectv1(cloneStatuses[clone]) == cloneDaos[d][0])
+							outputText(cloneDaos[d][1]);
+					}
+				} else outputText("Nothing");
+				outputText("\n\n");
+			}
 			//}
 		}
 		else outputText("You do not have a clone right now, whether you've never made one or one was sacrificed. You would need to make a new one, first.");
@@ -2854,10 +2783,11 @@ public class Camp extends NPCAwareContent{
 			}
 		}
 		else addButton(4, "Create", CreateClone);
-		addButtonIfTrue(0, "Contemplate", CloneContemplateDao1, "Req. fully formed clone (1).", player.hasStatusEffect(StatusEffects.PCClone1st), "Task your clone (1) with contemplating one of the Daos you know.");
-		addButtonIfTrue(1, "Contemplate", CloneContemplateDao2, "Req. fully formed clone (2).", player.hasStatusEffect(StatusEffects.PCClone2nd), "Task your clone (2) with contemplating one of the Daos you know.");
-		addButtonIfTrue(2, "Contemplate", CloneContemplateDao3, "Req. fully formed clone (3).", player.hasStatusEffect(StatusEffects.PCClone3rd), "Task your clone (3) with contemplating one of the Daos you know.");
-		addButtonIfTrue(3, "Contemplate", CloneContemplateDao4, "Req. fully formed clone (4).", player.hasStatusEffect(StatusEffects.PCClone4th), "Task your clone (4) with contemplating one of the Daos you know.");
+		for (clone = 0; clone < cloneStatuses.length; ++clone) {
+			addButton(clone, "Contempl. ("+clone+")", cloneContemplateDao, clone)
+				.hint("Task your clone ("+clone+") with contemplating one of the Daos you know.")
+				.disableIf(!player.hasStatusEffect(cloneStatuses[clone]), "Req. fully formed clone ("+clone+").");
+		}
 		
 		//addButtonDisabled(1, "Contemplate", "Req. fully formed clone.");
 		//addButtonDisabled(5, "Training", "Req. fully formed clone.");
@@ -2985,137 +2915,24 @@ public class Camp extends NPCAwareContent{
 		}
 		doNext(camp.returnToCampUseEightHours);
 	}
-	private function CloneContemplateDao1():void {
+
+	private function cloneContemplateDao(clone:int):void {
 		clearOutput();
-		outputText("Maybe your clone (1) could contemplate one of Daos you knew while you adventure outside the [camp]? But which one it should be?");
+		outputText("Maybe your clone ("+clone+") could contemplate one of the Daos you know while you adventure outside the [camp]? But which one it should be?");
 		menu();
-		if (player.statusEffectv1(StatusEffects.PCClone1st) == 11) addButtonDisabled(0, "Fire", "Your clone (1) is currently contemplating this Dao.");
-		else addButton(0, "Fire", CloneContemplateDaoSet1, 11);
-		if (player.statusEffectv1(StatusEffects.PCClone1st) == 12) addButtonDisabled(1, "Ice", "Your clone (1) is currently contemplating this Dao.");
-		else addButton(1, "Ice", CloneContemplateDaoSet1, 12);
-		if (player.statusEffectv1(StatusEffects.PCClone1st) == 13) addButtonDisabled(2, "Lightning", "Your clone (1) is currently contemplating this Dao.");
-		else addButton(2, "Lightning", CloneContemplateDaoSet1, 13);
-		if (player.statusEffectv1(StatusEffects.PCClone1st) == 14) addButtonDisabled(3, "Darkness", "Your clone (1) is currently contemplating this Dao.");
-		else addButton(3, "Darkness", CloneContemplateDaoSet1, 14);
-		if (player.statusEffectv1(StatusEffects.PCClone1st) == 15) addButtonDisabled(4, "Poison", "Your clone (1) is currently contemplating this Dao.");
-		else addButton(4, "Poison", CloneContemplateDaoSet1, 15);
-		if (player.statusEffectv1(StatusEffects.PCClone1st) == 16) addButtonDisabled(5, "Wind", "Your clone (1) is currently contemplating this Dao.");
-		else addButton(5, "Wind", CloneContemplateDaoSet1, 16);
-		if (player.statusEffectv1(StatusEffects.PCClone1st) == 17) addButtonDisabled(6, "Blood", "Your clone (1) is currently contemplating this Dao.");
-		else addButton(6, "Blood", CloneContemplateDaoSet1, 17);
-		if (player.statusEffectv1(StatusEffects.PCClone1st) == 18) addButtonDisabled(7, "Water", "Your clone (1) is currently contemplating this Dao.");
-		else addButton(7, "Water", CloneContemplateDaoSet1, 18);
-		if (player.statusEffectv1(StatusEffects.PCClone1st) == 19) addButtonDisabled(8, "Earth", "Your clone (1) is currently contemplating this Dao.");
-		else addButton(8, "Earth", CloneContemplateDaoSet1, 19);
-		if (player.statusEffectv1(StatusEffects.PCClone1st) == 20) addButtonDisabled(9, "Acid", "Your clone (1) is currently contemplating this Dao.");
-		else addButton(9, "Acid", CloneContemplateDaoSet1, 20);
-		if (player.statusEffectv1(StatusEffects.PCClone1st) == 10) addButtonDisabled(13, "None", "Your clone (1) is currently not contemplating any Dao.");
-		else addButton(13, "None", CloneContemplateDaoSet1, 10);
+		var btn:int = 0;
+		for (var d:int = 0; d < cloneDaos.length; ++d) {
+			addButton(btn++, cloneDaos[d][1], cloneContemplateDaoSet, clone, cloneDaos[d][0])
+				.disableIf(player.statusEffectv1(cloneStatuses[clone]) == cloneDaos[d][0], "Your clone ("+clone+") is currently contemplating this Dao.");
+		}
+		addButton(13, "None", cloneContemplateDaoSet, clone, 10)
+			.disableIf(player.statusEffectv1(cloneStatuses[clone]) == 10, "Your clone ("+clone+") is currently not contemplating any Dao.");
 		addButton(14, "Back", VisitClone);
 	}
-	private function CloneContemplateDaoSet1(newdao:Number):void {
-		var olddao:Number = player.statusEffectv1(StatusEffects.PCClone1st);
-		player.addStatusValue(StatusEffects.PCClone1st,1,(newdao-olddao));
-		doNext(CloneContemplateDao1);
-	}
-	private function CloneContemplateDao2():void {
-		clearOutput();
-		outputText("Maybe your clone (2) could contemplate one of Daos you knew while you adventure outside the [camp]? But which one it should be?");
-		menu();
-		if (player.statusEffectv1(StatusEffects.PCClone2nd) == 11) addButtonDisabled(0, "Fire", "Your clone (2) is currently contemplating this Dao.");
-		else addButton(0, "Fire", CloneContemplateDaoSet2, 11);
-		if (player.statusEffectv1(StatusEffects.PCClone2nd) == 12) addButtonDisabled(1, "Ice", "Your clone (2) is currently contemplating this Dao.");
-		else addButton(1, "Ice", CloneContemplateDaoSet2, 12);
-		if (player.statusEffectv1(StatusEffects.PCClone2nd) == 13) addButtonDisabled(2, "Lightning", "Your clone (2) is currently contemplating this Dao.");
-		else addButton(2, "Lightning", CloneContemplateDaoSet2, 13);
-		if (player.statusEffectv1(StatusEffects.PCClone2nd) == 14) addButtonDisabled(3, "Darkness", "Your clone (2) is currently contemplating this Dao.");
-		else addButton(3, "Darkness", CloneContemplateDaoSet2, 14);
-		if (player.statusEffectv1(StatusEffects.PCClone2nd) == 15) addButtonDisabled(4, "Poison", "Your clone (2) is currently contemplating this Dao.");
-		else addButton(4, "Poison", CloneContemplateDaoSet2, 15);
-		if (player.statusEffectv1(StatusEffects.PCClone2nd) == 16) addButtonDisabled(5, "Wind", "Your clone (2) is currently contemplating this Dao.");
-		else addButton(5, "Wind", CloneContemplateDaoSet2, 16);
-		if (player.statusEffectv1(StatusEffects.PCClone2nd) == 17) addButtonDisabled(6, "Blood", "Your clone (2) is currently contemplating this Dao.");
-		else addButton(6, "Blood", CloneContemplateDaoSet2, 17);
-		if (player.statusEffectv1(StatusEffects.PCClone2nd) == 18) addButtonDisabled(7, "Water", "Your clone (2) is currently contemplating this Dao.");
-		else addButton(7, "Water", CloneContemplateDaoSet2, 18);
-		if (player.statusEffectv1(StatusEffects.PCClone2nd) == 19) addButtonDisabled(8, "Earth", "Your clone (2) is currently contemplating this Dao.");
-		else addButton(8, "Earth", CloneContemplateDaoSet2, 19);
-		if (player.statusEffectv1(StatusEffects.PCClone2nd) == 20) addButtonDisabled(9, "Acid", "Your clone (2) is currently contemplating this Dao.");
-		else addButton(9, "Acid", CloneContemplateDaoSet2, 20);
-		if (player.statusEffectv1(StatusEffects.PCClone2nd) == 10) addButtonDisabled(13, "None", "Your clone (2) is currently not contemplating any Dao.");
-		else addButton(13, "None", CloneContemplateDaoSet2, 10);
-		addButton(14, "Back", VisitClone);
-	}
-	private function CloneContemplateDaoSet2(newdao:Number):void {
-		var olddao:Number = player.statusEffectv1(StatusEffects.PCClone2nd);
-		player.addStatusValue(StatusEffects.PCClone2nd,1,(newdao-olddao));
-		doNext(CloneContemplateDao2);
-	}
-	private function CloneContemplateDao3():void {
-		clearOutput();
-		outputText("Maybe your clone (3) could contemplate one of Daos you knew while you adventure outside the [camp]? But which one it should be?");
-		menu();
-		if (player.statusEffectv1(StatusEffects.PCClone3rd) == 11) addButtonDisabled(0, "Fire", "Your clone (3) is currently contemplating this Dao.");
-		else addButton(0, "Fire", CloneContemplateDaoSet3, 11);
-		if (player.statusEffectv1(StatusEffects.PCClone3rd) == 12) addButtonDisabled(1, "Ice", "Your clone (3) is currently contemplating this Dao.");
-		else addButton(1, "Ice", CloneContemplateDaoSet3, 12);
-		if (player.statusEffectv1(StatusEffects.PCClone3rd) == 13) addButtonDisabled(2, "Lightning", "Your clone (3) is currently contemplating this Dao.");
-		else addButton(2, "Lightning", CloneContemplateDaoSet3, 13);
-		if (player.statusEffectv1(StatusEffects.PCClone3rd) == 14) addButtonDisabled(3, "Darkness", "Your clone (3) is currently contemplating this Dao.");
-		else addButton(3, "Darkness", CloneContemplateDaoSet3, 14);
-		if (player.statusEffectv1(StatusEffects.PCClone3rd) == 15) addButtonDisabled(4, "Poison", "Your clone (3) is currently contemplating this Dao.");
-		else addButton(4, "Poison", CloneContemplateDaoSet3, 15);
-		if (player.statusEffectv1(StatusEffects.PCClone3rd) == 16) addButtonDisabled(5, "Wind", "Your clone (3) is currently contemplating this Dao.");
-		else addButton(5, "Wind", CloneContemplateDaoSet3, 16);
-		if (player.statusEffectv1(StatusEffects.PCClone3rd) == 17) addButtonDisabled(6, "Blood", "Your clone (3) is currently contemplating this Dao.");
-		else addButton(6, "Blood", CloneContemplateDaoSet3, 17);
-		if (player.statusEffectv1(StatusEffects.PCClone3rd) == 18) addButtonDisabled(7, "Water", "Your clone (3) is currently contemplating this Dao.");
-		else addButton(7, "Water", CloneContemplateDaoSet3, 18);
-		if (player.statusEffectv1(StatusEffects.PCClone3rd) == 19) addButtonDisabled(8, "Earth", "Your clone (3) is currently contemplating this Dao.");
-		else addButton(8, "Earth", CloneContemplateDaoSet3, 19);
-		if (player.statusEffectv1(StatusEffects.PCClone3rd) == 20) addButtonDisabled(9, "Acid", "Your clone (3) is currently contemplating this Dao.");
-		else addButton(9, "Acid", CloneContemplateDaoSet3, 20);
-		if (player.statusEffectv1(StatusEffects.PCClone3rd) == 10) addButtonDisabled(13, "None", "Your clone (3) is currently not contemplating any Dao.");
-		else addButton(13, "None", CloneContemplateDaoSet3, 10);
-		addButton(14, "Back", VisitClone);
-	}
-	private function CloneContemplateDaoSet3(newdao:Number):void {
-		var olddao:Number = player.statusEffectv1(StatusEffects.PCClone3rd);
-		player.addStatusValue(StatusEffects.PCClone3rd,1,(newdao-olddao));
-		doNext(CloneContemplateDao3);
-	}
-	private function CloneContemplateDao4():void {
-		clearOutput();
-		outputText("Maybe your clone (4) could contemplate one of Daos you knew while you adventure outside the [camp]? But which one it should be?");
-		menu();
-		if (player.statusEffectv1(StatusEffects.PCClone4th) == 11) addButtonDisabled(0, "Fire", "Your clone (4) is currently contemplating this Dao.");
-		else addButton(0, "Fire", CloneContemplateDaoSet4, 11);
-		if (player.statusEffectv1(StatusEffects.PCClone4th) == 12) addButtonDisabled(1, "Ice", "Your clone (4) is currently contemplating this Dao.");
-		else addButton(1, "Ice", CloneContemplateDaoSet4, 12);
-		if (player.statusEffectv1(StatusEffects.PCClone4th) == 13) addButtonDisabled(2, "Lightning", "Your clone (4) is currently contemplating this Dao.");
-		else addButton(2, "Lightning", CloneContemplateDaoSet4, 13);
-		if (player.statusEffectv1(StatusEffects.PCClone4th) == 14) addButtonDisabled(3, "Darkness", "Your clone (4) is currently contemplating this Dao.");
-		else addButton(3, "Darkness", CloneContemplateDaoSet4, 14);
-		if (player.statusEffectv1(StatusEffects.PCClone4th) == 15) addButtonDisabled(4, "Poison", "Your clone (4) is currently contemplating this Dao.");
-		else addButton(4, "Poison", CloneContemplateDaoSet4, 15);
-		if (player.statusEffectv1(StatusEffects.PCClone4th) == 16) addButtonDisabled(5, "Wind", "Your clone (4) is currently contemplating this Dao.");
-		else addButton(5, "Wind", CloneContemplateDaoSet4, 16);
-		if (player.statusEffectv1(StatusEffects.PCClone4th) == 17) addButtonDisabled(6, "Blood", "Your clone (4) is currently contemplating this Dao.");
-		else addButton(6, "Blood", CloneContemplateDaoSet4, 17);
-		if (player.statusEffectv1(StatusEffects.PCClone4th) == 18) addButtonDisabled(7, "Water", "Your clone (4) is currently contemplating this Dao.");
-		else addButton(7, "Water", CloneContemplateDaoSet4, 18);
-		if (player.statusEffectv1(StatusEffects.PCClone4th) == 19) addButtonDisabled(8, "Earth", "Your clone (4) is currently contemplating this Dao.");
-		else addButton(8, "Earth", CloneContemplateDaoSet4, 19);
-		if (player.statusEffectv1(StatusEffects.PCClone4th) == 20) addButtonDisabled(9, "Acid", "Your clone (4) is currently contemplating this Dao.");
-		else addButton(9, "Acid", CloneContemplateDaoSet4, 20);
-		if (player.statusEffectv1(StatusEffects.PCClone4th) == 10) addButtonDisabled(13, "None", "Your clone (4) is currently not contemplating any Dao.");
-		else addButton(13, "None", CloneContemplateDaoSet4, 10);
-		addButton(14, "Back", VisitClone);
-	}
-	private function CloneContemplateDaoSet4(newdao:Number):void {
-		var olddao:Number = player.statusEffectv1(StatusEffects.PCClone4th);
-		player.addStatusValue(StatusEffects.PCClone4th,1,(newdao-olddao));
-		doNext(CloneContemplateDao4);
+
+	private function cloneContemplateDaoSet(clone:int, newdao:Number):void {
+		player.changeStatusValue(cloneStatuses[clone], newdao);
+		cloneContemplateDao(clone);
 	}
 
 	private function DummyTraining():void {
@@ -3164,15 +2981,15 @@ public class Camp extends NPCAwareContent{
 			if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] < 2) addButton(10, "Train", NPCsTrain);
 			if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) addButton(11, "Relax", NPCsRelax);
 		}
-		addButton(0, "Chi Chi", toggleChiChiMenu).hint("Enable or Disable Chi Chi. This will remove her from enc table and if already in [camp] disable access to her.");
-		addButton(1, "Diana", toggleDianaMenu).hint("Enable or Disable Diana. This will remove her from enc table and if already in [camp] disable access to her.");
-		addButton(2, "Diva", toggleDivaMenu).hint("Enable or Disable Diva. This will remove her from enc table and if already in [camp] disable access to her.");
-		addButton(3, "Electra", toggleElectraMenu).hint("Enable or Disable Electra. This will remove her from enc table and if already in [camp] disable access to her.");
-		addButton(4, "Etna", toggleEtnaMenu).hint("Enable or Disable Etna. This will remove her from enc table and if already in [camp] disable access to her.");
-		addButton(5, "Luna", toggleLunaMenu).hint("Enable or Disable Luna. This will remove her from enc table and if already in [camp] disable access to her.");
-		addButton(6, "DragonBoi", toggleTedMenu).hint("Enable or Disable Dragon Boi. This will remove him from enc table.");
+		addButton(0, "Chi Chi", toggleNPCStatus, StatusEffects.ChiChiOff).hint("Enable or Disable Chi Chi. This will remove her from enc table and if already in [camp] disable access to her.");
+		addButton(1, "Diana", toggleNPCStatus, StatusEffects.DianaOff).hint("Enable or Disable Diana. This will remove her from enc table and if already in [camp] disable access to her.");
+		addButton(2, "Diva", toggleNPCStatus, StatusEffects.DivaOff).hint("Enable or Disable Diva. This will remove her from enc table and if already in [camp] disable access to her.");
+		addButton(3, "Electra", toggleNPCStatus, StatusEffects.ElectraOff).hint("Enable or Disable Electra. This will remove her from enc table and if already in [camp] disable access to her.");
+		addButton(4, "Etna", toggleNPCStatus, StatusEffects.EtnaOff).hint("Enable or Disable Etna. This will remove her from enc table and if already in [camp] disable access to her.");
+		addButton(5, "Luna", toggleLuna).hint("Enable or Disable Luna. This will remove her from enc table and if already in [camp] disable access to her.");
+		addButton(6, "DragonBoi", toggleNPCStatus, StatusEffects.SpoodersOff).hint("Enable or Disable Dragon Boi. This will remove him from enc table.");
 		//since this section is WIP anyway, let her be here too, lol
-        addButton(12, "Spooders", toggleSpoodersMenu).hint("Enable or Disable spooder followers. This will remove them ONLY from enc table.");
+        addButton(12, "Spooders", toggleNPCStatus, StatusEffects.TedOff).hint("Enable or Disable spooder followers. This will remove them ONLY from enc table.");
 		addButton(13, "Others", SparrableNPCsMenuOthers).hint("Out of camp encounters only.");
 		addButton(14, "Back", campActions);
 	}
@@ -3180,8 +2997,8 @@ public class Camp extends NPCAwareContent{
 		clearOutput();
 		SparrableNPCsMenuText();
 		menu();
-		addButton(0, "Callu", toggleCalluMenu).hint("Enable or Disable Callu (Otter girl). This will remove her from enc table.");
-		addButton(1, "Venus", toggleVenusMenu).hint("Enable or Disable Venus (Gigantic Turtle). This will remove her from enc table.");
+		addButton(0, "Callu", toggleNPCStatus, StatusEffects.CalluOff).hint("Enable or Disable Callu (Otter girl). This will remove her from enc table.");
+		addButton(1, "Venus", toggleNPCStatus, StatusEffects.VenusOff).hint("Enable or Disable Venus (Gigantic Turtle). This will remove her from enc table.");
 		addButton(14, "Back", SparrableNPCsMenu);
 	}
 
@@ -3196,60 +3013,15 @@ public class Camp extends NPCAwareContent{
 		doNext(SparrableNPCsMenu);
 	}
 
-	private function toggleChiChiMenu():void {
-		if (player.hasStatusEffect(StatusEffects.ChiChiOff)) player.removeStatusEffect(StatusEffects.ChiChiOff);
-		else player.createStatusEffect(StatusEffects.ChiChiOff, 0, 0, 0, 0);
-		SparrableNPCsMenu();
-	}
-	private function toggleDianaMenu():void {
-		if (player.hasStatusEffect(StatusEffects.DianaOff)) player.removeStatusEffect(StatusEffects.DianaOff);
-		else player.createStatusEffect(StatusEffects.DianaOff, 0, 0, 0, 0);
-		SparrableNPCsMenu();
-	}
-	private function toggleDivaMenu():void {
-		if (player.hasStatusEffect(StatusEffects.DivaOff)) player.removeStatusEffect(StatusEffects.DivaOff);
-		else player.createStatusEffect(StatusEffects.DivaOff, 0, 0, 0, 0);
-		SparrableNPCsMenu();
-	}
-	private function toggleElectraMenu():void {
-		if (player.hasStatusEffect(StatusEffects.ElectraOff)) player.removeStatusEffect(StatusEffects.ElectraOff);
-		else player.createStatusEffect(StatusEffects.ElectraOff, 0, 0, 0, 0);
-		SparrableNPCsMenu();
-	}
-	private function toggleEtnaMenu():void {
-		if (player.hasStatusEffect(StatusEffects.EtnaOff)) player.removeStatusEffect(StatusEffects.EtnaOff);
-		else player.createStatusEffect(StatusEffects.EtnaOff, 0, 0, 0, 0);
-		SparrableNPCsMenu();
-	}
-	private function toggleLunaMenu():void {
-		if (player.hasStatusEffect(StatusEffects.LunaOff)) player.removeStatusEffect(StatusEffects.LunaOff);
-		else {
-			player.createStatusEffect(StatusEffects.LunaOff, 0, 0, 0, 0);
-			if (flags[kFLAGS.SLEEP_WITH] == "Luna") flags[kFLAGS.SLEEP_WITH] = "";
-		}
-		SparrableNPCsMenu();
-	}
-	private function toggleTedMenu():void {
-		if (player.hasStatusEffect(StatusEffects.TedOff)) player.removeStatusEffect(StatusEffects.TedOff);
-		else player.createStatusEffect(StatusEffects.TedOff, 0, 0, 0, 0);
+	private function toggleNPCStatus(status:StatusEffectType):void {
+		if (player.hasStatusEffect(status)) player.removeStatusEffect(status);
+		else player.createStatusEffect(status, 0, 0, 0, 0);
 		SparrableNPCsMenu();
 	}
 
-	private function toggleSpoodersMenu():void {
-		if (player.hasStatusEffect(StatusEffects.SpoodersOff)) player.removeStatusEffect(StatusEffects.SpoodersOff);
-		else player.createStatusEffect(StatusEffects.SpoodersOff, 0, 0, 0, 0);
-		SparrableNPCsMenu();
-	}
-
-	private function toggleCalluMenu():void {
-		if (player.hasStatusEffect(StatusEffects.CalluOff)) player.removeStatusEffect(StatusEffects.CalluOff);
-		else player.createStatusEffect(StatusEffects.CalluOff, 0, 0, 0, 0);
-		SparrableNPCsMenuOthers();
-	}
-	private function toggleVenusMenu():void {
-		if (player.hasStatusEffect(StatusEffects.VenusOff)) player.removeStatusEffect(StatusEffects.VenusOff);
-		else player.createStatusEffect(StatusEffects.VenusOff, 0, 0, 0, 0);
-		SparrableNPCsMenuOthers();
+	private function toggleLuna():void {
+		if (flags[kFLAGS.SLEEP_WITH] == "Luna") flags[kFLAGS.SLEEP_WITH] = ""; //reset sleeping thingy
+		toggleNPCStatus(StatusEffects.LunaOff);
 	}
 
 	private function swimInStream():void {
@@ -3981,7 +3753,7 @@ public class Camp extends NPCAwareContent{
 		if (player.ballSize < 1) player.ballSize = 1;
 		outputText("You feel your scrotum shift, shrinking down along with your [balls].  ");
 		outputText("Within a few seconds the paste has been totally absorbed and the shrinking stops.  ");
-		dynStats("lus", -10);
+		dynStats("lus", -10, "scale", false);
 		player.consumeItem(consumables.REDUCTO, 1);
 		doNext(camp.returnToCampUseOneHour);
 	}
@@ -4110,7 +3882,7 @@ public class Camp extends NPCAwareContent{
 				.disableIf(flags[kFLAGS.OWCA_UNLOCKED] != 1, "Search the plains.", null, "???");
 		bd.add("Troll Village", SceneLib.trollVillage.EnterTheVillage)
 				.hint("Visit the Troll Village.")
-				.disableIf(TrollVillage.ZenjiVillageStage <= 0, "Clear the factory first.", null, "???");
+				.disableIf(TrollVillage.ZenjiVillageStage <= 0, "You have not visited this place yet.", null, "???");
 		// Row 2 - places/NPCs 1-5
 		bd.add("Cathedral", SceneLib.gargoyle.gargoyleRouter)
 				.hint(flags[kFLAGS.GAR_NAME] == 0
@@ -4396,6 +4168,7 @@ public class Camp extends NPCAwareContent{
 //Wake up from a bad end.
 public function wakeFromBadEnd():void {
 	clearOutput();
+	EventParser.badEnded = false;
 	trace("Escaping bad end!");
 	outputText("No, it can't be.  It's all just a dream!  You've got to wake up!");
 	outputText("\n\nYou wake up and scream.  You pull out a mirror and take a look at yourself.  Yep, you look normal again.  That was the craziest dream you ever had.");
@@ -4444,6 +4217,7 @@ public function wakeFromBadEnd():void {
 //Moving nascent soul to your clone body
 public function rebirthFromBadEnd():void {
 	clearOutput();
+	EventParser.badEnded = false;
 	trace("Escaping bad end!");
 	outputText("No... Not like this! Your quest is... not... over..!");
 	outputText("\n\nYour nascent soul leaves your body, and unfetteredly escapes back to [camp] where it finds your clone and fuse with it. A pang of mental pain hits you after the sacrifice. After a moment of disorientation, you consider whether or not you should make another.");

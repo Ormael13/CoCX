@@ -290,7 +290,7 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 		public function NeisabutPCgotKOd():void {
 			clearOutput();
 			outputText("As you walk towards Neisa, she does a double take as she sees you alive and well.");
-			outputText("\"Well damn. How'd you survive.... nevermind. I don't want to know. You still owe me for that expedition, so I'll be waiting here until you're better prepared.\"");
+			outputText("\"Well damn. How'd you survive.... never mind. I don't want to know. You still owe me for that expedition, so I'll be waiting here until you're better prepared.\"");
 			outputText("Unless... you want to go back in now?")
 			menu();
 			addButton(1, "Yes", reenteringTheDungeon).hint("That will make you go to the dungeon right away!");
@@ -509,7 +509,7 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 				item = player.unequipArmor(false, true);
 				if (item && !item.isNothing) flags[kFLAGS.PLAYER_DISARMED_ARMOR_ID] = item.id;
 			}
-			player.setArmor(armors.TRADITC);
+			player.setArmor(armors.TRADITC, false, true);
 			if (!player.lowerGarment.isNothing) {
 				item = player.unequipUnderBottom(false, true);
 				if (item && !item.isNothing) flags[kFLAGS.PLAYER_DISARMED_UNDERWEAR_BOTTOM_ID] = item.id;

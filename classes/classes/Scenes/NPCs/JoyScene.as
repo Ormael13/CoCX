@@ -813,11 +813,11 @@ import classes.lists.Gender;
 				outputText("\n\nYou gently shake her a bit and tell her to wake up; when it does not work you blow inside her ear softly and she jolts up. \"<i>Huh! What... Oh, I guess I must have, like, fallen asleep or something...</i>\" she says. Then she gets up and stretches.");
 				if (flags[kFLAGS.JOJO_LAST_MEDITATION] == model.time.days) {
 					outputText("\n\nIt's too soon since you last meditated, so you don't get much benefit from it. Still you feel your urges have calmed down a little, despite Joy's antics.");
-					dynStats("lus", -30);
+					dynStats("lus", -30, "scale", false);
 				}
 				else {
 					outputText("\n\nMeditating seems to have helped, and you feel more in control of yourself, despite Joy's antics.");
-					dynStats("lus", -30);
+					dynStats("lus", -30, "scale", false);
 					var cleanse:int = -2; //Corruption reduction - faster at high corruption
 					if (player.cor > 80)
 						cleanse -= 3;
@@ -845,7 +845,7 @@ import classes.lists.Gender;
 				outputText("\n\nYou ask her what about helping you meditate? Is she giving up? Does she not want to help you out?");
 				outputText("\n\n\"<i>D'aaaw, but it's SO BORING!</i>\" She whines. \"<i>Like, I just wanna have some fun - I'm too horny to just sit here and' do nothing. C'mon, [name], help a girl out.</i>\" She pleads, grinding her rear purposefully into your crotch, wriggling from side to side as one hand slips into her pants and starts playing with her own genitals.");
 				outputText("\n\n(Do you 'help' Joy?)");
-				dynStats("lus", 20 + (player.lib / 5) + (player.cor / 10));
+				dynStats("lus", 20 + (player.lib / 5) + (player.cor / 10), "scale", false);
 				doYesNo(failedMeditateLetsFuck, failedMeditateNoThanks);
 				return;
 			}
@@ -866,7 +866,7 @@ import classes.lists.Gender;
 			outputText("You decide you're not really in the mood right now and grab a hold of her rump; getting both of you up and pushing her away slightly you tell her you're not in the mood right now.");
 			outputText("\n\n\"<i>Awww... Like, that's not fair, [name]. I'm sooo horny...</i>\" She pouts, turning on her most sadly adorable look in an effort to break through your resistance. \"<i>Can't we, y'know, have just a quickie? Please...?</i>\" She begs in a childish manner, hands clasped in prayer before her.");
 			outputText("\n\nYou tell her you're really not in the mood now and proceed to leave, despite her oh so adorable puppy face... and sexy body... and nice smell... aww, dammit now you're getting horny too... still you soldier on and leave. ");
-			dynStats("lus", 20 + (player.lib / 10) + (player.cor / 10));
+			dynStats("lus", 20 + (player.lib / 10) + (player.cor / 10), "scale", false);
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -891,7 +891,7 @@ import classes.lists.Gender;
 			addButton(0, "Strength", trainStrength);
 			addButton(1, "Toughness", trainToughness);
 			addButton(2, "Speed", trainSpeed);
-			addButton(4, "Nevermind", genericMenu);
+			addButton(4, "Never mind", genericMenu);
 		}
 
 		private function trainStrength():void {
@@ -922,7 +922,7 @@ import classes.lists.Gender;
 				outputText("\n\n\"<i>Ouch! Hey, what's the deal?</i>\" She whines.");
 				outputText("\n\nYou burst out laughing, saying you're sorry but that was too tempting; besides you were getting tired and her teasing was not helping.");
 				outputText("\n\nJoy pouts and gets up, rubbing her butt. \"<i>Well, go and, like, get some rest. You're getting much stronger.</i>\" With that said, she walks away.");
-				dynStats("lus", 20);
+				dynStats("lus", 20, "scale", false);
 			}
 			else {
 				outputText("\n\nYou begin lifting her and lowering her like a set of weights; it's a bit awkward, but quite easy actually; once you get used to it, you set upon a steady rhythm.");
@@ -940,7 +940,7 @@ import classes.lists.Gender;
 				outputText("\n\nNevertheless you go to the bimbo mouse and hook an arm around her waist, gently guiding her towards her tent to lay down and rest.");
 				outputText("\n\nShe doesn't protest, but instead leans gratefully against you for support.");
 				outputText("\n\nOnce she's laying down on her tent you pat her head and tell her to get well soon, then take your leave.");
-				dynStats("lus", 20);
+				dynStats("lus", 20, "scale", false);
 			}
 			//Increase strength
 			player.trainStat('str', 1, 50);
@@ -1371,7 +1371,7 @@ import classes.lists.Gender;
 			player.refillHunger(refillAmount);
 			fatigue(-40);
 			HPChange(50 + player.maxHP() / 5, false);
-			dynStats("lus", 20 + (player.lib / 5));
+			dynStats("lus", 20 + (player.lib / 5), "scale", false);
 			//Libido reduction
 			dynStats("lib", -1);
 			if (player.lib > 33) dynStats("lib", -1);
@@ -1392,7 +1392,7 @@ import classes.lists.Gender;
 			menu();
 			addButton(0, "Breasts", reductoJoysBreasts);
 			addButton(1, "Cock", reductoJoysCock);
-			addButton(4, "Nevermind", genericMenu);
+			addButton(4, "Never mind", genericMenu);
 		}
 		private function reductoJoysBreasts():void {
 			clearOutput();

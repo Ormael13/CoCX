@@ -224,7 +224,7 @@ use namespace CoC;
 			outputText("\n\nWith a smile, you thank him for letting you help him, but seeing how it is getting late, you excuse yourself and say that you should return to the camp.");
 			outputText("\n\n\"<i>It’s okay. The champion thing and all that, right?</i>\" He answers \"<i>Well, by now, you should have memorized where this place is so you can visit me anytime you want. I really enjoy when you’re here. And please, over all things, [name], keep yourself safe.</i>\"");
 			outputText("\n\nWaving goodbye to the avian, you return to you camp.");
-			dynStats("lus", 40);
+			dynStats("lus", 40, "scale", false);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		private function anzuRelatLvl3Dont():void {
@@ -764,7 +764,7 @@ use namespace CoC;
 			outputText("\n\n\"<i>Thanks, [name]. I really needed that. But seems like I overfilled you this time. Do you want to rest with me?</i>\"");
 			outputText("\n\nYou agree, jumping to his side with difficulty due the weight of his cum in your belly. Seeing your predicament, he helps you to stand up, and then embraces your body with both arms, surrounding it with his feathered wings. Soon, you are sleeping peacefully with his cum swirling in your belly and a satisfied look on both of your faces.");
 			outputText("\n\nAfter a relaxing nap, and a thoroughly fulfilling meal, you bid farewell to your avian friend and return to your camp.");
-			dynStats("lus", 30);
+			dynStats("lus", 30, "scale", false);
 			anzuAffection(5);
 			flags[kFLAGS.ANZU_SUCKED_OFF_COUNTER]++;
 			doNext(camp.returnToCampUseOneHour);
@@ -1050,7 +1050,7 @@ use namespace CoC;
 			outputText("\n\nLooking at your smaller body at his side, he suggests: \"<i>[if (tallness < 120)I'll be more comfortable for you if you sit down while I take care of you,|Well, I'll be better if I go closer to take care of you, and...if you're okay with it...you could sit on my lap...while I...you know.]</i>\" Anzu says nervously.");
 			outputText("\n\nSeeming no harm on his offering you sit on his lap, and he, faithful to his word, starts scrubbing softly your body with the soap, then massaging your back and shoulders working tenderly each sore muscle. While you enjoy his ministrations, you sit better, resting your legs over their own while he carefully rubs the soap on your [skin], [if (tallness >= 100)aided for his larger frame|aided by his towering frame]. As he does that, you realize that your butt is resting pretty close of the avian crotch, and that your close contact is making the big avian more than a bit flustered, if his erect cock is proof of anything.");
 			outputText("\n\nWell, given how hot and bothered Anzu is getting from rubbing naked against your body, you could take this as an invitation for a more...intimate intercourse with the bathing bird, given that you’ll probably end a bit dirty (and quite filled) in the end. On the other side, you could simply leave your kinkyness aside for a while and simply enjoy the bath with him.");
-			dynStats("lus", 30);
+			dynStats("lus", 30, "scale", false);
 			menu();
 			addButton(0, "Sexy times", anzuBathTimeSex);
 			addButton(1, "Just relax", anzuBathTimeRelax);
@@ -1082,7 +1082,7 @@ use namespace CoC;
 			outputText("\n\nFeeling in the mood to return the favor, you ask Anzu to turn back, so you can help the avian to get himself clean too.");
 			outputText("\n\n\"<i>Oh, that’s not necessary, [name]. I’m doing this as a favor to you.</i>\"");
 			outputText("\n\nThen, you chastise him, he should allow you to bathe him, as a favor.");
-			dynStats("lus", 20);
+			dynStats("lus", 20, "scale", false);
 			player.fatigue -= 30;
 			inDungeon = false;
 			doNext(camp.returnToCampUseOneHour);
@@ -1180,7 +1180,7 @@ use namespace CoC;
 			outputText("\n\nThe avian simply laughs and takes your cum-filled form in his arms, and after giving your smaller body a loving squeeze, he says");
 			outputText("\n\n\"<i>Upset? For a blowjob from my lover? Why? If anything, I should thank you. But, if you were so hungry and horny, you simply could be asked. I’m your host tonight, after all , and I’ll be more than happy to give you a cummy meal.</i>\"");
 			outputText("\n\nAnzu states, playfully poking your cum-inflated stomach. Both of you laugh for a bit and soon, thanks to the vigorous exercise and the hearty lunch in the middle of the night, you catch your sleep again, cuddled on the bigger frame of your avian friend, that falls asleep not much later.");
-			dynStats("lus", 20);
+			dynStats("lus", 20, "scale", false);
 			doNext(wakeUpWithAnzuGoodMorningBirdie);
 		}
 		

@@ -37,7 +37,7 @@ public class AbstractNecroSpell extends AbstractSpell {
 		if (uc) return uc;
 		
 		if (demonBonesAvailable() < demonBonesCost() && !player.hasPerk(PerkLib.BoneSoul)) {
-			return "You not have enough demon bones to use any this necromancer spell.";
+			return "You don't have enough demon bones to use any this necromancer spell.";
 		}
 		
 		return "";

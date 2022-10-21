@@ -218,7 +218,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					/*if (upgrade 1) flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= ?40?;
 					else */flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= 60;
 				}
-				if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] < 0) {
+				if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] <= 0) {
 					player.buff("Ayo Armor").remove();
 					flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] = 0;
 					outputText("\nYour ayo armor power reserves reached bottom. With a silent hiss armor depowers itself making you feel slower and heavier.\n");
@@ -368,7 +368,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					if (rand(5) == 0) {
 						flags[kFLAGS.PLAYER_PREGGO_WITH_WORMS] = 1;
 						outputText("\nA sudden gush of semen-coated worms noisily slurps out of your womb.  It runs down your legs as the worms do their damnedest to escape.  The feeling of so many squiggling forms squirting through your cunt-lips turns you on more than you'd like to admit.  You wonder why they stayed as long as they did, and some part of you worries that their stay may have reduced your capacity to bear children, though in a place like this that might be a blessing.\n");
-						player.dynStats("lus", 2 + player.effectiveSensitivity() / 10);
+						player.dynStats("lus", 2 + player.effectiveSensitivity() / 10, "scale", false);
 						if (player.fertility > 5) player.fertility -= (1 + Math.round(player.fertility / 4));
 						player.addStatusValue(StatusEffects.WormPlugged, 1, -1); //Lower chances
 						if (player.statusEffectv1(StatusEffects.WormPlugged) <= 0) { //Remove if too low
@@ -393,7 +393,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			if (player.hasStatusEffect(StatusEffects.Jizzpants)) {
 				outputText("\nYour [armor] squishes wetly with all the semen you unloaded into them, arousing you more and more with every movement.\n");
-				player.dynStats("lus", 10 + player.effectiveSensitivity() / 5);
+				player.dynStats("lus", 10 + player.effectiveSensitivity() / 5, "scale", false);
 				player.removeStatusEffect(StatusEffects.Jizzpants);
 				needNext = true;
 			}
@@ -638,7 +638,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
             if (camp.IsSleeping && player.armorName == "bimbo skirt" && rand(10) == 0 && player.biggestTitSize() < 12) {
                 outputText("\n<b>As you wake up, you feel a strange tingling starting in your nipples that extends down into your breasts.  After a minute, the tingling dissipates in a soothing wave.  As you cup your tits, you realize they've gotten larger!</b>");
 				player.growTits(1, player.bRows(), false, 2);
-				player.dynStats("lus", 10);
+				player.dynStats("lus", 10, "scale", false);
 				needNext = true;
 			}
 			if (flags[kFLAGS.BIKINI_ARMOR_BONUS] > 0) {
@@ -2119,7 +2119,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			if (player.tailType != Tail.MANTICORE_PUSSYTAIL && player.hasPerk(PerkLib.ManticoreCumAddict)) {
-				outputText("\nYou suddently feel like your mind is clear of the constant haze of lust and hunger for the first time since you had that tail. Losing it was perhaps for the best.\n");
+				outputText("\nYou suddenly feel like your mind is clear of the constant haze of lust and hunger for the first time since you had that tail. Losing it was perhaps for the best.\n");
 				player.removePerk(PerkLib.ManticoreCumAddict);
 				needNext = true;
 			}
@@ -2131,7 +2131,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			if (player.rearBody.type != RearBody.DISPLACER_TENTACLES && player.hasPerk(PerkLib.DisplacerMilkAddict)) {
-				outputText("\nYou suddently feel like your mind is clear of the constant haze of lust and hunger for the first time since you had these tentacles. Losing them was perhaps for the best.\n");
+				outputText("\nYou suddenly feel like your mind is clear of the constant haze of lust and hunger for the first time since you had these tentacles. Losing them was perhaps for the best.\n");
 				player.removePerk(PerkLib.DisplacerMilkAddict);
 				needNext = true;
 			}
@@ -2206,8 +2206,6 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 
 			//Turn to Bicorn
 			var CurentColor:String;
-			var bicornColorPalette:Array = ["black", "midnight black", "midnight"];
-			var bicornHairPalette:Array = ["silver","black", "midnight black", "midnight"];
 			if ((player.horns.type == Horns.BICORN || player.horns.type == Horns.UNICORN) && player.cor > 89 && !player.hasPerk(PerkLib.AvatorOfCorruption)) {
 				outputText("\nA sudden wave of pleasure strike you making you moan");
 				if (player.horns.type == Horns.UNICORN) {
@@ -2215,13 +2213,13 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					transformations.HornsBicorn.applyEffect(false);
 				}
 				if (!InCollection(player.hairColor, UnicornRace.BicornHairColors)) {
-					CurentColor = randomChoice(bicornHairPalette);
+					CurentColor = randomChoice(UnicornRace.BicornHairColors);
 					outputText(" You feel a tingling in your hairs as the strands turns "+CurentColor+".");
 					player.hairColor = CurentColor;
 				}
 				if (!InCollection(player.furColor, UnicornRace.BicornFurColors)) {
-					CurentColor = randomChoice(bicornColorPalette);
-					outputText(" Your fur tingle and you coo in delight as it turn "+CurentColor+".");
+					CurentColor = randomChoice(UnicornRace.BicornFurColors);
+					outputText(" Your fur tingles and you coo in delight as it turns "+CurentColor+".");
 					player.furColor = CurentColor;
 				}
 				if (CoC.instance.transformations.EyesChangeColor(["red"]).isPossible()) {
@@ -2229,8 +2227,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					player.eyes.colour = "red";
 				}
 				if (player.wings.type == Wings.FEATHERED_ALICORN) {
-					outputText(" Your wings aren’t spared either all the feather falling off to reveal a membranous demonic pair of bat wings.");
-					player.wings.type = Wings.NIGHTMARE;
+					CoC.instance.transformations.WingsNightmare.applyEffect();
 				}
 				outputText("\n\n<b>You giggle in delight of your own corruption as you fall from grace into a ");
 				if (player.wings.type == Wings.NIGHTMARE) outputText("nightmare");
@@ -2255,8 +2252,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			//Fixing wings
 			if (player.horns.type == Horns.BICORN && player.wings.type == Wings.FEATHERED_ALICORN) {
-				outputText("\n\nYour wings changes as all the feather falling off to reveal a membranous demonic pair of bat wings.");
-				CoC.instance.transformations.WingsNightmare.applyEffect(false);
+				CoC.instance.transformations.WingsNightmare.applyEffect();
 				needNext = true;
 			}
 			//Losing horn
@@ -2468,7 +2464,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 						flags[kFLAGS.PC_CURRENTLY_LUSTSTICK_AFFECTED]++;
 						needNext = true;
 					}
-					player.dynStats("lus", 20);
+					player.dynStats("lus", 20, "scale", false);
 					if (player.lust > player.maxLust()) player.lust = player.maxLust();
 				}
 				if (player.statusEffectv1(StatusEffects.Luststick) <= 0) {
@@ -2627,7 +2623,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			if (player.hasStatusEffect(StatusEffects.LustyTongue)) { //Lusty Tongue Check!
 				if (rand(5) == 0) {
 					outputText("\nYou keep licking your lips, blushing with the sexual pleasure it brings you.");
-					player.dynStats("lus", 2 + rand(15));
+					player.dynStats("lus", 2 + rand(15), "scale", false);
 					if (player.lust >= player.maxOverLust()) {
 						outputText("  Your knees lock from the pleasure, and you fall back in pleasure, twisting and moaning like a whore as you somehow orgasm from your mouth.  When it finishes, you realize your mouth feels even more sensitive than before.");
 						player.orgasm();
@@ -2927,7 +2923,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					outputText("  The sensation of wetness inside your own clothes torments you as you try to return to sleep, driving up your lust and making you half-hard once again... the rumbling of eggs in your abdomen, as if they're ready to be laid, doesn't help either.");
 					player.fertilizeEggs(); //convert eggs to fertilized based on player cum output, reduce lust by 100 and then add 20 lust
 					player.orgasm(); //reduce lust by 100 and add 20, convert eggs to fertilized depending on cum output
-					player.dynStats("lus", 20);
+					player.dynStats("lus", 20, "scale", false);
                     EngineCore.doNext(playerMenu);
 					//Hey Fenoxo - maybe the unsexed characters get a few \"cock up the ovipositor\" scenes for fertilization with some characters (probably only willing ones)?
 					//Hey whoever, maybe you write them? -Z
@@ -2947,7 +2943,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					outputText("  Turning over and trying to find a dry spot, you attempt to return to sleep... the wet pressure against your crotch doesn't make it easy, nor do the rumbles in your abdomen, and you're already partway erect by the time you drift off into another erotic dream.  Another traveler passes under you, and you prepare to jump at her; your ovipositor peeks out eagerly and a bead of slime drips from it, running just ahead of the first fertilized egg you'll push into your poor victim...");
 					player.fertilizeEggs(); //reduce lust by 100 and add 20, convert eggs to fertilized depending on cum output
 					player.orgasm();
-					player.dynStats("lus", 20);
+					player.dynStats("lus", 20, "scale", false);
 					EngineCore.doNext(playerMenu);
 					return true;
 				}
@@ -2965,7 +2961,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					outputText("  Turning over and trying to find a dry spot, you attempt to return to sleep... the wet pressure against your crotch doesn't make it easy, nor do the rumbles in your abdomen, and you're already partway erect by the time you drift off into another erotic dream.  Another traveler passes under you, and you prepare to snare her with your web; your ovipositor peeks out eagerly and a bead of slime drips from it, running just ahead of the first fertilized egg you'll push into your poor victim...");
 					player.fertilizeEggs(); //reduce lust by 100 and add 20, convert eggs to fertilized depending on cum output
 					player.orgasm();
-					player.dynStats("lus", 20);
+					player.dynStats("lus", 20, "scale", false);
 					EngineCore.doNext(playerMenu);
 					//Hey Fenoxo - maybe the unsexed characters get a few \"cock up the ovipositor\" scenes for fertilization with some characters (probably only willing ones)?
 					//Hey whoever, maybe you write them? -Z

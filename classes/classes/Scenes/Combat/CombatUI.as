@@ -12,6 +12,7 @@ import classes.CoC_Settings;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
 import classes.Items.Weapons.MoonlightGreatsword;
+import classes.Items.Weapons.Tidarion;
 import classes.PerkLib;
 import classes.Races;
 import classes.Scenes.Areas.Beach.CancerAttack;
@@ -20,6 +21,7 @@ import classes.Scenes.Areas.Forest.Alraune;
 import classes.Scenes.Areas.Forest.WoodElvesHuntingParty;
 import classes.Scenes.Areas.HighMountains.Izumi;
 import classes.Scenes.Dungeons.D3.*;
+import classes.Scenes.Dungeons.DemonLab.ProjectTyrant;
 import classes.Scenes.NPCs.*;
 import classes.Scenes.SceneLib;
 import classes.StatusEffectClass;
@@ -192,6 +194,7 @@ public class CombatUI extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.ElementalBody) && (player.weaponRangePerk == "" || player.weaponRangePerk == "Tome")) btnRanged.show("Throw", combat.throwElementalAttack, "Attack enemy with range elemental attack.  Damage done is determined by your strength.");
 		if (player.weapon is MoonlightGreatsword && (player.weaponRangePerk == "" || player.weaponRangePerk == "Tome")) btnRanged.show("MoonWave", combat.throwElementalAttack, "Attack enemy with wave of moonlight.  Damage done is determined by your intelligence and weapon.");
+		if (player.weapon is Tidarion && (player.weaponRangePerk == "" || player.weaponRangePerk == "Tome")) btnRanged.show("FireBeam", combat.throwElementalAttack, "Attack enemy with a beam of fire.  Damage done is determined by your intelligence and weapon.");
 		btnItems.show("Items", inventory.inventoryMenu, "The inventory allows you to use an item.  Be careful, as this leaves you open to a counterattack when in combat.");
 
 		// Submenus
@@ -796,9 +799,15 @@ public class CombatUI extends BaseCombatContent {
 			btnBoundWait.call((monster as Izumi).titSmotherWait);
 		}
 		if (player.hasStatusEffect(StatusEffects.Pounced)) {
-			outputText("\n<b>You’re trapped underneath the giant Drider, and all you can see is her armored undercarriage. Eight legs jab down at you, steel glinting dangerously. You need to get out of here, or you’ll end up crushed!</b>");
-			btnStruggle.call((monster as Tyrantia).tyrantiaPouncedStruggle);
-			btnBoundWait.call((monster as Tyrantia).tyrantiaPouncedWait);
+			if (monster is Tyrantia) {
+				outputText("\n<b>You’re trapped underneath the giant Drider, and all you can see is her armored undercarriage. Eight legs jab down at you, steel glinting dangerously. You need to get out of here, or you’ll end up crushed!</b>");
+				btnStruggle.call((monster as Tyrantia).tyrantiaPouncedStruggle);
+				btnBoundWait.call((monster as Tyrantia).tyrantiaPouncedWait);
+			} else if (monster is ProjectTyrant) {
+				outputText("You are pinned underneath the Drider-beast’s weight, and it begins to crush you!");
+				btnStruggle.call((monster as ProjectTyrant).TackleGrappleStruggle);
+				btnBoundWait.call((monster as ProjectTyrant).TackleGrappleWait);
+			}
 		}
 		if (player.hasStatusEffect(StatusEffects.Tentagrappled)) {
 			btnStruggle.call((monster as SuccubusGardener).grappleStruggle);

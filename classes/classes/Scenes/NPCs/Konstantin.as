@@ -1044,7 +1044,7 @@ public class Konstantin extends NPCAwareContent
 				outputText("Konstantin has nothing but a smile when he sees you coming to his place with the prospect of more fun in mind. With a mischievous wink, he strips of his undies, the only pieces of cloth covering his body, so you can ogle at the sight of his naked body, and lies on the bed, rubbing his towering manhood, as if enticing you to come in and choke on it.\n\n");
 				outputText("Truly speaking, the mere sight of the flesh mammoth sliding between his fingers, as well as his huge nuts bouncing below make your body ache in need. Not wanting to leave him wanting, you strip off your clothes, and hop to his side on the bed. You make out for a while, enjoying his kisses, caresses and gropes, until none of you can’t stand it anymore, your bodies melting under the carnal desire.\n\n");
 				outputText("Now that both of you are hot and ready, the question is, what do you want to do?\n\n");
-				dynStats("lus", 33);
+				dynStats("lus", 33, "scale", false);
 			}
 			else {
 				outputText("While wandering around the camp, you look out for Konstantin. Oddly, seems like he’s not around, as his working place is alone. You’re about to leave when you manage to hear a soft humming from his tent.\n\n");
@@ -1060,7 +1060,7 @@ public class Konstantin extends NPCAwareContent
 				outputText("Blushing, you admit that you’d like to do what you were seeking, spend a good time with him, if he catches what you mean. He nods and smiles, enveloping you in one of his bear-hugs.\n\n");
 				outputText("\"<i>It’s okay, " + player.mf("man", "girl") + ". We always have those urges sooner or later. And, in those times is much sooner than later. And, with you, I’d be more than happy.</i>\" he assures you. \"<i>So, what’s on your mind?</i>\"\n\n");
 				flags[kFLAGS.KONSTANTIN_SEX_MENU] = 1;
-				dynStats("lus", 33);
+				dynStats("lus", 33, "scale", false);
 			}
 			menu();
 			addButton(0, "Give BJ", KonstantinSexMenuGiveBJ);

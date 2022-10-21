@@ -124,7 +124,7 @@ public class TrollVillage extends BaseContent implements SaveableState{
                     "\n" +
                     "Suul raises an eyebrow as he turns his attention toward you again.\n" +
                     "\n" +
-                    "\"Hmm, never thought you’d want to… you know… after Yenza… Nevermind, you may enter.\"\n");
+                    "\"Hmm, never thought you’d want to… you know… after Yenza… Never mind, you may enter.\"\n");
             addButton(0, "Enter Village",EnterTheVillage,true);
         }
         else{
@@ -147,6 +147,7 @@ public class TrollVillage extends BaseContent implements SaveableState{
 
     public function EnterTheVillage(firsttime:Boolean = false):void{
         clearOutput();
+        menu();
         ZenjiFollowing = (flags[kFLAGS.PLAYER_COMPANION_1] == "Zenji");
         if (firsttime){
             outputText("You emerge at the troll village, the guard gives you a stern look but doesn’t obstruct you as you enter.\n");

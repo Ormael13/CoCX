@@ -79,9 +79,8 @@ import classes.Scenes.SceneLib;
 				if (player.hasCock() && player.hasVagina()) outputText("whilst your");
 				if (player.hasVagina()) outputText("thighs are suddenly soaked by a torrent of girlcum as your body reacts to the potent chemicals");
 				outputText(".");
-				var lustDmg:Number = (30 + rand(30)) * (EngineCore.lustPercent()/100);
-				player.dynStats("lus", lustDmg, "scale", false);
-				outputText(" <b>(<font color=\"#ff00ff\">" + (Math.round(lustDmg*10)/10) + "</font>)</b>");
+				var lustDmg:Number = (30 + rand(30));
+				player.takeLustDamage(lustDmg, true);
 			}
 		}
 

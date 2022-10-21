@@ -19,13 +19,13 @@ public class UnderwaterSharkGirl extends Monster
 				outputText("You charge at the shark girl, prepared to strike again, but stop dead in your tracks when she turns around and wiggles her toned ass towards you. It distracts you long enough for her tail to swing out and smack you. She coos, \"<i>Aw... You really do like me!</i>\" ");
 				//(Small health damage, medium lust build).
 				player.takePhysDamage(10+rand(10), true);
-				player.dynStats("lus", (10+(player.lib/10)));
+				player.takeLustDamage((10+(player.lib/10)), true);
 			}
 			else {
 				outputText("You pull your [weapon] back, getting a swimming start to land another attack. The Shark girl smirks and pulls up her bikini top, shaking her perky breasts in your direction. You stop abruptly, aroused by the sight just long enough for the shark girl to kick you across the face and knock you away.  She teases, \"<i>Aw, don't worry baby, you're gonna get the full package in a moment!</i>\" ");
 				//(Small health damage, medium lust build)
 				player.takePhysDamage(10+rand(10), true);
-				player.dynStats("lus", (5+(player.lib/5)));
+				player.takeLustDamage((5+(player.lib/5)), true);
 			}
 		}
 		private function sharkBiteAttack():void {

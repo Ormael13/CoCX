@@ -47,7 +47,7 @@ public class Imp extends Monster
 
 		protected function lustMagicAttack():void {
 			outputText("You see " + a + short + " make sudden arcane gestures at you!\n\n");
-			player.dynStats("lus", player.lib / 10 + player.cor / 10 + 10);
+			player.takeLustDamage(player.lib / 10 + player.cor / 10 + 10, true);
 			if (player.lust < (player.maxLust() * 0.3)) outputText("You feel strangely warm.  ");
 			if (player.lust >= (player.maxLust() * 0.3) && player.lust < (player.maxLust() * 0.6)) outputText("Blood rushes to your groin as a surge of arousal hits you, making your knees weak.  ");
 			if (player.lust >= (player.maxLust() * 0.6)) outputText("Images of yourself fellating and fucking the imp assault your mind, unnaturally arousing you.  ");
@@ -88,7 +88,7 @@ public class Imp extends Monster
 
 		protected function lustMagicAttack1():void {
 			outputText("You see " + a + short + " make sudden arcane gestures at you!\n\n");
-			player.dynStats("lus", player.lib / 20 + player.cor / 20 + 5);
+			player.takeLustDamage(player.lib / 20 + player.cor / 20 + 5, true);
 			if (player.lust < (player.maxLust() * 0.3)) outputText("You feel strangely warm.  ");
 			if (player.lust >= (player.maxLust() * 0.3) && player.lust < (player.maxLust() * 0.6)) outputText("Blood rushes to your groin as a surge of arousal hits you, making your knees weak.  ");
 			if (player.lust >= (player.maxLust() * 0.6)) outputText("Images of yourself fellating and fucking the imp assault your mind, unnaturally arousing you.  ");

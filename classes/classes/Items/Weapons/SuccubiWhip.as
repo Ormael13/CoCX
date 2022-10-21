@@ -10,6 +10,7 @@ package classes.Items.Weapons
 		public function SuccubiWhip() 
 		{
 			super("SucWhip","SucWhip","succubi whip","a succubi whip","sexy whipping",10,400,"This coiled length of midnight-black leather practically exudes lust.  Though it looks like it could do a lot of damage, the feel of that slick leather impacting flesh is sure to inspire lust.  However, it might slowly warp the mind of wielder.", "Whipping", "Whip");
+			withBuffs({'teasedmg': 45});
 		}
 		
 		override public function get attack():Number {

@@ -942,7 +942,7 @@ public static const ARIAN_FOLLOWER:int                                          
 public static const ARIAN_PARK:int                                                  =  934; // -1 = disabled, 1 = helped.
 public static const ARIAN_HEALTH:int                                                =  935; // Higher is better.
 public static const ARIAN_ANAL_XP:int                                               =  936; //
-public static const UNKNOWN_FLAG_NUMBER_00937:int                                   =  937; //
+public static const HELSPAWN_HADSEX:int                                   			=  937; //
 public static const ARIAN_COCK_SIZE:int                                             =  938; //
 public static const ARIAN_DOUBLE_COCK:int                                           =  939; //
 public static const ARIAN_VAGINA:int                                                =  940; //
@@ -2567,7 +2567,7 @@ public static const TEMPLE_OF_THE_DIVINE_FERA:int                               
 public static const GOLEMANCER_PERM_GOLEMS:int	                                    = 2559;
 public static const IN_COMBAT_PLAYER_GOLEM_ATTACKED:int	                            = 2560;
 public static const IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED:int                         = 2561;
-public static const UNKNOWN_FLAG_NUMBER_02562:int                         			= 2562;
+public static const SOUL_SENSE_ANTHILL:int                         					= 2562;
 public static const FISHES_STORED_AT_FISHERY:int                         			= 2563;
 public static const PATCHOULI_FOLLOWER:int                         					= 2564;
 public static const PATCHOULI_GIRL_OR_MORPH:int                                   	= 2565;
@@ -2954,7 +2954,7 @@ public static const UNKNOWN_FLAG_NUMBER_02945:int                               
 public static const UNKNOWN_FLAG_NUMBER_02946:int                                   = 2946;
 public static const UNKNOWN_FLAG_NUMBER_02947:int                                   = 2947;
 public static const UNKNOWN_FLAG_NUMBER_02948:int                                   = 2948;
-public static const UNKNOWN_FLAG_NUMBER_02949:int                                   = 2949;
+public static const RACESORT_SETTING:int		                                    = 2949;
 public static const SCENEHUNTER_POLYGAMY:int                                   		= 2950;
 public static const EXPLORE_MENU_STYLE:int                                          = 2951; // 1: classic, 0: 60btn
 public static const SCENEHUNTER_MOCK_FIGHTS:int                                   	= 2952;

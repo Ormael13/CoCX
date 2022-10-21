@@ -865,7 +865,7 @@ only corrupt siren daughters that the PC themselves father or birth stay at the 
                     + "She smiled before kissing your cheek. “<i>Thank you for listening, to my story, I know it was a long and hard thing, but it was a heart pounding tale.</i>“ she says with a snicker. “<i>Now then, I have many harpies and daughters to fuck and breed. I’m sure you have lots of ‘championing’ to do.</i>“ She says before getting up and heading over to where she keeps her harpies.\n"
                     + "\n"
                     + "With Minerva off tending to her breeders you sigh and head off, back to camp, blueballed by the erotic story Minerva told you.");
-                dynStats("lus", 30);
+                dynStats("lus", 30, "scale", false);
                 doNext(camp.returnToCampUseOneHour);
             }
         }
@@ -897,7 +897,7 @@ only corrupt siren daughters that the PC themselves father or birth stay at the 
                 + "Splashing, thrashing and surprisingly enough, playing in the spring, each of you drenching each other in the thick corrupted stuff and flirtatiously teasing each other all the while. After much playing and teasing the two of you relax, basking in the arousing warmth and sensations of the corrupted waters for a long while before you finally rise from the syrupy stuff and decide its time you headed out.\n"
                 + "\n"
                 + "“<i>Awww... leaving little old me all alone without even offering to have sex? how cruel?</i>“ Minerva teases before waving you off. “<i>Fine, fine. Go on and do your ‘championing’ if you ever get bored of that do come back, I’ll make sure you have a proper home and purpose</i>“ Stepping out of the thick slick goo you shake and wipe off as much as you can before you leave, making sure to stop off at a stream to wash yourself off properly before returning to camp.");
-            dynStats("lus", 10);
+            dynStats("lus", 10, "scale", false);
             doNext(camp.returnToCampUseOneHour);
         }
 

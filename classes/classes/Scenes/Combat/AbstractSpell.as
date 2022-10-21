@@ -212,7 +212,7 @@ public class AbstractSpell extends CombatAbility {
 	 * @param casting Determines if elemental spell counter (like Raging Inferno) should be increased
 	 * @return
 	 */
-	protected function adjustSpellDamage(
+	public function adjustSpellDamage(
 			baseDamage:Number,
 			damageType:int,
 			category:int,

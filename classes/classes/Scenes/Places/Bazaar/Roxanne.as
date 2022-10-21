@@ -172,7 +172,7 @@ public class Roxanne extends BazaarAbstractContent implements TimeAwareInterface
             if (flags[kFLAGS.ROXANNE_DICK_SIZE] >= 200) outputText("massive, seam-ripping bulge");
             else outputText("hard-to-hide bulge");
             outputText(" give you more than an eyeful every time you return her leer.  Still, the scaly shemale must be feeling the same way, judging by the large damp spot her cock is making.\n\n");
-            dynStats("lus", 25);
+            dynStats("lus", 25, "scale", false);
         }
         //[DRINKING CONTEST CONTINUES – losing intentionally]
         else {

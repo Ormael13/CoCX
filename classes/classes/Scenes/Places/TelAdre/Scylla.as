@@ -422,7 +422,7 @@ private function scyllaRoundIVPtII():void {
 	outputText("The last of your haze is burned away by her statement, and you take a careful look at yourself. You haven't changed physically, except in scale. Scylla isn't a lumbering giant – you've just shrunk down to a child's size, no more than three feet tall. The nun hushes your panicked squirming with a gentle shoosh and a pat on the head. \"<i>There there... You've been afflicted by a profane venom, but Scylla will make it all better.</i>\" She dips her head and lifts you up, threading your small [legs] around her shoulders, letting you ride piggyback as she walks to a small temple on the edge of the forest. You rest your tiny fingers in the thick, curly hair that spills all around you and smile, despite yourself, when she takes extra big steps to make you bounce on her shoulders.\n\n");
 
 	outputText("You reach her humble quarters, and Scylla sets you down on her plain-looking cot, leaving your [legs] to swing in the air over the side. \"<i>I have never seen this poison's effects in person,</i>\" she begins, taking a seat on a simple stool opposite you, \"<i>but I have read accounts of it. Demon Lords brew it to topple heroes without risking noble combat. Its vile magic saps your size and your strength. If left untreated, victims regress until they have no hope of overcoming their attackers. I shudder to think what happens if it gets that far.</i>\" Her eyes glaze, perhaps remembering the demonic factory that you shut down. Then she shakes her head and just like that, her concern is swept away – replaced by a smile like the first thaw of spring. \"<i>But we won't let that happen,</i>\" she soothes you, resting a large yet soft hand on your [leg].  You look down at the nun's lingering arm and follow it up to her sizable chest. Her breathing is a little too shallow, and you meet her eyes only to see the beginnings of thirst reaching its hooks into her mind. \"<i>We just need to get that poison out of you...</i>\" she whispers, leaning down, her full, red lips glistening.");
-	if (!recalling) dynStats("lus", 5);
+	if (!recalling) dynStats("lus", 5, "scale", false);
 	//[Next]
 	doNext(scyllaRoundIVPtIII);
 }
@@ -455,7 +455,7 @@ private function scyllaRoundIVPtIVWATCH():void {
 	outputText("The nun begins trembling with need as the demonic cock springs to life, and she gratefully lowers her head to it with a hungry gasp. Her lips have swollen in anticipation, puffing into a whorish scarlet pucker. She rubs the imp's cock along the rise of her mouth and titters mindlessly at the feel against her skin. Pulling down the neck of her dress, she bares her tits to the air, the nipple-mouths on each one already drooling white milk. She rolls her palms along her boobs and smears the oily pre-cream across her livid flesh, circling each areola with her pinkies, teasing them with the promise of penetration. She levels a husky puff at the crown of his dick and sucks the tip of his cock into her mouth. She draws back slightly, but her lips seem glued on, pulling her cheeks into a narrow concave. She slides a finger into her hungry nipples and begins to suck rhythmically at the demon prick, fucking him in the cunt-like tightness of her swollen lips.\n\n");
 
 	outputText("The imp's face goes from expressionless neutrality to a grimace, and he grunts as his body orgasms to sate Scylla's thirst. His foot-long dick pulses with each load as the nun strokes her tit-lips feverishly, masturbating from their near-clit sensitivity. Her cheeks fill with the demon's seed before she takes a large, grateful gulp, savoring the feel of the burning fluid rolling down her throat. As she drinks, the imp rouses from his paralysis, taking in the scene between groans. His confused expression quickly becomes wicked relish. \"<i>Couldn't help yourself, eh bitch?</i>\" he says triumphantly. \"<i>You belong in our new factory after all. Maybe I'll take you there after I'm done, but for now, let's take that virginity of yours, shall we?</i>\"\n\n");
-	if (!recalling) dynStats("lus", 10);
+	if (!recalling) dynStats("lus", 10, "scale", false);
 
 	//[Next]
 	doNext(scyllaWatchSecondPartPoorImp);
@@ -463,7 +463,7 @@ private function scyllaRoundIVPtIVWATCH():void {
 private function scyllaWatchSecondPartPoorImp():void {
 	scyllaSprite();
 	hideUpDown();
-	if (!recalling) dynStats("lus", 10);
+	if (!recalling) dynStats("lus", 10, "scale", false);
 	clearOutput();
 	outputText("The Imp Lord rises and tries to pull his member from Scylla's lips, but manages only to stumble onto his back.  The nun's mouth remains locked on, slurping up the last drop of cum from his cockhead. He yanks again, but it only slides his shaft deeper into her maw, her sucking lips and swallowing throat eager for his next orgasm. It seems that the imp's hooked dick has made it impossible for him to pull out while Scylla keeps it stimulated. He shrieks in irritation, but she merely lets out a pleased purr, vibrations traveling up his barbed prick and exciting his rapidly-refilling balls.\n\n");
 
@@ -501,7 +501,7 @@ private function scyllaPtIVKissPtI():void {
 	outputText("You take a step back and begin to appreciate the difference in scale between the two of you. In your poisoned state, you're not even three feet tall and losing inches with each hour. Scylla, on the other hand, has always been tall - nearly seven feet - and the changes the demonic taint has made to her body have made her buxom in a way her robe has given up trying to hide. Her long legs and plump thighs give way to a flat, fit waist while her breasts are over half your height and as deep as you are wide. Scylla leans in and wraps her strong arms around you in a pillowy hug. \"<i>I think my hero deserves a second kiss,</i>\" she insists, coyly. With one hand, she pulls the taut fabric around her tits down, allowing their full, J-cup flesh to roll against you, silken alabaster filling your vision. Cradling your diminutive form against her body, she raises your head to a scarlet nipple, areola lips moist from the milk within.\n\n");
 
 	outputText("You can't help yourself, and you rub your cheek against her satin boob as you kiss her nipple; the mouth kisses back with equal vigor. You thread your tongue between her candy lips and the sweet cream within squirts into your mouth, rich and intoxicating. Hazy fervor floods your body, your lips prickling with sexual sensitivity. You kiss harder, parting her lips with yours, and she yields, slick skin opening to your sudden thirst. The fine milk ebbs into your mouth, and you roll it around on your tongue before swallowing and savoring the warm, satin fluid that settles in your belly. Scylla takes a deep breath and contentedly strokes your hair as you nurse at her breast. You wrap your arms around her pliant titflesh and squeeze as you suckle in earnest. The creamy milk flows faster and thicker, flooding your mouth and forcing you to take big gulps. Even swallowing as much as you can, some milk dribbles down your chin, spilling between your fingers and the knead-able flesh of the nun's tits.\n\n");
-	if (!recalling) dynStats("lus", 15);
+	if (!recalling) dynStats("lus", 15, "scale", false);
 	doNext(scyllaPtIVKissPtII);
 }
 
@@ -620,7 +620,7 @@ private function scyllaPtVLeave():void {
 	scyllaSprite();
 	clearOutput();
 	//[Lust down]
-	dynStats("lus", -10);
+	dynStats("lus", -10, "scale", false);
 	if(player.cor > 30) dynStats("cor", -1);
 	outputText("You just don't feel right about interrupting and opt to take the high road, leaving them to their counseling. Nearly-forgotten warmth fills your chest and you smile with pride, despite yourself. You came here as a Champion to purge corruption and- despite every temptation- you acted like a good friend ought to. You walk back downstairs, with your head held high, and order a drink.");
 	cheatTime(1);
@@ -668,7 +668,7 @@ private function scyllaPtVTakeAdvantageNormal():void {
 		outputText("\"<i>Abylon, please,</i>\" Scylla starts, but the use of her given name infuriates the goblin girl, and she hurls the broken bottle at the nun, who ducks. It shatters on the wall, sending glass shards flying, several of them cutting your cock and giving you a half-dozen scrapes. The goblin releases your member and dives at the nun, snarling. They roll in a tangled cat fight, leather and cloth shredding under addiction-fueled claws. You swat Pastie from your dick and run out of the room, gingerly tending to your tormented groin.\n\n");
 	}
 	player.takePhysDamage(1);
-	dynStats("lus", -99);
+	dynStats("lus", -99, "scale", false);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -689,7 +689,7 @@ private function scyllaVTakeAdvantageWithExgartuan():void {
 	}
 
 	outputText("The girls stare at you blankly, not really sure what they're seeing. You know that if you don't make a move, the demon is just going to keep doing it for you, so you sigh and spread your arms and shrug. \"<i>Ladies,</i>\" you nod, by way of invitation. The nun shakes her head, trying to dismiss the unclean thoughts flooding through her and failing miserably. She giggles involuntarily, clapping a hand over her mouth in embarrassment. The goblin trembles, her fists balled into pale knuckles, but then she slumps, defeated.  \"<i>Damn it, my mom put you up to this, didn't she? Talking dicks? She just can't get grandchildren fast enough,</i>\" she grumbles, unable to conceal her burgeoning lust under her thick, leather armor. Pastie hiccups, trying to figure out what's happening.\n\n");
-	dynStats("lus", 5);
+	dynStats("lus", 5, "scale", false);
 	//[Next]
 	doNext(scyllaVTakeAdvantageWithExgartuan2);
 }
@@ -800,7 +800,7 @@ private function scyllaPtVMilk():void {
 	outputText("Scylla rises to give you a big, mushy hug, smooshing you into her jiggling breast. \"<i>It's okay to worry about the ones you love,</i>\" she comforts you. \"<i>I think it's your feelings for her that make her milk so important to you. Your body makes you follow what your heart desires.</i>\" Abylon snorts and finishes off another beer, making an impressive collection of empties in front of her. Her hands show the alcohol's influence when she sets down the glass and nearly knocks it off of the table. Scylla's embrace keeps you from seeing what Pastie is doing, but you can hear a soft schlicking noise, so you can guess she's still thinking about the milk.\n\n");
 
 	outputText("You try to consider Scylla's words, but the heat and softness of her chest makes thinking hard. Your mind keeps coming back to your vivid memories of Marble and your stomach grumbles. You smack your lips, but you just can't get any moisture. Everything feels hot and cramped. When you look up at Scylla, her bulging lips almost look like Marble's if you squint a lot. You can almost see the cow girl's udders in the nun's skin-tight robe - mammoth mammaries hulking against your chest like ripe melons, full of sweet ambrosia. You pat your pockets for the bottle of milk you could've sworn you'd stashed for a rainy day, but find only the boiling fire coursing through your belly. The want. The need. The thirst. Scylla meets your addiction constricted eyes with a blue gaze of innocent concern, her eyebrows turned up in a plaintive expression.\n\n");
-	dynStats("lus", 5);
+	dynStats("lus", 5, "scale", false);
 	//[Next]
 	doNext(scyllaPtVMilkII);
 }
@@ -817,7 +817,7 @@ private function scyllaPtVMilkII():void {
 	outputText("Her bottom lip bloats in your mouth, as sensitive as any nipple, inflating as you tease it with your tongue and lightly nibble with your teeth. The nun's lips fill out into a bimbo's sucking pucker, wobbling and stuffing your cheeks, her sweet drool polishing the pulsing, strawberry surface with a slick gloss before dribbling into your mouth. You swallow reflexively, and remember the thirst pangs that wrack your belly. You pull her lip far enough to make her squeak in pain, and then let go.  The bloated flesh slaps wetly back against her chin. She drops her hands from guarding her chest and brings their trembling fingers to stroke her enlarged kisser as her body shakes with the orgasm you've teased out of her. She seems unable to swallow as rivulets of clear saliva ooze down her cheeks, and she pants, wetly.\n\n");
 
 	outputText("Not one to miss an opportunity, you kneel and cushion your head against her right breast, letting your fingers sink and disappear in the plushness of her tits. You lick at the edges of her nipple lips, teasingly, savoring the bloated expansion as they begin flushing just like her upper mouth. They quiver and open a hair's breadth, softly sighing at your tongue's caresses. As your mouth comes around again, the lips pucker and suck at your tongue, pulling it into their velvet depths. You are drawn into a kiss by her nipple's suction and roll your head as your tongue trespasses on her tit's cunt-like interior. Your exploration is rewarded when a trickle of cream is stolen from her quivering reservoir, squeezed down her nipple, flowing like a pussy's wetness. You kiss her bosom deeper, sucking like the addict you've accepted you are.\n\n");
-	dynStats("lus", 5);
+	dynStats("lus", 5, "scale", false);
 	//[Next]
 	doNext(scyllaPtVMilkIII);
 }
@@ -836,7 +836,7 @@ private function scyllaPtVMilkIII():void {
 	outputText("Scylla's orgasm is immediate. The puffed nipple-lips you are sucking moan into your mouth and a torrent of cream rushes past your teeth, over your tongue, and down your eager gullet. You swallow as fast as you can, but Abby twists and pulls Scylla's lips, driving the nun crazy and opening her breasts' flood gates. You flick her nipple mouth with your tongue between gouts, and it kisses you with such force that the next burst of milk nearly chokes you. Meanwhile, Pastie appears to be clutching the bottom lip of Scylla's left nipple for dear life. The rushing blasts of milk are like creamy rapids to the fairy, and she sputters as it fills her mouth, nose, and eyes.\n\n");
 
 	outputText("Abby, mistaking the nun's orgasmic throes for pain, opens wide and sinks her teeth into the inflating lips, drawing blood. Scylla gasps and loses sensation in her arms. The fingers prying her tit's lips open for the fairy fall away, and her mouth closes tightly around the fairy's chest, leaving her legs and butt swinging wildly in the air. The lips around the tiny girl purse into a bloated pucker, the milk within rushing and churning, trying to get out through the struggling fairy. Pastie's belly swells rapidly as she swallows load after load, her wisp-thin waist bulging two, then three times its normal, fey size.\n\n");
-	dynStats("lus", 5);
+	dynStats("lus", 5, "scale", false);
 	//[Next]
 	doNext(scyllaPtVMilkIV);
 }
@@ -860,7 +860,7 @@ private function scyllaPtVMilkV():void {
 
 	outputText("Feeling pretty pleased with yourself, you add a skip to your step, belly jiggling all the way back to camp.");
 	//[Corruption Down]
-	dynStats("lus", -1);
+	dynStats("lus", -1, "scale", false);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -891,7 +891,7 @@ private function scyllaPtVCumII():void {
 
 	outputText("You lift the goblin girl over your head and line your cockhead up with her moist, leaking cunt, grunting in appreciation for the heat pouring out of her box. \"<i>Oh noooo, the Champion is gonna get raped by a dumb beast!</i>\" Abby wails, gleefully. You lower her onto your " + cockDescript(x) + ", her tight, green folds parting gradually before you. She sighs in exasperation and kicks backward, painfully catching your head in the left temple. \"<i>We ain't makin' love, ya dope, I don't need ta be romanced. Ya gotta breed and I got a warm hole. Be a minotaur!</i>\"\n\n");
 	//[Next]
-	dynStats("lus", 20);
+	dynStats("lus", 20, "scale", false);
 	doNext(scyllaPtVCumIII);
 }
 private function scyllaPtVCumIII():void {
@@ -949,7 +949,7 @@ private function scyllaPtVSex():void {
 	clearOutput();
 	outputText(images.showImage("scylla-help-round-five-sex-pt-one"));
 	flags[kFLAGS.SCYLLA_SEX_THERAPY_TIMES]++;
-	dynStats("lus", 10);
+	dynStats("lus", 10, "scale", false);
 	outputText("You're a little uncomfortable talking about this in front of the nun, but you push through the embarrassment and admit that you like sex. Abylon snorts, rolling her eyes. You clarify that you really, really, REALLY like sex. Ever since you lost your virginity, you just haven't been able to get enough. Imps, hell hounds, naga - if it's got a pulse, you'll jump it. Sometimes, you'll even let yourself be beaten in battle - just to let them have their way with you, with bestial dicks stuffing your every orifice and monstrous cunts milking your seed. But it's not just beasts. All the people who've been so kind to you, all you can do is think about fucking them silly. The heat, the sweat, the cum; despite the importance of your mission, it's too much to resist. You worry that maybe it's warping how you see the world. Will you be able to return home without trying to suck and fuck your way through all the people you knew and loved? Are you even capable of real love anymore?\n\n");
 
 	outputText("Abby makes a retching noise, her finger in her throat. \"<i>Aw please, what're ya plannin' a weddin'? There ain't nothin' wrong with enjoyin' sex, dummy. Jus' don't be a huge slut about it.</i>\" She takes a drink, crossing her legs unconsciously as she does so.\n\n");
@@ -975,7 +975,7 @@ private function scyllaPtVSexII():void {
 	outputText("\"<i>Oh, oh, no, this isn't... I mean... it's not,</i>\" Scylla stutters, wringing her hands. You cup Abby's breast, easily fitting the small girl's teat in your palm, and stroke the dark areola, teasingly close to her nipple but never quite touching it. Meanwhile, Pastie has thoroughly soaked her taut perch and slides forward slightly, letting the nipple's tip press against her pin-prick clit. She starts bouncing up and down, using her wings to add momentum as Abby's breasts jiggle in time to the fairy's bucking. The goblin girl hisses through her hair-gag and rubs her thighs together like she's trying to start a fire, girl cum leaking from her armor's gaps, re-oiling the plates with sticky, clear fluid. Using her wings to keep her aloft, Pastie turns 90 degrees downward and braces herself sideways against the goblin's boob, tiny high-heel-clad feet digging into the soft flesh around the areola to squeeze the nipple out further. Then, with a squeal of glee, the fairy flaps and impales herself on Abby's nipple, the whole jade nub vanishing inside her tiny snatch. You press your thumbnail against her other nipple and apply enough pressure to push it inward, sinking inside her tit up to your first knuckle.\n\n");
 
 	outputText("Abby screams into her gag in orgasm, far more sensitive to being used than you would've expected. She flexes her knees outward, hips bucking for friction against her armor. Her hands make a dive for your crotch and pulls out your [cocks]. She leans forward to your groin and grabs your shaft by the root, whipping it back and forth to smack herself in the face, gasping in pleasure at the degradation as she strokes it to life with masterful technique. With each meaty thwack against her pudgy cheeks and pug nose, it grows harder until she can't fit her small hands around it anymore, and she is forced to use both hands to encircle your " + cockDescript(x) + ". You grab the little goblin from her chair and peel off the rest of her armor, throwing the sopping wet leather to the floor and begin to line her twitching cunt up with your shaft when you happen to glance at Scylla, still sitting and watching you succumb to your addiction with sad worry on her face.");
-	dynStats("lus", 20);
+	dynStats("lus", 20, "scale", false);
 	//[Next]
 	doNext(scyllaPtVSexIII);
 }
@@ -1148,7 +1148,7 @@ public function Scylla6():void {
 
 	if(player.hasBalls()) outputText("Scylla guides you with polite little directions, pointing demurely at houses you pass by and letting you know a bit about their inhabitants. The cobbler over there just recovered from a terrible accident and has regained the use of his legs. That baker caught ill last week and is finally on the upswing. The family there found their missing daughter after searching high and low last night. She seems happy to be able to tell you all the positive, encouraging things that would've seemed to be mundane back home. Here, in this demon-tainted land, every small blessing seems a miracle.\n\n");
 	else outputText("Scylla guides you with polite little directions, pointing demurely at houses you pass by and letting you know a bit about their inhabitants. The cobbler over there just recovered from a terrible accident and has regained the use of his legs. That baker caught ill last week and is finally on the upswing. The family there found their missing daughter after searching high and low last night. She seems happy to be able to tell you all the positive, encouraging things that would've seemed to be mundane back home. Here, in this demon-tainted land, every small blessing seems a miracle.\n\n");
-	if (!recalling) dynStats("lus", 5+player.lib/20);
+	if (!recalling) dynStats("lus", 5+player.lib/20, "scale", false);
 	outputText("The nun guides you down an alley, talking about how she saw a bunny the other day when a couple of felines rush past, jostling you as they do so. You pat your pockets and notice they're emptier than usual, so you let go of Scylla's hand and turn around to chase the thieves. As you do so, you hear a soft shuffling behind you and the nun gasps.\n\n");
 	menu();
 	addButton(0, "Next", Scylla6SLOW);
@@ -1176,7 +1176,7 @@ private function Scylla6SLOW():void {
 	outputText("Too late, you realize the pickpockets were a distraction, and before you can whip around, a heavyweight cracks against the side of your skull, turning your world into a pinpoint of pain in an ocean of black unconsciousness. You muscles become jelly and you don't remember falling to your knees or slumping against the brick wall of the alley");
 	if (flags[kFLAGS.KATHERINE_UNLOCKED] < 1 || recalling && flags[kFLAGS.SCYLLA_CATS_RECALL_TRACKER] == 2) outputText(", but the last thing you remember is the soft jingling of a small bell");
 	outputText(".\n\n");
-	if (!recalling) dynStats("lus", 5+player.lib/20);
+	if (!recalling) dynStats("lus", 5+player.lib/20, "scale", false);
 	sceneHunter.print("Yay, another random part. Just recall it, it should be better.");
 	//[If the Player is Lactating]
 	if(player.biggestLactation() >= 1 && rand(2) == 0) {
@@ -1271,7 +1271,7 @@ private function Scylla6MilkyWait():void {
 	//More than Two-
 	else outputText("Your own endowments keep the four cats restraining you busy, noses nuzzling between your sloping valleys and granular tongues fanning a suffocating fire in your chest. Your rows of breasts heave as you wriggle under needy mouths and a matronly pride knots your stomach as you arch your back to present your milk to the thirsting felines. They waste no more time, descending on your cream-stuffed chest. Your tits wobble as they smooth their faces down to gather mouthfuls of your boobs, only to pull upward, sucking at the flesh that achingly slides from their muzzles until only your nipples hang from their lips, skin straining between your liquid weight and their coaxing squeezing. Sharp teeth drag along your sensitive bulk, just hard enough to make you feel their jaws nibbling at the tips of your teats, engorged pores swelling larger still until you can't think of your breasts as anything but udders- bloated organs meant to be milked. Meant to feed and nurse. The thought burns white hot in your loins and you can feel the sweetness in your chest churning in their runaway fertility.\n\n");
 	//NEXT
-	if (!recalling) dynStats("lus", (20+player.lib/10+player.sens/10));
+	if (!recalling) dynStats("lus", (20+player.lib/10+player.sens/10), "scale", false);
 	doNext(Scylla6MilkyWaitII);
 }
 //[Next]
@@ -1366,7 +1366,7 @@ private function Scylla6NoMilkSubmit():void {
 	outputText("Scylla's skin is sweet, her breast warm and yielding, but there is a tingling sensation between your eyes as you kiss her reluctantly at first, and deeper by degrees. An icy prickle runs down your spine when your tongue rolls along the pout of her lower lip and tastes the inside of her moist, clenching mound. A trickle of milk washes down your mouth like an intoxicating cream and you push your face into Scylla's tit harder, to lick deeper inside her swollen body. The plush softness of her breast molds against your face and her body jiggles with the sudden urgency of your thirst. Scylla squeaks and a rush of milk laps against your needy lips. You swallow gratefully, white rivulets running down the sides of your mouth.\n\n");
 
 	outputText("Before you can take a second gulp, the cat-morphs pull you back, your lips and hers still puckered from the broken kiss, milk leaking from both of you. Either the felines were satisfied that you haven't been further corrupted or their needs have overwhelmed their better judgment. They crowd around the nun's heaving chest and lap up her flowing bounty with a dozen thirsty tongues. As you regain your breath, you notice your throbbing erection and a different but no less pressing hunger fills you.\n\n");
-	if (!recalling) dynStats("lus", 75);
+	if (!recalling) dynStats("lus", 75, "scale", false);
 	doNext(Scylla6NoMilkSubmitII);
 }
 //[Next]

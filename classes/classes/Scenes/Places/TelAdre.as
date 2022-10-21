@@ -434,7 +434,7 @@ private function buyBackpack():void {
 	menu();
 	if (player.keyItemvX("Backpack", 1) < 2) addButton(0, "Small", buyBackpackConfirmation, 2, "Small", 100, "Grants additional two slot. \n\nCost: 100 gems");
 	if (player.keyItemvX("Backpack", 1) < 4) addButton(1, "Medium", buyBackpackConfirmation, 4, "Medium", 200, "Grants additional four slots. \n\nCost: 200 gems");
-	addButton(14, "Nevermind", oswaldPawnMenu2);
+	addButton(14, "Never mind", oswaldPawnMenu2);
 }
 private function buyBackpackConfirmation(size:int = 2, sizeDesc:String = "Small", price:int = 100):void {
 	spriteSelect(SpriteDb.s_oswald);
@@ -1584,6 +1584,7 @@ public function gymDesc():void {
 		outputText("\n\nYou spot Loppe the laquine wandering around, towel slung over her shoulder.  When she sees you, she smiles and waves to you and you wave back.");
 	}
 	if(model.time.hours > 9 && model.time.hours < 14) heckel.heckelAppearance();
+
 	gymMenu();
 }
 
@@ -1614,7 +1615,7 @@ private function buyGymLifeTimeMembership():void {
 	outputText("You fish into your pouches and pull out 500 gems, dumping them into the centaur's hands.  Her eyes widen as she turns and trots towards a counter in the back.  She leans over as she counts, giving you a generous view down her low-cut top at the cleavage she barely bothers to conceal.");
 	if(player.hasCock()) {
 		outputText("  It brings a flush to your face that has nothing to do with exercise.  Maybe you'll be able to con her into some alone time later?");
-		dynStats("lus", (10+player.lib/10));
+		dynStats("lus", (10+player.lib/10), "scale", false);
 	}
 	flags[kFLAGS.LIFETIME_GYM_MEMBER] = 1;
 	player.gems -= 500;
@@ -1661,16 +1662,16 @@ private function weightLifting():void {
 	//Body changes here
 	//Muscleness boost!
 	outputText(player.modTone(85,5+rand(5)));
-	outputText("\n\nDo you want to hit the showers before you head back to camp?");
+	outputText("\n\nDo you want to hit the showers before you leave the gym??");
 	if(flags[kFLAGS.BROOKE_MET] == 1) {
 		menu();
 		if (flags[kFLAGS.SEX_MACHINE_STATUS] >= 0) {
 			addButton(0,"«Machine»",sexMachine.exploreShowers);
 			addButton(1,"Showers",brooke.repeatChooseShower);
-			addButton(4, "Leave", camp.returnToCampUseOneHour);
-		} else doYesNo(brooke.repeatChooseShower,camp.returnToCampUseOneHour);
+			addButton(4, "Leave", stopGoingBackEveryHourGymCheck);
+		} else doYesNo(brooke.repeatChooseShower,stopGoingBackEveryHourGymCheck);
 	}
-	else doYesNo(sexMachine.exploreShowers,camp.returnToCampUseOneHour);
+	else doYesNo(sexMachine.exploreShowers,stopGoingBackEveryHourGymCheck);
 }
 
 private function goJogging():void {
@@ -1751,16 +1752,26 @@ private function goJogging():void {
 	outputText(player.modThickness(1,5+rand(2)));
 	//Muscleness boost!
 	outputText(player.modTone(player.maxToneCap(),2+rand(4)));
-	outputText("\n\nDo you want to hit the showers before you head back to camp?");
+	outputText("\n\nDo you want to hit the showers before you leave the gym??");
 	if(flags[kFLAGS.BROOKE_MET] == 1) {
 		menu();
 		if (flags[kFLAGS.SEX_MACHINE_STATUS] >= 0) {
 			addButton(0,"''Showers''",sexMachine.exploreShowers);
 			addButton(1,"Showers",brooke.repeatChooseShower);
-			addButton(4, "Leave", camp.returnToCampUseOneHour);
-		} else doYesNo(brooke.repeatChooseShower,camp.returnToCampUseOneHour);
+			addButton(4, "Leave", stopGoingBackEveryHourGymCheck);
+		} else doYesNo(brooke.repeatChooseShower,stopGoingBackEveryHourGymCheck);
 	}
-	else doYesNo(sexMachine.exploreShowers,camp.returnToCampUseOneHour);
+	else doYesNo(sexMachine.exploreShowers,stopGoingBackEveryHourGymCheck);
+}
+
+public function stopGoingBackEveryHourGymCheck():void{
+	if (CoC.instance.model.time.hours + 1 < 21){
+		cheatTime(1);
+		gymDesc();
+	}
+	else{
+		camp.returnToCampUseOneHour();
+	}
 }
 
 public function meetingLunaFirstTime():void {

@@ -267,7 +267,7 @@ public class Vapula extends NPCAwareContent implements TimeAwareInterface
 					}
 				}
 			}
-			dynStats("lus", 10);
+			dynStats("lus", 10, "scale", false);
 			menu();
 			addButton(0, "Appearance", fapulaFapfapfapAppearance);
 			addButton(1, "Talk", talkToVapulaForSomeReason);
@@ -1050,7 +1050,7 @@ public class Vapula extends NPCAwareContent implements TimeAwareInterface
 				outputText("\n\n\"<i>Ohh.  Now you've said a rude word to your [master].  I guess you don't want it so badly after all.</i>\"  Vapula watches the cock recede with almost comical despair.");
 				outputText("\n\n\"<i>Wait, no...  I didn't mean it!  Please don't...</i>\"");
 				outputText("\n\n\"<i>You'll talk about it tomorrow, my hungry little cumslut.  If you're good.</i>\" You turn and stride away, laughing as you slowly unbuckle the strap-on.  The expression on Vapula's face as you leave is going to keep you very warm tonight.");
-				dynStats("lus", (10 + player.sens / 10));
+				dynStats("lus", (10 + player.sens / 10), "scale", false);
 				flags[kFLAGS.VAPULA_TEASE_COUNT]++;
 			}
 			//Second Tease
@@ -1210,9 +1210,9 @@ public class Vapula extends NPCAwareContent implements TimeAwareInterface
 			outputText("\n\nIf she's going to cum, it's going to be because of you.  There's no masturbating your way out of punishment.  You pound away at that reddened bottom with renewed vigor, and soon, those drops of enjoyment turn into a tide of lubricated pleasure.  Vapula's head begins to thrash with each spank, and her body quakes, not from orgasm but from being on the edge for so long.  You double the pace, and as the entirety of her bottom goes red, Vapula cums, unleashing a tide of succubus-spunk to stain your [leg].  You give her a few gentle swats to see her orgasm through and release her once it's over.");
 			outputText("\n\nThe demoness nervelessly flops off you and onto the ground, moaning in pain and pleasure, rubbing her abused bottom.  Hopefully she learned her lesson, and if not, you can always teach it to her again, next time.");
 			//{+20ish lust}
-			dynStats("lus", (10 + player.lib / 7));
+			dynStats("lus", (10 + player.lib / 7), "scale", false);
 			//{Sadist: + 20 lust}
-			if (player.hasPerk(PerkLib.Sadist)) dynStats("lus", (10 + player.lib / 7));
+			if (player.hasPerk(PerkLib.Sadist)) dynStats("lus", (10 + player.lib / 7), "scale", false);
 			flags[kFLAGS.VAPULA_EARNED_A_SPANK] = 0;
 			doNext(camp.returnToCampUseOneHour);
 		}

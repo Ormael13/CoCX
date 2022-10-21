@@ -141,7 +141,7 @@ public function meetIzmaAtLake():void {
 		outputText("\"<i>Don't get the wrong idea here, I'm not gonna jump you or anything, I'm just offering.  I mean I could easily catch myself another shark girl or a cultist if I wanted to.  Just... offering, is all,</i>\" Izma says, looking skyward and avoiding eye contact.\n\n");
 		outputText("You roll the idea around in your head for a few seconds before asking just what's in it for you.  Izma smiles, happy to see you're at least pondering the offer.  \"<i>I can pay you,</i>\" she says proudly, earning a raised eyebrow from you.  Izma rummages around her oak chest, pulling out something that looks like a shark tooth.  One thing that catches your eye is the strange purple glow it's giving off.\n\n");
 		outputText("\"<i>It can make you a tigershark like me, with enough doses...</i>\" Izma explains, rolling the tooth between her knuckles.  \"<i>I mean, if you think you'd like that.  It can give you skin like mine, a fin, a shark tail, fangs... and one of these, too.</i>\" Izma cups her breasts and pivots her pelvis forward with its hefty package, as if trying to entice you.  Her suggestive pose does turn you on slightly.\n\n");
-		dynStats("lus", 5);
+		dynStats("lus", 5, "scale", false);
 		outputText("\"<i>There are two ways we can do this.  The sex, I mean,</i>\" Izma says, standing upright.  This causes you to raise your eyebrows, wondering what that's supposed to mean.  \"<i>We can do a bit of oral... or if you want to put it in, we can do what shark people do: fight for dominance. Choice is yours, really,</i>\" Izma says, moving closer to you. \"<i>So... what can I tempt you with today?</i>\"");
 	}
 	//(after 4+ encounters) (Izmacounter >= 5)
@@ -988,7 +988,7 @@ private function izmaLakeDominate():void {
 
 		outputText("You start to pick up speed as you mash your hips against Izma's own, earning moans from the pretty tigershark which only seem to get louder with every subsequent thrust.  Izma quickly starts to return the gesture, moving her hips up to meet your own thrusts every time.  It's while she's doing this that you notice her throbbingly erect cock wobbling around.\n\n");
 		//NEW RADAR STUFF, GAO
-		outputText("Do you tend to her prick?");
+		outputText("Do you tend to her prick?\n\n");
 		doYesNo(izmaLakeDominateContinueVanilla,noWankingForIzmaRadarSaysSo);
 	}
 	//[Female]
@@ -2035,7 +2035,7 @@ private function talkWivIzma():void {
 
 		outputText("You thank Izma for being willing to talk to you, then you politely excuse yourself and leave her to her thoughts.");
 		//(Slight lust gain)
-		dynStats("lus", 5);
+		dynStats("lus", 5, "scale", false);
 		flags[kFLAGS.IZMA_TALK_LEVEL]++;
 		doNext(camp.returnToCampUseOneHour);
 	}
@@ -2579,7 +2579,7 @@ private function stephenHawkingPorn():void {
 	outputText("By the time you're done reading, Izma certainly seems turned on.  She tries to hide it and sit primly - ");
 	if(flags[kFLAGS.IZMA_NO_COCK] == 0) outputText("but that's not exactly possible for someone who just had over a foot of dick slip from between her thighs and stick into the air.  You laugh openly and give Izma's silver hair a soft tug, before getting up and telling her you have business elsewhere.  Izma simply nods in taciturn response but keeps her gaze fixed on the lewd images before her.  Another laugh escapes your lips as soon as you think you're out of earshot.");
 	else outputText("but that's not exactly possible for someone who keeps squirming, creating lewd squishes from below the waist.  You laugh openly and give Izma's silver hair a soft tug, before getting up and telling her you have business elsewhere.  Izma simply nods in taciturn response but keeps her gaze fixed on the lewd images before her.  Another laugh escapes your lips as soon as you think you're out of earshot.");
-	dynStats("lus", 5);
+	dynStats("lus", 5, "scale", false);
 	player.KnowledgeBonus("lib",1);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -3170,7 +3170,7 @@ private function izmaDomsLatexyPartI():void {
 	}
 	flags[kFLAGS.TIMES_IZMA_DOMMED_LATEXY]++;
 	flags[kFLAGS.GOO_FLUID_AMOUNT] = 100;
-	dynStats("lus", 20+player.lib/10);
+	dynStats("lus", 20+player.lib/10, "scale", false);
 	doNext(camp.returnToCampUseOneHour);
 }
 

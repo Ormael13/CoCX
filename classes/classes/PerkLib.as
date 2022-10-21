@@ -2294,10 +2294,10 @@ public class PerkLib
 				"Incease healing power by 30% and lower healing spells mana costs by 10%.",
 				"You've chosen the 'Natural healing (Minor)' perk, increasing healing spell effectiveness and lowering their costs.");
 		public static const Naturaljouster:PerkType = mk("Natural jouster", "Natural jouster",
-				"Increase attack power of spears/lances when you attack once each turn and have taur/drider lower body or 2,5x higher speed if you not have one of this specific lower body types (60+ for taurs/drider and 150+ for others).",
+				"Increase attack power of spears/lances when you attack once each turn and have taur/drider lower body or 2,5x higher speed if you don't have one of this specific lower body types (60+ for taurs/drider and 150+ for others).",
 				"You've chosen the 'Natural jouster' perk. As long you have high enough speed (60+ for taurs/drider and 150+ for others) and attack once per turn, your spear/lance attack power will be three times higher.");
 		public static const NaturaljousterMastergrade:PerkType = mk("Natural jouster (Master grade)", "Natural jouster (Master grade)",
-				"Increase attack power of spears/lances when you attack once each turn and have taur/drider lower body or 2,5x higher speed if you not have one of this specific lower body types (180+ for taurs/drider and 450+ for others).",
+				"Increase attack power of spears/lances when you attack once each turn and have taur/drider lower body or 2,5x higher speed if you don't have one of this specific lower body types (180+ for taurs/drider and 450+ for others).",
 				"You've chosen the 'Natural jouster (Master grade)' perk. As long you have high enough speed (180+ for taurs/drider and 450+ for others) and attack once per turn, your spear/lance attack power will be five times higher.");
 		public static const NaturesSpringI:PerkType = mk("Nature's Spring I", "Nature's Spring I",
 				"Raises max fatigue by 20 and regain it 5% faster.",

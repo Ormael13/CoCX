@@ -197,7 +197,7 @@ public function isabellaGreeting():void {
 	else if(flags[kFLAGS.ISABELLA_MET_SHORT_PC] > 0 && flags[kFLAGS.ISABELLA_OKAY_WITH_TALL_FOLKS] == 0 && player.tallness > 78) {
 		outputText("You easily brush through the tall grasses and stride into Isabella the cow-girl's camp.  It looks like she was sitting in her chair mending a blanket when you arrived, and you take a moment to watch her hunched posture squeeze her breasts tightly against the gauzy silk top she's so fond of wearing.  The outline of a single areola is clearly visible through the diaphanous material, but most striking is that each areola has four VERY prominent nipple-tips.  She looks at you, first in fright, and then in embarrassment as she recognizes you AND realizes what you were doing in a single instant.\n\n");
 		//(+lust!)
-		dynStats("lus", 10+rand(10));
+		dynStats("lus", 10+rand(10), "scale", false);
 		outputText("Isabella complains, \"<i>Vere you just checking me out?  Vell I must confess, I liked you better ven you were shorter.  Maybe if you ask nicely I might give you a peak and a drink.  That vould be nice, nein?\n\n");
         isabellaFollowerScene.isabellaAffection(-5); //unhappy, but she knows you already
 		flags[kFLAGS.ISABELLA_OKAY_WITH_TALL_FOLKS]++;
@@ -652,7 +652,7 @@ public function volunteerToSlurpCowCunt():void {
 		outputText("Isabella sighs contentedly and says, \"<i>Thank you, [name].  You're a wonderful pussy licker.  Perhaps one of these times I will keep you for myself, huh?  I kid, I kid.</i>\"  She blushes heavily, as if realizing what she just said and turns to busy herself with cleaning up.  You get dressed, having some difficulty hiding the lust the act inspired in you.\n\n");
 	}
 	//(+lots of lust)
-	dynStats("lus", (10+player.lib/10));
+	dynStats("lus", (10+player.lib/10), "scale", false);
 	player.slimeFeed();
 	if(player.hasCock()) {
 		outputText("The cow-girl suddenly glances back at your crotch ");
@@ -1293,12 +1293,12 @@ public function victoryAgainstIzzzzzySixtyNine(x:int):void {
 		if(player.hasSheath()) outputText("sheath");
 		else outputText("base");
 		outputText(" numerous times before bobbing her head up and down.  She's using her tongue like some kind of onahole, and the warm, slippery pressure makes your " + cockDescript(x) + " want to melt with pleasure.  The cow-girl slides all the way to the tip");
-		if(player.hasKnot(x)) outputText(", struggling with the knot");
-		else if(player.cocks[x].cockType == CockTypesEnum.HORSE) outputText(", getting stuck at the medial ring");
+		if(player.cocks[x].cockType == CockTypesEnum.HORSE) outputText(", getting stuck at the medial ring");
 		else if(player.cocks[x].cockType == CockTypesEnum.DEMON) outputText(", slowed by all the nubs");
 		else if(player.cocks[x].cockType == CockTypesEnum.CAT) outputText(", slowed by all the spines");
 		else if(player.cocks[x].cockType == CockTypesEnum.TENTACLE) outputText(", stopping under the mushroom-like head");
 		else if(player.cocks[x].cockType == CockTypesEnum.ANEMONE) outputText(", giggling from the 'stings' your anemone-like prick gave her");
+        else if(player.hasKnot(x)) outputText(", struggling with the knot");
 		else outputText(", rubbing her mouth against your urethral bulge");
 		outputText(" before she plants a kiss on your opening.  She tenderly kisses the cum-slit, all the while keeping her tongue-sheath securely around your member.  You tremble from her masterful technique, bombarded with hellish levels of sensation.");
 	}

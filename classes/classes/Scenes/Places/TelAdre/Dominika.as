@@ -227,7 +227,7 @@ private function declineFellatrixOral():void {
 		outputText("She raises her eyebrow and looks around. \"<i>...Really?</i>\" she asks after a few seconds. \"<i>Like, I mean... you're going to turn down a free blowjob?</i>\"\n\n");
 
 		outputText("She pauses. \"<i>Or cunnilingus, I mean, I haven't looked between your legs yet. You know what this place is like.</i>\"\n\nYou suppose it might not hurt.  Do you want to receive some oral?");
-		dynStats("lus", 10);
+		dynStats("lus", 10, "scale", false);
 		doYesNo(acceptFellatrixOral,declineFellatrixOralHARDCORE);
 	}
 	else {
@@ -247,7 +247,7 @@ private function declineFellatrixOralHARDCORE():void {
 	spriteSelect(SpriteDb.s_uncloaked_dominika);
 	clearOutput();
 	outputText("\"<i>Really?</i>\" she asks again. \"<i>But, I mean... fucking look at these!</i>\" She purses her dark lips, running her tongue over them to emphasize how they glisten in the light. \"<i>Don't tell me you don't think these would feel fucking rad on you.</i>\"\n\nIt's VERY tempting.  Maybe one little round of fellatio?");
-	dynStats("lus", (10 + player.lib/10));
+	dynStats("lus", (10 + player.lib/10), "scale", false);
 	doYesNo(acceptFellatrixOral,declineFellatrixOralSUPERHARDCORE);
 }
 
@@ -592,7 +592,7 @@ private function agreeWithDominika():void {
 
 		outputText("You think about her lips on the streets of Tel'adre.");
 	}
-	dynStats("lus", 25);
+	dynStats("lus", 25, "scale", false);
 	flags[kFLAGS.DOMINIKA_FOLLOWUP] = 1;
 	doNext(camp.returnToCampUseOneHour);
 }

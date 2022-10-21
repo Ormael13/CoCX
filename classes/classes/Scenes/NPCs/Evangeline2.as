@@ -173,8 +173,7 @@ public class Evangeline2 extends Monster
 			if(player.lust >= (player.maxLust() * 0.3) && player.lust < (player.maxLust() * 0.6)) outputText("You staggers, suddenly weak and having trouble focusing on staying upright.  ");
 			if(player.lust >= (player.maxLust() * 0.6)) outputText("Your eyes glaze over with desire for a moment.  ");
 			lustDmg = Math.round(lustDmg);
-			player.dynStats("lus", lustDmg, "scale", false);
-			outputText(" <b>(<font color=\"#ff00ff\">" + lustDmg + "</font>)</b>");
+			player.takeLustDamage(lustDmg, true);
 			fatigue += spellCostArouse();
 			flags[kFLAGS.EVANGELINE_SPELLS_CASTED]++;
 		}

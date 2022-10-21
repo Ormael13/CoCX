@@ -64,7 +64,7 @@ package classes.Items.Consumables
             //Libido Reduction
 			if (player.cor > 0 && changes < changeLimit && Utils.rand(1.5) == 0 && player.lib > 40) {
 				outputText(" and settling your overcharged sex-drive a bit.");
-				dynStats("lus", -20);
+				dynStats("lus", -20, "scale", false);
 				player.addCurse("lib", 3, 1);
 				changes++;
 			}

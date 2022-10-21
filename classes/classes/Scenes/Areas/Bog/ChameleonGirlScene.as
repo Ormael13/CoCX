@@ -334,7 +334,7 @@ package classes.Scenes.Areas.Bog
 			if (x <= 0 || sceneHunter.uniHerms && rand(3) == 0) {
 				outputText("\n\nYou reach under her thong and toy with her clit for just a moment.  She nearly jumps, almost managing to sit up before collapsing back down into the water, and you slip a couple fingers into her slick cunt to be immediately met with a gush of her fluids.  She cries out loudly and her pussy clenches around your fingers as she cums, getting off quickly after all her waiting; then curls up on her side as her tail thrashes wildly while orgasm slowly melts her painful nerves down to normal levels.  After a minute she slackens and spreads out on the ground, panting heavily as she recovers.  Smiling down at the tired chameleon girl, you wish her luck with her new nerves and untie her hands.  She's too exhausted to get up, though, and you leave her lying there to sleep in the swampy water.");
 				//player.lust+=30;
-				dynStats("lus", 30);
+				dynStats("lus", 30, "scale", false);
 			}
 			//(else if at least one cock of appropriate size)
 			else {
@@ -342,7 +342,7 @@ package classes.Scenes.Areas.Bog
 				outputText("\n\nYou trace one finger lightly up and down her belly again, and she squirms as the powerful chemicals and sensations you've given her make her cum again and again.  Her eyes roll up and she pants openly, her mind completely broken by the overwhelming pleasure.  You start to notice that she feels almost a bit <i>too</i> good around you, and you wonder if the magic of the tainted liquids might also be affecting you to some extent, seeping into your system as her sexual fluids bathe your " + cockDescript(x) + ".  The squeezes of her hands on your skin feel as crisp as pinches but lack the pain, and you can feel the warm, wet folds of her pussy pressing against every inch of your prick.  Your thrusting intensifies as your whole body aches with need, and she wriggles and squeals as you push deeper into her, as if to outdistance your own orgasm building inside of you.  Her legs wrap around your back and hold you deep inside as you cum, and so much erupts from your " + cockDescript(x) + " that not even her vise-like wringing can prevent it from gushing back out and dripping down to the base of your cock.  Her grip on you loosens as she feels the proof of your lovemaking inside her.  You run a hand along her skin and she shudders, though your presence barely registers with her at this point.  Doubtful that this one will try to assert her dominance over you again any time soon, you pull your softening member out of the blissed-out chameleon-girl and stand up, donning your [armor] and leaving the semi-conscious girl there in the bog to recover.  The chemicals that you've gotten a contact high from leave you feeling somewhat aroused as you make your way back to camp.");
 				//player.lust = base + 20;
 				player.sexReward("Default","Default",true,false);
-				dynStats("lus", 20);
+				dynStats("lus", 20, "scale", false);
 			}
 			//send player back to camp, remove sens/fuck draft, reset hours since cum, add gems and exp and time
 			player.consumeItem(consumables.SENSDRF);

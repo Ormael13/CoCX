@@ -31,7 +31,7 @@ public class OmnibusOverseer extends Monster
 			outputText("The demoness blinks her eyes closed and knits her eyebrows in concentration.  The red orbs open wide and she smiles, licking her lips.   The air around her grows warmer, and muskier, as if her presence has saturated it with lust.");
 			if (hasStatusEffect(StatusEffects.LustAura)) {
 				outputText("  Your eyes cross with unexpected feelings as the taste of desire in the air worms its way into you.  The intense aura quickly subsides, but it's already done its job.");
-				player.dynStats("lus", (8 + int(player.lib / 20 + player.cor / 25)));
+				player.takeLustDamage((8 + int(player.lib / 20 + player.cor / 25)), true);
 			}
 			else {
 				createStatusEffect(StatusEffects.LustAura, 0, 0, 0, 0);
@@ -54,14 +54,14 @@ public class OmnibusOverseer extends Monster
 					outputText("The milk splashes into your [armor], soaking you effectively.  ");
 					if (player.cocks.length > 0) {
 						outputText("Your [cock] gets hard as the milk lubricates and stimulates it.  ");
-						player.dynStats("lus", 5);
+						player.takeLustDamage(5, true);
 					}
 					if (player.vaginas.length > 0) {
 						outputText("You rub your thighs together as the milk slides between your pussy lips, stimulating you far more than it should.  ");
-						player.dynStats("lus", 5);
+						player.takeLustDamage(5, true);
 					}
 				}
-				player.dynStats("lus", 7 + player.effectiveSensitivity() / 20);
+				player.takeLustDamage(7 + player.effectiveSensitivity() / 20, true);
 				if (player.biggestLactation() > 1) outputText("Milk dribbles from your [allbreasts] in sympathy.");
 			}
 		}

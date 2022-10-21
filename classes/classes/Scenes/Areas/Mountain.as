@@ -253,14 +253,14 @@ public class Mountain extends BaseContent
 						call  : SceneLib.mindbreaker.findMindbreaker,
 						chance: 0.50,
 						when  : function ():Boolean {
-							return Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_NOT_STARTED && player.level >= 10 && !player.blockingBodyTransformations()
+							return Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_NOT_STARTED && player.level >= 10 && !player.blockingBodyTransformations() && flags[kFLAGS.MARAE_QUEST_START] >= 1
 						}
 					}, {
 						name  : "mindbreaker",
 						call  : SceneLib.mindbreaker.findMindbreakerAgain,
 						chance: 0.50,
 						when  : function ():Boolean {
-							return Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_METMB && player.level >= 10 && !player.blockingBodyTransformations()
+							return Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_METMB && player.level >= 10 && !player.blockingBodyTransformations() && flags[kFLAGS.MARAE_QUEST_START] >= 1
 						}
 					}, {
 						name:"hike",
@@ -550,7 +550,7 @@ public class Mountain extends BaseContent
 			outputText("\n\nWith a hearty thrust, the minotaur plunges into the cow-girl's eager fuck-hole, burying himself past one -- two of his oversized cock's three ridge rings.  She screams in half pain, half ecstasy and pushes back, hungry for his full length.  After pulling back only slightly, he pushes deeper, driving every inch of his gigantic dick into his willing partner who writhes in pleasure, impaled exactly as she wanted.");
 			outputText("\n\nThe pair quickly settles into a rhythm, punctuated with numerous grunts, groans, and moans of sexual excess.  To you, it's almost a violent assault sure to leave both of them bruised and sore, but the cow-girl's lolling tongue and expression of overwhelming desire tells you otherwise.  She's enjoying every thrust as well as the strokes, gropes, and seemingly painful squeezes the minotaur's powerful hands deliver to her jiggling ass and ponderous tits.  He's little better, his eyes glazed over with lust as he continues banging the fuck-hole he found and all but mauling its owner.");
 			//[Next]
-			dynStats("lus", 10);
+			dynStats("lus", 10, "scale", false);
 			menu();
 			addButton(0, "Next", watchMinoCumSlutII);
 		}
@@ -561,7 +561,7 @@ public class Mountain extends BaseContent
 			outputText("They go at it for nearly an hour, oblivious to you watching them, before their intensity heightens as they near orgasm.  The results are almost explosive, both of them crying out as they begin twitching uncontrollably.  Clinging desperately to the cow-girl's ass, the minotaur pumps so much cum into her depths that it begins spurting out.  This accidental lubrication releases his grip, and the pair collapse to the ground.  Yet the minotaur isn't finished, his man-milk spraying into the air almost like his still-erect dick is a hose and splattering down onto both of them.");
 			outputText("\n\nAs you look at the two cum-covered creatures laying there in their exhausted sex-induced stupors, the minotaur's thick horse-cock now slowly deflating, you realize that you've been touching yourself.  You make yourself stop in disgust.");
 			outputText("\n\nOnly now do you notice other faces peeking over ledges and ridges.  You count at least two goblins and one imp who quickly pull back.  From the sounds, they were busy getting themselves off.  Apparently this isn't an uncommon show, and the locals enjoy it immensely.");
-			dynStats("lus", 25);
+			dynStats("lus", 25, "scale", false);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -581,7 +581,7 @@ public class Mountain extends BaseContent
 			if (player.statusEffectv1(StatusEffects.MinoPlusCowgirl) == 0)
 				outputText("  Apparently this isn't an uncommon show, and the locals enjoy it immensely.");
 			//Lust!
-			dynStats("lus", 5 + player.lib / 20 + player.racialScore(Races.MINOTAUR, false) + player.racialScore(Races.COW, false));
+			dynStats("lus", 5 + player.lib / 20 + player.racialScore(Races.MINOTAUR, false) + player.racialScore(Races.COW, false), "scale", false);
 			doNext(camp.returnToCampUseOneHour);
 		}
 	}

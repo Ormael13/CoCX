@@ -18,7 +18,6 @@ public class Incels extends Monster {
     public function Incels() {
         this.a = "the ";
         this.short = "Incels";
-        //this.imageName = "goblinwarrior";
         this.long = "This group of monstrous creatures slaver from their mouths, long black claws jutting from their hands. They’re not uniform in most aspects of their appearance…but the glassy eyes, perpetually open mouths and stiff movements give them a terrifying uniformity. They stare, unblinking, not at your eyes, face or [weapon], but at your loins. They seem to instinctively know you’re not one of them. ";
         this.plural = true;
         this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
@@ -51,32 +50,55 @@ public class Incels extends Monster {
         this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
         this.createPerk(PerkLib.ToughHide, 0, 0, 0, 0);
         this.createPerk(PerkLib.WeaponClawsClawTraining, 0, 0, 0, 0);
+        this.createPerk(PerkLib.MonsterRegeneration, 10, 0, 0, 0); //HP regen
+        this.createStatusEffect(StatusEffects.DefendMonsterVer, 50, 0.6, 0, 0); //phys resist?
 
         checkMonster();
     }
 
+    //For every 20 Lust damage they take, they gain a 5% bonus to the damage they deal. This is additive, not multiplitive.
+    private var damageMult:Number = 1.0;
+
+    public override function eBaseDamage():Number {
+        return super.eBaseDamage() * damageMult;
+    }
+
+    private function restoreLust():void {
+        damageMult += lust * 0.0025;
+        lust = 0;
+    }
+
     override public function defeated(hpVictory:Boolean):void {
+        //immune to lust
+        if (!hpVictory) {
+            restoreLust();
+            SceneLib.combat.enemyAIImpl();
+            return;
+        }
         SceneLib.dungeons.demonLab.IncelVictory();
     }
 
     override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void {
-        SceneLib.dungeons.demonLab.BadEndExperiment(); //TODO
+        SceneLib.dungeons.demonLab.BadEndExperiment();
     }
-
 
     private function IncelRush():void {
         outputText("The creatures rush at you, their blackened nails flashing. Sheer numbers weigh against you, and the creatures land strike after strike!");
-        var r:int = rand(6);
-        //TODO: how do Attacks work?
-        createStatusEffect(StatusEffects.Attacks, r, 0, 0, 0);
-        if (r == 0) {
+        var hit:int = 0;
+        for (var i:int = 0; i < 6; ++i) {
+            if (player.getEvasionRoll()) {
+                eOneAttack(true);
+                ++hit;
+            }
+        }
+        if (hit == 0) {
             outputText("You see the creatures massing for their attack. Before they can surround you, you kick one of the banquet tables over, delaying their charge long enough for you to put some distance between you and the horde. ")
         }
     }
 
     private function DraftSupportStart():void {
         outputText("You notice the pink gas spilling from the lab as it washes over the horde. The reaction is immediate, the animalistic creatures letting out wails of anger, some even scratching at their bodies as if to rid themselves of the effects. As the gas washes over you, blood rushes to your cheeks.")
-        player.dynStats("lus", Math.round(60 + (player.lib * 1.1)));
+        player.takeLustDamage(Math.round(60 + (player.lib * 1.1)), true);
         //add lust to the incels
     }
 

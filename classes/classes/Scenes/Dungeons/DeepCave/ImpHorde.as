@@ -20,7 +20,7 @@ public class ImpHorde extends Monster
 			//(½ chance during any round):
 			if(rand(2) == 0) {
 				outputText("\nOne of the tiny demons latches onto one of your [legs] and starts humping it.  You shake the little bastard off and keep fighting!");
-				player.dynStats("lus", 3);
+				player.takeLustDamage(3, true);
 			}
 		}
 		
@@ -32,7 +32,7 @@ public class ImpHorde extends Monster
 			else {
 				//(OH SHIT IT GOES OFF)
 				//+50 lust!
-				player.dynStats("lus", 500);
+				player.takeLustDamage(500, true);
 				outputText("The imps in the back finish their spell-casting, and point at you in unison.  A wave of pure arousal hits you with the force of a freight train.   Your equipment rubs across your suddenly violently sensitive " + nippleDescript(0));
 				if(player.biggestLactation() > 1) outputText(" as they begin to drip milk");
 				outputText(".  The lower portions of your coverings ");
@@ -110,7 +110,7 @@ public class ImpHorde extends Monster
 					if(damage == 3) outputText("Seed lands in your [hair], slicking you with demonic fluid.\n");
 					if(damage == 4) outputText("Another blast of jizz splatters against your face, coating your lips and forcing a slight taste of it into your mouth.\n");
 					if(damage == 5) outputText("The last eruption of cum soaks your thighs and the lower portions of your [armor], turning it a sticky white.\n");
-					player.dynStats("lus", (7+int(player.lib/40+player.cor/40)));
+					player.takeLustDamage((7+int(player.lib/40+player.cor/40)), true);
 				}
 				lust -= 5;
 				hits--;

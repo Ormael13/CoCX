@@ -285,7 +285,7 @@ private function sandwitchBewbs():void {
 	outputText("You wake up in the desert, immediately grabbing at your body to see if anything's changed...");
 	player.sexReward("milk");
 	player.refillHunger(35);
-	dynStats("lus", 25);
+	dynStats("lus", 25, "scale", false);
 	cleanupAfterCombat();
 	outputText("\n");
 }
@@ -642,7 +642,7 @@ private function sandwitchGetsDildoed():void {
     EngineCore.outputText("You wiggle the toy about, enjoying having taken such advantage of your now-unconscious foe.  But you have places to be, and you pull out your toy, ");
     if(player.cor > 50) EngineCore.outputText("lick it clean, ");
     EngineCore.outputText("and head back towards camp, knowing full well you'll need to relieve some tension after such a hot encounter.");
-    player.dynStats("lus", (20+player.lib/5+player.cor/10));
+    player.dynStats("lus", (20+player.lib/5+player.cor/10), "scale", false);
     cleanupAfterCombat();
 }
 
@@ -825,7 +825,7 @@ private function getToFuckingWithZeEggsInWitch():void {
 	}
 	//both go to merge
 	doNext(laySomeEggsInThatWitchFinally);
-	dynStats("lus", 15);
+	dynStats("lus", 15, "scale", false);
 }
 
 //(Merge)

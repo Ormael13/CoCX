@@ -19,7 +19,7 @@ public class TheCorruptedHandmaidens extends BeeGuards {
 				outputText("The arousal and pleasure spike from the aphrodisiac in the sting leaves you stunned.");
 				if (!player.hasPerk(PerkLib.Resolute)) player.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 				createStatusEffect(StatusEffects.AbilityCooldown1,5,0,0,0);
-				player.dynStats("lus", 100 + rand(50));
+				player.takeLustDamage(100 + rand(50), true);
 			}
 		}
 		
@@ -35,7 +35,7 @@ public class TheCorruptedHandmaidens extends BeeGuards {
 				createStatusEffect(StatusEffects.CHCompellingAria, CHCA, 0, 0, 0);
 				createStatusEffect(StatusEffects.AbilityCooldown2, 6, 0, 0, 0);
 			}
-			player.dynStats("lus", statusEffectv1(StatusEffects.CHCompellingAria));
+			player.takeLustDamage(statusEffectv1(StatusEffects.CHCompellingAria), true);
 		}
 		
 		override protected function performCombatAction():void {

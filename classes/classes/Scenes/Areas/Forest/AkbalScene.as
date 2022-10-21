@@ -351,7 +351,7 @@ public class AkbalScene extends BaseContent {
 				outputText("Lifting up your [leg], you firmly place the sole of your foot against his barbed flesh, pressing it against his stomach, forcing the jaguar to let out a low moan, which you quickly take advantage of, ");
 
 			outputText("stuffing his own tail into his maw.  As he tries to push his tail back out, you remove your [foot] pointedly, staring down at the demon. Lifting his hips back up weakly towards you, he meekly begins to suckle on his own appendage, closing his vibrant emerald eyes as you return your attention to his shaft.\n\n");
-			dynStats("lus", 50);
+			dynStats("lus", 50, "scale", false);
 			doNext(girlsRapeAkbalPart2_Tight);
 		}
 
@@ -391,7 +391,7 @@ public class AkbalScene extends BaseContent {
 			outputText("\n\n");
 
 			outputText("Judging by the shudder of longing that runs through his body, it's clear that he's more turned on by your actions than he would have liked. Using your lower body to pin his legs down, you grab his arms as you sink down, moaning more for his benefit as you brush the tip of his slick member against your entrance.");
-			dynStats("lus", 50);
+			dynStats("lus", 50, "scale", false);
 			doNext(girlsRapeAkbalPart2_Loose);
 		}
 

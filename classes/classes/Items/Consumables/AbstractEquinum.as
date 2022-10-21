@@ -158,7 +158,7 @@ public class AbstractEquinum extends Consumable {
 			}
 		}
 		if ((type == 1 || type == 2) && rand(3) == 0 && player.MutagenBonus("int", 1)) {
-			outputText("\n\nAs you finish drinking the potion you suddently feel more cunning and by far way smarter.");
+			outputText("\n\nAs you finish drinking the potion you suddenly feel more cunning and by far way smarter.");
 			changes++;
 		}
 		if (player.blockingBodyTransformations()) changeLimit = 0;
@@ -191,7 +191,7 @@ public class AbstractEquinum extends Consumable {
 				CoC.instance.transformations.CockHorse(temp).applyEffect();
 				temp2 = player.growCock(temp, rand(4) + 4);
 
-				dynStats("lus", 35);
+				dynStats("lus", 35, "scale", false);
 				player.addCurse("sen", 4, 1);
 				player.MutagenBonus("lib", 5);
 				//Make cock thicker if not thick already!
@@ -204,7 +204,7 @@ public class AbstractEquinum extends Consumable {
 				if (player.cocks.length == 1) {
 					temp2 = player.growCock(0, rand(3) + 1);
 					temp  = 0;
-					dynStats("lus", 10);
+					dynStats("lus", 10, "scale", false);
 					player.addCurse("sen", 1, 1);
 				}
 				//Multicock
@@ -225,7 +225,7 @@ public class AbstractEquinum extends Consumable {
 					//Grow smallest cock!
 					//temp2 changes to growth amount
 					temp2 = player.growCock(temp, rand(4) + 1);
-					dynStats("lus", 10);
+					dynStats("lus", 10, "scale", false);
 					player.addCurse("sen", 1, 1);
 				}
 				outputText("\n\n");
@@ -256,7 +256,7 @@ public class AbstractEquinum extends Consumable {
 				if (player.cor >= 30 && player.cor < 60) outputText("  You wonder why you thought such odd things, but they have a certain appeal.");
 				if (player.cor >= 60 && player.cor < 90) outputText("  You relish your twisted fantasies, hoping to dream of them again.");
 				if (player.cor >= 90) outputText("  You flush hotly and give a twisted smile, resolving to find a fitting subject to rape and relive your fantasies.");
-				dynStats("lus", 10);
+				dynStats("lus", 10, "scale", false);
 				player.MutagenBonus("lib", 1);
 			}
 			//Chance of ball growth if not 3" yet
@@ -265,7 +265,7 @@ public class AbstractEquinum extends Consumable {
 					player.balls    = 2;
 					player.ballSize = 1;
 					outputText("\n\nA nauseating pressure forms just under the base of your maleness.  With agonizing pain the flesh bulges and distends, pushing out a rounded lump of flesh that you recognize as a testicle!  A moment later relief overwhelms you as the second drops into your newly formed sack.");
-					dynStats("lus", 5);
+					dynStats("lus", 5, "scale", false);
 					player.MutagenBonus("lib", 2);
 					Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
 				}
@@ -273,7 +273,7 @@ public class AbstractEquinum extends Consumable {
 					player.ballSize++;
 					if (player.ballSize <= 2) outputText("\n\nA flash of warmth passes through you and a sudden weight develops in your groin.  You pause to examine the changes and your roving fingers discover your " + Appearance.ballsDescription(false, true, player) + " have grown larger than a human's.");
 					if (player.ballSize > 2) outputText("\n\nA sudden onset of heat envelops your groin, focusing on your " + Appearance.sackDescript(player) + ".  Walking becomes difficult as you discover your " + Appearance.ballsDescription(false, true, player) + " have enlarged again.");
-					dynStats("lus", 3);
+					dynStats("lus", 3, "scale", false);
 					player.MutagenBonus("lib", 1);
 				}
 				changes++;
@@ -283,7 +283,7 @@ public class AbstractEquinum extends Consumable {
 		if ((type == 1 || type == 2) && (!player.hasCock()) && player.isTaur() && changes < changeLimit && rand(3) == 0) {
 			CoC.instance.transformations.CockHuman(7).applyEffect();
 			player.cocks[0].cockThickness = 1.4;
-			dynStats("lus", 20);
+			dynStats("lus", 20, "scale", false);
 			player.addCurse("sen", 5, 1);
 			player.MutagenBonus("lib", 4);
 			changes++;
@@ -531,7 +531,7 @@ public class AbstractEquinum extends Consumable {
 			if (type == 0) EngineCore.HPChange(20, true);
 			if (type == 1) EngineCore.HPChange(100, true);
 			if (type == 2) EngineCore.HPChange(500, true);
-			dynStats("lus", 3);
+			dynStats("lus", 3, "scale", false);
 		}
 		player.refillHunger(15);
 		return false;

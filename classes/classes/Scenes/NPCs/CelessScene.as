@@ -504,12 +504,14 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 					"Your first guess was right, at least. "+
 					"That meager consolation does little to numb the disappointment.");
 					menu();
-					addButton(0, "Okay", celessUnicornIntro1, (player.isMale() || player.isGenderless()) ? 2 : 3);
-					var warningStr:String = "You have a strange feeling that you can miss something very important by doing this.\n\n<b>You can still get Celess this way by enabling 'Other' in SceneHunter settings.</b>";
-					var hintStr:String = "\n\n<b>You can still get Celess this way by enabling 'Other' in SceneHunter settings.</b>";
+					addButton(0, "Okay", celessUnicornIntro1, (player.isMale() || player.isGenderless()) ? 2 : 3)
+						.disableIf(player.isMale() && player.blockingBodyTransformations(), "Due to your unusual body, you have a feeling this won't work at you.")
+						.disableIf(player.isGargoyle(), "You are a gargoyle... you can't carry <b>anyone's</b> essence.");
+					var warningStr:String = "You have a strange feeling that you can miss something very important by doing this.\n\n"
+						+ "<b>You can still get Celess this way by enabling 'Other' in SceneHunter settings.</b>";
 					var noteStr:String = "<b>SH: Now this works as alternative way to Celess.</b>";
 					if (player.hasCock())
-						addButton(1, "Fuck Her", celessUnicornIntro1, 4).hint(sceneHunter.other ? noteStr : warningStr + hintStr);
+						addButton(1, "Fuck Her", celessUnicornIntro1, 4).hint(sceneHunter.other ? noteStr : warningStr);
 					else addButtonDisabled(1, "Fuck Her", "Req. a cock.");
 					addButton(4, "NoWay", celessUnicornIntro1, 1).hint(warningStr);
 				} else {
@@ -556,7 +558,9 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			case 0:
 				celessGuardNightmareShowProof();
 				menu();
-				addButton(0, "Okay", celessUnicornIntro2, (player.isMale() || player.isGenderless()) ? 2 : 3);
+				addButton(0, "Okay", celessUnicornIntro2, (player.isMale() || player.isGenderless()) ? 2 : 3)
+					.disableIf(player.isMale() && player.blockingBodyTransformations(), "Due to your unusual body, you have a feeling this won't work at you.")
+					.disableIf(player.isGargoyle(), "You are a gargoyle... you can't carry <b>anyone's</b> essence.");;
 				var warningStr:String = "You have a strange feeling that you can miss something very important by doing this.\n\n<b>You can still get Celess this way by enabling 'Other' in SceneHunter settings.</b>";
 				var hintStr:String = "\n\n<b>You can still get Celess this way by enabling 'Other' in SceneHunter settings.</b>";
 				var noteStr:String = "<b>SH: Now this works as alternative way to Celess.</b>";

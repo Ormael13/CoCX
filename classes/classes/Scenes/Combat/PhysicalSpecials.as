@@ -7,11 +7,8 @@ import classes.CoC;
 import classes.EngineCore;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
-import classes.IMutations.HeartOfTheStormMutation;
 import classes.IMutations.IMutationsLib;
-import classes.Items.Consumables.AbstractEquinum;
-import classes.Items.WeaponLib;
-import classes.MutationsLib;
+import classes.Items.Weapons.Tidarion;
 import classes.PerkLib;
 import classes.Races;
 import classes.Scenes.Areas.Bog.LizanRogue;
@@ -142,7 +139,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				}
 			//Ant Bite
 			  if ((player.faceType == Face.ANT || player.perkv1(IMutationsLib.VenomGlandsIM) >= 1)) {
-          bd = buttons.add("Ant Bite", antBiteAttack).hint("Attempt to bite your opponent and inject formic acid. (deal fire dmg and lower toughness)  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
+          bd = buttons.add("Ant Bite", antBiteAttack).hint("Attempt to bite your opponent and inject formic acid. (deal acid dmg and lower toughness)  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
           if (player.tailVenom < player.VenomWebCost() * 5) {
             bd.disable("You do not have enough venom to use ant bite right now!");
           } else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
@@ -722,8 +719,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.weapon == weapons.L_WHIP || player.weapon == weapons.TIDAR) {
 			damage = Math.round(damage * combat.fireDamageBoostedByDao());
 			doFireDamage(damage, true, true);
-			if (player.weapon == weapons.TIDAR)
-				player.mana -= Math.min(player.maxMana() / 10, player.mana);
+			if (player.weapon == weapons.TIDAR) (player.weapon as Tidarion).afterStrike();
 		}
 		else if ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
 			damage = Math.round(damage * combat.fireDamageBoostedByDao());
@@ -1212,7 +1208,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function feint():void {
 		clearOutput();
 		outputText("You attempt to feint [themonster] into dropping [monster his] guards. It ");
-		if (monster.speedDodge(player) > 0) outputText("failed.");
+		if (monster.getEvasionRoll(false, player.spe)) outputText("failed.");
 		else {
 			var feintduration:Number = 2;
 			if (player.hasPerk(PerkLib.GreaterFeint)) feintduration += 2;
@@ -1417,7 +1413,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
 		}
 		if (player.hasAGoreAttack()){
-			if (player.horns.type == Horns.UNICORN, player.horns.type == Horns.KIRIN)
+			if (player.horns.type == Horns.UNICORN || player.horns.type == Horns.KIRIN)
 			{
 				outputText("Not satisfied with your weapon alone you also impale your target on your horn, delivering massive damage.");
 			} else {
@@ -1463,7 +1459,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		fatigue(50, USEFATG_PHYSICAL);
 		outputText("You ready your [weapon] and prepare to spin it around trying to hit as many [themonster] as possible.  ");
-		if ((player.playerIsBlinded() && rand(2) == 0) || (monster.speedDodge(player) > 0)) {
+		if ((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe))) {
 			if (monster.spe - player.spe < 8) outputText("[Themonster] narrowly avoids your attack!");
 			if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText("[Themonster] dodges your attack with superior quickness!");
 			if (monster.spe - player.spe >= 20) outputText("[Themonster] deftly avoids your slow attack.");
@@ -1551,7 +1547,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		fatigue(50, USEFATG_PHYSICAL);
 		outputText("You ready your [weapon] and prepare to spin it around trying to whip as many [themonster] as possible.  ");
-		if ((player.playerIsBlinded() && rand(2) == 0) || (monster.speedDodge(player) > 0)) {
+		if ((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe))) {
 			if (monster.spe - player.spe < 8) outputText("[Themonster] narrowly avoids your attack!");
 			if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText("[Themonster] dodges your attack with superior quickness!");
 			if (monster.spe - player.spe >= 20) outputText("[Themonster] deftly avoids your slow attack.");
@@ -1638,7 +1634,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			return;
 		}
 		outputText("You ready your claws and prepare to spin it around trying to hit as many [themonster] as possible.  ");
-		if ((player.playerIsBlinded() && rand(2) == 0) || (monster.speedDodge(player) > 0)) {
+		if ((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe))) {
 			if (monster.spe - player.spe < 8) outputText("[Themonster] narrowly avoids your attack!");
 			if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText("[Themonster] dodges your attack with superior quickness!");
 			if (monster.spe - player.spe >= 20) outputText("[Themonster] deftly avoids your slow attack.");
@@ -1794,7 +1790,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
 		//miss
-		if((player.playerIsBlinded() && rand(2) == 0) || (monster.speedDodge(player) > 0)) {
+		if((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe))) {
 			outputText("Twirling like a top, you swing your tail, but connect with only empty air.");
 		}
 		else {
@@ -1824,7 +1820,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.tailType == Tail.KITSHOO && player.tailCount > 1) kishoo = "s"
 		outputText("With a simple thought you set your tail"+kishoo+" ablaze.");
 		//miss
-		if((player.playerIsBlinded() && rand(2) == 0) || (monster.speedDodge(player) > 0)) {
+		if((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe))) {
 			outputText("  Twirling like a top, you swing your tail"+kishoo+", but connect with only empty air.");
 		}
 		else {
@@ -1883,7 +1879,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.NaturalInstincts)) player.createStatusEffect(StatusEffects.CooldownTailSmack,5,0,0,0);
 		else player.createStatusEffect(StatusEffects.CooldownTailSmack,5,0,0,0);
 		//miss
-		if((player.playerIsBlinded() && rand(2) == 0) || (monster.speedDodge(player) > 0)) {
+		if((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe))) {
 			outputText("You smash your tail at [themonster], but connect with only empty air.");
 		}
 		else {
@@ -2136,7 +2132,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.PhantomStrike)) fatigue(80, USEFATG_PHYSICAL);
 		else fatigue(40, USEFATG_PHYSICAL);
 		//miss
-		if((player.playerIsBlinded() && rand(2) == 0) || (monster.speedDodge(player) > 0)) {
+		if((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe))) {
 			outputText("Twirling like a top, you swing your wings, but connect with only empty air.");
 		}
 		else {
@@ -2251,11 +2247,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.SuperChargedCore)) damage += ((300 + rand(121)) * 10);
 		dmgamp += temporalGolemsAplification();
 		damage *= dmgamp;
-		if (monster.hasPerk(PerkLib.EnemyGhostType)) damage *= 0.5;
 		damage = Math.round(damage);
 		outputText("Your stone golem slam into [themonster]. ");
-		if (monster.hasPerk(PerkLib.EnemyGhostType)) doMagicDamage(damage, true, true);
-		else doDamage(damage, true, true);
+		doDamage(damage, true, true);
 		if (shatter) outputText(" <b>*Golem Core shattered!*</b>");
 		if (overloadedGolemCoresBag) outputText(" <b>*Golem Core wasn't picked due to lack of space to store them!*</b>");
 		outputText("\n\n");
@@ -2306,11 +2300,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage *= 3;
 		dmgamp += temporalGolemsAplification();
 		damage *= dmgamp;
-		if (monster.hasPerk(PerkLib.EnemyGhostType)) damage *= 0.5;
 		damage = Math.round(damage);
 		outputText("Your stone golems slams into [themonster]. ");
-		if (monster.hasPerk(PerkLib.EnemyGhostType)) doMagicDamage(damage, true, true);
-		else doDamage(damage, true, true);
+		doDamage(damage, true, true);
 		if (shatter) outputText(" <b>*Golem Cores shattered!*</b>");
 		if (overloadedGolemCoresBag) outputText(" <b>*None of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
 		if (partialyoverloadedGolemCoresBag) outputText(" <b>*Some of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
@@ -2362,11 +2354,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage *= 5;
 		dmgamp += temporalGolemsAplification();
 		damage *= dmgamp;
-		if (monster.hasPerk(PerkLib.EnemyGhostType)) damage *= 0.5;
 		damage = Math.round(damage);
 		outputText("Your stone golems slams into [themonster]. ");
-		if (monster.hasPerk(PerkLib.EnemyGhostType)) doMagicDamage(damage, true, true);
-		else doDamage(damage, true, true);
+		doDamage(damage, true, true);
 		if (shatter) outputText(" <b>*Golem Cores shattered!*</b>");
 		if (overloadedGolemCoresBag) outputText(" <b>*None of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
 		if (partialyoverloadedGolemCoresBag) outputText(" <b>*Some of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
@@ -2395,11 +2385,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage *= 4;
 		dmgamp += temporalGolemsAplification();
 		damage *= dmgamp;
-		if (monster.hasPerk(PerkLib.EnemyGhostType)) damage *= 0.5;
 		damage = Math.round(damage);
 		outputText("Your stone golems slams into [themonster]. ");
-		if (monster.hasPerk(PerkLib.EnemyGhostType)) doMagicDamage(damage, true, true);
-		else doDamage(damage, true, true);
+		doDamage(damage, true, true);
 		if (overloadedGolemCoresBag) outputText(" <b>*None of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
 		if (partialyoverloadedGolemCoresBag) outputText(" <b>*Some of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
 		outputText("\n\n");
@@ -2427,11 +2415,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage *= 10;
 		dmgamp += temporalGolemsAplification();
 		damage *= dmgamp;
-		if (monster.hasPerk(PerkLib.EnemyGhostType)) damage *= 0.5;
 		damage = Math.round(damage);
 		outputText("Your stone golems slams into [themonster]. ");
-		if (monster.hasPerk(PerkLib.EnemyGhostType)) doMagicDamage(damage, true, true);
-		else doDamage(damage, true, true);
+		doDamage(damage, true, true);
 		if (overloadedGolemCoresBag) outputText(" <b>*None of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
 		if (partialyoverloadedGolemCoresBag) outputText(" <b>*Some of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
 		outputText("\n\n");
@@ -2459,11 +2445,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage *= 4;
 		dmgamp += temporalGolemsAplification();
 		damage *= dmgamp;
-		if (monster.hasPerk(PerkLib.EnemyGhostType)) damage *= 0.5;
 		damage = Math.round(damage);
 		outputText("Your stone golems slams into [themonster]. ");
-		if (monster.hasPerk(PerkLib.EnemyGhostType)) doMagicDamage(damage, true, true);
-		else doDamage(damage, true, true);
+		doDamage(damage, true, true);
 		if (overloadedGolemCoresBag) outputText(" <b>*None of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
 		if (partialyoverloadedGolemCoresBag) outputText(" <b>*Some of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
 		outputText("\n\n");
@@ -2495,11 +2479,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage *= usedGolems;
 		dmgamp += temporalGolemsAplification();
 		damage *= dmgamp;
-		if (monster.hasPerk(PerkLib.EnemyGhostType)) damage *= 0.5;
 		damage = Math.round(damage);
 		outputText("Your stone golems slams into [themonster]. ");
-		if (monster.hasPerk(PerkLib.EnemyGhostType)) doMagicDamage(damage, true, true);
-		else doDamage(damage, true, true);
+		doDamage(damage, true, true);
 		if (overloadedGolemCoresBag) outputText(" <b>*None of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
 		if (partialyoverloadedGolemCoresBag) outputText(" <b>*Some of used Golem Cores wasn't picked due to lack of space to store them!*</b>");
 		outputText("\n\n");
@@ -3457,7 +3439,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		else outputText("Turning and clenching muscles that no human should have, you expel a spray of sticky webs at [themonster]!  ");
 		//Determine if dodged!
-		if((player.playerIsBlinded() && rand(2) == 0) || (monster.speedDodge(player) > 0)) {
+		if((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe))) {
 			outputText("You miss [themonster] completely - ");
 			if(monster.plural) outputText("they");
 			else outputText(monster.mf("he","she") + " moved out of the way!\n\n");
@@ -4224,7 +4206,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) d3Bdcc *= 2;
 				if (player.lowerBody == LowerBody.ATLACH_NACHA){
 					if (monster.plural) outputText("  The one you bit flushes hotly, though the entire group seems to become more aroused in sympathy to their now-lusty compatriot.");
-					else outputText("  " + monster.mf("He", "She") + " flushes hotly and " + monster.mf("touches his suddenly-stiff member, moaning lewdly for a moment.", "touches a suddenly stiff nipple, moaning lewdly.  You can smell her arousal in the air."));
+					else outputText("  [monster He] flushes hotly and " + monster.mf("touches his suddenly-stiff member, moaning lewdly for a moment.", "touches a suddenly stiff nipple, moaning lewdly.  You can smell her arousal in the air."));
 					var lustDmg2:Number = 35 + rand(player.lib / 10);
 					var poisonScaling:Number = 1;
 					poisonScaling += player.lib/100;
@@ -4251,7 +4233,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					}
 				} else {
 					if (monster.plural) outputText("  The one you bit flushes hotly, though the entire group seems to become more aroused in sympathy to their now-lusty compatriot.");
-					else outputText("  " + monster.mf("He", "She") + " flushes hotly and " + monster.mf("touches his suddenly-stiff member, moaning lewdly for a moment.", "touches a suddenly stiff nipple, moaning lewdly.  You can smell her arousal in the air."));
+					else outputText("  [monster He] flushes hotly and " + monster.mf("touches his suddenly-stiff member, moaning lewdly for a moment.", "touches a suddenly stiff nipple, moaning lewdly.  You can smell her arousal in the air."));
 					var lustDmg:Number = 35 + rand(player.lib / 10);
 					if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= combat.RacialParagonAbilityBoost();
 					if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg *= 1.50;
@@ -4293,10 +4275,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 			//The following is how the enemy reacts over time to formic acid. It is displayed after the description paragraph,instead of lust
 			var d4Bdcc:Number = 2;
 			if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) d4Bdcc *= 2;
-			monster.statStore.addBuffObject({str:-d4Bdcc,spe:-d4Bdcc}, "Burn",{text:"Burn"});
+			monster.statStore.addBuffObject({str:-d4Bdcc,spe:-d4Bdcc}, "AntBurn",{text:"AntBurn"});
 			//Check weither its snakebite or apophis
-			if (monster.hasStatusEffect(StatusEffects.AntFire)) monster.addStatusValue(StatusEffects.AntFire,1,1);
-			else monster.createStatusEffect(StatusEffects.AntFire,10,0.02,0,0);
+			if (monster.hasStatusEffect(StatusEffects.AntAcid)) monster.addStatusValue(StatusEffects.AntAcid,1,1);
+			else monster.createStatusEffect(StatusEffects.AntAcid,10,0.02,0,0);
 		}
 		else {
 			outputText("You lunge headfirst, "+(player.faceType == Face.ANT ? "mandibles out":"fangs bared")+". Your attempt fails horrendously, as [themonster] manages to counter your lunge, knocking your head away with enough force to make your ears ring.");
@@ -4373,7 +4355,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		if (combat.checkConcentration()) return; //Amily concentration
 		outputText("You ready your wrists mounted scythes and prepare to sweep them towards [themonster].\n\n");
-		if ((player.playerIsBlinded() && rand(2) == 0) || (monster.speedDodge(player) > 0)) {
+		if ((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe))) {
 			if (monster.spe - player.spe < 8) outputText("[Themonster] narrowly avoids your attacks!\n\n");
 			if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText("[Themonster] dodges your attacks with superior quickness!\n\n");
 			if (monster.spe - player.spe >= 20) outputText("[Themonster] deftly avoids your slow attacks.\n\n");
@@ -5197,7 +5179,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.playerIsBlinded()) outputText("In hindsight, trying to bite someone while blind was probably a bad idea... ");
 		var damage:Number = 0;
 		//Determine if dodged!
-		if((player.playerIsBlinded() && rand(3) != 0) || (monster.speedDodge(player) > 0)) {
+		if((player.playerIsBlinded() && rand(3) != 0) || (monster.getEvasionRoll(false, player.spe))) {
 			if(monster.spe - player.spe < 8) outputText("[Themonster] narrowly avoids your attack!");
 			if(monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText("[Themonster] dodges your attack with superior quickness!");
 			if(monster.spe - player.spe >= 20) outputText("[Themonster] deftly avoids your slow attack.");
@@ -5342,7 +5324,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			return;
 		}
 		//Determine if dodged!
-		if ((player.playerIsBlinded() && rand(2) == 0) || (monster.speedDodge(player) > 0)) {
+		if ((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe))) {
 			//Akbal dodges special education
 			if (monster is Akbal) outputText("Akbal moves like lightning, weaving in and out of your furious attack with the speed and grace befitting his jaguar body.\n");
 			else {
@@ -5424,7 +5406,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		clearOutput();
 		EngineCore.WrathChange(-shieldbashcostly(), true);
 		outputText("You ready your [shield] and prepare to slam it towards [themonster].  ");
-		if ((player.playerIsBlinded() && rand(2) == 0) || (monster.speedDodge(player) > 0)) {
+		if ((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe))) {
 			if (monster.spe - player.spe >= 20) outputText("[Themonster] deftly avoids your slow attack.");
 			else if (monster.spe - player.spe >= 8) outputText("[Themonster] dodges your attack with superior quickness!");
 			else outputText("[Themonster] narrowly avoids your attack!");

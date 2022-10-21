@@ -16,7 +16,7 @@ import classes.internals.*;
 			outputText("Her pheromone cloud is getting to you, causing your manhood to stiffen with each passing moment, if you don’t finish this quickly you’ll eventually cave in! ");
 			var passivelust:Number = (lib / 6) + rand(8);
 			passivelust = Math.round(passivelust);
-			player.dynStats("lus", passivelust, "scale", false);
+			player.takeLustDamage(passivelust, true);
 			statScreenRefresh();
 		}
 		

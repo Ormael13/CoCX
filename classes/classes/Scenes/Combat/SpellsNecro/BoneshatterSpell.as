@@ -39,7 +39,7 @@ public class BoneshatterSpell extends AbstractNecroSpell {
 				|| monster.hasPerk(PerkLib.EnemyGhostType)
 				|| monster.hasPerk(PerkLib.EnemyGooType)
 				|| monster.hasPerk(PerkLib.EnemyPlantType)) {
-			return "Your enemy lack bones.";
+			return "Your enemy lacks bones.";
 		}
 		if (monster.plural
 				|| monster.hasPerk(PerkLib.Enemy300Type)

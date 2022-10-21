@@ -137,8 +137,9 @@ public class PlayerInfo extends BaseContent {
 			miscStats += "<b>Camp Population:</b> " + camp.getCampPopulation() + "\n";
 			miscStats += "<b>Camp Underground Population:</b> " + camp.getCampUndergroundPopulation() + "\n";
 			miscStats += "<b>Minions Count:</b> " + player.playerMinionsCount() + "\n";
-			if (player.race() == "mindbreaker") {
+			if (player.isRace(Races.FMINDBREAKER) || player.isRace(Races.MMINDBREAKER)) {
 				miscStats += "<b>Mindbroken Minions:</b> " + Mindbreaker.MindBreakerConvert + "\n";
+				miscStats += "<b>Mindbreaker Goal:</b> " + Mindbreaker.MindBreakerConvertGoal + "\n";
 			}
 		}
 
@@ -1981,21 +1982,21 @@ public class PlayerInfo extends BaseContent {
 		player.superPerkPoints--;
 		player.createPerk(PerkLib.DeityJobMunchkin,0,0,0,0);
 		clearOutput();
-		outputText("You gained 'Deity Job: Munchkin' super munchkin perk. (Because it too cool to be merely super perk, right?)");
+		outputText("You gained 'Deity Job: Munchkin' super munchkin perk. (Because it's too cool to merely be a super perk, right?)");
 		doNext(curry(superPerkBuyMenu, 1));
 	}
 	private function perkMunchkinAtGym():void {
 		player.superPerkPoints--;
 		player.createPerk(PerkLib.MunchkinAtGym,0,0,0,0);
 		clearOutput();
-		outputText("You gained 'Munchkin @ Gym' super munchkin perk. (Because it too cool to be merely super perk, right?)");
+		outputText("You gained 'Munchkin @ Gym' super munchkin perk. (Because it's too cool to merely be a super perk, right?)");
 		doNext(curry(superPerkBuyMenu, 1));
 	}
 	private function perkMunchkinAtWork():void {
 		player.superPerkPoints--;
 		player.createPerk(PerkLib.MunchkinAtWork,0,0,0,0);
 		clearOutput();
-		outputText("You gained 'Munchkin @ Work' super munchkin perk. (Because it too cool to be merely super perk, right?)");
+		outputText("You gained 'Munchkin @ Work' super munchkin perk. (Because it's too cool to merely be a super perk, right?)");
 		doNext(curry(superPerkBuyMenu, 1));
 	}
 	private function perkHiddenJobBloodDemon():void {

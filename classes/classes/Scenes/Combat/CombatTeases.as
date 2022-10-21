@@ -918,7 +918,7 @@ public class CombatTeases extends BaseCombatContent {
 				break;
 				//22 SPOIDAH SILK
 			case 22:
-				outputText("Reaching back, you milk some wet silk from your spider-y abdomen and present it to [themonster], molding the sticky substance as [monster he] looks on curiously.  Within moments, you hold up a silken heart scuplture, and with a wink, you toss it at [monster him]. It sticks to [monster his] body, the sensation causing [monster him] to hastily slap the heart off.  " + monster.mf("He", "She") + " returns [monster his] gaze to you to find you turned around, [butt] bared and abdomen bouncing lazily.  \"<i>I wonder what would happen if I webbed up your hole after I dropped some eggs inside?</i>\" you hiss mischievously.  " + monster.mf("He", "She") + " gulps.");
+				outputText("Reaching back, you milk some wet silk from your spider-y abdomen and present it to [themonster], molding the sticky substance as [monster he] looks on curiously.  Within moments, you hold up a silken heart scuplture, and with a wink, you toss it at [monster him]. It sticks to [monster his] body, the sensation causing [monster him] to hastily slap the heart off.  [monster He] returns [monster his] gaze to you to find you turned around, [butt] bared and abdomen bouncing lazily.  \"<i>I wonder what would happen if I webbed up your hole after I dropped some eggs inside?</i>\" you hiss mischievously.  [monster He] gulps.");
 				ass = true;
 				break;
 				//23 RUT TEASE
@@ -940,7 +940,7 @@ public class CombatTeases extends BaseCombatContent {
 				break;
 				//TALL WOMAN TEASE
 			case 25:
-				outputText("You move close to your enemy, handily stepping over [monster his] defensive strike before leaning right down in [monster his] face, giving [monster him] a good long view at your cleavage.  \"<i>Hey, there, little " + monster.mf("guy", "girl") + ",</i>\" you smile.  Before [monster he] can react, you grab [monster him] and smoosh [monster his] face into your [fullchest], nearly choking [monster him] in the canyon of your cleavage.  " + monster.mf("He", "She") + " struggles for a moment.  You give [monster him] a little kiss on the head and step back, ready for combat.");
+				outputText("You move close to your enemy, handily stepping over [monster his] defensive strike before leaning right down in [monster his] face, giving [monster him] a good long view at your cleavage.  \"<i>Hey, there, little " + monster.mf("guy", "girl") + ",</i>\" you smile.  Before [monster he] can react, you grab [monster him] and smoosh [monster his] face into your [fullchest], nearly choking [monster him] in the canyon of your cleavage.  [monster He] struggles for a moment.  You give [monster him] a little kiss on the head and step back, ready for combat.");
 				breasts = true;
 				chance += 6;
 				damage += 12;
@@ -1519,7 +1519,7 @@ public class CombatTeases extends BaseCombatContent {
 			if (flags[kFLAGS.PC_FETISH] >= 1 && !SceneLib.urtaQuest.isUrta()) {
 				if (player.lust < (player.maxLust() * 0.75)) outputText("\nFlaunting your body in such a way gets you a little hot and bothered.");
 				else outputText("\nIf you keep exposing yourself you're going to get too horny to fight back.  This exhibitionism fetish makes it hard to resist just stripping naked and giving up.");
-				if (!justText) dynStats("lus", 7 + rand(6));
+				if (!justText) player.takeLustDamage(7 + rand(6), true);
 			}
 			// Similar to fetish check, only add XP if the player IS the player...
 			if (!justText && !SceneLib.urtaQuest.isUrta()) player.SexXP(1 + bonusExpAfterSuccesfullTease());

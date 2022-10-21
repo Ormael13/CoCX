@@ -964,7 +964,7 @@ public class Holidays extends BaseContent {
                 + "\n\nYour hands pull her tightly against you, stopping her mad thrusts as her vagina continues to spasm against your taut belly, the contractions so powerful that you can feel them even through your [armor].  She cranes her head back and moans indecently into the air as her legs grip you, almost making you feel like you're about to burst with the pressure."
                 + "\n\nFinally though, her climax begins to die down.  She holds you close for a few moments, gulping down air after her body-shaking finish.  You continue to drain her breast, though you feel your [vagina] starting to leave a damp patch on the inside of your armour, dripping down your thighs to soak into the log beneath you.  The hand on your head begins to move its way out of your hair, trailing down your neck almost lovingly as her breathing starts to return to normal.  Her touch is almost electric against your skin and you suddenly find yourself very aware of how much your body has been reacting whilst your brain was fixated on her mind-numbingly good goo."
                 + "\n\nFinally, unable to withstand it any longer, you break your lips away from her teat and push the girl to the ground, your hunger for her body finally having overcome your hunger for her gravy.  She looks up at you with a confused expression to begin with, but once she sees your hands darting to the clasps of your armor, a much more sultry look crosses her features.");
-            player.dynStats("lus", 30);
+            player.dynStats("lus", 30, "scale", false);
             doNext(haveTurkeyGirlDesertInYourCunt);
         }
 
@@ -1158,7 +1158,7 @@ public class Holidays extends BaseContent {
             + "\n\nYou grin. You could really go for a wild night right about now and a cheap whore sounds like just the right thing to ease your... stress.");
         awardAchievement("Thankslutting", kACHIEVEMENTS.HOLIDAY_THANKSGIVING_I, true, true);
         //{Lust = lust + 10}
-        player.dynStats("lus", 5);
+        player.dynStats("lus", 5, "scale", false);
         menu();
         if (player.gems >= 1) addButton(0, "Throw gem", getARoastPiggueOinkOinkOinkMotherfucker);
         addButton(1, "Nah", SceneLib.telAdre.barTelAdre);
@@ -1425,7 +1425,7 @@ public class Holidays extends BaseContent {
             outputText("You decide your work here is done, and bid the three girls goodbye.  Scylla in particular seems grateful for your help, locking you in a smooshy hug for a few seconds before letting you go, and again expressing her gratitude for your help.  Well, that last gratitude almost made it worth it, though on the other hand, you find yourself a bit aroused by it...");
             //With no other things to do, you go back to camp to rest.
             //{Small Lust Increase, return to camp, go to sleep}
-            player.dynStats("lus", 10);
+            player.dynStats("lus", 10, "scale", false);
             doNext(SceneLib.camp.returnToCampUseTwoHours);
         }
 
@@ -1643,7 +1643,7 @@ public class Holidays extends BaseContent {
                 player.createPerk(PerkLib.PureAndLoving, 0, 0, 0, 0);
             }
 
-            player.dynStats("lus", 80);
+            player.dynStats("lus", 80, "scale", false);
             doNext(SceneLib.camp.returnToCampUseTwoHours);
         }
 
@@ -1713,7 +1713,7 @@ public class Holidays extends BaseContent {
             }
             //{Bimbo Champagne}
             else if (itype == consumables.BIMBOCH) {
-                outputText("\n\nPastie giggles as her body starts to slowly show the effects of the liquid she just drank.  \"<i>Hihihi... I feel kinda funny,</i>\" she says, and you start to see the changes the champagne is starting to have on her body.  Her hair starts turning blonde, and her position in mid-air changes somewhat... almost as if she was imitating standing on \"<i>fuck-me</i>\" pumps, and, slowly, her little cupid dress stretches, as you become aware that her body is starting to become curvier, especially in the chest area.  \"<i>Hahaha... it's, like, I'm hitting three puberties at once!  Ummm... pu... puber, ah, nevermind.  Look, look!  It's gonna rip!</i>\" The seams in the little dress indeed pop, exposing a significant amount of the little girl's cleavage, now very significant.  True, compared to your body size her breasts are still nothing, but on her little body they're very prominent.  She even seems to have trouble flying from the added mass!  Her hips gained the slightest bit of curve, too, and Pastie's hair is now completely blonde."
+                outputText("\n\nPastie giggles as her body starts to slowly show the effects of the liquid she just drank.  \"<i>Hihihi... I feel kinda funny,</i>\" she says, and you start to see the changes the champagne is starting to have on her body.  Her hair starts turning blonde, and her position in mid-air changes somewhat... almost as if she was imitating standing on \"<i>fuck-me</i>\" pumps, and, slowly, her little cupid dress stretches, as you become aware that her body is starting to become curvier, especially in the chest area.  \"<i>Hahaha... it's, like, I'm hitting three puberties at once!  Ummm... pu... puber, ah, never mind.  Look, look!  It's gonna rip!</i>\" The seams in the little dress indeed pop, exposing a significant amount of the little girl's cleavage, now very significant.  True, compared to your body size her breasts are still nothing, but on her little body they're very prominent.  She even seems to have trouble flying from the added mass!  Her hips gained the slightest bit of curve, too, and Pastie's hair is now completely blonde."
                     + "\n\n\"<i>Uhh, like... baby, you know, the usual drink gets me hot, and this one is as special as my new titties!  Would you mind helping me out?</i>\""
                     + "\n\nYou wonder if the sluttification has passed to everywhere on her body... there's a good chance a small member that's normally impossible for her entire body to fit may actually slip inside her now.  And you doubt she'd turn away a chance to get some cum or pussy juice, too.");
 
@@ -2928,7 +2928,7 @@ public class Holidays extends BaseContent {
                 + "\n\nYou begin pistoning your fingers in and out of the dragon-girl, asking her if she's feeling warmer now.  \"<i>Mmm, y-y-yes,</i>\" Kiha answers, even as her legs start to buckle, making her sway in a rather drunken fashion. \"<i>B-but it'll take more than - ooohhh... than that to warm me up,</i>\" she says, then moans.  She wants more, doesn't she?  Well, you're happy to oblige!  You add a couple more fingers to her love-hole, your other hand joining the first one in caring for her womanly needs by pinching and stroking her little, achingly engorged clit.  She shudders and squeals, her nether-lips squeezing you tightly as fem-cum drenches your hand, the orgasm ripping through her body and causing her to lose control of her legs, sending her crashing into you and knocking you both to the ground."
                 + "\n\nYou click your tongue, mocking her for giving in to a little pleasure.  Isn't she supposed to be all strong and mighty?  \"<i>I'll never be defeated,</i>\" right?  \"<i>Shush, love,</i>\" she pants unthinkingly.  You laugh at your scaly lover's reaction, patting her butt gently.  Then, you ask her if she's feeling warmer now?  If she isn't, you'll be happy to warm her up some more, even going so far as to send a questing hand to prod her moist opening."
                 + "\n\n\"<i>Well, I suppose you could get me a little hotter... if you can take the heat, my doofus,</i>\" she croons, snuggling tighter against you...");
-            player.dynStats("lus", 20 + player.sens / 20 + player.lib / 20);
+            player.dynStats("lus", 20 + player.sens / 20 + player.lib / 20, "scale", false);
             menu();
             addButton(0, "Next", processJackFrostEvent);
 
@@ -2976,7 +2976,7 @@ public class Holidays extends BaseContent {
                 + "\n\nYou put your nose against her neck, inhaling her scent, a faint grassy smell that is distinctively feminine.  \"<i>Mmm... that feels good.</i>\"  Amily drawls, and then she giggles, \"<i>Actually, it kinda tickles.</i>\""
                 + "\n\nYou tell her it feels perfect, and you'll fight hard to ensure you will all have more moments like this in the future...  \"<i>Well, I'll be rooting for you all the way... though, right now, I think I'd rather you just shut up and enjoy the moment,</i>\" she adds."
                 + "\n\nYou chuckle, even though she's the one that's been chatting your ears off this whole time?  \"<i>Yes, even though I'm the one that's been chatting your ears off,</i>\" Amily replies with a smile.  You suggest that perhaps all you need to do to stop talking is finding something to keep your mouths busy.  \"<i>Oh?  What are you suggesting?</i>\" she asks, her tail gently looping around your midriff.  Your reply is to simply draw her into a kiss...");
-            player.dynStats("lus", 30 + player.sens / 10);
+            player.dynStats("lus", 30 + player.sens / 10, "scale", false);
             menu();
             addButton(0, "Next", processJackFrostEvent);
         }
@@ -3209,7 +3209,7 @@ public class Holidays extends BaseContent {
                 if (player.cockArea(x) >= 80) {
                     outputText("You free your [cock " + (x + 1) + "] from your [armor], signaling your acceptance.  Your monster flops free, and the harpy grabs at her throat reflexively when she looks at it.  She glances up to you with wide eyes and back down at it.  \"<i>A-a promise is a promise, but...</i>\"");
                     outputText("\n\nShe turns and flees with a few terrified flaps of her wings.  You sigh, covering your enormous prick once more.  At least you won't have to deal with her pesky shrieking anymore.  The air warms and the snow thaws soon after you return, leaving no trace of its presence but a few spots of slushy mud.");
-                    player.dynStats("lus", 10);
+                    player.dynStats("lus", 10, "scale", false);
                     doNext(EventParser.playerMenu);
                     return;
                 }
@@ -3402,7 +3402,7 @@ public class Holidays extends BaseContent {
                 + "\n\nThe reaction you get from her, however, is much more spontaneous - Kami's kangaroo toes curl out while she moans enthusiastically.  The joy of having her length engulfed by your tight throat is painted plain on her face as much as you are buried into her crotch.  Throttling your head forward, Kami groans.  Her warm precum already starts to spill against your bottom lip, a little spooge dribbling out sloppily every time you pull back.  You reach behind her large member and spear her two holes with a finger each, drilling your two digits inside her erogenous pockets with lustful intent.  \"<i>W- oh god!</i>\"  She cries, your stimulation apparently too much for her to handle. Kami's tight pucker clamps down hard as her fem-sex and cock erupt simultaneously, soaking cum against both your active finger and the back of your throat."
                 + "\n\nYou gulp down her load without a sweat, pulling your fingers free from Kami's wetness. You allow Kami's soft, delicate lips to envelope and smother your own, giving her a taste of her man-milk in return.  You give her a seductive wink before finally pulling away to put on your garments, but Kami insists on your attention to apologize.  \"<i>Hey, uh, sorry for cumming so early there - if it's any consolation, that was amazing!  Next time you should be the one taking charge, doll.</i>\"  You beam at Kami, the waitress pecking you on the cheek before you head back to camp.");
             if (player.hasCock()) outputText("  You think you might still need to find an outlet for that itch of yours, with [eachCock] still erect and needing release.");
-            player.dynStats("lus", 20 + player.lib / 10 + player.sens / 10);
+            player.dynStats("lus", 20 + player.lib / 10 + player.sens / 10, "scale", false);
             //[Player heads back to camp, An hour passes, Lust = + 40 and KamiEnc = 1]
             flags[kFLAGS.KAMI_ENCOUNTER] = 1;
             doNext(SceneLib.camp.returnToCampUseOneHour);
@@ -3859,7 +3859,7 @@ public class Holidays extends BaseContent {
                     else outputText(", your little anemone spawn giggles and laughs at your predicament before finally ladling some water onto your lover's snatch");
                     outputText(", effectively allowing you to pull your tongue away."
                         + "\n\nBoth of you thoroughly flustered, Nieve returns to the winter paradise and you go back to your duties.");
-                    player.dynStats("lus", -5 - player.sens / 5);
+                    player.dynStats("lus", -5 - player.sens / 5, "scale", false);
                 }
                 doNext(SceneLib.camp.returnToCampUseOneHour);
             }
@@ -3935,26 +3935,6 @@ public class Holidays extends BaseContent {
                     if (player.cocks[x].cockType == CockTypesEnum.HUMAN) outputText("  Your normal, unaltered cock seems to take on a slight blue tint, although you can confirm it's not going numb.  Quite the contrary, it seems to be getting more sensitive as Nieve's lips roll over it.");
                     //(Equine)
                     else if (player.cocks[x].cockType == CockTypesEnum.HORSE) outputText("  Nieve fawns over your horsecock like a cultist praying to a god.  She sucks and kisses, running the tip of her tongue all along the sides until she reaches the sheathe, and then right back up the other side.");
-                    //(Canine)
-                    else if (player.hasKnot(x)) {
-                        outputText("  Nieve eyes the knot on your cock as though it were a challenge.  She inches down your shaft, getting ever closer.");
-                        //(Cocksize >40)
-                        if (player.cockArea(x) >= 40) outputText("  Eventually, though, she admits defeat and goes back to working your shaft, though she eyes that knot from time to time with no small amount of anger.");
-                        //(Cocksize <40)
-                        else outputText("  It takes her a few good minutes, but eventually she works her way down and takes the entire knot into her mouth.  She raises her hands in triumph and lets out a \"<i>Mmmmrrrrrpphhh!</i>\" before pulling back for a breath, inadvertently exposing your wet hard cock to the cold, wintery air.");
-                    }
-                        /*Cock types
-                    0 - human
-                    1 - horse
-                    2 - dog
-                    3 - demon
-                    4 - tentacle?
-                    5 - CAT
-                    6 - Lizard/Naga?
-                    7 - ANEMONE!
-                    8 - ugliest wang ever (kangaroo)
-                    9 - dragon
-                    */
                     //(Demonic)
                     else if (player.cocks[x].cockType == CockTypesEnum.DEMON) outputText("  Your purple, demonic shaft pulses and throbs, seemingly immune to the unnatural cold of Nieve's mouth. Seemingly oblivious to its nature, Nieve slavers over each nodule, giving every ridge and bump a kiss and more than just a lick.");
                     //(Tentacle)
@@ -3967,6 +3947,14 @@ public class Holidays extends BaseContent {
                     else if (player.cocks[x].cockType == CockTypesEnum.ANEMONE) outputText("  Nieve giggles whenever one of your wriggling tentacles stings her, seemingly immune to its effects, and kisses it back.  Soon after she devours your whole length, delighted to feel the sting of your cock in the back of her throat.");
                     //(Kangaroo)
                     else if (player.cocks[x].cockType == CockTypesEnum.KANGAROO) outputText("  It takes Nieve a little while to catch on that your cock isn't quite human, and by the time she figures it out, she mutters, \"<i>Huh, that's strange... I thought kangaroos had balls above the cock,</i>\" before shrugging and getting back to work.");
+                    //(Canine)
+                    else if (player.hasKnot(x)) {
+                        outputText("  Nieve eyes the knot on your cock as though it were a challenge.  She inches down your shaft, getting ever closer.");
+                        //(Cocksize >40)
+                        if (player.cockArea(x) >= 40) outputText("  Eventually, though, she admits defeat and goes back to working your shaft, though she eyes that knot from time to time with no small amount of anger.");
+                        //(Cocksize <40)
+                        else outputText("  It takes her a few good minutes, but eventually she works her way down and takes the entire knot into her mouth.  She raises her hands in triumph and lets out a \"<i>Mmmmrrrrrpphhh!</i>\" before pulling back for a breath, inadvertently exposing your wet hard cock to the cold, wintery air.");
+                    }
                     //(If you add dicks later, placeholder text:)
                     else outputText("  Nieve works on your mutant cock, spending time working every unique little facet of it.");
                 }

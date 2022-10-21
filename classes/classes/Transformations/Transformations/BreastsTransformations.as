@@ -237,7 +237,7 @@ public class BreastsTransformations extends MutationsHelper {
 						desc += "  Your new nipples are leaking and you can even press your finger inside, they are fuckable!"
 					}
 					player.breastRows[player.bRows() - 1].lactationMultiplier = player.breastRows[player.bRows() - 2].lactationMultiplier;
-					dynStats("lus", 30);
+					dynStats("lus", 30, "scale", false);
 					player.addCurse("sen", 2, 1);
 				}
 				if (doOutput) outputText(desc);
@@ -277,7 +277,7 @@ public class BreastsTransformations extends MutationsHelper {
 					player.createBreastRow(size, player.breastRows[player.bRows() - 1].nipplesPerBreast);
 					if (player.hasFuckableNipples()) player.breastRows[player.bRows() - 1].fuckable = true;
 					player.breastRows[player.bRows() - 1].lactationMultiplier = player.breastRows[player.bRows() - 2].lactationMultiplier;
-					dynStats("lus", 30);
+					dynStats("lus", 30, "scale", false);
 					player.addCurse("sen", 2, 1);
 				}
 				else transformations.CreateBreastRow(2).applyEffect(doOutput);
@@ -461,6 +461,7 @@ public class BreastsTransformations extends MutationsHelper {
 					player.removeStatusEffect(StatusEffects.BlackNipples);
 
 				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(BreastMem.getMemory(BreastMem.DEFAULTNIPPLE));
 			},
 			// is present
 			function ():Boolean {

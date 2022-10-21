@@ -113,7 +113,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 				if (doOutput) outputText(desc);
 				player.vaginas[0].vaginalLooseness--;
-				dynStats("lus", 25);
+				dynStats("lus", 25, "scale", false);
 				MutagenBonus("lib", 2);
 				},
 				// is possible
@@ -131,7 +131,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 				if (doOutput) outputText(desc);
 				player.ass.analLooseness--;
-				dynStats("lus", 25);
+				dynStats("lus", 25, "scale", false);
 				MutagenBonus("lib", 2);
 			},
 			// is possible
@@ -379,7 +379,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 //======================================================================================================================
     public var cocks:CockTransformations = new CockTransformations();
     public function UnlockCocks():void { return cocks.UnlockCocks(); }
-    public function CockNone(cock:int = 0): Transformation { return cocks.CockNone(); }
+    public function CockNone(cock:int = 0): Transformation { return cocks.CockNone(cock); }
     public function CockHuman(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 			{ return cocks.CockHuman(cock, length, thickness); }
     public function CockHorse(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 			{ return cocks.CockHorse(cock, length, thickness); }
     public function CockKirin(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 			{ return cocks.CockKirin(cock, length, thickness); }

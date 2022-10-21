@@ -34,7 +34,7 @@ public final class Reducto extends Consumable {
 			EngineCore.addButton(6, "Hips", reductoHips)
                 .disableIf(player.hips.type <= 2, "Already thin.");
             if (player.horns.count > 2) EngineCore.addButton(7, "Horns", shrinkHorns);
-			EngineCore.addButton(14, "Nevermind", reductoCancel);
+			EngineCore.addButton(14, "Never mind", reductoCancel);
 			return true;
 		}
 		
@@ -52,7 +52,7 @@ public final class Reducto extends Consumable {
 			if (player.breastRows.length == 1) shrink(1);
 			else {
 				clearOutput();
-				outputText("Which breast row would you want to use Gro+ on?");
+				outputText("Which breast row would you want to use Reducto on?");
 				BaseContent.pickANumber(shrink, 1, player.breastRows.length, useItem);
 			}
 			//==========================
@@ -106,7 +106,7 @@ public final class Reducto extends Consumable {
 			if (player.cocks.length == 1) pickPlace(1);
 			else {
 				clearOutput();
-				outputText("Which dick would you want to use Gro+ on?");
+				outputText("Which dick would you want to use Reducto on?");
 				BaseContent.pickANumber(pickPlace, 1, player.cocks.length, useItem);
 			}
 			//==========================

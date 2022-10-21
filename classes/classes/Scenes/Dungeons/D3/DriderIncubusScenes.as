@@ -639,7 +639,7 @@ public class DriderIncubusScenes extends BaseContent
 			menu();
 			addButton(0, "Fuck Him", actuallyRideDriderDick);
 			addButton(1, "Use Goblin", rideDriderToGoblin);
-			addButton(2, "Nevermind", driderDefeatMenu);
+			addButton(2, "Never mind", driderDefeatMenu);
 		}
 
 		public function rideDriderToGoblin():void

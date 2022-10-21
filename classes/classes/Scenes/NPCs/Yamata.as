@@ -29,12 +29,12 @@ import classes.internals.*;
 			} else if (x == 2) {
 				outputText("Yamata digs her heels into the ground, taunting you with a crude gesture. Her serpentine hair suddenly lashes forward, morphing before your eyes into countless blades! Thankfully, she seems to purposely avoid anything vital, but the grazing cuts they leave behind hurt terribly. <i>\"Ahahahaha! Doesn’t it just make you HARD?!\"</i>  ");
 				damage = int(str) - rand(25);
-				player.takeLustDamage(7);
+				player.takeLustDamage(7, true);
 				flags[kFLAGS.YAMATA_MASOCHIST]++;
 			} else {
 				outputText("With a quick whipping motion, Yamata’s serpentine hair lashes toward you, splitting into thousands of thin strands that whip against your flesh. Pain lances through your body wherever they touch, but the intense tingling sends blood boiling to your loins involuntarily.  ");
 				damage = int(str/2) + rand(50);
-				player.takeLustDamage(12);
+				player.takeLustDamage(12, true);
 				flags[kFLAGS.YAMATA_MASOCHIST]++;
 			}
 			
@@ -49,7 +49,7 @@ import classes.internals.*;
 			outputText("Yamata moves her fingers through the air in a circle, conjuring up a corrupted purple flame. She twists her upper body into a batter’s stance and strikes it with the flat of her blade, making the fireball rocket toward you like a missile, bursting on impact! The flames burn intensely as they engulf you, but the more it burns, the more you start to LIKE it.  ");
 			player.takeFireDamage(int(str/2) + rand(15), true);
 			//if masochist, take more damage
-			(player.hasPerk(PerkLib.Masochist) ?  player.takeLustDamage(15 + player.effectiveSensitivity()/10) : player.takeLustDamage((10 + player.effectiveSensitivity()/10)*2));
+			(player.hasPerk(PerkLib.Masochist) ?  player.takeLustDamage(15 + player.effectiveSensitivity()/10, true) : player.takeLustDamage((10 + player.effectiveSensitivity()/10)*2, true), true);
 			flags[kFLAGS.YAMATA_MASOCHIST]++;
 		}
 		
@@ -110,12 +110,12 @@ import classes.internals.*;
 						break;
 					case 1:
 						outputText("\n\n<i>\"This is my realm... and in my realm... you get to feel good...\"</i> her strange words entice you as you widen your eyes, you try to hit her but you always seem to miss. A mischievous grin comes from her figure as you feel something rubbing your crotch, is one of her tails! Oh damn, it feels so good!  ");
-						player.takeLustDamage(lustDmg);
+						player.takeLustDamage(lustDmg, true);
 						break;
 					case 2:
 						outputText("\n\nYamata turns around, brushing her tails to the side to expose her ample hindquarters, showing off her juicy-looking cheeks. Her display sends blood rushing to your groin, making you lick your lips eagerly.\n\n"
 						+"Yamata pauses for a moment, placing a hand on her taut abs and sliding her fingers downward slowly, gazing deep into your eyes. Her tails fan out around her, curling around her limbs seductively, and she gives you a flirtatious leer as she watches your body tremble with desire.  ");
-						player.takeLustDamage(lustDmg*2);
+						player.takeLustDamage(lustDmg*2, true);
 						break;
 						
 					default:

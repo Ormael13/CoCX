@@ -1038,9 +1038,7 @@ import classes.internals.SaveableState;
 
 			clearOutput();
 			outputText(title);
-
-			const vaginaDesc: String = CoC.instance.playerAppearance.describePussies();
-			outputText(player.hasVagina() ?  vaginaDesc : "You have no vagina.");
+			outputText(player.hasVagina() ?  CoC.instance.playerAppearance.describePussies() : "You have no vagina.");
 			outputText("[pg]Perhaps you'd like to change this?");
 
 			var totVag:int = player.vaginas.length;
@@ -1107,7 +1105,7 @@ import classes.internals.SaveableState;
 
 				if (unlocked && !partsInUse && enoughSF) addButton(currentButton++, buttonStr, doMetamorph, title, genMem, index).hint("Cost: " + cost + " SF" + (genMem.info ? "\n\n" + genMem.info : ""));
 				else if (unlocked && partsInUse) addButtonDisabled(currentButton++, buttonStr, (!genMem.hint? "You already have this, the metamorphosis would have no effect!":genMem.hint));
-				else if (unlocked && !partsInUse && !enoughSF) addButtonDisabled(currentButton++, buttonStr, "Cost: " + genMem.cost + " SF (You don't have enough Soulforce for this metamorphosis!)");
+				else if (unlocked && !partsInUse && !enoughSF) addButtonDisabled(currentButton++, buttonStr, "Cost: " + cost + " SF (You don't have enough Soulforce for this metamorphosis!)");
 				else if (!unlocked)	addButtonDisabled(currentButton++, buttonStr, "You haven't unlocked this metamorphosis yet!" + (genMem.lockedInfo ? "\n\n" + genMem.lockedInfo : ""));
 			}
 

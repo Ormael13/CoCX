@@ -22,7 +22,7 @@ public class Ayane extends Kitsune {
             else {
                 outputText(" The foxfire sears your skin, but leaves you strangely aroused.");
                 player.takeFireDamage(damage, true);
-                player.dynStats("lus", 15 + player.effectiveSensitivity() / 10);
+                player.takeLustDamage(15 + player.effectiveSensitivity() / 10, true);
             }
     }
 
@@ -73,7 +73,7 @@ public class Ayane extends Kitsune {
             + "\n"
             + "“<i>How prude! Many would kill to experience what you just saw.</i>”");
         createStatusEffect(StatusEffects.Illusion, 0, 0, 0, 0);
-        player.dynStats("lus", 20 + player.effectiveSensitivity() / 8);
+        player.takeLustDamage(20 + player.effectiveSensitivity() / 8, true);
         statStore.addBuff("spe", 20, "KitsuneIllusion", {rate: Buff.RATE_ROUNDS, ticks: 5});
     }
 
@@ -116,7 +116,7 @@ public class Ayane extends Kitsune {
             this.a = "";
             this.short = "Ayane";
         } else {
-            this.a = "a";
+            this.a = "a ";
             this.short = "mysterious seven-tailed kitsune";
         }
         this.imageName = "ayane";

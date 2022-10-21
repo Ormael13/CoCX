@@ -423,7 +423,7 @@ public class EyesTransformations extends MutationsHelper {
 			function (doOutput: Boolean): void {
 				var desc: String = "";
 
-				desc += "";
+				desc += "You gasp in discomfort as your vision troubles and blurr for a moment. You pass your hand to feel for your face and discover to your absolute surprise you can't feel your nose ridge, heck as you poke yourself in the eye and recoil back in surprise. Seems your eyes merged together into one single all encompassing eye like that of some cyclopean creature.\n";
 
 				player.eyes.type = Eyes.MONOEYE;
 				if (doOutput) outputText(desc);

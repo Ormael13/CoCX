@@ -331,8 +331,8 @@ public class UniqueSexScenes extends BaseContent
         }
         private function USSLiveDildo():Array{
             var btnSet:Array = ["Living Dildo"];
-            if (player.hasVagina() && (((player.isKraken() || player.lowerBody == LowerBody.HYDRA) && player.tallness*3/2 > monster.tallness) || player.tallness > monster.tallness*2) ) btnSet.push(HumanDildo, "");
-            else btnSet.push(false, "To be way taller then your opponent in order to even use this scene.");
+            if (player.hasVagina() && player.isKraken() && player.tallness > monster.tallness*2) btnSet.push(HumanDildo, "");
+            else btnSet.push(false, "You need to be a kraken and way taller than your opponent in order to even use this scene.");
             return btnSet;
         }
         private function USSJiangshiDrn():Array{

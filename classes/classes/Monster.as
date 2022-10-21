@@ -1601,9 +1601,10 @@ import flash.utils.getQualifiedClassName;
 
 		/**
 		 * try to hit, apply damage
+		 * @param display Whether to print the number or not
 		 * @return damage
 		 */
-		public function eOneAttack():int
+		public function eOneAttack(display:Boolean = false):int
 		{
 			//Determine damage - str modified by enemy toughness!
 			if (hasStatusEffect(StatusEffects.FlameBlade)) {
@@ -1616,7 +1617,7 @@ import flash.utils.getQualifiedClassName;
 			}
 			else {
 				var damage:int = calcDamage();
-				if (damage > 0) player.takePhysDamage(damage);
+				if (damage > 0) damage = player.takePhysDamage(damage, display);
 			}
 			return damage;
 		}
@@ -3122,7 +3123,7 @@ import flash.utils.getQualifiedClassName;
 				//when Entwined
 				outputText("You are bound tightly in the kitsune's tails.  <b>The only thing you can do is try to struggle free!</b>\n\n");
 				outputText("Stimulated by the coils of fur, you find yourself growing more and more aroused...\n\n");
-				player.dynStats("lus", 5+player.effectiveSensitivity()/10);
+				player.takeLustDamage(5+player.effectiveSensitivity()/10, true);
 			}
 			if(hasStatusEffect(StatusEffects.QueenBind)) {
 				outputText("You're utterly restrained by the Harpy Queen's magical ropes!\n\n");
@@ -3133,7 +3134,7 @@ import flash.utils.getQualifiedClassName;
 				else if(player.lust < (player.maxLust() * 0.70)) outputText("You aren't sure why but you have difficulty keeping your eyes off your opponent's lewd form.\n\n");
 				else if(player.lust < (player.maxLust() * 0.90)) outputText("You blush when you catch yourself staring at your foe's rack, watching it wobble with every step she takes.\n\n");
 				else outputText("You have trouble keeping your greedy hands away from your groin.  It would be so easy to just lay down and masturbate to the sight of your curvy enemy.  The succubus looks at you with a sexy, knowing expression.\n\n");
-				player.dynStats("lus", 1+rand(8));
+				player.takeLustDamage(1+rand(8), true);
 			}
 			//[LUST GAINED PER ROUND] - Omnibus
 			if(hasStatusEffect(StatusEffects.LustAura)) {
@@ -3154,7 +3155,7 @@ import flash.utils.getQualifiedClassName;
 					if(player.lust >= (player.maxLust() * 0.33) && player.lust < (player.maxLust() * 0.66)) outputText("The pollen in the air is getting to you.\n\n");
 					if(player.lust >= (player.maxLust() * 0.66)) outputText("You flush bright red with desire as the lust in the air worms its way inside you.\n\n");
 				}
-				player.dynStats("lus", (3 + int(player.lib/20 + player.cor/25)));
+				player.takeLustDamage((3 + int(player.lib/20 + player.cor/25)), true);
 			}
 			//immolation DoT
 			if (hasStatusEffect(StatusEffects.ImmolationDoT)) {
@@ -3199,13 +3200,13 @@ import flash.utils.getQualifiedClassName;
 				}
 			}
 			//Formic Acid DoT
-			if (hasStatusEffect(StatusEffects.AntFire)) {
+			if (hasStatusEffect(StatusEffects.AntAcid)) {
 				//Countdown to heal
-				addStatusValue(StatusEffects.AntFire,1,-1);
+				addStatusValue(StatusEffects.AntAcid,1,-1);
 				//Heal wounds
-				if(statusEffectv1(StatusEffects.AntFire) <= 0) {
+				if(statusEffectv1(StatusEffects.AntAcid) <= 0) {
 					outputText("The formic acid burning " + a + short + " finally wore out.\n\n");
-					removeStatusEffect(StatusEffects.AntFire);
+					removeStatusEffect(StatusEffects.AntAcid);
 				}
 				//Deal damage if still wounded.
 				else {
@@ -3213,9 +3214,9 @@ import flash.utils.getQualifiedClassName;
 					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store15 *= 1.2;
 					if (player.racialScore(Races.ANT) <= 4) store15 *= 0.75
 					store15 = Math.round(store15 * SceneLib.combat.poisonDamageBoostedByDao());
-					store15 += maxHP() * statusEffectv2(StatusEffects.AntFire);
+					store15 += maxHP() * statusEffectv2(StatusEffects.AntAcid);
 					store15 = SceneLib.combat.fixPercentDamage(store15);
-					store15 = SceneLib.combat.doFireDamage(store15);
+					store15 = SceneLib.combat.doAcidDamage(store15);
 					if(plural) outputText(capitalA + short + " burn from lingering formic acid. <b>([font-red]" + store15 + "[/font])</b>\n\n");
 					else outputText(capitalA + short + " burns from lingering formic acid. <b>([font-red]" + store15 + "[/font])</b>\n\n");
 				}

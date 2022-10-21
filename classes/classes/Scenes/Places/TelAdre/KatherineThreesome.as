@@ -532,7 +532,7 @@ public class KatherineThreesome extends TelAdreAbstractContent
 			katherine.katherineAndUrtaHadSex(true);
 			flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
 			urta.hoursUntilHorny(2 + rand(2));
-			dynStats("lus", 20 + player.lib / 20);
+			dynStats("lus", 20 + player.lib / 20, "scale", false);
 			if (model.time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -549,7 +549,7 @@ public class KatherineThreesome extends TelAdreAbstractContent
 			outputText("Urta lasts longer than you expected, but she can't resist Kath's silver tongue forever.  She gasps and you hear a wet splattering noise from the table.  It goes on and on as Urta's balls release her pent up load.  Most of the bar is looking her way but Urta doesn't notice.  She convulses again and again as Kath's tongue tries to reach even deeper.  At last it ends and, to the sound of her sperm dripping onto the floor, Urta mumbles, \"<i>lovely.</i>\"\n\n");
 			outputText("Kath snakes back up from under the table, her whole head wet with spunk.  She works quickly to clean herself up using her tongue and some napkins, then looks at Urta.  \"<i>Awww, I think I broke her,</i>\" she giggles drunkenly.  Say, " + katherine.playerText() + ", you wanna have some fun while one-shot here recovers?\n\n");
 			outputText("\"<i>No fair,</i>\" Urta mutters weakly.\n\n");
-			dynStats("lus", 20 + player.lib / 20);
+			dynStats("lus", 20 + player.lib / 20, "scale", false);
 			katherine.katherineAndUrtaHadSex(true);
 			flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
 			urta.hoursUntilHorny(2 + rand(2));
@@ -1037,7 +1037,7 @@ public class KatherineThreesome extends TelAdreAbstractContent
 			outputText("The first to recover is Vala, who says, \"<i>that feels so good.</i>\"  She rests her hand on her wobbling belly and rubs her protruding belly button.");
 			valaCommonPostSex(katherine.hasCock());
 			outputText("Kath flips over so that she’s lying on her back with Vala sitting upright on top of her.  Vala smiles at you and mouths, \"<i>thank you,</i>\" before collapsing herself, causing an \"<i>Oof</i>\" from Katherine.  You leave your lovers to it and step out into the bar, only remembering at the last second to wipe their fluids from your chin.");
-			dynStats("lus", 10 + player.lib / 20);
+			dynStats("lus", 10 + player.lib / 20, "scale", false);
 			player.slimeFeed();
 			katherine.orgasm();
 			katherine.katherineAndValaHadSex();
@@ -1063,7 +1063,7 @@ public class KatherineThreesome extends TelAdreAbstractContent
 			outputText("Vala gets a mischevious gleam in her eye.  ");
 			valaCommonPostSex(false);
 			outputText("After you extract your hands and clean yourself off you notice Kath has pulled Vala into her lap and is just holding her.  Vala smiles at you like all is right with the world and you give each of them a kiss before leaving.");
-			dynStats("lus", 10 + player.lib / 20);
+			dynStats("lus", 10 + player.lib / 20, "scale", false);
 			player.slimeFeed();
 			katherine.orgasm();
 			katherine.katherineAndValaHadSex();

@@ -14,7 +14,6 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Items.*;
 import classes.Scenes.API.Encounter;
 import classes.Scenes.API.Encounters;
-import classes.Scenes.API.Encounters;
 import classes.Scenes.API.SimpleEncounter;
 import classes.Transformations.TransformationLib;
 import classes.display.DebugInfo;
@@ -67,13 +66,14 @@ public class CoC extends MovieClip
         return _instance;
     }
     //Game Version
-    public var debugGameVer:String = "v0.8s5.171-173";
+    public var debugGameVer:String = "v0.8s5.182";
 
     //Mod save version.
-    public var modSaveVersion:Number = 36.030;
+    public var modSaveVersion:Number = 36.031;
     public var levelCap:Number = 185;
 
-    //Lock cheats menus from public builds.
+    //Lock cheats menus from public
+    // builds.
     public var lockCheats:Boolean = true;
 
     //Used to restrict random drops from overlapping uniques
@@ -238,11 +238,7 @@ public class CoC extends MovieClip
         this.mainView.addEventListener("addedToStage",_postInit);
         this.stage.addChild( this.mainView );
         //DEBUG-SPECIFIC CONFIG SETTINGS
-        CONFIG::debug
-        {
-            lockCheats = false;
-
-        }
+        if (CoC_Settings.debugBuild) lockCheats = false;
     }
     private function _postInit(e:Event):void {
         // Hooking things to MainView.

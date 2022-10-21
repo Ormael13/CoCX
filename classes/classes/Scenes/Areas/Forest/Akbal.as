@@ -96,7 +96,7 @@ public class Akbal extends Monster
 				outputText("You hear whispering in your head. Akbal begins speaking to you as he circles you, telling all the ways he'll dominate you once he beats the fight out of you.");
 				var lustattack1:Number = 9 + rand(9);
 				if (flags[kFLAGS.AKBAL_LVL_UP] >= 1) lustattack1 += flags[kFLAGS.AKBAL_LVL_UP] + rand(flags[kFLAGS.AKBAL_LVL_UP]);
-				player.dynStats("lus", lustattack1);
+				player.takeLustDamage(lustattack1, true);
 				player.createStatusEffect(StatusEffects.Whispered,0,0,0,0);
 			}
 			//Continuous Lust Attack - 
@@ -105,7 +105,7 @@ public class Akbal extends Monster
 				outputText("The whispering in your head grows, many voices of undetermined sex telling you all the things the demon wishes to do to you. You can only blush.");
 				var lustattack2:Number = 12 + rand(12);
 				if (flags[kFLAGS.AKBAL_LVL_UP] >= 1) lustattack2 += 3 + flags[kFLAGS.AKBAL_LVL_UP] + rand(flags[kFLAGS.AKBAL_LVL_UP]);
-				player.dynStats("lus", lustattack2);
+				player.takeLustDamage(lustattack2, true);
 			}
 		}
 		

@@ -245,7 +245,7 @@ private function acceptYoga():void {
 		outputText("She then helps you into an outfit identical to her own and you both return to the gym proper.\n\n");
 
 		outputText("She instructs you to lay on the mat, and you do. She proceeds to talk you through several poses, and hovers over you to correct your positioning here or there with a soft touch. Several times she bends over you, and her enormous bosom gets right in your face. At one point she stands over your head and you accidentally get a face full of her musky crotch. After about a half hour of this, the arousal and fatigue is too much and you explain you have to quit for now.\n\n");
-		dynStats("lus", (10+player.lib/10+player.sens/20));
+		dynStats("lus", (10+player.lib/10+player.sens/20), "scale", false);
 
 		outputText("\"<i>Oh, that's too bad. But you've done pretty good for a beginner,</i>\" she helps you up off the mat and pats you gently on the back. \"<i>Want to hit the showers then?</i>\" Despite having done little more than stretching, you find you are sweating quite a bit... but something makes you wonder if her idea of hitting the shower is the same as yours.");
 		//[Shower] or [Leave]
@@ -1484,7 +1484,7 @@ private function feedYourCottonKids():void {
 	outputText("\n\n\"<i>I'll be fine, don't worry about a thing. You get home, get some rest, and keep those milk jugs full, eh?</i>\" she laughs.");
 
 	outputText("\n\nYou kiss your equine lover, ruffle the sleeping child's hair, and quietly head back to camp, leaving Cotton to take care of things.");
-	dynStats("lus", -10);
+	dynStats("lus", -10, "scale", false);
 	//You've now been milked, reset the timer for that
 	if(player.hasStatusEffect(StatusEffects.Feeder)) {
 		player.addStatusValue(StatusEffects.Feeder,1,1);

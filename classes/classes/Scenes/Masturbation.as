@@ -352,7 +352,7 @@ public class Masturbation extends BaseContent {
 			if (player.gender == 0) {
 				genderlessMasturbate();
 				flags[kFLAGS.TIMES_MASTURBATED]++;
-				dynStats("lus", -50);
+				dynStats("lus", -50, "scale", false);
 				doNext(camp.returnToCampUseOneHour);
 				return;
 			}
@@ -1726,11 +1726,7 @@ public class Masturbation extends BaseContent {
 			if (player.cocks.length > 0) {
 				if (player.cocks.length == 1) {
 					outputText("The sensations prove too much for you, and you feel the tightness building in your ");
-					if (player.normalCocks() == 1)
-						outputText("twitching manhood, growing rapidly.  You stroke furiously, feeling the pressure of your cum as it nears release.  ");
-					else if (player.hasKnot())
-						outputText("swelling, bulbous knot.  You feel it growing tighter and tighter until it's nearly twice the width of your [cock].  The pressure is an agonizing pleasure that only builds higher and higher as you come closer and closer to orgasm.  ");
-					else if (player.horseCocks() == 1)
+					if (player.horseCocks() == 1)
 						outputText("swollen equine sheath, slowly beginning to work its way up your shaft.  Pre-cum begins pouring from your [cock], slicking your [cock] as you get ready to blow.  ");
 					else if (player.tentacleCocks() == 1 || player.stamenCocks() == 1)
 						outputText("wiggling vine-like cock, growing rapidly.  You feel the rubbery surface of your tentacle prick contracting as it nears release.  Thick bulges of fluids collect and travel along the length of your [cock], the first of which is almost to your oversized tip.  ");
@@ -1742,6 +1738,8 @@ public class Masturbation extends BaseContent {
 						outputText("swollen member.  You can feel it tingling and bulging strangly as it begins to contract and pulse.  Pre-cum leaks from your [cock] in a steady stream as each 'bulb' nearly doubles in size, and then one at a time, they deflate while your urethra dilates wide.  ");
 					else if (player.anemoneCocks() == 1)
 						outputText("base.  The tentacles surrounding your [cock] go nuts, constricting around it, inadvertently firing aphrodisiacs into the orgasmic flesh as they wring a potent, hip-jerking climax from you.  ");
+					else if (player.hasKnot())
+						outputText("swelling, bulbous knot.  You feel it growing tighter and tighter until it's nearly twice the width of your [cock].  The pressure is an agonizing pleasure that only builds higher and higher as you come closer and closer to orgasm.  ");
 					else outputText("twitching manhood, growing rapidly.  You stroke furiously, feeling the pressure of your cum as it nears release.  ");
 					outputText("Pleasurable spasms overwhelm you as cum erupts from your " + player.cockDescript());
 					outputText(".  Your hips jerk in the air in time with your eruptions, spraying cum ");
@@ -1786,20 +1784,13 @@ public class Masturbation extends BaseContent {
 				//MULTICOCK
 				if (player.cocks.length > 1) {
 					outputText("The sensations prove too much for you, and you feel the tightness building in your loins.  ");
-
-					if (player.dogCocks() > player.normalCocks() && player.dogCocks() > player.horseCocks()) { //Primary Dog
-						var dogIndex:int;
-						for (dogIndex = 0; dogIndex < player.cocks.length; dogIndex++) {
-							if (player.cocks[dogIndex].hasKnot()) break;
-						}
-						outputText("Your feel your knots bulging and swelling, growing tighter and tighter until they're nearly double the width of a " + player.cockDescript(dogIndex) + ".  The agonizing pressure builds higher and tighter with every passing second as you get closer and closer to orgasm.  ");
+                    var multiTypedIndex:int;
+					
+					if ((multiTypedIndex = player.findCockWithType(CockTypesEnum.HORSE)) >= 0) { //Primary Horse
+						outputText("You feel a pulsing in your sheath, slowly working its way up your " + player.cockDescript(multiTypedIndex) + "s.  Pre-cum pours from your " + player.cockDescript(multiTypedIndex) + "s, slicking the wobbly equine shafts as they get ready to blow.  ");
 					}
-					else if (player.horseCocks() > player.normalCocks()) { //Primary Horse
-						var horseIndex:int;
-						for (horseIndex = 0; horseIndex < player.cocks.length; horseIndex++) {
-							if (player.cocks[horseIndex].cockType == CockTypesEnum.HORSE) break;
-						}
-						outputText("You feel a pulsing in your sheath, slowly working its way up your " + player.cockDescript(horseIndex) + "s.  Pre-cum pours from your " + player.cockDescript(horseIndex) + "s, slicking the wobbly equine shafts as they get ready to blow.  ");
+                    else if ((multiTypedIndex = player.findCockWithType(CockTypesEnum.DOG, 1, -1, -1, "area", 1)) >= 0) { //Primary Dog
+						outputText("Your feel your knots bulging and swelling, growing tighter and tighter until they're nearly double the width of a " + player.cockDescript(multiTypedIndex) + ".  The agonizing pressure builds higher and tighter with every passing second as you get closer and closer to orgasm.  ");
 					}
 					else { //Primary Normal
 						outputText("Your manhoods twitch, growing to their full size.  You stroke them furiously, feeling the pressure of your cum as it nears release.  ");
@@ -2205,7 +2196,7 @@ public class Masturbation extends BaseContent {
 		clearOutput();
 		if (!player.hasPerk(PerkLib.Flexibility)) {
 			outputText("You undress from your [armor] and take a seat down on the ground. You spread your legs and look down at your sex. It's aching for something more than just your fingers, and you have a craving to taste the lustful juices leaking out. A very perverted idea of cats flashes through your brain, putting a naughty smile on your face. You lay on your side and spread your legs, giving you a perfect view of your [vagina] You lean your head down towards the pleasure-hole, only to be stopped half-way there. You stick your tongue out, trying to add a few more inches, but this doesn't do anything except increase your appetite and your lust as a drop of warm saliva falls onto your [vagina]. You stretch and wriggle your tongue out in a fruitless effort to taste your dripping wet cunt, craving the feeling of your tongue caressing your lips and penetrating into your depths... but it is not to be. You sit back up, frustrated and even more aroused than you were before.");
-			dynStats("lus", 15);
+			dynStats("lus", 15, "scale", false);
 			doNext(camp.returnToCampUseOneHour);
 			return;
 		}
@@ -2279,7 +2270,7 @@ public class Masturbation extends BaseContent {
 				//Fails [Herm has a 50/50 chance of getting either.]
 				//[Male]
 				outputText("You undress from your [armor] and take a seat down on the ground, your [cock] pointing straight at your face. You stroke the erect member a few times, but then remember the cats back at the village. You stare at your [cock]; the more you look at the cock, the more your mouth craves to suck on it. You open your mouth as wide as you can and lean towards your cock, only to be stopped halfway to the tip. You stick your tongue out and try to lick the head. You pretend you're rolling your tongue around the head, but this only makes your cock harder in eagerness. You throw your head forward in an attempt to flick your tongue against it, but the [cock] is pulled back as you go forward. You slump your back onto the ground and let out a frustrated groan. The only thing you've managed to do is make yourself more aroused than when you started.");
-				dynStats("lus", 15);
+				dynStats("lus", 15, "scale", false);
 				doNext(camp.returnToCampUseOneHour);
 				return;
 			}
@@ -2355,7 +2346,7 @@ public class Masturbation extends BaseContent {
 		public function meditate(description:String = "rock"):void {
 			clearOutput();
 			outputText("You find a flat, comfortable " + description + " to sit down on and meditate.  As always, meditation brings a sense of peace and calm to you, but it eats up one hour of the day.");
-			dynStats("lus", -50);
+			dynStats("lus", -50, "scale", false);
 			dynStats("cor", -.3 - 0.3 * player.countCockSocks("alabaster"));
 			if (player.hasPerk(PerkLib.Enlightened) && player.cor < 10) HPChange(50, true);
 			fatigue( -10);

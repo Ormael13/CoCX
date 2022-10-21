@@ -251,12 +251,12 @@ use namespace CoC;
 				else dynStats("int", 1);
 				if ((player.cor > 30 && player.cor < 60) || (player.lust > 60 && player.lust < 90) || (player.lib > 40 && player.lib < 75)) {
 					outputText("to thoughts of sex.");
-					dynStats("lus", (5 + player.lib / 10));
+					dynStats("lus", (5 + player.lib / 10), "scale", false);
 					displayed = true;
 				}
 				if (((player.cor >= 60) || (player.lust >= 90) || (player.lib >= 75)) && !displayed) {
 					outputText("into daydreams of raunchy perverted sex, flooding your groin with warmth.");
-					dynStats("lus", (player.cor / 10 + player.lib / 10));
+					dynStats("lus", (player.cor / 10 + player.lib / 10), "scale", false);
 				}
 				doNext(camp.returnToCampUseOneHour);
 
@@ -290,7 +290,7 @@ use namespace CoC;
 					outputText("While exploring, you notice something unusual on the lake.  This something is quickly moving towards you at a surprising rate, much faster than anything you've ever seen before.  Wary of meeting new things in this world after your previous experiences, you decide to slip behind a nearby hill and watch it while hidden.  Soon the object comes into view and you can see that it is a boat of some kind.  It looks almost like a large open box on the water with some kind of gazebo on it.  Despite how fast it is moving, you can't see any oars or means of moving the boat.  It slows somewhat when it gets close to the shore, but is still going about as fast as you can run when it hits the shore and extends some kind of gangplank onto the lake shore.  With a close up view, you estimate that it is six feet across, ten feet long, and doesn't actually seem to have very much of it underwater.  You guess that it must be magic in some way.  There are several robe-clad figures on board.\n\n");
 					outputText("After a moment, a number of the figures disembark down the gangplank and immediately go off in different directions.  You count half a dozen of them, and guess that they are female when one of them passes by close to you and you see the hole in her outfit over her naughty bits.  You look back at the boat to see it close the gangplank, and move back onto the lake, with only one of the figures still on board.  Surprised to hear a sudden yell, you look to the side and see the clothing of the one who passed you earlier shift and twist before becoming some pink outfit that clings to her backside.  You are stunned for a moment as she disappears from sight before you shake your head and move on.  It seems there are new residents to the lake.\n\n<b>(Fetish Cultists can now be encountered!)</b>");
 					//(increase player lust from the sights they saw)
-					dynStats("lus", 5);
+					dynStats("lus", 5, "scale", false);
 					doNext(camp.returnToCampUseOneHour);
 					return;
 				}

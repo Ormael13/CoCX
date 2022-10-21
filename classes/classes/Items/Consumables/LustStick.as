@@ -37,7 +37,7 @@ package classes.Items.Consumables
 				else outputText("Honestly, it amazes you that something as little as a kiss can make a man putty in your hands.");
 				outputText("  You finish and pucker your lips, feeling fairly sexy with your new makeup on.\n\n");
 			}
-			game.player.dynStats("lus", 1);
+			game.player.dynStats("lus", 1, "scale", false);
 			return(false);
 		}
 	}

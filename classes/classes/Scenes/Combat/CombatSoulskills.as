@@ -2,14 +2,9 @@
  * Coded by aimozg on 30.05.2017.
  */
 package classes.Scenes.Combat {
-import classes.BodyParts.Arms;
-import classes.BodyParts.LowerBody;
-import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
+import classes.Items.Weapons.Tidarion;
 import classes.Monster;
-import classes.Items.ShieldLib;
-import classes.Items.WeaponLib;
 import classes.PerkLib;
 import classes.Races;
 import classes.Scenes.API.FnHelpers;
@@ -329,7 +324,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			} else if (isEnemyInvisible) {
 				bd.disable("You cannot use offensive soulskills against an opponent you cannot see or target.");
 			} else if (player.isGargoyle()) {
-				bd.disable("You cannot use blood soulskills if you not have blood at all.");
+				bd.disable("You cannot use blood soulskills if you don't have blood at all.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsBloodSwipeSF)) {
@@ -347,7 +342,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			} else if (isEnemyInvisible) {
 				bd.disable("You cannot use offensive soulskills against an opponent you cannot see or target.");
 			} else if (player.isGargoyle()) {
-				bd.disable("You cannot use blood soulskills if you not have blood at all.");
+				bd.disable("You cannot use blood soulskills if you don't have blood at all.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsHeartSeeker)) {
@@ -363,7 +358,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			} else if (isEnemyInvisible) {
 				bd.disable("You cannot use offensive soulskills against an opponent you cannot see or target.");
 			} else if (player.isGargoyle()) {
-				bd.disable("You cannot use blood soulskills if you not have blood at all.");
+				bd.disable("You cannot use blood soulskills if you don't have blood at all.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsHeartSeekerSF)) {
@@ -381,7 +376,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			} else if (isEnemyInvisible) {
 				bd.disable("You cannot use offensive soulskills against an opponent you cannot see or target.");
 			} else if (player.isGargoyle()) {
-				bd.disable("You cannot use blood soulskills if you not have blood at all.");
+				bd.disable("You cannot use blood soulskills if you don't have blood at all.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsBloodDewdrops)) {
@@ -397,7 +392,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			} else if (isEnemyInvisible) {
 				bd.disable("You cannot use offensive soulskills against an opponent you cannot see or target.");
 			} else if (player.isGargoyle()) {
-				bd.disable("You cannot use blood soulskills if you not have blood at all.");
+				bd.disable("You cannot use blood soulskills if you don't have blood at all.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsBloodDewdropsSF)) {
@@ -415,7 +410,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			} else if (isEnemyInvisible) {
 				bd.disable("You cannot use offensive soulskills against an opponent you cannot see or target.");
 			} else if (player.isGargoyle()) {
-				bd.disable("You cannot use blood soulskills if you not have blood at all.");
+				bd.disable("You cannot use blood soulskills if you don't have blood at all.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsBloodRequiem)) {
@@ -431,7 +426,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			} else if (isEnemyInvisible) {
 				bd.disable("You cannot use offensive soulskills against an opponent you cannot see or target.");
 			} else if (player.isGargoyle()) {
-				bd.disable("You cannot use blood soulskills if you not have blood at all.");
+				bd.disable("You cannot use blood soulskills if you don't have blood at all.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsBloodRequiemSF)) {
@@ -449,12 +444,12 @@ public class CombatSoulskills extends BaseCombatContent {
 			} else if (isEnemyInvisible) {
 				bd.disable("You cannot use offensive soulskills against an opponent you cannot see or target.");
 			} else if (player.isGargoyle()) {
-				bd.disable("You cannot use blood soulskills if you not have blood at all.");
+				bd.disable("You cannot use blood soulskills if you don't have blood at all.");
 			}
 		}
 	}
 	private function monsterDodgeSkill(skillName:String):Boolean {
-		if ((player.playerIsBlinded() && rand(2) == 0) || (monster.speedDodge(player) > 0)) {
+		if ((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe))) {
 			if (monster.spe - player.spe < 8) outputText("[Themonster] narrowly avoids your " + skillName + "!");
 			else if (monster.spe-player.spe < 20) outputText("[Themonster] dodges your " + skillName + " with superior quickness!");
 			else outputText("[Themonster] deftly avoids your slow " + skillName + ".");
@@ -567,8 +562,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
 			if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
 		}
-		if (player.weapon == weapons.TIDAR)
-			player.mana -= Math.min(player.maxMana() / 10, player.mana);
+		if (player.weapon == weapons.TIDAR) (player.weapon as Tidarion).afterStrike();
 		if (combat.isPureWeapon()) {
 			damage = combat.monsterPureDamageBonus(damage);
 		}
@@ -583,7 +577,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
 			var damage1:Number = damage;
 			damage = combat.FireTypeDamageBonus(damage);
-			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1);
+			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1, "scale", false);
 			damage += damage1;
 			damage *= 1.1;
 		}
@@ -688,8 +682,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
 			if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
 		}
-		if (player.weapon == weapons.TIDAR)
-			player.mana -= Math.min(player.maxMana() / 10, player.mana);
+		if (player.weapon == weapons.TIDAR) (player.weapon as Tidarion).afterStrike();
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
 			if (player.isRaceCached(Races.MOUSE, 2) && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
 			else damage *= 2;
@@ -697,7 +690,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
 			damage = combat.FireTypeDamageBonus(damage);
-			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1);
+			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1, "scale", false);
 			damage *= 1.1;
 		}
 		//soulskill mod effect
@@ -754,7 +747,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			outputText(" <b>*Critical Hit!*</b>");
 			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
 		}
-		if (crit == false && player.hasPerk(PerkLib.Rage) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
+		if (!crit && player.hasPerk(PerkLib.Rage) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
 			if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 70) player.addStatusValue(StatusEffects.Rage, 1, 10);
 			else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
 		}
@@ -1000,7 +993,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
 			damage = combat.FireTypeDamageBonus(damage);
-			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1);
+			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1, "scale", false);
 			damage *= 1.1;
 		}
 		damage *= soulskillMod();
@@ -1160,7 +1153,7 @@ public class CombatSoulskills extends BaseCombatContent {
 				doFireDamage(damage, true, true);
 				damage *= 2;
 			}
-			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1);
+			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1, "scale", false);
 			damage = Math.round(damage * 1.1);
 		}
 		else {
@@ -1221,7 +1214,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
 			damage = combat.FireTypeDamageBonus(damage);
-			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1);
+			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1, "scale", false);
 			damage *= 1.1;
 		}
 		//other bonuses
@@ -1313,12 +1306,6 @@ public class CombatSoulskills extends BaseCombatContent {
 		enemyAI();
 	}
 
-	public function VioletPupilTransformationHealing():Number {
-		var modvpth:Number = 200;
-		//if () modvpth += 5;
-		//if (player.hasPerk(PerkLib.) || player.hasPerk(PerkLib.)) modvpth *= 1.3;
-		return modvpth;
-	}
 	public function VioletPupilTransformation():void {
 		clearOutput();
 		outputText("Deciding you need additional regeneration during current fight you spend moment to concentrate and activate Violet Pupil Transformation.  Your eyes starting to glow with a violet hua and you can feel refreshing feeling spreading all over your body.\n");
@@ -1383,8 +1370,6 @@ public class CombatSoulskills extends BaseCombatContent {
 			statScreenRefresh();
 		};
 		var tempStrTou:Number = 0;
-		var tempSpe:Number = 0;
-		var tempInt:Number = 0;
 		outputText("You focus the power of your mind and soul, letting the mystic energy fill you. Your [skin] begins to crystalize as the power within you takes form. The power whirls within you like a hurricane, the force of it lifting you off your feet. This power...  You will use it to reach victory!\n");
 		doEffect.call();
 		enemyAI();

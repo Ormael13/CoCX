@@ -1179,7 +1179,7 @@ public class DesertCave extends DungeonAbstractContent
                 if (player.hasUniquePregnancy()) player.impregnationRacialCheck();
                 else player.knockUp(PregnancyStore.PREGNANCY_SAND_WITCH, PregnancyStore.INCUBATION_SAND_WITCH, 90);
                 player.sexReward("cum", "Vaginal");
-                dynStats("lus", 5);
+                dynStats("lus", 5, "scale", false);
 				mFUSCW_end();
             }
 
@@ -3423,13 +3423,13 @@ public class DesertCave extends DungeonAbstractContent
 			else if(player.hasVagina()) outputText("\n\nThe cum witch says, \"<i>Since you're being so nice about this, I can bless you with superhuman fertility.  Just a little seed inside you and you'll be swelling with babies.  Doesn't that sound nice?</i>\"");
 			else if(player.gender == 3) outputText("\n\nThe cum witch says, \"<i>Ohhh, a fellow hermaphrodite.  Tell me, would you rather I gift you with unceasing virility or the fertility of a slut in heat?  I can only give you one.</i>\"");
 			else outputText("\n\nThe cum witch says, \"<i>Oh, you lack a gender.  Why don't you pick up some sexual equipment and come back for some real fun.</i>\"");
-			//[Virility] [Fertility] [Nevermind]
+			//[Virility] [Fertility] [Never mind]
 			menu();
 			if(player.hasCock()) addButton(0,"Virility",cumWitchBlessed, true, null, null, "Receive the blessing of virility. This will increase your cum production and virility rating.");
 			if(player.hasVagina()) addButton(1,"Fertility",cumWitchBlessed,false, null, null, "Receive the blessing of fertility. This will increase your pregnancy speed and fertility rating.");
-			addButton(4,"Nevermind",changeMindAboutBlessings).hint("Nevermind that! Drop the subject. You'll be able to come back if you want.");
+			addButton(4,"Never mind",changeMindAboutBlessings).hint("Never mind that! Drop the subject. You'll be able to come back if you want.");
 		}
-		//*Nevermind ✓Kirbu
+		//*Never mind ✓Kirbu
 		public function changeMindAboutBlessings():void {
 			clearOutput();
 			outputText("Thinking better of it, you grab your [armor] and get dressed, telling the jizz-obsessed enchantress that you don't need her gifts for now.");
@@ -3501,7 +3501,7 @@ public class DesertCave extends DungeonAbstractContent
 			clearOutput();
 			outputText("Figuring these horny, pregnant sluts should be more than receptive to a little sex, you shed your [armor].\n\n");
 			outputText("The heavily pregnant sand witches all stare at your [cock biggest] with rapt attention before they begin crawling towards you.  \"<i>Please!</i>\" each of them cry out.  \"<i>Too horny!  Too many hormones!</i>\"  Some of them crawl on their hands and knees with their quadruple breasts and pregnant bellies dragging along the ground.  \"<i>We need more!</i>\"  One cries out.  \"<i>More cock!</i>\" cries another.  \"<i>More children!</i>\" begs a third rubbing her belly.  \"<i>Fill us!</i>\" chants one before the others chime in.  \"<i>Yes; Fill us! Fill us!  Fill us!</i>\"  They paw at your genitals with sexual hunger burning in their eyes.  The smell of wet pussies permeates the air, encouraging your body's own arousal.");
-			dynStats("lus", 33);
+			dynStats("lus", 33, "scale", false);
 			var fitCnt:int = player.countCocks(-1, 50);
 			var tentaCnt:int = player.countCocks(-1, 50);
 			if (tentaCnt > fitCnt) fitCnt = tentaCnt;
@@ -3926,7 +3926,7 @@ public class DesertCave extends DungeonAbstractContent
 			clearOutput();
 			outputText("You sit in the tub for a while, letting the fragrant fluids soak into your " + player.skinFurScales() + ".  Yet, you have work to do, and eventually, you tire of relaxing in the sand witches' endless white bounty.  You pull out the tub's plug and climb out, finding a towel on the wall.  Thankfully, the milk doesn't seem to leave behind any residue, and you feel clean and refreshed, if a bit horny.");
 			//(+Lust, -Fatigue)
-			dynStats("lus", 10);
+			dynStats("lus", 10, "scale", false);
 			fatigue(-50);
 			doNext(playerMenu);
 		}

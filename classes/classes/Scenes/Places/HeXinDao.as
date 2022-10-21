@@ -84,7 +84,7 @@ public class HeXinDao extends BaseContent
 		outputText("\n\nDo you buy one from the " + flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] + " girl?");
 		menu();
 		if (flags[kFLAGS.SPIRIT_STONES] >= 10) addButton(1, "Yes", riverislandVillageStuffLunarClothing2);
-		else addButtonDisabled(1, "Yes", "You not have enough spirit stones to buy anything here");
+		else addButtonDisabled(1, "Yes", "You don't have enough spirit stones to buy anything here");
 		addButton(3, "No", riverislandVillageStuffLunar);
 	}
 	public function riverislandVillageStuffLunarClothing2():void {
@@ -222,14 +222,14 @@ public class HeXinDao extends BaseContent
              addButton(7, "HighSFRBot", buyItem2,consumables.HGSFRPB, sayLine2(consumables.HGSFRPB,"It's a rather useful item. I sell this to all cultivators at Soul Exalt stage or higher, this bottle of pills can help you restore some of your soulforce and would provide much more than the mid-grade one.")).hint("Bottle of High-grade Soulforce Recovery Pill.").disableIf(!hasSoulExalt);
              addButton(8, "SupSFRBotl", buyItem2,consumables.SGSFRPB, sayLine2(consumables.SGSFRPB,"It's a rather useful item. I sell this to all cultivators at Soul King stage or higher, this bottle of pills can help you restore some of your soulforce and would provide much more than the high-grade one.")).hint("Bottle of Superior-grade Soulforce Recovery Pill.").disableIf(!hasSoulKing);
 
-             addButton(10, "E.P.Bottle", buyItem2,useables.E_P_BOT, sayLine2(useables.E_P_BOT,"These bottles can be used to organize SoulForce pills. Due to the nature of the pills, they must be consumed shortly after opening the bottle, or it won't work. Some cultivators have theorized on the properties of the pills for a long time, but no definitive answer has been reached.")).hint("Empty Pills Bottle.");
+             addButton(10, "E.P.Bottle", buyItem2,useables.E_P_BOT, sayLine2(useables.E_P_BOT,"These bottles can be used to organize SoulForce pills. Due to the nature of the pills, they must be consumed shortly after opening the bottle, or it won't work. Some cultivators have theorized on the properties of the pills for a long time, but no definitive answer has been reached.")).hint("Empty Pill Bottle.");
 
              addButton(14, "Back", golemmerchant);
             statScreenRefresh();
         }
         function TierI():void {
             buyItem1 = curry(confirmBuy1,TierI,"Golem",1);
-            buyItem2 = curry(confirmBuy1,TierI,"Golem",0.2);
+            buyItem2 = curry(confirmBuy2,TierI,"Golem",0.2);
 			menu();
             addButton(2, "Bag of Cosmos", buyItem2,consumables.BAGOCOS, sayLine2(consumables.BAGOCOS,"A quintessential item for all soul cultivators, this little bag is dimensionally transcendental, that is, it's bigger on the inside. ")).hint("Bag of Cosmos.");
 			addButton(3, "BT.Solution", buyItem2,useables.BTSOLUTION, sayLine2(useables.BTSOLUTION,"This vial contain solution commonly used by body cultivators. In case of anyone else trying to ingest this fluid it raged from sever ingestion to death.")).hint("Vial of Body Tempering Solution.");
@@ -248,7 +248,7 @@ public class HeXinDao extends BaseContent
 		}
 		function TierII():void {
             buyItem1 = curry(confirmBuy1,TierII,"Golem",1);
-            buyItem2 = curry(confirmBuy1,TierII,"Golem",0.2);
+            buyItem2 = curry(confirmBuy2,TierII,"Golem",0.2);
 			menu();
             addButton(5, "Comet", buyItem2,consumables.COMETMA,sayLine2(consumables.COMETMA,"It's a manual for Comet, this technique allows you to project a shard of soulforce, which will come crashing down upon your opponent as a crystalline comet.  Perfect for when you are fighting groups of enemies, it also becomes more powerful as long as you keep training your body and soul."),"\n\nWhether you are going to try to go deeper into all that 'soulforce' stuff or not, at least you now have something to use when fighting groups of enemies.  You don't often meet more than one enemy at at a time, but you're sure that deeper in this forsaken realm you will face groups or maybe even hordes of demons at once. Best to be prepared. ").hint("Comet Manual.");
 			addButton(6, "V P Trans", buyItem2,consumables.VPTRMAN,sayLine2(consumables.VPTRMAN,"It's a manual for Violet Pupil Transformation, this advanced technique allows you to channel soulforce into regenerative power, allowing you to recover even from the brink of death.  Its only flaw is that it constantly drains the cultivator's soulforce. "),"\n\nIt seems like it's similar to a healing spell soul skill, but instead of being used immediately, with enough soulforce it could be kept active for a very long period of time.  It could give you an edge against the demons.  Additionally, the ability to heal from the brink of death could prove to be useful in future fights.  ").hint("Violet Pupil Transformation Manual.");
@@ -260,7 +260,7 @@ public class HeXinDao extends BaseContent
 		}
 		function TierIII():void {
             buyItem1 = curry(confirmBuy1,TierIII,"Golem",1);
-            buyItem2 = curry(confirmBuy1,TierIII,"Golem",0.2);
+            buyItem2 = curry(confirmBuy2,TierIII,"Golem",0.2);
 			menu();
 			addButton(0, "Nonuple Thrust", buyItem2,consumables.NONTMAN, sayLine2(consumables.NONTMAN,"It's a manual for Nonuple Thrust, this technique allows you to unleash nine thrusts. As you train your body and soul. "), "\n\nSince you are going deeper into soulforce, you got something more advanced to train with.  The name of the manual seems like it could have been influenced by this realm...or it's just a coincidence.  ").hint("Nonuple Thrust Manual.").disableIf(!hasSoulSprite);
 			addButton(1, "GHoMB", buyItem2,consumables.HOB3MAN, sayLine2(consumables.HOB3MAN,"It's a manual for Grandiose Hail of Moon Blades, this technique allows you to form a huge amount of etheral weapons traveling at extreme speeds. As you train your body and soul, this skill will become stronger."), "\n\nSince you are going deeper into soulforce, you got something more advanced to train with.  The name of the manual is strange, but it makes you remember something...but what and from where you not certain.  ").hint("Grandiose Hail of Moon Blades Manual.").disableIf(!hasSoulSprite);
@@ -423,12 +423,13 @@ public class HeXinDao extends BaseContent
     }
     private function exchange(value:int,toStones:Boolean=true):void{
         if(toStones){
+            outputText("\n\nYou count out the gems before giving them to the merchant. ")
             switch(value){
-                case 1:outputText("You count out the gems before giving them to the merchant. With noticable mumbling about you being stingy he slowly finishes the transaction, giving you one spirit stone.");break;
-                case 5:outputText("You count out the gems before giving them to the merchant. With barely noticable mumbling about the customer being stingy he slowly finishes the transaction, giving you five spirit stones.");break;
-                case 10:outputText("You count out the gems before giving them to the merchant. He finishes the transaction, giving you ten spirit stones.");break;
-                case 50:outputText("You count out the gems before giving them to the merchant. With slight haste he finishes the transaction, giving you fifty spirit stones.");break;
-                case 100:outputText("You count out the gems before giving them to the merchant. With haste, he finishes the transaction, giving you a hundred spirit stones.");break;
+                case 1:outputText("With noticable mumbling about you being stingy he slowly finishes the transaction, giving you one spirit stone.");break;
+                case 5:outputText("With barely noticable mumbling about the customer being stingy he slowly finishes the transaction, giving you five spirit stones.");break;
+                case 10:outputText("He finishes the transaction, giving you ten spirit stones.");break;
+                case 50:outputText("With slight haste he finishes the transaction, giving you fifty spirit stones.");break;
+                case 100:outputText("With haste, he finishes the transaction, giving you a hundred spirit stones.");break;
             }
             player.gems -= 20*value;
             flags[kFLAGS.SPIRIT_STONES]+=value;
@@ -825,7 +826,7 @@ public class HeXinDao extends BaseContent
 			}
 			else {
 				flags[kFLAGS.SPIRIT_STONES] -= 10;
-				outputText("\n\nYou fellow Erma behind the shop into the backyard. She has a field there for target practice. You spend the better part of the day shooting arrows, practicing and improving your aim while Erma corrects your stance and gives advice. You leave the village with improved skills at archery.");
+				outputText("\n\nYou follow Erma behind the shop into the backyard. She has a field there for target practice. You spend the better part of the day shooting arrows, practicing and improving your aim while Erma corrects your stance and gives advice. You leave the village with improved skills at archery.");
 				if (!player.hasStatusEffect(StatusEffects.Kelt)) player.createStatusEffect(StatusEffects.Kelt, 10, 0, 0, 0);
 				else player.addStatusValue(StatusEffects.Kelt, 1, 10);
 				if (player.statusEffectv1(StatusEffects.Kelt) >= 100) player.changeStatusValue(StatusEffects.Kelt,1,100);
@@ -1317,7 +1318,7 @@ public function soularena():void {
 		if (player.statusEffectv1(StatusEffects.GolemancerShop) == 0) {
 			outputText("Come to think of it, you have been a very faithful customer... So I'll give you a one time deal. 500 gems and it's yours.</i>\"");
 			if (player.gems >= 500) addButton(1, "Buy", golemancershopPermGolemsUpgradesGuideYes);
-			else addButtonDisabled(1, "Buy", "You not have enough gems to buy this.");
+			else addButtonDisabled(1, "Buy", "You don't have enough gems to buy this.");
 		}
 		addButton(3, "Don't Buy", golemancershopRepeat);
 	}

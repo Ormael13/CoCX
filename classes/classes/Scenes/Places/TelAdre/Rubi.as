@@ -1018,7 +1018,7 @@ public function teaseRubi():void {
 		outputText("\n\nYou slowly lick your fingers clean and kiss [rubi em], letting [rubi em] taste her own juices.  [rubi Ey] giggles and licks your face clean as well, until not a drop remains.");
 		outputText("\n\nWith your devious fun accomplished, you stand, make yourself look presentable, and head out the door.  Your last sight of Rubi is that of [rubi em] sitting spread eagle on the couch with a supremely satisfied look on [rubi eir] face.");
 	}
-	dynStats("lus", 5+player.lib/10);
+	dynStats("lus", 5+player.lib/10, "scale", false);
 	doNext(camp.returnToCampUseOneHour);
 }
 

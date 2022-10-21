@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes 
+package classes.Scenes
 {
 import classes.BaseContent;
 import classes.CoC;
@@ -10,7 +10,7 @@ import classes.CoC;
 public class Changelog extends BaseContent
 	{
 		
-		public function Changelog() 
+		public function Changelog()
 		{}
 		
 		public function accessChangelogMenu():void {
@@ -155,9 +155,9 @@ public class Changelog extends BaseContent
 			outputText("-New mutation perk: Hollow Fangs (Final Form). Req. having Hollow Fangs (Evolved) perk. Effects: +1 to vampire race score, +60% tou multi, increase max thirst stacks by 10, +20% more healed from Vampire Bite, each Vampire Bite giving 3 stacks and deal +100% lust dmg\n");
 			outputText("-New mutation perk: Twin Hearts (Final Form). Req. having Twin Hearts (Evolved) perk. Effects: +1 to all taur races, +75% tou/spe multi, +160% fatigue recovery, with tauric/drider body: +400% fatigue recovery, reduce Charge fatigue cost by ~40% as well as its cooldown by 4, increase damage by 200%.\n");
 			outputText("-New range weapon (by Ormael): Old Javelins - buyable at Erma Swiftarrow shop in He'Xin'Dao. Cost 5 spirit stones. Atk is 1 and there 10 of them.\n");
-			outputText("-New consumable item: a bottle of high-grade Soulforce Recovery Pills. Costs 3610 gems. It's gained by putting in empty pills bottle 10 high-grade soulforce recovery pills. Action that is only doable in camp (Camp Actions > Spend Time > Fill bottle)\n");
+			outputText("-New consumable item: a bottle of high-grade Soulforce Recovery Pills. Costs 3610 gems. It's gained by putting in empty pill bottle 10 high-grade soulforce recovery pills. Action that is only doable in camp (Camp Actions > Spend Time > Fill bottle)\n");
 			outputText("-New consumable item: superior-grade Soulforce Recovery Pill - buyable at golem shop in He'Xin'Dao. Costs 2160 gems. Recover soulforce: 21,600 + 8% max of max soulforce.\n");
-			outputText("-New consumable item: a bottle of superior-grade Soulforce Recovery Pills. Costs 21610 gems. It's gained by putting in empty pills bottle 10 superior-grade soulforce recovery pills. Action that is only doable in camp (Camp Actions > Spend Time > Fill bottle)\n");
+			outputText("-New consumable item: a bottle of superior-grade Soulforce Recovery Pills. Costs 21610 gems. It's gained by putting in empty pill bottle 10 superior-grade soulforce recovery pills. Action that is only doable in camp (Camp Actions > Spend Time > Fill bottle)\n");
 			outputText("-Ascension: Natural Metamorph would grant Metamorph (Ex) perk too.\n");
 			outputText("-When Belisa Affection reach 80%+ PC can use 6 holy bands at once. If it reach 120% limit increase to 8 holy bands. Her affection cap is now 120% not 100% too.\n");
 			outputText("-Belisa texts for putting on and removing holy bands been added/expanded.\n");
@@ -332,11 +332,30 @@ public class Changelog extends BaseContent
 			outputText("-Fix many typo in wood elf that weren't corrected. Improve Elven Eye slightly. Barrage now can deliver poison and does so with great effectiveness when fighting groups! (Liadri)\n");
 			outputText("-Player will properly use whatever natural weapon availlable when fighting in feral mode. Feral mode toggle fully fixed. Fix kraken and scylla nat weapon somehow being hidden behind stealth?? (Liadri)\n");
 			outputText("-Amily, Alvina, Futa+Bimbo fixes (Svalkash)\n");
+			outputText("-Kiha x Hel threesome button fix, Goo In button fix, Sidonie assfuck now changes butt, Fixed Darkslime EL encounter for slime PCs (Svalkash)\n");
+			outputText("-desc fix 4 troll village, Gym no longer sends you back every hour, fix sf menu display cost not showing. (Jtecx)\n");
+			outputText("-Fixed Slime (loss of slime hunger bug)\n");
+			outputText("-Fix for Multi Attacks. Spears work as intended now (khovel PR#283)\n");
+			outputText("-Minoking new bug fixed. Ayo armor lingering buff fixed. Epic Elementals in S.P.Turn fixed (Svalkash PR#286)\n");
+			outputText("-Cat subraces reworked to allow more flexible part mixing (character is considered subrace that has the most distinctive parts). (aimozg)");
+			outputText("-Fixed Bicorn horns giving Alicorn score instead of Nightmare. (aimozg)\n");
+			outputText("-Regular Nipples added to metamorph. Racial sorting is now persistant to the one you set. MB is now blocked from being encountered until you meet and agree to the visit to the factory with Marae. Jiangshi \"armour\" now forces itself onto the player after it saves and removes the current set. Mouse Cocoa TF colour selection null fix. Kirin added to Heart Of The Storm IM Races qualifier. (Jtecx PR#284)\n");
+			outputText("-Kraken display fix and small Tidarion rebalance. (Svalkash PR#288)\n");
+			outputText("-Hydra TF no longer grants snake (gorgon) hair (since they now negatively affect hydra score).\n");
+			outputText("-A bunch of metamorph and transformation fixes been piling up for a few months now (EragonX)\n");
+			outputText("-Smol bugfix to nat metamorph auto-proccing + facemem typo (Jtex)\n");
+			outputText("-Tidarion now deals fire damage properly. Gargoyle force impregnation behaviour fixed. Ant venom damage changed to be acid. Added Phylla to Soulsense. Added short hints for egg colors. (Svalkash)\n");
+			outputText("-Fixed some recent bugs and typos from Discord (Svalkash)\n");
+			outputText("-SH:Other - makes Corruption Tolerance twice as effective (Svalkash)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");// (khovel)
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
@@ -346,7 +365,24 @@ public class Changelog extends BaseContent
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");
 			outputText("-Fixed Bugs: Akbal been weak to fire not ice, Insightful Resources I-VI perks bonus to SF been lower than 5 per wis point, recovery of fatigue when waiting been lower than when attacking, Dao of Elements not giving additional % resistances after first 10%, missing bonus to acid elemental arrows, Holy Bands Managment locked behind having 3rd one band, ");
-			outputText("Centaur race bonuses error fixed to orginal values, Aether Twins following PC throu ascension in case they been equipped, Lusty Maiden Armor treated as already legendary item, wrong labeled gorgon eyes on race page, Jiaghsi curing leaving leftover effects of Cursed Tag options\n");/*ostatni punkt changelogu
+			outputText("Centaur race bonuses error fixed to orginal values, Aether Twins following PC throu ascension in case they been equipped, Lusty Maiden Armor treated as already legendary item, wrong labeled gorgon eyes on race page, Jiaghsi curing leaving leftover effects of Cursed Tag options\n");
+			//0.8s5.178
+			outputText("-Fixed bicorn horn score (aimozg)\n");
+			outputText("-Kirin, Fey-Draconic leg/armtype (respectively) added to DraconicBones Valid racetypes. -Fixed HxD merchants checking wrong currency for purchases (Jtecx PR#289)\n");
+			outputText("-Typos (Svalkash PR#290)\n");
+			//0.8s5.179
+			outputText("-Fix kraken and scylla natural weapon somehow being locked behind stealth??\n");
+			outputText("-All whips now give an increase in tease damage!\n");
+			outputText("-Fix faeri dragon leg sprite not showing\n");
+			outputText("-Frost wyrm fur now can be dyed.\n");
+			outputText("-Red panda fur pattern added to sprite files.\n");
+			outputText("-Arch Imp Sprite added to sprite files.\n");
+			outputText("-Valeria goo armor now has an official sprite\n");
+			outputText("-Some minor bugfixes and typos and something else (Svalkash PR #291)\n");
+			outputText("-small tweaks and patches to trollvillage and mindbreaker (Jtecx PR#292).\n");
+			//0.8s5.180
+			//outputText("-\n");
+			/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
@@ -423,17 +459,17 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -469,6 +505,15 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -805,8 +850,8 @@ public class Changelog extends BaseContent
 			outputText("-From time to time Dinah can present PC with some small things (gifts?). It won't happen usualy more often that once a day. Oh and she not gonna run to notify about this like Marble, option to get smth from her for free will became avialable among her interactions options.\n");
 			outputText("-Defeat would progress time only for six not eigth hours.\n");
 			outputText("-PerksDB V2 is released, but in beta. Missing main feature of perk description, but the layout will be as such. Thoughts? -Jtecx\n");
-			outputText("-Options in Alteration of Cursed Tag: No limiter -> Your zombified body is extremely resilient to physical damage and thus grants you +40% damage reduction. Furthermore the absence of a brain limiter allows you to push your limb strength beyond their normal capacity increasing your total strength by 100% of its value at the cost of your body integrity, taking light libido weakening on each attack. ");
-			outputText("This is a togglable ability. / Unliving Leech -> Double the benefits of Life Leech and the power cap on Energy harvested from Energy Dependant. / Undead resistance -> Gain Immunity to Cold, Poison and Fatigue damage. / Vital Sense -> You sense and see your opponents strong vital points which grants you increased critical damage. Increase critical strike damage multiplier by 1 time. / ");
+			outputText("-Options in Alteration of Cursed Tag: No Limiter -> Your zombified body is extremely resilient to physical damage and thus grants you +40% damage reduction. Furthermore the absence of a brain limiter allows you to push your limb strength beyond their normal capacity increasing your total strength by 100% of its value at the cost of your body integrity, taking light libido weakening on each attack. ");
+			outputText("This is a togglable ability. / Unliving Leech -> Double the benefits of Life Leech and the power cap on Energy harvested from Energy Dependant. / Undead Resistance -> Gain Immunity to Cold, Poison and Fatigue damage. / Vital Sense -> You sense and see your opponents strong vital points which grants you increased critical damage. Increase critical strike damage multiplier by 1 time. / ");
 			outputText("Zombified -> You are immune to mental attacks that would affect living sane beings. Furthermore you have unlimited fatigue.\n");
 			outputText("-Vladimir Regalia (by Liadri) added to Kaiba temporaly. It's light armor with +100% damage dealt from grapple and Dark ability, Player suffer from 5% degeneration during the day but regenerate 5% faster at night instead.\n");
 			outputText("-In mutation racial perks all perks with suffixes (Evolved) and (Final Form) been renamed to (Primitive) and (Evolved) respectively.\n");
@@ -1452,7 +1497,7 @@ public class Changelog extends BaseContent
 			outputText("-Increased max lvl camp npc's can attain after reaching end of training: Ceani (lvl 98), Diana (lvl 69), Dinah (lvl 56), Etna (lvl 96), Electra (lvl 96), Ember (lvl 98), Isabella (lvl 98), Kiha (lvl 99), Kindra (lvl 99), Luna (lvl 99)\n");
 			outputText("-Increased max lvl npc's outside camp can attain: Akbal (lvl 98), Izumi (lvl 96), Minerva (lvl 95), Priscilla (lvl 98)\n");
 			outputText("-Arena have now in challange section 2nd type of gargoyle enemy (this one is more of female-like one with axe tail instead of mace tail).\n");
-			outputText("-5 new achievments. (4 shadow ones)\n");	
+			outputText("-5 new achievments. (4 shadow ones)\n");
 			outputText("-Explore option named 42 was moved to silly mode.\n");
 			outputText("-Follower Zenji now scales up to PC lvl cap (150 > 185). He will also have gradualy increasing other combat stats beside raw stats and XP reward for beating him will be much higher.\n");
 			outputText("-Lover Zenji get new options: Sleep With (variants for having or not cabin), Nightwatch, Assist me (allowing to take him as henchman)\n");
@@ -2200,10 +2245,10 @@ public class Changelog extends BaseContent
 			outputText("-New head jewelery/accesory/misc (by Liadri): Scanner goggles - craftable at goblin workshop (5 metal pieces, 200 nails, 2 energy core, Machinist Goggles and BP). Cost 4030 gems, immunise against blind, increase critical chance with spell and attack by 5%.\n");
 			outputText("-New head jewelery/accesory/misc (by Liadri): S.A Tech Goggles - craftable at goblin workshop (10 metal pieces, 500 nails, 5 Energy core, Scanner goggles and BP). Cost 11105 gems, immunise against blind, increase critical chance with spell and attack by 10%.\n");
 			outputText("-New consumable item: Airweed - buyable at Pinchou shop. Cost 10 gems and grants water breathing for 24 hours.\n");
-			outputText("-New consumable item: a bottle of low-grade Soulforce Recovery Pills. Costs 110 gems. It's gained by putting in empty pills bottle 10 low-grade soulforce recovery pills. Action that is only doable in camp (Camp Actions > Spend Time > Fill bottle).\n");
-			outputText("-New consumable item: a bottle of mid-grade Soulforce Recovery Pills. Costs 610 gems. It's gained by putting in empty pills bottle 10 mid-grade soulforce recovery pills. Action that is only doable in camp (Camp Actions > Spend Time > Fill bottle)\n");
+			outputText("-New consumable item: a bottle of low-grade Soulforce Recovery Pills. Costs 110 gems. It's gained by putting in empty pill bottle 10 low-grade soulforce recovery pills. Action that is only doable in camp (Camp Actions > Spend Time > Fill bottle).\n");
+			outputText("-New consumable item: a bottle of mid-grade Soulforce Recovery Pills. Costs 610 gems. It's gained by putting in empty pill bottle 10 mid-grade soulforce recovery pills. Action that is only doable in camp (Camp Actions > Spend Time > Fill bottle)\n");
 			outputText("-New consumable item: a Fasting Pill. Costs 100 gems and buyable at golem shop for anyone with Job: Soul Cultivator perk. Req. to have hunger mode enabled to show up in golem shop offer. Would cause hunger decrease slower for 3 days (2 less points of hunger per hour and if it will be more that current rate of decreasing hunger it may even very slowly increase increase satiety). Using pills in succession would only extend duration by 1 day per additional pill.\n");
-			outputText("-New usable item: Empty Pills Bottle. Costing 10 gems and it's buyable at golem merchant in HXD. Used to store 10 pills of any kind. Due to manufacture process and realm interferances after opening full bottle all pills must be used in a span of few minutes or they would loose all effectivness.\n");
+			outputText("-New usable item: Empty Pill Bottle. Costing 10 gems and it's buyable at golem merchant in HXD. Used to store 10 pills of any kind. Due to manufacture process and realm interferances after opening full bottle all pills must be used in a span of few minutes or they would loose all effectivness.\n");
 			outputText("-New usable item: Energy Core. Costing 1015 gems and it's craftable by goblin PC. Req. 5 metal pieces and 3 golem cores. A power source for devices.\n");
 			outputText("-New usable item: Mechanism. Costing 1200 gems and it's craftable by goblin PC. Req. 5 metal pieces and 200 nails. A complex set of gear and gyro.\n");
 			outputText("-New TF item: Methir Crystal. Cave Wyrm can drop this or it can be found during caves exploration. Using this item will turn PC into cave wyrm. Half Cave Wyrm/Cave Wyrm bonuses at 5/10 pts in racial score (scalable): +30/50 to max Str, +35/70 to max Tou, +25/50 to max Lib, -15/30 to max Wis.\n");
