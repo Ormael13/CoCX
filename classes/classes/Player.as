@@ -112,28 +112,29 @@ use namespace CoC;
 
 		//Mastery attributes
 		public var combatMastery:Array =[
-            {combat: "Feral", 		level:0, experience:0, melee: true, desc:"<b>Dao of Feral Beast</b>"},
-            {combat: "Gauntlet", 	level:0, experience:0, melee: true, desc:"<b>Dao of Gauntlets</b>"},
-            {combat: "Dagger", 		level:0, experience:0, melee: true, desc:"<b>Dao of Dagger</b>"},
-            {combat: "Sword", 		level:0, experience:0, melee: true, desc:"<b>Dao of Sword</b>"},
-            {combat: "Axe", 		level:0, experience:0, melee: true, desc:"<b>Dao of Axe</b>"},
-            {combat: "Bludgeon", 	level:0, experience:0, melee: true, desc:"<b>Dao of Bludgeon</b>"},
-            {combat: "Dueling", 	level:0, experience:0, melee: true, desc:"<b>Dao of Dueling</b>"},
-            {combat: "Polearm", 	level:0, experience:0, melee: true, desc:"<b>Dao of Polearm</b>"},
-            {combat: "Spear", 		level:0, experience:0, melee: true, desc:"<b>Dao of Spear</b>"},
-            {combat: "Whip", 		level:0, experience:0, melee: true, desc:"<b>Dao of Whip</b>"},
-            {combat: "Exotic", 		level:0, experience:0, melee: true, desc:"<b>Dao of Exotic</b>"},
-            {combat: "Archery", 	level:0, experience:0, melee: false, desc:"\n<b>Dao of Archery</b>"},
-            {combat: "Throwing", 	level:0, experience:0, melee: false, desc:"<b>Dao of Throwing Weapons</b>"},
-            {combat: "Firearms", 	level:0, experience:0, melee: false, desc:"<b>Dao of Firearms</b>"},
-            {combat: "DualSmall", 	level:0, experience:0, melee: true, desc:"\n<b>Dual Wield Mastery - Small</b>"},
-            {combat: "DualNormal", 	level:0, experience:0, melee: true, desc:"<b>Dual Wield Mastery - Normal</b>"},
-            {combat: "DualLarge", 	level:0, experience:0, melee: true, desc:"<b>Dual Wield Mastery - Large</b>"},
-            {combat: "DualFirearm", level:0, experience:0, melee: false, desc:"<b>Dual Wield Mastery - Firearms</b>"},
-            {combat: "Small", 		level:0, experience:0, melee: true, desc:"\n<b>Weapon Mastery - Small</b>"},
-            {combat: "Normal", 		level:0, experience:0, melee: true, desc:"<b>Weapon Mastery - Normal</b>"},
-            {combat: "Large", 		level:0, experience:0, melee: true, desc:"<b>Weapon Mastery - Large</b>"},
-            {combat: "Range", 		level:0, experience:0, melee: false, desc:"<b>Weapon Mastery - Ranged</b>"}
+        /*00*/	{combat: "Feral", 		level:0, experience:0, melee: true, desc:"<b>Dao of Feral Beast</b>"},
+        /*01*/	{combat: "Gauntlet", 	level:0, experience:0, melee: true, desc:"<b>Dao of Gauntlets</b>"},
+        /*02*/	{combat: "Dagger", 		level:0, experience:0, melee: true, desc:"<b>Dao of Dagger</b>"},
+        /*03*/	{combat: "Sword", 		level:0, experience:0, melee: true, desc:"<b>Dao of Sword</b>"},
+        /*04*/	{combat: "Axe", 		level:0, experience:0, melee: true, desc:"<b>Dao of Axe</b>"},
+        /*05*/	{combat: "Bludgeon", 	level:0, experience:0, melee: true, desc:"<b>Dao of Bludgeon</b>"},
+        /*06*/	{combat: "Dueling", 	level:0, experience:0, melee: true, desc:"<b>Dao of Dueling</b>"},
+        /*07*/	{combat: "Polearm", 	level:0, experience:0, melee: true, desc:"<b>Dao of Polearm</b>"},
+        /*08*/	{combat: "Spear", 		level:0, experience:0, melee: true, desc:"<b>Dao of Spear</b>"},
+        /*09*/	{combat: "Whip", 		level:0, experience:0, melee: true, desc:"<b>Dao of Whip</b>"},
+        /*10*/	{combat: "Exotic", 		level:0, experience:0, melee: true, desc:"<b>Dao of Exotic</b>"},
+        /*11*/	{combat: "Archery", 	level:0, experience:0, melee: false, desc:"\n<b>Dao of Archery</b>"},
+        /*12*/	{combat: "Throwing", 	level:0, experience:0, melee: false, desc:"<b>Dao of Throwing Weapons</b>"},
+        /*13*/	{combat: "Firearms", 	level:0, experience:0, melee: false, desc:"<b>Dao of Firearms</b>"},
+        /*14*/	{combat: "DualSmall", 	level:0, experience:0, melee: true, desc:"\n<b>Dual Wield Mastery - Small</b>"},
+        /*15*/	{combat: "DualNormal", 	level:0, experience:0, melee: true, desc:"<b>Dual Wield Mastery - Normal</b>"},
+        /*16*/	{combat: "DualLarge", 	level:0, experience:0, melee: true, desc:"<b>Dual Wield Mastery - Large</b>"},
+        /*17*/	{combat: "DualFirearm", level:0, experience:0, melee: false, desc:"<b>Dual Wield Mastery - Firearms</b>"},
+        /*18*/	{combat: "Small", 		level:0, experience:0, melee: true, desc:"\n<b>Weapon Mastery - Small</b>"},
+        /*19*/	{combat: "Normal", 		level:0, experience:0, melee: true, desc:"<b>Weapon Mastery - Normal</b>"},
+        /*20*/	{combat: "Large", 		level:0, experience:0, melee: true, desc:"<b>Weapon Mastery - Large</b>"},
+        /*21*/	{combat: "Massive", 	level:0, experience:0, melee: true, desc:"<b>Weapon Mastery - Massive</b>"},
+        /*22*/	{combat: "Range", 		level:0, experience:0, melee: false, desc:"<b>Weapon Mastery - Ranged</b>"}
 		];
 
         public function initCombatMastery():void{
@@ -5630,33 +5631,56 @@ use namespace CoC;
             var combatMasteryPos:int = 19;	// default to Normal Weapon size
             if(weaponSpecials("Small") || weaponSpecials("Dual Small")){combatMasteryPos = 18}
             else if(weaponSpecials("Large")){combatMasteryPos = 20}
+            else if(weaponSpecials("Massive")){combatMasteryPos = 21}
             else if(isFeralCombat()){combatMasteryPos = 0}
-            else if(isBowTypeWeapon() || isThrownTypeWeapon()){combatMasteryPos = 21}
+            else if(isBowTypeWeapon() || isThrownTypeWeapon()){combatMasteryPos = 22}
 
-            if(combatMastery[combatMasteryPos].level >= 4 && spe >= 40)  {
-				rval+=1;
-			}
-            if(combatMastery[combatMasteryPos].level >= 8 && spe >= 60) {
-                if(combatMasteryPos === 18) rval+=2;
-                else rval+=1;
-				// large stops here
-			}
-            if(combatMastery[combatMasteryPos].level >= 16 && spe >= 90) {
-                if(combatMasteryPos === 18) rval+=2;
-                else if(combatMasteryPos != 20 ) rval+=1;
-			}
-            if(combatMastery[combatMasteryPos].level >= 24 && spe >= 130) {
-                if(combatMasteryPos === 18) rval+=2;
-                else if(combatMasteryPos != 20 ) rval+=1;
-			}
-            if(combatMastery[combatMasteryPos].level >= 32 && spe >= 180) {
-                if(combatMasteryPos === 18) rval+=2;
-                else if(combatMasteryPos != 20 ) rval+=1;
-			}
 
+			/*
+				40 for small + norm and 30 for rest
+				and it's 10 20 30 40
+				then 10 25 40
+				and finaly 15 30
+				i said 3 large atk not 4, 4 normal atk not 5 and 5 small atks not 6
+
+			 */
+            // Feral Attack Count
+            if(combatMasteryPos == 0){
+                if(combatMastery[combatMasteryPos].level >= 10) rval += 1;
+                if(combatMastery[combatMasteryPos].level >= 20) rval += 1;
+                if(combatMastery[combatMasteryPos].level >= 30) rval += 1;
+                if(combatMastery[combatMasteryPos].level >= 40) rval += 1;
+            }
+			// Small Weapon Attack Count
+			if(combatMasteryPos == 18){
+                if(combatMastery[combatMasteryPos].level >= 10) rval += 1;
+                if(combatMastery[combatMasteryPos].level >= 20) rval += 1;
+                if(combatMastery[combatMasteryPos].level >= 30) rval += 1;
+                if(combatMastery[combatMasteryPos].level >= 40) rval += 1;
+			}
+			// Normal Weapon attack count
+            if(combatMasteryPos == 19){
+                if(combatMastery[combatMasteryPos].level >= 10) rval += 1;
+                if(combatMastery[combatMasteryPos].level >= 25) rval += 1;
+                if(combatMastery[combatMasteryPos].level >= 40) rval += 1;
+            }
+			// Large Weapon attack count
+            if(combatMasteryPos == 20){
+                if(combatMastery[combatMasteryPos].level >= 15) rval += 1;
+                if(combatMastery[combatMasteryPos].level >= 30) rval += 1;
+            }
+			// Massive Weapon attack count
+            if(combatMasteryPos == 21){
+                if(combatMastery[combatMasteryPos].level >= 15) rval += 1;
+                if(combatMastery[combatMasteryPos].level >= 30) rval += 1;
+            }
+
+
+			// Spear gains a few extra due to Spear Dancing Flurry
 			if(isSpearTypeWeapon() && isNotHavingShieldCuzPerksNotWorkingOtherwise() && hasPerk(PerkLib.ELFElvenSpearDancingFlurry1to4) && isElf()) {
                 rval += perkv1(PerkLib.ELFElvenSpearDancingFlurry1to4);
             }
+			// Feral starts off with +1 with history perk
 			if(combatMasteryPos === 0 && (hasPerk(PerkLib.HistoryFeral) || hasPerk(PerkLib.PastLifeFeral))){
                 rval += 1;
 			}

@@ -5239,6 +5239,7 @@ public class Combat extends BaseContent {
         if ((player.weaponName == "fists" && player.haveNaturalClaws()) || player.weaponName == "fists") feralCombatXP(meleeMasteryEXPgains);
         else if (player.weaponSpecials("Dual Small") || player.weaponSpecials("Small")) weaponSmallMastery(meleeMasteryEXPgains);
         else if (player.weaponSpecials("Dual Large") || player.weaponSpecials("Large")) weaponLargeMastery(meleeMasteryEXPgains);
+        else if (player.weaponSpecials("Dual Massive") || player.weaponSpecials("Massive")) weaponMassiveMastery(meleeMasteryEXPgains);
         else weaponNormalMastery(meleeMasteryEXPgains);
     }
 
@@ -11044,6 +11045,7 @@ public function dualWieldFirearmsXP(XP:Number = 0):void {player.gainCombatXP(17,
 public function weaponSmallMastery(XP:Number = 0):void  {player.gainCombatXP(18, XP * weaponmasteryXPMulti());}
 public function weaponNormalMastery(XP:Number = 0):void {player.gainCombatXP(19, XP * weaponmasteryXPMulti());}
 public function weaponLargeMastery(XP:Number = 0):void  {player.gainCombatXP(20, XP * weaponmasteryXPMulti());}
+public function weaponMassiveMastery(XP:Number = 0):void  {player.gainCombatXP(21, XP * weaponmasteryXPMulti());}
 //public function weaponRangeMastery(XP:Number = 0):void  {player.gainCombatXP(21, XP * weaponmasteryXPMulti());}
 
 //VICTORY OR DEATH?
