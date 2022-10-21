@@ -1976,6 +1976,98 @@ public class SaveUpdater extends NPCAwareContent {
 				}
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.031;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.032) {
+				if (player.hasPerk(PerkLib.WeaponClawsClawTraining)) {
+					player.removePerk(PerkLib.WeaponClawsClawTraining);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.WeaponClawsExtraClawAttack)) {
+					player.removePerk(PerkLib.WeaponClawsExtraClawAttack);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.WeaponClawsMultiClawAttack)) {
+					player.removePerk(PerkLib.WeaponClawsMultiClawAttack);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.WeaponClawsClawingFlurry)) {
+					player.removePerk(PerkLib.WeaponClawsClawingFlurry);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.WeaponClawsSavageRend)) {
+					player.removePerk(PerkLib.WeaponClawsSavageRend);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.WeaponLargeDoubleAttack)) {
+					player.removePerk(PerkLib.WeaponLargeDoubleAttack);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.WeaponLargeTripleAttack)) {
+					player.removePerk(PerkLib.WeaponLargeTripleAttack);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.WeaponNormalDoubleAttack)) {
+					player.removePerk(PerkLib.WeaponNormalDoubleAttack);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.WeaponNormalTripleAttack)) {
+					player.removePerk(PerkLib.WeaponNormalTripleAttack);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.WeaponNormalQuadrupleAttack)) {
+					player.removePerk(PerkLib.WeaponNormalQuadrupleAttack);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.WeaponNormalPentaAttack)) {
+					player.removePerk(PerkLib.WeaponNormalPentaAttack);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.WeaponNormalHexaAttack)) {
+					player.removePerk(PerkLib.WeaponNormalHexaAttack);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.WeaponNormalPentaAttack)) {
+					player.removePerk(PerkLib.WeaponNormalPentaAttack);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.WeaponSmallDoubleAttack)) {
+					player.removePerk(PerkLib.WeaponSmallDoubleAttack);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.WeaponSmallTripleAttack)) {
+					player.removePerk(PerkLib.WeaponSmallTripleAttack);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.WeaponSmallQuadrupleAttack)) {
+					player.removePerk(PerkLib.WeaponSmallQuadrupleAttack);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.WeaponSmallPentaAttack)) {
+					player.removePerk(PerkLib.WeaponSmallPentaAttack);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.WeaponSmallHexaAttack)) {
+					player.removePerk(PerkLib.WeaponSmallHexaAttack);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.WeaponSmallHectaAttack)) {
+					player.removePerk(PerkLib.WeaponSmallHectaAttack);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.WeaponSmallOctaAttack)) {
+					player.removePerk(PerkLib.WeaponSmallOctaAttack);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.WeaponSmallNonaAttack)) {
+					player.removePerk(PerkLib.WeaponSmallNonaAttack);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.WeaponSmallDecaAttack)) {
+					player.removePerk(PerkLib.WeaponSmallDecaAttack);
+					player.perkPoints += 1;
+				}
+				outputText("\n\nDid you wanted to hold all those multiattacks perk points or you want have them all back for re-spending?");
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.032;
+			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
 		}

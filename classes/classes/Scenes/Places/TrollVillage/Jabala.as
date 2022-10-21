@@ -439,7 +439,7 @@ public class Jabala extends TrollVillageAbstractContent {
                                 "\n" +
                                 "\"<i>I told her since she wanted to be a whore that she should be prepared for a facial at any time.</i>\"\n" +
                                 "\n" +
-                                "\"<i>Well, since Mom couldn’t control herself, she’s no longer welcome at the diner until next week,\" Halkano replies.\n" +
+                                "\"<i>Well, since Mom couldn’t control herself, she’s no longer welcome at the diner until next week,</i>\" Halkano replies.\n" +
                                 "\n" +
                                 "Jabala rolls her eyes playfully.\n");
                         break;
@@ -575,6 +575,9 @@ public class Jabala extends TrollVillageAbstractContent {
                     "\n" +
                     "\"<i>What is dere ya wanted ta talk about?</i>\"\n");
         }
+        else{
+            outputText("What do you want to ask Halkano about?");
+        }
         menu();
         addButton(0, "Appearance", SceneLib.trollVillage.halkano.HalkanoAppearance);
         addButton(1, "Gossip", JabalaHalkanoGossip);
@@ -636,6 +639,9 @@ public class Jabala extends TrollVillageAbstractContent {
                     "\n" +
                     "Jabala now gives you her attention, \"<i>Is there something you wanted..?</i>\"\n");
         }
+        else{
+            outputText("What do you want to talk to Jabala about?");
+        }
         menu();
         addButton(0, "Appearance", JabalaAppearance);
         addButton(1, "Gossip", JabalaGossip);
@@ -677,6 +683,7 @@ public class Jabala extends TrollVillageAbstractContent {
             outputText("Jabala sets her watering can on the ground. \"<i>It was nice talking to you, but I would like to have some time to myself right now. If you don’t mind....</i>\"\n" +
                     "\n" +
                     "You understand and give her room for herself as you leave their house.\n");
+            doNext(camp.returnToCampUseOneHour);
         }
 
     }
@@ -851,7 +858,7 @@ public class Jabala extends TrollVillageAbstractContent {
                 "She has a rather tomboyish figure, rectangular body shape, and flat chest. Her form is svelte and very small compared to most other trolls, especially compared to her husband who is well over twice her size. She has the usual four-fingered hands and toes that trolls have. While some female trolls do have very short tails, she does not have any tail compared to the usual longer tails that male trolls carry.\n" +
                 "\n" +
                 "Jabala turns back to caring for her garden as you eye her up and down.\n");
-        JabalaSelfTalk();
+        doNext(JabalaSelfTalk);
     }
 }
 }
