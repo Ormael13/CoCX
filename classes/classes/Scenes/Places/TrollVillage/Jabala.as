@@ -439,7 +439,7 @@ public class Jabala extends TrollVillageAbstractContent {
                                 "\n" +
                                 "\"<i>I told her since she wanted to be a whore that she should be prepared for a facial at any time.</i>\"\n" +
                                 "\n" +
-                                "\"<i>Well, since Mom couldn’t control herself, she’s no longer welcome at the diner until next week,\" Halkano replies.\n" +
+                                "\"<i>Well, since Mom couldn’t control herself, she’s no longer welcome at the diner until next week</i>,\" Halkano replies.\n" +
                                 "\n" +
                                 "Jabala rolls her eyes playfully.\n");
                         break;
