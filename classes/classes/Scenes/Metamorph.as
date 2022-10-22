@@ -57,8 +57,6 @@ import classes.internals.SaveableState;
 		public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
 			if (o) {
 				GeneticMemoryStorage = {};
-				PermanentMemoryStorage = {};
-
 				var storage:* = o["genetic memory storage"];
 				for (var k:String in storage) {
     			if (storage.hasOwnProperty(k)) GeneticMemoryStorage[k] = !!storage[k];
@@ -68,6 +66,7 @@ import classes.internals.SaveableState;
 					TriggerUpdate = true;
 				}
 
+				PermanentMemoryStorage = {};
 				var storage2:* = o["permanent memory storage"];
 				for (var k2:String in storage2) {
     			if (storage2.hasOwnProperty(k2)) PermanentMemoryStorage[k2] = !!storage2[k2];
