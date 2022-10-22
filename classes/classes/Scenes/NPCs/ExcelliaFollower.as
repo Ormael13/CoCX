@@ -275,7 +275,7 @@ public function ExcelliaCampFixHerGetMilkDrink():void {
 
 public function ExcelliaMilkEffects():void {
 	HPChange((((player.level * 20) + 25) * 2 * (1 + player.newGamePlusMod())), true);
-	dynStats("lus", 15);
+	dynStats("lus", 15, "scale", false);
 	fatigue(-200);
 	player.refillHunger(100);
 }

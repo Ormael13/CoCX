@@ -169,7 +169,7 @@ public class Belisa extends Monster
 			mana -= spellCostHeal();
 			createStatusEffect(StatusEffects.AbilityCooldown2, 2, 0, 0, 0);
 			var lustDang:Number = 15 + rand(15);
-			player.dynStats("lus", lustDang);
+			player.takeLustDamage(lustDang, true);
 		}
 		
 		override protected function performCombatAction():void

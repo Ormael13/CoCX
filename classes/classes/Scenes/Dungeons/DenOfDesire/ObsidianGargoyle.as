@@ -26,7 +26,7 @@ public class ObsidianGargoyle extends AbstractGargoyle
 					else {
 						removeStatusEffect(StatusEffects.Uber);
 						outputText("The gargoyle cums, black corruption oozing out of her pussy and dick. To your horror these fluids are alive, with a mind of their own and flow toward you, moving up to your skin and disappearing inside of you. You feel extremely aroused as images of depraved sexual fantasies enter your mind.");
-						player.dynStats("lus", player.maxLust() * 0.5);
+						player.takeLustDamage(player.maxLust() * 0.5, true);
 					}
 				}
 			}

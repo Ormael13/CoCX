@@ -70,7 +70,7 @@ public final class KitsuneGift extends Consumable {
 
 				outputText("\n\n<b>The kitsune has shared some of its knowledge with you!</b>  But in the process, you've gained some of the kitsune's promiscuous trickster nature...");
 				//Increase INT and Libido, +10 LUST
-				dynStats("lus", 50);
+				dynStats("lus", 50, "scale", false);
 				player.addCurse("sen", 2, 1);
 				player.KnowledgeBonus("int", 4);
 				break;
@@ -91,7 +91,7 @@ public final class KitsuneGift extends Consumable {
 
 				outputText("\n\n<b>The kitsune's familiar has drawn all over your face!</b>  The resilient marks take about an hour to completely scrub off in the nearby stream.  You could swear you heard some mirthful snickering among the trees while you were cleaning yourself off.");
 				//Advance time 1 hour, -20 LUST
-				dynStats("lus", -(player.maxLust() * 0.2));
+				dynStats("lus", -(player.maxLust() * 0.2), "scale", false);
 				break;
 
 			//[Aphrodisiac]

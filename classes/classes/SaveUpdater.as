@@ -476,7 +476,7 @@ public class SaveUpdater extends NPCAwareContent {
 		}
 		if (flags[kFLAGS.MOD_SAVE_VERSION] == 2) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 3;
-			outputText("Ups looks like you not have achievements feature unlocked yet. So now you can get them.");
+			outputText("Ups looks like you don't have achievements feature unlocked yet. So now you can get them.");
 			outputText("\n\nDrill is as always. So not all achievements would be automaticaly gained but who of people playing this won't play again and again and...you get my drift right?");
 			updateAchievements();
 			outputText("\n\nAchievements are saved in a special savefile so no matter what savefile you're on, any earned achievements will be added to that special savefile. And now got catch them all traine...burp I mean fellow players ^^");
@@ -717,7 +717,7 @@ public class SaveUpdater extends NPCAwareContent {
 		if (flags[kFLAGS.MOD_SAVE_VERSION] == 18) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 19;
 			clearOutput();
-			outputText("Small reorganizing of the house interiors...err I mean mod interiors so not mind it if you not have Soul Cultivator PC. I heard you all likes colors, colors on EVERYTHING ever your belowed lil PC's eyes. So go ahead and pick them. Not much change from addition to appearance screen this small detail. But in future if scene will allow there will be addition of parser for using eyes color too.");
+			outputText("Small reorganizing of the house interiors...err I mean mod interiors so not mind it if you don't have Soul Cultivator PC. I heard you all likes colors, colors on EVERYTHING ever your belowed lil PC's eyes. So go ahead and pick them. Not much change from addition to appearance screen this small detail. But in future if scene will allow there will be addition of parser for using eyes color too.");
 			if (player.hasPerk(PerkLib.SoulExalt)) {
 				player.removePerk(PerkLib.SoulExalt);
 				player.createPerk(PerkLib.SoulScholar, 0, 0, 0, 0);
@@ -1743,7 +1743,7 @@ public class SaveUpdater extends NPCAwareContent {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.016;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.017) {
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02562] = 0; //Izma fishery cleanup.
+				flags[kFLAGS.SOUL_SENSE_ANTHILL] = 0; //Izma fishery cleanup.
 				// convert old buff tags to new ("item_"+itemid)
 				const ItemBuffsRename:Array = [
 					["RingOfWisdom", jewelries.RINGWIS.tagForBuffs],
@@ -1975,6 +1975,98 @@ public class SaveUpdater extends NPCAwareContent {
 					outputText("\n\nCheck on Helspawn - some cut content got restored.");
 				}
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.031;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.032) {
+				if (player.hasPerk(PerkLib.WeaponClawsClawTraining)) {
+					player.removePerk(PerkLib.WeaponClawsClawTraining);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.WeaponClawsExtraClawAttack)) {
+					player.removePerk(PerkLib.WeaponClawsExtraClawAttack);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.WeaponClawsMultiClawAttack)) {
+					player.removePerk(PerkLib.WeaponClawsMultiClawAttack);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.WeaponClawsClawingFlurry)) {
+					player.removePerk(PerkLib.WeaponClawsClawingFlurry);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.WeaponClawsSavageRend)) {
+					player.removePerk(PerkLib.WeaponClawsSavageRend);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.WeaponLargeDoubleAttack)) {
+					player.removePerk(PerkLib.WeaponLargeDoubleAttack);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.WeaponLargeTripleAttack)) {
+					player.removePerk(PerkLib.WeaponLargeTripleAttack);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.WeaponNormalDoubleAttack)) {
+					player.removePerk(PerkLib.WeaponNormalDoubleAttack);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.WeaponNormalTripleAttack)) {
+					player.removePerk(PerkLib.WeaponNormalTripleAttack);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.WeaponNormalQuadrupleAttack)) {
+					player.removePerk(PerkLib.WeaponNormalQuadrupleAttack);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.WeaponNormalPentaAttack)) {
+					player.removePerk(PerkLib.WeaponNormalPentaAttack);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.WeaponNormalHexaAttack)) {
+					player.removePerk(PerkLib.WeaponNormalHexaAttack);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.WeaponNormalPentaAttack)) {
+					player.removePerk(PerkLib.WeaponNormalPentaAttack);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.WeaponSmallDoubleAttack)) {
+					player.removePerk(PerkLib.WeaponSmallDoubleAttack);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.WeaponSmallTripleAttack)) {
+					player.removePerk(PerkLib.WeaponSmallTripleAttack);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.WeaponSmallQuadrupleAttack)) {
+					player.removePerk(PerkLib.WeaponSmallQuadrupleAttack);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.WeaponSmallPentaAttack)) {
+					player.removePerk(PerkLib.WeaponSmallPentaAttack);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.WeaponSmallHexaAttack)) {
+					player.removePerk(PerkLib.WeaponSmallHexaAttack);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.WeaponSmallHectaAttack)) {
+					player.removePerk(PerkLib.WeaponSmallHectaAttack);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.WeaponSmallOctaAttack)) {
+					player.removePerk(PerkLib.WeaponSmallOctaAttack);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.WeaponSmallNonaAttack)) {
+					player.removePerk(PerkLib.WeaponSmallNonaAttack);
+					player.perkPoints += 1;
+				}
+				if (player.hasPerk(PerkLib.WeaponSmallDecaAttack)) {
+					player.removePerk(PerkLib.WeaponSmallDecaAttack);
+					player.perkPoints += 1;
+				}
+				outputText("\n\nDid you wanted to hold all those multiattacks perk points or you want have them all back for re-spending?");
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.032;
 			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);

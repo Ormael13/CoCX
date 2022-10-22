@@ -196,7 +196,7 @@ public class Enigmanium extends Consumable {
             //Make cock thicker if not thick already!
             if (player.cocks[j].cockThickness <= 2) player.thickenCock(j, 1);
             outputText("  <b>You now have a bigger cock.</b>");
-            dynStats("lus", 35);
+            dynStats("lus", 35, "scale", false);
             player.addCurse("sen", 4, 1);
             player.MutagenBonus("lib", 5);
             changes++;
@@ -232,7 +232,7 @@ public class Enigmanium extends Consumable {
             else if (player.cor >= 60) outputText("  You relish your twisted fantasies, hoping to dream of them again.");
             else if (player.cor >= 30) outputText("  You wonder why you thought such odd things, but they have a certain appeal.");
             else outputText("  You shudder in revulsion at the strange thoughts and vow to control yourself better.");
-            dynStats("lus", 10);
+            dynStats("lus", 10, "scale", false);
             player.MutagenBonus("lib", 0.5);
             changes++;
           }
@@ -241,13 +241,13 @@ public class Enigmanium extends Consumable {
         if (rand(2) == 0 && changes < changeLimit && player.ballSize <= 3) {
           if (player.balls == 0) {
             CoC.instance.transformations.BallsDuo.applyEffect();
-            dynStats("lus", 5);
+            dynStats("lus", 5, "scale", false);
             player.MutagenBonus("lib", 2);
           } else {
             player.ballSize++;
             if (player.ballSize <= 2) outputText("[pg]A flash of warmth passes through you and a sudden weight develops in your groin.  You pause to examine the changes and your roving fingers discover your [balls] have grown larger than a human's.");
             else outputText("[pg]A sudden onset of heat envelops your groin, focusing on your [sack].  Walking becomes difficult as you discover your [balls] have enlarged again.");
-            dynStats("lus", 3);
+            dynStats("lus", 3, "scale", false);
             player.MutagenBonus("lib", 1);
           }
           changes++;
@@ -360,7 +360,7 @@ public class Enigmanium extends Consumable {
       if (changes == 0) {
         outputText("[pg]Inhuman vitality spreads through your body, invigorating you!\n");
         EngineCore.HPChange(50, true);
-        dynStats("lus", 3);
+        dynStats("lus", 3, "scale", false);
       }
       if (changes < changeLimit) {
         if (rand(2) == 0) outputText(player.modThickness(5, 2));

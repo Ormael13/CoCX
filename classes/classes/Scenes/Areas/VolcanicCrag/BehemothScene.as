@@ -253,7 +253,7 @@ public class BehemothScene extends BaseContent
 				addButtonIfTrue(5, "Watersports", watersportsWithBehemoth, "Have sex with the behemoth enough times to unlock this!", timesSexed() >= 3, "Do some urine activity with him.");
 			addButtonIfTrue(6, "Get Pollinated", SceneLib.uniqueSexScene.alrauneGetPollinatedScene,
 				"Req. to be an alraune.", player.isAlraune());
-			addButton(14, "Nevermind", CoC.instance.inCombat ? cleanupAfterCombat : camp.returnToCampUseOneHour);
+			addButton(14, "Never mind", CoC.instance.inCombat ? cleanupAfterCombat : camp.returnToCampUseOneHour);
 		}
 		
 		private function analPitchBehemoth():void {
@@ -378,7 +378,7 @@ public class BehemothScene extends BaseContent
 			outputText("Your eyes draw near the big bulge in his loincloth, and you lick your lips as if you're hungry. ");
 			if (player.hasStatusEffect(StatusEffects.LustyTongue)) {
 				outputText("Your body tingles with arousal as your " + tongueDescript() + " makes contact with your lips. ");
-				dynStats("lus", 30);
+				dynStats("lus", 30, "scale", false);
 			}
 			outputText("The behemoth looks at you with a grin and says, \"<i>See something you want, [name]?</i>\" You give him a nod and smile.");
 			outputText("\n\nYou move his loincloth aside to reveal his monster cock. Now that's a " + (silly() ? "dig bick": "big dick") + "! Time for a little foreplay; you stroke his cock, and the behemoth lets out a moan. \"<i>I love it when you do this! It gets my dick really nice and hard,</i>\" he says. You give his balls a caress and swirl your finger around his cockhead. Precum leaks from his cock.");

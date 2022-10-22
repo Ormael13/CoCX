@@ -562,7 +562,7 @@ public function treePhaseFourGo():void {
 	outputText("\n\nWell... you have a demonic plant-woman on your hands; a dryad by the legends of your homeland.  She looks harmless, so long as you don't stand too close, and she's quite the alluring sight.  What now?\n\n<b>Hollicynthea is now available in the followers tab!</b>");
 	flags[kFLAGS.FUCK_FLOWER_LEVEL] = 4;
 	flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] = 0;
-	dynStats("lus", 15);
+	dynStats("lus", 15, "scale", false);
 	//[Load Camp Menu with no text]
 	holliCampMenu(false);
 }

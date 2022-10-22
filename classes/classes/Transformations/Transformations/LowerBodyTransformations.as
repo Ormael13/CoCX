@@ -1821,11 +1821,11 @@ public class LowerBodyTransformations extends MutationsHelper {
 			//from naga non-feet (gain fatigue and lose lust)
 			if (player.isNaga()) {
 				desc += "Your body straightens and telescopes suddenly and without the length of your snake half to anchor you, you're left with your face in the dirt.  A shuffling and scraping of falling scales sounds and a terrible cramp takes you as your back half continues migrating, subducting under your [butt] and making you feel extremely bloated.  As your once prominent tail dwindles to roughly the length of your torso, a sickly ripping noise fills your head and it bursts apart, revealing two new legs!  The tattered snake-skin continues melding into your groin as you examine the fuzzy legs and long-toed, sensitive feet.  <b>Looks like you now have raccoon hind-paws...</b> and an upset stomach.";
-				dynStats("lus", -30);
+				dynStats("lus", -30, "scale", false);
 				fatigue(5);
 			} else if (player.lowerBody == LowerBody.MELKIE) {
 				desc += "Your body straightens and telescopes suddenly and without the length of your seal half to anchor you, you're left with your face in the dirt.  A shuffling and scraping of falling scales sounds and a terrible cramp takes you as your back half continues migrating, subducting under your [butt] and making you feel extremely bloated.  As your once prominent tail dwindles to roughly the length of your torso, a sickly ripping noise fills your head and it bursts apart, revealing two new legs covered in fur!  You examine the fuzzy legs and long-toed, sensitive feet.  <b>Looks like you now have raccoon hind-paws...</b> and an upset stomach.";
-				dynStats("lus", -30);
+				dynStats("lus", -30, "scale", false);
 				fatigue(5);
 			}
 			//from amoeba non-feet

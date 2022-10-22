@@ -1115,7 +1115,7 @@ private function shielaXPThreeSexyTimePostSexStayII():void {
 		else outputText("  Her pussy quivers around you, and you draw the fingers out and pop them into [sheilaname]'s mouth.  The woman sucks on them greedily, and you raise an eyebrow at her.  She blushes again, but it's evidently not the first time she's done the same thing!");
 		if (!recalling) {
 			if (player.hasCock()) player.sexReward("vaginalFluids", "Dick");
-			else dynStats("lus", player.lib / 4);
+			else dynStats("lus", player.lib / 4, "scale", false);
 		}
 
 		if(!recalling && player.cor >= 90 && sheilaCorruption() >= 90) {
@@ -1227,8 +1227,8 @@ private function sheilaXPThreeSexyTimeGuardDuty():void {
 	if (!recalling) {
 		//set sheila xp = 4, small lib-based lust damage if lib < 40, or large if lib >= 40; advance time 1 hr
 		flags[kFLAGS.SHEILA_XP] = 4;
-		if (player.lib < 40) dynStats("lus", 5);
-		else dynStats("lus", 15);
+		if (player.lib < 40) dynStats("lus", 5, "scale", false);
+		else dynStats("lus", 15, "scale", false);
 		doNext(camp.returnToCampUseOneHour);
 	} else doNext(recallWakeUp);
 }
@@ -2182,7 +2182,7 @@ private function sheilaMutualMasturbation():void {
 	}
 	if (!recalling) {
 		if(target == "cunt" || target == "cock" || target == "nipplecunt") player.sexReward("vaginalFluids");
-		else dynStats("lus", 50);
+		else dynStats("lus", 50, "scale", false);
 	}
 
 	if (recalling) normalEnd();
@@ -2265,7 +2265,7 @@ private function sheilaCorruptionWarningListenToHer():void {
 	
 	outputText("\n\n\"<i>Thank you,</i>\" she says.  With a peck on your cheek, she stands up and gathers her clothes, then sighs.  \"<i>I know it's not just your fault; it takes two to tango.  I'm going to try to get myself under control for these next couple of weeks.  Please, please do the same.  When I feel like I'm ready, you'll see me again.  I... love you.  Bye.</i>\"");
 	//no change in sheila corruption (remains at 80), PC corr -10, set sheila clock = -13
-	dynStats("lus", -10);
+	dynStats("lus", -10, "scale", false);
 	flags[kFLAGS.SHEILA_CLOCK] = -4;
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -3618,7 +3618,7 @@ private function tellSheilaDemonToFuckOff():void {
 		doNext(camp.returnToCampUseOneHour);
 	}
 	//go to fight if bitch is crazy, else plus lust and return to camp
-	dynStats("lus", 10);
+	dynStats("lus", 10, "scale", false);
 }
 
 //[Demon Sheila - Talk - The Change]
@@ -3748,7 +3748,7 @@ private function demonSheilaTalkAnotherQuestion():void {
 		else outputText("rubbing your bare groin");
 		outputText(" even as she smiles encouragingly.  \"<i>Sure, mate.  Amuse yourself.  I certainly intend to.</i>\"");
 		//plus sens-based lust damage, display talk options again
-		dynStats("lus", player.sens/10);
+		dynStats("lus", player.sens/10, "scale", false);
 		menu();
 		addButton(0,"The Change",askDemonSheilaAboutDahChange);
 		addButton(1,"Her Colony",askDemonSheilaAboutHerColony);
@@ -3822,7 +3822,7 @@ private function leavePregDemonSheila():void {
 	if(player.hasCock()) outputText("  Your refusal doesn't stop her from consummating the affair herself by slipping the oozing spade past her entrance and thrusting vigorously.  \"<i>What?</i>\" she says, shaking you from your distracted stare.  \"<i>I'm always randy now, and you're not going to spend time with me, so... move along.  Maybe someone fun will find me and join in.</i>\"  She throws her head back as her slippery tail makes a particularly deep push, crying her pleasure carelessly to the glaring sun.  The wet schlicks of her self-love follow you until the magic of the realm brings you abruptly back to camp.");
 	
 	//plus more lust if cock, go to camp
-	if(player.hasCock()) dynStats("lus", 10);
+	if(player.hasCock()) dynStats("lus", 10, "scale", false);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -3842,7 +3842,7 @@ private function pregDemonSheilaOtherSex():void {
 	else if (player.hasVagina()){
 		outputText("\"<i>Well, that doesn't sound as good as having your amazing self inside me, but I'll take what I can get, love.</i>\"  [sheilaname] snuggles closer to your arm, using one hand to turn your fingers out and slip them between her soft, hot labia, then kisses you on the cheek.  \"<i>So, what do you have in mind?  I'm all yours.</i>\"  She pulls your fingers out and sits down on the grass, spreading her thighs and looking at you expectantly.");
 		//go to fight if cock, else plus lust and present victory sex menu
-		dynStats("lus", 15);
+		dynStats("lus", 15, "scale", false);
 		beatUpDemonSheila(false);
 	} else {
 		doNext(camp.returnToCampUseOneHour);
@@ -3897,7 +3897,7 @@ private function loseToDemonSheila():void {
 	
 	outputText("\n\n[sheilaname] hems and haws nervously.  \"<i>Well, no one's allowed to use your body unless I let them.  I forbid it.  And... and I get off best when I can see the face you make as you come.  It's so cute.  I'm not just going to boff you while you're asleep.  U-unless you want me to, ah...</i>\"");
 	
-	outputText("\n\nThe woman nerves herself and her expression hardens as she re-rails her train of thought.  \"<i>No; nevermind that.  If you're going to get into blues all the time, I won't wait for you to ask for my help.  I'll take you with me whether you want it or not.  You're mine, and I can't bear the thought of you trying to tussle with some standover goon and carking it.  Get up.</i>\"");
+	outputText("\n\nThe woman nerves herself and her expression hardens as she re-rails her train of thought.  \"<i>No; never mind that.  If you're going to get into blues all the time, I won't wait for you to ask for my help.  I'll take you with me whether you want it or not.  You're mine, and I can't bear the thought of you trying to tussle with some standover goon and carking it.  Get up.</i>\"");
 	
 	outputText("\n\nStill shaken, you stand and let [sheilaname] do the same.  She narrows her eyes at you before speaking again.  \"<i>Be more careful, mate.  The idea of my " + player.mf("boy","girl") + " being fucked by trash makes me ill.</i>\"  Saying nothing more, the woman turns and leaves you to walk back to your camp.");
 	//suppress the "you'll probably come to in eight hours blah blah" message, subtract gems and add 8 hours, go to camp
@@ -4516,7 +4516,7 @@ private function sheilaAnalHateFuckAGoGoGETYOUSOMEWORMS():void {
 	player.removeStatusEffect(StatusEffects.Infested);
 	player.sexReward("vaginalFluids");
 	dynStats("cor", 10);
-	dynStats("lus", player.lib/5);
+	dynStats("lus", player.lib/5, "scale", false);
 	flags[kFLAGS.SHEILA_DISABLED] = 3;
     if (CoC.instance.inCombat)
         cleanupAfterCombat();

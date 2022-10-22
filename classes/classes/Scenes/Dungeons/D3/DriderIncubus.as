@@ -402,7 +402,7 @@ this.HP -= (this.maxHP() * 0.08);
 				outputText(" ache to be touched");
 			}
 			
-			player.dynStats("lus", (player.lib / 10 + player.cor / 10) + 15);
+			player.takeLustDamage((player.lib / 10 + player.cor / 10) + 15, true);
 			
 			outputText(". Your body rebels against you under the unholy influence");
 			if (player.lust < player.maxLust()) outputText(", but the effect is fleeting, thankfully. You try to ignore the residual tingles. You can’t afford to lose this close to your goal!");
@@ -433,7 +433,7 @@ this.HP -= (this.maxHP() * 0.08);
 			else
 			{
 				outputText(" The intensity overwhelms your ability to act, arousing and stunning you.");
-				player.dynStats("lus", (player.lib / 15 + player.cor / 15) + 15);
+				player.takeLustDamage((player.lib / 15 + player.cor / 15) + 15, true);
 				player.createStatusEffect(StatusEffects.Stunned, 0, 0, 0, 0);
 			}
 		}
@@ -456,7 +456,7 @@ this.HP -= (this.maxHP() * 0.08);
 			{
 				//Fail
 				outputText(" You concentrate to try and throw it off, but he overwhelms your mental defenses. Clouds of swirling pink filled with unsubtle erotic silhouettes fill your vision, effectively blinding you!");
-				player.dynStats("lus", 25);
+				player.takeLustDamage(25, true);
 				player.createStatusEffect(StatusEffects.PurpleHaze, 2 + rand(2), 0, 0, 0);
 				if (!player.hasPerk(PerkLib.BlindImmunity)) player.createStatusEffect(StatusEffects.Blind, player.statusEffectv1(StatusEffects.PurpleHaze), 0, 0, 0);
 			}
@@ -520,7 +520,7 @@ this.HP -= (this.maxHP() * 0.08);
 			outputText("\n\nShe dances and spins to the side, cooing, <i>\"Don’t you want me anymore, baby? Look how ready I am\"</i> Her nipples are taut and stiff, and the junction between her thighs absolutely drenched. Neither you nor your foe can keep from sparing lusty glances her way.");
 			
 			lust += 7;
-			player.dynStats("lus", 7);
+			player.takeLustDamage(7, true);
 		}
 		
 		public function freeGoblin():void

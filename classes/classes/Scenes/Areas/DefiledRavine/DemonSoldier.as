@@ -244,7 +244,7 @@ public class DemonSoldier extends Monster {
         else if (teaseChooser == 3) {
             outputText("Flicking " + this.mf("his", "her") + " wings out to full extension, the Demon gives them a hard pump as " + this.mf("he", "she") + " leaps toward you, propelling {him/her}self through the air. [If(attack hits)  “ Spreading " + this.mf("his", "her") + " legs mid-air, the creature attempts a kind of reverse leapfrog, rubbing " + this.mf("his", "her") + " groin across your face as " + this.mf("he", "she") + " passes over you, smearing you with " + this.mf("his", "her") + " hellish sex-juices. [If(isTaur = true) “ The Demon very nearly ends up straddling you equine hind-quarters, but nimbly vaults off again, landing behind you and forcing you to wheel around to face your demonic adversary. “][If(isTaur = false) “ The hellish beast lands behind you, forcing you to wheel around to face your adversary. “] The inescapable odour of the demon-slime coating your face causes you to become aroused. “][If(attack misses) “ You manage to duck and dive to the side, dodging the incoming Demon. Rolling back to your feet you wheel around to face your opponent. “]");
         }
-        player.takeLustDamage(5 + (player.lib / 10) + (player.cor / 15) + rand(10));
+        player.takeLustDamage(5 + (player.lib / 10) + (player.cor / 15) + rand(10), true);
     }
 
     //Demon Lust Spell. 2-part, avoid or take large lust damage!
@@ -261,7 +261,7 @@ public class DemonSoldier extends Monster {
                 outputText("Your preparedness from waiting definitely helped you in this situation. You just about succeed in flinging yourself out of the way of the ball of pure lust-energy, much to the chagrin of the Demon.");
             } else { //Didn't use Wait? Get hit!
                 outputText("The pink energy washes over you, greatly inflaming your lusts.");
-                player.takeLustDamage(10 + (player.lib / 8) + (player.cor / 10) + rand(20));
+                player.takeLustDamage(10 + (player.lib / 8) + (player.cor / 10) + rand(20), true);
             }
             this.fatigue += 25;
             this.removeStatusEffect(StatusEffects.Uber);

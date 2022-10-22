@@ -381,54 +381,54 @@ public function accessCraftingMaterialsBag():void {
 	//Cooper Ore
 	if (BagSlot01 < BagSlot01Cap) {
 		if (player.hasItem(useables.COP_ORE, 1)) addButton(0, "CopperOre", craftingMaterialsCopperOre1UP);
-		else addButtonDisabled(0, "CopperOre", "You not have any copper ore to store.");
+		else addButtonDisabled(0, "CopperOre", "You don't have any copper ore to store.");
 	}
 	else addButtonDisabled(0, "CopperOre", "You can't store more copper ore in your bag.");
 	if (BagSlot01 > 0) addButton(1, "CopperOre", craftingMaterialsCopperOre1Down);
-	else addButtonDisabled(1, "CopperOre", "You not have any copper ore in your bag.");
+	else addButtonDisabled(1, "CopperOre", "You don't have any copper ore in your bag.");
 	//Tin Ore
 	if (BagSlot02 < BagSlot02Cap) {
 		if (player.hasItem(useables.TIN_ORE, 1)) addButton(2, "TinOre", craftingMaterialsTinOre1UP);
-		else addButtonDisabled(2, "TinOre", "You not have any tin ore to store.");
+		else addButtonDisabled(2, "TinOre", "You don't have any tin ore to store.");
 	}
 	else addButtonDisabled(2, "TinOre", "You can't store more tin ore in your bag.");
 	if (BagSlot02 > 0) addButton(3, "TinOre", craftingMaterialsTinOre1Down);
-	else addButtonDisabled(3, "TinOre", "You not have any tin ore in your bag.");
+	else addButtonDisabled(3, "TinOre", "You don't have any tin ore in your bag.");
 	//Bronze Bar
 	if (BagSlot03 < BagSlot03Cap) {
 		if (player.hasItem(useables.BRONZEB, 1)) addButton(5, "BronzeBar", craftingMaterialsBronzeBar1UP);
-		else addButtonDisabled(5, "BronzeBar", "You not have any bronze bar to store.");
+		else addButtonDisabled(5, "BronzeBar", "You don't have any bronze bar to store.");
 	}
 	else addButtonDisabled(5, "BronzeBar", "You can't store more copper ore in your bag.");
 	if (BagSlot03 > 0) addButton(6, "BronzeBar", craftingMaterialsBronzeBar1Down);
-	else addButtonDisabled(6, "BronzeBar", "You not have any bronze bar in your bag.");
+	else addButtonDisabled(6, "BronzeBar", "You don't have any bronze bar in your bag.");
 	//Iron Ore
 	if (BagSlot04 < BagSlot04Cap) {
 		if (player.hasItem(useables.IRONORE, 1)) addButton(7, "IronOre", craftingMaterialsIronOre1UP);
-		else addButtonDisabled(7, "IronOre", "You not have any iron ore to store.");
+		else addButtonDisabled(7, "IronOre", "You don't have any iron ore to store.");
 	}
 	else addButtonDisabled(7, "IronOre", "You can't store more iron ore in your bag.");
 	
 	if (BagSlot04 > 0) addButton(8, "IronOre", craftingMaterialsIronOre1Down);
-	else addButtonDisabled(8, "IronOre", "You not have any iron ore in your bag.");
+	else addButtonDisabled(8, "IronOre", "You don't have any iron ore in your bag.");
 	//Ebon Ingot
 	if (BagSlot06 < BagSlot06Cap) {
 		if (player.hasItem(useables.EBONING, 1)) addButton(10, "EbonIngot", craftingMaterialsEbonIngot1UP);
-		else addButtonDisabled(10, "EbonIngot", "You not have any ebon ingot to store.");
+		else addButtonDisabled(10, "EbonIngot", "You don't have any ebon ingot to store.");
 	}
 	else addButtonDisabled(10, "EbonIngot", "You can't store more ebon ingots in your bag.");
 	
 	if (BagSlot06 > 0) addButton(11, "EbonIngot", craftingMaterialsEbonIngot1Down);
-	else addButtonDisabled(11, "EbonIngot", "You not have any ebon ingot in your bag.");
+	else addButtonDisabled(11, "EbonIngot", "You don't have any ebon ingot in your bag.");
 	//Moonstone
 	if (BagSlot07 < BagSlot07Cap) {
 		if (player.hasItem(useables.MOONSTO, 1)) addButton(12, "Moonstone", craftingMaterialsMoonstone1UP);
-		else addButtonDisabled(12, "Moonstone", "You not have any moonstone to store.");
+		else addButtonDisabled(12, "Moonstone", "You don't have any moonstone to store.");
 	}
 	else addButtonDisabled(12, "Moonstone", "You can't store more moonstones in your bag.");
 	
 	if (BagSlot07 > 0) addButton(13, "Moonstone", craftingMaterialsMoonstone1Down);
-	else addButtonDisabled(13, "Moonstone", "You not have any moonstone in your bag.");
+	else addButtonDisabled(13, "Moonstone", "You don't have any moonstone in your bag.");
 	addButton(14, "Back", camp.campActions);
 }
 private function craftingMaterialsCopperOre1UP():void {

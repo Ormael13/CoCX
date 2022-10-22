@@ -19,7 +19,6 @@ import classes.BodyParts.Wings;
 import classes.GeneticMemories.*;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
-import classes.Items.*;
 import classes.Scenes.Areas.Desert.SandWitchScene;
 import classes.Scenes.Metamorph;
 import classes.Scenes.NPCs.JojoScene;
@@ -1517,12 +1516,10 @@ import coc.view.MainView;
 			clearOutput();
 			if (customPlayerProfile != null) {
 				customPlayerProfile();
-				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) doNext(chooseTimescale);
-				else doNext(startTheGame);
+				doNext(chooseTimescale);
 				return;
 			}
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) chooseTimescale();
-			else startTheGame();
+			chooseTimescale();
 		}
 
 		public function arrival():void {
@@ -1538,7 +1535,7 @@ import coc.view.MainView;
 			else outputText("and your body reacts with a sense of growing warmth focusing in your groin, your manhood hardening for no apparent reason.");
 			outputText(" You were warned of this and press forward, ignoring your body's growing needs.  A glowing purple-pink portal swirls and flares with demonic light along the back wall.  Cringing, you press forward, keenly aware that your body seems to be anticipating coming in contact with the tainted magical construct.  Closing your eyes, you gather your resolve and leap forwards.  Vertigo overwhelms you and you black out...");
 			showStats();
-			dynStats("lus", 15);
+			dynStats("lus", 15, "scale", false);
 			doNext(arrivalPartTwo);
 		}
 
@@ -1560,7 +1557,7 @@ import coc.view.MainView;
 		private function arrivalPartThree():void {
 			clearOutput();
 			hideUpDown();
-			dynStats("lus", -30);
+			dynStats("lus", -30, "scale", false);
 			outputText("The imp shakes the empty vial to emphasize his point.  You reel in shock at this revelation - you've just entered the demon realm and you've already been drugged!  You tremble with the aching need in your groin, but resist, righteous anger lending you strength.\n\nIn desperation you leap towards the imp, watching with glee as his cocky smile changes to an expression of sheer terror.  The smaller creature is no match for your brute strength as you pummel him mercilessly.  You pick up the diminutive demon and punt him into the air, frowning grimly as he spreads his wings and begins speeding into the distance.\n\n");
 			outputText("The imp says, \"<i>FOOL!  You could have had pleasure unending... but should we ever cross paths again you will regret humiliating me!  Remember the name Zetaz, as you'll soon face the wrath of my master!</i>\"\n\n");
 			outputText("Your pleasure at defeating the demon ebbs as you consider how you've already been defiled.  You swear to yourself you will find the demon responsible for doing this to you and the other Champions, and destroy him AND his pet imp.");
@@ -1876,12 +1873,12 @@ import coc.view.MainView;
 
 			} else addButtonDisabled(6, "Perm Met.", "Spend Ascension Perk Points to make certain Metamorphs permanent.\n\n<b>In order to be able to select Metamorphs to make permanent, you need to buy Transcendental Genetic Memory from Rare Perks 2 first!</b>");
 			if (player.ascensionPerkPoints >= 5) addButton(7, "Past Life", historyTopastlife).hint("Spend Ascension Points to change current possessed History perk into Past Life perk (5 points).", "Perk Selection");
-			else addButtonDisabled(7, "Past Life", "You not have enough Ascension Perk Points to use this option.");
+			else addButtonDisabled(7, "Past Life", "You don't have enough Ascension Perk Points to use this option.");
 			if (player.hasPerk(PerkLib.AscensionCruelChimerasThesis) && flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3) {
 				if (player.ascensionPerkPoints >= 10) addButton(8, "Bloodline", bloodlineACQ).hint("Spend Ascension Points to change current possessed Descendant perk into Bloodline perk (10 points).", "Perk Selection");
-				else addButtonDisabled(8, "Bloodline", "You not have enough Ascension Perk Points to use this option.");
+				else addButtonDisabled(8, "Bloodline", "You don't have enough Ascension Perk Points to use this option.");
 			}
-			else addButtonDisabled(8, "???", "You not have Ascended enough times or/and have required ascension perk to use this option.");
+			else addButtonDisabled(8, "???", "You don't have Ascended enough times or/and have required ascension perk to use this option.");
 			addButton(10, "Rename", renamePrompt).hint("Change your name at no charge.");
 			if (!migration) addButton(14, "Reincarnate", reincarnatePrompt).hint("Reincarnate and start an entirely new adventure.");
 			else addButton(14, "Return", returnFromUpdateAscension).hint("Go back to your camp after updating your Ascension perks. (Only available during updates that refund points like this)");
@@ -2305,7 +2302,9 @@ import coc.view.MainView;
 					addButtonDisabled(btn, "Nat.MetaMph", "You do not have enough point to acquire Natural Metamorph.");
 				}
 				else{
-					addButton(btn,"Nat. Metamorph", curry(perkRPConfirm, 1,PerkLib.AscensionNaturalMetamorph, 30, 2));
+					addButton(btn, "Nat.MetaMph", curry(perkRPConfirm, 1, PerkLib.AscensionNaturalMetamorph, 30, 2))
+						.hint("Gain free perks Genetic Memory, Metamorph, MetamorphEx at the start of the game\n\n"
+							+ "Cost: 30 points.");
 				}
 			}
 			else{
@@ -2315,7 +2314,9 @@ import coc.view.MainView;
 						addButtonDisabled(btn, "Gen. Memory", "You do not have enough point to acquire Genetic Memory.");
 					}
 					else{
-						addButton(btn, "Gen. Memory", curry(perkRPConfirm, 1, PerkLib.AscensionTrancendentalGeneticMemoryStageX, pCost *1, 2));
+						addButton(btn, "Gen. Memory", curry(perkRPConfirm, 1, PerkLib.AscensionTrancendentalGeneticMemoryStageX, pCost * 1, 2))
+							.hint("Unlocks an ascension menu to make some metamorphs permanent and have them unlocked in your next runs.\n\n"
+								+ "Cost: " + pCost * 1 + " points.");
 					}
 				}
 				else {
@@ -2336,7 +2337,9 @@ import coc.view.MainView;
 						else{
 							player.changeStatusValue(StatusEffects.TranscendentalGeneticMemory, 1, 15 * tier);
 						}
-						addButton(btn, "Gen. Memory", curry(perkRPConfirm, tier, PerkLib.AscensionTrancendentalGeneticMemoryStageX, pCost *1, 2));
+						addButton(btn, "Gen. Memory", curry(perkRPConfirm, tier, PerkLib.AscensionTrancendentalGeneticMemoryStageX, pCost * tier, 2))
+							.hint("Increases the maximum number of permed metamorphs."
+								+ "Cost: " + pCost * tier + " points.");
 					}
 				}
 			}
@@ -2451,7 +2454,7 @@ import coc.view.MainView;
 			}
 			else {
 				clearOutput();
-				outputText("You not have any History perk to change into Past Life perk.");
+				outputText("You don't have any History perk to change into Past Life perk.");
 			}
 			doNext(ascensionMenu);
 		}
@@ -2515,7 +2518,7 @@ import coc.view.MainView;
 
 			else {
 				clearOutput();
-				outputText("You not have any Descendant perks to change into Bloodline perks.");
+				outputText("You don't have any Descendant perks to change into Bloodline perks.");
 			}
 			doNext(ascensionMenu);
 		}
@@ -3094,42 +3097,7 @@ import coc.view.MainView;
 			player.tailType = Tail.NONE;
 			player.tailRecharge = 0;
 			player.level = 0;
-			player.masteryFeralCombatLevel = 0;
-			player.masteryFeralCombatXP = 0;
-			player.masteryGauntletLevel = 0;
-			player.masteryGauntletXP = 0;
-			player.masteryDaggerLevel = 0;
-			player.masteryDaggerXP = 0;
-			player.masterySwordLevel = 0;
-			player.masterySwordXP = 0;
-			player.masteryAxeLevel = 0;
-			player.masteryAxeXP = 0;
-			player.masteryMaceHammerLevel = 0;
-			player.masteryMaceHammerXP = 0;
-			player.masteryDuelingSwordLevel = 0;
-			player.masteryDuelingSwordXP = 0;
-			player.masteryPolearmLevel = 0;
-			player.masteryPolearmXP = 0;
-			player.masterySpearLevel = 0;
-			player.masterySpearXP = 0;
-			player.masteryWhipLevel = 0;
-			player.masteryWhipXP = 0;
-			player.masteryExoticLevel = 0;
-			player.masteryExoticXP = 0;
-			player.masteryArcheryLevel = 0;
-			player.masteryArcheryXP = 0;
-			player.masteryThrowingLevel = 0;
-			player.masteryThrowingXP = 0;
-			player.masteryFirearmsLevel = 0;
-			player.masteryFirearmsXP = 0;
-			player.dualWSLevel = 0;
-			player.dualWSXP = 0;
-			player.dualWNLevel = 0;
-			player.dualWNXP = 0;
-			player.dualWLLevel = 0;
-			player.dualWLXP = 0;
-			player.dualWFLevel = 0;
-			player.dualWFXP = 0;
+			player.initCombatMastery();
 			player.teaseLevel = 0;
 			player.teaseXP = 0;
 			player.herbalismLevel = 0;

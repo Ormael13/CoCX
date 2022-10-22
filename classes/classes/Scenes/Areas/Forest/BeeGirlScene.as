@@ -492,7 +492,7 @@ public class BeeGirlScene extends BaseContent
 			outputText("<i>\"By my queen!  That izzz dizzzguzzting!  How can you zzztand it?  Ugh, no, I can't lay my queen'zzz preciouzzz eggzzz in a body with thozzze.\"</i>  A few drips of fluid dribble from the tip of her ovipositor and she adds, <i>\"and I zzzo wanted to.  I really have to find zzzomeone who can take thezzze and keep them zzzafe.\"</i>\n\n");
 			outputText("She lifts off, hovering a few feet off the ground.  <i>\"Good luck getting rid of thozzze thingzzz.  When you do, come find me and I'll fill you zzzo full of lovely eggzzz,\"</i> she promises, her fingers idly stroking her sex.  She shakes her head, deliberately getting control of herself and forcing her fingers away from her slit, then flies up through a hole in the canopy.\n\n");
 			outputText("Alone and aroused, all you can do is put your clothes back on and travel back to your camp, hoping no imps ambush you on the way.");
-			dynStats("lus", 0.5 * player.lib + 20);
+			dynStats("lus", 0.5 * player.lib + 20, "scale", false);
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -518,7 +518,7 @@ public class BeeGirlScene extends BaseContent
 			else
 				outputText(" spreads her legs and starts frigging her honey-soaked cunt.");
 			outputText("  The sweet scent oozing from between her legs is too much to bear, arousing you painfully...  What do you do to her?");
-			player.dynStats("lus", 33); //that means PC always has enough lust
+			player.dynStats("lus", 33, "scale", false); //that means PC always has enough lust
 
 			menu();
 			addButton(0, "Rape", rapeTheBeeGirl);
@@ -961,7 +961,7 @@ public class BeeGirlScene extends BaseContent
 				case BEE_GIRL_TALKED_AND_LEFT_TWICE:
 					outputText("\n\nThe handmaiden stands up on the flower, and puts her hands on her hips.  <i>\"Why not?  Thizzz will be abzzzolutly wonderful for you, I promizzze.  Why won’t you aczzzept me?\"</i> she pouts through her glossy lips.\n\n");
 					outputText("You stop for a moment and wonder exactly why you’ve refused her up until now.  Is it because you are afraid of her and the effect she has on your mind?  Is it because the idea of her eggs inside you is disgusting?  Is it because of your duty as a champion?  Or are you just going to leave her there wondering?");
-					dynStats("lus", 5 + player.lib / 25);
+					dynStats("lus", 5 + player.lib / 25, "scale", false);
 					simpleChoices("Afraid", beeEncounterRefusedHerEggsAfraid, "Disgusted", beeEncounterRefusedHerEggsDisgusted, "Duty", beeEncounterRefusedHerEggsDuty, "", null, "Leave", beeEncounterRefusedHerEggsLeave);
 					return;
 				case BEE_GIRL_TALKED_AND_LEFT:
@@ -971,7 +971,7 @@ public class BeeGirlScene extends BaseContent
 					attitude = BEE_GIRL_TALKED_AND_LEFT;
 			}
 			outputText("\n\nHer face falls at your refusal, but she makes no move against you.  <i>\"Okay, I won’t try to forzzze you, maybe you’ll be more willing next time?\"</i>  You give a half hearted chuckle before going back to your camp.");
-			dynStats("lus", 5 + player.lib / 25);
+			dynStats("lus", 5 + player.lib / 25, "scale", false);
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -979,7 +979,7 @@ public class BeeGirlScene extends BaseContent
 			spriteSelect(SpriteDb.s_bee_girl);
 			attitude = BEE_GIRL_PLAYER_AFRAID;
 			outputText("\n\nYou move away from her and explain that it isn’t that you don’t like the idea of bearing the eggs, it’s that you’re afraid of the effect she has on your mind.  You’re uncomfortable that you can’t think clearly around her, and you really can’t agree to anything when you can’t remember it and thus can’t really enjoy it.  She tips her head to the side in surprise, before pursing her glossy lips in worry and saying, <i>\"Really?  You mean there are people who don’t like it when they lozzze themzzzelvezzz?  Hmm, maybe I should tell my queen about thizzz.\"</i>  She smiles back at you and starts to fly away, before stopping in midair and floating over to you and saying <i>\"Come back another time, and maybe I can work out zzzomething you’ll be comfortable with, ok?\"</i>");
-			dynStats("lus", 5 + player.lib / 25);
+			dynStats("lus", 5 + player.lib / 25, "scale", false);
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -987,7 +987,7 @@ public class BeeGirlScene extends BaseContent
 			spriteSelect(SpriteDb.s_bee_girl);
 			attitude = BEE_GIRL_PLAYER_DISGUSTED;
 			outputText("\n\nYou tell her that you find the idea of her laying eggs in you repulsive, and that you’re tired of her trying to constantly tempt you into accepting against your will.  She gives you an annoyed look before stomping her foot down on the flower she is standing on, almost causing her to tumble over to the side while saying, <i>\"Fine, ah!\"</i> before righting herself with her wings.  <i>\"If I ever zzzee you again, you can forget about getting a good time.\"</i>  Before directing you away from the clearing.  You smile as you leave, now you don’t have to worry about her song getting to you anymore.");
-			dynStats("lus", 5 + player.lib / 25);
+			dynStats("lus", 5 + player.lib / 25, "scale", false);
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -997,14 +997,14 @@ public class BeeGirlScene extends BaseContent
 			outputText("\n\nYou explain to her that you are a champion of your village, and what that means.  You explain your duty, and that you can’t do anything that might push you away from accomplishing that.\n\n");
 
 			outputText("The bee girl nods and seems to smile in understanding.  <i>\"I zzzee, I’m bound to a duty too.  I have to find people to lay my queen’zzz eggzzz.  If you have a duty too, I won’t get in your way, and I won’t forzzze you to carry them.\"</i>  You thank the bee girl for her considerations and apologize that you can’t help her more directly.  She smiles at you and says, <i>\"That’zzz ok champion; if you ever want to just talk, feel free to come vizzzit.  Our queen is againzzzt the demon, zzzo we will zzzuport you in our heartzzz.\"</i>");
-			dynStats("lus", 5 + player.lib / 25);
+			dynStats("lus", 5 + player.lib / 25, "scale", false);
 			doNext(camp.returnToCampUseOneHour);
 		}
 
 		private function beeEncounterRefusedHerEggsLeave():void {
 			spriteSelect(SpriteDb.s_bee_girl);
 			outputText("\n\nYou aren’t going to deal with this girl right now, so you just turn and walk away.");
-			dynStats("lus", 5 + player.lib / 25);
+			dynStats("lus", 5 + player.lib / 25, "scale", false);
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -2170,7 +2170,7 @@ public class BeeGirlScene extends BaseContent
 			if(player.cor < 50) outputText("You feel kind of bad for her, but y");
 			else outputText("Y");
 			outputText("ou really need to get back to camp and get off after such an intense experience.  Maybe you should give your honey-flavored dildo a shot?");
-			dynStats("lus", (20+player.lib/5+player.cor/10));
+			dynStats("lus", (20+player.lib/5+player.cor/10), "scale", false);
 			cleanupAfterCombat();
 		}
 

@@ -122,7 +122,7 @@ import classes.internals.*;
 				outputText("The gnoll dances forward, then back, her whole body alive with sensual movement.  She catches the way you watch her and smirks, throwing in a hip-shake just for you.");
 				bonus += 6;
 			}
-			player.dynStats("lus", (bonus + 10 + player.lib/20 + rand(player.cor/20)));
+			player.takeLustDamage((bonus + 10 + player.lib/20 + rand(player.cor/20)), true);
 			outputText("\n");
 		}
 

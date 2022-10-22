@@ -97,7 +97,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 				if (rand(2) == 0) {
 					outputText("After you've both had your fill of talk, the spider-girl asks, \"<i>I-I w-was wondering if you'd do me a favor... I have certain... urges, and");
 					if (player.gender == 0) {
-						outputText(" o-oh nevermind, you're genderless... crap.</i>\"  She blushes and lifts her abdomen, shooting a web into the trees that she uses to escape from the awkward situation.  You're left utterly alone, once again.");
+						outputText(" o-oh never mind, you're genderless... crap.</i>\"  She blushes and lifts her abdomen, shooting a web into the trees that she uses to escape from the awkward situation.  You're left utterly alone, once again.");
 						doNext(camp.returnToCampUseOneHour);
 						return;
 					}

@@ -278,24 +278,28 @@ public class CampUpgrades extends BaseContent {
         outputText("Do you start work on building warehouse frame and walls? (Cost: 200 nails, 100 wood and 40 stones.)\n");
         checkMaterials();
         if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 200 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 100 && flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 40) {
-            doYesNo(do1stWarehouse1Work, noThanks);
+            doYesNo(doWarehouse1Work, noThanks);
         } else {
             errorNotEnough();
             doNext(playerMenu);
         }
     }
 
-    private function do1stWarehouse1Work():void {
-        flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 200;
-        flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 100;
-        flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 40;
-        clearOutput();
-        outputText("You pull out \"Carpenter's Guide\" and finds instructions on how to build warehouse. You spend few minutes looking at the instructions.");
-        flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] += 1;
-        outputText("\n\nYou pick up a log from a nearby pile and saw it into a rectangular plank, fit to be used for the base of your future warehouse.  You lay out the foundation, rooting in planks, and leaving open corners for the thick logs that will be the corners of the building.");
+    private function printLazyWriting(building:String):void {
+        outputText("You pull out \"Carpenter's Guide\" and finds instructions on how to build a "+building+". You spend few minutes looking at the instructions.");
+        outputText("\n\nYou pick up a log from a nearby pile and saw it into a rectangular plank, fit to be used for the base of your future "+building+".  You lay out the foundation, rooting in planks, and leaving open corners for the thick logs that will be the corners of the building.");
         outputText("\nAs you begin to connect their tops to make the floor the real work begins, nailing planks together, fitting everything into place.  After a few hours of hard labor the foundation is complete and you wipe the sweat off your brow, tapping a foot on your work and letting out a breath of air.");
         outputText("\nFor the last bit of work you get the frame of the building itself into place with a lot of elbow grease and brute strength, they don't call you the champion for nothing!");
         outputText("\nRapping a knuckle against the walls you're filled with pride of your hard work, though it still needs a roof and actual flooring, but that can wait until tomorrow, you're pretty beat…");
+    }
+
+    private function doWarehouse1Work():void {
+        flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 200;
+        flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 100;
+        flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 40;
+        flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] += 1;
+        clearOutput();
+        printLazyWriting("warehouse");
         buildWithHelpers(250);
     }
 
@@ -309,15 +313,19 @@ public class CampUpgrades extends BaseContent {
             doNext(playerMenu);
         }
     }
+    
+    private function printLazyWriting2(building:String):void {
+        outputText("You pull out \"Carpenter's Guide\" and finds instructions on how to build a "+building+". You spend a few minutes looking at the instructions.");
+        outputText("As before, you prepare some wood planks. Constructing temporally ladder, you use it to get on top of the construction. Here, one by one, you nail the prepared wood pieces to form a simple roof. After it's finished, you get down and entering inside. Putting wood logs in places, you fill rest of the space with stones to make sure that floor will be able to deal with heavy weight. At last, you use the leftover planks to make a floor. After the work, you go out to look at your brand-new "+building+".");
+    }
 
     private function doWarehouse2Work():void {
         flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 400;
         flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 300;
         flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 140;
-        clearOutput();
-        outputText("You pull out \"Carpenter's Guide\" and finds instructions on how to build warehouse. You spend few minutes looking at the instructions.");
         flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] += 1;
-        outputText("\n\nAs before you preparing wood planks. Constructing temporally ladder you using it to get on top of the construction. Here one by one you nail prepared earlier wood pieces to form simple roof. After it's finished you getting down and entering inside. Putting in marked places wood logs you fill rest of the space with stones to make sure floor would be able to deal with even heavy weight. As last thing you use left planks to make floor. After tiring work you going out to look at your brand-new warehouse.");
+        clearOutput();
+        printLazyWriting2("warehouse");
         buildWithHelpers(250);
         outputText("\n\n<b>You've built the " + (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 1 ? "first" : "second") + " warehouse and gained 12 inventory slots.</b>");
         flushOutputTextToGUI();
@@ -338,13 +346,9 @@ public class CampUpgrades extends BaseContent {
         flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 200;
         flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 125;
         flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 30;
-        clearOutput();
-        outputText("You pull out \"Carpenter's Guide\" and finds instructions on how to build granary. You spend few minutes looking at the instructions.");
         flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] += 1;
-        outputText("\n\nYou pick up a log from a nearby pile and saw it into a rectangular plank, fit to be used for the base of your future granary.  You lay out the foundation, rooting in planks, and leaving open corners for the thick logs that will be the corners of the building.");
-        outputText("\nAs you begin to connect their tops to make the floor the real work begins, nailing planks together, fitting everything into place.  After a few hours of hard labor the foundation is complete and you wipe the sweat off your brow, tapping a foot on your work and letting out a breath of air.");
-        outputText("\nFor the last bit of work you get the frame of the building itself into place with a lot of elbow grease and brute strength, they don't call you the champion for nothing!");
-        outputText("\nRapping a knuckle against the walls you're filled with pride of your hard work, though it still needs a roof and actual flooring, but that can wait until tomorrow, you're pretty beat…");
+        clearOutput();
+        printLazyWriting("granary");
         buildWithHelpers(250);
     }
 
@@ -363,12 +367,11 @@ public class CampUpgrades extends BaseContent {
         flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 300;
         flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 225;
         flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 105;
-        clearOutput();
-        outputText("You pull out \"Carpenter's Guide\" and finds instructions on how to build granary. You spend few minutes looking at the instructions.");
         flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] += 1;
-        outputText("As before you preparing wood planks. Constructing temporally ladder you using it to get on top of the construction. Here one by one you nail prepared earlier wood pieces to form simple roof. After it's finished you getting down and entering inside. Putting in marked places wood logs you fill rest of the space with stones to make sure floor would be able to deal with even heavy weight. As last thing you use left planks to make floor. After tiring work you going out to look at your brand-new granary.");
+        clearOutput();
+        printLazyWriting2("granary");
         buildWithHelpers(250);
-        outputText("\n\n<b>You've built granary and gained 9 inventory slots for consumable items.</b>");
+        outputText("\n\n<b>You've built a granary and gained 9 inventory slots for consumable items.</b>");
         flushOutputTextToGUI();
     }
 
@@ -376,27 +379,11 @@ public class CampUpgrades extends BaseContent {
         outputText("Do you start work on building warehouse frame and walls? (Cost: 250 nails, 150 wood and 40 stones.)\n");
         checkMaterials();
         if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 250 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 150 && flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 40) {
-            doYesNo(do2ndWarehouse1Work, noThanks);
+            doYesNo(doWarehouse1Work, noThanks);
         } else {
             errorNotEnough();
             doNext(playerMenu);
         }
-    }
-
-    private function do2ndWarehouse1Work():void {
-        flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 250;
-        flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 150;
-        flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 40;
-        clearOutput();
-        outputText("You pull out \"Carpenter's Guide\" and finds instructions on how to build a warehouse. You spend a few minutes looking at the instructions.");
-        flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] += 1;
-        outputText("\n\nYou pick up a log from a nearby pile and saw it into a rectangular plank, fit to be used for the base of your future granary.  You lay out the foundation, rooting in planks, and leaving open corners for the thick logs that will be the corners of the building.");
-        outputText("\nAs you begin to connect their tops to make the floor the real work begins, nailing planks together, fitting everything into place.  After a few hours of hard labor the foundation is complete and you wipe the sweat off your brow, tapping a foot on your work and letting out a breath of air.");
-        outputText("\nFor the last bit of work you get the frame of the building itself into place with a lot of elbow grease and brute strength, they don't call you the champion for nothing!");
-        outputText("\nRapping a knuckle against the walls, you're filled with pride of your hard work, though it still needs a roof and actual flooring, but that can wait until tomorrow, you're pretty beat…");
-        buildWithHelpers(250);
-        outputText("\n\n<b>You've built granary and gained 9 inventory slots for consumable items.</b>");
-        flushOutputTextToGUI();
     }
 
     //Kitsune Shrine Upgrade

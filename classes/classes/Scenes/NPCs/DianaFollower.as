@@ -630,8 +630,8 @@ public function mainCampMenu():void {
 		addButtonDisabled(7, "C.C.(Mult)", "Diana is not yet ready to cure your curses again.");
 	}
 	else {
-		addButtonDisabled(6, "C.C.(Base)", "You not have any curses to cure. (non-multiplier)");
-		addButtonDisabled(7, "C.C.(Mult)", "You not have any curses to cure. (multiplier)");
+		addButtonDisabled(6, "C.C.(Base)", "You don't have any curses to cure. (non-multiplier)");
+		addButtonDisabled(7, "C.C.(Mult)", "You don't have any curses to cure. (multiplier)");
 	}
 	addButton(8, "Uncurse", uncurseItemsMenu)
 			.disableIf(player.equippedKnownCursedItems().length == 0 && player.carriedKnownCursedItems().length == 0, "You don't have any cursed items");
@@ -717,7 +717,7 @@ public function HealingScene():void {
 	outputText("She then starts to move her hands across your body, rubbing sensually against your [skin], making you gasp as you feel a strong tingling feeling from her fingertips. Sparks of magic play across your [skin] as she leans in, arms rubbing your [hips]. You suspect she just wants some skinship, but her magic's still potent, washing away your pain and injuries.\n\n");
 	outputText("Diana starts to rub her chest against yours, causing more of the strange tingling as her soft mounds move against your [skin], your gasps soon turning into moans as her fingers move up your inner thigh, sparks of pleasure shooting up your spine as she runs her fingertips across your " + (player.hasCock() ? "" : "wo") + "manhood.\n\n");
 	outputText("The sparks of magic intensify, becoming almost painful. You grimace, but she hushes you, soft touch on your body countering the pain. Soon enough, it's all over. Diana lets go, stepping back. All your wounds and injuries have closed up, as if they never existed. You're healed, but now you feel rather aroused.\n\n");
-	dynStats("lus", 33);
+	dynStats("lus", 33, "scale", false);
 	HPChange(player.maxOverHP(), true);
 	EngineCore.changeFatigue( -(Math.round(player.maxFatigue() * 0.5)));
 	doNext(mainCampMenu);
@@ -731,7 +731,7 @@ public function CuringCurseScene1():void {	//value related curses removal
 	outputText("She then starts to move her hands across your body, rubbing sensually against your [skin], making you gasp as you feel a strong tingling feeling from her fingertips, washing away your curses.\n\n");
 	outputText("Diana gives you a wicked little smile, rubbing her chest against yours. Her magic flares, causing more of the strange, shocking sensation as her soft mounds move against your [skin], your gasps soon turning into moans as her fingers move from your hips to your groin, sparks of pleasure shooting up your spine as she caresses your " + (player.hasCock() ? "" : "wo") + "manhood.\n\n");
 	outputText("The sparks of magic intensify, becoming almost painful. You grimace, but she hushes you, soft touch on your body countering the pain. Soon enough, it's all over. Diana lets go, stepping back. Your curses have lessened, although now you feel rather aroused.\n\n");
-	dynStats("lus", 50);
+	dynStats("lus", 50, "scale", false);
 	for each (var stat:String in ["str","spe","tou","int","wis","lib","sens"]) {
 		player.removeCurse(stat, 10,1);
 		player.removeCurse(stat, 10,2);

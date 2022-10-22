@@ -431,7 +431,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			outputText("You ask the maid if is able to tend to your inuries.\n\n" +
 					"\"<i>Of course, [Master], please undress and I shall do so at once.</i>\"\n\n" +
 					"Luna apply medicines and healing ointments on your wounds treating and check for any trace of changes left by harming chemicals. She traces your skin up and down, gently, with her slender, clean fingers, soothing your pains and closing your cuts and scrapes as she does. Her treatment is highly effective, but also a bit arousing; the young maid's touch feels loving and warm, and you soon find yourself flushed with lust under her tender caresses.\n\n");
-			dynStats("lus", Math.round(player.maxLust() * 0.2));
+			dynStats("lus", Math.round(player.maxLust() * 0.2), "scale", false);
 			for each (var stat:String in ["str","spe","tou","int","wis","lib","sens"]) {
 				player.removeCurse(stat, 10,1);
 				player.removeCurse(stat, 5,2);

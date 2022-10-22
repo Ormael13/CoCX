@@ -127,7 +127,7 @@ import classes.internals.*;
 			if (flags[kFLAGS.LILY_LVL_UP] >= 3) {
 				var lustArrowDmg:Number = (flags[kFLAGS.LILY_LVL_UP] * 2);
 				if (flags[kFLAGS.LILY_LVL_UP] >= 9) lustArrowDmg += (this.inte / 5 + rand(player.lib - player.inte * 2 + player.cor) / 5);
-				player.dynStats("lus", lustArrowDmg);
+				player.takeLustDamage(lustArrowDmg, true);
 			}
 		}
 		

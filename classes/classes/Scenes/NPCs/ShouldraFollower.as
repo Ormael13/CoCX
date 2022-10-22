@@ -894,7 +894,7 @@ private function shouldraGroPlus():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_ghostGirl2);
 	outputText("You decide to take up Shouldra's offer on natural body enhancement.  Before you tell her as much, the eager spectre quickly assumes control of your body.  \"<i>Alright, Champ, now we're in business.  So, what did you have in mind?</i>\"");
-	//Balls     Breast     Clit     Cock     Nipples     Butt     Nevermind
+	//Balls     Breast     Clit     Cock     Nipples     Butt     Never mind
 	var balls:Function = null;
 	var breast:Function = shouldraGrowsYoTits;
 	var clit:Function = null;
@@ -925,7 +925,7 @@ private function groBallsBiggaGHOSTYSTYLE():void {
 	}
 	//if ballsize > 10
 	if(player.ballSize > 10) outputText("  You second guess your decision when your swinging cum barrels seem to impede walking.  Shouldra reassures you that the enhanced libido and baby batter supply is worth the wider gait.");
-	dynStats("lus", 10);
+	dynStats("lus", 10, "scale", false);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -938,7 +938,7 @@ private function shouldraGrowsYoTits():void {
 	//same growtits() as Gro+
 	if(player.breastRows.length == 1) player.growTits((1+rand(5)),1,true,1);
 	else player.growTits(1+rand(2),player.breastRows.length,true,1);
-	dynStats("lus", 10);
+	dynStats("lus", 10, "scale", false);
 	doNext(camp.returnToCampUseOneHour);
 }
 //Clit
@@ -991,7 +991,7 @@ private function shouldraGivesYaSomeFukkinTeats():void {
 	outputText("\n\nYour nipples press hard against your [armor], easily gaining at least a quarter of an inch in size.  Shouldra gives each [nipple] a hasty inspection, ensuring her work.");
 	//same increase and potential for fuckable nipples as Gro+
 	player.nippleLength += (rand(2) + 3)/10;
-	dynStats("lus", 15);
+	dynStats("lus", 15, "scale", false);
 	var temp2:Number = 0;
 	//NIPPLECUNTZZZ
 	if(!player.hasFuckableNipples() && rand(4) == 0) {
@@ -1023,7 +1023,7 @@ private function shouldraReductoMenu():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_ghostGirl2);
 	outputText("Shouldra's offer to shrink aspects of your body sounds right up your alley, and you pulse as much to your ghostly compatriot.  There's no response.  You remind her that it was HER suggestion in the first place.  \"<i>Come ooooon, Champ.  It was just a slip of the ol' spiritual tongue.</i>\"  You cross your arms and look up and off to the side, the best way you can figure to glare at something that isn't there. \"<i>Ugh, fine.  Let's just get this over with,</i>\" Shouldra concedes, removing your [armor].");
-	//Balls     Breast     Clit     Cock     Nipples     Butt     Nevermind
+	//Balls     Breast     Clit     Cock     Nipples     Butt     Never mind
 	var balls:Function = null;
 	var breasts:Function = null;
 	var clit:Function = null;
@@ -1142,7 +1142,7 @@ private function shrinkDatBootyForYoGhost():void {
 		if(player.butt.type < 1) player.butt.type = 1;
 		outputText("\n\nIn a few brief seconds, your [butt] relaxes into its new, slightly tinier form.  Shouldra huffs and puffs inside you, not wanting to discuss your bottom any further.");
 	}
-	dynStats("lus", -10);
+	dynStats("lus", -10, "scale", false);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -1210,7 +1210,7 @@ public function shouldersWarnings():Boolean {
 		else {
 			outputText("\nYour [leg] dances around fervently every so often.  At first, you figure that it's your nerves or something, but it soon dawns on you that your forgotten spectral partner is only getting hornier the longer she waits for you.  You appreciate not being nagged to death about it, but you'll have to deal with her lust encroaching on your own until she's satisfied.\n\n<b>Minimum lust raised by 20.</b>\n");
 		}
-		dynStats("lus", .1);
+		dynStats("lus", .1, "scale", false);
 		return true;
 	}
 	//Warning Three
@@ -1221,7 +1221,7 @@ public function shouldersWarnings():Boolean {
 		if(rand(3) == 0) outputText("\n\"<i>Look, Champ.  I've enjoyed the time together, but it's been too long since I got a turn on this ride.  I've been nice, but I'm on the brink here.  <b>If you think you can keep on ignoring me, you'll be sadly mistaken.</b></i>\"  You nod, unsure how exactly to take Shouldra's possible threat to your inaction.  The horny ghost certainly is already having her effect on your own libido.\n\n<b>Minimum lust raised by 30.</b>\n");
 		else if(rand(2) == 0) outputText("\n\nYour hands are beginning to cling desperately to any of your sexual organs.  You managed to win back control of them, but Shouldra doesn't seem too pleased.  \"<i>I'm trying to be nice here, Champ.  Really.  But when I signed on for this, I was under the impression both of us would get to have fun.</i>\"  Your horny passenger's desire only continues to press further into your own.  <b>Shouldra's about to reach her breaking point, and you aren't quite sure you want to find out what happens.</b>\n\n<b>Minimum lust raised by 30.</b>\n");
 		else outputText("\n\"<i>Champ, I like to think I'm a reasonable spirit.  I've respected your boundaries, haven't forced you into anything too wild for too long.  But if you think that I'm going to keep sitting in the corner like a quiet little girl, <b>you will be sorely mistaken.</b></i>\"  You know, call it a hunch, but you think Shouldra is getting really anxious for some sex.  Your ever-increasing libido only furthers your assumption.\n\n<b>Minimum lust raised by 30.</b>\n");
-		dynStats("lus", .1);
+		dynStats("lus", .1, "scale", false);
 		return true;
 	}
 	return false;
@@ -1928,7 +1928,7 @@ private function resistBeingAFatass():void {
 	outputText("\n\n\"<i>YES!</i>\"  yells the helpless feedee, \"<i>Y-yes, I love it.  I love being a fat slut for you, I want to eat and eat and make you happy.</i>\"  The ghost girl stares into her eyes for a moment, before grinning and planting a wet kiss on her lips.");
 	outputText("\n\n\"<i>Good answer babe.  Now get dressed and hurry home before I change my mind.</i>\"  The girl hastily grabs her clothes and dresses herself.  It's quite a challenge, but after some frantic struggling she's reasonably covered up; her jeans are unbuttoned and visibly straining at the seams, while her once-baggy sweater now hugs tightly against her marshmallowy tummy.  The girl then hurries away, glancing back with an odd expression - relief? - before slipping out onto the streets of Tel'Adre.");
 	outputText("\n\nYou suddenly realize that throughout the debauched encounter, none of the other patrons so much as glanced your way.  Must be magic, you think to yourself.  \"<i>Yup, wonderful, wonderful magic,</i>\" says Shouldra; seems she's returned to your head.  \"<i>Well, I've had my fun, Champ.  Let's blow this popsicle stand!</i>\"  You head out of the bakery and return to camp, leaving behind a very confused Maddie.");
-	dynStats("lus", 30);
+	dynStats("lus", 30, "scale", false);
 	doNext(camp.returnToCampUseOneHour);
 }
 }

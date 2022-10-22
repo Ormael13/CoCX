@@ -18,15 +18,15 @@ public class Vala extends Monster
 			//Lightly wounded.
 			if(HPRatio() > .7) {
 				outputText("  The sweet-smelling cloud rapidly fills the room, but the volume of mist is low enough that you don't end up breathing in that much of it.  It does make your pulse quicken in the most pleasant way though...");
-				player.dynStats("lus", 5 + player.lib/20);
+				player.takeLustDamage(5 + player.lib/20, true);
 			}
 			else if(HPRatio() > .4) {
 				outputText("  The rose-colored vapor spreads throughout the room, forcing you to breathe it in or pass out from lack of air.  It smells sweet and makes your head swim with sensual promises and your crotch tingle with desire.  Panicked by the knowledge that you're being drugged, you gasp, but it only draws more of the rapidly disappating cloud into your lungs, fueling your lust.");
-				player.dynStats("lus", 10 + player.lib/20);
+				player.takeLustDamage(10 + player.lib/20, true);
 			}
 			else {
 				outputText("  The cloying, thick cloud of pink spools out from her mouth and fills the room with a haze of bubblegum-pink sweetness.  Even the shallowest, most experimental breath makes your heart pound and your crotch thrum with excitement.  You gasp in another quick breath and sway back and forth on your feet, already on the edge of giving in to the faerie.");
-				player.dynStats("lus", 30 + player.lib/10);
+				player.takeLustDamage(30 + player.lib/10, true);
 			}
 		}
 		//Milk magic
@@ -43,12 +43,12 @@ public class Vala extends Monster
 				createStatusEffect(StatusEffects.Milk,5,0,0,0);
 				outputText("You aren't sure if there's something in her milk, the dust, or just watching her squirt and shake for you, but it's turning you on.");
 			}
-			player.dynStats("lus", statusEffectv1(StatusEffects.Milk) + player.lib / 20);
+			player.takeLustDamage(statusEffectv1(StatusEffects.Milk) + player.lib / 20, true);
 		}
 		//Masturbation
 		public function valaMasturbate():void {
 			outputText("The mind-fucked faerie spreads her alabaster thighs and dips a finger into the glistening slit between her legs, sliding in and out, only pausing to circle her clit.  She brazenly masturbates, putting on quite the show.  Vala slides another two fingers inside herself and finger-fucks herself hard, moaning and panting lewdly.  Then she pulls them out and asks, \"<i>Did you like that?  Will you fuck Vala now?</i>\"");
-			player.dynStats("lus", 4 + player.cor/10);
+			player.takeLustDamage(4 + player.cor/10, true);
 		}
 
 

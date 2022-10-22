@@ -119,7 +119,7 @@ public class Dreams {
         // Well Adjusted cuts by half
         if (player.hasPerk(PerkLib.WellAdjusted)) dreamLust = (dreamLust / 2);
 
-        if (dreamLust > 0) player.dynStats("lus", dreamLust);
+        if (dreamLust > 0) player.dynStats("lus", dreamLust, "scale", false);
 
         //ACTUAL DREAM TEXTS
         if(dreamtemp > 5) {
@@ -324,12 +324,12 @@ public class Dreams {
                         //end dream
                         //lust increase
                     }
-                    player.dynStats("lus", 25);
+                    player.dynStats("lus", 25, "scale", false);
                 }
                 else {
                     //Female Trap Dream:
                     EngineCore.outputText("odd things...\nYou find it difficult to find deep sleep, your rest tormented by strange desires which pluck at your subconscious and tease at your supple tomboy body.   You dream of rough leather on your skin, tough cotton tight upon your [fullChest] and the smell of medicinal alcohol in your nose.  You dream of swaggering down the roads of your old home town, meeting the eyes of everyone you pass, daring them to ask; you dream of haunting bars and parties in a perpetual twilight, sweet talking every girl you see with casual, lust charged ease.  Women want you and men want to be you in the whirl of your sleeping mind.  There is a buzz running through these thoughts and images which energises and stupefies you; you find yourself charging through dream after tantalising dream, exhausting yet somehow never satisfying yourself.");
-                    player.dynStats("lus", 25);
+                    player.dynStats("lus", 25, "scale", false);
                 }
             }
             else if(daydream == 17) {
@@ -432,8 +432,8 @@ public class Dreams {
                 EngineCore.outputText("You wake up in a sweat.  Fuck.");
             }
         }
-        if(CoC.instance.player.cor < 50) CoC.instance.player.dynStats("lus", 10);
-        else CoC.instance.player.dynStats("lus", 25);
+        if(CoC.instance.player.cor < 50) CoC.instance.player.dynStats("lus", 10, "scale", false);
+        else CoC.instance.player.dynStats("lus", 25, "scale", false);
         EngineCore.doNext(EventParser.playerMenu);
     }
 

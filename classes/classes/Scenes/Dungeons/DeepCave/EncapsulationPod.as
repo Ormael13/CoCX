@@ -31,7 +31,7 @@ import classes.internals.*;
 				else if(player.balls == 0) outputText("taint ");
 				outputText("as they climb ever-further up your body.  In spite of yourself, you feel the touch of arousal licking at your thoughts.\n");
 				if(player.lust < 35) {
-					player.dynStats("lus", 1);
+					player.takeLustDamage(1, true);
 					player.lust = 35;
 					statScreenRefresh();
 				}
@@ -75,7 +75,7 @@ import classes.internals.*;
 				else outputText("the underside of your " + allBreastsDescript());
 				outputText(".  Gods above, this is turning you on!  Your lower body is being violated in every conceivable way and it's only arousing you more.  Between the mind-numbing smell and the sexual assault you're having a hard time focusing.\n");
 				if(player.lust < 65) {
-					player.dynStats("lus", 1);
+					player.takeLustDamage(1, true);
 					player.lust = 65;
 					statScreenRefresh();
 				}
@@ -88,14 +88,14 @@ import classes.internals.*;
 				
 				outputText("The tentacles that aren't busy with your [allbreasts] are already climbing higher, and the slime has reached your waist.  If anything it actually makes the constant violation more intense and relaxing.  You start to sink down into it, but catch yourself and pull yourself back up.  No! You've got to fight!\n");
 				if(player.lust < 85) {
-					player.dynStats("lus", 1);
+					player.takeLustDamage(1, true);
 					player.lust = 85;
 					statScreenRefresh();
 				}
 			}
 			//[Round 4 Action]
 			else {
-				player.dynStats("lus", 1);
+				player.takeLustDamage(1, true);
 				player.lust = player.maxLust();
 				statScreenRefresh();
 				outputText("What's happening to you definitely isn't rape.  Not anymore.  You like it too much.  You lean back against a wall of the pod and thrust your " + Appearance.hipDescription(player) + " pitifully against a phantom lover, moaning lewdly as you're forcibly pleasured.  You grab hold of the fleshy walls with your hands and try to hold yourself up, but your [legs] have the consistency of jello.   They fold neatly underneath you as you slide into the ooze and begin to float inside it.  It's comforting in an odd way, and while you're gasping in between moans, your balance finally gives out.  You sink deeper into the fluid and lose all sense of direction.  Up and down become meaningless constructs that no longer matter to you.\n\n");

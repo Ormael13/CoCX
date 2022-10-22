@@ -343,12 +343,12 @@ public class PhyllaScene extends BaseContent implements TimeAwareInterface
 					outputText("\n\nShe's tried to stop a few times, pleading to you that it's too much but you just kept forcing her to continue.  After what you can only guess would be a few hours of watching her cum again and again in an almost heroic display of fortitude, she breaks.  Phylla falls over, completely spent. Sprawled out in front of you, her whole body from head to foot is covered in her own juices.");
 					outputText("\n\nYou don't say a word to her as she lies in the pool of her own secretions, her blank eyes gazing into nothingness.  Maybe you broke her, only time will tell, she'll need to recover first.  You set out back to camp, knowing full well she's now just another plaything for you.");
 					model.time.hours++;
-					dynStats("lus", 25);
+					dynStats("lus", 25, "scale", false);
 					doNext(camp.returnToCampUseOneHour);
 				}
 				function stopPushing():void {
 					outputText("\n\nYou've had your fun, and Phylla is none the wiser.  You wink at her and thank her for the show. The comment clearly goes over her head leaving her wondering about your meaning as you set off back to camp.");
-					dynStats("lus", 15);
+					dynStats("lus", 15, "scale", false);
 					doNext(camp.returnToCampUseOneHour);
 				}
 			}
@@ -1633,7 +1633,7 @@ public class PhyllaScene extends BaseContent implements TimeAwareInterface
 				outputText("\n\nWith one last heave the last egg is expelled from Phylla's pussy.");
 				//If Phylla is Laying (her) Eggs while Drider eggs hatch:
 				if (flags[kFLAGS.PHYLLA_EGG_LAYING] > 0) outputText("\n\nThough judging by the size of her abdomen, you're sure she still has a few left.  Her own eggs don't seem to cause her as many 'problems' as your eggs do.  Phylla tiredly slumps back to her bed, completely spent.");
-				dynStats("lus", 45);
+				dynStats("lus", 45, "scale", false);
 				dynStats("cor", 3);
 				if (player.canOvipositSpider()) {
 					outputText("\n\nGods DAMN!  You want to knock her up so bad!  Your Drider urges to mount her are in danger of overwhelming you and reducing you to a brainless breeder... maybe that isn't so bad after all, but you need to make a decision now before you're consumed by lust!");

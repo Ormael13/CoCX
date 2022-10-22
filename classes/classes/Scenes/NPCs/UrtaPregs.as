@@ -468,7 +468,7 @@ private function drinkSomeUrtaPostBirthTitMilk():void {
 	else outputText("children");
 	outputText(" together... but that's a poor substitute if you don't ever come back.  Please, be careful with yourself, [name],</i>\" she tells you solemnly.  You kiss her goodbye, giving her shaft a teasing grope then step out of the room.");
 	//Maybe lower Libido by -1?//
-	dynStats("lus", 10);
+	dynStats("lus", 10, "scale", false);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -997,7 +997,7 @@ private function urtaMassageClimax():void {
 	//High Cor:
 	else outputText("You walk up to her with a smirk and remove her condom, then pour down its contents over her belly, chuckling to yourself.  Now that's a great cream topping for your lovely fox-herm.");
 	outputText("  You walk out of her house, taking care to lock the door on your way out.");
-	dynStats("lus", 25);
+	dynStats("lus", 25, "scale", false);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -1157,7 +1157,7 @@ private function finishTitWorshipWivUrta():void {
 	outputText("\n\nUrta smiles and promptly gives your belly a playful poke.  \"<i>So you have... well, all right.  Still, if you ever want to drop by my place for a bite to eat... or a drop to drink... please, don't be a stranger,</i>\" she laughs.  \"<i>Though you may need to wait for the baby to be done if it's milk you're wanting,</i>\" she playfully chastises you.");
 	
 	outputText("\n\nYou'll keep that in mind.  Having said that, you kiss her goodbye and find your [armor], then excuse yourself.");
-	dynStats("lus", 20);
+	dynStats("lus", 20, "scale", false);
 	fatigue(40);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -1221,7 +1221,7 @@ private function milkPregnantUrta():void {
 	outputText("\n\n\"<i>I can't say that would have ever been something I'd come up with...</i>\"  Urta notes.  \"<i>But it was actually kind of fun.</i>\"  You smile at her happily.  Maybe next time you should come up with something a bit more hardcore for your roleplay.");
 	
 	outputText("\n\nUrta looks intently at you as you say this.  \"<i>Now, I know that look, and that look means you're up to something... should I be excited, scared or both of whatever you have cooking up in that brain of yours?</i>\"  She asks sarcastically, though her eyes twinkle in a way that suggests she's not really that adverse to it.  Then she yawns loudly.  \"<i>Wow, I feel really tired now... I guess you better head off; I'm going to take a nap while I'm here,</i>\" she murmurs.");
-	dynStats("lus", 20);
+	dynStats("lus", 20, "scale", false);
 	menu();
 	addButton(0,"Go",goHomeHorsecock);
 	addButton(1,"Stay",stayForHorseDickings);
@@ -2154,7 +2154,7 @@ private function getABackWashFromLianna():void {
 	
 	outputText("\n\n\"<i>If you'll excuse me, I gotta go rinse off,</i>\" She says moving towards the shower.  Seeing no point in waiting after what you were just doing, you follow after her.  Once rinsed and dressed, you politely say your goodbyes to the skunkette and head off.");
 	fatigue(-30);
-	dynStats("lus", player.sens/10);
+	dynStats("lus", player.sens/10, "scale", false);
 	doNext(camp.returnToCampUseOneHour);
 }
 

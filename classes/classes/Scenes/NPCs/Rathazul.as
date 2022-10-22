@@ -51,7 +51,7 @@ public function encounterRathazul():void {
 	}
 	var offered:Boolean;
 	//Rat is definitely not sexy!
-	if(player.lust > 30) dynStats("lus", -10);
+	if(player.lust > 30) dynStats("lus", -10, "scale", false);
 	//Introduction
 	outputText(images.showImage("rathazul-lake"));
 	if(player.hasStatusEffect(StatusEffects.MetRathazul)) {
@@ -126,24 +126,24 @@ public function campRathazul():void {
 	}
 	var offered:Boolean;
 	//Rat is definitely not sexy!
-	if(player.lust > 30) dynStats("lus", -1);
-	if(player.lust > 50) dynStats("lus", -2);
-	if(player.lust > 100) dynStats("lus", -3);
-	if(player.lust > 150) dynStats("lus", -4);
-	if(player.lust > 200) dynStats("lus", -5);
-	if(player.lust > 300) dynStats("lus", -5);
-	if(player.lust > 400) dynStats("lus", -6);
-	if(player.lust > 500) dynStats("lus", -6);
-	if(player.lust > 600) dynStats("lus", -7);
-	if(player.lust > 700) dynStats("lus", -7);
-	if(player.lust > 800) dynStats("lus", -8);
-	if(player.lust > 1000) dynStats("lus", -8);
-	if(player.lust > 1200) dynStats("lus", -9);
-	if(player.lust > 1400) dynStats("lus", -9);
-	if(player.lust > 1600) dynStats("lus", -10);
-	if(player.lust > 1800) dynStats("lus", -10);
-	if(player.lust > 2000) dynStats("lus", -11);
-	if(player.lust > 2200) dynStats("lus", -11);
+	if(player.lust > 30) dynStats("lus", -1, "scale", false);
+	if(player.lust > 50) dynStats("lus", -2, "scale", false);
+	if(player.lust > 100) dynStats("lus", -3, "scale", false);
+	if(player.lust > 150) dynStats("lus", -4, "scale", false);
+	if(player.lust > 200) dynStats("lus", -5, "scale", false);
+	if(player.lust > 300) dynStats("lus", -5, "scale", false);
+	if(player.lust > 400) dynStats("lus", -6, "scale", false);
+	if(player.lust > 500) dynStats("lus", -6, "scale", false);
+	if(player.lust > 600) dynStats("lus", -7, "scale", false);
+	if(player.lust > 700) dynStats("lus", -7, "scale", false);
+	if(player.lust > 800) dynStats("lus", -8, "scale", false);
+	if(player.lust > 1000) dynStats("lus", -8, "scale", false);
+	if(player.lust > 1200) dynStats("lus", -9, "scale", false);
+	if(player.lust > 1400) dynStats("lus", -9, "scale", false);
+	if(player.lust > 1600) dynStats("lus", -10, "scale", false);
+	if(player.lust > 1800) dynStats("lus", -10, "scale", false);
+	if(player.lust > 2000) dynStats("lus", -11, "scale", false);
+	if(player.lust > 2200) dynStats("lus", -11, "scale", false);
 	//Introduction
 	outputText(images.showImage("rathazul-camp"));
 	outputText("Rathazul looks up from his equipment and gives you an uncertain smile.\n\n\"<i>Oh, don't mind me,</i>\" he says, \"<i>I'm just running some tests here.  Was there something you needed, [name]?</i>\"\n\n");
@@ -716,7 +716,7 @@ private function buyDyes(fromPage2:Boolean = false):void {
 		addButton(12, "Pink", buyDye, consumables.PINKDYE);
 	}
 	addButton(13, "Reagent", buyDye, useables.REAGENT);
-	addButton(14, "Nevermind", buyDyeNevermind);
+	addButton(14, "Never mind", buyDyeNevermind);
 }
 private function buyDyesPage2():void {
 	clearOutput();
@@ -731,7 +731,7 @@ private function buyDyesPage2():void {
 		addButton(1, "Rainbow", buyDye, consumables.RAINDYE);
 	}
 	addButton(4, "Previous", buyDyes, true);
-	addButton(14, "Nevermind", buyDyeNevermind);
+	addButton(14, "Never mind", buyDyeNevermind);
  }
 
 private function buyDye(dye:ItemType):void {
@@ -767,7 +767,7 @@ private function makeDyes():void {
 		if (player.hasItem(consumables.PINKDYE, 1)) addButton(2, "Pink", makeDye3);
 		if (player.hasItem(consumables.RAINDYE, 1)) addButton(3, "Rainbow", makeDye4);
 	}
-	addButton(14, "Nevermind", makeDyeNevermind);
+	addButton(14, "Never mind", makeDyeNevermind);
 }
 
 private function makeDye1():void {
@@ -840,7 +840,7 @@ private function buyOils():void {
 	addButton(5, "Olive", buyOil, consumables.OLIVEOL);
 	addButton(6, "Russet", buyOil, consumables.RUSS_OL);
 	addButton(10, "Tan", buyOil, consumables.TAN_OIL);
-	addButton(14, "Nevermind", buyOilNevermind);
+	addButton(14, "Never mind", buyOilNevermind);
 }
 
 private function buyOil(oil:ItemType):void {
@@ -874,7 +874,7 @@ private function buyLotions():void {
 	addButton(1, "Rough", buyLotion, consumables.ROUGHLN);
 	addButton(2, "Sexy", buyLotion, consumables.SEXY_LN);
 	addButton(3, "Smooth", buyLotion, consumables.SMTH_LN);
-	addButton(14, "Nevermind", buyLotionNevermind);
+	addButton(14, "Never mind", buyLotionNevermind);
 }
 
 private function buyLotion(lotion:ItemType):void {
@@ -1117,7 +1117,7 @@ private function getThatRatAss3():void {
 	outputText("\"<i>No. And please do not ask me that again.\n- Rathazul</i>\"\n\n");
 	outputText("Sheesh, what a drama queen. A simple \"No thanks\" would've been fine. You toss the note aside with a huff and turn back to camp.\n\n");
 	outputText("Still though, thinking about that rat ass gets you turned on...");
-	dynStats("lus", 10);
+	dynStats("lus", 10, "scale", false);
 	doNext(camp.returnToCampUseOneHour);
 }
 }

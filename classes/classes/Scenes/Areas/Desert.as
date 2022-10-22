@@ -256,7 +256,7 @@ use namespace CoC;
 		{
 			clearOutput();
 			outputText("While exploring the desert, you see a shimmering tower in the distance.  As you rush towards it, it vanishes completely.  It was a mirage!   You sigh, depressed at wasting your time.");
-			dynStats("lus", -15);
+			dynStats("lus", -15, "scale", false);
 			doNext(camp.returnToCampUseOneHour);
 		}
 

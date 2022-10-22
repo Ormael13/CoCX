@@ -122,8 +122,8 @@ public function encounterTamanisDaughters():void {
 			addButton(3, "Let Them", legTamanisDaughtersRAEPYou);
 		}
 		else {
-			addButtonDisabled(2, "Fuck Them", "You not have cock.");
-			addButtonDisabled(3, "Let Them", "You not have cock.");
+			addButtonDisabled(2, "Fuck Them", "You don't have cock.");
+			addButtonDisabled(3, "Let Them", "You don't have cock.");
 		}
 		return;
 	}
@@ -145,8 +145,8 @@ public function encounterTamanisDaughters():void {
 		addButton(3, "Let Them", legTamanisDaughtersRAEPYou);
 	}
 	else {
-		addButtonDisabled(2, "Fuck Them", "You not have cock.");
-		addButtonDisabled(3, "Let Them", "You not have cock.");
+		addButtonDisabled(2, "Fuck Them", "You don't have cock.");
+		addButtonDisabled(3, "Let Them", "You don't have cock.");
 	}
 	if(flags[kFLAGS.TIMES_FUCKED_TAMANIS_DAUGHTERS] == 0) //first time
 		addButton(4, "Play Dumb", playDumbToTamanisDaughters);
@@ -175,8 +175,8 @@ private function playDumbToTamanisDaughters():void {
 		addButton(3, "Let Them", legTamanisDaughtersRAEPYou);
 	}
 	else {
-		addButtonDisabled(2, "Fuck Them", "You not have cock.");
-		addButtonDisabled(3, "Let Them", "You not have cock.");
+		addButtonDisabled(2, "Fuck Them", "You don't have cock.");
+		addButtonDisabled(3, "Let Them", "You don't have cock.");
 	}
 }
 
@@ -1089,7 +1089,7 @@ internal function combatWinAgainstDaughters():void {
 	}
 	else {
 		outputText("You smile in satisfaction as your daughters collapse in upon themselves, devolving into a frenzied orgy.  It looks like they're too distracted to continue fighting.  They're putting on quite a show...\n\n");
-		dynStats("lus", 5);
+		dynStats("lus", 5, "scale", false);
 		if(player.lust >= 33 && player.hasCock()) {
 			outputText("You could still fuck them, but things might get out of hand...\n\nDo you fuck them?");
 			doYesNo(fuckYoDaughtersHomie, cleanupAfterCombat);

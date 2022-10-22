@@ -1006,7 +1006,7 @@ private function minotaurCumFeedingGoo(nice:Boolean = false):void {
 	outputText(".");
 	outputText("\n\n" + flags[kFLAGS.GOO_NAME] + " smiles up at you, giving you a rather long and sensual hug as thanks.  Then, as you watch, her smile broadens.  Her bright eyes dull, the irises dilating into vacant dinner plates.  Your latex pet's hairless snatch puffs up and begins to drool, hot and heavy.  Panting now, she moans, smiling and blissful.  Without another word, she pumps her hand into her cunt, burying her fist up to the wrist in pliant pussy.  Syrupy latex gushes out around it as she finger-fucks herself, giving her body and mind over to the numbing pleasure that the drugged spunk you gifted her has granted.  In seconds, she cums, splattering the ground with inky moisture.  She screams your name and thrusts in again, up to her own elbow.  This sets off another messy orgasm, even larger than the first.");
 	outputText("\n\n" + flags[kFLAGS.GOO_NAME] + "'s eyes roll back into her head, and she collapses flat on her back, still fucking herself with her fist and forearm.  Like that, she cums over and over, succumbing to the narcotic arousal that dulls her wits and fills her body with lusty fire.  To her, there's nothing but mounting pleasure and the ecstatic release that follows, one after the other.  Her body's shaking intensifies to the point where you worry she'll injure her elastic body, but blessedly, her body goes completely limp, slumping into unconsciousness.");
-	dynStats("lus", 10+player.lib/20);
+	dynStats("lus", 10+player.lib/20, "scale", false);
 	//{+fluid, +happiness}
 	gooFluid(20);
 	gooHappiness(15);

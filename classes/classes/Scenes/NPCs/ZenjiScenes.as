@@ -117,7 +117,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_TROLLS);
 			menu();
 			if (player.gems >= 25) addButton(0, "Pay w Gems", part1TrollEncounterPayWithGems);
-			else addButtonDisabled(0, "Pay w Gems", "You not have enough gems!");
+			else addButtonDisabled(0, "Pay w Gems", "You don't have enough gems!");
 			addButton(1, "Sex", part1TrollEncounterSex);
 			addButton(2, "Challenge", part1TrollEncounterChallange);
 			addButton(3, "Fight", part1TrollEncounterFight);
@@ -132,7 +132,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			outputText("You think for a moment on how you want to deal with the situation.\n\n");
 			menu();
 			if (player.gems >= 25) addButton(0, "Pay w Gems", part1TrollEncounterPayWithGems);
-			else addButtonDisabled(0, "Pay w Gems", "You not have enough gems!");
+			else addButtonDisabled(0, "Pay w Gems", "You don't have enough gems!");
 			addButton(2, "Challenge", part1TrollEncounterChallange);
 			addButton(3, "Fight", part1TrollEncounterFight);
 			addButton(4, "Leave", part1TrollEncounterLeave);
@@ -1580,7 +1580,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			menu();
 			addButton(1, "Penis", loverZenjiGiveItemGroPlusPenis);
 			addButton(2, "Tusks", loverZenjiGiveItemGroPlusTusks);
-			addButton(4, "Nevermind", loverZenjiGiveItemGroPlusNevermind);
+			addButton(4, "Never mind", loverZenjiGiveItemGroPlusNevermind);
 		}
 		public function loverZenjiGiveItemGroPlusPenis():void {
 			spriteSelect(SpriteDb.s_zenji);
@@ -1642,7 +1642,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			menu();
 			addButton(1, "Penis", loverZenjiGiveItemReductoPenis);
 			addButton(2, "Tusks", loverZenjiGiveItemReductoTusks);
-			addButton(4, "Nevermind", loverZenjiGiveItemReductoNevermind);
+			addButton(4, "Never mind", loverZenjiGiveItemReductoNevermind);
 		}
 		public function loverZenjiGiveItemReductoPenis():void {
 			spriteSelect(SpriteDb.s_zenji);
@@ -1766,7 +1766,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 				if (player.lib < 85) addButtonDisabled(11, "Tease", "You aren't lewd enough to consider mocking him right now.");
 				else addButtonDisabled(11, "Tease", "You do not have the correct lower body for this scene.");
 			}
-			addButton(14, "Nevermind", loverZenjiSexNevermind).hint("Decide that you do not want to have sex anymore.");
+			addButton(14, "Never mind", loverZenjiSexNevermind).hint("Decide that you do not want to have sex anymore.");
 			if (player.lust > 33) {
 				addButton(0, "Take Anal", loverZenjiTakeAnal).hint("Have Zenji penetrate you anally.");
 				if (player.hasVagina()) addButton(1, "Take Vaginal", loverZenjiTakeVaginal).hint("Have Zenji penetrate you vaginally.");

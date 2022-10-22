@@ -286,7 +286,7 @@ import classes.lists.Gender;
 			addButton(0, "Song", listenToAnitaSong).hint("Listen to Anita's performance. This will cost you five gems.");
 			if (player.lust >= 33) addButton(1, "Sex", rompUpAnitaOffer);
 			else addButtonDisabled(1, "Sex", "You aren't aroused enough to do that.");
-			addButton(4, "Nevermind", nevermindToAnita);
+			addButton(4, "Never mind", nevermindToAnita);
 		}
 
 		private function nevermindToAnita():void {
@@ -321,7 +321,7 @@ import classes.lists.Gender;
 					outputText("\n\n\"<i>She'll be squirtin' like a fountain when she cuuuums \nShe'll be squirtin' like a fountain when she cuuuums \nShe'll be squirtin' like a fountain \nShe'll be squirtin' like a fountain \nShe'll be squirtin' like a fountain when she cuuuuuuuuuuuuuuuuuuuuuums.</i>\"");
 					outputText("\n\nExplosive applause rips through the tent and you find yourself clapping and hollering along with the crowd. Despite the repetitive, simplistic nature of the song you have to admit you enjoyed yourself. As the applause dies down, you realize that you feel a little riled up now.");
 					dynStats("lus", 10, "scale", false);
-					dynStats("lus", (player.lib / 5) + (player.cor / 10));
+					dynStats("lus", (player.lib / 5) + (player.cor / 10), "scale", false);
 					break;
 				case 1: //Rockin Robin
 					outputText("\n\nAnita smiles as she looks out over the customer filled tables, \"<i>Now this one is one of my favorites because it was written about my great-great-great-grandmother. She's the one who left the mountain and brought her nest down to the plains.</i>\" You hear a wolf whistle and turn to find a beer-bellied satyr giving Anita a wink, \"<i>Now if ya know the words feel free to sing along.</i>\" With that she starts bouncing around. As if on cue the light giving bowls of creamy liquid release a funky beat. Once it starts Anita twirls and begins belting out a song in a voice too big for her tiny frame.");
@@ -336,7 +336,7 @@ import classes.lists.Gender;
 					outputText("\n\nRockin Robin, tweet tweet tweetleelee \nRockin Robin, tweet tweet tweetleelee \nWith that rockin robin you know ya really gonna rock tonight</i>\"");
 					outputText("\n\nExplosive applause rips through the tent and you find yourself clapping and hollering along with the crowd. Despite the repetitive, simplistic nature of the song you have to admit you enjoyed yourself. As the applause dies down, you realize that you feel a little riled up now.");
 					dynStats("lus", 10, "scale", false);
-					dynStats("lus", (player.lib / 5) + (player.cor / 10));
+					dynStats("lus", (player.lib / 5) + (player.cor / 10), "scale", false);
 					break;
 				default:
 					outputText("\n\n<b>Something wrong has happened. Let me play you the song of my people. Actually, you should let Ormael/Aimozg know.</b>");
@@ -570,7 +570,7 @@ import classes.lists.Gender;
 			menu();
 			addButton(0, "Stash", checkAndyStash).hint("Go out the back of the tent and check out Andy's stash?");
 			addButtonIfTrue(1, "Sex", rompUpWithAndyTheSatyr, "You aren't aroused enough to consider this.", player.lust >= 33, "Proposition to have sex with the satyr.");
-			addButton(4, "Nevermind", nevermindToAndy);
+			addButton(4, "Never mind", nevermindToAndy);
 		}
 
 		private function nevermindToAndy():void {
@@ -623,7 +623,7 @@ import classes.lists.Gender;
 				outputText("You hold your hand out for the pipe. Andy scoots closer to you and passes it, leaning back against the barrels. As you take your hit the warm happy heat blooms in your [fullChest] and you hand the pipe back with a giant smile.");
 			}
 			dynStats("lus", 10, "scale", false);
-			dynStats("lus", 10 + (player.lib / 5) + (player.cor / 10));
+			dynStats("lus", 10 + (player.lib / 5) + (player.cor / 10), "scale", false);
 			switch(rand(2)) {
 				case 0:
 					outputText("\n\nAndy pulls the pipe to his lips with a quick, \"<i>Watch this.</i>\" he takes the hit, holds it in and blows. Your mouth drops as a pirate ship, complete with billowing sails, flies from his lips. He chuckles as he hands it back. You yourself barely manage a simple hoop and resolve to stop caring about smoke tricks as the drug takes effect, spreading its hot warmth throughout your body.");
@@ -667,7 +667,7 @@ import classes.lists.Gender;
 			outputText("\n\n\"<i>In my defense,</i>\" Andy says as he takes the pipe, \"<i>When I wear pants everyone calls me George and I love my dad but I don't like that shit. I'm Andy damnit, Andy fucking Mathis</i>\"");
 			outputText("\n\nYou can't help the guffaws of laughter erupting from your face. The two of you continue to smoke, chat and laugh until the happiness inducing drug is gone. Once the two of you have finished Andy says something about getting back to work and you find yourself feeling a little hungry.");
 			dynStats("lus", 10, "scale", false);
-			dynStats("lus", 10 + (player.lib / 5) + (player.cor / 10));
+			dynStats("lus", 10 + (player.lib / 5) + (player.cor / 10), "scale", false);
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -1140,7 +1140,7 @@ import classes.lists.Gender;
 			menu();
 			if (player.lust >= 33) addButton(0, "Sex", rompUpWithHarry);
 			else addButtonDisabled(0, "Sex", "You aren't horny enough to consider this.");
-			addButton(4, "Nevermind", nevermindToHarry);
+			addButton(4, "Never mind", nevermindToHarry);
 		}
 
 		private function nevermindToHarry():void {
@@ -1161,7 +1161,7 @@ import classes.lists.Gender;
 				outputText("\n\n\"<i>You want some?</i>\" He asks.");
 			}
 			addButton(0, "Get Fucked", haveHarryFuckYou);
-			addButton(1, "Nevermind", nevermindToHarrySex);
+			addButton(1, "Never mind", nevermindToHarrySex);
 		}
 
 		private function haveHarryFuckYou():void {
@@ -1402,7 +1402,7 @@ import classes.lists.Gender;
 			//Stats and genital changes
 			if (rand(2) == 0) {
 				outputText("\n\nHeat floods your loins as thoughts of tight round asses and dripping pussies flood your mind.");
-				dynStats("lus", 25);
+				dynStats("lus", 25, "scale", false);
 				if (player.lib < 100) {
 					if (player.lib < 50) dynStats("lib", 1);
 					dynStats("lib", 1);
@@ -1422,7 +1422,7 @@ import classes.lists.Gender;
 			if (rand(3) == 0 && changes < changeLimit && player.hasBalls()) {
 				outputText("\n\nYou feel a warmth rising into your face along with a bubbling of alcohol tickling your nose. Oonce it's subsided, you notice your face has a more masculine, angular shape to it.");
 				player.modFem(0, 2 + rand(4));
-				dynStats("lus", 20);
+				dynStats("lus", 20, "scale", false);
 				if (player.cumMultiplier < 10) player.cumMultiplier += 1;
 				if (player.cumMultiplier < 50) player.cumMultiplier += 0.5;
 				changes++;
@@ -1652,7 +1652,7 @@ import classes.lists.Gender;
 						break;
 					}
 				}
-				dynStats("lus", 20);
+				dynStats("lus", 20, "scale", false);
 				changes++;
 			}
 			//Change ears to rhino

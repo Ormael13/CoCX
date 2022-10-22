@@ -324,7 +324,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			} else if (isEnemyInvisible) {
 				bd.disable("You cannot use offensive soulskills against an opponent you cannot see or target.");
 			} else if (player.isGargoyle()) {
-				bd.disable("You cannot use blood soulskills if you not have blood at all.");
+				bd.disable("You cannot use blood soulskills if you don't have blood at all.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsBloodSwipeSF)) {
@@ -342,7 +342,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			} else if (isEnemyInvisible) {
 				bd.disable("You cannot use offensive soulskills against an opponent you cannot see or target.");
 			} else if (player.isGargoyle()) {
-				bd.disable("You cannot use blood soulskills if you not have blood at all.");
+				bd.disable("You cannot use blood soulskills if you don't have blood at all.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsHeartSeeker)) {
@@ -358,7 +358,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			} else if (isEnemyInvisible) {
 				bd.disable("You cannot use offensive soulskills against an opponent you cannot see or target.");
 			} else if (player.isGargoyle()) {
-				bd.disable("You cannot use blood soulskills if you not have blood at all.");
+				bd.disable("You cannot use blood soulskills if you don't have blood at all.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsHeartSeekerSF)) {
@@ -376,7 +376,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			} else if (isEnemyInvisible) {
 				bd.disable("You cannot use offensive soulskills against an opponent you cannot see or target.");
 			} else if (player.isGargoyle()) {
-				bd.disable("You cannot use blood soulskills if you not have blood at all.");
+				bd.disable("You cannot use blood soulskills if you don't have blood at all.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsBloodDewdrops)) {
@@ -392,7 +392,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			} else if (isEnemyInvisible) {
 				bd.disable("You cannot use offensive soulskills against an opponent you cannot see or target.");
 			} else if (player.isGargoyle()) {
-				bd.disable("You cannot use blood soulskills if you not have blood at all.");
+				bd.disable("You cannot use blood soulskills if you don't have blood at all.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsBloodDewdropsSF)) {
@@ -410,7 +410,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			} else if (isEnemyInvisible) {
 				bd.disable("You cannot use offensive soulskills against an opponent you cannot see or target.");
 			} else if (player.isGargoyle()) {
-				bd.disable("You cannot use blood soulskills if you not have blood at all.");
+				bd.disable("You cannot use blood soulskills if you don't have blood at all.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsBloodRequiem)) {
@@ -426,7 +426,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			} else if (isEnemyInvisible) {
 				bd.disable("You cannot use offensive soulskills against an opponent you cannot see or target.");
 			} else if (player.isGargoyle()) {
-				bd.disable("You cannot use blood soulskills if you not have blood at all.");
+				bd.disable("You cannot use blood soulskills if you don't have blood at all.");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsBloodRequiemSF)) {
@@ -444,12 +444,12 @@ public class CombatSoulskills extends BaseCombatContent {
 			} else if (isEnemyInvisible) {
 				bd.disable("You cannot use offensive soulskills against an opponent you cannot see or target.");
 			} else if (player.isGargoyle()) {
-				bd.disable("You cannot use blood soulskills if you not have blood at all.");
+				bd.disable("You cannot use blood soulskills if you don't have blood at all.");
 			}
 		}
 	}
 	private function monsterDodgeSkill(skillName:String):Boolean {
-		if ((player.playerIsBlinded() && rand(2) == 0) || (monster.speedDodge(player) > 0)) {
+		if ((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe))) {
 			if (monster.spe - player.spe < 8) outputText("[Themonster] narrowly avoids your " + skillName + "!");
 			else if (monster.spe-player.spe < 20) outputText("[Themonster] dodges your " + skillName + " with superior quickness!");
 			else outputText("[Themonster] deftly avoids your slow " + skillName + ".");
@@ -577,7 +577,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
 			var damage1:Number = damage;
 			damage = combat.FireTypeDamageBonus(damage);
-			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1);
+			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1, "scale", false);
 			damage += damage1;
 			damage *= 1.1;
 		}
@@ -690,7 +690,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
 			damage = combat.FireTypeDamageBonus(damage);
-			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1);
+			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1, "scale", false);
 			damage *= 1.1;
 		}
 		//soulskill mod effect
@@ -993,7 +993,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
 			damage = combat.FireTypeDamageBonus(damage);
-			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1);
+			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1, "scale", false);
 			damage *= 1.1;
 		}
 		damage *= soulskillMod();
@@ -1153,7 +1153,7 @@ public class CombatSoulskills extends BaseCombatContent {
 				doFireDamage(damage, true, true);
 				damage *= 2;
 			}
-			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1);
+			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1, "scale", false);
 			damage = Math.round(damage * 1.1);
 		}
 		else {
@@ -1214,7 +1214,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
 			damage = combat.FireTypeDamageBonus(damage);
-			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1);
+			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1, "scale", false);
 			damage *= 1.1;
 		}
 		//other bonuses

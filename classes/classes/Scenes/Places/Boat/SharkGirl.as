@@ -16,13 +16,13 @@ public class SharkGirl extends Monster
 				outputText("You charge at the shark girl, prepared to strike again, but stop dead in your tracks when she bends over and wiggles her toned ass towards you. It distracts you long enough for her tail to swing out and smack you to the ground. She coos, \"<i>Aw... You really do like me!</i>\" ");
 				//(Small health damage, medium lust build).
 				player.takePhysDamage(4+rand(4), true);
-				player.dynStats("lus", (10+(player.lib/20)));
+				player.takeLustDamage((10+(player.lib/20)), true);
 			}
 			else {
 				outputText("You pull your [weapon] back, getting a running start to land another attack. The Shark girl smirks and pulls up her bikini top, shaking her perky breasts in your direction. You stop abruptly, aroused by the sight just long enough for the shark girl to kick you across the face and knock you to the ground.  She teases, \"<i>Aw, don't worry baby, you're gonna get the full package in a moment!</i>\" ");
 				//(Small health damage, medium lust build)
 				player.takePhysDamage(4+rand(4), true);
-				player.dynStats("lus", (5+(player.lib/10)));
+				player.takeLustDamage((5+(player.lib/10)), true);
 			}
 		}
 		override public function defeated(hpVictory:Boolean):void

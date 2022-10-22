@@ -683,4 +683,4 @@ use namespace CoC;
 			checkMonster();
 		}
 	}
-}
+}

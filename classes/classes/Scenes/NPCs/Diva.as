@@ -132,7 +132,7 @@ public class Diva extends Monster {
             if (silly()) outputText("  You masochist, you.")
             dam = Math.round(dam);
             player.takePhysDamage(dam);
-            player.takeLustDamage(2 + rand(4));
+            player.takeLustDamage(2 + rand(4), true);
         }
     }
 

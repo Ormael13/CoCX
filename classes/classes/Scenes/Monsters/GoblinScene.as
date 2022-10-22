@@ -538,37 +538,37 @@ public class GoblinScene extends BaseContent {
         //Intro
         if (monster is GoblinAdventurers) {
             outputText("The adventurers fall on the ground, desperately trying to regain their composure but ultimately caving into the exhaustion of defeat. The leather belt wrapped around their pillowy breasts now hangs unfastened around their waist. The syringes once adorning it are now littered around them. Several shattered needles emit a sweet-smelling vapor that soon reaches their nose, causing the goblins to blush fervently as lust quickly overcomes their senses. Still, most of them manage to run away, leaving only a single goblin that has quaffed too much of the vapor.");
-            dynStats("lus", 20);
+            dynStats("lus", 20, "scale", false);
         } else if (monster is GoblinAssassin) {
             outputText("The assassin falls to her feet, desperately trying to regain her composure but ultimately caving in to the exhaustion of defeat. The leather belt that was once wrapped around her pillowy breasts now hangs unfastened around her waist, the syringes once adorning it now littered around her. A shattered needle by her side emits a sweet-smelling vapor that soon reaches her nose, causing the girl to blush furiously as lust begins to overcome her senses.");
-            dynStats("lus", 20);
+            dynStats("lus", 20, "scale", false);
         } else if (monster is GoblinShaman || monster is Priscilla) {
             if (monster.HP < 1) {
                 outputText("The " + goblinClass() + " falls to her feet, smashing her titties against the ground while her wooden staff slips from her grasp, clattering against the ground. She looks up at you and sniffles.");
             } else {
                 outputText("Unable to contain her arousal anymore, the magic-wielding goblin drops onto her back and releases her grip on the staff. Her legs spread wide, displaying amazing flexibility as one hand pulls her loincloth away before diving into her cunt and the other begins twisting her pierced nipples, one at a time. The display manages to stir your loins.");
-                dynStats("lus", 20);
+                dynStats("lus", 20, "scale", false);
             }
         } else if (monster is GoblinWarriors) {
             if (monster.HP < 1) {
                 outputText("The warriors fall to their feet, smashing titties against the confines of their breastplate. But during moment you think what to do to them or maybe.... with them, after some sort of signal of leading larger goblin all of them run into all direction leawving one pressumable weakest of them to face you. She looks up at you and sniffles.");
             } else {
                 outputText("Unable to contain her arousal anymore, the armor-clad goblins drop onto their backs. But during moment you think what to do to them or maybe.... with them, after some sort of signal of leading larger goblin all of them run into all direction leawving one pressumable weakest of them to face you. Her legs spread wide, displaying amazing flexibility as one hand dives into her cunt and the other begins twisting her pierced nipples, one at a time. The display manages to stir your loins.");
-                dynStats("lus", 20);
+                dynStats("lus", 20, "scale", false);
             }
         } else if (monster is GoblinWarrior) {
             if (monster.HP < 1) {
                 outputText("The warrior falls to her feet, smashing her titties against the confines of her breastplate while her sword slips from her grasp, landing on the ground with a thud. She looks up at you and sniffles.");
             } else {
                 outputText("Unable to contain her arousal anymore, the armor-clad goblin drops onto her back and releases her grip on the sword. Her legs spread wide, displaying amazing flexibility as one hand dives into her cunt and the other begins twisting her pierced nipples, one at a time. The display manages to stir your loins.");
-                dynStats("lus", 20);
+                dynStats("lus", 20, "scale", false);
             }
         } else {
             if (monster.HP < 1) {
                 outputText("The goblin falls down, smashing her tits flat on the ground and crying softly from the pain.  She looks up at you and sniffles.");
             } else {
                 outputText("The goblin groans and drops onto her back.  Her legs spread wide, displaying amazing flexibility as one hand dives into her cunt and the other begins twisting her pierced nipples, one at a time.  The display manages to stir your loins.");
-                dynStats("lus", 20);
+                dynStats("lus", 20, "scale", false);
             }
         }
         if (player.lust < 33) outputText("\n\n<b>You aren't horny enough to rape her.</b>");
@@ -895,10 +895,10 @@ public class GoblinScene extends BaseContent {
         //(FITS( barley) – Get ridden)
         if (player.cockArea(x) > monster.vaginalCapacity() * .8) {
             outputText("You pick up the defeated goblin, looking her over. She crosses her arms across her chest pitifully and asks, \"<i>What now?</i>\" with her eyes darting down when she thinks you won't notice. A grimace temporarily crossing her face at the size of your " + player.cockDescript(x) + ". You get the idea of giving her more cock than she can handle, and lower her down towards your " + player.cockDescript(x) + ". The tip slips between her moist and folds, stretching her and taking some of her weight off your arms. She winces slightly, wrapping her legs as far around your " + player.hipDescript() + " as possible.\n\n");
-            outputText("You start walking, letting your movements work with gravity, allowing you to penetrate her with little difficulty. Those puffy wet walls clench you tightly as she slides down, ");
-            if (player.cocks[0].cockType == CockTypesEnum.DEMON) outputText("rubbing painfully against your demonic nubs");
-            else if (player.hasKnot(0)) outputText("stretching painfully around your knot");
-            else if (player.cocks[0].cockType == CockTypesEnum.HORSE || player.cocks[0].cockType.Index > 3) outputText("feeling painfully tight around you");
+            outputText("You start walking, letting your movements work with gravity, allowing you to penetrate her with little difficulty. Those puffy wet walls clench you tightly as she slides down");
+            if (player.cocks[0].cockType == CockTypesEnum.DEMON) outputText(", rubbing painfully against your demonic nubs");
+            else if (player.cocks[0].cockType == CockTypesEnum.HORSE) outputText(", feeling painfully tight around you");
+            else if (player.hasKnot(0)) outputText(", stretching painfully around your knot");
             outputText(". With each and every step she slides down further, stretching her to capacity, until she sits almost completely impaled on you, grabbing your ");
             if (player.biggestTitSize() >= 1) outputText(player.allBreastsDescript());
             else outputText("torso");
@@ -909,10 +909,10 @@ public class GoblinScene extends BaseContent {
         //(FITS – Get ridden)
         else {
             outputText("You pick up the defeated goblin, looking her over.  She crosses her arms across her chest pitifully and asks, \"<i>What now?</i>\" with her eyes darting down when she thinks you won't notice.  You muse to yourself 'great minds think alike' and lower her down towards your " + player.cockDescript(x) + ".  The tip slips between her moist and parted folds, brushing against her entrance and taking some of her weight for you.  She goes cross-eyed and smiles happily, wrapping her legs as far around your " + player.hipDescript() + " as possible.\n\n");
-            outputText("You start walking, letting the movements work with gravity to allow you to effortlessly penetrate her.  Those puffy wet walls clench you tightly as she slides down ");
-            if (player.cocks[0].cockType == CockTypesEnum.DEMON) outputText("rubbing perfectly against your demonic nubs");
-            else if (player.hasKnot(0)) outputText("stretching tightly around your knot");
-            else if (player.cocks[0].cockType == CockTypesEnum.HORSE || player.cocks[0].cockType.Index > 3) outputText("feeling absolutely perfect around you");
+            outputText("You start walking, letting the movements work with gravity to allow you to effortlessly penetrate her.  Those puffy wet walls clench you tightly as she slides down");
+            if (player.cocks[0].cockType == CockTypesEnum.DEMON) outputText(", rubbing perfectly against your demonic nubs");
+            else if (player.cocks[0].cockType == CockTypesEnum.HORSE) outputText(", feeling absolutely perfect around you");
+            else if (player.hasKnot(0)) outputText(", stretching tightly around your knot");
             outputText(".  With each and every step you take, she slides down further, until she sits fully impaled on you, grabbing your ");
             if (player.biggestTitSize() >= 1) outputText(player.allBreastsDescript());
             else outputText("torso");

@@ -42,7 +42,7 @@ public class Tyrantia extends Monster
 			player.takePhysDamage(dmg0, true);
 			player.takePhysDamage(dmg0, true);
 			player.takePhysDamage(dmg0, true);
-			player.dynStats("lus", lust0);
+			player.takeLustDamage(lust0, true);
 		}
 		
 		private function tyrantiaWebbing():void {
@@ -90,7 +90,7 @@ public class Tyrantia extends Monster
 				dmg2 = Math.round(dmg2);
 				player.takePhysDamage(dmg2, true);
 				if (crit) outputText("<b> Critical!</b>");
-				player.dynStats("lus", lustFromHits());
+				player.takeLustDamage(lustFromHits(), true);
 			}
 		}
 		
@@ -100,25 +100,27 @@ public class Tyrantia extends Monster
 		}
 		public function tyrantiaPouncedStruggle():void {
 			clearOutput();
-			player.removeStatusEffect(StatusEffects.Pounced);
 			if ((rand(player.str) > this.str / 2) || player.hasPerk(PerkLib.FluidBody)) tyrantiaPounceSuccess();
 			else tyrantiaPounceFail();
 			SceneLib.combat.enemyAIImpl();
 		}
 		public function tyrantiaPouncedWait():void {
 			clearOutput();
-			player.removeStatusEffect(StatusEffects.Pounced);
 			tyrantiaPounceFail();
 			SceneLib.combat.enemyAIImpl();
 		}
 		private function tyrantiaPounceSuccess():void {
+			player.removeStatusEffect(StatusEffects.Pounced);
 			outputText("You notice a single weak point in her armor, the single metal flap on the front of her spider half. You surge up, jamming your fist as hard as you can into it. The metal and leather slide aside...and your fist enters a surprisingly warm, wet crevasse. The drider on top of you wails in surprise...and something else. Well, if you didn’t know what you’d entered before, you do now. She bucks, your fist exiting with a moist *pop*, and the giantess backs up, her tan cheeks bright red.\n\n");
 			outputText("\"<i>Fighting Dirty like that?!</i>\" She hisses. \"<i>I’ll show you.</i>\"\n");
 			var lustDang:Number = 15 + rand(15);
-			dynStats("lus", lustDang);
+			player.takeLustDamage(lustDang, true);
 			teased(lustDang);
 		}
 		private function tyrantiaPounceFail():void {
+			player.addStatusValue(StatusEffects.Pounced, 1, -1);
+			if (player.getStatusValue(StatusEffects.Pounced, 1) == 0)
+				player.removeStatusEffect(StatusEffects.Pounced);
 			outputText("Unable to throw the giant Drider off of you, she sinks two of her bladed limbs into your body, seemingly at random. You buck, the cold steel sending rippling pain through you, to no effect. ");
 			var dmg3:Number = 0;
 			dmg3 += this.str * 4;
@@ -139,7 +141,7 @@ public class Tyrantia extends Monster
 		
 		private function tyrantiaFangs():void {
 			outputText("The massive Drider charges at you. You sidestep her Dick, but that proved to be a feint. She rams you with her shoulder, then grabs you in her furry arms. You squirm, but her fangs sink into your exposed neck, leaving you both flushed and in pain. Blood squirts from your neck, and as you push, getting out from her grip, you can feel your muscles slackening.\n\n");
-			player.dynStats("lus", (lustFromHits() * 4));
+			player.takeLustDamage((lustFromHits() * 4), true);
 			player.buff("Goop Web").addStats( {"spe":-20} ).withText("Goop Web").combatPermanent();
 		}
 		

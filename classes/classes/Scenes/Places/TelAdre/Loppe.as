@@ -364,7 +364,7 @@ private function talkWithLoppeAboutLoppe():void {
 	outputText("\n\n\"<i>I have always had a very active sex drive.  I didn't know if I was going to win, but I had to try anyways.  The demon said she was very pleased with my choice, and would give me a boon.  So she turned me into this human-bunny-horse hybrid and gave me an even higher sex drive so I'd be a match for her.</i>\"  Loppe's face turns grim.");
 
 	outputText("\n\n\"<i>That was a huge mistake... for her.  Under her lust-boosting spell, I just went absolutely nuts.  We had sex for hours on end; by the time I was done with her, she was knocked out cold in a pool of our mixed fluids and I set my eyes on my mother... still bound...</i>\"  She bites her lower lip.");
-	outputText("\n\n\"<i>I nearly... nevermind.  I'm not going into any more detail about that.  Thanks for the chat.</i>\"");
+	outputText("\n\n\"<i>I nearly... never mind.  I'm not going into any more detail about that.  Thanks for the chat.</i>\"");
 	outputText("\n\nSurprised at the abrupt end, you rise when Loppe does, and return her thanks.");
 	outputText("\n\n\"<i>I guess I'll see you later then.</i>\"");
 	//set LoppeChat = 1
@@ -537,7 +537,7 @@ private function itsMeFuckingUrtaLoppe():void {
 	outputText("\n\n\"<i>Oh my goodness!  Her, too?</i>\" Loppe blurts, before rallying.  \"<i>Well... bigger doesn't mean better,</i>\" she says, still sounding a little defensive - maybe jealous, \"<i>I'm pretty sure I can give you a ride like she could never hope to.  Just call her over and get us a room and I'll show you what I mean, sugar.</i>\"");
 	outputText("\n\n\"<i>Perhaps,</i>\" you laugh.");
 	outputText("\n\nLoppe grins encouragingly, as though her offer were completely serious.  \"<i>Well, anyways... I'd say you'd be in more position to gossip about her than I would.  </i>You<i> can tell </i>me<i> about her next time.  For now, I'm going to go work off these calories.</i>\"");
-	dynStats("lus", 10+player.lib/10);
+	dynStats("lus", 10+player.lib/10, "scale", false);
 	doNext(camp.returnToCampUseOneHour);
 	//End Scene
 }
@@ -556,7 +556,7 @@ private function playAlongWivLoppesesUrtaGossip():void {
 	outputText("\n\nHer voice is almost liquid with desperation and lust, and you sadistically rub her straining bulge, playing your fingers absently over the stretched material, then 'remember' that you had plans to meet with Urta.");
 	outputText("\n\n\"<i>Sugar, wait up!  I know you said she's bigger and yada, yada, yada.  But size isn't everything... I doubt she is able to keep up as long as I am, or that she's as experienced as I am, so let's just tuck ourselves in a corner and you can help me with this... please?  Pretty please?  With cream on top?  Or bottom, or wherever you want it?  Just a quickie, so I can go back to working out?</i>\"  Loppe is on the verge of begging, and a pained look contorts her face as you hear the distinct sound of a seam ripping.  Loppe's hands dart to her shorts, trying to hold it together against her straining erection.  \"<i>Fuck!</i>\" she hisses.");
 	outputText("\n\nYou could just leave her like this or give her some relief... though you'd better be quick if you choose the latter.   You could always slide under the table and help blow off her steam, but a small part of you wonders just how upset she'd be if you kept rubbing her until her seams gave out and she creamed herself.");
-	dynStats("lus", 10+player.lib/10);
+	dynStats("lus", 10+player.lib/10, "scale", false);
 	//[Suck] [Handjob] [Kiss 'n' Run]
 	//See the Tease section for these scenes//
 	//Tease Menu options!
@@ -865,7 +865,7 @@ private function loppeSexChoice(bakery:Boolean = false):void {
 	}
 	if(player.lust < 33) {
 		player.lust = 33;
-		dynStats("lus", .2);
+		dynStats("lus", .2, "scale", false);
 	}
 	//Display sex options
 	//[Cowgirl][Frot][TakeVaginal][Boobjob][TakeAnal][Bail]
@@ -1330,7 +1330,7 @@ private function getFuckedInYerTwatYaCunt():void {
 	outputText("\n\nSidling up to you lover as best you can, you snuggle into her soft embrace.  A little rest can't hurt, right?  You take a look at the room around you, observing the copious smears of fluid all over the bedding and the floor - she's lucky her cock was buried in your cunt, or you're certain the walls and ceilings would be drenched in the stuff as well.  Wondering how lucky you yourself are to be so thoroughly worn out, you close your eyes and sink into oblivion.");
 
 	outputText("\n\n<b>Two hours later...</b>");
-	outputText("\n\nWhen you awaken, you feel much better.  You automatically right yourself, and find to your surprise that it's as effortless an action as always - your absurdly distended gut is gone.  In fact, you've been tucked carefully into clean, dry linen, and the floor is bare.  The stench of sex that should be suffocating you is entirely absent; you could hardly believe there was sex in here at all, nevermind the unmasked fuckfest you just had.");
+	outputText("\n\nWhen you awaken, you feel much better.  You automatically right yourself, and find to your surprise that it's as effortless an action as always - your absurdly distended gut is gone.  In fact, you've been tucked carefully into clean, dry linen, and the floor is bare.  The stench of sex that should be suffocating you is entirely absent; you could hardly believe there was sex in here at all, never mind the unmasked fuckfest you just had.");
 	outputText("\n\n\"<i>Oh, you're awake.  Great!  I brought something to eat,</i>\" Loppe says, casually walking towards you with a tray containing a sandwich and some milk.");
 
 	outputText("\n\nYour belly rumbles, reminding you that even if you don't look like it, you still just woke up after a marathon sex session, and you gratefully accept her offer of food.");
@@ -1964,7 +1964,7 @@ private function beATeaseAndLeaveLoppeAfterSexInvite():void {
 	outputText("\n\nShe smiles wanly at you and walks to her closet, dressing herself in a comfy bathrobe.  \"<i>[name], sorry for being a bad hostess, but can you show yourself out?  I kinda need to take care of a... thing.</i>\"");
 
 	outputText("\n\nYou nod your head, quietly redress yourself, and exit.");
-	dynStats("lus", 5+rand(5));
+	dynStats("lus", 5+rand(5), "scale", false);
 	menu();
 	addButton(0,"Next",telAdre.telAdreMenu);
 }
@@ -2057,7 +2057,7 @@ private function teaseLoppeNHJ():void {
 
 	//If FertileLoppe flag is not active, no special effects
 	//If FertileLoppe flag is active, PC who can become pregnant who uses the Goblin Machine at the Gym will become pregnant with Loppe-daughter if they use it within a week of playing this scene
-	dynStats("lus", 10+player.lib/5);
+	dynStats("lus", 10+player.lib/5, "scale", false);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -2136,7 +2136,7 @@ private function teaseLoppeNSuck():void {
 	//[=Accept=]
 	//[=Refuse=]
 	outputText("\n\nLoppe smiles at you, holding her cock in her hand.  \"<i>Alright then, sugar.  I'll be going in then; I have business to handle.  See you later!</i>\"");
-	dynStats("lus", 10+player.lib/5);
+	dynStats("lus", 10+player.lib/5, "scale", false);
 	doNext(camp.returnToCampUseOneHour);
 	player.slimeFeed();
 }

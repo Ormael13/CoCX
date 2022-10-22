@@ -50,9 +50,8 @@ use namespace CoC;
 					player.addCombatBuff('spe',-2, "Manticore Venom", "ManticoreVenom");
 					outputText("hits the mark dealing ");
 					player.takePhysDamage(tailspikedmg, true);
-					outputText(" damage and poisoning you. Your movements slow down and you feel extremely aroused. You took ");
-					player.dynStats("lus", lustdmg, "scale", false);
-					outputText(" <b>(<font color=\"#ff00ff\">" + lustdmg + "</font>)</b> lust damage!");
+					outputText(" damage and poisoning you. Your movements slow down and you feel extremely aroused. ");
+					player.takeLustDamage(lustdmg, true);
 				}
 			}
 			else {
@@ -74,8 +73,7 @@ use namespace CoC;
 			outputText(" in your direction crashing into you breasts first! For a few seconds you go red in confusion and arousal as your face is lost in her cleavage then she pulls off leaving you dazed and aroused as she readies her next attack!");
 			var boobcrashdmg:Number = Math.round(this.str / 8);
 			var lustdmg:Number = Math.round(this.lib / 3);
-			player.dynStats("lus", lustdmg, "scale", false);
-			outputText(" <b>(<font color=\"#ff00ff\">" + lustdmg + "</font>)</b>");
+			player.takeLustDamage(lustdmg, true);
 			player.takePhysDamage(boobcrashdmg, true);
 			player.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
 			removeStatusEffect(StatusEffects.Flying);

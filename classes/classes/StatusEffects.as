@@ -859,7 +859,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const AlraunePollen:StatusEffectType             = mkCombat("Alraune Pollen");
 		public static const AmilyVenom:StatusEffectType                = AmilyVenomDebuff.TYPE;
 		public static const AnemoneVenom:StatusEffectType              = AnemoneVenomDebuff.TYPE;
-		public static const AntFire:StatusEffectType        	       = mkCombat("Ant Fire");
+		public static const AntAcid:StatusEffectType        	       = mkCombat("Ant Acid");
 		public static const ApophisVenom:StatusEffectType              = mkCombat("Apophis Venom");
 		public static const ArcaneWeb:StatusEffectType                 = mkCombat("Arcane Web");
 		public static const ATranscendentSoulField:StatusEffectType    = mkCombat("Absolute TranscendentSoul Field");

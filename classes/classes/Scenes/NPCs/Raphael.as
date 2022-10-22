@@ -1106,7 +1106,7 @@ private function thieveryEnding():void {
 
 	outputText("<i>\"Some games are meant to be lost.\"</i>  He nuzzles you, putting his snout to your ear.  <i>\"It will be... exquisite.  Lose yourself, in my capable hands.\"</i>\n\n");
 	outputText("Do you?");
-	if (!recalling) dynStats("lus", 25);
+	if (!recalling) dynStats("lus", 25, "scale", false);
 	//Choose:
 	//[Yes] [No]
 	doYesNo(RaphaelThieverySmex,declinePuttingOutForRogues);

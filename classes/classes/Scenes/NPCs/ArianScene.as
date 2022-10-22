@@ -1328,7 +1328,7 @@ private function arianSexingTalk():void {
 		
 		//if PC has no cock)
 		if(!player.hasCock()) {
-			outputText("\n\nBut [arian ey] sighs in disappointment when [arian ey] sees no bulge.  \"<i>Maybe... you could grow your dick back and... nevermind....</i>\"  Arian averts [arian eir] eyes.");
+			outputText("\n\nBut [arian ey] sighs in disappointment when [arian ey] sees no bulge.  \"<i>Maybe... you could grow your dick back and... never mind....</i>\"  Arian averts [arian eir] eyes.");
 			outputText("\n\nYou tell [arian em] you'll think about it.");
 		}
 		else {
@@ -2253,7 +2253,7 @@ private function suckAriansDick():void {
 	outputText("\n\n\"<i>Uuuh... see you soon?</i>\"");
 	outputText("\n\nYou throw [arian em] a smirk over your shoulder, shake your [ass] for [arian eir] benefit, and head on out.");
 	player.sexReward("cum", "Lips");
-	dynStats("lus", 10+player.lib/5);
+	dynStats("lus", 10+player.lib/5, "scale", false);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -2791,11 +2791,11 @@ private function giveIncubusDraftToArian():void {
 		outputText("\n\n\"<i>Wait!  I'm still sensi-Ahhh!</i>\"  Arian's shaft throbs and another jet of cum arches through the air to hit [arian em] squarely on [arian eir] face.  Panting, Arian says, \"<i>I-I think I need a rest now...</i>\"  [arian Ey] collapses on [arian eir] bed, prehensile, reptilian tail waving about in a display of enjoyment.");
 		
 		outputText("\n\nA part of you wonders if maybe [arian ey]'s hoping you'll join [arian em] in bed, but then you take a closer look and concede that [arian ey] is genuinely tired.  You stroke [arian em] affectionately on [arian eir] scaly cheek and politely excuse yourself, heading back to camp.");
-		dynStats("lus", 10+player.lib/20);
+		dynStats("lus", 10+player.lib/20, "scale", false);
 	}
 	else if(flags[kFLAGS.ARIAN_COCK_SIZE] < 3) {
 		flags[kFLAGS.ARIAN_COCK_SIZE]++;
-		dynStats("lus", 10+player.lib/20);
+		dynStats("lus", 10+player.lib/20, "scale", false);
 		outputText("\n\nThe changes start at once. Arian shudders as a wave of arousal hits [arian em] and quickly opens [arian eir] robes to watch [arian eir] ");
 		if(flags[kFLAGS.ARIAN_DOUBLE_COCK] == 0) outputText("shaft emerges from its hiding place.  It throbs and grows, settling in its");
 		else outputText("pair of shafts emerge from their hiding place.  They throb and grow, settling in their");
@@ -2806,7 +2806,7 @@ private function giveIncubusDraftToArian():void {
 		else outputText(" back into its");
 		outputText(" slit.");
 		if(flags[kFLAGS.ARIAN_COCK_SIZE] == 2) {
-			dynStats("lus", 10+player.lib/20);
+			dynStats("lus", 10+player.lib/20, "scale", false);
 			outputText("\n\n[arian Ey] manages to tuck it in, although you have the impression you wouldn't have to reach too far inside to feel its tip.");
 			
 			outputText("\n\n\"<i>It's a tight fit, but I think I can still keep it inside,</i>\" Arian sighs in pleasure.  \"<i>It did feel good though; thank you, [name].</i>\"");
@@ -3406,7 +3406,7 @@ private function giveArianReptilum():void {
 	outputText("\n\nLaughing and moaning uncontrollably Arian says, \"<i>Wow, [name].  Your hands feel really good!  Kind of familiar too!</i>\"");
 	
 	outputText("\n\n[arian Ey]'s clearly so daffy that [arian ey] doesn't realize [arian ey]'s the one touching [arian em]self.  Still, this is amusing, rather than scary, so you're content to watch and let the show play out.  It's kind of a turn on...");
-	dynStats("lus", (5+player.lib/10));
+	dynStats("lus", (5+player.lib/10), "scale", false);
 	
 	var tfed:Boolean = false;
 	outputText("\n\nArian's giggling suddenly stops as [arian ey] finally orgasms, ");
@@ -3758,7 +3758,7 @@ private function listenToLowAnalXPArian():void {
 	outputText("\n\n...Okay, this is getting weird enough.  You're not really sure you can stay in the mood to fuck [arian eir] ass.");
 	outputText("\n\n\"<i>[name]... just let me bake overnight.  I'll be ready tomorrow.  G'night...</i>\"  Having said that, Arian finally calms down.");
 	outputText("\n\nYou wonder if maybe Arian always dreamed of being a baker instead of a wizard... or if [arian ey] just had a midnight craving for pastries  With a soft sigh, you make yourself settle down and try to get back to sleep.");
-	dynStats("lus", 15);
+	dynStats("lus", 15, "scale", false);
 	menu();
 	addButton(0,"Next",camp.sleepWrapper);
 }
@@ -3799,7 +3799,7 @@ private function listenToMediumAnalXPArian():void {
 	if(player.cor >= 66) outputText(", despite the silly lizan being deserving of it");
 	outputText(".");
 	if(player.hasCock()) outputText(" But as payback, [arian ey]'s going to sleep with you inside, not that it seems like it'll be much of a problem to [arian em]... Too bad you can't hold an erection all the time while asleep, so you know eventually you'll slip out...");
-	dynStats("lus", 15);
+	dynStats("lus", 15, "scale", false);
 	menu();
 	addButton(0,"Next",camp.sleepWrapper);
 }
@@ -3850,7 +3850,7 @@ private function teaseHighAnalXPArian():void {
 		outputText("\n\nYou continue pumping inside of the clearly pleased lizan for a while, but eventually you grow bored; as much as [arian ey] might be enjoying this, it's not really doing anything for you, and you still want to get some sleep.  You give [arian em] one last, deep thrust, and then try to withdraw your fingers only to find that you can't.  The greedy lizard-ass won't let you go!");
 		outputText("\n\n\"<i>No, if you remove the stuffing the bagels won't be tasty...</i>\" Arian mutters, still asleep.");
 		outputText("\n\nYou give a few more tugs, then sigh in disgruntlement.  Looks like you'll just have to put up with this; you're too sleepy to wake [arian em] up.  Still, Arian's in for a tongue-lashing in the morning, you note to yourself, even as you drift off to sleep.");
-		dynStats("lus", 15);
+		dynStats("lus", 15, "scale", false);
 	}
 	menu();
 	addButton(0,"Next",camp.sleepWrapper);
@@ -3980,7 +3980,7 @@ public function wakeUpAfterArianSleep():void {
 			outputText("\n\nYou tell [arian em] that's a good idea, and start fishing for your clothes.  Without shame, you start getting dressed in front of [arian em], wondering if [arian ey]'ll appreciate the views you're giving [arian em].  Arian starts dressing up [arian emself], stopping every once in a while to appreciate your body... though you know [arian ey]'s looking, [arian ey] shyly averts [arian eir] eyes.  You smile and give [arian em] an appreciative shake of your booty, just so [arian ey] knows you like the attention, before focusing on getting dressed.");
 			outputText("\n\nOnce you're both fully dressed, Arian smiles at you.  \"<i>[name], have a nice day... and please come visit me soon.</i>\"  You promise you will, and start heading out.");
 			outputText("\n\n\"<i>Wait!  Before you go, could you... never mind...</i>\"  The lizan fidgets a bit and turns away, walking towards [arian eir] work desk.  With a knowing smirk on your face, you walk back and grab [arian em] shoulder, forcefully spinning [arian em] around and kissing [arian em] witless.  You pause for a moment to admire the blissfully stunned, dopey look on your lover's face, then walk off to begin yet another day.");
-			dynStats("lus", 10);
+			dynStats("lus", 10, "scale", false);
 		}
 		else if(flags[kFLAGS.ARIAN_ANAL_XP] < 66) {
 			outputText("You awaken with a yawn, still snuggling against your scaly sleeping partner.  You slip quietly from the bed and give a good stretch, enjoying the feeling but trying not to wake Arian up.  Shortly after you're done, the lizan's maw opens into a wide toothy yawn of [arian eir] own, rubbing the sleep off [arian eir] eyes, [arian ey] looks about until [arian ey] spots you.  \"<i>Good morning, [name]!</i>\" [arian ey] says cheerfully, getting up and lazily stretching [arian emself] as well.  \"<i>Sleep well?</i>\"");
@@ -4010,7 +4010,7 @@ public function wakeUpAfterArianSleep():void {
 			outputText(" [arian Ey] pants, eyes glazed.  \"<i>Uhh... [name]...</i>\"");
 			
 			outputText("\n\nYou smile at [arian em] gently and step back, pulling on your clothes and giving [arian em] a tender kiss on the cheek before you slap [arian eir] bum and head off to start another day.  \"<i>[name].  Visit me soon... please?</i>\" you hear Arian say as you leave, still panting and flustered due to [arian eir] arousal.");
-			dynStats("lus", 10);
+			dynStats("lus", 10, "scale", false);
 		}
 		else { // AnalXP <= 100
 			outputText("You yawn quietly as you find yourself waking up to another new day.  You note that your hand doesn't feel as cramped as you'd expected; in fact, it turns out that your little buttslut must have let your fingers go sometime after you'd gone back to sleep.  You sigh gently and pat Arian on the back; the thought slips into your mind that maybe [arian ey] would like it more if you'd grow a new cock, so you can fuck [arian em] up the ass the way [arian ey] clearly enjoys so much...");
@@ -4027,7 +4027,7 @@ public function wakeUpAfterArianSleep():void {
 			outputText("\n\nArian fiddles [arian eir] fingers.  \"<i>What you said earlier.  I... would really appreciate it if you grew a nice, big, thick cock... full of cum...</i>\"  Arian trails off, licking [arian eir] lips dreamily and fidgeting slightly.");
 			
 			outputText("\n\nYou teasingly ask if [arian ey]'s really gotten that used to you reaming [arian eir] ass like that - why, you would have thought [arian ey]'d prefer it if you stopped.  Arian averts [arian eir] eyes and bites [arian eir] lower lip.  \"<i>No, I mean....  I didn't like it... much... at first.  But, I guess the feeling kinda grew on me, and... well... I've been feeling just so empty lately.</i>\"  [arian Ey] swallows audibly.  \"<i>What I mean to say is... yes, I like it when you poke me back there.</i>\"  [arian Ey] hides [arian eir] face in embarrassment, though [arian ey] fidgets in what you've come to recognize as an indication [arian ey] is aroused.  You can't resist smiling, then stepping over to clasp the still-naked lizan's bum, fingers slipping around to gently tease the entrance of [arian eir] well-trained back pucker, which flexes and tries to entice your fingers inside.  You tell [arian em] you'll consider growing a cock back, tap [arian em] on the nose with the very fingers you were just teasing [arian em] with, and then leave to start a new day.");
-			dynStats("lus", 10);
+			dynStats("lus", 10, "scale", false);
 		}
 	}
 	flags[kFLAGS.ARIAN_MORNING] = 0;

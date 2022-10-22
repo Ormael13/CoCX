@@ -16,7 +16,7 @@ public class Kiha extends Monster
 	{
 		private function kihaTimeWaster():void {
 			outputText("She supports the axe on a shoulder, cracking her neck and arching her back to stretch herself, giving you an unintended show.  ");
-			player.dynStats("lus", 5);
+			player.takeLustDamage(5, true);
 		}
 
 		private function finalizeDamage(damage:int):int {

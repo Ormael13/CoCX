@@ -163,7 +163,7 @@ private function greetHelAsFuckbuddies():void {
 	outputText("\"<i>Hey there, [name],</i>\" she says, quickly wrapping you in a tight hug.  You return it, and spend the next few minutes chatting amicably with your salamander lover.  After a while, though, Hel steps back from your embrace and, giving her ample endowments a little shake, asks, \"<i>So, lover mine, care to blow off some steam?</i>\"");
 	if(player.lust < 40) {
 		player.lust = 40;
-		dynStats("lus", 1);
+		dynStats("lus", 1, "scale", false);
 	}
 	//(Normal Player Victory sex options display)
 	helFuckMenu();
@@ -1082,7 +1082,7 @@ private function askMommaHelForSecondsAfterDinner():void {
 	//(Normal sex options appear, scene concludes afterwards)
 	if(player.lust < 40) {
 		player.lust = 40;
-		dynStats("lus", 1);
+		dynStats("lus", 1, "scale", false);
 	}
 	helFuckMenu();
 }
@@ -1096,7 +1096,7 @@ private function leaveHelAfterMinoThreeSomeChat():void {
 	outputText("\"<i>I'll see you soon, lover mine,</i>\" she whispers, planting a kiss on your neck.\n\n");
 
 	outputText("You tell her to count on it, and make your way back to camp.");
-	dynStats("lus", 2);
+	dynStats("lus", 2, "scale", false);
 	doNext(camp.returnToCampUseOneHour);
 }
 //===================
@@ -1359,7 +1359,7 @@ private function nomOnIzzyTitWithSallyMancer():void {
 	else outputText("\"<i>I want you.  I need you.  Both of you.  Here and now.</i>\"\n\n");
 
 	outputText("That finally serves to get Hel off of Isabella's tit.  With a smirk that's still drooling breast milk, the salamander says, \"<i>Oooh, a three-way.  Now we're talking!  What do you say, lover?  Want to join in on a little girl-on-girl?</i>\"\n\n");
-	dynStats("lus", 40);
+	dynStats("lus", 40, "scale", false);
 	fatigue(-40);
 
 	var dick:Function = null;
@@ -1760,7 +1760,7 @@ private function satisfyHelSoSheStopsMinoFucking():void {
 		outputText("\n\nShe smiles at you, clawed hands clutching tightly to your " + player.skinFurScales() + ". \"<i>Don't worry about a thing, lover mine.  I'll be careful not to hurt you... too much.</i>\"");
 	}
 	if(player.lust < 33) {
-		dynStats("lus", 0.1);
+		dynStats("lus", 0.1, "scale", false);
 		player.lust = 33;
 	}
 	if (!recalling) {
@@ -1783,7 +1783,7 @@ public function helSexualAmbush():void {
 	outputText("As you make your way around, you hear footfalls rapidly approaching.  Alarmed, you lift your [weapon] and spin - just in time for a blazing salamander to bull-rush you to the ground.  The two of you tumble back, eventually coming to a stop with Hel straddling you, already throwing off her scale bikini and clawing at your [armor] - you can see that her thighs are slick with her juices and her skin is flushed with arousal.");
 
 	outputText("\n\n\"<i>Come on, [name],</i>\" she growls, throwing her top aside, letting her big, bouncy breasts free. \"<i>You wanted me not to fuck 'taurs?  Fine... but I NEED you.  NOW!</i>\"");
-	dynStats("lus", 10+player.lib/20);
+	dynStats("lus", 10+player.lib/20, "scale", false);
 	if(player.lust < 33) player.lust = 33;
 	flags[kFLAGS.HEL_RAPED_TODAY] = 1;
 	helFuckMenu(true);

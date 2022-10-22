@@ -27,7 +27,7 @@ package classes.Scenes.Monsters
 				if (temp == 0) {
 					outputText("ass");
 					damage = 4;
-					player.dynStats("lus", 6 + int(player.effectiveSensitivity() / 20));
+					player.takeLustDamage(6 + int(player.effectiveSensitivity() / 20), true);
 				}
 				//Whip yo tits!
 				if (temp == 1) {
@@ -38,7 +38,7 @@ package classes.Scenes.Monsters
 						outputText(" but you feel no pain thanks to your protection");
 						damage = 0;
 					}
-					player.dynStats("lus", 4 + int(player.effectiveSensitivity() / 15));
+					player.takeLustDamage(4 + int(player.effectiveSensitivity() / 15), true);
 				}
 				//Whip yo groin
 				if (temp == 2) {
@@ -77,12 +77,12 @@ package classes.Scenes.Monsters
 								damage = int(damage / (groinProtection + 1));
 							}
 							if (damage < 20) damage = 10;
-							player.dynStats("lus", -15);
+							player.takeLustDamage(-15, true);
 						}
 						if (player.gender == 2) {
 							outputText("groin, making your " + vaginaDescript(0) + " sting with pain");
 							damage = 10;
-							player.dynStats("lus", -8);
+							player.takeLustDamage(-8, true);
 						}
 						if (player.gender == 3) {
 							outputText("groin, dealing painful damage to your [cocks] and " + player.vaginaDescript(0) + ", doubling you over in agony");
@@ -92,7 +92,7 @@ package classes.Scenes.Monsters
 								damage = int(damage / (groinProtection + 1));
 							}
 							if (damage < 30) damage = 30;
-							player.dynStats("lus", -20);
+							player.takeLustDamage(-20, true);
 						}
 					}
 				}
@@ -162,7 +162,7 @@ package classes.Scenes.Monsters
 					outputText(", making it jiggle delightfully.");
 					//85% success rate for the jiggly girls
 					if (rand(100) <= 95) {
-						player.dynStats("lus", rand(butt.type) + 10);
+						player.takeLustDamage(rand(butt.type) + 10, true);
 						outputText("\nThe display is quite arousing.");
 					}
 					else outputText("\nYou're unimpressed.\n\n");
@@ -171,7 +171,7 @@ package classes.Scenes.Monsters
 					outputText(".");
 					//50%ish chance of success for the tight butted.
 					if (rand(100) <= (70 + butt.type * 2)) {
-						player.dynStats("lus", rand(butt.type) + 9);
+						player.takeLustDamage(rand(butt.type) + 9, true);
 						outputText("\nThe display is quite arousing.");
 					}
 					else outputText("\nYou're unimpressed.\n\n");
@@ -186,7 +186,7 @@ package classes.Scenes.Monsters
 					outputText(capitalA + short + " caresses some of her ample chest-flesh before shaking it from side to side enticingly.");
 					if (lust >= maxLust() * 0.5) outputText("  " + pronoun2 + " hard nipples seem to demand your attention.");
 					if (rand(100) <= (65 + biggestTitSize())) {
-						player.dynStats("lus", rand(breastRows[0].breastRating) + breastRows.length + 10);
+						player.takeLustDamage(rand(breastRows[0].breastRating) + breastRows.length + 10, true);
 						outputText("\nThe display is quite arousing.");
 					}
 					else outputText("\nYou're unimpressed.\n\n");
@@ -197,7 +197,7 @@ package classes.Scenes.Monsters
 					if (lust >= maxLust() * 0.5) outputText(", your " + nippleDescript(0) + "s painfully visible.");
 					else outputText(".");
 					if (rand(100) <= (54 + (breastRows.length - 1) * 15 + breastRows[0].breastRating)) {
-						player.dynStats("lus", rand(breastRows[0].breastRating) + breastRows.length * breastRows[0].breasts + 5);
+						player.takeLustDamage(rand(breastRows[0].breastRating) + breastRows.length * breastRows[0].breasts + 5, true);
 						outputText("\nThe display is quite arousing.");
 					}
 					else outputText("\nYou're unimpressed.\n\n");
@@ -210,7 +210,7 @@ package classes.Scenes.Monsters
 				//Success = 50% + 10% times each cock/vagina
 				//rand(vaginas*2 + cocks*2) + wetness and/or length/6
 				if (rand(101) <= (65 + vaginas.length * 10 + cocks.length * 10)) {
-					player.dynStats("lus", rand(vaginas.length * 2 + cocks.length * 2) + 13);
+					player.takeLustDamage(rand(vaginas.length * 2 + cocks.length * 2) + 13, true);
 					outputText("\nThe display is quite arousing.");
 				}
 				else outputText("\nYou're unimpressed.\n\n");
