@@ -6455,6 +6455,7 @@ use namespace CoC;
 		public override function takeLustDamage(lustDmg:Number, display:Boolean = false, applyRes:Boolean = true):Number{
 			var x:Number = super.takeLustDamage(lustDmg, display, applyRes);
 			raijuSuperchargedCheck();
+			EngineCore.statScreenRefresh();
 			return x;
 		}
 
