@@ -153,7 +153,6 @@ import classes.Scenes.SceneLib;
 			this.lowerBody = LowerBody.SALAMANDER;
 			this.tailType = Tail.SALAMANDER;
 			this.wings.type = Wings.FEATHERED_PHOENIX;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.drop = new WeightedDrop().
 					add(useables.EBONBLO, 1).
 					add(weapons.SCIMITR,2).

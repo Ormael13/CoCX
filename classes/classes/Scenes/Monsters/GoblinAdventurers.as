@@ -151,7 +151,6 @@ public class GoblinAdventurers extends Monster
 			this.bonusHP = 70;
 			this.bonusLust = 130;
 			this.lust = 50;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 21;
 			this.gems = rand(50) + 50;
 			this.drop = new WeightedDrop().

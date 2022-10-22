@@ -86,7 +86,6 @@ import classes.Scenes.NPCs.*;
 			this.armorName = "fur";
 			this.lust = 10;
 			this.lustVuln = 0;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.gems = 5 + rand(5);
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.MonsterRegeneration, 5, 0, 0, 0);

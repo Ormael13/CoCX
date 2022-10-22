@@ -211,7 +211,6 @@ public class Syth extends Monster
 			this.bonusLust = 175;
 			this.lust = 30;
 			this.lustVuln = .2;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 30;
 			this.gems = 40 + rand(12);
 			this.drop = new ChainedDrop().

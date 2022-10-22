@@ -151,7 +151,6 @@ public class Phoenix extends Monster
 			this.bonusLust = 110;
 			this.lust = 10;
 			this.lustVuln = .7;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 30;
 			this.gems = 60 + rand(45);
 			this.drop = new ChainedDrop().add(useables.EBONBLO,1/20)

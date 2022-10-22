@@ -28,7 +28,6 @@ public class ProjectTyrant extends Monster {
         this.bonusHP = 300;
         this.bonusLust = 200;
         this.lust = 50;
-        this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
         this.level = 45;
         this.gems = rand(550) + 175;
 

@@ -252,7 +252,6 @@ import classes.display.SpriteDb;
 			this.bonusHP = bonusHP;
 			this.lust = 30;
 			this.lustVuln = lustVuln;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.gems = rand(50) + 100;
 			this.tailType = Tail.COW;
 			this.special1 = SceneLib.mountain.minotaurScene.minoPheromones;

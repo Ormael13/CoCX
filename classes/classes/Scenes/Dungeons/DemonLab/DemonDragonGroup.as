@@ -55,7 +55,6 @@ public class DemonDragonGroup extends Monster {
         this.bonusLust = 690;
         this.lust = 50;
         this.lustVuln = 0.44;
-        this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
         this.level = 50;
         this.gems = rand(50) + 75;
         this.drop = new WeightedDrop().add(useables.D_SCALE, 5).add(useables.LETHITE, 2).add(jewelries.POWRRNG, 1);

@@ -173,7 +173,6 @@ import classes.Scenes.SceneLib;
 			this.bonusLust = 125;
 			this.lust = 20;
 			this.lustVuln = .20;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 25;
 			this.gems = rand(15) + 10;
 			this.drop = NO_DROP;

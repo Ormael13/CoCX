@@ -114,7 +114,6 @@ public class Mimic extends Monster {
         this.lust = 10;
         this.lustVuln = 0;
 		this.bonusLust = 96;
-        this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
         this.level = 6;
         this.gems = rand(30) + 11;
         this.drop = new WeightedDrop()

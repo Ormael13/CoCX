@@ -128,7 +128,6 @@ public class HellHound extends Monster
 			this.armorMDef = 1;
 			this.bonusLust = 125;
 			this.lust = 25;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 10;
 			this.gems = 15+rand(12);
 			this.drop = new WeightedDrop().add(consumables.CANINEP, 3)

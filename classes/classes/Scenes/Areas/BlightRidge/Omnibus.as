@@ -91,7 +91,6 @@ use namespace CoC;
 			this.armorName = "demonic skin";
 			this.lust = 30;
 			this.lustVuln = .5;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.randomDropChance = 0.1;
 			this.randomDropParams = {
 				rarity: DynamicItems.RARITY_CHANCES_LESSER

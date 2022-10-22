@@ -59,7 +59,6 @@ use namespace CoC;
 			this.bonusLust = 105;
 			this.lust = 30;
 			this.lustVuln = .6;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = 15;
 			this.gems = rand(20) + 30;
 			this.drop = new WeightedDrop().

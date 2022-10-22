@@ -263,7 +263,6 @@ public class Tyrantia extends Monster
 			this.weaponVerb="piercing stab";
 			this.armorName = "carapace";
 			this.lustVuln = .2;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.gems = rand(10) + 40;
 			this.drop = new WeightedDrop().add(consumables.B_GOSSR,1)
 					.add(consumables.UNICORN,1)

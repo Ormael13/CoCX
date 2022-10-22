@@ -179,7 +179,6 @@ use namespace CoC;
 			this.armorName = "dragonscales armor";
 			this.lust = 15;
 			this.lustVuln = .9;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.gems = rand(10) + 5;
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);

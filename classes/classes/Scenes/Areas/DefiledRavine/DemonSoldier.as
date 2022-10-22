@@ -337,7 +337,6 @@ public class DemonSoldier extends Monster {
         this.weaponVerb = "claw-slash";
         this.armorName = "leathery skin";
         this.lust = 40;
-        this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
         this.level = 50;
         this.bonusHP = this.level * 25;
         this.weaponAttack = 45;

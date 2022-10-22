@@ -41,7 +41,6 @@ public class ScarredBlade extends Monster
 			this.bonusHP = 400;
 			this.lust = 0;
 			this.lustVuln = 0;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = 17;
 			this.gems = 0;
 			this.drop = new WeightedDrop(weapons.B_SCARB, 1);

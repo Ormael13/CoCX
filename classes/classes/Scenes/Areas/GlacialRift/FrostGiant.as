@@ -232,7 +232,6 @@ public class FrostGiant extends Monster
 			this.bonusLust = 214;
 			this.lust = 10;
 			this.lustVuln = 0.3;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = 89;
 			this.additionalXP = 3500;
 			this.gems = 150 + rand(75);

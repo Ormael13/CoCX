@@ -197,7 +197,6 @@ public class CumWitch extends Monster
 			this.bonusLust = 105;
 			this.lust = 30;
 			this.lustVuln = .8;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 10;
 			this.gems = rand(15) + 5;
 			this.drop = new WeightedDrop().addMany(1,

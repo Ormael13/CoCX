@@ -227,7 +227,6 @@ public class ImpHorde extends Monster
 			this.bonusLust = 114;
 			this.lust = 10;
 			this.lustVuln = .5;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 24;
 			this.gems = 30 + rand(30);
 			this.additionalXP = 100;

@@ -121,7 +121,6 @@ use namespace CoC;
 			this.bonusLust = 241;
 			this.lust = 40;
 			this.lustVuln = .3;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 31;
 			this.gems = rand(40)+50;
 			this.additionalXP = 100;

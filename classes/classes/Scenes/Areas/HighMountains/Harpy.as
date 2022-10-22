@@ -120,7 +120,6 @@ public class Harpy extends Monster
 			this.bonusLust = 120;
 			this.lust = 10;
 			this.lustVuln = .7;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 20;
 			this.gems = 30 + rand(14);
 			this.drop = new ChainedDrop().add(armors.W_ROBES,1/10)

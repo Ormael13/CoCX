@@ -93,7 +93,6 @@ public class Jojo extends Monster
 			this.armorMDef = 10;
 			this.lust = 15;
 			this.lustVuln = .9;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = 10;
 			this.gems = rand(15) + 7;
 			this.special1 = selfCorruption;

@@ -80,7 +80,6 @@ public class SandWitch extends Monster
 			this.bonusHP = 100;
 			this.bonusLust = 102;
 			this.lust = 30;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = 7;
 			this.gems = rand(15) + 5;
 			this.drop = new WeightedDrop().addMany(1,

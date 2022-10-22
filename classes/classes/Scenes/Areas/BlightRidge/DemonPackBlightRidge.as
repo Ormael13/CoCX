@@ -107,7 +107,6 @@ public class DemonPackBlightRidge extends Monster
 			this.bonusHP = 500;
 			this.bonusLust = 170;
 			this.lust = 30;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 30;
 			this.gems = rand(40)+70;
 			this.randomDropChance = 0.1;

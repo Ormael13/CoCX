@@ -193,7 +193,6 @@ use namespace CoC;
 			this.bonusLust = 122 + rand(this.ballSize*3);
 			this.lust = 50;
 			this.lustVuln = 0.33;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = 27;
 			this.additionalXP = 100;
 			this.gems = rand(25) + 40;

@@ -86,7 +86,6 @@ public class Anemone extends Monster
 			this.bonusLust = 102;
 			this.lust = 30;
 			this.lustVuln = .9;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 12;
 			this.gems = rand(20) + 20;
 			this.drop = new WeightedDrop(consumables.DRYTENT, 1);

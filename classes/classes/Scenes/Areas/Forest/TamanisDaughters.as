@@ -132,7 +132,6 @@ public class TamanisDaughters extends Goblin
 			if (bonusLust > 2048) bonusLust = 2048;
 			this.lust = 30;
 			this.lustVuln = .65;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 8 + (Math.floor(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 20));
 			if (level > 30) level = 30;
 			this.gems = rand(15) + 5;

@@ -158,7 +158,6 @@ public class SandMother extends Monster
 			this.bonusLust = 112;
 			this.lust = 20;
 			this.lustVuln = .6;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 12;
 			this.gems = rand(30) + 70;
 			this.createPerk(PerkLib.Resolute,0,0,0,0);

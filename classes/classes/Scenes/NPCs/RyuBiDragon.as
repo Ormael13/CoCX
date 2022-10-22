@@ -210,7 +210,6 @@ public class RyuBiDragon extends Monster
 			this.weaponVerb="claw";
 			this.armorName = "scales";
 			this.lust = 20;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.gems = 5 + rand(3);
 			this.drop = new ChainedDrop().add(useables.D_SCALE, 0.1);
 			this.faceType = Face.DRAGON;

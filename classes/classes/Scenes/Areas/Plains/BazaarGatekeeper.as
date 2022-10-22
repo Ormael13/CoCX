@@ -165,7 +165,6 @@ import classes.internals.*;
 			this.bonusLust = 55;
 			this.lust = 0;
 			this.lustVuln = .15;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 33;
 			this.additionalXP = 300;
 			this.drop = new WeightedDrop().add(weapons.SCIMITR, 1);

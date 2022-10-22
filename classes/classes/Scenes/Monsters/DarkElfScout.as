@@ -140,7 +140,6 @@ public class DarkElfScout extends Monster
 			this.bonusLust = 125;
 			this.lustVuln = .7;
 			this.lust = 50;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 15;
 			this.gems = rand(10) + 10;
 			this.drop = new WeightedDrop().

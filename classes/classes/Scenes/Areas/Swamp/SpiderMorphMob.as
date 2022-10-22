@@ -128,7 +128,6 @@ public class SpiderMorphMob extends Monster
 			this.bonusHP = 1200;
 			this.bonusLust = 93;
 			this.lustVuln = .2;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 23;
 			this.gems = rand(50)+100;
 			this.special1 = SceneLib.combat.packAttack;

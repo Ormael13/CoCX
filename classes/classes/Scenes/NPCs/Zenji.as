@@ -275,7 +275,6 @@ use namespace CoC;
 			this.armorName = "green fuzz";
 			this.lust = 0;
 			this.lustVuln = .1;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.gems = rand(10) + 5;
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);

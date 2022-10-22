@@ -184,7 +184,6 @@ import classes.internals.*;
 				this.bonusLust = 153;
 				this.lust = 35;
 				this.lustVuln = .25;
-				this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 				this.level = 23;
 				this.gems = rand(15) + 35;
 			} else {
@@ -192,7 +191,6 @@ import classes.internals.*;
 				this.bonusLust = 151;
 				this.lust = 30;
 				this.lustVuln = .4;
-				this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 				this.level = 21;
 				this.gems = rand(15) + 25;
 			}

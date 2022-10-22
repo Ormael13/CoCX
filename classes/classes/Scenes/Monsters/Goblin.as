@@ -161,7 +161,6 @@ public class Goblin extends Monster
 			this.armorMDef = 0;
 			this.bonusLust = 92;
 			this.lust = 50;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 2;
 			this.gems = rand(5) + 5;
 			this.drop = new WeightedDrop().

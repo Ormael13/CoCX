@@ -190,7 +190,6 @@ use namespace CoC;
 			this.armorName = "gelatinous skin";
 			this.lust = 45;
 			this.lustVuln = .75;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.drop = new ChainedDrop().add(weapons.PIPE,1/10)
 					.add(consumables.DSLIMEJ,1/2)
 					.elseDrop(useables.GREENGL);

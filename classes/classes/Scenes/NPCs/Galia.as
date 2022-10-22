@@ -229,7 +229,6 @@ import classes.internals.*;
 			this.bodyColor = "red";
 			this.hairColor = "black";
 			this.plural = false;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.drop = NO_DROP;
 			if (flags[kFLAGS.GALIA_LVL_UP] < 5) this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyFeralType, 0, 0, 0, 0);

@@ -106,7 +106,6 @@ public class WormMass extends Monster
 			this.bonusLust = 156;
 			this.lust = 30;
 			this.lustVuln = 0;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 6;
 			this.gems = 0;
 			this.special1 = wormAttack;

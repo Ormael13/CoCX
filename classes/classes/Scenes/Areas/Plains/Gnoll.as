@@ -380,7 +380,6 @@ import classes.internals.*;
 			this.bonusLust = 107;
 			this.lust = 30;
 			this.lustVuln = .35;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 18;
 			this.gems = 15 + rand(10);
 			this.drop = new ChainedDrop().

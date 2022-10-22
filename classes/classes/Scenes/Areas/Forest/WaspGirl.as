@@ -133,7 +133,6 @@ import classes.internals.ChainedDrop;
 			this.bonusLust = 221;//lib+sens+lvl
 			this.lust = 20 + rand(40);
 			this.lustVuln = 0.9;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 33;
 			this.gems = rand(33) + 20;
 			this.drop = new ChainedDrop().add(consumables.OVIELIX, 1 / 6)

@@ -143,7 +143,6 @@ use namespace CoC;
 			this.bonusLust = 211 + this.ballSize * 5 + rand(this.ballSize * 3);
 			this.lust = this.ballSize * 3;
 			this.lustVuln = 0.84;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = 46;
 			this.gems = rand(15) + 15;
 			//this.special1 = SceneLib.mountain.minotaurScene.minoPheromones;

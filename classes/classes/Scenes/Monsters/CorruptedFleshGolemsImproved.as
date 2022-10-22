@@ -79,7 +79,6 @@ package classes.Scenes.Monsters
 			this.lustVuln = .4;
 			this.level = 61;
 			this.additionalXP = 350;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.gems = rand(10)+5;
 			this.wings.type = Wings.BAT_LIKE_TINY;
 			this.tailType = Tail.DEMONIC;

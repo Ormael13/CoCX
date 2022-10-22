@@ -150,7 +150,6 @@ public class Naga extends Monster
 			this.armorMDef = 5;
 			this.bonusLust = 119;
 			this.lust = 30;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 9;
 			this.gems = rand(5) + 8;
 			this.abilities = [

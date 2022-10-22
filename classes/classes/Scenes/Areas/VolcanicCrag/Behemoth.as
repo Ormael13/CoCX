@@ -89,7 +89,6 @@ public class Behemoth extends Monster
 			this.bonusLust = 162;
 			this.lust = 15;
 			this.lustVuln = 0.3;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = 71;
 			this.gems =160 + rand(50);
 			this.drop = NO_DROP;

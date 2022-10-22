@@ -156,7 +156,6 @@ public class GoblinShaman extends Goblin
 			this.bonusLust = 114;
 			this.lust = 35;
 			this.lustVuln = 0.4;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 24;
 			this.gems = rand(15) + 25;
 			this.drop = new WeightedDrop().

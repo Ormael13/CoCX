@@ -172,7 +172,6 @@ public class FetishZealot extends Monster
 			this.bonusLust = 163;
 			this.lust = 25;
 			this.lustVuln = 0.75;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 8;
 			this.gems = 10+rand(15);
 			this.drop = new WeightedDrop().add(armors.C_CLOTH,1)

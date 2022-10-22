@@ -45,7 +45,6 @@ public class RyuBiHuman extends Monster
 			this.bonusLust = 175;//lib+sens+lvl
 			this.lust = 20;
 			this.lustVuln = .25;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 90;
 			this.gems = 15 + rand(8);
 			this.drop = new ChainedDrop().

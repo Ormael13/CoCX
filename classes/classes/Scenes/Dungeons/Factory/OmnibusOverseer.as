@@ -103,7 +103,6 @@ public class OmnibusOverseer extends Monster
 			this.bonusLust = 176;
 			this.lust = 20;
 			this.lustVuln = 0.75;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 16;
 			this.gems = rand(35) + 30;
 			this.additionalXP = 200;

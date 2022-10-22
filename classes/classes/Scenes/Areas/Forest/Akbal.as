@@ -219,7 +219,6 @@ public class Akbal extends Monster
 			this.armorName = "shimmering pelt";
 			this.lust = 30;
 			this.lustVuln = 0.8;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.gems = 40;
 			this.drop = new WeightedDrop().
 					add(consumables.INCUBID,4).

@@ -165,7 +165,6 @@ public class Imp extends Monster
 			this.armorMDef = 0;
 			this.bonusLust = 91;
 			this.lust = 40;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = 1;
 			this.gems = rand(5) + 5;
 			this.drop = new WeightedDrop().

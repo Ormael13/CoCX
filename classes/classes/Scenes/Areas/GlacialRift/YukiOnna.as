@@ -106,7 +106,6 @@ public class YukiOnna extends Monster
 			this.bonusLust = 426;
 			this.lust = 25 + rand(15);
 			this.lustVuln = 0.36;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = 71;
 			this.gems = 115 + rand(20);
 			this.drop = new WeightedDrop()

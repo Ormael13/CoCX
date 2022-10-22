@@ -188,7 +188,6 @@ public class Zetaz extends Monster
 			this.bonusLust = 120;
 			this.lust = 40;
 			this.lustVuln = .35;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = 30;
 			this.gems = rand(75) + 175;
 			this.additionalXP = 200;

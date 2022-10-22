@@ -295,7 +295,6 @@ public class Sheila extends Monster
 			this.bonusLust = 94;
 			this.lust = lust;
 			this.lustVuln = lustVuln;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = 19;
 			this.gems = rand(7) + 7;
 			if (game.flags[kFLAGS.SHEILA_DEMON] == 0){
