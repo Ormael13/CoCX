@@ -674,17 +674,29 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
         outputText(" \n\n");
         dungeons.setDungeonButtons(null, Ballroom3, null, null);
         if (WayOutBlocked) addButton(0, "Console", Computer); //broken after unlocked
+        addButton(1, "Desk,", Desk);
     }
 
     public function Computer():void {
         clearOutput();
         outputText("You sit down in front of the mess of buttons and lights. Several parts of the screen are cordoned off, showing several rooms...The Labs. You can see the labs through this device. You almost laugh. No wonder the demons in here were so terrified. \n\n");
-        outputText("You focus on the rest of the screen...You need to get that fucking door at the entrance unlocked, so you and the others can leave. The screen seems mostly covered with porn or seemingly random symbols, but two things catch your attention. One titled \"Security Folder \", and the other titled \"settings\" \n\n");
+        outputText("You focus on the rest of the screen...You need to get that fucking door at the entrance unlocked, so you and the others can leave. The screen seems mostly covered with porn or seemingly random symbols, but two things catch your attention. One titled \"Security Folder\", and the other titled \"Control Panel\" \n\n");
         menu();
         addButton(0, "Security Folder", Readme);
         addButton(1, "Control Panel", CntrlAltDenied);
-        addButton(2, "Caveman", WEHAVETECHNOLOGY);
+        addButton(2, "CAVEMAN!!!", WEHAVETECHNOLOGY);
         addButton(3, "Leave", Ballroom3);
+    }
+
+    public function Desk():void {
+        clearOutput();
+        outputText("You look through the desk, and find a large stack of paper. Looking through, you find a map that seems to mark off several locations that the demons find important. You recognize He-Din Xiao, marked in red, and a few other locations. \n"
+            + "\n"
+            + "To your surprise, further up the mountain is a marking labeled “My Queen’s Domain”, with an anatomically accurate heart drawn before and after the label. There seems to be lines on the map noting roads, or paths. This place would appear to be a demon queen’s fortress. Your heart leaps as you realise what you hold.\n"
+            + "\n"
+            + "<b>You’ve found a map to the Lethice’s Fortress!</b>");
+        //TODO: set the flag
+        addButton(3, "Back", Ballroom3);
     }
 
     public function Readme():void {
