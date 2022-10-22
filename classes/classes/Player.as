@@ -1045,11 +1045,11 @@ use namespace CoC;
 		public function isDualLowGradeWrathWeapon():Boolean
 		{
 			return weapon == game.weapons.DBFSWO || weapon == game.weapons.ANGSTD || weapon == game.weapons.DBFWHIP;
-		}/*
+		}
 		public function isMidGradeWrathWeapon():Boolean
 		{
 			return weaponSpecials("MGWrath") || weapon == game.weapons.NTWHIP;
-		}*/
+		}
 		public function isDualMidGradeWrathWeapon():Boolean
 		{
 			return weapon == game.weapons.ASTERIUS;
@@ -6455,6 +6455,7 @@ use namespace CoC;
 		public override function takeLustDamage(lustDmg:Number, display:Boolean = false, applyRes:Boolean = true):Number{
 			var x:Number = super.takeLustDamage(lustDmg, display, applyRes);
 			raijuSuperchargedCheck();
+			EngineCore.statScreenRefresh();
 			return x;
 		}
 

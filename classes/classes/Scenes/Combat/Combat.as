@@ -35,6 +35,7 @@ import classes.Scenes.Areas.VolcanicCrag.GolemsTrueFire;
 import classes.Scenes.Camp.TrainingDummy;
 import classes.Scenes.Dungeons.D3.*;
 import classes.Scenes.Dungeons.DeepCave.*;
+import classes.Scenes.Dungeons.DemonLab.Incels;
 import classes.Scenes.Dungeons.DemonLab.IncubusScientist;
 import classes.Scenes.Dungeons.DemonLab.LabGuard;
 import classes.Scenes.Dungeons.EbonLabyrinth.*;
@@ -923,15 +924,20 @@ public class Combat extends BaseContent {
 		if (player.hasPerk(PerkLib.HiddenJobAsura)) {
 			if (player.statStore.hasBuff("AsuraForm")) {
 				bd = buttons.add("Return", returnToNormalShape).hint("Return to normal from Asura form.");
-				bd = buttons.add("Asura's Howl", asurasHowl).hint("Unleash a howl before giving enemy good punching. \n\nWrath Cost: 50");
-				if (player.wrath < 50) {
+				bd = buttons.add("Asura's Howl", asurasHowl).hint("Unleash a howl before giving enemy good punching. \n\nWrath Cost: 100");
+				if (player.wrath < 100) {
 					bd.disable("Your wrath is too low to unleash your howl!");
 				}
-				if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) {
-					bd = buttons.add("SFoD", asurasSixFingersOfDestruction).hint("Six Fingers of Destruction - Poke your enemies Asura Style. \n\nWrath Cost: 50% of max Wrath");
+				if (player.hasPerk(PerkLib.AbsoluteStrength)) {
+					if (player.hasPerk(PerkLib.AsuraStrength)) bd = buttons.add("TFoD", asuras10FingersOfDestruction).hint("Ten Fingers of Destruction - Poke your enemies Asura Style. \n\nWrath Cost: 50% of max Wrath");
+					else if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) bd = buttons.add("EFoD", asuras8FingersOfDestruction).hint("Eight Fingers of Destruction - Poke your enemies Asura Style. \n\nWrath Cost: 50% of max Wrath");
+					else bd = buttons.add("SFoD", asuras6FingersOfDestruction).hint("Six Fingers of Destruction - Poke your enemies Asura Style. \n\nWrath Cost: 50% of max Wrath");
 					if (player.wrath < (player.maxWrath() * 0.5)) {
-						bd.disable("Your wrath is too low to use Six Fingers of Destruction!");
+						bd.disable("Your wrath is too low to poke your enemies Asura Style!");
 					}
+				}
+				if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) {
+				
 				}
 				if (player.hasPerk(PerkLib.AsuraStrength)) {
 				
@@ -1385,30 +1391,24 @@ public class Combat extends BaseContent {
             if (monster as DriderIncubus) taintedMindAttackAttempt();
             return;
         }
-
         clearOutput();
         if (SceneLib.urtaQuest.isUrta()) {
             flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
         }
-
         var dualWeapon:Boolean = false;
         if( player.weaponSpecials("Dual Large") || player.weaponSpecials("Dual Small") || player.weaponSpecials("Dual")){
             dualWeapon = true;
         }
-
         if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] >= 0) {
             flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = Math.min(maxCurrentAttacks(), (flags[kFLAGS.DOUBLE_ATTACK_STYLE] || 0) + 1);
-
             if (player.statusEffectv1(StatusEffects.CounterAction) > 0)
                 flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += player.statusEffectv1(StatusEffects.CounterAction);
-
             if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 1 && player.hasPerk(PerkLib.SteelStorm) && !player.hasStatusEffect(StatusEffects.CounterAction) && dualWeapon) {
                 if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 9) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 6;
                 else if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 5) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 4;
                 else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 2;
             }
-
-            if (player.weaponSpecials("Large") || player.weaponSpecials("Dual Large") || player.weaponSpecials("Massive")){//} || player.weaponSize() >= 2) { // Large/Massive Weapons
+            if (player.weaponSpecials("Large") || player.weaponSpecials("Dual Large") || player.weaponSpecials("Massive") || player.weaponSpecials("Dual Massive")){
                 if( player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking) ){
                     if (player.hasPerk(PerkLib.FuelForTheFire)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 1;
                     if (player.hasPerk(PerkLib.Anger) && player.hp100 < 60) {   // below 60% and 20% gain 1 or 2 attacks
@@ -1418,16 +1418,10 @@ public class Combat extends BaseContent {
                 }
             }
             if (player.hasStatusEffect(StatusEffects.BladeDance) || dualWeapon) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 2;
-            if (player.statStore.hasBuff("AsuraForm")) {
-                if (player.hasPerk(PerkLib.AsuraStrength)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 4;
-                else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 3;
-            }
         }
         else {
             flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
         }
-
-
         attack();
     }
 
@@ -4497,8 +4491,6 @@ public class Combat extends BaseContent {
             resolveFeralCombatAdditionnalAttacks();
         }
         // Do all other attacks
-
-
         meleeDamageAcc(IsFeralCombat);
         if (player.hasPerk(PerkLib.LightningClaw)){
             outputText(" The residual electricity leaves your foe's skin tingling with pleasure.");
@@ -5123,6 +5115,12 @@ public class Combat extends BaseContent {
 			if (player.hasKeyItem("Powboy") >= 0) damage *= 1.15;
 			if (player.hasKeyItem("M.G.S. bracer") >= 0) damage *= 1.2;
 		}
+        if (player.statStore.hasBuff("AsuraForm")) {
+			var AFAAM:Number = 3;
+			if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) AFAAM += 1;
+            if (player.hasPerk(PerkLib.AsuraStrength)) AFAAM += 1;
+            damage *= AFAAM;
+        }
 		if (SceneLib.urtaQuest.isUrta()) damage *= 2;
 		damage *= meleePhysicalForce();
 		return damage;
@@ -6823,9 +6821,9 @@ public class Combat extends BaseContent {
             }
         }
         if (player.isLowGradeWrathWeapon()) {
-            if (player.wrath >= 1) player.wrath -= 1;
+            if (player.wrath >= 5) player.wrath -= 5;
             else {
-                player.takePhysDamage(10);
+                player.takePhysDamage(50);
                 if (player.HP <= player.minHP()) {
                     doNext(endHpLoss);
                     return;
@@ -6833,18 +6831,27 @@ public class Combat extends BaseContent {
             }
         }
         if (player.isDualLowGradeWrathWeapon()) {
-            if (player.wrath >= 2) player.wrath -= 2;
+            if (player.wrath >= 10) player.wrath -= 10;
             else {
-                player.takePhysDamage(20);
+                player.takePhysDamage(100);
+                if (player.HP <= player.minHP()) {
+                    doNext(endHpLoss);
+                }
+            }
+        }
+        if (player.isMidGradeWrathWeapon()) {
+            if (player.wrath >= 20) player.wrath -= 20;
+            else {
+                player.takePhysDamage(200);
                 if (player.HP <= player.minHP()) {
                     doNext(endHpLoss);
                 }
             }
         }
         if (player.isDualMidGradeWrathWeapon()) {
-            if (player.wrath >= 4) player.wrath -= 4;
+            if (player.wrath >= 40) player.wrath -= 40;
             else {
-                player.takePhysDamage(40);
+                player.takePhysDamage(400);
                 if (player.HP <= player.minHP()) {
                     doNext(endHpLoss);
                 }
@@ -8353,6 +8360,7 @@ public class Combat extends BaseContent {
         }
 		if (player.hasStatusEffect(StatusEffects.ConstantHeatConditions) && !player.hasPerk(PerkLib.FireAffinity) && !player.hasPerk(PerkLib.AffinityIgnis)) SceneLib.volcanicCrag.ConstantHeatConditionsTick();
 		if (player.hasStatusEffect(StatusEffects.SubZeroConditions) && !player.hasPerk(PerkLib.ColdAffinity)) SceneLib.glacialRift.SubZeroConditionsTick();
+        if (monster is Incels) (monster as Incels).DraftSupportCheck();
         if (player.hasStatusEffect(StatusEffects.UnderwaterOutOfAir)) {
             var deoxigen:Number = 0;
             deoxigen += (player.maxHP() * 0.05);
@@ -10562,7 +10570,7 @@ public class Combat extends BaseContent {
             if (!player.hasPerk(PerkLib.GreyMage) && player.lust < 50) player.lust = 50;
         }
 		if (player.hasPerk(PerkLib.AdrenalineRush)) {
-			player.wrath += 100;
+			player.wrath += 300;
 			if (player.wrath > player.maxOverWrath()) player.wrath = player.maxOverWrath();
 		}
 		meleeDamageNoLag = 0;
@@ -14270,9 +14278,9 @@ public function bloodDewdropsBloodPuppies():void {
 }
 
 public function asuraformCost():Number {
-    var modcsc:Number = 20;
-    if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) modcsc += 20;
-    if (player.hasPerk(PerkLib.AsuraStrength)) modcsc += 20;
+    var modcsc:Number = 25;
+    if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) modcsc += 25;
+    if (player.hasPerk(PerkLib.AsuraStrength)) modcsc += 25;
     //if (player.hasPerk(PerkLib.)) modcsc += 20;
     //if (player.hasPerk(PerkLib.)) modcsc += 20;
     return modcsc;
@@ -14281,8 +14289,9 @@ public function assumeAsuraForm():void {
     clearOutput();
     player.wrath -= asuraformCost();
     outputText("As you starts to unleash your inner wrath two additional faces emerge from head on sides and " + (player.playerHasFourArms() ? "":"two ") + "additional pair" + (player.playerHasFourArms() ? "":"s") + " of arms grows under your " + (player.playerHasFourArms() ? "second":"first") + " pair" + (player.playerHasFourArms() ? "s":"") + " of arms. ");
-    if (player.hasPerk(PerkLib.AsuraStrength)) {
+    if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) {
         outputText("Additionaly from your back emerge ");
+		if (player.hasPerk(PerkLib.AsuraStrength)) outputText("two ");
         outputText("pair ");
         outputText("of semi-transparent arms. ");
     }
@@ -14333,28 +14342,28 @@ public function returnToNormalShape():void {
 
 public function asurasHowl():void {
     clearOutput();
-    player.wrath -= 50;
+    player.wrath -= 100;
     var heal:Number = 0;
-    heal += scalingBonusIntelligence();
-    if (player.hasPerk(PerkLib.WisenedHealer)) heal += scalingBonusWisdom();
-    heal *= healMod();
-    if (player.armorName == "skimpy nurse's outfit") heal *= 1.2;
-    if (player.weaponName == "unicorn staff") heal *= 1.5;
+    heal += scalingBonusIntelligence() * 2;
+    if (player.hasPerk(PerkLib.WisenedHealer)) heal += scalingBonusWisdom() * 2;
+    heal *= healMod() * 2;
+    if (player.armorName == "skimpy nurse's outfit") heal *= 1.4;
+    if (player.weaponName == "unicorn staff") heal *= 2;
     if (player.hasPerk(PerkLib.CloseToDeath) && player.HP < (player.maxHP() * 0.25)) {
-        if (player.hasPerk(PerkLib.CheatDeath) && player.HP < (player.maxHP() * 0.1)) heal *= 2.5;
-        else heal *= 1.5;
+        if (player.hasPerk(PerkLib.CheatDeath) && player.HP < (player.maxHP() * 0.1)) heal *= 4;
+        else heal *= 2;
     }
-    if (player.hasPerk(PerkLib.AbsoluteStrength)) heal *= 1.1;
-    if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) heal *= 1.2;
-    if (player.hasPerk(PerkLib.ICastAsuraFist)) heal *= 1.3;
-    if (player.hasPerk(PerkLib.AsuraStrength)) heal *= 1.4;
+    if (player.hasPerk(PerkLib.AbsoluteStrength)) heal *= 1.2;
+    if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) heal *= 1.4;
+    if (player.hasPerk(PerkLib.ICastAsuraFist)) heal *= 1.6;
+    if (player.hasPerk(PerkLib.AsuraStrength)) heal *= 1.8;
     //Determine if critical heal!
     var crit:Boolean = false;
     var critHeal:int = 5;
     critHeal += combatMagicalCritical();
     if (rand(100) < critHeal) {
         crit = true;
-        heal *= 1.75;
+        heal *= 2.5;
     }
     heal = Math.round(heal);
     outputText("Gathering all you wrath you unleash howl while your wounds healing a bit. <b>([font-heal]+" + heal + "[/font])</b>.");
@@ -14363,13 +14372,22 @@ public function asurasHowl():void {
     basemeleeattacks();
 }
 
-public function asurasSixFingersOfDestruction():void {
+public function asuras6FingersOfDestruction():void {
+	asurasXFingersOfDestruction("Six");
+}
+public function asuras8FingersOfDestruction():void {
+	asurasXFingersOfDestruction("Eight");
+}
+public function asuras10FingersOfDestruction():void {
+	asurasXFingersOfDestruction("Ten");
+}
+public function asurasXFingersOfDestruction(fingercount:String):void {
     clearOutput();
-    var SFoDMulti:Number = 1;
-    SFoDMulti += player.wrath100 * 0.03;
-    if (player.hasPerk(PerkLib.JobWarrior) || player.hasPerk(PerkLib.JobBeastWarrior)) SFoDMulti *= 2.5;
-    if (player.hasPerk(PerkLib.PrestigeJobBerserker)) SFoDMulti *= 2;
-    if (player.hasPerk(PerkLib.VexedNocking)) SFoDMulti *= 2;
+    var FoDMulti:Number = 1;
+    FoDMulti += player.wrath100 * 0.03;
+    if (player.hasPerk(PerkLib.JobWarrior) || player.hasPerk(PerkLib.JobBeastWarrior)) FoDMulti *= 2.5;
+    if (player.hasPerk(PerkLib.PrestigeJobBerserker)) FoDMulti *= 2;
+    if (player.hasPerk(PerkLib.VexedNocking)) FoDMulti *= 2;
     player.wrath -= Math.round(player.maxWrath() * 0.5);
     var damage:Number = unarmedAttack();
     damage += player.str;
@@ -14383,7 +14401,7 @@ public function asurasSixFingersOfDestruction():void {
     if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
     damage = itemsBonusDamageDamage(damage);
     damage = statusEffectBonusDamage(damage);
-    damage *= (1 + SFoDMulti);
+    damage *= (1 + FoDMulti);
     var crit:Boolean = false;
     var critChance:int = 65;
     critChance += combatPhysicalCritical();
@@ -14394,13 +14412,23 @@ public function asurasSixFingersOfDestruction():void {
         else damage *= 1.75;
     }
     damage = Math.round(damage);
-    outputText("You focus the force of your wrath, pushing the energy to the tip of your fingers. With a deep breath, you release the stored energy, thrusting it upon [themonster]. Six finger-shaped constructs materialize before you as they fly toward [themonster]. ");
+    outputText("You focus the force of your wrath, pushing the energy to the tip of your fingers. With a deep breath, you release the stored energy, thrusting it upon [themonster]. "+fingercount+" finger-shaped constructs materialize before you as they fly toward [themonster]. ");
     doPhysicalDamage(damage, true, true);
     doPhysicalDamage(damage, true, true);
     doPhysicalDamage(damage, true, true);
     doPhysicalDamage(damage, true, true);
     doPhysicalDamage(damage, true, true);
     doPhysicalDamage(damage, true, true);
+	if (fingercount == "Eight") {
+	    doPhysicalDamage(damage, true, true);
+		doPhysicalDamage(damage, true, true);	
+	}
+	if (fingercount == "Ten") {
+		doPhysicalDamage(damage, true, true);
+		doPhysicalDamage(damage, true, true);
+		doPhysicalDamage(damage, true, true);
+		doPhysicalDamage(damage, true, true);
+	}
     if (crit) {
         outputText("<b>Critical! </b>");
         if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);

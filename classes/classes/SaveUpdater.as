@@ -2065,7 +2065,7 @@ public class SaveUpdater extends NPCAwareContent {
 					player.removePerk(PerkLib.WeaponSmallDecaAttack);
 					player.perkPoints += 1;
 				}
-				outputText("\n\nDid you wanted to hold all those multiattacks perk points or you want have them all back for re-spending?");
+				outputText("\n\nMulti-attack perks have been refunded.");
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.032;
 			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");

@@ -280,8 +280,8 @@ public class PerkLib
 
 		// Ordinary (levelup) perks
 		public static const AdrenalineRush:PerkType = mk("Adrenaline Rush", "Adrenaline Rush",
-				"Always start combat with 100 more points of wrath.",
-				"You've chosen the 'Adrenaline Rush' perk, to always start combat with 100 more points of wrath.");
+				"Always start combat with 300 more points of wrath.",
+				"You've chosen the 'Adrenaline Rush' perk, to always start combat with 300 more points of wrath.");
 		public static const AdvancedGolemancyTheory:PerkType = mk("Advanced Golemancy Theory", "Advanced Golemancy Theory",
 				"Enable option to make steel golems and store 1 such golem.",
 				"You've chosen the 'Advanced Golemancy Theory' perk, allowing you to make steel golems.");
@@ -3963,7 +3963,7 @@ public class PerkLib
 		public static const AbsoluteStrength:PerkType = mk("Absolute Strength", "Absolute Strength",
 				"Increase strength based on current amount of wrath as long wrath is above 50% (1:2 ratio). Also wrath outside of combat will not decay and even with correct perks can slowly raise. (+10% of OverMax Wrath)");
 		public static const LikeAnAsuraBoss:PerkType = mk("Like A-sura Boss", "Like A-sura Boss",
-				"Adds to toggle starting in Asura Form at combat start, increase to physical might raise to 120%/60%/40% of core str/tou/spe. (+10% of OverMax Wrath)");
+				"Adds to toggle starting in Asura Form at combat start, increase to physical might raise to 120%/60%/40% of core str/tou/spe and generate one additional pair of semi-transparent arms. (+10% of OverMax Wrath)");
 		public static const ICastAsuraFist:PerkType = mk("I Cast (Asura) Fist", "I Cast (Asura) Fist",
 				"Safe treshold for magic/m.specials is calculated based on overmax wrath not max wrath, +50% of base max wrath. (+10% of OverMax Wrath)")
 				.withBuffs({'maxwrath_mult':+0.5});
@@ -4362,10 +4362,6 @@ public class PerkLib
             WeaponMastery.requireLevel(12)
                     .requirePerk(JobSwordsman)
                     .requireStr(100);
-//            WeaponLargeDoubleAttack.requireLevel(12)
-//                    .requirePerk(JobSwordsman)
-//                    .requireStr(75)
-//                    .requireSpe(50);
             Brawn.requireLevel(12)
                     .requireStr(75)
                     .requirePerk(Brute);
@@ -4411,10 +4407,6 @@ public class PerkLib
             DualWieldLarge.requirePerks(DualWield, GigantGrip)
                     .requireStr(125)
                     .requireLevel(24);
-//            WeaponLargeTripleAttack.requirePerk(WeaponLargeDoubleAttack)
-//                    .requireStr(125)
-//                    .requireSpe(100)
-//                    .requireLevel(24);
             GigantGripEx.requireLevel(24)
                     .requireStr(120)
                     .requirePerk(GigantGrip);
@@ -7306,4 +7298,4 @@ public class PerkLib
         }
 	}
 }
-}
+}

@@ -2207,11 +2207,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			//Turn to Bicorn
 			var CurentColor:String;
 			if ((player.horns.type == Horns.BICORN || player.horns.type == Horns.UNICORN) && player.cor > 89 && !player.hasPerk(PerkLib.AvatorOfCorruption)) {
-				outputText("\nA sudden wave of pleasure strike you making you moan");
+				outputText("\nA sudden wave of pleasure strike you, making you moan");
 				if (player.horns.type == Horns.UNICORN) {
 					outputText(" as your horn begins to split in two");
 					transformations.HornsBicorn.applyEffect(false);
 				}
+				outputText(".");
 				if (!InCollection(player.hairColor, UnicornRace.BicornHairColors)) {
 					CurentColor = randomChoice(UnicornRace.BicornHairColors);
 					outputText(" You feel a tingling in your hairs as the strands turns "+CurentColor+".");
@@ -2232,7 +2233,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				outputText("\n\n<b>You giggle in delight of your own corruption as you fall from grace into a ");
 				if (player.wings.type == Wings.NIGHTMARE) outputText("nightmare");
 				else outputText("bicorn");
-				outputText(". Mighty magical power start to swell in the twin horns on your forehead, washing away whats left of any purity you may have, and you will gladly use them to despoil and tarnish anything pure or innocent left on Mareth.</b>\n");
+				outputText(". Mighty magical power start to swell in the twin horns on your forehead, washing away what's left of any purity you may have, and you will gladly use them to despoil and tarnish anything pure or innocent left on Mareth.</b>\n");
 
 				if (player.hasPerk(PerkLib.AvatorOfPurity)) player.removePerk(PerkLib.AvatorOfPurity);
 				player.createPerk(PerkLib.AvatorOfCorruption, 0, 0, 0, 0);
