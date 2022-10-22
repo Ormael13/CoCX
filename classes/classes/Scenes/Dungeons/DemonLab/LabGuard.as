@@ -88,25 +88,26 @@ public class LabGuard extends Monster {
 
     private function CorShields():void {
         if (DemonLab.TyrantFollower) {
-            outputText("The shieldwall demons brace themselves for impact, but your Drider lover whoops, her massive, armoured frame slamming into the wall, sending demon soldiers scattering every which way. ");
+            outputText("The shieldwall demons brace themselves for impact, but your Drider lover whoops, her massive, armoured frame slamming into the wall, sending demon soldiers scattering every which way.\n\n");
         } else {
-            outputText("You see the demons in front crouching, planting their shields and readying counterattacks. Melee combat seems to be unadvised, unless you want to end up a pincushion!");
+            outputText("You see the demons in front crouching, planting their shields and readying counterattacks. Melee combat seems to be unadvised, unless you want to end up a pincushion!\n\n");
             shieldWall = true;
         }
     }
 
     private function CorVolley():void {
         if (DemonLab.KihaFollower) {
-            outputText("As the ranged weapons begin to poke out from behind the demonic horde, your dragoness lover takes to the air, unleashing a massive blast of flame. Screams and explosions erupt from the demonic lines, and many of those that weren’t hit are either blinded, or shoot instinctively at your dragoness. Kiha swerves in midair, taking no visible hits as she flies back towards more friendly airspace. ");
+            outputText("As the ranged weapons begin to poke out from behind the demonic horde, your dragoness lover takes to the air, unleashing a massive blast of flame. Screams and explosions erupt from the demonic lines, and many of those that weren’t hit are either blinded, or shoot instinctively at your dragoness. Kiha swerves in midair, taking no visible hits as she flies back towards more friendly airspace.\n\n");
         } else {
             outputText("The rangers in the middle of the demon’s formation cackle loudly, and you realise, as the warriors in front crouch, that there are a lot of guns aimed at you. ");
             if (player.shield.isNothing) {
                 outputText("The hail of bullets is too much to dodge entirely! You duck and weave, but some find their mark.");
                 player.takePhysDamage(int(spe * 25) - rand(player.tou) - player.armorDef);
             } else {
-                outputText("You cover yourself with [shield], but some of the bullets find their mark. ");
+                outputText("You cover yourself with [shield], but some of the bullets find their mark.");
                 player.takePhysDamage(int(spe * 20) - rand(player.tou) - player.armorDef);
             }
+            outputText("\n\n")
         }
     }
 
@@ -119,6 +120,7 @@ public class LabGuard extends Monster {
             addHP(inteligencescalingbonus() * 4);
             player.takeLustDamage(5 + (player.lib / 10) + (player.cor / 10) + rand(10), true);
         }
+        outputText("\n\n");
     }
 
     private function FrontlineAttack():void {

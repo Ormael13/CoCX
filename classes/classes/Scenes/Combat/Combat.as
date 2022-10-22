@@ -35,6 +35,7 @@ import classes.Scenes.Areas.VolcanicCrag.GolemsTrueFire;
 import classes.Scenes.Camp.TrainingDummy;
 import classes.Scenes.Dungeons.D3.*;
 import classes.Scenes.Dungeons.DeepCave.*;
+import classes.Scenes.Dungeons.DemonLab.DemonDragonGroup;
 import classes.Scenes.Dungeons.DemonLab.Incels;
 import classes.Scenes.Dungeons.DemonLab.IncubusScientist;
 import classes.Scenes.Dungeons.DemonLab.LabGuard;
@@ -4417,6 +4418,14 @@ public class Combat extends BaseContent {
             else {
                 outputText("Holding the basilisk in your peripheral vision, you charge forward to strike it.  Before the moment of impact, the reptile shifts its posture, dodging and flowing backward skillfully with your movements, trying to make eye contact with you. You twist unexpectedly, bringing your [weapon] up at an oblique angle; the basilisk doesn't anticipate this attack!  ");
             }
+        }
+        if (monster is DemonDragonGroup) {
+            (monster as DemonDragonGroup).meleeResponse();
+            if (player.HP <= player.minHP()) {
+                doNext(endHpLoss);
+                return;
+            }
+            //doesn't interrupt the attack
         }
         if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
             if (monster is FrostGiant) (monster as FrostGiant).giantBoulderHit(0);
