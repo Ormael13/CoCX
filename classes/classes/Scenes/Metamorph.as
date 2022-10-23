@@ -71,6 +71,9 @@ import classes.internals.SaveableState;
 				for (var k2:String in storage2) {
     			if (storage2.hasOwnProperty(k2)) PermanentMemoryStorage[k2] = !!storage2[k2];
 				}
+				var permedMetamorphCount:int = Metamorph.PermanentMemoryStorage.length;
+				player.removeStatusEffect(StatusEffects.TranscendentalGeneticMemory);
+				player.createStatusEffect(StatusEffects.TranscendentalGeneticMemory, 15 * player.perkv1(PerkLib.AscensionTrancendentalGeneticMemoryStageX), permedMetamorphCount, 0, 0);
 			} else {
 				// Migration from old save
 				resetState();

@@ -25,6 +25,7 @@ public class KihaFollower extends NPCAwareContent implements TimeAwareInterface,
     public static var EmberInteractionHappened:Boolean;
     public static var SidonieInteractionHappened:Boolean;
     public static var BelisaInteractionHappened:Boolean;
+    public static var ElectraInteractionHappened:Boolean;
 
     public function stateObjectName():String {
         return "KihaFollower";
@@ -45,6 +46,7 @@ public class KihaFollower extends NPCAwareContent implements TimeAwareInterface,
         EmberInteractionHappened = false;
         SidonieInteractionHappened = false;
         BelisaInteractionHappened = false;
+        ElectraInteractionHappened = false;
     }
 
     public function saveToObject():Object {
@@ -61,7 +63,8 @@ public class KihaFollower extends NPCAwareContent implements TimeAwareInterface,
             "CanVisitKids": CanVisitKids,
             "EmberInteractionHappened": EmberInteractionHappened,
             "SidonieInteractionHappened": SidonieInteractionHappened,
-            "BelisaInteractionHappened": BelisaInteractionHappened
+            "BelisaInteractionHappened": BelisaInteractionHappened,
+            "ElectraInteractionHappened": ElectraInteractionHappened
         };
     }
 
@@ -80,6 +83,7 @@ public class KihaFollower extends NPCAwareContent implements TimeAwareInterface,
             EmberInteractionHappened = "EmberInteractionHappened" in o ? o["EmberInteractionHappened"] : false;
             SidonieInteractionHappened = "SidonieInteractionHappened" in o ? o["SidonieInteractionHappened"] : false;
             BelisaInteractionHappened = "BelisaInteractionHappened" in o ? o["BelisaInteractionHappened"] : false;
+            ElectraInteractionHappened = "ElectraInteractionHappened" in o ? o["ElectraInteractionHappened"] : false;
         } else resetState();
     }
 
@@ -904,6 +908,9 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
             } else if (BelisaFollower.BelisaInCamp && !BelisaInteractionHappened && rand(9) == 0) {
                 belisaInteractionFirst(false);
                 return;
+            } else if (flags[kFLAGS.ELECTRA_FOLLOWER] > 1 && !player.hasStatusEffect(StatusEffects.ElectraOff) && !ElectraInteractionHappened && rand(9) == 0) {
+                electraInteractionFirst(false);
+                return;
             }
 			clearOutput();
 			if (flags[kFLAGS.KIHA_NEEDS_TO_REACT_TO_HORSECOCKING] == 1) kihaReactsToHorseDicking();
@@ -911,6 +918,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
             else if (TyrantiaFollower.isLover() && rand(10) == 0) tyrantiaInteraction(false);
             else if (flags[kFLAGS.SIDONIE_FOLLOWER] == 1 && SidonieInteractionHappened && rand(9) == 0) sidonieInteraction(false);
             else if (BelisaFollower.BelisaInCamp && BelisaInteractionHappened && rand(8) == 0) belisaInteraction(false);
+            else if (flags[kFLAGS.ELECTRA_FOLLOWER] > 1 && !player.hasStatusEffect(StatusEffects.ElectraOff) && ElectraInteractionHappened && rand(8) == 0) electraInteraction(false);
 			else {
 				outputText("When you approach your dragoness lover, a warm smile spreads across her dark features.  She gives you a playful punch on the shoulder and laughs, \"<i>Hey, doofus. You need something -- maybe a little dragon loving?</i>\" she adds with a wink.");
 				if (canKihaGetPregnant()) outputText("\n\n<b>Kiha's belly is noticeably swollen and distended.  She's got eggs in her womb ready to be fertilised; if you aren't careful when you have sex, you could fertilise her and become a father.</b>");
@@ -3080,6 +3088,33 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
             + "You hold your hands up, telling Kiha that you were looking for her, and saw her sign. You tell your dragoness that you didn’t want to disturb her nap. \n"
             + "\n"
             + "“<i>W-well, you failed at that, idiot.</i>” There’s no sting to her words, and she yawns, revealing her many sharp teeth. “<i>What did you want me for?</i>”");
+    }
+
+    //Always proc from Kiha
+    public function electraInteractionFirst(fromElectra:Boolean):void {
+        ElectraInteractionHappened = true;
+        clearOutput();
+
+        outputText("As you head towards Kiha’s part of camp, you hear her voice, getting louder by the second."+
+                "[pg]“<i>Ow, get away from me, you static-brained bimbo!</i>” Kiha brandishes her axe at Electra, and you can feel the static in the air as you near the Raiju. "+
+                "“<i>Oh come on! I need a plug!</i>” Electra whines back. “<i>Can’t you just help a girl out?</i>”[pg]"+
+                "“<i>I’ve seen what happens to those “Plugged” by Raiju. Get away from me!</i>” Kiha sees you, and strides over. “<i>I’m busy with [Name].</i>” Kiha takes your hand, and ignoring Electra’s protests, starts to drag you away from the Raiju.[pg]"+
+                "As soon as you’re away, Kiha sighs in relief, letting you go. “<i>Sorry, but I can’t deal with… <b>That</b>… Right now. Why did you even bring that… thing… into the camp? All she ever does is inflict her lust on people!</i>” [pg]"+
+                "You gently remind Kiha that when you first met her, she would attack you on sight. [pg]"+
+                "“<i>That was different! I was defending myself and my territory. She’s just…</i>” [pg]"+
+                "Trying to get rid of her lust. You interrupt Kiha, telling her about the Raiju’s…well…buildup.[pg]"+
+                "“<i>...She’s not the only one who has to deal with that. With those fucking demons, there’s a lot of pent up lust to go around. And the last thing I want is to get some of those stupid fuzzy ears, just because SHE couldn’t keep her juice to herself.</i>” Kiha huffs, sending a bit of smoke into the air. [pg]"+
+                "You ask Kiha if she has trouble dealing with that sort of thing, and she gives you a glare. “<i>Pervert</i>”, she says simply, before taking off."
+        );
+        eachMinuteCount(15);
+        doNext(playerMenu);
+    }
+
+    //no clears or buttons
+    public function electraInteraction(fromElectra:Boolean):void {
+        outputText("As you head over towards (Kiha/Electra)’s part of camp, you see Kiha and Electra, to your surprise, sitting over a series of lines carved into the dirt. They each have some stones, Kiha’s are black, and Electra’s are white, and they appear to be playing some sort of game with the colored rocks. As you draw near, the two pull a blanket over their game, looking at you. ")
+        if (fromElectra) outputText("You tell Electra that you came to see her, and she grins, bobbing up and down excitedly. Kiha nods respectfully, leaving without a word, and Electra tilts her head slightly, static filling the air. “<i>What’s up, [name]?</i>” ");
+        else outputText("You ask Kiha if she has a moment, and she nods. Electra leaves, and your fiery dragoness smiles slightly. ");
     }
 }
 }
