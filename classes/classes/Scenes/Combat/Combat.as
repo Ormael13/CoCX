@@ -4987,10 +4987,15 @@ public class Combat extends BaseContent {
         }
     }
 
-    public function CommasForDigits(damage:Number, lustColor:Boolean = false, text:String = ""):void {
+    public function CommasForDigits(damage:Number, lustColor:Boolean = false, text:String = "", elementTag:String = ""):void {
         var damagemsg:Array = new Array(String(damage).length);
         var damageTemp:Number = damage;
-        outputText("<b>(</b>");
+        if (elementTag != ""){
+            outputText("<b>[font-" + elementTag + "]([/font]</b>");
+        }
+        else{
+            outputText("<b>(</b>");
+        }
         for (var i:int = 0; i < damagemsg.length; i++) {
             damagemsg[i] = int(damageTemp % 10);
             damageTemp = Math.floor(damageTemp / 10);
@@ -5000,10 +5005,20 @@ public class Combat extends BaseContent {
                 if (j != 0) outputText(",");
                 k = 3;
             }
-            outputText("<b>[font-" + (damage < 0 ? "heal" : damage == 0 ? "miss" : lustColor ? "lust" : "damage") + "]" + text + String(damagemsg[damagemsg.length - j - 1]) + "[/font]</b>");
+            if (elementTag == ""){
+                outputText("<b>[font-" + (damage < 0 ? "heal" : damage == 0 ? "miss" : lustColor ? "lust" : "damage") + "]" + text + String(damagemsg[damagemsg.length - j - 1]) + "[/font]</b>");
+            }
+            else{
+                outputText("<b>[font-" + elementTag + "]" + text + String(damagemsg[damagemsg.length - j - 1])+"[/font]</b>");
+            }
             k--;
         }
-        outputText("<b>)</b>");
+        if (elementTag != ""){
+            outputText("<b>[font-" + elementTag + "] "+ elementTag +")[/font]</b>");
+        }
+        else{
+            outputText("<b>)</b>");
+        }
     }
 
     /**
@@ -7418,7 +7433,7 @@ public class Combat extends BaseContent {
             else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
             if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
         }
-        if (display) CommasForDigits(damage);
+        if (display) CommasForDigits(damage, false, "", "fire");
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
         //Keep shit in bounds.
@@ -7475,7 +7490,7 @@ public class Combat extends BaseContent {
             else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
             if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
         }
-        if (display) CommasForDigits(damage);
+        if (display) CommasForDigits(damage, false, "", "cold");
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
         //Keep shit in bounds.
@@ -7531,7 +7546,7 @@ public class Combat extends BaseContent {
             else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
             if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
         }
-        if (display) CommasForDigits(damage);
+        if (display) CommasForDigits(damage, false, "", "lightning");
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
         //Keep shit in bounds.
@@ -7576,7 +7591,7 @@ public class Combat extends BaseContent {
             else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
             if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
         }
-        if (display) CommasForDigits(damage);
+        if (display) CommasForDigits(damage, false, "", "dark");
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
         //Keep shit in bounds.
@@ -7615,7 +7630,7 @@ public class Combat extends BaseContent {
             else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
             if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
         }
-        if (display) CommasForDigits(damage);
+        if (display) CommasForDigits(damage, false, "", "poison");
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
         //Keep shit in bounds.
@@ -7650,7 +7665,7 @@ public class Combat extends BaseContent {
             else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
             if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
         }
-        if (display) CommasForDigits(damage);
+        if (display) CommasForDigits(damage, false, "", "wind");
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
         //Keep shit in bounds.
@@ -7689,7 +7704,7 @@ public class Combat extends BaseContent {
             else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
             if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
         }
-        if (display) CommasForDigits(damage);
+        if (display) CommasForDigits(damage, false, "", "water");
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
         //Keep shit in bounds.
@@ -7724,7 +7739,7 @@ public class Combat extends BaseContent {
             else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
             if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
         }
-        if (display) CommasForDigits(damage);
+        if (display) CommasForDigits(damage, false, "", "earth");
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
         //Keep shit in bounds.
@@ -7759,7 +7774,7 @@ public class Combat extends BaseContent {
             else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
             if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
         }
-        if (display) CommasForDigits(damage);
+        if (display) CommasForDigits(damage, false, "", "poison");
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
         //Keep shit in bounds.
