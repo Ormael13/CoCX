@@ -27,7 +27,7 @@ use namespace CoC;
 			if (player.bRows() > 1) bonus++;
 			if (player.bRows() > 2) bonus++;
 			player.createStatusEffect(StatusEffects.LustTransferance,bonus,0,0,0);
-			player.dynStats("lus", bonus * 2 + 5 + player.effectiveSensitivity()/5);
+			player.takeLustDamage(bonus * 2 + 5 + player.effectiveSensitivity()/5, true);
 		}
 		
 		private function livingFailureIdInsinuation():void {
@@ -65,7 +65,7 @@ use namespace CoC;
 				dynStats("cor", 20);
 			}
 			outputText("\n\n");
-			player.dynStats("lus", (10 + int(player.lib / 10 + player.effectiveSensitivity() / 10 + player.cor / 10)));
+			player.takeLustDamage((10 + int(player.lib / 10 + player.effectiveSensitivity() / 10 + player.cor / 10)), true);
 		}
 		
 		private function livingFailureDefileBody():void {

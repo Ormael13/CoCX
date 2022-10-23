@@ -54,7 +54,6 @@ import classes.VaginaClass;
 			this.bonusSoulforce = 3000;
 			this.lust = 20;
 			this.lustVuln = 0.5;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = player.level;
 			this.gems = 1;
 			this.drop = NO_DROP;

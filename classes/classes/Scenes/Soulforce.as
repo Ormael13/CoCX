@@ -17,6 +17,8 @@ import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.NPCs.LilyFollower;
 import classes.Scenes.NPCs.TyrantiaFollower;
 
+import coc.view.CoCButton;
+
 use namespace CoC;
 
 public class Soulforce extends BaseContent
@@ -287,11 +289,11 @@ public class Soulforce extends BaseContent
 			if (flags[kFLAGS.SOUL_CULTIVATION] == 9 && player.level >= 27 && player.wis >= 80 && player.hasKeyItem("Heavenly Tribulation: Myths and Facts") >= 0 && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && !player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) addButton(9, "Tribulation", tribulationsPrompt).hint("H class Heaven Tribulation - To face it or not? That's the question.");
 			else if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) addButtonDisabled(9, "Tribulation", "You already survived H class Heaven Tribulation.");
 			if (flags[kFLAGS.SOUL_CULTIVATION] == 10 && player.level >= 30 && player.soulforce >= Math.round(player.maxSoulforce() * 0.3)) addButton(10, "M.S.S.", Contemplations2, 7).hint("Attempt breakthrou to Middle Soul Sprite stage.");
-			else if (flags[kFLAGS.SOUL_CULTIVATION] >= 11) addButtonDisabled(10, "M.S.W.", "You already reached Middle Soul Sprite.");
+			else if (flags[kFLAGS.SOUL_CULTIVATION] >= 11) addButtonDisabled(10, "M.S.S.", "You already reached Middle Soul Sprite.");
 			if (flags[kFLAGS.SOUL_CULTIVATION] == 11 && player.level >= 33 && player.soulforce >= Math.round(player.maxSoulforce() * 0.3)) addButton(11, "L.S.S.", Contemplations2, 8).hint("Attempt breakthrou to Late Soul Sprite stage.");
-			else if (flags[kFLAGS.SOUL_CULTIVATION] >= 12) addButtonDisabled(11, "L.S.W.", "You already reached Late Soul Sprite.");
+			else if (flags[kFLAGS.SOUL_CULTIVATION] >= 12) addButtonDisabled(11, "L.S.S.", "You already reached Late Soul Sprite.");
 			if (flags[kFLAGS.SOUL_CULTIVATION] == 12 && player.wis >= 100 && player.level >= 36 && player.soulforce >= player.maxSoulforce()) addButton(12, "E.S.S.", Contemplations1, 4).hint("Attempt breakthrou to Early Soul Scholar stage.");
-			else if (flags[kFLAGS.SOUL_CULTIVATION] >= 13) addButtonDisabled(12, "E.S.W.", "You already reached Early Soul Scholar.");
+			else if (flags[kFLAGS.SOUL_CULTIVATION] >= 13) addButtonDisabled(12, "E.S.S.", "You already reached Early Soul Scholar.");
 			addButton(13, "-2-", Contemplations, page + 1);
 		}
 		if (page == 2)  {
@@ -1923,138 +1925,56 @@ public class Soulforce extends BaseContent
 			doNext(CorruptionAndSoulforce);
 		}
 	}
+
+	private function addSSButton(btn:int, name:String, func:Function, sfCost:int):CoCButton {
+		return addButton(btn, name, function ():void {
+			player.soulforce -= sfCost;
+			statScreenRefresh();
+			func();
+		}).disableIf(player.soulforce < sfCost, "Req. " + sfCost + " soulforce.");
+	}
+
 	public function SoulSense():void {
 		clearOutput();
 		outputText("Using a tiny amount of soulforce you could try to use soul sense to locate some of people you meet of location you found before without wasting hours for that. Especialy if those people are usualy roaming around or places that constantly changing their location.");
 		outputText("\n\nAmount of soulforce used to locate them using soul sense depening of relative power of searched person or location.");
 		menu();
-		if (flags[kFLAGS.SOUL_SENSE_TAMANI] >= 3 && player.hasCock() || !player.hasKeyItem("Deluxe Dildo")) addButton(0, "Tamani", TamaniEnc).hint("Req. 80+ soulforce");
-		else addButtonDisabled(0, "Tamani", "");
-		if (flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] >= 3) {
-			if (flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 16) {
-				if (player.hasCock()) addButton(1, "Tamani D.", TamaniDaughtersEnc).hint("Req. at least 80+ soulforce (more daughters will increase needed SF)");
-				else addButtonDisabled(1, "Tamani D.", "Req. to have cock of any type.");
-			}
-			else addButtonDisabled(1, "Tamani D.", "Req. to have 16+ (still alive) daughters with Tamani.");
-		}
-		else addButtonDisabled(1, "Tamani D.", "");
-		if (flags[kFLAGS.SOUL_SENSE_KITSUNE_MANSION] >= 3) addButton(2, "KitsuMansion", KitsuneMansion).hint("Req. 90+ soulforce");
-		else addButtonDisabled(2, "KitsuMansion", "");
-		if (flags[kFLAGS.SOUL_SENSE_IZUMI] >= 3) addButton(3, "Izumi", IzumiEnc).hint("Req. 300+ soulforce");
-		else addButtonDisabled(3, "Izumi", "");
-		//next page button?
-		if (flags[kFLAGS.SOUL_SENSE_PRISCILLA] >= 3) addButton(5, "Priscilla", PriscillaEnc).hint("Req. 320+ soulforce");
-		else addButtonDisabled(5, "Priscilla", "");
-		if (flags[kFLAGS.SOUL_SENSE_MINOTAUR_SONS] >= 3) {
-			if (flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] >= 3) {
-				if (player.hasVagina()) addButton(6, "Mino Sons", MinotaurSonsEnc).hint("Req. at least 260+ soulforce (more sons will increase needed SF)");
-				else addButtonDisabled(6, "Mino Sons", "Req. to have vagina.");
-			}
-			else addButtonDisabled(6, "Mino Sons", "Req. to have 3+ (still alive) minotaur sons.");
-		}
-		else addButtonDisabled(6, "Mino Sons", "");
-		//button 7 - Sheila (non demon ver) find
-		//button 8 - ?Behemoth find?
-		//previous page button?
-		if (flags[kFLAGS.SOUL_SENSE_WORLD_TREE] >= 1) addButton(10, "WorldTree", findWorldTree).hint("Req. 100+ soulforce");
-		else addButtonDisabled(10, "WorldTree", "");
+		var btn:int = 0;
+		if (flags[kFLAGS.SOUL_SENSE_GIACOMO] >= 3)
+			addSSButton(btn++, "Giacomo", SceneLib.giacomoShop.giacomoEncounter, 100);
+		if (flags[kFLAGS.SOUL_SENSE_TAMANI] >= 3 && player.hasCock() || !player.hasKeyItem("Deluxe Dildo"))
+			addSSButton(btn++, "Tamani", tamaniScene.encounterTamani, 80);
+		if (flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] >= 3)
+			addSSButton(btn++, "Tamani D.", tamaniDaughtersScene.encounterTamanisDaughters, soulforceForDaughters())
+				.disableIf(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] < 16, "Req. to have 16+ daughters with Tamani.")
+				.disableIf(!player.hasCock(), "Req. to have a cock.");
+		if (flags[kFLAGS.SOUL_SENSE_PRISCILLA] >= 3)
+			addSSButton(btn++, "Priscilla", SceneLib.priscillaScene.goblinElderEncounter, 320);
+		if (flags[kFLAGS.SOUL_SENSE_KITSUNE_MANSION] >= 3)
+			addSSButton(btn++, "KitsuMansion", SceneLib.kitsuneScene.enterTheTrickster, 90);
+		if (flags[kFLAGS.SOUL_SENSE_IZUMI] >= 3)
+			addSSButton(btn++, "Izumi", izumiScenes.encounter, 300);
+		if (flags[kFLAGS.SOUL_SENSE_MINOTAUR_SONS] >= 3)
+			addSSButton(btn++, "Mino Sons", minotaurSonsScene.meetMinotaurSons, soulforceForSons())
+				.disableIf(flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] < 3, "Req. to have 3+ minotaur sons.")
+				.disableIf(!player.hasVagina(), "Req. to have a vagina.");
+		if (flags[kFLAGS.SOUL_SENSE_WORLD_TREE] >= 1)
+			addSSButton(btn++, "WorldTree", worldtreeScene.YggdrasilDiscovery, 100);
+		if (flags[kFLAGS.SOUL_SENSE_ANTHILL] >= 1 && !flags[kFLAGS.ANT_WAIFU])
+			addSSButton(btn++, "Ant Colony", SceneLib.desert.antsScene.antColonyChallenge, 200);
 		//button 11
-		if (flags[kFLAGS.SOUL_SENSE_GIACOMO] >= 3) addButton(12, "Giacomo", findGiacomo).hint("Req. 100+ soulforce");
-		else addButtonDisabled(12, "Giacomo", "");
 		addButton(13, "???", theUnknown).hint("Draw into your soulforce for soulsensing.");
 		addButton(14, "Back", accessSoulforceMenu);
 	}
-	public function TamaniEnc():void {
-		if (player.soulforce >= 80) {
-			player.soulforce -= 80;
-			statScreenRefresh();
-			tamaniScene.encounterTamani();
-		}
-		else {
-			outputText("\n\nYour current soulforce is too low.");
-			doNext(SoulSense);
-		}
+
+	private function soulforceForDaughters():int {
+		return 10 * (8 + (Math.floor(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 20)));
 	}
-	public function TamaniDaughtersEnc():void {
-		if (player.soulforce >= 10 * (8 + (Math.floor(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 20)))) {
-			player.soulforce -= 10 * (8 + (Math.floor(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 20)));
-			statScreenRefresh();
-			tamaniDaughtersScene.encounterTamanisDaughters();
-		}
-		else {
-			outputText("\n\nYour current soulforce is too low.");
-			doNext(SoulSense);
-		}
+
+	private function soulforceForSons():int {
+		return 10 * (26 + Math.round((flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] - 3)/2));
 	}
-	public function KitsuneMansion():void {
-		if (player.soulforce >= 90) {
-			player.soulforce -= 90;
-			statScreenRefresh();
-			SceneLib.kitsuneScene.enterTheTrickster();
-		}
-		else {
-			outputText("\n\nYour current soulforce is too low.");
-			doNext(SoulSense);
-		}
-	}
-	public function IzumiEnc():void {
-		if (player.soulforce >= 300) {
-			player.soulforce -= 300;
-			statScreenRefresh();
-			izumiScenes.encounter();
-		}
-		else {
-			outputText("\n\nYour current soulforce is too low.");
-			doNext(SoulSense);
-		}
-	}
-	public function PriscillaEnc():void {
-		if (player.soulforce >= 320) {
-			player.soulforce -= 320;
-			statScreenRefresh();
-			SceneLib.priscillaScene.goblinElderEncounter();
-		}
-		else {
-			outputText("\n\nYour current soulforce is too low.");
-			doNext(SoulSense);
-		}
-	}
-	public function MinotaurSonsEnc():void {
-		if (player.soulforce >= 10 * (26 + Math.round((flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] - 3)/2))) {
-			player.soulforce -= 10 * (26 + Math.round((flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] - 3)/2));
-			statScreenRefresh();
-			minotaurSonsScene.meetMinotaurSons();
-		}
-		else {
-			outputText("\n\nYour current soulforce is too low.");
-			doNext(SoulSense);
-		}
-	}
-	//button 7
-	//button 8
-	public function findWorldTree():void {
-		if (player.soulforce >= 100) {
-			player.soulforce -= 100;
-			statScreenRefresh();
-			worldtreeScene.YggdrasilDiscovery();
-		}
-		else {
-			outputText("\n\nYour current soulforce is too low.");
-			doNext(SoulSense);
-		}
-	}
-	//button 11
-	public function findGiacomo():void {
-		if (player.soulforce >= 100) {
-			player.soulforce -= 100;
-			statScreenRefresh();
-			SceneLib.giacomoShop.giacomoEncounter();
-		}
-		else {
-			outputText("\n\nYour current soulforce is too low.");
-			doNext(SoulSense);
-		}
-	}
+
 	public function theUnknown():void {
 		if (player.soulforce >= 100) {
 			player.soulforce -= 100;

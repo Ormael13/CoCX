@@ -42,7 +42,7 @@ public class IgnisArenaSeer extends Monster
 			outputText(" ");
 			var lustDmg:Number = player.lustVuln * ((this.inte / 10) + rand(player.lib + player.cor) / 5);
 			lustDmg = Math.round(lustDmg);
-			player.dynStats("lus", lustDmg, "scale", false);
+			player.takeLustDamage(lustDmg, true);
 			if (!hasStatusEffect(StatusEffects.IgnisCounter)) createStatusEffect(StatusEffects.IgnisCounter, 1, 0, 0, 0);
 			else addStatusValue(StatusEffects.IgnisCounter, 1, 1);
 		}
@@ -127,7 +127,6 @@ public class IgnisArenaSeer extends Monster
 			this.bonusLust = 200;
 			this.lust = 20;
 			this.lustVuln = 0.9;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = 45;//mają wtedy tylko 2 ogony ale z czasem jak PC też rośnie w siłe z lvl-em bdą mieć awans to lvl może 18-20 i trzeci ogon plus wzmocnienie statów itp.
 			this.gems = rand(20) + 20;
 			if (flags[kFLAGS.IGNIS_ARENA_SEER] < 3) {

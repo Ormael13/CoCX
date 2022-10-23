@@ -51,8 +51,7 @@ import classes.internals.*;
 			outputText("Goth girl start drawing symbols in the air toward you.");
 			var lustDmg:Number = this.lust / 10 + this.lib / 10 + this.inte / 10 + this.wis / 10 + this.sens / 10;
 			lustDmg = Math.round(lustDmg);
-			player.dynStats("lus", lustDmg, "scale", false);
-			outputText(" <b>(<font color=\"#ff00ff\">" + lustDmg + "</font>)</b>");
+			player.takeLustDamage(lustDmg, true);
 		}
 		
 		override protected function performCombatAction():void
@@ -146,7 +145,6 @@ import classes.internals.*;
 			this.lustVuln = .75;
 			this.lust = 30;
 			this.drop = NO_DROP;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.horns.type = Horns.DEMON;
 			this.horns.count = 12;
 			this.wings.type = Wings.BAT_LIKE_TINY;

@@ -86,7 +86,7 @@ public class Exgartuan extends NPCAwareContent implements TimeAwareInterface {
                     } else if (rand(period) == 0) {
                         exgartuanBored_dick();
                         needNext = true;
-                    } else dynStats("lus", (1 + rand(3)) * (-player.statusEffectv2(StatusEffects.Exgartuan)) / 6);
+                    } else dynStats("lus", (1 + rand(3)) * (-player.statusEffectv2(StatusEffects.Exgartuan)) / 6, "scale", false);
                 }
             }
             if (boobsPresent()) {
@@ -420,7 +420,7 @@ public function exgartuanBored_dick():void {
             break;
     }
     outputText("\n");
-    dynStats("lus", 20);
+    dynStats("lus", 20, "scale", false);
 }
 
 public function exgartuanBored_boobs():void {
@@ -452,7 +452,7 @@ public function exgartuanBored_boobs():void {
             break;
     }
     outputText("\n");
-    dynStats("lus", 20);
+    dynStats("lus", 20, "scale", false);
 }
 
 public function exgartuanCombatUpdate():Boolean {
@@ -523,7 +523,7 @@ public function exgartuanCombatUpdate():Boolean {
 					outputText("It's becoming increasingly difficult to see this battle to its end when your mutinous mushroom is increasingly stiffening with each passing moment.  Exgartuan's weight is bad enough to your poise without extending it away from you.  What a jerk.");
 					break;
 			}
-			dynStats("lus", 4+rand(5));
+			dynStats("lus", 4+rand(5), "scale", false);
 			return true;
 		}
 		//(Taunts Male Foes -enemy lust)
@@ -605,7 +605,7 @@ public function exgartuanCombatUpdate():Boolean {
 					break;
 			}
 			//(+lust! Possible + enemy lust)
-			dynStats("lus", 2+player.effectiveSensitivity()/10);
+			dynStats("lus", 2+player.effectiveSensitivity()/10, "scale", false);
 			if(rand(3) == 0 && monster.lustVuln > 0) monster.lust += 5 + monster.lib/10;
 			return true;
 		}
@@ -730,7 +730,7 @@ public function caressYourself():void {
         if (player.cor < 50) outputText(", angry at yourself for falling prey to the demon's directions");
         outputText(".");
     }
-    dynStats("lus", 5 + player.effectiveSensitivity() / 10);
+    dynStats("lus", 5 + player.effectiveSensitivity() / 10, "scale", false);
     outputText("\n");
 }
 
@@ -957,7 +957,7 @@ private function exgartuanSleepSurprise():void {
 		if(player.lib < 60) dynStats("lib", 1);
 		else if(player.lib < 80) dynStats("lib", .5);
 		else dynStats("lib", .25);
-		dynStats("lus", 10);
+		dynStats("lus", 10, "scale", false);
 		flags[kFLAGS.TIMES_AUTOFELLATIOED_EXGARTUAN]++;
 		player.slimeFeed();
 	}

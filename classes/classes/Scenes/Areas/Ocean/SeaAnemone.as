@@ -23,7 +23,7 @@ public class SeaAnemone extends Monster
 			super.eAttack();
 		}
 
-		override public function eOneAttack():int
+		override public function eOneAttack(display:Boolean = false):int
 		{
 			applyVenom(rand(STAT_DOWN_FLAT + STAT_DOWN_MULT*player.newGamePlusMod() + player.effectiveSensitivity() / 20) + 1);
 			return 1;
@@ -90,7 +90,6 @@ public class SeaAnemone extends Monster
 			this.bonusLust = 270;
 			this.lust = 30;
 			this.lustVuln = .8;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 50;
 			this.gems = rand(50) + 70;
 			this.drop = new WeightedDrop(consumables.DRYTENT, 1);

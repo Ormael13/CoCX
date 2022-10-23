@@ -162,7 +162,6 @@ import classes.internals.*;
 			this.faceType = Face.COW_MINOTAUR;
 			this.lust = this.ballSize * 3;
 			this.lustVuln = hasAxe?0.84:0.87;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.abilities = [
 				{call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[], weight: 3},
 				{call: SceneLib.mountain.minotaurScene.minoPheromones, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[]}

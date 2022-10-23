@@ -43,7 +43,6 @@ public class Diva extends Monster {
         this.bonusHP = levelBonus * 500;
         this.bonusLust = levelBonus * 8;
         this.lustVuln = 1;
-        this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
         this.level = levelBonus;
         this.drop = new ChainedDrop(consumables.REDVIAL);
         this.createStatusEffect(StatusEffects.Flying, 50, 0, 0, 0);
@@ -132,7 +131,7 @@ public class Diva extends Monster {
             if (silly()) outputText("  You masochist, you.")
             dam = Math.round(dam);
             player.takePhysDamage(dam);
-            player.takeLustDamage(2 + rand(4));
+            player.takeLustDamage(2 + rand(4), true);
         }
     }
 

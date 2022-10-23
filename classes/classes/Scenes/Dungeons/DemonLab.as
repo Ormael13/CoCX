@@ -11,6 +11,7 @@ import classes.Scenes.Dungeons.DemonLab.IncubusScientist;
 import classes.Scenes.Dungeons.DemonLab.LabGuard;
 import classes.Scenes.Dungeons.DemonLab.MutantIncubus;
 import classes.Scenes.Dungeons.DemonLab.ProjectNightwalker;
+import classes.Scenes.Dungeons.DemonLab.ProjectTyrant;
 import classes.Scenes.NPCs.DivaScene;
 import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.SceneLib;
@@ -638,6 +639,8 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
             outputText("On the creature’s back sits a heavily muscled Incubus. His green eyes glare at you, and he shakes his head, pointing a light crossbow at you. \n\n");
             outputText("“<i>Tyrant? Kill!</i>”\n\n");
             outputText("You are now fighting Project Tyrant. \n\n");
+            startCombat(new ProjectTyrant());
+            return;
         }
         if (TyrantLabState == 2) {
             outputText("The lab that had once contained “<i>Project Tyrant</i>” is now empty and still. Some sort of serum sits abandoned in several different vials around the room, and the entire place reeks of antiseptic and blood. Tables adorned with odd, extremely sharp knives litter the middle of the lab, with massive cuffs on the corners. These devices were clearly made to hold down the people they were experimenting on, and the smell of blood intensifies as you near them.  \n\n");
@@ -671,17 +674,29 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
         outputText(" \n\n");
         dungeons.setDungeonButtons(null, Ballroom3, null, null);
         if (WayOutBlocked) addButton(0, "Console", Computer); //broken after unlocked
+        addButton(1, "Desk,", Desk);
     }
 
     public function Computer():void {
         clearOutput();
         outputText("You sit down in front of the mess of buttons and lights. Several parts of the screen are cordoned off, showing several rooms...The Labs. You can see the labs through this device. You almost laugh. No wonder the demons in here were so terrified. \n\n");
-        outputText("You focus on the rest of the screen...You need to get that fucking door at the entrance unlocked, so you and the others can leave. The screen seems mostly covered with porn or seemingly random symbols, but two things catch your attention. One titled \"Security Folder \", and the other titled \"settings\" \n\n");
+        outputText("You focus on the rest of the screen...You need to get that fucking door at the entrance unlocked, so you and the others can leave. The screen seems mostly covered with porn or seemingly random symbols, but two things catch your attention. One titled \"Security Folder\", and the other titled \"Control Panel\" \n\n");
         menu();
         addButton(0, "Security Folder", Readme);
         addButton(1, "Control Panel", CntrlAltDenied);
-        addButton(2, "Caveman", WEHAVETECHNOLOGY);
+        addButton(2, "CAVEMAN!!!", WEHAVETECHNOLOGY);
         addButton(3, "Leave", Ballroom3);
+    }
+
+    public function Desk():void {
+        clearOutput();
+        outputText("You look through the desk, and find a large stack of paper. Looking through, you find a map that seems to mark off several locations that the demons find important. You recognize He-Din Xiao, marked in red, and a few other locations. \n"
+            + "\n"
+            + "To your surprise, further up the mountain is a marking labeled “My Queen’s Domain”, with an anatomically accurate heart drawn before and after the label. There seems to be lines on the map noting roads, or paths. This place would appear to be a demon queen’s fortress. Your heart leaps as you realise what you hold.\n"
+            + "\n"
+            + "<b>You’ve found a map to the Lethice’s Fortress!</b>");
+        //TODO: set the flag
+        addButton(3, "Back", Ballroom3);
     }
 
     public function Readme():void {
@@ -771,7 +786,7 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
         clearOutput();
         outputText("The injured creature that was once a Drider collapses, its legs folding. On its back, the Incubus begins to panic, but the injured Drider-beast grunts, grabbing the demon as he tries to flee. Sinking its massive thumbs deep into the demon’s eyes, the creature blinds the incubus, before throwing him to the ground. The demon’s neck breaks, and you brace yourself as the creature turns towards you, blood dripping from its injuries. \n\n");
         outputText("Its eyes focus, and it rushes past you, eight legs skittering. Before you realise what’s going on, the creature’s running towards the cages, where the Driders were kept. You kick yourself into high gear, but as the hulking beast sees the first cage, ripping the bars off without any discernible effort, it stops, tilting its head, leaning into the cage.  \n\n");
-        outputText("The captive inside, an old female, pushes herself back against the wall, six eyes wide with fear. The creature that had been a Drider sees the fear, letting out a groaning, confused sound. Tossing the door aside, sending the screech of steel on stone echoing up the corridor, it moves to the next cage, repeating the process. Without exception, the captives avoid its gaze, recoiling in fear.  \n\n");
+        outputText("The captive inside, an old female, pushes herself back against the wall, six eyes wide with fear. The creature that had been a drider sees the fear, letting out a groaning, confused sound. Tossing the door aside, sending the screech of steel on stone echoing up the corridor, it moves to the next cage, repeating the process. Without exception, the captives avoid its gaze, recoiling in fear.  \n\n");
         outputText("As you watch, astounded, the mutated beast rips the doors off one cage after another. After the first few, it makes no move towards the captives. You go back to the lab, and pick up a keycard and ring of keys from the fallen demon.  \n\n");
         if (TyrantFollower) {
             outputText(" She watches the creature with wide eyes. She drops her Dick, arms shaking. She makes no moves to save her fellow Driders, but instead watches the creature. \n\n");

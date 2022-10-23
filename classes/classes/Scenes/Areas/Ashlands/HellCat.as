@@ -18,9 +18,7 @@ import classes.internals.*;
 		public function castArouse():void {
 			outputText("She makes a series of arcane gestures, drawing on her lust to inflict it upon you! ");
 			var lustDamage:int = (inte / 5) + rand(10);
-			lustDamage = lustDamage * (EngineCore.lustPercent() / 100);
-			player.dynStats("lus", lustDamage, "scale", false);
-			outputText(" <b>(<font color=\"#ff00ff\">" + (Math.round(lustDamage * 10) / 10) + "</font>)</b>");
+			player.takeLustDamage(lustDamage);
 			mana -= spellCostArouse;
 		}
 		
@@ -122,7 +120,6 @@ import classes.internals.*;
 			this.bonusLust = 241;
 			this.lust = 20;
 			this.lustVuln = .1;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 46;
 			this.gems = rand(55) + 40;
 			this.drop = new WeightedDrop().addMany(5,

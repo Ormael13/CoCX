@@ -50,7 +50,7 @@ public class Zetaz extends Monster
 				outputText("The imp lord shudders from his wounds and the pulsing member that's risen from under his tattered loincloth.  He strokes it and murmurs under his breath for a few moments.  You're so busy watching the spectacle of his masturbation that you nearly miss the sight of his bruises and wounds closing!  Zetaz releases his swollen member, and it deflates slightly.  He's used some kind of black magic to convert some of his lust into health!");
 				addHP(0.25 * maxHP());
 				lust -= 20;
-				player.dynStats("lus", 2);
+				player.takeLustDamage(2, true);
 			}
 			else {
 				var attackChoice:Number = rand(3);
@@ -95,7 +95,7 @@ public class Zetaz extends Monster
 		
 		public function gigaArouse():void {
 			outputText("You see " + a + short + " make familiar arcane gestures at you, but his motions seem a lot more over the top than you'd expect from an imp.\n\n");
-			player.dynStats("lus", rand(player.lib/10)+player.cor/10+15);
+			player.takeLustDamage(rand(player.lib/10)+player.cor/10+15, true);
 			if(player.lust < 30) outputText("Your nethers pulse with pleasant warmth that brings to mind pleasant sexual memories.  ");
 			if(player.lust >= 30 && player.lust < 60) outputText("Blood rushes to your groin in a rush as your body is hit by a tidal-wave of arousal.  ");
 			if(player.lust >= 60) outputText("Your mouth begins to drool as you close your eyes and imagine yourself sucking off Zetaz, then riding him, letting him sate his desires in your inviting flesh.  The unnatural visions send pulses of lust through you so strongly that your body shivers.  ");
@@ -188,7 +188,6 @@ public class Zetaz extends Monster
 			this.bonusLust = 120;
 			this.lust = 40;
 			this.lustVuln = .35;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = 30;
 			this.gems = rand(75) + 175;
 			this.additionalXP = 200;

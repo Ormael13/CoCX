@@ -99,7 +99,7 @@ public function keltEncounter():void {
 				player.createStatusEffect(StatusEffects.KeltBadEndWarning,0,0,0,0);
 				clearOutput();
 				outputText("You approach the farm, ready for another archery lesson.  Kelt is oblivious to your presence, busy practicing with his own bow for the moment.  The wind shifts and blows his musk your way.  Unconsciously, you breathe deeply, sending heat racing between your rear legs.  Alarm bells go off in your mind as you realize what his presence is doing to you, and you run away to your camp before he can notice you.  It's clear to you that you can't resist him much longer; the next time you meet him, you'll probably volunteer to become his brood-mare.  Perhaps you should avoid Kelt and the farm until you feel his influence less keenly.");
-				dynStats("lus", player.lib/5 + 10);
+				dynStats("lus", player.lib/5 + 10, "scale", false);
 				doNext(camp.returnToCampUseOneHour);
 			}
 			else keltCentaurBadEnd();
@@ -266,7 +266,7 @@ private function keltEagerlyGetNaked():void {
 	player.createStatusEffect(StatusEffects.NakedOn,0,0,0,0);
 	//(+10 Submissive)
 	player.addStatusValue(StatusEffects.Kelt,2,10);
-	dynStats("lus", int(player.lib/10)+5);
+	dynStats("lus", int(player.lib/10)+5, "scale", false);
 	keltMainEncounter2();
 }
 
@@ -320,7 +320,7 @@ private function keltReluctantlyGetNaked():void {
 	outputText("You nod, a little irritated at his callous nature.  You're not entirely sure you want to be naked in front of this crude centaur... but for now, at least, he'll teach you a little more.  Though the way he eyes your ass does make you feel a little uncomfortable.\r\r");
 	//(+7 Submissive)
 	player.addStatusValue(StatusEffects.Kelt,2,7);
-	dynStats("lus", int(player.lib/10)+5);
+	dynStats("lus", int(player.lib/10)+5, "scale", false);
 	keltMainEncounter2();
 }
 
@@ -505,7 +505,7 @@ private function keltMainEncounterAfterNakedReq():void {
 					player.createStatusEffect(StatusEffects.NakedOn,0,0,0,0);
 				}
 				outputText("\r\r");
-				dynStats("lus", int(player.lib/10)+5);
+				dynStats("lus", int(player.lib/10)+5, "scale", false);
 			}
 			//(Otherwise:
 			else outputText("You ignore his barbed comments as good as you can, and soon enough, he leaves the matter alone, instead critiquing your archery skills.\r\r");
@@ -627,7 +627,7 @@ private function keltMainEncounter3():void {
 			else if(player.statusEffectv2(StatusEffects.Kelt) <= 70) outputText("Despite yourself, some of his cruder comments make you blush.  By now, you're getting used to the oft-times depraved sexuality of the demon world... but it is a little humiliating to subject yourself to this kind of treatment... and, to your shame, sometimes it's a little arousing.  Though Kelt is insulting, cruel, and crude, you also notice real lust in some of his glances.  By the end of the lesson, you are flushed with arousal as well as exertion.");
 			//(Submissive, 70-100:
 			else outputText("Of course, Kelt's words only distract you even more from hitting the target.  Not because you are angry... but because you are aroused.  Somehow, his lewd comments and crude jibes make you shiver with anticipation.  He's just so powerful, so masculine.  Kelt seems well aware of the effect he has on you, and once reaches out to slap your ass heartily.  By the end of the training, you feel intensely horny.");
-			dynStats("lus", 10);
+			dynStats("lus", 10, "scale", false);
 			//player.addStatusValue(StatusEffects.Kelt,1,4);
 			if (player.statusEffectv1(StatusEffects.Kelt) < 90) bowSkill(4);
 			else bowSkill(1);
@@ -685,7 +685,7 @@ private function keltMainEncounter3():void {
 			outputText("\"<i>Lesson's over for now.  Next time it's my cock, slut.</i>\"\r\r");
 			outputText("He walks away without another word, taking some of your dignity with him.");
 			//(+5 Submissive)
-			dynStats("lus", 15);
+			dynStats("lus", 15, "scale", false);
 			player.addStatusValue(StatusEffects.Kelt,2,5);
 			//player.addStatusValue(StatusEffects.Kelt,1,4);
 			if (player.statusEffectv1(StatusEffects.Kelt) < 90) bowSkill(4);
@@ -797,7 +797,7 @@ private function keltResistGivingBJ():void {
 	outputText("\"<i>Keep fooling yourself, bitch.  I'll be waiting when you get hungry.</i>\"  \r\rKelt leaves, refusing to teach you now.");
 	//(-5 Submissiveness)
 	player.addStatusValue(StatusEffects.Kelt,2,-5);
-	dynStats("lus", 5);
+	dynStats("lus", 5, "scale", false);
 	doNext(camp.returnToCampUseOneHour);
 }
 //(Submit)
@@ -833,7 +833,7 @@ private function keltReluctantGivingBJ():void {
 	player.refillHunger(50);
 	outputText("\r\r\"<i>Pretty good, slut.  I knew there was a reason I kept you around.  Come back next time, and maybe I'll actually teach you something.  Or, who knows?  Maybe I'll just give you another snack, huh?  Ha!</i>\"\r\r");
 	outputText("Meekly you nod, humiliated and full of cum.  The worst part, by far, is how happy you are on the inside.  You try to tell yourself that this is wrong, that Kelt is an arrogant, cruel creature, and that this is the last time.  But you don't really believe that.  Despite the lies you tell yourself, you look forward to the next time he decides to use you.\r\r");
-	dynStats("lus", 5);
+	dynStats("lus", 5, "scale", false);
 	//(+5 Submissiveness)*/
 	player.addStatusValue(StatusEffects.Kelt,2,5);
 	doNext(camp.returnToCampUseOneHour);

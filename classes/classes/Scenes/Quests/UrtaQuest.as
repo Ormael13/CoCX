@@ -871,7 +871,7 @@ private function snuggleWithUrta(truth:Boolean):void {
 	else outputText("lascivious caress");
 	outputText(" before pulling you tighter into " + player2.mf("his","her") + " embrace.  Eager to forget your embarrassment, you focus on holding " + player2.mf("him","her") + " tight and close.  Your prick slowly slides back into its sheath from the lack of stimulus as you focus on how safe and content you feel to be here, being held like this.");
 	outputText("\n\nTo your own surprise, you find your eyes growing heavier and heavier.  But you don't want to let your " + player2.short + " go yet... besides, may as well start searching from here in the morning, right?  So, you and " + player2.short + " carefully lay yourselves back down and quietly drift off to sleep, still holding fast to each other as you do.  The last sounds you hear for the night are your lover breathing, accompanied by the beating of " + player2.mf("his","her") + " heart, and you idly hope that " + player2.mf("he","she") + " can hear the same sounds from you...");
-	dynStats("lus", 14);
+	dynStats("lus", 14, "scale", false);
 	menu();
 	addButton(0,"Next",morningAfterCampVisitEmbark, truth);
 }
@@ -1111,7 +1111,7 @@ private function urtaSecondWind():void {
 	monster.createStatusEffect(StatusEffects.UrtaSecondWinded,3,0,0,0);
 	HPChange(Math.round(player.maxHP()*0.75),false);
 	fatigue(-200);
-	dynStats("lus", -200);
+	dynStats("lus", -200, "scale", false);
 	outputText("Closing your eyes for a moment, you focus all of your willpower on pushing yourself to your absolute limits, forcing your lusts down and drawing on reserves of energy you didn't know you had!\n\n");
     SceneLib.combat.enemyAIImpl();
 }
@@ -1142,7 +1142,7 @@ private function urtaComboAttack():void {
 	//Blind
 	if (player.hasStatusEffect(StatusEffects.Blind)) outputText("You attempt to attack, but as blinded as you are right now, you doubt you'll have much luck!  ");
 	//Determine if dodged!
-	if(!monster.hasStatusEffect(StatusEffects.Blind) && (rand(3) == 0 || (player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.speedDodge(player) > 0))) {
+	if(!monster.hasStatusEffect(StatusEffects.Blind) && (rand(3) == 0 || (player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe)))) {
 		if(monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!");
 		if(monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!");
 		if(monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.");
@@ -1257,7 +1257,7 @@ private function urtaSidewinder():void {
 	if (player.hasStatusEffect(StatusEffects.Blind)) outputText("You attempt to hit with a vicious blow to the side, but as blinded as you are right now, you doubt you'll have much luck!  ");
 	else outputText("You make a wide swing to the side, hoping to stun your foe!  ");
 	//Determine if dodged!
-	if((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.speedDodge(player) > 0)) {
+	if((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe))) {
 		if(monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!");
 		if(monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!");
 		if(monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.");
@@ -1347,7 +1347,7 @@ private function urtaVaultAttack():void {
 	if (player.hasStatusEffect(StatusEffects.Blind)) outputText("You attempt to make a high, vaulting attack, but as blinded as you are right now, you doubt you'll have much luck!  ");
 	else outputText("You leap into the air, intent on slamming your [weapon] into your foe!  ");
 	//Determine if dodged!
-	if((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.speedDodge(player) > 0)) {
+	if((player.hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe))) {
 		if(monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids your attack!");
 		if(monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges your attack with superior quickness!");
 		if(monster.spe - player.spe >= 20) outputText(monster.capitalA + monster.short + " deftly avoids your slow attack.");
@@ -1810,7 +1810,7 @@ private function urtaSleepsNaked():void {
 	outputText("You bed down for the night, languidly removing your armor and stretching in the pale moonlight.  The cool air feels wonderful on your skin, particularly after being bound up in that restricting armor all day.  You yawn and wrap yourself up in a blanket, swifly falling asleep in the soft grasses at the edges of the plains, comforted by the gentle hooting of the owls in the woods to the west.");
 	HPChange(player.maxHP(),false);
 	fatigue(-100);
-	dynStats("lus", 10);
+	dynStats("lus", 10, "scale", false);
 	menu();
 	addButton(0,"Next",urtaGetsTentaRaped);
 }
@@ -2091,7 +2091,7 @@ public function milkyUrtaTic():void {
 	outputText("\n\n");
 	player.addStatusValue(StatusEffects.MilkyUrta,1,-1);
 	if(player.statusEffectv1(StatusEffects.MilkyUrta) <= 0) player.removeStatusEffect(StatusEffects.MilkyUrta);
-	dynStats("lus", 10);
+	dynStats("lus", 10, "scale", false);
 }
 
 //Drink Bottle of Mino Cum*

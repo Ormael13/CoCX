@@ -29,7 +29,7 @@ public class TamanisDaughters extends Goblin
 				outputText("You reach back and throw her off, but her perverted taunts still leave you feeling a little hot under the collar.\n\n");
 			}
 			else outputText("A daughter lays down in front of you and starts jilling herself on the spot.  It's impossible to not glance down and see her or hear her pleasured moans.  You step away to remove the distraction but it definitely causes some discomfort in your [armor].\n\n");
-			player.dynStats("lus", 1 + player.lib/15+rand(player.cor/30));
+			player.takeLustDamage(1 + player.lib/15+rand(player.cor/30), true);
 		}
 
 		private function tamaniShowsUp():void {
@@ -132,7 +132,6 @@ public class TamanisDaughters extends Goblin
 			if (bonusLust > 2048) bonusLust = 2048;
 			this.lust = 30;
 			this.lustVuln = .65;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 8 + (Math.floor(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 20));
 			if (level > 30) level = 30;
 			this.gems = rand(15) + 5;

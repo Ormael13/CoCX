@@ -68,7 +68,6 @@ package classes.Scenes.NPCs
 			this.lustVuln = .1;
 			this.lust = 30;
 			this.drop = NO_DROP;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.horns.type = Horns.DEMON;
 			this.horns.count = 12;
 			this.wings.type = Wings.BAT_LIKE_TINY;

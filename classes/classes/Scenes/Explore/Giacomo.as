@@ -1007,7 +1007,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 				outputText("\"<i>You are getting your dick milked,</i>\" the Succubus says flatly, \"<i>Accept it.  Trust me, when I am done, you will want more of me, anyway.</i>\"\n\n");
 				outputText("As the Succubus finishes her ultimatum, you feel churning vaginal contractions stroking your massive cock.  Heavy, powerful, coordinated undulations work your dick as surely as the best handjob.  You quickly moan in shock and pleasure at such rough treatment.");
 			}
-			dynStats("lus", 35);
+			dynStats("lus", 35, "scale", false);
 			doNext(ceruleanSuccubusEncounterPart2);
 		}
 		

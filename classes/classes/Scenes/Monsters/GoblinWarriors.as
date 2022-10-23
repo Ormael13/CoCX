@@ -70,7 +70,7 @@ public class GoblinWarriors extends Goblin
 			if (det == 1) outputText("Few of " + a + short + " grabs their heel and lifts it to head in an amazing display of flexibility despite the armor they're wearing.  They caresses their snatches and gives you a come hither look.");
 			if (det == 2) outputText("Few of " + a + short + " bends over, putting on a show and jiggling their heart-shaped ass at you.  Their looks over the shoulder and sucks on their finger, batting their eyelashes.");
 			var lustDmg:int = rand(player.lib / 2) + 80;
-			player.dynStats("lus", lustDmg);
+			player.takeLustDamage(lustDmg, true);
 			outputText("  The display distracts you long enough to prevent you from taking advantage of their awkward pose, leaving you more than a little flushed.\n\n");
 		}
 		
@@ -158,7 +158,6 @@ public class GoblinWarriors extends Goblin
 			this.bonusLust = 290;
 			this.lust = 50;
 			this.lustVuln = 0.44;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 40;
 			this.gems = rand(50) + 75;
 			this.drop = new WeightedDrop().

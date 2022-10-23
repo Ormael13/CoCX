@@ -16,7 +16,7 @@ public class Clara extends Monster
 			outputText("Clara suddenly starts roughly manhandling her tit, noisily stuffing it into her mouth and starting to suck and slobber. Frothy milk quickly stains her mouth and she releases her breast, letting it fall back down. She belches and takes a stance to defend herself again; you can see the injuries you’ve inflicted actually fading as the healing power of her milk fills her.");
 			HP += 45;
 			lust += 5;
-			player.dynStats("lus", (5+player.lib/5));
+			player.takeLustDamage((5+player.lib/5), true);
 		}
 		//Clara throws a goblin potion, she has the web potion, the lust potion, and the weakening potion
 		//should she try to drug them instead?
@@ -159,7 +159,6 @@ public class Clara extends Monster
 			this.armorName = "tough hide";
 			this.armorDef = 6;
 			this.armorMDef = 1;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 12;
 			this.bonusHP = 30;
 			this.bonusLust = 82;

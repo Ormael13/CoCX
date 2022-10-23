@@ -124,7 +124,7 @@ public function gorgonEncounter():void {
 		}
 		outputText("You think it would be a very good idea to come to the beach more often.");
 		doNext(camp.returnToCampUseOneHour);
-		dynStats("lus", player.lib/5);
+		dynStats("lus", player.lib/5, "scale", false);
 		return;
 	}
 	//If player's last fight did not involve them being a naga

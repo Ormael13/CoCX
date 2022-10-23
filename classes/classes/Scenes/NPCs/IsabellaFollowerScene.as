@@ -301,7 +301,7 @@ private function isabellasAccentCoaching():void {
 
 			case 1:
 				outputText("In spite of your efforts to teach the foreign cow-girl, she doesn't seem to make any progress.  The worst part is, she keeps slumping down when you correct her, which only sets her bosom to jiggling, her cleavage looking larger than ever before.  You wind up quite distracted by the time the two of you get finished.");
-				dynStats("lus", 10);
+				dynStats("lus", 10, "scale", false);
 
 				break;
 			default:
@@ -314,7 +314,7 @@ private function isabellasAccentCoaching():void {
 					outputText(".");
 				}
 				//(+big lust)
-				dynStats("lus", 25);
+				dynStats("lus", 25, "scale", false);
 
 				break;
 		}
@@ -539,7 +539,7 @@ private function repeatGermanBratwurstInCamp(x:int):void {
 		//(if libido <=15:
 		if(silly() && (player.lust < 50 || player.lib <= 20)) {
 			outputText("  Your cock immediately deflates from her laughable doujin-tier pillow talk and falls out of her buttcheeks.  You'll be posting that line to 4chan later for laughs.");
-			dynStats("lus", -99);
+			dynStats("lus", -99, "scale", false);
 			doNext(camp.returnToCampUseOneHour);
 			return;
 		}

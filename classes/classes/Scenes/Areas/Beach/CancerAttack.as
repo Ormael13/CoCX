@@ -163,7 +163,6 @@ public class CancerAttack extends Monster
 			this.bonusHP = 200;
 			this.bonusLust = 263;
 			this.lust = 30;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 37;
 			this.gems = rand(40)+40;
 			this.drop = new WeightedDrop().addMany(1, consumables.BUBBLEG);

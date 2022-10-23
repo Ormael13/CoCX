@@ -34,7 +34,7 @@ public class Behemoth extends Monster
 		
 		public function tease():void {
 			outputText("The behemoth lifts his loincloth to reveal his large prick and waves his cock left and right.  You blush from looking at his cock.");
-			player.dynStats("lus", 50 + (player.cor / 5) + (player.lib / 5));
+			player.takeLustDamage(50 + (player.cor / 5) + (player.lib / 5), true);
 		}
 		
 		override public function defeated(hpVictory:Boolean):void {
@@ -89,7 +89,6 @@ public class Behemoth extends Monster
 			this.bonusLust = 162;
 			this.lust = 15;
 			this.lustVuln = 0.3;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = 71;
 			this.gems =160 + rand(50);
 			this.drop = NO_DROP;

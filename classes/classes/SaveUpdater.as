@@ -476,7 +476,7 @@ public class SaveUpdater extends NPCAwareContent {
 		}
 		if (flags[kFLAGS.MOD_SAVE_VERSION] == 2) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 3;
-			outputText("Ups looks like you not have achievements feature unlocked yet. So now you can get them.");
+			outputText("Ups looks like you don't have achievements feature unlocked yet. So now you can get them.");
 			outputText("\n\nDrill is as always. So not all achievements would be automaticaly gained but who of people playing this won't play again and again and...you get my drift right?");
 			updateAchievements();
 			outputText("\n\nAchievements are saved in a special savefile so no matter what savefile you're on, any earned achievements will be added to that special savefile. And now got catch them all traine...burp I mean fellow players ^^");
@@ -671,10 +671,7 @@ public class SaveUpdater extends NPCAwareContent {
 				player.removeKeyItem("Divine Bark Plates");
 				flags[kFLAGS.PURE_MARAE_ENDGAME] = 1;
 			}
-			if (player.hasPerk(PerkLib.JobSoulArcher)) {
-				player.removePerk(PerkLib.JobSoulArcher);
-				player.perkPoints = player.perkPoints + 1;
-			}
+			refundPerk(PerkLib.JobSoulArcher);
 			//Update chitin
 			if (player.hasCoatOfType(Skin.CHITIN)) {
 				if (player.isRace(Races.MANTIS)) player.chitinColor = "green";
@@ -699,14 +696,8 @@ public class SaveUpdater extends NPCAwareContent {
 			if (player.faceType == Face.SNAKE_FANGS) {
 				if (player.tailRecharge < 5) player.tailRecharge = 5;
 			}
-			if (player.hasPerk(PerkLib.Cupid)) {
-				player.removePerk(PerkLib.Cupid);
-				player.perkPoints = player.perkPoints + 1;
-			}
-			if (player.hasPerk(PerkLib.ElementalArrows)) {
-				player.removePerk(PerkLib.ElementalArrows);
-				player.perkPoints = player.perkPoints + 1;
-			}
+			refundPerk(PerkLib.Cupid);
+			refundPerk(PerkLib.ElementalArrows);
 			if (player.hasPerk(PerkLib.JobArcaneArcher)) {
 				player.removePerk(PerkLib.JobArcaneArcher);
 				player.createPerk(PerkLib.JobHunter, 0, 0, 0, 0);
@@ -717,7 +708,7 @@ public class SaveUpdater extends NPCAwareContent {
 		if (flags[kFLAGS.MOD_SAVE_VERSION] == 18) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 19;
 			clearOutput();
-			outputText("Small reorganizing of the house interiors...err I mean mod interiors so not mind it if you not have Soul Cultivator PC. I heard you all likes colors, colors on EVERYTHING ever your belowed lil PC's eyes. So go ahead and pick them. Not much change from addition to appearance screen this small detail. But in future if scene will allow there will be addition of parser for using eyes color too.");
+			outputText("Small reorganizing of the house interiors...err I mean mod interiors so not mind it if you don't have Soul Cultivator PC. I heard you all likes colors, colors on EVERYTHING ever your belowed lil PC's eyes. So go ahead and pick them. Not much change from addition to appearance screen this small detail. But in future if scene will allow there will be addition of parser for using eyes color too.");
 			if (player.hasPerk(PerkLib.SoulExalt)) {
 				player.removePerk(PerkLib.SoulExalt);
 				player.createPerk(PerkLib.SoulScholar, 0, 0, 0, 0);
@@ -778,14 +769,8 @@ public class SaveUpdater extends NPCAwareContent {
 				else player.createStatusEffect(StatusEffects.SoulArenaGaunlets1, 2, 2, 0, 0);
 				flags[kFLAGS.SOUL_ARENA_FINISHED_GAUNLETS] = 0;
 			}
-			if (player.hasPerk(PerkLib.SenseCorruption)) {
-				player.removePerk(PerkLib.SenseCorruption);
-				player.perkPoints += 1;
-			}
-			if (player.hasPerk(PerkLib.SenseWrath)) {
-				player.removePerk(PerkLib.SenseWrath);
-				player.perkPoints += 1;
-			}
+			refundPerk(PerkLib.SenseCorruption);
+			refundPerk(PerkLib.SenseWrath);
 			if (player.hasPerk(PerkLib.ChimericalBodyBasicStage)) {
 				player.removePerk(PerkLib.ChimericalBodyBasicStage);
 				player.createPerk(PerkLib.ChimericalBodySemiBasicStage, 0, 0, 0, 0);
@@ -897,10 +882,7 @@ public class SaveUpdater extends NPCAwareContent {
 				player.removePerk(PerkLib.GreyArchmage);
 				player.createPerk(PerkLib.GrandArchmage3rdCircle, 0, 0, 0, 0);
 			}
-			if (player.hasPerk(PerkLib.Convergence)) {
-				player.removePerk(PerkLib.Convergence);
-				player.perkPoints += 1;
-			}
+			refundPerk(PerkLib.Convergence);
 			doNext(camp.doCamp);
 			return;
 		}
@@ -1256,10 +1238,7 @@ public class SaveUpdater extends NPCAwareContent {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 34;
 			clearOutput();
 			outputText("Grey Sage prestige really need to retire... please no cry blood tears it may return in some other form... maybe... Also all Evovlved/Final Form racial mutation perks been reassigned new tiers xD");
-			if (player.hasPerk(PerkLib.PrestigeJobGreySage)) {
-				player.removePerk(PerkLib.PrestigeJobGreySage);
-				player.perkPoints += 1;
-			}
+			refundPerk(PerkLib.PrestigeJobGreySage);
 			if (flags[kFLAGS.DINAH_HIPS_ASS_SIZE] == 1) flags[kFLAGS.DINAH_ASS_HIPS_SIZE] = 1;
 			if (flags[kFLAGS.TOUGHNESS_SCALING] != 0) flags[kFLAGS.TOUGHNESS_SCALING] = 0;
 			doNext(camp.doCamp);
@@ -1583,58 +1562,19 @@ public class SaveUpdater extends NPCAwareContent {
 			}*/
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.005) {
 				outputText("\n\nIt will hurt a tiny bit fellow daoists but it's for greater good to cripple our cultivations to start anew.\nPS. I LIED IT HURTS LIKE NINE HELLS AND FOUR HEAVEND... MUAHAHAHAHAHA");
-				if (player.hasPerk(PerkLib.JobSoulCultivator)) {
-					player.removePerk(PerkLib.JobSoulCultivator);
-					player.perkPoints += 1;
-				}
-				if (player.hasPerk(PerkLib.SoulApprentice)) {
-					player.removePerk(PerkLib.SoulApprentice);
-					player.perkPoints += 1;
-				}
-				if (player.hasPerk(PerkLib.SoulPersonage)) {
-					player.removePerk(PerkLib.SoulPersonage);
-					player.perkPoints += 1;
-				}
-				if (player.hasPerk(PerkLib.SoulWarrior)) {
-					player.removePerk(PerkLib.SoulWarrior);
-					player.perkPoints += 1;
-				}
-				if (player.hasPerk(PerkLib.SoulSprite)) {
-					player.removePerk(PerkLib.SoulSprite);
-					player.perkPoints += 1;
-				}
-				if (player.hasPerk(PerkLib.SoulScholar)) {
-					player.removePerk(PerkLib.SoulScholar);
-					player.perkPoints += 1;
-				}
-				if (player.hasPerk(PerkLib.SoulElder)) {
-					player.removePerk(PerkLib.SoulElder);
-					player.perkPoints += 1;
-				}
-				if (player.hasPerk(PerkLib.SoulExalt)) {
-					player.removePerk(PerkLib.SoulExalt);
-					player.perkPoints += 1;
-				}
-				if (player.hasPerk(PerkLib.SoulOverlord)) {
-					player.removePerk(PerkLib.SoulOverlord);
-					player.perkPoints += 1;
-				}
-				if (player.hasPerk(PerkLib.SoulTyrant)) {
-					player.removePerk(PerkLib.SoulTyrant);
-					player.perkPoints += 1;
-				}
-				if (player.hasPerk(PerkLib.SoulKing)) {
-					player.removePerk(PerkLib.SoulKing);
-					player.perkPoints += 1;
-				}
-				if (player.hasPerk(PerkLib.SoulEmperor)) {
-					player.removePerk(PerkLib.SoulEmperor);
-					player.perkPoints += 1;
-				}
-				if (player.hasPerk(PerkLib.SoulAncestor)) {
-					player.removePerk(PerkLib.SoulAncestor);
-					player.perkPoints += 1;
-				}
+				refundPerk(PerkLib.JobSoulCultivator);
+				refundPerk(PerkLib.SoulApprentice);
+				refundPerk(PerkLib.SoulPersonage);
+				refundPerk(PerkLib.SoulWarrior);
+				refundPerk(PerkLib.SoulSprite);
+				refundPerk(PerkLib.SoulScholar);
+				refundPerk(PerkLib.SoulElder);
+				refundPerk(PerkLib.SoulExalt);
+				refundPerk(PerkLib.SoulOverlord);
+				refundPerk(PerkLib.SoulTyrant);
+				refundPerk(PerkLib.SoulKing);
+				refundPerk(PerkLib.SoulEmperor);
+				refundPerk(PerkLib.SoulAncestor);
 				if (flags[kFLAGS.SOUL_CULTIVATION] > 0) flags[kFLAGS.SOUL_CULTIVATION] = 0;
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.005;
 			}
@@ -1643,30 +1583,12 @@ public class SaveUpdater extends NPCAwareContent {
 					var permedMetamorphCount:int = Metamorph.PermanentMemoryStorage.length;
 					player.createStatusEffect(StatusEffects.TranscendentalGeneticMemory, 15 * player.perkv1(PerkLib.AscensionTrancendentalGeneticMemoryStageX), permedMetamorphCount, 0, 0);
 				}
-				if (player.hasPerk(PerkLib.Dantain)) {
-					player.removePerk(PerkLib.Dantain);
-					player.perkPoints += 1;
-				}
-				if (player.hasPerk(PerkLib.DaoistCultivator)) {
-					player.removePerk(PerkLib.DaoistCultivator);
-					player.perkPoints += 1;
-				}
-				if (player.hasPerk(PerkLib.DaoistApprenticeStage)) {
-					player.removePerk(PerkLib.DaoistApprenticeStage);
-					player.perkPoints += 1;
-				}
-				if (player.hasPerk(PerkLib.DaoistWarriorStage)) {
-					player.removePerk(PerkLib.DaoistWarriorStage);
-					player.perkPoints += 1;
-				}
-				if (player.hasPerk(PerkLib.DaoistElderStage)) {
-					player.removePerk(PerkLib.DaoistElderStage);
-					player.perkPoints += 1;
-				}
-				if (player.hasPerk(PerkLib.DaoistOverlordStage)) {
-					player.removePerk(PerkLib.DaoistOverlordStage);
-					player.perkPoints += 1;
-				}
+				refundPerk(PerkLib.Dantain);
+				refundPerk(PerkLib.DaoistCultivator);
+				refundPerk(PerkLib.DaoistApprenticeStage);
+				refundPerk(PerkLib.DaoistWarriorStage);
+				refundPerk(PerkLib.DaoistElderStage);
+				refundPerk(PerkLib.DaoistOverlordStage);
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.006;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.007) { //Cloning this down.
@@ -1743,7 +1665,7 @@ public class SaveUpdater extends NPCAwareContent {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.016;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.017) {
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02562] = 0; //Izma fishery cleanup.
+				flags[kFLAGS.SOUL_SENSE_ANTHILL] = 0; //Izma fishery cleanup.
 				// convert old buff tags to new ("item_"+itemid)
 				const ItemBuffsRename:Array = [
 					["RingOfWisdom", jewelries.RINGWIS.tagForBuffs],
@@ -1819,26 +1741,11 @@ public class SaveUpdater extends NPCAwareContent {
 				if (flags[kFLAGS.MET_MARAE_CORRUPTED] == 2) flags[kFLAGS.MET_MARAE_CORRUPTED] = 1; //revert Lethicite stuff
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.024) {
-				if (player.hasPerk(PerkLib.BodyCultivator)) {
-					player.removePerk(PerkLib.BodyCultivator);
-					player.perkPoints += 1;
-				}
-				if (player.hasPerk(PerkLib.FleshBodyApprenticeStage)) {
-					player.removePerk(PerkLib.FleshBodyApprenticeStage);
-					player.perkPoints += 1;
-				}
-				if (player.hasPerk(PerkLib.FleshBodyWarriorStage)) {
-					player.removePerk(PerkLib.FleshBodyWarriorStage);
-					player.perkPoints += 1;
-				}
-				if (player.hasPerk(PerkLib.FleshBodyElderStage)) {
-					player.removePerk(PerkLib.FleshBodyElderStage);
-					player.perkPoints += 1;
-				}
-				if (player.hasPerk(PerkLib.FleshBodyOverlordStage)) {
-					player.removePerk(PerkLib.FleshBodyOverlordStage);
-					player.perkPoints += 1;
-				}
+				refundPerk(PerkLib.BodyCultivator);
+				refundPerk(PerkLib.FleshBodyApprenticeStage);
+				refundPerk(PerkLib.FleshBodyWarriorStage);
+				refundPerk(PerkLib.FleshBodyElderStage);
+				refundPerk(PerkLib.FleshBodyOverlordStage);
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.024;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.025) {
@@ -1976,8 +1883,41 @@ public class SaveUpdater extends NPCAwareContent {
 				}
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.031;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.032) {
+				refundPerk(PerkLib.WeaponClawsClawTraining);
+				refundPerk(PerkLib.WeaponClawsExtraClawAttack);
+				refundPerk(PerkLib.WeaponClawsMultiClawAttack);
+				refundPerk(PerkLib.WeaponClawsClawingFlurry);
+				refundPerk(PerkLib.WeaponClawsSavageRend);
+				refundPerk(PerkLib.WeaponLargeDoubleAttack);
+				refundPerk(PerkLib.WeaponLargeTripleAttack);
+				refundPerk(PerkLib.WeaponNormalDoubleAttack);
+				refundPerk(PerkLib.WeaponNormalTripleAttack);
+				refundPerk(PerkLib.WeaponNormalQuadrupleAttack);
+				refundPerk(PerkLib.WeaponNormalPentaAttack);
+				refundPerk(PerkLib.WeaponNormalHexaAttack);
+				refundPerk(PerkLib.WeaponNormalPentaAttack);
+				refundPerk(PerkLib.WeaponSmallDoubleAttack);
+				refundPerk(PerkLib.WeaponSmallTripleAttack);
+				refundPerk(PerkLib.WeaponSmallQuadrupleAttack);
+				refundPerk(PerkLib.WeaponSmallPentaAttack);
+				refundPerk(PerkLib.WeaponSmallHexaAttack);
+				refundPerk(PerkLib.WeaponSmallHectaAttack);
+				refundPerk(PerkLib.WeaponSmallOctaAttack);
+				refundPerk(PerkLib.WeaponSmallNonaAttack);
+				refundPerk(PerkLib.WeaponSmallDecaAttack);
+				outputText("\n\nMulti-attack perks have been refunded.");
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.032;
+			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
+		}
+	}
+
+	public function refundPerk(perk:PerkType):void {
+		if (player.hasPerk(perk)) {
+			player.removePerk(perk);
+			player.perkPoints += 1;
 		}
 	}
 

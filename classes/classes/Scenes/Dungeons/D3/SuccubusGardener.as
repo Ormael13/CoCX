@@ -405,7 +405,7 @@ import classes.StatusEffects.Combat.GardenerSapSpeedDebuff;
 			if (this.hasStatusEffect(StatusEffects.LustAura))
 			{
 				outputText("  Your eyes cross with unexpected feelings as the taste of desire in the air worms its way into you.  The intense aura quickly subsides, but it's already done its job.");
-				player.dynStats("lus", (8+int(player.lib/20 + player.cor/25)));
+				player.takeLustDamage((8+int(player.lib/20 + player.cor/25)), true);
 			}
 			else 
 			{

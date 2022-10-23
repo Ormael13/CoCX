@@ -919,7 +919,7 @@ public class Pregnancy extends NPCAwareContent {
                         //(If Corruption >= 75)
                         else {
                             pregText += "You find yourself daydreaming about giving birth, your belly swollen huge - bigger than it currently is - and the orgasmic sensation of many large, round eggs sliding out of your [vagina].\n\nYou start to absently rub yourself as you envision eggs by the dozens coming from within you; you shall be mothergod for a whole new race of dragons...";
-                            player.dynStats("lus", 35);
+                            player.dynStats("lus", 35, "scale", false);
                         }
                         pregText += "\n\nEmber interrupts your musings with a question.  \"<i>How are you feeling? Do you need me to get you anything?</i>\"";
                         pregText += "\n\nThe dragon's question is uncharacteristic of " + emberScene.emberMF("him","her") + ".  Still, you do appreciate the attention you're getting, and so you ask Ember to fetch you some food and water.  The speed with which Ember dashes off to fulfill your requests is truly impressive!  In short moments Ember is back with a piece of roasted meat and a skin of water.";
@@ -1084,7 +1084,7 @@ public class Pregnancy extends NPCAwareContent {
                 }
                 if(player.pregnancyIncubation == 210) {
                     EngineCore.outputText("\n<b>The fluttering of sensation inside you is getting stronger and more frequent.  At times it even feels as if the inner lining of your womb is tingling.</b>\n");
-                    player.dynStats("lus", (5+player.lib/20));
+                    player.dynStats("lus", (5+player.lib/20), "scale", false);
                     displayedUpdate = true;
                 }
                 if(player.pregnancyIncubation == 185) {
@@ -1104,7 +1104,7 @@ public class Pregnancy extends NPCAwareContent {
                     EngineCore.outputText("\n<b>Your larger, squirming belly makes your pregnancy obvious for those around you");
                     if(player.hasVagina()) EngineCore.outputText(" and keeps your " + vaginaDescript(0) + " aroused from the constant tingling in your womb");
                     EngineCore.outputText(".</b>\n");
-                    player.dynStats("lus", (10+player.lib/20));
+                    player.dynStats("lus", (10+player.lib/20), "scale", false);
                     displayedUpdate = true;
                 }
                 if(player.pregnancyIncubation == 72) {

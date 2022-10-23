@@ -12,6 +12,9 @@
  ****/
 
 package coc.view {
+import classes.CoC;
+import classes.EngineCore;
+
 import fl.controls.ComboBox;
 import fl.controls.UIScrollBar;
 import fl.data.DataProvider;
@@ -848,6 +851,11 @@ public class MainView extends Block {
 		this.scrollBar.update();
 	}
 
+	// I think font ones are 90% false reports (because of some Flash weirdness)
+	// (no actual unclosed tag, but the font is off because dark magic)
+	// there's a workaround I might try - if the font is messed up, clear text (but save first), reset font, and print text again
+	private var fontKostyl:Boolean = false;
+
 	public function setOutputText(text:String):void {
 		var fmt:TextFormat     = this.mainText.defaultTextFormat;
 		fmt.bold = false;
@@ -857,7 +865,19 @@ public class MainView extends Block {
 		this.mainText.htmlText = text; // Altering htmlText can cause changes in defaultTextFormat
 		var fmtnew:TextFormat  = this.mainText.defaultTextFormat;
 		this.mainText.defaultTextFormat = fmt;
-		if (fmtnew.bold != fmt.bold || fmtnew.italic != fmt.italic || fmtnew.underline != fmt.underline) {this.mainText.htmlText += " /!\\ UNCLOSED TAG DETECTED (When reporting this bug, give information on your previous actions. You can check text history by pressing [H] (Mobile version does not support this).) /!\\ "
+		if (fmtnew.bold != fmt.bold || fmtnew.italic != fmt.italic || fmtnew.underline != fmt.underline) {
+			if (fontKostyl) {
+				//autofix failed, rerun didn't help
+				this.mainText.htmlText += " /!\\ UNCLOSED TAG DETECTED (When reporting this bug, give information on your previous actions. You can check text history by pressing [H] (Mobile version does not support this).) /!\\ ";
+			} else {
+				//attempt to autofix
+				var txt:String = CoC.instance.currentText;
+				EngineCore.clearOutputTextOnly(true);
+				CoC.instance.currentText = txt;
+				fontKostyl = true;
+				CoC.instance.flushOutputTextToGUI();
+				fontKostyl = false;
+			}
 		}
 		this.scrollBar.update();
 	}

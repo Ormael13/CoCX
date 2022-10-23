@@ -193,7 +193,7 @@ private function firstGargoyleTalk():void {
 	outputText("\n\n\"<i>Who was. . . she?</i>\"");
 	outputText("\n\n\"<i>She was. . . Master.</i>\"");
 	//(Silly mode)
-	if(silly()) outputText("\n\n\"<i>You know 'master' is masculine, right?</i>\"\n\n\"<i>Indeed.  Master was male, too.</i>\"\n\n\"<i>But you just. . . Nevermind.</i>\"");
+	if(silly()) outputText("\n\n\"<i>You know 'master' is masculine, right?</i>\"\n\n\"<i>Indeed.  Master was male, too.</i>\"\n\n\"<i>But you just. . . Never mind.</i>\"");
 	outputText("\n\n\"<i>Fine,</i>\" you sigh.  Apparently she doesn't want to tell you, and you don't feel like pressing the issue just yet.  \"<i>In that case, what happened here?</i>\"");
 	
 	outputText("\n\nSuddenly, " + flags[kFLAGS.GAR_NAME] + " breaks the stare and looks away, as if in shame.  \"<i>The demons' doom that even now blights Mareth took its toll here, too.  The people of a town no longer here believed they were safe under Marae's roof.  Protected.  Their faith was. . . Misplaced.</i>\"");

@@ -142,10 +142,10 @@ public class Minerva extends Monster
 		private function bootyShortInYoFaceSon():void
 		{
 			outputText("The blue beauty turns around and bends over so far that she uses her halberd like a pole to support herself.  She lifts her shark tail up so you can see her short-shorts hugging perfectly against her ample bottom.  Her tail waves to the left and to the right as she does a little booty shake for you.  The siren gives her big ass a nice, hard slap that echoes off the tower walls, and making it jiggle even more.  She quickly turns around to face you, smirking at what she just did. ");
-			if (flags[kFLAGS.MINERVA_LVL_UP] >= 12) player.dynStats("lus", 50 + player.lib / 10 + rand(8));
-			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 8) player.dynStats("lus", 40 + player.lib / 10 + rand(7));
-			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 4) player.dynStats("lus", 30 + player.lib / 10 + rand(6));
-			else player.dynStats("lus", 20 + player.lib / 10 + rand(5));
+			if (flags[kFLAGS.MINERVA_LVL_UP] >= 12) player.takeLustDamage(50 + player.lib / 10 + rand(8), true);
+			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 8) player.takeLustDamage(40 + player.lib / 10 + rand(7), true);
+			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 4) player.takeLustDamage(30 + player.lib / 10 + rand(6), true);
+			else player.takeLustDamage(20 + player.lib / 10 + rand(5), true);
 		}
 
 //Lust Attacks for all Minervas
@@ -153,10 +153,10 @@ public class Minerva extends Monster
 		private function lickDatPole():void
 		{
 			outputText("Minerva stands, holding her halberd straight up next to her as she looks it over with a seductive stare.  Giving you a suggestive look she rolls out a two-foot long tongue from her mouth, licking a good length of the massive weapon, even wrapping her tongue around it a few times.  Suddenly she sucks her tongue back into her mouth and gives you a little smirk, almost to say \"<i>Yeah, I can do that... and more.</i>\" ");
-			if (flags[kFLAGS.MINERVA_LVL_UP] >= 12) player.dynStats("lus", 50 + player.lib / 10 + rand(8));
-			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 8) player.dynStats("lus", 40 + player.lib / 10 + rand(7));
-			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 4) player.dynStats("lus", 30 + player.lib / 10 + rand(6));
-			else player.dynStats("lus", 20 + player.lib / 10 + rand(5));
+			if (flags[kFLAGS.MINERVA_LVL_UP] >= 12) player.takeLustDamage(50 + player.lib / 10 + rand(8), true);
+			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 8) player.takeLustDamage(40 + player.lib / 10 + rand(7), true);
+			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 4) player.takeLustDamage(30 + player.lib / 10 + rand(6), true);
+			else player.takeLustDamage(20 + player.lib / 10 + rand(5), true);
 		}
 
 //Special attack
@@ -176,7 +176,7 @@ public class Minerva extends Monster
 				//No wait - insta loss:
 				else {
 					outputText("  Your mind clouds over as the song flows through your ears and fills your mind with sweet bliss.");
-					player.dynStats("lus", 1000);
+					player.takeLustDamage(1000, true);
 					if (player.lust >= player.maxOverLust()) outputText("  You lower your [weapon] and dreamily walk into the siren's sweet embrace.  You absent-mindedly disrobe yourself as you move in closer, the song getting louder with each step you take, until you finally bury yourself into the siren's soft bosom and she wraps her feathery arms around your body.  She stops singing her beautiful song and whispers into your ear, \"<i>You're all mine now.</i>\"");
 				}
 				removeStatusEffect(StatusEffects.SirenSong);
@@ -306,7 +306,6 @@ public class Minerva extends Monster
 			this.armorValue = 5;
 			this.lust = 20;
 			this.lustVuln = .2;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.gems = rand(40)+25;
 			this.drop = new WeightedDrop();
 			if (flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] < 10)

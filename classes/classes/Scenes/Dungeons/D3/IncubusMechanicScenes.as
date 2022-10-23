@@ -78,7 +78,7 @@ import classes.Scenes.SceneLib;
 
 				outputText("\n\nIt appears that your only options are to walk away, suck his cock, or fight him.");
 
-				dynStats("lus", 10);
+				player.takeLustDamage(10, true);
 				addButton(1, "Suck Dick", suckIncubusDick);
 				addButton(2, "Fight", startCombatImmediate, new IncubusMechanic());
 			}
@@ -90,7 +90,7 @@ import classes.Scenes.SceneLib;
 
 				outputText("\n\nDo you leave, pay him for the lift, suck his dick, or just fight him and be done with it?");
 
-				dynStats("lus", 10);
+				player.takeLustDamage(10, true);
 				addButtonIfTrue(0, "Pay Toll", payDaToll, "\n\n<b>You do not have enough gems to pay the required toll!</b>", player.gems >= 500);
 				addButton(1, "Suck Dick", suckIncubusDick);
 				addButton(2, "Fight", startCombatImmediate, new IncubusMechanic());

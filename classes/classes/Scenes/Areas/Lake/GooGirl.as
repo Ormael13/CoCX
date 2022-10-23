@@ -99,7 +99,7 @@ public class GooGirl extends Monster
 		private function gooPlay():void
 		{
 			outputText("The goo-girl lunges, wrapping her slimy arms around your waist in a happy hug, hot muck quivering excitedly against you. She looks up, empty eyes confused by your lack of enthusiasm and forms her mouth into a petulant pout before letting go.  You shiver in the cold air, regretting the loss of her embrace.");
-			player.dynStats("lus", 3 + rand(3) + player.effectiveSensitivity() / 10);
+			player.takeLustDamage(3 + rand(3) + player.effectiveSensitivity() / 10, true);
 		}
 
 //Throw –
@@ -108,7 +108,7 @@ public class GooGirl extends Monster
 			outputText("The girl reaches into her torso, pulls a large clump of goo out, and chucks it at you like a child throwing mud. The slime splatters on your chest and creeps under your [armor], tickling your skin like fingers dancing across your body. ");
 			var damage:Number = 1;
 			player.takePhysDamage(damage, true);
-			player.dynStats("lus", 5 + rand(3) + player.effectiveSensitivity() / 10);
+			player.takeLustDamage(5 + rand(3) + player.effectiveSensitivity() / 10, true);
 		}
 
 //Engulf –
@@ -189,7 +189,6 @@ public class GooGirl extends Monster
 			this.bonusLust = 96;
 			this.lust = 45;
 			this.lustVuln = .75;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 6;
 			this.gems = rand(6) + 4;
 			this.drop = new ChainedDrop().add(weapons.PIPE,1/10)

@@ -77,7 +77,7 @@ public class IvorySuccubusScene extends BaseContent
         else {
             outputText("She saunters toward you, swaying her hips the whole way. When she gets within your reach, she caresses your cheeks and pulls your face in close to hers, sliding her tongue deep into your mouth. You " + (player.lib + player.cor < 80 ? "reluctantly" : "eagerly") + " engage in the kiss, dueling her tongue with your own, trying to pin it down. She expertly laps your tongue and crushes it against the floor of your mouth. She swings one leg up to your head to scissor against your pubic region, and grinds against it hard despite there being nothing there. She flits her gaze down, then back up to yours, her eyes filled with lust regardless. She makes out with you longer, going on to lick all around your lips. All the way she pushes against you hard enough to let you feel her pubic bone crushing against yours, along with her considerable wetness.");
             outputText("\n\nWhen it's finally over she leaves you wordlessly. Suddenly on the ground there's a bottle that wasn't there before. You pick it up and examine it. It's a viscous white fluid labeled '<i>Incubus Draft</i>'.");
-            player.dynStats("lus", 50);
+            player.dynStats("lus", 50, "scale", false);
             inventory.takeItem(consumables.INCUBID, cleanupAfterCombat); //it's Incubus Draft
         }
         dynStats("cor", 3);

@@ -152,7 +152,6 @@ public class Valkyrie extends Monster
 			this.bonusLust = 134;
 			this.lust = 25 + rand(15);
 			this.lustVuln = 0.46;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = 44;
 			this.gems = 55 + rand(20);
 			this.drop = new WeightedDrop()

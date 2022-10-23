@@ -290,7 +290,7 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 		public function NeisabutPCgotKOd():void {
 			clearOutput();
 			outputText("As you walk towards Neisa, she does a double take as she sees you alive and well.");
-			outputText("\"Well damn. How'd you survive.... nevermind. I don't want to know. You still owe me for that expedition, so I'll be waiting here until you're better prepared.\"");
+			outputText("\"Well damn. How'd you survive.... never mind. I don't want to know. You still owe me for that expedition, so I'll be waiting here until you're better prepared.\"");
 			outputText("Unless... you want to go back in now?")
 			menu();
 			addButton(1, "Yes", reenteringTheDungeon).hint("That will make you go to the dungeon right away!");

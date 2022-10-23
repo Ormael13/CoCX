@@ -55,7 +55,6 @@ public class DemonDragonGroup extends Monster {
         this.bonusLust = 690;
         this.lust = 50;
         this.lustVuln = 0.44;
-        this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
         this.level = 50;
         this.gems = rand(50) + 75;
         this.drop = new WeightedDrop().add(useables.D_SCALE, 5).add(useables.LETHITE, 2).add(jewelries.POWRRNG, 1);
@@ -67,67 +66,71 @@ public class DemonDragonGroup extends Monster {
         checkMonster();
     }
 
-    //TODO: use!
+    public function meleeResponse():void {
+        // when you use melee, chance is reduced to 50% if you’re flying
+        if (!player.isFlying() || rand(2) == 0) {
+            outputText("You rush towards the corrupted dragonoids, but before you can get near them, three of the succubi-dragons take a half-step forward, letting a sound somewhere between a moan and a belch escape their lips. A wall of flame erupts in your path. ");
+            if (player.hasPerk(PerkLib.FireAffinity)) outputText("You laugh, the dragon’s breath feeling like a warm breeze. You barrel through the flame.")
+            else player.takeFireDamage(((inte + wis) * 1.2) + rand(80), true);
+            outputText("\n\n");
+        }
+    }
+
     private function PentaFireBreath():void {
-        //multi-hit fire breath. Not completely avoidable.
-        var damage:Number = ((inte + wis) * 1.2) + rand(80);
-        outputText("The draconic demonesses fan out, spears held in front of them. As you swivel your eyes between them, you notice that one of them is inhaling deeply, nostrils beginning to glow. Your eyes widen as you feel the air around you warm up. The dragoness moans, sending a veritable wall of flames at you. \n");
-
-        //Miss:
-        //TODO: PLEASE FIX THE REPITITION OR I WILL EAT YOUR SOUL!!!
-        //Determine if evaded
-        if (player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
-            outputText("Using your talent for evasion, you manage to sidestep the worst of the flames, only to have another burst fly at you a split second later. And another. And another. You cover your eyes, only to see a final, larger burst of blue flame headed your way.");
-            player.takeFireDamage(damage / 2, true);
-            player.takeFireDamage(damage / 2, true);
-            player.takeFireDamage(damage / 2, true);
-            player.takeFireDamage(damage / 2, true);
-            player.takeFireDamage(damage * 0.7, true);
-        }
-        //("Misdirection"
-        else if (player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
-            outputText("Using your talent for misdirection, you manage to sidestep the worst of the flames, only to have another burst fly at you a split second later. And another. And another. You cover your eyes, only to see a final, larger burst of blue flame headed your way.");
-            player.takeFireDamage(damage / 2, true);
-            player.takeFireDamage(damage / 2, true);
-            player.takeFireDamage(damage / 2, true);
-            player.takeFireDamage(damage / 2, true);
-            player.takeFireDamage(damage * 0.7, true);
-        }
-        //Determine if cat'ed
-        else if (player.hasPerk(PerkLib.Flexibility) && rand(100) < 6) {
-            outputText("Using your cat-like flexibility, you manage to bend your spine, dodging the first burst cleanly. A second, then third are launched, at different angles, and you contort, your extremely flexible body allowing you to narrowly evade the worst of the flames. This seems to interest the draconic male, his eyes lighting up. You're not sure you like the look he's giving you.");
-            player.takeFireDamage(damage / 2, true);
-            player.takeFireDamage(damage / 2, true);
-            player.takeFireDamage(damage / 2, true);
-            player.takeFireDamage(damage / 2, true);
-            player.takeFireDamage(damage * 0.7, true);
+        clearOutput();
+        var damage:Number = (inte + wis) * 1.2 * player.newGamePlusMod() + 90 + rand(10);
+        outputText("The draconic demonesses fan out, spears held in front of them. As you swivel your eyes between them, you notice that one of them is inhaling deeply, nostrils beginning to glow. Your eyes widen as you feel the air around you warm up. The dragoness moans, sending a veritable wall of flames at you.\n");
+        if (player.getEvasionRoll()) {
+            outputText("You manage to sidestep the worst of the flames, only to have another burst fly at you a split second later. And another. And another. You cover your eyes, only to see a final, larger burst of blue flame headed your way. ");
+            damage /= 2;
         } else {
-            damage = Math.round(90 + rand(10) + (player.newGamePlusMod() * 30));
-            outputText("You try to avoid the flames, but you're too slow!  The inferno slams into you, setting you alight!  You dive to one side, but as you do, another jet of burning flames wash over you, sending you staggering back. All five dragons unleash their burning breath in sequence.");
-            player.takeFireDamage(damage, true);
-            player.takeFireDamage(damage, true);
-            player.takeFireDamage(damage, true);
-            player.takeFireDamage(damage, true);
-            player.takeFireDamage(damage * 1.2, true);
-            outputText("\n");
+            outputText("You try to avoid the flames, but you're too slow!  The inferno slams into you, setting you alight!  You dive to one side, but as you do, another jet of burning flames wash over you, sending you staggering back. All five dragons unleash their burning breath in sequence. ");
         }
+        player.takeFireDamage(damage, true);
+        player.takeFireDamage(damage, true);
+        player.takeFireDamage(damage, true);
+        player.takeFireDamage(damage, true);
+        player.takeFireDamage(damage * 1.2, true);
     }
 
-    //TODO: use!
     public function DragonDemonHaremTease():void {
-        outputText("The four demonic dragonesses look at each other, flicking their long tongues out. The male steps back, bringing one hand to his tapered draconic cock, while the two closest dragonesses lean in, holding their spears with their flexible tails as they make out in front of him. Their sloppy kisses send drool down their cleavage, and they rub the male’s extended cock with their thighs. Distracted by the lewd display, you notice that the other two are rubbing their ribbed spear shafts across their muffs, moaning as they bite their lips. ")
+        clearOutput();
+        outputText("The four demonic dragonesses look at each other, flicking their long tongues out. The male steps back, bringing one hand to his tapered draconic cock, while the two closest dragonesses lean in, holding their spears with their flexible tails as they make out in front of him. Their sloppy kisses send drool down their cleavage, and they rub the male’s extended cock with their thighs. Distracted by the lewd display, you notice that the other two are rubbing their ribbed spear shafts across their muffs, moaning as they bite their lips.\n\n")
         outputText("<i>“Wouldn’t you rather join us?”</i> One of the outer women coos. <i>“Put down your weapon. That’s all you’d need to do.”</i> ")
-        player.dynStats("lus", Math.round(120 + (player.lib * 1.4)));
+        player.takeLustDamage(Math.round(120 + (player.lib * 1.4)), true);
     }
 
-    //TODO: use!
     public function ComboDragonStrike():void {
         clearOutput();
-        outputText("All five dragonoids spread their wings, the armoured male flying straight towards you, the other four flying to the sides, flanking you with disturbing ease. With a cry of elation, the draconic succubi stab at you with their spears. \n\n");
-        createStatusEffect(StatusEffects.Attacks, 2 + rand(2), 0, 0, 0);
-        //if four attacks land
-        //outputText("As the four dragon women impale you, spear heads stuck in your flesh, the larger male roars, swinging his giant sword down towards your shoulder. \n\n");
-        //createStatusEffect(StatusEffects.Attacks, 1);
+        outputText("You realise what they’re trying to do, and before they can trap you, you rush one of the draconic women, narrowly dodging her spear and slamming your [weapon] into her face. Formation broken, the women fly back towards their leader, spears now bristling defensively. ");
+        var hit:int = 0;
+        for (var i:int = 0; i < 4; ++i) {
+            if (player.getEvasionRoll()) {
+                eOneAttack(true);
+                ++hit;
+            }
+        }
+        if (hit == 0) {
+            outputText("\nYou realise what they’re trying to do, and before they can trap you, you rush one of the draconic women, narrowly dodging her spear and slamming your [weapon] into her face. Formation broken, the women fly back towards their leader, spears now bristling defensively.");
+        } else if (hit == 4) {
+            outputText("\nAs the four dragon women impale you, spearheads stuck in your flesh, the larger male roars, swinging his giant sword down towards your shoulder. ");
+            player.takePhysDamage(eBaseDamage() * 3);
+        }
+    }
+
+    override protected function performCombatAction():void {
+        var choice0:Number = rand(2);
+        switch (rand(3)) {
+            case 0:
+                ComboDragonStrike();
+                break;
+            case 1:
+                DragonDemonHaremTease();
+                break;
+            case 2:
+                PentaFireBreath();
+                break;
+        }
     }
 
     override public function defeated(hpVictory:Boolean):void {

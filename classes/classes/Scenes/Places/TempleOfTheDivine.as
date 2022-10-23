@@ -257,15 +257,15 @@ public class TempleOfTheDivine extends BaseContent {
 				addButton(0, "Altars", rebuildGodsAltairs).hint("Repair the altar.");
 				if ((flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] == 3 || flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] == 4) && flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] == 1) {
 					if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 150) addButton(1, "Statue of Marae", rebuildStatueOfMarae).hint("Repair the statue.");
-					else addButtonDisabled(1, "Statue of Marae", "You not have enough stones. Required: 150");
+					else addButtonDisabled(1, "Statue of Marae", "You don't have enough stones. Required: 150");
 				}
 				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] >= 5 && flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] < 7) {
 					if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 500) addButton(2, "Gargoyles", repairGargoylesOnTheWalls).hint("Repair some of the decorative gargoyles.");
-					else addButtonDisabled(2, "Gargoyles", "You not have enough stones. Required: 500");
+					else addButtonDisabled(2, "Gargoyles", "You don't have enough stones. Required: 500");
 				}
 				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] >= 7 && flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] < 17) {
 					if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 50 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 10) addButton(3, "Prayer Bench", makeNewPrayerBenches).hint("Repair some of the temple banches.");
-					else addButtonDisabled(3, "Prayer Bench", "You not have enough wood (50) or/and nails (10).");
+					else addButtonDisabled(3, "Prayer Bench", "You don't have enough wood (50) or/and nails (10).");
 				}
 				addButton(13, "CheckProgress", currentStateOfTemple).hint("See how far the sculpture has progressed.");
 				addButton(14, "Back", templeMainMenu);

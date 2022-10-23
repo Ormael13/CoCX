@@ -1326,8 +1326,8 @@ public class TestMenu extends BaseContent
 		BodyStateMenu();
 	}
 	public function RemovePussy():void {
-		player.removeVagina(0, 1);
 		player.clitLength = .25;
+		player.removeVagina(0, 1);
 		BodyStateMenu();
 	}
 	public function RemoveCockBalls():void {

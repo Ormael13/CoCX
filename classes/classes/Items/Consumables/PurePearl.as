@@ -20,7 +20,7 @@ public class PurePearl extends Consumable {
         if (!player.hasStatusEffect(StatusEffects.SiegweirdTraining2) && flags[kFLAGS.SIEGWEIRD_FOLLOWER] < 3
             && (!player.hasStatusEffect(StatusEffects.AlvinaTraining2) || player.statusEffectv1(StatusEffects.AlvinaTraining2) < 3)
             || flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] < 1)
-            outputText("<i>You have a feeling that you might find more important uses for itin future.</i>");
+            outputText("<i>You have a feeling that you might find more important uses for it in the future.</i>");
         EngineCore.doYesNo(eatIt, putBack);
         return true; //Wait for confirmation
     }

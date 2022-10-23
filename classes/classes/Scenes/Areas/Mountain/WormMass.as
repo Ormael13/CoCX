@@ -39,7 +39,7 @@ public class WormMass extends Monster
 			//SUCCESS
 			if(player.lust < 50) {
 				outputText("The worm colony stands before you and begins secreting a significant amount of slime. Inexplicably, you find that your [cock] is already erect and is throbbing. The erection is quite meddlesome and you find yourself distracted by the unwanted arousal.\n");
-				player.dynStats("lus", 10+player.lib/20+player.cor/20);
+				player.takeLustDamage(10+player.lib/20+player.cor/20, true);
 			}
 			else {
 				outputText("The worm colony shambles over to you and attempts to grapple you. Attempting to dodge, you fail to get away fast enough and fall to the ground engulfed by the mass. You are completely covered in the slimy worms!!! Incapable of avoiding any of their movements, you feel their slime coat every inch of your body and you feel the struggle and strain of each individual worm as they crawl all over you. You immediately begin flailing wildly as you cannot even breathe!");
@@ -106,7 +106,6 @@ public class WormMass extends Monster
 			this.bonusLust = 156;
 			this.lust = 30;
 			this.lustVuln = 0;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 6;
 			this.gems = 0;
 			this.special1 = wormAttack;

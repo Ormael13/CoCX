@@ -26,20 +26,20 @@ use namespace CoC;
 				outputText("slapping into your face before you can react!  You wipe the slick snot-like stuff out of your eyes and nose, ");
 				if (player.lust > 75) {
 					outputText("swallowing it into your mouth without thinking.  ");
-					player.dynStats("lus", 20 + player.lib/8);
+					player.takeLustDamage(20 + player.lib/8, true);
 				}
 				else {
 					outputText("feeling your heart beat with desire as your tongue licks the residue from your lips.  ");
-					player.dynStats("lus", 10 + player.lib/16);
+					player.takeLustDamage(10 + player.lib/16, true);
 				}
 			}
 			else outputText("right past your head.  ");
 			outputText("The animalistic scent of it seems to get inside you, the musky aroma burning a path of liquid heat to your groin.");
-			player.dynStats("lus", 20 + player.lib/16);
+			player.takeLustDamage(20 + player.lib/16, true);
 			if(player.hasPerk(PerkLib.MinotaurCumAddict) || flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 2) {
 				if(rand(2) == 0) outputText("\n<b>You shiver with need, wanting nothing more than to bury your face under that loincloth and slurp out every drop of goopey goodness.</b>");
 				else outputText("\n<b>You groan and lick your lips over and over, craving the taste of him in your mouth.</b>");
-				player.dynStats("lus", 15+rand(15));
+				player.takeLustDamage(15+rand(15), true);
 			}
 		}
 		
@@ -70,7 +70,7 @@ use namespace CoC;
 			//Used after stunning PC.
 			outputText("Before you can completely regain your wits, the brute is on you, easily holding your hand in one hand while he none-too-gently smacks his cock into your face, dragging his musky member back and forth across your cheeks before finally breaking contact.");
 			outputText(" Strands of his"+(player.hasPerk(PerkLib.MinotaurCumAddict) ? " god-like":"")+" spunk hang from your nose until your tongue lashes out to collect them. "+(player.hasPerk(PerkLib.MinotaurCumAddict) ? "Delicious.":"")+"Why did you do that? And why did it feel so good.");
-			player.dynStats("lus", 20 + player.lib/16);
+			player.takeLustDamage(20 + player.lib/16, true);
 		}
 		
 		public function  minoincubusBattleaxes():void {
@@ -143,7 +143,6 @@ use namespace CoC;
 			this.bonusLust = 211 + this.ballSize * 5 + rand(this.ballSize * 3);
 			this.lust = this.ballSize * 3;
 			this.lustVuln = 0.84;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = 46;
 			this.gems = rand(15) + 15;
 			//this.special1 = SceneLib.mountain.minotaurScene.minoPheromones;

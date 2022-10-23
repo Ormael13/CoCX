@@ -578,7 +578,7 @@ private function talkAboutTheSpringWithMinerva():void {
 	outputText("\n\nThe two of you rest for a while, and can't help but enjoy each other's company.  You idly make small talk before deciding that it's time to take your leave.  Putting your [armor] back on, you gather your things with Minerva watching, mildly upset that you have to leave so soon.  \"<i>Thank you so much for coming to visit!  I had a lot of fun.  Now, don't be a stranger, you hear?  Come back and visit again soon!</i>\"  she says, before sitting up and tossing you one last smile.");
 	outputText("\n\nReturning her shining smile, you promise to come back and visit soon, then head out and start the hike back toward your camp.");
 	// PC returns to camp.
-	dynStats("lus", 10+player.lib/10);
+	dynStats("lus", 10+player.lib/10, "scale", false);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -706,7 +706,7 @@ public function bathTimeWithMinerva():void {
 	outputText("\n\nEventually though, the heat fades, and it's time for both of you to get out of the spring.  The affectionate siren helps you out of the warm water, even going to get you something to dry off with and helping dry you off.  As soon as you're dry, you find yourself wrapped up in a tight, squeezing hug, the blue and gray siren cuddling you tightly.  \"<i>That was nice, my love... really, it was wonderful,</i>\" she says as she looks at you, eyes locked on yours, clearly very happy to have shared that tender moment with you.");
 	outputText("\n\nLeaning in, she gives you a gentle kiss on the lips before finally letting go of you.  \"<i>I wish you didn't have to go, but I understand that you must.  I'll miss you, you know?  Make sure you come back soon, all right?</i>\"  she asks, a sparkle of hope in her eyes.  Smiling back at the happy siren, you nod, reassuring the herm that you will come back as soon as you can, returning her embrace for a moment before turning and heading back for your camp.");
 	// PC returns to camp.
-	dynStats("lus", 10+player.lib/10);
+	dynStats("lus", 10+player.lib/10, "scale", false);
 	fatigue(-30);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -1107,7 +1107,7 @@ private function noBallsMinervaAndContinuation(clear:Boolean = true):void {
 	
 	outputText("\n\nFor a long while, you just lay there, cuddled up with the mostly naked siren, the two of you idly chatting about various things that come to mind.  Eventually, you must leave the gentle embrace and return to your duties as a Champion.  Disentangling yourself from Minerva, you straighten your clothes out and, with a smile, tell her you had a wonderful time.  Grinning up at you, Minerva climbs back onto her feet and pulls you into a deep, tongue-tangling goodbye kiss.  \"<i>It was amazing, we have to do this again.  Perhaps next time, I can do you, hmm?</i>\" she suggests, not wanting to be greedy and get all the pleasure.  Giving you another peck on the cheek, the siren sends you on your way after telling you to come back and visit soon.");
 	
-	dynStats("lus", 20);
+	dynStats("lus", 20, "scale", false);
 	cleanupAfterCombat();
 }
 

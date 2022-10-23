@@ -30,7 +30,7 @@ package classes.Scenes.Monsters
 		}
 		public function corruptedGolemLustAttack():void {
 			outputText("She smirks and licks her lips as she gives her cock a squeeze, milking a few beads of clear pre from the tip.  You shake your head and try to ignore your growing need.");
-			player.dynStats("lus", 10 + player.lib / 6 + player.cor / 6);
+			player.takeLustDamage(10 + player.lib / 6 + player.cor / 6, true);
 		}
 		
 		override protected function performCombatAction():void
@@ -83,7 +83,6 @@ package classes.Scenes.Monsters
 			this.lustVuln = .5;
 			this.level = 35;
 			this.additionalXP = 350;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.gems = rand(10)+5;
 			this.tailType = Tail.DEMONIC;
 			this.drop = new WeightedDrop().

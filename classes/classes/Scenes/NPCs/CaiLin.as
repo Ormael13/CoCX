@@ -244,7 +244,6 @@ public class CaiLin extends Monster
 			this.armorName = "scales";
 			this.lust = 30;
 			this.fatigue = 0;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.gems = 0;
 			this.drop = new WeightedDrop().
 					add(null,1).

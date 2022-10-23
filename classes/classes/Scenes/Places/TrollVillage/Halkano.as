@@ -244,7 +244,7 @@ public class Halkano extends TrollVillageAbstractContent{
                 "His body is very muscular with considerable heft. His bare chest is chunky and beefy, almost invitingly comfortable with his soft fur. He is currently only wearing fur pants that cover his lower body and legs, held up by a silky sash. He has the average features you’d expect on a male troll. Toned and muscular arms and legs, each supporting 4 fingers or toes. A fuzzy tail, about 3 feet long, as well as fur covering his entire body.\n" +
                 "\n" +
                 "Halkano gives a polite smile as you eye him up and down.\n");
-        SceneLib.trollVillage.jabala.JabalaHalkanoTalk();
+        doNext(SceneLib.trollVillage.jabala.JabalaHalkanoTalk);
     }
 
     public function JHalkanoSexScenes():void{

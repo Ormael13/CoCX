@@ -172,7 +172,7 @@ public class Punishments extends BaseContent
 			clearOutput();
 			outputText("(Placeholder) You break down and beg your " + prison.prisonCaptor.captorTitle + " to release you, and promise to do as " + prison.prisonCaptor.captorPronoun1 + " commands in the future. You are then given a chance to demonstrate your commitment as " + prison.prisonCaptor.captorPronoun1 + " walks around behind you and allows you to stuggle to fuck yourself on " + prison.prisonCaptor.captorPronoun3 + " cock. After much struggle your [vagOrAss] is fill with jizz, but you are left horny and needing release.");
 			player.slimeFeed();
-			dynStats("lus", 50);
+			dynStats("lus", 50, "scale", false);
 			prison.changeEsteem(-5,prison.inPrison);
 			prison.changeObey(2,prison.inPrison);
 			prisonCaptorPunishmentStockadesFreedomRelease();

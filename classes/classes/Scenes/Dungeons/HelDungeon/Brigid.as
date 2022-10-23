@@ -35,7 +35,7 @@ public class Brigid extends Monster
 		//Attack Three: Harpy Ass Grind GO!
 		private function BrigidAssGrind():void {
 			outputText("Brigid grins as she approaches you.  She handily deflects a few defensive blows and grabs you by the shoulders.  She forces you onto your knees and before you can blink, has turned around and smashed your face into her ass!  \"<i>Mmm, you like that, don'tcha?</i>\" she growls, grinding her huge, soft ass across your face, giving you an up-close and personal feel of her egg-laying hips.");
-			player.dynStats("lus", 30);
+			player.takeLustDamage(30, true);
 		}
 		override protected function performCombatAction():void
 		{
@@ -94,7 +94,6 @@ public class Brigid extends Monster
 			this.bonusLust = 144;
 			this.lust = 20;
 			this.lustVuln = .25;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 29;
 			this.gems = rand(37)+210;
 			this.additionalXP = 150;

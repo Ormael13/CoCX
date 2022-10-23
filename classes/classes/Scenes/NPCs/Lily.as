@@ -127,7 +127,7 @@ import classes.internals.*;
 			if (flags[kFLAGS.LILY_LVL_UP] >= 3) {
 				var lustArrowDmg:Number = (flags[kFLAGS.LILY_LVL_UP] * 2);
 				if (flags[kFLAGS.LILY_LVL_UP] >= 9) lustArrowDmg += (this.inte / 5 + rand(player.lib - player.inte * 2 + player.cor) / 5);
-				player.dynStats("lus", lustArrowDmg);
+				player.takeLustDamage(lustArrowDmg, true);
 			}
 		}
 		
@@ -225,7 +225,6 @@ import classes.internals.*;
 			this.nipplesPierced = 1;
 			this.lust = 35;
 			this.lustVuln = .2;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.gems = rand(15) + 35;
 			this.drop = new WeightedDrop().add(consumables.B_GOSSR,5)
 					.add(useables.T_SSILK,1)

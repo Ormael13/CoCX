@@ -517,7 +517,7 @@ public class Ingnam extends BaseContent
 			player.gems -= 5;
 			outputText("\"<i>I'd like a glass of beer please,</i>\" you say. You hand over the five gems to the innkeeper and he pours you a glass of beer.");
 			outputText("\n\nYou kick back and drink the beer slowly. ");
-			dynStats("lus", 20);
+			dynStats("lus", 20, "scale", false);
 			player.refillHunger(10);
 			if (!player.hasStatusEffect(StatusEffects.Drunk)) {
 				player.createStatusEffect(StatusEffects.Drunk, 2, 1, 1, 0);

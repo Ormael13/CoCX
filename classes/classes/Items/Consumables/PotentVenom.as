@@ -203,7 +203,7 @@ public class PotentVenom extends Consumable {
 					CoC.instance.transformations.CockCentipede().applyEffect(false);
 				}
 			}
-			dynStats("lus", 10);
+			dynStats("lus", 10, "scale", false);
 			player.MutagenBonus("lib", 3);
 			changes++;
 		}

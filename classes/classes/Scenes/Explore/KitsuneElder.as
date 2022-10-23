@@ -45,7 +45,7 @@ import classes.internals.*;
 			var lustDmg:Number = player.lustVuln * ((this.inte / 10) + rand(player.lib + player.cor) / 5);
 			lustDmg *= 0.5;
 			lustDmg = Math.round(lustDmg);
-			player.dynStats("lus", lustDmg, "scale", false);
+			player.takeLustDamage(lustDmg, true);
 		}
 		
 		public function KitsuneCastsComet():void {
@@ -182,7 +182,6 @@ import classes.internals.*;
 			this.bonusSoulforce = 1000;
 			this.lust = 20;
 			this.lustVuln = 0.9;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = 55;
 			this.gems = rand(20) + 20;
 			this.drop = NO_DROP;/*

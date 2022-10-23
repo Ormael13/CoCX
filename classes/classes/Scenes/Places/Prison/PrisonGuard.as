@@ -58,12 +58,12 @@ package classes.Scenes.Places.Prison
 					else if(player.obey < 75)
 					{
 						outputText("However, your conditioning gets the better of your desire for freedom and you fall to your knees submissively as the " + guardPronoun1 + " looms over you.\n");
-						dynStats("lus", 100);
+						dynStats("lus", 100, "scale", false);
 					}
 					else
 					{
 						outputText("However, you have no desire to fight back; to the contrary, your only desire is to absorb every ounce of punishment " + guardPronoun1 + " has in mind, and you silently communicate as much by bending over and assuming the most secuctively submissive stance you can manage.\n");
-						dynStats("lus", 100);
+						dynStats("lus", 100, "scale", false);
 					}
 					
 					prison.prisonEscapeFightAutoLose();
@@ -89,12 +89,12 @@ package classes.Scenes.Places.Prison
 				else if(player.obey < 75)
 				{
 					outputText("Something inside you is relieved that");
-					dynStats("lus", 15);
+					dynStats("lus", 15, "scale", false);
 				}
 				else
 				{
 					outputText("It gives you pleasure when you realize that");
-					dynStats("lus", 30);
+					dynStats("lus", 30, "scale", false);
 				}
 				
 				outputText(" your restraints prevent you from putting up any significant fight");
@@ -143,12 +143,12 @@ package classes.Scenes.Places.Prison
 			else if(player.obey < 75)
 			{
 				outputText("Your conditioning gets the better of your desire for freedom and you fall to your knees submissively as the " + guardType + " looms over you.\n");
-				dynStats("lus", 100);
+				dynStats("lus", 100, "scale", false);
 			}
 			else
 			{
 				outputText("However, you have no desire to fight back; to the contrary, your only desire is to absorb every ounce of punishment this " + guardType + " has in mind, and you silently communicate as much bending over and assuming the most secuctively submissive stance you can manage.\n");
-				dynStats("lus", 100);
+				dynStats("lus", 100, "scale", false);
 			}
 			
 			prison.changeObey(1, prison.inPrison);

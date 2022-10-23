@@ -61,9 +61,9 @@ public class Cockatrice extends Monster {
             eAttack();
             return;
         }
-        outputText("The cockatrice [if (monster.canFly)unfurls his wings, flapping them hard against the ground. He whips up a flurry of loose"
-            + " dirt and rocks, directing it at you as he soars above you.|sweeps his tail along the ground, whipping up a flurry of loose"
-            + " dirt and small rocks. With a swift movement he then swipes across at you, flinging debris in your direction.]  ");
+        outputText("The cockatrice " + (rand(2) == 0 ? "unfurls his wings, flapping them hard against the ground. He whips up a flurry of loose"
+            + " dirt and rocks, directing it at you as he soars above you." : "sweeps his tail along the ground, whipping up a flurry of loose"
+            + " dirt and small rocks. With a swift movement he then swipes across at you, flinging debris in your direction.") + " ");
         if (player.spe / 5 + rand(20) < 28 + player.newGamePlusMod() * 5) { // dodge chance here
             if (rand(2) == 0) {
                 // Hit
@@ -154,8 +154,8 @@ public class Cockatrice extends Monster {
             + " He watches you, his electric blue eyes glinting as his midnight blue tail swishes behind him. Every so often he lunges"
             + " forward, beak open before revealing it was a feint. He is wielding his sharp claws as a weapon and is shielded only by his"
             + " exotic plumage and cream scaled belly."
-            + " [if (monster.canFly) Every so often he spreads his large feathered wings in an attempt to intimidate you.]"
-            + " His lizard like feet occasionally gouge into the rubble of the plateau, flinging it up as he shifts his stance. ";
+            + " Every so often he spreads his large feathered wings in an attempt to intimidate you."
+            + " His lizard-like feet occasionally gouge into the rubble of the plateau, flinging it up as he shifts his stance. ";
         this.createCock(8, 2, CockTypesEnum.LIZARD);
         this.balls = 2;
         this.ballSize = 2;
@@ -195,7 +195,6 @@ public class Cockatrice extends Monster {
 		this.bonusLust = 112;
         this.lust = 30;
         this.lustVuln = .5;
-        this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
         this.level = 22;
         this.gems = rand(10) + 10;
         this.drop = new WeightedDrop()

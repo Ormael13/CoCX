@@ -86,7 +86,7 @@ import classes.internals.ChainedDrop;
 				if (player.gender == 1) outputText("or dripping honey-slicked cunts beckoning you. ");
 				if (player.gender == 2) outputText("planting your aching sex over her face while you lick her sweet honeypot. ");
 				if (player.gender == 3) outputText("or cocks, tits, and puffy nipples. ");
-				player.dynStats("lus", 75);
+				player.takeLustDamage(75, true);
 				if (player.lust > player.lust100 * 0.6) {
 					outputText(" You shake your head and struggle to stay focused,");
 					if (player.gender == 1 || player.gender == 3) outputText(" but it's difficult with the sensitive bulge in your groin.");
@@ -150,7 +150,6 @@ import classes.internals.ChainedDrop;
 			this.bonusLust = 121;//lib+sens+lvl
 			this.lust = 20 + rand(40);
 			this.lustVuln = 0.9;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 6;
 			this.gems = rand(20) + 5;
 			this.drop = new ChainedDrop().add(consumables.OVIELIX, 1 / 6)

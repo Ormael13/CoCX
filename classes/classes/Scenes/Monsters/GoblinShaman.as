@@ -80,9 +80,7 @@ public class GoblinShaman extends Goblin
 			else if (spellChooser == 3 && mana >= spellCostArouse) {
 				outputText("She makes a series of arcane gestures, drawing on her lust to inflict it upon you! ");
 				var lustDamage:int = (inte / 10) + (player.lib / 10) + rand(10) * spellMultiplier();
-				lustDamage = lustDamage * (EngineCore.lustPercent() / 100);
-				player.dynStats("lus", lustDamage, "scale", false);
-				outputText(" <b>(<font color=\"#ff00ff\">" + (Math.round(lustDamage * 10) / 10) + "</font>)</b>");
+				player.takeLustDamage(lustDamage, true);
 				mana -= spellCostArouse;
 			}
 			//Heal
@@ -158,7 +156,6 @@ public class GoblinShaman extends Goblin
 			this.bonusLust = 114;
 			this.lust = 35;
 			this.lustVuln = 0.4;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 24;
 			this.gems = rand(15) + 25;
 			this.drop = new WeightedDrop().

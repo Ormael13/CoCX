@@ -648,7 +648,7 @@ private function caressMarble():void {
 	clearOutput();
 	outputText("You offer to gently rub her breasts, saying it should be a lot less painful than the milking machine's sucking. \"<i>Oh no,</i>\" she retorts, \"<i>nothing is more wonderful than being sucked, but right now I guess I could use a break and get a good rub.</i>\" You move around behind her and reach up under her arms, firmly grasping her breasts. She gasps sharply at first, but as you start to gently massage and caress them, she lets out a sigh and starts breathing deeply. You begin to feel milk leaking out onto your hands as you rub her. \"<i>This is nice,</i>\" she says, \"<i>not as good as being suckled, but nice.</i>\" After a few minutes of gently massaging her breasts, she pulls your hands off of themand turns to you. \"<i>Thanks,</i>\" she says, \"<i>I'm still a little sore, but thank you for your touch, sweetie. Feel free to come back later; I'll be happy to visit with you any time.</i>\" Just before you leave, you notice that Marble is rubbing her breasts the same way you were, a slight smile on her face.");
     if (!recalling) {
-        dynStats("lus", 15);
+        dynStats("lus", 15, "scale", false);
         marbleStatusChange(5, 0);
         doNext(camp.returnToCampUseOneHour);
     } else doNext(recallWakeUp);
@@ -665,7 +665,7 @@ private function suckleMarble():void {
         player.refillHunger(30);
         marbleStatusChange(15, 10);
         applyMarblesMilk();
-        dynStats("lus", 25);
+        dynStats("lus", 25, "scale", false);
         doNext(camp.returnToCampUseOneHour);
     } else doNext(recallWakeUp);
 }
@@ -751,7 +751,7 @@ private function playerRefusesMarbleMilk():void {
 	//(reduce affection by 5)
 	//(reduce addiction by 5)
 	marbleStatusChange(-5,-5);
-	dynStats("lus", -10);
+	dynStats("lus", -10, "scale", false);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -773,7 +773,7 @@ public function encounterMarbleExploring2():void {
 	//[addiction >30]
 	if(player.statusEffectv2(StatusEffects.Marble) > 30) {
 		outputText("\n\nThe entire time you spend talking, you find yourself oddly attracted to Marble's scent, especially when you get an odd whiff of her milk.  ");
-		dynStats("lus", 10);
+		dynStats("lus", 10, "scale", false);
 	}
 	//[affection <60]
 	if(player.statusEffectv1(StatusEffects.Marble) < 60) {
@@ -790,14 +790,14 @@ public function encounterMarbleExploring2():void {
 		//[affection >=60, player has not had sex with Marble]
 		if(player.statusEffectv1(StatusEffects.FuckedMarble) == 0) {
 			outputText("\n\nAs the two of you finish chatting, Marble gives you an intense look. \"<i>You know that I really like you right, sweetie? I'd like it if I can do something special with you,</i>\" she hesitates for a moment, \"<i>Will you come to my bed?</i>\"\n\nDo you accept her invitation?");
-			dynStats("lus", 10);
+			dynStats("lus", 10, "scale", false);
 			doYesNo(AcceptMarblesSexualAdvances,turnDownMarbleSexFirstTime);
 		}
 		//[affection >=60, player has had sex with Marble]
 		else {
 			outputText("\n\nAfter you finish talking, Marble gives you another intense look. \"<i>Sweetie, will you come into my bed again?</i>\" You can feel a tingle in your groin at the thought of having sex with her again.\n\nDo you accept her invitation?");
 			//player chooses yes/no
-			dynStats("lus", 10);
+			dynStats("lus", 10, "scale", false);
 			doYesNo(AcceptMarblesSexualAdvances,turnDownMarbleSexRepeat);
 		}
 	}
@@ -861,7 +861,7 @@ public function helpMarble1():void {
 	//(increase affection by one tenth the player's str)
 	marbleStatusChange(int(player.str/10),0);
 	//(increase player lust)
-	dynStats("lus", 10);
+	dynStats("lus", 10, "scale", false);
 	//(player receives a bottle of Marble's milk)
 	inventory.takeItem(consumables.M__MILK, camp.returnToCampUseOneHour);
 }
@@ -885,7 +885,7 @@ public function helpMarble2():void {
 	//(increase affection by one tenth the player's spd)
 	marbleStatusChange(int(player.spe/10),0);
 	//(increase player lust)
-	dynStats("lus", 10);
+	dynStats("lus", 10, "scale", false);
 	if(afterMarbleHelp()) return;
 	outputText("When the two of you finish and you start to leave, Marble calls out to you, \"<i>Wait, let me give you something!</i>\" You turn and look back at her as she rushes up to you. Smiling brilliantly, the cow-girl hands you a bottle full of warm milk, \"<i>My gift to you for your help, fresh from the source,</i>\" she says, patting her sizable chest.\n\n");
 	//(player receives a bottle of Marble's milk)
@@ -1796,7 +1796,7 @@ private function marbleGenderlessNoFuck():void {
 	outputText("You hear Marble give a contented sigh, but her grip on you does not lessen at all. There is no way you could pull away at this point, even if you wanted to.  Your tongue snakes all around her insides, pushing into every crevice it can find and tasting every surface.  You are quite happy doing this until Marble's hands push your head to the top of her sex and she tells you breathlessly; \"<i>Suck.</i>\" You oblige.  Marble quickly lets out a soft sigh sounding almost like a moo, before finally letting go of your head.  \"<i>Thank you so much, sweetie, that was great.</i>\"");
 	//(be sure to do the after sex events for whatever sex scene triggered this one)
 	//(increase player lust)
-	if (!recalling) dynStats("lus", 40);
+	if (!recalling) dynStats("lus", 40, "scale", false);
 }
 
 public function marbleStatusChange(affection:Number, addiction:Number, isAddicted:Number = -1):void {
@@ -1994,7 +1994,7 @@ private function marbleKidsPlaytime():void {
 	if(select == 6) {
 		kidAScene.repeatCowSitting();
 	}
-	if(flags[kFLAGS.MARBLE_PLAYED_WITH_KIDS_TODAY] > 0) dynStats("lus", -10);
+	if(flags[kFLAGS.MARBLE_PLAYED_WITH_KIDS_TODAY] > 0) dynStats("lus", -10, "scale", false);
 	else dynStats("lib", -1, "lus", -10, "cor", -1);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -2086,7 +2086,7 @@ private function talkWithMarbleAtCamp():void {
 		else if (player.hasPerk(PerkLib.MaraesGiftStud))
 			outputText("You continue and tell her how your attempt to get Marae's Lethicite turned out.  Marble can't believe you tried that, but when she hears what happened next, her eyes go wide, and she actually starts masturbating in front of you.  At the end of your tale, Marble looks at you a bit nervously and asks, \"<i>So sweetie, does that mean you're going to breed with me?</i>\" <i>Hmm, </i> you think, <i>might not be a bad idea.</i>");
 		//increase the player's lust by 35 if they are under 50, so they can breed right away
-		if(player.lust<50) dynStats("lus", 35);
+		if(player.lust<50) dynStats("lus", 35, "scale", false);
 		if(!player.hasPerk(PerkLib.MaraesGiftFertility) && !player.hasPerk(PerkLib.MaraesGiftStud)) {
 			outputText("You finish your tale by recounting how you ran away.  She isn't really sure how to respond to your decision, but Marble does thank you for not leaving her behind and joining Marae.");
 		}
@@ -2680,7 +2680,7 @@ private function rapeMarble(room:Boolean = false):void {
             marbleRapeCorruptFantasy();
         outputText("With just one more thing to do, you laugh at Marble before shoving your full fist inside her.  The act results in that familiar gasp of pain and pleasure.  Playing with her is indeed quite satisfying.  ");
         //Reduce player lust by 20
-        if (!recalling) dynStats("lus", -20);
+        if (!recalling) dynStats("lus", -20, "scale", false);
         goodEnd();
     }
     function goodEnd():void {
@@ -3464,7 +3464,7 @@ private function marbleNomNoms():void {
 	}
     function sharedEnd():void {
         outputText("\"<i>Thank you so much sweetie.  Next time if you're in the mood, maybe we can have fun together,</i>\" says Marble.");
-        dynStats("lus", rand(10) + player.lib / 10);
+        dynStats("lus", rand(10) + player.lib / 10, "scale", false);
         doNext(playerMenu);
     }
 }
@@ -3694,7 +3694,7 @@ private function giveMarbleTailjobRelease():void {
 	} else sceneHunter.print("Check failed: need higher corruption.. and maybe long tongue?");
 	//teh end
 	//slimefeed if corruption, gain fuckin' lust n lower marble lust n' shit
-	dynStats("lus", 20);
+	dynStats("lus", 20, "scale", false);
 	flags[kFLAGS.MARBLE_LUST] = 0;
 	doNext(playerMenu);
 }

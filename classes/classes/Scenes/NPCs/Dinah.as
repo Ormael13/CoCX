@@ -185,9 +185,7 @@ import classes.internals.*;
 		public function castArouseDinah():void {
 			outputText("Dinah makes a series of arcane gestures, drawing on her lust to inflict it upon you! ");
 			var lustDamage:int = (inte / 5) + rand(10);
-			lustDamage = lustDamage * (EngineCore.lustPercent() / 100);
-			player.dynStats("lus", lustDamage, "scale", false);
-			outputText(" <b>(<font color=\"#ff00ff\">" + (Math.round(lustDamage * 10) / 10) + "</font>)</b>");
+			player.takeLustDamage(lustDamage, true);
 			mana -= spellCostArouse();
 			flags[kFLAGS.DINAH_SPELLS_CASTED]++;
 		}
@@ -508,7 +506,6 @@ import classes.internals.*;
 			this.weaponName = "claws";
 			this.weaponVerb = "slash";
 			this.lust = 30;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.gems = 0;
 			if (flags[kFLAGS.DINAH_LVL_UP] >= 1 && flags[kFLAGS.DINAH_LVL_UP] < 4) {
 				this.lustVuln = .9;

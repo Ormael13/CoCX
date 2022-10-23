@@ -125,7 +125,6 @@ import classes.internals.*;
 			this.armorName = "pants";
 			this.lust = 10;
 			this.lustVuln = 0.33;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.gems = 50 + rand(50);
 			this.drop = new ChainedDrop().add(necklaces.OBNECK,1/5)
 					.elseDrop(consumables.ONISAKE);

@@ -199,7 +199,7 @@ private function letDebimboSophieGo():void {
 		if(player.cor < 40) {
 			outputText("  You blink repeatedly, trying to clear your head of these idle thoughts, but are nonetheless aroused.");
 			//{+10 AROUSAL}
-			dynStats("lus", 10);
+			dynStats("lus", 10, "scale", false);
 		}
 		else {
 			outputText("\n\nYou let these fantasies run wild through your head, imagining a group of three opportunistic minotaurs gangbanging a flight-exhausted Sophie; their ribbed, flared cocks completely renovating her yielding pussy and convulsing asshole while she gurgles helplessly around a third pulsing horseshaft lodged deep in her throat.  The two double-penetrating her holes grunt, their grossly sperm-swollen, watermelon-sized ball sacs and quivering dark taints rubbing up against one another in a fevered race to see who can cum first and claim this bimbo bird as their own personal cumdump and breeding slave.");
@@ -216,7 +216,7 @@ private function letDebimboSophieGo():void {
 			
 			outputText("\n\nYou smile perversely from your fantasy, thoroughly aroused by it.");
 			//{+25 AROUSAL}
-			dynStats("lus", 25);
+			dynStats("lus", 25, "scale", false);
 		}
 	}
 	flags[kFLAGS.SOPHIE_DISABLED] = 1;
@@ -302,7 +302,7 @@ public function followerSophieMainScreen():void {
 		else outputText("she's quite skilled at it");
 		outputText(".  \"<i>Ohhh, come on, [name]!  Just give it to me like a good " + player.mf("boy","girl") + ", would you?  I could even give you a special treat.  <b>Just give. It. To. Me.</b></i>\"");
 		outputText("\n\nYou guess there's no way Sophie would really accept any non-impregnating kind of sex right now, but you could refuse... or pick that special treat over your usual sex.");
-		dynStats("lus", 20);
+		dynStats("lus", 20, "scale", false);
 		//[Vaginal][Special]
   		//[Vaginal] → Leads to the \"fertile\" variation of vaginal smex!
 		//[Special]
@@ -789,7 +789,7 @@ private function sophieBlowsSixtyNine():void {
 	//+10 lust
 	player.sexReward("vaginalFluids","Dick");
 	dynStats("sen", 1);
-	dynStats("lus", 10);
+	dynStats("lus", 10, "scale", false);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -1067,7 +1067,7 @@ public function sophieFollowerIntro():void {
 	outputText("\n\nYou snap back into reality, waking up to find the object of your obsession bouncing gleefully on your exposed groin.  Her tousled hair jumps around with every plunge of the bird-woman's heavenly thighs.  She quickly notices your stark awakening, and blushes hard while she tries to remove herself.");
 	
 	outputText("\n\n\"<i>Oh shit - dear, it's hardly what you think.  I've just always been the one to capture young men to bone me raw, but ever since you've come along, all I can think about is your cock!  Oh and you, of course.  Please don't get mad darling, it was hard enough to try and find this place, and-</i>\"");
-	dynStats("lus", 10);
+	dynStats("lus", 10, "scale", false);
 	//Plus lust!
 	//[Kiss Her][Get Out]
 	menu();
@@ -1081,7 +1081,7 @@ private function getOutSophieRecruitment():void {
 	outputText("Invading your camp is one thing, but Sophie's overstepping her boundaries by thinking she can get sex from you whenever she wants.  You push her off of your body, standing up to announce that you'll get sex when you need it, not when she desires.  The poor bird nods feverishly, completely embarrassed by the entire ordeal.");
 	outputText("\n\n\"<i>Absolutely dear, let's never speak of this again.  I'll be off now.</i>\"");
 	outputText("\n\nWith that, she darts above the camp, flying back to her home in the high mountains.  You were having such a nice dream, too.");
-	dynStats("lus", -5);
+	dynStats("lus", -5, "scale", false);
 	flags[kFLAGS.NO_PURE_SOPHIE_RECRUITMENT] = 1;
 	doNext(playerMenu);
 }
@@ -1100,7 +1100,7 @@ private function kissSophieRecruitment():void {
 	outputText("\n\nThe two of you slump back, exhausted over a good night's sex.  Sophie lies in your arms, twirling her finger around your chest.");
 
 	outputText("\n\n\"<i>You've got a cute set up here, sweetheart.  I don't mind moving away from all those harpies, if there was the possibility that I could stay here with you.</i>\"");
-	dynStats("lus", 20);
+	dynStats("lus", 20, "scale", false);
 	//[Sure][No] – Note: [No] leads to the [Get Out] scene.
 	menu();
 	addButton(0,"Sure",sophieRecruitmentFinale);

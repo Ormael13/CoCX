@@ -388,7 +388,7 @@ public class LizanRogueScene extends BaseContent
 			outputText("\n\nThe lizan rubs his belly, enjoying the warm urine you're giving him. By now, your bladder is empty, and you make sure to get the last of your urine out. He scoops up the murky water, washes off the urine and gets up. \"<i>All right, now it's my turn. I need release too,</i>\" he says.");
 			outputText("\n\nYou comply and lean back against the tree. He aims his twin cocks towards you and begins peeing all over you. It feels good with his warm urine on your body. He aims left and right, his urine streams go wide and splash into the murky waters. He aims back at you again, letting you revel in his warm urine.");
 			outputText("\n\nHis urine flows eventually stop, and you scoop up some murky water to wash off the urine.");
-			dynStats("lus", 10);
+			dynStats("lus", 10, "scale", false);
 			menu();
 			addButton(0, "Continue", haveSexWithLizan, true, null, null, "Continue having sex.");
 			addButton(1, "Done", finishWatersports);

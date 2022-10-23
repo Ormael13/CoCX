@@ -30,10 +30,7 @@ public class Marae extends Monster
 			else if (evade != null) outputText("You manage to avoid her tentacles thanks to your superior evasion!");
 			else {
 				outputText("You attempt to slap away the tentacles but it's too late! The tentacles tickle your groin and you can feel your [ass] being teased! \"<i>You know you want me!</i>\" Marae giggles. ");
-				var lustDmg:int = (150 + rand(player.cor / 5) + rand(player.effectiveSensitivity() / 5) + rand(player.lib / 5) + rand(50)) * (EngineCore.lustPercent() / 100);
-				player.dynStats("lust", lustDmg, "scale", false);
-				outputText("(+" + lustDmg + " lust)");
-				
+				player.takeLustDamage(150 + rand(player.cor / 5) + rand(player.effectiveSensitivity() / 5) + rand(player.lib / 5) + rand(50), true);
 			}
 		}
 		public function maraePollenCloud():void {
@@ -183,7 +180,6 @@ public class Marae extends Monster
 			this.bonusHP = 17500;
 			this.lust = 30;
 			this.lustVuln = .04;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 140;
 			this.drop = NO_DROP;
 			this.gems = 1000;

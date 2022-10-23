@@ -104,7 +104,6 @@ public class Marble extends Monster
 			this.armorDef = 10;
 			this.armorMDef = 0;
 			this.bonusLust = 84;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 14;
 			this.gems = rand(15) + 50;
 			this.drop = new WeightedDrop(weapons.L_HAMMR, 1);

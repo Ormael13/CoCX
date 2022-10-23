@@ -61,7 +61,6 @@ public class DarkElfRanger extends DarkElfScout
 			this.bonusLust = 189;
 			this.lustVuln = .7;
 			this.lust = 50;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 39;
 			this.gems = rand(10) + 20;
 			this.drop = new WeightedDrop().

@@ -48,11 +48,11 @@ use namespace CoC;
 				}
 				else if (player.lust >= 50 || player.cor >= 50) {
 					outputText("  Blushing at the scent and feel of cum on your [legs], you twist and pull free.  You find yourself wondering what this demon's dick would taste like.");
-					player.dynStats("lus", 7 + player.cor / 25);
+					player.takeLustDamage(7 + player.cor / 25, true);
 				}
 				else {
 					outputText("  Disgusted, you pull away from the purplish monstrosity, the act made easier by your well-slimed [legs].");
-					player.dynStats("lus", 4 + player.cor / 25);
+					player.takeLustDamage(4 + player.cor / 25, true);
 				}
 				player.takePhysDamage(4);
 			}
@@ -74,7 +74,7 @@ use namespace CoC;
 			switch (rand(3)) {
 				case 0: //Face
 					outputText("face.  The gooey demon-seed oozes and slides over you with a mind of its own, forcing its way into your mouth and nose!  You can feel it moving around inside you, doing its best to prepare you for its master.");
-					player.dynStats("lus", 3);
+					player.takeLustDamage(3, true);
 					if (!player.hasStatusEffect(StatusEffects.DemonSeed))
 						player.createStatusEffect(StatusEffects.DemonSeed, 4, 0, 0, 0);
 					else player.addStatusValue(StatusEffects.DemonSeed, 1, 6);
@@ -83,7 +83,7 @@ use namespace CoC;
 				case 1: //Chest
 					if (player.hasFuckableNipples()) {
 						outputText(allBreastsDescript() + ".  The gooey demon-seed oozes and slides over you with a mind of its own, forcing its way into your open nipples.  You can feel it moving around inside you, doing its best to prepare you for its master.");
-						player.dynStats("lus", 3);
+						player.takeLustDamage(3, true);
 						if (!player.hasStatusEffect(StatusEffects.DemonSeed))
 							player.createStatusEffect(StatusEffects.DemonSeed, 4, 0, 0, 0);
 						else player.addStatusValue(StatusEffects.DemonSeed, 1, 7);
@@ -94,7 +94,7 @@ use namespace CoC;
 				default: //Crotch
 					if (player.vaginas.length > 0) {
 						outputText("crotch.  The gooey demon-seed oozes and slides over you with a mind of its own, forcing its way past your [armor] and into your " + player.vaginaDescript(0) + ".  You can feel it moving around inside you, doing its best to prepare you for its master.");
-						player.dynStats("lus", 3);
+						player.takeLustDamage(3, true);
 						if (!player.hasStatusEffect(StatusEffects.DemonSeed))
 							player.createStatusEffect(StatusEffects.DemonSeed, 4, 0, 0, 0);
 						else player.addStatusValue(StatusEffects.DemonSeed, 1, 7);
@@ -163,7 +163,6 @@ use namespace CoC;
 			this.armorName = "demonic skin";
 			this.lust = 30;
 			this.lustVuln = .5;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.randomDropChance = 0.1;
 			this.randomDropParams = {
 				rarity: DynamicItems.RARITY_CHANCES_LESSER

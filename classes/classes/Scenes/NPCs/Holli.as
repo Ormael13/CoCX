@@ -130,7 +130,7 @@ public class Holli extends Monster
 				outputText(", forever...</i>\" ");
 				//lust damage, fatigue damage, light HP damage
 				EngineCore.fatigue(10);
-				player.dynStats("lus", 25);
+				player.takeLustDamage(25, true);
 				var damage:Number = 20 + rand(10);
 				damage = player.takePhysDamage(damage, true);
 			}
@@ -155,7 +155,7 @@ public class Holli extends Monster
 				//sap rose shitposting
 				var damage:int = 10 + rand(5);
 				damage = player.takePhysDamage(damage, true);
-				player.dynStats("lus", 15);
+				player.takeLustDamage(15, true);
 				player.createStatusEffect(StatusEffects.HolliConstrict, 0, 0, 0, 0);
 			}
 		}
@@ -192,7 +192,7 @@ public class Holli extends Monster
 			//lower monster lust by medium-lots and apply med sens-based lust damage
 			lust -= 20;
 			if (lust < 20) lust = 20;
-			player.dynStats("lus", 15 + player.effectiveSensitivity() / 5);
+			player.takeLustDamage(15 + player.effectiveSensitivity() / 5, true);
 		}
 
 //heal -Z
@@ -269,7 +269,6 @@ public class Holli extends Monster
 			this.bonusLust = 135;
 			this.lust = 20;
 			this.lustVuln = .2;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 20;
 			this.gems = 0;
 			this.drop = NO_DROP;

@@ -77,7 +77,6 @@ use namespace CoC;
 			this.lust = 30;
 			this.lustVuln = .8;
 			this.drop = NO_DROP;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			//this.tailType = Tail.MONKEY;
 			checkMonster();
 		}

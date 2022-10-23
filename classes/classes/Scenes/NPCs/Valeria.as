@@ -122,7 +122,6 @@ public class Valeria extends GooGirl
 			this.bonusHP = 500;
 			this.bonusLust = 155;
 			this.lustVuln = .35;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 30;
 			this.gems = rand(50)+80;
 			this.drop = NO_DROP;

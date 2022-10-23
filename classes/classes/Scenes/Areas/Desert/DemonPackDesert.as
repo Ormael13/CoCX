@@ -16,7 +16,7 @@ public class DemonPackDesert extends Monster
 		{
 			if (hpVictory) {
 				outputText("You strike out and the last of the demons tumbles to the ground with a thud. You stand there for a second surrounded by dead or unconscious demons feeling like a god of battle. Then you realize that if a god of battle does exist he lives on a demonic plane like this, so to avoid insulting him you take your hands off your hips and your [legs] off the head of the demon leader before you start to search the bodies.", true);
-				player.dynStats("lus", 1);
+				player.dynStats("lus", 1, "scale", false);
 			} else {
 				outputText("The demons stop attacking, and reach out to touch your body. Some are already masturbating like it's the only thing in the world and you know that right now, if you wanted to, you could make each and every one of them fuck you.");
 			}
@@ -116,7 +116,6 @@ public class DemonPackDesert extends Monster
 			this.bonusHP = 20;
 			this.bonusLust = 129;
 			this.lust = 30;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 9;
 			this.gems = rand(30)+20;
 			this.randomDropChance = 0.1;

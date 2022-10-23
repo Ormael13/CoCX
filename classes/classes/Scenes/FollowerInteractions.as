@@ -24,7 +24,7 @@ public function amilyMeetsPureJojo():void {
 	outputText("Amily sighs and hugs him again, \"<i>You're a pansy. You know that Jojo?  But I'm glad [name] reunited us so that we could meet again.</i>\"\n\n");
 	
 	outputText("Jojo replies, \"<i>Me too,</i>\" before he notices you and coughs.  Amily pulls back and beams a brilliant, buck-toothed smile at you.  She rushes into your arms and gives you a kiss before she runs off.  Jojo looks a little embarrassed and scratches his ear as he centers himself.\n\n");
-	dynStats("lus", 5);
+	dynStats("lus", 5, "scale", false);
 
 	//[To jojo camp interaction]
 	doNext(jojoScene.jojoCamp);
@@ -205,7 +205,7 @@ private function stopJojoDeathInTheNameOfLove():void {
 		//(NOT SMART)
 		outputText("Stop, think about this.  We can't do this, can we?</i>\"   She answers, \"<i>We do what we must,</i>\" and pulls her dagger.  You can't watch the grisly deed and avert your eyes.  She slits the once-pious monk's throat and it's done.  The two of you build a cairn of rocks over the mouse's body, as fitting a burial as you're able to provide for him.");
 		//(-80 lust)
-		dynStats("lus", -99);
+		dynStats("lus", -99, "scale", false);
 		//(You suck and Jojo died.)
 		flags[kFLAGS.JOJO_DEAD_OR_GONE] = 2;
 	}
@@ -228,7 +228,7 @@ private function whyWouldDoThis():void {
 	outputText("You can't watch the grisly deed and avert your eyes.  She slits the once-pious monk's throat and it's done.  The two of you build a cairn of rocks over the mouse's body, as fitting a burial as you're able to provide for him.");
 	
 	//(-99 lust)
-	dynStats("lus", -99);
+	dynStats("lus", -99, "scale", false);
 	//(You suck and Jojo died.)
 	flags[kFLAGS.JOJO_DEAD_OR_GONE] = 2;
 	doNext(camp.returnToCampUseOneHour);
@@ -249,7 +249,7 @@ public function AmilyIntroducesSelfToRathazul():void {
 	outputText("Amily takes off, leaving you alone with the alchemist.");
 	
 	//(+5 lust!)/
-	dynStats("lus", 5);
+	dynStats("lus", 5, "scale", false);
 	doNext(SceneLib.rathazul.returnToRathazulMenu);
 }
 //[Amily delivers ingredients to Rathazul – happens at Rathazul]
@@ -263,7 +263,7 @@ public function amilyIngredientDelivery():void {
 	outputText(".  Amily sprints into the rat's lab with an armful of flowers, plants, and other ingredients.  Rathazul says, \"<i>Thank you, child - these will be a huge help.  It is fortunate you knew where to find some of these.  Purchasing them is difficult and expensive.</i>\"\n\n");
 	outputText("Amily bobs her head happily as Rathazul reaches into his robes and says, \"<i>Here is the payment, as promised,</i>\" and hands her an old alchemical text.  She squeals happily and runs past you, her tail curling about your waist for the briefest moment before she's gone.\n\n");
 	//[To rathazul, +4 lust]
-	dynStats("lus", 4);
+	dynStats("lus", 4, "scale", false);
 	//[Prices reduced for reducto!
 	flags[kFLAGS.AMILY_MET_RATHAZUL]++;
 	doNext(SceneLib.rathazul.returnToRathazulMenu);
@@ -614,7 +614,7 @@ private function askAboutAmilyPt2():void {
 	outputText("Amily breaks the kiss and gives Urta a drunkenly affectionate smile, gently stroking her cheek.  \"<i>Mmm... I wish [name] had introduced ush earlier... I think we're gonna be good friendsh,</i>\" she slurs.  Urta simply nods, giving her a goofy grin but clearly miles away, mentally. The mouse promptly yawns, dropping the now empty bottle to the floor, shuts her eyes and snuggles up to Urta, who cuddles her close and also drifts off.\n\n");
 
 	outputText("With a soft sigh, you shut the door and leave them to sleep it off.  While you can't predict that they will be quite so magnanimous about all this when they wake up, right now, it looks like neither of them is inclined to declare war over you.");
-	dynStats("lus", 75);
+	dynStats("lus", 75, "scale", false);
 	doNext(camp.returnToCampUseOneHour);
 	//Progress to next stage!
 	flags[kFLAGS.AMILY_VISITING_URTA] = 2;
@@ -633,7 +633,7 @@ private function cheatingSloots():void {
 private function letTheSlootsFuck():void {
 	clearOutput();
 	outputText("You chuckle and tell them you understand, though they had better include you in the future.  Drunken relief spreads across their faces when you give them a wink and step out.  Soon you hear the sloppy sounds of sex and giggles about how great their lover is.");
-	dynStats("lus", 75);
+	dynStats("lus", 75, "scale", false);
 	doNext(camp.returnToCampUseOneHour);
 	flags[kFLAGS.AMILY_VISITING_URTA] = 4;
 }
@@ -784,7 +784,7 @@ private function amilyUrtaSexWatch():void {
 	outputText("With a sigh and a smile, Amily collapses on top of Urta, sated and full.  Her eyes dart towards you one more time before she cuddles the panting vixen to rest and enjoy the afterglow.\n\n");
 	
 	outputText("By this point, you are feeling very turned on indeed, but you can't bring yourself to disturb them.  Instead, you simply grin again and leave them to recover.");
-	dynStats("lus", 50);
+	dynStats("lus", 50, "scale", false);
 	doNext(camp.returnToCampUseOneHour);
 }
 }

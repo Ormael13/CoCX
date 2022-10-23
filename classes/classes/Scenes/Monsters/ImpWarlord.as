@@ -95,7 +95,6 @@ public class ImpWarlord extends Imp
 			this.bonusLust = 122;
 			this.lust = 30;
 			this.lustVuln = .4;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = 16;
 			this.gems = rand(20) + 40;
 			this.randomDropChance = 0.1;

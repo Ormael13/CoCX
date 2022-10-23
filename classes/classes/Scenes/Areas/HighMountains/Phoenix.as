@@ -71,9 +71,8 @@ public class Phoenix extends Monster
 				if (player.hasCock() && player.hasVagina()) outputText("whilst your");
 				if (player.hasVagina()) outputText("thighs are suddenly soaked by a torrent of girlcum as your body reacts to the potent chemicals");
 				outputText(".");
-				var lustDmg:Number = (30 + rand(30)) * (EngineCore.lustPercent()/100);
-				player.dynStats("lus", lustDmg, "scale", false);
-				outputText(" <b>(<font color=\"#ff00ff\">" + (Math.round(lustDmg*10)/10) + "</font>)</b>");
+				var lustDmg:Number = 30 + rand(30);
+				player.takeLustDamage(lustDmg, true);
 			}
 		}
 		
@@ -152,7 +151,6 @@ public class Phoenix extends Monster
 			this.bonusLust = 110;
 			this.lust = 10;
 			this.lustVuln = .7;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 30;
 			this.gems = 60 + rand(45);
 			this.drop = new ChainedDrop().add(useables.EBONBLO,1/20)

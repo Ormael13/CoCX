@@ -56,7 +56,6 @@ import classes.VaginaClass;
 			this.bonusSoulforce = 100 * (1 + rand(10));
 			this.lustVuln = 0.1 * (1 + rand(10));
 			this.lust = 20;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = player.level + rand(16);
 			this.ass.analLooseness = player.ass.analLooseness;
 			this.ass.analWetness = player.ass.analWetness;

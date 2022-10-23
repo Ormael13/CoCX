@@ -71,6 +71,9 @@ import classes.internals.SaveableState;
 				for (var k2:String in storage2) {
     			if (storage2.hasOwnProperty(k2)) PermanentMemoryStorage[k2] = !!storage2[k2];
 				}
+				var permedMetamorphCount:int = Metamorph.PermanentMemoryStorage.length;
+				player.removeStatusEffect(StatusEffects.TranscendentalGeneticMemory);
+				player.createStatusEffect(StatusEffects.TranscendentalGeneticMemory, 15 * player.perkv1(PerkLib.AscensionTrancendentalGeneticMemoryStageX), permedMetamorphCount, 0, 0);
 			} else {
 				// Migration from old save
 				resetState();
@@ -1038,9 +1041,7 @@ import classes.internals.SaveableState;
 
 			clearOutput();
 			outputText(title);
-
-			const vaginaDesc: String = CoC.instance.playerAppearance.describePussies();
-			outputText(player.hasVagina() ?  vaginaDesc : "You have no vagina.");
+			outputText(player.hasVagina() ?  CoC.instance.playerAppearance.describePussies() : "You have no vagina.");
 			outputText("[pg]Perhaps you'd like to change this?");
 
 			var totVag:int = player.vaginas.length;

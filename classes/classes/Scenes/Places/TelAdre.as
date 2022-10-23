@@ -434,7 +434,7 @@ private function buyBackpack():void {
 	menu();
 	if (player.keyItemvX("Backpack", 1) < 2) addButton(0, "Small", buyBackpackConfirmation, 2, "Small", 100, "Grants additional two slot. \n\nCost: 100 gems");
 	if (player.keyItemvX("Backpack", 1) < 4) addButton(1, "Medium", buyBackpackConfirmation, 4, "Medium", 200, "Grants additional four slots. \n\nCost: 200 gems");
-	addButton(14, "Nevermind", oswaldPawnMenu2);
+	addButton(14, "Never mind", oswaldPawnMenu2);
 }
 private function buyBackpackConfirmation(size:int = 2, sizeDesc:String = "Small", price:int = 100):void {
 	spriteSelect(SpriteDb.s_oswald);
@@ -1615,7 +1615,7 @@ private function buyGymLifeTimeMembership():void {
 	outputText("You fish into your pouches and pull out 500 gems, dumping them into the centaur's hands.  Her eyes widen as she turns and trots towards a counter in the back.  She leans over as she counts, giving you a generous view down her low-cut top at the cleavage she barely bothers to conceal.");
 	if(player.hasCock()) {
 		outputText("  It brings a flush to your face that has nothing to do with exercise.  Maybe you'll be able to con her into some alone time later?");
-		dynStats("lus", (10+player.lib/10));
+		dynStats("lus", (10+player.lib/10), "scale", false);
 	}
 	flags[kFLAGS.LIFETIME_GYM_MEMBER] = 1;
 	player.gems -= 500;

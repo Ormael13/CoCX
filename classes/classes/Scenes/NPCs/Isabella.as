@@ -166,7 +166,7 @@ public class Isabella extends Monster
 			if (flags[kFLAGS.ISABELLA_LVL_UP] >= 1) HP += 100 * flags[kFLAGS.ISABELLA_LVL_UP];
 			else HP += 100;
 			lust += 5;
-			player.dynStats("lus", (10+player.lib/20));
+			player.takeLustDamage((10+player.lib/20), true);
 		}
 
 		override protected function performCombatAction():void
@@ -365,7 +365,6 @@ public class Isabella extends Monster
 			this.armorValue = 70;
 			this.lust = 30;
 			this.lustVuln = .35;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.gems = rand(10) + 25;
 			this.tailType = Tail.COW;
 			this.tailRecharge = 0;

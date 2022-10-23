@@ -274,7 +274,6 @@ public class FeralImps extends Monster
 			this.bodyColor = "red";
 			this.hairColor = "black";
 			this.hairLength = 5;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.randomDropChance = 0.1;
 			this.randomDropParams = {
 				rarity: DynamicItems.RARITY_CHANCES_LESSER

@@ -1216,7 +1216,7 @@ public class CockTransformations extends MutationsHelper {
 				if (knot < .06) desc +="Your " + cockDescript(cock) + " feels unusually tight in your sheath as your knot grows.";
 				else if (knot <= .12) desc += "Your " + cockDescript(cock) + " pops free of your sheath, thickening nicely into a bigger knot.";
 				else  desc +="Your " + cockDescript(cock) + " surges free of your sheath, swelling thicker with each passing second.  Your knot bulges out at the base, growing far beyond normal.";
-				dynStats("lus", 5 * crit);
+				dynStats("lus", 5 * crit, "scale", false);
 				player.addCurse("sen", 1, 1);
 
 				if (doOutput) outputText(desc);

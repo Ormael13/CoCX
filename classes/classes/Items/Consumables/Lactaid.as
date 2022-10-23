@@ -37,7 +37,7 @@ package classes.Items.Consumables
 					player.breastRows[i].lactationMultiplier += 1 + rand(10) / 10;
 				}
 			}
-			dynStats("lus", 10);
+			dynStats("lus", 10, "scale", false);
 			if (rand(3) == 0) {
 				outputText(player.modFem(95, 1));
 			}

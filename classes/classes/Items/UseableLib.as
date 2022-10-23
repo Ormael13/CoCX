@@ -118,9 +118,9 @@ use namespace CoC;
 		public const DEMSKLL:SimpleUseable = new SimpleUseable("DemSkll", "DemonSkull", "a demon skull", 50,
 			"A skull taken from a slain demon.",
 			"You look at the demon skull.  A pair of horns protrude from the skull.  You admire the overall frame of the skull yet you find no obvious uses for it.");
-		public const E_P_BOT:SimpleUseable = new SimpleUseable("E P Bot.", "empty pills bottle", "an empty pills bottle", 10,
-			"An empty pills bottle used to keep various pills.",
-			"You look at empty pills bottle.  It would help hold your sourforce pills more organized than keep all loose.");
+		public const E_P_BOT:SimpleUseable = new SimpleUseable("E P Bot.", "empty pill bottle", "an empty pill bottle", 10,
+			"An empty pill bottle used to keep various pills.",
+			"You look at the empty pill bottle. It can help hold your sourforce pills more organized compared to keeping them loose.");
 		public const ENECORE:SimpleUseable = new SimpleUseable("EneCore", "Energy Core", "an Energy Core", 1015,
 			"A power source for devices.",
 			"You look at Energy Core.  It's component used to make goblin tech.");

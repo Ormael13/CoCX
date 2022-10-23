@@ -63,7 +63,6 @@ public class DemonPackBeach extends Monster
 			this.bonusHP = 200;
 			this.bonusLust = 275;
 			this.lust = 30;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 45;
 			this.gems = rand(60)+20;
 			this.randomDropChance = 0.1;

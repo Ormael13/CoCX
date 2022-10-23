@@ -34,7 +34,7 @@ public class GreenSlime extends Monster
 		
 		private function lustAttack():void {
 			outputText("The creature surges forward slowly with a swing that you easily manage to avoid.  You notice traces of green liquid spurt from the creature as it does, forming a thin mist that makes your skin tingle with excitement when you inhale it.");
-			player.dynStats("lus", player.lib / 10 + 8);
+			player.takeLustDamage(player.lib / 10 + 8, true);
 			doNext(EventParser.playerMenu);
 		}
 		
@@ -91,7 +91,6 @@ public class GreenSlime extends Monster
 			this.weaponVerb = "slap";
 			this.armorName = "gelatinous skin";
 			this.lust = 30;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.gems = rand(5) + 3;
 			this.drop = new ChainedDrop().add(weapons.PIPE, 1 / 10)
 					.add(consumables.WETCLTH, 1 / 2)

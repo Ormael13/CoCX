@@ -350,7 +350,6 @@ public class Ember extends Monster
 			this.weaponVerb="claw";
 			this.armorName = "scales";
 			this.lust = 20;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.gems = 0;
 			this.horns.type = Horns.DRACONIC_X4_12_INCH_LONG;
 			this.horns.count = 4;

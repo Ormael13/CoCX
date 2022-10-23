@@ -46,7 +46,7 @@ public class Ceraph extends Monster
 					//(Direct Hit)
 					else {
 						outputText("She throws her hands out, palms facing you, and a rush of pink flame washes towards you.  Too busy with your own attack to effectively dodge, you're hit full on by the pink fire.  Incredibly, it doesn't burn.  The fire actually seems to flow inside you, disappearing into your skin.  You stumble, confused for a second, but then it hits you.  Every inch of your body is buzzing with pleasure, practically squirming and convulsing with sexual delight.  You collapse, twitching and heaving, feeling the constant sensation of sexual release running from your head to your [feet].");
-						player.dynStats("lus", 1000);
+						player.takeLustDamage(1000, true);
 						if (player.lust >= player.maxOverLust()) outputText("  Too horny and pleasured to resist, you lie down and tremble, occasionally rubbing yourself to enhance the bliss.");
 					}
 				}
@@ -60,7 +60,7 @@ public class Ceraph extends Monster
 				//If player has l2 piercing
 				if (flags[kFLAGS.PC_FETISH] >= 2) {
 					outputText("  Gods this turns you on!");
-					player.dynStats("lus", 5);
+					player.takeLustDamage(5, true);
 				}
 				player.createStatusEffect(StatusEffects.Bound, 2 + rand(5), 0, 0, 0);
 			}
@@ -68,7 +68,7 @@ public class Ceraph extends Monster
 			else {
 				if (rand(2) == 0) {
 					outputText("Ceraph cuddles up against you, embracing you tenderly.  Her more-than-ample bosom crushes against your flank, and her demonic prick grinds and rubs against your [skin.type], smearing it with her juices.  Her hands slide over your bound form, sneaking underneath your [armor] to caress you more intimately while you're at her mercy.");
-					player.dynStats("lus", 9 + player.effectiveSensitivity() / 10);
+					player.takeLustDamage(9 + player.effectiveSensitivity() / 10, true);
 				}
 				//[SPECIAL 2 WHILE PC RESTRAINED]
 				else {
@@ -77,7 +77,7 @@ public class Ceraph extends Monster
 					else if (player.lust < .6*player.maxLust()) outputText("It gets inside you and turns you on, stoking the flames of your desire.");
 					else if (player.lust < .8*player.maxLust()) outputText("It makes you very horny, and you begin to wonder if it's worth resisting.");
 					else outputText("It makes you ache and tremble with need, practically begging for another touch.");
-					player.dynStats("lus", 5 + player.cor / 10 + player.lib / 20);
+					player.takeLustDamage(5 + player.cor / 10 + player.lib / 20, true);
 				}
 			}
 		}
@@ -119,9 +119,9 @@ public class Ceraph extends Monster
 			outputText("Why bother resisting?  The feeling of the leather wrapped tightly around you, digging into your [skin.type], is intoxicating.");
 			if (flags[kFLAGS.PC_FETISH] >= 2) {
 				outputText("  You squirm inside the bindings as you get more and more turned on, hoping that Ceraph will strip away your armor and force you to parade around as her bound, naked pet.");
-				player.dynStats("lus", 5);
+				player.takeLustDamage(5, true);
 			}
-			player.dynStats("lus", player.lib / 20 + 5 + rand(5));
+			player.takeLustDamage(player.lib / 20 + 5 + rand(5), true);
 			outputText("\n\n");
 			SceneLib.combat.enemyAIImpl();
 		}
@@ -140,7 +140,7 @@ public class Ceraph extends Monster
 				this.touStat.core.value += 15;
 				HP += 100;
 				lust = (maxLust() * 0.33);
-				player.dynStats("lus", 30);
+				player.takeLustDamage(30, true);
 				outputText("\n");
 				return;
 			}
@@ -320,7 +320,6 @@ public class Ceraph extends Monster
 			this.bonusLust = 104;
 			this.lust = 30;
 			this.lustVuln = 0.75;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 14;
 			this.gems = rand(5) + 38;
 			this.drop = NO_DROP;

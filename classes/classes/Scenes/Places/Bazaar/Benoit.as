@@ -175,20 +175,15 @@ public function clearBenoitPreggers():void
 }
 
 public function setBenoitShop(setButtonOnly:Boolean = false):void {
-	if (model.time.hours >= 9 && model.time.hours <= 17) {
-        if ((flags[kFLAGS.FEMOIT_NEXTDAY_EVENT_DONE] == 1 && CoC.instance.model.time.days >= flags[kFLAGS.FEMOIT_NEXTDAY_EVENT]) || flags[kFLAGS.FEMOIT_NEXTDAY_EVENT_DONE] != 1) {
-			if (flags[kFLAGS.TIMES_IN_BENOITS] == 0)
-			{
-				if (!setButtonOnly) outputText("\n\nYou notice a large market stall wedged between two wagons, swaddled in carpets and overflowing with all manner of objects.  On top of its looming fabric canopy is a wooden sign with the words \"<b>Geckos Garbidg</b>\" crudely scrawled upon them.  You wonder what that's all about.");
-				else addButton(0, "Market Stall", benoitIntro);
-			}
-			else
-			{
-				if (!setButtonOnly) outputText("\n\n[benoit name] the basilisk's stall looks open for business.  You could go see what's on offer.");
-				else addButton(0, "[benoit name]", benoitIntro);
-			}
+	if (model.time.hours >= 9 && model.time.hours <= 17 && (flags[kFLAGS.FEMOIT_NEXTDAY_EVENT_DONE] != 1 || CoC.instance.model.time.days >= flags[kFLAGS.FEMOIT_NEXTDAY_EVENT])) {
+		if (flags[kFLAGS.TIMES_IN_BENOITS] == 0) {
+			if (!setButtonOnly) outputText("\n\nYou notice a large market stall wedged between two wagons, swaddled in carpets and overflowing with all manner of objects.  On top of its looming fabric canopy is a wooden sign with the words \"<b>Geckos Garbidg</b>\" crudely scrawled upon them.  You wonder what that's all about.");
+			else addButton(0, "Market Stall", benoitIntro);
+		} else {
+			if (!setButtonOnly) outputText("\n\n[benoit name] the basilisk's stall looks open for business.  You could go see what's on offer.");
+			else addButton(0, "[benoit name]", benoitIntro);
 		}
-	}
+	} else addButtonDisabled(0, flags[kFLAGS.TIMES_IN_BENOITS] == 0 ? "???" : "[benoit name]", "Currently closed.")
 }
 
 //Introduction Scenes
@@ -294,13 +289,25 @@ public function benoitIntro():void {
 	addButton(2, "Talk", talkToBenoit);
 	addButton(14, "Leave", bazaar.enterTheBazaarAndMenu);
 	//Feminize & Herminize
-	if (flags[kFLAGS.FEMOIT_UNLOCKED] == 1 && flags[kFLAGS.BENOIT_STATUS] == 0) addButton(3, "Feminize", benoitFeminise);
-	if (flags[kFLAGS.BENOIT_STATUS] > 0 && flags[kFLAGS.BENOIT_STATUS] < 3) addButton(3, "Herminize", benoitHerminise);
+	if (flags[kFLAGS.FEMOIT_UNLOCKED] == 0) addButton(3, "HelpRace-Him", femoitInitialTalk)
+		.disableIf(flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS] > 0 || !sceneHunter.other,
+			"The problem is <i>already</i> solved.\n\n"
+			+ "<b>You can enable SH:Other to try this option too.</b>", "???")
+		.disableIf(benoitAffection() < 40, "He doesn't trust you enough.", "???")
+		.disableIf(flags[kFLAGS.BENOIT_TALKED_TO_PROPERLY] == 0, "You don't know him good enough.", "???");
+	else if (flags[kFLAGS.FEMOIT_UNLOCKED] == 1 && flags[kFLAGS.BENOIT_STATUS] == 0) addButton(3, "Feminize", benoitFeminise);
+	else if (flags[kFLAGS.BENOIT_STATUS] > 0 && flags[kFLAGS.BENOIT_STATUS] < 3) addButton(3, "Herminize", benoitHerminise);
 	//Basilisk Womb
-	if(flags[kFLAGS.BENOIT_WOMB_TALK_UNLOCKED] == 1 && (!(player.hasPerk(PerkLib.BasiliskWomb))) && flags[kFLAGS.BENOIT_TESTED_BASILISK_WOMB] == 0 && (flags[kFLAGS.BENOIT_STATUS] == 0 || flags[kFLAGS.BENOIT_STATUS] == 3)) addButton(4, "Basil. Womb", tryToConvertToBassyWomb);
+	if (flags[kFLAGS.BENOIT_WOMB_TALK_UNLOCKED] == 1 && (!(player.hasPerk(PerkLib.BasiliskWomb))) && flags[kFLAGS.BENOIT_TESTED_BASILISK_WOMB] == 0 && (flags[kFLAGS.BENOIT_STATUS] == 0 || flags[kFLAGS.BENOIT_STATUS] == 3)) addButton(4, "Basil. Womb", tryToConvertToBassyWomb);
+	else if (flags[kFLAGS.BENOIT_WOMB_TALK_UNLOCKED] == 0) addButton(4, "HelpRace-You", talkHelp)
+		.disableIf(!player.hasVagina(), "Req. a pussy.")
+		.disableIf(flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS] < 2, "Requires meeting Benoit a little <i>closer</i>.", "???");
 	//Suggest & sex
-	if(flags[kFLAGS.BENOIT_SUGGEST_UNLOCKED] > 0 && player.hasVagina() && (flags[kFLAGS.BENOIT_STATUS] == 0 || flags[kFLAGS.BENOIT_STATUS] == 3)) addButton(5, "Suggest", eggySuggest);
-	if (player.hasCock() && flags[kFLAGS.BENOIT_STATUS] > 0 && player.lust >= 33) addButton(6, "Sex", femoitSexIntro);
+	if (flags[kFLAGS.BENOIT_SUGGEST_UNLOCKED] > 0 && player.hasVagina() && (flags[kFLAGS.BENOIT_STATUS] == 0 || flags[kFLAGS.BENOIT_STATUS] == 3)) addButton(5, "Suggest", eggySuggest);
+	if (flags[kFLAGS.BENOIT_STATUS] > 0) {
+		if (flags[kFLAGS.FEMOIT_TALKED_TO] == 0) addButton(6, "What's next?", femoit1stTalk);
+		else addButton(6, "Sex", femoitSexIntro).disableIf(player.lust < 33, "Not aroused enough.");
+	}
 }
 
 //Buy or Sell First Time, only if prelover/prefem: You ask him what the deal is with his shop.
@@ -669,7 +676,7 @@ private function buyBackpack():void {
 	if (player.keyItemvX("Backpack", 1) < 8) addButton(3, "X Large", buyBackpackConfirmation, 8, "X Large", 400, "Grants additional eight slots. \n\nCost: 400 gems");
 	if (player.keyItemvX("Backpack", 1) < 10) addButton(4, "XX Large", buyBackpackConfirmation, 10, "XX Large", 500, "Grants additional ten slots. \n\nCost: 500 gems");
 	if (player.keyItemvX("Backpack", 1) < 12) addButton(5, "XXX Large", buyBackpackConfirmation, 12, "XXX Large", 600, "Grants additional twelve slots. \n\nCost: 600 gems");
-	addButton(14, "Nevermind", benoitsBuyMenu);
+	addButton(14, "Never mind", benoitsBuyMenu);
 }
 private function buyBackpackConfirmation(size:int = 2, sizeDesc:String = "Small", price:int = 100):void {
 	clearOutput();
@@ -717,68 +724,64 @@ private function buyZweihanderConfirmation():void {
 	inventory.takeItem(weapons.FRTAXE, benoitsBuyMenu);
 }
 
-//Talk
-private function talkToBenoit():void {
-	clearOutput();
-
+private function talkCount():void {
 	//(+5 Affection per day if used)
-	if(flags[kFLAGS.BENOIT_TALKED_TODAY] == 0) {
+	if (flags[kFLAGS.BENOIT_TALKED_TODAY] == 0) {
 		flags[kFLAGS.BENOIT_TALKED_TODAY] = 1;
 		benoitAffection(5);
 	}
-	//Basilisk Womb
-	//Requires: Had sex with Benoit at least twice, have vagina, select talk
-	if(((flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS] > 2 && player.inte >= 60 && flags[kFLAGS.BENOIT_WOMB_TALK_UNLOCKED] == 0) || flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS] == 2) && player.hasVagina()) {
-		outputText("You ask [benoit name] if [benoit ey] has ever thought about trying to do something to help his people's plight.");
+}
 
-		outputText("\n\nThe basilisk is silent for a time, running his claws along the counter pensively.  \"<i>Yes,</i>\" [benoit ey] says eventually, in a quiet tone.  \"<i>I 'ave.  Away from ze mountains, I 'ave 'ad time to sink.  I am not ze demons' slave anymore, and I am a funny joke of a basilisk anyway, so I 'ave often thought about... making certain zacrifices.  If we 'ad just one female, away from zeir corruption, zen...</i>\" [benoit ey] trails off, sighing heavily before smiling ruefully at you.  \"<i>Zose were ze kind of soughts I 'ad before I met you.  Crazy, yes?  Even more crazy to be still sinking zem when a good woman is giving me 'er love for no reason except through ze kindness of 'er 'art.  Still... it is so frustrating, being able to sink clearly about zese sings and not being able to do anysing about it.</i>\"");
+private function talkHelp():void {
+	clearOutput();
+	talkCount();
+	outputText("You ask [benoit name] if [benoit ey] has ever thought about trying to do something to help his people's plight.");
 
-		if(player.inte >= 60) {
-			outputText("\n\nYour mind wanders.  You doubt that even if you wanted to you could turn into a basilisk proper, but you wonder if there's some kind of transformation that would allow a human womb to mimic that of another race.");
-			outputText("\n\nBenoit answers warily.  \"<i>A double dose of ovi-elixer, a bottle of reptilum, goblin ale and some basilisk blood would probably do... if you were so minded.  But, [name], tell me you're not going to do somesing so reckless as experiment on your body?</i>\"");
-			//toggle on "Bas. Womb" from benoit's main menu.
-			flags[kFLAGS.BENOIT_WOMB_TALK_UNLOCKED] = 1;
-			outputText("\n\n(<b>Basilisk Womb option enabled in Benoit's menu!</b>)");
-		}
-		else {
-			outputText("\n\nYou rack your brain but can't think of anything that could help Benoit, so you end up simply sympathising with [benoit em].  \"<i>Do not beat yourself up over it,</i>\" says the basilisk, touching the tips of your fingers and smiling warmly.  \"<i>It is just foolishness.  And anyway, I told you: we are a race of bastards.  We are ze last guys who deserve someone sinking after us.</i>\"");
-			//don't trigger event again until the PC is smart enough!
-		}
-		doNext(camp.returnToCampUseOneHour);
+	outputText("\n\nThe basilisk is silent for a time, running his claws along the counter pensively.  \"<i>Yes,</i>\" [benoit ey] says eventually, in a quiet tone.  \"<i>I 'ave.  Away from ze mountains, I 'ave 'ad time to sink.  I am not ze demons' slave anymore, and I am a funny joke of a basilisk anyway, so I 'ave often thought about... making certain zacrifices.  If we 'ad just one female, away from zeir corruption, zen...</i>\" [benoit ey] trails off, sighing heavily before smiling ruefully at you.  \"<i>Zose were ze kind of soughts I 'ad before I met you.  Crazy, yes?  Even more crazy to be still sinking zem when a good woman is giving me 'er love for no reason except through ze kindness of 'er 'art.  Still... it is so frustrating, being able to sink clearly about zese sings and not being able to do anysing about it.</i>\"");
+
+	if (player.inte >= 60) {
+		outputText("\n\nYour mind wanders.  You doubt that even if you wanted to you could turn into a basilisk proper, but you wonder if there's some kind of transformation that would allow a human womb to mimic that of another race.");
+		outputText("\n\nBenoit answers warily.  \"<i>A double dose of ovi-elixer, a bottle of reptilum, goblin ale and some basilisk blood would probably do... if you were so minded.  But, [name], tell me you're not going to do somesing so reckless as experiment on your body?</i>\"");
+		//toggle on "Bas. Womb" from benoit's main menu.
+		flags[kFLAGS.BENOIT_WOMB_TALK_UNLOCKED] = 1;
+		outputText("\n\n(<b>Basilisk Womb option enabled in Benoit's menu!</b>)");
+	} else {
+		outputText("\n\nYou rack your brain but can't think of anything that could help Benoit, so you end up simply sympathising with [benoit em].  \"<i>Do not beat yourself up over it,</i>\" says the basilisk, touching the tips of your fingers and smiling warmly.  \"<i>It is just foolishness.  And anyway, I told you: we are a race of bastards.  We are ze last guys who deserve someone sinking after us.</i>\"");
+		//don't trigger event again until the PC is smart enough!
+		sceneHunter.print("Check failed: you're too dumb.");
 	}
+	doNext(camp.returnToCampUseOneHour);
+}
+
+private function femoit1stTalk():void {
+	clearOutput();
+	talkCount();
+	flags[kFLAGS.FEMOIT_TALKED_TO]++;
+	outputText("You ask Benoite if she intends to go back to the mountains now.  She laughs long and hard at this.  One thing the transformation has certainly gifted her is an extraordinarily filthy laugh.");
+
+	outputText("\n\n\"<i>Oh [name], you are so silly,</i>\" she says fondly.  \"<i>'Ow long do you sink a blind female basilisk would last up zair, eh?  If I was really lucky ze minotaurs would get me before ze demons did.  No, I will stay ere.  Ze uzzer basilisks, I cannot trust zem - zey are always exposed to ze corruption, some of zem even like it.  I will lay eggs far away from zere, I will raise my children to be different; away from ze corruption and with equal numbers of males and females, it will be different.  Zere are many empty places in zis world now zey can go to and be left alone.</i>\"  She pauses. \"<i>Or at least zese sings will 'appen once I work up ze courage to find a, er, donor.</i>\"");
+
+	if (!player.hasCock()) {
+		outputText("You ask if she's had any thoughts on that front.  \"<i>Not really,</i>\" Benoite sighs.  \"<i>I 'ave many male customers but zey all 'ave - 'ow you say? Rough round edges.  You now 'ow it is, [name], all men are pigs.</i>\"  You both laugh at this.  \"<i>I will find someone though, don't worry.  As I said before...</i>\" she points two fingers at her blind eyes and then at the stall entrance.  There's a distinct gleam in those cloudy grey depths you think would scare the hell out of most things with a penis.  \"<i>I 'ave a purpose now.</i>\"");
+	} else {
+		outputText("\n\nYou ask if she's had any thoughts on that front. \"<i>Well, I do 'ave zis one customer 'oo seems very kind.  And 'oo knows me a great deal better zan anyone else around 'ere,</i>\" Benoite mumbles, twiddling her fingers.  \"<i>But zis person 'as already done a great deal for me, so I don't know if... per'aps zis is asking too much. I will find someone though, never fear.  As I said before...</i>\" Benoite points two fingers at her blind eyes and then at the stall entrance.  There’s a distinct gleam in those cloudy grey depths you think would scare the hell out of most things with a penis. \"<i>I ‘ave a purpose now.</i>");
+		menu();
+		doYesNo(femoitFirstTimeYes, femoitFirstTimeNo);
+	}
+}
+
+//Talk
+private function talkToBenoit():void {
+	clearOutput();
+	talkCount();
 	//First time Talk:
-	else if(flags[kFLAGS.BENOIT_TALKED_TO_PROPERLY] == 0) {
+	if(flags[kFLAGS.BENOIT_TALKED_TO_PROPERLY] == 0) {
 		flags[kFLAGS.BENOIT_TALKED_TO_PROPERLY]++;
 		outputText("You take a moment to look the strange merchant over.  Although blind, [benoit ey] doesn't seem very old - [benoit ey] retains the tight, thin muscular frame of other basilisks you've seen, but looks to be slightly shorter and for all his proud, cruel profile seems slightly shabby around the edges.  In what is presumably a nod towards civilized manners, [benoit ey] is wearing a pair of denim long johns as well as his fez, perched upon one of his head spines.  You introduce yourself, and then decide to ask [benoit em] about basilisks.");
 
 		outputText("\n\n\"<i>We were a proud race once,</i>\" sighs Benoit.  \"<i>A noble race, who carried our 'eads 'igh, and...</i>\" the blind basilisk bursts into throaty laughter, which eventually subsides into a coughing fit.  You watch, bemused.  \"<i>Hahaha!  Aha.  Sorry.  No, we were always a race of egg-thieving bastards.  The lizans,</i>\" [benoit ey] flicks his snout in the general direction of the bonfire with disdain, \"<i>absolutely 'ate us.  Zey drove us to live in ze mountains, far away from zeir precious clutches, to live like savages.  'Ze family with ze evil eye over it', zat's what zey call us.  Eh... in basilisk it's more snappy.</i>\"  Benoit pauses, running his fingers over the counter ruminatively.  \"<i>But it wasn't so bad, up zair.  We kept ze harpies under control, and we collected scrap, sold it to zose who were brave enough to trade blindfolded.  We've always been good at zat.  Zen ze demons came to ze mountains.</i>\"");
 
 		outputText("\n\nHe shrugs. \"<i>What were we going to do?  Go down and throw ourselves on the mercy of the races 'oo despise us?  Ze demons offered to set us high in zeir service, augment our natural abilities if we agreed to help zem.  I suppose zey did, at zat.</i>\"  Benoit scratches a long groove in his counter, trembling with anger.  \"<i>By making us all male zey made sure we are always fixated on finding egg bearers, on keeping ze harpies down, and bringing scrap and statues to zem so zey don't do anysing worse to us.  We are just a brainless natural defence to zem now, in zeir mountain hideaways.  Don't go up ze mountain or ze evil basilisks will get you!  Bastards.  Bastards.</i>\"  Benoit finishes mutilating the wood in front of [benoit em] and sighs.  \"<i>But zat is by ze by.  Are you going to buy sumsing or not?</i>\"");
-	}
-	// First time Femoit talk
-	else if (flags[kFLAGS.FEMOIT_TALKED_TO] == 0 && flags[kFLAGS.BENOIT_STATUS] != 0)
-	{
-		flags[kFLAGS.FEMOIT_TALKED_TO]++;
-		outputText("You ask Benoite if she intends to go back to the mountains now.  She laughs long and hard at this.  One thing the transformation has certainly gifted her is an extraordinarily filthy laugh.");
-
-		outputText("\n\n\"<i>Oh [name], you are so silly,</i>\" she says fondly.  \"<i>'Ow long do you sink a blind female basilisk would last up zair, eh?  If I was really lucky ze minotaurs would get me before ze demons did.  No, I will stay ere.  Ze uzzer basilisks, I cannot trust zem - zey are always exposed to ze corruption, some of zem even like it.  I will lay eggs far away from zere, I will raise my children to be different; away from ze corruption and with equal numbers of males and females, it will be different.  Zere are many empty places in zis world now zey can go to and be left alone.</i>\"  She pauses. \"<i>Or at least zese sings will 'appen once I work up ze courage to find a, er, donor.</i>\"");
-
-		if (!player.hasCock())
-		{
-			outputText("You ask if she's had any thoughts on that front.  \"<i>Not really,</i>\" Benoite sighs.  \"<i>I 'ave many male customers but zey all 'ave - 'ow you say? Rough round edges.  You now 'ow it is, [name], all men are pigs.</i>\"  You both laugh at this.  \"<i>I will find someone though, don't worry.  As I said before...</i>\" she points two fingers at her blind eyes and then at the stall entrance.  There's a distinct gleam in those cloudy grey depths you think would scare the hell out of most things with a penis.  \"<i>I 'ave a purpose now.</i>\"");
-		}
-		else
-		{
-			outputText("\n\nYou ask if she's had any thoughts on that front. \"<i>Well, I do 'ave zis one customer 'oo seems very kind.  And 'oo knows me a great deal better zan anyone else around 'ere,</i>\" Benoite mumbles, twiddling her fingers.  \"<i>But zis person 'as already done a great deal for me, so I don't know if... per'aps zis is asking too much. I will find someone though, never fear.  As I said before...</i>\" Benoite points two fingers at her blind eyes and then at the stall entrance.  There’s a distinct gleam in those cloudy grey depths you think would scare the hell out of most things with a penis. \"<i>I ‘ave a purpose now.</i>");
-
-			menu();
-			doYesNo(femoitFirstTimeYes, femoitFirstTimeNo);
-		}
-	}
-	else if (flags[kFLAGS.BENOIT_TALKED_TO_PROPERLY] != 0 && benoitAffection() >= 40 && (flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS] == 0 || sceneHunter.other) && flags[kFLAGS.FEMOIT_UNLOCKED] == 0)
-	{
-		femoitInitialTalk();
-		doNext(camp.returnToCampUseOneHour);
 	}
 	//Subsequent Talk
 	else {
@@ -1425,6 +1428,7 @@ public function popOutBenoitEggs():void {
 public function femoitInitialTalk():void
 {
 	clearOutput();
+	talkCount();
 
 	outputText("You ask [benoit name] if [benoit ey] has ever thought about trying to do something to help [benoit eir] people's plight.");
 
@@ -1444,6 +1448,7 @@ public function femoitInitialTalk():void
 	{
 		outputText("\n\nYou rack your brain but can't think of anything that could help [benoit name], so end up simply sympathising with [benoit em].  \"<i>Do not beat yourself up over it,</i>\" says the basilisk, with a smile.  \"<i>It is a foolish dream.  And anyway, I told you: we are a race of bastards.  We are ze last guys who deserve someone sinking after us.</i>\"");
 	}
+	doNext(camp.returnToCampUseOneHour);
 }
 
 // Feminise

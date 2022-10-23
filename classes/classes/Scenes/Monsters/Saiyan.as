@@ -319,7 +319,6 @@ import classes.internals.*;
 			}
 			this.a = "the ";
 			this.short = "Saiyan";
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.gems = 45 + rand(40);
 			this.drop = new ChainedDrop().
 					add(armors.S_SWMWR,1/12).

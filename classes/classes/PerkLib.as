@@ -280,8 +280,8 @@ public class PerkLib
 
 		// Ordinary (levelup) perks
 		public static const AdrenalineRush:PerkType = mk("Adrenaline Rush", "Adrenaline Rush",
-				"Always start combat with 100 more points of wrath.",
-				"You've chosen the 'Adrenaline Rush' perk, to always start combat with 100 more points of wrath.");
+				"Always start combat with 300 more points of wrath.",
+				"You've chosen the 'Adrenaline Rush' perk, to always start combat with 300 more points of wrath.");
 		public static const AdvancedGolemancyTheory:PerkType = mk("Advanced Golemancy Theory", "Advanced Golemancy Theory",
 				"Enable option to make steel golems and store 1 such golem.",
 				"You've chosen the 'Advanced Golemancy Theory' perk, allowing you to make steel golems.");
@@ -2294,10 +2294,10 @@ public class PerkLib
 				"Incease healing power by 30% and lower healing spells mana costs by 10%.",
 				"You've chosen the 'Natural healing (Minor)' perk, increasing healing spell effectiveness and lowering their costs.");
 		public static const Naturaljouster:PerkType = mk("Natural jouster", "Natural jouster",
-				"Increase attack power of spears/lances when you attack once each turn and have taur/drider lower body or 2,5x higher speed if you not have one of this specific lower body types (60+ for taurs/drider and 150+ for others).",
+				"Increase attack power of spears/lances when you attack once each turn and have taur/drider lower body or 2,5x higher speed if you don't have one of this specific lower body types (60+ for taurs/drider and 150+ for others).",
 				"You've chosen the 'Natural jouster' perk. As long you have high enough speed (60+ for taurs/drider and 150+ for others) and attack once per turn, your spear/lance attack power will be three times higher.");
 		public static const NaturaljousterMastergrade:PerkType = mk("Natural jouster (Master grade)", "Natural jouster (Master grade)",
-				"Increase attack power of spears/lances when you attack once each turn and have taur/drider lower body or 2,5x higher speed if you not have one of this specific lower body types (180+ for taurs/drider and 450+ for others).",
+				"Increase attack power of spears/lances when you attack once each turn and have taur/drider lower body or 2,5x higher speed if you don't have one of this specific lower body types (180+ for taurs/drider and 450+ for others).",
 				"You've chosen the 'Natural jouster (Master grade)' perk. As long you have high enough speed (180+ for taurs/drider and 450+ for others) and attack once per turn, your spear/lance attack power will be five times higher.");
 		public static const NaturesSpringI:PerkType = mk("Nature's Spring I", "Nature's Spring I",
 				"Raises max fatigue by 20 and regain it 5% faster.",
@@ -3963,7 +3963,7 @@ public class PerkLib
 		public static const AbsoluteStrength:PerkType = mk("Absolute Strength", "Absolute Strength",
 				"Increase strength based on current amount of wrath as long wrath is above 50% (1:2 ratio). Also wrath outside of combat will not decay and even with correct perks can slowly raise. (+10% of OverMax Wrath)");
 		public static const LikeAnAsuraBoss:PerkType = mk("Like A-sura Boss", "Like A-sura Boss",
-				"Adds to toggle starting in Asura Form at combat start, increase to physical might raise to 120%/60%/40% of core str/tou/spe. (+10% of OverMax Wrath)");
+				"Adds to toggle starting in Asura Form at combat start, increase to physical might raise to 120%/60%/40% of core str/tou/spe and generate one additional pair of semi-transparent arms. (+10% of OverMax Wrath)");
 		public static const ICastAsuraFist:PerkType = mk("I Cast (Asura) Fist", "I Cast (Asura) Fist",
 				"Safe treshold for magic/m.specials is calculated based on overmax wrath not max wrath, +50% of base max wrath. (+10% of OverMax Wrath)")
 				.withBuffs({'maxwrath_mult':+0.5});
@@ -4362,10 +4362,6 @@ public class PerkLib
             WeaponMastery.requireLevel(12)
                     .requirePerk(JobSwordsman)
                     .requireStr(100);
-            WeaponLargeDoubleAttack.requireLevel(12)
-                    .requirePerk(JobSwordsman)
-                    .requireStr(75)
-                    .requireSpe(50);
             Brawn.requireLevel(12)
                     .requireStr(75)
                     .requirePerk(Brute);
@@ -4410,10 +4406,6 @@ public class PerkLib
                     .requirePerk(UnlimitedRage);
             DualWieldLarge.requirePerks(DualWield, GigantGrip)
                     .requireStr(125)
-                    .requireLevel(24);
-            WeaponLargeTripleAttack.requirePerk(WeaponLargeDoubleAttack)
-                    .requireStr(125)
-                    .requireSpe(100)
                     .requireLevel(24);
             GigantGripEx.requireLevel(24)
                     .requireStr(120)
@@ -4499,7 +4491,7 @@ public class PerkLib
                     .requireInt(150)
                     .requireLevel(54)
 					.requireCustomFunction(function (player:Player):Boolean {
-                        return player.masteryDaggerLevel >= 30 || player.masterySwordLevel >= 30 || player.masteryAxeLevel >= 30 || player.masteryMaceHammerLevel >= 30 || player.masteryDuelingSwordLevel >= 30 || player.masteryPolearmLevel >= 30 || player.masterySpearLevel >= 30 || player.masteryWhipLevel >= 30 || player.masteryExoticLevel >= 30;
+                        return player.getHighestMastery() >= 30;//masteryDaggerLevel >= 30 || player.masterySwordLevel >= 30 || player.masteryAxeLevel >= 30 || player.masteryMaceHammerLevel >= 30 || player.masteryDuelingSwordLevel >= 30 || player.masteryPolearmLevel >= 30 || player.masterySpearLevel >= 30 || player.masteryWhipLevel >= 30 || player.masteryExoticLevel >= 30;
                     }, "One of melee weapons mastery (excluding gauntlets) reaching lvl 30.");
             HalfStepToInhumanTranquilness.requireStr(300)
                     .requireTou(100)
@@ -4925,9 +4917,9 @@ public class PerkLib
                     .requirePerk(Runner)
                     .requireLevel(6);
             //slot 3 - Double Attack perk
-            WeaponNormalDoubleAttack.requirePerk(JobDervish)
-                    .requireSpe(50)
-                    .requireLevel(6);
+//            WeaponNormalDoubleAttack.requirePerk(JobDervish)
+//                    .requireSpe(50)
+//                    .requireLevel(6);
             WeaponRangeDoubleStrike.requirePerk(JobRanger)
                     .requireSpe(50)
                     .requireLevel(6);
@@ -4982,9 +4974,9 @@ public class PerkLib
                     .requireLevel(6);
             SneakyAttack.requirePerk(JobRogue)
                     .requireLevel(6);
-            WeaponSmallDoubleAttack.requirePerk(JobRogue)
-                    .requireSpe(40)
-                    .requireLevel(6);
+//            WeaponSmallDoubleAttack.requirePerk(JobRogue)
+//                    .requireSpe(40)
+//                    .requireLevel(6);
             StarlightStrikes.requirePerk(JobRogue)
                     .requireSpe(60)
                     .requireLevel(6);
@@ -5001,9 +4993,9 @@ public class PerkLib
             Blademaster.requireSpe(80)
                     .requireStr(60)
                     .requireLevel(12);
-            WeaponNormalTripleAttack.requirePerk(WeaponNormalDoubleAttack)
-                    .requireSpe(75)
-                    .requireLevel(12);
+//            WeaponNormalTripleAttack.requirePerk(WeaponNormalDoubleAttack)
+//                    .requireSpe(75)
+//                    .requireLevel(12);
             SluttySimplicity.requireSpe(80)
                     .requireLib(50)
                     .requirePerk(Unhindered)
@@ -5043,12 +5035,12 @@ public class PerkLib
             Feint.requireAnyPerk(SneakyAttack, MarkedForDeath)
                     .requireSpe(50)
                     .requireLevel(12);
-            WeaponSmallTripleAttack.requirePerk(WeaponSmallDoubleAttack)
-                    .requireSpe(55)
-                    .requireLevel(12);
-            WeaponSmallQuadrupleAttack.requirePerk(WeaponSmallTripleAttack)
-                    .requireSpe(70)
-                    .requireLevel(12);
+//            WeaponSmallTripleAttack.requirePerk(WeaponSmallDoubleAttack)
+//                    .requireSpe(55)
+//                    .requireLevel(12);
+//            WeaponSmallQuadrupleAttack.requirePerk(WeaponSmallTripleAttack)
+//                    .requireSpe(70)
+//                    .requireLevel(12);
             ImprovedEvade.requirePerks(JobRanger, Evade)
                     .requireSpe(60)
                     .requireLevel(12);
@@ -5065,9 +5057,9 @@ public class PerkLib
             Manyshot.requirePerks(JobHunter, WeaponRangeTripleStrike)
                     .requireSpe(100)
                     .requireLevel(18);
-            WeaponNormalQuadrupleAttack.requirePerk(WeaponNormalTripleAttack)
-                    .requireSpe(100)
-                    .requireLevel(18);
+//            WeaponNormalQuadrupleAttack.requirePerk(WeaponNormalTripleAttack)
+//                    .requireSpe(100)
+//                    .requireLevel(18);
             EnvenomedBolt.requireLevel(18)
                     .requirePerk(JobHunter)
                     .requireCustomFunction(function (player:Player):Boolean {
@@ -5094,12 +5086,12 @@ public class PerkLib
             GreaterFeint.requirePerk(Feint)
                     .requireSpe(100)
                     .requireLevel(18);
-            WeaponSmallPentaAttack.requirePerk(WeaponSmallQuadrupleAttack)
-                    .requireSpe(85)
-                    .requireLevel(18);
-            WeaponSmallHexaAttack.requirePerk(WeaponSmallPentaAttack)
-                    .requireSpe(100)
-                    .requireLevel(18);
+//            WeaponSmallPentaAttack.requirePerk(WeaponSmallQuadrupleAttack)
+//                    .requireSpe(85)
+//                    .requireLevel(18);
+//            WeaponSmallHexaAttack.requirePerk(WeaponSmallPentaAttack)
+//                    .requireSpe(100)
+//                    .requireLevel(18);
             QuickStrike.requirePerk(SpeedDemon)
                     .requireSpe(120)
                     .requireLevel(18);
@@ -5113,18 +5105,18 @@ public class PerkLib
             WildQuiver.requirePerk(Manyshot)
                     .requireSpe(125)
                     .requireLevel(24);
-            WeaponNormalPentaAttack.requirePerk(WeaponNormalQuadrupleAttack)
-                    .requireSpe(125)
-                    .requireLevel(24);
+//            WeaponNormalPentaAttack.requirePerk(WeaponNormalQuadrupleAttack)
+//                    .requireSpe(125)
+//                    .requireLevel(24);
             Slayer.requirePerk(DeadlySneaker)
                     .requireSpe(120)
                     .requireLevel(12);
-            WeaponSmallHectaAttack.requirePerk(WeaponSmallHexaAttack)
-                    .requireSpe(115)
-                    .requireLevel(24);
-            WeaponSmallOctaAttack.requirePerk(WeaponSmallHectaAttack)
-                    .requireSpe(130)
-                    .requireLevel(24);
+//            WeaponSmallHectaAttack.requirePerk(WeaponSmallHexaAttack)
+//                    .requireSpe(115)
+//                    .requireLevel(24);
+//            WeaponSmallOctaAttack.requirePerk(WeaponSmallHectaAttack)
+//                    .requireSpe(130)
+//                    .requireLevel(24);
             GreaterEvade.requirePerk(ImprovedEvade)
                     .requireSpe(100)
                     .requireLevel(24);
@@ -5134,21 +5126,21 @@ public class PerkLib
 			WoundPoison.requireLevel(24)
 					.requirePerk(JobRogue);
             //Tier 5 Speed Perks
-            WeaponNormalHexaAttack.requirePerk(WeaponNormalPentaAttack)
-                    .requireSpe(150)
-                    .requireLevel(30);
+//            WeaponNormalHexaAttack.requirePerk(WeaponNormalPentaAttack)
+//                    .requireSpe(150)
+//                    .requireLevel(30);
             Multishot.requirePerk(WildQuiver)
                     .requireSpe(150)
                     .requireLevel(30);
             UnlockEndurance2ndStage.requirePerk(UnlockEndurance)
                     .requireSpe(125)
                     .requireLevel(30);
-            WeaponSmallNonaAttack.requirePerk(WeaponSmallOctaAttack)
-                    .requireSpe(145)
-                    .requireLevel(30);
-            WeaponSmallDecaAttack.requirePerk(WeaponSmallNonaAttack)
-                    .requireSpe(160)
-                    .requireLevel(30);
+//            WeaponSmallNonaAttack.requirePerk(WeaponSmallOctaAttack)
+//                    .requireSpe(145)
+//                    .requireLevel(30);
+//            WeaponSmallDecaAttack.requirePerk(WeaponSmallNonaAttack)
+//                    .requireSpe(160)
+//                    .requireLevel(30);
             //Tier 6 Speed Perks
             NaturaljousterMastergrade.requirePerk(Naturaljouster)
                     .requireSpe(180)
@@ -5777,10 +5769,10 @@ public class PerkLib
                     .requireWis(150)
                     .requireLevel(22)
                     .requireNGPlus(5);
-            Combo.requirePerk(JobMonk)
-                    .requireWis(75)
-                    .requireSpe(50)
-                    .requireLevel(12);
+//            Combo.requirePerk(JobMonk)
+//                    .requireWis(75)
+//                    .requireSpe(50)
+//                    .requireLevel(12);
 			GrabbingStyle.requirePerk(JobMonk)
 					.requireWis(75)
 					.requireSpe(50)
@@ -5851,10 +5843,10 @@ public class PerkLib
                     .requireSpe(45)
                     .requireLevel(18);
             //Tier 4 Wisdom perks
-            ComboMaster.requirePerk(Combo)
-                    .requireWis(125)
-                    .requireSpe(100)
-                    .requireLevel(24);
+//            ComboMaster.requirePerk(Combo)
+//                    .requireWis(125)
+//                    .requireSpe(100)
+//                    .requireLevel(24);
 			MeteorStrike.requirePerks(JabbingGrandmaster, GrabbingGrandmaster)
 					.requireWis(105)
 					.requireSpe(65)
@@ -5994,8 +5986,8 @@ public class PerkLib
                     .requirePerk(EpicWisdom)
                     .requireLevel(66);
             //Tier 12 Wisdom perks
-            FlurryOfBlows.requireLevel(72)
-                    .requirePerks(ComboMaster, Backlash);
+//            FlurryOfBlows.requireLevel(72)
+//                    .requirePerks(ComboMaster, Backlash);
             SkeletonLord.requireLevel(72)
                     .requirePerk(BoneSoul);
             GreaterSharedPower.requireLevel(72)
@@ -6626,11 +6618,11 @@ public class PerkLib
             FeralArmor.requirePerk(ToughHide)
 					.requireLevel(6)
 					.requireTou(60);
-            WeaponClawsClawTraining.requirePerk(JobBeastWarrior)
-					.requireLevel(6)
-					.requireCustomFunction(function (player:Player):Boolean {
-					return player.hasNaturalWeapons() || player.haveNaturalClawsTypeWeapon();
-					}, "Any natural weapon");
+//            WeaponClawsClawTraining.requirePerk(JobBeastWarrior)
+//					.requireLevel(6)
+//					.requireCustomFunction(function (player:Player):Boolean {
+//					return player.hasNaturalWeapons() || player.haveNaturalClawsTypeWeapon();
+//					}, "Any natural weapon");
             JobHealer.requireAdvancedJobSlot()
 					.requireAnyPerk(JobSorcerer, JobSoulCultivator)
 					.requireLevel(6)
@@ -6755,11 +6747,11 @@ public class PerkLib
                     .requireTou(50)
                     .requireSpe(50)
                     .requireLevel(12);
-            WeaponClawsExtraClawAttack.requireLevel(12)
-                    .requirePerk(WeaponClawsClawTraining)
-					.requireCustomFunction(function (player:Player):Boolean {
-					return player.hasNaturalWeapons() || player.haveNaturalClawsTypeWeapon();
-					}, "Any natural weapon");
+//            WeaponClawsExtraClawAttack.requireLevel(12)
+//                    .requirePerk(WeaponClawsClawTraining)
+//					.requireCustomFunction(function (player:Player):Boolean {
+//					return player.hasNaturalWeapons() || player.haveNaturalClawsTypeWeapon();
+//					}, "Any natural weapon");
             NaturalHealingMinor.requireLevel(12)
                     .requirePerk(WisenedHealer)
                     .requireInt(15)
@@ -6822,11 +6814,11 @@ public class PerkLib
                     .requirePerk(NaturalHealingMinor)
                     .requireInt(20)
                     .requireWis(80);
-            WeaponClawsMultiClawAttack.requireLevel(18)
-                    .requirePerk(WeaponClawsExtraClawAttack)
-					.requireCustomFunction(function (player:Player):Boolean {
-					return player.hasNaturalWeapons() || player.haveNaturalClawsTypeWeapon();
-					}, "Any natural weapon");
+//            WeaponClawsMultiClawAttack.requireLevel(18)
+//                    .requirePerk(WeaponClawsExtraClawAttack)
+//					.requireCustomFunction(function (player:Player):Boolean {
+//					return player.hasNaturalWeapons() || player.haveNaturalClawsTypeWeapon();
+//					}, "Any natural weapon");
             NaturalArsenal.requireLevel(18)
 					.requireStr(60)
 					.requireSpe(60)
@@ -6892,16 +6884,16 @@ public class PerkLib
                     .requirePerk(NaturalHealingMajor)
                     .requireInt(25)
                     .requireWis(100);
-            WeaponClawsClawingFlurry.requireLevel(24)
-                    .requirePerk(WeaponClawsMultiClawAttack)
-					.requireCustomFunction(function (player:Player):Boolean {
-					return player.hasNaturalWeapons() || player.haveNaturalClawsTypeWeapon();
-					}, "Any natural weapon");
-            WeaponClawsSavageRend.requireLevel(30)
-                    .requirePerk(WeaponClawsClawingFlurry)
-					.requireCustomFunction(function (player:Player):Boolean {
-					return player.hasNaturalWeapons() || player.haveNaturalClawsTypeWeapon();
-					}, "Any natural weapon");
+//            WeaponClawsClawingFlurry.requireLevel(24)
+//                    .requirePerk(WeaponClawsMultiClawAttack)
+//					.requireCustomFunction(function (player:Player):Boolean {
+//					return player.hasNaturalWeapons() || player.haveNaturalClawsTypeWeapon();
+//					}, "Any natural weapon");
+//            WeaponClawsSavageRend.requireLevel(30)
+//                    .requirePerk(WeaponClawsClawingFlurry)
+//					.requireCustomFunction(function (player:Player):Boolean {
+//					return player.hasNaturalWeapons() || player.haveNaturalClawsTypeWeapon();
+//					}, "Any natural weapon");
             CheatDeath.requireLevel(24)
                     .requirePerk(CloseToDeath)
                     .requireInt(100)
@@ -7306,4 +7298,4 @@ public class PerkLib
         }
 	}
 }
-}
+}

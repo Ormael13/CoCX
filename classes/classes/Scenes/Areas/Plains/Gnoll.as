@@ -122,7 +122,7 @@ import classes.internals.*;
 				outputText("The gnoll dances forward, then back, her whole body alive with sensual movement.  She catches the way you watch her and smirks, throwing in a hip-shake just for you.");
 				bonus += 6;
 			}
-			player.dynStats("lus", (bonus + 10 + player.lib/20 + rand(player.cor/20)));
+			player.takeLustDamage((bonus + 10 + player.lib/20 + rand(player.cor/20)), true);
 			outputText("\n");
 		}
 
@@ -380,7 +380,6 @@ import classes.internals.*;
 			this.bonusLust = 107;
 			this.lust = 30;
 			this.lustVuln = .35;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 18;
 			this.gems = 15 + rand(10);
 			this.drop = new ChainedDrop().

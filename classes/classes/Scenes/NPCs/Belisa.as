@@ -169,7 +169,7 @@ public class Belisa extends Monster
 			mana -= spellCostHeal();
 			createStatusEffect(StatusEffects.AbilityCooldown2, 2, 0, 0, 0);
 			var lustDang:Number = 15 + rand(15);
-			player.dynStats("lus", lustDang);
+			player.takeLustDamage(lustDang, true);
 		}
 		
 		override protected function performCombatAction():void
@@ -264,7 +264,6 @@ public class Belisa extends Monster
 			this.weaponVerb="slash";
 			this.armorName = "silken robe";
 			this.lustVuln = .2;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.gems = rand(10) + 20;
 			this.drop = new WeightedDrop().add(consumables.B_GOSSR,1)
 					.add(useables.T_SSILK,3)

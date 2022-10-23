@@ -106,7 +106,7 @@ private function liftWhileIfrisWatches():void {
 
 	outputText("\"<i>Mmm... lovely. Maybe next time I'll get to see a little more.</i>\" She grins a little then, exposing her fanged teeth to you briefly before she turns and slinks from the gym, her posh little bottom swaying more than it has any real right to. You can't help but stare until she's gone, and you shake your head, trying to clear it to go about your business...");
 	fatigue(30);
-	dynStats("lus", 5);
+	dynStats("lus", 5, "scale", false);
 	ifrisEnd();
 }
 //4b-PC decides to show off, possible strength requirement?-
