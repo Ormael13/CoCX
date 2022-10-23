@@ -3090,6 +3090,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
             + "“<i>W-well, you failed at that, idiot.</i>” There’s no sting to her words, and she yawns, revealing her many sharp teeth. “<i>What did you want me for?</i>”");
     }
 
+    //Always proc from Kiha
     public function electraInteractionFirst(fromElectra:Boolean):void {
         ElectraInteractionHappened = true;
         clearOutput();
@@ -3109,6 +3110,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         doNext(playerMenu);
     }
 
+    //no clears or buttons
     public function electraInteraction(fromElectra:Boolean):void {
         outputText("As you head over towards (Kiha/Electra)’s part of camp, you see Kiha and Electra, to your surprise, sitting over a series of lines carved into the dirt. They each have some stones, Kiha’s are black, and Electra’s are white, and they appear to be playing some sort of game with the colored rocks. As you draw near, the two pull a blanket over their game, looking at you. ")
         if (fromElectra) outputText("You tell Electra that you came to see her, and she grins, bobbing up and down excitedly. Kiha nods respectfully, leaving without a word, and Electra tilts her head slightly, static filling the air. “<i>What’s up, [name]?</i>” ");

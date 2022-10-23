@@ -156,15 +156,11 @@ public function ElectraRecruitingAgain():void {
 
 public function ElectraCampMainMenu():void {
 	spriteSelect(SpriteDb.s_electra);
-	if (flags[kFLAGS.KIHA_FOLLOWER] == 1 && !KihaFollower.ElectraInteractionHappened && rand(10) == 0) {
-		kihaFollower.electraInteractionFirst(true);
-		return;
-	}
+	clearOutput();
 	if (flags[kFLAGS.KIHA_FOLLOWER] == 1 && KihaFollower.ElectraInteractionHappened && rand(10) == 0) {
 		kihaFollower.electraInteraction(true);
 	}
 	else {
-		clearOutput();
 		outputText("You almost feel the static in the air as you head up to Electra. She perks up at your presence, ears on end.\n\n");
 		outputText("\"<i>Hey [name] good afternoon! I have been generating a lot of current lately, it's always difficult to keep it under control but since you"+(camp.hasCompanions() ? " and your friends...</i>\" She pauses licking her lips naughtily at the thought. This should be an alarm to you but so far no one complained. \"<i>..." : "")+"");
 		outputText("are here I can keep a lust free lucidity all the time, it's so nice to be able to think straight all the time.");
