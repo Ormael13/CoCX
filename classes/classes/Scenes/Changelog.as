@@ -354,6 +354,12 @@ public class Changelog extends BaseContent
 			outputText("-Like A-sura Boss super perk got additional effect of generating additional set of arms. Maintain cost of Asura Form increased to 25/50/75 from 20/40/60.\n");
 			outputText("-Asura Howl cost increased 2x with healing effect have at least 2x better effect (the more various elements boosting healing the better healing effect going beyond simple 2x more healing).\n");
 			outputText("-Six Fingers of Destruction accesable already after picking Absolute Strength super perk. Picking Like A-sura Boss and then Asura Strength super perks would enhance special accordly to increased amount of arms.\n");
+			outputText("-Added hints for Benoit progression (Svalkash)\n");
+			outputText("-Fix perm metamorph loading, Kiha Electra interaction (EragonX)\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -363,12 +369,6 @@ public class Changelog extends BaseContent
 			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed Bugs: Akbal been weak to fire not ice, Insightful Resources I-VI perks bonus to SF been lower than 5 per wis point, recovery of fatigue when waiting been lower than when attacking, Dao of Elements not giving additional % resistances after first 10%, missing bonus to acid elemental arrows, Holy Bands Managment locked behind having 3rd one band, ");
