@@ -76,7 +76,7 @@ public class DiningHalls extends TrollVillageAbstractContent{
 
         function ZenjiPaysorPC():void{  //So I don't have to copy/paste this....
             if (TrollVillage.ZenjiFollowing){
-                outputText("Zenji forks over 8 gems, \"<i>I gotcha covered, [name]<i>\"\n\n");
+                outputText("Zenji forks over 8 gems, \"<i>I gotcha covered, [name]</i>\"\n\n");
             }
             else{
                 outputText("You pass 8 gems toward the busgirl.");
