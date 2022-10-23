@@ -2930,7 +2930,7 @@ public class Camp extends NPCAwareContent{
 	}
 
 	private function cloneContemplateDaoSet(clone:int, newdao:Number):void {
-		player.changeStatusValue(cloneStatuses[clone], newdao);
+		player.changeStatusValue(cloneStatuses[clone], 1, newdao);
 		cloneContemplateDao(clone);
 	}
 
