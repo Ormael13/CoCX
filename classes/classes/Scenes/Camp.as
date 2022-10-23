@@ -2158,9 +2158,8 @@ public class Camp extends NPCAwareContent{
 			[consumables.HG_SFRP, consumables.HGSFRPB, "high"],
 			[consumables.SG_SFRP, consumables.SGSFRPB, "superior"],
 		];
-		//fillUpPillBottle.apply(null, bottles[0]);
 		for (var i:int = 0; i < bottles.length; ++i) {
-			addButton(5 + i, "FillBottle(" + bottles[i][2].charAt(0).toUpperCase() + ")", fillUpPillBottle.apply, null, bottles[i])
+			addButton(5 + i, "FillBottle(" + bottles[i][2].charAt(0).toUpperCase() + ")", fillUpPillBottle.apply, this, bottles[i])
 				.hint("Fill up one of your pill bottles with "+bottles[i][2]+"-grade soulforce recovery pills.")
 				.disableIf(!player.hasItem(bottles[i][0], 10) || !player.hasItem(useables.E_P_BOT, 1),
 					"You need one empty pill bottle and ten "+bottles[i][2]+"-grade soulforce recovery pills.");
