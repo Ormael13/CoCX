@@ -5000,7 +5000,7 @@ public class Combat extends BaseContent {
                 if (j != 0) outputText(",");
                 k = 3;
             }
-            if (elementTag = ""){
+            if (elementTag == ""){
                 outputText("<b>[font-" + (damage < 0 ? "heal" : damage == 0 ? "miss" : lustColor ? "lust" : "damage") + "]" + text + String(damagemsg[damagemsg.length - j - 1]) + "[/font]</b>");
             }
             else{
