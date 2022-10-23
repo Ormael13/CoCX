@@ -298,7 +298,7 @@ public class Jabala extends TrollVillageAbstractContent {
                             "\n" +
                             "Zenji looks shocked at your statement and blushes softly, embarrassed.\n" +
                             "\n" +
-                            "\"<i>[name]! You can’t just…\" Zenji whispers\n" +
+                            "\"<i>[name]! You can’t just…</i>\" Zenji whispers\n" +
                             "\n" +
                             "Jabala snickers, \"<i>Money problems? Oh no, the two of you must be so desperate and helpless out there!</i>\"\n" +
                             "\n" +
@@ -354,7 +354,7 @@ public class Jabala extends TrollVillageAbstractContent {
                         "\n" +
                         "\"<i>Trouble in paradise?</i>\" Halkano chimes\n" +
                         "\n" +
-                        "\"<i>Er… noting like dat, tings have just been… Strange and we’d like to hear what you have ta say.\" Zenji replies\n" +
+                        "\"<i>Er… noting like dat, tings have just been… Strange and we’d like to hear what you have ta say.</i>\" Zenji replies\n" +
                         "\n" +
                         "Jabala gently nudges Halkano before turning her attention back to the two of you. \"<i>Communication is always important. Be honest, be gentle. Don’t be afraid to say what the problem is. If the issue is… each other, then work it out rather than staying silent about it.</i>\"\n" +
                         "\n" +
