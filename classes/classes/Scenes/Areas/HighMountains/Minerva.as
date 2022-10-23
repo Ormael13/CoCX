@@ -306,7 +306,6 @@ public class Minerva extends Monster
 			this.armorValue = 5;
 			this.lust = 20;
 			this.lustVuln = .2;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.gems = rand(40)+25;
 			this.drop = new WeightedDrop();
 			if (flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] < 10)

@@ -141,7 +141,6 @@ import classes.internals.*;
 			this.bonusSoulforce = 100;
 			this.lustVuln = 0;
 			this.lust = 30;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 18;
 			this.gems = rand(15) + 10;
 			this.drop = NO_DROP;

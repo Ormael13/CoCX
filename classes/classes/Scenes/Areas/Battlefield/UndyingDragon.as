@@ -45,7 +45,6 @@ import classes.internals.*;
 			this.bonusHP = 30;
 			this.bonusLust = 133;
 			this.lust = 10;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = 42;
 			this.gems = 0;
 			this.drop = new ChainedDrop().add(consumables.ECTOPLS, 1 / 3);

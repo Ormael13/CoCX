@@ -40,7 +40,6 @@ public class Incels extends Monster {
         this.bonusLust = 990;
         this.lust = 50;
         this.lustVuln = 0.44;
-        this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
         this.level = 40;
         this.gems = rand(50) + 75;
         //I don't know how to add regeneration, physical resistance, or the lust to damage special ability I want them to have.

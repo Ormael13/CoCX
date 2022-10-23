@@ -290,7 +290,6 @@ import classes.internals.*;
 			this.bonusLust = 132;
 			this.lust = 10;
 			this.lustVuln = .3;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 22;
 			this.gems = 40 + rand(45);
 			this.drop = new ChainedDrop().add(armors.W_ROBES,1/10)

@@ -270,7 +270,6 @@ public class Kitsune extends Monster
 			this.armorName = "skin";
 			this.lust = 20;
 			this.lustVuln = 0.9;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.gems = rand(20) + 20;
 			this.drop = new WeightedDrop().
 					add(armors.ARCBANG,1).

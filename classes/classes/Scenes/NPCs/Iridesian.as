@@ -310,7 +310,6 @@ import classes.internals.*;
 			this.armorName = "skin";
 			this.lustVuln = .75;
 			this.lust = 30;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.drop = new WeightedDrop(consumables.ME_DROP, 1);
 			this.createStatusEffect(StatusEffects.TranscendentSoulField, 10, 10, 0, 0);//X times less dmg, +X lvl diff bonus
 			this.createPerk(PerkLib.EpicWisdom, 0, 0, 0, 0);

@@ -147,7 +147,6 @@ public class GoblinAssassin extends Monster
 			this.armorDef = 1;
 			this.armorMDef = 1;
 			this.lust = 50;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.gems = rand(50) + 25;
 			this.drop = new WeightedDrop().
 					add(consumables.GOB_ALE, 5).

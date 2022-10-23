@@ -647,7 +647,6 @@ package classes.Scenes.NPCs
 			this.weaponName = "staff";
 			this.weaponVerb="smack";
 			this.armorName = "fur";
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.ears.type = Ears.HORSE;
 			this.faceType = Face.HORSE;
 			this.tailType = Tail.HORSE;

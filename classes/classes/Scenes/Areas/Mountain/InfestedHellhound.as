@@ -118,7 +118,6 @@ import classes.internals.*;
 			this.bonusLust = 125;
 			this.lust = 50;
 			this.lustVuln = 0.87;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 10;
 			this.gems = 15 + rand(12);
             this.drop = new WeightedDrop().add(consumables.CANINEP, 3)

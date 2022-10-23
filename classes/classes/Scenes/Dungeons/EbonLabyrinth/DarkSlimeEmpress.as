@@ -120,7 +120,6 @@ use namespace CoC;
 			this.armorName = "gelatinous skin";
 			this.lust = 45;
 			this.lustVuln = .75;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.drop = new WeightedDrop(consumables.DSLIMEJ, 1);
 			this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.FireVulnerability, 0, 0, 0, 0);

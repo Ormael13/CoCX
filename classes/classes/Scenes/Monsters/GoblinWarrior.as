@@ -83,7 +83,6 @@ public class GoblinWarrior extends Goblin
 			this.bonusLust = 106;
 			this.lust = 50;
 			this.lustVuln = 0.44;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 16;
 			this.gems = rand(15) + 15;
 			this.drop = new WeightedDrop().

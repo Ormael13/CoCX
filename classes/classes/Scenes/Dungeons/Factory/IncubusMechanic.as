@@ -156,7 +156,6 @@ public class IncubusMechanic extends Monster {
 			this.bonusLust = 164;
 			this.lust = 50;
 			this.lustVuln = .5;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 14;
 			this.drop = new WeightedDrop(consumables.GROPLUS, 1);
 			this.gems = rand(25) + 20;

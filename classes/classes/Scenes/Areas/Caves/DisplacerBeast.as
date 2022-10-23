@@ -98,7 +98,6 @@ use namespace CoC;
 			this.wrath = 130;
 			this.lustVuln = .35;
 			this.lust = 30;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.drop = new ChainedDrop().
 					add(useables.EBONBLO,1/20).
 					add(consumables.D_FRUIT,0.7);

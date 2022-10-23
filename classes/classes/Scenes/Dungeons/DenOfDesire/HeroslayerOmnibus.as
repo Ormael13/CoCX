@@ -183,7 +183,6 @@ public class HeroslayerOmnibus extends Monster
 			this.bonusLust = 200;
 			this.lust = 30;
 			this.lustVuln = 0.75;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 30;
 			this.gems = rand(5) + 38;
 			this.drop = NO_DROP;

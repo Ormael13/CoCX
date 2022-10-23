@@ -116,7 +116,6 @@ public class DemonPackDesert extends Monster
 			this.bonusHP = 20;
 			this.bonusLust = 129;
 			this.lust = 30;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 9;
 			this.gems = rand(30)+20;
 			this.randomDropChance = 0.1;

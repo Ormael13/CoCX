@@ -71,7 +71,6 @@ use namespace CoC;
 			this.bonusLust = 130;
 			this.lust = 30;
 			this.lustVuln = .8;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 30;
 			this.gems = 45 + rand(40);
 			this.drop = new ChainedDrop().

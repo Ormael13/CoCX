@@ -114,7 +114,6 @@ import classes.internals.ChainedDrop;
 			this.bonusLust = 109;
 			this.lust = 30;
 			this.lustVuln = .5;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 24;
 			this.gems = rand(20) + 40;
 			this.drop = new ChainedDrop().add(useables.EBONBLO,1/20)

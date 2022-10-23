@@ -139,7 +139,6 @@ package classes.Scenes.Areas.Plains
 			this.bonusLust = 176;
 			this.lust = 30;
 			this.lustVuln = .35;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 16;
 			this.gems = 800;
 			this.drop = new ChainedDrop().

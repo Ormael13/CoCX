@@ -182,7 +182,6 @@ public class Hel extends Monster
 			this.bonusLust = 116;
 			this.lust = 30;
 			this.lustVuln = .35;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 21;
 			this.gems = 15 + rand(8);
 			this.noFetishDrop = true;

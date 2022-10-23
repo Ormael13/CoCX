@@ -365,7 +365,6 @@ public class Isabella extends Monster
 			this.armorValue = 70;
 			this.lust = 30;
 			this.lustVuln = .35;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.gems = rand(10) + 25;
 			this.tailType = Tail.COW;
 			this.tailRecharge = 0;

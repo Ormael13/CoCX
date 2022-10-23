@@ -168,7 +168,6 @@ public class Gorgon extends Monster
 			this.bonusHP = 500;
 			this.bonusLust = 151;
 			this.lust = 30;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 24;
 			this.gems = rand(16) + 30;
 			this.drop = new WeightedDrop().

@@ -91,7 +91,6 @@ public class GreenSlime extends Monster
 			this.weaponVerb = "slap";
 			this.armorName = "gelatinous skin";
 			this.lust = 30;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.gems = rand(5) + 3;
 			this.drop = new ChainedDrop().add(weapons.PIPE, 1 / 10)
 					.add(consumables.WETCLTH, 1 / 2)

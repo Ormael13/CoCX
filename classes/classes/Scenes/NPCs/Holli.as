@@ -269,7 +269,6 @@ public class Holli extends Monster
 			this.bonusLust = 135;
 			this.lust = 20;
 			this.lustVuln = .2;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 20;
 			this.gems = 0;
 			this.drop = NO_DROP;

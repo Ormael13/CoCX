@@ -40,7 +40,6 @@ package classes.Scenes.Places.TrollVillage {
             this.HP = 1;
             this.level = 1;
             this.lust = 0;
-            this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
             this.gems = 100;
         }
     }

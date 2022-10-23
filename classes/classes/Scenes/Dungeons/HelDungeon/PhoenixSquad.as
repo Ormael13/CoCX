@@ -105,7 +105,6 @@ public class PhoenixSquad extends Monster
 			this.bonusLust = 204;
 			this.lust = 20;
 			this.lustVuln = .15;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 41;
 			this.gems = rand(40)+300;
 			this.additionalXP = 100;

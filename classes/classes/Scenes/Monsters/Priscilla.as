@@ -211,7 +211,6 @@ public class Priscilla extends Goblin
 			this.fatigue = 0;
 			this.lust = 35;
 			this.lustVuln = 0.4;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.gems = rand(10) + 40;
 			this.drop = new WeightedDrop().
 					add(consumables.GOB_ALE, 5).

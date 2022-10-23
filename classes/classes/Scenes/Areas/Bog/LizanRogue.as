@@ -109,7 +109,6 @@ public class LizanRogue extends Monster
 			this.bonusLust = 66;
 			this.lust = 20;
 			this.lustVuln = .7;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 36;
 			this.gems = 70 + rand(80);
 			this.drop = new WeightedDrop().add(consumables.REPTLUM, 5)

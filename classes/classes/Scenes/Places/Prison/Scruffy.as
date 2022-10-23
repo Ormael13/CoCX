@@ -48,7 +48,6 @@ public class Scruffy extends Imp
 			this.armorMDef = 1;
 			this.bonusLust = 97;
 			this.lust = 40;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = 7;
 			this.gems = rand(5) + 25;
 			this.drop = NO_DROP;

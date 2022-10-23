@@ -269,7 +269,6 @@ use namespace CoC;
 			this.armorName = "indecent spider silk robe";
 			this.lust = 30;
 			this.lustVuln = .8;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.gems = 500;
 			this.drop = new ChainedDrop().
 					add(armors.INDESSR,1/10).

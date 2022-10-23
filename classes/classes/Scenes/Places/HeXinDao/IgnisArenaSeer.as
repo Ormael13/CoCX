@@ -127,7 +127,6 @@ public class IgnisArenaSeer extends Monster
 			this.bonusLust = 200;
 			this.lust = 20;
 			this.lustVuln = 0.9;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = 45;//mają wtedy tylko 2 ogony ale z czasem jak PC też rośnie w siłe z lvl-em bdą mieć awans to lvl może 18-20 i trzeci ogon plus wzmocnienie statów itp.
 			this.gems = rand(20) + 20;
 			if (flags[kFLAGS.IGNIS_ARENA_SEER] < 3) {

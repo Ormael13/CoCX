@@ -231,7 +231,6 @@ public class ImpOverlord extends Imp
 			this.lust = 30;
 			this.lustVuln = .3;
 			this.fatigue = 0;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = 21;
 			this.gems = rand(25) + 55;
 			this.randomDropChance = 0.1;

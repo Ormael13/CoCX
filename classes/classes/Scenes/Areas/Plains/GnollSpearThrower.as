@@ -354,7 +354,6 @@ import classes.internals.*;
 			this.bonusLust = 123;
 			this.lust = 30;
 			this.lustVuln = .35;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 14;
 			this.gems = 15 + rand(10);
 			this.drop = new ChainedDrop().add(consumables.GROPLUS,1/5).add(consumables.INCUBID,1/2).add(weaponsrange.GTHRSPE,1/2).elseDrop(consumables.BROWN_D);

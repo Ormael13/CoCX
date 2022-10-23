@@ -180,7 +180,6 @@ public class Marae extends Monster
 			this.bonusHP = 17500;
 			this.lust = 30;
 			this.lustVuln = .04;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 140;
 			this.drop = NO_DROP;
 			this.gems = 1000;

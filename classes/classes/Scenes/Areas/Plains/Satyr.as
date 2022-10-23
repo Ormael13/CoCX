@@ -169,7 +169,6 @@ public class Satyr extends Monster
 			this.bonusLust = 114;
 			this.lust = 20;
 			this.lustVuln = 0.30;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = 19;
 			this.gems = rand(30) + 30;
 			this.drop = new ChainedDrop().add(consumables.INCUBID,1/2);

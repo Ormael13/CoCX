@@ -89,7 +89,6 @@ public class LustyDemons extends Monster
 			this.bonusLust = 208;
 			this.lust = 30;
 			this.lustVuln = .3;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 28;
 			this.gems = 500 + rand(250);
 			this.special1 = SceneLib.combat.packAttack;

@@ -78,7 +78,6 @@ public class UnderwaterSharkGirl extends Monster
 			this.bonusLust = 206;
 			this.lust = 40;
 			this.lustVuln = .7;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 55;
 			this.gems = rand(30) + 25;
 			this.drop = new WeightedDrop().

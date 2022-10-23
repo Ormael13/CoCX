@@ -92,7 +92,6 @@ public class Izumi extends Monster
 			this.armorName = "silken kimono";
 			this.lust = 10;
 			this.lustVuln = 0.33;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.gems = 50 + rand(50);
 			this.drop = new ChainedDrop().add(armors.SPKIMO,1/10)
 					.add(necklaces.OBNECK,1/5)

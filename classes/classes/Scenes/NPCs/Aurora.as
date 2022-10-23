@@ -609,7 +609,6 @@ use namespace CoC;
 			this.weaponName = "claws";
 			this.weaponVerb = "claw-slash";
 			this.armorName = "stone skin";
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.gems = 0;
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.EnemyConstructType, 0, 0, 0, 0);

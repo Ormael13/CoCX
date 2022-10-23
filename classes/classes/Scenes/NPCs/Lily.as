@@ -225,7 +225,6 @@ import classes.internals.*;
 			this.nipplesPierced = 1;
 			this.lust = 35;
 			this.lustVuln = .2;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.gems = rand(15) + 35;
 			this.drop = new WeightedDrop().add(consumables.B_GOSSR,5)
 					.add(useables.T_SSILK,1)

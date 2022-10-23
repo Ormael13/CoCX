@@ -92,7 +92,6 @@ import classes.internals.*;
 			this.armorName = "translucent clothes";
 			this.armorDef = 1;
 			this.lust = 10;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			if (rand(2) == 0) {
 				initStrTouSpeInte(44, 55, 66, 140);
 				initWisLibSensCor(140, 1, 140, 50);
