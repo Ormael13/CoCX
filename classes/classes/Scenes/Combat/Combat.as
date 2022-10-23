@@ -4990,7 +4990,12 @@ public class Combat extends BaseContent {
     public function CommasForDigits(damage:Number, lustColor:Boolean = false, text:String = "", elementTag:String = ""):void {
         var damagemsg:Array = new Array(String(damage).length);
         var damageTemp:Number = damage;
-        outputText("<b>(</b>");
+        if (elementTag != ""){
+            outputText("<b>[font-" + elementTag + "]([/font]</b>");
+        }
+        else{
+            outputText("<b>(</b>");
+        }
         for (var i:int = 0; i < damagemsg.length; i++) {
             damagemsg[i] = int(damageTemp % 10);
             damageTemp = Math.floor(damageTemp / 10);
@@ -5004,11 +5009,16 @@ public class Combat extends BaseContent {
                 outputText("<b>[font-" + (damage < 0 ? "heal" : damage == 0 ? "miss" : lustColor ? "lust" : "damage") + "]" + text + String(damagemsg[damagemsg.length - j - 1]) + "[/font]</b>");
             }
             else{
-                outputText("<b>[font-" + elementTag + "]" + text + String(damagemsg[damagemsg.length - j - 1]) + "[/font]</b>");
+                outputText("<b>[font-" + elementTag + "]" + text + String(damagemsg[damagemsg.length - j - 1])+"[/font]</b>");
             }
             k--;
         }
-        outputText("<b>)</b>");
+        if (elementTag != ""){
+            outputText("<b>[font-" + elementTag + "] "+ elementTag +")[/font]</b>");
+        }
+        else{
+            outputText("<b>)</b>");
+        }
     }
 
     /**
