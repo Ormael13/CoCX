@@ -4912,14 +4912,9 @@ public class PerkLib
                     .requireNGPlus(2);
             UnlockEndurance.requireSpe(20);
             //Tier 1 Speed Perks
-            //Agility - A small portion of your speed is applied to your defense rating when wearing light armors.
             Agility.requireSpe(75)
                     .requirePerk(Runner)
                     .requireLevel(6);
-            //slot 3 - Double Attack perk
-//            WeaponNormalDoubleAttack.requirePerk(JobDervish)
-//                    .requireSpe(50)
-//                    .requireLevel(6);
             WeaponRangeDoubleStrike.requirePerk(JobRanger)
                     .requireSpe(50)
                     .requireLevel(6);
@@ -4974,9 +4969,6 @@ public class PerkLib
                     .requireLevel(6);
             SneakyAttack.requirePerk(JobRogue)
                     .requireLevel(6);
-//            WeaponSmallDoubleAttack.requirePerk(JobRogue)
-//                    .requireSpe(40)
-//                    .requireLevel(6);
             StarlightStrikes.requirePerk(JobRogue)
                     .requireSpe(60)
                     .requireLevel(6);
@@ -4993,9 +4985,6 @@ public class PerkLib
             Blademaster.requireSpe(80)
                     .requireStr(60)
                     .requireLevel(12);
-//            WeaponNormalTripleAttack.requirePerk(WeaponNormalDoubleAttack)
-//                    .requireSpe(75)
-//                    .requireLevel(12);
             SluttySimplicity.requireSpe(80)
                     .requireLib(50)
                     .requirePerk(Unhindered)
@@ -5035,12 +5024,6 @@ public class PerkLib
             Feint.requireAnyPerk(SneakyAttack, MarkedForDeath)
                     .requireSpe(50)
                     .requireLevel(12);
-//            WeaponSmallTripleAttack.requirePerk(WeaponSmallDoubleAttack)
-//                    .requireSpe(55)
-//                    .requireLevel(12);
-//            WeaponSmallQuadrupleAttack.requirePerk(WeaponSmallTripleAttack)
-//                    .requireSpe(70)
-//                    .requireLevel(12);
             ImprovedEvade.requirePerks(JobRanger, Evade)
                     .requireSpe(60)
                     .requireLevel(12);
@@ -5057,9 +5040,6 @@ public class PerkLib
             Manyshot.requirePerks(JobHunter, WeaponRangeTripleStrike)
                     .requireSpe(100)
                     .requireLevel(18);
-//            WeaponNormalQuadrupleAttack.requirePerk(WeaponNormalTripleAttack)
-//                    .requireSpe(100)
-//                    .requireLevel(18);
             EnvenomedBolt.requireLevel(18)
                     .requirePerk(JobHunter)
                     .requireCustomFunction(function (player:Player):Boolean {
@@ -5086,12 +5066,6 @@ public class PerkLib
             GreaterFeint.requirePerk(Feint)
                     .requireSpe(100)
                     .requireLevel(18);
-//            WeaponSmallPentaAttack.requirePerk(WeaponSmallQuadrupleAttack)
-//                    .requireSpe(85)
-//                    .requireLevel(18);
-//            WeaponSmallHexaAttack.requirePerk(WeaponSmallPentaAttack)
-//                    .requireSpe(100)
-//                    .requireLevel(18);
             QuickStrike.requirePerk(SpeedDemon)
                     .requireSpe(120)
                     .requireLevel(18);
@@ -5105,18 +5079,9 @@ public class PerkLib
             WildQuiver.requirePerk(Manyshot)
                     .requireSpe(125)
                     .requireLevel(24);
-//            WeaponNormalPentaAttack.requirePerk(WeaponNormalQuadrupleAttack)
-//                    .requireSpe(125)
-//                    .requireLevel(24);
             Slayer.requirePerk(DeadlySneaker)
                     .requireSpe(120)
                     .requireLevel(12);
-//            WeaponSmallHectaAttack.requirePerk(WeaponSmallHexaAttack)
-//                    .requireSpe(115)
-//                    .requireLevel(24);
-//            WeaponSmallOctaAttack.requirePerk(WeaponSmallHectaAttack)
-//                    .requireSpe(130)
-//                    .requireLevel(24);
             GreaterEvade.requirePerk(ImprovedEvade)
                     .requireSpe(100)
                     .requireLevel(24);
@@ -5126,21 +5091,12 @@ public class PerkLib
 			WoundPoison.requireLevel(24)
 					.requirePerk(JobRogue);
             //Tier 5 Speed Perks
-//            WeaponNormalHexaAttack.requirePerk(WeaponNormalPentaAttack)
-//                    .requireSpe(150)
-//                    .requireLevel(30);
             Multishot.requirePerk(WildQuiver)
                     .requireSpe(150)
                     .requireLevel(30);
             UnlockEndurance2ndStage.requirePerk(UnlockEndurance)
                     .requireSpe(125)
                     .requireLevel(30);
-//            WeaponSmallNonaAttack.requirePerk(WeaponSmallOctaAttack)
-//                    .requireSpe(145)
-//                    .requireLevel(30);
-//            WeaponSmallDecaAttack.requirePerk(WeaponSmallNonaAttack)
-//                    .requireSpe(160)
-//                    .requireLevel(30);
             //Tier 6 Speed Perks
             NaturaljousterMastergrade.requirePerk(Naturaljouster)
                     .requireSpe(180)

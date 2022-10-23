@@ -356,7 +356,7 @@ public class Changelog extends BaseContent
 			outputText("-Six Fingers of Destruction accesable already after picking Absolute Strength super perk. Picking Like A-sura Boss and then Asura Strength super perks would enhance special accordly to increased amount of arms.\n");
 			outputText("-Added hints for Benoit progression (Svalkash)\n");
 			outputText("-Fix perm metamorph loading, Kiha Electra interaction (EragonX)\n");
-			outputText("-\n");
+			outputText("-Elemental Damage type now use special font color (Liadri)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
