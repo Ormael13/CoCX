@@ -2870,6 +2870,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 				doNext(loverZenjiTalks);
 			}
 			else{
+				player.destroyItems(jewelries.ENDGRNG, 1);
 				outputText("You call Zenji to you, to which he immediately approaches you with a stride in his step. His deep voice rings to you as he stands in front of you, \"You called?\"\n" + "\n");
 				if (player.mf("m", "f") == "f"){
 					outputText("You grab Zenji by his wrists. Zenji holds onto you gently, eyeing you carefully, unsure of where you’re going with this, \"<i>Mi costilla... someting wrong?</i>\"\n" +
@@ -2992,7 +2993,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 						"\n" +
 						"You turn around to look at yourself in the mirror. What a sight, the layers of silken fabric, the strapless dress molds to your form accenting your features incredibly. The seamstress passes you a tiara with a silken veil, white gloves, and flats. Jabala helps put the silken flats on your feet, once you’re fully dressed the seamstress places the tiara over your head as the veil flows over your face.\n" +
 						"\n" +
-						"\"<i>You are ready,<i>\" the seamstress states. \"<i>Truly a beautiful sight, I’m sure your partner will be excited to see such beauty.</i>\"\n" +
+						"\"<i>You are ready,</i>\" the seamstress states. \"<i>Truly a beautiful sight, I’m sure your partner will be excited to see such beauty.</i>\"\n" +
 						"\n" +
 						"Jabala wipes her tears from her face, \"<i>Follow me, [name] we will get you prepared for the ceremony.</i>\"\n");
 			}
@@ -3660,6 +3661,10 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 				var timeShift:int = (24 - time.hours) + 8;
 				doNext(createCallBackFunction(camp.returnToCamp, timeShift));
 			} else doNext(recallWakeUp);
+		}
+
+		public static function isLover():Boolean {
+			return flags[kFLAGS.ZENJI_PROGRESS] >= 11;
 		}
 	}
 }

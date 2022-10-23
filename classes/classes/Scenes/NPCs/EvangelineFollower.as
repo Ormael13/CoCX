@@ -170,7 +170,7 @@ public function Nie2():void
 
 public function meetEvangeline():void {
 	clearOutput();
-	if (flags[kFLAGS.ZENJI_PROGRESS] == 11 && rand(4) == 0) {
+	if (ZenjiScenes.isLover() && rand(4) == 0) {
 		outputText("You call your transformations expert, Evangeline, but you get no response. After a moment you decide to head over to her.\n\n");
 		outputText("When you arrive, you already see Zenji hovering over her shoulder, his tail nervously coiling around himself. Evangeline is showing Zenji what the transformations do and ensuring him that it will cause no harm to any imbibers.\n\n");
 		outputText("Zenji seems somewhat unconvinced at her assurance. \"<i>If dat is what you say so, but if you dare harm [name], just know dat I will be de first to know.</i>\"\n\n");
