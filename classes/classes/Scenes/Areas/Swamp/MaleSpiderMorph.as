@@ -62,7 +62,6 @@ public class MaleSpiderMorph extends AbstractSpiderMorph
 			this.bonusLust = 98;
 			this.lust = 20;
 			this.lustVuln = .6;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 18;
 			this.gems = rand(15) + 15;
 			this.drop = new WeightedDrop().add(consumables.S_GOSSR,5)

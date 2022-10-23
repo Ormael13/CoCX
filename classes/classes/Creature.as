@@ -1031,7 +1031,7 @@ public class Creature extends Utils
 		public function takeLustDamage(lustDmg:Number, display:Boolean = false, applyRes:Boolean = true):Number{
 			if (applyRes) lustDmg *= lustPercent()/100; //the same as dynStats("lus", lustDmg, applyRes);
 			var ldi:int = int(lustDmg);
-			dynStats("lus", ldi, false);
+			dynStats("lus", ldi);
 			SceneLib.combat.CommasForDigits(ldi, true);
 			return ldi;
 		}

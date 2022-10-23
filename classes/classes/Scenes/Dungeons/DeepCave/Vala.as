@@ -134,7 +134,6 @@ public class Vala extends Monster
 			this.bonusLust = 116;
 			this.lust = lust;
 			this.lustVuln = lustVuln;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 26;
 			this.gems = 1;
 			this.additionalXP = 100;

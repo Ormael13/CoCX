@@ -65,7 +65,7 @@ public class Yenza extends TrollVillageAbstractContent{
                         "\"<i>[name]... we should go… Don’t… don’t look...</i>\" He stands up, gesturing for you to follow him.\n" +
                         "\n" +
                         "Instead of following him, your gaze reflexively shifts back around to notice a very beautiful troll standing up now. She is the pinnacle of perfect femininity, with an hourglass figure and long, dark green silky hair. She is approaching fairly quickly. You barely have enough time to blink and she’s already positioned over the other side of the table, giving you a full view of her cleavage.\n");
-                outputText("\"<i>So, I see you found the tattered scraps of man I left behind, have you?</i>\" She smirks, \"<i>Has he been a good little boy? Trust me, I know just how tiny he is. Calling him a man is an understatement.</i>\"\n" +
+                outputText("\"<i>So, I see you found the tattered scraps of man I left behind, have you?</i>\" She smirks, \"<i>Has he been a good little boy? Trust me, I know just how tiny he is. Calling him a man is an overstatement.</i>\"\n" +
                         "\n" +
                         "You want to leave, but something compels you to stay. You can’t explain what, but there’s a certain gravity she has over you.\n" +
                         "\n" +

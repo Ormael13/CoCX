@@ -65,7 +65,6 @@ public class IvorySuccubus extends AbstractSuccubus {
 		this.armorMDef = 2;
 		this.bonusLust = 123;
         this.lust = 50;
-        this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
         this.level = 3;
         this.gems = rand(5) + 5;
         this.randomDropChance = 0.1;

@@ -100,7 +100,6 @@ import classes.internals.*;
 			this.bonusLust = 235;
 			this.lust = 20;
 			this.lustVuln = .7;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 38;
 			this.additionalXP = 125;
 			this.gems = 70 + rand(80);

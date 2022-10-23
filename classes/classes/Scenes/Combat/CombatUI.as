@@ -21,6 +21,7 @@ import classes.Scenes.Areas.Forest.Alraune;
 import classes.Scenes.Areas.Forest.WoodElvesHuntingParty;
 import classes.Scenes.Areas.HighMountains.Izumi;
 import classes.Scenes.Dungeons.D3.*;
+import classes.Scenes.Dungeons.DemonLab.Incels;
 import classes.Scenes.Dungeons.DemonLab.ProjectTyrant;
 import classes.Scenes.NPCs.*;
 import classes.Scenes.SceneLib;
@@ -807,6 +808,10 @@ public class CombatUI extends BaseCombatContent {
 				outputText("You are pinned underneath the Drider-beast’s weight, and it begins to crush you!");
 				btnStruggle.call((monster as ProjectTyrant).TackleGrappleStruggle);
 				btnBoundWait.call((monster as ProjectTyrant).TackleGrappleWait);
+			} else if (monster is Incels) {
+				outputText("You are buried under the incels’ writhing mass, and they’re still trying to tear you apart!");
+				btnStruggle.call((monster as Incels).RipStruggle);
+				btnBoundWait.call((monster as Incels).RipWait);
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.Tentagrappled)) {

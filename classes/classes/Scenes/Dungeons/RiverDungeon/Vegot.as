@@ -201,7 +201,6 @@ use namespace CoC;
 			this.lust = 30;
 			this.lustVuln = .8;
 			this.level = 43;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.gems = 65 + rand(30);
 			this.drop = new ChainedDrop().
 					add(consumables.VOLTTOP,1).

@@ -103,7 +103,6 @@ use namespace CoC;
 			this.weaponAttack = 5;
 			this.armorName = "sticky glistering skin";
 			this.lust = 30;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.drop = new WeightedDrop(consumables.FSNAILS, 1);
 			this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);

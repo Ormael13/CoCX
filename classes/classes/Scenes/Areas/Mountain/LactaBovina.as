@@ -95,7 +95,6 @@ import classes.internals.*;
 			this.bonusLust = 95;
 			this.lust = 40;
 			this.lustVuln = .9;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.gems = rand(15) + 15;
 			this.level = 15;
 			this.tailType = Tail.COW;

@@ -116,7 +116,6 @@ public class TentacleBeastRaging extends Monster
 			this.bonusLust = 122;
 			this.lust = 10;
 			this.lustVuln = 0.8;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 11;
 			this.gems = rand(7)+3;
 			this.drop = new WeightedDrop().addMany(1,consumables.HEALHERB,

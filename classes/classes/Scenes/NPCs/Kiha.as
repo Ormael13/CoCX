@@ -342,7 +342,6 @@ public class Kiha extends Monster
 			if (game.flags[kFLAGS.KIHA_UNDERGARMENTS] > 0) this.armorDef += (2 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			this.lust = 10;
 			this.lustVuln = 0.4;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.gems = rand(15) + 95;
 			this.noFetishDrop = true;
 			this.drop = new ChainedDrop().add(useables.D_SCALE, 0.2);

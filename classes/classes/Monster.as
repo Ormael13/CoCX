@@ -171,19 +171,6 @@ import flash.utils.getQualifiedClassName;
 		//Lust vulnerability
 		public var lustVuln:Number = 1;
 
-		public static const TEMPERMENT_AVOID_GRAPPLES:int = 0;
-		public static const TEMPERMENT_LUSTY_GRAPPLES:int = 1;
-		public static const TEMPERMENT_RANDOM_GRAPPLES:int = 2;
-		public static const TEMPERMENT_LOVE_GRAPPLES:int = 3;
-		/**
-		 * temperment - used for determining grapple behaviors
-		 * 0 - avoid grapples/break grapple
-		 * 1 - lust determines > 50 grapple
-		 * 2 - random
-		 * 3 - love grapples
-		*/
-		public var temperment:Number = TEMPERMENT_AVOID_GRAPPLES;
-
 		//Used for special attacks.
 		public var special1:Function = null;
 		public var special2:Function = null;
@@ -1360,7 +1347,6 @@ import flash.utils.getQualifiedClassName;
 			///*OPTIONAL*/ //this.bonusLust = ; // default 0
 			///*OPTIONAL*/ //this.lust = ; // default 0
 			///*OPTIONAL*/ //this.lustVuln = ; // default 1
-			///*OPTIONAL*/ //this.temperment = TEMPERMENT; // default AVOID_GRAPPLES
 			///*OPTIONAL*/ //this.fatigue = ; // default 0
 
 			//// 13. Level
@@ -1585,9 +1571,7 @@ import flash.utils.getQualifiedClassName;
 			this.HP = maxHP();
 			this.XP = totalXP();
 			error += super.validate();
-			error += Utils.validateNonNegativeNumberFields(this, "Monster.validate",[
-					"lustVuln", "temperment"
-			]);
+			error += Utils.validateNonNegativeNumberFields(this, "Monster.validate", ["lustVuln"]);
 			return error;
 		}
 

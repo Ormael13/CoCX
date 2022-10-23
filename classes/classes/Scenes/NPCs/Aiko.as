@@ -560,7 +560,6 @@ import classes.internals.*;
 			this.bonusHP = 350;
 			this.lust = 25;
 			this.lustVuln = 0.4;
-			this.temperment = (cor >= 50 && game.flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]==1 ? TEMPERMENT_LOVE_GRAPPLES : TEMPERMENT_LUSTY_GRAPPLES);
 			if (flags[kFLAGS.AIKO_BOSS_COMPLETE] > 0) {
 				initStrTouSpeInte(50, 60, 240, 200);
 				initWisLibSensCor(200, 80, 130, game.flags[kFLAGS.AIKO_CORRUPTION]);

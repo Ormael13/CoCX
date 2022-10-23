@@ -195,7 +195,6 @@ public class Cockatrice extends Monster {
 		this.bonusLust = 112;
         this.lust = 30;
         this.lustVuln = .5;
-        this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
         this.level = 22;
         this.gems = rand(10) + 10;
         this.drop = new WeightedDrop()

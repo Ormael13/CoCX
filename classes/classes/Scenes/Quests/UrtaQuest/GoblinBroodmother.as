@@ -54,7 +54,6 @@ public class GoblinBroodmother extends Goblin
 			this.bonusLust = 146;
 			this.lust = 50;
 			this.lustVuln = 0.5;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 22;
 			this.gems = rand(20) + 22;
 			this.drop = new WeightedDrop().

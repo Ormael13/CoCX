@@ -171,7 +171,6 @@ public class TentacleBeast extends Monster
 			this.armorName = "rubbery skin";
 			this.lust = 10;
 			this.lustVuln = 0.8;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.drop = new WeightedDrop().addMany(1,consumables.HEALHERB,
 					consumables.HEALHERB,
 					consumables.HEALHERB,

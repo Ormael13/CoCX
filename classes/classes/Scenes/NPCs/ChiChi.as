@@ -234,7 +234,6 @@ use namespace CoC;
 			this.bonusHP = 25000;
 			this.lust = 30;
 			this.lustVuln = .8;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.gems = 45 + rand(40);
 			if (flags[kFLAGS.CHI_CHI_FOLLOWER] == 2) this.drop = NO_DROP;
 			else this.drop = new ChainedDrop().add(consumables.FIERYS_, 0.2);

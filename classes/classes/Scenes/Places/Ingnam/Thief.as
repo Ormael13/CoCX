@@ -42,7 +42,6 @@ public class Thief extends Monster
 			this.armorMDef = 0;
 			this.bonusLust = 33;
 			this.lust = 25;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 1;
 			this.gems = 15+rand(5);
 			this.drop = new WeightedDrop().add(weapons.DAGGER,1)

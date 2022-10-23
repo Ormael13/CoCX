@@ -144,7 +144,6 @@ public class SandTrap extends Monster
 			this.bonusLust = 110;
 			this.lust = 20;
 			this.lustVuln = .55;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 5;
 			this.gems = 5 + rand(5);
 			this.drop = new ChainedDrop(consumables.TRAPOIL).add(consumables.OVIELIX,1/3);

@@ -319,7 +319,6 @@ import classes.internals.*;
 			this.lust = 30;
 			if (hasStatusEffect(StatusEffects.Maleficium)) this.lustVuln = 0.75;
 			else this.lustVuln = 0.5;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 100;
 			this.gems = rand(25) + 138;
 			this.drop = NO_DROP;

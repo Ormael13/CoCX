@@ -81,7 +81,6 @@ public class UnderwaterTigersharkGirl extends Monster
 			this.bonusLust = 235;
 			this.lust = 20;
 			this.lustVuln = .3;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 60;
 			this.gems = rand(35) + 30;
 			this.drop = new WeightedDrop().

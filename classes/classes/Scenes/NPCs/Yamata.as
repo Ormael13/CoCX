@@ -375,7 +375,6 @@ import classes.internals.*;
 			this.lust = 25;
 			this.bonusLust = 310;
 			this.lustVuln = 0.35;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = 60;
 			this.gems = rand(20) + 30;
 			this.drop = new WeightedDrop(consumables.MYSTJWL, 1);

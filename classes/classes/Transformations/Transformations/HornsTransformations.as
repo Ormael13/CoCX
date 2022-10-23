@@ -44,9 +44,9 @@ public class HornsTransformations extends MutationsHelper {
 			function (doOutput: Boolean): void {
 				var desc: String = "";
 
-				if (player.horns.type == Horns.NONE) desc += "With painful pressure, the skin on your forehead splits around two tiny nub-like horn, a little bit similar to that you would see on the cattle back in your homeland.";
-				else if (player.horns.type == Horns.UNICORN) desc += "A sudden wave of pleasure strike you making you moan as your horn begins to split in two";
-				else desc += "Your horns vibrate and shift as if made of clay, reforming into horns with a bicorn-like shape.";
+				if (player.horns.type == Horns.NONE) desc += "With painful pressure, the skin on your forehead splits around two tiny nub-like horn, a little bit similar to that you would see on the cattle back in your homeland. ";
+				else if (player.horns.type == Horns.UNICORN) desc += "A sudden wave of pleasure strike you, making you moan as your horn begins to split in two.";
+				else desc += "Your horns vibrate and shift as if made of clay, reforming into a bicorn-like shape.";
 				player.horns.count = 2;
 				player.horns.type = Horns.BICORN;
 

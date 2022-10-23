@@ -166,7 +166,6 @@ public class FetishCultist extends Monster
 			this.armorMDef = 1;
 			this.bonusLust = 158;
 			this.lust = 25;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 3;
 			this.gems = 5+rand(10);
 			this.drop = new WeightedDrop().add(consumables.LABOVA_,1)

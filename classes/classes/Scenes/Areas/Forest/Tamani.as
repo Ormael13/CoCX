@@ -145,7 +145,6 @@ public class Tamani extends Goblin
 			this.bonusLust = 137;
 			this.lust = 40;
 			this.lustVuln = 0.9;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 8;
 			this.gems = rand(35) + 10;
 			this.drop = new WeightedDrop().add(consumables.GOB_ALE,4)

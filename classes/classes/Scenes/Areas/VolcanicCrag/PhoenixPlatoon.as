@@ -115,7 +115,6 @@ import classes.internals.WeightedDrop;
 			this.bonusLust = 369;
 			this.lust = 20;
 			this.lustVuln = .15;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 74;
 			this.gems = rand(35)+200;
 			this.additionalXP = 250;

@@ -189,7 +189,6 @@ public class GooGirl extends Monster
 			this.bonusLust = 96;
 			this.lust = 45;
 			this.lustVuln = .75;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 6;
 			this.gems = rand(6) + 4;
 			this.drop = new ChainedDrop().add(weapons.PIPE,1/10)

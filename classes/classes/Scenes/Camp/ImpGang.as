@@ -64,7 +64,6 @@ public class ImpGang extends Imp
 			this.bonusLust = 104;
 			this.lust = 30;
 			this.lustVuln = .65;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = 14;
 			this.gems = rand(15) + 25;
 			this.drop = NO_DROP;

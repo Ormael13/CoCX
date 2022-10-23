@@ -290,7 +290,6 @@ use namespace CoC;
 			this.armorName = "skimpy black bikini";
 			this.lust = 30;
 			this.lustVuln = .8;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.gems = 45 + rand(40);
 			this.drop = new ChainedDrop().
 					add(armors.S_SWMWR,1/12).

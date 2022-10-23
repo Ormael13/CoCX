@@ -179,7 +179,6 @@ public class Alraune extends Monster
 			this.bonusLust = 174;
 			this.lust = 20 + rand(40);
 			this.lustVuln = 0.2;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 28;
 			this.gems = rand(20) + 5;
 			this.drop = new WeightedDrop().

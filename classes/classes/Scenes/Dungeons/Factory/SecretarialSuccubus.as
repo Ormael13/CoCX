@@ -59,7 +59,6 @@ public class SecretarialSuccubus extends AbstractSuccubus
 			this.bonusHP = 200;
 			this.bonusLust = 162;
 			this.lust = 30;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 12;
 			this.gems = rand(25) + 20;
 			this.additionalXP = 75;

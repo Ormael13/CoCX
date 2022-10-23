@@ -94,7 +94,6 @@ public class Brigid extends Monster
 			this.bonusLust = 144;
 			this.lust = 20;
 			this.lustVuln = .25;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 29;
 			this.gems = rand(37)+210;
 			this.additionalXP = 150;

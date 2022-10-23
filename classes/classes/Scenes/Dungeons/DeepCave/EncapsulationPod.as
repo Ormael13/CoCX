@@ -226,7 +226,6 @@ import classes.internals.*;
 			this.bonusHP = 1200;
 			this.lust = 10;
 			this.lustVuln = 0;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 28;
 			this.gems = 1;
 			this.additionalXP = 200;

@@ -184,7 +184,6 @@ public class SandWitchMob extends Monster
 			this.bonusLust = 102;
 			this.lust = 30;
 			this.lustVuln = .5;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 7;
 			this.gems = rand(20) + 15;
 			this.drop = NO_DROP;

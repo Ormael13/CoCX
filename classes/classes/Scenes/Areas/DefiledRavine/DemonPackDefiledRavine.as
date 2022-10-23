@@ -63,7 +63,6 @@ public class DemonPackDefiledRavine extends Monster
 			this.bonusHP = 1000;
 			this.bonusLust = 201;
 			this.lust = 30;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 41;
 			this.gems = rand(40)+70;
 			this.randomDropChance = 0.1;

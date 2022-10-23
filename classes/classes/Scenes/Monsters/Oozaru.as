@@ -50,7 +50,6 @@ import classes.internals.*;
 			}
 			this.a = "the ";
 			this.short = "oozaru";
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.gems = 45 + rand(40);
 			this.drop = NO_DROP;
 			this.tailType = Tail.MONKEY;

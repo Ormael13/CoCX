@@ -110,7 +110,6 @@ public class HarpyMob extends Monster
 			this.bonusLust = 167;
 			this.lust = 20;
 			this.lustVuln = .2;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 32;
 			this.gems = rand(25)+140;
 			this.additionalXP = 50;

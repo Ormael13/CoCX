@@ -72,7 +72,6 @@ public class SharkGirl extends Monster
 			this.bonusLust = 130;
 			this.lust = 40;
 			this.lustVuln = .9;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 20;
 			this.gems = rand(30) + 25;
 			this.drop = new WeightedDrop().

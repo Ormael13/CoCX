@@ -125,7 +125,6 @@ public class HarpyQueen extends Monster
 			this.fatigue = 0;
 			this.lust = 20;
 			this.lustVuln = .15;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 30;
 			this.gems = rand(25)+160;
 			this.additionalXP = 50;

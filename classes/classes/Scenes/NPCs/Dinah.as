@@ -506,7 +506,6 @@ import classes.internals.*;
 			this.weaponName = "claws";
 			this.weaponVerb = "slash";
 			this.lust = 30;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.gems = 0;
 			if (flags[kFLAGS.DINAH_LVL_UP] >= 1 && flags[kFLAGS.DINAH_LVL_UP] < 4) {
 				this.lustVuln = .9;

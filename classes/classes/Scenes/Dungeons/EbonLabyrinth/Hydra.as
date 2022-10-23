@@ -121,7 +121,6 @@ use namespace CoC;
 			this.weaponAttack = 5;
 			this.armorName = "scales";
 			this.lust = 30;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.drop = new WeightedDrop(consumables.HYDRASC, 1);
 			this.createStatusEffect(StatusEffects.HydraTails, 5, 0, 0, 0);
 			this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);

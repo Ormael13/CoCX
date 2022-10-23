@@ -72,7 +72,6 @@ import classes.internals.*;
 			this.bonusLust = 182;
 			this.lust = 30;
 			this.lustVuln = .8;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.gems = 50;
 			this.drop = new ChainedDrop().
 				//	add(armors.INDESSR,1/10).

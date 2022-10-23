@@ -28,7 +28,6 @@ public class ProjectTyrant extends Monster {
         this.bonusHP = 300;
         this.bonusLust = 200;
         this.lust = 50;
-        this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
         this.level = 45;
         this.gems = rand(550) + 175;
 
@@ -75,7 +74,6 @@ public class ProjectTyrant extends Monster {
     }
 
     public function TackleGrappleStruggle():void {
-        player.removeStatusEffect(StatusEffects.Pounced);
         if ((rand(player.str) > this.str / 2) || player.hasPerk(PerkLib.FluidBody)) TackleGrappleSuccess();
         else TackleGrapple();
         SceneLib.combat.enemyAIImpl();
@@ -147,6 +145,7 @@ public class ProjectTyrant extends Monster {
         outputText("The Incubus fires a shot at you! \n\n");
         player.takePhysDamage(dmg0, true);
         var choice0:Number = rand(3);
+        if (choice0 == 1 && player.hasStatusEffect(StatusEffects.Pounced)) SlamTrample();
         switch (choice0) {
             case 0:
                 SlamTrample();
