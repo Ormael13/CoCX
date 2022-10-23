@@ -58,6 +58,8 @@ import coc.view.ButtonData;
 import coc.view.ButtonDataList;
 import coc.view.MainView;
 
+import mx.formatters.NumberFormatter;
+
 //import flash.utils.getTimer;
 
 public class Combat extends BaseContent {
@@ -4988,6 +4990,15 @@ public class Combat extends BaseContent {
     }
 
     public function CommasForDigits(damage:Number, lustColor:Boolean = false, text:String = "", elementTag:String = ""):void {
+        var numberformat:NumberFormatter = new NumberFormatter();
+        var dmgText:String = numberformat.format(Math.floor(Math.abs(damage)));
+        if (elementTag == ""){
+            outputText("<b>([font-" + (damage < 0 ? "heal" : damage == 0 ? "miss" : lustColor ? "lust" : "damage") + "]" + text + dmgText + "[/font])</b>");
+        }
+        else {
+            outputText("<b>[font-" + elementTag + "](" + text + dmgText + " " + elementTag + ")[/font]</b>");
+        }
+        /*
         var damagemsg:Array = new Array(String(damage).length);
         var damageTemp:Number = damage;
         if (elementTag != ""){
@@ -5019,6 +5030,7 @@ public class Combat extends BaseContent {
         else{
             outputText("<b>)</b>");
         }
+        */
     }
 
     /**
