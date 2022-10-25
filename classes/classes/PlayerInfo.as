@@ -825,7 +825,7 @@ public class PlayerInfo extends BaseContent {
 				else interpersonStats += "25";
 				interpersonStats += "\n";
 			}
-			if (flags[kFLAGS.ZENJI_PROGRESS] == 11) {
+			if (ZenjiScenes.isLover()) {
 				interpersonStats += "<b>Zenji status:</b> Lover\n";
 				interpersonStats += "<b>Zenji Cum Production:</b> " + addComma(Math.round(1300 + player.statusEffectv2(StatusEffects.ZenjiModificationsList))) + "mL\n";
 				if (ZenjiScenes.Z1stKid != "") interpersonStats += "<b>Zenji Firstborn (Male) Name:</b> "+ZenjiScenes.Z1stKid+"\n";

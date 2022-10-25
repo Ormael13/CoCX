@@ -795,8 +795,8 @@ public class PerkLib
 				"Your extra dimensional golem bag can store 6 more temporary (and 1 more permanent when becoming Master Golem Maker) golems.",
 				"You've chosen the 'Bigger Golem Bag VI' perk, increasing your golems bag.");
 		public static const BladeBarrier:PerkType = mk("Blade Barrier", "Blade Barrier",
-				"Chance to parry is further increased by +15% when dual wielding.",
-				"You've chosen the 'Blade Barrier' perk. Chance to parry is further increased by +15% when dual wielding.");
+				"Chance to parry is further increased by +25% when dual wielding.",
+				"You've chosen the 'Blade Barrier' perk. Chance to parry is further increased by +25% when dual wielding.");
 		public static const Blademaster:PerkType = mk("Blademaster", "Blademaster",
 				"Gain +5% to critical strike chance when wielding weapon with blade (sword, dueling sword, axe, dagger, scythe) and not using a shield.",
 				"You've chosen the 'Blademaster' perk.  Your chance of a critical hit is increased by 5% as long as you're wielding a weapon with a blade (sword, dueling sword, axe, dagger, scythe) and not using a shield.");
@@ -2697,8 +2697,8 @@ public class PerkLib
 				"Add a part of your toughness to your weapon and shield damage.",
 				"You've chosen the 'Steel Impact' perk. Increasing damage of your weapon and shield.");
 		public static const SteelStorm:PerkType = mk("Steel Storm", "Steel Storm",
-				"Gain two (or four/six if PC normaly attack 5+/9+ times per turn) extra attack when dual wielding.",
-				"You've chosen the 'Steel Storm' perk. Gain two (or four/six if PC normaly attack 5+/9+ times per turn) extra attack when dual wielding.");
+				"Gain extra attacks equal to current used mutliattack option when dual wielding.",
+				"You've chosen the 'Steel Storm' perk. Gain extra attacks equal to current used mutliattack option when dual wielding.");
 		public static const Straddle:PerkType = mk("Straddle", "Straddle",
 				"You may now perform the straddle action in battle against stunned foes. Initiating a grappling stance. This grapple efficiency is based on libido and only function on single target humanoids.\n",
 				"You've chosen the 'Straddle' perk, allowing you to further tease your stunned foe through devastating grappling techniques.");
@@ -2884,8 +2884,8 @@ public class PerkLib
 				"Double gems gained from selling items and gems found. Gem based abilities are more powerful.");
 
 		public static const TwinRiposte:PerkType = mk("Twin Riposte", "Twin Riposte",
-				"Upon a successful parry when dual wielding deal two attack. (+20% melee physical attacks multiplier)",
-				"You've chosen the 'Twin Riposte' perk. Upon a successful parry when dual wielding deal two attack. (+20% melee physical attacks multiplier)");
+				"Upon a successful parry when dual wielding deal two attacks. (+20% melee physical attacks multiplier)",
+				"You've chosen the 'Twin Riposte' perk. Upon a successful parry when dual wielding deal two attacks. (+20% melee physical attacks multiplier)");
 		public static const Unhindered:PerkType = mk("Unhindered", "Unhindered",
 				"Increases chances of evading enemy attacks when you are naked. (Undergarments won't disable this perk.)",
 				"You've chosen the 'Unhindered' perk, increasing your chance to evade when you are naked.");

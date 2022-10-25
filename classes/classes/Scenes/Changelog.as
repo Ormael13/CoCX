@@ -357,7 +357,7 @@ public class Changelog extends BaseContent
 			outputText("-Added hints for Benoit progression (Svalkash)\n");
 			outputText("-Fix perm metamorph loading, Kiha Electra interaction (EragonX)\n");
 			outputText("-Elemental Damage type now use special font color (Liadri)\n");
-			outputText("-\n");
+			outputText("-Steel Storm perk effect changed to: Gain extra attacks equal to current used mutliattack option when dual wielding. Blade Barrier parry chance bonus increased to 25%.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

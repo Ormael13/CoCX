@@ -187,7 +187,7 @@ public class Camp extends NPCAwareContent{
 			SceneLib.trollVillage.yenza.YenzaBeratePart2();
 			return;
 		}
-		if (flags[kFLAGS.ZENJI_PROGRESS] >= 11 && time.days != ZenjiScenes.ZenjiLoverDaysTracker){
+		if (ZenjiScenes.isLover() && time.days != ZenjiScenes.ZenjiLoverDaysTracker){
 			ZenjiScenes.ZenjiLoverDays++;
 			ZenjiScenes.ZenjiLoverDaysTracker = time.days;
 		}
@@ -349,7 +349,7 @@ public class Camp extends NPCAwareContent{
 				return;
 			}
 		}
-		if (Holidays.isHalloween() && flags[kFLAGS.ZENJI_PROGRESS] == 11 && (model.time.hours >= 6 && model.time.hours < 9) && player.statusEffectv4(StatusEffects.ZenjiZList) == 0) {
+		if (Holidays.isHalloween() && ZenjiScenes.isLover() && (model.time.hours >= 6 && model.time.hours < 9) && player.statusEffectv4(StatusEffects.ZenjiZList) == 0) {
 			hideMenus();
 			SceneLib.zenjiScene.loverZenjiHalloweenEvent();
 			return;
@@ -641,13 +641,13 @@ public class Camp extends NPCAwareContent{
 			return;
 		}
 		//Zenji freaks out about jojo
-		if (flags[kFLAGS.ZENJI_PROGRESS] == 11 && !ZenjiScenes.ZenjiMarried && campCorruptJojo() && rand(4) == 0) {
+		if (ZenjiScenes.isLover() && !ZenjiScenes.ZenjiMarried && campCorruptJojo() && rand(4) == 0) {
 			finter.zenjiFreaksOverJojo();
 			hideMenus();
 			return;
 		}
 		//Zenji freaks out about corrupted celess
-		if (flags[kFLAGS.ZENJI_PROGRESS] == 11 && CelessScene.instance.isCorrupt && !CelessScene.instance.setDeadOrRemoved() && rand(4) == 0) {
+		if (ZenjiScenes.isLover() && CelessScene.instance.isCorrupt && !CelessScene.instance.setDeadOrRemoved() && rand(4) == 0) {
 			finter.zenjiFreaksOverCorruptCeless();
 			hideMenus();
 			return;
@@ -1191,7 +1191,7 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.NIEVE_STAGE] == 5) counter++;
 		if (flags[kFLAGS.ANT_WAIFU] > 0) counter++;
 		if (flags[kFLAGS.SAMIRAH_FOLLOWER] > 9) counter++;
-		if (flags[kFLAGS.ZENJI_PROGRESS] == 11) counter++;
+		if (ZenjiScenes.isLover()) counter++;
 		for each (var npc:XXCNPC in _campFollowers) {
 			if (npc.isCompanion(XXCNPC.LOVER)) {
 				counter++;
@@ -1222,7 +1222,7 @@ public class Camp extends NPCAwareContent{
 		//if (flags[kFLAGS.DINAH_LVL_UP] >= 1) counter++;
 		//if (flags[kFLAGS.GALIA_LVL_UP] >= 1) counter++;
 		//if (flags[kFLAGS.MICHIKO_FOLLOWER] >= 1) counter++;
-		if (flags[kFLAGS.ZENJI_PROGRESS] == 8 || flags[kFLAGS.ZENJI_PROGRESS] == 9 || flags[kFLAGS.ZENJI_PROGRESS] == 11) counter++;
+		if (flags[kFLAGS.ZENJI_PROGRESS] == 8 || flags[kFLAGS.ZENJI_PROGRESS] == 9 || ZenjiScenes.isLover()) counter++;
 		if (flags[kFLAGS.EXCELLIA_RECRUITED] >= 33) counter++;
 		if (flags[kFLAGS.MITZI_RECRUITED] >= 4) counter++;
 		if (player.hasStatusEffect(StatusEffects.CampMarble) && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) counter++;
@@ -1637,7 +1637,7 @@ public class Camp extends NPCAwareContent{
 				buttons.add("Tyrantia", SceneLib.tyrantia.TyrantiaAtCamp).disableIf(player.statusEffectv1(StatusEffects.CampSparingNpcsTimers5) > 0, "Training.");
 			}
 			//Zenji
-			if (flags[kFLAGS.ZENJI_PROGRESS] == 11 && TrollVillage.ZenjiVillageStage != 2) {
+			if (ZenjiScenes.isLover() && TrollVillage.ZenjiVillageStage != 2) {
 				if (model.time.hours >= 7 && model.time.hours <= 18) {
 					if (slavesCount() > 0 && rand(5) == 0) outputText("Zenji is keeping a close eye on some of your more corrupt camp members, ensuring that they don’t cause any harm.");
 					else if (player.statusEffectv2(StatusEffects.ZenjiModificationsList) >= 998700 && rand(5) == 0) outputText("Zenji is around your [camp], it’s impossible to miss him as he strokes his length as cascades of cum leak from his erection.");
@@ -3508,7 +3508,7 @@ public class Camp extends NPCAwareContent{
 			} else if (flags[kFLAGS.SLEEP_WITH] == "Arian" && arianScene.arianFollower()) {
 				arianScene.sleepWithArian();
 				return;
-			} else if (flags[kFLAGS.SLEEP_WITH] == "Zenji" && flags[kFLAGS.ZENJI_PROGRESS] == 11) {
+			} else if (flags[kFLAGS.SLEEP_WITH] == "Zenji" && ZenjiScenes.isLover()) {
 				spriteSelect(SpriteDb.s_zenji);
 				if (flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0) {
 					outputText("You approach Zenji, ready to call it a day and spend the rest of your night with him in your cabin.\n\n");

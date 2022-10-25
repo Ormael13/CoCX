@@ -437,7 +437,7 @@ private function communalBath():void {
 	}
 	
 	//{If PC has Zenji:
-	if (flags[kFLAGS.ZENJI_PROGRESS] == 8 || flags[kFLAGS.ZENJI_PROGRESS] == 9 || flags[kFLAGS.ZENJI_PROGRESS] == 11) outputText("\n\n\"<i>Milk bath?</i>\" Zenji asks, \"<i>Haha! What will dey tink of next?</i>\" He says looking at the bath, \"<i>¡Chévere! Good vibes, good times!</i>\" He says as he hops in.");
+	if (flags[kFLAGS.ZENJI_PROGRESS] == 8 || flags[kFLAGS.ZENJI_PROGRESS] == 9 || ZenjiScenes.isLover()) outputText("\n\n\"<i>Milk bath?</i>\" Zenji asks, \"<i>Haha! What will dey tink of next?</i>\" He says looking at the bath, \"<i>¡Chévere! Good vibes, good times!</i>\" He says as he hops in.");
 	
 	//[Combine]
 	outputText("\n\nSurrounded by friends and lovers, you relax in the pool, leaning your arms back over the rim and closing your eyes, sighing contentedly.  Your friends splash and play with each other, happy to enjoy a few blissful, normal moments away from the cares of the world, away from the demons, and the monsters, and the horror their world has become.  The waves displace beside you, milk parting as a pair of giant jugs move over to you; you look down to see " + flags[kFLAGS.MILK_NAME] + " curling up in your arm.  Her giant teats float atop the waters, boyantly swaying with a strange grace atop the sea of their own making.");
