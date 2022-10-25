@@ -238,7 +238,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if ((flags[kFLAGS.LUNA_FOLLOWER] %2 == 1) && flags[kFLAGS.LUNA_JEALOUSY] >= 100 && (CoC.instance.model.time.hours > 6 && CoC.instance.model.time.hours < 23)) SceneLib.lunaFollower.warrningAboutJelously();
 			}
 			//Zenji loneliness
-			if (flags[kFLAGS.ZENJI_PROGRESS] == 11) player.addStatusValue(StatusEffects.ZenjiModificationsList, 1, 1);
+			if (ZenjiScenes.isLover()) player.addStatusValue(StatusEffects.ZenjiModificationsList, 1, 1);
 			//Tripxi firearms restoration progress
 			if (player.statusEffectv3(StatusEffects.TelAdreTripxi) > 0) player.addStatusValue(StatusEffects.TelAdreTripxi, 3, -1);
 			//
@@ -936,7 +936,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					if (player.statusEffectv1(StatusEffects.ZenjiTrainingsCounters2) > 0) player.addStatusValue(StatusEffects.ZenjiTrainingsCounters2, 1, -player.statusEffectv1(StatusEffects.ZenjiTrainingsCounters2));
 					if (player.statusEffectv2(StatusEffects.ZenjiTrainingsCounters2) > 0) player.addStatusValue(StatusEffects.ZenjiTrainingsCounters2, 2, -player.statusEffectv2(StatusEffects.ZenjiTrainingsCounters2));
 				}
-				if (flags[kFLAGS.ZENJI_PROGRESS] == 11) {
+				if (ZenjiScenes.isLover()) {
 					if (player.statusEffectv2(StatusEffects.ZenjiPreparationsList) < 20) player.addStatusValue(StatusEffects.ZenjiPreparationsList, 2, 1);
 					if (player.statusEffectv1(StatusEffects.ZenjiModificationsList) > 0) player.addStatusValue(StatusEffects.ZenjiModificationsList, 1, -1);
 					if (player.statusEffectv3(StatusEffects.ZenjiZList) > 0) {
@@ -2105,7 +2105,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Marae corrupted or killed + Zenji
-			if (flags[kFLAGS.ZENJI_PROGRESS] == 11 && (flags[kFLAGS.MET_MARAE_CORRUPTED] >= 1 || flags[kFLAGS.CORRUPTED_MARAE_KILLED] > 0) && !ZenjiScenes.ZenjiMarae) {
+			if (ZenjiScenes.isLover() && (flags[kFLAGS.MET_MARAE_CORRUPTED] >= 1 || flags[kFLAGS.CORRUPTED_MARAE_KILLED] > 0) && !ZenjiScenes.ZenjiMarae) {
 				outputText("\nZenji approaches you, \"<i>[name]. I.. I felt something, not long ago. Someting terrible has happened, I feel it deep within me.</i>\"");
 				outputText("\n\nHe pulls you into his protective arms, \"<i>Stay close, [name], dis world just doesn’t feel right anymore.</i>\"");
 				ZenjiScenes.ZenjiMarae = true;
@@ -2431,7 +2431,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.ass.analWetness = 2;
 				needNext = true;
 			}
-			if (!Holidays.isHalloween() && flags[kFLAGS.ZENJI_PROGRESS] == 11 && player.statusEffectv4(StatusEffects.ZenjiZList) == 2 && rand(5) < 2) {
+			if (!Holidays.isHalloween() && ZenjiScenes.isLover() && player.statusEffectv4(StatusEffects.ZenjiZList) == 2 && rand(5) < 2) {
 				SceneLib.zenjiScene.loverZenjiHalloweenEventEnding();
 				needNext = true;
 			}

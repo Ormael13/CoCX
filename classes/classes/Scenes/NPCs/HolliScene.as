@@ -26,7 +26,7 @@ public function treeMenu(output:Boolean = true):void {
 
 public function flowerStage1Menu(output:Boolean = true):void {
 	if(output) clearOutput();
-	if (output && flags[kFLAGS.ZENJI_PROGRESS] == 11 && !ZenjiScenes.ZenjiHolli) {
+	if (output && ZenjiScenes.isLover() && !ZenjiScenes.ZenjiHolli) {
 		outputText("You find Zenji carefully inspecting the strange plant you saw growing in your camp.\n\n");
 		outputText("\"<i>Dis plant has some very bad energy coming from it, [name]... I better destroy it before it becomes a problem.</i>\"\n\n");
 		outputText("You see him reach down to uproot it, you consider if you want him to continue though.");
