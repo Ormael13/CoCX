@@ -11,21 +11,14 @@ import classes.internals.*;
 public class Goblin extends Monster
 	{
 		protected function goblinDrugAttack():void {
-			var temp2:Number = rand(2);
 			var multiplier:Number = 1; //Higher tier goblins have powerful potions.
-			if (this is GoblinAssassin) multiplier += 0.2;
 			if (this is GoblinShaman) multiplier += 0.4;
 			if (this is GoblinWarrior) multiplier += 0.5;
 			if (this is Priscilla) multiplier += 1;
 			multiplier += player.newGamePlusMod() * 0.5;
-			if(this is Tamani) temp2 = rand(5);
-			if(this is TamanisDaughters) temp2 = rand(5);
-			var color:String = "";
-			if(temp2 == 0) color = "red";
-			if(temp2 == 1) color = "green";
-			if(temp2 == 2) color = "blue";
-			if(temp2 == 3) color = "white";
-			if(temp2 == 4) color = "black";
+			var color:String;
+			if(this is Tamani || this is TamanisDaughters) color = randomChoice("red", "green", "blue", "white", "black");
+			else color = randomChoice("red", "green");
 			//Throw offensive potions at the player
 			if(color != "blue") {
 				if(this is TamanisDaughters) outputText("Tamani uncorks a glass bottle full of " + color + " fluid and swings her arm, flinging a wave of fluid at you.");
@@ -54,7 +47,7 @@ public class Goblin extends Monster
 				return;
 			}
 			//Dodge chance!
-			if((player.hasPerk(PerkLib.Evade) && rand(10) <= 3) || (rand(100) < player.spe/5)) {
+			if(player.getEvasionRoll()) {
 				outputText("\nYou narrowly avoid the gush of alchemic fluids!\n");
 			}
 			else {

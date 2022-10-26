@@ -10,13 +10,8 @@ public class GoblinAssassin extends Monster
 	{
 		
 		protected function goblinDrugAttack():void {
-			var temp2:Number = rand(5);
-			var color:String = "";
-			if(temp2 == 0) color = "red";
-			if(temp2 == 1) color = "green";
-			if(temp2 == 2) color = "blue";
-			if(temp2 == 3) color = "white";
-			if(temp2 == 4) color = "black";
+			var color:String = randomChoice("red", "green", "blue", "white", "black");
+			var multiplier:Number = 1.2 + 0.5 * newGamePlusMod();
 			//Throw offensive potions at the player
 			if (color != "blue") {
 				outputText(capitalA + short + " uncorks a glass bottle full of " + color + " fluid and swings her arm, flinging a wave of fluid at you.");
@@ -26,34 +21,35 @@ public class GoblinAssassin extends Monster
 				outputText(capitalA + short + " pulls out a blue vial and uncaps it, swiftly downing its contents.");
 				if(HPRatio() < 1) {
 					outputText("  She looks to have recovered from some of her wounds!\n");
-					addHP(maxHP() / 4);
+					addHP(maxHP() / 4 * multiplier);
 				}
 				else outputText("  There doesn't seem to be any effect.\n");
 			}
 			//Dodge chance!
-			if((player.hasPerk(PerkLib.Evade) && rand(10) <= 3) || (rand(100) < player.spe/5)) {
+			if(player.getEvasionRoll()) {
 				outputText("\nYou narrowly avoid the gush of alchemic fluids!\n");
-			}
-			//Get hit!
-			//Temporary heat
-			if(color == "red") {
-				outputText("\nThe red fluids hit you and instantly soak into your skin, disappearing.  Your skin flushes and you feel warm.  Oh no...\n");
-				if(!player.hasStatusEffect(StatusEffects.TemporaryHeat)) player.createStatusEffect(StatusEffects.TemporaryHeat,0,0,0,0);
-			}
-			//Green poison
-			if(color == "green") {
-				outputText("\nThe greenish fluids splash over you, making you feel slimy and gross.  Nausea plagues you immediately - you have been poisoned!\n");
-				if(!player.hasStatusEffect(StatusEffects.Poison)) player.createStatusEffect(StatusEffects.Poison,0,0,0,0);
-			}
-			//sticky flee prevention
-			if(color == "white") {
-				outputText("\nYou try to avoid it, but it splatters the ground around you with very sticky white fluid, making it difficult to run.  You'll have a hard time escaping now!\n");
-				if(!player.hasStatusEffect(StatusEffects.NoFlee)) player.createStatusEffect(StatusEffects.NoFlee,0,0,0,0);
-			}
-			//Increase fatigue
-			if(color == "black") {
-				outputText("\nThe black fluid splashes all over you and wicks into your skin near-instantly.  It makes you feel tired and drowsy.\n");
-				EngineCore.fatigue(10 + rand(25));
+			} else {
+				//Get hit!
+				//Temporary heat
+				if (color == "red") {
+					outputText("\nThe red fluids hit you and instantly soak into your skin, disappearing.  Your skin flushes and you feel warm.  Oh no...\n");
+					if (!player.hasStatusEffect(StatusEffects.TemporaryHeat)) player.createStatusEffect(StatusEffects.TemporaryHeat, 0, multiplier, 0, 0);
+				}
+				//Green poison
+				if (color == "green") {
+					outputText("\nThe greenish fluids splash over you, making you feel slimy and gross.  Nausea plagues you immediately - you have been poisoned!\n");
+					if (!player.hasStatusEffect(StatusEffects.Poison)) player.createStatusEffect(StatusEffects.Poison, 0, multiplier, 0, 0);
+				}
+				//sticky flee prevention
+				if (color == "white") {
+					outputText("\nYou try to avoid it, but it splatters the ground around you with very sticky white fluid, making it difficult to run.  You'll have a hard time escaping now!\n");
+					if (!player.hasStatusEffect(StatusEffects.NoFlee)) player.createStatusEffect(StatusEffects.NoFlee, 0, 0, 0, 0);
+				}
+				//Increase fatigue
+				if (color == "black") {
+					outputText("\nThe black fluid splashes all over you and wicks into your skin near-instantly.  It makes you feel tired and drowsy.\n");
+					EngineCore.fatigue(10 + rand(25) * multiplier);
+				}
 			}
 		}
 		//Lust Needle

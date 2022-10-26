@@ -358,7 +358,7 @@ public class Changelog extends BaseContent
 			outputText("-Fix perm metamorph loading, Kiha Electra interaction (EragonX)\n");
 			outputText("-Elemental Damage type now use special font color (Liadri)\n");
 			outputText("-Steel Storm perk effect changed to: Gain extra attacks equal to current used mutliattack option when dual wielding. Blade Barrier parry chance bonus increased to 25%.\n");
-			outputText("-\n");
+			outputText("-Anger perk effect of 'adding 1/2 more atk with large/massive weapons when PC dropped below 60/20% of max HP' was replaced by 'Can trigger grade 2 and 3 of berserker state by loosing one time 50% of max OverHP to grants 1 more attack per increased grade with large/massive weapons'.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
