@@ -14,8 +14,7 @@ public class GoblinWarriors extends Goblin
 	{
 		public function goblinsDrugAttack():void {
 			var temp2:Number = rand(5);
-			var multiplier:Number = 2;
-			multiplier += player.newGamePlusMod() * 0.5;
+			var multiplier:Number = 6 + player.newGamePlusMod() * 0.5;
 			var color:String = "";
 			if(temp2 == 0) color = "red";
 			if(temp2 == 1) color = "green";

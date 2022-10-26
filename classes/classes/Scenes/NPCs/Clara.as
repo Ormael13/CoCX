@@ -37,7 +37,7 @@ public class Clara extends Monster
 				//Temporary heat
 				if(color == "red") {
 					outputText("\nThe red fluids hit you and instantly soak into your skin, disappearing.  Your skin flushes and you feel warm.  Oh no...\n");
-					if(!player.hasStatusEffect(StatusEffects.TemporaryHeat)) player.createStatusEffect(StatusEffects.TemporaryHeat,0,0,0,0);
+					if(!player.hasStatusEffect(StatusEffects.TemporaryHeat)) player.createStatusEffect(StatusEffects.TemporaryHeat,0,5,0,0);
 				}
 				//Increase fatigue
 				if(color == "black") {

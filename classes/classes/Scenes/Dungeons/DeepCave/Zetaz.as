@@ -66,7 +66,7 @@ public class Zetaz extends Monster
 					else {
 						outputText("You try to avoid it, but the fragile glass shatters against you, coating you in sticky red liquid.  It seeps into your [skin.type] and leaves a pleasant, residual tingle in its wake.  Oh no...");
 						//[Applies: "Temporary Heat" status]
-						if(!player.hasStatusEffect(StatusEffects.TemporaryHeat)) player.createStatusEffect(StatusEffects.TemporaryHeat,0,0,0,0);
+						if(!player.hasStatusEffect(StatusEffects.TemporaryHeat)) player.createStatusEffect(StatusEffects.TemporaryHeat,0,10,0,0);
 					}
 				}
 				else if(attackChoice == 1) {
