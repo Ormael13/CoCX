@@ -976,6 +976,16 @@ public class Combat extends BaseContent {
 				bd.disable("You're already pretty goddamn mad!");
 			}
 		}
+		if (player.hasPerk(PerkLib.Anger) && player.hasStatusEffect(StatusEffects.Berzerking)) {
+			bd = buttons.add("Berserk G2", mspecials.berzerkG2);
+			if (player.statusEffectv2(StatusEffects.Berzerking) >= 1) {
+				bd.disable("You're already reached 2nd grade of Berserk!");
+			}
+			bd = buttons.add("Berserk G3", mspecials.berzerkG3);
+			if (player.statusEffectv2(StatusEffects.Berzerking) >= 2) {
+				bd.disable("You're already reached 3rd grade of Berserk!");
+			}
+		}
 		if (player.hasPerk(PerkLib.Lustzerker) || player.jewelryName == "Flame Lizard ring" || player.jewelryName2 == "Flame Lizard ring" || player.jewelryName3 == "Flame Lizard ring" || player.jewelryName4 == "Flame Lizard ring") {
 			bd = buttons.add("Lustserk", mspecials.lustzerk);
 			if (player.hasPerk(PerkLib.ColderLust)) {
@@ -988,6 +998,16 @@ public class Combat extends BaseContent {
 			bd.requireWrath(50);
 			if (player.hasStatusEffect(StatusEffects.Lustzerking)) {
 				bd.disable("You're already raging, anger and lust combined!");
+			}
+		}
+		if (player.hasPerk(PerkLib.Anger) && player.hasStatusEffect(StatusEffects.Lustzerking)) {
+			bd = buttons.add("Lustserk G2", mspecials.lustzerkG2);
+			if (player.statusEffectv2(StatusEffects.Lustzerking) >= 1) {
+				bd.disable("You're already reached 2nd grade of Lustserk!");
+			}
+			bd = buttons.add("Lustserk G3", mspecials.lustzerkG3);
+			if (player.statusEffectv2(StatusEffects.Lustzerking) >= 2) {
+				bd.disable("You're already reached 2nd grade of Lustserk!");
 			}
 		}
 		if (player.hasPerk(PerkLib.JobBeastWarrior) || player.necklaceName == "Crinos Shape necklace") {
@@ -1409,8 +1429,8 @@ public class Combat extends BaseContent {
             if (player.weaponSpecials("Large") || player.weaponSpecials("Dual Large") || player.weaponSpecials("Massive") || player.weaponSpecials("Dual Massive")) {
                 if( player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking) ){
                     if (player.hasPerk(PerkLib.FuelForTheFire)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 1;
-                    if (player.hasPerk(PerkLib.Anger) && player.hp100 < 60) {   // below 60% and 20% gain 1 or 2 attacks
-                        if (player.hp100 < 20) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 2;
+                    if (player.hasPerk(PerkLib.Anger) && (player.statusEffectv2(StatusEffects.Berzerking) >= 1 || player.statusEffectv2(StatusEffects.Lustzerking) >= 1)) {
+                        if (player.statusEffectv2(StatusEffects.Berzerking) >= 2 || player.statusEffectv2(StatusEffects.Lustzerking) >= 2) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 2;
                         else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 1;
                     }
                 }
