@@ -28,7 +28,7 @@ public class Clara extends Monster
 			//Throw offensive potions at the player
 			outputText("Clara suddenly snatches something from a pouch at her belt. \"<i>Try this, little cutie!</i>\" She snarls, and throws a vial of potion at you.");
 			//Dodge chance!
-			if((player.hasPerk(PerkLib.Evade) && rand(10) <= 3) || (rand(100) < player.spe/5)) {
+			if(player.getEvasionRoll()) {
 				outputText("\nYou narrowly avoid the gush of alchemic fluids!\n");
 			}
 			else

@@ -35,7 +35,7 @@ public class GoblinWarriors extends Goblin
 				return;
 			}
 			//Dodge chance!
-			if((player.hasPerk(PerkLib.Evade) && rand(10) <= 3) || (rand(100) < player.spe/5)) {
+			if(player.getEvasionRoll()) {
 				outputText("\nYou narrowly avoid the gush of alchemic fluids!\n");
 			}
 			else {

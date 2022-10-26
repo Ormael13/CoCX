@@ -31,29 +31,30 @@ public class GoblinAssassin extends Monster
 				else outputText("  There doesn't seem to be any effect.\n");
 			}
 			//Dodge chance!
-			if((player.hasPerk(PerkLib.Evade) && rand(10) <= 3) || (rand(100) < player.spe/5)) {
+			if(player.getEvasionRoll()) {
 				outputText("\nYou narrowly avoid the gush of alchemic fluids!\n");
-			}
-			//Get hit!
-			//Temporary heat
-			if(color == "red") {
-				outputText("\nThe red fluids hit you and instantly soak into your skin, disappearing.  Your skin flushes and you feel warm.  Oh no...\n");
-				if(!player.hasStatusEffect(StatusEffects.TemporaryHeat)) player.createStatusEffect(StatusEffects.TemporaryHeat,0,0,0,0);
-			}
-			//Green poison
-			if(color == "green") {
-				outputText("\nThe greenish fluids splash over you, making you feel slimy and gross.  Nausea plagues you immediately - you have been poisoned!\n");
-				if(!player.hasStatusEffect(StatusEffects.Poison)) player.createStatusEffect(StatusEffects.Poison,0,0,0,0);
-			}
-			//sticky flee prevention
-			if(color == "white") {
-				outputText("\nYou try to avoid it, but it splatters the ground around you with very sticky white fluid, making it difficult to run.  You'll have a hard time escaping now!\n");
-				if(!player.hasStatusEffect(StatusEffects.NoFlee)) player.createStatusEffect(StatusEffects.NoFlee,0,0,0,0);
-			}
-			//Increase fatigue
-			if(color == "black") {
-				outputText("\nThe black fluid splashes all over you and wicks into your skin near-instantly.  It makes you feel tired and drowsy.\n");
-				EngineCore.fatigue(10 + rand(25));
+			} else {
+				//Get hit!
+				//Temporary heat
+				if (color == "red") {
+					outputText("\nThe red fluids hit you and instantly soak into your skin, disappearing.  Your skin flushes and you feel warm.  Oh no...\n");
+					if (!player.hasStatusEffect(StatusEffects.TemporaryHeat)) player.createStatusEffect(StatusEffects.TemporaryHeat, 0, 0, 0, 0);
+				}
+				//Green poison
+				if (color == "green") {
+					outputText("\nThe greenish fluids splash over you, making you feel slimy and gross.  Nausea plagues you immediately - you have been poisoned!\n");
+					if (!player.hasStatusEffect(StatusEffects.Poison)) player.createStatusEffect(StatusEffects.Poison, 0, 0, 0, 0);
+				}
+				//sticky flee prevention
+				if (color == "white") {
+					outputText("\nYou try to avoid it, but it splatters the ground around you with very sticky white fluid, making it difficult to run.  You'll have a hard time escaping now!\n");
+					if (!player.hasStatusEffect(StatusEffects.NoFlee)) player.createStatusEffect(StatusEffects.NoFlee, 0, 0, 0, 0);
+				}
+				//Increase fatigue
+				if (color == "black") {
+					outputText("\nThe black fluid splashes all over you and wicks into your skin near-instantly.  It makes you feel tired and drowsy.\n");
+					EngineCore.fatigue(10 + rand(25));
+				}
 			}
 		}
 		//Lust Needle
