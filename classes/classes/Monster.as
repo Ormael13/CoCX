@@ -2591,7 +2591,9 @@ import flash.utils.getQualifiedClassName;
 						outputText("Due to natural regeneration " + short + " recover");
 						if (plural) outputText("s");
 						else outputText("ed");
-						outputText(" some HP! <b>([font-heal]+" + temp2 + "</font>)</b>.\n\n");
+						outputText(" some HP! ");
+						SceneLib.combat.CommasForDigits(-temp2);
+						outputText(".\n\n")
 					}
 					addHP(temp2);
 				}
