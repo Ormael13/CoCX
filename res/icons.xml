@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!DOCTYPE icons [
-        <!ELEMENT icons (file)*>
+        <!ELEMENT icons (file|aliases)*>
         <!ELEMENT file (row)*>
         <!ATTLIST file
                 name CDATA #REQUIRED
@@ -9,6 +9,11 @@
                 cellheight CDATA #REQUIRED>
         <!ELEMENT row (icon)*>
         <!ELEMENT icon (#PCDATA)>
+        <!ELEMENT aliases (alias)*>
+        <!ELEMENT alias EMPTY>
+        <!ATTLIST alias
+                icon CDATA #REQUIRED
+                alias CDATA #REQUIRED>
         ]>
 <icons>
     <!--
@@ -29,4 +34,12 @@
      <file name="icons/abilities.png" prefix="A_" cellwidth="36" cellheight="36">
      </file>
      -->
+
+    <!-- Aliases - images sharing IDs -->
+    <aliases>
+        <!--
+            Existing icon "I_IncubiD" is also available under id "I_HairDye"
+            <alias icon="I_IncubiD" alias="I_HairDye"/>
+        -->
+    </aliases>
 </icons>

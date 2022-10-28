@@ -13,6 +13,8 @@ public class IconLib {
 	
 	// String -> Bitmap
 	private const icons:Object = {};
+	// String -> String
+	private const aliases:Object = {};
 	
 	private function init(xml:XML):void {
 		for each(var item:XML in xml.file) {
@@ -23,6 +25,9 @@ public class IconLib {
 					loadFile(xfile, result);
 				})
 			})(item);
+		}
+		for each(item in xml.aliases.alias) {
+			aliases[String(item.@alias)] = String(item.@icon);
 		}
 	}
 	private function loadFile(xfile:XML, bd:BitmapData):void {
@@ -53,6 +58,7 @@ public class IconLib {
 	 * @return null if no icon with such id
 	 */
 	public function getBitmap(id:String):Bitmap {
+		while (id in aliases && id != aliases[id]) id = aliases[id];
 		return icons[id] || null;
 	}
 	public static function getBitmap(id:String):Bitmap {
