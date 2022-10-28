@@ -64,5 +64,29 @@ public class IconLib {
 	public static function getBitmap(id:String):Bitmap {
 		return INSTANCE.getBitmap(id);
 	}
+	public static function hasIcon(id:String):Boolean {
+		return !!getBitmap(id);
+	}
+	/**
+	 * Pick and return first icon id that exists
+	 **/
+	public static function pickIcon(...ids:/*String*/Array):String {
+		for each(var id:String in ids) {
+			if (hasIcon(id)) return id;
+		}
+		return null;
+	}
+	/**
+	 * Pick and return first icon that exists
+	 * @example
+	 * IconLib.pickBitmap(item.id, "I_GenericWeapon", "I_GenericItem")
+	 **/
+	public static function pickBitmap(...ids:/*String*/Array):Bitmap {
+		for each(var id:String in ids) {
+			var bmp:Bitmap = getBitmap(id);
+			if (bmp) return bmp;
+		}
+		return null;
+	}
 }
 }
