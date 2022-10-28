@@ -356,6 +356,7 @@ public class CoCButton extends Block {
 		alpha         = 1;
 		enabled       = false;
 		callback      = null;
+		iconId        = null;
 		return this;
 	}
 	/**
