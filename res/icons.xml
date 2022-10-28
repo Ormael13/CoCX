@@ -22,11 +22,14 @@
          (optional) prefix= prepended to icon ids>
      -->
 
-    <!-- Item icons. Icon ID is:
+    <!--
+        Item icons.
+
+        Icon ID is:
         * Specific items: "I_" + itemId (ex. "I_IncubiD")
-        * Generic weapon of type: "I_GenericWeapon_"+type (ex. "I_GenericWeapon_Sword")
-        * Generic armor of type: "I_GenericArmor_"+perk (ex. "I_GenericArmor_Light")
-        * Generic by category: "I_GenericItem_"+category (ex. "I_GenericItem_weapon")
+        * Generic weapon of type: "I_GenericWeapon_"+type (ex. "I_GenericWeapon_Sword", see ItemConstants.WT_XXXX)
+        * Generic armor of type: "I_GenericArmor_"+perk (ex. "I_GenericArmor_Light", see ItemConstants.AP_XXXX)
+        * Generic by category: "I_GenericItem_"+category (ex. "I_GenericItem_weapon", see ItemConstants.CATEGORY_XXXX)
         * Placeholder: "I_GenericItem"
     -->
     <file name="icons/items.png" prefix="I_" cellwidth="36" cellheight="36">
