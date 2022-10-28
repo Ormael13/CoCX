@@ -117,6 +117,10 @@ public class ItemType extends ItemConstants
 		public var stackSize:int = 5;
 		public var perlStackSize:int = 15;
 
+		public function get iconId():String {
+			if (this.isDynamicItem) return "I_"+templateId();
+			else return "I_"+id;
+		}
 		public function get category():String {
 			CoC_Settings.errorAMC("ItemType","category",_id)
 			return CATEGORY_OTHER;

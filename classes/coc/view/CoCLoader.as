@@ -50,6 +50,14 @@ public class CoCLoader {
 //	public static var BUNDLE_RES_CHAR1_PNG:Class;
 //	ldbmp("res/char1.png",BUNDLE_RES_CHAR1_PNG);
 
+	[Embed(source="../../../res/icons/items.png", mimeType="image/png")]
+	public static var BUNDLE_RES_ICONS_ITEMS_PNG:Class;
+	bundleImage("res/icons/items.png", BUNDLE_RES_ICONS_ITEMS_PNG);
+
+	[Embed(source="../../../res/icons.xml", mimeType="application/octet-stream")]
+	public static var BUNDLE_RES_ICONS_XML:Class;
+	bundleText("res/icons.xml", BUNDLE_RES_ICONS_XML);
+
 	[Embed(source="../../../res/charview/body.png", mimeType="image/png")]
 	public static var BUNDLE_RES_CHARVIEW_BODY_PNG:Class;
 	bundleImage("res/charview/body.png", BUNDLE_RES_CHARVIEW_BODY_PNG);
