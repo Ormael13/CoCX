@@ -116,6 +116,7 @@ public final class WeaponLib extends ItemConstants
 		public const MASTGLO:Weapon = new Weapon("MastGlo", "MasterGloves", "Master Gloves", "a Master Gloves", "punch", 0, 400, "These gloves belonged to Chi Chi. They seem to naturally strengthen the soulforce techniques of the user.", "",WT_GAUNTLET).withBuffs({
 			'psoulskillpower': +0.4
 		}) as Weapon;
+		public const MCLAWS:MoonlightClaws = new MoonlightClaws();
 		public const MGSWORD:MoonlightGreatsword = new MoonlightGreatsword();
 		public const MOONLIT:MoonlitSnow = new MoonlitSnow();
 		public const N_STAFF:NocturnusStaff = new NocturnusStaff();

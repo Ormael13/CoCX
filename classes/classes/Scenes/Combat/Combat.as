@@ -3312,7 +3312,7 @@ public class Combat extends BaseContent {
 		var critChance:int = 5;
 		var critDmg:Number = 1.75;
 		critChance += combatPhysicalCritical();
-		if (player.weapon is MoonlightGreatsword || player.weapon is Tidarion) {
+		if (player.weapon is MoonlightGreatsword || player.weapon is MoonlightClaws || player.weapon is Tidarion) {
             if (player.weapon is Tidarion) meleeDamageNoLag = 0; //recalc damage
             if (meleeDamageNoLag != 0) damage += meleeDamageNoLag;
             else {
@@ -3362,6 +3362,7 @@ public class Combat extends BaseContent {
         checkAchievementDamage(damage);
 		var elementalVariant:Number = ElementalRace.getElement(player);
 		if (player.weapon is MoonlightGreatsword) elementalVariant = 5;
+		if (player.weapon is MoonlightClaws) elementalVariant = 5;
         if (player.weapon is Tidarion) elementalVariant = 6;
         switch (elementalVariant) {
             case ElementalRace.ELEMENT_SYLPH:
@@ -3399,7 +3400,7 @@ public class Combat extends BaseContent {
 				doWindDamage(damage, true, true);
                 break;
         }
-		if (player.weapon is MoonlightGreatsword || player.weapon is Tidarion) {
+		if (player.weapon is MoonlightGreatsword || player.weapon is MoonlightClaws || player.weapon is Tidarion) {
 			var swordEXPgains:Number = 1;
 			if (player.hasPerk(PerkLib.MeleeWeaponsMastery)) swordEXPgains += 2;
 			if (monster.short == "training dummy" && flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 1) {
@@ -5013,7 +5014,7 @@ public class Combat extends BaseContent {
 				damage += scalingBonusIntelligence() * 0.2;
 				if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurry1to4)) damage*=1+(0.2*player.perkv1(PerkLib.ELFElvenSpearDancingFlurry1to4));
 			}
-			else if (player.weapon is MoonlightGreatsword || player.weapon is Tidarion) {
+			else if (player.weapon is MoonlightGreatsword || player.weapon is MoonlightClaws || player.weapon is Tidarion) {
 				damage += player.inte;
 				damage += scalingBonusIntelligence() * 0.2;
 			}
@@ -5448,6 +5449,8 @@ public class Combat extends BaseContent {
                         doDarknessDamage(damage, true, true);
                     }
                     else if (player.weapon == weapons.MGSWORD)
+                        doMagicDamage(damage, true, true);
+                    else if (player.weapon == weapons.MCLAWS)
                         doMagicDamage(damage, true, true);
                     else if (player.weapon == weapons.PHALLUS) {
                         if (player.statusEffectv1(StatusEffects.ThePhalluspear1) == 1) monster.teased(Math.round(monster.lustVuln * damage * 0.05));
