@@ -49,10 +49,10 @@ public class CoCButton extends Block {
 	private var _labelField:TextField,
 				_iconGraphic:BitmapDataSprite,
 				_backgroundGraphic:BitmapDataSprite,
-				_enabled:Boolean = true,
-				_callback:Function = null,
+				_enabled:Boolean      = true,
+				_callback:Function    = null,
 				_preCallback:Function = null,
-				_icon:String = null;
+				_iconId:String        = null;
 
 	public var toolTipHeader:String,
 			   toolTipText:String;
@@ -138,12 +138,12 @@ public class CoCButton extends Block {
 		this._backgroundGraphic.alpha = value ? 1 : 0.4;
 	}
 	
-	public function get icon():String {
-		return _icon;
+	public function get iconId():String {
+		return _iconId;
 	}
 	
-	public function set icon(iconId:String):void {
-		_icon = iconId;
+	public function set iconId(iconId:String):void {
+		_iconId           = iconId;
 		var bitmap:Bitmap = iconId ? IconLib.getBitmap(iconId) : null;
 		if (bitmap) {
 			_iconGraphic.bitmap = IconLib.getBitmap(iconId);
@@ -156,6 +156,10 @@ public class CoCButton extends Block {
 			this._labelField.width = MainView.BTN_W;
 		}
 		labelText = labelText; // forse resize
+	}
+	public function icon(iconId:String):CoCButton {
+		this.iconId = iconId;
+		return this;
 	}
 	public function get labelText():String {
 		return this._labelField.text;
@@ -250,7 +254,7 @@ public class CoCButton extends Block {
 		return this;
 	}
 	public function itemIcon(item:ItemType):CoCButton {
-		icon = item.iconId;
+		iconId = item.iconId;
 		return this;
 	}
 	public function showForItem(item:ItemType, callback:Function):CoCButton {

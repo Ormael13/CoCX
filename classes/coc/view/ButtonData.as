@@ -92,8 +92,10 @@ public class ButtonData {
 		if (!visible) {
 			btn.hide();
 		} else {
-			btn.show(text, callback, toolTipText, toolTipHeader).color(labelColor).disableIf(!enabled);
-			btn.icon = iconId;
+			btn.show(text, callback, toolTipText, toolTipHeader)
+					.color(labelColor)
+					.disableIf(!enabled)
+					.icon(iconId);
 		}
 	}
 	/**
