@@ -8,6 +8,8 @@ import classes.GlobalFlags.kFLAGS;
 import classes.PerkLib;
 import classes.Scenes.SceneLib;
 
+import coc.view.IconLib;
+
 public class Weapon extends Equipable
 	{
 		private var _verb:String;
@@ -27,6 +29,11 @@ public class Weapon extends Equipable
 			this._perk = perk;
 			this._perks = perk ? perk.split(", ") : null;
 			this._type = type;
+		}
+		
+		
+		override public function get iconId():String {
+			return IconLib.pickIcon(ownIconId, "I_GenericWeapon_"+type, super.iconId);
 		}
 		
 		private static const SLOTS:Array = [SLOT_WEAPON_MELEE];

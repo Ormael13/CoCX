@@ -246,6 +246,9 @@ public class BaseCombatContent extends BaseContent {
 	protected function spellBlackTier2Cooldown():Number {
 		return combat.magic.spellBlackTier2CooldownImpl();
 	}
+	protected function spellBlackTier3Cooldown():Number {
+		return combat.magic.spellBlackTier3CooldownImpl();
+	}
 	protected function spellGreyCooldown():Number {
 		return combat.magic.spellGreyCooldownImpl();
 	}
@@ -257,6 +260,9 @@ public class BaseCombatContent extends BaseContent {
 	}
 	protected function spellWhiteTier2Cooldown():Number {
 		return combat.magic.spellWhiteTier2CooldownImpl();
+	}
+	protected function spellWhiteTier3Cooldown():Number {
+		return combat.magic.spellWhiteTier3CooldownImpl();
 	}
 	protected function healMod():Number {
 		return combat.magic.healModImpl();

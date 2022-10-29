@@ -366,12 +366,14 @@ public class CombatMagic extends BaseCombatContent {
 
 	internal function spellGreyCooldownImpl():Number {
 		var mod:Number = 3;
+		if (player.hasPerk(PerkLib.NaturalSpellcasting)) mod -= 1;
 		if (mod < 0) mod = 0;
 		return mod;
 	}
 
 	internal function spellGreyTier2CooldownImpl():Number {
 		var mod:Number = 6;
+		if (player.hasPerk(PerkLib.NaturalSpellcasting)) mod -= 1;
 		if (mod < 0) mod = 0;
 		return mod;
 	}
@@ -451,6 +453,7 @@ public class CombatMagic extends BaseCombatContent {
 	internal function spellWhiteCooldownImpl():Number {
 		var mod:Number = 3;
 		if (player.hasPerk(PerkLib.AvatorOfPurity)) mod -= 1;
+		if (player.hasPerk(PerkLib.NaturalSpellcasting)) mod -= 1;
 		if (mod < 0) mod = 0;
 		return mod;
 	}
@@ -458,6 +461,15 @@ public class CombatMagic extends BaseCombatContent {
 	internal function spellWhiteTier2CooldownImpl():Number {
 		var mod:Number = 6;
 		if (player.hasPerk(PerkLib.AvatorOfPurity)) mod -= 1;
+		if (player.hasPerk(PerkLib.NaturalSpellcasting)) mod -= 1;
+		if (mod < 0) mod = 0;
+		return mod;
+	}
+
+	internal function spellWhiteTier3CooldownImpl():Number {
+		var mod:Number = 12;
+		if (player.hasPerk(PerkLib.AvatorOfPurity)) mod -= 1;
+		if (player.hasPerk(PerkLib.NaturalSpellcasting)) mod -= 1;
 		if (mod < 0) mod = 0;
 		return mod;
 	}
@@ -500,6 +512,7 @@ public class CombatMagic extends BaseCombatContent {
 	internal function spellBlackCooldownImpl():Number {
 		var mod:Number = 3;
 		if (player.hasPerk(PerkLib.AvatorOfCorruption)) mod -= 1;
+		if (player.hasPerk(PerkLib.NaturalSpellcasting)) mod -= 1;
 		if (mod < 0) mod = 0;
 		return mod;
 	}
@@ -507,6 +520,15 @@ public class CombatMagic extends BaseCombatContent {
 	internal function spellBlackTier2CooldownImpl():Number {
 		var mod:Number = 6;
 		if (player.hasPerk(PerkLib.AvatorOfCorruption)) mod -= 1;
+		if (player.hasPerk(PerkLib.NaturalSpellcasting)) mod -= 1;
+		if (mod < 0) mod = 0;
+		return mod;
+	}
+
+	internal function spellBlackTier3CooldownImpl():Number {
+		var mod:Number = 12;
+		if (player.hasPerk(PerkLib.AvatorOfCorruption)) mod -= 1;
+		if (player.hasPerk(PerkLib.NaturalSpellcasting)) mod -= 1;
 		if (mod < 0) mod = 0;
 		return mod;
 	}

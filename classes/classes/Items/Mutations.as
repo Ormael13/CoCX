@@ -9298,6 +9298,12 @@ public final class Mutations extends MutationsHelper {
             player.createPerk(PerkLib.ElvenSense, 0, 0, 0, 0);
             changes++;
         }
+        if (changes < changeLimit && !player.hasPerk(PerkLib.NaturalSpellcasting) && player.ears.type == Ears.ELVEN && player.eyes.type == Eyes.ELF) {
+            outputText("[pg]As your body finishes changing you feel something fundamental shift in your essence. Magic… You somehow feel magic come to you more easily. Casting spells should be easier to you now that your voice sings the incantations and your hand weaves the signs with ideal precisions.  <b>You gained the ability Natural Spellcasting.</b>[pg]");
+            outputText("<b>(Gained Perk: Natural Spellcasting</b>)");
+            player.createPerk(PerkLib.NaturalSpellcasting, 0, 0, 0, 0);
+            changes++;
+        }
         if (player.tongue.type == Tongue.HUMAN && player.tongue.type != Tongue.ELF && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.TongueElf.applyEffect();

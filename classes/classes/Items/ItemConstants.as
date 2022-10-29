@@ -243,6 +243,7 @@ public class ItemConstants extends Utils {
 	public static const WP_BLEED100:String   = "Bleed100";
 	public static const WP_LGWRATH:String    = "LGWrath";
 	public static const WP_MGWRATH:String    = "MGWrath";
+	public static const WP_MAGICAL:String	 = "MAGICDMG";
 	
 	public static const WEAPON_PERK_NAMES:Object = createMapFromPairs([
 		[WP_AP10, "10% Armor Penetration"],

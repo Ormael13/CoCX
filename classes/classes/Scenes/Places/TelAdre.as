@@ -1213,6 +1213,7 @@ public function kaibaShopMainMenu2():void {
 			addButton(4, "T.M.Outfit", buyItem, armors.TRMOUTF).hint("Traveling Merchant Outfit - Increase all gems gained by 100% and increase the potency of gem based ability by 150%, reduce spellcasting cost by 60%.");
 			addButton(5, "W.I.Cloak", buyItem, armors.WALIC).hint("Walpurgis Izalia Cloak - Increase fire and darkness damage by 100%, weaken all other elemental damage by 99%, increase fire resistance by 25%, reduce spellcasting cost by 60%.");
 			addButton(6, "S.S.Clothing", buyItem, armors.SCANSC).hint("Scandalous Succubus Clothing - Slutty seduction 15, Count as naked, +25% to Lust strike tease damage, Double tease experience gained, Raise corruption over time, Incompatible with bra or panty, double the effect of Masochist and Sadist.");
+			addButton(7, "MoonClaws", buyItem, weapons.MCLAWS).hint("Moonlight Claws - dealing magical dmg instead of physical, using charge weapon will give 2x larger bonus and can use range attack in case there is no range weapon equipped.");
 		}
 		//addButton(0, "Necklace", buyItem, necklaces.CSNECK);
 		addButton(12, "-1-", kaibaShopMainMenuPage1);
@@ -1274,57 +1275,29 @@ public function tripxiShopMainMenu():void {
 	clearOutput();
 	if (player.statusEffectv2(StatusEffects.TelAdreTripxi) > 0) {
 		outputText("You enter the shop and deliver the gun parts to Tripxi who overjoyed begins to rebuild the gun immediately drawing schematics in the process.\n\n");
-		outputText("\"<i>Great job with this we are one step closer to restoring what was lost in the demon war all thanks to you! Come back tomorrow and I will have a brand new gun ready for you.</i>\"\n\n");
+		outputText("\"<i>Great job with this we are one step closer to restoring what was lost in the demon war all thanks to you! Come back tomorrow and I will have a brand-new gun ready for you.</i>\"\n\n");
 		if (model.time.hours >= 15) player.addStatusValue(StatusEffects.TelAdreTripxi, 3, 16);
 		else player.addStatusValue(StatusEffects.TelAdreTripxi, 3, 8);
-		player.addStatusValue(StatusEffects.TelAdreTripxi, 2, -1);
-		if (player.hasKeyItem("Desert Eagle") >= 0) {
-			player.removeKeyItem("Desert Eagle");
-			player.addStatusValue(StatusEffects.TelAdreTripxiGuns1, 1, 1);
-		}
-		if (player.hasKeyItem("M1 Cerberus") >= 0) {
-			player.removeKeyItem("M1 Cerberus");
-			player.addStatusValue(StatusEffects.TelAdreTripxiGuns2, 1, 1);
-		}
-		if (player.hasKeyItem("Tripxi Fatbilly") >= 0) {
-			player.removeKeyItem("Tripxi Fatbilly");
-			player.addStatusValue(StatusEffects.TelAdreTripxiGuns3, 1, 1);
-		}
-		if (player.hasKeyItem("Snippler") >= 0) {
-			player.removeKeyItem("Snippler");
-			player.addStatusValue(StatusEffects.TelAdreTripxiGuns4, 1, 1);
-		}
-		if (player.hasKeyItem("Touhouna M3") >= 0) {
-			player.removeKeyItem("Touhouna M3");
-			player.addStatusValue(StatusEffects.TelAdreTripxiGuns5, 1, 1);
-		}
-		if (player.hasKeyItem("Twin Grakaturd") >= 0) {
-			player.removeKeyItem("Twin Grakaturd");
-			player.addStatusValue(StatusEffects.TelAdreTripxiGuns6, 1, 1);
-		}
-		if (player.hasKeyItem("Dart pistol") >= 0) {
-			player.removeKeyItem("Dart pistol");
-			player.addStatusValue(StatusEffects.TelAdreTripxiGuns1, 2, 1);
-		}
-		if (player.hasKeyItem("Twin Dart pistol") >= 0) {
-			player.removeKeyItem("Twin Dart pistol");
-			player.addStatusValue(StatusEffects.TelAdreTripxiGuns2, 2, 1);
-		}
-		if (player.hasKeyItem("Harpoon gun") >= 0) {
-			player.removeKeyItem("Harpoon gun");
-			player.addStatusValue(StatusEffects.TelAdreTripxiGuns3, 2, 1);
-		}
-		if (player.hasKeyItem("Derpnade Launcher") >= 0) {
-			player.removeKeyItem("Derpnade Launcher");
-			player.addStatusValue(StatusEffects.TelAdreTripxiGuns5, 2, 1);
-		}
-		if (player.hasKeyItem("Double barreled dragon gun") >= 0) {
-			player.removeKeyItem("Double barreled dragon gun");
-			player.addStatusValue(StatusEffects.TelAdreTripxiGuns1, 3, 1);
-		}
-		if (player.hasKeyItem("Lactoblasters") >= 0) {
-			player.removeKeyItem("Lactoblasters");
-			player.addStatusValue(StatusEffects.TelAdreTripxiGuns2, 3, 1);
+		player.changeStatusValue(StatusEffects.TelAdreTripxi, 2, 0);
+		var guns:Array = [
+			["Desert Eagle", StatusEffects.TelAdreTripxiGuns1, 1],
+			["M1 Cerberus", StatusEffects.TelAdreTripxiGuns2, 1],
+			["Tripxi Fatbilly", StatusEffects.TelAdreTripxiGuns3, 1],
+			["Snippler", StatusEffects.TelAdreTripxiGuns4, 1],
+			["Touhouna M3", StatusEffects.TelAdreTripxiGuns5, 1],
+			["Twin Grakaturd", StatusEffects.TelAdreTripxiGuns6, 1],
+			["Dart pistol", StatusEffects.TelAdreTripxiGuns1, 2],
+			["Twin Dart pistol", StatusEffects.TelAdreTripxiGuns2, 2],
+			["Harpoon gun", StatusEffects.TelAdreTripxiGuns3, 2],
+			["Derpnade Launcher", StatusEffects.TelAdreTripxiGuns5, 2],
+			["Double barreled dragon gun", StatusEffects.TelAdreTripxiGuns1, 3],
+			["Lactoblasters", StatusEffects.TelAdreTripxiGuns2, 3],
+		];
+		for each (var gun:Array in guns) {
+			if (player.hasKeyItem(gun[0]) >= 0) {
+				player.removeKeyItem(gun[0]);
+				player.addStatusValue(gun[1], gun[2], 1);
+			}
 		}
 		doNext(telAdreMenu);
 	}

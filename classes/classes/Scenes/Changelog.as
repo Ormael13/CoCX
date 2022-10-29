@@ -358,7 +358,21 @@ public class Changelog extends BaseContent
 			outputText("-Fix perm metamorph loading, Kiha Electra interaction (EragonX)\n");
 			outputText("-Elemental Damage type now use special font color (Liadri)\n");
 			outputText("-Steel Storm perk effect changed to: Gain extra attacks equal to current used mutliattack option when dual wielding. Blade Barrier parry chance bonus increased to 25%.\n");
-			outputText("-Anger perk effect of 'adding 1/2 more atk with large/massive weapons when PC dropped below 60/20% of max HP' was replaced by 'Can trigger grade 2 and 3 of berserker state by loosing one time 50% of max OverHP to grants 1 more attack per increased grade with large/massive weapons'.\n");
+			outputText("-Anger perk effect of 'adding 1/2 more atk with large/massive weapons when PC dropped below 60/20% of max HP' was replaced by 'Grade 2 and higher of berserker state grants 1 more attack per increased grade with large/massive weapons'.\n");
+			outputText("-Feral combat will raise mastery now even if wielding a claw weapon and in Feral stance. Added Damage bonuses for new masteries. (khovel)\n");
+			outputText("-Buttons can have icons - for items, abilities, locations, and anything else. (aimozg)\n");
+			outputText("-Prestige Job: Berserker perk have additional effect : Can trigger grade 2 and 3 of berserker state by loosing one time 50% of max OverHP. Each grade will shorten duration of the berserking by 2 round and increase atk bonus by 100% of base value.\n");
+			outputText("-Endless Rage perk allow to reach 4th grade of berserking state. Wrath cost to sustain berserking state increased from 10 to 50.\n");
+			outputText("-New event perk: Natural Spellcasting. Gained by using elf tf when PC have both elf eyes and ears. Effect: Reduce all spell cooldowns by 1 round (2 if wearing the leaf necklace). (+1 to elf score)\n");
+			outputText("-Meditation would remove 20% of max lust instead of 50.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -460,15 +474,6 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
 			outputText("\n");
 			outputText("\n");
@@ -505,11 +510,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

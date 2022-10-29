@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE icons [
+        <!ELEMENT icons (file|aliases)*>
+        <!ELEMENT file (row)*>
+        <!ATTLIST file
+                name CDATA #REQUIRED
+                prefix CDATA #IMPLIED
+                cellwidth CDATA #REQUIRED
+                cellheight CDATA #REQUIRED>
+        <!ELEMENT row (icon)*>
+        <!ELEMENT icon (#PCDATA)>
+        <!ELEMENT aliases (alias)*>
+        <!ELEMENT alias EMPTY>
+        <!ATTLIST alias
+                icon CDATA #REQUIRED
+                alias CDATA #REQUIRED>
+        ]>
+<icons>
+    <!--
+    <file
+         name= file name (relative to res/)
+         (optional) prefix= prepended to icon ids>
+     -->
+
+    <!--
+        Item icons.
+
+        Icon ID is:
+        * Specific items: "I_" + itemId (ex. "I_IncubiD")
+        * Generic weapon of type: "I_GenericWeapon_"+type (ex. "I_GenericWeapon_Sword", see ItemConstants.WT_XXXX)
+        * Generic armor of type: "I_GenericArmor_"+perk (ex. "I_GenericArmor_Light", see ItemConstants.AP_XXXX)
+        * Generic by category: "I_GenericItem_"+category (ex. "I_GenericItem_weapon", see ItemConstants.CATEGORY_XXXX)
+        * Placeholder: "I_GenericItem"
+    -->
+    <file name="icons/items.png" prefix="I_" cellwidth="36" cellheight="36">
+        <row>
+            <icon>IncubiD</icon>
+        </row>
+    </file>
+
+    <!-- Ability icons, iconId = "A_" + abilityId -->
+    <!--
+     <file name="icons/abilities.png" prefix="A_" cellwidth="36" cellheight="36">
+     </file>
+     -->
+
+    <!-- Aliases - images sharing IDs -->
+    <aliases>
+        <!--
+            Existing icon "I_IncubiD" is also available under id "I_HairDye"
+            <alias icon="I_IncubiD" alias="I_HairDye"/>
+        -->
+    </aliases>
+</icons>

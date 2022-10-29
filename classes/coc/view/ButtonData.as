@@ -9,8 +9,6 @@ import classes.PerkLib;
 import classes.StatusEffects;
 import classes.internals.Utils;
 
-import flash.net.navigateToURL;
-
 public class ButtonData {
 	public var text:String = "";
 	public var callback:Function = null;
@@ -23,6 +21,7 @@ public class ButtonData {
 	public var draggable:Boolean = false;
 	public var slot:ItemSlotClass = null;
 	public var slotType:Function;
+	public var iconId:String = null;
 	public function ButtonData(text:String, callback:Function =null, toolTipText:String ="", toolTipHeader:String ="") {
 		this.text = text;
 		this.callback = callback;
@@ -59,6 +58,10 @@ public class ButtonData {
 		labelColor = color;
 		return this;
 	}
+	public function icon(iconId:String):ButtonData {
+		this.iconId = iconId;
+		return this;
+	}
 	
 	/**
 	 * Associate custom data with the button.
@@ -71,6 +74,7 @@ public class ButtonData {
 		text = item.shortName;
 		hint(item.description, Utils.capitalizeFirstLetter(item.longName));
 		labelColor = item.buttonColor;
+		iconId = item.iconId;
 		return this;
 	}
 	public function forItemSlot(slot:ItemSlotClass):ButtonData {
@@ -88,7 +92,10 @@ public class ButtonData {
 		if (!visible) {
 			btn.hide();
 		} else {
-			btn.show(text, callback, toolTipText, toolTipHeader).color(labelColor).disableIf(!enabled);
+			btn.show(text, callback, toolTipText, toolTipHeader)
+					.color(labelColor)
+					.disableIf(!enabled)
+					.icon(iconId);
 		}
 	}
 	/**

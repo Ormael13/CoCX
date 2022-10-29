@@ -2346,7 +2346,7 @@ public class Masturbation extends BaseContent {
 		public function meditate(description:String = "rock"):void {
 			clearOutput();
 			outputText("You find a flat, comfortable " + description + " to sit down on and meditate.  As always, meditation brings a sense of peace and calm to you, but it eats up one hour of the day.");
-			dynStats("lus", -50, "scale", false);
+			dynStats("lus", -Math.round(player.maxLust()*0.2), "scale", false);
 			dynStats("cor", -.3 - 0.3 * player.countCockSocks("alabaster"));
 			if (player.hasPerk(PerkLib.Enlightened) && player.cor < 10) HPChange(50, true);
 			fatigue( -10);
@@ -3651,3 +3651,4 @@ public class Masturbation extends BaseContent {
 		}
 	}
 }
+

@@ -125,60 +125,29 @@ public class Combat extends BaseContent {
         }
     }
 
-    public function masteryFeralCombatLevel():Number {
-        return player.combatMastery[0].level;
-    }
-    public function masteryGauntletLevel():Number {
-        return player.combatMastery[1].level;
-    }
-	public function masteryDaggerLevel():Number {
-        return player.combatMastery[2].level;
-    }
-    public function masterySwordLevel():Number {
-        return player.combatMastery[3].level;
-    }
-	public function masteryAxeLevel():Number {
-        return player.combatMastery[4].level;
-    }
-    public function masteryMaceHammerLevel():Number {
-        return player.combatMastery[5].level;
-    }
-	public function masteryDuelingSwordLevel():Number {
-        return player.combatMastery[6].level;
-    }
-	public function masteryPolearmLevel():Number {
-        return player.combatMastery[7].level;
-    }
-	public function masterySpearLevel():Number {
-        return player.combatMastery[8].level;
-    }
-	public function masteryWhipLevel():Number {
-        return player.combatMastery[9].level;
-    }
-	public function masteryExoticLevel():Number {
-        return player.combatMastery[10].level;
-    }
-	public function masteryArcheryLevel():Number {
-        return player.combatMastery[11].level;
-    }
-	public function masteryThrowingLevel():Number {
-        return player.combatMastery[12].level;
-    }
-	public function masteryFirearmsLevel():Number {
-        return player.combatMastery[13].level;
-    }
-	public function dualWSLevel():Number {
-        return player.combatMastery[14].level;
-    }
-    public function dualWNLevel():Number {
-        return player.combatMastery[15].level;
-    }
-    public function dualWLLevel():Number {
-        return player.combatMastery[16].level;
-    }
-    public function dualWFLevel():Number {
-        return player.combatMastery[17].level;
-    }
+    public function masteryFeralCombatLevel():Number {return player.combatMastery[0].level;}
+    public function masteryGauntletLevel():Number {return player.combatMastery[1].level;}
+	public function masteryDaggerLevel():Number {return player.combatMastery[2].level;}
+    public function masterySwordLevel():Number {return player.combatMastery[3].level;}
+	public function masteryAxeLevel():Number {return player.combatMastery[4].level;}
+    public function masteryMaceHammerLevel():Number {return player.combatMastery[5].level;}
+	public function masteryDuelingSwordLevel():Number {return player.combatMastery[6].level;}
+	public function masteryPolearmLevel():Number {return player.combatMastery[7].level;}
+	public function masterySpearLevel():Number {return player.combatMastery[8].level;}
+	public function masteryWhipLevel():Number {return player.combatMastery[9].level;}
+	public function masteryExoticLevel():Number {return player.combatMastery[10].level;}
+	public function masteryArcheryLevel():Number {return player.combatMastery[11].level;}
+	public function masteryThrowingLevel():Number {return player.combatMastery[12].level;}
+	public function masteryFirearmsLevel():Number {return player.combatMastery[13].level}
+	public function dualWSLevel():Number {return player.combatMastery[14].level;}
+    public function dualWNLevel():Number {return player.combatMastery[15].level;}
+    public function dualWLLevel():Number {return player.combatMastery[16].level;}
+    public function dualWFLevel():Number {return player.combatMastery[17].level;}
+    public function weaponSizeSmall():Number {return player.combatMastery[18].level;}
+    public function weaponSizeNormal():Number {return player.combatMastery[19].level;}
+    public function weaponSizeLarge():Number {return player.combatMastery[20].level;}
+    public function weaponSizeMassive():Number {return player.combatMastery[21].level;}
+    //public function weaponSizeRange():Number {return player.combatMastery[22].level;}
 
     public function bonusExpAfterSuccesfullTease():Number {
         return teases.bonusExpAfterSuccesfullTease();
@@ -309,6 +278,10 @@ public class Combat extends BaseContent {
         return magic.spellWhiteTier2CooldownImpl();
     }
 
+    public function spellWhiteTier3Cooldown():Number {
+        return magic.spellWhiteTier3CooldownImpl();
+    }
+
     public function spellModBlack():Number {
         return magic.spellModBlackImpl();
     }
@@ -323,6 +296,10 @@ public class Combat extends BaseContent {
 
     public function spellBlackTier2Cooldown():Number {
         return magic.spellBlackTier2CooldownImpl();
+    }
+
+    public function spellBlackTier3Cooldown():Number {
+        return magic.spellBlackTier3CooldownImpl();
     }
 
     public function spellModGrey():Number {
@@ -415,12 +392,12 @@ public class Combat extends BaseContent {
 			outputText("Just as you would be defeated, the Tears of Denial you prepared restores you to full health and clarity of mind. To [themonster] dismay you get back up, still undefeated and ready to keep fighting.");
 			player.HP = player.maxOverHP();
 			player.lust = player.minLust();
-			doNext(curry(combatMenu, true));
+			combatMenu(false);
 		}
 		else if ((player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking)) && player.hasPerk(PerkLib.TooAngryToDie)) {
 			if (!player.hasStatusEffect(StatusEffects.TooAngryTooDie)) player.createStatusEffect(StatusEffects.TooAngryTooDie, 0, 0, 0, 0);
 			player.HP = player.minHP() + 1;
-			doNext(curry(combatMenu, true));
+            combatMenu(false);
 		}
         else monster.won_(true, false);
     }
@@ -981,9 +958,17 @@ public class Combat extends BaseContent {
 			if (player.statusEffectv2(StatusEffects.Berzerking) >= 1) {
 				bd.disable("You're already reached 2nd grade of Berserk!");
 			}
-			bd = buttons.add("Berserk G3", mspecials.berzerkG3);
-			if (player.statusEffectv2(StatusEffects.Berzerking) >= 2) {
-				bd.disable("You're already reached 3rd grade of Berserk!");
+			if (player.statusEffectv2(StatusEffects.Berzerking) >= 1) {
+				bd = buttons.add("Berserk G3", mspecials.berzerkG3);
+				if (player.statusEffectv2(StatusEffects.Berzerking) >= 2) {
+					bd.disable("You're already reached 3rd grade of Berserk!");
+				}
+			}
+			if (player.hasPerk(PerkLib.EndlessRage) && player.statusEffectv2(StatusEffects.Berzerking) >= 2) {
+				bd = buttons.add("Berserk G4", mspecials.berzerkG4);
+				if (player.statusEffectv2(StatusEffects.Berzerking) >= 3) {
+					bd.disable("You're already reached 4th grade of Berserk!");
+				}
 			}
 		}
 		if (player.hasPerk(PerkLib.Lustzerker) || player.jewelryName == "Flame Lizard ring" || player.jewelryName2 == "Flame Lizard ring" || player.jewelryName3 == "Flame Lizard ring" || player.jewelryName4 == "Flame Lizard ring") {
@@ -1005,9 +990,17 @@ public class Combat extends BaseContent {
 			if (player.statusEffectv2(StatusEffects.Lustzerking) >= 1) {
 				bd.disable("You're already reached 2nd grade of Lustserk!");
 			}
-			bd = buttons.add("Lustserk G3", mspecials.lustzerkG3);
-			if (player.statusEffectv2(StatusEffects.Lustzerking) >= 2) {
-				bd.disable("You're already reached 2nd grade of Lustserk!");
+			if (player.statusEffectv2(StatusEffects.Lustzerking) >= 1) {
+				bd = buttons.add("Lustserk G3", mspecials.lustzerkG3);
+				if (player.statusEffectv2(StatusEffects.Lustzerking) >= 2) {
+					bd.disable("You're already reached 3rd grade of Lustserk!");
+				}
+			}
+			if (player.hasPerk(PerkLib.EndlessRage) && player.statusEffectv2(StatusEffects.Lustzerking) >= 2) {
+				bd = buttons.add("Lustserk G4", mspecials.lustzerkG4);
+				if (player.statusEffectv2(StatusEffects.Lustzerking) >= 3) {
+					bd.disable("You're already reached 4th grade of Lustserk!");
+				}
 			}
 		}
 		if (player.hasPerk(PerkLib.JobBeastWarrior) || player.necklaceName == "Crinos Shape necklace") {
@@ -1430,7 +1423,8 @@ public class Combat extends BaseContent {
                 if( player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking) ){
                     if (player.hasPerk(PerkLib.FuelForTheFire)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 1;
                     if (player.hasPerk(PerkLib.Anger) && (player.statusEffectv2(StatusEffects.Berzerking) >= 1 || player.statusEffectv2(StatusEffects.Lustzerking) >= 1)) {
-                        if (player.statusEffectv2(StatusEffects.Berzerking) >= 2 || player.statusEffectv2(StatusEffects.Lustzerking) >= 2) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 2;
+                        if (player.statusEffectv2(StatusEffects.Berzerking) >= 3 || player.statusEffectv2(StatusEffects.Lustzerking) >= 3) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 3;
+                        else if (player.statusEffectv2(StatusEffects.Berzerking) >= 2 || player.statusEffectv2(StatusEffects.Lustzerking) >= 2) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 2;
                         else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 1;
                     }
                 }
@@ -2534,6 +2528,19 @@ public class Combat extends BaseContent {
 		if (player.weaponSpecials("Dual")) accmod += Math.round((dualWNLevel() - 1) / 2);
 		if (player.weaponSpecials("Dual Large")) accmod += Math.round((dualWLLevel() - 1) / 2);
 		if (player.weaponSpecials("Dual Small") || player.weaponSpecials("Dual") || player.weaponSpecials("Dual Large")) accmod += meleeDualWieldAccuracyPenalty();
+
+        var weaponSize:Number = 1;
+        if( player.weaponSpecials("Small") ) weaponSize = 0;
+        if( player.weaponSpecials("Large") ) weaponSize = 2;
+        if( player.weaponSpecials("Massive") ) weaponSize = 3;
+        if (weaponSize == 0) accmod += Math.round((weaponSizeSmall() - 1) / 2);
+        if (weaponSize == 1) accmod += Math.round((weaponSizeNormal() - 1) / 2);
+        if (weaponSize == 2) accmod += Math.round((weaponSizeLarge() - 1) / 2);
+        if (weaponSize == 3) accmod += Math.round((weaponSizeMassive() - 1) / 2);
+
+
+
+
         return accmod;
     }
 
@@ -2648,6 +2655,8 @@ public class Combat extends BaseContent {
         if (player.weaponRangeName == "Touhouna M3") faccmod -= 20;
 		if (player.weaponRangePerk == "Dual Firearms") faccmod += Math.round((dualWFLevel() - 1) / 2);
 		if (player.weaponRangePerk == "Dual Firearms") faccmod += firearmsDualWieldAccuracyPenalty();
+
+
         return faccmod;
     }
 
@@ -3341,7 +3350,7 @@ public class Combat extends BaseContent {
 		var critChance:int = 5;
 		var critDmg:Number = 1.75;
 		critChance += combatPhysicalCritical();
-		if (player.weapon is MoonlightGreatsword || player.weapon is Tidarion) {
+		if (player.weapon is MoonlightGreatsword || player.weapon is MoonlightClaws || player.weapon is Tidarion) {
             if (player.weapon is Tidarion) meleeDamageNoLag = 0; //recalc damage
             if (meleeDamageNoLag != 0) damage += meleeDamageNoLag;
             else {
@@ -3391,6 +3400,7 @@ public class Combat extends BaseContent {
         checkAchievementDamage(damage);
 		var elementalVariant:Number = ElementalRace.getElement(player);
 		if (player.weapon is MoonlightGreatsword) elementalVariant = 5;
+		if (player.weapon is MoonlightClaws) elementalVariant = 5;
         if (player.weapon is Tidarion) elementalVariant = 6;
         switch (elementalVariant) {
             case ElementalRace.ELEMENT_SYLPH:
@@ -3428,7 +3438,7 @@ public class Combat extends BaseContent {
 				doWindDamage(damage, true, true);
                 break;
         }
-		if (player.weapon is MoonlightGreatsword || player.weapon is Tidarion) {
+		if (player.weapon is MoonlightGreatsword || player.weapon is MoonlightClaws || player.weapon is Tidarion) {
 			var swordEXPgains:Number = 1;
 			if (player.hasPerk(PerkLib.MeleeWeaponsMastery)) swordEXPgains += 2;
 			if (monster.short == "training dummy" && flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 1) {
@@ -5073,7 +5083,7 @@ public class Combat extends BaseContent {
 				damage += scalingBonusIntelligence() * 0.2;
 				if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurry1to4)) damage*=1+(0.2*player.perkv1(PerkLib.ELFElvenSpearDancingFlurry1to4));
 			}
-			else if (player.weapon is MoonlightGreatsword || player.weapon is Tidarion) {
+			else if (player.weapon is MoonlightGreatsword || player.weapon is MoonlightClaws || player.weapon is Tidarion) {
 				damage += player.inte;
 				damage += scalingBonusIntelligence() * 0.2;
 			}
@@ -5156,6 +5166,16 @@ public class Combat extends BaseContent {
 		if (player.weaponSpecials("Dual Small")) damage *= (1 + (0.01 * dualWSLevel()));
 		if (player.weaponSpecials("Dual")) damage *= (1 + (0.01 * dualWNLevel()));
 		if (player.weaponSpecials("Dual Large")) damage *= (1 + (0.01 * dualWLLevel()));
+
+        var weaponSize:Number = 1;
+        if( player.weaponSpecials("Small") ) weaponSize = 0;
+        if( player.weaponSpecials("Large") ) weaponSize = 2;
+        if( player.weaponSpecials("Massive") ) weaponSize = 3;
+        if (weaponSize == 0) damage *= (1 + (0.01 * weaponSizeSmall()));
+        if (weaponSize == 1) damage *= (1 + (0.01 * weaponSizeNormal()));
+        if (weaponSize == 2) damage *= (1 + (0.01 * weaponSizeLarge()));
+        if (weaponSize == 3) damage *= (1 + (0.01 * weaponSizeMassive()));
+
 		//Thunderous Strikes
 		if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
 		if (player.hasPerk(PerkLib.ChiReflowMagic)) damage *= UmasShop.NEEDLEWORK_MAGIC_REGULAR_MULTI;
@@ -5505,6 +5525,8 @@ public class Combat extends BaseContent {
                     }
                     else if (player.weapon == weapons.MGSWORD)
                         doMagicDamage(damage, true, true);
+                    else if (player.weapon == weapons.MCLAWS)
+                        doMagicDamage(damage, true, true);
                     else if (player.weapon == weapons.PHALLUS) {
                         if (player.statusEffectv1(StatusEffects.ThePhalluspear1) == 1) monster.teased(Math.round(monster.lustVuln * damage * 0.05));
                         else {
@@ -5817,7 +5839,7 @@ public class Combat extends BaseContent {
                 WrathWeaponsProc();
                 heroBaneProc(damage);
                 EruptingRiposte();
-                if (player.hasPerk(PerkLib.SwiftCasting) && flags[kFLAGS.ELEMENTAL_MELEE] > 0 && (player.isOneHandedWeapons() || (player.weaponSpecials("Large") && player.hasPerk(PerkLib.GigantGrip))) && player.isHavingFreeOffHand()) {
+                if (player.hasPerk(PerkLib.SwiftCasting) && flags[kFLAGS.ELEMENTAL_MELEE] > 0 && (player.isOneHandedWeapons() || (player.weaponSpecials("Large") && player.hasPerk(PerkLib.GigantGrip))) && player.isHavingFreeOffHand() && !player.statStore.hasBuff("Supercharged")) {
                     if (flags[kFLAGS.ELEMENTAL_MELEE] == 1 && CombatAbilities.WhitefireSwiftcast.isUsable) {
                         CombatAbilities.WhitefireSwiftcast.perform();
                     }
@@ -9059,14 +9081,14 @@ public class Combat extends BaseContent {
             } else {
 				if (player.hasPerk(PerkLib.EndlessRage)) {
 					if (player.hasStatusEffect(StatusEffects.TooAngryTooDie)) {
-						if (player.wrath >= (player.maxWrath() * 0.1)) player.wrath -= (player.maxWrath() * 0.1);
+						if (player.wrath >= (player.maxWrath() * (0.1*(1+player.statusEffectv2(StatusEffects.Berzerking))))) player.wrath -= (player.maxWrath() * (0.1*(1+player.statusEffectv2(StatusEffects.Berzerking))));
 						else {
 							player.removeStatusEffect(StatusEffects.TooAngryTooDie);
 							player.removeStatusEffect(StatusEffects.Berzerking);
 							outputText("<b>Berserker effect wore off!</b>\n\n");
 						}
 					} else {
-						if (player.wrath >= 10) player.wrath -= 10;
+						if (player.wrath >= (50*(1+player.statusEffectv2(StatusEffects.Berzerking)))) player.wrath -= (50*(1+player.statusEffectv2(StatusEffects.Berzerking)));
 						else {
 							player.removeStatusEffect(StatusEffects.Berzerking);
 							outputText("<b>Berserker effect wore off!</b>\n\n");
@@ -9090,14 +9112,14 @@ public class Combat extends BaseContent {
             } else {
 				if (player.hasPerk(PerkLib.EndlessRage)) {
 					if (player.hasStatusEffect(StatusEffects.TooAngryTooDie)) {
-						if (player.wrath >= (player.maxWrath() * 0.1)) player.wrath -= (player.maxWrath() * 0.1);
+						if (player.wrath >= (player.maxWrath() * (0.1*(1+player.statusEffectv2(StatusEffects.Lustzerking))))) player.wrath -= (player.maxWrath() * (0.1*(1+player.statusEffectv2(StatusEffects.Lustzerking))));
 						else {
 							player.removeStatusEffect(StatusEffects.TooAngryTooDie);
 							player.removeStatusEffect(StatusEffects.Lustzerking);
 							outputText("<b>Lustzerker effect wore off!</b>\n\n");
 						}
 					} else {
-						if (player.wrath >= 10) player.wrath -= 10;
+						if (player.wrath >= (50*(1+player.statusEffectv2(StatusEffects.Lustzerking)))) player.wrath -= (50*(1+player.statusEffectv2(StatusEffects.Lustzerking)));
 						else {
 							player.removeStatusEffect(StatusEffects.Lustzerking);
 							outputText("<b>Lustzerker effect wore off!</b>\n\n");
@@ -10627,7 +10649,7 @@ public class Combat extends BaseContent {
 		}
 		meleeDamageNoLag = 0;
 		applyAutocast0();
-        magic.applyAutocast();
+        if (!player.statStore.hasBuff("Supercharged")) magic.applyAutocast();
         mspecials.applyAutocast2();
         if (player.weaponRange == weaponsrange.LBLASTR) {
             var milkAmmo:Number = player.lactationQ() / 100;
@@ -11589,7 +11611,6 @@ public function SingIntensify(Bee:Boolean = false):void {
         outputText("Try as you might you cannot intensify the strength of your song any further.");
         menu();
         addButton(0, "Next", combatMenu, false);
-        return;
     }
 }
 

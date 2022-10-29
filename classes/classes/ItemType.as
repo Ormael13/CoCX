@@ -9,6 +9,8 @@ import classes.Items.ItemConstants;
 import classes.Items.ItemTypeNothing;
 import classes.internals.Utils;
 
+import coc.view.IconLib;
+
 import flash.utils.Dictionary;
 
 public class ItemType extends ItemConstants
@@ -117,6 +119,13 @@ public class ItemType extends ItemConstants
 		public var stackSize:int = 5;
 		public var perlStackSize:int = 15;
 
+		public function get ownIconId():String {
+			if (this.isDynamicItem) return "I_"+templateId();
+			else return "I_"+id;
+		}
+		public function get iconId():String {
+			return IconLib.pickIcon(ownIconId, "I_GenericItem_"+category, "I_GenericItem");
+		}
 		public function get category():String {
 			CoC_Settings.errorAMC("ItemType","category",_id)
 			return CATEGORY_OTHER;
