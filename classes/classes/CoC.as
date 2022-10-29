@@ -24,6 +24,7 @@ import classes.internals.Utils;
 import coc.model.GameModel;
 import coc.model.TimeModel;
 import coc.view.CoCButton;
+import coc.view.IconLib;
 import coc.view.MainView;
 import coc.xxc.Story;
 import coc.xxc.StoryCompiler;
@@ -403,6 +404,7 @@ public class CoC extends MovieClip
         new Story("lib",rootStory,"monsters",true);
         execPostInit();
         loadStory();
+        IconLib.INSTANCE.loadIcons();
         this.addFrameScript( 0, this.run );
         //setTimeout(this.run,0);
     }
