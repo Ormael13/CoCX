@@ -278,6 +278,10 @@ public class Combat extends BaseContent {
         return magic.spellWhiteTier2CooldownImpl();
     }
 
+    public function spellWhiteTier3Cooldown():Number {
+        return magic.spellWhiteTier3CooldownImpl();
+    }
+
     public function spellModBlack():Number {
         return magic.spellModBlackImpl();
     }
@@ -292,6 +296,10 @@ public class Combat extends BaseContent {
 
     public function spellBlackTier2Cooldown():Number {
         return magic.spellBlackTier2CooldownImpl();
+    }
+
+    public function spellBlackTier3Cooldown():Number {
+        return magic.spellBlackTier3CooldownImpl();
     }
 
     public function spellModGrey():Number {
@@ -950,9 +958,17 @@ public class Combat extends BaseContent {
 			if (player.statusEffectv2(StatusEffects.Berzerking) >= 1) {
 				bd.disable("You're already reached 2nd grade of Berserk!");
 			}
-			bd = buttons.add("Berserk G3", mspecials.berzerkG3);
-			if (player.statusEffectv2(StatusEffects.Berzerking) >= 2) {
-				bd.disable("You're already reached 3rd grade of Berserk!");
+			if (player.statusEffectv2(StatusEffects.Berzerking) >= 1) {
+				bd = buttons.add("Berserk G3", mspecials.berzerkG3);
+				if (player.statusEffectv2(StatusEffects.Berzerking) >= 2) {
+					bd.disable("You're already reached 3rd grade of Berserk!");
+				}
+			}
+			if (player.hasPerk(PerkLib.EndlessRage) && player.statusEffectv2(StatusEffects.Berzerking) >= 2) {
+				bd = buttons.add("Berserk G4", mspecials.berzerkG4);
+				if (player.statusEffectv2(StatusEffects.Berzerking) >= 3) {
+					bd.disable("You're already reached 4th grade of Berserk!");
+				}
 			}
 		}
 		if (player.hasPerk(PerkLib.Lustzerker) || player.jewelryName == "Flame Lizard ring" || player.jewelryName2 == "Flame Lizard ring" || player.jewelryName3 == "Flame Lizard ring" || player.jewelryName4 == "Flame Lizard ring") {
@@ -974,9 +990,17 @@ public class Combat extends BaseContent {
 			if (player.statusEffectv2(StatusEffects.Lustzerking) >= 1) {
 				bd.disable("You're already reached 2nd grade of Lustserk!");
 			}
-			bd = buttons.add("Lustserk G3", mspecials.lustzerkG3);
-			if (player.statusEffectv2(StatusEffects.Lustzerking) >= 2) {
-				bd.disable("You're already reached 2nd grade of Lustserk!");
+			if (player.statusEffectv2(StatusEffects.Lustzerking) >= 1) {
+				bd = buttons.add("Lustserk G3", mspecials.lustzerkG3);
+				if (player.statusEffectv2(StatusEffects.Lustzerking) >= 2) {
+					bd.disable("You're already reached 3rd grade of Lustserk!");
+				}
+			}
+			if (player.hasPerk(PerkLib.EndlessRage) && player.statusEffectv2(StatusEffects.Lustzerking) >= 2) {
+				bd = buttons.add("Lustserk G4", mspecials.lustzerkG4);
+				if (player.statusEffectv2(StatusEffects.Lustzerking) >= 3) {
+					bd.disable("You're already reached 4th grade of Lustserk!");
+				}
 			}
 		}
 		if (player.hasPerk(PerkLib.JobBeastWarrior) || player.necklaceName == "Crinos Shape necklace") {
@@ -1399,7 +1423,8 @@ public class Combat extends BaseContent {
                 if( player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking) ){
                     if (player.hasPerk(PerkLib.FuelForTheFire)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 1;
                     if (player.hasPerk(PerkLib.Anger) && (player.statusEffectv2(StatusEffects.Berzerking) >= 1 || player.statusEffectv2(StatusEffects.Lustzerking) >= 1)) {
-                        if (player.statusEffectv2(StatusEffects.Berzerking) >= 2 || player.statusEffectv2(StatusEffects.Lustzerking) >= 2) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 2;
+                        if (player.statusEffectv2(StatusEffects.Berzerking) >= 3 || player.statusEffectv2(StatusEffects.Lustzerking) >= 3) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 3;
+                        else if (player.statusEffectv2(StatusEffects.Berzerking) >= 2 || player.statusEffectv2(StatusEffects.Lustzerking) >= 2) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 2;
                         else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 1;
                     }
                 }
@@ -5814,7 +5839,7 @@ public class Combat extends BaseContent {
                 WrathWeaponsProc();
                 heroBaneProc(damage);
                 EruptingRiposte();
-                if (player.hasPerk(PerkLib.SwiftCasting) && flags[kFLAGS.ELEMENTAL_MELEE] > 0 && (player.isOneHandedWeapons() || (player.weaponSpecials("Large") && player.hasPerk(PerkLib.GigantGrip))) && player.isHavingFreeOffHand()) {
+                if (player.hasPerk(PerkLib.SwiftCasting) && flags[kFLAGS.ELEMENTAL_MELEE] > 0 && (player.isOneHandedWeapons() || (player.weaponSpecials("Large") && player.hasPerk(PerkLib.GigantGrip))) && player.isHavingFreeOffHand() && !player.statStore.hasBuff("Supercharged")) {
                     if (flags[kFLAGS.ELEMENTAL_MELEE] == 1 && CombatAbilities.WhitefireSwiftcast.isUsable) {
                         CombatAbilities.WhitefireSwiftcast.perform();
                     }
@@ -9056,14 +9081,14 @@ public class Combat extends BaseContent {
             } else {
 				if (player.hasPerk(PerkLib.EndlessRage)) {
 					if (player.hasStatusEffect(StatusEffects.TooAngryTooDie)) {
-						if (player.wrath >= (player.maxWrath() * 0.1)) player.wrath -= (player.maxWrath() * 0.1);
+						if (player.wrath >= (player.maxWrath() * (0.1*(1+player.statusEffectv2(StatusEffects.Berzerking))))) player.wrath -= (player.maxWrath() * (0.1*(1+player.statusEffectv2(StatusEffects.Berzerking))));
 						else {
 							player.removeStatusEffect(StatusEffects.TooAngryTooDie);
 							player.removeStatusEffect(StatusEffects.Berzerking);
 							outputText("<b>Berserker effect wore off!</b>\n\n");
 						}
 					} else {
-						if (player.wrath >= 10) player.wrath -= 10;
+						if (player.wrath >= (50*(1+player.statusEffectv2(StatusEffects.Berzerking)))) player.wrath -= (50*(1+player.statusEffectv2(StatusEffects.Berzerking)));
 						else {
 							player.removeStatusEffect(StatusEffects.Berzerking);
 							outputText("<b>Berserker effect wore off!</b>\n\n");
@@ -9087,14 +9112,14 @@ public class Combat extends BaseContent {
             } else {
 				if (player.hasPerk(PerkLib.EndlessRage)) {
 					if (player.hasStatusEffect(StatusEffects.TooAngryTooDie)) {
-						if (player.wrath >= (player.maxWrath() * 0.1)) player.wrath -= (player.maxWrath() * 0.1);
+						if (player.wrath >= (player.maxWrath() * (0.1*(1+player.statusEffectv2(StatusEffects.Lustzerking))))) player.wrath -= (player.maxWrath() * (0.1*(1+player.statusEffectv2(StatusEffects.Lustzerking))));
 						else {
 							player.removeStatusEffect(StatusEffects.TooAngryTooDie);
 							player.removeStatusEffect(StatusEffects.Lustzerking);
 							outputText("<b>Lustzerker effect wore off!</b>\n\n");
 						}
 					} else {
-						if (player.wrath >= 10) player.wrath -= 10;
+						if (player.wrath >= (50*(1+player.statusEffectv2(StatusEffects.Lustzerking)))) player.wrath -= (50*(1+player.statusEffectv2(StatusEffects.Lustzerking)));
 						else {
 							player.removeStatusEffect(StatusEffects.Lustzerking);
 							outputText("<b>Lustzerker effect wore off!</b>\n\n");
@@ -10624,7 +10649,7 @@ public class Combat extends BaseContent {
 		}
 		meleeDamageNoLag = 0;
 		applyAutocast0();
-        magic.applyAutocast();
+        if (!player.statStore.hasBuff("Supercharged")) magic.applyAutocast();
         mspecials.applyAutocast2();
         if (player.weaponRange == weaponsrange.LBLASTR) {
             var milkAmmo:Number = player.lactationQ() / 100;

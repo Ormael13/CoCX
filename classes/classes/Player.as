@@ -1413,16 +1413,30 @@ use namespace CoC;
 			}
 			if (hasStatusEffect(StatusEffects.Berzerking) || hasStatusEffect(StatusEffects.Lustzerking)) {
 				var zerkersboost:Number = 0;
-				zerkersboost += (15 + (15 * newGamePlusMod));
-				if (hasPerk(PerkLib.ColdFury) || hasPerk(PerkLib.ColdLust)) zerkersboost += (5 + (5 * newGamePlusMod));
-				if (hasPerk(PerkLib.ColderFury) || hasPerk(PerkLib.ColderLust)) zerkersboost += (10 + (10 * newGamePlusMod));
+				var more:Number = 1;
+				if (hasStatusEffect(StatusEffects.Berzerking)) {
+					zerkersboost += (15 + (15 * newGamePlusMod));
+					if (hasPerk(PerkLib.ColdFury)) zerkersboost += (5 + (5 * newGamePlusMod));
+					if (hasPerk(PerkLib.ColderFury)) zerkersboost += (10 + (10 * newGamePlusMod));
+					if (hasPerk(PerkLib.PrestigeJobBerserker) && statusEffectv2(StatusEffects.Berzerking) >= 1) more += statusEffectv2(StatusEffects.Berzerking);
+				}
+				if (hasStatusEffect(StatusEffects.Lustzerking)) {
+					zerkersboost += (15 + (15 * newGamePlusMod));
+					if (hasPerk(PerkLib.ColdLust)) zerkersboost += (5 + (5 * newGamePlusMod));
+					if (hasPerk(PerkLib.ColderLust)) zerkersboost += (10 + (10 * newGamePlusMod));
+					if (hasPerk(PerkLib.PrestigeJobBerserker) && statusEffectv2(StatusEffects.Lustzerking) >= 1) more += statusEffectv2(StatusEffects.Lustzerking);
+				}
+				zerkersboost *= more;
 				if (perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 3) zerkersboost += (30 + (30 * newGamePlusMod));
 				if (hasPerk(PerkLib.Lustzerker) && (jewelryName == "Flame Lizard ring" || jewelryName2 == "Flame Lizard ring" || jewelryName3 == "Flame Lizard ring" || jewelryName4 == "Flame Lizard ring")) zerkersboost += (5 + (5 * newGamePlusMod));
 				if (hasPerk(PerkLib.BerserkerArmor)) zerkersboost += (5 + (5 * newGamePlusMod));
 				if (hasStatusEffect(StatusEffects.Berzerking) && hasStatusEffect(StatusEffects.Lustzerking)) {
-					if (hasPerk(PerkLib.ColderFury) || hasPerk(PerkLib.ColderLust)) zerkersboost *= 4;
-					else if (hasPerk(PerkLib.ColderFury) || hasPerk(PerkLib.ColderLust)) zerkersboost *= 3;
-					else zerkersboost *= 2.5;
+					var supp:Number = 1.5;
+					if (hasPerk(PerkLib.ColderFury)) zerkersboost += .5;
+					if (hasPerk(PerkLib.ColderLust)) zerkersboost += .5;
+					if (hasPerk(PerkLib.ColdFury)) zerkersboost += .25;
+					if (hasPerk(PerkLib.ColdLust)) zerkersboost += .25;
+					zerkersboost *= supp;
 				}
 				attack += zerkersboost;
 			}

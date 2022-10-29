@@ -49,6 +49,7 @@ public class ElfRace extends Race {
 				.noWings(+1)
 				.hasPerk(PerkLib.FlawlessBody, +1)
 				.hasPerk(PerkLib.ElvenSense, +1)
+				.hasPerk(PerkLib.NaturalSpellcasting, +1)
 				.customRequirement("","not a wood elf",
 						function (body:BodyData):Boolean {
 							return !body.player.hasPerk(PerkLib.BlessingOfTheAncestorTree)

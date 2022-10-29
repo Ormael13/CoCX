@@ -35,14 +35,14 @@ public class MagicSpecials extends BaseCombatContent {
 	internal function applyAutocast2():void {
 		outputText("\n\n");
 		if ((player.wrath >= 50 || player.hasPerk(PerkLib.EndlessRage)) && (flags[kFLAGS.ZERKER_COMBAT_MODE] == 1 || flags[kFLAGS.ZERKER_COMBAT_MODE] == 3)) {
-			var berzerkDuration:Number = 10;
+			var berzerkDuration:Number = 0;
 			if (player.hasPerk(PerkLib.EndlessRage)) berzerkDuration += 1;
 			else {
 				player.wrath -= 50;
 				berzerkDuration += 10;
 			}
-			if (player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 2) berzerkDuration += 2;
-			if (player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 3) berzerkDuration += 8;
+			if (player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 2) berzerkDuration += 1;
+			if (player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 3) berzerkDuration += 4;
 			player.createStatusEffect(StatusEffects.Berzerking,berzerkDuration,0,0,0);
 			outputText("<b>Berzerking was used successfully.</b>\n\n");
 		}
@@ -53,8 +53,8 @@ public class MagicSpecials extends BaseCombatContent {
 				player.wrath -= 50;
 				lustzerkDuration += 10;
 			}
-			if (player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 2) lustzerkDuration += 2;
-			if (player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 3) lustzerkDuration += 8;
+			if (player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 2) lustzerkDuration += 1;
+			if (player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 3) lustzerkDuration += 4;
 			player.createStatusEffect(StatusEffects.Lustzerking,lustzerkDuration,0,0,0);
 			outputText("<b>Lustzerking was used successfully.</b>\n\n");
 		}
@@ -640,14 +640,22 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("You're already pretty goddamn mad!");
 			}
 		}
-		if (player.hasPerk(PerkLib.Anger) && player.hasStatusEffect(StatusEffects.Berzerking)) {
+		if (player.hasPerk(PerkLib.PrestigeJobBerserker) && player.hasStatusEffect(StatusEffects.Berzerking)) {
 			bd = buttons.add("Berserk G2", berzerkG2);
 			if (player.statusEffectv2(StatusEffects.Berzerking) >= 1) {
 				bd.disable("You're already reached 2nd grade of Berserk!");
 			}
-			bd = buttons.add("Berserk G3", berzerkG3);
-			if (player.statusEffectv2(StatusEffects.Berzerking) >= 2) {
-				bd.disable("You're already reached 3rd grade of Berserk!");
+			if (player.statusEffectv2(StatusEffects.Berzerking) >= 1) {
+				bd = buttons.add("Berserk G3", berzerkG3);
+				if (player.statusEffectv2(StatusEffects.Berzerking) >= 2) {
+					bd.disable("You're already reached 3rd grade of Berserk!");
+				}
+			}
+			if (player.hasPerk(PerkLib.EndlessRage) && player.statusEffectv2(StatusEffects.Berzerking) >= 2) {
+				bd = buttons.add("Berserk G4", berzerkG4);
+				if (player.statusEffectv2(StatusEffects.Berzerking) >= 3) {
+					bd.disable("You're already reached 4th grade of Berserk!");
+				}
 			}
 		}
 		if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1 || player.isRaceCached(Races.SHARK)) {
@@ -674,14 +682,22 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("You're already pretty goddamn mad & lustfull!");
 			}
 		}
-		if (player.hasPerk(PerkLib.Anger) && player.hasStatusEffect(StatusEffects.Lustzerking)) {
+		if (player.hasPerk(PerkLib.PrestigeJobBerserker) && player.hasStatusEffect(StatusEffects.Lustzerking)) {
 			bd = buttons.add("Lustserk G2", lustzerkG2);
 			if (player.statusEffectv2(StatusEffects.Lustzerking) >= 1) {
 				bd.disable("You're already reached 2nd grade of Lustserk!");
 			}
-			bd = buttons.add("Lustserk G3", lustzerkG3);
-			if (player.statusEffectv2(StatusEffects.Lustzerking) >= 2) {
-				bd.disable("You're already reached 2nd grade of Lustserk!");
+			if (player.statusEffectv2(StatusEffects.Lustzerking) >= 1) {
+				bd = buttons.add("Lustserk G3", lustzerkG3);
+				if (player.statusEffectv2(StatusEffects.Lustzerking) >= 2) {
+					bd.disable("You're already reached 3rd grade of Lustserk!");
+				}
+			}
+			if (player.hasPerk(PerkLib.EndlessRage) && player.statusEffectv2(StatusEffects.Lustzerking) >= 2) {
+				bd = buttons.add("Lustserk G4", lustzerkG4);
+				if (player.statusEffectv2(StatusEffects.Lustzerking) >= 3) {
+					bd.disable("You're already reached 4th grade of Lustserk!");
+				}
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsTyrantState)) {
@@ -3076,15 +3092,25 @@ public class MagicSpecials extends BaseCombatContent {
 	}
 	public function berzerkG2():void {
 		clearOutput();
-		outputText("Placeholder text that only meantion savage fury reaching Grade 2. +1 large/massive weapon atk. - 50% max over HP.\n\n");
+		outputText("Placeholder text that only meantion savage fury reaching Grade 2."+(player.hasPerk(PerkLib.Anger)?" +1 large/massive weapon atk.":"")+" - 50% max over HP.\n\n");
 		player.HP -= Math.round(player.maxOverHP() * 0.5);
+		if (!player.hasPerk(PerkLib.EndlessRage)) player.addStatusValue(StatusEffects.Berzerking, 1, -2);
 		player.addStatusValue(StatusEffects.Berzerking, 2, 1);
 		enemyAI();
 	}
 	public function berzerkG3():void {
 		clearOutput();
-		outputText("Placeholder text that only meantion savage fury reaching Grade 3. +1 large/massive weapon atk. - 50% max over HP.\n\n");
+		outputText("Placeholder text that only meantion savage fury reaching Grade 3."+(player.hasPerk(PerkLib.Anger)?" +1 large/massive weapon atk.":"")+" - 50% max over HP.\n\n");
 		player.HP -= Math.round(player.maxOverHP() * 0.5);
+		if (!player.hasPerk(PerkLib.EndlessRage)) player.addStatusValue(StatusEffects.Berzerking, 1, -2);
+		player.addStatusValue(StatusEffects.Berzerking, 2, 1);
+		enemyAI();
+	}
+	public function berzerkG4():void {
+		clearOutput();
+		outputText("Placeholder text that only meantion savage fury reaching Grade 4. +1 large/massive weapon atk. - 50% max over HP.\n\n");
+		player.HP -= Math.round(player.maxOverHP() * 0.5);
+		if (!player.hasPerk(PerkLib.EndlessRage)) player.addStatusValue(StatusEffects.Berzerking, 1, -2);
 		player.addStatusValue(StatusEffects.Berzerking, 2, 1);
 		enemyAI();
 	}
@@ -3122,15 +3148,25 @@ public class MagicSpecials extends BaseCombatContent {
 	}
 	public function lustzerkG2():void {
 		clearOutput();
-		outputText("Placeholder text that only meantion lusty fury reaching Grade 2. +1 large/massive weapon atk. - 50% max over HP.\n\n");
+		outputText("Placeholder text that only meantion lusty fury reaching Grade 2."+(player.hasPerk(PerkLib.Anger)?" +1 large/massive weapon atk.":"")+" - 50% max over HP.\n\n");
 		player.HP -= Math.round(player.maxOverHP() * 0.5);
+		if (!player.hasPerk(PerkLib.EndlessRage)) player.addStatusValue(StatusEffects.Lustzerking, 1, -2);
 		player.addStatusValue(StatusEffects.Lustzerking, 2, 1);
 		enemyAI();
 	}
 	public function lustzerkG3():void {
 		clearOutput();
-		outputText("Placeholder text that only meantion lusty fury reaching Grade 3. +1 large/massive weapon atk. - 50% max over HP.\n\n");
+		outputText("Placeholder text that only meantion lusty fury reaching Grade 3."+(player.hasPerk(PerkLib.Anger)?" +1 large/massive weapon atk.":"")+" - 50% max over HP.\n\n");
 		player.HP -= Math.round(player.maxOverHP() * 0.5);
+		if (!player.hasPerk(PerkLib.EndlessRage)) player.addStatusValue(StatusEffects.Lustzerking, 1, -2);
+		player.addStatusValue(StatusEffects.Lustzerking, 2, 1);
+		enemyAI();
+	}
+	public function lustzerkG4():void {
+		clearOutput();
+		outputText("Placeholder text that only meantion lusty fury reaching Grade 4. +1 large/massive weapon atk. - 50% max over HP.\n\n");
+		player.HP -= Math.round(player.maxOverHP() * 0.5);
+		if (!player.hasPerk(PerkLib.EndlessRage)) player.addStatusValue(StatusEffects.Lustzerking, 1, -2);
 		player.addStatusValue(StatusEffects.Lustzerking, 2, 1);
 		enemyAI();
 	}
