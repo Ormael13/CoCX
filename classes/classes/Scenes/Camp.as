@@ -4100,7 +4100,7 @@ public class Camp extends NPCAwareContent{
 			if (player.statusEffectv1(StatusEffects.ResourceNode1) < 5) addButtonDisabled(0, "???", "You need to explore Forest more to unlock this place.");
 			else addButton(0, "Woodcutting", camp.cabinProgress.gatherWoods).hint("You can cut some trees here to get wood.");
 			if (player.statusEffectv2(StatusEffects.ResourceNode1) < 5) addButtonDisabled(1, "???", "You need to explore Mountains more to unlock this place.");
-			else addButton(1, "Quarry", camp.cabinProgress.quarrySite).hint("You can mine here to get stones, gems and maybe even some ores. <b>(Daylight)</b>");
+			else addButton(1, "Quarry", camp.cabinProgress.quarrySite).hint("You can mine here to get stones, gems and maybe even some ores.");
 		}
 		else {
 			addButtonDisabled(0, "???", "Search the forest.");
