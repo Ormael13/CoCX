@@ -633,6 +633,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			doDarknessDamage(damage, true, true);
 		}
 		else if (player.weapon == weapons.MGSWORD) doMagicDamage(damage, true, true);
+		else if (player.weapon == weapons.MCLAWS) doMagicDamage(damage, true, true);
 		else {
 			doDamage(damage, true, true);
 			if (player.weapon == weapons.DAISHO) doDamage(Math.round(damage * 0.5), true, true);
@@ -734,6 +735,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			doDarknessDamage(damage, true, true);
 		}
 		else if (player.weapon == weapons.MGSWORD) doMagicDamage(damage, true, true);
+		else if (player.weapon == weapons.MCLAWS) doMagicDamage(damage, true, true);
 		else {
 			doDamage(damage, true, true);
 			if (player.weapon == weapons.DAISHO) doDamage(Math.round(damage * 0.5), true, true);

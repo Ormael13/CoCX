@@ -5632,8 +5632,8 @@ use namespace CoC;
             if(weaponSpecials("Small") || weaponSpecials("Dual Small")){combatMasteryPos = 18}
             else if(weaponSpecials("Large")){combatMasteryPos = 20}
             else if(weaponSpecials("Massive")){combatMasteryPos = 21}
-            else if(isFeralCombat()){combatMasteryPos = 0}
             else if(isBowTypeWeapon() || isThrownTypeWeapon()){combatMasteryPos = 22}
+            if(isFeralCombat()){combatMasteryPos = 0}
 
 
 			/*

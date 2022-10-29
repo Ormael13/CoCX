@@ -125,60 +125,29 @@ public class Combat extends BaseContent {
         }
     }
 
-    public function masteryFeralCombatLevel():Number {
-        return player.combatMastery[0].level;
-    }
-    public function masteryGauntletLevel():Number {
-        return player.combatMastery[1].level;
-    }
-	public function masteryDaggerLevel():Number {
-        return player.combatMastery[2].level;
-    }
-    public function masterySwordLevel():Number {
-        return player.combatMastery[3].level;
-    }
-	public function masteryAxeLevel():Number {
-        return player.combatMastery[4].level;
-    }
-    public function masteryMaceHammerLevel():Number {
-        return player.combatMastery[5].level;
-    }
-	public function masteryDuelingSwordLevel():Number {
-        return player.combatMastery[6].level;
-    }
-	public function masteryPolearmLevel():Number {
-        return player.combatMastery[7].level;
-    }
-	public function masterySpearLevel():Number {
-        return player.combatMastery[8].level;
-    }
-	public function masteryWhipLevel():Number {
-        return player.combatMastery[9].level;
-    }
-	public function masteryExoticLevel():Number {
-        return player.combatMastery[10].level;
-    }
-	public function masteryArcheryLevel():Number {
-        return player.combatMastery[11].level;
-    }
-	public function masteryThrowingLevel():Number {
-        return player.combatMastery[12].level;
-    }
-	public function masteryFirearmsLevel():Number {
-        return player.combatMastery[13].level;
-    }
-	public function dualWSLevel():Number {
-        return player.combatMastery[14].level;
-    }
-    public function dualWNLevel():Number {
-        return player.combatMastery[15].level;
-    }
-    public function dualWLLevel():Number {
-        return player.combatMastery[16].level;
-    }
-    public function dualWFLevel():Number {
-        return player.combatMastery[17].level;
-    }
+    public function masteryFeralCombatLevel():Number {return player.combatMastery[0].level;}
+    public function masteryGauntletLevel():Number {return player.combatMastery[1].level;}
+	public function masteryDaggerLevel():Number {return player.combatMastery[2].level;}
+    public function masterySwordLevel():Number {return player.combatMastery[3].level;}
+	public function masteryAxeLevel():Number {return player.combatMastery[4].level;}
+    public function masteryMaceHammerLevel():Number {return player.combatMastery[5].level;}
+	public function masteryDuelingSwordLevel():Number {return player.combatMastery[6].level;}
+	public function masteryPolearmLevel():Number {return player.combatMastery[7].level;}
+	public function masterySpearLevel():Number {return player.combatMastery[8].level;}
+	public function masteryWhipLevel():Number {return player.combatMastery[9].level;}
+	public function masteryExoticLevel():Number {return player.combatMastery[10].level;}
+	public function masteryArcheryLevel():Number {return player.combatMastery[11].level;}
+	public function masteryThrowingLevel():Number {return player.combatMastery[12].level;}
+	public function masteryFirearmsLevel():Number {return player.combatMastery[13].level}
+	public function dualWSLevel():Number {return player.combatMastery[14].level;}
+    public function dualWNLevel():Number {return player.combatMastery[15].level;}
+    public function dualWLLevel():Number {return player.combatMastery[16].level;}
+    public function dualWFLevel():Number {return player.combatMastery[17].level;}
+    public function weaponSizeSmall():Number {return player.combatMastery[18].level;}
+    public function weaponSizeNormal():Number {return player.combatMastery[19].level;}
+    public function weaponSizeLarge():Number {return player.combatMastery[20].level;}
+    public function weaponSizeMassive():Number {return player.combatMastery[21].level;}
+    //public function weaponSizeRange():Number {return player.combatMastery[22].level;}
 
     public function bonusExpAfterSuccesfullTease():Number {
         return teases.bonusExpAfterSuccesfullTease();
@@ -2534,6 +2503,19 @@ public class Combat extends BaseContent {
 		if (player.weaponSpecials("Dual")) accmod += Math.round((dualWNLevel() - 1) / 2);
 		if (player.weaponSpecials("Dual Large")) accmod += Math.round((dualWLLevel() - 1) / 2);
 		if (player.weaponSpecials("Dual Small") || player.weaponSpecials("Dual") || player.weaponSpecials("Dual Large")) accmod += meleeDualWieldAccuracyPenalty();
+
+        var weaponSize:Number = 1;
+        if( player.weaponSpecials("Small") ) weaponSize = 0;
+        if( player.weaponSpecials("Large") ) weaponSize = 2;
+        if( player.weaponSpecials("Massive") ) weaponSize = 3;
+        if (weaponSize == 0) accmod += Math.round((weaponSizeSmall() - 1) / 2);
+        if (weaponSize == 1) accmod += Math.round((weaponSizeNormal() - 1) / 2);
+        if (weaponSize == 2) accmod += Math.round((weaponSizeLarge() - 1) / 2);
+        if (weaponSize == 3) accmod += Math.round((weaponSizeMassive() - 1) / 2);
+
+
+
+
         return accmod;
     }
 
@@ -2648,6 +2630,8 @@ public class Combat extends BaseContent {
         if (player.weaponRangeName == "Touhouna M3") faccmod -= 20;
 		if (player.weaponRangePerk == "Dual Firearms") faccmod += Math.round((dualWFLevel() - 1) / 2);
 		if (player.weaponRangePerk == "Dual Firearms") faccmod += firearmsDualWieldAccuracyPenalty();
+
+
         return faccmod;
     }
 
@@ -3341,7 +3325,7 @@ public class Combat extends BaseContent {
 		var critChance:int = 5;
 		var critDmg:Number = 1.75;
 		critChance += combatPhysicalCritical();
-		if (player.weapon is MoonlightGreatsword || player.weapon is Tidarion) {
+		if (player.weapon is MoonlightGreatsword || player.weapon is MoonlightClaws || player.weapon is Tidarion) {
             if (player.weapon is Tidarion) meleeDamageNoLag = 0; //recalc damage
             if (meleeDamageNoLag != 0) damage += meleeDamageNoLag;
             else {
@@ -3391,6 +3375,7 @@ public class Combat extends BaseContent {
         checkAchievementDamage(damage);
 		var elementalVariant:Number = ElementalRace.getElement(player);
 		if (player.weapon is MoonlightGreatsword) elementalVariant = 5;
+		if (player.weapon is MoonlightClaws) elementalVariant = 5;
         if (player.weapon is Tidarion) elementalVariant = 6;
         switch (elementalVariant) {
             case ElementalRace.ELEMENT_SYLPH:
@@ -3428,7 +3413,7 @@ public class Combat extends BaseContent {
 				doWindDamage(damage, true, true);
                 break;
         }
-		if (player.weapon is MoonlightGreatsword || player.weapon is Tidarion) {
+		if (player.weapon is MoonlightGreatsword || player.weapon is MoonlightClaws || player.weapon is Tidarion) {
 			var swordEXPgains:Number = 1;
 			if (player.hasPerk(PerkLib.MeleeWeaponsMastery)) swordEXPgains += 2;
 			if (monster.short == "training dummy" && flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 1) {
@@ -5073,7 +5058,7 @@ public class Combat extends BaseContent {
 				damage += scalingBonusIntelligence() * 0.2;
 				if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurry1to4)) damage*=1+(0.2*player.perkv1(PerkLib.ELFElvenSpearDancingFlurry1to4));
 			}
-			else if (player.weapon is MoonlightGreatsword || player.weapon is Tidarion) {
+			else if (player.weapon is MoonlightGreatsword || player.weapon is MoonlightClaws || player.weapon is Tidarion) {
 				damage += player.inte;
 				damage += scalingBonusIntelligence() * 0.2;
 			}
@@ -5156,6 +5141,16 @@ public class Combat extends BaseContent {
 		if (player.weaponSpecials("Dual Small")) damage *= (1 + (0.01 * dualWSLevel()));
 		if (player.weaponSpecials("Dual")) damage *= (1 + (0.01 * dualWNLevel()));
 		if (player.weaponSpecials("Dual Large")) damage *= (1 + (0.01 * dualWLLevel()));
+
+        var weaponSize:Number = 1;
+        if( player.weaponSpecials("Small") ) weaponSize = 0;
+        if( player.weaponSpecials("Large") ) weaponSize = 2;
+        if( player.weaponSpecials("Massive") ) weaponSize = 3;
+        if (weaponSize == 0) damage *= (1 + (0.01 * weaponSizeSmall()));
+        if (weaponSize == 1) damage *= (1 + (0.01 * weaponSizeNormal()));
+        if (weaponSize == 2) damage *= (1 + (0.01 * weaponSizeLarge()));
+        if (weaponSize == 3) damage *= (1 + (0.01 * weaponSizeMassive()));
+
 		//Thunderous Strikes
 		if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
 		if (player.hasPerk(PerkLib.ChiReflowMagic)) damage *= UmasShop.NEEDLEWORK_MAGIC_REGULAR_MULTI;
@@ -5504,6 +5499,8 @@ public class Combat extends BaseContent {
                         doDarknessDamage(damage, true, true);
                     }
                     else if (player.weapon == weapons.MGSWORD)
+                        doMagicDamage(damage, true, true);
+                    else if (player.weapon == weapons.MCLAWS)
                         doMagicDamage(damage, true, true);
                     else if (player.weapon == weapons.PHALLUS) {
                         if (player.statusEffectv1(StatusEffects.ThePhalluspear1) == 1) monster.teased(Math.round(monster.lustVuln * damage * 0.05));
