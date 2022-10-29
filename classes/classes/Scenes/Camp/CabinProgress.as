@@ -218,7 +218,7 @@ import classes.Scenes.SceneLib;
 			}
 		}
 		
-		public function quarrySite(nightExploration:Boolean = false):void {
+		public function quarrySite():void {
 			clearOutput();
 			if (player.hasStatusEffect(StatusEffects.ResourceNode1) && player.statusEffectv2(StatusEffects.ResourceNode1) >= 5) outputText("You return to the mountain area where you found before a very good mineral formation.");
 			else outputText("As you explore the mountain area you run into what appears to be a very good mineral formation.");
@@ -234,8 +234,8 @@ import classes.Scenes.SceneLib;
 				addButton(1, "Pickaxe", quarrySitePickaxe);
 			}
 			else {
-				if (nightExploration) addButton(0, "Mine(N)", quarrySiteMine);
-				else addButton(0, "Mine(D)", quarrySiteMine);
+				if (model.time.hours <= 5 || model.time.hours >= 21) addButton(0, "Mine (N)", quarrySiteMine, true);
+				else addButton(0, "Mine (D)", quarrySiteMine).hint("Some ores might be available only at night.");
 			}
 			addButton(14, "Leave", camp.returnToCampUseOneHour);
 		}
@@ -273,8 +273,7 @@ import classes.Scenes.SceneLib;
 				outputText(" Along with the stone you managed to dig up " + gemsMined + " gems!");
 				player.gems += gemsMined;
 			}
-			if (nightExploration) findOre(true);
-			else findOre();
+			findOre(nightExploration);
 		}
 		
 		private function findOre(nightExploration:Boolean = false):void {
