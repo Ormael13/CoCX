@@ -627,7 +627,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 		}
 		if (player.hasPerk(PerkLib.Berzerker)) {
-			bd = buttons.add("Berserk", berzerk);
+			bd = buttons.add("Berserk G1", berzerk);
 			if (player.hasPerk(PerkLib.ColderFury)) {
 				bd.hint("Throw yourself into a cold(er) rage!  Greatly increases the strength of your weapon and increases lust resistance. \n");
 			} else if (player.hasPerk(PerkLib.ColdFury)) {
@@ -638,6 +638,16 @@ public class MagicSpecials extends BaseCombatContent {
 			bd.requireWrath(50);
 			if (player.hasStatusEffect(StatusEffects.Berzerking)) {
 				bd.disable("You're already pretty goddamn mad!");
+			}
+		}
+		if (player.hasPerk(PerkLib.Anger) && player.hasStatusEffect(StatusEffects.Berzerking)) {
+			bd = buttons.add("Berserk G2", berzerkG2);
+			if (player.statusEffectv2(StatusEffects.Berzerking) >= 1) {
+				bd.disable("You're already reached 2nd grade of Berserk!");
+			}
+			bd = buttons.add("Berserk G3", berzerkG3);
+			if (player.statusEffectv2(StatusEffects.Berzerking) >= 2) {
+				bd.disable("You're already reached 3rd grade of Berserk!");
 			}
 		}
 		if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1 || player.isRaceCached(Races.SHARK)) {
@@ -651,7 +661,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 		}
 		if (player.hasPerk(PerkLib.Lustzerker) || player.jewelryName == "Flame Lizard ring" || player.jewelryName2 == "Flame Lizard ring" || player.jewelryName3 == "Flame Lizard ring" || player.jewelryName4 == "Flame Lizard ring") {
-			bd = buttons.add("Lustserk", lustzerk);
+			bd = buttons.add("Lustserk G1", lustzerk);
 			if (player.hasPerk(PerkLib.ColderLust)) {
 				bd.hint("Throw yourself into a cold(er) lust rage!  Greatly increases the strength of your weapon and increases armor defense. \n");
 			} else if (player.hasPerk(PerkLib.ColdLust)) {
@@ -662,6 +672,16 @@ public class MagicSpecials extends BaseCombatContent {
 			bd.requireWrath(50);
 			if (player.hasStatusEffect(StatusEffects.Lustzerking)) {
 				bd.disable("You're already pretty goddamn mad & lustfull!");
+			}
+		}
+		if (player.hasPerk(PerkLib.Anger) && player.hasStatusEffect(StatusEffects.Lustzerking)) {
+			bd = buttons.add("Lustserk G2", lustzerkG2);
+			if (player.statusEffectv2(StatusEffects.Lustzerking) >= 1) {
+				bd.disable("You're already reached 2nd grade of Lustserk!");
+			}
+			bd = buttons.add("Lustserk G3", lustzerkG3);
+			if (player.statusEffectv2(StatusEffects.Lustzerking) >= 2) {
+				bd.disable("You're already reached 2nd grade of Lustserk!");
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsTyrantState)) {
@@ -3054,6 +3074,20 @@ public class MagicSpecials extends BaseCombatContent {
 		player.createStatusEffect(StatusEffects.Berzerking,berzerkDuration,0,0,0);
 		enemyAI();
 	}
+	public function berzerkG2():void {
+		clearOutput();
+		outputText("Placeholder text that only meantion savage fury reaching Grade 2. +1 large/massive weapon atk. - 50% max over HP.\n\n");
+		player.HP -= Math.round(player.maxOverHP() * 0.5);
+		player.addStatusValue(StatusEffects.Berzerking, 2, 1);
+		enemyAI();
+	}
+	public function berzerkG3():void {
+		clearOutput();
+		outputText("Placeholder text that only meantion savage fury reaching Grade 3. +1 large/massive weapon atk. - 50% max over HP.\n\n");
+		player.HP -= Math.round(player.maxOverHP() * 0.5);
+		player.addStatusValue(StatusEffects.Berzerking, 2, 1);
+		enemyAI();
+	}
 
 	public function bloodFrenzy():void {
 		clearOutput();
@@ -3084,6 +3118,20 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		else outputText("You roar and unleash your lustful fury, forgetting about defense from any sexual attacks or magical attacks in order to destroy your foe!\n\n");
 		player.createStatusEffect(StatusEffects.Lustzerking,lustzerkDuration,0,0,0);
+		enemyAI();
+	}
+	public function lustzerkG2():void {
+		clearOutput();
+		outputText("Placeholder text that only meantion lusty fury reaching Grade 2. +1 large/massive weapon atk. - 50% max over HP.\n\n");
+		player.HP -= Math.round(player.maxOverHP() * 0.5);
+		player.addStatusValue(StatusEffects.Lustzerking, 2, 1);
+		enemyAI();
+	}
+	public function lustzerkG3():void {
+		clearOutput();
+		outputText("Placeholder text that only meantion lusty fury reaching Grade 3. +1 large/massive weapon atk. - 50% max over HP.\n\n");
+		player.HP -= Math.round(player.maxOverHP() * 0.5);
+		player.addStatusValue(StatusEffects.Lustzerking, 2, 1);
 		enemyAI();
 	}
 
