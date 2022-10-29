@@ -415,12 +415,12 @@ public class Combat extends BaseContent {
 			outputText("Just as you would be defeated, the Tears of Denial you prepared restores you to full health and clarity of mind. To [themonster] dismay you get back up, still undefeated and ready to keep fighting.");
 			player.HP = player.maxOverHP();
 			player.lust = player.minLust();
-			doNext(curry(combatMenu, true));
+			combatMenu(false);
 		}
 		else if ((player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking)) && player.hasPerk(PerkLib.TooAngryToDie)) {
 			if (!player.hasStatusEffect(StatusEffects.TooAngryTooDie)) player.createStatusEffect(StatusEffects.TooAngryTooDie, 0, 0, 0, 0);
 			player.HP = player.minHP() + 1;
-			doNext(curry(combatMenu, true));
+            combatMenu(false);
 		}
         else monster.won_(true, false);
     }
@@ -11569,7 +11569,6 @@ public function SingIntensify(Bee:Boolean = false):void {
         outputText("Try as you might you cannot intensify the strength of your song any further.");
         menu();
         addButton(0, "Next", combatMenu, false);
-        return;
     }
 }
 
