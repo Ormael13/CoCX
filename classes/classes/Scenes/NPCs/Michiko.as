@@ -172,7 +172,7 @@ public function campMichikoTalkRegion():void {
 public function campMichikoTalkRegionWasteland():void {
 	clearOutput();
 	outputText("You inquire about the Mareth wasteland. The endless expanse of nothingness that spans most of the area.\n\n");
-	outputText("\"<i>Mareth is a big place [name] but just because it appears empty does not mean it is. Several people have been spotted wandering the area, including that weirdo merchant Giacomo. There's also rumors that  a goblin trader has settled up shop there somewhere, that is if you can find her of course. It's also possible one or more of the cave systems in the area could be inhabited.</i>\"\n\n");
+	outputText("\"<i>Mareth is a big place, [name], but just because it appears empty, does not mean it is. Several people have been spotted wandering the area, including that weirdo merchant Giacomo. There's also rumors that  a goblin trader has set up shop there somewhere, that is if you can find her of course. It's also possible one or more of the cave systems in the area could be inhabited.</i>\"\n\n");
 	doNext(campMichikoTalkRegion);
 	eachMinuteCount(15);
 }
@@ -223,18 +223,10 @@ public function campMichikoTalkRegionHighMountains():void {
 	outputText("that used to once be Mareth’s greatest holy site until the demons damaged it. If the demons do have a fortress it’s likely located somewhere up there.</i>\"\n\n");
 	doNext(campMichikoTalkRegion);
 	eachMinuteCount(15);
-}/*
-public function campMichikoTalkRegion():void {
-	clearOutput();
-	outputText("\n\n");
-	outputText("\"<i>");
-	outputText("</i>\"\n\n");
-	doNext(campMichikoTalkRegion);
-	eachMinuteCount(15);
-}*/
+}
 public function campMichikoTalkRegionPlains():void {
 	clearOutput();
-	outputText("What does she knows about the plains of Mareth?\n\n");
+	outputText("What does she know about the plains of Mareth?\n\n");
 	outputText("The plains of Mareth are home to many tribes both good and bad. I know there's at least one remaining village of sheep morphs and several kangaroo morphs hunting there though odds are good, you will never find their burrows as they hide underground at night. Of all the tribes though avoid the gnolls, they are highly territorial and enjoy dominating males above anything else. \"<i>");
 	outputText("Finally there's also a demonic camp somewhere which acts as a trade hub for people of questionable morality.</i>\"\n\n");
 	doNext(campMichikoTalkRegion);
@@ -247,27 +239,11 @@ public function campMichikoTalkRegionSwamp():void {
 	outputText("Either they attack you or they talk to you. I generally prefer to flee rather then find out.</i>\"\n\n");
 	doNext(campMichikoTalkRegion);
 	eachMinuteCount(15);
-}/*
-public function campMichikoTalkRegion():void {
-	clearOutput();
-	outputText("\n\n");
-	outputText("\"<i>");
-	outputText("</i>\"\n\n");
-	doNext(campMichikoTalkRegion);
-	eachMinuteCount(15);
 }
-public function campMichikoTalkRegion():void {
-	clearOutput();
-	outputText("\n\n");
-	outputText("\"<i>");
-	outputText("</i>\"\n\n");
-	doNext(campMichikoTalkRegion);
-	eachMinuteCount(15);
-}*/
 public function campMichikoTalkMarriage():void {
 	clearOutput();
 	outputText("With the whole demon invasion and sex everywhere you're surprised love still manages to blossom around Mareth in one way or another with people not going Aphrodiphobic. Thinking on it you've never considered to ask any of your partners how courtship and weddings even happen here if such a concept as matrimony and faithfulness still hold any shadow of a value here.\n\n");
-	outputText("\"<i>Oh courtship in Mareth is no different from other worlds, people fall in love and hang together all the same, sometimes they even marry. This said, Marriage on Mareth especially in those difficult times has been given some leniency. A man or woman may have multiple partners but as a rule of thumb you only marry once. It is also customary for the proposal to include a wedding ring. ");
+	outputText("\"<i>Oh courtship in Mareth is no different from other worlds, people fall in love and hang together all the same, sometimes they even marry. This said, marriage on Mareth especially in those difficult times has been given some leniency. A man or woman may have multiple partners but as a rule of thumb you only marry once. It is also customary for the proposal to include a wedding ring. ");
 	outputText("Whoever you chose becomes the official queen or king of your would be harem by principe. Loving people equally? Ah... what a lie, everyone has a favorite whether they want to admit it or not.</i>\"\n\n");
 	outputText("So in order to marry someone you just need an engagement ring?\n\n");
 	outputText("\"<i>That you do but a fair bit of warning, weddings attracts a lot of people and are handled in public churches dedicated to Marae thus it also tends to drag the attention of troublemakers. Your foes will be well aware of the wedding going on just as well as if you would have screamed it out loud, they simply will know. Be prepared to defend your happy day at any time, I've yet to see one going well from start to finish.</i>\"\n\n");

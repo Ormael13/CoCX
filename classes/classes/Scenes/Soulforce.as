@@ -89,7 +89,7 @@ public class Soulforce extends BaseContent
 			else addButton(10, "Metamorph", SceneLib.metamorph.openMetamorph).hint("Use your soulforce to mold your body.");//używanie metamorfowania z użyciem soulforce
 		}
 		else addButtonDisabled(10, "???", "Req. Metamorph.");
-		addButton(13, "Cultivation", Contemplations).hint("Contemplate mysteries of the world to try progress your soul cultivation path. Maybe even attain cultivation base breakthrou. (Req. 100% or 30% of max Soulforce + high enough wisdom / level + sometimes some additional req.)");
+		addButton(13, "Cultivation", Contemplations).hint("Contemplate mysteries of the world in attempt to progress your soul cultivation path.");
 		addButton(14, "Back", playerMenu);
 	}
 
@@ -149,9 +149,9 @@ public class Soulforce extends BaseContent
 			/*0*/[0, "Early Soul Apprentice", "E.S.A.", 20, PerkLib.SoulApprentice],
 			[1, "Middle Soul Apprentice", "M.S.A."],
 			[1, "Late Soul Apprentice", "L.S.A."],
-			/*3*/[0, "Early Soul Apprentice", "E.S.P.", 40, PerkLib.SoulPersonage],
-			[1, "Middle Soul Apprentice", "M.S.P."],
-			[1, "Late Soul Apprentice", "L.S.P."],
+			/*3*/[0, "Early Soul Personage", "E.S.P.", 40, PerkLib.SoulPersonage],
+			[1, "Middle Soul Personage", "M.S.P."],
+			[1, "Late Soul Personage", "L.S.P."],
 			/*6*/[0, "Early Soul Warrior", "E.S.W.", 60, PerkLib.SoulWarrior],
 			[1, "Middle Soul Warrior", "M.S.W."],
 			[1, "Late Soul Warrior", "L.S.W."],
