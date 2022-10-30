@@ -33,6 +33,7 @@ import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.NPCs.ZenjiScenes;
 import classes.Scenes.Places.WoodElves;
 import classes.Scenes.SceneLib;
+import classes.Scenes.Soulforce;
 import classes.StatusEffects.VampireThirstEffect;
 import classes.lists.BreastCup;
 
@@ -247,53 +248,16 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (player.statusEffectv1(StatusEffects.WendigoPsychosis) <= 0) player.removeStatusEffect(StatusEffects.WendigoPsychosis);
 			}
 			//
-			if (player.hasStatusEffect(StatusEffects.PCClone1st) && player.statusEffectv1(StatusEffects.PCClone1st) > 10 && player.statusEffectv1(StatusEffects.PCClone1st) < 21) {
-				if (player.statusEffectv1(StatusEffects.PCClone1st) == 11 && player.statusEffectv2(StatusEffects.DaoOfFire) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfFire, "Fire");
-				if (player.statusEffectv1(StatusEffects.PCClone1st) == 12 && player.statusEffectv2(StatusEffects.DaoOfIce) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfIce, "Ice");
-				if (player.statusEffectv1(StatusEffects.PCClone1st) == 13 && player.statusEffectv2(StatusEffects.DaoOfLightning) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfLightning, "Lightning");
-				if (player.statusEffectv1(StatusEffects.PCClone1st) == 14 && player.statusEffectv2(StatusEffects.DaoOfDarkness) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfDarkness, "Darkness");
-				if (player.statusEffectv1(StatusEffects.PCClone1st) == 15 && player.statusEffectv2(StatusEffects.DaoOfPoison) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfPoison, "Poison");
-				if (player.statusEffectv1(StatusEffects.PCClone1st) == 16 && player.statusEffectv2(StatusEffects.DaoOfWind) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfWind, "Wind");
-				if (player.statusEffectv1(StatusEffects.PCClone1st) == 17 && player.statusEffectv2(StatusEffects.DaoOfBlood) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfBlood, "Blood");
-				if (player.statusEffectv1(StatusEffects.PCClone1st) == 18 && player.statusEffectv2(StatusEffects.DaoOfWater) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfWater, "Water");
-				if (player.statusEffectv1(StatusEffects.PCClone1st) == 19 && player.statusEffectv2(StatusEffects.DaoOfEarth) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfEarth, "Earth");
-				if (player.statusEffectv1(StatusEffects.PCClone1st) == 20 && player.statusEffectv2(StatusEffects.DaoOfAcid) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfAcid, "Acid");
-			}
-			if (player.hasStatusEffect(StatusEffects.PCClone2nd) && player.statusEffectv1(StatusEffects.PCClone2nd) > 10 && player.statusEffectv1(StatusEffects.PCClone2nd) < 21) {
-				if (player.statusEffectv1(StatusEffects.PCClone2nd) == 11 && player.statusEffectv2(StatusEffects.DaoOfFire) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfFire, "Fire");
-				if (player.statusEffectv1(StatusEffects.PCClone2nd) == 12 && player.statusEffectv2(StatusEffects.DaoOfIce) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfIce, "Ice");
-				if (player.statusEffectv1(StatusEffects.PCClone2nd) == 13 && player.statusEffectv2(StatusEffects.DaoOfLightning) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfLightning, "Lightning");
-				if (player.statusEffectv1(StatusEffects.PCClone2nd) == 14 && player.statusEffectv2(StatusEffects.DaoOfDarkness) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfDarkness, "Darkness");
-				if (player.statusEffectv1(StatusEffects.PCClone2nd) == 15 && player.statusEffectv2(StatusEffects.DaoOfPoison) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfPoison, "Poison");
-				if (player.statusEffectv1(StatusEffects.PCClone2nd) == 16 && player.statusEffectv2(StatusEffects.DaoOfWind) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfWind, "Wind");
-				if (player.statusEffectv1(StatusEffects.PCClone2nd) == 17 && player.statusEffectv2(StatusEffects.DaoOfBlood) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfBlood, "Blood");
-				if (player.statusEffectv1(StatusEffects.PCClone2nd) == 18 && player.statusEffectv2(StatusEffects.DaoOfWater) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfWater, "Water");
-				if (player.statusEffectv1(StatusEffects.PCClone2nd) == 19 && player.statusEffectv2(StatusEffects.DaoOfEarth) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfEarth, "Earth");
-				if (player.statusEffectv1(StatusEffects.PCClone2nd) == 20 && player.statusEffectv2(StatusEffects.DaoOfAcid) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfAcid, "Acid");
-			}
-			if (player.hasStatusEffect(StatusEffects.PCClone3rd) && player.statusEffectv1(StatusEffects.PCClone3rd) > 10 && player.statusEffectv1(StatusEffects.PCClone3rd) < 21) {
-				if (player.statusEffectv1(StatusEffects.PCClone3rd) == 11 && player.statusEffectv2(StatusEffects.DaoOfFire) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfFire, "Fire");
-				if (player.statusEffectv1(StatusEffects.PCClone3rd) == 12 && player.statusEffectv2(StatusEffects.DaoOfIce) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfIce, "Ice");
-				if (player.statusEffectv1(StatusEffects.PCClone3rd) == 13 && player.statusEffectv2(StatusEffects.DaoOfLightning) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfLightning, "Lightning");
-				if (player.statusEffectv1(StatusEffects.PCClone3rd) == 14 && player.statusEffectv2(StatusEffects.DaoOfDarkness) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfDarkness, "Darkness");
-				if (player.statusEffectv1(StatusEffects.PCClone3rd) == 15 && player.statusEffectv2(StatusEffects.DaoOfPoison) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfPoison, "Poison");
-				if (player.statusEffectv1(StatusEffects.PCClone3rd) == 16 && player.statusEffectv2(StatusEffects.DaoOfWind) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfWind, "Wind");
-				if (player.statusEffectv1(StatusEffects.PCClone3rd) == 17 && player.statusEffectv2(StatusEffects.DaoOfBlood) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfBlood, "Blood");
-				if (player.statusEffectv1(StatusEffects.PCClone3rd) == 18 && player.statusEffectv2(StatusEffects.DaoOfWater) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfWater, "Water");
-				if (player.statusEffectv1(StatusEffects.PCClone3rd) == 19 && player.statusEffectv2(StatusEffects.DaoOfEarth) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfEarth, "Earth");
-				if (player.statusEffectv1(StatusEffects.PCClone3rd) == 20 && player.statusEffectv2(StatusEffects.DaoOfAcid) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfAcid, "Acid");
-			}
-			if (player.hasStatusEffect(StatusEffects.PCClone4th) && player.statusEffectv1(StatusEffects.PCClone4th) > 10 && player.statusEffectv1(StatusEffects.PCClone4th) < 21) {
-				if (player.statusEffectv1(StatusEffects.PCClone4th) == 11 && player.statusEffectv2(StatusEffects.DaoOfFire) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfFire, "Fire");
-				if (player.statusEffectv1(StatusEffects.PCClone4th) == 12 && player.statusEffectv2(StatusEffects.DaoOfIce) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfIce, "Ice");
-				if (player.statusEffectv1(StatusEffects.PCClone4th) == 13 && player.statusEffectv2(StatusEffects.DaoOfLightning) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfLightning, "Lightning");
-				if (player.statusEffectv1(StatusEffects.PCClone4th) == 14 && player.statusEffectv2(StatusEffects.DaoOfDarkness) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfDarkness, "Darkness");
-				if (player.statusEffectv1(StatusEffects.PCClone4th) == 15 && player.statusEffectv2(StatusEffects.DaoOfPoison) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfPoison, "Poison");
-				if (player.statusEffectv1(StatusEffects.PCClone4th) == 16 && player.statusEffectv2(StatusEffects.DaoOfWind) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfWind, "Wind");
-				if (player.statusEffectv1(StatusEffects.PCClone4th) == 17 && player.statusEffectv2(StatusEffects.DaoOfBlood) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfBlood, "Blood");
-				if (player.statusEffectv1(StatusEffects.PCClone4th) == 18 && player.statusEffectv2(StatusEffects.DaoOfWater) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfWater, "Water");
-				if (player.statusEffectv1(StatusEffects.PCClone4th) == 19 && player.statusEffectv2(StatusEffects.DaoOfEarth) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfEarth, "Earth");
-				if (player.statusEffectv1(StatusEffects.PCClone4th) == 20 && player.statusEffectv2(StatusEffects.DaoOfAcid) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfAcid, "Acid");
+			for each (var clone:StatusEffectType in Soulforce.clones) {
+				if (player.hasStatusEffect(clone)) {
+					var cloneDao:int = player.statusEffectv1(clone);
+					if (cloneDao > 10 && cloneDao < 21) {
+						for (var i:int = 0; i < Soulforce.daos.length; ++i) {
+							if (Soulforce.daos[i][2] == cloneDao && player.statusEffectv2(Soulforce.daos[i][1]) < SceneLib.soulforce.highestLayerOfDaoComprehension())
+								SceneLib.soulforce.daoContemplationsEffect(Soulforce.daos[i][1], Soulforce.daos[i][0], true);
+						}
+					}
+				}
 			}
 			//
 			if (player.hasStatusEffect(StatusEffects.DinahGift)) {
@@ -1286,7 +1250,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			if (player.hasStatusEffect(StatusEffects.DemonEnergyThirstFeed)) {
 				if (player.hunger < player.maxHunger()) player.refillHunger(10, false);
 				if (player.HP < player.maxHP()) EngineCore.HPChange(100 + (player.tou*2), true);
-				if (player.mana < player.maxMana()) EngineCore.ManaChange(100 + (player.inte*2), true);
+				if (player.mana < player.maxMana()) EngineCore.ManaChange(100 + (player.inte*2));
 				EngineCore.changeFatigue(-(100 + (player.spe*2)));
 				outputText("You feel energised and empowered by the energy drained out of the cum of your recent fuck. What a meal!");
 				player.removeStatusEffect(StatusEffects.DemonEnergyThirstFeed)
@@ -1376,11 +1340,11 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					EngineCore.HPChange(100 + (player.tou*2), true);
 				}
 				if (player.mana < player.maxMana()) {
-					EngineCore.ManaChange(100 + (player.inte*2), true);
+					EngineCore.ManaChange(100 + (player.inte*2));
 				}
 				EngineCore.changeFatigue(-(100 + (player.spe*2)));
 				if (player.soulforce < player.maxOverSoulforce()) {
-					EngineCore.SoulforceChange(500 + (player.wis*2), true);
+					EngineCore.SoulforceChange(500 + (player.wis*2));
 				}
 				outputText("You feel energised and empowered by the life force drained out of the fluids of your recent blind date. What a meal!");
 				player.removeStatusEffect(StatusEffects.KitsuneEnergyThirstFeed);

@@ -135,115 +135,47 @@ public class EngineCore {
         }
     }
 
-    public static function SoulforceChange(changeNum:Number, display:Boolean):Number {
+    public static function SoulforceChange(changeNum:Number):Number {
         var before:Number = CoC.instance.player.soulforce;
         if (changeNum == 0) return 0;
         if (changeNum > 0) {
-            if (CoC.instance.player.soulforce + int(changeNum) > maxOverSoulforce()) {
-                //	if(CoC.instance.player.HP >= maxHP()) {
-                //	if (display) HPChangeNotify(changeNum);
-                //		return CoC.instance.player.HP - before;
-                //	}
-                //	if (display) HPChangeNotify(changeNum);
-                CoC.instance.player.soulforce = maxOverSoulforce();
-            }
-            else {
-                //	if (display) HPChangeNotify(changeNum);
-                CoC.instance.player.soulforce += changeNum;
-                //	CoC.instance.mainView.statsView.showStatUp( 'hp' );
-                // hpUp.visible = true;
-            }
+            if (CoC.instance.player.soulforce + int(changeNum) > maxOverSoulforce()) CoC.instance.player.soulforce = maxOverSoulforce();
+            else CoC.instance.player.soulforce += changeNum;
+        } else {
+            if (CoC.instance.player.soulforce + changeNum <= 0) CoC.instance.player.soulforce = 0;
+            else CoC.instance.player.soulforce += changeNum;
         }
-        //Negative Soulforce
-        	else
-            {
-                if(CoC.instance.player.soulforce + changeNum <= 0) {
-                    //if (display) HPChangeNotify(changeNum);
-                    CoC.instance.player.soulforce = 0;
-                    //CoC.instance.mainView.statsView.showStatDown( 'hp' );
-                }
-                else {
-                    //if (display) HPChangeNotify(changeNum);
-                    CoC.instance.player.soulforce += changeNum;
-                    //CoC.instance.mainView.statsView.showStatDown( 'hp' );
-                }
-            }
-        CoC.instance.player.dynStats("lust", 0, "scale", false) //Workaround to showing the arrow.
+        CoC.instance.player.dynStats("lust", 0, "scale", false);
         statScreenRefresh();
         return CoC.instance.player.soulforce - before;
     }
 
-    public static function ManaChange(changeNum:Number, display:Boolean):Number {
+    public static function ManaChange(changeNum:Number):Number {
         var before:Number = CoC.instance.player.mana;
         if (changeNum == 0) return 0;
         if (changeNum > 0) {
-            if (CoC.instance.player.mana + int(changeNum) > maxOverMana()) {
-                //	if(CoC.instance.player.HP >= maxHP()) {
-                //	if (display) HPChangeNotify(changeNum);
-                //		return CoC.instance.player.HP - before;
-                //	}
-                //	if (display) HPChangeNotify(changeNum);
-                CoC.instance.player.mana = maxOverMana();
-            }
-            else {
-                //	if (display) HPChangeNotify(changeNum);
-                CoC.instance.player.mana += changeNum;
-                //	CoC.instance.mainView.statsView.showStatUp( 'hp' );
-                // hpUp.visible = true;
-            }
+            if (CoC.instance.player.mana + int(changeNum) > maxOverMana()) CoC.instance.player.mana = maxOverMana();
+            else CoC.instance.player.mana += changeNum;
+        } else {
+            if (CoC.instance.player.mana + changeNum <= 0) CoC.instance.player.mana = 0;
+            else CoC.instance.player.mana += changeNum;
         }
-        //Negative Mana
-        	else
-            {
-                if(CoC.instance.player.mana + changeNum <= 0) {
-                    //if (display) HPChangeNotify(changeNum);
-                    CoC.instance.player.mana = 0;
-                    //CoC.instance.mainView.statsView.showStatDown( 'hp' );
-                }
-                else {
-                    //if (display) HPChangeNotify(changeNum);
-                    CoC.instance.player.mana += changeNum;
-                    //CoC.instance.mainView.statsView.showStatDown( 'hp' );
-                }
-            }
         CoC.instance.player.dynStats("lust", 0, "scale", false) //Workaround to showing the arrow.
         statScreenRefresh();
         return CoC.instance.player.mana - before;
     }
 
-    public static function WrathChange(changeNum:Number, display:Boolean):Number {
+    public static function WrathChange(changeNum:Number):Number {
         var before:Number = CoC.instance.player.wrath;
         if (changeNum == 0) return 0;
         if (changeNum > 0) {
-            if (CoC.instance.player.wrath + int(changeNum) > maxOverWrath()) {
-                //	if(CoC.instance.player.HP >= maxHP()) {
-                //	if (display) HPChangeNotify(changeNum);
-                //		return CoC.instance.player.HP - before;
-                //	}
-                //	if (display) HPChangeNotify(changeNum);
-                CoC.instance.player.wrath = maxOverWrath();
-            }
-            else {
-                //	if (display) HPChangeNotify(changeNum);
-                CoC.instance.player.wrath += changeNum;
-                //	CoC.instance.mainView.statsView.showStatUp( 'hp' );
-                // hpUp.visible = true;
-            }
+            if (CoC.instance.player.wrath + int(changeNum) > maxOverWrath()) CoC.instance.player.wrath = maxOverWrath();
+            else CoC.instance.player.wrath += changeNum;
+        } else {
+            if (CoC.instance.player.wrath + changeNum <= 0) CoC.instance.player.wrath = 0;
+            else CoC.instance.player.wrath += changeNum;
         }
-        //Negative Wrath
-        else {
-            if (CoC.instance.player.wrath + changeNum <= 0) {
-                //if (display) HPChangeNotify(changeNum);
-                CoC.instance.player.wrath = 0;
-                //CoC.instance.mainView.statsView.showStatDown('hp');
-            }
-            else {
-                //if (display) HPChangeNotify(changeNum);
-                CoC.instance.player.wrath += changeNum;
-               // CoC.instance.mainView.statsView.showStatDown('hp');
-            }
-        }
-        CoC.instance.player.dynStats("lust", 0, "scale", false); //Workaround to showing the arrow.
+        CoC.instance.player.dynStats("lust", 0, "scale", false) //Workaround to showing the arrow.
         statScreenRefresh();
         return CoC.instance.player.wrath - before;
     }

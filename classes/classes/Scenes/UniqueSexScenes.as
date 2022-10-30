@@ -708,7 +708,7 @@ public class UniqueSexScenes extends BaseContent
 			outputText("Instinctively sensing the imminent climax you wrap your lips tightly around the throbbing cock, sealing shut as the demon unloads ropes after ropes of corrupted cum directly into your massaging throat.\n\n");
 			outputText("The meal is satisfying, though it does not restore your humanity, lacking the soulforce you require to make you slightly more alive. Finished with the demon, you hop off and take your leave"+(inDungeon ? "":" heading back to camp")+".\n\n");
 			HPChange(Math.round(player.maxHP() * 0.1), true);
-			EngineCore.ManaChange(Math.round(player.maxMana() * 0.1), true);
+			EngineCore.ManaChange(Math.round(player.maxMana() * 0.1));
 			player.fatigue -= Math.round(player.maxFatigue() * 0.1);
 			if (player.fatigue < 0) player.fatigue = 0;
 			player.trainStat("lib", 1, 50);
@@ -745,7 +745,7 @@ public class UniqueSexScenes extends BaseContent
 				outputText("For a few moments you bask in the high, your flesh bursting with energy. But you’re no longer getting anything from this slut, you’ll need another to get your fix.\n\n");
 				outputText("Unconcerned by the demon's fate you stand up and" + (inDungeon ? " resume exploring the labyrinth" : " hop back to camp") + ".\n\n");
 				HPChange(Math.round(player.maxHP() * 0.1), true);
-				EngineCore.ManaChange(Math.round(player.maxMana() * 0.1), true);
+				EngineCore.ManaChange(Math.round(player.maxMana() * 0.1));
 				player.fatigue -= Math.round(player.maxFatigue() * 0.1);
 				if (player.fatigue < 0) player.fatigue = 0;
 				dynStats("cor", 1);

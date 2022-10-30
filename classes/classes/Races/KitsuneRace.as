@@ -136,7 +136,7 @@ public class KitsuneRace extends Race {
 					"maxfatigue_base": +100
 				})
 				.withExtraBonuses(
-						"+100% SF Regeneration"
+						"+40% SF Regeneration"
 				)
 				.end();
 		buildTier(16, "nine tailed kitsune")
@@ -154,7 +154,7 @@ public class KitsuneRace extends Race {
 					"maxfatigue_base": +300
 				})
 				.withExtraBonuses(
-					"+100% SF Regeneration"
+					"+80% SF Regeneration"
 				)
 				.end();
 		buildTier(21, "nine tailed kitsune of balance")
@@ -172,7 +172,7 @@ public class KitsuneRace extends Race {
 					"maxfatigue_base": +500
 				})
 				.withExtraBonuses(
-					"+100% SF Regeneration"
+					"+130% SF Regeneration"
 				)
 				.end();
 		buildTier(26, "Inari")
@@ -189,7 +189,7 @@ public class KitsuneRace extends Race {
 					"maxfatigue_base": +1000
 				})
 				.withExtraBonuses(
-					"+100% SF Regeneration"
+					"+200% SF Regeneration"
 				)
 				.end();
 		

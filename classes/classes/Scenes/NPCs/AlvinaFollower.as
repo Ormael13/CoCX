@@ -21,9 +21,9 @@ public function alvinaFirstEncounter():void
 	spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2Concealed_16bit);
 	clearOutput();
 	outputText("Along your travels, you meet a woman in robes with black hair. You expected to find at least a few humans in Mareth, if nothing else, the previous champions, so to find another human in this realm is a relief. You ask if she could give you directions, as you have no idea what to expect in this realm. As a champion, your job is to fight the demons, but you can’t fight them if you have no idea where to look.\n\n");
-	outputText("\"<i>Directions and demons, hm? There are many places you could visit. If I were you, I would go to the lake and look for a peculiar island at its center. That said, be respectful of whomever you meet there.</i>\"");
+	outputText("\"<i>Directions and demons, hm? There are many places you could visit. If I were you, I would go to the lake and look for a peculiar island at its center. That said, be respectful of whomever you meet there.</i>\"\n\n");
 	outputText("You nod and prepare to leave, but ask her who she is in case you should ever see her again.\n\n");
-	outputText("\"<i>Me? I am a person of no consequence.</i>\"");
+	outputText("\"<i>Me? I am a person of no consequence.</i>\"\n\n");
 	outputText("As you turn back to question her, you notice that she's vanished without a trace. You're not sure whether to be relieved...or concerned by this.\n\n");
 	flags[kFLAGS.ALVINA_FOLLOWER] = 1;
 	doNext(camp.returnToCampUseOneHour);

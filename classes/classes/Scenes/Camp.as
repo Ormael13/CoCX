@@ -2722,25 +2722,6 @@ public class Camp extends NPCAwareContent{
 		inventory.takeItem(result, campMiscActions);
 	}
 
-	private static var cloneStatuses:Array = [
-		StatusEffects.PCClone1st,
-		StatusEffects.PCClone2nd,
-		StatusEffects.PCClone3rd,
-		StatusEffects.PCClone4th,
-	];
-	private static var cloneDaos:Array = [
-		[11, "Fire"],
-		[12, "Ice"],
-		[13, "Lightning"],
-		[14, "Darkness"],
-		[15, "Poison"],
-		[16, "Wind"],
-		[17, "Blood"],
-		[18, "Water"],
-		[19, "Earth"],
-		[20, "Acid"],
-	];
-
 	private function VisitClone():void {
 		var clone:int;
 
@@ -2756,13 +2737,13 @@ public class Camp extends NPCAwareContent{
 			else {*/		//that part will be later used for primaltwin - note for Svalkash
 			outputText("Your clone" + (player.statusEffectv4(StatusEffects.PCClone) > 0 ? "s are" : " is") + " wandering around [camp]. What would you ask "
 				+ (player.statusEffectv4(StatusEffects.PCClone) > 0 ? "them" : "[him]") + " to do?\n\n");
-			for (clone = 0; clone < cloneStatuses.length; ++clone) {
+			for (clone = 0; clone < Soulforce.clones.length; ++clone) {
 				outputText("Current clone (" + clone + ") task: ");
-				if (player.statusEffectv1(cloneStatuses[clone]) > 10 && player.statusEffectv1(cloneStatuses[clone]) < 21) {
+				if (player.statusEffectv1(Soulforce.clones[clone]) > 10 && player.statusEffectv1(Soulforce.clones[clone]) < 21) {
 					outputText("Contemplating Dao of ");
-					for (var d:int = 0; d < cloneDaos.length; ++d) {
-						if (player.statusEffectv1(cloneStatuses[clone]) == cloneDaos[d][0])
-							outputText(cloneDaos[d][1]);
+					for (var d:int = 0; d < Soulforce.daos.length; ++d) {
+						if (player.statusEffectv1(Soulforce.clones[clone]) == Soulforce.daos[d][2])
+							outputText(Soulforce.daos[d][0]);
 					}
 				} else outputText("Nothing");
 				outputText("\n\n");
@@ -2782,10 +2763,10 @@ public class Camp extends NPCAwareContent{
 			}
 		}
 		else addButton(4, "Create", CreateClone);
-		for (clone = 0; clone < cloneStatuses.length; ++clone) {
+		for (clone = 0; clone < Soulforce.clones.length; ++clone) {
 			addButton(clone, "Contempl. ("+clone+")", cloneContemplateDao, clone)
 				.hint("Task your clone ("+clone+") with contemplating one of the Daos you know.")
-				.disableIf(!player.hasStatusEffect(cloneStatuses[clone]), "Req. fully formed clone ("+clone+").");
+				.disableIf(!player.hasStatusEffect(Soulforce.clones[clone]), "Req. fully formed clone ("+clone+").");
 		}
 		
 		//addButtonDisabled(1, "Contemplate", "Req. fully formed clone.");
@@ -2810,41 +2791,24 @@ public class Camp extends NPCAwareContent{
 		addButton(4, "Back", VisitClone);
 	}
 	private function FormClone():void {
-		clearOutput();
+		var num:int;
 		if (player.hasStatusEffect(StatusEffects.PCClone)) {
-			if (!player.hasStatusEffect(StatusEffects.PCClone4th)) {
-				FormCLoneText();
-				outputText("You share a grin now that the process is successful. Your quest remains to be completed, but now you have the power of five.\n\n");
-				outputText("<b>Your clone (4) is fully formed.</b>\n\n");
-				player.addStatusValue(StatusEffects.PCClone, 4, 1);
-				player.addStatusValue(StatusEffects.PCClone, 3, 9);
-				player.createStatusEffect(StatusEffects.PCClone4th, 0, 0, 0, 0);
+			for (var i:int = 1; i < Soulforce.clones.length; ++i)
+			if (!player.hasStatusEffect(Soulforce.clones[i])) {
+				num = i + 1;
 			}
-			else if (!player.hasStatusEffect(StatusEffects.PCClone3rd)) {
-				FormCLoneText();
-				outputText("You share a grin now that the process is successful. Your quest remains to be completed, but now you have the power of four.\n\n");
-				outputText("<b>Your clone (3) is fully formed.</b>\n\n");
-				player.addStatusValue(StatusEffects.PCClone, 4, 1);
-				player.addStatusValue(StatusEffects.PCClone, 3, 9);
-				player.createStatusEffect(StatusEffects.PCClone3rd, 0, 0, 0, 0);
-			}
-			else {
-				FormCLoneText();
-				outputText("You share a grin now that the process is successful. Your quest remains to be completed, but now you have the power of three.\n\n");
-				outputText("<b>Your clone (2) is fully formed.</b>\n\n");
-				player.addStatusValue(StatusEffects.PCClone, 4, 1);
-				player.addStatusValue(StatusEffects.PCClone, 3, 9);
-				player.createStatusEffect(StatusEffects.PCClone2nd, 0, 0, 0, 0);
-			}
+		} else {
+			num = 1;
+			player.createStatusEffect(StatusEffects.PCClone, 0, 0, 0, 0);
 		}
-		else {
-			FormCLoneText();
-			outputText("You share a grin now that the process is successful. Your quest remains to be completed, but now you have the power of two.\n\n");
-			outputText("<b>Your clone (1) is fully formed.</b>\n\n");
-			player.createStatusEffect(StatusEffects.PCClone, 0, 0, 9, 1);
-			player.createStatusEffect(StatusEffects.PCClone1st, 0, 0, 0, 0);
-		}
-		EngineCore.SoulforceChange(-player.maxSoulforce(), true);
+		clearOutput();
+		FormCLoneText();
+		outputText("You share a grin now that the process is successful. Your quest remains to be completed, but now you have the power of "+NUMBER_WORDS_NORMAL[num+1]+".\n\n");
+		outputText("<b>Your clone ("+num+") is fully formed.</b>\n\n");
+		player.addStatusValue(StatusEffects.PCClone, 3, 9);
+		player.addStatusValue(StatusEffects.PCClone, 4, 1);
+		player.createStatusEffect(Soulforce.clones[num], 0, 0, 0, 0);
+		EngineCore.SoulforceChange(-player.maxSoulforce());
 		HPChange(-(player.maxHP() * 0.9), true);
 		if (player.hasPerk(PerkLib.AscensionAdvTrainingX)) player.statPoints -= (45 + (player.perkv1(PerkLib.AscensionAdvTrainingX) * 36));
 		else player.statPoints -= 45;
@@ -2878,7 +2842,7 @@ public class Camp extends NPCAwareContent{
 				outputText("<b>Your clone is fully formed.</b>\n\n");
 				player.addStatusValue(StatusEffects.PCClone, 4, 1);
 				player.addStatusValue(StatusEffects.PCClone, 3, 30);
-				EngineCore.SoulforceChange(-player.maxSoulforce(), true);
+				EngineCore.SoulforceChange(-player.maxSoulforce());
 				HPChange(-(player.maxHP() * 0.5), true);
 				player.statPoints -= 150;
 				player.perkPoints -= 30;
@@ -2890,7 +2854,7 @@ public class Camp extends NPCAwareContent{
 				outputText("Six hours pass as the cocoon hardens into a substance akin to hard, black chitin until the cocoon is opaque. A small part of the layer around the navel keeps some translucent properties.\n\n");
 				outputText("Fatigue steadily overwhelms you after expending such intense amounts of your life energy. You lie down and rest for an hour before you decide to resume.\n\n");
 				player.addStatusValue(StatusEffects.PCClone, 4, 1);
-				EngineCore.SoulforceChange(-player.maxSoulforce(), true);
+				EngineCore.SoulforceChange(-player.maxSoulforce());
 				HPChange(-(player.maxHP() * 0.5), true);
 			}
 			else {
@@ -2900,7 +2864,7 @@ public class Camp extends NPCAwareContent{
 				outputText("With the second phase completed, you slowly break the connection with your clone. Your mind and body wrack from the expended essence you've given to your clone. You decide to take the time to rest.\n\n");
 				outputText("After a couple of hours, you rise before leaving the half-finished creation in the corner of your [camp].\n\n");
 				player.addStatusValue(StatusEffects.PCClone, 4, 1);
-				EngineCore.SoulforceChange(-player.maxSoulforce(), true);
+				EngineCore.SoulforceChange(-player.maxSoulforce());
 				HPChange(-(player.maxHP() * 0.5), true);
 			}
 		}
@@ -2909,7 +2873,7 @@ public class Camp extends NPCAwareContent{
 			outputText("An hour passes as you steadily concentrate on the essence that has left your body. Keeping your concentration on the swirling life, you guide more of essence and soul energy to leave your body and drift toward the new creation growing before you.\n\n");
 			outputText("The process is slow. While nourishing the core of the clone, you find yourself unable to expend any more of your life essence or risk being completely drained of soul essence.\n\n");
 			player.createStatusEffect(StatusEffects.PCClone, 0, 0, 0, 1);
-			EngineCore.SoulforceChange(-(player.maxSoulforce()), true);
+			EngineCore.SoulforceChange(-(player.maxSoulforce()));
 			HPChange(-(player.maxHP() * 0.5), true);
 		}
 		doNext(camp.returnToCampUseEightHours);
@@ -2920,17 +2884,17 @@ public class Camp extends NPCAwareContent{
 		outputText("Maybe your clone ("+clone+") could contemplate one of the Daos you know while you adventure outside the [camp]? But which one it should be?");
 		menu();
 		var btn:int = 0;
-		for (var d:int = 0; d < cloneDaos.length; ++d) {
-			addButton(btn++, cloneDaos[d][1], cloneContemplateDaoSet, clone, cloneDaos[d][0])
-				.disableIf(player.statusEffectv1(cloneStatuses[clone]) == cloneDaos[d][0], "Your clone ("+clone+") is currently contemplating this Dao.");
+		for (var d:int = 0; d < Soulforce.daos.length; ++d) {
+			addButton(btn++, Soulforce.daos[d][0], cloneContemplateDaoSet, clone, Soulforce.daos[d][2])
+				.disableIf(player.statusEffectv1(Soulforce.clones[clone]) == Soulforce.daos[d][2], "Your clone ("+clone+") is currently contemplating this Dao.");
 		}
 		addButton(13, "None", cloneContemplateDaoSet, clone, 10)
-			.disableIf(player.statusEffectv1(cloneStatuses[clone]) == 10, "Your clone ("+clone+") is currently not contemplating any Dao.");
+			.disableIf(player.statusEffectv1(Soulforce.clones[clone]) == 10, "Your clone ("+clone+") is currently not contemplating any Dao.");
 		addButton(14, "Back", VisitClone);
 	}
 
 	private function cloneContemplateDaoSet(clone:int, newdao:Number):void {
-		player.changeStatusValue(cloneStatuses[clone], 1, newdao);
+		player.changeStatusValue(Soulforce.clones[clone], 1, newdao);
 		cloneContemplateDao(clone);
 	}
 

@@ -500,7 +500,7 @@ public class Combat extends BaseContent {
 				if (player.hasPerk(PerkLib.PrestigeJobNecromancer) && monster.soulforce > 0) {
 					var SFHarvest:Number = monster.level * (1 + rand(3));
 					if (SFHarvest > monster.soulforce) SFHarvest = monster.soulforce;
-					EngineCore.SoulforceChange(SFHarvest, false);
+					EngineCore.SoulforceChange(SFHarvest);
 				}
             }
         }
@@ -709,7 +709,7 @@ public class Combat extends BaseContent {
 			if (player.hasStatusEffect(StatusEffects.MomentOfClarity)) dynStats("lus", -(Math.round(player.maxLust() * 0.05)));
 			if (player.hasStatusEffect(StatusEffects.FieryRage)) {
 				if (player.soulforce < (player.maxSoulforce() * 0.05)) player.removeStatusEffect(StatusEffects.FieryRage);
-				else EngineCore.SoulforceChange(Math.round(player.maxSoulforce() * 0.05), false);
+				else EngineCore.SoulforceChange(Math.round(player.maxSoulforce() * 0.05));
 			}
         }
         mainView.hideMenuButton(MainView.MENU_DATA);
@@ -6828,44 +6828,13 @@ public class Combat extends BaseContent {
 		}
 	}
 
-    //unused atm
-    /*
-    public function ArmorStatusProcs():void {
-		var bleed:Boolean = false;
-        var bleedChance:int = 0;
-		//xx% bleed chance
-
-		if (monster.hasPerk(PerkLib.EnemyConstructType) || monster.hasPerk(PerkLib.EnemyPlantType) || monster.hasPerk(PerkLib.EnemyGooType)) bleedChance = 0;
-        if (rand(100) < bleedChance) bleed = true;
-		if (bleed) {
-			if (monster.hasStatusEffect(StatusEffects.HemorrhageArmor)) monster.addStatusValue(StatusEffects.HemorrhageArmor, 1, 2);
-			else monster.createStatusEffect(StatusEffects.HemorrhageArmor, 2, 0.01, 0, 0);
-			if (monster.plural) outputText("\n[Themonster] bleed profusely from the many bloody gashes your [armor] left behind.");
-            else outputText("\n[Themonster] bleeds profusely from the many bloody gashes your [armor] left behind.");
-		}
-    }
-    */
-
-    //unused atm
-    /*
-	public function WrathGenerationPerHit(damage:int = 0):void {
-		if (damage > 0) {
-			var generatedWrath:Number = 0;
-			generatedWrath += damage / 10;
-			generatedWrath = Math.sqrt(generatedWrath);
-			generatedWrath = Math.round(generatedWrath);
-			if (generatedWrath > 0) EngineCore.WrathChange(generatedWrath, false);
-		}
-	}
-	*/
-
 	public function WrathGenerationPerHit1(damage:int = 0):void {	//base melee/range attacks wrath generation
 		var addedWrath:Number = damage;
 		if (player.hasPerk(PerkLib.FuriousStrikes)) addedWrath *= 3;
 		if (player.hasPerk(PerkLib.UnlimitedRage)) addedWrath *= 3;
 		if (player.hasPerk(PerkLib.ImprovedAdrenaline)) addedWrath += Math.round(player.maxWrath() * 0.02);
 		if (player.hasPerk(PerkLib.PrestigeJobBerserker)) addedWrath += Math.round(player.maxWrath() * 0.01);
-		EngineCore.WrathChange(addedWrath, false);
+		EngineCore.WrathChange(addedWrath);
 	}
 	public function WrathGenerationPerHit2(damage:int = 0):void {	//specials wrath generation
 		var addedWrath:Number = damage;
@@ -6873,7 +6842,7 @@ public class Combat extends BaseContent {
 		if (player.hasPerk(PerkLib.UnlimitedRage)) addedWrath *= 3;
 		if (player.hasPerk(PerkLib.ImprovedAdrenaline)) addedWrath += Math.round(player.maxWrath() * 0.02);
 		if (player.hasPerk(PerkLib.PrestigeJobBerserker)) addedWrath += Math.round(player.maxWrath() * 0.01);
-		EngineCore.WrathChange(addedWrath, false);
+		EngineCore.WrathChange(addedWrath);
 	}
 	public function PASPAS():Number {
 		var PAS:Number = 0.5;
@@ -7139,8 +7108,8 @@ public class Combat extends BaseContent {
 		if (player.shieldPerk == "Massive") wrathShieldSize += 4;
         if (blockChance >= (rand(100) + 1) && player.wrath >= wrathShieldSize && player.shieldName != "nothing" && player.isShieldsForShieldBash()) {// && player.weaponRange != weaponsrange.M1CERBE
             if (doFatigue) {
-                if (player.hasPerk(PerkLib.ShieldGrandmastery) && player.tou >= 100) EngineCore.WrathChange((wrathShieldSize * 0.5), true);
-                else EngineCore.WrathChange(wrathShieldSize, true);
+                if (player.hasPerk(PerkLib.ShieldGrandmastery) && player.tou >= 100) EngineCore.WrathChange((wrathShieldSize * 0.5));
+                else EngineCore.WrathChange(wrathShieldSize);
             }
             return true;
         } else return false;
@@ -7316,7 +7285,7 @@ public class Combat extends BaseContent {
 			if (MonsterIsBleeding() && player.hasPerk(PerkLib.YourPainMyPower)) {
 				player.HP += damage;
 				if (player.HP > (player.maxHP() + player.maxOverHP())) player.HP = player.maxHP() + player.maxOverHP();
-				EngineCore.WrathChange(WrathGains, false);
+				EngineCore.WrathChange(WrathGains);
 			}
 			else monster.wrath += WrathGains;
             if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
@@ -7888,7 +7857,7 @@ public class Combat extends BaseContent {
 			if (MonsterIsBleeding() && player.hasPerk(PerkLib.YourPainMyPower)) {
 				player.HP += damage;
 				if (player.HP > (player.maxHP() + player.maxOverHP())) player.HP = player.maxHP() + player.maxOverHP();
-				EngineCore.WrathChange(WrathGains, false);
+				EngineCore.WrathChange(WrathGains);
 			}
 			else monster.wrath += WrathGains;
             if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
@@ -10226,7 +10195,7 @@ public class Combat extends BaseContent {
 		gainedsoulforce *= soulforceRecoveryMultiplier();
 		gainedsoulforce = Math.round(gainedsoulforce * 0.02 * minutes);
 		if (player.hasPerk(PerkLib.EnergyDependent)) gainedsoulforce = 0;
-		EngineCore.SoulforceChange(gainedsoulforce, false);
+		EngineCore.SoulforceChange(gainedsoulforce);
 	}
 	public function soulforceregeneration1(combat:Boolean = true, minutes:Number = 1):void {
         var gainedsoulforce:Number = 0;
@@ -10237,13 +10206,13 @@ public class Combat extends BaseContent {
             gainedsoulforce *= soulforceRecoveryMultiplier();
             if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) gainedsoulforce *= 2;
             gainedsoulforce = Math.round(gainedsoulforce);
-            EngineCore.SoulforceChange(gainedsoulforce, false);
+            EngineCore.SoulforceChange(gainedsoulforce);
         }
 		else {
             gainedsoulforce += soulforceregeneration2() * 2;
             gainedsoulforce *= soulforceRecoveryMultiplier();
             gainedsoulforce = Math.round(gainedsoulforce);
-            EngineCore.SoulforceChange(gainedsoulforce, false);
+            EngineCore.SoulforceChange(gainedsoulforce);
         }
     }
 
@@ -10299,7 +10268,7 @@ public class Combat extends BaseContent {
         gainedmana += manaregeneration2();
         gainedmana *= manaRecoveryMultiplier();
         gainedmana = Math.round(gainedmana * 0.02 * minutes);
-        EngineCore.ManaChange(gainedmana, false);
+        EngineCore.ManaChange(gainedmana);
     }
 	public function manaregeneration1(combat:Boolean = true):void {
         var gainedmana:Number = 0;
@@ -10311,13 +10280,13 @@ public class Combat extends BaseContent {
             gainedmana *= manaRecoveryMultiplier();
             if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) gainedmana *= 2;
             gainedmana = Math.round(gainedmana);
-            EngineCore.ManaChange(gainedmana, false);
+            EngineCore.ManaChange(gainedmana);
         }
 		else {
             gainedmana += manaregeneration2() * 2;
             gainedmana *= manaRecoveryMultiplier();
             gainedmana = Math.round(gainedmana);
-            EngineCore.ManaChange(gainedmana, false);
+            EngineCore.ManaChange(gainedmana);
         }
     }
 
@@ -10388,7 +10357,7 @@ public class Combat extends BaseContent {
 			gainedwrath += LostWrathPerTick;
 		}
 		gainedwrath = Math.round(gainedwrath);
-        EngineCore.WrathChange(gainedwrath, false);
+        EngineCore.WrathChange(gainedwrath);
     }
 	public function wrathregeneration1(combat:Boolean = true):void {
         var gainedwrath:Number = 0;
@@ -10412,7 +10381,7 @@ public class Combat extends BaseContent {
 				if (player.hasPerk(PerkLib.AsuraStrength)) gainedwrath += 2 * BonusWrathMult;
 			}
             if (player.hasPerk(PerkLib.Ferocity) && player.HP < 1) gainedwrath *= 2 * BonusWrathMult;
-            EngineCore.WrathChange(gainedwrath, false);
+            EngineCore.WrathChange(gainedwrath);
         }
 		else {
 			if (player.hasPerk(PerkLib.AbsoluteStrength)) gainedwrath += wrathregeneration2();
@@ -10422,7 +10391,7 @@ public class Combat extends BaseContent {
 				LostWrathPerTick = Math.round(LostWrathPerTick);
 				gainedwrath += LostWrathPerTick;
 			}
-            EngineCore.WrathChange(gainedwrath, false);
+            EngineCore.WrathChange(gainedwrath);
         }
     }
 
@@ -11871,11 +11840,11 @@ public function StraddleTease():void {
             EngineCore.HPChange(25 + (player.tou/2), true);
         }
         if (player.mana < player.maxMana()) {
-            EngineCore.ManaChange(25 + (player.inte/2), true);
+            EngineCore.ManaChange(25 + (player.inte/2));
         }
         EngineCore.changeFatigue(-(25 + (player.spe/2)));
         if (player.soulforce < player.maxSoulforce() && player.hasPerk(PerkLib.KitsuneEnergyThirst)) {
-            EngineCore.SoulforceChange(100 + (player.wis*2), true);
+            EngineCore.SoulforceChange(100 + (player.wis*2));
         }
     }
     if (player.hasPerk(PerkLib.EnergyDependent)) {
