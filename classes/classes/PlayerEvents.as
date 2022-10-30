@@ -1903,7 +1903,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			//Soul Sense
 			if (!player.hasPerk(PerkLib.SoulSense) && player.hasKeyItem("'Soul Sense and You' Manual") >= 0 && player.hasPerk(PerkLib.SoulPersonage)) {
 				outputText("\nDuring a casual walk around your camp you suddenly notice, or rather feel, something unexpected. Your surrounding blurs for a moment, to be replaced with a forest. You notice a goblin strolling nearby. Suddenly, she stops and slowly looks around, staring directly at you. A moment later, your vision of the forest becomes blurry, eventually fading away to be replaced by your camp and its surroundings. ");
-				outputText("You shake your head, trying to figure out what had just happened. The only solution that you find within yourself is something that mrs Shigure you met in He’Xin’Dao at lectures mentioned. Another sense that they had developed, which allowed them to perceive distant places or find specific people over long distances. It looks as though you finaly developed it too.\n");
+				outputText("You shake your head, trying to figure out what had just happened. The only solution that you find within yourself is something that Mrs. Shigure you met in He’Xin’Dao at lectures mentioned. Another sense that they had developed, which allowed them to perceive distant places or find specific people over long distances. It looks as though you finaly developed it too.\n");
 				player.removeKeyItem("'Soul Sense and You' Manual");
 				player.createPerk(PerkLib.SoulSense, 0, 0, 0, 0);
 				needNext = true;
