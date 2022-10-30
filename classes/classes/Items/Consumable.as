@@ -29,7 +29,9 @@ import classes.internals.Utils;
 		protected function get prison():Prison { return SceneLib.prison; }
 		protected function get flags():DefaultDict { return CoC.instance.flags; }
 		protected function get camp():Camp { return SceneLib.camp; }
-		protected function doNext(eventNo:Function):void { EngineCore.doNext(eventNo); }
+		protected function doNext(func:Function, ...args):void {
+			EngineCore.doNext.apply(null, [func].concat(args));
+		}
 		protected function rand(n:Number):int { return Utils.rand(n); }
 		
 		override public function get category():String {

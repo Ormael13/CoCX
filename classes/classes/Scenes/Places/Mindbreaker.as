@@ -872,7 +872,7 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 						" She surpasses expectations and jumps the nearest man, straddling him right away.");
 
 			outputText("You smirk delighted at your work and head back to the lair commons");
-			doNext(curry(CaveLayout, true));
+			doNext(CaveLayout, true);
 		}
 
 		public function MindbreakerBrainEvolution(isOutOfCave:Boolean = true):void {

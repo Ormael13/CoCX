@@ -484,7 +484,7 @@ public class Soulforce extends BaseContent
 		outputText("The spent time has allowed you to restore " + EngineCore.SoulforceChange(sfRegen(hours)) + " soulforce.\n\n");
 		outputText("Current soulpower: " + player.soulforce + " / " + player.maxSoulforce());
 		if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(20 * hours);
-		doNext(curry(camp.returnToCamp, hours));
+		doNext(camp.returnToCamp, hours);
 	}
 
 	//Max possible with ALL items

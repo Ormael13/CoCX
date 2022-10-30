@@ -1012,7 +1012,7 @@ private function marriageSexMale(sleep:Boolean = false):void {
 		sexBuffs();
 		if (sleep) {
 
-			doNext(curry(camp.sleepWrapper, 2.0));
+			doNext(camp.sleepWrapper, 2.0);
 		} else doNext(camp.returnToCampUseOneHour);
 	} else doNext(recallWakeUp);
 }

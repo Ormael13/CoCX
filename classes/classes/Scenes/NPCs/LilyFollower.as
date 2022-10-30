@@ -840,7 +840,7 @@ import classes.display.SpriteDb;
 			outputText("Below her slender neck, four E-cup breasts cover her chest, bound only by a set of fetishistic golden chains. Each of her nipples are pierced, with a thin rod of gold through each, keeping the chains in place. Hair flows down her scalp, falling in " + LilyHairColor + " waves past her shoulders, long enough to cover her top pair of E-Cups.\n\n");
 			outputText("Her Spider-half has eight spindly legs, and her spinnerets are visibly active. Lily occasionally leans back, using her fingers to pull silk from her spinnerets, quickly braiding the strands into crude, yet serviceable rope.\n\n");
 			outputText("As she sees you looking at her, Lily gives you a sly three-eyed wink, sliding a hand down her waist, making eye contact with you as she rubs her rapidly swelling ebony pussy lips with one hand.\n\n");
-			doNext(curry(LilyCampFollower, true));
+			doNext(LilyCampFollower, true);
 		}
 		
 		public function LearningWithLily():void {

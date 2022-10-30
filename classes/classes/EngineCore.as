@@ -611,18 +611,16 @@ public class EngineCore {
 
     /**
      * Clears all button and adds a 'Next' button.
-     * @param    event The event function to call if the button is pressed.
+     * @param    func The event function to call if the button is pressed.
      */
-    public static function doNext(event:Function):void { //Now typesafe
+    public static function doNext(func:Function, ...args):void { //Now typesafe
         //Prevent new events in combat from automatically overwriting a game over.
         if (CoC.instance.mainView.getButtonText(0).indexOf("Game Over") != -1) {
             trace("Do next setup cancelled by game over");
             return;
         }
-        //trace("DoNext have item:", eventNo);
-        //choices("Next", event, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0, "", 0);
         menu();
-        addButton(0, "Next", event);
+        addButton.apply(null, [0, "Next", func].concat(args));
     }
 
     /**

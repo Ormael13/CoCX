@@ -408,7 +408,7 @@ public class Combat extends BaseContent {
 			outputText("Just as you would be defeated, the Tears of Denial you prepared restores you to full health and clarity of mind. To [themonster] dismay you get back up, still undefeated and ready to keep fighting.");
 			player.HP = player.maxOverHP();
 			player.lust = player.minLust();
-			doNext(curry(combatMenu, true));
+			doNext(combatMenu, true);
 		}
         else {
 			if (player.hasStatusEffect(StatusEffects.Infested) && flags[kFLAGS.CAME_WORMS_AFTER_COMBAT] == 0) {
@@ -1638,7 +1638,7 @@ public class Combat extends BaseContent {
 				break;
         }
 		if (elementType == NONE || elementType == NONE_E) {
-			doNext(curry(combatMenu, false));
+			doNext(combatMenu, false);
 		}
 		else {
 			var manaCost:Number = 1;
@@ -1668,7 +1668,7 @@ public class Combat extends BaseContent {
 			if (player.mana < manaCost) {
 				outputText("\n\nYour mana is too low to fuel your elemental attack!");
 				flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] = 1;
-				doNext(curry(combatMenu, false));
+				doNext(combatMenu, false);
 			} else {
 				if (!player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn)) outputText("\n\n");
 				switch (elementType) {
@@ -4132,7 +4132,7 @@ public class Combat extends BaseContent {
             fatigue(oneBulletReloadCost() * player.ammo);
             if (player.hasPerk(PerkLib.RapidReload)) {
                 outputText("\n\n");
-                doNext(curry(combatMenu, false));
+                doNext(combatMenu, false);
             } else {
                 outputText("Reloading took some time. Your opponent takes advantage of this.\n\n");
                 enemyAI();
@@ -13893,7 +13893,7 @@ public function landAfterUsingFlyingSword():void {
     }
     monster.removeStatusEffect(StatusEffects.MonsterAttacksDisabled);
     player.removeStatusEffect(StatusEffects.Flying);
-    doNext(curry(combatMenu, false));
+    doNext(combatMenu, false);
 }
 public function landAfterUsingSoulforce():void {
     clearOutput();
@@ -13904,7 +13904,7 @@ public function landAfterUsingSoulforce():void {
     }
     monster.removeStatusEffect(StatusEffects.MonsterAttacksDisabled);
     player.removeStatusEffect(StatusEffects.Flying);
-    doNext(curry(combatMenu, false));
+    doNext(combatMenu, false);
 }
 
 public function attackFlyingSword():void {
