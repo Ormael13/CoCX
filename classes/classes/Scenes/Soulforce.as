@@ -199,7 +199,7 @@ public class Soulforce extends BaseContent
 			outputText("<b>Next stage: " + stage[1] + "</b>\n");
 			outputText("Requirements:\n"
 				+ "Level: " + level + "\n");
-			if (stage[0] != 1) outputText("Wisdom: " + stage[4]);
+			if (stage[0] != 1) outputText("Wisdom: " + stage[3]);
 			//Primary
 			if (stage[0] == 0) addButton(0, stage[2], contPrimary, stage[1], stage[4])
 				.disableIf(player.soulforce < player.maxSoulforce(), "Not enough soulforce, required: full");
