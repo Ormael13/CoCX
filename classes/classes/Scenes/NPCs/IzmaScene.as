@@ -100,6 +100,7 @@ public function meetIzmaAtLake():void {
 		flags[kFLAGS.IZMA_ENCOUNTER_COUNTER] = 5;
 		//Clear 'worms' toggle
 		flags[kFLAGS.IZMA_WORMS_SCARED] = 0;
+		return;
 	}
 	//(Izmacounter= 1)
 	else if(flags[kFLAGS.IZMA_ENCOUNTER_COUNTER] == 1) {
