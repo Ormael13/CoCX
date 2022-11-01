@@ -4955,6 +4955,7 @@ private function getHelpVsKittyKats():void
 	outputText("\n\nYou race to the nearest intersection and call out.  A tall lizard morph in a watch uniform pushes through a throng of people and asks you, \"<i>What seems to be the problem?</i>\"");
 	outputText("\n\nYou explain what you saw and lead him back to the mouth of the alleyway.  It’s empty.  The lizard takes down your description of the situation and thanks you for doing the right thing.  He says, \"<i>We’ve had a few similar reports in the past, though strangely it’s always the same woman.  I’ll get the description back to the Watch houses and all the officers will keep a sharp eye open.</i>\"");
 	outputText("\n\nFeeling you’ve done a good deed today you press on.");
+	flags[kFLAGS.KATHERINE_RANDOM_RECRUITMENT_DISABLED] = 1; // locking her away. They ARE keeping a sharp eye open.
 	doNext(telAdre.telAdreMenu);
 }
 
@@ -5077,6 +5078,7 @@ private function leaveKittyKatsLikeANeeeeeerrrrd():void
 	clearOutput();
 	outputText("You decide you’re better off not getting involved.  After all, who knows what she’s done?  She’s obviously a stray and could have stolen something from one of the others.  Heck, with all the perverts you’ve seen in this land she could have a rape fetish.  Surely she would scream to attract the guard if she were in real trouble.");
 	outputText("\n\nPutting it out of your mind you walk deeper into the city.  You’ve got things to take care of.");
+	// No locking, just "not now"
 	doNext(telAdre.telAdreMenu);
 }
 
