@@ -159,7 +159,7 @@ import classes.Scenes.SceneLib;
 			//can regenerate once even if stunned
 			if (!devourUsed || !monsterIsStunned() && !hasStatusEffect(StatusEffects.Fear) && !monsterIsConstricted()) {
 				devourLife();
-				doNext(curry(SceneLib.combat.combatMenu, false));
+				doNext(SceneLib.combat.combatMenu, false);
 			} else SceneLib.alvinaFollower.marriagePostFight();
 		}
 

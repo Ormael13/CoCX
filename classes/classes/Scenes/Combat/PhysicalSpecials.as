@@ -1326,7 +1326,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("You let out a primal shout that lets your enemies know you won’t be easily defeated.\n\n");
 		var wsr:Number = 0.2;
 		wsr *= player.maxOverWrath();
-		EngineCore.WrathChange(wsr, true);
+		EngineCore.WrathChange(wsr);
 		menu();
 		addButton(0, "Next", combatMenu, false);
 	}
@@ -5407,7 +5407,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 
 	public function shieldBash():void {
 		clearOutput();
-		EngineCore.WrathChange(-shieldbashcostly(), true);
+		EngineCore.WrathChange(-shieldbashcostly());
 		outputText("You ready your [shield] and prepare to slam it towards [themonster].  ");
 		if ((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe))) {
 			if (monster.spe - player.spe >= 20) outputText("[Themonster] deftly avoids your slow attack.");

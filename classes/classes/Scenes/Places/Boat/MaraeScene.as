@@ -589,7 +589,7 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
             outputText("suppress your gag reflex as her cock grows thick in your mouth and begins to dump its cream down your wanton gullet.  The slippery tentacle goes into overdrive while Marae cums, pumping away at your " + vaginaDescript(0) + " with incredibly violent fervor.   Your belly bubbles as it's stuffed full of goddess-cum, and your pussy clamps down hard on its invader while it spurts out its own syrupy load into your womb.   Swooning with lust, you orgasm from the twin violations, squirming on Marae's rod while she packs you with nectar.");
             outputText("\n\nThe goddess pulls back with a satisfied sigh, dragging her length out of your throat and shivering from the sensations of your hot, oral vice on her twitching member.  You look up at her with eyes full of adoration, feeling your gut churn from the quantity of her deposit.  Marae ruffles your hair and pulls the tentacle back with a suddenness that makes you feel empty and void.   You feel a little drowsy and close your eyes while your goddess watches over you.  Everything is perfect...");
             player.sexReward("cum", "Vaginal");
-            doNext(curry(MaraePt2RoundIIIPrizes, 2));
+            doNext(MaraePt2RoundIIIPrizes, 2);
         }
 
         //[Dudezillaz]
@@ -633,7 +633,7 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
 
             outputText("It doesn't matter, you're giving her what she wants.  You cum until your [legs] give out and you're sprawled on your back, " + sMultiCockDesc() + " being milked of its seed by the slurping, cunt-tentacles.  Every time you start to come down, the one in your backdoor rubs you just right and forces out another load.  Marae steps over your [face] and drops down, allowing you to lick the nectar that drips from her sensitive, flower-like folds while you cum.  It's sweet, potent, and refreshing.  It makes it easy to keep cumming but hard to stay awake, and your eyes roll back as you pass out from an overload of pleasure.");
             player.sexReward("vaginalFluids", "Dick");
-            doNext(curry(MaraePt2RoundIIIPrizes, 1));
+            doNext(MaraePt2RoundIIIPrizes, 1);
         }
 
         //[Hermz]  Marae grows vinecawks for DP under her flowercunt and sexes.
@@ -695,7 +695,7 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
             outputText("You slide out and slump over, utterly exhausted by the breeding session.  The goddess pulls her tentacles from your abused openings, marveling at the outflow of plant-spunk while you relax and pass out.  You feel her fold your hands around your belly to cradle the pregnant bulge, and then you're snoring contentedly.\n\n");
             player.sexReward("vaginalFluids", "Dick");
             player.sexReward("cum", "Vaginal");
-            doNext(curry(MaraePt2RoundIIIPrizes, 3));
+            doNext(MaraePt2RoundIIIPrizes, 3);
         }
     }
 

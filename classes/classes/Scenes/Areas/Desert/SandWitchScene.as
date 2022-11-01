@@ -955,7 +955,7 @@ private function helpZeWithBirfBabies():void {
 	}
 	//PC is everything else: 
 	else outputText("\n\nEasing a hand under her armpit, you give her the support she needs to hobble along the hot desert sand.  Which direction to hobble in gives you cause for concern though; you don't really know where you are at this point.  Making the only choice you can, you concentrate on the camp.  With the rough picture in mind you tell the sand witch to hold on, before the two of you slowly make your way across the dry desert sea...");
-	doNext(curry(sandwitchBirthsYourMonstrosities, false));
+	doNext(sandwitchBirthsYourMonstrosities, false);
 }
 
 //[Must I really?] (corr >=60)
@@ -976,7 +976,7 @@ private function reluctantlyHelpZeWitch():void {
 	}
 	//PC is everything else:  
 	else outputText("\n\nEasing a hand under her armpit, you give her the support she needs to hobble along the hot desert sand.  Which direction to hobble in gives you cause for concern though; you don't really know where you are at this point.  Making the only choice you can, you concentrate on the camp.  With the rough picture in mind you tell the sand witch to hold on, before the two of you slowly make your way across the dry desert sea...");
-	doNext(curry(sandwitchBirthsYourMonstrosities, true));
+	doNext(sandwitchBirthsYourMonstrosities, true);
 }
 
 

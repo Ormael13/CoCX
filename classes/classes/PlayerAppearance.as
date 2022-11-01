@@ -1071,7 +1071,7 @@ public class PlayerAppearance extends BaseContent {
 					clearOutput();
 					Race.byId(parseInt(parts[1])).takeForm(player, parts[2]);
 					mainViewManager.updateCharviewIfNeeded();
-					doNext(curry(RacialScores, clickedRace, sortBy));
+					doNext(RacialScores, clickedRace, sortBy);
 					break;
 			}
 		}

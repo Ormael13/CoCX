@@ -597,7 +597,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			if (flags[kFLAGS.LUNA_FOLLOWER] == 5 || flags[kFLAGS.LUNA_FOLLOWER] == 7 || flags[kFLAGS.LUNA_FOLLOWER] == 9) flags[kFLAGS.LUNA_FOLLOWER] = 11;
 			if (flags[kFLAGS.LUNA_FOLLOWER] == 6 || flags[kFLAGS.LUNA_FOLLOWER] == 8 || flags[kFLAGS.LUNA_FOLLOWER] == 10) flags[kFLAGS.LUNA_FOLLOWER] = 12;
 			mooning = true;
-			doNext(curry(sexMenuVaginal, true));
+			doNext(sexMenuVaginal, true);
 		}
 		public function fullMoonEventAccept2():void {
 			spriteSelect(SpriteDb.s_Luna_Mooning);
@@ -612,7 +612,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			if (flags[kFLAGS.LUNA_FOLLOWER] == 5 || flags[kFLAGS.LUNA_FOLLOWER] == 7 || flags[kFLAGS.LUNA_FOLLOWER] == 9) flags[kFLAGS.LUNA_FOLLOWER] = 11;
 			if (flags[kFLAGS.LUNA_FOLLOWER] == 6 || flags[kFLAGS.LUNA_FOLLOWER] == 8 || flags[kFLAGS.LUNA_FOLLOWER] == 10) flags[kFLAGS.LUNA_FOLLOWER] = 12;
 			mooning = true;
-			doNext(curry(sexMenuVaginal, true));
+			doNext(sexMenuVaginal, true);
 		}
 		public function fullMoonEventResist():void {
 			spriteSelect(SpriteDb.s_Luna_Mooning);

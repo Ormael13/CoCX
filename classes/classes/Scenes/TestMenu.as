@@ -153,7 +153,7 @@ public class TestMenu extends BaseContent
 		else{
 			outputText("Stop messing about in the ICU and go away.");
 		}
-		doNext(curry(SoulforceCheats1, 4));
+		doNext(SoulforceCheats1, 4);
 	}
 	
 	private function identifyAll():void {
@@ -174,7 +174,7 @@ public class TestMenu extends BaseContent
 				}
 			}
 		}
-		doNext(curry(SoulforceCheats1, 3));
+		doNext(SoulforceCheats1, 3);
 	}
 	private function uncurseAll():void {
 		clearOutput();
@@ -194,7 +194,7 @@ public class TestMenu extends BaseContent
 				}
 			}
 		}
-		doNext(curry(SoulforceCheats1, 3));
+		doNext(SoulforceCheats1, 3);
 	}
 	
 	private function fixFormerJiangshi():void {
@@ -205,7 +205,7 @@ public class TestMenu extends BaseContent
 			if (player.hasStatusEffect(StatusEffects.AlterBindScroll4)) player.removeStatusEffect(StatusEffects.AlterBindScroll4);
 			if (player.hasStatusEffect(StatusEffects.AlterBindScroll5)) player.removeStatusEffect(StatusEffects.AlterBindScroll5);
 		}
-		doNext(curry(SoulforceCheats1, 3));
+		doNext(SoulforceCheats1, 3);
 	}
 
 	private function FaeDragTest2():void{
@@ -214,14 +214,14 @@ public class TestMenu extends BaseContent
 		player.arms.type = Arms.FEY_DRACONIC;
 		player.lowerBody = LowerBody.FEY_DRAGON;
 		outputText("Faerie dragon bodyparts gained.");
-		doNext(curry(SoulforceCheats1, 3));
+		doNext(SoulforceCheats1, 3);
 	}
 
 	private function FaeDragTest1():void{
 		clearOutput();
 		player.createPerk(PerkLib.DragonFaerieBreath, 0, 0, 0, 0);
 		outputText("Faerie dragon breath gained.");
-		doNext(curry(SoulforceCheats1, 3));
+		doNext(SoulforceCheats1, 3);
 	}
 	
 	private function anTrigger():void {
@@ -234,14 +234,14 @@ public class TestMenu extends BaseContent
 			player.createPerk(PerkLib.AntyDexterity, 0, 0, 0, 0);
 			outputText("Now you see me.\n\n<i><b>(Anty-Dexterity)</b></i>");
 		}
-		doNext(curry(SoulforceCheats1, 3));
+		doNext(SoulforceCheats1, 3);
 	}
 
 	private function mutateReqNope():void{
 		clearOutput();
 		flags[kFLAGS.EVA_MUTATIONS_BYPASS] = !flags[kFLAGS.EVA_MUTATIONS_BYPASS];
 		outputText("Mutation requirements are now " + (flags[kFLAGS.EVA_MUTATIONS_BYPASS] ? "off" : "on") + ".");
-		doNext(curry(SoulforceCheats1, 3));
+		doNext(SoulforceCheats1, 3);
 	}
 
 	private function refillSoulforce():void{
@@ -249,7 +249,7 @@ public class TestMenu extends BaseContent
 		player.soulforce = player.maxOverSoulforce();
 		outputText("Soulforce filled up.");
 		statScreenRefresh();
-		doNext(curry(SoulforceCheats1, 3));
+		doNext(SoulforceCheats1, 3);
 	}
 
 	private function applyHangover():void {
@@ -292,25 +292,25 @@ public class TestMenu extends BaseContent
 		if (player.hasPerk(PerkLib.BodyTempering)) player.removePerk(PerkLib.BodyTempering);
 		if (player.hasPerk(PerkLib.SoulTempering)) player.removePerk(PerkLib.SoulTempering);
 		if (flags[kFLAGS.SOUL_CULTIVATION] > 0) flags[kFLAGS.SOUL_CULTIVATION] = 0;
-		doNext(curry(SoulforceCheats1, 3));
+		doNext(SoulforceCheats1, 3);
 	}
 	public function FairyTest3():void {
 		DriderTown.LilyKidsPCPregnancy = 0;
-		doNext(curry(SoulforceCheats1, 0));
+		doNext(SoulforceCheats1, 0);
 	}
 	public function FairyTest5():void {
 		TyrantiaFollower.TyrantiaFollowerStage = 4;
 		TyrantiaFollower.TyraniaCorrupteedLegendaries = 1;
-		doNext(curry(SoulforceCheats1, 0));
+		doNext(SoulforceCheats1, 0);
 	}
 	public function FairyTest():void {
 		player.removePerk(PerkLib.DragonPoisonBreath);
 		player.createPerk(PerkLib.DragonLustPoisonBreath, 0, 0, 0, 0);
-		doNext(curry(SoulforceCheats1, 0));
+		doNext(SoulforceCheats1, 0);
 	}
 	public function belisatest2():void{
 		BelisaFollower.BelisaConfessed = true;
-		doNext(curry(SoulforceCheats1,2));
+		doNext(SoulforceCheats1,2);
 	}
 	public function belisatest3():void {
 		if (BelisaFollower.BelisaEncounternum >= 1) SceneLib.belisa.subsequentEncounters();
@@ -319,7 +319,7 @@ public class TestMenu extends BaseContent
     public function cheatFixShards():void { //wrapper for fixShards to use it in cheat menu
 		clearOutput();
         fixShards();
-		doNext(curry(SoulforceCheats1,2));
+		doNext(SoulforceCheats1,2);
     }
 	public function fixShards():void {
 		var cnt:int = 0;
@@ -486,7 +486,7 @@ public class TestMenu extends BaseContent
 		else
 			player.addKeyValue("Radiant shard", 1, -1);
 		outputText("\n\n<b>You currently have "+ player.keyItemvX("Radiant shard", 1) +" radiant shards.</b>");
-		doNext(curry(SoulforceCheats1, 2));
+		doNext(SoulforceCheats1, 2);
 	}
 	public function cheatAddShard(cnt:int = 1):void {
 		if (player.hasKeyItem("Radiant shard") >= 0)
@@ -494,7 +494,7 @@ public class TestMenu extends BaseContent
 		else
 			player.createKeyItem("Radiant shard", cnt, 0, 0, 0);
 		outputText("\n\n<b>You currently have "+ player.keyItemvX("Radiant shard", 1) + " radiant shards.</b>");
-		doNext(curry(SoulforceCheats1,2));
+		doNext(SoulforceCheats1,2);
 	}
 	private function jiangshiBuggedItemsCleanUpCrew0():void {
 		if (!player.weapon.isNothing) {
@@ -544,7 +544,7 @@ public class TestMenu extends BaseContent
 		if (!player.headJewelry.isNothing) flags[kFLAGS.PLAYER_DISARMED_HEAD_ACCESORY_ID] = player.headJewelry.id;
 		player.setHeadJewelry(headjewelries.JIANGCT, false, true);
 		player.statStore.replaceBuffObject({'str.mult':0.2,'tou.mult':0.2,'lib.mult':0.2,'sens':80}, 'Jiangshi Curse Tag', { text: 'Jiangshi Curse Tag' });
-		doNext(curry(SoulforceCheats1, 0));
+		doNext(SoulforceCheats1, 0);
 	}
 	public function AddMaxBackpack00():void {
 		outputText("\n\nFix completed");
@@ -621,7 +621,7 @@ public class TestMenu extends BaseContent
 			player.removePerk(PerkLib.AscensionBuildingPrestige06);
 		}
 		if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] > 0) flags[kFLAGS.CHRISTMAS_TREE_LEVEL]++;
-		doNext(curry(SoulforceCheats1, 1));
+		doNext(SoulforceCheats1, 1);
 	}
 	public function AddMaxBackpack03():void {
 		outputText("\n\nA11 th4t H1dd3n Prestige is Y0urs to T4ke!!!");
@@ -638,7 +638,7 @@ public class TestMenu extends BaseContent
 		if (!player.hasPerk(PerkLib.PrestigeJobWarlock)) player.createPerk(PerkLib.PrestigeJobWarlock, 0, 0, 0, 0);
 		if (!player.hasPerk(PerkLib.HiddenJobAsura)) player.createPerk(PerkLib.HiddenJobAsura, 0, 0, 0, 0);
 		if (!player.hasPerk(PerkLib.HiddenJobBloodDemon)) player.createPerk(PerkLib.HiddenJobBloodDemon, 0, 0, 0, 0);
-		doNext(curry(SoulforceCheats1, 1));
+		doNext(SoulforceCheats1, 1);
 	}
 	public function AddMaxBackpack02():void {
 		if (!player.hasPerk(PerkLib.JobSorcerer)) player.createPerk(PerkLib.JobSorcerer, 0, 0, 0, 0);
@@ -650,12 +650,12 @@ public class TestMenu extends BaseContent
 		player.createStatusEffect(StatusEffects.KnowsCurseOfWeeping, 0, 0, 0, 0);
 		player.createStatusEffect(StatusEffects.KnowsLifeSiphon, 0, 0, 0, 0);
 		player.createStatusEffect(StatusEffects.KnowsLifetap, 0, 0, 0, 0);
-		doNext(curry(SoulforceCheats1, 1));
+		doNext(SoulforceCheats1, 1);
 	}
 	public function AddMaxBackpack01():void {
 		flags[kFLAGS.CAMP_BUILT_CABIN] = 1;
 		flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] = 1;
-		doNext(curry(SoulforceCheats1, 1));
+		doNext(SoulforceCheats1, 1);
 	}
 	public function AddMaxBackpack2():void {
 		if (player.hasKeyItem("Adventurer Guild: Copper plate") >= 0 && AdventurerGuild.Slot01Cap < 10) {
@@ -668,17 +668,17 @@ public class TestMenu extends BaseContent
 			AdventurerGuild.Slot03Cap = 10;
 			AdventurerGuild.Slot04Cap = 10;
 		}
-		doNext(curry(SoulforceCheats1, 1));
+		doNext(SoulforceCheats1, 1);
 	}
 	public function AddMaxBackpack3():void {
 		player.createStatusEffect(StatusEffects.ZenjiZList, 0, 0, 0, 0);
-		doNext(curry(SoulforceCheats1, 0));
+		doNext(SoulforceCheats1, 0);
 	}
 	public function AddMaxBackpack4():void {
 		if (player.hasStatusEffect(StatusEffects.WendigoPsychosis)) SceneLib.glacialRift.wendigoScene.becomeWendigo();
 		else {
 			outputText("Get a Life... i mean Wendigo Psychosis...");
-			doNext(curry(SoulforceCheats1, 1));
+			doNext(SoulforceCheats1, 1);
 		}
 	}
 	public function AddMaxBackpack5():void {
@@ -691,13 +691,13 @@ public class TestMenu extends BaseContent
 		if (flags[kFLAGS.EVANGELINE_02332] > 0) flags[kFLAGS.EVANGELINE_02332] = 0;
 		if (flags[kFLAGS.EVANGELINE_02333] > 0) flags[kFLAGS.EVANGELINE_02333] = 0;
 		outputText("Rewind Evangeline ^^");
-		doNext(curry(SoulforceCheats1, 1));
+		doNext(SoulforceCheats1, 1);
 	}
 	public function TestDynamicStats():void {
 		player.statStore.addBuff('sens',+10,'tag',{text:'Debug buff!', rate: Buff.RATE_HOURS, tick: 1});
 		statScreenRefresh();
 		trace("Stop for debugging");
-		doNext(curry(SoulforceCheats1,0));
+		doNext(SoulforceCheats1,0);
 	}
 	public function FightAria():void {
 		clearOutput();
@@ -743,7 +743,7 @@ public class TestMenu extends BaseContent
 			player.createPerk(PerkLib.ChimericalBodyUltimateStage, 0, 0, 0, 0);
 			outputText("\n\n<b>(Gained Perk: Chimerical Body: Ultimate Stage!)</b>");
 		}
-		doNext(curry(SoulforceCheats1, 0));
+		doNext(SoulforceCheats1, 0);
 	}
 	public function AllMetamorphOptionsUnlock():void {
 		for each (var raceMem: * in RaceMem.Memories) {
@@ -820,7 +820,7 @@ public class TestMenu extends BaseContent
 		Metamorph.GeneticMemoryStorage["Taur Lower Body"] = true;
 		clearOutput();
 		outputText("All metamorph options unlocked.");
-		doNext(curry(SoulforceCheats1, 0));
+		doNext(SoulforceCheats1, 0);
 	}
 	public function PerkGalore1():void {
 		if (!player.hasPerk(PerkLib.CorruptedKitsune)) {
@@ -967,7 +967,7 @@ public class TestMenu extends BaseContent
 			player.createPerk(PerkLib.SexDeity, 0, 0, 0, 0);
 			outputText("\n\n<b>(Gained Perk: Sex Deity!)</b>");
 		}
-		doNext(curry(SoulforceCheats1, 1));
+		doNext(SoulforceCheats1, 1);
 	}
 	public function PerkGalore2():void {
 		if (!player.hasPerk(PerkLib.PrestigeJobSeer)) {
@@ -1158,7 +1158,7 @@ public class TestMenu extends BaseContent
 			player.createPerk(PerkLib.HistoryFeral, 0, 0, 0, 0);
 			outputText("\n\n<b>(Gained Perk: History: Feral!)</b>");
 		}
-		doNext(curry(SoulforceCheats1, 1));
+		doNext(SoulforceCheats1, 1);
 	}
 	public function StatsAscensionMenu():void {
 		menu();
@@ -2280,14 +2280,14 @@ public class TestMenu extends BaseContent
 			player.removePerk(PerkLib.SoulAncestor);
 			outputText("\n\n<b>(Lost Perk: Soul Ancestor!)</b>");
 		}
-		doNext(curry(SoulforceCheats1, 0));
+		doNext(SoulforceCheats1, 0);
 	}
 	public function TribulationPerks():void {
 		if (!player.hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) {
 			player.createPerk(PerkLib.EclassHeavenTribulationSurvivor, 0, 0, 0, 0);
 			outputText("\n\n<b>(Gained Perk: E class Heaven Tribulation Survivor!)</b>");
 		}
-		doNext(curry(SoulforceCheats1, 0));
+		doNext(SoulforceCheats1, 0);
 	}
 	public function AddWhiteBook():void {
 		outputText("\n\n<b>(Gained 1 White Book!)</b>\n\n");
@@ -2434,7 +2434,7 @@ public class TestMenu extends BaseContent
 	}
 	public function RevertCabinProgress():void {
 		flags[kFLAGS.CAMP_CABIN_PROGRESS] = 2;
-		doNext(curry(SoulforceCheats1, 0));
+		doNext(SoulforceCheats1, 0);
 	}
 	public function GargoyleMenu():void {
 		menu();
@@ -2469,7 +2469,7 @@ public class TestMenu extends BaseContent
 		player.removePerk(PerkLib.TransformationImmunity);
 		clearOutput();
 		outputText("You have become fully human again.");
-		doNext(curry(SoulforceCheats1, 0));
+		doNext(SoulforceCheats1, 0);
 	}
 	public function MarbleGargoyleForm():void {
 		flags[kFLAGS.GARGOYLE_BODY_MATERIAL] = 1;
@@ -2606,7 +2606,7 @@ public class TestMenu extends BaseContent
 			player.removeStatusEffect(StatusEffects.Feeder);
 			player.removePerk(PerkLib.Feeder);
 		}
-		doNext(curry(SoulforceCheats1, 0));
+		doNext(SoulforceCheats1, 0);
 	}
 	public function lilytest():void {
 		SceneLib.lily.lilyEncounter();

@@ -2541,7 +2541,7 @@ use namespace CoC;
 				var gainedWrath:Number = 0;
 				gainedWrath += Math.sqrt(damage / 10);
 				gainedWrath = Math.round(gainedWrath * wrathFromHPmulti());
-				if (gainedWrath > 0) EngineCore.WrathChange(gainedWrath, false);
+				if (gainedWrath > 0) EngineCore.WrathChange(gainedWrath);
 			}
 		}
 
@@ -6083,7 +6083,7 @@ use namespace CoC;
 				outputText(" You feel slightly more alive from the soulforce you vampirised from your sexual partner orgasm.");
 			}
 			if (HP < maxHP()) EngineCore.HPChange(25 + (lib/2), true);
-			if (mana < maxMana()) EngineCore.ManaChange(25 + (inte/2), true);
+			if (mana < maxMana()) EngineCore.ManaChange(25 + (inte/2));
 			EngineCore.changeFatigue(-(25 + (spe/2)));
 			removeCurse("lib", 5, 1);
 			removeCurse("lib", 5, 2);

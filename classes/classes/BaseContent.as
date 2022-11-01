@@ -267,9 +267,9 @@ import coc.xxc.StoryContext;
 			CoC.instance.flushOutputTextToGUI();
 		}
 
-		protected function doNext(eventNo:Function):void //Now typesafe
+		protected function doNext(func:Function, ...args):void //Now typesafe
 		{
-			EngineCore.doNext(eventNo);
+			EngineCore.doNext.apply(null, [func].concat(args));
 		}
 
 		protected static function menu():void

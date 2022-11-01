@@ -1192,7 +1192,7 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 		outputText("<i>\"mmm…Mine.\"</i> Belisa whispers, finally closing her eyes. Her labored breathing slows, and you realize that she’s falling asleep with her legs still around you…But you don’t mind. For the life of you, you can’t think of anything better to do than cuddle with your Drider-girl.\n\n");
 		player.sexReward("vaginalFluids","Dick");
 		var rng:Number = (Math.random() * 3 + 1);
-		if (rng == 1) doNext(curry(BelisaAfterSex1, true));
+		if (rng == 1) doNext(BelisaAfterSex1, true);
 		else doNext(BelisaAfterSex2);
 	}
 	

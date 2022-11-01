@@ -79,7 +79,7 @@ if (foobar === "moo") {
 }
 ```
 
-##### But dont't do this:
+##### But don't do this:
 ```as3
 if (foo === "bar")
 	outputText("foobar");

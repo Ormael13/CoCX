@@ -1909,6 +1909,10 @@ public class SaveUpdater extends NPCAwareContent {
 				outputText("\n\nMulti-attack perks have been refunded.");
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.032;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.033) {
+				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_2358] = 0; //reclaiming soulforce flag
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.033;
+			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
 		}

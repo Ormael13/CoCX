@@ -336,11 +336,11 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			if (player.gems < 10) {
-				outputText("\n\nGiacomo sighs, indicating you need " + String(10 - player.gems) + " more gems to purchase this item.");
+				outputText("Giacomo sighs, indicating you need " + String(10 - player.gems) + " more gems to purchase this item.");
 				doNext(bookMenu);
 			}
 			else {
-				outputText("\n\nYou consider yourself fortunate to be quite literate in this day and age.  It certainly comes in handy with this book.  Obviously written by well-informed, but women-starved men, the narrative drearily states the various types of poisonous and carnivorous plants in the world.  One entry that really grabs you is the chapter on 'Violation Plants'.  The chapter drones on about an entire classification of specially bred plants whose purpose is to torture or feed off a human being without permanently injuring and killing them.  Most of these plants attempt to try breeding with humans and are insensitive to the intricacies of human reproduction to be of any value, save giving the person no end of hell.  These plants range from massive shambling horrors to small plant-animal hybrids that attach themselves to people.  As you finish the book, you cannot help but shiver at the many unnatural types of plants out there and wonder what sick bastard created such monstrosities. ");
+				outputText("You consider yourself fortunate to be quite literate in this day and age.  It certainly comes in handy with this book.  Obviously written by well-informed, but women-starved men, the narrative drearily states the various types of poisonous and carnivorous plants in the world.  One entry that really grabs you is the chapter on 'Violation Plants'.  The chapter drones on about an entire classification of specially bred plants whose purpose is to torture or feed off a human being without permanently injuring and killing them.  Most of these plants attempt to try breeding with humans and are insensitive to the intricacies of human reproduction to be of any value, save giving the person no end of hell.  These plants range from massive shambling horrors to small plant-animal hybrids that attach themselves to people.  As you finish the book, you cannot help but shiver at the many unnatural types of plants out there and wonder what sick bastard created such monstrosities. ");
 				doNext(bookMenu);
 				player.gems -= 10;
 				player.createKeyItem("Dangerous Plants", 0, 0, 0, 0);
@@ -446,11 +446,11 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			if (player.gems < 100) {
-				outputText("\n\nGiacomo sighs, indicating you need " + String(100 - player.gems) + " more gems to purchase this item.");
+				outputText("Giacomo sighs, indicating you need " + String(100 - player.gems) + " more gems to purchase this item.");
 				doNext(bookMenu);
 			}
 			else {
-				outputText("\n\nYou consider yourself fortunate to be quite literate in this day and age.  It certainly comes in handy with this magazine.  Obviously written by well-informed, would help you in herb cultivation. ");
+				outputText("You consider yourself fortunate to be quite literate in this day and age.  It certainly comes in handy with this magazine.  Obviously written by well-informed, would help you in herb cultivation. ");
 				doNext(bookMenu);
 				player.gems -= 100;
 				player.createKeyItem("Tel'Adre Magazine Issue 5", 0, 0, 0, 0);
@@ -474,11 +474,11 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			if (player.gems < 100) {
-				outputText("\n\nGiacomo sighs, indicating you need " + String(100 - player.gems) + " more gems to purchase this item.");
+				outputText("Giacomo sighs, indicating you need " + String(100 - player.gems) + " more gems to purchase this item.");
 				doNext(bookMenu);
 			}
 			else {
-				outputText("\n\nYou consider yourself fortunate to be quite literate in this day and age.  It certainly comes in handy with this magazine.  Obviously written by well-informed, would help you in diggin the hole.... err mining to your heart content. ");
+				outputText("You consider yourself fortunate to be quite literate in this day and age.  It certainly comes in handy with this magazine.  Obviously written by well-informed, would help you in diggin the hole.... err mining to your heart content. ");
 				doNext(bookMenu);
 				player.gems -= 100;
 				player.createKeyItem("Tel'Adre Magazine Issue 10", 0, 0, 0, 0);

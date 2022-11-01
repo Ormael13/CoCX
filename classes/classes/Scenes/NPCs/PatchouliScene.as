@@ -67,7 +67,7 @@ public class PatchouliScene extends NPCAwareContent {
 		if (follower < 1) {
 			outputText("As you explore the forest, you spot a particularly weird cat person sleeping in a tree. Weird isn’t exactly the proper term here, as its fur color simply seems out of this world; either he dyed them or he was born with green fur and pink stripes. While at first you thought he was a girl due to his lean features, long hair and somewhat feminine face, the absence of breasts and the somewhat male, albeit girlish and young voice of the cat tells you otherwise. You approach him and ask him who he is. He stretches, looks at you and gives you an impossibly wide grin.\n\n");
 			outputText("\"<i>Nyaaaaaaaaaaaa...Oh, hello traveler? Are you perhaps lost? My job is to guide people across this land to new destinations. Would you like a tour? My name’s Trusty Patchouli, by the way.</i>\"\n\n");
-			outputText("The way he says this, with that constant smile, is somewhat disturbing, but now that you think of it ");
+			outputText("The way he says this, with that constant smile, is somewhat disturbing, but now that you think of it");
 			if (visitedAllAreas()) {
 				outputText(", you’re pretty sure you saw each and every location on Mareth, so you ponder where he could lead you.");
 			} else {

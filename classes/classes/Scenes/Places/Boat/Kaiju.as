@@ -640,7 +640,7 @@ public class Kaiju extends AbstractLakeContent {
 
 		outputText("\n\n\"<i>Oh don’t look so concerned, I know it can’t fit in you.  Well, not without some major corrupt magic on my part and a crazy willingness on your part, but we could always discuss that later.  But how about a little urethra play?  I’ve seen a minotaur stick a pinkie finger in his cock before, I think you’ll fit.</i>\"");
 		//now to regular urethra scene
-		doNext(curry(urethraFuckDatGiantCock, true));
+		doNext(urethraFuckDatGiantCock, true);
 	}
 
 	//Improved Bad End

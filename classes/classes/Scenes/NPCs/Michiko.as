@@ -26,11 +26,16 @@ public function firstMeetingMichiko():void {
 	outputText("Starting from the scalp, simple straight strands of cocoa brown, the ends of her tresses are dyed white and frame her face quite nicely. Down the center her hair is a darker shade of brown and rests between her eyes. And yet, the most prominent features that sit atop the woman’s head are two well-sized ears that share her lighter brown hair color while on the inside her ears become completely white. Coming down from her face, ");
 	outputText("you’re greeted by a wide grin, her light green eyes twinkle knowingly, almost as if she’s found what she’s been looking for. The rest of her attire looks like regular clothing that matches her current colour scheme: a warm looking sleeveless sweater; white covers her chest while brown adorns the rest of the garment. Her arm coverings follow a similar style: white at the tip and the rest of the body is brown. ");
 	outputText("You can’t really see her lower half due to the table but you suspect it to follow the same pattern. What really sticks out to you is her tail, it boasts similarities to the squirrels back in Ingnam. Large, fluffy and curled at the end while following the same color pattern as her hair: dark brown down the middle encompassed by lighter brown on the sides that end in white.\n\n");
-	outputText("A squirrel-morph? It’s not the strangest thing you’ve seen in this world and you doubt she’ll be the last to surprise. Remembering your manners, you politely ask for the girl’s name, trying to play off your blatant staring. The woman seems unphased and reaches out to grasp your hand eagerly, \"<i>Oh, don’t worry too much about it, champion. My name is Michiko. And please, it’s a pleasure to finally meet the hero of our time.</i>\"\n\n");
-	outputText("Hero? She’s getting a bit ahead of herself if she thinks you're already a hero. After all, you’ve only just arrived on Mareth, how can she call you a hero? \"<i>Oh please, I don’t follow just anybody around, [name]. I only keep track of the most valuable targets. It’s what I do.</i>\" ...How does she know your name? \"<i>Like I said, champion, I only follow the most highly valued targets, and you’re one of high priority. ");
-	outputText("If you weren’t I wouldn’t have taken the time to start tracking you.</i>\"\n\nTracking you? Ok, why has she been stalking you and what makes you so special that she needs to? ");
+	outputText("A squirrel-morph? It’s not the strangest thing you’ve seen in this world and you doubt she’ll be the last to surprise. Remembering your manners, you politely ask for the girl’s name, trying to play off your blatant staring. The woman seems unphased and reaches out to grasp your hand eagerly.\n\n"
+		+ "\"<i>Oh, don’t worry too much about it, champion. My name is Michiko. And please, it’s a pleasure to finally meet the hero of our time.</i>\"\n\n");
+	outputText("Hero? She’s getting a bit ahead of herself if she thinks you're already a hero. After all, you’ve only just arrived on Mareth, how can she call you a hero?\n\n"
+		+ "\"<i>Oh please, I don’t follow just anybody around, [name]. I only keep track of the most valuable targets. It’s what I do.</i>\"\n\n"
+		+ "...How does she know your name?\"\n\n"
+		+ "<i>Like I said, champion, I only follow the most highly valued targets, and you’re one of high priority. If you weren’t, I wouldn’t have taken the time to start tracking you.</i>\"\n\n"
+		+ "Tracking you? Ok, why has she been stalking you and what makes you so special that she needs to? ");
 	outputText("\"<i>Well, how about being one of the few champions to not get turned into a demon’s toy five seconds after stepping out of their portal? Quite the impressive escape you made, might I add. Like I said, it’s rare that champions make it past their first day, let alone a week, seems you’ve been doing well for yourself, [name].</i>\" She stares at you with a mischievous glint in her eyes.\n\n");
-	outputText("Off put by her revelation, you fail to notice your attendant returning with your meals. A bit startled and embarrassed, you thank her for the food and grab a few gems for her work. \"<i>It’s alright, [name]. It was my request, it’s my responsibility to pay.</i>\" Michiko has already moved to pay, a large sum of gems gleaming in her hand. The waitress thanks her and bows to both of you, and takes her leave.\n\n");
+	outputText("Off put by her revelation, you fail to notice your attendant returning with your meals. A bit startled and embarrassed, you thank her for the food and grab a few gems for her work.\n\n"
+		+ "\"<i>It’s alright, [name]. It was my request, it’s my responsibility to pay.</i>\" Michiko has already moved to pay, a large sum of gems gleaming in her hand. The waitress thanks her and bows to both of you, and takes her leave.\n\n");
 	outputText("Returning your attention to you stalker, you begin your barrage of questions. How did she know where to look when you came through the portal? How long has she been keeping her eyes on you? What else does she know about you? Why are you the focus of her stalking? And why is she even stalking you in the first place? Isn’t this land too dangerous for someone of her small stature to be running around so carelessly?\n\n");
 	outputText("\"<i>Slow down, champ. I do owe you some answers for watching you as long as I have, but you gotta give me some time to answer back!</i>\" She’s right and you do admit that it was rude to start flooding the person you just met with questions. You apologize and sit back, letting her have the floor.\n\n");
 	outputText("\"<i>Alright then. First of all, it’s not that hard to find these portals, [name]. I’m sure you’ve noticed that yours never closes and stands out. I’ve been around doing what I do long enough to know when each new champion is coming through. So, when it was time for that portal to spit out some new sucker, I was ready. ");
@@ -167,7 +172,7 @@ public function campMichikoTalkRegion():void {
 public function campMichikoTalkRegionWasteland():void {
 	clearOutput();
 	outputText("You inquire about the Mareth wasteland. The endless expanse of nothingness that spans most of the area.\n\n");
-	outputText("\"<i>Mareth is a big place [name] but just because it appears empty does not mean it is. Several people have been spotted wandering the area, including that weirdo merchant Giacomo. There's also rumors that  a goblin trader has settled up shop there somewhere, that is if you can find her of course. It's also possible one or more of the cave systems in the area could be inhabited.</i>\"\n\n");
+	outputText("\"<i>Mareth is a big place, [name], but just because it appears empty, does not mean it is. Several people have been spotted wandering the area, including that weirdo merchant Giacomo. There's also rumors that  a goblin trader has set up shop there somewhere, that is if you can find her of course. It's also possible one or more of the cave systems in the area could be inhabited.</i>\"\n\n");
 	doNext(campMichikoTalkRegion);
 	eachMinuteCount(15);
 }
@@ -218,18 +223,10 @@ public function campMichikoTalkRegionHighMountains():void {
 	outputText("that used to once be Mareth’s greatest holy site until the demons damaged it. If the demons do have a fortress it’s likely located somewhere up there.</i>\"\n\n");
 	doNext(campMichikoTalkRegion);
 	eachMinuteCount(15);
-}/*
-public function campMichikoTalkRegion():void {
-	clearOutput();
-	outputText("\n\n");
-	outputText("\"<i>");
-	outputText("</i>\"\n\n");
-	doNext(campMichikoTalkRegion);
-	eachMinuteCount(15);
-}*/
+}
 public function campMichikoTalkRegionPlains():void {
 	clearOutput();
-	outputText("What does she knows about the plains of Mareth?\n\n");
+	outputText("What does she know about the plains of Mareth?\n\n");
 	outputText("The plains of Mareth are home to many tribes both good and bad. I know there's at least one remaining village of sheep morphs and several kangaroo morphs hunting there though odds are good, you will never find their burrows as they hide underground at night. Of all the tribes though avoid the gnolls, they are highly territorial and enjoy dominating males above anything else. \"<i>");
 	outputText("Finally there's also a demonic camp somewhere which acts as a trade hub for people of questionable morality.</i>\"\n\n");
 	doNext(campMichikoTalkRegion);
@@ -242,27 +239,11 @@ public function campMichikoTalkRegionSwamp():void {
 	outputText("Either they attack you or they talk to you. I generally prefer to flee rather then find out.</i>\"\n\n");
 	doNext(campMichikoTalkRegion);
 	eachMinuteCount(15);
-}/*
-public function campMichikoTalkRegion():void {
-	clearOutput();
-	outputText("\n\n");
-	outputText("\"<i>");
-	outputText("</i>\"\n\n");
-	doNext(campMichikoTalkRegion);
-	eachMinuteCount(15);
 }
-public function campMichikoTalkRegion():void {
-	clearOutput();
-	outputText("\n\n");
-	outputText("\"<i>");
-	outputText("</i>\"\n\n");
-	doNext(campMichikoTalkRegion);
-	eachMinuteCount(15);
-}*/
 public function campMichikoTalkMarriage():void {
 	clearOutput();
 	outputText("With the whole demon invasion and sex everywhere you're surprised love still manages to blossom around Mareth in one way or another with people not going Aphrodiphobic. Thinking on it you've never considered to ask any of your partners how courtship and weddings even happen here if such a concept as matrimony and faithfulness still hold any shadow of a value here.\n\n");
-	outputText("\"<i>Oh courtship in Mareth is no different from other worlds, people fall in love and hang together all the same, sometimes they even marry. This said, Marriage on Mareth especially in those difficult times has been given some leniency. A man or woman may have multiple partners but as a rule of thumb you only marry once. It is also customary for the proposal to include a wedding ring. ");
+	outputText("\"<i>Oh courtship in Mareth is no different from other worlds, people fall in love and hang together all the same, sometimes they even marry. This said, marriage on Mareth especially in those difficult times has been given some leniency. A man or woman may have multiple partners but as a rule of thumb you only marry once. It is also customary for the proposal to include a wedding ring. ");
 	outputText("Whoever you chose becomes the official queen or king of your would be harem by principe. Loving people equally? Ah... what a lie, everyone has a favorite whether they want to admit it or not.</i>\"\n\n");
 	outputText("So in order to marry someone you just need an engagement ring?\n\n");
 	outputText("\"<i>That you do but a fair bit of warning, weddings attracts a lot of people and are handled in public churches dedicated to Marae thus it also tends to drag the attention of troublemakers. Your foes will be well aware of the wedding going on just as well as if you would have screamed it out loud, they simply will know. Be prepared to defend your happy day at any time, I've yet to see one going well from start to finish.</i>\"\n\n");

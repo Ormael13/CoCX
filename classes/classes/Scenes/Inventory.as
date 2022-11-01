@@ -1555,7 +1555,7 @@ use namespace CoC;
 				takeItem(oldItem, nextFn);
 			} else if (oldItem == null) {
 				// failed to unequip, text was displayed, add [Next] before proceeding
-				doNext(curry(nextFn));
+				doNext(nextFn);
 			} else {
 				nextFn();
 			}

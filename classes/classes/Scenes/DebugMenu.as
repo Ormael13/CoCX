@@ -455,7 +455,7 @@ public class DebugMenu extends BaseContent
 				
 				outputText(item.shortName+"\n"+item.longName+"\n"+item.description);
 				
-				doNext(curry(inventory.takeItem, item, itemSpawnMenu));
+				doNext(inventory.takeItem, item, itemSpawnMenu);
 			});
 			addButton(5, "Random", function():void {
 				hideItemParams();
