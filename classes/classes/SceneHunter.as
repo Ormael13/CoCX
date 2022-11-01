@@ -758,9 +758,6 @@ public class SceneHunter extends BaseContent {
         if (flags[kFLAGS.URTA_X_RAPHAEL_HAPPENED])
             addButton(7, "Urta x Raph", SceneLib.urta.urtaAndRaphaelSurprise)
                 .hint("Drunk Urta and Raphael surprise.");
-        if (flags[kFLAGS.URTA_X_RAPHAEL_HAPPENED])
-            addButton(7, "Urta x Raph", SceneLib.urta.urtaAndRaphaelSurprise)
-                .hint("Drunk Urta and Raphael surprise.");
         if (SceneLib.telAdre.sexMachine.totalUses() > 0)
             addButton(8, "Sex Machine", SceneLib.telAdre.sexMachine.exploreShowers)
                 .hint("Your first time with the 'unique' gym machine");
