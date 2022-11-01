@@ -1983,91 +1983,91 @@ public class PlayerInfo extends BaseContent {
 		player.createPerk(PerkLib.DeityJobMunchkin,0,0,0,0);
 		clearOutput();
 		outputText("You gained 'Deity Job: Munchkin' super munchkin perk. (Because it's too cool to merely be a super perk, right?)");
-		doNext(curry(superPerkBuyMenu, 1));
+		doNext(superPerkBuyMenu, 1);
 	}
 	private function perkMunchkinAtGym():void {
 		player.superPerkPoints--;
 		player.createPerk(PerkLib.MunchkinAtGym,0,0,0,0);
 		clearOutput();
 		outputText("You gained 'Munchkin @ Gym' super munchkin perk. (Because it's too cool to merely be a super perk, right?)");
-		doNext(curry(superPerkBuyMenu, 1));
+		doNext(superPerkBuyMenu, 1);
 	}
 	private function perkMunchkinAtWork():void {
 		player.superPerkPoints--;
 		player.createPerk(PerkLib.MunchkinAtWork,0,0,0,0);
 		clearOutput();
 		outputText("You gained 'Munchkin @ Work' super munchkin perk. (Because it's too cool to merely be a super perk, right?)");
-		doNext(curry(superPerkBuyMenu, 1));
+		doNext(superPerkBuyMenu, 1);
 	}
 	private function perkHiddenJobBloodDemon():void {
 		player.superPerkPoints--;
 		player.createPerk(PerkLib.HiddenJobBloodDemon,0,0,0,0);
 		clearOutput();
 		outputText("You gained 'Hidden Job: Blood Demon' super perk.");
-		doNext(curry(superPerkBuyMenu, 2));
+		doNext(superPerkBuyMenu, 2);
 	}
 	private function perkWayOfTheBlood():void {
 		player.superPerkPoints--;
 		player.createPerk(PerkLib.WayOfTheBlood,0,0,0,0);
 		clearOutput();
 		outputText("You gained 'Way of the Blood' super perk.");
-		doNext(curry(superPerkBuyMenu, 2));
+		doNext(superPerkBuyMenu, 2);
 	}
 	private function perkYourPainMyPower():void {
 		player.superPerkPoints--;
 		player.createPerk(PerkLib.YourPainMyPower,0,0,0,0);
 		clearOutput();
 		outputText("You gained 'Your Pain My Power' super perk.");
-		doNext(curry(superPerkBuyMenu, 2));
+		doNext(superPerkBuyMenu, 2);
 	}
 	private function perkMyBloodForBloodPuppies():void {
 		player.superPerkPoints--;
 		player.createPerk(PerkLib.MyBloodForBloodPuppies,0,0,0,0);
 		clearOutput();
 		outputText("You gained 'My Blood for Blood Puppies' super perk.");
-		doNext(curry(superPerkBuyMenu, 2));
+		doNext(superPerkBuyMenu, 2);
 	}
 	private function perkBloodDemonToughness():void {
 		player.superPerkPoints--;
 		player.createPerk(PerkLib.BloodDemonToughness,0,0,0,0);
 		clearOutput();
 		outputText("You gained 'Blood Demon Toughness' super perk.");
-		doNext(curry(superPerkBuyMenu, 2));
+		doNext(superPerkBuyMenu, 2);
 	}
 	private function perkHiddenJobAsura():void {
 		player.superPerkPoints--;
 		player.createPerk(PerkLib.HiddenJobAsura,0,0,0,0);
 		clearOutput();
 		outputText("You gained 'Hidden Job: Asura' super perk.");
-		doNext(curry(superPerkBuyMenu, 3));
+		doNext(superPerkBuyMenu, 3);
 	}
 	private function perkAbsoluteStrength():void {
 		player.superPerkPoints--;
 		player.createPerk(PerkLib.AbsoluteStrength,0,0,0,0);
 		clearOutput();
 		outputText("You gained 'Absolute Strength' super perk.");
-		doNext(curry(superPerkBuyMenu, 3));
+		doNext(superPerkBuyMenu, 3);
 	}
 	private function perkLikeAnAsuraBoss():void {
 		player.superPerkPoints--;
 		player.createPerk(PerkLib.LikeAnAsuraBoss,0,0,0,0);
 		clearOutput();
 		outputText("You gained 'Like A-sura Boss' super perk.");
-		doNext(curry(superPerkBuyMenu, 3));
+		doNext(superPerkBuyMenu, 3);
 	}
 	private function perkICastAsuraFist():void {
 		player.superPerkPoints--;
 		player.createPerk(PerkLib.ICastAsuraFist,0,0,0,0);
 		clearOutput();
 		outputText("You gained 'I Cast (Asura) Fist' super perk.");
-		doNext(curry(superPerkBuyMenu, 3));
+		doNext(superPerkBuyMenu, 3);
 	}
 	private function perkAsuraStrength():void {
 		player.superPerkPoints--;
 		player.createPerk(PerkLib.AsuraStrength,0,0,0,0);
 		clearOutput();
 		outputText("You gained 'Asura Strength' super perk.");
-		doNext(curry(superPerkBuyMenu, 3));
+		doNext(superPerkBuyMenu, 3);
 	}
 }
 }

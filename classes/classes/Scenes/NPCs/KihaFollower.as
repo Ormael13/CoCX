@@ -2586,7 +2586,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         outputText("…Holding her upside down against a wall, her legs around your neck and the taste of her pussy overwhelming, your tongue deep inside her while she throats your [cock]...\n\n");
         outputText("…Her lips on yours, burning alcohol mixing with your saliva as she trickles brandy into your mouth with her flexible tongue.\n\n");
         outputText("You open your eyes, head pounding. The room seems to swim around you, and you don’t even try to roll over, your body aching all over. Your chest heaves, and you feel like you can barely breathe…You look down at your chest, and you see Kiha, splayed out on top of you. One arm is around your neck, her tail wrapped clumsily around your [legs], but her other limbs are limp, thrown randomly around.\n\n");
-        doNext(curry(camp.returnToCamp, 20));
+        doNext(camp.returnToCamp, 20);
     }
 
     public function KihaLesbWeddingNight():void {
@@ -2594,7 +2594,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         outputText("You take Kiha’s tail in your hands, rubbing the scaly appendage. Smiling slightly, you take the tip, guiding it to your own delta.\n\n");
         outputText("Snas is having technical difficulties writing this scene, as he does not have the equipment to adequately imagine what is going on here. Please, for the love of Dragon Waifus, someone help me with lesbian scenes.\n\n");
         outputText("PLEASE.\n\n");
-        doNext(curry(camp.returnToCamp, 20));
+        doNext(camp.returnToCamp, 20);
     }
 
 

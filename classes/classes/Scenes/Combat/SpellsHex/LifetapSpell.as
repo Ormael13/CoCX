@@ -48,7 +48,7 @@ public class LifetapSpell extends AbstractHexSpell {
 				outputText("You proceed to cut your hand and draw a small pattern. You feel your magical reservoirs fill back up by a significant amount.");
 			}
 			HPChange(-Math.round(player.maxHP() * .25), false);
-			EngineCore.ManaChange(Math.round(player.maxMana() * .25), false);
+			EngineCore.ManaChange(Math.round(player.maxMana() * .25));
 		}
 	}
 }

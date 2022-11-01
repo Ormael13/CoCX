@@ -314,14 +314,14 @@ public class AdventurerGuild extends HeXinDaoAbstractContent implements Saveable
 		private function No():void {
 			clearOutput();
 			outputText("You aren’t interested in dungeon delving at the time. It's barely worth it while you're overburdened with your regular activities.");
-			doNext(curry(SceneLib.journeyToTheEast.enteringInn,false));
+			doNext(SceneLib.journeyToTheEast.enteringInn,false);
 		}
 		private function Yes():void{
 			clearOutput();
 			if (flags[kFLAGS.SPIRIT_STONES] < 5) {
 				outputText("Yeah sure, you will join. Or rather you would like to but you lack the required spirit stones for the membership fee.\n\n");
 				outputText("\"<i>It's ok just go to Moga Hen, he should be able to exchange those gem of yours for the local currency.</i>\"");
-				doNext(curry(SceneLib.journeyToTheEast.enteringInn,false));
+				doNext(SceneLib.journeyToTheEast.enteringInn,false);
 			}
 			else {
 				outputText("Yeah sure, you will join. You handle the ursine woman the spirit stones and sign the papers.\n\n");
@@ -895,7 +895,7 @@ public class AdventurerGuild extends HeXinDaoAbstractContent implements Saveable
 				outputText("Yang nods \"<i>Yeah, sure we can do that. Just write a full job description and I will post it on the board. It will cost 10 spirit stones.</i>\"\n\n");
 				if (flags[kFLAGS.SPIRIT_STONES] < 10) {
 					outputText("You tell her you’ll be back with the stones the moment you have them.\n\n");
-					doNext(curry(SceneLib.journeyToTheEast.enteringInn,false));
+					doNext(SceneLib.journeyToTheEast.enteringInn,false);
 				}
 				else {
 					menu();

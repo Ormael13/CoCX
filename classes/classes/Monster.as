@@ -82,8 +82,8 @@ import flash.utils.getQualifiedClassName;
 		protected final function statScreenRefresh():void {
 			EngineCore.statScreenRefresh();
 		}
-		protected final function doNext(eventNo:Function):void { //Now typesafe
-			EngineCore.doNext(eventNo);
+		protected final function doNext(func:Function, ...args):void {
+			EngineCore.doNext.apply(null, [func].concat(args));
 		}
 		protected final function combatMiss():Boolean {
 			return SceneLib.combat.combatMiss();

@@ -352,7 +352,7 @@ use namespace CoC;
 					else outputText("new");
 					outputText(" demon-cock for a few more orgasms.");
 					player.sexReward("vaginalFluids", "Dick");
-					doNext(curry(doBadEndDemon, 1));
+					doNext(doBadEndDemon, 1);
 				}
 				function singleF():void {
 					outputText(multiCockDescriptLight() + " pulsates, straining for just a touch of the succubus' hand.  She paces around you, giggling and toying with you as your " + multiCockDescript() + " seems to follow her, twitching and thickening anytime she takes a step closer.\n\n");
@@ -378,7 +378,7 @@ use namespace CoC;
 					else outputText("new");
 					outputText(" demon-cock for a few more orgasms.");
 					player.sexReward("vaginalFluids", "Dick");
-					doNext(curry(doBadEndDemon, 1));
+					doNext(doBadEndDemon, 1);
 				}
 			}
 			function vagF():void {
@@ -401,7 +401,7 @@ use namespace CoC;
 				outputText("The succubus interrupts your delight by recovering far faster than you, rolling up to a standing position and watching something between your legs.  You prop yourself up on your elbows to see what the fuss is about.  Between your legs something curious is happening – a trickle of pinkish fluid is still escaping your nethers, rolling towards a rapidly expanding pool, along with every other drop of the pink goop.  Before your very eyes the pool grows until every drop of pink fluid has collected together, and it grows upwards, solidifying into a sparkling crystalline shape.\n\n");
 				outputText("Before you can react, she grasps the newly-formed lethicite and noisily begins eating it, her eyes glowing with newfound power.  Watching her makes you more than a little jealous and angry with yourself.  You should've taken the lethicite and gained its power!  No use fretting about it, you can still fuck this succubus for a few hours before you go out in search of your own victims...\n\n");
 				player.sexReward("vaginalFluids", "Vaginal");
-				doNext(curry(doBadEndDemon, 2));
+				doNext(doBadEndDemon, 2);
 			}
 			function hermF():void {
 				//Buh.  Zombie fen need brains.
@@ -427,7 +427,7 @@ use namespace CoC;
 				outputText(" demon-cock for a few more orgasms.");
 				outputText("  Before you get into that, you spy a small piece of pink crystal on the floor between your legs.  You snatch it and devour it before the succubus has a chance and eat it, turning part of your soul into new-found demonic strength before you return to a long night of sex...");
 				player.sexReward("vaginalFluids", "Dick");
-				doNext(curry(doBadEndDemon, 3));
+				doNext(doBadEndDemon, 3);
 			}
 		}
 

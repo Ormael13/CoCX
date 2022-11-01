@@ -126,6 +126,7 @@ public function meetIzmaAtLake():void {
 		//(Izmacounter +1)
 		flags[kFLAGS.IZMA_ENCOUNTER_COUNTER]++;
 		doNext(camp.returnToCampUseOneHour);
+		return;
 	}
 	//[Next 2 encounters with Izma] (Izmacounter = 2 or 3)
 	else if(flags[kFLAGS.IZMA_ENCOUNTER_COUNTER] < 4) {

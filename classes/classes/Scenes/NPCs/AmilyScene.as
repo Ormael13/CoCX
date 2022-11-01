@@ -7125,7 +7125,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				player.removeStatusEffect(StatusEffects.CombatFollowerAmily);
 				flags[kFLAGS.PLAYER_COMPANION_1] = "";
 			}
-			doNext(curry(amilyMenu, false));
+			doNext(amilyMenu, false);
 			cheatTime(1/12);
 		}
 

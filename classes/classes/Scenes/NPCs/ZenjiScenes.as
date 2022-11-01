@@ -3493,7 +3493,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 							"You plan on sleeping for the rest of the night, wrapped within the warmth of your husband’s embrace.\n");
 				}
 			}
-			doNext(curry(ZenjiMarriageSexTime2, options));
+			doNext(ZenjiMarriageSexTime2, options);
 		}
 
 		private function ZenjiMarriageSexTime2(options:int):void{
@@ -3543,7 +3543,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 						"\n" +
 						"You turn to face Zenji, he unconsciously pulls you closer to him as you drift back to sleep in his embrace.\n");
 			}
-			doNext(curry(ZenjiMarriageSexTime3, options));
+			doNext(ZenjiMarriageSexTime3, options);
 		}
 		
 		private function ZenjiMarriageSexTime3(options:int):void{

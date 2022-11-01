@@ -378,7 +378,7 @@ public class SceneHunter extends BaseContent {
         }
         //Dialogue
         var beforeText:String = CoC.instance.currentText;
-        outputText("\n\n<b>Since you have several cocks, will you try to use more at the same time to get more pleasure, or only one hoping for a better treatment?</b>");
+        outputText("\n\n<b>Will you try to use more cocks at the same time to get more pleasure, or only one hoping for a better treatment?</b>");
         //menu
         menu();
         addButton(0, "Single", restoreText, beforeText, singleF);
