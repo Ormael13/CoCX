@@ -266,7 +266,6 @@ public class Soulforce extends BaseContent
 			["Elder", PerkLib.DaoistElderStage, consumables.HGSFRPB, PerkLib.SoulExalt],
 			["Overlord", PerkLib.DaoistOverlordStage, consumables.SGSFRPB, PerkLib.SoulKing],
 		];
-		clearOutput();
 		menu();
 		var i:int;
 		for (i = 0; i < stages.length; ++i)
@@ -292,7 +291,6 @@ public class Soulforce extends BaseContent
 			["Elder", PerkLib.DaoistElderStage, consumables.HGSFRPB, PerkLib.FleshBodyElderStage],
 			["Overlord", PerkLib.DaoistOverlordStage, consumables.SGSFRPB, PerkLib.FleshBodyOverlordStage],
 		];
-		clearOutput();
 		menu();
 		var i:int;
 		for (i = 0; i < stages.length; ++i)
