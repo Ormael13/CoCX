@@ -228,8 +228,9 @@ package classes.Scenes.Places{
 				var sizeIncrement:Number = 5-player.biggestTitSize();
 				player.growTits(sizeIncrement, 1, false, 3)
 			}
-			player.createPerk(PerkLib.FlawlessBody,0,0,0,0);
-			player.createPerk(PerkLib.ElvenSense,0,0,0,0);
+			if (!player.hasPerk(PerkLib.NaturalSpellcasting)) player.createPerk(PerkLib.NaturalSpellcasting,0,0,0,0);
+			if (!player.hasPerk(PerkLib.FlawlessBody)) player.createPerk(PerkLib.FlawlessBody,0,0,0,0);
+			if (!player.hasPerk(PerkLib.ElvenSense)) player.createPerk(PerkLib.ElvenSense,0,0,0,0);
 			WoodElvesQuest = QUEST_STAGE_LOSTTOELF;
 			doNext(YouAreAlreadyElf2);
 		}
@@ -1089,3 +1090,4 @@ package classes.Scenes.Places{
 		}
 	}
 }
+

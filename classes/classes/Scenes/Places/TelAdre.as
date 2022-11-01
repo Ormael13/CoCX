@@ -1204,6 +1204,8 @@ public function kaibaShopMainMenu2():void {
 			addButtonDisabled(4, "T.M.Outfit", "You already bought item from Kaiba today.");
 			addButtonDisabled(5, "W.I.Cloak", "You already bought item from Kaiba today.");
 			addButtonDisabled(6, "S.S.Clothing", "You already bought item from Kaiba today.");
+			addButtonDisabled(7, "MoonClaws", "You already bought item from Kaiba today.");
+			addButtonDisabled(8, "Leaf Amulet", "You already bought item from Kaiba today.");
 		}
 		else {
 			addButton(0, "S.Ornament", buyItem, headjewelries.DMONSKUL).hint("Skull hair ornament - An unique hair accessory for evil wizards greatly empower ones magic power scaling with corruption, An unique find buy it while you can because this won't last forever!");
@@ -1214,6 +1216,7 @@ public function kaibaShopMainMenu2():void {
 			addButton(5, "W.I.Cloak", buyItem, armors.WALIC).hint("Walpurgis Izalia Cloak - Increase fire and darkness damage by 100%, weaken all other elemental damage by 99%, increase fire resistance by 25%, reduce spellcasting cost by 60%.");
 			addButton(6, "S.S.Clothing", buyItem, armors.SCANSC).hint("Scandalous Succubus Clothing - Slutty seduction 15, Count as naked, +25% to Lust strike tease damage, Double tease experience gained, Raise corruption over time, Incompatible with bra or panty, double the effect of Masochist and Sadist.");
 			addButton(7, "MoonClaws", buyItem, weapons.MCLAWS).hint("Moonlight Claws - dealing magical dmg instead of physical, using charge weapon will give 2x larger bonus and can use range attack in case there is no range weapon equipped.");
+			addButton(8, "Leaf Amulet", buyItem, necklaces.LEAFAMU).hint("Leaf Amulet - Increase white magic damage and evasion by 10%. (Effect doubled for elves) Decrease spells cooldown by 1 turn if used by elf. This is a temporary sale.");
 		}
 		//addButton(0, "Necklace", buyItem, necklaces.CSNECK);
 		addButton(12, "-1-", kaibaShopMainMenuPage1);

@@ -4160,6 +4160,10 @@ public class Creature extends Utils
 			if (game.player.hasKeyItem("Spring Boots") >= 0 && game.player.tallness < 48 && game.player.isBiped()) chance += 10;
 			if (game.player.hasKeyItem("Rocket Boots") >= 0 && game.player.tallness < 48 && game.player.isBiped()) chance += 20;
 			if (game.player.hasKeyItem("Nitro Boots") >= 0 && game.player.tallness < 48 && game.player.isBiped()) chance += 30;
+			if (game.player.necklace == game.necklaces.LEAFAMU) {
+				if (game.player.isElf()) chance += 20;
+				else chance += 10;
+			}
 			if (hasPerk(PerkLib.JunglesWanderer)) chance += 35;
 			if (hasStatusEffect(StatusEffects.Illusion)) {
 				if (perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 3) chance += 30;
@@ -4265,7 +4269,7 @@ public class Creature extends Utils
 			if (game.player.hasKeyItem("Rocket Boots") >= 0 && game.player.tallness < 48 && game.player.isBiped()) generalevasion += 20;
 			if (game.player.hasKeyItem("Nitro Boots") >= 0 && game.player.tallness < 48 && game.player.isBiped()) generalevasion += 30;
 			// perks
-			if ((hasPerk(PerkLib.Evade) || hasPerk(PerkLib.ElvenSense) || ((game.player.hasKeyItem("Nitro Boots") >= 0 || game.player.hasKeyItem("Rocket Boots") >= 0 || game.player.hasKeyItem("Spring Boots") >= 0) && game.player.tallness < 48 && game.player.isBiped())) && (roll < generalevasion)) return "Evade";
+			if ((hasPerk(PerkLib.Evade) || hasPerk(PerkLib.ElvenSense) || game.player.necklace == game.necklaces.LEAFAMU || ((game.player.hasKeyItem("Nitro Boots") >= 0 || game.player.hasKeyItem("Rocket Boots") >= 0 || game.player.hasKeyItem("Spring Boots") >= 0) && game.player.tallness < 48 && game.player.isBiped())) && (roll < generalevasion)) return "Evade";
 			if ((hasPerk(PerkLib.Flexibility) || perkv1(IMutationsLib.CatLikeNimblenessIM) >= 1) && (roll < 6)) return "Flexibility";
 			if (hasPerk(PerkLib.Misdirection) && (game.player.armor.hasTag(ItemTags.A_AGILE)) && (roll < 10)) return "Misdirection";
 			//if (hasPerk(PerkLib.Unhindered) && meetUnhinderedReq() && (roll < 10)) return "Unhindered";
