@@ -5023,7 +5023,7 @@ private function interveneWithKittyKats4():void
 	if (player.isBiped()) outputText("holding her tightly between your knees");
 	else if (player.isNaga()) outputText("your snake-like coils wraped around her");
 	else outputText("holding her tightly");
-	outputText(".  If she gets her wits about her she might still be able to escape, so you put your hands over her mouth and tell her to untie you in your most commanding tone.");
+	outputText(".  If she gets her wits about her, she might still be able to escape, so you put your hands over her mouth and tell her to untie you in your most commanding tone.");
 	outputText("\n\nShe freezes in place, staring into your eyes.  Then her fingers reach up and, after some fumbling, free your hands.  You remind her that considering she just robbed you calling out isn’t a good idea.  Then you take your hands away and ask what her name is.");
 	//[Next]
 	//Leads to Intervene (Part 5)

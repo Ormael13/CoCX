@@ -778,8 +778,8 @@ public static const BIKINI_ARMOR_BONUS:int                                      
 public static const OWN_MAIDEN_BIKINI:int                                           =  770; //
 public static const AMILY_X_IZMA_POTION_3SOME:int                                   =  771; //
 public static const MET_ESSY:int                                                    =  772; //
-public static const TURNED_DOWN_ESSY_FIRST_MEETING:int                              =  773; //
-public static const ACCEPTED_ESSY_FIRST_MEETING:int                                 =  774; //
+public static const UNKNOWN_FLAG_NUMBER_00773:int                              		=  773; //
+public static const ESSRAYLE_SEXED:int                                 				=  774; //
 public static const GIVEN_AMILY_NURSE_OUTFIT:int                                    =  775; //
 public static const TIMES_EATEN_EDRYN_PUSSY_RUT:int                                 =  776; //
 public static const MET_OTTERGIRL:int                                               =  777; //

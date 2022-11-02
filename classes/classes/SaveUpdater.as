@@ -1913,6 +1913,10 @@ public class SaveUpdater extends NPCAwareContent {
 				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_2358] = 0; //reclaiming soulforce flag
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.033;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.034) {
+				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00773] = 1; //reclaiming essy flag
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.034;
+			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
 		}
