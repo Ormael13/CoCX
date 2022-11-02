@@ -255,7 +255,6 @@ private function helpArianWhenYouMeetHim():void {
 	//(Park added to TA's Menu.  It will later be replaced by Arian's house.)
 	outputText("\n\n(<b>The park has been added to Tel'Adre's menu.</b>)");
 
-	arianHealth(1);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -350,9 +349,7 @@ public function visitThePark():void {
 		//Player returns to (Tel'Adre / camp).
 		//Arian's House replaces Park in Tel'Adre menu.
 		outputText("\n\n(<b>The park has been removed from Tel'Adre's menu.  Arian's house has been added to the 'Homes' submenu.</b>");
-		arianHealth(5);
 	}
-	arianHealth(1);
 	flags[kFLAGS.ARIAN_PARK]++;
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -361,7 +358,6 @@ public function visitThePark():void {
 public function visitAriansHouse():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_arian);
-	if (flags[kFLAGS.ARIAN_HEALTH] < 29 || flags[kFLAGS.ARIAN_VIRGIN] == 1) arianHealth(1);
 	if (arianFollower()) {
 		if (arianMF("m", "f") == "f")
 			outputText(images.showImage("arianfemale-tent"));
@@ -597,7 +593,7 @@ public function visitAriansHouse():void {
 	}
 }
 
-private function arianHomeMenu():void {
+private function arianHomeMenu(back:Boolean = false):void {
 	sceneHunter.print("Arian's health: " + arianHealth() + " out of 100.");
 	menu();
 	if(flags[kFLAGS.ARIAN_S_DIALOGUE] == 0 && arianHealth() >= 10) addButton(0,"Next",arianStoryDialogue1);
@@ -2699,39 +2695,31 @@ private function giveArianAnItem():void {
 	}
 	
 	menu();
-	if(flags[kFLAGS.ARIAN_S_DIALOGUE] == 0 && arianHealth() >= 10) arianStoryDialogue1();
-	else if(flags[kFLAGS.ARIAN_S_DIALOGUE] == 1 && arianHealth() >= 20) arianStoryDialogue2();
-	else if(flags[kFLAGS.ARIAN_S_DIALOGUE] == 2 && arianHealth() >= 30) arianDialogue3();
-	else if(flags[kFLAGS.ARIAN_S_DIALOGUE] == 3 && arianHealth() >= 50) arianImbue();
-	else if(flags[kFLAGS.ARIAN_S_DIALOGUE] == 4 && arianHealth() >= 75) arianPlot4();
-	else if(flags[kFLAGS.ARIAN_S_DIALOGUE] == 5 && arianHealth() >= 100) arianPlot5();
-	else {
-		if(flags[kFLAGS.ARIAN_HEALTH] >= 20) {
-			addButton(0, consumables.P_DRAFT.shortName, giveIncubusDraftToArian)
-				.disableIf(!player.hasItem(consumables.P_DRAFT), "You don't have any.");
-			addButton(1, consumables.P_S_MLK.shortName, succubiMilkForArian)
-				.disableIf(!player.hasItem(consumables.P_S_MLK), "You don't have any.");
-			addButton(2, consumables.LACTAID.shortName, giveArianLactaid)
-				.disableIf(!player.hasItem(consumables.LACTAID), "You don't have any.");
-			addButton(3, consumables.REDUCTO.shortName, giveArianReducto)
-				.disableIf(!player.hasItem(consumables.REDUCTO), "You don't have any.");
-			addButton(4, consumables.REPTLUM.shortName, giveArianReptilum)
-				.disableIf(!player.hasItem(consumables.REPTLUM), "You don't have any.");
-			if(arianFollower() && flags[kFLAGS.ARIAN_SCALES] != 0) {
-				if(flags[kFLAGS.ARIAN_SCALES] != 1) addButton(5, useables.VIALCLE.shortName, giveArianScalesDyeVial1)
-					.disableIf(!player.hasItem(useables.VIALCLE), "You don't have any.");
-				if(flags[kFLAGS.ARIAN_SCALES] != 2) addButton(6, useables.VIALTUR.shortName, giveArianScalesDyeVial2)
-					.disableIf(!player.hasItem(useables.VIALTUR), "You don't have any.");
-				if(flags[kFLAGS.ARIAN_SCALES] != 3) addButton(7, useables.VIALPIN.shortName, giveArianScalesDyeVial3)
-					.disableIf(!player.hasItem(useables.VIALPIN), "You don't have any.");
-				if(flags[kFLAGS.ARIAN_SCALES] != 4) addButton(8, useables.VIALPIN.shortName, giveArianScalesDyeVial4)
-					.disableIf(!player.hasItem(useables.VIALPIN), "You don't have any.");
-			}
+	if(flags[kFLAGS.ARIAN_HEALTH] >= 20) {
+		addButton(0, consumables.P_DRAFT.shortName, giveIncubusDraftToArian)
+			.disableIf(!player.hasItem(consumables.P_DRAFT), "You don't have any.");
+		addButton(1, consumables.P_S_MLK.shortName, succubiMilkForArian)
+			.disableIf(!player.hasItem(consumables.P_S_MLK), "You don't have any.");
+		addButton(2, consumables.LACTAID.shortName, giveArianLactaid)
+			.disableIf(!player.hasItem(consumables.LACTAID), "You don't have any.");
+		addButton(3, consumables.REDUCTO.shortName, giveArianReducto)
+			.disableIf(!player.hasItem(consumables.REDUCTO), "You don't have any.");
+		addButton(4, consumables.REPTLUM.shortName, giveArianReptilum)
+			.disableIf(!player.hasItem(consumables.REPTLUM), "You don't have any.");
+		if(arianFollower() && flags[kFLAGS.ARIAN_SCALES] != 0) {
+			if(flags[kFLAGS.ARIAN_SCALES] != 1) addButton(5, useables.VIALCLE.shortName, giveArianScalesDyeVial1)
+				.disableIf(!player.hasItem(useables.VIALCLE), "You don't have any.");
+			if(flags[kFLAGS.ARIAN_SCALES] != 2) addButton(6, useables.VIALTUR.shortName, giveArianScalesDyeVial2)
+				.disableIf(!player.hasItem(useables.VIALTUR), "You don't have any.");
+			if(flags[kFLAGS.ARIAN_SCALES] != 3) addButton(7, useables.VIALPIN.shortName, giveArianScalesDyeVial3)
+				.disableIf(!player.hasItem(useables.VIALPIN), "You don't have any.");
+			if(flags[kFLAGS.ARIAN_SCALES] != 4) addButton(8, useables.VIALPIN.shortName, giveArianScalesDyeVial4)
+				.disableIf(!player.hasItem(useables.VIALPIN), "You don't have any.");
 		}
-		if (flags[kFLAGS.ARIAN_HEALTH] < 100) addButton(10,"Vital Tinct",arianVitalityTincture)
-				.disableIf(!player.hasItem(consumables.VITAL_T), "You don't have any.");
-		addButton(14,"Back",arianHomeMenu);
 	}
+	if (flags[kFLAGS.ARIAN_HEALTH] < 100) addButton(10,"Vital Tinct",arianVitalityTincture)
+			.disableIf(!player.hasItem(consumables.VITAL_T), "You don't have any.");
+	addButton(14,"Back",arianHomeMenu, true);
 }
 
 //Vitality Tincture:
@@ -2760,8 +2748,7 @@ private function arianVitalityTincture():void {
 	outputText("\n\nYou smile and stroke the lizan gently on [arian eir] head, telling [arian em] that [arian ey]'s welcome.  Now, you think it's time [arian ey] laid [arian em]self back down and got some rest; give the medicine time to work.  You promise you'll try and come back to see [arian em] later, but right now, [arian ey] needs to get some more rest.  Arian nods and settles [arian em]self on [arian eir] bed.");
 	
 	player.consumeItem(consumables.VITAL_T);
-	menu();
-	addButton(0,"Next",giveArianAnItem);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //P. Incubus Draft:
