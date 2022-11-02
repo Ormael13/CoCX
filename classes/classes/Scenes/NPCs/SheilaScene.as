@@ -3630,7 +3630,7 @@ private function askDemonSheilaAboutDahChange():void {
 		outputText("\n\n\"<i>How can I say this?  It felt... monumental.  As I came with you, all my cares slipped away.</i>\"  [sheilaname] lowers a hand to her crotch and begins to tease herself");
 		if(player.hasCock()) outputText(", and you feel a monument of your own being erected");
 		outputText(".  \"<i>Every squeeze of my pussy compressed my focus, too, until my mind was clearer than the juice you made me flow with.  I realized my purpose there, with you.</i>\"");
-		outputText("\n\nYou raise an eyebrow at that.  [sheilaname] smiles and explains, \"<i>Strange to say, but the captain was right.  My purpose in life really is to fuck.  When you and I were together, I forgot about all the whining, the unimportant nagging that was dumped on me all my life.  The digging, the worrying, the hiding... it never mattered.  Any of it.  You were what made that clear for me; having you is what I care about.</i>\"  She blows you a kiss.  \"<i>So... we could do something real, if you like.</i>\"");
+		outputText("\n\nYou raise an eyebrow at that.  [sheilaname] smiles and explains, \"<i>Strange to say, but the captain was right.  My purpose in life really is to fuck.  When you and I were together, I forgot about all the whining, the unimportant nagging that was dumped on me all my life.  The digging, the worrying, the hiding... it never mattered.  Any of it.  You were what has made that clear for me; having you is what I care about.</i>\"  She blows you a kiss.  \"<i>So... we could do something real, if you like.</i>\"");
 	}
 	//(else if sheilacite <= -1)
 	else if(flags[kFLAGS.SHEILA_CITE] <= -1) {
