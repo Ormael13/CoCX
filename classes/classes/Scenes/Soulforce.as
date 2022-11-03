@@ -273,7 +273,7 @@ public class Soulforce extends BaseContent
 				.disableIf(!player.hasItem(stages[i][2]), "Requires " + (stages[i][2] as ItemType).longName)
 				.disableIf(!player.hasPerk(stages[i][3]), "Requires perk: " + (stages[i][3] as PerkType).name())
 				.disableIf(player.hasPerk(stages[i][1]), "You have already reached this stage.");
-		addButton(i, "Back", SubPaths);
+		addButton(14, "Back", SubPaths);
 	}
 
 	private function daoistSubPathChosen(perk:PerkType, bottle:ItemType):void {
@@ -286,10 +286,10 @@ public class Soulforce extends BaseContent
 
 	public function bodycultivationSubPath():void {
 		var stages:Array = [
-			["Apprentice", PerkLib.DaoistApprenticeStage, consumables.LGSFRPB, PerkLib.FleshBodyApprenticeStage],
-			["Warrior", PerkLib.DaoistWarriorStage, consumables.MGSFRPB, PerkLib.FleshBodyWarriorStage],
-			["Elder", PerkLib.DaoistElderStage, consumables.HGSFRPB, PerkLib.FleshBodyElderStage],
-			["Overlord", PerkLib.DaoistOverlordStage, consumables.SGSFRPB, PerkLib.FleshBodyOverlordStage],
+			["Apprentice", PerkLib.FleshBodyApprenticeStage, consumables.LGSFRPB, PerkLib.SoulApprentice],
+			["Warrior", PerkLib.FleshBodyWarriorStage, consumables.MGSFRPB, PerkLib.SoulSprite],
+			["Elder", PerkLib.FleshBodyElderStage, consumables.HGSFRPB, PerkLib.SoulExalt],
+			["Overlord", PerkLib.FleshBodyOverlordStage, consumables.SGSFRPB, PerkLib.SoulKing],
 		];
 		menu();
 		var i:int;
@@ -299,7 +299,7 @@ public class Soulforce extends BaseContent
 				.disableIf(!player.hasItem(useables.BTSOLUTION, (i + 1) * 2), "Requires 2 vials" + useables.BTSOLUTION.longName.substr(6))
 				.disableIf(!player.hasPerk(stages[i][3]), "Requires perk: " + (stages[i][3] as PerkType).name())
 				.disableIf(player.hasPerk(stages[i][1]), "You have already reached this stage.");
-		addButton(i, "Back", SubPaths);
+		addButton(14, "Back", SubPaths);
 	}
 
 	private function bodycultivationSubPathChosen(perk:PerkType, bottle:ItemType, btcnt:int):void {
