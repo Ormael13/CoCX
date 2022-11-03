@@ -4215,7 +4215,7 @@ use namespace CoC;
 					modThickness(maxThicknessCap(), weightChange);
 					hunger = maxHunger(); //don't mind overeating?
 				}
-				if (hunger > oldHunger && flags[kFLAGS.USE_OLD_INTERFACE] == 0) CoC.instance.mainView.statsView.showStatUp('hunger');
+				if (hunger > oldHunger) CoC.instance.mainView.statsView.showStatUp('hunger');
 				//game.dynStats("lus", 0, "scale", false);
 				if (nl) outputText("\n\n");
 				//Messages
@@ -4244,7 +4244,7 @@ use namespace CoC;
 			var oldHunger:Number = hunger;
 			hunger += amnt;
 			if (hunger > maxHunger()) hunger = maxHunger();
-			if (hunger > oldHunger && flags[kFLAGS.USE_OLD_INTERFACE] == 0) CoC.instance.mainView.statsView.showStatUp('hunger');
+			if (hunger > oldHunger) CoC.instance.mainView.statsView.showStatUp('hunger');
 			//game.dynStats("lus", 0, "scale", false);
 			if (nl) outputText("\n");
 			if (hunger > oldHunger) CoC.instance.mainView.statsView.showStatUp("hunger");
@@ -4260,7 +4260,7 @@ use namespace CoC;
 			var oldHunger:Number = hunger;
 			hunger -= amnt;
 			if (hunger < 0) hunger = 0;
-			if (hunger < oldHunger && flags[kFLAGS.USE_OLD_INTERFACE] == 0) CoC.instance.mainView.statsView.showStatDown('hunger');
+			if (hunger < oldHunger) CoC.instance.mainView.statsView.showStatDown('hunger');
 			dynStats("lus", 0, "scale", false);
 		}
 

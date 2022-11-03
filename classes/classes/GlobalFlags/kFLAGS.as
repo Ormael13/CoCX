@@ -2986,7 +2986,7 @@ public static const CHARVIEW_STYLE:int                                          
 public static const CHARVIEWER_ENABLED:int                                          = 2978;
 public static const NEW_GAME_PLUS_LEVEL:int                                         = 2979; // Current intensity of New Game+. Each ascension increments this counter by 1.
 public static const NEW_GAME_PLUS_BONUS_UNLOCKED_HERM:int                           = 2980; // Unlocked hermaphrodite.
-public static const USE_OLD_INTERFACE:int                                           = 2981; // 1 if old interface is used, currently disabled until I can re-implement something that mimics the old interface.
+public static const UNKNOWN_FLAG_NUMBER_02981:int                                   = 2981;
 public static const IMAGEPACK_OFF:int                                               = 2982; // 1 if imagepack is disabled.
 public static const SPRITE_STYLE:int                                                = 2983; // 1 if old sprites are used.
 public static const AUTO_LEVEL:int                                                  = 2984; // 1 if automatic leveling is enabled.
