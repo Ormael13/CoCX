@@ -3003,7 +3003,7 @@ private function sheilaForcedOralGeneric():void {
 	else outputText("and she pets your head affectionately as her walls squeeze your tongue.  \"<i>Oh, mate...</i>\" she whispers lovingly, completely forgetting the struggle that led to your tryst.");
 	if(player.tongue.type > Tongue.HUMAN) fatigue(15);
 	dynStats("lus", player.lib/3+30, "scale", false);
-	if(player.lust >= player.maxLust()) dynStats("lib", 1);
+	if(player.lust >= player.maxOverLust()) dynStats("lib", 1);
 
 	if(player.cor >= 90 && sheilaCorruption() >= 90) {
 		outputText("\n\nYou could finish what you've started and fully corrupt the woman. Are you ready?")
@@ -3740,7 +3740,7 @@ private function talkToDemonSheilaAboutWhatNow():void {
 private function demonSheilaTalkAnotherQuestion():void {
 	clearOutput();
 	//(if lust <=99)
-	if(player.lust < player.maxLust()) {
+	if(player.lust < player.maxOverLust()) {
 		outputText("[sheilaname] reaches farther down, ");
 		//(cock)
 		if(player.hasCock()) outputText("slipping more of her finger and thumb around your penis");
@@ -4628,7 +4628,7 @@ private function jojoRuinsTheAnalHateFuck(clear:Boolean = true):void {
 	outputText("\n\nSmiling grimly, you leave the wet sounds of sex behind you, wondering if Jojo will ever come when you call again.");
 	
 	//set lust to 100, huge corruption gain (like it matters), set sheilapreg to -3 and disable Jojo unless and until new corrupted content is written to reflect changes
-	dynStats("lus=", player.maxLust(), "cor", 10, "scale", false);
+	dynStats("lus=", player.maxOverLust(), "cor", 10, "scale", false);
 	flags[kFLAGS.SHEILA_DISABLED] = 4;
 	flags[kFLAGS.JOJO_DEAD_OR_GONE] = 1;
     if (CoC.instance.inCombat)

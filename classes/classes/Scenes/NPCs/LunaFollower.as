@@ -414,8 +414,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 						"\"<i>It is my pride and my pleasure to serve you, [Master]. Your praise is all I could desire and more.</i>\"\n\n");
 				player.hunger = player.maxHunger();
 				HPChange(Math.round(player.maxHP() * .05), true);
-				player.mana += Math.round(player.maxMana() * 0.05);
-				if (player.mana > player.maxMana()) player.mana = player.maxMana();
+				EngineCore.ManaChange(player.maxMana() * 0.05);
 				player.buff("WellFed").setStats({"str.mult":0.05,"tou.mult":0.05,"spe.mult":0.05}).forDays(1).withText("Well Fed");
 				EngineCore.changeFatigue(-(Math.round(player.maxFatigue() * 0.2)));
 				flags[kFLAGS.LUNA_MEAL] = 1;

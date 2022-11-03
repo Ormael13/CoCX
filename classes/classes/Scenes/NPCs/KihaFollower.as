@@ -763,7 +763,7 @@ public class KihaFollower extends NPCAwareContent implements TimeAwareInterface,
         outputText("[pg]Finding a gap in the foliage, the temperamental dragon-woman takes you up and out into the sky.  The gnarled swamp-trees beneath you look far less imposing from up here, and soon, they're flying past in a blur.  Without warning, Kiha twists and dives, taking you down to a small island in the swamp - her home.  She swoops through a gap in the roof with you in tow, confidently catching herself on the far wall of her abode and setting you down on the hard-packed floor.  You stumble, woozy from the abrupt flight.");
         outputText("[pg]\"<i>Does getting dragons off really make you that light-headed?</i>\" Kiha asks.  She tackles you into her bed before you can answer.  Her attitude, while still fierce, reminds you more of a playful kitten than a threat.");
         //[Route to appropriate sex scene!]
-        if (!recalling) dynStats("lus=", player.maxLust());
+        if (!recalling) dynStats("lus=", player.maxOverLust());
         doNext(lovingHugSelector);
     }
 

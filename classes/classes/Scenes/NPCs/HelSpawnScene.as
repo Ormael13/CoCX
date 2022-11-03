@@ -1959,7 +1959,7 @@ internal function loseSparringToDaughter():void {
 	//if Sluttymander:
 	if(flags[kFLAGS.HELSPAWN_PERSONALITY] >= 50) {
 		outputText("As you stumble back, ");
-		if(player.lust >= player.maxLust()) outputText("succumbing to your own lusts");
+		if(player.lust >= player.maxOverLust()) outputText("succumbing to your own lusts");
 		else outputText("unable to withstand her unending hail of attacks");
 		outputText(", " + flags[kFLAGS.HELSPAWN_NAME] + " quickly sweeps your [legs] out from under you, dropping you right on your ass.  You collapse with a grunt, ");
 		if(player.weaponName != "fists") outputText("weapon tumbling out of hand");
@@ -1975,7 +1975,7 @@ internal function loseSparringToDaughter():void {
 	//Else If Chastemander:
 	else {
 		outputText("As you stumble back, ");
-		if(player.lust >= player.maxLust()) outputText("succumbing to your own lusts");
+		if(player.lust >= player.maxOverLust()) outputText("succumbing to your own lusts");
 		else outputText("unable to withstand her unending hail of attacks");
 		outputText(", " + flags[kFLAGS.HELSPAWN_NAME] + " grabs your arm, catching you before you can fall.  \"<i>Easy there, " + championRef() + ", I got you,</i>\" she says, pulling you into a quick hug.");
 		
@@ -1992,7 +1992,7 @@ internal function loseSparringToDaughter():void {
 internal function beatUpYourDaughter():void {
 	clearOutput();
 	//{If Sluttymander loses to lust (you monster)}:
-	if(flags[kFLAGS.HELSPAWN_PERSONALITY] >= 50 && monster.lust >= monster.maxLust()) {
+	if(flags[kFLAGS.HELSPAWN_PERSONALITY] >= 50 && monster.lust >= monster.maxOverLust()) {
 		outputText("\"<i>N-no more...</i>\" the slutty little salamander moans, slumping down to the ground, arms wrapping around herself.  \"<i>Fuck, you're sexy... so horny...</i>\" she groans, hands slipping down to her soaked bikini bottom.");
 		
 		outputText("\n\nShaking your head, you give her a little push, flopping her onto her back.  She just lets out a little whimper and finally tears her panties away, giving her unrestricted access to her sodden box.  \"<i>Hey, d-don't just leave me like this,</i>\" she whines, but to no avail.");

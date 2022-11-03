@@ -405,7 +405,7 @@ this.HP -= (this.maxHP() * 0.08);
 			player.takeLustDamage((player.lib / 10 + player.cor / 10) + 15, true);
 			
 			outputText(". Your body rebels against you under the unholy influence");
-			if (player.lust < player.maxLust()) outputText(", but the effect is fleeting, thankfully. You try to ignore the residual tingles. You can’t afford to lose this close to your goal!");
+			if (player.lust < player.maxOverLust()) outputText(", but the effect is fleeting, thankfully. You try to ignore the residual tingles. You can’t afford to lose this close to your goal!");
 			else outputText(".");
 		}
 		

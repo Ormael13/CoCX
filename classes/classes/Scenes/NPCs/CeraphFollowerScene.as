@@ -199,7 +199,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			outputText("The defeated demon explains, \"<i>Though I am now and forever your slut, your slave, your bitch... those in my harem cannot be abandoned.  I am sad to say I cannot live with you, [Master].</i>\"  She sees the look forming in your eyes and hastily adds, \"<i>Oh, I'll still be at your beck and call, but if I can't make it, I'll be sure to send you one of my pets.  Just rub this charm whenever you want my services, [Master], and I'll be there.</i>\"  Ceraph holds out a tiny onyx bar tipped with rubies.  The gems shine and glitter with their own inner light, while the black shaft seems to drink in everything around it, leaving behind darkness.\n\n");
 
 			outputText("Well, with a harem as large as hers, it makes sense that she'd have to keep them in her lair and tend to them.  There's no way you could foster the people in your camp, and besides, since their Mistress is your slave, they're <b>now yours by extension, as well</b>.  Ceraph reaches down to ");
-			if (monster.lust >= monster.maxLust()) outputText("resume stroking");
+			if (monster.lust >= monster.maxOverLust()) outputText("resume stroking");
 			else outputText("stroke");
 			outputText(" her nodule-studded demon-dick with her free hand.  She whimpers, \"<i>Would my [Master] prefer to carry [his] slave's token, or wear it as a belly-button piercing?</i>\"\n\n");
 			if (player.hasKeyItem("Radiant shard") >= 0){

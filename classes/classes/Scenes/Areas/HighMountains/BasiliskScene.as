@@ -475,7 +475,7 @@ public class BasiliskScene extends BaseContent
 				outputText("The harpy manages to cum twice on your hand, gobbling with excitement as she spatters your arm with her juices.  During this time you are forced to ride the potent cocktail of hypnotic sexual compulsion, and the pheromone lipstick again and again, until you feel you would have collapsed in a pool of steaming sex long ago if your knees allowed it.  Once she is finished with you the harpy clambers down, taking care to wipe her leaking twat on your naked front as she does so, before flapping off with a winsome smirk, entirely ignoring your own achingly deprived sex.\n\n");
 
 				outputText("After another ten or twenty minutes of being forced to stand still and savor your own shameful memories, you find with great relief you can begin to move your fingers again. Eventually with some effort you manage to work power into each corner of your body and finally shake free of the basilisk's curse; quickly, you redress before anything else finds you and, still reeking of harpy sex, you begin to make your way back down the mountain. You think woozily that maybe you should consider yourself lucky that nothing actually fucked you whilst you were in your helpless state, but your body thinks the exact opposite, and you really, really need to get back to camp and sort yourself out.");
-				dynStats("lus=", player.maxLust());
+				dynStats("lus=", player.maxOverLust());
 				cleanupAfterCombat();
 			}
 			//Genderless:
@@ -491,7 +491,7 @@ public class BasiliskScene extends BaseContent
 				outputText("The harpy manages to cum twice on your hand, gobbling with excitement as she spatters your arm with her juices.  During this time you are forced to ride the potent cocktail of hypnotic sexual compulsion, and the harpy's golden lipstick again and again, until you feel you would have collapsed in a pool of steaming sex long ago if your knees would only allow it.  Once she is finished with you the harpy clambers down, taking care to wipe her leaking twat on your naked front as she does so, before flapping off with a winsome smirk, entirely ignoring your own plight.\n\n");
 
 				outputText("After another ten or twenty minutes of being forced to stand still and savor your own shameful memories, you find with great relief you can begin to move your fingers again.  Eventually with some effort you manage to work power into each corner of your body and finally shake free of the basilisk's curse; quickly, you redress before anything else finds you and, still reeking of harpy sex, you begin to make your way back down the mountain.  You think woozily that maybe you should consider yourself lucky that nothing actually fucked you whilst you were in your helpless state, but your body thinks the exact opposite, and you really, really need to get back to camp and sort yourself out.");
-				dynStats("lus=", player.maxLust());
+				dynStats("lus=", player.maxOverLust());
 				cleanupAfterCombat();
 			}
 		}

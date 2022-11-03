@@ -48,7 +48,7 @@ public class HellHound extends Monster
 					doNext(SceneLib.combat.endHpLoss);
 					return;
 				}
-				if(player.lust >= player.maxLust()) {
+				if(player.lust >= player.maxOverLust()) {
 					doNext(SceneLib.combat.endLustLoss);
 					return;
 				}

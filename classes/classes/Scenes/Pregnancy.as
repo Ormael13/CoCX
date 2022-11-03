@@ -1209,7 +1209,7 @@ public class Pregnancy extends NPCAwareContent {
                         //genderless:
                         else EngineCore.outputText("  Your [vagina] begins twitching, aching for something to push through it over and over again.");
                         EngineCore.outputText("  Seated in your own slime, you moan softly, unable to keep your hands off yourself.");
-                        player.dynStats("lus=", player.maxLust(), "scale", false);
+                        player.dynStats("lus=", player.maxOverLust(), "scale", false);
                         displayedUpdate = true;
                     }
                     else {
@@ -2014,7 +2014,7 @@ public class Pregnancy extends NPCAwareContent {
                         EngineCore.outputText("You are interrupted as you find yourself overtaken by an uncontrollable urge to undress and squat.   You berate yourself for giving in to the urge for a moment before feeling something shift.  You hear the splash of fluid on the ground and look down to see a thick greenish fluid puddling underneath you.  There is no time to ponder this development as a rounded object passes down your birth canal, spreading your feminine lips apart and forcing a blush to your cheeks.  It plops into the puddle with a splash, and you find yourself feeling visibly delighted to be laying such healthy eggs.   Another egg works its way down and you realize the process is turning you on more and more.   In total you lay ");
                         EngineCore.outputText(eggDescript());
                         EngineCore.outputText(", driving yourself to the very edge of orgasm.");
-                        player.dynStats("lus=", player.maxLust(), "scale", false);
+                        player.dynStats("lus=", player.maxOverLust(), "scale", false);
                     }
                     //High quantity
                     else {
@@ -2072,7 +2072,7 @@ public class Pregnancy extends NPCAwareContent {
                     //genderless:
                     else EngineCore.outputText("  Your asshole begins twitching, aching for something to push through it over and over again.");
                     EngineCore.outputText("  Seated in your own slime, you moan softly, unable to keep your hands off yourself.");
-                    player.dynStats("lus=", player.maxLust(), "scale", false);
+                    player.dynStats("lus=", player.maxOverLust(), "scale", false);
                     displayedUpdate = true;
                 }
             }

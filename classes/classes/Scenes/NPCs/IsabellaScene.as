@@ -686,7 +686,7 @@ public function IsabellaWinsAndSpanks():void {
 		if(player.HP < 1) outputText("You collapse at Isabella's feet, nearly senseless from all the damage you've taken.");
 		else outputText("You collapse at Isabella's feet, masturbating pathetically as she glares down at you.");
 		outputText("  A hand grabs hold of the back of your [armor] and lifts you up, placing you firmly over the cow-girl's fur-covered knee.  You can feel the transition from fur to skin underneath your belly, at the midpoint of her thigh.  ");
-		if(player.lust >= player.maxLust()) outputText("You start trying to hump and grind, but the angry cow will have none of it.  ");
+		if(player.lust >= player.maxOverLust()) outputText("You start trying to hump and grind, but the angry cow will have none of it.  ");
 		outputText("SMACK!  A powerful impact slams into your [ass], making you gasp out in pain");
 		if(player.hasPerk(PerkLib.Masochist)) outputText(" and pleasure");
 		outputText(".  The next blow follows shortly after, equally hard but placed upon your other, yet-unbruised butt-cheek.");
@@ -747,7 +747,7 @@ public function IsabellaWinsAndSpanks():void {
 		if(player.HP < 1) outputText("You collapse at Isabella's feet, nearly senseless from all the damage you've taken.");
 		else outputText("You collapse at Isabella's feet, masturbating pathetically as she glares down at you.");
 		outputText("  A hand grabs hold of the back of your [armor] and props you up, ass in the air.  ");
-		if(player.lust >= player.maxLust()) outputText("You start trying to masturbate yourself, but the angry cow will have none of it.  ");
+		if(player.lust >= player.maxOverLust()) outputText("You start trying to masturbate yourself, but the angry cow will have none of it.  ");
 		outputText("SMACK!  A powerful impact slams into your [ass], making you gasp out in pain");
 
 		if(player.hasPerk(PerkLib.Masochist)) outputText(" and pleasure");
@@ -818,7 +818,7 @@ public function isabellaRapesYouWithHerAss(x:int):void {
 	if(player.HP < 1) outputText("You collapse at Isabella's feet, nearly senseless from all the damage you've taken.");
 	else outputText("You collapse at Isabella's feet, masturbating pathetically as she glares down at you.");
 	outputText("  The cow-girl plants a hoof on your chest, pinning you into the dusty sod of her camp while she looks you up and down.  The victorious redhead leers at your groin while she begins to tear off your [armor].  It doesn't take her more than a few seconds to expose your [cocks].");
-	if(player.lust >= player.maxLust())
+	if(player.lust >= player.maxOverLust())
 	{
 		outputText("  Your twitching hardness brings a smile to Isabella's face as she coos, \"");
 		if(isabellaAccent()) outputText("<i>Oooh, so eager to be taught a lesson, ja?  Very vell, Izabella vill give you your punishment!</i>\"\n\n");
@@ -1159,7 +1159,7 @@ public function PCVictoryOnIsabellaButtsex():void {
 	clearOutput();
 	if (y < 0) sceneHunter.print("You could use another one!");
 	outputText("Milk, huh?  No, that won't do.  You tell the ");
-	if(monster.lust >= monster.maxLust()) outputText("horny ");
+	if(monster.lust >= monster.maxOverLust()) outputText("horny ");
 	outputText("cow-slut to roll over and get on all fours.  ");
 	if(monster.HP <= monster.minHP()) outputText("She struggles to comply, heaving her hefty body until she's wobbling on all fours, nearly falling into the dirt.");
 	else outputText("She struggles to comply, pulling her hands away from her erogenous zones as she wobbles onto shaky hands and knees.");
@@ -1364,7 +1364,7 @@ public function tooBigVictoryTittyFuckingFuntimesWithMilk():void {
 	var x:Number = player.biggestCockIndex();
 	clearOutput();
 	outputText("You toss aside your [armor] to reveal your " + cockDescript(x) + " to the ");
-	if(monster.lust >= monster.maxLust()) outputText("lusty");
+	if(monster.lust >= monster.maxOverLust()) outputText("lusty");
 	else outputText("weakened");
 	outputText(" cow-girl.  Her eyes go wide as she beholds the full, revealed length, watching it ");
 	if(player.lust >= (player.maxLust() * 0.7)) outputText("pulsate with your raging lust");
@@ -1380,7 +1380,7 @@ public function tooBigVictoryTittyFuckingFuntimesWithMilk():void {
 	if(player.cor < 33) outputText("I'm sorry, but you're too hot to resist, and it's better I do this than try to force it in a hole that could never accept it,");
 	else if(player.cor < 66) {
 		outputText("This isn't up for discussion.  ");
-		if(monster.lust >= monster.maxLust()) outputText("You're so drippy that you want this anyway,");
+		if(monster.lust >= monster.maxOverLust()) outputText("You're so drippy that you want this anyway,");
 		else outputText("You lost and you've got to deal with the consequences,");
 	}
 	else outputText("Tough shit,");
@@ -1443,7 +1443,7 @@ public function vaginalProdNPokeIsabella():void {
 	if(x < 0) x = 0;
 	clearOutput();
 	outputText("You smirk down at Isabella as you tell her that milk is the least of your concerns.  The ");
-	if(monster.lust >= monster.maxLust()) outputText("lusty");
+	if(monster.lust >= monster.maxOverLust()) outputText("lusty");
 	else outputText("defeated");
 	outputText(" cow-girl pales and asks, ");
 	if (isabellaAccent()) outputText("\"<i>But vhy not?  Mein milk is so gooood.</i>\"");
@@ -1523,7 +1523,7 @@ public function tinyVictoryTittyFuckingFuntimesWithMilk():void {
 	var x:Number = player.smallestCockIndex();
 	clearOutput();
 	outputText("You toss aside your [armor] to reveal your " + cockDescript(x) + " to the ");
-	if(monster.lust >= monster.maxLust()) outputText("lusty");
+	if(monster.lust >= monster.maxOverLust()) outputText("lusty");
 	else outputText("weakened");
 	outputText(" cow-girl.  She squeals in delight at the sight of your " + multiCockDescriptLight());
 	if(player.cockTotal() > 1) outputText(", singling the smallest one out for some reason");
@@ -1535,7 +1535,7 @@ public function tinyVictoryTittyFuckingFuntimesWithMilk():void {
 	else if(player.cor < 66) outputText("bringing a tiny blush to your cheeks");
 	else outputText("but you aren't really bothered by it in the slightest");
 	outputText(".  You clear your throat and try to regain control of the situation by demanding that she service you with her breasts.  Isabella happily accedes, even going so far as to clap excitedly as she sheds her top.  She seems to genuinely relish the idea, to a degree that makes her forget ");
-	if(monster.lust >= monster.maxLust()) outputText("her own needs.");
+	if(monster.lust >= monster.maxOverLust()) outputText("her own needs.");
 	else outputText("her wounds.");
 	outputText("\n\n");
 

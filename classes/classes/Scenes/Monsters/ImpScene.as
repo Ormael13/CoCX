@@ -1445,7 +1445,7 @@ use namespace CoC;
 			}
             sceneHunter.print("Failed check: Bimbo/Futa, non-taur, vagina");
 			//Lust loss
-			if(player.lust >= player.maxLust())
+			if(player.lust >= player.maxOverLust())
 				sceneHunter.selectLossMenu([
 						[0, "Vaginal", vaginal, "Req. a vagina", player.hasVagina()],
 						[1, "SuckHim", suckHimMale, "Req. a cock", player.hasCock()],

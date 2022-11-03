@@ -67,7 +67,7 @@ import classes.display.SpriteDb;
 			//(Low damage taken)
 			if(damage <= 8) {
 				outputText("Though your body is tingling from the show the horny beasts are giving you, it doesn't effect you as much as it could have.");
-				if(player.lust >= player.maxLust()) outputText("  Still, you're too horny to fight any longer.");
+				if(player.lust >= player.maxOverLust()) outputText("  Still, you're too horny to fight any longer.");
 			}
 			//(Medium damage taken)
 			else if(damage <= 14) {
@@ -75,7 +75,7 @@ import classes.display.SpriteDb;
 				if(player.lust > 70) outputText(", though you didn't think such a thing was possible");
 				else outputText(", feeling like two bullets scraping along the inside of your " + player.armorName);
 				outputText(", but it... it could have been worse.  You shudder as a little fantasy of letting them dribble it all over your body works through your mind.");
-				if(player.lust >= player.maxLust()) outputText("  Fuck it, they smell so good.  You want, no, NEED more.");
+				if(player.lust >= player.maxOverLust()) outputText("  Fuck it, they smell so good.  You want, no, NEED more.");
 				else outputText("  A growing part of you wants to experience that.");
 			}
 			//(high damage taken)
@@ -95,7 +95,7 @@ import classes.display.SpriteDb;
 				}
 				if(player.hasCock()) outputText("  " + SMultiCockDesc() + " twitches and dribbles its own pre-seed, but it doesn't smell anywhere near as good!");
 				outputText("  Shuddering and moaning, your body is wracked by ever-increasing arousal.  Fantasies of crawling under the beast-men's soaked legs and lapping at their drooling erections inundate your mind, your body shivering and shaking in response.  ");
-				if(player.lust < player.maxLust()) outputText("You pull back from the brink with a start.  It'll take more than a little drugged pre-cum to bring you down!");
+				if(player.lust < player.maxOverLust()) outputText("You pull back from the brink with a start.  It'll take more than a little drugged pre-cum to bring you down!");
 				else outputText("You sigh and let your tongue loll out.  It wouldn't so bad, would it?");
 			}
 		}

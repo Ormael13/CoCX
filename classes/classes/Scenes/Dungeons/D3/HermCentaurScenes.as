@@ -371,7 +371,7 @@ import classes.Scenes.SceneLib;
 
 				outputText("\n\nThe rest of your days are lived out like that, interrupted only for fresh injections of demonic chemicals and thick centaur-cum.  Amazingly, the demon's experiments bear fruit, and you have the honor of birthing the first true demon offspring - the first of many.  Though you're eventually traded to a new owner once you're well-used and other sluts have been similar prepared, you keep a sense of a perverse pride through it all.  You were the first demon mother.  You helped the new species propagate and assure their dominance over lesser forms of life, like yourself.");
 
-				dynStats("lus=", player.maxLust(), "lib", 50, "cor", 50);
+				dynStats("lus=", player.maxOverLust(), "lib", 50, "cor", 50);
 				EventParser.gameOver();
 			}
 		}

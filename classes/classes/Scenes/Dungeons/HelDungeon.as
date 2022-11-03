@@ -365,7 +365,7 @@ use namespace CoC;
 			spriteSelect(SpriteDb.s_valeria);
 			clearOutput();
 			outputText("Succumbing to your ");
-			if(monster.lust >= monster.maxLust()) outputText("erotic abilities");
+			if(monster.lust >= monster.maxOverLust()) outputText("erotic abilities");
 			else outputText("skill in battle");
 			outputText(", the armored goo slumps backwards against the wall, unable to stand.  You loom over her, grinning as you contemplate what to do with your helpless opponent.");
 			outputText("\n\n\"<i>Hey... hey wait!</i>\" the goo gasps, waving a hand emphatically to ward you off.  \"<i>It... it doesn't have to be like this.  I think... Hey, yeah, I think we can come to an understanding.  You're a reasonable sort, right? No need to get violent...</i>\"");
@@ -693,7 +693,7 @@ use namespace CoC;
 		public function phoenixSquadMurdersPC():void {
 			clearOutput();
 			outputText("You collapse, too ");
-			if(player.lust >= player.maxLust()) outputText("turned on");
+			if(player.lust >= player.maxOverLust()) outputText("turned on");
 			else outputText("badly injured");
 			outputText(" to continue the fight.  The squad of heavy infantry breaks their formation, circling around you with shields still raised, keeping you from making any kind of last-ditch attack.  One prods you with the flat of her blade.  \"<i>Is " + player.mf("he","she") + " down?</i>\"");
 			outputText("\n\n\"<i>Yeah,</i>\" another says. \"<i>This one's a goner. Let's bring " + player.mf("him","her") + " up to mom.</i>\"");

@@ -4585,7 +4585,7 @@ private function urtaGooTesticleVoreRuinedOrgasms():void {
 
 	outputText("\n\nYou feel Urta's body shift around a few times, her legs bumping into your new \"home\" as she struggles to get comfortable.  Then, surprisingly, you can hear muffled snoring.  After being subjected to ruined orgasm after ruined orgasm, Urta just fell asleep!  Figuring there's not much you can do about it from in here, you relax your body as well.  As you calm down, you feel your body beginning to lose its shape.  If you think about it, you can regain your form, so rather than worry about it, you let yourself soften, mixing with Urta's spunk as you too drift off into a peaceful sleep.");
 
-	dynStats("lus=", player.maxLust(), "scale", false);
+	dynStats("lus=", player.maxOverLust(), "scale", false);
 	//Next
 	menu();
 	addButton(0,"Next",urtasRuinedOrgasmsFromGooPartII);
@@ -5105,7 +5105,7 @@ private function urtaTakesPCOnWalkies():void {
 	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] += 5;
 	if(flags[kFLAGS.PC_FETISH] > 0) {
 		outputText("  <b>You're so fucking turned on after exhibiting yourself in such a way that you're dripping EVERYWHERE.  Such a good doggie.</b>");
-		dynStats("lus=", player.maxLust(), "scale", false);
+		dynStats("lus=", player.maxOverLust(), "scale", false);
 	}
 	doNext(camp.returnToCampUseOneHour);
 }

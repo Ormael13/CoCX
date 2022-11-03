@@ -112,8 +112,8 @@ public class Soulforce extends BaseContent
 		var btn:int = 0;
 		for each(var hours:int in hoursOpt) {
 			var timeS:String = hours == 1 ? "1 hour" : "" + hours + " hours";
-			addButton(btn++, timeS, cultivate, hours)
-				.hint("Cultivate for "+timeS+" (Allow to recover " + sfRegen(hours) + " soulforce).");
+			addButton(btn++, timeS, meditate, hours)
+				.hint("Meditate for "+timeS+" (Allow to recover " + meditationPredict(hours)  + " soulforce).");
 		}
 		addButton(14, "Back", accessSoulforceMenu);
 	}
@@ -341,15 +341,15 @@ public class Soulforce extends BaseContent
 	//Name, status, clone ID
 	public static var daos:/*Array*/Array = [
 		["Fire", StatusEffects.DaoOfFire, 11],
-		["Ice", StatusEffects.DaoOfFire, 12],
-		["Lightning", StatusEffects.DaoOfFire, 13],
-		["Darkness", StatusEffects.DaoOfFire, 14],
-		["Poison", StatusEffects.DaoOfFire, 15],
-		["Wind", StatusEffects.DaoOfFire, 16],
-		["Blood", StatusEffects.DaoOfFire, 17],
-		["Water", StatusEffects.DaoOfFire, 18],
-		["Earth", StatusEffects.DaoOfFire, 19],
-		["Acid", StatusEffects.DaoOfFire, 20],
+		["Ice", StatusEffects.DaoOfIce, 12],
+		["Lightning", StatusEffects.DaoOfLightning, 13],
+		["Darkness", StatusEffects.DaoOfDarkness, 14],
+		["Poison", StatusEffects.DaoOfPoison, 15],
+		["Wind", StatusEffects.DaoOfWind, 16],
+		["Blood", StatusEffects.DaoOfBlood, 17],
+		["Water", StatusEffects.DaoOfWater, 18],
+		["Earth", StatusEffects.DaoOfEarth, 19],
+		["Acid", StatusEffects.DaoOfAcid, 20],
 	];
 
 	public static var clones:/*StatusEffectType*/Array = [
@@ -364,14 +364,13 @@ public class Soulforce extends BaseContent
 		outputText("Which Dao would you try to comprehend?\n\n");
 		for (var i:int = 0; i < daos.length; ++i) {
 			var dao:Array = daos[i];
-			if (player.hasStatusEffect(dao[1])) {
-				outputText(dao[0] + ": " + player.statusEffectv1(dao[1]) + "\n");
-				addButton(i, dao[0], daoContemplationsEffect, dao[1], dao[0])
-					.disableIf(player.statusEffectv2(dao[1]) == highestLayerOfDaoComprehension(),
-						"You have reached your current limit of comprehending for this Dao."
-						+ (player.hasPerk(PerkLib.SoulEmperor) ? "Try to improve your soulforce skills to get further."
-							: "\n<b>MAXIMUM LEVEL REACHED</b>"));
-			}
+			if (player.hasStatusEffect(dao[1]))
+				outputText(dao[0] + ": Level - " + player.statusEffectv2(dao[1]) + ", Progress - " + player.statusEffectv1(dao[1]) + "\n");
+			addButton(i, dao[0], daoContemplationsEffect, dao[1], dao[0])
+				.disableIf(player.statusEffectv2(dao[1]) == highestLayerOfDaoComprehension(),
+					"You have reached your current limit of comprehending for this Dao."
+					+ (player.hasPerk(PerkLib.SoulEmperor) ? "Try to improve your soulforce skills to get further."
+						: "\n<b>MAXIMUM LEVEL REACHED</b>"));
 		}
 		addButton(14, "Back", accessSoulforceMenu);
 	}
@@ -428,12 +427,16 @@ public class Soulforce extends BaseContent
 		return hLrODC;
 	}
 
-	private function sfRegenRacialMult():Number {
+	public function sfRegenRacialMult():Number {
 		var kitsuneBonus:Array = [0.4, 0.8, 1.3, 2.0];
 		var nekoBonus:Array = [0.2, 0.4];
+		var kitshooBonus:Array = [0.3, 0.4, 0.5];
 		var mult:Number = 1.0;
 		if (player.isRace(Races.KITSUNE)) mult += kitsuneBonus[player.racialTier(Races.KITSUNE) - 1];
 		if (player.isRace(Races.NEKOMATA)) mult += nekoBonus[player.racialTier(Races.NEKOMATA) - 1];
+		if (player.isRace(Races.KITSHOO)) mult += kitshooBonus[player.racialTier(Races.KITSHOO) - 1];
+		if (player.isRaceCached(Races.UNICORN, 2)) mult += 0.05;
+		if (player.isRaceCached(Races.ALICORN, 2)) mult += 0.1;
 		return mult;
 	}
 
@@ -474,13 +477,23 @@ public class Soulforce extends BaseContent
 		return amount;
 	}
 
+	//Predict the soulforce change after the meditation
+	public function meditationPredict(hours:int):int {
+		var maxChange:int = sfRegen(hours) //regen from meditation itself
+			+ Math.round(SceneLib.combat.soulforceregeneration2() * 2 * SceneLib.combat.soulforceRecoveryMultiplier() * hours); //from time spent
+		return Math.min(maxChange, player.maxOverSoulforce() - player.soulforce);
+	}
+
 	//Regen SF and train max SF with items
-	private function cultivate(hours:int):void {
+	private function meditate(hours:int):void {
 		clearOutput();
 		outputText("You find a flat, comfortable rock to sit down on and meditate. Minute after minute you feel how your lost soulforce is slowly replenished.\n\n");
 		soulforceItemTraining(hours); //incremental bonus to MAX soulforce after each cultivation. Scales with hours
-		outputText("The spent time has allowed you to restore " + EngineCore.SoulforceChange(sfRegen(hours)) + " soulforce.\n\n");
-		outputText("Current soulpower: " + player.soulforce + " / " + player.maxSoulforce());
+		//need to include the time.
+		var predict:int = meditationPredict(hours);
+		outputText("The spent time has allowed you to restore " + predict + " soulforce.\n\n");
+		outputText("Current soulpower: " + (player.soulforce + predict) + " / " + player.maxSoulforce());
+		EngineCore.SoulforceChange(sfRegen(hours)); //actual regen
 		if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(20 * hours);
 		doNext(camp.returnToCamp, hours);
 	}

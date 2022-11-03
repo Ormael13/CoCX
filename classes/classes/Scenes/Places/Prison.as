@@ -2434,7 +2434,7 @@ public class Prison extends BaseContent implements TimeAwareInterface
 		{
 			if (flags[kFLAGS.IN_PRISON] == 0) return false; //Make sure events don't proc!
 			var eventOccurred:Boolean = false;
-			if ((flags[kFLAGS.PRISON_PUNISHMENT] == 0 || flags[kFLAGS.PRISON_PUNISHMENT] == 3) && player.lust >= player.maxLust() && rand(3) == 0)
+			if ((flags[kFLAGS.PRISON_PUNISHMENT] == 0 || flags[kFLAGS.PRISON_PUNISHMENT] == 3) && player.lust >= player.maxOverLust() && rand(3) == 0)
 			{
 				//prisonCaptor.updateNextRoomRandomEvent(model.time.hours, model.time.days);
 				//Wild Dildo Rack appears!

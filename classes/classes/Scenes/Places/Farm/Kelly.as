@@ -357,7 +357,7 @@ public function secondKeltBreaking():void {
 internal function defeatKellyNDBREAKHIM():void {
 	clearOutput();
 	if (!recalling) outputText("<b>New scene is unlocked in 'Recall' menu!</b>\n\n");
-	if(monster.lust >= monster.maxLust()) outputText("Kelt moans, mauling at his mantits in his lust before he realizes what's going on");
+	if(monster.lust >= monster.maxOverLust()) outputText("Kelt moans, mauling at his mantits in his lust before he realizes what's going on");
 	else outputText("Kelt groans, slumping slightly from all the damage you've done to him");
 	outputText(".  You close in, saying, \"<i>Easy now, okay?  You know what I can do with my [weapon].  Now if you just calm down, I promise I'll be much nicer this time.</i>\"");
 	
