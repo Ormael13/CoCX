@@ -757,7 +757,7 @@ use namespace CoC;
 			monster = new ImpGang();
 			outputText("\n");
 			if (!loss) outputText("<b>You sleep uneasily. A small sound near the edge of your camp breaks into your rest, and you awaken suddenly to find yourself surrounded by [themonster]</b>!\n\n");
-			if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && (flags[kFLAGS.SLEEP_WITH] == "Marble" || flags[kFLAGS.SLEEP_WITH] == "")) {
+			if (camp.sleepInCabin()) {
 				outputText("You look at the door to see that it's open. Shit. You've forgottten to lock the door before you went to sleep!\n\n");
 			}
 			if ((Math.sqrt(player.inte + player.spe) >= rand(16) || rand(3) == 0) && !loss) {

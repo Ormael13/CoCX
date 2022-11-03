@@ -3390,6 +3390,11 @@ public class Camp extends NPCAwareContent{
 //-----------------
 //-- SLEEP
 //-----------------
+	public function sleepInCabin():Boolean {
+		return flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0
+			&& ["", "Marble", "Zenji", "Excellia", "Luna", "Samirah", "Sophie", "Hel"].indexOf(flags[kFLAGS.SLEEP_WITH]) != -1;
+	}
+
 	public function doSleep(clrScreen:Boolean = true):void {
 		IsSleeping = true;
 		if (SceneLib.urta.pregnancy.incubation == 0 && SceneLib.urta.pregnancy.type == PregnancyStore.PREGNANCY_PLAYER && model.time.hours >= 20 && model.time.hours < 2) {
@@ -3459,7 +3464,7 @@ public class Camp extends NPCAwareContent{
 			/******************************************************************/
 			/*       SLEEP WITH SYSTEM GOOOO                                  */
 			/******************************************************************/
-			if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && (flags[kFLAGS.SLEEP_WITH] == "" || flags[kFLAGS.SLEEP_WITH] == "Marble")) {
+			if (sleepInCabin() && (flags[kFLAGS.SLEEP_WITH] == "" || flags[kFLAGS.SLEEP_WITH] == "Marble")) {
 				outputText("You enter your cabin to turn yourself in for the night. ")
 			}
 			//Marble Sleepies
@@ -3640,7 +3645,7 @@ public class Camp extends NPCAwareContent{
 			fatRecovery += 10;
 			hpRecovery += 10;
 		}
-		if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && (flags[kFLAGS.SLEEP_WITH] == "" || flags[kFLAGS.SLEEP_WITH] == "Marble")) {
+		if (sleepInCabin()) {
 			multiplier += 0.5;
 		}
 		if (player.hasPerk(PerkLib.SpeedyRecovery)) fatRecovery += 5;

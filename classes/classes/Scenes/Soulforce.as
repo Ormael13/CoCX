@@ -277,10 +277,9 @@ public class Soulforce extends BaseContent
 	}
 
 	private function daoistSubPathChosen(perk:PerkType, bottle:ItemType):void {
-		clearOutput();
 		player.destroyItems(bottle, 1);
 		player.createPerk(perk, 0, 0, 0, 0);
-		outputText("<b>Gained perk - " + perk.name() + "</b>");
+		outputText("\n\n<b>Gained perk - " + perk.name() + "</b>");
 		doNext(camp.returnToCampUseFourHours);
 	}
 
@@ -307,8 +306,7 @@ public class Soulforce extends BaseContent
 		player.destroyItems(bottle, 2);
 		player.destroyItems(useables.BTSOLUTION, btcnt);
 		player.createPerk(perk, 0, 0, 0, 0);
-		clearOutput();
-		outputText("<b>Gained perk - " + perk.name() + "</b>");
+		outputText("\n\n<b>Gained perk - " + perk.name() + "</b>");
 		doNext(camp.returnToCampUseFourHours);
 	}
 

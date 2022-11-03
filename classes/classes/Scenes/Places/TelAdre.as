@@ -1278,7 +1278,7 @@ public function tripxiShopMainMenu():void {
 	clearOutput();
 	if (player.statusEffectv2(StatusEffects.TelAdreTripxi) > 0) {
 		outputText("You enter the shop and deliver the gun parts to Tripxi who overjoyed begins to rebuild the gun immediately drawing schematics in the process.\n\n");
-		outputText("\"<i>Great job with this we are one step closer to restoring what was lost in the demon war all thanks to you! Come back tomorrow and I will have a brand-new gun ready for you.</i>\"\n\n");
+		outputText("\"<i>Great job! We are one step closer to restoring what was lost in the demon war... Come back tomorrow and I will have a brand-new gun ready for you.</i>\"\n\n");
 		if (model.time.hours >= 15) player.addStatusValue(StatusEffects.TelAdreTripxi, 3, 16);
 		else player.addStatusValue(StatusEffects.TelAdreTripxi, 3, 8);
 		player.changeStatusValue(StatusEffects.TelAdreTripxi, 2, 0);
