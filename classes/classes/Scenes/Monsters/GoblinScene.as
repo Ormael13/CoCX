@@ -1126,11 +1126,8 @@ public class GoblinScene extends BaseContent {
     private function killGoblin():void {
         clearOutput();
         flags[kFLAGS.GOBLINS_KILLED]++;
-        if (flags[kFLAGS.NO_GORE_MODE] >= 1) outputText("You make a quick work of the goblin before dragging the corpse away. That's one less foul creature prowling the realms. ");
-        else {
-            outputText("You slowly stalk towards your defeated foe. The goblin looks at you, lust filling her eyes as she believes you're going to use her. That lust quickly changes to fear as you pull a small knife out of its holster, the blade gleaming dangerously.\n\n");
-            outputText("The goblin tries to run, but in her tired state, only manages to stumble around as you draw closer. You grab her by the hair and hoist her up, placing the sharp edge of the knife against her ear. The goblin wails in pain as you cut her ear off, blood spurting out as you quickly slit her throat to put the thing out of its misery. ");
-        }
+        outputText("You slowly stalk towards your defeated foe. The goblin looks at you, lust filling her eyes as she believes you're going to use her. That lust quickly changes to fear as you pull a small knife out of its holster, the blade gleaming dangerously.\n\n");
+        outputText("The goblin tries to run, but in her tired state, only manages to stumble around as you draw closer. You grab her by the hair and hoist her up, placing the sharp edge of the knife against her ear. The goblin wails in pain as you cut her ear off, blood spurting out as you quickly slit her throat to put the thing out of its misery. ");
         if (player.cor < 25) dynStats("cor", -0.5);
         inventory.takeItem(useables.GOBOEAR, cleanupAfterCombat);
     }
