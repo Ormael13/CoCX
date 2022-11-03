@@ -260,7 +260,7 @@ public class Camp extends NPCAwareContent{
 			//Cor < 50
 			//No corrupt: Jojo, Amily, or Vapula
 			//Purifying Murble
-			if (player.cor < 50 && !campCorruptJojo() && !amilyScene.amilyCorrupt() && !vapulaSlave()
+			if (player.cor < 50 + player.corruptionTolerance && !campCorruptJojo() && !amilyScene.amilyCorrupt() && !vapulaSlave()
 					&& flags[kFLAGS.MARBLE_PURIFICATION_STAGE] == 0 && flags[kFLAGS.MARBLE_COUNTUP_TO_PURIFYING] >= 200
 					&& !player.hasPerk(PerkLib.MarblesMilk)) {
 				hideMenus();
