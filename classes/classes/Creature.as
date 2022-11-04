@@ -976,7 +976,7 @@ public class Creature extends Utils
 
 			// Keep values in bounds (lust and HP handled above)
 			fatigue = Math.min(fatigue, maxFatigue());
-			mana = Math.min(mana, maxOverHP());
+			mana = Math.min(mana, maxOverMana());
 			soulforce = Math.min(soulforce, maxOverSoulforce());
 			wrath = Math.min(wrath,maxOverWrath());
 		}

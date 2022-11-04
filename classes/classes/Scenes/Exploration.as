@@ -112,7 +112,7 @@ public class Exploration extends BaseContent
 			bd.add("Boat", SceneLib.boat.boatExplore)
 					.hint("Get on the boat and explore the lake. \n\nRecommended level: 12")
 					.disableIf(!player.hasStatusEffect(StatusEffects.BoatDiscovery), "Search the lake.");
-			bd.add("Shore").hint("TBA"); //Discovered when exploring using Lake Boat.
+			//bd.add("Shore").hint("TBA"); //Discovered when exploring using Lake Boat.
 			bd.add("");
 			bd.add("");
 			// Row 3
@@ -360,7 +360,7 @@ public class Exploration extends BaseContent
 			menu();
 			if (SceneLib.forest.deepwoodsDiscovered()) addButton(0, "Deepwoods", SceneLib.forest.exploreDeepwoods).hint("Visit the dark, bioluminescent deepwoods. " + (debug ? "\n\nTimes explored: " + SceneLib.forest.timesExploredDeepwoods() : ""));
 			else addButtonDisabled(0, "Deepwoods", "Discovered when exploring Forest (I).");
-			addButtonDisabled(1, "Shore", "TBA");//Discovered when exploring using Lake Boat.
+			//addButtonDisabled(1, "Shore", "TBA");//Discovered when exploring using Lake Boat.
 			//if (flags[kFLAGS.DISCOVERED_DEEP_SEA] > 0 && player.canSwimUnderwater()) addButton(2, "Deep Sea", SceneLib.deepsea.exploreDeepSea).hint("Visit the 'almost virgin' deep sea. But beware of... krakens. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_DEEP_SEA] : ""));
 			
 			if (flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] > 0) addButton(10, "Glacial Rift(O)", SceneLib.glacialRift.exploreGlacialRift).hint("Visit the chilly glacial rift (outer part). " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] : ""));

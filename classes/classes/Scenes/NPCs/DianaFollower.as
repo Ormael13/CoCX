@@ -74,7 +74,8 @@ public function wonOverDiana():void {
 	outputText("The horse morph kneels down defeated. Seems you can do whatever you want with her now. So, what will it be?\n\n");
 	menu();
 	levelingHerself();
-	if (player.lust >= 33) addButton(1, "Rape", wonOverDianaSex);
+	addButton(1, "Rape", wonOverDianaSex)
+		.disableIf(player.lust < 33, "Not aroused enough.");
 	addButton(0, "Spare", wonOverDianaSpare);
 }
 public function wonOverDianaSex():void {

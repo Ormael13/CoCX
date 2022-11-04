@@ -442,14 +442,14 @@ public function encounterMarbleInitially():void {
 		return;
 	} else sceneHunter.print("Check failed: you're too tall.");
 	outputText("\"<i>My name's Marble, what's yours?</i>\" she asks you. You introduce yourself and exchange a few pleasantries before she asks how she can help you. You tell her that you actually came to help her, explaining that Whitney said she could use a gentle touch. \"<i>Oh that would be nice</i>\", she says \"<i>Spending the night connected to the milking machine was a mistake, and now I need something gentle.</i>\" How will you help her?");
-	outputText("\n\n(Of course, you could always turn around and resolve to avoid her from this point on, if you wanted.)");
+	outputText("\n\n(Of course, you could always turn around and avoid her for now.)");
 	//- player chooses caress, suckle, or rape
 	menu();
 	addButton(1, "Caress", caressMarble);
 	addButton(3, "Suckle", suckleMarble);
 	addButton(2, "Rape", rapeMarble);
 	addButton(4, "Leave", turnOffMarbleForever)
-        .hint(recalling ? "<b>RECALL: Shortcut to the second meeting.</b>" : "She certainly will not be pleased.");
+        .hint(recalling ? "<b>RECALL: Shortcut to the second meeting.</b>" : "She certainly will not be pleased.... but you still will be able to save it.");
 }
 
 private function turnOffMarbleForever():void {
