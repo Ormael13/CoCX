@@ -634,6 +634,7 @@ import classes.internals.SaveableState;
 			}
 
 			clearOutput();
+			statScreenRefresh();
 			var BtMS:Number = (50 * (1 + player.perkv1(PerkLib.Metamorph)));
 			if (player.hasPerk(PerkLib.MetamorphEx)) BtMS += (100 * player.perkv1(PerkLib.MetamorphEx));
 			//if (player.hasPerk(PerkLib.MetamorphMastery)) BtMS += (100 * player.perkv1(PerkLib.MetamorphMastery));
