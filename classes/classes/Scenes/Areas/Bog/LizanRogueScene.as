@@ -123,7 +123,7 @@ public class LizanRogueScene extends BaseContent
 		public function loseToLizan():void {
 			clearOutput();
 			if (player.cor > 30) {
-				outputText("Unable to continue fighting, you collapse from " + (player.lust >= player.maxLust() ? "overwhelming desires": "your injuries") + ". The lizan steps over to you, intent on punishing you. ");
+				outputText("Unable to continue fighting, you collapse from " + (player.lust >= player.maxOverLust() ? "overwhelming desires": "your injuries") + ". The lizan steps over to you, intent on punishing you. ");
 				cleanupAfterCombat();
 			}
 			else {
@@ -403,7 +403,7 @@ public class LizanRogueScene extends BaseContent
         }
 
         public function rLITA_start(x:int):void {
-            if (monster.lust >= monster.maxLust()) {
+            if (monster.lust >= monster.maxOverLust()) {
                 outputText("After spit shining your " + player.cockDescript(x) + " you aim it towards the horny guy's back door, and enter without one thought of knocking.");
             }
             else {
@@ -418,7 +418,7 @@ public class LizanRogueScene extends BaseContent
             var x:int = player.findCock(1, -1, 7, "length");
 
             rLITA_start(x);
-            if (monster.lust >= monster.maxLust()) {
+            if (monster.lust >= monster.maxOverLust()) {
                 outputText("\n\nThe lizan groans as you sink into his heated tunnel. With your " + player.cockDescript(x) + " inside his anal ring flexes against you, tightening around your dick as he pushes back against you. You grab his hips and begin roughly pounding the lizan's hole. With every rough thrust the lizan spreads his legs and tail, attempting to allow you deeper access. As you wreck his ass with your " + player.cockDescript(x) + " he continues pumping his dual dicks, even as his chest and chin slide through the dirt. You toss your head back, lost in the sensation of his squeezing hole while he obviously loves the feeling of your " + player.cockDescript(x) + ".");
             }
             else {
@@ -431,7 +431,7 @@ public class LizanRogueScene extends BaseContent
             var x:int = player.findCock(1, 7, 11, "length");
 
             rLITA_start(x);
-            if (monster.lust >= monster.maxLust()) {
+            if (monster.lust >= monster.maxOverLust()) {
                 outputText("\n\nThe lizan squirms as you sink into his hot, tight tunnel. You can feel his anal ring quivering around your " + player.cockDescript(x) + " as you forcibly hilt him. The lust crazed lizan begins to rise for some reason, and you have to shove his chest back into the ground, keeping your weight on his back. When you begin pounding the shape out of the tight-fitting rectal passage he spreads his legs and tail to give you deeper access. The lizan grunts with every brutal thrust as you violently take his ass in deep full length thrusts. His hot little tail hole is a perfect combination of heat and tightness and you and your " + player.cockDescript(x) + " relish beating the little puckering hole inward.");
             }
             else {
@@ -445,7 +445,7 @@ public class LizanRogueScene extends BaseContent
             var x:int = player.findCock(1, 11, -1, "length");
 
             rLITA_start(x);
-            if (monster.lust >= monster.maxLust()) {
+            if (monster.lust >= monster.maxOverLust()) {
                 outputText("\n\nThe lizan yelps and squirms as your [cockHead] begins to stretch his anal ring wide. It is hard work to force the rest of your " + player.cockDescript(x) + " into the lizan's unaccommodating back door. He doesn't seem to be in pain though, quite the opposite, his hands feverishly pump his dual cocks with renewed vigor as he spreads his legs in an attempt to open up for you. Inch by inch you slide in, tugging the lust crazed lizan’s slender hips while thrusting forward.");
                 outputText("\n\nOnce you've buried your entire bone in the lizard man’s backyard an intense spasm rocks his body. His tail curls around you, holding you close as his anal walls clench, and you know he has just sprayed the bog floor with lizan spooge. Once his tail loosens its grip you grab his hips and begin pounding the lizan's tight little tail hole into a new shape. You have to maintain your hold to keep him in position. His ass is a hot tunnel that fights you of its own accord but with every thrust you feel yourself slowly winning this uphill battle. The problem is that you’re just too big but that doesn’t stop you from enjoying the lizan’s upturned hole as he squirms and groans, too lost in pleasure to do anything else.");
             }
@@ -458,7 +458,7 @@ public class LizanRogueScene extends BaseContent
         }
 
         public function rLITA_end(x:int):void {
-            if (monster.lust >= monster.maxLust()) {
+            if (monster.lust >= monster.maxOverLust()) {
                 outputText("\n\nYour brutal thrusts coupled with his lust addled brain sends the lizan over the edge. As he reaches climax his hole begins to milk your deeply embedded " + player.cockDescript(x) + ". As his orgasm makes his body spasm you can feel your own orgasm building until you're exploding, still pounding the lizan into the bog floor as the two of you spill your seed together.");
 				if (player.cumQ() >= 1000) outputText("\n\nYou continue to fuck him into the bog floor as your seed pours out of you. With every thrust his stomach swells until he looks pregnant.");
 				else if (player.cumQ() >= 2500) outputText("\n\nYou continue to pound him as your seed pours out of you. Every thrust causes it to spurt out of his tail hole. Soon you’re fucking him into a lake of semen even as his lizan’s stomach swells till he looks pregnant.");
@@ -476,7 +476,7 @@ public class LizanRogueScene extends BaseContent
 		
 		public function rapeLizanInTheAss():void {
 			clearOutput();
-			if (monster.lust >= monster.maxLust()) {
+			if (monster.lust >= monster.maxOverLust()) {
 				outputText("The lizan does little to resist. He just continues his intense masturbation as you push him over to make his rectal passage more accessible. The horny guy even lifts his tail, eagerly giving you access to his back door. From the look of things he is neither a virgin nor a frequent taker. ");
 				outputText("\n\nWith his chest on the ground he continues to pump his cocks, his hole winking in invitation. When you slide your hands across his self parting ass cheeks he arches his back and groans, begging for it. Not being one to disappoint you spit into your hand while marveling at how simple lust has turned this pure creature into your hot little boy slut.\n");
 			}

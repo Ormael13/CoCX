@@ -255,7 +255,6 @@ private function helpArianWhenYouMeetHim():void {
 	//(Park added to TA's Menu.  It will later be replaced by Arian's house.)
 	outputText("\n\n(<b>The park has been added to Tel'Adre's menu.</b>)");
 
-	arianHealth(1);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -350,9 +349,7 @@ public function visitThePark():void {
 		//Player returns to (Tel'Adre / camp).
 		//Arian's House replaces Park in Tel'Adre menu.
 		outputText("\n\n(<b>The park has been removed from Tel'Adre's menu.  Arian's house has been added to the 'Homes' submenu.</b>");
-		arianHealth(5);
 	}
-	arianHealth(1);
 	flags[kFLAGS.ARIAN_PARK]++;
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -361,7 +358,6 @@ public function visitThePark():void {
 public function visitAriansHouse():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_arian);
-	if (flags[kFLAGS.ARIAN_HEALTH] < 29 || flags[kFLAGS.ARIAN_VIRGIN] == 1) arianHealth(1);
 	if (arianFollower()) {
 		if (arianMF("m", "f") == "f")
 			outputText(images.showImage("arianfemale-tent"));
@@ -458,7 +454,7 @@ public function visitAriansHouse():void {
 			else outputText("indifferently");
 			outputText(" ask why he's thanking you.");
 			
-			outputText("\n\nBoon smiles and motions for you to follow, leading you upstairs.  \"<i>You see... master Arian didn't always enjoy taking long walks... I don't really know what made him suddenly take a liking for long walks around the city, but his condition does not allow him to do so, and he's just too stubborn to admit it.  So we kinda have to reel him in, or he will end up passing out in one of the rough parts of the city.</i>\"  Boon explains, turning on a hallway.  \"<i>Still, master looked really happy when he came back.  I'm glad he wound up meeting someone nice like you, instead of a mugger or a thief.</i>\"  Boon smiles at you.");
+			outputText("\n\nBoon smiles and motions for you to follow, leading you upstairs.  \"<i>You see... master Arian didn't always enjoy taking long walks... I don't really know what has made  him suddenly take a liking for long walks around the city, but his condition does not allow him to do so, and he's just too stubborn to admit it.  So we kinda have to reel him in, or he will end up passing out in one of the rough parts of the city.</i>\"  Boon explains, turning on a hallway.  \"<i>Still, master looked really happy when he came back.  I'm glad he wound up meeting someone nice like you, instead of a mugger or a thief.</i>\"  Boon smiles at you.");
 			
 			outputText("\n\nHe stops at a wooden door and turns the knob.  \"<i>Of course!</i>\"  Once he does open the door, you're treated to a surprising sight.  Boon slaps his forehead with an open palm and groans.  Arian is standing on his bed, halfway out of the window, a surprised look plastered on his white face.");
 			
@@ -597,7 +593,7 @@ public function visitAriansHouse():void {
 	}
 }
 
-private function arianHomeMenu():void {
+private function arianHomeMenu(back:Boolean = false):void {
 	sceneHunter.print("Arian's health: " + arianHealth() + " out of 100.");
 	menu();
 	if(flags[kFLAGS.ARIAN_S_DIALOGUE] == 0 && arianHealth() >= 10) addButton(0,"Next",arianStoryDialogue1);
@@ -838,26 +834,26 @@ private function arianStoryDialogue1():void {
 	outputText("\n\nArian nods.  \"<i>Good guess....  And how old do I look?</i>\"");
 	
 	outputText("\n\nYou look the reptilian wizard up and down, contemplating. Then you profess you aren't really familiar with people covered in scales, but you'd guess somewhere in [arian eir] mid-20s?");
-	outputText("\n\nArian nods and smiles.  \"<i>I'm actually 23 years old....  So I can't tell you much about how this whole trouble started, I was only a child back then... and my parents made sure to keep me sheltered from all that as well....</i>\"  Arian stares in the distance.  \"<i>Sheltered, I guess that word defines me pretty well.  I've been sheltered from the world for most of my life.</i>\"");
-	outputText("\n\nYou ask why; what made [arian eir] parents shelter him from the world outside?");
+	outputText("\n\nArian nods and smiles.  \"<i>I'm actually 23 years old....  So I can't tell you much about how this whole trouble started, I was only a child back then... and my parents made sure to keep me sheltered from all that as well....</i>\"  Arian stares in the distance.  \"<i>Sheltered, I guess that word defines me pretty well.  I've been sheltered from the world for the most of my life.</i>\"");
+	outputText("\n\nYou ask why; what has made [arian eir] parents shelter him from the world outside?");
 	
 	outputText("\n\nArian looks back at you.  \"<i>Well, the world was a mess, so they thought it would be best if I just stayed in the academy; they told me stories of young lizans walking outside who were dragged away by demons to take part in terrible rituals.  They weren't entirely wrong I guess, but that was a really cruel thing to say to a child.  Although, they were just looking after me, in the end, and as curious as I am....  Well, let's not dwell on that.</i>\"  Arian clears [arian eir] throat.  \"<i>So, I've been at the academy for as long as I can remember.  I told you about how I used to live buried in books right?</i>\"");
 	
 	outputText("\n\nYou nod your head and admit that [arian ey] did indeed tell you that.");
 	outputText("\n\n\"<i>Well, what I didn't tell you is that books used to be the only thing I cared about as well.</i>\"");
-	outputText("\n\nYou comment that it does seem kind of odd that a self-professed bookworm would be so desperate to get out and stretch [arian eir] legs, now that [arian ey] mentions it.  Arian laughs at that.  \"<i>Yes, quite a change wouldn't you say?</i>\"  Then, with a sigh, [arian ey]] says, \"<i>It's ironic actually.  Since I couldn't go outside, all I had were the books; and the books had become my world: I read them, loved them, lived in them, and mastered them. With the time I spent reading, it was quite an easy path towards wizardhood.  As soon as I was of age, I joined the academy formally, and during my testing I was shown to have skills greater than or on par with my testers. In the end, they didn't see a need to instruct me, so they declared me a master of the art and assigned me my pupils: Laika and Boon.</i>\"");
+	outputText("\n\nYou comment that it does seem kind of odd that a self-professed bookworm would be so desperate to get out and stretch [arian eir] legs, now that [arian ey] mentions it.  Arian laughs at that.  \"<i>Yes, quite a change wouldn't you say?</i>\"  Then, with a sigh, [arian ey] says, \"<i>It's ironic actually.  Since I couldn't go outside, all I had were the books; and the books had become my world: I read them, loved them, lived in them, and mastered them. With the time I spent reading, it was quite an easy path towards wizardhood.  As soon as I was of age, I joined the academy formally, and during my testing I was shown to have skills greater than or on par with my testers. In the end, they didn't see a need to instruct me, so they declared me a master of the art and assigned to me my pupils: Laika and Boon.</i>\"");
 	outputText("\n\nDid [arian ey] enjoy having students of [arian eir] own to teach?");
 	outputText("\n\nArian's eyes light up in recollection.  \"<i>Enjoy it?  I loved it!  These two... they became much more than mere pupils; they were my friends.  I can even say they're part of my family.  Having grown up alone, ignored by my elders, who were too busy with their next research project to pay any attention to me, and with nothing but books to keep me entertained.  Can you imagine how many friends I had?</i>\"");
 	outputText("\n\nYou must confess that the situation [arian ey]'s describing sounds quite lonely.");
 	
 	outputText("\n\n\"<i>So you can imagine how thrilled I was to get not one, but two people who would have to pay attention to every single instruction I gave them.</i>\"  Arian looks down, a slight tinge of regret on [arian eir] face.  \"<i>I was pretty mean at first.  I wound up taking my frustrations out on them, but thankfully they found it in their hearts to forgive me.  We've been very close ever since.</i>\"  Arian smiles.");
 	outputText("\n\nYou tell [arian eir] that it's good to hear they got to know each other properly; is that why Arian gave particular attention to ensuring they escaped when [arian eir] academy was attacked?");
-	outputText("\n\nArian shakes [arian eir] head.  \"<i>Not exactly.  It was my intention to defeat all of the invading demons; I was arrogant and it cost me greatly.  I only managed to save Boon and Laika because they were the closest to me when the wave of dark magic hit us.  I used much of my power and concentration to resist the wave's effects... it was brutal.</i>\"");
+	outputText("\n\nArian shakes [arian eir] head.  \"<i>Not exactly.  It was my intention to defeat all of the invading demons; I was arrogant and it has costed me greatly.  I only managed to save Boon and Laika because they were the closest to me when the wave of dark magic hit us.  I used much of my power and concentration to resist the wave's effects... it was brutal.</i>\"");
 	
 	outputText("\n\nDoes that have something to do why [arian ey]'s so frail now - the stress of shielding [arian em]self and [arian eir] apprentices from the demons' black magic?");
 	
 	outputText("\n\n\"<i>Yes, actually. I'm not going to get into any specifics right now, but my method of casting spells causes damage to the caster's body, which is why I'm in such a miserable state.</i>\"  Arian sighs.  \"<i>Now I can't even go for a walk....</i>\"");
-	outputText("\n\nYou reach out a hand and pat [arian em] on the shoulder; you don't really think it'll make [arian em] feel any better, but it's what they always used to do when people got like this back in your village.  As you pat [arian eir] shoulder, you realize [arian ey] still hasn't told you what made [arian em] change [arian eir] attitude so much.  Even as you continue giving [arian em] comforting touches, you ask why it bothers [arian em] being bedridden now if [arian ey] was an antisocial stay-at-home bookworm before.");
+	outputText("\n\nYou reach out a hand and pat [arian em] on the shoulder; you don't really think it'll make [arian em] feel any better, but it's what they always used to do when people got like this back in your village.  As you pat [arian eir] shoulder, you realize [arian ey] still hasn't told you what has made  [arian em] change [arian eir] attitude so much.  Even as you continue giving [arian em] comforting touches, you ask why it bothers [arian em] being bedridden now if [arian ey] was an antisocial stay-at-home bookworm before.");
 	outputText("\n\n\"<i>Oh, yes.  I got sidetracked, sorry.</i>\" Arian grins at you and says, \"<i>I escaped the academy.</i>\"  You scratch the back of your neck; this isn't much of an explanation.  Noticing the confusion in your face, Arian explains, \"<i>The academy didn't have any windows.  Something about preserving our privacy and ensuring no external elements would interrupt our studies.  It doesn't matter now.  So, before escaping the academy with Boon and Laika in tow, I hadn't even gazed at the sky.</i>\"");
 	
 	outputText("\n\nYou blink in surprise; [arian ey]'d never even seen the sky?  How could they keep anyone so constrained?  What - did [arian ey] hatch indoors and was never allowed outside?");
@@ -2699,39 +2695,31 @@ private function giveArianAnItem():void {
 	}
 	
 	menu();
-	if(flags[kFLAGS.ARIAN_S_DIALOGUE] == 0 && arianHealth() >= 10) arianStoryDialogue1();
-	else if(flags[kFLAGS.ARIAN_S_DIALOGUE] == 1 && arianHealth() >= 20) arianStoryDialogue2();
-	else if(flags[kFLAGS.ARIAN_S_DIALOGUE] == 2 && arianHealth() >= 30) arianDialogue3();
-	else if(flags[kFLAGS.ARIAN_S_DIALOGUE] == 3 && arianHealth() >= 50) arianImbue();
-	else if(flags[kFLAGS.ARIAN_S_DIALOGUE] == 4 && arianHealth() >= 75) arianPlot4();
-	else if(flags[kFLAGS.ARIAN_S_DIALOGUE] == 5 && arianHealth() >= 100) arianPlot5();
-	else {
-		if(flags[kFLAGS.ARIAN_HEALTH] >= 20) {
-			addButton(0, consumables.P_DRAFT.shortName, giveIncubusDraftToArian)
-				.disableIf(!player.hasItem(consumables.P_DRAFT), "You don't have any.");
-			addButton(1, consumables.P_S_MLK.shortName, succubiMilkForArian)
-				.disableIf(!player.hasItem(consumables.P_S_MLK), "You don't have any.");
-			addButton(2, consumables.LACTAID.shortName, giveArianLactaid)
-				.disableIf(!player.hasItem(consumables.LACTAID), "You don't have any.");
-			addButton(3, consumables.REDUCTO.shortName, giveArianReducto)
-				.disableIf(!player.hasItem(consumables.REDUCTO), "You don't have any.");
-			addButton(4, consumables.REPTLUM.shortName, giveArianReptilum)
-				.disableIf(!player.hasItem(consumables.REPTLUM), "You don't have any.");
-			if(arianFollower() && flags[kFLAGS.ARIAN_SCALES] != 0) {
-				if(flags[kFLAGS.ARIAN_SCALES] != 1) addButton(5, useables.VIALCLE.shortName, giveArianScalesDyeVial1)
-					.disableIf(!player.hasItem(useables.VIALCLE), "You don't have any.");
-				if(flags[kFLAGS.ARIAN_SCALES] != 2) addButton(6, useables.VIALTUR.shortName, giveArianScalesDyeVial2)
-					.disableIf(!player.hasItem(useables.VIALTUR), "You don't have any.");
-				if(flags[kFLAGS.ARIAN_SCALES] != 3) addButton(7, useables.VIALPIN.shortName, giveArianScalesDyeVial3)
-					.disableIf(!player.hasItem(useables.VIALPIN), "You don't have any.");
-				if(flags[kFLAGS.ARIAN_SCALES] != 4) addButton(8, useables.VIALPIN.shortName, giveArianScalesDyeVial4)
-					.disableIf(!player.hasItem(useables.VIALPIN), "You don't have any.");
-			}
+	if(flags[kFLAGS.ARIAN_HEALTH] >= 20) {
+		addButton(0, consumables.P_DRAFT.shortName, giveIncubusDraftToArian)
+			.disableIf(!player.hasItem(consumables.P_DRAFT), "You don't have any.");
+		addButton(1, consumables.P_S_MLK.shortName, succubiMilkForArian)
+			.disableIf(!player.hasItem(consumables.P_S_MLK), "You don't have any.");
+		addButton(2, consumables.LACTAID.shortName, giveArianLactaid)
+			.disableIf(!player.hasItem(consumables.LACTAID), "You don't have any.");
+		addButton(3, consumables.REDUCTO.shortName, giveArianReducto)
+			.disableIf(!player.hasItem(consumables.REDUCTO), "You don't have any.");
+		addButton(4, consumables.REPTLUM.shortName, giveArianReptilum)
+			.disableIf(!player.hasItem(consumables.REPTLUM), "You don't have any.");
+		if(arianFollower() && flags[kFLAGS.ARIAN_SCALES] != 0) {
+			if(flags[kFLAGS.ARIAN_SCALES] != 1) addButton(5, useables.VIALCLE.shortName, giveArianScalesDyeVial1)
+				.disableIf(!player.hasItem(useables.VIALCLE), "You don't have any.");
+			if(flags[kFLAGS.ARIAN_SCALES] != 2) addButton(6, useables.VIALTUR.shortName, giveArianScalesDyeVial2)
+				.disableIf(!player.hasItem(useables.VIALTUR), "You don't have any.");
+			if(flags[kFLAGS.ARIAN_SCALES] != 3) addButton(7, useables.VIALPIN.shortName, giveArianScalesDyeVial3)
+				.disableIf(!player.hasItem(useables.VIALPIN), "You don't have any.");
+			if(flags[kFLAGS.ARIAN_SCALES] != 4) addButton(8, useables.VIALPIN.shortName, giveArianScalesDyeVial4)
+				.disableIf(!player.hasItem(useables.VIALPIN), "You don't have any.");
 		}
-		if (flags[kFLAGS.ARIAN_HEALTH] < 100) addButton(10,"Vital Tinct",arianVitalityTincture)
-				.disableIf(!player.hasItem(consumables.VITAL_T), "You don't have any.");
-		addButton(14,"Back",arianHomeMenu);
 	}
+	if (flags[kFLAGS.ARIAN_HEALTH] < 100) addButton(10,"Vital Tinct",arianVitalityTincture)
+			.disableIf(!player.hasItem(consumables.VITAL_T), "You don't have any.");
+	addButton(14,"Back",arianHomeMenu, true);
 }
 
 //Vitality Tincture:
@@ -2760,8 +2748,7 @@ private function arianVitalityTincture():void {
 	outputText("\n\nYou smile and stroke the lizan gently on [arian eir] head, telling [arian em] that [arian ey]'s welcome.  Now, you think it's time [arian ey] laid [arian em]self back down and got some rest; give the medicine time to work.  You promise you'll try and come back to see [arian em] later, but right now, [arian ey] needs to get some more rest.  Arian nods and settles [arian em]self on [arian eir] bed.");
 	
 	player.consumeItem(consumables.VITAL_T);
-	menu();
-	addButton(0,"Next",giveArianAnItem);
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //P. Incubus Draft:

@@ -88,7 +88,7 @@ import classes.Scenes.Dungeons.BeeHive.TheCorruptedHandmaidens;
 		}
 		public function room1LostToGuards():void {
 			clearOutput();
-			outputText("Defeated you fall to the ground"+(player.lust >= player.maxLust() ? " furiously masturbating":"")+". The guards roughly carry you a fair distance away from the hive dropping you in the trees from the air. Thanks to the leaves your landing isn't too harsh. You head back to camp for now to recover.");
+			outputText("Defeated you fall to the ground"+(player.lust >= player.maxOverLust() ? " furiously masturbating":"")+". The guards roughly carry you a fair distance away from the hive dropping you in the trees from the air. Thanks to the leaves your landing isn't too harsh. You head back to camp for now to recover.");
 			inDungeon = false;
 			cleanupAfterCombat();
 			doNext(camp.returnToCampUseOneHour);

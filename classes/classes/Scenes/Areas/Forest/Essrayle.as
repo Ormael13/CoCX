@@ -10,8 +10,8 @@ public class Essrayle extends BaseContent{
 	}
 
 //const MET_ESSY:int = 772;
-//const TURNED_DOWN_ESSY_FIRST_MEETING:int = 773;
-//const ACCEPTED_ESSY_FIRST_MEETING:int = 774;
+//const UNKNOWN_FLAG_NUMBER_00773:int = 773;
+//const ESSRAYLE_SEXED:int = 774;
 //const ESSRAYLE_ESCAPED_DUNGEON:int = 863;
 //const TOLD_MOTHER_TO_RELEASE_ESSY:int = 864;
 //const ESSY_DUNGEON_FUCKED:int = 865;
@@ -58,7 +58,7 @@ public function essrayleMeetingI():void {
 		
 	}
 	else {
-		outputText("During your travels through the forest, you stumble upon a familiar face once again.  \"<i>Oh, hello!</i>\ Essrayle cheerily waves to you, causing her ample tits to jiggle slightly.  \"<i>I was wondering if you'd be back.</i>\"  She moves closer, massive melons wobbling mere inches away from you, \"<i>I had a feeling you would though.</i>\"  Cooing warmly, she brushes a lock of hair aside with enough of an exaggerated motion to set the bouncy pair to bobbing.");
+		outputText("During your travels through the forest, you stumble upon a familiar face once again.  \"<i>Oh, hello!</i>\" Essrayle cheerily waves to you, causing her ample tits to jiggle slightly.  \"<i>I was wondering if you'd be back.</i>\"  She moves closer, massive melons wobbling mere inches away from you, \"<i>I had a feeling you would though.</i>\"  Cooing warmly, she brushes a lock of hair aside with enough of an exaggerated motion to set the bouncy pair to bobbing.");
 		outputText("\n\n\"<i>So, did you come back just to say hi, or might there be some other reason?</i>\"  Those slender, green hands fall upon her shapely hips as her gorgeous amethyst eyes peer deeply into yours.  \"<i>If you came to give me a feeding, I simply must thank you this time, I insist.</i>\"  Abruptly, those tits squish against your chest as she leans in close, asking seductively, \"<i>So, feeling up for some gardening?</i>\"");
 	}
 	flags[kFLAGS.MET_ESSY]++;
@@ -73,17 +73,16 @@ public function essrayleMeetingI():void {
 private function noPlantsForMe():void {
 	clearOutput();
 	outputText("Essy pouts, ears flattening to the sides a bit.  \"<i>I see,</i>\" she nods, looking at you with thinly masked disappointment.  She seems to instantly put on a false smile and move aside, gesturing to the path ahead with a sweep of the arm.  \"<i>Well, in that case, you must be going somewhere important.  Best not keep you waiting.  I do wish you luck in your adventures!</i>\" She continues to beam as you head on off, leaving her behind you in no time.  Though as you leave, you swear you hear a mumbled, \"<i>Leave it to me to find the prudish ones.</i>\"");
-	flags[kFLAGS.TURNED_DOWN_ESSY_FIRST_MEETING] = 1;
 	doNext(camp.returnToCampUseOneHour);
 }
  
 //>If Yes
 private function plantsForMe():void {
 	clearOutput();
-	if(flags[kFLAGS.ACCEPTED_ESSY_FIRST_MEETING] == 0) {
-		flags[kFLAGS.ACCEPTED_ESSY_FIRST_MEETING] = 1;
+	if(flags[kFLAGS.ESSRAYLE_SEXED] == 0) {
 		outputText("Essrayle giggles, sending ripples through her ample breasts.  \"<i>Oh, why thank you!  It's nothing major - I doubt it'll be much of a burden to you.  But in my travels, I've grown wilted and depleted of the energy to go on.  I'm soooo hungry!  Would you please-?</i>\"  She leaves the question hanging, looking to you imploringly.  Hastily your hand goes to where your supplies are housed, but you stop as she waves a hand dismissively.  \"<i>No, no, I don't mean biscuits or the like.</i>\"  Confused, you frown, but soften as you feel her hand rest upon your [chest].  \"<i>I require a special kind of food to do what I do, one that won't exhaust your supplies in the least.</i>\"\n\n");
 	}
+	++flags[kFLAGS.ESSRAYLE_SEXED];
 	//(If breasts
 	if(player.biggestTitSize() > 1) outputText("Your nipples stiffen, breasts puffing out with a heated breath");
 	else outputText("You arch your back gently, unconsciously pressing into her slender fingers a bit further");

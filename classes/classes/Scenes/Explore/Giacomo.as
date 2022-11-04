@@ -69,6 +69,11 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			return false;
 		}
 		//End of Interface Implementation
+
+		public function giacomoEncounterSS():void {
+			if (player.hasPerk(PerkLib.SoulSense) && flags[kFLAGS.SOUL_SENSE_GIACOMO] < 2) flags[kFLAGS.SOUL_SENSE_GIACOMO]++;
+			giacomoEncounter();
+		}
 		
 		public function giacomoEncounter():void {
 			spriteSelect(SpriteDb.s_giacomo);
@@ -98,8 +103,6 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 				outputText("You spy the merchant Giacomo in the distance.  He makes a beeline for you, setting up his shop in moments.  ");
 				outputText("Giacomo's grin is nothing short of creepy as he offers his wares to you. What are you interested in?");
 			}
-			//var deworm:Function = (player.hasStatusEffect(StatusEffects.WormOffer) && player.hasStatusEffect(StatusEffects.Infested) ? wormRemovalOffer : null);
-			if (player.hasPerk(PerkLib.SoulSense) && flags[kFLAGS.SOUL_SENSE_GIACOMO] < 2) flags[kFLAGS.SOUL_SENSE_GIACOMO]++;
 			if (flags[kFLAGS.SOUL_SENSE_GIACOMO] == 2) {
 				flags[kFLAGS.SOUL_SENSE_GIACOMO]++;
 				outputText("\n\n<b>You have met him enough times to be able to find him in the future when using soul sense. (Removes Giacomo from general explore encounters pool!)</b>\n\n");

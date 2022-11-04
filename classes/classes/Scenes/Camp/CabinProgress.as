@@ -77,7 +77,7 @@ import classes.Scenes.SceneLib;
 		public function startWork():void {
 			outputText("You wander around your camp for a good few moments when suddenly, something crosses your mind. Yes, that's it! A cabin! Just what you would need to live comfortably instead of your tent. You wander for a good while until you find a suitable location to build your cabin. You memorize the location.");
 			flags[kFLAGS.CAMP_CABIN_PROGRESS] = 2;
-			doNext(camp.returnToCampUseOneHour);
+			doNext(camp.returnToCampUseTwoHours);
 		}
 		
 		//STAGE 2 - Survey and clear area for cabin site.
@@ -92,6 +92,7 @@ import classes.Scenes.SceneLib;
 		private function startThinkingOfMaterials():void {
 			outputText("Now that you have cleared an area for your cabin, you'll have to figure out how to get the resources you need. You look at the trees in the distance. Clearly, you'll need something to cut down trees. Maybe there's a shop somewhere?");
 			if (player.hasItem(weapons.L__AXE) || player.weaponName == "large axe") outputText("\n\nYour large axe will suffice for the daunting task of gathering materials.");
+			else if (player.hasKeyItem("Carpenter's Toolbox") >= 0) outputText("\n\nHappily, you have already bought it!");
 			else 
 			{	
 				outputText("\n\nYou realize something; you need an axe!");

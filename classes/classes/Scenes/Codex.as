@@ -52,7 +52,7 @@ import coc.view.ButtonDataList;
 				for each (var entry:Array in entries)
 					if (entry[0] == flag) {
 						if (flags[flag]) return false; //return if already unlocked. Not earlier - still want to check that flag is legal.
-						outputText("\n\n<b>New codex entry unlocked: " + entry[1] + "!</b>");
+						outputText("\n\n<b>New codex entry unlocked: " + entry[1] + "!</b>\n");
 						flags[flag] = 1;
 						checkAchievements();
 						return true;

@@ -347,7 +347,7 @@ private function victoryFemale_taur():void {
  			//(Loss by HPs)
     //NO RAEP IF LOSS BY HPs, FUCK CENTAURS! SRSLY! GROW NORMAL LEGS!
 			//(Loss by Lust)
-    if(monster.lust >= monster.maxLust()) {
+    if(monster.lust >= monster.maxOverLust()) {
         outputText("As your prey falls to the ground, her body too filled with sexual desire to fight, you step over her, your tall frame towering over her own quivering body. She instantly grabs your shoulders, lust burning in her eyes. You wrap your arms around her, drawing her back against your chest and lifting her off the ground. She is facing away from you, but you can tell by the way she's responding that she is ready for whatever you're going to do to her. You begin by shifting one of your arms to hold her around her stomach, while your other hand begins working on her small but tender breasts. You begin to nibble at her ear, occasionally kissing her neck. The " + gorgonOrNaga);
         outputText(" responds by wrapping her tail around your lower body, gently rubbing her sensitive underbelly against your [skin].");
         //(If PC is Herm i.e. Has a cock(s))
@@ -594,7 +594,7 @@ public function nagaFUCKSJOOOOOO():void {
             x = player.findCock(1, monster.vaginalCapacity(), -1); //select the biggest one (non-fitting)
         if (x < 0) x = player.biggestCockIndex(); //select overall biggest anyway
         //(If defeated by lust)
-        if(player.lust >= player.maxLust()) outputText("You fall to your knees, your body shaking with desire.\n\n");
+        if(player.lust >= player.maxOverLust()) outputText("You fall to your knees, your body shaking with desire.\n\n");
         //(If defeated by KO)
         else outputText("You fall to your knees, your battered body unable to hold itself up any longer.\n\n");
         outputText("You hear the hiss of the " + gorgonOrNaga);
@@ -604,7 +604,7 @@ public function nagaFUCKSJOOOOOO():void {
             outputText(" and clamping your legs to your stomach");
         outputText(". You struggle weakly against her grip, but ");
         //(if defeated by lust)
-        if(player.lust >= player.maxLust()) outputText("all your resistance seems to do is make your " + player.cockDescript(x) + " harder.");
+        if(player.lust >= player.maxOverLust()) outputText("all your resistance seems to do is make your " + player.cockDescript(x) + " harder.");
         //if defeated by KO)
         else outputText("you are too weak to do anything to stop her squeezing.");
         outputText("  She leans towards you, gripping your shoulders as she brings her face to your ear. You can feel her serpentine tongue flicking over your ear as she hisses coldly into it.\n\n");
@@ -688,7 +688,7 @@ public function nagaFUCKSJOOOOOO():void {
     function nagaRapesFemale():void {
         sceneHunter.print("Corruption checks (50 and 80), F.Nipples, lactation. Pregnancy check (alt if you were mean to her)).");
         //(If defeated by lust)
-        if(player.lust >= player.maxLust())
+        if(player.lust >= player.maxOverLust())
         {
             outputText("You fall to your knees, your body shaking with desire.\n\n");
         }
@@ -709,7 +709,7 @@ public function nagaFUCKSJOOOOOO():void {
         outputText("Now astride the base of her tail and facing towards her, your eyes are drawn to the place on her scaly pelvis where a vagina should be. With one hand the " + gorgonOrNaga);
         outputText(" begins gently caressing her nether regions, which begin to swell in her excitement into the outlines of a recognizable reptilian vulva. Her expectations are perfectly clear ");
         //(If defeated by lust)
-        if(player.lust >= player.maxLust())
+        if(player.lust >= player.maxOverLust())
         {
             outputText("and you can feel the need to have sex with her burn inside you. You quickly strip yourself of your [armor] and throw yourself on her awaiting pussy.");
         }
@@ -813,7 +813,7 @@ public function nagaFUCKSJOOOOOO():void {
 
     function nagaRapesGless():void {
         //(If player loses because of lust)
-        if(player.lust >= player.maxLust())
+        if(player.lust >= player.maxOverLust())
             outputText("You fall to your knees, your body shaking with desire.\n\n");
         //(If player loses from HP loss)
         else outputText("You fall to your knees, your battered body unable to hold itself up any longer.\n\n");
@@ -1153,7 +1153,7 @@ public function naggaTease():void {
         outputText("\n[Themonster] seems unimpressed.");
     }
     outputText("\n\n");
-    if (monster.lust >= monster.maxLust()) {
+    if (monster.lust >= monster.maxOverLust()) {
         doNext(SceneLib.combat.endLustVictory);
         return;
     }

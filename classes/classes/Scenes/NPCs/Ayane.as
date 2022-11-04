@@ -53,7 +53,7 @@ public class Ayane extends Kitsune {
             if (player.mana < 0) player.mana = 0;
             if (player.soulforce < 0) player.soulforce = 0;
             HP += maxHP() * 0.1;
-            if (HP > maxHP()) HP = maxHP();
+            if (HP > maxOverHP()) HP = maxOverHP();
         }
     }
 
@@ -65,7 +65,7 @@ public class Ayane extends Kitsune {
             + "\n"
             + "She draws a sign with her staff and you watch in frustration as some of her wounds close.");
         HP += maxHP() * 0.2;
-        if (HP > maxHP()) HP = maxHP();
+        if (HP > maxOverHP()) HP = maxOverHP();
     }
 
     private function illusion():void {
@@ -87,7 +87,7 @@ public class Ayane extends Kitsune {
         if (healCooldown > 0) --healCooldown;
         //pick move
         var moves:Array = [foxFireAttack, foxfireStorm, drainingKiss];
-        if (HP < maxHP()) {
+        if (HP < maxOverHP()) {
             if (kissCooldown == 0) moves.push(drainingKiss);
             if (healCooldown == 0) moves.push(heal);
         }

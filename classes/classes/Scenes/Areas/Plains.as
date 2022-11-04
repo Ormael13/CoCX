@@ -10,8 +10,6 @@ import classes.Scenes.API.Encounters;
 import classes.Scenes.API.FnHelpers;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Plains.*;
-import classes.Scenes.Holidays;
-import classes.Scenes.NPCs.SidonieFollower;
 import classes.Scenes.SceneLib;
 
 use namespace CoC;
@@ -27,9 +25,6 @@ use namespace CoC;
 		{
 			onGameInit(init);
 		}
-		public function isDiscovered():Boolean {
-			return flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 0;
-		}
 		public function discover():void {
 			flags[kFLAGS.TIMES_EXPLORED_PLAINS] = 1;
 			outputText(images.showImage("area-plain"));
@@ -40,7 +35,6 @@ use namespace CoC;
 		private var explorationEncounter:GroupEncounter = null;
 
 		private function init():void {
-			const game:CoC     = CoC.instance;
 			const fn:FnHelpers = Encounters.fn;
 			explorationEncounter = Encounters.group(/*SceneLib.commonEncounters,*/ {
 				//General Golems, Goblin and Imp Encounters

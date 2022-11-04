@@ -3727,7 +3727,7 @@ public final class Mutations extends MutationsHelper {
             }
         }
         //ORGAZMO
-        if (player.lust >= player.maxLust() && !CoC.instance.inCombat) {
+        if (player.lust >= player.maxOverLust() && !CoC.instance.inCombat) {
             outputText("[pg]The arousal from the potion overwhelms your senses and causes you to spontaneously orgasm.  You rip off your [armor] and look down as your ");
             if (player.cocks.length > 0) {
                 outputText(multiCockDescriptLight() + " erupts in front of you, liberally spraying the ground around you");
@@ -3747,7 +3747,7 @@ public final class Mutations extends MutationsHelper {
             MutagenBonus("lib", 2);
             if (player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) player.addStatusValue(StatusEffects.RaijuLightningStatus, 1, 24);
         }
-        if (player.lust > player.maxLust()) player.lust = player.maxLust();
+        if (player.lust > player.maxOverLust()) player.lust = player.maxOverLust();
         outputText("[pg]");
         player.refillHunger(5);
     }
@@ -16205,7 +16205,7 @@ public final class Mutations extends MutationsHelper {
         player.refillHunger(15);
         dynStats("lus", (30 + rand(player.lib / 10)), "scale", false);
         //ORGAZMO
-        if (player.lust >= player.maxLust() && !CoC.instance.inCombat) {
+        if (player.lust >= player.maxOverLust() && !CoC.instance.inCombat) {
             outputText("[pg]The arousal from the nectar overwhelms your senses and causes you to spontaneously orgasm.");
             outputText(" You rip off your gear and look down as your ");
             if (player.cocks.length > 0) {

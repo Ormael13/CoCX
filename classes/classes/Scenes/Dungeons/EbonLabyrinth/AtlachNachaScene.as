@@ -100,7 +100,7 @@ public class AtlachNachaScene extends BaseContent {
 
     public function defeatedBy():void {
         clearOutput();
-        outputText(" You fall to the ground defeated " + (player.lust >= player.maxLust() ? "by your growing lust":"") + ((player.inte <= 0 || player.wis <= 0) ? "as you lose your grip on reality going insane":"") + ". The last thing anyone will hear from you is your tortured screams as the nightmarish spiders cocoons you. ");
+        outputText(" You fall to the ground defeated " + (player.lust >= player.maxOverLust() ? "by your growing lust":"") + ((player.inte <= 0 || player.wis <= 0) ? "as you lose your grip on reality going insane":"") + ". The last thing anyone will hear from you is your tortured screams as the nightmarish spiders cocoons you. ");
         outputText("What will happen to you from now on is perhaps too horrible to be told and you will lose your sanity long before you die of fatigue, serving as this creature's plaything until you no longer can go on with your life.\n\n");
         //[GAME OVER]
         EventParser.gameOver();

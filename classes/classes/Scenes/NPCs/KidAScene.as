@@ -502,11 +502,11 @@ public class KidAScene extends BaseContent implements TimeAwareInterface
 				return;
 			}
 			//Sex scenes, post dream
-			if (flags[kFLAGS.HAD_KID_A_DREAM] > 0 && kidAXP() >= 40 && player.lust >= player.maxLust()) {
+			if (flags[kFLAGS.HAD_KID_A_DREAM] > 0 && kidAXP() >= 40 && player.lust >= player.maxOverLust()) {
 				if (sexPossible()) kidASex();
 				//nothing fits
 				//if KidXP >= 40 and lust > 99 after tutor and PC has only huge dicks of area >= 60 or hasn't got shit
-				else if (kidAXP() >= 40 && player.lust >= player.maxLust()) {
+				else if (kidAXP() >= 40 && player.lust >= player.maxOverLust()) {
 					outputText("\n\nYou collapse onto your back, panting your arousal into the dry air.  Shyly at first but with increasing confidence as you fail to react, the girl slips a hand into your clothes and down to your crotch.  She stops, wide-eyed, as her fingers initially locate ");
 					if (player.hasCock()) outputText("something too enormous");
 					else outputText("nothing useful");

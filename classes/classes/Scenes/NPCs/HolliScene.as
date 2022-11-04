@@ -1331,7 +1331,7 @@ internal function enjoyYourBadEndBIYAAAATCH():void {
 		
 		outputText("\n\n\"<i>Lovely,</i>\" Holli admires.  \"<i>You'll make for a fine ambiance.</i>\"  The demon sticks one finger into your still-drooling asshole, stroking the inside of the ring and fanning the flame of your magic-driven lust.  \"<i>I may even consent to use you for release occasionally... if I can't find someone more interesting to have a tryst with!</i>\"  With a cruel laugh, she pulls out of you and retreats into her tree, leaving you staring at her bark, smouldering with desire and helpless to indulge it.");
 		//--Next--
-		dynStats("lus=", player.maxLust());
+		dynStats("lus=", player.maxOverLust());
 		menu();
 		addButton(0,"Next",holliAndGenderlessSittingInATree);
 	}

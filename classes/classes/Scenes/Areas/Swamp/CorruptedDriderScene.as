@@ -121,7 +121,7 @@ use namespace CoC;
 			//situation when she kisses you with potent, envenomed lips.  Get
 			//moderately hypno'ed into cumming into her over and over again?
 			outputText("Eager to plumb the depths of this greedy spider's snatch, you practically tear your way out of your [armor] in your hurry to get naked.  Through it all ");
-			if (monster.lust >= monster.maxLust()) {
+			if (monster.lust >= monster.maxOverLust()) {
 				outputText("she looks ");
 				if (player.tallness > 72) outputText("up ");
 				outputText("at you with her " + monster.bodyColor + " eyes opened wide and her tongue hanging from her mouth, panting lewdly.  Carapace-clad digits sink into her dripping honey-pot over and over while she watches, deep in her own lusty haze.  She retracts her engorged demon-cock so as to have better access to that feminine hole.");
@@ -272,7 +272,7 @@ use namespace CoC;
 			hideUpDown();
 			monster.lust = 98;
 			monster.HP = 2;
-			player.lust = player.maxLust();
+			player.lust = player.maxOverLust();
 			flags[kFLAGS.COMBAT_BONUS_XP_VALUE] = monster.XP;
 			cleanupAfterCombat();
 			player.sexReward("vaginalFluids","Dick");
@@ -602,7 +602,7 @@ use namespace CoC;
 		{
 			spriteSelect(SpriteDb.s_drider);
 			clearOutput();
-			if (player.lust >= player.maxLust()) {
+			if (player.lust >= player.maxOverLust()) {
 				outputText("Desperately ");
 				if (player.hasCock()) outputText("jerking your [cock]");
 				if (player.gender == 3) outputText(player.biggestTitSize() > 0 ? ", " : " and ");
@@ -907,7 +907,7 @@ use namespace CoC;
 				outputText("Smirking to yourself, you advance on the collapsed girl, [cock " + y + "] straining against your clothing in anticipation of what's to come.");
 			}
 			outputText("\n\nDarting forwards suddenly, you seize her wrists, pulling her arms above her head");
-			if (monster.lust >= monster.maxLust()) outputText(" and away from her quivering snatch");
+			if (monster.lust >= monster.maxOverLust()) outputText(" and away from her quivering snatch");
 			outputText(", her struggles useless against your steely grip.  The defeated drider's eyes darken as she looks up at you, but before she can protest you roughly flip her onto her back, splashing both of you with dank water as she flails about in the shallow muck around your feet.  Spindly legs flail feebly as you grasp both of her wrists in one hand, sliding the other down her arm until it grazes softly across her first row of breasts.  You gently squeeze the supple flesh, fingers rolling a pert nipple as it slides between them and eliciting a surprised, pleasure-laden gasp from the spider-taur.  Your member twitches as you play with her, reminding you that you've still got to deal with the woman before you can have any real fun.  Reluctantly you remove your hand from her chest, catching what sounded like a soft sigh from the drider's mouth as you start to circle around her.");
 
 			outputText("\n\nMoving behind her back, you lift up her human half until you can firmly pin her arms together behind her back.  She writhes as you ");

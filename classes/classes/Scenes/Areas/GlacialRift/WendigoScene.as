@@ -96,7 +96,7 @@ package classes.Scenes.Areas.GlacialRift
 
 		public function becomeWendigo():void {
 			clearOutput();
-			outputText("Hungry… so damn hungry! You have been "+((flags[kFLAGS.HUNGER_ENABLED] <= 0 && player.lust >= player.maxLust()) ? "sexually ":"")+"starved for days now!\n\n");
+			outputText("Hungry… so damn hungry! You have been "+((flags[kFLAGS.HUNGER_ENABLED] <= 0 && player.lust >= player.maxOverLust()) ? "sexually ":"")+"starved for days now!\n\n");
 			outputText("Unable to stand it anymore, you head into the wild and look for something… anything to sate your maddening needs! As your luck has it an imp happens to show up right at the right time. The demon tries to cast a lust inducing spell on you but to no avail, nothing will distract you from your fixation on this meaty fat cock he's sporting.\n\nYou practically leap on the imp pushing him into the ground ");
 			outputText("as you begin ravenously feasting on his towering tool, licking at the flesh to coax him into orgasm. The confused demon struggles to get you off his prick but can only moan at the unrequited pleasure you coax into him from forcefully sucking him off. While the little bugger shifts and pushes around you discover new muscles and skills your tongue until now lacked and put them to good use. ");
 			outputText("It merely takes you a few seconds to finally force him to cum, and you begin gleefully feast on his seed, your unnatural hunger satisfied for a fraction of seconds before it resumes again. More… you need MORE!\n\nYour body begins changing as you resume coaxing the imp into orgasm, "+(player.arms.type == Arms.HUMAN ? "":"your arms taking back on their old human shape before ")+"your nails ");
