@@ -749,7 +749,7 @@ private function buyDyeNevermind():void {
 	outputText("You change your mind about the dye, and Rathazul returns your gems.\n\n<b>(+50 Gems)</b>");
 	player.gems += 50;
 	statScreenRefresh();
-	doNext(rathazulShopMenu);
+	rathazulShopMenu();
 }
 
 //Scales dyes
@@ -820,7 +820,7 @@ private function makeDyeNevermind():void {
 	outputText("You change your mind about the dye, and Rathazul returns your gems.\n\n<b>(+50 Gems)</b>");
 	player.gems += 50;
 	statScreenRefresh();
-	doNext(rathazulShopMenu);
+	rathazulShopMenu();
 }
 
 //Skin Oils
@@ -858,7 +858,7 @@ private function buyOilNevermind():void {
 	outputText("You change your mind about the oil, and Rathazul returns your gems.\n\n<b>(+50 Gems)</b>");
 	player.gems += 50;
 	statScreenRefresh();
-	doNext(rathazulShopMenu);
+	rathazulShopMenu();
 }
 
 //Body Lotions
@@ -892,7 +892,7 @@ private function buyLotionNevermind():void {
 	outputText("You change your mind about the lotion, and Rathazul returns your gems.\n\n<b>(+50 Gems)</b>");
 	player.gems += 50;
 	statScreenRefresh();
-	doNext(rathazulShopMenu);
+	rathazulShopMenu();
 }
 
 //Reducto
