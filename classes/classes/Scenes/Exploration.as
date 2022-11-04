@@ -115,6 +115,7 @@ public class Exploration extends BaseContent
 			//bd.add("Shore").hint("TBA"); //Discovered when exploring using Lake Boat.
 			bd.add("");
 			bd.add("");
+			bd.add("");
 			// Row 3
 			bd.add("Desert", SceneLib.desert.exploreDesert)
 					.hint("Visit the dry desert. "
