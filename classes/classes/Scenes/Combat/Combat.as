@@ -5962,6 +5962,10 @@ public class Combat extends BaseContent {
                 meleeMasteryGain(hitCounter, critCounter);
                 return;
             }
+			if (i > 1 && flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 1) {
+				if (player.fatigue + 50 > player.maxFatigue()) i = flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] + 1;
+				else fatigue(50);
+			}
         }
         if (player.weapon is Tidarion) (player.weapon as Tidarion).afterStrike();
         meleeMasteryGain(hitCounter, critCounter);
