@@ -686,9 +686,9 @@ public class UniqueSexScenes extends BaseContent
 			outputText("He looks at you fearfully and rightly so, there's no telling how far you will go to get the warmth you’re craving from him. You spread [monster his] leg wide to reveal the already hardening [monster cockshort] between. You lick his length to lube it properly for what is coming next, your cool saliva making [themonster] shiver. You rub your body along his while doing this, enjoying the sensation of warmth over your skin. A few seconds later you're already straddling the towering erection, inserting inch after inch inside your folds. Moans are exchanged as you begins to lower your body on your victim’s cock, moving at a steady pace. Midway you kiss [themonster] silencing his pain and pleasure mixed groans ");
 			outputText("as your cool breath pours in, and you draw out his warm one. He begins to shake as his cock hardens further, both from the pleasure and the thin layer of ice preventing his release and softening, freezing the very blood inside and spreading out across his body. He would be screaming half mad right now if you weren't choking his loud reply with a kiss, breathing in his warmth. He keeps thrusting until his lower body loses mobility to the creeping frost, not one to end, so soon you prolong his agonizing pleasure and yours by your own efforts, moaning in delight each time his diamond hard frozen member bottoms in.\n\n");
 			outputText("As you achieve your fifth orgasm, his body is entirely covered in creeping ice, and he's no better than a frozen statue, devoid of all warmth and life. What a bore, you were just barely satiated and could've gone on for several hours. You kick him in anger, causing his form to crack and explode like glass in the opposite direction. Guess you had fun while it lasted, time to head back to camp.\n\n");
-			player.HP = player.maxHP();
-			player.mana = player.maxMana();
-			player.soulforce = player.maxSoulforce();
+			player.HP = player.maxOverHP();
+			player.mana = player.maxOverMana();
+			player.soulforce = player.maxOverSoulforce();
 			player.sexReward("cum","Vaginal");
 			cleanupAfterCombat();
 		}
@@ -756,7 +756,7 @@ public class UniqueSexScenes extends BaseContent
 
 		public function jiangshiDrainHimMinotaurs():void {
 			clearOutput();//
-			outputText("The minotaur falls, unable to fight any longer."+(monster.lust >= monster.maxLust()?" His massive erection throbbing, drooling excessive amounts of precum as he moos softly, panting with desperate need.":"")+" His churning balls are full of excessive amounts of his virile energy. A fountain of energy, in more ways than one, and it's a fountain you intend to drink every last possible drop from. Already driven over the edge, the masculine scent of his musk only serves to remind you of the prize you've won. All you can think of now is the alluring sight of lifeforce that fill his balls.\n\n");
+			outputText("The minotaur falls, unable to fight any longer."+(monster.lust >= monster.maxOverLust()?" His massive erection throbbing, drooling excessive amounts of precum as he moos softly, panting with desperate need.":"")+" His churning balls are full of excessive amounts of his virile energy. A fountain of energy, in more ways than one, and it's a fountain you intend to drink every last possible drop from. Already driven over the edge, the masculine scent of his musk only serves to remind you of the prize you've won. All you can think of now is the alluring sight of lifeforce that fill his balls.\n\n");
 			outputText("Unceremoniously, you drop on the prone minotaur with eager readiness as you begin deepthroating his juicy cock for his soulforce. The bull moos, jumping slightly in shock before he gives in to the pleasure at the sudden but aggressive attention.\n\n");
 			outputText("Lacking a gag reflex or a need for air, you easily slide his massive member down your throat as you blow him. His full balls churn, yet you only receive a steady stream of precum from him. Impatiently, you poke the minotaur's massive balls with your nails, causing them to further swell in size as the venom forces him to produce even more cum.\n\n");
 			outputText("The minotaur moos eagerly, forcefully bucking into your gaping maw. You wring your tongue around his massive shaft, coaxing him closer to orgasm. The massive bull can only handle this torture for so long and begins unloading shot after shot into your throat causing your belly to inflate briefly before you absorb the fluid and deflate back to your normal size. Fitting your maker accounted for a bukake scenario.\n\n");
@@ -773,7 +773,7 @@ public class UniqueSexScenes extends BaseContent
 			}
 			if (player.hasStatusEffect(StatusEffects.AlterBindScroll2)) player.soulforce += player.maxSoulforce() * 0.4;
 			else player.soulforce += player.maxSoulforce() * 0.2;
-			if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+			if (player.soulforce > player.maxOverSoulforce()) player.soulforce = player.maxOverSoulforce();
 			outputText(" You feel slightly more alive from the soulforce you vampirised from your sexual partner orgasm.");
 			player.sexReward("cum", "Oral");
 			cleanupAfterCombat();

@@ -876,7 +876,7 @@ public function getMilked():void {
 	else {
 		outputText("Overwhelmed with your desire, you don't even bother to cover up and make yourself decent, you just run out of the barn, [allbreasts] jiggling and wet, heading straight for camp.");
 		if (farmCorruption.whitneyCorruption() < 90) outputText(" It isn't until you get back that you remember the disapproving look Whitney gave you, but if anything, it only makes you hornier.");
-		dynStats("lus=", player.maxLust());
+		dynStats("lus=", player.maxOverLust());
 	}
 	//Boost lactation by a tiny bit and prevent lactation reduction
 	player.boostLactation(.05);

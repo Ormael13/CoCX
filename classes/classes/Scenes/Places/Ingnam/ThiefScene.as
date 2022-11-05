@@ -40,7 +40,7 @@ package classes.Scenes.Places.Ingnam
 		
 		public function winAgainstThief():void {
 			clearOutput();
-			outputText("The thief collapses from his " + (monster.lust >= monster.maxLust() ? "overwhelming desires": "injuries") + ". You smile in satisfaction as you rummage through his gem pouch");
+			outputText("The thief collapses from his " + (monster.lust >= monster.maxOverLust() ? "overwhelming desires": "injuries") + ". You smile in satisfaction as you rummage through his gem pouch");
 			if (flags[kFLAGS.THIEF_GEMS] > 0) outputText(", happily retrieving the gems the thief has taken from you");
 			outputText(".");
 			monster.gems += flags[kFLAGS.THIEF_GEMS];

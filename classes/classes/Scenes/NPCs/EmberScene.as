@@ -100,7 +100,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
                 needNext = true;
             }
             //At max lust, count up - if ten hours lusty, ember yells at ya!
-            if (player.lust >= player.maxLust() && player.gender > 0) {
+            if (player.lust >= player.maxOverLust() && player.gender > 0) {
                 flags[kFLAGS.EMBER_LUST_BITCHING_COUNTER]++;
                 if (flags[kFLAGS.EMBER_LUST_BITCHING_COUNTER] >= 10) {
                     emberBitchesAtYouAboutLustiness();

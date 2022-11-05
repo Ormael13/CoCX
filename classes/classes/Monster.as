@@ -421,11 +421,11 @@ import flash.utils.getQualifiedClassName;
 		}
 		public function addSoulforce(soulforce:Number):void {
 			this.soulforce += soulforce;
-			if (this.soulforce > maxSoulforce()) this.soulforce = maxSoulforce();
+			if (this.soulforce > maxOverSoulforce()) this.soulforce = maxOverSoulforce();
 		}
 		public function addMana(mana:Number):void {
 			this.mana += mana;
-			if (this.mana > maxMana()) this.mana = maxMana();
+			if (this.mana > maxOverMana()) this.mana = maxMana();
 		}
 
 		public override function maxLust():Number {
@@ -2599,7 +2599,7 @@ import flash.utils.getQualifiedClassName;
 				}
 			}
 			//soulforce and mana regeneration for monsters
-			if (hasPerk(PerkLib.JobSoulCultivator) && this.soulforce < maxSoulforce()) {
+			if (hasPerk(PerkLib.JobSoulCultivator) && this.soulforce < maxOverSoulforce()) {
 				var soulforceRecovery:Number = 0;
 				var soulforceRecoveryMulti:Number = 1;
 				if (hasPerk(PerkLib.JobSoulCultivator)) soulforceRecovery += 4;
@@ -2626,7 +2626,7 @@ import flash.utils.getQualifiedClassName;
 				soulforceRecovery *= soulforceRecoveryMulti;
 				addSoulforce(soulforceRecovery);
 			}
-			if (hasPerk(PerkLib.JobSorcerer) && this.mana < maxMana()) {
+			if (hasPerk(PerkLib.JobSorcerer) && this.mana < maxOverMana()) {
 				var manaRecovery:Number = 0;
 				var manaRecoveryMulti:Number = 1;
 				if (hasPerk(PerkLib.JobSorcerer)) manaRecovery += 10;

@@ -759,7 +759,7 @@ private function tamaniDaughtersCombatLossDrain():void {
 	if(player.HP < 1) outputText("defeated");
 	else outputText("lust weakened");
 	outputText(" form, pulling you off your feet and carrying the whole of your body off.  ");
-	if(player.lust >= player.maxLust()) {
+	if(player.lust >= player.maxOverLust()) {
 		outputText("It doesn't bother you too much... they keep ");
 		if(player.hasBalls()) outputText("fondling your balls and ");
 		outputText("stroking your shaft to keep you nice and excited, squirming helplessly with desire.");
@@ -1099,7 +1099,7 @@ internal function combatWinAgainstDaughters():void {
 }
 
 internal function loseToDaughters():void {
-	if(player.lust >= player.maxLust()) {
+	if(player.lust >= player.maxOverLust()) {
 		if(player.hasStatusEffect(StatusEffects.Infested)) {
 			SceneLib.mountain.wormsScene.infestOrgasm();
 			outputText("\n\nThe goblins sigh and say, \"<i>Dad, that's just gross.  Don't get us wrong, we're still gonna have you knock us up, but I hate the feeling of those worms inside me.</i>\"");

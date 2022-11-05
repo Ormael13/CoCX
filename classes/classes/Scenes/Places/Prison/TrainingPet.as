@@ -1001,7 +1001,7 @@ package classes.Scenes.Places.Prison
 				outputText("\n\n");
 				outputText("\n\n");
 				menu();
-				if(player.lust < player.maxLust())
+				if(player.lust < player.maxOverLust())
 				{
 					addButton(0,"Food",prisonCaptorPetTrainingCrateCallOut,1);
 					addButton(1,"Release",prisonCaptorPetTrainingCrateCallOut,2);
@@ -1014,7 +1014,7 @@ package classes.Scenes.Places.Prison
 				{
 					addButton(3,"Submit",prisonCaptorPetTrainingCrateLeash,0);
 				}
-				if(player.lust < player.maxLust())
+				if(player.lust < player.maxOverLust())
 				{
 					addButton(4,"Nothing",prisonCaptorPetTrainingCrateCallOut,6);
 				}

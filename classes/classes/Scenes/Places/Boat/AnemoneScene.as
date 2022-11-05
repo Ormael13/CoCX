@@ -155,7 +155,7 @@ public class AnemoneScene extends BaseContent {
             var x:Number = player.cockThatFits(36);
             outputText("Rubbing yourself through your [armor], you look over the anemone; your attention wanders down her torso to the blue slit between her legs");
             //[(lust victory)
-            if (monster.lust >= monster.maxLust()) outputText(", which she's currently diddling with the hand she's not using to stroke her cock");
+            if (monster.lust >= monster.maxOverLust()) outputText(", which she's currently diddling with the hand she's not using to stroke her cock");
             outputText(".  Unfastening your garments, you stroke " + sMultiCockDesc() + " to full hardness and approach her.  The anemone looks up at you, still somewhat befogged; then, as you stand over her, she leans forward and opens her mouth invitingly.\n\n");
 
             outputText("You smile at how eager she is for you, but shake your head.  The anemone closes her mouth and looks at you quizzically.  <i>\"No?\"</i> she asks.  Only then does she follow your gaze down to her pussy.  The skin on her face darkens a bit as she realizes your intention... which turns out to be a blush, by the looks of the shy glance she gives you next!  <i>\"Umm.\"</i>  The anemone's fingers");
@@ -265,7 +265,7 @@ public class AnemoneScene extends BaseContent {
 
         outputText("The anemone looks vacantly up at you as you approach.  Reaching forward, you take her cock in your hand");
         //[(lust victory)
-        if (monster.lust >= monster.maxLust()) outputText(" after brushing hers aside");
+        if (monster.lust >= monster.maxOverLust()) outputText(" after brushing hers aside");
         outputText(" and begin to fondle the crown, with its slippery tentacles.  As expected, her venom flows into your hand, imparting a sensation of heat that slides up your arm and diffuses into a gentle warmth.  After a few rubs, you lean down and carefully take her penis into your mouth.  It tastes of the ");
         if (flags[kFLAGS.ANEMONE_OR_SEA_ANEMONE] == 1) outputText("lake");
         if (flags[kFLAGS.ANEMONE_OR_SEA_ANEMONE] == 2) outputText("ocean");
@@ -628,7 +628,7 @@ public class AnemoneScene extends BaseContent {
         //victory sex choice for males with cock fit 48 or females with clit >7": "her anus"
         //(change "If you do, which of your parts" to "If you do, which part" in pre-sex choice menu)
         outputText("Imagining your climax already, you look over the anemone.  Your gaze lingers on her breasts; she sticks them out enticingly, trying to catch your interest");
-        if (monster.lust >= monster.maxLust()) outputText(" as she plays with herself");
+        if (monster.lust >= monster.maxOverLust()) outputText(" as she plays with herself");
         outputText(".  Nice, but not what you're looking for...  ");
         if (!player.isTaur()) {
             outputText("Opening your [armor] a bit, you stroke ");

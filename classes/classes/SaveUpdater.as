@@ -1910,7 +1910,9 @@ public class SaveUpdater extends NPCAwareContent {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.032;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.033) {
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_2358] = 0; //reclaiming soulforce flag
+				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02358] = 0; //reclaiming soulforce flag
+				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00773] = 1; //reclaiming essy flag
+				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02973] = 1; //reclaiming no gore flag (wasn't used)
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.033;
 			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");

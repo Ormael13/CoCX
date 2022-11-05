@@ -995,7 +995,7 @@ private function exgartuanBulgeTortureII():void {
 	outputText("  Too preoccupied with whatever's going on down below, you can't seem to focus enough to get the job done right.  Your peer down your body at your [cock], still flaccid and on lockdown.  The most you can respond is with another deep sigh, retreating your attention to the canvas up above you.  You figure the best course of action from here is to just try and make it until morning when you can find some help.  Confessing shame to some third party seems a much better alternative to going any more rounds with this nonsense.  Your fists clench and you take some deep breaths, prepared to ride out the remainder of the night with your sanity intact.\n\n");
 
 	//[new page. lust raises to 100]
-	dynStats("lus=", player.maxLust());
+	dynStats("lus=", player.maxOverLust());
 	doNext(exgartuanBulgeTortureIII);
 }
 private function exgartuanBulgeTortureIII():void {

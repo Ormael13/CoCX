@@ -511,8 +511,9 @@ import classes.Scenes.NPCs.Forgefather;
 			if (hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) max += (250 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) max += (300 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.AscensionEndurance)) max += perkv1(PerkLib.AscensionEndurance) * 30;
-			max += level * 5;
-			if (level <= 6) max += level * maxFatiguePerLevelStat.value;
+			max += level * maxFatiguePerLevelStat.value;
+			if (level <= 6) max += level * 5;
+			else max += 30;
 			max *= multimax;
 			max = Math.round(max);
 			if (max > 1499999) max = 1499999;
@@ -579,6 +580,7 @@ import classes.Scenes.NPCs.Forgefather;
 			if (necklaceEffectId == NecklaceLib.MODIFIER_SF) max += necklaceEffectMagnitude;//+100	 necklaceName == "soulmetal necklace"
 			max += level * maxSfPerLevelStat.value;
 			if (level <= 6) max += level * 5;
+			else max += 30;
 			if (isGargoyle() && Forgefather.material == "marble")
 			{
 				if (Forgefather.refinement == 0) multimax += (.15);
@@ -774,6 +776,7 @@ import classes.Scenes.NPCs.Forgefather;
 			if (jewelryEffectId4 == JewelryLib.MODIFIER_MP) max += jewelryEffectMagnitude4;
 			max += level * maxManaPerLevelStat.value;
 			if (level <= 6) max += level * 10;
+			else max += 60;
 			max *= multimax;
 			max = Math.round(max);
 			if (max < 0) max = 0;

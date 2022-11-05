@@ -177,7 +177,7 @@ public function clearBenoitPreggers():void
 public function setBenoitShop(setButtonOnly:Boolean = false):void {
 	if (model.time.hours >= 9 && model.time.hours <= 17 && (flags[kFLAGS.FEMOIT_NEXTDAY_EVENT_DONE] != 1 || CoC.instance.model.time.days >= flags[kFLAGS.FEMOIT_NEXTDAY_EVENT])) {
 		if (flags[kFLAGS.TIMES_IN_BENOITS] == 0) {
-			if (!setButtonOnly) outputText("\n\nYou notice a large market stall wedged between two wagons, swaddled in carpets and overflowing with all manner of objects.  On top of its looming fabric canopy is a wooden sign with the words \"<b>Geckos Garbidg</b>\" crudely scrawled upon them.  You wonder what that's all about.");
+			if (!setButtonOnly) outputText("\n\nYou notice a large market stall wedged between two wagons, swaddled in carpets and overflowing with all manner of objects.  On top of its looming fabric canopy is a wooden sign with the words \"Geckos Garbidg\" crudely scrawled upon them.  You wonder what that's all about.");
 			else addButton(0, "Market Stall", benoitIntro);
 		} else {
 			if (!setButtonOnly) outputText("\n\n[benoit name] the basilisk's stall looks open for business.  You could go see what's on offer.");
@@ -926,8 +926,8 @@ private function talkToBenoit():void {
 			default:
 				CoC_Settings.error("Benoit talk is broken");
 		}
-		doNext(camp.returnToCampUseOneHour);
 	}
+	doNext(camp.returnToCampUseOneHour);
 }
 
 

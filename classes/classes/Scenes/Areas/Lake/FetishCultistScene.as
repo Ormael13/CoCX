@@ -455,7 +455,7 @@ public class FetishCultistScene extends AbstractLakeContent
 				hideUpDown();
 				monster.lust = 98;
 				monster.HP = 2;
-				player.lust = player.maxLust();
+				player.lust = player.maxOverLust();
 				flags[kFLAGS.COMBAT_BONUS_XP_VALUE] = monster.XP;
 				cleanupAfterCombat();
 				player.sexReward("Default","Default",true,false);

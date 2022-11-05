@@ -1412,7 +1412,7 @@ public class MagicSpecials extends BaseCombatContent {
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
-		if (monster.lust >= monster.maxLust()) doNext(endLustVictory);
+		if (monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
 		if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 3 && rand(100) < 10 && !monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.Stunned,2,0,0,0);
 		enemyAI();
 	}
@@ -1481,7 +1481,7 @@ public class MagicSpecials extends BaseCombatContent {
 		statScreenRefresh();
 		player.createStatusEffect(StatusEffects.lustStorm,0,0,0,0);
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
-		if (monster.lust >= monster.maxLust()) doNext(endLustVictory);
+		if (monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
 		else enemyAI();
 	}
 
@@ -1854,7 +1854,7 @@ public class MagicSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		doNext(playerMenu);
-		if (monster.lust >= monster.maxLust()) doNext(endLustVictory);
+		if (monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
 		else if (monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
 	}
@@ -2988,7 +2988,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if(monster.HP <= monster.minHP()) {
 				doNext(endHpVictory);
 			}
-			else if(monster.lust >= monster.maxLust()) {
+			else if(monster.lust >= monster.maxOverLust()) {
 				doNext(endLustVictory);
 			}
 			else enemyAI();
@@ -3060,7 +3060,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if(monster.HP <= monster.minHP()) {
 			doNext(endHpVictory);
 		}
-		else if(monster.lust >= monster.maxLust()) {
+		else if(monster.lust >= monster.maxOverLust()) {
 			doNext(endLustVictory);
 		}
 		else
@@ -3800,10 +3800,10 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		spellPerkUnlock();
 		combat.heroBaneProc(damage);
-		if(monster.HP > 0 && monster.lust < monster.maxLust()) enemyAI();
+		if(monster.HP > 0 && monster.lust < monster.maxOverLust()) enemyAI();
 		else {
 			if(monster.HP <= monster.minHP()) doNext(endHpVictory);
-			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
+			if(monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
 		}
 	}
 	//(Basic Fox Fire)
@@ -3892,10 +3892,10 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		spellPerkUnlock();
 		combat.heroBaneProc(damage);
-		if(monster.HP > 0 && monster.lust < monster.maxLust()) enemyAI();
+		if(monster.HP > 0 && monster.lust < monster.maxOverLust()) enemyAI();
 		else {
 			if(monster.HP <= monster.minHP()) doNext(endHpVictory);
-			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
+			if(monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
 		}
 	}
 	//Corrupted Fox Fire
@@ -3990,10 +3990,10 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		spellPerkUnlock();
 		combat.heroBaneProc(damage);
-		if(monster.HP > 0 && monster.lust < monster.maxLust()) enemyAI();
+		if(monster.HP > 0 && monster.lust < monster.maxOverLust()) enemyAI();
 		else {
 			if(monster.HP <= monster.minHP()) doNext(endHpVictory);
-			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
+			if(monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
 		}
 	}
 	//Fused Fox Fire
@@ -4086,10 +4086,10 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		spellPerkUnlock();
 		combat.heroBaneProc(damage);
-		if(monster.HP > 0 && monster.lust < monster.maxLust()) enemyAI();
+		if(monster.HP > 0 && monster.lust < monster.maxOverLust()) enemyAI();
 		else {
 			if(monster.HP <= monster.minHP()) doNext(endHpVictory);
-			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
+			if(monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
 		}
 	}
 	//Pure Fox Fire
@@ -4183,10 +4183,10 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		spellPerkUnlock();
 		combat.heroBaneProc(damage);
-		if(monster.HP > 0 && monster.lust < monster.maxLust()) enemyAI();
+		if(monster.HP > 0 && monster.lust < monster.maxOverLust()) enemyAI();
 		else {
 			if(monster.HP <= monster.minHP()) doNext(endHpVictory);
-			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
+			if(monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
 		}
 	}
 
@@ -4335,9 +4335,9 @@ public class MagicSpecials extends BaseCombatContent {
 		monster.teased(lustDmg);
 		outputText("\n\n");
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
-		if(monster.lust < monster.maxLust()) enemyAI();
+		if(monster.lust < monster.maxOverLust()) enemyAI();
 		else {
-			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
+			if(monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
 		}
 	}
 
@@ -4732,7 +4732,7 @@ public class MagicSpecials extends BaseCombatContent {
 		monster.lust += lusttransfered;
 		outputText("\n\n");
 		doNext(playerMenu);
-		if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
+		if(monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
 		else enemyAI();
 	}
 
@@ -4786,7 +4786,7 @@ public class MagicSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		doNext(playerMenu);
-		if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
+		if(monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
 		else enemyAI();
 	}
 
@@ -4830,7 +4830,7 @@ public class MagicSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		doNext(playerMenu);
-		if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
+		if(monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
 		else enemyAI();
 	}
 

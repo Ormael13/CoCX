@@ -107,7 +107,6 @@ public class MimicScene extends BaseContent {
         if (itemRoll == 1) findSomeGems(); //find bag o gems
         if (itemRoll == 2) inventory.takeItem(consumables.NUMBOIL, camp.returnToCampUseOneHour); //find numbing oil
         if (itemRoll == 3) inventory.takeItem(consumables.HUMMUS_, camp.returnToCampUseOneHour); //find Hummanus
-        doNext(camp.returnToCampUseOneHour);
     }
 
     public function attackIt():void {

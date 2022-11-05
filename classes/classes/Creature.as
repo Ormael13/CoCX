@@ -967,7 +967,7 @@ public class Creature extends Utils
 			if (dsens < 0){
 				removeCurse("sens", -dsens,2);
 			}
-			lust = Utils.boundFloat(mins.lust, lust + dlust, maxLust());
+			lust = Utils.boundFloat(mins.lust, lust + dlust, maxOverLust());
 			cor  = Utils.boundFloat(mins.cor, cor + dcor, 100);
             if (cor < 1.0) cor = 0;//check [0,1] to avoid confusion
 
@@ -976,9 +976,9 @@ public class Creature extends Utils
 
 			// Keep values in bounds (lust and HP handled above)
 			fatigue = Math.min(fatigue, maxFatigue());
-			mana = Math.min(mana, maxMana());
-			soulforce = Math.min(soulforce, maxSoulforce());
-			wrath = Math.min(wrath,maxWrath());
+			mana = Math.min(mana, maxOverMana());
+			soulforce = Math.min(soulforce, maxOverSoulforce());
+			wrath = Math.min(wrath,maxOverWrath());
 		}
 		// Lust gain, in % (100 = receive as is, 25 = receive one fourth, 0 = immune)
 		public function lustPercent():Number {

@@ -17,7 +17,7 @@ public class BrigidScene extends BaseContent
 		public function pcDefeatsBrigid():void {
 			clearOutput();
 			outputText("The harpy jailer collapses, ");
-			if(monster.lust >= monster.maxLust()) outputText("too turned on");
+			if(monster.lust >= monster.maxOverLust()) outputText("too turned on");
 			else outputText("too badly beaten");
 			outputText(" to continue the fight.  You quickly snatch the keys from inside her shield, and hook them onto your own belt.");
 			//(New Key Item: Harpy Key A)

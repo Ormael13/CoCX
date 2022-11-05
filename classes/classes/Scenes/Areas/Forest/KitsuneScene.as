@@ -161,7 +161,7 @@ public class KitsuneScene extends BaseContent
 				//+15 Lust
 				dynStats("lus", 15, "scale", false);
 			}
-			if ((player.lust >= player.maxLust() || player.inte < 20) && !firstTime) {
+			if ((player.lust >= player.maxOverLust() || player.inte < 20) && !firstTime) {
 				mansion(false, false);
 			}
 			//Else:

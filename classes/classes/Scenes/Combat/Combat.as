@@ -116,7 +116,7 @@ public class Combat extends BaseContent {
         statScreenRefresh();
         if (monster.HP <= monster.minHP()) {
             doNext(endHpVictory);
-        } else if (monster.lust >= monster.maxLust()) {
+        } else if (monster.lust >= monster.maxOverLust()) {
             doNext(endLustVictory);
         } else if(player.lust >= player.maxOverLust() && !player.statStore.hasBuff("Supercharged")) {
             doNext(endLustLoss);
@@ -431,7 +431,7 @@ public class Combat extends BaseContent {
             //Clear itemswapping in case it hung somehow
 //No longer used:		itemSwapping = false;
             //Player won
-            if (monster.HP <= monster.minHP() || monster.lust > monster.maxLust()) {
+            if (monster.HP <= monster.minHP() || monster.lust >= monster.maxOverLust()) {
                 awardPlayer(nextFunc);
             }
             //Player lost
@@ -1807,7 +1807,7 @@ public class Combat extends BaseContent {
         if (crit) outputText(" <b>Critical!</b>");
         //checkMinionsAchievementDamage(elementalDamage);
 		outputText(" ");
-        if (monster.HP >= 1 && monster.lust <= monster.maxLust()) {
+        if (monster.HP >= 1 && monster.lust <= monster.maxOverLust()) {
 			if (summonedElementalsMulti > 1) {
 				summonedElementalsMulti -= 1;
 				elementalattacks(elementType, summonedElementals, summonedElementalsMulti, summonedEpicElemental);
@@ -2055,7 +2055,7 @@ public class Combat extends BaseContent {
             doNext(endHpVictory);
             return;
         }
-        if (monster.lust >= monster.maxLust()) {
+        if (monster.lust >= monster.maxOverLust()) {
             doNext(endLustVictory);
             return;
         }
@@ -3186,7 +3186,7 @@ public class Combat extends BaseContent {
 						flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
                     }
                 }
-                if (monster.lust >= monster.maxLust()) {
+                if (monster.lust >= monster.maxOverLust()) {
                     outputText("\n\n");
                     checkAchievementDamage(damage);
                     flags[kFLAGS.ARROWS_SHOT]++;
@@ -3225,7 +3225,7 @@ public class Combat extends BaseContent {
             doNext(endHpVictory);
             return;
         }
-        if (monster.lust >= monster.maxLust()) {
+        if (monster.lust >= monster.maxOverLust()) {
             doNext(endLustVictory);
             return;
         }
@@ -3316,7 +3316,7 @@ public class Combat extends BaseContent {
                 lustArrowDmg = Math.round(lustArrowDmg);
                 monster.lust += lustArrowDmg;
                 outputText("<b>([font-lust]" + lustArrowDmg + "[/font])</b>");
-                if (monster.lust >= monster.maxLust()) doNext(endLustVictory);
+                if (monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
             }
         }
     }
@@ -3467,7 +3467,7 @@ public class Combat extends BaseContent {
             doNext(endHpVictory);
             return;
         }
-        if (monster.lust >= monster.maxLust()) {
+        if (monster.lust >= monster.maxOverLust()) {
             doNext(endLustVictory);
             return;
         }
@@ -3588,7 +3588,7 @@ public class Combat extends BaseContent {
             doNext(endHpVictory);
             return;
         }
-        if (monster.lust >= monster.maxLust()) {
+        if (monster.lust >= monster.maxOverLust()) {
             doNext(endLustVictory);
         }
     }
@@ -3738,7 +3738,7 @@ public class Combat extends BaseContent {
             doNext(endHpVictory);
             return;
         }
-        if (monster.lust >= monster.maxLust()) {
+        if (monster.lust >= monster.maxOverLust()) {
             doNext(endLustVictory);
         } else if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] > 1) {
             flags[kFLAGS.MULTIPLE_ARROWS_STYLE] -= 1;
@@ -4058,7 +4058,7 @@ public class Combat extends BaseContent {
             doNext(endHpVictory);
             return;
         }
-        if (monster.lust >= monster.maxLust()) {
+        if (monster.lust >= monster.maxOverLust()) {
             doNext(endLustVictory);
             return;
         }
@@ -4322,7 +4322,7 @@ public class Combat extends BaseContent {
                 monster.teased(Math.round(monster.lustVuln * damage));
             } else outputText("and it worked, to an extent, allowing your opponent to retreat away from the gas.");
         }
-        if (monster.lust >= monster.maxLust()) doNext(endLustVictory);
+        if (monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
         enemyAI();
     }
 
@@ -5258,7 +5258,7 @@ public class Combat extends BaseContent {
                     outputText("You stare into her hangdog expression and lose most of the killing intensity you had summoned up for your attack, stopping a few feet short of hitting her.\n");
                     //damage = 0;
                     //Kick back to main if no damage occured!
-                    if (monster.HP > 0 && monster.lust < monster.maxLust()) {
+                    if (monster.HP > 0 && monster.lust < monster.maxOverLust()) {
                         if (player.hasStatusEffect(StatusEffects.FirstAttack)) {
                             attack(false);
                             return true;
@@ -5793,7 +5793,7 @@ public class Combat extends BaseContent {
                                     flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
                                 }
                             }
-                            if (monster.lust >= monster.maxLust()) {
+                            if (monster.lust >= monster.maxOverLust()) {
                                 outputText("\n\n");
                                 checkAchievementDamage(damage);
                                 doNext(endLustVictory);
@@ -5815,7 +5815,7 @@ public class Combat extends BaseContent {
                     }
                 }
                 if (monster is JeanClaude && !player.hasStatusEffect(StatusEffects.FirstAttack)) {
-                    if (monster.HP <= monster.minHP() || monster.lust > monster.maxLust()) {
+                    if (monster.HP <= monster.minHP() || monster.lust >= monster.maxOverLust()) {
                         // noop
                     }
                     if (player.lust <= 30) {
@@ -5872,9 +5872,9 @@ public class Combat extends BaseContent {
                     player.mana += player.maxMana() * sippedA;
                     player.fatigue -= player.maxFatigue() * sippedA;
                     player.soulforce += player.maxSoulforce() * sippedA;
-                    if (player.HP > player.maxHP()) player.HP = player.maxHP();
-                    if (player.mana > player.maxMana()) player.mana = player.maxMana();
-                    if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+                    if (player.HP > player.maxOverHP()) player.HP = player.maxOverHP();
+                    if (player.mana > player.maxOverMana()) player.mana = player.maxOverMana();
+                    if (player.soulforce > player.maxOverSoulforce()) player.soulforce = player.maxOverSoulforce();
                     if (player.fatigue < 0) player.fatigue = 0;
                 }
                 //Damage Unarmed Strike chaining combos. GRABBING STYLE AND JABBING STYLE
@@ -5957,11 +5957,15 @@ public class Combat extends BaseContent {
                 meleeMasteryGain(hitCounter, critCounter);
                 return;
             }
-            else if (monster.lust >= monster.maxLust()) {
+            else if (monster.lust >= monster.maxOverLust()) {
                 doNext(endLustVictory);
                 meleeMasteryGain(hitCounter, critCounter);
                 return;
             }
+			if (i > 1 && flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 1) {
+				if (player.fatigue + 50 > player.maxFatigue()) i = flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] + 1;
+				else fatigue(50);
+			}
         }
         if (player.weapon is Tidarion) (player.weapon as Tidarion).afterStrike();
         meleeMasteryGain(hitCounter, critCounter);
@@ -6276,6 +6280,11 @@ public class Combat extends BaseContent {
     }
 
     public function IceTypeDamageBonus(damage:Number):Number {
+        if (monster.hasPerk(PerkLib.FireNature)) damage *= 1.5;
+        if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 1.2;
+        if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 0.8;
+        if (monster.hasPerk(PerkLib.IceNature)) damage *= 0.5;
+        if (player.hasPerk(PerkLib.ColdAffinity) || player.hasPerk(PerkLib.AffinityUndine)) damage *= 2;
         return damage;
     }
 
@@ -6284,7 +6293,7 @@ public class Combat extends BaseContent {
         if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 4;
         if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 0.25;
         if (monster.hasPerk(PerkLib.IceNature)) damage *= 0.4;
-        if (player.hasPerk(PerkLib.ColdAffinity)) damage *= 2;
+        if (player.hasPerk(PerkLib.ColdAffinity) || player.hasPerk(PerkLib.AffinityUndine)) damage *= 2;
         return damage;
     }
 
@@ -7288,7 +7297,7 @@ public class Combat extends BaseContent {
 				EngineCore.WrathChange(WrathGains);
 			}
 			else monster.wrath += WrathGains;
-            if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
+            if (monster.wrath > monster.maxOverWrath()) monster.wrath = monster.maxOverWrath();
         }
         if (display) CommasForDigits(damage);
         //Interrupt gigaflare if necessary.
@@ -7373,7 +7382,7 @@ public class Combat extends BaseContent {
             if (monster.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult = 1.20;
             if (monster.hasPerk(PerkLib.FuelForTheFire)) monster.wrath += Math.round((damage / 5)*BonusWrathMult);
             else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
-            if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
+            if (monster.wrath > monster.maxOverWrath()) monster.wrath = monster.maxOverWrath();
         }
         if (display) CommasForDigits(damage);
         //Interrupt gigaflare if necessary.
@@ -7450,7 +7459,7 @@ public class Combat extends BaseContent {
             if (monster.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult = 1.20;
             if (monster.hasPerk(PerkLib.FuelForTheFire)) monster.wrath += Math.round((damage / 5)*BonusWrathMult);
             else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
-            if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
+            if (monster.wrath > monster.maxOverWrath()) monster.wrath = monster.maxOverWrath();
         }
         if (display) CommasForDigits(damage, false, "", "fire");
         //Interrupt gigaflare if necessary.
@@ -7507,7 +7516,7 @@ public class Combat extends BaseContent {
             if (monster.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult = 1.20;
             if (monster.hasPerk(PerkLib.FuelForTheFire)) monster.wrath += Math.round((damage / 5)*BonusWrathMult);
             else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
-            if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
+            if (monster.wrath > monster.maxOverWrath()) monster.wrath = monster.maxOverWrath();
         }
         if (display) CommasForDigits(damage, false, "", "cold");
         //Interrupt gigaflare if necessary.
@@ -7563,7 +7572,7 @@ public class Combat extends BaseContent {
             if (monster.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult = 1.20;
             if (monster.hasPerk(PerkLib.FuelForTheFire)) monster.wrath += Math.round((damage / 5)*BonusWrathMult);
             else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
-            if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
+            if (monster.wrath > monster.maxOverWrath()) monster.wrath = monster.maxOverWrath();
         }
         if (display) CommasForDigits(damage, false, "", "lightning");
         //Interrupt gigaflare if necessary.
@@ -7608,7 +7617,7 @@ public class Combat extends BaseContent {
             if (monster.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult = 1.20;
             if (monster.hasPerk(PerkLib.FuelForTheFire)) monster.wrath += Math.round((damage / 5)*BonusWrathMult);
             else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
-            if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
+            if (monster.wrath > monster.maxOverWrath()) monster.wrath = monster.maxOverWrath();
         }
         if (display) CommasForDigits(damage, false, "", "dark");
         //Interrupt gigaflare if necessary.
@@ -7647,7 +7656,7 @@ public class Combat extends BaseContent {
             if (monster.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult = 1.20;
             if (monster.hasPerk(PerkLib.FuelForTheFire)) monster.wrath += Math.round((damage / 5)*BonusWrathMult);
             else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
-            if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
+            if (monster.wrath > monster.maxOverWrath()) monster.wrath = monster.maxOverWrath();
         }
         if (display) CommasForDigits(damage, false, "", "poison");
         //Interrupt gigaflare if necessary.
@@ -7682,7 +7691,7 @@ public class Combat extends BaseContent {
             if (monster.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult = 1.20;
             if (monster.hasPerk(PerkLib.FuelForTheFire)) monster.wrath += Math.round((damage / 5)*BonusWrathMult);
             else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
-            if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
+            if (monster.wrath > monster.maxOverWrath()) monster.wrath = monster.maxOverWrath();
         }
         if (display) CommasForDigits(damage, false, "", "wind");
         //Interrupt gigaflare if necessary.
@@ -7721,7 +7730,7 @@ public class Combat extends BaseContent {
             if (monster.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult = 1.20;
             if (monster.hasPerk(PerkLib.FuelForTheFire)) monster.wrath += Math.round((damage / 5)*BonusWrathMult);
             else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
-            if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
+            if (monster.wrath > monster.maxOverWrath()) monster.wrath = monster.maxOverWrath();
         }
         if (display) CommasForDigits(damage, false, "", "water");
         //Interrupt gigaflare if necessary.
@@ -7756,7 +7765,7 @@ public class Combat extends BaseContent {
             if (monster.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult = 1.20;
             if (monster.hasPerk(PerkLib.FuelForTheFire)) monster.wrath += Math.round((damage / 5)*BonusWrathMult);
             else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
-            if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
+            if (monster.wrath > monster.maxOverWrath()) monster.wrath = monster.maxOverWrath();
         }
         if (display) CommasForDigits(damage, false, "", "earth");
         //Interrupt gigaflare if necessary.
@@ -7791,7 +7800,7 @@ public class Combat extends BaseContent {
             if (monster.hasPerk(PerkLib.BerserkerArmor)) BonusWrathMult = 1.20;
             if (monster.hasPerk(PerkLib.FuelForTheFire)) monster.wrath += Math.round((damage / 5)*BonusWrathMult);
             else monster.wrath += Math.round((damage / 10)*BonusWrathMult);
-            if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
+            if (monster.wrath > monster.maxOverWrath()) monster.wrath = monster.maxOverWrath();
         }
         if (display) CommasForDigits(damage, false, "", "poison");
         //Interrupt gigaflare if necessary.
@@ -7860,7 +7869,7 @@ public class Combat extends BaseContent {
 				EngineCore.WrathChange(WrathGains);
 			}
 			else monster.wrath += WrathGains;
-            if (monster.wrath > monster.maxWrath()) monster.wrath = monster.maxWrath();
+            if (monster.wrath > monster.maxOverWrath()) monster.wrath = monster.maxOverWrath();
         }
         if (display) CommasForDigits(damage);
         //Interrupt gigaflare if necessary.
@@ -8056,7 +8065,7 @@ public class Combat extends BaseContent {
         }
         if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) {
             var bonusGems3:int = (monster.gems * 0.04) * (player.teaseLevel * 0.2);
-            if (monster.lust >= monster.maxLust()) monster.gems += bonusGems3;
+            if (monster.lust >= monster.maxOverLust()) monster.gems += bonusGems3;
         }
         if (player.hasPerk(PerkLib.AscensionFortune)) {
             monster.gems *= 1 + (player.perkv1(PerkLib.AscensionFortune) * 0.2);
@@ -8339,7 +8348,8 @@ public class Combat extends BaseContent {
 				if (player.statStore.hasBuff("Crossed Holy Band")) bleed *= 0.5;
                 bleed *= player.HP;
                 bleed = player.takePhysDamage(bleed);
-                outputText("<b>You gasp and wince in pain, feeling fresh blood pump from your wounds. ");
+                outputText("<b>You gasp and wince in pain, feeling fresh blood pump from your wounds.</b>"
+                    + "");
                 CommasForDigits(bleed);
                 outputText("[pg]");
             }
@@ -8708,7 +8718,7 @@ public class Combat extends BaseContent {
             checkAchievementDamage(damage0);
             statScreenRefresh();
             if (monster.HP <= monster.minHP()) doNext(endHpVictory);
-            if (monster.lust >= monster.maxLust()) doNext(endLustVictory);
+            if (monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
         }
         //Sing
         if (player.hasStatusEffect(StatusEffects.Sing) && monster.lustVuln > 0) {
@@ -9978,7 +9988,7 @@ public class Combat extends BaseContent {
         regeneration1(true);
         if (player.lust >= player.maxOverLust() && !player.statStore.hasBuff("Supercharged")) doNext(endLustLoss);
         if (player.HP <= player.minHP()) doNext(endHpLoss);
-		if (monster.lust >= monster.maxLust()) doNext(endLustVictory);
+		if (monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
     }
 
@@ -10252,14 +10262,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.DaoistElderStage)) multi += 1;
         if (player.hasPerk(PerkLib.DaoistOverlordStage)) multi += 1;
         if (player.hasPerk(PerkLib.ControlledBreath) && player.cor < (30 + player.corruptionTolerance)) multi += 0.2;
-        if (player.isRaceCached(Races.ALICORN, 2)) multi += 0.1;
-        if (player.isRaceCached(Races.KITSHOO, 1)) multi += 0.3;
-        if (player.isRaceCached(Races.KITSHOO, 2)) multi += 0.4;
-        if (player.isRaceCached(Races.KITSHOO, 3)) multi += 0.5;
-        if (player.isRaceCached(Races.KITSUNE)) multi += 1;
-        if (player.isRaceCached(Races.NEKOMATA, 1)) multi += 0.2;
-        if (player.isRaceCached(Races.NEKOMATA, 2)) multi += 0.4;
-        if (player.isRaceCached(Races.UNICORN, 2)) multi += 0.05;
+        multi += SceneLib.soulforce.sfRegenRacialMult();
         return multi;
     }
 
@@ -10562,12 +10565,12 @@ public class Combat extends BaseContent {
         else if (player.newGamePlusMod() == 3) monster.lustVuln *= 0.7;
         else if (player.newGamePlusMod() >= 4) monster.lustVuln *= 0.6;
         monster.HP = monster.maxOverHP();
-        monster.mana = monster.maxMana();
-        monster.soulforce = monster.maxSoulforce();
+        monster.mana = monster.maxOverMana();
+        monster.soulforce = monster.maxOverSoulforce();
         monster.XP = monster.totalXP();
         settingPCforFight();
         if (prison.inPrison && prison.prisonCombatAutoLose) {
-            dynStats("lus", player.maxLust(), "scale", false);
+            dynStats("lus=", player.maxOverLust());
             doNext(endLustLoss);
             return;
         }
@@ -10600,8 +10603,8 @@ public class Combat extends BaseContent {
         else if (player.newGamePlusMod() == 3) monster.lustVuln *= 0.7;
         else if (player.newGamePlusMod() >= 4) monster.lustVuln *= 0.6;
         monster.HP = monster.maxOverHP();
-        monster.mana = monster.maxMana();
-        monster.soulforce = monster.maxSoulforce();
+        monster.mana = monster.maxOverMana();
+        monster.soulforce = monster.maxOverSoulforce();
         monster.XP = monster.totalXP();
 		settingPCforFight();
         playerMenu();
@@ -11010,7 +11013,7 @@ public class Combat extends BaseContent {
             if (monster.lust > (monster.maxLust() * 0.5) && monster.lust < (monster.maxLust() * 0.6)) outputText("Drider Giantess's skin remains flushed with the beginnings of arousal.  ");
             if (monster.lust >= (monster.maxLust() * 0.6) && monster.lust < (monster.maxLust() * 0.7)) outputText("Drider Giantess's eyes constantly dart over your most sexual parts, betraying [monster his] lust.  ");
             if (monster.lust >= (monster.maxLust() * 0.7) && monster.lust < (monster.maxLust() * 0.8)) outputText("Drider Giantess is obviously turned on, you can smell [monster his] arousal in the air.  ");
-            if (monster.lust >= (monster.maxLust() * 0.8) && monster.lust < monster.maxLust()) outputText("You can see the giantess’s back legs trembling, the armored hatch on her front gushing lubricant.  ");
+            if (monster.lust >= (monster.maxLust() * 0.8) && monster.lust < monster.maxOverLust()) outputText("You can see the giantess’s back legs trembling, the armored hatch on her front gushing lubricant.  ");
         } else if (monster is Kitsune) {
             //Kitsune Lust states:
             //Low
@@ -11131,7 +11134,7 @@ public function combatIsOver():Boolean {
         doNext(endHpVictory);
         return true;
     }
-    if (monster.lust > monster.maxLust()) {
+    if (monster.lust >= monster.maxOverLust()) {
         doNext(endLustVictory);
         return true;
     }
@@ -11836,14 +11839,14 @@ public function StraddleTease():void {
         {
             player.refillHunger(2, false);
         }
-        if (player.HP < player.maxHP()) {
+        if (player.HP < player.maxOverHP()) {
             EngineCore.HPChange(25 + (player.tou/2), true);
         }
-        if (player.mana < player.maxMana()) {
+        if (player.mana < player.maxOverMana()) {
             EngineCore.ManaChange(25 + (player.inte/2));
         }
         EngineCore.changeFatigue(-(25 + (player.spe/2)));
-        if (player.soulforce < player.maxSoulforce() && player.hasPerk(PerkLib.KitsuneEnergyThirst)) {
+        if (player.soulforce < player.maxOverSoulforce() && player.hasPerk(PerkLib.KitsuneEnergyThirst)) {
             EngineCore.SoulforceChange(100 + (player.wis*2));
         }
     }
@@ -12404,7 +12407,7 @@ public function ScyllaTease():void {
             outputText("\n[Themonster] seems unimpressed.");
         }
         outputText("\n\n");
-        if (monster.lust >= monster.maxLust()) {
+        if (monster.lust >= monster.maxOverLust()) {
             doNext(endLustVictory);
             return;
         }
@@ -12595,7 +12598,7 @@ public function WebTease():void {
             outputText("\n[Themonster] seems unimpressed.");
         }
         outputText("\n\n");
-        if (monster.lust >= monster.maxLust()) {
+        if (monster.lust >= monster.maxOverLust()) {
             doNext(endLustVictory);
             return;
         }
@@ -12740,7 +12743,7 @@ public function GooTease():void {
             outputText("\n[Themonster] seems unimpressed.");
         }
         outputText("\n\n");
-        if (monster.lust >= monster.maxLust()) {
+        if (monster.lust >= monster.maxOverLust()) {
             doNext(endLustVictory);
             return;
         }
@@ -12893,9 +12896,7 @@ public function ManticoreFeed():void {
             {
                 player.refillHunger(10, false);
             }
-            if (player.HP < player.maxHP()) {
-                EngineCore.HPChange(100 + (player.tou*2), true);
-            }
+            EngineCore.HPChange(100 + (player.tou*2), true);
             EngineCore.changeFatigue(-(100 + (player.spe*2)));
             player.manticoreFeed();
             player.addStatusValue(StatusEffects.ManticorePlug,3,+1);
@@ -12903,7 +12904,7 @@ public function ManticoreFeed():void {
     }
     //Nuttin honey
     outputText("\n\n");
-    if (monster.lust >= monster.maxLust()) {
+    if (monster.lust >= monster.maxOverLust()) {
         doNext(endLustVictory);
         return;
     }
@@ -13002,9 +13003,7 @@ public function displacerFeedContinue():void {
             {
                 player.refillHunger(10, false);
             }
-            if (player.HP < player.maxHP()) {
-                EngineCore.HPChange(100 + (player.tou*2), true);
-            }
+            EngineCore.HPChange(100 + (player.tou*2), true);
             EngineCore.changeFatigue(-(100 + (player.spe*2)));
             player.displacerFeed();
             player.addStatusValue(StatusEffects.DisplacerPlug,3,+1);
@@ -13012,7 +13011,7 @@ public function displacerFeedContinue():void {
     }
     //Nuttin honey
     outputText("\n\n");
-    if (monster.lust >= monster.maxLust()) {
+    if (monster.lust >= monster.maxOverLust()) {
         doNext(endLustVictory);
         return;
     }
@@ -13111,9 +13110,7 @@ public function SlimeRapeFeed():void {
             {
                 player.refillHunger(10, false);
             }
-            if (player.HP < player.maxHP()) {
-                EngineCore.HPChange(100 + (player.tou*2), true);
-            }
+            EngineCore.HPChange(100 + (player.tou*2), true);
             EngineCore.changeFatigue(-(100 + (player.spe*2)));
             player.slimeFeed();
             player.addStatusValue(StatusEffects.SlimeInsert,3,+1);
@@ -13121,7 +13118,7 @@ public function SlimeRapeFeed():void {
     }
     //Nuttin honey
     outputText("\n\n");
-    if (monster.lust >= monster.maxLust()) {
+    if (monster.lust >= monster.maxOverLust()) {
         doNext(endLustVictory);
         return;
     }
@@ -13154,8 +13151,7 @@ public function VampiricBite():void {
     if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
     damage = Math.round(damage);
     doPhysicalDamage(damage, true, true);
-    player.HP += damage;
-    if (player.HP > player.maxHP()) player.HP = player.maxHP();
+    EngineCore.HPChange(damage, false);
     outputText(" damage. You feel yourself grow stronger with each drop. ");
     var thirst:VampireThirstEffect = player.statusEffectByType(StatusEffects.VampireThirst) as VampireThirstEffect;
     if (player.perkv1(IMutationsLib.HollowFangsIM) >= 4) thirst.drink(3);

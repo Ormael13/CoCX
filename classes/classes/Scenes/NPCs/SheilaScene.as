@@ -3003,7 +3003,7 @@ private function sheilaForcedOralGeneric():void {
 	else outputText("and she pets your head affectionately as her walls squeeze your tongue.  \"<i>Oh, mate...</i>\" she whispers lovingly, completely forgetting the struggle that led to your tryst.");
 	if(player.tongue.type > Tongue.HUMAN) fatigue(15);
 	dynStats("lus", player.lib/3+30, "scale", false);
-	if(player.lust >= player.maxLust()) dynStats("lib", 1);
+	if(player.lust >= player.maxOverLust()) dynStats("lib", 1);
 
 	if(player.cor >= 90 && sheilaCorruption() >= 90) {
 		outputText("\n\nYou could finish what you've started and fully corrupt the woman. Are you ready?")
@@ -3630,7 +3630,7 @@ private function askDemonSheilaAboutDahChange():void {
 		outputText("\n\n\"<i>How can I say this?  It felt... monumental.  As I came with you, all my cares slipped away.</i>\"  [sheilaname] lowers a hand to her crotch and begins to tease herself");
 		if(player.hasCock()) outputText(", and you feel a monument of your own being erected");
 		outputText(".  \"<i>Every squeeze of my pussy compressed my focus, too, until my mind was clearer than the juice you made me flow with.  I realized my purpose there, with you.</i>\"");
-		outputText("\n\nYou raise an eyebrow at that.  [sheilaname] smiles and explains, \"<i>Strange to say, but the captain was right.  My purpose in life really is to fuck.  When you and I were together, I forgot about all the whining, the unimportant nagging that was dumped on me all my life.  The digging, the worrying, the hiding... it never mattered.  Any of it.  You were what made that clear for me; having you is what I care about.</i>\"  She blows you a kiss.  \"<i>So... we could do something real, if you like.</i>\"");
+		outputText("\n\nYou raise an eyebrow at that.  [sheilaname] smiles and explains, \"<i>Strange to say, but the captain was right.  My purpose in life really is to fuck.  When you and I were together, I forgot about all the whining, the unimportant nagging that was dumped on me all my life.  The digging, the worrying, the hiding... it never mattered.  Any of it.  You were what has made that clear for me; having you is what I care about.</i>\"  She blows you a kiss.  \"<i>So... we could do something real, if you like.</i>\"");
 	}
 	//(else if sheilacite <= -1)
 	else if(flags[kFLAGS.SHEILA_CITE] <= -1) {
@@ -3740,7 +3740,7 @@ private function talkToDemonSheilaAboutWhatNow():void {
 private function demonSheilaTalkAnotherQuestion():void {
 	clearOutput();
 	//(if lust <=99)
-	if(player.lust < player.maxLust()) {
+	if(player.lust < player.maxOverLust()) {
 		outputText("[sheilaname] reaches farther down, ");
 		//(cock)
 		if(player.hasCock()) outputText("slipping more of her finger and thumb around your penis");
@@ -4628,7 +4628,7 @@ private function jojoRuinsTheAnalHateFuck(clear:Boolean = true):void {
 	outputText("\n\nSmiling grimly, you leave the wet sounds of sex behind you, wondering if Jojo will ever come when you call again.");
 	
 	//set lust to 100, huge corruption gain (like it matters), set sheilapreg to -3 and disable Jojo unless and until new corrupted content is written to reflect changes
-	dynStats("lus=", player.maxLust(), "cor", 10, "scale", false);
+	dynStats("lus=", player.maxOverLust(), "cor", 10, "scale", false);
 	flags[kFLAGS.SHEILA_DISABLED] = 4;
 	flags[kFLAGS.JOJO_DEAD_OR_GONE] = 1;
     if (CoC.instance.inCombat)
