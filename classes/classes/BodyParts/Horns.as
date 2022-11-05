@@ -199,7 +199,7 @@ public class Horns extends BodyPart {
 		appearanceDescFunc: function(player: *): String {
 			var desc: String = "";
 
-			if (player.horns.count < 3) desc += "A pair of tiny horns-like nub protrude from your forehead, resembling the horns of the young bicorns.";
+			if (player.horns.count < 3) desc += "A pair of tiny horns-like nubs protrude from your forehead, resembling the horns of the young bicorns.";
 			if (player.horns.count >= 3 && player.horns.count < 6) desc += "Two moderately sized horns grow from your forehead, similar in size to those on a young bicorn.";
 			if (player.horns.count >= 6 && player.horns.count < 12) desc += "Two large horns sprout from your forehead, spiraling and pointing forwards like those of a bicorn.";
 			if (player.horns.count >= 12 && player.horns.count < 20) desc += "Two very large and dangerous looking spiraling horns sprout from your forehead, pointing forward and over a foot long. They have dangerous looking tip.";
