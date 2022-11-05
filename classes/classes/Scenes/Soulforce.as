@@ -296,7 +296,7 @@ public class Soulforce extends BaseContent
 			addButton(i, stages[i][0], bodycultivationSubPathChosen, stages[i][1], stages[i][2], (i + 1) * 2)
 				.disableIf(!player.hasItem(stages[i][2], 2) || !player.hasItem(useables.BTSOLUTION, (i + 1) * 2),
 					"Requires 2 bottles" + (stages[i][2] as ItemType).longName.substr(8)
-					+ " and 2 vials" + useables.BTSOLUTION.longName.substr(6))
+					+ " and " + ((i + 1) * 2) + " vials" + useables.BTSOLUTION.longName.substr(6))
 				.disableIf(!player.hasPerk(stages[i][3]), "Requires perk: " + (stages[i][3] as PerkType).name())
 				.disableIf(player.hasPerk(stages[i][1]), "You have already reached this stage.");
 		addButton(14, "Back", SubPaths);

@@ -8344,7 +8344,8 @@ public class Combat extends BaseContent {
 				if (player.statStore.hasBuff("Crossed Holy Band")) bleed *= 0.5;
                 bleed *= player.HP;
                 bleed = player.takePhysDamage(bleed);
-                outputText("<b>You gasp and wince in pain, feeling fresh blood pump from your wounds. ");
+                outputText("<b>You gasp and wince in pain, feeling fresh blood pump from your wounds.</b>"
+                    + "");
                 CommasForDigits(bleed);
                 outputText("[pg]");
             }

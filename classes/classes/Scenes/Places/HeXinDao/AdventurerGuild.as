@@ -705,6 +705,7 @@ public class AdventurerGuild extends HeXinDaoAbstractContent implements Saveable
 						if (Slot03 >= 2) Slot03 -= 2;
 						else player.destroyItems(useables.MINOHOR, 2);
 						inventory.takeItem(consumables.TCLEAVE, BoardkeeperYangQuest);
+						return;
 					}
 					else outputText("\"<i>Hey [name], I counted those horns and clearly you forgot a few. Get out there and bring me the remaining ones.</i>\"\n\n");
 				}

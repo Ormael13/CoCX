@@ -2022,38 +2022,37 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (!player.statStore.hasBuff('DrugInjector')) {
 					if (player.hasKeyItem("Drug injectors") >= 0){
 						outputText("\nYou can feel the chemicals pumped in by your gadgets resume working.\n");
-
-						player.statStore.replaceBuffObject({'sens':5,'lib.mult':0.25},'DrugInjector',{text:'Drug injectors'})
+						player.statStore.replaceBuffObject({'sens':5,'lib.mult':0.25},'DrugInjector',{text:'Drug injectors'});
+						needNext = true;
 					}
 					if (player.hasKeyItem("Improved Drug injectors") >= 0){
 						outputText("\nYou can feel the chemicals pumped in by your gadgets resume working.\n");
-
-						player.statStore.replaceBuffObject({'sens':10,'lib.mult':0.50},'DrugInjector',{text:'Improved Drug injectors'})
+						player.statStore.replaceBuffObject({'sens':10,'lib.mult':0.50},'DrugInjector',{text:'Improved Drug injectors'});
+						needNext = true;
 					}
 					if (player.hasKeyItem("Potent Drug injectors") >= 0){
 						outputText("\nYou can feel the chemicals pumped in by your gadgets resume working.\n");
-
-						player.statStore.replaceBuffObject({'sens':15,'lib.mult':0.75},'DrugInjector',{text:'Potent Drug injectors'})
+						player.statStore.replaceBuffObject({'sens':15,'lib.mult':0.75},'DrugInjector',{text:'Potent Drug injectors'});
+						needNext = true;
 					}
 				}
 					else {
 					if (player.hasKeyItem("Power bracer") >= 0) {
 						outputText("\nYou can feel the chemicals pumped in by your gadgets resume working.\n");
-
-						player.statStore.replaceBuffObject({'sens':5,'str.mult':0.50},'Power bracer',{text:'Power bracer'})
+						player.statStore.replaceBuffObject({'sens':5,'str.mult':0.50},'Power bracer',{text:'Power bracer'});
+						needNext = true;
 					}
 					if (player.hasKeyItem("Powboy") >= 0) {
 						outputText("\nYou can feel the chemicals pumped in by your gadgets resume working.\n");
-
-						player.statStore.replaceBuffObject({'sens':10,'str.mult':0.75},'Power bracer',{text:'Powboy'})
+						player.statStore.replaceBuffObject({'sens':10,'str.mult':0.75},'Power bracer',{text:'Powboy'});
+						needNext = true;
 					}
 					if (player.hasKeyItem("M.G.S. bracer") >= 0) {
 						outputText("\nYou can feel the chemicals pumped in by your gadgets resume working.\n");
-
-						player.statStore.replaceBuffObject({'sens':15,'str.mult':1},'Power bracer',{text:'M.G.S. bracer'})
+						player.statStore.replaceBuffObject({'sens':15,'str.mult':1},'Power bracer',{text:'M.G.S. bracer'});
+						needNext = true;
 					}
 				}
-				needNext = true;
 			}
 			//Cow bell
 			if (player.necklace == necklaces.COWBELL && player.isRaceCached(Races.COW) && !player.statStore.hasBuff('Cow bell')) player.statStore.replaceBuffObject({'str.mult':0.2, 'lib.mult':0.2}, 'Cow bell', { text: 'Cow bell' });
