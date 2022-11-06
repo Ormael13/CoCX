@@ -332,7 +332,7 @@ public class Combat extends BaseContent {
     }
 
     public function maxCurrentAttacks():int {
-        if (player.weaponSpecials("Staff") || player.weaponSpecials("Wand") || player.weaponSpecials("Massive")) return 1;
+        if (player.weaponSpecials("Staff") || player.weaponSpecials("Wand")) return 1;
         else return player.calculateMultiAttacks();
     }
 
@@ -4560,7 +4560,7 @@ public class Combat extends BaseContent {
                 HPChange(player.maxHP()*0.25,false);
             }
             if (player.faceType == Face.SHARK_TEETH || player.faceType == Face.ORCA) biteMultiplier = 2.0;
-            if (player.faceType == Face.SHARK_TEETH || player.faceType == Face.VAMPIRE) {
+            if ((player.faceType == Face.SHARK_TEETH || player.faceType == Face.VAMPIRE) && !monster.isImmuneToBleed()) {
                 outputText(" and drawing blood out.");
                 if (!monster.hasStatusEffect(StatusEffects.SharkBiteBleed)) monster.createStatusEffect(StatusEffects.SharkBiteBleed,15,0,0,0);
                 else {
@@ -5522,6 +5522,10 @@ public class Combat extends BaseContent {
                         damage = Math.round(damage * darkDamage);
                         doDarknessDamage(damage, true, true);
                     }
+                    else if (player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+						doPhysicalDamage(damage, true, true);
+                        doLightingDamage(Math.round(damage * 0.2), true, true);
+					}
                     else if (player.weapon == weapons.MGSWORD)
                         doMagicDamage(damage, true, true);
                     else if (player.weapon == weapons.MCLAWS)
@@ -11808,7 +11812,7 @@ public function StraddleTease():void {
         if (player.isLiliraune()) TeaseFunctionList.push(RandomTeaseLiliraune);
         else TeaseFunctionList.push(RandomTeaseAlraune);
     }
-    if (player.rearBody.type == RearBody.DISPLACER_TENTACLES) TeaseFunctionList.push(RandomTeaseDisplacerMilkingInitiate);
+    if (player.rearBody.type == RearBody.DISPLACER_TENTACLES && !monster.hasPerk(PerkLib.EnemyConstructType)) TeaseFunctionList.push(RandomTeaseDisplacerMilkingInitiate);
     if (player.lowerBody == LowerBody.GOO){
         TeaseFunctionList.push(RandomTeaseSlime);
         TeaseFunctionList.push(RandomTeaseSlimeInsert);

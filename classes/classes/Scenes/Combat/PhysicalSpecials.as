@@ -3280,7 +3280,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		doDamage(damage);
 		var multikulti:String = (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType)) ? "s" : "";
 		outputText("You swipe the field with your axe-bladed tail, slicing your foe" + multikulti + ", dealing <b><font color=\"#800000\">" + damage + "</font></b> damage!");
-		if (!monster.hasPerk(PerkLib.EnemyConstructType)) {
+		if (!monster.isImmuneToBleed()) {
 			outputText(" The attack leaves your target" + multikulti + " bleeding from deep wounds!");
 			if (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType)) monster.createStatusEffect(StatusEffects.SharkBiteBleed, 2, 5, 0, 0);
 			monster.createStatusEffect(StatusEffects.SharkBiteBleed, 2, 0, 0, 0);
