@@ -540,7 +540,7 @@ import classes.room;
 			if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) {
 				var item:Vehicles;
 				item = vehicles.GOBMPRI;
-				outputText("You decide to haul it back home and call on the walkie talkie system in your mech to tell your daughters to come and pick it up for you. It should be at camp the next time you're there and ready to install any and all upgrades you already own.");
+				outputText("You decide to haul it back home and call on the walkie-talkie system in your mech to tell your daughters to come and pick it up for you. It should be at camp the next time you're there and ready to install any and all upgrades you already own.");
 				flags[kFLAGS.D3_GOBLIN_MECH_PRIME] = 1;
 				inventory.takeItem(item, playerMenu);
 			}

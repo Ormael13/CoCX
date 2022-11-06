@@ -5,6 +5,8 @@ import classes.GlobalFlags.*;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
+import coc.view.CoCButton;
+
 public class JojoScene extends NPCAwareContent implements TimeAwareInterface {
 
 		public var pregnancy:PregnancyStore;
@@ -1994,6 +1996,15 @@ public function refuseJojosApology():void
 	lowCorruptionIntro();
 }
 
+private function rapeButton(btn:int, camp:Boolean):CoCButton {
+	return addButton(btn, "Rape", camp ? jojoAtCampRape : jojoRape)
+		.hint("Rape the poor monk." + (player.cor < 50 ? "  Why would you do that?": ""))
+		.disableIf(player.lust < 33, "Not horny enough.")
+		.disableIf(player.cor < 33, "You're not corrupted enough to betray your friend.")
+		.disableIf(player.isGenderless(), "You're genderless...")
+		.disableIf(flags[kFLAGS.DISABLED_JOJO_RAPE], "You can just ask him nicely.");
+}
+
 //Intro
 public function lowCorruptionIntro():void
 {
@@ -2013,7 +2024,6 @@ public function lowCorruptionIntro():void
 	menu();
 	addButton(0, "Meditate", meditateInForest); // OH GOD NO SEND HELP
 	addButton(1, "Leave", camp.returnToCampUseOneHour);
-	if (player.cor > 10 && player.lust >= 33 && player.gender > 0 && flags[kFLAGS.DISABLED_JOJO_RAPE] <= 0 && monk >= 0) addButton(4, "Rape", jojoRape).hint("Rape the poor monk mouse-morph." + (player.cor < 50 ? "  Why would you do that?": ""));
 }
 
 public function highCorruptionJojoEncounter():void {
@@ -2027,7 +2037,7 @@ public function highCorruptionJojoEncounter():void {
 	menu();
     addButton(0, "Accept", SceneLib.jojoScene.meditateInForest);
     addButton(1, "Decline", camp.returnToCampUseOneHour);
-    if (player.cor > 10 && player.lust >= 33 && player.gender > 0 && flags[kFLAGS.DISABLED_JOJO_RAPE] <= 0 && monk >= 0) addButton(2, "Rape", SceneLib.jojoScene.jojoRape).hint("Rape the poor monk mouse-morph." + (player.cor < 50 ? "  Why would you do that?" : ""));
+	rapeButton(2, false);
 }
 
 //Repeat encounter
@@ -2041,7 +2051,7 @@ public function repeatJojoEncounter():void {
 		menu();
         addButton(0, "Meditate", SceneLib.jojoScene.meditateInForest);
         addButton(1, "Purge", SceneLib.jojoScene.wormRemoval).hint("Request him to purge the worms from your body.");
-        if (player.gender > 0 && flags[kFLAGS.DISABLED_JOJO_RAPE] == 0 && player.lust >= 33) addButton(2, "Rape", SceneLib.jojoScene.jojoRape).hint("Rape the poor monk mouse-morph." + (player.cor < 25 ? "  Why would you do that?" : ""));
+		rapeButton(2, false);
         addButton(4, "Leave", camp.returnToCampUseOneHour);
 		return;
 	}
@@ -2050,7 +2060,7 @@ public function repeatJojoEncounter():void {
 	//Choices time!
 	menu();
     doYesNo(SceneLib.jojoScene.meditateInForest, camp.returnToCampUseOneHour);
-    if (player.gender > 0 && player.lust >= 33 && flags[kFLAGS.DISABLED_JOJO_RAPE] == 0) addButton(2, "Rape", SceneLib.jojoScene.jojoRape).hint("Rape the poor monk mouse-morph." + (player.cor < 25 ? "  Why would you do that?" : ""));
+	rapeButton(2, false);
 }
 
 public function corruptJojoEncounter():void {
@@ -2179,7 +2189,8 @@ public function jojoCamp():void {
 			outputText("You walk up to the boulder where Jojo usually sits, and see him sitting cross-legged with his eyes closed.  He seems to be deep in meditation, but when you approach his eyes open suddenly and he gets up appearing slightly distressed, \"<i>Uh... [name], I can feel a bit of corruption within you.  It is not much, but I think you should be concerned about it before it gets out of hand and you do something you might regret.  If you want to I'd be happy to meditate with you as you rid yourself of it.</i>\" he offers with a concerned look on his face.\n\n");
 		}
 		outputText("Do you accept Jojo's help?\n\n");
-		simpleChoices("Yes", acceptOfferOfHelp, "No", refuseOfferOfHelp, "", null, "", null, "Rape", (player.lust >= 33 && player.gender > 0 && monk >= 0 ? jojoAtCampRape : null));
+		doYesNo(acceptOfferOfHelp, refuseOfferOfHelp);
+		rapeButton(4, true);
 	}
 	else { //Normal shit
 		if (player.cor > 10)
@@ -2213,9 +2224,9 @@ private function jojoCampMenu():void {
 	addButton(3, "Meditate", jojoFollowerMeditate);
 	addButton(4, jojoDefense, jojoDefenseToggle).hint((player.hasStatusEffect(StatusEffects.JojoNightWatch) ? "Request him to stop guarding the camp.": "Request him to guard the camp at night."));
 	if (player.hasStatusEffect(StatusEffects.Infested)) addButton(5, "Purge", wormRemoval).hint("Request him to purge the worms from your body.");
-	if (player.cor > 10 && player.lust >= 33 && player.gender > 0 && flags[kFLAGS.DISABLED_JOJO_RAPE] <= 0) addButton(8, "Rape", jojoAtCampRape).hint("Rape the poor monk mouse-morph." + (player.cor < 25 ? "  Why would you do that?": ""));
 	if (player.lust >= 33 && monk <= -3)
         addButton(8, "Sex", pureJojoSexMenu).hint("Initiate sexy time with the mouse-morph.");
+	else rapeButton(8, true);
 	addButton(14, "Leave", camp.campFollowers);
 }
 
