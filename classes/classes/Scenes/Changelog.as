@@ -346,7 +346,7 @@ public class Changelog extends BaseContent
 			outputText("-Smol bugfix to nat metamorph auto-proccing + facemem typo (Jtex)\n");
 			outputText("-Tidarion now deals fire damage properly. Gargoyle force impregnation behaviour fixed. Ant venom damage changed to be acid. Added Phylla to Soulsense. Added short hints for egg colors. (Svalkash)\n");
 			outputText("-Fixed some recent bugs and typos from Discord (Svalkash)\n");
-			outputText("-SH:Other - makes Corruption Tolerance twice as effective (Svalkash)\n");
+			outputText("-SH:Other - makes Corruption Tolerance twice as effective. The cabin doesn't disable imp attacks anymore. You still can build a wall or something else though. Disables Raphael dress timer - you can't fail his date by not wearing it. (Svalkash)\n");
 			outputText("-Reworked Masteries / Multi melee attacks. Consolidated all masteries together. Disabled all Multi-Attack perks - You earn multi-attacks via weapon masteries now. (khovel)\n");
 			outputText("-Small weapons mastery opens new mutliattack option at mastery 10, 20, 30 and 40. Normal weapons mastery at 10, 25, 40. Large weapons mastery at 15 and 30. Massive weapons mastery at 30.\n");
 			outputText("-Asura Form wouldn't add 2x/3x more attacks that are displayed seperatly but would instead increase by equal amount damage of attack. I think certain Goat would be happy on this.\n");

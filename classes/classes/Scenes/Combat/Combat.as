@@ -5291,7 +5291,6 @@ public class Combat extends BaseContent {
         var masteryXPNatural:Number = baseMasteryXP * (hit - crit);
         var meleeMasteryEXPgains:Number = masteryXPCrit + masteryXPNatural;
 
-
         if (player.isGauntletWeapon()) gauntletXP(meleeMasteryEXPgains);
         if (player.isSwordTypeWeapon()) swordXP(meleeMasteryEXPgains);
         if (player.isAxeTypeWeapon()) axeXP(meleeMasteryEXPgains);
@@ -5305,7 +5304,6 @@ public class Combat extends BaseContent {
         if (player.weaponSpecials("Dual Small")) dualWieldSmallXP(meleeMasteryEXPgains);
         if (player.weaponSpecials("Dual")) dualWieldNormalXP(meleeMasteryEXPgains);
         if (player.weaponSpecials("Dual Large")) dualWieldLargeXP(meleeMasteryEXPgains);
-
 
         if ((player.weaponName == "fists" && player.haveNaturalClaws()) || player.weaponName == "fists") feralCombatXP(meleeMasteryEXPgains);
         else if (player.weaponSpecials("Dual Small") || player.weaponSpecials("Small")) weaponSmallMastery(meleeMasteryEXPgains);
@@ -5963,7 +5961,7 @@ public class Combat extends BaseContent {
                 meleeMasteryGain(hitCounter, critCounter);
                 return;
             }
-			if (i > 1 && flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 1) {
+			if (i > 1 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] > 0) {
 				if (player.fatigue + 50 > player.maxFatigue()) i = flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] + 1;
 				else fatigue(50);
 			}
