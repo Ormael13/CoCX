@@ -4029,7 +4029,7 @@ public final class Mutations extends MutationsHelper {
         }
         //SEXYTIEMS
         //Multidick killa!
-        if (player.cocks.length > 1 && rand(3) == 0 && changes < changeLimit) {
+        if (player.cocks.length > 1 && rand(3) == 0 && changes < changeLimit && !flags[kFLAGS.HYPER_HAPPY]) {
             outputText("[pg]");
             player.killCocks(1);
             changes++;

@@ -24,6 +24,10 @@ public function Raphael() {
 
 private var checkedRussetRogue:int;
 
+public function get dressTimerDisabled():Boolean {
+	return sceneHunter.other;
+}
+
 //Implementation of TimeAwareInterface
 public function timeChange():Boolean {
     checkedRussetRogue = 0; //Make sure we test just once in timeChangeLarge
@@ -51,7 +55,7 @@ public function timeChangeLarge():Boolean {
                         return true;
                     }
                     //Dress followup - Call picnic date prologue!
-                    if (player.armor == armors.R_BDYST && (flags[kFLAGS.RAPHAEL_DRESS_TIMER] > 1 && flags[kFLAGS.RAPHAEL_DRESS_TIMER] <= 4 || flags[kFLAGS.RAPHAEL_DRESS_TIMER] == -1)) {
+                    if (player.armor == armors.R_BDYST && flags[kFLAGS.RAPHAEL_DRESS_TIMER] > 1 && flags[kFLAGS.RAPHAEL_DRESS_TIMER] <= 4) {
                         outputText("<b>\nSomething unusual happens that morning...</b>\n");
                         doNext(RaphaelEncounterIIDressFollowup);
                         return true;
@@ -67,8 +71,12 @@ public function timeChangeLarge():Boolean {
                 //Dress countdown - if pc isn't wearing it yet, kick out to
                 //Finale!
                 if (flags[kFLAGS.RAPHAEL_DRESS_TIMER] == 1) {
-                    flags[kFLAGS.RAPHAEL_DRESS_TIMER] = -1;
-                    flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] = 7;
+					if (sceneHunter.other) flags[kFLAGS.RAPHAEL_DRESS_TIMER] = 4; //reset to nice state
+					else {
+						// date is dead, skip to the ending
+						flags[kFLAGS.RAPHAEL_DRESS_TIMER] = -1;
+						flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] = 7;
+					}
                 }
                 //PC get ready for the 2nd encounter and hasn't been
                 //shot down yet?
@@ -337,20 +345,12 @@ private function RaphaelDressPtII():void {
 	inventory.takeItem(armors.R_BDYST, playerMenu);
 }
 
-/*DRESS HERE
-Descriptive: A high society bodysuit. It is as easy to mistake it for ballroom apparel as it is for boudoir lingerie. The thin transparent fabric is so light and airy that it makes avoiding blows a second nature.
-Optional:
-Multiplies evasion ratings. It has crap armor rating.
-~~~*/
-
 
 private function RaphaelEncounterIIDressFollowup():void {
 	//{Encounter two}
 	//{Requirement: PC is wearing High society bodysuit.
 	//Sequence: When PC wakes up the next day.})
 	flags[kFLAGS.RAPHAEL_SECOND_DATE] = 1;
-	//Clear dress countdown.  Its over and done with.
-	flags[kFLAGS.RAPHAEL_DRESS_TIMER] = -1;
 	clearOutput();
     spriteSelect(SpriteDb.s_raphael);
 	if (camp.IsSleeping){
@@ -375,6 +375,8 @@ private function RaphaelEncounterIIDressFollowup():void {
 		flags[kFLAGS.RAPHAEL_DISGUSTED_BY_PC_APPEARANCE] = 0;
 		//[Reject] [Frisk] [Date]
 		simpleChoices("Reject", RaphaelChooseReject, "Frisk", RaphaelChooseFrisk, "Date", RaphaelSelectDate, "", null, "", null);
+		//Clear dress countdown.  Its over and done with.
+		flags[kFLAGS.RAPHAEL_DRESS_TIMER] = -1;
 	}
 	//({If player does not meet the first encounter requirements:}
 	else {
@@ -414,6 +416,7 @@ private function RaphaelEncounterIIDressFollowup():void {
 		doNext(playerMenu);
 		flags[kFLAGS.RAPHAEL_DISGUSTED_BY_PC_APPEARANCE] = 1;
 		//7 days to fix or done with!
+		flags[kFLAGS.RAPHAEL_SECOND_DATE] = 7;
 	}
 }
 

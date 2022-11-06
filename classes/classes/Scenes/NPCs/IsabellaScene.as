@@ -134,8 +134,10 @@ public function isabellaGreeting():void {
 		if(player.hasStatusEffect(StatusEffects.Marble)) outputText("She's like Marble - she has a human face with horns and cow-like ears.");
 		else outputText("She has a human face, but the top of her head is also adorned with a pair of stubby, bovine horns and floppy cow-ears.");
 		outputText("  Her skin is tanned dark, practically milk-chocolate brown, but a few rounded spots of white, pearly skin break up the uniformity.  The cow-girl is wearing a diaphanous silk shirt supported by a black leather corset and red lace.  She also wears a plain, olive-toned skirt that barely protects her modesty, and nearly fails in its purpose with every subtle breeze.  Her wide hips flare into spacious thighs before disappearing under a layer of shaggy, auburn fur that grows thicker and thicker the closer it gets to her hooves.\n\n");
+		sceneHunter.print("And here go some tallness checks. Not that they block anything, but being taller or shorter than 6'6\" may open some nice scene variations.");
 		//(tall PC's 6'6</i>\"+)
 		if(player.tallness > 78) {
+			sceneHunter.print("Check failed... or not? You're taller than she <i>usually</i> likes.");
 			outputText("The cow-girl narrows her eyebrows in irritation as she sizes up your impressively large form.  She speaks with a strange accent, \"<i>Who are you and vat are you doing here?</i>\"\n\n");
 			outputText("You answer and begin to explain yourself, but she interrupts, \"<i>Get out!  Zis is mein camp and I vill not tolerate you here!</i>\"\n\n");
 			outputText("A bit taken aback by her violent reaction, you blink in confusion as she pulls a titanic shield from behind her chair and slides her arm comfortably into the strap.  What do you do?\n\n");
@@ -164,6 +166,7 @@ public function isabellaGreeting():void {
 	}
 	//Camp Meeting – Repeat Unwelcome
 	else if(player.tallness > 78 && flags[kFLAGS.ISABELLA_OKAY_WITH_TALL_FOLKS] == 0) {
+		sceneHunter.print("Check failed... or not? You're taller than she <i>usually</i> likes.");
 		outputText("You stumble through the grass, nearly tripping as it parts to reveal the now-familiar sight of Isabella's camp.  The cow-girl spots you instantly and snarls, \"<i>Begone!  I varned you once already!</i>\"");
         isabellaFollowerScene.isabellaAffection(-5);
 		//[Talk] [Fight] [Leave]
@@ -195,6 +198,7 @@ public function isabellaGreeting():void {
 	}
 	//Camp Meeting – Welcomed Short but Not Tall
 	else if(flags[kFLAGS.ISABELLA_MET_SHORT_PC] > 0 && flags[kFLAGS.ISABELLA_OKAY_WITH_TALL_FOLKS] == 0 && player.tallness > 78) {
+		sceneHunter.print("Check failed... or not? You're taller than she <i>usually</i> likes.");
 		outputText("You easily brush through the tall grasses and stride into Isabella the cow-girl's camp.  It looks like she was sitting in her chair mending a blanket when you arrived, and you take a moment to watch her hunched posture squeeze her breasts tightly against the gauzy silk top she's so fond of wearing.  The outline of a single areola is clearly visible through the diaphanous material, but most striking is that each areola has four VERY prominent nipple-tips.  She looks at you, first in fright, and then in embarrassment as she recognizes you AND realizes what you were doing in a single instant.\n\n");
 		//(+lust!)
 		dynStats("lus", 10+rand(10), "scale", false);
@@ -316,6 +320,7 @@ public function nomOnMommaIzzysTits():void {
 	var x:Number = player.cockThatFits(20);
 	//[Voluntary Nursing – PC is a big one or taur]
 	if(player.tallness > 78 || player.isTaur()) {
+		sceneHunter.print("Check failed... or not? You're taller than she <i>usually</i> likes.");
 		outputText("Isabella's face lights up when you let her know that you could use a drink.  She grabs one of her blankets from atop a chest and throws it out over the ground.  The fabric of her intricately-patterned spread settles over the dirt, amazing you with its quality and size.  It's well over 10 feet from edge to edge and does a fantastic job of making the patch of dirt feel a lot more comfortable.  The busty cow-girl walks onto it, almost like a carpet, but then she lies down on her side and begins casually unlacing the red cord from her black corset.  Her mountainous mammaries wobble dangerously with each tug, and then she's tossing the corset aside.  With it out of the way, there's nothing between you and the cow-girl's glistening, sun-kissed skin except for a gauzy layer of silk.\n\n");
 
 		outputText("You approach, salivating slightly in anticipation of the taste of the cow-girl's milk and unintentionally growing more and more aroused by her 'concealed' and yet totally exposed breasts.  ");

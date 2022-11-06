@@ -21,7 +21,7 @@ import classes.Scenes.Dungeons.BeeHive.TheCorruptedHandmaidens;
 		
 		public function enterDungeon():void {
 			inDungeon = true;
-			if (flags[kFLAGS.DISCOVERED_BEE_HIVE_DUNGEON] < 2.75) room1Pass();
+			if (flags[kFLAGS.DISCOVERED_BEE_HIVE_DUNGEON] < 2.75 && flags[kFLAGS.TIFA_FOLLOWER] <= 5) room1Pass();
 			else room1South();
 		}
 		
