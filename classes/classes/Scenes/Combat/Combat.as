@@ -332,7 +332,7 @@ public class Combat extends BaseContent {
     }
 
     public function maxCurrentAttacks():int {
-        if (player.weaponSpecials("Staff") || player.weaponSpecials("Wand") || player.weaponSpecials("Massive")) return 1;
+        if (player.weaponSpecials("Staff") || player.weaponSpecials("Wand")) return 1;
         else return player.calculateMultiAttacks();
     }
 
@@ -4560,7 +4560,7 @@ public class Combat extends BaseContent {
                 HPChange(player.maxHP()*0.25,false);
             }
             if (player.faceType == Face.SHARK_TEETH || player.faceType == Face.ORCA) biteMultiplier = 2.0;
-            if (player.faceType == Face.SHARK_TEETH || player.faceType == Face.VAMPIRE) {
+            if ((player.faceType == Face.SHARK_TEETH || player.faceType == Face.VAMPIRE) && !monster.isImmuneToBleed()) {
                 outputText(" and drawing blood out.");
                 if (!monster.hasStatusEffect(StatusEffects.SharkBiteBleed)) monster.createStatusEffect(StatusEffects.SharkBiteBleed,15,0,0,0);
                 else {
@@ -5291,7 +5291,6 @@ public class Combat extends BaseContent {
         var masteryXPNatural:Number = baseMasteryXP * (hit - crit);
         var meleeMasteryEXPgains:Number = masteryXPCrit + masteryXPNatural;
 
-
         if (player.isGauntletWeapon()) gauntletXP(meleeMasteryEXPgains);
         if (player.isSwordTypeWeapon()) swordXP(meleeMasteryEXPgains);
         if (player.isAxeTypeWeapon()) axeXP(meleeMasteryEXPgains);
@@ -5305,7 +5304,6 @@ public class Combat extends BaseContent {
         if (player.weaponSpecials("Dual Small")) dualWieldSmallXP(meleeMasteryEXPgains);
         if (player.weaponSpecials("Dual")) dualWieldNormalXP(meleeMasteryEXPgains);
         if (player.weaponSpecials("Dual Large")) dualWieldLargeXP(meleeMasteryEXPgains);
-
 
         if ((player.weaponName == "fists" && player.haveNaturalClaws()) || player.weaponName == "fists") feralCombatXP(meleeMasteryEXPgains);
         else if (player.weaponSpecials("Dual Small") || player.weaponSpecials("Small")) weaponSmallMastery(meleeMasteryEXPgains);
@@ -5524,6 +5522,10 @@ public class Combat extends BaseContent {
                         damage = Math.round(damage * darkDamage);
                         doDarknessDamage(damage, true, true);
                     }
+                    else if (player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+						doPhysicalDamage(damage, true, true);
+                        doLightingDamage(Math.round(damage * 0.2), true, true);
+					}
                     else if (player.weapon == weapons.MGSWORD)
                         doMagicDamage(damage, true, true);
                     else if (player.weapon == weapons.MCLAWS)
@@ -5963,7 +5965,7 @@ public class Combat extends BaseContent {
                 meleeMasteryGain(hitCounter, critCounter);
                 return;
             }
-			if (i > 1 && flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 1) {
+			if (i > 1 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] > 0) {
 				if (player.fatigue + 50 > player.maxFatigue()) i = flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] + 1;
 				else fatigue(50);
 			}
@@ -11810,7 +11812,7 @@ public function StraddleTease():void {
         if (player.isLiliraune()) TeaseFunctionList.push(RandomTeaseLiliraune);
         else TeaseFunctionList.push(RandomTeaseAlraune);
     }
-    if (player.rearBody.type == RearBody.DISPLACER_TENTACLES) TeaseFunctionList.push(RandomTeaseDisplacerMilkingInitiate);
+    if (player.rearBody.type == RearBody.DISPLACER_TENTACLES && !monster.hasPerk(PerkLib.EnemyConstructType)) TeaseFunctionList.push(RandomTeaseDisplacerMilkingInitiate);
     if (player.lowerBody == LowerBody.GOO){
         TeaseFunctionList.push(RandomTeaseSlime);
         TeaseFunctionList.push(RandomTeaseSlimeInsert);

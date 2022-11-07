@@ -346,7 +346,7 @@ public class Changelog extends BaseContent
 			outputText("-Smol bugfix to nat metamorph auto-proccing + facemem typo (Jtex)\n");
 			outputText("-Tidarion now deals fire damage properly. Gargoyle force impregnation behaviour fixed. Ant venom damage changed to be acid. Added Phylla to Soulsense. Added short hints for egg colors. (Svalkash)\n");
 			outputText("-Fixed some recent bugs and typos from Discord (Svalkash)\n");
-			outputText("-SH:Other - makes Corruption Tolerance twice as effective (Svalkash)\n");
+			outputText("-SH:Other - makes Corruption Tolerance twice as effective. The cabin doesn't disable imp attacks anymore. You still can build a wall or something else though. Disables Raphael dress timer - you can't fail his date by not wearing it. (Svalkash)\n");
 			outputText("-Reworked Masteries / Multi melee attacks. Consolidated all masteries together. Disabled all Multi-Attack perks - You earn multi-attacks via weapon masteries now. (khovel)\n");
 			outputText("-Small weapons mastery opens new mutliattack option at mastery 10, 20, 30 and 40. Normal weapons mastery at 10, 25, 40. Large weapons mastery at 15 and 30. Massive weapons mastery at 30.\n");
 			outputText("-Asura Form wouldn't add 2x/3x more attacks that are displayed seperatly but would instead increase by equal amount damage of attack. I think certain Goat would be happy on this.\n");
@@ -367,11 +367,11 @@ public class Changelog extends BaseContent
 			outputText("-Meditation would remove 20% of max lust instead of 50.\n");
 			outputText("-New Necklace (by Liadri): Leaf Amulet - buyable at Kaiba shop. Costs 4,500 gems. Increase white magic damage and evasion by 10%. (Effect doubled for elves) Decrease spells cooldown by 1 turn if used by elf.\n");
 			outputText("-Kath 'Get Help' locks her random encounters. Still can be recruited after that Scylla scene. Added first SexMachine use to Recall menu. Marble purification quest doesn't check your or your followers' corruption anymore. (Svalkash)\n");
+			outputText("-Golem enemies won't be affected by displacer beast tentacle move causing milking enemy. Feral combat attack part with biting enemy won't cause bleed on enemeis immune to bleed.\n");
+			outputText("-Using charge weapon spell would add lightning dmg equal to 20% of phys dmg weapon dealing on attack. Now you can hurt all those pesky immune to physical damage enemies ;)\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-\n");//Multiattacks aren't costless now. All normal sized and larger weapons req. 50 wrath per attack beyond 1st and others 50 fatigue. If PC lacks wrath or fatigue it would only reduce in that turn amount of multiattacks.
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
