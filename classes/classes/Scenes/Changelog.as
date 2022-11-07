@@ -206,7 +206,7 @@ public class Changelog extends BaseContent
 			outputText("-Machine Greatsword, Ripper 1.0, Ripper 2.0 gained classification as Exotic type weapons for mastery purposes.\n");
 			outputText("-Separated skin, hair, fur, scales, chitin, feather colos from skin layers. (aimozg)\n");
 			outputText("-Added support for dynamic item generation from template id + properties. See hair dye for example. (aimozg)\n");
-			outputText("-For Kitsune thyroid gland or parathyroid glands req. perks would include Star Sphere Mastery perk too and Kishoo race (paratyr) or Kishoo tails (thyr).\n");
+			outputText("-For Kitsune thyroid gland or parathyroid glands req. perks would include Star Sphere Mastery perk too and Kitshoo race (paratyr) or Kitshoo tails (thyr).\n");
 			outputText("-Use material bags materials directly. Add Scythe to exotic Mastery & combat cleanup. Add Golem cores directly to golem bag & minor fixes/improvements. (EragonX)\n");
 			outputText("-Flame blade special can be used on scythe type of weapons too.\n");
 			outputText("-Monsters can now drop generated items: Many generic imps&demons can drop common/magical/rare items; Identify by equiping, cheating, or paying Michiko; Uncurse by paying Diana or Arian. (aimozg)\n");

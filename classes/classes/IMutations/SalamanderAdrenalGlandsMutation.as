@@ -19,7 +19,7 @@ public class SalamanderAdrenalGlandsMutation extends IMutationPerkType
             pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier >= 1) descS += "Your Salamander adrenal glands are giving you slight boost to your natural stamina";
             if (pTier == 1){
-                descS += "and libido";
+                descS += " and libido";
             }
             if (pTier == 2){
                 descS += ", stamina, speed, libido and extend lustzerker and berserker duration by 2 turns";
