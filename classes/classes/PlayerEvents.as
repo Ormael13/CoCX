@@ -1957,7 +1957,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.createPerk(PerkLib.BouncyBody, 0, 0, 0, 0);
 				needNext = true;
 			}
-			else if ((!player.isGoblinoid()) && player.hasPerk(PerkLib.BouncyBody) && !player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 3) {
+			else if ((!player.isGoblinoid()) && player.hasPerk(PerkLib.BouncyBody) && player.perkv1(IMutationsLib.NaturalPunchingBagIM) < 3) {
 				outputText("\nYou're not as cushiony as you used to be. Better avoid getting hit.\n");
 				outputText("\n<b>(Lost Perk: Bouncy body)</b>\n");
 				player.removePerk(PerkLib.BouncyBody);
