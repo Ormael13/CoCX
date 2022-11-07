@@ -602,16 +602,10 @@ public class BeeGirlScene extends BaseContent
 				//Boobies!
 				if (player.biggestTitSize() > 1) {
 					outputText("The cool hardness of her hands startles you as she reaches around to massage your ample bosom, tweaking your hard nipples between her fingers");
+				    if (player.breastRows.length > 1) outputText(", leaning around to lick them with her curving sinuous tongue");
 					//if lactating
-					if (player.biggestLactation() > 1) outputText(", humming in surprise as a squirt of milk splatters across the flower's petals.  ");
-					else outputText(".  ");
-				}
-				//Multiboobs!
-				if (player.breastRows.length > 1) {
-					outputText("The cool hardness of her hands startles you as she begins running her hands over your many breasts, tweaking each hard nipple between her fingers, leaning around to lick them with her curving sinuous tongue, and humming softly");
-					//Milk bit
-					if (player.biggestLactation() > 1) outputText(" in surprise as a squirt of milk splashes across the flower's petals.  ");
-					else outputText(".  ");
+					if (player.biggestLactation() > 1) outputText(", humming in surprise as a squirt of milk splatters across the flower's petals");
+					outputText(".  ");
 				}
 				//Continue as normal!
 				outputText("Instinctively, your butt clenches as a wet presence presses tightly against it.  You try to gather your thoughts, but a particularly forceful hum drives them away and totally relaxes you, allowing the bulbous thickness of her ovipositor to slip inside you.   Slowly at first, then with increasing urgency, the bee-girl rocks it further and further inside of you, humming happily and placing a handful of honey before you.   Your tongue darts forwards of its own accord, lapping at the honey");

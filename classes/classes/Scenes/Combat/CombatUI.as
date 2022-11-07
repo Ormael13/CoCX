@@ -461,7 +461,7 @@ public class CombatUI extends BaseCombatContent {
 			if ((player.hasPerk(PerkLib.PhantomStrike) && (player.fatigueLeft() <= combat.physicalCost(40))) || (!player.hasPerk(PerkLib.PhantomStrike) && (player.fatigueLeft() <= combat.physicalCost(20)))) {
 				button(0).disable("You are too tired to bite " + monster.a + " [monster name].");
 			}
-			if (player.rearBody.type == RearBody.DISPLACER_TENTACLES) {
+			if (player.rearBody.type == RearBody.DISPLACER_TENTACLES && !monster.hasPerk(PerkLib.EnemyConstructType)) {
 				if (monster.hasStatusEffect(StatusEffects.DisplacerPlug)) addButton(1, "Feed", combat.displacerFeedContinue).hint("Feast on your foe breast milk.");
 				else addButton(1, "Attach", combat.displacerCombatFeed).hint("Attach you tentacles to start feast on your foe breast milk. \n\nFatigue Cost: " + physicalCost(50) + "");
 			}
