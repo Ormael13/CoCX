@@ -6,39 +6,21 @@ package classes.Scenes
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armor;
-import classes.Items.ArmorLib;
 import classes.Items.Consumable;
 import classes.Items.Equipable;
-import classes.Items.FlyingSwords;
 import classes.Items.FlyingSwordsLib;
-import classes.Items.HeadJewelry;
-import classes.Items.HeadJewelryLib;
 import classes.Items.ItemConstants;
 import classes.Items.Jewelry;
-import classes.Items.JewelryLib;
-import classes.Items.MiscJewelry;
-import classes.Items.MiscJewelryLib;
-import classes.Items.Necklace;
-import classes.Items.NecklaceLib;
 import classes.Items.Shield;
-import classes.Items.ShieldLib;
 import classes.Items.Undergarment;
-import classes.Items.UndergarmentLib;
 import classes.Items.Useable;
-import classes.Items.Vehicles;
 import classes.Items.VehiclesLib;
 import classes.Items.Weapon;
-import classes.Items.WeaponLib;
 import classes.Items.WeaponRange;
-import classes.Items.WeaponRangeLib;
 import classes.Scenes.Camp.UniqueCampScenes;
 import classes.Scenes.NPCs.HolliPureScene;
 import classes.Scenes.NPCs.MagnoliaFollower;
-
-import coc.view.Block;
-
 import coc.view.ButtonDataList;
-import coc.view.MainView;
 import coc.view.charview.DragButton;
 
 use namespace CoC;
@@ -100,8 +82,6 @@ use namespace CoC;
 		public function pearlStorageDirectGet():Array { return pearlStorage; }
 
 		public function gearStorageDirectGet():Array { return gearStorage; }
-
-		public function prisonStorageDirectGet():Array { return prisonStorage; }
 
 //		public function currentCallNext():Function { return callNext; }
 
@@ -224,7 +204,6 @@ use namespace CoC;
 		}
 
 		public function PotionMenu(page:int = 1):void {
-			var x:int;
 			//var foundItem:Boolean = false;
 			if (CoC.instance.inCombat) {
 				callNext = inventoryCombatHandler; //Player will return to combat after item use
@@ -259,7 +238,6 @@ use namespace CoC;
 			for (ID in PotionType.ALL_POTIONS) {
 				potionType = PotionType.ALL_POTIONS[ID];
 				potionCount = player.numberOfPotions(potionType);
-				var potionEffect:Function = potionType.effect;
 				addButton(position, potionType.name, player.usePotion, potionType).disableIf(potionCount == 0);
 				position++;
 			}
@@ -369,90 +347,28 @@ use namespace CoC;
 			outputText("Currently used Ayo Armor soulforce drain rate (per hour): "+currentArmorSFDrainrate+"\n\n");
 			outputText("Soulforce reserves in armor: "+flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR]+" / "+maxSFCapacity+"\n\n");
 			menu();
-			addButton(0, "Charge 50", AyoArmorRecharge1);
-			addButton(1, "Charge 100", AyoArmorRecharge2);
-			addButton(2, "Charge 200", AyoArmorRecharge3);
-			addButton(3, "Charge 500", AyoArmorRecharge4);
-			addButton(4, "FullRechar", AyoArmorRecharge5);
-			if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] > 0) addButton(10, "Power UP", AyoArmorPowerUP).hint("Activate Ayo Armor (and feel faster and stronger than before ^^)");
-			else addButtonDisabled(10, "Power UP", "You need to charge your Ayo Armor with Soulforce before using Power UP function.");
+			var btn:int = 0;
+			for each (var amnt:int in [50, 100, 200, 500])
+				addButton(btn++, "Charge " + amnt, AyoArmorRecharge, amnt)
+					.disableIf(player.soulforce < amnt, "Your current soulforce is too low.");
+			addButton(btn++, "Full Charge", AyoArmorRecharge, -1)
+				.disableIf(player.soulforce <= 0, "You don't have any soulforce at all!");
+			addButton(10, "Power UP", AyoArmorPowerUP).hint("Activate Ayo Armor (increases strength and speed)")
+				.disableIf(flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] == 0,
+					"You need to charge your Ayo Armor with Soulforce before using Power UP function.");
 			addButton(14, "Back", inventoryMenu);
 		}
-		public function AyoArmorRecharge1():void {
+
+		public function AyoArmorRecharge(amnt:int):void {
 			clearOutput();
-			if (player.soulforce >= 50) {
-				outputText("You focus on your spiritual power and guide it to armor energy storages recharging it for 50 SF.");
-				player.soulforce -= 50;
-				flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] += 50;
-				if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] > maxSFCapacity) {
-					outputText(" Some of spiritual power was too much to be stored into storage and so it been reabsorbed by your body. (+"+(flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] - maxSFCapacity)+")");
-					player.soulforce += (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] - maxSFCapacity);
-					flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] = maxSFCapacity;
-				}
-				statScreenRefresh();
-			}
-			else outputText("Your current soulforce is too low.");
+			if (amnt < 0) amnt = player.soulforce;
+			amnt = Math.min(amnt, maxSFCapacity - flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR]);
+			outputText("You focus on your spiritual power and guide it to armor energy storages recharging it for "+amnt+" soulforce.");
+			flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] += amnt;
+			EngineCore.SoulforceChange(-amnt);
 			doNext(AyoArmorsMaintance);
 		}
-		public function AyoArmorRecharge2():void {
-			clearOutput();
-			if (player.soulforce >= 100) {
-				outputText("You focus on your spiritual power and guide it to armor energy storages recharging it for 100 SF.");
-				player.soulforce -= 100;
-				flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] += 100;
-				if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] > maxSFCapacity) {
-					outputText(" Some of spiritual power was too much to be stored into storage and so it been reabsorbed by your body. (+"+(flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] - maxSFCapacity)+")");
-					player.soulforce += (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] - maxSFCapacity);
-					flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] = maxSFCapacity;
-				}
-				statScreenRefresh();
-			}
-			else outputText("Your current soulforce is too low.");
-			doNext(AyoArmorsMaintance);
-		}
-		public function AyoArmorRecharge3():void {
-			clearOutput();
-			if (player.soulforce >= 200) {
-				outputText("You focus on your spiritual power and guide it to armor energy storages recharging it for 200 SF.");
-				player.soulforce -= 200;
-				flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] += 200;
-				if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] > maxSFCapacity) {
-					outputText(" Some of spiritual power was too much to be stored into storage and so it been reabsorbed by your body. (+"+(flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] - maxSFCapacity)+")");
-					player.soulforce += (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] - maxSFCapacity);
-					flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] = maxSFCapacity;
-				}
-				statScreenRefresh();
-			}
-			else outputText("Your current soulforce is too low.");
-			doNext(AyoArmorsMaintance);
-		}
-		public function AyoArmorRecharge4():void {
-			clearOutput();
-			if (player.soulforce >= 500) {
-				outputText("You focus on your spiritual power and guide it to armor energy storages recharging it for 500 SF.");
-				player.soulforce -= 500;
-				flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] += 500;
-				if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] > maxSFCapacity) {
-					outputText(" Some of spiritual power was too much to be stored into storage and so it been reabsorbed by your body. (+"+(flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] - maxSFCapacity)+")");
-					player.soulforce += (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] - maxSFCapacity);
-					flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] = maxSFCapacity;
-				}
-				statScreenRefresh();
-			}
-			else outputText("Your current soulforce is too low.");
-			doNext(AyoArmorsMaintance);
-		}
-		public function AyoArmorRecharge5():void {
-			clearOutput();
-			if (player.soulforce >= (maxSFCapacity - flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR])) {
-				outputText("You focus on your spiritual power and guide it to armor energy storages recharging it for "+(maxSFCapacity - flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR])+" SF.");
-				player.soulforce -= (maxSFCapacity - flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR]);
-				flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] = maxSFCapacity;
-				statScreenRefresh();
-			}
-			else outputText("Your current soulforce is too low.");
-			doNext(AyoArmorsMaintance);
-		}
+
 		public function AyoArmorPowerUP():void {
 			clearOutput();
 			var oldHPratio:Number = player.hp100/100;
@@ -476,41 +392,9 @@ use namespace CoC;
 			addButton(14, "Back", inventoryMenu);
 		}
 
-		public function SkyPoisonPearlMenu():void {
-			hideMenus();
-			spriteSelect(null);
-			menu();
-			addButton(0, "Pearl Store 1", pickItemToPlaceInSkyPoisonPearl1).hint("Store item in Sky Poison Pearl (east section).");
-			addButton(5, "Pearl Take 1", pickItemToTakeFromSkyPoisonPearl1).hint("Take item from Sky Poison Pearl (east section).");
-			if (player.level >= 6) addButton(6, "Pearl Take 2", pickItemToTakeFromSkyPoisonPearl2).hint("Take item from Sky Poison Pearl (south section).");
-			if (player.level >= 12) addButton(7, "Pearl Take 3", pickItemToTakeFromSkyPoisonPearl3).hint("Take item from Sky Poison Pearl (west section).");
-			if (player.level >= 18) addButton(8, "Pearl Take 4", pickItemToTakeFromSkyPoisonPearl4).hint("Take item from Sky Poison Pearl (north section).");
-			if (player.level >= 24) addButton(9, "Pearl Take 5", pickItemToTakeFromSkyPoisonPearl5).hint("Take item from Sky Poison Pearl (center section).");
-			if (player.level >= 30) addButton(11, "Pearl Take 6", pickItemToTakeFromSkyPoisonPearl6).hint("Take item from Sky Poison Pearl (above section).");
-			if (player.level >= 36) addButton(13, "Pearl Take 7", pickItemToTakeFromSkyPoisonPearl7).hint("Take item from Sky Poison Pearl (below section).");
-			addButton(1, "Pearl Store 2", pickItemToPlaceInSkyPoisonPearl2).hint("Store item in Sky Poison Pearl (south section).").disableIf(player.level < 6,"Req. LvL 6+ to unlock this.");
-			addButton(2, "Pearl Store 3", pickItemToPlaceInSkyPoisonPearl3).hint("Store item in Sky Poison Pearl (west section).").disableIf(player.level < 12,"Req. LvL 12+ to unlock this.");
-			addButton(3, "Pearl Store 4", pickItemToPlaceInSkyPoisonPearl4).hint("Store item in Sky Poison Pearl (north section).").disableIf(player.level < 18,"Req. LvL 18+ to unlock this.");
-			addButton(4, "Pearl Store 5", pickItemToPlaceInSkyPoisonPearl5).hint("Store item in Sky Poison Pearl (center section).").disableIf(player.level < 24,"Req. LvL 24+ to unlock this.");
-			addButton(10, "Pearl Store 6", pickItemToPlaceInSkyPoisonPearl6).hint("Store item in Sky Poison Pearl (above section).").disableIf(player.level < 30,"Req. LvL 30+ to unlock this.");
-			addButton(12, "Pearl Store 7", pickItemToPlaceInSkyPoisonPearl7).hint("Store item in Sky Poison Pearl (below section).").disableIf(player.level < 36,"Req. LvL 36+ to unlock this.");
-			addButton(14, "Back", inventoryMenu);
-		}
-
 		public function SkyPoisonPearlMenuv2():void{
 			transferMenu(pearlStorage, 0, pearlStorageSize(), inventoryMenu, "Sky Poison Pearl");
 		}
-
-		private function SPPStoreItems():void{
-			clearOutput();
-			outputText("What do you want to put into storage?");
-			var pLvl:int = Math.floor(player.level/6);
-			outputText("You have "+ 14 * pLvl + " slots total, of which " + pearlStorage.length + " slots are used.");
-			menu();
-			pickItemToPlaceInStorage2(placeInSkyPoisonPearl5, allAcceptable, "sky poison pearl", false)
-		}
-
-		private function SPPTakeOut():void{}
 
 		public function transferMenu(
 				storage:/*ItemSlotClass*/Array,
@@ -1622,41 +1506,6 @@ use namespace CoC;
 			transferItemsFrom(gearStorage, 45, 57, "bag", inventoryMenu);
 		}
 
-		private function pickItemToTakeFromSkyPoisonPearl1():void {
-			callNext = pickItemToTakeFromSkyPoisonPearl1;
-			transferItemsFrom(pearlStorage, 0, 14, "sky poison pearl (east section)", inventoryMenu);
-		}
-
-		private function pickItemToTakeFromSkyPoisonPearl2():void {
-			callNext = pickItemToTakeFromSkyPoisonPearl2;
-			transferItemsFrom(pearlStorage, 14, 28, "sky poison pearl (south section)", inventoryMenu);
-		}
-
-		private function pickItemToTakeFromSkyPoisonPearl3():void {
-			callNext = pickItemToTakeFromSkyPoisonPearl3;
-			transferItemsFrom(pearlStorage, 28, 42, "sky poison pearl (west section)", inventoryMenu);
-		}
-
-		private function pickItemToTakeFromSkyPoisonPearl4():void {
-			callNext = pickItemToTakeFromSkyPoisonPearl4;
-			transferItemsFrom(pearlStorage, 42, 56, "sky poison pearl (north section)", inventoryMenu);
-		}
-
-		private function pickItemToTakeFromSkyPoisonPearl5():void {
-			callNext = pickItemToTakeFromSkyPoisonPearl5;
-			transferItemsFrom(pearlStorage, 56, 70, "sky poison pearl (central section)", inventoryMenu);
-		}
-
-		private function pickItemToTakeFromSkyPoisonPearl6():void {
-			callNext = pickItemToTakeFromSkyPoisonPearl6;
-			transferItemsFrom(pearlStorage, 70, 84, "sky poison pearl (above section)", inventoryMenu);
-		}
-
-		private function pickItemToTakeFromSkyPoisonPearl7():void {
-			callNext = pickItemToTakeFromSkyPoisonPearl7;
-			transferItemsFrom(pearlStorage, 84, 98, "sky poison pearl (below section)", inventoryMenu);
-		}
-
 		private function pickItemToTakeFromWarehouse1():void {
 			callNext = pickItemToTakeFromWarehouse1;
 			transferItemsFrom(gearStorage, 57, 69, "1st warehouse", warehouse);
@@ -1820,9 +1669,6 @@ use namespace CoC;
 			if (showEmptyWarning && !foundItem) outputText("\n<b>You have no appropriate items to put in this " + text + ".</b>");
 			addButton(14, "Back", stash);
 		}
-		private function pickItemToPlaceInStorageA(page:int = 1):void {
-
-		}
 
 		private function pickItemToPlaceInStorage2(placeInStorageFunction:Function, typeAcceptableFunction:Function, text:String, showEmptyWarning:Boolean, page:int = 1):void {
 			var x:int;
@@ -1852,9 +1698,6 @@ use namespace CoC;
 			if (showEmptyWarning && !foundItem) outputText("\n<b>You have no appropriate items to put in this " + text + ".</b>");
 			addButton(14, "Back", inventoryMenu);
 		}
-		private function pickItemToPlaceInStorage2A():void {
-
-		}
 
 		private function pickItemToPlaceInStorage3(placeInStorageFunction:Function, typeAcceptableFunction:Function, text:String, showEmptyWarning:Boolean, page:int = 1):void {
 			var x:int;
@@ -1883,9 +1726,6 @@ use namespace CoC;
 			}
 			if (showEmptyWarning && !foundItem) outputText("\n<b>You have no appropriate items to put in this " + text + ".</b>");
 			addButton(14, "Back", warehouse);
-		}
-		private function pickItemToPlaceInStorage3A(page:int = 1):void {
-
 		}
 
 		private function placeInCampStorage(slotNum:int):void {
