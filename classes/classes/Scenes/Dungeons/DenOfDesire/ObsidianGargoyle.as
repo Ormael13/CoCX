@@ -13,8 +13,7 @@ public class ObsidianGargoyle extends AbstractGargoyle
 	{
 		public function moveLustBlast():void {
 			if (hasStatusEffect(StatusEffects.Uber)) {
-				if (hasStatusEffect(StatusEffects.Stunned) || hasStatusEffect(StatusEffects.FrozenSolid) || hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.ConstrictedScylla)
-				|| hasStatusEffect(StatusEffects.GooEngulf) || hasStatusEffect(StatusEffects.EmbraceVampire) || hasStatusEffect(StatusEffects.StunnedTornado) || hasStatusEffect(StatusEffects.Pounce)) {
+				if (monsterIsStunned() || monsterIsConstricted() || hasStatusEffect(StatusEffects.Fear)) {
 					outputText("Your interruption cause the gargoyle to choke in disbelief on whatever ability it was readying!");
 					removeStatusEffect(StatusEffects.Uber);
 				}
@@ -38,7 +37,7 @@ public class ObsidianGargoyle extends AbstractGargoyle
 		
 		public function moveDevourMagic():void {
 			if (hasStatusEffect(StatusEffects.DevourMagic)) {
-				if (hasStatusEffect(StatusEffects.Stunned) || hasStatusEffect(StatusEffects.FrozenSolid)) {
+				if (monsterIsStunned()) {
 					outputText("Liadri would write text for this situation... eventualy.");
 				}
 				else {

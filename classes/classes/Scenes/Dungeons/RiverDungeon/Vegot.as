@@ -88,8 +88,7 @@ use namespace CoC;
 		private function vegotR():void {
 			if (hasStatusEffect(StatusEffects.Uber)) {
 				removeStatusEffect(StatusEffects.Uber);
-				if (hasStatusEffect(StatusEffects.Stunned) || hasStatusEffect(StatusEffects.FrozenSolid) || hasStatusEffect(StatusEffects.StunnedTornado) || hasStatusEffect(StatusEffects.Fear) || hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.ConstrictedWhip) || hasStatusEffect(StatusEffects.GooEngulf)
-				|| hasStatusEffect(StatusEffects.EmbraceVampire) || hasStatusEffect(StatusEffects.Pounce)) {
+				if (monsterIsStunned() || monsterIsConstricted() || hasStatusEffect(StatusEffects.Fear)) {
 					removeStatusEffect(StatusEffects.AbilityCooldown2);
 					outputText("Vegot reels in frustration as his concentration breaks under your assaults.\n\n");
 				}
