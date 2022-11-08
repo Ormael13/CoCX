@@ -134,7 +134,8 @@ use namespace CoC;
         /*19*/	{combat: "Normal", 		level:0, experience:0, melee: true, desc:"<b>Weapon Mastery - Normal</b>"},
         /*20*/	{combat: "Large", 		level:0, experience:0, melee: true, desc:"<b>Weapon Mastery - Large</b>"},
         /*21*/	{combat: "Massive", 	level:0, experience:0, melee: true, desc:"<b>Weapon Mastery - Massive</b>"},
-        /*22*/	{combat: "Range", 		level:0, experience:0, melee: false, desc:"<b>Weapon Mastery - Ranged</b>"}
+        /*22*/	{combat: "Range", 		level:0, experience:0, melee: false, desc:"<b>Weapon Mastery - Ranged</b>"},
+        /*23*/	{combat: "Unarmed", 	level:0, experience:0, melee: true, desc:"<b>Dao of Fists</b>"}
 		];
 
         public function initCombatMastery():void{
@@ -145,7 +146,7 @@ use namespace CoC;
         }
         public function loadCombatMastery(saved:Array):void{
 //            [i, player.combatMastery[k].level, player.combatMastery[k].experience];
-            for(var i:int = 0; i < combatMastery.length; i++){
+            for(var i:int = 0; i < saved.length; i++){
 				combatMastery[saved[i].index].level = saved[i].level;
 				combatMastery[saved[i].index].experience = saved[i].experience;
             }
@@ -999,6 +1000,7 @@ use namespace CoC;
 		public function haveNaturalClaws():Boolean { return Arms.Types[arms.type].claw || Arms.Types[arms.type].armSlam || Arms.Types[arms.type].scythe || LowerBody.hasClaws(this);}
 		public function haveNaturalClawsTypeWeapon():Boolean {return weaponName == "gauntlet with claws" || weaponName == "gauntlet with an aphrodisiac-coated claws" || weaponName == "Venoclaw" || weaponName == "hooked gauntlets" || (hasAetherTwinsTier1() || hasAetherTwinsTier2());}
         public function isFeralCombat():Boolean { return flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && ( (weaponName == "fists" && haveNaturalClaws()) || haveNaturalClawsTypeWeapon() ) ;}
+        public function isUnarmedCombat():Boolean { return flags[kFLAGS.FERAL_COMBAT_MODE] == 0 && isFistOrFistWeapon() ;}
         //Other natural weapon checks
 		public function hasABiteAttack():Boolean { return (lowerBody == LowerBody.HYDRA || Face.Types[faceType].bite);}
 		public function hasAWingAttack():Boolean { return (Wings.Types[wings.type].wingSlap || wings.type == Wings.THUNDEROUS_AURA || wings.type == Wings.WINDY_AURA);}
@@ -5647,8 +5649,11 @@ use namespace CoC;
             if(weaponSpecials("Small") || weaponSpecials("Dual Small")){combatMasteryPos = 18}
             else if(weaponSpecials("Large")){combatMasteryPos = 20}
             else if(weaponSpecials("Massive")){combatMasteryPos = 21}
-            else if(isBowTypeWeapon() || isThrownTypeWeapon()){combatMasteryPos = 22}
-            if(isFeralCombat()){combatMasteryPos = 0}
+            else if(isBowTypeWeapon() || isThrownTypeWeapon()){combatMasteryPos = 23}
+            if (isFeralCombat() || isUnarmedCombat()){
+				if (isFeralCombat()) combatMasteryPos = 0;
+				else combatMasteryPos = 23;
+			}
 
 
 			/*
@@ -5661,6 +5666,13 @@ use namespace CoC;
 			 */
             // Feral Attack Count
             if(combatMasteryPos == 0){
+                if(combatMastery[combatMasteryPos].level >= 10) rval += 1;
+                if(combatMastery[combatMasteryPos].level >= 20) rval += 1;
+                if(combatMastery[combatMasteryPos].level >= 30) rval += 1;
+                if(combatMastery[combatMasteryPos].level >= 40) rval += 1;
+            }
+            // Unarmed Attack Count
+            if(combatMasteryPos == 23){
                 if(combatMastery[combatMasteryPos].level >= 10) rval += 1;
                 if(combatMastery[combatMasteryPos].level >= 20) rval += 1;
                 if(combatMastery[combatMasteryPos].level >= 30) rval += 1;

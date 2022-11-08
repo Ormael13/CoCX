@@ -149,6 +149,7 @@ public class Combat extends BaseContent {
     public function weaponSizeLarge():Number {return player.combatMastery[20].level;}
     public function weaponSizeMassive():Number {return player.combatMastery[21].level;}
     //public function weaponSizeRange():Number {return player.combatMastery[22].level;}
+    public function masteryUnarmedCombatLevel():Number {return player.combatMastery[23].level;}
 
     public function bonusExpAfterSuccesfullTease():Number {
         return teases.bonusExpAfterSuccesfullTease();
@@ -1430,7 +1431,7 @@ public class Combat extends BaseContent {
                     }
                 }
             }
-            if (player.hasStatusEffect(StatusEffects.BladeDance) || dualWeapon) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 2;
+            if (player.hasStatusEffect(StatusEffects.BladeDance) || dualWeapon || player.isUnarmedCombat()) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 2;
             if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 1 && player.hasPerk(PerkLib.SteelStorm) && !player.hasStatusEffect(StatusEffects.CounterAction) && dualWeapon) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 2;
         }
         else {
@@ -2514,8 +2515,13 @@ public class Combat extends BaseContent {
 		if (player.hasPerk(PerkLib.TrueSeeing)) accmod += 40;
         if (monster.hasStatusEffect(StatusEffects.EvasiveTeleport) && !player.hasPerk(PerkLib.TrueSeeing)) accmod -= player.statusEffectv1(StatusEffects.EvasiveTeleport);
         if (player.jewelryName == "Ring of Ambidexty") accmod += 30;
-		if (player.weaponName == "fists") accmod += Math.round((masteryFeralCombatLevel() - 1) / 2);
-		if (player.isGauntletWeapon()) accmod += Math.round((masteryGauntletLevel() - 1) / 2);
+		if (player.isFistOrFistWeapon()) {
+			if (flags[kFLAGS.FERAL_COMBAT_MODE] == 1) accmod += Math.round((masteryFeralCombatLevel() - 1) / 2);
+			else {
+				if (player.isGauntletWeapon()) accmod += Math.round((masteryGauntletLevel() - 1) / 2);
+				else accmod += Math.round((masteryUnarmedCombatLevel() - 1) / 2);
+			}
+		}
 		if (player.isSwordTypeWeapon()) accmod += Math.round((masterySwordLevel() - 1) / 2);
 		if (player.isAxeTypeWeapon()) accmod += Math.round((masteryAxeLevel() - 1) / 2);
 		if (player.isMaceHammerTypeWeapon()) accmod += Math.round((masteryMaceHammerLevel() - 1) / 2);
@@ -5153,8 +5159,13 @@ public class Combat extends BaseContent {
         if (player.isSpearTypeWeapon() && player.hasPerk(PerkLib.ElvenRangerArmor)) damage *= 1.5;
         if ((player.weapon == weapons.S_RULER) && (monster.hasPerk(PerkLib.EnemyHugeType) || monster.hasPerk(PerkLib.EnemyGigantType) || monster.hasPerk(PerkLib.EnemyColossalType))) damage *= 1.5;
         //Mastery bonus damage
-		if (player.weapon is Fists) damage *= (1 + (0.01 * masteryFeralCombatLevel()));
-		if (player.isGauntletWeapon()) damage *= (1 + (0.01 * masteryGauntletLevel()));
+		if (player.isFistOrFistWeapon()) {
+			if (IsFeralCombat) damage *= (1 + (0.01 * masteryFeralCombatLevel()));
+			else {
+				if (player.isGauntletWeapon()) damage *= (1 + (0.01 * masteryGauntletLevel()));
+				else damage *= (1 + (0.01 * masteryUnarmedCombatLevel()));
+			}
+		}
 		if (player.isSwordTypeWeapon()) damage *= (1 + (0.01 * masterySwordLevel()));
 		if (player.isAxeTypeWeapon()) damage *= (1 + (0.01 * masteryAxeLevel()));
 		if (player.isMaceHammerTypeWeapon()) damage *= (1 + (0.01 * masteryMaceHammerLevel()));
@@ -5305,7 +5316,8 @@ public class Combat extends BaseContent {
         if (player.weaponSpecials("Dual")) dualWieldNormalXP(meleeMasteryEXPgains);
         if (player.weaponSpecials("Dual Large")) dualWieldLargeXP(meleeMasteryEXPgains);
 
-        if ((player.weaponName == "fists" && player.haveNaturalClaws()) || player.weaponName == "fists") feralCombatXP(meleeMasteryEXPgains);
+        if (player.isFeralCombat()) feralCombatXP(meleeMasteryEXPgains);
+        else if (player.isUnarmedCombat()) unarmedCombatXP(meleeMasteryEXPgains);
         else if (player.weaponSpecials("Dual Small") || player.weaponSpecials("Small")) weaponSmallMastery(meleeMasteryEXPgains);
         else if (player.weaponSpecials("Dual Large") || player.weaponSpecials("Large")) weaponLargeMastery(meleeMasteryEXPgains);
         else if (player.weaponSpecials("Dual Massive") || player.weaponSpecials("Massive")) weaponMassiveMastery(meleeMasteryEXPgains);
@@ -5524,7 +5536,7 @@ public class Combat extends BaseContent {
                     }
                     else if (player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
 						doPhysicalDamage(damage, true, true);
-                        doLightingDamage(Math.round(damage * 0.2), true, true);
+                        doMagicDamage(Math.round(damage * 0.2), true, true);
 					}
                     else if (player.weapon == weapons.MGSWORD)
                         doMagicDamage(damage, true, true);
@@ -5966,8 +5978,14 @@ public class Combat extends BaseContent {
                 return;
             }
 			if (i > 1 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] > 0) {
-				if (player.fatigue + 50 > player.maxFatigue()) i = flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] + 1;
-				else fatigue(50);
+				if (player.weaponSpecials("Dual Large") || player.weaponSpecials("Large") || player.weaponSpecials("Dual Massive") || player.weaponSpecials("Massive")) {
+					if (player.wrath - 10 >= 0) player.wrath -= 10;
+					else i = flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] + 1;
+				}
+				else {
+					if (player.fatigue + 50 > player.maxFatigue()) i = flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] + 1;
+					else fatigue(50);
+				}
 			}
         }
         if (player.weapon is Tidarion) (player.weapon as Tidarion).afterStrike();
@@ -11103,7 +11121,8 @@ public function weaponSmallMastery(XP:Number = 0):void  {player.gainCombatXP(18,
 public function weaponNormalMastery(XP:Number = 0):void {player.gainCombatXP(19, XP * weaponmasteryXPMulti());}
 public function weaponLargeMastery(XP:Number = 0):void  {player.gainCombatXP(20, XP * weaponmasteryXPMulti());}
 public function weaponMassiveMastery(XP:Number = 0):void  {player.gainCombatXP(21, XP * weaponmasteryXPMulti());}
-//public function weaponRangeMastery(XP:Number = 0):void  {player.gainCombatXP(21, XP * weaponmasteryXPMulti());}
+public function unarmedCombatXP(XP:Number = 0):void  	{player.gainCombatXP(22, XP * weaponmasteryXPMulti());}
+//public function weaponRangeMastery(XP:Number = 0):void  {player.gainCombatXP(23, XP * weaponmasteryXPMulti());}
 
 //VICTORY OR DEATH?
 // Called after the monster's action. Increments round counter. Setups doNext to win/loss/combat menu
