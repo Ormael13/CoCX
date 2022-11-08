@@ -197,7 +197,7 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 
 		}
 		private function visitMadam():void {
-			clearOutput();//Madam - female kishoo npc for stat points to perk points conversion		outputText("\"<i></i>\"\n\n");
+			clearOutput();
 			if (AhriTavernTalks) outputText("\"<i>You came back? What do you seek from this Madam?</i>\" You can swear to see her eyes glow for a moment under the hood as she looks at you. \"<i>Another session to exchange your grown potential to increased ability to develop mystical abilities?</i>\"\n\n");
 			else {
 				outputText("You see a person covered wholy by the loose robe. For a moment it looks like it not noticed your presence next to it.\n\n");

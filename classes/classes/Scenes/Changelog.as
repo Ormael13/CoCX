@@ -206,7 +206,7 @@ public class Changelog extends BaseContent
 			outputText("-Machine Greatsword, Ripper 1.0, Ripper 2.0 gained classification as Exotic type weapons for mastery purposes.\n");
 			outputText("-Separated skin, hair, fur, scales, chitin, feather colos from skin layers. (aimozg)\n");
 			outputText("-Added support for dynamic item generation from template id + properties. See hair dye for example. (aimozg)\n");
-			outputText("-For Kitsune thyroid gland or parathyroid glands req. perks would include Star Sphere Mastery perk too and Kishoo race (paratyr) or Kishoo tails (thyr).\n");
+			outputText("-For Kitsune thyroid gland or parathyroid glands req. perks would include Star Sphere Mastery perk too and Kitshoo race (paratyr) or Kitshoo tails (thyr).\n");
 			outputText("-Use material bags materials directly. Add Scythe to exotic Mastery & combat cleanup. Add Golem cores directly to golem bag & minor fixes/improvements. (EragonX)\n");
 			outputText("-Flame blade special can be used on scythe type of weapons too.\n");
 			outputText("-Monsters can now drop generated items: Many generic imps&demons can drop common/magical/rare items; Identify by equiping, cheating, or paying Michiko; Uncurse by paying Diana or Arian. (aimozg)\n");
@@ -367,7 +367,7 @@ public class Changelog extends BaseContent
 			outputText("-Meditation would remove 20% of max lust instead of 50.\n");
 			outputText("-New Necklace (by Liadri): Leaf Amulet - buyable at Kaiba shop. Costs 4,500 gems. Increase white magic damage and evasion by 10%. (Effect doubled for elves) Decrease spells cooldown by 1 turn if used by elf.\n");
 			outputText("-Kath 'Get Help' locks her random encounters. Still can be recruited after that Scylla scene. Added first SexMachine use to Recall menu. Marble purification quest doesn't check your or your followers' corruption anymore. (Svalkash)\n");
-			outputText("-Golem enemies won't be affected by displacer beast tentacle move causing milking enemy. Feral combat attack part with biting enemy won't cause bleed on enemeis immune to bleed.\n");
+			outputText("-Golem enemies won't be affected by displacer beast tentacle move causing milking enemy. Feral combat attack part with biting enemy won't cause bleed on enemies immune to bleed.\n");
 			outputText("-Using charge weapon spell would add lightning dmg equal to 20% of phys dmg weapon dealing on attack. Now you can hurt all those pesky immune to physical damage enemies ;)\n");
 			outputText("-\n");
 			outputText("-\n");

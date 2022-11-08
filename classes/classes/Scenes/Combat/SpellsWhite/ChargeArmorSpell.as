@@ -8,7 +8,7 @@ public class ChargeArmorSpell extends AbstractWhiteSpell {
 	public function ChargeArmorSpell() {
 		super(
 			"Charge Armor",
-			"The Charge Armor spell will surround your armor with electrical energy, causing it to do provide additional protection.  The effect lasts for a few combat turns.",
+			"The Charge Armor spell will surround your armor with magical energy, causing it to do provide additional protection.  The effect lasts for a few combat turns.",
 			TARGET_SELF,
 			TIMING_LASTING,
 			[TAG_BUFF]
@@ -100,10 +100,10 @@ public class ChargeArmorSpell extends AbstractWhiteSpell {
 		var ChargeArmorDuration:Number = 5;
 		ChargeArmorDuration += combat.magic.perkRelatedDurationBoosting();
 		if (display) {
-			outputText("You utter words of power, summoning an electrical charge around your");
+			outputText("You utter the words of power, summoning an electrical charge around your");
 			if (player.isNaked() && player.haveNaturalArmor() && player.hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalArmor)) outputText(" natural armor.");
 			else outputText(" [armor].");
-			outputText("  It crackles loudly, ensuring you'll have more protection for the rest of the fight.");
+			outputText("  The electricity crackles stubbornly with a magical current, ensuring to protect you from even the fiercest blows.");
 		}
 		player.createStatusEffect(StatusEffects.ChargeArmor, ChargeArmorBoost, ChargeArmorDuration, 0, 0);
 		

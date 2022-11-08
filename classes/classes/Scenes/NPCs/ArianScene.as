@@ -254,7 +254,7 @@ private function helpArianWhenYouMeetHim():void {
 	outputText("\n\nYou decide to leave him for the moment, and head back to the camp.");
 	//(Park added to TA's Menu.  It will later be replaced by Arian's house.)
 	outputText("\n\n(<b>The park has been added to Tel'Adre's menu.</b>)");
-
+	arianHealth(1);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -349,15 +349,18 @@ public function visitThePark():void {
 		//Player returns to (Tel'Adre / camp).
 		//Arian's House replaces Park in Tel'Adre menu.
 		outputText("\n\n(<b>The park has been removed from Tel'Adre's menu.  Arian's house has been added to the 'Homes' submenu.</b>");
+		arianHealth(5);
 	}
+	arianHealth(1);
 	flags[kFLAGS.ARIAN_PARK]++;
 	doNext(camp.returnToCampUseOneHour);
 }
 
 //First Visit
-public function visitAriansHouse():void {
+public function visitAriansHouse(back:Boolean = false):void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_arian);
+	if (flags[kFLAGS.ARIAN_HEALTH] < 29 || flags[kFLAGS.ARIAN_VIRGIN] == 1 && !back) arianHealth(1);
 	if (arianFollower()) {
 		if (arianMF("m", "f") == "f")
 			outputText(images.showImage("arianfemale-tent"));
@@ -596,12 +599,12 @@ public function visitAriansHouse():void {
 private function arianHomeMenu(back:Boolean = false):void {
 	sceneHunter.print("Arian's health: " + arianHealth() + " out of 100.");
 	menu();
-	if(flags[kFLAGS.ARIAN_S_DIALOGUE] == 0 && arianHealth() >= 10) addButton(0,"Next",arianStoryDialogue1);
-	else if(flags[kFLAGS.ARIAN_S_DIALOGUE] == 1 && arianHealth() >= 20) addButton(0,"Next",arianStoryDialogue2);
-	else if(flags[kFLAGS.ARIAN_S_DIALOGUE] == 2 && arianHealth() >= 30) addButton(0,"Next",arianDialogue3);
-	else if(flags[kFLAGS.ARIAN_S_DIALOGUE] == 3 && arianHealth() >= 50) addButton(0,"Next",arianImbue);
-	else if(flags[kFLAGS.ARIAN_S_DIALOGUE] == 4 && arianHealth() >= 75) addButton(0,"Next",arianPlot4);
-	else if(flags[kFLAGS.ARIAN_S_DIALOGUE] == 5 && arianHealth() >= 100) addButton(0,"Next",arianPlot5);
+	if (!back && flags[kFLAGS.ARIAN_S_DIALOGUE] == 0) addButton(0, "Next", arianStoryDialogue1);
+	else if (!back && flags[kFLAGS.ARIAN_S_DIALOGUE] == 1 && arianHealth() >= 20) addButton(0, "Next", arianStoryDialogue2);
+	else if (!back && flags[kFLAGS.ARIAN_S_DIALOGUE] == 2 && arianHealth() >= 30) addButton(0, "Next", arianDialogue3);
+	else if (!back && flags[kFLAGS.ARIAN_S_DIALOGUE] == 3 && arianHealth() >= 50) addButton(0, "Next", arianImbue);
+	else if (!back && flags[kFLAGS.ARIAN_S_DIALOGUE] == 4 && arianHealth() >= 75) addButton(0, "Next", arianPlot4);
+	else if (!back && flags[kFLAGS.ARIAN_S_DIALOGUE] == 5 && arianHealth() >= 100) addButton(0,"Next",arianPlot5);
 	//If no story dialogue
 	else {
 		addButton(0,"Talk",talkToArianChoices);
@@ -4332,7 +4335,7 @@ private function arianAppearance():void {
 		outputText(" has a soft, tight pussy, with a 0.2 inch clit. The womb that lies within is perfectly adapted to oviposition.\n\n");
 	}
 	outputText("[arian Ey] has a pair of scaly legs, ending in reptilian feet with claws adapted to grasp, though the harmless nature of the lizan has made them look much less menacing that they could be.");
-	doNext(visitAriansHouse);
+	doNext(visitAriansHouse, true);
 }
 }
 }

@@ -2722,6 +2722,7 @@ import flash.utils.getQualifiedClassName;
 				if (hasPerk(PerkLib.EnemyResiliance)) addStatusValue(StatusEffects.FrozenSolid,1,-5);
 				if(statusEffectv1(StatusEffects.FrozenSolid) <= 0) {
 					outputText("<b>" + capitalA + short + (plural ? " are" : " is") + " no longer encased in the ice prison!</b>\n\n");
+					statStore.removeBuffs("FrozenSolid");
 					removeStatusEffect(StatusEffects.FrozenSolid);
 				}
 				else outputText("<b>" + capitalA + short + (plural ? " are" : " is") + " currently encased in the ice prison!</b>\n\n");

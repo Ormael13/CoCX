@@ -7,7 +7,6 @@ package classes.Scenes.Places{
 	import classes.BodyParts.Tail;
 	import classes.BodyParts.Wings;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.Items.ArmorLib;
 	import classes.Scenes.Crafting;
 	import classes.Scenes.Areas.Forest.WoodElvesHuntingParty;
     import classes.display.SpriteDb;
@@ -1090,4 +1089,3 @@ package classes.Scenes.Places{
 		}
 	}
 }
-

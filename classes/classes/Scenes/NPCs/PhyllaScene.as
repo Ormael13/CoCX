@@ -1312,16 +1312,16 @@ public class PhyllaScene extends BaseContent implements TimeAwareInterface
 			outputText(" stiff and longing for immersion into this orgy, you just need to find an opening.  Walking over to Phylla, you tap the ant getting a tit fuck on the shoulder.  Without a second thought, he stands aside for you, letting his balls slip out of Phylla's mouth with an audible pop.  You grin down at Phylla, seeing that she's now completely lost and just enjoying herself.  It's at this moment that you feel shadows looming behind you.  Before you can react, hands reach down and start lovingly stroking [oneCock].");
 
 			//If player has two-three dicks:
-			if (player.cockTotal() > 1 && player.cockTotal() <= 3) {
+			if (player.cockTotal() > 1) {
 				outputText("\n\nYou quickly find each of your cocks are being taken care of.  You can hardly tell who's touching or sucking what.  Looking down you see Phylla sucking the head of your longest cock as someone's hands run down the shaft.  Your other dick");
 				if (player.cockTotal() == 2) outputText(" is");
 				else outputText("s are");
 				outputText(" getting sucked off by two of your children, who themselves are being sucked off.");
 			}
-			//If player has four-6 six dicks:
-			if (player.cockTotal() >= 4 && player.cockTotal() <= 6) outputText("\n\nEven though you have so many cocks, it won't be a problem.  Just standing over Phylla you look down as hands, mouths, and Phylla's breasts do their best to please every one of your cocks in turn.");
+			//If player has four-six dicks:
+			if (player.cockTotal() >= 4) outputText("\n\nEven though you have free cocks, it won't be a problem for too long.  Just standing over Phylla you look down as hands, mouths, and Phylla's breasts do their best to please every one of your cocks in turn.");
 			//Silly Mode (LOTR) player has 10+ dicks:
-			if (silly()) {
+			if (silly() && player.cockTotal() == 10) {
 				outputText("\n\nLooking down at your children, fear can be seen  in their eyes.  You decide to give a heartfelt speech.");
 
 				outputText("\n\n\"<i>Sons, offspring, my children!  I see in your eyes the same fear that would take the heart of me!  A day may come when the semen of these cocks fail, when they go limp and never stand erect again... but that is not this day!  An hour of sorrow and sadness when these cocks cease to cum... but that is not this day!  This day you fight!  By all that you hold dear in this good colony, I bid you suck!  Suck all the cock!</i>\"");

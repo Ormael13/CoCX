@@ -10825,7 +10825,7 @@ public final class Mutations extends MutationsHelper {
         }
         if (!InCollection(player.hairColor, KitshooRace.KitshooHairColors) && changes < changeLimit && rand(4) == 0) {
             player.hairColor = randomChoice(KitshooRace.KitshooHairColors);
-            outputText("[pg]Your scalp begins to tingle, and you gently grasp a strand, pulling it forward to check it.  Your hair has become the same [haircolor] as a kishoo!");
+            outputText("[pg]Your scalp begins to tingle, and you gently grasp a strand, pulling it forward to check it.  Your hair has become the same [haircolor] as a kitshoo!");
             changes++;
         }
 		//Scales & Fur color

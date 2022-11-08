@@ -650,28 +650,25 @@ private function nonFightIzmaSmexPAINUS():void {
 	outputText("Hearing that her offer is being accepted, Izma smiles brightly and sheds what little clothing she has on.  The top half of her black bikini goes first; her DD-cup breasts jiggle about from the motions, and she sighs happily now that she's free of the restricting garments.  She then gets to work undoing the well-crafted grass skirt, and props it on her oak chest as gently as possible so as not to damage it.  Her monstrous cock swings heavily between her knees, slowly hardening at the prospect of sweet release.  She's a rather magnificent specimen all things considered, and you find yourself ogling every curve on her well-toned body.\n\n");
 
 	outputText("You respond in kind, shedding your garments as her lips purse and her eyes roam up and down your form.  ");
-	//Single Normal dicks
-	if(player.cockTotal() == 1 && player.cocks[0].cockType.Index < 9) {
-		//[Human dick in slot 0]
-		if(player.cocks[0].cockType == CockTypesEnum.HUMAN) outputText("Izma seems surprised to see your genitalia is similar to hers.  \"<i>Huh. Thought that every land-dweller usually bumbled into a dick transformation around here.</i>\"");
-		//[Horse cock in slot 0]
-		else if(player.cocks[0].cockType == CockTypesEnum.HORSE) outputText("Seeing your [cock] causes Izma to lick her lips slowly. \"<i>Well... Equinum is pretty popular, isn't it?</i>\"");
-		//[Dog cock]
-		else if(player.hasKnot(0)) outputText("Izma stares intently at your [cock], as if trying to make up her mind about it. \"<i>Well, it is a rather cute look. Just be careful with the knot, will ya?</i>\"");
-		//[Tentacle]
-		else if(player.cocks[0].cockType == CockTypesEnum.TENTACLE) outputText("A puzzled look plays across Izma's face as she stares at your [cock].  \"<i>Wow... I've read a lot about the corrupt plants.  Didn't think people could wind up like that.</i>\"");
-		//[Demon Dick]
-		else if(player.cocks[0].cockType == CockTypesEnum.DEMON) outputText("Izma looks shocked as she lays eyes on your perverted pecker, having never seen anything quite like it before. \"<i>Um... that looks... awkward. Like having a truncheon between your legs.</i>\"");
-		//[cat dork]
-		else if(player.cocks[0].cockType == CockTypesEnum.CAT) outputText("She glances at your barbed pecker and winces.  \"<i>You ate the fruit around here, didn't you?  One of my friends did that, too.</i>\"");
-		//[lizardick]
-		else if(player.cocks[0].cockType == CockTypesEnum.LIZARD) outputText("Her eyes goggle as you reveal a bulbous purple pecker.  \"<i>Oh wow.  Do you have a green one too?</i>\"");
-		//[Captain Nemo]
-		else if(player.cocks[0].cockType == CockTypesEnum.ANEMONE) outputText("She grimaces as you unveil a [cock].  \"<i>God, not one of those.  You wind up hornier after cumming than you were before you started touching it.</i>\"");
-		//[Kangaroo Jack]
-		else if(player.cocks[0].cockType == CockTypesEnum.KANGAROO) outputText("She looks on blankly as you reveal your sheath, then gives a start as your [cock] slides out of it after a few strokes.  \"<i>Woah... it's so... thin and pointy.</i>\"");
-	}
-	//Multi or weird new shit.
+	//[Human dick in slot 0]
+    if(player.cocks[0].cockType == CockTypesEnum.HUMAN) outputText("Izma seems surprised to see your genitalia is similar to hers.  \"<i>Huh. Thought that every land-dweller usually bumbled into a dick transformation around here.</i>\"");
+    //[Horse cock in slot 0]
+    else if(player.cocks[0].cockType == CockTypesEnum.HORSE) outputText("Seeing your [cock] causes Izma to lick her lips slowly. \"<i>Well... Equinum is pretty popular, isn't it?</i>\"");
+    //[Tentacle]
+    else if(player.cocks[0].cockType == CockTypesEnum.TENTACLE) outputText("A puzzled look plays across Izma's face as she stares at your [cock].  \"<i>Wow... I've read a lot about the corrupt plants.  Didn't think people could wind up like that.</i>\"");
+    //[Demon Dick]
+    else if(player.cocks[0].cockType == CockTypesEnum.DEMON) outputText("Izma looks shocked as she lays eyes on your perverted pecker, having never seen anything quite like it before. \"<i>Um... that looks... awkward. Like having a truncheon between your legs.</i>\"");
+    //[cat dork]
+    else if(player.cocks[0].cockType == CockTypesEnum.CAT) outputText("She glances at your barbed pecker and winces.  \"<i>You ate the fruit around here, didn't you?  One of my friends did that, too.</i>\"");
+    //[lizardick]
+    else if(player.cocks[0].cockType == CockTypesEnum.LIZARD) outputText("Her eyes goggle as you reveal a bulbous purple pecker.  \"<i>Oh wow.  Do you have a green one too?</i>\"");
+    //[Captain Nemo]
+    else if(player.cocks[0].cockType == CockTypesEnum.ANEMONE) outputText("She grimaces as you unveil a [cock].  \"<i>God, not one of those.  You wind up hornier after cumming than you were before you started touching it.</i>\"");
+    //[Kangaroo Jack]
+    else if(player.cocks[0].cockType == CockTypesEnum.KANGAROO) outputText("She looks on blankly as you reveal your sheath, then gives a start as your [cock] slides out of it after a few strokes.  \"<i>Woah... it's so... thin and pointy.</i>\"");
+    //[Dog cock]
+    else if(player.hasKnot(0)) outputText("Izma stares intently at your [cock], as if trying to make up her mind about it. \"<i>Well, it is a rather cute look. Just be careful with the knot, will ya?</i>\"");
+	//weird new shit.
 	else outputText("Her eyes bug out as you reveal " + sMultiCockDesc() + ".  \"<i>Woah, jeez, look at that one... oh man, and that one's... daaamn.</i>\"");
 	outputText("\n\n");
 
