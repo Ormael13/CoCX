@@ -108,30 +108,40 @@ public class DragButton {
     }
 
     private function swapWith(target:DragButton):Boolean {
-        if (!target._acceptable(this._itemSlot.itype)) {return false;}
-        if (!_acceptable(target._itemSlot.itype) && !target._itemSlot.isEmpty()) {return false;}
-        var tLabel:String         = target._button.labelText;
-        var tToolTipText:String   = target._button.toolTipText;
-        var tToolTipHeader:String = target._button.toolTipHeader;
-        var tEnabled:Boolean      = target._button.enabled;
-        var tColor:String         = target._button.labelColor;
+        if (target._itemSlot.isEmpty() || target._itemSlot.itype == this._itemSlot.itype && target._itemSlot.hasRoom()) {
+            // can move items one by one (to anempty cell or to a stack of similar items)
+            var movingQty:int = Math.min(this._itemSlot.quantity, target._itemSlot.roomLeft()); // how much we move
+            target._itemSlot.setItemAndQty(this._itemSlot.itype, target._itemSlot.quantity + movingQty); //even if not empty, item type won't change
+            // if out of items, set this to empty
+            this._itemSlot.quantity = this._itemSlot.quantity - movingQty; // auto-empty if spent
 
-        target._button.labelText     = _button.labelText;
-        target._button.toolTipHeader = _button.toolTipHeader;
-        target._button.color(_button.labelColor);
-        target._button.enable(_button.toolTipText);
-
-        _button.labelText     = tLabel;
-        _button.toolTipHeader = tToolTipHeader;
-        _button.toolTipText   = tToolTipText;
-        _button.color(tColor);
-        _button.enable();
-        _button.disableIf(!tEnabled);
-
-        var holdItype:ItemType = target._itemSlot.itype;
-        var holdQty:int = target._itemSlot.quantity;
-        target._itemSlot.setItemAndQty(this._itemSlot.itype, this._itemSlot.quantity);
-        this._itemSlot.setItemAndQty(holdItype, holdQty);
+        } else { // attempt to swap items
+            // can't place item type - abort
+            if (!target._acceptable(this._itemSlot.itype) ||
+                !this._acceptable(target._itemSlot.itype) && !target._itemSlot.isEmpty()) return false;
+            // can't fit quantity - abort
+            if (this._itemSlot.quantity > target._itemSlot.defaultStackSize() ||
+                target._itemSlot.quantity > this._itemSlot.defaultStackSize()) return false; // if can't fit - abort
+            var holdItype:ItemType = target._itemSlot.itype;
+            var holdQty:int = target._itemSlot.quantity;
+            target._itemSlot.setItemAndQty(this._itemSlot.itype, this._itemSlot.quantity);
+            this._itemSlot.setItemAndQty(holdItype, holdQty);
+        }
+        // now fixing the buttons. Create new ButtonData based on the existing buttons & items and apply it.
+        new ButtonData("")
+            .fromButton(this._button)
+            .forItemSlot(this._itemSlot)
+            .drag(this._itemSlot, this._acceptable) // _acceptable is the same for player and storage inventories
+            .enable() // in case it was empty and disabled
+            .disableIf(this._itemSlot.isEmpty())
+            .applyTo(this._button);
+        new ButtonData("")
+            .fromButton(target._button)
+            .forItemSlot(target._itemSlot)
+            .drag(target._itemSlot, target._acceptable) // _acceptable is the same for player and storage inventories
+            .enable() // in case it was empty and disabled
+            .disableIf(target._itemSlot.isEmpty())
+            .applyTo(target._button);
         return true;
     }
 

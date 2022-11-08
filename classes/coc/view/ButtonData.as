@@ -34,11 +34,11 @@ public class ButtonData {
 		this.toolTipHeader = toolTipHeader;
 		return this;
 	}
-	public function enable(callback:Function,toolTipText:String=null,toolTipHeader:String=null):ButtonData {
-		this.callback = callback;
-		this.enabled = callback != null;
+	public function enable(callback:Function=null,toolTipText:String=null,toolTipHeader:String=null):ButtonData {
+		if (callback is Function) this.callback = callback;
 		if (toolTipText is String) this.toolTipText = toolTipText;
 		if (toolTipHeader is String) this.toolTipHeader = toolTipHeader;
+		this.enabled = this.callback != null; // no enabling for nulls!
 		return this;
 	}
 	public function disable(toolTipText:String=null,toolTipHeader:String=null, text:String = null):ButtonData {
@@ -175,6 +175,24 @@ public class ButtonData {
 		this.draggable = true;
 		this.slot = slot;
 		this.slotType = slotType;
+		return this;
+	}
+
+	/**
+	 * Fills most fields from an existing button
+	 * @param btn The button to copy
+	 */
+	public function fromButton(btn:CoCButton):ButtonData {
+		this.text = btn.labelText;
+		this.callback = btn.callback;
+		this.enabled = btn.enabled;
+		this.visible = btn.visible;
+		this.visible = btn.visible;
+		this.toolTipHeader = btn.toolTipHeader;
+		this.toolTipText = btn.toolTipText;
+		this.labelColor = btn.labelColor;
+		this.iconId = btn.iconId;
+		// Still not enough to copy fields associated with items
 		return this;
 	}
 }

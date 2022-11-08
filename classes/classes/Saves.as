@@ -2363,7 +2363,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		{
 			for (i = 0; i < saveFile.data.pearlStorage.length && pearlStorageGet().length < 98; i++)
 			{
-				pearlStorageGet().push(new ItemSlotClass());
+				pearlStorageGet().push(new ItemSlotClass(ItemSlotClass.STORAGE_PEARL));
 					//trace("Initialize a slot for one of the item storage locations to load.");
 			}
 			//Populate storage slot array

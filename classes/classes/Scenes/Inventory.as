@@ -750,11 +750,7 @@ use namespace CoC;
 				var slot:ItemSlotClass = storage[i];
 				//if (!slot.unlocked) continue;
 				if (empty < 0 && slot.quantity == 0) empty = i;
-				if (storageName == "Sky Poison Pearl" && existing < 0 && slot.itype == source.itype && slot.pearlHasRoom()) {
-					existing = i;
-					break;
-				}
-				else if (existing < 0 && slot.itype == source.itype && slot.hasRoom()) {
+				if (existing < 0 && slot.itype == source.itype && slot.hasRoom()) {
 					existing = i;
 					break;
 				}
