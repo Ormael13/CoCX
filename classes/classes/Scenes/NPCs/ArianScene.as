@@ -599,12 +599,12 @@ public function visitAriansHouse(back:Boolean = false):void {
 private function arianHomeMenu(back:Boolean = false):void {
 	sceneHunter.print("Arian's health: " + arianHealth() + " out of 100.");
 	menu();
-	if(flags[kFLAGS.ARIAN_S_DIALOGUE] == 0 && arianHealth() >= 10) addButton(0,"Next",arianStoryDialogue1);
-	else if(flags[kFLAGS.ARIAN_S_DIALOGUE] == 1 && arianHealth() >= 20) addButton(0,"Next",arianStoryDialogue2);
-	else if(flags[kFLAGS.ARIAN_S_DIALOGUE] == 2 && arianHealth() >= 30) addButton(0,"Next",arianDialogue3);
-	else if(flags[kFLAGS.ARIAN_S_DIALOGUE] == 3 && arianHealth() >= 50) addButton(0,"Next",arianImbue);
-	else if(flags[kFLAGS.ARIAN_S_DIALOGUE] == 4 && arianHealth() >= 75) addButton(0,"Next",arianPlot4);
-	else if(flags[kFLAGS.ARIAN_S_DIALOGUE] == 5 && arianHealth() >= 100) addButton(0,"Next",arianPlot5);
+	if (!back && flags[kFLAGS.ARIAN_S_DIALOGUE] == 0) addButton(0, "Next", arianStoryDialogue1);
+	else if (!back && flags[kFLAGS.ARIAN_S_DIALOGUE] == 1 && arianHealth() >= 20) addButton(0, "Next", arianStoryDialogue2);
+	else if (!back && flags[kFLAGS.ARIAN_S_DIALOGUE] == 2 && arianHealth() >= 30) addButton(0, "Next", arianDialogue3);
+	else if (!back && flags[kFLAGS.ARIAN_S_DIALOGUE] == 3 && arianHealth() >= 50) addButton(0, "Next", arianImbue);
+	else if (!back && flags[kFLAGS.ARIAN_S_DIALOGUE] == 4 && arianHealth() >= 75) addButton(0, "Next", arianPlot4);
+	else if (!back && flags[kFLAGS.ARIAN_S_DIALOGUE] == 5 && arianHealth() >= 100) addButton(0,"Next",arianPlot5);
 	//If no story dialogue
 	else {
 		addButton(0,"Talk",talkToArianChoices);
