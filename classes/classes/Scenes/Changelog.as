@@ -346,7 +346,7 @@ public class Changelog extends BaseContent
 			outputText("-Smol bugfix to nat metamorph auto-proccing + facemem typo (Jtex)\n");
 			outputText("-Tidarion now deals fire damage properly. Gargoyle force impregnation behaviour fixed. Ant venom damage changed to be acid. Added Phylla to Soulsense. Added short hints for egg colors. (Svalkash)\n");
 			outputText("-Fixed some recent bugs and typos from Discord (Svalkash)\n");
-			outputText("-SH:Other - makes Corruption Tolerance twice as effective. The cabin doesn't disable imp attacks anymore. You still can build a wall or something else though. Disables Raphael dress timer - you can't fail his date by not wearing it. (Svalkash)\n");
+			outputText("-SH:Other - makes Corruption Tolerance twice as effective. The cabin doesn't disable imp attacks anymore. You still can build a wall or something else though. Disables Raphael dress timer - you can't fail his date by not wearing it. Added Joey massage to SH:UniHerms. (Svalkash)\n");
 			outputText("-Reworked Masteries / Multi melee attacks. Consolidated all masteries together. Disabled all Multi-Attack perks - You earn multi-attacks via weapon masteries now. (khovel)\n");
 			outputText("-Small weapons mastery opens new mutliattack option at mastery 10, 20, 30 and 40. Normal weapons mastery at 10, 25, 40. Large weapons mastery at 15 and 30. Massive weapons mastery at 30.\n");
 			outputText("-Asura Form wouldn't add 2x/3x more attacks that are displayed seperatly but would instead increase by equal amount damage of attack. I think certain Goat would be happy on this.\n");
@@ -371,6 +371,12 @@ public class Changelog extends BaseContent
 			outputText("-Using charge weapon spell would add magic dmg equal to 20% of phys dmg weapon dealing on attack. Now you can hurt all those pesky immune to physical damage enemies ;)\n");
 			outputText("-Multiattacks aren't costless now. All large and massive weapons req. 5 wrath per attack beyond 1st and others 50 fatigue. If PC lacks wrath or fatigue it would only reduce in that turn amount of multiattacks to 1 (2).\n");
 			outputText("-Unarmed attacks using fists (not feral) have now seperate mastery tracker of Unarmed mastery.\n");
+			outputText("-Bag of Cosmos now uses the new transfer menu with dragging. DragButton functionality fixed for S.P.Pearl (no more moving stacks of 15). Also, instead of swapping stacks, it tries to fill the target if possible. (Svalkash)\n");
+			outputText("-Power Attack / Shoot damage is now boosted by bonus to dmg from masteries.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -383,12 +389,6 @@ public class Changelog extends BaseContent
 			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

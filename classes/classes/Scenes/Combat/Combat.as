@@ -1431,7 +1431,7 @@ public class Combat extends BaseContent {
                     }
                 }
             }
-            if (player.hasStatusEffect(StatusEffects.BladeDance) || dualWeapon || player.isUnarmedCombat()) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 2;
+            if (player.hasStatusEffect(StatusEffects.BladeDance) || dualWeapon) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 2;
             if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 1 && player.hasPerk(PerkLib.SteelStorm) && !player.hasStatusEffect(StatusEffects.CounterAction) && dualWeapon) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 2;
         }
         else {
@@ -5158,36 +5158,8 @@ public class Combat extends BaseContent {
         }
         if (player.isSpearTypeWeapon() && player.hasPerk(PerkLib.ElvenRangerArmor)) damage *= 1.5;
         if ((player.weapon == weapons.S_RULER) && (monster.hasPerk(PerkLib.EnemyHugeType) || monster.hasPerk(PerkLib.EnemyGigantType) || monster.hasPerk(PerkLib.EnemyColossalType))) damage *= 1.5;
-        //Mastery bonus damage
-		if (player.isFistOrFistWeapon()) {
-			if (IsFeralCombat) damage *= (1 + (0.01 * masteryFeralCombatLevel()));
-			else {
-				if (player.isGauntletWeapon()) damage *= (1 + (0.01 * masteryGauntletLevel()));
-				else damage *= (1 + (0.01 * masteryUnarmedCombatLevel()));
-			}
-		}
-		if (player.isSwordTypeWeapon()) damage *= (1 + (0.01 * masterySwordLevel()));
-		if (player.isAxeTypeWeapon()) damage *= (1 + (0.01 * masteryAxeLevel()));
-		if (player.isMaceHammerTypeWeapon()) damage *= (1 + (0.01 * masteryMaceHammerLevel()));
-		if (player.isDuelingTypeWeapon()) damage *= (1 + (0.01 * masteryDuelingSwordLevel()));
-		if (player.isPolearmTypeWeapon()) damage *= (1 + (0.01 * masteryPolearmLevel()));
-		if (player.isSpearTypeWeapon()) damage *= (1 + (0.01 * masterySpearLevel()));
-		if (player.isDaggerTypeWeapon()) damage *= (1 + (0.01 * masteryDaggerLevel()));
-		if (player.isWhipTypeWeapon()) damage *= (1 + (0.01 * masteryWhipLevel()));
-		if (player.isExoticTypeWeapon()) damage *= (1 + (0.01 * masteryExoticLevel()));
-		if (player.weaponSpecials("Dual Small")) damage *= (1 + (0.01 * dualWSLevel()));
-		if (player.weaponSpecials("Dual")) damage *= (1 + (0.01 * dualWNLevel()));
-		if (player.weaponSpecials("Dual Large")) damage *= (1 + (0.01 * dualWLLevel()));
-
-        var weaponSize:Number = 1;
-        if( player.weaponSpecials("Small") ) weaponSize = 0;
-        if( player.weaponSpecials("Large") ) weaponSize = 2;
-        if( player.weaponSpecials("Massive") ) weaponSize = 3;
-        if (weaponSize == 0) damage *= (1 + (0.01 * weaponSizeSmall()));
-        if (weaponSize == 1) damage *= (1 + (0.01 * weaponSizeNormal()));
-        if (weaponSize == 2) damage *= (1 + (0.01 * weaponSizeLarge()));
-        if (weaponSize == 3) damage *= (1 + (0.01 * weaponSizeMassive()));
-
+        // Mastery bonus damage
+		damage *= MasteryBonusDamageMelee(true);
 		//Thunderous Strikes
 		if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
 		if (player.hasPerk(PerkLib.ChiReflowMagic)) damage *= UmasShop.NEEDLEWORK_MAGIC_REGULAR_MULTI;
@@ -5208,6 +5180,38 @@ public class Combat extends BaseContent {
 		if (SceneLib.urtaQuest.isUrta()) damage *= 2;
 		damage *= meleePhysicalForce();
 		return damage;
+	}
+	
+	public function MasteryBonusDamageMelee(IsFeralCombat:Boolean = false):Number {
+		var Mastery_bonus_damage:Number = 1;
+		if (player.isFistOrFistWeapon()) {
+			if (IsFeralCombat) Mastery_bonus_damage += 0.01 * masteryFeralCombatLevel();
+			else {
+				if (player.isGauntletWeapon()) Mastery_bonus_damage += 0.01 * masteryGauntletLevel();
+				else Mastery_bonus_damage += 0.01 * masteryUnarmedCombatLevel();
+			}
+		}
+		if (player.isSwordTypeWeapon()) Mastery_bonus_damage += 0.01 * masterySwordLevel();
+		if (player.isAxeTypeWeapon()) Mastery_bonus_damage += 0.01 * masteryAxeLevel();
+		if (player.isMaceHammerTypeWeapon()) Mastery_bonus_damage += 0.01 * masteryMaceHammerLevel();
+		if (player.isDuelingTypeWeapon()) Mastery_bonus_damage += 0.01 * masteryDuelingSwordLevel();
+		if (player.isPolearmTypeWeapon()) Mastery_bonus_damage += 0.01 * masteryPolearmLevel();
+		if (player.isSpearTypeWeapon()) Mastery_bonus_damage += 0.01 * masterySpearLevel();
+		if (player.isDaggerTypeWeapon()) Mastery_bonus_damage += 0.01 * masteryDaggerLevel();
+		if (player.isWhipTypeWeapon()) Mastery_bonus_damage += 0.01 * masteryWhipLevel();
+		if (player.isExoticTypeWeapon()) Mastery_bonus_damage += 0.01 * masteryExoticLevel();
+		if (player.weaponSpecials("Dual Small")) Mastery_bonus_damage += 0.01 * dualWSLevel();
+		if (player.weaponSpecials("Dual")) Mastery_bonus_damage += 0.01 * dualWNLevel();
+		if (player.weaponSpecials("Dual Large")) Mastery_bonus_damage += 0.01 * dualWLLevel();
+        var weaponSize:Number = 1;
+        if( player.weaponSpecials("Small") || player.weaponSpecials("Dual Small") ) weaponSize = 0;
+        if( player.weaponSpecials("Large") || player.weaponSpecials("Dual Large") ) weaponSize = 2;
+        if( player.weaponSpecials("Massive") || player.weaponSpecials("Dual Massive") ) weaponSize = 3;
+        if (weaponSize == 0) Mastery_bonus_damage += 0.01 * weaponSizeSmall();
+        if (weaponSize == 1) Mastery_bonus_damage += 0.01 * weaponSizeNormal();
+        if (weaponSize == 2) Mastery_bonus_damage += 0.01 * weaponSizeLarge();
+        if (weaponSize == 3) Mastery_bonus_damage += 0.01 * weaponSizeMassive();
+		return Mastery_bonus_damage;
 	}
 
     /*
@@ -5317,7 +5321,7 @@ public class Combat extends BaseContent {
         if (player.weaponSpecials("Dual Large")) dualWieldLargeXP(meleeMasteryEXPgains);
 
         if (player.isFeralCombat()) feralCombatXP(meleeMasteryEXPgains);
-        else if (player.isUnarmedCombat()) unarmedCombatXP(meleeMasteryEXPgains);
+        else if (flags[kFLAGS.FERAL_COMBAT_MODE] != 1 && player.weaponName == "fists") unarmedCombatXP(meleeMasteryEXPgains);
         else if (player.weaponSpecials("Dual Small") || player.weaponSpecials("Small")) weaponSmallMastery(meleeMasteryEXPgains);
         else if (player.weaponSpecials("Dual Large") || player.weaponSpecials("Large")) weaponLargeMastery(meleeMasteryEXPgains);
         else if (player.weaponSpecials("Dual Massive") || player.weaponSpecials("Massive")) weaponMassiveMastery(meleeMasteryEXPgains);
@@ -5549,7 +5553,7 @@ public class Combat extends BaseContent {
                             monster.teased(Math.round(monster.lustVuln * damage * 0.0125));
                         }
                     }
-					else if (flags[kFLAGS.FERAL_COMBAT_MODE] != 1 && player.isFistOrFistWeapon()) {
+					else if (player.isUnarmedCombat()) {
 						doPhysicalDamage(damage, true, true);
 						doPhysicalDamage(damage, true, true);
 					}
