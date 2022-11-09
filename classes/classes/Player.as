@@ -1000,7 +1000,7 @@ use namespace CoC;
 		public function haveNaturalClaws():Boolean { return Arms.Types[arms.type].claw || Arms.Types[arms.type].armSlam || Arms.Types[arms.type].scythe || LowerBody.hasClaws(this);}
 		public function haveNaturalClawsTypeWeapon():Boolean {return weaponName == "gauntlet with claws" || weaponName == "gauntlet with an aphrodisiac-coated claws" || weaponName == "Venoclaw" || weaponName == "hooked gauntlets" || (hasAetherTwinsTier1() || hasAetherTwinsTier2());}
         public function isFeralCombat():Boolean { return flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && ( (weaponName == "fists" && haveNaturalClaws()) || haveNaturalClawsTypeWeapon() ) ;}
-        public function isUnarmedCombat():Boolean { return flags[kFLAGS.FERAL_COMBAT_MODE] == 0 && isFistOrFistWeapon() ;}
+        public function isUnarmedCombat():Boolean { return flags[kFLAGS.FERAL_COMBAT_MODE] != 1 && isFistOrFistWeapon() ;}
         //Other natural weapon checks
 		public function hasABiteAttack():Boolean { return (lowerBody == LowerBody.HYDRA || Face.Types[faceType].bite);}
 		public function hasAWingAttack():Boolean { return (Wings.Types[wings.type].wingSlap || wings.type == Wings.THUNDEROUS_AURA || wings.type == Wings.WINDY_AURA);}
@@ -5654,6 +5654,7 @@ use namespace CoC;
 				}
 			}
             else if(weaponSpecials("Small") || weaponSpecials("Dual Small")){combatMasteryPos = 18}
+            else if(weaponSpecials("Dual")){combatMasteryPos = 19}
             else if(weaponSpecials("Large") || weaponSpecials("Dual Large")){combatMasteryPos = 20}
             else if(weaponSpecials("Massive") || weaponSpecials("Dual Massive")){combatMasteryPos = 21}
             else if(isBowTypeWeapon() || isThrownTypeWeapon()){combatMasteryPos = 22}

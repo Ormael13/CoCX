@@ -811,6 +811,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 		damage = combat.itemsBonusDamageDamage(damage);
+		if (player.isFeralCombat()) damage *= combat.MasteryBonusDamageMelee(true);
+		else damage *= combat.MasteryBonusDamageMelee();
 		damage *= combat.meleePhysicalForce();
 		damage *= PAMulti;
 		var crit:Boolean = false;
@@ -863,6 +865,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage = combat.archerySkillDamageMod(damage);
 		if (player.weaponRangeName == "Wild Hunt" && player.level > monster.level) damage *= 1.2;
 		if (player.weaponRangeName == "Hodr's bow" && monster.hasStatusEffect(StatusEffects.Blind)) damage *= 1.1;
+		if (player.weaponRangePerk == "Throwing") damage *= (1 + (0.01 * combat.masteryThrowingLevel()));
+		else damage *= (1 + (0.01 * combat.masteryArcheryLevel()));
 		damage *= combat.rangePhysicalForce();
 		damage *= PSMulti;
 		var crit:Boolean = false;
@@ -6344,4 +6348,4 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function PhysicalSpecials() {
 	}
 }
-}
+}
