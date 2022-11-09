@@ -116,8 +116,10 @@ public class ItemType extends ItemConstants
 		/**
 		 * Max stack size for items of that type
 		 */
-		public var stackSize:int = 5;
-		public var perlStackSize:int = 15;
+		public static var DEFAULT_STACK_SIZE:int = 5;
+		public static var DEFAULT_PEARL_STACK_SIZE:int = 15;
+		public var stackSize:int = DEFAULT_STACK_SIZE;
+		public var pearlStackSize:int = DEFAULT_PEARL_STACK_SIZE;
 
 		public function get ownIconId():String {
 			if (this.isDynamicItem) return "I_"+templateId();

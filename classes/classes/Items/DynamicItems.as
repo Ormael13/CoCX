@@ -428,6 +428,7 @@ public class DynamicItems extends ItemConstants {
 	
 	public static function postConstruct(item:Equipable, tags:Object, buffs:Object):void {
 		item.stackSize = 1;
+		item.pearlStackSize = 1;
 		item.withTags(tags);
 		item.withBuffs(buffs);
 		for each (var enchantment:Enchantment in item.getEnchantments()) {
