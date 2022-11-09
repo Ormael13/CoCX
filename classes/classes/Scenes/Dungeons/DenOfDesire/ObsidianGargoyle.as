@@ -37,10 +37,7 @@ public class ObsidianGargoyle extends AbstractGargoyle
 		
 		public function moveDevourMagic():void {
 			if (hasStatusEffect(StatusEffects.DevourMagic)) {
-				if (monsterIsStunned()) {
-					outputText("Liadri would write text for this situation... eventualy.");
-				}
-				else {
+				if (!monsterIsStunned()) {
 					outputText("You feel your magical energy being forcefully drawn out of you, coming out as a bluish aura that rushes straight into the Gargoyle waiting mouth. She take it in like a breath of fresh air, looking healthier as she feasts on your magic. The gargoyle licks her lips like she just had an excellent meal.");
 					var devour:Number = 0;
 					if (player.fatigue + 200 > player.maxFatigue()) {
