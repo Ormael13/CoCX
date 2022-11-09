@@ -5979,7 +5979,7 @@ public class Combat extends BaseContent {
             }
 			if (i > 1 && flags[kFLAGS.DOUBLE_ATTACK_STYLE] > 0) {
 				if (player.weaponSpecials("Dual Large") || player.weaponSpecials("Large") || player.weaponSpecials("Dual Massive") || player.weaponSpecials("Massive")) {
-					if (player.wrath - 10 >= 0) player.wrath -= 10;
+					if (player.wrath - 5 >= 0) player.wrath -= 5;
 					else i = flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] + 1;
 				}
 				else {
@@ -11121,8 +11121,8 @@ public function weaponSmallMastery(XP:Number = 0):void  {player.gainCombatXP(18,
 public function weaponNormalMastery(XP:Number = 0):void {player.gainCombatXP(19, XP * weaponmasteryXPMulti());}
 public function weaponLargeMastery(XP:Number = 0):void  {player.gainCombatXP(20, XP * weaponmasteryXPMulti());}
 public function weaponMassiveMastery(XP:Number = 0):void  {player.gainCombatXP(21, XP * weaponmasteryXPMulti());}
-public function unarmedCombatXP(XP:Number = 0):void  	{player.gainCombatXP(22, XP * weaponmasteryXPMulti());}
-//public function weaponRangeMastery(XP:Number = 0):void  {player.gainCombatXP(23, XP * weaponmasteryXPMulti());}
+//public function weaponRangeMastery(XP:Number = 0):void  {player.gainCombatXP(22, XP * weaponmasteryXPMulti());}
+public function unarmedCombatXP(XP:Number = 0):void  	{player.gainCombatXP(23, XP * weaponmasteryXPMulti());}
 
 //VICTORY OR DEATH?
 // Called after the monster's action. Increments round counter. Setups doNext to win/loss/combat menu

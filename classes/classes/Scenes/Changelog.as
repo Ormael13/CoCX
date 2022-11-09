@@ -369,7 +369,7 @@ public class Changelog extends BaseContent
 			outputText("-Kath 'Get Help' locks her random encounters. Still can be recruited after that Scylla scene. Added first SexMachine use to Recall menu. Marble purification quest doesn't check your or your followers' corruption anymore. (Svalkash)\n");
 			outputText("-Golem enemies won't be affected by displacer beast tentacle move causing milking enemy. Feral combat attack part with biting enemy won't cause bleed on enemies immune to bleed.\n");
 			outputText("-Using charge weapon spell would add magic dmg equal to 20% of phys dmg weapon dealing on attack. Now you can hurt all those pesky immune to physical damage enemies ;)\n");
-			outputText("-Multiattacks aren't costless now. All large and massive weapons req. 10 wrath per attack beyond 1st and others 50 fatigue. If PC lacks wrath or fatigue it would only reduce in that turn amount of multiattacks to 1 (2).\n");
+			outputText("-Multiattacks aren't costless now. All large and massive weapons req. 5 wrath per attack beyond 1st and others 50 fatigue. If PC lacks wrath or fatigue it would only reduce in that turn amount of multiattacks to 1 (2).\n");
 			outputText("-Unarmed attacks using fists (not feral) have now seperate mastery tracker of Unarmed mastery.\n");
 			outputText("-\n");
 			outputText("-\n");

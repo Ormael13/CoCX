@@ -5646,14 +5646,17 @@ use namespace CoC;
 		public function calculateMultiAttacks():Number{
 			var rval:Number = 1;
             var combatMasteryPos:int = 19;	// default to Normal Weapon size
-            if(weaponSpecials("Small") || weaponSpecials("Dual Small")){combatMasteryPos = 18}
-            else if(weaponSpecials("Large")){combatMasteryPos = 20}
-            else if(weaponSpecials("Massive")){combatMasteryPos = 21}
-            else if(isBowTypeWeapon() || isThrownTypeWeapon()){combatMasteryPos = 23}
             if (isFeralCombat() || isUnarmedCombat()){
 				if (isFeralCombat()) combatMasteryPos = 0;
-				else combatMasteryPos = 23;
+				else {
+					if (isGauntletWeapon()) combatMasteryPos = 1;
+					else combatMasteryPos = 23;
+				}
 			}
+            else if(weaponSpecials("Small") || weaponSpecials("Dual Small")){combatMasteryPos = 18}
+            else if(weaponSpecials("Large") || weaponSpecials("Dual Large")){combatMasteryPos = 20}
+            else if(weaponSpecials("Massive") || weaponSpecials("Dual Massive")){combatMasteryPos = 21}
+            else if(isBowTypeWeapon() || isThrownTypeWeapon()){combatMasteryPos = 22}
 
 
 			/*
@@ -5672,7 +5675,7 @@ use namespace CoC;
                 if(combatMastery[combatMasteryPos].level >= 40) rval += 1;
             }
             // Unarmed Attack Count
-            if(combatMasteryPos == 23){
+            if(combatMasteryPos == 23 || combatMasteryPos == 1){
                 if(combatMastery[combatMasteryPos].level >= 10) rval += 1;
                 if(combatMastery[combatMasteryPos].level >= 20) rval += 1;
                 if(combatMastery[combatMasteryPos].level >= 30) rval += 1;
