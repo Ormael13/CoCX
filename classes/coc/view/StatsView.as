@@ -58,9 +58,6 @@ public class StatsView extends Block {
 	private var manaBar:StatBar;
 	private var soulforceBar:StatBar;
 	private var hungerBar:StatBar;
-	private var esteemBar:StatBar;
-	private var willBar:StatBar;
-	private var obeyBar:StatBar;
 
 	private var allStats:Array;
 
@@ -186,18 +183,6 @@ public class StatsView extends Block {
 			statName: "Satiety:",
 			showMax : true
 		}));
-		col2.addElement(esteemBar = new StatBar({
-			statName: "Self Esteem:",
-			showMax : true
-		}));
-		col2.addElement(willBar = new StatBar({
-			statName: "Willpower:",
-			showMax : true
-		}));
-		col2.addElement(obeyBar = new StatBar({
-			statName: "Obedience:",
-			showMax : true
-		}));
 		///////////////////////////
 		allStats = [];
 		for (var ci:int = 0, cn:int = col1.numElements; ci < cn; ci++) {
@@ -290,12 +275,6 @@ public class StatsView extends Block {
 				return corner.xpBar;
 			case 'gems':
 				return corner.gemsBar;
-			case 'will':
-				return willBar;
-			case 'esteem':
-				return esteemBar;
-			case 'obey':
-				return obeyBar;
 			case 'spiritstones':
 				return corner.spiritstonesBar;
 		}
@@ -355,36 +334,19 @@ public class StatsView extends Block {
 		} else {
 			hungerBar.statName = 'Satiety:';
 		}
-		var inPrison:Boolean          = SceneLib.prison.inPrison;
-		esteemBar.visible     		  = inPrison;
-		willBar.visible      		  = inPrison;
-		obeyBar.visible       		  = inPrison;
-		corner.levelBar.visible      		  = !inPrison;
-		corner.xpBar.visible         		  = !inPrison;
-		corner.gemsBar.visible       		  = !inPrison;
-		corner.spiritstonesBar.visible       = !inPrison;
-		if (inPrison) {
-			corner.advancementText.htmlText = "<b>Prison Stats</b>";
-			esteemBar.maxValue       = 100;
-			esteemBar.value          = player.esteem;
-			willBar.maxValue         = 100;
-			willBar.value            = player.will;
-			obeyBar.maxValue         = 100;
-			obeyBar.value            = player.obey;
+
+		corner.advancementText.htmlText = "<b>Advancement</b>";
+		corner.levelBar.value           = player.level;
+		if (player.level < CoC.instance.levelCap) {
+			corner.xpBar.maxValue = player.requiredXP();
+			corner.xpBar.value    = player.XP;
 		} else {
-			corner.advancementText.htmlText = "<b>Advancement</b>";
-			corner.levelBar.value           = player.level;
-			if (player.level < CoC.instance.levelCap) {
-				corner.xpBar.maxValue = player.requiredXP();
-				corner.xpBar.value    = player.XP;
-			} else {
-				corner.xpBar.maxValue  = player.XP;
-				corner.xpBar.value     = player.XP;
-				corner.xpBar.valueText = 'MAX';
-			}
-			corner.gemsBar.valueText = Utils.addComma(Math.floor(player.gems));
-			corner.spiritstonesBar.valueText = game.flags[kFLAGS.SPIRIT_STONES];
+			corner.xpBar.maxValue  = player.XP;
+			corner.xpBar.value     = player.XP;
+			corner.xpBar.valueText = 'MAX';
 		}
+		corner.gemsBar.valueText = Utils.addComma(Math.floor(player.gems));
+		corner.spiritstonesBar.valueText = game.flags[kFLAGS.SPIRIT_STONES];
 
 		var minutesDisplay:String = "" + game.model.time.minutes;
 		if (minutesDisplay.length == 1) minutesDisplay = "0" + minutesDisplay;

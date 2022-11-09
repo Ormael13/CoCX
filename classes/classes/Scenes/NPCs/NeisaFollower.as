@@ -30,7 +30,7 @@ public function timeChange():Boolean
 	return false;
 }
 public function timeChangeLarge():Boolean {
-	if (model.time.hours == 6 && model.time.minutes == 0 && flags[kFLAGS.NEISA_FOLLOWER] >= 14 && !prison.inPrison) {
+	if (model.time.hours == 6 && model.time.minutes == 0 && flags[kFLAGS.NEISA_FOLLOWER] >= 14) {
 		//spriteSelect(SpriteDb.s_isabella);
 		neisaMorningPaycheckCall();
 		return true;

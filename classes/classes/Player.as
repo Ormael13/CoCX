@@ -167,13 +167,8 @@ use namespace CoC;
 		public var teaseLevel:Number = 0;
 		public var teaseXP:Number = 0;
 
-		//Prison stats
-		public var hunger:Number = 0; //Also used in survival and realistic mode
-		public var obey:Number = 0;
-		public var esteem:Number = 0;
-		public var will:Number = 0;
-
-		public var obeySoftCap:Boolean = true;
+		//Only used in survival and realistic mode
+		public var hunger:Number = 0;
 
 		//Perks used to store 'queued' perk buys
 		public var perkPoints:Number = 0;
@@ -223,7 +218,6 @@ use namespace CoC;
 		public var itemSlot20:ItemSlotClass;
 		public var itemSlots:/*ItemSlotClass*/Array;
 
-		public var prisonItemSlots:Array = [];
 		public var previouslyWornClothes:Array = []; //For tracking achievement.
 
 		private var _equipment:/*Equipable*/Array = [];
@@ -4199,7 +4193,6 @@ use namespace CoC;
 				else if (hasPerk(PerkLib.DeadMetabolism)) hungerActive = false;
 				else if (hasPerk(PerkLib.GargoylePure) || hasPerk(PerkLib.GargoyleCorrupted)) hungerActive = false;
 			}
-			if (flags[kFLAGS.IN_PRISON] > 0) hungerActive = true;
 			if (hungerActive) {
 				var oldHunger:Number = hunger;
 				var weightChange:int = 0;
@@ -4212,7 +4205,7 @@ use namespace CoC;
 				overeatingLimit += 20;overeating ex perk chyba		achiev polegający na przeżyciu x dni bez jedzenie czegokolwiek wiec każde podniesienie hunger resetuje ten timer xD
 				overeatingLimit += 40;overeating su perk chyba*/
 				hunger += amnt;
-				if (hunger > maxHunger() + overeatingLimit && !SceneLib.prison.inPrison) {
+				if (hunger > maxHunger() + overeatingLimit) {
 					weightChange = Math.ceil((hunger - (maxHunger() + overeatingLimit)) / overeatingLimit); //rounded UP to int
 					modThickness(maxThicknessCap(), weightChange);
 					hunger = maxHunger(); //don't mind overeating?
@@ -6014,7 +6007,10 @@ use namespace CoC;
 			}
 			SexXP(5+level);
 			if (armor == game.armors.SCANSC)SexXP(5+level);
-			if (real) orgasm(type);
+			if (real) {
+				statStore.removeBuffs('Supercharged');
+				orgasm(type);
+			}
 		}
 
 		public function orgasm(type:String = "Default"):void

@@ -1107,7 +1107,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] == 2 || flags[kFLAGS.CURSE_OF_THE_JIANGSHI] == 3) hungerActive = false;
 				else if (player.hasPerk(PerkLib.DeadMetabolism)) hungerActive = false;
 			}
-			if (hungerActive || prison.inPrison) {
+			if (hungerActive) {
 				var multiplier:Number = 1.0;
 				if (player.hasPerk(PerkLib.Survivalist)) multiplier -= 0.2;
 				if (player.hasPerk(PerkLib.Survivalist2)) multiplier -= 0.2;
@@ -1126,21 +1126,11 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				//Hunger drain rate. If above 50, 1.5 per hour. Between 25 and 50, 1 per hour. Below 25, 0.5 per hour.
 				//So it takes 100 hours to fully starve from 100/100 to 0/100 hunger. Can be increased to 125 then 166 and 250 hours with Survivalist perks.
 				if (player.hasStatusEffect(StatusEffects.FastingPill)) player.hunger += 1;
-				if (prison.inPrison) {
-					if (player.internalChimeraRating() >= 1) {
-						player.hunger -= ((4 + player.internalChimeraRating()) * 0.5 * multiplier); //Hunger depletes faster in prison.
-					}
-					else {
-						player.hunger -= (2 * multiplier); //Hunger depletes faster in prison.
-					}
-				}
-				else {
-					if (player.internalChimeraRating() >= 1) player.hunger -= (0.5 * player.internalChimeraRating());
-					if (player.hunger > 80) player.hunger -= (0.5 * multiplier); //If satiated, depletes at 2 points per hour.
-					if (player.hunger > 50) player.hunger -= (0.5 * multiplier);
-					if (player.hunger > 25) player.hunger -= (0.5 * multiplier);
-					if (player.hunger > 0) player.hunger -= (0.5 * multiplier);
-				}
+				if (player.internalChimeraRating() >= 1) player.hunger -= (0.5 * player.internalChimeraRating());
+				if (player.hunger > 80) player.hunger -= (0.5 * multiplier); //If satiated, depletes at 2 points per hour.
+				if (player.hunger > 50) player.hunger -= (0.5 * multiplier);
+				if (player.hunger > 25) player.hunger -= (0.5 * multiplier);
+				if (player.hunger > 0) player.hunger -= (0.5 * multiplier);
 				if (player.buttPregnancyType == PregnancyStore.PREGNANCY_GOO_STUFFED) player.hunger = player.maxHunger(); //After Valeria x Goo Girl, you'll never get hungry until you "birth" the goo-girl.
 				if (player.hunger < 50 && player.hasPerk(PerkLib.MagicMetabolism)) {
 					var manaDrain:Number = 0;
@@ -1151,39 +1141,23 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					}
 				}
 				if (player.hunger <= 0) {
-					if (prison.inPrison) {
-						if (player.isGargoyle()) {
-							fatigue(2);//zmienić potem jak lia coś tu wymyśli
-						}
-						else {
-							SceneLib.prison.changeWill(-1, prison.inPrison);
-							fatigue(2);
-						}
-					}
+					if (player.isGargoyle()) campUniqueScene.droppingToZeroSatietyAsGargoyle();
 					else {
-						if (player.isGargoyle()) campUniqueScene.droppingToZeroSatietyAsGargoyle();
-						else {
-							//Lose HP and makes fatigue go up. Lose body weight and muscles.
-							if (player.thickness < 25) {
-								player.takePhysDamage(player.maxHP() / 25);
-								fatigue(2);
-								dynStats("tou", -0.5);
-								dynStats("str", -0.5);
-							}
-							else if ((model.time.hours + 2) % 4 == 0) { //Lose thickness 2x as fast.
-								player.modThickness(1, 1);
-								player.modTone(1, 1);
-							}
+						//Lose HP and makes fatigue go up. Lose body weight and muscles.
+						if (player.thickness < 25) {
+							player.takePhysDamage(player.maxHP() / 25);
+							fatigue(2);
+							dynStats("tou", -0.5);
+							dynStats("str", -0.5);
+						}
+						else if ((model.time.hours + 2) % 4 == 0) { //Lose thickness 2x as fast.
+							player.modThickness(1, 1);
+							player.modTone(1, 1);
 						}
 					}
 					player.hunger = 0; //Prevents negative
 				}
-				else {
-					if (prison.inPrison) {
-						SceneLib.prison.changeWill((player.esteem / 50) + 1);
-					}
-				}
-				if (player.hunger < 10 && model.time.hours % 4 == 0 && !prison.inPrison) {
+				if (player.hunger < 10 && model.time.hours % 4 == 0) {
 					player.modThickness(1, 1);
 					player.modTone(1, 1);
 				}
@@ -2840,7 +2814,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		private var LunaFullMoonScene: Boolean = false;
 
 		public function timeChangeLarge():Boolean {
-            if (!prison.inPrison && !ingnam.inIngnam) {
+            if (!ingnam.inIngnam) {
                 if (rand(4) == 0 && Holidays.isChristmas() && player.gender > 0 && camp.IsSleeping && flags[kFLAGS.XMAS_CHICKEN_YEAR] < date.fullYear) {
 					SceneLib.holidays.getAChristmasChicken();
                     return true;
@@ -2849,7 +2823,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					SceneLib.holidays.xmasBitchEncounter(); //Set it to remember the last year encountered
                     return true;
                 }
-                if (checkedTurkey++ == 0 && (rand(5) == 0 && (CoC.instance.model.time.hours == 18 || CoC.instance.model.time.hours == 19)) && (date.fullYear > flags[kFLAGS.TURKEY_FUCK_YEAR_DONE] || flags[kFLAGS.MORE_TURKEY] > 0) && Holidays.isThanksgiving() && player.gender > 0 && flags[kFLAGS.IN_INGNAM] <= 0) {
+                if (checkedTurkey++ == 0 && (rand(5) == 0 && (CoC.instance.model.time.hours == 18 || CoC.instance.model.time.hours == 19)) && (date.fullYear > flags[kFLAGS.TURKEY_FUCK_YEAR_DONE] || flags[kFLAGS.MORE_TURKEY] > 0) && Holidays.isThanksgiving() && player.gender > 0 && !flags[kFLAGS.IN_INGNAM]) {
 					SceneLib.holidays.datTurkeyRumpMeeting(); //TURKEY SURPRISE
                     return true;
                 }

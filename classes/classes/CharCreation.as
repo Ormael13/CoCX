@@ -157,9 +157,6 @@ import coc.view.MainView;
 			player.wrath = 0;
 			player.mana = 100;
 			player.hunger = 80;
-			player.obey = 10;
-			player.esteem = 50;
-			player.will = 80;
 			player.lust = 15;
 			player.gems = 0;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {

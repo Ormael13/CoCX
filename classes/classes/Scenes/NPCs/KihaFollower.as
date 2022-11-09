@@ -103,17 +103,14 @@ public class KihaFollower extends NPCAwareContent implements TimeAwareInterface,
         if (pregnancy.isPregnant && kihaPregUpdate()) needNext = true;
         if (flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] > 1) {
             if (flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] != 144) flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER]--;
-            if (flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] == 240 && (flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0)) {
+            if (flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] == 240 && !flags[kFLAGS.IN_INGNAM]) {
                 kihaBreastfeedingTime();
                 needNext = true;
-            } else if (flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] == 144 && prison.inPrison) {
-                kihaTellsChildrenStory();
-                needNext = true;
-            } else if (flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] == 72 && (flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0)) {
+            } else if (flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] == 72 && !flags[kFLAGS.IN_INGNAM]) {
                 kihaTrainsHerKids();
                 needNext = true;
             }
-        } else if (flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] == 1 && (flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0)) {
+        } else if (flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] == 1 && !flags[kFLAGS.IN_INGNAM]) {
             kihaChildGraduationTime();
             needNext = true;
         }
@@ -2163,11 +2160,6 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         var eggCounter:int = (rand(5) + 1) * 2;
         eggCounter += (player.virilityQ() / 10);
         if (eggCounter > 10) eggCounter = 10;
-        //In prison? Letter for you!
-        if (prison.inPrison) {
-            prison.prisonLetter.letterFromKiha1(eggCounter);
-            return;
-        }
         clearOutput();
         kihaSprite();
         //Scene time!
@@ -2218,10 +2210,6 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
 
     public function kihaTellsChildrenStory():void {
         flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER]--;
-        if (prison.inPrison) {
-            prison.prisonLetter.letterFromKiha3();
-            return;
-        }
         clearOutput();
         kihaSprite();
         outputText("Kiha walks over to you and says, \"<i>Could you sit with me please, [name]? I want to tell our " + (totalKihaChildren() == 1 ? "kid" : "kids") + " a story,</i>\" she says. You tell her that it would be a wonderful idea! Kiha escorts you to her nest.");
@@ -2251,10 +2239,6 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
 
     private function kihaChildGraduationTime():void {
         flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] = 0;
-        if (prison.inPrison) {
-            prison.prisonLetter.letterFromKiha4();
-            return;
-        }
         outputText("You walk up to check on your draconic children. By Marae, they're all grown up! Looking down, you notice that most of them are wearing tribal loincloths, a nod to modesty ");
         if (flags[kFLAGS.KIHA_UNDERGARMENTS] > 0) outputText("like Kiha");
         else outputText("unlike Kiha, who is naked");

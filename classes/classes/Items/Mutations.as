@@ -14576,11 +14576,6 @@ public final class Mutations extends MutationsHelper {
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
     }
 
-
-    public function prisonBread(player:Player):void {
-        prison.prisonItemBread(false);
-    }
-
     public function frothyBeer(player:Player):void {
         outputText("Feeling parched, you twist the metal cap from the clear green bottle and chug it down. ");
         dynStats("lus", 15, "scale", false);

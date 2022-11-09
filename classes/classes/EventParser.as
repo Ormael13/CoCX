@@ -285,25 +285,25 @@ public class EventParser {
             SceneLib.inventory.takeItem(player.unequipMiscJewelry2(false,true), playerMenu);
         }
         //Drop Excalibur / beautiful sword / beautiful staff if corrupted!
-        if ((player.weapon == CoC.instance.weapons.EXCALIB || player.weapon == CoC.instance.weapons.B_SWORD || player.weapon == CoC.instance.weapons.B_STAFF) && player.cor >= (33 + player.corruptionTolerance)) {
+        if ((player.weapon == CoC.instance.weapons.EXCALIB || player.weapon == CoC.instance.weapons.B_SWORD || player.weapon == CoC.instance.weapons.B_STAFF) && player.cor >= 33 + player.corruptionTolerance) {
             EngineCore.outputText("<b>\nThe <u>[weapon]</u> grows hot in your hand, until you are forced to drop it.  Whatever power inhabits this weapon appears to be unhappy with you.  Touching it gingerly, you realize it is no longer hot, but as soon as you go to grab the hilt, it nearly burns you.\n\nYou realize you won't be able to use it right now, but you could probably keep it in your inventory.</b>\n\n");
             SceneLib.inventory.takeItem(player.setWeapon(WeaponLib.FISTS), playerMenu);
             return true;
         }
         //Drop beautiful bow if corrupted!
-        if (player.weaponRange == CoC.instance.weaponsrange.BEA_BOW && player.cor >= (33 + player.corruptionTolerance)) {
+        if (player.weaponRange == CoC.instance.weaponsrange.BEA_BOW && player.cor >= 33 + player.corruptionTolerance) {
             EngineCore.outputText("<b>\nThe <u>[weaponrange]</u> grows hot in your hand, until you are forced to drop it.  Whatever power inhabits this range weapon appears to be unhappy with you.  Touching it gingerly, you realize it is no longer hot, but as soon as you go to grab the riser, it nearly burns you.\n\nYou realize you won't be able to use it right now, but you could probably keep it in your inventory.</b>\n\n");
             SceneLib.inventory.takeItem(player.unequipWeaponRange(), playerMenu);
             return true;
         }
         //Drop beautiful shield if corrupted!
-        if (player.shield == CoC.instance.shields.BSHIELD && player.cor >= (33 + player.corruptionTolerance)) {
+        if (player.shield == CoC.instance.shields.BSHIELD && player.cor >= 33 + player.corruptionTolerance) {
             EngineCore.outputText("<b>\nThe <u>[shield]</u> grows hot in your hand, until you are forced to drop it.  Whatever power inhabits this shield appears to be unhappy with you.  Touching it gingerly, you realize it is no longer hot, but as soon as you go to grab the enarmes, it nearly burns you.\n\nYou realize you won't be able to use it right now, but you could probably keep it in your inventory.</b>\n\n");
             SceneLib.inventory.takeItem(player.unequipShield(), playerMenu);
             return true;
         }
         //Drop scarred blade if not corrupted enough!
-        if (player.weapon == CoC.instance.weapons.SCARBLD && player.cor < (66 - player.corruptionTolerance) && CoC.instance.flags[kFLAGS.MEANINGLESS_CORRUPTION] <= 0) {
+        if (player.weapon == CoC.instance.weapons.SCARBLD && player.cor < 66 - player.corruptionTolerance) {
             SceneLib.sheilaScene.rebellingScarredBlade();
             return true;
         }
@@ -366,10 +366,6 @@ public class EventParser {
                 // trace("IMA LOOPIN", counter);
             }
 
-        }
-        if (SceneLib.prison.trainingFeed.prisonCaptorFeedingQuestTrainingExists() && SceneLib.prison.trainingFeed.prisonCaptorFeedingQuestTrainingIsTimeUp() && Utils.rand(100) < (CoC.instance.flags[kFLAGS.PRISON_CAPTURE_CHANCE] + player.obey / 4) && !DungeonAbstractContent.inDungeon && !DungeonAbstractContent.inRoomedDungeon && !SceneLib.prison.inPrison && !SceneLib.ingnam.inIngnam) {
-            SceneLib.prison.goBackToPrisonBecauseQuestTimeIsUp();
-            return true;
         }
         EngineCore.statScreenRefresh();
         if (needNext) {
@@ -505,7 +501,7 @@ public class EventParser {
                 return 1;
             } else if (chance > Utils.rand(100) && !player.hasStatusEffect(StatusEffects.DefenseCanopy)) {
                 if (player.gender > 0 && (!player.hasStatusEffect(StatusEffects.JojoNightWatch) || !player.hasStatusEffect(StatusEffects.PureCampJojo)) && (flags[kFLAGS.HEL_GUARDING] == 0 || !SceneLib.helFollower.followerHel()) && flags[kFLAGS.ANEMONE_WATCH] == 0 && (flags[kFLAGS.HOLLI_DEFENSE_ON] == 0 || flags[kFLAGS.FUCK_FLOWER_KILLED] > 0) && (flags[kFLAGS.KIHA_CAMP_WATCH] == 0 || !SceneLib.kihaFollower.followerKiha()) && !(SceneLib.camp.sleepInCabin() && (player.inte / 5 >= Utils.rand(15) || player.lust < 0.8 * player.maxLust() || CoC.instance.gameSettings.sceneHunter_inst.other)) &&
-                        (flags[kFLAGS.IN_INGNAM] == 0 && flags[kFLAGS.IN_PRISON] == 0) || flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] == 2) {
+                        !flags[kFLAGS.IN_INGNAM] || flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] == 2) {
                     SceneLib.impScene.impGangabangaEXPLOSIONS();
                     EngineCore.doNext(playerMenu);
                     return 2;

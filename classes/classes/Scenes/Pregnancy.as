@@ -1693,7 +1693,6 @@ public class Pregnancy extends NPCAwareContent {
             }
             //Give birth if it's time (to a cowgirl!)
             if (player.pregnancyType == PregnancyStore.PREGNANCY_MARBLE) {
-                if (prison.prisonLetter.deliverChildWhileInPrison()) return displayedUpdate;
                 player.knockUpForce(); //Clear Pregnancy
                 player.boostLactation(.01);
 
@@ -1806,11 +1805,6 @@ public class Pregnancy extends NPCAwareContent {
             {
                 if(flags[kFLAGS.AMILY_VISITING_URTA] == 1 || flags[kFLAGS.AMILY_VISITING_URTA] == 2) player.knockUpForce(PregnancyStore.PREGNANCY_MOUSE, player.pregnancyIncubation);
             }
-            //Amily failsafe - converts PC with pure babies to mouse babies if PC is in prison.
-            if (player.pregnancyType == PregnancyStore.PREGNANCY_AMILY)
-            {
-                if(prison.inPrison) player.knockUpForce(PregnancyStore.PREGNANCY_MOUSE, player.pregnancyIncubation);
-            }
             //Give birth if it's time (to an AMILY BITCH mouse!)
             if (player.pregnancyType == PregnancyStore.PREGNANCY_AMILY) {
                 player.boostLactation(.01);
@@ -1840,7 +1834,7 @@ public class Pregnancy extends NPCAwareContent {
 
 
                 //Main Text here
-                if (player.pregnancyType == PregnancyStore.PREGNANCY_JOJO && (monk < 0 || flags[kFLAGS.JOJO_BIMBO_STATE] == 3) && !prison.inPrison) {
+                if (player.pregnancyType == PregnancyStore.PREGNANCY_JOJO && (monk < 0 || flags[kFLAGS.JOJO_BIMBO_STATE] == 3)) {
                     if (flags[kFLAGS.JOJO_BIMBO_STATE] == 3) {
                         SceneLib.joyScene.playerGivesBirthToJoyBabies();
                         return true;
@@ -1947,7 +1941,6 @@ public class Pregnancy extends NPCAwareContent {
             }
             //Give birth to sirens.
             if (player.pregnancyType == PregnancyStore.PREGNANCY_MINERVA) {
-                if (prison.prisonLetter.deliverChildWhileInPrison()) return displayedUpdate;
 
                 if (flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] >= 10) SceneLib.highMountains.minervaScene.minervaCorruption.corruptPlayerBirth();
                 else SceneLib.highMountains.minervaScene.minervaPurification.playerGivesBirth();
@@ -1961,8 +1954,6 @@ public class Pregnancy extends NPCAwareContent {
             }
             //Give birth to alraune seeds.
             if (player.pregnancyType == PregnancyStore.PREGNANCY_ALRAUNE) {
-                //	if (prison.prisonLetter.deliverChildWhileInPrison()) return displayedUpdate;
-
                 if (player.isAlraune()) {
                     EngineCore.outputText("\n\nWith a sudden gush of nectar you feel something slowly sliding out of you, slowly but steadily prying your body open. Something is coming out and it feels so good, to the point of leaving you spasming periodically.");
                     EngineCore.outputText("\n\nYour eyes roll inward and you feel your consciousness partially shut down from the consecutive orgasms, as you feel seeds the size of an apple each, drop one by one out of a hidden hole under your pitcher that might as well be a second pussy from how sensitive it is. One, two, three... Eventually, you lose count of the seeds as you temporarily lose the capability of rational thought. Before long the ground is littered with your seeds. Both instinct and common sense tell you they won't grow up if you just leave them there, on top of the ground, and as such you proceed to sow them in the fertile earth around your camp, promising to yourself that you will water them everyday. You can’t help but want to do this again as soon as possible.");
@@ -1994,8 +1985,6 @@ public class Pregnancy extends NPCAwareContent {
             }
             //Give birth to behemoth.
             if (player.pregnancyType == PregnancyStore.PREGNANCY_BEHEMOTH) {
-                if (prison.prisonLetter.deliverChildWhileInPrison()) return displayedUpdate;
-
                 SceneLib.volcanicCrag.behemothScene.giveBirthToBehemoth();
                 if(player.hips.type < 10) {
                     player.hips.type++;

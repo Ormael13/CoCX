@@ -140,11 +140,6 @@ public class Camp extends NPCAwareContent{
 			SceneLib.ingnam.menuIngnam();
 			return;
 		}
-		if (prison.inPrison) { //Prison
-			SceneLib.prison.prisonRoom(true);
-			return;
-		}
-		//trace("Current fertility: " + player.totalFertility());
 		mainView.showMenuButton(MainView.MENU_NEW_MAIN);
 		if (player.hasStatusEffect(StatusEffects.PostAkbalSubmission)) {
 			player.removeStatusEffect(StatusEffects.PostAkbalSubmission);
@@ -155,15 +150,13 @@ public class Camp extends NPCAwareContent{
 			HPChange(Math.round(player.maxHP() / 2), false);
 			player.removeStatusEffect(StatusEffects.PostAnemoneBeatdown);
 		}
-  
-		//Clear out Izma's saved loot status
+
 		flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = "";
 		//History perk backup
 		if (flags[kFLAGS.HISTORY_PERK_SELECTED] == 0) {
 			flags[kFLAGS.HISTORY_PERK_SELECTED] = 2;
 			hideMenus();
 			CoC.instance.charCreation.chooseHistory();
-//		fixHistory();
 			return;
 		}
 		saveUpdater.fixFlags();
@@ -462,7 +455,7 @@ public class Camp extends NPCAwareContent{
 		}
 		IsSleeping = false;
 		IsWaitingResting = false;
-		if (flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && flags[kFLAGS.CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] > 0 && (flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0)) {
+		if (flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && flags[kFLAGS.CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] > 0 && !flags[kFLAGS.IN_INGNAM]) {
 			if (flags[kFLAGS.FUCK_FLOWER_LEVEL] == 0 && flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] >= 8) {
 				holliScene.getASprout();
 				hideMenus();
@@ -485,7 +478,7 @@ public class Camp extends NPCAwareContent{
 				return;
 			}
 		}
-		if (flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && flags[kFLAGS.MARAE_QUEST_COMPLETE] == 1 && (flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0)) {
+		if (flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && flags[kFLAGS.MARAE_QUEST_COMPLETE] == 1 && !flags[kFLAGS.IN_INGNAM]) {
 			if (flags[kFLAGS.FLOWER_LEVEL] == 0 && flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] >= 8) {
 				HolliPure.getASprout();
 				hideMenus();
@@ -508,7 +501,7 @@ public class Camp extends NPCAwareContent{
 				return;
 			}
 		}
-		if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] > 1 && flags[kFLAGS.CHRISTMAS_TREE_LEVEL] < 5 && (flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0)) {
+		if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] > 1 && flags[kFLAGS.CHRISTMAS_TREE_LEVEL] < 5 && !flags[kFLAGS.IN_INGNAM]) {
 			if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 3 && flags[kFLAGS.CHRISTMAS_TREE_GROWTH_COUNTER] >= 6) {
 				Magnolia.plantGrowsToLevel2();
 				hideMenus();
@@ -3247,7 +3240,7 @@ public class Camp extends NPCAwareContent{
 		if (player.hasPerk(PerkLib.ControlledBreath)) fatRecovery *= 1.1;
 		if (player.hasStatusEffect(StatusEffects.BathedInHotSpring)) fatRecovery *= 1.2;
 		if (flags[kFLAGS.AYANE_FOLLOWER] >= 2) fatRecovery *= 3;
-		if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && !prison.inPrison && !ingnam.inIngnam)
+		if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && !ingnam.inIngnam)
 			multiplier += 0.5;
 		//Marble withdrawal
 		if (player.hasStatusEffect(StatusEffects.MarbleWithdrawl))
@@ -3262,7 +3255,7 @@ public class Camp extends NPCAwareContent{
 			HPChange(timeQ * hpRecovery * multiplier, false);
 			fatigue(timeQ * -fatRecovery * multiplier);
 
-			if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && !prison.inPrison && !ingnam.inIngnam) {
+			if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && !ingnam.inIngnam) {
 				if (timeQ != 1) outputText("You head into your cabin to rest. You lie down on your bed to rest for " + num2Text(timeQ) + " hours.\n");
 				else outputText("You head into your cabin to rest. You lie down on your bed to rest for an hour.\n");
 			} else if (player.lowerBody == LowerBody.PLANT_FLOWER) {
@@ -3406,7 +3399,7 @@ public class Camp extends NPCAwareContent{
 			CanDream = true;
 			model.time.minutes = 0;
 			timeQ = 9;
-			if (flags[kFLAGS.BENOIT_CLOCK_ALARM] > 0 && flags[kFLAGS.IN_PRISON] == 0) {
+			if (flags[kFLAGS.BENOIT_CLOCK_ALARM] > 0) {
 				timeQ += (flags[kFLAGS.BENOIT_CLOCK_ALARM] - 6);
 			}
 			//Autosave stuff
@@ -3416,14 +3409,6 @@ public class Camp extends NPCAwareContent{
 			}
 			//Clear screen
 			if (clrScreen) clearOutput();
-			if (prison.inPrison) {
-				outputText("You curl up on a slab, planning to sleep for " + num2Text(timeQ) + " hour");
-				if (timeQ > 1) outputText("s");
-				outputText(". ");
-				sleepRecovery(true);
-				goNext(true);
-				return;
-			}
 			/******************************************************************/
 			/*       ONE TIME SPECIAL EVENTS                                  */
 			/******************************************************************/
@@ -3815,7 +3800,6 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.DILAPIDATED_SHRINE_UNLOCKED] > 1) places++;
 		if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] > 0) places++;
 		if (flags[kFLAGS.YU_SHOP] == 2) places++;
-		if (flags[kFLAGS.PRISON_CAPTURE_COUNTER] > 0) places++;
 		if (player.hasStatusEffect(StatusEffects.ResourceNode1)) {
 			if (player.statusEffectv1(StatusEffects.ResourceNode1) >= 5) places++;
 			if (player.statusEffectv2(StatusEffects.ResourceNode1) >= 5) places++;
@@ -4058,8 +4042,6 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.AIKO_TIMES_MET] > 3) addButton(10, "Great Tree", SceneLib.aikoScene.encounterAiko).hint("Visit the Great Tree in the Deep Woods where Aiko lives.");
 		else addButtonDisabled(10, "???", "???");
 		if (Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_ISMB) addButton(11, "Eldritch Caves", SceneLib.mindbreaker.CaveLayout).hint("Visit the mindbreaker lair.");
-		//11 - ???
-//	if (flags[kFLAGS.PRISON_CAPTURE_COUNTER] > 0) addButton(12, "Prison", CoC.instance.prison.prisonIntro, false, null, null, "Return to the prison and continue your life as Elly's slave.");
 		if (debug) addButton(13, "Ingnam", SceneLib.ingnam.returnToIngnam).hint("Return to Ingnam for debugging purposes. Night-time event weirdness might occur. You have been warned!");
 		addButton(14, "Back", playerMenu);
 	}
@@ -4669,7 +4651,7 @@ public function rebirthFromBadEnd():void {
 //Camp population!
 	public function getCampPopulation():int {
 		var pop:int = 0; //Once you enter Mareth, this will increase to 1.
-		if (flags[kFLAGS.IN_INGNAM] <= 0) pop++; //You count toward the population!
+		if (!flags[kFLAGS.IN_INGNAM]) pop++; //You count toward the population!
 		pop += companionsCount();
 		//------------
 		//Misc check!

@@ -3459,23 +3459,7 @@ import flash.utils.getQualifiedClassName;
 		public function handleCombatLossText(inDungeon:Boolean, gemsLost:int):int
 		{ //New Function, override this function in child classes if you want a monster to output special text after the player loses in combat
 			//This function doesn’t take the gems away from the player, it just provides the output text
-			if (SceneLib.prison.inPrison) {
-				SceneLib.prison.doPrisonEscapeFightLoss();
-				return 6;
-			}
 			if (!inDungeon) {
-				if (SceneLib.prison.trainingFeed.prisonCaptorFeedingQuestTrainingExists()) {
-					//Just... do know that this shit is old as fuck and probably won't work for a lot of monsters.
-					if (short == "goblin" || short == "goblin assassin" || short == "goblin warrior" || short == "goblin shaman" || short == "imp" || short == "imp lord" || short == "imp warlord" || short == "imp overlord" || //Generic encounter
-						short == "tentacle beast" || (short == "kitsune" && hairColor == "red") || short == "Akbal" || short == "Tamani" || //Forest, deepwoods
-						short == "goo-girl" || short == "green slime" || short == "fetish cultist" || short == "fetish zealot" || //Lake
-						short == "sandtrap" || short == "sand tarp" || short == "naga" || short == "demons" || short == "Cum Witch" || //Desert
-						short == "hellhound" || short == "infested hellhound" || short == "minotaur" || short == "minotaur lord" || short == "minotaur gang" || short == "minotaur tribe" || short == "basilisk" || short == "phoenix" || //Mountain, high mountains
-						short == "satyr" || short == "gnoll" || short == "gnoll spear-thrower" || short == "female spider-morph" || short == "male spider-morph" || short == "corrupted drider" || //Plains, swamp, bog
-						short == "yeti" || short == "behemoth") { //Glacial rift, volcanic crag
-						SceneLib.prison.trainingFeed.prisonCaptorFeedingQuestTrainingProgress(1, 1);
-					}
-				}
 				outputText("\n\nYou'll probably come to your senses in six hours or so");
 				if ((player.gems > 1) && gemsLost > 0)
 					outputText(", missing " + gemsLost + " gems.");
