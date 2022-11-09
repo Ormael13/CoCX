@@ -189,48 +189,25 @@ public class UniqueSexScenes extends BaseContent
             return bd;
         }
 
-		public function pcUSSPreChecksV2(backFunc:Function, btnPos:int = 13):void{
-            //uncomment if it's REALLY needed
-			if (pcCanUseUniqueSexScenes())
-				addButton(btnPos, "U.Sex Scenes", openUSSmenu, backFunc).hint("Other non-typical sex scenes.");
-			else
-				addButtonDisabled(btnPos,"U.Sex Scenes", "You don't qualify for any Unique Sex Scenes.");
+		public function pcUSSPreChecksV2(backFunc:Function, btnPos:int = 13):void {
+			if (RaijuOverLust()) {
+				if (player.isGenderless()) raijuVoltTransfer();
+				else RaijuRapeSupercharged();
+				//supercharged check - forcecalls the scene if needed
+			} else addButton(btnPos, "U.Sex Scenes", openUSSmenu, backFunc)
+				.disableIf(player.hasPerk(PerkLib.ElementalBody), "You can't use unique sex scenes while being an elemental.");
 		}
-
-        public function pcCanUseUniqueSexScenes():Boolean {
-			activeBtns = 0;
-			sceneMenu;
-			if (player.hasPerk(PerkLib.ElementalBody)) return false;
-            if (RaijuOverLust(true)) return true; //special for supercharged Raiju
-            else return activeBtns > 0;
-        }
 
 		//Use above for special cases.
 		public function openUSSmenu(backFunc:Function = null):void{
-			//special for supercharged Raiju
-			if(RaijuOverLust(true)) {
-				RaijuOverLust();
-			}
-			else{	//normal menu
-				var menuItems:ButtonDataList = sceneMenu;
-				if (backFunc == null) backFunc = camp.returnToCampUseOneHour;
-				submenu(menuItems, backFunc, 0, false);
-			}
-
+			var menuItems:ButtonDataList = sceneMenu;
+			if (backFunc == null) backFunc = camp.returnToCampUseOneHour;
+			submenu(menuItems, backFunc, 0, false);
         }
 
         //checking functions ===========================================================================
-        private function RaijuOverLust(check:Boolean = false):*{
-            if (player.statStore.hasBuff("Supercharged") && !monster.hasPerk(PerkLib.LightningAffinity) && !monster.hasPerk(PerkLib.LightningNature)){
-                if(check) return true;
-				else{
-					clearOutput();
-					menu();
-					if(!player.hasVagina() && !player.hasCock()) raijuVoltTransfer();
-					else RaijuRapeSupercharged();
-				}
-            }
-			else if(check) return false;
+        private function RaijuOverLust():Boolean {
+			return player.statStore.hasBuff("Supercharged") && !monster.hasPerk(PerkLib.LightningAffinity) && !monster.hasPerk(PerkLib.LightningNature);
         }
 
         private function USSTailRape():Array{
@@ -554,6 +531,7 @@ public class UniqueSexScenes extends BaseContent
 			if (monster.biggestTitSize() > 0) outputText(" and milk");
 			outputText(" everywhere in the vicinity. You can see the pulse of your statics as a small glow in every thrust of [monster his] hips as [monster he] keep fiercely masturbating in an attempt to expel the lust.\n\n");
 			outputText("You leave your lust receptacle there, it's unlikely [monster he] will stop masturbating anytime soon.");
+			player.statStore.removeBuffs('Supercharged');
 			player.sexReward("no");
 			statScreenRefresh();
 			cleanupAfterCombat();

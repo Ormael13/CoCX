@@ -79,6 +79,7 @@ public class AnemoneScene extends BaseContent {
         addButtonIfTrue(0, "Your Cock", rapeAnemoneWithDick, "Req. a cock.", player.hasCock());
         addButtonIfTrue(1, "Your Vagina", rapeAnemoneWithPussy, "Req. a vagina.", player.hasVagina());
         addButton(2, "Your Ass", victoryButtholeRape);
+        addButton(14, "Leave", cleanupAfterCombat);
         if (defeat) {
             addButtonIfTrue(3, "Her Butt", herButtRouter, "Req. a cock fitting 48 area OR a vagina with a long clit.",
                 player.cockThatFits(48) >= 0 || player.hasVagina() && player.clitLength >= 4);
@@ -90,7 +91,6 @@ public class AnemoneScene extends BaseContent {
             addButtonDisabled(3, "Her Butt", "Only available after defeating her!");
             addButtonDisabled(4, "Lay Eggs", "Only available after defeating her!");
         }
-        addButton(14, "Leave", cleanupAfterCombat)
     }
 
     public function herButtRouter():void {

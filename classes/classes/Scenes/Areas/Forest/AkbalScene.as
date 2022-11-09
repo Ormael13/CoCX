@@ -65,7 +65,6 @@ public class AkbalScene extends BaseContent {
 					addButtonIfTrue(12, "ForceLick (T)", rapeAkbalForcedFemaleOral_Taur, "Req. a vagina & taur body",
 						player.hasVagina() && player.isTaur());
 					LustyMaidensArmor.addTitfuckButton(4);
-					SceneLib.uniqueSexScene.pcUSSPreChecksV2(curry(akbalDefeated, false));
 					addButton(14, "Leave", cleanupAfterCombat);
 				}
 				else {

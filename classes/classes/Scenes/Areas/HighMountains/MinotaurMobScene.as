@@ -641,9 +641,8 @@ public function victorySexMenu():void {
 	addButton(4, "Get Sucked", curry(forceMinitaurToGiveOral, 1),
 		"Req. a cock", player.hasCock());
 	addButton(5, "Discipline", disciplineEldestMinotaurSon);
-	SceneLib.uniqueSexScene.pcUSSPreChecksV2(victorySexMenu);
 	addButton(14, "Leave", cleanupAfterCombat);
-	}
+}
 //*[Victory Tit-Fuck] (for only the fattest of fat bitch titties)
 private function victoryMinotaurGangTitFuck():void {
 	clearOutput();

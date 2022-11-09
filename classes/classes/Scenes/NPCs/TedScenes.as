@@ -67,11 +67,8 @@ public function defeatedTedPostHiddenCave():void {
 	if (flags[kFLAGS.TED_LVL_UP] >= 3) {
 		outputText(".");
 		outputText("\n\n\"<i>My Dao Heart is firm.</i>\" he recite before escaping with help of smokescreen.\n\n");//WIP post combat version
-		menu();
-		addButton(14, "Leave", cleanupAfterCombat);
-		SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatedTedPostHiddenCave);
-			}
-	if (flags[kFLAGS.TED_LVL_UP] == 2) {
+	}
+	else if (flags[kFLAGS.TED_LVL_UP] == 2) {
 		outputText(".");
 		outputText("\n\n\"<i>My Dao Heart is firm.</i>\" he recite before escaping with help of smokescreen.\n\n");//WIP post combat version
 	}//w walce po której Ted awansuje do lvl 27 dać fragment gdzie on lub ktoś inny jak npc. jakiś loli bat golem co Ted ją znalazł do pomocy zdradza jego imie typu: mistrzu ted bla bla bla

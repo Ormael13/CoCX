@@ -1486,7 +1486,6 @@ public class BeeGirlScene extends BaseContent
 			addButtonIfTrue(9, "B. Feed", milkAndHoneyAreKindaFunny, "Req. Feeder perk", player.hasStatusEffect(StatusEffects.Feeder));
 			//dildo, uss
 			addButtonIfTrue(10, "Dildo Rape", beeGirlsGetsDildoed, "Req. Deluxe dildo", player.hasKeyItem("Deluxe Dildo") >= 0);
-			SceneLib.uniqueSexScene.pcUSSPreChecksV2(afterfightoptionswithBeeGirl);
 			//leave
 			addButton(14, "Leave", leaveAfterDefeating, true);
 		}

@@ -880,7 +880,6 @@ public function nagaRapeChoice():void {
     addButtonIfTrue(8, "Lay Eggs (B)", beePositANagaPlease, "Req. bee ovipositor", player.canOvipositBee());
     addButtonIfTrue(4, "Gooey Rape", gooNagaRape, "Req. goo body", player.isGoo());
     //end
-	SceneLib.uniqueSexScene.pcUSSPreChecksV2(nagaRapeChoice);
 	addButton(14, "Leave", cleanupAfterCombat);
 }
 

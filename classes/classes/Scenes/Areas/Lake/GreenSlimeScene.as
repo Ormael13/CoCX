@@ -59,8 +59,8 @@ public function defeatGS():void {
 			if (player.hasVagina())
 				addButtonDisabled(4, "F.Rape", "You're too pure to take this filth in your pussy!\n<b>Enable 'Other' in SceneHunter settings to override.</b>");
 		}
-		SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatGS);
 		addButton(14, "Leave", cleanupAfterCombat);
+		SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatGS);
 	}
 }
 

@@ -486,8 +486,8 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 					"<b>You don't have a dick small enough to fuck her vagina.</b>  Req. a cock with area smaller than " + monster.vaginalCapacity(),
 					player.cockThatFits(monster.vaginalCapacity()) >= 0);
 				addButtonIfTrue(2, "Scissor", fSpiderMorphRape, "Req. a vagina", player.hasVagina());
+				addButton(14, "Leave", cleanupAfterCombat);
                 SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatASpiderBitch);
-				addButton(14, "Leave", cleanupAfterCombat)
 			}
 			else {
 				outputText("You're not aroused enough to rape her.");

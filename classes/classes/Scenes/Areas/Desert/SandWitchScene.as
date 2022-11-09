@@ -625,9 +625,8 @@ public function sexMenu():void {
     addButtonIfTrue(7, "Ride", centaurRide, "Req. low corruption and centaur lower body", lowCor && player.isTaur());
     addButtonIfTrue(8, "Taur Rape", centaurRape, "Req. high corruption and centaur lower body", hiCor && player.isTaur());
 	addButtonIfTrue(9, "Lay Eggs", ovipositSandWitches, "Req. oviposition", player.gender > 0 && player.canOviposit());
-    
-	SceneLib.uniqueSexScene.pcUSSPreChecksV2(sexMenu);
 	addButton(14, "Leave", cleanupAfterCombat);
+	SceneLib.uniqueSexScene.pcUSSPreChecksV2(sexMenu);
 }
 
 //RAEP SAND-WITCH!
