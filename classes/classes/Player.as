@@ -5723,14 +5723,8 @@ use namespace CoC;
 
 		public function maxMiningLevel():Number {
 			var maxLevel:Number = 2;
-			//if (hasPerk(PerkLib.SuperSensual)) {
-				//if (level < 48) maxLevel += level;
-				//else maxLevel += 48;
-			//}
-			//else {
-				if (level < 18) maxLevel += level;
-				else maxLevel += 18;
-			//}
+			if (level < 18) maxLevel += level;
+			else maxLevel += 18;
 			return maxLevel;
 		}
 		public function MiningExpToLevelUp():Number {
