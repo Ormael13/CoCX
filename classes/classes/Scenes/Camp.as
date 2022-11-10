@@ -2945,9 +2945,9 @@ public class Camp extends NPCAwareContent{
 		addButton(3, "Electra", toggleNPCStatus, StatusEffects.ElectraOff).hint("Enable or Disable Electra. This will remove her from enc table and if already in [camp] disable access to her.");
 		addButton(4, "Etna", toggleNPCStatus, StatusEffects.EtnaOff).hint("Enable or Disable Etna. This will remove her from enc table and if already in [camp] disable access to her.");
 		addButton(5, "Luna", toggleLuna).hint("Enable or Disable Luna. This will remove her from enc table and if already in [camp] disable access to her.");
-		addButton(6, "DragonBoi", toggleNPCStatus, StatusEffects.SpoodersOff).hint("Enable or Disable Dragon Boi. This will remove him from enc table.");
+		addButton(6, "DragonBoi", toggleNPCStatus, StatusEffects.TedOff).hint("Enable or Disable Dragon Boi. This will remove him from enc table.");
 		//since this section is WIP anyway, let her be here too, lol
-        addButton(12, "Spooders", toggleNPCStatus, StatusEffects.TedOff).hint("Enable or Disable spooder followers. This will remove them ONLY from enc table.");
+        addButton(12, "Spooders", toggleNPCStatus, StatusEffects.SpoodersOff).hint("Enable or Disable spooder followers. This will remove them ONLY from enc table.");
 		addButton(13, "Others", SparrableNPCsMenuOthers).hint("Out of camp encounters only.");
 		addButton(14, "Back", campActions);
 	}
