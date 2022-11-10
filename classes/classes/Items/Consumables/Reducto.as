@@ -12,11 +12,11 @@ import classes.Scenes.SceneLib;
 import classes.internals.Utils;
 
 public final class Reducto extends Consumable {
-		
+
 		public function Reducto() {
 			super("Reducto", "Reducto", "a salve marked as 'Reducto'", 30, "This container full of paste can be used to shrink a body part down by a significant amount.");
 		}
-		
+
 		override public function useItem():Boolean {
 			clearOutput();
 			EngineCore.menu();
@@ -34,11 +34,19 @@ public final class Reducto extends Consumable {
                 .disableIf(player.butt.type <= 1, "Not thick anymore.");
 			EngineCore.addButton(6, "Hips", pickDoses, reductoHips)
                 .disableIf(player.hips.type <= 2, "Already thin.");
-            if (player.horns.count > 2) EngineCore.addButton(7, "Horns", pickDoses, shrinkHorns);
+            if (player.horns.count > 2) EngineCore.addButton(7, "Horns", shrinkHorns);
 			EngineCore.addButton(14, "Never mind", reductoCancel);
 			return true;
 		}
-		
+
+	private function sharedEnd(dose:int, sexual:Boolean = false):void {
+		player.dynStats("lus", -10 * dose, "scale", false);
+		if (sexual) game.player.dynStats("sen", -2*dose);
+		if (dose > 1 && !CoC.instance.debug) player.consumeItem(game.consumables.REDUCTO, dose - 1); //eat up more reds
+		game.mainViewManager.updateCharviewIfNeeded();
+		SceneLib.inventory.itemGoNext();
+	}
+
 		private function reductoBalls(dose:int):void {
 			var d:int = dose;
 			clearOutput();
@@ -46,11 +54,9 @@ public final class Reducto extends Consumable {
 			while (d --> 0) game.player.ballSize -= Utils.rand(4) + 2;
 			if (game.player.ballSize < 1) game.player.ballSize = 1;
 			outputText("You feel your scrotum shift, shrinking down along with your [balls].  Within a few seconds the paste has been totally absorbed and the shrinking stops.");
-			game.player.dynStats("lib", -2*dose, "lus", -10*dose);
-			if (dose > 1 && !CoC.instance.debug) player.consumeItem(game.consumables.REDUCTO, dose - 1); //eat up more reds
-			SceneLib.inventory.itemGoNext();
+			sharedEnd(dose, true);
 		}
-		
+
 		private function reductoBreasts():void {
 			if (player.breastRows.length == 1) pickDB(1);
 			else {
@@ -78,12 +84,10 @@ public final class Reducto extends Consumable {
 					while (randProcs --> 0) game.player.shrinkTits(true, row1 - 1);
                 }
                 outputText("\nThe last of it wicks away into your skin, completing the changes.");
-                game.player.dynStats("sen", -2*dose, "lus", -5*dose);
-				if (dose > 1 && !CoC.instance.debug) player.consumeItem(game.consumables.REDUCTO, dose - 1); //eat up more reds
-                SceneLib.inventory.itemGoNext();
+				sharedEnd(dose);
 			}
 		}
-		
+
 		private function reductoButt(dose:int):void {
 			var d:int = dose;
 			clearOutput();
@@ -97,11 +101,9 @@ public final class Reducto extends Consumable {
 				else game.player.butt.type -= Utils.rand(3) + 1;
 			}
 			if (game.player.butt.type < 1) game.player.butt.type = 1;
-			game.player.dynStats("lib", -2*dose, "lus", -10*dose);
-			if (dose > 1 && !CoC.instance.debug) player.consumeItem(game.consumables.REDUCTO, dose - 1); //eat up more reds
-			SceneLib.inventory.itemGoNext();
+			sharedEnd(dose);
 		}
-		
+
 		private function reductoClit(dose:int):void {
 			var d:int = dose;
 			clearOutput();
@@ -111,10 +113,9 @@ public final class Reducto extends Consumable {
 			//Set clitlength down to 2 digits in length
 			game.player.clitLength = int(game.player.clitLength * 100) / 100;
 			outputText("Your [clit] shrinks rapidly, dwindling down to almost half its old size before it finishes absorbing the paste.");
-			game.player.dynStats("sen", 2*dose, "lus", 10*dose);
-			SceneLib.inventory.itemGoNext();
+			sharedEnd(dose, true);
 		}
-		
+
 		private function reductoCock():void {
 			if (player.cocks.length == 1) pickPlace(1);
 			else {
@@ -155,12 +156,10 @@ public final class Reducto extends Consumable {
                     player.growCock(dick, -4*dose);
                     player.thickenCock(dick, -1*dose);
 				}
-                player.dynStats("sen", -2*dose, "lus", -1*dose);
-				if (dose > 1 && !CoC.instance.debug) player.consumeItem(game.consumables.REDUCTO, dose - 1); //eat up more reds
-				SceneLib.inventory.itemGoNext();
+				sharedEnd(dose, true);
 			}
 		}
-		
+
 		private function reductoHips(dose:int):void {
 			var d:int = dose;
 			clearOutput();
@@ -174,11 +173,9 @@ public final class Reducto extends Consumable {
 				else game.player.hips.type -= Utils.rand(3) + 1;
 			}
 			if (game.player.hips.type < 1) game.player.hips.type = 1;
-			game.player.dynStats("lib", -2*dose, "lus", -10*dose);
-			if (dose > 1 && !CoC.instance.debug) player.consumeItem(game.consumables.REDUCTO, dose - 1); //eat up more reds
-			SceneLib.inventory.itemGoNext();
+			sharedEnd(dose);
 		}
-		
+
 		private function reductoNipples(dose:int):void {
 			var d:int = dose;
 			clearOutput();
@@ -190,19 +187,16 @@ public final class Reducto extends Consumable {
 				game.player.nippleLength = 0.25;
 			}
 			else outputText("Your [nipples] get smaller and smaller, stopping when they are roughly half their previous size.");
-			game.player.dynStats("sen", -5*dose, "lus", -5*dose);
-			if (dose > 1 && !CoC.instance.debug) player.consumeItem(game.consumables.REDUCTO, dose - 1); //eat up more reds
-			SceneLib.inventory.itemGoNext();
+			sharedEnd(dose, true);
 		}
-		
-		public function shrinkHorns(dose:int):void {
+
+		public function shrinkHorns():void {
 			outputText("You doubt if the reducto is going to work but you apply the foul-smelling paste all over your horns anyways.\n\n");
 			outputText("Incredibly, it works and you can feel your horns receding by an inch.");
-			game.player.horns.count -= dose;
-			if (dose > 1 && !CoC.instance.debug) player.consumeItem(game.consumables.REDUCTO, dose - 1); //eat up more reds
+			game.player.horns.count--;
 			SceneLib.inventory.itemGoNext();
 		}
-		
+
 		private function reductoCancel():void {
 			clearOutput();
 			outputText("You put the salve away.\n\n");
