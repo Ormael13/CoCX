@@ -139,7 +139,11 @@ import classes.internals.Utils;
                     if (cockThickness > cockLength * .25) increase /= 2;
                     if (cockThickness > cockLength * .33) increase /= 2;
                     if (cockThickness > cockLength * .50) increase /= 4;
-                }
+                } else {
+					if (cockThickness < cockLength * .15) increase /= 2;
+					if (cockThickness < cockLength * .1) increase /= 2;
+					if (cockThickness < cockLength * .05) increase /= 4;
+				}
                 cockThickness += increase;
                 increaseTotal += increase;
             }
