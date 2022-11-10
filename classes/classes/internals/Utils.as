@@ -544,6 +544,29 @@ public class Utils extends Object
 
 			return tar[rand(tar.length)];
 		}
+
+		/**
+		 * Same as randomChoice(), but places the picked items into an array.
+		 * Accepts any type; Can also accept a *single* array of items, in which case it picks from the array instead.
+		 * @param unique If true, will pick unique items (works well with duplicates in the provided array)
+		 * @param count	 How much items to pick
+		 */
+		public static function randomChoices(unique:Boolean, count:int, ...args):Array {
+			var tar:Array = args.length == 1 && args[0] is Array ? args[0] : args;
+			if (unique && count > tar.length || count < 0) throw new Error("Wrong randomChoices usage.");
+
+			var ind:Array = [], res:Array = [];
+			var i:int;
+			// find unique indices
+			while (ind.length < count) {
+				i = rand(args.length);
+				if (!unique || ind.indexOf(i) == -1)
+					ind.push(i);
+			}
+			for each (i in ind)
+				res.push(args[i]);
+			return res;
+		}
 		
 		
 		/**
