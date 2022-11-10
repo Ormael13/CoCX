@@ -144,18 +144,24 @@ public final class Reducto extends Consumable {
         }
 
         function shrink(dick:int, part:String, dose:int):void {
+            var d:int = dose;
             clearOutput();
             outputText("You smear the repulsive smelling paste over the " + part + " of your [cock " + (dick + 1) + "].  It immediately begins to grow warm, almost uncomfortably so, as your [cock " + (dick + 1) + "] begins to shrink.\n\n");
-            if (part == "tip") {
-                outputText("Your can't believe your eyes - your [cock " + (dick + 1) + "] has lost several inches of its length!");
-                player.growCock(dick, -6 * dose);
-            } else if (part == "side") {
-                outputText("Your feel your [cock " + (dick + 1) + "] bending slightly as it has become noticeably thinner!");
-                player.thickenCock(dick, -1.5 * dose);
-            } else if (part == "entirety") {
-                outputText("Your [cock " + (dick + 1) + "] twitches as it shrinks, disappearing steadily into your " + (game.player.hasSheath() ? "sheath" : "crotch") + " until it has lost about some of its old length and thickness.");
-                player.growCock(dick, -4 * dose);
-                player.thickenCock(dick, -1 * dose);
+            if (part == "tip") outputText("Your can't believe your eyes - your [cock " + (dick + 1) + "] has lost several inches of its length!");
+            else if (part == "side") outputText("Your feel your [cock " + (dick + 1) + "] bending slightly as it has become noticeably thinner!");
+            else if (part == "entirety") outputText("Your [cock " + (dick + 1) + "] twitches as it shrinks, disappearing steadily into your " + (game.player.hasSheath() ? "sheath" : "crotch") + " until it has lost about some of its old length and thickness.");
+            while (d-- > 0) {
+                if (part == "tip") {
+                    outputText("Your can't believe your eyes - your [cock " + (dick + 1) + "] has lost around one third of its length!");
+                    player.growCock(dick, -player.cocks[dick].cockLength / 3);
+                } else if (part == "side") {
+                    outputText("Your feel your [cock " + (dick + 1) + "] bending slightly as it has become noticeably thinner!");
+                    player.thickenCock(dick, -player.cocks[dick].cockThickness / 3);
+                } else if (part == "entirety") {
+                    outputText("Your [cock " + (dick + 1) + "] twitches as it shrinks, disappearing steadily into your " + (game.player.hasSheath() ? "sheath" : "crotch") + " until it has lost about one fourth of its old length and thickness.");
+                    player.growCock(dick, -player.cocks[dick].cockLength / 4);
+                    player.thickenCock(dick, -player.cocks[dick].cockThickness / 4);
+                }
             }
             sharedEnd(dose, true);
         }
