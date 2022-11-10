@@ -1,11 +1,13 @@
 package classes.Items {
 import classes.*;
 import classes.BodyParts.*;
+import classes.GeneticMemories.CockMem;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
 import classes.Items.Consumables.EmberTF;
 import classes.Races.*;
+import classes.Scenes.Metamorph;
 import classes.Scenes.SceneLib;
 import classes.Stats.Buff;
 import classes.Transformations.TransformationUtils;
@@ -899,18 +901,7 @@ public final class Mutations extends MutationsHelper {
                 }
                 //NO CAWKS?
                 if (player.cocks.length == 0) {
-                    player.createCock(rand(3) + 4);
-                    outputText("[pg]You shudder as a pressure builds in your crotch, peaking painfully as a large bulge begins to push out from your body.  ");
-                    outputText("The skin seems to fold back as a fully formed demon-cock bursts forth from your loins, drizzling hot cum everywhere as it orgasms.  Eventually the orgasm ends as your [cock] fades to a more normal " + player.skinColor + " tone.");
-                    if (tainted) {
-                        dynStats("lus", 10, "cor", 5);
-                        player.addCurse("sens", 5, 1);
-                        MutagenBonus("lib", 3);
-                    } else {
-                        dynStats("lus", 10, "scale", false);
-                        player.addCurse("sens", 5, 1);
-                        MutagenBonus("lib", 3);
-                    }
+                    growDemonCock(1, tainted);
                 }
                 //TIT CHANGE 25% chance of shrinkage
                 if (rand(4) == 0) {
@@ -921,8 +912,10 @@ public final class Mutations extends MutationsHelper {
             }
             //Mid-level changes
             if (rando >= 50 && rando < 93) {
-                if (player.cocks.length > 1) {
-                    outputText("[pg]Your cocks fill to full-size... and begin growing obscenely.  ");
+                if (player.cocks.length == 0) growDemonCock(1, tainted);
+                else if (player.cocks.length >= 1) {
+                    if (player.cocks.length == 1) outputText("[pg]Your cock fills to its normal size and begins growing... ");
+                    else outputText("[pg]Your cocks fill to full-size... and begin growing obscenely.  ");
                     selectedCock = player.cocks.length;
                     while (selectedCock > 0) {
                         selectedCock--;
@@ -954,48 +947,6 @@ public final class Mutations extends MutationsHelper {
                         MutagenBonus("lib", 3);
                     }
                 }
-                if (player.cocks.length == 1) {
-                    outputText("[pg]Your cock fills to its normal size and begins growing... ");
-                    temp3 = player.thickenCock(0, 1);
-                    temp2 = player.growCock(0, rand(3) + 2);
-                    player.lengthChange(temp2, 1);
-                    //Display the degree of thickness change.
-                    if (temp3 >= 1) {
-                        if (player.cocks.length == 1) outputText("  Your cock spreads rapidly, swelling an inch or more in girth, making it feel fat and floppy.");
-                        else outputText("  Your cocks spread rapidly, swelling as they grow an inch or more in girth, making them feel fat and floppy.");
-                    }
-                    if (temp3 <= .5) {
-                        if (player.cocks.length > 1) outputText("  Your cocks feel swollen and heavy. With a firm, but gentle, squeeze, you confirm your suspicions. They are definitely thicker.");
-                        else outputText("  Your cock feels swollen and heavy. With a firm, but gentle, squeeze, you confirm your suspicions. It is definitely thicker.");
-                    }
-                    if (temp3 > .5 && temp2 < 1) {
-                        if (player.cocks.length == 1) outputText("  Your cock seems to swell up, feeling heavier. You look down and watch it growing fatter as it thickens.");
-                        if (player.cocks.length > 1) outputText("  Your cocks seem to swell up, feeling heavier. You look down and watch them growing fatter as they thicken.");
-                    }
-                    if (tainted) {
-                        dynStats("lus", 10, "cor", 3);
-                        player.addCurse("sens", 5, 1);
-                        MutagenBonus("lib", 3);
-                    } else {
-                        dynStats("lus", 10, "scale", false);
-                        player.addCurse("sens", 5, 1);
-                        MutagenBonus("lib", 3);
-                    }
-                }
-                if (player.cocks.length == 0) {
-                    transformations.CockHuman(0, rand(3) + 4).applyEffect(false);
-                    outputText("[pg]You shudder as a pressure builds in your crotch, peaking painfully as a large bulge begins to push out from your body.  ");
-                    outputText("The skin seems to fold back as a fully formed demon-cock bursts forth from your loins, drizzling hot cum everywhere as it orgasms.  Eventually the orgasm ends as your [cock] fades to a more normal " + player.skinColor + " tone.");
-                    if (tainted) {
-                        dynStats("lus", 10, "cor", 3);
-                        player.addCurse("sens", 5, 1);
-                        MutagenBonus("lib", 3);
-                    } else {
-                        dynStats("lus", 10, "scale", false);
-                        player.addCurse("sens", 5, 1);
-                        MutagenBonus("lib", 3);
-                    }
-                }
                 //Shrink breasts a more
                 //TIT CHANGE 50% chance of shrinkage
                 if (rand(2) == 0) {
@@ -1009,18 +960,9 @@ public final class Mutations extends MutationsHelper {
                 if (player.cockTotal() < 10) {
                     if (int(Math.random() * 10) < int(player.cor / (25+player.corruptionTolerance))) {
                         outputText("[pg]");
-                        growDemonCock(rand(2) + 2);
-                        if (tainted) {
-                            dynStats("lus", 10, "cor", 5);
-                            player.addCurse("sens", 5, 1);
-                            MutagenBonus("lib", 3);
-                        } else {
-                            dynStats("lus", 10, "scale", false);
-                            player.addCurse("sens", 5, 1);
-                            MutagenBonus("lib", 3);
-                        }
+                        growDemonCock(rand(2) + 2, tainted);
                     } else {
-                        growDemonCock(1);
+                        growDemonCock(1, tainted);
                     }
                 }
                 if (!flags[kFLAGS.HYPER_HAPPY]) {
@@ -1036,24 +978,40 @@ public final class Mutations extends MutationsHelper {
         player.refillHunger(10);
     }
 
-    public function growDemonCock(growCocks:Number):void {
+    public function growDemonCock(growCocks:Number, tainted:Boolean):void {
         var grown:int = 0;
         while (growCocks > 0) {
             player.createCock();
-            trace("COCK LENGTH: " + player.cocks[length - 1].cockLength);
+            transformations.UnlockCocks();
             player.cocks[player.cocks.length - 1].cockLength = rand(3) + 4;
             player.cocks[player.cocks.length - 1].cockThickness = .75;
-            trace("COCK LENGTH: " + player.cocks[length - 1].cockLength);
+            if (tainted) {
+                player.cocks[player.cocks.length - 1].cockType = CockTypesEnum.DEMON;
+                Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.DEMON));
+            }
             growCocks--;
             grown++;
         }
+        if (tainted) {
+            dynStats("lus", 10, "cor", 5);
+            player.addCurse("sens", 5, 1);
+            MutagenBonus("lib", 3);
+        } else {
+            dynStats("lus", 10, "scale", false);
+            player.addCurse("sens", 5, 1);
+            MutagenBonus("lib", 3);
+        }
         outputText("[pg]You shudder as a pressure builds in your crotch, peaking painfully as a large bulge begins to push out from your body.  ");
         if (grown == 1) {
-            outputText("The skin seems to fold back as a fully formed demon-cock bursts forth from your loins, drizzling hot cum everywhere as it orgasms.  In time it fades to a more normal coloration and human-like texture.  ");
+            outputText("The skin seems to fold back as a fully formed demon-cock bursts forth from your loins, drizzling hot cum everywhere as it orgasms.  ");
+            if (!tainted) outputText("In time, it fades to a more normal coloration and human-like texture.  ");
         } else {
-            outputText("The skin bulges obscenely, darkening and splitting around " + num2Text(grown) + " of your new dicks.  For an instant they turn a demonic purple and dribble in thick spasms of scalding demon-cum.  After, they return to a more humanoid coloration.  ");
+            outputText("The skin bulges obscenely, darkening and splitting around " + num2Text(grown) + " of your new dicks.  For an instant they turn a demonic purple and dribble in thick spasms of scalding demon-cum.  ");
+            if (grown > 4) outputText("Your tender bundle of new cocks feels deliciously sensitive, and you cannot stop yourself from wrapping your hands around the slick demonic bundle and pleasuring them.[pg]Nearly an hour later, you finally pull your slick body away from the puddle you left on the ground.  When you look back, you notice it has already been devoured by the hungry earth.  ");
+            cheatTime(1); // hour :P
+            if (!tainted) outputText("In a few minutes, your cocks return to a more humanoid coloration.  ");
         }
-        if (grown > 4) outputText("Your tender bundle of new cocks feels deliciously sensitive, and you cannot stop yourself from wrapping your hands around the slick demonic bundle and pleasuring them.[pg]Nearly an hour later, you finally pull your slick body away from the puddle you left on the ground.  When you look back, you notice it has already been devoured by the hungry earth.");
+
         player.orgasm('Dick');
     }
 
