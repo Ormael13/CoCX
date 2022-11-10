@@ -4284,12 +4284,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //6b.Infinite Vagina
-        if (player.hasVagina() && player.vaginalCapacity() < 9000 && rand(3) == 0 && changes < changeLimit) {
-            if (!player.hasStatusEffect(StatusEffects.BonusVCapacity)) player.createStatusEffect(StatusEffects.BonusVCapacity, 9000, 0, 0, 0);
-            else player.addStatusValue(StatusEffects.BonusVCapacity, 1, 9000);
-            outputText("[pg]Your [vagina]'s internal walls feel a tingly wave of strange tightness.  Experimentally, you slip a few fingers, then your hand, then most of your forearm inside yourself.  <b>It seems you're now able to accommodate just about ANYTHING inside your sex.</b>");
-            changes++;
-        } else if (player.tallness < 100 && rand(3) == 0 && changes < changeLimit) {
+        if (player.tallness < 100 && rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]Your gel-like body swells up from the intake of additional slime.  If you had to guess, you'd bet you were about two inches taller.");
             player.tallness += 2;
             MutagenBonus("str", 1);
@@ -4297,7 +4292,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Big slime girl
-        else if (player.vaginalCapacity() >= 9000 && transformations.RearBodyMetamorphicGoo.isPresent() && transformations.arms.ArmsGoo.isPresent() && LowerBody.isGoo(player)) {
+        else if (transformations.RearBodyMetamorphicGoo.isPresent() && transformations.arms.ArmsGoo.isPresent() && LowerBody.isGoo(player)) {
             if (!player.hasStatusEffect(StatusEffects.SlimeCraving)) {
                 outputText("[pg]You feel a growing gnawing in your gut.  You feel... hungry, but not for food.  No, you need something wet and goopy pumped into you.  You NEED it.  You can feel it in your bones.  <b>If you don't feed that need... you'll get weaker and maybe die.</b>");
                 player.createStatusEffect(StatusEffects.SlimeCraving, 0, 0, 0, 1); //Value four indicates this tracks strength and speed separately
@@ -11100,13 +11095,6 @@ public final class Mutations extends MutationsHelper {
                 player.createStatusEffect(StatusEffects.BonusVCapacity, 0, 0, 0, 0);
             }
             player.addStatusValue(StatusEffects.BonusVCapacity, 1, 5 + rand(10));
-        });
-        //[Vag of Holding] - rare effect, only if PC has high vaginal looseness
-        mutationStep(player.hasVagina() && player.statusEffectv1(StatusEffects.BonusVCapacity) >= 200 && player.statusEffectv1(StatusEffects.BonusVCapacity) < 8000, mystic ? 1 : 5, function ():void {
-            outputText("[pg]You clutch your stomach with both hands, dropping to the ground in pain as your internal organs begin to twist and shift violently inside you.  As you clench your eyes shut in agony, you are overcome with a sudden calm.  The pain in your abdomen subsides, and you feel at one with the unfathomable infinity of the universe, warmth radiating through you from the vast swirling cosmos contained within your womb.");
-            if (silly()) outputText("  <b>Your vagina has become a universe unto itself, capable of accepting colossal insertions beyond the scope of human comprehension!</b>");
-            else outputText("  <b>Your vagina is now capable of accepting even the most ludicrously sized insertions with no ill effects.</b>");
-            player.changeStatusValue(StatusEffects.BonusVCapacity, 1, 9001);
         });
 
 

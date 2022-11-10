@@ -1920,6 +1920,14 @@ public class SaveUpdater extends NPCAwareContent {
 					flags[prisonFlag] = 0;
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.034;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.035) {
+				// removing vags of holding
+				if (player.statusEffectv1(StatusEffects.BonusVCapacity) >= 9000)
+					player.addStatusValue(StatusEffects.BonusVCapacity, 1, -9000);
+				if (player.statusEffectv1(StatusEffects.BonusVCapacity) >= 8000)
+					player.addStatusValue(StatusEffects.BonusVCapacity, 1, -8000);
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.035;
+			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
 		}
