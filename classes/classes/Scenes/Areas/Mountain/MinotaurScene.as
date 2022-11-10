@@ -21,6 +21,8 @@ public function minoVictoryRapeChoices():void {
 		outputText("\n\nlthough you're not aroused enough to rape the minotaur, you realize your own need to breastfeed has not been met.  You could always let the poor thing have a drink...\n\nWill you?");
 	else outputText("\n\nYou're not aroused enough to rape him.")
 	//menu
+	addButton(9, "Kill", killMinotaur);
+	addButton(14, "Leave", cleanupAfterCombat);
 	if (player.lust >= 33) {
 		var cockFits:Boolean = player.cockThatFits(monster.analCapacity()) >= 0;
 		var cockNotFitsMsg:String = "Req. a cock with area smaller than " + monster.analCapacity();
@@ -56,8 +58,6 @@ public function minoVictoryRapeChoices():void {
 		addButton(12, "SateYourself", slimeSateYourself).disableIf(!player.isGoo(), "Requires goo body.");
 		SceneLib.uniqueSexScene.pcUSSPreChecksV2(minoVictoryRapeChoices); //13
 	}
-	addButton(9, "Kill", killMinotaur);
-	addButton(14, "Leave", cleanupAfterCombat);
 }
 
 private function oviRouter():void {

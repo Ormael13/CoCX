@@ -23,10 +23,11 @@ package classes.Scenes.Areas.GlacialRift
 			menu();
 			if (player.lust >= 33) {
 				addButtonIfTrue(0, "RideHisCock", rideWinterWolfsCock, "", player.hasVagina());
-				SceneLib.uniqueSexScene.pcUSSPreChecksV2(winAgainstWinterWolf);
 				addButton(14, "Leave", cleanupAfterCombat);
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(winAgainstWinterWolf);
 			}
 			else {
+				outputText("You aren't aroused enough to fuck him.");
 				cleanupAfterCombat();
 			}
 		}

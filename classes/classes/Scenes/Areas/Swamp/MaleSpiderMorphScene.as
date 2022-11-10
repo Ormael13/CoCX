@@ -83,8 +83,8 @@ public class MaleSpiderMorphScene extends BaseContent
 						"Req. dick with area smaller than " + monster.analCapacity(),
 						player.findCock(1, monster.analCapacity(), -1) >= 0);
 				LustyMaidensArmor.addTitfuckButton(3);
-				SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatSpiderBoy);
 				addButton(14, "Leave", cleanupAfterCombat);
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatSpiderBoy);
 			}
 			else {
 				outputText("\n\nYou're not aroused enough to rape him.");

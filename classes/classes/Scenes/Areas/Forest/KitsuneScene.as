@@ -1146,7 +1146,6 @@ public class KitsuneScene extends BaseContent
 			}
 			//[Feeder]
 			addButtonIfTrue(10, "Breastfeed", feederTheKitsunes, "Req. Feeder perk", player.hasPerk(PerkLib.Feeder));
-			SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatTheKitsunes);
 			addButton(14, "Leave", leaveKitsune);
 		}
 

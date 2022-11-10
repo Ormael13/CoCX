@@ -125,8 +125,8 @@ public class GnollScene extends BaseContent
 				addButtonIfTrue(3, "TakeHerClit", takeGnollClit, "Req. a vagina",
 					player.hasVagina(), "Put your vagina to use and ride the gnoll's clit.");
 				addButton(4, "SuckHerClit", suckGnollClit).hint("Suck the gnoll's clit.", "Suck Her Clit");
-				SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatHyena);
 				addButton(14, "Leave", cleanupAfterCombat);
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatHyena);
 			}
 			else {
 				outputText("You're not aroused enough to rape her.");

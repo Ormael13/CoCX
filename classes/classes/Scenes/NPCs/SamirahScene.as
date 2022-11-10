@@ -21,7 +21,7 @@ public function timeChange():Boolean {
 	return false;
 }
 public function timeChangeLarge():Boolean {
-	if (model.time.hours == 6 && flags[kFLAGS.SLEEP_WITH] == "Samirah" && !prison.inPrison) {
+	if (model.time.hours == 6 && flags[kFLAGS.SLEEP_WITH] == "Samirah") {
 		samirahMorningWakeupCall();
 		return true;
 	}

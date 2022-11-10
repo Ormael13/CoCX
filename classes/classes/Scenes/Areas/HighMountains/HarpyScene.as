@@ -52,7 +52,7 @@ public class HarpyScene extends BaseContent
 				addButtonIfTrue(5, "Lay Eggs", spoidahsLegEggsInHarpeis, "Req. spider ovipositor and snake/spider fangs", player.canOvipositSpider() && (player.faceType == Face.SNAKE_FANGS || player.faceType == Face.SPIDER_FANGS), "Use your ovipositor to lay the eggs into harpy.");
 				addButton(14, "Leave", cleanupAfterCombat);
 				SceneLib.uniqueSexScene.pcUSSPreChecksV2(harpyVictoryuuuuu);
-							}
+			}
 			//Not horny?  Iz over
 			else {
 				outputText("You're not aroused enough to rape the poor birb.")

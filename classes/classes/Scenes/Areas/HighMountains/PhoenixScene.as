@@ -66,8 +66,8 @@ public class PhoenixScene extends BaseContent
 				addButton(3, "Ride Anal", rideAnal);
 				addButtonIfTrue(4, "Ride Vaginal", rideVaginal, "Req. a vagina", player.hasVagina());
 				LustyMaidensArmor.addTitfuckButton(7);
+				addButton(14, "Leave", cleanupAfterCombat);
 				SceneLib.uniqueSexScene.pcUSSPreChecksV2(winAgainstPhoenix);
-								addButton(14, "Leave", cleanupAfterCombat);
 			}
 			else cleanupAfterCombat();
 		}

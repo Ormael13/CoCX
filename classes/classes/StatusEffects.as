@@ -689,15 +689,6 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const MaraesQuestStart:StatusEffectType        = mk("Marae's Quest Start");
 		public static const MetMarae:StatusEffectType                = mk("Met Marae");
 
-		//Prisoner status effects.
-		public static const PrisonCaptorEllyStatus:StatusEffectType  = mk("prisonCaptorEllyStatus");
-		public static const PrisonCaptorEllyQuest:StatusEffectType   = mk("prisonCaptorEllyQuest");
-		public static const PrisonCaptorEllyPet:StatusEffectType     = mk("prisonCaptorEllyPet");
-		public static const PrisonCaptorEllyBillie:StatusEffectType  = mk("prisonCaptorEllyBillie");
-		public static const PrisonCaptorEllyScruffy:StatusEffectType = mk("prisonCaptorEllyScruffy");
-		public static const PrisonRestraints:StatusEffectType        = mk("prisonRestraint");
-		public static const PrisonCaptorEllyScratch:StatusEffectType = mk("prisonCaptorEllyScatch");
-
 		public static const CalluOff:StatusEffectType            = mk("Callu Off");
 		public static const ChiChiOff:StatusEffectType           = mk("Chi Chi Off");
 		public static const DianaOff:StatusEffectType            = mk("Diana Off");

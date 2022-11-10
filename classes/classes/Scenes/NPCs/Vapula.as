@@ -24,7 +24,7 @@ public class Vapula extends NPCAwareContent implements TimeAwareInterface
 				if (flags[kFLAGS.VAPULA_FOLLOWER] == .5 || flags[kFLAGS.VAPULA_FOLLOWER] == 1.5) flags[kFLAGS.VAPULA_FOLLOWER]++;
 				flags[kFLAGS.DAYS_SINCE_LAST_DEMON_DEALINGS]++;
 			}
-			if (vapulaSlave() && player.hasKeyItem("Demonic Strap-On") < 0 && player.gender == 2 && flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 0 && (flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0)) {
+			if (vapulaSlave() && player.hasKeyItem("Demonic Strap-On") < 0 && player.gender == 2 && flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 0 && !flags[kFLAGS.IN_INGNAM]) {
 				vapulaGivesPCAPresent();
 				return true;
 			}
@@ -32,7 +32,7 @@ public class Vapula extends NPCAwareContent implements TimeAwareInterface
 		}
 
 		public function timeChangeLarge():Boolean {
-			if (prison.inPrison || flags[kFLAGS.IN_INGNAM] > 0) return false;
+			if (flags[kFLAGS.IN_INGNAM]) return false;
 			if (flags[kFLAGS.VAPULA_FOLLOWER] >= 2.5 && model.time.hours == 6 && flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] == 0) {
 				femaleVapulaRecruitmentPartII();
 				return true;

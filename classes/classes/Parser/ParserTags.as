@@ -154,15 +154,7 @@ public class ParserTags {
         "tail"                  : function ():* { return CoC.instance.player.tailDescript(); },
         "onetail"               : function ():* { return CoC.instance.player.oneTailDescript(); },
         "tailcount"             : function ():* { return Utils.num2Text(CoC.instance.player.tailCount); },
-        "Tailcount"             : function ():* { return Utils.Num2Text(CoC.instance.player.tailCount); },
-
-        //Prisoner
-        "captortitle": function ():* { return SceneLib.prison.prisonCaptor.captorTitle; },
-        "captorname" : function ():* { return SceneLib.prison.prisonCaptor.captorName; },
-        "captorhe"   : function ():* { return SceneLib.prison.prisonCaptor.captorPronoun1; },
-        "captorhim"  : function ():* { return SceneLib.prison.prisonCaptor.captorPronoun2; },
-        "captorhis"  : function ():* { return SceneLib.prison.prisonCaptor.captorPronoun3;}
-
+        "Tailcount"             : function ():* { return Utils.Num2Text(CoC.instance.player.tailCount); }
     };
     /**
      * provides lookups for subject: "arian"
@@ -630,12 +622,7 @@ public class ParserTags {
         "islactating"   : function ():* { return (CoC.instance.player.lactationQ() > 0); },
         "true"          : function ():* { return true; },
         "false"         : function ():* { return false; },
-	    "silly"         : function ():* { return EngineCore.silly();},
-
-        //Prison
-        "esteem": function ():* { return CoC.instance.player.esteem; },
-        "obey"  : function ():* { return CoC.instance.player.obey; },
-        "will"  : function ():* { return CoC.instance.player.will;}
+	    "silly"         : function ():* { return EngineCore.silly();}
     };
 
     internal static function skinDescriptionFn(layer:String, noAdj:Boolean, noTone:Boolean):Function {

@@ -167,22 +167,10 @@ public class MainMenu extends BaseContent {
 		outputText("<b>Game Mod Supplementary Events:</b>\n");
 		outputText("<ul>");
 		outputText("<li> worldofdrakan (Pigtail Truffles & Pig/Boar TF)</li>");
-		outputText("<li> FeiFongWong (Prisoner Mod)</li>");
 		outputText("<li> Foxxling (Lizan Rogue, Skin Oils & Body Lotions, Black Cock)</li>");
 		outputText("<li> LukaDoc (Bimbo Jojo)</li>");
 		outputText("<li> Kitteh6660 (Behemoth, Cabin, Ingnam, Pure Jojo sex scenes)</li>");
 		outputText("</ul>");
-		/*outputText("<b>Game Mod Bug Reporting:</b>\n");
-		 outputText("<ul>");
-		 outputText("<li> Netys (github)</li>");
-		 outputText("<ul>");
-		 outputText("</ul>");
-		 outputText("<b>Typo Reporting</b>\n");
-		 outputText("<ul>");
-		 outputText("<li> SoS</li>");
-		 outputText("<li> Prisoner416</li>");
-		 outputText("<li> Chibodee</li>");
-		 outputText("");*/
 		outputText("<b>Graphical & Code Prettiness:</b>");
 		outputText("<ul>");
         outputText("<li> Dasutin (Background Images)</li>");

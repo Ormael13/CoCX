@@ -1117,7 +1117,6 @@ public class DesertCave extends DungeonAbstractContent
 			addButtonIfTrue(2,"Tentacles",tentacleVictoryGangbangCumWitch, "Req. 3 tentacle/stamen cocks", player.countCocksWithType(CockTypesEnum.TENTACLE) >= 3, "Fuck the Cum Witch with your tentacle cocks.");
             //Female Victory Sex
 			addButtonIfTrue(3,"Ladysex",ladyVictorySex, "Req. a vagina", player.hasVagina(), "Ride the Cum Witch's cock until she cums!");
-			SceneLib.uniqueSexScene.pcUSSPreChecksV2(cumWitchDefeated);
 			//Complicated leaving
 			if(monster.HP >= 1)
 				addButton(14,"Decline",declineSandWitch);
@@ -4172,11 +4171,8 @@ public class DesertCave extends DungeonAbstractContent
 			
 			outputText("\n\nLying on the dusty ground, still slick with the fluids of the womb, is a healthy, beautiful baby girl, with sandy blonde fuzz on her head and olive-colored skin.  The twin sets of tiny little nipples on her chest and the two pussies are the only signs that she isn't strictly human.");
 			outputText("\n\nSmiling with a sudden sense of maternal pride, you scoop the baby witch up and hold her to your breast.  She fusses and wriggles some, but soon calms down, cooing as she snuggles against your [chest].   Milk begins to leak from your [nipples], and like iron to a magnet your baby's lips are drawn to the sweet, creamy fluid.  Sparks of pleasure tingle through your breasts as your child nurses, and you can't resist a smile.  Gently you hold her, rocking her back and forth as she noisily suckles from you.");
-			if (prison.inPrison) outputText("\n\nMistress Elly opens the door to see that you're tending to the baby girl. \"<i>Isn't she a cutie? I grant you my permission to bring the baby to Sand Witches,</i>\" she says. You acknowledge her and get up. ");
 			outputText("\n\nWhen she's finally done, you're surprised to see she hasn't grown at all - unless you count the big, round belly she contentedly strokes, a result of the sheer amount of milk the greedy little girl drank.  She starts to squirm and fuss as her greediness catches up to her, and you sling her over your shoulder and gently burp her, the sound echoing out over the wasteland.  As the baby settles in your arms and starts to fall asleep, you carefully gather some scrap cloth, to form a blanket for her, gather your things, and head off to the desert.");
-			
 			outputText("\n\nYou soon find your way to the hidden caves of the Sand Witches, where you present your new daughter to the nursery.  The sand witches there aren't too happy about the idea of looking after her themselves, insisting you should stay here with them and rear her yourself, but you are insistent that you cannot stay here and it's not safe to keep your daughter with you.  Finally, they give in and start fussing over your daughter, giving you the opportunity to quietly slip out and head back home.\n");
-			if (prison.inPrison) outputText("\n\nWith your daughter safely delivered to the cave of the Sand Witches, you return to the prison.");
 			fatigue(40);
 		}
 		

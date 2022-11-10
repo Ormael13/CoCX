@@ -39,7 +39,7 @@ public function DefeatedHellCat():void {
 	if (player.hasVagina()) addButton(2, "Catcock", DefeatedHellCatCatcock);
     LustyMaidensArmor.addTitfuckButton(3);
 	SceneLib.uniqueSexScene.pcUSSPreChecksV2(DefeatedHellCat);
-	}
+}
 
 public function DefeatedHellCatPussycat():void {
 	if (player.gender == 3) outputText("You ain’t gonna get any close to that feline penis of hers. " + (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] > 0 ? "If your hunch is good it’s likely even worse than that of the hellhounds. " : "") + "");

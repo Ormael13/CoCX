@@ -98,8 +98,8 @@ public class SharkGirlScene extends AbstractBoatContent {
             menu();
             addButtonIfTrue(1, "Fuck Her", sharkgirlOceanDickFuck, "Req. a cock.", player.hasCock());
             addButtonIfTrue(2, "Sixty-nine", sharkgirlOceanSixtyNine, "Req. a vagina.", player.hasVagina());
-            SceneLib.uniqueSexScene.pcUSSPreChecksV2(oceanSexMenu);
             addButton(4, "Leave", cleanupAfterCombat);
+            SceneLib.uniqueSexScene.pcUSSPreChecksV2(oceanSexMenu);
         } else {
             if (player.gender == 0) outputText(", but you're not in the mood.");
             else outputText(", but you can't figure out how exactly to do that.");

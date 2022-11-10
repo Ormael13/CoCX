@@ -77,7 +77,7 @@ public class IsabellaScene extends NPCAwareContent implements TimeAwareInterface
 		}
 
 		public function timeChangeLarge():Boolean {
-			if (checkedIsabella++ == 0 && model.time.hours == 6 && isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0 && flags[kFLAGS.ISABELLA_BLOWJOBS_DISABLED] == 0 && player.hasCock() && (model.time.days % 2 == 0 || !player.hasPerk(PerkLib.MarblesMilk)) && player.shortestCockLength() <= 9 && !prison.inPrison) {
+			if (checkedIsabella++ == 0 && model.time.hours == 6 && isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0 && flags[kFLAGS.ISABELLA_BLOWJOBS_DISABLED] == 0 && player.hasCock() && (model.time.days % 2 == 0 || !player.hasPerk(PerkLib.MarblesMilk)) && player.shortestCockLength() <= 9) {
 				spriteSelect(SpriteDb.s_isabella);
 				isabellaFollowerScene.isabellaMorningWakeupCall();
 				return true;

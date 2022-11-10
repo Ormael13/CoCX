@@ -37,7 +37,6 @@ public function fapArenaGOOOO():void {
 		//outputText("She redirects you to a small stall near the entrance with various potions stored on shelves.  A poster placed on it reads: "Your dick must qualify to the house's standards.  80 gems for a vial of Gro+, 80 for the session of your life!"
 		//Do you buy products? (Yes/No) //Yes gives you a vial of Gro+, No does nothing. In both cases, the PC is redirected to the Bazaar.
 		doNext(bazaar.enterTheBazaar);
-		return;
 	}
 	//[if dick size >= 8 inches: 1st time]
 	else if(flags[kFLAGS.FAP_ARENA_RULES_EXPLAINED] == 0) {
@@ -119,9 +118,8 @@ private function fapArenaPageII():void {
 		//5% chance of losing no matter what.
 		//If that check fails,
 		//Let S be the PC's sensitivity
-		var s:Number = 0;
-		if (player.sens > 100) s = Math.round((player.effectiveSensitivity() / player.sens) * 100);
-		else s = player.sens;
+		var s:Number;
+		s = Math.round((player.effectiveSensitivity() / player.sens) * Math.min(player.sens, 100));
 		//D the number of hours since he last came
 		var d:Number = player.hoursSinceCum;
 		var c:Number = 0;

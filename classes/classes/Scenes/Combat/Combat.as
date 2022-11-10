@@ -426,7 +426,6 @@ public class Combat extends BaseContent {
     public function cleanupAfterCombatImpl(nextFunc:Function = null, ThisIsNotATFScene:Boolean = true):void {
         magic.cleanupAfterCombatImpl();
         if (nextFunc == null) nextFunc = camp.returnToCampUseOneHour;
-        if (prison.inPrison && prison.prisonCombatWinEvent != null) nextFunc = prison.prisonCombatWinEvent;
         if (inCombat) {
             //clear status
             clearStatuses(false);
@@ -481,12 +480,6 @@ public class Combat extends BaseContent {
                 inCombat = false;
                 if (player.hasStatusEffect(StatusEffects.SoulArena)) player.removeStatusEffect(StatusEffects.SoulArena);
                 if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlet)) player.removeStatusEffect(StatusEffects.SoulArenaGaunlet);
-                //Prison is unfinished, shit is old, I'm not adding new monsties here.
-                if (!prison.inPrison && flags[kFLAGS.PRISON_CAPTURE_CHANCE] > 0 && rand(100) < flags[kFLAGS.PRISON_CAPTURE_CHANCE] && (prison.trainingFeed.prisonCaptorFeedingQuestTrainingIsTimeUp() || !prison.trainingFeed.prisonCaptorFeedingQuestTrainingExists()) && (monster is Goblin || monster is GoblinAssassin || monster is Imp || monster is ImpLord || monster is ImpWarlord || monster is HellHound || monster.short == "minotaur" || monster is Satyr || monster is Gnoll || monster is GnollSpearThrower || monster is Basilisk)) {
-                    outputText("  You feel yourself being dragged and carried just before you black out.");
-                    doNext(prison.prisonIntro);
-                    return;
-                }
                 //BUNUS XPZ
                 if (flags[kFLAGS.COMBAT_BONUS_XP_VALUE] > 0) {
                     player.XP += flags[kFLAGS.COMBAT_BONUS_XP_VALUE];
@@ -8105,7 +8098,7 @@ public class Combat extends BaseContent {
             monster.gems = Math.round(monster.gems);
         }
         if (!monster.hasPerk(PerkLib.NoExpGained)) monster.handleAwardText(); //Each monster can now override the default award text
-        if (!inDungeon && !inRoomedDungeon && !prison.inPrison) { //Not in dungeons
+        if (!inDungeon && !inRoomedDungeon) { //Not in dungeons
             if (nextFunc != null) doNext(nextFunc);
             else doNext(playerMenu);
         } else {
@@ -10594,11 +10587,6 @@ public class Combat extends BaseContent {
         monster.soulforce = monster.maxOverSoulforce();
         monster.XP = monster.totalXP();
         settingPCforFight();
-        if (prison.inPrison && prison.prisonCombatAutoLose) {
-            dynStats("lus=", player.maxOverLust());
-            doNext(endLustLoss);
-            return;
-        }
         doNext(playerMenu);
     }
 
@@ -13581,10 +13569,6 @@ public function runAway(callHook:Boolean = true):void {
         }
         return;
     }
-    if (prison.inPrison && !prison.prisonCanEscapeRun()) {
-        addButton(0, "Next", combatMenu, false);
-        return;
-    }
     //Attempt texts!
     if (monster is Marae) {
         outputText("Your boat is blocked by tentacles! ");
@@ -13622,12 +13606,8 @@ public function runAway(callHook:Boolean = true):void {
 
     //Nonflying PCs
     else {
-        //In prison!
-        if (prison.inPrison) {
-            outputText("You make a quick dash for the door and attempt to escape! ");
-        }
         //Stuck!
-        else if (player.hasStatusEffect(StatusEffects.NoFlee)) {
+        if (player.hasStatusEffect(StatusEffects.NoFlee)) {
             clearOutput();
             if (monster.short == "goblin") outputText("You try to flee, but get stuck in the sticky white goop surrounding you.\n\n");
             else outputText("You put all your skills at running to work, ducking and diving in an effort to escape, but are unable to get away!\n\n");
@@ -13746,17 +13726,8 @@ public function runAway(callHook:Boolean = true):void {
     }
     //SUCCESSFUL FLEE
     if ((player.spe > rand(monster.spe + escapeMod)) || monster.hasPerk(PerkLib.AlwaysSuccesfullRunaway)) {
-        //Escape prison
-        if (prison.inPrison) {
-            outputText("You quickly bolt out of the main entrance and after hiding for a good while, there's no sign of [themonster]. You sneak back inside to retrieve whatever you had before you were captured. ");
-            inCombat = false;
-            clearStatuses(false);
-            prison.prisonEscapeSuccessText();
-            doNext(prison.prisonEscapeFinalePart1);
-            return;
-        }
         //Fliers flee!
-        else if (player.canFly()) outputText("[Themonster] can't catch you.");
+        if (player.canFly()) outputText("[Themonster] can't catch you.");
         //sekrit benefit: if you have coon ears, coon tail, and Runner perk, change normal Runner escape to flight-type escape
         else if (player.tailType == Tail.RACCOON && player.ears.type == Ears.RACCOON && player.hasPerk(PerkLib.Runner)) {
             outputText("Using your running skill, you build up a head of steam and jump, then spread your arms and flail your tail wildly; your opponent dogs you as best [monster he] can, but stops and stares dumbly as your spastic tail slowly propels you several meters into the air!  You leave [monster him] behind with your clumsy, jerky, short-range flight.");

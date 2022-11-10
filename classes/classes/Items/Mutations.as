@@ -4297,7 +4297,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Big slime girl
-        else {
+        else if (player.vaginalCapacity() >= 9000 && transformations.RearBodyMetamorphicGoo.isPresent() && transformations.arms.ArmsGoo.isPresent() && LowerBody.isGoo(player)) {
             if (!player.hasStatusEffect(StatusEffects.SlimeCraving)) {
                 outputText("[pg]You feel a growing gnawing in your gut.  You feel... hungry, but not for food.  No, you need something wet and goopy pumped into you.  You NEED it.  You can feel it in your bones.  <b>If you don't feed that need... you'll get weaker and maybe die.</b>");
                 player.createStatusEffect(StatusEffects.SlimeCraving, 0, 0, 0, 1); //Value four indicates this tracks strength and speed separately
@@ -14574,11 +14574,6 @@ public final class Mutations extends MutationsHelper {
 		DrunkenPowerEmpowerIfPossible();
         player.refillHunger(10);
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
-    }
-
-
-    public function prisonBread(player:Player):void {
-        prison.prisonItemBread(false);
     }
 
     public function frothyBeer(player:Player):void {

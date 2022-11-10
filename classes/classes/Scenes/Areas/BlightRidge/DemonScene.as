@@ -34,8 +34,8 @@ import classes.Scenes.SceneLib;
 			outputText("You smile in satisfaction as the mino incubus collapses, unable to continue fighting.");
 			if (monster.HP < 1) addButton (5, "Kill Him", killDemon);
             LustyMaidensArmor.addTitfuckButton(7);
-			SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatMinoIncubus);
 			addButton (14, "Leave", cleanupAfterCombat);
+			SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatMinoIncubus);
 		}
 		
 		//Incubus
@@ -50,6 +50,8 @@ import classes.Scenes.SceneLib;
 			clearOutput();
 			menu();
 			outputText("You smile in satisfaction as the incubus collapses, unable to continue fighting.");
+			if (monster.HP < 1) addButton (12, "Kill Him", killDemon);
+			addButton (14, "Leave", cleanupAfterCombat);
 			if (player.lust >= 33) {
 				outputText("\nNow would be the perfect opportunity to taste the fruits of his sex-ready form...[pg]Do you fuck him?");
 				addButtonIfTrue(0, "M. Fuck", IncubusGetsRapedByMale, "Req. a cock.", player.hasCock());
@@ -58,11 +60,11 @@ import classes.Scenes.SceneLib;
 				addButton (3, "Catch Anal", SceneLib.dungeons.factory.doRideIncubusAnally);
 				addButtonIfTrue(4, "L.Paizuri", lustyPaizuri, "Req . to have Lusty Maiden or Succubus armor equipped (unique scene for incubi).",
 					player.hasVagina() && player.biggestTitSize() >= 4 && (player.armor == armors.LMARMOR || player.armor == armors.S_ARMOR));
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatIncubus); //the last!
+			} else {
+				outputText("You're not aroused enough to rape him.");
+				flushOutputTextToGUI();
 			}
-			else outputText("You're not aroused enough to rape him.");
-			if (monster.HP < 1) addButton (12, "Kill Him", killDemon);
-			SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatIncubus);
-			addButton (14, "Leave", cleanupAfterCombat);
 		}
 		
 		public function lustyPaizuri():void {
@@ -195,15 +197,18 @@ import classes.Scenes.SceneLib;
 			clearOutput();
 			menu();
 			outputText("You smile in satisfaction as the omnibus collapses, unable to continue fighting.");
+			if (monster.HP < 1) addButton (5, "Kill Her", killDemon);
+			addButton (14, "Leave", cleanupAfterCombat);
 			if (player.lust>=33 && player.gender > 0) {
 				outputText("\nNow would be the perfect opportunity to taste the fruits of her sex-ready form...[pg]Do you fuck her?");
 				if (player.gender == 1 || player.gender == 3) addButton (0, "M. Fuck", OmnibusGetsRapedByMale);
 				if (player.gender == 2 || player.gender == 3) addButton (1, "F. Fuck", OmnibusGetsRapedByFemale);
                 LustyMaidensArmor.addTitfuckButton(2);
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatOmnibus); // the last!
+			} else {
+				outputText("You aren't aroused enough to rape her.");
+				flushOutputTextToGUI();
 			}
-			if (monster.HP < 1) addButton (5, "Kill Her", killDemon);
-			SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatOmnibus);
-			addButton (14, "Leave", cleanupAfterCombat);
 		}
 		
 		public function OmnibusGetsRapedByMale():void {
@@ -347,8 +352,8 @@ import classes.Scenes.SceneLib;
 			menu();
 			outputText("You smile in satisfaction as the cow succubus collapses, unable to continue fighting.");
 			if (monster.HP < 1) addButton (5, "Kill Her", killDemon);
-			SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatCowSuccubus);
 			addButton (14, "Leave", cleanupAfterCombat);
+			SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatCowSuccubus);
 		}
 		
 		//Succubus
@@ -364,15 +369,18 @@ import classes.Scenes.SceneLib;
 			clearOutput();
 			menu();
 			outputText("You smile in satisfaction as the succubus collapses, unable to continue fighting.");
+			if (monster.HP < 1) addButton (5, "Kill Her", killDemon);
+			addButton (14, "Leave", cleanupAfterCombat);
 			if (player.lust>=33) {
 				outputText("\nNow would be the perfect opportunity to taste the fruits of her sex-ready form...[pg]Do you fuck her?");
 				addButtonIfTrue(0, "M. Fuck", SuccubusGetsRapedByMale, "Req. a cock.", player.hasCock());
 				addButtonIfTrue(1, "F. Fuck", SuccubusGetsRapedByFemale, "Req. a vagina.", player.hasVagina());
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatSuccubus);
 			}
-			else outputText("You're not aroused enough to rape her.");
-			if (monster.HP < 1) addButton (5, "Kill Her", killDemon);
-			SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatSuccubus);
-			addButton (14, "Leave", cleanupAfterCombat);
+			else {
+				outputText("You're not aroused enough to rape her.");
+				flushOutputTextToGUI();
+			}
 		}
 		
 		public function SuccubusGetsRapedByMale():void {
