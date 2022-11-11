@@ -6442,9 +6442,9 @@ public class PerkLib
 			*/
             Metamorph.requirePerk(GeneticMemory);
 			MetamorphEx.requirePerk(Metamorph)
-					.requireCustomFunction(function (player:Player):Boolean {
-						return player.perkv1(PerkLib.Metamorph) >= 18;
-					}, "Metamorph perk bonus to soulforce at 950.");
+				.requireCustomFunction(function (player:Player):Boolean {
+					return player.perkv1(PerkLib.Metamorph) >= 18;
+				}, "Metamorph perk bonus to soulforce at 950.");
 //			MetamorphMastery.requirePerk(MetamorphEx)
 //                    .requireCustomFunction(function (player:Player):Boolean {
 //                        return player.perkv1(PerkLib.AscensionTrancendentalGeneticMemoryStageX) > 6;
