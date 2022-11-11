@@ -378,7 +378,7 @@ public class Changelog extends BaseContent
 			outputText("-A bunch of fixes: monke typo, ted-spooder confusion, LGSFPill shop desc, sensitivity racial buffs, I.Draft not unlocking cock count metamorphs, Raphael broken dates (Svalkash)\n");
 			outputText("-Tainted I.Draft now grows demon dicks. You can now use multiple doses of Reducto. Reducto can be applied to butt and hips. Cocks are reduced by 1/4 or 1/3 again. (Svalkash)\n");
 			outputText("-Brutal Blows perk armor reduction is now: 10% of enemy current armor value + 5\n");
-			outputText("-\n");
+			outputText("-Low tier magic immunity - some of the enemies now would have immunity to tier 1 spells. They still can be hurt by tier 2 or 3 spells thou or magical specials.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

@@ -17,7 +17,7 @@ public class DarknessShardSpell extends AbstractBlackSpell {
 				: "Drawing your own lust to condense part of the the ambivalent darkness into a shard to attack your enemies.",
 			TARGET_ENEMY,
 			TIMING_INSTANT,
-			[TAG_DAMAGING, TAG_DARKNESS]
+			[TAG_DAMAGING, TAG_DARKNESS, TAG_TIER1]
 		);
 		baseManaCost = 40;
 		if (ex) baseWrathCost = 100;

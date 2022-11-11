@@ -17,7 +17,7 @@ public class DuskWaveSpell extends AbstractBlackSpell {
 				: "This spell draws your own lust and wrath to condense part of the the ambivalent darkness into a wave to attack your enemies.",
 			TARGET_ENEMY,
 			TIMING_INSTANT,
-			[TAG_DAMAGING, TAG_DARKNESS, TAG_AOE]
+			[TAG_DAMAGING, TAG_DARKNESS, TAG_AOE, TAG_TIER1]
 		);
 		baseManaCost = 200;
 		if (ex) baseWrathCost = 100;

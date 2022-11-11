@@ -181,6 +181,10 @@ public class CombatAbility extends BaseCombatContent {
 		name: 'Acid',
 		desc: "This ability primary element is Acid"
 	});
+	public static const TAG_TIER1:int = EnumValue.add(AllTags, 15, 'TIER1', {
+		name: 'Tier1',
+		desc: "This ability is tier 1"
+	});
 	
 	/**
 	 * Unique id of this ability.

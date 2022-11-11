@@ -113,6 +113,10 @@ public class AbstractSpell extends CombatAbility {
 			if (display) {
 				outputText("As soon as your magic touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			}
+		} else if (monster.hasStatusEffect(StatusEffects.LowtierMagicImmunity) && hasTag(TAG_DAMAGING) && hasTag(TAG_TIER1)) {
+			if (display) {
+				outputText("As soon as your magic touches [themonster], it sizzles and fades to nothing.\n\n");
+			}
 		} else {
 			if (!isAutocasting) preSpellEffect();
 			doSpellEffect(display);

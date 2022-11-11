@@ -17,7 +17,7 @@ public class WindBlastSpell extends AbstractGreySpell {
 				: "Devastate the enemy ranks with a barrage of wind vortexes.",
 			TARGET_ENEMY,
 			TIMING_INSTANT,
-			[TAG_DAMAGING, TAG_WIND, TAG_AOE]
+			[TAG_DAMAGING, TAG_WIND, TAG_AOE, TAG_TIER1]
 		);
 		baseManaCost = 200;
 		if (ex) baseWrathCost = 100;
