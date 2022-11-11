@@ -1004,6 +1004,15 @@ public class PerkMenu extends BaseContent {
 				}
 				outputText("\nRequirements for next tier: " + reqs.join(", "));
 
+				if (pMutateLvl > 0) {
+					outputText("\nCurrent Tier Description: ");
+					if(mutation.mDesc(player.getPerk(mutation), pMutateLvl).length <= 1) {	//Some desc. contains only "."
+						outputText("Error in description for Mutation "+ mutation.name() +".");
+					} else{
+						outputText(mutation.mDesc(player.getPerk(mutation), pMutateLvl));
+					}
+				}
+
 				if (mutation.maxLvl != pMutateLvl) {
 					outputText("\nNext Tier Description: ");
 					if (mutation.mDesc(player.getPerk(mutation), pMutateLvl).length <= 1) {	//Some desc. contains only "."
@@ -1012,15 +1021,6 @@ public class PerkMenu extends BaseContent {
 						else outputText("Error in description for Mutation " + mutation.name() + ".");
 					} else {
 						outputText(mutation.mDesc(player.getPerk(mutation), pMutateLvl + 1));
-					}
-				}
-
-				if (pMutateLvl > 0) {
-					outputText("\nCurrent Tier Description: ");
-					if(mutation.mDesc(player.getPerk(mutation), pMutateLvl).length <= 1) {	//Some desc. contains only "."
-						outputText("Error in description for Mutation "+ mutation.name() +".");
-					} else{
-						outputText(mutation.mDesc(player.getPerk(mutation), pMutateLvl));
 					}
 				}
 
