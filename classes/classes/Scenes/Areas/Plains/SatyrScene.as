@@ -255,8 +255,8 @@ internal function defeatASatyr():void {
 	addButtonIfTrue(1, "Ride Face", femaleTakesAdvantageOfSatyr,
 		"Req. a vagina", player.hasVagina());
 	LustyMaidensArmor.addTitfuckButton(2);
-	SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatASatyr);
 	addButton(14, "Leave", cleanupAfterCombat);
+	SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatASatyr);
 }
 
 //Female (Z)

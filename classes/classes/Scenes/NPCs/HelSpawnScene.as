@@ -629,10 +629,6 @@ private function helsLifestyle():void {
 
 //IT'S TIME! (Play the morning of the 15th Day of Helia's pregnancy)
 public function heliaBirthtime():void {
-	if (prison.inPrison) {
-		prison.prisonLetter.letterFromHelia1();
-		return;
-	}
 	clearOutput();
 	helScene.helSprite();
 	outputText("The morning dawns like any other, though as you're getting dressed, you can't help but notice Hel waddling back from the edge of camp, both hands firmly gripping her positively massive belly.  You walk over just in time to hear her groan, \"<i>Oh fuck me sideways and call me a harpy, this shit sucks.</i>\"  You put an arm around her to steady the sickened salamander, but she barely notices you as she flops down beside her still, nearly grabbing a glass before stopping herself.  \"<i>Fucking shit fuck I am so done with this.  I - oh god,</i>\" she doubles over, squeezing her belly.  \"<i>Ow ow oh god ow.</i>\"");
@@ -1050,10 +1046,6 @@ private function dasBarbarimander():void {
 //Event: Helspawn's a Little Slut Like Mommy
 //{Play at night, while sleeping.}
 public function helspawnIsASlut():void {
-	if (prison.inPrison) { //No choices for you in prison!
-		prison.prisonLetter.noControlOverHelspawn();
-		return;
-	}
 	helScene.helSprite();
 	flags[kFLAGS.HELSPAWN_FUCK_INTERRUPTUS] = 1;
 	outputText("\nSomething's moving in your camp.");

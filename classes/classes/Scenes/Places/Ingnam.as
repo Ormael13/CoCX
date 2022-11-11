@@ -17,7 +17,7 @@ public class Ingnam extends BaseContent
 		public var thiefScene:ThiefScene = new ThiefScene();
 		public var soulforce:Soulforce = new Soulforce();
 		
-		public function get inIngnam():Boolean { return flags[kFLAGS.IN_INGNAM] > 0; }
+		public function get inIngnam():Boolean { return flags[kFLAGS.IN_INGNAM]; }
 		
 		public function Ingnam()
 		{

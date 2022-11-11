@@ -157,8 +157,8 @@ public class GnollSpearThrowerScene extends BaseContent
 					"Make the gnoll suck you off.");
 				addButtonIfTrue(1, "Get Licked", victoryRapeHyenaCunnilingus,
 					"Req. a vagina.", player.hasVagina(), "Make the gnoll lick your pussy.");
-				SceneLib.uniqueSexScene.pcUSSPreChecksV2(hyenaVictory);
 				addButton(14, "Leave", cleanupAfterCombat);
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(hyenaVictory);
 			}
 			else {
 				outputText("You're not aroused enough to rape her.");

@@ -2215,10 +2215,6 @@ private function firstTimeDeclineIzmasKdiddlezlijfhdjkfhslkfbsjkhfbs():void {
 //about veracity. She can take care of everything with her
 //OCDNS powers. -Z)
 private function IzmaPoopsBabies():void {
-	if (prison.inPrison) {
-		prison.prisonLetter.letterFromIzma();
-		return;
-	}
 	spriteSelect(SpriteDb.s_izma);
 	clearOutput();
 	outputText("You hear the sounds of splashing and cursing coming from the part of the stream where Izma, by neccessity, keeps her private mini-camp, and immediately you set off running. When you come tearing to a halt there, you find Izma, wading in the stream well up to her waist, and cursing as she holds her gravid belly, her tail angrily flailing through the water behind her. She still manages to smile when she sees it's you who's come to see her. No words are neccessary; you plunge into the water and head to her side.\n\n");

@@ -101,8 +101,8 @@ public class CockatriceScene extends BaseContent {
                 if (player.hasVagina()) addButton(4, "Oral (Vag)", cockatriceOralVag).hint("Get a vaginal blowjob!");
             } else if (player.isTaur() && (player.hasVagina() || player.hasCock())) addButton(5, "Taur sex", cockatriceTaurButtFuck).hint("Let him fuck your tauric butt!");
             else if (player.isDrider() && (player.hasVagina() || player.hasCock())) addButton(5, "Drider sex", cockatriceDriderButtFuck).hint("Let him fuck your drider butt!");
-            SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatCockatrice);
             addButton(14, "Leave", cleanupAfterCombat);
+            SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatCockatrice);
         } else {
             outputText("You're not aroused enough to rape him.");
             cleanupAfterCombat();

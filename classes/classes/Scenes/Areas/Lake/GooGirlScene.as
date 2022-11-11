@@ -381,8 +381,8 @@ public class GooGirlScene extends AbstractLakeContent
 				}
 				else if (latexGoo_canThink && flags[kFLAGS.PC_KNOWS_ABOUT_BLACK_EGGS] <= 0 && player.cor >= 50)
 					sceneHunter.print("Have you ever seen rubber-black eggs? Try to figure out what they are... somehow. Maybe ask someone?");
-	            SceneLib.uniqueSexScene.pcUSSPreChecksV2(beatUpGoo);
 				addButton(14, "Leave", cleanupAfterCombat);
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(beatUpGoo);
 			}
 		}
 

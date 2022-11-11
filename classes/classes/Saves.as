@@ -948,16 +948,8 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		//Herbalism
 		saveFile.data.herbalismLevel = player.herbalismLevel;
 		saveFile.data.herbalismXP = player.herbalismXP;
-		//Prison STATS
+		//Hunger
 		saveFile.data.hunger = player.hunger;
-		saveFile.data.esteem = player.esteem;
-		saveFile.data.obey = player.obey;
-		saveFile.data.obeySoftCap = player.obeySoftCap;
-		saveFile.data.will = player.will;
-
-		saveFile.data.prisonItems = player.prisonItemSlots;
-		//saveFile.data.prisonArmor = prison.prisonItemSlotArmor;
-		//saveFile.data.prisonWeapon = prison.prisonItemSlotWeapon;
 		//LEVEL STATS
 		saveFile.data.XP = player.XP;
 		saveFile.data.level = player.level;
@@ -1834,63 +1826,11 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.herbalismLevel = 0;
 		else
 			player.herbalismLevel = saveFile.data.herbalismLevel;
-		//Prison STATS
+		//Hunger
 		if (saveFile.data.hunger == undefined)
 			player.hunger = 50;
 		else
 			player.hunger = saveFile.data.hunger;
-		if (saveFile.data.esteem == undefined)
-			player.esteem = 50;
-		else
-			player.esteem = saveFile.data.esteem;
-		if (saveFile.data.obey == undefined)
-			player.obey = 0;
-		else
-			player.obey = saveFile.data.obey;
-		if (saveFile.data.will == undefined)
-			player.will = 50;
-		else
-			player.will = saveFile.data.will;
-		if (saveFile.data.obeySoftCap == undefined)
-			player.obeySoftCap = true;
-		else
-			player.obeySoftCap = saveFile.data.obeySoftCap;
-		//Prison storage
-		//Items
-		if (saveFile.data.prisonItems == undefined) {
-			trace("Not found");
-			player.prisonItemSlots = [];
-		}
-		else {
-			trace("Items FOUND!");
-			//for (var k:int = 0; k < 10; i++) {
-				player.prisonItemSlots = saveFile.data.prisonItems;
-			//}
-		}
-		//Armour
-		/*if (saveFile.data.prisonArmor == undefined) {
-			trace("Armour not found");
-			prison.prisonItemSlotArmor = null;
-		}
-		else {
-			trace("Armour FOUND!");
-			if (saveFile.data.prisonArmor is ItemType) {
-				trace("Loading prison armour");
-				prison.prisonItemSlotArmor = saveFile.data.prisonArmor;
-			}
-		}
-		//Weapon
-		if (saveFile.data.prisonWeapon == undefined) {
-			trace("Weapon not found");
-			prison.prisonItemSlotWeapon = null;
-		}
-		else {
-			trace("Weapon FOUND!");
-			if (saveFile.data.prisonWeapon is ItemType) {
-				trace("Loading prison weapon");
-				prison.prisonItemSlotWeapon = saveFile.data.prisonWeapon;
-			}
-		}*/
 		//LEVEL STATS
 		player.XP = saveFile.data.XP;
 		player.gems = saveFile.data.gems || 0;

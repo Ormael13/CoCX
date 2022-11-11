@@ -7,7 +7,6 @@ package classes.Scenes.Places
 import classes.*;
 import classes.GlobalFlags.*;
 import classes.Items.*;
-import classes.Scenes.Places.Prison.*;
 import classes.Scenes.SceneLib;
 import classes.internals.SaveableState;
 

@@ -93,7 +93,7 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
                 flags[kFLAGS.MET_MARAE] = 1;
                 flags[kFLAGS.MARAE_ISLAND] = 1;
                 outputText("You approach the tree and note that its bark is unusually smooth.  Every leaf of the tree is particularly vibrant, bright green with life and color.   You reach out to touch the bark and circle around it, noting a complete lack of knots or discoloration.  As you finish the circle, you are surprised to see the silhouette of a woman growing from the bark.  The transformation stops, exposing the front half a woman from the waist up.   You give a start when she opens her eyes – revealing totally white irises, the only part of her NOT textured with bark.\n\n");
-                if (player.cor > 66 + player.corruptionTolerance && flags[kFLAGS.MEANINGLESS_CORRUPTION] <= 0) outputText("The woman bellows, \"<i>Begone demon.  You tread on the precipice of damnation.</i>\"  The tree's eyes flash, and you find yourself rowing back to camp.  The compulsion wears off in time, making you wonder just what that tree-woman was!");
+                if (player.cor > 66 + player.corruptionTolerance) outputText("The woman bellows, \"<i>Begone demon.  You tread on the precipice of damnation.</i>\"  The tree's eyes flash, and you find yourself rowing back to camp.  The compulsion wears off in time, making you wonder just what that tree-woman was!");
                 //Explain the dungeon scenario
                 else {
                     flags[kFLAGS.MARAE_QUEST_START] = 1;
@@ -119,7 +119,7 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
             //Second meeting
             else {
                 outputText("You approach Marae's tree, watching the goddess flow out of the tree's bark as if it was made of liquid.  Just as before, she appears as the top half of a woman, naked from the waist up, with her back merging into the tree's trunk.\n\n");
-                if (player.cor > 66 + player.corruptionTolerance && flags[kFLAGS.MEANINGLESS_CORRUPTION] <= 0) {
+                if (player.cor > 66 + player.corruptionTolerance) {
                     outputText("She bellows in rage, \"<i>I told you, begone!</i>\"\n\nYou turn tail and head back to your boat, knowing you cannot compete with her power directly.");
                     if (player.level >= 30) outputText(" Of course, you could probably try to overthrow her.");
                     doNext(camp.returnToCampUseOneHour);

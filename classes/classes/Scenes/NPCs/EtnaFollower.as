@@ -201,9 +201,8 @@ public function etnaRapeIntro():void
 	addButton(0, "Yes (M)", etnaRapeYesM).disableIf(!player.hasCock(), "Req. a cock!");
 	addButton(1, "Yes (F)", etnaRapeYesF).disableIf(!player.hasVagina(), "Req. a vagina!");
 	addButton(2, "Fill her up!", EtnaFillHerUp).disableIf(!player.isAlraune(), "Req. to be an alraune.");
-	SceneLib.uniqueSexScene.pcUSSPreChecksV2(etnaRapeIntro, 3);
 	addButton(4, "No", etnaRapeNo);
-	}
+}
 
 public function etnaRapeYesM():void
 {
@@ -355,8 +354,7 @@ public function etnaRape3rdWin():void
 	if (player.lust >= 33 && player.hasCock()) addButton(0, "Yes (M)", etnaRapeYesM);
 	if (player.lust >= 33 && player.hasVagina()) addButton(1, "Yes (F)", etnaRapeYesF);
 	addButton(2, "No", etnaRapeNo);
-	SceneLib.uniqueSexScene.pcUSSPreChecksV2(etnaRape3rdWin);
-	}
+}
 
 public function etnaReady2Come2Camp():void
 {

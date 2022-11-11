@@ -63,6 +63,9 @@ use namespace CoC;
 				addButtonIfTrue(9, "Fuck & Piss", pissDom, "Requires you to have non-taur body and 'Watersports' to be enabled", flags[kFLAGS.WATERSPORTS_ENABLED] >= 1 && !player.isTaur(), "Fuck the Imp's ass, and relieve yourself. What's a better way to leave your scent and mark on him?");
 				addButtonIfTrue(11, "Oviposit", putBeeEggsInAnImpYouMonster, "Req. bee ovipositor", player.canOvipositBee(), "Use your ovipositor and lay some eggs in his butt.");
 				SceneLib.uniqueSexScene.pcUSSPreChecksV2(impRapeMenu);
+			} else {
+				outputText("You aren't aroused enough to rape him.");
+				flushOutputTextToGUI();
 			}
 		}
 
@@ -1706,14 +1709,15 @@ use namespace CoC;
 			} else {
 				outputText("The muscular imp groans in pained arousal, his loincloth being pushed to the side by his thick, powerful dick.  Grabbing the useless clothing, he rips it from his body, discarding it.  The imp's eyes lock on his cock as he becomes completely ignorant of your presence.  His now insatiable lust has completely clouded his judgment.  Wrapping both of his hands around his pulsing member he begins to masturbate furiously, attempting to relieve the pressure you've caused.");
 			}
-			if (player.lust >= 33) {
-				addButton(0, "Sex", sexAnImpLord);
-				SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatImpLord);
-			} else {
-				outputText("\n\nYou are not aroused enough to rape him.");
-			}
 			addButton(1, "Kill Him", killImp);
 			addButton(4, "Leave", cleanupAfterCombat);
+			if (player.lust >= 33) {
+				addButton(0, "Sex", sexAnImpLord);
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatImpLord); // the last!
+			} else {
+				outputText("\n\nYou are not aroused enough to rape him.");
+				flushOutputTextToGUI();
+			}
 		}
 		public function loseToAnImpLord():void {
 			clearOutput();

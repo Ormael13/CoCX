@@ -9,7 +9,6 @@ import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.Scenes.Holidays;
 import classes.Scenes.Inventory;
 import classes.Scenes.Places.Ingnam;
-import classes.Scenes.Places.Prison;
 import classes.Scenes.SceneLib;
 import classes.Transformations.TransformationLib;
 import classes.internals.Utils;
@@ -74,10 +73,6 @@ import coc.xxc.StoryContext;
 
 		protected function get ingnam():Ingnam {
 			return SceneLib.ingnam;
-		}
-
-		protected function get prison():Prison {
-			return SceneLib.prison;
 		}
 
 		protected function get d3():D3 {

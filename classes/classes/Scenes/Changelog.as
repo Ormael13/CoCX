@@ -373,7 +373,7 @@ public class Changelog extends BaseContent
 			outputText("-Unarmed attacks using fists (not feral) have now seperate mastery tracker of Unarmed mastery.\n");
 			outputText("-Bag of Cosmos now uses the new transfer menu with dragging. DragButton functionality fixed for S.P.Pearl (no more moving stacks of 15). Also, instead of swapping stacks, it tries to fill the target if possible. (Svalkash)\n");
 			outputText("-Power Attack / Shoot damage is now boosted by bonus to dmg from masteries.\n");
-			outputText("-\n");
+			outputText("-USS check now autoforces supercharged raiju. Removes USS from some enemies. FapArena calculation small improvement. Fixed SlimeCraving requirements. (Svalkash)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

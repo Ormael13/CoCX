@@ -104,8 +104,8 @@ public function tamaniDefeated(hpVictory:Boolean):void {
 		addButton(0, "Fuck", tamaniSexWon);
 		addButtonIfTrue(1, "Buttfuck", tamaniAnalShits, "Req. cock with area smaller than " + monster.analCapacity(), player.hasCock() && player.cockThatFits(monster.analCapacity()) >= 0);
 		addButtonIfTrue(2, "Lay Eggs", tamaniBeaten, "Req. pregnant Tamani and spider ovipositor", pregnancy.isPregnant && player.canOvipositSpider());
-		SceneLib.uniqueSexScene.pcUSSPreChecksV2(curry(tamaniDefeated, hpVictory), 3);
 		addButton(4, "Leave", cleanupAfterCombat);
+		SceneLib.uniqueSexScene.pcUSSPreChecksV2(curry(tamaniDefeated, hpVictory), 3);
 	}
 	else {
 		outputText("  You're not aroused enough to fuck her.");

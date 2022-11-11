@@ -332,17 +332,6 @@ public function timeChangeLarge():Boolean {
     }
     if (checkedMarbleMilk == 0 && model.time.hours == 6 && player.hasPerk(PerkLib.MarblesMilk)) {
         checkedMarbleMilk++;
-        //In prison
-        if (prison.inPrison) {
-            outputText("\nYou get up and complain about not getting your daily dose of Marble's milk. ");
-            if (flags[kFLAGS.PRISON_BITCHED_ABOUT_MARBLE_MILK] == 0) {
-                outputText("Yet oddly, you are still fine. Perhaps addiction to Lacta Bovine milk is a conspiracy? You curse the codex entry for deceiving you about the properties of her milk!");
-            }
-            outputText("\n");
-            flags[kFLAGS.PRISON_BITCHED_ABOUT_MARBLE_MILK]++;
-            doNext(playerMenu);
-            return true;
-        }
         //Marble is at camp
         if (player.hasStatusEffect(StatusEffects.CampMarble)) {
             postAddictionCampMornings(false);
@@ -2834,10 +2823,6 @@ public function marbleBadEndFollowup():void {
 public function marblePoopsBaybees():void {
 	//Normal shitz
 	if (pregnancy.type == PregnancyStore.PREGNANCY_PLAYER) {
-		if (prison.inPrison) {
-			prison.prisonLetter.letterFromMarble();
-			return;
-		}
 		//Gives birth at 28 days
 		outputText("\nMarble rushes up to you with a concerned look on her face.  \"<i>Sweetie, it's time!  Our child is going to come into the world!</i>\"  She squats down and gets you to kneel next to her, putting your hand against her now gaping womanhood.  You can feel that something is starting to come out of the hole, and you start encouraging Marble as she continues to breathe heavily and occasionally grunt from the effort of pushing the child out.\n\n");
 		
