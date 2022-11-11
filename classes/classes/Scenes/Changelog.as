@@ -374,10 +374,10 @@ public class Changelog extends BaseContent
 			outputText("-Bag of Cosmos now uses the new transfer menu with dragging. DragButton functionality fixed for S.P.Pearl (no more moving stacks of 15). Also, instead of swapping stacks, it tries to fill the target if possible. (Svalkash)\n");
 			outputText("-Power Attack / Shoot damage is now boosted by bonus to dmg from masteries.\n");
 			outputText("-USS check now autoforces supercharged raiju. Removes USS from some enemies. FapArena calculation small improvement. Fixed SlimeCraving requirements. (Svalkash)\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Benoit shop cleaned up, increased the chance of rare items. BFGauntlets now have the Large tag. Mutations DB now prints all mutation tiers. Vag of holding is removed. Instead, you get a bonus to capacity(capacities) when you have goo lower body or kitsune tail. (Svalkash)\n");
+			outputText("-A bunch of fixes: monke typo, ted-spooder confusion, LGSFPill shop desc, sensitivity racial buffs, I.Draft not unlocking cock count metamorphs, Raphael broken dates (Svalkash)\n");
+			outputText("-Tainted I.Draft now grows demon dicks. You can now use multiple doses of Reducto. Reducto can be applied to butt and hips. Cocks are reduced by 1/4 or 1/3 again. (Svalkash)\n");
+			outputText("-Brutal Blows perk nmow reduce enemy by: fixed amount + 10% of current enemy armor.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

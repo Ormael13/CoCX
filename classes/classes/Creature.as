@@ -2294,8 +2294,14 @@ public class Creature extends Utils
 			if (isTaur())
 				bonus = 50;
 			//Naga = +20 capacity
-			else if (lowerBody == 3)
+			if (isNaga())
 				bonus = 20;
+			// Goo body - "infinite"
+			if (isGoo())
+				bonus += 9000;
+			//Kitsune Vag of Holding - "infinite"
+			if (tail.type == Tail.FOX && tailCount == 9)
+				bonus += 9000;
 			//Wet pussy provides 50 point boost
 			if (hasPerk(PerkLib.WetPussy))
 				bonus += 50;
@@ -2317,6 +2323,9 @@ public class Creature extends Utils
 			//Centaurs = +30 capacity
 			if (isTaur())
 				bonus = 30;
+			// Goo body - "infinite"
+			if (isGoo())
+				bonus += 9000;
 			if (hasPerk(PerkLib.HistorySlut) || hasPerk(PerkLib.PastLifeSlut))
 				bonus += 20;
 			if (hasPerk(PerkLib.Cornucopia))

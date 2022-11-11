@@ -635,7 +635,7 @@ internal function aikoWinsIntro():void {
 	outputText("You slump to the ground, [if (player.lust >= player.maxOverLust())crippled with desire|thoroughly thrashed], looking up at the fiery-eyed fox-woman.\n\n");
 	if (flags[kFLAGS.AIKO_TIMES_MET] == 1) {
 		if (player.racialScore(Races.KITSUNE, false) > 0) {
-			if (player.tail.type == Tail.FOX && player.tail.venom == 9) { //what's the difference in tail.type == Tail.FOX here and tailtype == 13 above?
+			if (player.tail.type == Tail.FOX && player.tailCount == 9) { //what's the difference in tail.type == Tail.FOX here and tailtype == 13 above?
 				outputText("<i>\"... C-can it be? I... I defeated a nine-tails?\"</i> With dismay painted across her face, she carefully makes her bow disappear in a puff of smoke. Surrounding herself with an array of fireballs, she approaches you and slowly reaches for your pouch, retrieving her white star sphere.\n\n"
 				+"<i>\"I'm... astonished... Maybe you let me win, but I just couldn't let you go with my star sphere.\"</i>\n\n"
 				+"She carefully tucks the star sphere into her cleavage, stepping back and keeping the fireballs pointed toward you at arm’s length. Holding her first two fingers up near her face, she whispers an incantation, and as the last syllables leave her lips, your vision begins to swim. Just before you black out, you can hear Aiko’s voice calling out as if from miles away."
@@ -797,7 +797,7 @@ private function aikoTalkE3():void {
 		+"<i>\"Thanks. I learned from my mother… She was the village guardian before me.\"</i>\n\n"
 		+"You smile a bit and press her for more information, and she adds, <i>\"Well... every kitsune village selects a guardian to protect the entrance from outsiders. It’s a great honor to be chosen for it… I wanted to do it ever since I was little.\"</i>\n\n"
 		+"You tell her that you have something in common with her, and go on to explain how you were chosen to become your village’s Champion, and what it means to you. Then you notice that she mentioned that \"every\" kitsune village chooses a guardian—does that mean there’s more than one?"
-		+"<i>\"Oh, yeah, sure. They’re all super top-secret though—even I don’t know where most of them are. We keep to ourselves mainly, though the village chiefs sometimes get together for really important stuff. I… actually I probably shouldn’t be talking about this with an outsider, " +(player.tail.type == Tail.FOX && player.tail.venom == 9 ? "even if "+ player.mf("he","she") +" is a nine-tails... ":"")+ " the Elders tend to get mad easily about this stuff, unfortunately.\"</i>\n\n"
+		+"<i>\"Oh, yeah, sure. They’re all super top-secret though—even I don’t know where most of them are. We keep to ourselves mainly, though the village chiefs sometimes get together for really important stuff. I… actually I probably shouldn’t be talking about this with an outsider, " +(player.tail.type == Tail.FOX && player.tailCount == 9 ? "even if "+ player.mf("he","she") +" is a nine-tails... ":"")+ " the Elders tend to get mad easily about this stuff, unfortunately.\"</i>\n\n"
 		+"You apologize for prying and ask if there’s anything she CAN talk about.\n\n"
 		+"<i>\"Sorry, I didn’t mean it like that, it’s just the village elders like their privacy… Ever since the demons appeared… Well, we were pretty isolated to begin with, but now with the demons, the elders are scared that contact with the outside world could bring corruption into our village. I don’t know if we have that much to worry about, honestly, but it HAS happened before...\"</i>\n\n"
 		+"You can tell she’s not very comfortable discussing it, and promptly decide to change the subject.\n\n");
@@ -841,7 +841,7 @@ private function aikoTalkE3():void {
 		+"You tell her that you’re not so different from her, in some respects, explaining how you were chosen to be your village’s champion and come through the portal.\n\n"
 		+"<i>\"Yeah, and I see what you’ve done with it. Some Champion.\"</i>\n\n"
 		+"Her words sting, but you have more questions, so you press on. She mentioned that \"every\" kitsune village chooses a guardian. You ask her if that means there’s more than one.\n\n"
-		+"<i>\"Of course, you didn’t think mine was the only one, did you? …Never mind. They’re hidden, and you won’t be getting their locations from me; I don’t even know where most of them are. "+((player.tail.type == Tail.FOX && player.tail.venom == 9) ?"you should be able to locate them if you want to, you are nine-tails and all.":"")+"\"</i>\n\n"
+		+"<i>\"Of course, you didn’t think mine was the only one, did you? …Never mind. They’re hidden, and you won’t be getting their locations from me; I don’t even know where most of them are. "+((player.tail.type == Tail.FOX && player.tailCount == 9) ?"you should be able to locate them if you want to, you are nine-tails and all.":"")+"\"</i>\n\n"
 		+"Nodding in understanding, you ask why they’re such a big secret.\n\n"
 		+"<i>\"We like our privacy, okay? And the elders think that if we have too much contact with the outside, we’ll become tainted by the demons’ corruption. I used to think they were just worry-warts, but they might have a point.\"</i>\n\n"
 		+"You get that her scathing remarks are probably aimed at you again; this conversation isn’t going as well as you had hoped. Then again, what could you expect, after how you’ve treated her? Looking for an escape, you tell Aiko that you have to be going back to camp now, but you enjoyed talking to her.\n\n"
@@ -1056,7 +1056,7 @@ private function  talkNineTails():void {
 	}
 	outputText("She laughs with her tongue out of her mouth, pulling a mischievous grin.\n\n"
 	+"<i>\"Nine-tails are the oldest and wisest kitsune, they are generally very rare and revered, in our clan we have only six Nine-tails, my mother being one of them.\"</i> You listen carefully as you find this topic very interesting"
-	+((player.tail.type == Tail.FOX && player.tail.venom == 9)?" especially since it is so applicable to you.\n\n":".\n\n")
+	+((player.tail.type == Tail.FOX && player.tailCount == 9)?" especially since it is so applicable to you.\n\n":".\n\n")
 	+"<i>\"When a kitsune gets their last tail, a ceremony is induced and all of the village celebrates at their newly acquired leader. During said ceremony, the new nine tails can select one or more retainers who will act as their servants and lieutenants, these retainers need to have five or more tails and may even be from other clans. It is a very high honor to be selected.\"</i>\n\n"
 	+"You nod as you see her lips stop moving. You ask if she has ever become a retainer, noting that she has "+ ((flags[kFLAGS.AIKO_BOSS_COMPLETE] >0)?"eight":"seven")+" tails. You see her with an irritated grin immediately after you finished talking, it's clear something is up.\n\n"
 	+"<i>\"Well... yes. I was a retainer, to the last nine tails ever created in my village. Her name is \"Ginko\" ... let's just say she loved nagging us and had... somewhat of a passion for sexually dominating us. That is until I became the guardian of my village.\"</i>\n\n"

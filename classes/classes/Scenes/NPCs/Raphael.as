@@ -55,7 +55,9 @@ public function timeChangeLarge():Boolean {
                         return true;
                     }
                     //Dress followup - Call picnic date prologue!
-                    if (player.armor == armors.R_BDYST && flags[kFLAGS.RAPHAEL_DRESS_TIMER] > 1 && flags[kFLAGS.RAPHAEL_DRESS_TIMER] <= 4) {
+                    // First one - when the timer is ticking, first date or date after disgust
+                    // Second one - when the timer is stopped: dating, but not disgusted
+                    if (player.armor == armors.R_BDYST && (flags[kFLAGS.RAPHAEL_DRESS_TIMER] > 1 && flags[kFLAGS.RAPHAEL_DRESS_TIMER] <= 4 || flags[kFLAGS.RAPHAEL_DRESS_TIMER] == -1)) {
                         outputText("<b>\nSomething unusual happens that morning...</b>\n");
                         doNext(RaphaelEncounterIIDressFollowup);
                         return true;

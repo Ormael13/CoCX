@@ -48,11 +48,6 @@ public class DarkSlimeRace extends Race {
 				.customRequirement("skin", "slimy goo skin", function (body:BodyData):Boolean {
 					return body.player.isGooSkin() && body.skinBaseAdj == "slimy"
 				}, +1)
-				.customRequirement("vagina", "Vag of Holding",
-						function (body:BodyData):Boolean {
-							return body.player.vaginalCapacity() >= 9000;
-						},
-						+1)
 				.hasStatusEffect(StatusEffects.SlimeCraving, "Slime Craving", +1)
 				.hasPerk(PerkLib.DarkSlimeCore, +1);
 		
@@ -68,7 +63,7 @@ public class DarkSlimeRace extends Race {
 				.noWings(+1)
 				.noGills(+1);
 		
-		buildTier(13, "dark slime")
+		buildTier(12, "dark slime")
 				.namesMaleFemale("dark slime boi", "dark slime girl")
 				.buffs({
 					"tou.mult": +0.90,
@@ -78,7 +73,7 @@ public class DarkSlimeRace extends Race {
 				})
 				.end();
 		
-		buildTier(17, "dark slime queen")
+		buildTier(16, "dark slime queen")
 				.buffs({
 					"tou.mult": +1.15,
 					"spe.mult": -0.50,

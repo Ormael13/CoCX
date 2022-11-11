@@ -111,7 +111,7 @@ import classes.internals.SaveableState;
 			outputText("\"<i>Stop right there!</i>\" An angry voice calls to you, heavy footsteps getting closer. You turn, catching sight of your pursuer. She's a pale blue skinned woman, with average-sized breasts and hips, both hidden under a layer of light armor. She pivots, unfolding a single snow-white wing, forcefully putting the limb between you and the bimbo monkey. Your would-be paramour lets out an annoyed groan, but a single glare from the angelic woman is all it takes to cow her. The blue-skinned woman forces her way in, glaring at you with her lips curled in disgust.\n\n");
 			outputText("\"<i>Return home, milady. Someone needs to be taught a lesson.</i>\" The newcomer silently glares at the bimbo-monkey, who eventually looks down and away, leaving the area with a huff. Once she's gone, the blue-skinned angel points towards the Soul Arena. \"<i>What's it going to be, sex-freak? Are you gonna join me in the ring, or do I need to drag you there myself?</i>\"\n\n");
 			outputText("Slightly annoyed by the interuption to your 'fight', you give the angel a slow nod, entering the arena.\n\n");
-			outputText("\"<i>Lesson one. </i>\"She sinks into a low combat stance,  unfolding her wings. <i>\" What happens when a pervert tries to take advantage of milady? Let me demonstrate! \n\n");
+			outputText("\"<i>Lesson one.</i>\" She sinks into a low combat stance,  unfolding her wings. <i>\"What happens when a pervert tries to take advantage of milady? Let me demonstrate!</i>\"");
 			startCombat(new Koshya());
 		}
 		public function bimboMonkeyFight():void {

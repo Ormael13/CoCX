@@ -38,7 +38,7 @@ public final class WeaponLib extends ItemConstants
 		public const B_SWORD:BeautifulSword = new BeautifulSword();
 		public const B_SCARB:Weapon = new Weapon("B.ScarB", "B.ScarBlade", "broken scarred blade", "a broken scarred blade", "slash", 12, 480, "This saber, made from lethicite-imbued metal, seems to no longer seek flesh; whatever demonic properties in this weapon is gone now but it's still an effective weapon.", "", WT_SWORD);
 		public const B_WIDOW:BlackWidow = new BlackWidow();
-		public const BFGAUNT:Weapon = new Weapon("BFGaunt", "B.F.Gauntlets", "big fucking gauntlets", "a big fucking gauntlets", "smash", 0, 1600, "Big Fucking Gauntlets - the best solution for a tiny e-pen complex at this side of the Mareth!  This huge gauntlets signed by mysterious 'Vi' requires 150 strength to fully unleash it power.\nIncreases unarmed damage by 4x.\nIncreases stun chance by 40.", "LGWrath, Stun40", WT_GAUNTLET);
+		public const BFGAUNT:Weapon = new Weapon("BFGaunt", "B.F.Gauntlets", "big fucking gauntlets", "a big fucking gauntlets", "smash", 0, 1600, "Big Fucking Gauntlets - the best solution for a tiny e-pen complex at this side of the Mareth!  This huge gauntlets signed by mysterious 'Vi' requires 150 strength to fully unleash it power.\nIncreases unarmed damage by 4x.\nIncreases stun chance by 40.", "Large, LGWrath, Stun40", WT_GAUNTLET);
 		public const BFTHSWORD:BFTHSword = new BFTHSword();
 		public const BFSWORD:BFSword = new BFSword();
 		public const BFWHIP :BFWhip = new BFWhip();

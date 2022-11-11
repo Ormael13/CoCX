@@ -5581,7 +5581,8 @@ public class Combat extends BaseContent {
                 }
                 if (player.hasPerk(PerkLib.BrutalBlows) && player.str > 75 && damage > 0) {
                     if (monster.armorDef > 0) outputText("\nYour hits are so brutal that you damage [themonster]'s defenses!");
-                    if (monster.armorDef - 5 > 0) monster.armorDef -= 5;
+                    var bbc:Number = (Math.round(monster.armorDef * 0.1) + 5);
+					if (monster.armorDef - bbc > 0) monster.armorDef -= bbc;
                     else monster.armorDef = 0;
                 }
                 if (player.statStore.hasBuff("NoLimiterState") && player.weaponName == "fists") {

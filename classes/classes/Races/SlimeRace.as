@@ -47,11 +47,6 @@ public class SlimeRace extends Race {
 				.customRequirement("skin", "slimy goo skin", function (body:BodyData):Boolean {
 					return body.player.isGooSkin() && body.skinBaseAdj == "slimy"
 				}, +1)
-				.customRequirement("vagina", "Vag of Holding",
-						function (body:BodyData):Boolean {
-							return body.player.vaginalCapacity() >= 9000;
-						},
-						+1)
 				.hasStatusEffect(StatusEffects.SlimeCraving, "Slime Craving", +1)
 				.hasPerk(PerkLib.SlimeCore, +1);
 		
@@ -67,7 +62,7 @@ public class SlimeRace extends Race {
 				.noWings(+1)
 				.noGills(+1);
 		
-		buildTier(11, "slime")
+		buildTier(10, "slime")
 				.namesMaleFemale("slime boi", "slime girl")
 				.buffs({
 					"tou.mult": +1.00,
@@ -76,7 +71,7 @@ public class SlimeRace extends Race {
 				})
 				.end();
 		
-		buildTier(15, "slime queen")
+		buildTier(14, "slime queen")
 				.buffs({
 					"tou.mult": +1.15,
 					"spe.mult": -0.50,
