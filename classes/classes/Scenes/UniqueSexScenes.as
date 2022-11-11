@@ -7,6 +7,7 @@ package classes.Scenes
 import classes.*;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
+import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.Mountain.HellHound;
 import classes.Scenes.Areas.Mountain.InfestedHellhound;
 import classes.Scenes.Areas.Mountain.Minotaur;
@@ -162,8 +163,40 @@ public class UniqueSexScenes extends BaseContent
 		private var activeBtns:int = 0;
         public function get sceneMenu():ButtonDataList {
 			var menuItems:Array = [];
+			var sceneList:Array = [USSTailpeg(),
+				USSTailRape(),
+				USSSnRape(),
+				USSVoltTsf(),
+				USSHeatTsf(),
+				USSCooldown(),
+				USSStlWmth(),
+				USSGobMech(),
+				USSBrainMlt(),
+				USSAlrauneSS(),
+				USSEastrBny(),
+				USSTentRape(),
+				USSLiveDildo(),
+				USSJiangshiDrn()];
+
 			var bd:ButtonDataList = new ButtonDataList();
-			menuItems.push(USSTailRape());
+			menuItems.push();
+			if (flags[kFLAGS.USSDISPLAY_STYLE] == 0){
+				var rtn2:Array = [];
+				for each(var rtn:Array in sceneList){
+					if (rtn[1] is Function) menuItems.push(rtn);
+					else rtn2.push(rtn);
+				}
+				for each(var rtn3:Array in rtn2){
+					menuItems.push(rtn3);
+				}
+			}
+			else{
+				for each (var rtn4:Array in sceneList){
+					menuItems.push(rtn4);
+				}
+			}
+			/*
+			menuItems.push();
 			menuItems.push(USSTailpeg());
 			menuItems.push(USSSnRape());
 			menuItems.push(USSVoltTsf());
@@ -177,6 +210,7 @@ public class UniqueSexScenes extends BaseContent
 			menuItems.push(USSTentRape());
 			menuItems.push(USSLiveDildo());
 			menuItems.push(USSJiangshiDrn());
+			*/
 			for each (var i:Array in menuItems){
 				if (i[1] is Function){
 					bd.add(i[0], i[1], i[2]);

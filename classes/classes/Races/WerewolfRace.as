@@ -1,7 +1,6 @@
 package classes.Races {
 import classes.BodyParts.*;
 import classes.CockTypesEnum;
-import classes.GeneticMemories.RaceMem;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
@@ -54,7 +53,6 @@ public class WerewolfRace extends Race {
 				.hasPerk(PerkLib.Lycanthropy, +1)
 				//.hasPerk(PerkLib.LycanthropyDormant, -11)
 		addMutation(IMutationsLib.AlphaHowlIM);
-		;
 		addScoresAfter(1)
 				.hasCockOfType(CockTypesEnum.WOLF, +1)
 		
