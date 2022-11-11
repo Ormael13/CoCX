@@ -656,10 +656,10 @@ import coc.xxc.StoryContext;
 		protected function get itemTemplates():ItemTemplateLib{
 			return ItemTemplateLib.instance;
 		}
-		protected function get consumables():ConsumableLib{
+		protected static function get consumables():ConsumableLib{
 			return CoC.instance.consumables;
 		}
-		protected function get useables():UseableLib{
+		protected static function get useables():UseableLib{
 			return CoC.instance.useables;
 		}
 		protected function get weapons():WeaponLib{
@@ -671,7 +671,7 @@ import coc.xxc.StoryContext;
 		protected function get weaponsflyingswords():FlyingSwordsLib{
 			return CoC.instance.weaponsflyingswords;
 		}
-		protected function get armors():ArmorLib{
+		protected static function get armors():ArmorLib{
 			return CoC.instance.armors;
 		}
 		protected function get miscjewelries():MiscJewelryLib{

@@ -2154,9 +2154,6 @@ import classes.internals.SaveableState;
                     player.createPerk(PerkLib.EnergyDependent, 0, 0, 0, 0);
                     flags[kFLAGS.CURSE_OF_THE_JIANGSHI] = 2;
                     break;
-                case "Kitsune":
-                    player.createStatusEffect(StatusEffects.BonusVCapacity, 8000, 0, 0, 0);
-                    break;
                 case "Phoenix":
                     player.createPerk(PerkLib.HarpyWomb, 10, 0, 0, 0);
                     break;

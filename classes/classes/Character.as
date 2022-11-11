@@ -140,7 +140,6 @@ import classes.Scenes.NPCs.Forgefather;
 			//Gargoyle cancel!
 			if (isGargoyle())
 				return;
-//			if (hasStatusEffect(StatusEffects.GooStuffed)) return; //No longer needed thanks to PREGNANCY_GOO_STUFFED being used as a blocking value
 			var bonus:int = 0;
 			//If arg = 1 (always pregnant), bonus = 9000
 			if (arg >= 1)

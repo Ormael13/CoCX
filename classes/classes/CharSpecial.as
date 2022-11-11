@@ -1708,7 +1708,6 @@ import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
 			player.vaginas[0].vaginalLooseness = 0;
 			player.vaginas[0].vaginalWetness = 2; // wet
 			player.vaginas[0].virgin = false;
-			player.createStatusEffect(StatusEffects.BonusVCapacity, 8000, 0, 0, 0); // Vag of Holding kitsune trait
 			player.clitLength = 0.3;
 			player.fertility = 5;
 
@@ -1722,7 +1721,7 @@ import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
 
 			player.ass.analWetness = 2; // moist
 			player.ass.analLooseness = 1; // not virgin
-			player.createStatusEffect(StatusEffects.BonusACapacity, 100, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.BonusACapacity, 20, 0, 0, 0);
 
 			player.createCock(12, 1.6, CockTypesEnum.TENTACLE); // as most kitsune you love tentackles
 			player.createCock(12, 1.6, CockTypesEnum.TENTACLE); // and while they aren't really fitting your body...
@@ -2088,7 +2087,6 @@ import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
 			player.vaginas[0].vaginalLooseness = 0;
 			player.vaginas[0].vaginalWetness = 2; // wet
 			player.vaginas[0].virgin = true;
-			player.createStatusEffect(StatusEffects.BonusVCapacity, 8000, 0, 0, 0); // Vag of Holding kitsune trait
 			player.clitLength = 0.3;
 			player.fertility = 5;
 
@@ -2102,7 +2100,7 @@ import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
 
 			player.ass.analWetness = 2; // moist
 			player.ass.analLooseness = 1; // not virgin
-			player.createStatusEffect(StatusEffects.BonusACapacity, 100, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.BonusACapacity, 20, 0, 0, 0);
 
 			player.tallness = 30; // 3ft feral goblin
 			player.hips.type = Hips.RATING_FERTILE;

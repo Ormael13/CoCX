@@ -1400,6 +1400,8 @@ public class LowerBodyTransformations extends MutationsHelper {
 			var desc: String = "";
 
 			desc += "Your viewpoint rapidly drops as everything below your [butt] and groin melts together into an amorphous blob. Thankfully, you discover you can still roll about on your new slimey undercarriage, but it's still a whole new level of strange.";
+			if (player.hasVagina())
+				outputText("[pg]The internal walls of your [vagOrAss] feel a tingly wave of strange tightness.  Experimentally, you slip a few fingers, then your hand, then most of your forearm inside yourself.  <b>It seems you're now able to accommodate just about ANYTHING inside your body.</b>");
 
 			player.tallness -= 3 + rand(2);
 			if (player.basetallness < 36) {

@@ -1200,6 +1200,12 @@ public class TailTransformations extends MutationsHelper {
 
 					player.tailCount = tailCount;
 					if (doOutput) outputText(desc);
+					if (tailCount == 9 && player.hasVagina()) {
+						// ninetails -> get vag of holding!
+						outputText("[pg]You clutch your stomach with both hands, dropping to the ground in pain as your internal organs begin to twist and shift violently inside you.  As you clench your eyes shut in agony, you are overcome with a sudden calm.  The pain in your abdomen subsides, and you feel at one with the unfathomable infinity of the universe, warmth radiating through you from the vast swirling cosmos contained within your womb.");
+						if (silly()) outputText("  <b>Your vagina has become a universe unto itself, capable of accepting colossal insertions beyond the scope of human comprehension!</b>");
+						else outputText("  <b>Your vagina is now capable of accepting even the most ludicrously sized insertions with no ill effects.</b>");
+					}
 
 					//noinspection FallThroughInSwitchStatementJS			// Fallthrough is intended for retroactively unlocking in Metamorph after getting GeneticMemory
 					switch (tailCount) {

@@ -127,8 +127,6 @@ public class DarkSlimeScene extends BaseContent
         CoC.instance.transformations.FaceHuman.applyEffect(false);
         CoC.instance.transformations.TongueHuman.applyEffect(false);
         CoC.instance.transformations.VaginaHuman().applyEffect(false);
-        if (!player.hasStatusEffect(StatusEffects.BonusVCapacity)) player.createStatusEffect(StatusEffects.BonusVCapacity, 9000, 0, 0, 0);
-        else player.addStatusValue(StatusEffects.BonusVCapacity, 1, 9000);
         CoC.instance.transformations.AntennaeNone.applyEffect(false);
         CoC.instance.transformations.HornsNone.applyEffect(false);
         CoC.instance.transformations.WingsNone.applyEffect(false);

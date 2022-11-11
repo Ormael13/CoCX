@@ -332,16 +332,25 @@ public function benoitsBuyMenu():void {
 		outputText("\"<i>Some may call zis junk,</i>\" says Benoit, indicating " + benoitMF("his","her") + " latest wares.  \"<i>Me... I call it garbage.</i>\"");
 	}
 	outputText("\n\n<b><u>[benoit name]'s Prices</u></b>");
-	outputText("\n" + ItemType.lookupItem(flags[kFLAGS.BENOIT_1]).longName + ": " + Math.round(buyMod * ItemType.lookupItem(flags[kFLAGS.BENOIT_1]).value));
-	outputText("\n" + ItemType.lookupItem(flags[kFLAGS.BENOIT_2]).longName + ": " + Math.round(buyMod * ItemType.lookupItem(flags[kFLAGS.BENOIT_2]).value));
-	outputText("\n" + ItemType.lookupItem(flags[kFLAGS.BENOIT_3]).longName + ": " + Math.round(buyMod * ItemType.lookupItem(flags[kFLAGS.BENOIT_3]).value));
-	outputText("\n" + ItemType.lookupItem(flags[kFLAGS.BENOIT_4]).longName + ": " + Math.round(buyMod * ItemType.lookupItem(flags[kFLAGS.BENOIT_4]).value));
-	outputText("\n" + ItemType.lookupItem(flags[kFLAGS.BENOIT_5]).longName + ": " + Math.round(buyMod * ItemType.lookupItem(flags[kFLAGS.BENOIT_5]).value));
-	simpleChoices(flags[kFLAGS.BENOIT_1],createCallBackFunction(benoitTransactBuy,1),
-			flags[kFLAGS.BENOIT_2],createCallBackFunction(benoitTransactBuy,2),
-			flags[kFLAGS.BENOIT_3],createCallBackFunction(benoitTransactBuy,3),
-			flags[kFLAGS.BENOIT_4],createCallBackFunction(benoitTransactBuy,4),
-			flags[kFLAGS.BENOIT_5],createCallBackFunction(benoitTransactBuy,5));
+	var shop:/*ItemType*/Array = [];
+	var item:ItemType;
+	var btn:int = 0;
+	for each (var flag:int in [kFLAGS.BENOIT_1, kFLAGS.BENOIT_2, kFLAGS.BENOIT_3, kFLAGS.BENOIT_4, kFLAGS.BENOIT_5])
+		shop.push(ItemType.lookupItem(flags[flag]));
+	menu();
+	for each (item in shop) {
+		var cost:int = int(buyMod * item.value);
+		outputText("\n" + item.longName + ": " + cost);
+		addButton(btn++, item.shortName, benoitTransactBuy, item)
+			.disableIf(player.gems < cost, "Not enough gems.");
+	}
+	if (sceneHunter.printChecks) {
+		outputText("\nCheck the new stock tomorrow!")
+		outputText("\nFull list of items: ");
+		for each (item in itemShop) outputText(item.shortName + ", ");
+		outputText("\nFull list of armors & materials: ");
+		for each (item in armorShop) outputText(item.shortName + ", ");
+	}
 	if (player.keyItemvX("Backpack", 1) < 12) addButton(5, "Backpack", buyBackpack).hint("This backpack will allow you to carry more items.");
 	if (flags[kFLAGS.BENOIT_CLOCK_BOUGHT] <= 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_NIGHTSTAND] > 0) addButton(6, "Alarm Clock", buyAlarmClock).hint("This mechanical clock looks like it was originally constructed by the Goblins before the corruption spreaded throughout Mareth.");
 	if (flags[kFLAGS.BENOIT_PISTOL_BOUGHT] < 2 && flags[kFLAGS.BENOIT_AFFECTION] == 100) addButton(7, "Zweihander", buyZweihander);
@@ -385,23 +394,11 @@ private function benoitSellMenu(page:int = 1):void {
 	addButton(14, "Back", benoitIntro);
 }
 
-private function benoitTransactBuy(slot:int = 1):void {
+private function benoitTransactBuy(itype:ItemType):void {
 	clearOutput();
-	var itype:ItemType;
 	var buyMod:Number = 2;
 
 	if (flags[kFLAGS.BENOIT_STATUS] == 1) buyMod = 1.66;
-
-	if(slot == 1) itype = ItemType.lookupItem(flags[kFLAGS.BENOIT_1]);
-	else if(slot == 2) itype = ItemType.lookupItem(flags[kFLAGS.BENOIT_2]);
-	else if(slot == 3) itype = ItemType.lookupItem(flags[kFLAGS.BENOIT_3]);
-	else if(slot == 4) itype = ItemType.lookupItem(flags[kFLAGS.BENOIT_4]);
-	else itype = ItemType.lookupItem(flags[kFLAGS.BENOIT_5]);
-	if(player.gems < int(buyMod * itype.value)) {
-		outputText("You consider making a purchase, but you lack the gems to go through with it.");
-		doNext(benoitsBuyMenu);
-		return;
-	}
 	if(benoitLover()) outputText("After examining what you've picked out with [benoit eir] fingers, [benoit name] hands it over and accepts your gems with a grin.");
 	else outputText("After examining what you've picked out with [benoit eir] fingers, [benoit name] hands it over, names the price and accepts your gems with a curt nod.\n\n");
 	//(+3 Affection)
@@ -452,187 +449,62 @@ private function benoitSellAllTransact(totalItems:int, sellMod:int):void {
 	doNext(benoitIntro);
 }
 
+// items by slots
+public static function get itemShop():/*ItemType*/Array {
+	return [
+		consumables.INCUBID,
+		consumables.MINOBLO,
+		consumables.MINOCUM,
+		consumables.EQUINUM,
+		consumables.BLACKPP,
+		consumables.SMART_T,
+		consumables.VITAL_T,
+		consumables.DBLPEPP,
+		consumables.PURHONY,
+		consumables.BEEHONY,
+		consumables.SUCMILK,
+		consumables.W_FRUIT,
+		consumables.WETCLTH,
+		consumables.GLDSEED,
+		consumables.LABOVA_,
+		consumables.SNAKOIL,
+		consumables.S_GOSSR,
+		consumables.HUMMUS_,
+		consumables.PIGTRUF,
+		consumables.B_GOSSR,
+		// rare before, now normal
+		consumables.L_PNKEG,
+		consumables.L_BLUEG,
+		consumables.BIMBOLQ,
+		consumables.BROBREW,
+		consumables.TSTOOTH,
+		consumables.W_PDDNG,
+		consumables.NUMBROX,
+		consumables.SENSDRF,
+	];
+}
+
+public static function get armorShop():/*ItemType*/Array {
+	return [
+		armors.W_ROBES,
+		armors.S_SWMWR,
+		useables.GREENGL,
+		useables.B_CHITN,
+		// rare before, now normal
+		armors.BONSTRP,
+		armors.NURSECL,
+	];
+}
+
 //All slots are reset each day.  Benoit buys items at 66% the rate Oswald does.
 public function updateBenoitInventory():void {
-	//Slot 1
-	switch(rand(5)) {
-		case 0:
-			flags[kFLAGS.BENOIT_1] = consumables.INCUBID.id;
-			break;
-		case 1:
-			flags[kFLAGS.BENOIT_1] = consumables.MINOBLO.id;
-			break;
-		case 2:
-			flags[kFLAGS.BENOIT_1] = consumables.MINOCUM.id;
-			break;
-		case 3:
-			flags[kFLAGS.BENOIT_1] = consumables.EQUINUM.id;
-			break;
-		case 4:
-			flags[kFLAGS.BENOIT_1] = consumables.BLACKPP.id;
-			break;
-		default:
-	}
-	if (rand(100) < 4) {
-		//There is a 4% chance the following items will appear in Slot 1
-		switch (rand(2)) {
-			case 0:
-				flags[kFLAGS.BENOIT_1] = consumables.L_PNKEG.id;
-				break;
-			default:
-				flags[kFLAGS.BENOIT_1] = consumables.L_BLUEG.id;
-				break;
-		}
-	}
-
-	//Slot 2
-	switch(rand(5)) {
-		case 0:
-			flags[kFLAGS.BENOIT_2] = consumables.SMART_T.id;
-			break;
-		case 1:
-			flags[kFLAGS.BENOIT_2] = consumables.VITAL_T.id;
-			break;
-		case 2:
-			flags[kFLAGS.BENOIT_2] = consumables.DBLPEPP.id;
-			break;
-		case 3:
-			flags[kFLAGS.BENOIT_2] = consumables.PURHONY.id;
-			break;
-		case 4:
-			flags[kFLAGS.BENOIT_2] = consumables.BEEHONY.id;
-			break;
-		default:
-	}
-	if (rand(100) < 4) {
-		//There is a 4% chance the following items will appear in Slot 2
-		switch (rand(2)) {
-			case 0:
-				flags[kFLAGS.BENOIT_2] = consumables.BIMBOLQ.id;
-				break;
-			case 1:
-				flags[kFLAGS.BENOIT_2] = consumables.BROBREW.id;
-				break;
-		}
-	}
-
-	//Slot 3
-	switch(rand(5)) {
-		case 0:
-			flags[kFLAGS.BENOIT_3] = consumables.SUCMILK.id;
-			break;
-		case 1:
-			flags[kFLAGS.BENOIT_3] = consumables.W_FRUIT.id;
-			break;
-		case 2:
-			flags[kFLAGS.BENOIT_3] = consumables.WETCLTH.id;
-			break;
-		case 3:
-			flags[kFLAGS.BENOIT_3] = consumables.GLDSEED.id;
-			break;
-		case 4:
-			flags[kFLAGS.BENOIT_3] = consumables.LABOVA_.id;
-			break;
-		default:
-	}
-	if (rand(100) < 4) {
-		//There is a 4% chance the following items will appear in Slot 3
-		switch (rand(2)) {
-			case 0:
-				flags[kFLAGS.BENOIT_3] = consumables.TSTOOTH.id;
-				break;
-			case 1:
-				flags[kFLAGS.BENOIT_3] = consumables.W_PDDNG.id;
-				break;
-		}
-	}
-
-	//Slot 4
-	switch(rand(5)) {
-		case 0:
-			flags[kFLAGS.BENOIT_4] = consumables.SNAKOIL.id;
-			break;
-		case 1:
-			flags[kFLAGS.BENOIT_4] = consumables.S_GOSSR.id;
-			break;
-		case 2:
-			flags[kFLAGS.BENOIT_4] = consumables.HUMMUS_.id;
-			break;
-		case 3:
-			flags[kFLAGS.BENOIT_4] = consumables.PIGTRUF.id;
-			break;
-		case 4:
-			flags[kFLAGS.BENOIT_4] = consumables.B_GOSSR.id;
-			break;
-		default:
-	}
-	if (rand(100) < 4) {
-		//There is a 4% chance the following item will appear in Slot 4
-		switch (rand(2)) {
-			case 0:
-				flags[kFLAGS.BENOIT_4] = consumables.NUMBROX.id;
-				break;
-			case 1:
-				flags[kFLAGS.BENOIT_4] = consumables.SENSDRF.id;
-				break;
-		}
-	}
-
-	//Slot 5
-	switch(rand(4)) {
-		case 0:
-			flags[kFLAGS.BENOIT_5] = armors.W_ROBES.id;
-			break;
-		case 1:
-			flags[kFLAGS.BENOIT_5] = armors.S_SWMWR.id;
-			break;
-		case 2:
-			flags[kFLAGS.BENOIT_5] = useables.GREENGL.id;
-			break;
-		case 3:
-			flags[kFLAGS.BENOIT_5] = useables.B_CHITN.id;
-			break;
-		default:
-	}
-	if (rand(100) < 10) {
-		//There is a 10% chance the following items will appear in Slot 5
-		switch (rand(2)) {
-			case 0:
-				flags[kFLAGS.BENOIT_5] = armors.BONSTRP.id;
-				break;
-			case 1:
-				flags[kFLAGS.BENOIT_5] = armors.NURSECL.id;
-				break;
-		}
-	}
-	//Slot 6 Herbal Contraceptive - 30 gems.  Only becomes available through PC fem path.  Reduces fertility by 90% for a week if taken.
+	var pickedItems:Array = randomChoices(true, 4, itemShop);
+	flags[kFLAGS.BENOIT_1] = pickedItems[0].id;
+	flags[kFLAGS.BENOIT_2] = pickedItems[1].id;
+	flags[kFLAGS.BENOIT_3] = pickedItems[2].id;
+	flags[kFLAGS.BENOIT_4] = pickedItems[3].id;
+	flags[kFLAGS.BENOIT_5] = randomChoice(armorShop).id;
 }
-
-//Unused... I guess?
-/*
-private function buyFlintlock():void {
-	clearOutput();
-	outputText("You wander [benoit name]'s shop for a good while as you're searching for something interesting until you spot something interesting.");
-	outputText("\n\nYou walk over to pick up whatever caught your attention and show it to [benoit name].  \"<i>Zis?  I do know that zis a weapon and it originally belonged to a goblin from long time ago,</i>\" [benoit ey] says.");
-	outputText("\n\nTime to test this weapon out.  You aim the pistol at one of the empty tin cans and pull the trigger.  A round launches from the pistol and hits the tin can, knocking it off shelf.  [benoit name] looks in surprise and says, \"<i>It works?  200 gems and it can be yours.</i>\"");
-	outputText("\n\nDo you buy the gun?  ");
-	doYesNo(buyFlintlockConfirmation, benoitsBuyMenu);
-}
-private function buyFlintlockConfirmation():void {
-	clearOutput();
-	if (player.gems < 200) {
-		outputText("You count out your gems and realize it's beyond your price range.");
-		doNext(benoitsBuyMenu);
-		return;
-	}
-	outputText("\"<i>Here you go.  I have no need for zis,</i>\" [benoit name] says.");
-	flags[kFLAGS.BENOIT_PISTOL_BOUGHT]++;
-	player.ammo = 4;
-	player.gems -= 200;
-	statScreenRefresh();
-	inventory.takeItem(weaponsrange.FLINTLK, benoitsBuyMenu);
-}
-*/
 
 private function buyAlarmClock():void {
 	clearOutput();
