@@ -559,12 +559,12 @@ public class Utils extends Object
 			var i:int;
 			// find unique indices
 			while (ind.length < count) {
-				i = rand(args.length);
+				i = rand(tar.length);
 				if (!unique || ind.indexOf(i) == -1)
 					ind.push(i);
 			}
 			for each (i in ind)
-				res.push(args[i]);
+				res.push(tar[i]);
 			return res;
 		}
 		
