@@ -980,15 +980,6 @@ public class PerkMenu extends BaseContent {
 					outputText("\n" + mutation.name() + ": [font-red]Missing.[/font]");
 				}
 				outputText("\nTier: " + pMutateLvl + " of " + mutation.maxLvl + ".");
-				if (pMutateLvl > 0) {
-					outputText("Current tier description: ");
-					outputText(mutation.mDesc(player.getPerk(mutation), pMutateLvl));
-//					if(mutation.mDesc(player.getPerk(mutation), pMutateLvl).length <= 1) {	//Some desc. contains only "."
-//						outputText("Error in description for Mutation "+ mutation.name() +".");
-//					} else{
-//						outputText(mutation.mDesc(player.getPerk(mutation), pMutateLvl));
-//					}
-				}
 				var reqs:Array = [];
 				if (mutation.maxLvl != pMutateLvl) {
 					mutation.pReqs()	//Forces requirements to load up
@@ -1010,13 +1001,30 @@ public class PerkMenu extends BaseContent {
 				}
 				if (mutation.maxLvl == pMutateLvl) {	//Highest tier.
 					reqs.push("You already have the highest tier.");
-				} else {
-					outputText("\nRequirements for next tier: " + reqs.join(", "));
-					outputText("\nNext Tiers Descriptions: ");
-					for (var nextTier:int = pMutateLvl + 1; nextTier <= mutation.maxLvl; ++nextTier)
-						outputText("\n" + nextTier + ": " + mutation.mDesc(player.getPerk(mutation), nextTier));
 				}
-				outputText("\n\n")
+				outputText("\nRequirements for next tier: " + reqs.join(", "));
+
+				if (mutation.maxLvl != pMutateLvl) {
+					outputText("\nNext Tier Description: ");
+					if (mutation.mDesc(player.getPerk(mutation), pMutateLvl).length <= 1) {	//Some desc. contains only "."
+						if (!player.hasMutation(mutation)) outputText(mutation.mDesc(player.getPerk(mutation), 1));
+						//outputText(mutation.mDesc(player.getPerk(mutation), pMutateLvl));
+						else outputText("Error in description for Mutation " + mutation.name() + ".");
+					} else {
+						outputText(mutation.mDesc(player.getPerk(mutation), pMutateLvl + 1));
+					}
+				}
+
+				if (pMutateLvl > 0) {
+					outputText("\nCurrent Tier Description: ");
+					if(mutation.mDesc(player.getPerk(mutation), pMutateLvl).length <= 1) {	//Some desc. contains only "."
+						outputText("Error in description for Mutation "+ mutation.name() +".");
+					} else{
+						outputText(mutation.mDesc(player.getPerk(mutation), pMutateLvl));
+					}
+				}
+
+				outputText("\n\n");
 				var tempObj:Object = mutation.pBuffs(player)
 				for (var key:String in tempObj) {
 					outputText("" + StatUtils.explainBuff(key, tempObj[key]) + "\n");
