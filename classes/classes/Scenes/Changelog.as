@@ -377,7 +377,7 @@ public class Changelog extends BaseContent
 			outputText("-Benoit shop cleaned up, increased the chance of rare items. BFGauntlets now have the Large tag. Mutations DB now prints all mutation tiers. Vag of holding is removed. Instead, you get a bonus to capacity(capacities) when you have goo lower body or kitsune tail. (Svalkash)\n");
 			outputText("-A bunch of fixes: monke typo, ted-spooder confusion, LGSFPill shop desc, sensitivity racial buffs, I.Draft not unlocking cock count metamorphs, Raphael broken dates (Svalkash)\n");
 			outputText("-Tainted I.Draft now grows demon dicks. You can now use multiple doses of Reducto. Reducto can be applied to butt and hips. Cocks are reduced by 1/4 or 1/3 again. (Svalkash)\n");
-			outputText("-Brutal Blows perk nmow reduce enemy by: fixed amount + 10% of current enemy armor.\n");
+			outputText("-Brutal Blows perk armor reduction is now: 10% of enemy current armor value + 5\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
