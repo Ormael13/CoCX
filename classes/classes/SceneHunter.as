@@ -657,7 +657,6 @@ public class SceneHunter extends BaseContent {
         addButton(12, "CampNPCs-3", recallScenes_NPCs_3);
         if (flags[kFLAGS.URTA_QUEST_STATUS] >= 1) addButton(13, "UrtaQuest", recallScenes_quest);
         addButton(14, "Wake Up", recallWakeUpImpl);
-        flags[kFLAGS.DOMINIKAS_SWORD_GIVEN] = 0;
     }
 
     private function recallScenes_places():void {

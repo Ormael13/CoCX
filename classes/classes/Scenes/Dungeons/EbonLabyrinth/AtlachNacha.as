@@ -129,7 +129,6 @@ use namespace CoC;
 		{
 			//scaled from 65 now, reduced base stats to compensate
 			var mod:int = inDungeon ? SceneLib.dungeons.ebonlabyrinth.enemyLevelMod : 3;
-			var modReward =
             initStrTouSpeInte(40 + 30*mod, 260 + 40*mod, 103 + 27*mod, 81 + 23*mod);
             initWisLibSensCor(81 + 23*mod, 280 + 30*mod, 70 + 40*mod, 100);
             this.armorDef = 75 + 75*mod;

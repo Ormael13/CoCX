@@ -10,7 +10,7 @@ Each **Race** consists of:
   * fail score (ex. -1, default 0), applied if check function fails
   * min score for this requirement to be applied (ex. "if kitsune score >= 5, give +1 for plain skin")
 * **RacialTier**'s. Tier is a milestone on the racial score scale with its own name, bonuses, and requirements. They have:
-  * name function (ex. "nine tailed kitsune/kitsune-taur") that generates a displayed racial name for particular body.
+  * name function (ex. "nine-tailed kitsune/kitsune-taur") that generates a displayed racial name for particular body.
   * minimum score (ex. 16) player has to have to qualify for tier.
   * custom requirements (ex. "have nine tails")
   * buffs (ex. "-35% Strength, +75% Wisdom...") given to qualified player.
@@ -252,7 +252,7 @@ When a tier requires more than having a score, use a `.requireXXXX()/.require()`
 
 Example:
 ```
-buildTier(16, "nine tailed kitsune")
+buildTier(16, "nine-tailed kitsune")
         .requireTailCount(9)
 ```
 ```

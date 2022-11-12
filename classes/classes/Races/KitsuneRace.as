@@ -134,8 +134,8 @@ public class KitsuneRace extends Race {
 						"+40% SF Regeneration"
 				)
 				.end();
-		buildTier(15, "nine tailed kitsune")
-				.namesTauric("nine tailed kitsune", "nine tailed kitsune-taur")
+		buildTier(15, "nine-tailed kitsune")
+				.namesTauric("nine-tailed kitsune", "nine-tailed kitsune-taur")
 				.requirePreviousTier()
 				.requireTailCount(9)
 				.buffs({
@@ -152,8 +152,8 @@ public class KitsuneRace extends Race {
 					"+80% SF Regeneration"
 				)
 				.end();
-		buildTier(20, "nine tailed kitsune of balance")
-				.namesTauric("nine tailed kitsune of balance", "nine tailed kitsune-taur of balance")
+		buildTier(20, "nine-tailed kitsune of balance")
+				.namesTauric("nine-tailed kitsune of balance", "nine-tailed kitsune-taur of balance")
 				.requirePreviousTier()
 				.requirePerk(PerkLib.NinetailsKitsuneOfBalance)
 				.buffs({

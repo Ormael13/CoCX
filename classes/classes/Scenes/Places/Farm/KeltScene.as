@@ -554,7 +554,7 @@ private function keltMainEncounter3():void {
 				break;
 
 			case 3:
-				if (player.race() != "centaur") {
+				if (!player.isRace(Races.CENTAUR, 1, false)) {
 					outputText("\"<i>If you were a centaur, I'd recommend suicide.  Since you're a [race], I'd say your best option is to fuck off.</i>\"\r\r");
 				} else {
 					outputText("\"<i>As a centaur, I'd recommend suicide.  Really, it's that or man the fuck up.</i>\"\r\r");

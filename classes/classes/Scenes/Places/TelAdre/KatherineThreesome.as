@@ -1,6 +1,7 @@
 ﻿package classes.Scenes.Places.TelAdre 
 {
 import classes.*;
+import classes.BodyParts.Face;
 import classes.GlobalFlags.*;
 import classes.Scenes.NPCs.Urta;
 import classes.Scenes.SceneLib;
@@ -26,10 +27,7 @@ public class KatherineThreesome extends TelAdreAbstractContent
 			outputText("Smirking, the cat begins to remove her shirt, pulling it off and casting it aside.  \"<i>How big of a mess are we going to make with just a circlejerk?</i>\"\n\n");
 			outputText("\"<i>Kitty, you got no idea who you’re talking about, do you?</i>\" Urta says, letting the cat’s dick go to help you remove her clothes and armor as well.\n\n");
 			outputText("As soon as Urta’s top is off her, you move your hands to grope at her soft orbs, pinching and twisting her nipples, then pulling her head against your " + (player.hasBreasts() ? player.breastDescript(0) : "chest") + ", and finally giving her perky fox-ear a gentle bite");
-			var race:String = player.race(); //Looks like the best way to be sure you have sharp teeth
-			var race3:String = race.substr(0, 3); //Tests for cat, dog, fox
-			var race6:String = race.substr(0, 6); //Tests for dragon, drider, ferret, spider
-			if (race3 == "cat" || race3 == "dog" || race3 == "fox" || race6 == "dragon" || race6 == "drider" || race6 == "ferret" || race6 == "spider" || race == "naga" || race == "kitsune" || race == "demon-morph" || race == "shark-morph" || race.search("lizan") > -1)
+			if ([Face.ANIMAL_TOOTHS, Face.BEAR, Face.CAT, Face.CAT_CANINES, Face.DEVIL_FANGS, Face.DOG, Face.DRAGON, Face.DRAGON_FANGS, Face.JABBERWOCKY, Face.SALAMANDER_FANGS, Face.SHARK_TEETH, Face.FOX, Face.SNAKE_FANGS, Face.SPIDER_FANGS, Face.VAMPIRE, Face.WOLF, Face.WOLF_FANGS].indexOf(player.faceType) != -1)
 				outputText(", careful not to hurt her with your sharp teeth");
 			outputText(".\n\nUrta giggles.  \"<i>Frisky [boy]... mmm, you always did know how to get me ready, didn’t you?</i>\" she asks, tail wagging softly behind her, indirectly patting you with its soft, fluffy mass.  Through all this, her hand remains firmly attached to Kath’s dick, and she begins to gently slide it up and down, stroking with the ease of someone who has a lot of practice on their own dick.\n\n");
 			outputText("Urta’s fluffy tail, patting you down, is enough to get you in the mood");

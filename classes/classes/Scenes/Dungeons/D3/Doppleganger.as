@@ -299,7 +299,7 @@ import classes.VaginaClass;
 			
 			str += "You are fighting the doppelganger. " + player.mf("He", "She") +" is a ";
 			str += String(Math.floor(player.tallness / 12) + " foot " + player.tallness % 12 + " inch tall ");
-			str += player.race() + ", with [bodytype]. ";
+			str += "[race], with [bodytype]. ";
 			
 			str += player.mf("His", "Her") + " face is " + player.faceDesc() + ".";
 			

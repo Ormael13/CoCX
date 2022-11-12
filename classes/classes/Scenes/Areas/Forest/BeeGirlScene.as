@@ -86,18 +86,18 @@ public class BeeGirlScene extends BaseContent
 				return;
 			}
 			//Bee-morph
-			var isBeeMorph:Boolean = player.race() == "bee-morph";
+			var isBeeMorph:Boolean = player.isRace(Races.BEE, 1, false);
+			var femBee:Boolean = isBeeMorph && player.hasVagina();
 			if (player.hasCock() && (player.findCockWithType(CockTypesEnum.BEE, 1, 50, -1) >= 0 || isBeeMorph && player.biggestCockArea() >= 50)) {
-				if (isBeeMorph && player.hasVagina() && rand(2) == 0) //herms!
-				    beeEncounterAsBeeMorphFemale();
-                else beeEncounterAsBeeMorphMaleOrGiantCock(isBeeMorph);
-				return;
-			}
-			else if (isBeeMorph) {
+				if (!femBee || rand(2) == 0) { //randomize the girl thingy
+					beeEncounterAsBeeMorphMaleOrGiantCock(isBeeMorph);
+					return;
+				}
+			} else sceneHunter.print("Check failed: bee race and cock area greater than 50 (or just a bee cock of this size)");
+			if (femBee) { // if cock thing failed,
 				beeEncounterAsBeeMorphFemale();
 				return;
-			}
-			else sceneHunter.print("Check failed: bee race, cock area greater than 50 (or just big enough bee cock)");
+			} else sceneHunter.print("Check failed: bee race and a pussy.");
 			//Fighs counter
 			if (flags[kFLAGS.BEE_GIRL_COMBAT_LOSSES] + flags[kFLAGS.BEE_GIRL_COMBAT_WINS_WITH_RAPE] + flags[kFLAGS.BEE_GIRL_COMBAT_WINS_WITHOUT_RAPE] >= 5) {
 				if (flags[kFLAGS.BEE_GIRL_COMBAT_LOSSES] > flags[kFLAGS.BEE_GIRL_COMBAT_WINS_WITH_RAPE] + flags[kFLAGS.BEE_GIRL_COMBAT_WINS_WITHOUT_RAPE])
@@ -830,7 +830,7 @@ public class BeeGirlScene extends BaseContent
 			if (player.cocks[giantCockIndex].cockType == CockTypesEnum.BEE) {
 				outputText("You know the deal by now,");
 			}
-			else if (player.race() == "bee-morph") {
+			else if (player.isRace(Races.BEE, 1, false)) {
 				outputText("All you have to do izzz take thizzz after it hazzz had an hour to zzzet and you’ll be a real man!");
 			}
 			else {
