@@ -840,7 +840,7 @@ public function helspawnDiscoversBooze():void {
 	helScene.helSprite();
 	flags[kFLAGS.HELSPAWN_DISCOVER_BOOZE] = 1;
 	outputText("As you're moving through camp, you notice Hel's away from her little nook - probably off visiting the family, seeing as her cloak's gone.  You wouldn't have given her part of camp a second look, except for a sudden whiff of brimstone and burning brewery on the wind.  Cocking an eyebrow, you creep over to Hel's still, quiet as ");
-	if(player.race() != "cat-boy" && player.race() != "cat-girl") outputText("a cat");
+	if(player.isRace(Races.CAT, 1, false)) outputText("a cat");
 	else outputText("the cat you are");
 	outputText(", and poke your head around the iron body of the still.");
 	
@@ -1785,7 +1785,7 @@ private function talkToHelspawn():void {
 		outputText("\n\nA soft, melodic tune starts to play as " + flags[kFLAGS.HELSPAWN_NAME] + "'s dexterous fingers dance across the fret, plucking at the strings with some small hesitation.  She's a beginner, but not bad at all; the simple tune is sweet and she plays it with burgeoning proficiency, slowly settling into the rhythm of the piece until you can close your eyes and relax, letting her playing sooth you, carrying your troubles far away.  You barely notice when a high, soft voice adds itself to the guitar, a lilting, haunting soprano that slowly grows in power as the young 'mander's playing intensifies, building toward crescendo.  She's singing, surely, but the words are alien and unknowable; you think, for a moment, that perhaps they're in Helia's native tongue, but when a second voice, powerful and operatic, joins " + flags[kFLAGS.HELSPAWN_NAME] + "'s, you know who's been teaching her.");
 		
 		outputText("\n\nYou open an eye as Isabella approaches, belting out a misty-eyed verse in her strange language, and you can practically feel her homesickness, her separation from a lifetime of friends and loved ones.  As her arms cross under her enormous breasts, you can't help but think of the mutations she has undergone");
-		if(player.race() != "human") outputText(" and you yourself have suffered as well");
+		if(!player.isRace(Races.HUMAN, 1, false)) outputText(" and you yourself have suffered as well");
 		outputText(".  You smile as Isabella seats herself beside " + flags[kFLAGS.HELSPAWN_NAME] + ", joining their voices together for the final chorus that leaves them both shaking as " + flags[kFLAGS.HELSPAWN_NAME] + " strums the last, desperate notes, nearly clawing through the strings in her passion.");
 		
 		outputText("\"<i>");

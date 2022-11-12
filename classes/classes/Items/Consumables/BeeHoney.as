@@ -11,6 +11,7 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
+import classes.Races;
 import classes.Races.BeeRace;
 import classes.CoC;
 import classes.CockTypesEnum;
@@ -266,7 +267,7 @@ public class BeeHoney extends Consumable
 					player.cocks[0].cockThickness += (0.1 * Utils.rand(5) + 0.5) * mult; //0.5 to 1 inches in thickness
 					player.addCurse("sen", 5, 1);
 				}
-				else if (player.cocks[0].cockType != CockTypesEnum.BEE && player.race() == "bee-morph") {
+				else if (player.cocks[0].cockType != CockTypesEnum.BEE && player.isRace(Races.BEE, 1, false)) {
 					CoC.instance.transformations.CockBee(0).applyEffect();
 					outputText("[pg]It takes a lot of will not to just run off in search of the bee girl that gave you that special honey right now.  This isn’t good.[pg]");
 					player.cocks[0].cockLength += 5 * mult;

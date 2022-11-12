@@ -3614,7 +3614,8 @@ use namespace CoC;
 		public function isRaceCached(race:Race, minTier:int=1):Boolean {
 			return racialTierCached(race) >= minTier;
 		}
-		
+
+		// returns the player's top race
 		public function raceObject(useCache:Boolean=false):Race {
 			if (!useCache) {
 				updateRacialCacheIfNeeded();
@@ -3631,6 +3632,8 @@ use namespace CoC;
 			scores.sortOn("1", Array.NUMERIC|Array.DESCENDING);
 			return scores[0][0];
 		}
+
+		// WARNING: NEVER USE IT FOR CHECKING THE RACE, THINGS WILL EVENTUALLY BREAK!!!
 		public function race():String {
 			updateRacialCache();
 			if (grandchimeraScore(true) >= 3) {
@@ -3642,27 +3645,6 @@ use namespace CoC;
 			var topRace:Race = raceObject(true);
 			var topScore:Number = racialScoreCached(topRace);
 			return topRace.nameFor(bodyData(), topScore);
-			/*
-			if (TopRace == "alicornkin") {
-				if (TopScore >= 12) {
-					if (horns.type == Horns.UNICORN) {
-						race = "alicornkin";
-					} else {
-						race = "nightmarekin";
-					}
-				}
-			}
-			
-			 */
-			//if (mutantScore() >= 5 && race == "human")
-			//	race = "corrupted mutant";
-			//if (humanScore() >= 5 && race == "corrupted mutant")
-			//	race = "somewhat human mutant";
-			//if (lowerBody == LowerBody.HOOFED && isTaur() && wings.type == Wings.FEATHERED_LARGE) {
-			//	race = "pegataur";
-			//}
-			//if (lowerBody == LowerBody.PONY)
-			//	race = "pony-kin";
 		}
 
 		public function humanScore():Number {

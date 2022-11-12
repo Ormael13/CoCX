@@ -924,6 +924,8 @@ public class PerkMenu extends BaseContent {
 			displayHeader(IMutationPerkType.Slots[slot].name+" Mutations:");
 			mutationsDatabaseVerify(IMutationsLib.mutationsArray(slot));
 			mutationsDatabase(pageAdd);
+			addButton(11, moreInfo ? "LESS INFO" : "MORE INFO", moreInfoSwitch, curry(mutationsDBSlot, slot, pageAdd))
+				.hint(moreInfo ? "Display only the current and next tiers." : "Display all mutation tiers and stat buffs");
 		}
 
 		function mutationsDBDragon():void{
@@ -934,6 +936,8 @@ public class PerkMenu extends BaseContent {
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2) outputText("\nThere is another extra bonus mutation slot given due to NG++");
 			mutationsDatabaseVerify([IMutationsLib.DraconicBonesIM, IMutationsLib.DraconicHeartIM, IMutationsLib.DraconicLungIM]);
 			mutationsDatabase(1);
+			addButton(11, moreInfo ? "LESS INFO" : "MORE INFO", moreInfoSwitch, mutationsDBDragon)
+				.hint(moreInfo ? "Display only the current and next tiers." : "Display all mutation tiers and stat buffs");
 		}
 
 		function mutationsDBKitsune():void{
@@ -943,9 +947,10 @@ public class PerkMenu extends BaseContent {
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) outputText("\nThere is an extra bonus mutation slot given due to NG+");
 			mutationsDatabaseVerify([IMutationsLib.KitsuneThyroidGlandIM, IMutationsLib.KitsuneParathyroidGlandsIM]);
 			mutationsDatabase(1);
+			addButton(11, moreInfo ? "LESS INFO" : "MORE INFO", moreInfoSwitch, mutationsDBKitsune)
+				.hint(moreInfo ? "Display only the current and next tiers." : "Display all mutation tiers and stat buffs");
 		}
 
-		menu();
 		var bd:ButtonDataList = new ButtonDataList();
 		//This was originally hard coded buttons. Which it can still be, I suppose.
 		bd.add("Heart",  curry(mutationsDBSlot, IMutationPerkType.SLOT_HEART), "Heart Mutations");
@@ -966,7 +971,13 @@ public class PerkMenu extends BaseContent {
 		bd.add("Adaptations", curry(mutationsDBSlot, IMutationPerkType.SLOT_ADAPTATIONS, 1), "Adaptation Mutations");
 		bd.add("Dragons", mutationsDBDragon, "Dragon Mutations");
 		bd.add("Kitsunes", mutationsDBKitsune, "Kitsune Mutations");
-		submenu(bd, displayPerks, page, false);
+		submenu(bd, displayPerks, page, false, 11); // reserving 11 for the switch
+	}
+
+	private var moreInfo:Boolean = false; //no need to save, so keep it here
+	private function moreInfoSwitch(callAfter:Function):void {
+		moreInfo = !moreInfo;
+		callAfter(); //update text and buttons
 	}
 
 	//Mutations check helper. Cloned + stripped requirements logic from PerkMenuDB.
@@ -1013,11 +1024,14 @@ public class PerkMenu extends BaseContent {
 					}
 				}
 
-				if (mutation.maxLvl != pMutateLvl) {
+				if (moreInfo) {
+					outputText("\nAll Tier Descriptions:");
+					for (var tier:int = 1; tier <= mutation.maxLvl; ++tier)
+						outputText("\n" + tier + ": " + mutation.mDesc(player.getPerk(mutation), tier) + "; " + mutation.explainBuffs(tier));
+				} else if (mutation.maxLvl != pMutateLvl) {
 					outputText("\nNext Tier Description: ");
 					if (mutation.mDesc(player.getPerk(mutation), pMutateLvl).length <= 1) {	//Some desc. contains only "."
 						if (!player.hasMutation(mutation)) outputText(mutation.mDesc(player.getPerk(mutation), 1));
-						//outputText(mutation.mDesc(player.getPerk(mutation), pMutateLvl));
 						else outputText("Error in description for Mutation " + mutation.name() + ".");
 					} else {
 						outputText(mutation.mDesc(player.getPerk(mutation), pMutateLvl + 1));

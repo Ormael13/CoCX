@@ -14,6 +14,7 @@ import classes.ItemType;
 import classes.PerkLib;
 import classes.Player;
 import classes.PregnancyStore;
+import classes.Races;
 import classes.Scenes.NPCs.JojoScene;
 import classes.StatusEffects;
 import classes.VaginaClass;
@@ -192,7 +193,7 @@ public class Holidays extends BaseContent {
                 outputText(" dick with child-like glee");
             }
             outputText(".  \"<i>");
-            if (player.race() != "human") outputText("I know what you were, virile suitor.  ");
+            if (!player.isRace(Races.HUMAN)) outputText("I know what you were, virile suitor.  ");
             outputText("There's never too much of a good thing.  Of course, my champion must have the proper train of thought...</i>\""
                 + "\n\nWait... what?  You start to pull back, but her grip tightens, forcing you rigid with involuntary pain.  Prickly vines boil out of the ground around your [legs] and entwine into a twisted web with the strength of iron.  In seconds, you're firmly bound up to your [chest], the only part left mobile being your poor, depleted dick.  It swings freely, controlled as effortlessly by the tainted goddess as your veridian prison."
                 + "\n\nFera rambles, \"<i>My sister is not so strong anymore... the planet itself has been turned to my way of thinking, just like you.</i>\"  She leans forward to kiss you, those ruby lips as smooth as glass and soft as the finest velvet.  You lose yourself in her lips, immediately kissing her back, devoting all your muscle control to passionately twisting your tongue about hers, tasting her cinnamon-sweet mouth, moist organs lapping against one another while bubbles of saliva roll between your hungry lips.  It's enough to blind you to the rising wall of verdant tentacles, at least until they touch your ears."

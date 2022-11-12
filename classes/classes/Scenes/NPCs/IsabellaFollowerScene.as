@@ -1048,7 +1048,7 @@ private function getIzzyBurped():void {
 			changed = true;
 		}
 		//[if female/herm and player race not cow-girl]
-		if(changed && player.hasVagina() && player.race() != "cow-girl") {
+		if(changed && player.hasVagina() && player.isRace(Races.COW, 1, false)) {
 			outputText("  \"<i>Goodness, look at you!</i>\" Isabella exclaims, waving away the remnant wisps of the gassy mist.  \"<i>Surely, you're giving me a run for ");
 			if(isabellaAccent()) outputText("mein money now, ja?");
 			else outputText("my money now, darling!");
@@ -1066,7 +1066,7 @@ private function getIzzyBurped():void {
 			outputText("</i>\"\n\n");
 		}
 		//[if male and player race not cowboy]
-		else if(changed && player.hasCock() && player.race() != "cow-morph") {
+		else if(changed && player.hasCock() && player.isRace(Races.COW, 1, false)) {
 			outputText("  \"<i>");
 			if(isabellaAccent()) outputText("Nein nein nein nein, zis von't do at all!");
 			else outputText("No, no! This is awful!");

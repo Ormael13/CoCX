@@ -804,7 +804,17 @@ import coc.xxc.StoryContext;
 		protected function get context():StoryContext {
 			return CoC.instance.context;
 		}
-		public static function submenu(buttons:ButtonDataList, back:Function=null, page:int=0, IsSorted:Boolean = true):void {
+
+		/**
+		 * Print a submenu from the provided buttons
+		 * @param buttons List of buttons for the menu
+		 * @param back Function for the "Back" button (14)
+		 * @param page Currently displayed page
+		 * @param IsSorted If true, the buttons will be sorted by their names
+		 * @param buttonsPerPage How many buttons is displayed per page. By default, 12 (buttons 12-13 reserved for Prev-Next pages, 14 for Back)
+		 * @return this
+		 */
+		public static function submenu(buttons:ButtonDataList, back:Function=null, page:int=0, IsSorted:Boolean = true, buttonsPerPage:int = 12):void {
 			var list:/*ButtonData*/Array = buttons.list.filter(function(e:ButtonData, i:int, a:Array):Boolean{
 				return e.visible;
 			});
@@ -813,11 +823,11 @@ import coc.xxc.StoryContext;
 			}
 			menu();
 			var total:int = list.length;
-			var n:int = Math.min(total,(page+1)*12);
-			for (var bi:int = 0,li:int=page*12; li<n; li++,bi++) {
-				list[li].applyTo(button(bi%12));
+			var n:int = Math.min(total,(page+1)*buttonsPerPage);
+			for (var bi:int = 0,li:int=page*buttonsPerPage; li<n; li++,bi++) {
+				list[li].applyTo(button(bi%buttonsPerPage));
 			}
-			if (page!=0 || total>12) {
+			if (page!=0 || total>buttonsPerPage) {
 				button(12).show("Prev Page", curry(submenu, buttons, back, page - 1, IsSorted)).disableIf(page == 0);
 				button(13).show("Next Page", curry(submenu, buttons, back, page + 1, IsSorted)).disableIf(n >= total);
 			}
