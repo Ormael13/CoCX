@@ -5141,7 +5141,7 @@ public class Combat extends BaseContent {
             damage += scalingBonusLibido() * 0.20;
             damage = FireTypeDamageBonus(damage);
         }
-		if (player.weapon == weapons.BFGAUNT || player.hasAetherTwinsTier2()) damage *= 4;
+		if (player.weapon == weapons.BFGAUNT || player.hasAetherTwinsTier2()) damage *= 2;
 		if (player.weapon == weapons.FRTAXE && monster.isFlying()) damage *= 1.5;
 		if (player.weapon == weapons.VENCLAW && flags[kFLAGS.FERAL_COMBAT_MODE] == 1) damage *= 1.2;
 		if (player.weapon is ArmageddonBlade) damage *= 1.25;

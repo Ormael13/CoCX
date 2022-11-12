@@ -379,6 +379,12 @@ public class Changelog extends BaseContent
 			outputText("-Tainted I.Draft now grows demon dicks. You can now use multiple doses of Reducto. Reducto can be applied to butt and hips. Cocks are reduced by 1/4 or 1/3 again. (Svalkash)\n");
 			outputText("-Brutal Blows perk armor reduction is now: 10% of enemy current armor value + 5\n");
 			outputText("-Low tier magic immunity - some of the enemies now would have immunity to tier 1 spells. They still can be hurt by tier 2 or 3 spells thou or magical specials.\n");
+			outputText("-BF Gaunlets (Aether Twins 2nd evo) unarmed dmg bonus decreased from 4x to 2x.\n");
+			outputText("-Patchouli now lead PC lvl 30+ to Wonderland insterad of after having all areas explored. Still it's 50% chance to visit Wonderland over any other area.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -389,12 +395,6 @@ public class Changelog extends BaseContent
 			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed Bugs: Akbal been weak to fire not ice, Insightful Resources I-VI perks bonus to SF been lower than 5 per wis point, recovery of fatigue when waiting been lower than when attacking, Dao of Elements not giving additional % resistances after first 10%, missing bonus to acid elemental arrows, Holy Bands Managment locked behind having 3rd one band, ");
