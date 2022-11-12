@@ -3020,7 +3020,7 @@
                 <show part="arms/yeti"/>
 				<show part="hands/yeti"/>
             </case>
-            <case values="Arms.CAT,Arms.BEAR,Arms.MELKIE">
+            <case values="Arms.RED_PANDA,Arms.CAT,Arms.BEAR,Arms.MELKIE">
                 <show part="hands/fur"/>
                 <show part="hands_bg/fur"/>
 				<if test="ears.type==Ears.PANDA">
@@ -3411,7 +3411,7 @@
                     </default>
                 </switch>
             </case>
-            <case values="LowerBody.BUNNY,LowerBody.KANGAROO,LowerBody.CAT,LowerBody.DOG,LowerBody.FOX,LowerBody.RAIJU,LowerBody.CANINE,LowerBody.WEASEL,LowerBody.RACCOON,LowerBody.FERRET,LowerBody.MOUSE,LowerBody.HINEZUMI,LowerBody.BEAR,LowerBody.SQUIRREL">
+            <case values="LowerBody.RED_PANDA, LowerBody.BUNNY,LowerBody.KANGAROO,LowerBody.CAT,LowerBody.DOG,LowerBody.FOX,LowerBody.RAIJU,LowerBody.CANINE,LowerBody.WEASEL,LowerBody.RACCOON,LowerBody.FERRET,LowerBody.MOUSE,LowerBody.HINEZUMI,LowerBody.BEAR,LowerBody.SQUIRREL">
                 <switch>
                     <case test="legCount==4">
                         <hide part="legs/*"/>
