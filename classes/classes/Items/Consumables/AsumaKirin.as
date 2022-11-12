@@ -11,6 +11,7 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.RearBody;
 import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
+import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
 import classes.CoC_Settings;
 import classes.CockTypesEnum;
@@ -287,6 +288,13 @@ public class AsumaKirin extends Consumable {
 				CoC.instance.transformations.HornsKirin.applyEffect();
 				changes++;
 			}
+		}
+		//Gain Dragon Tongue
+		if (changes < changeLimit && rand(3) == 0 && player.tongue.type != Tongue.DRACONIC) {
+			outputText("[pg]");
+			CoC.instance.transformations.TongueDraconic.applyEffect();
+			changes++;
+			//Note: This type of tongue should be eligible for all things you can do with demon tongue... Dunno if it's best attaching a boolean just to change the description or creating a whole new tongue type.
 		}
 		if (!InCollection(player.hairColor, KirinRace.KirinHairColors) && changes < changeLimit && rand(3) == 0) {
 			player.hairColor = randomChoice(KirinRace.KirinHairColors);
