@@ -3020,7 +3020,7 @@
                 <show part="arms/yeti"/>
 				<show part="hands/yeti"/>
             </case>
-            <case values="Arms.CAT,Arms.BEAR,Arms.MELKIE">
+            <case values="Arms.RED_PANDA,Arms.CAT,Arms.BEAR,Arms.MELKIE">
                 <show part="hands/fur"/>
                 <show part="hands_bg/fur"/>
 				<if test="ears.type==Ears.PANDA">
