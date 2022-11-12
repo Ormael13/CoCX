@@ -93,8 +93,8 @@ use namespace CoC;
             this.bonusHP = 10000 + 2500*mod;
             this.bonusLust = 505 + 65*mod;
             this.level = 60 + 5*mod; //starts from 65 due to EL levelMod calculations;
-            this.gems = mod > 50 ? 0 : Math.floor((2500 + rand(500)) * Math.exp(0.3*mod));
-            this.additionalXP = mod > 50 ? 0 : Math.floor(10000 * Math.exp(0.3*mod));
+            this.gems = mod > 20 ? 0 : Math.floor((2500 + rand(500)) * Math.exp(0.3*mod));
+            this.additionalXP = mod > 20 ? 0 : Math.floor(10000 * Math.exp(0.3*mod));
             
 			this.a = "";
 			this.short = "Dark Slime Empress";

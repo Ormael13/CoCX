@@ -129,6 +129,7 @@ use namespace CoC;
 		{
 			//scaled from 65 now, reduced base stats to compensate
 			var mod:int = inDungeon ? SceneLib.dungeons.ebonlabyrinth.enemyLevelMod : 3;
+			var modReward =
             initStrTouSpeInte(40 + 30*mod, 260 + 40*mod, 103 + 27*mod, 81 + 23*mod);
             initWisLibSensCor(81 + 23*mod, 280 + 30*mod, 70 + 40*mod, 100);
             this.armorDef = 75 + 75*mod;
@@ -136,8 +137,8 @@ use namespace CoC;
             this.bonusHP = mod == 0 ? 0 : 2000*(mod-1);
             this.bonusLust = 415 + 75*mod;
             this.level = 60 + 5*mod; //starts from 65 due to EL levelMod calculations;
-            this.gems = mod > 50 ? 0 : Math.floor((1500 + rand(300)) * Math.exp(0.3*mod));
-            this.additionalXP = mod > 50 ? 0 : Math.floor(6500 * Math.exp(0.3*mod));
+            this.gems = mod > 20 ? 0 : Math.floor((1500 + rand(300)) * Math.exp(0.3*mod));
+            this.additionalXP = mod > 20 ? 0 : Math.floor(6500 * Math.exp(0.3*mod));
             
 			this.a = " ";
 			this.short = "Atlach Nacha";
