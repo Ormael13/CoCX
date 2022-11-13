@@ -770,6 +770,8 @@ public class HeXinDao extends BaseContent
         addButton(6, weaponsrange.HUXBOW_.shortName, weaponrangeBuy, weaponsrange.HUXBOW_);
         addButton(7, weaponsrange.HEXBOW_.shortName, weaponrangeBuy, weaponsrange.HEXBOW_);
         addButton(7, weaponsrange.O_JAVEL.shortName, weaponrangeBuy, weaponsrange.O_JAVEL);
+        addButton(8, weaponsrange.T_KNIFE.shortName, weaponrangeBuy, weaponsrange.T_KNIFE);
+        addButton(9, weaponsrange.SHURIKE.shortName, weaponrangeBuy, weaponsrange.SHURIKE);
         //addButton(4, weapons.MACE.shortName, weaponBuy, weapons.MACE);
         //addButton(8, weapons.MACE.shortName, weaponBuy, weapons.MACE);//awl - wymagać bedzie możliwość lewitacji czy coś od PC aby to używać
         //addButton(9, weapons.MACE.shortName, weaponBuy, weapons.MACE);//bow made for soul cultivator xD

@@ -381,6 +381,12 @@ public class Changelog extends BaseContent
 			outputText("-Low tier magic immunity - some of the enemies now would have immunity to tier 1 spells. They still can be hurt by tier 2 or 3 spells thou or magical specials.\n");
 			outputText("-BF Gaunlets (Aether Twins 2nd evo) unarmed dmg bonus decreased from 4x to 2x.\n");
 			outputText("-Patchouli now lead PC lvl 30+ to Wonderland insterad of after having all areas explored. Still it's 50% chance to visit Wonderland over any other area.\n");
+			outputText("-New range weapon (by Ormael): Shuriken - buyable at Erma shop in He'Xin'Dao. Cost 100 gems. Base atk is 2 and ammo size 10.\n");
+			outputText("-New range weapon (by Ormael): Throwing Knife - buyable at Erma shop in He'Xin'Dao. Cost 100 gems. Base atk is 2 and ammo size 10.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -395,7 +401,6 @@ public class Changelog extends BaseContent
 			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed Bugs: Akbal been weak to fire not ice, Insightful Resources I-VI perks bonus to SF been lower than 5 per wis point, recovery of fatigue when waiting been lower than when attacking, Dao of Elements not giving additional % resistances after first 10%, missing bonus to acid elemental arrows, Holy Bands Managment locked behind having 3rd one band, ");
 			outputText("Centaur race bonuses error fixed to orginal values, Aether Twins following PC throu ascension in case they been equipped, Lusty Maiden Armor treated as already legendary item, wrong labeled gorgon eyes on race page, Jiaghsi curing leaving leftover effects of Cursed Tag options, tier 3 spells have incrrectly calculated cooldowns\n");
@@ -497,7 +502,6 @@ public class Changelog extends BaseContent
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
-			outputText("\n");
 			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
 			outputText("\n");
 			outputText("\n");full stats bonuses not added yet to: Dragonne, Echidna, Ferret-morph, Kitshoo-morph, Scorpion-morph
@@ -514,10 +518,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

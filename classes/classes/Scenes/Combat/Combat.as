@@ -10660,6 +10660,8 @@ public class Combat extends BaseContent {
         if (player.weaponRange == weaponsrange.GTHRAXE) player.ammo = 10;
         if (player.weaponRange == weaponsrange.O_JAVEL) player.ammo = 10;
         if (player.weaponRange == weaponsrange.TRJAVEL) player.ammo = 10;
+        if (player.weaponRange == weaponsrange.SHURIKE) player.ammo = 10;
+        if (player.weaponRange == weaponsrange.T_KNIFE) player.ammo = 10;
         if (player.weaponRange == weaponsrange.SHUNHAR || player.weaponRange == weaponsrange.KSLHARP || player.weaponRange == weaponsrange.LEVHARP) player.ammo = 1;
         if (player.statusEffectv1(StatusEffects.SoulDrill1) > 0) {
             player.removeStatusEffect(StatusEffects.SoulDrill1);
