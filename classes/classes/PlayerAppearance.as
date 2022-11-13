@@ -1087,7 +1087,7 @@ public class PlayerAppearance extends BaseContent {
 			outputText(player.hasPerk(PerkLib.RacialParagon) ? "[font-green]" : "[font-lblue]");
 			outputText("INTERNAL CHIMERICAL DISPOSITION: (" + player.internalChimeraRating() + ") " + score)
             if (player.hasPerk(PerkLib.RacialParagon)) outputText(" - no buffs because of the Racial Paragon perk");
-            else outputText(" (+" + (5 * score) + "% to Str racial multi / Tou / Spe / Int / Wis / Lib and +" + (5 * score) + " to Sens)");
+            else outputText(" (+" + (5 * score) + "% to Str racial multi / Tou / Spe / Int / Wis / Lib");
 			outputText("[/font]")
         } else {
 			outputText("\nINTERNAL CHIMERICAL DISPOSITION: 0");

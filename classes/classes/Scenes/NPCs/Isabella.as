@@ -17,25 +17,9 @@ public class Isabella extends Monster
 			//[Standard attack]
 			outputText("Isabella snorts and lowers a shield a moment before she begins to charge towards you. Her hooves tear huge divots out of the ground as she closes the distance with surprising speed!  ");
 
-			//Blind dodge change
-			if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
-				outputText("Isabella blindly tries to charge at you, but misses completely.\n");
-			}
 			//Determine if dodged!
-			else if(player.speedDodge(this)>0) {
+			if(player.getEvasionRoll()) {
 				outputText("You duck aside at the last moment, relying entirely on your speed.\n");
-			}
-			//Determine if evaded
-			else if(player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
-				outputText("You easily evade her incredibly linear attack.\n");
-			}
-			//("Misdirection"
-			else if(player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
-				outputText("You easily misdirect her and step aside at the last moment.\n");
-			}
-			//Determine if cat'ed
-			else if(player.hasPerk(PerkLib.Flexibility) && rand(100) < 6) {
-				outputText("You throw yourself out of the way with cat-like agility at the last moment, avoiding her attack.\n");
 			}
 			else {
 				var damage:Number;
@@ -75,25 +59,8 @@ public class Isabella extends Monster
 			//[Stunning Impact]
 			outputText("Isabella spins her shield back at you in a potent, steel-assisted backhand.  ");
 
-			//Blind dodge change
-			if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
-				outputText("Isabella blindly tries to charge at you, but misses completely.\n");
-			}
-			//Determine if dodged!
-			else if(player.speedDodge(this)>0) {
+			if(player.getEvasionRoll()) {
 				outputText("You duck aside at the last moment, relying entirely on your speed.\n");
-			}
-			//Determine if evaded
-			else if(player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
-				outputText("You easily evade her incredibly linear attack.\n");
-			}
-			//("Misdirection"
-			else if(player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
-				outputText("You easily misdirect her and step aside at the last moment.\n");
-			}
-			//Determine if cat'ed
-			else if(player.hasPerk(PerkLib.Flexibility) && rand(100) < 6) {
-				outputText("You bend backward with cat-like agility to avoid her attack.\n");
 			}
 			else {
 				var damage:Number = 0;
@@ -120,25 +87,9 @@ public class Isabella extends Monster
 		public function isabellaThroatPunch():void {
 			outputText("Isabella punches out from behind her shield in a punch aimed right at your throat!  ");
 
-			//Blind dodge change
-			if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
-				outputText("Isabella blindly tries to charge at you, but misses completely.\n");
-			}
 			//Determine if dodged!
-			else if(player.speedDodge(this)>0) {
+			if(player.getEvasionRoll()) {
 				outputText("You duck aside at the last moment, relying entirely on your speed.\n");
-			}
-			//Determine if evaded
-			else if(player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
-				outputText("You easily evade her incredibly linear attack.\n");
-			}
-			//("Misdirection"
-			else if(player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
-				outputText("You easily misdirect her and step aside at the last moment.\n");
-			}
-			//Determine if cat'ed
-			else if(player.hasPerk(PerkLib.Flexibility) && rand(100) < 6) {
-				outputText("You bend backward with cat-like agility to avoid her attack.\n");
 			}
 			else {
 				var damage:Number;

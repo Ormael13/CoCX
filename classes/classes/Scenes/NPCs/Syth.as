@@ -48,29 +48,9 @@ public class Syth extends Monster
 			var damage:Number;
 			//return to combat menu when finished
 			doNext(EventParser.playerMenu);
-			//Blind dodge change
-			if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 1) {
-				outputText(capitalA + short + " completely misses you with a blind attack!\n");
-				return;
-			}
 			//Determine if dodged!
-			if(player.speedDodge(this)>0) {
+			if(player.getEvasionRoll()) {
 				outputText("The salamander rushes at you, knocking aside your defensive feint and trying to close the distance between you.  He lashes out at your feet with his tail, and you're only just able to dodge the surprise attack.");
-				return;
-			}
-			//Determine if evaded
-			if(player.hasPerk(PerkLib.Evade) && rand(100) < 5) {
-				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s tail-swipe.\n");
-				return;
-			}
-			//("Misdirection"
-			if(player.hasPerk(PerkLib.Misdirection) && rand(100) < 5 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
-				outputText("Using Raphael's teachings, you anticipate and sidestep " + a + short + "' tail-swipe.\n");
-				return;
-			}
-			//Determine if cat'ed
-			if(player.hasPerk(PerkLib.Flexibility) && rand(100) < 3) {
-				outputText("With your incredible flexibility, you squeeze out of the way of a tail-swipe!");
 				return;
 			}
 			//Determine damage - str modified by enemy toughness!

@@ -25,7 +25,6 @@ import classes.BodyParts.UnderBody;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.*;
-import classes.Items.ArmorLib;
 import classes.Items.ItemTags;
 import classes.Items.JewelryLib;
 import classes.Races.ElementalRace;
@@ -1049,8 +1048,16 @@ public class Creature extends Utils
 		 * @return 0: did not avoid; 1-3: avoid with varying difference between
 		 * speeds (1: narrowly avoid, 3: deftly avoid)
 		 */
-		public function speedDodge(creature:Creature):int{
-			var diff:Number = spe - creature.spe;
+		public function speedDodge(creature:Creature):int {
+			return calcSpeedDodge(creature.spe);
+		}
+
+		/**
+		 * @return 0: did not avoid; 1-3: avoid with varying difference between
+		 * speeds (1: narrowly avoid, 3: deftly avoid)
+		 */
+		public function calcSpeedDodge(attackSpeed:int):int {
+			var diff:Number = spe - attackSpeed;
 			var rnd:int = int(Math.random() * ((diff / 4) + 80));
 			if (rnd<=80) return 0;
 			else if (diff<8) return 1;
@@ -4248,15 +4255,13 @@ public class Creature extends Utils
 		*
 		* If attacker is null then you can specify attack speed for enviromental and non-combat cases. If no speed and attacker specified and then only perks would be accounted.
 		*
-		* This does NOT account blind!
+		* This DOES account blind!
 	    */
 		public function getEvasionReason(useMonster:Boolean = true, attackSpeed:int = int.MIN_VALUE):String
 		{
-			// speed
+			if (useMonster && game.monster.hasStatusEffect(StatusEffects.Blind) && rand(100) < 66) return "Blind"; //first, handle blind
 			if (useMonster && game.monster != null && attackSpeed == int.MIN_VALUE) attackSpeed = game.monster.spe;
-			if (attackSpeed != int.MIN_VALUE && spe - attackSpeed > 0 && int(Math.random() * (((spe - attackSpeed) / 4) + 80)) > 80) return "Speed";
-			//note, Player.speedDodge is still used, since this function can't return how close it was
-			var roll:Number = rand(100);
+			if (calcSpeedDodge(attackSpeed) > 0) return "Speed"; // now, handle speed
 			var generalevasion:Number = 0;
 			var flyeavsion:Number = 20;
 			if (hasPerk(PerkLib.Evade)) generalevasion += 5;
@@ -4279,22 +4284,18 @@ public class Creature extends Utils
 			if (game.player.hasKeyItem("Rocket Boots") >= 0 && game.player.tallness < 48 && game.player.isBiped()) generalevasion += 20;
 			if (game.player.hasKeyItem("Nitro Boots") >= 0 && game.player.tallness < 48 && game.player.isBiped()) generalevasion += 30;
 			// perks
-			if ((hasPerk(PerkLib.Evade) || hasPerk(PerkLib.ElvenSense) || game.player.necklace == game.necklaces.LEAFAMU || ((game.player.hasKeyItem("Nitro Boots") >= 0 || game.player.hasKeyItem("Rocket Boots") >= 0 || game.player.hasKeyItem("Spring Boots") >= 0) && game.player.tallness < 48 && game.player.isBiped())) && (roll < generalevasion)) return "Evade";
-			if ((hasPerk(PerkLib.Flexibility) || perkv1(IMutationsLib.CatLikeNimblenessIM) >= 1) && (roll < 6)) return "Flexibility";
-			if (hasPerk(PerkLib.Misdirection) && (game.player.armor.hasTag(ItemTags.A_AGILE)) && (roll < 10)) return "Misdirection";
-			//if (hasPerk(PerkLib.Unhindered) && meetUnhinderedReq() && (roll < 10)) return "Unhindered";
-			if (hasPerk(PerkLib.Unhindered) && game.player.armor.hasTag(ItemTags.A_AGILE) && (roll < 10)) return "Unhindered";
-			if (hasPerk(PerkLib.JunglesWanderer) && (roll < 35)) return "Jungle's Wanderer";
-			if (hasStatusEffect(StatusEffects.Illusion)) {
-				if (perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 3 && roll < 30) return "Illusion";
-				else if (roll < 10) return "Illusion";
-			}
-			if (hasStatusEffect(StatusEffects.Flying) && (roll < flyeavsion)) return "Flying";
-			if (hasStatusEffect(StatusEffects.HurricaneDance) && (roll < 25)) return "Hurricane Dance";
-			if (hasStatusEffect(StatusEffects.BladeDance) && (roll < 30)) return "Blade Dance";
-			if (game.player.isRace(Races.CHESHIRE) && ((!hasStatusEffect(StatusEffects.Minimise) && (roll < 30)) || (hasStatusEffect(StatusEffects.EverywhereAndNowhere) && (roll < 80)))) return "Minimise";
-			if (game.player.isRace(Races.CHESHIRE) && ((!hasStatusEffect(StatusEffects.EverywhereAndNowhere) && (roll < 30)) || (hasStatusEffect(StatusEffects.EverywhereAndNowhere) && (roll < 80)))) return "Phasing";
-			if (game.player.isRace(Races.DISPLACERBEAST) && ((!hasStatusEffect(StatusEffects.Displacement) && (roll < 30)) || (hasStatusEffect(StatusEffects.Displacement) && (roll < 80)))) return "Displacing";
+			if ((hasPerk(PerkLib.Evade) || hasPerk(PerkLib.ElvenSense) || game.player.necklace == game.necklaces.LEAFAMU || ((game.player.hasKeyItem("Nitro Boots") >= 0 || game.player.hasKeyItem("Rocket Boots") >= 0 || game.player.hasKeyItem("Spring Boots") >= 0) && game.player.tallness < 48 && game.player.isBiped())) && (rand(100) < generalevasion)) return "Evade";
+			if ((hasPerk(PerkLib.Flexibility) || perkv1(IMutationsLib.CatLikeNimblenessIM) >= 1) && (rand(100) < 6)) return "Flexibility";
+			if (hasPerk(PerkLib.Misdirection) && (game.player.armor.hasTag(ItemTags.A_AGILE)) && (rand(100) < 10)) return "Misdirection";
+			if (hasPerk(PerkLib.Unhindered) && game.player.armor.hasTag(ItemTags.A_AGILE) && (rand(100) < 10)) return "Unhindered";
+			if (hasPerk(PerkLib.JunglesWanderer) && (rand(100) < 35)) return "Jungle's Wanderer";
+			if (hasStatusEffect(StatusEffects.Illusion) && rand(100) < (perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 3 ? 30 : 10)) return "Illusion";
+			if (hasStatusEffect(StatusEffects.Flying) && (rand(100) < flyeavsion)) return "Flying";
+			if (hasStatusEffect(StatusEffects.HurricaneDance) && (rand(100) < 25)) return "Hurricane Dance";
+			if (hasStatusEffect(StatusEffects.BladeDance) && (rand(100) < 30)) return "Blade Dance";
+			if (game.player.isRace(Races.CHESHIRE) && ((!hasStatusEffect(StatusEffects.Minimise) && (rand(100) < 30)) || (hasStatusEffect(StatusEffects.EverywhereAndNowhere) && (rand(100) < 80)))) return "Minimise";
+			if (game.player.isRace(Races.CHESHIRE) && ((!hasStatusEffect(StatusEffects.EverywhereAndNowhere) && (rand(100) < 30)) || (hasStatusEffect(StatusEffects.EverywhereAndNowhere) && (rand(100) < 80)))) return "Phasing";
+			if (game.player.isRace(Races.DISPLACERBEAST) && ((!hasStatusEffect(StatusEffects.Displacement) && (rand(100) < 30)) || (hasStatusEffect(StatusEffects.Displacement) && (rand(100) < 80)))) return "Displacing";
 			return null;
 		}
 
@@ -4362,10 +4363,8 @@ public class Creature extends Utils
 		 * @return true if this creature can be targeted with ability
 		 */
 		public function canBeTargetedWith(ability:Object):Boolean {
-			if (ability.range == RANGE_MELEE && isFlying()) {
-				return false;
-			}
-			return true;
+			return !(ability.range == RANGE_MELEE && isFlying());
+
 		}
 
 		public function getEvasionRoll(useMonster:Boolean = true, attackSpeed:int = int.MIN_VALUE):Boolean

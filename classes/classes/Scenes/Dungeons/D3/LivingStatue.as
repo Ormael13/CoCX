@@ -161,7 +161,7 @@ import classes.internals.ChainedDrop;
 			outputText("The animated statue spins its hammer around, striking at your [weapon] with its haft.");
 	
 			//Avoid
-			if ((combatMiss() && combatMiss()) || player.getEvasionRoll(false) || (player.hasPerk(PerkLib.ShieldWard) && rand (2) == 0)) outputText(" You manage to hold onto your equipment, for now.");
+			if (player.getEvasionRoll() || (player.hasPerk(PerkLib.ShieldWard) && rand (2) == 0)) outputText(" You manage to hold onto your equipment, for now.");
 			//Oh noes!
 			else
 			{

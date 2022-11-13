@@ -18,18 +18,8 @@ import classes.internals.*;
 			//return to combat menu when finished
 			doNext(EventParser.playerMenu);
 			//Determine if dodged!
-			if(player.speedDodge(this)>0) {
+			if(player.getEvasionRoll()) {
 				outputText("The girl wades in for a swing, but you deftly dodge to the side. She recovers quickly, spinning back at you.");
-				return;
-			}
-			//("Misdirection"
-			if(player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
-				outputText("The girl wades in for a swing, but you deftly misdirect her and avoid the attack. She recovers quickly, spinning back at you.");
-				return;
-			}
-			//Determine if cat'ed
-			if(player.hasPerk(PerkLib.Flexibility) && rand(100) < 6) {
-				outputText("The girl wades in for a swing, but you deftly twist your flexible body out of the way. She recovers quickly, spinning back at you.");
 				return;
 			}
 			//Determine damage - str modified by enemy toughness!
