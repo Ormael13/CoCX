@@ -148,24 +148,11 @@ public class Ceraph extends Monster
 			outputText("The demoness weaves her whip in the air until you can practically hear it slithering like a snake, cutting the air as it weaves back and forth, still magically alight with flames.  In a blink she lashes out twice in quick succession!\n");
 			//First hit!
 			doNext(EventParser.playerMenu);
-			//Blind dodge change
-			if (hasStatusEffect(StatusEffects.Blind) && rand(10) != 9) {
-				outputText(capitalA + short + " completely misses you with a blind attack!");
-			}
-			//Determine if dodged!
-			else if (player.speedDodge(this)>0) {
+			if (player.getEvasionRoll()) {
 				if (player.spe - spe < 8) outputText("You narrowly avoid " + a + short + "'s " + weaponVerb + "!");
 				if (player.spe - spe >= 8 && player.spe - spe < 20) outputText("You dodge " + a + short + "'s " + weaponVerb + " with superior quickness!");
 				if (player.spe - spe >= 20) outputText("You deftly avoid " + a + short + "'s slow " + weaponVerb + ".");
 			}
-			//Determine if evaded
-			else if (player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
-				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s attack.");
-			}
-			else if (player.hasPerk(PerkLib.Misdirection) && rand(100) < 15 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
-				outputText("With Raphael's teachings and the easy movement afforded by your bodysuit, you easily anticipate and sidestep " + a + short + "'s attack.");
-			}
-			//Determine damage - str modified by enemy toughness!
 			else {
 				damage = int((eBaseDamage()) - Math.random() * (player.tou + player.armorDef));
 				if (damage > 0) {
@@ -195,22 +182,10 @@ public class Ceraph extends Monster
 			EngineCore.statScreenRefresh();
 			outputText("\n");
 			//SECOND ATTACK HERE------
-			//Blind dodge change
-			if (hasStatusEffect(StatusEffects.Blind) && rand(10) != 9) {
-				outputText(capitalA + short + " completely misses you with a blind attack!");
-			}
-			//Determine if dodged!
-			else if (player.speedDodge(this)>0) {
+			if (player.getEvasionRoll()) {
 				if (player.spe - spe < 8) outputText("You narrowly avoid " + a + short + "'s " + weaponVerb + "!");
 				if (player.spe - spe >= 8 && player.spe - spe < 20) outputText("You dodge " + a + short + "'s " + weaponVerb + " with superior quickness!");
 				if (player.spe - spe >= 20) outputText("You deftly avoid " + a + short + "'s slow " + weaponVerb + ".");
-			}
-			//Determine if evaded
-			else if (player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
-				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s attack.");
-			}
-			else if (player.hasPerk(PerkLib.Misdirection) && rand(100) < 15 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
-				outputText("With Raphael's teachings and the easy movement afforded by your bodysuit, you easily anticipate and sidestep " + a + short + "'s attack.");
 			}
 			else {
 				//Determine damage - str modified by enemy toughness!

@@ -34,25 +34,9 @@ public class AbstractSpiderMorph extends Monster
 		public function spiderMorphWebAttack():void
 		{
 			outputText("Turning to the side, [themonster] raises [monster his] abdomen and unleashes a spray of webbing in your direction!  ");
-			//Blind dodge change
-			if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
-				outputText("[Themonster] misses completely due to their blindness.");
-			}
 			//Determine if dodged!
-			else if (player.speedDodge(this)>0) {
+			if (player.getEvasionRoll()) {
 				outputText("You dodge away, avoiding the sticky strands!");
-			}
-			//Determine if evaded
-			else if (player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
-				outputText("You evade, avoiding the sticky strands!");
-			}
-			//("Misdirection"
-			else if (player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armor == armors.FQR)) {
-				outputText("Your misleading movements allow you to easily sidestep the sticky strands!");
-			}
-			//Determine if cat'ed
-			else if (player.hasPerk(PerkLib.Flexibility) && rand(100) < 6) {
-				outputText("You throw yourself out of the way with cat-like agility at the last moment, avoiding " + mf("his", "her") + " attack.\n");
 			}
 			//Got hit
 			else {
@@ -91,25 +75,9 @@ public class AbstractSpiderMorph extends Monster
 				return;
 			}
 			outputText("The spider-" + mf("boy", "girl") + " lunges forward with " + mf("his", "her") + " mouth open, " + mf("his", "her") + " two needle-like fangs closing rapidly.  ");
-			//Blind dodge change
-			if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
-				outputText(capitalA + short + " misses completely due to their blindness.");
-			}
 			//Determine if dodged!
-			else if (player.speedDodge(this)>0) {
+			if (player.getEvasionRoll()) {
 				outputText("You dodge away, avoiding " + mf("his", "her") + " bite!");
-			}
-			//Determine if evaded
-			else if (player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
-				outputText("You evade, avoiding the bite!");
-			}
-			//("Misdirection"
-			else if (player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
-				outputText("Your misleading movements allow you to easily sidestep the spider bite!");
-			}
-			//Determine if cat'ed
-			else if (player.hasPerk(PerkLib.Flexibility) && rand(100) < 6) {
-				outputText("You throw yourself out of the way with cat-like agility at the last moment, avoiding " + mf("his", "her") + " attack.\n");
 			}
 			else {
 				if (rand(5) == 0) {
@@ -130,25 +98,9 @@ public class AbstractSpiderMorph extends Monster
 		public function spiderDisarm():void
 		{
 			outputText(capitalA + short + " shifts and sprays webbing, aiming a tight strand of it at your [weapon].  ");
-			//Blind dodge change
-			if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
-				outputText("The blind web-shot goes horribly wide, missing you entirely.");
-			}
 			//Determine if dodged!
-			else if (player.speedDodge(this)>0) {
+			if (player.speedDodge(this)>0) {
 				outputText("You pull your weapon back and the webbing goes wide, missing entirely.");
-			}
-			//Determine if evaded
-			else if (player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
-				outputText("You pull your weapon back evasively and the webbing goes wide, missing entirely!");
-			}
-			//("Misdirection"
-			else if (player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
-				outputText("Your misleading movements allow you to easily sidestep the webbing!");
-			}
-			//Determine if cat'ed
-			else if (player.hasPerk(PerkLib.Flexibility) && rand(100) < 6) {
-				outputText("You throw yourself out of the way with cat-like agility at the last moment, avoiding " + mf("his", "her") + " attack.\n");
 			}
 			//Shield Ward
 			else if (player.hasPerk(PerkLib.ShieldWard) && rand (2) == 0) {
@@ -173,25 +125,9 @@ public class AbstractSpiderMorph extends Monster
 		public function spiderSilence():void
 		{
 			outputText(capitalA + short + " squirts a concentrated spray of " + mf("his", "her") + " webs directly at your face!  ");
-			//Blind dodge change
-			if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
-				outputText("The blind web-shot goes horribly wide, missing you entirely.");
-			}
 			//Determine if dodged!
-			else if (player.speedDodge(this)>0) {
+			if (player.getEvasionRoll()) {
 				outputText("You lean back and let them pass harmlessly overhead, avoiding the attack.");
-			}
-			//Determine if evaded
-			else if (player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
-				outputText("You pull your weapon back evasively and the webbing goes wide, missing entirely.");
-			}
-			//("Misdirection"
-			else if (player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
-				outputText("Your misleading movements allow you to easily sidestep the webbing!");
-			}
-			//Determine if cat'ed
-			else if (player.hasPerk(PerkLib.Flexibility) && rand(100) < 6) {
-				outputText("You throw yourself out of the way with cat-like agility at the last moment, avoiding " + mf("his", "her") + " attack.\n");
 			}
 			else {
 				outputText("They hit you before you can move, covering most of your nose and mouth and making it hard to breathe.  You'll be unable to use your magic while you're constantly struggling just to draw air!\n");

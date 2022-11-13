@@ -18,7 +18,7 @@ public class Ayane extends Kitsune {
             damage *= 0.2;
         }
         for (var i:int = 0; i < 7; ++i)
-            if (player.hasPerk(PerkLib.Evade) && rand(100) < 10) outputText("  You avoid the foxfire barely feeling it's tingling against your skin!");
+            if (player.getEvasionRoll()) outputText("  You avoid the foxfire barely feeling it's tingling against your skin!");
             else {
                 outputText(" The foxfire sears your skin, but leaves you strangely aroused.");
                 player.takeFireDamage(damage, true);
@@ -42,7 +42,7 @@ public class Ayane extends Kitsune {
         kissCooldown = 8;
         outputText("The kitsune appears out of nowhere and attempts to grab you!");
 
-        if (player.speedDodge(this) > 0 || player.hasPerk(PerkLib.Evade) && rand(100) < 10)
+        if (player.getEvasionRoll())
             outputText("You manage to avoid her embrace just in time. She gives you a disappointed expression then backs off into the ambient darkness. ");
         else {
             outputText("Unable to dodge in time she wraps her arms around you and forces a kiss. To your horror you feel your mystical energy being sapped away! She breaks the embrace and back off licking her lips.\n"

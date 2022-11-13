@@ -136,17 +136,9 @@ public class MinotaurKing extends Monster
 		{
 			outputText("Feinting with his axe, the Minotaur King flings a powerful backhand in your direction.");
 			var damage:Number = (str + weaponAttack) - rand(player.tou);
-			if (damage <= 0 || combatMiss() || player.hasPerk(PerkLib.Flexibility))
+			if (damage <= 0 || player.getEvasionRoll())
 			{
 				outputText(" Luckily, you dodge aside.");
-			}
-			else if (player.hasPerk(PerkLib.Evade))
-			{
-				outputText(" Luckily, you evade.");
-			}
-			else if (player.hasPerk(PerkLib.Misdirection))
-			{
-				outputText(" Luckily, you misdirect his attack.");
 			}
 			else
 			{
@@ -159,12 +151,8 @@ public class MinotaurKing extends Monster
 		{
 			outputText("<i>\"Settle down,\"</i> the brute growls, moments before attempting to slam his forehead into your own.");
 			var damage:Number = ((str + weaponAttack) / 2) - rand(player.tou);
-			if (damage <= 0 || combatMiss() || player.hasPerk(PerkLib.Flexibility))
+			if (damage <= 0 || player.getEvasionRoll())
 				outputText(" Luckily, you dodge aside.");
-			else if (player.hasPerk(PerkLib.Evade))
-				outputText(" Luckily, you evade.");
-			else if (player.hasPerk(PerkLib.Misdirection))
-				outputText(" Luckily, you misdirect his attack.");
 			else {
 				_lastRoundStun = true;
 				damage = player.takePhysDamage(damage);
@@ -197,7 +185,7 @@ public class MinotaurKing extends Monster
 		{
 			outputText("The Minotaur King carries his axe as if it weighed no more than a feather, brandishing it back and forth with such casual movements that you barely register his swing");
 			var damage:Number = (str + weaponAttack) - rand(player.tou);
-			if (damage <= 0 || combatMiss() || player.hasPerk(PerkLib.Evade) || player.hasPerk(PerkLib.Flexibility) || player.hasPerk(PerkLib.Misdirection))
+			if (damage <= 0 || player.getEvasionRoll())
 				outputText(" in time to avoid it.");
 			else {
 				damage = player.takePhysDamage(damage);

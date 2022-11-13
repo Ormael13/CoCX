@@ -13,19 +13,9 @@ public class Marble extends Monster
 		private function marbleSpecialAttackOne():void {
 			//Special1: Heavy overhead swing, high chance of being avoided with evasion, does heavy damage if it hits.
 			var damage:Number = 0;
-			//Blind dodge change
-			if(hasStatusEffect(StatusEffects.Blind)) {
-				outputText("Marble unwisely tries to make a massive swing while blinded, which you are easily able to avoid.");
-				return;
-			}
 			//Determine if dodged!
-			if(player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 60) {
+			if(player.getEvasionRoll()) {
 				outputText("You manage to roll out of the way of a massive overhand swing.");
-				return;
-			}
-			//Determine if evaded
-			if(player.hasPerk(PerkLib.Evade) && rand(100) < 60) {
-				outputText("You easily sidestep as Marble tries to deliver a huge overhand blow.");
 				return;
 			}
 			//Determine damage - str modified by enemy toughness!
@@ -44,13 +34,9 @@ public class Marble extends Monster
 		private function marbleSpecialAttackTwo():void {
 			//Special2: Wide sweep; very high hit chance, does low damage.
 			var damage:Number = 0;
-			//Blind dodge change
-			if(hasStatusEffect(StatusEffects.Blind)) {
-				outputText("Marble makes a wide sweeping attack with her hammer, which is difficult to avoid even from a blinded opponent.\n");
-			}
 			//Determine if evaded
-			if(player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
-				outputText("You barely manage to avoid a wide sweeping attack from marble by rolling under it.");
+			if(player.getEvasionRoll()) {
+				outputText("You barely manage to avoid a wide sweeping attack from Marble by rolling under it.");
 				return;
 			}
 			//Determine damage - str modified by enemy toughness!

@@ -15,27 +15,9 @@ public class Hel extends Monster
 			var damage:Number;
 			//return to combat menu when finished
 			doNext(EventParser.playerMenu);
-			//Blind dodge change
-			if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 1) {
-				outputText(capitalA + short + " completely misses you with a blind attack!\n");
-			}
-			//Determine if dodged!
-			else if (player.spe - spe > 0 && int(Math.random() * (((player.spe-spe) / 4) + 80)) > 80) {
+			if (player.getEvasionRoll()) {
 				outputText("You nimbly dodge the salamander's massive sword thrust!");
 			}
-			//Determine if evaded
-			else if (player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
-				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s attack.\n");
-			}
-			//("Misdirection"
-			else if (player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
-				outputText("Using Raphael's teachings, you anticipate and sidestep " + a + short + "' attacks.\n");
-			}
-			//Determine if cat'ed
-			else if (player.hasPerk(PerkLib.Flexibility) && rand(100) < 6) {
-				outputText("With your incredible flexibility, you squeeze out of the way of " + a + short + "");
-			}
-			//Determine damage - str modified by enemy toughness!
 			else
 			{
 				damage = int((str + weaponAttack) - rand(player.tou/2) - player.armorDef/2);
@@ -67,29 +49,9 @@ public class Hel extends Monster
 			var damage:Number;
 			//return to combat menu when finished
 			doNext(EventParser.playerMenu);
-			//Blind dodge change
-			if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 1) {
-				outputText(capitalA + short + " completely misses you with a blind attack!\n");
-				return;
-			}
 			//Determine if dodged!
-			if(player.speedDodge(this)>0) {
+			if(player.getEvasionRoll()) {
 				outputText("The salamander rushes at you, knocking aside your defensive feint and trying to close the distance between you.  She lashes out at your feet with her tail, and you're only just able to dodge the surprise attack.");
-				return;
-			}
-			//Determine if evaded
-			if(player.hasPerk(PerkLib.Evade) && rand(100) < 5) {
-				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s tail-swipe.\n");
-				return;
-			}
-			//("Misdirection"
-			if(player.hasPerk(PerkLib.Misdirection) && rand(100) < 5 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
-				outputText("Using Raphael's teachings, you anticipate and sidestep " + a + short + "' tail-swipe.\n");
-				return;
-			}
-			//Determine if cat'ed
-			if(player.hasPerk(PerkLib.Flexibility) && rand(100) < 3) {
-				outputText("With your incredible flexibility, you squeeze out of the way of a tail-swipe!");
 				return;
 			}
 			//Determine damage - str modified by enemy toughness!
@@ -117,7 +79,7 @@ public class Hel extends Monster
 
 		private function helCleavage():void {
 			//FAIL
-			if((player.hasPerk(PerkLib.Flexibility) && rand(100) < 6) || (player.hasPerk(PerkLib.Evade) && rand(100) < 10) || (player.speedDodge(this)>0)) {
+			if(player.getEvasionRoll()) {
 				outputText("To your surprise, the salamander suddenly pulls up her top, letting her hefty breasts hang free in the air; her small, bright pink nipples quickly harden from either arousal or temperature.  Before you can take your eyes off her impressive rack, she jumps at you.  One of her scaled arms reaches around your waist, and the other toward your head, but you roll away from her grip and push her bodily away.  She staggers a moment, but then quickly yanks the jangling bikini top back down with a glare.\n");
 			}
 			//Attack 3 – Lust – Cleavage (Failure)

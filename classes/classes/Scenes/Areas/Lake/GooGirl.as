@@ -36,27 +36,9 @@ public class GooGirl extends Monster
 			if (hasPerk(PerkLib.Acid)) outputText("Her body quivering from your flames, the goo-girl ");
 			else outputText("The slime holds its hands up and they morph into a replica of your [weapon].  Happily, she swings at you");
 			//Determine if dodged!
-			if (player.speedDodge(this)>0) {
+			if (player.getEvasionRoll()) {
 				if (hasPerk(PerkLib.Acid)) outputText("tries to slap you, but you dodge her attack.");
 				else outputText(", missing as you dodge aside.");
-				return;
-			}
-			//Determine if evaded
-			if (short != "Kiha" && player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
-				if (hasPerk(PerkLib.Acid)) outputText("tries to slap you, but you evade her attack.");
-				else outputText(", but you evade the clumsy attack.");
-				return;
-			}
-			//("Misdirection"
-			if (player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
-				if (hasPerk(PerkLib.Acid)) outputText("tries to slap you.  You misdirect her, avoiding the hit.");
-				else outputText(", missing as you misdirect her attentions.");
-				return;
-			}
-			//Determine if cat'ed
-			if (player.hasPerk(PerkLib.Flexibility) && rand(100) < 6) {
-				if (hasPerk(PerkLib.Acid)) outputText("tries to slap you, but misses due to your cat-like evasion.");
-				else outputText(", missing due to your cat-like evasion.");
 				return;
 			}
 			//Determine damage - str modified by enemy toughness!

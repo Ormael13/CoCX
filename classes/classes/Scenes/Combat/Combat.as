@@ -30,7 +30,6 @@ import classes.Scenes.Areas.HighMountains.*;
 import classes.Scenes.Areas.Lake.GreenSlime;
 import classes.Scenes.Areas.Mountain.*;
 import classes.Scenes.Areas.Ocean.SeaAnemone;
-import classes.Scenes.Areas.Plains.*;
 import classes.Scenes.Areas.Tundra.YoungFrostGiant;
 import classes.Scenes.Areas.VolcanicCrag.GolemsTrueFire;
 import classes.Scenes.Camp.TrainingDummy;
@@ -42,7 +41,6 @@ import classes.Scenes.Dungeons.DemonLab.IncubusScientist;
 import classes.Scenes.Dungeons.DemonLab.LabGuard;
 import classes.Scenes.Dungeons.EbonLabyrinth.*;
 import classes.Scenes.Dungeons.HelDungeon.*;
-import classes.Scenes.Monsters.*;
 import classes.Scenes.NPCs.*;
 import classes.Scenes.Places.Boat.*;
 import classes.Scenes.Places.Farm.Kelt;
@@ -6984,10 +6982,6 @@ public class Combat extends BaseContent {
                 player.necklace == necklaces.YWSCARF;
     }
 
-    public function combatMiss():Boolean {
-        return player.spe - monster.spe > 0 && int(Math.random() * (((player.spe - monster.spe) / 4) + 80)) > 80;
-    }
-
     public function combatParry():Boolean {
         var parryChance:int = 0;
         parryChance += combatParry2();
@@ -8218,7 +8212,7 @@ public class Combat extends BaseContent {
             } else {
                 outputText("The tentacles grab at you again!");
                 if (player.canFly()) outputText(" No matter how they strain, they can’t reach you.\n\n");
-                else if (combatMiss() || player.hasPerk(PerkLib.Evade) || player.hasPerk(PerkLib.Flexibility)) outputText(" You twist out of their slick, bizarrely sensuous grasp for now.\n\n");
+                else if (player.getEvasionRoll()) outputText(" You twist out of their slick, bizarrely sensuous grasp for now.\n\n");
                 else {
                     outputText(" Damn, they got you! They yank your arms and [legs] taut, holding you helpless in the air for their brothers to further violate. You can already feel a few oily tendrils sneaking under your [armor].\n\n");
                     player.changeStatusValue(StatusEffects.LethicesRapeTentacles, 3, 1);

@@ -78,9 +78,6 @@ public class BaseCombatContent extends BaseContent {
 	protected function doTrueDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
 		return combat.doTrueDamage(damage, apply, display);
 	}
-	protected function combatMiss():Boolean {
-		return combat.combatMiss();
-	}
 	protected function combatParry():Boolean {
 		return combat.combatParry();
 	}
