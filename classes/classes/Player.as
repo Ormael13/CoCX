@@ -4918,7 +4918,7 @@ use namespace CoC;
 				"int.mult": (buffInt+buffAll)/100,
 				"wis.mult": (buffWis+buffAll)/100,
 				"lib.mult": (buffLib+buffAll)/100,
-				"sens": currentSen + buffAll
+				"sens": currentSen
 			});
 			return buffs;
 		}
