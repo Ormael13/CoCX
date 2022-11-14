@@ -3548,7 +3548,11 @@ public class Combat extends BaseContent {
                     else if (monster.plural)
                         outputText(" Your opponents staggers, collapsing onto each other from the wounds you've inflicted on [monster him]. ");
                     else outputText(" Your opponent staggers, collapsing from the wounds you've inflicted on [monster him]. ");
-                    doPhysicalDamage(damage, true, true);
+                    if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
+						doPhysicalDamage(damage, true, true);
+						doMagicDamage(Math.round(damage * 0.2), true, true);
+					}
+					else doPhysicalDamage(damage, true, true);
                     if (crit)  outputText(" <b>*One or more of the projectile did a Critical Hit!*</b>");
                     throwingXP(rangeMasteryEXPgained(crit));
                     outputText("\n\n");
@@ -3558,7 +3562,11 @@ public class Combat extends BaseContent {
                 } else {
                     if (!MSGControll) {
                         outputText(" ");
-                        doPhysicalDamage(damage, true, true);
+                        if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
+							doPhysicalDamage(damage, true, true);
+							doMagicDamage(Math.round(damage * 0.2), true, true);
+						}
+						else doPhysicalDamage(damage, true, true);
                         throwingXP(rangeMasteryEXPgained(crit));
                     }
                     if (crit) hasCritAtLeastOnce = true;
@@ -3702,7 +3710,11 @@ public class Combat extends BaseContent {
                 else if (monster.plural)
                     outputText(" and [monster he] stagger, collapsing onto each other from the wounds you've inflicted on [monster him]. ");
                 else outputText(" and [monster he] staggers, collapsing from the wounds you've inflicted on [monster him]. ");
-                doPhysicalDamage(damage, true, true);
+                if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
+					doPhysicalDamage(damage, true, true);
+                    doMagicDamage(Math.round(damage * 0.2), true, true);
+				}
+				else doPhysicalDamage(damage, true, true);
                 if (crit) outputText(" <b>*Critical Hit!*</b>");
 				throwingXP(rangeMasteryEXPgained(crit));
                 outputText("\n\n");
@@ -3711,7 +3723,11 @@ public class Combat extends BaseContent {
             } else {
                 if (!MSGControll) {
                     outputText(".  It's clearly very painful. ");
-                    doPhysicalDamage(damage, true, true);
+                    if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
+						doPhysicalDamage(damage, true, true);
+						doMagicDamage(Math.round(damage * 0.2), true, true);
+					}
+					else doPhysicalDamage(damage, true, true);
 					throwingXP(rangeMasteryEXPgained(crit));
                 }
                 if (crit) outputText(" <b>*Critical Hit!*</b>");

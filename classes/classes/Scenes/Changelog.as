@@ -383,8 +383,9 @@ public class Changelog extends BaseContent
 			outputText("-Patchouli now lead PC lvl 30+ to Wonderland insterad of after having all areas explored. Still it's 50% chance to visit Wonderland over any other area.\n");
 			outputText("-New range weapon (by Ormael): Shuriken - buyable at Erma shop in He'Xin'Dao. Cost 100 gems. Base atk is 2 and ammo size 10.\n");
 			outputText("-New range weapon (by Ormael): Throwing Knife - buyable at Erma shop in He'Xin'Dao. Cost 100 gems. Base atk is 2 and ammo size 10.\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Nuked most fancy dodge texts, but now most dodge checks include all of your perks (Evade, Flexibility, mutations, etc.) Changed how dodge works. Before, it took the roll and compared it to your total evasion. Then it checked some perks with the same rolled number, making them ineffective if the first roll was bad. ");
+			outputText("Now, it rerolls the number for each perk check, probably making evasion perk-stacking even more OP than before. (Svalkash)\n");
+			outputText("-New White magic spell: Charge Range Weapon. Learned from White Book. Works like Charge Weapon but affect range not melee weapons. Range weapon atk won't be now boosted as before by Charge Weapon spell.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

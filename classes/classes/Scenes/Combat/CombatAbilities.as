@@ -19,6 +19,7 @@ public class CombatAbilities {
 	public static const ChainLightningEx:ChainLightningSpell    = new ChainLightningSpell(true);
 	public static const Blind:BlindSpell                        = new BlindSpell();
 	public static const ChargeWeapon:ChargeWeaponSpell          = new ChargeWeaponSpell();
+	public static const ChargeRWeapon:ChargeRangeWeaponSpell    = new ChargeRangeWeaponSpell();
 	public static const ChargeArmor:ChargeArmorSpell            = new ChargeArmorSpell();
 	public static const Heal:HealSpell                          = new HealSpell();
 	public static const Blizzard:BlizzardSpell                  = new BlizzardSpell();
@@ -39,6 +40,7 @@ public class CombatAbilities {
 		ChainLightningEx,
 		Blind,
 		ChargeWeapon,
+		ChargeRWeapon,
 		ChargeArmor,
 		Heal,
 		Blizzard,

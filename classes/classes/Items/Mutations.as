@@ -3415,50 +3415,56 @@ public final class Mutations extends MutationsHelper {
             player.createStatusEffect(StatusEffects.KnowsCharge, 0, 0, 0, 0);
             return;
         }
+        //Smart enough for charge range weapon and doesnt have it
+        if (player.inte >= 35 && !player.hasStatusEffect(StatusEffects.KnowsChargeR)) {
+            outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Charge Range Weapon.</b>");
+            player.createStatusEffect(StatusEffects.KnowsChargeR, 0, 0, 0, 0);
+            return;
+        }
         //Smart enough for charge armor and doesnt have it
-        if (player.inte >= 35 && !player.hasStatusEffect(StatusEffects.KnowsChargeA)) {
+        if (player.inte >= 40 && !player.hasStatusEffect(StatusEffects.KnowsChargeA)) {
             outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Charge Armor.</b>");
             player.createStatusEffect(StatusEffects.KnowsChargeA, 0, 0, 0, 0);
             return;
         }
         //Smart enough for heal and doesnt have it
-        if (player.inte >= 40 && !player.hasStatusEffect(StatusEffects.KnowsHeal)) {
+        if (player.inte >= 45 && !player.hasStatusEffect(StatusEffects.KnowsHeal)) {
             outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Heal.</b>");
             player.createStatusEffect(StatusEffects.KnowsHeal, 0, 0, 0, 0);
             return;
         }
         //Smart enough for blind and doesnt have it
-        if (player.inte >= 45 && !player.hasStatusEffect(StatusEffects.KnowsBlind)) {
+        if (player.inte >= 50 && !player.hasStatusEffect(StatusEffects.KnowsBlind)) {
             outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Blind.</b>");
             player.createStatusEffect(StatusEffects.KnowsBlind, 0, 0, 0, 0);
             return;
         }
         //Smart enough for pyre burst and doesnt have it
-        if (player.inte >= 50 && !player.hasStatusEffect(StatusEffects.KnowsPyreBurst)) {
+        if (player.inte >= 55 && !player.hasStatusEffect(StatusEffects.KnowsPyreBurst)) {
             outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Pyre Burst.</b>");
             player.createStatusEffect(StatusEffects.KnowsPyreBurst, 0, 0, 0, 0);
             return;
         }
         //Smart enough for chain lightning and doesnt have it
-        if (player.inte >= 55 && !player.hasStatusEffect(StatusEffects.KnowsChainLighting)) {
+        if (player.inte >= 60 && !player.hasStatusEffect(StatusEffects.KnowsChainLighting)) {
             outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Chain Lighting.</b>");
             player.createStatusEffect(StatusEffects.KnowsChainLighting, 0, 0, 0, 0);
             return;
         }
         //Smart enough for blizzard and doesnt have it
-        if (player.inte >= 60 && !player.hasStatusEffect(StatusEffects.KnowsBlizzard)) {
+        if (player.inte >= 65 && !player.hasStatusEffect(StatusEffects.KnowsBlizzard)) {
             outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Blizzard.</b>");
             player.createStatusEffect(StatusEffects.KnowsBlizzard, 0, 0, 0, 0);
             return;
         }
         //Smart enough for Mental Shield and doesnt have it
-        if (player.inte >= 65 && !player.hasStatusEffect(StatusEffects.KnowsMentalShield)) {
+        if (player.inte >= 70 && !player.hasStatusEffect(StatusEffects.KnowsMentalShield)) {
             outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Mental Shield.</b>");
             player.createStatusEffect(StatusEffects.KnowsMentalShield, 0, 0, 0, 0);
             return;
         }
         //Smart enough for Cure and doesnt have it
-        if (player.inte >= 70 && !player.hasStatusEffect(StatusEffects.KnowsCure)) {
+        if (player.inte >= 75 && !player.hasStatusEffect(StatusEffects.KnowsCure)) {
             outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Cure.</b>");
             player.createStatusEffect(StatusEffects.KnowsCure, 0, 0, 0, 0);
             return;
