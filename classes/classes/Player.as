@@ -5652,8 +5652,8 @@ use namespace CoC;
             var masteryArrays:Array = masteryBonusAttacks;
 			for each (var masteryArr:Array in masteryArrays) {
 				if (masteryArr[1]) {
-					for (var bonusPos:int = 0; bonusPos < masteryArr[3].length; ++bonusPos) {
-						if (combatMastery[masteryArr[0]].level >= masteryArr[3][bonusPos]) ++rval;
+					for (var bonusPos:int = 0; bonusPos < masteryArr[2].length; ++bonusPos) {
+						if (combatMastery[masteryArr[0]].level >= masteryArr[2][bonusPos]) ++rval;
 						else break;
 					}
 					break;
