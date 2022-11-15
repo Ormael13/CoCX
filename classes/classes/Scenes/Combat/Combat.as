@@ -4354,6 +4354,15 @@ public class Combat extends BaseContent {
         enemyAI();
     }
 
+    public static function playerWaitsOrDefends():Boolean {
+        return flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1 && flags[kFLAGS.WAIT_STAND_STILL] == 0
+            || player.hasStatusEffect(StatusEffects.Defend);
+    }
+
+    public static function autoHitPlayer():Boolean {
+        return flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1 && flags[kFLAGS.WAIT_STAND_STILL] == 1;
+    }
+
     public function seconwindGo():void {
         clearOutput();
         outputText("You enter your second wind, recovering your energy.\n\n");
@@ -6999,6 +7008,7 @@ public class Combat extends BaseContent {
     }
 
     public function combatParry():Boolean {
+        if (autoHitPlayer()) return false;
         var parryChance:int = 0;
         parryChance += combatParry2();
         return rand(100) <= parryChance;
@@ -7127,6 +7137,7 @@ public class Combat extends BaseContent {
     }
 
     public function combatBlock(doFatigue:Boolean = false):Boolean {
+        if (autoHitPlayer()) return false;
         //Set chance
         var blockChance:int = 20 + player.shieldBlock + Math.floor((player.str - monster.str) / 5);
         if (player.hasPerk(PerkLib.ShieldMastery) && player.tou >= 50 && player.isShieldsForShieldBash()) {

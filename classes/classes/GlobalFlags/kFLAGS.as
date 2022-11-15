@@ -231,7 +231,7 @@ public static const ROXANNE_TIMES_WON:int                                   		= 
 public static const ROXANNE_TIMES_LOST:int                                   		=  223; // -Times Lost Contest
 public static const ROXANNE_LAST_RESULT:int                                   		=  224; // -Who won contest last? (1 = pc, 2 = strahza)
 public static const ROXANNE_DICK_SIZE:int                                   		=  225; // -How long has Strahza gone without sex?
-public static const UNKNOWN_FLAG_NUMBER_00226:int                                   =  226;
+public static const WAIT_STAND_STILL:int                                   			=  226; // Disables evasion and blocking.
 public static const ROXANNE_BONUS_SCORE:int                                   		=  227; // -Drinking Contest Bonus Score
 public static const DIAPAUSE_FLUID_STORE:int                                   		=  228; // Diapause fluid store
 public static const DIAPAUSE_DISPLAYED:int                                   		=  229; // Diapause gain need displayed?

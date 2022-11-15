@@ -88,10 +88,8 @@ public class PerkMenu extends BaseContent {
 			outputText("\n<b>You can choose and adjust various effects related to your magic.</b>");
 			addButton(7, "Magic Opt",MagicOption);
 		}
-		if (player.hasPerk(PerkLib.LiftOff)) {
-			outputText("\n<b>You can choose and adjust various misc effects.</b>");
-			addButton(8, "Misc Opt",MiscOption);
-		}
+		outputText("\n<b>You can choose and adjust miscellaneous effects.</b>");
+		addButton(8, "Misc Opt",MiscOption);
 		//addButton (9, "PerkDB2", perkDatabase2); //WIP. //Apparently conflicts with Racial Score display
 		if (player.statusEffectv1(StatusEffects.SummonedElementals) >= 1) {
 			outputText("\n<b>You can adjust your elemental summons behaviour during combat.</b>");
@@ -145,26 +143,33 @@ public class PerkMenu extends BaseContent {
 		addButton(14, "Back", displayPerks);
 	}
 
-	public function MiscOption(e:MouseEvent = null):void {
+	public function MiscOption():void {
 		clearOutput();
 		menu();
 		var autoFlyingFlag:int = flags[kFLAGS.AUTO_FLIGHT];
         var setflag:Function = curry(setFlag,MiscOption);
+		var toggleFlagMisc:Function = curry(toggleFlag,MiscOption);
 		var autoFlyingType:Function = curry(setflag,kFLAGS.AUTO_FLIGHT);
         if (player.hasPerk(PerkLib.LiftOff)) {
 			outputText("You can choose to start flying or not at the start of each combat.\n");
-			outputText("Start ");
+			outputText("Start: <b>");
 			switch(autoFlyingFlag) {
 				case 0: outputText("on the ground"); break;
 				case 1: outputText("flying (by wings)"); break;
 				case 2: outputText("flying (on flying sword)"); break;
 				case 3: outputText("flying (using soulforce)"); break;
 			}
+			outputText("</b>");
+			if (autoFlyingFlag != 0) addButton(0, "On Ground", autoFlyingType,0);
+			if (player.canFly() && autoFlyingFlag != 1) addButton(1, "By Wings", autoFlyingType,1);
+			if (player.hasPerk(PerkLib.FlyingSwordPath) && autoFlyingFlag != 2) addButton(2, "By FlyingSw", autoFlyingType,2);
+			if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor) && autoFlyingFlag != 3) addButton(3, "By SF", autoFlyingType,3);
 		}
-		if (autoFlyingFlag != 0) addButton(0, "On Ground", autoFlyingType,0);
-		if (player.canFly() && autoFlyingFlag != 1) addButton(1, "By Wings", autoFlyingType,1);
-		if (player.hasPerk(PerkLib.FlyingSwordPath) && autoFlyingFlag != 2) addButton(2, "By FlyingS", autoFlyingType,2);
-		if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor) && autoFlyingFlag != 3) addButton(3, "By SF", autoFlyingType,3);
+		// auto hit mode :)
+		outputText("\n\nYou can choose to stand still when selecting the 'Wait' actions. This way, you won't attempt to dodge or block any attacks. Why would you do that?!");
+		outputText("\nCurrent 'Wait' behaviour: <b>" + (flags[kFLAGS.WAIT_STAND_STILL] ? "standing still" : "dodging") + "</b>");
+		addButton(5, "StandStill", curry(toggleFlagMisc, kFLAGS.WAIT_STAND_STILL));
+		//
 		addButton(14, "Back", displayPerks);
 	}
 
