@@ -63,7 +63,7 @@ use namespace CoC;
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function tentacleBeastDeepwoodsEncounterFn():void {
-			if (player.gender > 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00247] = 0;
+			if (player.gender > 0) flags[kFLAGS.TENTABEAST_CENT_GLESS_MET] = 0;
 			//Tentacle avoidance chance due to dangerous plants
 			if (player.hasKeyItem("Dangerous Plants") >= 0 && player.inte / 2 > rand(50)) {
 				clearOutput();

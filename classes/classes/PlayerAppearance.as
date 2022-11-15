@@ -91,22 +91,7 @@ public class PlayerAppearance extends BaseContent {
 		addButton(7, "Reflect", campActionsReflect).hint("Reflect on your current state and future plans. (Also would make your body fully adjust to any sudden changes to natural limits of your attributes after eating any odd things and etc.)");
 		addButton(10, "RacialScores", RacialScores);
 		addButton(11, "Gender Set.", GenderForcedSetting);
-		if (player.hasPerk(PerkLib.AuraOfCorruption) || player.hasPerk(PerkLib.AuraOfPurity)) addButton(12, "Aura Set.", toggleHornyHorseyAuraMenu);
 		flushOutputTextToGUI();
-	}
-
-	private function toggleHornyHorseyAuraMenu():void {
-		clearOutput();
-		if (player.hasStatusEffect(StatusEffects.HornyHorseyAuraOff)) {
-			outputText("You would stop suppress your Aura of "+(player.hasPerk(PerkLib.AuraOfCorruption)?"Corruption":"Purity")+".");
-			player.removeStatusEffect(StatusEffects.HornyHorseyAuraOff);
-		}
-		else {
-			outputText("You would start suppress your Aura of "+(player.hasPerk(PerkLib.AuraOfCorruption)?"Corruption":"Purity")+".");
-			player.createStatusEffect(StatusEffects.HornyHorseyAuraOff, 0, 0, 0, 0);
-		}
-		menu();
-		addButton(0, "Back", appearance);
 	}
 
 	public function	WeaponDisplay():void {

@@ -700,7 +700,6 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const TedOff:StatusEffectType              = mk("Ted Off");
 		public static const VenusOff:StatusEffectType            = mk("Venus Off");
 		public static const SpoodersOff:StatusEffectType         = mk("Belisa Off");
-		public static const HornyHorseyAuraOff:StatusEffectType  = mk("HornyHorseyAuraOff");
 		public static const ThereCouldBeOnlyOne:StatusEffectType = mk("There Could Be Only One");
 		public static const UmasMassage:StatusEffectType         = mk("Uma's Massage"); //v1 = bonus index; v2 = bonus value; v3 = remaining time
 		public static const Uniball:StatusEffectType             = mk("Uniball");

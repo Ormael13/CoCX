@@ -133,7 +133,7 @@ public class PerkMenu extends BaseContent {
 		}
 		if (player.hasPerk(PerkLib.Spellsword) || player.hasPerk(PerkLib.Spellarmor) || player.hasPerk(PerkLib.Battleflash) || player.hasPerk(PerkLib.Battlemage) || player.hasPerk(PerkLib.Battleshield) || player.hasPerk(PerkLib.FortressOfIntellect)) {
 			outputText("\n<b>You can adjust your spell autocast settings.</b>");
-			addButton(2, "Spells Opt",spellautocastOptions);
+			addButton(2, "Spells Opt",spellOptions);
 		}
 		if (player.hasPerk(PerkLib.DarkRitual) || player.hasPerk(PerkLib.HiddenJobBloodDemon)) {
 			if (player.hasPerk(PerkLib.DarkRitual)) outputText("\n<b>You can choose if you wish to use dark ritual and sacrifice health to empower your magic.</b>");
@@ -165,10 +165,15 @@ public class PerkMenu extends BaseContent {
 			if (player.hasPerk(PerkLib.FlyingSwordPath) && autoFlyingFlag != 2) addButton(2, "By FlyingSw", autoFlyingType,2);
 			if (player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor) && autoFlyingFlag != 3) addButton(3, "By SF", autoFlyingType,3);
 		}
+		if (player.hasPerk(PerkLib.AuraOfCorruption) || player.hasPerk(PerkLib.AuraOfPurity) || player.hasPerk(PerkLib.ArousingAura)) {
+			outputText("\n\nYou can suppress your auras. This way, they won't damage/arouse enemies.");
+			outputText("\nAuras: <b>" + (flags[kFLAGS.DISABLE_AURAS] ? "suppressed" : "active") + "</b>");
+			addButton(5, "Auras", curry(toggleFlagMisc, kFLAGS.DISABLE_AURAS));
+		}
 		// auto hit mode :)
 		outputText("\n\nYou can choose to stand still when selecting the 'Wait' actions. This way, you won't attempt to dodge or block any attacks. Why would you do that?!");
 		outputText("\nCurrent 'Wait' behaviour: <b>" + (flags[kFLAGS.WAIT_STAND_STILL] ? "standing still" : "dodging") + "</b>");
-		addButton(5, "StandStill", curry(toggleFlagMisc, kFLAGS.WAIT_STAND_STILL));
+		addButton(6, "StandStill", curry(toggleFlagMisc, kFLAGS.WAIT_STAND_STILL));
 		//
 		addButton(14, "Back", displayPerks);
 	}
@@ -351,7 +356,7 @@ public class PerkMenu extends BaseContent {
 		submenu(bd, CoC.instance.inCombat ? curry(combat.combatMenu, false) : displayPerks);
 	}
 
-	public function spellautocastOptions():void {
+	public function spellOptions():void {
 		var autocasts:Array = [
 			// Name, flag, requirement
 			["Charge Weapon", kFLAGS.AUTO_CAST_CHARGE_WEAPON, PerkLib.Spellsword],
@@ -360,7 +365,7 @@ public class PerkMenu extends BaseContent {
 			["Blink", kFLAGS.AUTO_CAST_BLINK, PerkLib.Battleflash],
 			["Mana Shield", kFLAGS.AUTO_CAST_MANA_SHIELD, PerkLib.Battleshield],
 		];
-		var toggleFlagMagic:Function = curry(toggleFlag, spellautocastOptions);
+		var toggleFlagMagic:Function = curry(toggleFlag, spellOptions);
 		var btn:int = 0;
 		clearOutput();
 		menu();
@@ -380,7 +385,7 @@ public class PerkMenu extends BaseContent {
 		function toggleFortressOfIntelect():void {
 			if (!player.hasStatusEffect(StatusEffects.FortressOfIntellect)) player.createStatusEffect(StatusEffects.FortressOfIntellect, 0, 0, 0, 0);
 			else player.removeStatusEffect(StatusEffects.FortressOfIntellect);
-			spellautocastOptions();
+			spellOptions();
 		}
 	}
 
