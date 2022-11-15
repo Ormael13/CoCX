@@ -7,6 +7,7 @@ import classes.*;
 import classes.BodyParts.*;
 import classes.GlobalFlags.*;
 import classes.Items.DynamicItems;
+import classes.Scenes.Combat.Combat;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
@@ -257,7 +258,7 @@ public class DemonSoldier extends Monster {
         //Second part: Unleash!
         else {
             outputText("The Demon places both hands, wrists together with palms splayed, behind the ever-growing energy ball, and makes a shoving motion towards you! ");
-            if (game.flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] > 0) { //Used Wait to avoid!
+            if (Combat.playerWaitsOrDefends()) { //Used Wait to avoid!
                 outputText("Your preparedness from waiting definitely helped you in this situation. You just about succeed in flinging yourself out of the way of the ball of pure lust-energy, much to the chagrin of the Demon.");
             } else { //Didn't use Wait? Get hit!
                 outputText("The pink energy washes over you, greatly inflaming your lusts.");

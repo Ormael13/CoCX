@@ -2,6 +2,7 @@ package classes.Scenes.Places.Boat
 {
 import classes.*;
 import classes.GlobalFlags.*;
+import classes.Scenes.Combat.Combat;
 import classes.Scenes.SceneLib;
 
 public class Marae extends Monster
@@ -65,7 +66,7 @@ public class Marae extends Monster
 			createStatusEffect(StatusEffects.Uber, 1, 0, 0, 0);
 		}
 		public function smiteHit():void {
-			if (game.flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) {
+			if (Combat.playerWaitsOrDefends()) {
 				outputText("You look up in the sky to see the lightning incoming! Thanks to your preparedness, you manage to leap away before the lightning hits you! ");
 			}
 			else {

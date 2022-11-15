@@ -28,6 +28,7 @@ import classes.IMutations.*;
 import classes.Items.ItemTags;
 import classes.Items.JewelryLib;
 import classes.Races.ElementalRace;
+import classes.Scenes.Combat.Combat;
 import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.SceneLib;
@@ -1057,6 +1058,7 @@ public class Creature extends Utils
 		 * speeds (1: narrowly avoid, 3: deftly avoid)
 		 */
 		public function calcSpeedDodge(attackSpeed:int):int {
+			if (this is Player && Combat.autoHitPlayer()) return 0;
 			var diff:Number = spe - attackSpeed;
 			var rnd:int = int(Math.random() * ((diff / 4) + 80));
 			if (rnd<=80) return 0;
@@ -4259,6 +4261,7 @@ public class Creature extends Utils
 	    */
 		public function getEvasionReason(useMonster:Boolean = true, attackSpeed:int = int.MIN_VALUE):String
 		{
+			if (this is Player && Combat.autoHitPlayer()) return null;
 			if (useMonster && game.monster.hasStatusEffect(StatusEffects.Blind) && rand(100) < 66) return "Blind"; //first, handle blind
 			if (useMonster && game.monster != null && attackSpeed == int.MIN_VALUE) attackSpeed = game.monster.spe;
 			if (calcSpeedDodge(attackSpeed) > 0) return "Speed"; // now, handle speed

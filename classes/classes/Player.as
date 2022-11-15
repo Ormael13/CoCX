@@ -36,6 +36,7 @@ import classes.Items.Vehicles;
 import classes.Items.Weapon;
 import classes.Items.WeaponRange;
 import classes.Races.HumanRace;
+import classes.Scenes.Combat.Combat;
 import classes.Scenes.Combat.CombatAbilities;
 import classes.Scenes.Combat.CombatAbility;
 import classes.Scenes.NPCs.AetherTwinsFollowers;
@@ -1209,13 +1210,13 @@ use namespace CoC;
 		//Natural Jouster perks req check
 		public function isMeetingNaturalJousterReq():Boolean
 		{
-			return (((isTaur() || isDrider() || canFly()) && spe >= 60) && hasPerk(PerkLib.Naturaljouster) && (!(PerkLib.WeaponNormalDoubleAttack) || (hasPerk(PerkLib.WeaponNormalDoubleAttack) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)))
-             || (spe >= 150 && hasPerk(PerkLib.Naturaljouster) && hasPerk(PerkLib.WeaponNormalDoubleAttack) && (!hasPerk(PerkLib.WeaponNormalDoubleAttack) || (hasPerk(PerkLib.WeaponNormalDoubleAttack) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)));
+			return (((isTaur() || isDrider() || canFly()) && spe >= 60) && hasPerk(PerkLib.Naturaljouster) && (!(PerkLib.WeaponNormalDoubleAttack) || (hasPerk(PerkLib.WeaponNormalDoubleAttack) && flags[kFLAGS.MULTIATTACK_STYLE] == 0)))
+             || (spe >= 150 && hasPerk(PerkLib.Naturaljouster) && hasPerk(PerkLib.WeaponNormalDoubleAttack) && (!hasPerk(PerkLib.WeaponNormalDoubleAttack) || (hasPerk(PerkLib.WeaponNormalDoubleAttack) && flags[kFLAGS.MULTIATTACK_STYLE] == 0)));
 		}
 		public function isMeetingNaturalJousterMasterGradeReq():Boolean
 		{
-			return (((isTaur() || isDrider() || canFly()) && spe >= 180) && hasPerk(PerkLib.NaturaljousterMastergrade) && (!hasPerk(PerkLib.WeaponNormalDoubleAttack) || (hasPerk(PerkLib.WeaponNormalDoubleAttack) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)))
-             || (spe >= 450 && hasPerk(PerkLib.NaturaljousterMastergrade) && hasPerk(PerkLib.WeaponNormalDoubleAttack) && (!hasPerk(PerkLib.WeaponNormalDoubleAttack) || (hasPerk(PerkLib.WeaponNormalDoubleAttack) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)));
+			return (((isTaur() || isDrider() || canFly()) && spe >= 180) && hasPerk(PerkLib.NaturaljousterMastergrade) && (!hasPerk(PerkLib.WeaponNormalDoubleAttack) || (hasPerk(PerkLib.WeaponNormalDoubleAttack) && flags[kFLAGS.MULTIATTACK_STYLE] == 0)))
+             || (spe >= 450 && hasPerk(PerkLib.NaturaljousterMastergrade) && hasPerk(PerkLib.WeaponNormalDoubleAttack) && (!hasPerk(PerkLib.WeaponNormalDoubleAttack) || (hasPerk(PerkLib.WeaponNormalDoubleAttack) && flags[kFLAGS.MULTIATTACK_STYLE] == 0)));
 		}
 		public function haveWeaponForJouster():Boolean
 		{
@@ -4309,7 +4310,7 @@ use namespace CoC;
 
 		public function minoCumAddiction(raw:Number = 10):void {
 			//Increment minotaur cum intake count
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00340]++;
+			flags[kFLAGS.MINOCUM_INTAKES]++;
 			//Fix if variables go out of range.
 			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] < 0) flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] = 0;
 			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] < 0) flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] = 0;
@@ -5618,75 +5619,52 @@ use namespace CoC;
             combatMastery[index].experience = experience;
 		}
 
-		public function calculateMultiAttacks():Number{
-			var rval:Number = 1;
-            var combatMasteryPos:int = 19;	// default to Normal Weapon size
-            if (isFeralCombat() || isUnarmedCombat()){
-				if (isFeralCombat()) combatMasteryPos = 0;
-				else {
-					if (isGauntletWeapon()) combatMasteryPos = 1;
-					else combatMasteryPos = 23;
+		public function get masteryBonusAttacks():Array {
+			return [
+				// Mastery, condition, array of attack boosts (from +1)
+				[Combat.MASTERY_FERAL, isFeralCombat(), [10, 20, 30, 40]],
+				[Combat.MASTERY_GAUNTLET, isGauntletWeapon(), [10, 20, 30, 40]],
+				[Combat.MASTERY_UNARMED, isUnarmedCombat(), [10, 20, 30, 40]],
+				[Combat.MASTERY_SMALL, weaponSpecials("Small") || weaponSpecials("Dual Small"), [10, 20, 30, 40]],
+				[Combat.MASTERY_LARGE, weaponSpecials("Large") || weaponSpecials("Dual Large"), [15, 30]],
+				[Combat.MASTERY_MASSIVE, weaponSpecials("Massive") || weaponSpecials("Dual Massive"), [30]],
+				[Combat.MASTERY_RANGED, isBowTypeWeapon() || isThrownTypeWeapon(), []],
+				[Combat.MASTERY_NORMAL, true, [10, 25, 40]] //the last one for "everything else"
+			];
+		}
+
+		public function nextBonusAttack():int {
+			var masteryArrays:Array = masteryBonusAttacks;
+			for each (var masteryArr:Array in masteryArrays) {
+				if (masteryArr[1]) {
+					for (var bonusPos:int = 0; bonusPos < masteryArr[3].length; ++bonusPos) {
+						if (combatMastery[masteryArr[0]].level < masteryArr[3][bonusPos])
+							return masteryArr[3][bonusPos];
+					}
+					return -1; // attack found, all bonuses received
 				}
 			}
-            else if(weaponSpecials("Small") || weaponSpecials("Dual Small")){combatMasteryPos = 18}
-            else if(weaponSpecials("Dual")){combatMasteryPos = 19}
-            else if(weaponSpecials("Large") || weaponSpecials("Dual Large")){combatMasteryPos = 20}
-            else if(weaponSpecials("Massive") || weaponSpecials("Dual Massive")){combatMasteryPos = 21}
-            else if(isBowTypeWeapon() || isThrownTypeWeapon()){combatMasteryPos = 22}
+			return -1; // attack not found
+		}
 
-
-			/*
-				40 for small + norm and 30 for rest
-				and it's 10 20 30 40
-				then 10 25 40
-				and finaly 15 30
-				i said 3 large atk not 4, 4 normal atk not 5 and 5 small atks not 6
-
-			 */
-            // Feral Attack Count
-            if(combatMasteryPos == 0){
-                if(combatMastery[combatMasteryPos].level >= 10) rval += 1;
-                if(combatMastery[combatMasteryPos].level >= 20) rval += 1;
-                if(combatMastery[combatMasteryPos].level >= 30) rval += 1;
-                if(combatMastery[combatMasteryPos].level >= 40) rval += 1;
-            }
-            // Unarmed Attack Count
-            if(combatMasteryPos == 23 || combatMasteryPos == 1){
-                if(combatMastery[combatMasteryPos].level >= 10) rval += 1;
-                if(combatMastery[combatMasteryPos].level >= 20) rval += 1;
-                if(combatMastery[combatMasteryPos].level >= 30) rval += 1;
-                if(combatMastery[combatMasteryPos].level >= 40) rval += 1;
-            }
-			// Small Weapon Attack Count
-			if(combatMasteryPos == 18){
-                if(combatMastery[combatMasteryPos].level >= 10) rval += 1;
-                if(combatMastery[combatMasteryPos].level >= 20) rval += 1;
-                if(combatMastery[combatMasteryPos].level >= 30) rval += 1;
-                if(combatMastery[combatMasteryPos].level >= 40) rval += 1;
+		public function calculateMultiAttacks():int {
+			var rval:Number = 1;
+            var masteryArrays:Array = masteryBonusAttacks;
+			for each (var masteryArr:Array in masteryArrays) {
+				if (masteryArr[1]) {
+					for (var bonusPos:int = 0; bonusPos < masteryArr[2].length; ++bonusPos) {
+						if (combatMastery[masteryArr[0]].level >= masteryArr[2][bonusPos]) ++rval;
+						else break;
+					}
+					break;
+				}
 			}
-			// Normal Weapon attack count
-            if(combatMasteryPos == 19){
-                if(combatMastery[combatMasteryPos].level >= 10) rval += 1;
-                if(combatMastery[combatMasteryPos].level >= 25) rval += 1;
-                if(combatMastery[combatMasteryPos].level >= 40) rval += 1;
-            }
-			// Large Weapon attack count
-            if(combatMasteryPos == 20){
-                if(combatMastery[combatMasteryPos].level >= 15) rval += 1;
-                if(combatMastery[combatMasteryPos].level >= 30) rval += 1;
-            }
-			// Massive Weapon attack count
-            if(combatMasteryPos == 21){
-                if(combatMastery[combatMasteryPos].level >= 30) rval += 1;
-            }
-
-
 			// Spear gains a few extra due to Spear Dancing Flurry
 			if(isSpearTypeWeapon() && isNotHavingShieldCuzPerksNotWorkingOtherwise() && hasPerk(PerkLib.ELFElvenSpearDancingFlurry1to4) && isElf()) {
                 rval += perkv1(PerkLib.ELFElvenSpearDancingFlurry1to4);
             }
 			// Feral starts off with +1 with history perk
-			if(combatMasteryPos === 0 && (hasPerk(PerkLib.HistoryFeral) || hasPerk(PerkLib.PastLifeFeral))){
+			if(isFeralCombat() && (hasPerk(PerkLib.HistoryFeral) || hasPerk(PerkLib.PastLifeFeral))){
                 rval += 1;
 			}
 

@@ -9,6 +9,7 @@ import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Combat.Combat;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
@@ -203,7 +204,7 @@ import classes.internals.*;
 		private function foxfireCanon2():void
 		{
 			var totaldmg:int = 0;
-			if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) {
+			if (Combat.playerWaitsOrDefends()) {
 				outputText("The air is suddenly filled with missiles of corrupted flame as each of the eight snake heads launches its own projectile at you! Thankfully you were prepared for it, and easily dip, duck, and dive through all of the flaming missiles, emerging unscathed.");
 			} else {
 				var hits:int = rand(9);

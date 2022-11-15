@@ -231,7 +231,7 @@ public static const ROXANNE_TIMES_WON:int                                   		= 
 public static const ROXANNE_TIMES_LOST:int                                   		=  223; // -Times Lost Contest
 public static const ROXANNE_LAST_RESULT:int                                   		=  224; // -Who won contest last? (1 = pc, 2 = strahza)
 public static const ROXANNE_DICK_SIZE:int                                   		=  225; // -How long has Strahza gone without sex?
-public static const UNKNOWN_FLAG_NUMBER_00226:int                                   =  226;
+public static const WAIT_STAND_STILL:int                                   			=  226; // Disables evasion and blocking.
 public static const ROXANNE_BONUS_SCORE:int                                   		=  227; // -Drinking Contest Bonus Score
 public static const DIAPAUSE_FLUID_STORE:int                                   		=  228; // Diapause fluid store
 public static const DIAPAUSE_DISPLAYED:int                                   		=  229; // Diapause gain need displayed?
@@ -252,7 +252,7 @@ public static const MADDIE_OFFER_COUNTER:int                                   	
 public static const COTTON_UNUSUAL_YOGA_BOOK_TRACKER:int                            =  244; // Cotton Unusual Yoga Guidebook tracker
 public static const COTTON_BREAKFAST_CLUB:int                                       =  245; // Cotton Breakfast Club
 public static const GOT_STOOTH_FROM_IZMA_TODAY:int                                  =  246; // Tiger Tooth Countdown
-public static const UNKNOWN_FLAG_NUMBER_00247:int                                   =  247; // Genderless centaur madness
+public static const TENTABEAST_CENT_GLESS_MET:int                                   =  247; // Genderless centaur madness
 public static const IZMA_PREGNANCY_DISCUSSED:int                                   	=  248; // Izma Preggers Discussion
 public static const IZMA_PREGNANCY_ENABLED:int                                   	=  249; // Pregnancy Enabled (1 = yes)
 public static const IZMA_INCUBATION:int                                             =  250; // Izma's Incubation timer
@@ -334,7 +334,7 @@ public static const MINOTAUR_SONS_TIMES_MET:int                                 
 public static const MINOTAUR_SONS_TRIBE_SIZE:int                                   	=  326; // Number of grown up minotaur offspring - TRIBE SIZE
 public static const MINOTAUR_SONS_CHILDREN:int                                   	=  327; // Number of minotaur sons pending growing up
 public static const MINOTAUR_SONS_GROW_COUNTDOWN:int                                =  328; // Grow up countdown
-public static const UNKNOWN_FLAG_NUMBER_00329:int                                   =  329;
+public static const DISABLE_AURAS:int                                   			=  329; // Disable all PC auras
 public static const MINOCUM_WARNING_COOLDOWN:int                                    =  330; // Cooldown on minotaur cum repeat messages
 public static const JOJO_TIMES_MILKED:int                                   		=  331; // Times Jojo Milked
 public static const JOJO_COCK_MILKING_COOLDOWN:int                                  =  332; // Jojo milk cooldown 4 hours
@@ -345,7 +345,7 @@ public static const AMILY_OFFERED_DEFURRY:int                                   
 public static const AMILY_NOT_FURRY:int                                             =  337; //  1 = Amily is no longer a flea-ridden furry who stinks up your carpet.
 public static const AMILY_IS_BATMAN:int                                             =  338; //  1 = You turned Amily into a human and then pissed all over her happy thoughts.  She now stalks you from rooftops while buying graphite helmets, utility belts, and a sweet, jetpowered car in the theme of a rat.
 public static const FAP_ARENA_RULES_EXPLAINED:int                                   =  339; // Fap Arena - rules been explaned?
-public static const UNKNOWN_FLAG_NUMBER_00340:int                                   =  340; // came in with minotaur cum
+public static const MINOCUM_INTAKES:int                                   			=  340; // came in with minotaur cum
 public static const KIHA_TOLL:int                                                   =  341; //
 public static const KIHA_TOLL_DURATION:int                                          =  342; //
 public static const TIMES_MET_KIHA:int                                              =  343; //
@@ -872,7 +872,7 @@ public static const ESSRAYLE_ESCAPED_DUNGEON:int                                
 public static const TOLD_MOTHER_TO_RELEASE_ESSY:int                                 =  864; //
 public static const ESSY_DUNGEON_FUCKED:int                                         =  865; //
 public static const ESSY_MET_IN_DUNGEON:int                                         =  866; //
-public static const DOUBLE_ATTACK_STYLE:int                                         =  867; // DOUBLE_ATTACK_STYLE" Description="prefered number of attacks is (X+1)
+public static const MULTIATTACK_STYLE:int                                         =  867; // MULTIATTACK_STYLE" Description="prefered number of attacks is (X+1)
 public static const SPELLS_CAST:int                                                 =  868; //
 public static const MILK_NAME:int                                                   =  869; //
 public static const MILK_SIZE:int                                                   =  870; //
@@ -2462,7 +2462,7 @@ public static const SOULFORCE_STORED_IN_AYO_ARMOR:int           			        = 245
 public static const ANEMONE_OR_SEA_ANEMONE:int                                      = 2454;
 public static const SKY_POISON_PEARL:int                         		            = 2455;
 public static const MULTIPLE_ARROWS_STYLE:int                      	                = 2456;
-public static const DOUBLE_STRIKE_STYLE:int                     	                = 2457;
+public static const MULTISHOT_STYLE:int                     	                = 2457;
 public static const ARROWS_ACCURACY:int            			                        = 2458;
 public static const PRISON_STORAGE_WEAPON_RANGE:int                                 = 2459;
 public static const ELEMENTAL_ARROWS:int                                 		    = 2460;

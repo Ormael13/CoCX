@@ -13,6 +13,7 @@ import classes.BodyParts.LowerBody;
 import classes.GlobalFlags.kFLAGS;
 import classes.Monster;
 import classes.PerkLib;
+import classes.Scenes.Combat.Combat;
 import classes.StatusEffects;
 import classes.VaginaClass;
 import classes.Scenes.NPCs.BelisaFollower;
@@ -158,7 +159,7 @@ public class Belisa extends Monster
 		
 		override protected function performCombatAction():void
 		{
-			if (BelisaFollower.BelisaEncounternum == 3 && flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) SceneLib.belisa.postFightOptionsWhitefireWait();
+			if (BelisaFollower.BelisaEncounternum == 3 && Combat.playerWaitsOrDefends()) SceneLib.belisa.postFightOptionsWhitefireWait();
 			var choice0:Number = rand(4);
 			switch (choice0) {
 				case 0:

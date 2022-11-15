@@ -9,6 +9,7 @@ import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.BodyParts.LowerBody;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Combat.Combat;
 import classes.Scenes.SceneLib;
 
 public class HeroslayerOmnibus extends Monster
@@ -96,7 +97,7 @@ public class HeroslayerOmnibus extends Monster
 				else {
 					removeStatusEffect(StatusEffects.Uber);
 					//(Avoid!)
-					if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) {
+					if (Combat.playerWaitsOrDefends()) {
 						outputText("She throws her hands out, palms facing you, and a rush of purple flame washes towards you.  Thanks to your decision to wait, it's easy to avoid the onrushing flames and her attack.\n\n");
 						outputText(capitalA + short + " sighs and asks, \"<i>Why would you move?  It would make you feel soooo good!</i>\"");
 					}

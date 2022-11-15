@@ -2,6 +2,7 @@ package classes.Scenes.Areas.Plains
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Combat.Combat;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
@@ -53,7 +54,7 @@ import classes.internals.*;
 				outputText("The gatekeeper raises his scimitars! Judging from the way he is holding, <b>he is going to cross-slash you!</b>");
 				return;
 			}
-			if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] > 0) {
+			if (Combat.playerWaitsOrDefends()) {
 				outputText("The gatekeeper slashes his scimitar towards you! Thanks to your preparedness, you manage to avoid his scimitars in the nick of time.");
 			}
 			else if (hasStatusEffect(StatusEffects.Blind) && rand(3) > 0) {
