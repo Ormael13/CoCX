@@ -872,7 +872,7 @@ public static const ESSRAYLE_ESCAPED_DUNGEON:int                                
 public static const TOLD_MOTHER_TO_RELEASE_ESSY:int                                 =  864; //
 public static const ESSY_DUNGEON_FUCKED:int                                         =  865; //
 public static const ESSY_MET_IN_DUNGEON:int                                         =  866; //
-public static const DOUBLE_ATTACK_STYLE:int                                         =  867; // DOUBLE_ATTACK_STYLE" Description="prefered number of attacks is (X+1)
+public static const MULTIATTACK_STYLE:int                                         =  867; // MULTIATTACK_STYLE" Description="prefered number of attacks is (X+1)
 public static const SPELLS_CAST:int                                                 =  868; //
 public static const MILK_NAME:int                                                   =  869; //
 public static const MILK_SIZE:int                                                   =  870; //
@@ -2462,7 +2462,7 @@ public static const SOULFORCE_STORED_IN_AYO_ARMOR:int           			        = 245
 public static const ANEMONE_OR_SEA_ANEMONE:int                                      = 2454;
 public static const SKY_POISON_PEARL:int                         		            = 2455;
 public static const MULTIPLE_ARROWS_STYLE:int                      	                = 2456;
-public static const DOUBLE_STRIKE_STYLE:int                     	                = 2457;
+public static const MULTISHOT_STYLE:int                     	                = 2457;
 public static const ARROWS_ACCURACY:int            			                        = 2458;
 public static const PRISON_STORAGE_WEAPON_RANGE:int                                 = 2459;
 public static const ELEMENTAL_ARROWS:int                                 		    = 2460;
