@@ -3248,15 +3248,69 @@ public class Combat extends BaseContent {
     }
 
     public function doArcheryDamage(damage:Number):void {
-        if (flags[kFLAGS.ELEMENTAL_ARROWS] == 1) doFireDamage(damage, true, true);
-        else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 2) doIceDamage(damage, true, true);
-        else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 3) doLightingDamage(damage, true, true);
-        else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) doDarknessDamage(damage, true, true);
-        else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 5) doWaterDamage(damage, true, true);
-        else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 6) doWindDamage(damage, true, true);
-        else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 7) doEarthDamage(damage, true, true);
-        else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 8) doAcidDamage(damage, true, true);
-        else doPhysicalDamage(damage, true, true);
+        if (flags[kFLAGS.ELEMENTAL_ARROWS] == 1) {
+			if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
+				doFireDamage(damage, true, true);
+				doMagicDamage(Math.round(damage * 0.2), true, true);
+			}
+			else doFireDamage(damage, true, true);
+		}
+        else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 2) {
+			if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
+				doIceDamage(damage, true, true);
+				doMagicDamage(Math.round(damage * 0.2), true, true);
+			}
+			else doIceDamage(damage, true, true);
+		}
+        else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 3) {
+			if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
+				doLightingDamage(damage, true, true);
+				doMagicDamage(Math.round(damage * 0.2), true, true);
+			}
+			else doLightingDamage(damage, true, true);
+		}
+        else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) {
+			if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
+				doDarknessDamage(damage, true, true);
+				doMagicDamage(Math.round(damage * 0.2), true, true);
+			}
+			else doDarknessDamage(damage, true, true);
+		}
+        else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 5) {
+			if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
+				doWaterDamage(damage, true, true);
+				doMagicDamage(Math.round(damage * 0.2), true, true);
+			}
+			else doWaterDamage(damage, true, true);
+		}
+        else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 6) {
+			if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
+				doWindDamage(damage, true, true);
+				doMagicDamage(Math.round(damage * 0.2), true, true);
+			}
+			else doWindDamage(damage, true, true);
+		}
+        else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 7) {
+			if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
+				doEarthDamage(damage, true, true);
+				doMagicDamage(Math.round(damage * 0.2), true, true);
+			}
+			else doEarthDamage(damage, true, true);
+		}
+        else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 8) {
+			if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
+				doAcidDamage(damage, true, true);
+				doMagicDamage(Math.round(damage * 0.2), true, true);
+			}
+			else doAcidDamage(damage, true, true);
+		}
+        else {
+			if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
+				doPhysicalDamage(damage, true, true);
+				doMagicDamage(Math.round(damage * 0.2), true, true);
+			}
+			else doPhysicalDamage(damage, true, true);
+		}
     }
 
     public function elementalArrowDamageMod(damage:Number):Number {
@@ -3947,7 +4001,11 @@ public class Combat extends BaseContent {
                 else if (monster.plural)
                     outputText(" and [monster he] stagger, collapsing onto each other from the wounds you've inflicted on [monster him]. ");
                 else outputText(" and [monster he] staggers, collapsing from the wounds you've inflicted on [monster him]. ");
-                doPhysicalDamage(damage, true, true);
+                if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
+					doPhysicalDamage(damage, true, true);
+					doMagicDamage(Math.round(damage * 0.2), true, true);
+				}
+				else doPhysicalDamage(damage, true, true);
                 if (crit) outputText(" <b>*Critical Hit!*</b>");
 				firearmsXP(rangeMasteryEXPgained(crit));
 				if (player.weaponRangePerk == "Dual Firearms") {
@@ -3959,30 +4017,104 @@ public class Combat extends BaseContent {
             } else {
                 if (player.isInGoblinMech() && (player.hasKeyItem("Repeater Gun") >= 0 || player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0)) {
                     outputText(".  It's clearly very painful. ");
-                    doPhysicalDamage(damage, true, true);
+                    if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
+						doPhysicalDamage(damage, true, true);
+						doMagicDamage(Math.round(damage * 0.2), true, true);
+					}
+					else doPhysicalDamage(damage, true, true);
 					firearmsXP(rangeMasteryEXPgained(crit));
 					if (player.weaponRangePerk == "Dual Firearms") {
 						dualWieldFirearmsXP(rangeMasteryEXPgained(crit));
 					}
 					if (player.weaponRange == weaponsrange.M1CERBE) {
-						if (player.hasPerk(PerkLib.AmateurGunslinger)) doPhysicalDamage(damage, true, true);
-						if (player.hasPerk(PerkLib.ExpertGunslinger)) doPhysicalDamage(damage, true, true);
-						if (player.hasPerk(PerkLib.MasterGunslinger)) doPhysicalDamage(damage, true, true);
-						if (player.hasPerk(PerkLib.LockAndLoad)) doPhysicalDamage(damage, true, true);
-						if (player.hasPerk(PerkLib.MasterGunslinger) && player.hasPerk(PerkLib.LockAndLoad)) doPhysicalDamage(damage, true, true);
+						if (player.hasPerk(PerkLib.AmateurGunslinger)) {
+							if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
+								doPhysicalDamage(damage, true, true);
+								doMagicDamage(Math.round(damage * 0.2), true, true);
+							}
+							else doPhysicalDamage(damage, true, true);
+						}
+						if (player.hasPerk(PerkLib.ExpertGunslinger)) {
+							if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
+								doPhysicalDamage(damage, true, true);
+								doMagicDamage(Math.round(damage * 0.2), true, true);
+							}
+							else doPhysicalDamage(damage, true, true);
+						}
+						if (player.hasPerk(PerkLib.MasterGunslinger)) {
+							if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
+								doPhysicalDamage(damage, true, true);
+								doMagicDamage(Math.round(damage * 0.2), true, true);
+							}
+							else doPhysicalDamage(damage, true, true);
+						}
+						if (player.hasPerk(PerkLib.LockAndLoad)) {
+							if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
+								doPhysicalDamage(damage, true, true);
+								doMagicDamage(Math.round(damage * 0.2), true, true);
+							}
+							else doPhysicalDamage(damage, true, true);
+						}
+						if (player.hasPerk(PerkLib.MasterGunslinger) && player.hasPerk(PerkLib.LockAndLoad)) {
+							if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
+								doPhysicalDamage(damage, true, true);
+								doMagicDamage(Math.round(damage * 0.2), true, true);
+							}
+							else doPhysicalDamage(damage, true, true);
+						}
 					}
                 } else {
                     if (!MSGControll) {
                         outputText(".  It's clearly very painful. ");
-                        if (player.weaponRange == weaponsrange.HARKON1) doTrueDamage(damage, true, true);
+                        if (player.weaponRange == weaponsrange.HARKON1) {
+							if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
+								doTrueDamage(damage, true, true);
+								doMagicDamage(Math.round(damage * 0.2), true, true);
+							}
+							else doTrueDamage(damage, true, true);
+						}
 						else {
-                            doPhysicalDamage(damage, true, true);
+                            if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
+								doPhysicalDamage(damage, true, true);
+								doMagicDamage(Math.round(damage * 0.2), true, true);
+							}
+							else doPhysicalDamage(damage, true, true);
 							if (player.weaponRange == weaponsrange.M1CERBE) {
-								if (player.hasPerk(PerkLib.AmateurGunslinger)) doPhysicalDamage(damage, true, true);
-								if (player.hasPerk(PerkLib.ExpertGunslinger)) doPhysicalDamage(damage, true, true);
-								if (player.hasPerk(PerkLib.MasterGunslinger)) doPhysicalDamage(damage, true, true);
-								if (player.hasPerk(PerkLib.LockAndLoad)) doPhysicalDamage(damage, true, true);
-								if (player.hasPerk(PerkLib.MasterGunslinger) && player.hasPerk(PerkLib.LockAndLoad)) doPhysicalDamage(damage, true, true);
+								if (player.hasPerk(PerkLib.AmateurGunslinger)) {
+									if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
+										doPhysicalDamage(damage, true, true);
+										doMagicDamage(Math.round(damage * 0.2), true, true);
+									}
+									else doPhysicalDamage(damage, true, true);
+								}
+								if (player.hasPerk(PerkLib.ExpertGunslinger)) {
+									if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
+										doPhysicalDamage(damage, true, true);
+										doMagicDamage(Math.round(damage * 0.2), true, true);
+									}
+									else doPhysicalDamage(damage, true, true);
+								}
+								if (player.hasPerk(PerkLib.MasterGunslinger)) {
+									if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
+										doPhysicalDamage(damage, true, true);
+										doMagicDamage(Math.round(damage * 0.2), true, true);
+									}
+									else doPhysicalDamage(damage, true, true);
+								}
+								if (player.hasPerk(PerkLib.LockAndLoad)) {
+									if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
+										doPhysicalDamage(damage, true, true);
+										doMagicDamage(Math.round(damage * 0.2), true, true);
+									}
+									else doPhysicalDamage(damage, true, true);
+								}
+								if (player.hasPerk(PerkLib.MasterGunslinger) && player.hasPerk(PerkLib.LockAndLoad)) {
+									if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
+										doPhysicalDamage(damage, true, true);
+										doMagicDamage(Math.round(damage * 0.2), true, true);
+									}
+									else doPhysicalDamage(damage, true, true);
+								}
 							}
 						}
 						firearmsXP(rangeMasteryEXPgained(crit));
