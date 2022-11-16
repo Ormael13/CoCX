@@ -221,14 +221,6 @@ use namespace CoC;
 				var potionCount: Number = player.numberOfPotions(potionType);
 				outputText("<b>"+potionType.name+":</b> : " + potionCount + ")\n");
 			}
-			/*
-			outputText("<b>Poultice:</b> : " + player.getKeyItem("poultice").value1 + ")\n");
-			outputText("<b>Energy drink:</b> : " + player.getKeyItem("energy drink").value1 + ")\n");
-			outputText("<b>Cure:</b> : " + player.getKeyItem("cure").value1 + ")\n");
-			outputText("<b>Painkiller:</b> : " + player.getKeyItem("painkiller").value1 + ")\n");
-			outputText("<b>Stimulant:</b> : " + player.getKeyItem("stimulant").value1 + ")\n");
-			outputText("<b>Perfume:</b> : " + player.getKeyItem("perfume").value1 + ")\n");
-			*/
 			outputText("\n\nWhich item will you use?");
 
 			menu();
