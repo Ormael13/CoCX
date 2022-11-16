@@ -385,7 +385,9 @@ public class Changelog extends BaseContent
 			outputText("-New range weapon (by Ormael): Throwing Knife - buyable at Erma shop in He'Xin'Dao. Cost 100 gems. Base atk is 2 and ammo size 10.\n");
 			outputText("-Nuked most fancy dodge texts, but now most dodge checks include all of your perks (Evade, Flexibility, mutations, etc.) Changed how dodge works. Before, it took the roll and compared it to your total evasion. Then it checked some perks with the same rolled number, making them ineffective if the first roll was bad. ");
 			outputText("Now, it rerolls the number for each perk check, probably making evasion perk-stacking even more OP than before. (Svalkash)\n");
-			outputText("-New White magic spell: Charge Range Weapon. Learned from White Book. Works like Charge Weapon but affect range not melee weapons. Range weapon atk won't be now boosted as before by Charge Weapon spell.\n");
+			outputText("-New White magic spell: Charge Range Weapon. Learned from White Book. Works like Charge Weapon but affects range weapons. Range weapon atk won't be now boosted as before by Charge Weapon spell.\n");
+			outputText("-'Defend' action triggers 'Wait' effects (like evasion from Ceraph's oneshot) Moved misc option: 'Suppress Auras'. Disables the effects of Purity, Corruption, Arousing auras. (Svalkash)\n");
+			outputText("-New misc option: 'Stand Still'. Makes you an easy target when you wait. Why would you turn it on? (Svalkash)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -394,9 +396,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-\n");// (Svalkash)
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
 			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
 			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
