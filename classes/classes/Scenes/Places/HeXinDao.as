@@ -762,16 +762,8 @@ public class HeXinDao extends BaseContent
         outputText("Behind the desk in the central point of the shop you see a centauress. She has no fancy or provocative clothes, and sports an average body. She moves quite gracefully around the shelves, despite her larger body.");
         outputText("\n\n\"<i>Greetings, my name is Erma Swiftarrow and this is my shop. Go ahead and look around, if something catches your eye, simply let me know,</i>\" she say all that almost entirely in one breath after noticing your presence.");
         menu();
-        addButton(0, weaponsrange.BOWLIGH.shortName, weaponrangeBuy, weaponsrange.BOWLIGH);
-        addButton(1, weaponsrange.BOWHUNT.shortName, weaponrangeBuy, weaponsrange.BOWHUNT);
-        addButton(2, weaponsrange.BOWLONG.shortName, weaponrangeBuy, weaponsrange.BOWLONG);
-        addButton(3, weaponsrange.BOWKELT.shortName, weaponrangeBuy, weaponsrange.BOWKELT);
-        addButton(5, weaponsrange.LCROSBW.shortName, weaponrangeBuy, weaponsrange.LCROSBW);
-        addButton(6, weaponsrange.HUXBOW_.shortName, weaponrangeBuy, weaponsrange.HUXBOW_);
-        addButton(7, weaponsrange.HEXBOW_.shortName, weaponrangeBuy, weaponsrange.HEXBOW_);
-        addButton(7, weaponsrange.O_JAVEL.shortName, weaponrangeBuy, weaponsrange.O_JAVEL);
-        addButton(8, weaponsrange.T_KNIFE.shortName, weaponrangeBuy, weaponsrange.T_KNIFE);
-        addButton(9, weaponsrange.SHURIKE.shortName, weaponrangeBuy, weaponsrange.SHURIKE);
+        addButton(1, "Shelf 1", ermaswiftarrowmerchantshelf1).hint("Bows and Crossbows");
+        addButton(3, "Shelf 2", ermaswiftarrowmerchantshelf2).hint("Other types");
         //addButton(4, weapons.MACE.shortName, weaponBuy, weapons.MACE);
         //addButton(8, weapons.MACE.shortName, weaponBuy, weapons.MACE);//awl - wymagać bedzie możliwość lewitacji czy coś od PC aby to używać
         //addButton(9, weapons.MACE.shortName, weaponBuy, weapons.MACE);//bow made for soul cultivator xD
@@ -779,25 +771,64 @@ public class HeXinDao extends BaseContent
         addButton(14, "Back", riverislandVillageStuff);
         statScreenRefresh();
     }
-
-    private function weaponrangeBuy(itype:ItemType):void {
+    public function ermaswiftarrowmerchantshelf1():void {
+        menu();
+        addButton(0, weaponsrange.BOWLIGH.shortName, weaponrangeBuy1, weaponsrange.BOWLIGH);
+        addButton(1, weaponsrange.BOWHUNT.shortName, weaponrangeBuy1, weaponsrange.BOWHUNT);
+        addButton(2, weaponsrange.BOWLONG.shortName, weaponrangeBuy1, weaponsrange.BOWLONG);
+        addButton(3, weaponsrange.BOWKELT.shortName, weaponrangeBuy1, weaponsrange.BOWKELT);
+        addButton(5, weaponsrange.LCROSBW.shortName, weaponrangeBuy1, weaponsrange.LCROSBW);
+        addButton(6, weaponsrange.HUXBOW_.shortName, weaponrangeBuy1, weaponsrange.HUXBOW_);
+        addButton(7, weaponsrange.HEXBOW_.shortName, weaponrangeBuy1, weaponsrange.HEXBOW_);
+        addButton(14, "Back", ermaswiftarrowmerchant);
+    }
+    public function ermaswiftarrowmerchantshelf2():void {
+        menu();
+        addButton(0, weaponsrange.ATKNIFE.shortName, weaponrangeBuy2, weaponsrange.ATKNIFE);
+        addButton(1, weaponsrange.RTKNIFE.shortName, weaponrangeBuy2, weaponsrange.RTKNIFE);
+        addButton(2, weaponsrange.STKNIFE.shortName, weaponrangeBuy2, weaponsrange.STKNIFE);
+        addButton(3, weaponsrange.TTKNIFE.shortName, weaponrangeBuy2, weaponsrange.TTKNIFE);
+        addButton(5, weaponsrange.O_JAVEL.shortName, weaponrangeBuy2, weaponsrange.O_JAVEL);
+        addButton(6, weaponsrange.T_KNIFE.shortName, weaponrangeBuy2, weaponsrange.T_KNIFE);
+        addButton(7, weaponsrange.SHURIKE.shortName, weaponrangeBuy2, weaponsrange.SHURIKE);
+        addButton(14, "Back", ermaswiftarrowmerchant);
+    }
+	
+    private function weaponrangeBuy1(itype:ItemType):void {
         clearOutput();
         outputText("The centauress nods at your purchase and replies: \"<i>That'll be " + itype.value / 10 + " spirit stones.</i>\"");
-        //outputText("The gruff metal-working husky gives you a slight nod and slams the weapon down on the edge of his stand.  He grunts, \"<i>That'll be " + itype.value + " gems.</i>\"");
         if(flags[kFLAGS.SPIRIT_STONES] < itype.value / 10) {
             outputText("\n\nYou count out your spirit stones and realize it's beyond your price range.");
             //Goto shop main menu
-            doNext(ermaswiftarrowmerchant);
+            doNext(ermaswiftarrowmerchantshelf1);
             return;
         }
         else outputText("\n\nDo you buy it?\n\n");
         //Go to debit/update function or back to shop window
-        doYesNo(curry(debitWeaponRange,itype), ermaswiftarrowmerchant);
+        doYesNo(curry(debitWeaponRange1,itype), ermaswiftarrowmerchantshelf1);
     }
-    private function debitWeaponRange(itype:ItemType):void {
+    private function debitWeaponRange1(itype:ItemType):void {
         flags[kFLAGS.SPIRIT_STONES] -= itype.value / 10;
         statScreenRefresh();
-        inventory.takeItem(itype, ermaswiftarrowmerchant);
+        inventory.takeItem(itype, ermaswiftarrowmerchantshelf1);
+    }
+    private function weaponrangeBuy2(itype:ItemType):void {
+        clearOutput();
+        outputText("The centauress nods at your purchase and replies: \"<i>That'll be " + itype.value / 10 + " spirit stones.</i>\"");
+        if(flags[kFLAGS.SPIRIT_STONES] < itype.value / 10) {
+            outputText("\n\nYou count out your spirit stones and realize it's beyond your price range.");
+            //Goto shop main menu
+            doNext(ermaswiftarrowmerchantshelf2);
+            return;
+        }
+        else outputText("\n\nDo you buy it?\n\n");
+        //Go to debit/update function or back to shop window
+        doYesNo(curry(debitWeaponRange2,itype), ermaswiftarrowmerchantshelf2);
+    }
+    private function debitWeaponRange2(itype:ItemType):void {
+        flags[kFLAGS.SPIRIT_STONES] -= itype.value / 10;
+        statScreenRefresh();
+        inventory.takeItem(itype, ermaswiftarrowmerchantshelf2);
     }
 	
 	public function ermaswiftarrowmerchantarcherytraining():void {

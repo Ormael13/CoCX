@@ -3603,7 +3603,23 @@ public class Combat extends BaseContent {
                         outputText(" Your opponents staggers, collapsing onto each other from the wounds you've inflicted on [monster him]. ");
                     else outputText(" Your opponent staggers, collapsing from the wounds you've inflicted on [monster him]. ");
                     if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
-						doPhysicalDamage(damage, true, true);
+						if (player.weaponRange == weaponsrange.RTKNIFE) {
+							damage = Math.round(damage * fireDamageBoostedByDao());
+							doFireDamage(damage, true, true);
+						}
+						else if (player.weaponRange == weaponsrange.STKNIFE) {
+							damage = Math.round(damage * iceDamageBoostedByDao());
+							doIceDamage(damage, true, true);
+						}
+						else if (player.weaponRange == weaponsrange.TTKNIFE) {
+							damage = Math.round(damage * lightningDamageBoostedByDao());
+							doLightingDamage(damage, true, true);
+						}
+						else if (player.weaponRange == weaponsrange.ATKNIFE) {
+							damage = Math.round(damage * darknessDamageBoostedByDao());
+							doDarknessDamage(damage, true, true);
+						}
+						else doPhysicalDamage(damage, true, true);
 						doMagicDamage(Math.round(damage * 0.2), true, true);
 					}
 					else doPhysicalDamage(damage, true, true);
@@ -3617,7 +3633,23 @@ public class Combat extends BaseContent {
                     if (!MSGControll) {
                         outputText(" ");
                         if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
-							doPhysicalDamage(damage, true, true);
+							if (player.weaponRange == weaponsrange.RTKNIFE) {
+								damage = Math.round(damage * fireDamageBoostedByDao());
+								doFireDamage(damage, true, true);
+							}
+							else if (player.weaponRange == weaponsrange.STKNIFE) {
+								damage = Math.round(damage * iceDamageBoostedByDao());
+								doIceDamage(damage, true, true);
+							}
+							else if (player.weaponRange == weaponsrange.TTKNIFE) {
+								damage = Math.round(damage * lightningDamageBoostedByDao());
+								doLightingDamage(damage, true, true);
+							}
+							else if (player.weaponRange == weaponsrange.ATKNIFE) {
+								damage = Math.round(damage * darknessDamageBoostedByDao());
+								doDarknessDamage(damage, true, true);
+							}
+							else doPhysicalDamage(damage, true, true);
 							doMagicDamage(Math.round(damage * 0.2), true, true);
 						}
 						else doPhysicalDamage(damage, true, true);
@@ -3765,7 +3797,23 @@ public class Combat extends BaseContent {
                     outputText(" and [monster he] stagger, collapsing onto each other from the wounds you've inflicted on [monster him]. ");
                 else outputText(" and [monster he] staggers, collapsing from the wounds you've inflicted on [monster him]. ");
                 if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
-					doPhysicalDamage(damage, true, true);
+					if (player.weaponRange == weaponsrange.RTKNIFE) {
+						damage = Math.round(damage * fireDamageBoostedByDao());
+						doFireDamage(damage, true, true);
+					}
+					else if (player.weaponRange == weaponsrange.STKNIFE) {
+						damage = Math.round(damage * iceDamageBoostedByDao());
+						doIceDamage(damage, true, true);
+					}
+					else if (player.weaponRange == weaponsrange.TTKNIFE) {
+						damage = Math.round(damage * lightningDamageBoostedByDao());
+						doLightingDamage(damage, true, true);
+					}
+					else if (player.weaponRange == weaponsrange.ATKNIFE) {
+						damage = Math.round(damage * darknessDamageBoostedByDao());
+						doDarknessDamage(damage, true, true);
+					}
+					else doPhysicalDamage(damage, true, true);
                     doMagicDamage(Math.round(damage * 0.2), true, true);
 				}
 				else doPhysicalDamage(damage, true, true);
@@ -3778,7 +3826,23 @@ public class Combat extends BaseContent {
                 if (!MSGControll) {
                     outputText(".  It's clearly very painful. ");
                     if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
-						doPhysicalDamage(damage, true, true);
+						if (player.weaponRange == weaponsrange.RTKNIFE) {
+							damage = Math.round(damage * fireDamageBoostedByDao());
+							doFireDamage(damage, true, true);
+						}
+						else if (player.weaponRange == weaponsrange.STKNIFE) {
+							damage = Math.round(damage * iceDamageBoostedByDao());
+							doIceDamage(damage, true, true);
+						}
+						else if (player.weaponRange == weaponsrange.TTKNIFE) {
+							damage = Math.round(damage * lightningDamageBoostedByDao());
+							doLightingDamage(damage, true, true);
+						}
+						else if (player.weaponRange == weaponsrange.ATKNIFE) {
+							damage = Math.round(damage * darknessDamageBoostedByDao());
+							doDarknessDamage(damage, true, true);
+						}
+						else doPhysicalDamage(damage, true, true);
 						doMagicDamage(Math.round(damage * 0.2), true, true);
 					}
 					else doPhysicalDamage(damage, true, true);
@@ -6136,8 +6200,8 @@ public class Combat extends BaseContent {
 					else i = flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] + 1;
 				}
 				else {
-					if (player.fatigue + 50 > player.maxFatigue()) i = flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] + 1;
-					else fatigue(50);
+					if (player.fatigue + 5 > player.maxFatigue()) i = flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] + 1;
+					else fatigue(5);
 				}
 			}
         }
@@ -6415,7 +6479,6 @@ public class Combat extends BaseContent {
     public function isDarknessTypeWeapon():Boolean {
         return ((player.weapon == weapons.ACLAYMO || player.weapon == weapons.ADAGGER) && (player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "amethyst"));
     }
-
 
     public function monsterPureDamageBonus(damage:Number):Number {
         if (monster.cor < 33) damage = Math.round(damage * 1.0);
