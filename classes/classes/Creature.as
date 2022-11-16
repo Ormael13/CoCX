@@ -4241,16 +4241,11 @@ public class Creature extends Utils
 			return chance;
 		}
 
-		public const EVASION_SPEED:String = "Speed"; // enum maybe?
+		public const EVASION_SPEED:String = "Speed";
 		public const EVASION_EVADE:String = "Evade";
 		public const EVASION_FLEXIBILITY:String = "Flexibility";
 		public const EVASION_MISDIRECTION:String = "Misdirection";
 		public const EVASION_UNHINDERED:String = "Unhindered";
-		public const EVASION_JUNGLESWANDERER:String = "Jungle's Wanderer";
-		public const EVASION_ILLUSION:String = "Illusion";
-		public const EVASION_FLYING:String = "Flying";
-		public const EVASION_CHESHIRE_PHASING:String = "Phasing";
-		public const EVASION_TITANIA_MINIMISE:String = "Minimise";
 
 		/**
 	    * Try to avoid and @return a reason if successfull or null if failed to evade.
@@ -4264,7 +4259,7 @@ public class Creature extends Utils
 			if (this is Player && Combat.autoHitPlayer()) return null;
 			if (useMonster && game.monster.hasStatusEffect(StatusEffects.Blind) && rand(100) < 66) return "Blind"; //first, handle blind
 			if (useMonster && game.monster != null && attackSpeed == int.MIN_VALUE) attackSpeed = game.monster.spe;
-			if (calcSpeedDodge(attackSpeed) > 0) return "Speed"; // now, handle speed
+			if (attackSpeed != int.MIN_VALUE && spe - attackSpeed > 0 && calcSpeedDodge(attackSpeed) > 0) return "Speed"; // now, handle speed
 			var generalevasion:Number = 0;
 			var flyeavsion:Number = 20;
 			if (hasPerk(PerkLib.Evade)) generalevasion += 5;
