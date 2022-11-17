@@ -8215,7 +8215,8 @@ public class Combat extends BaseContent {
         if (mod < 0) {
             mod *= fatigueRecoveryMultiplier();
         }
-        player.fatigue += mod;
+        if (player.hasStatusEffect(StatusEffects.AlterBindScroll3)) return;
+		else player.fatigue += mod;
         if (mod < 0) {
             mainView.statsView.showStatUp('fatigue');
         }

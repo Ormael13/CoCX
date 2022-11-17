@@ -389,12 +389,12 @@ public class Changelog extends BaseContent
 			outputText("-'Defend' action triggers 'Wait' effects (like evasion from Ceraph's oneshot) Moved misc option: 'Suppress Auras'. Disables the effects of Purity, Corruption, Arousing auras. (Svalkash)\n");
 			outputText("-New misc option: 'Stand Still'. Makes you an easy target when you wait. Why would you turn it on? (Svalkash)\n");
 			outputText("-Added option to pay Neisa her waged outside early morning scene.\n");
-			outputText("-New range weapon (by Ormael): Amethyst Throwing Knife - buyable at Erma shop in He'Xin'Dao. Cost 30 spirit stones. After casting Charge Range Weapon spell deal darkness damage. Base atk is 3 and ammo size 15.\n");
-			outputText("-New range weapon (by Ormael): Ruby Throwing Knife - buyable at Erma shop in He'Xin'Dao. Cost 30 spirit stones. After casting Charge Range Weapon spell deal fire damage. Base atk is 3 and ammo size 15.\n");
-			outputText("-New range weapon (by Ormael): Sapphire Throwing Knife - buyable at Erma shop in He'Xin'Dao. Cost 30 spirit stones. After casting Charge Range Weapon spell deal ice damage. Base atk is 3 and ammo size 15.\n");
-			outputText("-New range weapon (by Ormael): Topaz Throwing Knife - buyable at Erma shop in He'Xin'Dao. Cost 30 spirit stones. After casting Charge Range Weapon spell deal lightning damage. Base atk is 3 and ammo size 15.\n");
+			outputText("-New range weapon (by Ormael): Amethyst Throwing Knife - buyable at Erma shop 2nd shelf in He'Xin'Dao. Cost 30 spirit stones. After casting Charge Range Weapon spell deal darkness damage. Base atk is 3 and ammo size 15.\n");
+			outputText("-New range weapon (by Ormael): Ruby Throwing Knife - buyable at Erma shop 2nd shelf in He'Xin'Dao. Cost 30 spirit stones. After casting Charge Range Weapon spell deal fire damage. Base atk is 3 and ammo size 15.\n");
+			outputText("-New range weapon (by Ormael): Sapphire Throwing Knife - buyable at Erma shop 2nd shelf in He'Xin'Dao. Cost 30 spirit stones. After casting Charge Range Weapon spell deal ice damage. Base atk is 3 and ammo size 15.\n");
+			outputText("-New range weapon (by Ormael): Topaz Throwing Knife - buyable at Erma shop 2nd shelf in He'Xin'Dao. Cost 30 spirit stones. After casting Charge Range Weapon spell deal lightning damage. Base atk is 3 and ammo size 15.\n");
 			outputText("-Erma shop menu divided into two subpages for bows/crossbows and other range weapons.\n");
-			outputText("-\n");
+			outputText("-'Undead Resistance' option on binding talisman for Jiangshi now include immunity to faitgue damage or costs. Which sounds and works as it say - PC Jiangshi will not gain fatigue of most of actions where it should otherwise. Been 'undead' do have some effects still even if not exactly as undead as in other realms ;)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

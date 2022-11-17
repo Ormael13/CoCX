@@ -140,7 +140,7 @@ public final class WeaponLib extends ItemConstants
 		public const RULER  :Weapon = new Weapon("Ruler  ", "Ruler", "ruler", "a ruler", "smash", 16, 2560, "The flat, wide rod has a center ridge on one side, flat on the other. The handle consists of a thick tang with a heavy iron bolster on either side.", "Large, Stun10", WT_MACE_HAMMER).withBuffs({
 			'psoulskillpower': +0.2
 		}) as Weapon;
-		public const S_BLADE:Weapon = new Weapon("S.Blade", "S.Blade", "inscribed spellblade", "a spellblade", "slash", 8, 640, "Forged not by a swordsmith but a sorceress, this arcane-infused blade amplifies your magic. Unlike the wizard staves it is based on, this weapon also has a sharp edge, a technological innovation which has proven historically useful in battle.", "Sword, StaffPart").withBuff('spellpower', +0.5) as Weapon;
+		public const S_BLADE:Weapon = new Weapon("S.Blade", "S.Blade", "inscribed spellblade", "a spellblade", "slash", 8, 640, "Forged not by a swordsmith but a sorceress, this arcane-infused blade amplifies your magic. Unlike the wizard staves it is based on, this weapon also has a sharp edge, a technological innovation which has proven historically useful in battle.", "", "Sword, StaffPart").withBuff('spellpower', +0.5) as Weapon;
 		public const S_GAUNT:Weapon = new Weapon("S.Gaunt","S.Gauntlet","spiked gauntlet","a spiked gauntlet","spiked punch",0,200,"This single metal gauntlet has the knuckles tipped with metal spikes.  Though it lacks the damaging potential of other weapons, the sheer pain of its wounds has a chance of stunning your opponent.", "Stun10", "Gauntlet");
 		public const S_RULER:Weapon = new Weapon("S.Ruler", "S.Ruler", "Storm Ruler", "a Storm Ruler", "smash", 15, 4800, "It's looking like a greatword with broken blade still possesing residual power of lightning. Also known as the Giantslayer for bringings giants to their knees.", "Large, Stun10", WT_MACE_HAMMER).withBuffs({
 			'psoulskillpower': +0.2
@@ -195,10 +195,10 @@ public final class WeaponLib extends ItemConstants
 		}) as Weapon;
 		public const ZWNDER :Zweihander = new Zweihander();
 		//Spellcasting weapon
-		public const S_SWORD:Weapon = new Weapon("S.Sword", "S.Sword", "Sorcerer sword", "a sorcerer sword", "slash", 25, 2000, "This weapon was forged by elven wizards. It is both an excelent catalyst and a deadly blade.", "Sword, StaffPart").withBuff('spellpower', +1) as Weapon;
+		public const S_SWORD:Weapon = new Weapon("S.Sword", "S.Sword", "Sorcerer sword", "a sorcerer sword", "slash", 25, 2000, "This weapon was forged by elven wizards. It is both an excelent catalyst and a deadly blade.", "", "Sword, StaffPart").withBuff('spellpower', +1) as Weapon;
 		public const A_WAND:Weapon = new Weapon("A.Wand", "A.Wand", "Apprentice wand", "an apprentice wand", "smack", 1, 150, "A low quality wand. Light and cheap it is commonly used by young apprentices who have started learning magic. Seeing as beginners tend to cause their catalyst to explode this is the perfect weapon for them.", "Wand", WT_WAND).withBuff('spellpower', +1) as Weapon;
 		public const H_WAND:Weapon = new Weapon("H.Wand", "H.Wand", "hellcat wand", "a hellcat wand", "smack", 1, 500, "A hellcat witch wand. Commonly used by hellcats to deliver their iconic fire magic.", "Wand", WT_WAND).withBuff('spellpower', +1.5) as Weapon;
-		public const WDAGGER:Weapon = new Weapon("WDagger","W.Dagger","witch dagger","a witch dagger","stab",3,500,"A dagger engraved with magical runes. While not the best catalyst around it is light, discreet and excelent for delivering spells.", "Small, Dagger, StaffPart", WT_DAGGER).withBuff('spellpower', +0.80) as Weapon;
+		public const WDAGGER:Weapon = new Weapon("WDagger","W.Dagger","witch dagger","a witch dagger","stab",3,500,"A dagger engraved with magical runes. While not the best catalyst around it is light, discreet and excelent for delivering spells.", "Small" , "Dagger, StaffPart").withBuff('spellpower', +0.80) as Weapon;
 		public const OCCULUS:Occulus = new Occulus();
 		public const ECLIPSE:Eclipse = new Eclipse();
 		public const NEXUS:Nexus = new Nexus(); //We may need to add a special event or forge for this item
