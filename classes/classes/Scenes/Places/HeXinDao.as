@@ -606,7 +606,7 @@ public class HeXinDao extends BaseContent
 			addButton(3, consumables.BALLOTD.shortName, weaponBuy5, consumables.BALLOTD);
 			addButton(4, consumables.POISONB.shortName, weaponBuy5, consumables.POISONB);
 			addButton(7, consumables.BANGBM3.shortName, weaponBuy5, consumables.BANGBM3);
-			addButton(8, consumables.BANGBM3.shortName, weaponBuy5, consumables.BANGBM3);
+			//addButton(8, consumables.BANGBM3.shortName, weaponBuy5, consumables.BANGBM3);
 		}
         else {
 			addButtonDisabled(0, "???", "Req. lvl 42+");
@@ -615,7 +615,7 @@ public class HeXinDao extends BaseContent
 			addButtonDisabled(3, "???", "Req. lvl 42+");
 			addButtonDisabled(4, "???", "Req. lvl 42+");
 			addButtonDisabled(7, "???", "Req. lvl 42+");
-			addButtonDisabled(8, "???", "Req. lvl 42+");
+			//addButtonDisabled(8, "???", "Req. lvl 42+");
 		}
         addButton(10, consumables.BANGB_M.shortName, weaponBuy5, consumables.BANGB_M);
         addButton(11, consumables.W_STICK.shortName, weaponBuy5, consumables.W_STICK);
@@ -1494,4 +1494,4 @@ public function soularena():void {
         doNext(camp.returnToCampUseOneHour);
     }
 }
-}
+}

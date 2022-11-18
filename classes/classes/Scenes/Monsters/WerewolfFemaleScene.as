@@ -80,7 +80,7 @@ public class WerewolfFemaleScene extends BaseContent
 			var x:Number = player.biggestCockIndex();
 			outputText("You pin the werewolf to the ground as your erect shaft drools in anticipation.\n\n");
 			outputText("\"<i>Ugh, I won't yield!</i>\"\n\n");
-			outputText("Yeah yeah, we’ll see about that. You're way too horny to stop now. You will use her/him however you want, and that starts with satisfying your desires.\n\n" +
+			outputText("Yeah yeah, we’ll see about that. You're way too horny to stop now. You will use [monster him] however you want, and that starts with satisfying your desires.\n\n" +
 					"You're going to start by getting a taste of that doggy hole right now. The werewolf begins to protest as you grab [monster his] hips forcing [monster him] on all fours. You move behind [monster him] and shove your " + cockDescript(x) + " right into [monster his] welcoming ass");
 			if(player.hasKnot()) outputText(", your knot expanding, trapping your shaft inside them");
 			outputText(".\n\n");
@@ -90,7 +90,7 @@ public class WerewolfFemaleScene extends BaseContent
 					" The cub pants, drool falling on the dirt as you fuck [monster him], your crotch slapping against [monster his] well shaped backside with each thrust." +
 					" [monster His] ass is constricting you like a vice." +
 					" Before long [monster his] tail starts wagging from side to side as you fuck [monster him] for several minutes establishing your dominion over [monster his] body.\n\n");
-			outputText("Finally you reach your climax howling in tandem with him/her as you fill his/her hole with your hot seed.\n\n");
+			outputText("Finally you reach your climax howling in tandem with [monster him] as you fill [monster his] hole with your hot seed.\n\n");
 			outputText("You keep painting [monster his] ass several times under the moonlight, once in a while switching to [monster his] mouth");
 			if(player.hasKnot()) outputText(" or [monster his] cunt");
 			outputText(", using and abusing all of [monster his] holes until dawn finally breaks, your cock still dripping cum on your defeated foe’s face. You took your sweet time to mark [monster him] over and over again as your playtoy.");

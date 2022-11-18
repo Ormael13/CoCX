@@ -195,10 +195,10 @@ public final class WeaponLib extends ItemConstants
 		}) as Weapon;
 		public const ZWNDER :Zweihander = new Zweihander();
 		//Spellcasting weapon
-		public const S_SWORD:Weapon = new Weapon("S.Sword", "S.Sword", "Sorcerer sword", "a sorcerer sword", "slash", 25, 2000, "This weapon was forged by elven wizards. It is both an excelent catalyst and a deadly blade.", "", "Sword, StaffPart").withBuff('spellpower', +1) as Weapon;
-		public const A_WAND:Weapon = new Weapon("A.Wand", "A.Wand", "Apprentice wand", "an apprentice wand", "smack", 1, 150, "A low quality wand. Light and cheap it is commonly used by young apprentices who have started learning magic. Seeing as beginners tend to cause their catalyst to explode this is the perfect weapon for them.", "Wand", WT_WAND).withBuff('spellpower', +1) as Weapon;
-		public const H_WAND:Weapon = new Weapon("H.Wand", "H.Wand", "hellcat wand", "a hellcat wand", "smack", 1, 500, "A hellcat witch wand. Commonly used by hellcats to deliver their iconic fire magic.", "Wand", WT_WAND).withBuff('spellpower', +1.5) as Weapon;
-		public const WDAGGER:Weapon = new Weapon("WDagger","W.Dagger","witch dagger","a witch dagger","stab",3,500,"A dagger engraved with magical runes. While not the best catalyst around it is light, discreet and excelent for delivering spells.", "Small" , "Dagger, StaffPart").withBuff('spellpower', +0.80) as Weapon;
+		public const S_SWORD:Weapon = new Weapon("S.Sword", "S.Sword", "Sorcerer sword", "a sorcerer sword", "slash", 25, 2000, "This weapon was forged by elven wizards. It is both an excelent catalyst and a deadly blade.", "", "Sword, StaffPart").withBuff('spellpower', +0.40) as Weapon;
+		public const A_WAND:Weapon = new Weapon("A.Wand", "A.Wand", "Apprentice wand", "an apprentice wand", "smack", 1, 150, "A low quality wand. Light and cheap it is commonly used by young apprentices who have started learning magic. Seeing as beginners tend to cause their catalyst to explode this is the perfect weapon for them.", "Wand", WT_WAND).withBuff('spellpower', +0.30) as Weapon;
+		public const H_WAND:Weapon = new Weapon("H.Wand", "H.Wand", "hellcat wand", "a hellcat wand", "smack", 1, 500, "A hellcat witch wand. Commonly used by hellcats to deliver their iconic fire magic.", "Wand", WT_WAND).withBuff('spellpower', +1) as Weapon;
+		public const WDAGGER:Weapon = new Weapon("WDagger","W.Dagger","witch dagger","a witch dagger","stab",3,500,"A dagger engraved with magical runes. While not the best catalyst around it is light, discreet and excelent for delivering spells.", "Small" , "Dagger, StaffPart").withBuff('spellpower', +0.20) as Weapon;
 		public const OCCULUS:Occulus = new Occulus();
 		public const ECLIPSE:Eclipse = new Eclipse();
 		public const NEXUS:Nexus = new Nexus(); //We may need to add a special event or forge for this item
