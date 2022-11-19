@@ -1928,6 +1928,11 @@ public class SaveUpdater extends NPCAwareContent {
 					player.addStatusValue(StatusEffects.BonusVCapacity, 1, -8000);
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.035;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.036) {
+				if (player.statusEffectv1(StatusEffects.Kelt) >= 100) player.changeStatusValue(StatusEffects.Kelt, 1, 100);
+				if (player.statusEffectv1(StatusEffects.Kindra) >= 150) player.changeStatusValue(StatusEffects.Kindra,1,150);
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.036;
+			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
 		}
@@ -2067,3 +2072,4 @@ public class SaveUpdater extends NPCAwareContent {
 }
 }
 
+
