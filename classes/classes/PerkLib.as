@@ -5046,8 +5046,8 @@ public class PerkLib
                     .requirePerk(JobHunter)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.tail.isAny(Tail.BEE_ABDOMEN, Tail.SCORPION, Tail.MANTICORE_PUSSYTAIL) || player.facePart.isAny(Face.SNAKE_FANGS, Face.SPIDER_FANGS)
-                                || player.lowerBodyPart.isAny(LowerBody.HYDRA, LowerBody.ATLACH_NACHA) || player.perkv1(IMutationsLib.VenomGlandsIM) >= 1;
-                    }, "Venom-producing tail, abdomen, fangs or having Venom Glands mutation");
+                                || player.lowerBodyPart.isAny(LowerBody.HYDRA, LowerBody.ATLACH_NACHA) || player.perkv1(IMutationsLib.VenomGlandsIM) >= 1 || player.hasKeyItem("Sky Poison Pearl") >= 0;
+                    }, "Venom-producing tail, abdomen, fangs or having Venom Glands mutation or possesing Sky Poison Pearl");
             DancersVitalityIV.requirePerk(DancersVitalityIII)
                     .requireSpe(105)
                     .requireNGPlus(3)
@@ -5075,8 +5075,9 @@ public class PerkLib
                     .requirePerk(JobRogue)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.tail.isAny(Tail.BEE_ABDOMEN, Tail.SCORPION, Tail.MANTICORE_PUSSYTAIL) || player.facePart.isAny(Face.SNAKE_FANGS, Face.SPIDER_FANGS)
-                                || player.lowerBodyPart.isAny(LowerBody.HYDRA, LowerBody.ATLACH_NACHA) || player.hasPerk(PerkLib.PoisonNails) || player.perkv1(IMutationsLib.VenomGlandsIM) >= 1;
-                    }, "Venom-producing tail, abdomen, fangs or having Venom Glands mutation");
+                                || player.lowerBodyPart.isAny(LowerBody.HYDRA, LowerBody.ATLACH_NACHA) || player.hasPerk(PerkLib.PoisonNails)
+								|| player.perkv1(IMutationsLib.VenomGlandsIM) >= 1 || player.hasKeyItem("Sky Poison Pearl") >= 0;
+                    }, "Venom-producing tail, abdomen, fangs or having Venom Glands mutation or possesing Sky Poison Pearl");
             //Tier 4 Speed Perks
             WildQuiver.requirePerk(Manyshot)
                     .requireSpe(125)

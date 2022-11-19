@@ -3078,7 +3078,7 @@ public class Combat extends BaseContent {
                     player.tailVenom -= player.VenomWebCost();
 					flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
                 }
-                if (player.tailType == Tail.SCORPION) {
+                if (player.tailType == Tail.SCORPION || player.hasKeyItem("Sky Poison Pearl") >= 0) {
                     outputText("  [monster he] seems to be effected by the poison, its movements slowing rapidly.");
 					var DBP:Number = 2;
 					var DBPa:Number = 1;
@@ -5931,7 +5931,7 @@ public class Combat extends BaseContent {
                                 player.tailVenom -= player.VenomWebCost();
                                 flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
                             }
-                            if (player.tailType == Tail.SCORPION) {
+                            if (player.tailType == Tail.SCORPION || player.hasKeyItem("Sky Poison Pearl") >= 0) {
                                 outputText("  [monster he] seems to be effected by the poison, its movement turning sluggish.");
                                 var damBa:Number = 1;
                                 if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) damBa *= 2;
@@ -10765,6 +10765,7 @@ public class Combat extends BaseContent {
 			if (player.lowerBody == LowerBody.HYDRA) venomCRecharge += 4;
 			if (player.lowerBody == LowerBody.ATLACH_NACHA) venomCRecharge *= 2;
 			if (player.hasPerk(PerkLib.AxillaryVenomGlands)) venomCRecharge *= 2;
+			if (player.hasKeyItem("Sky Poison Pearl") >= 0) venomCRecharge += 3;
 			venomCRecharge = Math.round(venomCRecharge);
 		}
 		return venomCRecharge;

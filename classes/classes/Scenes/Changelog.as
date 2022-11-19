@@ -395,7 +395,7 @@ public class Changelog extends BaseContent
 			outputText("-New range weapon (by Ormael): Topaz Throwing Knife - buyable at Erma shop 2nd shelf in He'Xin'Dao. Cost 30 spirit stones. After casting Charge Range Weapon spell deal lightning damage. Base atk is 3 and ammo size 15.\n");
 			outputText("-Erma shop menu divided into two subpages for bows/crossbows and other range weapons.\n");
 			outputText("-'Undead Resistance' option on binding talisman for Jiangshi now include immunity to faitgue damage or costs. Which sounds and works as it say - PC Jiangshi will not gain fatigue of most of actions where it should otherwise. Been 'undead' do have some effects still even if not exactly as undead as in other realms ;)\n");
-			outputText("-\n");
+			outputText("-Sky Poison Pearl now would be increasing max venom and venom generated per 5 min stats. It's as high bonuses as having scorpion stinger for both stats. It could be used to gain access to poisoned attacks and it effects are similar to scorpion poison.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

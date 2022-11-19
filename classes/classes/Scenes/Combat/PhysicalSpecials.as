@@ -1093,7 +1093,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 						player.tailVenom -= player.VenomWebCost();
 						flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
 					}
-					if (player.tailType == Tail.SCORPION) {
+					if (player.tailType == Tail.SCORPION || player.hasKeyItem("Sky Poison Pearl") >= 0) {
 						outputText("  [monster he] seems to be effected by the poison, its movement turning sluggish.");
 						var damage1Bcc:Number = 1;
 						if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) damage1Bcc *= 2;
@@ -5706,7 +5706,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				player.tailVenom -= player.VenomWebCost();
 				flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
 			}
-			if (player.tailType == Tail.SCORPION) {
+			if (player.tailType == Tail.SCORPION || player.hasKeyItem("Sky Poison Pearl") >= 0) {
 				outputText("  [monster he] seems to be effected by the poison, its movements slowing rapidly.");
 				var DBP:Number = 2;
 				var DBPa:Number = 1;
