@@ -519,6 +519,12 @@ public class MagicSpecials extends BaseCombatContent {
 				else bd.disable("Your throat is incredibly sore and hoarse. You aren’t sure you can talk let alone try that attack for more than a day.");
 			} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 		}
+			if (player.hasPerk(PerkLib.DragonLustPoisonBreath)) {
+				bd = buttons.add("Poison Breath", DragonLustPoisonBreath).hint("Unleash a cloud of aphrodisiac poison. Particularly powerful against groups");
+				if (player.tailVenom < player.VenomWebCost() * 5) {
+					bd.disable("You do not have enough poison in your glands to breath a cloud right now! (Req. "+player.VenomWebCost()*5+"+)");
+				} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+			}
 		if (player.faceType == Face.WOLF && player.hasKeyItem("Gleipnir Collar") >= 0) {
 			bd = buttons.add("FreezingBreath", fenrirFreezingBreath,"Freeze your foe solid with a powerful breath attack. \n\nWould go into cooldown after use for: "+(player.hasPerk(PerkLib.NaturalInstincts) ? "9":"10")+" rounds  \n<b>AoE attack.</b>");
 			bd.requireFatigue(spellCost(150));
@@ -2602,7 +2608,57 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.EclipsingShadowSu)) player.addStatusValue(StatusEffects.CounterEclipsingShadow, 3, 1);
 			enemyAI();
 		}
+	}
 
+	public function DragonLustPoisonBreath():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		if (combat.checkConcentration()) return; //Amily concentration
+		if (monster is LivingStatue)
+		{
+			outputText("This thing is just seldom immune to poison like come on its a statue!");
+			enemyAI();
+			return;
+		}
+		//Works similar to bee stinger, must be regenerated over time. Shares the same poison-meter
+		else {
+			outputText("You inhale deeply before releasing a cloud of aphrodisiacs poison on your foe!");
+			var venomType:StatusEffectType = StatusEffects.JabberwockyVenom;
+			var d2Bdcc:Number = 2;
+			var lustDmg2:Number = combat.calculateBasicTeaseDamage(20+rand(10));
+			var poisonScaling:Number = 1;
+			if (monster.plural){
+				d2Bdcc *=5;
+				lustDmg2 *=5
+			}
+			poisonScaling += player.lib/100;
+			poisonScaling += player.tou/100;
+			if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) poisonScaling += 1;
+			if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 1) poisonScaling += 2;
+			if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 2) poisonScaling += 2;
+			if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) poisonScaling += 2;
+			if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 4) poisonScaling += 2;
+			if (player.hasPerk(PerkLib.RacialParagon)) poisonScaling += 0.5;
+			if (player.hasPerk(PerkLib.Apex)) poisonScaling += 0.5;
+			if (player.hasPerk(PerkLib.AlphaAndOmega)) poisonScaling += 0.5;
+			if (player.hasPerk(PerkLib.NaturalArsenal)) poisonScaling += 0.5;
+			lustDmg2 *= poisonScaling;
+			lustDmg2 *= d2Bdcc;
+			monster.teased(Math.round(monster.lustVuln * lustDmg2), true);
+			combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
+			if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) d2Bdcc *= 2;
+			monster.statStore.addBuffObject({tou:-d2Bdcc}, "Poison",{text:"Poison"});
+			if(monster.hasStatusEffect(venomType))
+			{
+				monster.addStatusValue(venomType,2,2);
+				monster.addStatusValue(venomType,1,d2Bdcc);
+			}
+			else monster.createStatusEffect(venomType,d2Bdcc,2,0,0);
+		}
+		outputText("\n\n");
+		player.tailVenom -= player.VenomWebCost() * 5;
+		flags[kFLAGS.VENOM_TIMES_USED] += 1;
+		if (!combatIsOver()) enemyAI();
 	}
 //* Terrestrial Fire
 	public function fireballuuuuu():void {

@@ -1953,16 +1953,28 @@ public class PlayerInfo extends BaseContent {
 				if (player.hasPerk(PerkLib.AsuraStrength)) addButtonDisabled(4, "ASTR", "You already have this perk.");
 				else addButtonDisabled(4, "ASTR", "You do not have enough super perk points to obtain this perk.");
 			}
-			//12 -> page + 1 button
+			addButton(12, "Next", superPerkBuyMenu, page + 1);
 			addButton(13, "Previous", superPerkBuyMenu, page - 1);
 			addButton(14, "Back", playerMenu);
 		}
-		if (page == 3) {
+		if (page == 4) {
 			if (player.superPerkPoints > 0) {
-
+				addButtonDisabled(0, "HJ:??", "What could be here? Some new secret unreleased yet Hidden Job option? Or something else?");
+				//addButtonDisabled(0, "HJ:GS", "You do not have a free slot for this hidden job.");
 			}
 			else {
-
+				addButtonDisabled(0, "HJ:??", "What could be here? Some new secret unreleased yet Hidden Job option? Or something else?");
+			}
+			addButton(13, "Previous", superPerkBuyMenu, page - 1);
+			//13 -> page - 1 button
+			addButton(14, "Back", playerMenu);
+		}
+		if (page == 5) {
+			if (player.superPerkPoints > 0) {
+				
+			}
+			else {
+				
 			}
 			//12 -> page + 1 button
 			//13 -> page - 1 button

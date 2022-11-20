@@ -41,7 +41,7 @@ use namespace CoC;
 			if (rand(4) == 0) choice[choice.length] = 6;	 //Find nothing! The rand will be removed from this once the Ocean is populated with more encounters.
 			
 			//Ceani
-			if ((model.time.hours >= 12 && model.time.hours <= 22) && flags[kFLAGS.CEANI_FOLLOWER] < 1 && flags[kFLAGS.CEANI_ARCHERY_TRAINING] >= 4) {
+			if ((model.time.hours >= 12 && model.time.hours <= 22) && flags[kFLAGS.CEANI_FOLLOWER] < 1 && flags[kFLAGS.CEANI_ARCHERY_TRAINING] >= 4 && rand(4) == 0) {
 				ceaniScene.oceanInteractionsAfterArcheryTraining();
 				return;
 			}
