@@ -397,7 +397,7 @@ public class Changelog extends BaseContent
 			outputText("-'Undead Resistance' option on binding talisman for Jiangshi now include immunity to faitgue damage or costs. Which sounds and works as it say - PC Jiangshi will not gain fatigue of most of actions where it should otherwise. Been 'undead' do have some effects still even if not exactly as undead as in other realms ;)\n");
 			outputText("-Sky Poison Pearl now would be increasing max venom and venom generated per 5 min stats. It's as high bonuses as having scorpion stinger for both stats. It could be used to gain access to poisoned attacks and it effects are similar to scorpion poison.\n");
 			outputText("-Jabberwocky dragon breath been moved from physical specials to magical specials like all other breaths.\n");
-			outputText("-\n");
+			outputText("-Alraune Perfume effect would expire now - it would display hours left counter on stats page too.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

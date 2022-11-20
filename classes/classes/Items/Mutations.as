@@ -3205,7 +3205,7 @@ public final class Mutations extends MutationsHelper {
 			player.createStatusEffect(StatusEffects.KnowsNosferatu, 0, 0, 0, 0);
 			return;
 		}
-		if (player.hasPerk(PerkLib.PrestigeJobNecromancer)) {
+		if (player.hasPerk(PerkLib.PrestigeJobNecromancer) || player.hasPerk(PerkLib.PrestigeJobGreySage)) {
 			//Smart enough for Bone spirit and doesnt have it
 			if (player.inte >= 100 &&  !player.hasStatusEffect(StatusEffects.KnowsBoneSpirit)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new necromancer spell: Bone spirit.</b>");
@@ -3225,7 +3225,7 @@ public final class Mutations extends MutationsHelper {
 				return;
 			}
 		}
-		if (player.hasPerk(PerkLib.HexKnowledge)) {
+		if (player.hasPerk(PerkLib.HexKnowledge) || player.hasPerk(PerkLib.PrestigeJobGreySage)) {
 			//Smart enough for lifetap and doesnt have it
 			if (player.inte >= 150 && !player.hasStatusEffect(StatusEffects.KnowsLifetap)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new warlock spell: Lifetap.</b>");
@@ -3288,7 +3288,7 @@ public final class Mutations extends MutationsHelper {
             outputText("[pg]The contents of the book did little for your already considerable intellect.");
             KnowledgeBonus("int", 0.5);
         }
-        if (player.hasPerk(PerkLib.GreyMagic)) {
+        if (player.hasPerk(PerkLib.GreyMagic) || player.hasPerk(PerkLib.PrestigeJobGreySage)) {
             //Smart enough for mana shield and doesnt have it
             if (player.inte >= 50 && !player.hasStatusEffect(StatusEffects.KnowsManaShield)) {
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Mana Shield.</b>");
@@ -3475,7 +3475,7 @@ public final class Mutations extends MutationsHelper {
             player.createStatusEffect(StatusEffects.KnowsFireStorm, 0, 0, 0, 0);
             return;
         }
-		if (player.hasPerk(PerkLib.DivineKnowledge)) {
+		if (player.hasPerk(PerkLib.DivineKnowledge) || player.hasPerk(PerkLib.PrestigeJobGreySage)) {
 			//Smart enough for Aegis and doesnt have it
 			if (player.inte >= 150 && !player.hasStatusEffect(StatusEffects.KnowsAegis)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Aegis.</b>");
@@ -3524,7 +3524,7 @@ public final class Mutations extends MutationsHelper {
             outputText("[pg]The contents of the manuscript did little for your already considerable intellect.");
             KnowledgeBonus("int", 0.6);
         }
-		if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) {
+		if (player.hasPerk(PerkLib.HiddenJobBloodDemon) || player.hasPerk(PerkLib.PrestigeJobGreySage)) {
 			//Smart enough for Blood Missiles and doesnt have it
 			if (player.inte >= 20 && !player.hasStatusEffect(StatusEffects.KnowsBloodMissiles)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood spell: Blood Missiles.</b>");

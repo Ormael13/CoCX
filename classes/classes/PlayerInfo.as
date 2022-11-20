@@ -347,6 +347,9 @@ public class PlayerInfo extends BaseContent {
 			statEffects += "\n";
 		}
 
+		if (player.statusEffectv2(StatusEffects.ArousalPotion) > 0)
+			statEffects += "Alraune perfume - " + player.statusEffectv2(StatusEffects.ArousalPotion) + " hours remaining.\n";
+
 		if (player.statusEffectv1(StatusEffects.Bammed1) > 0) {
 			if (player.statusEffectv1(StatusEffects.Bammed1) == 3) statEffects += "Bammed <b>(Disables melee attacks permanently)</b>\n";
 			else statEffects += "Bammed - " + player.statusEffectv3(StatusEffects.Bammed1) + " hours remaining. (Disables melee attacks)\n";
@@ -1959,11 +1962,11 @@ public class PlayerInfo extends BaseContent {
 		}
 		if (page == 4) {
 			if (player.superPerkPoints > 0) {
-				addButtonDisabled(0, "HJ:??", "What could be here? Some new secret unreleased yet Hidden Job option? Or something else?");
+				addButtonDisabled(0, "HJ:?S", "What could be here? Some new secret unreleased yet Hidden Job option? Or something else? Maybe little hint would help...or it won't?");
 				//addButtonDisabled(0, "HJ:GS", "You do not have a free slot for this hidden job.");
 			}
 			else {
-				addButtonDisabled(0, "HJ:??", "What could be here? Some new secret unreleased yet Hidden Job option? Or something else?");
+				addButtonDisabled(0, "HJ:?S", "What could be here? Some new secret unreleased yet Hidden Job option? Or something else? Maybe little hint would help...or it won't?");
 			}
 			addButton(13, "Previous", superPerkBuyMenu, page - 1);
 			//13 -> page - 1 button
@@ -2078,6 +2081,13 @@ public class PlayerInfo extends BaseContent {
 		clearOutput();
 		outputText("You gained 'Asura Strength' super perk.");
 		doNext(superPerkBuyMenu, 3);
+	}
+	private function perkHiddenJobGreySage():void {
+		player.superPerkPoints--;
+		player.createPerk(PerkLib.PrestigeJobGreySage,0,0,0,0);
+		clearOutput();
+		outputText("You gained 'Hidden Job: Grey Sage' super perk.");
+		doNext(superPerkBuyMenu, 4);
 	}
 }
 }
