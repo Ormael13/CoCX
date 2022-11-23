@@ -44,6 +44,14 @@ public class CharViewContext extends ExecContext {
 			var game:CoC = CoC.instance;
 			var weaponSubtype:String = (player.weapon is DynamicWeapon) ? (player.weapon as DynamicWeapon).subtypeId : "";
 			var armorSubtype:String = (player.armor is DynamicArmor) ? (player.armor as DynamicArmor).subtypeId : "";
+
+			function showLegClothing():Boolean {
+				return !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && [LowerBody.GAZER, LowerBody.YETI, LowerBody.KIRIN, LowerBody.HOOFED, LowerBody.CLOVEN_HOOFED, LowerBody.HARPY, LowerBody.BUNNY, LowerBody.GOO, LowerBody.NAGA, LowerBody.HYDRA, LowerBody.DRIDER, LowerBody.ATLACH_NACHA, LowerBody.HINEZUMI, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.CANCER, LowerBody.GHOST_2].indexOf(player.lowerBody) == -1 && player.legCount == 2 && !player.isStancing();
+			}
+			function showPanty():Boolean {
+				return !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && [LowerBody.GAZER, LowerBody.GOO, LowerBody.NAGA, LowerBody.HYDRA, LowerBody.DRIDER, LowerBody.ATLACH_NACHA, LowerBody.HINEZUMI, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.CANCER, LowerBody.GHOST_2].indexOf(player.lowerBody) == -1 && player.legCount == 2 && !player.isStancing();
+			}
+
 			super([
 				{}, // local variables
 				character,
@@ -60,8 +68,8 @@ public class CharViewContext extends ExecContext {
 					DarkSlimeCore: player.hasPerk(PerkLib.DarkSlimeCore),
 					showClothing: !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && [Arms.GAZER, Arms.DISPLACER].indexOf(player.arms.type) == -1 && !player.isAlraune() && !player.isSitStancing() && !player.isGargoyleStancing(),
 					showArmClothing: !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && [Arms.GAZER, Arms.DISPLACER, Arms.GARGOYLE, Arms.GARGOYLE_2, Arms.YETI, Arms.HINEZUMI].indexOf(player.arms.type) == -1 && !player.hasStatusEffect(StatusEffects.CancerCrabStance) && !player.isStancing(),
-					showLegClothing: !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && [LowerBody.GAZER, LowerBody.YETI, LowerBody.KIRIN, LowerBody.HOOFED, LowerBody.CLOVEN_HOOFED, LowerBody.HARPY, LowerBody.BUNNY, LowerBody.GOO, LowerBody.NAGA, LowerBody.HYDRA, LowerBody.DRIDER, LowerBody.ATLACH_NACHA, LowerBody.HINEZUMI, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.CANCER, LowerBody.GHOST_2].indexOf(player.lowerBody) == -1 && player.legCount == 2 && !player.isStancing(),
-					showPanty: !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && [LowerBody.GAZER, LowerBody.GOO, LowerBody.NAGA, LowerBody.HYDRA, LowerBody.DRIDER, LowerBody.ATLACH_NACHA, LowerBody.HINEZUMI, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.CANCER, LowerBody.GHOST_2].indexOf(player.lowerBody) == -1 && player.legCount == 2 && !player.isStancing(),
+					showLegClothing: showLegClothing(),
+					showPanty: showPanty(),
 					PlayerHasViewableOutfit: !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && player.isWearingArmor(),
 					PlayerIsStancing: player.isStancing(),
 					PlayerIsFeralStancing: player.isFeralStancing(),
@@ -70,7 +78,7 @@ public class CharViewContext extends ExecContext {
 					playerHasWeaponWings: [Wings.VAMPIRE].indexOf(player.wings.type) == -1,
 					playerHasLargeLowerBody: player.isTaur() || [LowerBody.DRIDER, LowerBody.ATLACH_NACHA, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.CANCER].indexOf(player.lowerBody) != -1,
 					playerHasWeirdLowerBody: player.isTaur() || [LowerBody.DRIDER, LowerBody.ATLACH_NACHA, LowerBody.HYDRA, LowerBody.NAGA, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN].indexOf(player.lowerBody) != -1,
-					PlayerIsCriticalyAroused: player.lust >= 0.8 * player.maxLust(),
+					showDickDrippies: player.lust >= 0.8 * player.maxLust() && (player.lowerGarment.isNothing || !showPanty()) && (player.armor.isNothing || !showLegClothing()),
 
 					//Detect Weapon Skins
 					PlayerHasAWeapon: player.isWandTypeWeapon() || player.isStaffTypeWeapon() || player.isSwordTypeWeapon() || player.isAxeTypeWeapon() || player.isMaceHammerTypeWeapon() || player.isSpearTypeWeapon() || player.isSpearTypeWeapon() || player.isDuelingTypeWeapon(),
