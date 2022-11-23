@@ -595,7 +595,7 @@ package classes.Scenes.Places{
 			if (player.hasPerk(PerkLib.RacialParagon))
 				flags[kFLAGS.APEX_SELECTED_RACE] = Races.WOODELF;
 			player.removeAllRacialMutation();
-			doNext(camp.returnToCampUseSixteenHours);
+			doNext(camp.returnToCamp, 16);
 		}
 
 		public function GroveLayout():void {
