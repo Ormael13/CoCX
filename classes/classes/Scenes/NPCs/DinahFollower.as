@@ -8,22 +8,29 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.internals.Utils;
 
-public class DinahFollower extends NPCAwareContent
+public class DinahFollower extends NPCAwareContent implements TimeAwareInterface
+{
+	public function DinahFollower()
 	{
-		
-		public function DinahFollower() 
-		{}
+		EventParser.timeAwareClassAdd(this);
+	}
+
+	//Implementation of TimeAwareInterface
+	public function timeChange():Boolean
+	{
+		if (model.time.hours > 3) flags[kFLAGS.DINAH_ATTACKED_TODAY] = 0;
+		return false;
+	}
+
+	public function timeChangeLarge():Boolean {
+		return false;
+	}
+	//End of Interface Implementation
 		
 		private var _extra:Number = 0;
 		private var _roulette1:Number = 0;
 		private var _roulette2:Number = 0;
 		private var _roulette3:Number = 0;
-		
-		public function dinahAffection(changes:Number = 0):Number {
-			flags[kFLAGS.DINAH_AFFECTION] += changes;
-			if (flags[kFLAGS.DINAH_AFFECTION] > 100) flags[kFLAGS.DINAH_AFFECTION] = 100;
-			return flags[kFLAGS.DINAH_AFFECTION];
-		}
 		
 		public function DinahIntro1():void {
 			clearOutput();//non-camp intro
@@ -76,8 +83,9 @@ public class DinahFollower extends NPCAwareContent
 			if (rand(2) == 0) _roulette2 = rand(3);
 			if (rand(2) == 0) _roulette3 = rand(6);
 			outputText("\"<i>Oh, Great Lady Godiva, tell us your will!</i>\" With religious zeal, Dinah pulls a coin out of nowhere and throws it into the air. But before it can fall on the ground, it vanishes. ");
-			if (rand(4) > 0 && flags[kFLAGS.DINAH_AFFECTION] < 90) {
-				outputText("\"<i>The Coin Told Me To <b>Cuddle</b> You.</i>\" her smile becomes even wider. You've got a <i>very</i> bad feeling about this. It looks like there is no other choice. You've gotta to beat some sense into her before getting back to buisness.");
+			if (rand(4) > 0 && flags[kFLAGS.DINAH_AFFECTION] < 90 && !flags[kFLAGS.DINAH_ATTACKED_TODAY]) {
+				outputText("\"<i>The coin told me to <b>cuddle</b> you.</i>\" her smile becomes even wider. You've got a <b>very</b> bad feeling about this. It looks like there is no other choice. You've gotta to beat some sense into her before getting back to buisness.");
+				flags[kFLAGS.DINAH_ATTACKED_TODAY] = 1;
 				startCombat(new Dinah());
 			}
 			else {
@@ -87,20 +95,20 @@ public class DinahFollower extends NPCAwareContent
 		}
 		public function DinahMainMenu():void {
 			var atCamp:Boolean = (flags[kFLAGS.DINAH_LVL_UP] > 0.5);
-			var weather_choice:Array = ["sunny", "rainy", "snowy", "windy", "dankest", "reeking with undistilled lust"];
 			clearOutput();
-			if (atCamp) outputText("\"<i>What can I do for you, [name], this " + randomChoice(weather_choice) + " day?</i>\" Dinha asks you with a disturbingly wide and briliant smile on her face.");
+			if (atCamp) outputText("\"<i>What can I do for you today?</i>\" Dinha asks you with a disturbingly wide and briliant smile on her face.");
 			else outputText("\"<i>Will you gaze at me the whole day or will you buy something?</i>\" They grumble to themselves.");
 			menu();
 			addButton(2, "Shop", DinahShopMainMenu);
 			if (atCamp) {
 				addButton(0, "Appearance", DinahAppearance);
-				addButton(1, "Spar", DinahSparring);
-				addButtonDisabled(3, "Talk", "NYI");
-				addButtonDisabled(4, "Sex", "NYI");
-				if (player.hasStatusEffect(StatusEffects.DinahGift)) addButtonDisabled(5, "Gift", "She not feel like she want...");
-				else addButton(5, "Gift", recieveGIFTfromDinah);
-				addButton(6, "Give Item", giveDinahItem);
+				addButton(1, "Spar", DinahSparring)
+					.disableIf(flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 2, "You need a good sparring ring for that.");
+				//addButtonDisabled(3, "Talk", "NYI");
+				//addButtonDisabled(4, "Sex", "NYI");
+				addButton(5, "Gift", recieveGIFTfromDinah)
+					.disableIf(player.hasStatusEffect(StatusEffects.DinahGift), "She doesn't have anything for you right now... Come back later!");
+				//addButton(6, "Give Item", giveDinahItem);
 				addButton(14, "Back", camp.campFollowers);
 			}
 			else {
@@ -551,32 +559,25 @@ public class DinahFollower extends NPCAwareContent
 			clearOutput();
 			outputText("\"<i>Lady Godiva says that sometimes, it's good to share something without asking for money so...</i>\" as she talks, she pulls an object from the folds of her robe and tosses it to you. \"<i>...Take this. May Lady Godiva bless this place. Now, forgive me. I have other matters that occupy my time.</i>\" Not giving you chance to say anything, she shoos you away.");
 			player.createStatusEffect(StatusEffects.DinahGift, (16+rand(15)), 0, 0, 0);
-			/*var gift:Number = rand(20);
-			if (gift == 0) inventory.takeItem(consumables.KITGIFT, DinahMainMenu);
-			if (gift > 0) */inventory.takeItem(consumables.KITGIFT, DinahMainMenu);
+			inventory.takeItem(consumables.KITGIFT, DinahMainMenu);
 		}
 		
 		public function giveDinahItem():void {
 			clearOutput();
 			outputText("Which item do you want to offer to Dinah?");
 			menu();
-			var haveGift:Boolean = false;
 			var button:int = 0;
 			if (player.hasItem(consumables.P_S_MLK)) {
 				addButton(button++, "P.SuccMilk", giveDinahPurifiedSuccubusMilk);
-				haveGift = true;
 			}
 			if (player.hasItem(consumables.BROWNEG) || player.hasItem(consumables.L_BRNEG)) {
 				addButton(button++, "Brown Egg", giveDinahBrownEgg);
-				haveGift = true;
 			}
 			if (player.hasItem(consumables.PURPLEG) || player.hasItem(consumables.L_PRPEG)) {
 				addButton(button++, "Purple Egg", giveDinahPurpleEgg);
-				haveGift = true;
 			}
 			if (player.hasItem(consumables.REDUCTO)) {
 				addButton(button++, "Reducto", giveDinahReducto);
-				haveGift = true;
 			}
 			addButton(14, "Back", DinahMainMenu);
 		}

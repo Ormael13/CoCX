@@ -815,7 +815,8 @@ import classes.display.SpriteDb;
 				.disableIf(player.isGenderless(), "Not for genderless.");
 			if (LilyTalked > 4) addButton(3, "Learning", LearningWithLily).hint("Learning with Lily.");
 			else addButton(3, "House", LearningWithLily);
-			addButton(4, "Spar", LilySpar);
+			addButton(4, "Spar", LilySpar)
+				.disableIf(flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 2, "You need a good sparring ring for that.");
 			if (DriderTown.DriderTownComplete) addButton(13, "Back", SceneLib.dridertown.DriderTownEnter).hint("Return to main DriderTown menu.");
 			addButton(14, "Leave", camp.campLoversMenu);
 		}

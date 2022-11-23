@@ -475,7 +475,8 @@ public function ChiChiCampMainMenu():void {
 	addButton(0, "Appearance", chichiAppearance).hint("Examine Chi Chi's detailed appearance.");
 	addButton(1, "Talk", chichiTalksMenu);
 	addButton(2, "Shop", SoulskilsManualsShop);
-	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2 && flags[kFLAGS.CHI_CHI_DAILY_TRAINING] < 1) addButton(3, "Spar", chichiSparring);
+	addButton(3, "Spar", chichiSparring)
+		.disableIf(flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 2, "You need a good sparring ring for that.");
 	addButton(4, "Sex", chichiSex);
 	addButton(14, "Back", camp.campLoversMenu);
 }
