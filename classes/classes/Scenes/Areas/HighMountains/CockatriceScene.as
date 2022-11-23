@@ -158,7 +158,7 @@ public class CockatriceScene extends BaseContent {
         outputText("\"<i>So did I. Let’s do this again sometime.</i>\" he says with a smile before giving himself one last smooth over before "
             + "spreading his wings and taking off].");
         player.sexReward("cum", "Vaginal");
-        player.knockUpForce(PregnancyStore.PREGNANCY_COCKATRICE, PregnancyStore.INCUBATION_COCKATRICE);
+        player.knockUp(PregnancyStore.PREGNANCY_COCKATRICE, PregnancyStore.INCUBATION_COCKATRICE);
         player.cuntChange(monster.cockArea(0), true);
         cleanupAfterCombat();
     }
@@ -606,7 +606,7 @@ public class CockatriceScene extends BaseContent {
             + "He straightens up as his cock begins to retreat into his genital slit, wiping himself  clean before leaving you there on the ground. "
             + "As your mind grows fuzzy with post orgasmic contentment and you long for sleep, the last thing you see is the cockatrices swaying hips and tail as he continues on his way with a spring his step.");
         player.cuntChange(monster.cockArea(0), true);
-        player.knockUpForce(PregnancyStore.PREGNANCY_COCKATRICE, PregnancyStore.INCUBATION_COCKATRICE);
+        player.knockUp(PregnancyStore.PREGNANCY_COCKATRICE, PregnancyStore.INCUBATION_COCKATRICE);
         player.sexReward("cum", "Vaginal");
         cleanupAfterCombat();
     }
