@@ -2417,7 +2417,8 @@ public class Camp extends NPCAwareContent{
 		if (player.herbalismLevel < 10) button(5).disable("You lack the skill to craft this item.\n\nRequire Herbalism level 10");
 		if (player.itemCount(CoC.instance.consumables.RAUNENECT) == 0) button(5).disable("You lack the ingrediants to craft this item. \n\nAlraune nectar currently owned "+player.itemCount(CoC.instance.consumables.RAUNENECT)+"");
 		//THE GARDEN!
-		addButton(10, "Garden", Garden).hint("Manage your garden of medicinal plants")
+		// Nuked from the game until Lia fixes the save
+		//addButton(10, "Garden", Garden).hint("Manage your garden of medicinal plants")
 		//.disableIf(1!=1, "You haven't built a garden yet."); //TO DO
 		addButton(14, "Back", campActions);
 	}
