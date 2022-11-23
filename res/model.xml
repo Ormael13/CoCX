@@ -631,7 +631,7 @@
         <cell rect="607,70,40,28" name="clotheHead/machinistGoggles" dx="84" dy="32"/>
         <cell rect="486,1574,30,20" name="clotheHead/fairyQueenCirclet" dx="88" dy="38"/>
         <cell rect="1013,12,40,28" name="clotheHead/merchantClotheHat" dx="81" dy="30"/>
-        <cell rect="150,187,49,25" name="clotheHead_bg/warlockSkulls" dx="79" dy="36"/>
+        <cell rect="150,123,49,25" name="clotheHead_bg/warlockSkulls" dx="79" dy="36"/>
 		<cell rect="150,187,49,25" name="clotheHead_behindHorns/darkPriest" dx="79" dy="33"/>
 		<cell rect="201,210,49,25" name="clotheHead_behindHorns/priest" dx="79" dy="33"/>
         <cell rect="607,41,15,13" name="clotheAmulet/GoldStatAmulet" dx="97" dy="65"/>
