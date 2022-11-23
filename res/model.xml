@@ -1116,6 +1116,22 @@
         <cell rect="811,170,49,29" name="fullbodyBreast/Fundine" dx="79" dy="68"/>
         <cell rect="861,170,49,29" name="fullbodyBreast/Fsylph" dx="79" dy="68"/>
 		<cell rect="11,170,49,29" name="fullbodyBreast/Fimp" dx="79" dy="67"/>
+		<cell rect="11,530,49,29" name="breasts/Ghuman" dx="79" dy="69"/>
+        <cell rect="61,530,49,29" name="breasts/Gfur" dx="79" dy="69"/>
+        <cell rect="61,530,49,29" name="breasts/Gpanda" dx="79" dy="69"/>
+        <cell rect="111,530,49,29" name="breasts/Gchitin" dx="79" dy="69"/>
+        <cell rect="161,530,49,29" name="breasts/Gbee" dx="79" dy="69"/>
+        <cell rect="211,530,49,29" name="breasts/Gpscales" dx="79" dy="69"/>
+        <cell rect="261,530,49,29" name="breasts/Gscales" dx="79" dy="69"/>
+        <cell rect="311,530,49,29" name="breasts/Gorca" dx="79" dy="69"/>
+        <cell rect="361,530,49,29" name="breasts/Ggoo" dx="79" dy="69"/>
+        <cell rect="661,530,49,29" name="breasts/Gdscales" dx="79" dy="69"/>
+        <cell rect="911,530,49,29" name="breasts/Gshark" dx="79" dy="69"/>
+        <cell rect="711,530,49,29" name="fullbodyBreast/Ggnome" dx="79" dy="69"/>
+        <cell rect="761,530,49,29" name="fullbodyBreast/Gignis" dx="79" dy="69"/>
+        <cell rect="811,530,49,29" name="fullbodyBreast/Gundine" dx="79" dy="69"/>
+        <cell rect="861,530,49,29" name="fullbodyBreast/Gsylph" dx="79" dy="69"/>
+        <cell rect="11,530,49,29" name="fullbodyBreast/Gimp" dx="79" dy="69"/>
         <cell rect="411,110,49,29" name="breasts_pattern/Bpstripe" dx="79" dy="68"/>
         <cell rect="411,140,49,29" name="breasts_pattern/Bstripe" dx="79" dy="69"/>
         <cell rect="411,170,49,29" name="breasts_pattern/Blstripe" dx="79" dy="69"/>
@@ -1326,6 +1342,7 @@
 		<cell rect="1161,410,49,29" name="bra/cowBraSmall" dx="79" dy="68"/>
         <cell rect="1161,440,49,29" name="bra/cowBraMedium" dx="79" dy="68"/>
         <cell rect="1161,470,49,29" name="bra/cowBraLarge" dx="79" dy="68"/>
+		<cell rect="1161,530,49,29" name="bra/cowBraMega" dx="79" dy="69"/>
         <cell rect="11,500,49,29" name="panty/goblinTechnomancerPanty" dx="79" dy="99"/>
         <cell rect="61,500,49,29" name="panty/sexyBlackBikiniPanty" dx="79" dy="99"/>
         <cell rect="111,500,49,29" name="panty/sexyAquamarineBikiniPanty" dx="79" dy="99"/>
@@ -2811,6 +2828,24 @@
                 </case>
 				<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
                     <show part="breasts/F$skinx"/>
+                </case>
+				<case test="breastRows[0].breastRating lte BreastCup.G"><!--A-B-->
+					<if test="PlayerHasViewableOutfit == false">
+						<if test="PlayerHasABra == false">
+							<show part="breasts/G$skinx"/>
+							<else>
+								<if test="cowBra">
+									<show part="breasts/G$skinx"/>
+									<else>
+										<show part="breasts/F$skinx"/>
+									</else>
+								</if>
+							</else>
+						</if>
+						<else>
+							<show part="breasts/F$skinx"/>
+						</else>
+					</if>
                 </case>
                 <default>
                     <show part="breasts/F$skinx"/>
