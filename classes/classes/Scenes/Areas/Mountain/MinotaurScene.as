@@ -21,6 +21,7 @@ public function minoVictoryRapeChoices():void {
 		outputText("\n\nlthough you're not aroused enough to rape the minotaur, you realize your own need to breastfeed has not been met.  You could always let the poor thing have a drink...\n\nWill you?");
 	else outputText("\n\nYou're not aroused enough to rape him.")
 	//menu
+	menu();
 	addButton(9, "Kill", killMinotaur);
 	addButton(14, "Leave", cleanupAfterCombat);
 	if (player.lust >= 33) {
