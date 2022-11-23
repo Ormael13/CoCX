@@ -580,13 +580,14 @@ import coc.xxc.StoryContext;
 		public static const USEFATG_BLACK:int = 6;
 		public static const USEFATG_WHITE_NOBM:int = 7;
 		public static const USEFATG_BLACK_NOBM:int = 8;
-		protected function fatigue(mod:Number,type:Number=0):void {
+
+		protected function fatigue(mod:Number, type:Number = USEFATG_NORMAL):void {
 			EngineCore.fatigue(mod, type);
 		}
 
-		protected function useMana(mod:Number,type:Number=0):void
-		{
-			SceneLib.combat.useManaImpl(mod,type);
+		public static const USEMANA_NORMAL:int = 0;
+		protected function useMana(mod:Number, type:Number = USEMANA_NORMAL):void {
+			SceneLib.combat.useManaImpl(mod, type);
 		}
 
 		protected static function playerMenu():void { EventParser.playerMenu(); }

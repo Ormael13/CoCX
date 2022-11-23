@@ -34,21 +34,31 @@ public class AbstractSpell extends CombatAbility {
 		super(name, desc, targetType, timingType, tags);
 		this.useManaType = useManaType;
 	}
+
+	override public function manaCost():Number {
+		return combat.finalSpellCost(super.manaCost(), useManaType); //includes modifiers
+	}
 	
 	override public function useResources():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		//var realManaCost:Number = combat.finalSpellCost(manaCost(), useManaType);
 		var realManaCost:Number = manaCost();
 		var realWrathCost:Number = wrathCost();
-		
-		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
-		
-		if (isBloodMagicApplicable && (player.hasStatusEffect(StatusEffects.BloodMage) || player.hasPerk(PerkLib.BloodMage))) {
-			player.HP -= realManaCost;
-		} else if (isLastResortApplicable && player.hasPerk(PerkLib.LastResort) && player.mana < realManaCost) {
-			player.HP -= realManaCost;
-		} else {
-			useMana(realManaCost, useManaType);
+		if (realManaCost > 0) {
+			// Blood magic first
+			if (isBloodMagicApplicable && (player.hasStatusEffect(StatusEffects.BloodMage) || player.hasPerk(PerkLib.BloodMage)))
+				player.HP -= realManaCost;
+			else {
+				// Normal mana usage, if possible
+				var manaUsed:Number = Math.min(realManaCost, player.mana);
+				useMana(manaUsed); // no type - it's already accounted for!!!
+				realManaCost -= manaUsed;
+				// Now last resort, if not enough mana
+				if (realManaCost > 0 && isLastResortApplicable && player.hasPerk(PerkLib.LastResort))
+					player.HP -= realManaCost;
+			}
 		}
-		
+		combat.darkRitualCheckDamage();
 		player.wrath -= realWrathCost;
 		
 		flags[kFLAGS.SPELLS_CAST]++;
@@ -63,22 +73,17 @@ public class AbstractSpell extends CombatAbility {
 		if (uc) return uc;
 		
 		// Run our checks
-		var manaCost:Number = this.manaCost();
+		//var finalCost:Number = combat.finalSpellCost(manaCost(), useManaType);
+		var finalCost:Number = this.manaCost();
 		if (isBloodMagicApplicable && (player.hasStatusEffect(StatusEffects.BloodMage) || player.hasPerk(PerkLib.BloodMage))) {
-			if (player.HP - player.minHP() <= manaCost) {
-				return "Your hp is too low to cast this spell."
+			if (player.HP - player.minHP() <= finalCost) {
+				return "Your HP is too low to cast this spell."
 			}
-		} else {
-			if (player.mana < manaCost) {
-				if (isLastResortApplicable && player.hasPerk(PerkLib.LastResort)) {
-					if (player.HP < manaCost) {
-						return "Your hp and mana are too low to cast this spell."
-					}
-				} else {
-					return "Your mana is too low to cast this spell."
-				}
-			}
-		}
+		} else if (isLastResortApplicable && player.hasPerk(PerkLib.LastResort) && player.mana + (player.HP - player.minHP()) < finalCost) {
+			return "Your HP and mana are too low to cast this spell.";
+		} else if (player.mana < finalCost)
+			return "Your mana is too low to cast this spell.";
+
 		if (targetType == TARGET_ENEMY) {
 			if (monster.hasStatusEffect(StatusEffects.Dig)) {
 				return "You can only use buff magic while underground."

@@ -8127,54 +8127,41 @@ public class Combat extends BaseContent {
     public static const USEMANA_WHITE_HEAL:int = 10;
     public static const USEMANA_BLACK_HEAL:int = 11;
 
-    //Modify mana (mod>0 - subtract, mod<0 - regen)
-    public function useManaImpl(mod:Number, type:int = USEMANA_NORMAL):void {
-        //Spell reductions
+    public function finalSpellCost(base:Number, type:int = USEMANA_NORMAL):Number {
         switch (type) {
             case USEMANA_MAGIC:
             case USEMANA_MAGIC_NOBM:
-                mod = spellCost(mod);
-                break;
-			case USEMANA_GREY:
-			case USEMANA_GREY_NOBM:
-				mod = spellCostGrey(mod);
-				break;
+                return spellCost(base);
+            case USEMANA_GREY:
+            case USEMANA_GREY_NOBM:
+                return spellCostGrey(base);
             case USEMANA_WHITE:
             case USEMANA_WHITE_NOBM:
-                mod = spellCostWhite(mod);
-                break;
+                return spellCostWhite(base);
             case USEMANA_BLACK:
             case USEMANA_BLACK_NOBM:
-                mod = spellCostBlack(mod);
-                break;
+                return spellCostBlack(base);
             case USEMANA_MAGIC_HEAL:
-                mod = healCost(mod);
-                break;
+                return healCost(base);
             case USEMANA_WHITE_HEAL:
-                mod = healCostWhite(mod);
-                break;
+                return healCostWhite(base);
             case USEMANA_BLACK_HEAL:
-                mod = healCostBlack(mod);
-                break;
+                return healCostBlack(base);
+            default: // including normal
+                return base;
         }
-        //Blood mages use HP for spells
-        var damage:Number;
-        if (player.hasStatusEffect(StatusEffects.DarkRitual)) {
-            damage = player.maxHP() * 0.1;
-            player.takePhysDamage(damage);
-            //statScreenRefresh();
-        }
-        if (mod < 0) {
-            mod *= manaRecoveryMultiplier();
-        }
-        player.mana = boundFloat(0, player.mana - mod, player.maxMana());
-        if (mod < 0) {
-            mainView.statsView.showStatUp('mana');
-        }
-        if (mod > 0) {
-            mainView.statsView.showStatDown('mana');
-        }
-        statScreenRefresh();
+    }
+
+    public function darkRitualCheckDamage():void {
+        if (player.hasStatusEffect(StatusEffects.DarkRitual))
+            player.takePhysDamage(player.maxHP() * 0.1);
+    }
+
+    //Modify mana (mod>0 - subtract, mod<0 - regen)
+    public function useManaImpl(mod:Number, type:int = USEMANA_NORMAL):void {
+        mod = finalSpellCost(mod, type); //Spell reductions - spells do this for themselves!
+        if (mod < 0) mod *= manaRecoveryMultiplier();
+        EngineCore.ManaChange(-mod);
     }
 
     public function fatigueCost(mod:Number, type:Number = USEFATG_NORMAL):Number {
@@ -13542,6 +13529,7 @@ public function BreakOutWeb():void {
 public function HypnosisHeal():void {
     clearOutput();
     useMana(30, USEMANA_WHITE_HEAL);
+    combat.darkRitualCheckDamage();
     outputText("You initiate a healing spell. ");
     CombatAbilities.Heal.doEffect(false);
     outputText("\n\nIt's only when you finish your casting that [themonster] snaps out of the hypnosis...But it's too late. ");
@@ -13557,6 +13545,7 @@ public function HypnosisHeal():void {
 public function HypnosisDarknessShard():void {
     clearOutput();
     useMana(30, USEMANA_BLACK);
+    combat.darkRitualCheckDamage();
     outputText("You initiate a Darkness spell. ");
     CombatAbilities.DarknessShard.doEffect(false);
     CombatAbilities.DarknessShard.doEffect(false);
@@ -13573,6 +13562,7 @@ public function HypnosisDarknessShard():void {
 public function HypnosisDuskWave():void {
     clearOutput();
     useMana(30, USEMANA_BLACK);
+    combat.darkRitualCheckDamage();
     outputText("You initiate a Darkness spell. ");
     CombatAbilities.DuskWave.doEffect(false);
     CombatAbilities.DuskWave.doEffect(false);
