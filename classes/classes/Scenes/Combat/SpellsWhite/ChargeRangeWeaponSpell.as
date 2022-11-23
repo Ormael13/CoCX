@@ -54,21 +54,17 @@ public class ChargeRangeWeaponSpell extends AbstractWhiteSpell {
 	}
 	
 	private function weaponSizeBoost():Number {
-		var ab12r:Number = 1;/*
-		if (player.weaponSpecials("") || player.weaponSpecials("Dual")) ab12 *= 2;
-		if (player.weaponSpecials("Hybrid")) ab12 *= 2.5;
-		if (player.weaponSpecials("Large") || player.weaponSpecials("Dual Large")) ab12 *= 3;
-		if (player.weaponSpecials("Massive")) ab12 *= 4;
-		if (player.weapon == weapons.MGSWORD) ab12 *= 2;*/
+		var ab12r:Number = 1;
+		if (player.weaponRangePerk == "Bow" || player.weaponRangePerk == "Crossbow" || player.weaponRangePerk == "Rifle") ab12r *= 2;
+		if (player.weaponRangePerk == "Throwing") ab12r *= 2.5;
+		if (player.weaponRangePerk == "2H Firearm" || player.weaponRangePerk == "Dual Firearms") ab12r *= 3;
 		return ab12r;
 	}
-	
 	private function weaponSizeManaCost():Number {
-		var ba21r:Number = 1;/*
-		if (player.weaponSpecials("") || player.weaponSpecials("Dual Small")) ba21 *= 2;
-		if (player.weaponSpecials("Hybrid")) ba21 *= 3;
-		if (player.weaponSpecials("Large") || player.weaponSpecials("Dual")) ba21 *= 4;
-		if (player.weaponSpecials("Massive") || player.weaponSpecials("Dual Large")) ba21 *= 8;*/
+		var ba21r:Number = 1;
+		if (player.weaponRangePerk == "Bow" || player.weaponRangePerk == "Crossbow" || player.weaponRangePerk == "Rifle") ba21r *= 2;
+		if (player.weaponRangePerk == "Throwing") ba21r *= 2.5;
+		if (player.weaponRangePerk == "2H Firearm" || player.weaponRangePerk == "Dual Firearms") ba21r *= 3;
 		return ba21r;
 	}
 	

@@ -372,7 +372,7 @@ public class PerkMenu extends BaseContent {
 		outputText("You can choose to autocast or not specific buff spells at the start of the combat.");
 		for each (var autoItem:Array in autocasts) {
 			if (player.hasPerk(autoItem[2])) {
-				outputText("\n\n" + autoItem[0] + ": <b>" + (flags[autoItem[1]] ? "Autocast" : "Manual") + "</b>");
+				outputText("\n\n" + autoItem[0] + ": <b>" + (flags[autoItem[1]] ? "Manual" : "Autocast") + "</b>");
 				addButton(btn++, autoItem[0], curry(toggleFlagMagic, autoItem[1]));
 			}
 		}

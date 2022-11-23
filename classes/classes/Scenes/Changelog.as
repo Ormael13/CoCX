@@ -361,7 +361,7 @@ public class Changelog extends BaseContent
 			outputText("-Anger perk effect of 'adding 1/2 more atk with large/massive weapons when PC dropped below 60/20% of max HP' was replaced by 'Grade 2 and higher of berserker state grants 1 more attack per increased grade with large/massive weapons'.\n");
 			outputText("-Feral combat will raise mastery now even if wielding a claw weapon and in Feral stance. Added Damage bonuses for new masteries. (khovel)\n");
 			outputText("-Buttons can have icons - for items, abilities, locations, and anything else. (aimozg)\n");
-			outputText("-Prestige Job: Berserker perk have additional effect : Can trigger grade 2 and 3 of berserker state by loosing one time 50% of max OverHP. Each grade will shorten duration of the berserking by 2 round and increase atk bonus by 100% of base value.\n");
+			outputText("-Prestige Job: Berserker perk have additional effect: Can trigger grade 2 and 3 of berserker state by loosing one time 50% of max OverHP. Each grade will shorten duration of the berserking by 2 round and increase atk bonus by 100% of base value.\n");
 			outputText("-Endless Rage perk allow to reach 4th grade of berserking state. Wrath cost to sustain berserking state increased from 10 to 50.\n");
 			outputText("-New event perk: Natural Spellcasting. Gained by using elf tf when PC have both elf eyes and ears. Effect: Reduce all spell cooldowns by 1 round (2 if wearing the leaf necklace). (+1 to elf score)\n");
 			outputText("-Meditation would remove 20% of max lust instead of 50.\n");
@@ -369,7 +369,7 @@ public class Changelog extends BaseContent
 			outputText("-Kath 'Get Help' locks her random encounters. Still can be recruited after that Scylla scene. Added first SexMachine use to Recall menu. Marble purification quest doesn't check your or your followers' corruption anymore. (Svalkash)\n");
 			outputText("-Golem enemies won't be affected by displacer beast tentacle move causing milking enemy. Feral combat attack part with biting enemy won't cause bleed on enemies immune to bleed.\n");
 			outputText("-Using charge weapon spell would add magic dmg equal to 20% of phys dmg weapon dealing on attack. Now you can hurt all those pesky immune to physical damage enemies ;)\n");
-			outputText("-Multiattacks aren't costless now. All large and massive weapons req. 5 wrath per attack beyond 1st and others 50 fatigue. If PC lacks wrath or fatigue it would only reduce in that turn amount of multiattacks to 1 (2).\n");
+			outputText("-Multiattacks aren't costless now. All large and massive weapons req. 5 wrath per attack beyond 1st and others 5 fatigue. If PC lacks wrath or fatigue it would only reduce in that turn amount of multiattacks to 1 (2).\n");
 			outputText("-Unarmed attacks using fists (not feral) have now seperate mastery tracker of Unarmed mastery.\n");
 			outputText("-Bag of Cosmos now uses the new transfer menu with dragging. DragButton functionality fixed for S.P.Pearl (no more moving stacks of 15). Also, instead of swapping stacks, it tries to fill the target if possible. (Svalkash)\n");
 			outputText("-Power Attack / Shoot damage is now boosted by bonus to dmg from masteries.\n");
@@ -381,13 +381,26 @@ public class Changelog extends BaseContent
 			outputText("-Low tier magic immunity - some of the enemies now would have immunity to tier 1 spells. They still can be hurt by tier 2 or 3 spells thou or magical specials.\n");
 			outputText("-BF Gaunlets (Aether Twins 2nd evo) unarmed dmg bonus decreased from 4x to 2x.\n");
 			outputText("-Patchouli now lead PC lvl 30+ to Wonderland insterad of after having all areas explored. Still it's 50% chance to visit Wonderland over any other area.\n");
-			outputText("-New range weapon (by Ormael): Shuriken - buyable at Erma shop in He'Xin'Dao. Cost 100 gems. Base atk is 2 and ammo size 10.\n");
-			outputText("-New range weapon (by Ormael): Throwing Knife - buyable at Erma shop in He'Xin'Dao. Cost 100 gems. Base atk is 2 and ammo size 10.\n");
+			outputText("-New range weapon (by Ormael): Shuriken - buyable at Erma shop in He'Xin'Dao. Cost 10 spirit stones. Base atk is 2 and ammo size 10.\n");
+			outputText("-New range weapon (by Ormael): Throwing Knife - buyable at Erma shop in He'Xin'Dao. Cost 10 spirit stones. Base atk is 2 and ammo size 10.\n");
 			outputText("-Nuked most fancy dodge texts, but now most dodge checks include all of your perks (Evade, Flexibility, mutations, etc.) Changed how dodge works. Before, it took the roll and compared it to your total evasion. Then it checked some perks with the same rolled number, making them ineffective if the first roll was bad. ");
 			outputText("Now, it rerolls the number for each perk check, probably making evasion perk-stacking even more OP than before. (Svalkash)\n");
 			outputText("-New White magic spell: Charge Range Weapon. Learned from White Book. Works like Charge Weapon but affects range weapons. Range weapon atk won't be now boosted as before by Charge Weapon spell.\n");
 			outputText("-'Defend' action triggers 'Wait' effects (like evasion from Ceraph's oneshot) Moved misc option: 'Suppress Auras'. Disables the effects of Purity, Corruption, Arousing auras. (Svalkash)\n");
 			outputText("-New misc option: 'Stand Still'. Makes you an easy target when you wait. Why would you turn it on? (Svalkash)\n");
+			outputText("-Added option to pay Neisa her waged outside early morning scene.\n");
+			outputText("-New range weapon (by Ormael): Amethyst Throwing Knife - buyable at Erma shop 2nd shelf in He'Xin'Dao. Cost 30 spirit stones. After casting Charge Range Weapon spell deal darkness damage. Base atk is 3 and ammo size 15.\n");
+			outputText("-New range weapon (by Ormael): Ruby Throwing Knife - buyable at Erma shop 2nd shelf in He'Xin'Dao. Cost 30 spirit stones. After casting Charge Range Weapon spell deal fire damage. Base atk is 3 and ammo size 15.\n");
+			outputText("-New range weapon (by Ormael): Sapphire Throwing Knife - buyable at Erma shop 2nd shelf in He'Xin'Dao. Cost 30 spirit stones. After casting Charge Range Weapon spell deal ice damage. Base atk is 3 and ammo size 15.\n");
+			outputText("-New range weapon (by Ormael): Topaz Throwing Knife - buyable at Erma shop 2nd shelf in He'Xin'Dao. Cost 30 spirit stones. After casting Charge Range Weapon spell deal lightning damage. Base atk is 3 and ammo size 15.\n");
+			outputText("-Erma shop menu divided into two subpages for bows/crossbows and other range weapons.\n");
+			outputText("-'Undead Resistance' option on binding talisman for Jiangshi now include immunity to faitgue damage or costs. Which sounds and works as it say - PC Jiangshi will not gain fatigue of most of actions where it should otherwise. Been 'undead' do have some effects still even if not exactly as undead as in other realms ;)\n");
+			outputText("-Sky Poison Pearl now would be increasing max venom and venom generated per 5 min stats. It's as high bonuses as having scorpion stinger for both stats. It could be used to gain access to poisoned attacks and it effects are similar to scorpion poison.\n");
+			outputText("-Jabberwocky dragon breath been moved from physical specials to magical specials like all other breaths.\n");
+			outputText("-Alraune Perfume effect would expire now - it would display hours left counter on stats page too.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -404,7 +417,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");
 			outputText("-Fixed Bugs: Akbal been weak to fire not ice, Insightful Resources I-VI perks bonus to SF been lower than 5 per wis point, recovery of fatigue when waiting been lower than when attacking, Dao of Elements not giving additional % resistances after first 10%, missing bonus to acid elemental arrows, Holy Bands Managment locked behind having 3rd one band, ");
-			outputText("Centaur race bonuses error fixed to orginal values, Aether Twins following PC throu ascension in case they been equipped, Lusty Maiden Armor treated as already legendary item, wrong labeled gorgon eyes on race page, Jiaghsi curing leaving leftover effects of Cursed Tag options, tier 3 spells have incrrectly calculated cooldowns\n");
+			outputText("Centaur race bonuses error fixed to orginal values, Aether Twins following PC throu ascension in case they been equipped, Lusty Maiden Armor treated as already legendary item, wrong labeled gorgon eyes on race page, Jiaghsi curing leaving leftover effects of Cursed Tag options, tier 3 spells have incrrectly calculated cooldowns, Wood Elf archer training bugs\n");
 			//0.8s5.178
 			outputText("-Fixed bicorn horn score (aimozg)\n");
 			outputText("-Kirin, Fey-Draconic leg/armtype (respectively) added to DraconicBones Valid racetypes. -Fixed HxD merchants checking wrong currency for purchases (Jtecx PR#289)\n");
@@ -488,7 +501,10 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -519,12 +535,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

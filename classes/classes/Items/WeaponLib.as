@@ -105,12 +105,6 @@ public final class WeaponLib extends ItemConstants
 		public const LHSCYTH:LifehuntScythe = new LifehuntScythe();
 		public const LRAPIER:LustRapier = new LustRapier();
 		public const MACE   :DynamicWeapon = findCommonDynamicWeapon("mace");
-		public const RULER  :Weapon = new Weapon("Ruler  ", "Ruler", "ruler", "a ruler", "smash", 16, 2560, "The flat, wide rod has a center ridge on one side, flat on the other. The handle consists of a thick tang with a heavy iron bolster on either side.", "Large, Stun10", WT_MACE_HAMMER).withBuffs({
-			'psoulskillpower': +0.2
-		}) as Weapon;
-		public const S_RULER:Weapon = new Weapon("S.Ruler", "S.Ruler", "Storm Ruler", "a Storm Ruler", "smash", 15, 4800, "It's looking like a greatword with broken blade still possesing residual power of lightning. Also known as the Giantslayer for bringings giants to their knees.", "Large, Stun10", WT_MACE_HAMMER).withBuffs({
-			'psoulskillpower': +0.2
-		}) as Weapon;
 		public const MACGRSW:Weapon = new Weapon("Macgrsw","Mach.greatsword","Machine Greatsword","a Machine Greatsword","slash",19,4415,"This greatsword is half invention and half weapon. Instead of a sharp straight blade, the weapon’s sides are a set of metal teeth that constantly move in order to properly saw through flesh and more solid matter, creating grievous wounds. Very good for cutting down trees too.", "Large, Bleed100", "Exotic");
 		public const MASAMUN:Masamune = new Masamune();
 		public const MASTGLO:Weapon = new Weapon("MastGlo", "MasterGloves", "Master Gloves", "a Master Gloves", "punch", 0, 400, "These gloves belonged to Chi Chi. They seem to naturally strengthen the soulforce techniques of the user.", "",WT_GAUNTLET).withBuffs({
@@ -136,21 +130,27 @@ public final class WeaponLib extends ItemConstants
 		public const PURITAS:Weapon = new Weapon("Puritas", "Puritas", "Puritas", "Puritas, Element of Purity", "smack", 6, 960, "This staff is made from sacred wood, infused with Marae’s bark. Vines run along the staff, grown out of the wood itself. The top has an odd zigzag shape, with clear crystals adorning the recesses. The staff glows with power, radiating purity.", "Large, Staff", WT_STAFF).withBuff('spellpower', +0.6) as Weapon;
 		public const Q_GUARD:QueensGuard = new QueensGuard();
 		public const R_STAFF:Weapon = new Weapon("R.Staff", "R. Staff", "ruby staff", "a ruby staff", "smack", 2, 240, "This staff is made of very old wood and seems to tingle to the touch.  The top has ruby embedded in it, and the wood is worn smooth from lots of use.  It probably belonged to a wizard at some point and would aid magic use.", "Large, Staff", WT_STAFF).withBuff('spellpower', +0.8) as Weapon;
-		public const RDAGGER:Weapon = new Weapon("RDagger","R.Dagger","ruby dagger","an ruby dagger","stab",3,240,"This dagger is made of crimson metal and richly decorated with rubies and gold engravings. The magic within this crimson blade will flare up with magical flames when charged with magic.", "Small", "Dagger");
+		public const RCLAYMO:RubyClaymore = new RubyClaymore();
+		public const RDAGGER:Weapon = new Weapon("RDagger","R.Dagger","ruby dagger","a ruby dagger","stab",3,240,"This dagger is made of crimson metal and richly decorated with rubies and gold engravings. The magic within this crimson blade will flare up with magical flames when charged with magic.", "Small", "Dagger");
 		public const RIBBON :Weapon = new Weapon("Ribbon ","Ribbon","long ribbon","a long ribbon","whip-like slash",5,200,"A long ribbon made of fine silk that despite it seemly fragile appearance can deal noticable damage to even few enemies at once.  Perfect example of weapon that is more dangerous than it looks.", "Whipping", "Ribbon");
 		public const RIDINGC:Weapon = new Weapon("RidingC","RidingC","riding crop","a riding crop","whip-crack",5,200,"This riding crop appears to be made of black leather, and could be quite a painful (or exciting) weapon.").withBuffs({'teasedmg': 30}) as Weapon;;
 		public const RIPPER1:Weapon = new Weapon("Ripper1","Ripper1.0","Ripper 1.0","a Ripper 1.0","slash",24,14445,"Similar to the machine Greatsword, this weapon is highly mechanical. Instead of a sharp straight blade, the weapon’s sides are a set of sharp metal teeth that constantly move in order to properly saw through flesh and more solid matter, creating grievous wounds. Very good for cutting down trees too.", "Large, Bleed100", "Exotic");
 		public const RIPPER2:Weapon = new Weapon("Ripper2","Ripper2.0","Ripper 2.0","a Ripper 2.0","slash",29,37520,"Similar to the machine Greatsword, this weapon is highly mechanical. Instead of a sharp straight blade, the weapon’s sides are a set of sharp metal teeth that constantly move in order to properly saw through flesh and more solid matter, creating grievous wounds. The blades movement is so fast it creates heat along the length and thanks to a small system set, the saw is constantly aflame. Aside of cutting fleshy things in half, it is very good for taking down trees.", "Large, Bleed100", "Exotic");
 		public const RRAPIER:RaphaelsRapier = new RaphaelsRapier();
-		public const RCLAYMO:RubyClaymore = new RubyClaymore();
-		public const S_BLADE:Weapon = new Weapon("S.Blade", "S.Blade", "inscribed spellblade", "a spellblade", "slash", 8, 640, "Forged not by a swordsmith but a sorceress, this arcane-infused blade amplifies your magic. Unlike the wizard staves it is based on, this weapon also has a sharp edge, a technological innovation which has proven historically useful in battle.", "Sword, StaffPart").withBuff('spellpower', +0.5) as Weapon;
+		public const RULER  :Weapon = new Weapon("Ruler  ", "Ruler", "ruler", "a ruler", "smash", 16, 2560, "The flat, wide rod has a center ridge on one side, flat on the other. The handle consists of a thick tang with a heavy iron bolster on either side.", "Large, Stun10", WT_MACE_HAMMER).withBuffs({
+			'psoulskillpower': +0.2
+		}) as Weapon;
+		public const S_BLADE:Weapon = new Weapon("S.Blade", "S.Blade", "inscribed spellblade", "a spellblade", "slash", 8, 640, "Forged not by a swordsmith but a sorceress, this arcane-infused blade amplifies your magic. Unlike the wizard staves it is based on, this weapon also has a sharp edge, a technological innovation which has proven historically useful in battle.", "", "Sword, StaffPart").withBuff('spellpower', +0.5) as Weapon;
 		public const S_GAUNT:Weapon = new Weapon("S.Gaunt","S.Gauntlet","spiked gauntlet","a spiked gauntlet","spiked punch",0,200,"This single metal gauntlet has the knuckles tipped with metal spikes.  Though it lacks the damaging potential of other weapons, the sheer pain of its wounds has a chance of stunning your opponent.", "Stun10", "Gauntlet");
+		public const S_RULER:Weapon = new Weapon("S.Ruler", "S.Ruler", "Storm Ruler", "a Storm Ruler", "smash", 15, 4800, "It's looking like a greatword with broken blade still possesing residual power of lightning. Also known as the Giantslayer for bringings giants to their knees.", "Large, Stun10", WT_MACE_HAMMER).withBuffs({
+			'psoulskillpower': +0.2
+		}) as Weapon;
 		public const S_STAFF:Weapon = new Weapon("S.Staff", "S. Staff", "sapphire staff", "a sapphire staff", "smack", 2, 240, "This staff is made of very old wood and seems to tingle to the touch.  The top has sapphire embedded in it, and the wood is worn smooth from lots of use.  It probably belonged to a wizard at some point and would aid magic use.", "Large, Staff", WT_STAFF).withBuff('spellpower', +0.2) as Weapon;
 		public const SCARBLD:ScarredBlade = new ScarredBlade();
 		public const SCECOMM:Weapon = new Weapon("SceComm", "SceptreOfCom", "Sceptre of Command", "a Sceptre of Command", "smack", 4, 600, "This enchanted scepter empowers the abilities and control of summoners over their minions.");
 		public const SCIMITR:Weapon = new Weapon("Scimitr", "Scimitar", "scimitar", "a scimitar", "slash", 15, 600, "This curved sword is made for slashing.  No doubt it'll easily cut through flesh.", "", "Sword");
 		public const SCLAYMO:SapphireClaymore = new SapphireClaymore();
-		public const SDAGGER:Weapon = new Weapon("SDagger","S.Dagger","sapphire dagger","an sapphire dagger","stab",3,240,"This dagger is made of azure metal and richly decorated with sapphires and silver engravings. The magic within this azure blade will radiate magical frost when charged with magic.", "Small", "Dagger");
+		public const SDAGGER:Weapon = new Weapon("SDagger","S.Dagger","sapphire dagger","a sapphire dagger","stab",3,240,"This dagger is made of azure metal and richly decorated with sapphires and silver engravings. The magic within this azure blade will radiate magical frost when charged with magic.", "Small", "Dagger");
 		public const SESPEAR:SeraphicSpear = new SeraphicSpear();
 		public const SIM_SPR:Weapon = new Weapon("Sim_Spr", "Sim.Spear", "simple spear", "a simple spear", "thrust", 10, 250, "A fairly crude-looking spear", WP_AP30,"Spear")
 		public const SIM_STF:Weapon = new Weapon ("Sim_Stf", "Sim.Staff", "simple staff", "a simple staff", "smack", 11, 75, "A simple staff, faint pure energy emanates from it.\n", "Large, Staff",WT_STAFF).withBuff('spellpower', +0.1) as Weapon;
@@ -164,7 +164,7 @@ public final class WeaponLib extends ItemConstants
 		public const TCLAYMO:TopazClaymore = new TopazClaymore();
 		public const TIDAR:Tidarion = new Tidarion();
 		public const TKNIVES:TaintlessKnives = new TaintlessKnives();
-		public const TODAGGER:Weapon = new Weapon("ToDagger","T.Dagger","topaz dagger","an topaz dagger","stab",3,240,"This dagger is made of eversteel and richly decorated with yellow topazes and copper engravings. The magic within this shining blade will oversaturate the metal with electricity when charged with magic.", "Small", "Dagger");
+		public const TODAGGER:Weapon = new Weapon("ToDagger","T.Dagger","topaz dagger","a topaz dagger","stab",3,240,"This dagger is made of eversteel and richly decorated with yellow topazes and copper engravings. The magic within this shining blade will oversaturate the metal with electricity when charged with magic.", "Small", "Dagger");
 		public const TDAGGER:Weapon = new Weapon("TDagger","ThrowDagger","throwing dagger","a throwing dagger","stab",2,160,"A small blade that could be thrown.  Preferred weapon for the rogues.", "Small", "Dagger, Thrown");
 		public const TRIDAG :Weapon = new Weapon("TriDag ","TriDagger","tri-dagger","a tri-dagger","stab",4,320,"A dagger whose blade is shaped like a perfect equilateral triangle.  It has chance to leave bleeding wounds.", "Small, Bleed25", "Dagger");
 		public const TRASAXE:Weapon = new Weapon("TraSAxe","Train.S.Axe", "training soul axe", "a training soul axe", "cleave", 1, 80, "This axe was specialy forged and enhanted to help novice soul cultivatiors to train their soulforce.  Still if situation calls for it it could be used as a normal weapon.", "", "Axe");
@@ -195,10 +195,10 @@ public final class WeaponLib extends ItemConstants
 		}) as Weapon;
 		public const ZWNDER :Zweihander = new Zweihander();
 		//Spellcasting weapon
-		public const S_SWORD:Weapon = new Weapon("S.Sword", "S.Sword", "Sorcerer sword", "a sorcerer sword", "slash", 25, 2000, "This weapon was forged by elven wizards. It is both an excelent catalyst and a deadly blade.", "Sword, StaffPart").withBuff('spellpower', +1) as Weapon;
-		public const A_WAND:Weapon = new Weapon("A.Wand", "A.Wand", "Apprentice wand", "an apprentice wand", "smack", 1, 150, "A low quality wand. Light and cheap it is commonly used by young apprentices who have started learning magic. Seeing as beginners tend to cause their catalyst to explode this is the perfect weapon for them.", "Wand", WT_WAND).withBuff('spellpower', +1) as Weapon;
-		public const H_WAND:Weapon = new Weapon("H.Wand", "H.Wand", "hellcat wand", "a hellcat wand", "smack", 1, 500, "A hellcat witch wand. Commonly used by hellcats to deliver their iconic fire magic.", "Wand", WT_WAND).withBuff('spellpower', +1.5) as Weapon;
-		public const WDAGGER:Weapon = new Weapon("WDagger","W.Dagger","witch dagger","a witch dagger","stab",3,500,"A dagger engraved with magical runes. While not the best catalyst around it is light, discreet and excelent for delivering spells.", "Small, Dagger, StaffPart", WT_DAGGER).withBuff('spellpower', +0.80) as Weapon;
+		public const S_SWORD:Weapon = new Weapon("S.Sword", "S.Sword", "Sorcerer sword", "a sorcerer sword", "slash", 25, 2000, "This weapon was forged by elven wizards. It is both an excelent catalyst and a deadly blade.", "", "Sword, StaffPart").withBuff('spellpower', +0.40) as Weapon;
+		public const A_WAND:Weapon = new Weapon("A.Wand", "A.Wand", "Apprentice wand", "an apprentice wand", "smack", 1, 150, "A low quality wand. Light and cheap it is commonly used by young apprentices who have started learning magic. Seeing as beginners tend to cause their catalyst to explode this is the perfect weapon for them.", "Wand", WT_WAND).withBuff('spellpower', +0.30) as Weapon;
+		public const H_WAND:Weapon = new Weapon("H.Wand", "H.Wand", "hellcat wand", "a hellcat wand", "smack", 1, 500, "A hellcat witch wand. Commonly used by hellcats to deliver their iconic fire magic.", "Wand", WT_WAND).withBuff('spellpower', +1) as Weapon;
+		public const WDAGGER:Weapon = new Weapon("WDagger","W.Dagger","witch dagger","a witch dagger","stab",3,500,"A dagger engraved with magical runes. While not the best catalyst around it is light, discreet and excelent for delivering spells.", "Small" , "Dagger, StaffPart").withBuff('spellpower', +0.20) as Weapon;
 		public const OCCULUS:Occulus = new Occulus();
 		public const ECLIPSE:Eclipse = new Eclipse();
 		public const NEXUS:Nexus = new Nexus(); //We may need to add a special event or forge for this item
