@@ -394,22 +394,9 @@ public class AbstractSpell extends CombatAbility {
     }
 	
 	public static function omnicasterDamageFactor():Number {
-        /*
-        if (!player.hasPerk(PerkLib.Omnicaster) &&
-                !(player.isStaffTypeWeapon() || player.isPartiallyStaffTypeWeapon()) && player.hasPerk(PerkLib.OffensiveStaffChanneling))
-            return 1.0;
-        return oscOverGazer() ? omnicasterDamageFactor_osc() : omnicasterDamageFactor_gazer();
-        */
         if ((player.isStaffTypeWeapon() || player.isPartiallyStaffTypeWeapon()) && player.hasPerk(PerkLib.OffensiveStaffChanneling)) {
             if (player.hasPerk(PerkLib.Omnicaster) && !oscOverGazer())
-                return omnicasterDamageFactor_gazer() * 1.1;
-                /*
-                Because:
-                1. I fixed the selection, so I want this.
-                2. "player is familiar with multicasting, so his ability to focus is slightly better"
-                3. "the staff helps to concentrate beacause.... eh.. PC's familiar with it"
-                4. :P
-                */
+                return omnicasterDamageFactor_gazer() * 1.2;
             else
                 return omnicasterDamageFactor_osc();
         }
