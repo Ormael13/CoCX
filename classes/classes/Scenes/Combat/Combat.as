@@ -1800,7 +1800,7 @@ public class Combat extends BaseContent {
         if (crit) outputText(" <b>Critical!</b>");
         //checkMinionsAchievementDamage(elementalDamage);
 		outputText(" ");
-        if (monster.HP >= 1 && monster.lust <= monster.maxOverLust()) {
+        if (monster.HP > monster.minHP() && monster.lust < monster.maxOverLust()) {
 			if (summonedElementalsMulti > 1) {
 				summonedElementalsMulti -= 1;
 				elementalattacks(elementType, summonedElementals, summonedElementalsMulti, summonedEpicElemental);
