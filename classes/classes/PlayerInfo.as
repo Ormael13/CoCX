@@ -255,7 +255,7 @@ public class PlayerInfo extends BaseContent {
 		}
 
 		// Mino Cum Addiction
-		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00340] > 0 || flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] > 0 || player.hasPerk(PerkLib.MinotaurCumAddict) || player.hasPerk(PerkLib.MinotaurCumResistance) || player.hasPerk(PerkLib.ManticoreCumAddict)) {
+		if (flags[kFLAGS.MINOCUM_INTAKES] > 0 || flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] > 0 || player.hasPerk(PerkLib.MinotaurCumAddict) || player.hasPerk(PerkLib.MinotaurCumResistance) || player.hasPerk(PerkLib.ManticoreCumAddict)) {
 			if (!player.hasPerk(PerkLib.MinotaurCumAddict))
 				addictStats += "<b>Minotaur Cum:</b> " + Math.round(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] * 10) / 10 + "%\n";
 			else if (player.hasPerk(PerkLib.MinotaurCumResistance) || player.hasPerk(PerkLib.ManticoreCumAddict))
@@ -346,6 +346,9 @@ public class PlayerInfo extends BaseContent {
 			if (vthirst.currentBoost > 0) statEffects += "(+" + vthirst.currentBoost + " to str / spe / int / lib)";
 			statEffects += "\n";
 		}
+
+		if (player.statusEffectv2(StatusEffects.ArousalPotion) > 0)
+			statEffects += "Alraune perfume - " + player.statusEffectv2(StatusEffects.ArousalPotion) + " hours remaining.\n";
 
 		if (player.statusEffectv1(StatusEffects.Bammed1) > 0) {
 			if (player.statusEffectv1(StatusEffects.Bammed1) == 3) statEffects += "Bammed <b>(Disables melee attacks permanently)</b>\n";
@@ -1953,16 +1956,28 @@ public class PlayerInfo extends BaseContent {
 				if (player.hasPerk(PerkLib.AsuraStrength)) addButtonDisabled(4, "ASTR", "You already have this perk.");
 				else addButtonDisabled(4, "ASTR", "You do not have enough super perk points to obtain this perk.");
 			}
-			//12 -> page + 1 button
+			addButton(12, "Next", superPerkBuyMenu, page + 1);
 			addButton(13, "Previous", superPerkBuyMenu, page - 1);
 			addButton(14, "Back", playerMenu);
 		}
-		if (page == 3) {
+		if (page == 4) {
 			if (player.superPerkPoints > 0) {
-
+				addButtonDisabled(0, "HJ:?S", "What could be here? Some new secret unreleased yet Hidden Job option? Or something else? Maybe little hint would help...or it won't?");
+				//addButtonDisabled(0, "HJ:GS", "You do not have a free slot for this hidden job.");
 			}
 			else {
-
+				addButtonDisabled(0, "HJ:?S", "What could be here? Some new secret unreleased yet Hidden Job option? Or something else? Maybe little hint would help...or it won't?");
+			}
+			addButton(13, "Previous", superPerkBuyMenu, page - 1);
+			//13 -> page - 1 button
+			addButton(14, "Back", playerMenu);
+		}
+		if (page == 5) {
+			if (player.superPerkPoints > 0) {
+				
+			}
+			else {
+				
 			}
 			//12 -> page + 1 button
 			//13 -> page - 1 button
@@ -2066,6 +2081,13 @@ public class PlayerInfo extends BaseContent {
 		clearOutput();
 		outputText("You gained 'Asura Strength' super perk.");
 		doNext(superPerkBuyMenu, 3);
+	}
+	private function perkHiddenJobGreySage():void {
+		player.superPerkPoints--;
+		player.createPerk(PerkLib.PrestigeJobGreySage,0,0,0,0);
+		clearOutput();
+		outputText("You gained 'Hidden Job: Grey Sage' super perk.");
+		doNext(superPerkBuyMenu, 4);
 	}
 }
 }

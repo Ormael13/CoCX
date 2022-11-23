@@ -1,5 +1,6 @@
 package classes.Scenes.Places.TelAdre {
 import classes.GlobalFlags.*;
+import classes.Races;
 import classes.StatusEffects;
 import classes.display.SpriteDb;
 
@@ -54,7 +55,7 @@ public class PabloScene extends TelAdreAbstractContent {
             outputText("\n\n\"<i>They did,</i>\" he begins, lowering his head and shuffling his feet. He can’t help but chuckle as he looks back on the day he first arrived in the city. \"<i>I had a lot of explaining to do, and it certainly wasn’t easy. In the end, it all came down to this weird corruption scan with some kind of special crystal. You could imagine how surprised they were when I passed their test.</i>\"");
             outputText("\n\nIf he wasn’t always like this, what was he? And how did he get this way? You really hope he doesn’t mind you asking.");
             outputText("\n\n\"<i>If you can believe it, I was a human once. I was an adventurer, you see. One day, I stumbled through this portal, and voilà! I was in this place, the land of Mareth!</i>\"");
-            outputText("\n\nYour eyes widen. He used to be a human, just like you " + (player.race() == "human" ? "are" : "were") + "!");
+            outputText("\n\nYour eyes widen. He used to be a human, just like you " + (player.isRace(Races.HUMAN, 1, false) ? "are" : "were") + "!");
             outputText("\n\n\"<i>Eventually, I got hungry, -really- hungry. For a while, food was hard to come by, and I had to make do with whatever I could find. Sometimes the imps would have this strange food on them, and sometimes they would have drinks. I think you can see where I’m going here. Long story short, the things I ate ended up changing me.</i>\"");
             outputText("\n\nYou intently continue to listen to his story.");
             outputText("\n\n\"<i>My hair wasn’t always this color, either. It was black.</i>\" he says, twirling one of his sandy blonde locks. \"<i>Some crazy bitch out in the desert made it that way, called herself a Sand Witch. Heh. She threw this hissy fit when I refused to let her cast a spell on me. What else was I supposed to do? She wouldn’t even tell me what kind of spell it was. In the end, I gave in just to calm her crazy tits. I’ve gotten kinda used to this color, actually. But I guess that’s enough about me. Perhaps you and I could work out together?</i>\"");

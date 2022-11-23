@@ -3205,7 +3205,7 @@ public final class Mutations extends MutationsHelper {
 			player.createStatusEffect(StatusEffects.KnowsNosferatu, 0, 0, 0, 0);
 			return;
 		}
-		if (player.hasPerk(PerkLib.PrestigeJobNecromancer)) {
+		if (player.hasPerk(PerkLib.PrestigeJobNecromancer) || player.hasPerk(PerkLib.PrestigeJobGreySage)) {
 			//Smart enough for Bone spirit and doesnt have it
 			if (player.inte >= 100 &&  !player.hasStatusEffect(StatusEffects.KnowsBoneSpirit)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new necromancer spell: Bone spirit.</b>");
@@ -3225,7 +3225,7 @@ public final class Mutations extends MutationsHelper {
 				return;
 			}
 		}
-		if (player.hasPerk(PerkLib.HexKnowledge)) {
+		if (player.hasPerk(PerkLib.HexKnowledge) || player.hasPerk(PerkLib.PrestigeJobGreySage)) {
 			//Smart enough for lifetap and doesnt have it
 			if (player.inte >= 150 && !player.hasStatusEffect(StatusEffects.KnowsLifetap)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new warlock spell: Lifetap.</b>");
@@ -3288,7 +3288,7 @@ public final class Mutations extends MutationsHelper {
             outputText("[pg]The contents of the book did little for your already considerable intellect.");
             KnowledgeBonus("int", 0.5);
         }
-        if (player.hasPerk(PerkLib.GreyMagic)) {
+        if (player.hasPerk(PerkLib.GreyMagic) || player.hasPerk(PerkLib.PrestigeJobGreySage)) {
             //Smart enough for mana shield and doesnt have it
             if (player.inte >= 50 && !player.hasStatusEffect(StatusEffects.KnowsManaShield)) {
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Mana Shield.</b>");
@@ -3415,50 +3415,56 @@ public final class Mutations extends MutationsHelper {
             player.createStatusEffect(StatusEffects.KnowsCharge, 0, 0, 0, 0);
             return;
         }
+        //Smart enough for charge range weapon and doesnt have it
+        if (player.inte >= 35 && !player.hasStatusEffect(StatusEffects.KnowsChargeR)) {
+            outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Charge Range Weapon.</b>");
+            player.createStatusEffect(StatusEffects.KnowsChargeR, 0, 0, 0, 0);
+            return;
+        }
         //Smart enough for charge armor and doesnt have it
-        if (player.inte >= 35 && !player.hasStatusEffect(StatusEffects.KnowsChargeA)) {
+        if (player.inte >= 40 && !player.hasStatusEffect(StatusEffects.KnowsChargeA)) {
             outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Charge Armor.</b>");
             player.createStatusEffect(StatusEffects.KnowsChargeA, 0, 0, 0, 0);
             return;
         }
         //Smart enough for heal and doesnt have it
-        if (player.inte >= 40 && !player.hasStatusEffect(StatusEffects.KnowsHeal)) {
+        if (player.inte >= 45 && !player.hasStatusEffect(StatusEffects.KnowsHeal)) {
             outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Heal.</b>");
             player.createStatusEffect(StatusEffects.KnowsHeal, 0, 0, 0, 0);
             return;
         }
         //Smart enough for blind and doesnt have it
-        if (player.inte >= 45 && !player.hasStatusEffect(StatusEffects.KnowsBlind)) {
+        if (player.inte >= 50 && !player.hasStatusEffect(StatusEffects.KnowsBlind)) {
             outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Blind.</b>");
             player.createStatusEffect(StatusEffects.KnowsBlind, 0, 0, 0, 0);
             return;
         }
         //Smart enough for pyre burst and doesnt have it
-        if (player.inte >= 50 && !player.hasStatusEffect(StatusEffects.KnowsPyreBurst)) {
+        if (player.inte >= 55 && !player.hasStatusEffect(StatusEffects.KnowsPyreBurst)) {
             outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Pyre Burst.</b>");
             player.createStatusEffect(StatusEffects.KnowsPyreBurst, 0, 0, 0, 0);
             return;
         }
         //Smart enough for chain lightning and doesnt have it
-        if (player.inte >= 55 && !player.hasStatusEffect(StatusEffects.KnowsChainLighting)) {
+        if (player.inte >= 60 && !player.hasStatusEffect(StatusEffects.KnowsChainLighting)) {
             outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Chain Lighting.</b>");
             player.createStatusEffect(StatusEffects.KnowsChainLighting, 0, 0, 0, 0);
             return;
         }
         //Smart enough for blizzard and doesnt have it
-        if (player.inte >= 60 && !player.hasStatusEffect(StatusEffects.KnowsBlizzard)) {
+        if (player.inte >= 65 && !player.hasStatusEffect(StatusEffects.KnowsBlizzard)) {
             outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Blizzard.</b>");
             player.createStatusEffect(StatusEffects.KnowsBlizzard, 0, 0, 0, 0);
             return;
         }
         //Smart enough for Mental Shield and doesnt have it
-        if (player.inte >= 65 && !player.hasStatusEffect(StatusEffects.KnowsMentalShield)) {
+        if (player.inte >= 70 && !player.hasStatusEffect(StatusEffects.KnowsMentalShield)) {
             outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Mental Shield.</b>");
             player.createStatusEffect(StatusEffects.KnowsMentalShield, 0, 0, 0, 0);
             return;
         }
         //Smart enough for Cure and doesnt have it
-        if (player.inte >= 70 && !player.hasStatusEffect(StatusEffects.KnowsCure)) {
+        if (player.inte >= 75 && !player.hasStatusEffect(StatusEffects.KnowsCure)) {
             outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Cure.</b>");
             player.createStatusEffect(StatusEffects.KnowsCure, 0, 0, 0, 0);
             return;
@@ -3469,7 +3475,7 @@ public final class Mutations extends MutationsHelper {
             player.createStatusEffect(StatusEffects.KnowsFireStorm, 0, 0, 0, 0);
             return;
         }
-		if (player.hasPerk(PerkLib.DivineKnowledge)) {
+		if (player.hasPerk(PerkLib.DivineKnowledge) || player.hasPerk(PerkLib.PrestigeJobGreySage)) {
 			//Smart enough for Aegis and doesnt have it
 			if (player.inte >= 150 && !player.hasStatusEffect(StatusEffects.KnowsAegis)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Aegis.</b>");
@@ -3518,7 +3524,7 @@ public final class Mutations extends MutationsHelper {
             outputText("[pg]The contents of the manuscript did little for your already considerable intellect.");
             KnowledgeBonus("int", 0.6);
         }
-		if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) {
+		if (player.hasPerk(PerkLib.HiddenJobBloodDemon) || player.hasPerk(PerkLib.PrestigeJobGreySage)) {
 			//Smart enough for Blood Missiles and doesnt have it
 			if (player.inte >= 20 && !player.hasStatusEffect(StatusEffects.KnowsBloodMissiles)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood spell: Blood Missiles.</b>");

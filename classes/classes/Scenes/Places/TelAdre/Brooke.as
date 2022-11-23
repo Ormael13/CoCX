@@ -520,6 +520,7 @@ public function brookeAnal():void {
 
 	//[if {cockFit >= 61}
 	if(x < 0) {
+		x = 0;
 		outputText("Bluntly, you ask Brooke what her opinion is on anal.  <i>\"What, with you?\"</i> she asks, leaning her ass back and trapping your " + cockDescript(x) + " between her asscheeks expertly.  You moan with pleasure, but before you get the wrong idea, she hums disapprovingly.  She was actually using her ass to measure your " + cockDescript(x) + "!  <i>\"Sorry, sweet thing, but maybe not this time.  I just got in from the gym, and working a beast like that into my ass would be a workout in of itself.  I'm up for anything else, though.\"</i>");
 		//Go back to 'grope' menu
  		sexMenu();

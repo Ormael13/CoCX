@@ -209,10 +209,10 @@ public class CombatSoulskills extends BaseCombatContent {
 			}
 		}
 		if (player.weapon == weapons.WDBLADE) {
-			bd = buttons.add("Blade Dance", BladeDance).hint("Attack twice (four times if double attack is active, six times if triple attack is active and etc.). \n\n(PHYSICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(50 * soulskillCost() * (1 + flags[kFLAGS.DOUBLE_ATTACK_STYLE])));
-			if ((player.soulforce < 50 * soulskillCost() * (1 + flags[kFLAGS.DOUBLE_ATTACK_STYLE])) && !player.hasStatusEffect(StatusEffects.BloodCultivator)) {
+			bd = buttons.add("Blade Dance", BladeDance).hint("Attack twice (four times if double attack is active, six times if triple attack is active and etc.). \n\n(PHYSICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(50 * soulskillCost() * (1 + flags[kFLAGS.MULTIATTACK_STYLE])));
+			if ((player.soulforce < 50 * soulskillCost() * (1 + flags[kFLAGS.MULTIATTACK_STYLE])) && !player.hasStatusEffect(StatusEffects.BloodCultivator)) {
 				bd.disable("Your current soulforce is too low.");
-			} else if (player.hasStatusEffect(StatusEffects.BloodCultivator) && (bloodForBloodGod - 1) < (50 * soulskillCost() * (1 + flags[kFLAGS.DOUBLE_ATTACK_STYLE]))) {
+			} else if (player.hasStatusEffect(StatusEffects.BloodCultivator) && (bloodForBloodGod - 1) < (50 * soulskillCost() * (1 + flags[kFLAGS.MULTIATTACK_STYLE]))) {
 				bd.disable("Your hp is too low to use this soulskill.");
 			}
 		}
@@ -1382,7 +1382,7 @@ public class CombatSoulskills extends BaseCombatContent {
 	}
 	public function BladeDance():void {
 		clearOutput();
-		var soulforcecost:Number = 50 * soulskillCost() * (1 + flags[kFLAGS.DOUBLE_ATTACK_STYLE]);
+		var soulforcecost:Number = 50 * soulskillCost() * (1 + flags[kFLAGS.MULTIATTACK_STYLE]);
 		soulforcecost = Math.round(soulforcecost);
 		if (player.hasStatusEffect(StatusEffects.BloodCultivator)) player.takePhysDamage(soulforcecost);
 		else player.soulforce -= soulforcecost;

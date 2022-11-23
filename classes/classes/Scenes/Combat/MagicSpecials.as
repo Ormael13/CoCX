@@ -519,6 +519,12 @@ public class MagicSpecials extends BaseCombatContent {
 				else bd.disable("Your throat is incredibly sore and hoarse. You aren’t sure you can talk let alone try that attack for more than a day.");
 			} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 		}
+			if (player.hasPerk(PerkLib.DragonLustPoisonBreath)) {
+				bd = buttons.add("Poison Breath", DragonLustPoisonBreath).hint("Unleash a cloud of aphrodisiac poison. Particularly powerful against groups");
+				if (player.tailVenom < player.VenomWebCost() * 5) {
+					bd.disable("You do not have enough poison in your glands to breath a cloud right now! (Req. "+player.VenomWebCost()*5+"+)");
+				} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+			}
 		if (player.faceType == Face.WOLF && player.hasKeyItem("Gleipnir Collar") >= 0) {
 			bd = buttons.add("FreezingBreath", fenrirFreezingBreath,"Freeze your foe solid with a powerful breath attack. \n\nWould go into cooldown after use for: "+(player.hasPerk(PerkLib.NaturalInstincts) ? "9":"10")+" rounds  \n<b>AoE attack.</b>");
 			bd.requireFatigue(spellCost(150));
@@ -998,25 +1004,7 @@ public class MagicSpecials extends BaseCombatContent {
 			return;
 		}
 		//Special enemy avoidances
-		if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
-			outputText("Vala beats her wings with surprising strength, blowing the ice wave back at you! ");
-			if(player.hasPerk(PerkLib.Evade) && rand(2) == 0) {
-				outputText("You dive out of the way and evade it!");
-			}
-			else if(player.hasPerk(PerkLib.Flexibility) && rand(4) == 0) {
-				outputText("You use your flexibility to barely fold your body out of the way!");
-			}
-			//Determine if blocked!
-			else if (combatBlock(true)) {
-				outputText("You manage to block your own ice wave with your [shield]!");
-			}
-			else {
-				damage = player.takeIceDamage(damage);
-				outputText("Your own ice wave smacks into your face! ");
-				combat.CommasForDigits(damage);
-			}
-			outputText("\n\n");
-		}
+		if (valaReflect(damage, "ice wave", player.takeIceDamage)) {}
 		else {
 			if(!monster.hasPerk(PerkLib.Resolute)) {
 				outputText("  [Themonster] scream for an instant as it is flash frozen solid by the wave along with everything around it! Your opponent now trapped in a block of ice tries very hard to burst out and get free of its glacial prison.");
@@ -1098,25 +1086,7 @@ public class MagicSpecials extends BaseCombatContent {
 			return;
 		}
 		//Special enemy avoidances
-		if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
-			outputText("Vala beats her wings with surprising strength, blowing the ice wave back at you! ");
-			if(player.hasPerk(PerkLib.Evade) && rand(2) == 0) {
-				outputText("You dive out of the way and evade it!");
-			}
-			else if(player.hasPerk(PerkLib.Flexibility) && rand(4) == 0) {
-				outputText("You use your flexibility to barely fold your body out of the way!");
-			}
-			//Determine if blocked!
-			else if (combatBlock(true)) {
-				outputText("You manage to block your own ice wave with your [shield]!");
-			}
-			else {
-				damage = player.takeIceDamage(damage);
-				outputText("Your own ice wave smacks into your face! ");
-				combat.CommasForDigits(damage);
-			}
-			outputText("\n\n");
-		}
+		if (valaReflect(damage, "freezing breath", player.takeIceDamage)) {}
 		else {
 			if(!monster.hasPerk(PerkLib.Resolute)) {
 				outputText("  [Themonster] ");
@@ -1603,6 +1573,37 @@ public class MagicSpecials extends BaseCombatContent {
 		return miniOniscored;
 	}
 
+	private function valaReflect(damage:Number, attack:String, takeDmgF:Function, applyBlizzard:Boolean = false):Boolean {
+		if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
+			outputText("Vala beats her wings with surprising strength, blowing the " + attack + " back at you! ");
+			if(player.hasPerk(PerkLib.Evade) && rand(2) == 0) {
+				outputText("You dive out of the way and evade it!");
+			}
+			else if(player.hasPerk(PerkLib.Flexibility) && rand(4) == 0) {
+				outputText("You use your flexibility to barely fold your body out of the way!");
+			}
+			else if(applyBlizzard && player.hasStatusEffect(StatusEffects.Blizzard)) {
+				outputText("  <b>Surrounding you blizzard at the cost of loosing some of it remaining power massively dissipated most of the " + attack + " energy, causing it to hit with far less force!</b>");
+				player.addStatusValue(StatusEffects.Blizzard,1,-1);
+				damage = Math.round(0.2 * damage);
+				damage = player.takeFireDamage(damage);
+				combat.CommasForDigits(damage);
+			}
+			//Determine if blocked!
+			else if (combatBlock(true)) {
+				outputText("You manage to block your own " + attack + " with your [shield]!");
+			}
+			else {
+				damage = takeDmgF(damage);
+				outputText("Your own " + attack + " smacks into your face! ");
+				combat.CommasForDigits(damage);
+			}
+			outputText("\n\n");
+			return true;
+		} else return false;
+	}
+
+
 	public function phoenixfireBreath():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
@@ -1656,30 +1657,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("  Despite the heavy impact caused by your attack, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
-		else if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
-			outputText("Vala beats her wings with surprising strength, blowing the fireball back at you! ");
-			if(player.hasPerk(PerkLib.Evade) && rand(2) == 0) {
-				outputText("You dive out of the way and evade it!");
-			}
-			else if(player.hasPerk(PerkLib.Flexibility) && rand(4) == 0) {
-				outputText("You use your flexibility to barely fold your body out of the way!");
-			}
-			else if(player.hasStatusEffect(StatusEffects.Blizzard)) {
-				outputText("  <b>Surrounding you blizzard at the cost of loosing some of it remaining power massively dissipated most of the fireball energy, causing it to hit with far less force!</b>");
-				player.addStatusValue(StatusEffects.Blizzard,1,-1);
-				damage = Math.round(0.2 * damage);
-			}
-			//Determine if blocked!
-			else if (combatBlock(true)) {
-				outputText("You manage to block your own fire with your [shield]!");
-			}
-			else {
-				damage = player.takeFireDamage(damage);
-				outputText("Your own fire smacks into your face! ");
-				combat.CommasForDigits(damage);
-			}
-			outputText("\n\n");
-		}
+		else if (valaReflect(damage, "fire breath", player.takeFireDamage, true)) {}
 		//Goos burn
 		else if(monster.short == "goo-girl") {
 			outputText(" Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy [monster color] skin has lost some of its shimmer. ");
@@ -1911,25 +1889,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("  Despite the heavy impact caused by your attack, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
-		else if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
-			outputText("Vala beats her wings with surprising strength, blowing the acid spit back at you! ");
-			if(player.hasPerk(PerkLib.Evade) && rand(2) == 0) {
-				outputText("You dive out of the way and evade it!");
-			}
-			else if(player.hasPerk(PerkLib.Flexibility) && rand(4) == 0) {
-				outputText("You use your flexibility to barely fold your body out of the way!");
-			}
-			//Determine if blocked!
-			else if (combatBlock(true)) {
-				outputText("You manage to block your own fire with your [shield]!");
-			}
-			else {
-				damage = player.takeAcidDamage(damage);
-				outputText("Your own spit smacks into your face! ");
-				combat.CommasForDigits(damage);
-			}
-			outputText("\n\n");
-		}
+		else if (valaReflect(damage, "acid spit", player.takeAcidDamage)) {}
 		else {
 			outputText(" ");
 			doAcidDamage(damage, true, true);
@@ -1997,30 +1957,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("  Despite the heavy impact caused by your attack, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
-		else if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
-			outputText("Vala beats her wings with surprising strength, blowing the fireball back at you! ");
-			if(player.hasPerk(PerkLib.Evade) && rand(2) == 0) {
-				outputText("You dive out of the way and evade it!");
-			}
-			else if(player.hasPerk(PerkLib.Flexibility) && rand(4) == 0) {
-				outputText("You use your flexibility to barely fold your body out of the way!");
-			}
-			else if(player.hasStatusEffect(StatusEffects.Blizzard)) {
-				outputText("  <b>Surrounding you blizzard at the cost of loosing some of it remaining power massively dissipated most of the fireball energy, causing it to hit with far less force!</b>");
-				player.addStatusValue(StatusEffects.Blizzard,1,-1);
-				damage = Math.round(0.2 * damage);
-			}
-			//Determine if blocked!
-			else if (combatBlock(true)) {
-				outputText("You manage to block your own fire with your [shield]!");
-			}
-			else {
-				damage = player.takeFireDamage(damage);
-				outputText("Your own fire smacks into your face! ");
-				combat.CommasForDigits(damage);
-			}
-			outputText("\n\n");
-		}
+		else if (valaReflect(damage, "azure flame breath", player.takeFireDamage, true)) {}
 		//Goos burn
 		else if(monster.short == "goo-girl") {
 			outputText(" Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy [monster color] skin has lost some of its shimmer. ");
@@ -2107,30 +2044,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("  Despite the heavy impact caused by your roar, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
-		else if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
-			outputText("Vala beats her wings with surprising strength, blowing the fire breath back at you! ");
-			if(player.hasPerk(PerkLib.Evade) && rand(2) == 0) {
-				outputText("You dive out of the way and evade it!");
-			}
-			else if(player.hasPerk(PerkLib.Flexibility) && rand(4) == 0) {
-				outputText("You use your flexibility to barely fold your body out of the way!");
-			}
-			else if(player.hasStatusEffect(StatusEffects.Blizzard)) {
-				outputText("  <b>Surrounding you blizzard at the cost of loosing some of it remaining power massively dissipated most of the fireball energy, causing it to hit with far less force!</b>");
-				player.addStatusValue(StatusEffects.Blizzard,1,-1);
-				damage = Math.round(0.2 * damage);
-			}
-			//Determine if blocked!
-			else if (combatBlock(true)) {
-				outputText("You manage to block your own fire with your [shield]!");
-			}
-			else {
-				damage = player.takeFireDamage(damage);
-				outputText("Your own fire smacks into your face! ");
-				combat.CommasForDigits(damage);
-			}
-			outputText("\n\n");
-		}
+		else if (valaReflect(damage, "fire breath", player.takeFireDamage, true)) {}
 		//Goos burn
 		else if(monster.short == "goo-girl") {
 			outputText(" Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy [monster color] skin has lost some of its shimmer. ");
@@ -2205,25 +2119,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("  Despite the heavy impact caused by your roar, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
-		else if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
-			outputText("Vala beats her wings with surprising strength, blowing the ice breath back at you! ");
-			if(player.hasPerk(PerkLib.Evade) && rand(2) == 0) {
-				outputText("You dive out of the way and evade it!");
-			}
-			else if(player.hasPerk(PerkLib.Flexibility) && rand(4) == 0) {
-				outputText("You use your flexibility to barely fold your body out of the way!");
-			}
-			//Determine if blocked!
-			else if (combatBlock(true)) {
-				outputText("You manage to block your own ice with your [shield]!");
-			}
-			else {
-				damage = player.takeIceDamage(damage);
-				outputText("Your own ice smacks into your face! ");
-				combat.CommasForDigits(damage);
-			}
-			outputText("\n\n");
-		}
+		else if (valaReflect(damage, "ice", player.takeIceDamage)) {}
 		else {
 			if(!monster.hasPerk(PerkLib.Resolute)) {
 				outputText("  [Themonster] reels as your wave of force slams into [monster him] like a ton of rock!  The impact sends [monster him] crashing to the ground, too dazed to strike back. ");
@@ -2288,25 +2184,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("  Despite the heavy impact caused by your roar, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
-		else if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
-			outputText("Vala beats her wings with surprising strength, blowing the lightning breath back at you! ");
-			if(player.hasPerk(PerkLib.Evade) && rand(2) == 0) {
-				outputText("You dive out of the way and evade it!");
-			}
-			else if(player.hasPerk(PerkLib.Flexibility) && rand(4) == 0) {
-				outputText("You use your flexibility to barely fold your body out of the way!");
-			}
-			//Determine if blocked!
-			else if (combatBlock(true)) {
-				outputText("You manage to block your own lightning with your [shield]!");
-			}
-			else {
-				damage = player.takeLightningDamage(damage);
-				outputText("Your own lightning smacks into your face! ");
-				combat.CommasForDigits(damage);
-			}
-			outputText("\n\n");
-		}
+		else if (valaReflect(damage, "lightning breath", player.takeLightningDamage)) {}
 		else {
 			if(!monster.hasPerk(PerkLib.Resolute)) {
 				outputText("  [Themonster] reels as your wave of force slams into [monster him] like a ton of rock!  The impact sends [monster him] crashing to the ground, too dazed to strike back. ");
@@ -2370,25 +2248,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("  Despite the heavy impact caused by your roar, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
-		else if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
-			outputText("Vala beats her wings with surprising strength, blowing the darkness breath back at you! ");
-			if(player.hasPerk(PerkLib.Evade) && rand(2) == 0) {
-				outputText("You dive out of the way and evade it!");
-			}
-			else if(player.hasPerk(PerkLib.Flexibility) && rand(4) == 0) {
-				outputText("You use your flexibility to barely fold your body out of the way!");
-			}
-			//Determine if blocked!
-			else if (combatBlock(true)) {
-				outputText("You manage to block your own darkness with your [shield]!");
-			}
-			else {
-				damage = player.takeDarknessDamage(damage);
-				outputText("Your own darkness smacks into your face! ");
-				combat.CommasForDigits(damage);
-			}
-			outputText("\n\n");
-		}
+		else if (valaReflect(damage, "darkness breath", player.takeDarknessDamage)) {}
 		else {
 			if(!monster.hasPerk(PerkLib.Resolute)) {
 				outputText("  [Themonster] reels as your wave of force slams into [monster him] like a ton of rock!  The impact sends [monster him] crashing to the ground, too dazed to strike back. ");
@@ -2452,25 +2312,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("  Despite the heavy impact caused by your roar, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
-		else if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
-			outputText("Vala beats her wings with surprising strength, blowing the poison breath back at you! ");
-			if(player.hasPerk(PerkLib.Evade) && rand(2) == 0) {
-				outputText("You dive out of the way and evade it!");
-			}
-			else if(player.hasPerk(PerkLib.Flexibility) && rand(4) == 0) {
-				outputText("You use your flexibility to barely fold your body out of the way!");
-			}
-			//Determine if blocked!
-			else if (combatBlock(true)) {
-				outputText("You manage to block your own poison with your [shield]!");
-			}
-			else {
-				damage = player.takePoisonDamage(damage);
-				outputText("Your own poison smacks into your face! ");
-				combat.CommasForDigits(damage);
-			}
-			outputText("\n\n");
-		}
+		else if (valaReflect(damage, "poison breath", player.takePoisonDamage)) {}
 		else {
 			if(!monster.hasPerk(PerkLib.Resolute)) {
 				outputText("  [Themonster] reels as your wave of force slams into [monster him] like a ton of rock!  The impact sends [monster him] crashing to the ground, too dazed to strike back. ");
@@ -2541,25 +2383,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("  Despite the heavy impact caused by your roar, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
-		else if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
-			outputText("Vala beats her wings with surprising strength, blowing the water breath back at you! ");
-			if(player.hasPerk(PerkLib.Evade) && rand(2) == 0) {
-				outputText("You dive out of the way and evade it!");
-			}
-			else if(player.hasPerk(PerkLib.Flexibility) && rand(4) == 0) {
-				outputText("You use your flexibility to barely fold your body out of the way!");
-			}
-			//Determine if blocked!
-			else if (combatBlock(true)) {
-				outputText("You manage to block your own water with your [shield]!");
-			}
-			else {
-				damage = player.takeWaterDamage(damage);
-				outputText("Your own water smacks into your face! ");
-				combat.CommasForDigits(damage);
-			}
-			outputText("\n\n");
-		}
+		else if (valaReflect(damage, "water breath", player.takeWaterDamage)) {}
 		else {
 			if(!monster.hasPerk(PerkLib.Resolute)) {
 				outputText("  [Themonster] reels as your wave of force slams into [monster him] like a ton of rock!  The impact sends [monster him] crashing to the ground, too dazed to strike back. ");
@@ -2623,25 +2447,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("  Despite the heavy impact caused by your roar, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
-		else if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
-			outputText("Vala beats her wings with surprising strength, blowing the water breath back at you! ");
-			if(player.hasPerk(PerkLib.Evade) && rand(2) == 0) {
-				outputText("You dive out of the way and evade it!");
-			}
-			else if(player.hasPerk(PerkLib.Flexibility) && rand(4) == 0) {
-				outputText("You use your flexibility to barely fold your body out of the way!");
-			}
-			//Determine if blocked!
-			else if (combatBlock(true)) {
-				outputText("You manage to block your own water with your [shield]!");
-			}
-			else {
-				damage = player.takeMagicDamage(damage);
-				outputText("Your own water smacks into your face! ");
-				combat.CommasForDigits(damage);
-			}
-			outputText("\n\n");
-		}
+		else if (valaReflect(damage, "faerie breath", player.takeMagicDamage)) {}
 		else {
 			if(!monster.hasPerk(PerkLib.Resolute)) {
 				outputText("  [Themonster] reels as your wave of force slams into [monster him] like a ton of rock!  The impact sends [monster him] crashing to the ground, too dazed to strike back. ");
@@ -2764,25 +2570,7 @@ public class MagicSpecials extends BaseCombatContent {
 				outputText("  Despite the heavy impact caused by your roar, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 			}
 			//Special enemy avoidances
-			else if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
-				outputText("Vala beats her wings with surprising strength, blowing the darkness breath back at you! ");
-				if(player.hasPerk(PerkLib.Evade) && rand(2) == 0) {
-					outputText("You dive out of the way and evade it!");
-				}
-				else if(player.hasPerk(PerkLib.Flexibility) && rand(4) == 0) {
-					outputText("You use your flexibility to barely fold your body out of the way!");
-				}
-				//Determine if blocked!
-				else if (combatBlock(true)) {
-					outputText("You manage to block your own elemental energy blast with your [shield]!");
-				}
-				else {
-					damage = player.takeMagicDamage(damage);
-					outputText("Your own elemental energy blast smacks into your face! ");
-					combat.CommasForDigits(damage);
-				}
-				outputText("\n\n");
-			}
+			else if (valaReflect(damage, "true dragon breath", player.takeMagicDamage)) {}
 			else {
 				if(!monster.hasPerk(PerkLib.Resolute)) {
 					outputText(" [Themonster] is stunned and");
@@ -2820,7 +2608,57 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.EclipsingShadowSu)) player.addStatusValue(StatusEffects.CounterEclipsingShadow, 3, 1);
 			enemyAI();
 		}
+	}
 
+	public function DragonLustPoisonBreath():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		if (combat.checkConcentration()) return; //Amily concentration
+		if (monster is LivingStatue)
+		{
+			outputText("This thing is just seldom immune to poison like come on its a statue!");
+			enemyAI();
+			return;
+		}
+		//Works similar to bee stinger, must be regenerated over time. Shares the same poison-meter
+		else {
+			outputText("You inhale deeply before releasing a cloud of aphrodisiacs poison on your foe!");
+			var venomType:StatusEffectType = StatusEffects.JabberwockyVenom;
+			var d2Bdcc:Number = 2;
+			var lustDmg2:Number = combat.calculateBasicTeaseDamage(20+rand(10));
+			var poisonScaling:Number = 1;
+			if (monster.plural){
+				d2Bdcc *=5;
+				lustDmg2 *=5
+			}
+			poisonScaling += player.lib/100;
+			poisonScaling += player.tou/100;
+			if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) poisonScaling += 1;
+			if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 1) poisonScaling += 2;
+			if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 2) poisonScaling += 2;
+			if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) poisonScaling += 2;
+			if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 4) poisonScaling += 2;
+			if (player.hasPerk(PerkLib.RacialParagon)) poisonScaling += 0.5;
+			if (player.hasPerk(PerkLib.Apex)) poisonScaling += 0.5;
+			if (player.hasPerk(PerkLib.AlphaAndOmega)) poisonScaling += 0.5;
+			if (player.hasPerk(PerkLib.NaturalArsenal)) poisonScaling += 0.5;
+			lustDmg2 *= poisonScaling;
+			lustDmg2 *= d2Bdcc;
+			monster.teased(Math.round(monster.lustVuln * lustDmg2), true);
+			combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
+			if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) d2Bdcc *= 2;
+			monster.statStore.addBuffObject({tou:-d2Bdcc}, "Poison",{text:"Poison"});
+			if(monster.hasStatusEffect(venomType))
+			{
+				monster.addStatusValue(venomType,2,2);
+				monster.addStatusValue(venomType,1,d2Bdcc);
+			}
+			else monster.createStatusEffect(venomType,d2Bdcc,2,0,0);
+		}
+		outputText("\n\n");
+		player.tailVenom -= player.VenomWebCost() * 5;
+		flags[kFLAGS.VENOM_TIMES_USED] += 1;
+		if (!combatIsOver()) enemyAI();
 	}
 //* Terrestrial Fire
 	public function fireballuuuuu():void {
@@ -2881,32 +2719,7 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		else if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
-			outputText("Vala beats her wings with surprising strength, blowing the fireball back at you! ");
-			if(player.hasPerk(PerkLib.Evade) && rand(2) == 0) {
-				outputText("You dive out of the way and evade it!");
-			}
-			else if(player.hasPerk(PerkLib.Flexibility) && rand(4) == 0) {
-				outputText("You use your flexibility to barely fold your body out of the way!");
-			}
-			else if(player.hasStatusEffect(StatusEffects.Blizzard)) {
-				outputText("  <b>Surrounding you blizzard at the cost of loosing some of it remaining power massively dissipated most of the fireball energy, causing it to hit with far less force!</b>");
-				player.addStatusValue(StatusEffects.Blizzard,1,-1);
-				damage = Math.round(0.2 * damage);
-			}
-			else {
-				//Determine if blocked!
-				if (combatBlock(true)) {
-					outputText("You manage to block your own fire with your [shield]!");
-					combatRoundOver();
-					return;
-				}
-				outputText("Your own fire smacks into your face! ");
-				player.takeFireDamage(damage);
-				combat.CommasForDigits(damage);
-			}
-			outputText("\n\n");
-		}
+		else if (valaReflect(damage, "fireball", player.takeFireDamage, true)) {}
 		else if (monster is Lethice && (monster as Lethice).fightPhase == 2)
 		{
 			//Attack gains burn DoT for 2-3 turns.
@@ -3007,26 +2820,7 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		else if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
-			outputText("  Vala beats her wings with surprising strength, blowing the fireball back at you!  ");
-			if(player.hasPerk(PerkLib.Evade) && rand(2) == 0) {
-				outputText("You dive out of the way and evade it!");
-			}
-			else if(player.hasPerk(PerkLib.Flexibility) && rand(4) == 0) {
-				outputText("You use your flexibility to barely fold your body out of the way!");
-			}
-			else if(player.hasStatusEffect(StatusEffects.Blizzard)) {
-				outputText("  <b>Surrounding you blizzard at the cost of loosing some of it remaining power massively dissipated most of the fireball energy, causing it to hit with far less force!</b>");
-				player.addStatusValue(StatusEffects.Blizzard,1,-1);
-				damage = Math.round(0.2 * damage);
-			}
-			else {
-				damage = int(damage / 6);
-				outputText("Your own fire smacks into your face, arousing you!");
-				dynStats("lus", damage);
-			}
-			outputText("\n");
-		}
+		else if (valaReflect(damage, "hellfire", player.takeLustDamage, true)) {}
 		else {
 			if(monster.inte < 10) {
 				outputText("  Your foe lets out a shriek as their form is engulfed in the blistering flames.");

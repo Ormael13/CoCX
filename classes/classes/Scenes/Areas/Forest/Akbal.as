@@ -21,23 +21,13 @@ public class Akbal extends Monster
 				outputText(capitalA + short + " seems to have no problem guiding his attacks towards you, despite his blindness.\n");
 			}
 			//Determine if dodged!
-			if (player.speedDodge(this)>0) {
+			if (player.getEvasionRoll()) {
 				if (player.spe - spe < 8)
 					outputText("You narrowly avoid " + a + short + "'s " + weaponVerb + "!");
 				if (player.spe - spe >= 8 && player.spe - spe < 20)
 					outputText("You dodge " + a + short + "'s " + weaponVerb + " with superior quickness!");
 				if (player.spe - spe >= 20)
 					outputText("You deftly avoid " + a + short + "'s slow " + weaponVerb + ".");
-				return;
-			}
-			//Determine if evaded
-			if (player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
-				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s attack.");
-				return;
-			}
-			//Determine if flexibilitied
-			if (player.hasPerk(PerkLib.Flexibility) && rand(100) < 10) {
-				outputText("Using your cat-like agility, you twist out of the way of " + a + short + "'s attack.");
 				return;
 			}
 			//Determine damage - str modified by enemy toughness!
@@ -125,7 +115,7 @@ public class Akbal extends Monster
 				outputText("Akbal releases an ear-splitting roar, hurling a torrent of emerald green flames towards you.\n");
 				//(high HP damage)
 				//Determine if dodged!
-				if (player.speedDodge(this)>0)
+				if (player.getEvasionRoll())
 				{
 					if (player.spe - spe < 8)
 						outputText("You narrowly avoid " + a + short + "'s fire!");
@@ -133,18 +123,6 @@ public class Akbal extends Monster
 						outputText("You dodge " + a + short + "'s fire with superior quickness!");
 					if (player.spe - spe >= 20)
 						outputText("You deftly avoid " + a + short + "'s slow fire-breath.");
-					return;
-				}
-				//Determine if evaded
-				if (player.hasPerk(PerkLib.Evade) && rand(100) < 20)
-				{
-					outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s fire-breath.");
-					return;
-				}
-				//Determine if flexibilitied
-				if (player.hasPerk(PerkLib.Flexibility) && rand(100) < 10)
-				{
-					outputText("Using your cat-like agility, you contort your body to avoid " + a + short + "'s fire-breath.");
 					return;
 				}
 				if (player.hasStatusEffect(StatusEffects.Blizzard)) {

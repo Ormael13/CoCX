@@ -429,8 +429,9 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const KnowsBoneArmor:StatusEffectType                 = mk("Knows Bone armor");
 		public static const KnowsBoneSpirit:StatusEffectType                = mk("Knows Bone spirit");
 		public static const KnowsChainLighting:StatusEffectType             = mk("Knows Chain Lighting");
-		public static const KnowsCharge:StatusEffectType                    = mk("Knows Charge");//Charge Weapon
+		public static const KnowsCharge:StatusEffectType                    = mk("Knows Charge");//Charge Melee Weapon
 		public static const KnowsChargeA:StatusEffectType                   = mk("Knows Charge Armor");
+		public static const KnowsChargeR:StatusEffectType                   = mk("Knows Charge Range");//Charge Range Weapon
 		public static const KnowsClearMind:StatusEffectType                 = mk("Knows Clear Mind");
 		public static const KnowsCleave:StatusEffectType                    = mk("Knows Cleave");
 		public static const KnowsComet:StatusEffectType                     = mk("Knows Comet");
@@ -699,7 +700,6 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const TedOff:StatusEffectType              = mk("Ted Off");
 		public static const VenusOff:StatusEffectType            = mk("Venus Off");
 		public static const SpoodersOff:StatusEffectType         = mk("Belisa Off");
-		public static const HornyHorseyAuraOff:StatusEffectType  = mk("HornyHorseyAuraOff");
 		public static const ThereCouldBeOnlyOne:StatusEffectType = mk("There Could Be Only One");
 		public static const UmasMassage:StatusEffectType         = mk("Uma's Massage"); //v1 = bonus index; v2 = bonus value; v3 = remaining time
 		public static const Uniball:StatusEffectType             = mk("Uniball");
@@ -886,6 +886,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const ChanneledAttack:StatusEffectType           = mkCombat("Channeled Attack");
 		public static const ChanneledAttackType:StatusEffectType       = mkCombat("Channeled Attack Type");
 		public static const ChargeArmor:StatusEffectType               = mkCombat("Charge Armor");
+		public static const ChargeRWeapon:StatusEffectType             = mkCombat("Charge Range Weapon");
 		public static const ChargeWeapon:StatusEffectType              = mkCombat("Charge Weapon");
 		public static const Chokeslam:StatusEffectType                 = mkCombat("Chokeslam");
 		public static const CompBoostingPCArmorValue:StatusEffectType  = mkCombat("Companion Boosting PC Armor Value");

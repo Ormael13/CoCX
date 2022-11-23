@@ -91,17 +91,10 @@ public class MutantIncubus extends Monster {
         outputText("The mutant Incubus rushes towards you, blades outstretched. \n\n");
         //Miss:
         //Determine if evaded
-        if (player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
+        if (player.getEvasionRoll()) {
             outputText("Using your talent for evasion, you manage to sidestep the creature's clumsy charge.");
         }
-        //("Misdirection"
-        else if (player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
-            outputText("Using your talent for misdirection, you manage to sidestep the creature's clumsy charge.");
-        }
-        //Determine if cat'ed
-        else if (player.hasPerk(PerkLib.Flexibility) && rand(100) < 6) {
-            outputText("Using your cat-like flexibility, you manage to bend your spine backwards. Throwing yourself into a sideways flip, you manage to sidestep the creature's clumsy charge.");
-        } else {
+        else {
             outputText("You try to dodge, but the creature’s fist is too fast, hitting you square in the chest. You’re sent tumbling back.");
             eOneAttack(true);
             outputText("As it keeps charging through, a few of the drider’s legs come down onto your prone frame, trampling you. ");
@@ -114,19 +107,9 @@ public class MutantIncubus extends Monster {
     private function HandStab():void {
         clearOutput();
         outputText(capitalA + short + " steps in, stabbing at your chest with one blade. You move, but it was a feint! His other rapier is headed right towards your [weapon] hand.  ");
-        //Blind dodge change
-        if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
-            outputText("The Incubus's blind stab misses outright.");
-        }
-        //Determine if dodged!
-        else if (player.speedDodge(this) > 0) {
+        if (player.getEvasionRoll()) {
             outputText("You pull your weapon back and the stab whiffs, hitting nothing but air.");
         }
-        //Determine if evaded
-        else if (player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
-            outputText("You pull your weapon back evasively and the stab goes wide, missing entirely!");
-        }
-        //Shield Ward
         else if (player.hasPerk(PerkLib.ShieldWard) && rand(2) == 0) {
             outputText("You intercept the Incubus's blade with your shield.");
         } else if (player.weaponName == "spiked gauntlet" || player.weaponName == "hooked gauntlets" || player.weapon == weapons.AETHERD) {

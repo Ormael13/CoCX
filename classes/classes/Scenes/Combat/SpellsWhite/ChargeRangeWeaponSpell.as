@@ -19,13 +19,13 @@ public class ChargeRangeWeaponSpell extends AbstractWhiteSpell {
 	override public function get buttonName():String {
 		return "Charge RW.";
 	}
-	//yes i know it's not yet finished so not touch it yet, ok?
+	
 	override public function isActive():Boolean {
-		return player.hasStatusEffect(StatusEffects.ChargeWeapon);
+		return player.hasStatusEffect(StatusEffects.ChargeRWeapon);
 	}
 	
 	override public function get isKnown():Boolean {
-		return player.hasStatusEffect(StatusEffects.KnowsCharge);
+		return player.hasStatusEffect(StatusEffects.KnowsChargeR);
 	}
 	
 	override public function manaCost():Number {
@@ -33,12 +33,12 @@ public class ChargeRangeWeaponSpell extends AbstractWhiteSpell {
 	}
 	
 	override public function advance(display:Boolean):void {
-		if (player.statusEffectv2(StatusEffects.ChargeWeapon) <= 0) {
-			player.removeStatusEffect(StatusEffects.ChargeWeapon);
-			if (player.hasPerk(PerkLib.SelfbuffsProficiencyEx) && player.mana >= CombatAbilities.ChargeWeapon.manaCost()) CombatAbilities.ChargeWeapon.autocast();
+		if (player.statusEffectv2(StatusEffects.ChargeRWeapon) <= 0) {
+			player.removeStatusEffect(StatusEffects.ChargeRWeapon);
+			if (player.hasPerk(PerkLib.SelfbuffsProficiencyEx) && player.mana >= CombatAbilities.ChargeRWeapon.manaCost()) CombatAbilities.ChargeRWeapon.autocast();
 			else if (display) outputText("<b>Charged Range Weapon effect wore off!</b>\n\n");
 		} else {
-			if (!player.hasPerk(PerkLib.PureMagic)) player.addStatusValue(StatusEffects.ChargeWeapon, 2, -1);
+			if (!player.hasPerk(PerkLib.PureMagic)) player.addStatusValue(StatusEffects.ChargeRWeapon, 2, -1);
 		}
 	}
 	
@@ -46,71 +46,67 @@ public class ChargeRangeWeaponSpell extends AbstractWhiteSpell {
 		var uc:String = super.usabilityCheck();
 		if (uc) return uc;
 		
-		if (player.weaponName == "fists" && !player.hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalWeapons)) {
-			return "Charge weapon can't be casted on your bare fists.";
+		if (player.weaponRangeName == "nothing") {
+			return "Charge range weapon can't be casted without any range weapon.";
 		}
 		
 		return "";
 	}
 	
 	private function weaponSizeBoost():Number {
-		var ab12:Number = 1;
-		if (player.weaponSpecials("") || player.weaponSpecials("Dual")) ab12 *= 2;
-		if (player.weaponSpecials("Hybrid")) ab12 *= 2.5;
-		if (player.weaponSpecials("Large") || player.weaponSpecials("Dual Large")) ab12 *= 3;
-		if (player.weaponSpecials("Massive")) ab12 *= 4;
-		if (player.weapon == weapons.MGSWORD) ab12 *= 2;
-		return ab12;
+		var ab12r:Number = 1;
+		if (player.weaponRangePerk == "Bow" || player.weaponRangePerk == "Crossbow" || player.weaponRangePerk == "Rifle") ab12r *= 2;
+		if (player.weaponRangePerk == "Throwing") ab12r *= 2.5;
+		if (player.weaponRangePerk == "2H Firearm" || player.weaponRangePerk == "Dual Firearms") ab12r *= 3;
+		return ab12r;
 	}
-	
 	private function weaponSizeManaCost():Number {
-		var ba21:Number = 1;
-		if (player.weaponSpecials("") || player.weaponSpecials("Dual Small")) ba21 *= 2;
-		if (player.weaponSpecials("Hybrid")) ba21 *= 3;
-		if (player.weaponSpecials("Large") || player.weaponSpecials("Dual")) ba21 *= 4;
-		if (player.weaponSpecials("Massive") || player.weaponSpecials("Dual Large")) ba21 *= 8;
-		return ba21;
+		var ba21r:Number = 1;
+		if (player.weaponRangePerk == "Bow" || player.weaponRangePerk == "Crossbow" || player.weaponRangePerk == "Rifle") ba21r *= 2;
+		if (player.weaponRangePerk == "Throwing") ba21r *= 2.5;
+		if (player.weaponRangePerk == "2H Firearm" || player.weaponRangePerk == "Dual Firearms") ba21r *= 3;
+		return ba21r;
 	}
 	
 	
 	private function costMultiplier():Number {
-		var spellChargeWeaponMultiplier:Number = 1;
-		spellChargeWeaponMultiplier *= weaponSizeManaCost();
-		if (player.hasStatusEffect(StatusEffects.SiegweirdTraining)) spellChargeWeaponMultiplier *= 0.5;
-		if (player.hasPerk(PerkLib.EverLastingBuffs)) spellChargeWeaponMultiplier *= 2;
-		if (player.hasPerk(PerkLib.EternalyLastingBuffs)) spellChargeWeaponMultiplier *= 2;
-		if (player.hasPerk(PerkLib.SelfbuffsProficiencySu)) spellChargeWeaponMultiplier *= 2;
-		return spellChargeWeaponMultiplier;
+		var spellChargeRangeWeaponMultiplier:Number = 1;
+		spellChargeRangeWeaponMultiplier *= weaponSizeManaCost();
+		if (player.hasStatusEffect(StatusEffects.SiegweirdTraining)) spellChargeRangeWeaponMultiplier *= 0.5;
+		if (player.hasPerk(PerkLib.EverLastingBuffs)) spellChargeRangeWeaponMultiplier *= 2;
+		if (player.hasPerk(PerkLib.EternalyLastingBuffs)) spellChargeRangeWeaponMultiplier *= 2;
+		if (player.hasPerk(PerkLib.SelfbuffsProficiencySu)) spellChargeRangeWeaponMultiplier *= 2;
+		return spellChargeRangeWeaponMultiplier;
 	}
 	
 	override protected function doSpellEffect(output:Boolean = true):void {
-		var ChargeWeaponBoostCap:Number = 4;
-		var ChargeWeaponBoost:Number = 5;
+		var ChargeRangeWeaponBoostCap:Number = 4;
+		var ChargeRangeWeaponBoost:Number = 5;
 		if (player.hasPerk(PerkLib.SelfbuffsProficiency)) {
 			var capB:Number = 1.2;
 			if (player.hasPerk(PerkLib.SelfbuffsProficiencyEx)) capB += 0.8;
 			if (player.hasPerk(PerkLib.SelfbuffsProficiencySu)) capB *= 5;
-			ChargeWeaponBoostCap *= capB;
+			ChargeRangeWeaponBoostCap *= capB;
 		}
-		ChargeWeaponBoostCap *= ChargeWeaponBoost;
+		ChargeRangeWeaponBoostCap *= ChargeRangeWeaponBoost;
 		if (player.hasPerk(PerkLib.DivineArmament)) {
-			ChargeWeaponBoostCap *= 2;
-			ChargeWeaponBoost *= 2;
+			ChargeRangeWeaponBoostCap *= 2;
+			ChargeRangeWeaponBoost *= 2;
 		}
-		//ChargeWeaponBoost += Math.round(player.intStat.max * 0.1); - może tylko jak bedzie mieć perk z prestige job: magus/warock/inny związany z spells
-		if (player.hasPerk(PerkLib.JobEnchanter)) ChargeWeaponBoost *= 1.2;
-		ChargeWeaponBoost *= spellModWhite();
-		//ChargeWeaponBoost = FnHelpers.FN.logScale(ChargeWeaponBoost,ChargeWeaponABC,10);
-		if (ChargeWeaponBoost > ChargeWeaponBoostCap) ChargeWeaponBoost = ChargeWeaponBoostCap;
-		ChargeWeaponBoost *= weaponSizeBoost();
-		ChargeWeaponBoost = Math.round(ChargeWeaponBoost);
-		var ChargeWeaponDuration:Number = 5;
-		ChargeWeaponDuration += combat.magic.perkRelatedDurationBoosting();
+		//ChargeRangeWeaponBoost += Math.round(player.intStat.max * 0.1); - może tylko jak bedzie mieć perk z prestige job: magus/warock/inny związany z spells
+		if (player.hasPerk(PerkLib.JobEnchanter)) ChargeRangeWeaponBoost *= 1.2;
+		ChargeRangeWeaponBoost *= spellModWhite();
+		//ChargeRangeWeaponBoost = FnHelpers.FN.logScale(ChargeRangeWeaponBoost,ChargeWeaponABC,10);
+		if (ChargeRangeWeaponBoost > ChargeRangeWeaponBoostCap) ChargeRangeWeaponBoost = ChargeRangeWeaponBoostCap;
+		ChargeRangeWeaponBoost *= weaponSizeBoost();
+		ChargeRangeWeaponBoost = Math.round(ChargeRangeWeaponBoost);
+		var ChargeRangeWeaponDuration:Number = 5;
+		ChargeRangeWeaponDuration += combat.magic.perkRelatedDurationBoosting();
 		
 		if(output) {
 			outputText("You whisper the brief spell, the words of power cause mana to pour into your weapon as sparks of electricity burst into being. A halo of lightning hums, swirling around your [weaponrange] with a steady charge. Your ammunition crackles with hints of a magical charge as you prepare to fire, allowing your shots to deal more damage.");
 		}
-		player.createStatusEffect(StatusEffects.ChargeWeapon, ChargeWeaponBoost, ChargeWeaponDuration, 0, 0);
+		player.createStatusEffect(StatusEffects.ChargeRWeapon, ChargeRangeWeaponBoost, ChargeRangeWeaponDuration, 0, 0);
 	}
 }
 }

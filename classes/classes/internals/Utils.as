@@ -28,6 +28,11 @@ public class Utils extends Object
             return x & ~(1 << bit) | (int(setTo) << bit);
         }
 
+		//XORs n-th bit of the integer
+		public static function xorBit(x:int, bit:int):int {
+			return setBit(x, bit, !getBit(x, bit));
+		}
+
 		// curryFunction(f,args1)(args2)=f(args1.concat(args2))
 		// e.g. curryFunction(f,x,y)(z,w) = f(x,y,z,w)
 		public static function curry(func:Function,...args):Function

@@ -9,13 +9,8 @@ public class WormMass extends Monster
 	{
 		public function wormAttack():void {
 			//Dodged!
-			if(player.speedDodge(this)>0) {
+			if(player.getEvasionRoll()) {
 				outputText("The worm colony flails at you with its simulated arms, but its lack of coordination allows you to easily dodge its attack.\n");
-				return;
-			}
-			//Evade
-			if(player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
-				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "' attacks.\n");
 				return;
 			}
 			var temp:int = int((str + weaponAttack) - Math.random()*(player.tou+player.armorDef));

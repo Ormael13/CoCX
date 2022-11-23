@@ -189,17 +189,9 @@ this.HP -= (this.maxHP() * 0.08);
 			
 			var damage:Number = (str + weaponAttack) * 0.40;
 			
-			if (damage <= 0 || (combatMiss() || player.hasPerk(PerkLib.Flexibility)))
+			if (damage <= 0 || player.getEvasionRoll())
 			{
 				outputText(" You barely slide out of the way.");
-			}
-			else if (player.hasPerk(PerkLib.Evade))
-			{
-				outputText(" You evade the strike.");
-			}
-			else if (player.hasPerk(PerkLib.Misdirection))
-			{
-				outputText(" Using your skills at misdirection, you avoid the strike.");
 			}
 			else
 			{
@@ -249,9 +241,7 @@ this.HP -= (this.maxHP() * 0.08);
 				outputText("Twisting over, the arachnid demon bares his fangs, attempting to bite you!");
 				
 				//Dodge
-				if (player.hasPerk(PerkLib.Misdirection)) outputText(" You misdirect his venomous strike!");
-				else if (player.hasPerk(PerkLib.Evade)) outputText(" You evade his venomous strike!");
-				else if (combatMiss() || player.hasPerk(PerkLib.Flexibility)) outputText(" You avoid his venomous strike!");
+				if (player.getEvasionRoll()) outputText(" You avoid his venomous strike!");
 				else
 				{
 					//Hits
@@ -286,11 +276,7 @@ this.HP -= (this.maxHP() * 0.08);
 		{
 			outputText("While you’re busy with his spear, he nonchalantly snaps a kick in your direction!");
 			
-			if (player.hasPerk(PerkLib.Misdirection))
-			{
-				outputText(" You twist out of the way at the last moment thanks to your misdirection.");
-			}
-			else if (combatMiss() || player.hasPerk(PerkLib.Evade) || player.hasPerk(PerkLib.Flexibility))
+			if (player.getEvasionRoll())
 			{
 				outputText(" You twist out of the way at the last moment, evading with ease.");
 			}
@@ -317,15 +303,7 @@ this.HP -= (this.maxHP() * 0.08);
 			outputText("Twirling his weapon until it appears a blurred disc, the drider pivots, bringing the haft around at your head!");
 			
 			//Dodge
-			if (combatMiss() || player.hasPerk(PerkLib.Flexibility))
-			{
-				outputText(" You duck in the nick of time.");
-			}
-			else if (player.hasPerk(PerkLib.Misdirection))
-			{
-				outputText(" You were already changing direction. You silently thank Raphael for his training.");
-			}
-			else if (player.hasPerk(PerkLib.Evade))
+			if (player.getEvasionRoll())
 			{
 				outputText(" You lean in the direction of the swing, letting gravity pull you down and away from the stunning blow.");
 			}
@@ -367,17 +345,9 @@ this.HP -= (this.maxHP() * 0.08);
 			//Use hit/dodge messages from above.
 			var damage:Number = str + weaponAttack + 10 - rand(player.tou);
 			
-			if (damage <= 0 || (combatMiss() || player.hasPerk(PerkLib.Flexibility)))
+			if (damage <= 0 || player.getEvasionRoll())
 			{
 				outputText(" You barely slide out of the way.");
-			}
-			else if (player.hasPerk(PerkLib.Evade))
-			{
-				outputText(" You evade the strike.");
-			}
-			else if (player.hasPerk(PerkLib.Misdirection))
-			{
-				outputText(" Using your skills at misdirection, you avoid the strike.");
 			}
 			else
 			{

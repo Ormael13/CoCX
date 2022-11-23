@@ -183,7 +183,7 @@ public class PatchouliScene extends NPCAwareContent {
 
 		clearOutput();
 		outputText("The cat jumps down from the tree and walks ahead of you, showing you the way. Strangely, the landscape seems to change absurdly fast around you as you follow him until ");
-		if (visitedAllAreas()) {
+		if (player.level >= 30 && rand(2) == 0) {
 			if (flags[kFLAGS.PATCHOULI_AND_WONDERLAND] != 1) {
 				outputText("you end up in an exceedingly colorful version of the forest. Things here look weirder than usual, but not in a sexual way, rather it’s like the painting of a mad artist.\n\n");
 				outputText("\"<i>Well wow, out of all locations I didn’t expect us to end up in here... just... just pick up a fruit or two and I will escort you out.</i>\"\n\n");

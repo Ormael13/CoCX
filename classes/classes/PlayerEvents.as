@@ -2423,6 +2423,14 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
                     needNext = true;
 				}
 			}
+			if (player.hasStatusEffect(StatusEffects.ArousalPotion)) {
+				player.addStatusValue(StatusEffects.ArousalPotion, 2, -1);
+				if (player.statusEffectv2(StatusEffects.ArousalPotion) <= 0) {
+					outputText("\n<b>Alraune perfume effect expired.</b>");
+					player.removeStatusEffect(StatusEffects.ArousalPotion);
+					needNext = true;
+				}
+			}
 			if (player.hasStatusEffect(StatusEffects.Eggchest)) { //Eggs in tits!
 				player.addStatusValue(StatusEffects.Eggchest, 1, -1);
 				if (player.statusEffectv1(StatusEffects.Eggchest) <= 0) {

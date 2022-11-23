@@ -25,29 +25,9 @@ import classes.internals.*;
 		private function sophieKissAttack():void {
 			SceneLib.sophieBimbo.sophieSprite();
 			outputText("Sophie bobs and weaves as she closes the distance between you in an instant.  ");
-			//Blind dodge change
-			if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
-				outputText(capitalA + short + " looks like she's trying to kiss you, but it's easy to avoid the blind harpy!\n");
-				return;
-			}
 			//Determine if dodged!
-			if(player.speedDodge(this)>0) {
+			if(player.getEvasionRoll()) {
 				outputText("Sophie changes direction in a flash, trying to slip inside your guard, but you manage to sidestep the incredibly fast harpy's attack.\n");
-				return;
-			}
-			//Determine if evaded
-			if(player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
-				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s attack.\n");
-				return;
-			}
-			if(player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
-				outputText("Using Raphael's teachings and the movement afforded by your bodysuit, you anticipate and sidestep " + a + short + "'s attack.\n");
-				return;
-			}
-			//Determine if cat'ed
-			if(player.hasPerk(PerkLib.Flexibility) && rand(100) < 6) {
-				outputText("With your incredible flexibility, you squeeze out of the way of " + a + short + "");
-				outputText("'s attack.\n");
 				return;
 			}
 			//YOU GOT HIT SON
@@ -79,29 +59,9 @@ import classes.internals.*;
 		private function sophieHarpyBoatsPC():void {
 			SceneLib.sophieBimbo.sophieSprite();
 			outputText(capitalA + short + " flaps her wings and launches herself forwards with her talons up.  ");
-			//Blind dodge change
-			if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
-				outputText(capitalA + short + "'s talons are easy to avoid thanks to her blindness!\n");
-				return;
-			}
 			//Determine if dodged!
-			if(player.speedDodge(this)>0) {
+			if(player.getEvasionRoll()) {
 				outputText(a + short + "'s movements are incredibly fast but you manage to sidestep them.\n");
-				return;
-			}
-			//Determine if evaded
-			if(player.hasPerk(PerkLib.Evade) && rand(100) < 60) {
-				outputText("Using your skills at evading attacks, you determine " + a + short + " is aiming for your upper body and slide under the attack.\n");
-				return;
-			}
-			if(player.hasPerk(PerkLib.Misdirection) && rand(100) < 40 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
-				outputText("Using Raphael's teachings and the movement afforded by your bodysuit, you anticipate and sidestep " + a + short + "'s attack.\n");
-				return;
-			}
-			//Determine if cat'ed
-			if(player.hasPerk(PerkLib.Flexibility) && rand(100) < 40) {
-				outputText("With your incredible flexibility, you squeeze out of the way of " + a + short + "");
-				outputText("'s attack.\n");
 				return;
 			}
 			//YOU GOT HIT SON
@@ -136,29 +96,9 @@ import classes.internals.*;
 			SceneLib.sophieBimbo.sophieSprite();
 			outputText("Sophie pulls her leg up, cocking her thigh dangerously.  Look out!  ");
 			var damage:Number = 0;
-			//Blind dodge change
-			if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
-				outputText(capitalA + short + "'s talons are easy to avoid thanks to her blindness!\n");
-				return;
-			}
 			//Determine if dodged!
-			if(player.speedDodge(this)>0) {
+			if(player.getEvasionRoll()) {
 				outputText(a + short + "'s tears through the air, but you manage to just barely dodge it.\n");
-				return;
-			}
-			//Determine if evaded
-			if(player.hasPerk(PerkLib.Evade) && rand(100) < 60) {
-				outputText("Using your skills at evading attacks, you watch " + a + short + " and deftly sidestep her brutal talons.\n");
-				return;
-			}
-			if(player.hasPerk(PerkLib.Misdirection) && rand(100) < 30 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
-				outputText("Using Raphael's teachings and the movement afforded by your bodysuit, you anticipate and sidestep " + a + short + "'s attack.\n");
-				return;
-			}
-			//Determine if cat'ed
-			if(player.hasPerk(PerkLib.Flexibility) && rand(100) < 40) {
-				outputText("With your incredible flexibility, you squeeze out of the way of " + a + short + "");
-				outputText("'s attack.\n");
 				return;
 			}
 			outputText("Her leg lashes forwards, lightning-quick, and tears bloody gashes into your [skin.type] with her razor-sharp talons! ");

@@ -31,18 +31,10 @@ public class IncubusScientist extends Monster {
         outputText("The demon scientist lines you up in his sights, pulling the trigger several times.")
         //Miss:
         //Determine if evaded
-        if (player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
+        if (player.getEvasionRoll()) {
             outputText("You dodge the bullets, and they fly past, taking small chunks out of the stone wall behind you.");
         }
-        //("Misdirection"
-        else if (player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
-            outputText("Using your talent for misdirection, You dodge the bullets, and they fly past, taking small chunks out of the stone wall behind you.");
-        }
-        //Determine if cat'ed
-        else if (player.hasPerk(PerkLib.Flexibility) && rand(100) < 6) {
-            outputText("Using your cat-like flexibility, you manage to bend your spine, dodging the bullets. They fly past, taking small chunks out of the stone wall behind you.");
-
-        } else {
+        else {
             var damage:Number = Math.round(90 + rand(10) + (player.newGamePlusMod() * 30));
             outputText("You can’t even see the projectile as it flies, striking you in the [chest].");
             player.takePhysDamage(damage * 2);

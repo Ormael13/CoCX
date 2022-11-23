@@ -5,6 +5,7 @@
 package classes.Scenes.NPCs
 {
 import classes.*;
+import classes.Scenes.Combat.Combat;
 import classes.internals.*;
 import classes.BodyParts.Arms;
 import classes.BodyParts.Butt
@@ -46,7 +47,7 @@ import classes.Scenes.SceneLib;
 				createStatusEffect(StatusEffects.Uber, 0, 0, 0, 0);
 			}
 			else {
-				if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) {
+				if (Combat.playerWaitsOrDefends()) {
 					outputText("You dive to the ground just as Camilla breathes a great gout of flame at you. The fire blooms over your back, singeing your [armor], but doesn’t harm you. As she swoops low you see Camilla scowl, looking quite disappointed, but it’s clear she isn’t done yet!");
 				}
 				//MASSIVE DAMAGE!

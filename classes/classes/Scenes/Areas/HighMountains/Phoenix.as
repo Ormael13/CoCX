@@ -8,6 +8,7 @@ import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Combat.Combat;
 import classes.Scenes.SceneLib;
 import classes.internals.ChainedDrop;
 
@@ -39,7 +40,7 @@ public class Phoenix extends Monster
 				createStatusEffect(StatusEffects.Uber, 0, 0, 0, 0);
 			}
 			else {
-				if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) {
+				if (Combat.playerWaitsOrDefends()) {
 					outputText("You dive to the ground just as the phoenix breathes a great gout of flame at you. The fire blooms over your back, singeing your [armor], but doesn’t harm you. As she swoops low you see the phoenix scowl, looking quite disappointed, but it’s clear she isn’t done yet!");
 				}
 				//MASSIVE DAMAGE!

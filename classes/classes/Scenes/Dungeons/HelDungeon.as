@@ -427,7 +427,7 @@ use namespace CoC;
 			flags[kFLAGS.MET_VALERIA] = 1;
 			flags[kFLAGS.TOOK_GOO_ARMOR] = 1;
 			cleanupAfterCombat();
-			if (player.race() != "Jiangshi" || !player.isRace(Races.JIANGSHI, 1, false)){
+			if (!player.isRace(Races.JIANGSHI, 1, false)){
 				var item:Armor = player.setArmor(armors.GOOARMR, true, true); //Item is now the player's old armor
 				//(\"<i>You gained ValeriaArmor!</i>\")
 				//(\"<i>You put a (previous armorName) in your X pouch)

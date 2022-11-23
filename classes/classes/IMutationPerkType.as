@@ -5,6 +5,7 @@
 package classes
 {
 import classes.Scenes.SceneLib;
+import classes.Stats.StatUtils;
 import classes.internals.Utils;
 
 public class IMutationPerkType extends PerkType
@@ -102,8 +103,20 @@ public class IMutationPerkType extends PerkType
 		public function pReqs():void{
 		}
 
-		public function pBuffs(target:Creature = null):Object{
+		public function buffsForTier(pTier:int):Object {
 			return _pBuffs;
+		}
+
+		public function explainBuffs(pTier:int):String {
+			var tempObj:Object = buffsForTier(pTier);
+			var res:String = "";
+			for (var key:String in tempObj)
+				res += StatUtils.explainBuff(key, tempObj[key]);
+			return res;
+		}
+
+		public function pBuffs(target:Creature = null):Object{
+			return buffsForTier(currentTier(this, (target == null) ? player : target));
 		}
 
 		/**

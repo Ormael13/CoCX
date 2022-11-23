@@ -65,9 +65,8 @@ public class FeyArcaneBloodstreamMutation extends IMutationPerkType
         }
 
         //Mutations Buffs
-        override public function pBuffs(target:Creature = null):Object{
+        override public function buffsForTier(pTier:int):Object {
             var pBuffs:Object = {};
-            var pTier:int = currentTier(this, (target == null)? player : target);
             if (pTier == 1) pBuffs['int.mult'] = 0.05;
             if (pTier == 2) pBuffs['int.mult'] = 0.15;
             if (pTier == 3) pBuffs['int.mult'] = 0.35;

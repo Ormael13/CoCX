@@ -69,9 +69,8 @@ public class NaturalPunchingBagMutation extends IMutationPerkType
         }
 
         //Mutations Buffs
-        override public function pBuffs(target:Creature = null):Object{
+        override public function buffsForTier(pTier:int):Object {
             var pBuffs:Object = {};
-            var pTier:int = currentTier(this, (target == null)? player : target);
             var buffVal:Number = 0;
             if (pTier == 1) buffVal = 0.05;
             if (pTier == 2) buffVal = 0.15;

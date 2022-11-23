@@ -744,8 +744,8 @@ private function tentacleRapeContinuationForFemales():void {
 private function centaurGenderlessRetardation():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_tentacleMonster);
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00247] == 0 || player.balls == 0) {
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00247] = 1;
+	if(flags[kFLAGS.TENTABEAST_CENT_GLESS_MET] == 0 || player.balls == 0) {
+		flags[kFLAGS.TENTABEAST_CENT_GLESS_MET] = 1;
 		outputText("Tentacles wrap around your legs before you can make a move to stop them, binding you tightly and coiling upwards.  One slides slowly along your underside, making you shiver in ");
 		if(player.cor < 50 && player.lust < 70) outputText("dread");
 		else outputText("anticipation");

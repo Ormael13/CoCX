@@ -85,9 +85,6 @@ import flash.utils.getQualifiedClassName;
 		protected final function doNext(func:Function, ...args):void {
 			EngineCore.doNext.apply(null, [func].concat(args));
 		}
-		protected final function combatMiss():Boolean {
-			return SceneLib.combat.combatMiss();
-		}
 		protected final function combatParry():Boolean {
 			return SceneLib.combat.combatParry();
 		}

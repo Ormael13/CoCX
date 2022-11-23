@@ -519,50 +519,44 @@ import classes.lists.Gender;
 			outputText("You decide to ask Joy what she thinks about you.");
 			outputText("\n\nJoy blinks and looks at you puzzled. \"<i>What do I, like, think of you? Okay...</i>\" She narrows her eyes, studying you intensely.\n\n");
 			//Race check
-			switch(player.race) {
-				case "human":
+			switch(player.raceObject()) {
+				case Races.HUMAN:
 					outputText("\"<i>Well, you're a human. I haven't seen one of your kind in, like, many, many years. I think the demons got 'em all, or at least they got most of 'em. They try to round up every human who comes through, like, the portals, too. Still, I think there's some of you still hidden around.</i>\"");
 					break;
-				case "dog-morph":
-				case "dog-man":
-				case "dog-woman":
+				case Races.DOG:
 					outputText("\"<i>Well, you're a doggy - woof woof! There used to be a lot of doggys in a city called Tel'Adre somewhere... I dunno what happened to 'em all,</i>\"");
 					break;
-				case "centaur":
-				case "centaur-morph":
+				case Races.CENTAUR:
 					outputText("\"<i>Well, you're a centaur. You look kinda like somebody stuck a human on a horse. How'd that happen, anyway?</i>\"");
 					break;
-				case "cat-morph":
-				case "cat-boy":
-				case "cat-girl":
+				case Races.CAT:
 					outputText("\"<i>Well, you're a kitty... What? Did you, like, think it was funny to have a mousie girlfriend when you're a kitty - cat?</i>\"");
 					break;
-				case "equine-morph":
+				case Races.HORSE:
 					outputText("\"<i>Well, you look like a horse. Neigh! I've never, like, seen a horse-morph before.</i>\"");
 					break;
-				case "fox-morph":
-				case "fox-girl":
+				case Races.FOX:
 					outputText("\"<i>Well, you're a fox. I remember there are some foxes in a city called Tel'Adre somewhere.</i>\"");
 					break;
-				case "goblin":
+				case Races.GOBLIN:
 					outputText("\"<i>Well, you're a goblin... Sort of. Never knew a goblin who wasn't obsessed with trying to fuck everything in sight.");
 					if (player.hasCock()) outputText(" Never knew a goblin with, like, a cock of her own, either.");
 					if (player.gender == Gender.GENDER_FEMALE && !joyHasCock()) outputText(" But I've never, like, heard of a lesbian goblin before.");
 					outputText("</i>\"");
 					break;
-				case "kitsune":
+				case Races.KITSUNE:
 					outputText("\"<i>Well, you look like a kitsune. You look like a fox with lots of tails! There are some kitsunes in the deepwoods. They, like, enjoy playing tricks on you!</i>\"");
 					break;
-				case "bee-morph":
+				case Races.BEE:
 					outputText("\"<i>Well, you're a buzzy little bee-girl/boy/herm/thingy, aren't you? I'm kind of sad you don't make honey... I always liked honey... But I guess it's better than getting eggs up my butt.</i>\"");
 					break;
-				case "shark-morph":
+				case Races.SHARK:
 					outputText("\"<i>Well, you're a shark. You should be splashing around in the lake; what are you doing on dry land? Always want to be a fish out of water?</i>\"");
 					break;
-				case "demon-morph":
+				case Races.DEMON:
 					outputText("\"<i>Well, to be honest, you look like a demon... And that's terrible! Demons are nasty! People will be scared of you if you look like that.</i>\"");
 					break;
-				case "siren":
+				case Races.SIREN:
 					outputText("\"<i>Well, you look like a beautiful siren. Wanna, like, song to me?</i>\"");
 					break;
 				default:

@@ -927,15 +927,17 @@ package classes.Scenes.Places{
 			doNext(camp.returnToCampUseEightHours);
 		}
 
-		//unused
-		/*
 		//Elenwen is nearly as skilled as Kindra, but is very picky on who she teaches to. Better be an elf. Also her training is slower as she tends to fool around.
-		private function bowSkill(diff:Number):Number {
+		private function bowSkill1(diff:Number):Number {
 			player.addStatusValue(StatusEffects.Kelt,1,diff);
-			if (player.statusEffectv1(StatusEffects.Kelt) >= 100) player.changeStatusValue(StatusEffects.Kelt,1,100);//Kelt track basic archery skill that caps on 100 not 150 so not need to thanks me for fixing too high cap on this training ;)
+			if (player.statusEffectv1(StatusEffects.Kelt) >= 100) player.changeStatusValue(StatusEffects.Kelt,1,100);
 			return player.statusEffectv1(StatusEffects.Kelt);
 		}
-		*/
+		private function bowSkill2(diff:Number):Number {
+			player.addStatusValue(StatusEffects.Kindra,1,diff);
+			if (player.statusEffectv1(StatusEffects.Kindra) >= 150) player.changeStatusValue(StatusEffects.Kindra,1,150);
+			return player.statusEffectv1(StatusEffects.Kindra);
+		}
 
 		public function Elenwen():void {
 			clearOutput();
@@ -995,7 +997,7 @@ package classes.Scenes.Places{
 				outputText("\n\nThanks to your extensive training in elven archery you have unlocked the Master Shot Perk! <b>Gained Perk: Master Shot</b>");
 				hasTrainedToday = true;
 			}
-			else if (player.spe >= 200 && player.statusEffectv1(StatusEffects.Kelt) >= 150 && WoodElfBowTraining == QUEST_STAGE_BOWTRAINING3 && !hasTrainedToday){
+			else if (player.spe >= 200 && player.statusEffectv1(StatusEffects.Kelt) >= 100 && player.statusEffectv1(StatusEffects.Kindra) >= 50 && WoodElfBowTraining == QUEST_STAGE_BOWTRAINING3 && !hasTrainedToday){
 				WoodElfBowTraining = QUEST_STAGE_BOWTRAINING4;
 				player.createPerk(PerkLib.ELFArcherCovenant,0,0,0,0);
 				outputText("\n\nThanks to your extensive training in elven archery you have unlocked the Archer Covenant Perk! <b>Gained Perk: Archer Covenant</b>");
@@ -1005,7 +1007,13 @@ package classes.Scenes.Places{
 				hasTrainedToday = true;
 			}
 			if (!player.hasStatusEffect(StatusEffects.Kelt)) player.createStatusEffect(StatusEffects.Kelt, 5, 0, 0, 0);
-			else player.addStatusValue(StatusEffects.Kelt, 1, 5);
+			else {
+				if (player.statusEffectv1(StatusEffects.Kelt) >= 100) {
+					if (!player.hasStatusEffect(StatusEffects.Kindra)) player.createStatusEffect(StatusEffects.Kindra, 5, 0, 0, 0);
+					else bowSkill2(5);
+				}
+				else bowSkill1(5);
+			}
 			CoC.instance.timeQ = 1;
 			doNext(camp.returnToCampUseOneHour);
 		}

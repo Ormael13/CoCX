@@ -9,6 +9,7 @@ import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.BodyParts.LowerBody;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Combat.Combat;
 import classes.Scenes.SceneLib;
 
 public class HeroslayerOmnibus extends Monster
@@ -36,17 +37,10 @@ public class HeroslayerOmnibus extends Monster
 				outputText(capitalA + short + " completely misses you with a blind attack!");
 			}
 			//Determine if dodged!
-			else if (player.speedDodge(this)>0) {
+			else if (player.getEvasionRoll()) {
 				if (player.spe - spe < 8) outputText("You narrowly avoid " + a + short + "'s " + weaponVerb + "!");
 				if (player.spe - spe >= 8 && player.spe - spe < 20) outputText("You dodge " + a + short + "'s " + weaponVerb + " with superior quickness!");
 				if (player.spe - spe >= 20) outputText("You deftly avoid " + a + short + "'s slow " + weaponVerb + ".");
-			}
-			//Determine if evaded
-			else if (player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
-				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s attack.");
-			}
-			else if (player.hasPerk(PerkLib.Misdirection) && rand(100) < 15 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
-				outputText("With Raphael's teachings and the easy movement afforded by your bodysuit, you easily anticipate and sidestep " + a + short + "'s attack.");
 			}
 			else {
 				//Determine damage - str modified by enemy toughness!
@@ -103,7 +97,7 @@ public class HeroslayerOmnibus extends Monster
 				else {
 					removeStatusEffect(StatusEffects.Uber);
 					//(Avoid!)
-					if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) {
+					if (Combat.playerWaitsOrDefends()) {
 						outputText("She throws her hands out, palms facing you, and a rush of purple flame washes towards you.  Thanks to your decision to wait, it's easy to avoid the onrushing flames and her attack.\n\n");
 						outputText(capitalA + short + " sighs and asks, \"<i>Why would you move?  It would make you feel soooo good!</i>\"");
 					}

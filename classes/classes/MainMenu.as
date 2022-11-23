@@ -41,8 +41,8 @@ public class MainMenu extends BaseContent {
 		mainView.dataButton.toolTipHeader       = "Data";
 		mainView.statsButton.toolTipText        = "View your stats.";
 		mainView.statsButton.toolTipHeader      = "Stats";
-		mainView.perksButton.toolTipText        = "View your perks.";
-		mainView.perksButton.toolTipHeader      = "Perks";
+		mainView.perksButton.toolTipText        = "View your perks and toggle different in-game options.";
+		mainView.perksButton.toolTipHeader      = "Perks & Opt.";
 		mainView.appearanceButton.toolTipText   = "View your appearance.";
 		mainView.appearanceButton.toolTipHeader = "Appearance";
 		//Sets game state to 3, used for determining back functionality of save/load menu.
