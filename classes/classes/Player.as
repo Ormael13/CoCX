@@ -5623,6 +5623,8 @@ use namespace CoC;
             combatMastery[index].experience = experience;
 			// Can we get any new attacks?
 			if (grantsBonusAttacks) {// if it grants bonus attacks
+				var maxAttacksNew:int = SceneLib.combat.maxCurrentAttacks();
+				outputText("\n<b>Thanks to your training, your maximum bonus attack count has increased to " + maxAttacksNew + "!</b>\n");
 				// remember the last value
 				var masteryArrays:Array = masteryBonusAttacks;
 				for each (var masteryArr:Array in masteryArrays) {
@@ -5634,7 +5636,7 @@ use namespace CoC;
 								// before THIS level (new attack), it was maxed (0 in flag = 1 attack, 1 = 2 attacks, etc.)
 								if (flags[kFLAGS.MULTIATTACK_STYLE] == maxAttacksOld - 1) {
 									// keep up with the new max
-									flags[kFLAGS.MULTIATTACK_STYLE] = SceneLib.combat.maxCurrentAttacks() - 1;
+									flags[kFLAGS.MULTIATTACK_STYLE] = maxAttacksNew - 1;
 								}
 							}
 						}
