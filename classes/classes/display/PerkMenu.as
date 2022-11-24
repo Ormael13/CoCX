@@ -185,7 +185,6 @@ public class PerkMenu extends BaseContent {
 		var zerkingStyle:Function = curry(setFlag, meleeOptions, kFLAGS.ZERKER_COMBAT_MODE);
 
 		clearOutput();
-		outputText("You will always attack ");
 		outputText("You will always attack " + (multiAttackStyle < 1 ? "once" :
 			multiAttackStyle == 1 ? "twice" :
 				NUMBER_WORDS_NORMAL[multiAttackStyle + 1] + " times"));
@@ -294,14 +293,15 @@ public class PerkMenu extends BaseContent {
 			doNext(meleeOptions);
 			return;
 		}
-		outputText("Current number of attacks: " + currentAttacks + "\n");
+		outputText("Current number of attacks: " + (currentAttacks + 1) + "\n");
 		outputText("Maximum number of attacks with your current weapon: " + maxAttacks + "\n");
 		var nba:int = player.nextBonusAttack();
 		if (nba < 0) outputText("You've reached the maximum number of bonus attacks from mastery!");
 		else outputText("Next bonus attack at mastery level " + nba);
-		outputText("\n\nHow many attacks would you like to deal?")
+		outputText("\n\nHow many attacks would you like to deal?");
+		menu();
 		var atk:int = 0;
-		while (atk <= maxAttacks) {
+		while (atk < maxAttacks) {
 			addButton(atk, NUMBER_WORDS_CAPITAL[atk + 1], multiAttackStyle, atk)
 				.disableIf(currentAttacks == atk, "Already selected");
 			atk++;
@@ -314,10 +314,11 @@ public class PerkMenu extends BaseContent {
 		var currentProj:int = flags[kFLAGS.MULTISHOT_STYLE];
 		var maxProj:int = combat.maxCurrentRangeAttacks();
 		clearOutput();
-		outputText("Current number of projectiles per shot: " + currentProj + "\n");
+		outputText("Current number of projectiles per shot: " + (currentProj + 1) + "\n");
 		outputText("Maximum number of projectiles per shot with your current weapon: " + maxProj + "\n");
+		menu();
 		var atk:int = 0;
-		while (atk <= maxProj) {
+		while (atk < maxProj) {
 			addButton(atk, NUMBER_WORDS_CAPITAL[atk + 1], multiShotStyle, atk)
 				.disableIf(currentProj == atk, "Already selected");
 			atk++;
