@@ -3207,7 +3207,7 @@ public final class Mutations extends MutationsHelper {
 		}
 		if (player.hasPerk(PerkLib.PrestigeJobNecromancer) || player.hasPerk(PerkLib.PrestigeJobGreySage)) {
 			//Smart enough for Bone spirit and doesnt have it
-			if (player.inte >= 100 &&  !player.hasStatusEffect(StatusEffects.KnowsBoneSpirit)) {
+			if (player.inte >= 100 && !player.hasStatusEffect(StatusEffects.KnowsBoneSpirit)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new necromancer spell: Bone spirit.</b>");
 				player.createStatusEffect(StatusEffects.KnowsBoneSpirit, 0, 0, 0, 0);
 				return;
@@ -3505,6 +3505,26 @@ public final class Mutations extends MutationsHelper {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Tears of Denial.</b>");
 				player.createStatusEffect(StatusEffects.KnowsTearsOfDenial, 0, 0, 0, 0);
 			}
+		}
+		if (player.hasPerk(PerkLib.PrestigeJobGreySage)) {
+			//Smart enough for Plant growth and doesnt have it
+			if (player.inte >= 100 && !player.hasStatusEffect(StatusEffects.KnowsPlantGrowth)) {
+				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new green spell: Plant growth.</b>");
+				player.createStatusEffect(StatusEffects.KnowsPlantGrowth, 0, 0, 0, 0);
+				return;
+			}
+			//Smart enough for Entangle and doesnt have it
+			if (player.inte >= 110 && !player.hasStatusEffect(StatusEffects.KnowsEntangle)) {
+				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new green spell: Entangle.</b>");
+				player.createStatusEffect(StatusEffects.KnowsEntangle, 0, 0, 0, 0);
+				return;
+			}/*
+			//Smart enough for Boneshatter and doesnt have it
+			if (player.inte >= 120 && !player.hasStatusEffect(StatusEffects.KnowsBoneshatter)) {
+				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new green spell: Boneshatter.</b>");
+				player.createStatusEffect(StatusEffects.KnowsBoneshatter, 0, 0, 0, 0);
+				return;
+			}*/
 		}
     }
 

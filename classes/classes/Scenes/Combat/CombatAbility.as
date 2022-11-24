@@ -119,6 +119,10 @@ public class CombatAbility extends BaseCombatContent {
 		name:"Divine Spell",
 		group:"spell"
 	});
+	public static const CAT_SPELL_GREEN:int = EnumValue.add(AllCategories, 11, "SPELL_GREEN", {
+		name:"Green Spell",
+		group:"spell"
+	});
 	
 	public static var AllTags:/*EnumValue*/Array = [];
 	public static const TAG_DAMAGING:int = EnumValue.add(AllTags, 0, 'DAMAGING', {
