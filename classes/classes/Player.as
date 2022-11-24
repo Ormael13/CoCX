@@ -5601,6 +5601,9 @@ use namespace CoC;
 
 			var xpToLevel:Number = CombatExpToLevelUp(level, melee);
 			var xpLoop:Number = exp;
+			// for tracking bonus attack masteries
+			var grantsBonusAttacks:Boolean = Combat.bonusAttackMasteries.indexOf(index) != -1;
+			var maxAttacksOld:int = SceneLib.combat.maxCurrentAttacks();
 			// This loop does weapon types ( dagger, sword, fist, claws, ... )
 			while (xpLoop > 0) {
 				experience += xpLoop;	// incremeent the XP of the weapon mastery
@@ -5610,16 +5613,34 @@ use namespace CoC;
 				if (level < maxCombatLevel(melee) && experience >= xpToLevel) {
 					outputText("\n<b>" + desc + " leveled up to " + (++level) + "!</b>\n");
 					// Any Leftover EXP?
-
 					xpLoop = experience - xpToLevel;
 					experience = 0;
 					// recalculate xp to next level ( dont want to gain 50 levels unexpectedly
 					xpToLevel = CombatExpToLevelUp(level, melee);
 				}
 			}
-
             combatMastery[index].level = level;
             combatMastery[index].experience = experience;
+			// Can we get any new attacks?
+			if (grantsBonusAttacks) {// if it grants bonus attacks
+				// remember the last value
+				var masteryArrays:Array = masteryBonusAttacks;
+				for each (var masteryArr:Array in masteryArrays) {
+					// if matches index, used right now
+					if (masteryArr[0] == index && masteryArr[1]) {
+						for (var bonusPos:int = 0; bonusPos < masteryArr[2].length; ++bonusPos) {
+							// AND grants a new attack at this level
+							if (combatMastery[masteryArr[0]].level == masteryArr[2][bonusPos]) {
+								// before THIS level (new attack), it was maxed (0 in flag = 1 attack, 1 = 2 attacks, etc.)
+								if (flags[kFLAGS.MULTIATTACK_STYLE] == maxAttacksOld - 1) {
+									// keep up with the new max
+									flags[kFLAGS.MULTIATTACK_STYLE] = SceneLib.combat.maxCurrentAttacks() - 1;
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 
 		public function get masteryBonusAttacks():Array {

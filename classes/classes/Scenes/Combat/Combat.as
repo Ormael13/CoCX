@@ -11301,30 +11301,41 @@ public class Combat extends BaseContent {
 
 
 
-public static var MASTERY_FERAL:int = 0;
-public static var MASTERY_GAUNTLET:int = 1;
-public static var MASTERY_DAGGER:int = 2;
-public static var MASTERY_SWORD:int = 3;
-public static var MASTERY_AXE:int = 4;
-public static var MASTERY_MACEHAMMER:int = 5;
-public static var MASTERY_DUELINGSWORD:int = 6;
-public static var MASTERY_POLEARM:int = 7;
-public static var MASTERY_SPEAR:int = 8;
-public static var MASTERY_WHIP:int = 9;
-public static var MASTERY_EXOTIC:int = 10;
-public static var MASTERY_ARCHERY:int = 11;
-public static var MASTERY_THROWING:int = 12;
-public static var MASTERY_FIREARMS:int = 13;
-public static var MASTERY_DUAL_SMALL:int = 14;
-public static var MASTERY_DUAL_NORMAL:int = 15;
-public static var MASTERY_DUAL_LARGE:int = 16;
-public static var MASTERY_DUAL_FIREARMS:int = 17;
-public static var MASTERY_SMALL:int = 18;
-public static var MASTERY_NORMAL:int = 19;
-public static var MASTERY_LARGE:int = 20;
-public static var MASTERY_MASSIVE:int = 21;
-public static var MASTERY_RANGED:int = 22;
-public static var MASTERY_UNARMED:int = 23;
+public static const MASTERY_FERAL:int = 0;
+public static const MASTERY_GAUNTLET:int = 1;
+public static const MASTERY_DAGGER:int = 2;
+public static const MASTERY_SWORD:int = 3;
+public static const MASTERY_AXE:int = 4;
+public static const MASTERY_MACEHAMMER:int = 5;
+public static const MASTERY_DUELINGSWORD:int = 6;
+public static const MASTERY_POLEARM:int = 7;
+public static const MASTERY_SPEAR:int = 8;
+public static const MASTERY_WHIP:int = 9;
+public static const MASTERY_EXOTIC:int = 10;
+public static const MASTERY_ARCHERY:int = 11;
+public static const MASTERY_THROWING:int = 12;
+public static const MASTERY_FIREARMS:int = 13;
+public static const MASTERY_DUAL_SMALL:int = 14;
+public static const MASTERY_DUAL_NORMAL:int = 15;
+public static const MASTERY_DUAL_LARGE:int = 16;
+public static const MASTERY_DUAL_FIREARMS:int = 17;
+public static const MASTERY_SMALL:int = 18;
+public static const MASTERY_NORMAL:int = 19;
+public static const MASTERY_LARGE:int = 20;
+public static const MASTERY_MASSIVE:int = 21;
+public static const MASTERY_RANGED:int = 22;
+public static const MASTERY_UNARMED:int = 23;
+
+public static const bonusAttackMasteries:Array = [
+    MASTERY_FERAL,
+    MASTERY_GAUNTLET,
+    MASTERY_UNARMED,
+    MASTERY_SMALL,
+    MASTERY_LARGE,
+    MASTERY_MASSIVE,
+    MASTERY_RANGED,
+    MASTERY_NORMAL
+];
 
 public function feralCombatXP(XP:Number = 0):void       {player.gainCombatXP(MASTERY_FERAL, XP * weaponmasteryXPMulti());}
 public function gauntletXP(XP:Number = 0):void          {player.gainCombatXP(MASTERY_GAUNTLET, XP * weaponmasteryXPMulti());}
