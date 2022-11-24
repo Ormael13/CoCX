@@ -4370,12 +4370,12 @@
                 <case values="CockTypesEnum.DOG,CockTypesEnum.WOLF,CockTypesEnum.FOX">
                     <if test="big">
                         <show part="penis$taur/caninebig$taur"/>
-						<if test="PlayerIsCriticalyAroused">
+						<if test="showDickDrippies">
 								<show part="cum$taur/caninebig$taur"/>
 						</if>
                         <else>
                             <show part="penis$taur/canine$taur"/>
-							<if test="PlayerIsCriticalyAroused">
+							<if test="showDickDrippies">
 								<show part="cum$taur/canine$taur"/>
 							</if>
                         </else>
@@ -4385,12 +4385,12 @@
 				<case values="CockTypesEnum.CAT,CockTypesEnum.DISPLACER">
 					<if test="big">
                         <show part="penis$taur/catbig$taur"/>
-						<if test="PlayerIsCriticalyAroused">
+						<if test="showDickDrippies">
 							<show part="cum$taur/catbig$taur"/>
 						</if>
                         <else>
                             <show part="penis$taur/cat$taur"/>
-							<if test="PlayerIsCriticalyAroused">
+							<if test="showDickDrippies">
 								<show part="cum$taur/cat$taur"/>
 							</if>
                         </else>
@@ -4400,12 +4400,12 @@
                 <case values="CockTypesEnum.LIZARD,CockTypesEnum.DRAGON">
 					<if test="big">
                         <show part="penis$taur/reptilebig$taur"/>
-						<if test="PlayerIsCriticalyAroused">
+						<if test="showDickDrippies">
 							<show part="cum$taur/reptilebig$taur"/>
 						</if>
                         <else>
                             <show part="penis$taur/reptile$taur"/>
-							<if test="PlayerIsCriticalyAroused">
+							<if test="showDickDrippies">
 								<show part="cum$taur/reptile$taur"/>
 							</if>
                         </else>
@@ -4415,12 +4415,12 @@
                 <case values="CockTypesEnum.HORSE">
 					<if test="big">
                         <show part="penis$taur/horsebig$taur"/>
-						<if test="PlayerIsCriticalyAroused">
+						<if test="showDickDrippies">
 							<show part="cum$taur/horsebig$taur"/>
 						</if>
                         <else>
                             <show part="penis$taur/horse$taur"/>
-							<if test="PlayerIsCriticalyAroused">
+							<if test="showDickDrippies">
 								<show part="cum$taur/horse$taur"/>
 							</if>
                         </else>
@@ -4430,12 +4430,12 @@
                 <case values="CockTypesEnum.BEE">
                     <if test="big">
                         <show part="penis$taur/chitinbig$taur"/>
-						<if test="PlayerIsCriticalyAroused">
+						<if test="showDickDrippies">
 							<show part="cum$taur/humanbig$taur"/>
 						</if>
                         <else>
                             <show part="penis$taur/chitin$taur"/>
-							<if test="PlayerIsCriticalyAroused">
+							<if test="showDickDrippies">
 								<show part="cum$taur/human$taur"/>
 							</if>
                         </else>
@@ -4464,12 +4464,12 @@
 				<case values="CockTypesEnum.DOG">
                     <if test="big">
                         <show part="penis$taur/caninebig$taur"/>
-						<if test="PlayerIsCriticalyAroused">
+						<if test="showDickDrippies">
 							<show part="cum$taur/caninebig$taur"/>
 						</if>
                         <else>
                             <show part="penis$taur/canine$taur"/>
-							<if test="PlayerIsCriticalyAroused">
+							<if test="showDickDrippies">
 								<show part="cum$taur/canine$taur"/>
 							</if>
                         </else>
@@ -4500,12 +4500,12 @@
 						<if test="skin.base.pattern==Pattern.ORCA_UNDERBODY or skin.base.pattern==Pattern.SEA_DRAGON_UNDERBODY">
 							<if test="big">
 								<show part="penis$taur/human2big$taur"/>
-								<if test="PlayerIsCriticalyAroused">
+								<if test="showDickDrippies">
 									<show part="cum$taur/humanbig$taur"/>
 								</if>
 								<else>
 									<show part="penis$taur/human2$taur"/>
-									<if test="PlayerIsCriticalyAroused">
+									<if test="showDickDrippies">
 										<show part="cum$taur/human$taur"/>
 									</if>
 								</else>
@@ -4513,12 +4513,12 @@
 							<else>
 								<if test="big">
 									<show part="penis$taur/sharkbig$taur"/>
-									<if test="PlayerIsCriticalyAroused">
+									<if test="showDickDrippies">
 										<show part="cum$taur/humanbig$taur"/>
 									</if>
 									<else>
 										<show part="penis$taur/shark$taur"/>
-										<if test="PlayerIsCriticalyAroused">
+										<if test="showDickDrippies">
 											<show part="cum$taur/human$taur"/>
 										</if>
 									</else>
@@ -4528,12 +4528,12 @@
 						<else>
 							<if test="big">
 								<show part="penis$taur/humanbig$taur"/>
-								<if test="PlayerIsCriticalyAroused">
+								<if test="showDickDrippies">
 									<show part="cum$taur/humanbig$taur"/>
 								</if>
 								<else>
 									<show part="penis$taur/human$taur"/>
-									<if test="PlayerIsCriticalyAroused">
+									<if test="showDickDrippies">
 										<show part="cum$taur/human$taur"/>
 									</if>
 								</else>

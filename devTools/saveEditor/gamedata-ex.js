@@ -1172,7 +1172,6 @@ Gamedata.values = {
 		"stageBow": "number",
 		"stageSpear": "number",
 		"elfHasTrainedToday": "checkbox",
-		"elfHasTrainedTodayCooldown": "number",
 	}),
 	ss_zenji: customValuesOfSaveableState("ZenjiScenes", {
 		"Z1stKid": "text",

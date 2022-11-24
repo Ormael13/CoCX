@@ -2296,7 +2296,7 @@ internal function sheilaGotWhomped():void {
 			.disableIf(player.cockThatFits(48) < 0, "Req. a cock fitting 48 area.");
 		addButton(1,"Forced BJ", sceneHunter.callFitNofit, forcedSheilaOral, 8, "length")
 			.disableIf(player.isTaur(), "Not for taurs anymore. Sorry.")
-			.disableIf(!player.hasVagina(), "Req. a cock.");
+			.disableIf(!player.hasCock(), "Req. a cock.");
 		addButton(2,"Forced Lick",forcedSheilaOral,-1)
 			.disableIf(!player.hasVagina(), "Req. a vagina.");
 		addButton(3, "Use Dildo", sheilaGetsRapedWithADildont)

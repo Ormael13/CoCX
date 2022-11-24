@@ -68,6 +68,7 @@ package classes.Scenes.Places{
 				WoodElvesQuest = o["stage"];
 				WoodElfBowTraining = o["stageBow"];
 				WoodElfSpearTraining = o["stageSpear"];
+				hasTrainedToday = o["elfHasTrainedToday"];
 			} else {
 				// loading from old save
 				resetState();
@@ -595,7 +596,7 @@ package classes.Scenes.Places{
 			if (player.hasPerk(PerkLib.RacialParagon))
 				flags[kFLAGS.APEX_SELECTED_RACE] = Races.WOODELF;
 			player.removeAllRacialMutation();
-			doNext(camp.returnToCampUseSixteenHours);
+			doNext(camp.returnToCamp, 16);
 		}
 
 		public function GroveLayout():void {

@@ -1800,7 +1800,7 @@ public class Combat extends BaseContent {
         if (crit) outputText(" <b>Critical!</b>");
         //checkMinionsAchievementDamage(elementalDamage);
 		outputText(" ");
-        if (monster.HP >= 1 && monster.lust <= monster.maxOverLust()) {
+        if (monster.HP > monster.minHP() && monster.lust < monster.maxOverLust()) {
 			if (summonedElementalsMulti > 1) {
 				summonedElementalsMulti -= 1;
 				elementalattacks(elementType, summonedElementals, summonedElementalsMulti, summonedEpicElemental);
@@ -8127,54 +8127,41 @@ public class Combat extends BaseContent {
     public static const USEMANA_WHITE_HEAL:int = 10;
     public static const USEMANA_BLACK_HEAL:int = 11;
 
-    //Modify mana (mod>0 - subtract, mod<0 - regen)
-    public function useManaImpl(mod:Number, type:int = USEMANA_NORMAL):void {
-        //Spell reductions
+    public function finalSpellCost(base:Number, type:int = USEMANA_NORMAL):Number {
         switch (type) {
             case USEMANA_MAGIC:
             case USEMANA_MAGIC_NOBM:
-                mod = spellCost(mod);
-                break;
-			case USEMANA_GREY:
-			case USEMANA_GREY_NOBM:
-				mod = spellCostGrey(mod);
-				break;
+                return spellCost(base);
+            case USEMANA_GREY:
+            case USEMANA_GREY_NOBM:
+                return spellCostGrey(base);
             case USEMANA_WHITE:
             case USEMANA_WHITE_NOBM:
-                mod = spellCostWhite(mod);
-                break;
+                return spellCostWhite(base);
             case USEMANA_BLACK:
             case USEMANA_BLACK_NOBM:
-                mod = spellCostBlack(mod);
-                break;
+                return spellCostBlack(base);
             case USEMANA_MAGIC_HEAL:
-                mod = healCost(mod);
-                break;
+                return healCost(base);
             case USEMANA_WHITE_HEAL:
-                mod = healCostWhite(mod);
-                break;
+                return healCostWhite(base);
             case USEMANA_BLACK_HEAL:
-                mod = healCostBlack(mod);
-                break;
+                return healCostBlack(base);
+            default: // including normal
+                return base;
         }
-        //Blood mages use HP for spells
-        var damage:Number;
-        if (player.hasStatusEffect(StatusEffects.DarkRitual)) {
-            damage = player.maxHP() * 0.1;
-            player.takePhysDamage(damage);
-            //statScreenRefresh();
-        }
-        if (mod < 0) {
-            mod *= manaRecoveryMultiplier();
-        }
-        player.mana = boundFloat(0, player.mana - mod, player.maxMana());
-        if (mod < 0) {
-            mainView.statsView.showStatUp('mana');
-        }
-        if (mod > 0) {
-            mainView.statsView.showStatDown('mana');
-        }
-        statScreenRefresh();
+    }
+
+    public function darkRitualCheckDamage():void {
+        if (player.hasStatusEffect(StatusEffects.DarkRitual))
+            player.takePhysDamage(player.maxHP() * 0.1);
+    }
+
+    //Modify mana (mod>0 - subtract, mod<0 - regen)
+    public function useManaImpl(mod:Number, type:int = USEMANA_NORMAL):void {
+        mod = finalSpellCost(mod, type); //Spell reductions - spells do this for themselves!
+        if (mod < 0) mod *= manaRecoveryMultiplier();
+        EngineCore.ManaChange(-mod);
     }
 
     public function fatigueCost(mod:Number, type:Number = USEFATG_NORMAL):Number {
@@ -11314,30 +11301,41 @@ public class Combat extends BaseContent {
 
 
 
-public static var MASTERY_FERAL:int = 0;
-public static var MASTERY_GAUNTLET:int = 1;
-public static var MASTERY_DAGGER:int = 2;
-public static var MASTERY_SWORD:int = 3;
-public static var MASTERY_AXE:int = 4;
-public static var MASTERY_MACEHAMMER:int = 5;
-public static var MASTERY_DUELINGSWORD:int = 6;
-public static var MASTERY_POLEARM:int = 7;
-public static var MASTERY_SPEAR:int = 8;
-public static var MASTERY_WHIP:int = 9;
-public static var MASTERY_EXOTIC:int = 10;
-public static var MASTERY_ARCHERY:int = 11;
-public static var MASTERY_THROWING:int = 12;
-public static var MASTERY_FIREARMS:int = 13;
-public static var MASTERY_DUAL_SMALL:int = 14;
-public static var MASTERY_DUAL_NORMAL:int = 15;
-public static var MASTERY_DUAL_LARGE:int = 16;
-public static var MASTERY_DUAL_FIREARMS:int = 17;
-public static var MASTERY_SMALL:int = 18;
-public static var MASTERY_NORMAL:int = 19;
-public static var MASTERY_LARGE:int = 20;
-public static var MASTERY_MASSIVE:int = 21;
-public static var MASTERY_RANGED:int = 22;
-public static var MASTERY_UNARMED:int = 23;
+public static const MASTERY_FERAL:int = 0;
+public static const MASTERY_GAUNTLET:int = 1;
+public static const MASTERY_DAGGER:int = 2;
+public static const MASTERY_SWORD:int = 3;
+public static const MASTERY_AXE:int = 4;
+public static const MASTERY_MACEHAMMER:int = 5;
+public static const MASTERY_DUELINGSWORD:int = 6;
+public static const MASTERY_POLEARM:int = 7;
+public static const MASTERY_SPEAR:int = 8;
+public static const MASTERY_WHIP:int = 9;
+public static const MASTERY_EXOTIC:int = 10;
+public static const MASTERY_ARCHERY:int = 11;
+public static const MASTERY_THROWING:int = 12;
+public static const MASTERY_FIREARMS:int = 13;
+public static const MASTERY_DUAL_SMALL:int = 14;
+public static const MASTERY_DUAL_NORMAL:int = 15;
+public static const MASTERY_DUAL_LARGE:int = 16;
+public static const MASTERY_DUAL_FIREARMS:int = 17;
+public static const MASTERY_SMALL:int = 18;
+public static const MASTERY_NORMAL:int = 19;
+public static const MASTERY_LARGE:int = 20;
+public static const MASTERY_MASSIVE:int = 21;
+public static const MASTERY_RANGED:int = 22;
+public static const MASTERY_UNARMED:int = 23;
+
+public static const bonusAttackMasteries:Array = [
+    MASTERY_FERAL,
+    MASTERY_GAUNTLET,
+    MASTERY_UNARMED,
+    MASTERY_SMALL,
+    MASTERY_LARGE,
+    MASTERY_MASSIVE,
+    MASTERY_RANGED,
+    MASTERY_NORMAL
+];
 
 public function feralCombatXP(XP:Number = 0):void       {player.gainCombatXP(MASTERY_FERAL, XP * weaponmasteryXPMulti());}
 public function gauntletXP(XP:Number = 0):void          {player.gainCombatXP(MASTERY_GAUNTLET, XP * weaponmasteryXPMulti());}
@@ -13542,6 +13540,7 @@ public function BreakOutWeb():void {
 public function HypnosisHeal():void {
     clearOutput();
     useMana(30, USEMANA_WHITE_HEAL);
+    combat.darkRitualCheckDamage();
     outputText("You initiate a healing spell. ");
     CombatAbilities.Heal.doEffect(false);
     outputText("\n\nIt's only when you finish your casting that [themonster] snaps out of the hypnosis...But it's too late. ");
@@ -13557,6 +13556,7 @@ public function HypnosisHeal():void {
 public function HypnosisDarknessShard():void {
     clearOutput();
     useMana(30, USEMANA_BLACK);
+    combat.darkRitualCheckDamage();
     outputText("You initiate a Darkness spell. ");
     CombatAbilities.DarknessShard.doEffect(false);
     CombatAbilities.DarknessShard.doEffect(false);
@@ -13573,6 +13573,7 @@ public function HypnosisDarknessShard():void {
 public function HypnosisDuskWave():void {
     clearOutput();
     useMana(30, USEMANA_BLACK);
+    combat.darkRitualCheckDamage();
     outputText("You initiate a Darkness spell. ");
     CombatAbilities.DuskWave.doEffect(false);
     CombatAbilities.DuskWave.doEffect(false);

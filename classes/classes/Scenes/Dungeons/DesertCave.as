@@ -1118,7 +1118,7 @@ public class DesertCave extends DungeonAbstractContent
             //Female Victory Sex
 			addButtonIfTrue(3,"Ladysex",ladyVictorySex, "Req. a vagina", player.hasVagina(), "Ride the Cum Witch's cock until she cums!");
 			//Complicated leaving
-			if(monster.HP >= 1)
+			if(monster.HP > monster.minHP())
 				addButton(14,"Decline",declineSandWitch);
 			else if (CoC.instance.inCombat)
 				addButton(14,"Leave",cleanupAfterCombat);
