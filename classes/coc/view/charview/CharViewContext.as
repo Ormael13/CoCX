@@ -63,6 +63,7 @@ public class CharViewContext extends ExecContext {
 					showLegClothing: !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && [LowerBody.GAZER, LowerBody.YETI, LowerBody.KIRIN, LowerBody.HOOFED, LowerBody.CLOVEN_HOOFED, LowerBody.HARPY, LowerBody.BUNNY, LowerBody.GOO, LowerBody.NAGA, LowerBody.HYDRA, LowerBody.DRIDER, LowerBody.ATLACH_NACHA, LowerBody.HINEZUMI, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.CANCER, LowerBody.GHOST_2].indexOf(player.lowerBody) == -1 && player.legCount == 2 && !player.isStancing(),
 					showPanty: !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && [LowerBody.GAZER, LowerBody.GOO, LowerBody.NAGA, LowerBody.HYDRA, LowerBody.DRIDER, LowerBody.ATLACH_NACHA, LowerBody.HINEZUMI, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.CANCER, LowerBody.GHOST_2].indexOf(player.lowerBody) == -1 && player.legCount == 2 && !player.isStancing(),
 					PlayerHasViewableOutfit: !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && player.isWearingArmor(),
+					PlayerHasABra: !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && player.isWearingBra(),
 					PlayerIsStancing: player.isStancing(),
 					PlayerIsFeralStancing: player.isFeralStancing(),
 					PlayerIsSitStancing: player.isSitStancing(),
