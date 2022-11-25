@@ -32,6 +32,7 @@ import classes.Items.Necklace;
 import classes.Items.NecklaceLib;
 import classes.Items.Shield;
 import classes.Items.Undergarment;
+import classes.Items.UndergarmentLib;
 import classes.Items.Vehicles;
 import classes.Items.Weapon;
 import classes.Items.WeaponRange;
@@ -545,6 +546,9 @@ use namespace CoC;
 		}
 		public function isWearingArmor():Boolean {
 			return armor != ArmorLib.COMFORTABLE_UNDERCLOTHES && !armor.isNothing;
+		}
+		public function isWearingBra():Boolean {
+			return !upperGarment.isNothing;
 		}
 		public function isStancing():Boolean {
 			return (lowerBody == LowerBody.DRAGON && arms.type == Arms.DRACONIC) || (lowerBody == LowerBody.HINEZUMI && arms.type == Arms.HINEZUMI) || isFeralStancing() || isSitStancing();

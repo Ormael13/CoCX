@@ -1,5 +1,6 @@
 package classes.Scenes.Combat {
 import classes.Scenes.Combat.SpellsBlack.*;
+import classes.Scenes.Combat.SpellsGreen.*;
 import classes.Scenes.Combat.SpellsWhite.*;
 import classes.Scenes.Combat.SpellsHex.*;
 import classes.Scenes.Combat.SpellsDivine.*;
@@ -206,6 +207,16 @@ public class CombatAbilities {
 		BloodField
 	];
 	
+	public static const PlantGrowth:PlantGrowthSpell   = new PlantGrowthSpell();
+	public static const Entangle:EntangleSpell         = new EntangleSpell();
+	//public static const Boneshatter:BoneshatterSpell            = new BoneshatterSpell();
+
+	public static const ALL_GREEN_SPELLS:/*CombatAbility*/Array = [
+		PlantGrowth,
+		Entangle/*,
+		Boneshatter*/
+	];
+	
 	public static const ALL_SPELLS:/*CombatAbility*/Array = []
 			.concat(ALL_WHITE_SPELLS)
 			.concat(ALL_BLACK_SPELLS)
@@ -214,6 +225,7 @@ public class CombatAbilities {
 			.concat(ALL_NECRO_SPELLS)
 			.concat(ALL_GREY_SPELLS)
 			.concat(ALL_BLOOD_SPELLS)
+			.concat(ALL_GREEN_SPELLS)
 	;
 	
 	/*

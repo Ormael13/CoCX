@@ -652,7 +652,7 @@ package classes.Scenes.Places{
 			if (hasTrainedToday) addButtonDisabled(4,"Alyssa","You need a break from your recent training before you can train again.");
 			else if (!player.isElf()) addButtonDisabled(4,"Alyssa","Alyssa has personal preferences in regards to the people she will train, maybe you should make yourself more elf like.");
 			else if (!player.hasVagina()) addButtonDisabled(4,"Alyssa","Alyssa has personal preferences in regards to the people she will train with... it's not like the spear is a girl only discipline, but the way she uses it might as well be...");
-			addButton(5, "Leave", camp.returnToCampUseOneHour);
+			addButton(14, "Leave", camp.returnToCampUseOneHour);
 		}
 
 		public function River():void {
