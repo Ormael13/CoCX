@@ -398,8 +398,8 @@ public class Changelog extends BaseContent
 			outputText("-Sky Poison Pearl now would be increasing max venom and venom generated per 5 min stats. It's as high bonuses as having scorpion stinger for both stats. It could be used to gain access to poisoned attacks and it effects are similar to scorpion poison.\n");
 			outputText("-Jabberwocky dragon breath been moved from physical specials to magical specials like all other breaths.\n");
 			outputText("-Alraune Perfume effect would expire now - it would display hours left counter on stats page too.\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Spell costs now display correctly! Dark Ritual now doesn't triggers for all mana usages. Only for spells and magic abilities scaling from spellMod. If you were at the maximum bonus attack count, it will auto-increase after the mastery levels up. Dungeon fights don't skip hours anymore. Intended to finally put an end to timed events triggering in dungeons. (Svalkash)\n");
+			outputText("-Fixes (Svalkash): Sheila forced bj, Minotaur win menu, Dick drippies through pants, Cockatrice force-preg, Elemental attack and weird win checks, Wood elves training, Offensive Staff Chan. perk description, Dinah sparring w/o ring\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
