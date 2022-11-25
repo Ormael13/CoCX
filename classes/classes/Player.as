@@ -5599,6 +5599,7 @@ use namespace CoC;
 
 		public function gainCombatXP(index:int, exp:Number):void{
 			var level:Number = combatMastery[index].level;
+			var levelUp:Boolean = false;
 			var experience:Number = combatMastery[index].experience;
 			var melee:Boolean = combatMastery[index].melee;
 			var desc:String = combatMastery[index].desc;
@@ -5615,6 +5616,7 @@ use namespace CoC;
 
 				// Did we level up?
 				if (level < maxCombatLevel(melee) && experience >= xpToLevel) {
+					levelUp = true;
 					outputText("\n<b>" + desc + " leveled up to " + (++level) + "!</b>\n");
 					// Any Leftover EXP?
 					xpLoop = experience - xpToLevel;
@@ -5626,9 +5628,8 @@ use namespace CoC;
             combatMastery[index].level = level;
             combatMastery[index].experience = experience;
 			// Can we get any new attacks?
-			if (grantsBonusAttacks) {// if it grants bonus attacks
+			if (grantsBonusAttacks && levelUp) {// if it grants bonus attacks
 				var maxAttacksNew:int = SceneLib.combat.maxCurrentAttacks();
-				outputText("\n<b>Thanks to your training, your maximum bonus attack count has increased to " + maxAttacksNew + "!</b>\n");
 				// remember the last value
 				var masteryArrays:Array = masteryBonusAttacks;
 				for each (var masteryArr:Array in masteryArrays) {
@@ -5637,6 +5638,7 @@ use namespace CoC;
 						for (var bonusPos:int = 0; bonusPos < masteryArr[2].length; ++bonusPos) {
 							// AND grants a new attack at this level
 							if (combatMastery[masteryArr[0]].level == masteryArr[2][bonusPos]) {
+								outputText("\n<b>Thanks to your training, your maximum bonus attack count has increased to " + maxAttacksNew + "!</b>\n");
 								// before THIS level (new attack), it was maxed (0 in flag = 1 attack, 1 = 2 attacks, etc.)
 								if (flags[kFLAGS.MULTIATTACK_STYLE] == maxAttacksOld - 1) {
 									// keep up with the new max
