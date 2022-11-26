@@ -41,6 +41,17 @@ package classes.Scenes.Places{
 		public static const QUEST_STAGE_SPEARTRAINING3:int = 4;
 		public static const QUEST_STAGE_SPEARTRAINING4:int = 5;
 
+		public static var WoodElfMagicTraining:int;
+		public static const QUEST_STAGE_MAGICTRAINING0:int = 0;
+		public static const QUEST_STAGE_MAGICTRAINING1:int = 1;
+		public static const QUEST_STAGE_MAGICTRAINING2:int = 2;
+		public static const QUEST_STAGE_MAGICTRAINING3:int = 3;
+		public static const QUEST_STAGE_MAGICTRAINING4:int = 4;
+		public static const QUEST_STAGE_MAGICTRAINING5:int = 5;
+		public static const QUEST_STAGE_MAGICTRAINING6:int = 6;
+		public static const QUEST_STAGE_MAGICTRAINING7:int = 7;
+		public static var WoodElfMagicTraner:Boolean;
+
 		public static var hasTrainedToday:Boolean;
 
 		public function stateObjectName():String {
@@ -52,6 +63,8 @@ package classes.Scenes.Places{
 			WoodElvesQuest = QUEST_STAGE_NOT_STARTED;
 			WoodElfBowTraining = QUEST_STAGE_BOWTRAINING0;
 			WoodElfSpearTraining = QUEST_STAGE_SPEARTRAININGFIRST;
+			WoodElfMagicTraining = QUEST_STAGE_MAGICTRAINING0;
+			WoodElfMagicTraner = false;
 		}
 
 		public function saveToObject():Object {
@@ -59,7 +72,9 @@ package classes.Scenes.Places{
 				"stage": WoodElvesQuest,
 				"stageBow": WoodElfBowTraining,
 				"stageSpear": WoodElfSpearTraining,
-				"elfHasTrainedToday": hasTrainedToday
+				"elfHasTrainedToday": hasTrainedToday,
+				"stageMagic": WoodElfMagicTraining,
+				"WoodElfMagicTraner": WoodElfMagicTraner
 			};
 		}
 
@@ -69,6 +84,8 @@ package classes.Scenes.Places{
 				WoodElfBowTraining = o["stageBow"];
 				WoodElfSpearTraining = o["stageSpear"];
 				hasTrainedToday = o["elfHasTrainedToday"];
+				WoodElfMagicTraining = valueOr(o["stageMagic"], 0);
+				WoodElfMagicTraner = valueOr(o["WoodElfMagicTraner"], false);
 			} else {
 				// loading from old save
 				resetState();
@@ -652,6 +669,9 @@ package classes.Scenes.Places{
 			if (hasTrainedToday) addButtonDisabled(4,"Alyssa","You need a break from your recent training before you can train again.");
 			else if (!player.isElf()) addButtonDisabled(4,"Alyssa","Alyssa has personal preferences in regards to the people she will train, maybe you should make yourself more elf like.");
 			else if (!player.hasVagina()) addButtonDisabled(4,"Alyssa","Alyssa has personal preferences in regards to the people she will train with... it's not like the spear is a girl only discipline, but the way she uses it might as well be...");
+			addButton(5, "Lutien", Lutien);
+			if (hasTrainedToday) addButtonDisabled(5,"Lutien","You need a break from your recent training before you can train again.");
+			else if (WoodElfMagicTraining == QUEST_STAGE_MAGICTRAINING3) addButtonDisabled(5,"Lutien","For now Lutien can't teach you anything new. Come back again after newer version is out.");
 			addButton(14, "Leave", camp.returnToCampUseOneHour);
 		}
 
@@ -1095,6 +1115,151 @@ package classes.Scenes.Places{
 				hasTrainedToday = true;
 			}
 			doNext(camp.returnToCampUseOneHour);
+		}
+
+		public function LutienMF(boy:String,girl:String):String {
+			if (WoodElfMagicTraner) return boy;
+			else return girl;
+		}
+		public function Lutien():void {
+			if (WoodElfMagicTraining == QUEST_STAGE_MAGICTRAINING0) Lutien0();
+			else if (WoodElfMagicTraining == QUEST_STAGE_MAGICTRAINING1) Lutien1();
+			else LutienMain();
+		}
+		public function Lutien0():void {
+			clearOutput();
+			spriteSelect(SpriteDb.s_WoodElves);
+			outputText("As you explore around the village, you come upon an Elf whose appearance sets her clearly apart from the rest of your sisters." +
+					" Dressed in a loose, sleeveless blouse and knee-length skirt and wearing thigh-high leather boots, she seems to eschew the usual Wood Elf penchant for exposing as much skin as possible." +
+					" Over the ensemble is a white cloak, which she wears with the hood down, concealing her hair and forehead. Her breasts are smaller even than Alyssa’s, practically non-existent; " +
+					" evidently magic and bust size don’t always go hand in hand. Though, her white hood conceals her head, you spot braided hair long enough to lay alongside her slender thigh on the bench at which she sits." +
+					" Though she seems preoccupied with the book in her hands, she nevertheless acknowledges you, waving a hand lazily in your direction without taking " +
+					" her eyes from the tome in her lap, and addressing you languidly in a quiet, husky voice.\n\n");
+			outputText("\"<i>Oh, if it isn’t the newest sister. Apologies for not coming to greet you with the others, but I’ve been busy. " +
+					" As you can see, I have interests a bit different from the rest of us - I’d rather study and practice my magic than frolic in the woods. Ah, but where are my manners?</i>\"" +
+					" She closes the book around a slender finger to keep her place and turns her head to face you, fixing you with a hooded, critical gaze. " +
+					"\"<i>My name is Lutien, and I am the resident mage of the Wood Elves, if only for lack of any competition, or cooperation, from my sisters. What is your name?</i>\"\n\n");
+			outputText("You smile and gladly tell her that you are [name] the newest little " + player.mf("brother","Sister") +".\n\n");
+			outputText("\"<i>I assure you the pleasure is mine, [name]. If you have a need for magic I am very happy to assist you. Otherwise I’m afraid you won’t find me very interesting company, and you should probably return to playing with the others.</i>\"");
+			menu();
+			addButton(1, "Magic", Lutien3);
+			addButton(3, "Not interested", Lutien2);
+		}
+		public function Lutien1():void {
+			clearOutput();
+			spriteSelect(SpriteDb.s_WoodElves);
+			outputText("You visit Lutien at " + LutienMF("his","her") + " tent, " + LutienMF("he","she") + " is currently in the process of reading what looks to be a book while writing notes on a parchment.\n\n");
+			outputText("\"<i>Oh it's you again have you reconsidered on the training? If you're here for something else I would please ask that you leave. I have far more important matters to attend to at the time to talk about games and what not.</i>\"\n\n");
+			menu();
+			addButton(1, "Magic", Lutien3);
+			addButton(3, "Not interested", Lutien2);
+		}
+		public function Lutien2():void {
+			clearOutput();
+			spriteSelect(SpriteDb.s_WoodElves);
+			outputText("Lutien sighs," +
+					" \"<i>Yes, yes, of course. No need for the tedium of magic when you can play around with your other sisters. I understand completely.</i>\"" +
+					" She pauses as her attention shifts back to her book," +
+					" \"<i>Now, if you would excuse me, I would like to continue my reading in peace.</i>\"\n\n");
+			outputText("You leave Lutien to her work, not wanting to disturb her efforts, and not especially appreciating her company.");
+			if (WoodElfMagicTraining == QUEST_STAGE_MAGICTRAINING0) WoodElfMagicTraining = QUEST_STAGE_MAGICTRAINING1;
+			doNext(camp.returnToCampUseOneHour);
+		}
+		public function Lutien3():void {
+			clearOutput();
+			spriteSelect(SpriteDb.s_WoodElves);
+			outputText("Magic? That sounds <b>very</b> interesting, as a matter of fact. If you can learn Elf magic you want to.\n\n");
+			outputText("Lutien blinks, startled by your reply." +
+					" \"<i>Oh. I… I see? I will admit I didn’t expect you to have any interest when you have so many more pleasurable avenues to explore here," +
+					" but perhaps you are different from the others after all. If you’re serious about this then I’m confident I can teach you." +
+					" And, of course, you can always stop when things get difficult. I won’t try to keep you.</i>\"\n\n");
+			outputText("Well, she doesn’t have the best personality, but the prospect of learning new ways to deal with your opponents is too good to pass up. Lutien pats the bench next to her, and you sit beside her to begin your lesson.\n\n");
+			outputText("<b>Found Lutien in the Elven village!</b>");
+			WoodElfMagicTraining = QUEST_STAGE_MAGICTRAINING2;
+			doNext(camp.returnToCampUseOneHour);
+		}
+		public function LutienMain():void {
+			clearOutput();
+			spriteSelect(SpriteDb.s_WoodElves);
+			outputText("You visit Lutien at " + LutienMF("his","her") + " tent, " + LutienMF("he","she") + " is currently in the process of reading what looks to be a book while writing notes on a parchment.\n\n");
+			outputText("\"<i>Oh good day sister… how can I help you? Are you here to train your spellcasting or for something else?</i>\"\n\n");
+			menu();
+			addButton(0, "Train", LutienTrain);
+			if (WoodElfMagicTraining >= QUEST_STAGE_MAGICTRAINING3) addButton(1, "Sex", LutienMainSex);
+			else addButtonDisabled(1, "???", "???");
+		}
+		public function LutienTrain():void {
+			clearOutput();
+			spriteSelect(SpriteDb.s_WoodElves);
+			if (WoodElfMagicTraining == QUEST_STAGE_MAGICTRAINING2 && !hasTrainedToday){
+				WoodElfMagicTraining = QUEST_STAGE_MAGICTRAINING3;
+				outputText("After a few hours spent directing the discussion and answering your questions, Lutien sighs and closes her book.\n\n");
+				outputText("\"<i>Well, I suppose that went about as well as I could expect.</i>\"\n\n");
+				outputText("A bit miffed, you ask what you could do better next time.\n\n");
+				outputText("\"<i>If there is a next time,</i>\" she replies pointedly, \"<i>you may find the time we spend more productive if you can keep your eyes on the text instead of my chest and groin.");
+				outputText(" That level of distraction is mild by what passes for Elven standards now, but you shouldn’t expect to see success casting magic in combat if a little thing like me sitting next to you is enough to make your focus wander.</i>\"\n\n");
+				outputText("You are forced to concede the point, though you counter that Lutien is much cuter than she lets on. You see a faint blush on her cheeks as she reopens the book to her original place and shoos you off.\n\n");
+				outputText("\"<i>Enough, be off with you. I’d like to get back to my reading. If you can pull yourself away from your other activities on some other day we can try this again; I’m willing to go that far at least.</i>\"\n\n");
+				if (!player.hasStatusEffect(StatusEffects.KnowsPlantGrowth)) {
+					outputText("<b>Gained new green spell: Plant growth.</b>");
+					player.createStatusEffect(StatusEffects.KnowsPlantGrowth, 0, 0, 0, 0);
+				}
+				hasTrainedToday = true;
+			}
+			else if (player.spe >= 100 && WoodElfMagicTraining == QUEST_STAGE_MAGICTRAINING3 && !hasTrainedToday){
+				WoodElfMagicTraining = QUEST_STAGE_MAGICTRAINING4;
+				outputText("\n\n");
+				outputText("\"<i></i>\"\n\n");
+				hasTrainedToday = true;
+			}
+			else if (player.spe >= 150 && WoodElfMagicTraining == QUEST_STAGE_MAGICTRAINING4 && !hasTrainedToday){
+				WoodElfMagicTraining = QUEST_STAGE_MAGICTRAINING5;
+				outputText("\n\n");
+				outputText("\"<i></i>\"\n\n");
+				hasTrainedToday = true;
+			}
+			else if (player.spe >= 200 && WoodElfMagicTraining == QUEST_STAGE_MAGICTRAINING5 && !hasTrainedToday){
+				WoodElfMagicTraining = QUEST_STAGE_MAGICTRAINING6;
+				outputText("\n\n");
+				outputText("\"<i></i>\"\n\n");
+				hasTrainedToday = true;
+			}
+			else if (player.spe >= 200 && WoodElfMagicTraining == QUEST_STAGE_MAGICTRAINING6 && !hasTrainedToday){
+				WoodElfMagicTraining = QUEST_STAGE_MAGICTRAINING7;
+				outputText("\n\n");
+				outputText("\"<i></i>\"\n\n");
+				hasTrainedToday = true;
+			}
+			player.trainStat("int", 2, 100);
+			CoC.instance.timeQ = 2;
+			doNext(camp.returnToCampUseTwoHours);
+		}
+		public function LutienMainSex():void {
+			clearOutput();
+			spriteSelect(SpriteDb.s_WoodElves);
+			outputText("You ask Lutien if " + LutienMF("he","she") + " feels like getting intimate with you.\n\n");
+			if (WoodElfMagicTraner) {
+				outputText("Lutien eyes you intently, \"<i>I will not object to the idea. Do you know what you want?</i>\"\n\n");
+				outputText("You pause momentarily to think about it.\n\n");
+			}
+			else {
+				outputText("Lutien eyes you warily, \"<i>I will not object to the idea, though, have you not realized that I am not like the other sisters? More than just my affinity for magic, I am not a woman like the masses.</i>\"\n\n");
+				outputText("Wait, really? There are elves that aren’t girls? But he looks so…\n\n");
+				outputText("He sighs, \"<i>Yes, I am well aware, but not every elf is made the same. I am sterile, thankfully. The things they’d do to me if they knew I could help produce offspring for them. Still, are you still willing to take up some more… personal time together?</i>\"\n\n");
+				outputText("You think about it.\n\n");
+				WoodElfMagicTraner = true;
+			}
+			menu();
+			//addButton(0, "Train", LutienTrain);
+			//addButton(1, "Sex", );
+			addButton(2, "Nevermind", LutienMainSexNevermind);
+		}
+		public function LutienMainSexNevermind():void {
+			clearOutput();
+			spriteSelect(SpriteDb.s_WoodElves);
+			outputText("Yea nevermind you ain't in the mood for that right now.\n\n");
+			outputText("Lutien sigh. \"<i>Yea I figured you must've just been joking. Well either way is there anything else I can help you with?</i>\"\n\n");
+			doNext(LutienMain);
 		}
 	}
 }

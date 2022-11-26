@@ -3968,6 +3968,8 @@ use namespace CoC;
 				hiddenJobs1++;
 			if (hasPerk(PerkLib.HiddenJobAsura))
 				hiddenJobs1++;
+			if (hasPerk(PerkLib.PrestigeJobGreySage))
+				hiddenJobs1++;
 			return hiddenJobs1;
 		}
 		public function maxHiddenJobs():Number {

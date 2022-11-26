@@ -1962,14 +1962,17 @@ public class PlayerInfo extends BaseContent {
 		}
 		if (page == 4) {
 			if (player.superPerkPoints > 0) {
-				addButtonDisabled(0, "HJ:?S", "What could be here? Some new secret unreleased yet Hidden Job option? Or something else? Maybe little hint would help...or it won't?");
-				//addButtonDisabled(0, "HJ:GS", "You do not have a free slot for this hidden job.");
+				if (player.hasPerk(PerkLib.PrestigeJobGreySage)) addButtonDisabled(0, "HJ:GS", "You already have this super perk.");
+				else {
+					if (player.freeHiddenJobsSlots() > 0) addButton(0, "HJ:GS", perkHiddenJobGreySage).hint("Choose the 'Hidden Job: Grey Sage' super perk. You've trained in Way of Grey Sage. There is no spell you can't learn. (+10% to OverMax Mana)");
+					else addButtonDisabled(0, "HJ:GS", "You do not have a free slot for this hidden job.");
+				}
 			}
 			else {
-				addButtonDisabled(0, "HJ:?S", "What could be here? Some new secret unreleased yet Hidden Job option? Or something else? Maybe little hint would help...or it won't?");
+				if (player.hasPerk(PerkLib.PrestigeJobGreySage)) addButtonDisabled(0, "HJ:GS", "You already have this perk.");
+				else addButtonDisabled(0, "HJ:GS", "You do not have enough super perk points to obtain this perk.");
 			}
 			addButton(13, "Previous", superPerkBuyMenu, page - 1);
-			//13 -> page - 1 button
 			addButton(14, "Back", playerMenu);
 		}
 		if (page == 5) {

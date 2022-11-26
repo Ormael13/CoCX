@@ -996,11 +996,13 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const NagaBind:StatusEffectType                  = mkCombat("Naga Bind");
 		public static const NagaVenom:StatusEffectType                 = mkCombat("Naga Venom");
 		public static const NearWater:StatusEffectType                 = mkCombat("Near Water");
+		public static const NearbyPlants:StatusEffectType              = mkCombat("Nearby Plants");
 		public static const NoFlee:StatusEffectType                    = mkCombat("NoFlee");
 		public static const OniRampage:StatusEffectType                = mkCombat("Oni Rampage");
 		public static const Overlimit:StatusEffectType                 = mkCombat("Overlimit");
 		public static const PhysicalDisabled:StatusEffectType          = mkCombat("Physical Disabled");
 		public static const PiercingBlow:StatusEffectType	           = mkCombat("Piercing Blow");
+		public static const PlantGrowth:StatusEffectType               = mkCombat("Plant Growth");
 		public static const PlayerRegenerate:StatusEffectType		   = mkCombat("Player Regenerate");
 		public static const Poison:StatusEffectType                    = mkCombat("Poison");
 		public static const PoisonDoT:StatusEffectType                 = mkCombat("Poison DoT");
@@ -1211,3 +1213,4 @@ import classes.StatusEffects.VampireThirstEffect;
 		}
 	}
 }
+

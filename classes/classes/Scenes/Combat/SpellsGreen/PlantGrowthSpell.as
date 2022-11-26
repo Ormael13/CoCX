@@ -24,80 +24,60 @@ public class PlantGrowthSpell extends AbstractGreenSpell {
 		return "~" + calcDamage(target, false, false) + " lust damage"
 	}
 	
+	override public function calcCooldown():int {
+		return (1+spellWhiteCooldown());
+	}
+	
+	override public function advance(display:Boolean):void {
+		if (player.hasStatusEffect(StatusEffects.PlantGrowth)) {
+			if (player.statusEffectv1(StatusEffects.PlantGrowth) <= 0) {
+				player.removeStatusEffect(StatusEffects.PlantGrowth);
+				if (display) outputText("<b>PLant Growth effect wore off!</b>\n\n");
+			} else {
+				player.addStatusValue(StatusEffects.PlantGrowth, 1, -1);
+			}
+		}
+	}
+	
 	public function calcDamage(monster:Monster, randomize:Boolean = true, casting:Boolean = true):Number { //casting - Increase Elemental Counter while casting (like Raging Inferno)
-		return adjustLustDamage(player.inte / 5, monster, CAT_SPELL_GREEN, randomize);
+		var baseDamage:Number = (combat.teases.teaseBaseLustDamage() * 0.5);
+		return adjustLustDamage(baseDamage, monster, CAT_SPELL_GREEN, randomize);
 	}
 	
 	override protected function doSpellEffect(display:Boolean = true):void {
 		if (display) {
-			outputText("You make a series of arcane gestures, drawing on your own lust to inflict it upon your foe!\n");
-		}
-		if (monster is WormMass) {
-			if (display) {
-				outputText("The worms appear to be unaffected by your magic!\n\n");
-			}
-			return;
-		} else if (monster.lustVuln == 0) {
-			if (display) {
-				outputText("It has no effect!  Your foe clearly does not experience lust in the same way as you.\n\n");
-			}
-			return;
-		}
-		var lustDmg:Number = calcDamage(monster, true, true);
-		if (display) {
-			if (monster.lust100 < 30) outputText("[Themonster] squirms as the magic affects [monster him].  ");
-			if (monster.lust100 >= 30 && monster.lust100 < 60) {
-				if (monster.plural) outputText("[Themonster] stagger, suddenly weak and having trouble focusing on staying upright.  ");
-				else outputText("[Themonster] staggers, suddenly weak and having trouble focusing on staying upright.  ");
-			}
-			if (monster.lust100 >= 60) {
-				outputText("[Themonster]'");
-				if (!monster.plural) outputText("s");
-				outputText(" eyes glaze over with desire for a moment.  ");
-			}
-			if (monster.cocks.length > 0) {
-				if (monster.lust100 >= 60) outputText("You see [monster his] [monster cocks] dribble pre-cum.  ");
-				if (monster.lust100 >= 30 && monster.lust100 < 60) {
-					if (monster.cocks.length == 1) {
-						outputText("[Themonster]'s [monster cockshort] hardens, distracting [monster him] further.");
-					} else {
-						outputText("You see [monster his] [monster cocks] harden uncomfortably.  ");
+			if (player.hasStatusEffect(StatusEffects.NearbyPlants)) {
+				outputText("You focus your intent on the flora around you, infusing them with the power of your emotions. The onslaught of lust causes flowers to bloom into a pollen cloud as vine surges from the canopy and darts to your opponent.\n");
+				if (monster.lustVuln == 0) {
+					if (display) {
+						outputText("It has no effect!  Your foe clearly does not experience lust in the same way as you.\n\n");
 					}
+					return;
 				}
-			}
-			if (monster.vaginas.length > 0 && monster.lust100 >= 60) {
-				if (monster.plural) {
-					if (monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_NORMAL) outputText("[Themonster]'s [monster vagina]s dampen perceptibly.  ");
-					if (monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_WET) outputText("[Themonster]'s crotches become sticky with girl-lust.  ");
-					if (monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLICK) outputText("[Themonster]'s [monster vagina]s become sloppy and wet.  ");
-					if (monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of [themonster]'s thighs.  ");
-					if (monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING) outputText("[Themonster]'s [monster vagina]s instantly soak [monster him] groin.  ");
-				} else {
-					if (monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_NORMAL) outputText("[Themonster]'s [monster vagina] dampens perceptibly.  ");
-					if (monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_WET) outputText("[Themonster]'s crotch becomes sticky with girl-lust.  ");
-					if (monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLICK) outputText("[Themonster]'s [monster vagina] becomes sloppy and wet.  ");
-					if (monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DROOLING) outputText("Thick runners of girl-lube stream down the insides of [themonster]'s thighs.  ");
-					if (monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING) outputText("[Themonster]'s [monster vagina] instantly soaks her groin.  ");
+				player.createStatusEffect(StatusEffects.PlantGrowth, 4, 0, 0, 0);
+				var lustDmg:Number = calcDamage(monster, true, true);
+				//Determine if critical tease!
+				var crit:Boolean   = false;
+				var critChance:int = 5;
+				if (player.hasPerk(PerkLib.CriticalPerformance)) {
+					if (player.lib <= 100) critChance += player.lib / 5;
+					if (player.lib > 100) critChance += 20;
 				}
+				if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+				if (rand(100) < critChance) {
+					crit = true;
+					lustDmg *= 1.75;
+				}
+				lustDmg = Math.round(monster.lustVuln * lustDmg);
+				monster.teased(lustDmg, false);
+				if (crit) outputText(" <b>Critical!</b>");
+				combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
+			}
+			else {
+				outputText("You focus your energy on the world around you causing vegetation surge out of the ground at an accelerated rate into a verdant patch of vines and other tentacle greenery.\n");
+				player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
 			}
 		}
-		
-		//Determine if critical tease!
-		var crit:Boolean   = false;
-		var critChance:int = 5;
-		if (player.hasPerk(PerkLib.CriticalPerformance)) {
-			if (player.lib <= 100) critChance += player.lib / 5;
-			if (player.lib > 100) critChance += 20;
-		}
-		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
-		if (rand(100) < critChance) {
-			crit = true;
-			lustDmg *= 1.75;
-		}
-		lustDmg = Math.round(monster.lustVuln * lustDmg);
-		monster.teased(lustDmg, false);
-		if (crit) outputText(" <b>Critical!</b>");
-		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 	}
 }
 }
