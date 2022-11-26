@@ -4247,10 +4247,9 @@ use namespace CoC;
 		}
 
 		public function get corruptionTolerance():int {
-			var temp:int = perkv1(PerkLib.AscensionTolerance) * 5;
-			if (CoC.instance.gameSettings.sceneHunter_inst.other) temp *= 2;
-			if (flags[kFLAGS.MEANINGLESS_CORRUPTION] > 0) temp += 100;
-			return temp;
+			if (flags[kFLAGS.CORRUPTION_TOLERANCE_MODE] == 1) return 0;
+			if (flags[kFLAGS.CORRUPTION_TOLERANCE_MODE] == 2) return 100;
+			return perkv1(PerkLib.AscensionTolerance) * (CoC.instance.gameSettings.sceneHunter_inst.other ? 10 : 5);
 		}
 		public function get corAdjustedUp():Number {
 			return boundFloat(0, cor + corruptionTolerance, 100);

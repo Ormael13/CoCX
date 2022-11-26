@@ -3000,7 +3000,7 @@ public static const HARDCORE_MODE:int                                           
 public static const HARDCORE_SLOT:int                                               = 2992; // The current slot for hardcore mode. Forced autosave will save over the selected slot.
 public static const HUNGER_ENABLED:int                                              = 2993; // Determines if hunger is enabled. 1 is enabled.
 public static const USE_12_HOURS:int                                                = 2994; // 0 for 24-hour format, 1 for 12-hour format.
-public static const MEANINGLESS_CORRUPTION:int                                      = 2995; // Raises corruption tolerance by 100.
+public static const CORRUPTION_TOLERANCE_MODE:int                                   = 2995; // 0 - default, enabled if possible; 1 - disabled, 2 - 100% (debug)
 public static const ITS_EVERY_DAY:int                                               = 2996; // all special calender events occur every day!
 public static const LOW_STANDARDS_FOR_ALL:int                                       = 2997;
 public static const HYPER_HAPPY:int                                                 = 2998;

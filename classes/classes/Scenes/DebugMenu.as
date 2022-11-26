@@ -1467,13 +1467,13 @@ public class DebugMenu extends BaseContent
 
 		private function toggleMeaninglessCorruption():void {
 			clearOutput();
-			if (flags[kFLAGS.MEANINGLESS_CORRUPTION] == 0) {
-				flags[kFLAGS.MEANINGLESS_CORRUPTION] = 1;
-				outputText("<b>Set MEANINGLESS_CORRUPTION flag to 1.</b>");
+			if (flags[kFLAGS.CORRUPTION_TOLERANCE_MODE] == 0) {
+				flags[kFLAGS.CORRUPTION_TOLERANCE_MODE] = 2;
+				outputText("<b>Set CORRUPTION_TOLERANCE_MODE flag to 2.</b>");
 			}
 			else {
-				flags[kFLAGS.MEANINGLESS_CORRUPTION] = 0;
-				outputText("<b>Set MEANINGLESS_CORRUPTION flag to 0.</b>");
+				flags[kFLAGS.CORRUPTION_TOLERANCE_MODE] = 0;
+				outputText("<b>Set CORRUPTION_TOLERANCE_MODE flag to 0.</b>");
 			}
 		}
 

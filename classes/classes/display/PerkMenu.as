@@ -14,6 +14,7 @@ import classes.PerkLib;
 import classes.PerkTree;
 import classes.PerkType;
 import classes.Races;
+import classes.Scenes.Dungeons.BeeHive.CorruptBeeQueen;
 import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.SceneLib;
@@ -167,15 +168,31 @@ public class PerkMenu extends BaseContent {
 		}
 		if (player.hasPerk(PerkLib.AuraOfCorruption) || player.hasPerk(PerkLib.AuraOfPurity) || player.hasPerk(PerkLib.ArousingAura)) {
 			outputText("\n\nYou can suppress your auras. This way, they won't damage/arouse enemies.");
-			outputText("\nAuras: <b>" + (flags[kFLAGS.DISABLE_AURAS] ? "suppressed" : "active") + "</b>");
+			outputText("\nAuras: <b>" + (flags[kFLAGS.DISABLE_AURAS] ? "Suppressed" : "Active") + "</b>");
 			addButton(5, "Auras", curry(toggleFlagMisc, kFLAGS.DISABLE_AURAS));
 		}
 		// auto hit mode :)
 		outputText("\n\nYou can choose to stand still when selecting the 'Wait' actions. This way, you won't attempt to dodge or block any attacks. Why would you do that?!");
-		outputText("\nCurrent 'Wait' behaviour: <b>" + (flags[kFLAGS.WAIT_STAND_STILL] ? "standing still" : "dodging") + "</b>");
+		outputText("\nCurrent 'Wait' behaviour: <b>" + (flags[kFLAGS.WAIT_STAND_STILL] ? "Standing still" : "Dodging") + "</b>");
 		addButton(6, "StandStill", curry(toggleFlagMisc, kFLAGS.WAIT_STAND_STILL));
+		// corruption tolerance
+		if (player.hasPerk(PerkLib.AscensionTolerance) || !CoC.instance.lockCheats) {
+			outputText("\n\nYou can temporarily enable or disable your corruption tolerance.");
+			if (!CoC.instance.lockCheats) outputText(" <i>Since you have cheats enabled, you can force it to be 100.</i>");
+			outputText("\nCorruption Tolerance mode: <b>" + (
+				flags[kFLAGS.CORRUPTION_TOLERANCE_MODE] == 0 ? "Enabled (" + player.corruptionTolerance + ")" :
+					flags[kFLAGS.CORRUPTION_TOLERANCE_MODE] == 1 ? "Disabled (0)" : "CHEAT (100)") + "</b>");
+			addButton(7, "CorTolerance", toggleCorruptionTolerance);
+		}
 		//
 		addButton(14, "Back", displayPerks);
+	}
+
+	private function toggleCorruptionTolerance():void {
+		++flags[kFLAGS.CORRUPTION_TOLERANCE_MODE];
+		if (flags[kFLAGS.CORRUPTION_TOLERANCE_MODE] > (CoC.instance.lockCheats ? 1 : 2))
+			flags[kFLAGS.CORRUPTION_TOLERANCE_MODE] = 0;
+		MiscOption();
 	}
 
 	public function meleeOptions():void {
