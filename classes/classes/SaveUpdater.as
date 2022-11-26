@@ -1933,6 +1933,18 @@ public class SaveUpdater extends NPCAwareContent {
 				if (player.statusEffectv1(StatusEffects.Kindra) >= 150) player.changeStatusValue(StatusEffects.Kindra,1,150);
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.036;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.037) {
+				// clones retroactive fix
+				for (var cloneMax:int = Soulforce.clones.length - 1; cloneMax >= 0; --cloneMax) {
+					if (player.hasStatusEffect(Soulforce.clones[cloneMax])) {
+						for (var cloneNum:int = 0; cloneNum < cloneMax; ++cloneNum) {
+							if (!player.hasStatusEffect(Soulforce.clones[cloneNum]))
+								player.createStatusEffect(Soulforce.clones[cloneNum], 0, 0, 0, 0);
+						}
+					}
+				}
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.037;
+			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
 		}
@@ -2071,5 +2083,3 @@ public class SaveUpdater extends NPCAwareContent {
 	}
 }
 }
-
-
