@@ -400,8 +400,8 @@ public class Changelog extends BaseContent
 			outputText("-Alraune Perfume effect would expire now - it would display hours left counter on stats page too.\n");
 			outputText("-Spell costs now display correctly! Dark Ritual now doesn't triggers for all mana usages. Only for spells and magic abilities scaling from spellMod. If you were at the maximum bonus attack count, it will auto-increase after the mastery levels up. Dungeon fights don't skip hours anymore. Intended to finally put an end to timed events triggering in dungeons. (Svalkash)\n");
 			outputText("-Fixes (Svalkash): Sheila forced bj, Minotaur win menu, Dick drippies through pants, Cockatrice force-preg, Elemental attack and weird win checks, Wood elves training, Offensive Staff Chan. perk description, Dinah sparring w/o ring\n");
-			outputText("-\n");
-			outputText("-\n");
+			//outputText("-New event perk: Hidden Job: Asura. Gained by spending 1 super perk point and having free slot for hidden job. Effects: Allow to reach OverMax Wrath equal to 110% of current max wrath. \n");
+			//outputText("-New green spell: Plant Growth\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -419,7 +419,8 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed Bugs: Akbal been weak to fire not ice, Insightful Resources I-VI perks bonus to SF been lower than 5 per wis point, recovery of fatigue when waiting been lower than when attacking, Dao of Elements not giving additional % resistances after first 10%, missing bonus to acid elemental arrows, Holy Bands Managment locked behind having 3rd one band, ");
-			outputText("Centaur race bonuses error fixed to orginal values, Aether Twins following PC throu ascension in case they been equipped, Lusty Maiden Armor treated as already legendary item, wrong labeled gorgon eyes on race page, Jiaghsi curing leaving leftover effects of Cursed Tag options, tier 3 spells have incrrectly calculated cooldowns, Wood Elf archer training bugs\n");
+			outputText("Centaur race bonuses error fixed to orginal values, Aether Twins following PC throu ascension in case they been equipped, Lusty Maiden Armor treated as already legendary item, wrong labeled gorgon eyes on race page, Jiaghsi curing leaving leftover effects of Cursed Tag options, tier 3 spells have incrrectly calculated cooldowns, Wood Elf archer training bugs, ");
+			outputText("Fera Boon - Wide Open perk not been permable on ascension\n");
 			//0.8s5.178
 			outputText("-Fixed bicorn horn score (aimozg)\n");
 			outputText("-Kirin, Fey-Draconic leg/armtype (respectively) added to DraconicBones Valid racetypes. -Fixed HxD merchants checking wrong currency for purchases (Jtecx PR#289)\n");

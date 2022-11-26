@@ -9010,6 +9010,30 @@ public class Combat extends BaseContent {
                 outputText("Your opponent seems not to be affected by the cold of your aura of black frost. Probably because [monster he] is immune to the cold's effects.");
             }
         }
+        //Plant Growth
+        if (player.hasStatusEffect(StatusEffects.PlantGrowth) && monster.lustVuln > 0) {
+            outputText("The vine slithers around [monster him] before groping at [monster his] erogenous zones, enticing them as their focus and grip on combat weakens.");
+            var damagePG:Number = (combat.teases.teaseBaseLustDamage() * 0.5 * spellModWhite());
+            var Randomcrit1:Boolean = false;
+            //Determine if critical tease!
+            var critChance5:int = 5;
+            if (player.hasPerk(PerkLib.CriticalPerformance)) {
+                if (player.lib <= 100) critChance5 += player.lib / 5;
+                if (player.lib > 100) critChance5 += 20;
+            }
+            if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance5 = 0;
+            if (rand(100) < critChance5) {
+                Randomcrit1 = true;
+                damagePG *= 1.75;
+            }
+            if (player.hasPerk(PerkLib.RacialParagon)) damagePG *= combat.RacialParagonAbilityBoost();
+            if (player.hasPerk(PerkLib.NaturalArsenal)) damagePG *= 1.50;
+            damagePG = Math.round(damagePG*monster.lustVuln);
+            monster.teased(damagePG, false);
+            if (Randomcrit1) outputText(" Critical hit!");
+            outputText("\n\n");
+            combat.teaseXP((1 + combat.bonusExpAfterSuccesfullTease()*2));
+        }
         if (player.hasStatusEffect(StatusEffects.Bound) && flags[kFLAGS.PC_FETISH] >= 2) {
             outputText("The feel of tight leather completely immobilizing you turns you on more and more.  Would it be so bad to just wait and let her play with you like this?\n\n");
             player.takeLustDamage(3, true);
@@ -15524,4 +15548,4 @@ private function touSpeStrScale(stat:int):Number {
         return damage;
     }
 }
-}
+}
