@@ -92,7 +92,10 @@ use namespace CoC;
 			_forestOutskirtsEncounter = Encounters.group("outskirtsforest", {
 						//General Golems, Goblin and Imp Encounters
 						name: "common",
-						call: SceneLib.exploration.genericGolGobImpEncounters
+						call: function ():void {
+							player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
+							SceneLib.exploration.genericGolGobImpEncounters();
+						}
 					}, {
 						//Helia monogamy fucks
 						name  : "helcommon",
@@ -105,6 +108,7 @@ use namespace CoC;
 						night : false,
 						chance: 0.6,
 						call  : function ():void {
+							player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
 							if (flags[kFLAGS.TAMANI_DAUGHTER_PREGGO_COUNTDOWN] == 0
 								&& flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 16 && flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] < 3) {
 								tamaniDaughtersScene.encounterTamanisDaughters();
@@ -121,7 +125,10 @@ use namespace CoC;
 					}, {
 						name  : "Tamani_Daughters",
 						night : false,
-						call  : encounterTamanisDaughtersFn,
+						call  : function ():void {
+							player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
+							encounterTamanisDaughtersFn();
+						},
 						when  : function ():Boolean {
 							return player.gender > 0
 								&& player.hasCock()
@@ -143,12 +150,18 @@ use namespace CoC;
 					}, {
 						name  : "beegirl",
 						night : false,
-						call  : beeGirlScene.beeEncounter,
+						call  : function ():void {
+							player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
+							beeGirlScene.beeEncounter();
+						},
 						chance: 0.20
 					}, {
 						name  : "werewolfFemale",
 						day : false,
-						call  : SceneLib.werewolfFemaleScene.introWerewolfFemale,
+						call  : function ():void {
+							player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
+							SceneLib.werewolfFemaleScene.introWerewolfFemale();
+						},
 						chance: 0.50
 					}, {
 						name  : "truffle",
@@ -215,12 +228,18 @@ use namespace CoC;
 			_forestEncounter = Encounters.group("forest", {
 						//General Golems, Goblin and Imp Encounters
 						name: "common",
-						call: SceneLib.exploration.genericGolGobImpEncounters
+						call: function ():void {
+							player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
+							SceneLib.exploration.genericGolGobImpEncounters();
+						}
 					}, {
 						//Helia monogamy fucks
 						name  : "helcommon",
 						night : false,
-						call  : SceneLib.helScene.helSexualAmbush,
+						call  : function ():void {
+							player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
+							SceneLib.helScene.helSexualAmbush();
+						},
 						chance: 0.2,
 						when  : SceneLib.helScene.helSexualAmbushCondition
 					}, {
@@ -235,6 +254,7 @@ use namespace CoC;
 						night : false,
 						chance: 0.6,
 						call  : function ():void {
+							player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
 							if (flags[kFLAGS.TAMANI_DAUGHTER_PREGGO_COUNTDOWN] == 0
 								&& flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 16 && flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] < 3) {
 								tamaniDaughtersScene.encounterTamanisDaughters();
@@ -251,7 +271,10 @@ use namespace CoC;
 					}, {
 						name  : "Tamani_Daughters",
 						night : false,
-						call  : encounterTamanisDaughtersFn,
+						call  : function ():void {
+							player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
+							encounterTamanisDaughtersFn();
+						},
 						when  : function ():Boolean {
 							return player.gender > 0
 								&& player.hasCock()
@@ -277,7 +300,10 @@ use namespace CoC;
 						call  : jojoEncounter
 					}, {
 						name  : "tentaBeast",
-						call  : tentacleBeastEncounterFn,
+						call  : function ():void {
+							player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
+							tentacleBeastEncounterFn();
+						},
 						when  : fn.ifLevelMin(3),
 						chance: 0.80
 					}, {
@@ -292,12 +318,18 @@ use namespace CoC;
 					}, {
 						name  : "beegirl",
 						night : false,
-						call  : beeGirlScene.beeEncounter,
+						call  : function ():void {
+							player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
+							beeGirlScene.beeEncounter();
+						},
 						chance: 1.0
 					}, {
 						name  : "WoodElf",
 						night : false,
-						call  : SceneLib.woodElves.findElves,
+						call  : function ():void {
+							player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
+							SceneLib.woodElves.findElves();
+						},
 						chance: 0.5,
 						when  : function ():Boolean {
 							return WoodElves.WoodElvesQuest == WoodElves.QUEST_STAGE_NOT_STARTED && player.level >= 10 && !player.blockingBodyTransformations()
@@ -305,7 +337,10 @@ use namespace CoC;
 					}, {
 						name  : "WoodElfRematch",
 						night : false,
-						call  : SceneLib.woodElves.findElvesRematch,
+						call  : function ():void {
+							player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
+							SceneLib.woodElves.findElvesRematch();
+						},
 						chance: 0.75,
 						when  : function ():Boolean {
 							return WoodElves.WoodElvesQuest == WoodElves.QUEST_STAGE_METELFSANDEVENBEATSTHEM && player.level >= 10 && !player.blockingBodyTransformations()
@@ -344,7 +379,10 @@ use namespace CoC;
 							return flags[kFLAGS.DIANA_FOLLOWER] < 6 && !(flags[kFLAGS.DIANA_FOLLOWER] != 3 && flags[kFLAGS.DIANA_LVL_UP] >= 8) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff);
 						},
 						chance: 0.5,
-						call: SceneLib.dianaScene.repeatEnc
+						call: function ():void {
+							player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
+							SceneLib.dianaScene.repeatEnc();
+						}
 					}, {
 						name: "dianaName",
 						night : false,
@@ -352,7 +390,10 @@ use namespace CoC;
 							return ((flags[kFLAGS.DIANA_FOLLOWER] < 3 || flags[kFLAGS.DIANA_FOLLOWER] == 5) && flags[kFLAGS.DIANA_LVL_UP] >= 8) && !player.hasStatusEffect(StatusEffects.DianaOff) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1;
 						},
 						chance: 0.5,
-						call: SceneLib.dianaScene.postNameEnc
+						call: function ():void {
+							player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
+							SceneLib.dianaScene.postNameEnc();
+						}
 					}, {
 						name: "walk",
 						call: forestWalkFn
@@ -395,7 +436,10 @@ use namespace CoC;
 					}, {
 						name: "mimic",
 						when: fn.ifLevelMin(3),
-						call: curry(SceneLib.mimicScene.mimicTentacleStart, 1),
+						call: function ():void {
+							player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
+							curry(SceneLib.mimicScene.mimicTentacleStart, 1);
+						},
 						chance: 0.50
 					}, {
 						name  : "succubus",
@@ -405,7 +449,10 @@ use namespace CoC;
 					}, {
 						name  : "werewolfFemale",
 						day : false,
-						call  : SceneLib.werewolfFemaleScene.introWerewolfFemale,
+						call  : function ():void {
+							player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
+							SceneLib.werewolfFemaleScene.introWerewolfFemale();
+						},
 						chance: 0.50
 					});
 			_deepwoodsEncounter = Encounters.group("deepwoods", /*CoC.instance.commonEncounters,*/ {
@@ -424,7 +471,10 @@ use namespace CoC;
 				//Helia monogamy fucks
 				name  : "helcommon",
 				night : false,
-				call  : SceneLib.helScene.helSexualAmbush,
+				call  : function ():void {
+					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
+					SceneLib.helScene.helSexualAmbush();
+				},
 				chance: 0.2,
 				when  : SceneLib.helScene.helSexualAmbushCondition
 			}, {
@@ -435,7 +485,10 @@ use namespace CoC;
 						   && !player.hasStatusEffect(StatusEffects.EtnaOff)
 						   && (player.level >= 20);
 				},
-				call  : SceneLib.etnaScene.repeatYandereEnc
+				call  : function ():void {
+					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
+					SceneLib.etnaScene.repeatYandereEnc();
+				}
 			}, {
 				name  : "electra",
 				night : false,
@@ -447,6 +500,7 @@ use namespace CoC;
 				},
 				chance: 0.5,
 				call  : function ():void {
+					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
 					if (flags[kFLAGS.ELECTRA_AFFECTION] == 100) {
 						if (flags[kFLAGS.ELECTRA_FOLLOWER] == 1) SceneLib.electraScene.ElectraRecruitingAgain();
 						else SceneLib.electraScene.ElectraRecruiting();
@@ -458,11 +512,17 @@ use namespace CoC;
 				when: function():Boolean {
 					return flags[kFLAGS.SOUL_SENSE_KITSUNE_MANSION] < 3;
 				},
-				call: kitsuneScene.enterTheTrickster
+				call: function ():void {
+					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
+					kitsuneScene.enterTheTrickster();
+				}
 			}, {
 				name: "celess-nightmare",
 				night : false,
-				call: nightmareScene.nightmareIntro,
+				call: function ():void {
+					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
+					nightmareScene.nightmareIntro();
+				},
 				when: function():Boolean {
 					return player.hasStatusEffect(StatusEffects.CanMeetNightmare) && player.statusEffectv1(StatusEffects.CanMeetNightmare) < 1 && player.pregnancyIncubation == 0;
 				}
@@ -472,12 +532,16 @@ use namespace CoC;
 			 }, */{
 				name: "akbal",
 				night : false,
-				call: akbalScene.supahAkabalEdition
+				call: function ():void {
+					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
+					akbalScene.supahAkabalEdition();
+				}
 			}, {
 				name  : "Tamani",
 				night : false,
 				chance: 0.6,
 				call  : function ():void {
+					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
 					if (flags[kFLAGS.TAMANI_DAUGHTER_PREGGO_COUNTDOWN] == 0
 						&& flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 16 && flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] < 3 && rand(5) == 0) {
 						tamaniDaughtersScene.encounterTamanisDaughters();
@@ -494,7 +558,10 @@ use namespace CoC;
 			}, {
 				name  : "Tamani_Daughters",
 				night : false,
-				call  : encounterTamanisDaughtersFn,
+				call  : function ():void {
+					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
+					encounterTamanisDaughtersFn();
+				},
 				when  : function ():Boolean {
 					return player.gender > 0
 						   && player.hasCock()
@@ -527,7 +594,10 @@ use namespace CoC;
 				when: function():Boolean {
 					return flags[kFLAGS.ERLKING_DISABLED] == 0;
 				},
-				call: erlkingScene.encounterWildHunt
+				call: function ():void {
+					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
+					erlkingScene.encounterWildHunt();
+				}
 			}, {
 				name: "fera_1",
 				when: function():Boolean {
@@ -561,11 +631,17 @@ use namespace CoC;
 				}
 			}, {
 				name: "tentabeast",
-				call: tentacleBeastDeepwoodsEncounterFn
+				call: function ():void {
+					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
+					tentacleBeastDeepwoodsEncounterFn();
+				}
 			}, {
 				name: "alraune",
 				night : false,
-				call: alrauneEncounterFn
+				call: function ():void {
+					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
+					alrauneEncounterFn();
+				}
 			}, {
 				name: "lilirauneIngrediant",
 				call  : lilirauneIngrediantEvent,
@@ -574,11 +650,17 @@ use namespace CoC;
 				}
 			}, {
 				name  : "dark_elf_scout",
-				call  : darkelfScene.introDarkELfScout,
+				call  : function ():void {
+					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
+					darkelfScene.introDarkELfScout();
+				},
 				chance: 0.8
 			}, {
 				name: "aiko",
-				call: aikoScene.encounterAiko,
+				call: function ():void {
+					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
+					aikoScene.encounterAiko();
+				},
 				when: function ():Boolean {
 					return (player.level > 35
 						&& flags[kFLAGS.AIKO_TIMES_MET] < 4
@@ -586,7 +668,10 @@ use namespace CoC;
 				}
 			}, {
 				name: "ted",
-				call: SceneLib.tedScene.introPostHiddenCave,
+				call: function ():void {
+					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
+					SceneLib.tedScene.introPostHiddenCave();
+				},
 				when: SceneLib.tedScene.canEncounterTed
 			},{
 				name: "dungeon",
@@ -599,7 +684,10 @@ use namespace CoC;
 			}, {
 				name  : "werewolfFemale",
 				day : false,
-				call  : SceneLib.werewolfFemaleScene.introWerewolfFemale,
+				call  : function ():void {
+					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
+					SceneLib.werewolfFemaleScene.introWerewolfFemale();
+				},
 				chance: 0.50
 			}, {
 				name  : "truffle",

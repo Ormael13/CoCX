@@ -517,6 +517,9 @@ public class PerkLib
 		public static const HotNCold:PerkType = mk("Hot N Cold", "Hot N Cold",
 				"You're Hot N Cold and can't cross 75% minimum lust threshold.",
 				"You've chosen the 'Hot N Cold' perk, causing your minimum lust never cross 75% threshold.");
+		public static const GreenMagic:PerkType = mk("Green magic", "Green magic",
+				"Your Elven spell effects are twice as strong and last twice as long.",
+				"You've chosen the 'Green magic' perk. Your Elven spell effects are twice as strong and last twice as long.");
 
 		public static const ElementsOfMarethBasic:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
@@ -524,15 +527,6 @@ public class PerkLib
 		/*public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk, .");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk, .");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk, .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, .");
@@ -3656,6 +3650,8 @@ public class PerkLib
 				"The more sated you are the stronger you get, although your satisfaction is fleeting.");
 		public static const WendigoCurse:PerkType = mk("Wendigo Curse", "Wendigo Curse",
 				"Your body and soul has been cursed by a wendigo. Transformative no longer have an effect on you.");
+		public static const VegetalAffinity:PerkType = mk("Vegetal Affinity", "Vegetal Affinity",
+				"Empower Green Magic by 50% weaken fire resistance by 50%.");
 		public static const VerdantMight:PerkType = mk("Verdant Might", "Verdant Might",
 				"As a plant when using natural weapon your damage scaling is based on Toughness instead of strength.");
 		public static const RampantMight:PerkType = mk("Rampant Might", "Rampant Might",
@@ -6794,6 +6790,12 @@ public class PerkLib
 			LiftOff.requireLevel(18)
 					.requirePerk(Aerobatics)
 					.requireStr(40)
+					.requireSpe(45);
+			GreenMagic.requireLevel(18)
+					.requirePerk(NaturalSpellcasting)
+					.requireInt(100)
+					.requireLib(100)
+					.requireCor(50)
 					.requireSpe(45);
             //Tier 4
 			ChimericalBodySemiImprovedStage.requirePerk(ChimericalBodyBasicStage)

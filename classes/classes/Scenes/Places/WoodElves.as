@@ -671,7 +671,6 @@ package classes.Scenes.Places{
 			else if (!player.hasVagina()) addButtonDisabled(4,"Alyssa","Alyssa has personal preferences in regards to the people she will train with... it's not like the spear is a girl only discipline, but the way she uses it might as well be...");
 			addButton(5, "Lutien", Lutien);
 			if (hasTrainedToday) addButtonDisabled(5,"Lutien","You need a break from your recent training before you can train again.");
-			else if (WoodElfMagicTraining == QUEST_STAGE_MAGICTRAINING3) addButtonDisabled(5,"Lutien","For now Lutien can't teach you anything new. Come back again after newer version is out.");
 			addButton(14, "Leave", camp.returnToCampUseOneHour);
 		}
 
@@ -1206,32 +1205,44 @@ package classes.Scenes.Places{
 				}
 				hasTrainedToday = true;
 			}
-			else if (player.spe >= 100 && WoodElfMagicTraining == QUEST_STAGE_MAGICTRAINING3 && !hasTrainedToday){
+			else if (player.inte >= 100 && WoodElfMagicTraining == QUEST_STAGE_MAGICTRAINING3 && !hasTrainedToday){
 				WoodElfMagicTraining = QUEST_STAGE_MAGICTRAINING4;
-				outputText("\n\n");
-				outputText("\"<i></i>\"\n\n");
+				outputText("After a few hours spent directing the discussion and answering your questions, Lutien sighs and closes " + LutienMF("his","her") + " book.\n\n");
+				outputText("\"<i>You learn about as fast as I'd expect any other elf, which is to say slowly and with bits of distraction every now and then but at least you are making progress. I would give you homeworks but I'm afraid");
+				outputText(" you would just forget about doing it. For now just stick to practicing what I've already taught you and come back later for more.</i>\"\n\n");
+				outputText("You nod and leave Lutien to " + LutienMF("his","her") + " study.\n\n");
+				if (!player.hasStatusEffect(StatusEffects.KnowsEntangle)) {
+					outputText("<b>Gained new green spell: Entangle.</b>");
+					player.createStatusEffect(StatusEffects.KnowsEntangle, 0, 0, 0, 0);
+				}
 				hasTrainedToday = true;
-			}
-			else if (player.spe >= 150 && WoodElfMagicTraining == QUEST_STAGE_MAGICTRAINING4 && !hasTrainedToday){
+			}/*
+			else if (player.inte >= 100 && WoodElfMagicTraining == QUEST_STAGE_MAGICTRAINING4 && !hasTrainedToday){
 				WoodElfMagicTraining = QUEST_STAGE_MAGICTRAINING5;
 				outputText("\n\n");
 				outputText("\"<i></i>\"\n\n");
 				hasTrainedToday = true;
 			}
-			else if (player.spe >= 200 && WoodElfMagicTraining == QUEST_STAGE_MAGICTRAINING5 && !hasTrainedToday){
+			else if (player.inte >= 200 && WoodElfMagicTraining == QUEST_STAGE_MAGICTRAINING5 && !hasTrainedToday){
 				WoodElfMagicTraining = QUEST_STAGE_MAGICTRAINING6;
 				outputText("\n\n");
 				outputText("\"<i></i>\"\n\n");
 				hasTrainedToday = true;
 			}
-			else if (player.spe >= 200 && WoodElfMagicTraining == QUEST_STAGE_MAGICTRAINING6 && !hasTrainedToday){
+			else if (player.inte >= 200 && WoodElfMagicTraining == QUEST_STAGE_MAGICTRAINING6 && !hasTrainedToday){
 				WoodElfMagicTraining = QUEST_STAGE_MAGICTRAINING7;
 				outputText("\n\n");
 				outputText("\"<i></i>\"\n\n");
 				hasTrainedToday = true;
+			}*/
+			else {
+				outputText("You would just like to revise theory with Lutien today. On this " + LutienMF("he","she") + " close " + LutienMF("his","her") + " book and sigh.\n\n");
+				outputText("\"<i>Well I suppose I can give you a list of practical tests to do should at least be a break from my research. Let's see how well you've learned this far.</i>\"\n\n");
+				outputText("You spend the 5 hour studying with Lutien and finish feeling far more confident in your ability to use magic.\n\n");
+				hasTrainedToday = true;
 			}
-			player.trainStat("int", 2, 100);
-			CoC.instance.timeQ = 2;
+			player.trainStat("int", 2 + rand(4), 100);
+			CoC.instance.timeQ = 3;
 			doNext(camp.returnToCampUseTwoHours);
 		}
 		public function LutienMainSex():void {

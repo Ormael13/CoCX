@@ -2965,6 +2965,7 @@ use namespace CoC;
 			if (lowerGarmentName == "HB shorts") mult -= 10;
 			if (hasPerk(PerkLib.FromTheFrozenWaste) || hasPerk(PerkLib.ColdAffinity)) mult += 100;
 			if (hasPerk(PerkLib.FireAffinity)) mult -= 50;
+			if (hasPerk(PerkLib.VegetalAffinity)) mult -= 50;
 			if (hasStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff1) && (statusEffectv2(StatusEffects.ShiraOfTheEastFoodBuff1) > 0)) mult -= statusEffectv2(StatusEffects.ShiraOfTheEastFoodBuff1);
 			if (hasStatusEffect(StatusEffects.DaoOfFire) && (statusEffectv2(StatusEffects.DaoOfFire) > 3)) mult -= (10 * (statusEffectv2(StatusEffects.DaoOfFire) - 3));
 			if (headjewelryEffectId == HeadJewelryLib.MODIFIER_FIRE_R) mult -= headjewelryEffectMagnitude;

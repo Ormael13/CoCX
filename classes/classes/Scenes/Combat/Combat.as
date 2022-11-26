@@ -9015,6 +9015,8 @@ public class Combat extends BaseContent {
             outputText("The vine slithers around [monster him] before groping at [monster his] erogenous zones, enticing them as their focus and grip on combat weakens.");
             var damagePG:Number = (combat.teases.teaseBaseLustDamage() * 0.5 * spellModWhite());
             var Randomcrit1:Boolean = false;
+			if (player.hasPerk(PerkLib.VegetalAffinity)) damagePG *= 1.5;
+			if (player.hasPerk(PerkLib.GreenMagic)) damagePG *= 2;
             //Determine if critical tease!
             var critChance5:int = 5;
             if (player.hasPerk(PerkLib.CriticalPerformance)) {
@@ -9034,6 +9036,38 @@ public class Combat extends BaseContent {
             outputText("\n\n");
             combat.teaseXP((1 + combat.bonusExpAfterSuccesfullTease()*2));
         }
+		//Entagled
+		if (monster.hasStatusEffect(StatusEffects.Entangled) && monster.lustVuln > 0) {
+			if (40 + rand(player.inte) + rand(player.lib) > monster.spe) {
+				outputText("The vines are currently wrapped around [monster], ensuring that [monster he] cannot escape their clutches. ");
+				var damageE:Number = (combat.teases.teaseBaseLustDamage() * spellModWhite());
+				var Randomcrit2:Boolean = false;
+				if (player.hasPerk(PerkLib.VegetalAffinity)) damagePG *= 1.5;
+				if (player.hasPerk(PerkLib.GreenMagic)) damageE *= 2;
+				//Determine if critical tease!
+				var critChance6:int = 5;
+				if (player.hasPerk(PerkLib.CriticalPerformance)) {
+					if (player.lib <= 100) critChance6 += player.lib / 5;
+					if (player.lib > 100) critChance6 += 20;
+				}
+				if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance6 = 0;
+				if (rand(100) < critChance6) {
+					Randomcrit2 = true;
+					damageE *= 1.75;
+				}
+				if (player.hasPerk(PerkLib.RacialParagon)) damageE *= combat.RacialParagonAbilityBoost();
+				if (player.hasPerk(PerkLib.NaturalArsenal)) damageE *= 1.50;
+				damageE = Math.round(damageE*monster.lustVuln);
+				monster.teased(damageE, false);
+				if (Randomcrit2) outputText(" Critical hit!");
+				outputText("\n\n");
+				combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
+			}
+			else {
+				outputText("[Themonster] wriggles free from the vines, regaining control of [himself]\n\n");
+				monster.removeStatusEffect(StatusEffects.Entangled);
+			}
+		}
         if (player.hasStatusEffect(StatusEffects.Bound) && flags[kFLAGS.PC_FETISH] >= 2) {
             outputText("The feel of tight leather completely immobilizing you turns you on more and more.  Would it be so bad to just wait and let her play with you like this?\n\n");
             player.takeLustDamage(3, true);
@@ -15548,4 +15582,4 @@ private function touSpeStrScale(stat:int):Number {
         return damage;
     }
 }
-}
+}

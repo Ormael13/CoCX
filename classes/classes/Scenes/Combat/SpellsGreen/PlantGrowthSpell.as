@@ -32,7 +32,7 @@ public class PlantGrowthSpell extends AbstractGreenSpell {
 		if (player.hasStatusEffect(StatusEffects.PlantGrowth)) {
 			if (player.statusEffectv1(StatusEffects.PlantGrowth) <= 0) {
 				player.removeStatusEffect(StatusEffects.PlantGrowth);
-				if (display) outputText("<b>PLant Growth effect wore off!</b>\n\n");
+				if (display) outputText("<b>Plant Growth effect wore off!</b>\n\n");
 			} else {
 				player.addStatusValue(StatusEffects.PlantGrowth, 1, -1);
 			}
@@ -40,8 +40,16 @@ public class PlantGrowthSpell extends AbstractGreenSpell {
 	}
 	
 	public function calcDamage(monster:Monster, randomize:Boolean = true, casting:Boolean = true):Number { //casting - Increase Elemental Counter while casting (like Raging Inferno)
-		var baseDamage:Number = (combat.teases.teaseBaseLustDamage() * 0.5);
+		var baseDamage:Number = (combat.teases.teaseBaseLustDamage() * 0.5 * spellModWhite());
+		if (player.hasPerk(PerkLib.VegetalAffinity)) baseDamage *= 1.5;
+		if (player.hasPerk(PerkLib.GreenMagic)) baseDamage *= 2;
 		return adjustLustDamage(baseDamage, monster, CAT_SPELL_GREEN, randomize);
+	}
+	
+	public function calcDuration():int {
+		var dura:Number = 4;
+		if (player.hasPerk(PerkLib.GreenMagic)) dura *= 2;
+		return dura;
 	}
 	
 	override protected function doSpellEffect(display:Boolean = true):void {
@@ -54,7 +62,7 @@ public class PlantGrowthSpell extends AbstractGreenSpell {
 					}
 					return;
 				}
-				player.createStatusEffect(StatusEffects.PlantGrowth, 4, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.PlantGrowth, calcDuration(), 0, 0, 0);
 				var lustDmg:Number = calcDamage(monster, true, true);
 				//Determine if critical tease!
 				var crit:Boolean   = false;
@@ -74,7 +82,7 @@ public class PlantGrowthSpell extends AbstractGreenSpell {
 				combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 			}
 			else {
-				outputText("You focus your energy on the world around you causing vegetation surge out of the ground at an accelerated rate into a verdant patch of vines and other tentacle greenery.\n");
+				outputText("You focus your energy on the world around you causing vegetation to surge out of the ground at an accelerated rate into a verdant patch of vines and other tentacle greenery.\n");
 				player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
 			}
 		}

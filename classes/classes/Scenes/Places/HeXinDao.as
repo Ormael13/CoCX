@@ -1494,4 +1494,4 @@ public function soularena():void {
         doNext(camp.returnToCampUseOneHour);
     }
 }
-}
+}
