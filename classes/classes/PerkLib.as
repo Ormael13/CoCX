@@ -6793,10 +6793,9 @@ public class PerkLib
 					.requireSpe(45);
 			GreenMagic.requireLevel(18)
 					.requirePerk(NaturalSpellcasting)
-					.requireInt(100)
-					.requireLib(100)
-					.requireCor(50)
-					.requireSpe(45);
+					.requireInt(80)
+					.requireLib(80)
+					.requireCor(50);
             //Tier 4
 			ChimericalBodySemiImprovedStage.requirePerk(ChimericalBodyBasicStage)
                     .requireLevel(24)
@@ -6955,7 +6954,12 @@ public class PerkLib
             MotivationSu.requireLevel(36)
                     .requirePerk(MotivationEx);//.requirePerk(AdvancedLeadership)
             AdvancedAllRounderEducation.requireLevel(36)
-                    .requirePerk(IntermediateAllRounderEducation);
+                    .requirePerk(IntermediateAllRounderEducation);/*
+			GreenMagic.requireLevel(36)
+					.requirePerk(GreenMagic)
+					.requireInt(140)
+					.requireLib(140)
+					.requireCor(50);*/
             //Tier 7
             ChimericalBodyAdvancedStage.requirePerk(ChimericalBodySemiAdvancedStage)
                     .requireLevel(42)
@@ -7254,4 +7258,4 @@ public class PerkLib
         }
 	}
 }
-}
+}
