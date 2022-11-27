@@ -1,5 +1,6 @@
 package classes.Scenes.Combat {
 import classes.PerkLib;
+import classes.StatusEffects;
 
 public class AbstractBlackSpell extends AbstractSpell {
 	public function AbstractBlackSpell(
@@ -27,8 +28,11 @@ public class AbstractBlackSpell extends AbstractSpell {
 		if (player.lust < combat.magic.getBlackMagicMinLust()) {
 			return "You aren't turned on enough to use any black magics.";
 		}
-		if (player.hasPerk(PerkLib.DivineKnowledge)) {
+		if (player.hasPerk(PerkLib.DivineKnowledge) && !player.hasPerk(PerkLib.Equilibrium)) {
 			return "Your chosen path of magic locked out this spell.";
+		}
+		if (player.statusEffectv2(StatusEffects.Sealed) == 10) {
+			return "Your ability to use black magic was sealed."
 		}
 		
 		return "";

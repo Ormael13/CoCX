@@ -3519,10 +3519,10 @@ public final class Mutations extends MutationsHelper {
 				player.createStatusEffect(StatusEffects.KnowsEntangle, 0, 0, 0, 0);
 				return;
 			}/*
-			//Smart enough for Boneshatter and doesnt have it
-			if (player.inte >= 120 && !player.hasStatusEffect(StatusEffects.KnowsBoneshatter)) {
-				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new green spell: Boneshatter.</b>");
-				player.createStatusEffect(StatusEffects.KnowsBoneshatter, 0, 0, 0, 0);
+			//Smart enough for Briarthorn and doesnt have it
+			if (player.inte >= 120 && !player.hasStatusEffect(StatusEffects.KnowsBriarthorn)) {
+				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new green spell: Briarthorn.</b>");
+				player.createStatusEffect(StatusEffects.KnowsBriarthorn, 0, 0, 0, 0);
 				return;
 			}*/
 		}

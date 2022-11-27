@@ -407,9 +407,9 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Vegetal Affinity. Gained by been one of plant races or wood elf. Effects: Empower Green Magic by 50% weaken fire resistance by 50%.\n");
 			outputText("-New tier 3 misc lvl-up perk: Green magic. Req. Natural Spellcasting perk, Intelligence 80+, Libido 80+, Corruption 50+. Effect: Your Elven spell effects are twice as strong and last twice as long.\n");
 			outputText("-New green spell: Entagle. Learned from lession with Lutien - wood elf village mage teacher when having 100+ int OR from White Book when having Hidden Job: Grey Sage. It have 6 turns cooldown. Would turn present plants into vines that would try to grapple enemy for up to 6 turns. Each turn enemy is entangled it will recieve lust damage.\n");
+			outputText("-New event perk: Equilibrium. Gained by spending 1 super perk point and having Hidden Job: Grey Sage super perk. Effects: Allow to reach OverMax Mana equal to 120% of current max mana. You can cast now any spell you learned even if you missing additional materials or not meet requirements.\n");
 			//outputText("-New tier 6 misc lvl-up perk: Verdant Leech. Req. Green magic perk, Intelligence 140+, Libido 140+, Corruption 50+. Effect: .\n");
 			//outputText("-New tier 9 misc lvl-up perk: Arcane Venom. Req. Verdant Leech perk, Intelligence 200+, Libido 200+, Corruption 50+. Effect: .\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

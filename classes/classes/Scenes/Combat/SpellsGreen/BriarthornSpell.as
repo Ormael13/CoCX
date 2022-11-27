@@ -4,9 +4,9 @@ import classes.PerkLib;
 import classes.Scenes.Combat.AbstractGreenSpell;
 import classes.StatusEffects;
 
-public class PlantGrowthSpell extends AbstractGreenSpell {
-	public function PlantGrowthSpell() {
-		super("Plant growth",
+public class BriarthornSpell extends AbstractGreenSpell {
+	public function BriarthornSpell() {
+		super("Briarthorn",
 			"Grow plants around the caster. If plants are already present, turn them into invasive vines to deal lust damage.",
 			TARGET_ENEMY,
 			TIMING_INSTANT,
@@ -15,7 +15,7 @@ public class PlantGrowthSpell extends AbstractGreenSpell {
 	}
 	
 	override public function get isKnown():Boolean {
-		return player.hasStatusEffect(StatusEffects.KnowsPlantGrowth);
+		return player.hasStatusEffect(StatusEffects.KnowsBriarthorn);
 	}
 	
 	override public function describeEffectVs(target:Monster):String {

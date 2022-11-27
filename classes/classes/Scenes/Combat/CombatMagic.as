@@ -258,7 +258,6 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.GrandArchmage3rdCircle) && player.inte >= 175) mod += .6;
 		if (player.hasPerk(PerkLib.GrandMage) && player.inte >= 75) mod += .2;
 		if (player.hasPerk(PerkLib.JobSorcerer) && player.inte >= 25) mod += .1;
-		if (player.hasPerk(PerkLib.PrestigeJobGreySage)) mod += .2;
 		if (player.hasPerk(PerkLib.Mage) && player.inte >= 50) mod += .1;
 		if (player.hasPerk(PerkLib.Spellpower) && player.inte >= 50) mod += .1;
 		if (player.hasPerk(PerkLib.TraditionalMageI) && (player.isUsingStaff() || (player.isUsingWand() && player.isUsingTome()))) mod += 1;

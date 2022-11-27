@@ -123,11 +123,17 @@ public class CombatAbilities {
 	public static const BoneSpirit:BoneSpiritSpell              = new BoneSpiritSpell();
 	public static const BoneArmor:BoneArmorSpell                = new BoneArmorSpell();
 	public static const Boneshatter:BoneshatterSpell            = new BoneshatterSpell();
+	public static const NecroticRot:NecroticRotSpell            = new NecroticRotSpell();
+	public static const CorpseExplosion:CorpseExplosionSpell    = new CorpseExplosionSpell();
+	public static const BloodShower:BloodShowerSpell            = new BloodShowerSpell();
 
 	public static const ALL_NECRO_SPELLS:/*CombatAbility*/Array = [
 		BoneSpirit,
 		BoneArmor,
-		Boneshatter
+		Boneshatter,
+		NecroticRot,
+		CorpseExplosion,
+		BloodShower
 	];
 	
 	public static const ManaShield:ManaShieldSpell             = new ManaShieldSpell();
@@ -209,12 +215,12 @@ public class CombatAbilities {
 	
 	public static const PlantGrowth:PlantGrowthSpell   = new PlantGrowthSpell();
 	public static const Entangle:EntangleSpell         = new EntangleSpell();
-	//public static const Boneshatter:BoneshatterSpell            = new BoneshatterSpell();
+	public static const Briarthorn:BriarthornSpell     = new BriarthornSpell();
 
 	public static const ALL_GREEN_SPELLS:/*CombatAbility*/Array = [
 		PlantGrowth,
-		Entangle/*,
-		Boneshatter*/
+		Entangle,
+		Briarthorn
 	];
 	
 	public static const ALL_SPELLS:/*CombatAbility*/Array = []

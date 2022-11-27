@@ -1,10 +1,8 @@
 package classes.Scenes.Combat.SpellsGreen {
 import classes.Monster;
 import classes.PerkLib;
-import classes.Scenes.Areas.Mountain.WormMass;
 import classes.Scenes.Combat.AbstractGreenSpell;
 import classes.StatusEffects;
-import classes.VaginaClass;
 
 public class EntangleSpell extends AbstractGreenSpell {
 	public function EntangleSpell() {
@@ -13,7 +11,7 @@ public class EntangleSpell extends AbstractGreenSpell {
 			TARGET_ENEMY,
 			TIMING_LASTING,
 			[TAG_LUSTDMG]);
-		baseManaCost = 30;
+		baseManaCost = 100;
 	}
 	
 	override public function get isKnown():Boolean {

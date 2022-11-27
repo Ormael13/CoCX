@@ -26,8 +26,11 @@ public class AbstractGreenSpell extends AbstractSpell {
 		var uc:String =  super.usabilityCheck();
 		if (uc) return uc;
 		
+		if (player.hasStatusEffect(StatusEffects.NoPlantsArea)) {
+			return "Your can't use green magic in place where not plants exists or could grow."
+		}
 		if (player.statusEffectv2(StatusEffects.Sealed) == 10) {
-			return "Your ability to use white magic was sealed."
+			return "Your ability to use green magic was sealed."
 		}
 		
 		return "";

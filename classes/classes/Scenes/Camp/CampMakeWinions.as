@@ -2355,6 +2355,11 @@ public class CampMakeWinions extends BaseContent
 		
 		public function maxDemonBonesStored():Number {
 			var maxDemonBonesStoredCounter:Number = 100;
+			if (player.hasPerk(PerkLib.BoneSoul)) maxDemonBonesStoredCounter += 100;
+			if (player.hasPerk(PerkLib.Equilibrium)) {
+				maxDemonBonesStoredCounter += 10;
+				maxDemonBonesStoredCounter *= 1.1;
+			}
 			return maxDemonBonesStoredCounter;
 		}
 		public function maxSkeletonWarriors():Number {

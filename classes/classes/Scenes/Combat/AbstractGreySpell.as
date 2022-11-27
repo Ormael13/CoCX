@@ -1,5 +1,6 @@
 package classes.Scenes.Combat {
 import classes.PerkLib;
+import classes.StatusEffects;
 
 public class AbstractGreySpell extends AbstractSpell {
 	
@@ -31,6 +32,9 @@ public class AbstractGreySpell extends AbstractSpell {
 				(threshold <= player.lust && player.lust <= player.maxLust() - threshold)
 		)){
 			return "You can't use any grey magics."
+		}
+		if (player.statusEffectv2(StatusEffects.Sealed) == 10) {
+			return "Your ability to use grey magic was sealed."
 		}
 		
 		return "";

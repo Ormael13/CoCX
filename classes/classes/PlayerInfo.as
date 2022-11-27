@@ -1967,10 +1967,20 @@ public class PlayerInfo extends BaseContent {
 					if (player.freeHiddenJobsSlots() > 0) addButton(0, "HJ:GS", perkHiddenJobGreySage).hint("Choose the 'Hidden Job: Grey Sage' super perk. You've trained in Way of Grey Sage. There is no spell you can't learn. (+10% to OverMax Mana)");
 					else addButtonDisabled(0, "HJ:GS", "You do not have a free slot for this hidden job.");
 				}
+				if (player.level >= 10) {
+					if (player.hasPerk(PerkLib.Equilibrium)) addButtonDisabled(1, "Eq", "You already have this super perk.");
+					else {
+						if (player.hasPerk(PerkLib.PrestigeJobGreySage)) addButton(1, "Eq", perkEquilibrium).hint("Choose the 'Equilibrium' super perk. You can cast now any spell you learned even if you missing additional materials or not meet requirements. (+10% of OverMax Mana)");
+						else addButtonDisabled(1, "Eq", "You need to first have the 'Hidden Job: Grey Sage' super perk.");
+					}
+				}
+				else addButtonDisabled(1, "Eq", "You need to reach level 10 first.");
 			}
 			else {
 				if (player.hasPerk(PerkLib.PrestigeJobGreySage)) addButtonDisabled(0, "HJ:GS", "You already have this perk.");
 				else addButtonDisabled(0, "HJ:GS", "You do not have enough super perk points to obtain this perk.");
+				if (player.hasPerk(PerkLib.Equilibrium)) addButtonDisabled(1, "Eq", "You already have this perk.");
+				else addButtonDisabled(1, "Eq", "You do not have enough super perk points to obtain this perk.");
 			}
 			addButton(13, "Previous", superPerkBuyMenu, page - 1);
 			addButton(14, "Back", playerMenu);
@@ -2090,6 +2100,13 @@ public class PlayerInfo extends BaseContent {
 		player.createPerk(PerkLib.PrestigeJobGreySage,0,0,0,0);
 		clearOutput();
 		outputText("You gained 'Hidden Job: Grey Sage' super perk.");
+		doNext(superPerkBuyMenu, 4);
+	}
+	private function perkEquilibrium():void {
+		player.superPerkPoints--;
+		player.createPerk(PerkLib.Equilibrium,0,0,0,0);
+		clearOutput();
+		outputText("You gained 'Equilibrium' super perk.");
 		doNext(superPerkBuyMenu, 4);
 	}
 }
