@@ -1970,7 +1970,7 @@ public class PlayerInfo extends BaseContent {
 				if (player.level >= 10) {
 					if (player.hasPerk(PerkLib.Equilibrium)) addButtonDisabled(1, "Eq", "You already have this super perk.");
 					else {
-						if (player.hasPerk(PerkLib.PrestigeJobGreySage)) addButton(1, "Eq", perkEquilibrium).hint("Choose the 'Equilibrium' super perk. You can cast now any spell you learned even if you missing additional materials or not meet requirements. (+10% of OverMax Mana)");
+						if (player.hasPerk(PerkLib.PrestigeJobGreySage)) addButton(1, "Eq", perkEquilibrium).hint("Choose the 'Equilibrium' super perk. You can cast now any spell you learned even if you missing additional materials or not meet requirements. Slight increase cap on stored bones for necromancers. (+10% of OverMax Mana)");
 						else addButtonDisabled(1, "Eq", "You need to first have the 'Hidden Job: Grey Sage' super perk.");
 					}
 				}
@@ -2110,4 +2110,4 @@ public class PlayerInfo extends BaseContent {
 		doNext(superPerkBuyMenu, 4);
 	}
 }
-}
+}
