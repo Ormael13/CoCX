@@ -1311,7 +1311,7 @@ private function urtaSidewinder():void {
 	else if (monster.hasPerk(PerkLib.Resolute)) outputText("\nWhile it should have some chance of stunning, your foe seems far too resolute to be affected by such an ailment.");
 	outputText("\n");
 	//Kick back to main if no damage occured!
-	if(monster.HP >= 1 && monster.lust <= 99) {
+	if(monster.HP > monster.minHP() && monster.lust < monster.maxOverLust()) {
 		if(player.hasStatusEffect(StatusEffects.FirstAttack)) {
 			combat.attack();
 			return;
@@ -1401,7 +1401,7 @@ private function urtaVaultAttack():void {
 	}
 	outputText("\n");
 	//Kick back to main if no damage occured!
-	if(monster.HP >= 1 && monster.lust <= 99) {
+	if(monster.HP > monster.minHP() && monster.lust < monster.maxOverLust()) {
 		if(player.hasStatusEffect(StatusEffects.FirstAttack)) {
 			combat.attack();
 			return;

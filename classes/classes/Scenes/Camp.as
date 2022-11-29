@@ -107,12 +107,6 @@ public class Camp extends NPCAwareContent{
 	public function returnToCampUseTwelveHours():void {
 		returnToCamp(12);
 	}
-	public function returnToCampUseFourteenHours():void {
-		returnToCamp(14);
-	}
-	public function returnToCampUseSixteenHours():void {
-		returnToCamp(16);
-	}
 
 	//Used to determine scenes if you choose to play joke on them. Should the variables be moved to flags?
 	protected var izmaJoinsStream:Boolean;
@@ -1863,10 +1857,10 @@ public class Camp extends NPCAwareContent{
 				buttons.add("Kindra", SceneLib.kindraFollower.meet2Kindra).hint("Visit Kindra the sheep-morph.").disableIf(player.statusEffectv1(StatusEffects.CampSparingNpcsTimers2) > 0, "Training.");
 			}
 			//Dinah
-			if (flags[kFLAGS.DINAH_LVL_UP] >= 1) {
+			/*if (flags[kFLAGS.DINAH_LVL_UP] >= 1) {
 				outputText("You can see a cart with various vials standing next to a bedroll. Dinah must be somewhere nearby.\n\n");
 				buttons.add("Dinah", SceneLib.dinahScene.DinahIntro2).hint("Visit Dinah the cat chimera merchant.").disableIf(player.statusEffectv3(StatusEffects.CampSparingNpcsTimers3) > 0, "Training.");
-			}
+			}*/
 			//Neisa
 			if (flags[kFLAGS.NEISA_FOLLOWER] >= 7) {
 				outputText("Neisa is hanging by a tree next to the [camp] practicing her swordplay on a makeshift dummy for the next expedition.\n\n");
@@ -2423,7 +2417,8 @@ public class Camp extends NPCAwareContent{
 		if (player.herbalismLevel < 10) button(5).disable("You lack the skill to craft this item.\n\nRequire Herbalism level 10");
 		if (player.itemCount(CoC.instance.consumables.RAUNENECT) == 0) button(5).disable("You lack the ingrediants to craft this item. \n\nAlraune nectar currently owned "+player.itemCount(CoC.instance.consumables.RAUNENECT)+"");
 		//THE GARDEN!
-		addButton(10, "Garden", Garden).hint("Manage your garden of medicinal plants")
+		// Nuked from the game until Lia fixes the save
+		//addButton(10, "Garden", Garden).hint("Manage your garden of medicinal plants")
 		//.disableIf(1!=1, "You haven't built a garden yet."); //TO DO
 		addButton(14, "Back", campActions);
 	}
@@ -2660,7 +2655,7 @@ public class Camp extends NPCAwareContent{
 			doNext(campMiscActions);
 		}
 	}
-	
+
 	private function AlterBindScroll():void {
 		var statusNames:Array = [
 			[StatusEffects.AlterBindScroll1, "No Limiter"],
@@ -2733,7 +2728,7 @@ public class Camp extends NPCAwareContent{
 			outputText("Your clone" + (player.statusEffectv4(StatusEffects.PCClone) > 0 ? "s are" : " is") + " wandering around [camp]. What would you ask "
 				+ (player.statusEffectv4(StatusEffects.PCClone) > 0 ? "them" : "[him]") + " to do?\n\n");
 			for (clone = 0; clone < Soulforce.clones.length; ++clone) {
-				outputText("Current clone (" + clone + ") task: ");
+				outputText("Current clone (" + (clone + 1) + ") task: ");
 				if (player.statusEffectv1(Soulforce.clones[clone]) > 10 && player.statusEffectv1(Soulforce.clones[clone]) < 21) {
 					outputText("Contemplating Dao of ");
 					for (var d:int = 0; d < Soulforce.daos.length; ++d) {
@@ -2748,24 +2743,17 @@ public class Camp extends NPCAwareContent{
 		else outputText("You do not have a clone right now, whether you've never made one or one was sacrificed. You would need to make a new one, first.");
 		outputText("\n\n");
 		menu();
-		if (player.isGargoyle()) addButtonDisabled(4, "Create", "Your current body cannot handle a clone.");
-		else if (player.hasStatusEffect(StatusEffects.PCClone)) {
-			if (player.statusEffectv3(StatusEffects.PCClone) > 0) addButtonDisabled(4, "Create", "You have not recovered enough from the ordeal of making your previous clone. Unrecovered levels: " + player.statusEffectv3(StatusEffects.PCClone) + "");
-			else {
-				if (player.statusEffectv4(StatusEffects.PCClone) == 4) addButtonDisabled(4, "Create", "You cannot have more than four clones.");
-				else if (player.statusEffectv4(StatusEffects.PCClone) > 0 && player.statusEffectv4(StatusEffects.PCClone) < 4) addButton(4, "Create", CreateClone);
-				else addButtonDisabled(4, "Create", "You must wait before creating a new clone.");
-			}
-		}
-		else addButton(4, "Create", CreateClone);
+		addButton(4, "Create", CreateClone)
+			.disableIf(player.isGargoyle(), "Your can't clone your stone body!");
+		if (button(4).enabled && player.hasStatusEffect(StatusEffects.PCClone)) button(4)
+			.disableIf(player.statusEffectv3(StatusEffects.PCClone) > 0,
+				"You have not recovered enough from the ordeal of making your previous clone. Unrecovered levels: " + player.statusEffectv3(StatusEffects.PCClone))
+			.disableIf(player.statusEffectv4(StatusEffects.PCClone) == 4, "You cannot have more than four clones.");
 		for (clone = 0; clone < Soulforce.clones.length; ++clone) {
-			addButton(clone, "Contempl. ("+clone+")", cloneContemplateDao, clone)
-				.hint("Task your clone ("+clone+") with contemplating one of the Daos you know.")
-				.disableIf(!player.hasStatusEffect(Soulforce.clones[clone]), "Req. fully formed clone ("+clone+").");
+			addButton(clone, "Contempl. (" + (clone + 1) + ")", cloneContemplateDao, clone)
+				.hint("Task your clone (" + (clone + 1) + ") with contemplating one of the Daos you know.")
+				.disableIf(!player.hasStatusEffect(Soulforce.clones[clone]), "Req. fully formed clone (" + (clone + 1) + ").");
 		}
-		
-		//addButtonDisabled(1, "Contemplate", "Req. fully formed clone.");
-		//addButtonDisabled(5, "Training", "Req. fully formed clone.");
 		addButton(14, "Back", campMiscActions);
 	}
 	private function maximumClonesCount():Number {
@@ -2786,23 +2774,24 @@ public class Camp extends NPCAwareContent{
 		addButton(4, "Back", VisitClone);
 	}
 	private function FormClone():void {
-		var num:int;
+		var newClone:int;
 		if (player.hasStatusEffect(StatusEffects.PCClone)) {
-			for (var i:int = 1; i < Soulforce.clones.length; ++i)
-			if (!player.hasStatusEffect(Soulforce.clones[i])) {
-				num = i + 1;
+			for (var i:int = 1; i < Soulforce.clones.length; ++i) {
+				if (!player.hasStatusEffect(Soulforce.clones[i])) {
+					newClone = i;
+				}
 			}
 		} else {
-			num = 1;
+			newClone = 0;
 			player.createStatusEffect(StatusEffects.PCClone, 0, 0, 0, 0);
 		}
 		clearOutput();
 		FormCLoneText();
-		outputText("You share a grin now that the process is successful. Your quest remains to be completed, but now you have the power of "+NUMBER_WORDS_NORMAL[num+1]+".\n\n");
-		outputText("<b>Your clone ("+num+") is fully formed.</b>\n\n");
+		outputText("You share a grin now that the process is successful. Your quest remains to be completed, but now you have the power of "+NUMBER_WORDS_NORMAL[newClone + 2]+".\n\n");
+		outputText("<b>Your clone (" + (newClone + 1) + ") is fully formed.</b>\n\n");
 		player.addStatusValue(StatusEffects.PCClone, 3, 9);
 		player.addStatusValue(StatusEffects.PCClone, 4, 1);
-		player.createStatusEffect(Soulforce.clones[num], 0, 0, 0, 0);
+		player.createStatusEffect(Soulforce.clones[newClone], 0, 0, 0, 0);
 		EngineCore.SoulforceChange(-player.maxSoulforce());
 		HPChange(-(player.maxHP() * 0.9), true);
 		if (player.hasPerk(PerkLib.AscensionAdvTrainingX)) player.statPoints -= (45 + (player.perkv1(PerkLib.AscensionAdvTrainingX) * 36));
@@ -3174,7 +3163,7 @@ public class Camp extends NPCAwareContent{
 		dynStats("lus", -15, "scale", false);
 		doNext(camp.returnToCampUseOneHour);
 	}
-	
+
 	private function useGryphonStatuette():void {
 		CoC.instance.mutations.skybornSeed(1, player);
 		eachMinuteCount(5);
@@ -3817,9 +3806,9 @@ public class Camp extends NPCAwareContent{
 			oldPlacesMenu();
 			return;
 		}
-		
+
 		menu();
-		
+
 		var bd:ButtonDataList = new ButtonDataList();
 		// Row 1 - towns 1-5
 		bd.add("He'Xin'Dao", SceneLib.hexindao.riverislandVillageStuff0)
@@ -3962,11 +3951,11 @@ public class Camp extends NPCAwareContent{
 		// Row 10 - spare
 		// Row 11 - spare
 		// Row 12 - spare
-		
+
 		bigButtonGrid(bd);
 		addButton(14, "Back", playerMenu);
 	}
-	
+
 	public function oldPlacesMenu():Boolean {
 		hideMenus();
 		clearOutput();

@@ -14,6 +14,7 @@ import classes.PerkLib;
 import classes.PerkTree;
 import classes.PerkType;
 import classes.Races;
+import classes.Scenes.Dungeons.BeeHive.CorruptBeeQueen;
 import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.SceneLib;
@@ -128,16 +129,16 @@ public class PerkMenu extends BaseContent {
 		clearOutput();
 		menu();
 		if (player.hasPerk(PerkLib.Venomancy)) {
-			outputText("\n<b>You can adjust your Venomancy.</b>");
+			outputText("<b>You can adjust your Venomancy.</b>\n");
 			addButton(1, "Venomancy Opt",VenomancyOption);
 		}
 		if (player.hasPerk(PerkLib.Spellsword) || player.hasPerk(PerkLib.Spellarmor) || player.hasPerk(PerkLib.Battleflash) || player.hasPerk(PerkLib.Battlemage) || player.hasPerk(PerkLib.Battleshield) || player.hasPerk(PerkLib.FortressOfIntellect)) {
-			outputText("\n<b>You can adjust your spell autocast settings.</b>");
+			outputText("<b>You can adjust your spell autocast settings.</b>\n");
 			addButton(2, "Spells Opt",spellOptions);
 		}
 		if (player.hasPerk(PerkLib.DarkRitual) || player.hasPerk(PerkLib.HiddenJobBloodDemon)) {
-			if (player.hasPerk(PerkLib.DarkRitual)) outputText("\n<b>You can choose if you wish to use dark ritual and sacrifice health to empower your magic.</b>");
-			if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) outputText("\n<b>You can adjust your Blood Demon hidden job settings.</b>");
+			if (player.hasPerk(PerkLib.DarkRitual)) outputText("<b>You can choose if you wish to use dark ritual and sacrifice health to empower your magic.</b>\n");
+			if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) outputText("<b>You can adjust your Blood Demon hidden job settings.</b>\n");
 			addButton(3, "Bloody Opt",DarkRitualOption);
 		}
 		addButton(14, "Back", displayPerks);
@@ -167,15 +168,31 @@ public class PerkMenu extends BaseContent {
 		}
 		if (player.hasPerk(PerkLib.AuraOfCorruption) || player.hasPerk(PerkLib.AuraOfPurity) || player.hasPerk(PerkLib.ArousingAura)) {
 			outputText("\n\nYou can suppress your auras. This way, they won't damage/arouse enemies.");
-			outputText("\nAuras: <b>" + (flags[kFLAGS.DISABLE_AURAS] ? "suppressed" : "active") + "</b>");
+			outputText("\nAuras: <b>" + (flags[kFLAGS.DISABLE_AURAS] ? "Suppressed" : "Active") + "</b>");
 			addButton(5, "Auras", curry(toggleFlagMisc, kFLAGS.DISABLE_AURAS));
 		}
 		// auto hit mode :)
 		outputText("\n\nYou can choose to stand still when selecting the 'Wait' actions. This way, you won't attempt to dodge or block any attacks. Why would you do that?!");
-		outputText("\nCurrent 'Wait' behaviour: <b>" + (flags[kFLAGS.WAIT_STAND_STILL] ? "standing still" : "dodging") + "</b>");
+		outputText("\nCurrent 'Wait' behaviour: <b>" + (flags[kFLAGS.WAIT_STAND_STILL] ? "Standing still" : "Dodging") + "</b>");
 		addButton(6, "StandStill", curry(toggleFlagMisc, kFLAGS.WAIT_STAND_STILL));
+		// corruption tolerance
+		if (player.hasPerk(PerkLib.AscensionTolerance) || !CoC.instance.lockCheats) {
+			outputText("\n\nYou can temporarily enable or disable your corruption tolerance.");
+			if (!CoC.instance.lockCheats) outputText(" <i>Since you have cheats enabled, you can force it to be 100.</i>");
+			outputText("\nCorruption Tolerance mode: <b>" + (
+				flags[kFLAGS.CORRUPTION_TOLERANCE_MODE] == 0 ? "Enabled (" + player.corruptionTolerance + ")" :
+					flags[kFLAGS.CORRUPTION_TOLERANCE_MODE] == 1 ? "Disabled (0)" : "CHEAT (100)") + "</b>");
+			addButton(7, "CorTolerance", toggleCorruptionTolerance);
+		}
 		//
 		addButton(14, "Back", displayPerks);
+	}
+
+	private function toggleCorruptionTolerance():void {
+		++flags[kFLAGS.CORRUPTION_TOLERANCE_MODE];
+		if (flags[kFLAGS.CORRUPTION_TOLERANCE_MODE] > (CoC.instance.lockCheats ? 1 : 2))
+			flags[kFLAGS.CORRUPTION_TOLERANCE_MODE] = 0;
+		MiscOption();
 	}
 
 	public function meleeOptions():void {
@@ -185,7 +202,6 @@ public class PerkMenu extends BaseContent {
 		var zerkingStyle:Function = curry(setFlag, meleeOptions, kFLAGS.ZERKER_COMBAT_MODE);
 
 		clearOutput();
-		outputText("You will always attack ");
 		outputText("You will always attack " + (multiAttackStyle < 1 ? "once" :
 			multiAttackStyle == 1 ? "twice" :
 				NUMBER_WORDS_NORMAL[multiAttackStyle + 1] + " times"));
@@ -240,11 +256,11 @@ public class PerkMenu extends BaseContent {
 				.disableIf(!canVenomAttacks(), "You need a source of poison for this.");
 		}
 		if (player.hasPerk(PerkLib.StaffChanneling)) {
-			outputText("\n\nYou can toggle Staff Channeling");
+			outputText("\n\nYou can toggle Staff Channeling.");
 			outputText("\nStaff Channeling: <b>" + (flags[kFLAGS.STAFF_CHANNELING_MODE] ? "Active" : "Inactive") + "</b>");
 			bd.add("Channelling", curry(toggleFlagMelee, kFLAGS.STAFF_CHANNELING_MODE));
 		}
-		submenu(bd, CoC.instance.inCombat ? curry(combat.combatMenu, false) : displayPerks);
+		submenu(bd, CoC.instance.inCombat ? curry(combat.combatMenu, false) : displayPerks, 0, false);
 	}
 
 	private function canVenomAttacks():Boolean {
@@ -294,14 +310,15 @@ public class PerkMenu extends BaseContent {
 			doNext(meleeOptions);
 			return;
 		}
-		outputText("Current number of attacks: " + currentAttacks + "\n");
+		outputText("Current number of attacks: " + (currentAttacks + 1) + "\n");
 		outputText("Maximum number of attacks with your current weapon: " + maxAttacks + "\n");
 		var nba:int = player.nextBonusAttack();
 		if (nba < 0) outputText("You've reached the maximum number of bonus attacks from mastery!");
 		else outputText("Next bonus attack at mastery level " + nba);
-		outputText("\n\nHow many attacks would you like to deal?")
+		outputText("\n\nHow many attacks would you like to deal?");
+		menu();
 		var atk:int = 0;
-		while (atk <= maxAttacks) {
+		while (atk < maxAttacks) {
 			addButton(atk, NUMBER_WORDS_CAPITAL[atk + 1], multiAttackStyle, atk)
 				.disableIf(currentAttacks == atk, "Already selected");
 			atk++;
@@ -314,10 +331,11 @@ public class PerkMenu extends BaseContent {
 		var currentProj:int = flags[kFLAGS.MULTISHOT_STYLE];
 		var maxProj:int = combat.maxCurrentRangeAttacks();
 		clearOutput();
-		outputText("Current number of projectiles per shot: " + currentProj + "\n");
+		outputText("Current number of projectiles per shot: " + (currentProj + 1) + "\n");
 		outputText("Maximum number of projectiles per shot with your current weapon: " + maxProj + "\n");
+		menu();
 		var atk:int = 0;
-		while (atk <= maxProj) {
+		while (atk < maxProj) {
 			addButton(atk, NUMBER_WORDS_CAPITAL[atk + 1], multiShotStyle, atk)
 				.disableIf(currentProj == atk, "Already selected");
 			atk++;
@@ -353,7 +371,7 @@ public class PerkMenu extends BaseContent {
 			bd.add("Venom", curry(toggleFlagRanged, kFLAGS.ENVENOMED_BOLTS))
 				.disableIf(!canVenomAttacks(), "You need a source of poison for this.");
 		}
-		submenu(bd, CoC.instance.inCombat ? curry(combat.combatMenu, false) : displayPerks);
+		submenu(bd, CoC.instance.inCombat ? curry(combat.combatMenu, false) : displayPerks, 0, false);
 	}
 
 	public function spellOptions():void {
@@ -372,7 +390,7 @@ public class PerkMenu extends BaseContent {
 		outputText("You can choose to autocast or not specific buff spells at the start of the combat.");
 		for each (var autoItem:Array in autocasts) {
 			if (player.hasPerk(autoItem[2])) {
-				outputText("\n\n" + autoItem[0] + ": <b>" + (flags[autoItem[1]] ? "Manual" : "Autocast") + "</b>");
+				outputText("\n\n" + autoItem[0] + ": <b>" + (flags[autoItem[1]] ? "Autocast" : "Manual") + "</b>");
 				addButton(btn++, autoItem[0], curry(toggleFlagMagic, autoItem[1]));
 			}
 		}

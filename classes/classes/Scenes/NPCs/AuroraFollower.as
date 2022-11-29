@@ -39,10 +39,9 @@ public function auroraCampMenu():void {
 	menu();
 	addButton(0, "Appearance", auroraAppearance).hint("Examine Aurora appearance.");
 	//talk
-	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) {
-		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Aurora") addButtonDisabled(4, "Spar", "You can't fight against her as long she's in your team.");
-		else addButton(4, "Spar", auroraSparsWithPC).hint("Ask Aurora for a mock battle.");
-	}
+	addButton(4, "Spar", auroraSparsWithPC).hint("Ask Aurora for a mock battle.")
+		.disableIf(flags[kFLAGS.PLAYER_COMPANION_1] == "Aurora", "You can't fight against her as long she's in your team.")
+		.disableIf(flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 2, "You need a good sparring ring for that.");
 	if (player.hasPerk(PerkLib.BasicLeadership)) {
 		if (flags[kFLAGS.PLAYER_COMPANION_1] == "") addButton(5, "Team", auroraHenchmanOption).hint("Ask Aurora to join you in adventures outside camp.");
 		else if (flags[kFLAGS.PLAYER_COMPANION_1] == "Aurora") addButton(5, "Team", auroraHenchmanOption).hint("Ask Aurora to stay in camp.");

@@ -258,7 +258,6 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.GrandArchmage3rdCircle) && player.inte >= 175) mod += .6;
 		if (player.hasPerk(PerkLib.GrandMage) && player.inte >= 75) mod += .2;
 		if (player.hasPerk(PerkLib.JobSorcerer) && player.inte >= 25) mod += .1;
-		if (player.hasPerk(PerkLib.PrestigeJobGreySage)) mod += .2;
 		if (player.hasPerk(PerkLib.Mage) && player.inte >= 50) mod += .1;
 		if (player.hasPerk(PerkLib.Spellpower) && player.inte >= 50) mod += .1;
 		if (player.hasPerk(PerkLib.TraditionalMageI) && (player.isUsingStaff() || (player.isUsingWand() && player.isUsingTome()))) mod += 1;
@@ -836,36 +835,24 @@ public class CombatMagic extends BaseCombatContent {
 	}
 
 	public function spellMagicBolt():void {
-		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
-		clearOutput();
-		useMana(40, Combat.USEMANA_MAGIC);
-		if(handleShell()){return;}
-		spellMagicBolt2();
+		spellMagicBolt2(false, false);
 	}
 	public function spellElementalBolt():void {
-		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
-		clearOutput();
-		useMana(80, Combat.USEMANA_MAGIC);
-		if(handleShell()){return;}
-		spellMagicBolt2();
+		spellMagicBolt2(true, false);
 	}
 	public function spellEdgyMagicBolt():void {
-		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
-		clearOutput();
-		useMana(40, Combat.USEMANA_MAGIC);
-		player.wrath -= 100;
-		if(handleShell()){return;}
-		spellMagicBolt2(true);
+		spellMagicBolt2(false, true);
 	}
 	public function spellEdgyElementalBolt():void {
+		spellMagicBolt2(true, true);
+	}
+	public function spellMagicBolt2(elemental:Boolean = false, edgy:Boolean = false):void {
+		useMana(elemental ? 80 : 40, Combat.USEMANA_MAGIC);
+		if (edgy) player.wrath -= 100;
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		useMana(80, Combat.USEMANA_MAGIC);
-		player.wrath -= 100;
-		if(handleShell()){return;}
-		spellMagicBolt2(true);
-	}
-	public function spellMagicBolt2(edgy:Boolean = false):void {
+		combat.darkRitualCheckDamage();
+		if (handleShell()) return;
 		outputText("You narrow your eyes, focusing your mind with deadly intent.  ");
 		if (player.hasPerk(PerkLib.StaffChanneling) && player.weaponSpecials("Staff")) outputText("You point your staff and shoot a magic bolt toward [themonster]!\n\n");
 		else outputText("You point your hand toward [themonster] and shoot a magic bolt!\n\n");

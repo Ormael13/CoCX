@@ -1156,7 +1156,8 @@ public function helspawnsMainMenu():void {
 	//[Talk]
 	addButton(1,"Talk",talkToHelspawn);
 	//[Spar]
-	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(2,"Spar",sparHelspawn);
+	addButton(2,"Spar",sparHelspawn)
+		.disableIf(flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 2, "You need a good sparring ring for that.");
 	//[Sex]; bipeds only, lust must be high, incest must be flagged active, and player must have a dick.
 	if (incestEnabled()) {
 		if (flags[kFLAGS.HELSPAWN_INCEST]) addButton(3, "Sex", sexHelspawn)

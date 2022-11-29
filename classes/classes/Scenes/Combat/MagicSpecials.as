@@ -3217,6 +3217,7 @@ public class MagicSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
 		useMana(80, Combat.USEMANA_MAGIC);
+		combat.darkRitualCheckDamage();
 		var WWCD:Number = 4;
 		if (player.perkv1(IMutationsLib.RatatoskrSmartsIM) >= 3) WWCD -= 1;
 		if (player.hasPerk(PerkLib.NaturalInstincts)) WWCD -= 1;
@@ -3359,6 +3360,7 @@ public class MagicSpecials extends BaseCombatContent {
 		doNext(combatMenu);
 		if (player.perkv1(IMutationsLib.ObsidianHeartIM) >= 3) useMana(50, Combat.USEMANA_MAGIC);
 		else useMana(40, Combat.USEMANA_MAGIC);
+		combat.darkRitualCheckDamage();
 		if (player.cor < 60 && player.perkv1(IMutationsLib.ObsidianHeartIM) >= 1) dynStats("cor", 0.3);
 		if (monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your attack touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your attack!\n\n");
@@ -3495,32 +3497,20 @@ public class MagicSpecials extends BaseCombatContent {
 		checkAchievementDamage(damage);
 		if (player.hasStatusEffect(StatusEffects.HeroBane)) flags[kFLAGS.HERO_BANE_DAMAGE_BANK] += damage;
 	}
-	//(Puppeter)
-	public function nekomataPuppeteer():void {
-		clearOutput();
-		var soulforcecost:int = 10 * soulskillCost() * soulskillcostmulti();/*
-		if (player.tailCount == 2 && player.tailType == Tail.CAT && player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 1) soulforcecost *= 3;*/
-		if (player.tailCount == 2 && player.tailType == Tail.CAT) soulforcecost *= 2;// || player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 1
-		player.soulforce -= soulforcecost;
-		nekomataPuppeteer2();
-	}
-	public function nekomataPuppeteer2():void {
 
-	}
 	//(Ghost Fire)
 	public function nekomataGhostFire():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		var soulforcecost:int = 50 * soulskillCost() * soulskillcostmulti();/*
-		if (player.tailCount == 2 && player.tailType == Tail.CAT && player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 1) soulforcecost *= 3;*/
-		if (player.tailCount == 2 && player.tailType == Tail.CAT) soulforcecost *= 2;// || player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 1
+		var soulforcecost:int = 50 * soulskillCost() * soulskillcostmulti();
+		if (player.tailCount == 2 && player.tailType == Tail.CAT) soulforcecost *= 2;
 		player.soulforce -= soulforcecost;
 		nekomataGhostFire2();
 	}
 	public function nekomataGhostFire2():void {
-		/*if (player.tailCount == 2 && player.tailType == Tail.CAT && player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 1) useMana((150), 3);
-		else */if (player.tailCount == 2 && player.tailType == Tail.CAT) useMana((80), Combat.USEMANA_MAGIC_NOBM);// || player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 1
+		if (player.tailCount == 2 && player.tailType == Tail.CAT) useMana((80), Combat.USEMANA_MAGIC_NOBM);
 		else useMana((40), Combat.USEMANA_MAGIC_NOBM);
+		combat.darkRitualCheckDamage();
 		outputText("Holding out your palm, you conjure ghastly greenish flame that dances across your fingertips.  You launch it at [themonster] with a ferocious throw, and it bursts on impact, showering dazzling emerald sparks everywhere.  ");
 		var damage:Number = (scalingBonusWisdom() * 0.6) + (scalingBonusIntelligence() * 0.4);
 		//Determine if critical hit!
@@ -3604,6 +3594,7 @@ public class MagicSpecials extends BaseCombatContent {
 	}
 	public function basicFoxFire2():void {
 		useMana((60 * kitsuneskillCost()), Combat.USEMANA_MAGIC_NOBM);
+		combat.darkRitualCheckDamage();
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			enemyAI();
@@ -3696,6 +3687,7 @@ public class MagicSpecials extends BaseCombatContent {
 	}
 	public function corruptedFoxFire2():void {
 		useMana((80 * kitsuneskillCost()), Combat.USEMANA_MAGIC_NOBM);
+		combat.darkRitualCheckDamage();
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			enemyAI();
@@ -3794,6 +3786,7 @@ public class MagicSpecials extends BaseCombatContent {
 	}
 	public function fusedFoxFire2():void {
 		useMana((200 * kitsuneskillCost()), Combat.USEMANA_MAGIC_NOBM);
+		combat.darkRitualCheckDamage();
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			enemyAI();
@@ -3890,6 +3883,7 @@ public class MagicSpecials extends BaseCombatContent {
 	}
 	public function pureFoxFire2():void {
 		useMana((80 * kitsuneskillCost()), Combat.USEMANA_MAGIC_NOBM);
+		combat.darkRitualCheckDamage();
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			enemyAI();
@@ -4167,6 +4161,7 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		useMana(50);
+		combat.darkRitualCheckDamage();
 		outputText("You wave a sign in the air, summoning a huge slime blob which you proceed to hurl at your opponent. [Themonster] is caught in the sticky blast, getting completely soaked in slime. ");
 		var lustDmgF:Number = 20 + rand(6);
 		var lustBoostToLustDmg:Number = 0;
@@ -4322,6 +4317,7 @@ public class MagicSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
 		useMana(80, Combat.USEMANA_MAGIC);
+		combat.darkRitualCheckDamage();
 		outputText("Your wings start shining with rainbowish light as you charge and unleash a beam of primal energy on [themonster]. ");
 		var damage:Number = (scalingBonusIntelligence() * spellMod());
 		//Determine if critical hit!
@@ -4626,6 +4622,7 @@ public class MagicSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 3;
 		clearOutput();
 		useMana(100, USEFATG_MAGIC_NOBM);
+		combat.darkRitualCheckDamage();
 		var damage:Number = (scalingBonusIntelligence() * spellMod());
 		//Determine if critical hit!
 		var crit:Boolean = false;

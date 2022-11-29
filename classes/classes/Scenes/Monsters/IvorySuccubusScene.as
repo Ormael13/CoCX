@@ -8,6 +8,7 @@ package classes.Scenes.Monsters
 {
 import classes.BaseContent;
 import classes.display.SpriteDb;
+import classes.StatusEffects;
 
 public class IvorySuccubusScene extends BaseContent
 {
@@ -28,12 +29,14 @@ public class IvorySuccubusScene extends BaseContent
         }
         else {
             outputText("She starts to close the distance by charging at you! It's a fight!");
-            startCombat(new IvorySuccubus());
+            player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
+			startCombat(new IvorySuccubus());
         }
     }
 
     public function fightAgainstSuccubus():void {
-        startCombatImmediate(new IvorySuccubus());
+        player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
+		startCombatImmediate(new IvorySuccubus());
     }
 
     public function winAgainstSuccubus():void {

@@ -997,7 +997,7 @@ use namespace CoC;
 		}
 		//Natural Claws (arm types and weapons that can substitude them)
 		public function haveNaturalClaws():Boolean { return Arms.Types[arms.type].claw || Arms.Types[arms.type].armSlam || Arms.Types[arms.type].scythe || LowerBody.hasClaws(this);}
-		public function haveNaturalClawsTypeWeapon():Boolean {return weaponName == "gauntlet with claws" || weaponName == "gauntlet with an aphrodisiac-coated claws" || weaponName == "Venoclaw" || weaponName == "hooked gauntlets" || (hasAetherTwinsTier1() || hasAetherTwinsTier2());}
+		public function haveNaturalClawsTypeWeapon():Boolean {return weaponName == "gauntlet with claws" || weaponName == "gauntlet with an aphrodisiac-coated claws" || weaponName == "Venoclaw" || weaponName == "hooked gauntlets" || (hasAetherTwinsTier1() || hasAetherTwinsTier2() || weaponName == "Moonlight Claws");}
         public function isFeralCombat():Boolean { return flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && ( (weaponName == "fists" && haveNaturalClaws()) || haveNaturalClawsTypeWeapon() ) ;}
         public function isUnarmedCombat():Boolean { return flags[kFLAGS.FERAL_COMBAT_MODE] != 1 && isFistOrFistWeapon() ;}
         //Other natural weapon checks
@@ -2965,6 +2965,7 @@ use namespace CoC;
 			if (lowerGarmentName == "HB shorts") mult -= 10;
 			if (hasPerk(PerkLib.FromTheFrozenWaste) || hasPerk(PerkLib.ColdAffinity)) mult += 100;
 			if (hasPerk(PerkLib.FireAffinity)) mult -= 50;
+			if (hasPerk(PerkLib.VegetalAffinity)) mult -= 50;
 			if (hasStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff1) && (statusEffectv2(StatusEffects.ShiraOfTheEastFoodBuff1) > 0)) mult -= statusEffectv2(StatusEffects.ShiraOfTheEastFoodBuff1);
 			if (hasStatusEffect(StatusEffects.DaoOfFire) && (statusEffectv2(StatusEffects.DaoOfFire) > 3)) mult -= (10 * (statusEffectv2(StatusEffects.DaoOfFire) - 3));
 			if (headjewelryEffectId == HeadJewelryLib.MODIFIER_FIRE_R) mult -= headjewelryEffectMagnitude;
@@ -3968,6 +3969,8 @@ use namespace CoC;
 				hiddenJobs1++;
 			if (hasPerk(PerkLib.HiddenJobAsura))
 				hiddenJobs1++;
+			if (hasPerk(PerkLib.PrestigeJobGreySage))
+				hiddenJobs1++;
 			return hiddenJobs1;
 		}
 		public function maxHiddenJobs():Number {
@@ -4247,10 +4250,9 @@ use namespace CoC;
 		}
 
 		public function get corruptionTolerance():int {
-			var temp:int = perkv1(PerkLib.AscensionTolerance) * 5;
-			if (CoC.instance.gameSettings.sceneHunter_inst.other) temp *= 2;
-			if (flags[kFLAGS.MEANINGLESS_CORRUPTION] > 0) temp += 100;
-			return temp;
+			if (flags[kFLAGS.CORRUPTION_TOLERANCE_MODE] == 1) return 0;
+			if (flags[kFLAGS.CORRUPTION_TOLERANCE_MODE] == 2) return 100;
+			return perkv1(PerkLib.AscensionTolerance) * (CoC.instance.gameSettings.sceneHunter_inst.other ? 10 : 5);
 		}
 		public function get corAdjustedUp():Number {
 			return boundFloat(0, cor + corruptionTolerance, 100);
@@ -5599,12 +5601,16 @@ use namespace CoC;
 
 		public function gainCombatXP(index:int, exp:Number):void{
 			var level:Number = combatMastery[index].level;
+			var levelUp:Boolean = false;
 			var experience:Number = combatMastery[index].experience;
 			var melee:Boolean = combatMastery[index].melee;
 			var desc:String = combatMastery[index].desc;
 
 			var xpToLevel:Number = CombatExpToLevelUp(level, melee);
 			var xpLoop:Number = exp;
+			// for tracking bonus attack masteries
+			var grantsBonusAttacks:Boolean = Combat.bonusAttackMasteries.indexOf(index) != -1;
+			var maxAttacksOld:int = SceneLib.combat.maxCurrentAttacks();
 			// This loop does weapon types ( dagger, sword, fist, claws, ... )
 			while (xpLoop > 0) {
 				experience += xpLoop;	// incremeent the XP of the weapon mastery
@@ -5612,18 +5618,39 @@ use namespace CoC;
 
 				// Did we level up?
 				if (level < maxCombatLevel(melee) && experience >= xpToLevel) {
+					levelUp = true;
 					outputText("\n<b>" + desc + " leveled up to " + (++level) + "!</b>\n");
 					// Any Leftover EXP?
-
 					xpLoop = experience - xpToLevel;
 					experience = 0;
 					// recalculate xp to next level ( dont want to gain 50 levels unexpectedly
 					xpToLevel = CombatExpToLevelUp(level, melee);
 				}
 			}
-
             combatMastery[index].level = level;
             combatMastery[index].experience = experience;
+			// Can we get any new attacks?
+			if (grantsBonusAttacks && levelUp) {// if it grants bonus attacks
+				var maxAttacksNew:int = SceneLib.combat.maxCurrentAttacks();
+				// remember the last value
+				var masteryArrays:Array = masteryBonusAttacks;
+				for each (var masteryArr:Array in masteryArrays) {
+					// if matches index, used right now
+					if (masteryArr[0] == index && masteryArr[1]) {
+						for (var bonusPos:int = 0; bonusPos < masteryArr[2].length; ++bonusPos) {
+							// AND grants a new attack at this level
+							if (combatMastery[masteryArr[0]].level == masteryArr[2][bonusPos]) {
+								outputText("\n<b>Thanks to your training, your maximum bonus attack count has increased to " + maxAttacksNew + "!</b>\n");
+								// before THIS level (new attack), it was maxed (0 in flag = 1 attack, 1 = 2 attacks, etc.)
+								if (flags[kFLAGS.MULTIATTACK_STYLE] == maxAttacksOld - 1) {
+									// keep up with the new max
+									flags[kFLAGS.MULTIATTACK_STYLE] = maxAttacksNew - 1;
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 
 		public function get masteryBonusAttacks():Array {

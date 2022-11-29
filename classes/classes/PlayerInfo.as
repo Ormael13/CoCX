@@ -633,7 +633,7 @@ public class PlayerInfo extends BaseContent {
 			    interpersonStats += "<b>Diana Progress:</b> " + Math.round(flags[kFLAGS.DIANA_LVL_UP] / 8 * 100) + "%\n";
             else
                 interpersonStats += "<b>Diana Progress:</b> LOVER\n";
-			interpersonStats += "<b>Spells Cast:</b> " + flags[kFLAGS.DIANA_SPELLS_CASTED] + "\n";
+			interpersonStats += "<b>Diana Spells Casted:</b> " + flags[kFLAGS.DIANA_SPELLS_CASTED] + "\n";
 			if (flags[kFLAGS.DIANA_LVL_UP] == 16) interpersonStats += "<b>Diana lvl:</b> 75\n";
 			if (flags[kFLAGS.DIANA_LVL_UP] == 15) interpersonStats += "<b>Diana lvl:</b> 69 (current max lvl)\n";
 			else if (flags[kFLAGS.DIANA_LVL_UP] < 1) interpersonStats += "<b>Diana lvl:</b> 3\n";
@@ -642,7 +642,7 @@ public class PlayerInfo extends BaseContent {
 
 		if (flags[kFLAGS.DINAH_LVL_UP] > 0.5) {
 			interpersonStats += "<b>Dinah Affection:</b> " + Math.round(flags[kFLAGS.DINAH_AFFECTION]) + "%\n";
-			interpersonStats += "<b>Spells Cast:</b> " + flags[kFLAGS.DINAH_SPELLS_CASTED] + "\n";
+			interpersonStats += "<b>Dinah Spells Casted:</b> " + flags[kFLAGS.DINAH_SPELLS_CASTED] + "\n";
 			if (flags[kFLAGS.DINAH_LVL_UP] == 9) interpersonStats += "<b>Dinah lvl:</b> 56 (current max lvl)\n";
 			else if (flags[kFLAGS.DINAH_LVL_UP] == 1) interpersonStats += "<b>Dinah lvl:</b> 8\n";
 			else interpersonStats += getNPCLevel("Dinah", 8, 1, 9, 6, flags[kFLAGS.DINAH_LVL_UP]);
@@ -1962,14 +1962,27 @@ public class PlayerInfo extends BaseContent {
 		}
 		if (page == 4) {
 			if (player.superPerkPoints > 0) {
-				addButtonDisabled(0, "HJ:?S", "What could be here? Some new secret unreleased yet Hidden Job option? Or something else? Maybe little hint would help...or it won't?");
-				//addButtonDisabled(0, "HJ:GS", "You do not have a free slot for this hidden job.");
+				if (player.hasPerk(PerkLib.PrestigeJobGreySage)) addButtonDisabled(0, "HJ:GS", "You already have this super perk.");
+				else {
+					if (player.freeHiddenJobsSlots() > 0) addButton(0, "HJ:GS", perkHiddenJobGreySage).hint("Choose the 'Hidden Job: Grey Sage' super perk. You've trained in Way of Grey Sage. There is no spell you can't learn. (+10% to OverMax Mana)");
+					else addButtonDisabled(0, "HJ:GS", "You do not have a free slot for this hidden job.");
+				}
+				if (player.level >= 10) {
+					if (player.hasPerk(PerkLib.Equilibrium)) addButtonDisabled(1, "Eq", "You already have this super perk.");
+					else {
+						if (player.hasPerk(PerkLib.PrestigeJobGreySage)) addButton(1, "Eq", perkEquilibrium).hint("Choose the 'Equilibrium' super perk. You can cast now any spell you learned even if you missing additional materials or not meet requirements. (+10% of OverMax Mana)");
+						else addButtonDisabled(1, "Eq", "You need to first have the 'Hidden Job: Grey Sage' super perk.");
+					}
+				}
+				else addButtonDisabled(1, "Eq", "You need to reach level 10 first.");
 			}
 			else {
-				addButtonDisabled(0, "HJ:?S", "What could be here? Some new secret unreleased yet Hidden Job option? Or something else? Maybe little hint would help...or it won't?");
+				if (player.hasPerk(PerkLib.PrestigeJobGreySage)) addButtonDisabled(0, "HJ:GS", "You already have this perk.");
+				else addButtonDisabled(0, "HJ:GS", "You do not have enough super perk points to obtain this perk.");
+				if (player.hasPerk(PerkLib.Equilibrium)) addButtonDisabled(1, "Eq", "You already have this perk.");
+				else addButtonDisabled(1, "Eq", "You do not have enough super perk points to obtain this perk.");
 			}
 			addButton(13, "Previous", superPerkBuyMenu, page - 1);
-			//13 -> page - 1 button
 			addButton(14, "Back", playerMenu);
 		}
 		if (page == 5) {
@@ -2087,6 +2100,13 @@ public class PlayerInfo extends BaseContent {
 		player.createPerk(PerkLib.PrestigeJobGreySage,0,0,0,0);
 		clearOutput();
 		outputText("You gained 'Hidden Job: Grey Sage' super perk.");
+		doNext(superPerkBuyMenu, 4);
+	}
+	private function perkEquilibrium():void {
+		player.superPerkPoints--;
+		player.createPerk(PerkLib.Equilibrium,0,0,0,0);
+		clearOutput();
+		outputText("You gained 'Equilibrium' super perk.");
 		doNext(superPerkBuyMenu, 4);
 	}
 }

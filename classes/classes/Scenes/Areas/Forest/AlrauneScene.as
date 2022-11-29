@@ -68,6 +68,7 @@ public class AlrauneScene extends BaseContent
 				outputText("\"<i>Mmmmmm such a nice catch... Come closer into my pitcher.</i>\"\n\n");
 				outputText("There's no way you will let this thing pull you in!\n\n");
 			}
+			player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
 			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_ALRAUNE);
 			startCombat(new Alraune());
 		}

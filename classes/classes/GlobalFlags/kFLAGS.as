@@ -2641,7 +2641,7 @@ public static const DINAH_CUP_SIZE:int                                   			= 26
 public static const DINAH_HIPS_ASS_SIZE:int                                   		= 2633;
 public static const DINAH_SPELLS_CASTED:int                                   		= 2634;
 public static const DINAH_ASS_HIPS_SIZE:int                                   		= 2635;
-public static const UNKNOWN_FLAG_NUMBER_02636:int                                   = 2636;//Not Yet Used Flag
+public static const DINAH_ATTACKED_TODAY:int                                   		= 2636;
 public static const DARKKITSUNE_WARN_INT:int                                 	  	= 2637;//Warning to PC INT is lower than 15% + disables looping
 public static const DARKKITSUNE_WARN_WIS:int                                   		= 2638;//Warning to PC WIS is lower than 15% + disables looping
 public static const AIKO_DONE_KITSUNETJ:int                                  		= 2639;
@@ -3000,7 +3000,7 @@ public static const HARDCORE_MODE:int                                           
 public static const HARDCORE_SLOT:int                                               = 2992; // The current slot for hardcore mode. Forced autosave will save over the selected slot.
 public static const HUNGER_ENABLED:int                                              = 2993; // Determines if hunger is enabled. 1 is enabled.
 public static const USE_12_HOURS:int                                                = 2994; // 0 for 24-hour format, 1 for 12-hour format.
-public static const MEANINGLESS_CORRUPTION:int                                      = 2995; // Raises corruption tolerance by 100.
+public static const CORRUPTION_TOLERANCE_MODE:int                                   = 2995; // 0 - default, enabled if possible; 1 - disabled, 2 - 100% (debug)
 public static const ITS_EVERY_DAY:int                                               = 2996; // all special calender events occur every day!
 public static const LOW_STANDARDS_FOR_ALL:int                                       = 2997;
 public static const HYPER_HAPPY:int                                                 = 2998;

@@ -2564,6 +2564,9 @@ import coc.view.MainView;
 				if (player.hasPerk(PerkLib.FerasBoonSeeder) && player.perkv4(PerkLib.FerasBoonSeeder) < 1) addButton(12, "FerasB.S.", permanentizePerk1, PerkLib.FerasBoonSeeder);
 				else if (player.hasPerk(PerkLib.FerasBoonSeeder) && player.perkv4(PerkLib.FerasBoonSeeder) > 0) addButtonDisabled(12, "FerasB.S.", "Feras Boon Seeder perk is already made permanent and will carry over in all subsequent ascensions.");
 				else addButtonDisabled(12, "FerasB.S.", "Feras Boon Seeder");
+				if (player.hasPerk(PerkLib.FerasBoonWideOpen) && player.perkv4(PerkLib.FerasBoonWideOpen) < 1) addButton(13, "FerasB.W.O.", permanentizePerk1, PerkLib.FerasBoonWideOpen);
+				else if (player.hasPerk(PerkLib.FerasBoonWideOpen) && player.perkv4(PerkLib.FerasBoonWideOpen) > 0) addButtonDisabled(13, "FerasB.W.O.", "Feras Boon Wide Open perk is already made permanent and will carry over in all subsequent ascensions.");
+				else addButtonDisabled(13, "FerasB.W.O.", "Feras Boon Wide Open");
 			}
 			if (page == 2) {
 				if (player.hasPerk(PerkLib.FireLord) && player.perkv4(PerkLib.FireLord) < 1) addButton(0, "FireLord", permanentizePerk2, PerkLib.FireLord);

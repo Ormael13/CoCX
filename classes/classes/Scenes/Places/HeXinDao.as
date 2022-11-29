@@ -1131,7 +1131,7 @@ public function soularena():void {
 	public function mrsShigureLecturesBasics():void {
 		clearOutput();
 		player.gems -= 50;
-		outputText("After you pay the Gems, a slender young Kitsune guides you to the side of the arena, into a stone building built off of it. The open space has seating for over a hundred people, and most of the seats are already filled…Especially near the front, where several students are arguing, jostling for seats at the front.\n\n");
+		outputText("After you pay the gems, a slender young Kitsune guides you to the side of the arena, into a stone building built off of it. The open space has seating for over a hundred people, and most of the seats are already filled…Especially near the front, where several students are arguing, jostling for seats at the front.\n\n");
 		outputText("Not interested in the overeager students, you find a seat near the middle of the lecture hall, squeezing down in. You take your seat, listening to the murmur of the class. A few minutes later, the slender kitsune from earlier takes the stage, and speaks in a low, slightly nervous voice.\n\n");
 		outputText("\"<i>Thank you for coming, everyone. Today’s lecture will begin momentarily.</i>\" Everyone turns to face the stage, the chatter coming to a dead halt. You hear footsteps from backstage, and you steel yourself, expecting a dried up old elder to take the stage. Some geezer who’s spent their entire lives in a dusty old temple, with a dry, barely audible voice. However, as your instructor steps out, you can hear a muffled gasp, then silence as many of the assembled students stop breathing.\n\n");
 		outputText("Her legs, long and slender, toned with just a hint of softness, hit you first. Bare to the thigh, her pale skin reflects the light. Slowly, you move your gaze up. Her hips sway, wide and motherly, with each step she takes. Her kimono doesn’t hide the shape of her ass, large, yet firm, bouncing ever so slightly with each step she takes. Her hips, ass and legs are perfectly proportioned, almost as if chiselled by the Gods themselves.\n\n");
@@ -1494,4 +1494,4 @@ public function soularena():void {
         doNext(camp.returnToCampUseOneHour);
     }
 }
-}
+}

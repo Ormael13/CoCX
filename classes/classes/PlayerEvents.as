@@ -1812,7 +1812,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			//VerdantMight
 			if ((player.isRaceCached(Races.PLANT) || player.isRaceCached(Races.ALRAUNE)) && !player.hasPerk(PerkLib.VerdantMight)) {
-				outputText("\nRaw green power flows throught your veins while being a plant hasnt done so much to improve your muscle your general sturdyness more then makes up for it allowing you to use your toughness instead of your strength when delivering blows. \n\n<b>(gained the Verdant Might perk!)</b>\n");
+				outputText("\nRaw green power flows throught your veins while being a plant hasnt done so much to improve your muscle your general sturdyness more then makes up for it allowing you to use your toughness instead of your strength when delivering blows.\n\n<b>(gained the Verdant Might perk!)</b>\n");
 				player.createPerk(PerkLib.VerdantMight,0,0,0,0);
 				needNext = true;
 			}
@@ -1846,6 +1846,17 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (player.hasPerk(PerkLib.VerdantMight)) player.removePerk(PerkLib.VerdantMight);
 				needNext = true;
 			}*/
+			//Vegetal Affinity
+			if ((player.isRaceCached(Races.PLANT) || player.isRaceCached(Races.ALRAUNE) || player.isRaceCached(Races.YGGDRASIL) || player.isRaceCached(Races.WOODELF)) && !player.hasPerk(PerkLib.VegetalAffinity)) {
+				outputText("\nWith your connection to the natural flora growing stronger you gained an affinity with plantlife.\n\n<b>(gained the Vegetal Affinity perk!)</b>\n");
+				player.createPerk(PerkLib.VegetalAffinity,0,0,0,0);
+				needNext = true;
+			}
+			if (!player.isRaceCached(Races.PLANT) && !player.isRaceCached(Races.ALRAUNE) && !player.isRaceCached(Races.YGGDRASIL) && !player.isRaceCached(Races.WOODELF) && player.hasPerk(PerkLib.VegetalAffinity)) {
+				outputText("\nWith your connection to the natural world growing weaker you lose your affinity with plantlife.\n\n<b>(Lost the Vegetal Affinity perk!)</b>\n");
+				player.removePerk(PerkLib.VegetalAffinity);
+				needNext = true;
+			}
 			//Lacta bovine immunities
 			if (player.isRaceCached(Races.COW) && !player.hasPerk(PerkLib.LactaBovineImmunity)) {
 				outputText("\nAs you become more of a lacta bovine you become increasingly obsessed with thoughts of horsecocks and cum sloshing balls, namely minotaur balls. While you are aware you naturally became addicted to minotaur cum you also know your nature as a lacta bovine will protect you from most of its harmful effects allowing you to sample the substance to your heart's content without risks.");

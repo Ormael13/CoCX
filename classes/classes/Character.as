@@ -786,6 +786,7 @@ import classes.Scenes.NPCs.Forgefather;
 			var max1:Number = maxMana();
 			var max2:Number = 1;
 			if (hasPerk(PerkLib.PrestigeJobGreySage)) max2 += 0.1;
+			if (hasPerk(PerkLib.Equilibrium)) max2 += 0.1;
 			if (hasPerk(PerkLib.MunchkinAtWork)) max2 += 0.1;
 			max1 *= max2;//~120%
 			max1 = Math.round(max1);

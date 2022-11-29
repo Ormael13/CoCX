@@ -49,13 +49,13 @@ public class DilapidatedShrine extends BaseContent
 		}
 		private function mainmenu():void {
 			menu();
-			addButton(0, "Library", shrineLibrary);
-			addButtonDisabled(2, "North", "???");//magic god subshrine
-			addButtonDisabled(4, "Garden", "???");
+			//addButton(0, "Library", shrineLibrary);
+			//addButtonDisabled(2, "North", "???");//magic god subshrine
+			//addButtonDisabled(4, "Garden", "???");
 			addButton(6, "West", westSection);
-			addButtonDisabled(7, "Shinshoku", "???");//mysterious old housekeeper
-			addButtonDisabled(8, "East", "???");//life god subshrine
-			addButtonDisabled(10, "Crypt", "???");//heavenly kings resting place
+			//addButtonDisabled(7, "Shinshoku", "???");//mysterious old housekeeper
+			//addButtonDisabled(8, "East", "???");//life god subshrine
+			//addButtonDisabled(10, "Crypt", "???");//heavenly kings resting place
 			addButton(12, "South", southSection);
 			addButton(14, "Leave", camp.returnToCampUseOneHour);
 		}
@@ -63,7 +63,8 @@ public class DilapidatedShrine extends BaseContent
 		private function shinshoku():Boolean {
 			return rand(5) == 0 && ((model.time.hours > 6 && model.time.hours < 10) || (model.time.hours > 18 && model.time.hours < 22));
 		}
-		
+
+		/*
 		private function shrineLibrary():void {
 			clearOutput();
 			outputText("As you walk toward the small building, you find yourself inside a room with countless shelves, many of which contain an assortment of books haphazardly strewn on them. Despite the cleanliness of the place, you can see the passage of time on the surrounding furniture. This place seems to have been untouched for months, if not years.\n\n");
@@ -76,21 +77,7 @@ public class DilapidatedShrine extends BaseContent
 			addButtonDisabled(12, "Warmonger", "Placeholder button until one of the writers write write something on this subject ^^");//story about god of war				//addButtonDisabled(1, "The Descent", "Placeholder button until Lia write something on this subject ^^");//orgin of soul cultivators in Mareth (here or other place in mareth?)
 			addButton(14, "Back", shrinemainmenu);
 		}
-		
-		private function northSection():void {
-			clearOutput();
-			outputText("Standing inside the northern building is a large statue, several pillars on either side marking a clear path. ");
-			outputText("In front of the statue is a raised dais, with a bronze bowl laid directly into the brick. A few ancient coins sit in the bottom of the bowl, along with some pieces of dried fruit. Offerings from another time, you suppose.\n\n");
-			menu();
-			addButton(14, "Back", shrinemainmenu);
-		}
-		
-		private function shrineGarden():void {
-			clearOutput();
-			outputText("\n\n");
-			menu();
-			addButton(14, "Back", shrinemainmenu);
-		}
+		*/
 		
 		private function westSection():void {
 			clearOutput();
@@ -142,28 +129,6 @@ public class DilapidatedShrine extends BaseContent
 			outputText("\n\n")
 			doNext(westSection);
 			cheatTime(1/12);
-		}
-		
-		private function shrineShinshoku():void {
-			clearOutput();
-			outputText("\n\n");
-			menu();
-			addButton(14, "Back", shrinemainmenu);
-		}
-		
-		private function eastSection():void {
-			clearOutput();
-			outputText("Standing inside the building located on east direction you see a statue in middle of it, ");
-			outputText("A single offering bowl sits, wood shimmering as if newly washed.\n\n");
-			menu();
-			addButton(14, "Back", shrinemainmenu);
-		}
-		
-		private function shrineCrypt():void {
-			clearOutput();
-			outputText("\n\n");
-			menu();
-			addButton(14, "Back", shrinemainmenu);
 		}
 		
 		private function southSection():void {

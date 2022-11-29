@@ -1,5 +1,6 @@
 package classes.Scenes.Combat {
 import classes.PerkLib;
+import classes.StatusEffects;
 
 public class AbstractNecroSpell extends AbstractSpell {
 	public function AbstractNecroSpell(
@@ -36,8 +37,11 @@ public class AbstractNecroSpell extends AbstractSpell {
 		var uc:String = super.usabilityCheck();
 		if (uc) return uc;
 		
-		if (demonBonesAvailable() < demonBonesCost() && !player.hasPerk(PerkLib.BoneSoul)) {
+		if (demonBonesAvailable() < demonBonesCost() && !player.hasPerk(PerkLib.BoneSoul) && !player.hasPerk(PerkLib.Equilibrium)) {
 			return "You don't have enough demon bones to use any this necromancer spell.";
+		}
+		if (player.statusEffectv2(StatusEffects.Sealed) == 10) {
+			return "Your ability to use necromantic magic was sealed."
 		}
 		
 		return "";
@@ -57,7 +61,8 @@ public class AbstractNecroSpell extends AbstractSpell {
 	}
 	
 	public static function demonBonesAvailable():int {
-		return player.perkv1(PerkLib.PrestigeJobNecromancer);
+		if (player.hasPerk(PerkLib.PrestigeJobNecromancer)) return player.perkv1(PerkLib.PrestigeJobNecromancer);
+		else return 0;
 	}
 	
 	public static function addDemonBones(delta:int):void {

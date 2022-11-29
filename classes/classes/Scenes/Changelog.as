@@ -398,10 +398,18 @@ public class Changelog extends BaseContent
 			outputText("-Sky Poison Pearl now would be increasing max venom and venom generated per 5 min stats. It's as high bonuses as having scorpion stinger for both stats. It could be used to gain access to poisoned attacks and it effects are similar to scorpion poison.\n");
 			outputText("-Jabberwocky dragon breath been moved from physical specials to magical specials like all other breaths.\n");
 			outputText("-Alraune Perfume effect would expire now - it would display hours left counter on stats page too.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Spell costs now display correctly! Dark Ritual now doesn't triggers for all mana usages. Only for spells and magic abilities scaling from spellMod. If you were at the maximum bonus attack count, it will auto-increase after the mastery levels up. Dungeon fights don't skip hours anymore. Intended to finally put an end to timed events triggering in dungeons. (Svalkash)\n");
+			outputText("-Fixes (Svalkash): Sheila forced bj, Minotaur win menu, Dick drippies through pants, Cockatrice force-preg, Elemental attack and weird win checks, Wood elves training, Offensive Staff Chan. perk description, Dinah sparring w/o ring\n");
+			outputText("-New event perk: Hidden Job: Grey Sage. Gained by spending 1 super perk point and having free slot for hidden job. Effects: Allow to reach OverMax Mana equal to 110% of current max mana. Allow to learn any spell even from more obscure jobs.\n");
+			outputText("-New green spell: Plant Growth. Learned from 1st lession with Lutien - wood elf village mage teacher OR from White Book when having Hidden Job: Grey Sage. It have 4 turns cooldown. If no plant in area (Forest/Deepwood/Plains) first cast would grow some plants for the rest of the combat. ");
+			outputText("When plants are present will turn some of them into vines that would deal lust in turn when spell was castred and for next 4 turn deal periodical lust damage.\n");
+			outputText("-New NPC to interact in wood village: Lutien - bit on flat end of spectrum wood elf gal with 'smol' secret. During training she can teach PC all green spells as long req. to learn each is reached.\n");
+			outputText("-New event perk: Vegetal Affinity. Gained by been one of plant races or wood elf. Effects: Empower Green Magic by 50% weaken fire resistance by 50%.\n");
+			outputText("-New tier 3 misc lvl-up perk: Green magic. Req. Natural Spellcasting perk, Intelligence 80+, Libido 80+, Corruption 50+. Effect: Your Elven spell effects are twice as strong and last twice as long.\n");
+			outputText("-New green spell: Entagle. Learned from lession with Lutien - wood elf village mage teacher when having 100+ int OR from White Book when having Hidden Job: Grey Sage. It have 6 turns cooldown. Would turn present plants into vines that would try to grapple enemy for up to 6 turns. Each turn enemy is entangled it will recieve lust damage.\n");
+			outputText("-New event perk: Equilibrium. Gained by spending 1 super perk point and having Hidden Job: Grey Sage super perk. Effects: Allow to reach OverMax Mana equal to 120% of current max mana. You can cast now any spell you learned even if you missing additional materials or not meet requirements.\n");
+			//outputText("-New tier 6 misc lvl-up perk: Verdant Leech. Req. Green magic perk, Intelligence 140+, Libido 140+, Corruption 50+. Effect: .\n");
+			//outputText("-New tier 9 misc lvl-up perk: Arcane Venom. Req. Verdant Leech perk, Intelligence 200+, Libido 200+, Corruption 50+. Effect: .\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -416,8 +424,10 @@ public class Changelog extends BaseContent
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");
+			outputText("-\n");
 			outputText("-Fixed Bugs: Akbal been weak to fire not ice, Insightful Resources I-VI perks bonus to SF been lower than 5 per wis point, recovery of fatigue when waiting been lower than when attacking, Dao of Elements not giving additional % resistances after first 10%, missing bonus to acid elemental arrows, Holy Bands Managment locked behind having 3rd one band, ");
-			outputText("Centaur race bonuses error fixed to orginal values, Aether Twins following PC throu ascension in case they been equipped, Lusty Maiden Armor treated as already legendary item, wrong labeled gorgon eyes on race page, Jiaghsi curing leaving leftover effects of Cursed Tag options, tier 3 spells have incrrectly calculated cooldowns, Wood Elf archer training bugs\n");
+			outputText("Centaur race bonuses error fixed to orginal values, Aether Twins following PC throu ascension in case they been equipped, Lusty Maiden Armor treated as already legendary item, wrong labeled gorgon eyes on race page, Jiaghsi curing leaving leftover effects of Cursed Tag options, tier 3 spells have incrrectly calculated cooldowns, Wood Elf archer training bugs, ");
+			outputText("Fera Boon - Wide Open perk not been permable on ascension\n");
 			//0.8s5.178
 			outputText("-Fixed bicorn horn score (aimozg)\n");
 			outputText("-Kirin, Fey-Draconic leg/armtype (respectively) added to DraconicBones Valid racetypes. -Fixed HxD merchants checking wrong currency for purchases (Jtecx PR#289)\n");
@@ -500,11 +510,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -535,10 +541,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
