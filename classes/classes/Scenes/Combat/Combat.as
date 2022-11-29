@@ -9039,7 +9039,7 @@ public class Combat extends BaseContent {
 		//Entagled
 		if (monster.hasStatusEffect(StatusEffects.Entangled) && monster.lustVuln > 0) {
 			if (40 + rand(player.inte) + rand(player.lib) > monster.spe) {
-				outputText("The vines are currently wrapped around [monster], ensuring that [monster he] cannot escape their clutches. ");
+				outputText("The vines are currently wrapped around [themonster], ensuring that [monster he] cannot escape their clutches. ");
 				var damageE:Number = (combat.teases.teaseBaseLustDamage() * spellModWhite());
 				var Randomcrit2:Boolean = false;
 				if (player.hasPerk(PerkLib.VegetalAffinity)) damagePG *= 1.5;
