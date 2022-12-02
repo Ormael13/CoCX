@@ -800,7 +800,7 @@ public class DebugMenu extends BaseContent
 			addButton(5, "Tooltips Ahoy", EngineCore.doNothing).hint("Ahoy! I'm a tooltip! I will show up a lot in future updates!", "Tooltip 2.0");
 			addButton(6, "Lights Out", startLightsOut, testVictoryFunc, testFailureFunc, null, "Test the lights out puzzle, fresh off TiTS!");
 			addButton(7, "Isabella Birth", SceneLib.isabellaFollowerScene.isabellaGivesBirth).hint("Test Isabella giving birth for debugging purposes.", "Trigger Isabella Giving Birth");
-			addButton(8, "BodyPartEditor", bodyPartEditorRoot).hint("Inspect and fine-tune the player body parts");
+			addButton(8, "BodyPartEditor", bodyPartEditorRoot, styleHackMenu).hint("Inspect and fine-tune the player body parts");
 			addButton(9, "Color Picker", colorPickerRoot).hint("HSL picker for skin/hair color");
 			addButton(14, "Back", accessDebugMenu);
 		}
@@ -936,7 +936,10 @@ public class DebugMenu extends BaseContent
 			flushOutputTextToGUI();
 		}
 		private var bodyEditorControls:Block;
-		public function bodyPartEditorRoot():void {
+
+		private var bodyPartEditorBack:Function = null;
+		public function bodyPartEditorRoot(back:Function):void {
+			if (bodyPartEditorBack == null) bodyPartEditorBack = accessDebugMenu;
 			clearOutput();
 			menu();
 			if (bodyEditorControls) {
@@ -970,7 +973,7 @@ public class DebugMenu extends BaseContent
 					mainView.removeElement(bodyEditorControls);
 					bodyEditorControls = null;
 				}
-				accessDebugMenu();
+				back();
 			});
 		}
 		private function clearBeElements():void {
