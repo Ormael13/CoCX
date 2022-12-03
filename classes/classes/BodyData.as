@@ -420,7 +420,7 @@ public class BodyData {
 		name:"skin",
 		nameFn: function(value:int):String {
 			if (value === Skin.PLAIN) return "plain";
-			return Skin.SkinTypes[value].name;
+			return (Skin.SkinTypes[value].adj != undefined) ? Skin.SkinTypes[value].adj : Skin.SkinTypes[value].name;
 		}
 	});
 	public function get skinBaseType():int {
