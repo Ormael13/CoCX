@@ -1469,15 +1469,13 @@ import classes.internals.SaveableState;
 				case "Cow": 	CoC.instance.transformations.NipplesPerBreastFour.applyEffect(); 
 								CoC.instance.transformations.StartLactation.applyEffect();
 								CoC.instance.transformations.NipplesNoColor.applyEffect();	break;
-				case "Fuckable":CoC.instance.transformations.NipplesFuckable.applyEffect(); break;
+				case "Fuckable":CoC.instance.transformations.NipplesFuckableForce.applyEffect(); break;
 				case "Black":   CoC.instance.transformations.NipplesBlack.applyEffect(); break;
 				case "Glow":	CoC.instance.transformations.NipplesGlowing.applyEffect(); break;
 				default: 		CoC.instance.transformations.NipplesPerBreastOne.applyEffect();
 								CoC.instance.transformations.NipplesNoColor.applyEffect();
 								CoC.instance.transformations.NipplesUnfuck.applyEffect();
 								CoC.instance.transformations.RemoveLactation.applyEffect(); 	break;
-								
-				// transformations.NipplesFuckableForce.applyEffect(); //----- Not sure if used or how different functionally than normal
 			}
 			switch(arr[5]) {// Ears
 				case "Avian": 		CoC.instance.transformations.EarsAvian.applyEffect();		break;
@@ -1651,8 +1649,8 @@ import classes.internals.SaveableState;
 				case "Tentacle":	CoC.instance.transformations.GillsInTentacleLegs.applyEffect();	break;
 				default: 			CoC.instance.transformations.GillsNone.applyEffect();			break;
 			}
-            switch(arr[9]) {/*Hair
-				CoC.instance.transformations.HairFeather.applyEffect();
+            switch(arr[9]) {//Hair
+			/*	CoC.instance.transformations.HairFeather.applyEffect();
 				CoC.instance.transformations.HairBurning.applyEffect();
 				CoC.instance.transformations.HairSnowy.applyEffect();
 				CoC.instance.transformations.HairGrass.applyEffect();
@@ -1809,8 +1807,8 @@ import classes.internals.SaveableState;
 				case "Wolf": 		CoC.instance.transformations.RearBodyWolfCollar.applyEffect();				break;
 				default: 			CoC.instance.transformations.RearBodyNone.applyEffect();				break;
 			}
-			switch(arr[13]) {/*Skin
-				CoC.instance.transformations.SkinPatternNone.applyEffect();
+			switch(arr[13]) {//Skin
+			/*ransformations.SkinPatternNone.applyEffect();
 				CoC.instance.transformations.SkinPatternOrc.applyEffect();
 				CoC.instance.transformations.SkinPatternOni.applyEffect();
 				CoC.instance.transformations.SkinPatternKitsune.applyEffect();
@@ -1933,8 +1931,8 @@ import classes.internals.SaveableState;
 				case "Glow": 	CoC.instance.transformations.AssholeGlowing.applyEffect();	break;
 				default: 		CoC.instance.transformations.AssholeNormal.applyEffect();	break;
 			}
-			switch(arr[17]) {/*Tail
-				CoC.instance.transformations.TailScorpion.applyEffect();
+			switch(arr[17]) {//Tail
+			/*	CoC.instance.transformations.TailScorpion.applyEffect();
 				CoC.instance.transformations.TailManticore.applyEffect();
 				CoC.instance.transformations.TailBurning.applyEffect();
 				CoC.instance.transformations.TailTwinkasha.applyEffect();
@@ -2001,8 +1999,8 @@ import classes.internals.SaveableState;
 				case "Snake": 		CoC.instance.transformations.TongueSnake.applyEffect();		break;
 				default: 			CoC.instance.transformations.TongueHuman.applyEffect();		break;
 			}
-			switch(arr[19]) {/*Wings
-				CoC.instance.transformations.WingsFeatheredSphinx.applyEffect();
+			switch(arr[19]) {//Wings
+			/*	CoC.instance.transformations.WingsFeatheredSphinx.applyEffect();
 				CoC.instance.transformations.WingsManticoreLarge.applyEffect();
 				CoC.instance.transformations.WingsManticoreSmall.applyEffect();
 				CoC.instance.transformations.WingsNightmare.applyEffect(); 
@@ -2042,8 +2040,8 @@ import classes.internals.SaveableState;
 				case "Thunder": 		CoC.instance.transformations.WingsThunderousAura.applyEffect();		break;
 				default: 				CoC.instance.transformations.WingsNone.applyEffect();				break;
 			}
-			switch(arr[20]) {/*Cocks
-				public var cocks:CockCoC.instance.transformations = new CockCoC.instance.transformations();
+			switch(arr[20]) {//Cocks
+			/*	public var cocks:CockCoC.instance.transformations = new CockCoC.instance.transformations();
 				public function UnlockCocks():void { return cocks.UnlockCocks(); }
 				public function CockNone(cock:int = 0): Transformation { return cocks.CockNone(); }
 				public function CockHuman(cock:int = 0, length:Number = 5.5, thickness:Number = 1): Transformation 			{ return cocks.CockHuman(cock, length, thickness); }
@@ -2090,8 +2088,8 @@ import classes.internals.SaveableState;
 
 				default: 		if(player.cocks.length >= 1) CoC.instance.transformations.CockHuman(0, rand(3) + 4).applyEffect(false);	break;
 			}
-			switch(arr[21]) {/* Vaginas
-				public var vaginas:VaginaCoC.instance.transformations = new VaginaCoC.instance.transformations();
+			switch(arr[21]) {// Vaginas
+			/*	public var vaginas:VaginaCoC.instance.transformations = new VaginaCoC.instance.transformations();
 				public function UnlockVagina(): void { return vaginas.UnlockVagina(); }
 				public function VaginaNone(vagina:int = 0): Transformation { return vaginas.VaginaNone(vagina); }
 				public function CockToVagina(vagina:int = 0): Transformation { return vaginas.CockToVagina(vagina); }

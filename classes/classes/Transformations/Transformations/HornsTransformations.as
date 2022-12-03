@@ -216,19 +216,35 @@ public class HornsTransformations extends MutationsHelper {
 				var desc: String = "";
 
 				if (player.horns.type === Horns.NONE) {
-					desc += "\n\nWith painful pressure, the skin on the sides of your forehead splits around two tiny nub-like horns. They're angled back in such a way as to resemble those you saw on the dragons in your village's legends. A few inches of horns sprout from your head before stopping. <b>You have about four inches of dragon-like horns.</b>";
+					desc += "With painful pressure, the skin on the sides of your forehead splits around two tiny nub-like horns. They're angled back in such a way as to resemble those you saw on the dragons in your village's legends. A few inches of horns sprout from your head before stopping. <b>You have about four inches of dragon-like horns.</b>";
+					if (player.horns.count < 4) {
+						player.horns.count = 4;
+					}
 				} else {
-					desc += "\n\nYou feel your horns changing and warping, and reach back to touch them. They have a slight curve and a gradual taper. They must look something like the horns the dragons in your village's legends always had.";
-
-					if (player.horns.count > 13) {
-						desc += " The change seems to have shrunken the horns, they're about a foot long now.";
-						player.horns.count = 12;
+					desc += "You feel your horns changing and warping, and reach back to touch them. They have a slight curve and a gradual taper. They must look something like the horns the dragons in your village's legends always had.";
+					if (player.horns.count < 4) {
+						player.horns.count = 4;
 					}
 				}
-
-				if (player.horns.count < 4) {
-					player.horns.count = 4;
+				if (player.horns.type == Horns.DRACONIC_X2) {
+					if (player.horns.count < 12) {
+						if (rand(2) == 0) {
+							outputText("[pg]You get a headache as an inch of fresh horns escapes from your pounding skull.");
+							player.horns.count += 1;
+						} else {
+							outputText("[pg]Your head aches as your horns grow a few inches longer.  They get even thicker about the base, giving you a menacing appearance.");
+							player.horns.count += 2 + rand(4);
+						}
+						if (player.horns.count >= 12) outputText("  <b>Your horns settle down quickly, as if they're reached their full size.</b>");
+						changes++;
+					}
 				}
+				if (player.horns.count > 12) {
+					desc += " The change seems to have shrunken the horns, they're about a foot long now.";
+					player.horns.count = 12;
+				}
+
+
 
 				player.horns.type = Horns.DRACONIC_X2;
 				if (doOutput) outputText(desc);
@@ -236,7 +252,7 @@ public class HornsTransformations extends MutationsHelper {
 			},
 			// is present
 			function (): Boolean {
-				return player.horns.type === Horns.DRACONIC_X2;
+				return player.horns.type === Horns.DRACONIC_X2 && player.horns.count >= 12;
 			}
 	);
 
@@ -281,23 +297,25 @@ public class HornsTransformations extends MutationsHelper {
 				var desc: String = "";
 
 				if (player.horns.count < 12 && (player.horns.type == Horns.NONE || player.horns.type == Horns.DEMON)) {
-					desc += "";
 					if (player.horns.count == 0) {
 						desc += "A small pair of demon horns erupts from your forehead. They actually look kind of cute. <b>You have horns!</b>";
 					} else desc += "Another pair of demon horns, larger than the last, forms behind the first row.";
-				} else if (player.horns.type > Horns.DEMON && player.horns.type != Horns.ORCHID) {
-					desc += "";
+					player.horns.count += 2;
+					player.horns.type = Horns.DEMON;
+				} else if (player.horns.type != Horns.DEMON) {
 					desc += "Your horns shift, shrinking into two small demonic-looking horns.";
+					player.horns.count = 2;
+					player.horns.type = Horns.DEMON;
 				}
-				player.horns.count = 2;
-				player.horns.type = Horns.DEMON;
+				else
+					desc += "The transformation seems to have no effect...";
 
 				if (doOutput) outputText(desc);
 				Metamorph.unlockMetamorph(HornsMem.getMemory(HornsMem.DEMON));
 			},
 			// is present
 			function (): Boolean {
-				return player.horns.type === Horns.DEMON;
+				return player.horns.type === Horns.DEMON && player.horns.count >= 12;
 			}
 	);
 

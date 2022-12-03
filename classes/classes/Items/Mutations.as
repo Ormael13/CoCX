@@ -4933,14 +4933,8 @@ public final class Mutations extends MutationsHelper {
             else {
                 if (player.horns.type == Horns.DRACONIC_X2) {
                     if (player.horns.count < 12) {
-                        if (rand(2) == 0) {
-                            outputText("[pg]You get a headache as an inch of fresh horns escapes from your pounding skull.");
-                            player.horns.count += 1;
-                        } else {
-                            outputText("[pg]Your head aches as your horns grow a few inches longer.  They get even thicker about the base, giving you a menacing appearance.");
-                            player.horns.count += 2 + rand(4);
-                        }
-                        if (player.horns.count >= 12) outputText("  <b>Your horns settle down quickly, as if they're reached their full size.</b>");
+                        outputText("[pg]");
+                        transformations.HornsDraconicDual.applyEffect();
                         changes++;
                     }
                     //maxxed out, new row
@@ -11975,23 +11969,10 @@ public final class Mutations extends MutationsHelper {
             flags[kFLAGS.TIMES_TRANSFORMED]++;
         }
         //grow horns!
-        if ((player.horns.count == 0 || (rand(player.horns.count + 3) == 0))) {
-            if (player.horns.type == Horns.NONE) {
-                outputText("[pg]");
-                transformations.HornsDemonic.applyEffect();
-            } else if (player.horns.count < 12 && player.horns.type == Horns.DEMON) {
-                outputText("[pg]");
-                outputText("Another pair of demon horns, larger than the last, forms behind the first row.");
-                player.horns.count++;
-                player.horns.count++;
-                dynStats("cor", 3);
-            }
-            //Text for shifting horns
-            else if (player.horns.type != Horns.DEMON && player.horns.type != Horns.ORCHID) {
-                outputText("[pg]");
-                transformations.HornsDemonic.applyEffect();
-                dynStats("cor", 3);
-            }
+        if (player.horns.count == 0 || (rand(player.horns.count + 3) == 0 && player.horns.count < 12) && player.horns.type != Horns.ORCHID) {
+            outputText("[pg]");
+            transformations.HornsDemonic.applyEffect();
+            dynStats("cor", 3);
             flags[kFLAGS.TIMES_TRANSFORMED]++;
         }
         //Nipples Turn Back:
