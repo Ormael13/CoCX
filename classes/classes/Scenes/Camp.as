@@ -1035,7 +1035,7 @@ public class Camp extends NPCAwareContent{
 				addButtonDisabled(12, "Sleep", "Try as you may you cannot find sleep tonight. The damn moon won't let you rest as your urges to hunt and fuck are on the rise.");
 			}
 		}
-		if (!CoC.instance.lockCheats) addButton(14, "Cheats", testmenu.SoulforceCheats1).hint("This should be obvious. ^^");//block this option at each public version
+		if (!CoC.instance.lockCheats) addButton(14, "Cheats", testmenu.SoulforceCheats).hint("This should be obvious. ^^");//block this option at each public version
 
 		//Remove buttons according to conditions.
 		if (isNightTime) {

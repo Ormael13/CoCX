@@ -6,6 +6,8 @@ package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Camp;
+import classes.Scenes.SceneLib;
 import classes.internals.Utils;
 
 public class DinahFollower extends NPCAwareContent implements TimeAwareInterface
@@ -99,7 +101,7 @@ public class DinahFollower extends NPCAwareContent implements TimeAwareInterface
 			if (atCamp) outputText("\"<i>What can I do for you today?</i>\" Dinha asks you with a disturbingly wide and briliant smile on her face.");
 			else outputText("\"<i>Will you gaze at me the whole day or will you buy something?</i>\" They grumble to themselves.");
 			menu();
-			addButton(2, "Shop", DinahShopMainMenu);
+			addButton(2, "Shop", openShop, false);
 			if (atCamp) {
 				addButton(0, "Appearance", DinahAppearance);
 				addButton(1, "Spar", DinahSparring)
@@ -193,7 +195,13 @@ public class DinahFollower extends NPCAwareContent implements TimeAwareInterface
 			}
 			cleanupAfterCombat();
 		}
-		
+
+	private var shopCheatAccess:Boolean = false;
+		public function openShop(cheatAccess:Boolean = false):void {
+			shopCheatAccess = cheatAccess;
+			DinahShopMainMenu();
+		}
+
 		public function DinahShopMainMenu():void {
 			clearOutput();
 			outputText("You begin to browse "+(flags[kFLAGS.DINAH_LVL_UP] > 0.5 ?"Dinah":"veiled merchant")+" shop inventory.");
@@ -210,7 +218,7 @@ public class DinahFollower extends NPCAwareContent implements TimeAwareInterface
 			addButton(9, consumables.BCHCAKE.shortName, buyItem2, 9).hint("Buy a Big chocolate cake.");
 			if (player.headJewelry == headjewelries.HBHELM && player.armor == armors.HBARMOR) addButton(10, "HB M&U", buyHowlingBansheeMechAndUpgrades);
 			else addButtonDisabled(10, "???", "Offers only for those that are wearing HB Armor & HB Helmet.");
-			if (flags[kFLAGS.DINAH_LVL_UP] > 0.5) {
+			if (flags[kFLAGS.DINAH_LVL_UP] > 0.5 || shopCheatAccess) {
 				addButton(11, "Roulette", DinahShopMainMenu3).hint("You feelin' lucky champion?");
 				addButton(13, "BossTF's", DinahShopMainMenu2);
 			}
@@ -218,24 +226,24 @@ public class DinahFollower extends NPCAwareContent implements TimeAwareInterface
 				addButtonDisabled(11, "Roulette", "Maybe if merchant would be more interested in you...");
 				addButtonDisabled(13, "Boss D.", "Maybe if merchant would be more interested in you...");
 			}
-			addButton(14, "Back", DinahMainMenu);
+			addButton(14, "Back", shopCheatAccess ? camp.testmenu.SoulforceCheats : DinahMainMenu);
 		}
 		public function DinahShopMainMenu2():void {
 			clearOutput();
 			outputText("You begin to browse Dinah shop inventory.");
 			menu();
-			if (flags[kFLAGS.PATCHOULI_AND_WONDERLAND] >= 1) addButton(0, consumables.JABBERS.shortName, buyItem4, 23).hint("Buy a Jabberwocky Scale.");
+			if (flags[kFLAGS.PATCHOULI_AND_WONDERLAND] >= 1 || shopCheatAccess) addButton(0, consumables.JABBERS.shortName, buyItem4, 23).hint("Buy a Jabberwocky Scale.");
 			else addButtonDisabled(0, "???", "Req. to beat one of bosses in Wonderland to have access to this TF item.");
-			if (flags[kFLAGS.DINAH_LVL_UP] >= 1) {
-				if (player.statusEffectv2(StatusEffects.TFDealer1) > 0) addButton(1, consumables.HYDRASC.shortName, buyItem4, 21).hint("Buy a Hydra Scale.");
+			if (flags[kFLAGS.DINAH_LVL_UP] >= 1 || shopCheatAccess) {
+				if (player.statusEffectv2(StatusEffects.TFDealer1) > 0 || shopCheatAccess) addButton(1, consumables.HYDRASC.shortName, buyItem4, 21).hint("Buy a Hydra Scale.");
 				else addButtonDisabled(1, "???", "Req. to beat one of bosses in Ebon Labyrinth to have access to this TF item.");
-				if (player.statusEffectv3(StatusEffects.TFDealer1) > 0) addButton(2, consumables.FSNAILS.shortName, buyItem4, 22).hint("Buy a Fire Snail Saliva.");
+				if (player.statusEffectv3(StatusEffects.TFDealer1) > 0 || shopCheatAccess) addButton(2, consumables.FSNAILS.shortName, buyItem4, 22).hint("Buy a Fire Snail Saliva.");
 				else addButtonDisabled(2, "???", "Req. to beat one of bosses in Ebon Labyrinth to have access to this TF item.");
-				if (player.statusEffectv1(StatusEffects.TFDealer1) > 0) addButton(3, consumables.DSLIMEJ.shortName, buyItem4, 20).hint("Buy a Dark Slime Jelly.");
+				if (player.statusEffectv1(StatusEffects.TFDealer1) > 0 || shopCheatAccess) addButton(3, consumables.DSLIMEJ.shortName, buyItem4, 20).hint("Buy a Dark Slime Jelly.");
 				else addButtonDisabled(3, "???", "Req. to beat one of bosses in Ebon Labyrinth to have access to this TF item.");
-				if (player.statusEffectv1(StatusEffects.TFDealer2) > 0) addButton(4, consumables.ME_DROP.shortName, buyItem4, 24).hint("Buy a Magic Eye Drop.");
+				if (player.statusEffectv1(StatusEffects.TFDealer2) > 0 || shopCheatAccess) addButton(4, consumables.ME_DROP.shortName, buyItem4, 24).hint("Buy a Magic Eye Drop.");
 				else addButtonDisabled(3, "???", "Req. to beat one of bosses in Ebon Labyrinth to have access to this TF item.");
-				if (player.statusEffectv2(StatusEffects.TFDealer2) > 0) addButton(5, consumables.M_GOSSR.shortName, buyItem4, 25).hint("Buy a Midnight Black Glossamer.");
+				if (player.statusEffectv2(StatusEffects.TFDealer2) > 0 || shopCheatAccess) addButton(5, consumables.M_GOSSR.shortName, buyItem4, 25).hint("Buy a Midnight Black Glossamer.");
 				else addButtonDisabled(3, "???", "Req. to beat one of bosses in Ebon Labyrinth to have access to this TF item.");
 			}
 			addButton(14, "Back", DinahShopMainMenu);
@@ -244,18 +252,31 @@ public class DinahFollower extends NPCAwareContent implements TimeAwareInterface
 			clearOutput();
 			outputText("You begin to browse Dinah shop inventory.");
 			menu();
-			if (_roulette1 == 0) addButtonDisabled(1, "???", "Dud. Shame, shame.");
-			if (_roulette1 == 1) addButton(1, "UnDefKingS", buyItem5, 40).hint("Undefeated King's Signet - Increase max wrath by 100. When worn on right hand (slot 1 and 3 for rings) would have additional effects: increase max wrath by another 100 (with base bonus it's +200), generate 6/3 wrath per turn/hour, increase multiplied on Power Attack damage by 1.");
-			if (_roulette1 == 2) addButton(1, "CroUndefKing", buyItem5, 41).hint("Crown of the Undefeated King - You can't lose by HP until your health drops into the negatives any more than 5% of max HP + 500(scalable). When below 0 HP PC would gain additional 1% of max HP per turn regeneration effect.");
-			if (_roulette1 == 3) addButton(1, "UnDefKingDest", buyItem5, 42).hint("Undefeated King's Destroyer - Massive mace weapon that will increase PC parry chance by 20%. Have 20% base chance for stun (3 rounds).");
-			if (_roulette2 == 0) addButtonDisabled(2, "???", "Dud. Shame, shame.");
-			if (_roulette2 == 1) addButton(2, "FlameLizR", buyItem5, 45).hint("Flame Lizard ring - Increases maximum Wrath by 75. Generate 2/1 wrath per turn/hour. Allow to use Lustzerker.");
-			if (_roulette2 == 2) addButton(2, "InferMouseR", buyItem5, 46).hint("Infernal Mouse ring - Increases maximum Wrath by 75. Generate 2/1 wrath per turn/hour. Allow to use Blazing battle spirit.");
-			if (_roulette3 == 0) addButtonDisabled(3, "???", "Dud. Shame, shame.");
-			if (_roulette3 == 1) addButton(3, "HBHelmet", buyItem5, 50).hint("HB helmet - Increase armor by 5 and magic resistance by 4.");
-			if (_roulette3 == 2) addButton(3, "HBArmor", buyItem5, 51).hint("HB armor - Increasing it armor/resistance when power up by soulforce.");
-			if (_roulette3 == 3) addButton(3, "HBShirt", buyItem5, 52).hint("HB Shirt - Increase armor by 4, magic resistance by 3, fire/ice/electric resistance by 10%.");
-			if (_roulette3 == 4) addButton(3, "HBShorts", buyItem5, 53).hint("HB Shorts - Increase armor by 4, magic resistance by 3, fire/ice/electric resistance by 10%.");
+			if (shopCheatAccess) {
+				addButton(0, "UnDefKingS", buyItem5, 40).hint("Undefeated King's Signet - Increase max wrath by 100. When worn on right hand (slot 1 and 3 for rings) would have additional effects: increase max wrath by another 100 (with base bonus it's +200), generate 6/3 wrath per turn/hour, increase multiplied on Power Attack damage by 1.");
+				addButton(1, "CroUndefKing", buyItem5, 41).hint("Crown of the Undefeated King - You can't lose by HP until your health drops into the negatives any more than 5% of max HP + 500(scalable). When below 0 HP PC would gain additional 1% of max HP per turn regeneration effect.");
+				addButton(2, "UnDefKingDest", buyItem5, 42).hint("Undefeated King's Destroyer - Massive mace weapon that will increase PC parry chance by 20%. Have 20% base chance for stun (3 rounds).");
+				addButton(3, "FlameLizR", buyItem5, 45).hint("Flame Lizard ring - Increases maximum Wrath by 75. Generate 2/1 wrath per turn/hour. Allow to use Lustzerker.");
+				addButton(4, "InferMouseR", buyItem5, 46).hint("Infernal Mouse ring - Increases maximum Wrath by 75. Generate 2/1 wrath per turn/hour. Allow to use Blazing battle spirit.");
+				addButton(5, "HBHelmet", buyItem5, 50).hint("HB helmet - Increase armor by 5 and magic resistance by 4.");
+				addButton(6, "HBArmor", buyItem5, 51).hint("HB armor - Increasing it armor/resistance when power up by soulforce.");
+				addButton(7, "HBShirt", buyItem5, 52).hint("HB Shirt - Increase armor by 4, magic resistance by 3, fire/ice/electric resistance by 10%.");
+				addButton(8, "HBShorts", buyItem5, 53).hint("HB Shorts - Increase armor by 4, magic resistance by 3, fire/ice/electric resistance by 10%.");
+
+			} else {
+				if (_roulette1 == 0) addButtonDisabled(1, "???", "Dud. Shame, shame.");
+				if (_roulette1 == 1) addButton(1, "UnDefKingS", buyItem5, 40).hint("Undefeated King's Signet - Increase max wrath by 100. When worn on right hand (slot 1 and 3 for rings) would have additional effects: increase max wrath by another 100 (with base bonus it's +200), generate 6/3 wrath per turn/hour, increase multiplied on Power Attack damage by 1.");
+				if (_roulette1 == 2) addButton(1, "CroUndefKing", buyItem5, 41).hint("Crown of the Undefeated King - You can't lose by HP until your health drops into the negatives any more than 5% of max HP + 500(scalable). When below 0 HP PC would gain additional 1% of max HP per turn regeneration effect.");
+				if (_roulette1 == 3) addButton(1, "UnDefKingDest", buyItem5, 42).hint("Undefeated King's Destroyer - Massive mace weapon that will increase PC parry chance by 20%. Have 20% base chance for stun (3 rounds).");
+				if (_roulette2 == 0) addButtonDisabled(2, "???", "Dud. Shame, shame.");
+				if (_roulette2 == 1) addButton(2, "FlameLizR", buyItem5, 45).hint("Flame Lizard ring - Increases maximum Wrath by 75. Generate 2/1 wrath per turn/hour. Allow to use Lustzerker.");
+				if (_roulette2 == 2) addButton(2, "InferMouseR", buyItem5, 46).hint("Infernal Mouse ring - Increases maximum Wrath by 75. Generate 2/1 wrath per turn/hour. Allow to use Blazing battle spirit.");
+				if (_roulette3 == 0) addButtonDisabled(3, "???", "Dud. Shame, shame.");
+				if (_roulette3 == 1) addButton(3, "HBHelmet", buyItem5, 50).hint("HB helmet - Increase armor by 5 and magic resistance by 4.");
+				if (_roulette3 == 2) addButton(3, "HBArmor", buyItem5, 51).hint("HB armor - Increasing it armor/resistance when power up by soulforce.");
+				if (_roulette3 == 3) addButton(3, "HBShirt", buyItem5, 52).hint("HB Shirt - Increase armor by 4, magic resistance by 3, fire/ice/electric resistance by 10%.");
+				if (_roulette3 == 4) addButton(3, "HBShorts", buyItem5, 53).hint("HB Shorts - Increase armor by 4, magic resistance by 3, fire/ice/electric resistance by 10%.");
+			}
 			//if (_roulette4 == 0) addButtonDisabled(6, "???", "Dud. Shame, shame.");
 			//if (_roulette5 == 0) addButtonDisabled(7, "???", "Dud. Shame, shame.");
 			//if (_roulette6 == 0) addButtonDisabled(8, "???", "Dud. Shame, shame.");
