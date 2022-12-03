@@ -32,10 +32,12 @@ import classes.Items.Necklace;
 import classes.Items.NecklaceLib;
 import classes.Items.Shield;
 import classes.Items.Undergarment;
+import classes.Items.UndergarmentLib;
 import classes.Items.Vehicles;
 import classes.Items.Weapon;
 import classes.Items.WeaponRange;
 import classes.Races.HumanRace;
+import classes.Scenes.Combat.Combat;
 import classes.Scenes.Combat.CombatAbilities;
 import classes.Scenes.Combat.CombatAbility;
 import classes.Scenes.NPCs.AetherTwinsFollowers;
@@ -134,7 +136,8 @@ use namespace CoC;
         /*19*/	{combat: "Normal", 		level:0, experience:0, melee: true, desc:"<b>Weapon Mastery - Normal</b>"},
         /*20*/	{combat: "Large", 		level:0, experience:0, melee: true, desc:"<b>Weapon Mastery - Large</b>"},
         /*21*/	{combat: "Massive", 	level:0, experience:0, melee: true, desc:"<b>Weapon Mastery - Massive</b>"},
-        /*22*/	{combat: "Range", 		level:0, experience:0, melee: false, desc:"<b>Weapon Mastery - Ranged</b>"}
+        /*22*/	{combat: "Range", 		level:0, experience:0, melee: false, desc:"<b>Weapon Mastery - Ranged</b>"},
+        /*23*/	{combat: "Unarmed", 	level:0, experience:0, melee: true, desc:"<b>Dao of Fists</b>"}
 		];
 
         public function initCombatMastery():void{
@@ -145,7 +148,7 @@ use namespace CoC;
         }
         public function loadCombatMastery(saved:Array):void{
 //            [i, player.combatMastery[k].level, player.combatMastery[k].experience];
-            for(var i:int = 0; i < combatMastery.length; i++){
+            for(var i:int = 0; i < saved.length; i++){
 				combatMastery[saved[i].index].level = saved[i].level;
 				combatMastery[saved[i].index].experience = saved[i].experience;
             }
@@ -166,13 +169,8 @@ use namespace CoC;
 		public var teaseLevel:Number = 0;
 		public var teaseXP:Number = 0;
 
-		//Prison stats
-		public var hunger:Number = 0; //Also used in survival and realistic mode
-		public var obey:Number = 0;
-		public var esteem:Number = 0;
-		public var will:Number = 0;
-
-		public var obeySoftCap:Boolean = true;
+		//Only used in survival and realistic mode
+		public var hunger:Number = 0;
 
 		//Perks used to store 'queued' perk buys
 		public var perkPoints:Number = 0;
@@ -222,7 +220,6 @@ use namespace CoC;
 		public var itemSlot20:ItemSlotClass;
 		public var itemSlots:/*ItemSlotClass*/Array;
 
-		public var prisonItemSlots:Array = [];
 		public var previouslyWornClothes:Array = []; //For tracking achievement.
 
 		private var _equipment:/*Equipable*/Array = [];
@@ -549,6 +546,9 @@ use namespace CoC;
 		}
 		public function isWearingArmor():Boolean {
 			return armor != ArmorLib.COMFORTABLE_UNDERCLOTHES && !armor.isNothing;
+		}
+		public function isWearingBra():Boolean {
+			return !upperGarment.isNothing;
 		}
 		public function isStancing():Boolean {
 			return (lowerBody == LowerBody.DRAGON && arms.type == Arms.DRACONIC) || (lowerBody == LowerBody.HINEZUMI && arms.type == Arms.HINEZUMI) || isFeralStancing() || isSitStancing();
@@ -997,8 +997,9 @@ use namespace CoC;
 		}
 		//Natural Claws (arm types and weapons that can substitude them)
 		public function haveNaturalClaws():Boolean { return Arms.Types[arms.type].claw || Arms.Types[arms.type].armSlam || Arms.Types[arms.type].scythe || LowerBody.hasClaws(this);}
-		public function haveNaturalClawsTypeWeapon():Boolean {return weaponName == "gauntlet with claws" || weaponName == "gauntlet with an aphrodisiac-coated claws" || weaponName == "Venoclaw" || weaponName == "hooked gauntlets" || (hasAetherTwinsTier1() || hasAetherTwinsTier2());}
+		public function haveNaturalClawsTypeWeapon():Boolean {return weaponName == "gauntlet with claws" || weaponName == "gauntlet with an aphrodisiac-coated claws" || weaponName == "Venoclaw" || weaponName == "hooked gauntlets" || (hasAetherTwinsTier1() || hasAetherTwinsTier2() || weaponName == "Moonlight Claws");}
         public function isFeralCombat():Boolean { return flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && ( (weaponName == "fists" && haveNaturalClaws()) || haveNaturalClawsTypeWeapon() ) ;}
+        public function isUnarmedCombat():Boolean { return flags[kFLAGS.FERAL_COMBAT_MODE] != 1 && isFistOrFistWeapon() ;}
         //Other natural weapon checks
 		public function hasABiteAttack():Boolean { return (lowerBody == LowerBody.HYDRA || Face.Types[faceType].bite);}
 		public function hasAWingAttack():Boolean { return (Wings.Types[wings.type].wingSlap || wings.type == Wings.THUNDEROUS_AURA || wings.type == Wings.WINDY_AURA);}
@@ -1213,13 +1214,13 @@ use namespace CoC;
 		//Natural Jouster perks req check
 		public function isMeetingNaturalJousterReq():Boolean
 		{
-			return (((isTaur() || isDrider() || canFly()) && spe >= 60) && hasPerk(PerkLib.Naturaljouster) && (!(PerkLib.WeaponNormalDoubleAttack) || (hasPerk(PerkLib.WeaponNormalDoubleAttack) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)))
-             || (spe >= 150 && hasPerk(PerkLib.Naturaljouster) && hasPerk(PerkLib.WeaponNormalDoubleAttack) && (!hasPerk(PerkLib.WeaponNormalDoubleAttack) || (hasPerk(PerkLib.WeaponNormalDoubleAttack) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)));
+			return (((isTaur() || isDrider() || canFly()) && spe >= 60) && hasPerk(PerkLib.Naturaljouster) && (!(PerkLib.WeaponNormalDoubleAttack) || (hasPerk(PerkLib.WeaponNormalDoubleAttack) && flags[kFLAGS.MULTIATTACK_STYLE] == 0)))
+             || (spe >= 150 && hasPerk(PerkLib.Naturaljouster) && hasPerk(PerkLib.WeaponNormalDoubleAttack) && (!hasPerk(PerkLib.WeaponNormalDoubleAttack) || (hasPerk(PerkLib.WeaponNormalDoubleAttack) && flags[kFLAGS.MULTIATTACK_STYLE] == 0)));
 		}
 		public function isMeetingNaturalJousterMasterGradeReq():Boolean
 		{
-			return (((isTaur() || isDrider() || canFly()) && spe >= 180) && hasPerk(PerkLib.NaturaljousterMastergrade) && (!hasPerk(PerkLib.WeaponNormalDoubleAttack) || (hasPerk(PerkLib.WeaponNormalDoubleAttack) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)))
-             || (spe >= 450 && hasPerk(PerkLib.NaturaljousterMastergrade) && hasPerk(PerkLib.WeaponNormalDoubleAttack) && (!hasPerk(PerkLib.WeaponNormalDoubleAttack) || (hasPerk(PerkLib.WeaponNormalDoubleAttack) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)));
+			return (((isTaur() || isDrider() || canFly()) && spe >= 180) && hasPerk(PerkLib.NaturaljousterMastergrade) && (!hasPerk(PerkLib.WeaponNormalDoubleAttack) || (hasPerk(PerkLib.WeaponNormalDoubleAttack) && flags[kFLAGS.MULTIATTACK_STYLE] == 0)))
+             || (spe >= 450 && hasPerk(PerkLib.NaturaljousterMastergrade) && hasPerk(PerkLib.WeaponNormalDoubleAttack) && (!hasPerk(PerkLib.WeaponNormalDoubleAttack) || (hasPerk(PerkLib.WeaponNormalDoubleAttack) && flags[kFLAGS.MULTIATTACK_STYLE] == 0)));
 		}
 		public function haveWeaponForJouster():Boolean
 		{
@@ -1413,16 +1414,30 @@ use namespace CoC;
 			}
 			if (hasStatusEffect(StatusEffects.Berzerking) || hasStatusEffect(StatusEffects.Lustzerking)) {
 				var zerkersboost:Number = 0;
-				zerkersboost += (15 + (15 * newGamePlusMod));
-				if (hasPerk(PerkLib.ColdFury) || hasPerk(PerkLib.ColdLust)) zerkersboost += (5 + (5 * newGamePlusMod));
-				if (hasPerk(PerkLib.ColderFury) || hasPerk(PerkLib.ColderLust)) zerkersboost += (10 + (10 * newGamePlusMod));
+				var more:Number = 1;
+				if (hasStatusEffect(StatusEffects.Berzerking)) {
+					zerkersboost += (15 + (15 * newGamePlusMod));
+					if (hasPerk(PerkLib.ColdFury)) zerkersboost += (5 + (5 * newGamePlusMod));
+					if (hasPerk(PerkLib.ColderFury)) zerkersboost += (10 + (10 * newGamePlusMod));
+					if (hasPerk(PerkLib.PrestigeJobBerserker) && statusEffectv2(StatusEffects.Berzerking) >= 1) more += statusEffectv2(StatusEffects.Berzerking);
+				}
+				if (hasStatusEffect(StatusEffects.Lustzerking)) {
+					zerkersboost += (15 + (15 * newGamePlusMod));
+					if (hasPerk(PerkLib.ColdLust)) zerkersboost += (5 + (5 * newGamePlusMod));
+					if (hasPerk(PerkLib.ColderLust)) zerkersboost += (10 + (10 * newGamePlusMod));
+					if (hasPerk(PerkLib.PrestigeJobBerserker) && statusEffectv2(StatusEffects.Lustzerking) >= 1) more += statusEffectv2(StatusEffects.Lustzerking);
+				}
+				zerkersboost *= more;
 				if (perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 3) zerkersboost += (30 + (30 * newGamePlusMod));
 				if (hasPerk(PerkLib.Lustzerker) && (jewelryName == "Flame Lizard ring" || jewelryName2 == "Flame Lizard ring" || jewelryName3 == "Flame Lizard ring" || jewelryName4 == "Flame Lizard ring")) zerkersboost += (5 + (5 * newGamePlusMod));
 				if (hasPerk(PerkLib.BerserkerArmor)) zerkersboost += (5 + (5 * newGamePlusMod));
 				if (hasStatusEffect(StatusEffects.Berzerking) && hasStatusEffect(StatusEffects.Lustzerking)) {
-					if (hasPerk(PerkLib.ColderFury) || hasPerk(PerkLib.ColderLust)) zerkersboost *= 4;
-					else if (hasPerk(PerkLib.ColderFury) || hasPerk(PerkLib.ColderLust)) zerkersboost *= 3;
-					else zerkersboost *= 2.5;
+					var supp:Number = 1.5;
+					if (hasPerk(PerkLib.ColderFury)) zerkersboost += .5;
+					if (hasPerk(PerkLib.ColderLust)) zerkersboost += .5;
+					if (hasPerk(PerkLib.ColdFury)) zerkersboost += .25;
+					if (hasPerk(PerkLib.ColdLust)) zerkersboost += .25;
+					zerkersboost *= supp;
 				}
 				attack += zerkersboost;
 			}
@@ -1558,8 +1573,8 @@ use namespace CoC;
 			if(hasStatusEffect(StatusEffects.Berzerking)) rangeattack += (30 + (15 * newGamePlusMod));
 			if(hasStatusEffect(StatusEffects.Lustzerking)) rangeattack += (30 + (15 * newGamePlusMod));
 			if(hasPerk(PerkLib.)) rangeattack += Math.round(statusEffectv1(StatusEffects.ChargeWeapon));
-		*/	if (hasStatusEffect(StatusEffects.ChargeWeapon) && !isUsingTome()) {
-				rangeattack += Math.round(statusEffectv1(StatusEffects.ChargeWeapon));
+		*/	if (hasStatusEffect(StatusEffects.ChargeRWeapon) && !isUsingTome()) {
+				rangeattack += Math.round(statusEffectv1(StatusEffects.ChargeRWeapon));
 			}
 			rangeattack = Math.round(rangeattack);
 			return rangeattack;
@@ -2527,7 +2542,7 @@ use namespace CoC;
 				var gainedWrath:Number = 0;
 				gainedWrath += Math.sqrt(damage / 10);
 				gainedWrath = Math.round(gainedWrath * wrathFromHPmulti());
-				if (gainedWrath > 0) EngineCore.WrathChange(gainedWrath, false);
+				if (gainedWrath > 0) EngineCore.WrathChange(gainedWrath);
 			}
 		}
 
@@ -2950,6 +2965,7 @@ use namespace CoC;
 			if (lowerGarmentName == "HB shorts") mult -= 10;
 			if (hasPerk(PerkLib.FromTheFrozenWaste) || hasPerk(PerkLib.ColdAffinity)) mult += 100;
 			if (hasPerk(PerkLib.FireAffinity)) mult -= 50;
+			if (hasPerk(PerkLib.VegetalAffinity)) mult -= 50;
 			if (hasStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff1) && (statusEffectv2(StatusEffects.ShiraOfTheEastFoodBuff1) > 0)) mult -= statusEffectv2(StatusEffects.ShiraOfTheEastFoodBuff1);
 			if (hasStatusEffect(StatusEffects.DaoOfFire) && (statusEffectv2(StatusEffects.DaoOfFire) > 3)) mult -= (10 * (statusEffectv2(StatusEffects.DaoOfFire) - 3));
 			if (headjewelryEffectId == HeadJewelryLib.MODIFIER_FIRE_R) mult -= headjewelryEffectMagnitude;
@@ -3604,7 +3620,8 @@ use namespace CoC;
 		public function isRaceCached(race:Race, minTier:int=1):Boolean {
 			return racialTierCached(race) >= minTier;
 		}
-		
+
+		// returns the player's top race
 		public function raceObject(useCache:Boolean=false):Race {
 			if (!useCache) {
 				updateRacialCacheIfNeeded();
@@ -3621,6 +3638,8 @@ use namespace CoC;
 			scores.sortOn("1", Array.NUMERIC|Array.DESCENDING);
 			return scores[0][0];
 		}
+
+		// WARNING: NEVER USE IT FOR CHECKING THE RACE, THINGS WILL EVENTUALLY BREAK!!!
 		public function race():String {
 			updateRacialCache();
 			if (grandchimeraScore(true) >= 3) {
@@ -3632,27 +3651,6 @@ use namespace CoC;
 			var topRace:Race = raceObject(true);
 			var topScore:Number = racialScoreCached(topRace);
 			return topRace.nameFor(bodyData(), topScore);
-			/*
-			if (TopRace == "alicornkin") {
-				if (TopScore >= 12) {
-					if (horns.type == Horns.UNICORN) {
-						race = "alicornkin";
-					} else {
-						race = "nightmarekin";
-					}
-				}
-			}
-			
-			 */
-			//if (mutantScore() >= 5 && race == "human")
-			//	race = "corrupted mutant";
-			//if (humanScore() >= 5 && race == "corrupted mutant")
-			//	race = "somewhat human mutant";
-			//if (lowerBody == LowerBody.HOOFED && isTaur() && wings.type == Wings.FEATHERED_LARGE) {
-			//	race = "pegataur";
-			//}
-			//if (lowerBody == LowerBody.PONY)
-			//	race = "pony-kin";
 		}
 
 		public function humanScore():Number {
@@ -3971,6 +3969,8 @@ use namespace CoC;
 				hiddenJobs1++;
 			if (hasPerk(PerkLib.HiddenJobAsura))
 				hiddenJobs1++;
+			if (hasPerk(PerkLib.PrestigeJobGreySage))
+				hiddenJobs1++;
 			return hiddenJobs1;
 		}
 		public function maxHiddenJobs():Number {
@@ -4183,7 +4183,6 @@ use namespace CoC;
 				else if (hasPerk(PerkLib.DeadMetabolism)) hungerActive = false;
 				else if (hasPerk(PerkLib.GargoylePure) || hasPerk(PerkLib.GargoyleCorrupted)) hungerActive = false;
 			}
-			if (flags[kFLAGS.IN_PRISON] > 0) hungerActive = true;
 			if (hungerActive) {
 				var oldHunger:Number = hunger;
 				var weightChange:int = 0;
@@ -4196,12 +4195,12 @@ use namespace CoC;
 				overeatingLimit += 20;overeating ex perk chyba		achiev polegający na przeżyciu x dni bez jedzenie czegokolwiek wiec każde podniesienie hunger resetuje ten timer xD
 				overeatingLimit += 40;overeating su perk chyba*/
 				hunger += amnt;
-				if (hunger > maxHunger() + overeatingLimit && !SceneLib.prison.inPrison) {
+				if (hunger > maxHunger() + overeatingLimit) {
 					weightChange = Math.ceil((hunger - (maxHunger() + overeatingLimit)) / overeatingLimit); //rounded UP to int
 					modThickness(maxThicknessCap(), weightChange);
 					hunger = maxHunger(); //don't mind overeating?
 				}
-				if (hunger > oldHunger && flags[kFLAGS.USE_OLD_INTERFACE] == 0) CoC.instance.mainView.statsView.showStatUp('hunger');
+				if (hunger > oldHunger) CoC.instance.mainView.statsView.showStatUp('hunger');
 				//game.dynStats("lus", 0, "scale", false);
 				if (nl) outputText("\n\n");
 				//Messages
@@ -4230,7 +4229,7 @@ use namespace CoC;
 			var oldHunger:Number = hunger;
 			hunger += amnt;
 			if (hunger > maxHunger()) hunger = maxHunger();
-			if (hunger > oldHunger && flags[kFLAGS.USE_OLD_INTERFACE] == 0) CoC.instance.mainView.statsView.showStatUp('hunger');
+			if (hunger > oldHunger) CoC.instance.mainView.statsView.showStatUp('hunger');
 			//game.dynStats("lus", 0, "scale", false);
 			if (nl) outputText("\n");
 			if (hunger > oldHunger) CoC.instance.mainView.statsView.showStatUp("hunger");
@@ -4246,15 +4245,14 @@ use namespace CoC;
 			var oldHunger:Number = hunger;
 			hunger -= amnt;
 			if (hunger < 0) hunger = 0;
-			if (hunger < oldHunger && flags[kFLAGS.USE_OLD_INTERFACE] == 0) CoC.instance.mainView.statsView.showStatDown('hunger');
+			if (hunger < oldHunger) CoC.instance.mainView.statsView.showStatDown('hunger');
 			dynStats("lus", 0, "scale", false);
 		}
 
 		public function get corruptionTolerance():int {
-			var temp:int = perkv1(PerkLib.AscensionTolerance) * 5;
-			if (CoC.instance.gameSettings.sceneHunter_inst.other) temp *= 2;
-			if (flags[kFLAGS.MEANINGLESS_CORRUPTION] > 0) temp += 100;
-			return temp;
+			if (flags[kFLAGS.CORRUPTION_TOLERANCE_MODE] == 1) return 0;
+			if (flags[kFLAGS.CORRUPTION_TOLERANCE_MODE] == 2) return 100;
+			return perkv1(PerkLib.AscensionTolerance) * (CoC.instance.gameSettings.sceneHunter_inst.other ? 10 : 5);
 		}
 		public function get corAdjustedUp():Number {
 			return boundFloat(0, cor + corruptionTolerance, 100);
@@ -4318,7 +4316,7 @@ use namespace CoC;
 
 		public function minoCumAddiction(raw:Number = 10):void {
 			//Increment minotaur cum intake count
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00340]++;
+			flags[kFLAGS.MINOCUM_INTAKES]++;
 			//Fix if variables go out of range.
 			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] < 0) flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] = 0;
 			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] < 0) flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] = 0;
@@ -4981,6 +4979,7 @@ use namespace CoC;
 			}
 			if (!hasPerk(PerkLib.AbsoluteStrength) && statStore.hasBuff('Absolute Strength')) statStore.removeBuffs('Absolute Strength');
 			var buffs:Object = calcRacialBuffs(true);
+			statStore.removeBuffs("Racials");
 			statStore.replaceBuffObject(buffs, "Racials", {text:"Racials"});
 		}
 
@@ -5136,6 +5135,9 @@ use namespace CoC;
 			}
 			if(hasStatusEffect(StatusEffects.DragonLightningBreathCooldown) && (perkv1(IMutationsLib.DraconicLungIM) >= 1 || perkv1(IMutationsLib.DrakeLungsIM) >= 3)) {
 				removeStatusEffect(StatusEffects.DragonLightningBreathCooldown);
+			}
+			if(hasStatusEffect(StatusEffects.DragonPoisonBreathCooldown) && (perkv1(IMutationsLib.DraconicLungIM) >= 1 || perkv1(IMutationsLib.DrakeLungsIM) >= 3)) {
+				removeStatusEffect(StatusEffects.DragonPoisonBreathCooldown);
 			}
 			if(hasStatusEffect(StatusEffects.DragonWaterBreathCooldown) && (perkv1(IMutationsLib.DraconicLungIM) >= 1 || perkv1(IMutationsLib.DrakeLungsIM) >= 3)) {
 				removeStatusEffect(StatusEffects.DragonWaterBreathCooldown);
@@ -5599,12 +5601,16 @@ use namespace CoC;
 
 		public function gainCombatXP(index:int, exp:Number):void{
 			var level:Number = combatMastery[index].level;
+			var levelUp:Boolean = false;
 			var experience:Number = combatMastery[index].experience;
 			var melee:Boolean = combatMastery[index].melee;
 			var desc:String = combatMastery[index].desc;
 
 			var xpToLevel:Number = CombatExpToLevelUp(level, melee);
 			var xpLoop:Number = exp;
+			// for tracking bonus attack masteries
+			var grantsBonusAttacks:Boolean = Combat.bonusAttackMasteries.indexOf(index) != -1;
+			var maxAttacksOld:int = SceneLib.combat.maxCurrentAttacks();
 			// This loop does weapon types ( dagger, sword, fist, claws, ... )
 			while (xpLoop > 0) {
 				experience += xpLoop;	// incremeent the XP of the weapon mastery
@@ -5612,75 +5618,87 @@ use namespace CoC;
 
 				// Did we level up?
 				if (level < maxCombatLevel(melee) && experience >= xpToLevel) {
+					levelUp = true;
 					outputText("\n<b>" + desc + " leveled up to " + (++level) + "!</b>\n");
 					// Any Leftover EXP?
-
 					xpLoop = experience - xpToLevel;
 					experience = 0;
 					// recalculate xp to next level ( dont want to gain 50 levels unexpectedly
 					xpToLevel = CombatExpToLevelUp(level, melee);
 				}
 			}
-
             combatMastery[index].level = level;
             combatMastery[index].experience = experience;
+			// Can we get any new attacks?
+			if (grantsBonusAttacks && levelUp) {// if it grants bonus attacks
+				var maxAttacksNew:int = SceneLib.combat.maxCurrentAttacks();
+				// remember the last value
+				var masteryArrays:Array = masteryBonusAttacks;
+				for each (var masteryArr:Array in masteryArrays) {
+					// if matches index, used right now
+					if (masteryArr[0] == index && masteryArr[1]) {
+						for (var bonusPos:int = 0; bonusPos < masteryArr[2].length; ++bonusPos) {
+							// AND grants a new attack at this level
+							if (combatMastery[masteryArr[0]].level == masteryArr[2][bonusPos]) {
+								outputText("\n<b>Thanks to your training, your maximum bonus attack count has increased to " + maxAttacksNew + "!</b>\n");
+								// before THIS level (new attack), it was maxed (0 in flag = 1 attack, 1 = 2 attacks, etc.)
+								if (flags[kFLAGS.MULTIATTACK_STYLE] == maxAttacksOld - 1) {
+									// keep up with the new max
+									flags[kFLAGS.MULTIATTACK_STYLE] = maxAttacksNew - 1;
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 
-		public function calculateMultiAttacks():Number{
-			var rval:Number = 1;
-            var combatMasteryPos:int = 19;	// default to Normal Weapon size
-            if(weaponSpecials("Small") || weaponSpecials("Dual Small")){combatMasteryPos = 18}
-            else if(weaponSpecials("Large")){combatMasteryPos = 20}
-            else if(weaponSpecials("Massive")){combatMasteryPos = 21}
-            else if(isFeralCombat()){combatMasteryPos = 0}
-            else if(isBowTypeWeapon() || isThrownTypeWeapon()){combatMasteryPos = 22}
+		public function get masteryBonusAttacks():Array {
+			return [
+				// Mastery, condition, array of attack boosts (from +1)
+				[Combat.MASTERY_FERAL, isFeralCombat(), [10, 20, 30, 40]],
+				[Combat.MASTERY_GAUNTLET, isGauntletWeapon(), [10, 20, 30, 40]],
+				[Combat.MASTERY_UNARMED, isUnarmedCombat(), [10, 20, 30, 40]],
+				[Combat.MASTERY_SMALL, weaponSpecials("Small") || weaponSpecials("Dual Small"), [10, 20, 30, 40]],
+				[Combat.MASTERY_LARGE, weaponSpecials("Large") || weaponSpecials("Dual Large"), [15, 30]],
+				[Combat.MASTERY_MASSIVE, weaponSpecials("Massive") || weaponSpecials("Dual Massive"), [30]],
+				[Combat.MASTERY_RANGED, isBowTypeWeapon() || isThrownTypeWeapon(), []],
+				[Combat.MASTERY_NORMAL, true, [10, 25, 40]] //the last one for "everything else"
+			];
+		}
 
-
-			/*
-				40 for small + norm and 30 for rest
-				and it's 10 20 30 40
-				then 10 25 40
-				and finaly 15 30
-				i said 3 large atk not 4, 4 normal atk not 5 and 5 small atks not 6
-
-			 */
-            // Feral Attack Count
-            if(combatMasteryPos == 0){
-                if(combatMastery[combatMasteryPos].level >= 10) rval += 1;
-                if(combatMastery[combatMasteryPos].level >= 20) rval += 1;
-                if(combatMastery[combatMasteryPos].level >= 30) rval += 1;
-                if(combatMastery[combatMasteryPos].level >= 40) rval += 1;
-            }
-			// Small Weapon Attack Count
-			if(combatMasteryPos == 18){
-                if(combatMastery[combatMasteryPos].level >= 10) rval += 1;
-                if(combatMastery[combatMasteryPos].level >= 20) rval += 1;
-                if(combatMastery[combatMasteryPos].level >= 30) rval += 1;
-                if(combatMastery[combatMasteryPos].level >= 40) rval += 1;
+		public function nextBonusAttack():int {
+			var masteryArrays:Array = masteryBonusAttacks;
+			for each (var masteryArr:Array in masteryArrays) {
+				if (masteryArr[1]) {
+					for (var bonusPos:int = 0; bonusPos < masteryArr[2].length; ++bonusPos) {
+						if (combatMastery[masteryArr[0]].level < masteryArr[2][bonusPos])
+							return masteryArr[2][bonusPos];
+					}
+					return -1; // attack found, all bonuses received
+				}
 			}
-			// Normal Weapon attack count
-            if(combatMasteryPos == 19){
-                if(combatMastery[combatMasteryPos].level >= 10) rval += 1;
-                if(combatMastery[combatMasteryPos].level >= 25) rval += 1;
-                if(combatMastery[combatMasteryPos].level >= 40) rval += 1;
-            }
-			// Large Weapon attack count
-            if(combatMasteryPos == 20){
-                if(combatMastery[combatMasteryPos].level >= 15) rval += 1;
-                if(combatMastery[combatMasteryPos].level >= 30) rval += 1;
-            }
-			// Massive Weapon attack count
-            if(combatMasteryPos == 21){
-                if(combatMastery[combatMasteryPos].level >= 30) rval += 1;
-            }
+			return -1; // attack not found
+		}
 
-
+		public function calculateMultiAttacks():int {
+			var rval:Number = 1;
+            var masteryArrays:Array = masteryBonusAttacks;
+			for each (var masteryArr:Array in masteryArrays) {
+				if (masteryArr[1]) {
+					for (var bonusPos:int = 0; bonusPos < masteryArr[2].length; ++bonusPos) {
+						if (combatMastery[masteryArr[0]].level >= masteryArr[2][bonusPos]) ++rval;
+						else break;
+					}
+					break;
+				}
+			}
 			// Spear gains a few extra due to Spear Dancing Flurry
 			if(isSpearTypeWeapon() && isNotHavingShieldCuzPerksNotWorkingOtherwise() && hasPerk(PerkLib.ELFElvenSpearDancingFlurry1to4) && isElf()) {
                 rval += perkv1(PerkLib.ELFElvenSpearDancingFlurry1to4);
             }
 			// Feral starts off with +1 with history perk
-			if(combatMasteryPos === 0 && (hasPerk(PerkLib.HistoryFeral) || hasPerk(PerkLib.PastLifeFeral))){
+			if(isFeralCombat() && (hasPerk(PerkLib.HistoryFeral) || hasPerk(PerkLib.PastLifeFeral))){
                 rval += 1;
 			}
 
@@ -5699,14 +5717,8 @@ use namespace CoC;
 
 		public function maxMiningLevel():Number {
 			var maxLevel:Number = 2;
-			//if (hasPerk(PerkLib.SuperSensual)) {
-				//if (level < 48) maxLevel += level;
-				//else maxLevel += 48;
-			//}
-			//else {
-				if (level < 18) maxLevel += level;
-				else maxLevel += 18;
-			//}
+			if (level < 18) maxLevel += level;
+			else maxLevel += 18;
 			return maxLevel;
 		}
 		public function MiningExpToLevelUp():Number {
@@ -5984,7 +5996,10 @@ use namespace CoC;
 			}
 			SexXP(5+level);
 			if (armor == game.armors.SCANSC)SexXP(5+level);
-			if (real) orgasm(type);
+			if (real) {
+				statStore.removeBuffs('Supercharged');
+				orgasm(type);
+			}
 		}
 
 		public function orgasm(type:String = "Default"):void
@@ -6065,11 +6080,11 @@ use namespace CoC;
 			if (!CoC.instance.monster.hasPerk(PerkLib.EnemyTrueDemon)) {
 				if (hasStatusEffect(StatusEffects.AlterBindScroll2)) soulforce += maxSoulforce() * 0.08;
 				else soulforce += maxSoulforce() * 0.04;
-				if (soulforce > maxSoulforce()) soulforce = maxSoulforce();
+				if (soulforce > maxOverSoulforce()) soulforce = maxOverSoulforce();
 				outputText(" You feel slightly more alive from the soulforce you vampirised from your sexual partner orgasm.");
 			}
-			if (HP < maxHP()) EngineCore.HPChange(25 + (lib/2), true);
-			if (mana < maxMana()) EngineCore.ManaChange(25 + (inte/2), true);
+			EngineCore.HPChange(25 + (lib/2), true);
+			EngineCore.ManaChange(25 + (inte/2));
 			EngineCore.changeFatigue(-(25 + (spe/2)));
 			removeCurse("lib", 5, 1);
 			removeCurse("lib", 5, 2);

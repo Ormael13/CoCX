@@ -565,15 +565,9 @@ public class GameSettings extends BaseContent {
 		else
 			outputText("Eternal Holiday Mode: <font color=\"#800000\"><b>OFF</b></font>\n All holiday events happen only during their respective holiday times.");
 		outputText("\n\n");
-		if (flags[kFLAGS.NO_GORE_MODE] >= 1) {
-			outputText("No Blood Mode: <font color=\"#008000\"><b>ON</b></font>\n Excessive Bloody or Gore scenes variants are disabled.");
-		}
-		else
-			outputText("No Blood Mode: <font color=\"#800000\"><b>OFF</b></font>\n Excessive Bloody or Gore scenes variants are enabled.");
 		menu();
 
 		addButton(0, "Eternal Holiday", toggleFlag, kFLAGS.ITS_EVERY_DAY, settingsScreenGameSettings2).hint("Toggles eternal holiday mode. All holiday events like Eastern/X-mas and etc. can happen at any day of the year.");
-		addButton(1, "No Blood Toggle", toggleFlag, kFLAGS.NO_GORE_MODE, settingsScreenGameSettings2).hint("Toggles No Blood Mode. If enabled, scenes could have more gruesome/bloody variants showed. Not for the weak of heart players.");
 		addButton(2, "Sec.Mon.Stat", difficultySelectionMenu2).hint("Adjusts monsters secondary stats multiplier to make game easier or harder.");
 		addButton(5, "Wis scaling", toggleFlag, kFLAGS.WISDOM_SCALING, settingsScreenGameSettings2).hint("Toggles Wisdom scaling for all attacks using it. If enabled, wisdom scaling would be less random with big generally a bit higher values on average.");
 		addButton(6, "Int scaling", toggleFlag, kFLAGS.INTELLIGENCE_SCALING, settingsScreenGameSettings2).hint("Toggles Intelligance scaling for all attacks using it. If enabled, intelligence scaling would be less random with values being a bit higher on average.");
@@ -596,6 +590,7 @@ public class GameSettings extends BaseContent {
 		mutationsSpoilersSetting();
 		simpPerkSetting();
 		invMgmtSetting();
+		USSdisplayOpt();
 
 		outputText("\n\n");
 		menu();
@@ -604,6 +599,7 @@ public class GameSettings extends BaseContent {
 		addButton(1, "Mutation Assist", flagUpdate, kFLAGS.MUTATIONS_SPOILERS, 1).hint("Mutation Tracker Spoiler Mode. For when you want to discover mutations by yourself, or with some help.");
 		addButton(2, "PerkView Simplfied", flagUpdate, kFLAGS.NEWPERKSDISPLAY, 1).hint("Simplified Perk Viewing. So duplicate entries/tiers don't show up.");
 		addButton(3, "Inventory Mgmt", flagUpdate, kFLAGS.INVT_MGMT_TYPE, 1).hint("Toggle between existing SHIFT to remove items vs an extra menu. Recommended to enable for Mobile users.");
+		addButton(4,"USS Display Opt.", flagUpdate, kFLAGS.USSDISPLAY_STYLE,1).hint("Switches between USS Display options.");
 		addButton(14, "Back", settingsScreenMain);
 
 		function fastLvlSettings():void{
@@ -649,6 +645,17 @@ public class GameSettings extends BaseContent {
 				outputText("Inventory Mgmt: <b>Old</b>\n Shift key is required for removing items.");
 			}
 			outputText("This toggle is most useful for mobile players where the shift key is not available, but is functional for desktop use too.");
+			outputText("\n\n");
+		}
+
+		function USSdisplayOpt():void{
+			if (flags[kFLAGS.USSDISPLAY_STYLE] > 0){
+				outputText("USS Display: <b>Default</b>\n All options will be shown.");
+			}
+			else{
+				outputText("Inventory Mgmt: <b>Shuffled</b>\n Options that can be used will show up first.");
+			}
+			outputText("This toggle is used to hide extra scenes.");
 			outputText("\n\n");
 		}
 

@@ -475,7 +475,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 			clearOutput();
 			spriteSelect(SpriteDb.s_spidergirl);
 			outputText("The spider-girl drops to her knees and wobbles unsteadily");
-			if (monster.lust >= monster.maxLust()) outputText(", thrusting two of her carapace-covered fingertips deep into her sloppy box as she gives into her lust.  She actually has the temerity to demand, \"<i>Fuck me, fuck me now!</i>\"");
+			if (monster.lust >= monster.maxOverLust()) outputText(", thrusting two of her carapace-covered fingertips deep into her sloppy box as she gives into her lust.  She actually has the temerity to demand, \"<i>Fuck me, fuck me now!</i>\"");
 			else outputText(", too wounded to fight back or run away.");
 			if (player.lust >= 33) {
 				outputText("\n\nWhat do you do to her?");
@@ -486,8 +486,8 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 					"<b>You don't have a dick small enough to fuck her vagina.</b>  Req. a cock with area smaller than " + monster.vaginalCapacity(),
 					player.cockThatFits(monster.vaginalCapacity()) >= 0);
 				addButtonIfTrue(2, "Scissor", fSpiderMorphRape, "Req. a vagina", player.hasVagina());
+				addButton(14, "Leave", cleanupAfterCombat);
                 SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatASpiderBitch);
-				addButton(14, "Leave", cleanupAfterCombat)
 			}
 			else {
 				outputText("You're not aroused enough to rape her.");
@@ -506,7 +506,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 			outputText(".  You slap her hands away and pry her legs open, getting a nice, close look at her vagina.\n\n");
 
 			outputText("Her pussy is dark, like her nipples, though the lips of her sex are closer to a pure midnight-black than the dusky skin of those tiny nubs.  A sheen of feminine lube has built up over her vulva, making her outer labia and skin glisten noticeably in the muted sunlight that filters down to the swamp floor.  Around her vagina, the skin rapidly fades from dark chocolate back to the porcelain white of the rest of her body.  You prod and play with the moist slit, feeling the soft skin part around your fingers like a soft velvet glove.  She grows wetter in response, giving up plaintive little moans at your incursion");
-			if (monster.lust >= monster.maxLust()) outputText(" until she's panting and her tiny clit has emerged, hard as a rock");
+			if (monster.lust >= monster.maxOverLust()) outputText(" until she's panting and her tiny clit has emerged, hard as a rock");
 			outputText(".\n\n");
 
 			outputText("The spider-kin's honeyed onyx-hued pussy is irresistible, and you remove your [armor] to prepare for the coming sex.  While you're distracted, the defeated arachnid-morph begins to masturbate while watching you with wide, eager eyes.  You grab a nearby vine and yank the slut's hands away from her pussy.  She protests, but you smirk and inform her she won't get her mitts back until she gets you off.  The spider-girl nods mutely, though confusion crosses her face once you start circling her, coming up next to her chest.\n\n");
@@ -632,10 +632,10 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 			clearOutput();
 			spriteSelect(SpriteDb.s_spidergirl);
 			outputText("You peel off your [armor] while you gaze disdainfully down at your prize.  ");
-			if (monster.lust >= monster.maxLust()) outputText("She's moaning plaintively and happily fingering herself, practically offering her juicy box to you.");
+			if (monster.lust >= monster.maxOverLust()) outputText("She's moaning plaintively and happily fingering herself, practically offering her juicy box to you.");
 			else outputText("She's groaning painfully and struggling to move before falling back down, legs akimbo, inadvertantly displaying her pussy to you.");
 			outputText("  Sighing, you grab her narrow frame, admiring the lightness of her body as you heft her up and position her onto her hands and knees.  ");
-			if (monster.lust >= monster.maxLust()) outputText("She mewls with disappointment.  ");
+			if (monster.lust >= monster.maxOverLust()) outputText("She mewls with disappointment.  ");
 			outputText("This is a much better position for her; ass-up, with her pussy and pucker fully exposed.\n\n");
 
 			outputText("The spider-morph looks back fearfully, but she flexes her back to raise up her abdomen and allow you easier access to her holes like the obedient slut she truly is.  You wrap your arms around the heavy, exoskeletal organ and step forward, leveraging your " + cockDescript(x) + " to slide it into her welcoming pussy.  The arachnid cunt sucks you in with a wet slurp, welcoming your cock to the oozing sheath with uncommon eagerness until the plush black pussy lips are compressing against your loins.  You have trouble not giving into the hot, moist pressure of the silken canal and rutting her like a beast then and there, but a tighter, better hole beckons for your now-lubricated fuck-stick's attention.\n\n");

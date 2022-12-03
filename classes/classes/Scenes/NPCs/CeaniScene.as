@@ -617,7 +617,7 @@ public function sparringWithCeani():void
 	outputText("\"<i>I don’t want to hurt you and...</i>\"\n\n");
 	outputText("You tell her that you'll be using sparring weapons of course no need for you two to wound each others more than necessary.\n\n");
 	outputText("\"<i>Well ok fine [name], but you were warned. I may look like a gentle girl but I can actually pack a punch.</i>\"\n\n");
-	outputText("The two of you head to the ring and Ceani readies her wooden sparring harpoon taking on a menacing stance. Now that you think of it was it really such a good idea?\n\n");
+	outputText("The two of you head to the ring and Ceani readies her wooden sparring harpoon taking on a menacing stance. Now that you think of it, was it really such a good idea?\n\n");
 	startCombat(new Ceani());
 }
 public function sparringWithCeaniWon():void

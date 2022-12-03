@@ -100,15 +100,16 @@ public class HellHoundScene extends BaseContent
 				addButton(0, "Get Licked", hellHoundGetsRaped);
 				addButtonIfTrue(1, "Fuck", hellHoundPropahRape, "Req. a vagina and NOT naga lower body.", player.hasVagina() && !player.isNaga());
 				addButtonIfTrue(2, "TakeBothIn", takeBothIn, "Req. to be a liliraune.", player.isLiliraune());
-				SceneLib.uniqueSexScene.pcUSSPreChecksV2(curry(hellHoundPostFightOptions, hpVictory));
+				addButton(14, "Leave", cleanupAfterCombat);
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(curry(hellHoundPostFightOptions, hpVictory)); //CALLED AT THE END
 			}
 			else {
 				if (hpVictory)
 					outputText("You're not aroused enough to rape your enemy.'.");
 				else
 					outputText("You turn away, not really turned on enough to be interested in such an offer.");
+				addButton(14, "Leave", cleanupAfterCombat);
 			}
-			addButton(14, "Leave", cleanupAfterCombat);
 		}
 
 		public function hellHoundGetsRaped():void
@@ -274,7 +275,7 @@ public class HellHoundScene extends BaseContent
 			clearOutput();
 			//Give him Merae's Lethicite, now he's got enough power for a major upheaval in the demon hierarchy.  You don't get to keep being a champion.
 			//Max player's lust for genital descriptions.
-			dynStats("lus=", player.maxLust());
+			dynStats("lus=", player.maxOverLust());
 
 			outputText("You pull out the giant pink crystal that you stole from Merae.  At the sight of the gem, the demon's eyes go so wide, you almost can't believe that they stay in his head.  \"<i>Is that what I think... yes, YES! This is quite the prize you have brought me, my wonderful imitator!</i>\"  He snatches the crystal out of your hands and cradles it in his hands for a few moments, a crazed hungry look in his eyes.  You remain in his power, and can do nothing but watch as he raves for a few minutes with the jewel in his hands.\n\n");
 

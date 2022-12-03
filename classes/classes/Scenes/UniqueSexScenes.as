@@ -7,6 +7,7 @@ package classes.Scenes
 import classes.*;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
+import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.Mountain.HellHound;
 import classes.Scenes.Areas.Mountain.InfestedHellhound;
 import classes.Scenes.Areas.Mountain.Minotaur;
@@ -162,8 +163,40 @@ public class UniqueSexScenes extends BaseContent
 		private var activeBtns:int = 0;
         public function get sceneMenu():ButtonDataList {
 			var menuItems:Array = [];
+			var sceneList:Array = [USSTailpeg(),
+				USSTailRape(),
+				USSSnRape(),
+				USSVoltTsf(),
+				USSHeatTsf(),
+				USSCooldown(),
+				USSStlWmth(),
+				USSGobMech(),
+				USSBrainMlt(),
+				USSAlrauneSS(),
+				USSEastrBny(),
+				USSTentRape(),
+				USSLiveDildo(),
+				USSJiangshiDrn()];
+
 			var bd:ButtonDataList = new ButtonDataList();
-			menuItems.push(USSTailRape());
+			menuItems.push();
+			if (flags[kFLAGS.USSDISPLAY_STYLE] == 0){
+				var rtn2:Array = [];
+				for each(var rtn:Array in sceneList){
+					if (rtn[1] is Function) menuItems.push(rtn);
+					else rtn2.push(rtn);
+				}
+				for each(var rtn3:Array in rtn2){
+					menuItems.push(rtn3);
+				}
+			}
+			else{
+				for each (var rtn4:Array in sceneList){
+					menuItems.push(rtn4);
+				}
+			}
+			/*
+			menuItems.push();
 			menuItems.push(USSTailpeg());
 			menuItems.push(USSSnRape());
 			menuItems.push(USSVoltTsf());
@@ -177,6 +210,7 @@ public class UniqueSexScenes extends BaseContent
 			menuItems.push(USSTentRape());
 			menuItems.push(USSLiveDildo());
 			menuItems.push(USSJiangshiDrn());
+			*/
 			for each (var i:Array in menuItems){
 				if (i[1] is Function){
 					bd.add(i[0], i[1], i[2]);
@@ -189,48 +223,25 @@ public class UniqueSexScenes extends BaseContent
             return bd;
         }
 
-		public function pcUSSPreChecksV2(backFunc:Function, btnPos:int = 13):void{
-            //uncomment if it's REALLY needed
-			if (pcCanUseUniqueSexScenes())
-				addButton(btnPos, "U.Sex Scenes", openUSSmenu, backFunc).hint("Other non-typical sex scenes.");
-			else
-				addButtonDisabled(btnPos,"U.Sex Scenes", "You don't qualify for any Unique Sex Scenes.");
+		public function pcUSSPreChecksV2(backFunc:Function, btnPos:int = 13):void {
+			if (RaijuOverLust()) {
+				if (player.isGenderless()) raijuVoltTransfer();
+				else RaijuRapeSupercharged();
+				//supercharged check - forcecalls the scene if needed
+			} else addButton(btnPos, "U.Sex Scenes", openUSSmenu, backFunc)
+				.disableIf(player.hasPerk(PerkLib.ElementalBody), "You can't use unique sex scenes while being an elemental.");
 		}
-
-        public function pcCanUseUniqueSexScenes():Boolean {
-			activeBtns = 0;
-			sceneMenu;
-			if (player.hasPerk(PerkLib.ElementalBody)) return false;
-            if (RaijuOverLust(true)) return true; //special for supercharged Raiju
-            else return activeBtns > 0;
-        }
 
 		//Use above for special cases.
 		public function openUSSmenu(backFunc:Function = null):void{
-			//special for supercharged Raiju
-			if(RaijuOverLust(true)) {
-				RaijuOverLust();
-			}
-			else{	//normal menu
-				var menuItems:ButtonDataList = sceneMenu;
-				if (backFunc == null) backFunc = camp.returnToCampUseOneHour;
-				submenu(menuItems, backFunc, 0, false);
-			}
-
+			var menuItems:ButtonDataList = sceneMenu;
+			if (backFunc == null) backFunc = camp.returnToCampUseOneHour;
+			submenu(menuItems, backFunc, 0, false);
         }
 
         //checking functions ===========================================================================
-        private function RaijuOverLust(check:Boolean = false):*{
-            if (player.statStore.hasBuff("Supercharged") && !monster.hasPerk(PerkLib.LightningAffinity) && !monster.hasPerk(PerkLib.LightningNature)){
-                if(check) return true;
-				else{
-					clearOutput();
-					menu();
-					if(!player.hasVagina() && !player.hasCock()) raijuVoltTransfer();
-					else RaijuRapeSupercharged();
-				}
-            }
-			else if(check) return false;
+        private function RaijuOverLust():Boolean {
+			return player.statStore.hasBuff("Supercharged") && !monster.hasPerk(PerkLib.LightningAffinity) && !monster.hasPerk(PerkLib.LightningNature);
         }
 
         private function USSTailRape():Array{
@@ -360,11 +371,11 @@ public class UniqueSexScenes extends BaseContent
 			//============================================================================
 			function dickF():void {
 				outputText(" plasma dripping cock already rock hard at the thought of FINALLY finding a hole to plug. Your body is overflowing with latent electricity. Your [cock] throbs in eager anticipation at the thought of pumping your victim with every volt of energy you have.\n\n" +
-						"[He] pleads for you to stop, yet in your lust-addled state, the only reply you can manage to give them is an intense stare of unbridled lust. There is nothing to hold you back now, rain would be more likely to flow back into the sky at their command.\n\n" +
+						"[monster He] pleads for you to stop, yet in your lust-addled state, the only reply you can manage to give them is an intense stare of unbridled lust. There is nothing to hold you back now, rain would be more likely to flow back into the sky at their command.\n\n" +
 						"This poor, unfortunate soul is your long-awaited outlet, and nothing can hold you from unloading every ounce of seed into them. Your presence was warning enough, they had time to run.\n\n" +
-						"Before [he] can make any further protest, you plug yourself into [his] "+monster.assholeOrPussy()+", thrusting with wanton abandon as your charge quickly builds up within you. In a moment, you quickly begin unloading surge after surge of electricity into them. The air crackles around you with latent, lustful shocks. You can't help but growl in pleasure.\n\n" +
+						"Before [monster he] can make any further protest, you plug yourself into [monster his] "+monster.assholeOrPussy()+", thrusting with wanton abandon as your charge quickly builds up within you. In a moment, you quickly begin unloading surge after surge of electricity into them. The air crackles around you with latent, lustful shocks. You can't help but growl in pleasure.\n\n" +
 						"Your poor victim's hole reflexively tightens around you as you continue bucking into them eagerly, the sheer force of your electricity causing them to spasm and quiver beneath your presence. You bring more of your weight upon them as you can feel yourself getting closer to the release that you so crave. Your eyes roll back, causing your vision to white out as you continue unloading all your charge into the make-shift lightning rod.\n\n" +
-						"[themonster] continues clenching against you as a familiar pressure and heat builds up within your loins. You let loose a loud grunt as you finally release your load into [him]. Shot after shot of raiju plasma fills up your hapless victim as you steadily regain your senses, and your erection deflates.\n\n" +
+						"[themonster] continues clenching against you as a familiar pressure and heat builds up within your loins. You let loose a loud grunt as you finally release your load into [monster him]. Shot after shot of raiju plasma fills up your hapless victim as you steadily regain your senses, and your erection deflates.\n\n" +
 						"Finally, you slowly unplug yourself from them, cum slowly seeping out of the broken, twitching mess you've left [themonster] in. Your partner will be a fumbling mess for a while with all that lingering charge in them. Electricity courses around their form as [he] clenches [his] body, still cumming.\n\n" +
 						"You no longer have any need to stick around now that your vision is cleared, and your mind is no longer stuck in a fog. You decide to head back to your camp, satisfied.");
 				if (monster.hasVagina())
@@ -378,11 +389,11 @@ public class UniqueSexScenes extends BaseContent
 			}
 			function vagF():void {
 				outputText(" plasma dripping pussy juicing itself at the thought of FINALLY getting plugged! Your body is literally overflowing with electricity, and you're about all too eager to unload every last volt into your hapless victim.\n\n" +
-						"[He] pleads for you to stop, yet in your lust-addled state, the only reply you can manage to give them is an intense stare of unbridled lust. There is nothing to hold you back now, rain would be more likely to flow back into the sky at their command.\n\n" +
+						"[monster He] pleads for you to stop, yet in your lust-addled state, the only reply you can manage to give them is an intense stare of unbridled lust. There is nothing to hold you back now, rain would be more likely to flow back into the sky at their command.\n\n" +
 						"This poor, unfortunate soul is your long-awaited plug, and nothing can hold you from dissipating all of your volts in them. Your presence was warning enough, they had time to run.");
 				if (monster.hasCock()){
-					outputText("Before [he] can make any further protest, you force [his] plug into your overloaded outlet pumping with wanton abandon as your charge quickly builds up within you.");
-					if(player.vaginalCapacity() < monster.cockArea(0)) outputText(" Damn, [his] plug is massive. You barely manage to force [him] in, but there's no helping it. It's that or going about a few extra hours as a lust crazed lunatic, and you'd prefer the former.");
+					outputText(" Before [monster he] can make any further protest, you force [monster his] plug into your overloaded outlet pumping with wanton abandon as your charge quickly builds up within you.");
+					if(player.vaginalCapacity() < monster.cockArea(0)) outputText(" Damn, [monster his] plug is massive. You barely manage to force [monster him] in, but there's no helping it. It's that or going about a few extra hours as a lust crazed lunatic, and you'd prefer the former.");
 					player.cuntChange(monster.cockArea(0), true);
 					outputText(" In a moment, you quickly begin unloading surge after surge of electricity into them. The air crackles around you with latent, lustful shocks. You can't help but growl in pleasure.\n\n" +
 							"Your poor victim's cock reflexively twitches around your walls as you continue pumping it eagerly, the sheer force of your electricity causing them to spasm and quiver beneath your presence." +
@@ -554,6 +565,7 @@ public class UniqueSexScenes extends BaseContent
 			if (monster.biggestTitSize() > 0) outputText(" and milk");
 			outputText(" everywhere in the vicinity. You can see the pulse of your statics as a small glow in every thrust of [monster his] hips as [monster he] keep fiercely masturbating in an attempt to expel the lust.\n\n");
 			outputText("You leave your lust receptacle there, it's unlikely [monster he] will stop masturbating anytime soon.");
+			player.statStore.removeBuffs('Supercharged');
 			player.sexReward("no");
 			statScreenRefresh();
 			cleanupAfterCombat();
@@ -664,7 +676,7 @@ public class UniqueSexScenes extends BaseContent
 
 		public function Cooldown():void {
 			clearOutput();
-			outputText("You eye [themonster] with anticipation. Being a "+player.race()+", your body temperature is constantly burning way above normal and right now your [pussy] is like 40° celcius in summer with high humidity. " +
+			outputText("You eye [themonster] with anticipation. Being a [race], your body temperature is constantly burning way above normal and right now your [pussy] is like 40° celcius in summer with high humidity. " +
 					"A little cooling is in order and this unlucky rift denizen is about to serve as natural refreshment for your burning hot body.\n\n" +
 					"You proceed to force [themonster] on [monster his] back");
 			if (monster.wolfCocks() > 0) outputText(", your warm body slowly forcing his puppy pecker out of its sheath");
@@ -686,9 +698,9 @@ public class UniqueSexScenes extends BaseContent
 			outputText("He looks at you fearfully and rightly so, there's no telling how far you will go to get the warmth you’re craving from him. You spread [monster his] leg wide to reveal the already hardening [monster cockshort] between. You lick his length to lube it properly for what is coming next, your cool saliva making [themonster] shiver. You rub your body along his while doing this, enjoying the sensation of warmth over your skin. A few seconds later you're already straddling the towering erection, inserting inch after inch inside your folds. Moans are exchanged as you begins to lower your body on your victim’s cock, moving at a steady pace. Midway you kiss [themonster] silencing his pain and pleasure mixed groans ");
 			outputText("as your cool breath pours in, and you draw out his warm one. He begins to shake as his cock hardens further, both from the pleasure and the thin layer of ice preventing his release and softening, freezing the very blood inside and spreading out across his body. He would be screaming half mad right now if you weren't choking his loud reply with a kiss, breathing in his warmth. He keeps thrusting until his lower body loses mobility to the creeping frost, not one to end, so soon you prolong his agonizing pleasure and yours by your own efforts, moaning in delight each time his diamond hard frozen member bottoms in.\n\n");
 			outputText("As you achieve your fifth orgasm, his body is entirely covered in creeping ice, and he's no better than a frozen statue, devoid of all warmth and life. What a bore, you were just barely satiated and could've gone on for several hours. You kick him in anger, causing his form to crack and explode like glass in the opposite direction. Guess you had fun while it lasted, time to head back to camp.\n\n");
-			player.HP = player.maxHP();
-			player.mana = player.maxMana();
-			player.soulforce = player.maxSoulforce();
+			player.HP = player.maxOverHP();
+			player.mana = player.maxOverMana();
+			player.soulforce = player.maxOverSoulforce();
 			player.sexReward("cum","Vaginal");
 			cleanupAfterCombat();
 		}
@@ -708,7 +720,7 @@ public class UniqueSexScenes extends BaseContent
 			outputText("Instinctively sensing the imminent climax you wrap your lips tightly around the throbbing cock, sealing shut as the demon unloads ropes after ropes of corrupted cum directly into your massaging throat.\n\n");
 			outputText("The meal is satisfying, though it does not restore your humanity, lacking the soulforce you require to make you slightly more alive. Finished with the demon, you hop off and take your leave"+(inDungeon ? "":" heading back to camp")+".\n\n");
 			HPChange(Math.round(player.maxHP() * 0.1), true);
-			EngineCore.ManaChange(Math.round(player.maxMana() * 0.1), true);
+			EngineCore.ManaChange(Math.round(player.maxMana() * 0.1));
 			player.fatigue -= Math.round(player.maxFatigue() * 0.1);
 			if (player.fatigue < 0) player.fatigue = 0;
 			player.trainStat("lib", 1, 50);
@@ -745,7 +757,7 @@ public class UniqueSexScenes extends BaseContent
 				outputText("For a few moments you bask in the high, your flesh bursting with energy. But you’re no longer getting anything from this slut, you’ll need another to get your fix.\n\n");
 				outputText("Unconcerned by the demon's fate you stand up and" + (inDungeon ? " resume exploring the labyrinth" : " hop back to camp") + ".\n\n");
 				HPChange(Math.round(player.maxHP() * 0.1), true);
-				EngineCore.ManaChange(Math.round(player.maxMana() * 0.1), true);
+				EngineCore.ManaChange(Math.round(player.maxMana() * 0.1));
 				player.fatigue -= Math.round(player.maxFatigue() * 0.1);
 				if (player.fatigue < 0) player.fatigue = 0;
 				dynStats("cor", 1);
@@ -756,7 +768,7 @@ public class UniqueSexScenes extends BaseContent
 
 		public function jiangshiDrainHimMinotaurs():void {
 			clearOutput();//
-			outputText("The minotaur falls, unable to fight any longer."+(monster.lust >= monster.maxLust()?" His massive erection throbbing, drooling excessive amounts of precum as he moos softly, panting with desperate need.":"")+" His churning balls are full of excessive amounts of his virile energy. A fountain of energy, in more ways than one, and it's a fountain you intend to drink every last possible drop from. Already driven over the edge, the masculine scent of his musk only serves to remind you of the prize you've won. All you can think of now is the alluring sight of lifeforce that fill his balls.\n\n");
+			outputText("The minotaur falls, unable to fight any longer."+(monster.lust >= monster.maxOverLust()?" His massive erection throbbing, drooling excessive amounts of precum as he moos softly, panting with desperate need.":"")+" His churning balls are full of excessive amounts of his virile energy. A fountain of energy, in more ways than one, and it's a fountain you intend to drink every last possible drop from. Already driven over the edge, the masculine scent of his musk only serves to remind you of the prize you've won. All you can think of now is the alluring sight of lifeforce that fill his balls.\n\n");
 			outputText("Unceremoniously, you drop on the prone minotaur with eager readiness as you begin deepthroating his juicy cock for his soulforce. The bull moos, jumping slightly in shock before he gives in to the pleasure at the sudden but aggressive attention.\n\n");
 			outputText("Lacking a gag reflex or a need for air, you easily slide his massive member down your throat as you blow him. His full balls churn, yet you only receive a steady stream of precum from him. Impatiently, you poke the minotaur's massive balls with your nails, causing them to further swell in size as the venom forces him to produce even more cum.\n\n");
 			outputText("The minotaur moos eagerly, forcefully bucking into your gaping maw. You wring your tongue around his massive shaft, coaxing him closer to orgasm. The massive bull can only handle this torture for so long and begins unloading shot after shot into your throat causing your belly to inflate briefly before you absorb the fluid and deflate back to your normal size. Fitting your maker accounted for a bukake scenario.\n\n");
@@ -773,7 +785,7 @@ public class UniqueSexScenes extends BaseContent
 			}
 			if (player.hasStatusEffect(StatusEffects.AlterBindScroll2)) player.soulforce += player.maxSoulforce() * 0.4;
 			else player.soulforce += player.maxSoulforce() * 0.2;
-			if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+			if (player.soulforce > player.maxOverSoulforce()) player.soulforce = player.maxOverSoulforce();
 			outputText(" You feel slightly more alive from the soulforce you vampirised from your sexual partner orgasm.");
 			player.sexReward("cum", "Oral");
 			cleanupAfterCombat();

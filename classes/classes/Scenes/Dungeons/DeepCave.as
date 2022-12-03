@@ -668,7 +668,7 @@ use namespace CoC;
 		public function loseToZetaz():void {
 			clearOutput();
 			outputText("\"<i>Well, isn't this familiar?</i>\" asks Zetaz as he watches your ");
-			if(player.lust >= player.maxLust()) outputText("masturbating");
+			if(player.lust >= player.maxOverLust()) outputText("masturbating");
 			else outputText("prone");
 			outputText(" form with an amused expression, \"<i>The first champion in ages to retain " + player.mf("his","her") + " free will for more than a few minutes, and " + player.mf("he","she") + "'s brought to " + player.mf("his","her") + " knees by the very imp " + player.mf("he","she") + " escaped!  Once you've learned your proper place, you'll guarantee my safe return to my rightful station.  Perhaps I'll even get a promotion?  After all, you've defeated so many higher ranking demons already.</i>\"\n\n");
 

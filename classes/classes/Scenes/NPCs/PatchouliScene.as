@@ -67,7 +67,7 @@ public class PatchouliScene extends NPCAwareContent {
 		if (follower < 1) {
 			outputText("As you explore the forest, you spot a particularly weird cat person sleeping in a tree. Weird isn’t exactly the proper term here, as its fur color simply seems out of this world; either he dyed them or he was born with green fur and pink stripes. While at first you thought he was a girl due to his lean features, long hair and somewhat feminine face, the absence of breasts and the somewhat male, albeit girlish and young voice of the cat tells you otherwise. You approach him and ask him who he is. He stretches, looks at you and gives you an impossibly wide grin.\n\n");
 			outputText("\"<i>Nyaaaaaaaaaaaa...Oh, hello traveler? Are you perhaps lost? My job is to guide people across this land to new destinations. Would you like a tour? My name’s Trusty Patchouli, by the way.</i>\"\n\n");
-			outputText("The way he says this, with that constant smile, is somewhat disturbing, but now that you think of it ");
+			outputText("The way he says this, with that constant smile, is somewhat disturbing, but now that you think of it");
 			if (visitedAllAreas()) {
 				outputText(", you’re pretty sure you saw each and every location on Mareth, so you ponder where he could lead you.");
 			} else {
@@ -183,7 +183,7 @@ public class PatchouliScene extends NPCAwareContent {
 
 		clearOutput();
 		outputText("The cat jumps down from the tree and walks ahead of you, showing you the way. Strangely, the landscape seems to change absurdly fast around you as you follow him until ");
-		if (visitedAllAreas()) {
+		if (player.level >= 30 && rand(2) == 0) {
 			if (flags[kFLAGS.PATCHOULI_AND_WONDERLAND] != 1) {
 				outputText("you end up in an exceedingly colorful version of the forest. Things here look weirder than usual, but not in a sexual way, rather it’s like the painting of a mad artist.\n\n");
 				outputText("\"<i>Well wow, out of all locations I didn’t expect us to end up in here... just... just pick up a fruit or two and I will escort you out.</i>\"\n\n");

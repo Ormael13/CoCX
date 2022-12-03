@@ -17,7 +17,7 @@ public class IceSpikeSpell extends AbstractBlackSpell {
 				: "Drawning your own lust to concentrate it into chilling spike of ice that will attack your enemies.",
 			TARGET_ENEMY,
 			TIMING_INSTANT,
-			[TAG_DAMAGING, TAG_ICE]
+			[TAG_DAMAGING, TAG_ICE, TAG_TIER1]
 		);
 		baseManaCost = 40;
 		if (ex) baseWrathCost = 100;

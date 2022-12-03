@@ -18,12 +18,8 @@ import classes.internals.*;
 		public function driderKiss():void {
 			var temp:int;
 			outputText("The corrupted drider closes in on your web-bound form, cooing happily at you while you struggle with the sticky fibers.\n\n");
-			//Blind dodge change
-			if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
-				outputText("She's too blind to get anywhere near you.\n");
-			}
 			//Dodge
-			else if(player.speedDodge(this)>0) {
+			if(player.getEvasionRoll()) {
 				outputText("Somehow, you manage to drag yourself out of the way.  She sighs and licks her lips.  \"<i>");
 				temp = rand(4);
 				if(temp == 0) outputText("I just wanted to give my delicious morsel a kiss...</i>\"\n");
@@ -31,34 +27,6 @@ import classes.internals.*;
 				else if(temp == 2) outputText("Mmm, do you have to squirm so much, prey?</i>\"\n");
 				else outputText("Just look at my glossy, dripping lips.  Imagine how great it would feel to have them locked against you.  Why resist?</i>\"\n");
 			}
-			//Determine if evaded
-			else if(player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
-				outputText("Somehow, you manage to evade her lusty attack.  She sighs and licks her lips.  \"<i>");
-				temp = rand(4);
-				if(temp == 0) outputText("I just wanted to give my delicious morsel a kiss...</i>\"\n");
-				else if(temp == 1) outputText("Why won't you let me kiss you?</i>\"\n");
-				else if(temp == 2) outputText("Mmm, do you have to squirm so much, prey?</i>\"\n");
-				else outputText("Just look at my glossy, dripping lips.  Imagine how great it would feel to have them locked against you.  Why resist?</i>\"\n");
-			}
-			//("Misdirection"
-			else if(player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
-				outputText("You manage to misdirect her lusty attack, avoiding it at the last second.  She sighs and licks her lips.  \"<i>");
-				temp = rand(4);
-				if(temp == 0) outputText("I just wanted to give my delicious morsel a kiss...</i>\"\n");
-				else if(temp == 1) outputText("Why won't you let me kiss you?</i>\"\n");
-				else if(temp == 2) outputText("Mmm, do you have to squirm so much, prey?</i>\"\n");
-				else outputText("Just look at my glossy, dripping lips.  Imagine how great it would feel to have them locked against you.  Why resist?</i>\"\n");
-			}
-			//Determine if cat'ed
-			else if(player.hasPerk(PerkLib.Flexibility) && rand(100) < 6) {
-				outputText("You manage to twist your cat-like body out of the way at the last second, avoiding it at the last second.  She sighs and licks her lips.  \"<i>");
-				temp = rand(4);
-				if(temp == 0) outputText("I just wanted to give my delicious morsel a kiss...</i>\"\n");
-				else if(temp == 1) outputText("Why won't you let me kiss you?</i>\"\n");
-				else if(temp == 2) outputText("Mmm, do you have to squirm so much, prey?</i>\"\n");
-				else outputText("Just look at my glossy, dripping lips.  Imagine how great it would feel to have them locked against you.  Why resist?</i>\"\n");
-			}
-			
 			else if(!player.hasStatusEffect(StatusEffects.DriderKiss)) {
 				//(HIT? + 10 lust)
 				player.dynStats("lus", 10);

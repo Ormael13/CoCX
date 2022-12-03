@@ -46,14 +46,8 @@ use namespace CoC;
 		public function minoincubusHeadbutt():void {
 			outputText("\"<i>Catch,</i>\" the demonic brute growls, moments before attempting to slam his forehead into your own.");
 			var damage:Number = ((str + weaponAttack) * 0.5) - rand(player.tou * 0.75);
-			if (damage <= 0 || combatMiss() || player.hasPerk(PerkLib.Flexibility)) {
+			if (damage <= 0 || player.getEvasionRoll()) {
 				outputText(" Luckily, you dodge aside.");
-			}
-			else if (player.hasPerk(PerkLib.Evade)) {
-				outputText(" Luckily, you evade.");
-			}
-			else if (player.hasPerk(PerkLib.Misdirection)) {
-				outputText(" Luckily, you misdirect his attack.");
 			}
 			else {
 				outputText(" He impacts with stunning force, leaving you reeling! ");
@@ -76,7 +70,7 @@ use namespace CoC;
 		public function  minoincubusBattleaxes():void {
 			outputText("The mino incubus carries his axes as if they weighed no more than a feather, brandishing them back and forth with such casual movements that you barely register his swings");
 			var damage:Number = ((str + weaponAttack) * 1.25) - rand(player.tou);
-			if (damage <= 0 || combatMiss() || player.hasPerk(PerkLib.Evade) || player.hasPerk(PerkLib.Flexibility) || player.hasPerk(PerkLib.Misdirection)) {
+			if (damage <= 0 || player.getEvasionRoll()) {
 				outputText(" in time to avoid it.");
 			}
 			else {

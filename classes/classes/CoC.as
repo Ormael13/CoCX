@@ -24,6 +24,7 @@ import classes.internals.Utils;
 import coc.model.GameModel;
 import coc.model.TimeModel;
 import coc.view.CoCButton;
+import coc.view.IconLib;
 import coc.view.MainView;
 import coc.xxc.Story;
 import coc.xxc.StoryCompiler;
@@ -66,10 +67,10 @@ public class CoC extends MovieClip
         return _instance;
     }
     //Game Version
-    public var debugGameVer:String = "v0.8s5.186";
+    public var debugGameVer:String = "v0.8s5.223";
 
     //Mod save version.
-    public var modSaveVersion:Number = 36.032;
+    public var modSaveVersion:Number = 36.037;
     public var levelCap:Number = 185;
 
     //Lock cheats menus from public
@@ -403,6 +404,7 @@ public class CoC extends MovieClip
         new Story("lib",rootStory,"monsters",true);
         execPostInit();
         loadStory();
+        IconLib.INSTANCE.loadIcons();
         this.addFrameScript( 0, this.run );
         //setTimeout(this.run,0);
     }

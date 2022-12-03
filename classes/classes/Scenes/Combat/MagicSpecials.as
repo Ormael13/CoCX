@@ -14,6 +14,7 @@ import classes.BodyParts.Wings;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
+import classes.Items.ItemTags;
 import classes.Scenes.Areas.GlacialRift.FrostGiant;
 import classes.Scenes.Areas.Tundra.YoungFrostGiant;
 import classes.Scenes.Dungeons.D3.Doppleganger;
@@ -35,14 +36,14 @@ public class MagicSpecials extends BaseCombatContent {
 	internal function applyAutocast2():void {
 		outputText("\n\n");
 		if ((player.wrath >= 50 || player.hasPerk(PerkLib.EndlessRage)) && (flags[kFLAGS.ZERKER_COMBAT_MODE] == 1 || flags[kFLAGS.ZERKER_COMBAT_MODE] == 3)) {
-			var berzerkDuration:Number = 10;
+			var berzerkDuration:Number = 0;
 			if (player.hasPerk(PerkLib.EndlessRage)) berzerkDuration += 1;
 			else {
 				player.wrath -= 50;
 				berzerkDuration += 10;
 			}
-			if (player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 2) berzerkDuration += 2;
-			if (player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 3) berzerkDuration += 8;
+			if (player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 2) berzerkDuration += 1;
+			if (player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 3) berzerkDuration += 4;
 			player.createStatusEffect(StatusEffects.Berzerking,berzerkDuration,0,0,0);
 			outputText("<b>Berzerking was used successfully.</b>\n\n");
 		}
@@ -53,8 +54,8 @@ public class MagicSpecials extends BaseCombatContent {
 				player.wrath -= 50;
 				lustzerkDuration += 10;
 			}
-			if (player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 2) lustzerkDuration += 2;
-			if (player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 3) lustzerkDuration += 8;
+			if (player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 2) lustzerkDuration += 1;
+			if (player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 3) lustzerkDuration += 4;
 			player.createStatusEffect(StatusEffects.Lustzerking,lustzerkDuration,0,0,0);
 			outputText("<b>Lustzerking was used successfully.</b>\n\n");
 		}
@@ -91,13 +92,6 @@ public class MagicSpecials extends BaseCombatContent {
 	internal function buildMenu(buttons:ButtonDataList):void {
 		var bd:ButtonData;
 		var isEnemyInvisible:Boolean = combat.isEnemyInvisible;
-		//if (player.hasPerk(PerkLib.HarpySong) || player.hasPerk(PerkLib.MelkieSong)) {
-		//	bd = buttons.add("Compelling Aria", singCompellingAria, "Sing for a moment.");
-		//	bd.requireFatigue(spellCost(50));
-		//	if (player.hasStatusEffect(StatusEffects.CooldownCompellingAria)) {
-		//		bd.disable("<b>You need more time before you can use Compelling Aria again.</b>\n\n");
-		//	} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
-		//}
 		if (player.isRaceCached(Races.SPHINX)) {
 			bd = buttons.add("Cursed Riddle", CursedRiddle, "Weave a curse in the form of a magical riddle. If the victims fails to answer it, it will be immediately struck by the curse. Intelligence determines the odds and damage.");
 			bd.requireFatigue(spellCost(50));
@@ -525,6 +519,12 @@ public class MagicSpecials extends BaseCombatContent {
 				else bd.disable("Your throat is incredibly sore and hoarse. You aren’t sure you can talk let alone try that attack for more than a day.");
 			} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 		}
+			if (player.hasPerk(PerkLib.DragonLustPoisonBreath)) {
+				bd = buttons.add("Poison Breath", DragonLustPoisonBreath).hint("Unleash a cloud of aphrodisiac poison. Particularly powerful against groups");
+				if (player.tailVenom < player.VenomWebCost() * 5) {
+					bd.disable("You do not have enough poison in your glands to breath a cloud right now! (Req. "+player.VenomWebCost()*5+"+)");
+				} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+			}
 		if (player.faceType == Face.WOLF && player.hasKeyItem("Gleipnir Collar") >= 0) {
 			bd = buttons.add("FreezingBreath", fenrirFreezingBreath,"Freeze your foe solid with a powerful breath attack. \n\nWould go into cooldown after use for: "+(player.hasPerk(PerkLib.NaturalInstincts) ? "9":"10")+" rounds  \n<b>AoE attack.</b>");
 			bd.requireFatigue(spellCost(150));
@@ -627,7 +627,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 		}
 		if (player.hasPerk(PerkLib.Berzerker)) {
-			bd = buttons.add("Berserk", berzerk);
+			bd = buttons.add("Berserk G1", berzerk);
 			if (player.hasPerk(PerkLib.ColderFury)) {
 				bd.hint("Throw yourself into a cold(er) rage!  Greatly increases the strength of your weapon and increases lust resistance. \n");
 			} else if (player.hasPerk(PerkLib.ColdFury)) {
@@ -638,6 +638,24 @@ public class MagicSpecials extends BaseCombatContent {
 			bd.requireWrath(50);
 			if (player.hasStatusEffect(StatusEffects.Berzerking)) {
 				bd.disable("You're already pretty goddamn mad!");
+			}
+		}
+		if (player.hasPerk(PerkLib.PrestigeJobBerserker) && player.hasStatusEffect(StatusEffects.Berzerking)) {
+			bd = buttons.add("Berserk G2", berzerkG2);
+			if (player.statusEffectv2(StatusEffects.Berzerking) >= 1) {
+				bd.disable("You're already reached 2nd grade of Berserk!");
+			}
+			if (player.statusEffectv2(StatusEffects.Berzerking) >= 1) {
+				bd = buttons.add("Berserk G3", berzerkG3);
+				if (player.statusEffectv2(StatusEffects.Berzerking) >= 2) {
+					bd.disable("You're already reached 3rd grade of Berserk!");
+				}
+			}
+			if (player.hasPerk(PerkLib.EndlessRage) && player.statusEffectv2(StatusEffects.Berzerking) >= 2) {
+				bd = buttons.add("Berserk G4", berzerkG4);
+				if (player.statusEffectv2(StatusEffects.Berzerking) >= 3) {
+					bd.disable("You're already reached 4th grade of Berserk!");
+				}
 			}
 		}
 		if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1 || player.isRaceCached(Races.SHARK)) {
@@ -651,7 +669,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 		}
 		if (player.hasPerk(PerkLib.Lustzerker) || player.jewelryName == "Flame Lizard ring" || player.jewelryName2 == "Flame Lizard ring" || player.jewelryName3 == "Flame Lizard ring" || player.jewelryName4 == "Flame Lizard ring") {
-			bd = buttons.add("Lustserk", lustzerk);
+			bd = buttons.add("Lustserk G1", lustzerk);
 			if (player.hasPerk(PerkLib.ColderLust)) {
 				bd.hint("Throw yourself into a cold(er) lust rage!  Greatly increases the strength of your weapon and increases armor defense. \n");
 			} else if (player.hasPerk(PerkLib.ColdLust)) {
@@ -662,6 +680,24 @@ public class MagicSpecials extends BaseCombatContent {
 			bd.requireWrath(50);
 			if (player.hasStatusEffect(StatusEffects.Lustzerking)) {
 				bd.disable("You're already pretty goddamn mad & lustfull!");
+			}
+		}
+		if (player.hasPerk(PerkLib.PrestigeJobBerserker) && player.hasStatusEffect(StatusEffects.Lustzerking)) {
+			bd = buttons.add("Lustserk G2", lustzerkG2);
+			if (player.statusEffectv2(StatusEffects.Lustzerking) >= 1) {
+				bd.disable("You're already reached 2nd grade of Lustserk!");
+			}
+			if (player.statusEffectv2(StatusEffects.Lustzerking) >= 1) {
+				bd = buttons.add("Lustserk G3", lustzerkG3);
+				if (player.statusEffectv2(StatusEffects.Lustzerking) >= 2) {
+					bd.disable("You're already reached 3rd grade of Lustserk!");
+				}
+			}
+			if (player.hasPerk(PerkLib.EndlessRage) && player.statusEffectv2(StatusEffects.Lustzerking) >= 2) {
+				bd = buttons.add("Lustserk G4", lustzerkG4);
+				if (player.statusEffectv2(StatusEffects.Lustzerking) >= 3) {
+					bd.disable("You're already reached 4th grade of Lustserk!");
+				}
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsTyrantState)) {
@@ -968,25 +1004,7 @@ public class MagicSpecials extends BaseCombatContent {
 			return;
 		}
 		//Special enemy avoidances
-		if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
-			outputText("Vala beats her wings with surprising strength, blowing the ice wave back at you! ");
-			if(player.hasPerk(PerkLib.Evade) && rand(2) == 0) {
-				outputText("You dive out of the way and evade it!");
-			}
-			else if(player.hasPerk(PerkLib.Flexibility) && rand(4) == 0) {
-				outputText("You use your flexibility to barely fold your body out of the way!");
-			}
-			//Determine if blocked!
-			else if (combatBlock(true)) {
-				outputText("You manage to block your own ice wave with your [shield]!");
-			}
-			else {
-				damage = player.takeIceDamage(damage);
-				outputText("Your own ice wave smacks into your face! ");
-				combat.CommasForDigits(damage);
-			}
-			outputText("\n\n");
-		}
+		if (valaReflect(damage, "ice wave", player.takeIceDamage)) {}
 		else {
 			if(!monster.hasPerk(PerkLib.Resolute)) {
 				outputText("  [Themonster] scream for an instant as it is flash frozen solid by the wave along with everything around it! Your opponent now trapped in a block of ice tries very hard to burst out and get free of its glacial prison.");
@@ -1068,25 +1086,7 @@ public class MagicSpecials extends BaseCombatContent {
 			return;
 		}
 		//Special enemy avoidances
-		if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
-			outputText("Vala beats her wings with surprising strength, blowing the ice wave back at you! ");
-			if(player.hasPerk(PerkLib.Evade) && rand(2) == 0) {
-				outputText("You dive out of the way and evade it!");
-			}
-			else if(player.hasPerk(PerkLib.Flexibility) && rand(4) == 0) {
-				outputText("You use your flexibility to barely fold your body out of the way!");
-			}
-			//Determine if blocked!
-			else if (combatBlock(true)) {
-				outputText("You manage to block your own ice wave with your [shield]!");
-			}
-			else {
-				damage = player.takeIceDamage(damage);
-				outputText("Your own ice wave smacks into your face! ");
-				combat.CommasForDigits(damage);
-			}
-			outputText("\n\n");
-		}
+		if (valaReflect(damage, "freezing breath", player.takeIceDamage)) {}
 		else {
 			if(!monster.hasPerk(PerkLib.Resolute)) {
 				outputText("  [Themonster] ");
@@ -1247,7 +1247,7 @@ public class MagicSpecials extends BaseCombatContent {
 			dynStats("lus", temp2, "scale", false);
 			var lustDmgF:Number = combat.calculateBasicTeaseDamage(120);
 			var lustBoostToLustDmg:Number = 0;
-			if (player.hasPerk(PerkLib.SluttySimplicity) && player.armorName == "nothing") lustDmgF *= (1 + ((10 + rand(11)) / 100));
+			if (player.hasPerk(PerkLib.SluttySimplicity) && player.armor.hasTag(ItemTags.A_REVEALING)) lustDmgF *= (1 + ((10 + rand(11)) / 100));
 			if (player.hasPerk(PerkLib.ElectrifiedDesire)) {
 				lustDmgF *= (1 + (player.lust100 * 0.01));
 			}
@@ -1376,7 +1376,7 @@ public class MagicSpecials extends BaseCombatContent {
 		combat.heroBaneProc(damage);
 		statScreenRefresh();
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
-		if (monster.lust >= monster.maxLust()) doNext(endLustVictory);
+		if (monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
 		if (player.perkv1(IMutationsLib.HeartOfTheStormIM) >= 3 && rand(100) < 10 && !monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.Stunned,2,0,0,0);
 		enemyAI();
 	}
@@ -1445,7 +1445,7 @@ public class MagicSpecials extends BaseCombatContent {
 		statScreenRefresh();
 		player.createStatusEffect(StatusEffects.lustStorm,0,0,0,0);
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
-		if (monster.lust >= monster.maxLust()) doNext(endLustVictory);
+		if (monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
 		else enemyAI();
 	}
 
@@ -1573,6 +1573,37 @@ public class MagicSpecials extends BaseCombatContent {
 		return miniOniscored;
 	}
 
+	private function valaReflect(damage:Number, attack:String, takeDmgF:Function, applyBlizzard:Boolean = false):Boolean {
+		if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
+			outputText("Vala beats her wings with surprising strength, blowing the " + attack + " back at you! ");
+			if(player.hasPerk(PerkLib.Evade) && rand(2) == 0) {
+				outputText("You dive out of the way and evade it!");
+			}
+			else if(player.hasPerk(PerkLib.Flexibility) && rand(4) == 0) {
+				outputText("You use your flexibility to barely fold your body out of the way!");
+			}
+			else if(applyBlizzard && player.hasStatusEffect(StatusEffects.Blizzard)) {
+				outputText("  <b>Surrounding you blizzard at the cost of loosing some of it remaining power massively dissipated most of the " + attack + " energy, causing it to hit with far less force!</b>");
+				player.addStatusValue(StatusEffects.Blizzard,1,-1);
+				damage = Math.round(0.2 * damage);
+				damage = player.takeFireDamage(damage);
+				combat.CommasForDigits(damage);
+			}
+			//Determine if blocked!
+			else if (combatBlock(true)) {
+				outputText("You manage to block your own " + attack + " with your [shield]!");
+			}
+			else {
+				damage = takeDmgF(damage);
+				outputText("Your own " + attack + " smacks into your face! ");
+				combat.CommasForDigits(damage);
+			}
+			outputText("\n\n");
+			return true;
+		} else return false;
+	}
+
+
 	public function phoenixfireBreath():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
@@ -1626,30 +1657,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("  Despite the heavy impact caused by your attack, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
-		else if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
-			outputText("Vala beats her wings with surprising strength, blowing the fireball back at you! ");
-			if(player.hasPerk(PerkLib.Evade) && rand(2) == 0) {
-				outputText("You dive out of the way and evade it!");
-			}
-			else if(player.hasPerk(PerkLib.Flexibility) && rand(4) == 0) {
-				outputText("You use your flexibility to barely fold your body out of the way!");
-			}
-			else if(player.hasStatusEffect(StatusEffects.Blizzard)) {
-				outputText("  <b>Surrounding you blizzard at the cost of loosing some of it remaining power massively dissipated most of the fireball energy, causing it to hit with far less force!</b>");
-				player.addStatusValue(StatusEffects.Blizzard,1,-1);
-				damage = Math.round(0.2 * damage);
-			}
-			//Determine if blocked!
-			else if (combatBlock(true)) {
-				outputText("You manage to block your own fire with your [shield]!");
-			}
-			else {
-				damage = player.takeFireDamage(damage);
-				outputText("Your own fire smacks into your face! ");
-				combat.CommasForDigits(damage);
-			}
-			outputText("\n\n");
-		}
+		else if (valaReflect(damage, "fire breath", player.takeFireDamage, true)) {}
 		//Goos burn
 		else if(monster.short == "goo-girl") {
 			outputText(" Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy [monster color] skin has lost some of its shimmer. ");
@@ -1818,7 +1826,7 @@ public class MagicSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		doNext(playerMenu);
-		if (monster.lust >= monster.maxLust()) doNext(endLustVictory);
+		if (monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
 		else if (monster.HP <= monster.minHP()) doNext(endHpVictory);
 		else enemyAI();
 	}
@@ -1881,25 +1889,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("  Despite the heavy impact caused by your attack, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
-		else if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
-			outputText("Vala beats her wings with surprising strength, blowing the acid spit back at you! ");
-			if(player.hasPerk(PerkLib.Evade) && rand(2) == 0) {
-				outputText("You dive out of the way and evade it!");
-			}
-			else if(player.hasPerk(PerkLib.Flexibility) && rand(4) == 0) {
-				outputText("You use your flexibility to barely fold your body out of the way!");
-			}
-			//Determine if blocked!
-			else if (combatBlock(true)) {
-				outputText("You manage to block your own fire with your [shield]!");
-			}
-			else {
-				damage = player.takeAcidDamage(damage);
-				outputText("Your own spit smacks into your face! ");
-				combat.CommasForDigits(damage);
-			}
-			outputText("\n\n");
-		}
+		else if (valaReflect(damage, "acid spit", player.takeAcidDamage)) {}
 		else {
 			outputText(" ");
 			doAcidDamage(damage, true, true);
@@ -1967,30 +1957,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("  Despite the heavy impact caused by your attack, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
-		else if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
-			outputText("Vala beats her wings with surprising strength, blowing the fireball back at you! ");
-			if(player.hasPerk(PerkLib.Evade) && rand(2) == 0) {
-				outputText("You dive out of the way and evade it!");
-			}
-			else if(player.hasPerk(PerkLib.Flexibility) && rand(4) == 0) {
-				outputText("You use your flexibility to barely fold your body out of the way!");
-			}
-			else if(player.hasStatusEffect(StatusEffects.Blizzard)) {
-				outputText("  <b>Surrounding you blizzard at the cost of loosing some of it remaining power massively dissipated most of the fireball energy, causing it to hit with far less force!</b>");
-				player.addStatusValue(StatusEffects.Blizzard,1,-1);
-				damage = Math.round(0.2 * damage);
-			}
-			//Determine if blocked!
-			else if (combatBlock(true)) {
-				outputText("You manage to block your own fire with your [shield]!");
-			}
-			else {
-				damage = player.takeFireDamage(damage);
-				outputText("Your own fire smacks into your face! ");
-				combat.CommasForDigits(damage);
-			}
-			outputText("\n\n");
-		}
+		else if (valaReflect(damage, "azure flame breath", player.takeFireDamage, true)) {}
 		//Goos burn
 		else if(monster.short == "goo-girl") {
 			outputText(" Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy [monster color] skin has lost some of its shimmer. ");
@@ -2077,30 +2044,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("  Despite the heavy impact caused by your roar, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
-		else if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
-			outputText("Vala beats her wings with surprising strength, blowing the fire breath back at you! ");
-			if(player.hasPerk(PerkLib.Evade) && rand(2) == 0) {
-				outputText("You dive out of the way and evade it!");
-			}
-			else if(player.hasPerk(PerkLib.Flexibility) && rand(4) == 0) {
-				outputText("You use your flexibility to barely fold your body out of the way!");
-			}
-			else if(player.hasStatusEffect(StatusEffects.Blizzard)) {
-				outputText("  <b>Surrounding you blizzard at the cost of loosing some of it remaining power massively dissipated most of the fireball energy, causing it to hit with far less force!</b>");
-				player.addStatusValue(StatusEffects.Blizzard,1,-1);
-				damage = Math.round(0.2 * damage);
-			}
-			//Determine if blocked!
-			else if (combatBlock(true)) {
-				outputText("You manage to block your own fire with your [shield]!");
-			}
-			else {
-				damage = player.takeFireDamage(damage);
-				outputText("Your own fire smacks into your face! ");
-				combat.CommasForDigits(damage);
-			}
-			outputText("\n\n");
-		}
+		else if (valaReflect(damage, "fire breath", player.takeFireDamage, true)) {}
 		//Goos burn
 		else if(monster.short == "goo-girl") {
 			outputText(" Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy [monster color] skin has lost some of its shimmer. ");
@@ -2175,25 +2119,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("  Despite the heavy impact caused by your roar, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
-		else if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
-			outputText("Vala beats her wings with surprising strength, blowing the ice breath back at you! ");
-			if(player.hasPerk(PerkLib.Evade) && rand(2) == 0) {
-				outputText("You dive out of the way and evade it!");
-			}
-			else if(player.hasPerk(PerkLib.Flexibility) && rand(4) == 0) {
-				outputText("You use your flexibility to barely fold your body out of the way!");
-			}
-			//Determine if blocked!
-			else if (combatBlock(true)) {
-				outputText("You manage to block your own ice with your [shield]!");
-			}
-			else {
-				damage = player.takeIceDamage(damage);
-				outputText("Your own ice smacks into your face! ");
-				combat.CommasForDigits(damage);
-			}
-			outputText("\n\n");
-		}
+		else if (valaReflect(damage, "ice", player.takeIceDamage)) {}
 		else {
 			if(!monster.hasPerk(PerkLib.Resolute)) {
 				outputText("  [Themonster] reels as your wave of force slams into [monster him] like a ton of rock!  The impact sends [monster him] crashing to the ground, too dazed to strike back. ");
@@ -2258,25 +2184,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("  Despite the heavy impact caused by your roar, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
-		else if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
-			outputText("Vala beats her wings with surprising strength, blowing the lightning breath back at you! ");
-			if(player.hasPerk(PerkLib.Evade) && rand(2) == 0) {
-				outputText("You dive out of the way and evade it!");
-			}
-			else if(player.hasPerk(PerkLib.Flexibility) && rand(4) == 0) {
-				outputText("You use your flexibility to barely fold your body out of the way!");
-			}
-			//Determine if blocked!
-			else if (combatBlock(true)) {
-				outputText("You manage to block your own lightning with your [shield]!");
-			}
-			else {
-				damage = player.takeLightningDamage(damage);
-				outputText("Your own lightning smacks into your face! ");
-				combat.CommasForDigits(damage);
-			}
-			outputText("\n\n");
-		}
+		else if (valaReflect(damage, "lightning breath", player.takeLightningDamage)) {}
 		else {
 			if(!monster.hasPerk(PerkLib.Resolute)) {
 				outputText("  [Themonster] reels as your wave of force slams into [monster him] like a ton of rock!  The impact sends [monster him] crashing to the ground, too dazed to strike back. ");
@@ -2340,25 +2248,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("  Despite the heavy impact caused by your roar, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
-		else if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
-			outputText("Vala beats her wings with surprising strength, blowing the darkness breath back at you! ");
-			if(player.hasPerk(PerkLib.Evade) && rand(2) == 0) {
-				outputText("You dive out of the way and evade it!");
-			}
-			else if(player.hasPerk(PerkLib.Flexibility) && rand(4) == 0) {
-				outputText("You use your flexibility to barely fold your body out of the way!");
-			}
-			//Determine if blocked!
-			else if (combatBlock(true)) {
-				outputText("You manage to block your own darkness with your [shield]!");
-			}
-			else {
-				damage = player.takeDarknessDamage(damage);
-				outputText("Your own darkness smacks into your face! ");
-				combat.CommasForDigits(damage);
-			}
-			outputText("\n\n");
-		}
+		else if (valaReflect(damage, "darkness breath", player.takeDarknessDamage)) {}
 		else {
 			if(!monster.hasPerk(PerkLib.Resolute)) {
 				outputText("  [Themonster] reels as your wave of force slams into [monster him] like a ton of rock!  The impact sends [monster him] crashing to the ground, too dazed to strike back. ");
@@ -2422,25 +2312,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("  Despite the heavy impact caused by your roar, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
-		else if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
-			outputText("Vala beats her wings with surprising strength, blowing the poison breath back at you! ");
-			if(player.hasPerk(PerkLib.Evade) && rand(2) == 0) {
-				outputText("You dive out of the way and evade it!");
-			}
-			else if(player.hasPerk(PerkLib.Flexibility) && rand(4) == 0) {
-				outputText("You use your flexibility to barely fold your body out of the way!");
-			}
-			//Determine if blocked!
-			else if (combatBlock(true)) {
-				outputText("You manage to block your own poison with your [shield]!");
-			}
-			else {
-				damage = player.takePoisonDamage(damage);
-				outputText("Your own poison smacks into your face! ");
-				combat.CommasForDigits(damage);
-			}
-			outputText("\n\n");
-		}
+		else if (valaReflect(damage, "poison breath", player.takePoisonDamage)) {}
 		else {
 			if(!monster.hasPerk(PerkLib.Resolute)) {
 				outputText("  [Themonster] reels as your wave of force slams into [monster him] like a ton of rock!  The impact sends [monster him] crashing to the ground, too dazed to strike back. ");
@@ -2511,25 +2383,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("  Despite the heavy impact caused by your roar, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
-		else if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
-			outputText("Vala beats her wings with surprising strength, blowing the water breath back at you! ");
-			if(player.hasPerk(PerkLib.Evade) && rand(2) == 0) {
-				outputText("You dive out of the way and evade it!");
-			}
-			else if(player.hasPerk(PerkLib.Flexibility) && rand(4) == 0) {
-				outputText("You use your flexibility to barely fold your body out of the way!");
-			}
-			//Determine if blocked!
-			else if (combatBlock(true)) {
-				outputText("You manage to block your own water with your [shield]!");
-			}
-			else {
-				damage = player.takeWaterDamage(damage);
-				outputText("Your own water smacks into your face! ");
-				combat.CommasForDigits(damage);
-			}
-			outputText("\n\n");
-		}
+		else if (valaReflect(damage, "water breath", player.takeWaterDamage)) {}
 		else {
 			if(!monster.hasPerk(PerkLib.Resolute)) {
 				outputText("  [Themonster] reels as your wave of force slams into [monster him] like a ton of rock!  The impact sends [monster him] crashing to the ground, too dazed to strike back. ");
@@ -2593,25 +2447,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("  Despite the heavy impact caused by your roar, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 		}
 		//Special enemy avoidances
-		else if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
-			outputText("Vala beats her wings with surprising strength, blowing the water breath back at you! ");
-			if(player.hasPerk(PerkLib.Evade) && rand(2) == 0) {
-				outputText("You dive out of the way and evade it!");
-			}
-			else if(player.hasPerk(PerkLib.Flexibility) && rand(4) == 0) {
-				outputText("You use your flexibility to barely fold your body out of the way!");
-			}
-			//Determine if blocked!
-			else if (combatBlock(true)) {
-				outputText("You manage to block your own water with your [shield]!");
-			}
-			else {
-				damage = player.takeMagicDamage(damage);
-				outputText("Your own water smacks into your face! ");
-				combat.CommasForDigits(damage);
-			}
-			outputText("\n\n");
-		}
+		else if (valaReflect(damage, "faerie breath", player.takeMagicDamage)) {}
 		else {
 			if(!monster.hasPerk(PerkLib.Resolute)) {
 				outputText("  [Themonster] reels as your wave of force slams into [monster him] like a ton of rock!  The impact sends [monster him] crashing to the ground, too dazed to strike back. ");
@@ -2734,25 +2570,7 @@ public class MagicSpecials extends BaseCombatContent {
 				outputText("  Despite the heavy impact caused by your roar, [themonster] manages to take it at an angle and remain on [monster his] feet and focuses on you, ready to keep fighting.");
 			}
 			//Special enemy avoidances
-			else if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
-				outputText("Vala beats her wings with surprising strength, blowing the darkness breath back at you! ");
-				if(player.hasPerk(PerkLib.Evade) && rand(2) == 0) {
-					outputText("You dive out of the way and evade it!");
-				}
-				else if(player.hasPerk(PerkLib.Flexibility) && rand(4) == 0) {
-					outputText("You use your flexibility to barely fold your body out of the way!");
-				}
-				//Determine if blocked!
-				else if (combatBlock(true)) {
-					outputText("You manage to block your own elemental energy blast with your [shield]!");
-				}
-				else {
-					damage = player.takeMagicDamage(damage);
-					outputText("Your own elemental energy blast smacks into your face! ");
-					combat.CommasForDigits(damage);
-				}
-				outputText("\n\n");
-			}
+			else if (valaReflect(damage, "true dragon breath", player.takeMagicDamage)) {}
 			else {
 				if(!monster.hasPerk(PerkLib.Resolute)) {
 					outputText(" [Themonster] is stunned and");
@@ -2790,7 +2608,57 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.EclipsingShadowSu)) player.addStatusValue(StatusEffects.CounterEclipsingShadow, 3, 1);
 			enemyAI();
 		}
+	}
 
+	public function DragonLustPoisonBreath():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		if (combat.checkConcentration()) return; //Amily concentration
+		if (monster is LivingStatue)
+		{
+			outputText("This thing is just seldom immune to poison like come on its a statue!");
+			enemyAI();
+			return;
+		}
+		//Works similar to bee stinger, must be regenerated over time. Shares the same poison-meter
+		else {
+			outputText("You inhale deeply before releasing a cloud of aphrodisiacs poison on your foe!");
+			var venomType:StatusEffectType = StatusEffects.JabberwockyVenom;
+			var d2Bdcc:Number = 2;
+			var lustDmg2:Number = combat.calculateBasicTeaseDamage(20+rand(10));
+			var poisonScaling:Number = 1;
+			if (monster.plural){
+				d2Bdcc *=5;
+				lustDmg2 *=5
+			}
+			poisonScaling += player.lib/100;
+			poisonScaling += player.tou/100;
+			if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) poisonScaling += 1;
+			if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 1) poisonScaling += 2;
+			if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 2) poisonScaling += 2;
+			if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) poisonScaling += 2;
+			if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 4) poisonScaling += 2;
+			if (player.hasPerk(PerkLib.RacialParagon)) poisonScaling += 0.5;
+			if (player.hasPerk(PerkLib.Apex)) poisonScaling += 0.5;
+			if (player.hasPerk(PerkLib.AlphaAndOmega)) poisonScaling += 0.5;
+			if (player.hasPerk(PerkLib.NaturalArsenal)) poisonScaling += 0.5;
+			lustDmg2 *= poisonScaling;
+			lustDmg2 *= d2Bdcc;
+			monster.teased(Math.round(monster.lustVuln * lustDmg2), true);
+			combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
+			if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) d2Bdcc *= 2;
+			monster.statStore.addBuffObject({tou:-d2Bdcc}, "Poison",{text:"Poison"});
+			if(monster.hasStatusEffect(venomType))
+			{
+				monster.addStatusValue(venomType,2,2);
+				monster.addStatusValue(venomType,1,d2Bdcc);
+			}
+			else monster.createStatusEffect(venomType,d2Bdcc,2,0,0);
+		}
+		outputText("\n\n");
+		player.tailVenom -= player.VenomWebCost() * 5;
+		flags[kFLAGS.VENOM_TIMES_USED] += 1;
+		if (!combatIsOver()) enemyAI();
 	}
 //* Terrestrial Fire
 	public function fireballuuuuu():void {
@@ -2851,32 +2719,7 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		else if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
-			outputText("Vala beats her wings with surprising strength, blowing the fireball back at you! ");
-			if(player.hasPerk(PerkLib.Evade) && rand(2) == 0) {
-				outputText("You dive out of the way and evade it!");
-			}
-			else if(player.hasPerk(PerkLib.Flexibility) && rand(4) == 0) {
-				outputText("You use your flexibility to barely fold your body out of the way!");
-			}
-			else if(player.hasStatusEffect(StatusEffects.Blizzard)) {
-				outputText("  <b>Surrounding you blizzard at the cost of loosing some of it remaining power massively dissipated most of the fireball energy, causing it to hit with far less force!</b>");
-				player.addStatusValue(StatusEffects.Blizzard,1,-1);
-				damage = Math.round(0.2 * damage);
-			}
-			else {
-				//Determine if blocked!
-				if (combatBlock(true)) {
-					outputText("You manage to block your own fire with your [shield]!");
-					combatRoundOver();
-					return;
-				}
-				outputText("Your own fire smacks into your face! ");
-				player.takeFireDamage(damage);
-				combat.CommasForDigits(damage);
-			}
-			outputText("\n\n");
-		}
+		else if (valaReflect(damage, "fireball", player.takeFireDamage, true)) {}
 		else if (monster is Lethice && (monster as Lethice).fightPhase == 2)
 		{
 			//Attack gains burn DoT for 2-3 turns.
@@ -2952,7 +2795,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if(monster.HP <= monster.minHP()) {
 				doNext(endHpVictory);
 			}
-			else if(monster.lust >= monster.maxLust()) {
+			else if(monster.lust >= monster.maxOverLust()) {
 				doNext(endLustVictory);
 			}
 			else enemyAI();
@@ -2977,26 +2820,7 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		else if(monster.short == "Vala" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
-			outputText("  Vala beats her wings with surprising strength, blowing the fireball back at you!  ");
-			if(player.hasPerk(PerkLib.Evade) && rand(2) == 0) {
-				outputText("You dive out of the way and evade it!");
-			}
-			else if(player.hasPerk(PerkLib.Flexibility) && rand(4) == 0) {
-				outputText("You use your flexibility to barely fold your body out of the way!");
-			}
-			else if(player.hasStatusEffect(StatusEffects.Blizzard)) {
-				outputText("  <b>Surrounding you blizzard at the cost of loosing some of it remaining power massively dissipated most of the fireball energy, causing it to hit with far less force!</b>");
-				player.addStatusValue(StatusEffects.Blizzard,1,-1);
-				damage = Math.round(0.2 * damage);
-			}
-			else {
-				damage = int(damage / 6);
-				outputText("Your own fire smacks into your face, arousing you!");
-				dynStats("lus", damage);
-			}
-			outputText("\n");
-		}
+		else if (valaReflect(damage, "hellfire", player.takeLustDamage, true)) {}
 		else {
 			if(monster.inte < 10) {
 				outputText("  Your foe lets out a shriek as their form is engulfed in the blistering flames.");
@@ -3024,7 +2848,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if(monster.HP <= monster.minHP()) {
 			doNext(endHpVictory);
 		}
-		else if(monster.lust >= monster.maxLust()) {
+		else if(monster.lust >= monster.maxOverLust()) {
 			doNext(endLustVictory);
 		}
 		else
@@ -3052,6 +2876,30 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		else outputText("You roar and unleash your savage fury, forgetting about defense from any physical or magical attacks in order to destroy your foe!\n\n");
 		player.createStatusEffect(StatusEffects.Berzerking,berzerkDuration,0,0,0);
+		enemyAI();
+	}
+	public function berzerkG2():void {
+		clearOutput();
+		outputText("Placeholder text that only meantion savage fury reaching Grade 2."+(player.hasPerk(PerkLib.Anger)?" +1 large/massive weapon atk.":"")+" - 50% max over HP.\n\n");
+		player.HP -= Math.round(player.maxOverHP() * 0.5);
+		if (!player.hasPerk(PerkLib.EndlessRage)) player.addStatusValue(StatusEffects.Berzerking, 1, -2);
+		player.addStatusValue(StatusEffects.Berzerking, 2, 1);
+		enemyAI();
+	}
+	public function berzerkG3():void {
+		clearOutput();
+		outputText("Placeholder text that only meantion savage fury reaching Grade 3."+(player.hasPerk(PerkLib.Anger)?" +1 large/massive weapon atk.":"")+" - 50% max over HP.\n\n");
+		player.HP -= Math.round(player.maxOverHP() * 0.5);
+		if (!player.hasPerk(PerkLib.EndlessRage)) player.addStatusValue(StatusEffects.Berzerking, 1, -2);
+		player.addStatusValue(StatusEffects.Berzerking, 2, 1);
+		enemyAI();
+	}
+	public function berzerkG4():void {
+		clearOutput();
+		outputText("Placeholder text that only meantion savage fury reaching Grade 4. +1 large/massive weapon atk. - 50% max over HP.\n\n");
+		player.HP -= Math.round(player.maxOverHP() * 0.5);
+		if (!player.hasPerk(PerkLib.EndlessRage)) player.addStatusValue(StatusEffects.Berzerking, 1, -2);
+		player.addStatusValue(StatusEffects.Berzerking, 2, 1);
 		enemyAI();
 	}
 
@@ -3084,6 +2932,30 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		else outputText("You roar and unleash your lustful fury, forgetting about defense from any sexual attacks or magical attacks in order to destroy your foe!\n\n");
 		player.createStatusEffect(StatusEffects.Lustzerking,lustzerkDuration,0,0,0);
+		enemyAI();
+	}
+	public function lustzerkG2():void {
+		clearOutput();
+		outputText("Placeholder text that only meantion lusty fury reaching Grade 2."+(player.hasPerk(PerkLib.Anger)?" +1 large/massive weapon atk.":"")+" - 50% max over HP.\n\n");
+		player.HP -= Math.round(player.maxOverHP() * 0.5);
+		if (!player.hasPerk(PerkLib.EndlessRage)) player.addStatusValue(StatusEffects.Lustzerking, 1, -2);
+		player.addStatusValue(StatusEffects.Lustzerking, 2, 1);
+		enemyAI();
+	}
+	public function lustzerkG3():void {
+		clearOutput();
+		outputText("Placeholder text that only meantion lusty fury reaching Grade 3."+(player.hasPerk(PerkLib.Anger)?" +1 large/massive weapon atk.":"")+" - 50% max over HP.\n\n");
+		player.HP -= Math.round(player.maxOverHP() * 0.5);
+		if (!player.hasPerk(PerkLib.EndlessRage)) player.addStatusValue(StatusEffects.Lustzerking, 1, -2);
+		player.addStatusValue(StatusEffects.Lustzerking, 2, 1);
+		enemyAI();
+	}
+	public function lustzerkG4():void {
+		clearOutput();
+		outputText("Placeholder text that only meantion lusty fury reaching Grade 4. +1 large/massive weapon atk. - 50% max over HP.\n\n");
+		player.HP -= Math.round(player.maxOverHP() * 0.5);
+		if (!player.hasPerk(PerkLib.EndlessRage)) player.addStatusValue(StatusEffects.Lustzerking, 1, -2);
+		player.addStatusValue(StatusEffects.Lustzerking, 2, 1);
 		enemyAI();
 	}
 
@@ -3345,6 +3217,7 @@ public class MagicSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
 		useMana(80, Combat.USEMANA_MAGIC);
+		combat.darkRitualCheckDamage();
 		var WWCD:Number = 4;
 		if (player.perkv1(IMutationsLib.RatatoskrSmartsIM) >= 3) WWCD -= 1;
 		if (player.hasPerk(PerkLib.NaturalInstincts)) WWCD -= 1;
@@ -3487,6 +3360,7 @@ public class MagicSpecials extends BaseCombatContent {
 		doNext(combatMenu);
 		if (player.perkv1(IMutationsLib.ObsidianHeartIM) >= 3) useMana(50, Combat.USEMANA_MAGIC);
 		else useMana(40, Combat.USEMANA_MAGIC);
+		combat.darkRitualCheckDamage();
 		if (player.cor < 60 && player.perkv1(IMutationsLib.ObsidianHeartIM) >= 1) dynStats("cor", 0.3);
 		if (monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your attack touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your attack!\n\n");
@@ -3623,32 +3497,20 @@ public class MagicSpecials extends BaseCombatContent {
 		checkAchievementDamage(damage);
 		if (player.hasStatusEffect(StatusEffects.HeroBane)) flags[kFLAGS.HERO_BANE_DAMAGE_BANK] += damage;
 	}
-	//(Puppeter)
-	public function nekomataPuppeteer():void {
-		clearOutput();
-		var soulforcecost:int = 10 * soulskillCost() * soulskillcostmulti();/*
-		if (player.tailCount == 2 && player.tailType == Tail.CAT && player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 1) soulforcecost *= 3;*/
-		if (player.tailCount == 2 && player.tailType == Tail.CAT) soulforcecost *= 2;// || player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 1
-		player.soulforce -= soulforcecost;
-		nekomataPuppeteer2();
-	}
-	public function nekomataPuppeteer2():void {
 
-	}
 	//(Ghost Fire)
 	public function nekomataGhostFire():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		var soulforcecost:int = 50 * soulskillCost() * soulskillcostmulti();/*
-		if (player.tailCount == 2 && player.tailType == Tail.CAT && player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 1) soulforcecost *= 3;*/
-		if (player.tailCount == 2 && player.tailType == Tail.CAT) soulforcecost *= 2;// || player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 1
+		var soulforcecost:int = 50 * soulskillCost() * soulskillcostmulti();
+		if (player.tailCount == 2 && player.tailType == Tail.CAT) soulforcecost *= 2;
 		player.soulforce -= soulforcecost;
 		nekomataGhostFire2();
 	}
 	public function nekomataGhostFire2():void {
-		/*if (player.tailCount == 2 && player.tailType == Tail.CAT && player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 1) useMana((150), 3);
-		else */if (player.tailCount == 2 && player.tailType == Tail.CAT) useMana((80), Combat.USEMANA_MAGIC_NOBM);// || player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) >= 1
+		if (player.tailCount == 2 && player.tailType == Tail.CAT) useMana((80), Combat.USEMANA_MAGIC_NOBM);
 		else useMana((40), Combat.USEMANA_MAGIC_NOBM);
+		combat.darkRitualCheckDamage();
 		outputText("Holding out your palm, you conjure ghastly greenish flame that dances across your fingertips.  You launch it at [themonster] with a ferocious throw, and it bursts on impact, showering dazzling emerald sparks everywhere.  ");
 		var damage:Number = (scalingBonusWisdom() * 0.6) + (scalingBonusIntelligence() * 0.4);
 		//Determine if critical hit!
@@ -3716,10 +3578,10 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		spellPerkUnlock();
 		combat.heroBaneProc(damage);
-		if(monster.HP > 0 && monster.lust < monster.maxLust()) enemyAI();
+		if(monster.HP > 0 && monster.lust < monster.maxOverLust()) enemyAI();
 		else {
 			if(monster.HP <= monster.minHP()) doNext(endHpVictory);
-			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
+			if(monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
 		}
 	}
 	//(Basic Fox Fire)
@@ -3732,6 +3594,7 @@ public class MagicSpecials extends BaseCombatContent {
 	}
 	public function basicFoxFire2():void {
 		useMana((60 * kitsuneskillCost()), Combat.USEMANA_MAGIC_NOBM);
+		combat.darkRitualCheckDamage();
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			enemyAI();
@@ -3808,10 +3671,10 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		spellPerkUnlock();
 		combat.heroBaneProc(damage);
-		if(monster.HP > 0 && monster.lust < monster.maxLust()) enemyAI();
+		if(monster.HP > 0 && monster.lust < monster.maxOverLust()) enemyAI();
 		else {
 			if(monster.HP <= monster.minHP()) doNext(endHpVictory);
-			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
+			if(monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
 		}
 	}
 	//Corrupted Fox Fire
@@ -3824,6 +3687,7 @@ public class MagicSpecials extends BaseCombatContent {
 	}
 	public function corruptedFoxFire2():void {
 		useMana((80 * kitsuneskillCost()), Combat.USEMANA_MAGIC_NOBM);
+		combat.darkRitualCheckDamage();
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			enemyAI();
@@ -3906,10 +3770,10 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		spellPerkUnlock();
 		combat.heroBaneProc(damage);
-		if(monster.HP > 0 && monster.lust < monster.maxLust()) enemyAI();
+		if(monster.HP > 0 && monster.lust < monster.maxOverLust()) enemyAI();
 		else {
 			if(monster.HP <= monster.minHP()) doNext(endHpVictory);
-			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
+			if(monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
 		}
 	}
 	//Fused Fox Fire
@@ -3922,6 +3786,7 @@ public class MagicSpecials extends BaseCombatContent {
 	}
 	public function fusedFoxFire2():void {
 		useMana((200 * kitsuneskillCost()), Combat.USEMANA_MAGIC_NOBM);
+		combat.darkRitualCheckDamage();
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			enemyAI();
@@ -4002,10 +3867,10 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		spellPerkUnlock();
 		combat.heroBaneProc(damage);
-		if(monster.HP > 0 && monster.lust < monster.maxLust()) enemyAI();
+		if(monster.HP > 0 && monster.lust < monster.maxOverLust()) enemyAI();
 		else {
 			if(monster.HP <= monster.minHP()) doNext(endHpVictory);
-			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
+			if(monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
 		}
 	}
 	//Pure Fox Fire
@@ -4018,6 +3883,7 @@ public class MagicSpecials extends BaseCombatContent {
 	}
 	public function pureFoxFire2():void {
 		useMana((80 * kitsuneskillCost()), Combat.USEMANA_MAGIC_NOBM);
+		combat.darkRitualCheckDamage();
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			enemyAI();
@@ -4099,10 +3965,10 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		spellPerkUnlock();
 		combat.heroBaneProc(damage);
-		if(monster.HP > 0 && monster.lust < monster.maxLust()) enemyAI();
+		if(monster.HP > 0 && monster.lust < monster.maxOverLust()) enemyAI();
 		else {
 			if(monster.HP <= monster.minHP()) doNext(endHpVictory);
-			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
+			if(monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
 		}
 	}
 
@@ -4251,9 +4117,9 @@ public class MagicSpecials extends BaseCombatContent {
 		monster.teased(lustDmg);
 		outputText("\n\n");
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
-		if(monster.lust < monster.maxLust()) enemyAI();
+		if(monster.lust < monster.maxOverLust()) enemyAI();
 		else {
-			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
+			if(monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
 		}
 	}
 
@@ -4295,6 +4161,7 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		useMana(50);
+		combat.darkRitualCheckDamage();
 		outputText("You wave a sign in the air, summoning a huge slime blob which you proceed to hurl at your opponent. [Themonster] is caught in the sticky blast, getting completely soaked in slime. ");
 		var lustDmgF:Number = 20 + rand(6);
 		var lustBoostToLustDmg:Number = 0;
@@ -4325,7 +4192,7 @@ public class MagicSpecials extends BaseCombatContent {
 				lustDmgF += (4 * (1 + player.newGamePlusMod()));
 				break;
 		}
-		if (player.hasPerk(PerkLib.SluttySimplicity) && player.armorName == "nothing") lustDmgF *= (1 + ((10 + rand(11)) / 100));
+		if (player.hasPerk(PerkLib.SluttySimplicity) && player.armor.hasTag(ItemTags.A_REVEALING)) lustDmgF *= (1 + ((10 + rand(11)) / 100));
 		if (player.hasPerk(PerkLib.ElectrifiedDesire)) lustDmgF *= (1 + (player.lust100 * 0.01));
 		if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) lustDmgF *= (1 + combat.historyWhoreBonus());
 		lustBoostToLustDmg += lustDmgF * 0.01;
@@ -4450,6 +4317,7 @@ public class MagicSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
 		useMana(80, Combat.USEMANA_MAGIC);
+		combat.darkRitualCheckDamage();
 		outputText("Your wings start shining with rainbowish light as you charge and unleash a beam of primal energy on [themonster]. ");
 		var damage:Number = (scalingBonusIntelligence() * spellMod());
 		//Determine if critical hit!
@@ -4648,7 +4516,7 @@ public class MagicSpecials extends BaseCombatContent {
 		monster.lust += lusttransfered;
 		outputText("\n\n");
 		doNext(playerMenu);
-		if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
+		if(monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
 		else enemyAI();
 	}
 
@@ -4702,7 +4570,7 @@ public class MagicSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		doNext(playerMenu);
-		if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
+		if(monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
 		else enemyAI();
 	}
 
@@ -4746,7 +4614,7 @@ public class MagicSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		doNext(playerMenu);
-		if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
+		if(monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
 		else enemyAI();
 	}
 
@@ -4754,6 +4622,7 @@ public class MagicSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 3;
 		clearOutput();
 		useMana(100, USEFATG_MAGIC_NOBM);
+		combat.darkRitualCheckDamage();
 		var damage:Number = (scalingBonusIntelligence() * spellMod());
 		//Determine if critical hit!
 		var crit:Boolean = false;

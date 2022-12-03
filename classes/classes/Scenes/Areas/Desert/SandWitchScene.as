@@ -123,7 +123,7 @@ internal function sandwitchRape():void {
 	spriteSelect(SpriteDb.s_sandwich);
 	player.clearStatuses(false);
 	//LUST DEFEAT
-	if(player.lust >= player.maxLust()) {
+	if(player.lust >= player.maxOverLust()) {
 		//BAD END START
 		clearOutput();
 		if(player.biggestTitSize() >= 9 && player.biggestLactation() >= 3) {
@@ -569,7 +569,7 @@ private function rapeSandwitchMultiStone():void {
 internal function beatSandwitch():void {
 	spriteSelect(SpriteDb.s_sandwich);
 	clearOutput();
-	if(monster.lust >= monster.maxLust()) outputText("You smile in satisfaction as the [monster name] drops down on all fours and begins masturbating feverishly.  ");
+	if(monster.lust >= monster.maxOverLust()) outputText("You smile in satisfaction as the [monster name] drops down on all fours and begins masturbating feverishly.  ");
 	else outputText("You smile in satisfaction as the [monster name] drops down on all fours and struggles to rise.  ");
     //lust check
     if (player.lust < 33) {
@@ -578,7 +578,7 @@ internal function beatSandwitch():void {
 		return;
     }
     //more text
-    outputText("\nSadly you realize your own needs have not been met.  Of course you could always fuck the " + (monster.lust >= monster.maxLust() ? "horny " : "") + "witch... Will you rape her?");
+    outputText("\nSadly you realize your own needs have not been met.  Of course you could always fuck the " + (monster.lust >= monster.maxOverLust() ? "horny " : "") + "witch... Will you rape her?");
     outputText("  Of course, just taunting, teasing, and humiliating her for her arrogance would be equally amusing, <b>but it would give her plenty of time to turn the tables...</b>");
     //FuNnY and the real menu
 	menu();
@@ -625,9 +625,8 @@ public function sexMenu():void {
     addButtonIfTrue(7, "Ride", centaurRide, "Req. low corruption and centaur lower body", lowCor && player.isTaur());
     addButtonIfTrue(8, "Taur Rape", centaurRape, "Req. high corruption and centaur lower body", hiCor && player.isTaur());
 	addButtonIfTrue(9, "Lay Eggs", ovipositSandWitches, "Req. oviposition", player.gender > 0 && player.canOviposit());
-    
-	SceneLib.uniqueSexScene.pcUSSPreChecksV2(sexMenu);
 	addButton(14, "Leave", cleanupAfterCombat);
+	SceneLib.uniqueSexScene.pcUSSPreChecksV2(sexMenu);
 }
 
 //RAEP SAND-WITCH!
@@ -955,7 +954,7 @@ private function helpZeWithBirfBabies():void {
 	}
 	//PC is everything else: 
 	else outputText("\n\nEasing a hand under her armpit, you give her the support she needs to hobble along the hot desert sand.  Which direction to hobble in gives you cause for concern though; you don't really know where you are at this point.  Making the only choice you can, you concentrate on the camp.  With the rough picture in mind you tell the sand witch to hold on, before the two of you slowly make your way across the dry desert sea...");
-	doNext(curry(sandwitchBirthsYourMonstrosities, false));
+	doNext(sandwitchBirthsYourMonstrosities, false);
 }
 
 //[Must I really?] (corr >=60)
@@ -976,7 +975,7 @@ private function reluctantlyHelpZeWitch():void {
 	}
 	//PC is everything else:  
 	else outputText("\n\nEasing a hand under her armpit, you give her the support she needs to hobble along the hot desert sand.  Which direction to hobble in gives you cause for concern though; you don't really know where you are at this point.  Making the only choice you can, you concentrate on the camp.  With the rough picture in mind you tell the sand witch to hold on, before the two of you slowly make your way across the dry desert sea...");
-	doNext(curry(sandwitchBirthsYourMonstrosities, true));
+	doNext(sandwitchBirthsYourMonstrosities, true);
 }
 
 
@@ -1020,7 +1019,7 @@ private function sandwitchSpanking():void {
 	if(monster.HP <= monster.minHP()) outputText("  You can't even stand up!");
 	else outputText("  You can't even stop masturbating, can you?");
 	outputText("</i>\"  You kick her hand away, and she tumbles down into a distraught heap, crying softly");
-	if(monster.lust >= monster.maxLust()) outputText(" but still masturbating");
+	if(monster.lust >= monster.maxOverLust()) outputText(" but still masturbating");
 	outputText(".  It's time for some fun!");
 	outputText("\n\nYou grab the helpless witch and flop her onto her back.  She gasps, glaring defiantly up at you while her arms fold closed over the front of her robe, concealing what looks like four large tits beneath.  None of that!  You tickle her sides in a surprise attack, and she starts to laugh.  Then, you move your scurrying fingertips to her belly and down her thighs.  The spellcaster giggles uproariously and tries to bat your arms away, which gives you the opening you need.  You easily slide past her laughter-addled strikes to the course fabric of her brown robes, and with a quick flex of your muscles, you tear the fabric down the middle, exposing a sea of tanned breast-flesh capped with four prominent nipples.");
 	outputText("\n\n\"<i>Nooo,</i>\" the witch protests once her laughter dies down.  Smirking, you start to pinch and pull at her nipples, tweaking the tender nubs until drops of milk are rolling down all four of her ponderous jugs.  You milk her effortlessly, tugging and tweaking the teats idly while you ply her with questions, asking her if she has anything better to do than try to shove rocks up strangers' assholes.  Her tanned cheeks color in embarrassment, but she stays mute, glowering at you while you play with her nipples.");
@@ -1048,7 +1047,7 @@ private function sandwitchSpanking():void {
 	outputText(".  Bruised and orgasmed into exhaustion, you pass out in the sand with your [armor] around your ankles.  Maybe next time you won't waste your chances gloating.");
 	monster.lust = 98;
 	monster.HP = 2;
-	player.lust = player.maxLust();
+	player.lust = player.maxOverLust();
 	flags[kFLAGS.COMBAT_BONUS_XP_VALUE] = monster.XP;
 	cleanupAfterCombat();
 	player.sexReward("vaginalFluids","Dick");

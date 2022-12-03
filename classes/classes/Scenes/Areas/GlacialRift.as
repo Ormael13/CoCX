@@ -388,7 +388,7 @@ use namespace CoC;
 			else if (flags[kFLAGS.FENRIR_COLLAR] < 1) {
 				outputText("This seems like a bad idea. You don't doubt that the dark god has shown you the truth, but you've come this far without making choices you can't take back, and this choice in particular doesn't feel like the place to start. You return your paw to your side and move to leave the cavern, and Fenrir's voice echoes around you one more time.");
 				outputText("\n\n\"<i>Your choice is your own, feeble one. I speak the truth; I shall not force you. You will be a fitting vessel for my power only if you take it willingly, and knowing full well what it entails. Until you decide differently I will wait here, patiently. But know this: it was the weight of Urdr's thread that brought you to this place, and you may find resisting it as hard a burden as the one you already bear. Make no mistake, so long as you bear the shape of my scattered children we will meet here again, and you will have to choose once more.</i>\"");
-				outputText("\n\nOn those word Fenrir falls silent again as you make your way back to your camp.");
+				outputText("\n\nOn these words Fenrir falls silent again as you make your way back to your camp.");
 				flags[kFLAGS.FENRIR_COLLAR] = 1;
 			}
 			doNext(camp.returnToCampUseOneHour);

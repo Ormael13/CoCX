@@ -20,7 +20,7 @@ public class WhitefireSpell extends AbstractWhiteSpell {
 				: "Whitefire is a potent fire based attack that will burn your foe with flickering white flames, ignoring their physical toughness and most armors.",
 			TARGET_ENEMY,
 			TIMING_INSTANT,
-			[TAG_DAMAGING, TAG_FIRE]
+			[TAG_DAMAGING, TAG_FIRE, TAG_TIER1]
 		);
 		baseManaCost = 40;
 		baseWrathCost = ex ? 100 : 0;

@@ -48,7 +48,7 @@ import classes.Scenes.SceneLib;
 			}
 			if (hit) {
 				var heal:int = damageTotal * 10;
-				if (HP + heal > maxHP()) heal = maxHP() - HP;
+				if (HP + heal > maxOverHP()) heal = maxOverHP() - HP;
 				HP += heal;
 				outputText("\n\nEach blow he lands seems to heal his wounds as if he drained the life out of you to replenish his own! <b>([font-heal]+" + heal + "</font>)</b>.\n\n");
 			}
@@ -159,7 +159,7 @@ import classes.Scenes.SceneLib;
 			//can regenerate once even if stunned
 			if (!devourUsed || !monsterIsStunned() && !hasStatusEffect(StatusEffects.Fear) && !monsterIsConstricted()) {
 				devourLife();
-				doNext(curry(SceneLib.combat.combatMenu, false));
+				doNext(SceneLib.combat.combatMenu, false);
 			} else SceneLib.alvinaFollower.marriagePostFight();
 		}
 

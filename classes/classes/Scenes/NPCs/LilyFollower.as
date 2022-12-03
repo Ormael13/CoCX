@@ -662,7 +662,7 @@ import classes.display.SpriteDb;
 			if (DivaScene.instance.isCompanion()) outputText("Diva hears the ruckus, poking her head out, then rolls her eyes. <i>\"Thou art making a mockery of both lovemaking and Dungeons.\"</i> She then goes back to sleep. <i>\"Wake me at thoust peril.\"</i>\n\n");
 			if (player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3) outputText("Jojo notices your display before shielding his eyes and turning away, wanting none of your lewd nonsense.\n\n");
 			if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] > 3) outputText("Siegweird gives a disapproving glower, but otherwise, the paladin does not approach\n\n");
-			if (flags[kFLAGS.ZENJI_PROGRESS] == 8 || flags[kFLAGS.ZENJI_PROGRESS] == 9 || flags[kFLAGS.ZENJI_PROGRESS] == 11) outputText("Zenji remains on top of his tree, peering at you and your bound accomplice, he seems disinterested in the proceedings.\n\n");
+			if (flags[kFLAGS.ZENJI_PROGRESS] == 8 || flags[kFLAGS.ZENJI_PROGRESS] == 9 || ZenjiScenes.isLover()) outputText("Zenji remains on top of his tree, peering at you and your bound accomplice, he seems disinterested in the proceedings.\n\n");
 			if (emberScene.followerEmber()) outputText("Ember sticks "+((flags[kFLAGS.EMBER_GENDER] == 2 || flags[kFLAGS.EMBER_GENDER] == 3)?"her":"his")+" head out of "+((flags[kFLAGS.EMBER_GENDER] == 2 || flags[kFLAGS.EMBER_GENDER] == 3)?"her":"his")+" lair, seeing you establish your dominance. She rolls "+((flags[kFLAGS.EMBER_GENDER] == 2 || flags[kFLAGS.EMBER_GENDER] == 3)?"her":"his")+" eyes at the crass display, taking off.\n\n");
 			if (flags[kFLAGS.LUNA_FOLLOWER] >= 4 && !player.hasStatusEffect(StatusEffects.LunaOff)) outputText("Luna sees the Drider tied up, and is almost disappointed. <i>“[master], if you wanted…”</i> She cuts herself off, shaking her head. She doesn’t leave, however, instead walking to your cabin and coming back with a paddle, a whip, and some other crude toys. She stands not far from you, apparently intending to pass you an implement, should you want one.\n\n");
 			if (followerKiha()) outputText("Kiha stares at your display, mouth wide open, then harrumphs, turning her head away. When she thinks you aren’t looking, she turns her head back, rubbing her knees together nervously. You can see the moisture dripping from her legs.\n\n");
@@ -815,7 +815,8 @@ import classes.display.SpriteDb;
 				.disableIf(player.isGenderless(), "Not for genderless.");
 			if (LilyTalked > 4) addButton(3, "Learning", LearningWithLily).hint("Learning with Lily.");
 			else addButton(3, "House", LearningWithLily);
-			addButton(4, "Spar", LilySpar);
+			addButton(4, "Spar", LilySpar)
+				.disableIf(flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 2, "You need a good sparring ring for that.");
 			if (DriderTown.DriderTownComplete) addButton(13, "Back", SceneLib.dridertown.DriderTownEnter).hint("Return to main DriderTown menu.");
 			addButton(14, "Leave", camp.campLoversMenu);
 		}
@@ -840,7 +841,7 @@ import classes.display.SpriteDb;
 			outputText("Below her slender neck, four E-cup breasts cover her chest, bound only by a set of fetishistic golden chains. Each of her nipples are pierced, with a thin rod of gold through each, keeping the chains in place. Hair flows down her scalp, falling in " + LilyHairColor + " waves past her shoulders, long enough to cover her top pair of E-Cups.\n\n");
 			outputText("Her Spider-half has eight spindly legs, and her spinnerets are visibly active. Lily occasionally leans back, using her fingers to pull silk from her spinnerets, quickly braiding the strands into crude, yet serviceable rope.\n\n");
 			outputText("As she sees you looking at her, Lily gives you a sly three-eyed wink, sliding a hand down her waist, making eye contact with you as she rubs her rapidly swelling ebony pussy lips with one hand.\n\n");
-			doNext(curry(LilyCampFollower, true));
+			doNext(LilyCampFollower, true);
 		}
 		
 		public function LearningWithLily():void {

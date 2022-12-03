@@ -332,17 +332,6 @@ public function timeChangeLarge():Boolean {
     }
     if (checkedMarbleMilk == 0 && model.time.hours == 6 && player.hasPerk(PerkLib.MarblesMilk)) {
         checkedMarbleMilk++;
-        //In prison
-        if (prison.inPrison) {
-            outputText("\nYou get up and complain about not getting your daily dose of Marble's milk. ");
-            if (flags[kFLAGS.PRISON_BITCHED_ABOUT_MARBLE_MILK] == 0) {
-                outputText("Yet oddly, you are still fine. Perhaps addiction to Lacta Bovine milk is a conspiracy? You curse the codex entry for deceiving you about the properties of her milk!");
-            }
-            outputText("\n");
-            flags[kFLAGS.PRISON_BITCHED_ABOUT_MARBLE_MILK]++;
-            doNext(playerMenu);
-            return true;
-        }
         //Marble is at camp
         if (player.hasStatusEffect(StatusEffects.CampMarble)) {
             postAddictionCampMornings(false);
@@ -442,14 +431,14 @@ public function encounterMarbleInitially():void {
 		return;
 	} else sceneHunter.print("Check failed: you're too tall.");
 	outputText("\"<i>My name's Marble, what's yours?</i>\" she asks you. You introduce yourself and exchange a few pleasantries before she asks how she can help you. You tell her that you actually came to help her, explaining that Whitney said she could use a gentle touch. \"<i>Oh that would be nice</i>\", she says \"<i>Spending the night connected to the milking machine was a mistake, and now I need something gentle.</i>\" How will you help her?");
-	outputText("\n\n(Of course, you could always turn around and resolve to avoid her from this point on, if you wanted.)");
+	outputText("\n\n(Of course, you could always turn around and avoid her for now.)");
 	//- player chooses caress, suckle, or rape
 	menu();
 	addButton(1, "Caress", caressMarble);
 	addButton(3, "Suckle", suckleMarble);
 	addButton(2, "Rape", rapeMarble);
 	addButton(4, "Leave", turnOffMarbleForever)
-        .hint(recalling ? "<b>RECALL: Shortcut to the second meeting.</b>" : "She certainly will not be pleased.");
+        .hint(recalling ? "<b>RECALL: Shortcut to the second meeting.</b>" : "She certainly will not be pleased.... but you still will be able to save it.");
 }
 
 private function turnOffMarbleForever():void {
@@ -1361,7 +1350,7 @@ private function extendedMurbelFarmTalkz():void {
 		case 0:
 			outputText("During your talk, Marble asks where you're from.");
 			//[if PC is human] 
-			if(player.race() == "human") {
+			if(!player.isRace(Races.HUMAN, 1, false)) {
 				outputText("  \"<i>The only other human I've ever met is that wandering trader Giacomo,</i>\" she tells you \"<i>but he doesn't really talk about himself.  Maybe you could tell me about humans?  I was wondering where they live and what kind of people they are.</i>\"");
 				//[if PC is shorter then 5 feet] 
 				if(player.tallness < 60) outputText("  Her eyes light up. \"<i>Are they all as cute as you?</i>\"");
@@ -1369,18 +1358,18 @@ private function extendedMurbelFarmTalkz():void {
 				else if(player.tallness > 78) outputText("  \"<i>Are most of you this tall?</i>\"");
 			}
 			//[if PC is cow-girl/cowboi]
-			else if(player.race() == "cow-morph" || player.race() == "cow-boy") {
+			else if(player.isRace(Races.COW, 1, false)) {
 				outputText("  \"<i>It's so nice to see another of my kind,</i>\" she tells you, \"<i>I haven't seen any since I left home.  Where are you from?</i>\"");
 			}
 			//[if PC is a dogmorph] 
-			else if(player.race() == "dog-morph") outputText("  \"<i>I've seen lots of dog-morphs before, are you from Barkersvile?</i>\"");
+			else if(player.isRace(Races.DOG, 1, false)) outputText("  \"<i>I've seen lots of dog-morphs before, are you from Barkersvile?</i>\"");
 			//[if PC is a centaur]
-			else if(player.isTaur()) outputText("  \"<i>I've seen a few centaurs before, but they don't seem to have regular homes.  They're nomads, wandering the plains.  Are you the same?</i>\"");
+			else if(player.isRace(Races.CENTAUR, 1, false)) outputText("  \"<i>I've seen a few centaurs before, but they don't seem to have regular homes.  They're nomads, wandering the plains.  Are you the same?</i>\"");
 			//[if PC is not human, cow-girl/cowboi, dogmorph, or centaur] 
 			else outputText("  \"<i>It's very rare that we get a [race] here.  Are you from around these parts?</i>\"");
 			outputText("\n\nYou sigh and think back for a moment before answering her.");
 			//[if PC is not human anymore] 
-			if(player.race() != "human") outputText("\n\nYou start by explaining that you weren't born as what you appear to be; you were once a human.  Marble is surprised by this, but when you start to explain how you came to be what you are, she stops you.  \"<i>You don't need to tell me the power of some of the things in this world.  Mommy taught me how to find LaBova if I ever lose a part of my bovinity,</i>\" she says, winking at you.  \"<i>I don't know of anything that will give humanity though, so I can't really help you if you want to change back...</i>\"  You tell her that's fine and that you'll look on your own if you need to do so.  \"<i>Well then, where is your human home?</i>\" she asks.");
+			if(!player.isRace(Races.HUMAN, 1, false)) outputText("\n\nYou start by explaining that you weren't born as what you appear to be; you were once a human.  Marble is surprised by this, but when you start to explain how you came to be what you are, she stops you.  \"<i>You don't need to tell me the power of some of the things in this world.  Mommy taught me how to find LaBova if I ever lose a part of my bovinity,</i>\" she says, winking at you.  \"<i>I don't know of anything that will give humanity though, so I can't really help you if you want to change back...</i>\"  You tell her that's fine and that you'll look on your own if you need to do so.  \"<i>Well then, where is your human home?</i>\" she asks.");
 			outputText("\n\nYou tell her that you aren't from this world, and how you actually passed through a portal to get here, and tell her about your home and your family.  However, you avoid any mention of your mission, or about your village's tradition.  Marble pays close attention to everything you say, and seems to really enjoy the story.  At the end, she stops to think about what you told her.  \"<i>That sounds like a really nice place; I wonder if I'll be able to visit some time?  Well sweetie, you've told me about your family; want to hear about mine?</i>\"  Politely, you say you'd be happy to hear about them.");
 			outputText("\n\nShe smiles and tells you that she was the oldest child of a cow-girl named Hana, and a dog-morph named Roland.  She loved her mother and very much appreciated the many lessons that Hana taught her, but she was always closer to Roland.  He was always kind to her and never demanded anything from her, always helping her in what she wanted to do and accepting anything she did without complaints.  It was he that taught her how to survive and how to fight.  She goes on to say that she had two other younger siblings, both cow-girls, before she left home.");
 			outputText("\n\nThe rest of the meal passes without anything of interest being discussed.  Having now finished your meal together, the two of you stand up and Marble shows you out of her room.  As you're leaving, Marble tells you with a smile on her face that she enjoyed your talk together, and hopes that you'll join her for another soon.");
@@ -2763,8 +2752,6 @@ public function marbleBadEndFollowup():void {
 	marbleSprite();
 	clearOutput();
 	//Variables for this function:
-	//morph – keeps track of player's form (human, dog-morph, centaur)
-	var morph:String = player.race(); //Now uses actual race.
 	//approxHeight – short description for approximately how tall is the player is, (very short, short, average height, tall, very tall)
     var approxHeight:String = player.tallness < 54 ? "very short" :
         player.tallness < 66 ?  "short" :
@@ -2778,7 +2765,7 @@ public function marbleBadEndFollowup():void {
 	//SHIFT ABOVE TO END OF RELEVANT BAD ENDS
 	outputText("The young champion moved quickly towards the barn; he was really looking forward to seeing this 'person he might know' as that dog-girl had described.  Maybe it was another one of the champions!  He thought as he hurried over.\n\n");
 	//does he find a human?
-	if(morph=="human") {
+	if(player.isRace(Races.HUMAN, 1, false)) {
 		outputText("His eyes light up as he spots a very attractive ");
 		//does that person have a noteworthy stature?
 		if(approxHeight!="average height")
@@ -2788,7 +2775,7 @@ public function marbleBadEndFollowup():void {
 	}
 	//that's no human!
 	else {
-		outputText("However, he is rather surprised to see a " + player.mf("male", "female") + " " + morph + " leaning against the barn wall next to the entrance.  The young champion approaches the " + morph + " with a little trepidation and calls out to them <i>\"Hello there, uh, Whitney said I might know you.</i>\"  The " + morph + " looks up at him for a few moments before smiling in recognition and saying \"<i>So they picked you next, huh?</i>\"  The young champion starts at this declaration.  \"<i>How do you know who I am?</i>\" he demands indignantly, \"<i>What do you know about my home?</i>\" the other chuckles and says, \"<i>I'm [name], despite my form, I'm still the same person.  Being able to change is one of the joys of this messed up world.</i>\"  The young champion looks uncertainly at them for a few moments before realizing that the " + morph + " is telling the truth!\n\n");
+		outputText("However, he is rather surprised to see a [race] leaning against the barn wall next to the entrance.  The young champion approaches the [race] with a little trepidation and calls out to them <i>\"Hello there, uh, Whitney said I might know you.</i>\"  The [race] looks up at him for a few moments before smiling in recognition and saying \"<i>So they picked you next, huh?</i>\"  The young champion starts at this declaration.  \"<i>How do you know who I am?</i>\" he demands indignantly, \"<i>What do you know about my home?</i>\" the other chuckles and says, \"<i>I'm [name], despite my form, I'm still the same person.  Being able to change is one of the joys of this messed up world.</i>\"  The young champion looks uncertainly at them for a few moments before realizing that the [race] is telling the truth!\n\n");
 		outputText("\"<i>You really are [name]!  I can't believe you left your humanity behind, but I'm glad to have found a friend in this world.  ");
 	}
 	//does he comment on the player's height?
@@ -2834,10 +2821,6 @@ public function marbleBadEndFollowup():void {
 public function marblePoopsBaybees():void {
 	//Normal shitz
 	if (pregnancy.type == PregnancyStore.PREGNANCY_PLAYER) {
-		if (prison.inPrison) {
-			prison.prisonLetter.letterFromMarble();
-			return;
-		}
 		//Gives birth at 28 days
 		outputText("\nMarble rushes up to you with a concerned look on her face.  \"<i>Sweetie, it's time!  Our child is going to come into the world!</i>\"  She squats down and gets you to kneel next to her, putting your hand against her now gaping womanhood.  You can feel that something is starting to come out of the hole, and you start encouraging Marble as she continues to breathe heavily and occasionally grunt from the effort of pushing the child out.\n\n");
 		

@@ -33,7 +33,7 @@ public class Imp extends Monster
 			}
 			else if (pcCameWorms) {
 				outputText("\n\nThe imp grins at your already corrupted state...");
-				player.lust = player.maxLust();
+				player.lust = player.maxOverLust();
 				doNext(SceneLib.impScene.impRapesYou);
 			}
 			else if (EvangelineFollower.EvangelineAffectionMeter == 1) {

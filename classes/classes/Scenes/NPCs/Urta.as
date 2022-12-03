@@ -4036,7 +4036,7 @@ private function fillMeUpPleaseUrta():void {
 	outputText(".");
 	if(player.pregnancyIncubation > 0 && player.pregnancyIncubation < 150) outputText("  You may have been pregnant before, but you're beyond pregnant now... with cum AND child.");
 	//{Goo:
-	if(player.isGoo() && player.vaginalCapacity() > 9000) outputText("  Successive eruptions make you bigger, but your flexible cunt soon grows so bloated that the onrushing injections mostly squirt back out, painting Urta, the bed, and your [legs] white with cum.");
+	if(player.isGoo()) outputText("  Successive eruptions make you bigger, but your flexible cunt soon grows so bloated that the onrushing injections mostly squirt back out, painting Urta, the bed, and your [legs] white with cum.");
 	else outputText("  Successive eruptions do little to bloat you further - your body is stretched to capacity, so the onrushing injections only squirt back out through your entrance, painting Urta, the bed, and your [legs] white with cum.");
 	outputText("\n\nYour pussy, spent after cumming so long, gives up and goes slack, vacantly allowing fluid to flow in and out.  You're equally exhausted by the ordeal and your heavy womb.  Swaying to the side, you lose your balance and slide off, coming to rest next to the still-spurting fox.  She's pumping her tool hard, spraying semen into the air to rain down over both of you.  The fox revels in it, wildly moaning and thrashing, smearing it into her skin and yours.");
 	outputText("\n\nEven after she finishes painting the walls and ceiling white, Urta flops her drooling member onto your ass and allows it to thoroughly cream your crack.  She rubs it all over your butt, squeezing and kneading your backside as she comes down.  After a while, you roll over and return the favor, massaging the fox with her own orgasmic goo.  You're both white messes, but thoroughly, delectably sated.");
@@ -4585,7 +4585,7 @@ private function urtaGooTesticleVoreRuinedOrgasms():void {
 
 	outputText("\n\nYou feel Urta's body shift around a few times, her legs bumping into your new \"home\" as she struggles to get comfortable.  Then, surprisingly, you can hear muffled snoring.  After being subjected to ruined orgasm after ruined orgasm, Urta just fell asleep!  Figuring there's not much you can do about it from in here, you relax your body as well.  As you calm down, you feel your body beginning to lose its shape.  If you think about it, you can regain your form, so rather than worry about it, you let yourself soften, mixing with Urta's spunk as you too drift off into a peaceful sleep.");
 
-	dynStats("lus=", player.maxLust(), "scale", false);
+	dynStats("lus=", player.maxOverLust(), "scale", false);
 	//Next
 	menu();
 	addButton(0,"Next",urtasRuinedOrgasmsFromGooPartII);
@@ -5105,7 +5105,7 @@ private function urtaTakesPCOnWalkies():void {
 	flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] += 5;
 	if(flags[kFLAGS.PC_FETISH] > 0) {
 		outputText("  <b>You're so fucking turned on after exhibiting yourself in such a way that you're dripping EVERYWHERE.  Such a good doggie.</b>");
-		dynStats("lus=", player.maxLust(), "scale", false);
+		dynStats("lus=", player.maxOverLust(), "scale", false);
 	}
 	doNext(camp.returnToCampUseOneHour);
 }

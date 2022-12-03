@@ -352,7 +352,7 @@ use namespace CoC;
 					else outputText("new");
 					outputText(" demon-cock for a few more orgasms.");
 					player.sexReward("vaginalFluids", "Dick");
-					doNext(curry(doBadEndDemon, 1));
+					doNext(doBadEndDemon, 1);
 				}
 				function singleF():void {
 					outputText(multiCockDescriptLight() + " pulsates, straining for just a touch of the succubus' hand.  She paces around you, giggling and toying with you as your " + multiCockDescript() + " seems to follow her, twitching and thickening anytime she takes a step closer.\n\n");
@@ -378,7 +378,7 @@ use namespace CoC;
 					else outputText("new");
 					outputText(" demon-cock for a few more orgasms.");
 					player.sexReward("vaginalFluids", "Dick");
-					doNext(curry(doBadEndDemon, 1));
+					doNext(doBadEndDemon, 1);
 				}
 			}
 			function vagF():void {
@@ -401,7 +401,7 @@ use namespace CoC;
 				outputText("The succubus interrupts your delight by recovering far faster than you, rolling up to a standing position and watching something between your legs.  You prop yourself up on your elbows to see what the fuss is about.  Between your legs something curious is happening – a trickle of pinkish fluid is still escaping your nethers, rolling towards a rapidly expanding pool, along with every other drop of the pink goop.  Before your very eyes the pool grows until every drop of pink fluid has collected together, and it grows upwards, solidifying into a sparkling crystalline shape.\n\n");
 				outputText("Before you can react, she grasps the newly-formed lethicite and noisily begins eating it, her eyes glowing with newfound power.  Watching her makes you more than a little jealous and angry with yourself.  You should've taken the lethicite and gained its power!  No use fretting about it, you can still fuck this succubus for a few hours before you go out in search of your own victims...\n\n");
 				player.sexReward("vaginalFluids", "Vaginal");
-				doNext(curry(doBadEndDemon, 2));
+				doNext(doBadEndDemon, 2);
 			}
 			function hermF():void {
 				//Buh.  Zombie fen need brains.
@@ -427,7 +427,7 @@ use namespace CoC;
 				outputText(" demon-cock for a few more orgasms.");
 				outputText("  Before you get into that, you spy a small piece of pink crystal on the floor between your legs.  You snatch it and devour it before the succubus has a chance and eat it, turning part of your soul into new-found demonic strength before you return to a long night of sex...");
 				player.sexReward("vaginalFluids", "Dick");
-				doNext(curry(doBadEndDemon, 3));
+				doNext(doBadEndDemon, 3);
 			}
 		}
 
@@ -453,7 +453,7 @@ use namespace CoC;
 			function dickF(x:int):void {
 				var x1:int = x + 1;
 				//(LUSTY)
-				if(monster.lust >= monster.maxLust()) outputText("Panting hotly, the succubus staggers towards you, her eyes fixated on the bulge in your crotch.  Dark viscous liquid drips from her dusky folds as her hips undulate hypnotically.  Blue fingers smear the corrupted lubricants over the smooth outer folds of her sex as she lies back enticingly, giving up on anything but bedding you.  In moments your [armor] are on the floor and you approach your prize.\n\n");
+				if(monster.lust >= monster.maxOverLust()) outputText("Panting hotly, the succubus staggers towards you, her eyes fixated on the bulge in your crotch.  Dark viscous liquid drips from her dusky folds as her hips undulate hypnotically.  Blue fingers smear the corrupted lubricants over the smooth outer folds of her sex as she lies back enticingly, giving up on anything but bedding you.  In moments your [armor] are on the floor and you approach your prize.\n\n");
 				//(HP)
 				else outputText("The succubus collapses on the floor, groaning in pain.  Most of her clothes have been destroyed by the combat and her blue skin is marked with deep purple bruises and bloody lacerations.  You undress, straddling your conquest and gazing down on her helpless, curvaceous form.  She looks up at you and forces a smile, licking the blood from a cracked lip and beginning to masturbate for you.\n\n");
 				//START ZE RAEP CANNONZ
@@ -620,7 +620,7 @@ use namespace CoC;
 			);
 
 			function dickF():void {
-				if(player.lust >= player.maxLust()) outputText("Driven half mad with lust, you drop to your knees. Your fingers fly over your body as you pry off every last piece of your [armor], displaying just how hard your alluring opponent has gotten you.  The succubus saunters over, every sinuous step radiating the inhuman sexuality that pours off her skin like heat from a bonfire.\n\n");
+				if(player.lust >= player.maxOverLust()) outputText("Driven half mad with lust, you drop to your knees. Your fingers fly over your body as you pry off every last piece of your [armor], displaying just how hard your alluring opponent has gotten you.  The succubus saunters over, every sinuous step radiating the inhuman sexuality that pours off her skin like heat from a bonfire.\n\n");
 				else outputText("Exhausted, you collapse before the succubus.  She effortlessly slices away your [armor], peeling your possessions away with practiced ease.  In moments, you are stark naked and wholly exposed to your captor.  In spite of yourself, your body begins to respond to her sultry aura, displaying the hardness of your desire and shame immediately.\n\n");
 				outputText("\"<i>Awww, did I get you all <b>HOT</b> and bothered?</i>\" She croons, poising" + (secretary ? " a stocking clad" : "") + " foot above you as her high-heels seem to fade away.  Warm " + (secretary ? "silk" : "skin") + " begins to press against your groin as slender toes curl around the head of your throbbing maleness, your foe having her way with your desire-saturated form.  You mewl pitifully at the sensation, your hips twitching involuntarily against her demonic sole. The slippery surface of her foot squeezes as she expertly strokes you with her foot, delighting in her complete dominance over your easily controlled member.\n\n");
 				//balls or pussy play
@@ -661,7 +661,7 @@ use namespace CoC;
 				}
 			}
 			function clitF():void {
-				if(player.lust >= player.maxLust()) {
+				if(player.lust >= player.maxOverLust()) {
 					outputText("Driven half mad with lust, you shake yourself free from the trappings of your [armor], first revealing your [allbreasts], then " + hipDescript() + " and finally your ");
 					if(player.vaginas.length > 0) outputText(vaginaDescript(0) + " as the last pieces fall away.\n\n");
 					else outputText("bare groin as the last pieces fall away.\n\n");
@@ -737,7 +737,7 @@ use namespace CoC;
 		public function doLossIncubus(mechanic:Boolean = true):void {
 			clearOutput();
 			sceneHunter.selectLossMenu([
-					[0, "Nipplefuck", nippleF, "Req. nipplecunts and lose by lust.", player.hasFuckableNipples() && player.lust >= player.maxLust()],
+					[0, "Nipplefuck", nippleF, "Req. nipplecunts and lose by lust.", player.hasFuckableNipples() && player.lust >= player.maxOverLust()],
 					[1, "Vagfuck", curry(otherF, true), "Req. a vagina.", player.hasVagina()],
 					[2, "Assfuck", curry(otherF, false)]
 				],
@@ -766,7 +766,7 @@ use namespace CoC;
 			}
 			//Tentacle gangbang
 			function otherF(useVag:Boolean):void {
-				if (player.lust >= player.maxLust()) outputText("Molten arousal pumps through your veins, burning away your reason with an unquenchable desire to mate. You drop your top, exposing your [allbreasts] to your foe in a submissive display, ");
+				if (player.lust >= player.maxOverLust()) outputText("Molten arousal pumps through your veins, burning away your reason with an unquenchable desire to mate. You drop your top, exposing your [allbreasts] to your foe in a submissive display, ");
 				else outputText("You lower your top, exposing your nubile form to your foe in a submissive display, ");
 				outputText("lowering your eyes and fixating on [monster his] now-rigid demonic member.  Right before your eyes, it begins splitting and dividing into thinner prehensile penises that squirm about in the air, each one reminding you of a snake on the prowl.  ");
 				if (player.cor < 80) outputText("In a disgusting display");
@@ -982,7 +982,7 @@ use namespace CoC;
 		//Choose your poison
 		public function winAgainstOmnibus():void {
 			clearOutput();
-			if(monster.lust >= monster.maxLust()) {
+			if(monster.lust >= monster.maxOverLust()) {
 				outputText("The omnibus trembles where she stands, her proud demonic dick twitching and pulsating as her desires totally overwhelm her.  The tainted nodules covering the purplish hermaphrodite's member ripple and swell from the base towards the tip, culminating with an explosive eruption of sticky, white demon-seed.  She moans with shame and pleasure, pumping larger and larger volumes of cum onto her office's floor.  She drops to her knees, too exhausted and ashamed by her premature orgasm to continue fighting.\n\n");
 				outputText("\"<i>Ooooh no.  You can't tell the other demons I got off so easily!  I'll never live it down,</i>\" she cries, \"<i>You've beaten me, please if you let me go and promise not to tell the other demons I'll use my magic to give you a gift!  My magic is powerful, I can do nearly ANYTHING with it when the subject desires the changes.</i>\"\n\n");
 			}

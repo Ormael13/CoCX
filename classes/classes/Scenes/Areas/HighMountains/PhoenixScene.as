@@ -51,8 +51,8 @@ public class PhoenixScene extends BaseContent
 		//VICTORY!
 		public function winAgainstPhoenix(many:Boolean = false):void {
 			flags[kFLAGS.PHOENIX_HP_LOSS_COUNTER] = 0; //Reset counter if you win.
-			if (many) outputText("With one final grunt, the phoenixes collapses, barely able to support themself. The once-proud soldiers has been reduced to a " + (monster.lust >= monster.maxLust() ? "dazed, lust-crazed sluts, desperately pulling at their clothing in a mad attempt to expose themself": "a beaten, battered heap; completely unable to resist your advances") + ". Still most of them seems to have some strength left as all lift off leaving behind one of them pressumable the weakest one. ");
-			else outputText("With one final grunt, the phoenix collapses against a nearby rock, barely able to support herself. The once-proud soldier has been reduced to a " + (monster.lust >= monster.maxLust() ? "dazed, lust-crazed slut, desperately pulling at her clothing in a mad attempt to expose herself": "a beaten, battered heap; completely unable to resist your advances") + ". ");
+			if (many) outputText("With one final grunt, the phoenixes collapses, barely able to support themself. The once-proud soldiers has been reduced to a " + (monster.lust >= monster.maxOverLust() ? "dazed, lust-crazed sluts, desperately pulling at their clothing in a mad attempt to expose themself": "a beaten, battered heap; completely unable to resist your advances") + ". Still most of them seems to have some strength left as all lift off leaving behind one of them pressumable the weakest one. ");
+			else outputText("With one final grunt, the phoenix collapses against a nearby rock, barely able to support herself. The once-proud soldier has been reduced to a " + (monster.lust >= monster.maxOverLust() ? "dazed, lust-crazed slut, desperately pulling at her clothing in a mad attempt to expose herself": "a beaten, battered heap; completely unable to resist your advances") + ". ");
 			if (player.lust >= 33) {
 				outputText("What do you do? \n\n");
 				menu();
@@ -66,8 +66,8 @@ public class PhoenixScene extends BaseContent
 				addButton(3, "Ride Anal", rideAnal);
 				addButtonIfTrue(4, "Ride Vaginal", rideVaginal, "Req. a vagina", player.hasVagina());
 				LustyMaidensArmor.addTitfuckButton(7);
+				addButton(14, "Leave", cleanupAfterCombat);
 				SceneLib.uniqueSexScene.pcUSSPreChecksV2(winAgainstPhoenix);
-								addButton(14, "Leave", cleanupAfterCombat);
 			}
 			else cleanupAfterCombat();
 		}
@@ -79,8 +79,8 @@ public class PhoenixScene extends BaseContent
 			clearOutput();
 			//TODO: fix cock finding!
 			outputText("You charge at the defenseless phoenix, quickly disarming her before throwing the defeated girl to the ground, leaving her moaning in the dirt on her back. She grunts, shaking her head vigourously to try and clear her mind, before looking up at you with grim, fierce eyes. ");
-			outputText("\n\n\"<i>I’ll never submit! I am a noble phoenix, not some-</i>\" Completely ignoring her you yank her chain shirt up, revealing the heaving, plush D-cups beneath " + (monster.lust >= monster.maxLust() ? " nipples already standing at attention in the cool air": "") + ". The phoenix gasps at the sudden exposure and turns her head away, squeezing her eyes closed, determined to not look you in the eye as you take your pleasure.");
-			outputText("\n\nKneeling before her, you tear away her loincloth, forcing her legs apart to reveal her " + (monster.lust >= monster.maxLust() ? " slick pussy and half-rigid cock, clearly aroused despite her insistence on not enjoying herself": " tight slit and slowly engorging lizard-shaft, apparently her current condition is more enticing than she wants to admit") + ". You run a pair of fingers along her cleft, trailing it all the way up to the tip of her stirring member before circling around her tip and sliding back down. The phoenix whines pitifully as her prick reacts accordingly, twitching as it hardens at your teasing touch before you bring your fingers back to her slickening entrance and ease them between her soft lips. She groans, gritting her teeth as you go deeper and deeper inside her, wiggling against her walls whilst she soaks your hand with arousal.");
+			outputText("\n\n\"<i>I’ll never submit! I am a noble phoenix, not some-</i>\" Completely ignoring her you yank her chain shirt up, revealing the heaving, plush D-cups beneath " + (monster.lust >= monster.maxOverLust() ? " nipples already standing at attention in the cool air": "") + ". The phoenix gasps at the sudden exposure and turns her head away, squeezing her eyes closed, determined to not look you in the eye as you take your pleasure.");
+			outputText("\n\nKneeling before her, you tear away her loincloth, forcing her legs apart to reveal her " + (monster.lust >= monster.maxOverLust() ? " slick pussy and half-rigid cock, clearly aroused despite her insistence on not enjoying herself": " tight slit and slowly engorging lizard-shaft, apparently her current condition is more enticing than she wants to admit") + ". You run a pair of fingers along her cleft, trailing it all the way up to the tip of her stirring member before circling around her tip and sliding back down. The phoenix whines pitifully as her prick reacts accordingly, twitching as it hardens at your teasing touch before you bring your fingers back to her slickening entrance and ease them between her soft lips. She groans, gritting her teeth as you go deeper and deeper inside her, wiggling against her walls whilst she soaks your hand with arousal.");
 			outputText("\n\nHer neck cranes as she struggles to control herself; slow, heavy breathing accentuating her tits as they tremble gently with each mouthful of air. With a grin you whip your fingers out of her and, as she writhes at the sudden emptiness, force them into her gasping mouth. Eyes shooting wide open, she sputters and shakes her head, but you don’t let up until she’s had a good, long taste, wrapping her reptilian tongue around your dripping digits to make sure she gets a full sampling of her own flavour. The way her tongue constricts your sodden fingers floods your groin with warmth, and you feel your " + (y1 < 1 ? "member": "members") + " starting to thicken as she slurps at her own spunk.");
 			outputText("\n\nWithdrawing your hand you chide her, asking that if she doesn’t want it so much, why is she so wet?");
 			outputText("\n\n\"<i>I-I am not! It’s natural!</i>\" As she speaks, her tongue darts out to lick her lips, almost as if searching for more of her delicious juice.");
@@ -92,7 +92,7 @@ public class PhoenixScene extends BaseContent
 			outputText("\n\nHer voice slowly builds as you slip into her slick, tight tunnel" + (player.cocks.length > 1 ? " and even tighter ass": "") + ", her hips trying to thrust against you in hopes of speeding up your torturously slow intrusion. You resist her, stopping your movement completely as you firmly hold her lower body still. She cries out as you remain motionless inside her, your throat rumbling as her body quakes around you, almost overcome by the blissful feeling of her spasming pussy " + (player.cocks.length > 1 ? " and back passage": "") + ". ");
 			outputText("\n\nHer eyes shoot open and stare into yours pleadingly, seconds ticking by with no movement except for her body trying to coax you further inside, grasping and squeezing your " + (y1 < 1 ? " [cock "+x1+"]": "rods") + ". You simply hold her gaze, watching her face intently as the desperation builds, her expression imploring you to continue. She tries to wrap her legs around your hips, the move spreading her entrance" + (player.cocks.length > 1 ? "s": "") + " slightly wider as her surprisingly strong thighs tighten about your waist.");
 			outputText("\n\nWith her new position she tries to pull you into her, legs tensing with effort. Your grip on her hips increases, fingers sinking into the soft, feathered flesh as you hold her hips away from you. Her snatch quivers around your length as her legs begin to tremble, though you manage to stop yourself from sliding any further into the incredibly horny girl. She must still be exhausted from the fight, considering that it feels as if it takes almost no effort to keep her at bay.");
-			doNext(curry(missionaryWithPhoenixPart2, x1,y1));
+			doNext(missionaryWithPhoenixPart2, x1,y1);
 		}
 		
 		public function missionaryWithPhoenixPart2(x1:int, y1:int):void {
@@ -202,13 +202,13 @@ public class PhoenixScene extends BaseContent
 					sceneHunter.print("shitty bad end warning because none was written. Don't die to HP, you won't even get any scene for that.");
 				}
 			}
-			outputText("You collapse to the rocky ground, far too " + (player.lust >= player.maxLust() ? "turned on": "drained") + " to continue the fight. ");
+			outputText("You collapse to the rocky ground, far too " + (player.lust >= player.maxOverLust() ? "turned on": "drained") + " to continue the fight. ");
 			if (!many) {
 				outputText("The phoenix smirks as you drop, carefully shedding her tattered clothing to expose her lush hips and breasts, then makes her way over to you, swaying sensuously with each step. ");
 				outputText("\n\n\"<i>I was just going to kill you and be done with it,</i>\" her hand grasps your chin as she speaks, turning your head up so that you can see both her gloating face and the throbbing, fully erect lizardcock that juts out above her soaked snatch. \"<i>But after that pathetic performance, I think I've come up with a much better use for you...</i>\"");
 			}
 			else {
-				outputText("You collapse to the rocky ground, far too " + (player.lust >= player.maxLust() ? "turned on": "drained") + " to continue the fight. The phoenixes smirk as you drop, then after short and heated talks one of them carefully sheds her tattered clothing to expose her lush hips and breasts, then makes her way over to you, swaying sensuously with each step. ");
+				outputText("You collapse to the rocky ground, far too " + (player.lust >= player.maxOverLust() ? "turned on": "drained") + " to continue the fight. The phoenixes smirk as you drop, then after short and heated talks one of them carefully sheds her tattered clothing to expose her lush hips and breasts, then makes her way over to you, swaying sensuously with each step. ");
 				outputText("\n\n\"<i>We were just going to kill you and be done with it,</i>\" her hand grasps your chin as she speaks, turning your head up so that you can see both her gloating face and the throbbing, fully erect lizardcock that juts out above her soaked snatch. \"<i>But after that pathetic performance, We've come up with a much better use for you...</i>\"");
 			}
 			if (player.hasCock() && rand(2) == 0)

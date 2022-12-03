@@ -88,30 +88,10 @@ import classes.StatusEffects.Combat.AmilyVenomDebuff;
 		//(Special Attacks)
 		//-Double Attack: Same as a normal attack, but hits twice.
 		public function amilyDoubleAttack():void {
-			var dodged:Number = 0;
+			var dodged:Number = player.getEvasionRoll() + player.getEvasionRoll();
 			var damage:Number = 0;
 			//return to combat menu when finished
 			doNext(EventParser.playerMenu);
-			//Blind dodge change
-			if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
-				dodged++;
-			}
-			//Determine if dodged!
-			if(player.speedDodge(this)>0) {
-				dodged++;
-			}
-			//Determine if evaded
-			if(player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
-				dodged++;
-			}
-			//("Misdirection"
-			if(player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
-				dodged++;
-			}
-			//Determine if cat'ed
-			if(player.hasPerk(PerkLib.Flexibility) && rand(100) < 6) {
-				dodged++;
-			}
 			//Get hit!
 			if(dodged < 2) {
 				//Determine damage - str modified by enemy toughness!
@@ -138,55 +118,14 @@ import classes.StatusEffects.Combat.AmilyVenomDebuff;
 		//-Poison Dart: Deals speed and str damage to the PC. (Not constant)
 		private function amilyDartGo():void
 		{
-			var dodged:Number = 0;
 			if (player.hasStatusEffect(StatusEffects.WindWall)) {
 				outputText(capitalA + short + " attack from her dartgun stops at wind wall weakening it slightly.\n");
 				player.addStatusValue(StatusEffects.WindWall,2,-1);
 				return;
 			}
-			//Blind dodge change
-			if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
-				outputText(capitalA + short + " completely misses you with a blind attack from her dartgun!\n");
-				return;
-			}
-			//Determine if dodged!
-			if (player.speedDodge(this)>0) {
-				dodged = 1;
-			}
-			//Determine if evaded
-			if (player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
-				dodged = 2;
-			}
-			//("Misdirection"
-			if (player.hasPerk(PerkLib.Misdirection) && rand(100) < 15 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
-				dodged = 3;
-			}
-			//Determine if cat'ed
-			if (player.hasPerk(PerkLib.Flexibility) && rand(100) < 15) {
-				dodged = 4;
-			}
 			//Dodged
-			if (dodged > 0) {
+			if (player.getEvasionRoll()) {
 				outputText("Amily dashes at you and swipes her knife rather slowly. You easily dodge the attack; but it was all a feint, her other hands tries to strike at you with a poisoned dart. Luckily you manage to avoid it.");
-				//Add tags for miss/evade/flexibility/etc.
-				switch (dodged) {
-					case 1:
-						outputText(" [Dodge]");
-						break;
-					case 2:
-						outputText(" [Evade]");
-						break;
-					case 3:
-						outputText(" [Misdirect]");
-						break;
-					case 4:
-						outputText(" [Flexibility]");
-						break;
-					default:
-						CoC_Settings.error("");
-						outputText(" <b>[ERROR]</b>");
-						break;
-				}
 			}
 			//Else hit!
 			else {

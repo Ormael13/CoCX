@@ -86,18 +86,18 @@ public class BeeGirlScene extends BaseContent
 				return;
 			}
 			//Bee-morph
-			var isBeeMorph:Boolean = player.race() == "bee-morph";
+			var isBeeMorph:Boolean = player.isRace(Races.BEE, 1, false);
+			var femBee:Boolean = isBeeMorph && player.hasVagina();
 			if (player.hasCock() && (player.findCockWithType(CockTypesEnum.BEE, 1, 50, -1) >= 0 || isBeeMorph && player.biggestCockArea() >= 50)) {
-				if (isBeeMorph && player.hasVagina() && rand(2) == 0) //herms!
-				    beeEncounterAsBeeMorphFemale();
-                else beeEncounterAsBeeMorphMaleOrGiantCock(isBeeMorph);
-				return;
-			}
-			else if (isBeeMorph) {
+				if (!femBee || rand(2) == 0) { //randomize the girl thingy
+					beeEncounterAsBeeMorphMaleOrGiantCock(isBeeMorph);
+					return;
+				}
+			} else sceneHunter.print("Check failed: bee race and cock area greater than 50 (or just a bee cock of this size)");
+			if (femBee) { // if cock thing failed,
 				beeEncounterAsBeeMorphFemale();
 				return;
-			}
-			else sceneHunter.print("Check failed: bee race, cock area greater than 50 (or just big enough bee cock)");
+			} else sceneHunter.print("Check failed: bee race and a pussy.");
 			//Fighs counter
 			if (flags[kFLAGS.BEE_GIRL_COMBAT_LOSSES] + flags[kFLAGS.BEE_GIRL_COMBAT_WINS_WITH_RAPE] + flags[kFLAGS.BEE_GIRL_COMBAT_WINS_WITHOUT_RAPE] >= 5) {
 				if (flags[kFLAGS.BEE_GIRL_COMBAT_LOSSES] > flags[kFLAGS.BEE_GIRL_COMBAT_WINS_WITH_RAPE] + flags[kFLAGS.BEE_GIRL_COMBAT_WINS_WITHOUT_RAPE])
@@ -602,16 +602,10 @@ public class BeeGirlScene extends BaseContent
 				//Boobies!
 				if (player.biggestTitSize() > 1) {
 					outputText("The cool hardness of her hands startles you as she reaches around to massage your ample bosom, tweaking your hard nipples between her fingers");
+				    if (player.breastRows.length > 1) outputText(", leaning around to lick them with her curving sinuous tongue");
 					//if lactating
-					if (player.biggestLactation() > 1) outputText(", humming in surprise as a squirt of milk splatters across the flower's petals.  ");
-					else outputText(".  ");
-				}
-				//Multiboobs!
-				if (player.breastRows.length > 1) {
-					outputText("The cool hardness of her hands startles you as she begins running her hands over your many breasts, tweaking each hard nipple between her fingers, leaning around to lick them with her curving sinuous tongue, and humming softly");
-					//Milk bit
-					if (player.biggestLactation() > 1) outputText(" in surprise as a squirt of milk splashes across the flower's petals.  ");
-					else outputText(".  ");
+					if (player.biggestLactation() > 1) outputText(", humming in surprise as a squirt of milk splatters across the flower's petals");
+					outputText(".  ");
 				}
 				//Continue as normal!
 				outputText("Instinctively, your butt clenches as a wet presence presses tightly against it.  You try to gather your thoughts, but a particularly forceful hum drives them away and totally relaxes you, allowing the bulbous thickness of her ovipositor to slip inside you.   Slowly at first, then with increasing urgency, the bee-girl rocks it further and further inside of you, humming happily and placing a handful of honey before you.   Your tongue darts forwards of its own accord, lapping at the honey");
@@ -836,7 +830,7 @@ public class BeeGirlScene extends BaseContent
 			if (player.cocks[giantCockIndex].cockType == CockTypesEnum.BEE) {
 				outputText("You know the deal by now,");
 			}
-			else if (player.race() == "bee-morph") {
+			else if (player.isRace(Races.BEE, 1, false)) {
 				outputText("All you have to do izzz take thizzz after it hazzz had an hour to zzzet and you’ll be a real man!");
 			}
 			else {
@@ -1239,7 +1233,7 @@ public class BeeGirlScene extends BaseContent
 			//FEMALES - even taurs now
 			//Fan-submitted - female funtimes with a bit o' end breathplay
 			if (player.hasVagina()) {
-				if (player.lust < player.maxLust()) outputText("Barely conscious, you look up as the bee approaches.  ");
+				if (player.lust < player.maxOverLust()) outputText("Barely conscious, you look up as the bee approaches.  ");
 				else outputText("Overcome with desire, you look up as the bee approaches.  ");
 				outputText("You feel weary and weak as your body begins to betray you to the pheromones of your foe.  You try and struggle as she moves over you, holding your hands against the ground as her chest pushes into your face, blocking sunlight and air as you protest. Your [armor] are pulled from your body as the bee-girl moves on top of you.\n\n");
 				outputText("A sharp pain hits your stomach as the bee-girl's stinger penetrates your flesh. Before you can cry out, a sickening warmth floods from the wound, washing away the pain and oozing through your body. Your " + vaginaDescript(0) + " juices flow between your ");
@@ -1492,7 +1486,6 @@ public class BeeGirlScene extends BaseContent
 			addButtonIfTrue(9, "B. Feed", milkAndHoneyAreKindaFunny, "Req. Feeder perk", player.hasStatusEffect(StatusEffects.Feeder));
 			//dildo, uss
 			addButtonIfTrue(10, "Dildo Rape", beeGirlsGetsDildoed, "Req. Deluxe dildo", player.hasKeyItem("Deluxe Dildo") >= 0);
-			SceneLib.uniqueSexScene.pcUSSPreChecksV2(afterfightoptionswithBeeGirl);
 			//leave
 			addButton(14, "Leave", leaveAfterDefeating, true);
 		}
@@ -1604,7 +1597,7 @@ public class BeeGirlScene extends BaseContent
 
 		private function taurRapesBeeWithCock():void {
 			clearOutput();
-			if (monster.lust >= monster.maxLust()) outputText("The bee-girl plops onto her flower with her legs splayed out, letting you get a clear look at her dripping honeypot. She watches you nervously as you approach, letting her stinger slide out in a pointless threat. She seems taken aback when you smile down at her, but returns the gesture with a nervous smile of her own.\n\n");
+			if (monster.lust >= monster.maxOverLust()) outputText("The bee-girl plops onto her flower with her legs splayed out, letting you get a clear look at her dripping honeypot. She watches you nervously as you approach, letting her stinger slide out in a pointless threat. She seems taken aback when you smile down at her, but returns the gesture with a nervous smile of her own.\n\n");
 			else outputText("The bee-girl plops onto her flower, barely conscious from the beating she's taken.  Her legs are splayed drunkenly, letting you get a clear look at her dripping honeypot. She watches through heavily, lidded eyes as you approach, letting her stinger slide out in a weak threat.  She seems taken aback when you smile down at her, but returns the gesture with a nervous, scared smile of her own.\n\n");
 
 			outputText("You reach down and stroke her hair. She flinches from your hand at first before realizing that you genuinely mean her no harm. Her own hand reaches to slide up your arm as you pull yourself down to kiss her. She happily kisses you back, her long, thin, dexterous tongue wrapping around your own.\n\n");

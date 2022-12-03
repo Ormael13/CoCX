@@ -13,6 +13,7 @@ import classes.BodyParts.LowerBody;
 import classes.GlobalFlags.kFLAGS;
 import classes.Monster;
 import classes.PerkLib;
+import classes.Scenes.Combat.Combat;
 import classes.StatusEffects;
 import classes.VaginaClass;
 import classes.Scenes.NPCs.BelisaFollower;
@@ -94,25 +95,9 @@ public class Belisa extends Monster
 		
 		private function belisaWebAttack():void {
 			outputText("\"<i>"+(player.hasStatusEffect(StatusEffects.SparingBelisa)?"Slow down":"Leave me alone")+"!</i>\" She yells in her high-pitched voice, spraying a wide swathe of webbing at you. It sticks to your [skin.type] like glue.");
-			//Blind dodge change
-			if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
-				outputText("She misses completely due to their blindness.");
-			}
 			//Determine if dodged!
-			else if (player.speedDodge(this)>0) {
+			if (player.getEvasionRoll()) {
 				outputText("You dodge away, avoiding the sticky strands!");
-			}
-			//Determine if evaded
-			else if (player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
-				outputText("You evade, avoiding the sticky strands!");
-			}
-			//("Misdirection"
-			else if (player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
-				outputText("Your misleading movements allow you to easily sidestep the sticky strands!");
-			}
-			//Determine if cat'ed
-			else if (player.hasPerk(PerkLib.Flexibility) && rand(100) < 6) {
-				outputText("You throw yourself out of the way with cat-like agility at the last moment, avoiding " + mf("his", "her") + " attack.\n");
 			}
 			//Got hit
 			else {
@@ -174,7 +159,7 @@ public class Belisa extends Monster
 		
 		override protected function performCombatAction():void
 		{
-			if (BelisaFollower.BelisaEncounternum == 3 && flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) SceneLib.belisa.postFightOptionsWhitefireWait();
+			if (BelisaFollower.BelisaEncounternum == 3 && Combat.playerWaitsOrDefends()) SceneLib.belisa.postFightOptionsWhitefireWait();
 			var choice0:Number = rand(4);
 			switch (choice0) {
 				case 0:

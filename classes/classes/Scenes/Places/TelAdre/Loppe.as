@@ -359,7 +359,7 @@ private function talkWithLoppeAboutLoppe():void {
 
 	outputText("\n\n\"<i>I figured it was some kind of trap, so I suggested something the demon didn't expect.  A bout of sex.  And whomever outlasted the other would be the winner.  As you can see... I won.</i>\"  She grins at you.");
 
-	outputText("\n\nYou tell her that was very brave - but very foolish.  How did she know the demon would actually keep her word?  What made her think she could actually win a contest like that, anyway?");
+	outputText("\n\nYou tell her that was very brave - but very foolish.  How did she know the demon would actually keep her word?  What has made  her think she could actually win a contest like that, anyway?");
 
 	outputText("\n\n\"<i>I have always had a very active sex drive.  I didn't know if I was going to win, but I had to try anyways.  The demon said she was very pleased with my choice, and would give me a boon.  So she turned me into this human-bunny-horse hybrid and gave me an even higher sex drive so I'd be a match for her.</i>\"  Loppe's face turns grim.");
 
@@ -964,7 +964,7 @@ private function loppeRidesCocks():void {
 		menu();
 		addButton(0,"Next",loppeRidesYouNoFaceJizz);
 	}
-	dynStats("lus=", player.maxLust(), "scale", false);
+	dynStats("lus=", player.maxOverLust(), "scale", false);
 }
 
 //{If NoFace:

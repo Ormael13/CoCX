@@ -21,7 +21,6 @@ import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armor;
 import classes.Items.Consumable;
-import classes.Items.ConsumableLib;
 import classes.Items.Dynamic.DynamicArmor;
 import classes.Items.Dynamic.DynamicWeapon;
 import classes.Items.DynamicItems;
@@ -57,9 +56,6 @@ import flash.utils.describeType;
 
 public class DebugMenu extends BaseContent
 	{
-		public var flagNames:XML = describeType(kFLAGS);
-		private var lastMenu:Function = null;
-
 		public var setArrays:Boolean = false;
 
 		//Set up equipment arrays
@@ -99,8 +95,7 @@ public class DebugMenu extends BaseContent
 				addButton(1, "Change Stats", statChangeMenu).hint("Change your core stats.");
 				addButton(2, "Flag Editor", flagEditor).hint("Edit any flag. \n\nCaution: This might screw up your save!");
 				addButton(3, "Reset NPC", resetNPCMenu).hint("Choose a NPC to reset.");
-				//addButton(5, "Event Trigger", eventTriggerMenu);
-				//addButton(6, "MeaninglessCorr", toggleMeaninglessCorruption).hint("Toggles the Meaningless Corruption flag. If enabled, all corruption requirements are disabled for scenes.");
+				addButton(6, "MeaninglessCorr", toggleMeaninglessCorruption).hint("Toggles the Meaningless Corruption flag. If enabled, most corruption requirements are disabled for scenes.");
 				if (player.isPregnant()) addButton(4, "Abort Preg", abortPregnancy);
 				addButton(5, "DumpEffects", dumpEffectsMenu).hint("Display your status effects");
 				addButton(7, "HACK STUFFZ", styleHackMenu).hint("H4X0RZ");
@@ -455,7 +450,7 @@ public class DebugMenu extends BaseContent
 				
 				outputText(item.shortName+"\n"+item.longName+"\n"+item.description);
 				
-				doNext(curry(inventory.takeItem, item, itemSpawnMenu));
+				doNext(inventory.takeItem, item, itemSpawnMenu);
 			});
 			addButton(5, "Random", function():void {
 				hideItemParams();
@@ -644,7 +639,6 @@ public class DebugMenu extends BaseContent
 			consumableArray.push(consumables.BC_BEER);
 			consumableArray.push(consumables.BHMTCUM);
 			consumableArray.push(consumables.BIMBOCH);
-			consumableArray.push(consumables.C_BREAD);
 			consumableArray.push(consumables.CCUPCAK);
 			consumableArray.push(consumables.FISHFIL);
 			consumableArray.push(consumables.FR_BEER);
@@ -654,7 +648,6 @@ public class DebugMenu extends BaseContent
 			consumableArray.push(consumables.IZYMILK);
 			consumableArray.push(consumables.M__MILK);
 			consumableArray.push(consumables.MINOCUM);
-			consumableArray.push(consumables.P_BREAD);
 			consumableArray.push(consumables.P_WHSKY);
 			consumableArray.push(consumables.PURPEAC);
 			consumableArray.push(consumables.SHEEPMK);
@@ -775,7 +768,6 @@ public class DebugMenu extends BaseContent
 		}
 
 		private function statChangeAttributeMenu(stats:String = ""):void {
-			var attribute:* = stats;
 			clearOutput();
 			outputText("Increment or decrement by how much?");
 			addButton(0, "Add 1", statChangeApply, stats, 1);
@@ -805,11 +797,10 @@ public class DebugMenu extends BaseContent
 			addButton(1, "Scorpion Tail", changeScorpionTail);
 			addButton(2, "Be Manticore", getManticoreKit).hint("Gain everything needed to become a Manticore-morph.");
 			addButton(3, "Be Dragonne", getDragonneKit).hint("Gain everything needed to become a Dragonne-morph.");
-			addButton(4, "Debug Prison", debugPrison);
 			addButton(5, "Tooltips Ahoy", EngineCore.doNothing).hint("Ahoy! I'm a tooltip! I will show up a lot in future updates!", "Tooltip 2.0");
 			addButton(6, "Lights Out", startLightsOut, testVictoryFunc, testFailureFunc, null, "Test the lights out puzzle, fresh off TiTS!");
 			addButton(7, "Isabella Birth", SceneLib.isabellaFollowerScene.isabellaGivesBirth).hint("Test Isabella giving birth for debugging purposes.", "Trigger Isabella Giving Birth");
-			addButton(8, "BodyPartEditor", bodyPartEditorRoot).hint("Inspect and fine-tune the player body parts");
+			addButton(8, "BodyPartEditor", bodyPartEditorRoot, styleHackMenu).hint("Inspect and fine-tune the player body parts");
 			addButton(9, "Color Picker", colorPickerRoot).hint("HSL picker for skin/hair color");
 			addButton(14, "Back", accessDebugMenu);
 		}
@@ -819,19 +810,7 @@ public class DebugMenu extends BaseContent
                         Parser.recursiveParser("[" + tag + "]").replace(' ', '\xA0')
             }).join(",\t");
 		}
-		private function showChangeOptions(backFn:Function, page:int, constants:Array, functionPageIndex:Function):void {
-			var N:int = 12;
-			for (var i:int = N * page; i < constants.length && i < (page + 1) * N; i++) {
-				var e:* = constants[i];
-				if (e === null || e === undefined) continue;
-				if (e is EnumValue) e = [e.value, e.value+' '+e.id];
-				else if (!(e is Array)) e = [i,e];
-				addButton(i % N, e[1], curry(functionPageIndex, page, e[0])).hint(e[1]);
-			}
-			if (page > 0) addButton(12, "PrevPage", curry(functionPageIndex, page - 1));
-			if ((page +1)*N < constants.length) addButton(13, "NextPage", curry(functionPageIndex, page + 1));
-			addButton(14, "Back", backFn);
-		}
+
 		private var oldColor:String = "";
 		private var pickerMode:String = "skin";
 		private function colorPickerRoot():void {
@@ -957,7 +936,10 @@ public class DebugMenu extends BaseContent
 			flushOutputTextToGUI();
 		}
 		private var bodyEditorControls:Block;
-		public function bodyPartEditorRoot():void {
+
+		private var bodyPartEditorBack:Function = null;
+		public function bodyPartEditorRoot(back:Function):void {
+			if (bodyPartEditorBack == null) bodyPartEditorBack = accessDebugMenu;
 			clearOutput();
 			menu();
 			if (bodyEditorControls) {
@@ -991,7 +973,7 @@ public class DebugMenu extends BaseContent
 					mainView.removeElement(bodyEditorControls);
 					bodyEditorControls = null;
 				}
-				accessDebugMenu();
+				back();
 			});
 		}
 		private function clearBeElements():void {
@@ -1486,56 +1468,15 @@ public class DebugMenu extends BaseContent
 			doNext(styleHackMenu);
 		}
 
-		private function debugPrison():void {
-			clearOutput();
-			doNext(styleHackMenu);
-			//Stored equipment
-			outputText("<b><u>Stored equipment:</u></b>");
-			outputText("\n<b>Stored armour:</b> ");
-			if (flags[kFLAGS.PRISON_STORAGE_ARMOR] != 0) {
-				outputText("" + ItemType.lookupItem(flags[kFLAGS.PRISON_STORAGE_ARMOR]));
-			}
-			else outputText("None");
-			outputText("\n<b>Stored weapon:</b> ");
-			if (flags[kFLAGS.PRISON_STORAGE_WEAPON] != 0) {
-				outputText("" + ItemType.lookupItem(flags[kFLAGS.PRISON_STORAGE_WEAPON]));
-			}
-			else outputText("None");
-			outputText("\n<b>Stored shield:</b> ");
-			if (flags[kFLAGS.PRISON_STORAGE_SHIELD] != 0) {
-				outputText("" + ItemType.lookupItem(flags[kFLAGS.PRISON_STORAGE_SHIELD]));
-			}
-			else outputText("None");
-			//Stored items
-			outputText("\n\n<b><u>Stored items:</u></b>");
-			for (var i:int = 0; i < 10; i++) {
-				if (player.prisonItemSlots[i*2] != null && player.prisonItemSlots[i*2] != undefined) {
-					outputText("\n" + player.prisonItemSlots[i*2]);
-					outputText(" x" + player.prisonItemSlots[(i*2)+1]);
-				}
-			}
-			flushOutputTextToGUI();
-		}
-
-		private function eventTriggerMenu():void {
-			menu();
-			addButton(0, "Anemone", SceneLib.kidAScene.anemoneKidBirthPtII);
-			//addButton(0, "Marae Purify", CoC.instance.highMountains.minervaScene.minervaPurification.purificationByMarae);
-			//addButton(1, "Jojo Purify", CoC.instance.highMountains.minervaScene.minervaPurification.purificationByJojoPart1);
-			//addButton(2, "Rathazul Purify", CoC.instance.highMountains.minervaScene.minervaPurification.purificationByRathazul);
-
-			addButton(14, "Back", accessDebugMenu);
-		}
-
 		private function toggleMeaninglessCorruption():void {
 			clearOutput();
-			if (flags[kFLAGS.MEANINGLESS_CORRUPTION] == 0) {
-				flags[kFLAGS.MEANINGLESS_CORRUPTION] = 1;
-				outputText("<b>Set MEANINGLESS_CORRUPTION flag to 1.</b>");
+			if (flags[kFLAGS.CORRUPTION_TOLERANCE_MODE] == 0) {
+				flags[kFLAGS.CORRUPTION_TOLERANCE_MODE] = 2;
+				outputText("<b>Set CORRUPTION_TOLERANCE_MODE flag to 2.</b>");
 			}
 			else {
-				flags[kFLAGS.MEANINGLESS_CORRUPTION] = 0;
-				outputText("<b>Set MEANINGLESS_CORRUPTION flag to 0.</b>");
+				flags[kFLAGS.CORRUPTION_TOLERANCE_MODE] = 0;
+				outputText("<b>Set CORRUPTION_TOLERANCE_MODE flag to 0.</b>");
 			}
 		}
 
@@ -1595,7 +1536,7 @@ public class DebugMenu extends BaseContent
 		private function resetJojo():void {
 			clearOutput();
 			outputText("Did you do something wrong with Jojo? Corrupted him? Accidentally removed him from the game? No problem!");
-			doYesNo(reallyResetSheila, resetNPCMenu);
+			doYesNo(reallyResetJojo, resetNPCMenu);
 		}
 		private function reallyResetJojo():void {
 			clearOutput();
@@ -1695,7 +1636,7 @@ public class DebugMenu extends BaseContent
 			lightsOutFailureFunction = failureFunction;
 
 			menu();
-			lightsArray = new Array();
+			lightsArray = [];
 
 			for (var i:int = 0; i < 15; i++)
 			{

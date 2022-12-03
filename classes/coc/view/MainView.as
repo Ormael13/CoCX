@@ -344,7 +344,7 @@ public class MainView extends Block {
 			bitmapClass: ButtonBackground4
 		}));
 		topRow.addElement(perksButton = new CoCButton({
-			labelText  : 'Perks',
+			labelText  : 'Perks & Opt.',
 			bitmapClass: ButtonBackground5
 		}));
 		topRow.addElement(appearanceButton = new CoCButton({

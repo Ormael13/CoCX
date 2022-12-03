@@ -161,7 +161,7 @@ public class KitsuneScene extends BaseContent
 				//+15 Lust
 				dynStats("lus", 15, "scale", false);
 			}
-			if ((player.lust >= player.maxLust() || player.inte < 20) && !firstTime) {
+			if ((player.lust >= player.maxOverLust() || player.inte < 20) && !firstTime) {
 				mansion(false, false);
 			}
 			//Else:
@@ -485,7 +485,7 @@ public class KitsuneScene extends BaseContent
 			outputText("Exhausted by the ordeal, you relax into a blissful stupor, only vaguely aware of the feeling of being dragged onto the deck.  The last thing you recall before slipping into unconsciousness is the three sisters crawling up alongside you, coaxing your twice-spent member back to life yet again with their magic, eyes glinting hungrily.");
 			//Increase PC cum production slightly due to residual effects from the kitsunes' magic.
 			player.sexReward("vaginalFluids", "Dick");
-			doNext(curry(outro, false, true));
+			doNext(outro, false, true);
 		} //end stillHungry();
 
 
@@ -587,7 +587,7 @@ public class KitsuneScene extends BaseContent
 
 			outputText("Exhausted by the ordeal, you relax into a blissful stupor, only vaguely aware of the feeling of being dragged onto the deck.  The last thing you recall before slipping into unconsciousness is the three sisters crawling up alongside you, proffering their twisted magics on your spent body.");
 			//Increase PC milk production slightly due to residual effects from the kitsunes' magic. Note: The breast size boost was temporary and shouldn't actually result in a permanent change.
-			doNext(curry(outro, false, false));
+			doNext(outro, false, false);
 		} // end stillHungry();
 
 	private function alrauneVSKitsune():void
@@ -636,7 +636,7 @@ public class KitsuneScene extends BaseContent
 		outputText("\n\nEvery twitch and spasm of your loins finds you feeling a little more fatigued, your eyelids growing heavy with drowsiness as you can feel the life being drained from you.  Panting desperately, the three sisters gradually regain their senses as your flagging " + (a ? "tendril" : "tentacle") + "s slowly lower them down into the water" + ((player.cumQ() > 1000) ? ", their arms wrapped protectively around their " + (a ? "seed" : "tentacle") + "-bloated bellies" : "" ) + ".  Exhausted from your ordeal, you let yourself relax into a blissful stupor, only vaguely aware of the feeling of being dragged up onto the deck.  The last thing you see before going unconscious is the three sisters crawling up around you, coaxing your spent " + (a ? "vine" : "tentacle") + "s back to life, their eyes glinting hungrily.");
 		player.sexReward("vaginalFluids", "Dick");
 		player.sexReward("cum");
-		doNext(curry(outro, true));
+		doNext(outro, true);
 	}
 
 		private function outro(tentacles:Boolean = false, dick:Boolean = true):void {
@@ -1146,7 +1146,6 @@ public class KitsuneScene extends BaseContent
 			}
 			//[Feeder]
 			addButtonIfTrue(10, "Breastfeed", feederTheKitsunes, "Req. Feeder perk", player.hasPerk(PerkLib.Feeder));
-			SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatTheKitsunes);
 			addButton(14, "Leave", leaveKitsune);
 		}
 

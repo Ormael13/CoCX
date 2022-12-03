@@ -47,11 +47,6 @@ public class MagmaSlimeRace extends Race {
 				.customRequirement("skin", "slimy goo skin", function (body:BodyData):Boolean {
 					return body.player.isGooSkin() && body.skinBaseAdj == "slimy"
 				}, +1)
-				.customRequirement("vagina", "Vag of Holding",
-						function (body:BodyData):Boolean {
-							return body.player.vaginalCapacity() >= 9000;
-						},
-						+1)
 				.hasStatusEffect(StatusEffects.SlimeCraving, "Slime Craving", +1)
 				.hasPerk(PerkLib.MagmaSlimeCore, +1);
 		
@@ -67,7 +62,7 @@ public class MagmaSlimeRace extends Race {
 				.noWings(+1)
 				.noGills(+1);
 		
-		buildTier(13, "magma slime")
+		buildTier(12, "magma slime")
 				.namesMaleFemale("magma slime boi", "magma slime girl")
 				.buffs({
 					"str.mult": +0.35,
@@ -77,7 +72,7 @@ public class MagmaSlimeRace extends Race {
 				})
 				.end();
 		
-		buildTier(17, "magma slime queen")
+		buildTier(16, "magma slime queen")
 				.buffs({
 					"str.mult": +0.45,
 					"tou.mult": +1.15,

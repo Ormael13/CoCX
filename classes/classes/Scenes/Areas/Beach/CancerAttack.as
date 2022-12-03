@@ -57,7 +57,7 @@ public class CancerAttack extends Monster
 		}
 
 		private function Grab():void {
-			if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1){
+			if (Combat.playerWaitsOrDefends()){
 				outputText("By observing your environment and staying alert, you manage to dodge just in time as the pincer dig its way back up from under you. \n\n");
 			} else if (player.isFlying()) {
 				outputText("You can’t help but chuckle at the cancer futile attempts to ambush you from beneath, simply flying way out of its reach. You taunt [monster him] still chuckling.\n\n" +

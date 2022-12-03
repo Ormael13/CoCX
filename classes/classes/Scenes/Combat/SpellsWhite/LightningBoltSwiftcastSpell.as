@@ -15,7 +15,7 @@ public class LightningBoltSwiftcastSpell extends AbstractWhiteSpell {
 			"Lightning Bolt is a basic lightning attack that will electrocute your foe with a single bolt of lightning.",
 			TARGET_ENEMY,
 			TIMING_INSTANT,
-			[TAG_DAMAGING, TAG_LIGHTNING]
+			[TAG_DAMAGING, TAG_LIGHTNING, TAG_TIER1]
 		);
 		baseManaCost = 8;
 	}

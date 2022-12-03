@@ -174,13 +174,8 @@ public function ElectraCampMainMenu():void {
 	addButton(2, "Sex", electraSex).hint("Have some sex with Electra");
 	if (flags[kFLAGS.ELECTRA_DAILY_STORM_JEWEL] > 0) addButtonDisabled(3, "Req. Jewel", "You already asked her for a jewel today.");
 	else addButton(3, "Req. jewel", electraStromJewel).hint("Ask Electra for a storm jewel.");
-	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(4, "Spar", electraSpar).hint("Ask Electra for a mock battle with sex for the winner.");/*
-	if (player.hasPerk(PerkLib.BasicLeadership)) {
-		if (flags[kFLAGS.PLAYER_COMPANION_1] == "") addButton(5, "Team", etnaHenchmanOption).hint("Ask Etna to join you in adventures outside camp.");
-		else if (flags[kFLAGS.PLAYER_COMPANION_1] == "Etna") addButton(5, "Team", etnaHenchmanOption).hint("Ask Etna to stay in camp.");
-		else addButtonDisabled(5, "Team", "You already have another henchman with you. Ask him/her to stay at camp before you talk with Etna about accompaning you.");
-	}
-	else addButtonDisabled(5, "Team", "You need to have at least Basic Leadership to form a team.");*/
+	addButton(4, "Spar", electraSpar).hint("Ask Electra for a mock battle with sex for the winner.")
+		.disableIf(flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 2, "You need a good sparring ring for that.");
 	addButton(14, "Back", camp.campLoversMenu);
 }
 

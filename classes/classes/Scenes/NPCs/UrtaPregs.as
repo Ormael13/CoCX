@@ -4,6 +4,7 @@ import classes.BodyParts.Tongue;
 import classes.GeneticMemories.BallsMem;
 import classes.GlobalFlags.*;
 import classes.PregnancyStore;
+import classes.Races;
 import classes.Scenes.Metamorph;
 import classes.Scenes.SceneLib;
 
@@ -2268,7 +2269,7 @@ public function visitTheHouse():void {
 		outputText("\n\n\"<i>Now about that thing I wanted to talk to you about, [name]...</i>\"");
 		
 		//If PC is still human:
-		if(player.race() == "human") outputText("\n\n\"<i>I can't help but notice that you're a human.</i>\"  You are indeed - it is how you were born, you note.");
+		if(player.isRace(Races.HUMAN, 1, false)) outputText("\n\n\"<i>I can't help but notice that you're a human.</i>\"  You are indeed - it is how you were born, you note.");
 		else outputText("\n\nShe twitches her nose.  \"<i>You smell like a human, but you aren't a human...?</i>\"  You figure it can't hurt and explain you were human before coming to Mareth, but gave up your humanity with the magical items that abound in this land.  She nods her head in realisation.");
 		
 		outputText("\n\nYou ask her what business she has with you.");

@@ -462,7 +462,7 @@ public class PhoukaScene extends BaseContent implements TimeAwareInterface {
 					addButton(1, "Anal Ride", phoukaSexFaeriePostCombat); //Works for all
 					if (player.hasCock()) addButton(2, "Fuck Faerie", phoukaSexFaerieFemalePostCombat); //Male or Herm Only
 					SceneLib.uniqueSexScene.pcUSSPreChecksV2(phoukaPlayerWins2);
-									}
+				}
 			}
 		}
 		public function phoukaPlayerWins2():void {
@@ -471,7 +471,7 @@ public class PhoukaScene extends BaseContent implements TimeAwareInterface {
 			addButton(1, "Anal Ride", phoukaSexFaeriePostCombat); //Works for all
 			if (player.hasCock()) addButton(2, "Fuck Faerie", phoukaSexFaerieFemalePostCombat); //Male or Herm Only
 			SceneLib.uniqueSexScene.pcUSSPreChecksV2(phoukaPlayerWins2);
-					}
+		}
 
 		public function phoukaPregBirth():void
 		{

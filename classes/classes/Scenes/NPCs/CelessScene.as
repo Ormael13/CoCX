@@ -522,7 +522,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 					"What task?\n\n"+
 					"<i>\"In the darkest reaches of the forest lurks a terrifying creature of great corruption known as a nightmare. "+
 					"It is anathema to purity and must be disposed of. Slay the nightmare and I will grant you access to the shield.\"</i>\n\n"+
-					"On those word you leave, better seek out this creature as fast as possible.");
+					"On these words you leave, better seek out this creature as fast as possible.");
 					player.createStatusEffect(StatusEffects.CanMeetNightmare,0,0,0,0);
 					_age = _ageCanMeetNightmare;
 					doNext(camp.returnToCampUseOneHour);

@@ -91,7 +91,7 @@ public class SophieScene extends BaseContent implements TimeAwareInterface {
 				}
 				else { //She's in camp and not pregnant
 					if (flags[kFLAGS.SOPHIE_HEAT_COUNTER] == 0) { //Tick over into heat if appropriate
-						if (player.hasCock() && (!prison.inPrison && flags[kFLAGS.IN_INGNAM] == 0)) {
+						if (player.hasCock() && !flags[kFLAGS.IN_INGNAM]) {
 							if (sophieBimbo.bimboSophie()) sophieBimbo.sophieGoesIntoSeason();
 							else sophieFollowerScene.sophieFollowerGoesIntoSeas();
 							flags[kFLAGS.SOPHIE_HEAT_COUNTER] = 720;
@@ -100,12 +100,12 @@ public class SophieScene extends BaseContent implements TimeAwareInterface {
 					}
 					else {
 						flags[kFLAGS.SOPHIE_HEAT_COUNTER]--;
-						if (flags[kFLAGS.SOPHIE_HEAT_COUNTER] == 552 && !prison.inPrison) { //Expire heat if it counts down to 552
+						if (flags[kFLAGS.SOPHIE_HEAT_COUNTER] == 552) { //Expire heat if it counts down to 552
 							if (sophieBimbo.bimboSophie()) sophieBimbo.sophieSeasonExpiration();
 							else sophieFollowerScene.sophieFertilityExpired();
 							needNext = true;
 						}
-						if (model.time.hours == 10 && (!player.hasPerk(PerkLib.LuststickAdapted) || rand(3) == 0) && sophieBimbo.bimboSophie() && !sophieBimbo.sophieIsInSeason() && flags[kFLAGS.SOPHIE_CAMP_EGG_COUNTDOWN] == 0 && !prison.inPrison) {
+						if (model.time.hours == 10 && (!player.hasPerk(PerkLib.LuststickAdapted) || rand(3) == 0) && sophieBimbo.bimboSophie() && !sophieBimbo.sophieIsInSeason() && flags[kFLAGS.SOPHIE_CAMP_EGG_COUNTDOWN] == 0) {
 							sophieBimbo.bimboSophieLustStickSurprise();
 							needNext = true;
 						}
@@ -121,7 +121,7 @@ public class SophieScene extends BaseContent implements TimeAwareInterface {
 					sophieFollowerScene.sophieFollowerIntro();
 					return true;
 				}
-				if (flags[kFLAGS.SLEEP_WITH] == "Sophie" && player.hasCock() && !prison.inPrison) {
+				if (flags[kFLAGS.SLEEP_WITH] == "Sophie" && player.hasCock()) {
 					if (sophieBimbo.bimboSophie() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0 && rand(2) == 0 && player.cockThatFits(sophieBimbo.sophieCapacity()) >= 0) {
 						outputText("\n<b><u>Something odd happens that morning...</u></b>");
 						if (pregnancy.event >= 2) sophieBimbo.fuckYoPregnantHarpyWaifu(true);
@@ -468,7 +468,7 @@ private function cramANippleInIt():void {
     //COMBAT
 	else {
 		//(Lust Win)
-		if(monster.lust >= monster.maxLust()) outputText("Sophie pants and pulls herself up to her knees.  She barely keeps her balance as she rams four of her fingers deep into her dripping pussy, fiddling at her clit with her thumb.  The harpy opens her mouth to beg for your milk with her glossy lips as you slowly undress.\n\n");
+		if(monster.lust >= monster.maxOverLust()) outputText("Sophie pants and pulls herself up to her knees.  She barely keeps her balance as she rams four of her fingers deep into her dripping pussy, fiddling at her clit with her thumb.  The harpy opens her mouth to beg for your milk with her glossy lips as you slowly undress.\n\n");
 		//(HP Win)
 		else outputText("You pull the dazed and defeated harpy up to her knees.  She sways unsteadily as you undress and expose your [allbreasts] to the cool mountain air.   Sophie's eyes open wider as she struggles back to consciousness, and the hungry harpy happily opens her mouth into a wide 'O', begging for your milk.\n\n");
 	}
@@ -1103,7 +1103,7 @@ private function fuckDatClit():void {
 	outputText("It's several hours later when you wake up at the base of the mountain.   Your [armor] is back on, and your gem-pouch feels a little lighter.  Maybe you'll think twice about jamming something as sensitive as your " + clitDescript() + " into a slick vice next time?  Then again, you might have to go visit her again.  You're still tingling from the aftereffects of those orgasms.");
 	monster.lust = 98;
 	monster.HP = 2;
-	player.lust = player.maxLust();
+	player.lust = player.maxOverLust();
 	flags[kFLAGS.COMBAT_BONUS_XP_VALUE] = monster.XP;
 	cleanupAfterCombat();
 	player.sexReward("vaginalFluids","Dick");

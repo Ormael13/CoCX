@@ -24,6 +24,10 @@ public function Raphael() {
 
 private var checkedRussetRogue:int;
 
+public function get dressTimerDisabled():Boolean {
+	return sceneHunter.other;
+}
+
 //Implementation of TimeAwareInterface
 public function timeChange():Boolean {
     checkedRussetRogue = 0; //Make sure we test just once in timeChangeLarge
@@ -35,7 +39,7 @@ public function timeChange():Boolean {
 }
 
 public function timeChangeLarge():Boolean {
-    if (checkedRussetRogue++ == 0 && model.time.hours == 6 && flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] >= 0 && player.hasKeyItem("Camp - Chest") >= 0 && player.gems >= 5 && player.statusEffectv1(StatusEffects.TelAdre) >= 1 && (flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0)) {
+    if (checkedRussetRogue++ == 0 && model.time.hours == 6 && flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] >= 0 && player.hasKeyItem("Camp - Chest") >= 0 && player.gems >= 5 && player.statusEffectv1(StatusEffects.TelAdre) >= 1 && !flags[kFLAGS.IN_INGNAM]) {
         if (flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] <= 0) { //Countdown to finale not currently engaged!
             //If the PC meets his criteria!
             if (RaphaelLikes()) { //Not yet met!  MEETING TIEM!
@@ -51,6 +55,8 @@ public function timeChangeLarge():Boolean {
                         return true;
                     }
                     //Dress followup - Call picnic date prologue!
+                    // First one - when the timer is ticking, first date or date after disgust
+                    // Second one - when the timer is stopped: dating, but not disgusted
                     if (player.armor == armors.R_BDYST && (flags[kFLAGS.RAPHAEL_DRESS_TIMER] > 1 && flags[kFLAGS.RAPHAEL_DRESS_TIMER] <= 4 || flags[kFLAGS.RAPHAEL_DRESS_TIMER] == -1)) {
                         outputText("<b>\nSomething unusual happens that morning...</b>\n");
                         doNext(RaphaelEncounterIIDressFollowup);
@@ -67,8 +73,12 @@ public function timeChangeLarge():Boolean {
                 //Dress countdown - if pc isn't wearing it yet, kick out to
                 //Finale!
                 if (flags[kFLAGS.RAPHAEL_DRESS_TIMER] == 1) {
-                    flags[kFLAGS.RAPHAEL_DRESS_TIMER] = -1;
-                    flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] = 7;
+					if (sceneHunter.other) flags[kFLAGS.RAPHAEL_DRESS_TIMER] = 4; //reset to nice state
+					else {
+						// date is dead, skip to the ending
+						flags[kFLAGS.RAPHAEL_DRESS_TIMER] = -1;
+						flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] = 7;
+					}
                 }
                 //PC get ready for the 2nd encounter and hasn't been
                 //shot down yet?
@@ -337,20 +347,12 @@ private function RaphaelDressPtII():void {
 	inventory.takeItem(armors.R_BDYST, playerMenu);
 }
 
-/*DRESS HERE
-Descriptive: A high society bodysuit. It is as easy to mistake it for ballroom apparel as it is for boudoir lingerie. The thin transparent fabric is so light and airy that it makes avoiding blows a second nature.
-Optional:
-Multiplies evasion ratings. It has crap armor rating.
-~~~*/
-
 
 private function RaphaelEncounterIIDressFollowup():void {
 	//{Encounter two}
 	//{Requirement: PC is wearing High society bodysuit.
 	//Sequence: When PC wakes up the next day.})
 	flags[kFLAGS.RAPHAEL_SECOND_DATE] = 1;
-	//Clear dress countdown.  Its over and done with.
-	flags[kFLAGS.RAPHAEL_DRESS_TIMER] = -1;
 	clearOutput();
     spriteSelect(SpriteDb.s_raphael);
 	if (camp.IsSleeping){
@@ -375,6 +377,8 @@ private function RaphaelEncounterIIDressFollowup():void {
 		flags[kFLAGS.RAPHAEL_DISGUSTED_BY_PC_APPEARANCE] = 0;
 		//[Reject] [Frisk] [Date]
 		simpleChoices("Reject", RaphaelChooseReject, "Frisk", RaphaelChooseFrisk, "Date", RaphaelSelectDate, "", null, "", null);
+		//Clear dress countdown.  Its over and done with.
+		flags[kFLAGS.RAPHAEL_DRESS_TIMER] = -1;
 	}
 	//({If player does not meet the first encounter requirements:}
 	else {
@@ -414,6 +418,7 @@ private function RaphaelEncounterIIDressFollowup():void {
 		doNext(playerMenu);
 		flags[kFLAGS.RAPHAEL_DISGUSTED_BY_PC_APPEARANCE] = 1;
 		//7 days to fix or done with!
+		flags[kFLAGS.RAPHAEL_SECOND_DATE] = 7;
 	}
 }
 
@@ -1386,7 +1391,7 @@ private function raphaelIntroPageTwo():void {
 
 	outputText("\n\n\"<i>It's a public establishment.  It provides homes to treasure seekers, fashion designers, antiquarians and the huddled masses.  I believe the law refers to us as pickpockets, strippers, fences and beggars.</i>\"  He shrugs.  \"<i>Can't say I blame them.  Right now we're having an auction.  You'd be surprised how many of these bored nobles are happy to get acquainted with valuables they'd forgotten about ten years ago.  They think they'll match the ones they still have in their attics... somewhere.</i>\"  He grins.  \"<i>They'll never care to look and in truth, I think they know deep down.  The coming of demons and the ruination of any semblance of a proper economy, it does much to skew people's perception of wealth.  The poor no longer have places to earn any and the rich sit on hoards they can no longer properly spend.  I give them a place that allows them their little indulgences, one that makes them feel wealthy again.  I then spend the proceedings on those that need it. I'm the middle man, the great equalizer.</i>\"  Raphael drifts by and walks further across the roof.");
 
-	outputText("\n\nWhen you wonder what made him equalize your possessions, he winks apologetic.  \"<i>I needed to cool my heels outside the city for a while.  I couldn't stay in the orphanage, nor Tel'Adre with the Quicksilvers breathing down my neck.  It would put too many people at risk.</i>\"  He takes you by the hands and fondles them with his thumbs.  \"<i>The beasts and demons carry little wealth and I remain a thief.  You were the only thing out there allowing me to profess my craft and keep me sane.</i>\"  He kneels before you, staring you in your eyes.  \"<i>And then you saved me, my salvation.</i>\"  He kisses your hand once.");
+	outputText("\n\nWhen you wonder what has made  him equalize your possessions, he winks apologetic.  \"<i>I needed to cool my heels outside the city for a while.  I couldn't stay in the orphanage, nor Tel'Adre with the Quicksilvers breathing down my neck.  It would put too many people at risk.</i>\"  He takes you by the hands and fondles them with his thumbs.  \"<i>The beasts and demons carry little wealth and I remain a thief.  You were the only thing out there allowing me to profess my craft and keep me sane.</i>\"  He kneels before you, staring you in your eyes.  \"<i>And then you saved me, my salvation.</i>\"  He kisses your hand once.");
 
 	menu();
 	addButton(0,"Next",evenMoreRaphaelIntro);

@@ -119,6 +119,10 @@ public class CombatAbility extends BaseCombatContent {
 		name:"Divine Spell",
 		group:"spell"
 	});
+	public static const CAT_SPELL_GREEN:int = EnumValue.add(AllCategories, 11, "SPELL_GREEN", {
+		name:"Green Spell",
+		group:"spell"
+	});
 	
 	public static var AllTags:/*EnumValue*/Array = [];
 	public static const TAG_DAMAGING:int = EnumValue.add(AllTags, 0, 'DAMAGING', {
@@ -180,6 +184,10 @@ public class CombatAbility extends BaseCombatContent {
 	public static const TAG_ACID:int = EnumValue.add(AllTags, 14, 'ACID', {
 		name: 'Acid',
 		desc: "This ability primary element is Acid"
+	});
+	public static const TAG_TIER1:int = EnumValue.add(AllTags, 15, 'TIER1', {
+		name: 'Tier1',
+		desc: "This ability is tier 1"
 	});
 	
 	/**

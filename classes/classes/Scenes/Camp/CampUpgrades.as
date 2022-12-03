@@ -201,13 +201,13 @@ public class CampUpgrades extends BaseContent {
         }
         if (helpers.count >= 2) {
             outputText("\n\nThanks to your assistants, the construction takes only " + formatTime(timeWithMore) + "!");
-            doNext(curry(camp.returnToCamp, timeWithMore));
+            doNext(camp.returnToCamp, timeWithMore);
         } else if (helpers.count == 1) {
             outputText("\n\nThanks to your assistant, the construction takes only " + formatTime(timeWithOne) + ".");
-            doNext(curry(camp.returnToCamp, timeWithOne));
+            doNext(camp.returnToCamp, timeWithOne);
         } else {
             outputText("\n\nIt's a daunting task but you eventually manage to finish it in " + formatTime(timeWithout) + ".");
-            doNext(curry(camp.returnToCamp, timeWithout));
+            doNext(camp.returnToCamp, timeWithout);
         }
     }
 
@@ -535,7 +535,7 @@ public class CampUpgrades extends BaseContent {
         clearOutput();
         outputText("You consider the many people who reside in the camp and realise you could spar with them if you had a ring for it. You proceed to get a rope and some wooden sticks, then build a small provisory ring for your daily sparring matches.");
         flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] += 1;
-        outputText("\n\nYou work an hour on this project but the ring is made. You even moved to it border that training dummy you found in camp after arrival.");
+        outputText("\n\nYou work for an hour, but the ring is made. You even moved to its border that training dummy you've found in camp upon your arrival.");
         player.createStatusEffect(StatusEffects.TrainingNPCsTimersReduction, 6, 0, 0, 0);
         //Gain fatigue.
         var fatigueAmount:int = 50;

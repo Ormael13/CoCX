@@ -631,7 +631,7 @@
         <cell rect="607,70,40,28" name="clotheHead/machinistGoggles" dx="84" dy="32"/>
         <cell rect="486,1574,30,20" name="clotheHead/fairyQueenCirclet" dx="88" dy="38"/>
         <cell rect="1013,12,40,28" name="clotheHead/merchantClotheHat" dx="81" dy="30"/>
-        <cell rect="150,187,49,25" name="clotheHead_bg/warlockSkulls" dx="79" dy="36"/>
+        <cell rect="150,123,49,25" name="clotheHead_bg/warlockSkulls" dx="79" dy="36"/>
 		<cell rect="150,187,49,25" name="clotheHead_behindHorns/darkPriest" dx="79" dy="33"/>
 		<cell rect="201,210,49,25" name="clotheHead_behindHorns/priest" dx="79" dy="33"/>
         <cell rect="607,41,15,13" name="clotheAmulet/GoldStatAmulet" dx="97" dy="65"/>
@@ -801,6 +801,7 @@
         <cell rect="296,1460,49,29" name="breasts/Bliliraune" dx="43" dy="68"/>
         <cell rect="296,1490,49,29" name="breasts/Dliliraune" dx="43" dy="68"/>
         <cell rect="296,1520,49,29" name="breasts/Fliliraune" dx="43" dy="68"/>
+		<cell rect="606,1490,49,29" name="breasts/Gliliraune" dx="43" dy="69"/>
         <cell rect="122,1620,80,102" name="weapon/staffGeneric" dx="38" dy="55"/>
         <cell rect="122,1726,80,102" name="weapon/staffHoly" dx="38" dy="55"/>
         <cell rect="122,1832,80,102" name="weapon/staffUnholy" dx="38" dy="55"/>
@@ -1116,6 +1117,22 @@
         <cell rect="811,170,49,29" name="fullbodyBreast/Fundine" dx="79" dy="68"/>
         <cell rect="861,170,49,29" name="fullbodyBreast/Fsylph" dx="79" dy="68"/>
 		<cell rect="11,170,49,29" name="fullbodyBreast/Fimp" dx="79" dy="67"/>
+		<cell rect="11,530,49,29" name="breasts/Ghuman" dx="79" dy="69"/>
+        <cell rect="61,530,49,29" name="breasts/Gfur" dx="79" dy="69"/>
+        <cell rect="61,530,49,29" name="breasts/Gpanda" dx="79" dy="69"/>
+        <cell rect="111,530,49,29" name="breasts/Gchitin" dx="79" dy="69"/>
+        <cell rect="161,530,49,29" name="breasts/Gbee" dx="79" dy="69"/>
+        <cell rect="211,530,49,29" name="breasts/Gpscales" dx="79" dy="69"/>
+        <cell rect="261,530,49,29" name="breasts/Gscales" dx="79" dy="69"/>
+        <cell rect="311,530,49,29" name="breasts/Gorca" dx="79" dy="69"/>
+        <cell rect="361,530,49,29" name="breasts/Ggoo" dx="79" dy="69"/>
+        <cell rect="661,530,49,29" name="breasts/Gdscales" dx="79" dy="69"/>
+        <cell rect="911,530,49,29" name="breasts/Gshark" dx="79" dy="69"/>
+        <cell rect="711,530,49,29" name="fullbodyBreast/Ggnome" dx="79" dy="69"/>
+        <cell rect="761,530,49,29" name="fullbodyBreast/Gignis" dx="79" dy="69"/>
+        <cell rect="811,530,49,29" name="fullbodyBreast/Gundine" dx="79" dy="69"/>
+        <cell rect="861,530,49,29" name="fullbodyBreast/Gsylph" dx="79" dy="69"/>
+        <cell rect="11,530,49,29" name="fullbodyBreast/Gimp" dx="79" dy="69"/>
         <cell rect="411,110,49,29" name="breasts_pattern/Bpstripe" dx="79" dy="68"/>
         <cell rect="411,140,49,29" name="breasts_pattern/Bstripe" dx="79" dy="69"/>
         <cell rect="411,170,49,29" name="breasts_pattern/Blstripe" dx="79" dy="69"/>
@@ -1241,10 +1258,12 @@
         <cell rect="561,110,49,29" name="overskin/Bpyeti" dx="79" dy="68"/>
         <cell rect="561,140,49,29" name="overskin/Byeti" dx="79" dy="68"/>
         <cell rect="561,170,49,29" name="overskin/Blyeti" dx="79" dy="68"/>
+		<cell rect="561,200,49,29" name="overskin/BHyeti" dx="79" dy="69"/>
         <cell rect="61,80,49,29" name="overskin/BfcaveWyrm" dx="79" dy="68"/>
         <cell rect="611,110,49,29" name="overskin/BpcaveWyrm" dx="79" dy="68"/>
         <cell rect="611,140,49,29" name="overskin/BcaveWyrm" dx="79" dy="68"/>
         <cell rect="611,170,49,29" name="overskin/BlcaveWyrm" dx="79" dy="68"/>
+		<cell rect="611,200,49,29" name="overskin/BHcaveWyrm" dx="79" dy="69"/>
         <cell rect="261,200,49,29" name="overskinpanty/yetipanty" dx="80" dy="99"/>
         <cell rect="311,200,49,29" name="overskinpanty/Ookumukadevenom" dx="75" dy="104"/>
         <cell rect="361,200,49,29" name="overskinpanty/caveWyrm" dx="80" dy="112"/>
@@ -1326,6 +1345,7 @@
 		<cell rect="1161,410,49,29" name="bra/cowBraSmall" dx="79" dy="68"/>
         <cell rect="1161,440,49,29" name="bra/cowBraMedium" dx="79" dy="68"/>
         <cell rect="1161,470,49,29" name="bra/cowBraLarge" dx="79" dy="68"/>
+		<cell rect="1161,530,49,29" name="bra/cowBraMega" dx="79" dy="69"/>
         <cell rect="11,500,49,29" name="panty/goblinTechnomancerPanty" dx="79" dy="99"/>
         <cell rect="61,500,49,29" name="panty/sexyBlackBikiniPanty" dx="79" dy="99"/>
         <cell rect="111,500,49,29" name="panty/sexyAquamarineBikiniPanty" dx="79" dy="99"/>
@@ -2261,6 +2281,27 @@
 						<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
 							<show part="overskin/Blyeti"/>
 						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.F"><!--A-B-->
+							<show part="overskin/Blyeti"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.G"><!--A-B-->
+							<if test="PlayerHasViewableOutfit == false">
+								<if test="PlayerHasABra == false">
+									<show part="overskin/BHyeti"/>
+									<else>
+										<if test="cowBra">
+											<show part="overskin/BHyeti"/>
+											<else>
+												<show part="overskin/Blyeti"/>
+											</else>
+										</if>
+									</else>
+								</if>
+								<else>
+									<show part="overskin/Blyeti"/>
+								</else>
+							</if>
+						</case>
 						<default>
 						</default>
 					</switch>
@@ -2812,6 +2853,27 @@
 				<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
                     <show part="breasts/F$skinx"/>
                 </case>
+				<case test="breastRows[0].breastRating lte BreastCup.F"><!--A-B-->
+                    <show part="breasts/F$skinx"/>
+                </case>
+				<case test="breastRows[0].breastRating lte BreastCup.G"><!--A-B-->
+					<if test="PlayerHasViewableOutfit == false">
+						<if test="PlayerHasABra == false">
+							<show part="breasts/G$skinx"/>
+							<else>
+								<if test="cowBra">
+									<show part="breasts/G$skinx"/>
+									<else>
+										<show part="breasts/F$skinx"/>
+									</else>
+								</if>
+							</else>
+						</if>
+						<else>
+							<show part="breasts/F$skinx"/>
+						</else>
+					</if>
+                </case>
                 <default>
                     <show part="breasts/F$skinx"/>
                 </default>
@@ -2835,6 +2897,27 @@
                 </case>
 				<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
                     <show part="overskin/BlcaveWyrm"/>
+                </case>
+				<case test="breastRows[0].breastRating lte BreastCup.F"><!--A-B-->
+                    <show part="overskin/BlcaveWyrm"/>
+                </case>
+				<case test="breastRows[0].breastRating lte BreastCup.G"><!--A-B-->
+					<if test="PlayerHasViewableOutfit == false">
+						<if test="PlayerHasABra == false">
+							<show part="overskin/BHcaveWyrm"/>
+							<else>
+								<if test="cowBra">
+									<show part="overskin/BHcaveWyrm"/>
+									<else>
+										<show part="overskin/BlcaveWyrm"/>
+									</else>
+								</if>
+							</else>
+						</if>
+						<else>
+							<show part="overskin/BlcaveWyrm"/>
+						</else>
+					</if>
                 </case>
                 <default>
                     <show part="overskin/BlcaveWyrm"/>
@@ -3020,7 +3103,7 @@
                 <show part="arms/yeti"/>
 				<show part="hands/yeti"/>
             </case>
-            <case values="Arms.CAT,Arms.BEAR,Arms.MELKIE">
+            <case values="Arms.RED_PANDA,Arms.CAT,Arms.BEAR,Arms.MELKIE">
                 <show part="hands/fur"/>
                 <show part="hands_bg/fur"/>
 				<if test="ears.type==Ears.PANDA">
@@ -3411,7 +3494,7 @@
                     </default>
                 </switch>
             </case>
-            <case values="LowerBody.BUNNY,LowerBody.KANGAROO,LowerBody.CAT,LowerBody.DOG,LowerBody.FOX,LowerBody.RAIJU,LowerBody.CANINE,LowerBody.WEASEL,LowerBody.RACCOON,LowerBody.FERRET,LowerBody.MOUSE,LowerBody.HINEZUMI,LowerBody.BEAR,LowerBody.SQUIRREL">
+            <case values="LowerBody.RED_PANDA, LowerBody.BUNNY,LowerBody.KANGAROO,LowerBody.CAT,LowerBody.DOG,LowerBody.FOX,LowerBody.RAIJU,LowerBody.CANINE,LowerBody.WEASEL,LowerBody.RACCOON,LowerBody.FERRET,LowerBody.MOUSE,LowerBody.HINEZUMI,LowerBody.BEAR,LowerBody.SQUIRREL">
                 <switch>
                     <case test="legCount==4">
                         <hide part="legs/*"/>
@@ -3686,6 +3769,27 @@
 						</case>
 						<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
 							<show part="breasts/Fliliraune"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.F"><!--A-B-->
+							<show part="breasts/Fliliraune"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.G"><!--A-B-->
+							<if test="PlayerHasViewableOutfit == false">
+								<if test="PlayerHasABra == false">
+									<show part="breasts/Gliliraune"/>
+									<else>
+										<if test="cowBra">
+											<show part="breasts/Gliliraune"/>
+											<else>
+												<show part="breasts/Fliliraune"/>
+											</else>
+										</if>
+									</else>
+								</if>
+								<else>
+									<show part="breasts/Fliliraune"/>
+								</else>
+							</if>
 						</case>
 						<default>
 							<show part="breasts/Fliliraune"/>
@@ -4335,12 +4439,12 @@
                 <case values="CockTypesEnum.DOG,CockTypesEnum.WOLF,CockTypesEnum.FOX">
                     <if test="big">
                         <show part="penis$taur/caninebig$taur"/>
-						<if test="PlayerIsCriticalyAroused">
+						<if test="showDickDrippies">
 								<show part="cum$taur/caninebig$taur"/>
 						</if>
                         <else>
                             <show part="penis$taur/canine$taur"/>
-							<if test="PlayerIsCriticalyAroused">
+							<if test="showDickDrippies">
 								<show part="cum$taur/canine$taur"/>
 							</if>
                         </else>
@@ -4350,12 +4454,12 @@
 				<case values="CockTypesEnum.CAT,CockTypesEnum.DISPLACER">
 					<if test="big">
                         <show part="penis$taur/catbig$taur"/>
-						<if test="PlayerIsCriticalyAroused">
+						<if test="showDickDrippies">
 							<show part="cum$taur/catbig$taur"/>
 						</if>
                         <else>
                             <show part="penis$taur/cat$taur"/>
-							<if test="PlayerIsCriticalyAroused">
+							<if test="showDickDrippies">
 								<show part="cum$taur/cat$taur"/>
 							</if>
                         </else>
@@ -4365,12 +4469,12 @@
                 <case values="CockTypesEnum.LIZARD,CockTypesEnum.DRAGON">
 					<if test="big">
                         <show part="penis$taur/reptilebig$taur"/>
-						<if test="PlayerIsCriticalyAroused">
+						<if test="showDickDrippies">
 							<show part="cum$taur/reptilebig$taur"/>
 						</if>
                         <else>
                             <show part="penis$taur/reptile$taur"/>
-							<if test="PlayerIsCriticalyAroused">
+							<if test="showDickDrippies">
 								<show part="cum$taur/reptile$taur"/>
 							</if>
                         </else>
@@ -4380,12 +4484,12 @@
                 <case values="CockTypesEnum.HORSE">
 					<if test="big">
                         <show part="penis$taur/horsebig$taur"/>
-						<if test="PlayerIsCriticalyAroused">
+						<if test="showDickDrippies">
 							<show part="cum$taur/horsebig$taur"/>
 						</if>
                         <else>
                             <show part="penis$taur/horse$taur"/>
-							<if test="PlayerIsCriticalyAroused">
+							<if test="showDickDrippies">
 								<show part="cum$taur/horse$taur"/>
 							</if>
                         </else>
@@ -4395,12 +4499,12 @@
                 <case values="CockTypesEnum.BEE">
                     <if test="big">
                         <show part="penis$taur/chitinbig$taur"/>
-						<if test="PlayerIsCriticalyAroused">
+						<if test="showDickDrippies">
 							<show part="cum$taur/humanbig$taur"/>
 						</if>
                         <else>
                             <show part="penis$taur/chitin$taur"/>
-							<if test="PlayerIsCriticalyAroused">
+							<if test="showDickDrippies">
 								<show part="cum$taur/human$taur"/>
 							</if>
                         </else>
@@ -4429,12 +4533,12 @@
 				<case values="CockTypesEnum.DOG">
                     <if test="big">
                         <show part="penis$taur/caninebig$taur"/>
-						<if test="PlayerIsCriticalyAroused">
+						<if test="showDickDrippies">
 							<show part="cum$taur/caninebig$taur"/>
 						</if>
                         <else>
                             <show part="penis$taur/canine$taur"/>
-							<if test="PlayerIsCriticalyAroused">
+							<if test="showDickDrippies">
 								<show part="cum$taur/canine$taur"/>
 							</if>
                         </else>
@@ -4465,12 +4569,12 @@
 						<if test="skin.base.pattern==Pattern.ORCA_UNDERBODY or skin.base.pattern==Pattern.SEA_DRAGON_UNDERBODY">
 							<if test="big">
 								<show part="penis$taur/human2big$taur"/>
-								<if test="PlayerIsCriticalyAroused">
+								<if test="showDickDrippies">
 									<show part="cum$taur/humanbig$taur"/>
 								</if>
 								<else>
 									<show part="penis$taur/human2$taur"/>
-									<if test="PlayerIsCriticalyAroused">
+									<if test="showDickDrippies">
 										<show part="cum$taur/human$taur"/>
 									</if>
 								</else>
@@ -4478,12 +4582,12 @@
 							<else>
 								<if test="big">
 									<show part="penis$taur/sharkbig$taur"/>
-									<if test="PlayerIsCriticalyAroused">
+									<if test="showDickDrippies">
 										<show part="cum$taur/humanbig$taur"/>
 									</if>
 									<else>
 										<show part="penis$taur/shark$taur"/>
-										<if test="PlayerIsCriticalyAroused">
+										<if test="showDickDrippies">
 											<show part="cum$taur/human$taur"/>
 										</if>
 									</else>
@@ -4493,12 +4597,12 @@
 						<else>
 							<if test="big">
 								<show part="penis$taur/humanbig$taur"/>
-								<if test="PlayerIsCriticalyAroused">
+								<if test="showDickDrippies">
 									<show part="cum$taur/humanbig$taur"/>
 								</if>
 								<else>
 									<show part="penis$taur/human$taur"/>
-									<if test="PlayerIsCriticalyAroused">
+									<if test="showDickDrippies">
 										<show part="cum$taur/human$taur"/>
 									</if>
 								</else>

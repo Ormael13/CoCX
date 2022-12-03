@@ -647,7 +647,7 @@ private function sheilaReconcileKay2():void {
 	
 	outputText("\n\n\"<i>You make it sound like it's only the three blokes and yours truly huddled in a cave for warmth,</i>\" she responds, finally.  \"<i>Sorry, I know I've never said otherwise; just a funny thought.  Actually we're part of a little hidden alcove, village-sized, with over fifteen families.  Everyone I've ever met that's like me lives in a similar enclave, led by a political and quasi-religious yobbo");
 	//[(pc is kangaroo)
-	if(player.race() == "kangaroo-morph") outputText(" - except you, I suppose");
+	if(player.isRace(Races.KANGAROO, 1, false)) outputText(" - except you, I suppose");
 	outputText(".  We trade our goods in prearranged op shops and dead drops but avoid bringing outsiders into our own settlements, even when they're right corkers.</i>\"");
 	
 	outputText("\n\nYou press her on the last point.  \"<i>Well, what you don't know, you can't reveal when the demons take you, right?</i>\" she answers.  \"<i>I dunno if I should tell you this, but... the other reason has to do with our bodies.</i>\"  She looks over at you, searching your face for something inscrutable; you compose a mask of patient, perfect attention as you chew another mouthful of meat.  \"<i>Y'see, we're very empathetic to and conductive of emotions under certain circumstances - namely, during a shag.</i>\"  She looks away again, into the fire; as you peer closer, she actually appears to be blushing.  \"<i>When we, er... orgasm,</i>\" she resumes, still not meeting your eyes, \"<i>we give or take emotion and feeling from our partner depending on whether they have more or less than us.  For example, it means that horny buggers");
@@ -2296,7 +2296,7 @@ internal function sheilaGotWhomped():void {
 			.disableIf(player.cockThatFits(48) < 0, "Req. a cock fitting 48 area.");
 		addButton(1,"Forced BJ", sceneHunter.callFitNofit, forcedSheilaOral, 8, "length")
 			.disableIf(player.isTaur(), "Not for taurs anymore. Sorry.")
-			.disableIf(!player.hasVagina(), "Req. a cock.");
+			.disableIf(!player.hasCock(), "Req. a cock.");
 		addButton(2,"Forced Lick",forcedSheilaOral,-1)
 			.disableIf(!player.hasVagina(), "Req. a vagina.");
 		addButton(3, "Use Dildo", sheilaGetsRapedWithADildont)
@@ -3003,7 +3003,7 @@ private function sheilaForcedOralGeneric():void {
 	else outputText("and she pets your head affectionately as her walls squeeze your tongue.  \"<i>Oh, mate...</i>\" she whispers lovingly, completely forgetting the struggle that led to your tryst.");
 	if(player.tongue.type > Tongue.HUMAN) fatigue(15);
 	dynStats("lus", player.lib/3+30, "scale", false);
-	if(player.lust >= player.maxLust()) dynStats("lib", 1);
+	if(player.lust >= player.maxOverLust()) dynStats("lib", 1);
 
 	if(player.cor >= 90 && sheilaCorruption() >= 90) {
 		outputText("\n\nYou could finish what you've started and fully corrupt the woman. Are you ready?")
@@ -3630,7 +3630,7 @@ private function askDemonSheilaAboutDahChange():void {
 		outputText("\n\n\"<i>How can I say this?  It felt... monumental.  As I came with you, all my cares slipped away.</i>\"  [sheilaname] lowers a hand to her crotch and begins to tease herself");
 		if(player.hasCock()) outputText(", and you feel a monument of your own being erected");
 		outputText(".  \"<i>Every squeeze of my pussy compressed my focus, too, until my mind was clearer than the juice you made me flow with.  I realized my purpose there, with you.</i>\"");
-		outputText("\n\nYou raise an eyebrow at that.  [sheilaname] smiles and explains, \"<i>Strange to say, but the captain was right.  My purpose in life really is to fuck.  When you and I were together, I forgot about all the whining, the unimportant nagging that was dumped on me all my life.  The digging, the worrying, the hiding... it never mattered.  Any of it.  You were what made that clear for me; having you is what I care about.</i>\"  She blows you a kiss.  \"<i>So... we could do something real, if you like.</i>\"");
+		outputText("\n\nYou raise an eyebrow at that.  [sheilaname] smiles and explains, \"<i>Strange to say, but the captain was right.  My purpose in life really is to fuck.  When you and I were together, I forgot about all the whining, the unimportant nagging that was dumped on me all my life.  The digging, the worrying, the hiding... it never mattered.  Any of it.  You were what has made that clear for me; having you is what I care about.</i>\"  She blows you a kiss.  \"<i>So... we could do something real, if you like.</i>\"");
 	}
 	//(else if sheilacite <= -1)
 	else if(flags[kFLAGS.SHEILA_CITE] <= -1) {
@@ -3740,7 +3740,7 @@ private function talkToDemonSheilaAboutWhatNow():void {
 private function demonSheilaTalkAnotherQuestion():void {
 	clearOutput();
 	//(if lust <=99)
-	if(player.lust < player.maxLust()) {
+	if(player.lust < player.maxOverLust()) {
 		outputText("[sheilaname] reaches farther down, ");
 		//(cock)
 		if(player.hasCock()) outputText("slipping more of her finger and thumb around your penis");
@@ -4628,7 +4628,7 @@ private function jojoRuinsTheAnalHateFuck(clear:Boolean = true):void {
 	outputText("\n\nSmiling grimly, you leave the wet sounds of sex behind you, wondering if Jojo will ever come when you call again.");
 	
 	//set lust to 100, huge corruption gain (like it matters), set sheilapreg to -3 and disable Jojo unless and until new corrupted content is written to reflect changes
-	dynStats("lus=", player.maxLust(), "cor", 10, "scale", false);
+	dynStats("lus=", player.maxOverLust(), "cor", 10, "scale", false);
 	flags[kFLAGS.SHEILA_DISABLED] = 4;
 	flags[kFLAGS.JOJO_DEAD_OR_GONE] = 1;
     if (CoC.instance.inCombat)

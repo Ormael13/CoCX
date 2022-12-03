@@ -61,8 +61,8 @@ public class ValkyrieScene extends BaseContent
 				addButtonIfTrue(1, "Anal Fuck", valkyrieAnalFuck, "Req. a cock.", player.hasCock());
 				addButtonIfTrue(2, "Get Licked", valkyrieLicksYou, "Req. a vagina.", player.hasVagina());
 				addButtonIfTrue(3, "Scissor", valkyrieScissor, "Req. a vagina.", player.hasVagina());
-				SceneLib.uniqueSexScene.pcUSSPreChecksV2(winAgainstValkyrie);
 				addButton(14, "Leave", cleanupAfterCombat);
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(winAgainstValkyrie);
 			}
 			else {
 				outputText("You're not aroused enough to rape her.")

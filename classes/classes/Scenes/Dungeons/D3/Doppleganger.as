@@ -126,7 +126,7 @@ import classes.VaginaClass;
 					break;
 				case 5:
 					outputText("\n\nThe shimmering intensifies for a moment as something... shifts....");
-					player.dynStats("lus+", player.maxLust());
+					player.dynStats("lus+", player.maxOverLust());
 					break;
 				default:
 					outputText("\n\n\"<i>How did you even survive?</i>\" the doppelganger looks in confusion. \"<i>Regardless, I'm still taking your body.</i>\"");
@@ -299,7 +299,7 @@ import classes.VaginaClass;
 			
 			str += "You are fighting the doppelganger. " + player.mf("He", "She") +" is a ";
 			str += String(Math.floor(player.tallness / 12) + " foot " + player.tallness % 12 + " inch tall ");
-			str += player.race() + ", with [bodytype]. ";
+			str += "[race], with [bodytype]. ";
 			
 			str += player.mf("His", "Her") + " face is " + player.faceDesc() + ".";
 			

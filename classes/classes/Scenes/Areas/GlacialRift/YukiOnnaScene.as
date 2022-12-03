@@ -166,7 +166,7 @@ public class YukiOnnaScene extends BaseContent
 				encounterYukiOnnaYes();
 			}
 			else {
-				outputText("Defeated by "+(player.lust >= player.maxLust() ? "your growing lust":"the ravaging cold")+" you pass out somewhat terrified to think of what will happen to you.\n\n");
+				outputText("Defeated by "+(player.lust >= player.maxOverLust() ? "your growing lust":"the ravaging cold")+" you pass out somewhat terrified to think of what will happen to you.\n\n");
 				outputText("After a while, you wake up, still dizzy. You don't know exactly how or when you did move, but you are now laying down on a silky white couch, in some beautiful and cozy house, fully stripped out of your gear and with the Yuki Onna snuggling against you, ready for a kiss. Even if you wanted to try and get out of this situation, you are still too weak from the battle to fight back.");
 				if (player.gender == 2 || player.gender == 3) {
 					outputText(" Sensing that you are terrified she gently shushes you, placing a finger on your trembling lips.\n\n");

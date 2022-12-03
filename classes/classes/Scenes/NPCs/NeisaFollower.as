@@ -30,9 +30,9 @@ public function timeChange():Boolean
 	return false;
 }
 public function timeChangeLarge():Boolean {
-	if (model.time.hours == 6 && model.time.minutes == 0 && flags[kFLAGS.NEISA_FOLLOWER] >= 14 && !prison.inPrison) {
+	if (model.time.hours == 6 && model.time.minutes == 0 && flags[kFLAGS.NEISA_FOLLOWER] >= 14) {
 		//spriteSelect(SpriteDb.s_isabella);
-		neisaMorningPaycheckCall();
+		neisaMorningPaycheckCall1();
 		return true;
 	}
 	return false;
@@ -45,9 +45,16 @@ public function neisaAffection(changes:Number = 0):Number
 	return flags[kFLAGS.NEISA_AFFECTION];
 }
 //Morning Paycheck Call
+public function neisaMorningPaycheckCall2():void {
+	clearOutput();
+	neisaMorningPaycheckCall();
+}
+public function neisaMorningPaycheckCall1():void {
+	outputText("\n");
+	neisaMorningPaycheckCall();
+}
 public function neisaMorningPaycheckCall():void {
 	//spriteSelect(SpriteDb.s_isabella);
-	outputText("\n");
 	if (flags[kFLAGS.NEISA_FOLLOWER] == 17) {
 		if (flags[kFLAGS.SPIRIT_STONES] > 9) {
 			outputText("You pay the spirit stone you owe Neisa as she comes over to collect.\n\n");
@@ -126,6 +133,7 @@ public function neisaCampMenu():void {
 		else addButtonDisabled(5, "Team", "You already have other henchman accompany you. Ask him/her to stay at camp before you talk with Neisa about accompaning you.");
 	}
 	else addButtonDisabled(5, "Team", "You need to have at least Basic Leadership to form a team.");
+	if (flags[kFLAGS.NEISA_FOLLOWER] >= 14) addButton(13, "Paycheck", neisaMorningPaycheckCall2).hint("Pay Neisa due payment (make sure to not lack spirit stones for it)");
 	addButton(14, "Back", camp.campFollowers);
 }
 

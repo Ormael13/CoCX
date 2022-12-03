@@ -221,12 +221,12 @@ internal function kihaVictoryIntroduction():void {
 	outputText("Kiha sways back and forth for a moment, then drops her axe with numb hands.  As soon as she does, the hot glow of the weapon's cutting edge fades to silver, and the weapon lands with a heavy 'thunk' ");
 	if(silly()) outputText("(like Urta's cock!) ");
 	outputText("in the dirt.  The dragoness drops to her knees and slumps back against a tree, her limbs trembling ");
-	if(monster.lust >= monster.maxLust()) outputText("with lust");
+	if(monster.lust >= monster.maxOverLust()) outputText("with lust");
 	else outputText("weakly");
 	outputText(" as she tries to rise.\n\n");
 
 	//(Lust)
-	if(monster.lust >= monster.maxLust()) outputText("\"<i>You... can't make me like it!,</i>\" she shouts, struggling with all her might to keep her hands away from her genitals.  Somehow, she seems to be managing.");
+	if(monster.lust >= monster.maxOverLust()) outputText("\"<i>You... can't make me like it!,</i>\" she shouts, struggling with all her might to keep her hands away from her genitals.  Somehow, she seems to be managing.");
 	//(HP)
 	else outputText("\"<i>You... you... haven't... beaten me,</i>\" she mutters, even though it's quite clear that you have.");
 	outputText("  What do you do with the wannabe dragon now that you've taken her down a peg?");
@@ -258,7 +258,7 @@ internal function kihaLossIntro():void {
 	//No milky tits, no lust - get your ass whooped!
 	if (!(mocking || monster.lust >= 50 || sceneHunter.other && player.lib >= 80 || player.biggestLactation() >= 2)) {
 		sceneHunter.print("The dragoness won't rape you, of course... maybe because she's not aroused enough? High enough libido would probably suffice too (requires SH:Other).");
-		if(player.lust >= player.maxLust()) outputText("You give up on fighting, too horny to keep fighting.  Kiha strikes the ground with her axe and snorts out a puff of smoke.  \"<i>What a shameless slut!  You're lusting after me even in the heat of battle, like a common imp!  You aren't worthy to lick between my foot-claws!</i>\"\n\n");
+		if(player.lust >= player.maxOverLust()) outputText("You give up on fighting, too horny to keep fighting.  Kiha strikes the ground with her axe and snorts out a puff of smoke.  \"<i>What a shameless slut!  You're lusting after me even in the heat of battle, like a common imp!  You aren't worthy to lick between my foot-claws!</i>\"\n\n");
 		else outputText("You collapse, too wounded to keep fighting.  Kiha strikes the ground with her axe and snorts out a puff of smoke.  \"<i>What a wimp!  I've barely started fighting and you're already beaten!</i>\"\n\n");
 		outputText("Kiha pulls her axe back in a two-handed grip, and you're sure the moment of your death is upon you.  A moment later, the flat of the blade slams into your head, knocking you unconscious.");
 		player.takePhysDamage(1000);
@@ -280,7 +280,7 @@ internal function kihaLossIntro():void {
 }
 
 private function sharedRapeIntro():void {
-	if(player.lust >= player.maxLust()) outputText("You give up on fighting, too horny to keep fighting.  Kiha strikes the ground with her axe and snorts out a puff of smoke.  \"<i>What a shameless slut!  You're lusting after me even in the heat of battle, like a common imp!  You aren't worthy to lick between my foot-claws!</i>\"\n\n");
+	if(player.lust >= player.maxOverLust()) outputText("You give up on fighting, too horny to keep fighting.  Kiha strikes the ground with her axe and snorts out a puff of smoke.  \"<i>What a shameless slut!  You're lusting after me even in the heat of battle, like a common imp!  You aren't worthy to lick between my foot-claws!</i>\"\n\n");
 	else outputText("You collapse, too wounded to keep fighting.  Kiha strikes the ground with her axe and snorts out a puff of smoke.  \"<i>What a wimp!  I've barely started fighting and you're already beaten!</i>\"\n\n");
 	outputText("The dragoness sighs and glances around.  \"<i>Since you weren't able to satisfy me in battle, let's see if you have anything else to offer...</i>\"\n\n");
 	outputText("Leaving her axe to rest a few feet away, stuck on the ground, Kiha strips off your [armor] revealing your ");
@@ -293,7 +293,7 @@ private function sharedRapeIntro():void {
 //*Milky Tit Humiliation - Fen
 private function kihaMilkTitHumiliation():void {
 	outputText(images.showImage("kiha-loss-milking"));
-	if(player.lust >= player.maxLust()) outputText("You slide to the ground, too turned on to fight and openly touching yourself.");
+	if(player.lust >= player.maxOverLust()) outputText("You slide to the ground, too turned on to fight and openly touching yourself.");
 	else outputText("You slide to the ground, too defeated to continue to fight.");
 	outputText("  Kiha snorts, expelling a tiny burst of flame and smoke from a nostril as she towers over your prone body.\n\n");
 
@@ -423,7 +423,7 @@ private function tsundereMasturbationChristmasCarol():void {
 	outputText(images.showImage("kiha-mutualmasturbation"));
     kihaFollower.kihaSprite(true);
 	outputText("You walk towards the draconic woman, removing your [armor] as you observe her firm, ");
-	if(player.lust >= player.maxLust()) outputText("wanton");
+	if(player.lust >= player.maxOverLust()) outputText("wanton");
 	else outputText("but dispirited");
 	outputText(" figure slumping against the weathered bark behind her.  She eyes you carefully, trying to comprehend the situation before catching note of your ");
 	if(player.gender > 0) outputText("aroused genitals");
@@ -477,7 +477,7 @@ private function kihaVictoryPomfTail():void {
 	outputText(images.showImage("kiha-taildildo"));
     kihaFollower.kihaSprite(true);
 	outputText("You approach the ");
-	if(monster.lust >= monster.maxLust()) outputText("lusty ");
+	if(monster.lust >= monster.maxOverLust()) outputText("lusty ");
 	else outputText("wounded ");
 	outputText("dragoness full of wicked ideas.  For her part, she looks up at you with a defiant gaze, as if it would somehow dissuade you from the sexual thoughts now guiding your body.  You circle to the side and reach down, grabbing her wriggling tail with both hands.  Kiha tries to pull it out of your hands, but in her weakened state, all it does is weakly flop like a caught fish.  Laughing, you smack her in the face with her own scaly hind-bits before you drop it.  You know just how you'll put that rudder to use, but first you've got to shuck your [armor].\n\n");
 
@@ -531,12 +531,12 @@ private function victoryDickKiha():void {
 	if (y < 0) sceneHunter.print("Maybe use another one for her ass?");
 	outputText(images.showImage("kiha-vagfuck"));
 	outputText("You walk up and push the dragoness off the tree and onto her side to get a better look at her sopping vagina and tight rump.  Initially she doesn't react, though when she realizes what you're about to do, she cries, \"<i>How very much like my old masters you are.  As soon as you've won a fight, you think of nothing but sex.  ");
-	if(monster.lust >= monster.maxLust()) outputText("Just because you've aroused my body doesn't mean I'll enjoy this!");
+	if(monster.lust >= monster.maxOverLust()) outputText("Just because you've aroused my body doesn't mean I'll enjoy this!");
 	else outputText("Don't think I'll enjoy this!");
 	outputText("</i>\"\n\n");
 
 	outputText("Kiha certainly has a mouth on her, but then again, you aren't interested in that particular orifice at the moment.  You lift her leg, but she curls her tail up to obscure her pussy from your view");
-	if(monster.lust >= monster.maxLust()) outputText(", rubbing it back and forth against her folds without thinking about it");
+	if(monster.lust >= monster.maxOverLust()) outputText(", rubbing it back and forth against her folds without thinking about it");
 	outputText(".  Annoyed, you twist the rebellious appendage out of your way but struggle to hold it back.  The dragon isn't making it easy for you for in the slightest.  Still, you get a nice long look at her soaked sex, and the sight ");
 	if(player.lust > 60) outputText("only makes " + sMultiCockDesc() + " harder.");
 	else outputText("quickly makes " + sMultiCockDesc() + " hard");
@@ -605,7 +605,7 @@ private function victoryDickKiha():void {
 		outputText("That perfect, dripping entrance beckons for your " + cockDescript(x) + ", and without hesitation, you slide inside.  Kiha growls, \"<i>That's it?  How artless.</i>\"  In spite of her disappointed tone, her slippery passage squeezes down on your member with miraculous tightness, embracing your " + cockDescript(x) + " in its firm, velvet grip.  You sigh happily and enjoy the dragon-pussy's pressure for a few moments, tuning out Kiha's griping to focus on the heavenly feelings her body is giving you.\n\n");
 
 		outputText("Eventually, you become accustomed to the feel of the reptilian tunnel's simmering juices, and eager for more stimulation, you begin to saw your " + cockDescript(x) + " in and out of sodden box.  The draconic woman beneath you lets out whimpers and moans of pleasure mixed with discontent, unable to resist you and unable to allow herself to enjoy it.  She squirms and wriggles beneath your forced affections, growing ");
-		if(monster.lust >= monster.maxLust()) outputText("more aroused despite her feigned indifference");
+		if(monster.lust >= monster.maxOverLust()) outputText("more aroused despite her feigned indifference");
 		else outputText("very aroused in spite of her desire to fight you");
 		outputText(".  For your part, you pick up the pace, pushing yourself faster and faster towards an eventual climax.  Kiha places her scaled fingers on her chest to stop it from jiggling in response, but you push them away, wanting her breasts to bounce freely for your amusement.\n\n");
 

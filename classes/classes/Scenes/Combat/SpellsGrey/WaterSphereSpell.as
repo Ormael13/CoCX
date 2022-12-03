@@ -17,7 +17,7 @@ public class WaterSphereSpell extends AbstractGreySpell {
 				: "Condense part of the the ambivalent moisture into spheres water to attack your enemies.",
 			TARGET_ENEMY,
 			TIMING_INSTANT,
-			[TAG_DAMAGING, TAG_WATER, TAG_AOE]
+			[TAG_DAMAGING, TAG_WATER, TAG_AOE, TAG_TIER1]
 		);
 		baseManaCost = 200;
 		if (ex) baseWrathCost = 100;

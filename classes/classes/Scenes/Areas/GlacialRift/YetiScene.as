@@ -108,10 +108,13 @@ public class YetiScene extends BaseContent
 				addButtonIfTrue(1, "RideHisCock", rideYetisCock, "Req. a vagina", player.hasVagina());
 				addButton(2, "SateYourself", MinotaurScene.slimeSateYourself).disableIf(!player.isGoo(), "Requires goo body.");
 				LustyMaidensArmor.addTitfuckButton(2);
-				SceneLib.uniqueSexScene.pcUSSPreChecksV2(winAgainstYeti);
+				addButton(14, "Leave", cleanupAfterCombat);
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(winAgainstYeti); //MUST BE CALLED AT THE END!!
 			}
-			else outputText("You're not aroused enough to rape him.")
-			addButton(14, "Leave", cleanupAfterCombat);
+			else {
+				outputText("You're not aroused enough to rape him.")
+				addButton(14, "Leave", cleanupAfterCombat);
+			}
 		}
 
 		private function fuckYetiInTheAss():void {

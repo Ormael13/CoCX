@@ -123,7 +123,7 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 		private function notThirsty():void {
 			clearOutput();
 			outputText("In the end you realise you are not thirsty after all and wave a goodbye before leaving.\n\n");
-			doNext(curry(enteringInn,false));
+			doNext(enteringInn,false);
 		}
 		private function buyDrink(drink:ItemType, amount:int):void{
 			var cost:int = amount;
@@ -163,7 +163,7 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 			if(flags[kFLAGS.SPIRIT_STONES] < itype.value / 10) {
 				outputText("\n\nYou count out your spirit stones and realize it's beyond your price range.");
 				//Goto shop main menu
-				doNext(curry(shadyPerson,false));
+				doNext(shadyPerson,false);
 				return;
 			}
 			else outputText("\n\nDo you buy it?\n\n");
@@ -197,7 +197,7 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 
 		}
 		private function visitMadam():void {
-			clearOutput();//Madam - female kishoo npc for stat points to perk points conversion		outputText("\"<i></i>\"\n\n");
+			clearOutput();
 			if (AhriTavernTalks) outputText("\"<i>You came back? What do you seek from this Madam?</i>\" You can swear to see her eyes glow for a moment under the hood as she looks at you. \"<i>Another session to exchange your grown potential to increased ability to develop mystical abilities?</i>\"\n\n");
 			else {
 				outputText("You see a person covered wholy by the loose robe. For a moment it looks like it not noticed your presence next to it.\n\n");
@@ -235,7 +235,7 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 				flags[kFLAGS.SPIRIT_STONES] -= 10;
 				player.statPoints -= 5;
 				player.perkPoints += 1;
-				doNext(curry(enteringInn,false));
+				doNext(enteringInn,false);
 				eachMinuteCount(30);
 			}
 		}
@@ -282,7 +282,7 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 				flags[kFLAGS.SPIRIT_STONES] -= 10;
 				player.statPoints += 5;
 				player.perkPoints -= 1;
-				doNext(curry(enteringInn,false));
+				doNext(enteringInn,false);
 				eachMinuteCount(30);
 			}
 		}
@@ -337,7 +337,7 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 			outputText("You are not interested into a mercenary right now but you thank her for proposing. She shrugs it off.\n\n");
 			outputText("\"<i>No skin off my back. Come back over if ya change your mind.</i>\"\n\n");
 			flags[kFLAGS.NEISA_FOLLOWER] = 2;
-			doNext(curry(enteringInn,false));
+			doNext(enteringInn,false);
 		}
 		public function meetingNeisaAfterDecline():void {
 			outputText("The mercenary come to attention as you approach her.\n\n");
@@ -371,7 +371,7 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 		}
 		public function meetingNeisaPostDungeonExplorationDontPay():void {
 			outputText("You walk away to go get the cash. You're lucky she doesn't send the city guards on your back.\n\n");
-			doNext(curry(enteringInn,false));
+			doNext(enteringInn,false);
 		}
 		public function meetingNeisaPostDungeonExplorationPay():void {
 			flags[kFLAGS.SPIRIT_STONES] -= 10;
@@ -397,7 +397,7 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 			outputText("Nah, you don't have that much right now.\n\n");
 			outputText("\"<i>Well, shit. I hope whatever you meet out there doesn't outright kill or fuck the soul out of you then. See me again if you ever change your mind.</i>\"\n\n");
 			if (flags[kFLAGS.NEISA_FOLLOWER] == 4) flags[kFLAGS.NEISA_FOLLOWER] = 5;
-			doNext(curry(enteringInn,false));
+			doNext(enteringInn,false);
 		}
 
 		public function firstTimeMeetingNekomataBoy():void {
@@ -422,7 +422,7 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 		public function firstTimeMeetingNekomataBoyNo():void {
 			outputText("Yeah no, this is looking too good to be true and truth be told it likely is. You tell the sketchy cat you will pass on it for now and head back towards the bar.\n\n");
 			flags[kFLAGS.CURSE_OF_THE_JIANGSHI] = 1;
-			doNext(curry(enteringInn,false));
+			doNext(enteringInn,false);
 		}
 		public function firstTimeMeetingNekomataBoyYes():void {
 			clearOutput();

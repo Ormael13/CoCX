@@ -21,7 +21,7 @@ public function timeChange():Boolean {
 	return false;
 }
 public function timeChangeLarge():Boolean {
-	if (model.time.hours == 6 && flags[kFLAGS.SLEEP_WITH] == "Samirah" && !prison.inPrison) {
+	if (model.time.hours == 6 && flags[kFLAGS.SLEEP_WITH] == "Samirah") {
 		samirahMorningWakeupCall();
 		return true;
 	}
@@ -310,7 +310,7 @@ public function samirahTalkClothes():void {
 	outputText("The bottom is similar to a panty of the same design save that it has but a single hole and is made to hang around a naga waist. Around the length of the panty is a pink veil that goes down to what would be the knee on a human body.");
 	if (player.isFemale()) {
 		if (player.isNaga()) {
-			outputText(" Well now that you think of it you are almost jealous. Not to mention that going commando isn’t exactly your style either. Ever since you became a naga you had to go without any form of bottom undergarment. You ask Samirah if she would mind giving you one of these lovely dresses since she has no use for them at the time.\n\n");
+			outputText(" Well now that you think of it, you are almost jealous. Not to mention that going commando isn’t exactly your style either. Ever since you became a naga you had to go without any form of bottom undergarment. You ask Samirah if she would mind giving you one of these lovely dresses since she has no use for them at the time.\n\n");
 			outputText("\"<i>I guess my grounds below to you now hunter. I will have to head out and hunt elsewhere...</i>\"\n\n");
 			outputText("Samirah helps you put the dress on, and you got to admit, it indeed looks beautiful on you, even going so far as to put the accent on your assets. Samirah brings out a mirror out of her stash so you can look yourself up.You slither right and left and even dance a little, giggling as you admire yourself. Samirah was right about it, your curves do sure look beautiful. She then stashes the mirror and talks to you about the dress.\n\n");
 			outputText("\"<i>The dress is yours, take good care of it.</i>\"\n\n");

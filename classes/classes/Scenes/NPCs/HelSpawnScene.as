@@ -629,10 +629,6 @@ private function helsLifestyle():void {
 
 //IT'S TIME! (Play the morning of the 15th Day of Helia's pregnancy)
 public function heliaBirthtime():void {
-	if (prison.inPrison) {
-		prison.prisonLetter.letterFromHelia1();
-		return;
-	}
 	clearOutput();
 	helScene.helSprite();
 	outputText("The morning dawns like any other, though as you're getting dressed, you can't help but notice Hel waddling back from the edge of camp, both hands firmly gripping her positively massive belly.  You walk over just in time to hear her groan, \"<i>Oh fuck me sideways and call me a harpy, this shit sucks.</i>\"  You put an arm around her to steady the sickened salamander, but she barely notices you as she flops down beside her still, nearly grabbing a glass before stopping herself.  \"<i>Fucking shit fuck I am so done with this.  I - oh god,</i>\" she doubles over, squeezing her belly.  \"<i>Ow ow oh god ow.</i>\"");
@@ -844,7 +840,7 @@ public function helspawnDiscoversBooze():void {
 	helScene.helSprite();
 	flags[kFLAGS.HELSPAWN_DISCOVER_BOOZE] = 1;
 	outputText("As you're moving through camp, you notice Hel's away from her little nook - probably off visiting the family, seeing as her cloak's gone.  You wouldn't have given her part of camp a second look, except for a sudden whiff of brimstone and burning brewery on the wind.  Cocking an eyebrow, you creep over to Hel's still, quiet as ");
-	if(player.race() != "cat-boy" && player.race() != "cat-girl") outputText("a cat");
+	if(player.isRace(Races.CAT, 1, false)) outputText("a cat");
 	else outputText("the cat you are");
 	outputText(", and poke your head around the iron body of the still.");
 	
@@ -1050,10 +1046,6 @@ private function dasBarbarimander():void {
 //Event: Helspawn's a Little Slut Like Mommy
 //{Play at night, while sleeping.}
 public function helspawnIsASlut():void {
-	if (prison.inPrison) { //No choices for you in prison!
-		prison.prisonLetter.noControlOverHelspawn();
-		return;
-	}
 	helScene.helSprite();
 	flags[kFLAGS.HELSPAWN_FUCK_INTERRUPTUS] = 1;
 	outputText("\nSomething's moving in your camp.");
@@ -1164,7 +1156,8 @@ public function helspawnsMainMenu():void {
 	//[Talk]
 	addButton(1,"Talk",talkToHelspawn);
 	//[Spar]
-	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(2,"Spar",sparHelspawn);
+	addButton(2,"Spar",sparHelspawn)
+		.disableIf(flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 2, "You need a good sparring ring for that.");
 	//[Sex]; bipeds only, lust must be high, incest must be flagged active, and player must have a dick.
 	if (incestEnabled()) {
 		if (flags[kFLAGS.HELSPAWN_INCEST]) addButton(3, "Sex", sexHelspawn)
@@ -1793,7 +1786,7 @@ private function talkToHelspawn():void {
 		outputText("\n\nA soft, melodic tune starts to play as " + flags[kFLAGS.HELSPAWN_NAME] + "'s dexterous fingers dance across the fret, plucking at the strings with some small hesitation.  She's a beginner, but not bad at all; the simple tune is sweet and she plays it with burgeoning proficiency, slowly settling into the rhythm of the piece until you can close your eyes and relax, letting her playing sooth you, carrying your troubles far away.  You barely notice when a high, soft voice adds itself to the guitar, a lilting, haunting soprano that slowly grows in power as the young 'mander's playing intensifies, building toward crescendo.  She's singing, surely, but the words are alien and unknowable; you think, for a moment, that perhaps they're in Helia's native tongue, but when a second voice, powerful and operatic, joins " + flags[kFLAGS.HELSPAWN_NAME] + "'s, you know who's been teaching her.");
 		
 		outputText("\n\nYou open an eye as Isabella approaches, belting out a misty-eyed verse in her strange language, and you can practically feel her homesickness, her separation from a lifetime of friends and loved ones.  As her arms cross under her enormous breasts, you can't help but think of the mutations she has undergone");
-		if(player.race() != "human") outputText(" and you yourself have suffered as well");
+		if(!player.isRace(Races.HUMAN, 1, false)) outputText(" and you yourself have suffered as well");
 		outputText(".  You smile as Isabella seats herself beside " + flags[kFLAGS.HELSPAWN_NAME] + ", joining their voices together for the final chorus that leaves them both shaking as " + flags[kFLAGS.HELSPAWN_NAME] + " strums the last, desperate notes, nearly clawing through the strings in her passion.");
 		
 		outputText("\"<i>");
@@ -1959,7 +1952,7 @@ internal function loseSparringToDaughter():void {
 	//if Sluttymander:
 	if(flags[kFLAGS.HELSPAWN_PERSONALITY] >= 50) {
 		outputText("As you stumble back, ");
-		if(player.lust >= player.maxLust()) outputText("succumbing to your own lusts");
+		if(player.lust >= player.maxOverLust()) outputText("succumbing to your own lusts");
 		else outputText("unable to withstand her unending hail of attacks");
 		outputText(", " + flags[kFLAGS.HELSPAWN_NAME] + " quickly sweeps your [legs] out from under you, dropping you right on your ass.  You collapse with a grunt, ");
 		if(player.weaponName != "fists") outputText("weapon tumbling out of hand");
@@ -1975,7 +1968,7 @@ internal function loseSparringToDaughter():void {
 	//Else If Chastemander:
 	else {
 		outputText("As you stumble back, ");
-		if(player.lust >= player.maxLust()) outputText("succumbing to your own lusts");
+		if(player.lust >= player.maxOverLust()) outputText("succumbing to your own lusts");
 		else outputText("unable to withstand her unending hail of attacks");
 		outputText(", " + flags[kFLAGS.HELSPAWN_NAME] + " grabs your arm, catching you before you can fall.  \"<i>Easy there, " + championRef() + ", I got you,</i>\" she says, pulling you into a quick hug.");
 		
@@ -1992,7 +1985,7 @@ internal function loseSparringToDaughter():void {
 internal function beatUpYourDaughter():void {
 	clearOutput();
 	//{If Sluttymander loses to lust (you monster)}:
-	if(flags[kFLAGS.HELSPAWN_PERSONALITY] >= 50 && monster.lust >= monster.maxLust()) {
+	if(flags[kFLAGS.HELSPAWN_PERSONALITY] >= 50 && monster.lust >= monster.maxOverLust()) {
 		outputText("\"<i>N-no more...</i>\" the slutty little salamander moans, slumping down to the ground, arms wrapping around herself.  \"<i>Fuck, you're sexy... so horny...</i>\" she groans, hands slipping down to her soaked bikini bottom.");
 		
 		outputText("\n\nShaking your head, you give her a little push, flopping her onto her back.  She just lets out a little whimper and finally tears her panties away, giving her unrestricted access to her sodden box.  \"<i>Hey, d-don't just leave me like this,</i>\" she whines, but to no avail.");

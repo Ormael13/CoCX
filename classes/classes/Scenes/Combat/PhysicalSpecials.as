@@ -8,6 +8,7 @@ import classes.EngineCore;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
+import classes.Items.ItemTags;
 import classes.Items.Weapons.Tidarion;
 import classes.PerkLib;
 import classes.Races;
@@ -71,12 +72,12 @@ public class PhysicalSpecials extends BaseCombatContent {
 				bd = buttons.add("Cleave", pcCleave).hint("Deal extra damage to multiple foes. Cause area effect bleed damage.");
 				if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
-			if (player.hasPerk(PerkLib.SneakyAttack) && player.haveWeaponForSneakAttack() && (monster.hasStatusEffect(StatusEffects.Stunned) || monster.hasStatusEffect(StatusEffects.FrozenSolid) || monster.hasStatusEffect(StatusEffects.StunnedTornado)
+			if (player.hasPerk(PerkLib.SneakyAttack) && player.haveWeaponForSneakAttack() && (monster.monsterIsStunned()
 				|| monster.hasStatusEffect(StatusEffects.Blind) || monster.hasStatusEffect(StatusEffects.InkBlind) || monster.hasStatusEffect(StatusEffects.Distracted))) {
 				bd = buttons.add("SneakAttack (M)", sneakAttack).hint("Strike the vitals of a stunned, blinded or distracted opponent for heavy damage. (Melee variant)");
 				if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
-			if (player.hasPerk(PerkLib.MarkedForDeath) && player.haveWeaponForSneakAttackRange() && (monster.hasStatusEffect(StatusEffects.Stunned) || monster.hasStatusEffect(StatusEffects.FrozenSolid) || monster.hasStatusEffect(StatusEffects.StunnedTornado)
+			if (player.hasPerk(PerkLib.MarkedForDeath) && player.haveWeaponForSneakAttackRange() && (monster.monsterIsStunned()
 				|| monster.hasStatusEffect(StatusEffects.Blind) || monster.hasStatusEffect(StatusEffects.InkBlind) || monster.hasStatusEffect(StatusEffects.Distracted))) {
 				bd = buttons.add("SneakAttack (R)", sneakAttackRange).hint("Strike the vitals of a stunned, blinded or distracted opponent for heavy damage. (Range variant)");
 				if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
@@ -308,9 +309,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 				bd = buttons.add("Tail Whip", tailWhipAttack).hint("Whip your foe with your tail to enrage them and lower their defense!");
 			} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			if ((player.tailType == Tail.SALAMANDER || player.tailType == Tail.KITSHOO) && !player.hasPerk(PerkLib.ElementalBody)) {
-				var kishoo:String = "";
-				if (player.tailType == Tail.KITSHOO && player.tailCount > 1) kishoo = "s"
-				bd = buttons.add("Tail Slap", tailSlapAttack).hint("Set ablaze in red-hot flames your tail"+kishoo+" to whip your foe with it to hurt and burn them!  \n\n<b>AoE attack.</b>");
+				var kitshoo:String = "";
+				if (player.tailType == Tail.KITSHOO && player.tailCount > 1) kitshoo = "s"
+				bd = buttons.add("Tail Slap", tailSlapAttack).hint("Set ablaze in red-hot flames your tail"+kitshoo+" to whip your foe with it to hurt and burn them!  \n\n<b>AoE attack.</b>");
 				if (player.hasPerk(PerkLib.PhantomStrike)) bd.requireFatigue(physicalCost(80));
 				else bd.requireFatigue(physicalCost(40));
 				if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
@@ -320,12 +321,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 				bd.requireFatigue(physicalCost(40));
 				if (player.hasStatusEffect(StatusEffects.CooldownTailSmack)) {
 					bd.disable("<b>You need more time before you can perform Tail Smack again.</b>\n\n");
-				} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
-			}
-			if (player.hasPerk(PerkLib.DragonLustPoisonBreath)) {
-				bd = buttons.add("Poison Breath", DragonLustPoisonBreath).hint("Unleash a cloud of aphrodisiac poison. Particularly powerful against groups");
-				if (player.tailVenom < player.VenomWebCost() * 5) {
-					bd.disable("You do not have enough poison in your glands to breath a cloud right now! (Req. "+player.VenomWebCost()*5+"+)");
 				} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			if (player.hasPerk(PerkLib.InkSpray) && player.gender > 0 && !player.hasPerk(PerkLib.ElementalBody)) {
@@ -580,13 +575,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (player.keyItemvX("HB Stealth System", 1) >= 1) bd = buttons.add("Invisibility", StealthModeActivate).hint("Turn your mech invisible. \n\nWould drain "+combat.StealthModeMechCost()+" SF from mech reserves or your own SF pool per turn.");// Will not use combat action.
 				else bd = buttons.add("Camouflage", StealthModeActivate).hint("Turn your mech invisible for 1 turn. \n\nWould drain "+combat.StealthModeMechCost()+" SF from mech reserves or your own SF pool.");
 				if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] < combat.StealthModeMechCost() && player.soulforce < combat.StealthModeMechCost()) bd.disable("<b>You are too low on SF reserves to use this option.</b>\n\n");
-				if (monster.hasStatusEffect(StatusEffects.InvisibleOrStealth) || monster.hasStatusEffect(StatusEffects.Stunned) || monster.hasStatusEffect(StatusEffects.FrozenSolid) || monster.hasStatusEffect(StatusEffects.StunnedTornado)
+				if (monster.hasStatusEffect(StatusEffects.InvisibleOrStealth) || monster.monsterIsStunned()
 					|| monster.hasStatusEffect(StatusEffects.Blind) || monster.hasStatusEffect(StatusEffects.InkBlind) || monster.hasStatusEffect(StatusEffects.Distracted)) {
 					bd = buttons.add("SneakAttack (M)", sneakAttackMech).hint("Strike the vitals of a stunned, blinded or distracted opponent for heavy damage. (Melee variant)");
 					if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 					else if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] < 100 && player.soulforce < 100) bd.disable("<b>You are too low on SF reserves to use this option.</b>");
 				}
-				if (monster.hasStatusEffect(StatusEffects.InvisibleOrStealth) || monster.hasStatusEffect(StatusEffects.Stunned) || monster.hasStatusEffect(StatusEffects.FrozenSolid) || monster.hasStatusEffect(StatusEffects.StunnedTornado)
+				if (monster.hasStatusEffect(StatusEffects.InvisibleOrStealth) || monster.monsterIsStunned()
 					|| monster.hasStatusEffect(StatusEffects.Blind) || monster.hasStatusEffect(StatusEffects.InkBlind) || monster.hasStatusEffect(StatusEffects.Distracted)) {
 					bd = buttons.add("SneakAttack (R)", sneakAttackRangeMech).hint("Strike the vitals of a stunned, blinded or distracted opponent for heavy damage. (Range variant)");
 					if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
@@ -749,6 +744,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			doDarknessDamage(damage, true, true);
 		}
 		else if (player.weapon == weapons.MGSWORD) doMagicDamage(damage, true, true);
+		else if (player.weapon == weapons.MCLAWS) doMagicDamage(damage, true, true);
 		else {
 			damage = Math.round(damage);
 			doDamage(damage, true, true);
@@ -809,6 +805,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
 		damage = combat.itemsBonusDamageDamage(damage);
+		if (player.isFeralCombat()) damage *= combat.MasteryBonusDamageMelee(true);
+		else damage *= combat.MasteryBonusDamageMelee();
 		damage *= combat.meleePhysicalForce();
 		damage *= PAMulti;
 		var crit:Boolean = false;
@@ -861,6 +859,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage = combat.archerySkillDamageMod(damage);
 		if (player.weaponRangeName == "Wild Hunt" && player.level > monster.level) damage *= 1.2;
 		if (player.weaponRangeName == "Hodr's bow" && monster.hasStatusEffect(StatusEffects.Blind)) damage *= 1.1;
+		if (player.weaponRangePerk == "Throwing") damage *= (1 + (0.01 * combat.masteryThrowingLevel()));
+		else damage *= (1 + (0.01 * combat.masteryArcheryLevel()));
 		damage *= combat.rangePhysicalForce();
 		damage *= PSMulti;
 		var crit:Boolean = false;
@@ -1087,7 +1087,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 						player.tailVenom -= player.VenomWebCost();
 						flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
 					}
-					if (player.tailType == Tail.SCORPION) {
+					if (player.tailType == Tail.SCORPION || player.hasKeyItem("Sky Poison Pearl") >= 0) {
 						outputText("  [monster he] seems to be effected by the poison, its movement turning sluggish.");
 						var damage1Bcc:Number = 1;
 						if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) damage1Bcc *= 2;
@@ -1189,7 +1189,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 							flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
 						}
 					}
-					if (monster.lust >= monster.maxLust()) {
+					if (monster.lust >= monster.maxOverLust()) {
 						outputText("\n\n");
 						checkAchievementDamage(damage);
 						doNext(endLustVictory);
@@ -1325,7 +1325,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("You let out a primal shout that lets your enemies know you won’t be easily defeated.\n\n");
 		var wsr:Number = 0.2;
 		wsr *= player.maxOverWrath();
-		EngineCore.WrathChange(wsr, true);
+		EngineCore.WrathChange(wsr);
 		menu();
 		addButton(0, "Next", combatMenu, false);
 	}
@@ -1818,16 +1818,16 @@ public class PhysicalSpecials extends BaseCombatContent {
 		clearOutput();
 		if (player.hasPerk(PerkLib.PhantomStrike)) fatigue(80, USEFATG_PHYSICAL);
 		else fatigue(40, USEFATG_PHYSICAL);
-		var kishoo:String = "";
-		if (player.tailType == Tail.KITSHOO && player.tailCount > 1) kishoo = "s"
-		outputText("With a simple thought you set your tail"+kishoo+" ablaze.");
+		var kitshoo:String = "";
+		if (player.tailType == Tail.KITSHOO && player.tailCount > 1) kitshoo = "s"
+		outputText("With a simple thought you set your tail"+kitshoo+" ablaze.");
 		//miss
 		if((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe))) {
-			outputText("  Twirling like a top, you swing your tail"+kishoo+", but connect with only empty air.");
+			outputText("  Twirling like a top, you swing your tail"+kitshoo+", but connect with only empty air.");
 		}
 		else {
-			if(!monster.plural) outputText("  Twirling like a top, you bat your opponent with your tail"+kishoo+".");
-			else outputText("  Twirling like a top, you bat your opponents with your tail"+kishoo+".");
+			if(!monster.plural) outputText("  Twirling like a top, you bat your opponent with your tail"+kitshoo+".");
+			else outputText("  Twirling like a top, you bat your opponents with your tail"+kitshoo+".");
 			var damage:Number = unarmedAttack();
 			damage += player.str;
 			if (player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) damage += player.str;
@@ -1845,7 +1845,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			damage *= monster.damagePercent() / 100;
 			if (damage < 5) damage = 5;
 			damage = Math.round(damage * combat.fireDamageBoostedByDao());
-			outputText("  Your tail"+kishoo+" slams against [themonster], dealing ");
+			outputText("  Your tail"+kitshoo+" slams against [themonster], dealing ");
 			doFireDamage(damage, true, true);
 			if (player.tailType == Tail.KITSHOO && player.tailCount > 1) {
 				var multismack:Number = (player.tailCount - 1);
@@ -1927,7 +1927,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		outputText("\n\n");
 		statScreenRefresh();
-		if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
+		if(monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
 		else enemyAI();
 	}
 
@@ -2093,7 +2093,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				lustDmgF += (4 * (1 + player.newGamePlusMod()));
 				break;
 		}
-		if (player.hasPerk(PerkLib.SluttySimplicity) && player.armorName == "nothing") lustDmgF *= (1 + ((10 + rand(11)) / 100));
+		if (player.hasPerk(PerkLib.SluttySimplicity) && player.armor.hasTag(ItemTags.A_REVEALING)) lustDmgF *= (1 + ((10 + rand(11)) / 100));
 		if (player.hasPerk(PerkLib.ElectrifiedDesire)) lustDmgF *= (1 + (player.lust100 * 0.01));
 		if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) lustDmgF *= (1 + combat.historyWhoreBonus());
 		if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= combat.RacialParagonAbilityBoost();
@@ -2885,7 +2885,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					lustDmgF += (4 * (1 + player.newGamePlusMod()));
 					break;
 			}
-			if (player.hasPerk(PerkLib.SluttySimplicity) && player.armorName == "nothing") lustDmgF *= (1 + ((10 + rand(11)) / 100));
+			if (player.hasPerk(PerkLib.SluttySimplicity) && player.armor.hasTag(ItemTags.A_REVEALING)) lustDmgF *= (1 + ((10 + rand(11)) / 100));
 			if (player.hasPerk(PerkLib.ElectrifiedDesire)) lustDmgF *= (1 + (player.lust100 * 0.01));
 			if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) lustDmgF *= (1 + combat.historyWhoreBonus());
 			if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= combat.RacialParagonAbilityBoost();
@@ -3278,7 +3278,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		doDamage(damage);
 		var multikulti:String = (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType)) ? "s" : "";
 		outputText("You swipe the field with your axe-bladed tail, slicing your foe" + multikulti + ", dealing <b><font color=\"#800000\">" + damage + "</font></b> damage!");
-		if (!monster.hasPerk(PerkLib.EnemyConstructType)) {
+		if (!monster.isImmuneToBleed()) {
 			outputText(" The attack leaves your target" + multikulti + " bleeding from deep wounds!");
 			if (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType)) monster.createStatusEffect(StatusEffects.SharkBiteBleed, 2, 5, 0, 0);
 			monster.createStatusEffect(StatusEffects.SharkBiteBleed, 2, 0, 0, 0);
@@ -4131,57 +4131,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (!combatIsOver()) enemyAI();
 	}
 
-	public function DragonLustPoisonBreath():void {
-		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
-		clearOutput();
-		if (combat.checkConcentration()) return; //Amily concentration
-		if (monster is LivingStatue)
-		{
-			outputText("This thing is just seldom immune to poison like come on its a statue!");
-			enemyAI();
-			return;
-		}
-		//Works similar to bee stinger, must be regenerated over time. Shares the same poison-meter
-		else {
-			outputText("You inhale deeply before releasing a cloud of aphrodisiacs poison on your foe!");
-			var venomType:StatusEffectType = StatusEffects.JabberwockyVenom;
-			var d2Bdcc:Number = 2;
-			var lustDmg2:Number = combat.calculateBasicTeaseDamage(20+rand(10));
-			var poisonScaling:Number = 1;
-			if (monster.plural){
-				d2Bdcc *=5;
-				lustDmg2 *=5
-			}
-			poisonScaling += player.lib/100;
-			poisonScaling += player.tou/100;
-			if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) poisonScaling += 1;
-			if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 1) poisonScaling += 2;
-			if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 2) poisonScaling += 2;
-			if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 3) poisonScaling += 2;
-			if (player.perkv1(IMutationsLib.DrakeLungsIM) >= 4) poisonScaling += 2;
-			if (player.hasPerk(PerkLib.RacialParagon)) poisonScaling += 0.5;
-			if (player.hasPerk(PerkLib.Apex)) poisonScaling += 0.5;
-			if (player.hasPerk(PerkLib.AlphaAndOmega)) poisonScaling += 0.5;
-			if (player.hasPerk(PerkLib.NaturalArsenal)) poisonScaling += 0.5;
-			lustDmg2 *= poisonScaling;
-			lustDmg2 *= d2Bdcc;
-			monster.teased(Math.round(monster.lustVuln * lustDmg2), true);
-			combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
-			if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) d2Bdcc *= 2;
-			monster.statStore.addBuffObject({tou:-d2Bdcc}, "Poison",{text:"Poison"});
-			if(monster.hasStatusEffect(venomType))
-			{
-				monster.addStatusValue(venomType,2,2);
-				monster.addStatusValue(venomType,1,d2Bdcc);
-			}
-			else monster.createStatusEffect(venomType,d2Bdcc,2,0,0);
-		}
-		outputText("\n\n");
-		player.tailVenom -= player.VenomWebCost() * 5;
-		flags[kFLAGS.VENOM_TIMES_USED] += 1;
-		if (!combatIsOver()) enemyAI();
-	}
-
 	public function spiderBiteAttack():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
@@ -4585,10 +4534,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
 		//Victory ORRRRR enemy turn.
-		if(monster.HP > 0 && monster.lust < monster.maxLust()) enemyAI();
+		if(monster.HP > 0 && monster.lust < monster.maxOverLust()) enemyAI();
 		else {
 			if(monster.HP <= monster.minHP()) doNext(endHpVictory);
-			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
+			if(monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
 		}
 	}
 
@@ -4715,10 +4664,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
 		//Victory ORRRRR enemy turn.
-		if(monster.HP > 0 && monster.lust < monster.maxLust()) enemyAI();
+		if(monster.HP > 0 && monster.lust < monster.maxOverLust()) enemyAI();
 		else {
 			if(monster.HP <= monster.minHP()) doNext(endHpVictory);
-			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
+			if(monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
 		}
 	}
 	//Upheaval Attack
@@ -4831,10 +4780,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
 		//Victory ORRRRR enemy turn.
-		if(monster.HP > 0 && monster.lust < monster.maxLust()) enemyAI();
+		if(monster.HP > 0 && monster.lust < monster.maxOverLust()) enemyAI();
 		else {
 			if(monster.HP <= monster.minHP()) doNext(endHpVictory);
-			if(monster.lust >= monster.maxLust()) doNext(endLustVictory);
+			if(monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
 		}
 	}
 //Player sting attack
@@ -4911,7 +4860,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		player.tailVenom -= player.VenomWebCost() * 5;
 		flags[kFLAGS.VENOM_TIMES_USED] += 1;
 		//Kick back to main if no damage occured!
-		if(monster.HP > 0 && monster.lust < monster.maxLust()) enemyAI();
+		if(monster.HP > 0 && monster.lust < monster.maxOverLust()) enemyAI();
 		else doNext(endLustVictory);
 	}
 //Player tail spike attack
@@ -4998,7 +4947,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		outputText("You drop on all fours, flinging your tail forward and shooting an envenomed spike at [themonster].");
 		tailspikedamage();
 		outputText("\n\n");
-		if(monster.HP > 0 && monster.lust < monster.maxLust()) enemyAI();
+		if(monster.HP > 0 && monster.lust < monster.maxOverLust()) enemyAI();
 		else doNext(endLustVictory);
 	}
 
@@ -5039,7 +4988,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.WeaponClawsSavageRend) && player.tailVenom >= player.VenomWebCost() * 5) tailspikedamage();
 		if ((player.hasPerk(PerkLib.HistoryFeral) || player.hasPerk(PerkLib.PastLifeFeral)) && player.tailVenom >= player.VenomWebCost() * 5) tailspikedamage();
 		outputText("\n\n");
-		if(monster.HP > 0 && monster.lust < monster.maxLust()) enemyAI();
+		if(monster.HP > 0 && monster.lust < monster.maxOverLust()) enemyAI();
 		else doNext(endLustVictory);
 	}
 
@@ -5233,7 +5182,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		combat.heroBaneProc(damage);
 		combat.EruptingRiposte();
 		//Kick back to main if no damage occured!
-		if(monster.HP > 0 && monster.lust < monster.maxLust()) {
+		if(monster.HP > 0 && monster.lust < monster.maxOverLust()) {
 			enemyAI();
 		}
 		else {
@@ -5406,7 +5355,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 
 	public function shieldBash():void {
 		clearOutput();
-		EngineCore.WrathChange(-shieldbashcostly(), true);
+		EngineCore.WrathChange(-shieldbashcostly());
 		outputText("You ready your [shield] and prepare to slam it towards [themonster].  ");
 		if ((player.playerIsBlinded() && rand(2) == 0) || (monster.getEvasionRoll(false, player.spe))) {
 			if (monster.spe - player.spe >= 20) outputText("[Themonster] deftly avoids your slow attack.");
@@ -5597,7 +5546,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			doNext(endHpVictory);
 			return;
 		}
-		if (monster.lust >= monster.maxLust()) {
+		if (monster.lust >= monster.maxOverLust()) {
 			doNext(endLustVictory);
 			return;
 		}
@@ -5700,7 +5649,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				player.tailVenom -= player.VenomWebCost();
 				flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
 			}
-			if (player.tailType == Tail.SCORPION) {
+			if (player.tailType == Tail.SCORPION || player.hasKeyItem("Sky Poison Pearl") >= 0) {
 				outputText("  [monster he] seems to be effected by the poison, its movements slowing rapidly.");
 				var DBP:Number = 2;
 				var DBPa:Number = 1;
@@ -5806,7 +5755,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
 				}
 			}
-			if (monster.lust >= monster.maxLust()) {
+			if (monster.lust >= monster.maxOverLust()) {
 				outputText("\n\n");
 				flags[kFLAGS.ARROWS_SHOT]++;
 				doNext(endLustVictory);
@@ -5849,8 +5798,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 			damage *= 1.75+buffMultiplier;
 		}
 		damage = Math.round(damage);
-		doDamage(damage);
-		outputText("Holding your weapon horizontally you shoot them all spraying [themonster] with projectile. (<b><font color=\"#800000\">" + damage + "</font></b>) ");
+		outputText("Holding your weapon horizontally, you shoot them all, spraying [themonster] with a projectile. ");
+		damage = doDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
 		combat.cupidArrowsEffect();

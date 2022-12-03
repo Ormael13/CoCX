@@ -209,10 +209,10 @@ public class CombatSoulskills extends BaseCombatContent {
 			}
 		}
 		if (player.weapon == weapons.WDBLADE) {
-			bd = buttons.add("Blade Dance", BladeDance).hint("Attack twice (four times if double attack is active, six times if triple attack is active and etc.). \n\n(PHYSICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(50 * soulskillCost() * (1 + flags[kFLAGS.DOUBLE_ATTACK_STYLE])));
-			if ((player.soulforce < 50 * soulskillCost() * (1 + flags[kFLAGS.DOUBLE_ATTACK_STYLE])) && !player.hasStatusEffect(StatusEffects.BloodCultivator)) {
+			bd = buttons.add("Blade Dance", BladeDance).hint("Attack twice (four times if double attack is active, six times if triple attack is active and etc.). \n\n(PHYSICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(50 * soulskillCost() * (1 + flags[kFLAGS.MULTIATTACK_STYLE])));
+			if ((player.soulforce < 50 * soulskillCost() * (1 + flags[kFLAGS.MULTIATTACK_STYLE])) && !player.hasStatusEffect(StatusEffects.BloodCultivator)) {
 				bd.disable("Your current soulforce is too low.");
-			} else if (player.hasStatusEffect(StatusEffects.BloodCultivator) && (bloodForBloodGod - 1) < (50 * soulskillCost() * (1 + flags[kFLAGS.DOUBLE_ATTACK_STYLE]))) {
+			} else if (player.hasStatusEffect(StatusEffects.BloodCultivator) && (bloodForBloodGod - 1) < (50 * soulskillCost() * (1 + flags[kFLAGS.MULTIATTACK_STYLE]))) {
 				bd.disable("Your hp is too low to use this soulskill.");
 			}
 		}
@@ -633,6 +633,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			doDarknessDamage(damage, true, true);
 		}
 		else if (player.weapon == weapons.MGSWORD) doMagicDamage(damage, true, true);
+		else if (player.weapon == weapons.MCLAWS) doMagicDamage(damage, true, true);
 		else {
 			doDamage(damage, true, true);
 			if (player.weapon == weapons.DAISHO) doDamage(Math.round(damage * 0.5), true, true);
@@ -734,6 +735,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			doDarknessDamage(damage, true, true);
 		}
 		else if (player.weapon == weapons.MGSWORD) doMagicDamage(damage, true, true);
+		else if (player.weapon == weapons.MCLAWS) doMagicDamage(damage, true, true);
 		else {
 			doDamage(damage, true, true);
 			if (player.weapon == weapons.DAISHO) doDamage(Math.round(damage * 0.5), true, true);
@@ -998,7 +1000,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		damage *= soulskillMod();
 		damage *= corruptionMulti;
-		if (player.hasPerk(PerkLib.PerfectStrike) && (monster.hasStatusEffect(StatusEffects.Stunned) || monster.hasStatusEffect(StatusEffects.StunnedTornado) || monster.hasStatusEffect(StatusEffects.FrozenSolid))) damage *= 1.5;
+		if (player.hasPerk(PerkLib.PerfectStrike) && monster.monsterIsStunned()) damage *= 1.5;
 		if (damage > 0) {
 			outputText("You thrust your palm forward, creating a blast of pure energy that erupts from your palm, slamming into [themonster], tossing");
 			if ((monster as Monster).plural) outputText(" them");
@@ -1049,7 +1051,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		damage += player.wis;
 		damage += scalingBonusWisdom();
 		//other bonuses
-		if (player.hasPerk(PerkLib.PerfectStrike) && (monster.hasStatusEffect(StatusEffects.Stunned) || monster.hasStatusEffect(StatusEffects.StunnedTornado) || monster.hasStatusEffect(StatusEffects.FrozenSolid))) damage *= 1.5;
+		if (player.hasPerk(PerkLib.PerfectStrike) && monster.monsterIsStunned()) damage *= 1.5;
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 		if (combat.wearingWinterScarf()) damage *= 1.2;
 		var crit:Boolean = false;
@@ -1072,34 +1074,18 @@ public class CombatSoulskills extends BaseCombatContent {
 			damage *= 2;
 		}
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
-		if (monster.hasStatusEffect(StatusEffects.FrozenSolid)) {
-			if (monster.spe - 20 >= 0) {
-				monster.addStatusValue(StatusEffects.FrozenSolid, 1, 20);
-				monster.buff("FrozenSolid").addStats({spe:-20}).withText("Frozen Solid").combatTemporary(1);
-			}
-			else {
-				monster.addStatusValue(StatusEffects.FrozenSolid, 1, monster.spe);
-				monster.buff("FrozenSolid").addStats({spe:-20}).withText("Frozen Solid").combatTemporary(1);
-			}
-		}
-		else {
-			monster.createStatusEffect(StatusEffects.FrozenSolid, 0, 0, 0, 0);
-			if (monster.spe - 20 >= 0) {
-				monster.addStatusValue(StatusEffects.FrozenSolid, 1, 20);
-				monster.buff("FrozenSolid").addStats({spe:-20}).withText("Frozen Solid").combatTemporary(1);
-			}
-			else {
-				monster.addStatusValue(StatusEffects.FrozenSolid, 1, monster.spe);
-				monster.buff("FrozenSolid").addStats({spe:-20}).withText("Frozen Solid").combatTemporary(1);
-			}
-		}
-		if (!monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
-		else {
+		//stun
+		if (monster.hasPerk(PerkLib.Resolute)) {
 			outputText("  <b>[Themonster] ");
 			if(!monster.plural) outputText("is ");
 			else outputText("are ");
 			outputText("too sturdy to be frozen by your attack.</b>");
 		}
+		else if (monster.hasStatusEffect(StatusEffects.FrozenSolid)) monster.addStatusValue(StatusEffects.FrozenSolid, 1, 2);
+		else monster.createStatusEffect(StatusEffects.FrozenSolid, 2, 0, 0, 0);
+		//speed debuff
+		if (monster.buff("FrozenSolid").isPresent()) monster.buff("FrozenSolid").addStats({spe: -20}).addDuration(2);
+		else monster.buff("FrozenSolid").addStats({spe: -20}).withText("Frozen Solid").combatTemporary(2);
 		checkAchievementDamage(damage);
 		combat.WrathGenerationPerHit2(5);
 		combat.heroBaneProc(damage);
@@ -1130,7 +1116,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			else damage *= 2;
 		}
 		//other bonuses
-		if (player.hasPerk(PerkLib.PerfectStrike) && (monster.hasStatusEffect(StatusEffects.Stunned) || monster.hasStatusEffect(StatusEffects.StunnedTornado) || monster.hasStatusEffect(StatusEffects.FrozenSolid))) damage *= 1.5;
+		if (player.hasPerk(PerkLib.PerfectStrike) && monster.monsterIsStunned()) damage *= 1.5;
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -1218,7 +1204,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			damage *= 1.1;
 		}
 		//other bonuses
-		if (player.hasPerk(PerkLib.PerfectStrike) && (monster.hasStatusEffect(StatusEffects.Stunned) || monster.hasStatusEffect(StatusEffects.StunnedTornado) || monster.hasStatusEffect(StatusEffects.FrozenSolid))) damage *= 1.5;
+		if (player.hasPerk(PerkLib.PerfectStrike) && monster.monsterIsStunned()) damage *= 1.5;
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -1262,7 +1248,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		//soulskill mod effect
 		damage *= combat.soulskillMagicalMod();
 		//other bonuses
-		if (player.hasPerk(PerkLib.PerfectStrike) && (monster.hasStatusEffect(StatusEffects.Stunned) || monster.hasStatusEffect(StatusEffects.StunnedTornado) || monster.hasStatusEffect(StatusEffects.FrozenSolid))) damage *= 1.5;
+		if (player.hasPerk(PerkLib.PerfectStrike) && monster.monsterIsStunned()) damage *= 1.5;
 		if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 		var crit:Boolean = false;
 		var critChance:int = 5;
@@ -1396,7 +1382,7 @@ public class CombatSoulskills extends BaseCombatContent {
 	}
 	public function BladeDance():void {
 		clearOutput();
-		var soulforcecost:Number = 50 * soulskillCost() * (1 + flags[kFLAGS.DOUBLE_ATTACK_STYLE]);
+		var soulforcecost:Number = 50 * soulskillCost() * (1 + flags[kFLAGS.MULTIATTACK_STYLE]);
 		soulforcecost = Math.round(soulforcecost);
 		if (player.hasStatusEffect(StatusEffects.BloodCultivator)) player.takePhysDamage(soulforcecost);
 		else player.soulforce -= soulforcecost;
@@ -1792,7 +1778,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		flags[kFLAGS.SPELLS_CAST]++;
 		if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
 		spellPerkUnlock();
-		if(player.lust >= player.maxLust()) doNext(endLustLoss);
+		if(player.lust >= player.maxOverLust()) doNext(endLustLoss);
 		else enemyAI();
 	}*/
 	/*

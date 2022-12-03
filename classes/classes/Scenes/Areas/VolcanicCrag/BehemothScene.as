@@ -190,7 +190,7 @@ public class BehemothScene extends BaseContent
 			if (player.lust >= 33) addButton(0, "Sex", behemothSexMenu, true, null, null, "Initiate sexy time with the Behemoth.");
 			addButton(14, "Leave", cleanupAfterCombat);
 			SceneLib.uniqueSexScene.pcUSSPreChecksV2(winAgainstBehemoth);
-					}
+		}
 		
 		public function loseToBehemoth():void {
 			clearOutput();
@@ -284,7 +284,7 @@ public class BehemothScene extends BaseContent
 			var isVirgin:Boolean = (player.looseness(false) == 0);
 			clearOutput();
 			outputText(images.showImage("behemoth-anal-catch"));
-			if (player.HP <= 0 || player.lust >= player.maxLust()) {
+			if (player.HP <= 0 || player.lust >= player.maxOverLust()) {
 				outputText("You have no choice but to accept the fact that the behemoth is going to penetrate you anally. He looks at you with a grin and says, \"<i>Go on, strip for me. I want to see your wonderful butt, " + player.mf("dude", "chick") + ".</i>\"\n\n");
 			}
 			else {

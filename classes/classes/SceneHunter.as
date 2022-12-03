@@ -103,7 +103,9 @@ public class SceneHunter extends BaseContent {
         outputText("\n- Urta - affection doesn't decay overtime anymore.");
         outputText("\n- Urta's quest, final scene - all follower lines are enabled at the same time (was random from 5 options before).");
         outputText("\n- 'Recall' - opens up alt versions of some scenes that probably nobody wants to see normally, but still might be interesting.");
-        outputText("\n<i>This flag (usually) opens up more scenes. Most changes are lore-accurate and explained in the game (so everything feels logical), but be warned that the original writers probably intended some details to work the other way.</i>");
+        outputText("\n- The cabin doesn't disable imp attacks anymore. You still can build a wall or something else though.");
+        outputText("\n- Disables Raphael dress timer - you can't fail his date by not wearing it.");
+        outputText("\n<i>Most changes are lore-accurate and explained in the game (so everything feels logical), but be warned that the original writers probably intended some details to work the other way.</i>");
         outputText("\n<i>Some one-time scenes with many options and checks can be replayed using 'Camp Actions > Spend Time > Recall'.</i>");
 
         outputText("\n\n<b><u>SAVE-RELATED FLAGS</u></b>\n");
@@ -378,7 +380,7 @@ public class SceneHunter extends BaseContent {
         }
         //Dialogue
         var beforeText:String = CoC.instance.currentText;
-        outputText("\n\n<b>Since you have several cocks, will you try to use more at the same time to get more pleasure, or only one hoping for a better treatment?</b>");
+        outputText("\n\n<b>Will you try to use more cocks at the same time to get more pleasure, or only one hoping for a better treatment?</b>");
         //menu
         menu();
         addButton(0, "Single", restoreText, beforeText, singleF);
@@ -655,7 +657,6 @@ public class SceneHunter extends BaseContent {
         addButton(12, "CampNPCs-3", recallScenes_NPCs_3);
         if (flags[kFLAGS.URTA_QUEST_STATUS] >= 1) addButton(13, "UrtaQuest", recallScenes_quest);
         addButton(14, "Wake Up", recallWakeUpImpl);
-        flags[kFLAGS.DOMINIKAS_SWORD_GIVEN] = 0;
     }
 
     private function recallScenes_places():void {
@@ -758,6 +759,9 @@ public class SceneHunter extends BaseContent {
         if (flags[kFLAGS.URTA_X_RAPHAEL_HAPPENED])
             addButton(7, "Urta x Raph", SceneLib.urta.urtaAndRaphaelSurprise)
                 .hint("Drunk Urta and Raphael surprise.");
+        if (SceneLib.telAdre.sexMachine.totalUses() > 0)
+            addButton(8, "Sex Machine", SceneLib.telAdre.sexMachine.exploreShowers)
+                .hint("Your first time with the 'unique' gym machine");
         addButton(14, "Back", recallScenes_places);
     }
 

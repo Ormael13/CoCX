@@ -65,7 +65,6 @@ public class AkbalScene extends BaseContent {
 					addButtonIfTrue(12, "ForceLick (T)", rapeAkbalForcedFemaleOral_Taur, "Req. a vagina & taur body",
 						player.hasVagina() && player.isTaur());
 					LustyMaidensArmor.addTitfuckButton(4);
-					SceneLib.uniqueSexScene.pcUSSPreChecksV2(curry(akbalDefeated, false));
 					addButton(14, "Leave", cleanupAfterCombat);
 				}
 				else {
@@ -1141,7 +1140,7 @@ public class AkbalScene extends BaseContent {
 				//{if penis > 12in}
 				else
 					outputText("\n\nAkbal howls and cringes as you begin to stuff yourself into his tight tailhole.  His hips swerve, and you have to yank your forest-made collar to keep your [cock " + x1 + "] buried within his gloriously wet and unbelievably tight hole.  Once you’ve managed to get your [cockHead biggest] past his tight ring, he begins to whine again.  You have to pull his collar to force him down the length of your [cock " + x1 + "], but once a foot of your massive dick is inside him, your advance is halted.  Before you even think to complain his insides begin to squirm, shifting to make room for the rest of your [cock " + x1 + "].  You reach down and grab his hips, pulling him back until his plump muscled cheeks softly mash against your trunk.  He howls as you maintain a firm grip on his slender hips, not allowing him to move an inch.  Through your fully embedded [cock " + x1 + "] you can feel his hole quivering as it pumps massive gobs of that creamy, slick lube in an attempt to make the fuck easier.  A yank on the collar causes the demon to begin slowly forcing himself up and down the length of your [cock " + x1 + "].  After a few incursions Akbal picks up the pace and becomes lost in fucking himself up and down your giant pole.  His natural lube even slides out and drips down your [legs] as he repeatedly smashes his insatiable ass into you.  Unbidden, a groan finds its way out your mouth as the demon works you over, having gone from neophyte to pro in a matter of minutes.");
-				doNext(curry(dickF2, x));
+				doNext(dickF2, x);
 			}
 			function dickF2(x:int):void {
 				var x1:int = x + 1;

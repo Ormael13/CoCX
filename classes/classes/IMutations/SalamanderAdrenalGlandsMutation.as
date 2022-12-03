@@ -19,7 +19,7 @@ public class SalamanderAdrenalGlandsMutation extends IMutationPerkType
             pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier >= 1) descS += "Your Salamander adrenal glands are giving you slight boost to your natural stamina";
             if (pTier == 1){
-                descS += "and libido";
+                descS += " and libido";
             }
             if (pTier == 2){
                 descS += ", stamina, speed, libido and extend lustzerker and berserker duration by 2 turns";
@@ -67,9 +67,8 @@ public class SalamanderAdrenalGlandsMutation extends IMutationPerkType
         }
 
         //Mutations Buffs
-        override public function pBuffs(target:Creature = null):Object{
+        override public function buffsForTier(pTier:int):Object {
             var pBuffs:Object = {};
-            var pTier:int = currentTier(this, (target == null)? player : target);
             if (pTier == 1) {
                 pBuffs['tou.mult'] = 0.05;
                 pBuffs['lib.mult'] = 0.05;

@@ -23,7 +23,7 @@ public class AlrauneScene extends BaseContent
 						"\"<i>Looking for a stamen to fertilize us, or a pussy to stuff our seed, truly.</i>\"\n\n" +
 						"\"<i>Except we haven’t found anyone but you so far.</i>\"\n\n");
 			}
-			outputText("You pretty much stumbled upon her at random though truth be told now that you think of it there is no such thing as incest when it comes down to plants.");
+			outputText("You pretty much stumbled upon her at random though truth be told now that you think of it, there is no such thing as incest when it comes down to plants.");
 			if(player.isLiliraune()) outputText(" Both of you ");
 			else outputText(" You ");
 			outputText("give the flower girl a wink.");
@@ -68,6 +68,7 @@ public class AlrauneScene extends BaseContent
 				outputText("\"<i>Mmmmmm such a nice catch... Come closer into my pitcher.</i>\"\n\n");
 				outputText("There's no way you will let this thing pull you in!\n\n");
 			}
+			player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
 			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_ALRAUNE);
 			startCombat(new Alraune());
 		}

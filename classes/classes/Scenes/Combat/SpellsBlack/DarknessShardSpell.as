@@ -17,7 +17,7 @@ public class DarknessShardSpell extends AbstractBlackSpell {
 				: "Drawing your own lust to condense part of the the ambivalent darkness into a shard to attack your enemies.",
 			TARGET_ENEMY,
 			TIMING_INSTANT,
-			[TAG_DAMAGING, TAG_DARKNESS]
+			[TAG_DAMAGING, TAG_DARKNESS, TAG_TIER1]
 		);
 		baseManaCost = 40;
 		if (ex) baseWrathCost = 100;
@@ -46,7 +46,7 @@ public class DarknessShardSpell extends AbstractBlackSpell {
 		var baseDamage:Number = 2 * scalingBonusIntelligence(randomize);
 		if (player.weaponRangeName == "Artemis") baseDamage *= 1.5;
 		if (ex) baseDamage *= 2;
-		return adjustSpellDamage(baseDamage, DamageType.ICE, CAT_SPELL_BLACK, monster, true, casting);
+		return adjustSpellDamage(baseDamage, DamageType.DARKNESS, CAT_SPELL_BLACK, monster, true, casting);
 	}
 	
 	override protected function doSpellEffect(display:Boolean = true):void {

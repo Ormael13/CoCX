@@ -13,8 +13,9 @@ package classes.Items.Weapons
 		{
 			super("LifScyt", "L.Scythe", "lifehunt scythe", "a lifehunt scythe", "slash", 25, 2000,
 					"This enchanted scythe is made of a white metal, and its surface is decorated with ruby gemstones and silver engravings depicting dragons. It seems to drink in the opponents blood use it to heal its user’s wounds.",
-					"Large, Bleed25", "Scythe, StaffPart"
+					"Large, Whirlwind, Bleed25", "Scythe, StaffPart"
 			);
+			withBuff('spellpower', +1.0);
 		}
 		
 		override public function get attack():Number{

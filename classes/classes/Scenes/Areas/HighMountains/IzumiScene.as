@@ -1021,7 +1021,7 @@ import classes.Stats.Buff;
 			outputText(" backwards, self-preservation instincts kicking in, intent on escaping the deranged Oni.  To your surprise, rather than snatching or leaping at you, she just blinks and looks at you in confusion.\n\n");
 
 			outputText("\"<i>Huh?  What’s the matter?</i>\"  She asks, looking genuinely nonplussed.  She reaches out towards you and you shuffle away again, putting a little more distance between the two of you.");
-			if(player.lust >= player.maxLust()) outputText("  Despite how much the fight with the enormous Oni has turned you on, you’re still hesitant to capitulate to her will entirely.");
+			if(player.lust >= player.maxOverLust()) outputText("  Despite how much the fight with the enormous Oni has turned you on, you’re still hesitant to capitulate to her will entirely.");
 			outputText("  Izumi actually looks a little hurt.  \"<i>You... you really don’t want to do it?</i>\"  You can only stare at the oversized giantess in utter confusion as she stammers awkwardly.  \"<i>D-Did I do something wrong? I was only playing around, so... we can do it now, right?  What’s wrong?!</i>\"  Against all your expectations, Izumi actually backs down, settling back into a seated position on her knees, her expression visibly deflating.\n\n");
 
 			outputText("\"<i>Oh, I get it.  It’s me, right?  You don’t find a girl like me attractive.</i>\"  Her face falls as she stares at the floor, looking positively morose.  \"<i>It’s okay, I don’t blame you.  This whole situation probably seems pretty weird, right?  One minute I’m smacking you around, the next I’m trying to jump you... I forget sometimes that not everyone acts the way Oni do when it comes to stuff like this.</i>\"  She sniffs, rubbing one massive palm into her eye and scowling.\n\n");
@@ -1316,7 +1316,7 @@ import classes.Stats.Buff;
 			clearOutput();
 			outputText("Izumi slips backwards onto one knee and holds up a hand for pause,");
 			if((player.HP/player.maxHP()) <= 0.1) outputText(" the brief reprieve giving both of you a moment to recover.\n\n");
-			else if(monster.lust >= monster.maxLust()) outputText(" the Oni’s cheeks tinged a rosy peach in contrast to her alabaster skin.\n\n");
+			else if(monster.lust >= monster.maxOverLust()) outputText(" the Oni’s cheeks tinged a rosy peach in contrast to her alabaster skin.\n\n");
 			else outputText(" momentarily staggered by your furious onslaught.\n\n");
  
 			outputText("\"<i>Alright, alright! Hold it a second!</i>\" she yells, scowling as she pulls herself back to her feet.  Warily, you remain in your combat stance just out of reach, waiting to see if she’ll try anything.  Instead of launching some kind of surprise attack, however, she just dusts herself off, glaring at you thoughtfully.  The two of you exchange stares for a long, tense moment, before finally Izumi lets out a quiet grunt.\n\n");
@@ -1333,7 +1333,7 @@ import classes.Stats.Buff;
 
 			outputText("Izumi was pretty strong when she claimed to be just playing around and using only a single hand to fight you, but there’s nothing playful about her appearance now.  In fact, in her strange, crouched stance, muscles straining against some invisible force, snarling and roaring at the empty air as she stares into nothing, you can’t help but feel she looks like nothing more than a crazed monster...  a demon, straight out of a story made to scare wayward children. You have to do something, you realize.  You have to interrupt her, before she finishes whatever it is she’s doing!\n\n");
 			// Tease victory
-			if (monster.lust >= monster.maxLust())
+			if (monster.lust >= monster.maxOverLust())
 			{
 				// Gonna refactor the tease attack code to seperate out the display elements from the action elements, so I we can grab a player-appropriate text blurb
 				SceneLib.combat.teases.tease(true);

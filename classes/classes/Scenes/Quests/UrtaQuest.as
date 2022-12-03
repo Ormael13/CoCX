@@ -960,7 +960,7 @@ public function urtaLosesToGoblin():void {
 	clearOutput();
 	//Urta bad end, written by Kinathis... Buckle up for the worst writing you have ever seen!....Okay lets do this! Raaaaa!!! o-o What did i get myself into...
     //Loss by lust intro(C)*
-	if(player.lust >= player.maxLust()) {
+	if(player.lust >= player.maxOverLust()) {
 		outputText("Your aching body buckles under the goblin's lusty assault.  As if the constant flow of precum that soaks your skirt isn't enough, your raw desire for the goblin's curvy little body explodes from you.  The iron-hard pole of animalistic breeding meat throbs powerfully as it stands tall against your otherwise feminine body, lifting your protective skirt and making it gather up around your waist.  Unable to stop yourself, your hands grab hold of the aching, arm-sized length of horseflesh as you sink to your knees.  Without missing a beat, your hands stroke and squeeze your fat equine endowment with feverish need.  Almost instantly, your over-productive organ soaks your squeezing hands in streams of thick, musky pre; clear, sticky rivulets that drip all the way down to your aching, pulsating balls.  Your huge, sterile, stallion-nuts swell and bloat with their massive load.  The poor things ache to be unleashed inside your assailant's cum-craving womb.");
 		outputText("\n\nGiggling impishly, the pregnancy-obsessed seductress sashays her way over to you.  The voluptuous woman looks at your masturbating form for a moment, admiring your well endowed body before making her move.  Shoving you down, she pulls your face into her bountiful bosom, nearly suffocating you in sweet, soft titflesh as she grinds her curvy little body against you.  \"<i>Ohhh... look at that big beast you have there.  You're going to love feeling my tight little puss wraped around your stallion-cock, aren't you?  Just look at those huge balls - I think I found myself a keeper.  Now, don't you worry about anything, dear.  Just lay back and let me milk all the sperm from those big, round cum-dispensers of yours,</i>\" the kid-crazy woman says before she pulls a few red vials from her bags and forces them against your lips, massaging your throat to make sure you swallow every drop.");
 		outputText("\n\nYou were pretty horny before, but after these doses there's only one thought you're capable of processing: the searing desire to rut and breed.  As soon as that bubbling concoction hits your stomach a throaty groan tears itself from your dark lips.  The chemical aphrodisiac surges right to your brain and over-aroused equine erection.  Your already iron-hard horseflesh seems to swell even bigger from your newfound arousal; the bloated, blunt crown belching forth a thick, musky bolt of sticky pre all up the dominant goblin's back.  Feeling your hot, thick juice shoot across her flesh only seems to make her more hungry for you.  If you can pump out pre-cum like that, just what kind of flood are you going to make when you really cum?");
@@ -1196,7 +1196,7 @@ private function urtaComboAttack():void {
 	}
 	outputText("\n");
 	//Kick back to main if no damage occured!
-	if (monster.HP >= (monster.minHP() + 1) && monster.lust < monster.maxLust()) {
+	if (monster.HP >= (monster.minHP() + 1) && monster.lust < monster.maxOverLust()) {
 		if(player.hasStatusEffect(StatusEffects.Attacks)) {
 			trace("MORE ATTACK");
 			urtaComboAttack();
@@ -1311,7 +1311,7 @@ private function urtaSidewinder():void {
 	else if (monster.hasPerk(PerkLib.Resolute)) outputText("\nWhile it should have some chance of stunning, your foe seems far too resolute to be affected by such an ailment.");
 	outputText("\n");
 	//Kick back to main if no damage occured!
-	if(monster.HP >= 1 && monster.lust <= 99) {
+	if(monster.HP > monster.minHP() && monster.lust < monster.maxOverLust()) {
 		if(player.hasStatusEffect(StatusEffects.FirstAttack)) {
 			combat.attack();
 			return;
@@ -1401,7 +1401,7 @@ private function urtaVaultAttack():void {
 	}
 	outputText("\n");
 	//Kick back to main if no damage occured!
-	if(monster.HP >= 1 && monster.lust <= 99) {
+	if(monster.HP > monster.minHP() && monster.lust < monster.maxOverLust()) {
 		if(player.hasStatusEffect(StatusEffects.FirstAttack)) {
 			combat.attack();
 			return;
@@ -1491,7 +1491,7 @@ private function urtaWinFucksSirius():void {
 	outputText("\n\nSirius gurgles as you flood his throat with your spunk; it's amazing how he hasn't choked on your cock despite the fact that you never quit humping his face... no doubt that's due to his natural elasticity... something you've come to appreciate very much!  You moan and grunt as you finally finish your climax, then slowly pull your cock out of your lover's mouth, splattering the naga's face with one final gobbet of cum.");
 	outputText("\n\nYou shake your head, feeling kind of dizzy, but good... also, still kind of horny.  Wow, he looks really cute with his face splashed with semen... and his belly starting to bulge from the load you shot down his throat...  That's so... hot...  Your cock starts to harden up again, anticipating your intentions.  Funny... you vaguely remember needing to do something... something besides fucking this sexy snake here.  Eh, it can wait; round two, coming up!");
 	outputText("\n\nSirius coughs pathetically, spitting a small gob of seed in the process.  Then he licks his lips and looks up, only to meet your hungry stare.  \"<i>Why are you looking at me like that?  No... oh nononononono... Wa - GH!</i>\"  You cram his mouth full again, already humping his face as if your life depends on it... mmm, his throat feels so good wrapped around your cock...");
-	dynStats("lus=", player.maxLust(), "scale", false);
+	dynStats("lus=", player.maxOverLust(), "scale", false);
 	//Next Page button to trigger scene finish
 	menu();
 	addButton(0,"Next",fuckSiriusRadioII);
@@ -1673,7 +1673,7 @@ public function useSuccubiMilkOnGnollPrincesses():void {
 public function loseToGnollPrincessAndGetGangBanged():void {
 	clearOutput();
 	if (!recalling) flags[kFLAGS.URTA_TAKEN_BY_GNOLLS] = 1;
-	if(player.lust >= player.maxLust()) {
+	if(player.lust >= player.maxOverLust()) {
 		outputText("Sinking to your knees, utterly overwhelmed by lust, you gaze up the clit-cocked amazon, licking your chops. She responds by disdainfully pushing you down with one of her soft, padded paws.  \"<i>Did you really think you could trespass in my mother's territory and go unpunished?</i>\"");
 		outputText("\n\n\"<i>I didn't know!</i>\" you whimper, \"<i>Honest!  I just had to-ooooohhhh...</i>\"");
 		outputText("\n\nA pleasant, cushiony warmth envelops your turgid member, velvet pads curling around your equine length to squeeze it with remarkable dexterity.  The sensation easily derails your train of thought, leaving it a smoldering wreck at the bottom of a gulch.  Instead, you lift your hips against the lithe woman's limber footpaw to try and grind against it.  She withdraws the foot as fast as you can arch your body, denying you any extra sensation.  The gnoll tuts and withdraws her digits from around your throbbing maleness, \"<i>Look, you little bitch, I've never seen a girl with a cock like that, and I wanna watch you cum so hard you black out.  BUT, if you aren't going to lie there like a good little bitch, I'll knock your ass out, tie you up, and do it while you're unconscious so you don't even get to feel it.  Then, when you wake up, I'll rape your fucking urethra until you think your cock's gonna split in half.  Don't... fuck... with... me...</i>\"");
@@ -1974,7 +1974,7 @@ private function submissiveMinoUrtaBadEndPtIII():void {
 public function winRapeAMinoLordAsUrta():void {
 	clearOutput();
 	outputText("Exulting in your victory, you quickly undress, barely paying heed to the ");
-	if(monster.lust >= monster.maxLust()) outputText("lusty");
+	if(monster.lust >= monster.maxOverLust()) outputText("lusty");
 	else outputText("pained");
 	outputText(" moos coming from your defeated foe.  Thankfully, the straps on your armor don't give you much trouble today, and you're able to slip out of your gear in short order.  That's a pleasant blessing given how hard your horse-cock was getting just prior to being granted freedom from your weighty, armored skirt.  There's something to be said for felling your foes and standing over them, naked, victorious, and ready to ravage their anuses.");
 	outputText("\n\nYou give the succubus a warning glare and shout, \"<i>This cow's ass is mine, bitch.  Once I bust a load in him, you're next!</i>\"");
@@ -2238,7 +2238,7 @@ private function deadGodsDreaming():void {
 	outputText("\n\nThe statue smirks triumphantly at you, and then its eyes suddenly explode in a great wave of many-colored fire that washes over you, forcing you to close your eyes, leaving you reeling as they stab through you...");
 	outputText("\n\nThen you awake with a start, still kneeling before the unmoving statue.  Was it all a dream?  You don't know...  Your head is throbbing like mad, and you can't think clearly.  But even as the pain dims, you become aware of another, more pressing matter.  Lust.  That familiar yearning burns inside your arm-length prick like a raging inferno, the tower of equine fuckmeat thrusting boldly before you and steadily gushing precum onto the ground.  Naked, hungry NEED screams and claws and gibbers behind your eyes... " + player2.short + ", you must have " + player2.short + "!");
 	outputText("\n\nAbsently licking drool from your lips, you stagger upright and, using your halberd for support, start loping home from the shrine.  In your wake you leave a slug-like trail of sexual lubricants, too focused on finding and fucking your lover to care about the glistening slime caking your dick and plastering your inner thighs.");
-	dynStats("lus=", player.maxLust(), "scale", false);
+	dynStats("lus=", player.maxOverLust(), "scale", false);
 	//Revert to PC control and change page to Urta Arrives At Camp
 	menu();
 	addButton(0,"Next",urtaArrivesAtCampForFukks);

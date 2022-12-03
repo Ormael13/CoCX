@@ -5,6 +5,8 @@ package classes.Items
 {
 import classes.PerkLib;
 
+import coc.view.IconLib;
+
 public class Armor extends Equipable
 	{
 		private var _def:Number;
@@ -29,6 +31,10 @@ public class Armor extends Equipable
 		private static const SLOTS:Array = [SLOT_ARMOR];
 		override public function slots():Array {
 			return SLOTS; // don't recreate every time
+		}
+		
+		override public function get iconId():String {
+			return IconLib.pickIcon(ownIconId, "I_GenericArmor_"+perk, super.iconId);
 		}
 		
 		public function get def():Number { return _def; }

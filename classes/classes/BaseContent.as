@@ -9,7 +9,6 @@ import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.Scenes.Holidays;
 import classes.Scenes.Inventory;
 import classes.Scenes.Places.Ingnam;
-import classes.Scenes.Places.Prison;
 import classes.Scenes.SceneLib;
 import classes.Transformations.TransformationLib;
 import classes.internals.Utils;
@@ -74,10 +73,6 @@ import coc.xxc.StoryContext;
 
 		protected function get ingnam():Ingnam {
 			return SceneLib.ingnam;
-		}
-
-		protected function get prison():Prison {
-			return SceneLib.prison;
 		}
 
 		protected function get d3():D3 {
@@ -267,9 +262,9 @@ import coc.xxc.StoryContext;
 			CoC.instance.flushOutputTextToGUI();
 		}
 
-		protected function doNext(eventNo:Function):void //Now typesafe
+		protected function doNext(func:Function, ...args):void //Now typesafe
 		{
-			EngineCore.doNext(eventNo);
+			EngineCore.doNext.apply(null, [func].concat(args));
 		}
 
 		protected static function menu():void
@@ -585,13 +580,14 @@ import coc.xxc.StoryContext;
 		public static const USEFATG_BLACK:int = 6;
 		public static const USEFATG_WHITE_NOBM:int = 7;
 		public static const USEFATG_BLACK_NOBM:int = 8;
-		protected function fatigue(mod:Number,type:Number=0):void {
+
+		protected function fatigue(mod:Number, type:Number = USEFATG_NORMAL):void {
 			EngineCore.fatigue(mod, type);
 		}
 
-		protected function useMana(mod:Number,type:Number=0):void
-		{
-			SceneLib.combat.useManaImpl(mod,type);
+		public static const USEMANA_NORMAL:int = 0;
+		protected function useMana(mod:Number, type:Number = USEMANA_NORMAL):void {
+			SceneLib.combat.useManaImpl(mod, type);
 		}
 
 		protected static function playerMenu():void { EventParser.playerMenu(); }
@@ -661,10 +657,10 @@ import coc.xxc.StoryContext;
 		protected function get itemTemplates():ItemTemplateLib{
 			return ItemTemplateLib.instance;
 		}
-		protected function get consumables():ConsumableLib{
+		protected static function get consumables():ConsumableLib{
 			return CoC.instance.consumables;
 		}
-		protected function get useables():UseableLib{
+		protected static function get useables():UseableLib{
 			return CoC.instance.useables;
 		}
 		protected function get weapons():WeaponLib{
@@ -676,7 +672,7 @@ import coc.xxc.StoryContext;
 		protected function get weaponsflyingswords():FlyingSwordsLib{
 			return CoC.instance.weaponsflyingswords;
 		}
-		protected function get armors():ArmorLib{
+		protected static function get armors():ArmorLib{
 			return CoC.instance.armors;
 		}
 		protected function get miscjewelries():MiscJewelryLib{
@@ -809,7 +805,17 @@ import coc.xxc.StoryContext;
 		protected function get context():StoryContext {
 			return CoC.instance.context;
 		}
-		public static function submenu(buttons:ButtonDataList, back:Function=null, page:int=0, IsSorted:Boolean = true):void {
+
+		/**
+		 * Print a submenu from the provided buttons
+		 * @param buttons List of buttons for the menu
+		 * @param back Function for the "Back" button (14)
+		 * @param page Currently displayed page
+		 * @param IsSorted If true, the buttons will be sorted by their names
+		 * @param buttonsPerPage How many buttons is displayed per page. By default, 12 (buttons 12-13 reserved for Prev-Next pages, 14 for Back)
+		 * @return this
+		 */
+		public static function submenu(buttons:ButtonDataList, back:Function=null, page:int=0, IsSorted:Boolean = true, buttonsPerPage:int = 12):void {
 			var list:/*ButtonData*/Array = buttons.list.filter(function(e:ButtonData, i:int, a:Array):Boolean{
 				return e.visible;
 			});
@@ -818,11 +824,11 @@ import coc.xxc.StoryContext;
 			}
 			menu();
 			var total:int = list.length;
-			var n:int = Math.min(total,(page+1)*12);
-			for (var bi:int = 0,li:int=page*12; li<n; li++,bi++) {
-				list[li].applyTo(button(bi%12));
+			var n:int = Math.min(total,(page+1)*buttonsPerPage);
+			for (var bi:int = 0,li:int=page*buttonsPerPage; li<n; li++,bi++) {
+				list[li].applyTo(button(bi%buttonsPerPage));
 			}
-			if (page!=0 || total>12) {
+			if (page!=0 || total>buttonsPerPage) {
 				button(12).show("Prev Page", curry(submenu, buttons, back, page - 1, IsSorted)).disableIf(page == 0);
 				button(13).show("Next Page", curry(submenu, buttons, back, page + 1, IsSorted)).disableIf(n >= total);
 			}

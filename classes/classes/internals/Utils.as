@@ -28,6 +28,11 @@ public class Utils extends Object
             return x & ~(1 << bit) | (int(setTo) << bit);
         }
 
+		//XORs n-th bit of the integer
+		public static function xorBit(x:int, bit:int):int {
+			return setBit(x, bit, !getBit(x, bit));
+		}
+
 		// curryFunction(f,args1)(args2)=f(args1.concat(args2))
 		// e.g. curryFunction(f,x,y)(z,w) = f(x,y,z,w)
 		public static function curry(func:Function,...args):Function
@@ -543,6 +548,29 @@ public class Utils extends Object
 			else throw new Error("RandomInCollection could not determine usage pattern.");
 
 			return tar[rand(tar.length)];
+		}
+
+		/**
+		 * Same as randomChoice(), but places the picked items into an array.
+		 * Accepts any type; Can also accept a *single* array of items, in which case it picks from the array instead.
+		 * @param unique If true, will pick unique items (works well with duplicates in the provided array)
+		 * @param count	 How much items to pick
+		 */
+		public static function randomChoices(unique:Boolean, count:int, ...args):Array {
+			var tar:Array = args.length == 1 && args[0] is Array ? args[0] : args;
+			if (unique && count > tar.length || count < 0) throw new Error("Wrong randomChoices usage.");
+
+			var ind:Array = [], res:Array = [];
+			var i:int;
+			// find unique indices
+			while (ind.length < count) {
+				i = rand(tar.length);
+				if (!unique || ind.indexOf(i) == -1)
+					ind.push(i);
+			}
+			for each (i in ind)
+				res.push(tar[i]);
+			return res;
 		}
 		
 		

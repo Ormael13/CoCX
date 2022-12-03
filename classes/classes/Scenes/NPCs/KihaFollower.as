@@ -103,17 +103,14 @@ public class KihaFollower extends NPCAwareContent implements TimeAwareInterface,
         if (pregnancy.isPregnant && kihaPregUpdate()) needNext = true;
         if (flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] > 1) {
             if (flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] != 144) flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER]--;
-            if (flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] == 240 && (flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0)) {
+            if (flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] == 240 && !flags[kFLAGS.IN_INGNAM]) {
                 kihaBreastfeedingTime();
                 needNext = true;
-            } else if (flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] == 144 && prison.inPrison) {
-                kihaTellsChildrenStory();
-                needNext = true;
-            } else if (flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] == 72 && (flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0)) {
+            } else if (flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] == 72 && !flags[kFLAGS.IN_INGNAM]) {
                 kihaTrainsHerKids();
                 needNext = true;
             }
-        } else if (flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] == 1 && (flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0)) {
+        } else if (flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] == 1 && !flags[kFLAGS.IN_INGNAM]) {
             kihaChildGraduationTime();
             needNext = true;
         }
@@ -763,7 +760,7 @@ public class KihaFollower extends NPCAwareContent implements TimeAwareInterface,
         outputText("[pg]Finding a gap in the foliage, the temperamental dragon-woman takes you up and out into the sky.  The gnarled swamp-trees beneath you look far less imposing from up here, and soon, they're flying past in a blur.  Without warning, Kiha twists and dives, taking you down to a small island in the swamp - her home.  She swoops through a gap in the roof with you in tow, confidently catching herself on the far wall of her abode and setting you down on the hard-packed floor.  You stumble, woozy from the abrupt flight.");
         outputText("[pg]\"<i>Does getting dragons off really make you that light-headed?</i>\" Kiha asks.  She tackles you into her bed before you can answer.  Her attitude, while still fierce, reminds you more of a playful kitten than a threat.");
         //[Route to appropriate sex scene!]
-        if (!recalling) dynStats("lus=", player.maxLust());
+        if (!recalling) dynStats("lus=", player.maxOverLust());
         doNext(lovingHugSelector);
     }
 
@@ -2163,11 +2160,6 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         var eggCounter:int = (rand(5) + 1) * 2;
         eggCounter += (player.virilityQ() / 10);
         if (eggCounter > 10) eggCounter = 10;
-        //In prison? Letter for you!
-        if (prison.inPrison) {
-            prison.prisonLetter.letterFromKiha1(eggCounter);
-            return;
-        }
         clearOutput();
         kihaSprite();
         //Scene time!
@@ -2218,10 +2210,6 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
 
     public function kihaTellsChildrenStory():void {
         flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER]--;
-        if (prison.inPrison) {
-            prison.prisonLetter.letterFromKiha3();
-            return;
-        }
         clearOutput();
         kihaSprite();
         outputText("Kiha walks over to you and says, \"<i>Could you sit with me please, [name]? I want to tell our " + (totalKihaChildren() == 1 ? "kid" : "kids") + " a story,</i>\" she says. You tell her that it would be a wonderful idea! Kiha escorts you to her nest.");
@@ -2251,10 +2239,6 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
 
     private function kihaChildGraduationTime():void {
         flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] = 0;
-        if (prison.inPrison) {
-            prison.prisonLetter.letterFromKiha4();
-            return;
-        }
         outputText("You walk up to check on your draconic children. By Marae, they're all grown up! Looking down, you notice that most of them are wearing tribal loincloths, a nod to modesty ");
         if (flags[kFLAGS.KIHA_UNDERGARMENTS] > 0) outputText("like Kiha");
         else outputText("unlike Kiha, who is naked");
@@ -2586,7 +2570,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         outputText("…Holding her upside down against a wall, her legs around your neck and the taste of her pussy overwhelming, your tongue deep inside her while she throats your [cock]...\n\n");
         outputText("…Her lips on yours, burning alcohol mixing with your saliva as she trickles brandy into your mouth with her flexible tongue.\n\n");
         outputText("You open your eyes, head pounding. The room seems to swim around you, and you don’t even try to roll over, your body aching all over. Your chest heaves, and you feel like you can barely breathe…You look down at your chest, and you see Kiha, splayed out on top of you. One arm is around your neck, her tail wrapped clumsily around your [legs], but her other limbs are limp, thrown randomly around.\n\n");
-        doNext(curry(camp.returnToCamp, 20));
+        doNext(camp.returnToCamp, 20);
     }
 
     public function KihaLesbWeddingNight():void {
@@ -2594,7 +2578,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         outputText("You take Kiha’s tail in your hands, rubbing the scaly appendage. Smiling slightly, you take the tip, guiding it to your own delta.\n\n");
         outputText("Snas is having technical difficulties writing this scene, as he does not have the equipment to adequately imagine what is going on here. Please, for the love of Dragon Waifus, someone help me with lesbian scenes.\n\n");
         outputText("PLEASE.\n\n");
-        doNext(curry(camp.returnToCamp, 20));
+        doNext(camp.returnToCamp, 20);
     }
 
 

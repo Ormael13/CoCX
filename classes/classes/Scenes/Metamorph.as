@@ -634,6 +634,7 @@ import classes.internals.SaveableState;
 			}
 
 			clearOutput();
+			statScreenRefresh();
 			var BtMS:Number = (50 * (1 + player.perkv1(PerkLib.Metamorph)));
 			if (player.hasPerk(PerkLib.MetamorphEx)) BtMS += (100 * player.perkv1(PerkLib.MetamorphEx));
 			//if (player.hasPerk(PerkLib.MetamorphMastery)) BtMS += (100 * player.perkv1(PerkLib.MetamorphMastery));
@@ -2152,9 +2153,6 @@ import classes.internals.SaveableState;
                     player.createPerk(PerkLib.Undeath, 0, 0, 0, 0);
                     player.createPerk(PerkLib.EnergyDependent, 0, 0, 0, 0);
                     flags[kFLAGS.CURSE_OF_THE_JIANGSHI] = 2;
-                    break;
-                case "Kitsune":
-                    player.createStatusEffect(StatusEffects.BonusVCapacity, 8000, 0, 0, 0);
                     break;
                 case "Phoenix":
                     player.createPerk(PerkLib.HarpyWomb, 10, 0, 0, 0);

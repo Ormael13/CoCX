@@ -125,8 +125,8 @@ public class GnollScene extends BaseContent
 				addButtonIfTrue(3, "TakeHerClit", takeGnollClit, "Req. a vagina",
 					player.hasVagina(), "Put your vagina to use and ride the gnoll's clit.");
 				addButton(4, "SuckHerClit", suckGnollClit).hint("Suck the gnoll's clit.", "Suck Her Clit");
-				SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatHyena);
 				addButton(14, "Leave", cleanupAfterCombat);
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatHyena);
 			}
 			else {
 				outputText("You're not aroused enough to rape her.");
@@ -265,7 +265,7 @@ public class GnollScene extends BaseContent
 			outputText("Her legs twitch around your ears as you continue to swallow, even though there is no more to go.  The muscles in your throat gently massage the length of the monstrous clitoris, which plumps even further as more blood rushes into it.  You can feel its tumescent bulk all down your throat and halfway into your chest.\n\n");
 			outputText("The massive clit-dick then begins to flutter and twitch as the gnoll starts to cum.  Her feet stamp the ground to either side of you, and she abruptly screams into the sky.  Her warbling cry then seems to collapse inward, and her entire body slumps to the ground, unconscious.\n\n");
 			outputText("You leave her there on the sun-caked ground and head back to camp.");
-			dynStats("lus=", player.maxLust());
+			dynStats("lus=", player.maxOverLust());
 			cleanupAfterCombat();
 		}
 

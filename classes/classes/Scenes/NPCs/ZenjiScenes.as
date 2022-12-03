@@ -2870,6 +2870,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 				doNext(loverZenjiTalks);
 			}
 			else{
+				player.destroyItems(jewelries.ENDGRNG, 1);
 				outputText("You call Zenji to you, to which he immediately approaches you with a stride in his step. His deep voice rings to you as he stands in front of you, \"You called?\"\n" + "\n");
 				if (player.mf("m", "f") == "f"){
 					outputText("You grab Zenji by his wrists. Zenji holds onto you gently, eyeing you carefully, unsure of where you’re going with this, \"<i>Mi costilla... someting wrong?</i>\"\n" +
@@ -2992,7 +2993,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 						"\n" +
 						"You turn around to look at yourself in the mirror. What a sight, the layers of silken fabric, the strapless dress molds to your form accenting your features incredibly. The seamstress passes you a tiara with a silken veil, white gloves, and flats. Jabala helps put the silken flats on your feet, once you’re fully dressed the seamstress places the tiara over your head as the veil flows over your face.\n" +
 						"\n" +
-						"\"<i>You are ready,<i>\" the seamstress states. \"<i>Truly a beautiful sight, I’m sure your partner will be excited to see such beauty.</i>\"\n" +
+						"\"<i>You are ready,</i>\" the seamstress states. \"<i>Truly a beautiful sight, I’m sure your partner will be excited to see such beauty.</i>\"\n" +
 						"\n" +
 						"Jabala wipes her tears from her face, \"<i>Follow me, [name] we will get you prepared for the ceremony.</i>\"\n");
 			}
@@ -3324,7 +3325,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 				if (player.ass.analLooseness == AssClass.LOOSENESS_VIRGIN){
 					outputText("You have been waiting for someone you truly loved before giving it all away.");
 				}
-				outputText("Zenji gives a contented smile, \"<i>I’ve been waiting all night for ya [name]. I love you, and now I’m gonna show you just how much I mean by dat.\" He licks his hand seductively before lathering his length in his spit, then aligning his manhood with your rear. His strong hand gropes at your cheeks, getting you prepared for his entrance.\n");
+				outputText("Zenji gives a contented smile, \"<i>I’ve been waiting all night for ya [name]. I love you, and now I’m gonna show you just how much I mean by dat.</i>\" He licks his hand seductively before lathering his length in his spit, then aligning his manhood with your rear. His strong hand gropes at your cheeks, getting you prepared for his entrance.\n");
 				if (player.analCapacity() < 7){
 					if (player.ass.analLooseness == AssClass.LOOSENESS_VIRGIN){
 						outputText("\"You have waited your entire life for dis, [name]... Dat takes some real dedication. Now I will show you how a real troll makes love.\"\n");
@@ -3438,7 +3439,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 						"\n" +
 						"You nod, if he’s okay with it, that is.\n" +
 						"\n" +
-						"Zenji glances around slightly nervously, \"<i>I can’t lie, I’ve been wondering if I really wanted to, but… Well, you are my husband, aren’tcha? It’d be a shame if I neva gave you a chance.\</i>\n");
+						"Zenji glances around slightly nervously, \"<i>I can’t lie, I’ve been wondering if I really wanted to, but… Well, you are my husband, aren’tcha? It’d be a shame if I neva gave you a chance.</i>\n");
 				if (player.statusEffectv4(StatusEffects.ZenjiZList) > 0){
 					outputText("You were de first one ta take me dere,");
 				}
@@ -3492,10 +3493,11 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 							"You plan on sleeping for the rest of the night, wrapped within the warmth of your husband’s embrace.\n");
 				}
 			}
-			doNext(curry(ZenjiMarriageSexTime2, options));
+			doNext(ZenjiMarriageSexTime2, options);
 		}
 
 		private function ZenjiMarriageSexTime2(options:int):void{
+			clearOutput();
 			if (options == 1){
 				outputText("You wake up in the middle of the night to the sound of faint conversation.\n" +
 						"\n" +
@@ -3541,7 +3543,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 						"\n" +
 						"You turn to face Zenji, he unconsciously pulls you closer to him as you drift back to sleep in his embrace.\n");
 			}
-			doNext(curry(ZenjiMarriageSexTime3, options));
+			doNext(ZenjiMarriageSexTime3, options);
 		}
 		
 		private function ZenjiMarriageSexTime3(options:int):void{
@@ -3564,13 +3566,13 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 						"\n" +
 						"Zenji sits up, \"<i>Wait… uh… I didn’t tink dis through…</i>\"\n" +
 						"\n" +
-						"You hear a knocking on the door, \"I have your clothes right here!\" Jabala shouts.\n" +
+						"You hear a knocking on the door, \"<i>I have your clothes right here!</i>\" Jabala shouts.\n" +
 						"\n" +
-						"\"Ah, motha! Were you eavesdropping?</i>\"\n" +
+						"\"<i>Ah, motha! Were you eavesdropping?</i>\"\n" +
 						"\n" +
 						"\"No! I was… just… gardening!</i>\"\n" +
 						"\n" +
-						"\"<i>You were gardening… inside..?<i>\"\n" +
+						"\"<i>You were gardening… inside..?</i>\"\n" +
 						"\n" +
 						"\"<i>Yes! I’m tending to the shade plants!</i>\"\n" +
 						"\n" +
@@ -3624,7 +3626,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			else if (options == 3){
 				outputText("You wake up the next morning, as you open your eyes your face is resting against Zenji’s muscular pecs, comfortably nestled within his chest tuft. Daylight pours into the room and you give a small yawn and look up at Zenji, his eyes are resting upon your face.\n" +
 						"\n" +
-						"\"<i>Good morning [name]. Sleep well?<i>\" he asks, giving you a gentle smile.\n" +
+						"\"<i>Good morning [name]. Sleep well?</i>\" he asks, giving you a gentle smile.\n" +
 						"\n" +
 						"You tell him that indeed you did. You’re glad to spend the night with your husband.\n" +
 						"\n" +
@@ -3634,7 +3636,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 						"\n" +
 						"You nod your head, looking around before asking Zenji where your clothes are.\n" +
 						"\n" +
-						"Zenji sits up, \"<i>Wait… uh… I didn’t tink dis through…<i>\"\n" +
+						"Zenji sits up, \"<i>Wait… uh… I didn’t tink dis through…</i>\"\n" +
 						"\n" +
 						"You hear a knocking on the door, \"<i>I have your clothes right here!</i>\" Jabala shouts.\n" +
 						"\n" +
@@ -3660,6 +3662,10 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 				var timeShift:int = (24 - time.hours) + 8;
 				doNext(createCallBackFunction(camp.returnToCamp, timeShift));
 			} else doNext(recallWakeUp);
+		}
+
+		public static function isLover():Boolean {
+			return flags[kFLAGS.ZENJI_PROGRESS] >= 11;
 		}
 	}
 }

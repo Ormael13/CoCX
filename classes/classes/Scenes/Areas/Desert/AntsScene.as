@@ -782,7 +782,7 @@ public class AntsScene extends BaseContent
 			outputText(" down?  I mean, I'm not complaining!  But I... just... I mean... you... inside me,</i>\" she shyly remarks, obviously wanting something more... traditional.");
 			//(Player lust increases to 100)
 			if (!recalling) {
-				dynStats("lus=", player.maxLust());
+				dynStats("lus=", player.maxOverLust());
 				flags[kFLAGS.DIDNT_FUCK_PHYLLA_ON_RECRUITMENT] = 1;
 			}
 			//Where the fuck is this going?

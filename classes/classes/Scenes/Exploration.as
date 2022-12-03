@@ -112,7 +112,8 @@ public class Exploration extends BaseContent
 			bd.add("Boat", SceneLib.boat.boatExplore)
 					.hint("Get on the boat and explore the lake. \n\nRecommended level: 12")
 					.disableIf(!player.hasStatusEffect(StatusEffects.BoatDiscovery), "Search the lake.");
-			bd.add("Shore").hint("TBA"); //Discovered when exploring using Lake Boat.
+			//bd.add("Shore").hint("TBA"); //Discovered when exploring using Lake Boat.
+			bd.add("");
 			bd.add("");
 			bd.add("");
 			// Row 3
@@ -360,7 +361,7 @@ public class Exploration extends BaseContent
 			menu();
 			if (SceneLib.forest.deepwoodsDiscovered()) addButton(0, "Deepwoods", SceneLib.forest.exploreDeepwoods).hint("Visit the dark, bioluminescent deepwoods. " + (debug ? "\n\nTimes explored: " + SceneLib.forest.timesExploredDeepwoods() : ""));
 			else addButtonDisabled(0, "Deepwoods", "Discovered when exploring Forest (I).");
-			addButtonDisabled(1, "Shore", "TBA");//Discovered when exploring using Lake Boat.
+			//addButtonDisabled(1, "Shore", "TBA");//Discovered when exploring using Lake Boat.
 			//if (flags[kFLAGS.DISCOVERED_DEEP_SEA] > 0 && player.canSwimUnderwater()) addButton(2, "Deep Sea", SceneLib.deepsea.exploreDeepSea).hint("Visit the 'almost virgin' deep sea. But beware of... krakens. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_DEEP_SEA] : ""));
 			
 			if (flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] > 0) addButton(10, "Glacial Rift(O)", SceneLib.glacialRift.exploreGlacialRift).hint("Visit the chilly glacial rift (outer part). " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] : ""));
@@ -771,8 +772,9 @@ public class Exploration extends BaseContent
 				outputText("Against your better judgment, curiosity gets the better of you, and you find yourself walking into a strange area.");
 				outputText("\n\nNot long into your journey, you see a hooded figure looming across the landscape, moving at the same speed as it goes across the terrain. The odd creature captures your interest, and you start to follow it. You glance around, there's still no one else nearby, so you continue to tail the mysterious being.");
 				outputText("\n\nHalf an hour or so later, still following the cloaked figure, you begin to hear the sound of running water. Moving on, you eventually come across the source: a decently sized river flows across the land, populated by variously sized islands. Stopping for a second to take a look around, the hooded person seems to be moving towards one of the several islands. He? She? It is still oblivious to your presence.");
-				outputText("\n\nA voice rings from behind you,\"<i> Come to visit He'Xin'Dao, stranger? </i>\"");
-				outputText("\n\nTurning around, you see a few hooded figures similar to the one you have been following. You curse at the thought that someone could've ambushed you so easily without you noticing them sooner. You state that you've been exploring and found this place. The figure peers at you through the veiled hood, \"<i>You seem lacking in soulforce, but luckily your soul is enough intact to allow future cultivation. So, since you are already here, what do you think about visiting our village? Maybe you would come more often to it in the future?</i>\"");
+				outputText("\n\nA voice rings from behind you, \"<i>Come to visit He'Xin'Dao, stranger? </i>\"");
+				outputText("\n\nTurning around, you see a few hooded figures similar to the one you have been following. You curse at the thought that someone could've ambushed you so easily without you noticing them sooner. You state that you've been exploring and found this place. The figure peers at you through the veiled hood.\n\n"
+					+ "\"<i>You seem lacking in soulforce, but luckily your soul is enough intact to allow future cultivation. So, since you are already here, what do you think about visiting our village? Maybe you would come more often to it in the future?</i>\"");
 				outputText("\n\nYou ponder for a moment over the offer. The hooded beings don't seem to carry any malice, given they haven't attacked you nor attempted rape. Perhaps it would be of interest to explore this place?  You decide to accept their offer as they lead you over the wide bridge to one of the islands.  Several heavily armored guards peer at you searchingly, to which one of your new companions state that you are a new guest.  The guard gives a stoic nod as they step aside, no longer barring you from entry.  Your hooded friends guide you to a small island to properly register you as a guest. They give you a small guide on a piece of parchment, telling you places of interest and instructions on how to find this place again.");
 				outputText("\n\nAfterwards, you're left alone.  You wander around, checking a few places of interest before you decide it's time to return to your camp.  With the guide in your hands, you're sure you'll find this place again with ease if you need to.");
 				outputText("\n\n\n<b>You have unlocked He'Xin'Dao in Places menu!</b>");
@@ -924,8 +926,8 @@ public class Exploration extends BaseContent
 				//Chance of encountering Giacomo!
 				if (choosey == 0) {
 					player.explored++;
-					if (flags[kFLAGS.SOUL_SENSE_GIACOMO] < 3 && rand(3) > 0) SceneLib.giacomoShop.giacomoEncounter();
-					else if (flags[kFLAGS.DINAH_LVL_UP] < 1) SceneLib.dinahScene.DinahIntro1();
+					if (flags[kFLAGS.SOUL_SENSE_GIACOMO] < 3 && rand(3) > 0) SceneLib.giacomoShop.giacomoEncounterSS();
+					//else if (flags[kFLAGS.DINAH_LVL_UP] < 1) SceneLib.dinahScene.DinahIntro1();
 					else genericGolGobImpEncounters(true);
 					return;
 				}
@@ -939,14 +941,6 @@ public class Exploration extends BaseContent
 					player.explored++;
 					if (flags[kFLAGS.GAR_NAME] == 0) SceneLib.gargoyle.gargoylesTheShowNowOnWBNetwork();
 					else SceneLib.gargoyle.returnToCathedral();
-					return;
-				}
-				else if (choosey == 3 && flags[kFLAGS.PRISON_CAPTURE_COUNTER] < 1 && rand(4) == 0) {
-					player.explored++;
-					clearOutput();
-					outputText("Your curiosity draws you towards the smoke of a campfire on the edges of the forest. In the gloom ahead you see what appears to be a cage wagon surrounded by several tents, and hear the sounds of guttural voices engaged in boisterous conversation. Inexplicably you find yourself struck by an unwholesome sense of foreboding. <b>Even from here that cage looks like it is designed to carry people off to somewhere very unpleasant, some place where your life could be turned upside down and the rules you have become accustomed to in this world may no longer apply.</b> You take a long moment to consider turning back. Do you throw caution to the wind and investigate further?");
-					//outputText("\n\n(<b>NOTE:</b> Prisoner mod is currently under development and not all scenes are available.)");
-					doYesNo(SceneLib.prison.goDirectlyToPrisonDoNotPassGoDoNotCollect200Gems, camp.returnToCampUseOneHour);
 					return;
 				}
 				//Monster - 50/50 imp/gob split.

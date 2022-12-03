@@ -544,7 +544,8 @@ private function heliaOptions():void {
 	else {
 		if (flags[kFLAGS.SLEEP_WITH] == "Helia") addButton(1, "NoSleepWith", dontSleepWithHelia)
 			.hint("Stop sleeping with Helia, for now.", "No Sleep With");
-		addButton(2,"Hug",hugASmokeyTail).hint("Give that salamander bitch a hug. Bitches love hugs.");
+		addButton(2,"Hug",hugASmokeyTail).hint("Give that salamander bitch a hug. Bitches love hugs.\n"
+			+ "<b>Functions as \"Sleep With\" at 21:00.</b>");
 	}
 	if (flags[kFLAGS.HELIA_ANAL_TRAINING_OFFERED] > 0 && flags[kFLAGS.HELIA_ANAL_TRAINING] < 2)
 		addButton(3, "Anal Train", heliaGapeSceneChoices)

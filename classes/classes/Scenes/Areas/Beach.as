@@ -89,7 +89,7 @@ import classes.Scenes.SceneLib;
 				},
 				chance: 1,
 				when: function ():Boolean {
-					return (model.time.hours >= 6 && model.time.hours <= 11) && flags[kFLAGS.CEANI_FOLLOWER] < 1 && flags[kFLAGS.CEANI_ARCHERY_TRAINING] == 4;
+					return (model.time.hours >= 6 && model.time.hours <= 11) && flags[kFLAGS.CEANI_FOLLOWER] < 1 && flags[kFLAGS.CEANI_ARCHERY_TRAINING] >= 4;
 				}
 			}, {
 				// Pinchou swimwear shop

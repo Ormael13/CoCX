@@ -206,7 +206,7 @@ public class Changelog extends BaseContent
 			outputText("-Machine Greatsword, Ripper 1.0, Ripper 2.0 gained classification as Exotic type weapons for mastery purposes.\n");
 			outputText("-Separated skin, hair, fur, scales, chitin, feather colos from skin layers. (aimozg)\n");
 			outputText("-Added support for dynamic item generation from template id + properties. See hair dye for example. (aimozg)\n");
-			outputText("-For Kitsune thyroid gland or parathyroid glands req. perks would include Star Sphere Mastery perk too and Kishoo race (paratyr) or Kishoo tails (thyr).\n");
+			outputText("-For Kitsune thyroid gland or parathyroid glands req. perks would include Star Sphere Mastery perk too and Kitshoo race (paratyr) or Kitshoo tails (thyr).\n");
 			outputText("-Use material bags materials directly. Add Scythe to exotic Mastery & combat cleanup. Add Golem cores directly to golem bag & minor fixes/improvements. (EragonX)\n");
 			outputText("-Flame blade special can be used on scythe type of weapons too.\n");
 			outputText("-Monsters can now drop generated items: Many generic imps&demons can drop common/magical/rare items; Identify by equiping, cheating, or paying Michiko; Uncurse by paying Diana or Arian. (aimozg)\n");
@@ -346,7 +346,7 @@ public class Changelog extends BaseContent
 			outputText("-Smol bugfix to nat metamorph auto-proccing + facemem typo (Jtex)\n");
 			outputText("-Tidarion now deals fire damage properly. Gargoyle force impregnation behaviour fixed. Ant venom damage changed to be acid. Added Phylla to Soulsense. Added short hints for egg colors. (Svalkash)\n");
 			outputText("-Fixed some recent bugs and typos from Discord (Svalkash)\n");
-			outputText("-SH:Other - makes Corruption Tolerance twice as effective (Svalkash)\n");
+			outputText("-SH:Other - makes Corruption Tolerance twice as effective. The cabin doesn't disable imp attacks anymore. You still can build a wall or something else though. Disables Raphael dress timer - you can't fail his date by not wearing it. Added Joey massage to SH:UniHerms. (Svalkash)\n");
 			outputText("-Reworked Masteries / Multi melee attacks. Consolidated all masteries together. Disabled all Multi-Attack perks - You earn multi-attacks via weapon masteries now. (khovel)\n");
 			outputText("-Small weapons mastery opens new mutliattack option at mastery 10, 20, 30 and 40. Normal weapons mastery at 10, 25, 40. Large weapons mastery at 15 and 30. Massive weapons mastery at 30.\n");
 			outputText("-Asura Form wouldn't add 2x/3x more attacks that are displayed seperatly but would instead increase by equal amount damage of attack. I think certain Goat would be happy on this.\n");
@@ -357,6 +357,59 @@ public class Changelog extends BaseContent
 			outputText("-Added hints for Benoit progression (Svalkash)\n");
 			outputText("-Fix perm metamorph loading, Kiha Electra interaction (EragonX)\n");
 			outputText("-Elemental Damage type now use special font color (Liadri)\n");
+			outputText("-Steel Storm perk effect changed to: Gain extra attacks equal to current used mutliattack option when dual wielding. Blade Barrier parry chance bonus increased to 25%.\n");
+			outputText("-Anger perk effect of 'adding 1/2 more atk with large/massive weapons when PC dropped below 60/20% of max HP' was replaced by 'Grade 2 and higher of berserker state grants 1 more attack per increased grade with large/massive weapons'.\n");
+			outputText("-Feral combat will raise mastery now even if wielding a claw weapon and in Feral stance. Added Damage bonuses for new masteries. (khovel)\n");
+			outputText("-Buttons can have icons - for items, abilities, locations, and anything else. (aimozg)\n");
+			outputText("-Prestige Job: Berserker perk have additional effect: Can trigger grade 2 and 3 of berserker state by loosing one time 50% of max OverHP. Each grade will shorten duration of the berserking by 2 round and increase atk bonus by 100% of base value.\n");
+			outputText("-Endless Rage perk allow to reach 4th grade of berserking state. Wrath cost to sustain berserking state increased from 10 to 50.\n");
+			outputText("-New event perk: Natural Spellcasting. Gained by using elf tf when PC have both elf eyes and ears. Effect: Reduce all spell cooldowns by 1 round (2 if wearing the leaf necklace). (+1 to elf score)\n");
+			outputText("-Meditation would remove 20% of max lust instead of 50.\n");
+			outputText("-New Necklace (by Liadri): Leaf Amulet - buyable at Kaiba shop. Costs 4,500 gems. Increase white magic damage and evasion by 10%. (Effect doubled for elves) Decrease spells cooldown by 1 turn if used by elf.\n");
+			outputText("-Kath 'Get Help' locks her random encounters. Still can be recruited after that Scylla scene. Added first SexMachine use to Recall menu. Marble purification quest doesn't check your or your followers' corruption anymore. (Svalkash)\n");
+			outputText("-Golem enemies won't be affected by displacer beast tentacle move causing milking enemy. Feral combat attack part with biting enemy won't cause bleed on enemies immune to bleed.\n");
+			outputText("-Using charge weapon spell would add magic dmg equal to 20% of phys dmg weapon dealing on attack. Now you can hurt all those pesky immune to physical damage enemies ;)\n");
+			outputText("-Multiattacks aren't costless now. All large and massive weapons req. 5 wrath per attack beyond 1st and others 5 fatigue. If PC lacks wrath or fatigue it would only reduce in that turn amount of multiattacks to 1 (2).\n");
+			outputText("-Unarmed attacks using fists (not feral) have now seperate mastery tracker of Unarmed mastery.\n");
+			outputText("-Bag of Cosmos now uses the new transfer menu with dragging. DragButton functionality fixed for S.P.Pearl (no more moving stacks of 15). Also, instead of swapping stacks, it tries to fill the target if possible. (Svalkash)\n");
+			outputText("-Power Attack / Shoot damage is now boosted by bonus to dmg from masteries.\n");
+			outputText("-USS check now autoforces supercharged raiju. Removes USS from some enemies. FapArena calculation small improvement. Fixed SlimeCraving requirements. (Svalkash)\n");
+			outputText("-Benoit shop cleaned up, increased the chance of rare items. BFGauntlets now have the Large tag. Mutations DB now prints all mutation tiers. Vag of holding is removed. Instead, you get a bonus to capacity(capacities) when you have goo lower body or kitsune tail. (Svalkash)\n");
+			outputText("-A bunch of fixes: monke typo, ted-spooder confusion, LGSFPill shop desc, sensitivity racial buffs, I.Draft not unlocking cock count metamorphs, Raphael broken dates (Svalkash)\n");
+			outputText("-Tainted I.Draft now grows demon dicks. You can now use multiple doses of Reducto. Reducto can be applied to butt and hips. Cocks are reduced by 1/4 or 1/3 again. (Svalkash)\n");
+			outputText("-Brutal Blows perk armor reduction is now: 10% of enemy current armor value + 5\n");
+			outputText("-Low tier magic immunity - some of the enemies now would have immunity to tier 1 spells. They still can be hurt by tier 2 or 3 spells thou or magical specials.\n");
+			outputText("-BF Gaunlets (Aether Twins 2nd evo) unarmed dmg bonus decreased from 4x to 2x.\n");
+			outputText("-Patchouli now lead PC lvl 30+ to Wonderland insterad of after having all areas explored. Still it's 50% chance to visit Wonderland over any other area.\n");
+			outputText("-New range weapon (by Ormael): Shuriken - buyable at Erma shop in He'Xin'Dao. Cost 10 spirit stones. Base atk is 2 and ammo size 10.\n");
+			outputText("-New range weapon (by Ormael): Throwing Knife - buyable at Erma shop in He'Xin'Dao. Cost 10 spirit stones. Base atk is 2 and ammo size 10.\n");
+			outputText("-Nuked most fancy dodge texts, but now most dodge checks include all of your perks (Evade, Flexibility, mutations, etc.) Changed how dodge works. Before, it took the roll and compared it to your total evasion. Then it checked some perks with the same rolled number, making them ineffective if the first roll was bad. ");
+			outputText("Now, it rerolls the number for each perk check, probably making evasion perk-stacking even more OP than before. (Svalkash)\n");
+			outputText("-New White magic spell: Charge Range Weapon. Learned from White Book. Works like Charge Weapon but affects range weapons. Range weapon atk won't be now boosted as before by Charge Weapon spell.\n");
+			outputText("-'Defend' action triggers 'Wait' effects (like evasion from Ceraph's oneshot) Moved misc option: 'Suppress Auras'. Disables the effects of Purity, Corruption, Arousing auras. (Svalkash)\n");
+			outputText("-New misc option: 'Stand Still'. Makes you an easy target when you wait. Why would you turn it on? (Svalkash)\n");
+			outputText("-Added option to pay Neisa her waged outside early morning scene.\n");
+			outputText("-New range weapon (by Ormael): Amethyst Throwing Knife - buyable at Erma shop 2nd shelf in He'Xin'Dao. Cost 30 spirit stones. After casting Charge Range Weapon spell deal darkness damage. Base atk is 3 and ammo size 15.\n");
+			outputText("-New range weapon (by Ormael): Ruby Throwing Knife - buyable at Erma shop 2nd shelf in He'Xin'Dao. Cost 30 spirit stones. After casting Charge Range Weapon spell deal fire damage. Base atk is 3 and ammo size 15.\n");
+			outputText("-New range weapon (by Ormael): Sapphire Throwing Knife - buyable at Erma shop 2nd shelf in He'Xin'Dao. Cost 30 spirit stones. After casting Charge Range Weapon spell deal ice damage. Base atk is 3 and ammo size 15.\n");
+			outputText("-New range weapon (by Ormael): Topaz Throwing Knife - buyable at Erma shop 2nd shelf in He'Xin'Dao. Cost 30 spirit stones. After casting Charge Range Weapon spell deal lightning damage. Base atk is 3 and ammo size 15.\n");
+			outputText("-Erma shop menu divided into two subpages for bows/crossbows and other range weapons.\n");
+			outputText("-'Undead Resistance' option on binding talisman for Jiangshi now include immunity to faitgue damage or costs. Which sounds and works as it say - PC Jiangshi will not gain fatigue of most of actions where it should otherwise. Been 'undead' do have some effects still even if not exactly as undead as in other realms ;)\n");
+			outputText("-Sky Poison Pearl now would be increasing max venom and venom generated per 5 min stats. It's as high bonuses as having scorpion stinger for both stats. It could be used to gain access to poisoned attacks and it effects are similar to scorpion poison.\n");
+			outputText("-Jabberwocky dragon breath been moved from physical specials to magical specials like all other breaths.\n");
+			outputText("-Alraune Perfume effect would expire now - it would display hours left counter on stats page too.\n");
+			outputText("-Spell costs now display correctly! Dark Ritual now doesn't triggers for all mana usages. Only for spells and magic abilities scaling from spellMod. If you were at the maximum bonus attack count, it will auto-increase after the mastery levels up. Dungeon fights don't skip hours anymore. Intended to finally put an end to timed events triggering in dungeons. (Svalkash)\n");
+			outputText("-Fixes (Svalkash): Sheila forced bj, Minotaur win menu, Dick drippies through pants, Cockatrice force-preg, Elemental attack and weird win checks, Wood elves training, Offensive Staff Chan. perk description, Dinah sparring w/o ring\n");
+			outputText("-New event perk: Hidden Job: Grey Sage. Gained by spending 1 super perk point and having free slot for hidden job. Effects: Allow to reach OverMax Mana equal to 110% of current max mana. Allow to learn any spell even from more obscure jobs.\n");
+			outputText("-New green spell: Plant Growth. Learned from 1st lession with Lutien - wood elf village mage teacher OR from White Book when having Hidden Job: Grey Sage. It have 4 turns cooldown. If no plant in area (Forest/Deepwood/Plains) first cast would grow some plants for the rest of the combat. ");
+			outputText("When plants are present will turn some of them into vines that would deal lust in turn when spell was castred and for next 4 turn deal periodical lust damage.\n");
+			outputText("-New NPC to interact in wood village: Lutien - bit on flat end of spectrum wood elf gal with 'smol' secret. During training she can teach PC all green spells as long req. to learn each is reached.\n");
+			outputText("-New event perk: Vegetal Affinity. Gained by been one of plant races or wood elf. Effects: Empower Green Magic by 50% weaken fire resistance by 50%.\n");
+			outputText("-New tier 3 misc lvl-up perk: Green magic. Req. Natural Spellcasting perk, Intelligence 80+, Libido 80+, Corruption 50+. Effect: Your Elven spell effects are twice as strong and last twice as long.\n");
+			outputText("-New green spell: Entagle. Learned from lession with Lutien - wood elf village mage teacher when having 100+ int OR from White Book when having Hidden Job: Grey Sage. It have 6 turns cooldown. Would turn present plants into vines that would try to grapple enemy for up to 6 turns. Each turn enemy is entangled it will recieve lust damage.\n");
+			outputText("-New event perk: Equilibrium. Gained by spending 1 super perk point and having Hidden Job: Grey Sage super perk. Effects: Allow to reach OverMax Mana equal to 120% of current max mana. You can cast now any spell you learned even if you missing additional materials or not meet requirements. Slight increase cap on stored bones for necromancers.\n");
+			//outputText("-New tier 6 misc lvl-up perk: Verdant Leech. Req. Green magic perk, Intelligence 140+, Libido 140+, Corruption 50+. Effect: .\n");
+			//outputText("-New tier 9 misc lvl-up perk: Arcane Venom. Req. Verdant Leech perk, Intelligence 200+, Libido 200+, Corruption 50+. Effect: .\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -364,6 +417,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");// (Svalkash)
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
 			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
 			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
@@ -372,7 +426,8 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed Bugs: Akbal been weak to fire not ice, Insightful Resources I-VI perks bonus to SF been lower than 5 per wis point, recovery of fatigue when waiting been lower than when attacking, Dao of Elements not giving additional % resistances after first 10%, missing bonus to acid elemental arrows, Holy Bands Managment locked behind having 3rd one band, ");
-			outputText("Centaur race bonuses error fixed to orginal values, Aether Twins following PC throu ascension in case they been equipped, Lusty Maiden Armor treated as already legendary item, wrong labeled gorgon eyes on race page, Jiaghsi curing leaving leftover effects of Cursed Tag options\n");
+			outputText("Centaur race bonuses error fixed to orginal values, Aether Twins following PC throu ascension in case they been equipped, Lusty Maiden Armor treated as already legendary item, wrong labeled gorgon eyes on race page, Jiaghsi curing leaving leftover effects of Cursed Tag options, tier 3 spells have incrrectly calculated cooldowns, Wood Elf archer training bugs, ");
+			outputText("Fera Boon - Wide Open perk not been permable on ascension, Bone Soul perk not increasing cap on stored demon bones\n");
 			//0.8s5.178
 			outputText("-Fixed bicorn horn score (aimozg)\n");
 			outputText("-Kirin, Fey-Draconic leg/armtype (respectively) added to DraconicBones Valid racetypes. -Fixed HxD merchants checking wrong currency for purchases (Jtecx PR#289)\n");
@@ -455,26 +510,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -505,29 +541,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -3739,7 +3752,7 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Corrupted Kitsune. Gainable when PC use Mystic Jewel at Shrine having 6 tail. Unlocks better foxfire, add Terror and add 7th tail. Permable at ascension.\n");
 			outputText("-Changes to Illusion and Terror: Both will have 8 turns cooldown. For Illusion it would be giving slight lust inc for enemy and increasing PC evasion for 4 turns. Terror would act as 2 turn stun. Both of those specials cd can be lowered by 1 turn after getting all 9 tails or getting perk Hoshi No Tama. When both req. are meet cd will be lowered by 2 turns.\n");
 			outputText("-Now PC can get weak version of Fox Fire at 2nd tail that will be replaced by fox fire depending on possesed perk: either/or enlighted/corrupted kitsune. It deal now additionaly lust dmg aside fire dmg. After advansing to better version it can either deal 2x more fire dmg and 2x less lust dmg (pure) or revessed adj to fire/lust dmg (corrupted). At attaining second perk for each path this bonuses/penlties growing to 4x.\n");
-			outputText("-New bonuses for kitsunes: Half Kitsune and Kitsune (from 5 pts in race score and at least 2 fox tails): -40 str, +20 spe, +50 int, +40 lib, +100 max fatigue, +20% to max soulforce. For Nine Tailed Kitsunes (12+ pts in race score and 9 tails): -40 str, +60 spe, +100 int, +40 lib, +300 max fatigue, +40% max soulforce.\n");
+			outputText("-New bonuses for kitsunes: Half Kitsune and Kitsune (from 5 pts in race score and at least 2 fox tails): -40 str, +20 spe, +50 int, +40 lib, +100 max fatigue, +20% to max soulforce. For Nine-tailed Kitsunes (12+ pts in race score and 9 tails): -40 str, +60 spe, +100 int, +40 lib, +300 max fatigue, +40% max soulforce.\n");
 			outputText("-New bonuses for Foxes: Half fox (4+ pts in fox score): -5 str, +40 spe, +25 int and Fox-morph (7+ pts): -30 str, +80 spe, +55 int, +20 max fatigue. Having more than one fox tail will be giving penalty of 7 poins to fox score (to prevent stacking kitsune and fox bnuses and similary having less than 2 fox tails giving same 7 pts penalty to kitsune score)\n");
 			outputText("-Req. for Hoshi No Tama perk changed to having either Enlightened or Corrupted Kitsune perk and 5+ pts in kitsune score. It name was also changed to Kitsune Thyroid Gland. From effects it now will allow to decrease by 1 turn cd on terror or illusion or in case PC not have high enough kitsunes score giving access to severly weakened version of basic foxfire.\n");
 			outputText("-Changes to req. for each kitsune tail after 2nd: 3rd at lvl 6+ and 40+ int, 4th at lvl 12+ and 60+ int, 5th at lvl 18+ and 80+ int, 6th at lvl 24+ and 100+ int, 7th tail req. picking path for pure or corrupted kitsune by either meditating at shirne with norma fox jewel or using mystic jewel having lvl 33+ and 120+ int, 8th tail at lvl 42+ and 140+ int and 9th tail similary like for 7th tail plus havinglvl 51+ and 160+ int.\n");

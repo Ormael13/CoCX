@@ -58,7 +58,7 @@ import classes.BodyParts.Tail;
                     .requireAnyPerk(PerkLib.EnlightenedKitsune, PerkLib.CorruptedKitsune, PerkLib.StarSphereMastery)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return (player.tailType == Tail.FOX || player.tailType == Tail.KITSHOO) && player.tailCount >= 2;
-                    }, "2+ fox/kishoo tails");
+                    }, "2+ fox/kitshoo tails");
                 }
                 else{
                     var pLvl:int = pTier * 30;
@@ -69,9 +69,8 @@ import classes.BodyParts.Tail;
             }
         }
 
-        override public function pBuffs(target:Creature = null):Object{
+        override public function buffsForTier(pTier:int):Object {
             var pBuffs:Object = {};
-            var pTier:int = currentTier(this, (target == null)? player : target);
             if (pTier == 1) {
                 pBuffs['spe.mult'] = 0.05;
                 pBuffs['wis.mult'] = 0.05;

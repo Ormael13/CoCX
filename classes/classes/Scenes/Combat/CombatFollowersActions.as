@@ -66,7 +66,7 @@ import classes.StatusEffects;
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Neisa" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] = 1;
 			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Neisa" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] = 1;
 			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Neisa" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] = 1;
-			if (monster.HP <= monster.minHP() || monster.lust >= monster.maxLust()) enemyAI();
+			if (monster.HP <= monster.minHP() || monster.lust >= monster.maxOverLust()) enemyAI();
 		}
 		public function neisaCombatActions0():void {
 			outputText("Neisa looks for an opening in the battle.\n\n");
@@ -157,7 +157,7 @@ import classes.StatusEffects;
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Etna" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] = 1;
 			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Etna" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] = 1;
 			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Etna" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] = 1;
-			if (monster.HP <= monster.minHP() || monster.lust >= monster.maxLust()) enemyAI();
+			if (monster.HP <= monster.minHP() || monster.lust >= monster.maxOverLust()) enemyAI();
 		}
 		public function etnaCombatActions0():void {
 			outputText("Etna flies around, looking for an opportunity to strike.\n\n");
@@ -215,7 +215,7 @@ import classes.StatusEffects;
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Aurora" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] = 1;
 			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Aurora" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] = 1;
 			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Aurora" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] = 1;
-			if (monster.HP <= monster.minHP() || monster.lust >= monster.maxLust()) enemyAI();
+			if (monster.HP <= monster.minHP() || monster.lust >= monster.maxOverLust()) enemyAI();
 		}
 		public function auroraCombatActions0():void {
 			outputText("Aurora look for an opening in the battle.\n\n");
@@ -357,7 +357,7 @@ import classes.StatusEffects;
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Alvina" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] = 1;
 			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Alvina" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] = 1;
 			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Alvina" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] = 1;
-			if (monster.HP <= monster.minHP() || monster.lust >= monster.maxLust()) enemyAI();
+			if (monster.HP <= monster.minHP() || monster.lust >= monster.maxOverLust()) enemyAI();
 		}
 		public function alvinaCombatActions0():void {
 			outputText("Alvina is studying her spellbook, readying her next action.\n\n");
@@ -452,7 +452,7 @@ import classes.StatusEffects;
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Mitzi" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] = 1;
 			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Mitzi" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] = 1;
 			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Mitzi" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] = 1;
-			if (monster.HP <= monster.minHP() || monster.lust >= monster.maxLust()) enemyAI();
+			if (monster.HP <= monster.minHP() || monster.lust >= monster.maxOverLust()) enemyAI();
 		}
 		public function mitziCombatActions0():void {
 			outputText("Mitzi and her daughters stand by, waiting for an opportunity to attack.\n\n");
@@ -525,7 +525,7 @@ import classes.StatusEffects;
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Excellia" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] = 1;
 			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Excellia" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] = 1;
 			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Excellia" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] = 1;
-			if (monster.HP <= monster.minHP() || monster.lust >= monster.maxLust()) enemyAI();
+			if (monster.HP <= monster.minHP() || monster.lust >= monster.maxOverLust()) enemyAI();
 		}
 		public function excelliaCombatActions0():void {
 			outputText("Excellia glares at [themonster], looking for an opportunity to strike\n\n");
@@ -607,7 +607,7 @@ import classes.StatusEffects;
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Amily" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] = 1;
 			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Amily" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] = 1;
 			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Amily" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] = 1;
-			if (monster.HP <= monster.minHP() || monster.lust >= monster.maxLust()) enemyAI();
+			if (monster.HP <= monster.minHP() || monster.lust >= monster.maxOverLust()) enemyAI();
 		}
 		public function amilyCombatActions0():void {
 			outputText("Amily remains hidden, making sure she has escaped from sight.\n\n");
@@ -733,7 +733,7 @@ import classes.StatusEffects;
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Zenji" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] = 1;
 			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Zenji" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] = 1;
 			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Zenji" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] = 1;
-			if (monster.HP <= monster.minHP() || monster.lust >= monster.maxLust()) enemyAI();
+			if (monster.HP <= monster.minHP() || monster.lust >= monster.maxOverLust()) enemyAI();
 		}
 		public function zenjiCombatActions0():void {
 			outputText("Zenji remains fixated on your opponent, ready to deflect their blows.\n\n");
@@ -844,7 +844,7 @@ import classes.StatusEffects;
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Tyrantia" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] = 1;
 			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Tyrantia" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] = 1;
 			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Tyrantia" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] = 1;
-			if (monster.HP <= monster.minHP() || monster.lust >= monster.maxLust()) enemyAI();
+			if (monster.HP <= monster.minHP() || monster.lust >= monster.maxOverLust()) enemyAI();
 		}
 		public function tyrantiaCombatActions0():void {
 			outputText("Your Drider companion stares at the [themonster], making no movements towards them.\n\n");

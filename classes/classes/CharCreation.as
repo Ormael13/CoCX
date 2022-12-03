@@ -157,9 +157,6 @@ import coc.view.MainView;
 			player.wrath = 0;
 			player.mana = 100;
 			player.hunger = 80;
-			player.obey = 10;
-			player.esteem = 50;
-			player.will = 80;
 			player.lust = 15;
 			player.gems = 0;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
@@ -393,7 +390,6 @@ import coc.view.MainView;
                     kFLAGS.HARDCORE_SLOT,
                     kFLAGS.GAME_DIFFICULTY,
                     kFLAGS.EASY_MODE_ENABLE_FLAG,
-                    kFLAGS.NO_GORE_MODE,
                     kFLAGS.WISDOM_SCALING,
                     kFLAGS.INTELLIGENCE_SCALING,
                     kFLAGS.STRENGTH_SCALING,
@@ -2568,6 +2564,9 @@ import coc.view.MainView;
 				if (player.hasPerk(PerkLib.FerasBoonSeeder) && player.perkv4(PerkLib.FerasBoonSeeder) < 1) addButton(12, "FerasB.S.", permanentizePerk1, PerkLib.FerasBoonSeeder);
 				else if (player.hasPerk(PerkLib.FerasBoonSeeder) && player.perkv4(PerkLib.FerasBoonSeeder) > 0) addButtonDisabled(12, "FerasB.S.", "Feras Boon Seeder perk is already made permanent and will carry over in all subsequent ascensions.");
 				else addButtonDisabled(12, "FerasB.S.", "Feras Boon Seeder");
+				if (player.hasPerk(PerkLib.FerasBoonWideOpen) && player.perkv4(PerkLib.FerasBoonWideOpen) < 1) addButton(13, "FerasB.W.O.", permanentizePerk1, PerkLib.FerasBoonWideOpen);
+				else if (player.hasPerk(PerkLib.FerasBoonWideOpen) && player.perkv4(PerkLib.FerasBoonWideOpen) > 0) addButtonDisabled(13, "FerasB.W.O.", "Feras Boon Wide Open perk is already made permanent and will carry over in all subsequent ascensions.");
+				else addButtonDisabled(13, "FerasB.W.O.", "Feras Boon Wide Open");
 			}
 			if (page == 2) {
 				if (player.hasPerk(PerkLib.FireLord) && player.perkv4(PerkLib.FireLord) < 1) addButton(0, "FireLord", permanentizePerk2, PerkLib.FireLord);

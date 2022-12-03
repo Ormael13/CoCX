@@ -32,11 +32,11 @@ import classes.Scenes.SceneLib;
 			return desc;
 		}
 		
-		public function canUse():Boolean { return SceneLib.prison.prisonCanUseItem(this); } //If an item cannot be used it should provide some description of why not
+		public function canUse():Boolean { return true; } //If an item cannot be used it should provide some description of why not
 		
 		public function useItem():Boolean {
 			CoC_Settings.errorAMC("Useable", "useItem", id);
-			return(false);
+			return false;
 		}
 		
 		public function useText():void {} //Produces any text seen when using or equipping the item normally

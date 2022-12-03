@@ -455,7 +455,7 @@ public class FetishCultistScene extends AbstractLakeContent
 				hideUpDown();
 				monster.lust = 98;
 				monster.HP = 2;
-				player.lust = player.maxLust();
+				player.lust = player.maxOverLust();
 				flags[kFLAGS.COMBAT_BONUS_XP_VALUE] = monster.XP;
 				cleanupAfterCombat();
 				player.sexReward("Default","Default",true,false);
@@ -514,8 +514,8 @@ public class FetishCultistScene extends AbstractLakeContent
 				addButtonIfTrue(2, "B.Feed", fetishCultistHasAMilkFetish,"Req. 'Feeder' perk",
 					player.hasStatusEffect(StatusEffects.Feeder),"Empty your heavy jugs.");
 				addButtonIfTrue(3, "Mindbreak", mindbreakFemaleCultist, "You don't know how and why... yet?", Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_ISMB, "Toy with the cultist's brain.");
-				SceneLib.uniqueSexScene.pcUSSPreChecksV2(cultistDefeated);
 				addButton(14, "Leave", cleanupAfterCombat);
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(cultistDefeated);
 			}
 			else {
 				outputText("\n\nYou're not aroused enough to rape her.");

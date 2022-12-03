@@ -414,8 +414,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 						"\"<i>It is my pride and my pleasure to serve you, [Master]. Your praise is all I could desire and more.</i>\"\n\n");
 				player.hunger = player.maxHunger();
 				HPChange(Math.round(player.maxHP() * .05), true);
-				player.mana += Math.round(player.maxMana() * 0.05);
-				if (player.mana > player.maxMana()) player.mana = player.maxMana();
+				EngineCore.ManaChange(player.maxMana() * 0.05);
 				player.buff("WellFed").setStats({"str.mult":0.05,"tou.mult":0.05,"spe.mult":0.05}).forDays(1).withText("Well Fed");
 				EngineCore.changeFatigue(-(Math.round(player.maxFatigue() * 0.2)));
 				flags[kFLAGS.LUNA_MEAL] = 1;
@@ -508,7 +507,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			if (flags[kFLAGS.LUNA_FOLLOWER] >= 5 && flags[kFLAGS.LUNA_FOLLOWER] %2 == 1) flags[kFLAGS.LUNA_FOLLOWER]++;
 			outputText("Luna comes over to you.\n\n" +
 					"\"<i>[Master] I know that you are busy with important work, but it's been a long time since you accepted my service. I wish to remind you that should you need anything, truly <b>anything</b>, all you need to do is call me. My greatest pleasure is to serve you.</i>\"\n\n" +
-					"With that she leaves to prepare today's food, which you that you indeed have not enjoyed recently. You feel a little guilty thinking of all the work she does for you. Perhaps you should spare her an hour today.\n\n");
+					"With that she leaves to prepare today's food, which you indeed have not enjoyed recently. You feel a little guilty thinking of all the work she does for you. Perhaps you should spare her an hour today.\n\n");
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -597,7 +596,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			if (flags[kFLAGS.LUNA_FOLLOWER] == 5 || flags[kFLAGS.LUNA_FOLLOWER] == 7 || flags[kFLAGS.LUNA_FOLLOWER] == 9) flags[kFLAGS.LUNA_FOLLOWER] = 11;
 			if (flags[kFLAGS.LUNA_FOLLOWER] == 6 || flags[kFLAGS.LUNA_FOLLOWER] == 8 || flags[kFLAGS.LUNA_FOLLOWER] == 10) flags[kFLAGS.LUNA_FOLLOWER] = 12;
 			mooning = true;
-			doNext(curry(sexMenuVaginal, true));
+			doNext(sexMenuVaginal, true);
 		}
 		public function fullMoonEventAccept2():void {
 			spriteSelect(SpriteDb.s_Luna_Mooning);
@@ -612,7 +611,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			if (flags[kFLAGS.LUNA_FOLLOWER] == 5 || flags[kFLAGS.LUNA_FOLLOWER] == 7 || flags[kFLAGS.LUNA_FOLLOWER] == 9) flags[kFLAGS.LUNA_FOLLOWER] = 11;
 			if (flags[kFLAGS.LUNA_FOLLOWER] == 6 || flags[kFLAGS.LUNA_FOLLOWER] == 8 || flags[kFLAGS.LUNA_FOLLOWER] == 10) flags[kFLAGS.LUNA_FOLLOWER] = 12;
 			mooning = true;
-			doNext(curry(sexMenuVaginal, true));
+			doNext(sexMenuVaginal, true);
 		}
 		public function fullMoonEventResist():void {
 			spriteSelect(SpriteDb.s_Luna_Mooning);

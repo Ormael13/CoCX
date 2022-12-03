@@ -181,7 +181,7 @@ internal function loseToSatyr():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_satyr);
 	//[Lust loss
-	if(player.lust >= player.maxLust()) outputText("You pant as you begin masturbating furiously, too horny to care about anything the grinning satyr before you has in mind.");
+	if(player.lust >= player.maxOverLust()) outputText("You pant as you begin masturbating furiously, too horny to care about anything the grinning satyr before you has in mind.");
 	else outputText("You try to steady yourself, clutching your body in pain as the satyr grins at you.");
 	outputText("\n\nThe horned demihuman wastes no time on foreplay or savoring his victory, instead tramping triumphantly forward and pushing you over onto your back.  He squats down and roughly yanks off your [armor] until your crotch is bared.  Impatiently, he ");
 	if(player.isNaga()) outputText("pins down your serpentine body");
@@ -238,7 +238,7 @@ internal function defeatASatyr():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_satyr);
 	//Lust Victory
-	if(monster.lust >= monster.maxLust()) outputText("The satyr collapses to its caprine knees, bleating in dismay as it paws frantically at its huge cock, oblivious to everything in its need to get off.  Already, pre-cum is fountaining from the goat-man's shaft, his jerking motions smearing the pungent sexual fluid across the crown.");
+	if(monster.lust >= monster.maxOverLust()) outputText("The satyr collapses to its caprine knees, bleating in dismay as it paws frantically at its huge cock, oblivious to everything in its need to get off.  Already, pre-cum is fountaining from the goat-man's shaft, his jerking motions smearing the pungent sexual fluid across the crown.");
 	//HP Victory
 	else outputText("Beaten and dazed, the satyr collapses to its caprine knees, shaking his head in a futile attempt to recover himself from the brutal trouncing you've just given him.  The combination of the blows and his previous drunken state mean he's quite incapable of getting back, however.");
 	if (player.lust < 33) {
@@ -255,8 +255,8 @@ internal function defeatASatyr():void {
 	addButtonIfTrue(1, "Ride Face", femaleTakesAdvantageOfSatyr,
 		"Req. a vagina", player.hasVagina());
 	LustyMaidensArmor.addTitfuckButton(2);
-	SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatASatyr);
 	addButton(14, "Leave", cleanupAfterCombat);
+	SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatASatyr);
 }
 
 //Female (Z)

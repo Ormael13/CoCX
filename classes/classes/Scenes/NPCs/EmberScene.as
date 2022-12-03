@@ -100,7 +100,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
                 needNext = true;
             }
             //At max lust, count up - if ten hours lusty, ember yells at ya!
-            if (player.lust >= player.maxLust() && player.gender > 0) {
+            if (player.lust >= player.maxOverLust() && player.gender > 0) {
                 flags[kFLAGS.EMBER_LUST_BITCHING_COUNTER]++;
                 if (flags[kFLAGS.EMBER_LUST_BITCHING_COUNTER] >= 10) {
                     emberBitchesAtYouAboutLustiness();
@@ -213,7 +213,8 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
         if ((flags[kFLAGS.EMBER_OVIPOSITION] > 0 || (player.hasItem(consumables.OVIELIX, 1) && flags[kFLAGS.EMBER_AFFECTION] >= 75)) && hasVagina() && !pregnancy.isPregnant) addButton(4, "Get Egg", emberIsAnEggFactory).hint("Ask Ember if [ember ey]'s willing to lay an unfertilized egg for you." + (flags[kFLAGS.EMBER_OVIPOSITION] > 0 ? "" : "\n\nThis will cost you 1 Ovi Elixir each time you want [ember em] to lay an unfertilized egg.") + "");
         addButton(5, "Sex", emberSexMenu).hint("Get into a sex session with Ember.")
             .disableIf(player.lust < 33, "Not aroused enough!");
-        if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(6, "Spar", decideToSparEmbra).hint("Do a quick battle with Ember!");
+        addButton(6, "Spar", decideToSparEmbra).hint("Do a quick battle with Ember!")
+            .disableIf(flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 2, "You need a good sparring ring for that.");
         if (model.time.hours >= 21 || model.time.hours < 5) {
             if (flags[kFLAGS.EMBER_AFFECTION] < 75) addButton(7, "Sleep With?", sleepWithEmber).hint("Try to spend the night with Ember.");
             else addButton(7, "Sleep With", sleepWithEmber).hint("Spend the night with Ember.");

@@ -33,6 +33,7 @@ import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.NPCs.ZenjiScenes;
 import classes.Scenes.Places.WoodElves;
 import classes.Scenes.SceneLib;
+import classes.Scenes.Soulforce;
 import classes.StatusEffects.VampireThirstEffect;
 import classes.lists.BreastCup;
 
@@ -238,7 +239,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if ((flags[kFLAGS.LUNA_FOLLOWER] %2 == 1) && flags[kFLAGS.LUNA_JEALOUSY] >= 100 && (CoC.instance.model.time.hours > 6 && CoC.instance.model.time.hours < 23)) SceneLib.lunaFollower.warrningAboutJelously();
 			}
 			//Zenji loneliness
-			if (flags[kFLAGS.ZENJI_PROGRESS] == 11) player.addStatusValue(StatusEffects.ZenjiModificationsList, 1, 1);
+			if (ZenjiScenes.isLover()) player.addStatusValue(StatusEffects.ZenjiModificationsList, 1, 1);
 			//Tripxi firearms restoration progress
 			if (player.statusEffectv3(StatusEffects.TelAdreTripxi) > 0) player.addStatusValue(StatusEffects.TelAdreTripxi, 3, -1);
 			//
@@ -247,53 +248,16 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (player.statusEffectv1(StatusEffects.WendigoPsychosis) <= 0) player.removeStatusEffect(StatusEffects.WendigoPsychosis);
 			}
 			//
-			if (player.hasStatusEffect(StatusEffects.PCClone1st) && player.statusEffectv1(StatusEffects.PCClone1st) > 10 && player.statusEffectv1(StatusEffects.PCClone1st) < 21) {
-				if (player.statusEffectv1(StatusEffects.PCClone1st) == 11 && player.statusEffectv2(StatusEffects.DaoOfFire) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfFire, "Fire");
-				if (player.statusEffectv1(StatusEffects.PCClone1st) == 12 && player.statusEffectv2(StatusEffects.DaoOfIce) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfIce, "Ice");
-				if (player.statusEffectv1(StatusEffects.PCClone1st) == 13 && player.statusEffectv2(StatusEffects.DaoOfLightning) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfLightning, "Lightning");
-				if (player.statusEffectv1(StatusEffects.PCClone1st) == 14 && player.statusEffectv2(StatusEffects.DaoOfDarkness) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfDarkness, "Darkness");
-				if (player.statusEffectv1(StatusEffects.PCClone1st) == 15 && player.statusEffectv2(StatusEffects.DaoOfPoison) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfPoison, "Poison");
-				if (player.statusEffectv1(StatusEffects.PCClone1st) == 16 && player.statusEffectv2(StatusEffects.DaoOfWind) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfWind, "Wind");
-				if (player.statusEffectv1(StatusEffects.PCClone1st) == 17 && player.statusEffectv2(StatusEffects.DaoOfBlood) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfBlood, "Blood");
-				if (player.statusEffectv1(StatusEffects.PCClone1st) == 18 && player.statusEffectv2(StatusEffects.DaoOfWater) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfWater, "Water");
-				if (player.statusEffectv1(StatusEffects.PCClone1st) == 19 && player.statusEffectv2(StatusEffects.DaoOfEarth) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfEarth, "Earth");
-				if (player.statusEffectv1(StatusEffects.PCClone1st) == 20 && player.statusEffectv2(StatusEffects.DaoOfAcid) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfAcid, "Acid");
-			}
-			if (player.hasStatusEffect(StatusEffects.PCClone2nd) && player.statusEffectv1(StatusEffects.PCClone2nd) > 10 && player.statusEffectv1(StatusEffects.PCClone2nd) < 21) {
-				if (player.statusEffectv1(StatusEffects.PCClone2nd) == 11 && player.statusEffectv2(StatusEffects.DaoOfFire) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfFire, "Fire");
-				if (player.statusEffectv1(StatusEffects.PCClone2nd) == 12 && player.statusEffectv2(StatusEffects.DaoOfIce) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfIce, "Ice");
-				if (player.statusEffectv1(StatusEffects.PCClone2nd) == 13 && player.statusEffectv2(StatusEffects.DaoOfLightning) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfLightning, "Lightning");
-				if (player.statusEffectv1(StatusEffects.PCClone2nd) == 14 && player.statusEffectv2(StatusEffects.DaoOfDarkness) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfDarkness, "Darkness");
-				if (player.statusEffectv1(StatusEffects.PCClone2nd) == 15 && player.statusEffectv2(StatusEffects.DaoOfPoison) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfPoison, "Poison");
-				if (player.statusEffectv1(StatusEffects.PCClone2nd) == 16 && player.statusEffectv2(StatusEffects.DaoOfWind) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfWind, "Wind");
-				if (player.statusEffectv1(StatusEffects.PCClone2nd) == 17 && player.statusEffectv2(StatusEffects.DaoOfBlood) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfBlood, "Blood");
-				if (player.statusEffectv1(StatusEffects.PCClone2nd) == 18 && player.statusEffectv2(StatusEffects.DaoOfWater) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfWater, "Water");
-				if (player.statusEffectv1(StatusEffects.PCClone2nd) == 19 && player.statusEffectv2(StatusEffects.DaoOfEarth) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfEarth, "Earth");
-				if (player.statusEffectv1(StatusEffects.PCClone2nd) == 20 && player.statusEffectv2(StatusEffects.DaoOfAcid) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfAcid, "Acid");
-			}
-			if (player.hasStatusEffect(StatusEffects.PCClone3rd) && player.statusEffectv1(StatusEffects.PCClone3rd) > 10 && player.statusEffectv1(StatusEffects.PCClone3rd) < 21) {
-				if (player.statusEffectv1(StatusEffects.PCClone3rd) == 11 && player.statusEffectv2(StatusEffects.DaoOfFire) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfFire, "Fire");
-				if (player.statusEffectv1(StatusEffects.PCClone3rd) == 12 && player.statusEffectv2(StatusEffects.DaoOfIce) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfIce, "Ice");
-				if (player.statusEffectv1(StatusEffects.PCClone3rd) == 13 && player.statusEffectv2(StatusEffects.DaoOfLightning) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfLightning, "Lightning");
-				if (player.statusEffectv1(StatusEffects.PCClone3rd) == 14 && player.statusEffectv2(StatusEffects.DaoOfDarkness) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfDarkness, "Darkness");
-				if (player.statusEffectv1(StatusEffects.PCClone3rd) == 15 && player.statusEffectv2(StatusEffects.DaoOfPoison) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfPoison, "Poison");
-				if (player.statusEffectv1(StatusEffects.PCClone3rd) == 16 && player.statusEffectv2(StatusEffects.DaoOfWind) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfWind, "Wind");
-				if (player.statusEffectv1(StatusEffects.PCClone3rd) == 17 && player.statusEffectv2(StatusEffects.DaoOfBlood) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfBlood, "Blood");
-				if (player.statusEffectv1(StatusEffects.PCClone3rd) == 18 && player.statusEffectv2(StatusEffects.DaoOfWater) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfWater, "Water");
-				if (player.statusEffectv1(StatusEffects.PCClone3rd) == 19 && player.statusEffectv2(StatusEffects.DaoOfEarth) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfEarth, "Earth");
-				if (player.statusEffectv1(StatusEffects.PCClone3rd) == 20 && player.statusEffectv2(StatusEffects.DaoOfAcid) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfAcid, "Acid");
-			}
-			if (player.hasStatusEffect(StatusEffects.PCClone4th) && player.statusEffectv1(StatusEffects.PCClone4th) > 10 && player.statusEffectv1(StatusEffects.PCClone4th) < 21) {
-				if (player.statusEffectv1(StatusEffects.PCClone4th) == 11 && player.statusEffectv2(StatusEffects.DaoOfFire) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfFire, "Fire");
-				if (player.statusEffectv1(StatusEffects.PCClone4th) == 12 && player.statusEffectv2(StatusEffects.DaoOfIce) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfIce, "Ice");
-				if (player.statusEffectv1(StatusEffects.PCClone4th) == 13 && player.statusEffectv2(StatusEffects.DaoOfLightning) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfLightning, "Lightning");
-				if (player.statusEffectv1(StatusEffects.PCClone4th) == 14 && player.statusEffectv2(StatusEffects.DaoOfDarkness) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfDarkness, "Darkness");
-				if (player.statusEffectv1(StatusEffects.PCClone4th) == 15 && player.statusEffectv2(StatusEffects.DaoOfPoison) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfPoison, "Poison");
-				if (player.statusEffectv1(StatusEffects.PCClone4th) == 16 && player.statusEffectv2(StatusEffects.DaoOfWind) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfWind, "Wind");
-				if (player.statusEffectv1(StatusEffects.PCClone4th) == 17 && player.statusEffectv2(StatusEffects.DaoOfBlood) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfBlood, "Blood");
-				if (player.statusEffectv1(StatusEffects.PCClone4th) == 18 && player.statusEffectv2(StatusEffects.DaoOfWater) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfWater, "Water");
-				if (player.statusEffectv1(StatusEffects.PCClone4th) == 19 && player.statusEffectv2(StatusEffects.DaoOfEarth) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfEarth, "Earth");
-				if (player.statusEffectv1(StatusEffects.PCClone4th) == 20 && player.statusEffectv2(StatusEffects.DaoOfAcid) < SceneLib.soulforce.highestLayerOfDaoComprehension()) SceneLib.soulforce.DaoContemplationsEffectClone(StatusEffects.DaoOfAcid, "Acid");
+			for each (var clone:StatusEffectType in Soulforce.clones) {
+				if (player.hasStatusEffect(clone)) {
+					var cloneDao:int = player.statusEffectv1(clone);
+					if (cloneDao > 10 && cloneDao < 21) {
+						for (var i:int = 0; i < Soulforce.daos.length; ++i) {
+							if (Soulforce.daos[i][2] == cloneDao && player.statusEffectv2(Soulforce.daos[i][1]) < SceneLib.soulforce.highestLayerOfDaoComprehension())
+								SceneLib.soulforce.daoContemplationsEffect(Soulforce.daos[i][1], Soulforce.daos[i][0], true);
+						}
+					}
+				}
 			}
 			//
 			if (player.hasStatusEffect(StatusEffects.DinahGift)) {
@@ -503,7 +467,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			if (player.hasPerk(PerkLib.SlimeCore)) { //Lose slime core perk
-				if (player.vaginalCapacity() < 9000 || player.rearBody.type != RearBody.METAMORPHIC_GOO || player.arms.type != Arms.GOO || !LowerBody.isGoo(player)) {
+				if (player.rearBody.type != RearBody.METAMORPHIC_GOO || player.arms.type != Arms.GOO || !LowerBody.isGoo(player)) {
                     outputText("\nYour form ripples, as if uncertain at the changes your body is undergoing.  The goo of your flesh cools, its sensitive, responsive membrane thickening into [skin] while bones and muscles knit themselves into a cohesive torso, chest and hips gaining definition.  Translucent ooze clouds and the gushing puddle at your feet melts together, splitting into solid trunks as you regain your legs.  Before long, you can no longer see through your own body and, with an unsteady shiver, you pat yourself down, readjusting to solidity.  A lurching heat in your chest suddenly reminds you of the slime core that used to float inside you.  Gingerly touching your " + CoC.instance.player.chestDesc() + ", you can feel a small, second heartbeat under your ribs that gradually seems to be sinking, past your belly. A lurching wave of warmth sparks through you, knocking you off your fresh legs and onto your " + Appearance.buttDescription(player) + ".  A delicious pressure pulses in your abdomen and you loosen your [armor] as sweat beads down your neck.  You clench your eyes, tongue lolling in your mouth, and the pressure builds and builds until, in ecstatic release, your body arches in an orgasmic release.\n\n");
                     outputText("\nPanting, you open your eyes and see that, for once, the source of your climax wasn't your loins.  Feeling a warm, wetness on your abs, you investigate and find the small, heart-shaped nucleus that used to be inside your body has somehow managed to pass through your belly button. Exposed to the open air, the crimson organ slowly crystallizes, shrinking and hardening into a tiny ruby.  Rubbing the stone with your thumb, you're surprised to find that you can still feel a pulse within its glittering facets.  You stow the ruby heart, in case you need it again.\n");
 					player.createKeyItem("Ruby Heart", 0, 0, 0, 0); //[Add 'Ruby Heart' to key items. Player regains slime core if returning to goo body]
@@ -512,7 +476,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 			}
 			if (player.hasKeyItem("Ruby Heart") >= 0) { //Regain slime core
-				if (player.hasStatusEffect(StatusEffects.SlimeCraving) && !player.hasPerk(PerkLib.SlimeCore) && player.isGoo() && player.vaginalCapacity() >= 9000 && player.rearBody.type == RearBody.METAMORPHIC_GOO && player.arms.type == Arms.GOO) {
+				if (player.hasStatusEffect(StatusEffects.SlimeCraving) && !player.hasPerk(PerkLib.SlimeCore) && player.isGoo() && player.rearBody.type == RearBody.METAMORPHIC_GOO && player.arms.type == Arms.GOO) {
 					outputText("\nAs you adjust to your new, goo-like body, you remember the ruby heart you expelled so long ago.  As you reach to pick it up, it quivers and pulses with a warm, cheerful light.  Your fingers close on it and the nucleus slides through your palm, into your body!\n\n");
 					outputText("There is a momentary pressure in your chest and a few memories that are not your own flicker before your eyes.  The dizzying sight passes and the slime core settles within your body, imprinted with your personality and experiences.  There is a comforting calmness from your new nucleus and you feel as though, with your new memories, you will be better able to manage your body's fluid requirements.\n");
 					//(Reduces Fluid Addiction to a 24 hour intake requirement).
@@ -523,7 +487,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 			}
 			if (player.hasPerk(PerkLib.DarkSlimeCore)) { //Lose DARK slime core perk
-				if (player.vaginalCapacity() < 9000 || player.rearBody.type != RearBody.METAMORPHIC_GOO || player.arms.type != Arms.GOO || !LowerBody.isGoo(player)) {
+				if (player.rearBody.type != RearBody.METAMORPHIC_GOO || player.arms.type != Arms.GOO || !LowerBody.isGoo(player)) {
 					outputText("\nYour form ripples, as if uncertain at the changes your body is undergoing.  The goo of your flesh cools, its sensitive, responsive membrane thickening into [skin] while bones and muscles knit themselves into a cohesive torso, chest and hips gaining definition.  Translucent ooze clouds and the gushing puddle at your feet melts together, splitting into solid trunks as you regain your legs.  Before long, you can no longer see through your own body and, with an unsteady shiver, you pat yourself down, readjusting to solidity.  A lurching heat in your chest suddenly reminds you of the slime core that used to float inside you.  Gingerly touching your " + CoC.instance.player.chestDesc() + ", you can feel a small, second heartbeat under your ribs that gradually seems to be sinking, past your belly. A lurching wave of warmth sparks through you, knocking you off your fresh legs and onto your " + Appearance.buttDescription(player) + ".  A delicious pressure pulses in your abdomen and you loosen your [armor] as sweat beads down your neck.  You clench your eyes, tongue lolling in your mouth, and the pressure builds and builds until, in ecstatic release, your body arches in an orgasmic release.\n\n");
 					outputText("\nPanting, you open your eyes and see that, for once, the source of your climax wasn't your loins.  Feeling a warm, wetness on your abs, you investigate and find the small, heart-shaped nucleus that used to be inside your body has somehow managed to pass through your belly button. Exposed to the open air, the crimson organ slowly crystallizes, shrinking and hardening into a tiny ruby.  Rubbing the stone with your thumb, you're surprised to find that you can still feel a pulse within its glittering facets.  You stow the ruby heart, in case you need it again.\n");
 					player.createKeyItem("Ruby Orb", 0, 0, 0, 0); //[Add 'Ruby Heart' to key items. Player regains slime core if returning to goo body]
@@ -532,7 +496,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 			}
 			if (player.hasKeyItem("Ruby Orb") >= 0) { //Regain DARK slime core
-				if (player.hasStatusEffect(StatusEffects.SlimeCraving) && !player.hasPerk(PerkLib.DarkSlimeCore) && player.isGoo() && player.vaginalCapacity() >= 9000 && player.rearBody.type == RearBody.METAMORPHIC_GOO && player.arms.type == Arms.GOO && LowerBody.isGoo(player)) {
+				if (player.hasStatusEffect(StatusEffects.SlimeCraving) && !player.hasPerk(PerkLib.DarkSlimeCore) && player.isGoo() && player.rearBody.type == RearBody.METAMORPHIC_GOO && player.arms.type == Arms.GOO && LowerBody.isGoo(player)) {
 					outputText("\nAs you adjust to your new, goo-like body, you remember the ruby heart you expelled so long ago.  As you reach to pick it up, it quivers and pulses with a warm, cheerful light.  Your fingers close on it and the nucleus slides through your palm, into your body!\n\n");
 					outputText("There is a momentary pressure in your chest and a few memories that are not your own flicker before your eyes.  The dizzying sight passes and the slime core settles within your body, imprinted with your personality and experiences.  There is a comforting calmness from your new nucleus and you feel as though, with your new memories, you will be better able to manage your body's fluid requirements.\n");
 					//(Reduces Fluid Addiction to a 24 hour intake requirement).
@@ -543,7 +507,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 			}
 			if (player.hasStatusEffect(StatusEffects.SlimeCraving)) { //Slime craving stuff
-				if (player.vaginalCapacity() < 9000 || player.rearBody.type != RearBody.METAMORPHIC_GOO || player.arms.type != Arms.GOO || !LowerBody.isGoo(player)) {
+				if (player.rearBody.type != RearBody.METAMORPHIC_GOO || player.arms.type != Arms.GOO || !LowerBody.isGoo(player)) {
 					outputText("\n<b>You no longer feel the need to stockpile fluids in your body. Geeze just how much of a slut did this make you?</b>\n");
 					player.removeStatusEffect(StatusEffects.SlimeCraving);
 					player.removeStatusEffect(StatusEffects.SlimeCravingFeed);
@@ -823,9 +787,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (player.hasPerk(PerkLib.MetamorphEx) && player.perkv1(PerkLib.MetamorphEx) < 10) player.addPerkValue(PerkLib.MetamorphEx, 1, 1);
 				//if (player.hasPerk(PerkLib.MetamorphMastery) && player.perkv1(PerkLib.MetamorphMastery) < 5) player.addPerkValue(PerkLib.MetamorphMastery, 1, 1);
 				//Daily regeneration of mana for non mages
-				if (!player.hasPerk(PerkLib.JobSorcerer) && !player.hasPerk(PerkLib.JobHealer) && !player.hasPerk(PerkLib.JobElementalConjurer) && !player.hasPerk(PerkLib.JobGolemancer) && (player.mana < player.maxMana())) {
-					player.mana += 150;
-					if (player.mana > player.maxMana()) player.mana = player.maxMana();
+				if (!player.hasPerk(PerkLib.JobSorcerer) && !player.hasPerk(PerkLib.JobHealer) && !player.hasPerk(PerkLib.JobElementalConjurer) && !player.hasPerk(PerkLib.JobGolemancer)) {
+					EngineCore.ManaChange(150);
 				}
 				//Chi Chi healing progress
 				if (flags[kFLAGS.CHI_CHI_LVL_UP] < 5 && flags[kFLAGS.CHI_CHI_DAILY_TRAINING] < 1) {
@@ -936,7 +899,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					if (player.statusEffectv1(StatusEffects.ZenjiTrainingsCounters2) > 0) player.addStatusValue(StatusEffects.ZenjiTrainingsCounters2, 1, -player.statusEffectv1(StatusEffects.ZenjiTrainingsCounters2));
 					if (player.statusEffectv2(StatusEffects.ZenjiTrainingsCounters2) > 0) player.addStatusValue(StatusEffects.ZenjiTrainingsCounters2, 2, -player.statusEffectv2(StatusEffects.ZenjiTrainingsCounters2));
 				}
-				if (flags[kFLAGS.ZENJI_PROGRESS] == 11) {
+				if (ZenjiScenes.isLover()) {
 					if (player.statusEffectv2(StatusEffects.ZenjiPreparationsList) < 20) player.addStatusValue(StatusEffects.ZenjiPreparationsList, 2, 1);
 					if (player.statusEffectv1(StatusEffects.ZenjiModificationsList) > 0) player.addStatusValue(StatusEffects.ZenjiModificationsList, 1, -1);
 					if (player.statusEffectv3(StatusEffects.ZenjiZList) > 0) {
@@ -1144,7 +1107,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] == 2 || flags[kFLAGS.CURSE_OF_THE_JIANGSHI] == 3) hungerActive = false;
 				else if (player.hasPerk(PerkLib.DeadMetabolism)) hungerActive = false;
 			}
-			if (hungerActive || prison.inPrison) {
+			if (hungerActive) {
 				var multiplier:Number = 1.0;
 				if (player.hasPerk(PerkLib.Survivalist)) multiplier -= 0.2;
 				if (player.hasPerk(PerkLib.Survivalist2)) multiplier -= 0.2;
@@ -1163,21 +1126,11 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				//Hunger drain rate. If above 50, 1.5 per hour. Between 25 and 50, 1 per hour. Below 25, 0.5 per hour.
 				//So it takes 100 hours to fully starve from 100/100 to 0/100 hunger. Can be increased to 125 then 166 and 250 hours with Survivalist perks.
 				if (player.hasStatusEffect(StatusEffects.FastingPill)) player.hunger += 1;
-				if (prison.inPrison) {
-					if (player.internalChimeraRating() >= 1) {
-						player.hunger -= ((4 + player.internalChimeraRating()) * 0.5 * multiplier); //Hunger depletes faster in prison.
-					}
-					else {
-						player.hunger -= (2 * multiplier); //Hunger depletes faster in prison.
-					}
-				}
-				else {
-					if (player.internalChimeraRating() >= 1) player.hunger -= (0.5 * player.internalChimeraRating());
-					if (player.hunger > 80) player.hunger -= (0.5 * multiplier); //If satiated, depletes at 2 points per hour.
-					if (player.hunger > 50) player.hunger -= (0.5 * multiplier);
-					if (player.hunger > 25) player.hunger -= (0.5 * multiplier);
-					if (player.hunger > 0) player.hunger -= (0.5 * multiplier);
-				}
+				if (player.internalChimeraRating() >= 1) player.hunger -= (0.5 * player.internalChimeraRating());
+				if (player.hunger > 80) player.hunger -= (0.5 * multiplier); //If satiated, depletes at 2 points per hour.
+				if (player.hunger > 50) player.hunger -= (0.5 * multiplier);
+				if (player.hunger > 25) player.hunger -= (0.5 * multiplier);
+				if (player.hunger > 0) player.hunger -= (0.5 * multiplier);
 				if (player.buttPregnancyType == PregnancyStore.PREGNANCY_GOO_STUFFED) player.hunger = player.maxHunger(); //After Valeria x Goo Girl, you'll never get hungry until you "birth" the goo-girl.
 				if (player.hunger < 50 && player.hasPerk(PerkLib.MagicMetabolism)) {
 					var manaDrain:Number = 0;
@@ -1188,39 +1141,23 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					}
 				}
 				if (player.hunger <= 0) {
-					if (prison.inPrison) {
-						if (player.isGargoyle()) {
-							fatigue(2);//zmienić potem jak lia coś tu wymyśli
-						}
-						else {
-							SceneLib.prison.changeWill(-1, prison.inPrison);
-							fatigue(2);
-						}
-					}
+					if (player.isGargoyle()) campUniqueScene.droppingToZeroSatietyAsGargoyle();
 					else {
-						if (player.isGargoyle()) campUniqueScene.droppingToZeroSatietyAsGargoyle();
-						else {
-							//Lose HP and makes fatigue go up. Lose body weight and muscles.
-							if (player.thickness < 25) {
-								player.takePhysDamage(player.maxHP() / 25);
-								fatigue(2);
-								dynStats("tou", -0.5);
-								dynStats("str", -0.5);
-							}
-							else if ((model.time.hours + 2) % 4 == 0) { //Lose thickness 2x as fast.
-								player.modThickness(1, 1);
-								player.modTone(1, 1);
-							}
+						//Lose HP and makes fatigue go up. Lose body weight and muscles.
+						if (player.thickness < 25) {
+							player.takePhysDamage(player.maxHP() / 25);
+							fatigue(2);
+							dynStats("tou", -0.5);
+							dynStats("str", -0.5);
+						}
+						else if ((model.time.hours + 2) % 4 == 0) { //Lose thickness 2x as fast.
+							player.modThickness(1, 1);
+							player.modTone(1, 1);
 						}
 					}
 					player.hunger = 0; //Prevents negative
 				}
-				else {
-					if (prison.inPrison) {
-						SceneLib.prison.changeWill((player.esteem / 50) + 1);
-					}
-				}
-				if (player.hunger < 10 && model.time.hours % 4 == 0 && !prison.inPrison) {
+				if (player.hunger < 10 && model.time.hours % 4 == 0) {
 					player.modThickness(1, 1);
 					player.modTone(1, 1);
 				}
@@ -1285,8 +1222,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			//Demonic energy thirst
 			if (player.hasStatusEffect(StatusEffects.DemonEnergyThirstFeed)) {
 				if (player.hunger < player.maxHunger()) player.refillHunger(10, false);
-				if (player.HP < player.maxHP()) EngineCore.HPChange(100 + (player.tou*2), true);
-				if (player.mana < player.maxMana()) EngineCore.ManaChange(100 + (player.inte*2), true);
+				EngineCore.HPChange(100 + (player.tou*2), true);
+				EngineCore.ManaChange(100 + (player.inte*2));
 				EngineCore.changeFatigue(-(100 + (player.spe*2)));
 				outputText("You feel energised and empowered by the energy drained out of the cum of your recent fuck. What a meal!");
 				player.removeStatusEffect(StatusEffects.DemonEnergyThirstFeed)
@@ -1372,16 +1309,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (player.hunger < player.maxHunger()) {
 					player.refillHunger(10, false);
 				}
-				if (player.HP < player.maxHP()) {
-					EngineCore.HPChange(100 + (player.tou*2), true);
-				}
-				if (player.mana < player.maxMana()) {
-					EngineCore.ManaChange(100 + (player.inte*2), true);
-				}
+				EngineCore.HPChange(100 + (player.tou*2), true);
+				EngineCore.ManaChange(100 + (player.inte*2));
 				EngineCore.changeFatigue(-(100 + (player.spe*2)));
-				if (player.soulforce < player.maxOverSoulforce()) {
-					EngineCore.SoulforceChange(500 + (player.wis*2), true);
-				}
+				EngineCore.SoulforceChange(500 + (player.wis*2));
 				outputText("You feel energised and empowered by the life force drained out of the fluids of your recent blind date. What a meal!");
 				player.removeStatusEffect(StatusEffects.KitsuneEnergyThirstFeed);
 			}
@@ -1754,7 +1685,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Wendigo stuff
-			if (!player.blockingBodyTransformations() && player.hasStatusEffect(StatusEffects.WendigoPsychosis) && !player.hasPerk(PerkLib.EndlessHunger) && ((flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger <= 0) || (flags[kFLAGS.HUNGER_ENABLED] <= 0 && player.lust >= player.maxLust()))) SceneLib.glacialRift.wendigoScene.becomeWendigo();
+			if (!player.blockingBodyTransformations() && player.hasStatusEffect(StatusEffects.WendigoPsychosis) && !player.hasPerk(PerkLib.EndlessHunger) && ((flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger <= 0) || (flags[kFLAGS.HUNGER_ENABLED] <= 0 && player.lust >= player.maxOverLust()))) SceneLib.glacialRift.wendigoScene.becomeWendigo();
 			//Gazer perks
 			if (player.eyes.type == Eyes.MONOEYE && !player.hasPerk(PerkLib.TrueSeeing)) {
 				outputText("\nAs part of acquiring an all seeing eye your sight has improved greatly. It would seem you now possess the innate ability to dismiss illusions and falsehood seeing the world as it truly is. <b>You acquired True Seeing.</b> \n\n(<b>Gained Perk: True seeing</b>)");
@@ -1818,8 +1749,13 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (!player.hasPerk(PerkLib.FlawlessBody)) {
 					outputText("\nYou examine your body discovering with surprise your skin is now extremely sensitive but also flawless just like that of an elf. ");
 					outputText("It is beautiful and inviting to the touch, surely your opponents would beg for a chance to get but a single taste of your flawless body. <b>Your " + player.skinColor + " skin is now flawless just like that of the elves.</b>");
-					player.createPerk(PerkLib.FlawlessBody, 0, 0, 0, 0);
 					outputText("\n\n<b>(Gained Perk: Flawless Body</b>)");
+					player.createPerk(PerkLib.FlawlessBody, 0, 0, 0, 0);
+				}
+				if (!player.hasPerk(PerkLib.ElvenSense)) {
+					outputText("\nAs your body finishes changing you feel something fundamental shift in your essence. Magic… You somehow feel magic come to you more easily. Casting spells should be easier to you now that your voice sings the incantations and your hand weaves the signs with ideal precisions.  <b>You gained the ability Natural Spellcasting.</b>");
+					outputText("\n\n<b>(Gained Perk: Natural Spellcasting</b>)");
+					player.createPerk(PerkLib.NaturalSpellcasting, 0, 0, 0, 0);
 				}
 			}
 			//Flawless Body
@@ -1876,7 +1812,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			//VerdantMight
 			if ((player.isRaceCached(Races.PLANT) || player.isRaceCached(Races.ALRAUNE)) && !player.hasPerk(PerkLib.VerdantMight)) {
-				outputText("\nRaw green power flows throught your veins while being a plant hasnt done so much to improve your muscle your general sturdyness more then makes up for it allowing you to use your toughness instead of your strength when delivering blows. \n\n<b>(gained the Verdant Might perk!)</b>\n");
+				outputText("\nRaw green power flows throught your veins while being a plant hasnt done so much to improve your muscle your general sturdyness more then makes up for it allowing you to use your toughness instead of your strength when delivering blows.\n\n<b>(gained the Verdant Might perk!)</b>\n");
 				player.createPerk(PerkLib.VerdantMight,0,0,0,0);
 				needNext = true;
 			}
@@ -1910,6 +1846,17 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (player.hasPerk(PerkLib.VerdantMight)) player.removePerk(PerkLib.VerdantMight);
 				needNext = true;
 			}*/
+			//Vegetal Affinity
+			if ((player.isRaceCached(Races.PLANT) || player.isRaceCached(Races.ALRAUNE) || player.isRaceCached(Races.YGGDRASIL) || player.isRaceCached(Races.WOODELF)) && !player.hasPerk(PerkLib.VegetalAffinity)) {
+				outputText("\nWith your connection to the natural flora growing stronger you gained an affinity with plantlife.\n\n<b>(gained the Vegetal Affinity perk!)</b>\n");
+				player.createPerk(PerkLib.VegetalAffinity,0,0,0,0);
+				needNext = true;
+			}
+			if (!player.isRaceCached(Races.PLANT) && !player.isRaceCached(Races.ALRAUNE) && !player.isRaceCached(Races.YGGDRASIL) && !player.isRaceCached(Races.WOODELF) && player.hasPerk(PerkLib.VegetalAffinity)) {
+				outputText("\nWith your connection to the natural world growing weaker you lose your affinity with plantlife.\n\n<b>(Lost the Vegetal Affinity perk!)</b>\n");
+				player.removePerk(PerkLib.VegetalAffinity);
+				needNext = true;
+			}
 			//Lacta bovine immunities
 			if (player.isRaceCached(Races.COW) && !player.hasPerk(PerkLib.LactaBovineImmunity)) {
 				outputText("\nAs you become more of a lacta bovine you become increasingly obsessed with thoughts of horsecocks and cum sloshing balls, namely minotaur balls. While you are aware you naturally became addicted to minotaur cum you also know your nature as a lacta bovine will protect you from most of its harmful effects allowing you to sample the substance to your heart's content without risks.");
@@ -1939,7 +1886,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			//Soul Sense
 			if (!player.hasPerk(PerkLib.SoulSense) && player.hasKeyItem("'Soul Sense and You' Manual") >= 0 && player.hasPerk(PerkLib.SoulPersonage)) {
 				outputText("\nDuring a casual walk around your camp you suddenly notice, or rather feel, something unexpected. Your surrounding blurs for a moment, to be replaced with a forest. You notice a goblin strolling nearby. Suddenly, she stops and slowly looks around, staring directly at you. A moment later, your vision of the forest becomes blurry, eventually fading away to be replaced by your camp and its surroundings. ");
-				outputText("You shake your head, trying to figure out what had just happened. The only solution that you find within yourself is something that mrs Shigure you met in He’Xin’Dao at lectures mentioned. Another sense that they had developed, which allowed them to perceive distant places or find specific people over long distances. It looks as though you finaly developed it too.\n");
+				outputText("You shake your head, trying to figure out what had just happened. The only solution that you find within yourself is something that Mrs. Shigure you met in He’Xin’Dao at lectures mentioned. Another sense that they had developed, which allowed them to perceive distant places or find specific people over long distances. It looks as though you finaly developed it too.\n");
 				player.removeKeyItem("'Soul Sense and You' Manual");
 				player.createPerk(PerkLib.SoulSense, 0, 0, 0, 0);
 				needNext = true;
@@ -1995,7 +1942,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.createPerk(PerkLib.BouncyBody, 0, 0, 0, 0);
 				needNext = true;
 			}
-			else if ((!player.isGoblinoid()) && player.hasPerk(PerkLib.BouncyBody) && !player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 3) {
+			else if ((!player.isGoblinoid()) && player.hasPerk(PerkLib.BouncyBody) && player.perkv1(IMutationsLib.NaturalPunchingBagIM) < 3) {
 				outputText("\nYou're not as cushiony as you used to be. Better avoid getting hit.\n");
 				outputText("\n<b>(Lost Perk: Bouncy body)</b>\n");
 				player.removePerk(PerkLib.BouncyBody);
@@ -2060,38 +2007,37 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (!player.statStore.hasBuff('DrugInjector')) {
 					if (player.hasKeyItem("Drug injectors") >= 0){
 						outputText("\nYou can feel the chemicals pumped in by your gadgets resume working.\n");
-
-						player.statStore.replaceBuffObject({'sens':5,'lib.mult':0.25},'DrugInjector',{text:'Drug injectors'})
+						player.statStore.replaceBuffObject({'sens':5,'lib.mult':0.25},'DrugInjector',{text:'Drug injectors'});
+						needNext = true;
 					}
 					if (player.hasKeyItem("Improved Drug injectors") >= 0){
 						outputText("\nYou can feel the chemicals pumped in by your gadgets resume working.\n");
-
-						player.statStore.replaceBuffObject({'sens':10,'lib.mult':0.50},'DrugInjector',{text:'Improved Drug injectors'})
+						player.statStore.replaceBuffObject({'sens':10,'lib.mult':0.50},'DrugInjector',{text:'Improved Drug injectors'});
+						needNext = true;
 					}
 					if (player.hasKeyItem("Potent Drug injectors") >= 0){
 						outputText("\nYou can feel the chemicals pumped in by your gadgets resume working.\n");
-
-						player.statStore.replaceBuffObject({'sens':15,'lib.mult':0.75},'DrugInjector',{text:'Potent Drug injectors'})
+						player.statStore.replaceBuffObject({'sens':15,'lib.mult':0.75},'DrugInjector',{text:'Potent Drug injectors'});
+						needNext = true;
 					}
 				}
 					else {
 					if (player.hasKeyItem("Power bracer") >= 0) {
 						outputText("\nYou can feel the chemicals pumped in by your gadgets resume working.\n");
-
-						player.statStore.replaceBuffObject({'sens':5,'str.mult':0.50},'Power bracer',{text:'Power bracer'})
+						player.statStore.replaceBuffObject({'sens':5,'str.mult':0.50},'Power bracer',{text:'Power bracer'});
+						needNext = true;
 					}
 					if (player.hasKeyItem("Powboy") >= 0) {
 						outputText("\nYou can feel the chemicals pumped in by your gadgets resume working.\n");
-
-						player.statStore.replaceBuffObject({'sens':10,'str.mult':0.75},'Power bracer',{text:'Powboy'})
+						player.statStore.replaceBuffObject({'sens':10,'str.mult':0.75},'Power bracer',{text:'Powboy'});
+						needNext = true;
 					}
 					if (player.hasKeyItem("M.G.S. bracer") >= 0) {
 						outputText("\nYou can feel the chemicals pumped in by your gadgets resume working.\n");
-
-						player.statStore.replaceBuffObject({'sens':15,'str.mult':1},'Power bracer',{text:'M.G.S. bracer'})
+						player.statStore.replaceBuffObject({'sens':15,'str.mult':1},'Power bracer',{text:'M.G.S. bracer'});
+						needNext = true;
 					}
 				}
-				needNext = true;
 			}
 			//Cow bell
 			if (player.necklace == necklaces.COWBELL && player.isRaceCached(Races.COW) && !player.statStore.hasBuff('Cow bell')) player.statStore.replaceBuffObject({'str.mult':0.2, 'lib.mult':0.2}, 'Cow bell', { text: 'Cow bell' });
@@ -2105,7 +2051,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Marae corrupted or killed + Zenji
-			if (flags[kFLAGS.ZENJI_PROGRESS] == 11 && (flags[kFLAGS.MET_MARAE_CORRUPTED] >= 1 || flags[kFLAGS.CORRUPTED_MARAE_KILLED] > 0) && !ZenjiScenes.ZenjiMarae) {
+			if (ZenjiScenes.isLover() && (flags[kFLAGS.MET_MARAE_CORRUPTED] >= 1 || flags[kFLAGS.CORRUPTED_MARAE_KILLED] > 0) && !ZenjiScenes.ZenjiMarae) {
 				outputText("\nZenji approaches you, \"<i>[name]. I.. I felt something, not long ago. Someting terrible has happened, I feel it deep within me.</i>\"");
 				outputText("\n\nHe pulls you into his protective arms, \"<i>Stay close, [name], dis world just doesn’t feel right anymore.</i>\"");
 				ZenjiScenes.ZenjiMarae = true;
@@ -2431,7 +2377,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.ass.analWetness = 2;
 				needNext = true;
 			}
-			if (!Holidays.isHalloween() && flags[kFLAGS.ZENJI_PROGRESS] == 11 && player.statusEffectv4(StatusEffects.ZenjiZList) == 2 && rand(5) < 2) {
+			if (!Holidays.isHalloween() && ZenjiScenes.isLover() && player.statusEffectv4(StatusEffects.ZenjiZList) == 2 && rand(5) < 2) {
 				SceneLib.zenjiScene.loverZenjiHalloweenEventEnding();
 				needNext = true;
 			}
@@ -2466,7 +2412,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 						needNext = true;
 					}
 					player.dynStats("lus", 20, "scale", false);
-					if (player.lust > player.maxLust()) player.lust = player.maxLust();
+					if (player.lust > player.maxOverLust()) player.lust = player.maxOverLust();
 				}
 				if (player.statusEffectv1(StatusEffects.Luststick) <= 0) {
 					player.removeStatusEffect(StatusEffects.Luststick);
@@ -2486,6 +2432,14 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (flags[kFLAGS.DICK_EGG_INCUBATION] == 1) {
                     SceneLib.masturbation.birthBeeEggsOutYourWang();
                     needNext = true;
+				}
+			}
+			if (player.hasStatusEffect(StatusEffects.ArousalPotion)) {
+				player.addStatusValue(StatusEffects.ArousalPotion, 2, -1);
+				if (player.statusEffectv2(StatusEffects.ArousalPotion) <= 0) {
+					outputText("\n<b>Alraune perfume effect expired.</b>");
+					player.removeStatusEffect(StatusEffects.ArousalPotion);
+					needNext = true;
 				}
 			}
 			if (player.hasStatusEffect(StatusEffects.Eggchest)) { //Eggs in tits!
@@ -2879,7 +2833,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		private var LunaFullMoonScene: Boolean = false;
 
 		public function timeChangeLarge():Boolean {
-            if (!prison.inPrison && !ingnam.inIngnam) {
+            if (!ingnam.inIngnam) {
                 if (rand(4) == 0 && Holidays.isChristmas() && player.gender > 0 && camp.IsSleeping && flags[kFLAGS.XMAS_CHICKEN_YEAR] < date.fullYear) {
 					SceneLib.holidays.getAChristmasChicken();
                     return true;
@@ -2888,7 +2842,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					SceneLib.holidays.xmasBitchEncounter(); //Set it to remember the last year encountered
                     return true;
                 }
-                if (checkedTurkey++ == 0 && (rand(5) == 0 && (CoC.instance.model.time.hours == 18 || CoC.instance.model.time.hours == 19)) && (date.fullYear > flags[kFLAGS.TURKEY_FUCK_YEAR_DONE] || flags[kFLAGS.MORE_TURKEY] > 0) && Holidays.isThanksgiving() && player.gender > 0 && flags[kFLAGS.IN_INGNAM] <= 0) {
+                if (checkedTurkey++ == 0 && (rand(5) == 0 && (CoC.instance.model.time.hours == 18 || CoC.instance.model.time.hours == 19)) && (date.fullYear > flags[kFLAGS.TURKEY_FUCK_YEAR_DONE] || flags[kFLAGS.MORE_TURKEY] > 0) && Holidays.isThanksgiving() && player.gender > 0 && !flags[kFLAGS.IN_INGNAM]) {
 					SceneLib.holidays.datTurkeyRumpMeeting(); //TURKEY SURPRISE
                     return true;
                 }
@@ -3024,7 +2978,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				return true;
 			}
 			//Bee cocks
-			if (player.hasCock() && player.cocks[0].cockType == CockTypesEnum.BEE && player.lust >= player.maxLust()) {
+			if (player.hasCock() && player.cocks[0].cockType == CockTypesEnum.BEE && player.lust >= player.maxOverLust()) {
 				if (player.hasItem(consumables.BEEHONY) || player.hasItem(consumables.PURHONY) || player.hasItem(consumables.SPHONEY)) {
 					outputText("\nYou can't help it anymore. Thankfully, you have the honey in your pouch so you pull out a vial of honey. You're definitely going to masturbate with honey covering your bee-cock.");
                     doNext(SceneLib.masturbation.masturbateGo);

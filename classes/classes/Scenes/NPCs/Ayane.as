@@ -18,7 +18,7 @@ public class Ayane extends Kitsune {
             damage *= 0.2;
         }
         for (var i:int = 0; i < 7; ++i)
-            if (player.hasPerk(PerkLib.Evade) && rand(100) < 10) outputText("  You avoid the foxfire barely feeling it's tingling against your skin!");
+            if (player.getEvasionRoll()) outputText("  You avoid the foxfire barely feeling it's tingling against your skin!");
             else {
                 outputText(" The foxfire sears your skin, but leaves you strangely aroused.");
                 player.takeFireDamage(damage, true);
@@ -42,7 +42,7 @@ public class Ayane extends Kitsune {
         kissCooldown = 8;
         outputText("The kitsune appears out of nowhere and attempts to grab you!");
 
-        if (player.speedDodge(this) > 0 || player.hasPerk(PerkLib.Evade) && rand(100) < 10)
+        if (player.getEvasionRoll())
             outputText("You manage to avoid her embrace just in time. She gives you a disappointed expression then backs off into the ambient darkness. ");
         else {
             outputText("Unable to dodge in time she wraps her arms around you and forces a kiss. To your horror you feel your mystical energy being sapped away! She breaks the embrace and back off licking her lips.\n"
@@ -53,7 +53,7 @@ public class Ayane extends Kitsune {
             if (player.mana < 0) player.mana = 0;
             if (player.soulforce < 0) player.soulforce = 0;
             HP += maxHP() * 0.1;
-            if (HP > maxHP()) HP = maxHP();
+            if (HP > maxOverHP()) HP = maxOverHP();
         }
     }
 
@@ -65,7 +65,7 @@ public class Ayane extends Kitsune {
             + "\n"
             + "She draws a sign with her staff and you watch in frustration as some of her wounds close.");
         HP += maxHP() * 0.2;
-        if (HP > maxHP()) HP = maxHP();
+        if (HP > maxOverHP()) HP = maxOverHP();
     }
 
     private function illusion():void {
@@ -87,7 +87,7 @@ public class Ayane extends Kitsune {
         if (healCooldown > 0) --healCooldown;
         //pick move
         var moves:Array = [foxFireAttack, foxfireStorm, drainingKiss];
-        if (HP < maxHP()) {
+        if (HP < maxOverHP()) {
             if (kissCooldown == 0) moves.push(drainingKiss);
             if (healCooldown == 0) moves.push(heal);
         }

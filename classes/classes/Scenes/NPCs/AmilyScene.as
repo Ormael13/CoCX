@@ -289,7 +289,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				return;
 			}
 			//CORRUPTIONZ
-			if (flags[kFLAGS.AMILY_CORRUPT_FLIPOUT] > 0 && player.cor > 25) {
+			if (flags[kFLAGS.AMILY_CORRUPT_FLIPOUT] > 0 && player.cor > 25 + player.corruptionTolerance) {
 				//Cook amily a snack if player doesnt have key item for it.
 				if (player.hasKeyItem("Potent Mixture") < 0 && flags[kFLAGS.AMILY_CORRUPTION] < 3) {
 					cookAmilyASnack();
@@ -305,7 +305,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				}
 			}
 			//Amily Un-encounterable (worms):
-			if (flags[kFLAGS.AMILY_GROSSED_OUT_BY_WORMS] == 1 || player.cor > 25 || flags[kFLAGS.AMILY_CORRUPT_FLIPOUT] > 0) {
+			if (flags[kFLAGS.AMILY_GROSSED_OUT_BY_WORMS] == 1 || player.cor > 25 + player.corruptionTolerance || flags[kFLAGS.AMILY_CORRUPT_FLIPOUT] > 0) {
 				outputText("You enter the ruined village cautiously. There are burnt-down houses, smashed-in doorways, ripped-off roofs... everything is covered with dust and grime. For hours you explore, but you cannot find any sign of another living being, or anything of value. The occasional footprint from an imp or a goblin turns up in the dirt, but you don't see any of the creatures themselves. It looks like time and passing demons have stripped the place bare since it was originally abandoned. Finally, you give up and leave. You feel much easier when you're outside of the village – you had the strangest sensation of being watched while you were in there.");
 				doNext(camp.returnToCampUseOneHour);
 				return;
@@ -1142,7 +1142,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				outputText("You scramble backwards, but it still cuts a nasty gash into your flesh. Amily looks poised to strike again, but stops when she sees that it's you.\n\n");
 				//[Low Affection]
 				if(flags[kFLAGS.AMILY_AFFECTION] < 15) {
-					outputText("\"<i>Oh... It's you. Well, that was a dumb thing to do,</i>\" she says, surprisingly collected. She roughly grabs hold of you and painfully probes your injury, causing you to yelp in pain. \"<i>Big baby, you'll live. And let that serve a reminder not to sneak up on a survivor with a knife – not here, at least. So, what made you come here, anyway?</i>\" she asks, disinterested.\n\n");
+					outputText("\"<i>Oh... It's you. Well, that was a dumb thing to do,</i>\" she says, surprisingly collected. She roughly grabs hold of you and painfully probes your injury, causing you to yelp in pain. \"<i>Big baby, you'll live. And let that serve a reminder not to sneak up on a survivor with a knife – not here, at least. So, what has made  you come here, anyway?</i>\" she asks, disinterested.\n\n");
 				}
 				//[Medium Affection]
 				else if(flags[kFLAGS.AMILY_AFFECTION] < 40) {
@@ -5498,7 +5498,6 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 		public function amilyPopsOutKidsInCamp():void {
 			amilySprite();
 			flags[kFLAGS.AMILY_BIRTH_TOTAL]++;
-			if (prison.inPrison) return;
 			//Uncorrupt
 			if(flags[kFLAGS.AMILY_FOLLOWER] == 1) {
 				outputText("\nThe peace of your camp is suddenly disrupted by a loud squeal of distress. \"<i>[name]! It's time!</i>\" Amily cries out, then shrieks again - there is no question at all in your mind that she's gone into labor.  You race over to find her squatting naked over her nest, squealing softly with exertion as her swollen abdomen visibly ripples, fluid dripping from her swollen, naked, pink vagina. She is definitely in labor.\n\n");
@@ -7125,7 +7124,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				player.removeStatusEffect(StatusEffects.CombatFollowerAmily);
 				flags[kFLAGS.PLAYER_COMPANION_1] = "";
 			}
-			doNext(curry(amilyMenu, false));
+			doNext(amilyMenu, false);
 			cheatTime(1/12);
 		}
 

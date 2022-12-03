@@ -18,7 +18,7 @@ public class ChainLightningSpell extends AbstractWhiteSpell {
 				: "Chain Lighting is a lightning attack that will electrocute your foes with a chain bolts of lightning.",
 			TARGET_ENEMY,
 			TIMING_INSTANT,
-			[TAG_DAMAGING, TAG_AOE, TAG_LIGHTNING]
+			[TAG_DAMAGING, TAG_AOE, TAG_LIGHTNING, TAG_TIER1]
 		);
 		baseManaCost = 200;
 		baseWrathCost = ex ? 100 : 0;

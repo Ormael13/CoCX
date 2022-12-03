@@ -17,7 +17,7 @@ public class ShatterstoneSpell extends AbstractGreySpell {
 				: "Harden part of the the ground into many earth spike to attack your enemies.",
 			TARGET_ENEMY,
 			TIMING_INSTANT,
-			[TAG_DAMAGING, TAG_EARTH, TAG_AOE]
+			[TAG_DAMAGING, TAG_EARTH, TAG_AOE, TAG_TIER1]
 		);
 		baseManaCost = 200;
 		if (ex) baseWrathCost = 100;

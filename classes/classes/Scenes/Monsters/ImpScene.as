@@ -63,6 +63,9 @@ use namespace CoC;
 				addButtonIfTrue(9, "Fuck & Piss", pissDom, "Requires you to have non-taur body and 'Watersports' to be enabled", flags[kFLAGS.WATERSPORTS_ENABLED] >= 1 && !player.isTaur(), "Fuck the Imp's ass, and relieve yourself. What's a better way to leave your scent and mark on him?");
 				addButtonIfTrue(11, "Oviposit", putBeeEggsInAnImpYouMonster, "Req. bee ovipositor", player.canOvipositBee(), "Use your ovipositor and lay some eggs in his butt.");
 				SceneLib.uniqueSexScene.pcUSSPreChecksV2(impRapeMenu);
+			} else {
+				outputText("You aren't aroused enough to rape him.");
+				flushOutputTextToGUI();
 			}
 		}
 
@@ -757,7 +760,7 @@ use namespace CoC;
 			monster = new ImpGang();
 			outputText("\n");
 			if (!loss) outputText("<b>You sleep uneasily. A small sound near the edge of your camp breaks into your rest, and you awaken suddenly to find yourself surrounded by [themonster]</b>!\n\n");
-			if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 && (flags[kFLAGS.SLEEP_WITH] == "Marble" || flags[kFLAGS.SLEEP_WITH] == "")) {
+			if (camp.sleepInCabin()) {
 				outputText("You look at the door to see that it's open. Shit. You've forgottten to lock the door before you went to sleep!\n\n");
 			}
 			if ((Math.sqrt(player.inte + player.spe) >= rand(16) || rand(3) == 0) && !loss) {
@@ -1445,7 +1448,7 @@ use namespace CoC;
 			}
             sceneHunter.print("Failed check: Bimbo/Futa, non-taur, vagina");
 			//Lust loss
-			if(player.lust >= player.maxLust())
+			if(player.lust >= player.maxOverLust())
 				sceneHunter.selectLossMenu([
 						[0, "Vaginal", vaginal, "Req. a vagina", player.hasVagina()],
 						[1, "SuckHim", suckHimMale, "Req. a cock", player.hasCock()],
@@ -1706,14 +1709,15 @@ use namespace CoC;
 			} else {
 				outputText("The muscular imp groans in pained arousal, his loincloth being pushed to the side by his thick, powerful dick.  Grabbing the useless clothing, he rips it from his body, discarding it.  The imp's eyes lock on his cock as he becomes completely ignorant of your presence.  His now insatiable lust has completely clouded his judgment.  Wrapping both of his hands around his pulsing member he begins to masturbate furiously, attempting to relieve the pressure you've caused.");
 			}
-			if (player.lust >= 33) {
-				addButton(0, "Sex", sexAnImpLord);
-				SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatImpLord);
-			} else {
-				outputText("\n\nYou are not aroused enough to rape him.");
-			}
 			addButton(1, "Kill Him", killImp);
 			addButton(4, "Leave", cleanupAfterCombat);
+			if (player.lust >= 33) {
+				addButton(0, "Sex", sexAnImpLord);
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatImpLord); // the last!
+			} else {
+				outputText("\n\nYou are not aroused enough to rape him.");
+				flushOutputTextToGUI();
+			}
 		}
 		public function loseToAnImpLord():void {
 			clearOutput();

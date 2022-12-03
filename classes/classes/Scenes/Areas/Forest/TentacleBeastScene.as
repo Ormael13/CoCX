@@ -272,7 +272,7 @@ private function futaTentacleEpilogue():void {
 	}
 
 	private function horsecockLoss():void {
-		if(player.cor < 75 && player.lust < player.maxLust()) outputText("It grabs you before you can get away!\n\nWhile you attempt to resist the abomination, its raw muscle mass is too much. ");
+		if(player.cor < 75 && player.lust < player.maxOverLust()) outputText("It grabs you before you can get away!\n\nWhile you attempt to resist the abomination, its raw muscle mass is too much. ");
 		outputText("It pins you to the ground easily. You immediately feel a sharp, horrible pain at the base of your cock. You look down to see the end of a thorny tendril impaled in your pelvic region. Fiery pain courses through your veins as you feel the creature inject you with some sort of liquid. As the pain sears through you, your monstrous equine member immediately becomes fully erect and pre-cum flows freely from your flare.\n\n");
 		outputText("You see a large hollow tentacle attempt to descend upon your stiff cock. Much to your surprise and the creature's frustration, it barely opens wide enough to cover the tip of your impressive member. The creature mindlessly continues attempting to entrap your penis. It only succeeds in sending pangs of pleasure down your shaft as the thumping on the end of your cock shoots down to your roots.\n\n");
 		outputText("Amused as well as aroused, you choose to lull the creature into reticence as it keeps trying to suck your horsecock in. Each wave of pleasure makes your prick bob about");
@@ -744,8 +744,8 @@ private function tentacleRapeContinuationForFemales():void {
 private function centaurGenderlessRetardation():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_tentacleMonster);
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00247] == 0 || player.balls == 0) {
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00247] = 1;
+	if(flags[kFLAGS.TENTABEAST_CENT_GLESS_MET] == 0 || player.balls == 0) {
+		flags[kFLAGS.TENTABEAST_CENT_GLESS_MET] = 1;
 		outputText("Tentacles wrap around your legs before you can make a move to stop them, binding you tightly and coiling upwards.  One slides slowly along your underside, making you shiver in ");
 		if(player.cor < 50 && player.lust < 70) outputText("dread");
 		else outputText("anticipation");

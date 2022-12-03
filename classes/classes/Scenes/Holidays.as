@@ -14,6 +14,7 @@ import classes.ItemType;
 import classes.PerkLib;
 import classes.Player;
 import classes.PregnancyStore;
+import classes.Races;
 import classes.Scenes.NPCs.JojoScene;
 import classes.StatusEffects;
 import classes.VaginaClass;
@@ -192,7 +193,7 @@ public class Holidays extends BaseContent {
                 outputText(" dick with child-like glee");
             }
             outputText(".  \"<i>");
-            if (player.race() != "human") outputText("I know what you were, virile suitor.  ");
+            if (!player.isRace(Races.HUMAN)) outputText("I know what you were, virile suitor.  ");
             outputText("There's never too much of a good thing.  Of course, my champion must have the proper train of thought...</i>\""
                 + "\n\nWait... what?  You start to pull back, but her grip tightens, forcing you rigid with involuntary pain.  Prickly vines boil out of the ground around your [legs] and entwine into a twisted web with the strength of iron.  In seconds, you're firmly bound up to your [chest], the only part left mobile being your poor, depleted dick.  It swings freely, controlled as effortlessly by the tainted goddess as your veridian prison."
                 + "\n\nFera rambles, \"<i>My sister is not so strong anymore... the planet itself has been turned to my way of thinking, just like you.</i>\"  She leans forward to kiss you, those ruby lips as smooth as glass and soft as the finest velvet.  You lose yourself in her lips, immediately kissing her back, devoting all your muscle control to passionately twisting your tongue about hers, tasting her cinnamon-sweet mouth, moist organs lapping against one another while bubbles of saliva roll between your hungry lips.  It's enough to blind you to the rising wall of verdant tentacles, at least until they touch your ears."
@@ -433,7 +434,7 @@ public class Holidays extends BaseContent {
                 + "\n\nThere isn't enough guidance in that question to rouse a response from your supine form, so Fera continues on, smiling all the while.  \"<i>Oh, I'm going to do it, [name].  You're going to do this for me.</i>\"  She idly slips a finger along the underside of [oneCock] and licks her lips.");
 
             //[next]
-            player.dynStats("lus=", player.maxLust());
+            player.dynStats("lus=", player.maxOverLust());
             menu();
             addButton(0, "Next", dickBoostingFuntimes);
         }
@@ -528,7 +529,7 @@ public class Holidays extends BaseContent {
             outputText("?</i>\""
                 + "\n\nWith the question asked, she awaits your slow-moving mind's answer.  No is not an option you're even capable of considering at this point.  Which do you want?");
             //[Gape] [Tight] [Dick]
-            player.dynStats("lus=", player.maxLust(), "cor", 2);
+            player.dynStats("lus=", player.maxOverLust(), "cor", 2);
             menu();
             addButton(0, "Gape", gapeMePleaseFera);
             addButton(1, "Tight", tightLikeAToigar);
@@ -1080,7 +1081,7 @@ public class Holidays extends BaseContent {
                 + "\n\nInstantly, you can see her pale flesh reddening, burning with desire.  Her fem-slime practically pours out of her over-excited pussy as her breath quickens, chest heaving her tits up and around your [cocks].  Perfect! You pull your hand back out of her love-tunnel, slapping both her butt cheeks to wipe off the last of the lusty cream on her bare derriere, which flushes as red as her hair.  \"<i>Gobble!</i>\" she screams as you swat her ass, slamming her big hips down on your face, trying to get you to eat her needy box again even as she's panting and twitching, playing with her tits and your cock with shameless abandon."
                 + "\n\n\"<i>Gobbles, gobble,</i>\" you command, poking a finger into her drooling slit."
                 + "\n\n\"<i>Gobble!</i>\" she answers, rolling off of you and hiking her legs up, knees sinking into her bust to show off her slit for you, so eager and inviting.  You rise to your [feet], grabbing the lusty fowl behind her hooked knees and pulling her in to line up with your [cocks].  \"<i>G-gobble!</i>\" she begs, fluttering her plumage against your [legs], staring up at you imploringly as her skin further reddens, so hot with desperate lust you can practically feel the sexual hunger radiating off of her.  Time to finish this turkey off in style!");
-            player.dynStats("lus=", player.maxLust(), "scale", false);
+            player.dynStats("lus=", player.maxOverLust(), "scale", false);
             menu();
             addButton(0, "Next", turkeyDesertBitches);
         }
@@ -3044,7 +3045,7 @@ public class Holidays extends BaseContent {
                 + "\n\nThe mouse moans and groans lustily with every spank, his cock growing stiffer and harder, pre bubbling out of its tip until it is constantly oozing steadily from his cock.  He's lost in pleasure, existing only to be pushed over the edge into a true orgasm.  Realizing that the slut is bordering the edge of orgasm, you decide to put a finishing touch to his treatment... you shove your fingers into his easily yielding ass, pushing the digits up to the knuckle and pressing on his prostate with a single order: Cum."
                 + "\n\nWith a gasp and a howl, Jojo does as you command, a fountain of tainted mouse-spooge gushing from his cock, soaking into the snow to create a great slushy puddle.  He cums and he cums until he's totally exhausted his strength, collapsing bonelessly into the puddle he's just created, his tail slipping off of your wrist as he does so."
                 + "\n\nYou laugh at the mouse-slut's blissed out face of pleasure, feeling like you managed to chip away another part of his broken will.  Before you leave him to pass out on his snowy puddle of mouse-cum you ask him, what is his name?  \"<i>S - Slut...</i>\"  Is the moaning reply.  Satisfied, you decide to leave for the moment.  Maybe you'll get back to him and break him in a little more later...");
-            player.dynStats("lus=", player.maxLust(), "scale", true);
+            player.dynStats("lus=", player.maxOverLust(), "scale", true);
             menu();
             addButton(0, "Next", processJackFrostEvent);
             flags[kFLAGS.JACK_FROST_PROGRESS] = 5;

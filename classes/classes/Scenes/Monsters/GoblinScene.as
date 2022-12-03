@@ -154,13 +154,13 @@ public class GoblinScene extends BaseContent {
         if (monster is GoblinAdventurers) {
             outputText("After you collapse on the ground, the goblins hold a short huddle to try and figure out what to do. It ends pretty quickly with the tallest one walking towards you. You don't have to be a genius to know she's going to have you all to herself. To make sure you'll be easier to handle, the victorious assassin saunters up, a pair of fluid filled needles in her hands. She jams them into your [player.legs], emptying the contents into you before you can so much as stammer a protest. Burning lust pours through your veins unbidden, and you moan out loud as the chemicals have their way with you as easily as the goblin soon will.\n\n");
         } else if (monster is GoblinAssassin) {
-            if(player.lust < player.maxLust()) outputText("You collapse, utterly beaten. To make sure you'll be easier to handle, the victorious assassin saunters up, a pair of fluid filled needles in her hands. She jams them into your [player.legs], emptying the contents into you before you can so much as stammer a protest. Burning lust pours through your veins unbidden, and you moan out loud as the chemicals have their way with you as easily as the goblin soon will.\n\n");
+            if(player.lust < player.maxOverLust()) outputText("You collapse, utterly beaten. To make sure you'll be easier to handle, the victorious assassin saunters up, a pair of fluid filled needles in her hands. She jams them into your [player.legs], emptying the contents into you before you can so much as stammer a protest. Burning lust pours through your veins unbidden, and you moan out loud as the chemicals have their way with you as easily as the goblin soon will.\n\n");
         } else if (monster is GoblinShaman) {
-            if(player.lust < player.maxLust()) outputText("You collapse, utterly beaten. To make sure you'll be easier to handle, the victorious " + goblinClass() + " saunters up, pink arousing flames glow in her left hand. She exposes your nether regions and throws the pink flames right into your groin! You are unable to fight back.\n\n");
+            if(player.lust < player.maxOverLust()) outputText("You collapse, utterly beaten. To make sure you'll be easier to handle, the victorious " + goblinClass() + " saunters up, pink arousing flames glow in her left hand. She exposes your nether regions and throws the pink flames right into your groin! You are unable to fight back.\n\n");
         } else if (monster is GoblinWarriors) {
-            if (player.lust < player.maxLust()) outputText("You collapse, utterly beaten. To make sure you'll be easier to handle, the victorious warrior, picked by leader goblin, saunters up, a pair of fluid filled potions in her hands. She forcibly jams the Lust Drafts, emptying the contents into you before you can so much as stammer a protest. Burning lust pours through your veins unbidden, and you moan out loud as the chemicals have their way with you as easily as the goblin soon will. After that you hear short discussion what to do with you, ended by larger goblin order to give you to the best warrior in group to handle.\n\n");
+            if (player.lust < player.maxOverLust()) outputText("You collapse, utterly beaten. To make sure you'll be easier to handle, the victorious warrior, picked by leader goblin, saunters up, a pair of fluid filled potions in her hands. She forcibly jams the Lust Drafts, emptying the contents into you before you can so much as stammer a protest. Burning lust pours through your veins unbidden, and you moan out loud as the chemicals have their way with you as easily as the goblin soon will. After that you hear short discussion what to do with you, ended by larger goblin order to give you to the best warrior in group to handle.\n\n");
         } else if (monster is GoblinWarrior) {
-            if (player.lust < player.maxLust()) outputText("You collapse, utterly beaten. To make sure you'll be easier to handle, the victorious warrior saunters up, a pair of fluid filled potions in her hands. She forcibly jams the Lust Drafts, emptying the contents into you before you can so much as stammer a protest. Burning lust pours through your veins unbidden, and you moan out loud as the chemicals have their way with you as easily as the goblin soon will.\n\n");
+            if (player.lust < player.maxOverLust()) outputText("You collapse, utterly beaten. To make sure you'll be easier to handle, the victorious warrior saunters up, a pair of fluid filled potions in her hands. She forcibly jams the Lust Drafts, emptying the contents into you before you can so much as stammer a protest. Burning lust pours through your veins unbidden, and you moan out loud as the chemicals have their way with you as easily as the goblin soon will.\n\n");
         }
         sceneHunter.selectLossMenu([
                 [0, "Dick", dickFitF, "Req. a cock with area fitting " + monster.vaginalCapacity(),
@@ -618,12 +618,12 @@ public class GoblinScene extends BaseContent {
         //Breastfeed adds an option
         if (player.hasStatusEffect(StatusEffects.Feeder)) addButton(5, "Breastfeed", giveGoblinAMilkMustache).hint("You could give the goblin a taste of your milk. It's only in your desire to breastfeed someone.");
         if (player.isGoo()) addButton(11, "Goo In", gooIn).hint("Use your unusual body to get her off.");
+        addButton(14, "Leave", cleanupAfterCombat);
         if (!(monster is Priscilla)) { //no fatalities for Priscilla!
             if (Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_ISMB) addButton(10, "Mindbreak", mindbreakGoblin).hint("Although the green slut isn't too smart, her mind would suffice too.");
             addButton(12, "Kill", killGoblin);
-            SceneLib.uniqueSexScene.pcUSSPreChecksV2(rapeMenu);
+            if (player.lust >= 33) SceneLib.uniqueSexScene.pcUSSPreChecksV2(rapeMenu); //the last!
         }
-        addButton(14, "Leave", cleanupAfterCombat);
     }
 
     private function giveGoblinAMilkMustache():void {
@@ -1126,11 +1126,8 @@ public class GoblinScene extends BaseContent {
     private function killGoblin():void {
         clearOutput();
         flags[kFLAGS.GOBLINS_KILLED]++;
-        if (flags[kFLAGS.NO_GORE_MODE] >= 1) outputText("You make a quick work of the goblin before dragging the corpse away. That's one less foul creature prowling the realms. ");
-        else {
-            outputText("You slowly stalk towards your defeated foe. The goblin looks at you, lust filling her eyes as she believes you're going to use her. That lust quickly changes to fear as you pull a small knife out of its holster, the blade gleaming dangerously.\n\n");
-            outputText("The goblin tries to run, but in her tired state, only manages to stumble around as you draw closer. You grab her by the hair and hoist her up, placing the sharp edge of the knife against her ear. The goblin wails in pain as you cut her ear off, blood spurting out as you quickly slit her throat to put the thing out of its misery. ");
-        }
+        outputText("You slowly stalk towards your defeated foe. The goblin looks at you, lust filling her eyes as she believes you're going to use her. That lust quickly changes to fear as you pull a small knife out of its holster, the blade gleaming dangerously.\n\n");
+        outputText("The goblin tries to run, but in her tired state, only manages to stumble around as you draw closer. You grab her by the hair and hoist her up, placing the sharp edge of the knife against her ear. The goblin wails in pain as you cut her ear off, blood spurting out as you quickly slit her throat to put the thing out of its misery. ");
         if (player.cor < 25) dynStats("cor", -0.5);
         inventory.takeItem(useables.GOBOEAR, cleanupAfterCombat);
     }

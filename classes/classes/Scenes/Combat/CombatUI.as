@@ -12,6 +12,7 @@ import classes.CoC_Settings;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
 import classes.Items.Weapons.MoonlightGreatsword;
+import classes.Items.Weapons.MoonlightClaws;
 import classes.Items.Weapons.Tidarion;
 import classes.PerkLib;
 import classes.Races;
@@ -47,6 +48,7 @@ public class CombatUI extends BaseCombatContent {
 	private var divineSpellButtons:ButtonDataList = new ButtonDataList();
 	private var necroSpellButtons:ButtonDataList = new ButtonDataList();
 	private var bloodSpellButtons:ButtonDataList = new ButtonDataList();
+	private var greenSpellButtons:ButtonDataList = new ButtonDataList();
 	private var soulforceButtons:ButtonDataList = new ButtonDataList();
 	private var otherButtons:ButtonDataList = new ButtonDataList();
 	public function mainMenu():void {
@@ -61,6 +63,7 @@ public class CombatUI extends BaseCombatContent {
 		divineSpellButtons.clear();
 		necroSpellButtons.clear();
 		bloodSpellButtons.clear();
+		greenSpellButtons.clear();
 		soulforceButtons.clear();
 		otherButtons.clear();
 
@@ -195,6 +198,7 @@ public class CombatUI extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.ElementalBody) && (player.weaponRangePerk == "" || player.weaponRangePerk == "Tome")) btnRanged.show("Throw", combat.throwElementalAttack, "Attack enemy with range elemental attack.  Damage done is determined by your strength.");
 		if (player.weapon is MoonlightGreatsword && (player.weaponRangePerk == "" || player.weaponRangePerk == "Tome")) btnRanged.show("MoonWave", combat.throwElementalAttack, "Attack enemy with wave of moonlight.  Damage done is determined by your intelligence and weapon.");
+		if (player.weapon is MoonlightClaws && (player.weaponRangePerk == "" || player.weaponRangePerk == "Tome")) btnRanged.show("MoonWave", combat.throwElementalAttack, "Attack enemy with wave of moonlight.  Damage done is determined by your intelligence and weapon.");
 		if (player.weapon is Tidarion && (player.weaponRangePerk == "" || player.weaponRangePerk == "Tome")) btnRanged.show("FireBeam", combat.throwElementalAttack, "Attack enemy with a beam of fire.  Damage done is determined by your intelligence and weapon.");
 		btnItems.show("Items", inventory.inventoryMenu, "The inventory allows you to use an item.  Be careful, as this leaves you open to a counterattack when in combat.");
 
@@ -459,7 +463,7 @@ public class CombatUI extends BaseCombatContent {
 			if ((player.hasPerk(PerkLib.PhantomStrike) && (player.fatigueLeft() <= combat.physicalCost(40))) || (!player.hasPerk(PerkLib.PhantomStrike) && (player.fatigueLeft() <= combat.physicalCost(20)))) {
 				button(0).disable("You are too tired to bite " + monster.a + " [monster name].");
 			}
-			if (player.rearBody.type == RearBody.DISPLACER_TENTACLES) {
+			if (player.rearBody.type == RearBody.DISPLACER_TENTACLES && !monster.hasPerk(PerkLib.EnemyConstructType)) {
 				if (monster.hasStatusEffect(StatusEffects.DisplacerPlug)) addButton(1, "Feed", combat.displacerFeedContinue).hint("Feast on your foe breast milk.");
 				else addButton(1, "Attach", combat.displacerCombatFeed).hint("Attach you tentacles to start feast on your foe breast milk. \n\nFatigue Cost: " + physicalCost(50) + "");
 			}
@@ -753,13 +757,15 @@ public class CombatUI extends BaseCombatContent {
 		buildAbilityMenu(CombatAbilities.ALL_DIVINE_SPELLS, divineSpellButtons);
 		buildAbilityMenu(CombatAbilities.ALL_NECRO_SPELLS, necroSpellButtons);
 		buildAbilityMenu(CombatAbilities.ALL_BLOOD_SPELLS, bloodSpellButtons);
+		buildAbilityMenu(CombatAbilities.ALL_GREEN_SPELLS, greenSpellButtons);
 		if (whiteSpellButtons.length > 0) buttons.add("White Spells", curry(submenu,whiteSpellButtons, submenuSpells, 0, false)).hint("Open your White magic book");
 		if (blackSpellButtons.length > 0) buttons.add("Black Spells", curry(submenu,blackSpellButtons, submenuSpells, 0, false)).hint("Open your Black magic book");
-		if (player.hasPerk(PerkLib.GreyMagic) && greySpellButtons.length > 0) buttons.add("Grey Spells", curry(submenu,greySpellButtons, submenuSpells, 0, false)).hint("Open your Grey magic book");
-		if (player.hasPerk(PerkLib.HexKnowledge) && hexSpellButtons.length > 0) buttons.add("Hexes", curry(submenu,hexSpellButtons, submenuSpells, 0, false)).hint("Open your Hex grimoire");
-		if (player.hasPerk(PerkLib.DivineKnowledge) && divineSpellButtons.length > 0) buttons.add("Divine", curry(submenu,divineSpellButtons, submenuSpells, 0, false)).hint("Open your Divine tome");
-		if (player.hasPerk(PerkLib.PrestigeJobNecromancer) && necroSpellButtons.length > 0) buttons.add("Necro Spells", curry(submenu,necroSpellButtons, submenuSpells, 0, false)).hint("Open your Necromicon");
-		if (player.hasPerk(PerkLib.HiddenJobBloodDemon) && bloodSpellButtons.length > 0) buttons.add("Blood Spells", curry(submenu,bloodSpellButtons, submenuSpells, 0, false)).hint("Open your Blood grimoire");
+		if ((player.hasPerk(PerkLib.GreyMagic) || player.hasPerk(PerkLib.PrestigeJobGreySage)) && greySpellButtons.length > 0) buttons.add("Grey Spells", curry(submenu,greySpellButtons, submenuSpells, 0, false)).hint("Open your Grey magic book");
+		if ((player.hasPerk(PerkLib.HexKnowledge) || player.hasPerk(PerkLib.PrestigeJobGreySage)) && hexSpellButtons.length > 0) buttons.add("Hexes", curry(submenu,hexSpellButtons, submenuSpells, 0, false)).hint("Open your Hex grimoire");
+		if ((player.hasPerk(PerkLib.DivineKnowledge) || player.hasPerk(PerkLib.PrestigeJobGreySage)) && divineSpellButtons.length > 0) buttons.add("Divine", curry(submenu,divineSpellButtons, submenuSpells, 0, false)).hint("Open your Divine tome");
+		if ((player.hasPerk(PerkLib.PrestigeJobNecromancer) || player.hasPerk(PerkLib.PrestigeJobGreySage)) && necroSpellButtons.length > 0) buttons.add("Necro Spells", curry(submenu,necroSpellButtons, submenuSpells, 0, false)).hint("Open your Necromicon");
+		if ((player.hasPerk(PerkLib.HiddenJobBloodDemon) || player.hasPerk(PerkLib.PrestigeJobGreySage)) && bloodSpellButtons.length > 0) buttons.add("Blood Spells", curry(submenu,bloodSpellButtons, submenuSpells, 0, false)).hint("Open your Blood grimoire");
+		if (greenSpellButtons.length > 0) buttons.add("Green Spells", curry(submenu,greenSpellButtons, submenuSpells, 0, false)).hint("Open your Green magic book");
 	}
 	
 	private function buildAbilityMenu(abilities:/*CombatAbility*/Array, buttons:ButtonDataList):void {

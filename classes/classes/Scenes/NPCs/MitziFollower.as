@@ -135,7 +135,7 @@ public function mitziCamp():void {
 		outputText("She looks over her shoulder to see Etna peeking out from behind a rock in a pouncing position. She has a smug cat like expression on her face, making Mitzi tense.\n\n");
 	}
 	if (flags[kFLAGS.ZENJI_PROGRESS] == 8 || flags[kFLAGS.ZENJI_PROGRESS] == 9) outputText("\"<i>Oh geez, I can’t remember the last time I saw a troll! Beefy all over, packed with muscle, just the way I like it… I just want him to help me with my needs…</i>\"\n\n");
-	if (flags[kFLAGS.ZENJI_PROGRESS] == 11) outputText("\"<i>Oh geez, I can’t remember the last time I saw a troll! Beefy all over, packed with muscle, just the way I like it… I just want him to help me with my needs… But he’s so hard to talk to.</i>\"\n\n");
+	if (ZenjiScenes.isLover()) outputText("\"<i>Oh geez, I can’t remember the last time I saw a troll! Beefy all over, packed with muscle, just the way I like it… I just want him to help me with my needs… But he’s so hard to talk to.</i>\"\n\n");
 	//Aenair
 	outputText("She nodded her head in approval then smiles up at you.\n\n");
 	outputText("\"<i>Your camp is definitely better than any place I've been. Pretty much like a well-rounded community. I love it here, [name]!</i>\"\n\n");

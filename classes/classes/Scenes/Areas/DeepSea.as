@@ -35,19 +35,23 @@ package classes.Scenes.Areas
 			select = choice[rand(choice.length)];
 			switch(select) {
 			/*	case 0:
+					player.createStatusEffect(StatusEffects.NoPlantsArea, 0, 0, 0, 0);
 					CoC.instance.exploration.genericDemonsEncounters1();
 					break;
 				case 01:
 					flags[kFLAGS.SHARK_OR_TIGERSHARK_GIRL] = 1;
 					player.underwaterCombatBoost();
+					player.createStatusEffect(StatusEffects.NoPlantsArea, 0, 0, 0, 0);
 					sharkGirlScene.oceanSharkGirlEncounter();
 					break;
 				case 1:
 					flags[kFLAGS.SHARK_OR_TIGERSHARK_GIRL] = 2;
 					player.underwaterCombatBoost();
+					player.createStatusEffect(StatusEffects.NoPlantsArea, 0, 0, 0, 0);
 					sharkGirlScene.oceanTigersharkGirlEncounter();
 					break;
 				case 3:
+					player.createStatusEffect(StatusEffects.NoPlantsArea, 0, 0, 0, 0);
 					CoC.instance.exploration.genericImpEncounters2();
 					break;
 			*/	default:

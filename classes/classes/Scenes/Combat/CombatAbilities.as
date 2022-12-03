@@ -1,5 +1,6 @@
 package classes.Scenes.Combat {
 import classes.Scenes.Combat.SpellsBlack.*;
+import classes.Scenes.Combat.SpellsGreen.*;
 import classes.Scenes.Combat.SpellsWhite.*;
 import classes.Scenes.Combat.SpellsHex.*;
 import classes.Scenes.Combat.SpellsDivine.*;
@@ -19,6 +20,7 @@ public class CombatAbilities {
 	public static const ChainLightningEx:ChainLightningSpell    = new ChainLightningSpell(true);
 	public static const Blind:BlindSpell                        = new BlindSpell();
 	public static const ChargeWeapon:ChargeWeaponSpell          = new ChargeWeaponSpell();
+	public static const ChargeRWeapon:ChargeRangeWeaponSpell    = new ChargeRangeWeaponSpell();
 	public static const ChargeArmor:ChargeArmorSpell            = new ChargeArmorSpell();
 	public static const Heal:HealSpell                          = new HealSpell();
 	public static const Blizzard:BlizzardSpell                  = new BlizzardSpell();
@@ -39,6 +41,7 @@ public class CombatAbilities {
 		ChainLightningEx,
 		Blind,
 		ChargeWeapon,
+		ChargeRWeapon,
 		ChargeArmor,
 		Heal,
 		Blizzard,
@@ -120,11 +123,17 @@ public class CombatAbilities {
 	public static const BoneSpirit:BoneSpiritSpell              = new BoneSpiritSpell();
 	public static const BoneArmor:BoneArmorSpell                = new BoneArmorSpell();
 	public static const Boneshatter:BoneshatterSpell            = new BoneshatterSpell();
+	public static const NecroticRot:NecroticRotSpell            = new NecroticRotSpell();
+	public static const CorpseExplosion:CorpseExplosionSpell    = new CorpseExplosionSpell();
+	public static const BloodShower:BloodShowerSpell            = new BloodShowerSpell();
 
 	public static const ALL_NECRO_SPELLS:/*CombatAbility*/Array = [
 		BoneSpirit,
 		BoneArmor,
-		Boneshatter
+		Boneshatter,
+		NecroticRot,
+		CorpseExplosion,
+		BloodShower
 	];
 	
 	public static const ManaShield:ManaShieldSpell             = new ManaShieldSpell();
@@ -204,6 +213,16 @@ public class CombatAbilities {
 		BloodField
 	];
 	
+	public static const PlantGrowth:PlantGrowthSpell   = new PlantGrowthSpell();
+	public static const Entangle:EntangleSpell         = new EntangleSpell();
+	public static const Briarthorn:BriarthornSpell     = new BriarthornSpell();
+
+	public static const ALL_GREEN_SPELLS:/*CombatAbility*/Array = [
+		PlantGrowth,
+		Entangle,
+		Briarthorn
+	];
+	
 	public static const ALL_SPELLS:/*CombatAbility*/Array = []
 			.concat(ALL_WHITE_SPELLS)
 			.concat(ALL_BLACK_SPELLS)
@@ -212,6 +231,7 @@ public class CombatAbilities {
 			.concat(ALL_NECRO_SPELLS)
 			.concat(ALL_GREY_SPELLS)
 			.concat(ALL_BLOOD_SPELLS)
+			.concat(ALL_GREEN_SPELLS)
 	;
 	
 	/*

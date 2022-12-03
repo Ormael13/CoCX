@@ -1,11 +1,13 @@
 package classes.Items {
 import classes.*;
 import classes.BodyParts.*;
+import classes.GeneticMemories.CockMem;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
 import classes.Items.Consumables.EmberTF;
 import classes.Races.*;
+import classes.Scenes.Metamorph;
 import classes.Scenes.SceneLib;
 import classes.Stats.Buff;
 import classes.Transformations.TransformationUtils;
@@ -102,19 +104,7 @@ public final class Mutations extends MutationsHelper {
             if (player.hasPerk(PerkLib.GoblinoidBlood) && player.perkv1(IMutationsLib.NaturalPunchingBagIM) >= 3) AlchemyBonus("spe", 2 + rand(3));
             else AlchemyBonus("wis", 1 + rand(2));
         }
-    }/*
-    //Dao Dew
-		public function daoDew(player:Player):void
-		{
-			player.slimeFeed();
-			clearOutput();
-			outputText("Following the merchant's instructions, you steep and drink the tea. Its sharp taste fires up your palate and in moments, you find yourself more alert and insightful. As your mind wanders, a creative, if somewhat sordid, story comes to mind. It is a shame that you do not have writing implements as you feel you could make a coin or two off what you have conceived. The strange seller was not lying about the power of the tea.");
-			if (rand(3) == 0) outputText(player.modTone(10, 1));
-			if (player.wis < 100) dynStats("wis", 2 + rand(4));
-			else if (player.wis < 200) dynStats("wis", 2 + rand(3));
-			else dynStats("wis", 2 + rand(2));
-			player.refillHunger(10);
-		}*/
+    }
 
     //Vixen Tea
     public function vixenTea(player:Player):void {
@@ -187,7 +177,7 @@ public final class Mutations extends MutationsHelper {
 
     public function ezekielfruit(player:Player):void {
         clearOutput();
-        outputText("You take first bite of fruit that Evangeline gave you.  Surprisingly it taste delicious as nothing else you tasted before so without thinking more you ate rest of the fruit.");
+        outputText("You take first bite of fruit that Evangeline gave you. Surprisingly it taste delicious as nothing else you tasted before so without thinking more you ate rest of the fruit.");
         if (!player.hasPerk(PerkLib.EzekielBlessing)) player.createPerk(PerkLib.EzekielBlessing, 0, 0, 0, 0);
         statScreenRefresh();
         player.statStore.addBuffObject({
@@ -352,7 +342,7 @@ public final class Mutations extends MutationsHelper {
         if (player.hasPerk(PerkLib.EnergyDependent)) outputText("Sadly due to your current condition you not gained any soulforce.");
         else {
 			var lowgraderestore1:Number = Math.round(player.maxSoulforce() * 0.02) + 100;
-			EngineCore.SoulforceChange(lowgraderestore1, false);
+			EngineCore.SoulforceChange(lowgraderestore1);
             if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(5);
             outputText("Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.[pg](Recovered soulforce: "+lowgraderestore1+")");
             statScreenRefresh();
@@ -363,7 +353,7 @@ public final class Mutations extends MutationsHelper {
         if (player.hasPerk(PerkLib.EnergyDependent)) outputText("Sadly due to your current condition you not gained any soulforce.");
         else {
             var lowgraderestore2:Number = (Math.round(player.maxSoulforce() * 0.02) + 100) * 10;
-            EngineCore.SoulforceChange(lowgraderestore2, false);
+            EngineCore.SoulforceChange(lowgraderestore2);
             if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(50);
             outputText("Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.[pg](Recovered soulforce: "+lowgraderestore2+")");
             statScreenRefresh();
@@ -374,7 +364,7 @@ public final class Mutations extends MutationsHelper {
         if (player.hasPerk(PerkLib.EnergyDependent)) outputText("Sadly due to your current condition you not gained any soulforce.");
         else {
             var midgraderestore1:Number = Math.round(player.maxSoulforce() * 0.04) + 600;
-            EngineCore.SoulforceChange(midgraderestore1, false);
+            EngineCore.SoulforceChange(midgraderestore1);
             if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(20);
             outputText("Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.[pg](Recovered soulforce: "+midgraderestore1+")");
             statScreenRefresh();
@@ -385,7 +375,7 @@ public final class Mutations extends MutationsHelper {
         if (player.hasPerk(PerkLib.EnergyDependent)) outputText("Sadly due to your current condition you not gained any soulforce.");
         else {
             var midgraderestore2:Number = (Math.round(player.maxSoulforce() * 0.04) + 600) * 10;
-            EngineCore.SoulforceChange(midgraderestore2, false);
+            EngineCore.SoulforceChange(midgraderestore2);
             if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(200);
             outputText("Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.[pg](Recovered soulforce: "+midgraderestore2+")");
             statScreenRefresh();
@@ -396,7 +386,7 @@ public final class Mutations extends MutationsHelper {
         if (player.hasPerk(PerkLib.EnergyDependent)) outputText("Sadly due to your current condition you not gained any soulforce.");
         else {
             var highgraderestore1:Number = Math.round(player.maxSoulforce() * 0.06) + 3600;
-            EngineCore.SoulforceChange(highgraderestore1, false);
+            EngineCore.SoulforceChange(highgraderestore1);
             if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(80);
             outputText("Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.[pg](Recovered soulforce: "+highgraderestore1+")");
             statScreenRefresh();
@@ -407,7 +397,7 @@ public final class Mutations extends MutationsHelper {
         if (player.hasPerk(PerkLib.EnergyDependent)) outputText("Sadly due to your current condition you not gained any soulforce.");
         else {
             var highgraderestore2:Number = (Math.round(player.maxSoulforce() * 0.06) + 3600) * 10;
-            EngineCore.SoulforceChange(highgraderestore2, false);
+            EngineCore.SoulforceChange(highgraderestore2);
             if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(800);
             outputText("Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.[pg](Recovered soulforce: "+highgraderestore2+")");
             statScreenRefresh();
@@ -418,7 +408,7 @@ public final class Mutations extends MutationsHelper {
         if (player.hasPerk(PerkLib.EnergyDependent)) outputText("Sadly due to your current condition you not gained any soulforce.");
         else {
             var superiorgraderestore1:Number = Math.round(player.maxSoulforce() * 0.08) + 21600;
-            EngineCore.SoulforceChange(superiorgraderestore1, false);
+            EngineCore.SoulforceChange(superiorgraderestore1);
             if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(320);
             outputText("Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.[pg](Recovered soulforce: "+superiorgraderestore1+")");
             statScreenRefresh();
@@ -429,7 +419,7 @@ public final class Mutations extends MutationsHelper {
         if (player.hasPerk(PerkLib.EnergyDependent)) outputText("Sadly due to your current condition you not gained any soulforce.");
         else {
             var superiorgraderestore2:Number = (Math.round(player.maxSoulforce() * 0.08) + 21600) * 10;
-            EngineCore.SoulforceChange(superiorgraderestore2, false);
+            EngineCore.SoulforceChange(superiorgraderestore2);
             if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(3200);
             outputText("Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.[pg](Recovered soulforce: "+superiorgraderestore2+")");
             statScreenRefresh();
@@ -452,7 +442,7 @@ public final class Mutations extends MutationsHelper {
         }
         if (player.hasStatusEffect(StatusEffects.KnowsTripleThrust)) {
             outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
-            EngineCore.SoulforceChange(20, false);
+            EngineCore.SoulforceChange(20);
         }
     }
     public function sextuplethrustmanual(player:Player):void {
@@ -466,7 +456,7 @@ public final class Mutations extends MutationsHelper {
             }
             if (player.hasStatusEffect(StatusEffects.KnowsSextupleThrust)) {
                 outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
-                EngineCore.SoulforceChange(45, false);
+                EngineCore.SoulforceChange(45);
             }
         } else {
             outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
@@ -485,7 +475,7 @@ public final class Mutations extends MutationsHelper {
             }
             if (player.hasStatusEffect(StatusEffects.KnowsNonupleThrust)) {
                 outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
-                EngineCore.SoulforceChange(100, false);
+                EngineCore.SoulforceChange(100);
             }
         } else {
             outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
@@ -504,7 +494,7 @@ public final class Mutations extends MutationsHelper {
         }
         if (player.hasStatusEffect(StatusEffects.KnowsYinYangBlast)) {
             outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
-            EngineCore.SoulforceChange(25, false);
+            EngineCore.SoulforceChange(25);
         }
     }
 
@@ -518,7 +508,7 @@ public final class Mutations extends MutationsHelper {
         }
         if (player.hasStatusEffect(StatusEffects.KnowsDracoSweep)) {
             outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
-            EngineCore.SoulforceChange(25, false);
+            EngineCore.SoulforceChange(25);
         }
     }
 
@@ -532,7 +522,7 @@ public final class Mutations extends MutationsHelper {
         }
         if (player.hasStatusEffect(StatusEffects.KnowsManyBirds)) {
             outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
-            EngineCore.SoulforceChange(25, false);
+            EngineCore.SoulforceChange(25);
         }
     }
 
@@ -546,7 +536,7 @@ public final class Mutations extends MutationsHelper {
         }
         if (player.hasStatusEffect(StatusEffects.KnowsHailOfBlades)) {
             outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
-            EngineCore.SoulforceChange(25, false);
+            EngineCore.SoulforceChange(25);
         }
     }
     public function hailofbladesmanual2(player:Player):void {
@@ -560,7 +550,7 @@ public final class Mutations extends MutationsHelper {
             }
             if (player.hasStatusEffect(StatusEffects.KnowsGrandioseHailOfBlades)) {
                 outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
-                EngineCore.SoulforceChange(45, false);
+                EngineCore.SoulforceChange(45);
             }
         } else {
             outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
@@ -579,7 +569,7 @@ public final class Mutations extends MutationsHelper {
             }
             if (player.hasStatusEffect(StatusEffects.KnowsGrandioseHailOfMoonBlades)) {
                 outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
-                EngineCore.SoulforceChange(45, false);
+                EngineCore.SoulforceChange(45);
             }
         } else {
             outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
@@ -598,7 +588,7 @@ public final class Mutations extends MutationsHelper {
             }
             if (player.hasStatusEffect(StatusEffects.KnowsSextupleThrust)) {
                 outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
-                EngineCore.SoulforceChange(45, false);
+                EngineCore.SoulforceChange(45);
             }
         } else {
             outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
@@ -618,7 +608,7 @@ public final class Mutations extends MutationsHelper {
             }
             if (player.hasStatusEffect(StatusEffects.KnowsComet)) {
                 outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
-                EngineCore.SoulforceChange(100, false);
+                EngineCore.SoulforceChange(100);
             }
         } else {
             outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
@@ -637,7 +627,7 @@ public final class Mutations extends MutationsHelper {
             }
             if (player.hasStatusEffect(StatusEffects.KnowsVioletPupilTransformation)) {
                 outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
-                EngineCore.SoulforceChange(100, false);
+                EngineCore.SoulforceChange(100);
             }
         } else {
             outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
@@ -662,7 +652,7 @@ public final class Mutations extends MutationsHelper {
         }
         if (player.hasStatusEffect(StatusEffects.KnowsFlamesOfLove)) {
             outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
-            EngineCore.SoulforceChange(25, false);
+            EngineCore.SoulforceChange(25);
         }
     }
 
@@ -677,7 +667,7 @@ public final class Mutations extends MutationsHelper {
             }
             if (player.hasStatusEffect(StatusEffects.KnowsFlamesOfLove)) {
                 outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
-                EngineCore.SoulforceChange(50, false);
+                EngineCore.SoulforceChange(50);
             }
         } else {
             outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
@@ -695,7 +685,7 @@ public final class Mutations extends MutationsHelper {
         }
         if (player.hasStatusEffect(StatusEffects.KnowsIciclesOfLove)) {
             outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
-            EngineCore.SoulforceChange(25, false);
+            EngineCore.SoulforceChange(25);
         }
     }
 
@@ -710,7 +700,7 @@ public final class Mutations extends MutationsHelper {
             }
             if (player.hasStatusEffect(StatusEffects.KnowsIciclesOfLove)) {
                 outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
-                EngineCore.SoulforceChange(50, false);
+                EngineCore.SoulforceChange(50);
             }
         } else {
             outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
@@ -728,7 +718,7 @@ public final class Mutations extends MutationsHelper {
         }
         if (player.hasStatusEffect(StatusEffects.KnowsStormOfSisterhood)) {
             outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
-            EngineCore.SoulforceChange(25, false);
+            EngineCore.SoulforceChange(25);
         }
     }
 
@@ -743,7 +733,7 @@ public final class Mutations extends MutationsHelper {
             }
             if (player.hasStatusEffect(StatusEffects.KnowsStormOfSisterhood)) {
                 outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
-                EngineCore.SoulforceChange(50, false);
+                EngineCore.SoulforceChange(50);
             }
         } else {
             outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
@@ -761,7 +751,7 @@ public final class Mutations extends MutationsHelper {
         }
         if (player.hasStatusEffect(StatusEffects.KnowsNightOfBrotherhood)) {
             outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
-            EngineCore.SoulforceChange(25, false);
+            EngineCore.SoulforceChange(25);
         }
     }
 
@@ -776,7 +766,7 @@ public final class Mutations extends MutationsHelper {
             }
             if (player.hasStatusEffect(StatusEffects.KnowsNightOfBrotherhood)) {
                 outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
-                EngineCore.SoulforceChange(50, false);
+                EngineCore.SoulforceChange(50);
             }
         } else {
             outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
@@ -793,19 +783,19 @@ public final class Mutations extends MutationsHelper {
     public function verydilutedarcaneregenconcotion(player:Player):void {
 		var verydilutedarcaneregen:Number = Math.round(player.maxMana() * 0.02) + 200;
 		outputText("You grab your mana potion, pull the cork off, and swiftly chug it down.[pg](Mana recovered: "+verydilutedarcaneregen+")");
-        EngineCore.ManaChange(verydilutedarcaneregen, false);
+        EngineCore.ManaChange(verydilutedarcaneregen);
         statScreenRefresh();
     }
     public function dilutedarcaneregenconcotion(player:Player):void {
         var dilutedarcaneregen:Number = Math.round(player.maxMana() * 0.04) + 1200;
 		outputText("You grab your mana potion, pull the cork off, and swiftly chug it down.[pg](Mana recovered:: "+dilutedarcaneregen+")");
-        EngineCore.ManaChange(dilutedarcaneregen, false);
+        EngineCore.ManaChange(dilutedarcaneregen);
         statScreenRefresh();
     }
     public function arcaneregenconcotion(player:Player):void {
         var arcaneregen:Number = Math.round(player.maxMana() * 0.06) + 7200;
 		outputText("You grab your mana potion, pull the cork off, and swiftly chug it down.[pg](Mana recovered:: "+arcaneregen+")");
-        EngineCore.ManaChange(arcaneregen, false);
+        EngineCore.ManaChange(arcaneregen);
         statScreenRefresh();
     }
 
@@ -911,18 +901,7 @@ public final class Mutations extends MutationsHelper {
                 }
                 //NO CAWKS?
                 if (player.cocks.length == 0) {
-                    player.createCock(rand(3) + 4);
-                    outputText("[pg]You shudder as a pressure builds in your crotch, peaking painfully as a large bulge begins to push out from your body.  ");
-                    outputText("The skin seems to fold back as a fully formed demon-cock bursts forth from your loins, drizzling hot cum everywhere as it orgasms.  Eventually the orgasm ends as your [cock] fades to a more normal " + player.skinColor + " tone.");
-                    if (tainted) {
-                        dynStats("lus", 10, "cor", 5);
-                        player.addCurse("sens", 5, 1);
-                        MutagenBonus("lib", 3);
-                    } else {
-                        dynStats("lus", 10, "scale", false);
-                        player.addCurse("sens", 5, 1);
-                        MutagenBonus("lib", 3);
-                    }
+                    growDemonCock(1, tainted);
                 }
                 //TIT CHANGE 25% chance of shrinkage
                 if (rand(4) == 0) {
@@ -933,8 +912,10 @@ public final class Mutations extends MutationsHelper {
             }
             //Mid-level changes
             if (rando >= 50 && rando < 93) {
-                if (player.cocks.length > 1) {
-                    outputText("[pg]Your cocks fill to full-size... and begin growing obscenely.  ");
+                if (player.cocks.length == 0) growDemonCock(1, tainted);
+                else if (player.cocks.length >= 1) {
+                    if (player.cocks.length == 1) outputText("[pg]Your cock fills to its normal size and begins growing... ");
+                    else outputText("[pg]Your cocks fill to full-size... and begin growing obscenely.  ");
                     selectedCock = player.cocks.length;
                     while (selectedCock > 0) {
                         selectedCock--;
@@ -966,48 +947,6 @@ public final class Mutations extends MutationsHelper {
                         MutagenBonus("lib", 3);
                     }
                 }
-                if (player.cocks.length == 1) {
-                    outputText("[pg]Your cock fills to its normal size and begins growing... ");
-                    temp3 = player.thickenCock(0, 1);
-                    temp2 = player.growCock(0, rand(3) + 2);
-                    player.lengthChange(temp2, 1);
-                    //Display the degree of thickness change.
-                    if (temp3 >= 1) {
-                        if (player.cocks.length == 1) outputText("  Your cock spreads rapidly, swelling an inch or more in girth, making it feel fat and floppy.");
-                        else outputText("  Your cocks spread rapidly, swelling as they grow an inch or more in girth, making them feel fat and floppy.");
-                    }
-                    if (temp3 <= .5) {
-                        if (player.cocks.length > 1) outputText("  Your cocks feel swollen and heavy. With a firm, but gentle, squeeze, you confirm your suspicions. They are definitely thicker.");
-                        else outputText("  Your cock feels swollen and heavy. With a firm, but gentle, squeeze, you confirm your suspicions. It is definitely thicker.");
-                    }
-                    if (temp3 > .5 && temp2 < 1) {
-                        if (player.cocks.length == 1) outputText("  Your cock seems to swell up, feeling heavier. You look down and watch it growing fatter as it thickens.");
-                        if (player.cocks.length > 1) outputText("  Your cocks seem to swell up, feeling heavier. You look down and watch them growing fatter as they thicken.");
-                    }
-                    if (tainted) {
-                        dynStats("lus", 10, "cor", 3);
-                        player.addCurse("sens", 5, 1);
-                        MutagenBonus("lib", 3);
-                    } else {
-                        dynStats("lus", 10, "scale", false);
-                        player.addCurse("sens", 5, 1);
-                        MutagenBonus("lib", 3);
-                    }
-                }
-                if (player.cocks.length == 0) {
-                    transformations.CockHuman(0, rand(3) + 4).applyEffect(false);
-                    outputText("[pg]You shudder as a pressure builds in your crotch, peaking painfully as a large bulge begins to push out from your body.  ");
-                    outputText("The skin seems to fold back as a fully formed demon-cock bursts forth from your loins, drizzling hot cum everywhere as it orgasms.  Eventually the orgasm ends as your [cock] fades to a more normal " + player.skinColor + " tone.");
-                    if (tainted) {
-                        dynStats("lus", 10, "cor", 3);
-                        player.addCurse("sens", 5, 1);
-                        MutagenBonus("lib", 3);
-                    } else {
-                        dynStats("lus", 10, "scale", false);
-                        player.addCurse("sens", 5, 1);
-                        MutagenBonus("lib", 3);
-                    }
-                }
                 //Shrink breasts a more
                 //TIT CHANGE 50% chance of shrinkage
                 if (rand(2) == 0) {
@@ -1021,18 +960,9 @@ public final class Mutations extends MutationsHelper {
                 if (player.cockTotal() < 10) {
                     if (int(Math.random() * 10) < int(player.cor / (25+player.corruptionTolerance))) {
                         outputText("[pg]");
-                        growDemonCock(rand(2) + 2);
-                        if (tainted) {
-                            dynStats("lus", 10, "cor", 5);
-                            player.addCurse("sens", 5, 1);
-                            MutagenBonus("lib", 3);
-                        } else {
-                            dynStats("lus", 10, "scale", false);
-                            player.addCurse("sens", 5, 1);
-                            MutagenBonus("lib", 3);
-                        }
+                        growDemonCock(rand(2) + 2, tainted);
                     } else {
-                        growDemonCock(1);
+                        growDemonCock(1, tainted);
                     }
                 }
                 if (!flags[kFLAGS.HYPER_HAPPY]) {
@@ -1048,24 +978,40 @@ public final class Mutations extends MutationsHelper {
         player.refillHunger(10);
     }
 
-    public function growDemonCock(growCocks:Number):void {
+    public function growDemonCock(growCocks:Number, tainted:Boolean):void {
         var grown:int = 0;
         while (growCocks > 0) {
             player.createCock();
-            trace("COCK LENGTH: " + player.cocks[length - 1].cockLength);
+            transformations.UnlockCocks();
             player.cocks[player.cocks.length - 1].cockLength = rand(3) + 4;
             player.cocks[player.cocks.length - 1].cockThickness = .75;
-            trace("COCK LENGTH: " + player.cocks[length - 1].cockLength);
+            if (tainted) {
+                player.cocks[player.cocks.length - 1].cockType = CockTypesEnum.DEMON;
+                Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.DEMON));
+            }
             growCocks--;
             grown++;
         }
+        if (tainted) {
+            dynStats("lus", 10, "cor", 5);
+            player.addCurse("sens", 5, 1);
+            MutagenBonus("lib", 3);
+        } else {
+            dynStats("lus", 10, "scale", false);
+            player.addCurse("sens", 5, 1);
+            MutagenBonus("lib", 3);
+        }
         outputText("[pg]You shudder as a pressure builds in your crotch, peaking painfully as a large bulge begins to push out from your body.  ");
         if (grown == 1) {
-            outputText("The skin seems to fold back as a fully formed demon-cock bursts forth from your loins, drizzling hot cum everywhere as it orgasms.  In time it fades to a more normal coloration and human-like texture.  ");
+            outputText("The skin seems to fold back as a fully formed demon-cock bursts forth from your loins, drizzling hot cum everywhere as it orgasms.  ");
+            if (!tainted) outputText("In time, it fades to a more normal coloration and human-like texture.  ");
         } else {
-            outputText("The skin bulges obscenely, darkening and splitting around " + num2Text(grown) + " of your new dicks.  For an instant they turn a demonic purple and dribble in thick spasms of scalding demon-cum.  After, they return to a more humanoid coloration.  ");
+            outputText("The skin bulges obscenely, darkening and splitting around " + num2Text(grown) + " of your new dicks.  For an instant they turn a demonic purple and dribble in thick spasms of scalding demon-cum.  ");
+            if (grown > 4) outputText("Your tender bundle of new cocks feels deliciously sensitive, and you cannot stop yourself from wrapping your hands around the slick demonic bundle and pleasuring them.[pg]Nearly an hour later, you finally pull your slick body away from the puddle you left on the ground.  When you look back, you notice it has already been devoured by the hungry earth.  ");
+            cheatTime(1); // hour :P
+            if (!tainted) outputText("In a few minutes, your cocks return to a more humanoid coloration.  ");
         }
-        if (grown > 4) outputText("Your tender bundle of new cocks feels deliciously sensitive, and you cannot stop yourself from wrapping your hands around the slick demonic bundle and pleasuring them.[pg]Nearly an hour later, you finally pull your slick body away from the puddle you left on the ground.  When you look back, you notice it has already been devoured by the hungry earth.");
+
         player.orgasm('Dick');
     }
 
@@ -3259,9 +3205,9 @@ public final class Mutations extends MutationsHelper {
 			player.createStatusEffect(StatusEffects.KnowsNosferatu, 0, 0, 0, 0);
 			return;
 		}
-		if (player.hasPerk(PerkLib.PrestigeJobNecromancer)) {
+		if (player.hasPerk(PerkLib.PrestigeJobNecromancer) || player.hasPerk(PerkLib.PrestigeJobGreySage)) {
 			//Smart enough for Bone spirit and doesnt have it
-			if (player.inte >= 100 &&  !player.hasStatusEffect(StatusEffects.KnowsBoneSpirit)) {
+			if (player.inte >= 100 && !player.hasStatusEffect(StatusEffects.KnowsBoneSpirit)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new necromancer spell: Bone spirit.</b>");
 				player.createStatusEffect(StatusEffects.KnowsBoneSpirit, 0, 0, 0, 0);
 				return;
@@ -3279,7 +3225,7 @@ public final class Mutations extends MutationsHelper {
 				return;
 			}
 		}
-		if (player.hasPerk(PerkLib.HexKnowledge)) {
+		if (player.hasPerk(PerkLib.HexKnowledge) || player.hasPerk(PerkLib.PrestigeJobGreySage)) {
 			//Smart enough for lifetap and doesnt have it
 			if (player.inte >= 150 && !player.hasStatusEffect(StatusEffects.KnowsLifetap)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new warlock spell: Lifetap.</b>");
@@ -3342,7 +3288,7 @@ public final class Mutations extends MutationsHelper {
             outputText("[pg]The contents of the book did little for your already considerable intellect.");
             KnowledgeBonus("int", 0.5);
         }
-        if (player.hasPerk(PerkLib.GreyMagic)) {
+        if (player.hasPerk(PerkLib.GreyMagic) || player.hasPerk(PerkLib.PrestigeJobGreySage)) {
             //Smart enough for mana shield and doesnt have it
             if (player.inte >= 50 && !player.hasStatusEffect(StatusEffects.KnowsManaShield)) {
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Mana Shield.</b>");
@@ -3469,50 +3415,56 @@ public final class Mutations extends MutationsHelper {
             player.createStatusEffect(StatusEffects.KnowsCharge, 0, 0, 0, 0);
             return;
         }
+        //Smart enough for charge range weapon and doesnt have it
+        if (player.inte >= 35 && !player.hasStatusEffect(StatusEffects.KnowsChargeR)) {
+            outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Charge Range Weapon.</b>");
+            player.createStatusEffect(StatusEffects.KnowsChargeR, 0, 0, 0, 0);
+            return;
+        }
         //Smart enough for charge armor and doesnt have it
-        if (player.inte >= 35 && !player.hasStatusEffect(StatusEffects.KnowsChargeA)) {
+        if (player.inte >= 40 && !player.hasStatusEffect(StatusEffects.KnowsChargeA)) {
             outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Charge Armor.</b>");
             player.createStatusEffect(StatusEffects.KnowsChargeA, 0, 0, 0, 0);
             return;
         }
         //Smart enough for heal and doesnt have it
-        if (player.inte >= 40 && !player.hasStatusEffect(StatusEffects.KnowsHeal)) {
+        if (player.inte >= 45 && !player.hasStatusEffect(StatusEffects.KnowsHeal)) {
             outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Heal.</b>");
             player.createStatusEffect(StatusEffects.KnowsHeal, 0, 0, 0, 0);
             return;
         }
         //Smart enough for blind and doesnt have it
-        if (player.inte >= 45 && !player.hasStatusEffect(StatusEffects.KnowsBlind)) {
+        if (player.inte >= 50 && !player.hasStatusEffect(StatusEffects.KnowsBlind)) {
             outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Blind.</b>");
             player.createStatusEffect(StatusEffects.KnowsBlind, 0, 0, 0, 0);
             return;
         }
         //Smart enough for pyre burst and doesnt have it
-        if (player.inte >= 50 && !player.hasStatusEffect(StatusEffects.KnowsPyreBurst)) {
+        if (player.inte >= 55 && !player.hasStatusEffect(StatusEffects.KnowsPyreBurst)) {
             outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Pyre Burst.</b>");
             player.createStatusEffect(StatusEffects.KnowsPyreBurst, 0, 0, 0, 0);
             return;
         }
         //Smart enough for chain lightning and doesnt have it
-        if (player.inte >= 55 && !player.hasStatusEffect(StatusEffects.KnowsChainLighting)) {
+        if (player.inte >= 60 && !player.hasStatusEffect(StatusEffects.KnowsChainLighting)) {
             outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Chain Lighting.</b>");
             player.createStatusEffect(StatusEffects.KnowsChainLighting, 0, 0, 0, 0);
             return;
         }
         //Smart enough for blizzard and doesnt have it
-        if (player.inte >= 60 && !player.hasStatusEffect(StatusEffects.KnowsBlizzard)) {
+        if (player.inte >= 65 && !player.hasStatusEffect(StatusEffects.KnowsBlizzard)) {
             outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Blizzard.</b>");
             player.createStatusEffect(StatusEffects.KnowsBlizzard, 0, 0, 0, 0);
             return;
         }
         //Smart enough for Mental Shield and doesnt have it
-        if (player.inte >= 65 && !player.hasStatusEffect(StatusEffects.KnowsMentalShield)) {
+        if (player.inte >= 70 && !player.hasStatusEffect(StatusEffects.KnowsMentalShield)) {
             outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Mental Shield.</b>");
             player.createStatusEffect(StatusEffects.KnowsMentalShield, 0, 0, 0, 0);
             return;
         }
         //Smart enough for Cure and doesnt have it
-        if (player.inte >= 70 && !player.hasStatusEffect(StatusEffects.KnowsCure)) {
+        if (player.inte >= 75 && !player.hasStatusEffect(StatusEffects.KnowsCure)) {
             outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Cure.</b>");
             player.createStatusEffect(StatusEffects.KnowsCure, 0, 0, 0, 0);
             return;
@@ -3523,7 +3475,7 @@ public final class Mutations extends MutationsHelper {
             player.createStatusEffect(StatusEffects.KnowsFireStorm, 0, 0, 0, 0);
             return;
         }
-		if (player.hasPerk(PerkLib.DivineKnowledge)) {
+		if (player.hasPerk(PerkLib.DivineKnowledge) || player.hasPerk(PerkLib.PrestigeJobGreySage)) {
 			//Smart enough for Aegis and doesnt have it
 			if (player.inte >= 150 && !player.hasStatusEffect(StatusEffects.KnowsAegis)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Aegis.</b>");
@@ -3554,6 +3506,26 @@ public final class Mutations extends MutationsHelper {
 				player.createStatusEffect(StatusEffects.KnowsTearsOfDenial, 0, 0, 0, 0);
 			}
 		}
+		if (player.hasPerk(PerkLib.PrestigeJobGreySage)) {
+			//Smart enough for Plant growth and doesnt have it
+			if (player.inte >= 100 && !player.hasStatusEffect(StatusEffects.KnowsPlantGrowth)) {
+				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new green spell: Plant growth.</b>");
+				player.createStatusEffect(StatusEffects.KnowsPlantGrowth, 0, 0, 0, 0);
+				return;
+			}
+			//Smart enough for Entangle and doesnt have it
+			if (player.inte >= 110 && !player.hasStatusEffect(StatusEffects.KnowsEntangle)) {
+				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new green spell: Entangle.</b>");
+				player.createStatusEffect(StatusEffects.KnowsEntangle, 0, 0, 0, 0);
+				return;
+			}/*
+			//Smart enough for Briarthorn and doesnt have it
+			if (player.inte >= 120 && !player.hasStatusEffect(StatusEffects.KnowsBriarthorn)) {
+				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new green spell: Briarthorn.</b>");
+				player.createStatusEffect(StatusEffects.KnowsBriarthorn, 0, 0, 0, 0);
+				return;
+			}*/
+		}
     }
 
 	public function redManuscript(player:Player):void {
@@ -3572,7 +3544,7 @@ public final class Mutations extends MutationsHelper {
             outputText("[pg]The contents of the manuscript did little for your already considerable intellect.");
             KnowledgeBonus("int", 0.6);
         }
-		if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) {
+		if (player.hasPerk(PerkLib.HiddenJobBloodDemon) || player.hasPerk(PerkLib.PrestigeJobGreySage)) {
 			//Smart enough for Blood Missiles and doesnt have it
 			if (player.inte >= 20 && !player.hasStatusEffect(StatusEffects.KnowsBloodMissiles)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new blood spell: Blood Missiles.</b>");
@@ -3727,7 +3699,7 @@ public final class Mutations extends MutationsHelper {
             }
         }
         //ORGAZMO
-        if (player.lust >= player.maxLust() && !CoC.instance.inCombat) {
+        if (player.lust >= player.maxOverLust() && !CoC.instance.inCombat) {
             outputText("[pg]The arousal from the potion overwhelms your senses and causes you to spontaneously orgasm.  You rip off your [armor] and look down as your ");
             if (player.cocks.length > 0) {
                 outputText(multiCockDescriptLight() + " erupts in front of you, liberally spraying the ground around you");
@@ -3747,7 +3719,7 @@ public final class Mutations extends MutationsHelper {
             MutagenBonus("lib", 2);
             if (player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) player.addStatusValue(StatusEffects.RaijuLightningStatus, 1, 24);
         }
-        if (player.lust > player.maxLust()) player.lust = player.maxLust();
+        if (player.lust > player.maxOverLust()) player.lust = player.maxOverLust();
         outputText("[pg]");
         player.refillHunger(5);
     }
@@ -4041,7 +4013,7 @@ public final class Mutations extends MutationsHelper {
         }
         //SEXYTIEMS
         //Multidick killa!
-        if (player.cocks.length > 1 && rand(3) == 0 && changes < changeLimit) {
+        if (player.cocks.length > 1 && rand(3) == 0 && changes < changeLimit && !flags[kFLAGS.HYPER_HAPPY]) {
             outputText("[pg]");
             player.killCocks(1);
             changes++;
@@ -4296,12 +4268,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //6b.Infinite Vagina
-        if (player.hasVagina() && player.vaginalCapacity() < 9000 && rand(3) == 0 && changes < changeLimit) {
-            if (!player.hasStatusEffect(StatusEffects.BonusVCapacity)) player.createStatusEffect(StatusEffects.BonusVCapacity, 9000, 0, 0, 0);
-            else player.addStatusValue(StatusEffects.BonusVCapacity, 1, 9000);
-            outputText("[pg]Your [vagina]'s internal walls feel a tingly wave of strange tightness.  Experimentally, you slip a few fingers, then your hand, then most of your forearm inside yourself.  <b>It seems you're now able to accommodate just about ANYTHING inside your sex.</b>");
-            changes++;
-        } else if (player.tallness < 100 && rand(3) == 0 && changes < changeLimit) {
+        if (player.tallness < 100 && rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]Your gel-like body swells up from the intake of additional slime.  If you had to guess, you'd bet you were about two inches taller.");
             player.tallness += 2;
             MutagenBonus("str", 1);
@@ -4309,7 +4276,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Big slime girl
-        else {
+        else if (transformations.RearBodyMetamorphicGoo.isPresent() && transformations.arms.ArmsGoo.isPresent() && LowerBody.isGoo(player)) {
             if (!player.hasStatusEffect(StatusEffects.SlimeCraving)) {
                 outputText("[pg]You feel a growing gnawing in your gut.  You feel... hungry, but not for food.  No, you need something wet and goopy pumped into you.  You NEED it.  You can feel it in your bones.  <b>If you don't feed that need... you'll get weaker and maybe die.</b>");
                 player.createStatusEffect(StatusEffects.SlimeCraving, 0, 0, 0, 1); //Value four indicates this tracks strength and speed separately
@@ -9298,6 +9265,12 @@ public final class Mutations extends MutationsHelper {
             player.createPerk(PerkLib.ElvenSense, 0, 0, 0, 0);
             changes++;
         }
+        if (changes < changeLimit && !player.hasPerk(PerkLib.NaturalSpellcasting) && player.ears.type == Ears.ELVEN && player.eyes.type == Eyes.ELF) {
+            outputText("[pg]As your body finishes changing you feel something fundamental shift in your essence. Magic… You somehow feel magic come to you more easily. Casting spells should be easier to you now that your voice sings the incantations and your hand weaves the signs with ideal precisions.  <b>You gained the ability Natural Spellcasting.</b>[pg]");
+            outputText("<b>(Gained Perk: Natural Spellcasting</b>)");
+            player.createPerk(PerkLib.NaturalSpellcasting, 0, 0, 0, 0);
+            changes++;
+        }
         if (player.tongue.type == Tongue.HUMAN && player.tongue.type != Tongue.ELF && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             transformations.TongueElf.applyEffect();
@@ -10831,7 +10804,7 @@ public final class Mutations extends MutationsHelper {
         }
         if (!InCollection(player.hairColor, KitshooRace.KitshooHairColors) && changes < changeLimit && rand(4) == 0) {
             player.hairColor = randomChoice(KitshooRace.KitshooHairColors);
-            outputText("[pg]Your scalp begins to tingle, and you gently grasp a strand, pulling it forward to check it.  Your hair has become the same [haircolor] as a kishoo!");
+            outputText("[pg]Your scalp begins to tingle, and you gently grasp a strand, pulling it forward to check it.  Your hair has become the same [haircolor] as a kitshoo!");
             changes++;
         }
 		//Scales & Fur color
@@ -11106,13 +11079,6 @@ public final class Mutations extends MutationsHelper {
                 player.createStatusEffect(StatusEffects.BonusVCapacity, 0, 0, 0, 0);
             }
             player.addStatusValue(StatusEffects.BonusVCapacity, 1, 5 + rand(10));
-        });
-        //[Vag of Holding] - rare effect, only if PC has high vaginal looseness
-        mutationStep(player.hasVagina() && player.statusEffectv1(StatusEffects.BonusVCapacity) >= 200 && player.statusEffectv1(StatusEffects.BonusVCapacity) < 8000, mystic ? 1 : 5, function ():void {
-            outputText("[pg]You clutch your stomach with both hands, dropping to the ground in pain as your internal organs begin to twist and shift violently inside you.  As you clench your eyes shut in agony, you are overcome with a sudden calm.  The pain in your abdomen subsides, and you feel at one with the unfathomable infinity of the universe, warmth radiating through you from the vast swirling cosmos contained within your womb.");
-            if (silly()) outputText("  <b>Your vagina has become a universe unto itself, capable of accepting colossal insertions beyond the scope of human comprehension!</b>");
-            else outputText("  <b>Your vagina is now capable of accepting even the most ludicrously sized insertions with no ill effects.</b>");
-            player.changeStatusValue(StatusEffects.BonusVCapacity, 1, 9001);
         });
 
 
@@ -14582,11 +14548,6 @@ public final class Mutations extends MutationsHelper {
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
     }
 
-
-    public function prisonBread(player:Player):void {
-        prison.prisonItemBread(false);
-    }
-
     public function frothyBeer(player:Player):void {
         outputText("Feeling parched, you twist the metal cap from the clear green bottle and chug it down. ");
         dynStats("lus", 15, "scale", false);
@@ -16199,7 +16160,7 @@ public final class Mutations extends MutationsHelper {
         player.refillHunger(15);
         dynStats("lus", (30 + rand(player.lib / 10)), "scale", false);
         //ORGAZMO
-        if (player.lust >= player.maxLust() && !CoC.instance.inCombat) {
+        if (player.lust >= player.maxOverLust() && !CoC.instance.inCombat) {
             outputText("[pg]The arousal from the nectar overwhelms your senses and causes you to spontaneously orgasm.");
             outputText(" You rip off your gear and look down as your ");
             if (player.cocks.length > 0) {

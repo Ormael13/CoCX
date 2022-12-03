@@ -50,10 +50,10 @@ public function findBazaar():void {
 private function approachBazaarGuard():void {
 	clearOutput();
 	outputText("You step from concealment and walk up to the strange man, calling out in greeting.  He folds his arms across his chest and looks you up and down, peering at you with intense, black eyes.  They aren't solid onyx, but his irises are just as dark as the seemingly bottomless depths of his pupils.  His appraising gaze watches you, unblinking as second after second ticks by.  Just when you start to wonder if he speaks your language, he interrupts you by saying, \"<i>");
-	if(player.cor < 33 - player.corruptionTolerance && flags[kFLAGS.MEANINGLESS_CORRUPTION] <= 0) outputText("Leave at once.  You are not yet ready for the wonders of the Bazaar.");
+	if(player.cor < 33 - player.corruptionTolerance) outputText("Leave at once.  You are not yet ready for the wonders of the Bazaar.");
 	else outputText("Welcome to the Bizarre Bazaar.  Enter, but be mindful of your actions within.");
 	outputText("</i>\"");
-	if(player.cor < 33 - player.corruptionTolerance && flags[kFLAGS.MEANINGLESS_CORRUPTION] <= 0) simpleChoices("FIGHT!",initiateFightGuard, "", null, "", null, "", null, "Leave",camp.returnToCampUseOneHour);
+	if(player.cor < 33 - player.corruptionTolerance) simpleChoices("FIGHT!",initiateFightGuard, "", null, "", null, "", null, "Leave",camp.returnToCampUseOneHour);
 	else simpleChoices("Enter",enterTheBazaar, "", null, "", null, "", null, "Leave",camp.returnToCampUseOneHour);
 }
 
@@ -280,6 +280,13 @@ private function joeyMassage():void {
 }
 
 private function joeysMassageWifNoExtraJizz():void {
+	sceneHunter.selectGender(
+		curry(joeysMassageWifNoExtraJizzScene, true), null,
+		curry(joeysMassageWifNoExtraJizzScene, false)
+	);
+}
+
+private function joeysMassageWifNoExtraJizzScene(useCock:Boolean):void {
 	clearOutput();
 	//(Continue as NoWang)
 	outputText("The rabbit-eared fem-boy climbs back onto the table and strokes himself a few times over your [ass]; the first drops of his 'special oil' feel hot as they land on the curves of your butt cheeks.  He climbs over you, touching himself just enough to stay hard while his cum-drooling cock stops dripping and starts genuinely leaking.  A long trail of bunny-spunk is dripped onto your [ass] until you're glazed with thick ropes of it.  You spot his discarded thong on the floor and giggle as you feel him flip around to put his cute bunny-butt on your shoulders.  His spunk immediately runs down your spine, even as his hands smear it all over your [skin.type].\n\n");
@@ -297,7 +304,7 @@ private function joeysMassageWifNoExtraJizz():void {
 	outputText("The bed cradles you as you close your eyes and lie back, noting the slight change in darkness beyond your eyelids from Joey's new position.  Spunk begins to rain over your [face], puddling seed around your eyes and forehead before it drips down your cheeks and bubbles on your lips.  You're quickly distracted from the salty, cummy facial when your personal leporid lotion-dispenser ");
 	//(fork to male or genderless, no new PG)
 	//(MALE)
-	if(player.hasCock()) {
+	if(useCock) {
 		outputText("slides his warm, ruby lips over your [cock], licking and slurping the [cockhead] like a treasured candy.  That hot, breathy embrace hugs tight to your urethral bulge, slobbering up the cock-tip.  The flexible, thin rabbit tongue swirls over your cum-slit to lap at the bubbling pre-cum, even as his quaking balls continue to bury your face in bunny-semen.");
 		if(player.cockTotal() > 1) {
 			outputText("  He takes your " + cockDescript(1) + " with his free hand and pulls it over, giving it an affectionate, loving smooch.");
@@ -318,7 +325,7 @@ private function joeysMassageWifNoExtraJizz():void {
 		outputText(".  He skillfully works a free hand over your slippery butt-cheek, squeezing the supple flesh while he expertly rubs your interior, stroking it with semen-lubed touches.\n\n");
 	}
 	//Fems/Genderless cum+epilogue
-	if(!player.hasCock()) {
+	if(!useCock) {
 		//(Genderless orgasm)
 		if(player.gender == 0) outputText("Though his single finger makes you burn with passion, Joey's second slides effortlessly after it, filling your " + assholeDescript() + " with another of his cum-soaked digits.  His warm jism slides down the crack between the fingers, slowly pooling in your backdoor.  Once you've adjusted, he continues to the massage, stroking and bumping your interior with the confident, practiced strokes of a professional. You pull hard on your tortured " + nippleDescript(0) + "s, egging up the gradual upwelling of pleasure while you lick the bunny-cream from your lips.  A moment later, the no-longer-offending digits press hard on a sensitive spot, and you're arching your back, screaming with pleasure.\n\n");
 		//(Female orgasm)
@@ -954,7 +961,7 @@ private function assaultYoRapistYo():void {
 		//open options [Leave][Abuse ass(70 or more corruption)]
 		menu();
 		addButton(4,"Leave", assaultWinAndLeave);
-		if(player.cor >= 66 - player.corruptionTolerance || flags[kFLAGS.MEANINGLESS_CORRUPTION] > 0) addButton(0,"Abuse Ass",abuseHisAss);
+		if(player.cor >= 66 - player.corruptionTolerance) addButton(0,"Abuse Ass",abuseHisAss);
 	}
 }
 
@@ -1224,13 +1231,5 @@ private function finalGayFinallee(road:int = 0):void {
 		//Time set to morning
 	}
 }
-	//Prisoner mod! Seems like it's unused now...?
-	/*
-	private function investigateBackAlley():void {
-		clearOutput();
-		outputText("Your curiousity draws you halfway down a dark alleyway between two tents. In the gloom ahead you see what appears to be a cage wagon, and hear the sounds of guttural voices engaged in boisterous conversation. Inexplicably you find yourself struck by an unwholesome sense of foreboding. <b>Even from here that cage looks like it is designed to carry people off to somewhere very unpleasant, some place where your life could be turned upside down and the rules you have become accustomed to in this world may no longer apply.</b> You take a long moment to consider turning back. Do you throw caution to the wind and investigate further?");
-        doYesNo(SceneLib.prison.goDirectlyToPrisonDoNotPassGoDoNotCollect200Gems, enterTheBazaarAndMenu);
-    }
-    */
 }
 }

@@ -17,7 +17,7 @@ public class ArcticGaleSpell extends AbstractBlackSpell {
 				: "Devastate the enemy ranks with a barrage of steely ice daggers, driven by the cold northern winds.",
 			TARGET_ENEMY,
 			TIMING_INSTANT,
-			[TAG_DAMAGING, TAG_ICE, TAG_AOE]
+			[TAG_DAMAGING, TAG_ICE, TAG_AOE, TAG_TIER1]
 		);
 		baseManaCost = 200;
 		if (ex) baseWrathCost = 100;

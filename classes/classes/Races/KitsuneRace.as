@@ -107,11 +107,6 @@ public class KitsuneRace extends Race {
 				)
 				.skinBaseType(Skin.PLAIN, +1, -3)
 				.hairColor1(ANY(KitsuneHairColors), +1)
-				.customRequirement("vagina", "Vag of Holding",
-						function (body:BodyData):Boolean {
-							return body.player.vaginalCapacity() >= 8000;
-						},
-						+1)
 				.hasPerk(PerkLib.StarSphereMastery, +1)
 				.hasAnyPerk([PerkLib.EnlightenedKitsune, PerkLib.CorruptedKitsune], +1)
 				.hasPerk(PerkLib.NinetailsKitsuneOfBalance, +1);
@@ -120,7 +115,7 @@ public class KitsuneRace extends Race {
 		addMutation(IMutationsLib.KitsuneThyroidGlandIM);
 		addMutation(IMutationsLib.KitsuneParathyroidGlandsIM);
 		
-		buildTier(9, "kitsune")
+		buildTier(8, "kitsune")
 				.namesTauric("kitsune", "kitsune-taur")
 				.require("2+ fox tails", function (body:BodyData):Boolean {
 					return body.tailType == Tail.FOX && body.tailCount >= 2
@@ -136,11 +131,11 @@ public class KitsuneRace extends Race {
 					"maxfatigue_base": +100
 				})
 				.withExtraBonuses(
-						"+100% SF Regeneration"
+						"+40% SF Regeneration"
 				)
 				.end();
-		buildTier(16, "nine tailed kitsune")
-				.namesTauric("nine tailed kitsune", "nine tailed kitsune-taur")
+		buildTier(15, "nine-tailed kitsune")
+				.namesTauric("nine-tailed kitsune", "nine-tailed kitsune-taur")
 				.requirePreviousTier()
 				.requireTailCount(9)
 				.buffs({
@@ -154,11 +149,11 @@ public class KitsuneRace extends Race {
 					"maxfatigue_base": +300
 				})
 				.withExtraBonuses(
-					"+100% SF Regeneration"
+					"+80% SF Regeneration"
 				)
 				.end();
-		buildTier(21, "nine tailed kitsune of balance")
-				.namesTauric("nine tailed kitsune of balance", "nine tailed kitsune-taur of balance")
+		buildTier(20, "nine-tailed kitsune of balance")
+				.namesTauric("nine-tailed kitsune of balance", "nine-tailed kitsune-taur of balance")
 				.requirePreviousTier()
 				.requirePerk(PerkLib.NinetailsKitsuneOfBalance)
 				.buffs({
@@ -172,10 +167,10 @@ public class KitsuneRace extends Race {
 					"maxfatigue_base": +500
 				})
 				.withExtraBonuses(
-					"+100% SF Regeneration"
+					"+130% SF Regeneration"
 				)
 				.end();
-		buildTier(26, "Inari")
+		buildTier(25, "Inari")
 				.namesTauric("Inari", "Inari-taur")
 				.requirePreviousTier()
 				.buffs({
@@ -189,7 +184,7 @@ public class KitsuneRace extends Race {
 					"maxfatigue_base": +1000
 				})
 				.withExtraBonuses(
-					"+100% SF Regeneration"
+					"+200% SF Regeneration"
 				)
 				.end();
 		

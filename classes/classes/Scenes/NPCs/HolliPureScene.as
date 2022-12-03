@@ -56,7 +56,7 @@ public function treeMenu():void {
 		addButton(9, "Back", inventory.inventoryMenu);
 	}
 	else if (flags[kFLAGS.FLOWER_LEVEL] == 4) {
-		if (flags[kFLAGS.ZENJI_PROGRESS] == 11 && rand(4) == 0) {
+		if (ZenjiScenes.isLover() && rand(4) == 0) {
 			outputText("You go up to meet with Holli, but you find Zenji is already there. \"<i>I do not trust you, you reek of de filth dat plagues dis land.</i>\" He says.");
 			outputText("\n\n\"<i>Don't be a prude, troll,</i>\" Holli responds, \"<i>Marae gifted your people with life, why don't you want to share it with me? After all, I know what a troll is capable of when they mate,</i>\" she says coyly.");
 			outputText("\n\n\"<i>And accept de taint you carry? I don' tink so.</i>\" He scoffs. Zenji leaves. Noticing you're approaching Holli, Zenji speaks up to you, \"<i>Be careful around dat ting, I don't trust her, even if she claims she’s from Marae, she has a foul stench about her.</i>\"");

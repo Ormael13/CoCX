@@ -14,28 +14,8 @@ import classes.Scenes.SceneLib;
 
 		//[Special Attacks]
 		private function IzmaSpecials1():void {
-			//Blind dodge change
-			if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
-				outputText("Izma attempts to close the distance with you, but misses completely because of her blindness.\n");
-				return;
-			}
 			//Determine if dodged!
-			if(player.speedDodge(this)>0) {
-				outputText("Izma attempts to get close, but you manage to side-step her before she can lay her gauntleted hands on you.\n");
-				return;
-			}
-			//Determine if evaded
-			if(player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
-				outputText("Izma attempts to get close, but you manage to side-step her before she can lay her gauntleted hands on you.\n");
-				return;
-			}
-			//("Misdirection"
-			if(player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
-				outputText("Izma attempts to get close, but you put Raphael's teachings to use and side-step the sharkgirl, confusing her with your movements.\n");
-				return;
-			}
-			//Determine if cat'ed
-			if(player.hasPerk(PerkLib.Flexibility) && rand(100) < 6) {
+			if(player.getEvasionRoll()) {
 				outputText("Izma attempts to get close, but you manage to side-step her before she can lay her gauntleted hands on you.\n");
 				return;
 			}
@@ -45,29 +25,9 @@ import classes.Scenes.SceneLib;
 		}
 
 		private function IzmaSpecials2():void {
-			//Blind dodge change
-			if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
-				outputText("Izma blindly tries to clinch you, but misses completely.\n");
-				return;
-			}
 			//Determine if dodged!
-			if(player.speedDodge(this)>0) {
+			if(player.getEvasionRoll()) {
 				outputText("Izma tries to clinch you, but you use your speed to keep just out of reach.\n");
-				return;
-			}
-			//Determine if evaded
-			if(player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
-				outputText("Izma tries to clinch you, but she didn't count on your skills in evasion.  You manage to sidestep her at the last second.\n");
-				return;
-			}
-			//("Misdirection"
-			if(player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
-				outputText("Izma ducks and weaves forward to clinch you, but thanks to Raphael's teachings, you're easily able to misguide her and avoid the clumsy grab.\n");
-				return;
-			}
-			//Determine if cat'ed
-			if(player.hasPerk(PerkLib.Flexibility) && rand(100) < 6) {
-				outputText("Izma tries to lock you in a clinch, but your cat-like flexibility makes it easy to twist away from her grab.\n");
 				return;
 			}
 			var damage:Number = 0;

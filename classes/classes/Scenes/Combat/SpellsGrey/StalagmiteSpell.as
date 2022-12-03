@@ -17,7 +17,7 @@ public class StalagmiteSpell extends AbstractGreySpell {
 				: "Harden part of the the ground into earth spike to attack your enemy.",
 			TARGET_ENEMY,
 			TIMING_INSTANT,
-			[TAG_DAMAGING, TAG_EARTH]
+			[TAG_DAMAGING, TAG_EARTH, TAG_TIER1]
 		);
 		baseManaCost = 40;
 		if (ex) baseWrathCost = 100;

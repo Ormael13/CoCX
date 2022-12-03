@@ -8,6 +8,7 @@ import classes.*;
 import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Combat.Combat;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
@@ -79,7 +80,7 @@ use namespace CoC;
 			}
 			else {
 				removeStatusEffect(StatusEffects.AbilityChanneled);
-				if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) {
+				if (Combat.playerWaitsOrDefends()) {
 					outputText("When Chi Chi unleashes a torrent of soulforce energy at you, you’ve already dodged out of the way, predicting her move. The attack leaves a massive hole where you stood earlier. You are glad you moved out of the way!");
 				}
 				else {

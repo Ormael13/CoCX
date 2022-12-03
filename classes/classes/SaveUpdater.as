@@ -460,11 +460,10 @@ public class SaveUpdater extends NPCAwareContent {
 		if (SceneLib.dungeons.checkPhoenixTowerClear() && flags[kFLAGS.CLEARED_HEL_TOWER] < 2) flags[kFLAGS.CLEARED_HEL_TOWER] = 1;
 	}
 
-	private var initialVersion:Number;
 	public function promptSaveUpdate():void {
 		clearOutput();
 		doNext(camp.doCamp); //safeguard
-		initialVersion = flags[kFLAGS.MOD_SAVE_VERSION];
+		var initialVersion:Number = flags[kFLAGS.MOD_SAVE_VERSION];
 		if (flags[kFLAGS.MOD_SAVE_VERSION] < 2) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 2;
 			outputText("<b><u>CAUTION</u></b>\n");
@@ -1754,7 +1753,7 @@ public class SaveUpdater extends NPCAwareContent {
 				// - Compute how much total training pc did
 				// - Try to re-allocate training, maintain the ratio between stats
 				var primaryStats:/*PrimaryStat*/Array = [player.strStat,player.touStat,player.speStat,player.intStat,player.wisStat,player.libStat];
-				
+
 				var oldCoreTotal:int = 0;
 				var oldCoreStats:/*int*/Array = [0,0,0,0,0,0];
 				outputText("\n\nStat rework! Training is separated from level-up, <b>but benefits less from multipliers</b>.\nOld core stat values:")
@@ -1766,7 +1765,7 @@ public class SaveUpdater extends NPCAwareContent {
 					stat.core.value = 0;
 				}
 				outputText(" = total "+oldCoreTotal+".");
-				
+
 				// Compute total stat points spent
 				var statPointsPerLevel:int = 5 + (player.perkv1(PerkLib.AscensionAdvTrainingX));
 				var statPoints:int = player.level*statPointsPerLevel;
@@ -1786,7 +1785,7 @@ public class SaveUpdater extends NPCAwareContent {
 				if (player.hasStatusEffect(StatusEffects.RiverDungeonFloorRewards)) statPoints += 5 * player.statusEffectv1(StatusEffects.RiverDungeonFloorRewards);
 				if (flags[kFLAGS.EBON_LABYRINTH] >= 50) statPoints += 5;
 				statPoints += int(flags[kFLAGS.EBON_LABYRINTH]/150) * 5;
-				
+
 				var totalTrainPoints:int = oldCoreTotal - statPoints;
 				var remainingTrainPoints:int = totalTrainPoints;
 				// Re-allocate training stats, maintaining ratio
@@ -1826,7 +1825,7 @@ public class SaveUpdater extends NPCAwareContent {
 				for (i = 0; i < primaryStats.length; i++) {
 					outputText(" "+primaryStats[i].train.value);
 				}
-				
+
 				player.statPoints += statPoints;
 				outputText("\n\n<b>You have " + statPoints + " stat points refunded. Don't forget to allocate them</b>.");
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.025;
@@ -1908,6 +1907,43 @@ public class SaveUpdater extends NPCAwareContent {
 				refundPerk(PerkLib.WeaponSmallDecaAttack);
 				outputText("\n\nMulti-attack perks have been refunded.");
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.032;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.033) {
+				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02358] = 0; //reclaiming soulforce flag
+				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00773] = 1; //reclaiming essy flag
+				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02973] = 1; //reclaiming no gore flag (wasn't used)
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.033;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.034) {
+				// reclaiming prison flags just in case
+				for (var prisonFlag:int = kFLAGS.UNKNOWN_FLAG_NUMBER_02141; prisonFlag <= kFLAGS.UNKNOWN_FLAG_NUMBER_02159; ++prisonFlag)
+					flags[prisonFlag] = 0;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.034;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.035) {
+				// removing vags of holding
+				if (player.statusEffectv1(StatusEffects.BonusVCapacity) >= 9000)
+					player.addStatusValue(StatusEffects.BonusVCapacity, 1, -9000);
+				if (player.statusEffectv1(StatusEffects.BonusVCapacity) >= 8000)
+					player.addStatusValue(StatusEffects.BonusVCapacity, 1, -8000);
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.035;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.036) {
+				if (player.statusEffectv1(StatusEffects.Kelt) >= 100) player.changeStatusValue(StatusEffects.Kelt, 1, 100);
+				if (player.statusEffectv1(StatusEffects.Kindra) >= 150) player.changeStatusValue(StatusEffects.Kindra,1,150);
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.036;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.037) {
+				// clones retroactive fix
+				for (var cloneMax:int = Soulforce.clones.length - 1; cloneMax >= 0; --cloneMax) {
+					if (player.hasStatusEffect(Soulforce.clones[cloneMax])) {
+						for (var cloneNum:int = 0; cloneNum < cloneMax; ++cloneNum) {
+							if (!player.hasStatusEffect(Soulforce.clones[cloneNum]))
+								player.createStatusEffect(Soulforce.clones[cloneNum], 0, 0, 0, 0);
+						}
+					}
+				}
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.037;
 			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
@@ -2047,4 +2083,3 @@ public class SaveUpdater extends NPCAwareContent {
 	}
 }
 }
-

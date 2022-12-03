@@ -112,13 +112,7 @@ public class Gorgon extends Monster
 		public function TailWhip():void {
 			outputText("The gorgon tenses and twists herself forcefully.  ");
 			//[if evaded]
-			if((player.hasPerk(PerkLib.Evade) && rand(6) == 0)) {
-				outputText("You see her tail whipping toward you and evade it at the last second. You quickly roll back onto your feet.");
-			}
-			else if(player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
-				outputText("Using Raphael's teachings and the movement afforded by your bodysuit, you anticipate and sidestep " + a + short + "'s tail-whip.");
-			}
-			else if(player.spe > rand(300)) {
+			if (player.getEvasionRoll()) {
 				outputText("You see her tail whipping toward you and jump out of the way at the last second. You quickly roll back onto your feet.");
 			}
 			else {

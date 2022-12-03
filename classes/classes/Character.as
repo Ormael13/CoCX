@@ -140,7 +140,6 @@ import classes.Scenes.NPCs.Forgefather;
 			//Gargoyle cancel!
 			if (isGargoyle())
 				return;
-//			if (hasStatusEffect(StatusEffects.GooStuffed)) return; //No longer needed thanks to PREGNANCY_GOO_STUFFED being used as a blocking value
 			var bonus:int = 0;
 			//If arg = 1 (always pregnant), bonus = 9000
 			if (arg >= 1)
@@ -511,8 +510,9 @@ import classes.Scenes.NPCs.Forgefather;
 			if (hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) max += (250 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) max += (300 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.AscensionEndurance)) max += perkv1(PerkLib.AscensionEndurance) * 30;
-			max += level * 5;
-			if (level <= 6) max += level * maxFatiguePerLevelStat.value;
+			max += level * maxFatiguePerLevelStat.value;
+			if (level <= 6) max += level * 5;
+			else max += 30;
 			max *= multimax;
 			max = Math.round(max);
 			if (max > 1499999) max = 1499999;
@@ -579,6 +579,7 @@ import classes.Scenes.NPCs.Forgefather;
 			if (necklaceEffectId == NecklaceLib.MODIFIER_SF) max += necklaceEffectMagnitude;//+100	 necklaceName == "soulmetal necklace"
 			max += level * maxSfPerLevelStat.value;
 			if (level <= 6) max += level * 5;
+			else max += 30;
 			if (isGargoyle() && Forgefather.material == "marble")
 			{
 				if (Forgefather.refinement == 0) multimax += (.15);
@@ -774,6 +775,7 @@ import classes.Scenes.NPCs.Forgefather;
 			if (jewelryEffectId4 == JewelryLib.MODIFIER_MP) max += jewelryEffectMagnitude4;
 			max += level * maxManaPerLevelStat.value;
 			if (level <= 6) max += level * 10;
+			else max += 60;
 			max *= multimax;
 			max = Math.round(max);
 			if (max < 0) max = 0;
@@ -783,10 +785,12 @@ import classes.Scenes.NPCs.Forgefather;
 		public override function maxOverMana():Number {
 			var max1:Number = maxMana();
 			var max2:Number = 1;
+			if (hasPerk(PerkLib.PrestigeJobGreySage)) max2 += 0.1;
+			if (hasPerk(PerkLib.Equilibrium)) max2 += 0.1;
 			if (hasPerk(PerkLib.MunchkinAtWork)) max2 += 0.1;
-			max1 *= max2;//~110%
+			max1 *= max2;//~120%
 			max1 = Math.round(max1);
-			if (max1 > 2749999) max1 = 2749999;
+			if (max1 > 2999999) max1 = 2999999;
 			return max1;
 		}
 
@@ -840,6 +844,7 @@ import classes.Scenes.NPCs.Forgefather;
 				if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) multimaxven += 0.3;
 			}
 			if (perkv1(IMutationsLib.ArachnidBookLungIM) > 0) multimaxven += perkv1(IMutationsLib.ArachnidBookLungIM);
+			if (game.player.hasKeyItem("Sky Poison Pearl") >= 0) maxven += 300;
 			maxven *= multimaxven;
 			maxven = Math.round(maxven);
 			return maxven;

@@ -8,7 +8,7 @@ public class ChargeWeaponSpell extends AbstractWhiteSpell {
 	public function ChargeWeaponSpell() {
 		super(
 			"Charge Weapon",
-			"The Charge Weapon spell will surround your weapons in electrical energy, causing them to do even more damage.  The effect lasts for a few combat turns.",
+			"The Charge Weapon spell will surround your weapons in magical energy, causing them to do even more damage.  The effect lasts for a few combat turns.",
 			TARGET_SELF,
 			TIMING_LASTING,
 			[TAG_BUFF]
@@ -108,7 +108,7 @@ public class ChargeWeaponSpell extends AbstractWhiteSpell {
 		ChargeWeaponDuration += combat.magic.perkRelatedDurationBoosting();
 		
 		if(output) {
-			outputText("You whisper a short spell, pouring mana into your [weapon].  Electric energy sparks to life, surrounding your [weapon] in a halo of lightning-themed pain. You'll do more damage for the rest of the fight");
+			outputText("You whisper the brief spell, the words of power cause mana to pour into your weapon as sparks of electricity burst into being. A halo of lightning crackles, surrounding your [weapon] with a fierce, magical charge, allowing it to deal more damage.");
 		}
 		player.createStatusEffect(StatusEffects.ChargeWeapon, ChargeWeaponBoost, ChargeWeaponDuration, 0, 0);
 	}

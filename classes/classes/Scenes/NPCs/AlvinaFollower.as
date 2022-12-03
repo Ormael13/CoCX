@@ -21,9 +21,9 @@ public function alvinaFirstEncounter():void
 	spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2Concealed_16bit);
 	clearOutput();
 	outputText("Along your travels, you meet a woman in robes with black hair. You expected to find at least a few humans in Mareth, if nothing else, the previous champions, so to find another human in this realm is a relief. You ask if she could give you directions, as you have no idea what to expect in this realm. As a champion, your job is to fight the demons, but you can’t fight them if you have no idea where to look.\n\n");
-	outputText("\"<i>Directions and demons, hm? There are many places you could visit. If I were you, I would go to the lake and look for a peculiar island at its center. That said, be respectful of whomever you meet there.</i>\"");
+	outputText("\"<i>Directions and demons, hm? There are many places you could visit. If I were you, I would go to the lake and look for a peculiar island at its center. That said, be respectful of whomever you meet there.</i>\"\n\n");
 	outputText("You nod and prepare to leave, but ask her who she is in case you should ever see her again.\n\n");
-	outputText("\"<i>Me? I am a person of no consequence.</i>\"");
+	outputText("\"<i>Me? I am a person of no consequence.</i>\"\n\n");
 	outputText("As you turn back to question her, you notice that she's vanished without a trace. You're not sure whether to be relieved...or concerned by this.\n\n");
 	flags[kFLAGS.ALVINA_FOLLOWER] = 1;
 	doNext(camp.returnToCampUseOneHour);
@@ -295,7 +295,7 @@ public function alvinaMainCampMenuDiary():void
 		outputText("What I have left to do however is to create an easier ritual as the creation of devils seems to be a difficult one. That said I’m definitely going to perform the ritual for myself.\n\n");
 		outputText("Day 170 year 130\n\n");
 		outputText("Dear journal, I finally achieved what I sought for all those years. True immortality, however it did not come for free. In order to achieve the ritual I had to corrupt my own body in order to facilitate the soul passage to the phylactery. I realised all too late as I became a devil that despite keeping my head clear I would soon lose the ability to process morality, ");
-		outputText("what made me human in the first place. Bah, who need theses anyway, morality is just a tether in the way of progress and true advancement can only be achieved by discarding it. Did I ever even have a moral code in the first place? Well I guess I somewhat did but I have chosen to ignore it, otherwise I wouldn't have gotten this far.</i>\n\n");
+		outputText("what has made  me human in the first place. Bah, who need theses anyway, morality is just a tether in the way of progress and true advancement can only be achieved by discarding it. Did I ever even have a moral code in the first place? Well I guess I somewhat did but I have chosen to ignore it, otherwise I wouldn't have gotten this far.</i>\n\n");
 		outputText("The journal continues and Alvina is nowhere in sight, you are anxious to see what's inside the diary beyond these page. Do you resume reading and throw caution out the window?\n\n");
 		flags[kFLAGS.ALVINA_DIARY] = 5;
 		eachMinuteCount(30);
@@ -1012,7 +1012,7 @@ private function marriageSexMale(sleep:Boolean = false):void {
 		sexBuffs();
 		if (sleep) {
 
-			doNext(curry(camp.sleepWrapper, 2.0));
+			doNext(camp.sleepWrapper, 2.0);
 		} else doNext(camp.returnToCampUseOneHour);
 	} else doNext(recallWakeUp);
 }

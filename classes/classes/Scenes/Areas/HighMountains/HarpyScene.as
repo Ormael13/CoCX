@@ -52,7 +52,7 @@ public class HarpyScene extends BaseContent
 				addButtonIfTrue(5, "Lay Eggs", spoidahsLegEggsInHarpeis, "Req. spider ovipositor and snake/spider fangs", player.canOvipositSpider() && (player.faceType == Face.SNAKE_FANGS || player.faceType == Face.SPIDER_FANGS), "Use your ovipositor to lay the eggs into harpy.");
 				addButton(14, "Leave", cleanupAfterCombat);
 				SceneLib.uniqueSexScene.pcUSSPreChecksV2(harpyVictoryuuuuu);
-							}
+			}
 			//Not horny?  Iz over
 			else {
 				outputText("You're not aroused enough to rape the poor birb.")
@@ -505,7 +505,7 @@ public class HarpyScene extends BaseContent
 			function sharedEnd():void {
 				monster.lust = 98;
 				monster.HP = 2;
-				player.lust = player.maxLust();
+				player.lust = player.maxOverLust();
 				flags[kFLAGS.COMBAT_BONUS_XP_VALUE] = monster.XP;
 				cleanupAfterCombat();
 				dynStats("lib", 1);
@@ -539,10 +539,10 @@ public class HarpyScene extends BaseContent
 			outputText("\n\nYou close your eyes, getting lost in the sensation of the harpy's deceptively skilled tongue.  Slipping a hand under your still-clothed upper body, you start to play with your tits as the harpy stops tongue-fucking your opening and instead starts to move higher, with almost no direction from yourself.  You tweak your nipple as the girl flicks her tongue over your throbbing clit, the double-pronged attack on your senses making you go weak from the waist down.  She continues to ravish your engorged button, sucking it, flicking it and even occasionally nipping at it gently, and it takes almost everything you have not to collapse down on your [legs] and slam her face as hard as you can into your cunt.  It seems like she's trying her hardest to get you off quickly, so that she can escape before you doing anything else to her.");
 
 			outputText("\n\nShe finally brings her mouth forwards, her lips meeting yours in an obscene parody of a kiss.  Her tongue starts sliding up and down your slit as she starts to play with your dripping sex.  She nibbles your lips, trying to do anything she can to make you cum, but you're able to hold yourself back - barely.  After a few moments, her efforts wane somewhat, and you hear a slight whimpering from the submissive girl.  Pulling her head away from your crotch, you prepare to admonish her for slowing down when you were so close.  However, you see that the horny bitch has started to play with herself");
-			if (monster.lust >= monster.maxLust()) outputText(" again");
+			if (monster.lust >= monster.maxOverLust()) outputText(" again");
 			outputText(", her fingers firmly stuffed down between her plush thighs and frantically toying with her pussy. Seeing her get off to your treatment almost makes you climax right then and there, but you manage to hold yourself back, reasoning that she hasn't quite paid enough just yet for deciding to attack you.");
 			doNext(harpyScissorSurprisePtII);
-			dynStats("lus=", player.maxLust());
+			dynStats("lus=", player.maxOverLust());
 		}
 
 //{New page}
@@ -642,7 +642,7 @@ public class HarpyScene extends BaseContent
 		{
 			clearOutput();
 			outputText("Eyeing the hapless bird-woman up and down, you feel your lusts kindling.  Moisture seeps from your [vagina] as you watch the harpy ");
-			if (monster.lust >= monster.maxLust()) outputText("moan and masturbate, dipping her fingers into her honey-pot with wild abandon.");
+			if (monster.lust >= monster.maxOverLust()) outputText("moan and masturbate, dipping her fingers into her honey-pot with wild abandon.");
 			else outputText("moan and struggle to rise, jiggling in the cutest way each time she slumps down, defeated.");
 			outputText("  You wrench her thick thighs apart to get a better view of her avian snatch.  Her lips are shrouded in a downy, feathery fuzz, but you can easily make out the heavy, lust-glossed labia.  The thought of tasting her dripping honey makes your mouth water and inside your [armor], your [clit] has emerged from its hood, straining as blood rushes to your loins.   The sensitive organ is so swollen that it's more lady-cock than joy-buzzer, the thick hood resembling an animal's sheath more than a natural flesh fold.");
 			outputText("\n\nThe harpy stops her struggles when she sees you smiling at her.  \"<i>Are you gonna make me lick your pussy or somethin',</i>\" she quips, folding her arms across her modest, barely B-cup breasts.  Her eyebrows knit together while she glowers in your direction, one leg still pulled into the air by your rushing passions.");
@@ -670,7 +670,7 @@ public class HarpyScene extends BaseContent
 				outputText(" your endurance gives out, and you slip into unconsciousness.  This time it seems you met your sexual match.");
 				monster.lust = 98;
 				monster.HP = 2;
-				player.lust = player.maxLust();
+				player.lust = player.maxOverLust();
 				flags[kFLAGS.COMBAT_BONUS_XP_VALUE] = monster.XP;
 				cleanupAfterCombat();
 				player.sexReward("Default","Default",true,false);

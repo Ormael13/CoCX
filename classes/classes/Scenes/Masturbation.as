@@ -51,14 +51,6 @@ public class Masturbation extends BaseContent {
 
 		public function masturbateMenu():void {
 			menu();
-			if (prison.inPrison && !prison.prisonCanMasturbate()) {
-				doNext(playerMenu);
-				return;
-			}
-			if (prison.inPrison && flags[kFLAGS.PRISON_PUNISHMENT] == 2) {
-				prison.punishments.prisonCaptorPunishmentConfinementMasturbate();
-				return;
-			}
 			if (player.hasCock() && (player.cocks[0].cockType == CockTypesEnum.BEE)) {
 				clearOutput();
 				outputText("Although your bee cock aches, you know that there's no way for you to get relief on your own.  When you touch your shaft or think about cumming images of the bee girl and the sound of her hypnotic buzzing fill your mind.");
@@ -204,7 +196,7 @@ public class Masturbation extends BaseContent {
 				outputText("You take off your [armor] and sit on the ground.");
 			}
 			//In Ingnam or not in cabin.
-			else if (flags[kFLAGS.IN_INGNAM] > 0 || flags[kFLAGS.CAMP_BUILT_CABIN] <= 0) {
+			else if (flags[kFLAGS.IN_INGNAM] || flags[kFLAGS.CAMP_BUILT_CABIN] <= 0) {
 				if (player.cor < 15) {
 					outputText("You sheepishly find some rocks to hide in, where ");
 					if (player.armor == armors.GOOARMR) {
@@ -260,7 +252,7 @@ public class Masturbation extends BaseContent {
 					outputText("casting seductive looks around, hoping someone or something is nearby to fuck you.\n\n");
 				}
 			}
-			else if (prison.inPrison || (inDungeon && DungeonAbstractContent.dungeonLoc != DungeonAbstractContent.DUNGEON_CABIN && player.companionsInPCParty())) {
+			else if (inDungeon && DungeonAbstractContent.dungeonLoc != DungeonAbstractContent.DUNGEON_CABIN && player.companionsInPCParty()) {
 				outputText("You walk to a secluded corner" + player.clothedOrNakedLower(", remove your [lowergarment]") + " and sit down. ");
 			}
 			//In cabin
@@ -2346,7 +2338,7 @@ public class Masturbation extends BaseContent {
 		public function meditate(description:String = "rock"):void {
 			clearOutput();
 			outputText("You find a flat, comfortable " + description + " to sit down on and meditate.  As always, meditation brings a sense of peace and calm to you, but it eats up one hour of the day.");
-			dynStats("lus", -50, "scale", false);
+			dynStats("lus", -Math.round(player.maxLust()*0.2), "scale", false);
 			dynStats("cor", -.3 - 0.3 * player.countCockSocks("alabaster"));
 			if (player.hasPerk(PerkLib.Enlightened) && player.cor < 10) HPChange(50, true);
 			fatigue( -10);

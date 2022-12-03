@@ -145,11 +145,11 @@ public class HeXinDao extends BaseContent
     public function riverislandVillageStuff():void {
         spriteSelect(null);
         clearOutput();
-        outputText("He'Xin'Dao is a large village connected and assembled between many smaller islands in the middle of large river that flows from the east to the west. In addition to the bridges connecting each of the islands together, two larger bridges connects them as a whole to both sides of the river, serving as the only points of access to the village.  The village is strategically laid out, preventing anyone from entering by swimming directly from the river to any of the islands, forcing anyone who can't fly to use the bridges if they wish to enter.\n");
-        outputText("\n\nNear one of major bridges is a wide variety of shops, ranging from a few shops with vicious-looking weapons, to one shop with a goblin out front, hawking what appears to be golem-making materials. On the opposite side of village, near other bridge is a medium-sized shop with a large 'Currency Transfer' sign. A market chock-full of seemingly random items is in the same building, and as you get closer, you recognize several transformative items from your travels in this realm.");
+        outputText("He'Xin'Dao is a large village connected and assembled between many smaller islands in the middle of large river that flows from the east to the west. In addition to the bridges connecting each of the islands together, two larger bridges connects them as a whole to both sides of the river, serving as the only points of access to the village.  The village is strategically laid out, preventing anyone from entering by swimming directly from the river to any of the islands, forcing anyone who can't fly to use the bridges if they wish to enter.\n\n");
+        outputText("Near one of major bridges is a wide variety of shops, ranging from a few shops with vicious-looking weapons, to one shop with a goblin out front, hawking what appears to be golem-making materials. On the opposite side of village, near other bridge is a medium-sized shop with a large \"Currency Transfer\" sign. A market chock-full of seemingly random items is in the same building, and as you get closer, you recognize several transformative items from your travels in this realm.");
         outputText("\n\nAt the West end of He'Xin'Dao you see one of the biggest buildings here. The roar of a crowd rises up from it occasionally, and when you listen close, you can hear the rasping of blades, and various other sounds of combat. You assume it's a local arena.");	//Side question, why can't the ones with wings fly in? Answered: Because flying cultivators would kick their asses.
-        outputText("You notice several towers, positioned at central points on some of the larger islands. These hardy-looking wood and stone constructions have open, flat roofs, and several people perch on each.\n\n.");
-	outputText("While at first glance, these people seem random. Some wield bows, others daggers, a few with no weapons at all...But as you focus on them, you can <i> feel </i> their soulforce, almost reacting to your attention.\n\n");
+        outputText("You notice several towers, positioned at central points on some of the larger islands. These hardy-looking wood and stone constructions have open, flat roofs, and several people perch on each.\n\n");
+	outputText("At first glance these people seem random. Some wield bows, others daggers, a few with no weapons at all... But as you focus on them, you can <i> feel </i> their soulforce, almost reacting to your attention.\n\n");
 	outputText("As you look even closer into the sky, you see a few glints of light, something metal in the sky reflecting the sun's rays. Are those...people riding on flying swords?\n\n"); 
 	//outputText("\n.");	//Z czasem jak bede dodawac miejsca opis wioski bedzie rozbudowywany :P
         riverislandMenuShow();
@@ -212,12 +212,12 @@ public class HeXinDao extends BaseContent
             buyItem1 = curry(confirmBuy1,Tier0,"Golem",1);
             buyItem2 = curry(confirmBuy2,Tier0,"Golem",0.2);
             menu();
-             addButton(0, "LowSFRPill", buyItem1,consumables.LG_SFRP, sayLine1(consumables.LG_SFRP,"It's a useful item for any soul cultivator, this little pill can help you restore some of your soulforce. Unless don't have your soul.")).hint("Low-grade Soulforce Recovery Pill.");
+             addButton(0, "LowSFRPill", buyItem2,consumables.LG_SFRP, sayLine2(consumables.LG_SFRP,"It's a useful item for any soul cultivator, this little pill can help you restore some of your soulforce. Unless you don't have a soul.")).hint("Low-grade Soulforce Recovery Pill.");
              addButton(1, "MidSFRPill", buyItem2,consumables.MG_SFRP, sayLine2(consumables.MG_SFRP,"It's a rather useful item for all cultivators at Soul Sprite stage or higher, this small pill can help you restore some of your soulforce and would provide much more than the low-grade one.")).hint("Mid-grade Soulforce Recovery Pill.").disableIf(!hasSoulPersonage);
              addButton(2, "HighSFRPil", buyItem2,consumables.HG_SFRP, sayLine2(consumables.HG_SFRP,"It's a rather useful item. I sell this to all cultivators at Soul Exalt stage or higher, this small pill can help you restore some of your soulforce and would provide much more than the mid-grade one.")).hint("High-grade Soulforce Recovery Pill.").disableIf(!hasSoulExalt);
              addButton(3, "SupSFRPill", buyItem2,consumables.SG_SFRP, sayLine2(consumables.SG_SFRP,"It's a rather useful item. I sell this to all cultivators at Soul King stage or higher, this small pill can help you restore some of your soulforce and would provide much more than the high-grade one.")).hint("Superior-grade Soulforce Recovery Pill.").disableIf(!hasSoulKing);
 
-             addButton(5, "LowSFRBotl", buyItem1,consumables.LGSFRPB, sayLine2(consumables.LGSFRPB,"It's a useful item for any soul cultivator, the pills in this bottle can help you restore some of your soulforce. Unless don't have your soul.")).hint("Bottle of Low-grade Soulforce Recovery Pills.")
+             addButton(5, "LowSFRBotl", buyItem2,consumables.LGSFRPB, sayLine2(consumables.LGSFRPB,"It's a useful item for any soul cultivator, the pills in this bottle can help you restore some of your soulforce. Unless you don't have a soul.")).hint("Bottle of Low-grade Soulforce Recovery Pills.")
              addButton(6, "MidSFRBotl", buyItem2,consumables.MGSFRPB, sayLine2(consumables.MGSFRPB,"It's a rather useful item for all cultivators at Soul Sprite stage or higher, this bottle of pills can help you restore some of your soulforce and would provide much more than the low-grade one.")).hint("Bottle of Mid-grade Soulforce Recovery Pills.").disableIf(!hasSoulPersonage);
              addButton(7, "HighSFRBot", buyItem2,consumables.HGSFRPB, sayLine2(consumables.HGSFRPB,"It's a rather useful item. I sell this to all cultivators at Soul Exalt stage or higher, this bottle of pills can help you restore some of your soulforce and would provide much more than the mid-grade one.")).hint("Bottle of High-grade Soulforce Recovery Pill.").disableIf(!hasSoulExalt);
              addButton(8, "SupSFRBotl", buyItem2,consumables.SGSFRPB, sayLine2(consumables.SGSFRPB,"It's a rather useful item. I sell this to all cultivators at Soul King stage or higher, this bottle of pills can help you restore some of your soulforce and would provide much more than the high-grade one.")).hint("Bottle of Superior-grade Soulforce Recovery Pill.").disableIf(!hasSoulKing);
@@ -606,7 +606,7 @@ public class HeXinDao extends BaseContent
 			addButton(3, consumables.BALLOTD.shortName, weaponBuy5, consumables.BALLOTD);
 			addButton(4, consumables.POISONB.shortName, weaponBuy5, consumables.POISONB);
 			addButton(7, consumables.BANGBM3.shortName, weaponBuy5, consumables.BANGBM3);
-			addButton(8, consumables.BANGBM3.shortName, weaponBuy5, consumables.BANGBM3);
+			//addButton(8, consumables.BANGBM3.shortName, weaponBuy5, consumables.BANGBM3);
 		}
         else {
 			addButtonDisabled(0, "???", "Req. lvl 42+");
@@ -615,7 +615,7 @@ public class HeXinDao extends BaseContent
 			addButtonDisabled(3, "???", "Req. lvl 42+");
 			addButtonDisabled(4, "???", "Req. lvl 42+");
 			addButtonDisabled(7, "???", "Req. lvl 42+");
-			addButtonDisabled(8, "???", "Req. lvl 42+");
+			//addButtonDisabled(8, "???", "Req. lvl 42+");
 		}
         addButton(10, consumables.BANGB_M.shortName, weaponBuy5, consumables.BANGB_M);
         addButton(11, consumables.W_STICK.shortName, weaponBuy5, consumables.W_STICK);
@@ -762,14 +762,8 @@ public class HeXinDao extends BaseContent
         outputText("Behind the desk in the central point of the shop you see a centauress. She has no fancy or provocative clothes, and sports an average body. She moves quite gracefully around the shelves, despite her larger body.");
         outputText("\n\n\"<i>Greetings, my name is Erma Swiftarrow and this is my shop. Go ahead and look around, if something catches your eye, simply let me know,</i>\" she say all that almost entirely in one breath after noticing your presence.");
         menu();
-        addButton(0, weaponsrange.BOWLIGH.shortName, weaponrangeBuy, weaponsrange.BOWLIGH);
-        addButton(1, weaponsrange.BOWHUNT.shortName, weaponrangeBuy, weaponsrange.BOWHUNT);
-        addButton(2, weaponsrange.BOWLONG.shortName, weaponrangeBuy, weaponsrange.BOWLONG);
-        addButton(3, weaponsrange.BOWKELT.shortName, weaponrangeBuy, weaponsrange.BOWKELT);
-        addButton(5, weaponsrange.LCROSBW.shortName, weaponrangeBuy, weaponsrange.LCROSBW);
-        addButton(6, weaponsrange.HUXBOW_.shortName, weaponrangeBuy, weaponsrange.HUXBOW_);
-        addButton(7, weaponsrange.HEXBOW_.shortName, weaponrangeBuy, weaponsrange.HEXBOW_);
-        addButton(7, weaponsrange.O_JAVEL.shortName, weaponrangeBuy, weaponsrange.O_JAVEL);
+        addButton(1, "Shelf 1", ermaswiftarrowmerchantshelf1).hint("Bows and Crossbows");
+        addButton(3, "Shelf 2", ermaswiftarrowmerchantshelf2).hint("Other types");
         //addButton(4, weapons.MACE.shortName, weaponBuy, weapons.MACE);
         //addButton(8, weapons.MACE.shortName, weaponBuy, weapons.MACE);//awl - wymagać bedzie możliwość lewitacji czy coś od PC aby to używać
         //addButton(9, weapons.MACE.shortName, weaponBuy, weapons.MACE);//bow made for soul cultivator xD
@@ -777,25 +771,64 @@ public class HeXinDao extends BaseContent
         addButton(14, "Back", riverislandVillageStuff);
         statScreenRefresh();
     }
-
-    private function weaponrangeBuy(itype:ItemType):void {
+    public function ermaswiftarrowmerchantshelf1():void {
+        menu();
+        addButton(0, weaponsrange.BOWLIGH.shortName, weaponrangeBuy1, weaponsrange.BOWLIGH);
+        addButton(1, weaponsrange.BOWHUNT.shortName, weaponrangeBuy1, weaponsrange.BOWHUNT);
+        addButton(2, weaponsrange.BOWLONG.shortName, weaponrangeBuy1, weaponsrange.BOWLONG);
+        addButton(3, weaponsrange.BOWKELT.shortName, weaponrangeBuy1, weaponsrange.BOWKELT);
+        addButton(5, weaponsrange.LCROSBW.shortName, weaponrangeBuy1, weaponsrange.LCROSBW);
+        addButton(6, weaponsrange.HUXBOW_.shortName, weaponrangeBuy1, weaponsrange.HUXBOW_);
+        addButton(7, weaponsrange.HEXBOW_.shortName, weaponrangeBuy1, weaponsrange.HEXBOW_);
+        addButton(14, "Back", ermaswiftarrowmerchant);
+    }
+    public function ermaswiftarrowmerchantshelf2():void {
+        menu();
+        addButton(0, weaponsrange.ATKNIFE.shortName, weaponrangeBuy2, weaponsrange.ATKNIFE);
+        addButton(1, weaponsrange.RTKNIFE.shortName, weaponrangeBuy2, weaponsrange.RTKNIFE);
+        addButton(2, weaponsrange.STKNIFE.shortName, weaponrangeBuy2, weaponsrange.STKNIFE);
+        addButton(3, weaponsrange.TTKNIFE.shortName, weaponrangeBuy2, weaponsrange.TTKNIFE);
+        addButton(5, weaponsrange.O_JAVEL.shortName, weaponrangeBuy2, weaponsrange.O_JAVEL);
+        addButton(6, weaponsrange.T_KNIFE.shortName, weaponrangeBuy2, weaponsrange.T_KNIFE);
+        addButton(7, weaponsrange.SHURIKE.shortName, weaponrangeBuy2, weaponsrange.SHURIKE);
+        addButton(14, "Back", ermaswiftarrowmerchant);
+    }
+	
+    private function weaponrangeBuy1(itype:ItemType):void {
         clearOutput();
         outputText("The centauress nods at your purchase and replies: \"<i>That'll be " + itype.value / 10 + " spirit stones.</i>\"");
-        //outputText("The gruff metal-working husky gives you a slight nod and slams the weapon down on the edge of his stand.  He grunts, \"<i>That'll be " + itype.value + " gems.</i>\"");
         if(flags[kFLAGS.SPIRIT_STONES] < itype.value / 10) {
             outputText("\n\nYou count out your spirit stones and realize it's beyond your price range.");
             //Goto shop main menu
-            doNext(ermaswiftarrowmerchant);
+            doNext(ermaswiftarrowmerchantshelf1);
             return;
         }
         else outputText("\n\nDo you buy it?\n\n");
         //Go to debit/update function or back to shop window
-        doYesNo(curry(debitWeaponRange,itype), ermaswiftarrowmerchant);
+        doYesNo(curry(debitWeaponRange1,itype), ermaswiftarrowmerchantshelf1);
     }
-    private function debitWeaponRange(itype:ItemType):void {
+    private function debitWeaponRange1(itype:ItemType):void {
         flags[kFLAGS.SPIRIT_STONES] -= itype.value / 10;
         statScreenRefresh();
-        inventory.takeItem(itype, ermaswiftarrowmerchant);
+        inventory.takeItem(itype, ermaswiftarrowmerchantshelf1);
+    }
+    private function weaponrangeBuy2(itype:ItemType):void {
+        clearOutput();
+        outputText("The centauress nods at your purchase and replies: \"<i>That'll be " + itype.value / 10 + " spirit stones.</i>\"");
+        if(flags[kFLAGS.SPIRIT_STONES] < itype.value / 10) {
+            outputText("\n\nYou count out your spirit stones and realize it's beyond your price range.");
+            //Goto shop main menu
+            doNext(ermaswiftarrowmerchantshelf2);
+            return;
+        }
+        else outputText("\n\nDo you buy it?\n\n");
+        //Go to debit/update function or back to shop window
+        doYesNo(curry(debitWeaponRange2,itype), ermaswiftarrowmerchantshelf2);
+    }
+    private function debitWeaponRange2(itype:ItemType):void {
+        flags[kFLAGS.SPIRIT_STONES] -= itype.value / 10;
+        statScreenRefresh();
+        inventory.takeItem(itype, ermaswiftarrowmerchantshelf2);
     }
 	
 	public function ermaswiftarrowmerchantarcherytraining():void {
@@ -946,7 +979,7 @@ public function soularena():void {
     private function arenaSelection(mon:Class):void{
 		player.createStatusEffect(StatusEffects.SoulArena, 0, 0, 0, 0);
 		if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
-		startCombat(new mon());
+        startCombatImmediate(new mon());
 		monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
 		monster.XP = monster.XP * 2;
     }
@@ -1098,7 +1131,7 @@ public function soularena():void {
 	public function mrsShigureLecturesBasics():void {
 		clearOutput();
 		player.gems -= 50;
-		outputText("After you pay the Gems, a slender young Kitsune guides you to the side of the arena, into a stone building built off of it. The open space has seating for over a hundred people, and most of the seats are already filled…Especially near the front, where several students are arguing, jostling for seats at the front.\n\n");
+		outputText("After you pay the gems, a slender young Kitsune guides you to the side of the arena, into a stone building built off of it. The open space has seating for over a hundred people, and most of the seats are already filled…Especially near the front, where several students are arguing, jostling for seats at the front.\n\n");
 		outputText("Not interested in the overeager students, you find a seat near the middle of the lecture hall, squeezing down in. You take your seat, listening to the murmur of the class. A few minutes later, the slender kitsune from earlier takes the stage, and speaks in a low, slightly nervous voice.\n\n");
 		outputText("\"<i>Thank you for coming, everyone. Today’s lecture will begin momentarily.</i>\" Everyone turns to face the stage, the chatter coming to a dead halt. You hear footsteps from backstage, and you steel yourself, expecting a dried up old elder to take the stage. Some geezer who’s spent their entire lives in a dusty old temple, with a dry, barely audible voice. However, as your instructor steps out, you can hear a muffled gasp, then silence as many of the assembled students stop breathing.\n\n");
 		outputText("Her legs, long and slender, toned with just a hint of softness, hit you first. Bare to the thigh, her pale skin reflects the light. Slowly, you move your gaze up. Her hips sway, wide and motherly, with each step she takes. Her kimono doesn’t hide the shape of her ass, large, yet firm, bouncing ever so slightly with each step she takes. Her hips, ass and legs are perfectly proportioned, almost as if chiselled by the Gods themselves.\n\n");
@@ -1107,10 +1140,10 @@ public function soularena():void {
 		outputText("She turns to face the audience, and another wave of indrawn breath sweeps through the otherwise silent auditorium, as those assembled behold her heavenly visage.\n\n");
 		outputText("She has a slender raised nose, a few small, blonde whiskers on either side, a pointed chin and a slender, soft-looking neck. There were simply no flaws that one could see, her proportions strikingly feminine. Her golden eyes sweep across the gathered crowd, shimmering orbs deep with wisdom, and bright, fierce intelligence burning like an undying star. Her pale skin seems to reflect and amplify that light, smoothing what could be a piercing glare into a soft, warm radiance. Her silky-smooth hair, like woven gold, hangs down to her waist, flowing like woven gold with each movement of her head.\n\n");
 		outputText("Just by standing there, she was like a fairy of the highest heavens, ethereal and ephemeral. With each movement of her eyes, she seemed to see through whatever meets her gaze. Her long and slender legs, her impeccable figure, her full curves, her proud and arrogant charisma, her gentle fingers, every part of her was like a perfect piece of artwork. She places her slender fingers on the podium, and speaks in a voice like birdsong, drawing what few gazes remained to her.\n\n");
-		outputText("\"<i>Greetings everyone. You can call me Mrs Shigure, and I will be your instructor for today. Today’s lesson is the basics of SoulForce.</i>\"\n\n");
+		outputText("\"<i>Greetings everyone. You can call me Mrs. Shigure, and I will be your instructor for today. Today’s lesson is the basics of SoulForce.</i>\"\n\n");
 		outputText("\"<i>Now that we've put the boring part behind us, let's begin.</i>\" kitsune walks to the podium and sits behind it. She rests an elbow on the podium, cradling her head, and crosses her legs in front of her. Moving her left hand to the side, she smirks, a small flame forming in her palm. \"<i>It's Fox Fire. An ability Kitsune can use naturally. However, to use it effectively, it requires both mana and soulforce.</i>\" She closes her hands into a fist, snuffing out the flame.\n\n");
 		outputText("\"<i>But mana is not the focus of today's lesson. You all paid to learn about the other aspect of Fox-Fire. Soulforce.</i>\" She looks around gathered before asking. \"<i>Do any of you have idea what soulforce is?</i>\"\n\n");
-		outputText("After a minute of silence, a lizan raises his hand. She nods, pointing at him, and he stands, stealing a glance at the kitsune's bountiful cleavage. \"<i>It's mystical energy that is purer than mana. It can be found nearly anywhere and gathered. It users calls themself cultivators. As for the source of it that cultivators use...</i>\" ");
+		outputText("After a minute of silence, a lizan raises his hand. She nods, pointing at him, and he stands, stealing a glance at the kitsune's bountiful cleavage. \"<i>It's mystical energy that is purer than mana. It can be found nearly anywhere and gathered. Its users calls themself cultivators. As for the source of it that cultivators use...</i>\" ");
 		outputText("Lizan stops as if trying to think about the answer. \"<i>...They use their life force.</i>\" He finaly comes with an answer and ends quite pleased with himself.\n\n");
 		outputText("\"<i>Hmmmm not bad, not bad. You got most of it right.</i>\" His smile becomes wider when the kitsune slightly shakes her head. \"<i>All living beings... then what about demons?</i>\" With that his smile freezes, shrinking as he looks down at his feet. \"<i>De... mons... they...</i>\" he stutters.\n\n");
 		outputText("\"<i>Oh my, are you troubled?</i>\" She smile like a vixen with her toy. \"<i>No. They would never be able to use soulforce.</i>\" She looks around all gathered. \"<i>Does anyone have idea why?</i>\"\n\n");
@@ -1121,8 +1154,8 @@ public function soularena():void {
 		outputText("\"<i>From two comes four</i>\"\n");
 		outputText("\"<i>The four are expressed through the eight</i>\"\n\n");
 		outputText("Class drags on for most of the hour, Ms Shigure walking between the gathered students as they practice, stopping here or there to give some more in depth explanations.\n\n");
-		outputText("\"<i>Now my dear listeners, that's all I can do. While reading and lectures are a good start, the actual work must be done by each of you, in your own time. If you feel ready to start your own path, to become a Cultivator...</i>\" She returns to the podium, sitting back down. \"<i>Come here, and accept my gift. This is a basic manual for cultivation, going over meditation, energy sensing, and basic manipulation. It should be all you need to master the very basics...Should the heavans will it. Good fortune to you all.</i>\"\n\n");
-		outputText("With this she started calling each student one by one, giving them a small book, bound in an odd bamboo. Your turn comes, and you take your copy. Ms. Shigure gives you a small smile, but says nothing as you take your tome and head back to camp. You feel a buzzing in your fingers, your temples throbbing. You close your eyes, and for an instant, you feel a pulse...Was that your heartbeat...? Or...? You were there less than hour, but the foxy teacher clearly had some effect on you.\n\n");
+		outputText("\"<i>Now my dear listeners, that's all I can do. While reading and lectures are a good start, the actual work must be done by each of you, in your own time. If you feel ready to start your own path, to become a Cultivator...</i>\" She returns to the podium, sitting back down. \"<i>Come here, and accept my gift. This is a basic manual for cultivation, going over meditation, energy sensing, and basic manipulation. It should be all you need to master the very basics...Should the heavens will it. Good fortune to you all.</i>\"\n\n");
+		outputText("With this, she started calling each student one by one, giving them a small book, bound in an odd bamboo. Your turn comes, and you take your copy. Ms. Shigure gives you a small smile, but says nothing as you take your tome and head back to camp. You feel a buzzing in your fingers, your temples throbbing. You close your eyes, and for an instant, you feel a pulse...Was that your heartbeat...? Or...? You were there less than hour, but the foxy teacher clearly had some effect on you.\n\n");
 		outputText("<b>Gained perk: Soul Cultivation\n\nGained Key Item: Cultivation Manual: Duality</b>");
 		player.createKeyItem("Cultivation Manual: Duality", 0, 0, 0, 0);
 		player.createPerk(PerkLib.JobSoulCultivator, 0, 0, 0, 0);
@@ -1141,7 +1174,7 @@ public function soularena():void {
 			outputText("Her face is covered in a strange wave light energy, making her seem dreamy and mysterious.\n\n");
 			outputText("Her body was covered in mysteries, making one forever unable to see her goals.\n\n");
 			outputText("Her long and slender legs, her impeccable figure, her full curves, her proud and arrogant charisma, her gentle fingers, every part of her was like a perfect piece of artwork.\n\n");
-			outputText("\"<i>Greeting everyone. You can call me Shigure, Mrs Shigure and i will talk today about basic as in really basics.</i>\" Elder in lead of the lecture introduce herself after making sure pay attention to her.\n\n");
+			outputText("\"<i>Greetings, everyone. You can call me Shigure, Mrs. Shigure and I will talk today about basic as in really basics.</i>\" Elder in lead of the lecture introduce herself after making sure pay attention to her.\n\n");
 		}
 		else {
 			outputText("\"<i>Greetings, everyone. Thank you for attending today’s lecture.</i>\" Mrs. Shigure warmly greets everyone before proceeding.\n\n");
@@ -1149,8 +1182,8 @@ public function soularena():void {
 		outputText("\"<i>I see a few familiar faces today,</i>\" she says casually. Following her gaze you notice a certain lizan student from before, who blushes at her attention. \"<i>I congratulate you all. You've awoken your SoulForce. You can sense the energy around you, and took your first steps along the Cultivator's path. Do any of you know the subject of today's lesson?</i>\"\n\n");
 		outputText("The students begin murmuring, looking between themselves, but nobody answers. After five minutes, the curvy kitsune claps her hands. \"<i>Eyes on me, please. </i>\" No few students didn't need the prompt, shamelessly staring at her, but the chatter around the room stops.\n\n");
 		outputText("\"<i>Today's lecture is on the different fields of study. Now that you've awoken your SoulForce, many paths have opened up for you. Not all cultivators follow the same path and honestly...</i>\" she takes a breath, looking at the assembled students. \"<i>there are many paths to tread. Each of you will walk a different path, at your own pace, for as no two souls are the same, the paths we tread differ. But I digress, there are a few areas in which most souls gather. Three, to be exact. Three categories of discipline that encompass the paths that most cultivators take.</i>\" She motions with one hand, pointing to the back of the room. You turn to see three people stand, gracefully making their way to the stage. A white-furred wolf, a buxom lacta bovine, and a smaller, thinner raccoon-morph. They take a position next to her, and she motions to the Wolf.\n\n");
-		outputText("\"<i>My first assistant here is to demonstrate the most common, well-trodden path. He decided to develop his abilties of soulforce manipulation. It's the easiest path for most, especially those with experience in the mystic arts, and is especially popular among the Lizans, Unicorns, Nekomata, and my own race, the Kitsunes. This discipline focuses on manipulating the energy around them, not unlike more classic mages. </i>\" She motions, and the Winter Wolf raises his hands, spreading his arms wide. Etherial blades form above him, and with a flick of his hands, they spin, slicing the air with rapid strokes. He flicks his hands again, and the blades erupt into flame before vanishing. Several students clap, and he smiles slightly, bowing respectfully. Ms Shigure shakes her head, a small smile on her face. </i>\" We call that the Daoist's path.</i>\" She then turns to the second one.\n\n");
-		outputText("\"<i>Our bovine friend here decided to focus on her body instead. This path doesn't focus on manipulation, like the Daoists. Her energy isn't as fluid, or controlled... but instead, she draws the energy in, focusing it into her body. </i>\" Ms Shigure motions again, and two assistants drag a stone pillar in, placing it in front of the bovine. \"<i>This, of course, allows for physical abilities that the Daoists couldn't hope to match. </i>\" The bovine woman grins, bringing her hand down upon the top of the stone pillar. The rock splinters, shards of stone showering the stage with shards. The muscular woman doesn't seem effected in the slightest by the stone shards now embedded in her kimono, and as another round of applause breaks out, she chuckles and grins, scratching the back of her head. Ms Shigure looks out at the assembled students, motioning to her assistant. \"<i>This is the path of Body Cultivation. It tends to be popular among races with already impressive physicality, such as the Oni, Minotaur, Lacta-Bovine and Orca races.</i>\" The Lacta Bovina steps back, leaving the last assistant standing with Ms. Shigure.\n\n");
+		outputText("\"<i>My first assistant here is to demonstrate the most common, well-trodden path. He decided to develop his abilties of soulforce manipulation. It's the easiest path for most, especially those with experience in the mystic arts, and is especially popular among the Lizans, Unicorns, Nekomata, and my own race, the Kitsunes. This discipline focuses on manipulating the energy around them, not unlike more classic mages. </i>\" She motions, and the Winter Wolf raises his hands, spreading his arms wide. Etherial blades form above him, and with a flick of his hands, they spin, slicing the air with rapid strokes. He flicks his hands again, and the blades erupt into flame before vanishing. Several students clap, and he smiles slightly, bowing respectfully. Ms Shigure shakes her head, a small smile on her face. \"<i>We call that the Daoist's path.</i>\" She then turns to the second one.\n\n");
+		outputText("\"<i>Our bovine friend here decided to focus on her body instead. This path doesn't focus on manipulation, like the Daoists. Her energy isn't as fluid, or controlled... but instead, she draws the energy in, focusing it into her body. </i>\" Ms Shigure motions again, and two assistants drag a stone pillar in, placing it in front of the bovine. \"<i>This, of course, allows for physical abilities that the Daoists couldn't hope to match.</i>\" The bovine woman grins, bringing her hand down upon the top of the stone pillar. The rock splinters, shards of stone showering the stage with shards. The muscular woman doesn't seem effected in the slightest by the stone shards now embedded in her kimono, and as another round of applause breaks out, she chuckles and grins, scratching the back of her head. Ms Shigure looks out at the assembled students, motioning to her assistant. \"<i>This is the path of Body Cultivation. It tends to be popular among races with already impressive physicality, such as the Oni, Minotaur, Lacta-Bovine and Orca races.</i>\" The Lacta Bovina steps back, leaving the last assistant standing with Ms. Shigure.\n\n");
 		outputText("\"<i>This cultivator didn't pick the previous paths. Scholars have been arguing for centuries, as to which path is more demanding, this, or the Body Cultivator's path. He's developing heartforce, focusing on the mind and mental state. Some say it's pure willpower, unlike the esoteric nature of daoist magic or body cultivators raw physicality. Such cultivators we calls Heartforce Cultivators.</i>\" She motions, and an etherial white tiger forms around the raccoon-morph. He grins as several snakes erupt from his arms, sending a slight shock through the crowd. The animals bare their fangs, before fading away.\n\n");
 		outputText("With all three introduced, ms Shigure spends the next ten or so minutes explaining each path a little more in-depth, going over each path's basic strengths and weaknesses.\n\n");
 		outputText("\"<i>Now that we all should have a decent grasp of the basics, after this lecture you can buy manuals. These study guides will help you take the first steps along your path.</i>\" She then points to the young kitsune that sits at a small table in the back of the hall. \"<i>Miss Kyiana will be happy to sell you the study materials you need. Good luck on your chosen paths.</i>\"\n\n");
@@ -1166,7 +1199,7 @@ public function soularena():void {
 		clearOutput();
 		flags[kFLAGS.SPIRIT_STONES] -= 10;
 		outputText("\"<i>Greetings, everyone. Another meeting with so many of you. One would think I’d start remembering your names, right?</i>\" Shigure cracks a small joke to lighten the mood.\n\n");
-		outputText("\"<i>It's good to see so many of you have continued on your path into SoulForce, and are still getting value out of my lectures. Or maybe you come here for different reasons...</i>\" Shigure says, looking down at her gown, which has slipped aside, showing her shapely thighs. As it slips further, nearly giving you (and everyone else) a glance at her womanhood, She winks, covering herself again.\n\n");
+		outputText("\"<i>It's good to see so many of you have continued on your path into SoulForce, and are still getting value out of my lectures. Or maybe you come here for different reasons...</i>\" Shigure says, looking down at her gown, which has slipped aside, showing her shapely thighs. As it slips further, nearly giving you (and everyone else) a glance at her womanhood, she winks, covering herself again.\n\n");
 		outputText("\"<i>Being here today means you all managed to ascend above the level of Soul Apprentice. I expect that my techniques were helpful, considering most of you returned.</i>\" She nods and then turns around, giving everyone a good look at her shapely back and tails as she reaches for some small booklet.\n\n");
 		outputText("\"<i>Now some of you may start to feel your...powers...growing. </i>\" She gives that Lizan from before a direct look. \"<i> You may feel confident in your power, from training, or perhaps from besting your peers. You can feel your SoulForce expanding, your skills rising, and you may feel ready to test yourself.</i>\" She smiles down at her students. \"<i>It's a wonderful feeling, being able to better yourself, to feel the power thrumming inside you...</i>\" Her smile fades, and she looks down sternly.  \"<i>unless it gets to your head. The path of the cultivator is a path to power, but it is by no means the only one to walk. Confidence can easily lead to arrogance. And that is what can fell even the strongest, the most skilled... Many, so many of our people have fallen victim to such. Some, we were able to find, to recover.</i>\" She looks up, eyes somber. \"<i> But most end up as some demon's sex toy, or worse...</i>\" she sighs, cutting herself off and breathing deeply. \"<i>Mareth is not forgiving, students. If you learn nothing else here, learn that the world is dangerous, especially for the weak or the foolish.</i>\" ");
 		outputText("She then looks at the ground, \"<i>Mareth is not just a place of demons and lunatics. There are much worse things buried below this land, ancient powers which you would never wish to let...Stir.</i>\" Shigure shudders, letting the silence build. Suddenly, she claps her hands, popping upright and sending her breasts jiggling.\n\n");

@@ -170,7 +170,7 @@ public function Nie2():void
 
 public function meetEvangeline():void {
 	clearOutput();
-	if (flags[kFLAGS.ZENJI_PROGRESS] == 11 && rand(4) == 0) {
+	if (ZenjiScenes.isLover() && rand(4) == 0) {
 		outputText("You call your transformations expert, Evangeline, but you get no response. After a moment you decide to head over to her.\n\n");
 		outputText("When you arrive, you already see Zenji hovering over her shoulder, his tail nervously coiling around himself. Evangeline is showing Zenji what the transformations do and ensuring him that it will cause no harm to any imbibers.\n\n");
 		outputText("Zenji seems somewhat unconvinced at her assurance. \"<i>If dat is what you say so, but if you dare harm [name], just know dat I will be de first to know.</i>\"\n\n");
@@ -187,8 +187,8 @@ public function meetEvangeline():void {
 	addButton(1, "Talk", evangelineTalkMenu).hint("Ask Evangeline about something.");
 	if (EvangelineAffectionMeter >= 50) addButton(2, "Sex", evangelineSexMenu).hint("Have some sex with the demonic chimera girl.");//godess
 	if (EvangelineAffectionMeter >= 5) {
-		if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(3, "Spar", evangelineSparMenu).hint("Get into a quick battle with Evangeline!");
-		else addButtonDisabled(3, "Spar", "Req. built sparring ring.");
+		addButton(3, "Spar", evangelineSparMenu).hint("Get into a quick battle with Evangeline!")
+			.disableIf(flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 2, "You need a good sparring ring for that.");
 		if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 1) addButton(5, "Give Gems", LvLUp).hint("Give Evangeline some gems to cover her expenses on getting stronger.");
 		else addButtonDisabled(5, "Give Gems", "Req. sparring with Evangeline at least once.");
 		addButton(8, "I.Mutations", InternalMutations).hint("Check on what internal mutations Evangeline can grant you.");
@@ -415,7 +415,7 @@ private function evangelineAlchemyMenu(page:int = 1):void {
 		addButton(2, "Couatl Oil", MakingCouatlPotion).hint("Ask her to brew a special potion that could aid in becoming a couatl. \n\nCost: 10 Gems \nNeeds 1 Snake Oil and 1 Golden Seed.");
 		addButton(3, "Nocello Liq", MakingNocelloLiqueur).hint("Ask her to brew a special potion that could aid in becoming a phoenix. \n\nCost: 10 Gems \nNeeds 1 Golden Seed and 1 Salamander Firewater.");//Hybryd race TF
 		addButton(4, "Unicornum", MakingUnicornumPotion).hint("Ask her to brew a special potion that could aid in becoming a unicorn. \n\nCost: 20 Gems \nNeeds 1 Equinum and 4 Low-grade Soulforce Recovery Pills.");//1st stage Soul evolution race TF
-		addButton(5, "RubyCrystal", MakingRubyCrystal).hint("Ask her to brew a special potion that could aid in becoming a kishoo. \n\nCost: 10 Gems \nNeeds 1 Fox Jewel and 1 Salamander Firewater.");//Hybryd race TF
+		addButton(5, "RubyCrystal", MakingRubyCrystal).hint("Ask her to brew a special potion that could aid in becoming a kitshoo. \n\nCost: 10 Gems \nNeeds 1 Fox Jewel and 1 Salamander Firewater.");//Hybryd race TF
 		//6
 		//addButton(7, "", ).hint(".");siren TF//Hybryd race TF
 		//8
@@ -1084,9 +1084,9 @@ private function InternalMutations():void {
 	clearOutput();
 	if (EvangelinePeepTalkOnInternalMutations == 0) {
 		outputText("You ask Evangeline about ways to further make your body like that of a specific creature. Evangeline raises an eyebrow before replying.\n\n");
-		outputText("\"<i>It's possible to further improve yourself through internal mutations, however such changes would cause stress upon your body. You also won't be able to get inner mutations from transformations alone, I would need to craft something special. As a human or former human your anatomy wasn't made to host foreign organs and thus might react unfavorably to the change causing your health to suffer degeneration. ");
-		outputText("I can create the mutagens required to transform your insides but don't you say I didn't warn you about the after effects. Oh and before you ask, no this isn't something a regular transformative can do. While eating food on Mareth can conform your body to that of any race if not literally make you almost like a member of said species at a first glance, it doesn't go deep enough to strip everything human out of you, else you would lose the ability to transform at all. ");
-		outputText("Inner mutation requires something more advanced than just eating random food you find across the wilderness. Did you understand all of that?</i>\"");
+		outputText("\"<i>It's possible to further improve yourself through internal mutations, however such changes would cause stress upon your body. You also won't be able to get inner mutations from transformations alone, I would need to craft something special. As a human or former human, your anatomy wasn't made to host foreign organs and thus might react unfavorably to the change causing your health to suffer degeneration. ");
+		outputText("I can create the mutagens required to transform your insides, but don't you say I didn't warn you about the after effects. Oh, and before you ask, no, this isn't something a regular transformative can do. While eating food on Mareth can conform your body to that of any race if not literally make you almost like a member of said species at a first glance, it doesn't go deep enough to strip everything human out of you, else you would lose the ability to transform at all. ");
+		outputText("<b>Inner mutation requires something more advanced than just eating random food you find across the wilderness. Did you understand all of that?</b></i>\"");
 		menu();
 		addButton(1, "No", IMutationsYN, false);
 		addButton(3, "Yes", IMutationsYN);

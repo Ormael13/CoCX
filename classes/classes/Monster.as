@@ -82,11 +82,8 @@ import flash.utils.getQualifiedClassName;
 		protected final function statScreenRefresh():void {
 			EngineCore.statScreenRefresh();
 		}
-		protected final function doNext(eventNo:Function):void { //Now typesafe
-			EngineCore.doNext(eventNo);
-		}
-		protected final function combatMiss():Boolean {
-			return SceneLib.combat.combatMiss();
+		protected final function doNext(func:Function, ...args):void {
+			EngineCore.doNext.apply(null, [func].concat(args));
 		}
 		protected final function combatParry():Boolean {
 			return SceneLib.combat.combatParry();
@@ -421,11 +418,11 @@ import flash.utils.getQualifiedClassName;
 		}
 		public function addSoulforce(soulforce:Number):void {
 			this.soulforce += soulforce;
-			if (this.soulforce > maxSoulforce()) this.soulforce = maxSoulforce();
+			if (this.soulforce > maxOverSoulforce()) this.soulforce = maxOverSoulforce();
 		}
 		public function addMana(mana:Number):void {
 			this.mana += mana;
-			if (this.mana > maxMana()) this.mana = maxMana();
+			if (this.mana > maxOverMana()) this.mana = maxMana();
 		}
 
 		public override function maxLust():Number {
@@ -470,7 +467,6 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.InhumanDesireI)) temp += Math.round(this.lib * 3 * (1 + newGamePlusMod()));
 			if (hasPerk(PerkLib.JobCourtesan)) temp += 60;
 			if (hasPerk(PerkLib.JobSeducer)) temp += 30;
-			if (hasPerk(PerkLib.PrestigeJobGreySage)) temp += 300;
 			if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) temp += (150 * (1 + newGamePlusMod()));
 			if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) temp += (225 * (1 + newGamePlusMod()));
 			if (hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) temp += (300 * (1 + newGamePlusMod()));
@@ -2599,7 +2595,7 @@ import flash.utils.getQualifiedClassName;
 				}
 			}
 			//soulforce and mana regeneration for monsters
-			if (hasPerk(PerkLib.JobSoulCultivator) && this.soulforce < maxSoulforce()) {
+			if (hasPerk(PerkLib.JobSoulCultivator) && this.soulforce < maxOverSoulforce()) {
 				var soulforceRecovery:Number = 0;
 				var soulforceRecoveryMulti:Number = 1;
 				if (hasPerk(PerkLib.JobSoulCultivator)) soulforceRecovery += 4;
@@ -2626,7 +2622,7 @@ import flash.utils.getQualifiedClassName;
 				soulforceRecovery *= soulforceRecoveryMulti;
 				addSoulforce(soulforceRecovery);
 			}
-			if (hasPerk(PerkLib.JobSorcerer) && this.mana < maxMana()) {
+			if (hasPerk(PerkLib.JobSorcerer) && this.mana < maxOverMana()) {
 				var manaRecovery:Number = 0;
 				var manaRecoveryMulti:Number = 1;
 				if (hasPerk(PerkLib.JobSorcerer)) manaRecovery += 10;
@@ -2722,6 +2718,7 @@ import flash.utils.getQualifiedClassName;
 				if (hasPerk(PerkLib.EnemyResiliance)) addStatusValue(StatusEffects.FrozenSolid,1,-5);
 				if(statusEffectv1(StatusEffects.FrozenSolid) <= 0) {
 					outputText("<b>" + capitalA + short + (plural ? " are" : " is") + " no longer encased in the ice prison!</b>\n\n");
+					statStore.removeBuffs("FrozenSolid");
 					removeStatusEffect(StatusEffects.FrozenSolid);
 				}
 				else outputText("<b>" + capitalA + short + (plural ? " are" : " is") + " currently encased in the ice prison!</b>\n\n");
@@ -3458,23 +3455,7 @@ import flash.utils.getQualifiedClassName;
 		public function handleCombatLossText(inDungeon:Boolean, gemsLost:int):int
 		{ //New Function, override this function in child classes if you want a monster to output special text after the player loses in combat
 			//This function doesn’t take the gems away from the player, it just provides the output text
-			if (SceneLib.prison.inPrison) {
-				SceneLib.prison.doPrisonEscapeFightLoss();
-				return 6;
-			}
 			if (!inDungeon) {
-				if (SceneLib.prison.trainingFeed.prisonCaptorFeedingQuestTrainingExists()) {
-					//Just... do know that this shit is old as fuck and probably won't work for a lot of monsters.
-					if (short == "goblin" || short == "goblin assassin" || short == "goblin warrior" || short == "goblin shaman" || short == "imp" || short == "imp lord" || short == "imp warlord" || short == "imp overlord" || //Generic encounter
-						short == "tentacle beast" || (short == "kitsune" && hairColor == "red") || short == "Akbal" || short == "Tamani" || //Forest, deepwoods
-						short == "goo-girl" || short == "green slime" || short == "fetish cultist" || short == "fetish zealot" || //Lake
-						short == "sandtrap" || short == "sand tarp" || short == "naga" || short == "demons" || short == "Cum Witch" || //Desert
-						short == "hellhound" || short == "infested hellhound" || short == "minotaur" || short == "minotaur lord" || short == "minotaur gang" || short == "minotaur tribe" || short == "basilisk" || short == "phoenix" || //Mountain, high mountains
-						short == "satyr" || short == "gnoll" || short == "gnoll spear-thrower" || short == "female spider-morph" || short == "male spider-morph" || short == "corrupted drider" || //Plains, swamp, bog
-						short == "yeti" || short == "behemoth") { //Glacial rift, volcanic crag
-						SceneLib.prison.trainingFeed.prisonCaptorFeedingQuestTrainingProgress(1, 1);
-					}
-				}
 				outputText("\n\nYou'll probably come to your senses in six hours or so");
 				if ((player.gems > 1) && gemsLost > 0)
 					outputText(", missing " + gemsLost + " gems.");

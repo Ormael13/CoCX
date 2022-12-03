@@ -5,8 +5,6 @@
 package classes.Scenes.Places.TrollVillage {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.Items.ArmorLib;
-import classes.Items.UndergarmentLib;
 import classes.Scenes.NPCs.ZenjiScenes;
 import classes.Scenes.Places.TrollVillage;
 import classes.Scenes.SceneLib;

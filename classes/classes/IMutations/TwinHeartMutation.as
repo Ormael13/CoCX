@@ -29,7 +29,6 @@ public class TwinHeartMutation extends IMutationPerkType
             if (pTier == 4){
                 descS = "+160% fatigue recovery, with tauric/drider body: +400% fatigue recovery, reduce Charge fatigue cost by ~40% as well as its cooldown by 4, increase damage by 200%.";
             }
-            if (descS != "")descS += ".";
             return descS;
         }
 
@@ -74,9 +73,8 @@ public class TwinHeartMutation extends IMutationPerkType
         }
 
         //Mutations Buffs
-        override public function pBuffs(target:Creature = null):Object{
+        override public function buffsForTier(pTier:int):Object {
             var pBuffs:Object = {};
-            var pTier:int = currentTier(this, (target == null)? player : target);
             if (pTier == 1) {
                 pBuffs['tou.mult'] = 0.05;
                 pBuffs['spe.mult'] = 0.05;

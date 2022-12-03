@@ -6,14 +6,9 @@ package classes.Scenes.Areas.Caves
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.Scenes.SceneLib;
 
 public class CaveWyrmScene extends BaseContent
 	{
-				
-		public function CaveWyrmScene() 
-		{
-		}
 		
 public function berserkingCaveWyrmEncounter():void {
 	clearOutput();
@@ -40,16 +35,11 @@ public function winningOverCaveWyrm():void {
             sceneHunter.print("Maybe cavewyrm dick will solve the issue?");
 			addButton(1, "Fuck Her", winningOverCaveWyrmDMelting);
 		}
-		SceneLib.uniqueSexScene.pcUSSPreChecksV2(winningOverCaveWyrm);
-			}
-	else {
+	} else {
 		outputText("You approach the defeated lizard girl intending to punish her for her assault but the drop of precum fuming on the ground like acid next to her cunt tells you that it's a VERY bad idea. Who knows what your ");
 		if (player.hasVagina()) outputText("pussy "); //not sure why I bothered keeping this.
-		//if (player.hasVagina()) outputText("pussy" + (player.hasCock() ?" or ":"") + "");
-		//if (player.hasCock()) outputText("cock");	//Explictly checks if has this before this else occurs. What is the point of this?
 		outputText(" might end up like if any of these fluids gets in contact with them. Deciding against it you smash the " + (flags[kFLAGS.HERM_CAVE_WYRM] > 0 ?"herm":"female") + " unconscious instead and get your spoils. The locals will better use her then you would.");
 		addButton(0, "Leave", cleanupAfterCombat);
-		SceneLib.uniqueSexScene.pcUSSPreChecksV2(winningOverCaveWyrm);
 	}
 }	
 public function winningOverCaveWyrmDMelting():void {
