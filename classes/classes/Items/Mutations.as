@@ -164,6 +164,18 @@ public final class Mutations extends MutationsHelper {
 		player.refillHunger(10);
     }
 
+    //Madmen knowledge
+    public function madmenKnowledge(player:Player):void {
+        clearOutput();
+        outputText("You eat and savor the cake. You have no clue were the spoon and plate came from but they were there with the food.");
+        if (player.tallness > 42) {
+            outputText("[pg]Whoa wait did you just lost some height!? You indeed notice you've shrunk by a few inches.");
+            player.tallness -= 1 + rand(3);
+            if (player.basetallness < 42) player.tallness = 42;
+        }
+		player.refillHunger(10);
+    }
+
     //Airweed
     public function airweed(player:Player):void {
         player.slimeFeed();
@@ -826,6 +838,14 @@ public final class Mutations extends MutationsHelper {
         flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] += nails;
         if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 750 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 750;
         else if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 250 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 2) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 250;
+    }
+
+    public function packOfDemonBones(player:Player):void {
+        clearOutput();
+        var harv:Number = 10;
+		if (harv + player.perkv1(PerkLib.PrestigeJobNecromancer) > SceneLib.camp.campMake.maxDemonBonesStored()) harv = SceneLib.camp.campMake.maxDemonBonesStored() - player.perkv1(PerkLib.PrestigeJobNecromancer);
+		outputText("You open the pack to find " + harv + " demon bones inside.");
+		player.addPerkValue(PerkLib.PrestigeJobNecromancer, 1, harv);
     }
 
     /* ITEMZZZZZ FUNCTIONS GO HERE */
@@ -6301,7 +6321,14 @@ public final class Mutations extends MutationsHelper {
             }
             outputText("[pg]Your [skin.type] begins to tingle, then itch. ");
             transformations.SkinFur(Skin.COVERAGE_COMPLETE, {colors: ["brown", "chocolate", "auburn", "caramel", "orange", "sandy brown", "golden", "black", "midnight black", "dark gray", "gray", "light gray", "silver", "white", "orange and white", "brown and white", "black and white", "gray and white"]}).applyEffect();
+            changes++;
+        }
 
+        //-Madness
+        if (!player.hasPerk(PerkLib.Insanity) && changeLimit > 0) {
+            outputText("[pg]");
+            outputText(" Suddenly as if catching on to a joke way to late you begin to laugh uncontrollably. Wow how stupid have you been acting until now. Reality has unfolded before your eyes in a whole new manner and as the magic of wonderland begins to fully seep into your formerly logical, short sighted, desperately stubborn mind you open to a whole new perspective of the world you didn't have access to, the diagonal one. See most people look up down left or right but what about the area in between or the area behind? People might say you make no sense, that you're crazy but at the end of the day they are just blind idiots trying to make sense of a reality they have no access to. You've seen it all and understand it all.");
+            player.createPerk(PerkLib.Insanity,0,0,0,0);
             changes++;
         }
         // Remove gills
@@ -16187,4 +16214,4 @@ public final class Mutations extends MutationsHelper {
 		player.herbXP(HE);
     }
 }
-}
+}

@@ -59,7 +59,7 @@ public class EntangleSpell extends AbstractGreenSpell {
 			outputText("You focus your lust on the flora around you, causing them to surge with your emotions. Black vines slowly rise from the ground before quickly darting around [themonster].\n");
 			if (40 + rand(player.inte) + rand(player.lib) > monster.spe) {
 				outputText("The vines successfully wrap around [themonster], clutching onto [monster him] tightly as they squeeze and grope [monster his] body.\n");
-				player.createStatusEffect(StatusEffects.Entangled, calcDuration(), 0, 0, 0);
+				monster.createStatusEffect(StatusEffects.Entangled, calcDuration(), 0, 0, 0);
 			}
 			else outputText("[Themonster] successfully escapes from the entanglements, but the vines are relentless as they constantly whip around [monster him].\n");
 		}

@@ -276,6 +276,7 @@ public class Ingnam extends BaseContent
 			addButton(14, "Back", shopTradingPost);
 		}
 		private function shopTradingPostSell(slot:int):void {
+			var itemValueOrgin:Number = player.itemSlots[slot].itype.value;
 			var itemValue:int = int(player.itemSlots[slot].itype.value / 3);
 			clearOutput();
 			if (shiftKeyDown) {
@@ -284,19 +285,21 @@ public class Ingnam extends BaseContent
 				else outputText("You hand over " + num2Text(player.itemSlots[slot].quantity) + " " +  player.itemSlots[slot].itype.shortName + " to trader.  He nervously pulls out " + num2Text(itemValue * player.itemSlots[slot].quantity)  + " gems and drops them into your waiting hand.");
 				while (player.itemSlots[slot].quantity > 0){
 					player.itemSlots[slot].removeOneItem();
-					if (player.hasPerk(PerkLib.Greedy)) itemValue *= 2;
+					if (player.hasPerk(PerkLib.Greedy)) {
+						itemValue *= 2;
+						if (itemValue > itemValueOrgin) itemValue = itemValueOrgin;
+					}
 					player.gems += itemValue;
 				}
 			}
 			else {
 				if (player.hasPerk(PerkLib.Greedy)) itemValue *= 2;
 				if (player.hasPerk(PerkLib.TravelingMerchantOutfit)) itemValue *= 2;
-				if (itemValue == 0)
-				outputText("You hand over " + player.itemSlots[slot].itype.longName + " to trader.  He shrugs and says, \"<i>Well ok, it isn't worth anything, but I'll take it.</i>\"");
+				if (itemValue > itemValueOrgin) itemValue = itemValueOrgin;
+				if (itemValue == 0) outputText("You hand over " + player.itemSlots[slot].itype.longName + " to trader.  He shrugs and says, \"<i>Well ok, it isn't worth anything, but I'll take it.</i>\"");
 				else outputText("You hand over " + player.itemSlots[slot].itype.longName + " to trader.  He nervously pulls out " + num2Text(itemValue) + " gems and drops them into your waiting hand.");
 				player.itemSlots[slot].removeOneItem();
-				if (itemValue != 0 && player.hasPerk(PerkLib.Greedy) || player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your item for double the amount.");
-				if (itemValue != 0 && player.hasPerk(PerkLib.Greedy) && player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your item for four times the amount.");
+				if (itemValue != 0 && player.hasPerk(PerkLib.Greedy) || player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your item for more than normal.");
 				player.gems += itemValue;
 			}
 			statScreenRefresh();
@@ -312,11 +315,9 @@ public class Ingnam extends BaseContent
 					player.itemSlots[slot].quantity = 0;
 				}
 			}
-			if (player.hasPerk(PerkLib.Greedy)) itemValue *= 2;
-			if (player.hasPerk(PerkLib.TravelingMerchantOutfit)) itemValue *= 2;
+			if (player.hasPerk(PerkLib.Greedy) || player.hasPerk(PerkLib.TravelingMerchantOutfit)) itemValue *= 2;
 			outputText("You lay out all the items you're carrying on the counter in front of trader.  He examines them all and nods.  Nervously, he pulls out " + num2Text(itemValue) + " gems and drops them into your waiting hand.");
-			if (player.hasPerk(PerkLib.Greedy) || player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your item for double the amount.");
-			if (player.hasPerk(PerkLib.Greedy) && player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your item for four times the amount.");
+			if (player.hasPerk(PerkLib.Greedy) || player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your item for more than normal.");
 			player.gems += itemValue;
 			statScreenRefresh();
 			doNext(sellAtTradingPost);

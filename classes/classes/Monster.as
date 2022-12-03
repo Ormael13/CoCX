@@ -1854,6 +1854,7 @@ import flash.utils.getQualifiedClassName;
 				StatusEffects.GrabBear,
 				StatusEffects.CancerGrab,
 				StatusEffects.MysticWeb,
+				StatusEffects.Entangled,
 			]
 			for each (var effect:StatusEffectType in effects) if (hasStatusEffect(effect)) return true;
 			return false;
@@ -1956,6 +1957,10 @@ import flash.utils.getQualifiedClassName;
 		protected function handleConstricted():Boolean
 		{
 			interruptAbility();
+			if (hasStatusEffect(StatusEffects.Entangled)) {
+				if (player.hasPerk(PerkLib.ControlFreak)) ControlFreakStacking();
+				return false;
+			}
 			if (hasStatusEffect(StatusEffects.MysticWeb)) {
 				EngineCore.outputText("[Themonster] struggle to get free from your web!");
 				if (statusEffectv1(StatusEffects.MysticWeb) <= 0) {
