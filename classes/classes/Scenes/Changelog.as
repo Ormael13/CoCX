@@ -410,8 +410,8 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Equilibrium. Gained by spending 1 super perk point and having Hidden Job: Grey Sage super perk. Effects: Allow to reach OverMax Mana equal to 120% of current max mana. You can cast now any spell you learned even if you missing additional materials or not meet requirements. Slight increase cap on stored bones for necromancers.\n");
 			//outputText("-New tier 6 misc lvl-up perk: Verdant Leech. Req. Green magic perk, Intelligence 140+, Libido 140+, Corruption 50+. Effect: .\n");
 			//outputText("-New tier 9 misc lvl-up perk: Arcane Venom. Req. Verdant Leech perk, Intelligence 200+, Libido 200+, Corruption 50+. Effect: .\n");
-			outputText("-New consumable (by Ormael): Pack of demon bones - sold by Dinah. Costing 20 gems and adds 1 to 10 demon bones for necormancer use (going over limit of demon bones storage will cause loosing demon bones that went over the limit).\n");
-			outputText("-\n");
+			outputText("-New consumable (by Ormael): Pack of demon bones - sold by Dinah. Costing 20 gems and adds 1 to 10 demon bones for necromancer use (going over limit of demon bones storage will cause loosing demon bones that went over the limit).\n");
+			outputText("-Metamorph: Add horn count/length for dragon and demon horns, Add Non-fuckable nipples option, Kamaitachi (weasel) skin pattern, tail; Fey Dragon Arms, lower body, wings, tail; Ghost skin, skin pattern, hair, horns; Panda, Fire snail face; Antler horns (EragonX)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

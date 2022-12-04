@@ -447,7 +447,7 @@ package classes.GeneticMemories {
 			cost: 100,
 			title: "Ghost",
 			transformation: function(): Transformation {
-				return CoC.instance.transformations.FaceFireSnail;
+				return CoC.instance.transformations.FaceGhost;
 			}
 		});
 
