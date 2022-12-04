@@ -3073,6 +3073,18 @@ import flash.utils.getQualifiedClassName;
 					removeStatusEffect(StatusEffects.Timer);
 				addStatusValue(StatusEffects.Timer,1,-1);
 			}
+			if(hasStatusEffect(StatusEffects.Briarthorn)) {
+				var store16:Number = (player.str + player.spe) * 2;
+				if (game.player.hasPerk(PerkLib.ThirstForBlood)) store16 *= 1.5;
+				if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store16 *= 1.2;
+				store16 += maxHP()*0.05;
+				store16 = Math.round(store16);
+				store16 = SceneLib.combat.doDamage(store16);
+				if(plural) outputText("[Themonster] bleed profusely from the deep wounds your vine thorns left behind. ");
+				else outputText("[Themonster] bleeds profusely from the deep wounds your vine thorns left behind. ");
+				SceneLib.combat.CommasForDigits(store16);
+				outputText("[pg]");
+			}
 			if(hasStatusEffect(StatusEffects.LustStick)) {
 				//LoT Effect Messages:
 				switch(statusEffectv1(StatusEffects.LustStick)) {
@@ -3649,4 +3661,4 @@ import flash.utils.getQualifiedClassName;
 			}
 		}
 	}
-}
+}

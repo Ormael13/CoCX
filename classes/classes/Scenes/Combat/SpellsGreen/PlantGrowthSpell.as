@@ -19,7 +19,7 @@ public class PlantGrowthSpell extends AbstractGreenSpell {
 	}
 	
 	override public function describeEffectVs(target:Monster):String {
-		return "~" + calcDamage(target, false, false) + " lust damage"
+		return "~" + calcDamage(target, false, false) + " lust posion damage"
 	}
 	
 	override public function calcCooldown():int {
@@ -78,6 +78,10 @@ public class PlantGrowthSpell extends AbstractGreenSpell {
 				monster.teased(lustDmg, false);
 				if (crit) outputText(" <b>Critical!</b>");
 				combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
+				if (player.hasPerk(PerkLib.VerdantLeech)) {
+					monster.lustVuln += 0.50;
+					HPChange(Math.round(player.maxHP() * 0.05), false);
+				}
 			}
 			else {
 				outputText("You focus your energy on the world around you causing vegetation to surge out of the ground at an accelerated rate into a verdant patch of vines and other tentacle greenery.\n");

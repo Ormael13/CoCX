@@ -521,8 +521,11 @@ public class PerkLib
 				"Your Elven spell effects are twice as strong and last twice as long.",
 				"You've chosen the 'Green magic' perk. Your Elven spell effects are twice as strong and last twice as long.");
 		public static const VerdantLeech:PerkType = mk("Verdant Leech", "Verdant Leech",
+				"Your Elven spells and black magic raises your opponent's weakness to lust and heals you for 5% of your health each time they inflict poison.",
+				"You've chosen the 'Verdant Leech' perk. Your Elven spells and black magic raises your opponent's weakness to lust and heals you for 5% of your health each time they inflict poison.");
+		public static const ArcaneVenom:PerkType = mk("Arcane Venom", "Arcane Venom",
 				".",
-				"You've chosen the 'Verdant Leech' perk. ");
+				"You've chosen the 'Arcane Venom' perk, .");
 
 		public static const ElementsOfMarethBasic:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
@@ -530,6 +533,18 @@ public class PerkLib
 		/*public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk, .");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk, .");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk, .");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk, .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, .");
@@ -6966,12 +6981,12 @@ public class PerkLib
             MotivationSu.requireLevel(36)
                     .requirePerk(MotivationEx);//.requirePerk(AdvancedLeadership)
             AdvancedAllRounderEducation.requireLevel(36)
-                    .requirePerk(IntermediateAllRounderEducation);/*
+                    .requirePerk(IntermediateAllRounderEducation);
 			VerdantLeech.requireLevel(36)
 					.requirePerk(GreenMagic)
 					.requireInt(140)
 					.requireLib(140)
-					.requireCor(50);*/
+					.requireCor(50);
             //Tier 7
             ChimericalBodyAdvancedStage.requirePerk(ChimericalBodySemiAdvancedStage)
                     .requireLevel(42)
@@ -7055,7 +7070,7 @@ public class PerkLib
 					}, "10+ pets/minions");
 			LimitBreakerFlesh1stStage.requireLevel(54)
 					.requirePerk(LimitBreakerHeart1stStage);/*
-			VerdantLeech.requireLevel(54)
+			ArcaneVenom.requireLevel(54)
 					.requirePerk(VerdantLeech)
 					.requireInt(200)
 					.requireLib(200)

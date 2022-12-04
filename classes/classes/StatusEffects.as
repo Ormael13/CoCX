@@ -883,6 +883,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const Boneshatter:StatusEffectType           	   = mkCombat("Boneshatter");
 		public static const BoneArmor:StatusEffectType           	   = mkCombat("Bone armor");
 		public static const Bound:StatusEffectType                     = mkCombat("Bound");
+		public static const Briarthorn:StatusEffectType       	       = mkCombat("Briarthorn");
 		public static const BurnDoT:StatusEffectType                   = mkCombat("Burn DoT");
 		public static const BurnDoT2:StatusEffectType                  = mkCombat("Burn DoT 2");
 		public static const CancerMonsterGrab:StatusEffectType         = mkCombat("Cancer Grappled");

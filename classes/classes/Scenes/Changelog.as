@@ -287,30 +287,30 @@ public class Changelog extends BaseContent
 			outputText("-New tier 3 misc lvl-up perk: Green magic. Req. Natural Spellcasting perk, Intelligence 80+, Libido 80+, Corruption 50+. Effect: Your Elven spell effects are twice as strong and last twice as long.\n");
 			outputText("-New Green Spell: Entagle. Learned from lession with Lutien - wood elf village mage teacher when having 100+ int OR from White Book when having Hidden Job: Grey Sage. It have 6 turns cooldown. Would turn present plants into vines that would try to grapple enemy for up to 6 turns. Each turn enemy is entangled it will recieve lust damage.\n");
 			outputText("-New event perk: Equilibrium. Gained by spending 1 super perk point and having Hidden Job: Grey Sage super perk. Effects: Allow to reach OverMax Mana equal to 120% of current max mana. You can cast now any spell you learned even if you missing additional materials or not meet requirements. Slight increase cap on stored bones for necromancers.\n");
-			//outputText("-New tier 6 misc lvl-up perk: Verdant Leech. Req. Green magic perk, Intelligence 140+, Libido 140+, Corruption 50+. Effect: .\n");
+			outputText("-New tier 6 misc lvl-up perk: Verdant Leech. Req. Green magic perk, Intelligence 140+, Libido 140+, Corruption 50+. Effect: Your Elven spells and black magic raises your opponent's weakness to lust and heals you for 5% of your health each time they inflict poison.\n");
 			//outputText("-New tier 9 misc lvl-up perk: Arcane Venom. Req. Verdant Leech perk, Intelligence 200+, Libido 200+, Corruption 50+. Effect: .\n");
 			outputText("-New consumable (by Ormael): Pack of demon bones - sold by Dinah. Costing 20 gems and adds 1 to 10 demon bones for necromancer use (going over limit of demon bones storage will cause loosing demon bones that went over the limit).\n");
 			outputText("-Metamorph: Add horn count/length for dragon and demon horns, Add Non-fuckable nipples option, Kamaitachi (weasel) skin pattern, tail; Fey Dragon Arms, lower body, wings, tail; Ghost skin, skin pattern, hair, horns; Panda, Fire snail face; Antler horns (EragonX)\n");
 			outputText("-Divine armament affects partial staffs too without dismished effect.\n");
 			outputText("-New consumable (by Liadri): Madmen knowledge - drops from mindbreaker & wonderland foes. Costing 100 gems. Greatly raises intelligence (as training alchemical and knowledge) but raises corruption and inflicts wisdom drain. Has a 5% chance to cause the pc to gain the insanity perk on use.\n");
+			outputText("-New Green Spell: Briarthorn. Learned from lession with Lutien - wood elf village mage teacher when having 100+ int OR from White Book when having Hidden Job: Grey Sage. It have 3 turns cooldown. While entangling, vines grows sharp thorns that rend the opponent's flesh and deliver a deadly poison that rend vitality for 6 rounds. This spell also inflict bleed and poison damage.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");// (EragonX)
+			outputText("-\n");// (Svalkash)
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
 			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
 			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-\n");
-			outputText("-\n");// (EragonX)
-			outputText("-\n");// (Svalkash)
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			//outputText("-(Svalkash)\n");
 			//outputText("-(Svalkash)\n");
