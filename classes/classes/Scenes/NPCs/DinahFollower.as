@@ -132,6 +132,15 @@ public class DinahFollower extends NPCAwareContent// implements TimeAwareInterfa
 			addButton(14, "Back", DinahMainMenu);
 		}
 		
+		public function DinahWonSupriseAttack():void {
+			clearOutput();
+			cleanupAfterCombat(DinahMainMenu);
+		}
+		public function DinahLostSupriseAttack():void {
+			clearOutput();
+			cleanupAfterCombat(DinahMainMenu);
+		}
+		
 		public function DinahSparring():void {
 			clearOutput();
 			outputText("\"<i>Oh, you sensed my slowly building boredom? Not gonna say no to some entertaiment!</i>\" she makes few strenches and assumes a combat pose. \"<i>Let's <b>play</b>, [name]!</i>\".");

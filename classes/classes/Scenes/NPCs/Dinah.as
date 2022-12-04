@@ -346,10 +346,7 @@ import classes.internals.*;
 				player.removeStatusEffect(StatusEffects.CampSparingDinah);
 				SceneLib.dinahScene.DinahLostSparring();
 			}
-			else {
-				cleanupAfterCombat();
-				SceneLib.dinahScene.DinahMainMenu();
-			}
+			else SceneLib.dinahScene.DinahLostSupriseAttack();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -358,10 +355,7 @@ import classes.internals.*;
 				player.removeStatusEffect(StatusEffects.CampSparingDinah);
 				SceneLib.dinahScene.DinahWonSparring();
 			}
-			else {
-				cleanupAfterCombat();
-				SceneLib.dinahScene.DinahMainMenu();
-			}
+			else SceneLib.dinahScene.DinahWonSupriseAttack();
 		}
 		
 		public function Dinah() 
@@ -510,17 +504,20 @@ import classes.internals.*;
 			if (flags[kFLAGS.DINAH_LVL_UP] >= 1 && flags[kFLAGS.DINAH_LVL_UP] < 4) {
 				this.lustVuln = .9;
 				this.createStatusEffect(StatusEffects.EvasiveTeleport, 40, 0, 0, 0);
-				this.drop = new WeightedDrop(consumables.BAGOCA1, 1);
+				this.drop = new WeightedDrop().add(consumables.MADMENK, 1)
+					.add(consumables.BAGOCA1, 5);
 			}
 			if (flags[kFLAGS.DINAH_LVL_UP] >= 4 && flags[kFLAGS.DINAH_LVL_UP] < 7) {
 				this.lustVuln = .8;
 				this.createStatusEffect(StatusEffects.EvasiveTeleport, 70, 0, 0, 0);
-				this.drop = new WeightedDrop(consumables.BAGOCA2, 1);
+				this.drop = new WeightedDrop().add(consumables.MADMENK, 1)
+					.add(consumables.BAGOCA2, 5);
 			}
 			if (flags[kFLAGS.DINAH_LVL_UP] >= 7 && flags[kFLAGS.DINAH_LVL_UP] < 10) {
 				this.lustVuln = .7;
 				this.createStatusEffect(StatusEffects.EvasiveTeleport, 100, 0, 0, 0);
-				this.drop = new WeightedDrop(consumables.BAGOCA3, 1);
+				this.drop = new WeightedDrop().add(consumables.MADMENK, 1)
+					.add(consumables.BAGOCA3, 5);
 			}
 			if (flags[kFLAGS.DINAH_LVL_UP] >= 10 && flags[kFLAGS.DINAH_LVL_UP] < 12) {
 				this.lustVuln = .6;

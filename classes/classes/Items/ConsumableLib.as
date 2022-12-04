@@ -225,7 +225,7 @@ public final class ConsumableLib extends Utils
 		public const L_DRAFT:SimpleConsumable = mk("L.Draft", "LustDraft", "a vial of roiling bubble-gum pink fluid", 20, "This vial of bright pink fluid bubbles constantly inside the glass, as if eager to escape.  It smells very sweet, and has \"Lust\" inscribed on the side of the vial.", curry(m.lustDraft, false));
 		public const LACTAID:Consumable       = new Lactaid();
 		public const LUSTSTK:LustStick        = new LustStick();
-	//	public const MADMENK:SimpleConsumable = mk("MadmenK", "MadmenKnowledge", "a Madmen knowledge", 100, "A bottle filled with the raw knowledge of an insane person. Every now and then insane people speak a truth unavailable to sane folks, having glimpsed into something only they can see. Knowledge is power but power is corrupt and can, with time, break even the most steeled of minds.", m.madmenKnowledge);
+		public const MADMENK:SimpleConsumable = mk("MadmenK", "MadmenKnowledge", "a Madmen knowledge", 100, "A bottle filled with the raw knowledge of an insane person. Every now and then insane people speak a truth unavailable to sane folks, having glimpsed into something only they can see. Knowledge is power but power is corrupt and can, with time, break even the most steeled of minds.", m.madmenKnowledge);
 		public const MANUP_B:SimpleConsumable = mk("ManUp B", "ManUp B.", "a ManUp beer", 6, "A beverage made for people who believe brawn is better than brains.", m.manUpBeer);
 		public const MAPILL_:SimpleConsumable = mk("MAPill", "Medium Angry Pill", "a medium angry pill", 50, "A medium pill that's guaranteed to makes you a bit more angry.", m.mediumangrypill);
 		public const MILKPTN:Consumable       = new MilkPotion();
