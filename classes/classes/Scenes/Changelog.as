@@ -375,7 +375,7 @@ public class Changelog extends BaseContent
 			outputText("-Power Attack / Shoot damage is now boosted by bonus to dmg from masteries.\n");
 			outputText("-USS check now autoforces supercharged raiju. Removes USS from some enemies. FapArena calculation small improvement. Fixed SlimeCraving requirements. (Svalkash)\n");
 			outputText("-Benoit shop cleaned up, increased the chance of rare items. BFGauntlets now have the Large tag. Mutations DB now prints all mutation tiers. Vag of holding is removed. Instead, you get a bonus to capacity(capacities) when you have goo lower body or kitsune tail. (Svalkash)\n");
-			outputText("-A bunch of fixes: monke typo, ted-spooder confusion, LGSFPill shop desc, sensitivity racial buffs, I.Draft not unlocking cock count metamorphs, Raphael broken dates (Svalkash)\n");
+			outputText("-A bunch of fixes: monke typo, ted-spooder confusion, LGSFPill shop desc, sensitivity racial buffs, I.Draft not unlocking cock count metamorphs, Raphael broken dates, Fixed darkness spells conting as ice for stacking perks (Svalkash)\n");
 			outputText("-Tainted I.Draft now grows demon dicks. You can now use multiple doses of Reducto. Reducto can be applied to butt and hips. Cocks are reduced by 1/4 or 1/3 again. (Svalkash)\n");
 			outputText("-Brutal Blows perk armor reduction is now: 10% of enemy current armor value + 5\n");
 			outputText("-Low tier magic immunity - some of the enemies now would have immunity to tier 1 spells. They still can be hurt by tier 2 or 3 spells thou or magical specials.\n");
@@ -410,7 +410,7 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Equilibrium. Gained by spending 1 super perk point and having Hidden Job: Grey Sage super perk. Effects: Allow to reach OverMax Mana equal to 120% of current max mana. You can cast now any spell you learned even if you missing additional materials or not meet requirements. Slight increase cap on stored bones for necromancers.\n");
 			//outputText("-New tier 6 misc lvl-up perk: Verdant Leech. Req. Green magic perk, Intelligence 140+, Libido 140+, Corruption 50+. Effect: .\n");
 			//outputText("-New tier 9 misc lvl-up perk: Arcane Venom. Req. Verdant Leech perk, Intelligence 200+, Libido 200+, Corruption 50+. Effect: .\n");
-			outputText("-\n");
+			outputText("-New consumable (by Ormael): Pack of demon bones - sold by Dinah. Costing 20 gems and adds 1 to 10 demon bones for necormancer use (going over limit of demon bones storage will cause loosing demon bones that went over the limit).\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -427,7 +427,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-Fixed Bugs: Akbal been weak to fire not ice, Insightful Resources I-VI perks bonus to SF been lower than 5 per wis point, recovery of fatigue when waiting been lower than when attacking, Dao of Elements not giving additional % resistances after first 10%, missing bonus to acid elemental arrows, Holy Bands Managment locked behind having 3rd one band, ");
 			outputText("Centaur race bonuses error fixed to orginal values, Aether Twins following PC throu ascension in case they been equipped, Lusty Maiden Armor treated as already legendary item, wrong labeled gorgon eyes on race page, Jiaghsi curing leaving leftover effects of Cursed Tag options, tier 3 spells have incrrectly calculated cooldowns, Wood Elf archer training bugs, ");
-			outputText("Fera Boon - Wide Open perk not been permable on ascension, Bone Soul perk not increasing cap on stored demon bones\n");
+			outputText("Fera Boon - Wide Open perk not been permable on ascension, Bone Soul perk not increasing cap on stored demon bones, Traveling Merchant Outfit & Greedy effects allowing to get more than 100% of item worth during selling it\n");
 			//0.8s5.178
 			outputText("-Fixed bicorn horn score (aimozg)\n");
 			outputText("-Kirin, Fey-Draconic leg/armtype (respectively) added to DraconicBones Valid racetypes. -Fixed HxD merchants checking wrong currency for purchases (Jtecx PR#289)\n");
@@ -1881,7 +1881,7 @@ public class Changelog extends BaseContent
 			outputText("-New vehicle (by Liadri): Goblin Mech Prime - found in Lethice’s stronghold, Magpie Hall. Req. to have built Workshop to bring it back to camp. Cost 2000 gems. Would increase Armor and Magic Resistance by 20 and increase firearms power by 50%. Can be upgraded by using blueprint and materials. All upgrades from Alpha model could be carried over to this one.\n");
 			outputText("-New necklace (by Liadri): Yin Yang Amulet - obtained by having weedings with Chi Chi. Cost 800 gems. +15% to soulskills power.\n");
 			outputText("-New consumable (by Liadri): Alchemical Thunder - made by Rathazul by using 2 Raiju Plasma and 1 Lust Draft. Costing 50 gems and adds +30% weapon total damage as lightning for the battle (or one hour).\n");
-			outputText("-New consumable (by Ormael): Pack of nails - dropped ocassionaly by any goblin enemy. Costing 20 gems and adds 10 to 30 nails to storage (going over limit of nails storage will cause loosing nails that wnet over the limit).\n");
+			outputText("-New consumable (by Ormael): Pack of nails - dropped ocassionaly by any goblin enemy. Costing 20 gems and adds 10 to 30 nails to storage (going over limit of nails storage will cause loosing nails that went over the limit).\n");
 			outputText("-New usable item: Raiju Plasma. Costing 100 gems and it's obtainable after sex with Electra. Usefull in making Alchemical Thunder.\n");
 			outputText("-New melee weapon (by Ormael): Lust Rapier - buyable at Sean shop. Cost 640 gems. Base atk is 8. Each attack that would deal damage to enemy would apply a small dose of aphrodisiac similary to lust dagger.\n");
 			outputText("-New melee weapon (by Ormael): Lusty Claws - buyable at Sean shop. Cost 200 gems. Base atk is 0. Each attack that would deal damage to enemy would apply a small dose of aphrodisiac similary to lust dagger. It also compatibile to be used with feral combat.\n");
