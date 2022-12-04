@@ -469,9 +469,9 @@ public class WingsTransformations extends MutationsHelper {
 				}
 
 				player.wings.type = Wings.FEATHERED_AVIAN;
-				Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.FEATHERED_AVIAN));
 
 				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.FEATHERED_AVIAN));
 			},
 			// is present
 			function (): Boolean {
@@ -488,8 +488,8 @@ public class WingsTransformations extends MutationsHelper {
 						"They glow faintly and almost appear as though they’re moving with the wind. They don’t even hold any weight. <b>You can get used to floating like this with your ethereal wings.</b>";
 
 				player.wings.type = Wings.ETHEREAL;
-				Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.ETHEREAL));
 				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.ETHEREAL));
 			},
 			// is present
 			function (): Boolean {
@@ -523,8 +523,8 @@ public class WingsTransformations extends MutationsHelper {
 						"It would seem you have gained the infamous wind control power of the kamaitachi achieving mastery over it. Well this is going to be fun to play with. <b>You now have the ability to control winds as the Kamaitachi do using your windy aura!</b>";
 
 				player.wings.type = Wings.WINDY_AURA;
-				Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.WINDY_AURA));
 				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.WINDY_AURA));
 			},
 			// is present
 			function (): Boolean {
@@ -560,8 +560,8 @@ public class WingsTransformations extends MutationsHelper {
 						"It seems to resemble more of a giant aquatic flipper than wings. The insides are not only colorful but also display several minute light specks. Not unlike those of a deep-sea beast. <b>You can now fly and swim at great speed with your brand new sea dragon wings!</b>";
 
 				player.wings.type = Wings.SEA_DRAGON;
-				Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.SEA_DRAGON));
 				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.SEA_DRAGON));
 			},
 			// is present
 			function (): Boolean {
@@ -585,8 +585,8 @@ public class WingsTransformations extends MutationsHelper {
 				}
 
 				player.wings.type = Wings.DEVILFEATHER;
-				Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.DEVILFEATHER));
 				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.DEVILFEATHER));
 			},
 			// is present
 			function (): Boolean {
@@ -599,15 +599,14 @@ public class WingsTransformations extends MutationsHelper {
 			function (doOutput: Boolean): void {
 				var desc: String = "";
 				if ((player.wings.type == Wings.NONE)) {
-					desc += "You keel in pain as you feel something penetrating your back. No, nothing is stabbing your back. More so, something is about to burst from within you. The trauma subsides as large bones emerge. A thin yet sturdy layer of skin covers your wings are covered as they fall into place behind you.\n\nAs you examine the fleshy appendage, you realize it's webbed. "+
-							"It seems to resemble more of a giant aquatic flipper than wings. The insides are not only colorful but also display several minute light specks. Not unlike those of a deep-sea beast. <b>You can now fly and swim at great speed with your brand new sea dragon wings!</b>";
+					desc += "You feel a sense of euphoria and start giggling as you feel a slight stabbing pain on your back. You feel light as a feather as you flap your new buterfly-like wings which have a delicate, almost fairy like appearance and you flap them in awe as they not only feel strong but also agile. You now have a set of <b>fey dragon wings.</b>";
 				}
-				if ((player.wings.type != Wings.NONE)) {
-					desc += "You ain't even noticing as something messed up happen in your wings. They shrivel and change taking on a delicate almost fairy like appearance and you flap them in awe as they not only feel strong but also agile. You now have a set of <b>fey dragon wings.</b>";
+				else {
+					desc += "You hardly even notice as something happens in your wings. They shrivel and change taking on a delicate, almost fairy like appearance and you flap them in awe as they not only feel strong but also agile. You now have a set of <b>fey dragon wings.</b>";
 				}
 				player.wings.type = Wings.FEY_DRAGON;
-				Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.FEY_DRAGON));
 				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.FEY_DRAGON));
 			},
 			// is present
 			function (): Boolean {
@@ -620,15 +619,14 @@ public class WingsTransformations extends MutationsHelper {
 			function (doOutput: Boolean): void {
 				var desc: String = "";
 				if ((player.wings.type == Wings.NONE)) {
-					desc += "You keel in pain as you feel something penetrating your back. No, nothing is stabbing your back. More so, something is about to burst from within you. The trauma subsides as large bones emerge. A thin yet sturdy layer of skin covers your wings are covered as they fall into place behind you.\n\nAs you examine the fleshy appendage, you realize it's covered in bug like cells. "+
-							"It seems your wings are a mix between butterfly and dragon. The insides display several small dots and is segmented like that of a bug. <b>You can now fly at great speed with your brand new fairy wings!</b>";
+					desc += "You feel a sense of euphoria and start giggling as you feel a slight stabbing pain on your back. You feel light as a feather as you flap your new buterfly-like wings which have a delicate, almost fairy like appearance and you flap them in awe as they not only feel strong but also agile. You now have a set of <b>fairy wings.</b>";
 				}
-				if ((player.wings.type != Wings.NONE)) {
+				else{
 					desc += "You ain't even noticing as something messed up happen in your wings. They shrivel and change taking on a delicate almost fairy like appearance and you flap them in awe as they not only feel strong but also agile. You now have a set of <b>fairy wings.</b>";
 				}
 				player.wings.type = Wings.FAIRY;
-				Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.FAIRY));
 				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.FAIRY));
 			},
 			// is present
 			function (): Boolean {
@@ -644,12 +642,12 @@ public class WingsTransformations extends MutationsHelper {
 					desc += "You keel in pain as you feel something penetrating your back. No, nothing is stabbing your back. More so, something is about to burst from within you. The trauma subsides as large bones emerge. A thin yet sturdy layer of skin covers your wings are covered as they fall into place behind you.\n\nAs you examine the fleshy appendage, you realize it's covered in bug like cells. "+
 							"It seems your wings are a mix between butterfly and dragon. The insides display several small dots and is segmented like that of a bug yet the shape is definitively draconic. Just like those of a jabberwock actualy. <b>You can now fly at great speed with your brand new jabberwocky wings!</b>";
 				}
-				if ((player.wings.type != Wings.NONE)) {
+				else {
 					desc += "You ain't even noticing as something messed up happen in your wings. They shrivel and change taking on a delicate almost fairy like appearance and you flap them in awe as they not only feel strong but also agile. You now have a set of <b>jabberwocky wings.</b>";
 				}
 				player.wings.type = Wings.JABBERWOCKY;
-				Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.JABBERWOCKY));
 				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.JABBERWOCKY));
 			},
 			// is present
 			function (): Boolean {
@@ -669,8 +667,8 @@ public class WingsTransformations extends MutationsHelper {
 						"It feels unmistakably dick-like - bulging, tender flesh under the fibrous skin, with quite a bit of flexible, able to bend all along its length and dart its wet, distended head in any direction you wish. <b>You now have cockvine wings.</b>";
 
 				player.wings.type = Wings.PLANT;
-				Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.PLANT));
 				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.PLANT));
 			},
 			// is present
 			function (): Boolean {

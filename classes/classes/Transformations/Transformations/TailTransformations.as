@@ -459,6 +459,29 @@ public class TailTransformations extends MutationsHelper {
 			}
 	);
 
+	public const TailFeyDraconic: Transformation = new SimpleTransformation("Fey Draconic Tail",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				TransformationUtils.removeLowerBodyIfIncompatible(player, doOutput);
+
+				if (player.tailType == Tail.NONE) desc += "A sudden dull, throbbing pain in your [butt] forces your hands to it; you can feel an ominous lump over your tail bone, swelling bigger and bigger with every heartbeat. All of a sudden, it seems to explode, jutting out and around until it hovers near your ankles, the skin under your flesh hard and scaly. <b>You now have a fey dragon tail flicking at your back, flexible as a whip.</b>";
+				else desc += "An icy sensation fills your behind as your tail suddenly goes curiously numb. Twisting your head around, you watch as it melts and transforms into a reptilian appendage, long and flexible. <b>You now have a fey dragon tail.</b>";
+				player.tailVenom = 0;
+				player.tailRecharge = 0;
+				player.tailType = Tail.FEY_DRACONIC;
+				player.tailCount = 1;
+
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FEY_DRACONIC));
+			},
+			// is present
+			function (): Boolean {
+				return player.tailType === Tail.FEY_DRACONIC;
+			}
+	);
+
 	public const TailOrca: Transformation = new SimpleTransformation("Orca Tail",
 			// apply effect
 			function (doOutput: Boolean): void {
@@ -934,6 +957,7 @@ public class TailTransformations extends MutationsHelper {
 				player.tailCount = 1;
 
 				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.WEASEL));
 			},
 			// is present
 			function (): Boolean {

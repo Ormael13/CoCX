@@ -418,6 +418,39 @@ package classes.GeneticMemories {
 			}
 		});
 
+		public static const PANDA:int = _partid++;
+		EnumValue.add(Memories, PANDA, "PANDA", {
+			id: "Panda Face",
+			name: "Panda",
+			cost: 100,
+			title: "Panda",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.FacePanda;
+			}
+		});
+
+		public static const FIRE_SNAIL:int = _partid++;
+		EnumValue.add(Memories, FIRE_SNAIL, "FIRE_SNAIL", {
+			id: "Fire Snail Face",
+			name: "Fire Snail",
+			cost: 100,
+			title: "Fire Snail",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.FaceFireSnail;
+			}
+		});
+
+		public static const GHOST:int = _partid++;
+		EnumValue.add(Memories, GHOST, "GHOST", {
+			id: "Ghost Face",
+			name: "Ghost",
+			cost: 100,
+			title: "Ghost",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.FaceFireSnail;
+			}
+		});
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

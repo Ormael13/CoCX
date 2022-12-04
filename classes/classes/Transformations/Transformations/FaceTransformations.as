@@ -848,6 +848,7 @@ public class FaceTransformations extends MutationsHelper {
 
 				if (doOutput) outputText(desc);
 				player.faceType = Face.PANDA;
+				Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.PANDA));
 			},
 			// is present
 			function (): Boolean {
@@ -864,6 +865,7 @@ public class FaceTransformations extends MutationsHelper {
 
 				if (doOutput) outputText(desc);
 				player.faceType = Face.FIRE_SNAIL;
+				Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.FIRE_SNAIL));
 			},
 			// is present
 			function (): Boolean {
@@ -880,6 +882,7 @@ public class FaceTransformations extends MutationsHelper {
 
 				if (doOutput) outputText(desc);
 				player.faceType = Face.GHOST;
+				Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.GHOST));
 			},
 			// is present
 			function (): Boolean {

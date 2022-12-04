@@ -481,8 +481,8 @@ public class EyesTransformations extends MutationsHelper {
 				desc += "Something weird happens with your eyes as they suddenly begin to burn and tickle. After a while it stops and as you go check them up in a water puddle the first thing you notice is that your two irises now burn like two incandescent embers, just like those of a fiery creature. <b>Your irises are now incandescent.</b>";
 
 				player.eyes.type = Eyes.FIRE_SNAIL;
-				Metamorph.unlockMetamorph(EyesMem.getMemory(EyesMem.FIRE_SNAIL));
 				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(EyesMem.getMemory(EyesMem.FIRE_SNAIL));
 			},
 			// is present
 			function (): Boolean {
@@ -500,8 +500,8 @@ public class EyesTransformations extends MutationsHelper {
 				desc += "You feel an icy chill run through your body as your divine nature reasserts itself over your body. You won't escape your destiny as the Fenrir so easily, it seems.\n\nYou cry out in pain as your eyes once more freeze over, eventually settling back into their proper form. <b>You now have glowing icy eyes.</b>";
 
 				player.eyes.type = Eyes.FENRIR;
-				Metamorph.unlockMetamorph(EyesMem.getMemory(EyesMem.FENRIR));
 				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(EyesMem.getMemory(EyesMem.FENRIR));
 			},
 			// is present
 			function (): Boolean {
@@ -517,8 +517,8 @@ public class EyesTransformations extends MutationsHelper {
 				desc += "";
 
 				player.eyes.type = Eyes.DEAD;
-				Metamorph.unlockMetamorph(EyesMem.getMemory(EyesMem.DEAD));
 				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(EyesMem.getMemory(EyesMem.DEAD));
 			},
 			// is present
 			function (): Boolean {
@@ -555,8 +555,8 @@ public class EyesTransformations extends MutationsHelper {
 				desc += "The mysterious energy coming from the statue continues adapting your body into a more fierce, strong shape. This time, it has affected you eyesight, as you suddenly notice how the long distances that you once had trouble seeing are clear as if you were in front of them, and that you can perceive even the minimal move even from several miles afar.\n\nChecking your changes on the river, you see clearly how your sclera has acquired a golden-orange coloration, as well as your outer iris, separated from the former by a thin circle of black. Both your pupil and your inner iris, which now has enlarged, are solid black. <b>Now you’ll have a blessed vision due those raptor, gryphon-like eyes.</b>";
 
 				player.eyes.type = Eyes.GRYPHON;
-				Metamorph.unlockMetamorph(EyesMem.getMemory(EyesMem.GRYPHON));
 				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(EyesMem.getMemory(EyesMem.GRYPHON));
 			},
 			// is present
 			function (): Boolean {
@@ -709,8 +709,8 @@ public class EyesTransformations extends MutationsHelper {
 				desc += "Your vision becomes blurry, making it hard to see. You blink repeatedly, trying to clear your eyes. As your vision returns to normal, you notice that your surroundings appear sharper than normal. The shadows are as clear as day, though everything is tinted with a faint ethereal glow. You look in a puddle to see that your eyes glow an eerie [eyecolor]. <b>You now have glowing ghost eyes.</b>";
 
 				player.eyes.type = Eyes.GHOST;
-				Metamorph.unlockMetamorph(EyesMem.getMemory(EyesMem.GHOST));
 				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(EyesMem.getMemory(EyesMem.GHOST));
 			},
 			// is present
 			function (): Boolean {
@@ -726,8 +726,8 @@ public class EyesTransformations extends MutationsHelper {
 				desc += "";
 
 				player.eyes.type = Eyes.FIENDISH;
-				Metamorph.unlockMetamorph(EyesMem.getMemory(EyesMem.FIENDISH));
 				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(EyesMem.getMemory(EyesMem.FIENDISH));
 			},
 			// is present
 			function (): Boolean {
@@ -743,8 +743,8 @@ public class EyesTransformations extends MutationsHelper {
 				desc += "";
 
 				player.eyes.type = Eyes.FERAL;
-				Metamorph.unlockMetamorph(EyesMem.getMemory(EyesMem.FERAL));
 				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(EyesMem.getMemory(EyesMem.FERAL));
 			},
 			// is present
 			function (): Boolean {

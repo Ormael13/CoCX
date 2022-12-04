@@ -152,6 +152,17 @@ package classes.GeneticMemories {
 			}
 		});
 
+		public static const UNFUCKNIPPLE:int = _partid++;
+		EnumValue.add(Memories, UNFUCKNIPPLE, "UNFUCKNIPPLE", {
+			id: "Unlocked Metamorph",
+			name: "Non-Fuckable Nips",
+			cost: 200,
+			title: "Non-Fuckable",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.NipplesUnfuck;
+			}
+		});
+
 		public static const BLACKNIPPLE:int = _partid++;
 		EnumValue.add(Memories, BLACKNIPPLE, "BLACKNIPPLE", {
 			id: "Black Nipples",
@@ -176,7 +187,7 @@ package classes.GeneticMemories {
 
 		public static const DEFAULTNIPPLE:int = _partid++;
 		EnumValue.add(Memories, DEFAULTNIPPLE, "DEFAULTNIPPLE", {
-			id: "Regular Nipples",
+			id: "Unlocked Metamorph",
 			name: "Regular Nipples",
 			cost: 200,
 			title: "Reg. Nipples",
