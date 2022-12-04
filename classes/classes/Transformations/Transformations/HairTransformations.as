@@ -285,7 +285,7 @@ public class HairTransformations extends MutationsHelper {
 
 				if (doOutput) outputText(desc);
 				player.hairType = Hair.GHOST;
-                //Metamorph.unlockMetamorph(HairMem.getMemory(HairMem.GHOST));
+                Metamorph.unlockMetamorph(HairMem.getMemory(HairMem.GHOST));
 			},
 			// is present
 			function (): Boolean {

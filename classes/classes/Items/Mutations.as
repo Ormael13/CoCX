@@ -9141,8 +9141,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Transparent skin
         if (player.hasPlainSkinOnly() && !player.isGhostSkin() && rand(3) == 0 && changes < changeLimit && type == 1) {
-            outputText("[pg]You feel lightheaded all of a sudden. You bring your hands up to clutch your head only to find the color slowly fading from your skin or rather it’s losing its opacity altogether. You examine your body and see that you’ve become almost entirely transparent, adding to your ethereal appearance. <b>You now have transparent skin.</b>");
-            player.skin.setBaseOnly({type: Skin.TRANSPARENT, adj: "transparent"});
+            transformations.SkinTransparent.applyEffect();
             changes++;
         }
         //Skin pattern - black or white veins pattern - adv ghost tf

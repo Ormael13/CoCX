@@ -334,6 +334,7 @@ public class HornsTransformations extends MutationsHelper {
 
 				player.horns.type = Horns.ANTLERS;
 				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(HornsMem.getMemory(HornsMem.ANTLER));
 			},
 			// is present
 			function (): Boolean {
@@ -371,6 +372,7 @@ public class HornsTransformations extends MutationsHelper {
 				player.horns.count = 2;
 				player.horns.type = Horns.GHOSTLY_WISPS;
 				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(HornsMem.getMemory(HornsMem.GHOSTLY_WISP));
 			},
 			// is present
 			function (): Boolean {

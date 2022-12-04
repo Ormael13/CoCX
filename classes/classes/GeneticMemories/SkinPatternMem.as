@@ -165,6 +165,28 @@ package classes.GeneticMemories {
 		  }
 		});
 
+		public static const SCAR_WINDSWEPT:int = _partid++;
+		EnumValue.add(Memories, SCAR_WINDSWEPT, "SCAR_WINDSWEPT", {
+		  id: "Windswept Scar",
+		  name: "Windswept Scar",
+		  cost: 100,
+		  title: "Kamaitachi",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.SkinPatternScarWindswept
+		  }
+		});
+
+		public static const BLACK_WHITE_VEINS:int = _partid++;
+		EnumValue.add(Memories, BLACK_WHITE_VEINS, "BLACK_WHITE_VEINS", {
+		  id: "Black & White Veins",
+		  name: "Black & White Veins",
+		  cost: 100,
+		  title: "Black & White Veins",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.SkinPatternWhiteBlackVeins
+		  }
+		});
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

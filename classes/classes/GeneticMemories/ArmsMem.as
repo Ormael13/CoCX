@@ -184,6 +184,17 @@ import classes.CoC;
             }
         });
 
+        public static const FEY_DRACONIC:int = _partid++;
+        EnumValue.add(Memories, FEY_DRACONIC, "FEY_DRACONIC", {
+            id: "Fey Draconic Arms",
+            name: "Fey Draconic Arms",
+            cost: 100,
+            title: "Fey Draconic",
+            transformation: function(): Transformation {
+                return CoC.instance.transformations.ArmsFeyDraconic;
+            }
+        });
+
         public static const ELF:int = _partid++;
         EnumValue.add(Memories, ELF, "ELF", {
             id: "Elf Arms",
