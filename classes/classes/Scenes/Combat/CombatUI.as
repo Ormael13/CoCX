@@ -414,9 +414,9 @@ public class CombatUI extends BaseCombatContent {
 			addButton(3, "Intensify", combat.SingIntensify).hint("Increase the strength of your song!");
 			addButton(4, "Wait", combat.wait);
 			if (spellBookButtons.length > 0) btnMagic.show("Spells", submenuSpells, "Opens your spells menu, where you can cast any spells you have learned.", "Spells");
-			if (player.hasPerk(PerkLib.PrestigeJobBard)){
+			/*if (player.hasPerk(PerkLib.PrestigeJobBard)) {
 				btnMagic.disable("Spellcasting while singing would be impossible for anyone short of a skilled bard.\n\n");
-			} else if (player.hasStatusEffect(StatusEffects.OniRampage)) {
+			} else */if (player.hasStatusEffect(StatusEffects.OniRampage)) {
 				btnMagic.disable("You are too angry to think straight. Smash your puny opponents first and think later.\n\n");
 			} else if (!combat.canUseMagic()) {
 				btnMagic.disable();

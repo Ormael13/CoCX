@@ -4493,10 +4493,6 @@ public class PerkLib
                     .requireStr(165)
                     .requirePerks(GreaterBrawn, GreaterBrute);
             //Tier 9 Strength Perks
-			//PrestigeJobBard.requirePrestigeJobSlot()
-			//		.requirePerks(JobEromancer, JobCourtesan)
-			//		.requireLib(200)
-			//		.requireLevel(54);
             PrestigeJobBerserker.requirePrestigeJobSlot()
                     .requirePerks(JobSwordsman, JobBeastWarrior)
                     .requireAnyPerk(Berzerker, Lustzerker)

@@ -50,6 +50,8 @@ public class Changelog extends BaseContent
 			outputText("-New consumable item: a bottle of high-grade Soulforce Recovery Pills. Costs 3610 gems. It's gained by putting in empty pill bottle 10 high-grade soulforce recovery pills. Action that is only doable in camp (Camp Actions > Spend Time > Fill bottle)\n");
 			outputText("-New consumable item: superior-grade Soulforce Recovery Pill - buyable at golem shop in He'Xin'Dao. Costs 2160 gems. Recover soulforce: 21,600 + 8% max of max soulforce.\n");
 			outputText("-New consumable item: a bottle of superior-grade Soulforce Recovery Pills. Costs 21610 gems. It's gained by putting in empty pill bottle 10 superior-grade soulforce recovery pills. Action that is only doable in camp (Camp Actions > Spend Time > Fill bottle)\n");
+			outputText("-New item (by Svalkash): LubeSpray (gained from Lianna). Randomly increases vag/anal wetness, milk or cum production. With SH:Other enabled, can be bought from HXD shop.\n");
+			outputText("-New item (written by Snas): Shimmering sponge. Decreases wetness or cum/milk production.\n");
 			outputText("-New material: a vial of Body Tempering Solution. Cost 100 gems. Could be bought in 'Soul Items' shop. Usefull only for body cultivators subpath.\n");
 			outputText("-New White Spell: Charge Range Weapon. Learned from White Book. Works like Charge Weapon but affects range weapons. Range weapon atk won't be now boosted as before by Charge Weapon spell.\n");
 			outputText("-New weapon type Wands (Liadri)\n");
@@ -145,9 +147,7 @@ public class Changelog extends BaseContent
 			outputText("-Flesh Body: Elder Stage perk effects changed to: +14 to unarmed attack, +8 to armor / magic resistance, +1200 max HP at S.Elder, S.Exalt, S.Overlord stages\n");
 			outputText("-Flesh Body: Overlord Stage perk effects changed to: +18 to unarmed attack, +10 to armor / magic resistance, +1600 max HP S.Tyrant, S.King, S.Emperor stages\n");
 			outputText("-New shield (by Ormael): Necro Shield - buyable at Felix in Journey to the East inn. Base block 5, cost 100 spirit stones. Increase max cap on skeleton warriors, archers and mages by 1.\n");
-			outputText("-New item (by Svalkash): LubeSpray (gained from Lianna). Randomly increases vag/anal wetness, milk or cum production. With SH:Other enabled, can be bought from HXD shop.\n");
 			outputText("-Reworked primary stat structure - new formula is total = (core*mult) + (training*(multi+1)/2) + bonus. Old saves get their stat points refunded and training re-applied to have the same stat ratios and total points (spent+unspent) Fixed: some training events checking total instead of core/train, armor type detection, Warden's Staff buff (aimozg)\n");
-			outputText("-New item (written by Snas): Shimmering sponge. Decreases wetness or cum/milk production.\n");
 			outputText("-New special ability: Buzzing Tone. Req. to be Bee Handmaiden. Costing 50 fatigue channelled over 2 turns special dealing massive lust damage.\n");
 			outputText("-Bee Handmaiden venom scale dmg additionaly off Tou stat.\n");
 			outputText("-Ascension Advanced Training perk would give 4x more stat points on level up.\n");

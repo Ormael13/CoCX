@@ -35,6 +35,7 @@ public class ShimmeringSponge extends Consumable {
             .disableIf(player.cumMultiplier == 1, "Your production is at its minimum.\n<b>If it's still too high, please report this on Discord and I'll make it better.\n\n-Svalkash</b>");
         if (player.hasBreasts()) EngineCore.addButton(3, "Breasts", useBreasts)
             .disableIf(player.biggestLactation() == 0, "You don't lactate at all!");
+		EngineCore.addButton(4, "Never mind", shimspongeCancel);
         return true;
 
         //==============================================================================================================
@@ -72,5 +73,11 @@ public class ShimmeringSponge extends Consumable {
             SceneLib.inventory.itemGoNext();
         }
     }
+
+	private function shimspongeCancel():void {
+		clearOutput();
+		outputText("You put the sponge away.\n\n");
+		SceneLib.inventory.returnItemToInventory(this);
+	}
 }
 }
