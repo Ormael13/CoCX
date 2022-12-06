@@ -18,7 +18,6 @@ public class AbstractAngel extends Monster {
 		this.createBreastRow(0, 1);
 		initGenderless();
 		createStatusEffect(StatusEffects.LowtierMagicImmunity, 0, 0, 0, 0);
-		createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
 		createPerk(PerkLib.EnemyTrueAngel, 0, 0, 0, 0);
 	}
 

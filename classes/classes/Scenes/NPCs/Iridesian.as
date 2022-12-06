@@ -233,7 +233,7 @@ import classes.internals.*;
 			lustVuln += 0.15;
 			bonusWrath += 500;
 			bonusSoulforce += 1000;
-			outputText("Staggering back, Oculicorn wastes no time and above his head starts to manifest sort of halo. It have wings on the sides and in the middle of fron forms something resambliong eyeball. After halo formation a wave of light wash over it changing him. His horn grows longer, his monoeye pupil split into three seperate ones and his teeth grow longer and sharper. ");
+			outputText("Staggering back, Oculicorn wastes no time and above his head starts to manifest sort of halo. It have wings on the sides and in the middle of it forms something reasambling eyeball. After halo formation a wave of light wash over it changing him. His horn grows longer, his monoeye pupil split into three seperate ones and his teeth grow longer and sharper. ");
 			outputText("Eyestalks behind his back shows grew additional eyeballs located along the length of the stalks. Bottom half not change much aside gorwing fur all over it. After the wave reach his feet he starts to levitate.");
 			outputText("\n\n\"<i>Behold my true form foul creature!!!</i>\" he speaks with barely hidden content and reassume combat pose.");
 			createStatusEffect(StatusEffects.TrueFormAngel, 0, 0, 0, 0);
