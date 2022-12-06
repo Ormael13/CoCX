@@ -7460,6 +7460,7 @@ public class Combat extends BaseContent {
         if (monster.hasStatusEffect(StatusEffects.HemorrhageArmor)) isBleeding = true;
         if (monster.hasStatusEffect(StatusEffects.HemorrhageShield)) isBleeding = true;
         if (monster.hasStatusEffect(StatusEffects.Hemorrhage2)) isBleeding = true;
+        if (monster.hasStatusEffect(StatusEffects.Briarthorn)) isBleeding = true;
         return isBleeding;
     }
 
@@ -9035,6 +9036,10 @@ public class Combat extends BaseContent {
             if (Randomcrit1) outputText(" Critical hit!");
             outputText("\n\n");
             combat.teaseXP((1 + combat.bonusExpAfterSuccesfullTease()*2));
+			if (player.hasPerk(PerkLib.VerdantLeech)) {
+				monster.lustVuln += 0.50;
+				HPChange(Math.round(player.maxHP() * 0.05), false);
+			}
         }
 		//Entagled
 		if (monster.hasStatusEffect(StatusEffects.Entangled) && monster.lustVuln > 0) {
@@ -9042,7 +9047,7 @@ public class Combat extends BaseContent {
 				outputText("The vines are currently wrapped around [themonster], ensuring that [monster he] cannot escape their clutches. ");
 				var damageE:Number = (combat.teases.teaseBaseLustDamage() * spellModWhite());
 				var Randomcrit2:Boolean = false;
-				if (player.hasPerk(PerkLib.VegetalAffinity)) damagePG *= 1.5;
+				if (player.hasPerk(PerkLib.VegetalAffinity)) damageE *= 1.5;
 				if (player.hasPerk(PerkLib.GreenMagic)) damageE *= 2;
 				//Determine if critical tease!
 				var critChance6:int = 5;
@@ -9062,10 +9067,44 @@ public class Combat extends BaseContent {
 				if (Randomcrit2) outputText(" Critical hit!");
 				outputText("\n\n");
 				combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
+				if (player.hasPerk(PerkLib.VerdantLeech)) {
+					monster.lustVuln += 0.50;
+					HPChange(Math.round(player.maxHP() * 0.05), false);
+				}
 			}
 			else {
 				outputText("[Themonster] wriggles free from the vines, regaining control of [himself]\n\n");
 				monster.removeStatusEffect(StatusEffects.Entangled);
+			}
+		}
+		//Briarthorn
+		if (monster.hasStatusEffect(StatusEffects.Briarthorn) && monster.lustVuln > 0) {
+			outputText("It's me Di.... nah it's Information Noona saying that your Briarthorn is still here and dealing some lust poison damage to enemy.");
+			var damageB:Number = (combat.teases.teaseBaseLustDamage() * spellModWhite());
+			var Randomcrit3:Boolean = false;
+			if (player.hasPerk(PerkLib.VegetalAffinity)) damageB *= 1.5;
+			if (player.hasPerk(PerkLib.GreenMagic)) damageB *= 2;
+			//Determine if critical tease!
+			var critChance7:int = 5;
+			if (player.hasPerk(PerkLib.CriticalPerformance)) {
+				if (player.lib <= 100) critChance7 += player.lib / 5;
+				if (player.lib > 100) critChance7 += 20;
+			}
+			if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance7 = 0;
+			if (rand(100) < critChance7) {
+				Randomcrit3 = true;
+				damageE *= 1.75;
+			}
+			if (player.hasPerk(PerkLib.RacialParagon)) damageB *= combat.RacialParagonAbilityBoost();
+			if (player.hasPerk(PerkLib.NaturalArsenal)) damageB *= 1.50;
+			damageB = Math.round(damageB*monster.lustVuln);
+			monster.teased(damageB, false);
+			if (Randomcrit3) outputText(" Critical hit!");
+			outputText("\n\n");
+			combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
+			if (player.hasPerk(PerkLib.VerdantLeech)) {
+				monster.lustVuln += 0.50;
+				HPChange(Math.round(player.maxHP() * 0.05), false);
 			}
 		}
         if (player.hasStatusEffect(StatusEffects.Bound) && flags[kFLAGS.PC_FETISH] >= 2) {

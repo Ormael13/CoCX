@@ -1216,13 +1216,19 @@ package classes.Scenes.Places{
 					player.createStatusEffect(StatusEffects.KnowsEntangle, 0, 0, 0, 0);
 				}
 				hasTrainedToday = true;
-			}/*
+			}
 			else if (player.inte >= 100 && WoodElfMagicTraining == QUEST_STAGE_MAGICTRAINING4 && !hasTrainedToday){
 				WoodElfMagicTraining = QUEST_STAGE_MAGICTRAINING5;
-				outputText("\n\n");
-				outputText("\"<i></i>\"\n\n");
+				outputText("After a few hours spent directing the discussion and answering your questions, Lutien sighs and closes " + LutienMF("his","her") + " book.\n\n");
+				outputText("\"<i>You learn about as fast as I'd expect any other elf, which is to say slowly and with bits of distraction every now and then but at least you are making progress. I would give you homeworks but I'm afraid");
+				outputText(" you would just forget about doing it. For now just stick to practicing what I've already taught you and come back later for more.</i>\"\n\n");
+				outputText("You nod and leave Lutien to " + LutienMF("his","her") + " study.\n\n");
+				if (!player.hasStatusEffect(StatusEffects.KnowsBriarthorn)) {
+					outputText("<b>Gained new green spell: Briarthorn.</b>");
+					player.createStatusEffect(StatusEffects.KnowsBriarthorn, 0, 0, 0, 0);
+				}
 				hasTrainedToday = true;
-			}
+			}/*
 			else if (player.inte >= 200 && WoodElfMagicTraining == QUEST_STAGE_MAGICTRAINING5 && !hasTrainedToday){
 				WoodElfMagicTraining = QUEST_STAGE_MAGICTRAINING6;
 				outputText("\n\n");

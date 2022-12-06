@@ -727,6 +727,32 @@ public class Exploration extends BaseContent
 				else SceneLib.impScene.impPackEncounter2();
 			}
 		}
+		public function genericAngelsEncounters(even:Boolean = false):void {
+			var angelsChooser:int = rand(30);
+			//Limit chooser range
+			if (player.level < 12 && angelsChooser >= 10) angelsChooser = 9;
+			else if (player.level < 18 && angelsChooser >= 20) angelsChooser = 19;
+			else if (player.level < 24 && angelsChooser >= 30) angelsChooser = 29;
+			clearOutput();
+			//Angel ?Lord?
+			if (angelsChooser >= 10 && angelsChooser < 20) {
+				outputText("An angel wings out of the sky and attacks!");
+				startCombat(new Angel());
+				return;
+			}
+			//Angel ?Overlord?
+			else if (angelsChooser >= 20 && angelsChooser < 30) {
+				outputText("An angel wings out of the sky and attacks!");
+				startCombat(new Angel());
+				return;
+			}
+			//Angel
+			else {
+				outputText("An angel wings out of the sky and attacks!");
+				startCombat(new Angel());
+				return;
+			}
+		}
 
 		//Try to find a new location - called from doExplore once the first location is found
 		public function tryDiscover():void

@@ -50,6 +50,8 @@ public class Changelog extends BaseContent
 			outputText("-New consumable item: a bottle of high-grade Soulforce Recovery Pills. Costs 3610 gems. It's gained by putting in empty pill bottle 10 high-grade soulforce recovery pills. Action that is only doable in camp (Camp Actions > Spend Time > Fill bottle)\n");
 			outputText("-New consumable item: superior-grade Soulforce Recovery Pill - buyable at golem shop in He'Xin'Dao. Costs 2160 gems. Recover soulforce: 21,600 + 8% max of max soulforce.\n");
 			outputText("-New consumable item: a bottle of superior-grade Soulforce Recovery Pills. Costs 21610 gems. It's gained by putting in empty pill bottle 10 superior-grade soulforce recovery pills. Action that is only doable in camp (Camp Actions > Spend Time > Fill bottle)\n");
+			outputText("-New item (by Svalkash): LubeSpray (gained from Lianna). Randomly increases vag/anal wetness, milk or cum production. With SH:Other enabled, can be bought from HXD shop.\n");
+			outputText("-New item (written by Snas): Shimmering sponge. Decreases wetness or cum/milk production.\n");
 			outputText("-New material: a vial of Body Tempering Solution. Cost 100 gems. Could be bought in 'Soul Items' shop. Usefull only for body cultivators subpath.\n");
 			outputText("-New White Spell: Charge Range Weapon. Learned from White Book. Works like Charge Weapon but affects range weapons. Range weapon atk won't be now boosted as before by Charge Weapon spell.\n");
 			outputText("-New weapon type Wands (Liadri)\n");
@@ -145,9 +147,7 @@ public class Changelog extends BaseContent
 			outputText("-Flesh Body: Elder Stage perk effects changed to: +14 to unarmed attack, +8 to armor / magic resistance, +1200 max HP at S.Elder, S.Exalt, S.Overlord stages\n");
 			outputText("-Flesh Body: Overlord Stage perk effects changed to: +18 to unarmed attack, +10 to armor / magic resistance, +1600 max HP S.Tyrant, S.King, S.Emperor stages\n");
 			outputText("-New shield (by Ormael): Necro Shield - buyable at Felix in Journey to the East inn. Base block 5, cost 100 spirit stones. Increase max cap on skeleton warriors, archers and mages by 1.\n");
-			outputText("-New item (by Svalkash): LubeSpray (gained from Lianna). Randomly increases vag/anal wetness, milk or cum production. With SH:Other enabled, can be bought from HXD shop.\n");
 			outputText("-Reworked primary stat structure - new formula is total = (core*mult) + (training*(multi+1)/2) + bonus. Old saves get their stat points refunded and training re-applied to have the same stat ratios and total points (spent+unspent) Fixed: some training events checking total instead of core/train, armor type detection, Warden's Staff buff (aimozg)\n");
-			outputText("-New item (written by Snas): Shimmering sponge. Decreases wetness or cum/milk production.\n");
 			outputText("-New special ability: Buzzing Tone. Req. to be Bee Handmaiden. Costing 50 fatigue channelled over 2 turns special dealing massive lust damage.\n");
 			outputText("-Bee Handmaiden venom scale dmg additionaly off Tou stat.\n");
 			outputText("-Ascension Advanced Training perk would give 4x more stat points on level up.\n");
@@ -287,30 +287,30 @@ public class Changelog extends BaseContent
 			outputText("-New tier 3 misc lvl-up perk: Green magic. Req. Natural Spellcasting perk, Intelligence 80+, Libido 80+, Corruption 50+. Effect: Your Elven spell effects are twice as strong and last twice as long.\n");
 			outputText("-New Green Spell: Entagle. Learned from lession with Lutien - wood elf village mage teacher when having 100+ int OR from White Book when having Hidden Job: Grey Sage. It have 6 turns cooldown. Would turn present plants into vines that would try to grapple enemy for up to 6 turns. Each turn enemy is entangled it will recieve lust damage.\n");
 			outputText("-New event perk: Equilibrium. Gained by spending 1 super perk point and having Hidden Job: Grey Sage super perk. Effects: Allow to reach OverMax Mana equal to 120% of current max mana. You can cast now any spell you learned even if you missing additional materials or not meet requirements. Slight increase cap on stored bones for necromancers.\n");
-			//outputText("-New tier 6 misc lvl-up perk: Verdant Leech. Req. Green magic perk, Intelligence 140+, Libido 140+, Corruption 50+. Effect: .\n");
+			outputText("-New tier 6 misc lvl-up perk: Verdant Leech. Req. Green magic perk, Intelligence 140+, Libido 140+, Corruption 50+. Effect: Your Elven spells and black magic raises your opponent's weakness to lust and heals you for 5% of your health each time they inflict poison.\n");
 			//outputText("-New tier 9 misc lvl-up perk: Arcane Venom. Req. Verdant Leech perk, Intelligence 200+, Libido 200+, Corruption 50+. Effect: .\n");
 			outputText("-New consumable (by Ormael): Pack of demon bones - sold by Dinah. Costing 20 gems and adds 1 to 10 demon bones for necromancer use (going over limit of demon bones storage will cause loosing demon bones that went over the limit).\n");
 			outputText("-Metamorph: Add horn count/length for dragon and demon horns, Add Non-fuckable nipples option, Kamaitachi (weasel) skin pattern, tail; Fey Dragon Arms, lower body, wings, tail; Ghost skin, skin pattern, hair, horns; Panda, Fire snail face; Antler horns (EragonX)\n");
 			outputText("-Divine armament affects partial staffs too without dismished effect.\n");
 			outputText("-New consumable (by Liadri): Madmen knowledge - drops from mindbreaker & wonderland foes. Costing 100 gems. Greatly raises intelligence (as training alchemical and knowledge) but raises corruption and inflicts wisdom drain. Has a 5% chance to cause the pc to gain the insanity perk on use.\n");
+			outputText("-New Green Spell: Briarthorn. Learned from lession with Lutien - wood elf village mage teacher when having 100+ int OR from White Book when having Hidden Job: Grey Sage. It have 3 turns cooldown. While entangling, vines grows sharp thorns that rend the opponent's flesh and deliver a deadly poison that rend vitality for 6 rounds. This spell also inflict bleed and poison damage.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");// (EragonX)
+			outputText("-\n");// (Svalkash)
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
 			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
 			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-\n");
-			outputText("-\n");// (EragonX)
-			outputText("-\n");// (Svalkash)
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			//outputText("-(Svalkash)\n");
 			//outputText("-(Svalkash)\n");

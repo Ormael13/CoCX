@@ -44,6 +44,10 @@ public class Mountain extends BaseContent
 						name: "common",
 						call: SceneLib.exploration.genericGolGobImpEncounters
 					}, {
+						//General Angels Encounters
+						name: "common",
+						call: SceneLib.exploration.genericAngelsEncounters
+					}, {
 						//Helia monogamy fucks
 						name  : "helcommon",
 						night : false,

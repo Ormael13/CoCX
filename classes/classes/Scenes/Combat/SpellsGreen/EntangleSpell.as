@@ -19,7 +19,7 @@ public class EntangleSpell extends AbstractGreenSpell {
 	}
 	
 	override public function describeEffectVs(target:Monster):String {
-		return "~"+calcDamage(target, false, false)+" lust damage for "+numberOfThings(calcDuration(),"round");
+		return "~"+calcDamage(target, false, false)+" lust posion damage for "+numberOfThings(calcDuration(),"round");
 	}
 	
 	public function calcDamage(monster:Monster, randomize:Boolean = true, casting:Boolean = true):Number { //casting - Increase Elemental Counter while casting (like Raging Inferno)

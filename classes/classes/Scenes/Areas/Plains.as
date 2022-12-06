@@ -43,7 +43,14 @@ use namespace CoC;
 					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
 					SceneLib.exploration.genericGolGobImpEncounters();
 				}
-			}, {
+			}, {/*
+				//General Angels Encounters
+				name: "common",
+				call: function ():void {
+					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
+					SceneLib.exploration.genericAngelsEncounters();
+				}
+			}, {*/
 				//Helia monogamy fucks
 				name  : "helcommon",
 				night : false,
