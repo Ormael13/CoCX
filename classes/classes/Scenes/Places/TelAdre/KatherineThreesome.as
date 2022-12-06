@@ -811,6 +811,7 @@ public class KatherineThreesome extends TelAdreAbstractContent
 			outputText("Your two lovers trade you" + (player.hasCock() ? "r cock" : "") + " back and forth a few times until you feel that you’re about to cum.  ");
 			if (!player.hasCock()) {
 				outputText("There's no reason to fight it, you let go and femcum dribbles down " + (player.isNaga() ? "the scales of your tail" : "your legs") + " and washes over both Kath and Urta.  Your muscles give out and you collapse on the floor next to your panting, sweating lovers.");
+				sharedEnd();
 			} else {
 				outputText("\n\nWho will take your cock?");
 				menu();
