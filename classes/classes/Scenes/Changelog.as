@@ -294,7 +294,10 @@ public class Changelog extends BaseContent
 			outputText("-Divine armament affects partial staffs too without dismished effect.\n");
 			outputText("-New consumable (by Liadri): Madmen knowledge - drops from mindbreaker & wonderland foes. Costing 100 gems. Greatly raises intelligence (as training alchemical and knowledge) but raises corruption and inflicts wisdom drain. Has a 5% chance to cause the pc to gain the insanity perk on use.\n");
 			outputText("-New Green Spell: Briarthorn. Learned from lession with Lutien - wood elf village mage teacher when having 100+ int OR from White Book when having Hidden Job: Grey Sage. It have 3 turns cooldown. While entangling, vines grows sharp thorns that rend the opponent's flesh and deliver a deadly poison that rend vitality for 6 rounds. This spell also inflict bleed and poison damage.\n");
-			outputText("-\n");
+			outputText("-New perk for monsters: True Angel-type enemy. They not so common like true demons but they make up for it with better base power and possesing special field powered by soulforce, which could go down if angel not have enough SF to sustain it. Field itself have two effects that have very high synergy: reducing damage recieved form attacks and ");
+			outputText("making angel treated as few lvl higher than it's for purpose of mechanic that reduce dmg based on level difference between PC and enemy. Each of them is considered to constantly flying. (Ok so you thinking... that alot of stuff they get, right? You wonrg they still got ace to play if things go west ... or east) They also have special transformation ability to assume their true form. ");
+			outputText("Usualy it involve getting more... eyes and halo. It boosts their tou/spe/wis, sometimes even increase regeneration or enhance their protection field.\n");
+			outputText("-True Angel enemies getting innate Diehard effect. It would be % one with number matching enemy current lvl. They all would also receive 2% of max HP innate HP regen.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -514,7 +517,6 @@ public class Changelog extends BaseContent
 			outputText("-Bonus to mastery exp gains for expanding sparring ring was moved to only apply to fighting training dummy. With this bonus was changed from 1x/2x/3x for each of three sizes of the ring to 2x/5x/10x.\n");
 			outputText("-Any PC that may have Aura of Corruption/Purity can now suppress it or release. At suppressed state it will no longer deal dmg to enemies.\n");
 			outputText("-True Demon enemies getting innate OverMax HP effect. It would be % one with number matching enemy current lvl so factory bosses for ex. would have between 10 to 16 % OverMax HP bonus. They all would also receive 1% of max HP innate HP regen.\n");
-			//outputText("-True Angel enemies getting innate Diehard effect. It would be % one with number matching enemy current lvl. They all would also receive 2% of max HP innate HP regen.\n");
 			outputText("-Boss type enemies gained additional bonuses: Diehard effect of 7,5% of max HP + 2,250 HP * NG tier, OverMax HP effect of 15% magnitude.\n");
 			//outputText("-New perk for enemies: Elite type enemy. Bonuses for are: Diehard effect of 2,5% of max HP + 750 HP * NG tier, OverMax HP effect of 5% magnitude.\n");
 			//outputText("-New perk for enemies: Champion type enemy. Bonuses for are: Diehard effect of 5% of max HP + 1,500 HP * NG tier, OverMax HP effect of 10% magnitude.\n");
@@ -3195,7 +3197,7 @@ public class Changelog extends BaseContent
 			outputText("-New tier 14 toughness lvl-up perk: Mythic Endurance. Req. Half-step-to Mythic Endurance perk, 450+ tou and 300+ str. Effect: Inrease max Fatigue by 10000\n");
 			outputText("-New tier 14 intelligence lvl-up perk: Mythic Spirituality. Req. Half-step-to Mythic Spirituality perk, 450+ int and 300+ wis. Effect: Inrease max Mana by 15000\n");
 			outputText("-New tier 14 libido lvl-up perk: Mythic Self-Control. Req. Half-step-to Mythic Self-Control perk, 450+ lib and 300+ int. Effect: Inrease max Lust by 5000\n");
-			outputText("-New perk for monsters: True Demon-type enemy. It would amke them not have any soulforce (since true demons not have soul to gather soulforce so why they need to have it, right? xD).\n");
+			outputText("-New perk for monsters: True Demon-type enemy. It would make them not have any soulforce (since true demons not have soul to gather soulforce so why they need to have it, right? xD).\n");
 			addButton(0, "Next", Changelog17);
 			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
 		}

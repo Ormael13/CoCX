@@ -9,12 +9,12 @@ package classes.Scenes.Monsters
 	import classes.BodyParts.Wings;
 	import classes.Scenes.SceneLib;
 	
-	public class Angel extends AbstractAngel
+	public class AngelHR extends AbstractAngel
 	{
 		private function AngelEnergyRays():void {
-			outputText("Angel fixates you with "+(hasStatusEffect(StatusEffects.TrueFormAngel)?"all of its eyes":"it eye")+" unleashing a barrage of rays at you! ");
-			var omni:Number = 2;
-			if (hasStatusEffect(StatusEffects.TrueFormAngel)) omni *= 3;
+			outputText("Angel fixates you with all of its eyes unleashing a barrage of rays at you! ");
+			var omni:Number = 6;
+			if (hasStatusEffect(StatusEffects.TrueFormAngel)) omni *= 5;
 			while (omni-->0) AngelEnergyRaysD();
 			outputText("\n\n");
 		}
@@ -55,13 +55,13 @@ package classes.Scenes.Monsters
 			speStat.core.value += SB;
 			wisStat.core.value += WB;
 			createPerk(PerkLib.MonsterRegeneration, 1, 0, 0, 0);
-			addPerkValue(PerkLib.DieHardHP, 1, 5);
+			addPerkValue(PerkLib.DieHardHP, 1, 9);
 			addStatusValue(StatusEffects.TranscendentSoulField, 1, 5);
 			addStatusValue(StatusEffects.TranscendentSoulField, 2, 5);
 			HP = maxHP();
-			bonusWrath += 1000;
-			bonusSoulforce += 2000;
-			outputText("Staggering back, Angel wastes no time and above it head starts to manifest sort of halo. Both irises become uniform purple colored. And around it body manifest two crosed circles with pair of eyes looking exactly the same as main eye down to each detail including dual irises.\n"
+			bonusWrath += 300;
+			bonusSoulforce += 600;
+			outputText("Staggering back, Angel wastes no time and above it head starts to manifest sort of halo. All irises become uniform purple colored. And around it body manifest four crossed circles with two pairs of eyes looking exactly the same as main eye down to each detail including dual irises.\n"
 				+ "\"<i>Don't be afraid!!!</i>\" it whispers loud enough for you to hear before launching up to continue the fight.");
 			createStatusEffect(StatusEffects.TrueFormAngel, 0, 0, 0, 0);
 			SceneLib.combat.combatRoundOver();
@@ -78,9 +78,9 @@ package classes.Scenes.Monsters
 		
 		override public function get long():String
 		{
-			var str:String = "You're currently fighting angel. It's looks like winged eyeball with small mouth full of jagged teeth and one eye having two";
-			if (hasStatusEffect(StatusEffects.TrueFormAngel)) str += " purple irises. Around it body are two circles each with pair of eyes looking the same as the main eye and above head hoover halo.";
-			else str += " irises, one red and the other blue.";
+			var str:String = "You're currently fighting high-rank angel. It's looks like winged eyeball with small mouth full of jagged teeth and three eyes having two";
+			if (hasStatusEffect(StatusEffects.TrueFormAngel)) str += " purple irises each. Around it body are four circles each with two pairs of eyes looking the same as the main eye and above head hoover halo.";
+			else str += " irises each, one red and the other blue.";
 			if (hasStatusEffect(StatusEffects.TranscendentSoulField))
 			{
 				str += "\n\n<i>From time to time you can notice faint glimmers of orange protective field surrounding it.";
@@ -90,33 +90,33 @@ package classes.Scenes.Monsters
 			return str;
 		}
 		
-		public function Angel() 
+		public function AngelHR() 
 		{
 			super(false);
 			this.a = "the ";
-			this.short = "angel";
+			this.short = "high-rank angel";
 			this.imageName = "angel";
 			this.long = "";
-			initStrTouSpeInte(1, 20, 10, 5);
-			initWisLibSensCor(40, 1, 10, 0);
+			initStrTouSpeInte(7, 80, 40, 20);
+			initWisLibSensCor(160, 4, 30, 0);
 			this.tallness = 30;
 			this.drop = NO_DROP;
-			this.level = 6;
-			this.bonusHP = 200;
-            this.bonusLust = 17;
-			this.bonusWrath = 50;
-			this.bonusSoulforce = 100;
-			this.additionalXP = 60;
+			this.level = 18;
+			this.bonusHP = 600;
+            this.bonusLust = 49;
+			this.bonusWrath = 150;
+			this.bonusSoulforce = 300;
+			this.additionalXP = 90;
 			this.weaponName = "energy blast";
 			this.weaponVerb = "shoot";
 			this.weaponAttack = 6;
 			this.armorName = "skin";
-			this.armorDef = 6;
-			this.armorMDef = 6;
+			this.armorDef = 18;
+			this.armorMDef = 18;
 			this.wings.type = Wings.FEATHERED_AVIAN;
 			this.createStatusEffect(StatusEffects.TranscendentSoulField, 5, 5, 0, 0);//X times less dmg, +X lvl diff bonus
 			this.createStatusEffect(StatusEffects.Flying, 50, 0, 0, 0);
-			this.createPerk(PerkLib.DieHardHP, 5, 0, 0, 0);
+			this.createPerk(PerkLib.DieHardHP, 9, 0, 0, 0);
 			checkMonster();
 		}
 		

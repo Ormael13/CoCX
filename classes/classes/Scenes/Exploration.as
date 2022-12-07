@@ -730,26 +730,25 @@ public class Exploration extends BaseContent
 		public function genericAngelsEncounters(even:Boolean = false):void {
 			var angelsChooser:int = rand(30);
 			//Limit chooser range
-			if (player.level < 12 && angelsChooser >= 10) angelsChooser = 9;
-			else if (player.level < 18 && angelsChooser >= 20) angelsChooser = 19;
-			else if (player.level < 24 && angelsChooser >= 30) angelsChooser = 29;
+			if (player.level < 6 && angelsChooser >= 10) angelsChooser = 9;
+			else if (player.level < 12 && angelsChooser >= 20) angelsChooser = 19;
 			clearOutput();
-			//Angel ?Lord?
+			//Mid-rank Angel
 			if (angelsChooser >= 10 && angelsChooser < 20) {
-				outputText("An angel wings out of the sky and attacks!");
-				startCombat(new Angel());
+				outputText("A mid-ranked angel wings out of the sky and attacks!");
+				startCombat(new AngelMR());
 				return;
 			}
-			//Angel ?Overlord?
+			//High-rank Angel
 			else if (angelsChooser >= 20 && angelsChooser < 30) {
-				outputText("An angel wings out of the sky and attacks!");
-				startCombat(new Angel());
+				outputText("A high-ranked angel wings out of the sky and attacks!");
+				startCombat(new AngelHR());
 				return;
 			}
-			//Angel
+			//Low-rank Angel
 			else {
-				outputText("An angel wings out of the sky and attacks!");
-				startCombat(new Angel());
+				outputText("A low-ranked angel wings out of the sky and attacks!");
+				startCombat(new AngelLR());
 				return;
 			}
 		}

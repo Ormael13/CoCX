@@ -71,7 +71,7 @@ import classes.internals.*;
 			speStat.core.value += SB;
 			wisStat.core.value += WB;
 			createPerk(PerkLib.MonsterRegeneration, 3, 0, 0, 0);
-			addPerkValue(PerkLib.DieHardHP, 1, 10);
+			addPerkValue(PerkLib.DieHardHP, 1, 9);
 			addStatusValue(StatusEffects.TranscendentSoulField, 1, 20);
 			addStatusValue(StatusEffects.TranscendentSoulField, 2, 20);
 			HP = maxHP();
@@ -145,7 +145,7 @@ import classes.internals.*;
 			this.gems = rand(15) + 10;
 			this.drop = NO_DROP;
 			this.createStatusEffect(StatusEffects.ATranscendentSoulField, 20, 20, 0, 0);//X times less dmg, +X lvl diff bonus
-			this.createPerk(PerkLib.DieHardHP, 10, 0, 0, 0);
+			this.createPerk(PerkLib.DieHardHP, 9, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueAngel, 0, 0, 0, 0);
 			this.createPerk(PerkLib.JobSoulCultivator, 0, 0, 0, 0);
 			this.createPerk(PerkLib.InsightfulResourcesI, 0, 0, 0, 0);

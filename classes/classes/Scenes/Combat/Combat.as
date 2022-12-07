@@ -11097,6 +11097,7 @@ public class Combat extends BaseContent {
                 if (monster.hasPerk(PerkLib.EnemyLargeGroupType)) generalTypes.push("Large Group");
                 if (monster.hasPerk(PerkLib.EnemyPlantType)) generalTypes.push("Plant");
                 if (monster.hasPerk(PerkLib.EnemyTrueDemon)) generalTypes.push("True Demon");
+                if (monster.hasPerk(PerkLib.EnemyTrueAngel)) generalTypes.push("True Angel");
 				if (monster.hasPerk(PerkLib.EnemyBossType)) generalTypes.push("Boss");
                 if (monster.hasPerk(PerkLib.EnemyChampionType)) generalTypes.push("Champion");
                 if (monster.hasPerk(PerkLib.EnemyEliteType)) generalTypes.push("Elite");
