@@ -409,7 +409,7 @@ private function soberUrtaSatingPCHeat():void {
 	//[If Urta is infertile]
 	if(!urtaQuestDone()) {
 		if(!urtaLove()) outputText("\n\n\"<i>We are safe.  No matter how much sticky goo I pump into you, you shouldn't get pregnant.</i>\"");
-		else outputText("\n\n\She seems slightly sad, or at least not very pleased with herself as she explains her effective infertility once again.");
+		else outputText("\n\nShe seems slightly sad, or at least not very pleased with herself as she explains her effective infertility once again.");
 		outputText("  She grabs your hand and helps you stand up.");
 	}
 	//[If Urta's fertility quest is done]
