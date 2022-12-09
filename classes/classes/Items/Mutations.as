@@ -3552,6 +3552,18 @@ public final class Mutations extends MutationsHelper {
 				player.createStatusEffect(StatusEffects.KnowsBriarthorn, 0, 0, 0, 0);
 				return;
 			}
+			//Smart enough for Death Blossom and doesnt have it
+			if (player.inte >= 130 && !player.hasStatusEffect(StatusEffects.KnowsDeathBlossom)) {
+				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new green spell: Death Blossom.</b>");
+				player.createStatusEffect(StatusEffects.KnowsDeathBlossom, 0, 0, 0, 0);
+				return;
+			}
+			//Smart enough for Green Covenant and doesnt have it
+			if (player.inte >= 140 && !player.hasStatusEffect(StatusEffects.KnowsGreenCovenant)) {
+				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new green spell: Green Covenant.</b>");
+				player.createStatusEffect(StatusEffects.KnowsGreenCovenant, 0, 0, 0, 0);
+				return;
+			}
 		}
     }
 

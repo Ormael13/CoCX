@@ -8,6 +8,7 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.Ashlands.Cinderbloom;
 import classes.Scenes.Areas.Tundra.SnowLily;
+import classes.Scenes.Places.WoodElves;
 import classes.display.SpriteDb;
 
 public class AlrauneScene extends BaseContent
@@ -48,6 +49,7 @@ public class AlrauneScene extends BaseContent
 					"It’ll slowly flow all the way back in the depth of your pitcher where your seeds are created but for now, you look like you might as well be filled with four or even eight kids! " +
 					"Your stamens pop free from their cunt sheaths, falling limply to the ground and still leaking as you doze off highly content.");
 			player.sexReward("cum", "Vaginal");
+			if (!WoodElves.WoodElfMagicTranerGetLaid) WoodElves.WoodElfMagicTranerGetLaid = true;
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -145,7 +147,8 @@ public class AlrauneScene extends BaseContent
 			outputText("She wraps some of her vines around you both, using them to pull you both closer as she slides on your cock. You moan in incomprehensible babble as your drugged penis is milked by the alraune, cum flooding out at about a rate as steady as her pussy nectar. Men can, normally, only orgasm once or twice before they need a rest; you however simply can’t lose your hard on, cumming over and over as your drugged balls keep producing an almost endless amount of semen. ");
 			outputText("Whenever the Alraune sees the signs of thirst on your face, she quenches it with her breast, filling your mouth with more nectar. Go figure because plants don't leak any other fluids than that. Thankfully your stamina eventually gives out as you fall unconscious, way before your raging erection dies out.\n\n");
 			outputText("When you wake up, you are in a different area with your gear packed up next to you. Seems some thief made off with a small amount of your gems though.\n\n");
-			player.sexReward("vaginalFluids","Dick")
+			player.sexReward("vaginalFluids", "Dick");
+			if (!WoodElves.WoodElfMagicTranerGetLaid) WoodElves.WoodElfMagicTranerGetLaid = true;
 		}
 		function vagF():void {
 			outputText("You don’t recall when or how you ended up naked in her nectar bath but there you are, fawning in the arms of the " + (isHalloween() ? "pumpkin" : "plant") + " woman.\n\n");
@@ -170,6 +173,7 @@ public class AlrauneScene extends BaseContent
             else player.knockUp(PregnancyStore.PREGNANCY_ALRAUNE, PregnancyStore.INCUBATION_ALRAUNE);
 			player.sexReward("cum", "Vaginal");
 			player.sexReward("cum", "Anal");
+			if (!WoodElves.WoodElfMagicTranerGetLaid) WoodElves.WoodElfMagicTranerGetLaid = true;
 		}
 		dynStats("lib", 15, "sen", 5);
 		cleanupAfterCombat();

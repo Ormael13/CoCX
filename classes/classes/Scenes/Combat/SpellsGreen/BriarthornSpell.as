@@ -56,6 +56,7 @@ public class BriarthornSpell extends AbstractGreenSpell {
 		var baseDamage:Number = (combat.teases.teaseBaseLustDamage() * spellModWhite());
 		if (player.hasPerk(PerkLib.VegetalAffinity)) baseDamage *= 1.5;
 		if (player.hasPerk(PerkLib.GreenMagic)) baseDamage *= 2;
+		if (player.hasStatusEffect(StatusEffects.GreenCovenant)) baseDamage *= 2;
 		return adjustLustDamage(baseDamage, monster, CAT_SPELL_GREEN, randomize);
 	}
 	

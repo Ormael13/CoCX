@@ -51,6 +51,7 @@ package classes.Scenes.Places{
 		public static const QUEST_STAGE_MAGICTRAINING6:int = 6;
 		public static const QUEST_STAGE_MAGICTRAINING7:int = 7;
 		public static var WoodElfMagicTraner:Boolean;
+		public static var WoodElfMagicTranerGetLaid:Boolean;
 
 		public static var hasTrainedToday:Boolean;
 
@@ -65,6 +66,7 @@ package classes.Scenes.Places{
 			WoodElfSpearTraining = QUEST_STAGE_SPEARTRAININGFIRST;
 			WoodElfMagicTraining = QUEST_STAGE_MAGICTRAINING0;
 			WoodElfMagicTraner = false;
+			WoodElfMagicTranerGetLaid = false;
 		}
 
 		public function saveToObject():Object {
@@ -74,7 +76,8 @@ package classes.Scenes.Places{
 				"stageSpear": WoodElfSpearTraining,
 				"elfHasTrainedToday": hasTrainedToday,
 				"stageMagic": WoodElfMagicTraining,
-				"WoodElfMagicTraner": WoodElfMagicTraner
+				"WoodElfMagicTraner": WoodElfMagicTraner,
+				"WoodElfMagicTranerGetLaid": WoodElfMagicTranerGetLaid
 			};
 		}
 
@@ -86,6 +89,7 @@ package classes.Scenes.Places{
 				hasTrainedToday = o["elfHasTrainedToday"];
 				WoodElfMagicTraining = valueOr(o["stageMagic"], 0);
 				WoodElfMagicTraner = valueOr(o["WoodElfMagicTraner"], false);
+				WoodElfMagicTranerGetLaid = valueOr(o["WoodElfMagicTranerGetLaid"], false);
 			} else {
 				// loading from old save
 				resetState();
@@ -1228,19 +1232,41 @@ package classes.Scenes.Places{
 					player.createStatusEffect(StatusEffects.KnowsBriarthorn, 0, 0, 0, 0);
 				}
 				hasTrainedToday = true;
-			}/*
+			}
 			else if (player.inte >= 200 && WoodElfMagicTraining == QUEST_STAGE_MAGICTRAINING5 && !hasTrainedToday){
 				WoodElfMagicTraining = QUEST_STAGE_MAGICTRAINING6;
-				outputText("\n\n");
-				outputText("\"<i></i>\"\n\n");
+				outputText("After a few hours spent directing the discussion and answering your questions, Lutien smile and closes " + LutienMF("his","her") + " book.\n\n");
+				outputText("\"<i>I hate to admit that you actually got skill for this. I sadly won't be able to teach you "+(player.isRace(Races.WOODELF)?"much":"any")+" longer. You learned next to everything I could teach you already.</i>\"\n\n");
+				outputText("There must still be something Lutien can teach you though.\n\n");
+				if (player.isRace(Races.WOODELF)) {
+					outputText("\"<i>There is however I will first ask that you do something that goes directly against everything I've told you to do so far. I need you to go out there and get yourself laid… a LOT.</i>\"\n\n");
+					outputText("Wait what?\n\n");
+					outputText("\"<i>You heard right go out there and get yourself fucked silly by everything and anything until you've aquired a suffisent mastery of your charms and resiliance to pleasure. Funnily, this is something the others can absolutely assist you with. Heck, even that cow Chelsea could be helpful at this point.</i>\"\n\n");
+					outputText("Lutien and Chelsea don't seem to get along. You ask " + LutienMF("him","her") + " why is that?\n\n");
+					outputText("\"<i>Isn't that obvious? She's a nymphomaniac who only thinks about sex and pleasurable sensations. Why would I respect someone like that? Anyway, once you've achieved a suffisent mastery, I need you to go through one last step… That is to have sex with an alraune of great power. This might sound ludicrous but they are the closest ");
+					outputText("thing to an avatar of the deity marae. Well, of course, if you could have sex with Marae herself that would work too but Marae, last I heard, has no interest in that, unlike her floral and lustful daughters. Once your holes have been plugged full of greenery and stamens, we can go with our final lesson.</i>\"\n\n");
+				}
+				else {
+					outputText("\"<i>Sadly no, and that's because you aren't complete or rather… you never made a covenant with the blessed tree. This last spell taps directly in the power of the covenant and thus cannot be learned by someone with no connection. Thus this is our final lesson</i>\"\n\n");
+				}
+				outputText("You nod and leave Lutien to " + LutienMF("his","her") + " study.\n\n");
+				if (!player.hasStatusEffect(StatusEffects.KnowsDeathBlossom)) {
+					outputText("<b>Gained new green spell: Death Blossom.</b>");
+					player.createStatusEffect(StatusEffects.KnowsDeathBlossom, 0, 0, 0, 0);
+				}
 				hasTrainedToday = true;
 			}
-			else if (player.inte >= 200 && WoodElfMagicTraining == QUEST_STAGE_MAGICTRAINING6 && !hasTrainedToday){
+			else if (player.inte >= 400 && WoodElfMagicTraining == QUEST_STAGE_MAGICTRAINING6 && !hasTrainedToday && player.isRace(Races.WOODELF) && WoodElfMagicTranerGetLaid){
 				WoodElfMagicTraining = QUEST_STAGE_MAGICTRAINING7;
-				outputText("\n\n");
-				outputText("\"<i></i>\"\n\n");
+				outputText("After a few hours spent directing the discussion and answering your questions, Lutien smile and closes " + LutienMF("his","her") + " book.\n\n");
+				outputText("\"<i>Congratulations, [name]. You have effectively learned everything I could teach you and even mastered that one last spell. I guess this means the end of our lessons. However, if you wish to revise less serious subjects with me… just know I will be available anytime. It's rare to find someone so smart and at the same time… ");
+				outputText("so attractive.</i>\" " + LutienMF("He","She") + " blushes but quickly realizes " + LutienMF("he","she") + "'s wide open and moves " + LutienMF("his","her") + " eyes back to " + LutienMF("his","her") + " book dismissing you.\n\n");
+				if (!player.hasStatusEffect(StatusEffects.KnowsGreenCovenant)) {
+					outputText("<b>Gained new green spell: Green Covenant.</b>");
+					player.createStatusEffect(StatusEffects.KnowsGreenCovenant, 0, 0, 0, 0);
+				}
 				hasTrainedToday = true;
-			}*/
+			}
 			else {
 				outputText("You would just like to revise theory with Lutien today. On this " + LutienMF("he","she") + " close " + LutienMF("his","her") + " book and sigh.\n\n");
 				outputText("\"<i>Well I suppose I can give you a list of practical tests to do should at least be a break from my research. Let's see how well you've learned this far.</i>\"\n\n");

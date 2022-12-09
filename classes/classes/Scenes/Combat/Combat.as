@@ -8512,6 +8512,10 @@ public class Combat extends BaseContent {
             }
             player.takeLustDamage(player.statusEffectv1(StatusEffects.LustStones) + 4, true);
         }
+		if (player.hasStatusEffect(StatusEffects.GreenCovenant)) {
+			outputText("<b>It's me Di.... nah it's Information Noona saying that your Green Covenant is still here and dealing some lust damage to you. Not like she suggest pull out of you ass some vines, right? Especialy if Lia Producer not left any such option...</b>");
+			player.takeLustDamage(Math.round(player.maxLust() * 0.05), true);
+		}
 		if (player.hasStatusEffect(StatusEffects.LustTransferance)) player.takeLustDamage(player.statusEffectv1(StatusEffects.LustTransferance) + 4, true);
         if (player.hasStatusEffect(StatusEffects.WebSilence)) {
             if (player.statusEffectv1(StatusEffects.WebSilence) >= 2 || rand(20) + 1 + player.str / 10 >= 15) {
@@ -8676,7 +8680,7 @@ public class Combat extends BaseContent {
             }
         }
         //Apophis Unholy Aura
-        if (player.isRaceCached(Races.APOPHIS)){
+        if (player.isRaceCached(Races.APOPHIS) && monster.lustVuln > 0){
             outputText("Your unholy aura seeps into [themonster], slowly and insidiously eroding its resiliance to your unholy charms.\n\n");
             monster.lustVuln += 0.10;
         }
@@ -9018,6 +9022,7 @@ public class Combat extends BaseContent {
             var Randomcrit1:Boolean = false;
 			if (player.hasPerk(PerkLib.VegetalAffinity)) damagePG *= 1.5;
 			if (player.hasPerk(PerkLib.GreenMagic)) damagePG *= 2;
+			if (player.hasStatusEffect(StatusEffects.GreenCovenant)) damagePG *= 2;
             //Determine if critical tease!
             var critChance5:int = 5;
             if (player.hasPerk(PerkLib.CriticalPerformance)) {
@@ -9049,6 +9054,7 @@ public class Combat extends BaseContent {
 				var Randomcrit2:Boolean = false;
 				if (player.hasPerk(PerkLib.VegetalAffinity)) damageE *= 1.5;
 				if (player.hasPerk(PerkLib.GreenMagic)) damageE *= 2;
+				if (player.hasStatusEffect(StatusEffects.GreenCovenant)) damageE *= 2;
 				//Determine if critical tease!
 				var critChance6:int = 5;
 				if (player.hasPerk(PerkLib.CriticalPerformance)) {
@@ -9084,6 +9090,7 @@ public class Combat extends BaseContent {
 			var Randomcrit3:Boolean = false;
 			if (player.hasPerk(PerkLib.VegetalAffinity)) damageB *= 1.5;
 			if (player.hasPerk(PerkLib.GreenMagic)) damageB *= 2;
+			if (player.hasStatusEffect(StatusEffects.GreenCovenant)) damageB *= 2;
 			//Determine if critical tease!
 			var critChance7:int = 5;
 			if (player.hasPerk(PerkLib.CriticalPerformance)) {
@@ -9093,7 +9100,7 @@ public class Combat extends BaseContent {
 			if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance7 = 0;
 			if (rand(100) < critChance7) {
 				Randomcrit3 = true;
-				damageE *= 1.75;
+				damageB *= 1.75;
 			}
 			if (player.hasPerk(PerkLib.RacialParagon)) damageB *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damageB *= 1.50;
@@ -9105,6 +9112,41 @@ public class Combat extends BaseContent {
 			if (player.hasPerk(PerkLib.VerdantLeech)) {
 				monster.lustVuln += 0.50;
 				HPChange(Math.round(player.maxHP() * 0.05), false);
+			}
+		}
+		if (player.hasStatusEffect(StatusEffects.DeathBlossom)) {
+			outputText("It's me Di.... nah it's Information Noona saying that your Death Blossom is still here and dealing some lust poison damage to enemy.");
+			var damageDBH:Number = (scalingBonusIntelligence() * spellModWhite() * player.statusEffectv3(StatusEffects.DeathBlossom));
+			damageDBH = Math.round(damageDBH * poisonDamageBoostedByDao());
+            doPoisonDamage(damageDBH, true, true);
+			if (monster.lustVuln > 0) {
+				var damageDBL:Number = (combat.teases.teaseBaseLustDamage() * spellModWhite() * player.statusEffectv3(StatusEffects.DeathBlossom));
+				var Randomcrit4:Boolean = false;
+				if (player.hasPerk(PerkLib.VegetalAffinity)) damageDBL *= 1.5;
+				if (player.hasPerk(PerkLib.GreenMagic)) damageDBL *= 2;
+				if (player.hasStatusEffect(StatusEffects.GreenCovenant)) damageDBL *= 2;
+				//Determine if critical tease!
+				var critChance8:int = 5;
+				if (player.hasPerk(PerkLib.CriticalPerformance)) {
+					if (player.lib <= 100) critChance8 += player.lib / 5;
+					if (player.lib > 100) critChance8 += 20;
+				}
+				if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance8 = 0;
+				if (rand(100) < critChance8) {
+					Randomcrit4 = true;
+					damageDBL *= 1.75;
+				}
+				if (player.hasPerk(PerkLib.RacialParagon)) damageDBL *= combat.RacialParagonAbilityBoost();
+				if (player.hasPerk(PerkLib.NaturalArsenal)) damageDBL *= 1.50;
+				damageB = Math.round(damageDBL*monster.lustVuln);
+				monster.teased(damageDBL, false);
+				if (Randomcrit4) outputText(" Critical hit!");
+				outputText("\n\n");
+				combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
+				if (player.hasPerk(PerkLib.VerdantLeech)) {
+					monster.lustVuln += 0.50;
+					HPChange(Math.round(player.maxHP() * 0.05), false);
+				}
 			}
 		}
         if (player.hasStatusEffect(StatusEffects.Bound) && flags[kFLAGS.PC_FETISH] >= 2) {
@@ -10339,6 +10381,7 @@ public class Combat extends BaseContent {
             }
             if (player.headJewelry == headjewelries.CUNDKIN && player.HP < 1) healingPercent += 1;
             if (player.hasStatusEffect(StatusEffects.Overlimit) || player.hasStatusEffect(StatusEffects.FieryRage)) healingPercent -= 10;
+			if (player.hasStatusEffect(StatusEffects.GreenCovenant)) healingPercent += 25;
             if (player.hasPerk(PerkLib.Ferocity) && player.HP < 1) negativeHPRegen -= 1;
             if (player.hasPerk(PerkLib.Diehard) && !player.hasPerk(PerkLib.EpicDiehard) && player.HP < 1) negativeHPRegen -= 1;
             if (player.perkv1(IMutationsLib.LizanMarrowIM) >= 3 && player.HP < 1) negativeHPRegen -= 1;
@@ -15622,4 +15665,4 @@ private function touSpeStrScale(stat:int):Number {
         return damage;
     }
 }
-}
+}

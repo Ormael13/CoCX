@@ -2607,6 +2607,7 @@ use namespace CoC;
 			damage = difficultyDamageMultiplier(damage);
 			//all dmg reduction effect(s)
 			if (CoC.instance.monster.hasStatusEffect(StatusEffects.EnergyDrain)) damage *= 0.8;
+			if (hasStatusEffect(StatusEffects.GreenCovenant)) damage *= 0.25;
 			//Round
 			damage = Math.round(damage);
 			// we return "1 damage received" if it is in (0..1) but deduce no HP

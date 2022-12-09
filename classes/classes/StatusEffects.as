@@ -443,6 +443,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const KnowsCure:StatusEffectType                      = mk("Knows Cure");
 		public static const KnowsCurseOfDesire:StatusEffectType             = mk("Knows Curse of Desire");
 		public static const KnowsCurseOfWeeping:StatusEffectType            = mk("Knows Curse of Weeping");
+		public static const KnowsDeathBlossom:StatusEffectType              = mk("Knows Death Blossom");
 		public static const KnowsDarknessShard:StatusEffectType             = mk("Knows Darkness Shard");
 		public static const KnowsDivineShield:StatusEffectType              = mk("Knows Divine shield");
 		public static const KnowsDracoSweep:StatusEffectType                = mk("Knows Draco Sweep");
@@ -457,6 +458,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const KnowsGrandioseHailOfBlades:StatusEffectType     = mk("Knows Grandiose Hail of Blades");
 		public static const KnowsGrandioseHailOfMoonBlades:StatusEffectType = mk("Knows Grandiose Hail of Moon Blades");
 		//public static const KnowsGrandioseHailOfMoonBlades:StatusEffectType = mk("Knows Grandiose Hail of Moon Blades");
+		public static const KnowsGreenCovenant:StatusEffectType             = mk("Knows Green Covenant");
 		public static const KnowsHailOfBlades:StatusEffectType              = mk("Knows Hail of Blades");
 		public static const KnowsHeartSeeker:StatusEffectType             	= mk("Knows Heart Seeker");
 		public static const KnowsHeartSeekerSF:StatusEffectType           	= mk("Knows Heart Seeker (infused with Soulforce)");
@@ -903,15 +905,10 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const ControlFreak:StatusEffectType			   = mkCombat("Control Freak");
 		public static const CouatlHurricane:StatusEffectType           = mkCombat("Coualt Hurricane");
 		public static const CounterAction:StatusEffectType             = mkCombat("Counter Action");
-        // For the following: 1 - modifier (1=5%), 2 - "spell cast in the current turn, no decreasing", 3 - "spell is being channeled, no decrease for (Su)"
-		public static const CounterEclipsingShadow:StatusEffectType    = mkCombat("Counter Eclipsing Shadow");
-		public static const CounterGlacialStorm:StatusEffectType       = mkCombat("Counter Glacial Storm");
-		public static const CounterHighVoltage:StatusEffectType        = mkCombat("Counter High Voltage");
-		public static const CounterRagingInferno:StatusEffectType      = mkCombat("Counter Raging Inferno");
-        //
-		public static const CurseOfDesire:StatusEffectType             = mkCombat("Curse of Desire");
+        public static const CurseOfDesire:StatusEffectType             = mkCombat("Curse of Desire");
 		public static const CurseOfWeeping:StatusEffectType            = mkCombat("Curse of Weeping");
 		public static const DarkRitual:StatusEffectType            	   = mkCombat("Dark Ritual");
+		public static const DeathBlossom:StatusEffectType       	   = mkCombat("Death Blossom");
 		public static const Defend:StatusEffectType                    = mkCombat("Defend");
 		public static const DefendMonsterVer:StatusEffectType          = mkCombat("Defend Monster Ver");
 		public static const DemonSeed:StatusEffectType                 = mkCombat("DemonSeed");
@@ -953,6 +950,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const GooArmorSilence:StatusEffectType           = mkCombat("GooArmorSilence");
 		public static const GooBind:StatusEffectType                   = mkCombat("GooBind");
 		public static const GoreBleed:StatusEffectType                 = mkCombat("Gore Bleed");
+		public static const GreenCovenant:StatusEffectType       	   = mkCombat("Green Covenant");
 		public static const HarpyBind:StatusEffectType                 = mkCombat("HarpyBind");
 		public static const HeavenTribulationCR:StatusEffectType   	   = mkCombat("Heaven Tribulation Combat Rounds");
 		public static const Hemorrhage:StatusEffectType                = mkCombat("Hemorrhage");
@@ -1070,6 +1068,11 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const WindWall:StatusEffectType                  = mkCombat("Wind Wall");
 		public static const WolfHold:StatusEffectType                  = mkCombat("Wolf Hold");
 		public static const WoundPoison:StatusEffectType               = mkCombat("Wound Poison");
+		// For the following: 1 - modifier (1=5%), 2 - "spell cast in the current turn, no decreasing", 3 - "spell is being channeled, no decrease for (Su)"
+		public static const CounterEclipsingShadow:StatusEffectType    = mkCombat("Counter Eclipsing Shadow");
+		public static const CounterGlacialStorm:StatusEffectType       = mkCombat("Counter Glacial Storm");
+		public static const CounterHighVoltage:StatusEffectType        = mkCombat("Counter High Voltage");
+		public static const CounterRagingInferno:StatusEffectType      = mkCombat("Counter Raging Inferno");
 
 		//cooldowns
 		public static const CooldownAdamantineShell:StatusEffectType           	= mkCombat("Cooldown Adamantine Shell");
