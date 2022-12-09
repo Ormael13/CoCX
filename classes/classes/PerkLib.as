@@ -524,8 +524,8 @@ public class PerkLib
 				"Your Elven spells and black magic raises your opponent's weakness to lust and heals you for 5% of your health each time they inflict poison.",
 				"You've chosen the 'Verdant Leech' perk. Your Elven spells and black magic raises your opponent's weakness to lust and heals you for 5% of your health each time they inflict poison.");
 		public static const ArcaneVenom:PerkType = mk("Arcane Venom", "Arcane Venom",
-				".",
-				"You've chosen the 'Arcane Venom' perk, .");
+				"Spells that inflict poison add a number of direct applications equal to your intelligence (core + trained parts) divided by 50.",
+				"You've chosen the 'Arcane Venom' perk. Spells that inflict poison add a number of direct applications equal to your intelligence (core + trained parts) divided by 50.");
 
 		public static const ElementsOfMarethBasic:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
@@ -7065,12 +7065,12 @@ public class PerkLib
 					return player.playerMinionsCount() >= 10;
 					}, "10+ pets/minions");
 			LimitBreakerFlesh1stStage.requireLevel(54)
-					.requirePerk(LimitBreakerHeart1stStage);/*
+					.requirePerk(LimitBreakerHeart1stStage);
 			ArcaneVenom.requireLevel(54)
 					.requirePerk(VerdantLeech)
 					.requireInt(200)
 					.requireLib(200)
-					.requireCor(50);*/
+					.requireCor(50);
             //Tier 10
             ChimericalBodySemiPeerlessStage.requirePerk(ChimericalBodySuperiorStage)
                     .requireLevel(60)

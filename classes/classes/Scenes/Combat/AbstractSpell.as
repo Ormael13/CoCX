@@ -434,6 +434,12 @@ public class AbstractSpell extends CombatAbility {
 		return backfire
 	}
 	
+	public static function stackingArcaneVenom():Number {
+		var sAV:Number = 0;
+		sAV += Math.round((player.intStat.core.value + player.intStat.train.value) / 50);
+		return sAV;
+	}
+	
 	/**
 	 * Do a crit roll and apply crit multiplier.
 	 * Deal damage once or repeatedly (if Omnicaster and param set). Does NOT apply Omnicaster damage downscale!

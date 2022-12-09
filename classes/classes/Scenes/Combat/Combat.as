@@ -7471,6 +7471,7 @@ public class Combat extends BaseContent {
 		if (damage < 1) damage = 1;
         if (monster.hasStatusEffect(StatusEffects.TranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.TranscendentSoulField));
         if (monster.hasStatusEffect(StatusEffects.ATranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.ATranscendentSoulField));
+        if (monster.hasStatusEffect(StatusEffects.NecroticRot)) damage *= (1 + (0.25 * monster.statusEffectv1(StatusEffects.NecroticRot)));
         if (player.hasStatusEffect(StatusEffects.Minimise)) damage *= 0.01;
         if (player.hasPerk(PerkLib.Sadist)) {
             damage *= 1.2;
@@ -7571,6 +7572,7 @@ public class Combat extends BaseContent {
         damage *= doDamageReduction();
         if (monster.hasStatusEffect(StatusEffects.TranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.TranscendentSoulField));
         if (monster.hasStatusEffect(StatusEffects.ATranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.ATranscendentSoulField));
+        if (monster.hasStatusEffect(StatusEffects.NecroticRot)) damage *= (1 + (0.25 * monster.statusEffectv1(StatusEffects.NecroticRot)));
 		if (damage < 1) damage = 1;
         if (player.hasPerk(PerkLib.Sadist)) {
             damage *= 1.2;
@@ -7632,6 +7634,7 @@ public class Combat extends BaseContent {
         if (damage < 1) damage = 1;
         if (monster.hasStatusEffect(StatusEffects.TranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.TranscendentSoulField));
         if (monster.hasStatusEffect(StatusEffects.ATranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.ATranscendentSoulField));
+        if (monster.hasStatusEffect(StatusEffects.NecroticRot)) damage *= (1 + (0.25 * monster.statusEffectv1(StatusEffects.NecroticRot)));
         if (player.hasPerk(PerkLib.Sadist)) {
             damage *= 1.2;
             dynStats("lus", 3);
@@ -8051,6 +8054,7 @@ public class Combat extends BaseContent {
         if (damage < 1) damage = 1;
         if (monster.hasStatusEffect(StatusEffects.TranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.TranscendentSoulField));
         if (monster.hasStatusEffect(StatusEffects.ATranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.ATranscendentSoulField));
+        if (monster.hasStatusEffect(StatusEffects.NecroticRot)) damage *= (1 + (0.25 * monster.statusEffectv1(StatusEffects.NecroticRot)));
         if (player.hasPerk(PerkLib.Sadist)) {
             damage *= 1.2;
             if (player.armor == armors.SCANSC) {
@@ -8513,8 +8517,9 @@ public class Combat extends BaseContent {
             player.takeLustDamage(player.statusEffectv1(StatusEffects.LustStones) + 4, true);
         }
 		if (player.hasStatusEffect(StatusEffects.GreenCovenant)) {
-			outputText("<b>It's me Di.... nah it's Information Noona saying that your Green Covenant is still here and dealing some lust damage to you. Not like she suggest pull out of you ass some vines, right? Especialy if Lia Producer not left any such option...</b>");
+			outputText("<b>Your connection to corrupted flora makes you increasingly lustful.</b> ");
 			player.takeLustDamage(Math.round(player.maxLust() * 0.05), true);
+			outputText("\n\n");
 		}
 		if (player.hasStatusEffect(StatusEffects.LustTransferance)) player.takeLustDamage(player.statusEffectv1(StatusEffects.LustTransferance) + 4, true);
         if (player.hasStatusEffect(StatusEffects.WebSilence)) {
@@ -9018,65 +9023,19 @@ public class Combat extends BaseContent {
         //Plant Growth
         if (player.hasStatusEffect(StatusEffects.PlantGrowth) && monster.lustVuln > 0) {
             outputText("The vine slithers around [monster him] before groping at [monster his] erogenous zones, enticing them as their focus and grip on combat weakens.");
-            var damagePG:Number = (combat.teases.teaseBaseLustDamage() * 0.5 * spellModWhite());
-            var Randomcrit1:Boolean = false;
-			if (player.hasPerk(PerkLib.VegetalAffinity)) damagePG *= 1.5;
-			if (player.hasPerk(PerkLib.GreenMagic)) damagePG *= 2;
-			if (player.hasStatusEffect(StatusEffects.GreenCovenant)) damagePG *= 2;
-            //Determine if critical tease!
-            var critChance5:int = 5;
-            if (player.hasPerk(PerkLib.CriticalPerformance)) {
-                if (player.lib <= 100) critChance5 += player.lib / 5;
-                if (player.lib > 100) critChance5 += 20;
-            }
-            if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance5 = 0;
-            if (rand(100) < critChance5) {
-                Randomcrit1 = true;
-                damagePG *= 1.75;
-            }
-            if (player.hasPerk(PerkLib.RacialParagon)) damagePG *= combat.RacialParagonAbilityBoost();
-            if (player.hasPerk(PerkLib.NaturalArsenal)) damagePG *= 1.50;
-            damagePG = Math.round(damagePG*monster.lustVuln);
-            monster.teased(damagePG, false);
-            if (Randomcrit1) outputText(" Critical hit!");
-            outputText("\n\n");
-            combat.teaseXP((1 + combat.bonusExpAfterSuccesfullTease()*2));
-			if (player.hasPerk(PerkLib.VerdantLeech)) {
-				monster.lustVuln += 0.50;
-				HPChange(Math.round(player.maxHP() * 0.05), false);
-			}
+			var damagePG:Number = (combat.teases.teaseBaseLustDamage() * 0.5 * spellModWhite());
+            var arvePG:Number = 1;
+			if (player.hasPerk(PerkLib.ArcaneVenom)) arvePG += AbstractSpell.stackingArcaneVenom();
+			while (arvePG-->0) repeatArcaneVenom(damagePG, 1);
         }
 		//Entagled
 		if (monster.hasStatusEffect(StatusEffects.Entangled) && monster.lustVuln > 0) {
 			if (40 + rand(player.inte) + rand(player.lib) > monster.spe) {
 				outputText("The vines are currently wrapped around [themonster], ensuring that [monster he] cannot escape their clutches. ");
 				var damageE:Number = (combat.teases.teaseBaseLustDamage() * spellModWhite());
-				var Randomcrit2:Boolean = false;
-				if (player.hasPerk(PerkLib.VegetalAffinity)) damageE *= 1.5;
-				if (player.hasPerk(PerkLib.GreenMagic)) damageE *= 2;
-				if (player.hasStatusEffect(StatusEffects.GreenCovenant)) damageE *= 2;
-				//Determine if critical tease!
-				var critChance6:int = 5;
-				if (player.hasPerk(PerkLib.CriticalPerformance)) {
-					if (player.lib <= 100) critChance6 += player.lib / 5;
-					if (player.lib > 100) critChance6 += 20;
-				}
-				if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance6 = 0;
-				if (rand(100) < critChance6) {
-					Randomcrit2 = true;
-					damageE *= 1.75;
-				}
-				if (player.hasPerk(PerkLib.RacialParagon)) damageE *= combat.RacialParagonAbilityBoost();
-				if (player.hasPerk(PerkLib.NaturalArsenal)) damageE *= 1.50;
-				damageE = Math.round(damageE*monster.lustVuln);
-				monster.teased(damageE, false);
-				if (Randomcrit2) outputText(" Critical hit!");
-				outputText("\n\n");
-				combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
-				if (player.hasPerk(PerkLib.VerdantLeech)) {
-					monster.lustVuln += 0.50;
-					HPChange(Math.round(player.maxHP() * 0.05), false);
-				}
+				var arveE:Number = 1;
+				if (player.hasPerk(PerkLib.ArcaneVenom)) arveE += AbstractSpell.stackingArcaneVenom();
+				while (arveE-->0) repeatArcaneVenom(damageE, 0);
 			}
 			else {
 				outputText("[Themonster] wriggles free from the vines, regaining control of [himself]\n\n");
@@ -9086,67 +9045,21 @@ public class Combat extends BaseContent {
 		//Briarthorn
 		if (monster.hasStatusEffect(StatusEffects.Briarthorn) && monster.lustVuln > 0) {
 			outputText("It's me Di.... nah it's Information Noona saying that your Briarthorn is still here and dealing some lust poison damage to enemy.");
-			var damageB:Number = (combat.teases.teaseBaseLustDamage() * spellModWhite());
-			var Randomcrit3:Boolean = false;
-			if (player.hasPerk(PerkLib.VegetalAffinity)) damageB *= 1.5;
-			if (player.hasPerk(PerkLib.GreenMagic)) damageB *= 2;
-			if (player.hasStatusEffect(StatusEffects.GreenCovenant)) damageB *= 2;
-			//Determine if critical tease!
-			var critChance7:int = 5;
-			if (player.hasPerk(PerkLib.CriticalPerformance)) {
-				if (player.lib <= 100) critChance7 += player.lib / 5;
-				if (player.lib > 100) critChance7 += 20;
-			}
-			if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance7 = 0;
-			if (rand(100) < critChance7) {
-				Randomcrit3 = true;
-				damageB *= 1.75;
-			}
-			if (player.hasPerk(PerkLib.RacialParagon)) damageB *= combat.RacialParagonAbilityBoost();
-			if (player.hasPerk(PerkLib.NaturalArsenal)) damageB *= 1.50;
-			damageB = Math.round(damageB*monster.lustVuln);
-			monster.teased(damageB, false);
-			if (Randomcrit3) outputText(" Critical hit!");
-			outputText("\n\n");
-			combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
-			if (player.hasPerk(PerkLib.VerdantLeech)) {
-				monster.lustVuln += 0.50;
-				HPChange(Math.round(player.maxHP() * 0.05), false);
-			}
+			var damageB:Number = (combat.teases.teaseBaseLustDamage() * 0.75 * spellModWhite());
+			var arveB:Number = 1;
+			if (player.hasPerk(PerkLib.ArcaneVenom)) arveB += AbstractSpell.stackingArcaneVenom();
+			while (arveB-->0) repeatArcaneVenom(damageB, 0);
 		}
 		if (player.hasStatusEffect(StatusEffects.DeathBlossom)) {
 			outputText("It's me Di.... nah it's Information Noona saying that your Death Blossom is still here and dealing some lust poison damage to enemy.");
-			var damageDBH:Number = (scalingBonusIntelligence() * spellModWhite() * player.statusEffectv3(StatusEffects.DeathBlossom));
+			var damageDBH:Number = (scalingBonusIntelligence() * spellModWhite() * player.statusEffectv2(StatusEffects.DeathBlossom));
 			damageDBH = Math.round(damageDBH * poisonDamageBoostedByDao());
             doPoisonDamage(damageDBH, true, true);
 			if (monster.lustVuln > 0) {
-				var damageDBL:Number = (combat.teases.teaseBaseLustDamage() * spellModWhite() * player.statusEffectv3(StatusEffects.DeathBlossom));
-				var Randomcrit4:Boolean = false;
-				if (player.hasPerk(PerkLib.VegetalAffinity)) damageDBL *= 1.5;
-				if (player.hasPerk(PerkLib.GreenMagic)) damageDBL *= 2;
-				if (player.hasStatusEffect(StatusEffects.GreenCovenant)) damageDBL *= 2;
-				//Determine if critical tease!
-				var critChance8:int = 5;
-				if (player.hasPerk(PerkLib.CriticalPerformance)) {
-					if (player.lib <= 100) critChance8 += player.lib / 5;
-					if (player.lib > 100) critChance8 += 20;
-				}
-				if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance8 = 0;
-				if (rand(100) < critChance8) {
-					Randomcrit4 = true;
-					damageDBL *= 1.75;
-				}
-				if (player.hasPerk(PerkLib.RacialParagon)) damageDBL *= combat.RacialParagonAbilityBoost();
-				if (player.hasPerk(PerkLib.NaturalArsenal)) damageDBL *= 1.50;
-				damageB = Math.round(damageDBL*monster.lustVuln);
-				monster.teased(damageDBL, false);
-				if (Randomcrit4) outputText(" Critical hit!");
-				outputText("\n\n");
-				combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
-				if (player.hasPerk(PerkLib.VerdantLeech)) {
-					monster.lustVuln += 0.50;
-					HPChange(Math.round(player.maxHP() * 0.05), false);
-				}
+				var damageDBL:Number = (combat.teases.teaseBaseLustDamage() * 1.5 * spellModWhite() * player.statusEffectv2(StatusEffects.DeathBlossom));
+				var arveDBL:Number = 1;
+				if (player.hasPerk(PerkLib.ArcaneVenom)) arveDBL += AbstractSpell.stackingArcaneVenom();
+				while (arveDBL-->0) repeatArcaneVenom(damageDBL, 0);
 			}
 		}
         if (player.hasStatusEffect(StatusEffects.Bound) && flags[kFLAGS.PC_FETISH] >= 2) {
@@ -10353,6 +10266,37 @@ public class Combat extends BaseContent {
 		if (monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
     }
+	
+	private function repeatArcaneVenom(dmg:Number, subtype:Number):void {
+		var damageAV:Number = dmg;
+		var RandomCritAV:Boolean = false;
+		if (player.hasPerk(PerkLib.VegetalAffinity)) damageAV *= 1.5;
+		if (player.hasPerk(PerkLib.GreenMagic)) damageAV *= 2;
+		if (player.hasStatusEffect(StatusEffects.GreenCovenant)) damageAV *= 2;
+		//Determine if critical tease!
+		var critChanceAV:int = 5;
+		if (player.hasPerk(PerkLib.CriticalPerformance)) {
+			if (player.lib <= 100) critChanceAV += player.lib / 5;
+			if (player.lib > 100) critChanceAV += 20;
+		}
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChanceAV = 0;
+		if (rand(100) < critChanceAV) {
+			RandomCritAV = true;
+			damageAV *= 1.75;
+		}
+		if (player.hasPerk(PerkLib.RacialParagon)) damageAV *= combat.RacialParagonAbilityBoost();
+		if (player.hasPerk(PerkLib.NaturalArsenal)) damageAV *= 1.50;
+		damageAV = Math.round(damageAV*monster.lustVuln);
+		monster.teased(damageAV, false);
+		if (RandomCritAV) outputText(" Critical hit!");
+		outputText("\n\n");
+		if (subtype == 1) combat.teaseXP((1 + combat.bonusExpAfterSuccesfullTease()*2));
+		else combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
+		if (player.hasPerk(PerkLib.VerdantLeech)) {
+			if (monster.lustVuln != 0) monster.lustVuln += 0.50;
+			HPChange(Math.round(player.maxHP() * 0.05), false);
+		}
+	}
 
     public function regeneration(minutes:Number = 1):void {
 		var healingPercent:Number = 0;

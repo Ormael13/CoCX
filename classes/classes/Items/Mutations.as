@@ -3240,15 +3240,33 @@ public final class Mutations extends MutationsHelper {
 				return;
 			}
 			//Smart enough for Bone armor and doesnt have it
-			if (player.inte >= 110 && !player.hasStatusEffect(StatusEffects.KnowsBoneArmor)) {
+			if (player.inte >= 105 && !player.hasStatusEffect(StatusEffects.KnowsBoneArmor)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new necromancer spell: Bone armor.</b>");
 				player.createStatusEffect(StatusEffects.KnowsBoneArmor, 0, 0, 0, 0);
+				return;
+			}
+			//Smart enough for Corpse Explosion and doesnt have it
+			if (player.inte >= 110 && !player.hasStatusEffect(StatusEffects.KnowsCorpseExplosion)) {
+				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new necromancer spell: Corpse Explosion.</b>");
+				player.createStatusEffect(StatusEffects.KnowsCorpseExplosion, 0, 0, 0, 0);
+				return;
+			}
+			//Smart enough for Blood Shower and doesnt have it
+			if (player.inte >= 115 && !player.hasStatusEffect(StatusEffects.KnowsBloodShower)) {
+				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new necromancer spell: Blood Shower.</b>");
+				player.createStatusEffect(StatusEffects.KnowsBloodShower, 0, 0, 0, 0);
 				return;
 			}
 			//Smart enough for Boneshatter and doesnt have it
 			if (player.inte >= 120 && !player.hasStatusEffect(StatusEffects.KnowsBoneshatter)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new necromancer spell: Boneshatter.</b>");
 				player.createStatusEffect(StatusEffects.KnowsBoneshatter, 0, 0, 0, 0);
+				return;
+			}
+			//Smart enough for Necrotic Rot and doesnt have it
+			if (player.inte >= 125 && !player.hasStatusEffect(StatusEffects.KnowsNecroticRot)) {
+				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new necromancer spell: Necrotic Rot.</b>");
+				player.createStatusEffect(StatusEffects.KnowsNecroticRot, 0, 0, 0, 0);
 				return;
 			}
 		}

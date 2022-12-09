@@ -63,28 +63,40 @@ public class BriarthornSpell extends AbstractGreenSpell {
 	override protected function doSpellEffect(display:Boolean = true):void {
 		if (display) {
 			outputText("You concentrate on the vines causing them to grow vicious thorns that tear through your opponent's flesh delivering a noxious poison.\n");
+			if (monster.lustVuln == 0) {
+				if (display) {
+					outputText("It has no effect!  Your foe clearly does not experience lust in the same way as you.\n\n");
+				}
+				return;
+			}
 			monster.createStatusEffect(StatusEffects.Briarthorn, 6, 0, 0, 0);
-			var lustDmg:Number = calcDamage(monster, true, true);
-			//Determine if critical tease!
-			var crit:Boolean   = false;
-			var critChance:int = 5;
-			if (player.hasPerk(PerkLib.CriticalPerformance)) {
-				if (player.lib <= 100) critChance += player.lib / 5;
-				if (player.lib > 100) critChance += 20;
-			}
-			if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
-			if (rand(100) < critChance) {
-				crit = true;
-				lustDmg *= 1.75;
-			}
-			lustDmg = Math.round(monster.lustVuln * lustDmg);
-			monster.teased(lustDmg, false);
-			if (crit) outputText(" <b>Critical!</b>");
-			combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
-			if (player.hasPerk(PerkLib.VerdantLeech)) {
-				monster.lustVuln += 0.50;
-				HPChange(Math.round(player.maxHP() * 0.05), false);
-			}
+			var arve:Number = 1;
+			if (player.hasPerk(PerkLib.ArcaneVenom)) arve += stackingArcaneVenom();
+			while (arve-->0) doSpellEffect2();
+		}
+	}
+	
+	private function doSpellEffect2():void {
+		var lustDmg:Number = calcDamage(monster, true, true);
+		//Determine if critical tease!
+		var crit:Boolean   = false;
+		var critChance:int = 5;
+		if (player.hasPerk(PerkLib.CriticalPerformance)) {
+			if (player.lib <= 100) critChance += player.lib / 5;
+			if (player.lib > 100) critChance += 20;
+		}
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			lustDmg *= 1.75;
+		}
+		lustDmg = Math.round(monster.lustVuln * lustDmg);
+		monster.teased(lustDmg, false);
+		if (crit) outputText(" <b>Critical!</b>");
+		combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
+		if (player.hasPerk(PerkLib.VerdantLeech)) {
+			if (monster.lustVuln != 0) monster.lustVuln += 0.50;
+			HPChange(Math.round(player.maxHP() * 0.05), false);
 		}
 	}
 }
