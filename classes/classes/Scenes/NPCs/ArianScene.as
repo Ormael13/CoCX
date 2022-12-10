@@ -1452,7 +1452,7 @@ private function takeYerLizardHomePartII():void {
 	outputText("\n\nYou politely excuse yourself, saying you should let the lizan make [arian emself] comfortable in [arian eir] new home, and step back outside.");
 	//flag arian as follower
 	flags[kFLAGS.ARIAN_FOLLOWER] = 1;
-	flags[kFLAGS.ARIAN_SCALES] = 1;
+	flags[kFLAGS.ARIAN_SCALES] = 0.5;
 	if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard",1,+1);
 	else player.createKeyItem("Radiant shard", 1,0,0,0);
 	outputText("\n\n<b>Before fully settling in your camp as if remembering something Arian pulls a shining shard from [arian eir] inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
@@ -3491,14 +3491,14 @@ private function giveArianScalesDyeVial():void {
 	outputText(". The color in [arian eir] scales compliments well [arian eir] lithe body, and their texture is so smooth that makes you run a hand playfully over [arian eir] scaly buttcheecks, earning a surprised giggle from the lizan.\n\n");
 	outputText("Now back to business. You take the vial, and using a pot that you’ve brought from Arian’s tent when you came, mix its contents with clear water. Soon enough, you have the mixture done, and motion Arian to come close, so you can pour the liquid over [arian em].\n\n");
 	outputText("As you let the vial contents flow over [arian eir] body, the lizan’s scales bathe thoroughly in the ");
-	if (flags[kFLAGS.ARIAN_SCALES] == 1) outputText("white");
+	if (flags[kFLAGS.ARIAN_SCALES] <= 1) outputText("white");
 	if (flags[kFLAGS.ARIAN_SCALES] == 2) outputText("turquoise");
 	if (flags[kFLAGS.ARIAN_SCALES] == 3) outputText("purplish-pink");
 	if (flags[kFLAGS.ARIAN_SCALES] == 4) outputText("rainbow-colored");
 	outputText(" liquid.\n\n");
 	outputText("\"<i>Whoa, it’s cold!</i>\" Arian gasps, shuddering as the fluid makes contact with [arian eir] scales.");
 	outputText("In a matter of seconds, the fluid starts working over [arian em], and you can notice how [arian eir] scales ");
-	if (flags[kFLAGS.ARIAN_SCALES] == 1) {
+	if (flags[kFLAGS.ARIAN_SCALES] <= 1) {
 		outputText("recover their original white coloration. The white returns to all of [arian eir] body, the brown markings on [arian eir] back reappears, leaving [arian eir] color as before.\n\n");
 	}
 	if (flags[kFLAGS.ARIAN_SCALES] == 2) {
@@ -4292,7 +4292,7 @@ private function arianAppearance():void {
 	outputText(" figure.\n\n");
 	outputText("Arian’s head is reptilian in shape, with a long snout. The teeth in [arian eir] mouth, tough sharp as those of a lizan, look much less menacing and predatory as the others that you’ve seen. ");
 	outputText("Like [arian eir] body, the lizan’s head is covered ");
-	if (flags[kFLAGS.ARIAN_SCALES] == 1) outputText("entirely in white scales, probably a harmless remnant of [arian em] time of sickness");
+	if (flags[kFLAGS.ARIAN_SCALES] <= 1) outputText("entirely in white scales, probably a harmless remnant of [arian em] time of sickness");
 	if (flags[kFLAGS.ARIAN_SCALES] == 2) outputText("in bright turquoise scales, turning a lighter shade of the same color upon reaching to [arian eir] neck, while [arian eir] inner neck has creamy-gold colored scales");
 	if (flags[kFLAGS.ARIAN_SCALES] == 3) outputText("in lovely pink scales, turning a into a pinkish-white upon reaching to [arian eir] neck. Purplish-pink accents surround [arian eir] eyes and upper head");
 	if (flags[kFLAGS.ARIAN_SCALES] == 4) outputText("in scales, the ones on [arian eir] head a soft, almost pinkish ruby-red, softly turning to orange-golden at [arian eir] neck. [arian Eir] inner neck has a creamy-golden coloration");
@@ -4302,7 +4302,7 @@ private function arianAppearance():void {
 	else outputText("" + arianChestAdjective() + "breasts, each one with a 0.5 inch nipple protruding from them");
 	outputText(".\n\n");
 	outputText("Arian’s body is thoroughly covered in scales, the ");
-	if (flags[kFLAGS.ARIAN_SCALES] == 1) outputText("white of [arian eir] head remaining on most of the lizan’s body, except for a few brown markings on [arian eir] back and tail. [arian Eir] chest and underbelly is covered too by white scales, though a bit more greyish");
+	if (flags[kFLAGS.ARIAN_SCALES] <= 1) outputText("white of [arian eir] head remaining on most of the lizan’s body, except for a few brown markings on [arian eir] back and tail. [arian Eir] chest and underbelly is covered too by white scales, though a bit more greyish");
 	if (flags[kFLAGS.ARIAN_SCALES] == 2) outputText("bright turquoise of [arian eir] head remaining on the lizan’s upper arms and legs, as well as on [arian eir] back and tail. [arian Eir] lower arms and legs, and [arian eir] sides have a lighter shade of turquoise. Light-golden scales cover Arian’s chest, underbelly and crotch");
 	if (flags[kFLAGS.ARIAN_SCALES] == 3) outputText("purple-pink of [arian eir] head remaining on the lizan’s upper arms, legs, as well as on [arian eir] back and tail. [arian Eir] lower arms and legs, and [arian eir] sides have a lilac coloration. Pink-white scales cover Arian’s chest, underbelly and crotch");
 	if (flags[kFLAGS.ARIAN_SCALES] == 4) outputText("ruby-red and orange of [arian eir] head turning into golden upon reaching the lizan’s shoulders. The same golden scales cover [arian eir] upper arms. [arian Eir] chest and underbelly have a lighter, creamy-golden set of scales. On [arian eir] back, sides and lower arms, the scales turn into a chartreuse green, later into a light blue at the lizan’s butt and legs, to end with a violet coloration at the end of the tail");
@@ -4315,7 +4315,7 @@ private function arianAppearance():void {
 	else outputText("has a delightful softness, just");
 	outputText(" enough to get a good grope.\n\n");
 	outputText("From [arian eir] backside emerges a long, reptilian tail covered in ");
-	if (flags[kFLAGS.ARIAN_SCALES] == 1) outputText("white");
+	if (flags[kFLAGS.ARIAN_SCALES] <= 1) outputText("white");
 	if (flags[kFLAGS.ARIAN_SCALES] == 2) outputText("turquoise");
 	if (flags[kFLAGS.ARIAN_SCALES] == 3) outputText("purplish-pink");
 	if (flags[kFLAGS.ARIAN_SCALES] == 4) outputText("rainbow-colored");
@@ -4339,3 +4339,4 @@ private function arianAppearance():void {
 }
 }
 }
+

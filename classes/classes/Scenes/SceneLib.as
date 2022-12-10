@@ -87,6 +87,8 @@ public class SceneLib {
 
     public static var giacomoShop:Giacomo = new Giacomo();
 
+    public static var angelScene:AngelScene = new AngelScene();
+
     public static var impScene:ImpScene = new ImpScene();
 
     public static var goblinScene:GoblinScene = new GoblinScene();

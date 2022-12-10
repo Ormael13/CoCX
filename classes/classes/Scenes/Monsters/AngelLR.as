@@ -36,10 +36,19 @@ package classes.Scenes.Monsters
 		
 		override protected function performCombatAction():void
 		{
-			if (!hasStatusEffect(StatusEffects.TranscendentSoulField) && soulforce >= 5) createStatusEffect(StatusEffects.TranscendentSoulField, 10, 10, 0, 0);
-			if (hasStatusEffect(StatusEffects.TranscendentSoulField)) {
-				if (soulforce >= 5) soulforce -= 5;
-				else removeStatusEffect(StatusEffects.TranscendentSoulField);
+			if (hasStatusEffect(StatusEffects.TrueFormAngel)) {
+				if (!hasStatusEffect(StatusEffects.TranscendentSoulField) && soulforce >= 10) createStatusEffect(StatusEffects.TranscendentSoulField, 10, 10, 0, 0);
+				if (hasStatusEffect(StatusEffects.TranscendentSoulField)) {
+					if (soulforce >= 10) soulforce -= 10;
+					else removeStatusEffect(StatusEffects.TranscendentSoulField);
+				}
+			}
+			else {
+				if (!hasStatusEffect(StatusEffects.TranscendentSoulField) && soulforce >= 5) createStatusEffect(StatusEffects.TranscendentSoulField, 5, 5, 0, 0);
+				if (hasStatusEffect(StatusEffects.TranscendentSoulField)) {
+					if (soulforce >= 5) soulforce -= 5;
+					else removeStatusEffect(StatusEffects.TranscendentSoulField);
+				}
 			}
 			var choice:Number = rand(5);
 			if (choice == 0) AngelEnergyRays();

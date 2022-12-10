@@ -716,8 +716,14 @@ public class Exploration extends BaseContent
 			if (player.level < 18 && gobimpChooser >= 20) gobimpChooser = 19;
 			else if (player.level < 30 && gobimpChooser >= 30) gobimpChooser = 29;
 			clearOutput();
-			if (gobimpChooser >= 10 && gobimpChooser < 20) SceneLib.impScene.impPackEncounter2();
-			else if (gobimpChooser >= 20 && gobimpChooser < 30) SceneLib.impScene.impPackEncounter();
+			if (gobimpChooser >= 10 && gobimpChooser < 20) {
+				if (rand(2) == 0) SceneLib.impScene.impPackEncounter2();
+				else SceneLib.angelScene.angelGroupEncounter();
+			}
+			else if (gobimpChooser >= 20 && gobimpChooser < 30) {
+				if (rand(2) == 0) SceneLib.impScene.impPackEncounter();
+				else SceneLib.angelScene.angelGroupEncounter();
+			}
 			else if (gobimpChooser >= 30) {
 				if (flags[kFLAGS.TIMES_ENCOUNTERED_GOBLIN_WARRIOR] >= 1) SceneLib.goblinScene.goblinWarriorsEncounter();
 				else SceneLib.impScene.impPackEncounter();

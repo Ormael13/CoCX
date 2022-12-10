@@ -29,6 +29,17 @@ import classes.StatusEffects;
 		return spellWhiteTier3Cooldown();
 	}
 	
+	override protected function usabilityCheck():String {
+		var uc:String = super.usabilityCheck();
+		if (uc) return uc;
+		
+		if (!player.hasStatusEffect(StatusEffects.NearbyPlants)) {
+			return "Entangle require to have plants nearby.";
+		}
+		
+		return "";
+	}
+	
 	override public function isActive():Boolean {
 		return monster.hasStatusEffect(StatusEffects.GreenCovenant);
 	}

@@ -34,6 +34,17 @@ public class EntangleSpell extends AbstractGreenSpell {
 		return spellWhiteTier2Cooldown();
 	}
 	
+	override protected function usabilityCheck():String {
+		var uc:String = super.usabilityCheck();
+		if (uc) return uc;
+		
+		if (!player.hasStatusEffect(StatusEffects.NearbyPlants)) {
+			return "Entangle require to have plants nearby.";
+		}
+		
+		return "";
+	}
+	
 	override public function isActive():Boolean {
 		return player.statusEffectv1(StatusEffects.Entangled) > 0;
 	}

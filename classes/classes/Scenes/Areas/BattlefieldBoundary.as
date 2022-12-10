@@ -71,8 +71,8 @@ use namespace CoC;
 			//Build choice list!
 			choice[choice.length] = 0; //Golem group enemies
 			choice[choice.length] = 1; //Golem group enemies
-			choice[choice.length] = 2; //Golem group enemies
-			choice[choice.length] = 3; //Goblin/Imp group enemies
+			choice[choice.length] = 2; //Goblin/Imp/Angel group enemies
+			choice[choice.length] = 3; //Goblin/Imp/Angel group enemies
 			choice[choice.length] = 4; //Items
 			choice[choice.length] = 5; //Find nothing!
 			
@@ -80,9 +80,9 @@ use namespace CoC;
 			switch(select) {
 				case 0:
 				case 1:
-				case 2:
 					SceneLib.exploration.genericGolemsEncounters1();
 					break;
+				case 2:
 				case 3:
 					SceneLib.exploration.genericGobImpEncounters1();
 					break;
