@@ -9551,6 +9551,15 @@ public class Combat extends BaseContent {
                 outputText("<b>Moment of Clarity effect ended!</b>\n\n");
             } else player.addStatusValue(StatusEffects.MomentOfClarity, 1, -1);
         }
+		//Blackout
+        if (player.hasStatusEffect(StatusEffects.Blackout)) {
+            if (player.statusEffectv1(StatusEffects.Blackout) <= 0) {
+                player.removeStatusEffect(StatusEffects.Blackout);
+				outputText("<b>Blackout ended!</b>\n\n");
+            } else {
+                player.addStatusValue(StatusEffects.Blackout, 1, -1);
+            }
+        }
         //Ezekiel Curse
         if (player.hasStatusEffect(StatusEffects.EzekielCurse)) {/*
             if (EvangelineFollower.EvangelineAffectionMeter >= 2 && player.hasPerk(PerkLib.EzekielBlessing)) {

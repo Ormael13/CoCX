@@ -898,12 +898,24 @@ public class CombatUI extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
+		if (inCombat && player.hasStatusEffect(StatusEffects.Blackout)) {
+			clearOutput();
+			outputText("You try to ready a special attack, but you can't.  <b>Your ability to use magical special attacks was interrupted due to Blackout, and now you've wasted a chance to attack!</b>\n\n");
+			enemyAI();
+			return;
+		}
 		submenu(magspButtons,mainMenu);
 	}
 	internal function submenuPhySpecials():void {
 		if (inCombat && player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 5) {
 			clearOutput();
 			outputText("You try to ready a special attack, but wind up stumbling dizzily instead.  <b>Your ability to use physical special attacks was sealed, and now you've wasted a chance to attack!</b>\n\n");
+			enemyAI();
+			return;
+		}
+		if (inCombat && player.hasStatusEffect(StatusEffects.Blackout)) {
+			clearOutput();
+			outputText("You try to ready a special attack, but you can't.  <b>Your ability to use physical special attacks was interrupted due to Blackout, and now you've wasted a chance to attack!</b>\n\n");
 			enemyAI();
 			return;
 		}
@@ -918,6 +930,12 @@ public class CombatUI extends BaseCombatContent {
 			clearOutput();
 			if (player.statusEffectv2(StatusEffects.Sealed) == 2) outputText("You reach for your magic, but you just can't manage the focus necessary.  <b>Your ability to use magic was sealed, and now you've wasted a chance to attack!</b>\n\n");
 			if (player.statusEffectv2(StatusEffects.Sealed) == 10) outputText("You try to use magic but you are currently silenced by the alraune vines!\n\n");
+			enemyAI();
+			return;
+		}
+		if (inCombat && player.hasStatusEffect(StatusEffects.Blackout)) {
+			clearOutput();
+			outputText("You reach for your magic, but you just can't manage the focus necessary.  <b>Your ability to use magic was interrupted due to Blackout, and now you've wasted a chance to attack!</b>\n\n");
 			enemyAI();
 			return;
 		}

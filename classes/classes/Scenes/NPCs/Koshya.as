@@ -112,7 +112,7 @@ import classes.internals.*;
 		public function Koshya()
 		{
 			this.a = "the ";
-			this.short = "angel";
+			this.short = "blue skinned angel";
 			this.imageName = "koshya";
 			this.long = "";
 			// this.plural = false;

@@ -14,6 +14,6 @@ package classes.Scenes.NPCs
 		
 		
 		
-		//ice races chimera - jsut like Cindirella just for ice
+		//ice races chimera - just like Cindirella just for ice
 	}
 }

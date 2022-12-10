@@ -59,6 +59,7 @@ public class EbonLabyrinth extends DungeonAbstractContent {
 
     //Scene instances
     public var chaosChimeraScene:ChaosChimeraScene = new ChaosChimeraScene();
+    public var mindbreakerScene:MindbreakerScene = new MindbreakerScene();
 
     public var darkSlimeEmpressScene:DarkSlimeEmpressScene = new DarkSlimeEmpressScene();
     public var hydraScene:HydraScene = new HydraScene();
@@ -377,7 +378,7 @@ public class EbonLabyrinth extends DungeonAbstractContent {
     //selects an enemy and starts the encounter
     //'print' argument disables printing (used for night ambushes)
     private function enemySelector(print:Boolean = true):void {
-        var choices:Array = [displacerEL, darkSlimeEL, succubusEL, incubusEL, amogusEL, tentabeastEL, minotaurEL];
+        var choices:Array = [displacerEL, darkSlimeEL, succubusEL, incubusEL, amogusEL, tentabeastEL, minotaurEL, mindbreakerEL];
         choices[rand(choices.length)](print);
     }
     
@@ -454,6 +455,13 @@ public class EbonLabyrinth extends DungeonAbstractContent {
             outputText("Just as you turn the corner, you come face to face with a towering minotaur armed with a pair of huge battleaxes and equipped with a full plate armor. The beast smirks as his cock hardens in anticipation. It must’ve been months since he last fucked something!");
         }
         startCombat(new Minotaur(), true);
+    }
+    private function mindbreakerEL(print:Boolean = true):void {
+        if (print) {
+            clearOutput();
+            mindbreakerScene.encounter();
+        }
+        startCombat(new MindbreakerFemale(), true);
     }
 
     //==================================================================================================

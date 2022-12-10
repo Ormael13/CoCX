@@ -39,6 +39,7 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 
 		public static var MindbreakerPrisoner:Boolean;
 		public static var MindbreakerPrisonerCooldown:int;
+		public static var MindbreakerEncounterChance:Number;
 
 		public function stateObjectName():String {
 			return "Mindbreaker";
@@ -55,6 +56,7 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 			PlayerEggIsFertile = false;
 			MindbreakerPrisoner = false;
 			MindbreakerPrisonerCooldown = 0;
+			MindbreakerEncounterChance = 1;
 		}
 
 		public function saveToObject():Object {
@@ -73,7 +75,8 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 				"numberOfMiniFullConvert": MindBreakerMiniFullConvert,
 
 				"playerEggIsFertile": PlayerEggIsFertile,
-				"mindbreakerPrisoner": MindbreakerPrisoner
+				"mindbreakerPrisoner": MindbreakerPrisoner,
+				"MindbreakerEncounterChance": MindbreakerEncounterChance
 			};
 		}
 
@@ -101,6 +104,7 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 					// old save, still need to set Cooldown  to something
 					MindbreakerPrisonerCooldown = 0;
 				}
+				MindbreakerEncounterChance = valueOr(o["MindbreakerEncounterChance"], 1);
 			} else {
 				// loading from old save
 				resetState();

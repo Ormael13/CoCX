@@ -255,7 +255,7 @@ public class Mountain extends BaseContent
 					}, {
 						name  : "mindbreaker",
 						call  : SceneLib.mindbreaker.findMindbreaker,
-						chance: 0.50,
+						chance: findMindbreakerChance(),
 						when  : function ():Boolean {
 							return Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_NOT_STARTED && player.level >= 10 && !player.blockingBodyTransformations() && flags[kFLAGS.MARAE_QUEST_START] >= 1
 						}
@@ -276,6 +276,11 @@ public class Mountain extends BaseContent
 						call: curry(SceneLib.mimicScene.mimicTentacleStart,2)
 					})
 			;
+		}
+		private function findMindbreakerChance():Number {
+			var fMC:Number = 0.50;
+			fMC *= Mindbreaker.MindbreakerEncounterChance;
+			return fMC;
 		}
 		//Explore Mountain
 		public function exploreMountain():void {
