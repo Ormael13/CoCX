@@ -39,11 +39,19 @@ use namespace CoC;
 			explorationEncounter = Encounters.group(/*SceneLib.commonEncounters,*/ {
 				//General Golems, Goblin and Imp Encounters
 				name: "common",
+				chance: 0.4,
 				call: function ():void {
 					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
 					SceneLib.exploration.genericGolGobImpEncounters();
 				}
-			}, {
+			}, {/*
+				//General Angels Encounters
+				name: "common",
+				call: function ():void {
+					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
+					SceneLib.exploration.genericAngelsEncounters();
+				}
+			}, {*/
 				//Helia monogamy fucks
 				name  : "helcommon",
 				night : false,

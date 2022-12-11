@@ -213,14 +213,18 @@ public class CombatAbilities {
 		BloodField
 	];
 	
-	public static const PlantGrowth:PlantGrowthSpell   = new PlantGrowthSpell();
-	public static const Entangle:EntangleSpell         = new EntangleSpell();
-	public static const Briarthorn:BriarthornSpell     = new BriarthornSpell();
+	public static const PlantGrowth:PlantGrowthSpell     = new PlantGrowthSpell();
+	public static const Entangle:EntangleSpell           = new EntangleSpell();
+	public static const Briarthorn:BriarthornSpell       = new BriarthornSpell();
+	public static const DeathBlossom:DeathBlossomSpell   = new DeathBlossomSpell();
+	public static const GreenCovenant:GreenCovenantSpell = new GreenCovenantSpell();
 
 	public static const ALL_GREEN_SPELLS:/*CombatAbility*/Array = [
 		PlantGrowth,
 		Entangle,
-		Briarthorn
+		Briarthorn,
+		DeathBlossom,
+		GreenCovenant
 	];
 	
 	public static const ALL_SPELLS:/*CombatAbility*/Array = []

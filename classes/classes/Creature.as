@@ -4238,6 +4238,7 @@ public class Creature extends Utils
 				}
 			}
 			if (hasStatusEffect(StatusEffects.Flying)) chance += flychance;
+			if (hasStatusEffect(StatusEffects.GreenCovenant)) chance = 0;
 			return chance;
 		}
 

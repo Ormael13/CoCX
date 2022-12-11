@@ -9,88 +9,44 @@ public class BloodShowerSpell extends AbstractNecroSpell {
 	public function BloodShowerSpell() {
 		super(
 			"Blood Shower",
-			"Strike at the target ossature causing it to explode from the inside and causing serious internal damage and weakening its blow. Single target only (does not work on boneless creatures, Monster take 20% strength drain from this effect which stacks).",
+			"Force some of the blood out of one of the many defeated opponents on the opposite team leaving them on the brink of death as the stolen blood rains on the opponents, greatly damaging their morale. Only work on group type enemies with less than 80% of their HP left.",
 			TARGET_ENEMY,
 			TIMING_INSTANT,
-			[TAG_DAMAGING]
+			[TAG_DEBUFF]
 		)
 	}
 	
 	override public function describeEffectVs(target:Monster):String {
-		return "~"+calcDamage(target, false, false)+" true damage, "+
-				"-"+Math.round(100*calcDebuffPower(monster,false))+"% str"
-	}
-	
-	override public function calcCooldown():int {
-		return 3;
+		return "Reducing their damage dealt by 80%. Has a chance to strike fear in the heart of your foes."
 	}
 	
 	override public function get isKnown():Boolean {
 		return player.hasStatusEffect(StatusEffects.KnowsBloodShower);
 	}
 	
-	override public function demonBonesCost():int {
-		return 5;
+	override public function isActive():Boolean {
+		return monster.hasStatusEffect(StatusEffects.BloodShower);
 	}
 	
 	override protected function usabilityCheck():String {
-		if (monster.hasPerk(PerkLib.EnemyConstructType)
-				|| monster.hasPerk(PerkLib.EnemyElementalType)
-				|| monster.hasPerk(PerkLib.EnemyGhostType)
-				|| monster.hasPerk(PerkLib.EnemyGooType)
-				|| monster.hasPerk(PerkLib.EnemyPlantType)) {
-			return "Your enemy lacks bones.";
-		}
-		if (monster.plural
-				|| monster.hasPerk(PerkLib.Enemy300Type)
-				|| monster.hasPerk(PerkLib.EnemyGroupType)
-				|| monster.hasPerk(PerkLib.EnemyLargeGroupType)) {
-			return "You can only strike one target.";
+		if ((!monster.plural
+				|| !monster.hasPerk(PerkLib.Enemy300Type)
+				|| !monster.hasPerk(PerkLib.EnemyGroupType)
+				|| !monster.hasPerk(PerkLib.EnemyLargeGroupType)) && monster.HP > monster.maxHP() * 0.8) {
+			return "You can only use that spell on enemy groups that have less than 80% of members left.";
 		}
 		return super.usabilityCheck();
 	}
 	
-	public function calcDebuffPower(monster:Monster, randomize:Boolean=true):Number {
-		var shatterIt:Number = 0.2;
-		shatterIt *= boneSoulBonus(demonBonesCost())
-		return shatterIt;
-	}
-	
-	public function calcDamage(monster:Monster, randomize:Boolean=true, casting:Boolean = true):Number { //casting - Increase Elemental Counter while casting (like Raging Inferno)
-		var damage:Number = adjustSpellDamage(
-				scalingBonusIntelligence()*3,
-				DamageType.TRUE,
-				CAT_SPELL_NECRO,
-				monster,
-                true,
-                casting
-		);
-		if (player.hasPerk(PerkLib.Necromancy)) damage *= 1.5;
-		damage *= boneSoulBonus(demonBonesCost());
-		return damage;
-	}
-	
 	override protected function doSpellEffect(display:Boolean = true):void {
 		if (display) {
-			outputText("You channel your powers in [themonster] bone structure stressing it and forcing the bones to snap. [Themonster] cough blood you wreck [monster his] from the inside. ");
-		}
-		var damage:Number = calcDamage(monster, true, true);
-		var shatterIt:Number = calcDebuffPower(monster);
-		consumeBones(demonBonesCost());
-		damage = critAndRepeatDamage(display, damage, DamageType.TRUE);
-		checkAchievementDamage(damage);
-		combat.heroBaneProc(damage)
-		if (monster.hasStatusEffect(StatusEffects.Boneshatter)) {
-			var currentShatter:Number = monster.statusEffectv1(StatusEffects.Boneshatter);
-			if (currentShatter < 0.9) {
-				if (currentShatter - shatterIt > 0.9) shatterIt = 0.9-currentShatter;
-				monster.addStatusValue(StatusEffects.Boneshatter, 1, shatterIt);
-				monster.buff("Boneshatter").addStats({str:-(Math.round(shatterIt * monster.str))}).withText("Boneshatter").combatPermanent();
+			outputText("You concentrate your powers on one of the bodies of your fallen foes forcibly extracting blood and making it rain on your opponent. ");
+			if (rand(4) == 0) {
+				outputText("Your opponents are routing in terror! ");
+				monster.createStatusEffect(StatusEffects.Fear, 3, 0, 0, 0);
 			}
-		} else {
-			monster.createStatusEffect(StatusEffects.Boneshatter, shatterIt, 0, 0, 0);
-			monster.buff("Boneshatter").addStats({str:-(Math.round(shatterIt * monster.str))}).withText("Boneshatter").combatPermanent();
 		}
+		monster.createStatusEffect(StatusEffects.BloodShower, 0, 0, 0, 0);
 	}
 }
 }

@@ -151,30 +151,30 @@ public class Ingnam extends BaseContent
 			outputText("\n\n<b><u>Blacksmith's pricings</u></b>");
 			menu();
 			if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) { //20% discount for History: Fighter
-				addShopItem(weapons.DAGGER, 48, 1);
-				addShopItem(weapons.PIPE, 40, 1);
-				addShopItem(weapons.SPEAR, 140, 1);
-				addShopItem(weapons.KATANA, 200, 1);
-				addShopItem(weapons.MACE, 80, 1);
+				addShopItem(weapons.DAGGER, 160, 1);
+				addShopItem(weapons.PIPE, 120, 1);
+				addShopItem(weapons.SPEAR, 480, 1);
+				addShopItem(weapons.KATANA, 720, 1);
+				addShopItem(weapons.MACE, 400, 1);
 			}
 			else {
-				addShopItem(weapons.DAGGER, 60, 1);
-				addShopItem(weapons.PIPE, 50, 1);
-				addShopItem(weapons.SPEAR, 175, 1);
-				addShopItem(weapons.KATANA, 250, 1);
-				addShopItem(weapons.MACE, 100, 1);
+				addShopItem(weapons.DAGGER, 200, 1);
+				addShopItem(weapons.PIPE, 150, 1);
+				addShopItem(weapons.SPEAR, 600, 1);
+				addShopItem(weapons.KATANA, 900, 1);
+				addShopItem(weapons.MACE, 500, 1);
 			}
 			if (player.hasPerk(PerkLib.HistorySmith) || player.hasPerk(PerkLib.PastLifeSmith)) { //20% discount for History: Smith perk
-				addShopItem(armors.LEATHRA, 40, 2);
-				addShopItem(armors.FULLCHN, 120, 2);
-				addShopItem(armors.SCALEML, 288, 2);
+				addShopItem(armors.LEATHRA, 120, 2);
+				addShopItem(armors.FULLCHN, 360, 2);
+				addShopItem(armors.SCALEML, 800, 2);
 			}
 			else {
-				addShopItem(armors.LEATHRA, 50, 2);
-				addShopItem(armors.FULLCHN, 150, 2);
-				addShopItem(armors.SCALEML, 360, 2);
+				addShopItem(armors.LEATHRA, 150, 2);
+				addShopItem(armors.FULLCHN, 450, 2);
+				addShopItem(armors.SCALEML, 1000, 2);
 			}
-			addShopItem(weapons.A_WAND, 300, 2);
+			addShopItem(weapons.A_WAND, 225, 2);
 			addButton(14, "Leave", menuShops);
 		}
 		
@@ -184,15 +184,15 @@ public class Ingnam extends BaseContent
 			outputText("\n\n\"<i>Welcome to my shop. Do you need to get outfitted?</i>\" he says pulling keenly at the measuring tape draping his shoulders.");
 			outputText("\n\n<b><u>Tailor shop pricings</u></b>");
 			menu();
-			addShopItem(armors.C_CLOTH, 10, 3);
+			addShopItem(armors.C_CLOTH, 15, 3);
 			addShopItem(armors.ADVCLTH, 75, 3);
-			addShopItem(armors.CLSSYCL, 100, 3);
+			addShopItem(armors.CLSSYCL, 60, 3);
 			addShopItem(armors.TUBETOP, 40, 3);
-			addShopItem(armors.OVERALL, 30, 3);
-			addShopItem(armors.M_ROBES, 75, 3);
-			addShopItem(armors.LTHRPNT, 200, 3);
-			addShopItem(armors.RBBRCLT, 500, 3);
-			addShopItem(armors.T_BSUIT, 650, 3);
+			addShopItem(armors.OVERALL, 40, 3);
+			addShopItem(armors.M_ROBES, 40, 3);
+			addShopItem(armors.LTHRPNT, 30, 3);
+			addShopItem(armors.RBBRCLT, 225, 3);
+			addShopItem(armors.T_BSUIT, 75, 3);
 			addButton(14, "Leave", menuShops);
 		}
 		
@@ -240,7 +240,7 @@ public class Ingnam extends BaseContent
 			addShopItem(consumables.AGILI_E, 12, 5);
 			addShopItem(consumables.SMART_T, 30, 5);
 			addShopItem(consumables.INCOINS, 30, 5);
-			addShopItem(consumables.FISHFIL, 5, 5);
+			addShopItem(consumables.FISHFIL, 10, 5);
 			addShopItem(consumables.H_PILL, 10, 5);
 			addButton(10, "Sell", sellAtTradingPost);
 			addButton(14, "Leave", menuShops);

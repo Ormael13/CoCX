@@ -75,6 +75,7 @@ public class TestMenu extends BaseContent
 		bd.add("FaeDragBParts", FaeDragTest2, "Add missing fairy dragon bodyparts.");
 		bd.add("FixFJiasngshi", fixFormerJiangshi, "Removig leftover effects of cursed tag after curginh Jiangshi state.");
 		//bd.add("DinCheatShop", curry(SceneLib.dinahScene.openShop, true), "Open Dinah shop with everything unlocked. Normally, you have to defeat a boss to unlock its TF; and all 'Roulette' items appear randomly.")
+		bd.add("DebugMenu", SceneLib.debugMenu.accessDebugMenu, "The older debug menu. Who knows what it hides?");
 		bd.add("Bugfixes", cheatBugfixes, "Buttons or fixing some rare old bugs that can't be fixd with save-updater.");
 		bd.add("Testing", cheatTesting, "Buttons for testing some new stuff. May break your game if something is outdated.");
 		submenu(bd, playerMenu, 0, false);
@@ -2585,4 +2586,4 @@ public class TestMenu extends BaseContent
 		else SceneLib.tyrantia.firstEncounter();
 	}
 	}
-}
+}

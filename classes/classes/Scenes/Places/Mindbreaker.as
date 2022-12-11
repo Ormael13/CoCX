@@ -39,6 +39,7 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 
 		public static var MindbreakerPrisoner:Boolean;
 		public static var MindbreakerPrisonerCooldown:int;
+		public static var MindbreakerEncounterChance:Number;
 
 		public function stateObjectName():String {
 			return "Mindbreaker";
@@ -55,6 +56,7 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 			PlayerEggIsFertile = false;
 			MindbreakerPrisoner = false;
 			MindbreakerPrisonerCooldown = 0;
+			MindbreakerEncounterChance = 1;
 		}
 
 		public function saveToObject():Object {
@@ -73,7 +75,8 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 				"numberOfMiniFullConvert": MindBreakerMiniFullConvert,
 
 				"playerEggIsFertile": PlayerEggIsFertile,
-				"mindbreakerPrisoner": MindbreakerPrisoner
+				"mindbreakerPrisoner": MindbreakerPrisoner,
+				"MindbreakerEncounterChance": MindbreakerEncounterChance
 			};
 		}
 
@@ -101,6 +104,7 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 					// old save, still need to set Cooldown  to something
 					MindbreakerPrisonerCooldown = 0;
 				}
+				MindbreakerEncounterChance = valueOr(o["MindbreakerEncounterChance"], 1);
 			} else {
 				// loading from old save
 				resetState();
@@ -443,6 +447,8 @@ public class Mindbreaker extends BaseContent implements SaveableState{
 			if (player.hasPerk(PerkLib.FutaForm)) player.removePerk(PerkLib.FutaForm);
 			if (player.hasPerk(PerkLib.BimboBody)) player.removePerk(PerkLib.BimboBody);
 			if (player.hasPerk(PerkLib.BroBody)) player.removePerk(PerkLib.BroBody);
+			outputText("\n\nEverything makes so much sense now. You were blind to the truth but thanks to the voice of the master in your head your eyes are now open. You have access to knowledge you thought you didn't possess about your reality and the reality between the reality. ");
+			outputText("Such knowledge is not for your mind alone though you want to share it with the world. Their blindness and mind untouched by him is a disease and you just happen to have the cure.  (<b>Gained Perk: Insanity!</b>)");
 			player.createPerk(PerkLib.Insanity,0,0,0,0);
 			player.createPerk(PerkLib.TransformationImmunityAtlach,0,0,0,0);
 			if (player.hasPerk(PerkLib.RacialParagon))

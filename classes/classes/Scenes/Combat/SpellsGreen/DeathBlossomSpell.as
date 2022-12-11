@@ -1,74 +1,72 @@
-package classes.Scenes.Combat.SpellsGreen {
+package classes.Scenes.Combat.SpellsGreen 
+{
 import classes.Monster;
 import classes.PerkLib;
 import classes.Scenes.Combat.AbstractGreenSpell;
 import classes.StatusEffects;
 
-public class PlantGrowthSpell extends AbstractGreenSpell {
-	public function PlantGrowthSpell() {
-		super("Plant growth",
-			"Grow plants around the caster. If plants are already present, turn them into invasive vines to deal lust damage.",
+	public class DeathBlossomSpell extends AbstractGreenSpell {
+		public function DeathBlossomSpell() 
+		{
+			super("Death Blossom",
+			"Deliver deadly poison and strong aphrodisiac by causing nearby vegetation to bloom corrupted flowers which inflicts their poison each round for 3 rounds. Deals severe tease and poison damage over time intensifying every round by 20%.",
 			TARGET_ENEMY,
 			TIMING_INSTANT,
 			[TAG_LUSTDMG]);
-		baseManaCost = 20;
-	}
+		baseManaCost = 100;
+		}
 	
 	override public function get isKnown():Boolean {
-		return player.hasStatusEffect(StatusEffects.KnowsPlantGrowth);
+		return player.hasStatusEffect(StatusEffects.KnowsDeathBlossom);
 	}
 	
 	override public function describeEffectVs(target:Monster):String {
-		return "~" + calcDamage(target, false, false) + " lust posion damage"
+		return "~" + calcDamage(target, false, false) + " lust poison damage and poison/bleeding DoT intensifying every round by 20%"
 	}
 	
 	override public function calcCooldown():int {
-		return (1+spellWhiteCooldown());
+		return spellWhiteTier2Cooldown();
+	}
+	
+	override protected function usabilityCheck():String {
+		var uc:String = super.usabilityCheck();
+		if (uc) return uc;
+		
+		if (!player.hasStatusEffect(StatusEffects.NearbyPlants)) {
+			return "Death Blossom require to have plants nearby.";
+		}
+		
+		return "";
 	}
 	
 	override public function advance(display:Boolean):void {
-		if (player.hasStatusEffect(StatusEffects.PlantGrowth)) {
-			if (player.statusEffectv1(StatusEffects.PlantGrowth) <= 0) {
-				player.removeStatusEffect(StatusEffects.PlantGrowth);
-				if (display) outputText("<b>Plant Growth effect wore off!</b>\n\n");
+		if (player.hasStatusEffect(StatusEffects.DeathBlossom)) {
+			if (player.statusEffectv1(StatusEffects.DeathBlossom) <= 0) {
+				player.removeStatusEffect(StatusEffects.DeathBlossom);
+				if (display) outputText("<b>Death Blossom effect wore off!</b>\n\n");
 			} else {
-				player.addStatusValue(StatusEffects.PlantGrowth, 1, -1);
+				player.addStatusValue(StatusEffects.DeathBlossom, 1, -1);
+				player.addStatusValue(StatusEffects.DeathBlossom, 1, 0.2);
 			}
 		}
 	}
 	
 	public function calcDamage(monster:Monster, randomize:Boolean = true, casting:Boolean = true):Number { //casting - Increase Elemental Counter while casting (like Raging Inferno)
-		var baseDamage:Number = (combat.teases.teaseBaseLustDamage() * 0.5 * spellModWhite());
+		var baseDamage:Number = (combat.teases.teaseBaseLustDamage() * spellModWhite());
 		if (player.hasPerk(PerkLib.VegetalAffinity)) baseDamage *= 1.5;
 		if (player.hasPerk(PerkLib.GreenMagic)) baseDamage *= 2;
 		if (player.hasStatusEffect(StatusEffects.GreenCovenant)) baseDamage *= 2;
 		return adjustLustDamage(baseDamage, monster, CAT_SPELL_GREEN, randomize);
 	}
 	
-	public function calcDuration():int {
-		var dura:Number = 4;
-		if (player.hasPerk(PerkLib.GreenMagic)) dura *= 2;
-		return dura;
-	}
-	
 	override protected function doSpellEffect(display:Boolean = true):void {
 		if (display) {
-			if (player.hasStatusEffect(StatusEffects.NearbyPlants)) {
-				outputText("You focus your intent on the flora around you, infusing them with the power of your emotions. The onslaught of lust causes flowers to bloom into a pollen cloud as vine surges from the canopy and darts to your opponent.\n");
-				if (monster.lustVuln == 0) {
-					if (display) {
-						outputText("It has no effect!  Your foe clearly does not experience lust in the same way as you.\n\n");
-					}
-					return;
-				}
-				player.createStatusEffect(StatusEffects.PlantGrowth, calcDuration(), 0, 0, 0);
+			outputText("You concentrate your desire on the nearby plants causing their flowers to spontaneously bloom in a cloud of corrupted pollen.\n");
+			monster.createStatusEffect(StatusEffects.DeathBlossom, 5, 1, 0, 0);
+			if (monster.lustVuln != 0) {
 				var arve:Number = 1;
 				if (player.hasPerk(PerkLib.ArcaneVenom)) arve += stackingArcaneVenom();
 				while (arve-->0) doSpellEffect2();
-			}
-			else {
-				outputText("You focus your energy on the world around you causing vegetation to surge out of the ground at an accelerated rate into a verdant patch of vines and other tentacle greenery.\n");
-				player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
 			}
 		}
 	}

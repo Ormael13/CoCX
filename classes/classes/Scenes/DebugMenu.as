@@ -938,7 +938,8 @@ public class DebugMenu extends BaseContent
 		private var bodyEditorControls:Block;
 
 		private var bodyPartEditorBack:Function = null;
-		public function bodyPartEditorRoot(back:Function):void {
+		public function bodyPartEditorRoot(back:Function = null):void {
+			if (back != null) bodyPartEditorBack = back;
 			if (bodyPartEditorBack == null) bodyPartEditorBack = accessDebugMenu;
 			clearOutput();
 			menu();
@@ -973,7 +974,7 @@ public class DebugMenu extends BaseContent
 					mainView.removeElement(bodyEditorControls);
 					bodyEditorControls = null;
 				}
-				back();
+				bodyPartEditorBack();
 			});
 		}
 		private function clearBeElements():void {

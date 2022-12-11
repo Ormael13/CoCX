@@ -353,6 +353,7 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.EnemyChampionType)) maxOver2 += 0.1;
 			if (hasPerk(PerkLib.EnemyBossType)) maxOver2 += 0.15;
 			maxOver *= maxOver2;//~180%
+			if (hasStatusEffect(StatusEffects.CorpseExplosion)) maxOver *= (1 - (0.2 * statusEffectv1(StatusEffects.CorpseExplosion)));
 			maxOver = Math.round(maxOver);
 			return maxOver;
 		}
@@ -2520,7 +2521,7 @@ import flash.utils.getQualifiedClassName;
 			if (((hasPerk(PerkLib.Regeneration) || hasPerk(PerkLib.LizanRegeneration) || perkv1(IMutationsLib.LizanMarrowIM) >= 1 || perkv1(IMutationsLib.DraconicHeartIM) >= 3 || hasPerk(PerkLib.EnemyPlantType) || hasPerk(PerkLib.FleshBodyApprenticeStage) || hasPerk(PerkLib.MonsterRegeneration)
 			|| hasPerk(PerkLib.HydraRegeneration) || hasPerk(PerkLib.Lifeline) || hasPerk(PerkLib.ImprovedLifeline) || hasPerk(PerkLib.GreaterLifeline) || hasPerk(PerkLib.EpicLifeline) || hasPerk(PerkLib.IcyFlesh) || hasPerk(PerkLib.HclassHeavenTribulationSurvivor) || hasPerk(PerkLib.GclassHeavenTribulationSurvivor)
 			|| hasPerk(PerkLib.FclassHeavenTribulationSurvivor) || hasPerk(PerkLib.FFclassHeavenTribulationSurvivor) || hasPerk(PerkLib.EclassHeavenTribulationSurvivor) || hasStatusEffect(StatusEffects.MonsterRegen) || hasStatusEffect(StatusEffects.MonsterRegen2) || hasPerk(PerkLib.EnemyTrueAngel)
-			|| hasPerk(PerkLib.EnemyTrueDemon)) && this.HP < maxHP()) || (hasStatusEffect(StatusEffects.MonsterVPT) && (this.HP < maxOverHP()) && (this.HP > minHP()))) {
+			|| hasPerk(PerkLib.EnemyTrueDemon)) && this.HP < maxOverHP()) || (hasStatusEffect(StatusEffects.MonsterVPT) && (this.HP < maxOverHP()) && (this.HP > minHP()))) {
 				var healingPercent:Number = 0;
 				var temp2:Number = 0;
 				var temp3:Number = 0;
@@ -3072,6 +3073,18 @@ import flash.utils.getQualifiedClassName;
 				if(statusEffectv1(StatusEffects.Timer) <= 0)
 					removeStatusEffect(StatusEffects.Timer);
 				addStatusValue(StatusEffects.Timer,1,-1);
+			}
+			if(hasStatusEffect(StatusEffects.Briarthorn)) {
+				var store16:Number = (player.str + player.spe) * 2;
+				if (game.player.hasPerk(PerkLib.ThirstForBlood)) store16 *= 1.5;
+				if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store16 *= 1.2;
+				store16 += maxHP()*0.05;
+				store16 = Math.round(store16);
+				store16 = SceneLib.combat.doDamage(store16);
+				if(plural) outputText("[Themonster] bleed profusely from the deep wounds your vine thorns left behind. ");
+				else outputText("[Themonster] bleeds profusely from the deep wounds your vine thorns left behind. ");
+				SceneLib.combat.CommasForDigits(store16);
+				outputText("[pg]");
 			}
 			if(hasStatusEffect(StatusEffects.LustStick)) {
 				//LoT Effect Messages:
@@ -3649,4 +3662,4 @@ import flash.utils.getQualifiedClassName;
 			}
 		}
 	}
-}
+}

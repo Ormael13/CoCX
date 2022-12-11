@@ -414,7 +414,7 @@ public class CombatUI extends BaseCombatContent {
 			addButton(3, "Intensify", combat.SingIntensify).hint("Increase the strength of your song!");
 			addButton(4, "Wait", combat.wait);
 			if (spellBookButtons.length > 0) btnMagic.show("Spells", submenuSpells, "Opens your spells menu, where you can cast any spells you have learned.", "Spells");
-			if (player.hasPerk(PerkLib.PrestigeJobBard)){
+			if (!player.hasPerk(PerkLib.PrestigeJobBard)) {
 				btnMagic.disable("Spellcasting while singing would be impossible for anyone short of a skilled bard.\n\n");
 			} else if (player.hasStatusEffect(StatusEffects.OniRampage)) {
 				btnMagic.disable("You are too angry to think straight. Smash your puny opponents first and think later.\n\n");
@@ -700,6 +700,7 @@ public class CombatUI extends BaseCombatContent {
 		//Most basic spell ever ^^
 		if (player.hasPerk(PerkLib.JobSorcerer)) {
 			bd = buttons.add("M.Bolt", combat.magic.spellMagicBolt);
+			if (player.hasStatusEffect(StatusEffects.GreenCovenant)) bd = buttons.add("G.Coven(off)", combat.magic.spellGreenCovenantOff).hint("Ends Green Covenant effect."); 
 			if (player.hasPerk(PerkLib.StaffChanneling) && player.weaponSpecials("Staff")) bd.hint("Attempt to attack the enemy with magic bolt from your [weapon].  Damage done is determined by your intelligence and weapon.", "Magic Bolt");
 			else bd.hint("Attempt to attack the enemy with magic bolt.  Damage done is determined by your intelligence.", "Magic Bolt");
 			if (player.mana < spellCost(40)) {
@@ -897,12 +898,24 @@ public class CombatUI extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
+		if (inCombat && player.hasStatusEffect(StatusEffects.Blackout)) {
+			clearOutput();
+			outputText("You try to ready a special attack, but you can't.  <b>Your ability to use magical special attacks was interrupted due to Blackout, and now you've wasted a chance to attack!</b>\n\n");
+			enemyAI();
+			return;
+		}
 		submenu(magspButtons,mainMenu);
 	}
 	internal function submenuPhySpecials():void {
 		if (inCombat && player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 5) {
 			clearOutput();
 			outputText("You try to ready a special attack, but wind up stumbling dizzily instead.  <b>Your ability to use physical special attacks was sealed, and now you've wasted a chance to attack!</b>\n\n");
+			enemyAI();
+			return;
+		}
+		if (inCombat && player.hasStatusEffect(StatusEffects.Blackout)) {
+			clearOutput();
+			outputText("You try to ready a special attack, but you can't.  <b>Your ability to use physical special attacks was interrupted due to Blackout, and now you've wasted a chance to attack!</b>\n\n");
 			enemyAI();
 			return;
 		}
@@ -917,6 +930,12 @@ public class CombatUI extends BaseCombatContent {
 			clearOutput();
 			if (player.statusEffectv2(StatusEffects.Sealed) == 2) outputText("You reach for your magic, but you just can't manage the focus necessary.  <b>Your ability to use magic was sealed, and now you've wasted a chance to attack!</b>\n\n");
 			if (player.statusEffectv2(StatusEffects.Sealed) == 10) outputText("You try to use magic but you are currently silenced by the alraune vines!\n\n");
+			enemyAI();
+			return;
+		}
+		if (inCombat && player.hasStatusEffect(StatusEffects.Blackout)) {
+			clearOutput();
+			outputText("You reach for your magic, but you just can't manage the focus necessary.  <b>Your ability to use magic was interrupted due to Blackout, and now you've wasted a chance to attack!</b>\n\n");
 			enemyAI();
 			return;
 		}

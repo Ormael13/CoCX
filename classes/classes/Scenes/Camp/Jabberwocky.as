@@ -121,8 +121,8 @@ package classes.Scenes.Camp
 			this.lustVuln = .6;
 			this.lust = 50;
 			this.level = 60;
-			this.drop = new ChainedDrop()
-					.add(consumables.JABBERS, 1);
+			this.drop = new ChainedDrop().add(consumables.MADMENK, 1)
+					.add(consumables.JABBERS, 2);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
 			this.createPerk(PerkLib.FireNature, 0, 0, 0, 0);

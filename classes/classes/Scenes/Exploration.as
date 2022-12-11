@@ -716,8 +716,14 @@ public class Exploration extends BaseContent
 			if (player.level < 18 && gobimpChooser >= 20) gobimpChooser = 19;
 			else if (player.level < 30 && gobimpChooser >= 30) gobimpChooser = 29;
 			clearOutput();
-			if (gobimpChooser >= 10 && gobimpChooser < 20) SceneLib.impScene.impPackEncounter2();
-			else if (gobimpChooser >= 20 && gobimpChooser < 30) SceneLib.impScene.impPackEncounter();
+			if (gobimpChooser >= 10 && gobimpChooser < 20) {
+				if (rand(2) == 0) SceneLib.impScene.impPackEncounter2();
+				else SceneLib.angelScene.angelGroupEncounter();
+			}
+			else if (gobimpChooser >= 20 && gobimpChooser < 30) {
+				if (rand(2) == 0) SceneLib.impScene.impPackEncounter();
+				else SceneLib.angelScene.angelGroupEncounter();
+			}
 			else if (gobimpChooser >= 30) {
 				if (flags[kFLAGS.TIMES_ENCOUNTERED_GOBLIN_WARRIOR] >= 1) SceneLib.goblinScene.goblinWarriorsEncounter();
 				else SceneLib.impScene.impPackEncounter();
@@ -725,6 +731,31 @@ public class Exploration extends BaseContent
 			else {
 				if (flags[kFLAGS.TIMES_ENCOUNTERED_GOBLIN_ASSASSIN] >= 1) SceneLib.goblinScene.goblinAdventurersEncounter();
 				else SceneLib.impScene.impPackEncounter2();
+			}
+		}
+		public function genericAngelsEncounters(even:Boolean = false):void {
+			var angelsChooser:int = rand(30);
+			//Limit chooser range
+			if (player.level < 6 && angelsChooser >= 10) angelsChooser = 9;
+			else if (player.level < 12 && angelsChooser >= 20) angelsChooser = 19;
+			clearOutput();
+			//Mid-rank Angel
+			if (angelsChooser >= 10 && angelsChooser < 20) {
+				outputText("A mid-ranked angel wings out of the sky and attacks!");
+				startCombat(new AngelMR());
+				return;
+			}
+			//High-rank Angel
+			else if (angelsChooser >= 20 && angelsChooser < 30) {
+				outputText("A high-ranked angel wings out of the sky and attacks!");
+				startCombat(new AngelHR());
+				return;
+			}
+			//Low-rank Angel
+			else {
+				outputText("A low-ranked angel wings out of the sky and attacks!");
+				startCombat(new AngelLR());
+				return;
 			}
 		}
 

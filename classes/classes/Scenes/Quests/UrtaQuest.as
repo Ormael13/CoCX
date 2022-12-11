@@ -2555,6 +2555,7 @@ private function finishQuest():void {
 	if (!recalling) {
 		if (!recalling) outputText("\n\n<b>Quest scenes are unlocked in 'Recall' menu!</b>");
 		flags[kFLAGS.URTA_QUEST_STATUS] = 1;
+		flags[kFLAGS.URTA_FERTILE] = 1;
 		CoC.instance.inCombat = false;
 		doNext(camp.returnToCampUseOneHour);
 	} else doNext(recallWakeUp);

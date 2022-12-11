@@ -9,7 +9,7 @@ public class NecroticRotSpell extends AbstractNecroSpell {
 	public function NecroticRotSpell() {
 		super(
 			"Necrotic Rot",
-			"Strike at the target ossature causing it to explode from the inside and causing serious internal damage and weakening its blow. Single target only (does not work on boneless creatures, Monster take 20% strength drain from this effect which stacks).",
+			"Deals damage and cause the opponent wounds to fester and worsen increasing damage taken from physical attacks by 25%. This effect stacks.",
 			TARGET_ENEMY,
 			TIMING_INSTANT,
 			[TAG_DAMAGING]
@@ -17,12 +17,11 @@ public class NecroticRotSpell extends AbstractNecroSpell {
 	}
 	
 	override public function describeEffectVs(target:Monster):String {
-		return "~"+calcDamage(target, false, false)+" true damage, "+
-				"-"+Math.round(100*calcDebuffPower(monster,false))+"% str"
+		return "~"+calcDamage(target, false, false)+" true damage"
 	}
 	
 	override public function calcCooldown():int {
-		return 3;
+		return spellBlackCooldown();
 	}
 	
 	override public function get isKnown():Boolean {
@@ -34,12 +33,9 @@ public class NecroticRotSpell extends AbstractNecroSpell {
 	}
 	
 	override protected function usabilityCheck():String {
-		if (monster.hasPerk(PerkLib.EnemyConstructType)
-				|| monster.hasPerk(PerkLib.EnemyElementalType)
-				|| monster.hasPerk(PerkLib.EnemyGhostType)
-				|| monster.hasPerk(PerkLib.EnemyGooType)
-				|| monster.hasPerk(PerkLib.EnemyPlantType)) {
-			return "Your enemy lacks bones.";
+		if (monster.hasPerk(PerkLib.EnemyElementalType)
+				|| monster.hasPerk(PerkLib.EnemyGhostType)) {
+			return "Your enemy lacks physical body.";
 		}
 		if (monster.plural
 				|| monster.hasPerk(PerkLib.Enemy300Type)
@@ -50,15 +46,9 @@ public class NecroticRotSpell extends AbstractNecroSpell {
 		return super.usabilityCheck();
 	}
 	
-	public function calcDebuffPower(monster:Monster, randomize:Boolean=true):Number {
-		var shatterIt:Number = 0.2;
-		shatterIt *= boneSoulBonus(demonBonesCost())
-		return shatterIt;
-	}
-	
 	public function calcDamage(monster:Monster, randomize:Boolean=true, casting:Boolean = true):Number { //casting - Increase Elemental Counter while casting (like Raging Inferno)
 		var damage:Number = adjustSpellDamage(
-				scalingBonusIntelligence()*3,
+				scalingBonusIntelligence()*2,
 				DamageType.TRUE,
 				CAT_SPELL_NECRO,
 				monster,
@@ -72,25 +62,14 @@ public class NecroticRotSpell extends AbstractNecroSpell {
 	
 	override protected function doSpellEffect(display:Boolean = true):void {
 		if (display) {
-			outputText("You channel your powers in [themonster] bone structure stressing it and forcing the bones to snap. [Themonster] cough blood you wreck [monster his] from the inside. ");
+			outputText("You curse [themonster] with rot causing wounds old and new to open wide with increased deadliness as [monster his] flesh festers! ");
 		}
 		var damage:Number = calcDamage(monster, true, true);
-		var shatterIt:Number = calcDebuffPower(monster);
 		consumeBones(demonBonesCost());
 		damage = critAndRepeatDamage(display, damage, DamageType.TRUE);
 		checkAchievementDamage(damage);
-		combat.heroBaneProc(damage)
-		if (monster.hasStatusEffect(StatusEffects.Boneshatter)) {
-			var currentShatter:Number = monster.statusEffectv1(StatusEffects.Boneshatter);
-			if (currentShatter < 0.9) {
-				if (currentShatter - shatterIt > 0.9) shatterIt = 0.9-currentShatter;
-				monster.addStatusValue(StatusEffects.Boneshatter, 1, shatterIt);
-				monster.buff("Boneshatter").addStats({str:-(Math.round(shatterIt * monster.str))}).withText("Boneshatter").combatPermanent();
-			}
-		} else {
-			monster.createStatusEffect(StatusEffects.Boneshatter, shatterIt, 0, 0, 0);
-			monster.buff("Boneshatter").addStats({str:-(Math.round(shatterIt * monster.str))}).withText("Boneshatter").combatPermanent();
-		}
+		if (monster.hasStatusEffect(StatusEffects.NecroticRot)) monster.addStatusValue(StatusEffects.NecroticRot, 1, 1);
+		else monster.createStatusEffect(StatusEffects.NecroticRot, 1, 0, 0, 0);
 	}
 }
 }

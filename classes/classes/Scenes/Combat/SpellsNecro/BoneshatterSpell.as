@@ -52,7 +52,7 @@ public class BoneshatterSpell extends AbstractNecroSpell {
 	
 	public function calcDebuffPower(monster:Monster, randomize:Boolean=true):Number {
 		var shatterIt:Number = 0.2;
-		shatterIt *= boneSoulBonus(demonBonesCost())
+		shatterIt *= boneSoulBonus(demonBonesCost());
 		return shatterIt;
 	}
 	
@@ -79,7 +79,7 @@ public class BoneshatterSpell extends AbstractNecroSpell {
 		consumeBones(demonBonesCost());
 		damage = critAndRepeatDamage(display, damage, DamageType.TRUE);
 		checkAchievementDamage(damage);
-		combat.heroBaneProc(damage)
+		combat.heroBaneProc(damage);
 		if (monster.hasStatusEffect(StatusEffects.Boneshatter)) {
 			var currentShatter:Number = monster.statusEffectv1(StatusEffects.Boneshatter);
 			if (currentShatter < 0.9) {
