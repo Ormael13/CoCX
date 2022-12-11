@@ -92,6 +92,7 @@ use namespace CoC;
 			_forestOutskirtsEncounter = Encounters.group("outskirtsforest", {
 						//General Golems, Goblin and Imp Encounters
 						name: "common",
+						chance: 0.4,
 						call: function ():void {
 							player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
 							SceneLib.exploration.genericGolGobImpEncounters();
@@ -99,6 +100,7 @@ use namespace CoC;
 					}, {
 						//General Angels Encounters
 						name: "common",
+						chance: 0.4,
 						call: function ():void {
 							player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
 							SceneLib.exploration.genericAngelsEncounters();
@@ -235,6 +237,7 @@ use namespace CoC;
 			_forestEncounter = Encounters.group("forest", {
 						//General Golems, Goblin and Imp Encounters
 						name: "common",
+						chance: 0.4,
 						call: function ():void {
 							player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
 							SceneLib.exploration.genericGolGobImpEncounters();
@@ -445,14 +448,14 @@ use namespace CoC;
 						when: fn.ifLevelMin(3),
 						call: function ():void {
 							player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
-							curry(SceneLib.mimicScene.mimicTentacleStart, 1);
+							curry(SceneLib.mimicScene.mimicTentacleStart, 3);
 						},
-						chance: 0.50
+						chance: 0.25
 					}, {
 						name  : "succubus",
 						call  : SceneLib.ivorySuccubusScene.encounterSuccubus,
 						when  : fn.ifLevelMin(3),
-						chance: 0.50
+						chance: 0.25
 					}, {
 						name  : "werewolfFemale",
 						day : false,
