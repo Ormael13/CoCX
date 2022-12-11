@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Created by aimozg on 06.01.14.
  */
 package classes.Scenes.Areas
@@ -251,14 +251,14 @@ public class Mountain extends BaseContent
 					}, {
 						name  : "mindbreaker",
 						call  : SceneLib.mindbreaker.findMindbreaker,
-						chance: findMindbreakerChance(),
+						chance: findMindbreakerChance,
 						when  : function ():Boolean {
 							return Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_NOT_STARTED && player.level >= 10 && !player.blockingBodyTransformations() && flags[kFLAGS.MARAE_QUEST_START] >= 1
 						}
 					}, {
 						name  : "mindbreaker",
 						call  : SceneLib.mindbreaker.findMindbreakerAgain,
-						chance: findMindbreakerChance(),
+						chance: findMindbreakerChance,
 						when  : function ():Boolean {
 							return Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_METMB && player.level >= 10 && !player.blockingBodyTransformations() && flags[kFLAGS.MARAE_QUEST_START] >= 1
 						}
