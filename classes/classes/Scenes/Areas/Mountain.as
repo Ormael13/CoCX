@@ -42,10 +42,12 @@ public class Mountain extends BaseContent
 					Encounters.group(/*game.commonEncounters.withImpGob,*/{
 						//General Golems, Goblin and Imp Encounters
 						name: "common",
+						chance: 0.4,
 						call: SceneLib.exploration.genericGolGobImpEncounters
 					}, {
 						//General Angels Encounters
 						name: "common",
+						chance: 0.4,
 						call: SceneLib.exploration.genericAngelsEncounters
 					}, {
 						//Helia monogamy fucks
@@ -88,12 +90,6 @@ public class Mountain extends BaseContent
 						when: fn.not(salon.isDiscovered),
 						call: salon.hairDresser
 					},{
-						/* [INTERMOD: Revamp]
-						name: "mimic",
-						when: fn.ifLevelMin(3),
-						call: curry(game.mimicScene.mimicTentacleStart,2)
-					},{
-						*/
 						name: "highmountains",
 						when: function ():Boolean {
 							return !SceneLib.highMountains.isDiscovered()
@@ -272,6 +268,7 @@ public class Mountain extends BaseContent
 						call:hike
 					}, {
 						name: "mimic",
+						chance:0.25,
 						when: fn.ifLevelMin(3),
 						call: curry(SceneLib.mimicScene.mimicTentacleStart,2)
 					})
