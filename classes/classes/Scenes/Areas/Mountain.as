@@ -274,7 +274,7 @@ public class Mountain extends BaseContent
 					})
 			;
 		}
-		private function findMindbreakerChance():Number {
+		public function findMindbreakerChance():Number {
 			var fMC:Number = 5;
 			fMC *= Mindbreaker.MindbreakerEncounterChance;
 			return fMC;

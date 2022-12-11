@@ -58,14 +58,23 @@ public class Changelog extends BaseContent
 			outputText("-New consumable item: a bottle of superior-grade Soulforce Recovery Pills. Costs 21610 gems. It's gained by putting in empty pill bottle 10 superior-grade soulforce recovery pills. Action that is only doable in camp (Camp Actions > Spend Time > Fill bottle)\n");
 			outputText("-New consumable item (by Svalkash): LubeSpray (gained from Lianna). Randomly increases vag/anal wetness, milk or cum production. With SH:Other enabled, can be bought from HXD shop.\n");
 			outputText("-New consumable item (written by Snas): Shimmering sponge. Decreases wetness or cum/milk production.\n");
-			outputText("-New consumable (by Ormael): Pack of demon bones - sold by Dinah. Costing 20 gems and adds 1 to 10 demon bones for necromancer use (going over limit of demon bones storage will cause loosing demon bones that went over the limit).\n");
-			outputText("-New consumable (by Liadri): Madmen knowledge - drops from mindbreaker & wonderland foes. Costing 100 gems. Greatly raises intelligence (as training alchemical and knowledge) but raises corruption and inflicts wisdom drain. Has a 5% chance to cause the pc to gain the insanity perk on use.\n");
+			outputText("-New consumable item (by Ormael): Pack of demon bones - sold by Dinah. Costing 20 gems and adds 1 to 10 demon bones for necromancer use (going over limit of demon bones storage will cause loosing demon bones that went over the limit).\n");
+			outputText("-New consumable item (by Liadri): Madmen knowledge - drops from mindbreaker & wonderland foes. Costing 100 gems. Greatly raises intelligence (as training alchemical and knowledge) but raises corruption and inflicts wisdom drain. Has a 5% chance to cause the pc to gain the insanity perk on use.\n");
+			outputText("-New consumable item (by Liadri): MindUp (made by Rathazul). Req. 250 gems and five incenses of Insight. Effect: Remove Insanity perk.\n");
 			outputText("-New material: a vial of Body Tempering Solution. Cost 100 gems. Could be bought in 'Soul Items' shop. Usefull only for body cultivators subpath.\n");
 			outputText("-New enemy: Werewolf (female) - lvl 15. Encounterable in forest (outskirts) during the evening/night - between 18 and 6.\n");
 			outputText("-New White Spell: Charge Range Weapon. Learned from White Book. Works like Charge Weapon but affects range weapons. Range weapon atk won't be now boosted as before by Charge Weapon spell.\n");
+			outputText("-New Necromancy spell: Corpse Explosion. It can be learned by using black book after picking Prestige Job: Necromancer perk or Hidden Job: Grey Sage super perk. Effect: Execute one of the many defeated opponents on the opposite team causing it to explode in a shower of gore and piercing bones. Only work on group type enemies with less than 80% of their HP left. ");
+			outputText("Cooldown of 6 turns (tier 2 black spells cd reduction effects can shorten it). Fun fact No 1: Each use lower monster max HP pool and dmg they deal by 1/5 of base value. Fun fact No 2: Unless some monster get ressurection ability that penalty on max hp/dmg output on enemies will be pernament until end of the combat.\n");
+			outputText("-New Necromancy spell: Blood Shower. It can be learned by using black book after picking Prestige Job: Necromancer perk or Hidden Job: Grey Sage super perk. Effect: Force some of the blood out of one of the many defeated opponents on the opposite team leaving them on the brink of death as the stolen blood rains on the opponents, greatly damaging their morale and reducing their damage dealt by 80%. ");
+			outputText("Has a chance to strike fear in the heart of your foes. Only work on group type enemies with less than 80% of their HP left.\n");
+			outputText("-New Necromancy spell: Necrotic Rot. It can be learned by using black book after picking Prestige Job: Necromancer perk or Hidden Job: Grey Sage super perk. Effect: Deals damage and cause the opponent wounds to fester and worsen increasing damage taken from physical attacks by 25%. This effect stacks. Cooldown of 3 turns (tier 1 black spells cd reduction effects can shorten it).\n");
 			outputText("-New Green Spell: Plant Growth. Learned from 1st lession with Lutien - wood elf village mage teacher OR from White Book when having Hidden Job: Grey Sage. It have 4 turns cooldown. If no plant in area (Forest/Deepwood/Plains) first cast would grow some plants for the rest of the combat. ");
 			outputText("-New Green Spell: Entagle. Learned from lession with Lutien - wood elf village mage teacher when having 100+ int OR from White Book when having Hidden Job: Grey Sage. It have 6 turns cooldown. Would turn present plants into vines that would try to grapple enemy for up to 6 turns. Each turn enemy is entangled it will recieve lust damage.\n");
 			outputText("-New Green Spell: Briarthorn. Learned from lession with Lutien - wood elf village mage teacher when having 100+ int OR from White Book when having Hidden Job: Grey Sage. It have 3 turns cooldown. While entangling, vines grows sharp thorns that rend the opponent's flesh and deliver a deadly poison that rend vitality for 6 rounds. This spell also inflict bleed and poison damage.\n");
+			outputText("-New Green Spell: Death Blossom. Learned from lession with Lutien - wood elf village mage teacher when having 200+ int OR from White Book when having Hidden Job: Grey Sage. Deliver deadly poison and strong aphrodisiac by causing nearby vegetation to bloom corrupted flowers which inflicts their poison each round for 5 rounds. Deals severe tease and poison damage over time intensifying every round by 20%.\n");
+			outputText("-New Green Spell: Green Covenant. Learned from lession with Lutien - wood elf village mage teacher when having 400+ int, been Full Wood Elf, Sex mastery of 30 and having had sex at least once with an alraune of at least level 30+ or Marae OR from White Book when having Hidden Job: Grey Sage. It have 12 turns cooldown. Enforce the full might of your elven pact. ");
+			outputText("Connect with nearby plants gaining high regeneration (25%), damage reduction (75%), and empowering elven magic (100%) but taking periodic lust damage (5% of max lust) and reducing evade (down to 0).\n");
 			outputText("-New perk for monsters: True Angel-type enemy. They not so common like true demons but they make up for it with better base power and possesing special field powered by soulforce, which could go down if angel not have enough SF to sustain it. Field itself have two effects that have very high synergy: reducing damage recieved form attacks and ");
 			outputText("making angel treated as few lvl higher than it's for purpose of mechanic that reduce dmg based on level difference between PC and enemy. Each of them is considered to constantly flying. (Ok so you thinking... that alot of stuff they get, right? You wonrg they still got ace to play if things go west ... or east) They also have special transformation ability to assume their true form. ");
 			outputText("Usualy it involve getting more... eyes and halo. It boosts their tou/spe/wis, sometimes even increase regeneration or enhance their protection field.\n");
@@ -297,16 +306,8 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Equilibrium. Gained by spending 1 super perk point and having Hidden Job: Grey Sage super perk. Effects: Allow to reach OverMax Mana equal to 120% of current max mana. You can cast now any spell you learned even if you missing additional materials or not meet requirements. Slight increase cap on stored bones for necromancers.\n");
 			outputText("-Metamorph: Add horn count/length for dragon and demon horns, Add Non-fuckable nipples option, Kamaitachi (weasel) skin pattern, tail; Fey Dragon Arms, lower body, wings, tail; Ghost skin, skin pattern, hair, horns; Panda, Fire snail face; Antler horns (EragonX)\n");
 			outputText("-Divine armament affects partial staffs too without dismished effect.\n");
-			outputText("-New Green Spell: Death Blossom. Learned from lession with Lutien - wood elf village mage teacher when having 200+ int OR from White Book when having Hidden Job: Grey Sage. Deliver deadly poison and strong aphrodisiac by causing nearby vegetation to bloom corrupted flowers which inflicts their poison each round for 5 rounds. Deals severe tease and poison damage over time intensifying every round by 20%.\n");
-			outputText("-New Green Spell: Green Covenant. Learned from lession with Lutien - wood elf village mage teacher when having 400+ int, been Full Wood Elf, Sex mastery of 30 and having had sex at least once with an alraune of at least level 30+ or Marae OR from White Book when having Hidden Job: Grey Sage. It have 12 turns cooldown. Enforce the full might of your elven pact. ");
-			outputText("Connect with nearby plants gaining high regeneration (25%), damage reduction (75%), and empowering elven magic (100%) but taking periodic lust damage (5% of max lust) and reducing evade (down to 0).\n");
-			outputText("-New Necromancy spell: Corpse Explosion. It can be learned by using black book after picking Prestige Job: Necromancer perk or Hidden Job: Grey Sage super perk. Effect: Execute one of the many defeated opponents on the opposite team causing it to explode in a shower of gore and piercing bones. Only work on group type enemies with less than 80% of their HP left. ");
-			outputText("Cooldown of 6 turns (tier 2 black spells cd reduction effects can shorten it). Fun fact No 1: Each use lower monster max HP pool and dmg they deal by 1/5 of base value. Fun fact No 2: Unless some monster get ressurection ability that penalty on max hp/dmg output on enemies will be pernament until end of the combat.\n");
-			outputText("-New Necromancy spell: Blood Shower. It can be learned by using black book after picking Prestige Job: Necromancer perk or Hidden Job: Grey Sage super perk. Effect: Force some of the blood out of one of the many defeated opponents on the opposite team leaving them on the brink of death as the stolen blood rains on the opponents, greatly damaging their morale and reducing their damage dealt by 80%. ");
-			outputText("Has a chance to strike fear in the heart of your foes. Only work on group type enemies with less than 80% of their HP left.\n");
-			outputText("-New Necromancy spell: Necrotic Rot. It can be learned by using black book after picking Prestige Job: Necromancer perk or Hidden Job: Grey Sage super perk. Effect: Deals damage and cause the opponent wounds to fester and worsen increasing damage taken from physical attacks by 25%. This effect stacks. Cooldown of 3 turns (tier 1 black spells cd reduction effects can shorten it).\n");
-			outputText("-New consumable item (by Liadri): MindUp (made by Rathazul). Req. 250 gems and five incenses of Insight. Effect: Remove Insanity perk.\n");
 			outputText("-Rathazul crafting menu bit reorganized with few option getting greyed out buittons tleling what PC is missing. Arian menu for scales coloring changed to be bit more clear.\n");
+			outputText("-New event perk: Survival Training (Rank: 1). Gained by spending 1 super perk point. Effects: You have trained to better survive this realm hostile environment. (+1% to MaxOver HP, MaxOver Lust and Diehard each 3 lvl's up to +10%)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -318,14 +319,15 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");// (EragonX)
-			outputText("-\n");// (Svalkash)
+			outputText("-\n");
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
 			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
 			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");
+			outputText("-\n");// (EragonX)
+			outputText("-\n");// (Svalkash)
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -419,7 +421,9 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -454,10 +458,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
