@@ -2312,7 +2312,7 @@ import coc.view.MainView;
 						addButtonDisabled(btn, "Gen. Memory", "You do not have enough point to acquire Genetic Memory.");
 					}
 					else{
-						addButton(btn, "Gen. Memory", curry(perkRPConfirm, 1, PerkLib.AscensionTrancendentalGeneticMemoryStageX, pCost * 1, 2))
+						addButton(btn, "Gen. Memory", curry(perkRPConfirm, 1, PerkLib.AscensionTrancendentalGeneticMemoryStageX, pCost, 2))
 							.hint("Unlocks an ascension menu to make some metamorphs permanent and have them unlocked in your next runs.\n\n"
 								+ "Cost: " + pCost * 1 + " points.");
 					}
@@ -2333,9 +2333,9 @@ import coc.view.MainView;
 							player.createStatusEffect(StatusEffects.TranscendentalGeneticMemory, 15, 0, 0, 9000);
 						}
 						else{
-							player.changeStatusValue(StatusEffects.TranscendentalGeneticMemory, 1, 15 * tier);
+							player.changeStatusValue(StatusEffects.TranscendentalGeneticMemory, 1, pCost * tier);
 						}
-						addButton(btn, "Gen. Memory", curry(perkRPConfirm, tier, PerkLib.AscensionTrancendentalGeneticMemoryStageX, pCost * tier, 2))
+						addButton(btn, "Gen. Memory", curry(perkRPConfirm, tier, PerkLib.AscensionTrancendentalGeneticMemoryStageX, pCost, 2))
 							.hint("Increases the maximum number of permed metamorphs."
 								+ "Cost: " + pCost * tier + " points.");
 					}
