@@ -377,11 +377,11 @@ public class PerkMenu extends BaseContent {
 	public function spellOptions():void {
 		var autocasts:Array = [
 			// Name, flag, requirement
-			["Charge Weapon", kFLAGS.AUTO_CAST_CHARGE_WEAPON, PerkLib.Spellsword],
-			["Charge Armor", kFLAGS.AUTO_CAST_CHARGE_ARMOR, PerkLib.Spellarmor],
-			["Might", kFLAGS.AUTO_CAST_MIGHT, PerkLib.Battlemage],
-			["Blink", kFLAGS.AUTO_CAST_BLINK, PerkLib.Battleflash],
-			["Mana Shield", kFLAGS.AUTO_CAST_MANA_SHIELD, PerkLib.Battleshield],
+			["Charge Weapon", kFLAGS.AUTO_CAST_CHARGE_WEAPON_DISABLED, PerkLib.Spellsword],
+			["Charge Armor", kFLAGS.AUTO_CAST_CHARGE_ARMOR_DISABLED, PerkLib.Spellarmor],
+			["Might", kFLAGS.AUTO_CAST_MIGHT_DISABLED, PerkLib.Battlemage],
+			["Blink", kFLAGS.AUTO_CAST_BLINK_DISABLED, PerkLib.Battleflash],
+			["Mana Shield", kFLAGS.AUTO_CAST_MANA_SHIELD_DISABLED, PerkLib.Battleshield],
 		];
 		var toggleFlagMagic:Function = curry(toggleFlag, spellOptions);
 		var btn:int = 0;
@@ -390,7 +390,7 @@ public class PerkMenu extends BaseContent {
 		outputText("You can choose to autocast or not specific buff spells at the start of the combat.");
 		for each (var autoItem:Array in autocasts) {
 			if (player.hasPerk(autoItem[2])) {
-				outputText("\n\n" + autoItem[0] + ": <b>" + (flags[autoItem[1]] ? "Autocast" : "Manual") + "</b>");
+				outputText("\n\n" + autoItem[0] + ": <b>" + (flags[autoItem[1]] ? "Manual" : "Autocast") + "</b>");
 				addButton(btn++, autoItem[0], curry(toggleFlagMagic, autoItem[1]));
 			}
 		}
