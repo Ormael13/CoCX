@@ -10302,7 +10302,7 @@ public class Combat extends BaseContent {
 		if (subtype == 1) combat.teaseXP((1 + combat.bonusExpAfterSuccesfullTease()*2));
 		else combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		if (player.hasPerk(PerkLib.VerdantLeech)) {
-			if (monster.lustVuln != 0) monster.lustVuln += 0.50;
+			if (monster.lustVuln != 0) monster.lustVuln += 0.05;
 			HPChange(Math.round(player.maxHP() * 0.05), false);
 		}
 	}
@@ -12353,7 +12353,7 @@ public function RandomTeaseJabberwocky():void {
     StraddleDamage *= 2;
     monster.teased(StraddleDamage, false);
     if (Randomcrit) outputText(" <b>Critical!</b>");
-    monster.lustVuln += 0.50;
+    monster.lustVuln += 0.05;
 }
 
 public function RandomTeaseRaiju():void {
@@ -12368,7 +12368,7 @@ public function RandomTeaseRaiju():void {
     outputText(" with your current at the rhythm of [themonster] owns heartbeat.");
     monster.teased(StraddleDamage, false);
     if (Randomcrit) outputText(" <b>Critical!</b>");
-    monster.lustVuln += 0.50;
+    monster.lustVuln += 0.05;
 }
 
 public function RandomTeaseHarpy():void {
@@ -12381,7 +12381,7 @@ public function RandomTeaseHarpy():void {
             "Your opponent finally fights back, forcing you to release [monster his] dick from between your cheeks. You push off, getting back into a fighting stance, almost laughing as you see [monster him] arousal.");
     monster.teased(StraddleDamage, false);
     if (Randomcrit) outputText(" <b>Critical!</b>");
-    monster.lustVuln += 0.50;
+    monster.lustVuln += 0.05;
 }
 
 public function RandomTeaseKitsune():void {
@@ -12457,7 +12457,7 @@ public function RandomTeaseLustStrike():void {
     StraddleDamage = Math.round(StraddleDamage);
     monster.teased(StraddleDamage, false);
     if (Randomcrit) outputText(" <b>Critical!</b>");
-    monster.lustVuln += 0.50;
+    monster.lustVuln += 0.05;
 }
 
 public function RandomTeaseAnemone():void {
