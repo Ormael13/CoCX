@@ -1752,7 +1752,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					outputText("\n\n<b>(Gained Perk: Flawless Body</b>)");
 					player.createPerk(PerkLib.FlawlessBody, 0, 0, 0, 0);
 				}
-				if (!player.hasPerk(PerkLib.ElvenSense)) {
+				if (!player.hasPerk(PerkLib.NaturalSpellcasting)) {
 					outputText("\nAs your body finishes changing you feel something fundamental shift in your essence. Magic… You somehow feel magic come to you more easily. Casting spells should be easier to you now that your voice sings the incantations and your hand weaves the signs with ideal precisions.  <b>You gained the ability Natural Spellcasting.</b>");
 					outputText("\n\n<b>(Gained Perk: Natural Spellcasting</b>)");
 					player.createPerk(PerkLib.NaturalSpellcasting, 0, 0, 0, 0);
