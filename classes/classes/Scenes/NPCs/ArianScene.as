@@ -2716,8 +2716,8 @@ private function giveArianAnItem():void {
 				.disableIf(!player.hasItem(useables.VIALTUR), "You don't have any.");
 			if(flags[kFLAGS.ARIAN_SCALES] != 3) addButton(7, useables.VIALPIN.shortName, giveArianScalesDyeVial3)
 				.disableIf(!player.hasItem(useables.VIALPIN), "You don't have any.");
-			if(flags[kFLAGS.ARIAN_SCALES] != 4) addButton(8, useables.VIALPIN.shortName, giveArianScalesDyeVial4)
-				.disableIf(!player.hasItem(useables.VIALPIN), "You don't have any.");
+			if(flags[kFLAGS.ARIAN_SCALES] != 4) addButton(8, useables.VIALRAI.shortName, giveArianScalesDyeVial4)
+				.disableIf(!player.hasItem(useables.VIALRAI), "You don't have any.");
 		}
 	}
 	if (flags[kFLAGS.ARIAN_HEALTH] < 100) addButton(10,"Vital Tinct",arianVitalityTincture)
@@ -4339,4 +4339,3 @@ private function arianAppearance():void {
 }
 }
 }
-
