@@ -3491,19 +3491,7 @@ public class Combat extends BaseContent {
                 break;
         }
 		if (player.weapon is MoonlightGreatsword || player.weapon is MoonlightClaws || player.weapon is Tidarion) {
-			var swordEXPgains:Number = 1;
-			if (player.hasPerk(PerkLib.MeleeWeaponsMastery)) swordEXPgains += 2;
-			if (monster.short == "training dummy" && flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 1) {
-				swordEXPgains *= 2;
-				if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 2) swordEXPgains *= 2.5;
-				if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 3) swordEXPgains *= 2;
-			}
-			if (crit) {
-				swordEXPgains *= 2;
-				if (player.hasPerk(PerkLib.MeleeWeaponsMasteryEx)) swordEXPgains *= 2;
-				outputText(" <b>*Critical Hit!*</b>");
-			}
-			swordXP(swordEXPgains);
+			meleeMasteryGain(1,crit);
             if (player.weapon is Tidarion) (player.weapon as Tidarion).afterStrike();
 		}
 		else {
