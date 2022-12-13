@@ -2743,10 +2743,13 @@ public class Masturbation extends BaseContent {
 		private function getHugeEggsInCawk():void {
 			clearOutput();
             if (flags[kFLAGS.TIMES_EGGED_IN_EXGARTUAN] == 0) {
-				if (SceneLib.exgartuan.dickAwake()) eggExgartuan();
+				if (SceneLib.exgartuan.dickAwake()) {
+					eggExgartuan();
+					return;
+				}
 				else sceneHunter.print("Check failed: Exgartuan in dick and awake.");
 			}
-            else eggDickNormal();
+            eggDickNormal();
         }
 
 		

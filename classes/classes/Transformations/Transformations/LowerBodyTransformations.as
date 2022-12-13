@@ -320,24 +320,14 @@ public class LowerBodyTransformations extends MutationsHelper {
 				else if (legCount === 2) {
 					if (player.isTaur()) {
 						desc += "You cry out as spasms of pain suddenly rip through your quadrupedal body, bringing you crashing onto the ground. Words cannot define the agony as muscles and bones twist and shift and collapse violently. When it's all over, you stagger upright, finding yourself standing on two legs again. Though covered in scales and with the paws of some monster lizard instead of [feet], they otherwise look like your old human legs. <b>You now have two dragon feet.</b>";
-						player.lowerBody = LowerBody.DRAGON;
-						transformations.LowerBodyBipedal.applyEffect(false);
 					} else if (player.lowerBody == LowerBody.DRIDER) {
 						desc += "A disquieting feeling ripples through your arachnid abdomen, and you find yourself losing control of your body from the waist down. Your spidery legs flail madly as your abdomen visibly swells, chitin cracking ominously as the pressure builds up inside of you... and then explodes! You wipe the gore from your face in disgust, wondering why you feel no pain. Rolling over, you see that, caked with spider-slime, you now have a new pair of legs, human-like save for the scales and the bestial paws that serve as feet. <b>You now have dragon feet.</b>";
-						player.lowerBody = LowerBody.DRAGON;
-						transformations.LowerBodyBipedal.applyEffect(false);
 					} else if (player.isNaga()) {
 						desc += "You fall on your face to the ground, hissing and screeching in pain - it feels like someone has grabbed the tip of your tail, pulled it viciously straight, and is now splitting it up the middle with a knife! Paralyzed from the waist down, you claw desperately at the earth to try and alleviate the pain, and can only think to thank your lucky stars when it fades away. Looking down where your tail was, though the scales remain, you realize you've become a biped again, your new feet sporting bestial claws on their toes. <b>You now have dragon feet.</b>";
-						player.lowerBody = LowerBody.DRAGON;
-						transformations.LowerBodyBipedal.applyEffect(false);
 					} else if (player.isGoo()) {
 						desc += "A strange tingling sensation fills you, and you watch as your gooey blob of a body begins to ripple and shudder; you try to make it stop, but you can't control it. Before your eyes, it shapes itself into the appearance of legs, the colored slime growing denser and thicker, the surface membrane texturing itself to look like scales. Before you've quite realized what's happened, the slime has set like water freezing, leaving you with humanoid legs once again, though tipped with claws and very reptilian in appearance. <b>You now have dragon feet.</b>";
-						player.lowerBody = LowerBody.DRAGON;
-						transformations.LowerBodyBipedal.applyEffect(false);
 					} else if (player.lowerBody == LowerBody.HOOFED) {
 						desc += "You bellow in pain as your legs break and reform and your hooves seem to suddenly explode, the bones within twisting themselves into monstrous three-toed appendages, more like those of some terrible lizard-thing than anything else. <b>You now have dragon feet.</b>";
-						player.lowerBody = LowerBody.DRAGON;
-						transformations.LowerBodyBipedal.applyEffect(false);
 					} else if (player.isScylla()) {
 						desc += "Something weird happens in your tentacles as your limbs coil into two pillars of flesh and fuse together, your ";
 						if (player.gender == 1) {
@@ -349,10 +339,11 @@ public class LowerBodyTransformations extends MutationsHelper {
 							desc += "[cock],";
 						}
 						desc += " moving back up between your leg to where it used to be. Bones starts to form in your limb and, before you know it, you are staring at a pair of normal human legs. The changes does not end there however. When the pain is over, you realize that you still stand atop human-looking legs, but your [feet] have become like those of some bipedal reptilian killer, with powerful claws meant for gripping the ground. <b>You now have dragon [feet].</b>";
-						player.lowerBody = LowerBody.DRAGON;
-						transformations.LowerBodyBipedal.applyEffect(false);
 					} else if (player.isAlraune()) {
 						desc += "Your petals all withers and fall off as your pitch and flower turn to dust leaving you with normal human legs. The changes does not stop there however. When the pain is over, you realize that you still stand atop human-looking legs, but your [feet] have become like those of some bipedal reptilian killer, with powerful claws meant for gripping the ground. <b>You now have dragon [feet].</b>";
+					}
+
+					if (!player.isBiped()){
 						player.lowerBody = LowerBody.DRAGON;
 						transformations.LowerBodyBipedal.applyEffect(false);
 					}
@@ -377,6 +368,78 @@ public class LowerBodyTransformations extends MutationsHelper {
 			// is present
 			function (): Boolean {
 				return !Metamorph.checkTaurUnlock() && player.lowerBody === LowerBody.DRAGON;
+			}
+		)
+	}
+
+	public function LowerBodyFeyDraconic(legCount: int = undefined, toggleTaur: Boolean = false): Transformation {
+		return new SimpleTransformation("Draconic Lower Body",
+			// apply effect
+			function (doOutput: Boolean): void {
+				if (!legCount) legCount = player.legCount;
+				var desc: String = "";
+				if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.FEY_DRAGON ){
+					if (toggleTaur && legCount === 2) legCount = 4;
+					else if (toggleTaur && legCount >= 4) legCount = 2;
+				}
+
+				desc += "\n\n";
+				// Case 1: Morph Taur legs without changing leg count
+				if (player.isTaur() && legCount >= 4) {
+					desc += "You scream in agony as you feel the bones in your [feet] suddenly break and restructure themselves. When the pain is over, you realize that your [feet] have become like those of some bipedal reptilian killer, with powerful claws meant for gripping the ground. <b>You now have dragon [feet].</b>";
+				}
+				// Case 2: Bipedal TF
+				else if (legCount === 2) {
+					if (player.isTaur()) {
+						desc += "You cry out as spasms of pain suddenly rip through your quadrupedal body, bringing you crashing onto the ground. Words cannot define the agony as muscles and bones twist and shift and collapse violently. When it's all over, you stagger upright, finding yourself standing on two legs again. Though covered in scales and with the paws of some monster lizard instead of [feet], they otherwise look like your old human legs. <b>You now have two dragon feet.</b>";
+					} else if (player.lowerBody == LowerBody.DRIDER) {
+						desc += "A disquieting feeling ripples through your arachnid abdomen, and you find yourself losing control of your body from the waist down. Your spidery legs flail madly as your abdomen visibly swells, chitin cracking ominously as the pressure builds up inside of you... and then explodes! You wipe the gore from your face in disgust, wondering why you feel no pain. Rolling over, you see that, caked with spider-slime, you now have a new pair of legs, human-like save for the scales and the bestial paws that serve as feet. <b>You now have dragon feet.</b>";
+					} else if (player.isNaga()) {
+						desc += "You fall on your face to the ground, hissing and screeching in pain - it feels like someone has grabbed the tip of your tail, pulled it viciously straight, and is now splitting it up the middle with a knife! Paralyzed from the waist down, you claw desperately at the earth to try and alleviate the pain, and can only think to thank your lucky stars when it fades away. Looking down where your tail was, though the scales remain, you realize you've become a biped again, your new feet sporting bestial claws on their toes. <b>You now have dragon feet.</b>";
+					} else if (player.isGoo()) {
+						desc += "A strange tingling sensation fills you, and you watch as your gooey blob of a body begins to ripple and shudder; you try to make it stop, but you can't control it. Before your eyes, it shapes itself into the appearance of legs, the colored slime growing denser and thicker, the surface membrane texturing itself to look like scales. Before you've quite realized what's happened, the slime has set like water freezing, leaving you with humanoid legs once again, though tipped with claws and very reptilian in appearance. <b>You now have dragon feet.</b>";
+					} else if (player.lowerBody == LowerBody.HOOFED) {
+						desc += "You bellow in pain as your legs break and reform and your hooves seem to suddenly explode, the bones within twisting themselves into monstrous three-toed appendages, more like those of some terrible lizard-thing than anything else. <b>You now have dragon feet.</b>";
+					} else if (player.isScylla()) {
+						desc += "Something weird happens in your tentacles as your limbs coil into two pillars of flesh and fuse together, your ";
+						if (player.gender == 1) {
+							desc += "[vagina]";
+						} else if (player.gender == 3) {
+							desc += " and ";
+						}
+						if (player.cocks.length > 0) {
+							desc += "[cock],";
+						}
+						desc += " moving back up between your leg to where it used to be. Bones starts to form in your limb and, before you know it, you are staring at a pair of normal human legs. The changes does not end there however. When the pain is over, you realize that you still stand atop human-looking legs, but your [feet] have become like those of some bipedal reptilian killer, with powerful claws meant for gripping the ground. <b>You now have dragon [feet].</b>";
+					} else if (player.isAlraune()) {
+						desc += "Your petals all withers and fall off as your pitch and flower turn to dust leaving you with normal human legs. The changes does not stop there however. When the pain is over, you realize that you still stand atop human-looking legs, but your [feet] have become like those of some bipedal reptilian killer, with powerful claws meant for gripping the ground. <b>You now have dragon [feet].</b>";
+					}
+
+					if (!player.isBiped()){
+						player.lowerBody = LowerBody.FEY_DRAGON;
+						transformations.LowerBodyBipedal.applyEffect(false);
+					}
+
+					TransformationUtils.applyTFIfNotPresent(transformations.LowerBodyBipedal, doOutput);
+
+					// Display TF text if the player is obtaining this part instead of only changing leg count and didn't hit any special text
+					if (player.lowerBody !== LowerBody.FEY_DRAGON) {
+						desc += "You scream in agony as you feel the bones in your [feet] suddenly break and restructure themselves, toes fusing together, bone swelling out of the merged masses of flesh. When the pain is over, you realize that you still stand atop human-looking legs, but your feet have become like those of some bipedal reptilian killer, with powerful claws meant for gripping the ground. <b>You now have dragon feet.</b>";
+					}
+				}
+				// Case 3: Taur TF
+				else if (!player.isTaur() && legCount >= 4) {
+					transformations.LowerBodyTaur(LowerBody.FEY_DRAGON).applyEffect(doOutput);
+				}
+
+				if (doOutput) outputText(desc);
+				player.lowerBody = LowerBody.FEY_DRAGON;
+				player.legCount = legCount;
+				Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.FEY_DRAGON));
+			},
+			// is present
+			function (): Boolean {
+				return !Metamorph.checkTaurUnlock() && player.lowerBody === LowerBody.FEY_DRAGON;
 			}
 		)
 	}

@@ -53,16 +53,27 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const DEMON:int = _partid++;
-		EnumValue.add(Memories, DEMON, "DEMON", {
-			id: "Demon Horns",
-			name: "Demon Horns",
-			cost: 100,
-			title: "Demon",
-			transformation: function(): Transformation {
-				return CoC.instance.transformations.HornsDemonic;
-			}
-		});
+	  public static const ANTLER:int = _partid++;
+	  EnumValue.add(Memories, ANTLER, "ANTLER", {
+		  id: "Antler Horns",
+		  name: "Antler Horns",
+		  cost: 100,
+		  title: "Antlers",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.HornsAntlers;
+		  }
+	  });
+
+	  public static const BICORN:int = _partid++;
+	  EnumValue.add(Memories, BICORN, "BICORN", {
+		  id: "Bicorn Horns",
+		  name: "Bicorn Horns",
+		  cost: 100,
+		  title: "Bicorn",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.HornsBicorn;
+		  }
+	  });
 
 		public static const COW_MINOTAUR:int = _partid++;
 		EnumValue.add(Memories, COW_MINOTAUR, "COW_MINOTAUR", {
@@ -74,6 +85,17 @@ package classes.GeneticMemories {
 				return CoC.instance.transformations.HornsCowMinotaur;
 			}
 		});
+
+	  public static const DEMON:int = _partid++;
+	  EnumValue.add(Memories, DEMON, "DEMON", {
+		  id: "Demon Horns",
+		  name: "Demon Horns",
+		  cost: 100,
+		  title: "Demon",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.HornsDemonic;
+		  }
+	  });
 
 		public static const DRACONIC_X2:int = _partid++;
 		EnumValue.add(Memories, DRACONIC_X2, "DRACONIC_X2", {
@@ -97,6 +119,28 @@ package classes.GeneticMemories {
 			}
 		});
 
+	  public static const FROSTWYRM:int = _partid++;
+	  EnumValue.add(Memories, FROSTWYRM, "FROSTWYRM", {
+		  id: "Frostwyrm Horns",
+		  name: "Frostwyrm Horns",
+		  cost: 100,
+		  title: "Frostwyrm",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.HornsFrostwyrm;
+		  }
+	  });
+
+		public static const GHOSTLY_WISP:int = _partid++;
+		EnumValue.add(Memories, GHOSTLY_WISP, "GHOSTLY_WISP", {
+			id: "Ghostly Whisps",
+			name: "Ghostly Whisps",
+			cost: 100,
+			title: "Ghostly Whisps",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.HornsGhostlyWisps;
+			}
+		});
+
 		public static const GOAT:int = _partid++;
 		EnumValue.add(Memories, GOAT, "GOAT", {
 			id: "Goat Horns",
@@ -108,16 +152,16 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const UNICORN:int = _partid++;
-		EnumValue.add(Memories, UNICORN, "UNICORN", {
-			id: "Unicorn Horn",
-			name: "Unicorn Horn",
-			cost: 100,
-			title: "Unicorn",
-			transformation: function(): Transformation {
-				return CoC.instance.transformations.HornsUnicorn;
-			}
-		});
+	  public static const JABBERWOCKY:int = _partid++;
+	  EnumValue.add(Memories, JABBERWOCKY, "JABBERWOCKY", {
+		  id: "Jabberwocky Horns",
+		  name: "Jabberwocky Horns",
+		  cost: 100,
+		  title: "Jabberwocky",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.HornsJabberwocky;
+		  }
+	  });
 
 		public static const ONI:int = _partid++;
 		EnumValue.add(Memories, ONI, "ONI", {
@@ -141,17 +185,6 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const BICORN:int = _partid++;
-		EnumValue.add(Memories, BICORN, "BICORN", {
-			id: "Bicorn Horns",
-			name: "Bicorn Horns",
-			cost: 100,
-			title: "Bicorn",
-			transformation: function(): Transformation {
-				return CoC.instance.transformations.HornsBicorn;
-			}
-		});
-
 		public static const SEA_DRAGON:int = _partid++;
 		EnumValue.add(Memories, SEA_DRAGON, "SEA_DRAGON", {
 			id: "Sea dragon Horns",
@@ -163,27 +196,16 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const FROSTWYRM:int = _partid++;
-		EnumValue.add(Memories, FROSTWYRM, "FROSTWYRM", {
-			id: "Frostwyrm Horns",
-			name: "Frostwyrm Horns",
-			cost: 100,
-			title: "Frostwyrm",
-			transformation: function(): Transformation {
-				return CoC.instance.transformations.HornsFrostwyrm;
-			}
-		});
-
-		public static const JABBERWOCKY:int = _partid++;
-		EnumValue.add(Memories, JABBERWOCKY, "JABBERWOCKY", {
-			id: "Jabberwocky Horns",
-			name: "Jabberwocky Horns",
-			cost: 100,
-			title: "Jabberwocky",
-			transformation: function(): Transformation {
-				return CoC.instance.transformations.HornsJabberwocky;
-			}
-		});
+	  public static const UNICORN:int = _partid++;
+	  EnumValue.add(Memories, UNICORN, "UNICORN", {
+		  id: "Unicorn Horn",
+		  name: "Unicorn Horn",
+		  cost: 100,
+		  title: "Unicorn",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.HornsUnicorn;
+		  }
+	  });
 
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];

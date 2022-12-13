@@ -110,20 +110,22 @@ public class SkinTransformations extends MutationsHelper {
 						desc += "Your fur itches incessantly, so you start scratching it. It starts coming off in big clumps before the whole mess begins sloughing off your body. In seconds, your skin is nude. <b>You've lost your fur!</b>";
 						break;
 					case Skin.SCALES:
+					case Skin.AQUA_SCALES:
+					case Skin.AQUA_RUBBER_LIKE:
+					case Skin.DRAGON_SCALES:
 						desc += "Your scales itch incessantly, so you scratch at them. They start falling off wholesale, leaving you standing in a pile of scales after only a few moments. <b>You've lost your scales!</b>";
 						break;
-					case Skin.DRAGON_SCALES:
-						desc += "Your dragon scales itch incessantly, so you scratch at them. They start falling off wholesale, leaving you standing in a pile of scales after only a few moments. <b>You've lost your dragon scales!</b>";
-						break;
 					default:
-						desc += "Your [skin noadj] itches incessantly, and as you scratch it shifts and changes, becoming normal human-like skin. <b>Your skin is now Transparent!</b>";
+						desc += "Your [skin noadj] itches incessantly, and as you scratch it shifts and changes, becoming normal human-like skin.";
 				}
+				const color: String = randomChoice("white", "sable");
+				var adj: String = "milky";
+				if(color == "sable") adj = "ashen"
+				desc += "[pg]You feel lightheaded all of a sudden. You bring your hands up to clutch your head only to find the color slowly fading from your skin or rather it’s losing its opacity altogether. You examine your body and see that you’ve become almost entirely transparent, adding to your ethereal appearance. <b>You now have transparent "+adj+" "+color+" skin.</b>";
 
 				if (doOutput) outputText(desc);
-                const color: String = player.skinColor;
-                var adj: String = "milky";
-                if(color == "sable") adj = "ashen"
                 player.skin.setBaseOnly({ type: Skin.TRANSPARENT, color: color, adj: adj});
+				Metamorph.unlockMetamorph(SkinMem.getMemory(SkinMem.GHOST));
 			},
 			// is present
 			function (): Boolean {
@@ -672,6 +674,7 @@ public class SkinTransformations extends MutationsHelper {
 				player.skin.base.adj = "veined";
 
 				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(SkinPatternMem.getMemory(SkinPatternMem.BLACK_WHITE_VEINS));
 			},
 			// is present
 			function (): Boolean {
@@ -708,6 +711,7 @@ public class SkinTransformations extends MutationsHelper {
 				player.skin.base.pattern = Skin.PATTERN_SCAR_WINDSWEPT;
 				player.skin.base.adj = "windswept scars";
 				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(SkinPatternMem.getMemory(SkinPatternMem.SCAR_WINDSWEPT));
 			},
 			// is present
 			function (): Boolean {

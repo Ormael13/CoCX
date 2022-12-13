@@ -98,6 +98,10 @@ public class ArouseSpell extends AbstractBlackSpell {
 		monster.teased(lustDmg, false);
 		if (crit) outputText(" <b>Critical!</b>");
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
+		if (player.hasPerk(PerkLib.VerdantLeech)) {
+			if (monster.lustVuln != 0) monster.lustVuln += 0.50;
+			HPChange(Math.round(player.maxHP() * 0.05), false);
+		}
 	}
 }
 }

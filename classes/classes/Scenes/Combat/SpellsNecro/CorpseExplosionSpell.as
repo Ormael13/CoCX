@@ -9,7 +9,7 @@ public class CorpseExplosionSpell extends AbstractNecroSpell {
 	public function CorpseExplosionSpell() {
 		super(
 			"Corpse Explosion",
-			"Strike at the target ossature causing it to explode from the inside and causing serious internal damage and weakening its blow. Single target only (does not work on boneless creatures, Monster take 20% strength drain from this effect which stacks).",
+			"Execute one of the many defeated opponents on the opposite team causing it to explode in a shower of gore and piercing bones. Only work on group type enemies with less than 80% of their HP left.",
 			TARGET_ENEMY,
 			TIMING_INSTANT,
 			[TAG_DAMAGING]
@@ -17,35 +17,26 @@ public class CorpseExplosionSpell extends AbstractNecroSpell {
 	}
 	
 	override public function describeEffectVs(target:Monster):String {
-		return "~"+calcDamage(target, false, false)+" true damage, "+
-				"-"+Math.round(100*calcDebuffPower(monster,false))+"% str"
+		return "~"+calcDamage(target, false, false)+" true damage."
 	}
 	
 	override public function calcCooldown():int {
-		return 3;
+		return spellBlackTier2Cooldown();
 	}
 	
 	override public function get isKnown():Boolean {
 		return player.hasStatusEffect(StatusEffects.KnowsCorpseExplosion);
 	}
 	
-	override public function demonBonesCost():int {
-		return 5;
-	}
-	
 	override protected function usabilityCheck():String {
-		if (monster.hasPerk(PerkLib.EnemyConstructType)
-				|| monster.hasPerk(PerkLib.EnemyElementalType)
-				|| monster.hasPerk(PerkLib.EnemyGhostType)
-				|| monster.hasPerk(PerkLib.EnemyGooType)
-				|| monster.hasPerk(PerkLib.EnemyPlantType)) {
-			return "Your enemy lacks bones.";
+		if ((!monster.plural
+				|| !monster.hasPerk(PerkLib.Enemy300Type)
+				|| !monster.hasPerk(PerkLib.EnemyGroupType)
+				|| !monster.hasPerk(PerkLib.EnemyLargeGroupType)) && monster.HP > monster.maxHP() * 0.8) {
+			return "You can only use that spell on enemy groups that have less than 80% of members left.";
 		}
-		if (monster.plural
-				|| monster.hasPerk(PerkLib.Enemy300Type)
-				|| monster.hasPerk(PerkLib.EnemyGroupType)
-				|| monster.hasPerk(PerkLib.EnemyLargeGroupType)) {
-			return "You can only strike one target.";
+		if (monster.statusEffectv1(StatusEffects.CorpseExplosion) >= 4) {
+			return "You can't use that spell on enemy groups that have less than 20% of members left.";
 		}
 		return super.usabilityCheck();
 	}
@@ -58,7 +49,7 @@ public class CorpseExplosionSpell extends AbstractNecroSpell {
 	
 	public function calcDamage(monster:Monster, randomize:Boolean=true, casting:Boolean = true):Number { //casting - Increase Elemental Counter while casting (like Raging Inferno)
 		var damage:Number = adjustSpellDamage(
-				scalingBonusIntelligence()*3,
+				scalingBonusIntelligence()*5,
 				DamageType.TRUE,
 				CAT_SPELL_NECRO,
 				monster,
@@ -66,31 +57,18 @@ public class CorpseExplosionSpell extends AbstractNecroSpell {
                 casting
 		);
 		if (player.hasPerk(PerkLib.Necromancy)) damage *= 1.5;
-		damage *= boneSoulBonus(demonBonesCost());
 		return damage;
 	}
 	
 	override protected function doSpellEffect(display:Boolean = true):void {
 		if (display) {
-			outputText("You channel your powers in [themonster] bone structure stressing it and forcing the bones to snap. [Themonster] cough blood you wreck [monster his] from the inside. ");
+			outputText("You concentrate your powers on one of the bodies of your fallen foes causing it to bloat and explode! ");
 		}
 		var damage:Number = calcDamage(monster, true, true);
-		var shatterIt:Number = calcDebuffPower(monster);
-		consumeBones(demonBonesCost());
 		damage = critAndRepeatDamage(display, damage, DamageType.TRUE);
 		checkAchievementDamage(damage);
-		combat.heroBaneProc(damage)
-		if (monster.hasStatusEffect(StatusEffects.Boneshatter)) {
-			var currentShatter:Number = monster.statusEffectv1(StatusEffects.Boneshatter);
-			if (currentShatter < 0.9) {
-				if (currentShatter - shatterIt > 0.9) shatterIt = 0.9-currentShatter;
-				monster.addStatusValue(StatusEffects.Boneshatter, 1, shatterIt);
-				monster.buff("Boneshatter").addStats({str:-(Math.round(shatterIt * monster.str))}).withText("Boneshatter").combatPermanent();
-			}
-		} else {
-			monster.createStatusEffect(StatusEffects.Boneshatter, shatterIt, 0, 0, 0);
-			monster.buff("Boneshatter").addStats({str:-(Math.round(shatterIt * monster.str))}).withText("Boneshatter").combatPermanent();
-		}
+		if (monster.hasStatusEffect(StatusEffects.CorpseExplosion)) monster.addStatusValue(StatusEffects.CorpseExplosion, 1, 1);
+		else monster.createStatusEffect(StatusEffects.CorpseExplosion, 1, 0, 0, 0);
 	}
 }
 }

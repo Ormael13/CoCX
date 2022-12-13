@@ -770,7 +770,13 @@ public class Creature extends Utils
 			//
 			if (hasPerk(PerkLib.BloodDemonIntelligence)) maxOver2 += 0.1;
 			if (hasPerk(PerkLib.MunchkinAtWork)) maxOver2 += 0.1;
-			maxOver *= maxOver2;//~180%
+			if (hasPerk(PerkLib.SPSurvivalTrainingX)) {
+				var limit:Number = perkv1(PerkLib.SPSurvivalTrainingX) * 10;
+				var bonus:Number = Math.round((level - 1) / 3);
+				if (bonus > limit) bonus = limit;
+				maxOver2 += (0.01 * bonus);
+			}
+			maxOver *= maxOver2;//~190%
 			maxOver = Math.round(maxOver);
 			return Math.min(19999999,maxOver);
 		}
@@ -837,7 +843,13 @@ public class Creature extends Utils
 			var max1:Number = Math.round(maxLust_base()*maxLust_mult());
 			var max2:Number = 1;
 			if (hasPerk(PerkLib.MunchkinAtWork)) max2 += 0.1;
-			max1 *= max2;//~110%
+			if (hasPerk(PerkLib.SPSurvivalTrainingX)) {
+				var limit:Number = perkv1(PerkLib.SPSurvivalTrainingX) * 10;
+				var bonus:Number = Math.round((level - 1) / 3);
+				if (bonus > limit) bonus = limit;
+				max2 += (0.01 * bonus);
+			}
+			max1 *= max2;//~120%
 			max1 = Math.round(max1);
 			return Math.min(219999,max1);
 		}
@@ -4238,6 +4250,7 @@ public class Creature extends Utils
 				}
 			}
 			if (hasStatusEffect(StatusEffects.Flying)) chance += flychance;
+			if (hasStatusEffect(StatusEffects.GreenCovenant)) chance = 0;
 			return chance;
 		}
 

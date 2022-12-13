@@ -8,13 +8,13 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.internals.Utils;
 
-public class DinahFollower extends NPCAwareContent implements TimeAwareInterface
+public class DinahFollower extends NPCAwareContent// implements TimeAwareInterface
 {
 	public function DinahFollower()
 	{
-		EventParser.timeAwareClassAdd(this);
+		//EventParser.timeAwareClassAdd(this);
 	}
-
+/*
 	//Implementation of TimeAwareInterface
 	public function timeChange():Boolean
 	{
@@ -26,12 +26,18 @@ public class DinahFollower extends NPCAwareContent implements TimeAwareInterface
 		return false;
 	}
 	//End of Interface Implementation
-		
+*/
 		private var _extra:Number = 0;
 		private var _roulette1:Number = 0;
 		private var _roulette2:Number = 0;
 		private var _roulette3:Number = 0;
 		
+		public function dinahAffection(changes:Number = 0):Number {
+			flags[kFLAGS.DINAH_AFFECTION] += changes;
+			if (flags[kFLAGS.DINAH_AFFECTION] > 100) flags[kFLAGS.DINAH_AFFECTION] = 100;
+			return flags[kFLAGS.DINAH_AFFECTION];
+		}
+
 		public function DinahIntro1():void {
 			clearOutput();//non-camp intro
 			_extra = (3 + rand(5));
@@ -83,9 +89,9 @@ public class DinahFollower extends NPCAwareContent implements TimeAwareInterface
 			if (rand(2) == 0) _roulette2 = rand(3);
 			if (rand(2) == 0) _roulette3 = rand(6);
 			outputText("\"<i>Oh, Great Lady Godiva, tell us your will!</i>\" With religious zeal, Dinah pulls a coin out of nowhere and throws it into the air. But before it can fall on the ground, it vanishes. ");
-			if (rand(4) > 0 && flags[kFLAGS.DINAH_AFFECTION] < 90 && !flags[kFLAGS.DINAH_ATTACKED_TODAY]) {
+			if (rand(4) > 0 && flags[kFLAGS.DINAH_AFFECTION] < 90) {// && !flags[kFLAGS.DINAH_ATTACKED_TODAY]
 				outputText("\"<i>The coin told me to <b>cuddle</b> you.</i>\" her smile becomes even wider. You've got a <b>very</b> bad feeling about this. It looks like there is no other choice. You've gotta to beat some sense into her before getting back to buisness.");
-				flags[kFLAGS.DINAH_ATTACKED_TODAY] = 1;
+				//flags[kFLAGS.DINAH_ATTACKED_TODAY] = 1;
 				startCombat(new Dinah());
 			}
 			else {
@@ -95,8 +101,9 @@ public class DinahFollower extends NPCAwareContent implements TimeAwareInterface
 		}
 		public function DinahMainMenu():void {
 			var atCamp:Boolean = (flags[kFLAGS.DINAH_LVL_UP] > 0.5);
+			var weather_choice:Array = ["sunny", "rainy", "snowy", "windy", "dankest", "reeking with undistilled lust"];
 			clearOutput();
-			if (atCamp) outputText("\"<i>What can I do for you today?</i>\" Dinha asks you with a disturbingly wide and briliant smile on her face.");
+			if (atCamp) outputText("\"<i>What can I do for you, [name], this " + randomChoice(weather_choice) + " day?</i>\" Dinha asks you with a disturbingly wide and briliant smile on her face.");
 			else outputText("\"<i>Will you gaze at me the whole day or will you buy something?</i>\" They grumble to themselves.");
 			menu();
 			addButton(2, "Shop", DinahShopMainMenu);
@@ -123,6 +130,15 @@ public class DinahFollower extends NPCAwareContent implements TimeAwareInterface
 			outputText("\n\nShe has " + dinahHips() + " and a " + dinahButt() + ". She has a pair of " + dinahTits() + " on her chest. They have "+dinahNippleSize()+"-inch nipples at their tips and must be at least " + Appearance.breastCup(flags[kFLAGS.DINAH_CUP_SIZE]) + "s.");
 			menu();//very long, flowing locks of - between shouled length and ass length - hair desc
 			addButton(14, "Back", DinahMainMenu);
+		}
+		
+		public function DinahWonSupriseAttack():void {
+			clearOutput();
+			cleanupAfterCombat(DinahMainMenu);
+		}
+		public function DinahLostSupriseAttack():void {
+			clearOutput();
+			cleanupAfterCombat(DinahMainMenu);
 		}
 		
 		public function DinahSparring():void {
@@ -193,7 +209,7 @@ public class DinahFollower extends NPCAwareContent implements TimeAwareInterface
 			}
 			cleanupAfterCombat();
 		}
-		
+
 		public function DinahShopMainMenu():void {
 			clearOutput();
 			outputText("You begin to browse "+(flags[kFLAGS.DINAH_LVL_UP] > 0.5 ?"Dinah":"veiled merchant")+" shop inventory.");
@@ -208,14 +224,16 @@ public class DinahFollower extends NPCAwareContent implements TimeAwareInterface
 			addButton(7, consumables.REDVIAL.shortName, buyItem3, 7).hint("Buy a vial of ominous red liquid.");
 			addButton(8, consumables.STRASCA.shortName, buyItem2, 8).hint("Buy a Strawberry shortcake.");
 			addButton(9, consumables.BCHCAKE.shortName, buyItem2, 9).hint("Buy a Big chocolate cake.");
-			if (player.headJewelry == headjewelries.HBHELM && player.armor == armors.HBARMOR) addButton(10, "HB M&U", buyHowlingBansheeMechAndUpgrades);
-			else addButtonDisabled(10, "???", "Offers only for those that are wearing HB Armor & HB Helmet.");
+			if (player.hasPerk(PerkLib.PrestigeJobNecromancer)) addButton(10, consumables.PODBONE.shortName, buyItem1, 10).hint("Buy a pack of demon bones.");
+			else addButtonDisabled(10, "???", "Offers only for Necromancers.");
+			if (player.headJewelry == headjewelries.HBHELM && player.armor == armors.HBARMOR) addButton(11, "HB M&U", buyHowlingBansheeMechAndUpgrades);
+			else addButtonDisabled(11, "???", "Offers only for those that are wearing HB Armor & HB Helmet.");
 			if (flags[kFLAGS.DINAH_LVL_UP] > 0.5) {
-				addButton(11, "Roulette", DinahShopMainMenu3).hint("You feelin' lucky champion?");
+				addButton(12, "Roulette", DinahShopMainMenu3).hint("You feelin' lucky champion?");
 				addButton(13, "BossTF's", DinahShopMainMenu2);
 			}
 			else {
-				addButtonDisabled(11, "Roulette", "Maybe if merchant would be more interested in you...");
+				addButtonDisabled(12, "Roulette", "Maybe if merchant would be more interested in you...");
 				addButtonDisabled(13, "Boss D.", "Maybe if merchant would be more interested in you...");
 			}
 			addButton(14, "Back", DinahMainMenu);
@@ -264,6 +282,7 @@ public class DinahFollower extends NPCAwareContent implements TimeAwareInterface
 		private function buyItem1(item:Number = 0):void {
 			if (item == 0) catChimeraBuy1(consumables.AGILI_E);
 			if (item == 1) catChimeraBuy1(consumables.W_FRUIT);
+			if (item == 10) catChimeraBuy1(consumables.PODBONE);
 		}
 		private function buyItem2(item:Number = 0):void {
 			if (item == 2) catChimeraBuy2(consumables.WOFRUIT);
@@ -559,25 +578,32 @@ public class DinahFollower extends NPCAwareContent implements TimeAwareInterface
 			clearOutput();
 			outputText("\"<i>Lady Godiva says that sometimes, it's good to share something without asking for money so...</i>\" as she talks, she pulls an object from the folds of her robe and tosses it to you. \"<i>...Take this. May Lady Godiva bless this place. Now, forgive me. I have other matters that occupy my time.</i>\" Not giving you chance to say anything, she shoos you away.");
 			player.createStatusEffect(StatusEffects.DinahGift, (16+rand(15)), 0, 0, 0);
-			inventory.takeItem(consumables.KITGIFT, DinahMainMenu);
+			/*var gift:Number = rand(20);
+			if (gift == 0) inventory.takeItem(consumables.KITGIFT, DinahMainMenu);
+			if (gift > 0) */inventory.takeItem(consumables.KITGIFT, DinahMainMenu);
 		}
 		
 		public function giveDinahItem():void {
 			clearOutput();
 			outputText("Which item do you want to offer to Dinah?");
 			menu();
+			var haveGift:Boolean = false;
 			var button:int = 0;
 			if (player.hasItem(consumables.P_S_MLK)) {
 				addButton(button++, "P.SuccMilk", giveDinahPurifiedSuccubusMilk);
+				haveGift = true;
 			}
 			if (player.hasItem(consumables.BROWNEG) || player.hasItem(consumables.L_BRNEG)) {
 				addButton(button++, "Brown Egg", giveDinahBrownEgg);
+				haveGift = true;
 			}
 			if (player.hasItem(consumables.PURPLEG) || player.hasItem(consumables.L_PRPEG)) {
 				addButton(button++, "Purple Egg", giveDinahPurpleEgg);
+				haveGift = true;
 			}
 			if (player.hasItem(consumables.REDUCTO)) {
 				addButton(button++, "Reducto", giveDinahReducto);
+				haveGift = true;
 			}
 			addButton(14, "Back", DinahMainMenu);
 		}

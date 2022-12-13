@@ -796,6 +796,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.Venomancy)) {
 			if (player.tailVenom >= player.VenomWebCost()) {
 				var injections:Number = 0;
+				if (player.hasPerk(PerkLib.ArcaneVenom)) numberOfProcs *= (1 + AbstractSpell.stackingArcaneVenom());
 				while (player.tailVenom >= player.VenomWebCost() && injections < numberOfProcs) {
 					var damageB:Number = 35 + rand(player.lib / 10);
 					var poisonScaling:Number = 1;
@@ -923,6 +924,13 @@ public class CombatMagic extends BaseCombatContent {
 			}
 			enemyAI();
 		}
+	}
+	
+	public function spellGreenCovenantOff():void {
+		clearOutput();
+		outputText("Information Noona Warning:\n\n\<b>Your Green Covenant is deactivated now.</b>");
+		player.removeStatusEffect(StatusEffects.GreenCovenant);
+		enemyAI();
 	}
 
 	private function handleShell():Boolean{

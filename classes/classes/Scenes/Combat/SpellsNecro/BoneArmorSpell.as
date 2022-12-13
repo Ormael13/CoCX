@@ -43,6 +43,7 @@ public class BoneArmorSpell extends AbstractNecroSpell {
 			outputText("You animate a set of bones to fly around you, deflecting incoming attacks.\n\n");
 		}
 		var dura:int = calcDuration();
+		consumeBones(demonBonesCost());
 		player.createStatusEffect(StatusEffects.BoneArmor,dura,0,0,0);
 	}
 }

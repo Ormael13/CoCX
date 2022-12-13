@@ -521,8 +521,11 @@ public class PerkLib
 				"Your Elven spell effects are twice as strong and last twice as long.",
 				"You've chosen the 'Green magic' perk. Your Elven spell effects are twice as strong and last twice as long.");
 		public static const VerdantLeech:PerkType = mk("Verdant Leech", "Verdant Leech",
-				".",
-				"You've chosen the 'Verdant Leech' perk. ");
+				"Your Elven spells and black magic raises your opponent's weakness to lust and heals you for 5% of your health each time they inflict poison.",
+				"You've chosen the 'Verdant Leech' perk. Your Elven spells and black magic raises your opponent's weakness to lust and heals you for 5% of your health each time they inflict poison.");
+		public static const ArcaneVenom:PerkType = mk("Arcane Venom", "Arcane Venom",
+				"Spells that inflict poison add a number of direct applications equal to your intelligence (core + trained parts) divided by 50.",
+				"You've chosen the 'Arcane Venom' perk. Spells that inflict poison add a number of direct applications equal to your intelligence (core + trained parts) divided by 50.");
 
 		public static const ElementsOfMarethBasic:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
@@ -530,6 +533,18 @@ public class PerkLib
 		/*public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk, .");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk, .");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk, .");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk, .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, .");
@@ -1584,9 +1599,6 @@ public class PerkLib
 		public static const GreaterLifeline:PerkType = mk("Greater Lifeline", "Greater Lifeline",
 				"Increases self healing by 180 out of combat and by 90 in combat (using defend option will double it).",
 				"You've chosen the 'Greater Lifeline' perk, greatly increasing your self healing.");
-		public static const Greedy:PerkType = mk("Greedy", "Greedy",
-				"Double all gems gained!",
-				"Double all gems gained.");
 		public static const GreyArchmage:PerkType = mk("Grey Archmage", "Grey Archmage",
 				"[if (player.inte>=175)" +
 						"Increases grey spell strength by 30%, mana pool by 450, lust bar by 80 and regain mana 75% faster." +
@@ -3295,11 +3307,12 @@ public class PerkLib
 
 
 		// Other super perks
-		public static const SuperPerk1:PerkType = mk("Super Perk 1", "Super Perk 1",
+		public static const SPSurvivalTrainingX:SurvivalTrainingX = new SurvivalTrainingX();
+		public static const SuperPerk3:PerkType = mk("Super Perk 3", "Super Perk 3",
 				".");
 		public static const SuperPerk2:PerkType = mk("Super Perk 2", "Super Perk 2",
 				".");
-		public static const SuperPerk3:PerkType = mk("Super Perk 3", "Super Perk 3",
+		public static const SuperPerk1:PerkType = mk("Super Perk 1", "Super Perk 1",
 				".");
 
 		//Soul Cultivation perks
@@ -3534,6 +3547,8 @@ public class PerkLib
 				"Increases damage with guns and thrown weapons by 15%.");
 		public static const GoblinoidBlood:PerkType = mk("Goblinoid blood", "Goblinoid blood",
 				"Your blood is highly susceptible to chemical drugs, stimulants and poisons.");
+		public static const Greedy:PerkType = mk("Greedy", "Greedy",
+				"Double all gems gained!");
 		public static const HaltedVitals:PerkType = mk("Halted vitals", "Halted vitals",
 				"Your vitals are frozen in time by the magic of the curse tag, allowing you to live without the need for breathing, eating and a heartbeat. It also reduces damage taken from physical attacks by 20%. Furthermore your vitality is based of your libido rather then your toughness.");
 		public static const HarpySong:PerkType = mk("Harpy Song", "Harpy Song",
@@ -3986,7 +4001,7 @@ public class PerkLib
 		public static const PrestigeJobGreySage:PerkType = mk("Hidden Job: Grey Sage", "Job ( Hidden ): Grey Sage",
 				"You've trained in Way of Grey Sage. There is no spell you can't learn. (+10% to OverMax Mana)");
 		public static const Equilibrium:PerkType = mk("Equilibrium", "Equilibrium",
-				"You can cast now any spell you learned even if you missing additional materials or not meet requirements. (+10% to OverMax Mana)");
+				"You can cast now any spell you learned even if you missing additional materials or not meet requirements. Slight increase cap on stored bones for necromancers. (+10% to OverMax Mana)");
 		public static const HiddenJob0:PerkType = mk("Hidden Job: 0", "Hidden Job: 0",
 				". (+10% to OverMax Mana)");
 		public static const DeityJobMunchkin:PerkType = mk("Deity Job: Munchkin", "Job ( Deity ): Munchkin",
@@ -4479,10 +4494,6 @@ public class PerkLib
                     .requireStr(165)
                     .requirePerks(GreaterBrawn, GreaterBrute);
             //Tier 9 Strength Perks
-			//PrestigeJobBard.requirePrestigeJobSlot()
-			//		.requirePerks(JobEromancer, JobCourtesan)
-			//		.requireLib(200)
-			//		.requireLevel(54);
             PrestigeJobBerserker.requirePrestigeJobSlot()
                     .requirePerks(JobSwordsman, JobBeastWarrior)
                     .requireAnyPerk(Berzerker, Lustzerker)
@@ -6967,12 +6978,12 @@ public class PerkLib
             MotivationSu.requireLevel(36)
                     .requirePerk(MotivationEx);//.requirePerk(AdvancedLeadership)
             AdvancedAllRounderEducation.requireLevel(36)
-                    .requirePerk(IntermediateAllRounderEducation);/*
+                    .requirePerk(IntermediateAllRounderEducation);
 			VerdantLeech.requireLevel(36)
 					.requirePerk(GreenMagic)
 					.requireInt(140)
 					.requireLib(140)
-					.requireCor(50);*/
+					.requireCor(50);
             //Tier 7
             ChimericalBodyAdvancedStage.requirePerk(ChimericalBodySemiAdvancedStage)
                     .requireLevel(42)
@@ -7055,12 +7066,12 @@ public class PerkLib
 					return player.playerMinionsCount() >= 10;
 					}, "10+ pets/minions");
 			LimitBreakerFlesh1stStage.requireLevel(54)
-					.requirePerk(LimitBreakerHeart1stStage);/*
-			VerdantLeech.requireLevel(54)
+					.requirePerk(LimitBreakerHeart1stStage);
+			ArcaneVenom.requireLevel(54)
 					.requirePerk(VerdantLeech)
 					.requireInt(200)
 					.requireLib(200)
-					.requireCor(50);*/
+					.requireCor(50);
             //Tier 10
             ChimericalBodySemiPeerlessStage.requirePerk(ChimericalBodySuperiorStage)
                     .requireLevel(60)

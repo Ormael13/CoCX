@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Created by aimozg on 06.01.14.
  */
 package classes.Scenes.Areas
@@ -42,7 +42,13 @@ public class Mountain extends BaseContent
 					Encounters.group(/*game.commonEncounters.withImpGob,*/{
 						//General Golems, Goblin and Imp Encounters
 						name: "common",
+						chance: 0.4,
 						call: SceneLib.exploration.genericGolGobImpEncounters
+					}, {
+						//General Angels Encounters
+						name: "common",
+						chance: 0.4,
+						call: SceneLib.exploration.genericAngelsEncounters
 					}, {
 						//Helia monogamy fucks
 						name  : "helcommon",
@@ -84,12 +90,6 @@ public class Mountain extends BaseContent
 						when: fn.not(salon.isDiscovered),
 						call: salon.hairDresser
 					},{
-						/* [INTERMOD: Revamp]
-						name: "mimic",
-						when: fn.ifLevelMin(3),
-						call: curry(game.mimicScene.mimicTentacleStart,2)
-					},{
-						*/
 						name: "highmountains",
 						when: function ():Boolean {
 							return !SceneLib.highMountains.isDiscovered()
@@ -251,14 +251,14 @@ public class Mountain extends BaseContent
 					}, {
 						name  : "mindbreaker",
 						call  : SceneLib.mindbreaker.findMindbreaker,
-						chance: 0.50,
+						chance: findMindbreakerChance,
 						when  : function ():Boolean {
 							return Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_NOT_STARTED && player.level >= 10 && !player.blockingBodyTransformations() && flags[kFLAGS.MARAE_QUEST_START] >= 1
 						}
 					}, {
 						name  : "mindbreaker",
 						call  : SceneLib.mindbreaker.findMindbreakerAgain,
-						chance: 0.50,
+						chance: findMindbreakerChance,
 						when  : function ():Boolean {
 							return Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_METMB && player.level >= 10 && !player.blockingBodyTransformations() && flags[kFLAGS.MARAE_QUEST_START] >= 1
 						}
@@ -268,10 +268,16 @@ public class Mountain extends BaseContent
 						call:hike
 					}, {
 						name: "mimic",
+						chance:0.25,
 						when: fn.ifLevelMin(3),
 						call: curry(SceneLib.mimicScene.mimicTentacleStart,2)
 					})
 			;
+		}
+		public function findMindbreakerChance():Number {
+			var fMC:Number = 5;
+			fMC *= Mindbreaker.MindbreakerEncounterChance;
+			return fMC;
 		}
 		//Explore Mountain
 		public function exploreMountain():void {

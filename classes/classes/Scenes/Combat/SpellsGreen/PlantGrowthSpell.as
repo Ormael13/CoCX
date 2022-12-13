@@ -19,7 +19,7 @@ public class PlantGrowthSpell extends AbstractGreenSpell {
 	}
 	
 	override public function describeEffectVs(target:Monster):String {
-		return "~" + calcDamage(target, false, false) + " lust damage"
+		return "~" + calcDamage(target, false, false) + " lust posion damage"
 	}
 	
 	override public function calcCooldown():int {
@@ -41,6 +41,7 @@ public class PlantGrowthSpell extends AbstractGreenSpell {
 		var baseDamage:Number = (combat.teases.teaseBaseLustDamage() * 0.5 * spellModWhite());
 		if (player.hasPerk(PerkLib.VegetalAffinity)) baseDamage *= 1.5;
 		if (player.hasPerk(PerkLib.GreenMagic)) baseDamage *= 2;
+		if (player.hasStatusEffect(StatusEffects.GreenCovenant)) baseDamage *= 2;
 		return adjustLustDamage(baseDamage, monster, CAT_SPELL_GREEN, randomize);
 	}
 	
@@ -61,28 +62,38 @@ public class PlantGrowthSpell extends AbstractGreenSpell {
 					return;
 				}
 				player.createStatusEffect(StatusEffects.PlantGrowth, calcDuration(), 0, 0, 0);
-				var lustDmg:Number = calcDamage(monster, true, true);
-				//Determine if critical tease!
-				var crit:Boolean   = false;
-				var critChance:int = 5;
-				if (player.hasPerk(PerkLib.CriticalPerformance)) {
-					if (player.lib <= 100) critChance += player.lib / 5;
-					if (player.lib > 100) critChance += 20;
-				}
-				if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
-				if (rand(100) < critChance) {
-					crit = true;
-					lustDmg *= 1.75;
-				}
-				lustDmg = Math.round(monster.lustVuln * lustDmg);
-				monster.teased(lustDmg, false);
-				if (crit) outputText(" <b>Critical!</b>");
-				combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
+				var arve:Number = 1;
+				if (player.hasPerk(PerkLib.ArcaneVenom)) arve += stackingArcaneVenom();
+				while (arve-->0) doSpellEffect2();
 			}
 			else {
 				outputText("You focus your energy on the world around you causing vegetation to surge out of the ground at an accelerated rate into a verdant patch of vines and other tentacle greenery.\n");
 				player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
 			}
+		}
+	}
+	
+	private function doSpellEffect2():void {
+		var lustDmg:Number = calcDamage(monster, true, true);
+		//Determine if critical tease!
+		var crit:Boolean   = false;
+		var critChance:int = 5;
+		if (player.hasPerk(PerkLib.CriticalPerformance)) {
+			if (player.lib <= 100) critChance += player.lib / 5;
+			if (player.lib > 100) critChance += 20;
+		}
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			lustDmg *= 1.75;
+		}
+		lustDmg = Math.round(monster.lustVuln * lustDmg);
+		monster.teased(lustDmg, false);
+		if (crit) outputText(" <b>Critical!</b>");
+		combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
+		if (player.hasPerk(PerkLib.VerdantLeech)) {
+			if (monster.lustVuln != 0) monster.lustVuln += 0.50;
+			HPChange(Math.round(player.maxHP() * 0.05), false);
 		}
 	}
 }

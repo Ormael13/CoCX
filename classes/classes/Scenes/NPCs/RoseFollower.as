@@ -14,6 +14,6 @@ package classes.Scenes.NPCs
 		
 		
 		
-		//plant/animal hybrys with rose base for plant parts - beware of her thorn wines ;)
+		//plant/animal hybrys with rose base for plant parts - beware of her thorn vines ;)
 	}
 }

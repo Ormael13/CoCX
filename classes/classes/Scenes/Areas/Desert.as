@@ -171,6 +171,7 @@ use namespace CoC;
 						when  : SceneLib.helScene.helSexualAmbushCondition
 					}, {
 						name: "mimic",
+						chance: 0.25,
 						when: fn.ifLevelMin(3),
 						call: curry(SceneLib.mimicScene.mimicTentacleStart, 1)
 					}, {

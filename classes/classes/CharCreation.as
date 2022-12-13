@@ -1,4 +1,4 @@
-﻿package classes
+package classes
 {
 import classes.BodyParts.Antennae;
 import classes.BodyParts.Arms;
@@ -1880,7 +1880,9 @@ import coc.view.MainView;
 			else addButton(14, "Return", returnFromUpdateAscension).hint("Go back to your camp after updating your Ascension perks. (Only available during updates that refund points like this)");
 		}
 		private function genMemPatch():void{	//Cause for some fuckall rason the status gets wiped on ascending.
-			if (player.hasPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX) && !player.hasStatusEffect(StatusEffects.TranscendentalGeneticMemory)) {
+			if (player.hasStatusEffect(StatusEffects.TranscendentalGeneticMemory))
+				player.removeStatusEffect(StatusEffects.TranscendentalGeneticMemory);
+			if (player.hasPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX)) {
 				var permedMetamorphCount:int = Metamorph.PermanentMemoryStorage.length;
 				player.createStatusEffect(StatusEffects.TranscendentalGeneticMemory, 15 * player.perkv1(PerkLib.AscensionTrancendentalGeneticMemoryStageX), permedMetamorphCount, 0, 0);
 			}

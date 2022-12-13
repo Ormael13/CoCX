@@ -190,12 +190,20 @@ package classes.GeneticMemories {
           cost: 300,
           title: "Drider",
           transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyDrider},info: "Includes Spider tail and lower body parts."});
+
       public static const ELF: int = _partid++;
       EnumValue.add(Memories, ELF, "ELF", {
           id: "Elf Lower Body",name: "Elf Legs",
           cost: 100,
           title: "Elf",
           transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyElf}});
+
+      public static const FEY_DRAGON: int = _partid++;
+      EnumValue.add(Memories, FEY_DRAGON, "FEY_DRAGON", {
+          id: "Fey Draconic Lower Body",name: "Fey Draconic Legs",
+          cost: 100,
+          title: "Fey Dragon",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyFeyDraconicToggle(true)}});
 
       public static const FERRET: int = _partid++;
       EnumValue.add(Memories, FERRET, "FERRET", {

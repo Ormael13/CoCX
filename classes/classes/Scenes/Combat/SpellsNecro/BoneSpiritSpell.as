@@ -50,7 +50,7 @@ public class BoneSpiritSpell extends AbstractNecroSpell {
 		consumeBones(demonBonesCost());
 		damage = critAndRepeatDamage(display, damage, DamageType.TRUE);
 		checkAchievementDamage(damage);
-		combat.heroBaneProc(damage)
+		combat.heroBaneProc(damage);
 	}
 }
 }

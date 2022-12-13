@@ -86,6 +86,17 @@ package classes.GeneticMemories {
 			}
 		});
 
+        public static const GHOST:int = _partid++;
+        EnumValue.add(Memories, GHOST, "GHOST", {
+            id: "Ghost Hair",
+            name: "Ghost Hair",
+            cost: 100,
+            title: "Ghost",
+            transformation: function(): Transformation {
+                return CoC.instance.transformations.HairGhost;
+            }
+        });
+
         public static const GOO:int = _partid++;
         EnumValue.add(Memories, GOO, "GOO", {
             id: "Goo Hair",

@@ -164,6 +164,25 @@ public final class Mutations extends MutationsHelper {
 		player.refillHunger(10);
     }
 
+    //Madmen knowledge
+    public function madmenKnowledge(player:Player):void {
+        clearOutput();
+        outputText("You open the bottle and sip its contents, your mind flashing with images and thoughts not meant for the waking world.");
+        AlchemyBonus("int", 4 + rand(2));
+		KnowledgeBonus("int", 4 + rand(2));
+		player.addCurse("wis", 2 + rand(9), 1);
+		dynStats("cor", 2);
+		//-Madness
+        if (!player.hasPerk(PerkLib.Insanity) && rand(20) == 0) {
+            outputText("[pg]");
+			outputText(" As you drink the last sip of the vials you suddenly have an epiphany. The reason you've been feeling so limited is because of limits you have yourself placed over your own line of thoughts. Nothing is impossible to anyone who dismisses the very notion of impossibility. Crazy is just a word for enlightened and the mads have knowledge and truth the sanes are too stubborn to see. ");
+			outputText("With this knowledge you decide to discard aside your stuck up principes and embrace the all encompassing truth that is madness.  (<b>Gained Perk: Insanity!</b>)");
+            player.createPerk(PerkLib.Insanity,0,0,0,0);
+            changes++;
+        }
+        player.refillHunger(10);
+    }
+
     //Airweed
     public function airweed(player:Player):void {
         player.slimeFeed();
@@ -826,6 +845,14 @@ public final class Mutations extends MutationsHelper {
         flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] += nails;
         if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 750 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 750;
         else if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 250 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 2) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 250;
+    }
+
+    public function packOfDemonBones(player:Player):void {
+        clearOutput();
+        var harv:Number = 10;
+		if (harv + player.perkv1(PerkLib.PrestigeJobNecromancer) > SceneLib.camp.campMake.maxDemonBonesStored()) harv = SceneLib.camp.campMake.maxDemonBonesStored() - player.perkv1(PerkLib.PrestigeJobNecromancer);
+		outputText("You open the pack to find " + harv + " demon bones inside.");
+		player.addPerkValue(PerkLib.PrestigeJobNecromancer, 1, harv);
     }
 
     /* ITEMZZZZZ FUNCTIONS GO HERE */
@@ -3213,15 +3240,33 @@ public final class Mutations extends MutationsHelper {
 				return;
 			}
 			//Smart enough for Bone armor and doesnt have it
-			if (player.inte >= 110 && !player.hasStatusEffect(StatusEffects.KnowsBoneArmor)) {
+			if (player.inte >= 105 && !player.hasStatusEffect(StatusEffects.KnowsBoneArmor)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new necromancer spell: Bone armor.</b>");
 				player.createStatusEffect(StatusEffects.KnowsBoneArmor, 0, 0, 0, 0);
+				return;
+			}
+			//Smart enough for Corpse Explosion and doesnt have it
+			if (player.inte >= 110 && !player.hasStatusEffect(StatusEffects.KnowsCorpseExplosion)) {
+				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new necromancer spell: Corpse Explosion.</b>");
+				player.createStatusEffect(StatusEffects.KnowsCorpseExplosion, 0, 0, 0, 0);
+				return;
+			}
+			//Smart enough for Blood Shower and doesnt have it
+			if (player.inte >= 115 && !player.hasStatusEffect(StatusEffects.KnowsBloodShower)) {
+				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new necromancer spell: Blood Shower.</b>");
+				player.createStatusEffect(StatusEffects.KnowsBloodShower, 0, 0, 0, 0);
 				return;
 			}
 			//Smart enough for Boneshatter and doesnt have it
 			if (player.inte >= 120 && !player.hasStatusEffect(StatusEffects.KnowsBoneshatter)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new necromancer spell: Boneshatter.</b>");
 				player.createStatusEffect(StatusEffects.KnowsBoneshatter, 0, 0, 0, 0);
+				return;
+			}
+			//Smart enough for Necrotic Rot and doesnt have it
+			if (player.inte >= 125 && !player.hasStatusEffect(StatusEffects.KnowsNecroticRot)) {
+				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new necromancer spell: Necrotic Rot.</b>");
+				player.createStatusEffect(StatusEffects.KnowsNecroticRot, 0, 0, 0, 0);
 				return;
 			}
 		}
@@ -3518,13 +3563,25 @@ public final class Mutations extends MutationsHelper {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new green spell: Entangle.</b>");
 				player.createStatusEffect(StatusEffects.KnowsEntangle, 0, 0, 0, 0);
 				return;
-			}/*
+			}
 			//Smart enough for Briarthorn and doesnt have it
 			if (player.inte >= 120 && !player.hasStatusEffect(StatusEffects.KnowsBriarthorn)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new green spell: Briarthorn.</b>");
 				player.createStatusEffect(StatusEffects.KnowsBriarthorn, 0, 0, 0, 0);
 				return;
-			}*/
+			}
+			//Smart enough for Death Blossom and doesnt have it
+			if (player.inte >= 130 && !player.hasStatusEffect(StatusEffects.KnowsDeathBlossom)) {
+				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new green spell: Death Blossom.</b>");
+				player.createStatusEffect(StatusEffects.KnowsDeathBlossom, 0, 0, 0, 0);
+				return;
+			}
+			//Smart enough for Green Covenant and doesnt have it
+			if (player.inte >= 140 && !player.hasStatusEffect(StatusEffects.KnowsGreenCovenant)) {
+				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new green spell: Green Covenant.</b>");
+				player.createStatusEffect(StatusEffects.KnowsGreenCovenant, 0, 0, 0, 0);
+				return;
+			}
 		}
     }
 
@@ -4933,14 +4990,8 @@ public final class Mutations extends MutationsHelper {
             else {
                 if (player.horns.type == Horns.DRACONIC_X2) {
                     if (player.horns.count < 12) {
-                        if (rand(2) == 0) {
-                            outputText("[pg]You get a headache as an inch of fresh horns escapes from your pounding skull.");
-                            player.horns.count += 1;
-                        } else {
-                            outputText("[pg]Your head aches as your horns grow a few inches longer.  They get even thicker about the base, giving you a menacing appearance.");
-                            player.horns.count += 2 + rand(4);
-                        }
-                        if (player.horns.count >= 12) outputText("  <b>Your horns settle down quickly, as if they're reached their full size.</b>");
+                        outputText("[pg]");
+                        transformations.HornsDraconicDual.applyEffect();
                         changes++;
                     }
                     //maxxed out, new row
@@ -6301,7 +6352,15 @@ public final class Mutations extends MutationsHelper {
             }
             outputText("[pg]Your [skin.type] begins to tingle, then itch. ");
             transformations.SkinFur(Skin.COVERAGE_COMPLETE, {colors: ["brown", "chocolate", "auburn", "caramel", "orange", "sandy brown", "golden", "black", "midnight black", "dark gray", "gray", "light gray", "silver", "white", "orange and white", "brown and white", "black and white", "gray and white"]}).applyEffect();
+            changes++;
+        }
 
+        //-Madness
+        if (!player.hasPerk(PerkLib.Insanity) && changes < changeLimit) {
+            outputText("[pg]");
+			outputText(" You begin to laugh uncontrollably. Wow how stupid have you been acting until now. Reality has unfolded before your eyes in a whole new manner and as the magic of wonderland begins to fully seep into your formerly logical, short sighted, desperately stubborn mind you open to a whole new perspective of the world you didn't have access to, the diagonal one. See most people look up down left or right but what about the area in between or the area behind? ");
+			outputText("People might say you make no sense, that you're crazy but at the end of the day they are just blind idiots trying to make sense of a reality they have no access to. You've seen it all and understand it all.  (<b>Gained Perk: Insanity!</b>)");
+            player.createPerk(PerkLib.Insanity,0,0,0,0);
             changes++;
         }
         // Remove gills
@@ -9120,8 +9179,7 @@ public final class Mutations extends MutationsHelper {
         }
         //Transparent skin
         if (player.hasPlainSkinOnly() && !player.isGhostSkin() && rand(3) == 0 && changes < changeLimit && type == 1) {
-            outputText("[pg]You feel lightheaded all of a sudden. You bring your hands up to clutch your head only to find the color slowly fading from your skin or rather it’s losing its opacity altogether. You examine your body and see that you’ve become almost entirely transparent, adding to your ethereal appearance. <b>You now have transparent skin.</b>");
-            player.skin.setBaseOnly({type: Skin.TRANSPARENT, adj: "transparent"});
+            transformations.SkinTransparent.applyEffect();
             changes++;
         }
         //Skin pattern - black or white veins pattern - adv ghost tf
@@ -11975,23 +12033,10 @@ public final class Mutations extends MutationsHelper {
             flags[kFLAGS.TIMES_TRANSFORMED]++;
         }
         //grow horns!
-        if ((player.horns.count == 0 || (rand(player.horns.count + 3) == 0))) {
-            if (player.horns.type == Horns.NONE) {
-                outputText("[pg]");
-                transformations.HornsDemonic.applyEffect();
-            } else if (player.horns.count < 12 && player.horns.type == Horns.DEMON) {
-                outputText("[pg]");
-                outputText("Another pair of demon horns, larger than the last, forms behind the first row.");
-                player.horns.count++;
-                player.horns.count++;
-                dynStats("cor", 3);
-            }
-            //Text for shifting horns
-            else if (player.horns.type != Horns.DEMON && player.horns.type != Horns.ORCHID) {
-                outputText("[pg]");
-                transformations.HornsDemonic.applyEffect();
-                dynStats("cor", 3);
-            }
+        if (player.horns.count == 0 || (rand(player.horns.count + 3) == 0 && player.horns.count < 12) && player.horns.type != Horns.ORCHID) {
+            outputText("[pg]");
+            transformations.HornsDemonic.applyEffect();
+            dynStats("cor", 3);
             flags[kFLAGS.TIMES_TRANSFORMED]++;
         }
         //Nipples Turn Back:
@@ -14589,13 +14634,13 @@ public final class Mutations extends MutationsHelper {
         player.refillHunger(10);
         if (player.racialScore(Races.DRAGON, false) > 9 || player.racialScore(Races.DRAGONNE, false) > 9) {
             outputText("You eat the scale expecting some kind of spectacular change and for a moment pretty much nothing happen. You begin to feel weird… like very weird. For some reason your situation as a whole is so funny you can’t help but laugh. Are you seriously eating some otherworldly dragon scale just so you can turn into a messed up rabbit dragon yourself? Aha yes you are and that's way to funny.");
-            changeLimit += 1;
+            changeLimit += 3;
         } else {
             outputText("You eat the scale expecting some kind of spectacular change strangely nothing happened. Maybe you should stop eating everything you find.");
         }
         if (player.blockingBodyTransformations()) changeLimit = 0;
         //-Jabberwocky face/bucktooth
-        if ((player.faceType == Face.DRAGON || player.faceType == Face.DRAGON_FANGS) && changeLimit > 0) {
+        if ((player.faceType == Face.DRAGON || player.faceType == Face.DRAGON_FANGS) && changes < changeLimit) {
             outputText("[pg]");
             if (player.faceType == Face.DRAGON_FANGS) {
                 transformations.FaceBucktooth.applyEffect();
@@ -14605,38 +14650,38 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //-Existing horns become jabby'
-        if (player.horns.type != Horns.JABBERWOCKY && changeLimit > 0) {
+        if (player.horns.type != Horns.JABBERWOCKY && changes < changeLimit) {
             outputText("[pg]");
             transformations.HornsJabberwocky.applyEffect();
             changes++;
         }
         //-Jabby Neck
-        if (player.antennae.type != Antennae.JABBERWOCKY && changeLimit > 0) {
+        if (player.antennae.type != Antennae.JABBERWOCKY && changes < changeLimit) {
             outputText("[pg]");
             transformations.AntennaeJabberwocky.applyEffect();
             changes++;
         }
         //Gain Dragon Eyes
-        if (player.eyes.type != Eyes.DRACONIC && changeLimit > 0) {
+        if (player.eyes.type != Eyes.DRACONIC && changes < changeLimit) {
             outputText("[pg]");
             transformations.EyesDraconic.applyEffect();
             changes++;
         }
         //red eyes
-        if (!InCollection(player.eyes.colour, ("red")) && changeLimit > 0) {
+        if (!InCollection(player.eyes.colour, ("red")) && changes < changeLimit) {
             outputText("[pg]");
             transformations.EyesChangeColor(["red"]).applyEffect();
             changes++;
         }
         //Make sure pc is at least partialscaled
-        if (!player.hasCoatOfType(Skin.SCALES) && changeLimit > 0) {
+        if (!player.hasCoatOfType(Skin.SCALES) && changes < changeLimit) {
             outputText("[pg]");
             transformations.SkinDragonScales(Skin.COVERAGE_LOW, {color: "magenta"}).applyEffect();
             player.scaleColor2 = "purplish black";
             changes++;
         }
         // Scale color
-        if ((!InCollection(player.furColor1, ("magenta")) || !InCollection(player.scaleColor1, ("magenta")) || !InCollection(player.furColor2, ("purplish black")) || !InCollection(player.scaleColor2, ("purplish black"))) && changeLimit > 0) {
+        if ((!InCollection(player.furColor1, ("magenta")) || !InCollection(player.scaleColor1, ("magenta")) || !InCollection(player.furColor2, ("purplish black")) || !InCollection(player.scaleColor2, ("purplish black"))) && changes < changeLimit) {
             outputText("[pg]");
             player.furColor1 = "magenta";
             player.furColor2 = "purplish black";
@@ -14645,38 +14690,38 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //-Jabby Arms
-        if (player.arms.type != Arms.JABBERWOCKY && changeLimit > 0) {
+        if (player.arms.type != Arms.JABBERWOCKY && changes < changeLimit) {
             outputText("[pg]");
             transformations.ArmsJabberwocky.applyEffect();
             changes++;
         }
         //-Jabby leg
-        if (player.lowerBody != LowerBody.JABBERWOCKY && changeLimit > 0) {
+        if (player.lowerBody != LowerBody.JABBERWOCKY && changes < changeLimit) {
             outputText("[pg]");
             transformations.LowerBodyJabberwocky.applyEffect();
             changes++;
         }
         //-Jabby Wings
-        if ((player.wings.type != Wings.JABBERWOCKY) && changeLimit > 0) {
+        if ((player.wings.type != Wings.JABBERWOCKY) && changes < changeLimit) {
             outputText("[pg]");
             transformations.WingsJabberwocky.applyEffect();
             changes++;
         }
         //-Jabby Ears
-        if ((player.ears.type != Ears.BUNNY) && changeLimit > 0) {
+        if ((player.ears.type != Ears.BUNNY) && changes < changeLimit) {
             outputText("[pg]");
             transformations.EarsBunny.applyEffect();
             changes++;
         }
         // Hair color
-        if (!InCollection(player.hairColor, ("purplish-pink")) && changeLimit > 0) {
+        if (!InCollection(player.hairColor, ("purplish-pink")) && changes < changeLimit) {
             outputText("[pg]");
             outputText("[pg]Your hair suddenly tingles as purplish-pink colored strands begins to cover your entire skalp and before long all of them are of same dark color.");
             player.hairColor = "purplish-pink";
             changes++;
         }
         //Skin color
-        if (player.skinColor != "caramel" && changeLimit > 0) {
+        if (player.skinColor != "caramel" && changes < changeLimit) {
             changes++;
             outputText("[pg]It takes a while for you to notice, but <b>");
             if (player.isFurCovered()) outputText("the skin under your [fur color] " + player.skinDesc);
@@ -14693,9 +14738,10 @@ public final class Mutations extends MutationsHelper {
         }
 
         //-Madness
-        if (!player.hasPerk(PerkLib.Insanity) && changeLimit > 0) {
+        if (!player.hasPerk(PerkLib.Insanity) && changes < changeLimit) {
             outputText("[pg]");
-            outputText(" Suddenly as if catching on to a joke way to late you begin to laugh uncontrollably. Wow how stupid have you been acting until now. Reality has unfolded before your eyes in a whole new manner and as the magic of wonderland begins to fully seep into your formerly logical, short sighted, desperately stubborn mind you open to a whole new perspective of the world you didn't have access to, the diagonal one. See most people look up down left or right but what about the area in between or the area behind? People might say you make no sense, that you're crazy but at the end of the day they are just blind idiots trying to make sense of a reality they have no access to. You've seen it all and understand it all.");
+            outputText(" You begin to laugh uncontrollably. Wow how stupid have you been acting until now. Reality has unfolded before your eyes in a whole new manner and as the magic of wonderland begins to fully seep into your formerly logical, short sighted, desperately stubborn mind you open to a whole new perspective of the world you didn't have access to, the diagonal one. See most people look up down left or right but what about the area in between or the area behind? ");
+			outputText("People might say you make no sense, that you're crazy but at the end of the day they are just blind idiots trying to make sense of a reality they have no access to. You've seen it all and understand it all.  (<b>Gained Perk: Dragon lust poison breath!</b>)");
             player.createPerk(PerkLib.Insanity,0,0,0,0);
             changes++;
         }
@@ -16187,4 +16233,4 @@ public final class Mutations extends MutationsHelper {
 		player.herbXP(HE);
     }
 }
-}
+}

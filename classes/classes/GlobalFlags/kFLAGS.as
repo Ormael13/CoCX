@@ -63,7 +63,7 @@ public static const NUMBER_OF_TIMES_MET_SCYLLA:int                              
 public static const TIMES_ENCOUNTED_TAMANIS_DAUGHTERS:int                           =   55; // Times encountered Tamani's Daughters
 public static const TAMANI_TIMES_HYPNOTISED:int                                     =   56; // Tamani Hypno Level" Description="increases by 1 for each hypno event.  1-3 slight lust raises, 4-9 medium lust raises, 10-19 super high lust raises, 20+ high chance of autorape with special scene.
 public static const TAMANI_DAUGHTER_PREGGO_COUNTDOWN:int                            =   57; // Daughter Pregnancy Counter" Description="they will not return until this countdown timer is 0.  Same length as Tamani's incubation &#x2014; approx 1 week.
-public static const TAMANI_DAUGHTERS_TIMES_LOST:int                                   =   58; // Times In Goblin Daughter 'CHAIR'
+public static const TAMANI_DAUGHTERS_TIMES_LOST:int                                 =   58; // Times In Goblin Daughter 'CHAIR'
 public static const TIMES_FUCKED_TAMANIS_DAUGHTERS:int                              =   59; // TimeSleptWithDaughters
 public static const UNABLE_TO_MASTURBATE_BECAUSE_CENTAUR:int                        =   60; // Fail Masturbation As Centaur?
 public static const CERULEAN_POTION_BAD_END_FUTA_COUNTER:int                        =   61; // Cerulean Potion Bad-End Futa Count
@@ -123,7 +123,7 @@ public static const DEFEATED_ZETAZ:int                                          
 public static const ZETAZ_DOOR_UNLOCKED:int                                         =  115; // Zetaz' Door unlocked
 public static const ZETAZ_IMP_HORDE_DEFEATED:int                                    =  116; // Imp Horde Defooted
 public static const ZETAZ_FUNGUS_ROOM_DEFEATED:int                                  =  117; // Fungus Room Defeated (1 = yes)
-public static const PONY_APRIL_FOOLS:int                                   		=  118; // PONIES?!?!?!
+public static const PONY_APRIL_FOOLS:int                                   		    =  118; // PONIES?!?!?!
 public static const FREED_VALA:int                                                  =  119; // Vala Released?
 public static const WEEKLY_FAIRY_ORGY_COUNTDOWN:int                                 =  120; // Weekly Faerie Orgy Countdown
 public static const ENCOUNTERED_VALA_AT_BAR:int                                     =  121; // Vala Met At Bar?
@@ -149,7 +149,7 @@ public static const RAPHAEL_SECOND_DATE:int                                     
 public static const HELLHOUND_MASTER_PROGRESS:int                                   =  141; // Hellhound Progression
 public static const CAN_BUY_MINOCUM:int                                   			=  142; // Can buy minotaur cum from goblins?
 public static const URTA_SCYLLA_TIMES_CAUGHT:int                                    =  143; // How Many Times Have You Caught Urta + Scylla?
-public static const SCYLLA_ADVANTAGE_MULTICOCK:int                                   =  144; // Multitake Scylla meeting take advantage ever done?
+public static const SCYLLA_ADVANTAGE_MULTICOCK:int                                  =  144; // Multitake Scylla meeting take advantage ever done?
 public static const URTA_TALKED_ABOUT_SCYLLA:int                                    =  145; // Urta confrontation about Scylla ever done?
 public static const URTA_DRINK_TOOGLE:int                                           =  146; // Urta drink toggle = 0 is same, 1 is more, -1 is less.
 public static const URTA_NO_MORE_SCYLLA:int                                         =  147; // Is Urta banned from Scylla?  1 = yes.
@@ -417,7 +417,7 @@ public static const ROGAR_DIRT:int                                              
 public static const ROGAR_WARNING:int                                               =  409; //
 public static const ROGAR_DISABLED:int                                              =  410; //
 public static const ROGAR_FUCKED_TODAY:int                                          =  411; //
-public static const IZMA_KIDS_IN_THE_WILD:int                                   =  412; // IZMA_KIDS_IN_THE_WILD
+public static const IZMA_KIDS_IN_THE_WILD:int                                       =  412; // IZMA_KIDS_IN_THE_WILD
 public static const EXGARTUAN_TIGHTPANTS_MASTURBATE_COUNT:int                       =  413; //
 public static const BOOBGARTUAN_SURPRISE_COUNT:int                                  =  414; //
 public static const GOTTEN_INQUISITOR_ARMOR:int                                     =  415; //
@@ -632,7 +632,7 @@ public static const RUBI_GOT_BIMBO_SKIRT:int                                    
 public static const RUBI_PROFIT:int                                                 =  624; //
 public static const RUBI_BIMBO_MINIDRESS:int                                        =  625; //
 public static const MANSION_VISITED:int                                             =  626; //
-public static const REDHEAD_IS_FUTA:int                                               =  627; //
+public static const REDHEAD_IS_FUTA:int                                             =  627; //
 public static const MET_KITSUNES:int                                                =  628; //
 public static const AMILY_OVIPOSITED_COUNT:int                                      =  629; //
 public static const AMILY_OVIPOSITED_COUNTDOWN:int                                  =  630; //
@@ -847,7 +847,7 @@ public static const SAND_WITCHES_FRIENDLY:int                                   
 public static const CUM_WITCH_DEFEATED:int                                          =  839; //
 public static const ENTERED_SANDWITCH_DUNGEON:int                                   =  840; //
 public static const PAWJOBS:int                                                     =  841; //
-public static const PRISCILLA_WRESTLE_COUNTER:int                                    =  842; //
+public static const PRISCILLA_WRESTLE_COUNTER:int                                   =  842; //
 public static const PRISCILLA_FOREPLAY_COUNTER:int                            		=  843; //
 public static const DESERT_CAVE_DISABLED:int                                    	=  844; //Set after the player insists about MilkGirl
 public static const TIMES_SUBMITTED_TO_SANURA:int                                   =  845; //
@@ -867,12 +867,12 @@ public static const SHEILA_CLOCK:int                                            
 public static const SHEILA_IMPS:int                                                 =  859; //
 public static const TIMES_VISITED_MALI:int                                          =  860; //
 public static const TIMES_BEEN_TO_LIBRARY:int                                       =  861; //
-public static const MALI_BLADE_STATUS:int                                            =  862; //
+public static const MALI_BLADE_STATUS:int                                           =  862; //
 public static const ESSRAYLE_ESCAPED_DUNGEON:int                                    =  863; //
 public static const TOLD_MOTHER_TO_RELEASE_ESSY:int                                 =  864; //
 public static const ESSY_DUNGEON_FUCKED:int                                         =  865; //
 public static const ESSY_MET_IN_DUNGEON:int                                         =  866; //
-public static const MULTIATTACK_STYLE:int                                         =  867; // MULTIATTACK_STYLE" Description="prefered number of attacks is (X+1)
+public static const MULTIATTACK_STYLE:int                                           =  867; // MULTIATTACK_STYLE" Description="prefered number of attacks is (X+1)
 public static const SPELLS_CAST:int                                                 =  868; //
 public static const MILK_NAME:int                                                   =  869; //
 public static const MILK_SIZE:int                                                   =  870; //
@@ -933,7 +933,7 @@ public static const THREATENED_HOLLI:int                                        
 public static const DIDNT_FUCK_PHYLLA_ON_RECRUITMENT:int                            =  925; //
 public static const HELIA_ANAL_TRAINING_OFFERED:int                                 =  926; //
 public static const HELIA_ANAL_TRAINING:int                                         =  927; //
-public static const HELIA_BIRTHDAY_LAST_YEAR:int                                      =  928; //
+public static const HELIA_BIRTHDAY_LAST_YEAR:int                                    =  928; //
 public static const HELIA_BDAY_DRINKS:int                                           =  929; //
 public static const HELIA_BDAY_HAKON_AND_KIRI:int                                   =  930; //
 public static const HELIA_BDAY_PHOENIXES:int                                        =  931; //
@@ -979,7 +979,7 @@ public static const HELSPAWN_INCEST:int                                         
 public static const HEL_TALK_EIGHT:int                                              =  971; //
 public static const HELSPAWN_DISCOVER_BOOZE:int                                     =  972; //
 public static const HELSPAWN_FUCK_INTERRUPTUS:int                                   =  973; //
-public static const HELSPAWN_DAD_EVENT:int                                             =  974; //
+public static const HELSPAWN_DAD_EVENT:int                                          =  974; //
 public static const HAKON_AND_KIRI_VISIT:int                                        =  975; //
 public static const KELLY_HAIR_COLOR:int                                            =  976; //
 public static const KELLY_TALK_N_HAND_TIMES:int                                     =  977; //
@@ -1141,7 +1141,7 @@ public static const WHITNEY_TATTOO_BUTT:int                                     
 public static const FARM_CORRUPTION_BRANDING_MENU_UNLOCKED:int                      = 1133;
 public static const QUEUE_BRANDING_UPGRADE:int                                      = 1134;
 public static const QUEUE_BRANDING_AVAILABLE_TALK:int                               = 1135;
-public static const WHITNEY_ORAL_TRAINING_COCK:int                                       = 1136;
+public static const WHITNEY_ORAL_TRAINING_COCK:int                                  = 1136;
 public static const AMILY_TATTOO_COLLARBONE:int                                     = 1137;
 public static const AMILY_TATTOO_SHOULDERS:int                                      = 1138;
 public static const AMILY_TATTOO_LOWERBACK:int                                      = 1139;
@@ -1319,7 +1319,7 @@ public static const COCKATRICES_UNLOCKED:int                                   	
 public static const TIMES_ENCOUNTERED_COCKATRICES:int                               = 1311;
 public static const CODEX_ENTRY_COCKATRICES:int                                   	= 1312;
 public static const WHITNEY_ORAL_TRAINING_VAG:int                                   = 1313;
-public static const UNKNOWN_FLAG_NUMBER_01314:int                                   = 1314;
+public static const RATHAZUL_MINDUP_OFFERED:int                                     = 1314;
 public static const UNKNOWN_FLAG_NUMBER_01315:int                                   = 1315;
 public static const UNKNOWN_FLAG_NUMBER_01316:int                                   = 1316;
 public static const UNKNOWN_FLAG_NUMBER_01317:int                                   = 1317;

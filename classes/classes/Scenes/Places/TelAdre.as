@@ -376,12 +376,13 @@ private function oswaldPawnMenu2():void {
 
 private function oswaldPawnSell(slot:int):void { //Moved here from Inventory.as
 	spriteSelect(SpriteDb.s_oswald);
+	var itemValueOrgin:Number = player.itemSlots[slot].itype.value;
 	var itemValue:int = int(player.itemSlots[slot].itype.value / 2);
 	clearOutput();
 	if (player.hasPerk(PerkLib.Greedy)) itemValue *= 2;
 	if (player.hasPerk(PerkLib.TravelingMerchantOutfit)) itemValue *= 2;
-	if (itemValue != 0 && player.hasPerk(PerkLib.Greedy) || player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your items for double the amount.");
-	if (itemValue != 0 && player.hasPerk(PerkLib.Greedy) && player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your items for four times the amount.");
+	if (itemValue > itemValueOrgin) itemValue = itemValueOrgin;
+	if (itemValue != 0 && player.hasPerk(PerkLib.Greedy) || player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your items for more than normal.");
 	if (shiftKeyDown == 1) {
 		if (itemValue == 0)
 			outputText("You hand over " + num2Text(player.itemSlots[slot].quantity) + " " +  player.itemSlots[slot].itype.shortName + " to Oswald.  He shrugs and says, \"<i>Well ok, it isn't worth anything, but I'll take it.</i>\"");
@@ -412,12 +413,9 @@ private function oswaldPawnSellAll():void {
 			player.itemSlots[slot].quantity = 0;
 		}
 	}
-	if (player.hasPerk(PerkLib.Greedy)) itemValue *= 2;
-	if (player.hasPerk(PerkLib.TravelingMerchantOutfit)) itemValue *= 2;
+	if (player.hasPerk(PerkLib.Greedy) || player.hasPerk(PerkLib.TravelingMerchantOutfit)) itemValue *= 2;
 	outputText("You lay out all the items you're carrying on the counter in front of Oswald.  He examines them all and nods.  Nervously, he pulls out " + num2Text(itemValue) + " gems and drops them into your waiting hand.");
-	if (player.hasPerk(PerkLib.Greedy) || player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your item for double the amount.");
-	if (player.hasPerk(PerkLib.Greedy) && player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your item for four times the amount.");
-
+	if (player.hasPerk(PerkLib.Greedy) || player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your item for more than normal.");
 	player.gems += itemValue;
 	statScreenRefresh();
 	doNext(oswaldPawn);
@@ -1846,3 +1844,4 @@ public function meetingLunaCamp():void {
 }
 }
 }
+
