@@ -35,7 +35,7 @@ public class BriarthornSpell extends AbstractGreenSpell {
 		if (uc) return uc;
 		
 		if (!monster.hasStatusEffect(StatusEffects.Entangled)) {
-			return "Briarthorn require to have entangled by the vines enemy/ies.";
+			return "Briarthorn require to have enemy/ies entangled by the vines.";
 		}
 		
 		return "";
@@ -95,7 +95,7 @@ public class BriarthornSpell extends AbstractGreenSpell {
 		if (crit) outputText(" <b>Critical!</b>");
 		combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		if (player.hasPerk(PerkLib.VerdantLeech)) {
-			if (monster.lustVuln != 0) monster.lustVuln += 0.50;
+			if (monster.lustVuln != 0) monster.lustVuln += 0.05;
 			HPChange(Math.round(player.maxHP() * 0.05), false);
 		}
 	}

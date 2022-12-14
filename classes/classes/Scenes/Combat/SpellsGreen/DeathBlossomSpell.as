@@ -90,7 +90,7 @@ import classes.StatusEffects;
 		if (crit) outputText(" <b>Critical!</b>");
 		combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		if (player.hasPerk(PerkLib.VerdantLeech)) {
-			if (monster.lustVuln != 0) monster.lustVuln += 0.50;
+			if (monster.lustVuln != 0) monster.lustVuln += 0.05;
 			HPChange(Math.round(player.maxHP() * 0.05), false);
 		}
 	}
