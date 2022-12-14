@@ -3307,11 +3307,12 @@ public class PerkLib
 
 
 		// Other super perks
-		public static const SuperPerk1:PerkType = mk("Super Perk 1", "Super Perk 1",
+		public static const SPSurvivalTrainingX:SurvivalTrainingX = new SurvivalTrainingX();
+		public static const SuperPerk3:PerkType = mk("Super Perk 3", "Super Perk 3",
 				".");
 		public static const SuperPerk2:PerkType = mk("Super Perk 2", "Super Perk 2",
 				".");
-		public static const SuperPerk3:PerkType = mk("Super Perk 3", "Super Perk 3",
+		public static const SuperPerk1:PerkType = mk("Super Perk 1", "Super Perk 1",
 				".");
 
 		//Soul Cultivation perks

@@ -1832,6 +1832,8 @@ public class PlayerInfo extends BaseContent {
 					}
 				}
 				else addButtonDisabled(2, "M(at)W", "You need to reach level 120 first.");
+				if (player.hasPerk(PerkLib.SPSurvivalTrainingX)) addButtonDisabled(5, "SP:ST(R1)", "You already have this super perk.");
+				else addButton(5, "SP:ST(R1)", perkSurvivalTrainingRank1).hint("Choose the 'Survival Training (Rank: 1)' super perk. You have trained to better survive this realm hostile environment. (+1% to MaxOver HP, MaxOver Lust and Diehard each 3 lvl's up to +10%)");
 			}
 			else {
 				if (player.hasPerk(PerkLib.DeityJobMunchkin)) addButtonDisabled(0, "DJ:M", "You already have this perk.");
@@ -1840,6 +1842,8 @@ public class PlayerInfo extends BaseContent {
 				else addButtonDisabled(1, "M(at)G", "You do not have enough super perk points to obtain this perk.");
 				if (player.hasPerk(PerkLib.MunchkinAtWork)) addButtonDisabled(2, "M(at)W", "You already have this perk.");
 				else addButtonDisabled(2, "M(at)W", "You do not have enough super perk points to obtain this perk.");
+				if (player.hasPerk(PerkLib.SPSurvivalTrainingX)) addButtonDisabled(5, "SP:ST(R1)", "You already have this perk.");
+				else addButtonDisabled(5, "SP:ST(R1)", "You do not have enough super perk points to obtain this perk.");
 			}
 			addButton(12, "Next", superPerkBuyMenu, page + 1);
 			if (player.perkPoints > 2) addButton(13, "Convert", superPerkConvertMenu);
@@ -2003,6 +2007,20 @@ public class PlayerInfo extends BaseContent {
 		player.perkPoints -= 3;
 		player.superPerkPoints++;
 		doNext(superPerkBuyMenu);
+	}
+	private function perkSurvivalTrainingRank1():void {
+		player.superPerkPoints--;
+		player.createPerk(PerkLib.SPSurvivalTrainingX,1,0,0,0);
+		clearOutput();
+		outputText("You gained 'Survival Training (Rank: 1)' super perk.");
+		doNext(superPerkBuyMenu, 1);
+	}
+	private function perkSurvivalTrainingRank2():void {
+		player.superPerkPoints--;
+		player.addPerkValue(PerkLib.SPSurvivalTrainingX,1,1);
+		clearOutput();
+		outputText("Your 'Survival Training (Rank: 1)' super perk become 'Survival Training (Rank: 2)'.");
+		doNext(superPerkBuyMenu, 1);
 	}
 	private function perkDeityJobMunchkin():void {
 		player.superPerkPoints--;

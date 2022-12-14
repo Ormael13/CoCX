@@ -20,7 +20,7 @@ public class MindbreakerScene extends BaseContent {
 			if (player.cumQ() < 30000) player.cumMultiplier += 5;
 		}
 		else {
-			outputText("You blackout as she begins to fuck with your brain. When you wake up you feel somewhat weird but also the vivid memory of a cave somewhere in the high mountains haunts your mind. Perhaps you should seek it out.\n\n");
+			outputText("You blackout as she begins to fuck with your brain. When you wake up you feel somewhat weird but also the vivid memory of a cave somewhere in the mountains haunts your mind. Perhaps you should seek it out.\n\n");
 			Mindbreaker.MindbreakerEncounterChance *= 3;
 		}
 		dynStats("cor", 5);

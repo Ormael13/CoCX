@@ -34,7 +34,7 @@ import classes.StatusEffects;
 		if (uc) return uc;
 		
 		if (!player.hasStatusEffect(StatusEffects.NearbyPlants)) {
-			return "Entangle require to have plants nearby.";
+			return "Green Covenant require to have plants nearby.";
 		}
 		
 		return "";

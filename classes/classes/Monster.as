@@ -408,6 +408,12 @@ import flash.utils.getQualifiedClassName;
 				min -= maxHP() * 0.075;
 				min -= (2250 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}
+			if (hasPerk(PerkLib.SPSurvivalTrainingX)) {
+				var limit:Number = perkv1(PerkLib.SPSurvivalTrainingX) * 10;
+				var bonus:Number = Math.round((level - 1) / 3);
+				if (bonus > limit) bonus = limit;
+				min -= (maxHP() * 0.01 * bonus);
+			}
 			min = Math.round(min);
 			return min;
 		}
