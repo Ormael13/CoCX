@@ -508,6 +508,20 @@ import flash.utils.getQualifiedClassName;
 			if (temp < (100 + (30 * newGamePlusMod()))) temp = (100 + (30 * newGamePlusMod()));
 			return temp;
 		}
+		public override function maxOverLust():Number {
+			var max1:Number = Math.round(maxLust_base()*maxLust_mult());
+			var max2:Number = 1;
+			if (hasPerk(PerkLib.MunchkinAtWork)) max2 += 0.1;
+			if (hasPerk(PerkLib.SPSurvivalTrainingX)) {
+				var limit:Number = perkv1(PerkLib.SPSurvivalTrainingX) * 10;
+				var bonus:Number = Math.round((level - 1) / 3);
+				if (bonus > limit) bonus = limit;
+				max2 += (0.01 * bonus);
+			}
+			max1 *= max2;//~120%
+			max1 = Math.round(max1);
+			return max1;
+		}
 
 		public override function maxFatigue():Number {
 			//Base fatigue
@@ -631,6 +645,14 @@ import flash.utils.getQualifiedClassName;
 			if ((hasPerk(PerkLib.EnemyTrueDemon) && (!hasPerk(PerkLib.Phylactery) || !hasPerk(PerkLib.EnemyTrueAngel))) || (hasPerk(PerkLib.EnemyConstructType) && !hasPerk(PerkLib.Sentience))) temp = 0;
 			return temp;
 		}
+		public override function maxOverSoulforce():Number {
+			var max1:Number = maxSoulforce();
+			var max2:Number = 1;
+			if (hasPerk(PerkLib.MunchkinAtWork)) max2 += 0.1;
+			max1 *= max2;//~110%
+			max1 = Math.round(max1);
+			return max1;
+		}
 
 		public override function maxWrath():Number {
 			//Base wrath
@@ -725,6 +747,7 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.AsuraSpeed)) temp2 += 0.1;
 			if (hasPerk(PerkLib.MunchkinAtWork)) temp2 += 0.1;
 			temp1 *= temp2;
+			temp1 = Math.round(temp1);
 			return temp1;
 		}
 
@@ -790,6 +813,16 @@ import flash.utils.getQualifiedClassName;
 			temp = Math.round(temp);
 			if (hasPerk(PerkLib.EnemyConstructType) && !hasPerk(PerkLib.Sentience)) temp = 0;
 			return temp;
+		}
+		public override function maxOverMana():Number {
+			var max1:Number = maxMana();
+			var max2:Number = 1;
+			if (hasPerk(PerkLib.PrestigeJobGreySage)) max2 += 0.1;
+			if (hasPerk(PerkLib.Equilibrium)) max2 += 0.1;
+			if (hasPerk(PerkLib.MunchkinAtWork)) max2 += 0.1;
+			max1 *= max2;//~130%
+			max1 = Math.round(max1);
+			return max1;
 		}
 
 		private function stats_multi_based_on_misc():Number {

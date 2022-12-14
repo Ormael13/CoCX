@@ -3491,7 +3491,9 @@ public class Combat extends BaseContent {
                 break;
         }
 		if (player.weapon is MoonlightGreatsword || player.weapon is MoonlightClaws || player.weapon is Tidarion) {
-			meleeMasteryGain(1,crit);
+			var critCounter:int = 0;
+			if (crit) critCounter++;
+			meleeMasteryGain(1,critCounter);
             if (player.weapon is Tidarion) (player.weapon as Tidarion).afterStrike();
 		}
 		else {

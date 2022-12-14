@@ -1884,7 +1884,7 @@ import coc.view.MainView;
 				player.removeStatusEffect(StatusEffects.TranscendentalGeneticMemory);
 			if (player.hasPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX)) {
 				var permedMetamorphCount:int = 0;
-				for (var k in Metamorph.PermanentMemoryStorage) permedMetamorphCount++;
+				for (var k:* in Metamorph.PermanentMemoryStorage) permedMetamorphCount++;
 				player.createStatusEffect(StatusEffects.TranscendentalGeneticMemory, 15 * player.perkv1(PerkLib.AscensionTrancendentalGeneticMemoryStageX), permedMetamorphCount, 0, 0);
 			}
 		}
