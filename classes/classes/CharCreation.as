@@ -1883,7 +1883,8 @@ import coc.view.MainView;
 			if (player.hasStatusEffect(StatusEffects.TranscendentalGeneticMemory))
 				player.removeStatusEffect(StatusEffects.TranscendentalGeneticMemory);
 			if (player.hasPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX)) {
-				var permedMetamorphCount:int = Metamorph.PermanentMemoryStorage.length;
+				var permedMetamorphCount:int = 0;
+				for (var k in Metamorph.PermanentMemoryStorage) permedMetamorphCount++;
 				player.createStatusEffect(StatusEffects.TranscendentalGeneticMemory, 15 * player.perkv1(PerkLib.AscensionTrancendentalGeneticMemoryStageX), permedMetamorphCount, 0, 0);
 			}
 		}
@@ -2772,6 +2773,10 @@ import coc.view.MainView;
 					func: accessBreastsMenu
 				},
 				{
+					name: "Vagina Unlock",
+					func: accessVaginaUnlockMenu
+				},
+				{
 					name: "Vagina",
 					func: accessVaginaMenu
 				},
@@ -2903,6 +2908,10 @@ import coc.view.MainView;
 
 		private function accessBreastsMenu(currentPage: int = 0): void {
 			openPaginatedMetamorphMenu("Breasts", accessBreastsMenu, currentPage, BreastMem.Memories);
+		}
+
+		private function accessVaginaUnlockMenu(currentPage: int = 0): void {
+			openPaginatedMetamorphMenu("Vagina Unlock", accessVaginaUnlockMenu, currentPage, VaginaCountMem.Memories);
 		}
 
 		private function accessVaginaMenu(currentPage: int = 0): void {

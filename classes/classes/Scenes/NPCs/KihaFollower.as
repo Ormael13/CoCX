@@ -2794,9 +2794,13 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         if (DemonLab.MainAreaComplete < 4) {
             outputText("“<i>...Well, I’m working on some stuff...Mainly just trying to find out what happened...Put up some gravestones…Maybe a shrine?</i>” Kiha seems at a loss. “<i>...Mainly just...I want anyone who comes by to...see that there were people there.</i>” She sighs. “<i>Thanks for worrying, though...It means a lot to me, even if I don’t show it.</i>”\n\n");
             outputText("\n\n");
+            eachMinuteCount(15);
+            doNext(TalkWithKiha)
         }
         if (DemonLab.MainAreaComplete == 4 && FlameSpreaderKillCount > 0 && FlameSpreaderKillCount < 5) {
             outputText("“<i>Finding those abominations has been hard.</i>” She admits. “<i>They’re fast, and hard to kill.</i>” She gives you a wry smile. “<i>But you seem to just run into them, don’t you, my idiot?</i>” Her smile fades. “<i>I’ve dug graves for them, and...Made some markers. Now...I just need to fill them. Those people are gone, and there’s no way to bring them back...But at least I can make sure they rest.</i>”\n\n");
+            eachMinuteCount(15);
+            doNext(TalkWithKiha)
         }
         if (DemonLab.MainAreaComplete == 4 && FlameSpreaderKillCount >= 5 && !FlameSpreaderBossKilled) {
             outputText("“<i>You’ve been a great help, [name]</i>”. Kiha leans in, for once giving you the hug. Her naked breasts press into your [chest], and she rests her head on your shoulder. “...It feels odd. With each one we kill...I feel lighter. You take this to mean your dragon-lover is doing better, and you hug back. Her cunt drools, her leavings dripping down your thigh, and you give her a small smile.\n\n");
