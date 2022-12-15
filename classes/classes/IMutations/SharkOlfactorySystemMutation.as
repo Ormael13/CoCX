@@ -19,20 +19,21 @@ public class SharkOlfactorySystemMutation extends IMutationPerkType
             var bleedCent:int = 0;
             pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier >= 1){
-                descS += "Increase bleed damage by 50%, allows non-sharks to use blood frenzy";
+                descS += "Increase bleed damage by 25%, allows non-sharks to use blood frenzy";
                 perkCent += 10;
+				bleedCent += 25;
             }
             if (pTier >= 2){
                 perkCent += 15;
-				bleedCent += 50;
+				bleedCent += 25;
             }
             if (pTier >= 3){
                 perkCent += 20;
-				bleedCent += 50;
+				bleedCent += 25;
             }
             if (pTier >= 4){
                 perkCent += 25;
-				bleedCent += 50;
+				bleedCent += 25;
             }
             if (pTier >= 2) descS += ", Bite becomes free and increases bleed damage by " + bleedCent + " %";
             if (pTier >= 1) descS += "and increase melee damage against bleeding enemies by " + perkCent + " %";

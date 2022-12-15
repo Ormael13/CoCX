@@ -2889,13 +2889,15 @@ import flash.utils.getQualifiedClassName;
 				//Deal damage if still wounded.
 				else {
 					var procentvalue:Number = (4 + rand(7));
-					if (game.player.hasPerk(PerkLib.ThirstForBlood)) procentvalue *= 1.5;
-					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) procentvalue *= 1.2;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1) procentvalue *= 1.5;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2) procentvalue *= 1.5;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3) procentvalue *= 1.5;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 4) procentvalue *= 1.5;
+					var procentvalue1:Number = 1;
+					if (game.player.hasPerk(PerkLib.ThirstForBlood)) procentvalue1 += .25;
+					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) procentvalue1 += .2;
+					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1) procentvalue1 += .25;
+					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2) procentvalue1 += .25;
+					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3) procentvalue1 += .25;
+					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 4) procentvalue1 += .25;
 					if (statusEffectv2(StatusEffects.IzmaBleed) > 0) procentvalue += statusEffectv2(StatusEffects.IzmaBleed);
+					procentvalue *= procentvalue1;
 					procentvalue = Math.round(procentvalue);
 					var store:Number = maxHP() * (procentvalue) / 100;
 					store = SceneLib.combat.doDamage(store);
@@ -2917,15 +2919,17 @@ import flash.utils.getQualifiedClassName;
 				//Deal damage if still wounded.
 				else {
 					var store3:Number = (player.str + player.spe) * 2;
-					if (player.hasPerk(PerkLib.ThirstForBlood)) store3 *= 1.5;
-					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store3 *= 1.2;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1) store3 *= 1.5;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2) store3 *= 1.5;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3) store3 *= 1.5;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 4) store3 *= 1.5;
-					if (player.hasPerk(PerkLib.RacialParagon)) store3 *= 1.5;
-					if (player.hasPerk(PerkLib.Apex)) store3 *= 1.5;
-					if (player.hasPerk(PerkLib.AlphaAndOmega)) store3 *= 1.5;
+					var store3a:Number = 1;
+					if (player.hasPerk(PerkLib.ThirstForBlood)) store3a += .25;
+					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store3a += .2;
+					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1) store3a += .25;
+					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2) store3a += .25;
+					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3) store3a += .25;
+					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 4) store3a += .25;
+					if (player.hasPerk(PerkLib.RacialParagon)) store3a += .5;
+					if (player.hasPerk(PerkLib.Apex)) store3a += .5;
+					if (player.hasPerk(PerkLib.AlphaAndOmega)) store3a += .5;
+					store3 *= store3a;
 					store3 = Math.round(store3);
 					if (statusEffectv2(StatusEffects.SharkBiteBleed) > 0) store3 *= statusEffectv2(StatusEffects.SharkBiteBleed);
 					store3 = SceneLib.combat.doDamage(store3);
@@ -2955,8 +2959,10 @@ import flash.utils.getQualifiedClassName;
 				//This wounds never heals unless by magic
 				//Deal damage if still wounded.
 				var store13:Number = (player.str + player.spe) * 2;
-				if (game.player.hasPerk(PerkLib.ThirstForBlood)) store13 *= 1.5;
-				if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store3 *= 1.2;
+				var store13a:Number = 1;
+				if (game.player.hasPerk(PerkLib.ThirstForBlood)) store13a += .25;
+				if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store13a += .2;
+				store13 *= store13a;
 				store13 = Math.round(store13);
 				if (statusEffectv2(StatusEffects.KamaitachiBleed) > 0) store13 *= statusEffectv2(StatusEffects.KamaitachiBleed);
 				store13 += statusEffectv1(StatusEffects.KamaitachiBleed); //Kamaitachi bleed stacks on itself growing ever stronger
@@ -2982,15 +2988,17 @@ import flash.utils.getQualifiedClassName;
 				//Deal damage if still wounded.
 				else {
 					var store5:Number = (player.str + player.spe) * 2;
-					if (player.hasPerk(PerkLib.ThirstForBlood)) store5 *= 1.5;
-					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store5 *= 1.2;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1) store5 *= 1.5;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2) store5 *= 1.5;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3) store5 *= 1.5;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 4) store5 *= 1.5;
-					if (player.hasPerk(PerkLib.RacialParagon)) store5 *= 1.5;
-					if (player.hasPerk(PerkLib.Apex)) store5 *= 1.5;
-					if (player.hasPerk(PerkLib.AlphaAndOmega)) store5 *= 1.5;
+					var store5a:Number = 1;
+					if (player.hasPerk(PerkLib.ThirstForBlood)) store5a += .25;
+					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store5a += .2;
+					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1) store5a += .25;
+					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2) store5a += .25;
+					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3) store5a += .25;
+					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 4) store5a += .25;
+					if (player.hasPerk(PerkLib.RacialParagon)) store5a += .5;
+					if (player.hasPerk(PerkLib.Apex)) store5a += .5;
+					if (player.hasPerk(PerkLib.AlphaAndOmega)) store5a += .5;
+					store5 *= store5a;
 					store5 = Math.round(store5);
 					store5 = SceneLib.combat.doDamage(store5);
 					if (plural) outputText("[Themonster] bleed profusely from the jagged ");
@@ -3115,8 +3123,10 @@ import flash.utils.getQualifiedClassName;
 			}
 			if(hasStatusEffect(StatusEffects.Briarthorn)) {
 				var store16:Number = (player.str + player.spe) * 2;
-				if (game.player.hasPerk(PerkLib.ThirstForBlood)) store16 *= 1.5;
-				if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store16 *= 1.2;
+				var store16a:Number = 1;
+				if (game.player.hasPerk(PerkLib.ThirstForBlood)) store16a += .25;
+				if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store16a += .2;
+				store16 *= store16a;
 				store16 += maxHP()*0.05;
 				store16 = Math.round(store16);
 				store16 = SceneLib.combat.doDamage(store16);
