@@ -10286,7 +10286,7 @@ public class Combat extends BaseContent {
 		if (subtype == 1) combat.teaseXP((1 + combat.bonusExpAfterSuccesfullTease()*2));
 		else combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		if (player.hasPerk(PerkLib.VerdantLeech)) {
-			if (monster.lustVuln != 0) monster.lustVuln += 0.05;
+			if (monster.lustVuln != 0) monster.lustVuln += 0.025;
 			HPChange(Math.round(player.maxHP() * 0.05), false);
 		}
 	}
