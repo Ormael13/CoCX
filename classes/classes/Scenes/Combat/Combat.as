@@ -3491,7 +3491,9 @@ public class Combat extends BaseContent {
                 break;
         }
 		if (player.weapon is MoonlightGreatsword || player.weapon is MoonlightClaws || player.weapon is Tidarion) {
-			meleeMasteryGain(1,crit);
+			var critCounter:int = 0;
+			if (crit) critCounter++;
+			meleeMasteryGain(1,critCounter);
             if (player.weapon is Tidarion) (player.weapon as Tidarion).afterStrike();
 		}
 		else {
@@ -9017,14 +9019,8 @@ public class Combat extends BaseContent {
 			while (arvePG-->0) repeatArcaneVenom(damagePG, 1);
         }
 		//Entagled
-		if (monster.hasStatusEffect(StatusEffects.Entangled) && monster.lustVuln > 0) {
-			if (40 + rand(player.inte) + rand(player.lib) > monster.spe) {
-				outputText("The vines are currently wrapped around [themonster], ensuring that [monster he] cannot escape their clutches. ");
-				var damageE:Number = (combat.teases.teaseBaseLustDamage() * spellModWhite());
-				var arveE:Number = 1;
-				if (player.hasPerk(PerkLib.ArcaneVenom)) arveE += AbstractSpell.stackingArcaneVenom();
-				while (arveE-->0) repeatArcaneVenom(damageE, 0);
-			}
+		if (monster.hasStatusEffect(StatusEffects.Entangled)) {
+			if (40 + rand(player.inte) + rand(player.lib) > monster.spe) outputText("The vines are currently wrapped around [themonster], ensuring that [monster he] cannot escape their clutches. ");
 			else {
 				outputText("[Themonster] wriggles free from the vines, regaining control of [himself]\n\n");
 				monster.removeStatusEffect(StatusEffects.Entangled);
@@ -15375,10 +15371,11 @@ public function RacialParagonAbilityBoost():Number {
 
 public function BleedDamageBoost(isARacialAbility:Boolean = false):Number {
     var BleedMod:Number = 1.0;
-    if (player.hasPerk(PerkLib.ThirstForBlood)) BleedMod += 0.5;
-    if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2) BleedMod += 0.5;
-    if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3) BleedMod += 0.5;
-    if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 4) BleedMod += 0.5;
+    if (player.hasPerk(PerkLib.ThirstForBlood)) BleedMod += 0.25;
+    if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1) BleedMod += 0.25;
+    if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2) BleedMod += 0.25;
+    if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3) BleedMod += 0.25;
+    if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 4) BleedMod += 0.25;
     if (isARacialAbility) BleedMod *= combat.RacialParagonAbilityBoost();
     return BleedMod;
 }
@@ -15607,3 +15604,4 @@ private function touSpeStrScale(stat:int):Number {
     }
 }
 }
+

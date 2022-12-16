@@ -2847,8 +2847,8 @@ public class PerkLib
 				"Your advanced understanding of magic pools allows you to equip third ring.",
 				"You've chosen the 'Third Ring' perk, reaching advanced understanding of magic pools to allow you equip third ring.");
 		public static const ThirstForBlood:PerkType = mk("Thirst for blood", "Thirst for blood",
-				"Weapon and effect that causes bleed damage have this damage increased by 50%. (+15% melee physical attacks multiplier)",
-				"You've chosen the 'Thirst for blood' perk, increasing damage done by bleed effects. (+15% melee physical attacks multiplier)");
+				"Weapon and effect that causes bleed damage have this damage increased by 25%. (+15% melee physical attacks multiplier)",
+				"You've chosen the 'Thirst for blood' perk, increasing damage done by bleed effects (+25%). (+15% melee physical attacks multiplier)");
 		public static const ThunderousStrikes:PerkType = mk("Thunderous Strikes", "Thunderous Strikes",
 				"+20% 'Attack' damage while strength is at or above 80. (+5% melee physical attacks multiplier)",
 				"You've chosen the 'Thunderous Strikes' perk, increasing normal damage by 20% while your strength is over 80. (+5% melee physical attacks multiplier)");
@@ -4002,8 +4002,8 @@ public class PerkLib
 				"You've trained in Way of Grey Sage. There is no spell you can't learn. (+10% to OverMax Mana)");
 		public static const Equilibrium:PerkType = mk("Equilibrium", "Equilibrium",
 				"You can cast now any spell you learned even if you missing additional materials or not meet requirements. Slight increase cap on stored bones for necromancers. (+10% to OverMax Mana)");
-		public static const HiddenJob0:PerkType = mk("Hidden Job: 0", "Hidden Job: 0",
-				". (+10% to OverMax Mana)");
+		public static const HyperCasting:PerkType = mk("Hyper Casting", "Hyper Casting",
+				"Decrease CD for spells: -1 for tier 1, -2 for tier 2 and -4 for tier 3. Allow to always autocast buff spells. (+10% to OverMax Mana)");
 		public static const DeityJobMunchkin:PerkType = mk("Deity Job: Munchkin", "Job ( Deity ): Munchkin",
 				"You're Munchkin, an ultimate being that possess a god-like body and powers. (+20% max HP/Lust/Wrath, +10% max SF/Mana/Fatigue, increase limit of negative HP equal to all stats (aside of corruption) added up)")
 				.withBuffs({

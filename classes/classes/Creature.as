@@ -851,7 +851,7 @@ public class Creature extends Utils
 			}
 			max1 *= max2;//~120%
 			max1 = Math.round(max1);
-			return Math.min(219999,max1);
+			return Math.min(239999,max1);
 		}
 		public function maxFatigue():Number {
 			return 150;
