@@ -2482,7 +2482,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         clearOutput();
         outputText("You tell Kiha that you came to Mareth to purify the land and help its people. You tell your dragoness that if it earns you the affection of a hot dragon lady like her, it’s hardly unwelcome… But you explain that a relationship can’t be your focus right now.\n\n");
         outputText("\"<i>Ah. Well, you’re hardly the only one who wants The Demons to pay, [name].</i>\" Kiha pulls away from you, turning her back. \"<i>… I’ll be around if you want me.</i>\" She flies away, and you feel a single droplet of water hit your shoulder. Clearly, Kiha wanted something more.\n\n");
-        ProposalStatus = 2;
+        ProposalStatus = 4;
         doNext(camp.returnToCampUseOneHour);
     }
 
@@ -2748,7 +2748,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
             addButton(2, "Home", KihaTalkHome);
         }
         addButton (3, "Campmates", KihaTalkCampmates);
-        if (ProposalStatus == 2) {
+        if (ProposalStatus == 1) {
             addButton(5, "Propose", KihaProposal);
         }
         if (ProposalStatus == 3) {

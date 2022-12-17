@@ -1487,6 +1487,7 @@ public class CombatTeases extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.SuperSensual) && chance > 100) damagemultiplier += (0.02 * (chance - 100));
 			if (player.armorName == "desert naga pink and black silk dress") damagemultiplier += 0.1;
 			if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
+			if (player.armor == armors.ELFDRES && player.isElf()) damagemultiplier += 2;
 			damage *= damagemultiplier;
 			bonusDamage *= damagemultiplier;
 			if (player.hasPerk(PerkLib.ChiReflowLust)) damage *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;

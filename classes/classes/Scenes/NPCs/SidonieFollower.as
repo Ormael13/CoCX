@@ -98,19 +98,10 @@ package classes.Scenes.NPCs
 					outputText("Going so far to modify her own body to enhance her fertility, and having to endure all those births is quite a sacrifice.</i>\"\n\n");
 				}
 				if (arianScene.arianFollower()) {
-					outputText("\"<i>Once I stumbled on that colorful looking tent I found that we’ve a wizard among us! But, that Arian ");
-					if (flags[kFLAGS.ARIAN_VAGINA] > 0) outputText("gal");
-					else outputText("guy");
-					outputText(" is quite nervous. I stepped in to said hi, but the poor thing got scared and tried to hide from me. When I geot ");
-					if (flags[kFLAGS.ARIAN_VAGINA] > 0) outputText("her");
-					else outputText("him");
-					outputText(" to calm down, we finally could have a proper presentation. All on all, ");
-					if (flags[kFLAGS.ARIAN_VAGINA] > 0) outputText("she");
-					else outputText("he");
-					outputText(" seems like a fun person, albeit ");
-					if (flags[kFLAGS.ARIAN_VAGINA] > 0) outputText("she");
-					else outputText("he");
-					outputText(" always seemed hesitant to look me in the eyes.</i>\"\n\n");
+					outputText("\"<i>Once I stumbled on that colorful looking tent I found that we’ve a wizard among us! But, that Arian " +(flags[kFLAGS.ARIAN_VAGINA] > 0)?"gal":"guy");
+					outputText(" is quite nervous. I stepped in to said hi, but the poor thing got scared and tried to hide from me. When I got [arian em]");
+					outputText(" to calm down, we finally could have a proper presentation. All in all, [arian ey]");
+					outputText(" seems like a fun person, albeit [arian ey] always seemed hesitant to look me in the eyes.</i>\"\n\n");
 				}
 				if (sophieFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) {
 					if (flags[kFLAGS.SOPHIE_RECRUITED_PURE] > 0) {

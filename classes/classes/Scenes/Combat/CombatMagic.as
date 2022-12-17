@@ -784,6 +784,7 @@ public class CombatMagic extends BaseCombatContent {
 			}
 			if (monster.hasStatusEffect(StatusEffects.HypnosisNaga)) damage *= 0.5;
 			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
+			if (player.armor == armors.ELFDRES && player.isElf()) damage *= 2;
 			monster.teased(Math.round(monster.lustVuln * damage));
 			if (crit) outputText(" <b>Critical!</b>");
 			SceneLib.combat.teaseXP(1 + SceneLib.combat.bonusExpAfterSuccesfullTease());

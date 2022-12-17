@@ -46,8 +46,13 @@ public class HornsTransformations extends MutationsHelper {
 
 				if (player.horns.type == Horns.NONE) desc += "With painful pressure, the skin on your forehead splits around two tiny nub-like horn, a little bit similar to that you would see on the cattle back in your homeland. ";
 				else if (player.horns.type == Horns.UNICORN) desc += "A sudden wave of pleasure strike you, making you moan as your horn begins to split in two.";
+				else if (player.horns.type == Horns.BICORN) desc += "A splitting pain on your forehead heralds your bicorn horns gaining a few inches.";
 				else desc += "Your horns vibrate and shift as if made of clay, reforming into a bicorn-like shape.";
-				player.horns.count = 2;
+
+				if (player.horns.type != Horns.BICORN &&player.horns.type != Horns.UNICORN && player.horns.type != Horns.KIRIN)
+					player.horns.count = 2;
+				if (player.horns.type == Horns.BICORN)
+					player.horns.count += rand(4);
 				player.horns.type = Horns.BICORN;
 
 				if (doOutput) outputText(desc);
@@ -55,7 +60,7 @@ public class HornsTransformations extends MutationsHelper {
 			},
 			// is present
 			function (): Boolean {
-				return player.horns.type === Horns.BICORN;
+				return player.horns.type === Horns.BICORN && player.horns.count >= 20;
 			}
 	);
 
@@ -64,9 +69,14 @@ public class HornsTransformations extends MutationsHelper {
 			function (doOutput: Boolean): void {
 				var desc: String = "";
 
-				if (player.horns.type == Horns.NONE) desc += "With painful pressure, the skin on your forehead splits around tiny nub-like horn, a little bit similar to that you would see on the cattle back in your homeland.";
+				if (player.horns.type == Horns.NONE) desc += "With painful pressure, the skin on your forehead splits around a tiny nub-like horn, a little bit similar to that you would see on the cattle back in your homeland.";
+				else if (player.horns.type == Horns.BICORN) desc += "One of your horns crumble to dust, leaving you with a single pure unicorn horn.";
+				else if (player.horns.type == Horns.UNICORN) desc += "A splitting pain on your forehead heralds your unicorn horn gaining a few inches.";
 				else desc += "Your horns vibrate and shift as if made of clay, reforming into horn with a unicorn-like shape.";
-				player.horns.count = 1;
+				if (player.horns.type != Horns.BICORN && player.horns.type != Horns.UNICORN && player.horns.type != Horns.KIRIN)
+					player.horns.count = 1;
+				if (player.horns.type == Horns.UNICORN)
+					player.horns.count += rand(4);
 				player.horns.type = Horns.UNICORN;
 
 				if (doOutput) outputText(desc);
@@ -74,7 +84,7 @@ public class HornsTransformations extends MutationsHelper {
 			},
 			// is present
 			function (): Boolean {
-				return player.horns.type === Horns.UNICORN;
+				return player.horns.type === Horns.UNICORN && player.horns.count >= 20;
 			}
 	);
 
@@ -84,8 +94,12 @@ public class HornsTransformations extends MutationsHelper {
 				var desc: String = "";
 
 				if (player.horns.type == Horns.NONE) desc += "With painful pressure, the skin on your forehead splits around a tiny nub-like horn, a little bit similar to that you would see on the cattle back in your homeland.";
+				else if (player.horns.type == Horns.KIRIN) desc += "A splitting pain on your forehead heralds your horn gaining a few inches.";
 				else desc += "Your horns vibrate and shift as if made of clay, reforming into horn with a kirin-like shape.";
-				player.horns.count = 1;
+				if (player.horns.type != Horns.BICORN &&player.horns.type != Horns.UNICORN && player.horns.type != Horns.KIRIN)
+					player.horns.count = 1;
+				if (player.horns.type == Horns.KIRIN)
+					player.horns.count += rand(4);
 				player.horns.type = Horns.KIRIN;
 
 				if (doOutput) outputText(desc);
@@ -172,17 +186,18 @@ public class HornsTransformations extends MutationsHelper {
 			function (doOutput: Boolean): void {
 				var desc: String = "";
 
-				if (player.horns.type == Horns.GOAT) {
-					desc += "You groan in pleasure mixed with pain as your horns split into a second pair that ornaments the side of your head. If the original pair made you look fiendish, your four horns now definitively denounce your demonic nature. <b> You now have four devil horns curving backward behind your head.</b>"
-				}
+				TransformationUtils.applyTFIfNotPresent(transformations.HornsGoat, doOutput);
+
+				desc += "You groan in pleasure mixed with pain as your horns split into a second pair that ornaments the side of your head. If the original pair made you look fiendish, your four horns now definitively denounce your demonic nature. <b> You now have four devil horns curving backward behind your head.</b>"
 
 				player.horns.count = 1;
 				player.horns.type = Horns.GOATQUAD;
 				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(HornsMem.getMemory(HornsMem.GOATQUAD));
 			},
 			// is present
 			function (): Boolean {
-				return player.horns.type === Horns.GOAT;
+				return player.horns.type === Horns.GOATQUAD;
 			}
 	);
 

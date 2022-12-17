@@ -210,6 +210,7 @@ public class AbstractSpell extends CombatAbility {
 			if (player.hasPerk(PerkLib.HexKnowledge) && monster.cor < 34) lustDmg *= 1.2;
 			lustDmg *= corruptMagicPerkFactor(monster);
 		}
+		if (player.armor == armors.ELFDRES && player.isElf()) lustDmg *= 2;
 		return Math.round(lustDmg);
 	}
 	

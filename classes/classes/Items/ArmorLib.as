@@ -68,6 +68,8 @@ public final class ArmorLib extends ItemConstants
 				.withBuffs({'spellcost': -0.20}) as Armor;
 		public const DWARMOR:Armor = new Armor("DWArmor","D-wArmor","Drider-weave Armor","a Drider-weave Armor",20,34,2160,"This set of white armor shimmers in the light, rippling strands of silk pumping mana through them. The chestpiece is thick, padded with multiple layers of overlapping strands, and as you poke it, you can feel it’s been reinforced with many small pieces of metal, silk strands woven through holes in the steel.","Light");
 		public const DWSROBE:DriderWeaveSheerRobe = new DriderWeaveSheerRobe();
+		public const ELFDRES:Armor = new Armor("ElfDress","Elf Dress","Elven Villager Dress","an Elven Villager Dress",0,0,250,"This white dress with a green sash is typically worn by wood elves. It doesn't offer much protection but for some reason seems to greatly enhance one's natural charm. Just the act of showing it off seems to ease ones lust when wearing this surprisingly simple but lewd outfit.","Light")
+				.withBuffs({'teasedmg': 10}) as Armor;
 		public const EHGARB_:Armor = new Armor("EH.Garb","E.Heretic‘s Garb","Ebonweave Heretic‘s Garb","an Ebonweave Heretic‘s Garb",0,20,1600,"This outfit is ebonweave, created using refined ebonbloom petals. The outfit consists of arrowproof clothes, covered by a mesh breastplate and leatherlike duster inscribed with glyphs of magic and warding.  A trilby adorned with a moon pin completes the look.","Light", true, true)
 				.withBuffs({
 					'spellcost': -0.20,

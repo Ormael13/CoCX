@@ -152,6 +152,17 @@ package classes.GeneticMemories {
 			}
 		});
 
+		public static const GOATQUAD:int = _partid++;
+		EnumValue.add(Memories, GOATQUAD, "GOATQUAD", {
+			id: "Quad Goat Horns",
+			name: "Quad Goat Horns",
+			cost: 100,
+			title: "Quad Goat",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.HornsGoatQuadruple;
+			}
+		});
+
 	  public static const JABBERWOCKY:int = _partid++;
 	  EnumValue.add(Memories, JABBERWOCKY, "JABBERWOCKY", {
 		  id: "Jabberwocky Horns",
