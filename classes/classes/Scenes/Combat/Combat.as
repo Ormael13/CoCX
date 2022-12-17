@@ -9042,7 +9042,8 @@ public class Combat extends BaseContent {
 			if (player.hasPerk(PerkLib.ArcaneVenom)) arveB += AbstractSpell.stackingArcaneVenom();
 			while (arveB-->0) repeatArcaneVenom(damageB, 0);
 		}
-		if (player.hasStatusEffect(StatusEffects.DeathBlossom)) {
+		//Death Blossom
+		if (monster.hasStatusEffect(StatusEffects.DeathBlossom)) {
 			outputText("It's me Di.... nah it's Information Noona saying that your Death Blossom is still here and dealing some lust poison damage to enemy.");
 			var damageDBH:Number = (scalingBonusIntelligence() * spellModWhite() * player.statusEffectv2(StatusEffects.DeathBlossom));
 			damageDBH = Math.round(damageDBH * poisonDamageBoostedByDao());

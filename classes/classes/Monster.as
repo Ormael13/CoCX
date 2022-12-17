@@ -3135,6 +3135,15 @@ import flash.utils.getQualifiedClassName;
 				SceneLib.combat.CommasForDigits(store16);
 				outputText("[pg]");
 			}
+			if (hasStatusEffect(StatusEffects.DeathBlossom)) {
+				if (statusEffectv1(StatusEffects.DeathBlossom) <= 0) {
+					removeStatusEffect(StatusEffects.DeathBlossom);
+					outputText("<b>Death Blossom effect wore off!</b>[pg]");
+				} else {
+					addStatusValue(StatusEffects.DeathBlossom, 1, -1);
+					addStatusValue(StatusEffects.DeathBlossom, 1, 0.2);
+				}
+			}
 			if(hasStatusEffect(StatusEffects.LustStick)) {
 				//LoT Effect Messages:
 				switch(statusEffectv1(StatusEffects.LustStick)) {

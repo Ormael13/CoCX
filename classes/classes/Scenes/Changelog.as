@@ -307,7 +307,7 @@ public class Changelog extends BaseContent
 			outputText("-Metamorph: Add horn count/length for dragon and demon horns, Add Non-fuckable nipples option, Kamaitachi (weasel) skin pattern, tail; Fey Dragon Arms, lower body, wings, tail; Ghost skin, skin pattern, hair, horns; Panda, Fire snail face; Antler horns (EragonX)\n");
 			outputText("-Divine armament affects partial staffs too without dismished effect.\n");
 			outputText("-Rathazul crafting menu bit reorganized with few option getting greyed out buittons tleling what PC is missing. Arian menu for scales coloring changed to be bit more clear.\n");
-			outputText("-New event perk: Survival Training (Rank: 1). Gained by spending 1 super perk point. Effects: You have trained to better survive this realm hostile environment. (+1% to MaxOver HP, MaxOver Lust and Diehard each 3 lvl's up to +10%)\n");
+			outputText("-New event perk(s): Survival Training (Rank: 1-2). Gained by spending 1 super perk point. Effects: You have trained to better survive this realm hostile environment. (+1% to MaxOver HP, MaxOver Lust and Diehard each 3 lvl's up to +(10 * rank)%)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
