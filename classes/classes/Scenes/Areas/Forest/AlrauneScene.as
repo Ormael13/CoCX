@@ -149,6 +149,8 @@ public class AlrauneScene extends BaseContent
 			outputText("When you wake up, you are in a different area with your gear packed up next to you. Seems some thief made off with a small amount of your gems though.\n\n");
 			player.sexReward("vaginalFluids", "Dick");
 			if (!WoodElves.WoodElfMagicTranerGetLaid) WoodElves.WoodElfMagicTranerGetLaid = true;
+			dynStats("lib", 15, "sen", 5);
+			cleanupAfterCombat();
 		}
 		function vagF():void {
 			outputText("You don’t recall when or how you ended up naked in her nectar bath but there you are, fawning in the arms of the " + (isHalloween() ? "pumpkin" : "plant") + " woman.\n\n");
@@ -174,9 +176,9 @@ public class AlrauneScene extends BaseContent
 			player.sexReward("cum", "Vaginal");
 			player.sexReward("cum", "Anal");
 			if (!WoodElves.WoodElfMagicTranerGetLaid) WoodElves.WoodElfMagicTranerGetLaid = true;
+			dynStats("lib", 15, "sen", 5);
+			cleanupAfterCombat();
 		}
-		dynStats("lib", 15, "sen", 5);
-		cleanupAfterCombat();
 	}
 
 		private function beeHandmaidens(location:String, type:String):void {
