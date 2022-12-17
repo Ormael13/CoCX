@@ -2618,7 +2618,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
 
     public function KihaWeddingDefeat():void {
         clearOutput();
-        if (player.hasStatusEffect(StatusEffects.MagnarDominated) && player.statusEffectv1(StatusEffects.MagnarDominated) >= 4)
+        if (player.hasStatusEffect(StatusEffects.MagnarPinned) && player.hasStatusEffect(StatusEffects.MagnarDominated) && player.statusEffectv1(StatusEffects.MagnarDominated) >= 5)
             KihaWeddingDominated();
         else
             KihaWeddingBeaten();
