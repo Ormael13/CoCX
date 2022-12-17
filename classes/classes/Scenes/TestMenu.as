@@ -109,6 +109,7 @@ public class TestMenu extends BaseContent
 		bd.add("Gargoyle", GargoyleMenu, "To Be or Not To Be Gargoyle that is a question.");
 		bd.add("BelisaTest", belisatest3, "Belisa Trigger").disableIf(BelisaFollower.BelisaInGame && BelisaFollower.BelisaFollowerStage < 3);
 		bd.add("Test dynamic stat", TestDynamicStats, "Test Dynamic stats.");
+		bd.add("Kiha Wedding", kihaWedding, "Test Kiha Wedding Content before D4 completed");
 		submenu(bd, SoulforceCheats, 0, false);
 	}
 
@@ -283,6 +284,9 @@ public class TestMenu extends BaseContent
 	public function belisatest3():void {
 		if (BelisaFollower.BelisaEncounternum >= 1) SceneLib.belisa.subsequentEncounters();
 		else SceneLib.belisa.firstEncounter();
+	}
+	public function kihaWedding():void {
+		SceneLib.kihaFollower.KihaProposal();
 	}
     public function cheatFixShards():void { //wrapper for fixShards to use it in cheat menu
 		clearOutput();

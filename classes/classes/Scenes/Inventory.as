@@ -1087,6 +1087,22 @@ use namespace CoC;
 			addButton(14, "Abandon", callOnAbandon); //Does not doNext - immediately executes the callOnAbandon function
 		}
 
+		public function UseItemNow(item:Useable, nextAction:Function, source:ItemSlotClass = null):void {
+			clearOutput();
+
+			if (nextAction != null) {
+				if (nextAction != callNext) callNext = nextAction;
+			} else {
+				callNext = playerMenu;
+			}
+			if (item.canUse()) { //If an item cannot be used then canUse should provide a description of why the item cannot be used
+				useItem(item, source);
+			}
+			else {
+				takeItemFull(item, false, source); //Give the player another chance to take this item
+			}
+		}
+
 		private function useItemNow(item:Useable, source:ItemSlotClass):void {
 			clearOutput();
 			if (item.canUse()) { //If an item cannot be used then canUse should provide a description of why the item cannot be used

@@ -1,4 +1,4 @@
-﻿package classes.Scenes.Combat {
+package classes.Scenes.Combat {
 import classes.BaseContent;
 import classes.BodyParts.*;
 import classes.CoC;
@@ -41,6 +41,7 @@ import classes.Scenes.Dungeons.DemonLab.IncubusScientist;
 import classes.Scenes.Dungeons.DemonLab.LabGuard;
 import classes.Scenes.Dungeons.EbonLabyrinth.*;
 import classes.Scenes.Dungeons.HelDungeon.*;
+import classes.Scenes.Monsters.Magnar;
 import classes.Scenes.NPCs.*;
 import classes.Scenes.Places.Boat.*;
 import classes.Scenes.Places.Farm.Kelt;
@@ -617,6 +618,7 @@ public class Combat extends BaseContent {
             StatusEffects.GiantGrabbed,
             StatusEffects.Tentagrappled,
             StatusEffects.SiegweirdGrapple,
+            StatusEffects.MagnarPinned,
         ];
         var monsterStatuses:Array = [
             StatusEffects.QueenBind,
@@ -2145,6 +2147,9 @@ public class Combat extends BaseContent {
         } else if (monster.hasStatusEffect(StatusEffects.QueenBind)) {
             (monster as HarpyQueen).ropeStruggles(true);
             skipMonsterAction = true;
+        } else if (player..hasStatusEffect(StatusEffects.MagnarPinned)) {
+            (monster as Magnar).magnarPinStruggle(true);
+            skipMonsterAction = true;
         } else if (player.hasStatusEffect(StatusEffects.GooBind)) {
             clearOutput();
             if (monster is HellfireSnail) outputText("Your flesh begins burning as the snail embraces you with her molten body! You scream, but the molten girl doesn't stop!");
@@ -2330,6 +2335,9 @@ public class Combat extends BaseContent {
 			skipMonsterAction = true;
 		} else if (player.hasStatusEffect(StatusEffects.HarpyBind)) {
             (monster as HarpyMob).harpyHordeGangBangStruggle();
+            skipMonsterAction = true;
+        } else if (player.hasStatusEffect(StatusEffects.MagnarPinned)) {
+            (monster as Magnar).magnarPinStruggle();
             skipMonsterAction = true;
         } else if (player.hasStatusEffect(StatusEffects.GooArmorBind)) {
             (monster as Valeria).struggleAtGooBind();
@@ -9070,6 +9078,13 @@ public class Combat extends BaseContent {
             outputText("You are firmly trapped in the tentacle's coils.  <b>The only thing you can try to do is struggle free!</b>\n\n");
             if (flags[kFLAGS.PC_FETISH] >= 2) {
                 outputText("Wrapped tightly in the tentacles, you find it hard to resist becoming more and more aroused...\n\n");
+                player.takeLustDamage(3, true);
+            }
+        }
+        if (player.hasStatusEffect(StatusEffects.MagnarPinned)) {
+            outputText("You are firmly held in Magnar's grip.  <b>The only thing you can try to do is struggle free!</b>\n\n");
+            if (flags[kFLAGS.PC_FETISH] >= 2) {
+                outputText("With him constantly chocking you, you find it hard to resist becoming more and more aroused...\n\n");
                 player.takeLustDamage(3, true);
             }
         }
