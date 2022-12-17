@@ -39,18 +39,6 @@ import classes.StatusEffects;
 		return "";
 	}
 	
-	override public function advance(display:Boolean):void {
-		if (player.hasStatusEffect(StatusEffects.DeathBlossom)) {
-			if (player.statusEffectv1(StatusEffects.DeathBlossom) <= 0) {
-				player.removeStatusEffect(StatusEffects.DeathBlossom);
-				if (display) outputText("<b>Death Blossom effect wore off!</b>\n\n");
-			} else {
-				player.addStatusValue(StatusEffects.DeathBlossom, 1, -1);
-				player.addStatusValue(StatusEffects.DeathBlossom, 1, 0.2);
-			}
-		}
-	}
-	
 	public function calcDamage(monster:Monster, randomize:Boolean = true, casting:Boolean = true):Number { //casting - Increase Elemental Counter while casting (like Raging Inferno)
 		var baseDamage:Number = (combat.teases.teaseBaseLustDamage() * spellModWhite());
 		if (player.hasPerk(PerkLib.VegetalAffinity)) baseDamage *= 1.5;
