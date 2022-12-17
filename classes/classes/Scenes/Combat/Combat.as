@@ -15618,4 +15618,4 @@ private function touSpeStrScale(stat:int):Number {
         return damage;
     }
 }
-}
+}

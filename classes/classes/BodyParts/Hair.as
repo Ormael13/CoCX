@@ -260,6 +260,12 @@ public class Hair extends BodyPart {
 		adjective: "centaur ponytail"
 	});
 
+	public static const TWINRIBBON:int  = 10;
+	EnumValue.add(Styles, TWINRIBBON, "TWINRIBBON", {
+		name: "twin ribbon",
+		adjective: "twin ribbon"
+	});
+
 
 	public var color:String = "no";
 	public var length:Number = 0.0;
