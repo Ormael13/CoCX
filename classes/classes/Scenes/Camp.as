@@ -1,4 +1,4 @@
-﻿package classes.Scenes {
+package classes.Scenes {
 import classes.*;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
@@ -1506,8 +1506,10 @@ public class Camp extends NPCAwareContent{
 			}
 			//Kiha!
 			if (followerKiha()) {
+				if (KihaFollower.DergKidnapped == 1)
+					outputText("Kiha is nowhere to be seen");
 				//(6-7)
-				if (model.time.hours < 7) outputText("Kiha is sitting near the fire, her axe laying across her knees as she polishes it.\n\n");
+				else if (model.time.hours < 7) outputText("Kiha is sitting near the fire, her axe laying across her knees as she polishes it.\n\n");
 				else if (model.time.hours < 19) {
 					if (kihaFollower.totalKihaChildren() > 0 && flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] > 160 && (flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] % 3 == 0 || model.time.hours == 17)) outputText("Kiha is breastfeeding her offspring right now.\n\n");
 					else if (kihaFollower.totalKihaChildren() > 0 && flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] > 80 && flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] <= 160 && (flags[kFLAGS.KIHA_CHILD_MATURITY_COUNTER] % 7 == 0 || model.time.hours == 17)) outputText("Kiha is telling stories to her draconic child" + (kihaFollower.totalKihaChildren() == 1 ? "" : "ren") + " right now.\n\n");
@@ -1525,7 +1527,8 @@ public class Camp extends NPCAwareContent{
 						outputText("Most of them are on fire.\n\n");
 					}
 				}
-				if (player.statusEffectv3(StatusEffects.CampLunaMishaps1) > 0) buttons.add("Kiha", kihaScene.encounterKiha2).disableIf(player.statusEffectv3(StatusEffects.CampLunaMishaps1) > 0, "Cleaning burnt meat.");
+				if (KihaFollower.DergKidnapped == 1) buttons.add("Kiha", kihaFollower.KihaKidnapped);
+				else if (player.statusEffectv3(StatusEffects.CampLunaMishaps1) > 0) buttons.add("Kiha", kihaScene.encounterKiha2).disableIf(player.statusEffectv3(StatusEffects.CampLunaMishaps1) > 0, "Cleaning burnt meat.");
 				else buttons.add("Kiha", kihaScene.encounterKiha2).disableIf(player.statusEffectv3(StatusEffects.CampSparingNpcsTimers1) > 0, "Training.");
 			}
 			//Lily
