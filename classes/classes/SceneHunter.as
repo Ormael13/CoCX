@@ -464,11 +464,13 @@ public class SceneHunter extends BaseContent {
     public static const POLYGAMY_ETNA       :int = 1 << 2;
     public static const POLYGAMY_ZENJI      :int = 1 << 2;
     public static const POLYGAMY_ALVINA     :int = 1 << 3;
+    public static const POLYGAMY_KIHA       :int = 1 << 4;
     public static const polyBits:Object = {
         "Chi Chi": POLYGAMY_CHICHI,
         "Etna": POLYGAMY_ETNA,
         "Zenji": POLYGAMY_ZENJI,
-        "Alvina": POLYGAMY_ALVINA
+        "Alvina": POLYGAMY_ALVINA,
+        "Kiha": POLYGAMY_KIHA
     }
 
     public function get polygamy():Boolean {

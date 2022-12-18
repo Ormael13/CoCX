@@ -8655,6 +8655,16 @@ public final class Mutations extends MutationsHelper {
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
     }
 
+    //[Box of Chocolates] - 10 gems
+    public function boxChocolate(player:Player):void {
+        clearOutput();
+        outputText("You open the box of chocolates and start eating them one by one. They taste deliciously sweet, and you wonder if you could maybe give some as a present.  ");
+        if (SceneLib.alvinaFollower.alvinaCanMeetAtBar() && !SceneLib.alvinaFollower.GaveAlvinaChocolate) outputText("Maybe Alvina would enjoy some?");
+        outputText(player.modTone(0, 1));
+        outputText(player.modThickness(player.maxThicknessCap(), 1));
+        player.refillHunger(20);
+    }
+
     //[Giant Chocolate Cupcake] – 500 gems
     public function giantChocolateCupcake(player:Player):void {
         clearOutput();

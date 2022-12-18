@@ -177,16 +177,19 @@ use namespace CoC;
 			"These appears to be the shards of a shattered weapon though which one you do not know. You are no smith and thus have no idea how to reforge this item. From what Vala told you it might have been part of the scepter of the fairy queen. You recall that you will need 15 shards in total to start...");
 		public const IARROWHEAD:SimpleUseable = new SimpleUseable("IArrowHead", "IArrowHeads", "an iron arrowheads", 1,
 			"Hundred iron arrowheads.",
-			"You look at hundred iron arrowheads.  They could be used to craft special arrows.");
+			"You look at a hundred iron arrowheads.  They could be used to craft special arrows.");
 		public const MARROWHEAD:SimpleUseable = new SimpleUseable("MArrowHead", "MArrowHeads", "a moonstone arrowheads", 1,
 			"Hundred moonstone arrowheads.",
-			"You look at hundred moonstone arrowheads.  They could be used to craft special arrows.");
+			"You look at a hundred moonstone arrowheads.  They could be used to craft special arrows.");
 		public const SARROWHEAD:SimpleUseable = new SimpleUseable("SArrowHead", "SArrowHeads", "a skymetal arrowheads", 1,
 			"Hundred skymetal arrowheads.",
-			"You look at hundred skymetal arrowheads.  They could be used to craft special arrows.");
+			"You look at a hundred skymetal arrowheads.  They could be used to craft special arrows.");
 		public const EARROWHEAD:SimpleUseable = new SimpleUseable("EArrowHead", "EArrowHeads", "an ebonbloom arrowheads", 1,
 			"Hundred ebonbloom arrowheads.",
-			"You look at hundred ebonbloom arrowheads.  They could be used to craft special arrows.");
+			"You look at a hundred ebonbloom arrowheads.  They could be used to craft special arrows.");
+		public const TEDDY:SimpleUseable = new SimpleUseable("TeddyBear", "TeddyBear", "a Teddy bear", 200,
+				"An old Teddy bear with a small paper with the name Mister Paw tied to it.",
+				"You look at an old Teddy bear and see there is a small paper with the name Mister Paw tied to it.");
 		//CHEAT ITEM
 		public const DBGWAND:DebugWand = new DebugWand();
 	}

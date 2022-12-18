@@ -2575,7 +2575,8 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         outputText("“<i>Do you know why female dragons were considered the most dangerous?</i>” She asks you, sliding in, eyes dangerously close to yours as she exhales, the faintest hint of flame on her breath. You respond neutrally, telling Kiha that you don’t know… But you have every intention of finding out tonight.\n\n");
         outputText("“<i>Good answer</i>”. Kiha says, giving you a light push towards the bed. Not wanting to waste any time, you begin disrobing, your dragoness tapping one foot impatiently. “<i>… It’s been all I can stand, you know. Knowing that you’re mine, but those hours… I wanted to kick that priest out and bend you over the altar myself.</i>” You finish undressing, and Kiha tackles you. Playing along, you let her pin you down to the bed back-first, her hands on your forearms and wings spread wide.\n\n");
         outputText("“<i>Mine.</i>” She looks you up and down, almost drooling. “<i>I still can’t believe we're married… but… You’re mine.</i>” Kiha’s sharp teeth glint, her reptilian eyes gleaming.\n\n");
-        menu();
+
+        sceneHunter.marry("Kiha"); menu();
         if (player.hasCock()) {
             addButton(1, "MaleSex", KihaMaleWeddingNight);
         }
@@ -2749,14 +2750,18 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         }
         addButton (3, "Campmates", KihaTalkCampmates);
         if (ProposalStatus == 1) {
-            addButton(5, "Propose", KihaProposal);
+            addButton(5, "Propose", KihaProposal)
+                    .disableIf(!sceneHunter.canMarry(), "You have already married someone else.");
         }
         if (ProposalStatus == 3) {
             addButton(5, "WeddingReady", KihaWedding)
                     .disableIf(!SceneLib.templeofdivine.canMarry(), "You need to repair the temple first!")
+                    .disableIf(!sceneHunter.canMarry(), "You have already married someone else.");
         }
         if (ProposalStatus == 4) {
-            addButtonDisabled(5, "Propose", "You've chosen poorly. You're promised to another already.");
+
+            addButton(5, "Propose", KihaProposal)
+                    .disableIf(!sceneHunter.canMarry(), "You have already married someone else.");
         }
     }
 
