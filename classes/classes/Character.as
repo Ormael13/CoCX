@@ -26,11 +26,15 @@ import classes.Scenes.NPCs.Forgefather;
 		private var _pregnancyType:int = 0;
 		public function get pregnancyType():int { return _pregnancyType; }
 
+		private var _pregnancyTypeList:Array = ['NONE','PREGNANCY_IMP','PREGNANCY_MINOTAUR','PREGNANCY_COCKATRICE','PREGNANCY_MOUSE','PREGNANCY_OVIELIXIR_EGGS','PREGNANCY_HELL_HOUND','PREGNANCY_CENTAUR','PREGNANCY_MARBLE','PREGNANCY_BUNNY','PREGNANCY_ANEMONE','PREGNANCY_AMILY','PREGNANCY_IZMA','PREGNANCY_SPIDER','PREGNANCY_BASILISK','PREGNANCY_DRIDER_EGGS','PREGNANCY_GOO_GIRL','PREGNANCY_EMBER','PREGNANCY_BENOIT','PREGNANCY_SATYR','PREGNANCY_COTTON','PREGNANCY_URTA','PREGNANCY_SAND_WITCH','PREGNANCY_FROG_GIRL','PREGNANCY_FAERIE','PREGNANCY_PLAYER','PREGNANCY_BEE_EGGS','PREGNANCY_SANDTRAP_FERTILE','PREGNANCY_SANDTRAP','PREGNANCY_JOJO','PREGNANCY_KELT','PREGNANCY_TAOTH','PREGNANCY_GOO_STUFFED','PREGNANCY_WORM_STUFFED','PREGNANCY_MINERVA','PREGNANCY_BEHEMOTH','PREGNANCY_PHOENIX','PREGNANCY_ANDY','PREGNANCY_ALRAUNE','PREGNANCY_CELESS','PREGNANCY_GOBLIN','PREGNANCY_ZENJI','PREGNANCY_AYANE','PREGNANCY_ANT_EGGS','PREGNANCY_MANTIS_EGGS','PREGNANCY_HARPY_EGGS','PREGNANCY_HARPY_HATCHING'];
+		public function get pregnancyTypeText():String { return _pregnancyTypeList[_pregnancyType]; }
+
 		private var _pregnancyIncubation:int = 0;
 		public function get pregnancyIncubation():int { return _pregnancyIncubation; }
 
 		private var _buttPregnancyType:int = 0;
 		public function get buttPregnancyType():int { return _buttPregnancyType; }
+		public function get buttPregnancyTypeText():String { return _pregnancyTypeList[_buttPregnancyType]; }
 
 		private var _buttPregnancyIncubation:int = 0;
 		public function get buttPregnancyIncubation():int { return _buttPregnancyIncubation; }

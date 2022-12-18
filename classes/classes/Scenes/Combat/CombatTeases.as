@@ -32,31 +32,32 @@ public class CombatTeases extends BaseCombatContent {
 	
 	public function teaseBaseLustDamage():Number {
 		var tBLD:Number = 27 + rand(9);
-		if (player.hasPerk(PerkLib.SensualLover)) tBLD += 6;
-		if (player.hasPerk(PerkLib.Seduction)) tBLD += 15;
-		tBLD += (2 * player.teaseDmgStat.value);
-		if (player.hasPerk(PerkLib.BimboBody) || player.hasPerk(PerkLib.BroBody) || player.hasPerk(PerkLib.FutaForm)) tBLD += 15;
-		if (player.hasPerk(PerkLib.FlawlessBody)) tBLD += 20;
-		tBLD += scalingBonusLibido() * 0.2;
-		if (player.hasPerk(PerkLib.JobSeducer)) tBLD += player.teaseLevel * 3;
-		else tBLD += player.teaseLevel * 2;
-		if (player.hasPerk(PerkLib.JobCourtesan) && monster.hasPerk(PerkLib.EnemyBossType)) tBLD *= 1.2;
-		switch (player.coatType()) {
-			case Skin.FUR:
-				tBLD += (2 * (1 + player.newGamePlusMod()));
-				break;
-			case Skin.SCALES:
-				tBLD += (4 * (1 + player.newGamePlusMod()));
-				break;
-			case Skin.CHITIN:
-				tBLD += (6 * (1 + player.newGamePlusMod()));
-				break;
-			case Skin.BARK:
-				tBLD += (8 * (1 + player.newGamePlusMod()));
-				break;
-		}
-		if (player.hasPerk(PerkLib.SluttySimplicity) && player.armor.hasTag(ItemTags.A_REVEALING)) tBLD *= (1 + ((10 + rand(11)) / 100));
-		if (player.isElf() && player.hasPerk(PerkLib.ELFElvenSpearDancingTechnique) && player.isSpearTypeWeapon()) tBLD += scalingBonusSpeed() * 0.1;
+		tBLD = combat.calculateBasicTeaseDamage(tBLD);
+		//if (player.hasPerk(PerkLib.SensualLover)) tBLD += 6;
+		//if (player.hasPerk(PerkLib.Seduction)) tBLD += 15;
+		//tBLD += (2 * player.teaseDmgStat.value);
+		//if (player.hasPerk(PerkLib.BimboBody) || player.hasPerk(PerkLib.BroBody) || player.hasPerk(PerkLib.FutaForm)) tBLD += 15;
+		//if (player.hasPerk(PerkLib.FlawlessBody)) tBLD += 20;
+		//tBLD += scalingBonusLibido() * 0.2;
+		//if (player.hasPerk(PerkLib.JobSeducer)) tBLD += player.teaseLevel * 3;
+		//else tBLD += player.teaseLevel * 2;
+		//if (player.hasPerk(PerkLib.JobCourtesan) && monster.hasPerk(PerkLib.EnemyBossType)) tBLD *= 1.2;
+		//switch (player.coatType()) {
+		//	case Skin.FUR:
+		//		tBLD += (2 * (1 + player.newGamePlusMod()));
+		//		break;
+		//	case Skin.SCALES:
+		//		tBLD += (4 * (1 + player.newGamePlusMod()));
+		//		break;
+		//	case Skin.CHITIN:
+		//		tBLD += (6 * (1 + player.newGamePlusMod()));
+		//		break;
+		//	case Skin.BARK:
+		//		tBLD += (8 * (1 + player.newGamePlusMod()));
+		//		break;
+		//}
+		//if (player.hasPerk(PerkLib.SluttySimplicity) && player.armor.hasTag(ItemTags.A_REVEALING)) tBLD *= (1 + ((10 + rand(11)) / 100));
+		//if (player.isElf() && player.hasPerk(PerkLib.ELFElvenSpearDancingTechnique) && player.isSpearTypeWeapon()) tBLD += scalingBonusSpeed() * 0.1;
 		return tBLD;
 	}
 
@@ -1487,6 +1488,8 @@ public class CombatTeases extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.SuperSensual) && chance > 100) damagemultiplier += (0.02 * (chance - 100));
 			if (player.armorName == "desert naga pink and black silk dress") damagemultiplier += 0.1;
 			if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
+			if (player.armor == armors.ELFDRES && player.isElf()) damagemultiplier += 2;
+			if (player.armor == armors.FMDRESS && player.isWoodElf()) damagemultiplier += 2;
 			damage *= damagemultiplier;
 			bonusDamage *= damagemultiplier;
 			if (player.hasPerk(PerkLib.ChiReflowLust)) damage *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
@@ -1509,6 +1512,8 @@ public class CombatTeases extends BaseCombatContent {
 			if (rand(100) < critChance) {
 				crit = true;
 				damage *= 1.75;
+				if (monster.lustVuln != 0)
+					monster.lustVuln += 0.05;
 			}
 			if (monster is JeanClaude) (monster as JeanClaude).handleTease(damage, true);
 			else if (monster is Doppleganger && !monster.hasStatusEffect(StatusEffects.Stunned)) (monster as Doppleganger).mirrorTease(damage, true);

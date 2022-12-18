@@ -114,6 +114,8 @@ public class Tyrantia extends Monster
 			outputText("\"<i>Fighting Dirty like that?!</i>\" She hisses. \"<i>I’ll show you.</i>\"\n");
 			var lustDang:Number = 15 + rand(15);
 			player.takeLustDamage(lustDang, true);
+			if (player.armor == armors.ELFDRES && player.isElf()) lustDang *= 2;
+			if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDang *= 2;
 			teased(lustDang);
 		}
 		private function tyrantiaPounceFail():void {

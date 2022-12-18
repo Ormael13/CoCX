@@ -910,6 +910,138 @@ public class PlayerInfo extends BaseContent {
 		spriteSelect(null);
 		clearOutput();
 		displayHeader("Children Stats");
+
+		var pregnancies:String = "";
+		if (player.isPregnant())
+			pregnancies += "<b>Player: </b>"+ player.pregnancyTypeText +"\n";
+		if (player.isButtPregnant())
+			pregnancies += "<b>Player incubation: </b>" + player.buttPregnancyTypeText +"\n";
+
+		if (SceneLib.amilyScene.pregnancy.isPregnant)
+			pregnancies += "<b>Amily</b>\n";
+		if (SceneLib.amilyScene.pregnancy.isButtPregnant)
+			pregnancies += "<b>Amily incubation</b>\n";
+
+		if (SceneLib.ayaneFollower.pregnancy.isPregnant)
+			pregnancies += "<b>Ayane</b>\n";
+
+		if (SceneLib.arianScene.arianFollower() && flags[kFLAGS.ARIAN_EGG_COUNTER] < 24 && flags[kFLAGS.ARIAN_VAGINA] > 0)
+			pregnancies += "<b>Arian days to lay eggs: </b>" + (24-flags[kFLAGS.ARIAN_EGG_COUNTER]) + "\n";
+
+
+		if (DriderTown.BelisaPregnancy > 0)
+			pregnancies += "<b>Belisa</b>\n";
+		if (DriderTown.BelisaKidsEggs > 0 || DriderTown.BelisaKidsEggs1 > 0 || DriderTown.BelisaKidsEggs2 > 0)
+			pregnancies += "<b>Belisa eggs: </b>" +(DriderTown.BelisaKidsEggs +DriderTown.BelisaKidsEggs1 +DriderTown.BelisaKidsEggs2) + "\n";
+
+
+		//if (SceneLib.ceaniScene.pregnancy.isPregnant)	//TODO Ceani preggers
+		//	pregnancies += "<b>Ceani</b> \n";
+
+		//if (SceneLib.chichiScene.pregnancy.isPregnant)	//TODO ChiChi preggers
+		//	pregnancies += "<b>ChiChi</b> \n";
+
+		//if (SceneLib.dianaScene.pregnancy.isPregnant)	//TODO Diana preggers
+		//	pregnancies += "<b>Diana</b> \n";
+
+		if (flags[kFLAGS.FEMOIT_EGGS] != 0)
+			pregnancies += "<b>Benoit</b> \n";
+		if (SceneLib.holliScene)
+
+		if (SceneLib.telAdre.cotton.pregnancy.isPregnant)
+			pregnancies += "<b>Cotton</b> \n";
+
+		if (SceneLib.telAdre.edryn.pregnancy.isPregnant)
+			pregnancies += "<b>Edryn</b> \n";
+
+		if (SceneLib.emberScene.pregnancy.isPregnant)
+			pregnancies += "<b>Ember</b> \n";
+
+		//if (SceneLib.etnaScene.pregnancy.isPregnant)	//TODO Etna preggers
+		//	pregnancies += "<b>Etna</b> \n";
+
+		if (SceneLib.excelliaFollower.pregnancy.isPregnant)
+			pregnancies += "<b>Excellia</b> \n";
+
+		if (SceneLib.swamp.femaleSpiderMorphScene.pregnancy.isPregnant)
+			pregnancies += "<b>Female spider</b> \n";
+
+		if (SceneLib.helScene.pregnancy.isPregnant)
+			pregnancies += "<b>Helia</b> \n";
+
+		if (SceneLib.isabellaScene.pregnancy.isPregnant)
+			pregnancies += "<b>Isabella</b> \n";
+
+		if (SceneLib.izmaScene.pregnancy.isPregnant)
+			pregnancies += "<b>Izma</b> \n";
+
+		if (SceneLib.jojoScene.pregnancy.isPregnant)
+			pregnancies += "<b>Joy</b> \n";
+
+		if (SceneLib.farm.kelly.pregnancy.isPregnant)
+			pregnancies += "<b>Kelly</b> \n";
+
+		//if (SceneLib.telAdre.katherine.pregnancy.isPregnant)	//TODO Katherine preggers
+		//	pregnancies += "<b>Katherine</b> \n";
+
+		if (SceneLib.kihaFollower.pregnancy.isPregnant)
+			pregnancies += "<b>Kiha</b> \n";
+
+		if (DriderTown.LilyKidsPCPregnancy > 0)
+			pregnancies += "<b>Lily</b>\n";
+		if (DriderTown.LilyKidsIzmaPregnancy > 0)
+			pregnancies += "<b>Lily & Izma</b>\n";
+		if (DriderTown.LilyKidsSidonePregnancy > 0)
+			pregnancies += "<b>Lily & Sidone</b>\n";
+		if (DriderTown.LilyKidsPCEggs > 0 || DriderTown.LilyKidsPCEggs1 > 0 || DriderTown.LilyKidsPCEggs2 > 0)
+			pregnancies += "<b>Lily eggs: </b>" +(DriderTown.LilyKidsPCEggs +DriderTown.LilyKidsPCEggs1 +DriderTown.LilyKidsPCEggs2) + "\n";
+
+		//if (SceneLib.telAdre.loppe.pregnancy.isPregnant)	//TODO Loppe preggers
+		//	pregnancies += "<b>Loppe</b>\n";
+
+		if (flags[kFLAGS.LYNNETTE_CARRYING_COUNT] != 0)
+			pregnancies += "<b>Lynnette</b> \n";
+
+		if (SceneLib.marbleScene.pregnancy.isPregnant)
+			pregnancies += "<b>Marble</b>\n";
+
+		if (SceneLib.highMountains.minervaScene.pregnancy.isPregnant)
+			pregnancies += "<b>Minerva</b> \n"
+
+		if (SceneLib.mitziFollower.pregnancy.isPregnant)
+			pregnancies += "<b>Mitzi</b>\n";
+
+		if (SceneLib.phyllaScene.pregnancy.isPregnant)
+			pregnancies += "<b>Phylla</b>\n";
+		if (flags[kFLAGS.PHYLLA_EGG_LAYING] == 1)
+			pregnancies += "<b>Phylla eggs</b>\n";
+
+		if (SceneLib.desert.sandWitchScene.pregnancy.isPregnant)
+			pregnancies += "<b>SandWitch incubating</b>\n";
+
+		if (SceneLib.sheilaScene.pregnancy.isPregnant)
+			pregnancies += "<b>Sheila</b>\n";
+
+		if (SceneLib.sophieScene.pregnancy.isPregnant)
+			pregnancies += "<b>Sophie</b>\n";
+
+		if (SceneLib.forest.tamaniScene.pregnancy.isPregnant)
+			pregnancies += "<b>Tamani</b>\n";
+		if (SceneLib.forest.tamaniDaughtersScene.pregnancy.isPregnant)
+			pregnancies += "<b>Tamani's Daughters</b>\n";
+
+		if (DriderTown.TyrantiaPregnancy > 0)
+			pregnancies += "<b>Tyrantia</b>\n";
+		if (DriderTown.TyrantiaKidsEggs > 0 || DriderTown.TyrantiaKidsEggs1 > 0 || DriderTown.TyrantiaKidsEggs2 > 0)
+			pregnancies += "<b>Tyrantia eggs: </b>" +(DriderTown.TyrantiaKidsEggs +DriderTown.TyrantiaKidsEggs1 +DriderTown.TyrantiaKidsEggs2) + "\n";
+
+		if (SceneLib.urta.pregnancy.isPregnant)
+			pregnancies += "<b>Urta</b>\n";
+		if (SceneLib.urta.pregnancy.isButtPregnant)
+			pregnancies += "<b>Urta incubating</b>\n";
+
+
+		outputText("\n<b><u>Active pregnancies</u></b>\n" + pregnancies);
 		// Begin Children Stats
 		var childStats:String = "";
 
@@ -1074,6 +1206,62 @@ public class PlayerInfo extends BaseContent {
 		if (childStats != "")
 			outputText("\n<b><u>Children</u></b>\n" + childStats);
 		// End Children Stats
+
+		var possiblePregs:String = "";
+		possiblePregs += "Amily\n";
+		possiblePregs += "Ayane\n";
+		possiblePregs += "Arian faux preg\n";
+		possiblePregs += "Belisa\n";
+	//	possiblePregs += "Ceani\n";
+	//	possiblePregs += "ChiChi\n";
+	//	possiblePregs += "Diana\n";
+		possiblePregs += "Benoit\n";
+		possiblePregs += "Cotton\n";
+		possiblePregs += "Edryn\n";
+		possiblePregs += "Ember\n";
+	//	possiblePregs += "Etna\n";
+		possiblePregs += "Excellia\n";
+		possiblePregs += "Female spider\n";
+		possiblePregs += "Helia\n";
+		possiblePregs += "Isabella\n";
+		possiblePregs += "Izma\n";
+		possiblePregs += "Joy\n";
+		possiblePregs += "Kelly\n";
+	//	possiblePregs += "Katherine\n";
+		possiblePregs += "Kiha\n";
+		possiblePregs += "Lily\n";
+	//	possiblePregs += "Lily & Izma\n";
+	//	possiblePregs += "Lily & Sidone\n";
+	//	possiblePregs += "Loppe\n";
+		possiblePregs += "Lynnette\n";
+		possiblePregs += "Marble\n";
+		possiblePregs += "Minerva\n"
+		possiblePregs += "Mitzi\n";
+		possiblePregs += "Phylla\n";
+		possiblePregs += "Phylla eggs\n";
+		possiblePregs += "Sophie\n";
+		possiblePregs += "Sheila\n";
+		possiblePregs += "Tamani\n";
+		possiblePregs += "Tamani's Daughters\n";
+		possiblePregs += "Tyrantia\n";
+		possiblePregs += "Urta\n";
+		outputText("\n<b><u>Possible NPC Pregnancies</u></b>\n" + possiblePregs);
+
+		var possibleButtPregs:String = "";
+		possibleButtPregs += "Amily\n";
+		possibleButtPregs += "Sand Witch\n";
+		possibleButtPregs += "Urta\n";
+		outputText("\n<b><u>Possible NPC Butt Pregnancies</u></b>\n" + possibleButtPregs);
+
+		var possiblePCPregs:String = "CELESS unique, IMP, MINOTAUR, COCKATRICE, MOUSE, HELL_HOUND, CENTAUR, MARBLE, BUNNY, ANEMONE, "+
+				"AMILY, IZMA, SPIDER, BASILISK, DRIDER_EGGS, GOO_GIRL, EMBER, BENOIT, SATYR, COTTON, URTA, SAND_WITCH, FROG_GIRL, "+
+				"FAERIE, JOJO, KELT, TAOTH, MINERVA, BEHEMOTH, ZENJI, \n"+
+				"WORM_STUFFED permanent, faux OVIELIXIR_EGGS, faux GOO_STUFFED, \n"+
+				"ALRAUNE racial override,GOBLIN racial override, HARPY_EGGS racial override, HARPY_HATCHING racial override";
+		outputText("\n<b><u>Possible PC Pregnancies</u></b>\n" + possiblePCPregs);
+		var possiblePCButtPregs:String = "BEE_EGGS, DRIDER_EGGS, FROG_GIRL, SANDTRAP_FERTILE, SANDTRAP, BUNNY egg transformative"
+		outputText("\n<b><u>Possible PC Butt Pregnancies</u></b>\n" + possiblePCButtPregs);
+
 		statsMenu(8);
 	}
 	public function printStatMastery(index:String):String{
