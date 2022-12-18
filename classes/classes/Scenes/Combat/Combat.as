@@ -3079,6 +3079,7 @@ public class Combat extends BaseContent {
 						damage1Ba *= 2;
 					}
                     if (player.armor == armors.ELFDRES && player.isElf()) damage1B *= 2;
+                    if (player.armor == armors.FMDRESS && player.isWoodElf()) damage1B *= 2;
                     monster.teased(damage1B);
                     if (monster.hasStatusEffect(StatusEffects.BeeVenom)) {
                         monster.addStatusValue(StatusEffects.BeeVenom, 3, damage1Ba);
@@ -3121,6 +3122,8 @@ public class Combat extends BaseContent {
 						DBPaa *= 2;
 					}
                     if (player.armor == armors.ELFDRES && player.isElf()) lustdamage *= 2;
+                                if (player.armor == armors.FMDRESS && player.isWoodElf()) lustdamage *= 2;
+                    if (player.armor == armors.FMDRESS && player.isWoodElf()) lustdamage *= 2;
                     monster.teased(lustdamage, false);
 					if (player.hasPerk(PerkLib.ToxineMaster)) DBPaa += 2.5;
                     monster.statStore.addBuffObject({tou:-(DBPaa*2)}, "Poison",{text:"Poison"});
@@ -3168,6 +3171,7 @@ public class Combat extends BaseContent {
 							damage2Ba *= 2;
 						}
                         if (player.armor == armors.ELFDRES && player.isElf()) damage2B *= 2;
+                        if (player.armor == armors.FMDRESS && player.isWoodElf()) damage2B *= 2;
                         monster.teased(damage2B);
 						if (player.hasPerk(PerkLib.ToxineMaster)) poisonScaling += 5;
                         monster.statStore.addBuffObject({tou:-poisonScaling}, "Poison",{text:"Poison"});
@@ -3186,6 +3190,7 @@ public class Combat extends BaseContent {
                         var lustDmg:int = 6 * monster.lustVuln;
 						if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) lustDmg *= 2;
                         if (player.armor == armors.ELFDRES && player.isElf()) lustDmg *= 2;
+                        if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg *= 2;
                         monster.teased(lustDmg);
                         if (monster.lustVuln > 0) {
                             monster.lustVuln += 0.01;
@@ -4243,6 +4248,7 @@ public class Combat extends BaseContent {
                     if (player.weaponRange == weaponsrange.TDPISTO || player.weaponRange == weaponsrange.DPISTOL || player.weaponRange == weaponsrange.LBLASTR) {
                         rangeweaponLustDmg = (20 + player.cor / 15); // 20-26.7
                         if (player.armor == armors.ELFDRES && player.isElf()) rangeweaponLustDmg *= 2;
+                        if (player.armor == armors.FMDRESS && player.isWoodElf()) rangeweaponLustDmg *= 2;
                         if (rangeweaponLustDmg > 0) {
                             var s:String = monster.plural ? "" : "s";
                             if (player.weaponRange == weaponsrange.LBLASTR){
@@ -4523,6 +4529,7 @@ public class Combat extends BaseContent {
         if (player.upperGarment == undergarments.TECHBRA) damage *= 1.05;
         if (player.lowerGarment == undergarments.T_PANTY) damage *= 1.05;
         if (player.armor == armors.ELFDRES && player.isElf()) damage *= 2;
+        if (player.armor == armors.FMDRESS && player.isWoodElf()) damage *= 2;
         damage = damage * monster.lustVuln;
         damage = Math.round(damage);
         if (player.hasKeyItem("Lustnade Launcher") >= 0) {
@@ -4824,6 +4831,7 @@ public class Combat extends BaseContent {
                         damage3B *= 0.2;
                         if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) damage3Ba *= 2;
                         if (player.armor == armors.ELFDRES && player.isElf()) damage3Ba *= 2;
+                        if (player.armor == armors.FMDRESS && player.isWoodElf()) damage3Ba *= 2;
                         damage3B *= damage3Ba;
                         poisonScaling *= damage3Ba;
                         damage3B *= 1 + (poisonScaling / 10);
@@ -4842,6 +4850,7 @@ public class Combat extends BaseContent {
                         var lustDmg:int = 6 * monster.lustVuln;
                         if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) lustDmg *= 2;
                         if (player.armor == armors.ELFDRES && player.isElf()) lustDmg *= 2;
+                        if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg *= 2;
                         monster.teased(lustDmg);
                         if (monster.lustVuln > 0) {
                             monster.lustVuln += 0.01;
@@ -5050,6 +5059,8 @@ public class Combat extends BaseContent {
                     if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) lustDmg2 *= 2;
                     lustdamage *= lustDmg2;
                     if (player.armor == armors.ELFDRES && player.isElf()) lustdamage *= 2;
+                                if (player.armor == armors.FMDRESS && player.isWoodElf()) lustdamage *= 2;
+                    if (player.armor == armors.FMDRESS && player.isWoodElf()) lustdamage *= 2;
                     monster.teased(Math.round(monster.lustVuln * lustdamage), false);
                     monster.statStore.addBuffObject({tou:-(lustDmg2*2)}, "Poison",{text:"Poison"});
                     player.tailVenom -= player.VenomWebCost();
@@ -5094,6 +5105,7 @@ public class Combat extends BaseContent {
                 if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) lustDmg3 *= 2;
                 lustdamage2 *= lustDmg3;
                 if (player.armor == armors.ELFDRES && player.isElf()) lustdamage2 *= 2;
+                if (player.armor == armors.FMDRESS && player.isWoodElf()) lustdamage2 *= 2;
                 monster.teased(Math.round(monster.lustVuln * lustdamage2), false);
                 combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
                 if (monster.hasStatusEffect(StatusEffects.BeeVenom)) monster.addStatusValue(StatusEffects.BeeVenom,3,(dBd2c*5));
@@ -5702,6 +5714,7 @@ public class Combat extends BaseContent {
                             if (player.armorName == "desert naga pink and black silk dress") damagemultiplier += 0.1;
                             if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
                             if (player.armor == armors.ELFDRES && player.isElf()) damagemultiplier += 2;
+                            if (player.armor == armors.FMDRESS && player.isWoodElf()) damagemultiplier *= 2;
                             damageLC *= damagemultiplier;
                             //Determine if critical tease!
                             var crit1:Boolean = false;
@@ -5868,6 +5881,7 @@ public class Combat extends BaseContent {
                             whipLustSelf = (rand(4) == 0) ? 0 : 1; // 75% +1
                         }
                         if (player.armor == armors.ELFDRES && player.isElf()) whipLustDmg *= 2;
+                        if (player.armor == armors.FMDRESS && player.isWoodElf()) whipLustDmg *= 2;
                         if (whipLustDmg > 0) {
                             var s:String = monster.plural ? "" : "s";
                             if (rand(2) == 0) {
@@ -5904,6 +5918,7 @@ public class Combat extends BaseContent {
                         var lust0damage:Number = 35 + rand(player.lib / 10);
                         lust0damage *= 0.14;
                         if (player.armor == armors.ELFDRES && player.isElf()) lust0damage *= 2;
+                        if (player.armor == armors.FMDRESS && player.isWoodElf()) lust0damage *= 2;
                         monster.teased(Math.round(monster.lustVuln * lust0damage));
                         monster.statStore.addBuffObject({tou:-2, spe:-2}, "Poison",{text:"Poison"});
                         if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
@@ -5927,6 +5942,7 @@ public class Combat extends BaseContent {
                                 var damageB:Number = 35 + rand(player.lib / 10);
                                 var damageBa:Number = 1;
                                 if (player.armor == armors.ELFDRES && player.isElf()) damageBa *= 2;
+                                if (player.armor == armors.FMDRESS && player.isWoodElf()) damageBa *= 2;
                                 if (player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)) damageB += scalingBonusToughness() * 0.5;
                                 if (player.level < 10) damageB += 20 + (player.level * 3);
                                 else if (player.level < 20) damageB += 50 + (player.level - 10) * 2;
@@ -5972,6 +5988,7 @@ public class Combat extends BaseContent {
                                 else lustdamage += 80;
                                 if (player.hasPerk(PerkLib.RacialParagon)) lustdamage *= RacialParagonAbilityBoost();
                                 if (player.armor == armors.ELFDRES && player.isElf()) lustdamage *= 2;
+                                if (player.armor == armors.FMDRESS && player.isWoodElf()) lustdamage *= 2;
                                 lustdamage *= 0.14;
                                 lustdamage *= DBPaaa;
                                 monster.teased(Math.round(monster.lustVuln * lustdamage));
@@ -6007,6 +6024,7 @@ public class Combat extends BaseContent {
                                     var poisonScaling:Number = 1;
                                     var damage4Ba:Number = 1;
                                     if (player.armor == armors.ELFDRES && player.isElf()) damage4Ba *= 2;
+                                    if (player.armor == armors.FMDRESS && player.isWoodElf()) damage4Ba *= 2;
                                     if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) damage4B *= 2;
                                     poisonScaling += player.lib/100;
                                     poisonScaling += player.tou/100;
@@ -6034,6 +6052,7 @@ public class Combat extends BaseContent {
                                     var lustDmg:int = 6 * monster.lustVuln;
                                     if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) lustDmg *= 2;
                                     if (player.armor == armors.ELFDRES && player.isElf()) lustdamage *= 2;
+                                if (player.armor == armors.FMDRESS && player.isWoodElf()) lustdamage *= 2;
                                     monster.teased(lustDmg);
                                     if (monster.lustVuln > 0) {
                                         monster.lustVuln += 0.01;
@@ -6555,6 +6574,12 @@ public class Combat extends BaseContent {
     public function lustDamageCalc():Number {
         var damage:Number = (player.inte / 5 * spellMod() + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
         if (player.armor == armors.ELFDRES && player.isElf()) damage *= 2;
+        if (player.armor == armors.FMDRESS && player.isWoodElf()) damage *= 2;
+        if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50) {
+            outputText("\nYou use your own lust against the enemy, cooling off a bit in the process.");
+            player.takeLustDamage(Math.round(damage)/10, true);
+            damage *= 1.2;
+        }
         return monster.lustVuln * damage;
     }
 
@@ -6742,6 +6767,7 @@ public class Combat extends BaseContent {
                     if (player.hasPerk(PerkLib.ChiReflowLust)) damage *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
                     if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
                     if (player.armor == armors.ELFDRES && player.isElf()) damage *= 2;
+                    if (player.armor == armors.FMDRESS && player.isWoodElf()) damage *= 2;
                     damage = damage * 0.33 * monster.lustVuln;
                     damage = Math.round(damage);
                     monster.teased(damage,false);
@@ -6905,6 +6931,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= RacialParagonAbilityBoost();
         if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmgF *= 1.50;
         if (player.armor == armors.ELFDRES && player.isElf()) lustDmgF *= 2;
+        if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmgF *= 2;
         lustDmgF = lustDmgF * monster.lustVuln;
         lustDmgF = Math.round(lustDmgF);
         monster.teased(lustDmgF, false);
@@ -6993,6 +7020,7 @@ public class Combat extends BaseContent {
             outputText("\n[monster he] seems to be affected by the poison, showing increasing sign of arousal.");
             var Ldamage:Number = 8 + rand(3);
             if (player.armor == armors.ELFDRES && player.isElf()) Ldamage *= 2;
+            if (player.armor == armors.FMDRESS && player.isWoodElf()) Ldamage *= 2;
             monster.teased(Math.round(monster.lustVuln * Ldamage));
             monster.statStore.addBuffObject({tou:-1}, "Poison",{text:"Poison"});
             if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
@@ -8826,6 +8854,7 @@ public class Combat extends BaseContent {
             if (player.perkv1(IMutationsLib.EclipticMindIM) >= 2 && monster.cor < (player.cor / 2)) lustDmg = Math.round(lustDmg * 2);
             else if (player.perkv1(IMutationsLib.EclipticMindIM) >= 3 && monster.cor < (player.cor / 2)) lustDmg = Math.round(lustDmg * 3);
             if (player.armor == armors.ELFDRES && player.isElf()) lustDmg *= 2;
+            if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg *= 2;
             if (lustDmg > (monster.maxLust()/10)) lustDmg = Math.round(monster.maxLust()/10);
             outputText("[Themonster] slowly succumbs to [monster his] basest desires as your aura of corruption seeps through [monster him].");
             if (monster.cor < 100) outputText("Your victims purity is slowly becoming increasingly eroded by your seeping corruption.");
@@ -8860,6 +8889,7 @@ public class Combat extends BaseContent {
                 lustDmgA *= 1.3;
             }
             if (player.armor == armors.ELFDRES && player.isElf()) lustDmgA *= 2;
+            if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmgA *= 2;
             if (player.hasPerk(PerkLib.ArouseTheAudience) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType))) monster.lust += monster.lustVuln * 1.2 * (2 + rand(4));
             if (monster.lust < (monster.maxLust() * 0.5)) outputText("[Themonster] breathes in your pollen but does not have any visible effects yet.");
             else if (monster.lust < (monster.maxLust() * 0.6)) {
@@ -8959,6 +8989,7 @@ public class Combat extends BaseContent {
             lustDmgF = lustDmgF * monster.lustVuln;
             if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= RacialParagonAbilityBoost();
             if (player.armor == armors.ELFDRES && player.isElf()) lustDmgF *= 2;
+            if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmgF *= 2;
             lustDmgF = lustDmgF/2;
             lustDmgF = Math.round(lustDmgF);
             outputText("Your opponent is struck by lightning as your lust storm rages on.")
@@ -9006,6 +9037,7 @@ public class Combat extends BaseContent {
             //Apply intensity multiplier
             LustDamage *= player.statusEffectv1(StatusEffects.Sing);
             if (player.armor == armors.ELFDRES && player.isElf()) LustDamage *= 2;
+            if (player.armor == armors.FMDRESS && player.isWoodElf()) LustDamage *= 2;
             //Resolve
             LustDamage = (LustDamage) * monster.lustVuln;
             LustDamage = Math.round(LustDamage);
@@ -10328,6 +10360,7 @@ public class Combat extends BaseContent {
 		if (player.hasPerk(PerkLib.RacialParagon)) damageAV *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damageAV *= 1.50;
         if (player.armor == armors.ELFDRES && player.isElf()) damageAV *= 2;
+        if (player.armor == armors.FMDRESS && player.isWoodElf()) damageAV *= 2;
 		damageAV = Math.round(damageAV*monster.lustVuln);
 		monster.teased(damageAV, false);
 		if (RandomCritAV) outputText(" Critical hit!");
@@ -12092,6 +12125,7 @@ public function calculateBasicTeaseDamage(BaseTeaseDamage:Number = 18):Number {
     }
     if (player.hasPerk(PerkLib.FlawlessBody)) damage += 20;
     damage += scalingBonusLibido() * 0.2;
+    if (player.hasPerk(PerkLib.GracefulBeauty)) damage += scalingBonusSpeed() * 0.1;
     if (player.hasPerk(PerkLib.JobSeducer)) damage += player.teaseLevel * 3;
     else damage += player.teaseLevel * 2;
     if (player.hasPerk(PerkLib.JobCourtesan) && monster.hasPerk(PerkLib.EnemyBossType)) damage *= 1.2;
@@ -12105,9 +12139,15 @@ public function calculateBasicTeaseDamage(BaseTeaseDamage:Number = 18):Number {
     if (player.armorName == "desert naga pink and black silk dress") damagemultiplier += 0.1;
     if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
     if (player.armor == armors.ELFDRES && player.isElf()) damagemultiplier += 2;
+    if (player.armor == armors.FMDRESS && player.isWoodElf()) damagemultiplier += 2;
     damage *= damagemultiplier;
     if (player.hasPerk(PerkLib.ChiReflowLust)) damage *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
     if (player.hasPerk(PerkLib.ArouseTheAudience) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType))) damage *= 1.5;
+    if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50) {
+        outputText("\nYou use your own lust against the enemy, cooling off a bit in the process.");
+        player.takeLustDamage(Math.round(damage)/10, true);
+        damage *= 1.2;
+    }
     damage = (damage * monster.lustVuln);
     if (SceneLib.urtaQuest.isUrta()) damage *= 2;
     damage = Math.round(damage);
@@ -12180,6 +12220,8 @@ public function StraddleTease():void {
     if (rand(100) < critChance) {
         Randomcrit = true;
         StraddleDamage *= 1.75;
+        if (monster.lustVuln != 0)
+            monster.lustVuln += 0.05;
     }
     StraddleDamage = (StraddleDamage) * monster.lustVuln;
     if (player.hasStatusEffect(StatusEffects.AlrauneEntangle)) StraddleDamage *= 2;
@@ -12783,9 +12825,12 @@ public function ScyllaTease():void {
             if (rand(100) < critChance) {
                 crit = true;
                 damage *= 1.75;
+                if (monster.lustVuln != 0)
+                    monster.lustVuln += 0.05;
             }
             if (player.hasPerk(PerkLib.KrakenBlackDress)) damage *= 2;
             if (player.armor == armors.ELFDRES && player.isElf()) damage *= 2;
+            if (player.armor == armors.FMDRESS && player.isWoodElf()) damage *= 2;
             monster.teased(Math.round(monster.lustVuln * damage));
             if (crit) outputText(" <b>Critical!</b>");
             teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
@@ -12975,8 +13020,11 @@ public function WebTease():void {
             if (rand(100) < critChance) {
                 crit = true;
                 damage *= 1.75;
+                if (monster.lustVuln != 0)
+                    monster.lustVuln += 0.05;
             }
             if (player.armor == armors.ELFDRES && player.isElf()) damage *= 2;
+            if (player.armor == armors.FMDRESS && player.isWoodElf()) damage *= 2;
             monster.teased(Math.round(monster.lustVuln * damage), false);
             outputText(" Your unwilling toy makes an involuntary moan letting you know that your touch hit the mark.");
             if (crit) outputText(" <b>Critical!</b>");
@@ -13110,6 +13158,8 @@ public function GooTease():void {
             if (player.hasPerk(PerkLib.UnbreakableBind)) damagemultiplier += 1;
             if (player.hasStatusEffect(StatusEffects.ControlFreak)) damagemultiplier += (2 - player.statusEffectv1(StatusEffects.ControlFreak));
             if (player.hasPerk(PerkLib.Sadomasochism)) damage *= player.sadomasochismBoost();
+            if (player.armor == armors.ELFDRES && player.isElf()) damage *= 2;
+            if (player.armor == armors.FMDRESS && player.isWoodElf()) damage *= 2;
             damage *= damagemultiplier;
             //Determine if critical tease!
             var crit:Boolean = false;
@@ -13122,8 +13172,9 @@ public function GooTease():void {
             if (rand(100) < critChance) {
                 crit = true;
                 damage *= 1.75;
+                if (monster.lustVuln != 0)
+                    monster.lustVuln += 0.05;
             }
-            if (player.armor == armors.ELFDRES && player.isElf()) damage *= 2;
             monster.teased(Math.round(monster.lustVuln * damage));
             if (crit) outputText(" <b>Critical!</b>");
             teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
@@ -13178,6 +13229,7 @@ public function spiderBiteAttack():void {
         lustDmg *= 1+(poisonScaling/10);
         poisonScaling *= dam4Baa;
         if (player.armor == armors.ELFDRES && player.isElf()) lustDmg *= 2;
+        if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg *= 2;
         monster.teased(Math.round(monster.lustVuln * lustDmg), true);
         monster.statStore.addBuffObject({tou:-poisonScaling}, "Poison",{text:"Poison"});
         if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
@@ -13266,6 +13318,7 @@ public function ManticoreFeed():void {
         if (player.perkv1(IMutationsLib.ManticoreMetabolismIM) >= 3) damagemultiplier *= 2;
         if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
         if (player.armor == armors.ELFDRES && player.isElf()) damage *= 2;
+        if (player.armor == armors.FMDRESS && player.isWoodElf()) damage *= 2;
         damage *= damagemultiplier;
         //Determine if critical tease!
         var crit:Boolean = false;
@@ -13278,6 +13331,8 @@ public function ManticoreFeed():void {
         if (rand(100) < critChance) {
             crit = true;
             damage *= 1.75;
+            if (monster.lustVuln != 0)
+                monster.lustVuln += 0.05;
         }
         monster.teased(Math.round(monster.lustVuln * damage), false);
         if (crit) outputText(" <b>Critical!</b>");
@@ -13374,6 +13429,7 @@ public function displacerFeedContinue():void {
         if (player.hasPerk(PerkLib.RacialParagon)) damagemultiplier *= RacialParagonAbilityBoost();
         if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
         if (player.armor == armors.ELFDRES && player.isElf()) damage *= 2;
+        if (player.armor == armors.FMDRESS && player.isWoodElf()) damage *= 2;
         damage *= damagemultiplier;
         //Determine if critical tease!
         var crit:Boolean = false;
@@ -13386,6 +13442,8 @@ public function displacerFeedContinue():void {
         if (rand(100) < critChance) {
             crit = true;
             damage *= 1.75;
+            if (monster.lustVuln != 0)
+                monster.lustVuln += 0.05;
         }
         monster.teased(Math.round(monster.lustVuln * damage), false);
         if (crit) outputText(" <b>Critical!</b>");
@@ -13482,6 +13540,7 @@ public function SlimeRapeFeed():void {
         if (player.hasPerk(PerkLib.RacialParagon)) damagemultiplier *= RacialParagonAbilityBoost();
         if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
         if (player.armor == armors.ELFDRES && player.isElf()) damage *= 2;
+        if (player.armor == armors.FMDRESS && player.isWoodElf()) damage *= 2;
         damage *= damagemultiplier;
         //Determine if critical tease!
         var crit:Boolean = false;
@@ -13494,6 +13553,8 @@ public function SlimeRapeFeed():void {
         if (rand(100) < critChance) {
             crit = true;
             damage *= 1.75;
+            if (monster.lustVuln != 0)
+                monster.lustVuln += 0.05;
         }
         monster.teased(Math.round(monster.lustVuln * damage), false);
         if (crit) outputText(" <b>Critical!</b>");
@@ -13558,6 +13619,7 @@ public function VampiricBite():void {
         if (player.perkv1(IMutationsLib.HollowFangsIM) == 4) lustDmg *= 2;
         if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= RacialParagonAbilityBoost();
         if (player.armor == armors.ELFDRES && player.isElf()) lustDmg *= 2;
+        if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg *= 2;
         lustDmg = Math.round(monster.lustVuln * lustDmg);
         outputText(" [monster he] can’t help but moan, aroused from the aphrodisiac in your saliva for ");
         monster.teased(lustDmg);
@@ -13748,6 +13810,7 @@ public function HypnosisMaintain():void {
     if (player.armorName == "desert naga pink and black silk dress") damagemultiplier += 0.1;
     if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
     if (player.armor == armors.ELFDRES && player.isElf()) damagemultiplier += 2;
+    if (player.armor == armors.FMDRESS && player.isWoodElf()) damagemultiplier += 2;
     var lustDmg:int = (10 + (player.lib * 0.1)) * monster.lustVuln;
     lustDmg *= damagemultiplier;
     lustDmg = Math.round(lustDmg);

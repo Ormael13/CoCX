@@ -69,7 +69,9 @@ public final class ArmorLib extends ItemConstants
 		public const DWARMOR:Armor = new Armor("DWArmor","D-wArmor","Drider-weave Armor","a Drider-weave Armor",20,34,2160,"This set of white armor shimmers in the light, rippling strands of silk pumping mana through them. The chestpiece is thick, padded with multiple layers of overlapping strands, and as you poke it, you can feel it’s been reinforced with many small pieces of metal, silk strands woven through holes in the steel.","Light");
 		public const DWSROBE:DriderWeaveSheerRobe = new DriderWeaveSheerRobe();
 		public const ELFDRES:Armor = new Armor("ElfDress","Elf Dress","Elven Villager Dress","an Elven Villager Dress",0,0,250,"This white dress with a green sash is typically worn by wood elves. It doesn't offer much protection but for some reason seems to greatly enhance one's natural charm. Just the act of showing it off seems to ease ones lust when wearing this surprisingly simple but lewd outfit.","Light")
-				.withBuffs({'teasedmg': 10}) as Armor;
+				.withBuffs({'teasedmg': 10})
+				.withTag(ItemTags.A_REVEALING)
+				.withTag(ItemTags.A_AGILE)  as Armor;
 		public const EHGARB_:Armor = new Armor("EH.Garb","E.Heretic‘s Garb","Ebonweave Heretic‘s Garb","an Ebonweave Heretic‘s Garb",0,20,1600,"This outfit is ebonweave, created using refined ebonbloom petals. The outfit consists of arrowproof clothes, covered by a mesh breastplate and leatherlike duster inscribed with glyphs of magic and warding.  A trilby adorned with a moon pin completes the look.","Light", true, true)
 				.withBuffs({
 					'spellcost': -0.20,
@@ -88,6 +90,11 @@ public final class ArmorLib extends ItemConstants
 				.withBuffs({'spellcost': -0.30}) as Armor;
 		public const FCLOTHS:Armor =  new Armor("FCloths","Fur Clothes","Fur Clothes","fur clothes",1,0,40,"Generic brown fur clothing that trolls wear. It’s made to be form fitting and suit anyone of reasonable size or shape.\n","Light", false, false)
 				.withBuffs({'teasedmg': 10}) as Armor;
+		public const FMDRESS:Armor = new Armor("FMageDress","Forest Mage Dress","Forest Mage Dress","a Forest Mage Dress",0,0,800,"The wearer of this dress desire and pleasure is no longer vexed by the limitations of mortal flesh allowing one to keep control over their lust long enough to claim victory by diluting their own lust within the ambiant natural world for a time. So long as a Green Magic spell was cast within the 5 previous rounds the user of this dress effectively is able to maintain their focus and mind entirely to the task at hand at the cost of potentialy turning into a lecherous sex maniac due to all the dilluted lust merging back with the user at the end of combat. There is a small chance for this to backfire instead causing the ambiant flora to turn on and rape the wearer of the dress.","Light")
+				.withBuffs({
+					'spellcost': -0.10,
+					'soulskillcost': -0.60
+				}) as Armor;	//Effect: Slutty Seduction 10, Wizard Endurance 60. Increase tease total damage by x 2 when worn by a wood elf. Inflicting Tease damage reduces the wielder's own lust by a small amount.
 		public const FQR:Armor = new Armor("F.Q.Regalia","F.Q.Regalia","Fairy Queen Regalia","a Fairy Queen Regalia",0,30,6000,"This long dress has full glove sleeves to match, and changes color depending on your mood. It is lighter than air and about almost as transparent. Modeled after its people carefree nature this dress barely conceal anything though it still hide your assets just enough that you don’t appear outright naked. It also magicaly enhances one's ability to evade and is especially useful when worn by someone trained in the art of misdirection or fey magic. It comes with an assorted Tiara and choker.","Light")
 				.withBuffs({
 					'spellcost': -0.60,

@@ -1074,7 +1074,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 						else damage1B += 80;
 						damage1B *= 0.2;
 						damage1B *= damage1Bc
-						if (player.armor == armors.ELFDRES && player.isElf()) damage1B *= 2;;
+						if (player.armor == armors.ELFDRES && player.isElf()) damage1B *= 2;
+						if (player.armor == armors.FMDRESS && player.isWoodElf()) damage1B *= 2;
 						monster.teased(monster.lustVuln * damage1B);
 						if (monster.hasStatusEffect(StatusEffects.NagaVenom))
 						{
@@ -1117,6 +1118,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 						lustdamage *= 0.14;
 						lustdamage *= damage1Bcbc;
 						if (player.armor == armors.ELFDRES && player.isElf()) lustdamage *= 2;
+						if (player.armor == armors.FMDRESS && player.isWoodElf()) lustdamage *= 2;
 						monster.teased(monster.lustVuln * lustdamage);
 						monster.statStore.addBuffObject({tou:-(damage1Bcbc*2)}, "Poison",{text:"Poison"});
 						if (monster.hasStatusEffect(StatusEffects.ManticoreVenom))
@@ -1155,6 +1157,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 							var damage1Bdcc:Number = 1;
 							if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) damage1Bdcc *= 2;
 							if (player.armor == armors.ELFDRES && player.isElf()) damage1Bdcc *= 2;
+							if (player.armor == armors.FMDRESS && player.isWoodElf()) damage1Bdcc *= 2;
 							poisonScaling += player.lib/100;
 							poisonScaling += player.tou/100;
 							if (player.level < 10) damage2B += 20 + (player.level * 3);
@@ -1183,6 +1186,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 							var lustDmg:int = 6 * monster.lustVuln;
 							if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) lustDmg *= 2;
 							if (player.armor == armors.ELFDRES && player.isElf()) lustDmg *= 2;
+							if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg *= 2;
 							lustDmg *= monster.lustVuln;
 							monster.teased(lustDmg);
 							if (monster.lustVuln > 0) {
@@ -1776,6 +1780,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			damage += player.level * 1.5;
 			damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 			if (player.armor == armors.ELFDRES && player.isElf()) damage *= 2;
+        	if (player.armor == armors.FMDRESS && player.isWoodElf()) damage *= 2;
 			monster.statStore.addBuffObject({spe:-damage/2}, "Poison",{text:"Poison"});
 			damage = monster.lustVuln * damage;
 			//Clean up down to 1 decimal point
@@ -1929,6 +1934,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (monster.lustVuln > 0) {
 			var lustDmg:Number = 2 + player.teaseLevel + rand(5);
 			if (player.armor == armors.ELFDRES && player.isElf()) lustDmg *= 2;
+			if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg *= 2;
 			monster.teased(Math.round(monster.lustVuln * lustDmg));
 		}
 		outputText("\n\n");
@@ -1962,6 +1968,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			var MilkLustDmg:Number = 0;
 			MilkLustDmg += combat.scalingBonusLibido() * 0.2;
 			if (player.armor == armors.ELFDRES && player.isElf()) MilkLustDmg *= 2;
+			if (player.armor == armors.FMDRESS && player.isWoodElf()) MilkLustDmg *= 2;
 			monster.teased(Math.round(monster.lustVuln * MilkLustDmg));
 		}
 		if (!monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
@@ -1994,6 +2001,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			var CumLustDmg:Number = 0;
 			CumLustDmg += combat.scalingBonusLibido() * 0.2;
 			if (player.armor == armors.ELFDRES && player.isElf()) CumLustDmg *= 2;
+			if (player.armor == armors.FMDRESS && player.isWoodElf()) CumLustDmg *= 2;
 			monster.teased(Math.round(monster.lustVuln * CumLustDmg));
 		}
 		if (!monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
@@ -2126,6 +2134,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.ChiReflowLust)) lustDmgF *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
 		if (player.hasPerk(PerkLib.ArouseTheAudience) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType))) lustDmgF *= 1.5;
 		if (player.armor == armors.ELFDRES && player.isElf()) lustDmgF *= 2;
+		if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmgF *= 2;
 		lustDmgF = lustDmgF * monster.lustVuln;
 		lustDmgF = Math.round(lustDmgF);
 		monster.teased(lustDmgF);
@@ -2921,6 +2930,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.ChiReflowLust)) lustDmgF *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
 			if (player.hasPerk(PerkLib.ArouseTheAudience) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType))) lustDmgF *= 1.5;
 			if (player.armor == armors.ELFDRES && player.isElf()) lustDmgF*= 2;
+			if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmgF *= 2;
 			lustDmgF = lustDmgF * monster.lustVuln;
 			lustDmgF = Math.round(lustDmgF);
 			monster.teased(lustDmgF,false);
@@ -3623,6 +3633,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmgF *= 1.50;
 			if (player.armor == armors.ELFDRES && player.isElf()) lustDmgF *= 2;
+			if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmgF *= 2;
 			lustDmgF *= 5;
 			lustDmgF = Math.round(lustDmgF);
 			monster.teased(lustDmgF);
@@ -3651,6 +3662,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.perkv1(IMutationsLib.MelkieLungIM) >= 2) lustDmg2 *= 1.3;
 			if (player.perkv1(IMutationsLib.MelkieLungIM) >= 3) lustDmg2 *= 1.4;
 			if (player.armor == armors.ELFDRES && player.isElf()) lustDmg2 *= 2;
+			if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg2 *= 2;
 			lustDmg2 = Math.round(lustDmg2);
 			monster.teased(lustDmg2);
 			player.addStatusValue(StatusEffects.ChanneledAttack, 1, 1);
@@ -3669,6 +3681,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.perkv1(IMutationsLib.MelkieLungIM) >= 2) lustDmg *= 1.3;
 			if (player.perkv1(IMutationsLib.MelkieLungIM) >= 3) lustDmg *= 1.4;
 			if (player.armor == armors.ELFDRES && player.isElf()) lustDmg *= 2;
+			if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg *= 2;
 			lustDmg = Math.round(lustDmg);
 			monster.teased(lustDmg);
 			player.createStatusEffect(StatusEffects.ChanneledAttack, 1, 0, 0, 0);
@@ -4182,6 +4195,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					if (player.hasPerk(PerkLib.RacialParagon)) lustDmg2 *= combat.RacialParagonAbilityBoost();
 					if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg2 *= 1.50;
 					if (player.armor == armors.ELFDRES && player.isElf()) lustDmg2 *= 2;
+					if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg2 *= 2;
 					lustDmg2 *= 0.2;
 					lustDmg2 *= d3Bdcc;
 					lustDmg2 *= 1+(poisonScaling/10);
@@ -4843,6 +4857,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 			if (player.armor == armors.ELFDRES && player.isElf()) damage *= 2;
+        	if (player.armor == armors.FMDRESS && player.isWoodElf()) damage *= 2;
 			damage *= dBd3c;
 			monster.teased(Math.round(monster.lustVuln * damage));
 		}
@@ -5097,6 +5112,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		if (player.armor == armors.ELFDRES && player.isElf()) damage *= 2;
+        if (player.armor == armors.FMDRESS && player.isWoodElf()) damage *= 2;
 		//Add status if not already drugged
 		if(!monster.hasStatusEffect(StatusEffects.LustStick)) monster.createStatusEffect(StatusEffects.LustStick,0,0,0,0);
 		//Else add bonus to round damage
@@ -5652,6 +5668,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					damage1Ba *= 2;
 				}
 				if (player.armor == armors.ELFDRES && player.isElf()) damage1B *= 2;
+				if (player.armor == armors.FMDRESS && player.isWoodElf()) damage1B *= 2;
 				monster.teased(damage1B*Omnishot);
 				if (monster.hasStatusEffect(StatusEffects.BeeVenom)) {
 					monster.addStatusValue(StatusEffects.BeeVenom, 3, damage1Ba*Omnishot);
@@ -5694,6 +5711,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					DBPaa *= 2;
 				}
 				if (player.armor == armors.ELFDRES && player.isElf()) lustdamage *= 2;
+				if (player.armor == armors.FMDRESS && player.isWoodElf()) lustdamage *= 2;
 				monster.teased(lustdamage*Omnishot, false);
 				if (player.hasPerk(PerkLib.ToxineMaster)) DBPaa += 2.5;
 				monster.statStore.addBuffObject({tou:-(DBPaa*2*Omnishot)}, "Poison",{text:"Poison"});
@@ -5741,6 +5759,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 						damage2Ba *= 2;
 					}
 					if (player.armor == armors.ELFDRES && player.isElf()) damage2B *= 2;
+					if (player.armor == armors.FMDRESS && player.isWoodElf()) damage2B *= 2;
 					monster.teased(damage2B*Omnishot);
 					if (player.hasPerk(PerkLib.ToxineMaster)) poisonScaling += 5;
 					monster.statStore.addBuffObject({tou:-poisonScaling*Omnishot}, "Poison",{text:"Poison"});
@@ -5759,6 +5778,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					var lustDmg:int = 6 * monster.lustVuln;
 					if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) lustDmg *= 2;
 					if (player.armor == armors.ELFDRES && player.isElf()) lustDmg *= 2;
+					if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg *= 2;
 					monster.teased(lustDmg*Omnishot);
 					if (monster.lustVuln > 0) {
 						monster.lustVuln += 0.01;
@@ -6159,6 +6179,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (crit) outputText("<b>*Critical Hit!*</b> ");
 		var lustDmg:Number = (player.inte / 5 * spellModBlack() + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
 		if (player.armor == armors.ELFDRES && player.isElf()) lustDmg *= 2;
+		if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg *= 2;
 		//Determine if critical tease!
 		var crit1:Boolean = false;
 		var critChance1:int = 5;

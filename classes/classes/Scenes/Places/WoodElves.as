@@ -1426,27 +1426,21 @@ package classes.Scenes.Places{
 			player.trainStat("lib", 4, 300);
 
 			if (!player.hasPerk(PerkLib.FueledByDesire) && player.lib >= 150) {
-				player.createPerk(PerkLib.FueledByDesire,0,0,0,0);	//TODO perk effects
+				player.createPerk(PerkLib.FueledByDesire,0,0,0,0);
 				outputText("\n\nBetter refining of your charms allowed you to learn a new technique. <b>Gained Perk: Fueled by Desire</b>");
 			}
 
 			if (player.hasPerk(PerkLib.FueledByDesire) && !player.hasPerk(PerkLib.GracefulBeauty) && player.lib >= 200) {
-				player.createPerk(PerkLib.GracefulBeauty,0,0,0,0);	//TODO perk effects
+				player.createPerk(PerkLib.GracefulBeauty,0,0,0,0);
 				outputText("\n\nBetter refining of your charms allowed you to learn a new technique. <b>Gained Perk: Graceful Beauty</b>");
 			}
 
 			if (player.hasPerk(PerkLib.GracefulBeauty) && !player.hasPerk(PerkLib.SweepDefenses) && player.lib >= 200) {
-				player.createPerk(PerkLib.SweepDefenses,0,0,0,0);	//TODO perk effects
+				player.createPerk(PerkLib.SweepDefenses,0,0,0,0);
 				outputText("\n\nBetter refining of your charms allowed you to learn a new technique. <b>Gained Perk: Sweep Defenses</b>");
 			}
 
-			//New armor: Elven Villager Dress	DONE
-			//Type: Light
-			//Armor: 0
-			//Effect: Slutty seduction 10, Increase tease total damage by x 2 when worn by an elf. Inflicting Tease damage reduces the wielder's own lust by a small amount
-			//Description: This white dress with a green sash is typically worn by wood elves. It doesn't offer much protection but for some reason seems to greatly enhance one's natural charm. Just the act of showing off seems to ease one lust when wearing this surprisingly simple but lewd outfit.
-
-			//New Legendary Armor: Forest Mage Dress	//TODO
+			//New Legendary Armor: Forest Mage Dress	//TODO special effect with green magic, other effects complete
 			//Type: Light
 			//Armor: 0
 			//Effect: Slutty Seduction 10, Wizard Endurance 60. Increase tease total damage by x 2 when worn by a wood elf. Inflicting Tease damage reduces the wielder's own lust by a small amount.

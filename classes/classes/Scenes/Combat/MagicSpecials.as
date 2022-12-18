@@ -1145,6 +1145,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.perkv1(IMutationsLib.MelkieLungIM) >= 2) lustDmgF *= 1.3;
 			if (player.perkv1(IMutationsLib.MelkieLungIM) >= 3) lustDmgF *= 1.4;
 			if (player.armor == armors.ELFDRES && player.isElf()) lustDmgF *= 2;
+			if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmgF *= 2;
 			lustDmgF = Math.round(lustDmgF);
 			monster.teased(lustDmgF);
 			if(!monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.Stunned,4,0,0,0);
@@ -1175,6 +1176,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.perkv1(IMutationsLib.MelkieLungIM) >= 2) lustDmg2 *= 1.3;
 			if (player.perkv1(IMutationsLib.MelkieLungIM) >= 3) lustDmg2 *= 1.4;
 			if (player.armor == armors.ELFDRES && player.isElf()) lustDmg2 *= 2;
+			if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg2 *= 2;
 			lustDmg2 = Math.round(lustDmg2);
 			monster.teased(lustDmg2);
 			player.addStatusValue(StatusEffects.ChanneledAttack, 1, 1);
@@ -1194,6 +1196,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.perkv1(IMutationsLib.MelkieLungIM) >= 2) lustDmg *= 1.3;
 			if (player.perkv1(IMutationsLib.MelkieLungIM) >= 3) lustDmg *= 1.4;
 			if (player.armor == armors.ELFDRES && player.isElf()) lustDmg *= 2;
+			if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg *= 2;
 			lustDmg = Math.round(lustDmg);
 			monster.teased(lustDmg);
 			player.createStatusEffect(StatusEffects.ChanneledAttack, 1, 0, 0, 0);
@@ -1815,6 +1818,7 @@ public class MagicSpecials extends BaseCombatContent {
 		var lustDmg:Number = player.lust / 10 + player.lib / 10;
 		if (player.hasPerk(PerkLib.EromancyExpert)) lustDmg *= 1.5;
 		if (player.armor == armors.ELFDRES && player.isElf()) lustDmg *= 2;
+		if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg *= 2;
 		if(monster.lustVuln == 0) {
 			outputText("It has no effect!  Your foe clearly does not experience lust in the same way as you.\n\n");
 			enemyAI();
@@ -2838,6 +2842,7 @@ public class MagicSpecials extends BaseCombatContent {
 					outputText("  Your foe cries out in surprise and then gives a sensual moan as the flames of your passion surround them and fill their body with unnatural lust.");
 					if (player.hasPerk(PerkLib.EromancyExpert)) damage *= 1.5;
 					if (player.armor == armors.ELFDRES && player.isElf()) damage *= 2;
+        			if (player.armor == armors.FMDRESS && player.isWoodElf()) damage *= 2;
 					monster.teased(Math.round(monster.lustVuln * (damage / 6)));
 					outputText("\n");
 					if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
@@ -3329,6 +3334,7 @@ public class MagicSpecials extends BaseCombatContent {
 		outputText("You give [themonster] a belly dance show, moving your hip from a side to another and displaying your assets. [Themonster] is so distracted by your dancing it doesn’t realise the two of you are still in battle for a few seconds before snapping out only in time to realise [monster he] did absolutely nothing for the last six seconds. ");
 		var lustDmg:Number = (5 + rand(5));
 		if (player.armor == armors.ELFDRES && player.isElf()) lustDmg *= 2;
+		if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg *= 2;
 		lustDmg = Math.round(monster.lustVuln * lustDmg);
 		monster.teased(lustDmg);
 		outputText(" \n\n");
@@ -3572,6 +3578,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg *= 1.50;
 		if (player.armor == armors.ELFDRES && player.isElf()) lustDmg *= 2;
+		if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg *= 2;
 		lustDmg = Math.round(monster.lustVuln * lustDmg);
 		monster.teased(lustDmg);
 		outputText(" ");
@@ -3664,6 +3671,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg *= 1.50;
 		if (player.armor == armors.ELFDRES && player.isElf()) lustDmg *= 2;
+		if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg *= 2;
 		lustDmg = Math.round(monster.lustVuln * lustDmg);
 		monster.teased(lustDmg);
 		outputText(" ");
@@ -3764,6 +3772,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg *= 1.50;
 		if (player.armor == armors.ELFDRES && player.isElf()) lustDmg *= 2;
+		if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg *= 2;
 		lustDmg = Math.round(monster.lustVuln * lustDmg);
 		monster.teased(lustDmg);
 		outputText(" ");
@@ -3862,6 +3871,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg *= 1.50;
 		if (player.armor == armors.ELFDRES && player.isElf()) lustDmg *= 2;
+		if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg *= 2;
 		lustDmg = Math.round(monster.lustVuln * lustDmg);
 		monster.teased(lustDmg);
 		outputText(" ");
@@ -3961,6 +3971,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg *= 1.50;
 		if (player.armor == armors.ELFDRES && player.isElf()) lustDmg *= 2;
+		if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg *= 2;
 		lustDmg = Math.round(monster.lustVuln * lustDmg);
 		monster.teased(lustDmg);
 		outputText(" ");
@@ -4124,6 +4135,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg *= 1.50;
 		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono) || player.hasPerk(PerkLib.InariBlessedKimono)) lustDmg *= 2;
 		if (player.armor == armors.ELFDRES && player.isElf()) lustDmg *= 2;
+		if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg *= 2;
 		lustDmg *= 0.1;
 		lustDmg = Math.round(monster.lustVuln * lustDmg);
 		monster.teased(lustDmg);
@@ -4208,6 +4220,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.ElectrifiedDesire)) lustDmgF *= (1 + (player.lust100 * 0.01));
 		if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) lustDmgF *= (1 + combat.historyWhoreBonus());
 		if (player.armor == armors.ELFDRES && player.isElf()) lustDmgF *= 2;
+		if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmgF *= 2;
 		lustBoostToLustDmg += lustDmgF * 0.01;
 		lustDmgF *= 0.2;
 		if (player.lust100 * 0.01 >= 0.9) lustDmgF += (lustBoostToLustDmg * 140);
@@ -4230,6 +4243,11 @@ public class MagicSpecials extends BaseCombatContent {
 		lustDmgF = lustDmgF * monster.lustVuln;
 		if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmgF *= 1.50;
+		if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50) {
+			outputText("\nYou use your own lust against the enemy, cooling off a bit in the process.");
+			player.takeLustDamage(Math.round(lustDmgF)/10, true);
+			lustDmgF *= 1.2;
+		}
 		lustDmgF = Math.round(monster.lustVuln * lustDmgF);
 		monster.teased(lustDmgF);
 		if (critL) outputText(" <b>Critical!</b>");
@@ -4311,6 +4329,7 @@ public class MagicSpecials extends BaseCombatContent {
 				var lustDmg:Number = ((player.inte + (player.wis * 0.50)) / 5 * spellMod() + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
 				if (player.hasPerk(PerkLib.EromancyExpert)) lustDmg *= 1.5;
 				if (player.armor == armors.ELFDRES && player.isElf()) lustDmg *= 2;
+				if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg *= 2;
 				monster.teased(monster.lustVuln * lustDmg);
 				if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 			}
@@ -4558,10 +4577,16 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.perkv1(IMutationsLib.BlackHeartIM) >= 1) lustDmg += 5;
 		if (player.hasPerk(PerkLib.EromancyExpert)) lustDmg *= 1.5;
 		if (player.armor == armors.ELFDRES && player.isElf()) lustDmg *= 2;
+		if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg *= 2;
 		if(monster.lustVuln == 0) {
 			outputText("It has no effect!  Your foe clearly does not experience lust in the same way as you.\n\n");
 			enemyAI();
 			return;
+		}
+		if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50) {
+			outputText("\nYou use your own lust against the enemy, cooling off a bit in the process.");
+			player.takeLustDamage(Math.round(lustDmg)/10, true);
+			lustDmg *= 1.2;
 		}
 		if(monster.lust < (monster.maxLust() * 0.3)) outputText("[Themonster] squirms as the magic affects [monster him].  ");
 		if(monster.lust >= (monster.maxLust() * 0.3) && monster.lust < (monster.maxLust() * 0.6)) {
@@ -4624,6 +4649,12 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg *= 1.50;
 		if(player.armorName == "Scandalous Succubus Clothing") lustDmg *= 1.25;
 		if (player.armor == armors.ELFDRES && player.isElf()) lustDmg *= 2;
+		if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg *= 2;
+		if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50) {
+			outputText("\nYou use your own lust against the enemy, cooling off a bit in the process.");
+			player.takeLustDamage(Math.round(lustDmg)/10, true);
+			lustDmg *= 1.2;
+		}
 		monster.teased(Math.round(monster.lustVuln * lustDmg));
 		outputText("\n\n");
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
@@ -4745,9 +4776,15 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 			if (player.hasPerk(PerkLib.EromancyExpert)) damage *= 1.5;
 			if (player.armor == armors.ELFDRES && player.isElf()) damage *= 2;
+        if (player.armor == armors.FMDRESS && player.isWoodElf()) damage *= 2;
 			if (player.isRaceCached(Races.POLTERGEIST,3)) {
 				damage += Math.round(player.lust * 0.1);
 				player.lust -= Math.round(player.lust * 0.1);
+			}
+			if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50) {
+				outputText("\nYou use your own lust against the enemy, cooling off a bit in the process.");
+				player.takeLustDamage(Math.round(damage)/10, true);
+				damage *= 1.2;
 			}
 			monster.teased(Math.round(monster.lustVuln * damage));
 			outputText("\n\n");
@@ -5120,6 +5157,7 @@ public class MagicSpecials extends BaseCombatContent {
 				outputText("[Themonster]  is magically aroused by the eyebeam. ");
 				var lustDmg:Number = player.lib / 10;
 				if (player.armor == armors.ELFDRES && player.isElf()) lustDmg *= 2;
+				if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg *= 2;
 				monster.teased(Math.round(monster.lustVuln * lustDmg));
 				break;
 			case 6:
@@ -5816,6 +5854,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 9) lustdamage += 1 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 8);
 		if (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) >= 21) lustdamage += 1 * (player.statusEffectv2(StatusEffects.SummonedElementalsPoison) - 20);
 		if (player.armor == armors.ELFDRES && player.isElf()) lustdamage *= 2;
+        if (player.armor == armors.FMDRESS && player.isWoodElf()) lustdamage *= 2;
 		monster.teased(Math.round(monster.lustVuln * lustdamage));
 		outputText("\n\n");
 		//checkMinionsAchievementDamage(damage);

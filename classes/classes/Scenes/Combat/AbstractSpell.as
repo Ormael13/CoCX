@@ -211,6 +211,7 @@ public class AbstractSpell extends CombatAbility {
 			lustDmg *= corruptMagicPerkFactor(monster);
 		}
 		if (player.armor == armors.ELFDRES && player.isElf()) lustDmg *= 2;
+		if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg *= 2;
 		return Math.round(lustDmg);
 	}
 	
