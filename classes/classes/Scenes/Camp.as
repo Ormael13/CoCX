@@ -39,6 +39,7 @@ public class Camp extends NPCAwareContent{
 	}
 
 	public var saveUpdater:SaveUpdater = new SaveUpdater();
+	public static var harvestMoonScenes:HarvestMoonScenes = new HarvestMoonScenes();
 
 	public var cabinProgress:CabinProgress = new CabinProgress();
 	public var campUpgrades:CampUpgrades = new CampUpgrades();
