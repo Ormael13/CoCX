@@ -415,6 +415,7 @@ public class HornsTransformations extends MutationsHelper {
 
 				player.horns.count = 2;
 				player.horns.type = Horns.ORCHID;
+				player.featherColor = randomChoice("snow white","pink","red","blue","purple","peach");
 				if (doOutput) outputText(desc);
 			},
 			// is present

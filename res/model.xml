@@ -679,6 +679,7 @@
         <cell rect="1927,158,40,55" name="clothe/elfClothingSkirt" dx="84" dy="87"/>
 		<cell rect="1427,325,80,108" name="clothe/darkPriest" dx="63" dy="64"/>
 		<cell rect="1427,434,80,108" name="clothe/priest" dx="63" dy="64"/>
+		<cell rect="1427,543,80,108" name="clothe/elfVillager" dx="63" dy="64"/>
         <cell rect="672,445,45,80" name="clotheLegs/comfortableClothes" dx="79" dy="90"/>
         <cell rect="751,158,40,54" name="clotheLegs/whiteKimonoBottom" dx="85" dy="121"/>
         <cell rect="919,158,40,54" name="clotheLegs/blackKimonoBottom" dx="85" dy="121"/>
@@ -795,6 +796,8 @@
         <cell rect="441,1430,40,50" name="hair_bg/liliraune" dx="42" dy="22"/>
         <cell rect="396,1490,60,90" name="hair_bg/lilirauneLong" dx="22" dy="21"/>
         <cell rect="486,1550,25,22" name="ears/liliraune" dx="39" dy="44"/>
+		<cell rect="610,1550,25,22" name="eyes/liliraune" dx="52" dy="43"/>
+		<cell rect="641,1550,25,22" name="eyes/lilirauneCorrupt" dx="52" dy="43"/>
         <cell rect="486,1490,55,58" name="horns/LilirauneOrchid" dx="33" dy="12"/>
         <cell rect="486,1430,55,58" name="horns_bg/LilirauneOrchid" dx="33" dy="9"/>
         <cell rect="296,1430,49,29" name="breasts/0liliraune" dx="43" dy="68"/>
@@ -900,6 +903,7 @@
         <cell rect="361,136,59,65" name="hairLeft/sylph" dx="54" dy="26"/>
         <cell rect="421,136,59,65" name="hairRight/sylph" dx="98" dy="26"/>
 		<cell rect="721,136,59,65" name="hair/cow" dx="75" dy="21"/>
+		<cell rect="1081,350,87,98" name="hairRight/ribbon" dx="59" dy="3"/>
         <cell rect="1,449,28,30" name="hair/hairHood" dx="91" dy="39"/>
         <cell rect="1,482,28,30" name="hair/hairHoodFire" dx="91" dy="39"/>
     </spritemap>
@@ -1303,6 +1307,9 @@
 		<cell rect="1261,410,49,29" name="bra_fg/priestBraSmall" dx="79" dy="68"/>
         <cell rect="1261,440,49,29" name="bra_fg/priestBraMedium" dx="79" dy="68"/>
         <cell rect="1261,470,49,29" name="bra_fg/priestBraLarge" dx="79" dy="68"/>
+		<cell rect="1311,410,49,29" name="bra_fg/elfDressBraSmall" dx="79" dy="68"/>
+        <cell rect="1311,440,49,29" name="bra_fg/elfDressBraMedium" dx="79" dy="68"/>
+        <cell rect="1311,470,49,29" name="bra_fg/elfDressBraLarge" dx="79" dy="68"/>
         <cell rect="11,410,49,29" name="bra/goblinTechnomancerBraSmall" dx="79" dy="68"/>
         <cell rect="11,440,49,29" name="bra/goblinTechnomancerBraMedium" dx="79" dy="68"/>
         <cell rect="11,470,49,29" name="bra/goblinTechnomancerBraLarge" dx="79" dy="68"/>
@@ -2591,6 +2598,13 @@
                             <hide part="hair_bg/hellcat"/>
                         </if>
                     </case>
+					<case values="Hair.TWINRIBBON">
+						<show part="hairRight/ribbon"/>
+						<if test="hairType == Hair.STORM or hairType == Hair.BURNING">
+                            <hide part="hair_bg/raiju3"/>
+                            <hide part="hair_bg/hellcat"/>
+                        </if>
+                    </case>
                     <default>
                         <if test="hairType != Hair.MINDBREAKERMALE and hairType != Hair.MINDBREAKER and hairType != Hair.STORM and hairType != Hair.BURNING and hairType != Hair.QUILL and hairType != Hair.FEATHER and hairType != Hair.CRAZY and hairType != Hair.RATATOSKR and hairType != Hair.COW and hairType != Hair.PRISMATIC">
                             <switch>
@@ -2710,7 +2724,7 @@
 			<switch value="eyes.type">
 				<case values="Eyes.HUMAN">
 					<hide part="eyes/*"/>
-				<show part="eyes/centipede"/>
+					<show part="eyes/centipede"/>
 				</case>
 				<case values="Eyes.RAIJU,Eyes.MANTICORE,Eyes.FOX,Eyes,Eyes.CAT,Eyes.LIZARD,Eyes.SNAKE,Eyes.GORGON,Eyes.DRACONIC,Eyes.ONI,Eyes.ELF,Eyes.VAMPIRE,Eyes.WEASEL,Eyes.FIENDISH">
 					<hide part="eyes/*"/>
@@ -2738,11 +2752,6 @@
 				<if test="cor &gt;=100">
 					<hide part="face/*"/>
 					<show part="face/fairySmile"/>
-				</if>
-				<if test="cor &gt;=100 and lowerBody == LowerBody.FLOWER_LILIRAUNE">
-					<hide part="face/*"/>
-					<show part="face/lilirauneCorruptedSmile"/>
-					<show part="forehead/lilirauneCorruptedShadow"/>
 				</if>
 				<if test="skin.base.type == Skin.GOO">
 					<hide part="face/*"/>
@@ -2805,7 +2814,7 @@
                 <show part="face/orca"/>
             </case>
 			<case values="Face.CHESHIRE,Face.CHESHIRE_SMILE">
-                <show part="face/cheshire"/>
+                <show part="face/fairySmile"/>
             </case>
 			<case values="Face.PANDA">
                 <show part="face/panda"/>
@@ -3732,14 +3741,22 @@
 				<show part="legs_fg/liliraune"/>
                 <show part="legs_bg/liliraune"/>
 				<show part="torso/liliraune"/>
-				<show part="face/liliraune"/>
 				<show part="arms/liliraune"/>
 				<show part="arms_bg/liliraune"/>
-
+				<show part="face/liliraune"/>
 				<show part="ears/liliraune"/>
 				<show part="horns/LilirauneOrchid"/>
 				<show part="horns_bg/LilirauneOrchid"/>
 				<show part="uniquePlantBath/lilirauneBath"/>
+				<hide part="face/*"/>
+				<show part="face/lilirauneCorruptedSmile"/>
+				<if test="cor &gt;=100 and lowerBody == LowerBody.FLOWER_LILIRAUNE">
+					<show part="eyes/lilirauneCorrupt"/>
+					<show part="forehead/lilirauneCorruptedShadow"/>
+					<else>
+						<show part="eyes/liliraune"/>
+					</else>
+				</if>
 
 				<!-- HAIR AREA -->
                 <if test="hairLength lt 16">
@@ -6022,6 +6039,34 @@
 							<show part="clotheLegs/elfClothinglegs"/>
 						</else>
 					</if>
+				</if>
+			</if>
+		</if>
+		
+		<if test="elfVillagerDress">
+			<if test="showClothing">
+				<show part="clothe/elfVillager"/>
+				<if test="breastRows.length gt 0">
+					<switch>
+						<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+							<show part="bra_fg/ElfDressBraSmall"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+							<show part="bra_fg/ElfDressBraSmall"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+							<show part="bra_fg/ElfDressBraMedium"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+							<show part="bra_fg/ElfDressBraMedium"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+							<show part="bra_fg/ElfDressBraLarge"/>
+						</case>
+						<default>
+							<show part="bra_fg/ElfDressBraLarge"/>
+						</default>
+					</switch>
 				</if>
 			</if>
 		</if>

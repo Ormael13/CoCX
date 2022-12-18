@@ -10256,7 +10256,7 @@ public final class Mutations extends MutationsHelper {
                     "Satisfied with the rules, the two of you do a high-five and head back to camp ready to tag-team your adventure. <b>You are now two but one, one but two. You have become a Liliraune.</b>");
             player.createPerk(PerkLib.DualMind, 0, 0, 0, 0);
             player.hairColor = "light purple";
-            player.coatColor = "snow white";
+            player.featherColor = "snow white";
             player.lowerBody = LowerBody.FLOWER_LILIRAUNE;
             player.refillHunger(20);
         } else {
@@ -16233,4 +16233,4 @@ public final class Mutations extends MutationsHelper {
 		player.herbXP(HE);
     }
 }
-}
+}

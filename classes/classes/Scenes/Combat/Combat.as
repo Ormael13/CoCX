@@ -1,4 +1,4 @@
-package classes.Scenes.Combat {
+﻿package classes.Scenes.Combat {
 import classes.BaseContent;
 import classes.BodyParts.*;
 import classes.CoC;
@@ -15622,5 +15622,4 @@ private function touSpeStrScale(stat:int):Number {
         return damage;
     }
 }
-}
-
+}
