@@ -98,7 +98,7 @@ public class TestMenu extends BaseContent
 		
 	private function cheatTesting():void {
 		clearOutput();
-		outputText("Cheats made specifically for the testing needs. Use only if you're sure what you're doing - outdated test-cheats maay break something and nobody will look into such bugs.");
+		outputText("Cheats made specifically for the testing needs. Use only if you're sure what you're doing - outdated test-cheats may break something and nobody will look into such bugs.");
 		var bd:ButtonDataList = new ButtonDataList();
 		bd.add("LilyTest", lilytest, "Lily Trigger").disableIf(!LilyFollower.LilyFollowerState);
 		bd.add("NY(S/NS)MA-D", anTrigger, "Now you see or not see me.\n\n<i><b>(Anty-Dexterity)</b></i>");
@@ -109,6 +109,7 @@ public class TestMenu extends BaseContent
 		bd.add("Gargoyle", GargoyleMenu, "To Be or Not To Be Gargoyle that is a question.");
 		bd.add("BelisaTest", belisatest3, "Belisa Trigger").disableIf(BelisaFollower.BelisaInGame && BelisaFollower.BelisaFollowerStage < 3);
 		bd.add("Test dynamic stat", TestDynamicStats, "Test Dynamic stats.");
+		bd.add("Kiha Wedding", kihaWedding, "Test Kiha Wedding Content before D4 completed");
 		submenu(bd, SoulforceCheats, 0, false);
 	}
 
@@ -283,6 +284,9 @@ public class TestMenu extends BaseContent
 	public function belisatest3():void {
 		if (BelisaFollower.BelisaEncounternum >= 1) SceneLib.belisa.subsequentEncounters();
 		else SceneLib.belisa.firstEncounter();
+	}
+	public function kihaWedding():void {
+		SceneLib.kihaFollower.KihaProposal();
 	}
     public function cheatFixShards():void { //wrapper for fixShards to use it in cheat menu
 		clearOutput();
@@ -595,6 +599,7 @@ public class TestMenu extends BaseContent
 		outputText("\n\nA11 th4t H1dd3n Prestige is Y0urs to T4ke!!!");
 		if (!player.hasPerk(PerkLib.PrestigeJobArcaneArcher)) player.createPerk(PerkLib.PrestigeJobArcaneArcher, 0, 0, 0, 0);
 		if (!player.hasPerk(PerkLib.PrestigeJobArchpriest)) player.createPerk(PerkLib.PrestigeJobArchpriest, 0, 0, 0, 0);
+		if (!player.hasPerk(PerkLib.PrestigeJobBard)) player.createPerk(PerkLib.PrestigeJobBard, 0, 0, 0, 0);
 		if (!player.hasPerk(PerkLib.PrestigeJobBerserker)) player.createPerk(PerkLib.PrestigeJobBerserker, 0, 0, 0, 0);
 		if (!player.hasPerk(PerkLib.PrestigeJobDruid)) player.createPerk(PerkLib.PrestigeJobDruid, 0, 0, 0, 0);
 		if (!player.hasPerk(PerkLib.PrestigeJobNecromancer)) player.createPerk(PerkLib.PrestigeJobNecromancer, 0, 0, 0, 0);
@@ -606,6 +611,7 @@ public class TestMenu extends BaseContent
 		if (!player.hasPerk(PerkLib.PrestigeJobWarlock)) player.createPerk(PerkLib.PrestigeJobWarlock, 0, 0, 0, 0);
 		if (!player.hasPerk(PerkLib.HiddenJobAsura)) player.createPerk(PerkLib.HiddenJobAsura, 0, 0, 0, 0);
 		if (!player.hasPerk(PerkLib.HiddenJobBloodDemon)) player.createPerk(PerkLib.HiddenJobBloodDemon, 0, 0, 0, 0);
+		if (!player.hasPerk(PerkLib.PrestigeJobGreySage)) player.createPerk(PerkLib.PrestigeJobGreySage, 0, 0, 0, 0);
 		doNext(SoulforceCheats);
 	}
 	public function learnHexes():void {

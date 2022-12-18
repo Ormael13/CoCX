@@ -307,8 +307,8 @@ public class Changelog extends BaseContent
 			outputText("-Metamorph: Add horn count/length for dragon and demon horns, Add Non-fuckable nipples option, Kamaitachi (weasel) skin pattern, tail; Fey Dragon Arms, lower body, wings, tail; Ghost skin, skin pattern, hair, horns; Panda, Fire snail face; Antler horns (EragonX)\n");
 			outputText("-Divine armament affects partial staffs too without dismished effect.\n");
 			outputText("-Rathazul crafting menu bit reorganized with few option getting greyed out buittons tleling what PC is missing. Arian menu for scales coloring changed to be bit more clear.\n");
-			outputText("-New event perk: Survival Training (Rank: 1). Gained by spending 1 super perk point. Effects: You have trained to better survive this realm hostile environment. (+1% to MaxOver HP, MaxOver Lust and Diehard each 3 lvl's up to +10%)\n");
-			outputText("-\n");
+			outputText("-New event perk(s): Survival Training (Rank: 1-2). Gained by spending 1 super perk point. Effects: You have trained to better survive this realm hostile environment. (+1% to MaxOver HP, MaxOver Lust and Diehard each 3 lvl's up to +(10 * rank)%)\n");
+			outputText("-Blood Demon hidden job perks after 1st got slight change to spellpower/soulpower bonus for blood spells/soulskills. Each next perk add 5% more so 2nd add 15%, 3rd 20% and so on.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -335,7 +335,7 @@ public class Changelog extends BaseContent
 			//outputText("-(Svalkash)\n");
 			outputText("-Fixed Bugs: Akbal been weak to fire not ice, Insightful Resources I-VI perks bonus to SF been lower than 5 per wis point, recovery of fatigue when waiting been lower than when attacking, Dao of Elements not giving additional % resistances after first 10%, missing bonus to acid elemental arrows, Holy Bands Managment locked behind having 3rd one band, ");
 			outputText("Centaur race bonuses error fixed to orginal values, Aether Twins following PC throu ascension in case they been equipped, Lusty Maiden Armor treated as already legendary item, wrong labeled gorgon eyes on race page, Jiaghsi curing leaving leftover effects of Cursed Tag options, tier 3 spells have incrrectly calculated cooldowns, Wood Elf archer training bugs, ");
-			outputText("Fera Boon - Wide Open perk not been permable on ascension, Bone Soul perk not increasing cap on stored demon bones, Traveling Merchant Outfit & Greedy effects allowing to get more than 100% of item worth during selling it\n");
+			outputText("Fera Boon - Wide Open perk not been permable on ascension, Bone Soul perk not increasing cap on stored demon bones, Traveling Merchant Outfit & Greedy effects allowing to get more than 100% of item worth during selling it, Metamorph accesable from camp menu if not yet started on Soul Cultivator path for perm tf'd PC\n");
 			//0.8s5.178
 			outputText("-Fixed bicorn horn score (aimozg)\n");
 			outputText("-Kirin, Fey-Draconic leg/armtype (respectively) added to DraconicBones Valid racetypes. -Fixed HxD merchants checking wrong currency for purchases (Jtecx PR#289)\n");

@@ -590,7 +590,9 @@ public function etnaCampMenu():void
 		else addButtonDisabled(5, "Team", "You already have other henchman accompany you. Ask him/her to stay at camp before you talk with Etna about accompaning you.");
 	}
 	else addButtonDisabled(5, "Team", "You need to have at least Basic Leadership to form a team.");
-	if (flags[kFLAGS.MICHIKO_TALK_MARRIAGE] == 1 && flags[kFLAGS.ETNA_FOLLOWER] < 3 && (player.hasCock() || player.hasVagina())) addButton(6, "Marriage", etnaMarriage);
+	if (flags[kFLAGS.ETNA_FOLLOWER] < 3) addButton(6, "Marriage", etnaMarriage)
+		.disableIf(player.isGenderless(), "Come on, you're genderless!")
+		.disableIf(flags[kFLAGS.MICHIKO_TALK_MARRIAGE] == 0, "You don't even know if it's possible in Mareth. Try talking to random people in random river towns... maybe you'll find out?");
 	addButton(14, "Back", camp.campLoversMenu);
 }
 

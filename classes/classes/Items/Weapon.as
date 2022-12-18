@@ -128,7 +128,7 @@ public class Weapon extends Equipable
 			|| (game.player.shieldPerk == "Massive" && game.player.shield != ShieldLib.NOTHING && !game.player.hasPerk(PerkLib.GigantGrip))) {
 				SceneLib.inventory.unequipShield();
 			}*/
-			if (game.flags[kFLAGS.FERAL_COMBAT_MODE] == 1 ) game.flags[kFLAGS.FERAL_COMBAT_MODE] = 0;
+			if (game.flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && !game.player.isFeralCombat()) game.flags[kFLAGS.FERAL_COMBAT_MODE] = 0;
 			
 			return super.beforeEquip(doOutput);
 		}

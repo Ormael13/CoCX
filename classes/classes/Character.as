@@ -794,9 +794,9 @@ import classes.Scenes.NPCs.Forgefather;
 			if (hasPerk(PerkLib.PrestigeJobGreySage)) max2 += 0.1;
 			if (hasPerk(PerkLib.Equilibrium)) max2 += 0.1;
 			if (hasPerk(PerkLib.MunchkinAtWork)) max2 += 0.1;
-			max1 *= max2;//~120%
+			max1 *= max2;//~130%
 			max1 = Math.round(max1);
-			if (max1 > 2999999) max1 = 2999999;
+			if (max1 > 3299999) max1 = 3299999;
 			return max1;
 		}
 

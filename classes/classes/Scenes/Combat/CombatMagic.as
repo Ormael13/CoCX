@@ -23,7 +23,7 @@ public class CombatMagic extends BaseCombatContent {
 
 	internal function applyAutocast():void {
 		outputText("\n\n");
-		if (!player.hasPerk(PerkLib.HexKnowledge)) {
+		if (!player.hasPerk(PerkLib.HexKnowledge) && !player.hasPerk(PerkLib.HyperCasting)) {
 			if (player.hasPerk(PerkLib.Spellsword) && CombatAbilities.ChargeWeapon.isKnownAndUsable && flags[kFLAGS.AUTO_CAST_CHARGE_WEAPON_DISABLED] == 0) {
 				CombatAbilities.ChargeWeapon.autocast();
 			}
@@ -31,7 +31,7 @@ public class CombatMagic extends BaseCombatContent {
 				CombatAbilities.ChargeArmor.autocast();
 			}
 		}
-		if (!player.hasPerk(PerkLib.DivineKnowledge)) {
+		if (!player.hasPerk(PerkLib.DivineKnowledge) && !player.hasPerk(PerkLib.HyperCasting)) {
 			if (player.hasPerk(PerkLib.Battlemage) && CombatAbilities.Might.isKnownAndUsable && flags[kFLAGS.AUTO_CAST_MIGHT_DISABLED] == 0) {
 				CombatAbilities.Might.autocast();
 			}
@@ -51,7 +51,6 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.CounterEclipsingShadow)) player.removeStatusEffect(StatusEffects.CounterEclipsingShadow);
 	}
 
-
 	internal function costChange_all():Number {
 		var costPercent:Number = 0;
 		costPercent += 100*player.spellcostStat.value;
@@ -64,7 +63,6 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.WarMageMaster)) costPercent -= 20;
 		if (player.headjewelryName == "fox hairpin") costPercent -= 20;
         if (player.weapon == weapons.N_STAFF) costPercent += 200;
-		if (player.weapon == weapons.U_STAFF) costPercent -= 50;
 		if (player.weapon == weapons.U_STAFF) costPercent -= 50;
         return costPercent;
     }
@@ -134,18 +132,6 @@ public class CombatMagic extends BaseCombatContent {
 		return mod;
 	}
 
-	internal function healCostImpl(mod:Number):Number {
-		var costPercent:Number = 100 + costChange_all() + costChange_heal();
-		//Addiditive mods
-		if (player.weapon == weapons.ASCENSU) costPercent -= 15;
-		if (healModImpl() > 1) costPercent += Math.round(healModImpl() - 1) * 10;
-		if (player.hasPerk(PerkLib.AscensionMysticality)) costPercent -= (player.perkv1(PerkLib.AscensionMysticality) * 2);
-		mod *= costPercent / 100;
-		if (mod < 5) mod = 5;
-		mod = Math.round(mod * 100) / 100;
-		return mod;
-	}
-
     internal function costChange_white():Number {
 		var costPercent:Number = 0;
         if (player.hasPerk(PerkLib.Ambition)) costPercent -= (100 * player.perkv2(PerkLib.Ambition));
@@ -163,17 +149,6 @@ public class CombatMagic extends BaseCombatContent {
 		mod *= costPercent / 100;
 		if (player.hasPerk(PerkLib.BloodMage) && mod < 5) mod = 5;
 		else if (mod < 2) mod = 2;
-		mod = Math.round(mod * 100) / 100;
-		return mod;
-	}
-
-	internal function healCostWhiteImpl(mod:Number):Number {
-		var costPercent:Number = 100 + costChange_all() + costChange_heal() + costChange_white();
-		//Addiditive mods
-		if (healModWhiteImpl() > 1) costPercent += Math.round(healModWhiteImpl() - 1) * 10;
-		if (player.hasPerk(PerkLib.AscensionMysticality)) costPercent -= (player.perkv1(PerkLib.AscensionMysticality) * 2);
-		mod *= costPercent / 100;
-		if (mod < 5) mod = 5;
 		mod = Math.round(mod * 100) / 100;
 		return mod;
 	}
@@ -196,17 +171,6 @@ public class CombatMagic extends BaseCombatContent {
 		mod *= costPercent / 100;
 		if (player.hasPerk(PerkLib.BloodMage) && mod < 5) mod = 5;
 		else if (mod < 2) mod = 2;
-		mod = Math.round(mod * 100) / 100;
-		return mod;
-	}
-
-	internal function healCostBlackImpl(mod:Number):Number {
-		var costPercent:Number = 100 + costChange_all() + costChange_heal() + costChange_black();
-		//Addiditive mods
-		if (healModBlackImpl() > 1) costPercent += Math.round(healModBlackImpl() - 1) * 10;
-		if (player.hasPerk(PerkLib.AscensionMysticality)) costPercent -= (player.perkv1(PerkLib.AscensionMysticality) * 2);
-		mod *= costPercent / 100;
-		if (mod < 5) mod = 5;
 		mod = Math.round(mod * 100) / 100;
 		return mod;
 	}
@@ -310,9 +274,7 @@ public class CombatMagic extends BaseCombatContent {
 			}
 			if (player.hasPerk(PerkLib.SharedPower) && player.perkv1(PerkLib.SharedPower) > 0) mod += (0.1*player.perkv1(PerkLib.SharedPower));
 		}
-
         return mod;
-
     }
 
     internal function modChange_heal():Number {
@@ -326,16 +288,20 @@ public class CombatMagic extends BaseCombatContent {
     }
 
 	internal function spellModImpl():Number {
-		var mod:Number = modChange_all() + modChange_spell_1() + modChange_spell_2();
-		if (player.hasPerk(PerkLib.Obsession)) {
-			mod += player.perkv1(PerkLib.Obsession);
-		}
+		var mod:Number = 1 + modChange_all() + modChange_spell_1() + modChange_spell_2();
+		if (player.hasPerk(PerkLib.Obsession)) mod += player.perkv1(PerkLib.Obsession);
 		if (player.hasPerk(PerkLib.KnowledgeIsPower)) {
 			if (player.perkv1(IMutationsLib.RatatoskrSmartsIM) >= 3) mod += (Math.round(camp.codex.checkUnlocked() / 100) * 3);
 			else mod += Math.round(camp.codex.checkUnlocked() / 100);
 		}
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) mod += .3;
-
+		if (player.headJewelry == headjewelries.DMONSKUL) mod += player.cor * .006;
+		if (player.isGargoyle() && Forgefather.material == "alabaster") {
+			if (Forgefather.refinement == 0) mod += (.15);
+			if (Forgefather.refinement == 1) mod += (.25);
+			if (Forgefather.refinement == 2 || Forgefather.refinement == 3) mod += (.5);
+			if (Forgefather.refinement == 4) mod += (1);
+		}
 		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
 		if (player.weapon == weapons.PURITAS) mod *= 1.6;
 		if (player.weapon == weapons.DEPRAVA) mod *= 1.6;
@@ -346,19 +312,147 @@ public class CombatMagic extends BaseCombatContent {
 	}
 	
 	internal function spellModBloodImpl():Number {
-		var modS:Number = spellModImpl();
         var mod:Number = 1;
+		if (spellModImpl() > 1) mod += (spellModImpl() - 1);
 		if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) mod += .1;
-		if (player.hasPerk(PerkLib.WayOfTheBlood)) mod += .1;
-		if (player.hasPerk(PerkLib.YourPainMyPower)) mod += .1;
-		if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) mod += .1;
-		if (player.hasPerk(PerkLib.BloodDemonToughness)) mod += .1;
+		if (player.hasPerk(PerkLib.WayOfTheBlood)) mod += .15;
+		if (player.hasPerk(PerkLib.YourPainMyPower)) mod += .2;
+		if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) mod += .25;
+		if (player.hasPerk(PerkLib.BloodDemonToughness)) mod += .3;
 		//
-		if (player.hasPerk(PerkLib.BloodDemonWisdom)) mod += .1;
+		if (player.hasPerk(PerkLib.BloodDemonWisdom)) mod += .3;
 		//
-		if (player.hasPerk(PerkLib.BloodDemonIntelligence)) mod += .1;
+		if (player.hasPerk(PerkLib.BloodDemonIntelligence)) mod += .3;
         //
-        mod *= modS; //makes sense?
+		mod = Math.round(mod * 100) / 100;
+		return mod;
+	}
+	
+	internal function spellModGreyImpl():Number {
+		var mod:Number = 1;
+		if (spellModImpl() > 1) mod += (spellModImpl() - 1);
+		if (player.hasPerk(PerkLib.SpellpowerGrey) && player.inte >= 50) mod += .15;
+		if (player.hasPerk(PerkLib.GreyMageApprentice) && player.inte >= 75) mod += .1;
+		if (player.hasPerk(PerkLib.GreyMage) && player.inte >= 125) mod += .2;
+		if (player.hasPerk(PerkLib.GreyArchmage) && player.inte >= 175) mod += .3;
+		if (player.hasPerk(PerkLib.GrandGreyArchmage) && player.inte >= 225) mod += .4;
+		if (player.hasPerk(PerkLib.GrandGreyArchmage2ndCircle) && player.inte >= 275) mod += .5;
+		return mod;
+	}
+
+	internal function spellModWhiteImpl():Number {
+		var mod:Number = 1;
+		if (spellModImpl() > 1) mod += (spellModImpl() - 1);
+		if (player.hasStatusEffect(StatusEffects.BlessingOfDivineMarae)) {
+			mod += player.statusEffectv2(StatusEffects.BlessingOfDivineMarae);
+		}
+		if (player.hasPerk(PerkLib.AvatorOfPurity)) mod += .2;
+		if (Forgefather.purePearlEaten) mod +=.25;
+		if (player.hasPerk(PerkLib.UnicornBlessing) && player.cor <= 20) mod += .2;
+		if (player.hasPerk(PerkLib.PrestigeJobArchpriest)) mod += .2;
+		if (player.hasPerk(PerkLib.PrestigeJobWarlock)) mod -= .4;
+		if (player.hasKeyItem("Holy Symbol") >= 0) mod += .2;
+		if (player.necklace == necklaces.LEAFAMU) {
+			if (player.isElf()) mod += .2;
+			else mod += .1;
+		}
+		mod = Math.round(mod * 100) / 100;
+		return mod;
+	}
+
+	internal function spellModBlackImpl():Number {
+		var mod:Number = 1;
+		if (spellModImpl() > 1) mod += (spellModImpl() - 1);
+		if (player.hasPerk(PerkLib.AvatorOfCorruption)) mod += .3;
+		if (Forgefather.lethiciteEaten) mod +=.25;
+		if (player.hasPerk(PerkLib.BicornBlessing) && player.cor >= 80) mod += .2;
+		if (player.hasPerk(PerkLib.PrestigeJobArchpriest)) mod -= .4;
+		if (player.hasPerk(PerkLib.PrestigeJobWarlock)) mod += .2;
+		if (player.countMiscJewelry(miscjewelries.DMAGETO) > 0) mod += 0.25;
+		mod = Math.round(mod * 100) / 100;
+		return mod;
+	}
+
+	internal function healCostImpl(mod:Number):Number {
+		var costPercent:Number = 100 + costChange_all() + costChange_heal();
+		//Addiditive mods
+		if (player.weapon == weapons.ASCENSU) costPercent -= 15;
+		if (healModImpl() > 1) costPercent += Math.round(healModImpl() - 1) * 10;
+		if (player.hasPerk(PerkLib.AscensionMysticality)) costPercent -= (player.perkv1(PerkLib.AscensionMysticality) * 2);
+		mod *= costPercent / 100;
+		if (mod < 5) mod = 5;
+		mod = Math.round(mod * 100) / 100;
+		return mod;
+	}
+
+	internal function healCostWhiteImpl(mod:Number):Number {
+		var costPercent:Number = 100 + costChange_all() + costChange_heal() + costChange_white();
+		//Addiditive mods
+		if (healModWhiteImpl() > 1) costPercent += Math.round(healModWhiteImpl() - 1) * 10;
+		if (player.hasPerk(PerkLib.AscensionMysticality)) costPercent -= (player.perkv1(PerkLib.AscensionMysticality) * 2);
+		mod *= costPercent / 100;
+		if (mod < 5) mod = 5;
+		mod = Math.round(mod * 100) / 100;
+		return mod;
+	}
+
+	internal function healCostBlackImpl(mod:Number):Number {
+		var costPercent:Number = 100 + costChange_all() + costChange_heal() + costChange_black();
+		//Addiditive mods
+		if (healModBlackImpl() > 1) costPercent += Math.round(healModBlackImpl() - 1) * 10;
+		if (player.hasPerk(PerkLib.AscensionMysticality)) costPercent -= (player.perkv1(PerkLib.AscensionMysticality) * 2);
+		mod *= costPercent / 100;
+		if (mod < 5) mod = 5;
+		mod = Math.round(mod * 100) / 100;
+		return mod;
+	}
+
+	internal function healModImpl():Number {
+		var mod:Number = 1 + modChange_all() + modChange_heal();
+		if (player.hasPerk(PerkLib.Obsession)) mod += player.perkv1(PerkLib.Obsession);
+		if (player.hasPerk(PerkLib.Ambition)) mod += player.perkv1(PerkLib.Ambition);
+		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) mod += (player.cor * .01)/2;
+		if (player.hasPerk(PerkLib.SeersInsight)) mod += player.perkv1(PerkLib.SeersInsight);
+		if (player.hasPerk(PerkLib.InariBlessedKimono)){
+			var mod2:Number = 0.5;
+			mod2 -= player.cor / 100;
+			if (mod2 < 0.1) mod2 = 0.1;
+			mod += mod2;
+		}
+		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
+		if (player.weapon == weapons.PURITAS) mod *= 1.6;
+		if (player.weapon == weapons.DEPRAVA) mod *= 1.6;
+		if (player.weapon == weapons.ASCENSU) mod *= 2.5;
+		mod = Math.round(mod * 100) / 100;
+		return mod;
+	}
+
+	internal function healModWhiteImpl():Number {
+		var mod:Number = 1;
+		if (healModImpl() > 1) mod += (healModImpl() - 1);
+		if (player.hasPerk(PerkLib.Ambition)) mod += player.perkv2(PerkLib.Ambition);
+		if (player.hasStatusEffect(StatusEffects.BlessingOfDivineMarae)) mod += player.statusEffectv2(StatusEffects.BlessingOfDivineMarae);
+		if (player.hasPerk(PerkLib.AvatorOfPurity)) mod += .3;
+		if (player.hasPerk(PerkLib.UnicornBlessing) && player.cor <= 20) mod += .2;
+		if (player.hasKeyItem("Holy Symbol") >= 0) mod += .2;
+		if (player.hasPerk(PerkLib.SeersInsight)) mod += player.perkv1(PerkLib.SeersInsight);
+		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
+		if (player.weapon == weapons.PURITAS) mod *= 1.6;
+		if (player.weapon == weapons.ASCENSU) mod *= 2.5;
+		mod = Math.round(mod * 100) / 100;
+		return mod;
+	}
+
+	internal function healModBlackImpl():Number {
+		var mod:Number = 1;
+		if (healModImpl() > 1) mod += (healModImpl() - 1);
+		if (player.hasPerk(PerkLib.Obsession)) mod += player.perkv2(PerkLib.Obsession);
+		if (player.hasPerk(PerkLib.AvatorOfCorruption)) mod += .3;
+		if (player.hasPerk(PerkLib.BicornBlessing) && player.cor >= 80) mod += .2;
+		if (player.hasPerk(PerkLib.SeersInsight)) mod += player.perkv1(PerkLib.SeersInsight);
+		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
+		if (player.weapon == weapons.DEPRAVA) mod *= 1.6;
+		if (player.weapon == weapons.ASCENSU) mod *= 2.5;
 		mod = Math.round(mod * 100) / 100;
 		return mod;
 	}
@@ -380,82 +474,6 @@ public class CombatMagic extends BaseCombatContent {
 			else mod -= 1;
 		}
 		if (mod < 0) mod = 0;
-		return mod;
-	}
-
-	internal function healModImpl():Number {
-		var mod:Number = 1 + modChange_all() + modChange_heal();
-		if (player.hasPerk(PerkLib.Obsession)) {
-			mod += player.perkv1(PerkLib.Obsession);
-		}
-		if (player.hasPerk(PerkLib.Ambition)) {
-			mod += player.perkv1(PerkLib.Ambition);
-		}
-		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) mod += (player.cor * .01)/2;
-		if (player.hasPerk(PerkLib.SeersInsight)) mod += player.perkv1(PerkLib.SeersInsight);
-		if (player.hasPerk(PerkLib.InariBlessedKimono)){
-			var mod2:Number = 0.5;
-			mod2 -= player.cor / 100;
-			if (mod2 < 0.1) mod2 = 0.1;
-			mod += mod2;
-		}
-		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
-		if (player.weapon == weapons.PURITAS) mod *= 1.6;
-		if (player.weapon == weapons.DEPRAVA) mod *= 1.6;
-		if (player.weapon == weapons.ASCENSU) mod *= 2.5;
-		mod = Math.round(mod * 100) / 100;
-		return mod;
-	}
-
-	internal function spellModBase():Number {
-		var mod:Number = modChange_all() + modChange_spell_1() + modChange_spell_2();
-		if (player.isGargoyle() && Forgefather.material == "alabaster")
-			{
-				if (Forgefather.refinement == 0) mod += (.15);
-				if (Forgefather.refinement == 1) mod += (.25);
-				if (Forgefather.refinement == 2 || Forgefather.refinement == 3) mod += (.5);
-				if (Forgefather.refinement == 4) mod += (1);
-			}
-
-        //mod += modChange_spell_2(); //old place
-
-		if (player.headJewelry == headjewelries.DMONSKUL) mod += player.cor * .006;
-        //no sus multiplying for now...
-		mod = Math.round(mod * 100) / 100;
-		return mod;
-	}
-	
-	internal function spellModGreyImpl():Number {
-		var mod:Number = 1;
-		if (player.hasPerk(PerkLib.SpellpowerGrey) && player.inte >= 50) mod += .15;
-		if (player.hasPerk(PerkLib.GreyMageApprentice) && player.inte >= 75) mod += .1;
-		if (player.hasPerk(PerkLib.GreyMage) && player.inte >= 125) mod += .2;
-		if (player.hasPerk(PerkLib.GreyArchmage) && player.inte >= 175) mod += .3;
-		if (player.hasPerk(PerkLib.GrandGreyArchmage) && player.inte >= 225) mod += .4;
-		if (player.hasPerk(PerkLib.GrandGreyArchmage2ndCircle) && player.inte >= 275) mod += .5;
-		return mod;
-	}
-
-	internal function spellModWhiteImpl():Number {
-		var mod:Number = 1;
-		mod += spellModBase();
-		if (player.hasStatusEffect(StatusEffects.BlessingOfDivineMarae)) {
-			mod += player.statusEffectv2(StatusEffects.BlessingOfDivineMarae);
-		}
-		if (player.hasPerk(PerkLib.AvatorOfPurity)) mod += .2;
-		if (Forgefather.purePearlEaten) mod +=.25;
-		if (player.hasPerk(PerkLib.UnicornBlessing) && player.cor <= 20) mod += .2;
-		if (player.hasPerk(PerkLib.PrestigeJobArchpriest)) mod += .2;
-		if (player.hasPerk(PerkLib.PrestigeJobWarlock)) mod -= .4;
-		if (player.hasKeyItem("Holy Symbol") >= 0) mod += .2;
-        if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
-		if (player.necklace == necklaces.LEAFAMU) {
-			if (player.isElf()) mod += .2;
-			else mod += .1;
-		}
-		if (player.weapon == weapons.PURITAS) mod *= 1.6;
-		if (player.weapon == weapons.ASCENSU) mod *= 2.5; //BOOM!
-		mod = Math.round(mod * 100) / 100;
 		return mod;
 	}
 
@@ -492,41 +510,6 @@ public class CombatMagic extends BaseCombatContent {
 		return mod;
 	}
 
-	internal function healModWhiteImpl():Number {
-		var mod:Number = 1 + modChange_all() + modChange_heal();
-		if (player.hasPerk(PerkLib.Ambition)) {
-			mod += player.perkv2(PerkLib.Ambition);
-		}
-		if (player.hasStatusEffect(StatusEffects.BlessingOfDivineMarae)) {
-			mod += player.statusEffectv2(StatusEffects.BlessingOfDivineMarae);
-		}
-		if (player.hasPerk(PerkLib.AvatorOfPurity)) mod += .3;
-		if (player.hasPerk(PerkLib.UnicornBlessing) && player.cor <= 20) mod += .2;
-		if (player.hasKeyItem("Holy Symbol") >= 0) mod += .2;
-		if (player.hasPerk(PerkLib.SeersInsight)) mod += player.perkv1(PerkLib.SeersInsight);
-		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
-		if (player.weapon == weapons.PURITAS) mod *= 1.6;
-		if (player.weapon == weapons.ASCENSU) mod *= 2.5;
-		mod = Math.round(mod * 100) / 100;
-		return mod;
-	}
-
-	internal function spellModBlackImpl():Number {
-		var mod:Number = 1;
-		mod += spellModBase();
-		if (player.hasPerk(PerkLib.AvatorOfCorruption)) mod += .3;
-		if (Forgefather.lethiciteEaten) mod +=.25;
-		if (player.hasPerk(PerkLib.BicornBlessing) && player.cor >= 80) mod += .2;
-		if (player.hasPerk(PerkLib.PrestigeJobArchpriest)) mod -= .4;
-		if (player.hasPerk(PerkLib.PrestigeJobWarlock)) mod += .2;
-		if (player.countMiscJewelry(miscjewelries.DMAGETO) > 0) mod += 0.25;
-        if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
-		if (player.weapon == weapons.DEPRAVA) mod *= 1.6;
-		if (player.weapon == weapons.ASCENSU) mod *= 2.5; //BOOM!
-		mod = Math.round(mod * 100) / 100;
-		return mod;
-	}
-
 	internal function spellBlackCooldownImpl():Number {
 		var mod:Number = 3;
 		if (player.hasPerk(PerkLib.AvatorOfCorruption)) mod -= 1;
@@ -557,21 +540,6 @@ public class CombatMagic extends BaseCombatContent {
 			else mod -= 1;
 		}
 		if (mod < 0) mod = 0;
-		return mod;
-	}
-
-	internal function healModBlackImpl():Number {
-		var mod:Number = 1 + modChange_all() + modChange_heal();
-		if (player.hasPerk(PerkLib.Obsession)) {
-			mod += player.perkv2(PerkLib.Obsession);
-		}
-		if (player.hasPerk(PerkLib.AvatorOfCorruption)) mod += .3;
-		if (player.hasPerk(PerkLib.BicornBlessing) && player.cor >= 80) mod += .2;
-		if (player.hasPerk(PerkLib.SeersInsight)) mod += player.perkv1(PerkLib.SeersInsight);
-		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
-		if (player.weapon == weapons.DEPRAVA) mod *= 1.6;
-		if (player.weapon == weapons.ASCENSU) mod *= 2.5;
-		mod = Math.round(mod * 100) / 100;
 		return mod;
 	}
 

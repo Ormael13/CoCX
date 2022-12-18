@@ -21,7 +21,7 @@ import classes.StatusEffects;
 	}
 	
 	override public function describeEffectVs(target:Monster):String {
-		return "~" + calcDamage(target, false, false) + " lust poison damage and poison/bleeding DoT intensifying every round by 20%"
+		return "~" + calcDamage(target, false, false) + " lust poison damage and poison DoT intensifying every round by 20%"
 	}
 	
 	override public function calcCooldown():int {
@@ -37,18 +37,6 @@ import classes.StatusEffects;
 		}
 		
 		return "";
-	}
-	
-	override public function advance(display:Boolean):void {
-		if (player.hasStatusEffect(StatusEffects.DeathBlossom)) {
-			if (player.statusEffectv1(StatusEffects.DeathBlossom) <= 0) {
-				player.removeStatusEffect(StatusEffects.DeathBlossom);
-				if (display) outputText("<b>Death Blossom effect wore off!</b>\n\n");
-			} else {
-				player.addStatusValue(StatusEffects.DeathBlossom, 1, -1);
-				player.addStatusValue(StatusEffects.DeathBlossom, 1, 0.2);
-			}
-		}
 	}
 	
 	public function calcDamage(monster:Monster, randomize:Boolean = true, casting:Boolean = true):Number { //casting - Increase Elemental Counter while casting (like Raging Inferno)
@@ -90,7 +78,7 @@ import classes.StatusEffects;
 		if (crit) outputText(" <b>Critical!</b>");
 		combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		if (player.hasPerk(PerkLib.VerdantLeech)) {
-			if (monster.lustVuln != 0) monster.lustVuln += 0.05;
+			if (monster.lustVuln != 0) monster.lustVuln += 0.025;
 			HPChange(Math.round(player.maxHP() * 0.05), false);
 		}
 	}

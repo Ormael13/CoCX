@@ -586,7 +586,7 @@ public class PerkMenu extends BaseContent {
 		clearOutput();
 		menu();
 		if (player.hasPerk(PerkLib.DarkRitual)) {
-			outputText("Set weither you will be sacrificing blood to empower your magic or not.\n\n");
+			outputText("Set if you will be sacrificing blood to empower your magic or not.\n\n");
 			if (!player.hasStatusEffect(StatusEffects.DarkRitual)) {
 				outputText("Dark ritual is currently: <b>Inactive</b>.");
 				addButton(10, "On", DarkRitualOptionOn);

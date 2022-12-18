@@ -2753,13 +2753,6 @@
 					<hide part="face/*"/>
 					<show part="face/fairySmile"/>
 				</if>
-				<if test="cor &gt;=100 and lowerBody == LowerBody.FLOWER_LILIRAUNE">
-					<hide part="face/*"/>
-					<hide part="eyes/*"/>
-					<show part="face/lilirauneCorruptedSmile"/>
-					<show part="eyes/lilirauneCorrupt"/>
-					<show part="forehead/lilirauneCorruptedShadow"/>
-				</if>
 				<if test="skin.base.type == Skin.GOO">
 					<hide part="face/*"/>
 					<show part="face/goo"/>
@@ -3752,10 +3745,18 @@
 				<show part="arms_bg/liliraune"/>
 				<show part="face/liliraune"/>
 				<show part="ears/liliraune"/>
-				<show part="eyes/liliraune"/>
 				<show part="horns/LilirauneOrchid"/>
 				<show part="horns_bg/LilirauneOrchid"/>
 				<show part="uniquePlantBath/lilirauneBath"/>
+				<hide part="face/*"/>
+				<show part="face/lilirauneCorruptedSmile"/>
+				<if test="cor &gt;=100 and lowerBody == LowerBody.FLOWER_LILIRAUNE">
+					<show part="eyes/lilirauneCorrupt"/>
+					<show part="forehead/lilirauneCorruptedShadow"/>
+					<else>
+						<show part="eyes/liliraune"/>
+					</else>
+				</if>
 
 				<!-- HAIR AREA -->
                 <if test="hairLength lt 16">

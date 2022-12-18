@@ -12,18 +12,7 @@ package classes.Items.Weapons
 		
 		public function MoonlightClaws()
 		{
-			var id:String = "MClaws";
-			var shortName:String = "MoonlightClaws";
-			var name:String = "Moonlight Claws";
-			var longName:String = "a pair of moonlight claws";
-			var attribute:String = "clawing punch";
-			var attack:Number = 0;
-			var value:Number = 4000;
-			var description:String = "This pair of claws is imbued with magic, which shall be unleashed as a wave of moonlight. The magic within this will grant greated boon when charged with magic.";
-			var perk:String = WP_BLEED25;
-			var type:String = WT_GAUNTLET;
-
-			super(id, shortName, name, longName, attribute, attack, value, description, perk, type);
+			super("MClaws", "MoonlightClaws", "moonlight claws", "a pair of moonlight claws", "clawing punch", 0, 4000, "This pair of claws is imbued with magic, which shall be unleashed as a wave of moonlight. The magic within this will grant greated boon when charged with magic.", WP_BLEED25, WT_GAUNTLET);
 		}
 		
 		override public function get attack():Number {
