@@ -3432,6 +3432,7 @@ public class Creature extends Utils
 		public function isElf():Boolean {
 			return perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 3 || game.player.isRace(Races.ELF) || game.player.isRace(Races.WOODELF);
 		}
+		public function isWoodElf():Boolean { return  game.player.isRace(Races.WOODELF); }
 
 		public function isFlying():Boolean {
 			return hasStatusEffect(StatusEffects.Flying);

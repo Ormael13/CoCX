@@ -38,9 +38,12 @@ public class IconLib {
 		for each (var xrow:XML in xfile.row) {
 			var x:int = 0;
 			for each (var xicon:XML in xrow.icon) {
-				var bmp:BitmapData = new BitmapData(cellwidth, cellheight, true, 0);
-				bmp.copyPixels(bd, new Rectangle(x,y, cellwidth, cellheight), Point(new Point(0, 0)));
-				icons[prefix+xicon.text().toString()] = new Bitmap(bmp);
+				var iconId:String = prefix+xicon.text().toString();
+				if (iconId) {
+					var bmp:BitmapData = new BitmapData(cellwidth, cellheight, true, 0);
+					bmp.copyPixels(bd, new Rectangle(x, y, cellwidth, cellheight), Point(new Point(0, 0)));
+					icons[iconId] = new Bitmap(bmp);
+				}
 				x += cellwidth;
 			}
 			y += cellheight;

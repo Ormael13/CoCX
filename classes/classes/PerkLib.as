@@ -3745,6 +3745,8 @@ public class PerkLib
 				"Increases cum output by 1,000 mLs.");
 		public static const FerasBoonWideOpen:PerkType = mk("Fera's Boon - Wide Open", "Fera's Boon - Wide Open",
 				"Keeps your pussy permanently gaped and increases pregnancy speed.");
+		public static const FueledByDesire:PerkType = mk("Fueled by Desire", "Fueled by Desire",
+				"When using the tease action or an arousal spell, clear a small amount of lust to deal increased tease damage. This only works if lust is above 50%.");
 		public static const FireLord:PerkType = mk("Fire Lord", "Fire Lord",
 				"Akbal's blessings grant the ability to breathe burning green flames.");
 		public static const FluidBody:PerkType = mk("Fluid Body", "Fluid Body",
@@ -3753,6 +3755,8 @@ public class PerkLib
 				"You need constant intakes of sexual fluids to stay alive.");
 		public static const GargoylePure:PerkType = mk("Gargoyle", "Pure Gargoyle",
 				"Need to gain sustenance from soulforce to stay alive.");
+		public static const GracefulBeauty:PerkType = mk("Graceful Beauty", "Graceful Beauty",
+				"Add a small measure of your speed to your tease damage.");
 		public static const Hellfire:PerkType = mk("Hellfire", "Hellfire",
 				"Grants a corrupted fire breath attack, like the hellhounds in the mountains.");
 		public static const IntermediateLeadership:PerkType = mk("Intermediate Leadership", "Intermediate Leadership",
@@ -3800,6 +3804,8 @@ public class PerkLib
 				"Your sensual attitude towards love and romance makes your tease ability slightly more effective.");
 		public static const Soulless:PerkType = mk("Soulless", "Soulless",
 				"The absence of a soul allows you to completely go astray of the morality compass, increasing your libido and corruption beyond normal.").withBuffs({'lib.mult':0.75});
+		public static const SweepDefenses:PerkType = mk("Sweep Defenses", "Sweep Defenses",
+				"Critical tease also weakens your opponent's resistance to lust by 5%.");
 		public static const TransformationImmunity:PerkType = mk("Construct Transformation immunity", "Construct Transformation Immunity",
 				"As a magical construct you are immune to all effects that change the body of living beings, including most transformatives on Mareth (work as the regular transformative resistance except it reduce the odds of getting a body part tfed to 0 although stats increasing effects still could be triggered).");
 		public static const TransformationImmunityAtlach:PerkType = mk("Atlach Nacha Transformation immunity", "Eldritch Transformation Immunity",

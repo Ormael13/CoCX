@@ -53,6 +53,10 @@ package classes.Scenes.Places{
 		public static var WoodElfMagicTraner:Boolean;
 		public static var WoodElfMagicTranerGetLaid:Boolean;
 
+		public static var WoodElfSeductionTraining:int;
+		public static const QUEST_STAGE_SEDUCTIONTRAINING0:int = 0;
+		public static const QUEST_STAGE_SEDUCTIONTRAINING1:int = 1;
+		public static const QUEST_STAGE_SEDUCTIONTRAINING2:int = 2;
 		public static var hasTrainedToday:Boolean;
 
 		public function stateObjectName():String {
@@ -65,6 +69,7 @@ package classes.Scenes.Places{
 			WoodElfBowTraining = QUEST_STAGE_BOWTRAINING0;
 			WoodElfSpearTraining = QUEST_STAGE_SPEARTRAININGFIRST;
 			WoodElfMagicTraining = QUEST_STAGE_MAGICTRAINING0;
+			WoodElfSeductionTraining = QUEST_STAGE_SEDUCTIONTRAINING0;
 			WoodElfMagicTraner = false;
 			WoodElfMagicTranerGetLaid = false;
 		}
@@ -76,6 +81,7 @@ package classes.Scenes.Places{
 				"stageSpear": WoodElfSpearTraining,
 				"elfHasTrainedToday": hasTrainedToday,
 				"stageMagic": WoodElfMagicTraining,
+				"stageSeduction": WoodElfSeductionTraining,
 				"WoodElfMagicTraner": WoodElfMagicTraner,
 				"WoodElfMagicTranerGetLaid": WoodElfMagicTranerGetLaid
 			};
@@ -88,6 +94,7 @@ package classes.Scenes.Places{
 				WoodElfSpearTraining = o["stageSpear"];
 				hasTrainedToday = o["elfHasTrainedToday"];
 				WoodElfMagicTraining = valueOr(o["stageMagic"], 0);
+				WoodElfSeductionTraining = valueOr(o["stageSeduction"], 0);
 				WoodElfMagicTraner = valueOr(o["WoodElfMagicTraner"], false);
 				WoodElfMagicTranerGetLaid = valueOr(o["WoodElfMagicTranerGetLaid"], false);
 			} else {
@@ -252,8 +259,9 @@ package classes.Scenes.Places{
 			if (!player.hasPerk(PerkLib.NaturalSpellcasting)) player.createPerk(PerkLib.NaturalSpellcasting,0,0,0,0);
 			if (!player.hasPerk(PerkLib.FlawlessBody)) player.createPerk(PerkLib.FlawlessBody,0,0,0,0);
 			if (!player.hasPerk(PerkLib.ElvenSense)) player.createPerk(PerkLib.ElvenSense,0,0,0,0);
+
 			WoodElvesQuest = QUEST_STAGE_LOSTTOELF;
-			doNext(YouAreAlreadyElf2);
+			inventory.UseItemNow(CoC.instance.armors.ELFDRES, YouAreAlreadyElf2);
 		}
 
 		public function YouAreAlreadyElf2():void {
@@ -658,23 +666,25 @@ package classes.Scenes.Places{
 					"\n\nThe only stain amidst this beautiful scenery is the 'blessed' trees at the edge of this settlement, which reminds you all too well that if no one steps up and does the fighting, even this haven will eventually become corrupted and defiled beyond repair before disappearing from the face of Mareth. You try and keep your mind joyful however not to darken the light of day.");
 			if (flags[kFLAGS.FACTORY_SHUTDOWN] > 0) outputText(" Well, what's left of it… it's hard to get any sun with those damn clouds covering the sky.");
 			menu();
-			addButton(0, "River", River);
-			if ((!player.isRace(Races.ELF, 1, false) && !player.isRace(Races.WOODELF, 1, false))) addButtonDisabled(0,"River","You need to be an elf in order to go bath with the girls.");
-			else if (!player.hasVagina()) addButtonDisabled(0,"River","You can't seriously go back naked with girls as a guy! Just what were you thinking, You degenerate pervert!?");
-			addButton(1, "Tent", Tent);
-			if ((!player.isRace(Races.ELF, 1, false) && !player.isRace(Races.WOODELF, 1, false))) addButtonDisabled(1,"Tent","You need to be an elf.");
-			else if (!player.hasVagina()) addButtonDisabled(1,"Tent","You need to be female or herm in order to use the tents.");
+			addButton(0, "River", River)
+				.disableIf(!player.isRace(Races.ELF, 1, false) && !player.isRace(Races.WOODELF, 1, false),"You need to be an elf in order to go bath with the girls.")
+				.disableIf(!player.hasVagina(), "You can't seriously go back naked with girls as a guy! Just what were you thinking, You degenerate pervert!?");
+			addButton(1, "Tent", Tent)
+				.disableIf((!player.isRace(Races.ELF, 1, false) && !player.isRace(Races.WOODELF, 1, false)),"You need to be an elf.")
+				.disableIf(!player.hasVagina(), "You need to be female or herm in order to use the tents.");
 			addButton(2, "Fletching table", Fletching);
-			addButton(3, "Elenwen", Elenwen);
-			if (hasTrainedToday) addButtonDisabled(3,"Elenwen","You need a break from your recent training before you can train again.");
-		    else if (!player.isElf()) addButtonDisabled(3,"Elenwen","Elenwen has personal preferences in regards to the people she will train, maybe you should make yourself more elf like.");
-			else if (!player.hasVagina()) addButtonDisabled(3,"Elenwen","Elenwen has personal preferences in regards to the people she will train with... it's not like archery is just for girls, but considering the fact that she's practicing naked...");
-			addButton(4, "Alyssa", Alyssa);
-			if (hasTrainedToday) addButtonDisabled(4,"Alyssa","You need a break from your recent training before you can train again.");
-			else if (!player.isElf()) addButtonDisabled(4,"Alyssa","Alyssa has personal preferences in regards to the people she will train, maybe you should make yourself more elf like.");
-			else if (!player.hasVagina()) addButtonDisabled(4,"Alyssa","Alyssa has personal preferences in regards to the people she will train with... it's not like the spear is a girl only discipline, but the way she uses it might as well be...");
-			addButton(5, "Lutien", Lutien);
-			if (hasTrainedToday) addButtonDisabled(5,"Lutien","You need a break from your recent training before you can train again.");
+			addButton(3, "Elenwen", Elenwen)
+				.disableIf(hasTrainedToday,"You need a break from your recent training before you can train again.")
+				.disableIf(!player.isElf(),"Elenwen has personal preferences in regards to the people she will train, maybe you should make yourself more elf like.")
+				.disableIf(!player.hasVagina(),"Elenwen has personal preferences in regards to the people she will train with... it's not like archery is just for girls, but considering the fact that she's practicing naked...");
+			addButton(4, "Alyssa", Alyssa)
+				.disableIf(hasTrainedToday,"You need a break from your recent training before you can train again.")
+				.disableIf(!player.isElf(),"Alyssa has personal preferences in regards to the people she will train, maybe you should make yourself more elf like.")
+				.disableIf(!player.hasVagina(), "Alyssa has personal preferences in regards to the people she will train with... it's not like the spear is a girl only discipline, but the way she uses it might as well be...");
+			addButton(5, "Lutien", Lutien)
+					.disableIf(hasTrainedToday, "You need a break from your recent training before you can train again.");
+			addButton(6, "Chelsea", Chelsea)
+					.disableIf(hasTrainedToday, "You need a break from your recent training before you can train again.");
 			addButton(14, "Leave", camp.returnToCampUseOneHour);
 		}
 
@@ -1162,9 +1172,9 @@ package classes.Scenes.Places{
 			spriteSelect(SpriteDb.s_WoodElves);
 			outputText("Lutien sighs," +
 					" \"<i>Yes, yes, of course. No need for the tedium of magic when you can play around with your other sisters. I understand completely.</i>\"" +
-					" She pauses as her attention shifts back to her book," +
+					LutienMF("He","She")+" pauses as her attention shifts back to her book," +
 					" \"<i>Now, if you would excuse me, I would like to continue my reading in peace.</i>\"\n\n");
-			outputText("You leave Lutien to her work, not wanting to disturb her efforts, and not especially appreciating her company.");
+			outputText("You leave Lutien to "+LutienMF("his","her")+" work, not wanting to disturb their efforts, and not especially appreciating "+LutienMF("his","her")+" company.");
 			if (WoodElfMagicTraining == QUEST_STAGE_MAGICTRAINING0) WoodElfMagicTraining = QUEST_STAGE_MAGICTRAINING1;
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -1303,6 +1313,140 @@ package classes.Scenes.Places{
 			outputText("Yea nevermind you ain't in the mood for that right now.\n\n");
 			outputText("Lutien sigh. \"<i>Yea I figured you must've just been joking. Well either way is there anything else I can help you with?</i>\"\n\n");
 			doNext(LutienMain);
+		}
+
+		public function Chelsea():void {
+			if (WoodElfSeductionTraining == QUEST_STAGE_SEDUCTIONTRAINING0) ChelseaIntro();
+			else ChelseaMain();
+		}
+		public function ChelseaIntro():void {
+			clearOutput();
+			spriteSelect(SpriteDb.s_WoodElves);
+			outputText("As you explore the elven village you run into a sister you haven't met before, well at least not personally. She looks like all of your other sisters at a first glance, golden hairs, green eyes and white clothes but what sets her apart is her sheer tallness as well as the prodigious size of her breast. Easily 7 feet tall she towers above everyone else. The big sister notices your attention and chuckles.[pg]");
+			outputText("\"<i>Oh my if it ain't sister [name] we haven't been acquainted since you hang all the time with Merisiel, Allysa or Elenwen. Not that I blame them, my appearance is somewhat intimidating for an elf in more ways than one.</i>\" She punctuates her sentence by holding her J cup breasts with both hands to pass the point across. Any elf would feel intimidated by the sheer size of those orbs. How is she not developing back problems in the first place![pg]");
+			outputText("\"<i>Eyes up not down sister.</i>\" The busty elf laughs and you realise you've been staring. \"<i>Names Chelsea and I'm the village resident blacksmith. About every gear from weapons to armor is made by me. I overheard you used to be human or something heck you even got your memory back. Me? Well I was told I used to be a lacta bovine surely that'd explain the ridiculous size of my chest. I forgot everything about my past self post awakening so can't "+
+						"confirm if this is true not that it mathers. As it happens the sacred tree doesn't discriminate, It can turn about just anything into an elf provided it's not too big, has a soul and is somewhat sentient. If its a guy it makes a girl out of it though we've seen rare cases where even the tree was powerless to fully genderbend a man. Regardless I heard you're on some grand quest or something about saving the land. Maybe even purify the tree.. well now "+
+						"THAT would be great though looking at you I can't really see how you plan to defeat the demon army all by yourself.</i>\"[pg]");
+			outputText("Sure you plan to defeat the demons. Is she assuming you lack the conviction to do it or something?[pg]");
+			outputText("\"<i>Oh not at all though if you're so keen to defeat the fiends I could teach you one or two things about seduction.</i>\"*[pg]");	//TODO Ask about asterisk in doc
+			outputText("You raise an eyebrow coughing as you process the last sentence, did she just say seduction?[pg]");
+			outputText("\"<i>Do understand sister demons greatest weapon is sex and desire but it's also their biggest weakness. While you should avoid fighting demons on their own terms you will inevitably have to win a few battles through the power of guile, seduction and a few frustrated dicks. Thankfully your body like mine was made for temptation.</i>\"[pg]");
+			outputText("What is she getting at? You're perfectly adept at sex just as any elf is![pg]");
+			outputText("\"<i>Yes but not necessarily at teasing. Do trust me, I've developed and made many new techniques even the demons would spontaneously cum at. Want me to teach you some of them?</i>\"[pg]");
+
+			menu();
+			addButton(1, "Sure Sis", ChelseaTraining1);
+			addButton(3, "Nah", ChelseaTraining1No);
+		}
+		public function ChelseaTraining1():void {
+			clearOutput();
+			spriteSelect(SpriteDb.s_WoodElves);
+			outputText("Chelsea disrobes, encouraging you to do the same as she heads toward her tent letting you in.[pg]");
+			outputText("\"<i>First things first, we need to train your endurance, wouldn't want you to end up with weak shaking legs because a demon nibbled on your ear tips. You need to be in perfect control of your own pleasure rather than let it control you.</i>\"[pg]");
+			outputText("Without surprise she goes directly for your weak spot licking your pointy ear tip. You're about to jump her in a lust induced frenzy when she calmly reminds you \"<i>You need to endure and control your lust sister. I can see you're boiling with needs but improving your resistance is the very purpose of this training.</i>\"[pg]");
+			outputText("Begrudgingly you temper your desire her touch however is like a wave crashing down on the sandcastle that is your crumbling countenance and before long you beg her to fuck you one way or another.[pg]");
+			outputText("\"<i>Well sister I see you've done your best and will reward you for it. Go ahead and lose yourself in your big sister's lovely pillows.</i>\"[pg]");
+			outputText("She lay on her back into the grass and opens her arms to you, welcoming you to her bosom and you gladly take on her offer resting your head against her prodigious chest as she pulls her hand toward your aching pussy, a finger expertly exploring your drooling cunny. You moan loudly as your eldest gently massages your hole all the way toward a full peak causing you to cum gracefully on her hand with some of your juice splashing on the nearby grass. "+
+						"You ride this orgasm for a few seconds, losing yourself in the bright green of the eyes of your partner before slowly matching your excited breath back down to the rhythm of the ambient natural world.[pg]");
+			outputText("Chelsea comments as you both redress \"<i>Not a bad effort for a first time. Still do come back to me later you definitely could use improved self control especially if you plan to take the demons down. Don't you worry sis I will train you into a pillar of willpower and stamina even demons charm won't be able to overcome.</i>\"[pg]");
+			outputText("On this you wave goodbye and head back to camp.[pg]");
+
+			hasTrainedToday = true;
+			player.SexXP((5+player.level) * 10);
+			player.trainStat("lib", 4, 300);
+			WoodElfSeductionTraining = QUEST_STAGE_SEDUCTIONTRAINING2;
+			doNext(camp.returnToCampUseOneHour);
+		}
+		public function ChelseaTraining1No():void {
+			clearOutput();
+			spriteSelect(SpriteDb.s_WoodElves);
+			outputText("You decline Chelsea offer fully confident in your own skills.[pg]");
+			outputText("\"<i>Well if you ever need your big sister assistance just come to me and ill teach ya everything there is to sex and controlling your desires.</i>\"[pg]");
+			WoodElfSeductionTraining = QUEST_STAGE_SEDUCTIONTRAINING1;
+			doNext(camp.returnToCampUseOneHour);
+		}
+		public function ChelseaMain():void {
+			clearOutput();
+			spriteSelect(SpriteDb.s_WoodElves);
+			outputText("You visit Chelsea hoping to improve your self control. The busty elf is busy gathering flowers in the nearby meadow but deposits her basket the moment she sees you.[pg]");
+			outputText("\"<i>Good day [name] you came at just the right time I was about done here. Have you come to train or are you just here for a chat?</i>\"")
+
+			menu();
+			if (WoodElfSeductionTraining == QUEST_STAGE_SEDUCTIONTRAINING1)
+				addButton(1, "Sure Sis", ChelseaTraining1);
+			else
+				addButton(1, "Train", ChelseaTrainingRandom);
+			addButton(3, "See Ya", ChelseaTrainingNo);
+		}
+		public function ChelseaTrainingNo():void {
+			clearOutput();
+			spriteSelect(SpriteDb.s_WoodElves);
+			outputText("You tell her you just wanted to say hello really. You two talk of everything and nothing before you say your goodbye and head back to the elven commons. Chelsea waves you goodbye before you go.[pg]");
+			outputText("\"<i>Come back anytime, I will be right here.</i>\"[pg]");
+			doNext(camp.returnToCampUseOneHour);
+		}
+		public function ChelseaTrainingRandom():void {
+			clearOutput();
+			spriteSelect(SpriteDb.s_WoodElves);
+			var randomTrain:int = rand(2);
+			if (randomTrain == 0) ChelseaRandomTrain0();
+			else if (randomTrain == 1) ChelseaRandomTrain1();
+		}
+		public function ChelseaRandomTrain0():void {
+			outputText("Chelsea disrobe and encourage you to do the same as she heads toward her tent letting you in.[pg]");
+			outputText("\"<i>Today we will first train your endurance, wouldn't want you to end up with weak shaking legs because a demon nibbled on your ear tips. You need to be in perfect control of your own pleasure rather than let it control you.</i>\" [pg]");
+			outputText("Without surprise she goes directly for your weak spot licking your pointy ear tip. You're about to jump her in a lust induced frenzy when she calmly reminds you \"<i>You need to endure and control your lust sister. I can see you're boiling with needs but improving your resistance is the very purpose of this training.</i>\"[pg]");
+			outputText("Begrudgingly you temper your desire her touch however is like a wave crashing down on the sandcastle that is your crumbling countenance and before long you beg her to fuck you one way or another.[pg]");
+			outputText("\"<i>Well sister I see you've done your best and will reward you for it. Go ahead and lose yourself in your big sister's lovely pillows.</i>\"[pg]");
+			outputText("She lay on her back into the grass and opens her arms to you, welcoming you to her bosom and you gladly take on her offer resting your head against her prodigious chest as she pulls her hand toward your aching pussy, a finger expertly exploring your drooling cunny. You moan loudly as your eldest gently massages your hole all the way toward a full peak. You ain't sure if it's just her technique, her past life experience or just the fact she is an "+
+						"elf far older than you but her fingers do magic even the best cock would fail to, her precise movement causing you to cum gracefully on her hand with some of your juice splashing on the nearby grass. You ride this orgasm for a few seconds, losing yourself in the bright green of the eyes of your partner before slowly matching your excited breath back down to the rhythm of the ambient natural world.[pg]");
+			outputText("Chelsea comments as you both redress \"<i>Not a bad effort it's definitely better than the last time. Still do come back to me later you definitely could use more self control especially if you plan to take the demons down. Don't you worry sis I will train you into a pillar of willpower and stamina even demons charm won't be able to overcome.</i></i>\"[pg]");
+			outputText("On this you wave goodbye and head back to camp.[pg]");
+
+			hasTrainedToday = true;
+			player.SexXP((5+player.level) * 10);
+			player.trainStat("lib", 4, 300);
+			doNext(camp.returnToCampUseOneHour);
+		}
+		public function ChelseaRandomTrain1():void {
+			outputText("Chelsea disrobe and encourage you to do the same as she heads toward her tent letting you in.[pg]");
+			outputText("\"<i>Today we will train your empathy. You need to be receptive to your partner or opponent's reaction. It might come to you as no surprise but in battle most opponents won't act honest and when they do it can be difficult to pinpoint whether your performance was bad or not. By reading the subtle hints in their expression and movement you can improve and refine your skill as a seducter or just make yourself better at lovemaking. "+
+						"Your willing partners will thank you for it, some of the unwilling ones too.</i>\"[pg]");
+			outputText("She takes your hand and guides you to the bed, laying down next to you.[pg]");
+			outputText("\"<i>Your other sisters likely teached you to play some musical instruments or do other refined things. Sex is like a melody and the partner is your instrument, her moans the note. To draw out the most honest and clear notes you need to play your partner with care. Today is girl on girl but a penis is just a different instrument, you simply need to be attentive to the notes you play and the music will come out naturally.</i>\"[pg]");
+			outputText("She insert a finger into your quivering flower making you gasp as she move your hand to hers sliding your digit into her pussy.[pg]");
+			outputText("\"<i>The bee girls have a similar game to this one however for you this is training. For each good note you draw from me today I will reciprocate to you. Pay attention to the response so you can reproduce it.</i>\"[pg]");
+			outputText("Tentatively you begin fondling your teacher, using whatever skill you accumulated this far to find her good spot and draw out a moan. She rewards your attention with a moan of your own each time you hit a good spot. Seeking out her highs so to increase your own pleasure you manage to progressively adjust and improve your touch until eventually Chelsea grants you an amazing orgasm. It plays out like this for a fair hour until, utterly spent, "+
+						"you close your eyes and rest in Chelsea's arms using her breast as your pillow. Your big sister caresses your forehead the whole time singing a slow lullaby, guess she doesn't get those moments all that often.[pg]");
+			outputText("Later when you wake up Chelsea comments as you both redress \"<i>Not a bad effort it's definitely better than the last time. Still do come back to me later you definitely could use more empathy training especially if you plan to take the demons down. Don't you worry sis I will train you until your senses are as sharp as the edge of an elven glaive.</i>\"[pg]");
+			outputText("On this you wave goodbye and head back to camp.[pg]");
+
+			hasTrainedToday = true;
+			player.SexXP((5+player.level) * 10);
+			player.trainStat("lib", 4, 300);
+
+			if (!player.hasPerk(PerkLib.FueledByDesire) && player.lib >= 150) {
+				player.createPerk(PerkLib.FueledByDesire,0,0,0,0);
+				outputText("\n\nBetter refining of your charms allowed you to learn a new technique. <b>Gained Perk: Fueled by Desire</b>");
+			}
+
+			if (player.hasPerk(PerkLib.FueledByDesire) && !player.hasPerk(PerkLib.GracefulBeauty) && player.lib >= 200) {
+				player.createPerk(PerkLib.GracefulBeauty,0,0,0,0);
+				outputText("\n\nBetter refining of your charms allowed you to learn a new technique. <b>Gained Perk: Graceful Beauty</b>");
+			}
+
+			if (player.hasPerk(PerkLib.GracefulBeauty) && !player.hasPerk(PerkLib.SweepDefenses) && player.lib >= 200) {
+				player.createPerk(PerkLib.SweepDefenses,0,0,0,0);
+				outputText("\n\nBetter refining of your charms allowed you to learn a new technique. <b>Gained Perk: Sweep Defenses</b>");
+			}
+
+			//New Legendary Armor: Forest Mage Dress	//TODO special effect with green magic, other effects complete
+			//Type: Light
+			//Armor: 0
+			//Effect: Slutty Seduction 10, Wizard Endurance 60. Increase tease total damage by x 2 when worn by a wood elf. Inflicting Tease damage reduces the wielder's own lust by a small amount.
+			//The wearer of this dress desire and pleasure is no longer vexed by the limitations of mortal flesh allowing one to keep control over their lust long enough to claim victory by diluting their own lust within the ambiant natural world for a time. So long as a Green Magic spell was cast within the 5 previous rounds the user of this dress effectively is able to maintain their focus and mind entirely to the task at hand at the cost of potentialy turning into a lecherous sex maniac due to all the dilluted lust merging back with the user at the end of combat. There is a small chance for this to backfire instead causing the ambiant flora to turn on and rape the wearer of the dress.
+
+			doNext(camp.returnToCampUseOneHour);
 		}
 	}
 }

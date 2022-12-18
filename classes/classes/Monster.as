@@ -1,4 +1,4 @@
-﻿package classes
+package classes
 {
 import classes.BodyParts.Antennae;
 import classes.BodyParts.Arms;
@@ -2400,6 +2400,10 @@ import flash.utils.getQualifiedClassName;
 			lust += lustDelta;
 			lustDelta = Math.round(lustDelta * 10)/10;
 			outputText(" <b>([font-lust]" + lustDelta + "</font>)</b>");
+			if (player.armor == armors.ELFDRES) {
+				outputText("\nYou cool down a little bit");
+				player.takeLustDamage(Math.round(-lustDelta)/10);
+			}
 		}
 
 		public function generateDebugDescription():String {
@@ -3720,4 +3724,4 @@ import flash.utils.getQualifiedClassName;
 			}
 		}
 	}
-}
+}

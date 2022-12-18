@@ -237,12 +237,14 @@ import classes.internals.*;
 			var choice:Number = rand(3);
 			if (player.hasStatusEffect(StatusEffects.MagnarPinned) && player.hasStatusEffect(StatusEffects.MagnarDominated))
 				choice = 2;
-			if (hp100 < 65 && !hasStatusEffect(StatusEffects.Hypermode))
-				choice = 3;
+			if (hp100 < 65 && !hasStatusEffect(StatusEffects.Hypermode)) {
+				searingSpurn();
+				return;
+			}
+
 			if (choice == 0) eAttack();
 			if (choice == 1) darkMaul();
 			if (choice == 2) pinDown();
-			if (choice == 3) searingSpurn();
 		}
 
 		public function finalDominationScore():void {
