@@ -46,7 +46,17 @@ public class BitmapDataSprite extends Sprite {
 	private var _height:Number   = 0;
 	private var _stretch:Boolean = false;
 	private var _repeat:Boolean  = false;
-	private var _crop:Boolean  = false;
+	private var _crop:Boolean   = false;
+	private var _smooth:Boolean = true;
+	
+	public function get smooth():Boolean {
+		return _smooth;
+	}
+	public function set smooth(value:Boolean):void {
+		_smooth = value;
+		redraw();
+	}
+	
 	public function set bitmapClass(value:Class):void {
 		if (value as Class) bitmap = (new value()) as Bitmap;
 		else bitmap = null;
@@ -152,7 +162,7 @@ public class BitmapDataSprite extends Sprite {
 			if (stretch) {
 				var m:Matrix = new Matrix();
 				m.scale(_width / bitmap.width, _height / bitmap.height);
-				this.graphics.beginBitmapFill(bitmap.bitmapData, m, false, true);
+				this.graphics.beginBitmapFill(bitmap.bitmapData, m, false, smooth);
 			} else {
 				this.graphics.beginBitmapFill(bitmap.bitmapData, null, repeat);
 			}
