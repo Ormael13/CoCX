@@ -21,7 +21,7 @@ import classes.StatusEffects;
 	}
 	
 	override public function describeEffectVs(target:Monster):String {
-		return "~" + calcDamage(target, false, false) + " lust poison damage and poison/bleeding DoT intensifying every round by 20%"
+		return "~" + calcDamage(target, false, false) + " lust poison damage and poison DoT intensifying every round by 20%"
 	}
 	
 	override public function calcCooldown():int {

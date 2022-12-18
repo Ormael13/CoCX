@@ -308,7 +308,7 @@ public class Changelog extends BaseContent
 			outputText("-Divine armament affects partial staffs too without dismished effect.\n");
 			outputText("-Rathazul crafting menu bit reorganized with few option getting greyed out buittons tleling what PC is missing. Arian menu for scales coloring changed to be bit more clear.\n");
 			outputText("-New event perk(s): Survival Training (Rank: 1-2). Gained by spending 1 super perk point. Effects: You have trained to better survive this realm hostile environment. (+1% to MaxOver HP, MaxOver Lust and Diehard each 3 lvl's up to +(10 * rank)%)\n");
-			outputText("-\n");
+			outputText("-Blood Demon hidden job perks after 1st got slight change to spellpower/soulpower bonus for blood spells/soulskills. Each next perk add 5% more so 2nd add 15%, 3rd 20% and so on.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
