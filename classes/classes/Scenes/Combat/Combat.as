@@ -9024,7 +9024,7 @@ public class Combat extends BaseContent {
 			var damagePG:Number = (combat.teases.teaseBaseLustDamage() * 0.5 * spellModWhite());
             var arvePG:Number = 1;
 			if (player.hasPerk(PerkLib.ArcaneVenom)) arvePG += AbstractSpell.stackingArcaneVenom();
-			while (arvePG-->0) repeatArcaneVenom(damagePG, 1);
+			while (arvePG-->0) repeatArcaneVenom(damagePG, 1, 0);
         }
 		//Entagled
 		if (monster.hasStatusEffect(StatusEffects.Entangled)) {
@@ -9036,23 +9036,22 @@ public class Combat extends BaseContent {
 		}
 		//Briarthorn
 		if (monster.hasStatusEffect(StatusEffects.Briarthorn) && monster.lustVuln > 0) {
-			outputText("It's me Di.... nah it's Information Noona saying that your Briarthorn is still here and dealing some lust poison damage to enemy.");
+			outputText("It's me Di.... nah it's Information Noona saying that your Briarthorn is still here and dealing some lust poison damage to enemy. Bleed dmg notification is in another castle.");
 			var damageB:Number = (combat.teases.teaseBaseLustDamage() * 0.75 * spellModWhite());
 			var arveB:Number = 1;
 			if (player.hasPerk(PerkLib.ArcaneVenom)) arveB += AbstractSpell.stackingArcaneVenom();
-			while (arveB-->0) repeatArcaneVenom(damageB, 0);
+			while (arveB-->0) repeatArcaneVenom(damageB, 0, 0);
 		}
 		//Death Blossom
 		if (monster.hasStatusEffect(StatusEffects.DeathBlossom)) {
 			outputText("It's me Di.... nah it's Information Noona saying that your Death Blossom is still here and dealing some lust poison damage to enemy.");
 			var damageDBH:Number = (scalingBonusIntelligence() * spellModWhite() * player.statusEffectv2(StatusEffects.DeathBlossom));
 			damageDBH = Math.round(damageDBH * poisonDamageBoostedByDao());
-            doPoisonDamage(damageDBH, true, true);
 			if (monster.lustVuln > 0) {
 				var damageDBL:Number = (combat.teases.teaseBaseLustDamage() * 1.5 * spellModWhite() * player.statusEffectv2(StatusEffects.DeathBlossom));
 				var arveDBL:Number = 1;
 				if (player.hasPerk(PerkLib.ArcaneVenom)) arveDBL += AbstractSpell.stackingArcaneVenom();
-				while (arveDBL-->0) repeatArcaneVenom(damageDBL, 0);
+				while (arveDBL-->0) repeatArcaneVenom(damageDBL, 0, damageDBH);
 			}
 		}
         if (player.hasStatusEffect(StatusEffects.Bound) && flags[kFLAGS.PC_FETISH] >= 2) {
@@ -10276,7 +10275,11 @@ public class Combat extends BaseContent {
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
     }
 	
-	private function repeatArcaneVenom(dmg:Number, subtype:Number):void {
+	private function repeatArcaneVenom(dmg:Number, subtype:Number, poisonele:Number):void {
+		if (poisonele != 0) {
+			var damageAVP:Number = poisonele;
+			doPoisonDamage(damageAVP, true, true);
+		}
 		var damageAV:Number = dmg;
 		var RandomCritAV:Boolean = false;
 		if (player.hasPerk(PerkLib.VegetalAffinity)) damageAV *= 1.5;

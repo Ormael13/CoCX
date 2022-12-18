@@ -9,6 +9,7 @@ import classes.BodyParts.Hair;
 import classes.BodyParts.Hips;
 import classes.BodyParts.Horns;
 import classes.BodyParts.LowerBody;
+import classes.BodyParts.RearBody;
 import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
@@ -2125,6 +2126,7 @@ import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
 			player.horns.type = Horns.NONE;
 			player.horns.count = 0;
 			player.wings.type = Wings.NONE;
+			player.rearBody.type = RearBody.FENRIR_ICE_SPIKES;
 			player.strStat.train.value += 10; // Being raised by Wolves has it's advantages
 			player.touStat.train.value += 10;
 			player.speStat.train.value += 10; 
