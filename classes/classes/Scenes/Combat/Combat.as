@@ -41,6 +41,7 @@ import classes.Scenes.Dungeons.DemonLab.IncubusScientist;
 import classes.Scenes.Dungeons.DemonLab.LabGuard;
 import classes.Scenes.Dungeons.EbonLabyrinth.*;
 import classes.Scenes.Dungeons.HelDungeon.*;
+import classes.Scenes.Monsters.Magnar;
 import classes.Scenes.NPCs.*;
 import classes.Scenes.Places.Boat.*;
 import classes.Scenes.Places.Farm.Kelt;
@@ -617,6 +618,7 @@ public class Combat extends BaseContent {
             StatusEffects.GiantGrabbed,
             StatusEffects.Tentagrappled,
             StatusEffects.SiegweirdGrapple,
+            StatusEffects.MagnarPinned,
         ];
         var monsterStatuses:Array = [
             StatusEffects.QueenBind,
@@ -2145,6 +2147,9 @@ public class Combat extends BaseContent {
         } else if (monster.hasStatusEffect(StatusEffects.QueenBind)) {
             (monster as HarpyQueen).ropeStruggles(true);
             skipMonsterAction = true;
+        } else if (player..hasStatusEffect(StatusEffects.MagnarPinned)) {
+            (monster as Magnar).magnarPinStruggle(true);
+            skipMonsterAction = true;
         } else if (player.hasStatusEffect(StatusEffects.GooBind)) {
             clearOutput();
             if (monster is HellfireSnail) outputText("Your flesh begins burning as the snail embraces you with her molten body! You scream, but the molten girl doesn't stop!");
@@ -2330,6 +2335,9 @@ public class Combat extends BaseContent {
 			skipMonsterAction = true;
 		} else if (player.hasStatusEffect(StatusEffects.HarpyBind)) {
             (monster as HarpyMob).harpyHordeGangBangStruggle();
+            skipMonsterAction = true;
+        } else if (player.hasStatusEffect(StatusEffects.MagnarPinned)) {
+            (monster as Magnar).magnarPinStruggle();
             skipMonsterAction = true;
         } else if (player.hasStatusEffect(StatusEffects.GooArmorBind)) {
             (monster as Valeria).struggleAtGooBind();
@@ -3491,19 +3499,9 @@ public class Combat extends BaseContent {
                 break;
         }
 		if (player.weapon is MoonlightGreatsword || player.weapon is MoonlightClaws || player.weapon is Tidarion) {
-			var swordEXPgains:Number = 1;
-			if (player.hasPerk(PerkLib.MeleeWeaponsMastery)) swordEXPgains += 2;
-			if (monster.short == "training dummy" && flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 1) {
-				swordEXPgains *= 2;
-				if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 2) swordEXPgains *= 2.5;
-				if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] > 3) swordEXPgains *= 2;
-			}
-			if (crit) {
-				swordEXPgains *= 2;
-				if (player.hasPerk(PerkLib.MeleeWeaponsMasteryEx)) swordEXPgains *= 2;
-				outputText(" <b>*Critical Hit!*</b>");
-			}
-			swordXP(swordEXPgains);
+			var critCounter:int = 0;
+			if (crit) critCounter++;
+			meleeMasteryGain(1,critCounter);
             if (player.weapon is Tidarion) (player.weapon as Tidarion).afterStrike();
 		}
 		else {
@@ -9026,17 +9024,11 @@ public class Combat extends BaseContent {
 			var damagePG:Number = (combat.teases.teaseBaseLustDamage() * 0.5 * spellModWhite());
             var arvePG:Number = 1;
 			if (player.hasPerk(PerkLib.ArcaneVenom)) arvePG += AbstractSpell.stackingArcaneVenom();
-			while (arvePG-->0) repeatArcaneVenom(damagePG, 1);
+			while (arvePG-->0) repeatArcaneVenom(damagePG, 1, 0);
         }
 		//Entagled
-		if (monster.hasStatusEffect(StatusEffects.Entangled) && monster.lustVuln > 0) {
-			if (40 + rand(player.inte) + rand(player.lib) > monster.spe) {
-				outputText("The vines are currently wrapped around [themonster], ensuring that [monster he] cannot escape their clutches. ");
-				var damageE:Number = (combat.teases.teaseBaseLustDamage() * spellModWhite());
-				var arveE:Number = 1;
-				if (player.hasPerk(PerkLib.ArcaneVenom)) arveE += AbstractSpell.stackingArcaneVenom();
-				while (arveE-->0) repeatArcaneVenom(damageE, 0);
-			}
+		if (monster.hasStatusEffect(StatusEffects.Entangled)) {
+			if (40 + rand(player.inte) + rand(player.lib) > monster.spe) outputText("The vines are currently wrapped around [themonster], ensuring that [monster he] cannot escape their clutches. ");
 			else {
 				outputText("[Themonster] wriggles free from the vines, regaining control of [himself]\n\n");
 				monster.removeStatusEffect(StatusEffects.Entangled);
@@ -9044,22 +9036,22 @@ public class Combat extends BaseContent {
 		}
 		//Briarthorn
 		if (monster.hasStatusEffect(StatusEffects.Briarthorn) && monster.lustVuln > 0) {
-			outputText("It's me Di.... nah it's Information Noona saying that your Briarthorn is still here and dealing some lust poison damage to enemy.");
+			outputText("It's me Di.... nah it's Information Noona saying that your Briarthorn is still here and dealing some lust poison damage to enemy. Bleed dmg notification is in another castle.");
 			var damageB:Number = (combat.teases.teaseBaseLustDamage() * 0.75 * spellModWhite());
 			var arveB:Number = 1;
 			if (player.hasPerk(PerkLib.ArcaneVenom)) arveB += AbstractSpell.stackingArcaneVenom();
-			while (arveB-->0) repeatArcaneVenom(damageB, 0);
+			while (arveB-->0) repeatArcaneVenom(damageB, 0, 0);
 		}
-		if (player.hasStatusEffect(StatusEffects.DeathBlossom)) {
+		//Death Blossom
+		if (monster.hasStatusEffect(StatusEffects.DeathBlossom)) {
 			outputText("It's me Di.... nah it's Information Noona saying that your Death Blossom is still here and dealing some lust poison damage to enemy.");
 			var damageDBH:Number = (scalingBonusIntelligence() * spellModWhite() * player.statusEffectv2(StatusEffects.DeathBlossom));
 			damageDBH = Math.round(damageDBH * poisonDamageBoostedByDao());
-            doPoisonDamage(damageDBH, true, true);
 			if (monster.lustVuln > 0) {
 				var damageDBL:Number = (combat.teases.teaseBaseLustDamage() * 1.5 * spellModWhite() * player.statusEffectv2(StatusEffects.DeathBlossom));
 				var arveDBL:Number = 1;
 				if (player.hasPerk(PerkLib.ArcaneVenom)) arveDBL += AbstractSpell.stackingArcaneVenom();
-				while (arveDBL-->0) repeatArcaneVenom(damageDBL, 0);
+				while (arveDBL-->0) repeatArcaneVenom(damageDBL, 0, damageDBH);
 			}
 		}
         if (player.hasStatusEffect(StatusEffects.Bound) && flags[kFLAGS.PC_FETISH] >= 2) {
@@ -9086,6 +9078,13 @@ public class Combat extends BaseContent {
             outputText("You are firmly trapped in the tentacle's coils.  <b>The only thing you can try to do is struggle free!</b>\n\n");
             if (flags[kFLAGS.PC_FETISH] >= 2) {
                 outputText("Wrapped tightly in the tentacles, you find it hard to resist becoming more and more aroused...\n\n");
+                player.takeLustDamage(3, true);
+            }
+        }
+        if (player.hasStatusEffect(StatusEffects.MagnarPinned)) {
+            outputText("You are firmly held in Magnar's grip.  <b>The only thing you can try to do is struggle free!</b>\n\n");
+            if (flags[kFLAGS.PC_FETISH] >= 2) {
+                outputText("With him constantly chocking you, you find it hard to resist becoming more and more aroused...\n\n");
                 player.takeLustDamage(3, true);
             }
         }
@@ -10276,7 +10275,11 @@ public class Combat extends BaseContent {
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
     }
 	
-	private function repeatArcaneVenom(dmg:Number, subtype:Number):void {
+	private function repeatArcaneVenom(dmg:Number, subtype:Number, poisonele:Number):void {
+		if (poisonele != 0) {
+			var damageAVP:Number = poisonele;
+			doPoisonDamage(damageAVP, true, true);
+		}
 		var damageAV:Number = dmg;
 		var RandomCritAV:Boolean = false;
 		if (player.hasPerk(PerkLib.VegetalAffinity)) damageAV *= 1.5;
@@ -10302,7 +10305,7 @@ public class Combat extends BaseContent {
 		if (subtype == 1) combat.teaseXP((1 + combat.bonusExpAfterSuccesfullTease()*2));
 		else combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		if (player.hasPerk(PerkLib.VerdantLeech)) {
-			if (monster.lustVuln != 0) monster.lustVuln += 0.05;
+			if (monster.lustVuln != 0) monster.lustVuln += 0.025;
 			HPChange(Math.round(player.maxHP() * 0.05), false);
 		}
 	}
@@ -15387,10 +15390,11 @@ public function RacialParagonAbilityBoost():Number {
 
 public function BleedDamageBoost(isARacialAbility:Boolean = false):Number {
     var BleedMod:Number = 1.0;
-    if (player.hasPerk(PerkLib.ThirstForBlood)) BleedMod += 0.5;
-    if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2) BleedMod += 0.5;
-    if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3) BleedMod += 0.5;
-    if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 4) BleedMod += 0.5;
+    if (player.hasPerk(PerkLib.ThirstForBlood)) BleedMod += 0.25;
+    if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1) BleedMod += 0.25;
+    if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2) BleedMod += 0.25;
+    if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3) BleedMod += 0.25;
+    if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 4) BleedMod += 0.25;
     if (isARacialAbility) BleedMod *= combat.RacialParagonAbilityBoost();
     return BleedMod;
 }
