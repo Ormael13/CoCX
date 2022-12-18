@@ -18,8 +18,18 @@
 <icons>
     <!--
     <file
-         name= file name (relative to res/)
-         (optional) prefix= prepended to icon ids>
+          name= file name (relative to res/)
+          (optional) prefix= prepended to icon ids
+          cellwidth="icon width in px"
+          cellheight="icon height in px">
+
+        repeat for each row with icons, top-to-bottom:
+        <row>
+           repeat for each icon in the row, left-to-right:
+           <icon>IconId</icon>
+           <icon></icon> <- to skip empty cell
+        </row>
+    </file>
      -->
 
     <!--
@@ -31,6 +41,8 @@
         * Generic armor of type: "I_GenericArmor_"+perk (ex. "I_GenericArmor_Light", see ItemConstants.AP_XXXX)
         * Generic by category: "I_GenericItem_"+category (ex. "I_GenericItem_weapon", see ItemConstants.CATEGORY_XXXX)
         * Placeholder: "I_GenericItem"
+
+        "I_" is prepended automatically
     -->
     <file name="icons/items.png" prefix="I_" cellwidth="36" cellheight="36">
         <row>
