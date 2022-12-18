@@ -679,6 +679,7 @@
         <cell rect="1927,158,40,55" name="clothe/elfClothingSkirt" dx="84" dy="87"/>
 		<cell rect="1427,325,80,108" name="clothe/darkPriest" dx="63" dy="64"/>
 		<cell rect="1427,434,80,108" name="clothe/priest" dx="63" dy="64"/>
+		<cell rect="1427,543,80,108" name="clothe/elfVillager" dx="63" dy="64"/>
         <cell rect="672,445,45,80" name="clotheLegs/comfortableClothes" dx="79" dy="90"/>
         <cell rect="751,158,40,54" name="clotheLegs/whiteKimonoBottom" dx="85" dy="121"/>
         <cell rect="919,158,40,54" name="clotheLegs/blackKimonoBottom" dx="85" dy="121"/>
@@ -1306,6 +1307,9 @@
 		<cell rect="1261,410,49,29" name="bra_fg/priestBraSmall" dx="79" dy="68"/>
         <cell rect="1261,440,49,29" name="bra_fg/priestBraMedium" dx="79" dy="68"/>
         <cell rect="1261,470,49,29" name="bra_fg/priestBraLarge" dx="79" dy="68"/>
+		<cell rect="1311,410,49,29" name="bra_fg/elfDressBraSmall" dx="79" dy="68"/>
+        <cell rect="1311,440,49,29" name="bra_fg/elfDressBraMedium" dx="79" dy="68"/>
+        <cell rect="1311,470,49,29" name="bra_fg/elfDressBraLarge" dx="79" dy="68"/>
         <cell rect="11,410,49,29" name="bra/goblinTechnomancerBraSmall" dx="79" dy="68"/>
         <cell rect="11,440,49,29" name="bra/goblinTechnomancerBraMedium" dx="79" dy="68"/>
         <cell rect="11,470,49,29" name="bra/goblinTechnomancerBraLarge" dx="79" dy="68"/>
@@ -6034,6 +6038,34 @@
 							<show part="clotheLegs/elfClothinglegs"/>
 						</else>
 					</if>
+				</if>
+			</if>
+		</if>
+		
+		<if test="elfVillagerDress">
+			<if test="showClothing">
+				<show part="clothe/elfVillager"/>
+				<if test="breastRows.length gt 0">
+					<switch>
+						<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+							<show part="bra_fg/ElfDressBraSmall"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+							<show part="bra_fg/ElfDressBraSmall"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+							<show part="bra_fg/ElfDressBraMedium"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+							<show part="bra_fg/ElfDressBraMedium"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+							<show part="bra_fg/ElfDressBraLarge"/>
+						</case>
+						<default>
+							<show part="bra_fg/ElfDressBraLarge"/>
+						</default>
+					</switch>
 				</if>
 			</if>
 		</if>
