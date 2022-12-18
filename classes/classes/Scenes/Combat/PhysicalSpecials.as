@@ -1189,7 +1189,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 							if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg *= 2;
 							lustDmg *= monster.lustVuln;
 							monster.teased(lustDmg);
-							if (monster.lustVuln > 0) {
+							if (monster.lustVuln > 0 && !monster.hasPerk(PerkLib.EnemyTrueAngel)) {
 								monster.lustVuln += 0.01;
 								if (monster.lustVuln > 1) monster.lustVuln = 1;
 							}
@@ -2936,7 +2936,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			monster.teased(lustDmgF,false);
 			if (crit) outputText(" <b>Critical!</b>");
 			combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
-			if (monster.lustVuln > 0) {
+			if (monster.lustVuln > 0 && !monster.hasPerk(PerkLib.EnemyTrueAngel)) {
 				monster.lustVuln += 0.05;
 				if (monster.lustVuln > 1) monster.lustVuln = 1;
 			}
@@ -4219,7 +4219,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					lustDmg *= d3Bdcc;
 					monster.teased(Math.round(monster.lustVuln * lustDmg), true);
 					combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
-					if (monster.lustVuln > 0) {
+					if (monster.lustVuln > 0 && !monster.hasPerk(PerkLib.EnemyTrueAngel)) {
 						monster.lustVuln += 0.05;
 						if (monster.lustVuln > 1) monster.lustVuln = 1;
 					}
@@ -5780,7 +5780,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					if (player.armor == armors.ELFDRES && player.isElf()) lustDmg *= 2;
 					if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg *= 2;
 					monster.teased(lustDmg*Omnishot);
-					if (monster.lustVuln > 0) {
+					if (monster.lustVuln > 0 && !monster.hasPerk(PerkLib.EnemyTrueAngel)) {
 						monster.lustVuln += 0.01;
 						if (monster.lustVuln > 1) monster.lustVuln = 1;
 					}

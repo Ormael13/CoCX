@@ -1420,26 +1420,21 @@ package classes.Scenes.Places{
 						"you close your eyes and rest in Chelsea's arms using her breast as your pillow. Your big sister caresses your forehead the whole time singing a slow lullaby, guess she doesn't get those moments all that often.[pg]");
 			outputText("Later when you wake up Chelsea comments as you both redress \"<i>Not a bad effort it's definitely better than the last time. Still do come back to me later you definitely could use more empathy training especially if you plan to take the demons down. Don't you worry sis I will train you until your senses are as sharp as the edge of an elven glaive.</i>\"[pg]");
 			outputText("On this you wave goodbye and head back to camp.[pg]");
-
 			hasTrainedToday = true;
 			player.SexXP((5+player.level) * 10);
 			player.trainStat("lib", 4, 300);
-
-			if (!player.hasPerk(PerkLib.FueledByDesire) && player.lib >= 150) {
+			if (!player.hasPerk(PerkLib.FueledByDesire) && player.lib >= 100) {
 				player.createPerk(PerkLib.FueledByDesire,0,0,0,0);
 				outputText("\n\nBetter refining of your charms allowed you to learn a new technique. <b>Gained Perk: Fueled by Desire</b>");
 			}
-
-			if (player.hasPerk(PerkLib.FueledByDesire) && !player.hasPerk(PerkLib.GracefulBeauty) && player.lib >= 200) {
+			if (player.hasPerk(PerkLib.FueledByDesire) && !player.hasPerk(PerkLib.GracefulBeauty) && player.lib >= 150) {
 				player.createPerk(PerkLib.GracefulBeauty,0,0,0,0);
 				outputText("\n\nBetter refining of your charms allowed you to learn a new technique. <b>Gained Perk: Graceful Beauty</b>");
 			}
-
 			if (player.hasPerk(PerkLib.GracefulBeauty) && !player.hasPerk(PerkLib.SweepDefenses) && player.lib >= 200) {
 				player.createPerk(PerkLib.SweepDefenses,0,0,0,0);
 				outputText("\n\nBetter refining of your charms allowed you to learn a new technique. <b>Gained Perk: Sweep Defenses</b>");
 			}
-
 			//New Legendary Armor: Forest Mage Dress	//TODO special effect with green magic, other effects complete
 			//Type: Light
 			//Armor: 0

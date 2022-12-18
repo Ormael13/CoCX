@@ -776,9 +776,9 @@ public class Creature extends Utils
 				if (bonus > limit) bonus = limit;
 				maxOver2 += (0.01 * bonus);
 			}
-			maxOver *= maxOver2;//~190%
+			maxOver *= maxOver2;//~220%
 			maxOver = Math.round(maxOver);
-			return Math.min(19999999,maxOver);
+			return Math.min(21999999,maxOver);
 		}
 		public function minHP():Number {
 			return 0;
@@ -849,9 +849,9 @@ public class Creature extends Utils
 				if (bonus > limit) bonus = limit;
 				max2 += (0.01 * bonus);
 			}
-			max1 *= max2;//~120%
+			max1 *= max2;//~150%
 			max1 = Math.round(max1);
-			return Math.min(239999,max1);
+			return Math.min(299999,max1);
 		}
 		public function maxFatigue():Number {
 			return 150;
