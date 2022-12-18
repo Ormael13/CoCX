@@ -3122,7 +3122,6 @@ public class Combat extends BaseContent {
 						DBPaa *= 2;
 					}
                     if (player.armor == armors.ELFDRES && player.isElf()) lustdamage *= 2;
-                                if (player.armor == armors.FMDRESS && player.isWoodElf()) lustdamage *= 2;
                     if (player.armor == armors.FMDRESS && player.isWoodElf()) lustdamage *= 2;
                     monster.teased(lustdamage, false);
 					if (player.hasPerk(PerkLib.ToxineMaster)) DBPaa += 2.5;
@@ -5059,7 +5058,6 @@ public class Combat extends BaseContent {
                     if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) lustDmg2 *= 2;
                     lustdamage *= lustDmg2;
                     if (player.armor == armors.ELFDRES && player.isElf()) lustdamage *= 2;
-                                if (player.armor == armors.FMDRESS && player.isWoodElf()) lustdamage *= 2;
                     if (player.armor == armors.FMDRESS && player.isWoodElf()) lustdamage *= 2;
                     monster.teased(Math.round(monster.lustVuln * lustdamage), false);
                     monster.statStore.addBuffObject({tou:-(lustDmg2*2)}, "Poison",{text:"Poison"});
@@ -6052,7 +6050,7 @@ public class Combat extends BaseContent {
                                     var lustDmg:int = 6 * monster.lustVuln;
                                     if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) lustDmg *= 2;
                                     if (player.armor == armors.ELFDRES && player.isElf()) lustdamage *= 2;
-                                if (player.armor == armors.FMDRESS && player.isWoodElf()) lustdamage *= 2;
+                                    if (player.armor == armors.FMDRESS && player.isWoodElf()) lustdamage *= 2;
                                     monster.teased(lustDmg);
                                     if (monster.lustVuln > 0) {
                                         monster.lustVuln += 0.01;
@@ -6577,7 +6575,7 @@ public class Combat extends BaseContent {
         if (player.armor == armors.FMDRESS && player.isWoodElf()) damage *= 2;
         if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50) {
             outputText("\nYou use your own lust against the enemy, cooling off a bit in the process.");
-            player.takeLustDamage(Math.round(damage)/10, true);
+            player.takeLustDamage(Math.round(-damage)/10, true);
             damage *= 1.2;
         }
         return monster.lustVuln * damage;
@@ -12145,7 +12143,7 @@ public function calculateBasicTeaseDamage(BaseTeaseDamage:Number = 18):Number {
     if (player.hasPerk(PerkLib.ArouseTheAudience) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType))) damage *= 1.5;
     if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50) {
         outputText("\nYou use your own lust against the enemy, cooling off a bit in the process.");
-        player.takeLustDamage(Math.round(damage)/10, true);
+        player.takeLustDamage(Math.round(-damage)/10, true);
         damage *= 1.2;
     }
     damage = (damage * monster.lustVuln);
@@ -12220,7 +12218,7 @@ public function StraddleTease():void {
     if (rand(100) < critChance) {
         Randomcrit = true;
         StraddleDamage *= 1.75;
-        if (monster.lustVuln != 0)
+        if (monster.lustVuln != 0 && player.hasPerk(PerkLib.SweepDefenses))
             monster.lustVuln += 0.05;
     }
     StraddleDamage = (StraddleDamage) * monster.lustVuln;
@@ -12825,7 +12823,7 @@ public function ScyllaTease():void {
             if (rand(100) < critChance) {
                 crit = true;
                 damage *= 1.75;
-                if (monster.lustVuln != 0)
+                if (monster.lustVuln != 0 && player.hasPerk(PerkLib.SweepDefenses))
                     monster.lustVuln += 0.05;
             }
             if (player.hasPerk(PerkLib.KrakenBlackDress)) damage *= 2;
@@ -13017,14 +13015,14 @@ public function WebTease():void {
                 if (player.lib > 100) critChance += 20;
             }
             if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+            if (player.armor == armors.ELFDRES && player.isElf()) damage *= 2;
+            if (player.armor == armors.FMDRESS && player.isWoodElf()) damage *= 2;
             if (rand(100) < critChance) {
                 crit = true;
                 damage *= 1.75;
-                if (monster.lustVuln != 0)
+                if (monster.lustVuln != 0 && player.hasPerk(PerkLib.SweepDefenses))
                     monster.lustVuln += 0.05;
             }
-            if (player.armor == armors.ELFDRES && player.isElf()) damage *= 2;
-            if (player.armor == armors.FMDRESS && player.isWoodElf()) damage *= 2;
             monster.teased(Math.round(monster.lustVuln * damage), false);
             outputText(" Your unwilling toy makes an involuntary moan letting you know that your touch hit the mark.");
             if (crit) outputText(" <b>Critical!</b>");
@@ -13172,7 +13170,7 @@ public function GooTease():void {
             if (rand(100) < critChance) {
                 crit = true;
                 damage *= 1.75;
-                if (monster.lustVuln != 0)
+                if (monster.lustVuln != 0 && player.hasPerk(PerkLib.SweepDefenses))
                     monster.lustVuln += 0.05;
             }
             monster.teased(Math.round(monster.lustVuln * damage));
@@ -13331,7 +13329,7 @@ public function ManticoreFeed():void {
         if (rand(100) < critChance) {
             crit = true;
             damage *= 1.75;
-            if (monster.lustVuln != 0)
+            if (monster.lustVuln != 0 && player.hasPerk(PerkLib.SweepDefenses))
                 monster.lustVuln += 0.05;
         }
         monster.teased(Math.round(monster.lustVuln * damage), false);
@@ -13442,7 +13440,7 @@ public function displacerFeedContinue():void {
         if (rand(100) < critChance) {
             crit = true;
             damage *= 1.75;
-            if (monster.lustVuln != 0)
+            if (monster.lustVuln != 0 && player.hasPerk(PerkLib.SweepDefenses))
                 monster.lustVuln += 0.05;
         }
         monster.teased(Math.round(monster.lustVuln * damage), false);
@@ -13553,7 +13551,7 @@ public function SlimeRapeFeed():void {
         if (rand(100) < critChance) {
             crit = true;
             damage *= 1.75;
-            if (monster.lustVuln != 0)
+            if (monster.lustVuln != 0 && player.hasPerk(PerkLib.SweepDefenses))
                 monster.lustVuln += 0.05;
         }
         monster.teased(Math.round(monster.lustVuln * damage), false);

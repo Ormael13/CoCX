@@ -2402,7 +2402,7 @@ import flash.utils.getQualifiedClassName;
 			outputText(" <b>([font-lust]" + lustDelta + "</font>)</b>");
 			if (player.armor == armors.ELFDRES) {
 				outputText("\nYou cool down a little bit");
-				player.takeLustDamage(Math.round(lustDelta)/10, true);
+				player.takeLustDamage(Math.round(-lustDelta)/10);
 			}
 		}
 
@@ -3724,4 +3724,4 @@ import flash.utils.getQualifiedClassName;
 			}
 		}
 	}
-}
+}

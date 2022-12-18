@@ -4245,7 +4245,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmgF *= 1.50;
 		if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50) {
 			outputText("\nYou use your own lust against the enemy, cooling off a bit in the process.");
-			player.takeLustDamage(Math.round(lustDmgF)/10, true);
+			player.takeLustDamage(Math.round(-lustDmgF)/10, true);
 			lustDmgF *= 1.2;
 		}
 		lustDmgF = Math.round(monster.lustVuln * lustDmgF);
@@ -4585,7 +4585,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50) {
 			outputText("\nYou use your own lust against the enemy, cooling off a bit in the process.");
-			player.takeLustDamage(Math.round(lustDmg)/10, true);
+			player.takeLustDamage(Math.round(-lustDmg)/10, true);
 			lustDmg *= 1.2;
 		}
 		if(monster.lust < (monster.maxLust() * 0.3)) outputText("[Themonster] squirms as the magic affects [monster him].  ");
@@ -4652,7 +4652,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg *= 2;
 		if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50) {
 			outputText("\nYou use your own lust against the enemy, cooling off a bit in the process.");
-			player.takeLustDamage(Math.round(lustDmg)/10, true);
+			player.takeLustDamage(Math.round(-lustDmg)/10, true);
 			lustDmg *= 1.2;
 		}
 		monster.teased(Math.round(monster.lustVuln * lustDmg));
@@ -4783,7 +4783,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50) {
 				outputText("\nYou use your own lust against the enemy, cooling off a bit in the process.");
-				player.takeLustDamage(Math.round(damage)/10, true);
+				player.takeLustDamage(Math.round(-damage)/10, true);
 				damage *= 1.2;
 			}
 			monster.teased(Math.round(monster.lustVuln * damage));
