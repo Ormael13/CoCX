@@ -58,10 +58,10 @@
         </row>
         <row>
             <icon></icon>
-            <icon>bookid</icon>
             <icon>GenericItem_shield</icon>
             <icon>HealHerb</icon>
             <icon>GenericItem_necklace</icon>
+            <icon>bookid</icon>
         </row>
     </file>
 
