@@ -51,11 +51,9 @@ import classes.StatusEffects;
 		if (display) {
 			outputText("You concentrate your desire on the nearby plants causing their flowers to spontaneously bloom in a cloud of corrupted pollen.\n");
 			monster.createStatusEffect(StatusEffects.DeathBlossom, 5, 1, 0, 0);
-			if (monster.lustVuln != 0) {
-				var arve:Number = 1;
-				if (player.hasPerk(PerkLib.ArcaneVenom)) arve += stackingArcaneVenom();
-				while (arve-->0) doSpellEffect2();
-			}
+			var arve:Number = 1;
+			if (player.hasPerk(PerkLib.ArcaneVenom)) arve += stackingArcaneVenom();
+			while (arve-->0) doSpellEffect2();
 		}
 	}
 	
@@ -78,7 +76,7 @@ import classes.StatusEffects;
 		if (crit) outputText(" <b>Critical!</b>");
 		combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		if (player.hasPerk(PerkLib.VerdantLeech)) {
-			if (monster.lustVuln != 0) monster.lustVuln += 0.025;
+			if (monster.lustVuln != 0 && !monster.hasPerk(PerkLib.EnemyTrueAngel)) monster.lustVuln += 0.025;
 			HPChange(Math.round(player.maxHP() * 0.05), false);
 		}
 	}

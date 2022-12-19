@@ -3191,7 +3191,7 @@ public class Combat extends BaseContent {
                         if (player.armor == armors.ELFDRES && player.isElf()) lustDmg *= 2;
                         if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg *= 2;
                         monster.teased(lustDmg);
-                        if (monster.lustVuln > 0) {
+                        if (monster.lustVuln > 0 && !monster.hasPerk(PerkLib.EnemyTrueAngel)) {
                             monster.lustVuln += 0.01;
                             if (monster.lustVuln > 1) monster.lustVuln = 1;
                         }
@@ -4851,7 +4851,7 @@ public class Combat extends BaseContent {
                         if (player.armor == armors.ELFDRES && player.isElf()) lustDmg *= 2;
                         if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg *= 2;
                         monster.teased(lustDmg);
-                        if (monster.lustVuln > 0) {
+                        if (monster.lustVuln > 0 && !monster.hasPerk(PerkLib.EnemyTrueAngel)) {
                             monster.lustVuln += 0.01;
                             if (monster.lustVuln > 1) monster.lustVuln = 1;
                         }
@@ -5731,10 +5731,6 @@ public class Combat extends BaseContent {
                             damageLC = damageLC * 0.33 * monster.lustVuln;
                             damageLC = Math.round(damageLC);
                             monster.teased(damageLC);
-                            if (player.necklace == necklaces.LEAFAMU && player.isElf()) {
-                                outputText("\nYou cool down a little bit");
-                                player.takeLustDamage(Math.round(damageLC)/10, true);
-                            }
                             if (crit1) outputText(" <b>Critical!</b>");
                             outputText(" ");
                             if (player.hasPerk(PerkLib.SuperSensual) && player.hasPerk(PerkLib.Sensual)) teaseXP(2);
@@ -6052,7 +6048,7 @@ public class Combat extends BaseContent {
                                     if (player.armor == armors.ELFDRES && player.isElf()) lustdamage *= 2;
                                     if (player.armor == armors.FMDRESS && player.isWoodElf()) lustdamage *= 2;
                                     monster.teased(lustDmg);
-                                    if (monster.lustVuln > 0) {
+                                    if (monster.lustVuln > 0 && !monster.hasPerk(PerkLib.EnemyTrueAngel)) {
                                         monster.lustVuln += 0.01;
                                         if (monster.lustVuln > 1) monster.lustVuln = 1;
                                     }
@@ -8207,8 +8203,7 @@ public class Combat extends BaseContent {
     }
 
     public function darkRitualCheckDamage():void {
-        if (player.hasStatusEffect(StatusEffects.DarkRitual))
-            player.takePhysDamage(player.maxHP() * 0.1);
+        if (player.hasStatusEffect(StatusEffects.DarkRitual)) HPChange(-Math.round(player.maxHP() * 0.1), false);
     }
 
     //Modify mana (mod>0 - subtract, mod<0 - regen)
@@ -8734,7 +8729,7 @@ public class Combat extends BaseContent {
             }
         }
         //Apophis Unholy Aura
-        if (player.isRaceCached(Races.APOPHIS) && monster.lustVuln > 0){
+        if (player.isRaceCached(Races.APOPHIS) && monster.lustVuln > 0 && !monster.hasPerk(PerkLib.EnemyTrueAngel)){
             outputText("Your unholy aura seeps into [themonster], slowly and insidiously eroding its resiliance to your unholy charms.\n\n");
             monster.lustVuln += 0.10;
         }
@@ -10366,7 +10361,7 @@ public class Combat extends BaseContent {
 		if (subtype == 1) combat.teaseXP((1 + combat.bonusExpAfterSuccesfullTease()*2));
 		else combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		if (player.hasPerk(PerkLib.VerdantLeech)) {
-			if (monster.lustVuln != 0) monster.lustVuln += 0.025;
+			if (monster.lustVuln != 0 && !monster.hasPerk(PerkLib.EnemyTrueAngel)) monster.lustVuln += 0.025;
 			HPChange(Math.round(player.maxHP() * 0.05), false);
 		}
 	}
@@ -12218,8 +12213,7 @@ public function StraddleTease():void {
     if (rand(100) < critChance) {
         Randomcrit = true;
         StraddleDamage *= 1.75;
-        if (monster.lustVuln != 0 && player.hasPerk(PerkLib.SweepDefenses))
-            monster.lustVuln += 0.05;
+        if (monster.lustVuln != 0 && player.hasPerk(PerkLib.SweepDefenses) && !monster.hasPerk(PerkLib.EnemyTrueAngel)) monster.lustVuln += 0.05;
     }
     StraddleDamage = (StraddleDamage) * monster.lustVuln;
     if (player.hasStatusEffect(StatusEffects.AlrauneEntangle)) StraddleDamage *= 2;
@@ -12823,8 +12817,7 @@ public function ScyllaTease():void {
             if (rand(100) < critChance) {
                 crit = true;
                 damage *= 1.75;
-                if (monster.lustVuln != 0 && player.hasPerk(PerkLib.SweepDefenses))
-                    monster.lustVuln += 0.05;
+                if (monster.lustVuln != 0 && player.hasPerk(PerkLib.SweepDefenses) && !monster.hasPerk(PerkLib.EnemyTrueAngel)) monster.lustVuln += 0.05;
             }
             if (player.hasPerk(PerkLib.KrakenBlackDress)) damage *= 2;
             if (player.armor == armors.ELFDRES && player.isElf()) damage *= 2;
@@ -13020,8 +13013,7 @@ public function WebTease():void {
             if (rand(100) < critChance) {
                 crit = true;
                 damage *= 1.75;
-                if (monster.lustVuln != 0 && player.hasPerk(PerkLib.SweepDefenses))
-                    monster.lustVuln += 0.05;
+                if (monster.lustVuln != 0 && player.hasPerk(PerkLib.SweepDefenses) && !monster.hasPerk(PerkLib.EnemyTrueAngel)) monster.lustVuln += 0.05;
             }
             monster.teased(Math.round(monster.lustVuln * damage), false);
             outputText(" Your unwilling toy makes an involuntary moan letting you know that your touch hit the mark.");
@@ -13170,8 +13162,7 @@ public function GooTease():void {
             if (rand(100) < critChance) {
                 crit = true;
                 damage *= 1.75;
-                if (monster.lustVuln != 0 && player.hasPerk(PerkLib.SweepDefenses))
-                    monster.lustVuln += 0.05;
+                if (monster.lustVuln != 0 && player.hasPerk(PerkLib.SweepDefenses) && !monster.hasPerk(PerkLib.EnemyTrueAngel)) monster.lustVuln += 0.05;
             }
             monster.teased(Math.round(monster.lustVuln * damage));
             if (crit) outputText(" <b>Critical!</b>");
@@ -13329,8 +13320,7 @@ public function ManticoreFeed():void {
         if (rand(100) < critChance) {
             crit = true;
             damage *= 1.75;
-            if (monster.lustVuln != 0 && player.hasPerk(PerkLib.SweepDefenses))
-                monster.lustVuln += 0.05;
+            if (monster.lustVuln != 0 && player.hasPerk(PerkLib.SweepDefenses) && !monster.hasPerk(PerkLib.EnemyTrueAngel)) monster.lustVuln += 0.05;
         }
         monster.teased(Math.round(monster.lustVuln * damage), false);
         if (crit) outputText(" <b>Critical!</b>");
@@ -13440,8 +13430,7 @@ public function displacerFeedContinue():void {
         if (rand(100) < critChance) {
             crit = true;
             damage *= 1.75;
-            if (monster.lustVuln != 0 && player.hasPerk(PerkLib.SweepDefenses))
-                monster.lustVuln += 0.05;
+            if (monster.lustVuln != 0 && player.hasPerk(PerkLib.SweepDefenses) && !monster.hasPerk(PerkLib.EnemyTrueAngel)) monster.lustVuln += 0.05;
         }
         monster.teased(Math.round(monster.lustVuln * damage), false);
         if (crit) outputText(" <b>Critical!</b>");
@@ -13551,8 +13540,7 @@ public function SlimeRapeFeed():void {
         if (rand(100) < critChance) {
             crit = true;
             damage *= 1.75;
-            if (monster.lustVuln != 0 && player.hasPerk(PerkLib.SweepDefenses))
-                monster.lustVuln += 0.05;
+            if (monster.lustVuln != 0 && player.hasPerk(PerkLib.SweepDefenses) && !monster.hasPerk(PerkLib.EnemyTrueAngel)) monster.lustVuln += 0.05;
         }
         monster.teased(Math.round(monster.lustVuln * damage), false);
         if (crit) outputText(" <b>Critical!</b>");
@@ -13736,7 +13724,7 @@ public function BreakOutWeb():void {
 public function HypnosisHeal():void {
     clearOutput();
     useMana(30, USEMANA_WHITE_HEAL);
-    combat.darkRitualCheckDamage();
+    darkRitualCheckDamage();
     outputText("You initiate a healing spell. ");
     CombatAbilities.Heal.doEffect(false);
     outputText("\n\nIt's only when you finish your casting that [themonster] snaps out of the hypnosis...But it's too late. ");
@@ -13752,7 +13740,7 @@ public function HypnosisHeal():void {
 public function HypnosisDarknessShard():void {
     clearOutput();
     useMana(30, USEMANA_BLACK);
-    combat.darkRitualCheckDamage();
+    darkRitualCheckDamage();
     outputText("You initiate a Darkness spell. ");
     CombatAbilities.DarknessShard.doEffect(false);
     CombatAbilities.DarknessShard.doEffect(false);
@@ -13769,7 +13757,7 @@ public function HypnosisDarknessShard():void {
 public function HypnosisDuskWave():void {
     clearOutput();
     useMana(30, USEMANA_BLACK);
-    combat.darkRitualCheckDamage();
+    darkRitualCheckDamage();
     outputText("You initiate a Darkness spell. ");
     CombatAbilities.DuskWave.doEffect(false);
     CombatAbilities.DuskWave.doEffect(false);

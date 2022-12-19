@@ -2480,4 +2480,3 @@ public class CampMakeWinions extends BaseContent
 		}
 	}
 }
-

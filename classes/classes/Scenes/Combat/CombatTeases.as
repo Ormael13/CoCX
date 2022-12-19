@@ -1512,8 +1512,7 @@ public class CombatTeases extends BaseCombatContent {
 			if (rand(100) < critChance) {
 				crit = true;
 				damage *= 1.75;
-				if (monster.lustVuln != 0 && player.hasPerk(PerkLib.SweepDefenses))
-					monster.lustVuln += 0.05;
+				if (monster.lustVuln != 0 && player.hasPerk(PerkLib.SweepDefenses) && !monster.hasPerk(PerkLib.EnemyTrueAngel)) monster.lustVuln += 0.05;
 			}
 			if (monster is JeanClaude) (monster as JeanClaude).handleTease(damage, true);
 			else if (monster is Doppleganger && !monster.hasStatusEffect(StatusEffects.Stunned)) (monster as Doppleganger).mirrorTease(damage, true);
