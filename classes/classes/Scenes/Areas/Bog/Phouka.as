@@ -309,6 +309,7 @@ public class Phouka extends Monster
 					.add(consumables.GROPLUS, 2)
 					.add(consumables.SDELITE, 2)
 					.add(consumables.P_WHSKY, 2)
+					.add(consumables.CHOCBOX, 2)
 					.add(useables.S_SHARD, 40);
 			}
 			else {
@@ -317,6 +318,7 @@ public class Phouka extends Monster
 					.add(consumables.GROPLUS, 2)
 					.add(consumables.SDELITE, 13)
 					.add(consumables.P_WHSKY, 10)
+					.add(consumables.CHOCBOX, 10)
 					.add(null, 10);
 			}
 			this.wings.type = Wings.FAIRY;

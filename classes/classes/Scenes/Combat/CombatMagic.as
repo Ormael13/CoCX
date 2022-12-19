@@ -754,9 +754,9 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 			if (player.armor == armors.ELFDRES && player.isElf()) damage *= 2;
         	if (player.armor == armors.FMDRESS && player.isWoodElf()) damage *= 2;
-			if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50) {
+			if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50 && flags[kFLAGS.COMBAT_TEASE_HEALING]) {
 				outputText("\nYou use your own lust against the enemy, cooling off a bit in the process.");
-				player.takeLustDamage(Math.round(-damage)/10, true);
+				player.takeLustDamage(Math.round(-damage)/40, true);
 				damage *= 1.2;
 			}
 			monster.teased(Math.round(monster.lustVuln * damage));

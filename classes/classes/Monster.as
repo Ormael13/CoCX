@@ -2400,9 +2400,9 @@ import flash.utils.getQualifiedClassName;
 			lust += lustDelta;
 			lustDelta = Math.round(lustDelta * 10)/10;
 			outputText(" <b>([font-lust]" + lustDelta + "</font>)</b>");
-			if (player.armor == armors.ELFDRES) {
+			if (player.armor == armors.ELFDRES && flags[kFLAGS.COMBAT_TEASE_HEALING]) {
 				outputText("\nYou cool down a little bit");
-				player.takeLustDamage(Math.round(-lustDelta)/10);
+				player.takeLustDamage(Math.round(-lustDelta)/20);
 			}
 		}
 

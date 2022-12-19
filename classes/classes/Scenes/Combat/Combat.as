@@ -5908,6 +5908,15 @@ public class Combat extends BaseContent {
                         if (monster.hasStatusEffect(StatusEffects.BurnDoT)) monster.addStatusValue(StatusEffects.BurnDoT,1,1);
                         else monster.createStatusEffect(StatusEffects.BurnDoT, 5, 0.05, 0, 0);
                     }
+                    if (player.weapon == weapons.ATWINSCY) {
+                        outputText("  Reeling in pain [themonster] begins to burn.");
+                        if (monster.hasStatusEffect(StatusEffects.BurnDoT)) monster.addStatusValue(StatusEffects.BurnDoT,1,3);
+                        else monster.createStatusEffect(StatusEffects.BurnDoT, 5, 0.05, 0, 0);
+                        if (monster.mana > 100)
+                        outputText("\n\nYour scythes also strip away measure of the enemies mana");
+                        monster.mana -= 100;
+                        if (monster.mana <0) monster.mana = 0;
+                    }
                     if (player.hasPerk(PerkLib.PoisonNails) && player.isFistOrFistWeapon()) {
                         var lust0damage:Number = 35 + rand(player.lib / 10);
                         lust0damage *= 0.14;
@@ -6496,7 +6505,7 @@ public class Combat extends BaseContent {
     }
 
     public function isFireTypeWeapon():Boolean {
-        return ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && (player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "ruby")) || (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) || (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) || player.hasStatusEffect(StatusEffects.FlameBlade) || player.weapon == weapons.TIDAR;
+        return ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && (player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "ruby")) || (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) || (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) || player.hasStatusEffect(StatusEffects.FlameBlade) || player.weapon == weapons.TIDAR || player.weapon == weapons.ATWINSCY;
     }
 
     public function isIceTypeWeapon():Boolean {
@@ -6569,9 +6578,9 @@ public class Combat extends BaseContent {
         var damage:Number = (player.inte / 5 * spellMod() + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
         if (player.armor == armors.ELFDRES && player.isElf()) damage *= 2;
         if (player.armor == armors.FMDRESS && player.isWoodElf()) damage *= 2;
-        if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50) {
+        if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50 && flags[kFLAGS.COMBAT_TEASE_HEALING]) {
             outputText("\nYou use your own lust against the enemy, cooling off a bit in the process.");
-            player.takeLustDamage(Math.round(-damage)/10, true);
+            player.takeLustDamage(Math.round(-damage)/40, true);
             damage *= 1.2;
         }
         return monster.lustVuln * damage;
@@ -12136,9 +12145,9 @@ public function calculateBasicTeaseDamage(BaseTeaseDamage:Number = 18):Number {
     damage *= damagemultiplier;
     if (player.hasPerk(PerkLib.ChiReflowLust)) damage *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
     if (player.hasPerk(PerkLib.ArouseTheAudience) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType))) damage *= 1.5;
-    if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50) {
+    if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50 && flags[kFLAGS.COMBAT_TEASE_HEALING]) {
         outputText("\nYou use your own lust against the enemy, cooling off a bit in the process.");
-        player.takeLustDamage(Math.round(-damage)/10, true);
+        player.takeLustDamage(Math.round(-damage)/40, true);
         damage *= 1.2;
     }
     damage = (damage * monster.lustVuln);

@@ -99,17 +99,24 @@ public class AlvinaFollower extends NPCAwareContent implements TimeAwareInterfac
 	}
 
 	public function timeChange():Boolean {
+		if (time.hours == 6){
+			if (GiftCooldown > 0) GiftCooldown--;
+			if (WandCooldown > 0) WandCooldown--;
+			if (AlvinaInfernalOilCooldown > 0) AlvinaInfernalOilCooldown--;
+		}
 		return false;
 	}
 
 	public function timeChangeLarge():Boolean {
-		if (GiftCooldown > 0) GiftCooldown--;
-		if (WandCooldown > 0) WandCooldown--;
-		if (AlvinaInfernalOilCooldown > 0) AlvinaInfernalOilCooldown--;
 		return false;
 	}
 
-//ALVINA_FOLLOWER flag states
+	public function AlvinaFollower() {
+		EventParser.timeAwareClassAdd(this);
+		Saves.registerSaveableState(this);
+	}
+
+//ALVINA_FOLLOWER [2684] flag states
 // 1: Met first time during explore
 // 2~8: days since factory cleared
 // 9: Met second time on Mountain
@@ -310,7 +317,7 @@ public function alvinaThirdEncounterYesNeverWon():void
 		outputText("With one more attack you send Alvina flying across the room. She tries to reply with a spell of her own but it fizzles right out when striking you with little effect. Now you tower over the demoness' helpless form as she stares at you in confusion and terror, a feeling she clearly was not meant to ever have again.\n\n");
 		outputText("\"<i>Your body… it might even hold the key!? Was I wrong all along? [name] take pity on me. I have no idea how you attained such ridiculous powers but I'm knowledgeable and skilled, surely you could see a use for that amongst your servants! Yes I'm willing to serve you of all people, there's no way I can die when I'm so close to finishing my research, the god of that damn blasted universe depends on it!</i>\"\n\n");
 		addButton(0, "Put her out of her misery", alvinaThirdEncounterPutHerOutOfHerMisery);
-		addButton(4, "Take Her", alvinaThirdEncounterYesNever);
+		addButton(4, "Take Her", alvinaThirdEncounterTakeHer);
 	}
 	else {
 		outputText("In a desperate last attempt, you aim at the succubus shield one final time, striking directly at the pendant hanging from her neck and causing the mana shield protecting it to explode, your hit going through and reaching the pendant. Alvina stares in disbelief then acceptance as the crystal shatters. She desperately tries to hold the shards of the pendant together in a last ditch to preserve her now fleeting life.\n\n");
@@ -349,13 +356,13 @@ public function alvinaThirdEncounterPutHerOutOfHerMisery():void
 }
 public function alvinaThirdEncounterTakeHer():void
 {
-	outputText("CURRENT PATH DOES NOT EXIST");
-	doNext(camp.returnToCampUseFourHours);
+	outputText("CURRENT PATH DOES NOT EXIST\n\nSo you kill her instead... Such is the injustice of the world.\n\nIn future wil unlock a variant of Alvina that is sub to PC.");
+	doNext(alvinaThirdEncounterPutHerOutOfHerMisery);
 }
 
 	//Bar enconuter scenes
 	public function alvinaCanMeetAtBar():Boolean {
-		return GiftCooldown <= 0 && !DateFailed && flags[kFLAGS.ALVINA_FOLLOWER] >= 9 && flags[kFLAGS.ALVINA_FOLLOWER] < 12;
+		return GiftCooldown <= 0 && !DateFailed && flags[kFLAGS.ALVINA_FOLLOWER] >= 1 && flags[kFLAGS.ALVINA_FOLLOWER] < 12;
 	}
 	public function alvinaBarDescription():void {
 		if (!MetAlvinaAtBar) outputText("\n\nA tall but slim figure in a hooded robe sits by the bar reading a book while nursing a mug of ale.");
@@ -386,15 +393,16 @@ public function alvinaThirdEncounterTakeHer():void
 		if (!GaveAlvinaFafnirTear)
 				addButton(0, "Give Flower", alvinaGiveAFlower).disableIf(!hasFlowers(), "You might want to give her a flower");
 		if (!GaveAlvinaChocolate)
-			addButton(1, "Give Chocolate", alvinaGiveChocolate).disableIf(!player.hasItem(consumables.BLADEFERN), "You want to give her something sweet, maybe those Phouka in the swamp might have something?");
+			addButton(1, "Give Chocolate", alvinaGiveChocolate).disableIf(!player.hasItem(consumables.CHOCBOX), "You want to give her something sweet, maybe those Phouka in the bog might have something?");
 		if (!GaveAlvinaMrPaw)
 			addButton(2, "Give MrPaw", alvinaGiveMrPaw).disableIf(!player.hasItem(useables.TEDDY), "You need a gift to give to her, maybe check the Oddities shop?", "???");
 		if (!GaveAlvinaWand)
 			addButton(3, "Give Wand", alvinaGiveWand).disableIf(!player.hasItem(weapons.O_WAND), "You need a gift to give to her, maybe check the Oddities shop?", "???");
-		if (gaveAllPresents && !DateFailed && !FirstDateSuccess)
+		if (gaveAllPresents() && !DateFailed && !FirstDateSuccess)
 			addButton(0, "Date", alvinaDate);
 		if (FirstDateSuccess && flags[kFLAGS.LETHICE_DEFEATED] > 0)
 			addButton(0, "Date", alvinaSecondDate);
+		addButton(14, "Leave", telAdre.telAdreMenu);
 
 		function hasFlowers():Boolean {
 			return player.hasItem(consumables.F_TEAR) || player.hasItem(consumables.DRAKHRT) || player.hasItem(consumables.STRFLOW) || player.hasItem(consumables.SNAKEBANE);
@@ -428,7 +436,7 @@ public function alvinaThirdEncounterTakeHer():void
 		outputText("Alvina slowly recollects herself, it's as if for a moment she was about to cry and now she was perfectly fine.\n\n");
 		outputText("\"<i>Thank you for bringing me this. I will keep it safe at home.</i>\"\n\n");
 		outputText("You note from the sound of it, her mother must've been a very important person to her.\n\n");
-		outputText("\"<i>My mother and my father were the world to me. Sadly they passed on early in my life due to illness leaving me alone to fend for and raise my little sister, well at least until I attended school.</i>\"");
+		outputText("\"<i>My mother and my father were the world to me. Sadly they passed on early in my life due to illness leaving me alone to fend for and raise my little sister, well at least until I attended school.</i>\"\n\n");
 		outputText("That is very unfortunate, you apologize if it brought back painful memories.\n\n");
 		outputText("\"<i>No it's fine I just thought I had left all of that far behind me. Once you've fought as long as I have you begin to forget what it is you fought for in the first place. You'd do well, champion of Ingnam, to never forget why and what you fight for lest you take a wrong turn. Still as much as it pains me to remember her, I'm glad that I did.</i>\"\n\n");
 		outputText("Suddenly Alvina falls off to the ground near her stool as if in pain holding a hand firmly to her chest. You ask her if she's going to be okay.\n\n");
@@ -475,7 +483,7 @@ public function alvinaThirdEncounterTakeHer():void
 		player.destroyItems(weapons.O_WAND, 1);
 		GaveAlvinaWand = true;
 		WandCooldown = 1;
-		doNext(camp.returnToCampUseOneHour);
+		alvinaBarTalkOptions();
 	}
 	public function alvinaGiveChocolate():void {
 		spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2Concealed_16bit);
@@ -487,6 +495,7 @@ public function alvinaThirdEncounterTakeHer():void
 		outputText("She suddenly drop from her chair to the ground a hand on her chest as if trying to hold blood from a fatal wound. You're about to help her out, maybe try some basic medical skills of yours but she get back up on her own.\n\n");
 		outputText("\"<i>It's nothing… must've been something wrong with the drinks. I need to go and take care of my health. Be safe [name] and until next time.</i>\"\n\n");
 		outputText("She quickly dumps gems on the corner to pay her tab and storm out of the wet bitch. While you stare blankly still pondering what just happened.\n\n");
+		player.destroyItems(consumables.CHOCBOX, 1);
 		GaveAlvinaChocolate = true;
 		GiftCooldown = 1;
 		doNext(camp.returnToCampUseOneHour);
@@ -635,14 +644,14 @@ public function alvinaThirdEncounterTakeHer():void
 		outputText("From your pocket you pull out the Marae pearl. Purity manifest, the immaculate pearl shines before Alvina eyes which tremble before it.\n\n");
 		outputText("\"<i>Pure… immaculate… the will of the tree goddess in the form of a gem. Did you actually plan for this all along?</i>\"\n\n");
 		outputText("She might pretend she's a demon but her soul still exists albeit outside her body. While she is indeed deeply corrupted there's no telling that a powerful purifying agent couldn't fix her up so long as she genuinely wishes to change, her demonic nature as a natural shapeshifter should play itself up and assist it though you have no idea of what a purified demon would look like. \n\n");
-		outputText("\"<i>The very notion is ludicrous, absurd. You're telling me that if I reject my own corrupted nature hard enough it will just work? What kind of whimsical way of thinking is that?! Do you hear yourself talk here?! Well know what just to humor you I'll try, and if I fail I can always just off myself as I originally planned.</i>\"\n\n");
-		outputText("Alvina grabs the pearl from your hands, her fell eyes reflecting on the surface before she gulps it up. She begin to focus, closing her eyes and at first nothing seems to happen. You're about to sigh in disappointment when the tips of her pitch black hair strands begin to bleach, growing increasingly pale. At first the white gains a few centimeters before the black slightly swallows it back but it's as if pushing back against a tidal wave as the white begins creeping all the way up to the root. While she doesn't exactly become human again many of her fiendish traits are seldom revised into something more natural and noble, turning her into some kind of new chimeric hybrid. Her demon tail writhes and changes shape before covering in immaculate fur and draconic scales. Finally Alvina skin tone lightens up slightly as her fleshy wings membrane melt and change, covered with feathers of pure white. Alvina opens her formerly embery now golden horizontal slited eyes in absolute confusion marveling as her entire body is reshaped.\n\n");
-		outputText("\"<i>I… I am one with myself and the world, I've seen the depths of wants but also acquired the understanding. This feeling [name], it's like staring at the world first the first time, a dimension beneath the dimensions where all rules of creation converge. It's like I stand as a grain of sand in the middle of everything so small but capable of altering the fabrics of reality so long as it keep flowing harmoniously with the natural order. Is this godhood? No it is not… gods are limited in what they can do… their wants are restrained by their own petty desires and lack of imagination. To see what I see right now [name]. I have to concentrate not to lose myself into the sea of possible past futures and alternatives. It is as you first said, Mareth is damaged… wounded but not beyond repair. The gods can't fix this, heck if no one does anything the wound will only get worse but I can… I and my descendance can fix this wound caused by the corruption. </i>\"\n\n");
-		outputText("\"<i>Removing the demon's will not fix Mareth; the corruption has run too deep; it's literally in the mind of the denizens now. Even if we remove the plant and kill all the demon's new demons could easily arise from the remaining corrupted roots. All it takes is for a particularly lusty mortal to go on a lust craze and spontaneously lose their soul and we will be back to square one. As for you [name] You may think you are but a human but within you rest a spark capable of rewriting history as we see it.</i>\"\n\n");
-		outputText("\"<i>The power to beat impossible odds and change yourself infinitely to rewrite your own mistakes into success to the desired outcome and change the future… only… are you even aware of your own power? Maybe you use it subconsciously to begin with. You are an anomaly [name], one of the few beings capable of changing their own fates and that of others at will. I see now what I must do and it starts by pledging my body and souls to you so as to ensure that you may accomplish everything you set your goals upon, undo past mistakes and put Mareth into the right tracks. You embody everything I've worked so hard to see.</i>\"\n\n");
+		outputText("\"<i>The very notion is ludicrous, absurd. You're telling me that if I reject my own corrupted nature hard enough it will just work? What kind of whimsical way of thinking is that?! Do you hear yourself talk here?! Well know what, just to humor you I'll try, and if I fail I can always just off myself as I had originally planned.</i>\"\n\n");
+		outputText("Alvina grabs the pearl from your hands, her fell eyes reflecting on the surface before she gulps it down. She begin to focus, closing her eyes and at first nothing seems to happen. You're about to sigh in disappointment when the tips of her pitch black hair strands begin to bleach, growing increasingly pale. At first the white gains a few centimeters before the black slightly swallows it back, but it is like pushing back against a tidal wave as the white begins creeping all the way up to the root. While she doesn't exactly become human again, many of her fiendish traits are revised into something more natural and noble, turning her into some kind of new chimeric hybrid. Her demon tail writhes and changes shape before covering in immaculate fur and draconic scales. Finally Alvina skin tone lightens up slightly as her fleshy wings membrane melt and change, covered with feathers of pure white. Alvina opens her formerly embery, now golden horizontal slitted eyes in absolute confusion marveling as her entire body is reshaped.\n\n");
+		outputText("\"<i>I… I am one with myself and the world, I've seen the depths of wants but also acquired the understanding. This feeling [name], it's like staring at the world first the first time, a dimension beneath the dimensions where all rules of creation converge. It's like I stand as a grain of sand in the middle of everything so small but capable of altering the fabrics of reality so long as it keep flowing harmoniously with the natural order. Is this godhood? No it is not… gods are limited in what they can do… their wants are restrained by their own petty desires and lack of imagination. To see what I see right now [name]. I have to concentrate not to lose myself into the sea of possible past futures and alternatives. It is as you first said, Mareth is damaged… wounded but not beyond repair. The gods can't fix this, heck if no one does anything the wound will only get worse. But I can… I and my descendents can fix this wound caused by the corruption. </i>\"\n\n");
+		outputText("\"<i>Removing the demon's will not fix Mareth; the corruption has run too deep; it's literally in the mind of the denizens now. Even if we remove the plant and kill all the demon's new demons could easily arise from the remaining corrupted roots. All it takes is for a particularly lusty mortal to go on a lust craze and spontaneously lose their soul and we will be back to square one. As for you [name], you may think you are but a huma,n but within you rest a spark capable of rewriting history as we see it.</i>\"\n\n");
+		outputText("\"<i>The power to beat impossible odds and change yourself infinitely, to rewrite your own mistakes into success to the desired outcome and change the future… only… are you even aware of your own power? Maybe you use it subconsciously to begin with. You are an anomaly [name], one of the few beings capable of changing their own fates and that of others at will. I see now what I must do, and it starts by pledging my body and souls to you so as to ensure that you may accomplish everything you set your goals upon. Undo past mistakes and put Mareth onto the right track. You embody everything I've worked so hard to see.</i>\"\n\n");
 		outputText("She kneels in front of you, her golden eyes staring directly into yours, you see her unshakable determination firsthand. However you didn't wan't Alvina to be your servant, what you did was out of love for her.\n\n");
-		outputText("\"<i>I am unworthy of your praise [name], this form I have now is but the fruit of your own labor to unshackle me from my mistakes and free me from my torment. I just know it… I have seen all the alternatives and where they inevitably lead. If anything it's possible you have threaded them all already, you just don't remember it.</i>\"\n\n");
-		outputText("Still you would prefer she stood up and walked alongside you as a partner, a lover, not as a servant. \n\n");
+		outputText("\"<i>I am unworthy of your praise [name], this form I have now is but the fruit of your own labor to unshackle me from my mistakes and free me from my torment. I just know it… I have seen all the alternatives and where they inevitably lead. If anything, it's possible you have threaded them all already, you just don't remember it.</i>\"\n\n");
+		outputText("Still you would prefer she stood up and walked alongside you as a partner, a lover and not as a servant. \n\n");
 		outputText("\"<i>This path leads to a happy ending… I am not sure whether I deserve it but if this is what you choose, who am I to deny you fatebreaker? Fine then, I Alvina, first of my new species which I shall call Azazel, pledge myself to you.</i>\" \n\n");
 		outputText("Suddenly her eyes light up as if remembering something and she giggles as she catches your hand into her pawed fingers.\n\n");
 		outputText("\"<i>[name] I've been fighting it hard until now, pride and everything blinding me to my own feelings but I would like you to take me… here and now, please make me yours.</i>\"\n\n");
@@ -1576,9 +1585,6 @@ public function postMarriageSleep():void {
 		sceneHunter.selectGender(curry(marriageSexMale, true), curry(marriageSexFemale, true));
 	}
 }
-
-
-
 
 
 	//Pure Alvina Camp content
