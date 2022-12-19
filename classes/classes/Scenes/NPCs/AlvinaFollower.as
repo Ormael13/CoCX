@@ -675,7 +675,7 @@ public function alvinaThirdEncounterTakeHer():void
 		outputText("With a heavy heart you pick up the broken pendant if only as a memento. She deserved better than this.\n\n");
 		outputText("<b>Found Alvina's Shattered Phylactery</b>\n\n");
 		player.createKeyItem("Alvina's Shattered Phylactery", 0, 0, 0, 0);
-		flags[kFLAGS.ALVINA_FOLLOWER] = 12;
+		flags[kFLAGS.ALVINA_FOLLOWER] = 13;
 		doNext(camp.returnToCampUseSixHours);
 	}
 	public function alvinaMakeLovePure():void {
@@ -1589,7 +1589,9 @@ public function postMarriageSleep():void {
 
 	//Pure Alvina Camp content
 	public function alvinaPureCampDescript():void {
-		outputText("Alvina is writing down on a parchment at the side of the camp. She's likely writing down her thoughts, philosophy or perhaps trying to develop new spells to help your fight and contain the corruption across Mareth. The enthusiasm with which she does her research is commendable. She really seems to like what she does! (if multiple children) Once in a while one of your many children walks up to her to ask a question to which she patiently answers with a smile. Whether her answer is a half truth or the full truth is always carefully spoken. Through her sheer presence Alvina helps alleviate the ambiant corruption which is slowly burnt away from you and others near you.\n\n");
+		outputText("Alvina is writing down on a parchment at the side of the camp. She's likely writing down her thoughts, philosophy or perhaps trying to develop new spells to help your fight and contain the corruption across Mareth. The enthusiasm with which she does her research is commendable. She really seems to like what she does! "+
+			//(if multiple children) Once in a while one of your many children walks up to her to ask a question to which she patiently answers with a smile. Whether her answer is a half truth or the full truth is always carefully spoken.
+			"Through her sheer presence Alvina helps alleviate the ambiant corruption which is slowly burnt away from you and others near you.\n\n");
 	}
 
 	public function alvinaPureMainCampMenu():void {
@@ -1608,6 +1610,8 @@ public function postMarriageSleep():void {
 			.disableIf(true, "You need this item to ask her about it DUH...")
 			.disableIf(AlvinaInfernalOilCooldown > 0);	//TODO
 		addButton(1, "Sex", alvinaPureSexMenu);
+		if (sceneHunter.other)
+			addButton(5, "Corrupt Alvi", alvinaMainCampMenu).hint("Follows Corrupt Alvina as though you had joined her before the fight.");
 	}
 
 	public function alvinaPureInfernalOil():void {
@@ -1621,6 +1625,7 @@ public function postMarriageSleep():void {
 			outputText("You never said you wanted it as is. Could she purify it for you?\n\n");
 			outputText("\"<i>Wait you mean to say you… how flattering. Of all the possible shapes, you would like to look just like me. I would kiss you but you seem to be low on time. This is fine though, give me a day while I concentrate on altering this product and tadaa you will be an Azazel too in no time!</i>\"\n\n");
 			AlvinaInfernalOilCooldown = 1;
+			//player.destroyItems(consumables.INFOIL, 1);
 			AlvinaInfernalOilAsked = true;
 			eachMinuteCount(15);
 			doNext(playerMenu);
@@ -1629,7 +1634,7 @@ public function postMarriageSleep():void {
 		outputText("\"<i>All finished It took some effort but just like my form the reagent can be purified. Took me some great effort though, you wouldn't believe the places I had to go to get the reagents.</i>\"\n\n");
 		outputText("She hands you the bottle.\n\n");
 		outputText("\"<i>Don't abuse it… wouldn't want to get side effects or something not that id know them if any I'm just telling you what my sister used to say all the time about medicine and its that too much of a good thing is a bad thing.</i>\"\n\n");
-		//inventory.takeItem(consumables.SAGE_M);
+		//inventory.takeItem(consumables.SAGE_M);	//Sage Medicine	//Azazel TF from
 		eachMinuteCount(15);
 		doNext(playerMenu);
 	}
@@ -1644,7 +1649,7 @@ public function postMarriageSleep():void {
 		outputText("She prepares a spell and a white door appears.\n\n");
 		outputText("\"<i>After you [name].</i>\"\n\n");
 		outputText("Beyond the door is a beautiful bedroom with a large white silk bed. At the back is a balcony giving a view over what appears to be a cloudless sunlit blue sky and a field of white flowers, probably her favorites, which stretch all the way to the horizon. This tiny room radiates the warmth and joy of life, a defiant pocket of hope and light in the middle of the bleak realm that is Mareth.\n\n");
-		outputText("\"This [name] is a reflection of utopia… well my dream world idea of it. Obviously this pocket dimension can only be truly perfect with you in it. Let us if only for a few minutes leave the war scarred world of Mareth behind. As you are the champion relentlessly fighting your way through corruption I know you could use some time away from its black fume. Worry not time will resume in Mareth where we left it once we are done.\"\n\n");
+		outputText("\"<i>This, [name], is a reflection of utopia… well my dream world idea of it. Obviously this pocket dimension can only be truly perfect with you in it. Let us, if only for a few minutes, leave the war scarred world of Mareth behind. As you are the champion relentlessly fighting your way through corruption, I know you could use some time away from its black fume. Worry not, time will resume in Mareth where we left it once we are done.</i>\"\n\n");
 
 		alvinaMakeLovePure();
 	}
@@ -1653,7 +1658,7 @@ public function postMarriageSleep():void {
 		spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2_16bit);
 		clearOutput();
 		outputText("Pending scene text");
-		doNext(camp.returnToCampUseOneHour);
+		doNext(playerMenu);
 	}
 	public function alvinaPureLetHerTakeYou():void {  //Female or Herm
 		spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2_16bit);

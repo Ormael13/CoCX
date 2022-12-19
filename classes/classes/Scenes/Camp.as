@@ -1303,7 +1303,11 @@ public class Camp extends NPCAwareContent{
 				buttons.add("DriderTown", SceneLib.dridertown.DriderTownEnter).hint("Check up on Belisa, Lily & Tyrantia.");
 			}
 			//Alvina
-			if (flags[kFLAGS.ALVINA_FOLLOWER] > 19) {
+			if (SceneLib.alvinaFollower.AlvinaPurified) {
+				SceneLib.alvinaFollower.alvinaPureCampDescript();
+				buttons.add("Alvina", SceneLib.alvinaFollower.alvinaPureMainCampMenu).hint("Check up on Alvina.");
+			}
+			else if (flags[kFLAGS.ALVINA_FOLLOWER] > 19) {
 				outputText("Alvina isn’t so far from here, having made her [camp] in a corrupted plant groove she created so to have easy access to reagents.\n\n");
 				buttons.add("Alvina", SceneLib.alvinaFollower.alvinaMainCampMenu).hint("Check up on Alvina.");
 			}
