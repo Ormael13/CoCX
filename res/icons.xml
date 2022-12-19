@@ -47,6 +47,19 @@
     <file name="icons/items.png" prefix="I_" cellwidth="36" cellheight="36">
         <row>
             <icon>IncubiD</icon>
+            <icon>GenericItem_consumable</icon>
+        </row>
+        <row>
+            <icon>red potion icon id</icon>
+            <icon>GenericWeapon_Sword</icon>
+            <icon>GenericWeapon_Bow</icon>
+            <icon>bow2 id</icon>
+        </row>
+        <row>
+            <icon></icon>
+            <icon>GenericItem_shield</icon>
+            <icon>I_HealHerb</icon>
+            <icon>GenericItem_necklace</icon>
         </row>
     </file>
 
@@ -62,5 +75,11 @@
             Existing icon "I_IncubiD" is also available under id "I_HairDye"
             <alias icon="I_IncubiD" alias="I_HairDye"/>
         -->
+        <alias icon="I_HealHerb" alias="I_HealHerb"/>
+        <alias icon="I_HealHerb" alias="I_MoonGrass"/>
+        <alias icon="I_HealHerb" alias="I_SnakFlowr"/>
+        <alias icon="I_HealHerb" alias="I_IronWeed"/>
+        <alias icon="I_HealHerb" alias="I_BladeFerns"/>
+        <alias icon="I_HealHerb" alias="I_RauneNectar"/>
     </aliases>
 </icons>
