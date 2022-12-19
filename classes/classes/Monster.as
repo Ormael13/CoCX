@@ -518,7 +518,7 @@ import flash.utils.getQualifiedClassName;
 				if (bonus > limit) bonus = limit;
 				max2 += (0.01 * bonus);
 			}
-			max1 *= max2;//~120%
+			max1 *= max2;//~150%
 			max1 = Math.round(max1);
 			return max1;
 		}

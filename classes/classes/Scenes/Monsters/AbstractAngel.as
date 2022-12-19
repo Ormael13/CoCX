@@ -14,7 +14,7 @@ public class AbstractAngel extends Monster {
 	{
 		// argument so superclass constructor always called
 		this.plural = plural;
-		this.lustVuln = 0;
+		this.lustVuln = 0.01;
 		this.createBreastRow(0, 1);
 		initGenderless();
 		createStatusEffect(StatusEffects.LowtierMagicImmunity, 0, 0, 0, 0);

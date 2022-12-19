@@ -3669,7 +3669,6 @@ public class PerkLib
 				"Reduces the likelihood of undergoing a transformation. Disables Bad Ends from transformative items.");
 		public static const TransformationAcclimation:PerkType = mk("Transformation Acclimation", "Transformation Acclimation",
 				"Increases the likelihood of undergoing a transformation. Disables Bad Ends from transformative items.");
-
 		public static const UnnaturalStrength:PerkType = mk("Unnatural Strength", "Unnatural Strength",
 				"The more sated you are the stronger you get, although your satisfaction is fleeting.");
 		public static const WendigoCurse:PerkType = mk("Wendigo Curse", "Wendigo Curse",
