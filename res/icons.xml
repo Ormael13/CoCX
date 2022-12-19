@@ -58,6 +58,7 @@
         </row>
         <row>
             <icon></icon>
+            <icon>bookid</icon>
             <icon>GenericItem_shield</icon>
             <icon>HealHerb</icon>
             <icon>GenericItem_necklace</icon>
@@ -82,5 +83,9 @@
         <alias icon="I_HealHerb" alias="I_IronWeed"/>
         <alias icon="I_HealHerb" alias="I_BladeFerns"/>
         <alias icon="I_HealHerb" alias="I_RauneNectar"/>
+        <alias icon="I_bookid" alias="I_B__BOOK"/>
+        <alias icon="I_bookid" alias="I_W__BOOK"/>
+        <alias icon="I_bookid" alias="I_G__BOOK"/>
+        <alias icon="I_bookid" alias="I_RMANUSC"/>
     </aliases>
 </icons>

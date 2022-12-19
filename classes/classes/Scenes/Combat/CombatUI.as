@@ -71,10 +71,10 @@ public class CombatUI extends BaseCombatContent {
 		var btnRanged:CoCButton     = button(1).icon("I_GenericWeapon_Bow");
 		var btnTease:CoCButton      = button(2).icon("I_tease id");
 		var btnWait:CoCButton       = button(3);
-		var btnItems:CoCButton      = button(4);
+		var btnItems:CoCButton      = button(4).icon("I_red potion icon id")
 		var btnPSpecials:CoCButton  = button(5);
 		var btnMSpecials:CoCButton  = button(6);
-		var btnMagic:CoCButton      = button(7);
+		var btnMagic:CoCButton      = button(7).icon("I_bookid")
 		var btnSoulskills:CoCButton = button(8);
 		var btnOther:CoCButton      = button(9);
 		var btnSpecial1:CoCButton   = button(10);
@@ -200,7 +200,7 @@ public class CombatUI extends BaseCombatContent {
 		if (player.weapon is MoonlightGreatsword && (player.weaponRangePerk == "" || player.weaponRangePerk == "Tome")) btnRanged.show("MoonWave", combat.throwElementalAttack, "Attack enemy with wave of moonlight.  Damage done is determined by your intelligence and weapon.").icon("I_GenericWeapon_Bow");
 		if (player.weapon is MoonlightClaws && (player.weaponRangePerk == "" || player.weaponRangePerk == "Tome")) btnRanged.show("MoonWave", combat.throwElementalAttack, "Attack enemy with wave of moonlight.  Damage done is determined by your intelligence and weapon.").icon("I_GenericWeapon_Bow");
 		if (player.weapon is Tidarion && (player.weaponRangePerk == "" || player.weaponRangePerk == "Tome")) btnRanged.show("FireBeam", combat.throwElementalAttack, "Attack enemy with a beam of fire.  Damage done is determined by your intelligence and weapon.").icon("I_GenericWeapon_Bow");
-		btnItems.show("Items", inventory.inventoryMenu, "The inventory allows you to use an item.  Be careful, as this leaves you open to a counterattack when in combat.");
+		btnItems.show("Items", inventory.inventoryMenu, "The inventory allows you to use an item.  Be careful, as this leaves you open to a counterattack when in combat.").icon("I_red potion icon id")
 
 		// Submenus
 		function vampireBiteDuringGrapple(Position:int):void {
@@ -233,10 +233,10 @@ public class CombatUI extends BaseCombatContent {
 		}
 		// Submenu - Spells
 		BuildSpellBookMenu(spellBookButtons);
-		if (spellBookButtons.length > 0) btnMagic.show("Spells", submenuSpells, "Opens your spells menu, where you can cast any spells you have learned.", "Spells");
+		if (spellBookButtons.length > 0) btnMagic.show("Spells", submenuSpells, "Opens your spells menu, where you can cast any spells you have learned.", "Spells").icon("I_bookid")
 		if (player.hasStatusEffect(StatusEffects.OniRampage) || player.wrath > player.maxSafeWrathSpellcasting()) {
-			btnMagic.disable("You are too angry to think straight. Smash your puny opponents first and think later.\n\n");
-		} else if (!combat.canUseMagic()) btnMagic.disable();
+			btnMagic.disable("You are too angry to think straight. Smash your puny opponents first and think later.\n\n").icon("I_bookid")
+		} else if (!combat.canUseMagic()) btnMagic.disable().icon("I_bookid")
 		// Submenu - Soulskills
 		combat.soulskills.buildMenu(soulforceButtons);
 		if (soulforceButtons.length > 0) btnSoulskills.show("Soulforce", submenuSoulforce, "Soulforce attacks menu.", "Soulforce Specials");
@@ -396,11 +396,11 @@ public class CombatUI extends BaseCombatContent {
 					if (player.lowerBody == LowerBody.FROSTWYRM) addButton(0, "Grab", SceneLib.desert.nagaScene.nagaPlayerConstrict).hint("Surge out of the ground and coil around your opponent!");
 				}
 				addButton(4, "Wait", combat.wait);
-				if (spellBookButtons.length > 0) btnMagic.show("Spells", submenuSpells, "Opens your spells menu, where you can cast any spells you have learned.", "Spells");
+				if (spellBookButtons.length > 0) btnMagic.show("Spells", submenuSpells, "Opens your spells menu, where you can cast any spells you have learned.", "Spells").icon("I_bookid")
 				if (player.hasStatusEffect(StatusEffects.OniRampage)) {
-					btnMagic.disable("You are too angry to think straight. Smash your puny opponents first and think later.\n\n");
+					btnMagic.disable("You are too angry to think straight. Smash your puny opponents first and think later.\n\n").icon("I_bookid")
 				} else if (!combat.canUseMagic()) {
-					btnMagic.disable();
+					btnMagic.disable().icon("I_bookid")
 				}
 			}
 			addButton(2, "Dig out", combat.DigOut).hint("Dig back out out of the ground.");
@@ -413,13 +413,13 @@ public class CombatUI extends BaseCombatContent {
 			addButton(2, "Captivate", combat.SingCaptivate).hint("Captivate your opponent for a round!");
 			addButton(3, "Intensify", combat.SingIntensify).hint("Increase the strength of your song!");
 			addButton(4, "Wait", combat.wait);
-			if (spellBookButtons.length > 0) btnMagic.show("Spells", submenuSpells, "Opens your spells menu, where you can cast any spells you have learned.", "Spells");
+			if (spellBookButtons.length > 0) btnMagic.show("Spells", submenuSpells, "Opens your spells menu, where you can cast any spells you have learned.", "Spells").icon("I_bookid")
 			if (!player.hasPerk(PerkLib.PrestigeJobBard)) {
-				btnMagic.disable("Spellcasting while singing would be impossible for anyone short of a skilled bard.\n\n");
+				btnMagic.disable("Spellcasting while singing would be impossible for anyone short of a skilled bard.\n\n").icon("I_bookid")
 			} else if (player.hasStatusEffect(StatusEffects.OniRampage)) {
-				btnMagic.disable("You are too angry to think straight. Smash your puny opponents first and think later.\n\n");
+				btnMagic.disable("You are too angry to think straight. Smash your puny opponents first and think later.\n\n").icon("I_bookid")
 			} else if (!combat.canUseMagic()) {
-				btnMagic.disable();
+				btnMagic.disable().icon("I_bookid")
 			}
 			addButton(5, "Stop", combat.SingOut).hint("Stop singing and resume fighting normally.");
 			if (!recalling) addButton(14, "Run", combat.runAway).hint("Escape away from the battle.");
@@ -451,10 +451,10 @@ public class CombatUI extends BaseCombatContent {
 			}
 			// Submenu - Spells
 			//BuildSpellBookMenu(spellBookButtons);
-			if (spellBookButtons.length > 0) btnMagic.show("Spells", submenuSpells, "Opens your spells menu, where you can cast any spells you have learned.", "Spells");
+			if (spellBookButtons.length > 0) btnMagic.show("Spells", submenuSpells, "Opens your spells menu, where you can cast any spells you have learned.", "Spells").icon("I_bookid")
 			if (player.hasStatusEffect(StatusEffects.OniRampage) || player.wrath > player.maxSafeWrathSpellcasting()) {
-				btnMagic.disable("You are too angry to think straight. Smash your puny opponents first and think later.\n\n");
-			} else if (!combat.canUseMagic()) btnMagic.disable();
+				btnMagic.disable("You are too angry to think straight. Smash your puny opponents first and think later.\n\n").icon("I_bookid")
+			} else if (!combat.canUseMagic()) btnMagic.disable().icon("I_bookid")
 		} else if (monster.hasStatusEffect(StatusEffects.Pounce)) {
 			menu();
 			if (player.arms.type == Arms.DISPLACER) addButton(0, "Ravage", combat.clawsRend).hint("Rend your enemy using your four sets of claws. \n\nFatigue Cost: " + physicalCost(20) + "");
