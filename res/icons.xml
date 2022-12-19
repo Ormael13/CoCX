@@ -44,7 +44,7 @@
 
         "I_" is prepended automatically
     -->
-    <file name="icons/items.png" prefix="I_" cellwidth="36" cellheight="36">
+    <file name="icons/items.png" prefix="I_" cellwidth="32" cellheight="32">
         <row>
             <icon>IncubiD</icon>
             <icon>GenericItem_consumable</icon>
@@ -59,14 +59,14 @@
         <row>
             <icon></icon>
             <icon>GenericItem_shield</icon>
-            <icon>I_HealHerb</icon>
+            <icon>HealHerb</icon>
             <icon>GenericItem_necklace</icon>
         </row>
     </file>
 
     <!-- Ability icons, iconId = "A_" + abilityId -->
     <!--
-     <file name="icons/abilities.png" prefix="A_" cellwidth="36" cellheight="36">
+     <file name="icons/abilities.png" prefix="A_" cellwidth="32" cellheight="32">
      </file>
      -->
 
