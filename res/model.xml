@@ -6049,22 +6049,22 @@
 				<if test="breastRows.length gt 0">
 					<switch>
 						<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
-							<show part="bra_fg/ElfDressBraSmall"/>
+							<show part="bra_fg/elfDressBraSmall"/>
 						</case>
 						<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
-							<show part="bra_fg/ElfDressBraSmall"/>
+							<show part="bra_fg/elfDressBraSmall"/>
 						</case>
 						<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
-							<show part="bra_fg/ElfDressBraMedium"/>
+							<show part="bra_fg/elfDressBraMedium"/>
 						</case>
 						<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
 							<show part="bra_fg/ElfDressBraMedium"/>
 						</case>
 						<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
-							<show part="bra_fg/ElfDressBraLarge"/>
+							<show part="bra_fg/elfDressBraLarge"/>
 						</case>
 						<default>
-							<show part="bra_fg/ElfDressBraLarge"/>
+							<show part="bra_fg/elfDressBraLarge"/>
 						</default>
 					</switch>
 				</if>
