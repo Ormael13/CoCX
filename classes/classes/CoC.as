@@ -282,7 +282,7 @@ public class CoC extends MovieClip
 
 			//Version NUMBER
 			ver = "1.0.2_mod_Xianxia_" + debugGameVer;
-			version = ver + " (<b>Cultivation: Rebirth, Green Magic, return of Grey Sage, tons of QoL changes</b>)";
+			ver += " (<b>Cultivation: Rebirth, Green Magic, return of Grey Sage, tons of QoL changes</b>)";
 
         this.images = new ImageManager(stage, mainView);
         this.inputManager = new InputManager(stage, mainView, false);
