@@ -135,7 +135,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			addButton(0, "Defeat Her", ceraphScene.winChoices);
 			addButton(1, "Lose to Her", ceraphScene.ceraphRapesYouBADDAWGYODIGGITY);
 			addButton(2, "Be A Pet", sumissivenessToCeraphFollower)
-				.disableIf(!player.isGenderless(), "Not for genderless!");
+				.disableIf(player.isGenderless(), "Not for genderless!");
 			addButtonDisabled(5, "???");
 			addButtonDisabled(6, "???");
 			addButtonDisabled(7, "???");
