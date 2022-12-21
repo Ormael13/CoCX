@@ -2559,6 +2559,8 @@ public class PerkLib
 		public static const Sadist:PerkType = mk("Sadist", "Sadist",
 				"Deal 20% more damage, but gain lust at the same time.",
 				"You've chosen the 'Sadist' perk, increasing damage by 20 percent but causing you to gain lust from dealing damage.");
+		public static const SageMedicine:PerkType = mk("Sage Medicine", "Sage Medicine",
+				"Sage Medicine used for the Azazel ascension, reduces minimum corruption caused by havinng a soul Phylactery");
 		public static const Saint:PerkType = mk("Saint", "Saint",
 				"You go on periodic journeys to spread your faith and help those in need. These constant pilgrimages decrease your minimum libido and boost lust resistance. (-2 min libido/+5% to lust resistance)",
 				"You've chosen the 'Saint' perk, lowering min libido by 2 and raise lust resistance by 5%.");
@@ -3710,6 +3712,8 @@ public class PerkLib
 				"Grants immunity to Basilisk's paralyzing gaze. Disables Basilisk Bad End.");
 		public static const BulgeArmor:PerkType = mk("Bulge Armor", "Bulge Armor",
 				"Grants a 5 point damage bonus to dick-based tease attacks.");
+		public static const ConvictionOfPurpose:PerkType = mk("Conviction of purpose", "Conviction of purpose",
+				"Corruption meter now increase lust resistance based on purity.");
 		public static const Cornucopia:PerkType = mk("Cornucopia", "Cornucopia",
 				"Vaginal and Anal capacities increased by 30.");
 		public static const CraftedArrows:PerkType = mk("Crafted Arrows", "Crafted Arrows",
@@ -3733,6 +3737,8 @@ public class PerkLib
 		public static const ElvenBounty:ElvenBountyPerk = new ElvenBountyPerk();
 		public static const ElvenRangerArmor:PerkType = mk("Elven Ranger Armor", "Elven Ranger Armor",
 				"+50% to Bow and spear damage, Count as naked, Slutty seduction +8.");
+		public static const Exorcism:PerkType = mk("Exorcism", "Exorcism",
+				"Damage any creature above 25% corruption for 50% of its hit point total. Can be used only once per battle.");
 		public static const FeralHunter:FeralHunterPerk = new FeralHunterPerk();
 		public static const FerasBoonAlpha:PerkType = mk("Fera's Boon - Alpha", "Fera's Boon - Alpha",
 				"Increases the rate your cum builds up and cum production in general.");
@@ -3758,8 +3764,12 @@ public class PerkLib
 				"Add a small measure of your speed to your tease damage.");
 		public static const Hellfire:PerkType = mk("Hellfire", "Hellfire",
 				"Grants a corrupted fire breath attack, like the hellhounds in the mountains.");
+		public static const Immortality:PerkType = mk("Immortality", "Immortality",
+				"Cannot loose combat by damage. Damage taken below 0 instead cause player to take serious lust damage.");
 		public static const IntermediateLeadership:PerkType = mk("Intermediate Leadership", "Intermediate Leadership",
 				"Allows to form 3 people party.");
+		public static const JudgementFlare:PerkType = mk("Judgement Flare", "Judgement Flare",
+				"Grants a purifying flare attack, dealing light and fire damage with a chance to stun.");
 		public static const LuststickAdapted:PerkType = mk("Luststick Adapted", "Luststick Adapted",
 				"Grants immunity to the lust-increasing effects of lust-stick and allows its use.")
 				.withBuffs({'minlustx':0.1});
@@ -3790,11 +3800,17 @@ public class PerkLib
 				"Your constant desire for sex causes your sexual organs to be able to take larger insertions and disgorge greater amounts of fluid.");
 		public static const Phylactery:PerkType = mk("Phylactery", "Phylactery",
 				"Your soul has been safely stored into a phylactery allowing you to fully unlock your potential as a demon.").withBuffs({'int.mult':0.75});
+		public static const InnerPhylactery:PerkType = mk("InnerPhylactery", "InnerPhylactery",
+				"Your soul has been safely stored into a phylactery allowing you to fully unlock your potential as a demon, since fusing back into your body to sit beside your heart.").withBuffs({'int.mult':0.75});
+		public static const PerfectClarity:PerkType = mk("Perfect Clarity", "Perfect Clarity",
+				"Deal increased magic damage but take more physical damage, increase evasion slightly.");
 		public static const PilgrimsBounty:PerkType = mk("Pilgrim's Bounty", "Pilgrim's Bounty",
 				"Causes you to always cum as hard as if you had max lust.");
 		public static const ProductivityDrugs:PerkType = new ProductivityDrugsPerk();
 		public static const PureAndLoving:PerkType = mk("Pure and Loving", "Pure and Loving",
 				"Your caring attitude towards love and romance makes you slightly more resistant to lust and corruption.");
+		public static const SealSin:PerkType = mk("Seal Sin", "Seal Sin",
+				"Silence black magic and shut down tease type ability.");
 		public static const SenseCorruption:PerkType = mk("Sense Corruption", "Sense Corruption",
 				"Allow you to determine how corrupted or pure the enemy is.");
 		public static const SenseWrath:PerkType = mk("Sense Wrath", "Sense Wrath",

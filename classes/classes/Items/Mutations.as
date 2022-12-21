@@ -14556,9 +14556,7 @@ public final class Mutations extends MutationsHelper {
         //Horns
         if (rand(3) == 0 && changes < changeLimit && player.arms.type == Arms.DEVIL) {
             outputText("[pg]");
-            if (player.horns.type == Horns.NONE) {
-                transformations.HornsGoat.applyEffect();
-            } else if (player.horns.type == Horns.GOAT) {
+            if (player.horns.type == Horns.GOAT) {
                 transformations.HornsGoatQuadruple.applyEffect();
             } else {
                 transformations.HornsGoat.applyEffect();
@@ -14601,6 +14599,116 @@ public final class Mutations extends MutationsHelper {
 		DrunkenPowerEmpowerIfPossible();
         player.refillHunger(10);
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
+    }
+
+    public function sageMedicine(player:Player, item:ItemType):void {
+        player.slimeFeed();
+        //init variables
+        var changes:Number = 0;
+        var changeLimit:Number = 1;
+        //Temporary storage
+        var temp2:Number = 0;
+        //var temp3:Number = 0;
+        //Randomly choose affects limit
+        //clear screen
+        clearOutput();
+
+        //int change
+        if (MutagenBonus("int", 3) || MutagenBonus("wis", 3)) {
+        }
+        player.createPerk(PerkLib.SageMedicine,0,0,0,0);
+        dynStats("cor", -10);
+
+        //physical changes
+        //legs
+        if (player.lowerBody != LowerBody.HOOFED) {
+            outputText("[pg]");
+            CoC.instance.transformations.LowerBodyHoofed(2).applyEffect(false);
+            changes++;
+        }
+        //tail
+        if (player.tailType != Tail.AZAZEL) {
+            transformations.TailAzazel.applyEffect(false);
+            changes++;
+        }
+        //wings
+        if (player.wings.type != Wings.PUREDEVILFEATHER) {
+             transformations.WingsPureDevilfeather.applyEffect(false);
+            changes++;
+        }
+
+        //arms
+        if (player.arms.type != Arms.DEVIL) {
+            transformations.ArmsDevil.applyEffect(false);
+            changes++;
+        }
+
+        //Ears
+        if (player.ears.type != Ears.GOAT) {
+            transformations.EarsGoat.applyEffect(false);
+            changes++;
+        }
+        //Face
+        if (player.faceType != Face.INNOCENT) {
+            outputText("[pg]");
+            transformations.FaceInnocent.applyEffect(false);
+            changes++;
+        }
+        //Eyes
+        if (!transformations.EyesGoat.isPresent()) {
+            transformations.EyesGoat.applyEffect(false);
+            changes++;
+        }
+
+        outputText("You feel smarter and clearer of mind then before however as you finish the Sage medecine the legendary gear in your inventory begins to radiate along with your "+
+                (player.hasPerk(PerkLib.Phylactery) ? "Phylactery":"chest") + " as your very soul begin shining.\n\n");
+
+
+        if (player.hasPerk(PerkLib.Phylactery) && !player.hasPerk(PerkLib.InnerPhylactery)) {
+            outputText("[pg]You begin crying torrent as emotions overflow your mind again, no longer dimmed by the phylactery and all encompassing. Like a beating heart the pendant press against your chest, the gem slowly going through like if your body was fluid until it rest at your core where it has always belonged, the gem fusing with the flesh of your torso as body and soul are reunited.\n\n");
+            player.createPerk(PerkLib.InnerPhylactery, 0,0,0,0);
+        }
+
+        outputText("As the holy item within your hand is turned to purifying energies the black of any remaining corruption is washed away from you like night by the morning sun, your body surging with raw magic. Your powers feels boundless only restricted by your imagination and how you plan to use them. Overcome by the torrent of swirling emotions, flowing power and the pleasure of the change you achieve what may be the greatest orgasm in your life cuming witheout reserve or shame is this what they call true fulfillment?");
+
+        //transformation texts
+        if (player.wings.type != Wings.NONE) outputText("Your wings change color and shape turning into large feathery white wings larger then your old pair. ");
+        else outputText("A knot of pain forms in your shoulders as they tense up. With a surprising force, a pair of immaculate white feathered wings sprout from your back, ripping a pair of holes in the back of your [armor].");
+        player.hairColor = "snow white";    //TODO update color
+        player.featherColor = "snow white";
+        outputText("Your hair also changes color to match this becoming immaculate white, wich is the color of purity come to think of it. Your fangs retract, your mouth becoming more human and you can't help but smile serenely at the idea of your body being purged of all that nasty stuff leaving space for the perfect you.");
+        if (player.tail.type == Tail.DEMONIC)
+            outputText(" Finally your tail covers with fur and scales taking on a noble draconic appearance, gone is the last remnant of the demonic you.");
+
+        if (!player.hasPerk(PerkLib.Phylactery)) {
+            outputText("Finaly your soul begins to resonate with your next form, its power concentrating into a large gem that manifests on your torso. Well you didn't have a phylactery before but I guess that's a thing now? It reminds you of Alvina owns gem come to think of it.\n\n");
+            player.createPerk(PerkLib.InnerPhylactery, 0,0,0,0);
+        }
+        outputText("As Alvina herself declared, Want becomes so much more when used not for oneself but others.");
+        if (silly()) outputText("Well friendship is magic as they say and love is the ultimate weapon. The ponies at the lake would applaud your statement.");
+        outputText("Nothing can compare to the sheer joy of being delivered from your corrupt self, this time you hope for good.\n\n");
+
+        outputText("You became a shining light in the darkness, an ascendant who transcended and triumphed over evil that of yours and others. A being beyond the demons power with none of the flaws. You are now an Azazel.\n\n");
+        player.consumeItem(item);
+
+        //TODO add all Azazel perks effects
+        player.createPerk(PerkLib.JudgementFlare, 0,0,0,0);
+        outputText("<b>Obtained perk: JudgementFlare</b>  "+PerkLib.JudgementFlare.longDesc+"\n");
+        player.createPerk(PerkLib.Exorcism, 0,0,0,0);
+        outputText("<b>Obtained perk: Exorcism</b>  "+PerkLib.Exorcism.longDesc+"\n");
+        player.createPerk(PerkLib.Immortality, 0,0,0,0);
+        outputText("<b>Obtained perk: Immortality</b>  "+PerkLib.Immortality.longDesc+"\n");
+        player.createPerk(PerkLib.SealSin, 0,0,0,0);
+        outputText("<b>Obtained perk: SealSin</b>  "+PerkLib.SealSin.longDesc+"\n");
+        player.createPerk(PerkLib.PerfectClarity, 0,0,0,0);
+        outputText("<b>Obtained perk: PerfectClarity</b>  "+PerkLib.PerfectClarity.longDesc+"\n");
+        player.createPerk(PerkLib.ConvictionOfPurpose, 0,0,0,0);
+        outputText("<b>Obtained perk: ConvictionOfPurpose</b>  "+PerkLib.ConvictionOfPurpose.longDesc+"\n");
+
+        player.refillHunger(10);
+        flags[kFLAGS.TIMES_TRANSFORMED] += changes;
+        mainViewManager.updateCharviewIfNeeded();
+        SceneLib.inventory.itemGoNext();
     }
 
     public function frothyBeer(player:Player):void {

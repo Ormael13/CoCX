@@ -4720,6 +4720,8 @@ use namespace CoC;
 			if (hasPerk(PerkLib.Soulless)) minCor += 50;
 			if (hasPerk(PerkLib.Phylactery)) minCor = 100;
 			if (hasPerk(PerkLib.BlessingOfTheAncestorTree)) minCor = 50;
+			if (this.hasStatusEffect(StatusEffects.DevilPurificationScar)) {minCor-=50;}
+			if (hasPerk(PerkLib.Phylactery) && hasPerk(PerkLib.SageMedicine)) minCor = 0;
 			if (this.hasPerk(PerkLib.PurityElixir)) minCor -= (this.perkv1(PerkLib.PurityElixir) * 20);
 			if (minLib < 1) minLib = 1;
 			if (minCor < 0) minCor = 0;
@@ -5267,6 +5269,86 @@ use namespace CoC;
 				if (itemSlot.itype == itype) count += itemSlot.quantity;
 			}
 			return count;
+		}
+
+		public function hasLegendaryItem():Boolean {
+			for each (var item:ItemType in CoC.instance.weapons.Legendary())
+				for each (var itemSlot:ItemSlotClass in itemSlots){
+					if (itemSlot.itype == item) return true
+				}
+			for each (item in CoC.instance.weaponsrange.Legendary())
+				for each (itemSlot in itemSlots){
+					if (itemSlot.itype == item) return true
+				}
+			for each (item in CoC.instance.shields.Legendary())
+				for each (itemSlot in itemSlots){
+					if (itemSlot.itype == item) return true
+				}
+			for each (item in CoC.instance.armors.Legendary())
+				for each (itemSlot in itemSlots){
+					if (itemSlot.itype == item) return true
+				}
+			return false;
+		}
+		public function allLegendaryItems():Array {
+			var list: Array = [];
+			for each (var item:ItemType in CoC.instance.weapons.Legendary())
+				for each (var itemSlot:ItemSlotClass in itemSlots){
+					if (itemSlot.itype == item) list.push(item);
+				}
+			for each (item in CoC.instance.weaponsrange.Legendary())
+				for each (itemSlot in itemSlots){
+					if (itemSlot.itype == item) list.push(item);
+				}
+			for each (item in CoC.instance.shields.Legendary())
+				for each (itemSlot in itemSlots){
+					if (itemSlot.itype == item) list.push(item);
+				}
+			for each (item in CoC.instance.armors.Legendary())
+				for each (itemSlot in itemSlots){
+					if (itemSlot.itype == item) list.push(item);
+				}
+			return  list;
+		}
+
+		public function hasPureLegendaryItem():Boolean {
+			for each (var item:ItemType in CoC.instance.weapons.LegendaryPure())
+				for each (var itemSlot:ItemSlotClass in itemSlots){
+					if (itemSlot.itype == item) return true
+				}
+			for each (item in CoC.instance.weaponsrange.LegendaryPure())
+				for each (itemSlot in itemSlots){
+					if (itemSlot.itype == item) return true
+				}
+			for each (item in CoC.instance.shields.LegendaryPure())
+				for each (itemSlot in itemSlots){
+					if (itemSlot.itype == item) return true
+				}
+			for each (item in CoC.instance.armors.LegendaryPure())
+				for each (itemSlot in itemSlots){
+					if (itemSlot.itype == item) return true
+				}
+			return false;
+		}
+		public function allPureLegendaryItems():Array {
+			var list: Array = [];
+			for each (var item:ItemType in CoC.instance.weapons.LegendaryPure())
+				for each (var itemSlot:ItemSlotClass in itemSlots){
+					if (itemSlot.itype == item) list.push(item);
+				}
+			for each (item in CoC.instance.weaponsrange.LegendaryPure())
+				for each (itemSlot in itemSlots){
+					if (itemSlot.itype == item) list.push(item);
+				}
+			for each (item in CoC.instance.shields.LegendaryPure())
+				for each (itemSlot in itemSlots){
+					if (itemSlot.itype == item) list.push(item);
+				}
+			for each (item in CoC.instance.armors.LegendaryPure())
+				for each (itemSlot in itemSlots){
+					if (itemSlot.itype == item) list.push(item);
+				}
+			return  list;
 		}
 
 		// 0..5 or -1 if no

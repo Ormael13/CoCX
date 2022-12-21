@@ -616,6 +616,7 @@ public function alvinaThirdEncounterTakeHer():void
 		FightForAlvina = true;
 		startCombat(new Alvina());
 	}
+
 	public function alvinaDontFightWon():void {
 		spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2_16bit);
 		clearOutput();
@@ -629,7 +630,7 @@ public function alvinaThirdEncounterTakeHer():void
 		addButton(0, "Stop her", alvinaDestroyPhylactoryStopHer)
 			.disableIf(player.spe100 < 80, "You are simply not fast enough to stop her.")
 			.disableIf(!player.hasItem(consumables.P_PEARL), "You were warned to bring the pearl along, now it is too late!");
-		addButton(0, "Watch", alvinaDestroyPhylactoryWatch);
+		addButton(1, "Watch", alvinaDestroyPhylactoryWatch);
 	}
 	public function alvinaDestroyPhylactoryStopHer():void {
 		spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2_16bit);
@@ -679,16 +680,15 @@ public function alvinaThirdEncounterTakeHer():void
 		doNext(camp.returnToCampUseSixHours);
 	}
 	public function alvinaMakeLovePure():void {
-		outputText("NOTHING TO SEE HERE YET, BEYE")
 		menu();
-		addButton(0, "Take Her", alvinaPureTakeHer)
+		addButton(0, "Take Her", curry(sceneHunter.callBigSmall, alvinaPureTakeHer, 20, 10, "length"))
 				.disableIf(!player.hasCock(), "You need a penis to do this");
 		addButton(1, "Let Her", alvinaPureLetHerTakeYou)
 				.disableIf(!player.hasVagina(), "You need a vagina to do this");
-		addButton(3, "Make Out", alvinaPureMakeOut)
+		addButton(2, "Make Out", alvinaPureMakeOut)
 				.disableIf(!player.hasVagina(), "You need to have a vagina to do this");
 
-		addButton(14, "no", playerMenu);
+		addButton(14, "Later", playerMenu);
 	}
 
 
@@ -1606,8 +1606,8 @@ public function postMarriageSleep():void {
 
 		menu();
 		addButton(0, "Infernal Oil", alvinaPureInfernalOil)
-			.disableIf(true, "Requires you to be soulless")	//TODO
-			.disableIf(true, "You need this item to ask her about it DUH...")
+			//.disableIf(!player.hasPerk(PerkLib.Phylactery) || !player.hasPerk(PerkLib.Soulless), "Requires you to be soulless")
+			.disableIf(player.hasItem(consumables.INFWINE), "You need this item to ask her about it DUH...")
 			.disableIf(AlvinaInfernalOilCooldown > 0);	//TODO
 		addButton(1, "Sex", alvinaPureSexMenu);
 		if (sceneHunter.other)
@@ -1625,18 +1625,18 @@ public function postMarriageSleep():void {
 			outputText("You never said you wanted it as is. Could she purify it for you?\n\n");
 			outputText("\"<i>Wait you mean to say you… how flattering. Of all the possible shapes, you would like to look just like me. I would kiss you but you seem to be low on time. This is fine though, give me a day while I concentrate on altering this product and tadaa you will be an Azazel too in no time!</i>\"\n\n");
 			AlvinaInfernalOilCooldown = 1;
-			//player.destroyItems(consumables.INFOIL, 1);
+			player.destroyItems(consumables.INFWINE, 1);
 			AlvinaInfernalOilAsked = true;
 			eachMinuteCount(15);
 			doNext(playerMenu);
 		}
 		outputText("You ask Alvina about her progress with the potion.\n\n");
-		outputText("\"<i>All finished It took some effort but just like my form the reagent can be purified. Took me some great effort though, you wouldn't believe the places I had to go to get the reagents.</i>\"\n\n");
+		outputText("\"<i>All finished, It took some effort but just like my form the reagent can be purified. Took me some great effort though, you wouldn't believe the places I had to go to get the reagents!</i>\"\n\n");
 		outputText("She hands you the bottle.\n\n");
-		outputText("\"<i>Don't abuse it… wouldn't want to get side effects or something not that id know them if any I'm just telling you what my sister used to say all the time about medicine and its that too much of a good thing is a bad thing.</i>\"\n\n");
-		//inventory.takeItem(consumables.SAGE_M);	//Sage Medicine	//Azazel TF from
+		outputText("\"<i>Don't abuse it… wouldn't want to get side effects or something... not that id know them. If anything I'm just telling you what my sister used to say all the time about medicine and its that too much of a good thing is a bad thing.</i>\"\n\n");
+		AlvinaInfernalOilCooldown = -1;
 		eachMinuteCount(15);
-		doNext(playerMenu);
+		inventory.takeItem(consumables.SAGEMED, playerMenu);	//Sage Medicine	//Azazel TF from
 	}
 
 	public function alvinaPureSexMenu():void {
@@ -1654,19 +1654,60 @@ public function postMarriageSleep():void {
 		alvinaMakeLovePure();
 	}
 
-	public function alvinaPureTakeHer():void {  //Male or Herm
+	public function alvinaPureTakeHer(x:int):void
+	{  //Male or Herm
 		spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2_16bit);
 		clearOutput();
-		outputText("Pending scene text");
+		outputText("You proceed to remove your gear and ");
+		if (player.cocks[x].cockLength > 20) remarkTooBigCock();
+		else if (player.cocks[x].cockLength < 10) remarkSmallCock();
+		else remarkAverageCock();
+
+		outputText("Blushing in excitement she gently guides you into her lap spreading her hooved legs appart to offer you access to her innermost precious place, her hands open so to catch and hold yours. Somehow this passionate, innocent pose of hers arouse you more than all the trice damned demons of mareth have, whereas their seduction is perverted and crude Alvina pure genuine and nurtured love for you makes her every gesture radiate with a cute and heartwarming factor unique to hers. "+
+				"This isn't just about raw sex, this is about a conversation between you and her and sensual carresses and kisses are the word of love you two exchange. You place your hands into the palm of her open paws and align your "+player.cockDescript(x)+" with the entryway to Alvina sacred garden trusting past the gate for a taste of her heaven. You are not disappointed, since Alvina was formerly a succubus; her vagina is capable of amazing feats of motion control; she uses it to massage your cock slowly, letting you savor the pleasure for as long as possible. " +
+				"All the while you two seek each other's mouth moving together to reach new pleasurable heights. As a demon Alvina only knew to take and never give in return her transformation actually led her to rediscover the pleasure of giving and receiving freely and through each pleasant ministration she dots your penis she gets to feel some of the pleasure back. You mean in genuine untarnished happiness as you passionately slide your penis down her canal seeking out all her sweet spots. You can't help but think your penis feels at home into her hole " +
+				"and feel a little apologetic about all the other hole you've tried out before hers.\n\n");//cant check for penile virginity
+		outputText("Alvina, unable to hold further, wraps her legs around you, pushing you deeper and triggering your climax. Pleasure overwhelm your penis as you shoot rope after rope into her warm welcoming folds. She smiles in happiness, eyes closed in bliss as you finish.\n\n");
+		alvinaPureSexFertilityComment();
+		player.sexReward("vaginalFluids", "Dick");
 		doNext(playerMenu);
+
+		function remarkTooBigCock():void {
+			outputText("Alvina admits with a bit of worry \"<i>Well thats a mammoth your packing down here. Perhaps I should be thankful that my maximal vaginal capacity didn't downgrade from my transformation or this thing could inflict some serious damage. Seriously though you should consider shrinking it if only for the wellbeing of most of your partners.</i>\"\n\n");
+		}
+		function remarkAverageCock():void {
+			outputText("Alvina sighs in relief as she takes in the size of your cock \"<i>Well I guess thats the average standards on Mareth, big and firm and just the right size for a good bit of pleasant fun.</i>\"\n\n");
+		}
+		function remarkSmallCock():void {
+			outputText("Alvina sighs in relief as she takes in the size of your cock \"<i>Truth be told, with the craziness going around here I was worried I'd end up being pierced by a minotaur sized monster, you having a normal sized penis is the most relieving and cute thing ive seen in a long while. Don't you worry I can adapt my vagina to fit you just right, call it a vestige of my demonic shapeshifting powers if you will.</i>\"\n\n");
+		}
 	}
-	public function alvinaPureLetHerTakeYou():void {  //Female or Herm
+	public function alvinaPureLetHerTakeYou():void
+	{  //Female or Herm
 		spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2_16bit);
 		clearOutput();
-		outputText("Pending scene text");
+		outputText("At the suggestion Alvina makes an mischievous smile.\n\n");
+		outputText("\"<i>Well under all normal law of reality, a girl cannot fuck another girl with a penis she outright lacks. Fortunately for us I happen to disagree with this, so with a little effort I can get us just the thing down here, though you will have to coax it out.</i>\"\n\n");
+		outputText("Alvina lays down, legs spread open to grant you access to her folds. You lie next to her and tenderly begin to eat her out. As you do, her clit begins to engorge, becoming erect as it grows bigger and bigger. Just as Alvina swiftly reaches orgasm and rewards you with a spray of her juice, her clit finish its transformation, the skin molting brown and black into a fully grown, hard and twitching horsecock, her cheeks flushed with need now.\n\n");
+		outputText("\"<i>Well I heard it's all the rage out there, so I grew one for you. I hope you like it. Pardon me but I'm all hot now and can hardly contain myself anymore!</i>\"\n\n");
+		outputText("Truth be told you have been waiting for this the whole time and you gingerly open your legs up as Alvina lays down on your [chest], her breasts pressing against yours");
+		if (player.biggestTitSize() > 2) outputText(" with just the right amount of quake to make you moan");
+		outputText(". You feel the crown of her cock seeking out your passage before slowly inserting itself inches after inches inside. Alvina made it just right. It's the perfect size to fill you up entirely without hurting you. Well you would have expected no less from your kinky magician lover. As if reading your thought Alvina offers you a corner smile before commenting.\n\n");
+		outputText("\"<i>I'm glad you like it but I'm just getting started you know?</i>\"\n\n");
+		outputText("As she says this she begins trusting, you don't know if that's demon instinctual knowledge, but god is she good at this. She seems to instinctively know exactly in which direction to thrust to maximize your pleasure, and from the look of it she's also getting off from it, though with such a good fucking you will be cumming far ahead of her. You wrap your legs and clench the ground beneath you as you achieve orgasm, begging your lover to keep going, you just want to go again and again.\n\n");
+		outputText("\"<i>Well that's a good thing [name] seeing as I haven't reached my peak yet.</i>\" She kisses you before promising softly. \"<i>Don't you worry I will keep stuffing you until you can't go on.\"\n\n");
+		outputText("Alvina's movement do not stop, indeed allowing you to reach and feel peaks you've never reached before. Alvina's technique is so good you can't think about anything but her dick in your vagina right now as your brain slowly turns to mush. Eventually though, even Alvina reaches her limit as she unloads rope after rope of cum, painting your thirsty vagina white.\n\n");
+		alvinaPureSexFertilityComment();
 		doNext(camp.returnToCampUseOneHour);
 	}
-	public function alvinaPureMakeOut():void {  //Girl on Girl
+	public function alvinaPureSexFertilityComment():void
+	{
+		outputText("\"<i>You know I'm no longer a soulless body. Perhaps with a little luck we might even have a human child.</i>\"\n\n");
+		outputText("The thought makes you smile, a new human generation in Mareth after all these years might not be a bad thing, at least not the way Marae made it out to sound. And with you two there to teach them, you could even rebuild them from scratch.\n\n");
+		outputText("Spent, the two of you lie down next to one another, hugging tightly for a few minutes and whispering sweet nothings. It would be so easy to stay there with her forever, but you have things to do and Alvina understands that too.\n\n");
+	}
+	public function alvinaPureMakeOut():void
+	{  //Girl on Girl
 		spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2_16bit);
 		clearOutput();
 		outputText("Pending scene text");

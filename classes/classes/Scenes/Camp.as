@@ -3189,7 +3189,7 @@ public class Camp extends NPCAwareContent{
 //-----------------
 	public function restMenu():void {
 		menu();
-		addButton(0, "1 Hour", 	restFor, 1).hint("Rest for one hour.");
+		addButton(0, "1 Hour",  restFor, 1).hint("Rest for one hour.");
 		addButton(1, "2 Hours", restFor, 2).hint("Rest for two hours.");
 		addButton(2, "3 Hours", restFor, 3).hint("Rest for three hours.");
 		addButton(3, "4 Hours", restFor, 4).hint("Rest for four hours.");
@@ -3291,6 +3291,16 @@ public class Camp extends NPCAwareContent{
 			//Hungry
 			if (flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger < 25) {
 				outputText("\nYou have difficulty resting as you toss and turn with your stomach growling.\n");
+			}
+			if (SceneLib.alvinaFollower.AlvinaPurified) {
+				var mincor:int = player.getAllMinStats().cor;
+				if (player.cor == 0 || player.cor <= mincor) {}
+				else {
+					outputText("\nYour purified lover Alvina exudes a calming and purifying aura which helps you shed some of your build up corruption.\n");
+					if (player.cor >= mincor+10) dynStats("cor", -10);
+					else dynStats("cor", -(player.cor - mincor));
+				}
+
 			}
 
 			EngineCore.HPChangeNotify(player.HP - hpBefore);

@@ -19,6 +19,44 @@ public final class WeaponLib extends ItemConstants
 		private static function findCommonDynamicWeapon(subtypeId:String):DynamicWeapon {
 			return ItemTemplateLib.instance.createWeapon(subtypeId, RARITY_COMMON, 0, CS_KNOWN_UNCURSED, []);
 		}
+
+		public function Legendary():Array {
+			return LegendaryPure().concat(LegendaryCorrupt());
+		}
+		public function LegendaryPure():Array {
+			return [
+				NPHBLDE,
+				T_HEART,
+				KARMTOU,
+				MASAMUN,
+				U_STAFF,
+				LHSCYTH,
+				MOONLIT,
+				WG_GAXE,
+				SESPEAR,
+				Q_GUARD,
+				POCDEST,
+				ARMAGED,
+				OCCULUS,
+				EXCALIB
+			];
+		}
+		public function LegendaryCorrupt():Array {
+			return [
+				EBNYBLD,
+				DORSOUL,
+				YAMARG,
+				BLETTER,
+				N_STAFF,
+				C_BLADE,
+				DE_GAXE,
+				DSSPEAR,
+				B_WIDOW,
+				DOCDEST,
+				CHAOSEA,
+				ECLIPSE
+			];
+		}
 		
 		public static const DEFAULT_VALUE:Number = 6;
 

@@ -468,6 +468,12 @@ public class Tail extends SaveableBodyPart {
 		isLong: true,
 		scales: true
 	});
+	public static const AZAZEL: int = 55;
+	EnumValue.add(Types, AZAZEL, "AZAZEL", {
+		name:"azazel",
+		appearanceDesc: "A thin, scaly, prehensile reptilian tail almost as long as you are tall and covered in [fur color] fur, swings behind you like a living bullwhip. The end of its tip is tapered and thin like the end of a whip.",
+		isLong: true
+	});
 
 	override public function set type(value:int):void {
 		var old:int = type;
