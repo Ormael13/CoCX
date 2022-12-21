@@ -39,12 +39,19 @@ public class CoCButton extends Block {
 	public static const MAX_FONT_SIZE:int = 18;
 	public static const MIN_FONT_SIZE:int = 12;
 	
-	public static const ICON_WIDTH:int = 36;
-	public static const ICON_HEIGHT:int = 36;
-	private static const ICON_Y:int = (MainView.BTN_H - ICON_HEIGHT) / 2;
-	private static const ICON_X:int = 0;
-	private static const ICON_LABEL_X:int = ICON_X+ICON_WIDTH;
-	private static const ICON_LABEL_WIDTH:int = MainView.BTN_W-ICON_LABEL_X;
+	public static const BTN_PADDING:int = 4;
+	public static const ICON_WIDTH:int = 32;
+	public static const ICON_HEIGHT:int = 32;
+	private static const BTN_W:int = MainView.BTN_W;
+	private static const BTN_H:int = MainView.BTN_H;
+	private static const ICON_Y:int = BTN_PADDING;
+	private static const ICON_X:int = BTN_PADDING;
+	private static const LABEL_NOICON_X:int = BTN_PADDING;
+	private static const LABEL_NOICON_WIDTH:int = BTN_W - BTN_PADDING - LABEL_NOICON_X;
+	private static const LABEL_ICON_X:int = ICON_X + ICON_WIDTH;
+	private static const LABEL_ICON_WIDTH:int = BTN_W - BTN_PADDING - LABEL_ICON_X;
+	private static const LABEL_Y:int = 8; // works for default font size
+	
 
 	private var _labelField:TextField,
 				_iconGraphic:BitmapDataSprite,
@@ -64,11 +71,12 @@ public class CoCButton extends Block {
 		super();
 		_backgroundGraphic = addBitmapDataSprite({
 			stretch: true,
-			width  : MainView.BTN_W,
-			height : MainView.BTN_H
+			width  : BTN_W,
+			height : BTN_H
 		});
 		_iconGraphic = addBitmapDataSprite({
 			stretch: true,
+			smooth: false,
 			visible: false,
 			x: ICON_X,
 			y: ICON_Y,
@@ -76,10 +84,11 @@ public class CoCButton extends Block {
 			height: ICON_HEIGHT
 		});
 		_labelField        = addTextField({
-			width            : MainView.BTN_W,
+			width            : LABEL_NOICON_WIDTH,
 			embedFonts       : true,
-			y                : 8,
-			height           : MainView.BTN_H - 8,
+			x                : LABEL_NOICON_X,
+			y                : LABEL_Y,
+			height           : BTN_H - LABEL_Y,
 			defaultTextFormat: {
 				font : ButtonLabelFontName,
 				size : MAX_FONT_SIZE,
@@ -134,8 +143,10 @@ public class CoCButton extends Block {
 	}
 	public function set enabled(value:Boolean):void {
 		_enabled                      = value;
-		this._labelField.alpha        = value ? 1 : 0.4;
-		this._backgroundGraphic.alpha = value ? 1 : 0.4;
+		var alpha:Number              = value ? 1 : 0.4;
+		this._labelField.alpha        = alpha;
+		this._backgroundGraphic.alpha = alpha;
+		this._iconGraphic.alpha       = alpha;
 	}
 	
 	public function get iconId():String {
@@ -148,14 +159,14 @@ public class CoCButton extends Block {
 		if (bitmap) {
 			_iconGraphic.bitmap = IconLib.getBitmap(iconId);
 			_iconGraphic.visible = true;
-			this._labelField.x = ICON_LABEL_X;
-			this._labelField.width = ICON_LABEL_WIDTH;
+			this._labelField.x = LABEL_ICON_X;
+			this._labelField.width = LABEL_ICON_WIDTH;
 		} else {
 			_iconGraphic.visible = false;
-			this._labelField.x = 0;
-			this._labelField.width = MainView.BTN_W;
+			this._labelField.x = LABEL_NOICON_X;
+			this._labelField.width = LABEL_NOICON_WIDTH;
 		}
-		labelText = labelText; // forse resize
+		if (labelText) labelText = labelText; // force resize
 	}
 	public function icon(iconId:String):CoCButton {
 		this.iconId = iconId;
@@ -171,11 +182,15 @@ public class CoCButton extends Block {
 		tf.size                            = fontSize;
 		this._labelField.defaultTextFormat = tf;
 		this._labelField.text              = value;
-		while (this._labelField.textWidth > width - 4 && fontSize > MIN_FONT_SIZE) {
+		this._labelField.y                 = LABEL_Y;
+		this._labelField.height            = BTN_H - this._labelField.y;
+		while (this._labelField.textWidth > this._labelField.width && fontSize > MIN_FONT_SIZE) {
 			fontSize--;
 			tf.size                            = fontSize;
 			this._labelField.defaultTextFormat = tf;
 			this._labelField.text              = value;
+			this._labelField.y                 = (BTN_H - this._labelField.textHeight)/2;
+			this._labelField.height            = BTN_H - this._labelField.y;
 		}
 	}
 

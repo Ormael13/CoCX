@@ -5,10 +5,10 @@
 package classes.Items
 {
 
-import classes.ItemType;
 import classes.PerkLib;
-import classes.Player;
 import classes.Scenes.SceneLib;
+
+import coc.view.IconLib;
 
 public class WeaponRange extends Equipable
 	{
@@ -30,6 +30,9 @@ public class WeaponRange extends Equipable
 		private static const SLOTS:Array = [SLOT_WEAPON_RANGED];
 		override public function slots():Array {
 			return SLOTS; // don't recreate every time
+		}
+		override public function get iconId():String {
+			return IconLib.pickIcon(ownIconId, "I_GenericWeapon_"+perk, super.iconId);
 		}
 		
 		public function get verb():String { return _verb; }

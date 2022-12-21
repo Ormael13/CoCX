@@ -2741,7 +2741,7 @@ public static const UNKNOWN_FLAG_NUMBER_02732:int                               
 public static const UNKNOWN_FLAG_NUMBER_02733:int                                   = 2733;
 public static const UNKNOWN_FLAG_NUMBER_02734:int                                   = 2734;
 public static const UNKNOWN_FLAG_NUMBER_02735:int                                   = 2735;
-public static const UNKNOWN_FLAG_NUMBER_02736:int                                   = 2736;
+public static const BOOB_DISPLAY_FLAG:int                                   		= 2736;
 public static const IMPROVED_PERMANENT_GOLEMS_BAG:int                               = 2737;
 public static const PERMANENT_STEEL_GOLEMS_BAG:int                                  = 2738;
 public static const IMPROVED_PERMANENT_STEEL_GOLEMS_BAG:int                         = 2739;

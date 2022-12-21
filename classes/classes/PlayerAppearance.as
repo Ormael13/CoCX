@@ -88,6 +88,7 @@ public class PlayerAppearance extends BaseContent {
 		addButton(0, "Next", playerMenu);
 		if (player.hasPerk(PerkLib.RacialParagon)) addButton(1, "Set Race.", ApexRaceSetting);
 		addButton(2, "Weap View", WeaponDisplay);
+		addButton(3, "Superboob", BoobDisplay);
 		addButton(7, "Reflect", campActionsReflect).hint("Reflect on your current state and future plans. (Also would make your body fully adjust to any sudden changes to natural limits of your attributes after eating any odd things and etc.)");
 		addButton(10, "RacialScores", RacialScores);
 		addButton(11, "Gender Set.", GenderForcedSetting);
@@ -106,9 +107,26 @@ public class PlayerAppearance extends BaseContent {
 		addButton(14, "Back", appearance);
 	}
 
+	public function	BoobDisplay():void {
+		clearOutput();
+		outputText("Do you want to display Breast Bigger then F cup.");
+		if (flags[kFLAGS.BOOB_DISPLAY_FLAG] == 0) outputText("[pg]Display Style: <b>Yes</b>");
+		if (flags[kFLAGS.BOOB_DISPLAY_FLAG] == 1) outputText("[pg]Display Style: <b>No</b>");
+		mainView.hideAllMenuButtons();
+		menu();
+		addButton(0, "Hyper", BoobDisplaySwitch, 0).disableIf(flags[kFLAGS.BOOB_DISPLAY_FLAG] == 0, "Bigger boob disabled");
+		addButton(1, "No Hyper", BoobDisplaySwitch, 1).disableIf(flags[kFLAGS.BOOB_DISPLAY_FLAG] == 1, "Bigger boob enabled");
+		addButton(14, "Back", appearance);
+	}
+
 	public function	WeaponDisplaySwitch(Display:Number):void {
 		flags[kFLAGS.WEAPON_DISPLAY_FLAG] = Display;
 		WeaponDisplay();
+	}
+
+	public function	BoobDisplaySwitch(Display:Number):void {
+		flags[kFLAGS.BOOB_DISPLAY_FLAG] = Display;
+		BoobDisplay();
 	}
 
 	public function ApexRaceSetting():void {
