@@ -236,7 +236,7 @@ public class TailTransformations extends MutationsHelper {
 					desc += "Feeling an uncomfortable sensation on your butt, you stretch yourself, attributing it to having sat on a rough surface. A burning sensation runs through your body, similar to the one that you had after eating the root. When it migrates to your back, your attention goes to a mass of fluff that has erupted from your backside. Before you can check it properly, it seems to move on its own, following the heated sensation that now pulsates through your body, and when the heated pulses seem to have stopped, it has become a long, fluffy tube";
 					desc += "Shortly after, the feel of that spicy root returns, but now the heat is felt only in your tail, which shakes wildly while it elongates and becomes more bushy. Soon it has become almost as long as you. A very thick mass of soft, fluffy furs covers it in a matter of seconds. It acquires a lovely ringed pattern of red-russet and copperish-orange.";
 					desc += "When the effects finally subside, you decide to test the tail, making it coil around your body, realizing soon that you can control its movements with ease, and that its fur feels wonderful at the touch. Anyways, <b>you now have a long, bushy, red-panda tail!</b>";
-				} else if (player.tailType == Tail.BEE_ABDOMEN || player.tailType == Tail.SPIDER_ADBOMEN || player.tailType == Tail.MANTIS_ABDOMEN || player.tailType == Tail.ANT_ABDOMEN) {
+				} else if (player.tailType == Tail.BEE_ABDOMEN || player.tailType == Tail.SPIDER_ADBOMEN || player.tailType == Tail.SCORPION || player.tailType == Tail.MANTIS_ABDOMEN || player.tailType == Tail.ANT_ABDOMEN) {
 					desc += "Your insectile backside seems affected by the root properties, as your venom production suddenly stops. The flesh within the abdomen retracts into your backside, the chiting covering falling, leaving exposed a layer of soft, bare skin. When the abdomen disappears, your left with a comically sized butt, that soon reverts to its usual size.";
 					desc += "The root keeps doing its thing, as you feel an uncomfortable sensation on your butt. A burning sensation runs through your body, similar to the one that you had after eating the root. When it migrates to your back, your attention goes to a mass of fluff that has erupted from your backside. Before you can check it properly, it seems to move on its own, following the heated sensation that now pulsates through your body, and when the heated pulses seem to have stopped, it has become a long, fluffy tube, quite different from your former abdomen.";
 					desc += "Shortly after, the feel of that spicy root returns, but now the heat is felt only in your tail, which shakes wildly while it elongates and becomes more bushy. Soon it has become almost as long as you. A very thick mass of soft, fluffy furs covers it in a matter of seconds. It acquires a lovely ringed pattern of red-russet and copperish-orange.";
@@ -266,7 +266,7 @@ public class TailTransformations extends MutationsHelper {
 
 				TransformationUtils.removeLowerBodyIfIncompatible(player, doOutput);
 
-				if (player.tailType == Tail.SPIDER_ADBOMEN || player.tailType == Tail.BEE_ABDOMEN || player.tailType == Tail.SCORPION || player.tailType == Tail.MANTIS_ABDOMEN) {
+				if (player.tailType == Tail.SPIDER_ADBOMEN || player.tailType == Tail.BEE_ABDOMEN || player.tailType == Tail.SCORPION || player.tailType == Tail.MANTIS_ABDOMEN || player.tailType == Tail.ANT_ABDOMEN) {
 					desc += "Your insect-like abdomen bunches up as it begins shrinking, exoskeleton flaking off like a snake sheds its skin. It bunches up until it is as small as a tennis ball, then explodes outwards, growing into an animalistic tail shape. Moments later, it explodes into filaments of pain, dividing into hundreds of strands and turning into a shiny horsetail.";
 				} else {
 					TransformationUtils.applyTFIfNotPresent(transformations.TailNone, doOutput);
@@ -686,13 +686,41 @@ public class TailTransformations extends MutationsHelper {
 
 				if (player.tailType != Tail.NONE) {
 					desc += "";
-					if (player.tailType == Tail.SPIDER_ADBOMEN || player.tailType == Tail.BEE_ABDOMEN) desc += "You feel a tingling in your insectile abdomen as it stretches, narrowing, the exoskeleton flaking off as it transforms into a flexible demon-tail, complete with a round spaded tip. ";
+					if (player.tailType == Tail.SPIDER_ADBOMEN || player.tailType == Tail.BEE_ABDOMEN || player.tailType == Tail.SCORPION || player.tailType == Tail.ANT_ABDOMEN || player.tailType == Tail.MANTIS_ABDOMEN) desc += "You feel a tingling in your insectile abdomen as it stretches, narrowing, the exoskeleton flaking off as it transforms into a flexible demon-tail, complete with a round spaded tip. ";
 					else desc += "You feel a tingling in your tail. You are amazed to discover it has shifted into a flexible demon-tail, complete with a round spaded tip. ";
 					desc += "<b>Your tail is now demonic in appearance.</b>";
 				} else desc += "A pain builds in your backside... growing more and more pronounced. The pressure suddenly disappears with a loud ripping and tearing noise. <b>You realize you now have a demon tail</b>... complete with a cute little spade.";
 				player.tailVenom = 0;
 				player.tailRecharge = 0;
 				player.tailType = Tail.DEMONIC;
+				player.tailCount = 1;
+
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.DEMONIC));
+			},
+			// is present
+			function (): Boolean {
+				return player.tailType === Tail.DEMONIC;
+			}
+	);
+
+
+	public const TailAzazel: Transformation = new SimpleTransformation("Demonic Tail",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				TransformationUtils.removeLowerBodyIfIncompatible(player, doOutput);
+
+				if (player.tailType != Tail.NONE) {
+					desc += "";
+					if (player.tailType == Tail.SPIDER_ADBOMEN || player.tailType == Tail.BEE_ABDOMEN || player.tailType == Tail.SCORPION || player.tailType == Tail.ANT_ABDOMEN || player.tailType == Tail.MANTIS_ABDOMEN) desc += "You feel a tingling in your insectile abdomen as it stretches, narrowing, the exoskeleton flaking off as it transforms into a  ";
+					else desc += "You feel a tingling in your tail. You are amazed to discover it has shifted into a ";
+					desc += "thin, scaly, prehensile reptilian tail almost as long as you are tall and covered in [fur color] fur, swings behind you like a living bullwhip. The end of its tip is tapered and thin like the end of a whip. <b>Your tail is now demonic in appearance.</b>";
+				} else desc += "A pain builds in your backside... growing more and more pronounced. The pressure suddenly disappears with a loud ripping and tearing noise. <b>You realize you now have an azazel tail</b>... it looks thin, scaly, prehensile reptilian tail almost as long as you are tall and covered in [fur color] fur, swings behind you like a living bullwhip. The end of its tip is tapered and thin like the end of a whip.";
+				player.tailVenom = 0;
+				player.tailRecharge = 0;
+				player.tailType = Tail.AZAZEL;
 				player.tailCount = 1;
 
 				if (doOutput) outputText(desc);
@@ -874,7 +902,7 @@ public class TailTransformations extends MutationsHelper {
 				TransformationUtils.removeLowerBodyIfIncompatible(player, doOutput);
 
 				if (player.tailType == Tail.NONE) desc += "A painful pressure in your lower body causes you to stand straight and lock up. At first you think it might be gas. No... something is growing at the end of your tailbone. As you hold stock still so as not to exacerbate the pain, something thick pushes out from the rear of your garments. The pain subsides and you crane your neck around to look; a long, tapered tail is now attached to your butt and a thin coat of fur is already growing in! <b>You now have a kangaroo tail!</b>";
-				else if (player.tailType == Tail.SPIDER_ADBOMEN || player.tailType == Tail.BEE_ABDOMEN || player.tailType == Tail.SCORPION || player.tailType == Tail.MANTIS_ABDOMEN) {
+				else if (player.tailType == Tail.SPIDER_ADBOMEN || player.tailType == Tail.BEE_ABDOMEN || player.tailType == Tail.SCORPION || player.tailType == Tail.MANTIS_ABDOMEN || player.tailType == Tail.ANT_ABDOMEN) {
 					desc += "Your chitinous backside shakes and cracks.  Peering at it as best you can, it appears as though the fuzz is falling out in clumps and the chitin is flaking off.  As convulsions begin to wrack your body and force you to collapse, the ";
 					if (player.tailType == Tail.BEE_ABDOMEN) desc += "hollow stinger drops out of the end, taking the venom organ with it.";
 					else desc += "spinnerets drop out of the end, taking the last of your webbing with it. By the time you're back to yourself, the insectile carapace has fallen off completely, leaving you with a long, thick, fleshy tail in place of your proud, insectile abdomen.  <b>You now have a kangaroo tail!</b>";

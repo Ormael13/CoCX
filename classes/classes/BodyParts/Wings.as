@@ -369,6 +369,14 @@ public class Wings extends SaveableBodyPart {
 		canFly: true,
 		feathers: true
 	});
+	public static const PUREDEVILFEATHER: int = 44;
+	EnumValue.add(Types, PUREDEVILFEATHER, "PUREDEVILFEATHER", {
+		name:"puredevil",
+		desc:"white, feathered",
+		appearanceDesc: "A pair of large immaculate white feathered wings expand from your back. You can open them wide to soar high in the sky.",
+		canFly: true,
+		physical: true
+	});
 
 	public var desc:String = "non-existant";
 	public function Wings(creature:Creature) {

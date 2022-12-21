@@ -149,6 +149,17 @@ package classes.GeneticMemories {
 		  }
 	  });
 
+	  public static const PUREDEVILFEATHER:int = _partid++;
+	  EnumValue.add(Memories, PUREDEVILFEATHER, "PUREDEVILFEATHER", {
+		  id: "Pure Devil Feather Wings",
+		  name: "Pure Devil Feather Wings",
+		  cost: 100,
+		  title: "Pure Devilfeather",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.WingsPureDevilfeather;
+		  }
+	  });
+
 		public static const DRACONIC_SMALL:int = _partid++;
 		EnumValue.add(Memories, DRACONIC_SMALL, "DRACONIC_SMALL", {
 			id: "Draconic Small Wings",

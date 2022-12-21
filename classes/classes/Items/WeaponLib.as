@@ -19,6 +19,44 @@ public final class WeaponLib extends ItemConstants
 		private static function findCommonDynamicWeapon(subtypeId:String):DynamicWeapon {
 			return ItemTemplateLib.instance.createWeapon(subtypeId, RARITY_COMMON, 0, CS_KNOWN_UNCURSED, []);
 		}
+
+		public function Legendary():Array {
+			return LegendaryPure().concat(LegendaryCorrupt());
+		}
+		public function LegendaryPure():Array {
+			return [
+				NPHBLDE,
+				T_HEART,
+				KARMTOU,
+				MASAMUN,
+				U_STAFF,
+				LHSCYTH,
+				MOONLIT,
+				WG_GAXE,
+				SESPEAR,
+				Q_GUARD,
+				POCDEST,
+				ARMAGED,
+				OCCULUS,
+				EXCALIB
+			];
+		}
+		public function LegendaryCorrupt():Array {
+			return [
+				EBNYBLD,
+				DORSOUL,
+				YAMARG,
+				BLETTER,
+				N_STAFF,
+				C_BLADE,
+				DE_GAXE,
+				DSSPEAR,
+				B_WIDOW,
+				DOCDEST,
+				CHAOSEA,
+				ECLIPSE
+			];
+		}
 		
 		public static const DEFAULT_VALUE:Number = 6;
 
@@ -28,6 +66,7 @@ public final class WeaponLib extends ItemConstants
 		public const ACLAYMO:AmethystClaymore = new AmethystClaymore();
 		public const ADAGGER:Weapon = new Weapon("ADagger","A.Dagger","amethyst dagger","an amethyst dagger","stab",3,240,"This dagger is made of obsidian and grotesquely decorated with amethysts and lead engravings. The magic within this murky blade will bleed unnatural darkness when charged with magic.", "Small", "Dagger");
 		public const AETHERD:AetherD = new AetherD();
+		public const ATWINSCY:AlvinaTwinScythe = new AlvinaTwinScythe();
 		public const ANGSTD :AngstDaggers = new AngstDaggers();
 		public const ARMAGED:ArmageddonBlade = new ArmageddonBlade();
 		public const ASCENSU:Weapon = new Weapon("Ascensus", "Ascensus", "Ascensus", "Ascensus, Element of Ascension", "smack", 15, 2400, "This staff is made from sacred wood and holy bark. Vines and tentacles run along the staff, grown out of the wood itself. The top has an odd zigzag shape, with pulsing crystals adorning the recesses. This staff radiates power, neither pure nor corrupt.", "Large, Staff", WT_STAFF).withBuff('spellpower',+1.5) as Weapon;
@@ -197,6 +236,8 @@ public final class WeaponLib extends ItemConstants
 		//Spellcasting weapon
 		public const S_SWORD:Weapon = new Weapon("S.Sword", "S.Sword", "Sorcerer sword", "a sorcerer sword", "slash", 25, 2000, "This weapon was forged by elven wizards. It is both an excelent catalyst and a deadly blade.", "", "Sword, StaffPart").withBuff('spellpower', +0.40) as Weapon;
 		public const A_WAND:Weapon = new Weapon("A.Wand", "A.Wand", "Apprentice wand", "an apprentice wand", "smack", 1, 150, "A low quality wand. Light and cheap it is commonly used by young apprentices who have started learning magic. Seeing as beginners tend to cause their catalyst to explode this is the perfect weapon for them.", "Wand", WT_WAND).withBuff('spellpower', +0.30) as Weapon;
+		public const O_WAND:Weapon = new Weapon("O.Wand", "O.Wand", "Old wand", "an old wand", "smack", 1, 500, "An old wand. It seems to be broken or worn out, perhaps it can be repaired by a skilled wizard? It is not very useful in its current state but may be able to boost your spellpower if repaired.", "Wand", WT_WAND).withBuff('spellpower', +0.10) as Weapon;
+		public const R_WAND:Weapon = new Weapon("R.Wand", "R.Wand", "Repaired Old wand", "an old wand repaired by alvina", "smack", 1, 800, "An old wand that has been repaired for you by Alvina. It boosts your spellpower, though not as much as if it were made specifically for you.", "Wand", WT_WAND).withBuff('spellpower', +0.80) as Weapon;
 		public const H_WAND:Weapon = new Weapon("H.Wand", "H.Wand", "hellcat wand", "a hellcat wand", "smack", 1, 500, "A hellcat witch wand. Commonly used by hellcats to deliver their iconic fire magic.", "Wand", WT_WAND).withBuff('spellpower', +1) as Weapon;
 		public const WDAGGER:Weapon = new Weapon("WDagger","W.Dagger","witch dagger","a witch dagger","stab",3,500,"A dagger engraved with magical runes. While not the best catalyst around it is light, discreet and excelent for delivering spells.", "Small" , "Dagger, StaffPart").withBuff('spellpower', +0.20) as Weapon;
 		public const OCCULUS:Occulus = new Occulus();

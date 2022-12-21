@@ -86,6 +86,7 @@ public final class ConsumableLib extends Utils
         public const BIMBOCH:SimpleConsumable = mk("BimboCh", "BimboCh", "a bottle of bimbo champagne", 20, "A bottle of bimbo champagne. Drinking this might incur temporary bimbofication.", curry(function (player:Player):void {
             SceneLib.telAdre.niamh.bimboChampagne(player, true, true)
         }));
+		public const CHOCBOX:SimpleConsumable = mk("ChocBox", "ChocBox", "a box of chocolate", 250, "A box of sweet chocolates. Maybe you can give it to someone you like?", m.boxChocolate);
 		public const CCUPCAK:SimpleConsumable = mk("CCupcak", "CCupcak", "a gigantic, chocolate cupcake", 250, "A gigantic, chocolate cupcake. You could easily get full from eating this!", m.giantChocolateCupcake);
 		public const D_MORAD:SimpleConsumable = mk("D_Morad", "D.Morada", "a bag of Dulce Morada", 6, "It appears to be a few purple-colored hard candies. It has the same color as the troll figs.\n",function(player:Player):void{SceneLib.trollVillage.elderstore.itemsConsumed("D.Morada")});
 		public const EXCMILK:SimpleConsumable = mk("ExcMilk", "ExcMilk", "a bottle of Excellia's milk", 10, "It's a bottle of Excellia's milk. It's guaranteed to restore your body and energy.", m.excelliaMilk);
@@ -337,6 +338,7 @@ public final class ConsumableLib extends Utils
 		public const S_GOSSR:SimpleConsumable = mk("S.Gossr", "S.Gossr", "a bundle of pink, gossamer webbing", 6, "These strands of gooey pink gossamer seem quite unlike the normal silk that spider-morphs produce.  It smells sweet and is clearly edible, but who knows what it might do to you?", curry(m.sweetGossamer, 0));
 		public const SALAMFW:SimpleConsumable = mk("SalamFW", "SalamFW", "a hip flask of Salamander Firewater", 6, "This hip flask contain high-proof beverage called 'Salamander Firewater', which one sip can makes your throat feel like it been set on fire.  What whould happen if you drink whole flask content?", m.salamanderfirewater);
 		public const SATYR_W:SatyrWine        = new SatyrWine();
+		public const SAGEMED:SageMedicine     = new SageMedicine();
 		public const SCORICO:Scorpinum 		  = new Scorpinum();
 		public const SHARK_T:SimpleConsumable = mk("Shark.T", "Shark.T", "a sharp shark tooth", 6, "A glinting white tooth, very sharp and intimidating.", curry(m.sharkTooth, 0));
 		public const SKELP__:SimpleConsumable = mk("Skelp  ", "Skelp", "a skelp", 15, "A form of Kelp used by the Melkie as seasoning for their food. Very tasty but can result in transformation if used uncooked.", m.skelp);
