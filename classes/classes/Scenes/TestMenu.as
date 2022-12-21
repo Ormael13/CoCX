@@ -110,6 +110,7 @@ public class TestMenu extends BaseContent
 		bd.add("BelisaTest", belisatest3, "Belisa Trigger").disableIf(BelisaFollower.BelisaInGame && BelisaFollower.BelisaFollowerStage < 3);
 		bd.add("Test dynamic stat", TestDynamicStats, "Test Dynamic stats.");
 		bd.add("Kiha Wedding", kihaWedding, "Test Kiha Wedding Content before D4 completed");
+		bd.add("Alvina Pure", alvinaSaveFromHerself, "Test Alvina purification");
 		submenu(bd, SoulforceCheats, 0, false);
 	}
 
@@ -287,6 +288,9 @@ public class TestMenu extends BaseContent
 	}
 	public function kihaWedding():void {
 		SceneLib.kihaFollower.KihaProposal();
+	}
+	public function alvinaSaveFromHerself():void {
+		SceneLib.alvinaFollower.alvinaDontFightWon();
 	}
     public function cheatFixShards():void { //wrapper for fixShards to use it in cheat menu
 		clearOutput();

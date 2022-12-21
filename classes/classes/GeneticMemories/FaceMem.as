@@ -319,6 +319,17 @@ package classes.GeneticMemories {
 			}
 		});
 
+		public static const INNOCENT:int = _partid++;
+		EnumValue.add(Memories, INNOCENT, "INNOCENT", {
+			id: "Innocent Expression",
+			name: "Innocent Expression",
+			cost: 200,
+			title: "Innocent",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.FaceInnocent;
+			}
+		});
+
 	  	public static const ELF_FACE:int = _partid++;
 	  	EnumValue.add(Memories, ELF_FACE, "ELF_FACE", {
 		  	id: "Elf Face",

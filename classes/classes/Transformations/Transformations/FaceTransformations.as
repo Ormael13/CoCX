@@ -608,6 +608,23 @@ public class FaceTransformations extends MutationsHelper {
 			}
 	);
 
+	public const FaceInnocent: Transformation = new SimpleTransformation("Azazel Innocent Face",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				desc += "You bring your hands to your [face] as a sudden agony sweeps over it. Through the pain, you can feel its shape changing, details shifting little by little with purpose. When you come back to your senses, you notice <b>you have a innocent, almost angelic face!</b>";
+
+				if (doOutput) outputText(desc);
+				player.faceType = Face.INNOCENT;
+				Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.INNOCENT));
+			},
+			// is present
+			function (): Boolean {
+				return player.faceType === Face.INNOCENT;
+			}
+	);
+
 	public const FaceOniTeeth: Transformation = new SimpleTransformation("Oni Teeth Face",
 			// apply effect
 			function (doOutput: Boolean): void {

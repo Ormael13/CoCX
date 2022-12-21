@@ -7,6 +7,7 @@ package classes.Scenes.NPCs
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Monsters.ImpLord;
+import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
 public class SiegweirdFollower extends NPCAwareContent
@@ -185,7 +186,7 @@ public function siegweirdMainCampMenu():void
                 addButton(11, "Advanced Study", siegweirdAdvancedStudy_2);
 		}
 		else if (player.statusEffectv1(StatusEffects.SiegweirdTraining2) == 2) {
-			if (player.hasKeyItem("Alvina's Shattered Phylactery") >= 0)
+			if (player.hasKeyItem("Alvina's Shattered Phylactery") >= 0 || SceneLib.alvinaFollower.AlvinaPurified)
                 addButton(11, "Advanced Study", siegweirdAdvancedStudy_3);
 			else
                 addButtonDisabled(11, "Advanced Study", "You need to go kill a certain dangerous devil in Defiled Ravine.");
@@ -423,8 +424,12 @@ public function siegweirdAdvancedStudy_2():void {
 //Alvina reward
 public function siegweirdAdvancedStudy_3():void {
     clearOutput();
-    player.removeKeyItem("Alvina's Shattered Phylactery");
-    outputText("Siegweird notices that you have the pendant as soon as you come near him, giving you a cheerful smile.\n\n");
+	if (SceneLib.alvinaFollower.AlvinaPurified) {
+		outputText("Siegweird notices the presence of the purified Alvina and looks at her askance. \"<i>She... she doesnt appear to be corrupt anymore? How on earth you managed to pull that off I can never begin to imagine... I still dont know if she can be trusted or might one day fall to her old ways, but for now I shall wait and see.</i>\"\n\n");
+	} else {
+		player.removeKeyItem("Alvina's Shattered Phylactery");
+		outputText("Siegweird notices that you have the pendant as soon as you come near him, giving you a cheerful smile.\n\n");
+	}
     outputText("\"<i>[name]..! You… You did it! Something I know I could never do... You have helped the cause of purity more than you might think. We now have one less threat to deal with, thank you [name].</i>\"\n\n");
     outputText("Siegweird pulls you in for a fierce hug. He retracts before pulling something from his knapsack,");
     outputText("\"<i>Here, this tome is for you. I have mastered the ability in my own way, and now I want you to learn it by your own accord.</i>");

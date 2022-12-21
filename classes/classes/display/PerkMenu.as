@@ -174,7 +174,7 @@ public class PerkMenu extends BaseContent {
 		// auto hit mode :)
 		outputText("\n\nYou can choose to stand still when selecting the 'Wait' actions. This way, you won't attempt to dodge or block any attacks. Why would you do that?!");
 		outputText("\nCurrent 'Wait' behaviour: <b>" + (flags[kFLAGS.WAIT_STAND_STILL] ? "Standing still" : "Dodging") + "</b>");
-		addButton(6, "StandStill", curry(toggleFlagMisc, kFLAGS.WAIT_STAND_STILL));
+		addButton(6, "Wait", curry(toggleFlagMisc, kFLAGS.WAIT_STAND_STILL));
 		// corruption tolerance
 		if (player.hasPerk(PerkLib.AscensionTolerance) || !CoC.instance.lockCheats) {
 			outputText("\n\nYou can temporarily enable or disable your corruption tolerance.");
@@ -183,6 +183,13 @@ public class PerkMenu extends BaseContent {
 				flags[kFLAGS.CORRUPTION_TOLERANCE_MODE] == 0 ? "Enabled (" + player.corruptionTolerance + ")" :
 					flags[kFLAGS.CORRUPTION_TOLERANCE_MODE] == 1 ? "Disabled (0)" : "CHEAT (100)") + "</b>");
 			addButton(7, "CorTolerance", toggleCorruptionTolerance);
+		}
+		// tease healing
+		if (player.hasPerk(PerkLib.FueledByDesire) || player.armor == armors.ELFDRES) {
+			outputText("Combat Tease can cause lust reduction: " + (
+					flags[kFLAGS.COMBAT_TEASE_HEALING] == 0 ? "Enabled" : "Disabled"
+			));
+			addButton(5, "C. Tease Heal", curry(toggleFlagMisc, kFLAGS.COMBAT_TEASE_HEALING));
 		}
 		//
 		addButton(14, "Back", displayPerks);

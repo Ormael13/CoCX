@@ -10,6 +10,20 @@ import classes.PerkLib;
 
 public final class ShieldLib extends ItemConstants
 	{
+		public function Legendary():Array {
+			return LegendaryPure().concat(LegendaryCorrupt());
+		}
+		public function LegendaryPure():Array {
+			return [
+				SANCTYL
+			];
+		}
+		public function LegendaryCorrupt():Array {
+			return [
+				SANCTYD
+			];
+		}
+
 		public static const DEFAULT_VALUE:Number = 6;	//cena dla tarcz bazowa to 50 gems a nie 40 gems
 		
 		public static const NOTHING:Nothing = new Nothing();
