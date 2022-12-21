@@ -143,6 +143,7 @@ public class CharViewContext extends ExecContext {
 					PlayerHasADualWeapon: player.isDualWield(),
 
 					WeaponDisplay: game.flags[kFLAGS.WEAPON_DISPLAY_FLAG],
+					BoobDisplay: game.flags[kFLAGS.BOOB_DISPLAY_FLAG],
 					FireBuff: player.hasStatusEffect(StatusEffects.FlameBlade),
 
 					Antennae: Antennae,

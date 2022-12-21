@@ -102,6 +102,7 @@
             <color name="neon blue">#29eaff</color>
             <color name="spectral blue">#29eaff</color>
             <color name="glacial blue">#94f6ff</color>
+			<color name="pure blue">#94f6ff</color>
             <color name="mahogany">#81473b</color>
             <color name="mahogany2">#672828</color>
             <color name="metallic">#9c9c9c</color>
@@ -172,6 +173,7 @@
 			<color name="eldritch purple">#7a5f95</color>
             <color name="quartz white">#ffffff</color>
             <color name="pure white">#ffffff</color>
+			<color name="immaculate white">#fdfdfc</color>
             <color name="reddish-orange">#df8453</color>
             <color name="rough gray">#525252</color>
             <color name="sandy blonde">#ebd69e</color>
@@ -786,6 +788,7 @@
 		<cell rect="2074,158,40,55" name="glove_fg/darkPriestPrayer" dx="83" dy="61"/>
 		<cell rect="2158,158,40,55" name="glove_fg/priestPrayer" dx="83" dy="61"/>
         <cell rect="201,91,15,9" name="tailAccessory/demonTailJewelery" dx="133" dy="135"/>
+		<cell rect="233,91,15,9" name="overbreast/phylacteryExposed" dx="96" dy="69"/>
         <cell rect="296,1550,99,45" name="uniquePlantBath/lilirauneBath" dx="34" dy="88"/>
         <cell rect="546,1430,50,100" name="torso/liliraune" dx="36" dy="26"/>
         <cell rect="296,1596,85,20" name="face/lilirauneCorruptedSmile" dx="34" dy="50"/>
@@ -1423,6 +1426,8 @@
         <cell rect="508,421,168,69" name="tail/balrog_taur" dx="74" dy="93"/>
         <cell rect="677,421,168,69" name="tail/dragon" dx="18" dy="90"/>
         <cell rect="677,421,168,69" name="tail/dragon_taur" dx="62" dy="104"/>
+		<cell rect="677,491,168,69" name="tail/azazel" dx="18" dy="90"/>
+        <cell rect="677,491,168,69" name="tail/azazel_taur" dx="62" dy="104"/>
         <cell rect="1,491,83,69" name="tail/bunny" dx="95" dy="90"/>
         <cell rect="1,491,83,69" name="tail/bunny_taur" dx="141" dy="97"/>
         <cell rect="86,491,83,69" name="tail/goat" dx="94" dy="103"/>
@@ -1610,6 +1615,7 @@
 
         <layer name="neck"/>
 		<layer name="horns_bg"/>
+		<layer name="overbreast"/>
 		<layer name="overskin"/>
 		<layer name="breasts_pattern"/>
         <layer name="breasts"/>
@@ -2291,24 +2297,26 @@
 						<case test="breastRows[0].breastRating lte BreastCup.F"><!--A-B-->
 							<show part="overskin/Blyeti"/>
 						</case>
-						<case test="breastRows[0].breastRating lte BreastCup.G"><!--A-B-->
-							<if test="PlayerHasViewableOutfit == false">
-								<if test="PlayerHasABra == false">
-									<show part="overskin/BHyeti"/>
+                        <case test="breastRows[0].breastRating lte BreastCup.G"><!--A-B-->
+                            <if test="BoobDisplay == 0">
+                                <if test="PlayerHasViewableOutfit == false">
+                                    <if test="PlayerHasABra == false">
+                                        <show part="overskin/BHyeti"/>
+                                        <else>
+                                            <if test="cowBra">
+                                                <show part="overskin/BHyeti"/>
+                                                <else>
+                                                    <show part="overskin/Blyeti"/>
+                                                </else>
+											</if>
+										</else>
+									</if>
 									<else>
-										<if test="cowBra">
-											<show part="overskin/BHyeti"/>
-											<else>
-												<show part="overskin/Blyeti"/>
-											</else>
-										</if>
+										<show part="overskin/Blyeti"/>
 									</else>
 								</if>
-								<else>
-									<show part="overskin/Blyeti"/>
-								</else>
-							</if>
-						</case>
+                            </if>
+                        </case>
 						<default>
 						</default>
 					</switch>
@@ -2865,26 +2873,48 @@
 				<case test="breastRows[0].breastRating lte BreastCup.F"><!--A-B-->
                     <show part="breasts/F$skinx"/>
                 </case>
-				<case test="breastRows[0].breastRating lte BreastCup.G"><!--A-B-->
-					<if test="PlayerHasViewableOutfit == false">
-						<if test="PlayerHasABra == false">
-							<show part="breasts/G$skinx"/>
+                <case test="breastRows[0].breastRating lte BreastCup.G"><!--A-B-->
+                    <if test="BoobDisplay == 0">
+						<if test="PlayerHasViewableOutfit == false">
+							<if test="PlayerHasABra == false">
+								<show part="breasts/G$skinx"/>
+								<else>
+									<if test="cowBra">
+										<show part="breasts/G$skinx"/>
+										<else>
+											<show part="breasts/F$skinx"/>
+										</else>
+									</if>
+								</else>
+							</if>
 							<else>
-								<if test="cowBra">
-									<show part="breasts/G$skinx"/>
-									<else>
-										<show part="breasts/F$skinx"/>
-									</else>
-								</if>
+								<show part="breasts/F$skinx"/>
+							</else>
+						</if>
+                    </if>
+				</case>
+                <default>
+					<if test="BoobDisplay == 0">
+						<if test="PlayerHasViewableOutfit == false">
+							<if test="PlayerHasABra == false">
+								<show part="breasts/G$skinx"/>
+								<else>
+									<if test="cowBra">
+										<show part="breasts/G$skinx"/>
+										<else>
+											<show part="breasts/F$skinx"/>
+										</else>
+									</if>
+								</else>
+							</if>
+							<else>
+								<show part="breasts/F$skinx"/>
 							</else>
 						</if>
 						<else>
 							<show part="breasts/F$skinx"/>
 						</else>
 					</if>
-                </case>
-                <default>
-                    <show part="breasts/F$skinx"/>
                 </default>
             </switch>
         </if>
@@ -2911,25 +2941,47 @@
                     <show part="overskin/BlcaveWyrm"/>
                 </case>
 				<case test="breastRows[0].breastRating lte BreastCup.G"><!--A-B-->
-					<if test="PlayerHasViewableOutfit == false">
-						<if test="PlayerHasABra == false">
-							<show part="overskin/BHcaveWyrm"/>
+                    <if test="BoobDisplay == 0">
+						<if test="PlayerHasViewableOutfit == false">
+							<if test="PlayerHasABra == false">
+								<show part="overskin/BHcaveWyrm"/>
+								<else>
+									<if test="cowBra">
+										<show part="overskin/BHcaveWyrm"/>
+										<else>
+											<show part="overskin/BlcaveWyrm"/>
+										</else>
+									</if>
+								</else>
+							</if>
 							<else>
-								<if test="cowBra">
-									<show part="overskin/BHcaveWyrm"/>
-									<else>
-										<show part="overskin/BlcaveWyrm"/>
-									</else>
-								</if>
+								<show part="overskin/BlcaveWyrm"/>
+							</else>
+						</if>
+                    </if>
+				</case>
+                <default>
+					<if test="BoobDisplay == 0">
+						<if test="PlayerHasViewableOutfit == false">
+							<if test="PlayerHasABra == false">
+								<show part="overskin/BHcaveWyrm"/>
+								<else>
+									<if test="cowBra">
+										<show part="overskin/BHcaveWyrm"/>
+										<else>
+											<show part="overskin/BlcaveWyrm"/>
+										</else>
+									</if>
+								</else>
+							</if>
+							<else>
+								<show part="overskin/BlcaveWyrm"/>
 							</else>
 						</if>
 						<else>
 							<show part="overskin/BlcaveWyrm"/>
 						</else>
 					</if>
-                </case>
-                <default>
-                    <show part="overskin/BlcaveWyrm"/>
                 </default>
             </switch>
 			 </if>
@@ -3791,25 +3843,47 @@
 							<show part="breasts/Fliliraune"/>
 						</case>
 						<case test="breastRows[0].breastRating lte BreastCup.G"><!--A-B-->
-							<if test="PlayerHasViewableOutfit == false">
-								<if test="PlayerHasABra == false">
-									<show part="breasts/Gliliraune"/>
+                            <if test="BoobDisplay == 0">
+								<if test="PlayerHasViewableOutfit == false">
+									<if test="PlayerHasABra == false">
+										<show part="breasts/Gliliraune"/>
+										<else>
+											<if test="cowBra">
+												<show part="breasts/Gliliraune"/>
+												<else>
+													<show part="breasts/Fliliraune"/>
+												</else>
+											</if>
+										</else>
+									</if>
 									<else>
-										<if test="cowBra">
-											<show part="breasts/Gliliraune"/>
-											<else>
-												<show part="breasts/Fliliraune"/>
-											</else>
-										</if>
+										<show part="breasts/Fliliraune"/>
+									</else>
+								</if>
+                            </if>
+						</case>
+						<default>
+							<if test="BoobDisplay == 0">
+								<if test="PlayerHasViewableOutfit == false">
+									<if test="PlayerHasABra == false">
+										<show part="breasts/Gliliraune"/>
+										<else>
+											<if test="cowBra">
+												<show part="breasts/Gliliraune"/>
+												<else>
+													<show part="breasts/Fliliraune"/>
+												</else>
+											</if>
+										</else>
+									</if>
+									<else>
+										<show part="breasts/Fliliraune"/>
 									</else>
 								</if>
 								<else>
 									<show part="breasts/Fliliraune"/>
 								</else>
 							</if>
-						</case>
-						<default>
-							<show part="breasts/Fliliraune"/>
 						</default>
 					</switch>
 				</if>
@@ -5687,8 +5761,23 @@
 					<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
 						<show part="bra/cowBraLarge"/>
 					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.G"><!--A-B-->
+                        <if test="BoobDisplay == 0">
+							<if test="PlayerHasViewableOutfit == false">
+								<show part="bra/cowBraMega"/>
+								<else>
+									<show part="bra/cowBraLarge"/>
+								</else>
+							</if>
+                        </if>
+					</case>
 					<default>
-						<show part="bra/cowBraLarge"/>
+						<if test="BoobDisplay == 0">
+							<show part="bra/cowBraMega"/>
+							<else>
+								<show part="bra/cowBraLarge"/>
+							</else>
+						</if>
 					</default>
 				</switch>
 			</if>
