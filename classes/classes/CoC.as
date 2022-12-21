@@ -67,7 +67,7 @@ public class CoC extends MovieClip
         return _instance;
     }
     //Game Version
-    public var debugGameVer:String = "v0.8s5.246-final";
+    public var debugGameVer:String = "v0.8s5";
 
     //Mod save version.
     public var modSaveVersion:Number = 36.037;
@@ -281,8 +281,8 @@ public class CoC extends MovieClip
         debug = false;
 
 			//Version NUMBER
-			ver = "1.0.2_mod_Xianxia_" + debugGameVer;
-			ver += " (<b>Cultivation: Rebirth, Green Magic, return of Grey Sage, tons of QoL changes</b>)";
+			ver = "1.0.2_mod_Xianxia_" + debugGameVer + " (<b>Cultivation: Rebirth, Green Magic, return of Grey Sage, tons of QoL changes</b>)";
+			version = ver + " (<b>Cultivation: Rebirth, Green Magic, return of Grey Sage, tons of QoL changes</b>)";
 
         this.images = new ImageManager(stage, mainView);
         this.inputManager = new InputManager(stage, mainView, false);
