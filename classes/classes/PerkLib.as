@@ -7071,12 +7071,12 @@ public class PerkLib
 					return player.playerMinionsCount() >= 10;
 					}, "10+ pets/minions");
 			LimitBreakerFlesh1stStage.requireLevel(54)
-					.requirePerk(LimitBreakerHeart1stStage);
+					.requirePerk(LimitBreakerHeart1stStage);/*
 			ArcaneVenom.requireLevel(54)
 					.requirePerk(VerdantLeech)
 					.requireInt(200)
 					.requireLib(200)
-					.requireCor(50);
+					.requireCor(50);*/
             //Tier 10
             ChimericalBodySemiPeerlessStage.requirePerk(ChimericalBodySuperiorStage)
                     .requireLevel(60)
@@ -7292,4 +7292,4 @@ public class PerkLib
         }
 	}
 }
-}
+}

@@ -51,9 +51,9 @@ import classes.StatusEffects;
 		if (display) {
 			outputText("You concentrate your desire on the nearby plants causing their flowers to spontaneously bloom in a cloud of corrupted pollen.\n");
 			monster.createStatusEffect(StatusEffects.DeathBlossom, 5, 1, 0, 0);
-			var arve:Number = 1;
+			/*var arve:Number = 1;
 			if (player.hasPerk(PerkLib.ArcaneVenom)) arve += stackingArcaneVenom();
-			while (arve-->0) doSpellEffect2();
+			while (arve-->0)*/ doSpellEffect2();
 		}
 	}
 	

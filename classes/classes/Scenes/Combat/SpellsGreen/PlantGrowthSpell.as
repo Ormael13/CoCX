@@ -62,9 +62,9 @@ public class PlantGrowthSpell extends AbstractGreenSpell {
 					return;
 				}
 				player.createStatusEffect(StatusEffects.PlantGrowth, calcDuration(), 0, 0, 0);
-				var arve:Number = 1;
+				/*var arve:Number = 1;
 				if (player.hasPerk(PerkLib.ArcaneVenom)) arve += stackingArcaneVenom();
-				while (arve-->0) doSpellEffect2();
+				while (arve-->0)*/ doSpellEffect2();
 			}
 			else {
 				outputText("You focus your energy on the world around you causing vegetation to surge out of the ground at an accelerated rate into a verdant patch of vines and other tentacle greenery.\n");

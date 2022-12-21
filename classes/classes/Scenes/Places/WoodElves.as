@@ -683,8 +683,8 @@ package classes.Scenes.Places{
 				.disableIf(!player.hasVagina(), "Alyssa has personal preferences in regards to the people she will train with... it's not like the spear is a girl only discipline, but the way she uses it might as well be...");
 			addButton(5, "Lutien", Lutien)
 					.disableIf(hasTrainedToday, "You need a break from your recent training before you can train again.");
-			addButton(6, "Chelsea", Chelsea)
-					.disableIf(hasTrainedToday, "You need a break from your recent training before you can train again.");
+		//	addButton(6, "Chelsea", Chelsea)
+		//			.disableIf(hasTrainedToday, "You need a break from your recent training before you can train again.");
 			addButton(14, "Leave", camp.returnToCampUseOneHour);
 		}
 
