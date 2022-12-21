@@ -1,10 +1,14 @@
 package classes {
 import classes.Transformations.Transformation;
+import classes.Transformations.Transformations.RaceTransformations;
 import classes.internals.Utils;
 import classes.internals.race.ConditionedRaceScoreBuilder;
 import classes.internals.race.RaceScoreBuilder;
 import classes.internals.race.RaceTierBuilder;
+import classes.internals.race.RaceTierRequirement;
 import classes.internals.race.RacialRequirement;
+import classes.GeneticMemories.RaceMem;
+import classes.Scenes.Metamorph;
 
 public class Race {
 	public static const RaceById:Object                    = {};
@@ -46,18 +50,23 @@ public class Race {
 	public var grandChimeraTier:int = 2;
 
     /**
+	 * Used to do Full Body Transformations
+     */
+    public var tfRace : int = 0;
+
+    /**
      * @param _name Display name of the race
      * @param _id Unique number id
      */
-    function Race(_name:String, _id:int) {
+    function Race(_name:String, _id:int, raceBody/*String*/:Array) {
         this.name = _name;
         this.id = _id;
 		if (_id in RaceById) {
 			trace("[ERROR] Duplicate race id "+_id);
 		}
-        RaceById[_id] = this;
+		initRaceMemory(_name, raceBody);
+		RaceById[_id] = this;
     }
-	
 	/**
 	 * Configure tiers, requirements & other stuff
 	 */
@@ -78,29 +87,30 @@ public class Race {
 		return score;
 	}
 	
-	public function totalScore(body:BodyData):int {
-		return finalizeScore(body, basicScore(body));
+	public function totalScore(body:BodyData, checkRP:Boolean = true):int {
+		return finalizeScore(body, basicScore(body), checkRP);
 	}
 	
 	/**
 	 * Complete racial score calculation
 	 * @param body
 	 * @param score basic score
+	 * @param checkRP set to true to check Racial Paragon and other conditions, setting the score to zero.
 	 * @param outputText Optional function `(reason:String, scoreChange:int)=>void` to print reason of score changes.
 	 * @return final racial score
 	 */
 	public function finalizeScore(
 			body:BodyData,
 			score:int,
+			checkRP:Boolean = true,
 			outputText:Function = null
 	):int {
 		var player:Player = body.player;
 		var bonus:int;
-		
 		if (bloodlinePerks.length > 0) {
 			bonus = 0;
 			for each (var perk:PerkType in bloodlinePerks) {
-				if (/*score >= mutationThreshold && */body.player.hasPerk(perk)) {
+				if (score >= mutationThreshold && body.player.hasPerk(perk)) {
 					bonus += body.player.increaseFromBloodlinePerks();
 					break;
 				}
@@ -139,20 +149,7 @@ public class Race {
 				score += bonus;
 			}
 		}
-		
-		if (player.hasPerk(PerkLib.RacialParagon) && this != player.racialParagonSelectedRace()) {
-			if (outputText != null) outputText("Racial Paragon",Math.min(-1,-score));
-			return 0;
-		}
-		if (player.isGargoyle() && this != Races.GARGOYLE) {
-			if (outputText != null) outputText("Gargoyle",-score);
-			return 0;
-		}
-		if (player.hasPerk(PerkLib.ElementalBody) && this != Races.ELEMENTALFUSION) {
-			if (outputText != null) outputText("Elemental",-score);
-			return 0;
-		}
-		if (this != Races.HUMAN && this != Races.ELEMENTALFUSION && this != Races.GARGOYLE) {
+		if (this != Races.HUMAN) {
 			if (player.hasPerk(PerkLib.AscensionCruelChimerasThesis) && score >= minScore-2) {
 				if (outputText != null) outputText("Ascension: Cruel Chimera's Thesis", +1);
 				score += 1;
@@ -165,28 +162,53 @@ public class Race {
 				if (outputText != null) outputText("Chimerical Body: Ultimate Stage", +50);
 				score += 50;
 			}
+
+		}
+		if (checkRP) {
+			if (player.hasPerk(PerkLib.RacialParagon) && this != player.racialParagonSelectedRace()) {
+				if (outputText != null) outputText("Racial Paragon", Math.min(-1, -score));
+				return 0;
+			}
+			if (player.isGargoyle() && this != Races.GARGOYLE) {
+				if (outputText != null) outputText("Gargoyle", -score);
+				return 0;
+			}
+			if (player.hasPerk(PerkLib.ElementalBody) && this != Races.ELEMENTALFUSION) {
+				if (outputText != null) outputText("Elemental", -score);
+				return 0;
+			}
 		}
 		if (score < 0) return 0;
+        // TODO: Khovel - Find better place to check for race unlock...
+        unlockRaceMetamorph(getTierNumber(body, score, checkRP));
 		return score;
 	}
+
 	
-	public function getTier(body:BodyData, score:int=-1):RaceTier {
-		if (score < 0) score = this.totalScore(body);
+	public function getTier(body:BodyData, score:int=-1, checkRP:Boolean = true):RaceTier {
+		if (score < 0) score = this.totalScore(body, checkRP);
 		var tier:RaceTier = null;
+		var prev:Boolean = false;
 		for each(var i:RaceTier in tiers) {
-			if (i.check(body, score)) tier = i;
+			if (i.requiresPreviousTier && !prev) continue;
+			if (i.check(body, score)) {
+				tier = i;
+				prev = true;
+			} else {
+				prev = false;
+			}
 		}
 		return tier;
 	}
-	public function getTierNumber(body:BodyData, score:int=-1):int {
-		var tier:RaceTier = getTier(body,score);
+	public function getTierNumber(body:BodyData, score:int=-1, checkRP:Boolean = true):int {
+		var tier:RaceTier = getTier(body, score, checkRP);
 		if (!tier) return 0;
 		return tier.tierNumber;
 	}
 	public function tier(tierNumber:int):RaceTier {
 		return this.tiers[tierNumber-1];
 	}
-	public function get maxTier():int {
+	public function maxTier():int {
 		return (tiers.length === 0) ? 0 : tiers[tiers.length-1].tierNumber;
 	}
 	
@@ -269,7 +291,7 @@ public class Race {
 			s += reason+" ("+(change>0?"+"+change:change)+")";
 			s += "[/font]\n";
 		}
-		score = finalizeScore(body, score, finalizerOutput);
+		score = finalizeScore(body, score, true, finalizerOutput);
 		if (tiers.length>0) {
 			s += "\t<b>Tiers:</b>\n";
 		}
@@ -291,7 +313,24 @@ public class Race {
 				s += "[font-default]"
 			}
 			s += tier.describeBuffs(present ? body : null);
-			s += "[/font]\n";
+			s += "[/font]";
+			if (tier.requirements.length > 0) {
+				s += '. Requires ';
+				s += tier.requirements.map(Utils.varargify(function(rtr:RaceTierRequirement):String {
+					// green: pass, red: pass core fail req, black: fail req
+					//noinspection JSReferencingMutableVariableFromClosure
+					return (score < tier.minScore ? "[font-default]" :
+									rtr.check(body) ? "[font-green]" : "[font-red]") +
+							rtr.name + "[/font]"
+				})).join(", ");
+				if (tier.requiresPreviousTier) {
+					s += " and previous tier";
+				}
+				s+=".";
+			} else if (tier.requiresPreviousTier) {
+				s += ". Requires previous tier."
+			}
+			s += '\n';
 		}
 		return s;
 	}
@@ -432,8 +471,18 @@ public class Race {
 			trace("[ERROR] In "+name+".transform() element "+o);
 		}
 	}
-	
-	protected function get game():CoC {
+
+    public function unlockRaceMetamorph(tier:int = 0):void{
+        //if(tier > 0 && tfRace > 0 && tier == maxTier())
+        //     Metamorph.unlockMetamorphMastery(RaceMem.getMemory(tfRace));
+    }
+	public function initRaceMemory(name:String, raceBody:/*String*/Array):void{
+        if(raceBody.length > 1)
+            tfRace = RaceMem.appendEnumVal(name, RaceTransformations.raceTransform(name, raceBody, this));
+    }
+
+
+    protected function get game():CoC {
 		return CoC.instance;
 	}
     }

@@ -13,13 +13,39 @@ public class AlicornRace extends Race {
 	public static const NightmareHairColors:/*String*/Array = UnicornRace.BicornHairColors;
 	public static const AlicornFurColors:/*String*/Array  = UnicornRace.UnicornFurColors;
 	public static const AlicornHairColors:/*String*/Array = UnicornRace.UnicornHairColors;
-	
-	public function AlicornRace(id:int) {
-		super("Alicorn", id);
+	public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Human",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Normal",
+        /*Nips*/		"Human",
+        /*Ears*/		"Horse",
+        /*Eyes*/		"Alicorn",
+        /*Face*/		"Human",
+        /*Gills*/		"None",
+        /*Hair*/		"Alicorn",
+        /*Horns*/		"Unicorn",
+        /*LowerBody*/	"Horse",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Alicorn",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Horse",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Alicorn",
+        /*Penis*/		"Horse",
+        /*Vagina*/		"Horse",
+        /*Perks*/		"Human"];
+
+    public function AlicornRace(id:int) {
+		super("Alicorn", id, RaceBody);
 		chimeraTier = 2;
 		grandChimeraTier = 3;
-	}
-	
+    }
+
+
+
 	public override function setup():void {
 		
 		addScores()
@@ -34,8 +60,8 @@ public class AlicornRace extends Race {
 				.vaginaType(VaginaClass.EQUINE, +1)
 				.hornTypeAndCount(Horns.UNICORN, LESS_THAN(6), +1, 0, "Alicorn branch - size 1-5 unicorn horn")
 				.hornTypeAndCount(Horns.UNICORN, AT_LEAST(6), +2, 0, "Alicorn branch - size 6+ unicorn horn")
-				.hornTypeAndCount(Horns.UNICORN, LESS_THAN(6), +1, 0, "Nightmare branch - size 1-5 bicorn horns")
-				.hornTypeAndCount(Horns.UNICORN, AT_LEAST(6), +2, 0, "Nightmare branch - size 6+ bicorn horns")
+				.hornTypeAndCount(Horns.BICORN, LESS_THAN(6), +1, 0, "Nightmare branch - size 1-5 bicorn horns")
+				.hornTypeAndCount(Horns.BICORN, AT_LEAST(6), +2, 0, "Nightmare branch - size 6+ bicorn horns")
 				.customRequirement("",
 						"Wings match horns",
 						function (body:BodyData):Boolean {
@@ -54,8 +80,8 @@ public class AlicornRace extends Race {
 						"hair color: "+AlicornHairColors.join("/")+
 						"; coat color: "+AlicornFurColors.join("/"),
 						function (body:BodyData):Boolean {
-							return Utils.InCollection(body.hairColor, AlicornHairColors) &&
-									Utils.InCollection(body.skinCoatColor, AlicornFurColors)
+							return Utils.InCollection(body.hairColor1, AlicornHairColors) &&
+									Utils.InCollection(body.furColor1, AlicornFurColors)
 						},
 						+1)
 				.eyeColor("blue", +1)
@@ -70,8 +96,8 @@ public class AlicornRace extends Race {
 						"hair color: "+NightmareHairColors.join("/")+
 						"; coat color: "+NightmareFurColors.join("/"),
 						function (body:BodyData):Boolean {
-							return Utils.InCollection(body.hairColor, NightmareHairColors) &&
-									Utils.InCollection(body.skinCoatColor, NightmareFurColors)
+							return Utils.InCollection(body.hairColor1, NightmareHairColors) &&
+									Utils.InCollection(body.furColor1, NightmareFurColors)
 						},
 						+1)
 				.eyeColor("red", +1)

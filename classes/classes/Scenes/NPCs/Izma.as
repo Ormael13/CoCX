@@ -9,33 +9,13 @@ import classes.Scenes.SceneLib;
 	 * ...
 	 * @author ...
 	 */
-	public class Izma extends Monster 
+	public class Izma extends Monster
 	{
 
 		//[Special Attacks]
 		private function IzmaSpecials1():void {
-			//Blind dodge change
-			if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
-				outputText("Izma attempts to close the distance with you, but misses completely because of her blindness.\n");
-				return;
-			}
 			//Determine if dodged!
-			if(player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80) {
-				outputText("Izma attempts to get close, but you manage to side-step her before she can lay her gauntleted hands on you.\n");
-				return;
-			}
-			//Determine if evaded
-			if(player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
-				outputText("Izma attempts to get close, but you manage to side-step her before she can lay her gauntleted hands on you.\n");
-				return;
-			}
-			//("Misdirection"
-			if(player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
-				outputText("Izma attempts to get close, but you put Raphael's teachings to use and side-step the sharkgirl, confusing her with your movements.\n");
-				return;
-			}
-			//Determine if cat'ed
-			if(player.hasPerk(PerkLib.Flexibility) && rand(100) < 6) {
+			if(player.getEvasionRoll()) {
 				outputText("Izma attempts to get close, but you manage to side-step her before she can lay her gauntleted hands on you.\n");
 				return;
 			}
@@ -45,29 +25,9 @@ import classes.Scenes.SceneLib;
 		}
 
 		private function IzmaSpecials2():void {
-			//Blind dodge change
-			if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
-				outputText("Izma blindly tries to clinch you, but misses completely.\n");
-				return;
-			}
 			//Determine if dodged!
-			if(player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80) {
+			if(player.getEvasionRoll()) {
 				outputText("Izma tries to clinch you, but you use your speed to keep just out of reach.\n");
-				return;
-			}
-			//Determine if evaded
-			if(player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
-				outputText("Izma tries to clinch you, but she didn't count on your skills in evasion.  You manage to sidestep her at the last second.\n");
-				return;
-			}
-			//("Misdirection"
-			if(player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
-				outputText("Izma ducks and weaves forward to clinch you, but thanks to Raphael's teachings, you're easily able to misguide her and avoid the clumsy grab.\n");
-				return;
-			}
-			//Determine if cat'ed
-			if(player.hasPerk(PerkLib.Flexibility) && rand(100) < 6) {
-				outputText("Izma tries to lock you in a clinch, but your cat-like flexibility makes it easy to twist away from her grab.\n");
 				return;
 			}
 			var damage:Number = 0;
@@ -86,7 +46,7 @@ import classes.Scenes.SceneLib;
 		private function IzmaSpecials3():void {
 			outputText("Rather than move to attack you, Izma grins at you and grabs her breasts, massaging them as she caresses her long penis with one knee. Her tail thrashes and thumps the sand heavily behind her as she simulates an orgasm, moaning loudly into the air. The whole display leaves you more aroused than before.");
 			//(lust gain)
-			player.dynStats("lus", (20 + player.lib/5));
+			player.takeLustDamage((20 + player.lib/5), true);
 		}
 
 		private function IzmaAI():void {
@@ -158,7 +118,7 @@ import classes.Scenes.SceneLib;
 			this.tallness = 5*12+5;
 			this.hips.type = Hips.RATING_CURVY;
 			this.butt.type = Butt.RATING_NOTICEABLE;
-			this.skinTone = "striped orange";
+			this.bodyColor = "striped orange";
 			this.hairColor = "silver";
 			this.hairLength = 20;
 			initStrTouSpeInte(100, 110, 106, 74);
@@ -173,7 +133,6 @@ import classes.Scenes.SceneLib;
 			this.bonusLust = 125;
 			this.lust = 20;
 			this.lustVuln = .20;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 25;
 			this.gems = rand(15) + 10;
 			this.drop = NO_DROP;

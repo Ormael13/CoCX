@@ -7,6 +7,7 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
+import classes.Items.DynamicItems;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
@@ -77,9 +78,7 @@ public class ImpOverlord extends Imp
 			else if (spellChooser == 3 && fatigue <= (maxFatigue() - spellCostArouse)) {
 				outputText("He makes a series of arcane gestures, drawing on his lust to inflict it upon you! ");
 				var lustDamage:int = (inte / 5) + rand(10);
-				lustDamage = lustDamage * (EngineCore.lustPercent() / 100);
-				player.dynStats("lus", lustDamage, "scale", false);
-				outputText(" <b>(<font color=\"#ff00ff\">" + (Math.round(lustDamage * 10) / 10) + "</font>)</b>");
+				player.takeLustDamage(lustDamage, true);
 				fatigue += spellCostArouse;
 			}
 			//Heal
@@ -107,7 +106,7 @@ public class ImpOverlord extends Imp
 			var damage:int = 80 + rand(20);
 			damage = Math.round(damage);
 			player.takeFireDamage(damage, true);
-			player.dynStats("lus", 20 + player.cor / 10);
+			player.takeLustDamage(20 + player.cor / 10, true);
 		}
 
 		//Lust Attack
@@ -115,7 +114,7 @@ public class ImpOverlord extends Imp
 		{
 			outputText("Lowering his loincloth the imp reveals his inhumanly thick shaft.  He smirks and licks his lips as he gives his cock a squeeze, milking a few beads of clear pre from the tip.  You shake your head and try to ignore your growing need.");
 			//[+Lust]
-			player.dynStats("lus", 15 + player.lib / 5 + player.cor / 5);
+			player.takeLustDamage(15 + player.lib / 5 + player.cor / 5, true);
 		}
 
 		//Lust and Light Attack
@@ -125,7 +124,7 @@ public class ImpOverlord extends Imp
 			var damage:int = 12 + rand(25);
 			player.takePhysDamage(damage, true);
 			//[-HP(minor) // +Lust]
-			player.dynStats("lus", 25 + player.effectiveSensitivity() / 4 + player.cor / 10);
+			player.takeLustDamage(25 + player.effectiveSensitivity() / 4 + player.cor / 10, true);
 		}
 
 		//Cum cannon!
@@ -145,7 +144,7 @@ public class ImpOverlord extends Imp
 			else {
 				outputText("The cum lands on you, staining your [armor] and the cum even gets on your [skinfurscales]! You feel aroused from his cum.");
 				player.slimeFeed();
-				player.dynStats("lus", 30 + player.effectiveSensitivity() / 4 + player.cor / 10);
+				player.takeLustDamage(30 + player.effectiveSensitivity() / 4 + player.cor / 10, true);
 			}
 		}
 
@@ -218,7 +217,7 @@ public class ImpOverlord extends Imp
 			this.hips.type = Hips.RATING_BOYISH;
 			this.butt.type = Butt.RATING_TIGHT;
 			this.lowerBody = LowerBody.HOOFED;
-			this.skinTone = "red";
+			this.bodyColor = "red";
 			initStrTouSpeInte(100, 95, 85, 71);
 			initWisLibSensCor(71, 75, 35, 100);
 			this.weaponName = "scimitar";
@@ -232,9 +231,12 @@ public class ImpOverlord extends Imp
 			this.lust = 30;
 			this.lustVuln = .3;
 			this.fatigue = 0;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = 21;
 			this.gems = rand(25) + 55;
+			this.randomDropChance = 0.1;
+			this.randomDropParams = {
+				rarity: DynamicItems.RARITY_CHANCES_LESSER
+			};
 			this.drop = new WeightedDrop().
 					add(consumables.MINOBLO,3).
 					add(consumables.LABOVA_,3).

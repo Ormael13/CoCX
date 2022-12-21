@@ -2,7 +2,7 @@
  * ...
  * @author Canadian Snas
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.Appearance;
 import classes.AssClass;
@@ -13,11 +13,11 @@ import classes.BodyParts.LowerBody;
 import classes.GlobalFlags.kFLAGS;
 import classes.Monster;
 import classes.PerkLib;
+import classes.Scenes.Combat.Combat;
 import classes.StatusEffects;
 import classes.VaginaClass;
 import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.SceneLib;
-import classes.StatusEffects.Combat.WebDebuff;
 import classes.internals.WeightedDrop;
 
 
@@ -56,7 +56,7 @@ public class Belisa extends Monster
 			if (flags[kFLAGS.BELISA_LVL_UP] >= 4) slashes = "ten";
 			if (flags[kFLAGS.BELISA_LVL_UP] >= 6) slashes = "twelve";
 			if (flags[kFLAGS.BELISA_LVL_UP] >= 8) slashes = "fourteen";
-			outputText("The nimble drider-girl leaps towards you. You raise your [weapon] to intercept, but she shoots a web above and into the trees with a sharp thwip, nimbly evading your block. She gets inside your guard. \"<i>Hya, Hya! Heeeyah!!</i>\" She slashes "+slashes+" times, cutting cleanly through your [skin.color] [skin.type] before leaping backwards and out of your reach. Blood begins to flow from your injuries.");
+			outputText("The nimble drider-girl leaps towards you. You raise your [weapon] to intercept, but she shoots a web above and into the trees with a sharp thwip, nimbly evading your block. She gets inside your guard. \"<i>Hya, Hya! Heeeyah!!</i>\" She slashes "+slashes+" times, cutting cleanly through your [color] [skin.type] before leaping backwards and out of your reach. Blood begins to flow from your injuries.");
 			var bleedP:Number = 0.05;
 			var dmg0:Number = 0;
 			dmg0 += this.str;
@@ -95,40 +95,22 @@ public class Belisa extends Monster
 		
 		private function belisaWebAttack():void {
 			outputText("\"<i>"+(player.hasStatusEffect(StatusEffects.SparingBelisa)?"Slow down":"Leave me alone")+"!</i>\" She yells in her high-pitched voice, spraying a wide swathe of webbing at you. It sticks to your [skin.type] like glue.");
-			//Blind dodge change
-			if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
-				outputText("She misses completely due to their blindness.");
-			}
 			//Determine if dodged!
-			else if (player.spe - spe > 0 && int(Math.random() * (((player.spe - spe) / 4) + 80)) > 80) {
+			if (player.getEvasionRoll()) {
 				outputText("You dodge away, avoiding the sticky strands!");
-			}
-			//Determine if evaded
-			else if (player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
-				outputText("You evade, avoiding the sticky strands!");
-			}
-			//("Misdirection"
-			else if (player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
-				outputText("Your misleading movements allow you to easily sidestep the sticky strands!");
-			}
-			//Determine if cat'ed
-			else if (player.hasPerk(PerkLib.Flexibility) && rand(100) < 6) {
-				outputText("You throw yourself out of the way with cat-like agility at the last moment, avoiding " + mf("his", "her") + " attack.\n");
 			}
 			//Got hit
 			else {
-				var web:WebDebuff = player.statusEffectByType(StatusEffects.Web) as WebDebuff;
-				if (web == null) {
+				if (player.buff("Web").isPresent()) {
+					outputText("The silky strands hit you, weighing you down and restricting your movement even further.\n");
+					player.buff("Web").addStats( {"spe":-25} ).withText("Web").combatPermanent();
+				}
+				else {
 					outputText("The silky strands hit you, webbing around you and making it hard to move with any degree of speed.");
 					if (player.canFly()) outputText("  Your wings struggle uselessly in the bindings, no longer able to flap fast enough to aid you.");
 					outputText("\n");
-					web = new WebDebuff();
-					player.addStatusEffect(web);
+					player.buff("Web").addStats( {"spe":-25} ).withText("Web").combatPermanent();
 				}
-				else {
-					outputText("The silky strands hit you, weighing you down and restricting your movement even further.\n");
-				}
-				web.increase();
 			}
 		}
 		
@@ -172,12 +154,12 @@ public class Belisa extends Monster
 			mana -= spellCostHeal();
 			createStatusEffect(StatusEffects.AbilityCooldown2, 2, 0, 0, 0);
 			var lustDang:Number = 15 + rand(15);
-			player.dynStats("lus", lustDang);
+			player.takeLustDamage(lustDang, true);
 		}
 		
 		override protected function performCombatAction():void
 		{
-			if (BelisaFollower.BelisaEncounternum == 3 && flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) SceneLib.belisa.postFightOptionsWhitefireWait();
+			if (BelisaFollower.BelisaEncounternum == 3 && Combat.playerWaitsOrDefends()) SceneLib.belisa.postFightOptionsWhitefireWait();
 			var choice0:Number = rand(4);
 			switch (choice0) {
 				case 0:
@@ -213,7 +195,7 @@ public class Belisa extends Monster
 			return str;
 		}
 		
-		public function Belisa() 
+		public function Belisa()
 		{
 			if (flags[kFLAGS.BELISA_LVL_UP] < 1) {
 				initStrTouSpeInte(80, 90, 100, 250);
@@ -260,14 +242,13 @@ public class Belisa extends Monster
 			this.tallness = 8*12+5;
 			this.hips.type = Hips.RATING_CURVY + 2;
 			this.butt.type = Butt.RATING_LARGE + 1;
-			this.skinTone = "pale";
+			this.bodyColor = "pale";
 			this.hairColor = "black";
 			this.hairLength = 24;
 			this.weaponName = "daggers";
 			this.weaponVerb="slash";
 			this.armorName = "silken robe";
 			this.lustVuln = .2;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.gems = rand(10) + 20;
 			this.drop = new WeightedDrop().add(consumables.B_GOSSR,1)
 					.add(useables.T_SSILK,3)
@@ -301,7 +282,7 @@ public class Belisa extends Monster
 				this.createPerk(PerkLib.NaturalHealingMajor, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.BELISA_LVL_UP] >= 8) this.createPerk(PerkLib.PeerlessSpirituality, 0, 0, 0, 0);
-			checkMonster();	
+			checkMonster();
 		}
 	}
 }

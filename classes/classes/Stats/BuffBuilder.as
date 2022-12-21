@@ -66,6 +66,10 @@ public class BuffBuilder {
 		store.addBuffObject(buffObject, tag, options);
 		return this;
 	}
+	public function subtractStats(buffObject: Object): BuffBuilder {
+		store.addBuffObject(StatUtils.inverseBuffObject(buffObject), tag, options);
+		return this;
+	}
 	public function setStats(buffObject: Object): BuffBuilder {
 		store.replaceBuffObject(buffObject, tag, options);
 		return this;

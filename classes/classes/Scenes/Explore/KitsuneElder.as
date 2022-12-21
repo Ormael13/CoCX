@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.Explore 
+package classes.Scenes.Explore
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -26,8 +26,7 @@ import classes.internals.*;
 		
 		public function kitsunesoulskillMod():Number {
 			var kmodss:Number = 1;
-			if (hasPerk(PerkLib.DaoistCultivator)) kmodss += .2;
-			if (hasPerk(PerkLib.DaoistApprenticeStage)) kmodss += .4;
+			if (hasPerk(PerkLib.DaoistApprenticeStage)) kmodss += .3;
 			if (hasPerk(PerkLib.DaoistWarriorStage)) kmodss += .6;
 			return kmodss;
 		}
@@ -46,7 +45,7 @@ import classes.internals.*;
 			var lustDmg:Number = player.lustVuln * ((this.inte / 10) + rand(player.lib + player.cor) / 5);
 			lustDmg *= 0.5;
 			lustDmg = Math.round(lustDmg);
-			player.dynStats("lus", lustDmg, "scale", false);
+			player.takeLustDamage(lustDmg, true);
 		}
 		
 		public function KitsuneCastsComet():void {
@@ -148,7 +147,7 @@ import classes.internals.*;
 					"His left hand is lit up by an aura of blue flames, ready to flare up into gouts of foxfire at a moment’s notice. In his right hand is his metal staff, foxfire burning at it’s tip.";
 		}
 		
-		public function KitsuneElder() 
+		public function KitsuneElder()
 		{
 			this.a = "a ";
 			this.short = "kitsune elder";
@@ -166,7 +165,7 @@ import classes.internals.*;
 			this.tallness = rand(19) + 65;
 			this.hips.type = Hips.RATING_SLENDER;
 			this.butt.type = Butt.RATING_TIGHT;
-			this.skinTone = "red";
+			this.bodyColor = "red";
 			this.hairColor = "red";
 			this.hairLength = 13 + rand(15);
 			initStrTouSpeInte(55, 85, 210, 170);
@@ -183,7 +182,6 @@ import classes.internals.*;
 			this.bonusSoulforce = 1000;
 			this.lust = 20;
 			this.lustVuln = 0.9;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = 55;
 			this.gems = rand(20) + 20;
 			this.drop = NO_DROP;/*
@@ -198,8 +196,7 @@ import classes.internals.*;
 			this.createPerk(PerkLib.SoulWarrior, 0, 0, 0, 0);
 			this.createPerk(PerkLib.SoulSprite, 0, 0, 0, 0);
 			this.createPerk(PerkLib.SoulScholar, 0, 0, 0, 0);
-			this.createPerk(PerkLib.SoulElder, 0, 0, 0, 0);
-			this.createPerk(PerkLib.DaoistCultivator, 0, 0, 0, 0);
+			this.createPerk(PerkLib.SoulGrandmaster, 0, 0, 0, 0);
 			this.createPerk(PerkLib.DaoistApprenticeStage, 0, 0, 0, 0);
 			this.createPerk(PerkLib.DaoistWarriorStage, 0, 0, 0, 0);
 			this.createPerk(PerkLib.JobSorcerer, 0, 0, 0, 0);
@@ -209,6 +206,6 @@ import classes.internals.*;
 			this.createPerk(PerkLib.Archmage, 0, 0, 0, 0);
 			this.createPerk(PerkLib.GrandArchmage, 0, 0, 0, 0);
 			checkMonster();
-		}	
+		}
 	}
 }

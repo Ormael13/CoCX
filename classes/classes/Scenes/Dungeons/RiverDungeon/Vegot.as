@@ -2,7 +2,7 @@
  * ...
  * @author Ormael & Pyromania
  */
-package classes.Scenes.Dungeons.RiverDungeon 
+package classes.Scenes.Dungeons.RiverDungeon
 {
 import classes.*;
 import classes.BodyParts.Arms;
@@ -13,18 +13,12 @@ import classes.BodyParts.RearBody;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
 import classes.Scenes.SceneLib;
-import classes.StatusEffects.Combat.BasiliskSlowDebuff;
 import classes.internals.*;
 
 use namespace CoC;
 
 	public class Vegot extends Monster
 	{
-		public static function vegotSpeed(player:Player,amount:Number = 0):void {
-			var bse:BasiliskSlowDebuff = player.createOrFindStatusEffect(StatusEffects.BasiliskSlow) as BasiliskSlowDebuff;
-			bse.applyEffect(amount);
-		}
-		
 		private function vegotBasicAttack():void {
 			outputText("Vegot swings Frostlight ferociously, leaving you momentarily staggered from the slash of his icy blade. ");
 			var dmg0:Number = 0;
@@ -36,7 +30,7 @@ use namespace CoC;
 			dmg0 += Math.round(this.inte * 1.5);
 			dmg0 += Math.round(this.wis * 1.25);
 			player.takeIceDamage(dmg0, true);
-			vegotSpeed(player, 10);
+			player.buff("Frostlight Slow").addStats( {"spe":-10} ).withText("Frostlight Slow").combatPermanent();
 			player.takeLightningDamage(dmg0, true);
 			if (HP < maxOverHP()) {
 				var temp1:Number = 0;
@@ -53,19 +47,19 @@ use namespace CoC;
 			var dmg1:Number = 0;
 			dmg1 += eBaseIntelligenceDamage() * 0.8;
 			player.takeLightningDamage(dmg1, true);
-			player.dynStats("lus", 3+(player.effectiveLibido()/10)+rand(6));
+			player.takeLustDamage(3+(player.effectiveLibido()/10)+rand(6), true);
 		}
 		
 		private function vegotW():void {
 			if (hasStatusEffect(StatusEffects.lustStorm)) {
 				outputText("The Raiju King continues building up the energy before he thrusts his hands forward, causing strikes of lightning to hit the ground around you! ");
 				player.takeLightningDamage(vegotW1() * 3, true);
-				player.dynStats("lus", vegotW2() * 3);
+				player.takeLustDamage(vegotW2() * 3, true);
 			}
 			else {
 				outputText("The Raiju King clenches his fists as electricity builds up within his body. Clouds begin forming from above, blocking out the ceiling, thunder rumbles. The storm encroaches! ");
 				player.takeLightningDamage(vegotW1() * 2, true);
-				player.dynStats("lus", vegotW2() * 2);
+				player.takeLustDamage(vegotW2() * 2, true);
 				createStatusEffect(StatusEffects.lustStorm, 0, 0, 0, 0);
 			}
 		}
@@ -94,8 +88,7 @@ use namespace CoC;
 		private function vegotR():void {
 			if (hasStatusEffect(StatusEffects.Uber)) {
 				removeStatusEffect(StatusEffects.Uber);
-				if (hasStatusEffect(StatusEffects.Stunned) || hasStatusEffect(StatusEffects.FrozenSolid) || hasStatusEffect(StatusEffects.StunnedTornado) || hasStatusEffect(StatusEffects.Fear) || hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.ConstrictedWhip) || hasStatusEffect(StatusEffects.GooEngulf)
-				|| hasStatusEffect(StatusEffects.EmbraceVampire) || hasStatusEffect(StatusEffects.Pounce)) {
+				if (monsterIsStunned() || monsterIsConstricted() || hasStatusEffect(StatusEffects.Fear)) {
 					removeStatusEffect(StatusEffects.AbilityCooldown2);
 					outputText("Vegot reels in frustration as his concentration breaks under your assaults.\n\n");
 				}
@@ -121,7 +114,7 @@ use namespace CoC;
 			if (hasStatusEffect(StatusEffects.lustStorm)) {
 				outputText("You're struck by lightning as lust storm rages on.");
 				player.takeLightningDamage(vegotW1(), true);
-				player.dynStats("lus", vegotW2());
+				player.takeLustDamage(vegotW2(), true);
 				outputText("\n\n");
 			}
 			if (hasStatusEffect(StatusEffects.Uber)) vegotR();
@@ -175,7 +168,7 @@ use namespace CoC;
 			return str;
 		}
 
-		public function Vegot() 
+		public function Vegot()
 		{
 			this.a = "";
 			this.short = "Vegot";
@@ -191,7 +184,7 @@ use namespace CoC;
 			this.tallness = 120;
 			this.hips.type = Hips.RATING_AVERAGE;
 			this.butt.type = Butt.RATING_TIGHT;
-			this.skinTone = "light";
+			this.bodyColor = "light";
 			this.hairColor = "white";
 			this.hairLength = 10;
 			initStrTouSpeInte(130, 195, 230, 200);
@@ -207,7 +200,6 @@ use namespace CoC;
 			this.lust = 30;
 			this.lustVuln = .8;
 			this.level = 43;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.gems = 65 + rand(30);
 			this.drop = new ChainedDrop().
 					add(consumables.VOLTTOP,1).

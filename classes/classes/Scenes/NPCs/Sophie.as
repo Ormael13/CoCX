@@ -25,29 +25,9 @@ import classes.internals.*;
 		private function sophieKissAttack():void {
 			SceneLib.sophieBimbo.sophieSprite();
 			outputText("Sophie bobs and weaves as she closes the distance between you in an instant.  ");
-			//Blind dodge change
-			if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
-				outputText(capitalA + short + " looks like she's trying to kiss you, but it's easy to avoid the blind harpy!\n");
-				return;
-			}
 			//Determine if dodged!
-			if(player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80) {
+			if(player.getEvasionRoll()) {
 				outputText("Sophie changes direction in a flash, trying to slip inside your guard, but you manage to sidestep the incredibly fast harpy's attack.\n");
-				return;
-			}
-			//Determine if evaded
-			if(player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
-				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s attack.\n");
-				return;
-			}
-			if(player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
-				outputText("Using Raphael's teachings and the movement afforded by your bodysuit, you anticipate and sidestep " + a + short + "'s attack.\n");
-				return;
-			}
-			//Determine if cat'ed
-			if(player.hasPerk(PerkLib.Flexibility) && rand(100) < 6) {
-				outputText("With your incredible flexibility, you squeeze out of the way of " + a + short + "");
-				outputText("'s attack.\n");
 				return;
 			}
 			//YOU GOT HIT SON
@@ -57,63 +37,38 @@ import classes.internals.*;
 			if(player.hasStatusEffect(StatusEffects.Luststick)) {
 				outputText("  Blood rushes to [eachcock] as you grow so hard so fast that it hurts.  ");
 				SceneLib.sophieScene.luststickApplication(2);
-				player.dynStats("lus", (12+player.lib/10));
-				if(player.lust < 0.7*player.maxLust()) outputText("The drugged lip-gloss is starting to get to you!\n");
-				else if(player.lust < 0.8*player.maxLust()) outputText("Her curvy thighs look so inviting.  You barely stop yourself before you climb in between them!\n");
-				else if(player.lust < 0.9*player.maxLust()) outputText("A trickle of pre-cum leaks from [eachcock].  Sophie coos, \"<i>Why don't you give in and let mommy Sophie drain out all that juicy cum?</i>\"\n");
-				else if(player.lust < 1.0*player.maxLust()) outputText(player.SMultiCockDesc() + " twitches and bounces in time with your heartbeat, practically pulling you towards Sophie's gaping, pink-linked snatch.\n");
-				else outputText("So horny.  You need to copulate - no, fuck - right NOW.  Your hand touches your [cock] and you swoon, pumping your hips lewdly as you submit.\n");
+				player.takeLustDamage((12+player.lib/10), true);
 			}
 			else {
 				outputText("  Your whole body blushes as your lips tingle with some unnatural sensation.  Her lips were drugged!  Your whole body flushes as arousal begins to course through your veins.  ");
 				SceneLib.sophieScene.luststickApplication(2);
-				player.dynStats("lus", 8+player.lib/10);
-				if(player.lust < 0.7*player.maxLust()) outputText("The drugged lip-gloss is starting to get to you!\n");
-				else if(player.lust < 0.8*player.maxLust()) outputText("Her curvy thighs look so inviting.  You barely stop yourself before you climb in between them!\n");
-				else if(player.lust < 0.9*player.maxLust()) outputText("A trickle of pre-cum leaks from [eachcock].  Sophie coos, \"<i>Why don't you give in and let mommy Sophie drain out all that juicy cum?</i>\"\n");
-				else if(player.lust < 1.0*player.maxLust()) outputText(player.SMultiCockDesc() + " twitches and bounces in time with your heartbeat, practically pulling you towards Sophie's gaping, pink-linked snatch.\n");
-				else outputText("So horny.  You need to copulate - no, fuck - right NOW.  Your hand touches your [cock] and you swoon, pumping your hips lewdly as you submit.\n");
+				player.takeLustDamage(8+player.lib/10, true);
 			}
+			if(player.lust < 0.7*player.maxLust()) outputText("The drugged lip-gloss is starting to get to you!\n");
+			else if(player.lust < 0.8*player.maxLust()) outputText("Her curvy thighs look so inviting.  You barely stop yourself before you climb in between them!\n");
+			else if(player.lust < 0.9*player.maxLust()) outputText("A trickle of pre-cum leaks from [eachcock].  Sophie coos, \"<i>Why don't you give in and let mommy Sophie drain out all that juicy cum?</i>\"\n");
+			else if(player.lust < 1.0*player.maxLust()) outputText(player.SMultiCockDesc() + " twitches and bounces in time with your heartbeat, practically pulling you towards Sophie's gaping, pink-linked snatch.\n");
+			else outputText("So horny.  You need to copulate - no, fuck - right NOW.  Your hand touches your [cock] and you swoon, pumping your hips lewdly as you submit.\n");
 		}
 		
 		//Harpy-Boating (Only used on males)
-		//Takes off and flies directly at PC, locking her hips 
-		//around PC's torso and smothering the PC with breasts 
+		//Takes off and flies directly at PC, locking her hips
+		//around PC's torso and smothering the PC with breasts
 		//for a few moments.
 		//Easily dodged with evade or flexibility.
 		private function sophieHarpyBoatsPC():void {
 			SceneLib.sophieBimbo.sophieSprite();
 			outputText(capitalA + short + " flaps her wings and launches herself forwards with her talons up.  ");
-			//Blind dodge change
-			if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
-				outputText(capitalA + short + "'s talons are easy to avoid thanks to her blindness!\n");
-				return;
-			}
 			//Determine if dodged!
-			if(player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80) {
+			if(player.getEvasionRoll()) {
 				outputText(a + short + "'s movements are incredibly fast but you manage to sidestep them.\n");
-				return;
-			}
-			//Determine if evaded
-			if(player.hasPerk(PerkLib.Evade) && rand(100) < 60) {
-				outputText("Using your skills at evading attacks, you determine " + a + short + " is aiming for your upper body and slide under the attack.\n");
-				return;
-			}
-			if(player.hasPerk(PerkLib.Misdirection) && rand(100) < 40 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
-				outputText("Using Raphael's teachings and the movement afforded by your bodysuit, you anticipate and sidestep " + a + short + "'s attack.\n");
-				return;
-			}
-			//Determine if cat'ed
-			if(player.hasPerk(PerkLib.Flexibility) && rand(100) < 40) {
-				outputText("With your incredible flexibility, you squeeze out of the way of " + a + short + "");
-				outputText("'s attack.\n");
 				return;
 			}
 			//YOU GOT HIT SON
 			outputText("She hits you hard, nearly bowling you over.  Thankfully, her talons passed to either side of your torso.  They lock together behind your back and your face is pulled tightly into Sophie's smotheringly large mounds!");
 			if(rand(2) == 0) outputText("  She jiggles them around you pleasantly and coos, \"<i>Don't fight it baby.  Just let your body do what comes naturally.</i>\"\n");
 			else outputText("  She runs her long fingernails through your hair as she whispers, \"<i>Why fight it?  I'll make you feel so good.  Just relax and play with momma Sophie's tits.</i>\"\n");
-			player.dynStats("lus", (13 + player.effectiveSensitivity()/10));
+			player.takeLustDamage((13 + player.effectiveSensitivity()/10), true);
 		}
 		
 		//Compulsion (Male Only)
@@ -126,7 +81,7 @@ import classes.internals.*;
 			if(player.inte < 40 || (player.inte < 80 && rand(40) > (player.inte - 40))) {
 				outputText("You moan out loud as your arms move of their own volition.  They reach inside your [armor] and stroke [eachcock], caress the tip, and continue to fondle you a few moments.");
 				outputText("Even after regaining control of your limbs, you're left far more turned on by the ordeal.");
-				player.dynStats("lus", (15 + player.cor/20 + player.lib/20));
+				player.takeLustDamage((15 + player.cor/20 + player.lib/20), true);
 			}
 			//Player resists
 			else {
@@ -141,29 +96,9 @@ import classes.internals.*;
 			SceneLib.sophieBimbo.sophieSprite();
 			outputText("Sophie pulls her leg up, cocking her thigh dangerously.  Look out!  ");
 			var damage:Number = 0;
-			//Blind dodge change
-			if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
-				outputText(capitalA + short + "'s talons are easy to avoid thanks to her blindness!\n");
-				return;
-			}
 			//Determine if dodged!
-			if(player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80) {
+			if(player.getEvasionRoll()) {
 				outputText(a + short + "'s tears through the air, but you manage to just barely dodge it.\n");
-				return;
-			}
-			//Determine if evaded
-			if(player.hasPerk(PerkLib.Evade) && rand(100) < 60) {
-				outputText("Using your skills at evading attacks, you watch " + a + short + " and deftly sidestep her brutal talons.\n");
-				return;
-			}
-			if(player.hasPerk(PerkLib.Misdirection) && rand(100) < 30 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
-				outputText("Using Raphael's teachings and the movement afforded by your bodysuit, you anticipate and sidestep " + a + short + "'s attack.\n");
-				return;
-			}
-			//Determine if cat'ed
-			if(player.hasPerk(PerkLib.Flexibility) && rand(100) < 40) {
-				outputText("With your incredible flexibility, you squeeze out of the way of " + a + short + "");
-				outputText("'s attack.\n");
 				return;
 			}
 			outputText("Her leg lashes forwards, lightning-quick, and tears bloody gashes into your [skin.type] with her razor-sharp talons! ");
@@ -179,7 +114,7 @@ import classes.internals.*;
 		//Batters PC with wings – 4x attack impossible to dodge.*/
 		private function batterAttackSophie():void {
 			SceneLib.sophieBimbo.sophieSprite();
-			var damage:Number = 0;
+			var damage:Number;
 			outputText("Sophie comes at you in a flurry of beating wings!  There's no way to dodge the flurry of strikes!\n");
 			
 			//Determine damage - str modified by enemy toughness!
@@ -208,7 +143,7 @@ import classes.internals.*;
 		{
 			//Sophie has special AI in harpySophie.as
 			SceneLib.sophieBimbo.sophieSprite();
-			var select:Number = 1;
+			var select:Number;
 			var rando:Number = 1;
 //Update attacks for girls/neuters
 			if (!player.hasCock() || hasStatusEffect(StatusEffects.BimboBrawl)) {
@@ -295,13 +230,14 @@ import classes.internals.*;
 			this.bonusLust = 132;
 			this.lust = 10;
 			this.lustVuln = .3;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 22;
 			this.gems = 40 + rand(45);
 			this.drop = new ChainedDrop().add(armors.W_ROBES,1/10)
 					.elseDrop(consumables.GLDSEED);
+			if (player.hasPerk(PerkLib.LuststickAdapted)) {
+				(this.drop as ChainedDrop).add(consumables.LUSTSTK, 1/3)
+			}
 			this.wings.type = Wings.HARPY;
-			this.wings.desc = "large feathery";
 			this.special1 = harpyUberCharge;
 			this.special2 = harpyTease;
 			checkMonster();

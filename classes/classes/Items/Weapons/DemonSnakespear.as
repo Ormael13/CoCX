@@ -1,16 +1,15 @@
-package classes.Items.Weapons 
+package classes.Items.Weapons
 {
-	import classes.Items.Weapon;
-	import classes.Player;
+import classes.Items.Weapon;
 
-	public class DemonSnakespear extends Weapon
+public class DemonSnakespear extends Weapon
 	{
 		
-		public function DemonSnakespear() 
+		public function DemonSnakespear()
 		{
 			super("DSSpear", "Demon Sn Spear", "demon snake spear", "a demon snake spear", "piercing stab", 20, 1600,
 				"A dark steel spear imbued with corruption. Along the handle is a snake-like decoration with ruby eyes, from the mouth of which the spear tip emerges. The spear head is poisoned with an unknown venom.",
-				"", "Spear"
+				WP_AP100, WT_SPEAR
 			);
 		}
 		override public function get attack():Number {

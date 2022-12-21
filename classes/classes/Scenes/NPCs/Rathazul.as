@@ -38,10 +38,10 @@ public class Rathazul extends NPCAwareContent implements TimeAwareInterface {
 		public function returnToRathazulMenu():void {
 			if (player.hasStatusEffect(StatusEffects.CampRathazul))
 				campRathazul();
-			else encounterRathazul();
+			else encounterRathazul(false);
 		}
 
-public function encounterRathazul():void {
+public function encounterRathazul(meet:Boolean = true):void {
 	spriteSelect(SpriteDb.s_rathazul);
 	clearOutput();
 	if(flags[kFLAGS.MARBLE_PURIFICATION_STAGE] == 2 && player.hasStatusEffect(StatusEffects.MetRathazul))
@@ -51,7 +51,7 @@ public function encounterRathazul():void {
 	}
 	var offered:Boolean;
 	//Rat is definitely not sexy!
-	if(player.lust > 30) dynStats("lus", -10);
+	if(player.lust > 30) dynStats("lus", -10, "scale", false);
 	//Introduction
 	outputText(images.showImage("rathazul-lake"));
 	if(player.hasStatusEffect(StatusEffects.MetRathazul)) {
@@ -65,7 +65,7 @@ public function encounterRathazul():void {
 		player.createStatusEffect(StatusEffects.MetRathazul,0,0,0,0);
 	}
 	//Camp offer!
-	if(player.statusEffectv2(StatusEffects.MetRathazul) >= 2 && player.statusEffectv3(StatusEffects.MetRathazul) != 1 && player.cor < 75) {
+	if(player.statusEffectv2(StatusEffects.MetRathazul) >= 2 && player.statusEffectv3(StatusEffects.MetRathazul) != 1 && player.cor < 75 && meet) {
 		outputText("\"<i>You know, I think I might be able to do this worn-out world a lot more good from your camp than by wandering around this lake.  What do you say?</i>\" asks the rat.\n\n(Move Rathazul into your camp?)");
 		doYesNo(rathazulMoveToCamp, rathazulMoveDecline);
 		//Set rathazul flag that he has offered to move in (1 time offer)
@@ -126,24 +126,24 @@ public function campRathazul():void {
 	}
 	var offered:Boolean;
 	//Rat is definitely not sexy!
-	if(player.lust > 30) dynStats("lus", -1);
-	if(player.lust > 50) dynStats("lus", -2);
-	if(player.lust > 100) dynStats("lus", -3);
-	if(player.lust > 150) dynStats("lus", -4);
-	if(player.lust > 200) dynStats("lus", -5);
-	if(player.lust > 300) dynStats("lus", -5);
-	if(player.lust > 400) dynStats("lus", -6);
-	if(player.lust > 500) dynStats("lus", -6);
-	if(player.lust > 600) dynStats("lus", -7);
-	if(player.lust > 700) dynStats("lus", -7);
-	if(player.lust > 800) dynStats("lus", -8);
-	if(player.lust > 1000) dynStats("lus", -8);
-	if(player.lust > 1200) dynStats("lus", -9);
-	if(player.lust > 1400) dynStats("lus", -9);
-	if(player.lust > 1600) dynStats("lus", -10);
-	if(player.lust > 1800) dynStats("lus", -10);
-	if(player.lust > 2000) dynStats("lus", -11);
-	if(player.lust > 2200) dynStats("lus", -11);
+	if(player.lust > 30) dynStats("lus", -1, "scale", false);
+	if(player.lust > 50) dynStats("lus", -2, "scale", false);
+	if(player.lust > 100) dynStats("lus", -3, "scale", false);
+	if(player.lust > 150) dynStats("lus", -4, "scale", false);
+	if(player.lust > 200) dynStats("lus", -5, "scale", false);
+	if(player.lust > 300) dynStats("lus", -5, "scale", false);
+	if(player.lust > 400) dynStats("lus", -6, "scale", false);
+	if(player.lust > 500) dynStats("lus", -6, "scale", false);
+	if(player.lust > 600) dynStats("lus", -7, "scale", false);
+	if(player.lust > 700) dynStats("lus", -7, "scale", false);
+	if(player.lust > 800) dynStats("lus", -8, "scale", false);
+	if(player.lust > 1000) dynStats("lus", -8, "scale", false);
+	if(player.lust > 1200) dynStats("lus", -9, "scale", false);
+	if(player.lust > 1400) dynStats("lus", -9, "scale", false);
+	if(player.lust > 1600) dynStats("lus", -10, "scale", false);
+	if(player.lust > 1800) dynStats("lus", -10, "scale", false);
+	if(player.lust > 2000) dynStats("lus", -11, "scale", false);
+	if(player.lust > 2200) dynStats("lus", -11, "scale", false);
 	//Introduction
 	outputText(images.showImage("rathazul-camp"));
 	outputText("Rathazul looks up from his equipment and gives you an uncertain smile.\n\n\"<i>Oh, don't mind me,</i>\" he says, \"<i>I'm just running some tests here.  Was there something you needed, [name]?</i>\"\n\n");
@@ -173,6 +173,7 @@ private function rathazulWorkOffer():Boolean {
 	var totalOffers:int = 0;
 	var spoken:Boolean = false;
 	var debimbo:Boolean = false;
+	var mindup:Boolean = false;
 	var lethiciteDefense:Function = null;
 	if (flags[kFLAGS.MINERVA_PURIFICATION_RATHAZUL_TALKED] == 1 && flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] < 10) {
 		purificationByRathazulBegin();
@@ -260,7 +261,7 @@ private function rathazulWorkOffer():Boolean {
 		lethiciteDefense = growLethiciteDefense;
 	}
 	if(player.hasStatusEffect(StatusEffects.CampRathazul)) {
-	if(flags[kFLAGS.RATHAZUL_DEBIMBO_OFFERED] == 0 && (sophieBimbo.bimboSophie() || flags[kFLAGS.JOJO_BIMBO_STATE] == 3 || (flags[kFLAGS.EXCELLIA_RECRUITED] > 2 && flags[kFLAGS.EXCELLIA_RECRUITED] < 33) || player.hasPerk(PerkLib.BroBrains) || player.hasPerk(PerkLib.BimboBrains) || player.hasPerk(PerkLib.FutaFaculties))) {
+		if(flags[kFLAGS.RATHAZUL_DEBIMBO_OFFERED] == 0 && (sophieBimbo.bimboSophie() || flags[kFLAGS.JOJO_BIMBO_STATE] == 3 || (flags[kFLAGS.EXCELLIA_RECRUITED] > 2 && flags[kFLAGS.EXCELLIA_RECRUITED] < 33) || player.hasPerk(PerkLib.BroBrains) || player.hasPerk(PerkLib.BimboBrains) || player.hasPerk(PerkLib.FutaFaculties))) {
 			rathazulDebimboOffer();
 			return true;
 		}
@@ -285,6 +286,20 @@ private function rathazulWorkOffer():Boolean {
 		}
 		if (flags[kFLAGS.SAMIRAH_FOLLOWER] == 6) rathazulReptaTonguePotionOffer();
 		if (flags[kFLAGS.ELECTRA_FOLLOWER] == 2 && !player.hasStatusEffect(StatusEffects.ElectraOff) && player.hasItem(useables.RPLASMA, 1)) rathazulAlchemicalThunderOffer();
+		if(flags[kFLAGS.RATHAZUL_MINDUP_OFFERED] == 0 && player.hasPerk(PerkLib.Insanity)) {
+			rathazulMindUpOffer();
+			return true;
+		}
+		else if(flags[kFLAGS.RATHAZUL_MINDUP_OFFERED] > 0) {
+			outputText("You recall that Rathazul is willing to make something to restore sanity for 250 gems and five incenses of Insight.");
+			if(player.hasItem(consumables.MIND_UP,5) && player.gems >= 250) {
+				totalOffers++;
+				mindup = true;
+			}
+			else if(!player.hasItem(consumables.MIND_UP,5)) outputText("  You should probably find some if you want that...");
+			else outputText("  You need more gems to afford that, though.");
+			outputText("\n\n");			
+		}
 	}
 	if(totalOffers == 0 && spoken) {
 		doNext(camp.returnToCampUseOneHour);
@@ -300,35 +315,50 @@ private function rathazulWorkOffer():Boolean {
 		else
 			addButtonDisabled(0, "Shop", "You can't afford anything Rathazul has to offer.");
 		addButton(1, "Purify", purifySomething).hint("Ask him to purify any tainted potions. \n\nCost: 20 Gems.");
-		if (BelisaFollower.BelisaRalthTalked && BelisaFollower.BelisaFollowerStage == 0) {
-			if (player.hasItem(consumables.SHARK_T) && player.hasItem(consumables.PPHILTR) && player.hasItem(consumables.VITAL_T)) addButton(3, "C.CurePotion", RathazulMakesToothCursePotion).hint("Ask him to make cure curse cure potion. \n\nNeeds shark tooth, purity philter and vitality tincture");
-			else addButtonDisabled(3, "C.CurePotion", "Ask him to make cure curse cure potion. \n\nNeeds shark tooth, purity philter and vitality tincture");
+		if (flags[kFLAGS.ARIAN_SCALES] >= 1) {
+			if (dyes && player.hasItem(consumables.REPTLUM, 1)) addButton(3, "Make Dye", makeDyes).hint("Ask him to make a special dye for you. (Only dyes here are for Arian) \n\nCost: 50 Gems.");
+			else addButtonDisabled(3, "Make Dye", "You need 50+ gems and 1 vial of Reptilium.");
 		}
-		if (dyes && player.hasItem(consumables.REPTLUM, 1) && flags[kFLAGS.ARIAN_SCALES] > 0) addButton(4, "Make Dye", makeDyes).hint("Ask him to make a special dye for you. (Only dyes here are for Arian) \n\nCost: 50 Gems.");
-		if (player.hasItem(consumables.BEEHONY)) addButton(5, consumables.PURHONY.shortName, rathazulMakesPureHoney).hint("Ask him to distill a vial of bee honey into a pure honey. \n\nCost: 25 Gems \nNeeds 1 vial of Bee Honey");
-		if (debimbo) addButton(6, "Debimbo", makeADeBimboDraft).hint("Ask Rathazul to make a debimbofying potion for you. \n\nCost: 250 Gems \nNeeds 5 Scholar Teas.");
+		if (player.hasItem(consumables.BEEHONY)) addButton(4, consumables.PURHONY.shortName, rathazulMakesPureHoney).hint("Ask him to distill a vial of bee honey into a pure honey. \n\nCost: 25 Gems \nNeeds 1 vial of Bee Honey");
+		if (debimbo) addButton(5, "Debimbo", makeADeBimboDraft).hint("Ask Rathazul to make a debimbofying potion for you. \n\nCost: 250 Gems \nNeeds 5 Scholar Teas.");
+		if (mindup) addButton(6, "MindUp", makeAMindUpDraft).hint("Ask Rathazul to make a sanity restoring potion for you. \n\nCost: 250 Gems \nNeeds 5 incenses of Insight.");
 		if (flags[kFLAGS.ELECTRA_FOLLOWER] > 2 && !player.hasStatusEffect(StatusEffects.ElectraOff)) {
-		if (player.hasItem(useables.RPLASMA, 2) && player.hasItem(consumables.L_DRAFT, 1)) addButton(7, "Alch.Thun.", makeAlchemicalThunder).hint("Ask him to help Mitzi. \n\nNeeds two raiju plasmas and one lust draft");
+			if (player.hasItem(useables.RPLASMA, 2) && player.hasItem(consumables.L_DRAFT, 1)) addButton(7, "Alch.Thun.", makeAlchemicalThunder).hint("Ask him to help Mitzi. \n\nNeeds two raiju plasmas and one lust draft");
 			else addButtonDisabled(7, "Alch.Thun.", "Need to gather two raiju plasmas and one lust draft for this.");
 		}
-		if (flags[kFLAGS.MITZI_RECRUITED] == 2) {
-			if (player.hasItem(consumables.SMART_T, 5) && player.hasItem(consumables.VITAL_T, 5) && player.hasItem(consumables.S_WATER, 1) && player.hasItem(consumables.PURHONY, 1)) addButton(8, "Mitzi", cureMitzi).hint("Ask him to help Mitzi. \n\nNeeds five scholar teas, five vitality tinctures, one bottle of pure spring water, and one vial of pure honey");
-			else addButtonDisabled(8, "Mitzi", "Need to gather five scholar teas, five vitality tinctures, one bottle of pure spring water, and one vial of pure honey for this.");
-		}
-		if (flags[kFLAGS.SAMIRAH_FOLLOWER] == 7) {
-			if (player.hasItem(consumables.HUMMUS_, 1) && player.hasItem(consumables.REPTLUM, 1) && player.hasItem(consumables.OVIELIX, 1)) addButton(9, "ReptaTongue P", makeReptaTonguePotion).hint("Ask him to make Repta-Tongue Potion. \n\nNeeds 1 Hummus, 1 Reptilium and 1 Ovi Elixir");
-			else addButtonDisabled(9, "ReptaTongue P", "Need to gather 1 Hummus, 1 Reptilium and 1 Ovi Elixir for this potion.");
-		}
-		if (player.hasItem(consumables.PURHONY, 1) && player.hasItem(consumables.C__MINT, 1) && player.hasItem(consumables.PURPEAC, 1) && player.hasKeyItem("Rathazul's Purity Potion") < 0 &&(flags[kFLAGS.MINERVA_PURIFICATION_RATHAZUL_TALKED] == 2 && flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] < 10)) {
-			addButton(10, "Pure Potion", rathazulMakesPurifyPotion).hint("Ask him to brew a purification potion for Minerva.");
-		}
-		if (TyrantiaFollower.TyrantiaFollowerStage == 5) addButton(12, "Tyrantia", TyrantiaEggQuestRathazul);
-		if (lethiciteDefense != null) addButton(13, "Lethicite", lethiciteDefense).hint("Ask him if he can make use of that lethicite you've obtained from Marae.");
+		if (lethiciteDefense != null) addButton(11, "Lethicite", lethiciteDefense).hint("Ask him if he can make use of that lethicite you've obtained from Marae.");
+		if (silly() && player.hasStatusEffect(StatusEffects.CampRathazul)) addButton(12, "Flirt", getThatRatAss).hint("Try to score with Rathazul.");
+		addButton(13, "Rare offers", oneTimeOptions).hint("All the one time options.");
 		if (player.hasStatusEffect(StatusEffects.CampRathazul)) addButton(14,"Leave", camp.campFollowers);
 		else addButton(14, "Leave", camp.returnToCampUseOneHour);
 		return true;
 	}
 	return false;
+}
+
+private function oneTimeOptions():void {
+	spriteSelect(SpriteDb.s_rathazul);
+	clearOutput();
+	outputText("Rathazul asks, \"<i>Which one rare offer you want to pick?</i>\"");
+	menu();
+	if (BelisaFollower.BelisaRalthTalked && BelisaFollower.BelisaFollowerStage == 0) {
+		if (player.hasItem(consumables.SHARK_T) && player.hasItem(consumables.PPHILTR) && player.hasItem(consumables.VITAL_T)) addButton(0, "C.CurePotion", RathazulMakesToothCursePotion).hint("Ask him to make cure curse cure potion. \n\nNeeds shark tooth, purity philter and vitality tincture");
+		else addButtonDisabled(0, "C.CurePotion", "Ask him to make curse cure potion. \n\nNeeds shark tooth, purity philter and vitality tincture");
+	}
+	if (TyrantiaFollower.TyrantiaFollowerStage == 5) addButton(1, "Tyrantia", TyrantiaEggQuestRathazul);
+	if (flags[kFLAGS.SAMIRAH_FOLLOWER] == 7) {
+		if (player.hasItem(consumables.HUMMUS_, 1) && player.hasItem(consumables.REPTLUM, 1) && player.hasItem(consumables.OVIELIX, 1)) addButton(5, "ReptaTongue P", makeReptaTonguePotion).hint("Ask him to make Repta-Tongue Potion. \n\nNeeds 1 Hummus, 1 Reptilium and 1 Ovi Elixir");
+		else addButtonDisabled(5, "ReptaTongue P", "Need to gather 1 Hummus, 1 Reptilium and 1 Ovi Elixir for this potion.");
+	}
+	if (player.hasItem(consumables.PURHONY, 1) && player.hasItem(consumables.C__MINT, 1) && player.hasItem(consumables.PURPEAC, 1) && player.hasKeyItem("Rathazul's Purity Potion") < 0 &&(flags[kFLAGS.MINERVA_PURIFICATION_RATHAZUL_TALKED] == 2 && flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] < 10)) {
+		addButton(6, "Pure Potion", rathazulMakesPurifyPotion).hint("Ask him to brew a purification potion for Minerva.");
+	
+	}
+	if (flags[kFLAGS.MITZI_RECRUITED] == 2) {
+		if (player.hasItem(consumables.SMART_T, 5) && player.hasItem(consumables.VITAL_T, 5) && player.hasItem(consumables.S_WATER, 1) && player.hasItem(consumables.PURHONY, 1)) addButton(7, "Mitzi", cureMitzi).hint("Ask him to help Mitzi. \n\nNeeds five scholar teas, five vitality tinctures, one bottle of pure spring water, and one vial of pure honey");
+		else addButtonDisabled(7, "Mitzi", "Need to gather five scholar teas, five vitality tinctures, one bottle of pure spring water, and one vial of pure honey for this.");
+	}
+	addButton(14, "Back", rathazulWorkOffer);
 }
 
 private function TyrantiaEggQuestRathazul():void {
@@ -502,6 +532,19 @@ private function rathazulDebimboOffer():void {
 	addButton(0,"Next",campRathazul);
 }
 
+private function rathazulMindUpOffer():void {
+	spriteSelect(SpriteDb.s_rathazul);
+	clearOutput();
+	if(flags[kFLAGS.RATHAZUL_MINDUP_OFFERED] == 0) {
+        outputText("\n\nRathazul note your weird expression and mannerism as you approach him.");
+        outputText("\n\n\"<i>Um [name] I'm afraid you might have come into contact with things you may have preferred not to see or know. Clearly your sanity and grasp of reality took a hit. Fortunately I can help you still, madness is an illness of the mind and therefore it can be cured. Bring me five sage incense and I can fix you up.</i>\" ");
+        flags[kFLAGS.RATHAZUL_MINDUP_OFFERED]++;
+	}
+	//Rath menu
+	menu();
+	addButton(0,"Next",campRathazul);
+}
+
 private function rathazulAlchemicalThunderOffer():void {
 	spriteSelect(SpriteDb.s_rathazul);
 	clearOutput();
@@ -607,7 +650,7 @@ private function makeReptaTonguePotion():void {
 	addButton(0,"Next",campRathazul);
 }
 
-//Creation Of The Draft:*
+//Creation Of The Drafts:*
 private function makeADeBimboDraft():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_rathazul);
@@ -619,6 +662,18 @@ private function makeADeBimboDraft():void {
 	statScreenRefresh();
 	player.addStatusValue(StatusEffects.MetRathazul,2,1);
 	inventory.takeItem(consumables.DEBIMBO, returnToRathazulMenu);
+}
+private function makeAMindUpDraft():void {
+	clearOutput();
+	spriteSelect(SpriteDb.s_rathazul);
+	outputText("Rathazul takes the incenses of Insight and the gems into his wizened palms, shuffling the glittering jewels into a pouch and the incenses into a large decanter.  He promptly sets the combined brews atop a flame and shuffles over to his workbench, where he picks up numerous pouches and vials of every color and description, adding them to the mix one after the other.  The mixture roils and bubbles atop the open flame like a monstrous, eerie thing, but quickly simmers down to a quiet boil.  Rathazul leaves it going for a while, stirring occasionally as he pulls out a smaller vial.  Once most of the excess liquid has evaporated, he pours the concoction into the glass container and corks it, holding it up to the light to check its coloration.");
+	outputText("\n\n\"<i>That <b>should</b> do,</i>\" he mutters to himself.  Rathazul turns, carefully handing you the mixture.  \"<i>This should restore sanity.</i>\"\n\n");
+	//Take items
+	player.gems -= 250;
+	player.consumeItem(consumables.INCOINS,5);
+	statScreenRefresh();
+	player.addStatusValue(StatusEffects.MetRathazul,2,1);
+	inventory.takeItem(consumables.MIND_UP, returnToRathazulMenu);
 }
 
 //PURIFICATION
@@ -715,7 +770,7 @@ private function buyDyes(fromPage2:Boolean = false):void {
 		addButton(12, "Pink", buyDye, consumables.PINKDYE);
 	}
 	addButton(13, "Reagent", buyDye, useables.REAGENT);
-	addButton(14, "Nevermind", buyDyeNevermind);
+	addButton(14, "Never mind", buyDyeNevermind);
 }
 private function buyDyesPage2():void {
 	clearOutput();
@@ -730,7 +785,7 @@ private function buyDyesPage2():void {
 		addButton(1, "Rainbow", buyDye, consumables.RAINDYE);
 	}
 	addButton(4, "Previous", buyDyes, true);
-	addButton(14, "Nevermind", buyDyeNevermind);
+	addButton(14, "Never mind", buyDyeNevermind);
  }
 
 private function buyDye(dye:ItemType):void {
@@ -748,7 +803,7 @@ private function buyDyeNevermind():void {
 	outputText("You change your mind about the dye, and Rathazul returns your gems.\n\n<b>(+50 Gems)</b>");
 	player.gems += 50;
 	statScreenRefresh();
-	doNext(rathazulShopMenu);
+	rathazulShopMenu();
 }
 
 //Scales dyes
@@ -760,13 +815,17 @@ private function makeDyes():void {
 	player.gems -= 50;
 	statScreenRefresh();
 	menu();
-	if (player.hasItem(consumables.REPTLUM, 1) && flags[kFLAGS.ARIAN_SCALES] > 0) {
+	if (player.hasItem(consumables.REPTLUM, 1) && flags[kFLAGS.ARIAN_SCALES] >= 1) {
 		if (player.hasItem(consumables.WHITEDY, 1)) addButton(0, "White", makeDye1);
+		else addButtonDisabled(0, "White", "You not have white dye.");
 		if (player.hasItem(consumables.BLUEDYE, 1)) addButton(1, "Blue", makeDye2);
+		else addButtonDisabled(1, "Blue", "You not have blue dye.");
 		if (player.hasItem(consumables.PINKDYE, 1)) addButton(2, "Pink", makeDye3);
+		else addButtonDisabled(2, "Pink", "You not have pink dye.");
 		if (player.hasItem(consumables.RAINDYE, 1)) addButton(3, "Rainbow", makeDye4);
+		else addButtonDisabled(3, "Rainbow", "You not have rainbow dye.");
 	}
-	addButton(14, "Nevermind", makeDyeNevermind);
+	addButton(14, "Never mind", makeDyeNevermind);
 }
 
 private function makeDye1():void {
@@ -819,7 +878,7 @@ private function makeDyeNevermind():void {
 	outputText("You change your mind about the dye, and Rathazul returns your gems.\n\n<b>(+50 Gems)</b>");
 	player.gems += 50;
 	statScreenRefresh();
-	doNext(rathazulShopMenu);
+	rathazulShopMenu();
 }
 
 //Skin Oils
@@ -839,7 +898,7 @@ private function buyOils():void {
 	addButton(5, "Olive", buyOil, consumables.OLIVEOL);
 	addButton(6, "Russet", buyOil, consumables.RUSS_OL);
 	addButton(10, "Tan", buyOil, consumables.TAN_OIL);
-	addButton(14, "Nevermind", buyOilNevermind);
+	addButton(14, "Never mind", buyOilNevermind);
 }
 
 private function buyOil(oil:ItemType):void {
@@ -857,7 +916,7 @@ private function buyOilNevermind():void {
 	outputText("You change your mind about the oil, and Rathazul returns your gems.\n\n<b>(+50 Gems)</b>");
 	player.gems += 50;
 	statScreenRefresh();
-	doNext(rathazulShopMenu);
+	rathazulShopMenu();
 }
 
 //Body Lotions
@@ -873,7 +932,7 @@ private function buyLotions():void {
 	addButton(1, "Rough", buyLotion, consumables.ROUGHLN);
 	addButton(2, "Sexy", buyLotion, consumables.SEXY_LN);
 	addButton(3, "Smooth", buyLotion, consumables.SMTH_LN);
-	addButton(14, "Nevermind", buyLotionNevermind);
+	addButton(14, "Never mind", buyLotionNevermind);
 }
 
 private function buyLotion(lotion:ItemType):void {
@@ -891,7 +950,7 @@ private function buyLotionNevermind():void {
 	outputText("You change your mind about the lotion, and Rathazul returns your gems.\n\n<b>(+50 Gems)</b>");
 	player.gems += 50;
 	statScreenRefresh();
-	doNext(rathazulShopMenu);
+	rathazulShopMenu();
 }
 
 //Reducto
@@ -1088,6 +1147,36 @@ public function rathazulAprilFoolPart3():void {
     else
         player.addKeyValue("Rathazul's Purity Elixir", 1, 1);
 	doNext(returnToRathazulMenu);
+}
+
+private function getThatRatAss():void {
+	clearOutput();
+	outputText(images.showImage("rathazul-lab"));
+	outputText("You slide over to Rathazul's spot in camp and wink at him, saying, \"<i>Hey cutie, do you have 11 protons? Cause your sodium fine.</i>\"\n\n");
+	outputText("Rathazul looks up from the whatever it is he's working on and blinks wearily. \"<i>What?</i>\"\n\n");
+	outputText("\"<i>Oh, nothing.</i>\" You let out a soft laugh. \"<i>Just that we have chemistry, so I think it's time we try some biology.</i>\"\n\n");
+	outputText("There's a moment of silence, then he coughs. \"<i>I-I'm sorry, what are you trying to say?</i>\" There's a glimmer of a plea in his eyes, asking you to stop.\n\n");
+	outputText("No way. You are getting what you came here for. You puff your chest and declare, \"<i>I wanna fuck you.</i>\"\n\n");
+	doNext(getThatRatAss2);
+}
+private function getThatRatAss2():void {
+	clearOutput();
+	outputText(images.showImage("rathazul-accident"));
+	outputText("\"<i>Oh... Ohhhh no...</i>\" He takes a couple steps back, mumbling, \"<i>No, no no no no no no, no, no...</i>\" His eyes glaze over and his steps grow uncoordinated as his soul seems to leave his body. \"<i>No, no, no... No... No...</i>\"\n\n");
+	outputText("His foot steps in a bowl and he slips, crashing into the ground. His head slams into a rock along the way. You hear something crack that sounds like it shouldn't. You drop to all fours and put your hand on his shoulder, shouting his name. He doesn't respond. You put a hand to his neck. His pulse has stopped, and there is blood gathering around his head.\n\n");
+	outputText("You get up and very slowly back away. You have no idea what just happened, but you are sure of one thing-- You need to get out of here.\n\n");
+	doNext(getThatRatAss3);
+}
+private function getThatRatAss3():void {
+	spriteSelect(SpriteDb.s_rathazul);
+	clearOutput();
+	outputText(images.showImage("encounter-rathazul"));
+	outputText("An hour later, you muster up the courage to return to the scene of your crime. Much to your surprise, though, there is no scene. Rathazul is back on his feet, though distinctly avoiding looking at you. All he's offered is a note on the ground. You pick it up and read it.\n\n");
+	outputText("\"<i>No. And please do not ask me that again.\n- Rathazul</i>\"\n\n");
+	outputText("Sheesh, what a drama queen. A simple \"No thanks\" would've been fine. You toss the note aside with a huff and turn back to camp.\n\n");
+	outputText("Still though, thinking about that rat ass gets you turned on...");
+	dynStats("lus", 10, "scale", false);
+	doNext(camp.returnToCampUseOneHour);
 }
 }
 }

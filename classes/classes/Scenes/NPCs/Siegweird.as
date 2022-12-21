@@ -5,11 +5,7 @@
 package classes.Scenes.NPCs 
 {
 import classes.*;
-import classes.BodyParts.Butt;
-import classes.BodyParts.Hips;
-import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
-import classes.internals.*;
 
 	public class Siegweird extends Monster
 	{
@@ -75,13 +71,11 @@ import classes.internals.*;
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			cleanupAfterCombat();
 			SceneLib.siegweirdFollower.siegweirdFirstEncounterPostFightAnotherFightWon();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			cleanupAfterCombat();
 			SceneLib.siegweirdFollower.siegweirdFirstEncounterPostFightAnotherFightLost();
 		}
 		
@@ -116,7 +110,6 @@ import classes.internals.*;
 			this.bonusLust = 214;
 			this.lust = 30;
 			this.lustVuln = 0.75;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 64;
 			this.gems = rand(25) + 138;
 			this.drop = NO_DROP;

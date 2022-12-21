@@ -7,7 +7,6 @@ package classes.Scenes.NPCs
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Monsters.ImpLord;
-import classes.Scenes.NPCs.Siegweird;
 import classes.display.SpriteDb;
 
 public class SiegweirdFollower extends NPCAwareContent
@@ -74,6 +73,9 @@ public function siegweirdFirstEncounterPostFightJoinYes():void
 	outputText("\n\n You guide Siegweird to your camp, he smiles softly as he surveys the area.\n\n Once he’s found a place he’s content with he quickly builds a fire pit before reaching into his knapsack and pulling out a large cast iron pot.\n\n");
 	outputText("He sets everything up before igniting the flame.\n\n\"<i>I got some Soup! Call it a hero's feast, [name]. Feel free to ask me for some if you’re ever hungry.</i>\"");
 	outputText("\n\n<b>Siegweird has joined you as a follower.</b>\n\n");
+	if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard",1,+1);
+	else player.createKeyItem("Radiant shard", 1,0,0,0);
+	outputText("\n\n<b>Before fully settling in your camp as if remembering something Siegweird pulls a shining shard from his inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
 	flags[kFLAGS.ALVINA_FOLLOWER] = 12;
 	if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] == 2.5) {
 		flags[kFLAGS.SIEGWEIRD_FOLLOWER] = 4;
@@ -115,7 +117,7 @@ public function siegweirdFirstEncounterPostFightAnotherFightWon():void
 	outputText("<b>You obtained Siegweird's holy symbol!</b>\n\n");
 	player.createKeyItem("Siegweird's holy symbol", 0, 0, 0, 0);
 	flags[kFLAGS.SIEGWEIRD_FOLLOWER] = 3;
-	doNext(camp.returnToCampUseSixHours);
+	cleanupAfterCombat(camp.returnToCampUseSixHours);
 }
 public function siegweirdFirstEncounterPostFightAnotherFightLost():void
 {
@@ -125,8 +127,8 @@ public function siegweirdFirstEncounterPostFightAnotherFightLost():void
 
 public function siegweirdRepeatEncounterPostFight():void
 {
+	clearOutput();
 	if (player.statusEffectv1(StatusEffects.AlvinaTraining2) == 3) {
-		clearOutput();
 		outputText("It takes a while to find Siegweird. For a guy completely covered in full plate, he moves surprisingly fast along the blight ridge.\n\nHe seems to be in search of something… You’re positive the object of his search is someone you’ve gotten to know quite well recently.\n\n");
 		outputText("He’s quick to notice you, despite the fact that you haven’t made any attempt to announce your presence.\n\n");
 		outputText("\"<i>So, you came back after all... I should've known... You've been working with this witch from the start haven't you?</i>\" He shakes his head, \"<i>The voices in my head tell me ‘run away’, but I will not turn back, lest I go astray. I don't know what she promised you but in the end you will come to regret it, be it by my blade or by some twisted machinations she may have prepared for you.</i>\"\n\n");
@@ -364,7 +366,7 @@ public function siegweirdAdvancedStudy_0():void {
             outputText("</i>You tell him that you have already found Marae, and describe her state when you met her.\n\n<i>");
             if (flags[kFLAGS.FACTORY_SHUTDOWN] == 0) outputText("She's still alive... but to finish her purification, you must shut down the factory. There are no other options.");
             else if (flags[kFLAGS.MARAE_QUEST_COMPLETE] == 1) outputText("You have disabled the factory? Excellent! And that pearl you mentioned will be an excellent replacement for the bark!");
-            else if (flags[kFLAGS.MET_MARAE_CORRUPTED] == 2) outputText("So... she's fallen to it too. Forget about it then. Even if you manage to obtain her bark, it will probably be tainted too... Unless you've got some <b>before</b> she'd become corrupted. But I don't think it's possible...");
+            else if (flags[kFLAGS.MET_MARAE_CORRUPTED] > 0) outputText("So... she's fallen to it too. Forget about it then. Even if you manage to obtain her bark, it will probably be tainted too... Unless you've got some <b>before</b> she'd become corrupted. But I don't think it's possible...");
         }
         outputText("\n\nYou also need to find a silver ingot; the material would serve as the casing. Finally, a perfect diamond will be the ornament. You should get going and start looking for these items, I wish you good luck in that.</i>\"\n\n");
         player.createStatusEffect(StatusEffects.SiegweirdTraining2, 0, 0, 0, 0);

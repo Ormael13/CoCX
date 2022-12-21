@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.Areas.GlacialRift 
+package classes.Scenes.Areas.GlacialRift
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -20,7 +20,7 @@ public class YukiOnna extends Monster
 			player.takeIceDamage(kissdmg, true);
 			var kisslust:Number = (inte / 5) + rand(10);
 			kisslust = Math.round(kisslust);
-			player.dynStats("lus", kisslust, "scale", false);
+			player.takeLustDamage(kisslust, true);
 		}
 		
 		public function IceArmor():void {
@@ -77,7 +77,7 @@ public class YukiOnna extends Monster
 			SceneLib.glacialRift.yukionnaScene.loseToYukiOnna();
 		}
 		
-		public function YukiOnna() 
+		public function YukiOnna()
 		{
 			this.a = "a ";
 			this.short = "Yuki Onna";
@@ -106,7 +106,6 @@ public class YukiOnna extends Monster
 			this.bonusLust = 426;
 			this.lust = 25 + rand(15);
 			this.lustVuln = 0.36;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = 71;
 			this.gems = 115 + rand(20);
 			this.drop = new WeightedDrop()
@@ -116,7 +115,6 @@ public class YukiOnna extends Monster
 					.add(consumables.SNOWW_D, 5)
 					.add(consumables.WHITEIS, 5);
 			this.wings.type = Wings.LEVITATION;
-			this.wings.desc = "levitation";
 			//this.createStatusEffect(StatusEffects.GenericRunDisabled, 0, 0, 0, 0);
 			this.createStatusEffect(StatusEffects.AbilityCooldown1, 8, 0, 0, 0);
 			this.createStatusEffect(StatusEffects.IceArmor, 5, 0, 0, 0);

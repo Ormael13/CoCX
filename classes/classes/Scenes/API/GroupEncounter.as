@@ -2,6 +2,8 @@
  * Created by aimozg on 26.03.2017.
  */
 package classes.Scenes.API {
+import classes.internals.Utils;
+
 public class GroupEncounter implements Encounter {
 	protected var components:Array;// of Encounter
 	protected var name:String;
@@ -34,7 +36,8 @@ public class GroupEncounter implements Encounter {
 	 */
 	public function add(...defs):GroupEncounter {
 		for each (var def:* in defs) {
-			if (def is Encounter) components.push(def);
+			if (def is GroupEncounter && !(def is ComplexEncounter)) Utils.pushAll(components, (def as GroupEncounter).components);
+			else if (def is Encounter) components.push(def);
 			else components.push(Encounters.build(def));
 		}
 		return this;

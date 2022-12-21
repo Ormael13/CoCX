@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Perks 
+package classes.Perks
 {
 	import classes.PerkClass;
 	import classes.PerkType;
@@ -13,15 +13,16 @@ package classes.Perks
 		
 		override public function desc(params:PerkClass = null):String
 		{
+			if (!player || !params) return _desc;
 			return "(Rank: " + params.value1 + "/" + CoC.instance.charCreation.MAX_INNERPOWER_LEVEL + ") Increases maximum Wrath by " + params.value1 * 100 + ".";
 		}
 		
-		public function AscensionFuryPerk() 
+		public function AscensionFuryPerk()
 		{
 			super("Ascension: FURY", "Ascension: FURY", "", "Increases maximum Wrath by 100 per level.");
 		}
 		
-		override public function keepOnAscension(respec:Boolean = false):Boolean 
+		override public function keepOnAscension(respec:Boolean = false):Boolean
 		{
 			return true;
 		}

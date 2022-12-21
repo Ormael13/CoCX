@@ -25,6 +25,7 @@ import classes.Items.WeaponRange;
 import classes.Items.WeaponRangeLib;
 import classes.Scenes.Monsters.Imp;
 import classes.internals.SaveableState;
+import coc.view.ButtonDataList;
 
 public class EvangelineFollower extends NPCAwareContent implements SaveableState
 	{
@@ -73,10 +74,6 @@ public class EvangelineFollower extends NPCAwareContent implements SaveableState
 		{
 			Saves.registerSaveableState(this);
 		}
-
-public function isEvangelineBirthday():Boolean {
-	return date.month == 8;
-}
 
 public function evangelineAffection(changes:Number = 0):Number
 {
@@ -135,6 +132,9 @@ public function Tak():void
 	outputText("(<b>Evangeline has been added to the Followers menu!</b>)\n\n");
 	EvangelineAffectionMeter = 3;
 	EvangelineFollowerStage = 1;
+	if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard",1,+1);
+	else player.createKeyItem("Radiant shard", 1,0,0,0);
+	outputText("\n\n<b>Before fully settling in your camp as if remembering something Evangeline pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
 	flags[kFLAGS.EVANGELINE_LVL_UP] = 0;
 	flags[kFLAGS.EVANGELINE_SPELLS_CASTED] = 0;
 	//if (player.hasStatusEffect(StatusEffects.EzekielCurse)) player.removeStatusEffect(StatusEffects.EzekielCurse);
@@ -170,7 +170,7 @@ public function Nie2():void
 
 public function meetEvangeline():void {
 	clearOutput();
-	if (flags[kFLAGS.ZENJI_PROGRESS] == 11 && rand(4) == 0) {
+	if (ZenjiScenes.isLover() && rand(4) == 0) {
 		outputText("You call your transformations expert, Evangeline, but you get no response. After a moment you decide to head over to her.\n\n");
 		outputText("When you arrive, you already see Zenji hovering over her shoulder, his tail nervously coiling around himself. Evangeline is showing Zenji what the transformations do and ensuring him that it will cause no harm to any imbibers.\n\n");
 		outputText("Zenji seems somewhat unconvinced at her assurance. \"<i>If dat is what you say so, but if you dare harm [name], just know dat I will be de first to know.</i>\"\n\n");
@@ -187,8 +187,8 @@ public function meetEvangeline():void {
 	addButton(1, "Talk", evangelineTalkMenu).hint("Ask Evangeline about something.");
 	if (EvangelineAffectionMeter >= 50) addButton(2, "Sex", evangelineSexMenu).hint("Have some sex with the demonic chimera girl.");//godess
 	if (EvangelineAffectionMeter >= 5) {
-		if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(3, "Spar", evangelineSparMenu).hint("Get into a quick battle with Evangeline!");
-		else addButtonDisabled(3, "Spar", "Req. built sparring ring.");
+		addButton(3, "Spar", evangelineSparMenu).hint("Get into a quick battle with Evangeline!")
+			.disableIf(flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 2, "You need a good sparring ring for that.");
 		if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 1) addButton(5, "Give Gems", LvLUp).hint("Give Evangeline some gems to cover her expenses on getting stronger.");
 		else addButtonDisabled(5, "Give Gems", "Req. sparring with Evangeline at least once.");
 		addButton(8, "I.Mutations", InternalMutations).hint("Check on what internal mutations Evangeline can grant you.");
@@ -415,7 +415,7 @@ private function evangelineAlchemyMenu(page:int = 1):void {
 		addButton(2, "Couatl Oil", MakingCouatlPotion).hint("Ask her to brew a special potion that could aid in becoming a couatl. \n\nCost: 10 Gems \nNeeds 1 Snake Oil and 1 Golden Seed.");
 		addButton(3, "Nocello Liq", MakingNocelloLiqueur).hint("Ask her to brew a special potion that could aid in becoming a phoenix. \n\nCost: 10 Gems \nNeeds 1 Golden Seed and 1 Salamander Firewater.");//Hybryd race TF
 		addButton(4, "Unicornum", MakingUnicornumPotion).hint("Ask her to brew a special potion that could aid in becoming a unicorn. \n\nCost: 20 Gems \nNeeds 1 Equinum and 4 Low-grade Soulforce Recovery Pills.");//1st stage Soul evolution race TF
-		//addButton(5, "", ).hint(".");kitsune/salamander TF//Hybryd race TF
+		addButton(5, "RubyCrystal", MakingRubyCrystal).hint("Ask her to brew a special potion that could aid in becoming a kitshoo. \n\nCost: 10 Gems \nNeeds 1 Fox Jewel and 1 Salamander Firewater.");//Hybryd race TF
 		//6
 		//addButton(7, "", ).hint(".");siren TF//Hybryd race TF
 		//8
@@ -558,7 +558,7 @@ private function MakingAlicornumPotion():void {
 		return;
 	}
 	else if (!(player.hasItem(consumables.UNICORN, 1) && (player.hasItem(consumables.LG_SFRP, 20) || (player.hasItem(consumables.LGSFRPB, 2))))) {
-		outputText("\"<i>I'm sorry but you don't have the materials I need. I need vial of Unicornum and two bottles of Low-grade Soulforce Recovery Pills. In case you not have two bottles then twenty Low-grade Soulforce Recovery Pills would work too,</i>\" Evangeline says.");
+		outputText("\"<i>I'm sorry but you don't have the materials I need. I need vial of Unicornum and two bottles of Low-grade Soulforce Recovery Pills. In case you don't have two bottles then twenty Low-grade Soulforce Recovery Pills would work too,</i>\" Evangeline says.");
 		doNext(evangelineAlchemyMenu);
 		return;
 	}
@@ -577,6 +577,27 @@ private function MakingAlicornumPotion():void {
 	outputText(" Low-grade Soulforce Recovery Pills and fifty gems to Evangeline, which she gingerly takes them and proceeds to make potion for you.");
 	outputText("\n\nAfter a while, she hands you a vial labeled \"Alicornum\".  ");
 	inventory.takeItem(consumables.ALICORN, curry(evangelineAlchemyMenu, 1));
+	cheatTime(1/6);
+}
+private function MakingRubyCrystal():void {
+	clearOutput();
+	if (player.gems < 10) {
+		outputText("\"<i>I'm sorry but you don't have the gems for this potion,</i>\" Evangeline says.");
+		doNext(evangelineAlchemyMenu);
+		return;
+	}
+	else if (!(player.hasItem(consumables.FOXJEWL, 1) && player.hasItem(consumables.SALAMFW, 1))) {
+		outputText("\"<i>I'm sorry but you don't have the materials I need. I need Fox Jewel and hip flask of Salamander Firewater,</i>\" Evangeline says.");
+		doNext(evangelineAlchemyMenu);
+		return;
+	}
+	player.destroyItems(consumables.FOXJEWL, 1);
+	player.destroyItems(consumables.SALAMFW, 1);
+	player.gems -= 10;
+	statScreenRefresh();
+	outputText("You hand over one Fox Jewel, one hip flask of Salamander Firewater and ten gems to Evangeline, which she gingerly takes them and proceeds to make potion for you.");
+	outputText("\n\nAfter a while, she hands you a ruby crystal.  ");
+	inventory.takeItem(consumables.RUBYCRY, curry(evangelineAlchemyMenu, 1));
 	cheatTime(1/6);
 }
 private function MakingGreyInkPotion():void {
@@ -938,28 +959,28 @@ private function curingJiangshi():void {
 		player.destroyItems(consumables.VITAL_T, 5);
 		player.destroyItems(consumables.PPHILTR, 5);
 		outputText("Evangeline nods as you bring her the ingredients, getting to work. As soon as the potion is finished she pours it over your cursed talisman, causing it to smoke and crumble. The first thing you do as the nasty thing peels off is head back to He’Xin’Dao and look for your gear. Thankfully it doesn't take you long to find it in a chest not too far from the table on which the crazy cat messed you up. Gosh, it feels good to be alive, like REALLY alive.\n\n");
-		if (player.weapon == WeaponLib.FISTS && flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] < 1 && flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] != 0) {
+		if (player.weapon.isNothing && flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] < 1 && flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] != 0) {
 			player.setWeapon(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID]) as Weapon);
 			flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = 0;
 		}
-		if (player.weaponRange == WeaponRangeLib.NOTHING && flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] != 0) {
+		if (player.weaponRange.isNothing && flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] != 0) {
 			player.setWeaponRange(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID]) as WeaponRange);
 			flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] = 0;
 		}
-		if (player.shield == ShieldLib.NOTHING && flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] != 0) {
+		if (player.shield.isNothing && flags[kFLAGS.PLAYER_DISARMED_SHIELD_ID] != 0) {
 			if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] < 1) player.setShield(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_SHIELD_ID]) as Shield);
-			flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] = 0;
+			flags[kFLAGS.PLAYER_DISARMED_SHIELD_ID] = 0;
 		}
 		if (player.armor == armors.TRADITC && flags[kFLAGS.PLAYER_DISARMED_ARMOR_ID] != 0) {
 			player.setArmor(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_ARMOR_ID]) as Armor);
 			flags[kFLAGS.PLAYER_DISARMED_ARMOR_ID] = 0;
 		}
-		if (player.lowerGarment == UndergarmentLib.NOTHING && flags[kFLAGS.PLAYER_DISARMED_UNDERWEAR_BOTTOM_ID] != 0) {
-			player.setUndergarment(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_UNDERWEAR_BOTTOM_ID]) as Undergarment, UndergarmentLib.TYPE_LOWERWEAR);
+		if (player.lowerGarment.isNothing && flags[kFLAGS.PLAYER_DISARMED_UNDERWEAR_BOTTOM_ID] != 0) {
+			player.setUnderBottom(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_UNDERWEAR_BOTTOM_ID]) as Undergarment);
 			flags[kFLAGS.PLAYER_DISARMED_UNDERWEAR_BOTTOM_ID] = 0;
 		}
-		if (player.upperGarment == UndergarmentLib.NOTHING && flags[kFLAGS.PLAYER_DISARMED_UNDERWEAR_UPPER_ID] != 0) {
-			player.setUndergarment(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_UNDERWEAR_UPPER_ID]) as Undergarment, UndergarmentLib.TYPE_UPPERWEAR);
+		if (player.upperGarment.isNothing && flags[kFLAGS.PLAYER_DISARMED_UNDERWEAR_UPPER_ID] != 0) {
+			player.setUnderTop(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_UNDERWEAR_UPPER_ID]) as Undergarment);
 			flags[kFLAGS.PLAYER_DISARMED_UNDERWEAR_UPPER_ID] = 0;
 		}
 		if (player.headJewelry == HeadJewelryLib.NOTHING && flags[kFLAGS.PLAYER_DISARMED_HEAD_ACCESORY_ID] != 0) {
@@ -967,7 +988,7 @@ private function curingJiangshi():void {
 			flags[kFLAGS.PLAYER_DISARMED_HEAD_ACCESORY_ID] = 0;
 		}
 		flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] = 0;
-		player.skinTone = "light";
+		player.skinColor                                 = "light";
 		CoC.instance.transformations.FaceHuman.applyEffect(false);
 		player.eyes.type = Eyes.HUMAN;
 		player.horns.type = Horns.NONE;
@@ -977,6 +998,11 @@ private function curingJiangshi():void {
 		if (player.hasPerk(PerkLib.CursedTag)) {
 			player.removePerk(PerkLib.CursedTag);
 			player.perkPoints += 1;
+			if (player.hasStatusEffect(StatusEffects.AlterBindScroll1)) player.removeStatusEffect(StatusEffects.AlterBindScroll1);
+			if (player.hasStatusEffect(StatusEffects.AlterBindScroll2)) player.removeStatusEffect(StatusEffects.AlterBindScroll2);
+			if (player.hasStatusEffect(StatusEffects.AlterBindScroll3)) player.removeStatusEffect(StatusEffects.AlterBindScroll3);
+			if (player.hasStatusEffect(StatusEffects.AlterBindScroll4)) player.removeStatusEffect(StatusEffects.AlterBindScroll4);
+			if (player.hasStatusEffect(StatusEffects.AlterBindScroll5)) player.removeStatusEffect(StatusEffects.AlterBindScroll5);
 		}
 		if (player.hasPerk(PerkLib.ImprovedCursedTag)) {
 			player.removePerk(PerkLib.ImprovedCursedTag);
@@ -1030,242 +1056,14 @@ private function craftingSoulGem():void {
 		doNext(meetEvangeline);
 	}
 }
+
 private function receivingCraftedSoulGem():void {
 	clearOutput();
 	outputText("As you check on Evangeline she hands a purplish crystal to you.\n\n");
 	outputText("\"<i>Here's your soul gem. Please use this responsibly, they are very hard to craft, and quite dangerous.</i>\"\n\n");
-	outputText("<b>Acquired Soul Gem</b>\n\n");
-	if (flags[kFLAGS.GARGOYLE_QUEST] == 3) flags[kFLAGS.GARGOYLE_QUEST]++;
+	outputText("<b>Acquired a Soul Gem!</b>\n\n");
 	player.removeStatusEffect(StatusEffects.SoulGemCrafting);
 	inventory.takeItem(useables.SOULGEM, meetEvangeline);
-}
-
-private function InternalMutations():void {
-	clearOutput();
-	if (EvangelinePeepTalkOnInternalMutations == 0) {
-		outputText("You ask Evangeline about ways to further make your body like that of a specific creature. Evangeline raises an eyebrow before replying.\n\n");
-		outputText("\"<i>It's possible to further improve yourself through internal mutations, however such changes would cause stress upon your body. You also won't be able to get inner mutations from transformations alone, I would need to craft something special. As a human or former human your anatomy wasn't made to host foreign organs and thus might react unfavorably to the change causing your health to suffer degeneration. ");
-		outputText("I can create the mutagens required to transform your insides but don't you say I didn't warn you about the after effects. Oh and before you ask, no this isn't something a regular transformative can do. While eating food on Mareth can conform your body to that of any race if not literally make you almost like a member of said species at a first glance, it doesn't go deep enough to strip everything human out of you, else you would lose the ability to transform at all. ");
-		outputText("Inner mutation requires something more advanced than just eating random food you find across the wilderness. Did you understand all of that?</i>\"");
-		menu();
-		addButton(1, "No", InternalMutationsNie);
-		addButton(3, "Yes", InternalMutationsTak);
-	}
-	else if (EvangelinePeepTalkOnInternalMutations == 1) {
-		outputText("Your confused look annoys Evangeline to no end.\n\n");
-		outputText("\"<i>Gosh how did human civilization even become a serious thing out of Mareth when it's made out of people like you. As I just said It's possible to further improve yourself through internal mutations however doing so will cause your body to endure an ever increasing amount of stress due to degeneration. While there are ways to fully become one's race to do so will make you cease to be human. ");
-		outputText("For you chimerism is the safest route even if it forces you to constantly seek out the assistance of a skilled medic or daily healing magic treatment. And don't you just try poping those mutations naturaly by eating a hundred of ingrediants the only thing you will get is fat. You need a specialised transformative or straith out primal magic to transform your insides and I can only craft the first. Was this simple enough for you?</i>\"");
-		menu();
-		addButton(1, "No", InternalMutationsNie);
-		addButton(3, "Yes", InternalMutationsTak);
-	}
-	else if (EvangelinePeepTalkOnInternalMutations == 2) {
-		outputText("\"<i>Did you bring gems or find a vial of the mutagen?</i>\" she asks.\n\n");
-		outputText("Her eyes briefly graze your form, \"<i>It looks like the only that way we can do anything about that 'unhealthy drive' of yours is with a little mutation.</i>\" She snickers softly as she waits for your response.");
-		menu();
-		if (player.gems >= 500) addButton(1, "Gems", InternalMutationsGemsOrMutagen, 1);
-		else addButtonDisabled(1, "Gems", "Gotta get that 500 gems first.");
-		if (player.hasItem(useables.E_ICHOR, 1)) addButton(3, "Mutagen", InternalMutationsGemsOrMutagen, 2);
-		else addButtonDisabled(3, "Mutagen", "Gotta get that vial of mutagen first.");
-		addButton(14, "Back", meetEvangeline);
-	}
-}
-private function InternalMutationsNie():void {
-	outputText("\n\nYour confused look annoys Evangeline to no end.");
-	outputText("\n\n\"<i>That's fine, but trust me, you really will want my help on this, eventually.</i>\"");
-	EvangelinePeepTalkOnInternalMutations = 1;
-	doNext(meetEvangeline);
-}
-private function InternalMutationsTak():void {
-	outputText("\n\nEvangeline sighs in relief.");
-	outputText("\n\n\"<i>Glad to hear you at least are smarter than a minotaur. Anyways, there are means to reduce the stress on your body from internal mutations. With proper training you can develop the Chimera Corpus Exocell, or in common terms, the chimera body adaptation. This will allow your body to adapt to stress and slowly negate the drawbacks. Of course the lazy route would be to acquire regeneration from a species' inner mutation and thus negate the need to train entirely.</i>\"");
-	EvangelinePeepTalkOnInternalMutations = 2;
-	doNext(meetEvangeline);
-}
-private function InternalMutationsGemsOrMutagen(GoM:int = 0):void {
-	outputText("\n\nEvangeline prepares her alchemy lab as she sterilizes a syringe.\n\n\"<i>I can craft a mutagen out of common material or use the one you found to alter one of your organs. The change will be difficult to reverse, though. You'd better make sure this is what you want. Which mutagen would you like me to craft?</i>\"");
-	InternalMutations0(0, GoM);
-}
-private function InternalMutations0(page:int = 0, GoM:int = 0):void {
-	menu();
-	var menuItems:Array = [];
-	//Next Page
-	menuItems.push("Heart", InternalMutationsHeart, "Heart Mutations");
-	menuItems.push("Muscle", InternalMutationsMuscle, "Muscle Mutations");
-	menuItems.push("Mouth", InternalMutationsMouth, "Mouth Mutations");
-	menuItems.push("Adrenal Glands",InternalMutationsAdrenals, "Adrenals Mutations");
-	menuItems.push("Bloodstream",InternalMutationsBloodstream, "Bloodstream Mutations");
-	menuItems.push("Fat and Tissue", InternalMutationsFaTissue, "FaT Mutations");
-	menuItems.push("Lungs",InternalMutationsLungs, "Lungs Mutations");
-	menuItems.push("Metabolism", InternalMutationsMetabolism, "Metabolism Mutations");
-	menuItems.push("Ovaries", InternalMutationsOvaries, "Ovaries Mutations");
-	menuItems.push("Testicles", InternalMutationsTesticles, "Testicles Mutations");
-	menuItems.push("Eyes", InternalMutationsEyes, "Eyes Mutations");
-	menuItems.push("Bone/Marrow", InternalMutationsBoneMarrow, "Bone Mutations");
-	//Next Page
-	menuItems.push("Nerv/Sys", InternalMutationsPNervSys, "Nerv-Sys Mutations");
-	menuItems.push("Thyroid Gland", InternalMutationsThyroidGlands, "Thyroid Mutations");
-	menuItems.push("Parathyroid Gland", InternalMutationsParathyroid, "Parathyroid Mutations");
-	menuItems.push("Adaptations", InternalMutationsAdaptations, "Adaptation Mutations");
-	menuGen(menuItems, page, meetEvangeline);
-
-	function InternalMutationsHeart():void{
-		menu();
-		//Heart Mutations
-		mutationsAssistant(IMutationsLib.mutationsArray("Heart"));
-		addButton(14, "Back", InternalMutations0, 0 , GoM);
-	}
-
-	function InternalMutationsMuscle():void{
-		menu();
-		//Muscle Mutations
-		mutationsAssistant(IMutationsLib.mutationsArray("Muscle"));
-		addButton(14, "Back", InternalMutations0, 0 , GoM);
-	}
-
-	function InternalMutationsMouth():void{
-		menu();
-		//Mouth Mutations
-		mutationsAssistant(IMutationsLib.mutationsArray("Mouth"));
-		addButton(14, "Back", InternalMutations0, 0 , GoM);
-	}
-
-	function InternalMutationsAdrenals():void{
-		menu();
-		//Adrenal Glands Mutations
-		mutationsAssistant(IMutationsLib.mutationsArray("Adrenals"));
-		addButton(14, "Back", InternalMutations0, 0 , GoM);
-	}
-
-	function InternalMutationsBloodstream():void{
-		menu();
-		//Bloodstream Mutations, not bloodsteam, unless you're boiling blood.
-		mutationsAssistant(IMutationsLib.mutationsArray("Bloodstream"));
-		addButton(14, "Back", InternalMutations0, 0 , GoM);
-	}
-
-	function InternalMutationsFaTissue():void{
-		menu();
-		//Fat tissue Mutations
-		mutationsAssistant(IMutationsLib.mutationsArray("FaT"));
-		addButton(14, "Back", InternalMutations0, 0 , GoM);
-	}
-
-	function InternalMutationsLungs():void{
-		menu();
-		//Lungs Mutations
-		mutationsAssistant(IMutationsLib.mutationsArray("Lungs"));
-		addButton(14, "Back", InternalMutations0, 0 , GoM);
-	}
-
-	function InternalMutationsMetabolism():void{
-		menu();
-		//Metabolism Mutations
-		mutationsAssistant(IMutationsLib.mutationsArray("Metabolism"));
-		addButton(14, "Back", InternalMutations0, 0 , GoM);
-	}
-
-	function InternalMutationsOvaries():void{
-		menu();
-		//Ovaries Mutations
-		mutationsAssistant(IMutationsLib.mutationsArray("Ovaries"));
-		addButton(14, "Back", InternalMutations0, 0 , GoM);
-	}
-
-	function InternalMutationsTesticles():void{
-		menu();
-		//Testicle Mutations
-		mutationsAssistant(IMutationsLib.mutationsArray("Testicles"));
-		addButton(14, "Back", InternalMutations0, 0 , GoM);
-	}
-
-	function InternalMutationsEyes():void {
-		menu();
-		//Eyes Mutations
-		mutationsAssistant(IMutationsLib.mutationsArray("Eyes"));
-		addButton(14, "Back", InternalMutations0, 0 , GoM);
-	}
-
-	function InternalMutationsBoneMarrow():void{
-		menu();
-		//Bones and Marrow Mutations
-		mutationsAssistant(IMutationsLib.mutationsArray("Bone"));
-		addButton(14, "Back", InternalMutations0, 0 , GoM);
-	}
-
-	function InternalMutationsPNervSys():void{
-		menu();
-		//Peripheral/NervSys Mutations
-		mutationsAssistant(IMutationsLib.mutationsArray("Nerv/Sys"), 1);
-		addButton(14, "Back", InternalMutations0, 1, GoM);
-	}
-
-	function InternalMutationsThyroidGlands():void{
-		menu();
-		//Thyroid Glands Mutations
-		mutationsAssistant(IMutationsLib.mutationsArray("Thyroid"),1);
-		addButton(14, "Back", InternalMutations0, 1, GoM);
-	}
-
-	function InternalMutationsParathyroid():void{
-		menu();
-		//ParaThyroid Glands Mutations
-		mutationsAssistant(IMutationsLib.mutationsArray("PThyroid"),1);
-		addButton(14, "Back", InternalMutations0, 1, GoM);
-	}
-
-	function InternalMutationsAdaptations():void{
-		menu();
-		//Adaptations Mutations
-		mutationsAssistant(IMutationsLib.mutationsArray("Adaptations"),1);
-		addButton(14, "Back", InternalMutations0, 1, GoM);
-	}
-
-	function mutationsAssistant(pArray:Array, menuButton:int = 0):* {
-		var menuItems:Array = [];
-		var target:* = player;
-		for each (var mutations:IMutationPerkType in pArray){
-			mutations.pReqs();
-			trace("" + mutations.name() + ": Checking requirements. v");
-			if (mutations.available(target) && mutations.maxLvl > target.perkv1(mutations)){
-				trace("Requirements met, adding in.");
-				menuItems.push(mutations.name(), curry(mutations.acquireMutation, player, costTaker), mutations.desc());	//This is witchcraft, not sure how acquirePerk still recalls which perk to give, but it does.
-			}
-			else if(mutations.maxLvl == target.perkv1(mutations)){
-				trace("MaxTier acquired");
-				menuItems.push(mutations.name(), false, "You already have the highest tier!");
-			}
-			else{
-				if (mutations.requirements.length == 0){
-					trace("Requirements empty.");
-				}
-				else{
-					trace("Did not meet requirements.");
-				}
-				//trace("Unable to meet requirements/requirements borked.");
-				//if (mutations.available(target)) trace("\nAvailable: True");
-				//if (mutations.maxLvl > target.perkv1(mutations)) trace("MaxLvl: True");
-				menuItems.push(mutations.name(), false, "You don't meet the requirements for this!");
-			}
-		}
-		menuGen(menuItems, page, curry(meetEvangeline, 2));
-	}
-
-	function costTaker():void{
-		if (GoM == 1){
-			player.gems -= 500
-		}
-		else{
-			player.destroyItems(useables.E_ICHOR, 1)
-		}
-		menu();
-		clearOutput();
-		outputText("Evangeline gets to brewing the mutagen. An half hour later, the injection is ready. She has you laid down into a makeshift seat.\n\n");
-		outputText("\"<i>This might sting a little… bear it with me [name].</i>\"\n\n");
-		outputText("You don't have the time to gasp before she pushes the injection in. The transformative in the wound burns at first but then spreads to your organ as it slowly changes to acquire new inhuman property. The transformation was successful.");
-		eachMinuteCount(15);
-		doNext(InternalMutations);
-	}
 }
 
 private function Experiments():void {
@@ -1278,5 +1076,130 @@ private function Experiments():void {
 	addButton(13, "Give Gems", LvLUp).hint("Give Evangeline some gems to cover her experiments expenses.");
 	addButton(14, "Back", meetEvangeline);
 }
+//IMutations
+private var GoM:int = 0;
+
+//GoM stands for Gems or Mutations.
+private function InternalMutations():void {
+	clearOutput();
+	if (EvangelinePeepTalkOnInternalMutations == 0) {
+		outputText("You ask Evangeline about ways to further make your body like that of a specific creature. Evangeline raises an eyebrow before replying.\n\n");
+		outputText("\"<i>It's possible to further improve yourself through internal mutations, however such changes would cause stress upon your body. You also won't be able to get inner mutations from transformations alone, I would need to craft something special. As a human or former human, your anatomy wasn't made to host foreign organs and thus might react unfavorably to the change causing your health to suffer degeneration. ");
+		outputText("I can create the mutagens required to transform your insides, but don't you say I didn't warn you about the after effects. Oh, and before you ask, no, this isn't something a regular transformative can do. While eating food on Mareth can conform your body to that of any race if not literally make you almost like a member of said species at a first glance, it doesn't go deep enough to strip everything human out of you, else you would lose the ability to transform at all. ");
+		outputText("<b>Inner mutation requires something more advanced than just eating random food you find across the wilderness. Did you understand all of that?</b></i>\"");
+		menu();
+		addButton(1, "No", IMutationsYN, false);
+		addButton(3, "Yes", IMutationsYN);
 	}
+	else if (EvangelinePeepTalkOnInternalMutations == 1) {
+		outputText("Your confused look annoys Evangeline to no end.\n\n");
+		outputText("\"<i>Gosh how did human civilization even become a serious thing out of Mareth when it's made out of people like you. As I just said It's possible to further improve yourself through internal mutations however doing so will cause your body to endure an ever increasing amount of stress due to degeneration. While there are ways to fully become one's race to do so will make you cease to be human. ");
+		outputText("For you chimerism is the safest route even if it forces you to constantly seek out the assistance of a skilled medic or daily healing magic treatment. And don't you just try poping those mutations naturaly by eating a hundred of ingrediants the only thing you will get is fat. You need a specialised transformative or straith out primal magic to transform your insides and I can only craft the first. Was this simple enough for you?</i>\"");
+		menu();
+		addButton(1, "No", IMutationsYN, false);
+		addButton(3, "Yes", IMutationsYN);
+	}
+	else if (EvangelinePeepTalkOnInternalMutations == 2) {
+		outputText("\"<i>Did you bring gems or find a vial of the mutagen?</i>\" she asks.\n\n");
+		outputText("Her eyes briefly graze your form, \"<i>It looks like the only that way we can do anything about that 'unhealthy drive' of yours is with a little mutation.</i>\" She snickers softly as she waits for your response.");
+		menu();
+		addButton(1, "Gems", IMutationsGemsOrMutagen, 1).disableIf(player.gems < 500, "Gotta get that 500 gems first.");
+		addButton(3, "Mutagen", IMutationsGemsOrMutagen, 2).disableIf(!player.hasItem(useables.E_ICHOR, 1), "Gotta get that vial of mutagen first.");
+		addButton(14, "Back", meetEvangeline);
+	}
+
+	function IMutationsYN(yn:Boolean = true):void{
+		if (yn){
+			outputText("\n\nEvangeline sighs in relief.");
+			outputText("\n\n\"<i>Glad to hear you at least are smarter than a minotaur. Anyways, there are means to reduce the stress on your body from internal mutations. With proper training you can develop the Chimera Corpus Exocell, or in common terms, the chimera body adaptation. This will allow your body to adapt to stress and slowly negate the drawbacks. Of course the lazy route would be to acquire regeneration from a species' inner mutation and thus negate the need to train entirely.</i>\"");
+			EvangelinePeepTalkOnInternalMutations = 2;
+		}
+		else{
+			outputText("\n\nYour confused look annoys Evangeline to no end.");
+			outputText("\n\n\"<i>That's fine, but trust me, you really will want my help on this, eventually.</i>\"");
+			EvangelinePeepTalkOnInternalMutations = 1;
+		}
+		doNext(meetEvangeline);
+	}
+}
+
+private function IMutationsGemsOrMutagen(costType:int = 0):void {
+	outputText("\n\nEvangeline prepares her alchemy lab as she sterilizes a syringe.\n\n\"<i>I can craft a mutagen out of common material or use the one you found to alter one of your organs. The change will be difficult to reverse, though. You'd better make sure this is what you want. Which mutagen would you like me to craft?</i>\"");
+	GoM = costType;
+	IMutationsSelector(0);
+}
+
+private function IMutationsSelector(page:int = 0):void {
+	menu();
+	var bd:ButtonDataList = new ButtonDataList();
+	//Next Page
+	bd.add("Heart", curry(mutationsAssistant, IMutationsLib.mutationsArray(IMutationPerkType.SLOT_HEART))).hint("Heart Mutations");
+	bd.add("Muscle", curry(mutationsAssistant, IMutationsLib.mutationsArray(IMutationPerkType.SLOT_MUSCLE))).hint("Muscle Mutations");
+	bd.add("Mouth", curry(mutationsAssistant, IMutationsLib.mutationsArray(IMutationPerkType.SLOT_MOUTH))).hint("Mouth Mutations");
+	bd.add("Adrenal Glands", curry(mutationsAssistant, IMutationsLib.mutationsArray(IMutationPerkType.SLOT_ADRENALS))).hint("Adrenals Mutations");
+	bd.add("Bloodstream", curry(mutationsAssistant, IMutationsLib.mutationsArray(IMutationPerkType.SLOT_BLOODSTREAM))).hint("Bloodstream Mutations");
+	bd.add("Fat and Tissue", curry(mutationsAssistant, IMutationsLib.mutationsArray(IMutationPerkType.SLOT_FAT))).hint("FaT Mutations");
+	bd.add("Lungs", curry(mutationsAssistant, IMutationsLib.mutationsArray(IMutationPerkType.SLOT_LUNGS))).hint("Lungs Mutations");
+	bd.add("Metabolism", curry(mutationsAssistant, IMutationsLib.mutationsArray(IMutationPerkType.SLOT_METABOLISM))).hint("Metabolism Mutations");
+	bd.add("Ovaries", curry(mutationsAssistant, IMutationsLib.mutationsArray(IMutationPerkType.SLOT_OVARIES))).hint("Ovaries Mutations");
+	bd.add("Testicles", curry(mutationsAssistant, IMutationsLib.mutationsArray(IMutationPerkType.SLOT_TESTICLES))).hint("Testicles Mutations");
+	bd.add("Eyes", curry(mutationsAssistant, IMutationsLib.mutationsArray(IMutationPerkType.SLOT_EYES))).hint("Eyes Mutations");
+	bd.add("Bone/Marrow", curry(mutationsAssistant, IMutationsLib.mutationsArray(IMutationPerkType.SLOT_BONE))).hint("Bone Mutations");
+	//Next Page
+	bd.add("Nerv/Sys", curry(mutationsAssistant, IMutationsLib.mutationsArray(IMutationPerkType.SLOT_NERVSYS), 1)).hint("Nerv-Sys Mutations");
+	bd.add("Thyroid Gland", curry(mutationsAssistant, IMutationsLib.mutationsArray(IMutationPerkType.SLOT_THYROID),1)).hint("Thyroid Mutations");
+	bd.add("Parathyroid Gland", curry(mutationsAssistant, IMutationsLib.mutationsArray(IMutationPerkType.SLOT_PARATHYROID),1)).hint("Parathyroid Mutations");
+	bd.add("Adaptations", curry(mutationsAssistant, IMutationsLib.mutationsArray(IMutationPerkType.SLOT_ADAPTATIONS),1)).hint("Adaptation Mutations");
+	submenu(bd, meetEvangeline, page, false);
+
+	function mutationsAssistant(pArray:Array, menuButton:int = 0):void {
+		var bd:ButtonDataList = new ButtonDataList();
+		var bdFunc:*;
+		var bdDesc:String;
+		var target:* = player;
+		for each (var mutations:IMutationPerkType in pArray){
+			bdFunc = null;
+			mutations.pReqs();
+			//trace("" + mutations.name() + ": Checking requirements. v");
+			if (flags[kFLAGS.EVA_MUTATIONS_BYPASS] || (mutations.available(target) && mutations.maxLvl > target.perkv1(mutations))) {
+				//trace("Requirements met, adding in.");
+				bdFunc = curry(mutations.acquireMutation, player, costTaker)
+				bdDesc = mutations.desc();
+			} else if(mutations.maxLvl == target.perkv1(mutations)) {
+				//trace("MaxTier acquired");
+				bdDesc = "You already have the highest tier!"
+			} else {
+				if (mutations.requirements.length == 0){
+					trace("Requirements empty.");
+				}
+				else{
+					trace("Did not meet requirements.");
+				}
+				//trace("Unable to meet requirements/requirements borked.");
+				//if (mutations.available(target)) trace("\nAvailable: True");
+				//if (mutations.maxLvl > target.perkv1(mutations)) trace("MaxLvl: True");
+				bdDesc = "You don't meet the requirements for this!";
+			}
+			if (bdFunc is Function) {
+				bd.add(mutations.name(), bdFunc, bdDesc);
+			} else {
+				bd.add(mutations.name()).disable(bdDesc);
+			}
+		}
+		submenu(bd,curry(IMutationsSelector, menuButton), 0, false)
+	}
+
+	function costTaker():void{
+		if (GoM == 1) player.gems -= 500
+		else player.destroyItems(useables.E_ICHOR, 1)
+		menu();
+		clearOutput();
+		outputText("Evangeline gets to brewing the mutagen. An half hour later, the injection is ready. She has you laid down into a makeshift seat.\n\n");
+		outputText("\"<i>This might sting a little… bear it with me [name].</i>\"\n\n");
+		outputText("You don't have the time to gasp before she pushes the injection in. The transformative in the wound burns at first but then spreads to your organ as it slowly changes to acquire new inhuman property. The transformation was successful.");
+		eachMinuteCount(15);
+		doNext(InternalMutations);
+	}
+}
+}
 }

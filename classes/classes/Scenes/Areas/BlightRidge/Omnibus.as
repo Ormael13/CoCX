@@ -11,10 +11,10 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
+import classes.Items.DynamicItems;
 import classes.Scenes.Monsters.AbstractSuccubus;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
-import classes.Scenes.Dungeons.DungeonAbstractContent;
 
 use namespace CoC;
 	
@@ -81,7 +81,7 @@ use namespace CoC;
 			this.hips.type = Hips.RATING_CURVY;
 			this.butt.type = Butt.RATING_LARGE + 1;
 			this.lowerBody = LowerBody.DEMONIC_HIGH_HEELS;
-			this.skinTone = "purple";
+			this.bodyColor = "purple";
 			this.hairColor = "black";
 			this.hairLength = 13;
 			this.weaponName = "whip";
@@ -91,7 +91,10 @@ use namespace CoC;
 			this.armorName = "demonic skin";
 			this.lust = 30;
 			this.lustVuln = .5;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
+			this.randomDropChance = 0.1;
+			this.randomDropParams = {
+				rarity: DynamicItems.RARITY_CHANCES_LESSER
+			};
 			this.drop = new WeightedDrop().
 					add(consumables.BIMBOLQ, 1).
 					add(consumables.BROBREW, 1).

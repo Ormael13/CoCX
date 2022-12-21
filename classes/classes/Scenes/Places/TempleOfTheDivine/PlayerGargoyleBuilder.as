@@ -6,8 +6,8 @@ package classes.Scenes.Places.TempleOfTheDivine
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.Scenes.SceneLib;
 import classes.Scenes.NPCs.Forgefather;
+import classes.Scenes.SceneLib;
 
 use namespace CoC;
 
@@ -38,17 +38,16 @@ use namespace CoC;
 			outputText("Should the sacrifice still be alive, it’s physical body will likely die as its soul is sucked into your creation. There is no turning back once it's done, so make sure the subject is ready physically and psychologically to welcome the change. Stand facing the statue but on the opposite side of the central altar and recite the following arcane word in order to proceed to the transfer.\n\n");
 			outputText("Shira Khrim Almisry Ohm Ak Tar Marae Kann Tharr Shul Elysro An Siryr Ahn Ekatyr Evenar Sethe Omaris.\n\n");
 			outputText("You think you could use this information to perhaps turn yourself into a living weapon in order to defeat the demons with relative ease. The question you should ask yourself however is... is this really what you want?");
-			if (flags[kFLAGS.GARGOYLE_QUEST] == 1) {
-				if (player.hasKeyItem("Soul Gem Research") >= 0) flags[kFLAGS.GARGOYLE_QUEST] = 3;
-				flags[kFLAGS.GARGOYLE_QUEST]++;
-			}
+			if (!flags[kFLAGS.GARGOYLE_QUEST]) flags[kFLAGS.GARGOYLE_QUEST] = 1;
 			doNext(SceneLib.templeofdivine.templeBasement);
 		}
+
+
 
 		public function currentStateOfStatue():void {
 			clearOutput();
 			outputText("This statue looks like ");
-			if (Forgefather.statueProgress >= 11) outputText("a finished");
+			if (Forgefather.statueProgress >= 10) outputText("a finished");
 			else outputText("an incomplete stone gargoyle. This statue looks like ");
 			if (Forgefather.gender == 1) outputText("it has a gorgeous female face");
 			if (Forgefather.gender == 2) outputText("it has a handsome male face");
@@ -61,8 +60,8 @@ use namespace CoC;
 			if (Forgefather.hairLength == 4) outputText("long hair looks great.");
 			if (Forgefather.hairLength == 0) outputText("hair is yet to be sculpted.");
 			if (Forgefather.chest > 0) {
-				outputText("\n\nStatue have ");
-				if (Forgefather.chest == 1)outputText("flat chest");
+				outputText("\n\nThe statue has ");
+				if (Forgefather.chest == 1)outputText("a flat chest");
 				else outputText(Appearance.breastCup(Forgefather.chest - 1) + " breasts");
 				outputText(".\n\n");
 			}
@@ -150,7 +149,8 @@ use namespace CoC;
 			else addButtonDisabled(8, "Cock", "You already sculpted the Cock Area.");
 			if (Forgefather.balls < 1) addButton(9, "Balls", SculptBalls);
 			else addButtonDisabled(9, "Balls", "You already sculpted the Balls Area.");
-			if (Forgefather.statueProgress >= 10 && flags[kFLAGS.GARGOYLE_QUEST] >= 3 && !player.isGargoyle()) addButton(13, "Ritual", becomingGargoyle);
+			if (!player.isGargoyle()) addButtonIfTrue(10, "Ritual", becomingGargoyle,
+				"The statue is not ready yet.", Forgefather.statueProgress >= 10);
 			addButton(14, "Back", BackToSapphire);
 		}
 		public function BackToSapphire():void {
@@ -159,93 +159,59 @@ use namespace CoC;
 			doNext(SceneLib.templeofdivine.templeMainMenu);
 		}
 
-		public function chooseToWorkOnStoneStatue():void {
-			//flags[kFLAGS.GARGOYLE_BODY_MATERIAL] = 1;
-			flags[kFLAGS.GARGOYLE_BODY_SCULPTING_PROGRESS] = 1;
-			flags[kFLAGS.GARGOYLE_QUEST] = 1;
-			//flags[kFLAGS.GARGOYLE_WINGS_TYPE] = 0;
-			currentStateOfStatue();
-		}
-
 		public function SculptFrameAndFace():void {
 			menu();
-			addButton(0, "Feminine", SculptFeminineFrameAndFace).hint("Sculpt a feminine frame and face.");
-			addButton(1, "Masculine", SculptMasculineFrameAndFace).hint("Sculpt a masculine frame and face.");
-			addButton(2, "Androgynous", SculptAndrogynousFrameAndFace).hint("Sculpt a androgynous frame and face.");
+			addButton(0, "Feminine", SculptFrameAndFace_chosen, 1).hint("Sculpt a feminine frame and face.");
+			addButton(1, "Masculine", SculptFrameAndFace_chosen, 2).hint("Sculpt a masculine frame and face.");
+			addButton(2, "Androgynous", SculptFrameAndFace_chosen, 3).hint("Sculpt a androgynous frame and face.");
 			addButton(14, "Back", currentStateOfStatue);
 		}
-		public function SculptFeminineFrameAndFace():void {
-			SceneLib.forgefatherScene.setGargoyleGender(1);
-			SecondPartOfSculptingText();
-		}
-		public function SculptMasculineFrameAndFace():void {
-			SceneLib.forgefatherScene.setGargoyleGender(2);
-			SecondPartOfSculptingText();
-		}
-		public function SculptAndrogynousFrameAndFace():void {
-			SceneLib.forgefatherScene.setGargoyleGender(3);
+		public function SculptFrameAndFace_chosen(gender:int):void {
+			SceneLib.forgefatherScene.setGargoyleGender(gender);
 			SecondPartOfSculptingText();
 		}
 
 		public function SculptWings():void {
 			menu();
-			addButton(0, "Bat", SculptBatWings).hint("Sculpt bat wings.");
-			addButton(1, "Feathered", SculptFeatheredWings).hint("Sculpt feathered wings.");
+			addButton(0, "Bat", SculptWings_chosen, 2).hint("Sculpt bat wings.");
+			addButton(1, "Feathered", SculptWings_chosen, 1).hint("Sculpt feathered wings.");
 			addButton(14, "Back", currentStateOfStatue);
 		}
-		public function SculptBatWings():void {
-			SceneLib.forgefatherScene.setGargoyleWings(2);
-			//flags[kFLAGS.GARGOYLE_WINGS_TYPE] = 2;
-			SecondPartOfSculptingText();
-		}
-		public function SculptFeatheredWings():void {
-			SceneLib.forgefatherScene.setGargoyleWings(1);
-			//flags[kFLAGS.GARGOYLE_WINGS_TYPE] = 1;
+		public function SculptWings_chosen(wings:int):void {
+			SceneLib.forgefatherScene.setGargoyleWings(wings);
 			SecondPartOfSculptingText();
 		}
 
 		public function SculptTail():void {
 			menu();
-			addButton(0, "Mace", SculptMaceTail).hint("Sculpt mace shaped tail tip.");
-			addButton(1, "Axe", SculptAxeTail).hint("Sculpt axe shaped tail tip.");
+			addButton(0, "Mace", SculptTail_chosen, 1).hint("Sculpt mace shaped tail tip.");
+			addButton(1, "Axe", SculptTail_chosen, 2).hint("Sculpt axe shaped tail tip.");
 			addButton(14, "Back", currentStateOfStatue);
 		}
-		public function SculptMaceTail():void {
-			SceneLib.forgefatherScene.setGargoyleTail(1);
-			SecondPartOfSculptingText();
-		}
-		public function SculptAxeTail():void {
-			SceneLib.forgefatherScene.setGargoyleTail(2);
+		public function SculptTail_chosen(tail:int):void {
+			SceneLib.forgefatherScene.setGargoyleTail(tail);
 			SecondPartOfSculptingText();
 		}
 
 		public function SculptLegs():void {
 			menu();
-			addButton(0, "Clawed", SculptClawedLegs).hint("Sculpt clawed legs.");
-			addButton(1, "Humane", SculptHumaneLegs).hint("Sculpt humane legs.");
+			addButton(0, "Clawed", SculptLegs_chosen, 1).hint("Sculpt clawed legs.");
+			addButton(1, "Humane", SculptLegs_chosen, 2).hint("Sculpt humane legs.");
 			addButton(14, "Back", currentStateOfStatue);
 		}
-		public function SculptClawedLegs():void {
-			SceneLib.forgefatherScene.setGargoyleLowerBody(1);
-			SecondPartOfSculptingText();
-		}
-		public function SculptHumaneLegs():void {
-			SceneLib.forgefatherScene.setGargoyleLowerBody(2);
+		public function SculptLegs_chosen(legs:int):void {
+			SceneLib.forgefatherScene.setGargoyleLowerBody(legs);
 			SecondPartOfSculptingText();
 		}
 
 		public function SculptArms():void {
 			menu();
-			addButton(0, "Clawed", SculptClawedArms).hint("Sculpt clawed arms.");
-			addButton(1, "Humane", SculptHumaneArms).hint("Sculpt humane arms.");
+			addButton(0, "Clawed", SculptArms_chosen, 1).hint("Sculpt clawed arms.");
+			addButton(1, "Humane", SculptArms_chosen, 2).hint("Sculpt humane arms.");
 			addButton(14, "Back", currentStateOfStatue);
 		}
-		public function SculptClawedArms():void {
-			SceneLib.forgefatherScene.setGargoyleArms(1);
-			SecondPartOfSculptingText();
-		}
-		public function SculptHumaneArms():void {
-			SceneLib.forgefatherScene.setGargoyleArms(2);
+		public function SculptArms_chosen(arms:int):void {
+			SceneLib.forgefatherScene.setGargoyleArms(arms);
 			SecondPartOfSculptingText();
 		}
 
@@ -282,16 +248,12 @@ use namespace CoC;
 
 		public function SculptPussy():void {
 			menu();
-			if (Forgefather.cock != 1) addButton(0, "No", SculptPussyNo).hint("Don't sculpt pussy.");
-			addButton(1, "Yes", SculptPussyYes).hint("Sculpt pussy.");
+			if (Forgefather.cock != 1) addButton(0, "No", SculptPussy_chosen, 1).hint("Don't sculpt pussy.");
+			addButton(1, "Yes", SculptPussy_chosen, 2).hint("Sculpt pussy.");
 			addButton(14, "Back", currentStateOfStatue);
 		}
-		public function SculptPussyNo():void {
-			SceneLib.forgefatherScene.setGargoyleVagina(1);
-			SecondPartOfSculptingText();
-		}
-		public function SculptPussyYes():void {
-			SceneLib.forgefatherScene.setGargoyleVagina(2);
+		public function SculptPussy_chosen(puss:int):void {
+			SceneLib.forgefatherScene.setGargoyleVagina(puss);
 			SecondPartOfSculptingText();
 		}
 
@@ -337,24 +299,19 @@ use namespace CoC;
 		public function SecondPartOfSculptingText():void {
 			clearOutput();
 			outputText("You work for six hours, sculpting the statue part to your liking with an artist's passion, then head back to camp for a break.");
-			if (Forgefather.statueProgress > 0) Forgefather.statueProgress++;
-			else Forgefather.statueProgress = 1;
 			doNext(camp.returnToCampUseSixHours);
 		}
 
 		public function becomingGargoyle():void {
 			clearOutput();
-			if (player.hasKeyItem("Gargoyle demonic researches") >= 0 && player.hasItem(useables.SOULGEM, 1) && flags[kFLAGS.GARGOYLE_QUEST] < 6) flags[kFLAGS.GARGOYLE_QUEST] = 6;
-			if (player.hasKeyItem("Gargoyle demonic researches") >= 0 && player.hasItem(useables.SOULGEM, 1) && flags[kFLAGS.GARGOYLE_QUEST] == 6) {
+			if (player.hasKeyItem("Gargoyle demonic researches") >= 0 && player.hasItem(useables.SOULGEM, 1)) {
 				if (player.inte < 80) {
 					outputText("While you do have all the ingredient required as it states in the formula you feel you don't understand magic well enough yet to risk the ritual. Who knows, what fate awaits you, should you fail it. You resolve to come back when you have enough arcane knowledge to attempt this.");
 					doNext(SceneLib.templeofdivine.templeBasement);
-				}
-				else if (player.isPregnant() || player.isButtPregnant()) {
+				} else if (player.isPregnant() || player.isButtPregnant()) {
 					outputText("You can't become Gargoyle while pregnant. Come back after you give a birth.");
 					doNext(SceneLib.templeofdivine.templeBasement);
-				}
-				else {
+				} else {
 					outputText("You think you’ve gathered all you need and proceed to move the statue up from the basement to the cathedral center next to the altar where it ought to be. You ask Sapphire to help you carry it, to which she complies, albeit she throws you several worried looks.");
 					outputText("\n\n<b>Are you sure about this? There's no turning back past this point.</b>");
 					menu();
@@ -362,17 +319,20 @@ use namespace CoC;
 					addButton(1, "Yes", becomingGargoyleYes);
 					addButton(2, "Back", currentStateOfStatue);
 				}
-			}
-			else {
-				if (player.hasKeyItem("Gargoyle demonic researches") < 0 && player.hasItem(useables.SOULGEM, 1)) outputText("As you plan out the ritual you discover, to your utter annoyance, that the book doesn't describe at all what the magic circles look like. Without this information, you can’t risk your very soul in a spell that might fail entirely due to a wrong drawing. You will need to somehow find more information about golems and gargoyles first. ");
-				if (player.hasKeyItem("Gargoyle demonic researches") >= 0 && !player.hasItem(useables.SOULGEM, 1)) outputText("While you do have the demonic researches in hand the ritual specifically ask for a soul gem. Guess you will have to craft one.");
-				if (flags[kFLAGS.GARGOYLE_QUEST] == 4) flags[kFLAGS.GARGOYLE_QUEST]++;
+			} else {
+				if (player.hasKeyItem("Gargoyle demonic researches") < 0)
+					outputText("As you plan out the ritual you discover, to your utter annoyance, that the book doesn't describe at all what the magic circles look like. Without this information, you can’t risk your very soul in a spell that might fail entirely due to a wrong drawing. You will need to somehow find more information about golems and gargoyles first. ");
+				if (!player.hasItem(useables.SOULGEM, 1) && player.hasKeyItem("Soul Gem Research") >= 0)
+					outputText("While you do have the demonic researches in hand the ritual specifically ask for a soul gem. Guess you will have to craft one. Maybe ask an alchemist about it?");
+				else
+					outputText("You need a soul gem, but have no idea how to craft it. There should be some information... somewhere?");
 				doNext(SceneLib.templeofdivine.templeBasement);
 			}
 		}
+
 		public function becomingGargoyleNo():void {
 			clearOutput();
-			outputText("This is something that is gonna change your entire life and while you're ready to do anything to stop the demons, you're not sure this is what you want yet. You resolve to come back and do the ritual once you truly are ready for it.");
+			outputText("This is something that is gonna change your entire life and while you're ready to do anything to stop the demons, you're not sure if this is what you want yet. You resolve to come back and do the ritual once you truly are ready for it.");
 			doNext(SceneLib.templeofdivine.templeBasement);
 		}
 		public function becomingGargoyleYes():void {
@@ -403,8 +363,6 @@ use namespace CoC;
 			outputText("You reply that you will do whatever is needed to defeat the demons and if that means becoming an immortal artificial being, then so be it. Defeated by your determination, Sapphire finally complies as she chants \"<i>Shira Khrim Almisry Ohm Ak Tar Marae Kann Tharr Shul Elysro An Siryr Ahn Ekatyr Evenar Sethe Omaris!</i>\"\n\n");
 			outputText("As she practically screams the last word, your vision fade to black, and you lose consciousness.\n\n");
 			outputText("You come to several seconds later and, as you open your eyes, it seems you're sitting on a pedestal, your pedestal. It looks like your previous body turned to ashes on the altar and is no more, so it will be extremely difficult going back to being human, if such a thing is even possible. You flex your arms for a few seconds admiring your perfectly defined form, majestic wings and ");
-			//if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) outputText("marble");
-			//if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText("alabaster");
 			outputText("stone body, strong enough to shatter rocks and solid enough that the sharpest sword will leave you damageless as you’re suddenly rocked over by a terrifying hunger.\n\n");
 			if (player.hasPerk(PerkLib.GargoylePure)) {
 				outputText("Energy! You need energy to stay alive now. As you are masterless, while food used to be your main source of power, you are now a magical construct and Soulforce is what powers you now!\n\n");
@@ -413,7 +371,7 @@ use namespace CoC;
 			else {
 				outputText("Something went really wrong in the ritual. You're starting to crave fluids... any fluids and particularly cum and milk! Without an input of these, you feel you're gonna lose strength and eventually run out of energy, turning into an immobile ordinary statue! Worse yet, lust seems to creep up your mind like an uncontrollable wave. You need sex, and you need it now!\n\n");
 				outputText("<b>Gain perk: Corrupted Gargoyle - You need constant intakes of sexual fluids to stay alive.</b>\n\n");
-				player.lust = player.maxLust();
+				player.lust = player.maxOverLust();
 			}
 			if (flags[kFLAGS.HUNGER_ENABLED] == 0) flags[kFLAGS.HUNGER_ENABLED] = 0.5;
 			if (player.hasPerk(PerkLib.BimboBody)) player.removePerk(PerkLib.BimboBody);
@@ -423,6 +381,8 @@ use namespace CoC;
 			if (player.hasPerk(PerkLib.FutaForm)) player.removePerk(PerkLib.FutaForm);
 			if (player.hasPerk(PerkLib.FutaFaculties)) player.removePerk(PerkLib.FutaFaculties);
 			player.createPerk(PerkLib.TransformationImmunity, 0, 0, 0, 0);
+			if (player.hasPerk(PerkLib.RacialParagon))
+				flags[kFLAGS.APEX_SELECTED_RACE] = Races.GARGOYLE;
 			player.updateRacialAndPerkBuffs();
 			player.destroyItems(useables.SOULGEM, 1);
 			outputText("After the weird feelings subside, you pick up what is your actual pedestal and move it to your camp.\n\n");

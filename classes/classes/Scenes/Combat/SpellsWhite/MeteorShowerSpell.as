@@ -22,7 +22,7 @@ public class MeteorShowerSpell extends AbstractWhiteSpell{
 	}
 	
 	override public function calcCooldown():int {
-		return 12;
+		return spellWhiteTier3Cooldown();
 	}
 	
 	override protected function usabilityCheck():String {

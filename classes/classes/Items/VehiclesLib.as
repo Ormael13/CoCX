@@ -2,13 +2,11 @@
  * ...
  * @author Ormael
  */
-package classes.Items 
+package classes.Items
 {
-	import classes.Items.Vehicles.*;
-	import classes.PerkLib;
-	import classes.PerkType;
-	
-	public final class VehiclesLib 
+import classes.Items.Vehicles.*;
+
+public final class VehiclesLib extends ItemConstants
 	{
 		public static const DEFAULT_VALUE:Number = 6;
 		
@@ -19,7 +17,7 @@ package classes.Items
 		public const GS_MECH:GiantSlayerMech = new GiantSlayerMech();
 		public const HB_MECH:HowlingBansheeMech = new HowlingBansheeMech();
 		
-		public function VehiclesLib() 
+		public function VehiclesLib()
 		{
 		}
 	}

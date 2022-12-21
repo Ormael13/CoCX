@@ -3,9 +3,7 @@
  */
 package classes.Items
 {
-	import classes.BaseContent;
-
-	public final class MiscItemLib extends BaseContent
+public final class MiscItemLib extends ItemConstants
 	{
 		public function MiscItemLib()
 		{

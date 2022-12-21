@@ -2,6 +2,7 @@ package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
 import classes.CockTypesEnum;
+import classes.GeneticMemories.RaceMem;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
@@ -13,8 +14,34 @@ import classes.lists.Gender;
  * Tier 3: ancient dragon
  */
 public class DragonRace extends Race {
-	public function DragonRace(id:int) {
-		super("Dragon", id);
+	public static const DragonScaleColors:Array = ["red", "golden", "metallic golden", "metallic silver", "silver", "snow white", "green", "blue", "bronzed", "black", "midnight"];
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Dragon",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Dragon",
+        /*Eyes*/		"Dragon",
+        /*Face*/		"Dragon",
+        /*Gills*/		"None",
+        /*Hair*/		"Human",
+        /*Horns*/		"DragonQuad",
+        /*LowerBody*/	"Dragon",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Dragon",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Dragon",
+        /*Tongue*/		"Dragon",
+        /*Wings*/		"DraconicL",
+        /*Penis*/		"Dragon",
+        /*Vagina*/		"Human",
+		/*Perks*/		"Dragon"];
+
+    public function DragonRace(id:int) {
+		super("Dragon", id, RaceBody);
 		mutationThreshold = 6;
 	}
 	
@@ -22,9 +49,12 @@ public class DragonRace extends Race {
 		addScores()
 				.faceType(ANY(Face.DRAGON, Face.DRAGON_FANGS), +1)
 				.faceType(NONE(Face.JABBERWOCKY, Face.BUCKTOOTH), 0, -10)
+				.scaleColors(NOT("pinkish purple"), 0, -10)
+				.hairColor1(NOT("pink"), 0, -10)
 				.eyeType(Eyes.DRACONIC, +1)
 				.earType(Ears.DRAGON, +1)
 				.tailType(Tail.DRACONIC, +1)
+				.tailType(NOT(Tail.FEY_DRACONIC), 0, -10)
 				.tongueType(Tongue.DRACONIC, +1)
 				.wingType(Wings.DRACONIC_SMALL, +1)
 				.wingType(Wings.DRACONIC_LARGE, +2)
@@ -32,7 +62,9 @@ public class DragonRace extends Race {
 				.wingType(NOT(Wings.FEY_DRAGON), 0, -10)
 				.legType(LowerBody.DRAGON, +1)
 				.legType(NOT(LowerBody.FROSTWYRM), 0, -10)
+				.legType(NOT(LowerBody.FEY_DRAGON), 0, -10)
 				.armType(Arms.DRACONIC, +1)
+				.armType(NOT(Arms.FEY_DRACONIC), 0, -10)
 				.skinCoatType(Skin.DRAGON_SCALES, +1)
 				.hornType(Horns.DRACONIC_X2, +1)
 				.hornType(Horns.DRACONIC_X4_12_INCH_LONG, +2)

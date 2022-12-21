@@ -189,17 +189,9 @@ this.HP -= (this.maxHP() * 0.08);
 			
 			var damage:Number = (str + weaponAttack) * 0.40;
 			
-			if (damage <= 0 || (combatMiss() || player.hasPerk(PerkLib.Flexibility)))
+			if (damage <= 0 || player.getEvasionRoll())
 			{
 				outputText(" You barely slide out of the way.");
-			}
-			else if (player.hasPerk(PerkLib.Evade))
-			{
-				outputText(" You evade the strike.");
-			}
-			else if (player.hasPerk(PerkLib.Misdirection))
-			{
-				outputText(" Using your skills at misdirection, you avoid the strike.");
 			}
 			else
 			{
@@ -213,7 +205,7 @@ this.HP -= (this.maxHP() * 0.08);
 			var amount:Number;
 			
 			//Inflicts venom that reduces strength.
-			if (player.hasStatusEffect(StatusEffects.Stunned) || (player.spe <= 1 && player.statusEffectv1(StatusEffects.Web) >= 2))
+			if (player.hasStatusEffect(StatusEffects.Stunned) || player.spe <= 1)
 			{
 				if (player.hasStatusEffect(StatusEffects.DriderIncubusVenom))
 				{
@@ -249,9 +241,7 @@ this.HP -= (this.maxHP() * 0.08);
 				outputText("Twisting over, the arachnid demon bares his fangs, attempting to bite you!");
 				
 				//Dodge
-				if (player.hasPerk(PerkLib.Misdirection)) outputText(" You misdirect his venomous strike!");
-				else if (player.hasPerk(PerkLib.Evade)) outputText(" You evade his venomous strike!");
-				else if (combatMiss() || player.hasPerk(PerkLib.Flexibility)) outputText(" You avoid his venomous strike!");
+				if (player.getEvasionRoll()) outputText(" You avoid his venomous strike!");
 				else
 				{
 					//Hits
@@ -286,11 +276,7 @@ this.HP -= (this.maxHP() * 0.08);
 		{
 			outputText("While you’re busy with his spear, he nonchalantly snaps a kick in your direction!");
 			
-			if (player.hasPerk(PerkLib.Misdirection))
-			{
-				outputText(" You twist out of the way at the last moment thanks to your misdirection.");
-			}
-			else if (combatMiss() || player.hasPerk(PerkLib.Evade) || player.hasPerk(PerkLib.Flexibility))
+			if (player.getEvasionRoll())
 			{
 				outputText(" You twist out of the way at the last moment, evading with ease.");
 			}
@@ -317,15 +303,7 @@ this.HP -= (this.maxHP() * 0.08);
 			outputText("Twirling his weapon until it appears a blurred disc, the drider pivots, bringing the haft around at your head!");
 			
 			//Dodge
-			if (combatMiss() || player.hasPerk(PerkLib.Flexibility))
-			{
-				outputText(" You duck in the nick of time.");
-			}
-			else if (player.hasPerk(PerkLib.Misdirection))
-			{
-				outputText(" You were already changing direction. You silently thank Raphael for his training.");
-			}
-			else if (player.hasPerk(PerkLib.Evade))
+			if (player.getEvasionRoll())
 			{
 				outputText(" You lean in the direction of the swing, letting gravity pull you down and away from the stunning blow.");
 			}
@@ -367,17 +345,9 @@ this.HP -= (this.maxHP() * 0.08);
 			//Use hit/dodge messages from above.
 			var damage:Number = str + weaponAttack + 10 - rand(player.tou);
 			
-			if (damage <= 0 || (combatMiss() || player.hasPerk(PerkLib.Flexibility)))
+			if (damage <= 0 || player.getEvasionRoll())
 			{
 				outputText(" You barely slide out of the way.");
-			}
-			else if (player.hasPerk(PerkLib.Evade))
-			{
-				outputText(" You evade the strike.");
-			}
-			else if (player.hasPerk(PerkLib.Misdirection))
-			{
-				outputText(" Using your skills at misdirection, you avoid the strike.");
 			}
 			else
 			{
@@ -402,10 +372,10 @@ this.HP -= (this.maxHP() * 0.08);
 				outputText(" ache to be touched");
 			}
 			
-			player.dynStats("lus", (player.lib / 10 + player.cor / 10) + 15);
+			player.takeLustDamage((player.lib / 10 + player.cor / 10) + 15, true);
 			
 			outputText(". Your body rebels against you under the unholy influence");
-			if (player.lust < player.maxLust()) outputText(", but the effect is fleeting, thankfully. You try to ignore the residual tingles. You can’t afford to lose this close to your goal!");
+			if (player.lust < player.maxOverLust()) outputText(", but the effect is fleeting, thankfully. You try to ignore the residual tingles. You can’t afford to lose this close to your goal!");
 			else outputText(".");
 		}
 		
@@ -433,7 +403,7 @@ this.HP -= (this.maxHP() * 0.08);
 			else
 			{
 				outputText(" The intensity overwhelms your ability to act, arousing and stunning you.");
-				player.dynStats("lus", (player.lib / 15 + player.cor / 15) + 15);
+				player.takeLustDamage((player.lib / 15 + player.cor / 15) + 15, true);
 				player.createStatusEffect(StatusEffects.Stunned, 0, 0, 0, 0);
 			}
 		}
@@ -456,7 +426,7 @@ this.HP -= (this.maxHP() * 0.08);
 			{
 				//Fail
 				outputText(" You concentrate to try and throw it off, but he overwhelms your mental defenses. Clouds of swirling pink filled with unsubtle erotic silhouettes fill your vision, effectively blinding you!");
-				player.dynStats("lus", 25);
+				player.takeLustDamage(25, true);
 				player.createStatusEffect(StatusEffects.PurpleHaze, 2 + rand(2), 0, 0, 0);
 				if (!player.hasPerk(PerkLib.BlindImmunity)) player.createStatusEffect(StatusEffects.Blind, player.statusEffectv1(StatusEffects.PurpleHaze), 0, 0, 0);
 			}
@@ -520,7 +490,7 @@ this.HP -= (this.maxHP() * 0.08);
 			outputText("\n\nShe dances and spins to the side, cooing, <i>\"Don’t you want me anymore, baby? Look how ready I am\"</i> Her nipples are taut and stiff, and the junction between her thighs absolutely drenched. Neither you nor your foe can keep from sparing lusty glances her way.");
 			
 			lust += 7;
-			player.dynStats("lus", 7);
+			player.takeLustDamage(7, true);
 		}
 		
 		public function freeGoblin():void

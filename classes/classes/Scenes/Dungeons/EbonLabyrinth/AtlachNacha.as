@@ -9,7 +9,6 @@ import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
-import classes.StatusEffects.Combat.WebDebuff;
 
 use namespace CoC;
 
@@ -17,38 +16,20 @@ use namespace CoC;
 	{
 		private function atlachNachaWeb():void {
 			outputText("The nightmarish spider suddenly shoots webs at you");
-			//Blind dodge change
-			if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
-				outputText(" but " + capitalA + short + " misses completely due to their blindness.");
-			}
 			//Determine if dodged!
-			else if (player.spe - spe > 0 && int(Math.random() * (((player.spe - spe) / 4) + 80)) > 80) {
+			if (player.getEvasionRoll()) {
 				outputText(". You dodge away, avoiding the sticky strands!");
-			}
-			//Determine if evaded
-			else if (player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
-				outputText(". You evade, avoiding the sticky strands!");
-			}
-			//("Misdirection"
-			else if (player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
-				outputText(". Your misleading movements allow you to easily sidestep the sticky strands!");
-			}
-			//Determine if cat'ed
-			else if (player.hasPerk(PerkLib.Flexibility) && rand(100) < 6) {
-				outputText(". You throw yourself out of the way with cat-like agility at the last moment, avoiding " + mf("his", "her") + " attack.\n");
 			}
 			//Got hit
 			else {
-				var web:WebDebuff = player.statusEffectByType(StatusEffects.Web) as WebDebuff;
-				if (web == null) {
-					outputText(" causing you to become gradually entangled.\n");
-					web = new WebDebuff();
-					player.addStatusEffect(web);
+				if (player.buff("Web").isPresent()) {
+					outputText(" causing you to become more entangled. At this rate you will become unable to move.\n");
+					player.buff("Web").addStats( {"spe":-25} ).withText("Web").combatPermanent();
 				}
 				else {
-					outputText(" causing you to become more entangled. At this rate you will become unable to move.\n");
+					outputText(" causing you to become gradually entangled.\n");
+					player.buff("Web").addStats( {"spe":-25} ).withText("Web").combatPermanent();
 				}
-				web.increase();
 			}
 		}
 		
@@ -63,7 +44,7 @@ use namespace CoC;
 			else outputText("rushes towards you face first and you back away feeling for two new pinpricks that start heating");
 			outputText(" up. Were you poisoned just now?! This might be a very bad thing.\n\n");
 			player.takePhysDamage(this.str, true);
-			player.dynStats("lus", 60);
+			player.takeLustDamage(60, true);
 			if (!player.hasPerk(PerkLib.Insanity) || !player.hasStatusEffect(StatusEffects.AlterBindScroll3)) {
 				player.buff("Poison").addStats({"tou":-20, "int":-20, "wis":-20}).withText("Poisoned!").forHours(24);
 				showStatDown( 'tou' );
@@ -139,8 +120,8 @@ use namespace CoC;
             this.bonusHP = mod == 0 ? 0 : 2000*(mod-1);
             this.bonusLust = 415 + 75*mod;
             this.level = 60 + 5*mod; //starts from 65 due to EL levelMod calculations;
-            this.gems = mod > 50 ? 0 : Math.floor((1500 + rand(300)) * Math.exp(0.3*mod));
-            this.additionalXP = mod > 50 ? 0 : Math.floor(6500 * Math.exp(0.3*mod));
+            this.gems = mod > 20 ? 0 : Math.floor((1500 + rand(300)) * Math.exp(0.3*mod));
+            this.additionalXP = mod > 20 ? 0 : Math.floor(6500 * Math.exp(0.3*mod));
             
 			this.a = " ";
 			this.short = "Atlach Nacha";

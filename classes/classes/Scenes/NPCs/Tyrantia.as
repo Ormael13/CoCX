@@ -2,7 +2,7 @@
  * ...
  * @author Canadian Snas
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -12,10 +12,9 @@ import classes.BodyParts.Horns;
 import classes.BodyParts.LowerBody;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
-import classes.StatusEffects.Combat.BasiliskSlowDebuff;
 import classes.internals.*;
 import classes.Monster;
-	
+
 public class Tyrantia extends Monster
 	{
 		private function lustFromHits():Number {
@@ -23,11 +22,6 @@ public class Tyrantia extends Monster
 		}
 		private function lustzerkerBoost():Number {
 			return (150 + (30 * player.newGamePlusMod()));
-		}
-		
-		public static function tyraniaSpeed(player:Player,amount:Number = 0):void {
-			var bse:BasiliskSlowDebuff = player.createOrFindStatusEffect(StatusEffects.BasiliskSlow) as BasiliskSlowDebuff;
-			bse.applyEffect(amount);
 		}
 		
 		private function tyrantiaLustAura():void {
@@ -48,7 +42,7 @@ public class Tyrantia extends Monster
 			player.takePhysDamage(dmg0, true);
 			player.takePhysDamage(dmg0, true);
 			player.takePhysDamage(dmg0, true);
-			player.dynStats("lus", lust0);
+			player.takeLustDamage(lust0, true);
 		}
 		
 		private function tyrantiaWebbing():void {
@@ -61,7 +55,7 @@ public class Tyrantia extends Monster
 				dmg1 = player.takeAcidDamage(dmg1, true);
 				if (player.hasStatusEffect(StatusEffects.AcidDoT)) player.addStatusValue(StatusEffects.AcidDoT, 1, 1);
 				else player.createStatusEffect(StatusEffects.AcidDoT, 5, 10, 0, 0);
-				tyraniaSpeed(player, 25);
+				player.buff("Goop Web").addStats( {"spe":-25} ).withText("Goop Web").combatPermanent();
 			}
 		}
 		
@@ -96,7 +90,7 @@ public class Tyrantia extends Monster
 				dmg2 = Math.round(dmg2);
 				player.takePhysDamage(dmg2, true);
 				if (crit) outputText("<b> Critical!</b>");
-				player.dynStats("lus", lustFromHits());
+				player.takeLustDamage(lustFromHits(), true);
 			}
 		}
 		
@@ -105,26 +99,30 @@ public class Tyrantia extends Monster
 			player.createStatusEffect(StatusEffects.Pounced, 2, 0, 0, 0);
 		}
 		public function tyrantiaPouncedStruggle():void {
-			clearOutput();
-			player.removeStatusEffect(StatusEffects.Pounced);
 			if ((rand(player.str) > this.str / 2) || player.hasPerk(PerkLib.FluidBody)) tyrantiaPounceSuccess();
 			else tyrantiaPounceFail();
 			SceneLib.combat.enemyAIImpl();
 		}
 		public function tyrantiaPouncedWait():void {
-			clearOutput();
-			player.removeStatusEffect(StatusEffects.Pounced);
 			tyrantiaPounceFail();
 			SceneLib.combat.enemyAIImpl();
 		}
 		private function tyrantiaPounceSuccess():void {
+			player.removeStatusEffect(StatusEffects.Pounced);
+			clearOutput();
 			outputText("You notice a single weak point in her armor, the single metal flap on the front of her spider half. You surge up, jamming your fist as hard as you can into it. The metal and leather slide aside...and your fist enters a surprisingly warm, wet crevasse. The drider on top of you wails in surprise...and something else. Well, if you didn’t know what you’d entered before, you do now. She bucks, your fist exiting with a moist *pop*, and the giantess backs up, her tan cheeks bright red.\n\n");
 			outputText("\"<i>Fighting Dirty like that?!</i>\" She hisses. \"<i>I’ll show you.</i>\"\n");
 			var lustDang:Number = 15 + rand(15);
-			dynStats("lus", lustDang);
+			player.takeLustDamage(lustDang, true);
+			if (player.armor == armors.ELFDRES && player.isElf()) lustDang *= 2;
+			if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDang *= 2;
 			teased(lustDang);
 		}
 		private function tyrantiaPounceFail():void {
+			player.addStatusValue(StatusEffects.Pounced, 1, -1);
+			if (player.getStatusValue(StatusEffects.Pounced, 1) == 0)
+				player.removeStatusEffect(StatusEffects.Pounced);
+			clearOutput();
 			outputText("Unable to throw the giant Drider off of you, she sinks two of her bladed limbs into your body, seemingly at random. You buck, the cold steel sending rippling pain through you, to no effect. ");
 			var dmg3:Number = 0;
 			dmg3 += this.str * 4;
@@ -145,8 +143,8 @@ public class Tyrantia extends Monster
 		
 		private function tyrantiaFangs():void {
 			outputText("The massive Drider charges at you. You sidestep her Dick, but that proved to be a feint. She rams you with her shoulder, then grabs you in her furry arms. You squirm, but her fangs sink into your exposed neck, leaving you both flushed and in pain. Blood squirts from your neck, and as you push, getting out from her grip, you can feel your muscles slackening.\n\n");
-			player.dynStats("lus", (lustFromHits() * 4));
-			tyraniaSpeed(player, 20);
+			player.takeLustDamage((lustFromHits() * 4), true);
+			player.buff("Goop Web").addStats( {"spe":-20} ).withText("Goop Web").combatPermanent();
 		}
 		
 		protected override function outputDefaultTeaseReaction(lustDelta:Number):void {
@@ -166,7 +164,7 @@ public class Tyrantia extends Monster
 				}
 			}
 			if (TyrantiaFollower.TyrantiaFollowerStage < 2 || (player.hasStatusEffect(StatusEffects.SparingTyrantia) && player.statusEffectv1(StatusEffects.SparingTyrantia) > 0)) tyrantiaLustAura();
-			//if () 
+			//if ()
 			//else {
 				var choice0:Number = rand(6);
 				switch (choice0) {
@@ -197,8 +195,8 @@ public class Tyrantia extends Monster
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if (player.hasStatusEffect(StatusEffects.SparingTyrantia)) SceneLib.tyrania.TyrantiaLostSparring(hpVictory);
-			else SceneLib.tyrania.postFightOptions(hpVictory);
+			if (player.hasStatusEffect(StatusEffects.SparingTyrantia)) SceneLib.tyrantia.TyrantiaLostSparring(hpVictory);
+			else SceneLib.tyrantia.postFightOptions(hpVictory);
 		}
 		
 		override public function get long():String
@@ -212,7 +210,7 @@ public class Tyrantia extends Monster
 			return str;
 		}
 		
-		public function Tyrantia() 
+		public function Tyrantia()
 		{
 			if (flags[kFLAGS.TYRANTIA_LVL_UP] < 2) {
 				initStrTouSpeInte(295, 310, 190, 150);
@@ -260,14 +258,13 @@ public class Tyrantia extends Monster
 			this.tallness = 14*12;
 			this.hips.type = Hips.RATING_CURVY + 3;
 			this.butt.type = Butt.RATING_JIGGLY;
-			this.skinTone = "brown";
+			this.bodyColor = "brown";
 			this.hairColor = "black";
 			this.hairLength = 24;
 			this.weaponName = "Dick";
 			this.weaponVerb="piercing stab";
 			this.armorName = "carapace";
 			this.lustVuln = .2;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.gems = rand(10) + 40;
 			this.drop = new WeightedDrop().add(consumables.B_GOSSR,1)
 					.add(consumables.UNICORN,1)

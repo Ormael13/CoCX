@@ -61,7 +61,7 @@ use namespace CoC;
 				return;
 			}
 			//Ignis intro
-			if (flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && flags[kFLAGS.IGNIS_ARENA_SEER] < 1 && rand(5) == 0) {
+			if (flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && flags[kFLAGS.IGNIS_ARENA_SEER] < 1 && rand(5) == 0 && !isNightTime) {
 				clearOutput();
 				outputText("As you walk through blight ridge, you come across a small valley. An unremarkable locale, except for the fact that the moment you step foot in the valley, demons emerge from the ridges surrounding and swarming you from their vantage points.\n\n");
 				outputText("\"<b>It’s an ambush!</b>\"\n\n");
@@ -75,20 +75,20 @@ use namespace CoC;
 				return;
 			}
 			//Siegweird
-			if (player.statusEffectv1(StatusEffects.AlvinaTraining2) == 3 && rand(4) == 0) {
+			if (player.statusEffectv1(StatusEffects.AlvinaTraining2) == 3 && rand(4) == 0 && !isNightTime) {
 				if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] < 3) SceneLib.siegweirdFollower.siegweirdFirstEncounter();
 				else SceneLib.siegweirdFollower.siegweirdRepeatEncounterPostFight();
 				return;
 			}
-			if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] < 2 && rand(4) == 0) {
+			if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] < 2 && rand(4) == 0 && !isNightTime) {
 				SceneLib.siegweirdFollower.siegweirdFirstEncounter();
 				return;
 			}
-			if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] == 2.5 && rand(4) == 0) {
+			if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] == 2.5 && rand(4) == 0 && !isNightTime) {
 				SceneLib.siegweirdFollower.siegweirdRepeatEncounterPostFight();
 				return;
 			}
-			if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] == 2 && rand(2) == 0) {
+			if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] == 2 && rand(2) == 0 && !isNightTime) {
 				player.createStatusEffect(StatusEffects.SiegweirdImp,0,0,0,0);
 				startCombat(new ImpLord());
 				return;

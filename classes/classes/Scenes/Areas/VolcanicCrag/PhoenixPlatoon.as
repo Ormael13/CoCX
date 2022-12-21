@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.Areas.VolcanicCrag 
+package classes.Scenes.Areas.VolcanicCrag
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -44,7 +44,7 @@ import classes.internals.WeightedDrop;
 		public function phoenixPlatoonLustbang():void {
 			outputText("\"<i>LUSTBANGS OUT!</i>\" one of the rear-most phoenixes shouts, causing all the other warriors to duck down behind their shields.  Oh, shit!  Few large glass spheres rolls out from the shield wall, and immediately explodes in a great pink cloud.  You cough and wave your arms, but by the time the cloud has dissipated, you feel lightheaded and lusty, barely able to resist the urge to throw yourself at the phoenixes and beg for their cocks and cunts.");
 			//(Effect: Large lust increase)
-			player.dynStats("lus", Math.round(120+(player.lib*1.4)));
+			player.takeLustDamage(Math.round(120+(player.lib*1.4)), true);
 		}
 		
 		override protected function performCombatAction():void
@@ -78,7 +78,7 @@ import classes.internals.WeightedDrop;
 			}
 		}
 		
-		public function PhoenixPlatoon() 
+		public function PhoenixPlatoon()
 		{
 			this.a = "the ";
 			this.short = "phoenix platoon";
@@ -100,7 +100,7 @@ import classes.internals.WeightedDrop;
 			this.hips.type = Hips.RATING_AMPLE + 2;
 			this.butt.type = Butt.RATING_LARGE;
 			this.lowerBody = LowerBody.SALAMANDER;
-			this.skinTone = "red";
+			this.bodyColor = "red";
 			this.hairColor = "black";
 			this.hairLength = 15;
 			initStrTouSpeInte(283, 234, 255, 140);
@@ -115,7 +115,6 @@ import classes.internals.WeightedDrop;
 			this.bonusLust = 369;
 			this.lust = 20;
 			this.lustVuln = .15;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 74;
 			this.gems = rand(35)+200;
 			this.additionalXP = 250;

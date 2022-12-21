@@ -6,7 +6,6 @@ package classes.Scenes.NPCs
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-    import classes.display.SpriteDb;
 	
 	public class NeisaFollower extends NPCAwareContent implements TimeAwareInterface
 	{
@@ -31,9 +30,9 @@ public function timeChange():Boolean
 	return false;
 }
 public function timeChangeLarge():Boolean {
-	if (model.time.hours == 6 && flags[kFLAGS.NEISA_FOLLOWER] >= 14 && !prison.inPrison) {
+	if (model.time.hours == 6 && model.time.minutes == 0 && flags[kFLAGS.NEISA_FOLLOWER] >= 14) {
 		//spriteSelect(SpriteDb.s_isabella);
-		neisaMorningPaycheckCall();
+		neisaMorningPaycheckCall1();
 		return true;
 	}
 	return false;
@@ -46,9 +45,16 @@ public function neisaAffection(changes:Number = 0):Number
 	return flags[kFLAGS.NEISA_AFFECTION];
 }
 //Morning Paycheck Call
+public function neisaMorningPaycheckCall2():void {
+	clearOutput();
+	neisaMorningPaycheckCall();
+}
+public function neisaMorningPaycheckCall1():void {
+	outputText("\n");
+	neisaMorningPaycheckCall();
+}
 public function neisaMorningPaycheckCall():void {
 	//spriteSelect(SpriteDb.s_isabella);
-	outputText("\n");
 	if (flags[kFLAGS.NEISA_FOLLOWER] == 17) {
 		if (flags[kFLAGS.SPIRIT_STONES] > 9) {
 			outputText("You pay the spirit stone you owe Neisa as she comes over to collect.\n\n");
@@ -105,6 +111,7 @@ public function neisaMorningPaycheckCall():void {
 			outputText("\"<i>Heh, I don't mind if you are paying late, mistakes happen. Just make sure you got my pay for tomorrow as well as the missing spirit stones of today.</i>\"\n\n");
 		}
 	}
+	eachMinuteCount(5);
 	doNext(playerMenu);
 }
 
@@ -126,6 +133,7 @@ public function neisaCampMenu():void {
 		else addButtonDisabled(5, "Team", "You already have other henchman accompany you. Ask him/her to stay at camp before you talk with Neisa about accompaning you.");
 	}
 	else addButtonDisabled(5, "Team", "You need to have at least Basic Leadership to form a team.");
+	if (flags[kFLAGS.NEISA_FOLLOWER] >= 14) addButton(13, "Paycheck", neisaMorningPaycheckCall2).hint("Pay Neisa due payment (make sure to not lack spirit stones for it)");
 	addButton(14, "Back", camp.campFollowers);
 }
 
@@ -133,7 +141,7 @@ public function neisaAppearance():void {
 	clearOutput();
 	outputText("Neisa is a seven feet tall human or at least outwardly looks like one. Her black hair is short and straight and her green eyes always watchful. She could pass for a beautiful woman back home although in Mareth pretty faces are far from uncommon thanks to the whole demonic corruption problem turning every person into sexy temptresses or manly perfection.\n\n");
 	outputText("Neisa’s arms are well muscled despite their womanly shape to use a shield and any melee weapon, you suspect she does a rigorous training between jobs. Her legs are those of an adventurer who is used to walking for a long periods of time. She got a well shaped waistline with a girly ass that fits just fine in her armor.\n\n");
-	outputText("Similar to most of the impressive gravity defying sizes visible on most women on mareth she sports an I cup set of breasts.\n\n");
+	outputText("Similar to most of the impressive gravity defying sizes visible on most women on mareth she sports an I-cup set of breasts.\n\n");
 	outputText("You have yet to see what she hides under her semi skimpy armor but you suspect she got a pussy and no cock, making her a true female.");
 	menu();
 	addButton(14, "Back", neisaCampMenu);

@@ -125,12 +125,8 @@ public class MaraFruit extends Consumable{
 					temp++;
 				}
 				temp = choices[rand(choices.length)];
-				outputText("\n\nYour " + num2Text2(temp+1) + " penis itches, and you idly scratch at it.  As you do, it begins to grow longer and longer, all the way to the ground before you realize something is wrong.  You pull open your [armor] and look down, discovering your " + player.cockDescript(temp) + " has become a tentacle!  As you watch, it shortens back up; it's colored green except for a purplish head, and evidence seems to suggest you can make it stretch out at will.  <b>You now have a");
-				if(player.tentacleCocks() > 0) outputText("nother");
-				outputText(" tentacle-cock!</b>");
-				player.cocks[temp].cockType = CockTypesEnum.TENTACLE;
-				player.cocks[temp].knotMultiplier = 1.3;
-				dynStats("lus", 10);
+				CoC.instance.transformations.CockTentacle(temp).applyEffect();
+				dynStats("lus", 10, "scale", false);
 				player.addCurse("sen", 3,1);
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.breastRows.length > 0) {
@@ -201,21 +197,14 @@ public class MaraFruit extends Consumable{
 			CoC.instance.transformations.SkinPlain.applyEffect();
 			changes++;
 		}
-		if (player.hasPlainSkinOnly() && player.skinTone != "leaf green" && player.skinTone != "lime green" && player.skinTone != "turquoise" && player.skinTone != "light green" && changes < changeLimit && rand(2) == 0) {
-			if (rand(10) == 0) player.skinTone = "turquoise";
-			else {
-				if (rand(7) == 0) player.skinTone = "lime green";
-				else {
-					if (rand(4) == 0) player.skinTone = "leaf green";
-					else player.skinTone = "light green";
-				}
-			}
+		if (player.hasPlainSkinOnly() && !InCollection(player.skinColor, "leaf green", "lime green", "turquoise", "light green") && changes < changeLimit && rand(2) == 0) {
+			player.skinColor = randomChoice("turquoise", "lime green", "leaf green", "light green");
 			changes++;
-			outputText("\n\nWhoah, that was weird.  You just hallucinated that your skin turned " + player.skinTone + ".  No way!  It's staying, it really changed color!");
+			outputText("\n\nWhoah, that was weird.  You just hallucinated that your skin turned " + player.skinColor + ".  No way!  It's staying, it really changed color!");
 		}
 		//insert here turning into bark skin so it req. at least 2x use of mara fruit a także dodać wymaganie posiadanie już plant arms i legs
 		//Legs
-		if (player.skin.hasPlainSkinOnly() && (player.skinTone == "leaf green" || player.skinTone == "lime green" || player.skinTone == "turquoise" || player.skinTone == "light green") && changes < changeLimit && rand(3) == 0) {
+		if (player.skin.hasPlainSkinOnly() && (player.skinColor == "leaf green" || player.skinColor == "lime green" || player.skinColor == "turquoise" || player.skinColor == "light green") && changes < changeLimit && rand(3) == 0) {
 			//Males/genderless get clawed feet
 			if (player.gender <= 1 || (player.gender == 3 && player.mf("m", "f") == "m")) {
 				if (player.lowerBody != LowerBody.PLANT_ROOT_CLAWS) {
@@ -279,7 +268,7 @@ public class MaraFruit extends Consumable{
 		if (player.hairColor != "green" && !player.isGargoyle() && rand(3) == 0 && changes < changeLimit)
 		{
 			outputText("\n\nAt first it looks like nothing changed but then you realize all the hair on your body has shifted to a verdant green color.  <b>You now have green hair.</b>");
-			player.hairColorOnly = "green";
+			player.hairColor = "green";
 		}
 		//Horns
 		if ((player.hairType == Hair.LEAF || player.hairType == Hair.GRASS) && changes < changeLimit && rand(2) == 0) {
@@ -296,7 +285,7 @@ public class MaraFruit extends Consumable{
 			changes++;
 		}
 		//
-		if (player.isRace(Races.PLANT, 4) && player.wings.type == Wings.PLANT && player.hasStatusEffect(StatusEffects.AlrauneFlower) && changes < changeLimit && rand(2) == 0) {
+		if (player.isRace(Races.PLANT, 4, false) && player.wings.type == Wings.PLANT && player.hasStatusEffect(StatusEffects.AlrauneFlower) && changes < changeLimit && rand(2) == 0) {
 			outputText("\n\nYour close your eyes to appreciate the feeling of the sun on your vegetal skin, losing yourself in the sensation. The feeling is short lived as your feet suddenly tingle with a weird feeling. Opening your eyes you look down in panic as your feet roots themselves in the ground and start to merge together up to your pussy into a trunk which turn a shade of green darker than the rest of your body. Your tentacle wings have also moved down to your feet tips but the weirdest thing happens when everything below your waist grows bloated, easily becoming twice as large as you are. ");
 			outputText("Your legs almost look... like a flower about to bloom? Bloom it does indeed as everything below your waist explodes in a orchid of enormous size with petals large enough to engulf you entirely. Worried about being rooted in place you try and move and to your surprise you pretty much discover you can actually walk around on the vine like tentacle cocks at the base of your body. It feels weird at first but you think you will get used to walking on pseudo vines.");
 			if (player.tailType != 0) {
@@ -308,7 +297,7 @@ public class MaraFruit extends Consumable{
 			CoC.instance.transformations.TailNone.applyEffect(false);
 			CoC.instance.transformations.WingsNone.applyEffect(false);
 			CoC.instance.transformations.LowerBodyPlantFlower.applyEffect(false);
-			player.coatColor = "pink";
+			player.featherColor = "pink";
 			changes++;
 		}
 		player.refillHunger(10);

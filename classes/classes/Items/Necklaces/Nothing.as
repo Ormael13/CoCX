@@ -1,4 +1,4 @@
-package classes.Items.Necklaces 
+package classes.Items.Necklaces
 {
 	import classes.Items.Necklace;
 	
@@ -9,8 +9,8 @@ package classes.Items.Necklaces
 			super("noneckjewel", "noneckjewel", "nothing", "nothing", 0, 0, 0, "no jewelry", "necklace");
 		}
 		
-		override public function playerRemove():Necklace {
-			return null; //There is nothing!
+		override public function get isNothing():Boolean {
+			return true;
 		}
 	}
 }

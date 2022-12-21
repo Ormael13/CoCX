@@ -9,9 +9,33 @@ import classes.internals.race.RaceUtils;
 
 public class MaleMindbreakerRace extends Race{
 	public static const MindbreakerEyeColors:/*String*/Array = ["yellow", "orange", "light green"];
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Human",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Human",
+        /*Eyes*/		"Human",
+        /*Face*/		"Human",
+        /*Gills*/		"Human",
+        /*Hair*/		"Human",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Human",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Human",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Human"];
 	
 	public function MaleMindbreakerRace(id:int) {
-		super("Male Mind Breaker", id);
+		super("Male Mind Breaker", id, []);//RaceBody);
 		chimeraTier = 0;
 		grandChimeraTier = 0;
 	}
@@ -31,14 +55,29 @@ public class MaleMindbreakerRace extends Race{
 				.noWings(+3)
 				.hasCockOfType(CockTypesEnum.MINDBREAKER, +1)
 				.noVagina(0, -1000)
-				.hairTypeAndColor(Hair.MINDBREAKERMALE, "purple", +1)
+				.hairTypeAndColor1(Hair.MINDBREAKERMALE, "purple", +1)
 				.skinPlainOnly(0, -1)
-				.skinBaseColor("eldritch purple", +1)
+				.skinColor1("eldritch purple", +1)
 				.skinBaseAdj("slippery", +1)
 				.hasPerk(PerkLib.Insanity, +1)
 				.givePerkV1(PerkLib.MindbreakerBrain1toX);
 		
-		buildTier(20,"mindbreaker")
+		buildTier(15,"Half Mindbreaker")
+				.requireEyeType(Eyes.MINDBREAKERMALE)
+				.buffs({
+					"str.mult": +0.30,
+					"spe.mult": -0.20,
+					"tou.mult": +0.50,
+					"int.mult": +2.00,
+					"lib.mult": +2.00,
+					"wis.mult": -0.10,
+					"sens": +20
+				})
+				.end();
+
+		buildTier(20,"Mindbreaker")
+				.requirePerk(PerkLib.MindbreakerBrain1toX)
+				.requirePerk(PerkLib.Insanity)
 				.buffs({
 					"str.mult": +0.70,
 					"spe.mult": -0.40,

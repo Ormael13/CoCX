@@ -79,16 +79,18 @@ public class MinotaurKing extends Monster
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if (_orgasms == 0 && !hpVictory && !player.hasStatusEffect(StatusEffects.MinoKing)) {
-				lustDump();
-                SceneLib.combat.combatMenu(false);
-				return;
-			}
-			if (hpVictory && !player.hasStatusEffect(StatusEffects.MinoKing)) {
-				hpRestore();
-				if (flags[kFLAGS.WILL_O_THE_WISP] == 0) flags[kFLAGS.WILL_O_THE_WISP] = 1;
-                SceneLib.combat.combatMenu(false);
-				return;
+			if (!(flags[kFLAGS.GAME_DIFFICULTY] == 0 && (player.statusEffectv1(StatusEffects.MinotaurKingMusk) < 4 || (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 && player.statusEffectv1(StatusEffects.MinotaurKingMusk) < 2)))) {
+				if (_orgasms == 0 && !hpVictory && !player.hasStatusEffect(StatusEffects.MinoKing)) {
+					lustDump();
+					doNext(SceneLib.combat.combatMenu, false);
+					return;
+				}
+				if (hpVictory && !player.hasStatusEffect(StatusEffects.MinoKing)) {
+					hpRestore();
+					if (flags[kFLAGS.WILL_O_THE_WISP] == 0) flags[kFLAGS.WILL_O_THE_WISP] = 1;
+					doNext(SceneLib.combat.combatMenu, false);
+					return;
+				}
 			}
             player.removeStatusEffect(StatusEffects.MinoKing);
 			SceneLib.d3.minotaurKing.theKingIsDeadLongLiveTheKing();
@@ -134,17 +136,9 @@ public class MinotaurKing extends Monster
 		{
 			outputText("Feinting with his axe, the Minotaur King flings a powerful backhand in your direction.");
 			var damage:Number = (str + weaponAttack) - rand(player.tou);
-			if (damage <= 0 || combatMiss() || player.hasPerk(PerkLib.Flexibility))
+			if (damage <= 0 || player.getEvasionRoll())
 			{
 				outputText(" Luckily, you dodge aside.");
-			}
-			else if (player.hasPerk(PerkLib.Evade))
-			{
-				outputText(" Luckily, you evade.");
-			}
-			else if (player.hasPerk(PerkLib.Misdirection))
-			{
-				outputText(" Luckily, you misdirect his attack.");
 			}
 			else
 			{
@@ -157,12 +151,8 @@ public class MinotaurKing extends Monster
 		{
 			outputText("<i>\"Settle down,\"</i> the brute growls, moments before attempting to slam his forehead into your own.");
 			var damage:Number = ((str + weaponAttack) / 2) - rand(player.tou);
-			if (damage <= 0 || combatMiss() || player.hasPerk(PerkLib.Flexibility))
+			if (damage <= 0 || player.getEvasionRoll())
 				outputText(" Luckily, you dodge aside.");
-			else if (player.hasPerk(PerkLib.Evade))
-				outputText(" Luckily, you evade.");
-			else if (player.hasPerk(PerkLib.Misdirection))
-				outputText(" Luckily, you misdirect his attack.");
 			else {
 				_lastRoundStun = true;
 				damage = player.takePhysDamage(damage);
@@ -188,14 +178,14 @@ public class MinotaurKing extends Monster
 				if (player.hasPerk(PerkLib.MinotaurCumAddict)) outputText(" Delicious.");
 				else outputText(" Why did you do that? And why did it feel so good.");
 			}
-			player.dynStats("lus", 15 + player.lib/20);
+			player.takeLustDamage(15 + player.lib/20, true);
 		}
 
 		private function battleaxe():void
 		{
 			outputText("The Minotaur King carries his axe as if it weighed no more than a feather, brandishing it back and forth with such casual movements that you barely register his swing");
 			var damage:Number = (str + weaponAttack) - rand(player.tou);
-			if (damage <= 0 || combatMiss() || player.hasPerk(PerkLib.Evade) || player.hasPerk(PerkLib.Flexibility) || player.hasPerk(PerkLib.Misdirection))
+			if (damage <= 0 || player.getEvasionRoll())
 				outputText(" in time to avoid it.");
 			else {
 				damage = player.takePhysDamage(damage);
@@ -212,6 +202,7 @@ public class MinotaurKing extends Monster
 			outputText("Staggering back, the King wastes no time in appropriating his willing slave, lifting her up to his face as easily as one might heft a stein of fresh-brewed beer. One of her huge tits easily fits against the oversized minotaur’s lips, and you see him noisily gulping down a quick, milky pick-me-up. By the time he finishes, his wounds are closing, but his cock is twitching and leaking pre-cum like water from a sieve.");
 			outputText("\n\n<b>He looks like he’d be easier to arouse. Whatever’s in her milk may restore his wounds, but leave him vulnerable to his animalistic needs.</b>");
 			outputText("\n\n<i>Dealing with the King would be much easier if someone distracted his slut.</i>");
+			if (flags[kFLAGS.GAME_DIFFICULTY] == 0) player.addStatusValue(StatusEffects.MinotaurKingMusk, 1, 1);
 		}
 		
 		// copypasta I dun even give a fuck ¯\_(ツ)_/¯
@@ -223,20 +214,20 @@ public class MinotaurKing extends Monster
 				outputText("slapping into your face before you can react!  You wipe the slick snot-like stuff out of your eyes and nose, ");
 				if(player.lust > 75) {
 					outputText("swallowing it into your mouth without thinking.  ");
-					player.dynStats("lus", 15 + player.lib/10);
+					player.takeLustDamage(15 + player.lib/10, true);
 				}
 				else {
 					outputText("feeling your heart beat with desire as your tongue licks the residue from your lips.  ");
-					player.dynStats("lus", 7.5 + player.lib/20);
+					player.takeLustDamage(7.5 + player.lib/20, true);
 				}
 			}
 			else outputText("right past your head.  ");
 			outputText("The animalistic scent of it seems to get inside you, the musky aroma burning a path of liquid heat to your groin.");
-			player.dynStats("lus", 15 + player.lib/20);
+			player.takeLustDamage(15 + player.lib/20, true);
 			if(player.hasPerk(PerkLib.MinotaurCumAddict) || flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 2) {
 				if(rand(2) == 0) outputText("\n<b>You shiver with need, wanting nothing more than to bury your face under that loincloth and slurp out every drop of goopey goodness.</b>");
 				else outputText("\n<b>You groan and lick your lips over and over, craving the taste of him in your mouth.</b>");
-				player.dynStats("lus", 10+rand(10));
+				player.takeLustDamage(10+rand(10), true);
 			}
 		}
 
@@ -250,6 +241,7 @@ public class MinotaurKing extends Monster
 			if (player.hasPerk(PerkLib.MinotaurCumAddict)) outputText(" You’re jealous. All that cum must feel exquisite!");
 			outputText("\n\nWhatever spell this forceful mating cast, it breaks the moment Excellia slides off her lord’s still-hard phallus. You close your mouth and ready your grip on your [weapon] as the Minotaur King straightens, breathing heavily. He looks a little woozy for the effort, but still good to fight. Maybe if you can bring him back to the peak, he’ll fall for good?");
 			lust = 0;
+			if (flags[kFLAGS.GAME_DIFFICULTY] == 0) player.addStatusValue(StatusEffects.MinotaurKingMusk, 1, 1);
 		}
 
 		private function cowslutTeaseCocks():void
@@ -268,7 +260,7 @@ public class MinotaurKing extends Monster
                 outputText("Excellia rises up onto her knees and arches her back to display her monumental mammaries, letting their chocolatey nipples jut accusingly in your direction. Her fingers travel to them, squeezing out thin flows of milk that she gathers and smears across each orb in turn, rubbing it into her skin like high-grade massage oil. When she’s finished, her tits are shining, and you’re a little hotter under the collar.");
                 break;
             }
-            player.dynStats("lus", 10+rand(player.lib/20));
+            player.takeLustDamage(10+rand(player.lib/20), true);
 		}
 
 		override protected function handleStun():Boolean

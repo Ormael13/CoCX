@@ -61,13 +61,13 @@ import classes.display.SpriteDb;
 				outputText("The smallest of the beastmen, the minitaur, moans and begs, \"<i>Please Mom, can we please fuck you?  I... I need it so bad.</i>\"  He raises the edge of his loincloth to show exactly what he's talking about.  His member is limp but leaking.  What really catches your eyes sits behind that drizzling shaft - a pair of balls looking swollen and pent up beyond belief.  A sticky web of his leavings hangs between his genitals and his loincloth, showing you just how much he's been leaking at the thought of fucking you.  Fanning the sopping garment, he inadvertently blows a wave of his pheromones your way.\n");
 				damage = 9 + player.lib/20;
 			}
-			player.dynStats("lus", damage);
+			player.takeLustDamage(damage, true);
 			damage = player.lust - oldLust;
 			//UNIVERSAL pre-cum RESULT:
 			//(Low damage taken)
 			if(damage <= 8) {
 				outputText("Though your body is tingling from the show the horny beasts are giving you, it doesn't effect you as much as it could have.");
-				if(player.lust >= player.maxLust()) outputText("  Still, you're too horny to fight any longer.");
+				if(player.lust >= player.maxOverLust()) outputText("  Still, you're too horny to fight any longer.");
 			}
 			//(Medium damage taken)
 			else if(damage <= 14) {
@@ -75,7 +75,7 @@ import classes.display.SpriteDb;
 				if(player.lust > 70) outputText(", though you didn't think such a thing was possible");
 				else outputText(", feeling like two bullets scraping along the inside of your " + player.armorName);
 				outputText(", but it... it could have been worse.  You shudder as a little fantasy of letting them dribble it all over your body works through your mind.");
-				if(player.lust >= player.maxLust()) outputText("  Fuck it, they smell so good.  You want, no, NEED more.");
+				if(player.lust >= player.maxOverLust()) outputText("  Fuck it, they smell so good.  You want, no, NEED more.");
 				else outputText("  A growing part of you wants to experience that.");
 			}
 			//(high damage taken)
@@ -88,14 +88,14 @@ import classes.display.SpriteDb;
 				outputText(" in need.");
 				if(player.minotaurNeed()) {
 					outputText("  You need a fix so bad!");
-					player.dynStats("lus", 5);
+					player.takeLustDamage(5, true);
 				}
 				else {
 					outputText("  You can understand firsthand just how potent and addictive that fluid is...");
 				}
 				if(player.hasCock()) outputText("  " + SMultiCockDesc() + " twitches and dribbles its own pre-seed, but it doesn't smell anywhere near as good!");
 				outputText("  Shuddering and moaning, your body is wracked by ever-increasing arousal.  Fantasies of crawling under the beast-men's soaked legs and lapping at their drooling erections inundate your mind, your body shivering and shaking in response.  ");
-				if(player.lust < player.maxLust()) outputText("You pull back from the brink with a start.  It'll take more than a little drugged pre-cum to bring you down!");
+				if(player.lust < player.maxOverLust()) outputText("You pull back from the brink with a start.  It'll take more than a little drugged pre-cum to bring you down!");
 				else outputText("You sigh and let your tongue loll out.  It wouldn't so bad, would it?");
 			}
 		}
@@ -106,19 +106,19 @@ import classes.display.SpriteDb;
 			outputText("Strong hands come from behind and slide under your equipment to squeeze your " + chestDesc() + ".  The brutish fingers immediately locate and pinch at your " + nippleDescript(0) + "s, the sensitive flesh on your chest lighting up with pain and pleasure.  You arch your back in surprise, utterly stunned by the violation of your body.  After a moment you regain your senses and twist away, but the damage is already done.  You're breathing a bit quicker now");
 			if(player.lust >= 80) outputText(", and your pussy is absolutely soaking wet");
 			outputText(".");
-			player.dynStats("lus", (5 + player.effectiveSensitivity()/10));
+			player.takeLustDamage((5 + player.effectiveSensitivity()/10), true);
 		}
 		//Gang Grope
 		private function minotaurGangGangGropeAttack():void {
 			game.spriteSelect(SpriteDb.s_minotaurSons);
 			outputText("Before you can react, hands reach out from multiple angles and latch onto your body.  One pair squeezes at your " + Appearance.buttDescription(player) + ", the strong grip massaging your cheeks with loving touches.  Another set of hands are sliding along your tummy, reaching down for, but not quite touching, the juicy delta below.  Palms encircle your [chest] and caress them, gently squeezing in spite of the brutish hands holding you.  You wriggle and squirm in the collective grip of the many minotaurs for a few moments, growing more and more turned on by the treatment.  At last, you shake out of their hold and stand free, panting hard from exertion and desire.");
-			player.dynStats("lus", (15 + player.effectiveSensitivity()/10));
+			player.takeLustDamage((15 + player.effectiveSensitivity()/10), true);
 		}
 		//Waste  a turn
 		private function minotaurGangWaste():void {
 			wastedTurn = true;
 			game.spriteSelect(SpriteDb.s_minotaurSons);
-			outputText("\"<i>Oh man I can't wait to go hilt-deep in that pussy... I'm going to wreck " + player.mf("him", "her") + ",</i>\" promises one bull to his brother.  The other laughs and snorts, telling him how he'll have to do the deed during sloppy seconds.  It quickly escalates, and soon, every single one of the beast-men is taunting the others, bickering over how and when they'll get to have you.  While they're wasting their time, it's your chance to act!");
+			outputText("\"<i>Oh man I can't wait to go hilt-deep in that pussy... I'm going to wreck [him],</i>\" promises one bull to his brother.  The other laughs and snorts, telling him how he'll have to do the deed during sloppy seconds.  It quickly escalates, and soon, every single one of the beast-men is taunting the others, bickering over how and when they'll get to have you.  While they're wasting their time, it's your chance to act!");
 		}
 		//
 		private function minosPheromones():void {
@@ -129,20 +129,20 @@ import classes.display.SpriteDb;
 				outputText("slapping into your face before you can react!  You wipe the slick snot-like stuff out of your eyes and nose, ");
 				if(player.lust > player.maxLust() * 0.75) {
 					outputText("swallowing it into your mouth without thinking.  ");
-					dynStats("lus", 100 + player.lib);
+					takeLustDamage(100 + player.lib, true);
 				}
 				else {
 					outputText("feeling your heart beat with desire as your tongue licks the residue from your lips.  ");
-					dynStats("lus", 50 + player.lib/2);
+					takeLustDamage(50 + player.lib/2, true);
 				}
 			}
 			else outputText("right past your head.  ");
 			outputText("The animalistic scent of it seems to get inside you, the musky aroma burning a path of liquid heat to your groin.");
-			dynStats("lus", 100 + player.lib/2);
+			takeLustDamage(100 + player.lib/2, true);
 			if(player.hasPerk(PerkLib.MinotaurCumAddict) || flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 2) {
 				if(rand(2) == 0) outputText("\n<b>You shiver with need, wanting nothing more than to bury your face under one of those loincloth and slurp out every drop of goopey goodness.</b>");
 				else outputText("\n<b>You groan and lick your lips over and over, craving the taste of them in your mouth.</b>");
-				dynStats("lus", 50+rand(50));
+				takeLustDamage(50+rand(50), true);
 			}
 		}
 		//This is sparta
@@ -252,7 +252,6 @@ import classes.display.SpriteDb;
 			this.bonusHP = bonusHP;
 			this.lust = 30;
 			this.lustVuln = lustVuln;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.gems = rand(50) + 100;
 			this.tailType = Tail.COW;
 			this.special1 = SceneLib.mountain.minotaurScene.minoPheromones;

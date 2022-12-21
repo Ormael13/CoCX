@@ -10,7 +10,7 @@ Each **Race** consists of:
   * fail score (ex. -1, default 0), applied if check function fails
   * min score for this requirement to be applied (ex. "if kitsune score >= 5, give +1 for plain skin")
 * **RacialTier**'s. Tier is a milestone on the racial score scale with its own name, bonuses, and requirements. They have:
-  * name function (ex. "nine tailed kitsune/kitsune-taur") that generates a displayed racial name for particular body.
+  * name function (ex. "nine-tailed kitsune/kitsune-taur") that generates a displayed racial name for particular body.
   * minimum score (ex. 16) player has to have to qualify for tier.
   * custom requirements (ex. "have nine tails")
   * buffs (ex. "-35% Strength, +75% Wisdom...") given to qualified player.
@@ -62,6 +62,7 @@ Steps:
 2. Add score calculation code.
 3. Add tiers.
 4. Add race into `Races` library class.
+5. Add race into `RaceMem` class
 
 ## New race file template
 
@@ -74,9 +75,33 @@ import classes.PerkLib;
 import classes.Race;
 
 public class ZzzRace extends Race {
-
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Human",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Human",
+        /*Eyes*/		"Human",
+        /*Face*/		"Human",
+        /*Gills*/		"Human",
+        /*Hair*/		"Human",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Human",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Human",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Human"];
+        
     public function ZzzRace(id:int) {
-        super("Zzz", id);
+        super("Zzz", id, RaceBody);
     }
     
     public override function setup():void {
@@ -119,10 +144,10 @@ Examples:
 The `value` argument can take special "operator" constructs created with `NOT`,`ANY`,`NONE`,`LESS_THAN`,`GREATER_THAN`,`AT_LEAST`,`AT_MOST`.
 
 Examples:
-* `.legType(NOT(LowerBody.FROSTWYRM), 0, -1000)` -> "not frost wyrm legs (-1000 penalty)"
+* `.legType(NOT(LowerBody.FROSTWYRM), 0, -1000)` -> "not frost wyrm legs (0) (required)"
 * `.armType(ANY(Arms.HUMAN, Arms.KITSUNE, Arms.FOX), +1)` -> "human, kitsune or fox arms (+1)"
-* `.faceType(NONE(Face.CHESHIRE,Face.CHESHIRE_SMILE), 0, -7)` -> "neither cheshire nor cheshire smile face (-7 penalty)"
-* `.height(LESS_THAN(48), +2)` -> "height less than 4 feet"
+* `.faceType(NONE(Face.CHESHIRE,Face.CHESHIRE_SMILE), 0, -7)` -> "neither cheshire nor cheshire smile face (0) (-7 penalty)"
+* `.height(LESS_THAN(48), +2)` -> "height less than 4 feet (+2)"
 
 ### Custom requirements
 
@@ -213,6 +238,8 @@ Races don't need to override it; its superclass implementation contains the shar
 
 Possible scenario when you want to override it is varying fail score requirements (see HumanRace for example).
 
+By default, having Racial Paragon, being a gargoyle, or fusing with elemental (at the moment) sets the score to 0. You can disable this by setting `checkRP` to false.
+
 ## Tiers
 
 Racial tiers are configured in `setup()` function. They SHOULD be written in ascending order.
@@ -225,7 +252,7 @@ When a tier requires more than having a score, use a `.requireXXXX()/.require()`
 
 Example:
 ```
-buildTier(16, "nine tailed kitsune")
+buildTier(16, "nine-tailed kitsune")
         .requireTailCount(9)
 ```
 ```

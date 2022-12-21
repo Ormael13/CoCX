@@ -2,20 +2,20 @@
  * ...
  * @author Ormael
  */
-package classes.Items.MiscJewelries 
+package classes.Items.MiscJewelries
 {
 	import classes.Items.MiscJewelry;
 	
 	public class Nothing extends MiscJewelry
 	{
 		
-		public function Nothing() 
+		public function Nothing()
 		{
-			super("nomiscjewel", "nomiscjewel", "nothing", "nothing", 0, 0, 0, "no jewelry", "miscacc");
+			super("nomiscjewel", "nomiscjewel", "nothing", "nothing", 0, 0, 0, 0, "no jewelry", "miscacc");
 		}
 		
-		override public function playerRemove():MiscJewelry {
-			return null; //There is nothing!
+		override public function get isNothing():Boolean {
+			return true;
 		}
 	}
 }

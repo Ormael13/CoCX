@@ -2,7 +2,7 @@
  * ...
  * @author Zakanard
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -10,6 +10,7 @@ import classes.BodyParts.Ears;
 import classes.BodyParts.Hips;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Combat.Combat;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 	
@@ -58,7 +59,6 @@ import classes.internals.*;
 			outputText("Aiko moves her fingers through the air in a circle, conjuring up a pale blue flame. As she thrusts her palm forward, it rockets toward you like a missile, bursting on impact! The flames burn intensely as they engulf you, at the same time filling your body with a crippling pleasure that makes your skin flush red.  ");
 			var damage:int = 2*(str + rand(30));
 			damage = player.takeFireDamage(damage, true);
-			//player.takeLustDamage(15 + player.effectiveSensitivity() / 5
 			player.takeLustDamage(15 + player.effectiveSensitivity() / 5, true);
 		}
 		
@@ -104,9 +104,9 @@ import classes.internals.*;
 					player.createStatusEffect(StatusEffects.Illusion, 0, 0, 0, 0);
 					addCombatBuff("spe", -7, "Illusion", "Illusion");
 				}
-			}	
+			}
 		}
-				
+		
 		//Corrupted Aiko Attacks
 		private function aikoCorruptBasic():void
 		{
@@ -115,7 +115,7 @@ import classes.internals.*;
 			var dodge:int = player.speedDodge(this);
 			if (dodge>0) {
 				outputPlayerDodged(dodge);
-				var evasionResult:String = player.getEvasionReason(false); 
+				var evasionResult:String = player.getEvasionReason(false);
 				//Determine if evaded
 				if (evasionResult === EVASION_EVADE) {
 					outputText("<i>\"Just hold still, I promise to make it hurt good!\"</i> Aiko yells as using your skills at evading attacks, you anticipate and sidestep her ferocious attacks.");
@@ -150,12 +150,12 @@ import classes.internals.*;
 			}
 		}
 		
-		private function aikoDarkFoxfire():void 
+		private function aikoDarkFoxfire():void
 		{
 			outputText("Aiko moves her fingers through the air in a circle, conjuring up a corrupt purple flame. She twists her upper body into a batter’s stance and strikes it at you ferociously, making the fireball rocket toward you like a missile, bursting on impact! The flames burn intensely as they engulf you, but the more it burns, the more you start to LIKE it.  ");
 			player.takeFireDamage(int(str/2) + rand(15), true);
 			//if masochist, take more damage
-			(player.hasPerk(PerkLib.Masochist) ?  player.takeLustDamage(15 + player.effectiveSensitivity() / 5) : player.takeLustDamage((10 + player.effectiveSensitivity() / 5)*2));
+			(player.hasPerk(PerkLib.Masochist) ?  player.takeLustDamage(15 + player.effectiveSensitivity() / 5, true) : player.takeLustDamage((10 + player.effectiveSensitivity() / 5)*2, true), true);
 		}
 		
 		private function aikoTerrorize():void
@@ -223,7 +223,7 @@ import classes.internals.*;
 					break;
 			}
 			var lustDmg:int = 8 + int(player.effectiveSensitivity() / 5);
-			player.takeLustDamage(lustDmg);
+			player.takeLustDamage(lustDmg, true);
 		}
 
 		private function aikoIllusionLust():void
@@ -243,7 +243,7 @@ import classes.internals.*;
 						}
 				} else if (x === 1) {
 						outputText("\n\n<i>\"This is my realm... and in my realm... you get to feel good...\"</i> her strange words entice you as you widen your eyes, you try to hit her but you always seem to miss. A mischievous grin comes from her figure as you feel something rubbing your crotch, is one of her tails! Oh damn, it feels so good!  ");
-						player.takeLustDamage(lustDmg);
+						player.takeLustDamage(lustDmg, true);
 						
 						if (player.hasStatusEffect(StatusEffects.Illusion)) {
 							player.addCombatBuff("spe", -3, "Illusion", "Illusion");
@@ -259,12 +259,12 @@ import classes.internals.*;
 			else if (x==3) {
 				outputText("Aiko turns around, brushing her tails to the side to expose her ample hindquarters, showing off the spiral-shaped tattoos on her juicy-looking cheeks and a lotus-flower tramp stamp. Her display sends blood rushing to your groin, making you lick your lips eagerly.\n\n"
 				+"Aiko pauses for a moment, placing a hand on her taut abs and sliding her fingers downward slowly, coyly gazing deep into your eyes. Her tails fan out around her, curling around her limbs seductively, and she gives you a flirtatious leer as she watches your body tremble with desire.  ");
-				player.takeLustDamage(lustDmg*2);
+				player.takeLustDamage(lustDmg*2, true);
 			}
 			else if (x==4) {
 				outputText("Aiko devilishly looks at you, you find yourself surrounded by many Aikos! <i>\"Would you like a reverse gangbang, big boy?\"</i> all of the Aikos' seductively grab one bound breast and lower their pants, the tatoo on their pubic mounds drawing your attention to their most private parts.\n\n"
 				+"In your distraction you don't notice the illusion Aiko has cast over you!  ");
-				player.takeLustDamage(lustDmg * 2);
+				player.takeLustDamage(lustDmg * 2, true);
 				
 				if (player.hasStatusEffect(StatusEffects.Illusion)) {
 					player.addCombatBuff("spe", -3, "Illusion", "Illusion");
@@ -276,7 +276,7 @@ import classes.internals.*;
 				outputText("Aiko takes a moment to stretch out her limber body, thrusting out her chest as she stretches her arms toward the sky. She spins girlishly, giving you a come-hither glare, and then bows forward to give you a good angle at her cleavage, packed tightly into her too-small chest wrap."
 				+"\n\n<i>\"You know, we don’t have to fight... Wouldn’t you rather come pet my super fluffy tails?\"</i> Aiko teases, running a hand along her tails and making them fan out around her seductively. You find yourself nodding before you can even think to stop yourself—yes, you DO want the fluffy tails!  ");
 			}
-			player.takeLustDamage(lustDmg);
+			player.takeLustDamage(lustDmg, true);
 		}
 		
 		private function arcaneArcherActivate():void
@@ -360,7 +360,7 @@ import classes.internals.*;
 		private function hyperAttack2():void
 		{
 			outputText("You see Aiko gathering up an enormous amount of energy, she pulls back on the string of her bow, and as her golden aura extends outward, her tattoos begin to glow in an eerie light. She's up to something really dangerous as she aims at you. You can hear a faint whisper as she slowly draws the bow to it's absolute limit, <i>\"With an arrow the focus of my heart, I cast away all mundane thoughts, and with this shaft of light in my hands...\"</i> An arrow of the purest light you have ever seen materializes, nocked and ready to loose! \n\n");
-			if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) {
+			if (Combat.playerWaitsOrDefends()) {
 				outputText("<i>\"I'll punish every demon in this world!\"</i> As she finishes her incantation, she releases the string of her arrow and unleashes an immense beam of golden white light directly at you! It was a wise choice to stand back to see what was going on! You narrowly manage to dodge the attack by rolling away as you see the forest behind you completely obliterated. Aiko stands speechless before you, she clearly did not expected you to dodge her attack.");
 			} else {
 				outputText("<i>\"I'll punish every demon in this world!\"</i> As she finishes her incantation, she releases the string of her arrow and unleashes an immense beam of golden white light directly at you! Oh shit! You barely have the time to widen your eyes as you get blasted away by the enormous mass of energy who seems to obliterate you as you come crashing down to the floor, all of your body smoking.  ");
@@ -458,12 +458,12 @@ import classes.internals.*;
 			outputText("<i>\"Your fancy tricks wont work on me Champion, I see right through them.\"</i> Your blinding attack simply fades away before her magic.")
 			return true;
 		}
-				
+		
 		override protected function performCombatAction():void
 		{
 			castIllusion--;
 			if (player.hasStatusEffect(StatusEffects.lustvenom)) {
-				player.takeLustDamage(5 + player.effectiveSensitivity() / 5);
+				player.takeLustDamage(5 + player.effectiveSensitivity() / 5, true);
 				outputText("  You feel slightly more flushed from the poisoned arrow.\n\n");
 			}
 			if (player.hasStatusEffect(StatusEffects.Illusion))
@@ -522,7 +522,7 @@ import classes.internals.*;
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if (player.hasStatusEffect(StatusEffects.lustvenom)) 
+			if (player.hasStatusEffect(StatusEffects.lustvenom))
 				player.removeStatusEffect(StatusEffects.lustvenom);
 			if (player.hasStatusEffect(StatusEffects.Spar)) {
 				SceneLib.aikoScene.sparWithAikoLose(this.lust100);
@@ -533,7 +533,7 @@ import classes.internals.*;
 			}
 		}
 		
-		public function Aiko() 
+		public function Aiko()
 		{
 			this.a = "";
 			this.short = "Aiko";
@@ -551,7 +551,7 @@ import classes.internals.*;
 			this.tallness = 64;
 			this.hips.type = Hips.RATING_AMPLE;
 			this.butt.type = Butt.RATING_AVERAGE+1;
-			this.skinTone = "light tan";			//might need to change to russet
+			this.bodyColor = "light tan";			//might need to change to russet
 			this.hairColor = "silver-blonde";
 			this.hairLength = 10;
 			this.weaponName = (cor >= 50 && game.flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]==1 ? "bill-hook hatchet" : "longbow");
@@ -561,7 +561,6 @@ import classes.internals.*;
 			this.bonusHP = 350;
 			this.lust = 25;
 			this.lustVuln = 0.4;
-			this.temperment = (cor >= 50 && game.flags[kFLAGS.AIKO_CORRUPTION_ACTIVE]==1 ? TEMPERMENT_LOVE_GRAPPLES : TEMPERMENT_LUSTY_GRAPPLES);
 			if (flags[kFLAGS.AIKO_BOSS_COMPLETE] > 0) {
 				initStrTouSpeInte(50, 60, 240, 200);
 				initWisLibSensCor(200, 80, 130, game.flags[kFLAGS.AIKO_CORRUPTION]);

@@ -5,10 +5,36 @@ import classes.IMutations.IMutationsLib;
 import classes.Race;
 
 public class BearRace extends Race {
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Human",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Human",
+        /*Eyes*/		"Human",
+        /*Face*/		"Human",
+        /*Gills*/		"Human",
+        /*Hair*/		"Human",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Human",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Human",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Human"];
+
 	public static const BearFurColors:/*String*/Array = ["black","brown","white"];
 	
 	public function BearRace(id: int) {
-		super("Bear", id);
+		super("Bear", id, []);//RaceBody);
+        //tfRace = RaceMem.appendEnumVal("Bear", CoC.instance.transformations.FullBear);
 	}
 	
 	public override function setup():void {
@@ -21,8 +47,8 @@ public class BearRace extends Race {
 				.legType(LowerBody.BEAR, +1)
 				.eyeType(Eyes.BEAR, +1)
 				.skinCoatType(Skin.FUR, +1)
-				.skinCoatColor(ANY(BearFurColors), +1)
-				.skinCoatColorPair("white", "black", +1)
+				.furColor1(ANY(BearFurColors), +1)
+				.furColors("white and black", +1)
 				.height(GREATER_THAN(72), +2);
 		
 		buildTier(10,"bear")

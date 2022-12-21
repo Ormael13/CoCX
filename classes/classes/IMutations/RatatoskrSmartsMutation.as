@@ -5,14 +5,13 @@
 package classes.IMutations
 {
 import classes.PerkClass;
-import classes.PerkLib;
 import classes.IMutationPerkType;
 import classes.Creature;
-import classes.Player;
 import classes.Races;
 
 public class RatatoskrSmartsMutation extends IMutationPerkType
     {
+        private static const mName:String = "Ratatoskr Smarts";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -24,7 +23,7 @@ public class RatatoskrSmartsMutation extends IMutationPerkType
                 descS += ", knowledge is power is now three times as effective";
             }
             if (pTier >= 2){
-                descS += ", increase the damage of Weird words by" + (pTier == 2)?"20%":((pTier == 3)?"50%":"") + ", lower cooldown of Knowledge overload by" +(pTier == 2)?"1":((pTier == 3)?"2":"") + "turns";
+                descS += ", increase the damage of Weird words by " + ((pTier == 2)?"20%":((pTier == 3)?"50%":"")) + ", lower cooldown of Knowledge overload by " + ((pTier == 2)?"1 turn":((pTier == 3)?"2 turns":""));
             }
             if (descS != "")descS += ".";
             return descS;
@@ -43,7 +42,7 @@ public class RatatoskrSmartsMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Ratatoskr Smarts" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -66,9 +65,8 @@ public class RatatoskrSmartsMutation extends IMutationPerkType
         }
 
         //Mutations Buffs
-        override public function pBuffs(target:Creature = null):Object{
+        override public function buffsForTier(pTier:int):Object {
             var pBuffs:Object = {};
-            var pTier:int = currentTier(this, (target == null)? player : target);
             if (pTier == 1) pBuffs['int.mult'] = 0.05;
             if (pTier == 2) pBuffs['int.mult'] = 0.15;
             if (pTier == 3) pBuffs['int.mult'] = 0.35;
@@ -76,8 +74,7 @@ public class RatatoskrSmartsMutation extends IMutationPerkType
         }
 
         public function RatatoskrSmartsMutation() {
-            super("Ratatoskr Smarts IM", "Ratatoskr Smarts", ".");
-            maxLvl = 3;
+            super(mName + " IM", mName, SLOT_NERVSYS, 3);
         }
         
     }

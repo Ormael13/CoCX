@@ -8,11 +8,11 @@ import classes.PerkClass;
 import classes.PerkLib;
 import classes.IMutationPerkType;
 import classes.Creature;
-import classes.Player;
 import classes.Races;
 
 public class OrcAdrenalGlandsMutation extends IMutationPerkType
     {
+        private static const mName:String = "Orc Adrenal Glands";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -43,7 +43,7 @@ public class OrcAdrenalGlandsMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Orc Adrenal Glands" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -66,17 +66,15 @@ public class OrcAdrenalGlandsMutation extends IMutationPerkType
         }
 
         //Mutations Buffs
-        override public function pBuffs(target:Creature = null):Object{
+        override public function buffsForTier(pTier:int):Object {
             var pBuffs:Object = {};
-            var pTier:int = currentTier(this, (target == null)? player : target);
             if (pTier == 2) pBuffs['str.mult'] = 0.5;
             else if (pTier == 3) pBuffs['str.mult'] = 1;
             return pBuffs;
         }
 
         public function OrcAdrenalGlandsMutation() {
-            super("Orc Adrenal Glands IM", "Orc Adrenal Glands", ".");
-            maxLvl = 3;
+            super(mName + " IM", mName, SLOT_ADRENALS, 3);
         }
         
     }

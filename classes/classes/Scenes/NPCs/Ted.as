@@ -19,10 +19,7 @@ use namespace CoC;
 	{
 		private function tedSpecialAttackOne():void {
 			var damage:Number = 0;
-			if (hasStatusEffect(StatusEffects.Blind)) {
-				outputText((flags[kFLAGS.TED_LVL_UP] >= 3 ?"Ted":"Dragon-boy")+" makes a wide sweeping attack with his hammer, which is difficult to avoid even from a blinded opponent.\n");//Ted
-			}
-			if (player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
+			if (player.getEvasionRoll()) {
 				outputText("You barely manage to avoid a wide sweeping attack from dragon-boy by rolling under it.");//Ted's
 				return;
 			}
@@ -38,16 +35,8 @@ use namespace CoC;
 		}
 		private function tedSpecialAttackTwo():void {
 			var damage:Number = 0;
-			if (hasStatusEffect(StatusEffects.Blind)) {
-				outputText((flags[kFLAGS.TED_LVL_UP] >= 3 ?"Ted":"Dragon-boy")+" unwisely tries to make a massive swing while blinded, which you are easily able to avoid.");//Ted
-				return;
-			}
-			if (player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 60) {
+			if (player.getEvasionRoll()) {
 				outputText("You manage to roll out of the way of a massive overhand swing.");
-				return;
-			}
-			if (player.hasPerk(PerkLib.Evade) && rand(100) < 60) {
-				outputText("You easily sidestep as dragon-boy tries to deliver a huge overhand blow.");//Ted
 				return;
 			}
 			damage = int((str + 30 + weaponAttack) - Math.random()*(player.tou) - player.armorDef);
@@ -179,7 +168,6 @@ use namespace CoC;
 			this.armorName = "dragonscales armor";
 			this.lust = 15;
 			this.lustVuln = .9;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.gems = rand(10) + 5;
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);

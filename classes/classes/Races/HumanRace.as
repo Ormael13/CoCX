@@ -1,14 +1,42 @@
 package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
+import classes.CoC;
 import classes.CockTypesEnum;
+import classes.GeneticMemories.RaceMem;
 import classes.Player;
 import classes.Race;
 import classes.VaginaClass;
 
 public class HumanRace extends Race {
+	public static const HumanSkinColors:/*String*/Array = ["tan", "olive", "dark", "light"];
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Human",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Human",
+        /*Eyes*/		"Human",
+        /*Face*/		"Human",
+        /*Gills*/		"Human",
+        /*Hair*/		"Human",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Human",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Human",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Human"];
+
 	public function HumanRace(id:int) {
-		super("Human", id);
+		super("Human", id, RaceBody);
 		chimeraTier = 0;
 		grandChimeraTier = 0;
 	}
@@ -66,7 +94,7 @@ public class HumanRace extends Race {
 	
 	public static const maxScore:int = 17;
 	
-	override public function finalizeScore(body:BodyData, score:int, outputText:Function = null):int {
+	override public function finalizeScore(body:BodyData, score:int, checkRP:Boolean = true, outputText:Function = null):int {
 		var ics:Number = -body.player.internalChimeraScore();
 		if (ics > 0) {
 			if (outputText != null) {
@@ -74,7 +102,7 @@ public class HumanRace extends Race {
 			}
 			score -= ics;
 		}
-		score = super.finalizeScore(body, score, outputText);
+		score = super.finalizeScore(body, score, checkRP, outputText);
 		return score;
 	}
 	

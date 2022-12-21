@@ -2,18 +2,17 @@
  * ...
  * @author Canadian Snas
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.BlightRidge.DemonPackBlightRidge;
-import classes.Scenes.Areas.DefiledRavine.DemonPackDefiledRavine;
 import classes.Scenes.SceneLib;
 import classes.internals.SaveableState;
 
 import coc.view.ButtonDataList;
 
-	public class TyrantiaFollower extends NPCAwareContent implements SaveableState
+public class TyrantiaFollower extends NPCAwareContent implements SaveableState
 	{
 		public static var TyraniaIsRemovedFromThewGame:Boolean;
 		public static var TyraniaPostFinalKissScene:Boolean;
@@ -76,10 +75,14 @@ import coc.view.ButtonDataList;
 			}
 		}
 
-		public function TyrantiaFollower() 
+		public function TyrantiaFollower()
 		{
 			Saves.registerSaveableState(this);
 		}
+
+public static function isLover():Boolean {
+	return TyrantiaFollowerStage >= 4;
+}
 
 public function tyraniaAffection(changes:Number = 0):Number {
 	TyrantiaAffectionMeter += changes;
@@ -138,7 +141,7 @@ public function firstEncounterYesNoHiding():void {
 	outputText("You pop out and hold your hand out. You yell at her to freeze. Surprisingly, she stops in her tracks, tilting her head and staring at you curiously. \"<i>Why?</i>\"\n\n");
 	menu();
 	addButton(1, "Dunno", firstEncounterYesNoHidingDunno);
-	addButton(2, "T. Police", firstEncounterYesNoHidingTPolice);
+	addButton(2, "T. Police", firstEncounterYesNoHidingTPolice).hint("Say you're captain of Titty Police!");
 	addButton(3, "Fight", firstEncounterYesNoHidingFight);
 }
 public function firstEncounterYesNoHidingDunno():void {
@@ -182,13 +185,12 @@ public function postFightOptions(hpVictory:Boolean):void {
 		outputText("Tyrantia’s shaking legs finally give out, and she drops her phallic spear, both of her meaty hands dropping to her cunt-flap. Ignoring you entirely, she begins to grab at the flap, pulling the steel up and revealing a large-labed, drooling cunny. Wasting no time, she begins jilling herself off, breathing heavily from both exhaustion and arousal.\n\n");
 		outputText("\"<i>Fuck, no. Not now, you…</i>\" She moans, her armored chest heaving. Her black aura is nearly gone, but you can see a pink glow coming from her eyes. \"<i>What do you want?</i>\"\n\n");
 	}
-	if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) LevelingHerself();
+	LevelingHerself();
 	tyraniaAffection(5);
 	menu();
-	//addButton(0, "Rape", postFightOptionsRape);
-	addButton(1, "Heal", postFightOptionsHeal);
-	addButton(2, "Kiss", postFightOptionsKiss);
-	addButton(3, "Leave", postFightOptionsLeave);
+	addButton(0, "Heal", postFightOptionsHeal);
+	addButton(1, "Kiss", postFightOptionsKiss);
+	addButton(4, "Leave", cleanupAfterCombat);
 }
 public function postFightOptionsHeal():void {
 	clearOutput();
@@ -236,30 +238,19 @@ public function postFightOptionsKiss():void {
 		outputText("\"<i>Look, [name], I...Don’t want this, no offense.</i>\" She tries to push back, and you back away. \"<i>Thanks. Look, I’ll be fine. I’ve got shit to do, and…</i>\" She tries to rise, unsuccessfully, and glares at you. \"<i>Just let me be.</i>\"\n\n");
 		outputText("You decide to leave the Drider Giantess alone, and give her a gentle goodbye as you head back to camp.\n\n");
 		tyraniaAffection(3);
-		if (combat.inCombat) cleanupAfterCombat();
-		else doNext(camp.returnToCampUseOneHour);
+		cleanupAfterCombat();
 	}
 }
 public function postFightOptionsKissStop():void {
 	outputText("She sighs in relief, none of her eyes meeting yours. \"<i>Look…[name]. I...I have...Reasons for pushing you away. I’m sorry, I just…</i>\" The giantess looks close to tears, and you find yourself staring at her eyes. ");
 	outputText("\"<i>Don’t look at me like that. It’s not you. Marae knows it’s not you.</i>\" She lies there, still, and for a while, says and does nothing while several waves of black energy pours from her horn.\n\n");
 	tyraniaAffection(5);
-	if (combat.inCombat) cleanupAfterCombat();
-	else doNext(camp.returnToCampUseOneHour);
+	cleanupAfterCombat();
 }
 public function postFightOptionsKissKeepGoing():void {
 	outputText("You tell her that whatever’s wrong, she can tell you. You kiss her again, and she pushes you away, this time strong enough to dislodge you. She tries to stand, to stagger away, roaring in anger. \"<i>Weak! Stupid!</i>\" She falls again, staying down. ");
 	outputText("\"<i>Just LEAVE ME BE!</i>\" She blindly fires a black web at you, missing by a mile. You decide it’s time to leave, and the sobbing giant’s tears fade away behind you as you walk back towards camp.\n\n");
 	tyraniaAffection(-5);
-	if (combat.inCombat) cleanupAfterCombat();
-	else doNext(camp.returnToCampUseOneHour);
-}
-public function postFightOptionsRape():void {
-	clearOutput();
-	outputText("\"<i></i>\"\n\n");
-	cleanupAfterCombat();
-}
-public function postFightOptionsLeave():void {
 	cleanupAfterCombat();
 }
 
@@ -287,7 +278,7 @@ public function repeatEncounterBattlefield():void {
 	if (TyraniaPostFinalKissScene) addButton(4, "Sex", TyrantiaSexMenu);
 	else addButtonDisabled(4, "Sex", "Req. special scene after reaching 40%+ affection.");
 	if (TyraniaPostFinalKissScene && TyrantiaFollowerStage < 4) addButton(9, "LiveWithMe", TyrantiaLiveWithMe).hint("Take the Spooder home. Do it NOW ^^");
-	else if (TyrantiaFollowerStage >= 4) addButtonDisabled(9, "LiveWithMe","She's already in your camp!");
+	else if (isLover()) addButtonDisabled(9, "LiveWithMe","She's already in your camp!");
 	else addButtonDisabled(9, "???", "Req. special scene after reaching 40%+ affection.");
 	addButton(14, "Leave", camp.returnToCampUseOneHour);
 }
@@ -307,39 +298,32 @@ public function repeatEncounterBattlefieldRe():void {
 	else addButton(3, "Training", TyrantiaTraining);
 	if (TyraniaPostFinalKissScene) addButton(4, "Sex", TyrantiaSexMenu);
 	else addButtonDisabled(4, "Sex", "Req. special scene after reaching 40%+ affection.");
-	if (TyraniaPostFinalKissScene && TyrantiaFollowerStage < 4) addButton(9, "LiveWithMe", TyrantiaLiveWithMe).hint("Take the Spooder home. Do it NOW ^^");
-	else if (TyrantiaFollowerStage >= 4) addButtonDisabled(9, "LiveWithMe","She's already in your camp!");
-	else addButtonDisabled(9, "???", "Req. special scene after reaching 40%+ affection.");
+	if (TyrantiaFollowerStage < 4) addButton(9, "LiveWithMe", TyrantiaLiveWithMe)
+		.hint("Take the Spooder home. Do it NOW ^^")
+		.disableIf(!TyraniaPostFinalKissScene, "Req. special scene after reaching 40%+ affection.");
 	addButton(14, "Leave", camp.returnToCampUseOneHour);
 }
 public function repeatEncounterBattlefieldTalk():void {
 	clearOutput();
-	//outputText("\"<i></i>\"\n\n");
 	menu();
 	//0 - Lab
 	addButton(1, "Self", repeatEncounterBattlefieldTalkSelf);
 	if (TyrantiaTrainingSessions > 0) addButtonDisabled(2, "FightStyle", "You already can train with her.");
 	else addButton(2, "FightStyle", repeatEncounterBattlefieldTalkFightingStyle);
-	if (TyrantiaFollowerStage >= 4) {
+	if (isLover()) {
 		if (flags[kFLAGS.TIMES_MET_KIHA] > 0) addButton(3, "Kiha", repeatEncounterBattlefieldTalkKiha);
 		else addButtonDisabled(3, "???", "Perhaps if you look around the swamps, you might find someone she might also know...");
 		if (DivaScene.instance.status != 0) addButton(4, "Diva", repeatEncounterBattlefieldTalkDiva);
 		else addButtonDisabled(4,"???", "Perhaps if you look around the mountains, you might find someone she might also know...");
 	}
 	addButton(5, "Her", repeatEncounterBattlefieldTalkHer);
-	if (TyrantiaFollowerStage >= 4 && !TyraniaThePhalluspear && flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2) addButton(10, "ThePhalluspear", talkThePhalluspear);
-	if (TyrantiaFollowerStage >= 4) {
+	if (isLover() && !TyraniaThePhalluspear && flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2) addButton(10, "ThePhalluspear", talkThePhalluspear);
+	if (isLover()) {
 		if (flags[kFLAGS.SLEEP_WITH] != "Tyrantia") addButton(12, "Sleep With", TyrantiaSleepToggle);
 		else addButton(12, "Sleep Alone", TyrantiaSleepToggle);
 	}
-	if (TyrantiaFollowerStage >= 4) addButton(14, "Back", TyrantiaAtCamp);
+	if (isLover()) addButton(14, "Back", TyrantiaAtCamp);
 	else addButton(14, "Back", repeatEncounterBattlefieldRe);
-}
-public function repeatEncounterBattlefieldTalkLab():void {
-	clearOutput();
-	outputText("\"<i></i>\"\n\n");
-	//affection gains
-	doNext(camp.returnToCampUseOneHour);
 }
 public function repeatEncounterBattlefieldTalkSelf():void {
 	clearOutput();
@@ -382,7 +366,7 @@ public function repeatEncounterBattlefieldTalkHer():void {
 	clearOutput();
 	outputText("\"<i>Okay...Don’t think I’m that interesting, but...whatever. What do ya wanna know?</i>\"\n\n");
 	menu();
-	if (TyrantiaFollowerStage >= 4 && (LilyFollower.LilyFollowerState || BelisaFollower.BelisaInCamp)) addButton(0, "H U D?", repeatEncounterBattlefieldTalkHerHowUDoing).hint("How U doing?");
+	if (isLover() && (LilyFollower.LilyFollowerState || BelisaFollower.BelisaInCamp)) addButton(0, "H U D?", repeatEncounterBattlefieldTalkHerHowUDoing).hint("How U doing?");
 	else addButton(0, "L.B.D.", repeatEncounterBattlefieldTalkHerLifeBeforeDemons).hint("Life Before Demons");
 	addButton(1, "NoHerm?", repeatEncounterBattlefieldTalkHerNoHerm);
 	addButton(2, "Different Parts", repeatEncounterBattlefieldTalkHerDifferentParts);
@@ -399,7 +383,6 @@ public function repeatEncounterBattlefieldTalkHerHowUDoing():void {
 		if (DriderTown.LilyKidsPC > 0) {
 			outputText("\"<i>Lily’s podlings are rambunctious, to say the least. Sometimes it takes more than one of us to deal with them.</i>\" She thinks for a second.\n\n");
 			var choice:Array = [];
-			var select:int;
 			choice[choice.length] = 0;
 			choice[choice.length] = 1;
 			choice[choice.length] = 2;
@@ -409,7 +392,7 @@ public function repeatEncounterBattlefieldTalkHerHowUDoing():void {
             if (SceneLib.kihaFollower.totalKihaChildren() > 0) choice[choice.length] = 6;
             if (SceneLib.amilyScene.amilyFollower()) choice[choice.length] = 7;
             if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 1) choice[choice.length] = 8;
-			switch (select) {
+			switch (choice[rand(choice.length)]) {
 				case 0:
 					outputText("\"<i>Just the other day, one of them tried to organize an “Imp Fight Club”. Stupid kids captured a few imps, then tried to use the sparring ring to have them fight to the death.</i>\"\n\n");
 					break;
@@ -510,10 +493,8 @@ public function repeatEncounterBattlefieldTalkHerLifeBeforeDemonsNoNo():void {
 public function repeatEncounterBattlefieldTalkHerLifeBeforeDemonsNoYes():void {
 	outputText("You lie down beside Tyrantia’s upper half, and she takes your hands in hers. \"<i>Thank you,</i>\"she whispers, kissing you on the lips. Her fangs are out of the way, and you kiss back, a gentle, slow thing. You tell her that you’d never leave her alone like this. This gets a smile from the spider-girl, and she hums a gentle tune as she drifts off to sleep.\n\n");
 	tyraniaAffection(10);
-	CoC.instance.timeQ = 30 - model.time.hours;
-	camp.sleepRecovery(true);
-	CoC.instance.timeQ = 0;
-	doNext(camp.returnToCampUseOneHour);
+	camp.cheatSleepUntilMorning();
+	doNext(playerMenu);
 }
 public function repeatEncounterBattlefieldTalkHerNoHerm():void {
 	clearOutput();
@@ -581,6 +562,7 @@ public function talkThePhalluspear():void {
 	doNext(playerMenu);
 }
 public function TyraniaAndFlitzyScene():void {
+	clearOutput();
 	outputText("As you walk through the forest, you can hear the gurgling of a stream, and the sounds of...voices? Just talking? In Mareth? As you get closer, you begin to pick out the two voices. As you get closer, you can hear the gentle splatter of a waterfall, and two people bathing.\n\n");
 	if (TyraniaSeenFlitzy) {
 		outputText("You call out, and the Goblin lets out a little ‘eep’. Tyrantia calms her down, and you step out from the foliage. \"<i>Hey [name].</i>\" Tyrantia calls out. \"<i>You have the best timing! Come on down!</i>\"\n\n");
@@ -691,7 +673,6 @@ public function TyraniaAndIzumiSceneNo():void {
 	doNext(camp.returnToCampUseOneHour);
 }
 public function TyrantiaSleepToggle():void {
-	//spriteSelect(SpriteDb.s_electra);
 	clearOutput();
 	if(flags[kFLAGS.SLEEP_WITH] != "Tyrantia") {
 		outputText("You ask Tyrantia if she enjoys your hugs. She doesn’t say anything, simply stepping in, wrapping her warm, fuzzy tree trunk-sized arms around you, holding you against her breast.\n\n");
@@ -705,9 +686,6 @@ public function TyrantiaSleepToggle():void {
 	}
 	menu();
 	addButton(0,"Next", repeatEncounterBattlefieldTalk);
-}
-private function sleepWith(arg:String = ""):void {
-	flags[kFLAGS.SLEEP_WITH] = arg;
 }
 public function TyrantiaLiveWithMe():void {
 	clearOutput();
@@ -758,6 +736,9 @@ public function TyrantiaReactions2():void {
 	}
 	TyrantiaFollowerStage = 4;
 	outputText("<b>Tyrantia has joined you as a lover.</b>\n\n");
+	if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard",1,+1);
+	else player.createKeyItem("Radiant shard", 1,0,0,0);
+	outputText("\n\n<b>Before fully settling in your camp as if remembering something Tyrantia pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
 	doNext(camp.returnToCampUseOneHour);
 }
 public function AmilyReaction():void {
@@ -767,7 +748,7 @@ public function AmilyReaction():void {
 	outputText("<i>“Under your feet?! Oh, you wish I was there, don’t you, all jizzed up, you demon-spawn?”</i> At that, the first signs of anger appear on Tyrantia’s face. Her five eyes narrow, and her fangs quiver a bit.\n\n");
 	outputText("<i>“I am not a demon, rat.”</i> She looms over Amily, lower lip quivering. <i>“I’ve done more to stop the hordes than you, I’d bet. How many demons have you killed?”</i> She hoists her Dick. <i>“I’ve killed Five, seventeen imps, and...shit...How many Golems?”</i> She shrugs. <i>“Fuck it. A lot. And that was today.”</i> She points her Dick at Amily. <i>“Back the fuck off, bitch, or I’ll…”</i> Her black aura flares, and Tyrantia sees you. Her eyes widen, and the Drider flinches. She holds her head, making a visible effort to keep her corrupt aura inside.\n\n");
 	outputText("<i>“Just leave me be. You’re lucky that [name] cares about you.”</i> She stomps off towards the battlefield again, and Amily sits down on a log, wiping sweat off her brow.\n\n");
-	outputText("<i>“Oh, hey [name]”</i> She calls, seeing you walking towards her. <i>“We need to talk.”</i>\n\n"); 
+	outputText("<i>“Oh, hey [name]”</i> She calls, seeing you walking towards her. <i>“We need to talk.”</i>\n\n");
 	menu();
 	addButton(1, "Anger", AmilyAnger);
 	addButton(2, "Explain", AmilyExplain);
@@ -807,14 +788,8 @@ public function TyrantiaSpar():void {
 	outputText("Tyrantia looks down at you in mild disbelief. She seems to take a few seconds to understand what you’ve just asked.\n\n");
 	outputText("<i>“Look, [name]...Look at me.”</i> She gives you a stare, somewhat concerned, as she spreads her arms wide. The fur on her arms can’t fully conceal the massive muscles you know are there. Her metal leg-spikes, still on, leave indents in the ground where she moves. Tyrantia stands over fourteen feet tall, and the twin horns on her head buzz with the corrupt aura you know she keeps suppressed. Despite her intimidating stature, her five purple eyes are soft, unsure. <i>“...I don’t want to hurt you. I know you can handle yourself against those demon filth, but...They made me stronger, and…”</i> Tyrantia closes her eyes. <i>“Are you sure you want me to fight you?”</i>\n\n");
 	menu();
-	if (TyrantiaFollowerStage >= 4) {
-		addButton(1, "Yes", TyrantiaSparYes);
-		addButton(2, "No", TyrantiaAtCamp);
-	}
-	else {
-		addButton(1, "Yes", TyrantiaSparYes);
-		addButton(2, "No", repeatEncounterBattlefieldRe);
-	}
+	addButton(1, "Yes", TyrantiaSparYes);
+	addButton(2, "No", isLover() ? TyrantiaAtCamp : repeatEncounterBattlefieldRe);
 }
 
 public function TyrantiaSparYes():void {
@@ -828,7 +803,7 @@ public function TyrantiaSparYes():void {
 
 public function TyrantiaHoldsBack():void {
 	clearOutput();
-	if (TyrantiaFollowerStage >= 4) {
+	if (isLover()) {
 		outputText("Tyrantia nods, her full lips set into a line. She strides over to her hutch, and comes back out carrying her Dick. Her quadruple tits are hidden once more behind a layer of thick black steel, and she levels the phallic spear at you. You can see the pinkish venom pooling on the tip, and she brandishes the weapon with smooth, swift movements.\n\n");
 		outputText("<i>“Come on then, [name], show me what you’re made of!”</i>\n\n");
 	}
@@ -843,7 +818,7 @@ public function TyrantiaHoldsBack():void {
 
 public function TyrantiaAllOut():void {
 	clearOutput();
-	if (TyrantiaFollowerStage >= 4) outputText("Your Drider companion sighs heavily. <i>“Well…Don’t say I didn’t warn you.”</i> She leads you out of camp, back to the battlefield, not far from where you’d first met her.\n\n");
+	if (isLover()) outputText("Your Drider companion sighs heavily. <i>“Well…Don’t say I didn’t warn you.”</i> She leads you out of camp, back to the battlefield, not far from where you’d first met her.\n\n");
 	else {
 		outputText("Tyrantia points to a nearby flat area, the rocks swept aside. You join her there, and her eyes glow as she levels her spear, spreading her legs out into a wide stance. You notice she isn’t putting much weight on her front legs, and you suspect she’s just as ready to strike with those as with her Phallic Spear.\n\n");
 		outputText("<i>“Show me what you’ve got!”</i>\n\n");
@@ -860,42 +835,21 @@ public function TyrantiaLostSparring(hpVictory:Boolean):void {
 		outputText("The giantess groans, her spider-legs shaking. Now drooling from her cunt-flap, she slowly falls, resting her lower-half on the ground. She shakes her helmet off, cheeks bright red as she flicks her flap aside.\n\n");
 		outputText("<i>“Gods…Damn it…”</i> She whispers, looking at you. <i>“Stupid Sexy asshole.”</i> Another full-body shudder wracks your giantess. <i>“Well…If you’re going to fight like this…Least you could do is help me deal with it after.”</i>\n\n");
 	}
-	if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) LevelingHerself();
+	LevelingHerself();
 	cleanupAfterCombat();
 }
 private function LevelingHerself():void {
-	if (flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] >= 1) flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER]++;
-	else flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] = 1;
-	if (flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] == 10 && flags[kFLAGS.TYRANTIA_LVL_UP] == 1) {
-		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers5)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers5, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 10));
-		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers5, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 10), 0, 0, 0);
-		flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] = 0;
-		flags[kFLAGS.TYRANTIA_LVL_UP] = 2;
+	if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) {
+		if (flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] >= 1) flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER]++;
+		else flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] = 1;
+		if (flags[kFLAGS.TYRANTIA_LVL_UP] < 4 && flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] >= flags[kFLAGS.TYRANTIA_LVL_UP] + 9) {
+			var addToV1:Number = player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER];
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers5)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers5, 1, addToV1);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers5, addToV1, 0, 0, 0);
+			flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] = 0;
+			++flags[kFLAGS.TYRANTIA_LVL_UP];
+		}
 	}
-	if (flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] == 11 && flags[kFLAGS.TYRANTIA_LVL_UP] == 2) {
-		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers5)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers5, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 11));
-		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers5, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 11), 0, 0, 0);
-		flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] = 0;
-		flags[kFLAGS.TYRANTIA_LVL_UP] = 3;
-	}
-	if (flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] == 12 && flags[kFLAGS.TYRANTIA_LVL_UP] == 3) {
-		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers5)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers5, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 12));
-		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers5, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 12), 0, 0, 0);
-		flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] = 0;
-		flags[kFLAGS.TYRANTIA_LVL_UP] = 4;
-	}/*
-	if (flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] == 13 && flags[kFLAGS.TYRANTIA_LVL_UP] == 4) {
-		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers5)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers5, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 13));
-		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers5, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 13), 0, 0, 0);
-		flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] = 0;
-		flags[kFLAGS.TYRANTIA_LVL_UP] = 5;
-	}
-	if (flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] == 14 && flags[kFLAGS.TYRANTIA_LVL_UP] == 5) {
-		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers5)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers5, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 14));
-		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers5, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 14), 0, 0, 0);
-		flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] = 0;
-		flags[kFLAGS.TYRANTIA_LVL_UP] = 6;
-	}*/
 }
 
 public function TyrantiaTraining():void {
@@ -1099,7 +1053,7 @@ public function TyrantiaSexMenu():void {
 		}
 	}
 	if (player.hasVagina()) addButton(5, "P.Spear", GetPhallustuffed);
-	if (TyrantiaFollowerStage >= 4) addButton(14, "Back", TyrantiaAtCamp);
+	if (isLover()) addButton(14, "Back", TyrantiaAtCamp);
 }
 
 public function TyrantiaFuck():void {
@@ -1133,8 +1087,7 @@ public function TyrantiaFuck():void {
 		}
 	}
 	player.sexReward("vaginalFluids","Dick");
-    if (CoC.instance.inCombat) cleanupAfterCombat();
-	doNext(camp.returnToCampUseOneHour);
+	cleanupAfterCombat();
 }
 
 public function TyrantiaTitJob():void {
@@ -1151,9 +1104,8 @@ public function TyrantiaTitJob():void {
 	outputText("You can’t hold it back any longer! With a groan, your mast throbs, your aching balls twitching as you cum, spurting your load down your Drider lover’s throat.\n\n");
 	outputText("\"Tyrantia, to your shock, barely even gags as she slides herself down all the way, her fangs now touching your sack. Her throat works, tightening around you, and with this extra stimulation, your orgasm keeps going…and going… Your lover gulps it down, her five eyes looking up at your face, half-closed. Finally, your orgasm ends, and she slowly pulls her head back, your sensitive [cock] still twitching. As your [cockhead] passes her lips, she gently takes your tool in her hands, kissing your head before gently letting your cock rest.\n\n");
 	outputText("\"<i>Good to the last drop, lover.</i>\" She says, breathing heavily. <i>“I’d ask if you enjoyed it…but I think we both know you did.”</i> Once you’ve recovered, you thank Tyrantia for the titjob. She waves it off, smiling.\n\nYou redress and head your separate ways, but you make a note to come back to "+(TyrantiaFollowerStage >= 6 ? "Tyrantia’s part of camp more often":"the Battlefield more frequently. This was <i>definitely</i> worth the trip")+".\n\n");
-	player.sexReward("Default","Dick", true,false);
-    if (CoC.instance.inCombat) cleanupAfterCombat();
-	doNext(camp.returnToCampUseOneHour);
+	player.sexReward("no", "Dick");
+	cleanupAfterCombat();
 }
 
 public function TyrantiaHugFuck():void {
@@ -1196,8 +1148,7 @@ public function TyrantiaHugFuckCover():void {
 	clearOutput();
 	outputText("You hop into her arms, covering both of your genitals by wrapping your [legs] around your lover. This leaves your ass completely exposed, a problem quickly rectified by Tyrantia, who wraps one furry arm around your [ass], covering you with a layer of muscle and fur. You give Tyrantia a peck on the cheek, and she carries you back to camp. Your [cock] slaps against her still-sticky chitin, but you both go your separate ways when you reach camp. <i>“Thank you for this.”</i> she says before you part ways. <i>“...As hard as things can get...You make it a lot easier for me, when we make love.”</i>\n\n");
 	player.sexReward("vaginalFluids","Dick");
-    if (CoC.instance.inCombat) cleanupAfterCombat();
-	doNext(camp.returnToCampUseOneHour);
+	cleanupAfterCombat();
 }
 
 public function TyrantiaHugFuckLolno():void {
@@ -1208,8 +1159,7 @@ public function TyrantiaHugFuckLolno():void {
 	outputText("<i>“No. It’s not my fault you’ve got such a nice ass. Teasing me all the way back.”</i> Tyrantia slaps you on the [ass], hard. <i>“I’ll deal with it. You should get back to your work, I guess.”</i> She strides back towards her hutch, and you follow, reminding her that your gear is there.\n\n");
 	outputText("<i>“...Oh. Right.”</i> Tyrantia leads you back to her hutch, and stays outside as you put your clothes back on. You head back to your part of camp, leaving Tyrantia looking down at the ground, a confused look on her face.\n\n");
 	player.sexReward("vaginalFluids","Dick");
-    if (CoC.instance.inCombat) cleanupAfterCombat();
-	doNext(camp.returnToCampUseOneHour);
+	cleanupAfterCombat();
 }
 
 public function TyrantiaCavFuck():void {
@@ -1269,10 +1219,9 @@ public function GetPhallustuffed():void {
 	outputText("This brings Tyrantia to orgasm, and a deluge of femspunk hits you right in the face. You close your eyes, coughing as the sweet fluid enters your mouth and nose. Tyrantia finally falls, and you hug her upper half, letting the giantess rest it on you for a bit.\n\n");
 	outputText("\"<i>Gods...Damn, I love you.</i>\" Your Drider lover starts snoring, and you gently lower her exhausted upper body to the floor. She’ll reek like sex for quite some time, but you don’t think the giantess will mind that much.\n\n");
 	player.sexReward("Default","Vaginal");
-	if (CoC.instance.inCombat) cleanupAfterCombat();
-	doNext(camp.returnToCampUseOneHour);
+	cleanupAfterCombat();
 }
-	
+
 private function chanceToFail():Number {
 	var chance:Number = 10;
 	chance += Math.min(player.cumQ() / 25,40);
@@ -1282,12 +1231,16 @@ private function chanceToFail():Number {
 
 public function TyrantiaAtCamp():void {
 	clearOutput();
-	outputText("You decide to go see your Drider Giantess. As you walk over to her hutch, Tyrantia comes out from her dwelling, her phallic spear over one shoulder. She looks down at you, arching her back and sending the soft scraping of steel up your spine.\n\n");
-	outputText("\"<i>Oh, hey.</i>\" She rests her spider-half on the ground, so you don’t have to look up"+(player.tallness < 108 ? "" : " as much")+". \"<i>Do you need something? Or did you just come over to see me?</i>\"\n\n");
+	if (flags[kFLAGS.KIHA_FOLLOWER] == 1 && rand(10) == 0) kihaFollower.tyrantiaInteraction(true);
+	else {
+		outputText("You decide to go see your Drider Giantess. As you walk over to her hutch, Tyrantia comes out from her dwelling, her phallic spear over one shoulder. She looks down at you, arching her back and sending the soft scraping of steel up your spine.\n\n");
+		outputText("\"<i>Oh, hey.</i>\" She rests her spider-half on the ground, so you don’t have to look up" + (player.tallness < 108 ? "" : " as much") + ". \"<i>Do you need something? Or did you just come over to see me?</i>\"\n\n");
+	}
 	menu();
 	addButton(0, "Looks", TyrantiaAppearance);
 	addButton(1, "Talk", repeatEncounterBattlefieldTalk);
-	addButton(2, "Spar", TyrantiaSpar);
+	addButton(2, "Spar", TyrantiaSpar)
+		.disableIf(flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 2, "You need a good sparring ring for that.");
 	if (TyrantiaTrainingSessions >= 20) addButtonDisabled(3, "Training", "You finished all training session with her.");
 	else addButton(3, "Training", TyrantiaTraining);
 	addButton(4, "Sex", TyrantiaSexMenu);
@@ -1366,7 +1319,7 @@ public function itemImproveMenuCorrupt():void {
 		else {
 			var item:ItemType = improvableItems[i][selectfrom];
 			var from:ItemType = improvableItems[i][0];
-			selectMenu.add(item.id, curry(improveItem, item, from)).disableIf(!player.hasItem(from),"You need a "+from+" as a base to create this item")
+			selectMenu.add(item.id, curry(improveItem, item, from)).disableIf(!player.hasItem(from),"You need "+from.longName+" as a base to create this item")
 			.disableIf(player.keyItemvX("Radiant shard", 1) < 3,"You need at least three radiant shards in order to create this item.")
 			.disableIf(player.gems < 20000,"You need at least 10 000 gems in order to create this item");
 		}
@@ -1391,7 +1344,7 @@ public function itemImproveMenuCorrupt():void {
 /*
 public function JojoReaction():void {
 		clearOutput();
-		//This is to play the evening after Tyrantia is brought in. 
+		//This is to play the evening after Tyrantia is brought in.
 		outputText("You wake up to a commotion in your camp. Getting out of bed, you see a very angry Jojo facing off against Tyrantia, fists upheld. He sees you, and is very clearly relieved. <i>“[name], grab your weapon! One of the demons made it into our camp!”</i> He’s clearly nervous, staring up at the Drider Giantess with fear in his eyes. Tyrantia gives you a loaded look, like <i>“You’ve got to be kidding me.”</i>\n\n");
 		outputText("<i>“I’m going to grab something to eat. If you want something, come by my hut later, okay?”</i> She simply ignores Jojo and his objections, calmly walking away.\n\n");
 		outputText("<i>“Marae Above, that...Was terrifying.”</i> Jojo looks at you, expectantly. <i>“[name]...Is that corrupted...Demon...Staying?!”</i>\n\n");
@@ -1400,4 +1353,4 @@ public function JojoReaction():void {
 doNext(camp.returnToCamp);
 }*/
 }
-}
+}

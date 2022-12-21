@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.Areas.Beach 
+package classes.Scenes.Areas.Beach
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -57,7 +57,7 @@ public class CancerAttack extends Monster
 		}
 
 		private function Grab():void {
-			if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1){
+			if (Combat.playerWaitsOrDefends()){
 				outputText("By observing your environment and staying alert, you manage to dodge just in time as the pincer dig its way back up from under you. \n\n");
 			} else if (player.isFlying()) {
 				outputText("You can’t help but chuckle at the cancer futile attempts to ambush you from beneath, simply flying way out of its reach. You taunt [monster him] still chuckling.\n\n" +
@@ -149,7 +149,7 @@ public class CancerAttack extends Monster
 			this.tallness = rand(8) + 70;
 			this.hips.type = Hips.RATING_AMPLE + 2;
 			this.butt.type = Butt.RATING_LARGE;
-			this.skinTone = "light";
+			this.bodyColor = "light";
 			this.hairColor = "pale brown";
 			this.hairLength = 15;
 			initStrTouSpeInte(167, 185, 149, 42);
@@ -163,7 +163,6 @@ public class CancerAttack extends Monster
 			this.bonusHP = 200;
 			this.bonusLust = 263;
 			this.lust = 30;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 37;
 			this.gems = rand(40)+40;
 			this.drop = new WeightedDrop().addMany(1, consumables.BUBBLEG);

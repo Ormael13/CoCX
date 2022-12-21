@@ -13,12 +13,13 @@ import classes.BodyParts.Tail;
 
     public class KitsuneThyroidGlandMutation extends IMutationPerkType
     {
+        private static const mName:String = "Kitsune Thyroid Gland";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier >= 1){
-                descS += "Illusion & Terror -3CD";
+                descS += "50% reduced mana costs of FoxFire";
             }
             if (pTier >= 2){
                 descS += ", FoxFire +50% damage (fire and lust)";
@@ -43,7 +44,7 @@ import classes.BodyParts.Tail;
                 default:
                     sufval = "";
             }
-            return "Kitsune Thyroid Gland " + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -54,10 +55,10 @@ import classes.BodyParts.Tail;
                 this.requirements = [];
                 if (pTier == 0){
                     this.requireThyroidGlandMutationSlot()
-                    .requireAnyPerk(PerkLib.EnlightenedKitsune, PerkLib.CorruptedKitsune)
+                    .requireAnyPerk(PerkLib.EnlightenedKitsune, PerkLib.CorruptedKitsune, PerkLib.StarSphereMastery)
                     .requireCustomFunction(function (player:Player):Boolean {
-                        return player.tailType == Tail.FOX && player.tailCount >= 2;
-                    }, "2+ fox tails");
+                        return (player.tailType == Tail.FOX || player.tailType == Tail.KITSHOO) && player.tailCount >= 2;
+                    }, "2+ fox/kitshoo tails");
                 }
                 else{
                     var pLvl:int = pTier * 30;
@@ -68,9 +69,8 @@ import classes.BodyParts.Tail;
             }
         }
 
-        override public function pBuffs(target:Creature = null):Object{
+        override public function buffsForTier(pTier:int):Object {
             var pBuffs:Object = {};
-            var pTier:int = currentTier(this, (target == null)? player : target);
             if (pTier == 1) {
                 pBuffs['spe.mult'] = 0.05;
                 pBuffs['wis.mult'] = 0.05;
@@ -89,8 +89,7 @@ import classes.BodyParts.Tail;
 
         //Mutations Buffs
         public function KitsuneThyroidGlandMutation() {
-            super("Kitsune Thyroid Gland IM", "Kitsune Thyroid Gland", ".")
-            maxLvl = 3;
+            super(mName + " IM", mName, SLOT_THYROID, 3)
         }
 
     }

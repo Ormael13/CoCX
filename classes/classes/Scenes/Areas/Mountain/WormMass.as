@@ -9,13 +9,8 @@ public class WormMass extends Monster
 	{
 		public function wormAttack():void {
 			//Dodged!
-			if(player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80) {
+			if(player.getEvasionRoll()) {
 				outputText("The worm colony flails at you with its simulated arms, but its lack of coordination allows you to easily dodge its attack.\n");
-				return;
-			}
-			//Evade
-			if(player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
-				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "' attacks.\n");
 				return;
 			}
 			var temp:int = int((str + weaponAttack) - Math.random()*(player.tou+player.armorDef));
@@ -39,7 +34,7 @@ public class WormMass extends Monster
 			//SUCCESS
 			if(player.lust < 50) {
 				outputText("The worm colony stands before you and begins secreting a significant amount of slime. Inexplicably, you find that your [cock] is already erect and is throbbing. The erection is quite meddlesome and you find yourself distracted by the unwanted arousal.\n");
-				player.dynStats("lus", 10+player.lib/20+player.cor/20);
+				player.takeLustDamage(10+player.lib/20+player.cor/20, true);
 			}
 			else {
 				outputText("The worm colony shambles over to you and attempts to grapple you. Attempting to dodge, you fail to get away fast enough and fall to the ground engulfed by the mass. You are completely covered in the slimy worms!!! Incapable of avoiding any of their movements, you feel their slime coat every inch of your body and you feel the struggle and strain of each individual worm as they crawl all over you. You immediately begin flailing wildly as you cannot even breathe!");
@@ -94,7 +89,7 @@ public class WormMass extends Monster
 			this.tallness = 1;
 			this.hips.type = Hips.RATING_SLENDER;
 			this.butt.type = Butt.RATING_BUTTLESS;
-			this.skinTone = "white";
+			this.bodyColor = "white";
 			initStrTouSpeInte(40, 10, 10, 1);
 			initWisLibSensCor(1, 90, 60, 90);
 			this.weaponName = "worm";
@@ -106,7 +101,6 @@ public class WormMass extends Monster
 			this.bonusLust = 156;
 			this.lust = 30;
 			this.lustVuln = 0;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 6;
 			this.gems = 0;
 			this.special1 = wormAttack;

@@ -2,11 +2,14 @@
  * Coded by aimozg on 17.01.2020.
  */
 package coc.view {
+import classes.Scenes.Holidays;
+
 import flash.text.TextField;
 
 public class CornerStatsView extends Block {
 	internal var advancementText:TextField;
 	internal var timeText:TextField;
+	internal var debugBuildVersion:TextField;
 	internal var levelBar:StatBar;
 	internal var xpBar:StatBar;
 	internal var gemsBar:StatBar;
@@ -53,8 +56,14 @@ public class CornerStatsView extends Block {
 			hasBar: false
 		}));
 		timeText = addTextField({
-			htmlText: '<u>Day#: 0</u>\nTime: 00:00',
+			htmlText: '<u>Day#: 0</u>'
+				+ '\n<u>Date: D: 01 Jun 2010</u>'
+				+ '\nTime: 00:00',
 			defaultTextFormat: StatsView.TIME_FORMAT
+		},{before:1});
+		debugBuildVersion = addTextField({
+			text:'CoCX: UNKNOWN, NG: 0',
+			defaultTextFormat: StatsView.TEXT_FORMAT
 		},{before:1});
 	}
 	

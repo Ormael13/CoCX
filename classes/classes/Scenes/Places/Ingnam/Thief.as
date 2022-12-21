@@ -1,4 +1,4 @@
-package classes.Scenes.Places.Ingnam 
+package classes.Scenes.Places.Ingnam
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -9,13 +9,13 @@ import classes.internals.*;
 public class Thief extends Monster
 	{
 		
-				
+		
 		override public function defeated(hpVictory:Boolean):void
 		{
 			SceneLib.ingnam.thiefScene.winAgainstThief();
 		}
 		
-		public function Thief() 
+		public function Thief()
 		{
 			this.a = "the ";
 			this.short = "thief";
@@ -29,7 +29,7 @@ public class Thief extends Monster
 			this.tallness = 5*12 + 5 + rand(4);
 			this.hips.type = Hips.RATING_BOYISH;
 			this.butt.type = Butt.RATING_TIGHT;
-			this.skinTone = "light";
+			this.bodyColor = "light";
 			this.hairColor = "brown";
 			this.hairLength = 4;
 			initStrTouSpeInte(11, 9, 9, 11);
@@ -42,7 +42,6 @@ public class Thief extends Monster
 			this.armorMDef = 0;
 			this.bonusLust = 33;
 			this.lust = 25;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 1;
 			this.gems = 15+rand(5);
 			this.drop = new WeightedDrop().add(weapons.DAGGER,1)

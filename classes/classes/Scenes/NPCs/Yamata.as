@@ -2,13 +2,14 @@
  * ...
  * @author Zakanard
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Combat.Combat;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
@@ -24,17 +25,17 @@ import classes.internals.*;
 				outputText("Rushing toward you, Yamata drops down low, then leaps up into a wide swing. You flinch as you see the tip of her blade glide across your skin, but she dances away at the last second, leaving behind an angry red wound that hurts like hell, but is far from life-threatening. <i>\"Oh yeah, scream for me baby!\"</i> The realization that she’s toying with you is practically infuriating!  ");
 				damage = int(str/2) + rand(15);
 			} else if (x == 1) {
-				outputText("You back away as Yamata goes into the offensive, doing your best to dodge her attacks. The tip of her blade grazes you a few times, and the shallow wounds they leave behind hurt far worse than they really should. She raises the blade to her lips and gently licks it, grinning vindictively at you. You’re certain now that Yamata is just trying to inflict as much pain as possible before finishing you off.  ");	
-				damage = int(str/2) + rand(35);	
+				outputText("You back away as Yamata goes into the offensive, doing your best to dodge her attacks. The tip of her blade grazes you a few times, and the shallow wounds they leave behind hurt far worse than they really should. She raises the blade to her lips and gently licks it, grinning vindictively at you. You’re certain now that Yamata is just trying to inflict as much pain as possible before finishing you off.  ");
+				damage = int(str/2) + rand(35);
 			} else if (x == 2) {
 				outputText("Yamata digs her heels into the ground, taunting you with a crude gesture. Her serpentine hair suddenly lashes forward, morphing before your eyes into countless blades! Thankfully, she seems to purposely avoid anything vital, but the grazing cuts they leave behind hurt terribly. <i>\"Ahahahaha! Doesn’t it just make you HARD?!\"</i>  ");
 				damage = int(str) - rand(25);
-				player.takeLustDamage(7);
+				player.takeLustDamage(7, true);
 				flags[kFLAGS.YAMATA_MASOCHIST]++;
 			} else {
 				outputText("With a quick whipping motion, Yamata’s serpentine hair lashes toward you, splitting into thousands of thin strands that whip against your flesh. Pain lances through your body wherever they touch, but the intense tingling sends blood boiling to your loins involuntarily.  ");
 				damage = int(str/2) + rand(50);
-				player.takeLustDamage(12);
+				player.takeLustDamage(12, true);
 				flags[kFLAGS.YAMATA_MASOCHIST]++;
 			}
 			
@@ -44,12 +45,12 @@ import classes.internals.*;
 			else player.addStatusValue(StatusEffects.IzmaBleed, 1, 1);
 		}
 		
-		private function yamataDarkFoxfire():void 
+		private function yamataDarkFoxfire():void
 		{
 			outputText("Yamata moves her fingers through the air in a circle, conjuring up a corrupted purple flame. She twists her upper body into a batter’s stance and strikes it with the flat of her blade, making the fireball rocket toward you like a missile, bursting on impact! The flames burn intensely as they engulf you, but the more it burns, the more you start to LIKE it.  ");
 			player.takeFireDamage(int(str/2) + rand(15), true);
 			//if masochist, take more damage
-			(player.hasPerk(PerkLib.Masochist) ?  player.takeLustDamage(15 + player.effectiveSensitivity()/10) : player.takeLustDamage((10 + player.effectiveSensitivity()/10)*2));
+			(player.hasPerk(PerkLib.Masochist) ?  player.takeLustDamage(15 + player.effectiveSensitivity()/10, true) : player.takeLustDamage((10 + player.effectiveSensitivity()/10)*2, true), true);
 			flags[kFLAGS.YAMATA_MASOCHIST]++;
 		}
 		
@@ -59,14 +60,14 @@ import classes.internals.*;
 			//Resist: - successfully resisting deals small health & lust damage to Yamata
 			var resist:int = 0;
 			resist = (player.inte < 80 ? Math.round(player.inte/70*25) : 25);
-			if (player.hasPerk(PerkLib.Whispered)) 
+			if (player.hasPerk(PerkLib.Whispered))
 				resist += 30;
-			else 
+			else
 				outputText("Some small part of you knows this can’t be real, but you’re too terrified to act right now! ");
 			if (player.hasPerk(PerkLib.HistoryReligious) && player.cor <= 20)
 				resist += 15 - player.corAdjustedDown;
 			if (rand(100) < resist) {
-				outputText("\n\nSummoning up every last ounce of courage you have, you push back the illusions with your mind! Yamata reels a bit, clutching her forehead in pain, but only grins at you. <i>\"That all you got, hero?\"</i>");				
+				outputText("\n\nSummoning up every last ounce of courage you have, you push back the illusions with your mind! Yamata reels a bit, clutching her forehead in pain, but only grins at you. <i>\"That all you got, hero?\"</i>");
 				if (player.hasStatusEffect(StatusEffects.Fear))
 					player.removeStatusEffect(StatusEffects.Fear);
 			} else {
@@ -110,12 +111,12 @@ import classes.internals.*;
 						break;
 					case 1:
 						outputText("\n\n<i>\"This is my realm... and in my realm... you get to feel good...\"</i> her strange words entice you as you widen your eyes, you try to hit her but you always seem to miss. A mischievous grin comes from her figure as you feel something rubbing your crotch, is one of her tails! Oh damn, it feels so good!  ");
-						player.takeLustDamage(lustDmg);
+						player.takeLustDamage(lustDmg, true);
 						break;
 					case 2:
 						outputText("\n\nYamata turns around, brushing her tails to the side to expose her ample hindquarters, showing off her juicy-looking cheeks. Her display sends blood rushing to your groin, making you lick your lips eagerly.\n\n"
 						+"Yamata pauses for a moment, placing a hand on her taut abs and sliding her fingers downward slowly, gazing deep into your eyes. Her tails fan out around her, curling around her limbs seductively, and she gives you a flirtatious leer as she watches your body tremble with desire.  ");
-						player.takeLustDamage(lustDmg*2);
+						player.takeLustDamage(lustDmg*2, true);
 						break;
 						
 					default:
@@ -156,7 +157,7 @@ import classes.internals.*;
 		{
 			clearOutput();
 			outputText("You struggle against Yamata’s grip with every ounce of strength you can muster, desperately trying to free yourself.\n\n");
-			var brokeFree:Boolean;			
+			var brokeFree:Boolean;
 			if ((rand(player.str) > (this.str / 4)*3) || rand(5)==0 || player.hasPerk(PerkLib.FluidBody)) {
 				brokeFree = true;
 			}
@@ -167,7 +168,7 @@ import classes.internals.*;
 				if (player.str < 90)
 					outputText(" immense");
 				else
-					outputText(" impressive"); 
+					outputText(" impressive");
 				outputText(" strength, in an attempt to free yourself from her corrupting embrace, without success.");
 				var damage:int = 25 + rand(15);
 				player.takePhysDamage(damage, true);
@@ -193,7 +194,7 @@ import classes.internals.*;
 			flags[kFLAGS.YAMATA_MASOCHIST] += 2;
 			performCombatAction();
 		}
-				
+		
 		private function foxfireCanon1():void
 		{
 			outputText("Yamata’s hair snakes begin to fan themselves out, curling toward you with their jaws unhinged and open wide. They seem to be drawing in energy as bright balls of purple flame begin to build up in each of their mouths. It looks like Yamata is charging up for something big!");
@@ -203,7 +204,7 @@ import classes.internals.*;
 		private function foxfireCanon2():void
 		{
 			var totaldmg:int = 0;
-			if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) {
+			if (Combat.playerWaitsOrDefends()) {
 				outputText("The air is suddenly filled with missiles of corrupted flame as each of the eight snake heads launches its own projectile at you! Thankfully you were prepared for it, and easily dip, duck, and dive through all of the flaming missiles, emerging unscathed.");
 			} else {
 				var hits:int = rand(9);
@@ -347,7 +348,7 @@ import classes.internals.*;
 			SceneLib.aikoScene.yamataWins();
 		}
 
-		public function Yamata() 
+		public function Yamata()
 		{
 			this.a = "";
 			this.short = "Yamata";
@@ -362,7 +363,7 @@ import classes.internals.*;
 			this.tallness = 69;
 			this.hips.type = Hips.RATING_AMPLE;
 			this.butt.type = Butt.RATING_AVERAGE+1;
-			this.skinTone = "light tan";			//might need to change to russet
+			this.bodyColor = "light tan";			//might need to change to russet
 			this.hairColor = "black";
 			this.hairLength = 22;
 			initStrTouSpeInte(120, 140, 270, 200);
@@ -375,7 +376,6 @@ import classes.internals.*;
 			this.lust = 25;
 			this.bonusLust = 310;
 			this.lustVuln = 0.35;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = 60;
 			this.gems = rand(20) + 30;
 			this.drop = new WeightedDrop(consumables.MYSTJWL, 1);

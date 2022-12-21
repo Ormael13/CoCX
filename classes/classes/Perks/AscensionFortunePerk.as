@@ -1,4 +1,4 @@
-package classes.Perks 
+package classes.Perks
 {
 	import classes.PerkClass;
 	import classes.PerkType;
@@ -9,18 +9,19 @@ package classes.Perks
 		
 		override public function desc(params:PerkClass = null):String
 		{
+			if (!player || !params) return _desc;
 			return "(Rank: " + params.value1 + ") Increases gems gained in battles by " + params.value1 * 20 + "%.";
 		}
 		
-		public function AscensionFortunePerk() 
+		public function AscensionFortunePerk()
 		{
 			super("Ascension: Fortune", "Ascension: Fortune", "", "Increases gems gains by 20% per level.");
 		}
 		
-		override public function keepOnAscension(respec:Boolean = false):Boolean 
+		override public function keepOnAscension(respec:Boolean = false):Boolean
 		{
 			return true;
-		}		
+		}
 	}
 
 }

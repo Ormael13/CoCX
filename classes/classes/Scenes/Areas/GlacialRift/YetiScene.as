@@ -4,6 +4,7 @@ package classes.Scenes.Areas.GlacialRift
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armors.LustyMaidensArmor;
+import classes.Scenes.Areas.Mountain.MinotaurScene;
 import classes.Scenes.SceneLib;
 
 public class YetiScene extends BaseContent
@@ -81,7 +82,7 @@ public class YetiScene extends BaseContent
 				else outputText("them");
 				outputText(" ache all the more.");
 			}
-			if (player.balls > 0) outputText("Your ballsack is slimy with the stuff. ");
+			if (player.hasBalls()) outputText("Your ballsack is slimy with the stuff. ");
 			if (player.hasVagina()) outputText("You can feel it pooling along the lips of your mound. ");
 			outputText("The yeti’s furred balls slap against you, bludgeoning you with their large size, your cheeks reddening under its abuse. ");
 			if (player.mf("m", "f") == "m") outputText("The tip of the beast’s length rams into your prostate, making you cry out in pleasure.") ;
@@ -105,11 +106,15 @@ public class YetiScene extends BaseContent
 			if (player.lust >= 33) {
 				addButtonIfTrue(0, "Buttfuck", fuckYetiInTheAss, "Req. a cock", player.hasCock());
 				addButtonIfTrue(1, "RideHisCock", rideYetisCock, "Req. a vagina", player.hasVagina());
+				addButton(2, "SateYourself", MinotaurScene.slimeSateYourself).disableIf(!player.isGoo(), "Requires goo body.");
 				LustyMaidensArmor.addTitfuckButton(2);
-				SceneLib.uniqueSexScene.pcUSSPreChecksV2(winAgainstYeti);
+				addButton(14, "Leave", cleanupAfterCombat);
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(winAgainstYeti); //MUST BE CALLED AT THE END!!
 			}
-			else outputText("You're not aroused enough to rape him.")
-			addButton(14, "Leave", cleanupAfterCombat);
+			else {
+				outputText("You're not aroused enough to rape him.")
+				addButton(14, "Leave", cleanupAfterCombat);
+			}
 		}
 
 		private function fuckYetiInTheAss():void {
@@ -125,10 +130,10 @@ public class YetiScene extends BaseContent
 			outputText("The yeti strokes his giant red sprick as you fuck him, gutteral moans escaping his maw as he lays still and lets you dominate his rear. Your hands grip his furred hips, clenching down tight as you pick up the pace. \n\n");
 			if (player.biggestCockArea() >= 20) outputText("You shove as much into the beast as you can, taking what warmth you can get and moving one hand from the yeti’s hips to stroke along the inches of your length that simply won’t fit. \n\n");
 			if (player.biggestCockArea() <= 20 && player.cocks[player.biggestCockIndex()].cockType == CockTypesEnum.DOG) outputText("With a final thrust, you pop your knot past the beast’s rim, joining you two together with you as the alpha and him your bitch as you ready to breed him with your seed. You lean forward, hitting your limit as you give out a low groan.\n\n");
-			if (player.balls > 0) outputText("Your [balls] clench as your body readies to fire. You pump the yeti’s ass full of your spunk, firing out countless ropes of your seed, coating the beasts wall in your musky cum. \n\n");
+			if (player.hasBalls()) outputText("Your [balls] clench as your body readies to fire. You pump the yeti’s ass full of your spunk, firing out countless ropes of your seed, coating the beasts wall in your musky cum. \n\n");
 			if (player.cocks.length > 1) outputText("Your other cocks unload and coat his furred rear, drenching his rump in your spunk and messing his white fur with your sticky cream. With a satisfied huff you pull out, trails of your seed following your cock and leaking out across his abused rear. The beast groans as he unloads over his chest, his giant globs of thick spunk matting his fur. \n\n");
 			outputText("Without any delay you tuck your [cocks] into your [armor] and make your way out of the cavern through the passageway the yeti came in through, leaving the fearsome yeti looking like a well-used whore and collecting a few spoils along the way.");
-			player.sexReward("Default","Dick",true,false);
+			player.sexReward("no", "Dick");
 			cleanupAfterCombat();
 		}
 
@@ -150,7 +155,6 @@ public class YetiScene extends BaseContent
 			player.sexReward("cum","Vaginal");
 			cleanupAfterCombat();
 		}
-
 	}
 
 }

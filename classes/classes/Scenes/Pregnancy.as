@@ -3,11 +3,13 @@ import classes.CoC;
 import classes.CoC_Settings;
 import classes.CockTypesEnum;
 import classes.EngineCore;
+import classes.GeneticMemories.CockMem;
 import classes.GlobalFlags.kFLAGS;
 import classes.PerkLib;
 import classes.PregnancyStore;
 import classes.Scenes.NPCs.CelessScene;
 import classes.Scenes.NPCs.NPCAwareContent;
+import classes.Scenes.NPCs.SophieFollowerScene;
 import classes.StatusEffects;
 import classes.VaginaClass;
 
@@ -917,7 +919,7 @@ public class Pregnancy extends NPCAwareContent {
                         //(If Corruption >= 75)
                         else {
                             pregText += "You find yourself daydreaming about giving birth, your belly swollen huge - bigger than it currently is - and the orgasmic sensation of many large, round eggs sliding out of your [vagina].\n\nYou start to absently rub yourself as you envision eggs by the dozens coming from within you; you shall be mothergod for a whole new race of dragons...";
-                            player.dynStats("lus", 35);
+                            player.dynStats("lus", 35, "scale", false);
                         }
                         pregText += "\n\nEmber interrupts your musings with a question.  \"<i>How are you feeling? Do you need me to get you anything?</i>\"";
                         pregText += "\n\nThe dragon's question is uncharacteristic of " + emberScene.emberMF("him","her") + ".  Still, you do appreciate the attention you're getting, and so you ask Ember to fetch you some food and water.  The speed with which Ember dashes off to fulfill your requests is truly impressive!  In short moments Ember is back with a piece of roasted meat and a skin of water.";
@@ -1082,7 +1084,7 @@ public class Pregnancy extends NPCAwareContent {
                 }
                 if(player.pregnancyIncubation == 210) {
                     EngineCore.outputText("\n<b>The fluttering of sensation inside you is getting stronger and more frequent.  At times it even feels as if the inner lining of your womb is tingling.</b>\n");
-                    player.dynStats("lus", (5+player.lib/20));
+                    player.dynStats("lus", (5+player.lib/20), "scale", false);
                     displayedUpdate = true;
                 }
                 if(player.pregnancyIncubation == 185) {
@@ -1102,7 +1104,7 @@ public class Pregnancy extends NPCAwareContent {
                     EngineCore.outputText("\n<b>Your larger, squirming belly makes your pregnancy obvious for those around you");
                     if(player.hasVagina()) EngineCore.outputText(" and keeps your " + vaginaDescript(0) + " aroused from the constant tingling in your womb");
                     EngineCore.outputText(".</b>\n");
-                    player.dynStats("lus", (10+player.lib/20));
+                    player.dynStats("lus", (10+player.lib/20), "scale", false);
                     displayedUpdate = true;
                 }
                 if(player.pregnancyIncubation == 72) {
@@ -1203,11 +1205,11 @@ public class Pregnancy extends NPCAwareContent {
                         //pussy:
                         if(player.hasVagina()) EngineCore.outputText("  Against your [vagina], the slime feels warm and cold at the same time, coaxing delightful tremors from your [clit].");
                         //[balls:
-                        else if(player.balls > 0) EngineCore.outputText("  Slathered in hallucinogenic frog slime, your balls tingle, sending warm pulses of pleasure all the way up into your brain.");
+                        else if(player.hasBalls()) EngineCore.outputText("  Slathered in hallucinogenic frog slime, your balls tingle, sending warm pulses of pleasure all the way up into your brain.");
                         //genderless:
                         else EngineCore.outputText("  Your [vagina] begins twitching, aching for something to push through it over and over again.");
                         EngineCore.outputText("  Seated in your own slime, you moan softly, unable to keep your hands off yourself.");
-                        player.dynStats("lus=", player.maxLust(), "scale", false);
+                        player.dynStats("lus=", player.maxOverLust(), "scale", false);
                         displayedUpdate = true;
                     }
                     else {
@@ -1344,9 +1346,68 @@ public class Pregnancy extends NPCAwareContent {
                     }
                 }
             }
+            //Cockatrice Pregnancy
+            else if (player.pregnancyType == PregnancyStore.PREGNANCY_COCKATRICE) {
+                if (player.pregnancyIncubation === 185) {
+                    outputText("\n<b>Your belly grumbles as if empty, even though you ate not long ago.  Perhaps with all the exercise you're getting you just need to eat a little bit more.</b>\n");
+                    displayedUpdate = true;
+                }
+                if (player.pregnancyIncubation === 160) {
+                    outputText("\n<b>Your belly looks a little pudgy");
+                    if (player.thickness > 60 && player.tone < 40) outputText(" even for you");
+                    outputText(", maybe you should cut back on all the food you've been consuming lately?</b>\n");
+                    displayedUpdate = true;
+                }
+                if (player.pregnancyIncubation === 140) {
+                    outputText("\n<b>Your belly is definitely getting bigger, and no matter what you do, you can't seem to stop yourself from eating at the merest twinge of hunger.  The only explanation you can come up with is that you've gotten pregnant during your travels.  Hopefully it won't inconvenience your adventuring.</b>\n");
+                    displayedUpdate = true;
+                }
+                if (player.pregnancyIncubation === 110) {
+                    outputText("\n<b>Your belly has gotten nice and big, perhaps as big as you remember the bellies of the pregnant women back home being.  The elders always did insist on everyone doing their part to keep the population high enough to sustain the loss of a champion every year.  You give yourself a little hug, getting a surge of happiness from your hormone-addled body.  Pregnancy sure is great!</b>\n");
+                    displayedUpdate = true;
+                }
+                if (player.pregnancyIncubation === 72) {
+                    outputText("\n<b>The huge size of your pregnant belly constantly impedes your movement, but the constant squirming and shaking of your unborn offspring makes you pretty sure you won't have to carry them much longer.  A sense of motherly pride wells up in your breast - you just know you'll have such wonderful babies.");
+                    if (player.cor < 50)  outputText("  You shudder and shake your head, wondering why you're thinking such unusual things.");
+                    outputText("</b>\n");
+                    displayedUpdate = true;
+                }
+                if (player.pregnancyIncubation === 32 || player.pregnancyIncubation === 64 || player.pregnancyIncubation === 85 || player.pregnancyIncubation === 150) {
+                    //Increase lactation!
+                    if (player.biggestTitSize() >= 3 && player.mostBreastsPerRow() > 1 && player.biggestLactation() >= 1 && player.biggestLactation() < 2) {
+                        outputText("\nYour breasts feel swollen with all the extra milk they're accumulating.\n");
+                        player.boostLactation(.5);
+                        displayedUpdate = true;
+                    }
+                    if (player.biggestTitSize() >= 3 && player.mostBreastsPerRow() > 1 && player.biggestLactation() > 0 && player.biggestLactation() < 1) {
+                        outputText("\nDrops of breastmilk escape your nipples as your body prepares for the coming birth.\n");
+                        player.boostLactation(.5);
+
+                        displayedUpdate = true;
+                    }
+                    //Lactate if large && not lactating
+                    if (player.biggestTitSize() >= 3 && player.mostBreastsPerRow() > 1 && player.biggestLactation() === 0) {
+                        outputText("\n<b>You realize your breasts feel full, and occasionally lactate</b>.  It must be due to the pregnancy.\n");
+                        player.boostLactation(1);
+                        displayedUpdate = true;
+                    }
+                    //Enlarge if too small for lactation
+                    if (player.biggestTitSize() === 2 && player.mostBreastsPerRow() > 1) {
+                        outputText("\n<b>Your breasts have swollen to C-cups,</b> in light of your coming pregnancy.\n");
+                        player.growTits(1, 1, false, 3);
+                        displayedUpdate = true;
+                    }
+                    //Enlarge if really small!
+                    if (player.biggestTitSize() === 1 && player.mostBreastsPerRow() > 1) {
+                        outputText("\n<b>Your breasts have grown to B-cups,</b> likely due to the hormonal changes of your pregnancy.\n");
+                        player.growTits(1, 1, false, 3);
+                        displayedUpdate = true;
+                    }
+                }
+            }
         }
         if (player.pregnancyIncubation > 0 && player.pregnancyIncubation < 2) player.knockUpForce(player.pregnancyType, 1);
-        if(player.pregnancyIncubation == 1) {
+        if(player.pregnancyIncubation == 1 && player.pregnancyType != PregnancyStore.PREGNANCY_BENOIT) {
             if(player.fertility < 15) player.fertility++;
             if(player.fertility < 25) player.fertility++;
             if(player.fertility < 40) player.fertility++;
@@ -1498,8 +1559,7 @@ public class Pregnancy extends NPCAwareContent {
                     if(player.cockTotal() > 0) EngineCore.outputText("  The tentacles writhe around, rubbing against your " + player.multiCockDescriptLight());
                     //(doesn't exist)
                     else EngineCore.outputText("  The tentacles curl inwards, rubbing on the head of your new blue pecker");
-                    player.createCock((4+rand(3)),1.2);
-                    player.cocks[player.cockTotal()-1].cockType = CockTypesEnum.ANEMONE;
+                    player.createCock((4+rand(3)),1.2, CockTypesEnum.ANEMONE);
                     EngineCore.outputText(" and you quickly become fully erect from the aphrodisiac they inject.  Over and over the tentacles caress [eachcock] sensually, leaving behind a tingling trail of vibrant pleasure");
                     //[(if no dick1 and no balls)
                     if(player.cockTotal() == 1 && player.balls == 0) EngineCore.outputText("; you feel a pressure build below the shaft, near your asshole");
@@ -1518,6 +1578,7 @@ public class Pregnancy extends NPCAwareContent {
                     else if(player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_SLAVERING) EngineCore.outputText("a squirt");
                     else EngineCore.outputText("nearly a cupful of fluid");
                     EngineCore.outputText(" from your female orgasm to the puddle on the ground below your ass.\n\n");
+                    Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.ANEMONE));
                     //(gain 1 nemo-dick, reduce lust to min)]
                     player.orgasm();
                     player.dynStats("lib", 2, "sen", 5);
@@ -1541,6 +1602,34 @@ public class Pregnancy extends NPCAwareContent {
                 CelessScene.instance.birthScene();
                 return false;
             }
+            //Birth to harpy
+            if (player.pregnancyType == PregnancyStore.PREGNANCY_HARPY_EGGS){
+                EngineCore.outputText("\n");
+                //Large egg scene
+                EngineCore.outputText("A sudden shift in the weight of your pregnant belly staggers you, dropping you to your knees.  You realize something is about to be birthed, and you shed your [armor] before it can be ruined by what's coming.  A contraction pushes violently through your midsection, ");
+                if(player.vaginas[0].vaginalLooseness < VaginaClass.LOOSENESS_LOOSE) EngineCore.outputText("stretching your tight cunt painfully, the lips opening wide ");
+                if(player.vaginas[0].vaginalLooseness >= VaginaClass.LOOSENESS_LOOSE && player.vaginas[0].vaginalLooseness <= VaginaClass.LOOSENESS_GAPING_WIDE) EngineCore.outputText("temporarily stretching your cunt-lips wide-open ");
+                if(player.vaginas[0].vaginalLooseness > VaginaClass.LOOSENESS_GAPING_WIDE) EngineCore.outputText("parting your already gaping lips wide ");
+                EngineCore.outputText("as something begins sliding down your passage.  A burst of green slime soaks the ground below as the birthing begins in earnest, and the rounded surface of a strangely colored egg peaks between your lips.  You push hard and the large egg pops free at last, making you sigh with relief as it drops into the pool of slime.  The experience definitely turns you on, and you feel your clit growing free of its hood as another big egg starts working its way down your birth canal, rubbing your sensitive vaginal walls pleasurably.   You pant and moan as the contractions stretch you tightly around the next, slowly forcing it out between your nether-lips.  The sound of a gasp startles you as it pops free, until you realize it was your own voice responding to the sudden pressure and pleasure.  Aroused beyond reasonable measure, you begin to masturbate ");
+                if(player.clitLength > 5) EngineCore.outputText("your massive cock-like clit, jacking it off with the slimy birthing fluids as lube.   It pulses and twitches in time with your heartbeats, its sensitive surface overloading your fragile mind with pleasure.  ");
+                if(player.clitLength > 2 && player.clitLength <= 5) EngineCore.outputText("your large clit like a tiny cock, stroking it up and down between your slime-lubed thumb and fore-finger.  It twitches and pulses with your heartbeats, the incredible sensitivity of it overloading your fragile mind with waves of pleasure.  ");
+                if(player.clitLength <= 2) EngineCore.outputText("your " + vaginaDescript(0) + " by pulling your folds wide and playing with your clit.  Another egg pops free from your diminishing belly, accompanied by an audible burst of relief.  You make wet 'schlick'ing sounds as you spread the slime around, vigorously frigging yourself.  ");
+                EngineCore.outputText("You cum hard, the big eggs each making your cunt gape wide just before popping free.  You slump down, exhausted and barely conscious from the force of the orgasm.  ");
+                if(player.statusEffectv3(StatusEffects.Eggs) >= 11) EngineCore.outputText("Your swollen belly doesn't seem to be done with you, as yet another egg pushes its way to freedom.   The stimulation so soon after orgasm pushes you into a pleasure-stupor.  If anyone or anything discovered you now, they would see you collapsed next to a pile of eggs, your fingers tracing the outline of your " + vaginaDescript(0) + " as more and more eggs pop free.  In time your wits return, leaving you with the realization that you are no longer pregnant.  ");
+                EngineCore.outputText("\n\nYou gaze down at the mess, counting " + eggDescript() + ".");
+                player.orgasm();
+                player.dynStats("scale", false);
+
+                EngineCore.outputText("\n\nWhile many of your eggs are not fertile, one in particular stands out. <b>Powerful motherly instinct compels you to keep and protect this egg with your life!</b>" +
+                        " This egg is your precious baby and you won't let anyone damage it least of all a big dicked demon." +
+                        "\n\nWith unshakable resolve you carefully bring the egg to your nest and proceed to tenderly wrap it in clothes and material to keep it warm when you ain't there to hatch it.");
+                SophieFollowerScene.HarpyEggHatching = true;
+                player.cuntChange(20, true);
+                player.knockUpForce(); //Clear Pregnancy
+                player.knockUp(PregnancyStore.PREGNANCY_HARPY_HATCHING, PregnancyStore.PREGNANCY_HARPY_HATCHING, 1, 1); //Set Player to Hatching stage
+                return false;
+            }
+
             //Give birth to Zenji kid
             if (player.pregnancyType == PregnancyStore.PREGNANCY_ZENJI){
                 player.knockUpForce(); //Clear Pregnancy
@@ -1604,7 +1693,6 @@ public class Pregnancy extends NPCAwareContent {
             }
             //Give birth if it's time (to a cowgirl!)
             if (player.pregnancyType == PregnancyStore.PREGNANCY_MARBLE) {
-                if (prison.prisonLetter.deliverChildWhileInPrison()) return displayedUpdate;
                 player.knockUpForce(); //Clear Pregnancy
                 player.boostLactation(.01);
 
@@ -1710,17 +1798,12 @@ public class Pregnancy extends NPCAwareContent {
             //Amily failsafe - converts PC with pure babies to mouse babies if Amily is corrupted
             if (player.pregnancyType == PregnancyStore.PREGNANCY_AMILY)
             {
-                if(flags[kFLAGS.AMILY_FOLLOWER] == 2 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00170] > 0) player.knockUpForce(PregnancyStore.PREGNANCY_MOUSE, player.pregnancyIncubation);
+                if(flags[kFLAGS.AMILY_FOLLOWER] == 2 || flags[kFLAGS.AMILY_CORRUPTION] > 0) player.knockUpForce(PregnancyStore.PREGNANCY_MOUSE, player.pregnancyIncubation);
             }
             //Amily failsafe - converts PC with pure babies to mouse babies if Amily is with Urta
             if (player.pregnancyType == PregnancyStore.PREGNANCY_AMILY)
             {
                 if(flags[kFLAGS.AMILY_VISITING_URTA] == 1 || flags[kFLAGS.AMILY_VISITING_URTA] == 2) player.knockUpForce(PregnancyStore.PREGNANCY_MOUSE, player.pregnancyIncubation);
-            }
-            //Amily failsafe - converts PC with pure babies to mouse babies if PC is in prison.
-            if (player.pregnancyType == PregnancyStore.PREGNANCY_AMILY)
-            {
-                if(prison.inPrison) player.knockUpForce(PregnancyStore.PREGNANCY_MOUSE, player.pregnancyIncubation);
             }
             //Give birth if it's time (to an AMILY BITCH mouse!)
             if (player.pregnancyType == PregnancyStore.PREGNANCY_AMILY) {
@@ -1751,7 +1834,7 @@ public class Pregnancy extends NPCAwareContent {
 
 
                 //Main Text here
-                if (player.pregnancyType == PregnancyStore.PREGNANCY_JOJO && (monk < 0 || flags[kFLAGS.JOJO_BIMBO_STATE] == 3) && !prison.inPrison) {
+                if (player.pregnancyType == PregnancyStore.PREGNANCY_JOJO && (monk < 0 || flags[kFLAGS.JOJO_BIMBO_STATE] == 3)) {
                     if (flags[kFLAGS.JOJO_BIMBO_STATE] == 3) {
                         SceneLib.joyScene.playerGivesBirthToJoyBabies();
                         return true;
@@ -1858,9 +1941,10 @@ public class Pregnancy extends NPCAwareContent {
             }
             //Give birth to sirens.
             if (player.pregnancyType == PregnancyStore.PREGNANCY_MINERVA) {
-                if (prison.prisonLetter.deliverChildWhileInPrison()) return displayedUpdate;
 
-                SceneLib.highMountains.minervaScene.minervaPurification.playerGivesBirth();
+                if (flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] >= 10) SceneLib.highMountains.minervaScene.minervaCorruption.corruptPlayerBirth();
+                else SceneLib.highMountains.minervaScene.minervaPurification.playerGivesBirth();
+
                 if(player.hips.type < 10) {
                     player.hips.type++;
                     EngineCore.outputText("\n\nAfter the birth your [armor] fits a bit more snugly about your " + hipDescript() + ".");
@@ -1870,8 +1954,6 @@ public class Pregnancy extends NPCAwareContent {
             }
             //Give birth to alraune seeds.
             if (player.pregnancyType == PregnancyStore.PREGNANCY_ALRAUNE) {
-                //	if (prison.prisonLetter.deliverChildWhileInPrison()) return displayedUpdate;
-
                 if (player.isAlraune()) {
                     EngineCore.outputText("\n\nWith a sudden gush of nectar you feel something slowly sliding out of you, slowly but steadily prying your body open. Something is coming out and it feels so good, to the point of leaving you spasming periodically.");
                     EngineCore.outputText("\n\nYour eyes roll inward and you feel your consciousness partially shut down from the consecutive orgasms, as you feel seeds the size of an apple each, drop one by one out of a hidden hole under your pitcher that might as well be a second pussy from how sensitive it is. One, two, three... Eventually, you lose count of the seeds as you temporarily lose the capability of rational thought. Before long the ground is littered with your seeds. Both instinct and common sense tell you they won't grow up if you just leave them there, on top of the ground, and as such you proceed to sow them in the fertile earth around your camp, promising to yourself that you will water them everyday. You can’t help but want to do this again as soon as possible.");
@@ -1880,10 +1962,10 @@ public class Pregnancy extends NPCAwareContent {
                     EngineCore.outputText("\n\nWith a sudden gush of nectar, you feel that something, somewhere, is slowly sliding out of you, " +
                             "prying your body open with slow but steady progress. Something is coming out and it feels so good, " +
                             "causing you to periodically spasm in reaction to the crashing waves of pleasure rushing to your brain. " +
-                            "Your twin sister is in no better condition and you both strongly hug each other, squeezing your breasts together, as the both of you go into labor.\n\n" +
+                            "Your twin sister is in no better condition and you both strongly hug each other, squeezing your breasts together, as both of you go into labor.\n\n" +
                             "\"<i>Ahhhhh sis... it’s coming!</i>\"\n\n" +
                             "\"<i>I feel it too!! Ahhh Cummiiiiing!</i>\"\n\n" +
-                            "Your eyes roll inward and the both of you orgasm as you feel seeds, " +
+                            "Your eyes roll inward and both of you orgasm as you feel seeds, " +
                             "each the size of an apple drop, one by one, out of a hidden hole under your pitcher that might as well be a third pussy. " +
                             "Well, you pondered how you would give birth while bathing in your pitcher and now you know. One, two, three... " +
                             "Eventually, you lose count of the seeds as your mind temporarily loses the ability to think rationally.  " +
@@ -1903,8 +1985,6 @@ public class Pregnancy extends NPCAwareContent {
             }
             //Give birth to behemoth.
             if (player.pregnancyType == PregnancyStore.PREGNANCY_BEHEMOTH) {
-                if (prison.prisonLetter.deliverChildWhileInPrison()) return displayedUpdate;
-
                 SceneLib.volcanicCrag.behemothScene.giveBirthToBehemoth();
                 if(player.hips.type < 10) {
                     player.hips.type++;
@@ -1916,10 +1996,6 @@ public class Pregnancy extends NPCAwareContent {
             //Egg status messages
             if (player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS) {
                 EngineCore.outputText("\n");
-                if(player.vaginas.length == 0) {
-                    EngineCore.outputText("You feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  <b>You look down and behold a new vagina</b>.\n\n");
-                    player.createVagina();
-                }
                 //Small egg scenes
                 if(player.statusEffectv2(StatusEffects.Eggs) == 0) {
                     //light quantity
@@ -1927,7 +2003,7 @@ public class Pregnancy extends NPCAwareContent {
                         EngineCore.outputText("You are interrupted as you find yourself overtaken by an uncontrollable urge to undress and squat.   You berate yourself for giving in to the urge for a moment before feeling something shift.  You hear the splash of fluid on the ground and look down to see a thick greenish fluid puddling underneath you.  There is no time to ponder this development as a rounded object passes down your birth canal, spreading your feminine lips apart and forcing a blush to your cheeks.  It plops into the puddle with a splash, and you find yourself feeling visibly delighted to be laying such healthy eggs.   Another egg works its way down and you realize the process is turning you on more and more.   In total you lay ");
                         EngineCore.outputText(eggDescript());
                         EngineCore.outputText(", driving yourself to the very edge of orgasm.");
-                        player.dynStats("lus=", player.maxLust(), "scale", false);
+                        player.dynStats("lus=", player.maxOverLust(), "scale", false);
                     }
                     //High quantity
                     else {
@@ -1964,6 +2040,11 @@ public class Pregnancy extends NPCAwareContent {
                 displayedUpdate = true;
                 player.knockUpForce(); //Clear Pregnancy
             }
+            if (player.pregnancyType == PregnancyStore.PREGNANCY_COCKATRICE) {
+                SceneLib.highMountains.cockatriceScene.cockatriceBirth();
+                player.knockUpForce(); //Clear Pregnancy
+                displayedUpdate = true;
+            }
         }
         //IF INCUBATION IS ANAL
         if(player.buttPregnancyIncubation > 1) {
@@ -1974,13 +2055,13 @@ public class Pregnancy extends NPCAwareContent {
                     //pussy:
                     if(player.hasVagina()) EngineCore.outputText("  Against your [vagina], the slime feels warm and cold at the same time, coaxing delightful tremors from your [clit].");
                     //[balls:
-                    else if(player.balls > 0) EngineCore.outputText("  Slathered in hallucinogenic frog slime, your balls tingle, sending warm pulses of pleasure all the way up into your brain.");
+                    else if(player.hasBalls()) EngineCore.outputText("  Slathered in hallucinogenic frog slime, your balls tingle, sending warm pulses of pleasure all the way up into your brain.");
                     //[cock:
                     else if(player.hasCock()) EngineCore.outputText("  Splashing against the underside of your [cocks], the slime leaves a warm, oozy sensation that makes you just want to rub [eachCock] over and over and over again.");
                     //genderless:
                     else EngineCore.outputText("  Your asshole begins twitching, aching for something to push through it over and over again.");
                     EngineCore.outputText("  Seated in your own slime, you moan softly, unable to keep your hands off yourself.");
-                    player.dynStats("lus=", player.maxLust(), "scale", false);
+                    player.dynStats("lus=", player.maxOverLust(), "scale", false);
                     displayedUpdate = true;
                 }
             }
@@ -2192,6 +2273,30 @@ public class Pregnancy extends NPCAwareContent {
                 SceneLib.bazaar.benoit.popOutBenoitEggs();
             }
         }
+        if (player.pregnancyType == PregnancyStore.PREGNANCY_HARPY_HATCHING && SophieFollowerScene.HarpyEggReady) {
+            if(model.time.hours != 5 && model.time.hours != 6) {
+                player.knockUpForce(player.pregnancyType, 3); //Make sure eggs are only birthed early in the morning
+            }
+            else {
+                player.knockUpForce(); //Clear Pregnancy
+                outputText("As the dawn rises over mareth your egg begins shaking of its own volition. What you have been waiting for so long is finally happening. As your child kicks the egg cover open revealing her bird leg." +
+                        "\n\nWith tender care you help remove the egg shards so that she can move out without hurting herself." +
+                        " Harpies are no regular birds, it's the mother's duty to help her child leave the egg harmlessly seeing as the border could leave harmful cuts on the chick." +
+                        " Satisfied that your daughter successfully got out of the egg you cradle her in your wings and keep her warm while her duvet dries up." +
+                        " Unlike human babies, harpie are born with feathers and thus there is no such thing as a bald chick." +
+                        "\n\nAs feeding your daughter is your first priority, you spend the better part of the morning flying around looking for seeds and other things to nourish your chick." +
+                        " Thankfully Mareth somewhat warped space limits the time you need to do this before your baby is actually capable of flying and feeding on her own to a few hours only." +
+                        " While capable of talking and fending for herself now your kid still decides to settle nearby");
+                if (SophieFollowerScene.HarpyKids > 1) outputText(" with your other daughters");
+                outputText(" using a rocky cliff as her nesting ground." +
+                        " Well while keeping her from trying to bug any male in your camp could be a challenge in the near future at least you can keep on watching her like the good parent you are." +
+                        " Come to think about it, you blush as fantasies of getting your womb filled with a brand new egg fills your mind causing your stretched harpy pusy to drip in anticipation." +
+                        " Guess it's back to milking males of their semens for you.");
+                SophieFollowerScene.HarpyKids += 1;
+                SophieFollowerScene.HarpyEggReady = false
+                displayedUpdate = true;
+            }
+        }
         return displayedUpdate;
     }
 
@@ -2209,15 +2314,11 @@ public class Pregnancy extends NPCAwareContent {
             4 - white - breast growth.  If lactating increases lactation.
             5 - rubbery black -
             */
-            if(player.statusEffectv1(StatusEffects.Eggs) == 0) descript += "brown ";
-            if(player.statusEffectv1(StatusEffects.Eggs) == 1) descript += "purple ";
-            if(player.statusEffectv1(StatusEffects.Eggs) == 2) descript += "blue ";
-            if(player.statusEffectv1(StatusEffects.Eggs) == 3) descript += "pink ";
-            if(player.statusEffectv1(StatusEffects.Eggs) == 4) descript += "white ";
-            if(player.statusEffectv1(StatusEffects.Eggs) == 5) descript += "rubbery black ";
+            var eggDesc:Array = ["brown", "purple", "blue", "pink", "white", "rubbery black"];
+            descript += eggDesc[player.statusEffectv1(StatusEffects.Eggs)];
             //EGGS
-            if(plural) descript += "eggs";
-            else descript += "egg";
+            if(plural) descript += " eggs";
+            else descript += " egg";
             return descript;
         }
         CoC_Settings.error("");

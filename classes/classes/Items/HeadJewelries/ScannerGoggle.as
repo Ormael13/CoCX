@@ -2,39 +2,29 @@
  * ...
  * @author Liadri
  */
-package classes.Items.HeadJewelries 
+package classes.Items.HeadJewelries
 {
-	import classes.Items.HeadJewelry;
-	import classes.PerkLib;
+import classes.Items.HeadJewelry;
+import classes.PerkLib;
 
-	public class ScannerGoggle extends HeadJewelry
+public class ScannerGoggle extends HeadJewelry
 	{
 		
-		public function ScannerGoggle() 
+		public function ScannerGoggle()
 		{
-			super("Scangog", "Scangoggle", "Scanner goggle", "a Scanner goggle", 0, 0, 4030, "This set of goggles naturally include a user interface and scanner, revealing information about your opponents.","Helmet");
+			super("Scangog", "Scangoggle", "Scanner goggles", "a Scanner goggles", 0, 0, 4030, "This set of goggles naturally include a user interface and scanner, revealing information about your opponents.",HJT_HELMET);
+			withPerk(PerkLib.BlindImmunity, 0, 0, 0, 0);
 		}
 		
-		override public function canUse():Boolean {
-			if (!super.canUse()) {
+		override public function canEquip(doOutput:Boolean):Boolean {
+			if (!super.canEquip(doOutput)) {
 				return false;
 			}
-			if (game.player.tallness > 48) { //Taller than 4 ft
-				outputText("You try to put your goggles on but the things clearly weren't designed for someone your size. Frustrated, you put them back in the bag.\n\n");
+			if (game.player.basetallness > 48) { //Taller than 4 ft
+				if (doOutput) outputText("You try to put your goggles on but the things clearly weren't designed for someone your size. Frustrated, you put them back in the bag.\n\n");
 				return false;
 			}
 			return true;
-		}
-		
-		override public function playerEquip():HeadJewelry {
-			while (game.player.hasPerk(PerkLib.BlindImmunity)) game.player.removePerk(PerkLib.BlindImmunity);
-			game.player.createPerk(PerkLib.BlindImmunity,0,0,0,0);
-			return super.playerEquip();
-		}
-		
-		override public function playerRemove():HeadJewelry {
-			while (game.player.hasPerk(PerkLib.BlindImmunity)) game.player.removePerk(PerkLib.BlindImmunity);
-			return super.playerRemove();
 		}
 		
 	}

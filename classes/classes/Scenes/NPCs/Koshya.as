@@ -2,7 +2,7 @@
  * ...
  * @author Ormael (for now)
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -15,23 +15,23 @@ import classes.internals.*;
 	{
 		public function soulskillCostEnergyProjection():Number {
 			var cost:Number = 20;
-			//if (hasPerk(PerkLib.DaoistCultivator)) cost -= 2;
+			//if (hasPerk(PerkLib.DaoistApprenticeStage)) cost -= 2;
+			//if (hasPerk(PerkLib.DaoistWarriorStage)) cost -= 2;
 			if (hasStatusEffect(StatusEffects.TrueFormAngel)) cost *= 2;
 			return cost;
 		}
 		/*
 		public function SoulskillMod():Number {
 			var mod1:Number = 1;
-			if (hasPerk(PerkLib.DaoistCultivator)) mod1 += .2;
 			if (hasPerk(PerkLib.DaoistApprenticeStage)) {
-				if (hasPerk(PerkLib.SoulApprentice)) mod1 += .4;
-				if (hasPerk(PerkLib.SoulPersonage)) mod1 += .4;
-				if (hasPerk(PerkLib.SoulWarrior)) mod1 += .4;
+				if (hasPerk(PerkLib.SoulApprentice)) mod1 += .3;
+				if (hasPerk(PerkLib.SoulPersonage)) mod1 += .3;
+				if (hasPerk(PerkLib.SoulWarrior)) mod1 += .3;
 			}
 			if (hasPerk(PerkLib.DaoistWarriorStage)) {
 				if (hasPerk(PerkLib.SoulSprite)) mod1 += .6;
 				if (hasPerk(PerkLib.SoulScholar)) mod1 += .6;
-				if (hasPerk(PerkLib.SoulElder)) mod1 += .6;
+				if (hasPerk(PerkLib.SoulGrandmaster)) mod1 += .6;
 			}
 			return mod1;
 		}
@@ -71,15 +71,17 @@ import classes.internals.*;
 			speStat.core.value += SB;
 			wisStat.core.value += WB;
 			createPerk(PerkLib.MonsterRegeneration, 3, 0, 0, 0);
-			addPerkValue(PerkLib.DieHardHP, 1, 10);
+			addPerkValue(PerkLib.DieHardHP, 1, 9);
 			addStatusValue(StatusEffects.TranscendentSoulField, 1, 20);
 			addStatusValue(StatusEffects.TranscendentSoulField, 2, 20);
 			HP = maxHP();
 			bonusWrath += 1000;
 			bonusSoulforce += 2000;
-			outputText("Staggering back, woman lands in a bit ungracefull pose buit it saved her from falling down unstylish. When you think she gave up her halo starts to glow much more intensively, spreading then to her whole body triggering transformation. After half minute maybe bit longer cocoon of the light fade to reveal her new form.");
-			outputText("\n\nActualy the parts of what supposed to be 'cocoon' are her newly grown five pairs of wings with three to four eye-like organs located on each of it. Her main body not change alot aside from having similar to the ones on wings eyeball growns. On her forhead opened two additional eyes. Halo that was hovering above her head expanded and split into two with some additional eyes on them starting to retate around her.");
-			outputText("\n\n\"<i>It's unfortunate to me unravel this form!!!</i>\" she speaks with noticable dissapointed as she fly up ready to continue fight.");
+			outputText("Recoiling, the woman saves herself from humiliatingly crashing to the ground with a graceless pose. Just as you think she has given up her glowing halo intensifise engulfing her body in a cocoon of light. After half a minute the cocoon of light dims and unfolds to reveal her new form.\n"
+				+ "\n"
+				+ "The now visible cocoon is shown to be five newly grown pairs of wings, each with three to four moving eyes. Her body is similarly covered in eyes, and as you study her features two new eyes open on her forehead. The halo that once hovered above her head is now split in two rotating around her and festooned with eyes.\n"
+				+ "\n"
+				+ "\"<i>That I should take this form is a grave misfortune!!!</i>\" she belows indignantly before launching up to continue the fight.");
 			createStatusEffect(StatusEffects.TrueFormAngel, 0, 0, 0, 0);
 			SceneLib.combat.combatRoundOver();
 		}
@@ -107,10 +109,10 @@ import classes.internals.*;
 			return str;
 		}
 		
-		public function Koshya() 
+		public function Koshya()
 		{
 			this.a = "the ";
-			this.short = "angel";
+			this.short = "blue skinned angel";
 			this.imageName = "koshya";
 			this.long = "";
 			// this.plural = false;
@@ -124,7 +126,7 @@ import classes.internals.*;
 			this.butt.type = Butt.RATING_AVERAGE;
 			initStrTouSpeInte(45, 100, 110, 50);
 			initWisLibSensCor(110, 25, 15, 0);
-			this.skinTone = "pale blue";
+			this.bodyColor = "pale blue";
 			this.hairColor = "white";
 			this.hairLength = 16;
 			this.weaponName = "fist";
@@ -139,12 +141,11 @@ import classes.internals.*;
 			this.bonusSoulforce = 100;
 			this.lustVuln = 0;
 			this.lust = 30;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 18;
 			this.gems = rand(15) + 10;
 			this.drop = NO_DROP;
 			this.createStatusEffect(StatusEffects.ATranscendentSoulField, 20, 20, 0, 0);//X times less dmg, +X lvl diff bonus
-			this.createPerk(PerkLib.DieHardHP, 10, 0, 0, 0);
+			this.createPerk(PerkLib.DieHardHP, 9, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueAngel, 0, 0, 0, 0);
 			this.createPerk(PerkLib.JobSoulCultivator, 0, 0, 0, 0);
 			this.createPerk(PerkLib.InsightfulResourcesI, 0, 0, 0, 0);

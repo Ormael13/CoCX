@@ -13,27 +13,41 @@ import classes.StatusEffects;
 
 public class VampiricBloodstreamMutation extends IMutationPerkType
     {
+        private static const mName:String = "Vampiric Bloodstream";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier >= 1) descS += "Your bloodstream has started to adapt to the presence of vampiric blood";
             if (pTier >= 2){
-                descS += " Vampire Thirst stack now decays every 2 days.";
+                descS += " Vampire Thirst stack now decays every " + decay() + " days.";
             }
             descS += " Increases the maximum numbers of stacks of Vampire Thirst by " + vampStackC();
             if (pTier >= 3){
-                descS += ", and increase their potency by 50%";
+                descS += ", and increase their potency by " + potency() + "%";
             }
             if (descS != "")descS += ".";
             return descS;
-
+			
             function vampStackC():int{
                 if (pTier == 1) return 15;
-                if (pTier == 2) return 30;
-                if (pTier == 3) return 60;
+                if (pTier == 2) return 45;
+                if (pTier == 3) return 105;
+                if (pTier == 4) return 225;
                 return 0;
             }
+			
+			function decay():int{
+				if (pTier == 2 || pTier == 3) return 2;
+				if (pTier == 4) return 3;
+				return 1;
+			}
+			
+			function potency():int{
+				if (pTier == 3) return 50;
+				if (pTier == 4) return 100;
+				return 0;
+			}
         }
 
         //Name. Need it say more?
@@ -46,10 +60,13 @@ public class VampiricBloodstreamMutation extends IMutationPerkType
                 case 3:
                     sufval = "(Evolved)";
                     break;
+                case 3:
+                    sufval = "(Final Form)";
+                    break;
                 default:
                     sufval = "";
             }
-            return "Vampiric Bloodstream" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -75,18 +92,17 @@ public class VampiricBloodstreamMutation extends IMutationPerkType
         }
 
         //Mutations Buffs
-        override public function pBuffs(target:Creature = null):Object{
+        override public function buffsForTier(pTier:int):Object {
             var pBuffs:Object = {};
-            var pTier:int = currentTier(this, (target == null)? player : target);
             if (pTier == 1) pBuffs['lib.mult'] = 0.05;
             if (pTier == 2) pBuffs['lib.mult'] = 0.15;
             if (pTier == 3) pBuffs['lib.mult'] = 0.3;
+            if (pTier == 4) pBuffs['lib.mult'] = 0.6;
             return pBuffs;
         }
 
         public function VampiricBloodstreamMutation() {
-            super("Vampiric Bloodstream IM", "Vampiric Bloodstream", ".");
-            maxLvl = 3;
+            super(mName + " IM", mName, SLOT_BLOODSTREAM, 4);
         }
 
     }

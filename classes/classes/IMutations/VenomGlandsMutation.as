@@ -13,6 +13,7 @@ import classes.Races;
 
 public class VenomGlandsMutation extends IMutationPerkType
     {
+        private static const mName:String = "Venom Glands";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -25,6 +26,9 @@ public class VenomGlandsMutation extends IMutationPerkType
             }
             if (pTier == 3){
                 descS = "You now possess venom glands with increased venom capacity, and your teeth now can inject the venom when you bite (+15% poison resistance)";
+            }
+            if (pTier == 4){
+                descS = "You now possess venom glands with greatly increased venom capacity, and your teeth now can inject the venom when you bite (+30% poison resistance)";
             }
             if (descS != "")descS += ".";
             return descS;
@@ -40,10 +44,13 @@ public class VenomGlandsMutation extends IMutationPerkType
                 case 3:
                     sufval = "(Evolved)";
                     break;
+                case 4:
+                    sufval = "(Final Form)";
+                    break;
                 default:
                     sufval = "";
             }
-            return "Venom Glands" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -69,18 +76,17 @@ public class VenomGlandsMutation extends IMutationPerkType
         }
 
         //Mutations Buffs
-        override public function pBuffs(target:Creature = null):Object{
+        override public function buffsForTier(pTier:int):Object {
             var pBuffs:Object = {};
-            var pTier:int = currentTier(this, (target == null)? player : target);
             if (pTier == 1) pBuffs['tou.mult'] = 0.05;
             else if (pTier == 2) pBuffs['tou.mult'] = 0.15;
             else if (pTier == 3) pBuffs['tou.mult'] = 0.3;
+            else if (pTier == 4) pBuffs['tou.mult'] = 0.6;
             return pBuffs;
         }
 
         public function VenomGlandsMutation() {
-            super("Venom Glands IM", "Venom Glands", ".");
-            maxLvl = 3;
+            super(mName + " IM", mName, SLOT_MOUTH, 4);
         }
 
     }

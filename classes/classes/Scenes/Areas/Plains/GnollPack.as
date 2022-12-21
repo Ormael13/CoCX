@@ -15,11 +15,7 @@ package classes.Scenes.Areas.Plains
 	{
 		public function baseAttack():void
 		{
-			if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
-				outputText(capitalA + short + " completely misses you with a blind attack!\n");
-			}
-			//Determine if dodged!
-			else if (player.spe - spe > 0 && int(Math.random() * (((player.spe - spe) / 4) + 80)) > 80) {
+			if (player.getEvasionRoll()) {
 				if (player.spe - spe < 8) outputText("You narrowly avoid " + a + short + "'s " + weaponVerb + "!\n");
 				else if (player.spe - spe >= 8 && player.spe - spe < 20) outputText("You dodge " + a + short + "'s " + weaponVerb + " with superior quickness!\n");
 				else if (player.spe - spe >= 20) outputText("You deftly avoid " + a + short + "'s slow " + weaponVerb + ".\n");
@@ -34,11 +30,7 @@ package classes.Scenes.Areas.Plains
 		}
 		public function SpearRush():void
 		{
-			if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
-				outputText(capitalA + short + " completely misses you with a blind attack!\n");
-			}
-			//Determine if dodged!
-			else if (player.spe - spe > 0 && int(Math.random() * (((player.spe - spe) / 4) + 80)) > 80) {
+			if (player.getEvasionRoll()) {
 				if (player.spe - spe < 8) outputText("You narrowly avoid " + a + short + "'s " + weaponVerb + "!\n");
 				else if (player.spe - spe >= 8 && player.spe - spe < 20) outputText("You dodge " + a + short + "'s " + weaponVerb + " with superior quickness!\n");
 				else if (player.spe - spe >= 20) outputText("You deftly avoid " + a + short + "'s slow " + weaponVerb + ".\n");
@@ -51,11 +43,7 @@ package classes.Scenes.Areas.Plains
 		}
 		public function Javelins():void
 		{
-			if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
-				outputText(capitalA + short + " completely misses you with a blind attack!\n");
-			}
-			//Determine if dodged!
-			else if (player.spe - spe > 0 && int(Math.random() * (((player.spe - spe) / 4) + 80)) > 80) {
+			if (player.getEvasionRoll()) {
 				if (player.spe - spe < 8) outputText("You narrowly avoid " + a + short + "'s " + weaponVerb + "!\n");
 				else if (player.spe - spe >= 8 && player.spe - spe < 20) outputText("You dodge " + a + short + "'s " + weaponVerb + " with superior quickness!\n");
 				else if (player.spe - spe >= 20) outputText("You deftly avoid " + a + short + "'s slow " + weaponVerb + ".\n");
@@ -139,7 +127,6 @@ package classes.Scenes.Areas.Plains
 			this.bonusLust = 176;
 			this.lust = 30;
 			this.lustVuln = .35;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 16;
 			this.gems = 800;
 			this.drop = new ChainedDrop().

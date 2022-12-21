@@ -1,4 +1,4 @@
-package classes.Scenes.Areas.HighMountains 
+package classes.Scenes.Areas.HighMountains
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -13,7 +13,7 @@ public class Izumi extends Monster
 		// Set trace outout for this classes' content.
 		private var combatDebug:Boolean = true;
 		
-		public function Izumi() 
+		public function Izumi()
 		{
 			var lvlMulti:Number = flags[kFLAGS.IZUMI_LVL_UP];
 			if (flags[kFLAGS.IZUMI_LVL_UP] < 1) {
@@ -84,7 +84,7 @@ public class Izumi extends Monster
 			this.tallness = 132;
 			this.hips.type = Hips.RATING_AVERAGE+1;
 			this.butt.type = Butt.RATING_TIGHT+1;
-			this.skinTone = "creamy-white";
+			this.bodyColor = "creamy-white";
 			this.hairColor = "golden";
 			this.hairLength = 25;
 			this.weaponName = "fist";
@@ -92,7 +92,6 @@ public class Izumi extends Monster
 			this.armorName = "silken kimono";
 			this.lust = 10;
 			this.lustVuln = 0.33;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.gems = 50 + rand(50);
 			this.drop = new ChainedDrop().add(armors.SPKIMO,1/10)
 					.add(necklaces.OBNECK,1/5)
@@ -171,7 +170,7 @@ public class Izumi extends Monster
 			}
 			else
 			{
-				var actions:Array = [straightJab, straightJab, straightJab, roundhouseKick, roundhouseKick, roundhouseKick, chokeSlam]; 
+				var actions:Array = [straightJab, straightJab, straightJab, roundhouseKick, roundhouseKick, roundhouseKick, chokeSlam];
 				
 				if (!player.hasStatusEffect(StatusEffects.Groundpound))
 				{
@@ -226,16 +225,16 @@ public class Izumi extends Monster
 			if (player.cor >= 50 || player.lib >= 50 || player.sens >= 50)
 			{
 				outputText("You fall backwards and stagger away, already feeling a flush of warmth colouring your cheeks, trying to drag your mind back to the fight and away from... other things.");
-				if (flags[kFLAGS.IZUMI_LVL_UP] >= 8) player.dynStats("lus", 30 + player.lib / 10);
-				else if (flags[kFLAGS.IZUMI_LVL_UP] >= 4) player.dynStats("lus", 20 + player.lib / 10);
-				else player.dynStats("lus", 10 + player.lib / 10);
+				if (flags[kFLAGS.IZUMI_LVL_UP] >= 8) player.takeLustDamage(30 + player.lib / 10, true);
+				else if (flags[kFLAGS.IZUMI_LVL_UP] >= 4) player.takeLustDamage(20 + player.lib / 10, true);
+				else player.takeLustDamage(10 + player.lib / 10, true);
 			}
 			else
 			{
 				outputText("You furrow a brow at the Oni's ineffectual attack, not entirely sure if she was intending to hurt you or turn you on.  Her thighs did look rather tantalizing though...");
-				if (flags[kFLAGS.IZUMI_LVL_UP] >= 8) player.dynStats("lus", 15 + player.lib / 20);
-				else if (flags[kFLAGS.IZUMI_LVL_UP] >= 4) player.dynStats("lus", 10 + player.lib / 20);
-				else player.dynStats("lus", 5 + player.lib / 20);
+				if (flags[kFLAGS.IZUMI_LVL_UP] >= 8) player.takeLustDamage(15 + player.lib / 20, true);
+				else if (flags[kFLAGS.IZUMI_LVL_UP] >= 4) player.takeLustDamage(10 + player.lib / 20, true);
+				else player.takeLustDamage(5 + player.lib / 20, true);
 			}
 		}
 		
@@ -258,7 +257,7 @@ public class Izumi extends Monster
 		
 		// Struggle against izumi's chokeslam
 		public function chokeSlamStruggle():void
-		{	
+		{
 			clearOutput();
 			var brokeFree:Boolean;
 			if ((rand(player.str) > this.str / 2) || player.hasPerk(PerkLib.FluidBody))
@@ -274,7 +273,7 @@ public class Izumi extends Monster
 			{
 				outputText("Izumi's grip around your throat continues to strangle the breath from your lungs as she holds you aloft.  Your fingers tighten in turn around the Oni's wrist, fighting against her");
 				if (player.str < 90) outputText(" immense");
-				else outputText(" impressive"); 
+				else outputText(" impressive");
 				outputText(" strength, in an attempt to free yourself from her crushing embrace, without success.");
 				player.takePhysDamage(75 + rand(15), true);
 			}
@@ -290,7 +289,7 @@ public class Izumi extends Monster
 			if (flags[kFLAGS.PC_FETISH] >= 2)
 			{
 				outputText(" and to be honest, the grip isn't an entirely unplesent experience, either.  If only Izumi would stop playing around and just <i>take you</i> already.");
-				player.dynStats("lus", 5);
+				player.takeLustDamage(5, true);
 			}
 			else
 			{
@@ -378,9 +377,9 @@ public class Izumi extends Monster
 			outputText("first into Izumi - specifically, into her chest.  Shocked by suddenly having your face rammed into the pillowy soft expanse of Izumi’s bust, you rear back only to be slammed straight back into the mountainous expanse by Izumi’s arm.");
 			
 			player.createStatusEffect(StatusEffects.Titsmother, 0, 0, 0, 0);
-			if (flags[kFLAGS.IZUMI_LVL_UP] >= 8) player.dynStats("lus", (player.lib / 15) + 15 + rand(15));
-			else if (flags[kFLAGS.IZUMI_LVL_UP] >= 4) player.dynStats("lus", (player.lib / 15) + 10 + rand(10));
-			else player.dynStats("lus", (player.lib / 15) + 5 + rand(5));
+			if (flags[kFLAGS.IZUMI_LVL_UP] >= 8) player.takeLustDamage((player.lib / 15) + 15 + rand(15), true);
+			else if (flags[kFLAGS.IZUMI_LVL_UP] >= 4) player.takeLustDamage((player.lib / 15) + 10 + rand(10), true);
+			else player.takeLustDamage((player.lib / 15) + 5 + rand(5), true);
 		}
 		
 		// Remove the effect post-combat
@@ -437,7 +436,7 @@ public class Izumi extends Monster
 						outputText("Izumi’s bust encloses you on all sides, leaving you feeling like you’re trapped in some kind of breast sarcophagus.  The heat radiating from the soft flesh combines with the scent of whatever strange drug Izumi had been smoking, now hanging around her like some heady perfume.");
 					}
 				}
-				player.dynStats("lus", player.lib / 15 + 5 + rand(5));
+				player.takeLustDamage(player.lib / 15 + 5 + rand(5), true);
 			}
 			SceneLib.combat.enemyAIImpl();
 		}
@@ -455,7 +454,7 @@ public class Izumi extends Monster
 			else
 			{
 				outputText("Locking your arms against Izumi’s shoulders, you heave with all your might against the musclebound Oni girl’s choke hold.  You can feel her arm straining to hold you, struggling to resist, giving ground....");
-				if (player.isBiped()) 
+				if (player.isBiped())
 				{
 					outputText("  As soon as you can, you hike up your legs and place your feet firmly on Izumi’s stomach, adding your leg muscles to the effort.");
 				}
@@ -474,11 +473,11 @@ public class Izumi extends Monster
 			clearOutput();
 			if (combatDebug) trace("Waiting during TitSmother");
 			outputText("With your face crushed into the Oni's cleavage, you can't help but wonder; why bother resisting?  She's just so <i>strong</i>, and her breasts feel so lushious against your [face]...");
-			player.dynStats("lus", player.lib / 10 + 5 + rand(5));	
+			player.takeLustDamage(player.lib / 10 + 5 + rand(5), true);
 			if (flags[kFLAGS.PC_FETISH] >= 2)
 			{
 				outputText(" and to be honest, her grip isn't an entirely unplesent experience, either.  If only Izumi would stop playing around and just <i>take you</i> already.");
-				player.dynStats("lus", 5);
+				player.takeLustDamage(5, true);
 			}
 			else
 			{

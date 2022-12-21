@@ -11,6 +11,7 @@ package classes.Perks
 
 		override public function desc(params:PerkClass = null):String
 		{
+			if (!player || !params) return _desc;
 			return "Deal " + params.value1 * 100 + "% more physical melee damage to True Demons type enemies. (Rank: " + params.value1 * 10 + ")";
 		}
 

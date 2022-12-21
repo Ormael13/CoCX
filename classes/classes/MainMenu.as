@@ -3,6 +3,7 @@ package classes {
 import classes.GlobalFlags.*;
 import classes.Scenes.Achievements;
 import classes.Scenes.Changelog;
+import classes.Scenes.Holidays;
 import classes.Scenes.SceneLib;
 
 import coc.view.MainView;
@@ -40,15 +41,15 @@ public class MainMenu extends BaseContent {
 		mainView.dataButton.toolTipHeader       = "Data";
 		mainView.statsButton.toolTipText        = "View your stats.";
 		mainView.statsButton.toolTipHeader      = "Stats";
-		mainView.perksButton.toolTipText        = "View your perks.";
-		mainView.perksButton.toolTipHeader      = "Perks";
+		mainView.perksButton.toolTipText        = "View your perks and toggle different in-game options.";
+		mainView.perksButton.toolTipHeader      = "Perks & Opt.";
 		mainView.appearanceButton.toolTipText   = "View your appearance.";
 		mainView.appearanceButton.toolTipHeader = "Appearance";
 		//Sets game state to 3, used for determining back functionality of save/load menu.
         CoC.instance.resetGameState();
         clearOutput();
 		//outputText("<img src=\"logo\" id=\"coc-logo\" height=\"300\" width=\"400\" />\n");
-        outputText("<b>Corruption of Champions (" + CoC.instance.version + ")</b>");
+        outputText("<b>Corruption of Champions (" + CoC.instance.ver + ")</b>");
         if (CoC_Settings.debugBuild)
 			outputText(" Debug Build");
 		else
@@ -73,7 +74,7 @@ public class MainMenu extends BaseContent {
 		else addButtonDisabled(0, "Resume", "Please start or load a game first.");
 		if (resume != null) addButton(1, "Achievements", achievements.achievementsScreen).hint("View all achievements you have unlocked so far.");
 		else addButtonDisabled(1, "Achievements", "Please start or load a game first.");
-        addButton(2, "Settings", CoC.instance.gameSettings.settingsScreenMain).hint("Configure game settings and enable cheats.");
+        addButton(2, "Settings", CoC.instance.gameSettings.settingsScreenMain, true).hint("Configure game settings and enable cheats.");
 		addButton(3, "Mod Thread", openURL, "https://forum.fenoxo.com/threads/coc-xianxia-mod-0-8g2-for-coc-1-0-2.2346", null, null, "Check the official mod thread on Fenoxo's forum.");
         addButton(4, "Instructions", howToPlay).hint("How to play.  Starting tips.  And hotkeys for easy left-handed play...");
 
@@ -113,11 +114,11 @@ public class MainMenu extends BaseContent {
 			outputText("\n\n<b>It's Valentine's!</b>");
 		if (isHalloween())
 			outputText("\n\n<b>It's Halloween!</b>");
-		if (SceneLib.evangelineFollower.isEvangelineBirthday())
+		if (Holidays.isEvangelineBirthday())
 			outputText("\n\n<b>It's Milady Evangeline Birthday Month!</b>");
-		if (SceneLib.alvinaFollower.isAlvinaBirthday())
+		if (Holidays.isAlvinaBirthday())
 			outputText("\n\n<b>It's our lady and saviour Alvina Shadowmantle Birthday Month!</b>");
-		if (SceneLib.helFollower.isHeliaBirthday())
+		if (Holidays.isHeliaBirthday())
 			outputText("\n\n<b>It's Helia's Birthday Month!</b>");
 		//Brief credits
 		outputText("\n\n<b>Game Mod by:</b> Ormael"); //Mod Creator
@@ -166,22 +167,10 @@ public class MainMenu extends BaseContent {
 		outputText("<b>Game Mod Supplementary Events:</b>\n");
 		outputText("<ul>");
 		outputText("<li> worldofdrakan (Pigtail Truffles & Pig/Boar TF)</li>");
-		outputText("<li> FeiFongWong (Prisoner Mod)</li>");
 		outputText("<li> Foxxling (Lizan Rogue, Skin Oils & Body Lotions, Black Cock)</li>");
 		outputText("<li> LukaDoc (Bimbo Jojo)</li>");
 		outputText("<li> Kitteh6660 (Behemoth, Cabin, Ingnam, Pure Jojo sex scenes)</li>");
 		outputText("</ul>");
-		/*outputText("<b>Game Mod Bug Reporting:</b>\n");
-		 outputText("<ul>");
-		 outputText("<li> Netys (github)</li>");
-		 outputText("<ul>");
-		 outputText("</ul>");
-		 outputText("<b>Typo Reporting</b>\n");
-		 outputText("<ul>");
-		 outputText("<li> SoS</li>");
-		 outputText("<li> Prisoner416</li>");
-		 outputText("<li> Chibodee</li>");
-		 outputText("");*/
 		outputText("<b>Graphical & Code Prettiness:</b>");
 		outputText("<ul>");
         outputText("<li> Dasutin (Background Images)</li>");

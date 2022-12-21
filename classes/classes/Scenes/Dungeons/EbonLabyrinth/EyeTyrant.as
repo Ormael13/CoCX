@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.Dungeons.EbonLabyrinth 
+package classes.Scenes.Dungeons.EbonLabyrinth
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -72,8 +72,8 @@ use namespace CoC;
             this.bonusHP = mod == 0 ? 0 : 2500*(mod-1);
             this.bonusLust = 255 + 75*mod;
             this.level = 60 + 5*mod; //starts from 65 due to EL levelMod calculations;
-            this.gems = mod > 50 ? 0 : Math.floor((1300 + rand(260)) * Math.exp(0.3*mod));
-            this.additionalXP = mod > 50 ? 0 : Math.floor(6000 * Math.exp(0.3*mod));
+            this.gems = mod > 20 ? 0 : Math.floor((1300 + rand(260)) * Math.exp(0.3*mod));
+            this.additionalXP = mod > 20 ? 0 : Math.floor(6000 * Math.exp(0.3*mod));
             
 			this.a = "";
 			this.short = "Eye Tyrant";
@@ -91,7 +91,7 @@ use namespace CoC;
 			this.butt.type = Butt.RATING_NOTICEABLE + 1;
 			this.lowerBody = LowerBody.GAZER;
 			this.faceType = Face.ANIMAL_TOOTHS;
-			this.skinTone = "light grey";
+			this.bodyColor = "light grey";
 			this.hairColor = "black";
 			this.hairLength = 16;
 			this.weaponName = "fist";
@@ -100,7 +100,6 @@ use namespace CoC;
 			this.armorName = "skin";
 			this.lustVuln = .75;
 			this.lust = 30;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.drop = new WeightedDrop(consumables.ME_DROP, 1);
 			this.createStatusEffect(StatusEffects.Flying, 50, 0, 0, 0);
 			this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);

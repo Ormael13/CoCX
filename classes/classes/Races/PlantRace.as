@@ -6,9 +6,33 @@ import classes.Race;
 import classes.Races;
 
 public class PlantRace extends Race {
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Human",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Human",
+        /*Eyes*/		"Human",
+        /*Face*/		"Human",
+        /*Gills*/		"Human",
+        /*Hair*/		"Human",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Human",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Human",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Human"];
 	
 	public function PlantRace(id:int) {
-		super("Plant", id);
+		super("Plant", id, []);//RaceBody);
 		chimeraTier = 0;
 		grandChimeraTier = 0;
 	}
@@ -21,8 +45,8 @@ public class PlantRace extends Race {
 				.hornType(ANY(Horns.OAK, Horns.ORCHID), +1)
 				.earType(Ears.ELFIN, +1)
 				.earType(NOT(Ears.LIZARD), 0, -1)
-				.hairTypeAndColor(ANY(Hair.LEAF, Hair.GRASS), "green", +1)
-				.plainSkinOfColor(ANY("leaf green", "lime green", "turquoise", "light green"), +1)
+				.hairTypeAndColor1(ANY(Hair.LEAF, Hair.GRASS), "green", +1)
+				.plainSkinOfColor1(ANY("leaf green", "lime green", "turquoise", "light green"), +1)
 				//	if (skinType == 6)/zielona skóra +1, bark skin +2
 				//		plantCounter += 2;
 				.armType(Arms.PLANT, +1)

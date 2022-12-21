@@ -40,8 +40,9 @@ package classes.GeneticMemories {
 	 */
 
     public static var Memories:/*EnumValue*/ Array = [];
+	  private static var _partid:int = 0;
 
-		public static const NONE:int = 0;
+		public static const NONE:int = _partid++;
 		EnumValue.add(Memories, NONE, "NONE", {
 			id: "Unlocked Metamorph",
 			name: "No Skin Pattern",
@@ -52,7 +53,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const MAGICAL:int = 1;
+		public static const MAGICAL:int = _partid++;
 		EnumValue.add(Memories, MAGICAL, "MAGICAL", {
 			id: "Kitsune Skin Pattern",
 			name: "Runic Kitsune Tattoos",
@@ -63,7 +64,18 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const BATTLE:int = 2;
+		public static const PATTERN_VENOMOUS_MARKINGS:int = _partid++;
+		EnumValue.add(Memories, PATTERN_VENOMOUS_MARKINGS, "PATTERN_VENOMOUS_MARKINGS", {
+			id: "VenomousMarkings Pattern",
+			name: "VenomousMarkings Pattern",
+			cost: 100,
+			title: "VenomousMarkings",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.SkinPatternVenomousMarkings
+			}
+		});
+
+		public static const BATTLE:int = _partid++;
 		EnumValue.add(Memories, BATTLE, "BATTLE", {
 			id: "Oni Skin Pattern",
 			name: "Oni Battle Tattoos",
@@ -74,7 +86,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const LIGHTNING_SHAPED:int = 3;
+		public static const LIGHTNING_SHAPED:int = _partid++;
 		EnumValue.add(Memories, LIGHTNING_SHAPED, "LIGHTNING_SHAPED", {
 			id: "Raiju Skin Pattern",
 			name: "Lightning-shaped Raiju Tattoos",
@@ -85,7 +97,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const SCAR_SHAPED:int = 4;
+		public static const SCAR_SHAPED:int = _partid++;
 		EnumValue.add(Memories, SCAR_SHAPED, "SCAR_SHAPED", {
 			id: "Orc Skin Pattern",
 			name: "Scar-shaped Orc Tattoos",
@@ -96,7 +108,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const OIL:int = 5;
+		public static const OIL:int = _partid++;
 		EnumValue.add(Memories, OIL, "OIL", {
 			id: "Gazer Skin Pattern",
 			name: "Drips black fluids",
@@ -107,7 +119,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const BEE_STRIPES:int = 6;
+		public static const BEE_STRIPES:int = _partid++;
 		EnumValue.add(Memories, BEE_STRIPES, "BEE_STRIPES", {
 			id: "Bee Skin Pattern",
 			name: "Bee Stripes",
@@ -117,6 +129,62 @@ package classes.GeneticMemories {
 				return CoC.instance.transformations.SkinPatternBeeStripes
 			},
 			info: "Includes Chitin skin"
+		});
+
+		public static const SHARK_STRIPES:int = _partid++;
+		EnumValue.add(Memories, SHARK_STRIPES, "SHARK_STRIPES", {
+		  id: "Tiger Shark Skin Pattern",
+		  name: "Shark Stripes",
+		  cost: 200,
+		  title: "Shark Stripes",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.SkinPatternTigerSharkStripes
+		  },
+		  info: "Includes Aqua Scales skin"
+		});
+
+		public static const ORCA_UNDERBODY:int = _partid++;
+		EnumValue.add(Memories, ORCA_UNDERBODY, "ORCA_UNDERBODY", {
+		  id: "Orca Skin Pattern",
+		  name: "Orca Underbody",
+		  cost: 100,
+		  title: "Orca",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.SkinPatternOrca
+		  }
+		});
+
+		public static const SEA_DRAGON_UNDERBODY:int = _partid++;
+		EnumValue.add(Memories, SEA_DRAGON_UNDERBODY, "SEA_DRAGON_UNDERBODY", {
+		  id: "Sea Dragon Skin Pattern",
+		  name: "Sea Dragon Underbody",
+		  cost: 100,
+		  title: "Sea Dragon",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.SkinPatternSeaDragon
+		  }
+		});
+
+		public static const SCAR_WINDSWEPT:int = _partid++;
+		EnumValue.add(Memories, SCAR_WINDSWEPT, "SCAR_WINDSWEPT", {
+		  id: "Windswept Scar",
+		  name: "Windswept Scar",
+		  cost: 100,
+		  title: "Kamaitachi",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.SkinPatternScarWindswept
+		  }
+		});
+
+		public static const BLACK_WHITE_VEINS:int = _partid++;
+		EnumValue.add(Memories, BLACK_WHITE_VEINS, "BLACK_WHITE_VEINS", {
+		  id: "Black & White Veins",
+		  name: "Black & White Veins",
+		  cost: 100,
+		  title: "Black & White Veins",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.SkinPatternWhiteBlackVeins
+		  }
 		});
 
 		public static function getMemory(memoryId: Number): * {

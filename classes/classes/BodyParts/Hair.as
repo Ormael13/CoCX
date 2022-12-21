@@ -202,52 +202,68 @@ public class Hair extends BodyPart {
 
 	public static const PLAIN:int  = 0;
 	EnumValue.add(Styles, PLAIN, "PLAIN", {
+		name: "plain",
 		adjective: ""
 	});
 
 	public static const WILD:int = 1;
 	EnumValue.add(Styles, WILD, "WILD", {
+		name: "wild",
 		adjective: "wild"
 	});
 
 	public static const PONYTAIL:int  = 2;
 	EnumValue.add(Styles, PONYTAIL, "PONYTAIL", {
+		name: "ponytail",
 		adjective: "ponytailed"
 	});
 
 	public static const LONGTRESSES:int  = 3;
 	EnumValue.add(Styles, LONGTRESSES, "LONGTRESSES", {
+		name: "low ponytail",
 		adjective: "low-ponytailed"
 	});
 
 	public static const TWINTAILS:int  = 4;
 	EnumValue.add(Styles, TWINTAILS, "TWINTAILS", {
+		name: "twintails",
 		adjective: "twintailed"
 	});
 
 	public static const DWARVEN:int  = 5;
 	EnumValue.add(Styles, DWARVEN, "DWARVEN", {
+		name: "dwarven",
 		adjective: "Dwarven"
 	});
 
 	public static const SNOWLILY:int  = 6;
 	EnumValue.add(Styles, SNOWLILY, "SNOWLILY", {
+		name: "snowlily",
 		adjective: "snowlily"
 	});
 
 	public static const FOURWIND:int  = 7;
 	EnumValue.add(Styles, FOURWIND, "FOURWIND", {
+		name: "fourwind",
 		adjective: "fourwind"
 	});
 
 	public static const FOURWINDL:int  = 8;
 	EnumValue.add(Styles, FOURWINDL, "FOURWINDL", {
+		name: "long fourwind",
 		adjective: "long fourwind"
 	});
 
 	public static const TAURPONYTAIL:int  = 9;
 	EnumValue.add(Styles, TAURPONYTAIL, "TAURPONYTAIL", {
+		name: "centaur ponytail",
 		adjective: "centaur ponytail"
+	});
+
+	public static const TWINRIBBON:int  = 10;
+	EnumValue.add(Styles, TWINRIBBON, "TWINRIBBON", {
+		name: "twin ribbon",
+		adjective: "twin ribbon"
 	});
 
 
@@ -298,7 +314,7 @@ public class Hair extends BodyPart {
 			if(creature.skinType == Skin.FUR)
 				return "You have no hair, only a thin layer of fur atop of your head.";
 			else {
-				return "You have a completely " + getHairLength(creature) + " head, showing only shiny [skintone] [skin.type].";
+				return "You have a completely " + getHairLength(creature) + " head, showing only shiny [color] [skin.type].";
 			}
 		}
 
@@ -314,7 +330,7 @@ public class Hair extends BodyPart {
 		var hair:String = "hair";
 
 		//If furry and longish hair sometimes call it a mane (50%)
-		if (creature.hasFur() == 1 && creature.hairLength > 3 && rand(2) == 0) {
+		if (creature.isFurCovered() == 1 && creature.hairLength > 3 && rand(2) == 0) {
 			hair = "mane";
 		}
 
@@ -333,7 +349,7 @@ public class Hair extends BodyPart {
 		var hair:String = "hair";
 
 		//If furry and longish hair sometimes call it a mane (50%)
-		if (creature.hasFur() == 1 && creature.hairLength > 3 && rand(2) == 0) {
+		if (creature.isFurCovered() == 1 && creature.hairLength > 3 && rand(2) == 0) {
 			hair = "mane";
 		}
 

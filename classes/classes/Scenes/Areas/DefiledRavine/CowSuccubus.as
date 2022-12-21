@@ -2,22 +2,22 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.Areas.DefiledRavine 
+package classes.Scenes.Areas.DefiledRavine
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.BodyParts.Butt;
-	import classes.BodyParts.Hips;
-	import classes.BodyParts.Horns;
-	import classes.BodyParts.LowerBody;
-	import classes.BodyParts.Tail;
-	import classes.BodyParts.Wings;
-	import classes.CoC;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.Scenes.Monsters.AbstractSuccubus;
-	import classes.Scenes.SceneLib;
-	
-	use namespace CoC;
+import classes.*;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Hips;
+import classes.BodyParts.Horns;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Tail;
+import classes.BodyParts.Wings;
+import classes.GlobalFlags.kFLAGS;
+import classes.Items.DynamicItems;
+import classes.Scenes.Monsters.AbstractSuccubus;
+import classes.Scenes.SceneLib;
+import classes.internals.*;
+
+use namespace CoC;
 	
 	public class CowSuccubus extends AbstractSuccubus
 	{
@@ -28,12 +28,12 @@ package classes.Scenes.Areas.DefiledRavine
 			if (rand(20) + 1 + player.spe / 20 > 17) {
 				outputText("With your trained reflexes, you manage to duck and roll, narrowly avoiding getting sprayed with milk.");
 				outputText("\n\n\"<i>Such a waste.</i>\"  The succubus pouts.");
-				player.dynStats("lus", 6 + rand(6));
+				player.takeLustDamage(6 + rand(6), true);
 			}
 			//Hit:
 			else {
 				outputText("All you manage to do is cover your face; the rest of you, however, gets completely soaked in the demon's corrupted milk.  Looking down at yourself, you realize that you are panting, and the places where the milk splashed your [skin] begin to heat up.");
-				player.dynStats("lus", 15 + rand(15));
+				player.takeLustDamage(15 + rand(15), true);
 			}
 		}
 
@@ -42,7 +42,7 @@ package classes.Scenes.Areas.DefiledRavine
 			else if (rand(3) == 0) outputText("The succubus squeezes her spotted, sweat-oiled breasts together, squirting out trickles of fresh, creamy, succubi milk.  Bending down, she laps at her own bounty, taking to meet your eyes, her own glowing violet.  You can feel her next words as much as hear them, reaching into your brain and stirring a familiar heat in your loins.  \"<i>Giving in would mean pleasure unending, my dear champion.</i>\"");
 			else if (rand(2) == 0) outputText("The succubus turns slightly and slowly bends over, sliding her hands down the sides of her milk laden jugs. \"<i>Mmm, would you help a poor girl relax? These things need some attention,</i>\" she says with a lust filled moan as her hands reach her multitude of nipples.");
 			else outputText("The succubus leans forwards holding her tits, while wrapping her fingers around her nipples.  \"<i>My boobs are soo full.  Would you like to help me drain them?</i>\" she says with a husky voice.");
-			player.dynStats("lus", 20 + rand(20));
+			player.takeLustDamage(20 + rand(20), true);
 		}
 		
 		override protected function performCombatAction():void {
@@ -64,7 +64,7 @@ package classes.Scenes.Areas.DefiledRavine
 			SceneLib.defiledravine.demonScene.defeatCowSuccubus();
 		}
 		
-		public function CowSuccubus() 
+		public function CowSuccubus()
 		{
 			this.a = "the ";
 			this.short = "cow succubus";
@@ -79,7 +79,7 @@ package classes.Scenes.Areas.DefiledRavine
 			this.tallness = 84;
 			this.hips.type = Hips.RATING_CURVY;
 			this.butt.type = Butt.RATING_LARGE + 1;
-			this.skinTone = "blue";
+			this.bodyColor = "blue";
 			this.hairColor = "black";
 			this.hairLength = 13;
 			initStrTouSpeInte(130, 100, 180, 120);
@@ -96,7 +96,6 @@ package classes.Scenes.Areas.DefiledRavine
 			this.bonusLust = 241;
 			this.lust = 40;
 			this.lustVuln = .3;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 45;
 			this.gems = rand(40)+50;
 			this.additionalXP = 100;
@@ -109,6 +108,10 @@ package classes.Scenes.Areas.DefiledRavine
 			//this.special1 = kissAttack;	- potem sprawdzić czy bdą przydatne i zatrzymane czy combat ai dla moba je zastąpi
 			//this.special2 = seduceAttack;
 			//this.special3 = whipAttack;
+			this.randomDropChance = 0.1;
+			this.randomDropParams = {
+				rarity: DynamicItems.RARITY_CHANCES_LESSER
+			};
 			this.drop = new WeightedDrop().
 					add(consumables.BIMBOLQ, 1).
 					add(weapons.SUCWHIP, 2).

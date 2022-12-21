@@ -13,7 +13,6 @@ import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.*;
 import classes.Scenes.SceneLib;
-import classes.StatusEffects.Combat.ParalyzeVenomDebuff;
 import classes.internals.ChainedDrop;
 
 	public class HornetGirl extends Monster {
@@ -44,13 +43,12 @@ import classes.internals.ChainedDrop;
 			else
 			{
 				outputText("but she follows through with a spear strikes, tearing into your " + (player.armor.name == "nothing" ? "" : "[armorName] and the underlying") + " flesh. ");
-				var paralyze:ParalyzeVenomDebuff = player.statusEffectByType(StatusEffects.ParalyzeVenom) as ParalyzeVenomDebuff;
-				if (paralyze) {
-					outputText("  It's getting much harder to move, you're not sure how many more stings like that you can take!");
-				} else {
-					paralyze = new ParalyzeVenomDebuff();
-					player.addStatusEffect(paralyze);
+				if (player.buff("hornet paralyze venom").isPresent()) {
 					outputText("  You've fallen prey to paralyzation venom!  Better end this quick!");
+					player.buff("hornet paralyze venom").addStats( {"str":-15, "spe":-15} ).withText("hornet paralyze venom").combatPermanent();
+				} else {
+					outputText("  It's getting much harder to move, you're not sure how many more stings like that you can take!");
+					player.buff("hornet paralyze venom").addStats( {"str":-15, "spe":-15} ).withText("hornet paralyze venom").combatPermanent();
 				}
 				var attacks:int = 2;
 				var damage:int = 0;
@@ -59,7 +57,6 @@ import classes.internals.ChainedDrop;
 					attacks--;
 				}
 				player.takePhysDamage(damage, true);
-				paralyze.increaseHornet2();
 			}
 		}
 
@@ -89,7 +86,7 @@ import classes.internals.ChainedDrop;
 				if (player.gender == 1) outputText("or dripping honey-slicked cunts beckoning you. ");
 				if (player.gender == 2) outputText("planting your aching sex over her face while you lick her sweet honeypot. ");
 				if (player.gender == 3) outputText("or cocks, tits, and puffy nipples. ");
-				player.dynStats("lus", 75);
+				player.takeLustDamage(75, true);
 				if (player.lust > player.lust100 * 0.6) {
 					outputText(" You shake your head and struggle to stay focused,");
 					if (player.gender == 1 || player.gender == 3) outputText(" but it's difficult with the sensitive bulge in your groin.");
@@ -102,15 +99,13 @@ import classes.internals.ChainedDrop;
 			//Paralise the other 50%!
 			else {
 				outputText("Searing pain lances through you as " + a + short + " manages to sting you!  You stagger back a step and nearly trip, finding it hard to move yourself.");
-				var paralyze:ParalyzeVenomDebuff = player.statusEffectByType(StatusEffects.ParalyzeVenom) as ParalyzeVenomDebuff;
-				if (paralyze) {
-					outputText("  It's getting much harder to move, you're not sure how many more stings like that you can take!");
-				} else {
-					paralyze = new ParalyzeVenomDebuff();
-					player.addStatusEffect(paralyze);
+				if (player.buff("hornet paralyze venom").isPresent()) {
 					outputText("  You've fallen prey to paralyzation venom!  Better end this quick!");
+					player.buff("hornet paralyze venom").addStats( {"str":-9, "spe":-9} ).withText("hornet paralyze venom").combatPermanent();
+				} else {
+					outputText("  It's getting much harder to move, you're not sure how many more stings like that you can take!");
+					player.buff("hornet paralyze venom").addStats( {"str":-9, "spe":-9} ).withText("hornet paralyze venom").combatPermanent();
 				}
-				paralyze.increaseHornet1();
 			}
 			if (player.lust >= player.maxOverLust())
 				doNext(SceneLib.combat.endLustLoss);
@@ -140,7 +135,7 @@ import classes.internals.ChainedDrop;
 			this.hips.type = Hips.RATING_FERTILE + 1;
 			this.butt.type = Butt.RATING_HUGE;
 			this.lowerBody = LowerBody.BEE;
-			this.skinTone = "yellow";
+			this.bodyColor = "yellow";
 			this.hairColor = randomChoice("black","black and yellow");
 			this.hairLength = 6;
 			initStrTouSpeInte(30, 50, 30, 20);
@@ -155,7 +150,6 @@ import classes.internals.ChainedDrop;
 			this.bonusLust = 121;//lib+sens+lvl
 			this.lust = 20 + rand(40);
 			this.lustVuln = 0.9;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 6;
 			this.gems = rand(20) + 5;
 			this.drop = new ChainedDrop().add(consumables.OVIELIX, 1 / 6)

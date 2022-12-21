@@ -249,7 +249,7 @@ internal class ControlBindings {
                     "Respond to continue",
                     function ():void {
                         // Button 9
-                        if (CoC.instance.mainView.buttonIsVisible(9) && CoC.instance.mainView.buttonTextIsOneOf(9, ["Nevermind", "Abandon", "Next", "Return", "Back", "Leave", "Resume"])) {
+                        if (CoC.instance.mainView.buttonIsVisible(9) && CoC.instance.mainView.buttonTextIsOneOf(9, ["Never mind", "Abandon", "Next", "Return", "Back", "Leave", "Resume"])) {
                             //trace( "keyboard(): processing space bar for button 9",
                             //	CoC.instance.mainView.buttonIsVisible( 9 ) ? "(visible)" : "(hidden)",
                             //	CoC.instance.mainView.getButtonText( 9 ) );
@@ -258,7 +258,7 @@ internal class ControlBindings {
                             return;
                         }
                         // Button 14
-                        if (EngineCore.buttonIsVisible(14) && EngineCore.buttonTextIsOneOf(14, ["Nevermind", "Abandon", "Next", "Return", "Back", "Leave", "Resume"])) {
+                        if (EngineCore.buttonIsVisible(14) && EngineCore.buttonTextIsOneOf(14, ["Never mind", "Abandon", "Next", "Return", "Back", "Leave", "Resume"])) {
                             //trace( "keyboard(): processing space bar for button 9",
                             //	CoC.instance.mainView.buttonIsVisible( 9 ) ? "(visible)" : "(hidden)",
                             //	CoC.instance.mainView.getButtonText( 9 ) );
@@ -277,7 +277,7 @@ internal class ControlBindings {
                         }
 
                         // Button 4
-                        if (CoC.instance.mainView.buttonIsVisible(4) && CoC.instance.mainView.buttonTextIsOneOf(4, ["Nevermind", "Next", "Return", "Back", "Leave"])) {
+                        if (CoC.instance.mainView.buttonIsVisible(4) && CoC.instance.mainView.buttonTextIsOneOf(4, ["Never mind", "Next", "Return", "Back", "Leave"])) {
                             //trace( "keyboard(): processing space bar for button 4",
                             //	CoC.instance.mainView.buttonIsVisible( 4 ) ? "(visible)" : "(hidden)",
                             //	CoC.instance.mainView.getButtonText( 4 ) );
@@ -561,7 +561,7 @@ internal class ControlBindings {
                         }
                         else if (CoC.instance.flags[kFLAGS.CHEAT_ENTERING_COUNTER_2] == 4) {
                             if (keyCode == 71) {
-                                if (CoC.instance.player && CoC.instance.player.str > 0 && CoC.instance.mainView.getButtonText(0).indexOf("Game Over") == -1 && (CoC.instance.debug && CoC.instance.flags[kFLAGS.HARDCORE_MODE] <= 0 || CoC_Settings.debugBuild)) {
+                                if (CoC.instance.player && CoC.instance.player.str > 0 && CoC.instance.mainView.getButtonText(0).indexOf("Game Over") == -1 && (CoC.instance.debug && CoC.instance.flags[kFLAGS.HARDCORE_MODE] <= 0 || CoC_Settings.debugBuild) && !CoC.instance.lockCheats) {
                                     SceneLib.debugMenu.accessDebugMenu();
                                 }
                             }

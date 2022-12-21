@@ -1,4 +1,4 @@
-package classes.Items.Shields 
+package classes.Items.Shields
 {
 	import classes.Items.Shield;
 	
@@ -9,8 +9,8 @@ package classes.Items.Shields
 			super("noshild", "noshield", "nothing", "nothing", 0, 0, "no shield", "shield");
 		}
 		
-		override public function playerRemove():Shield {
-			return null; //There is nothing!
+		override public function get isNothing():Boolean {
+			return true;
 		}
 	}
 }

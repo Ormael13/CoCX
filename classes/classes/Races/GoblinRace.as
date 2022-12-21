@@ -1,9 +1,11 @@
 package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
+import classes.GeneticMemories.RaceMem;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
+import classes.Transformations.TransformationGroupAny;
 
 /**
  * Tier 1: goblin
@@ -12,9 +14,49 @@ public class GoblinRace extends Race {
 	public static const GoblinSkinColors:/*String*/Array = ["pale yellow", "grayish-blue", "green", "dark green", "emerald"];
 	public static const GoblinEyeColors:/*String*/Array = ["red", "yellow", "purple"];
 	public static const GoblinHairColors:/*String*/Array = ["red", "purple", "green", "blue", "pink", "orange"];
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Human",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Elfin",
+        /*Eyes*/		"Goblin",
+        /*Face*/		"Human",
+        /*Gills*/		"None",
+        /*Hair*/		"Goblin",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Human",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Goblin",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Goblin"];
+	
+	public const TfList:/*Transformation*/Array = [
+		new TransformationGroupAny("FaceHumanOrAnimal", [
+			game.transformations.FaceHuman,
+			game.transformations.FaceAnimalTeeth
+		]),
+		game.transformations.EarsElfin,
+		game.transformations.SkinPlain,
+		game.transformations.SkinColor(GoblinSkinColors),
+		game.transformations.EyesHuman,
+		game.transformations.EyesChangeColor(GoblinEyeColors),
+		game.transformations.HairChangeColor(GoblinHairColors),
+		game.transformations.ArmsHuman,
+		game.transformations.LowerBodyHuman,
+		game.transformations.AntennaeNone
+	];
 	
 	public function GoblinRace(id:int) {
-		super("Goblin", id);
+		super("Goblin", id, RaceBody);
 	}
 	
 	public override function setup():void {
@@ -26,7 +68,7 @@ public class GoblinRace extends Race {
 				.hasPerk(PerkLib.GoblinoidBlood, +1)
 				.hasPerk(PerkLib.BouncyBody, +1)
 				.skinPlainOnly(+1)
-				.skinBaseColor(ANY(GoblinSkinColors), +1, -1000)
+				.skinColor1(ANY(GoblinSkinColors), +1, -1000)
 				.hasVagina(+1);
 		addConditionedScores(
 				function (body:BodyData):Boolean {
@@ -35,7 +77,7 @@ public class GoblinRace extends Race {
 				"plain skin; "
 		)
 				.eyeTypeAndColor(Eyes.HUMAN, ANY(GoblinEyeColors), +1)
-				.hairColor(ANY(GoblinHairColors), +1)
+				.hairColor1(ANY(GoblinHairColors), +1)
 				.armType(Arms.HUMAN, +1)
 				.legType(LowerBody.HUMAN, +1)
 				.noAntennae(+1);

@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -11,7 +11,6 @@ import classes.BodyParts.LowerBody;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.WeaponLib;
 import classes.Scenes.SceneLib;
-import classes.StatusEffects.Combat.WebDebuff;
 import classes.internals.*;
 
 	public class Lily extends Monster//drider cumdump slave from swamp area
@@ -64,40 +63,22 @@ import classes.internals.*;
 		
 		private function lilyWebAttack():void {
 			outputText("She spins, exposing her spider back-half and spinnerets. The Drider spits webbing in great strands.");
-			//Blind dodge change
-			if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
-				outputText("She misses completely due to their blindness. As she spins back around, your opponent…seems to be looking at the strands in disappointment. Is it your imagination, or does she seem to regret the loss of silk?");
-			}
 			//Determine if dodged!
-			else if (player.spe - spe > 0 && int(Math.random() * (((player.spe - spe) / 4) + 80)) > 80) {
+			if (player.getEvasionRoll()) {
 				outputText("You dodge away, avoiding the sticky strands! As she spins back around, your opponent…seems to be looking at the strands in disappointment. Is it your imagination, or does she seem to regret the loss of silk?");
-			}
-			//Determine if evaded
-			else if (player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
-				outputText("You evade, avoiding the sticky strands! As she spins back around, your opponent…seems to be looking at the strands in disappointment. Is it your imagination, or does she seem to regret the loss of silk?");
-			}
-			//("Misdirection"
-			else if (player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
-				outputText("Your misleading movements allow you to easily sidestep the sticky strands! As she spins back around, your opponent…seems to be looking at the strands in disappointment. Is it your imagination, or does she seem to regret the loss of silk?");
-			}
-			//Determine if cat'ed
-			else if (player.hasPerk(PerkLib.Flexibility) && rand(100) < 6) {
-				outputText("You throw yourself out of the way with cat-like agility at the last moment, avoiding " + mf("his", "her") + " attack. As she spins back around, your opponent…seems to be looking at the strands in disappointment. Is it your imagination, or does she seem to regret the loss of silk?\n");
 			}
 			//Got hit
 			else {
-				var web:WebDebuff = player.statusEffectByType(StatusEffects.Web) as WebDebuff;
-				if (web == null) {
+				if (player.buff("Web").isPresent()) {
+					outputText("The silky strands hit you, weighing you down and restricting your movement even further.\n");
+					player.buff("Web").addStats( {"spe":-25} ).withText("Web").combatPermanent();
+				}
+				else {
 					outputText("You’re unable to dodge, and the heavy strands wrap around your arms and legs, weighing you down and restricting your movements.");
 					if (player.canFly()) outputText("  Your wings struggle uselessly in the bindings, no longer able to flap fast enough to aid you.");
 					outputText("\n");
-					web = new WebDebuff();
-					player.addStatusEffect(web);
+					player.buff("Web").addStats( {"spe":-25} ).withText("Web").combatPermanent();
 				}
-				else {
-					outputText("The silky strands hit you, weighing you down and restricting your movement even further.\n");
-				}
-				web.increase();
 			}
 		}
 		
@@ -130,7 +111,7 @@ import classes.internals.*;
 			if (flags[kFLAGS.LILY_LVL_UP] >= 3) {
 				var lustArrowDmg:Number = (flags[kFLAGS.LILY_LVL_UP] * 2);
 				if (flags[kFLAGS.LILY_LVL_UP] >= 9) lustArrowDmg += (this.inte / 5 + rand(player.lib - player.inte * 2 + player.cor) / 5);
-				player.dynStats("lus", lustArrowDmg);
+				player.takeLustDamage(lustArrowDmg, true);
 			}
 		}
 		
@@ -154,11 +135,11 @@ import classes.internals.*;
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if (LilyFollower.LilyFollowerState) cleanupAfterCombat();
+			if (LilyFollower.LilyFollowerState) SceneLib.lily.LilySparLost();
 			else SceneLib.lily.LilyAfterBattle();
 		}
 		
-		public function Lily() 
+		public function Lily()
 		{
 			if (flags[kFLAGS.LILY_LVL_UP] < 2) {
 				initStrTouSpeInte(70, 75, 110, 100);
@@ -195,7 +176,7 @@ import classes.internals.*;
 				this.level = 70;
 			}
 			this.imageName = "corrupteddrider";
-			if (LilyFollower.LilyTalked > 0) { 
+			if (LilyFollower.LilyTalked > 0) {
 				this.a = "";
 				this.short = "Lily";
 				this.long = "Lily is a drider - a creature with a humanoid top half and the lower body of a giant arachnid.  From a quick glance, you can tell that this one has fallen deeply to corruption.  She is utterly nude, exposing her four well-rounded, DD-cup breasts with their shiny black nipples.  Gold piercings and chains link the curvy tits together, crossing in front of her four mounds in an 'x' pattern.  On her face and forehead, a sextet of lust-filled, " + LilyFollower.LilySkinTone + " eyes gaze back at you.  Behind her, the monster-girl's " + LilyFollower.LilyHairColor + " hair drapes down her back like a cloak.  The drider's lips seem to shine with a light all their own, and a steady trickle of purple, reflective fluid beads and drips from them.  At her waist, there's a juicy looking snatch with a large, highly visible clit.  Her spider-half has eight spindly legs with black and " + LilyFollower.LilyHairColor + " stripes - a menacing display if ever you've seen one.";
@@ -216,7 +197,7 @@ import classes.internals.*;
 			this.hips.type = Hips.RATING_CURVY + 2;
 			this.butt.type = Butt.RATING_LARGE + 1;
 			this.lowerBody = LowerBody.DRIDER;
-			this.skinTone = LilyFollower.LilySkinTone;
+			this.bodyColor = LilyFollower.LilySkinTone;
 			this.hairColor = LilyFollower.LilyHairColor;
 			this.hairLength = 24;
 			this.weaponName = "claws";
@@ -228,7 +209,6 @@ import classes.internals.*;
 			this.nipplesPierced = 1;
 			this.lust = 35;
 			this.lustVuln = .2;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.gems = rand(15) + 35;
 			this.drop = new WeightedDrop().add(consumables.B_GOSSR,5)
 					.add(useables.T_SSILK,1)

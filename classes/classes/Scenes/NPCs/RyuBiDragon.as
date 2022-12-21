@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.BodyParts.*;
@@ -62,7 +62,7 @@ public class RyuBiDragon extends Monster
 			return str;
 		}
 		
-		public function RyuBiDragon() 
+		public function RyuBiDragon()
 		{
 			if (flags[kFLAGS.RYUBI_LVL_UP] == 0) {
 				initStrTouSpeInte(100, 100, 100, 10);
@@ -203,14 +203,13 @@ public class RyuBiDragon extends Monster
 			this.createStatusEffect(StatusEffects.BonusACapacity,10,0,0,0);
 			this.hips.type = Hips.RATING_SLENDER;
 			this.butt.type = Butt.RATING_TIGHT;
-			this.skin.base.color = "white";
+			this.bodyColor = "white";
 			this.hairColor = "black";
 			this.hairLength = 1;
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
 			this.armorName = "scales";
 			this.lust = 20;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.gems = 5 + rand(3);
 			this.drop = new ChainedDrop().add(useables.D_SCALE, 0.1);
 			this.faceType = Face.DRAGON;
@@ -226,13 +225,13 @@ public class RyuBiDragon extends Monster
 			if (flags[kFLAGS.RYUBI_LVL_UP] < 2) this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);
 			if (flags[kFLAGS.RYUBI_LVL_UP] >= 2 && flags[kFLAGS.RYUBI_LVL_UP] < 8) this.createPerk(PerkLib.EnemyGigantType, 0, 0, 0, 0);
 			if (flags[kFLAGS.RYUBI_LVL_UP] >= 8) this.createPerk(PerkLib.EnemyColossalType, 0, 0, 0, 0);
-			/*if (flags[kFLAGS.RYUBI_LVL_UP] >= 1) 
-			if (flags[kFLAGS.RYUBI_LVL_UP] >= 2) 
-			if (flags[kFLAGS.RYUBI_LVL_UP] >= 3) 
-			if (flags[kFLAGS.RYUBI_LVL_UP] >= 4) 
+			/*if (flags[kFLAGS.RYUBI_LVL_UP] >= 1)
+			if (flags[kFLAGS.RYUBI_LVL_UP] >= 2)
+			if (flags[kFLAGS.RYUBI_LVL_UP] >= 3)
+			if (flags[kFLAGS.RYUBI_LVL_UP] >= 4)
 			if (flags[kFLAGS.RYUBI_LVL_UP] >= 5) */
 			if (flags[kFLAGS.RYUBI_LVL_UP] >= 6) this.lustVuln = .1;
-			//if (flags[kFLAGS.RYUBI_LVL_UP] >= 7) 
+			//if (flags[kFLAGS.RYUBI_LVL_UP] >= 7)
 			checkMonster();
 		}
 		

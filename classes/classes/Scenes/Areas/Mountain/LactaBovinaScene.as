@@ -54,7 +54,7 @@ public function lactaBovinaVictorySittingBoobjob():void {
 	outputText("You watch patiently as the cow uses her massive tits to pleasure aching cock, bitch must be used to treating minotaurs on a daily basis because she's very good at this. "+(player.horseCocks() > 0?"That your cock is equine in shape probably helps put her in the mood. ":"")+"You moan as the cow slowly edges you toward the inevitable climax, her jiggly orbs moving across your lenght. ");
 	outputText("You almost feel the bump of fresh cum move along the length of you prick as you finally explode painting the cow face with your seed.\n\n");
 	outputText("Satisfied you stand up and redress leaving the pleading needy cow behind heading back to your camp.");
-	player.sexReward("Default","Dick",true,false);
+	player.sexReward("no", "Dick");
 	cleanupAfterCombat();
 }
 public function lactaBovinaVictoryLeave():void {

@@ -47,7 +47,7 @@ import classes.internals.*;
 			if (hasStatusEffect(StatusEffects.CreepingDoom)) lustDmg *= 2;
 			outputText("Alvina moans a word of power, squirting in orgasmic pleasure as a nova of black magic explodes from her. Unable to dodge, you are squarely hit by the energy wave and feel your arousal and sensitivity rise.\n\n");
 			lustDmg = Math.round(lustDmg);
-			player.dynStats("lus", lustDmg, "scale", false);
+			player.takeLustDamage(lustDmg, true);
 			player.addCurse("sens", 10, 2);
 		}
 
@@ -162,8 +162,8 @@ import classes.internals.*;
 						+ "being everywhere and nowhere at the same time, a living paradox"
 						+ ". You are barely conscious of the blades colliding together at your previous position with a deafening crash as you appear a few yards away!\n\n");
 			}
-			else if (player.isRace(Races.FAIRY)) outputText("You avoid the attack thanks to your Faerie magic, flickering out of reality just as the blades collides.\n\n");
-			else if (player.isRace(Races.DISPLACERBEAST)) outputText("Little does she know that you have the ability to displace yourself out of such deadly attacks, You are barely conscious of the blades colliding together at your previous position with a deafening crash as you appear a few yards away!\n\n");
+			else if (player.isRace(Races.FAIRY, 1, false)) outputText("You avoid the attack thanks to your Faerie magic, flickering out of reality just as the blades collides.\n\n");
+			else if (player.isRace(Races.DISPLACERBEAST, 1, false)) outputText("Little does she know that you have the ability to displace yourself out of such deadly attacks, You are barely conscious of the blades colliding together at your previous position with a deafening crash as you appear a few yards away!\n\n");
 			else {
 				var damage:Number = player.maxHP() * 1.1;
 				if (player.minHP() < 0) damage += player.minHP();
@@ -302,7 +302,7 @@ import classes.internals.*;
 			this.hips.type = Hips.RATING_AVERAGE;
 			this.butt.type = Butt.RATING_AVERAGE;
 			this.lowerBody = LowerBody.HOOFED;
-			this.skinTone = "purple";
+			this.bodyColor = "purple";
 			this.hairColor = "black";
 			this.hairLength = 20;
 			initStrTouSpeInte(375, 455, 390, 480);
@@ -319,7 +319,6 @@ import classes.internals.*;
 			this.lust = 30;
 			if (hasStatusEffect(StatusEffects.Maleficium)) this.lustVuln = 0.75;
 			else this.lustVuln = 0.5;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 100;
 			this.gems = rand(25) + 138;
 			this.drop = NO_DROP;

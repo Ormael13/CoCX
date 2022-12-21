@@ -1,4 +1,5 @@
 package classes.BodyParts {
+import classes.Creature;
 import classes.internals.EnumValue;
 import classes.PerkLib;
 
@@ -37,7 +38,7 @@ public class Eyes extends BodyPart {
 	});
 	public static const GORGON: int = 4;
 	EnumValue.add(Types, GORGON, "GORGON", {
-		name:"snake",
+		name:"gorgon",
 		appearanceDesc: "Your [eyecolor] eyes are similar to those of snake-like gorgons with ability to temporally petrify.",
 		Darkvision: true
 	});
@@ -262,8 +263,8 @@ public class Eyes extends BodyPart {
 
 	public var count:int;
 	public var colour:String = "brown";
-	public function Eyes() {
-		super(null, null);
+	public function Eyes(creature:Creature) {
+		super(creature, null);
 	}
 
 	public static function getAppearanceDescription(creature: *):String {

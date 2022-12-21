@@ -4,14 +4,11 @@ import classes.*;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
+import classes.Items.Armors.GooArmor;
 import classes.Scenes.SceneLib;
 
 public class HelFollower extends NPCAwareContent
 	{
-
-		public function HelFollower()
-		{
-		}
 
 //const HELIA_FOLLOWER_DISABLED:int = 696
 //const HEL_INTROS_LEVEL:int = 697;
@@ -24,26 +21,26 @@ public class HelFollower extends NPCAwareContent
 //const HELIA_ANAL_TRAINING_OFFERED:int = 926;
 //const HELIA_ANAL_TRAINING:int = 927;
 
-//const HELIA_BIRTHDAY_OFFERED:int = 928;
+//const HELIA_BIRTHDAY_LAST_YEAR:int = 928;
 //const HELIA_BDAY_DRINKS:int = 929;
 //const HELIA_BDAY_HAKON_AND_KIRI:int = 930;
 //const HELIA_BDAY_PHOENIXES:int = 931;
 //const HELIA_BDAY_FOX_TWINS:int = 932;
 
-private function helCapacity():Number {
+public function helCapacity():Number {
 	return 85;
 }
-private function helAnalCapacity():Number {
+public function get helNofitMsg():String {
+	return "Req. a cock fitting "+helCapacity()+" area";
+}
+public function helAnalCapacity():Number {
 	var anal:int = 85;
 	if(flags[kFLAGS.HELIA_ANAL_TRAINING] >= 1) anal += 100;
 	if(flags[kFLAGS.HELIA_ANAL_TRAINING] >= 2) anal += 300;
 	return anal;
 }
-internal function heliaCapacity():Number {
-	return helCapacity();
-}
-internal function heliaAnalCapacity():Number {
-	return helAnalCapacity();
+public function get helAnalNofitMsg():String {
+	return "Req. a cock fitting "+helAnalCapacity()+" area";
 }
 public function helAffection(diff:Number = 0):Number {
 	if(flags[kFLAGS.HEL_AFFECTION_FOLLOWER] > 70 && flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED] == 0) flags[kFLAGS.HEL_AFFECTION_FOLLOWER] = 70;
@@ -59,10 +56,6 @@ public function helAffection(diff:Number = 0):Number {
 		else if(diff < 0) if(flags[kFLAGS.HEL_BONUS_POINTS] < 0) flags[kFLAGS.HEL_BONUS_POINTS] = 0;		
 	}
 	return flags[kFLAGS.HEL_AFFECTION_FOLLOWER];
-	trace("HEL AFFECTION" + flags[kFLAGS.HEL_AFFECTION_FOLLOWER]);
-}
-public function isHeliaBirthday():Boolean {
-	return date.month == 7;
 }
 
 //The Pale Flame Lingers: Introduction -McGirt
@@ -476,7 +469,7 @@ public function angryHelAndIzzyCampHelHereFirst():void {
 }
 
 public function heliaFollowerMenu2():void {
-	if (!player.hasStatusEffect(StatusEffects.LunaWasWarned)) {
+	if (!player.hasStatusEffect(StatusEffects.LunaOff) && !player.hasStatusEffect(StatusEffects.LunaWasWarned)) {
 		if ((flags[kFLAGS.LUNA_JEALOUSY] > 200 && rand(10) < 4) || (flags[kFLAGS.LUNA_JEALOUSY] > 300 && rand(10) < 8)) mishapsLunaHel();
 		else heliaFollowerMenu();
 	}
@@ -491,37 +484,33 @@ public function heliaFollowerMenu(display:Boolean = true):void {
 		helScene.helSprite();
 	}
 	if(flags[kFLAGS.HEL_FOLLOWER_LEVEL] == 2) {
-		if(flags[kFLAGS.HELIA_ANAL_TRAINING_OFFERED] == 0 && display && player.biggestCockArea() > heliaAnalCapacity()) {
-			heliaAnalTrainingPrompt();
-			return;
+		if(flags[kFLAGS.HELIA_ANAL_TRAINING_OFFERED] == 0 && display) {
+			if (player.biggestCockArea() > helAnalCapacity()) {
+				heliaAnalTrainingPrompt();
+				return;
+			} else sceneHunter.print("Check failed: your biggest dick must be bigger than her ass can take.");
 		}
 		if(display) outputText("You call your salamander lover over, and in a few moments Hel walks your way, hips and tail swaying gaily as she moves.  She wraps an arm around your shoulders, pressing her soft, warm body against yours, and grins.  <i>\"Heyya, lover mine.  You need anything?\"</i>");
 		menu();
-		//Hel Camp Follower menu
-		//Options:
-		//Talk
-		//[If before 21:00: "Hug" else "Cuddle"]
-		//Spar
-		//Boxing
-		//Rough Sex (Needs normal lust to appear)
-		//Gentle Sex (Regardless of lust)
-		//Threesomes
-		//Take a Bath
-		//Appearance
 		camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_SALAMANDERS);
 		addButton(0,"Appearance",helSpawnScene.heliasAppearanceScreen).hint("Examine Helia's appearance.");
-		if (player.lust >= 33) {
-			addButton(1,"Sex",heliaRoughSex).hint("Initiate sex with Helia.");
-			addButton(2,"Threesomes",heliaThreesomes).hint("Invite someone for threesomes activity with Helia!");
-		}
+		addButton(1,"Sex",heliaRoughSex).hint("Initiate sex with Helia.")
+			.disableIf(player.lust < 33, "Not aroused enough!");
+		addButton(2,"Threesomes",heliaThreesomes).hint("Invite someone for threesomes activity with Helia!")
+			.disableIf(player.lust < 33, "Not aroused enough!");
 		addButton(4,"Talk",heliaOptions).hint("Discuss with Helia about various topics.");
-		if (!SceneLib.helScene.pregnancy.isPregnant && flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(5,"Spar",sparWithHeliaFirebuttsAreHot).hint("Do some quick fight sessions!");
-		else outputText("\n\n<b>Helia will not spar or box while pregnant.</b>");
-		if (!SceneLib.helScene.pregnancy.isPregnant) addButton(6,"Box",boxWithInCampHel).hint("Box with Helia and train your strength and toughness.");
-		if (flags[kFLAGS.HEL_LOVE] == 1 || flags[kFLAGS.HEL_LOVE] == -1) {
-			if(player.hasCock() && player.cockThatFits(heliaCapacity()) >= 0 && player.lust >= 33 &&
-					!helPregnant() && flags[kFLAGS.HELSPAWN_AGE] == 0) addButton(7,"Have A Kid",helSpawnScene.haveAKid).hint("Get Helia pregnant and start a family with her.");
-		}
+		addButton(5, "Spar", sparWithHeliaFirebuttsAreHot).hint("Do some quick fight sessions!")
+			.disableIf(flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 2, "Req. a proper sparring ring.")
+			.disableIf(helScene.pregnancy.isPregnant, "She's pregnant, what are you thinking about?");
+		if (sceneHunter.mockFights) addButton(10, "Mock Fight", helMockFight)
+			.disableIf(helScene.pregnancy.isPregnant, "She's pregnant, what are you thinking about?");
+		addButton(6,"Box",boxWithInCampHel).hint("Box with Helia and train your strength and toughness.")
+			.disableIf(helScene.pregnancy.isPregnant, "She's pregnant, what are you thinking about?");
+		if ((flags[kFLAGS.HEL_LOVE] == 1 || flags[kFLAGS.HEL_LOVE] == -1) && !helPregnant() && flags[kFLAGS.HELSPAWN_AGE] == 0)
+			addButton(7,"Have A Kid",helSpawnScene.haveAKid)
+				.hint("Get Helia pregnant and start a family with her.")
+				.disableIf(player.cockThatFits(helCapacity()) < 0, helNofitMsg)
+				.disableIf(player.lust < 33, "Not aroused enough!");
 		addButton(14,"Back",camp.campLoversMenu)
 	}
 	else if(flags[kFLAGS.HEL_FOLLOWER_LEVEL] == 1) {
@@ -541,7 +530,7 @@ public function heliaFollowerMenu(display:Boolean = true):void {
 }
 
 private function heliaOptions():void {
-	if (SceneLib.helScene.pregnancy.event >= 3 && flags[kFLAGS.HELIA_TALK_SEVEN] == 0) {
+	if (helScene.pregnancy.event >= 3 && flags[kFLAGS.HELIA_TALK_SEVEN] == 0) {
 		helSpawnScene.heliaTalkSeven();
 		return;
 	}
@@ -553,14 +542,21 @@ private function heliaOptions():void {
 	addButton(0,"Discuss",talkToHel).hint("Talk to her about random topics.");
 	if(model.time.hours >= 21) addButton(1,"Cuddle",hugASmokeyTail).hint("Cuddle with Helia and sleep with her.");
 	else {
-		if (flags[kFLAGS.SLEEP_WITH] == "Helia") addButton(1, "NoSleepWith", dontSleepWithHelia).hint("Stop sleeping with Helia, for now.", "No Sleep With");
-		addButton(2,"Hug",hugASmokeyTail).hint("Give that salamander bitch a hug. Bitches love hugs.");
+		if (flags[kFLAGS.SLEEP_WITH] == "Helia") addButton(1, "NoSleepWith", dontSleepWithHelia)
+			.hint("Stop sleeping with Helia, for now.", "No Sleep With");
+		addButton(2,"Hug",hugASmokeyTail).hint("Give that salamander bitch a hug. Bitches love hugs.\n"
+			+ "<b>Functions as \"Sleep With\" at 21:00.</b>");
 	}
-	if (flags[kFLAGS.HELIA_ANAL_TRAINING_OFFERED] > 0 && flags[kFLAGS.HELIA_ANAL_TRAINING] < 2 && player.biggestCockArea() > heliaAnalCapacity() && player.hasItem(consumables.GOB_ALE, 1)) addButton(3, "Anal Train", heliaGapeSceneChoices);
+	if (flags[kFLAGS.HELIA_ANAL_TRAINING_OFFERED] > 0 && flags[kFLAGS.HELIA_ANAL_TRAINING] < 2)
+		addButton(3, "Anal Train", heliaGapeSceneChoices)
+			.disableIf(player.biggestCockArea() <= helAnalCapacity(), "Req. a bigger dick.")
+			.disableIf(!player.hasItem(consumables.GOB_ALE, 1), "Requires a bottle of Goblin Ale.");
 	//addButton(4, "Futafication", talkAboutFuta).hint("See if she's in the mood to grow a new penis.");
 	addButton(5, "Bathe", takeABath).hint("Swim in stream with Helia.");
-	if(flags[kFLAGS.HELSPAWN_AGE] == 1) addButton(7,flags[kFLAGS.HELSPAWN_NAME],helSpawnScene.playWithYourKid).hint("Spend some time with your salamander child.");
-	if(flags[kFLAGS.HEL_GUARDING] == 0) addButton(8,"GuardCamp",helGuardToggle).hint("Request her to guard the camp every night.", "Guard Camp");
+	if(flags[kFLAGS.HELSPAWN_AGE] == 1) addButton(7,flags[kFLAGS.HELSPAWN_NAME],helSpawnScene.playWithYourKid)
+		.hint("Spend some time with your salamander child.");
+	if(flags[kFLAGS.HEL_GUARDING] == 0) addButton(8,"GuardCamp",helGuardToggle)
+		.hint("Request her to guard the camp every night.", "Guard Camp");
 	else addButton(8,"NoGuarding",helGuardToggle).hint("Request her to stop guarding the camp.", "No Guarding");
 	addButton(14,"Back",heliaFollowerMenu);
 }
@@ -572,31 +568,21 @@ private function dontSleepWithHelia():void {
 	heliaOptions();
 }
 
-/*Replaced by a function in heliaPreggers.as: heliasAppearanceScreen
-//Hel: Appearance	
-private function helFollowerAppearance():void {
-	clearOutput();
-	outputText("Hel the salamander stands seven feet tall, with pale skin and thick, bright-red scales covering her arms and legs, though she has a normal human torso and face.  A fiery tail swishes gaily behind her, blazing with a bright orange glow that lets off a pleasant heat, though it never seems to burn you.  Hel is wearing her scale bikini and a leather thong, and using her scimitar as a weapon.  She has a human face, with bright red eyes, gentle, feminine features and a smattering of pale scales on her cheeks, like freckles.  Hel has long, bright-red hair bound in a pony-tail that hangs down her back.  She has wide-flared hips and a soft, squishy butt.  Her two reptilian legs are visibly adorned with scales and claws, ending in soft, leathery soles.");
-	if(flags[kFLAGS.HEL_ISABELLA_THREESOME_ENABLED] >= 1) outputText("  Hel's blue bandanna is wrapped around her brow, mostly hidden beneath her fiery hair.");
-	outputText("\n\nHel has a pair of big, soft E-cup breasts, each with a 0.5 inch nipple at their tip.");
-	
-	outputText("\n\nShe has a warm, wet, and accommodating pussy between her legs.");
-	
-	outputText("\n\nHel has a single tight asshole between her buttcheeks, right where it belongs.");
-	
-	menu();
-	addButton(0,"Next",heliaFollowerMenu);
-}*/
+private function helMockFight():void {
+	mocking = true;
+	sparWithHeliaFirebuttsAreHot();
+}
+
 //Hel: Spar Intro
 private function sparWithHeliaFirebuttsAreHot():void {
 	clearOutput();
 	outputText("Giving Hel a playful punch on the shoulder, you ask the salamander-girl if she'd be up for a little battle practice.");
+	if (mocking) outputText("  Maybe she'll even like to fight and fuck with you just like you did it before, in the wild?");
 	outputText("\n\n<i>\"Oh?  Well, it's certainly been awhile since you and I fought out on the plains...  Alright, let's do it, [name]!  But heads up, I might just need to have my way with you after I push your face in the dirt!\"</i>");
 	outputText("\n\nYou ready your [weapon] and prepare for battle!");
 	startCombat(new Hel());
-	monster.createStatusEffect(StatusEffects.Sparring,0,0,0,0);
-	//No gems.
-	//monster.XP = 1;
+	if (!mocking) monster.createStatusEffect(StatusEffects.Sparring,0,0,0,0);
+	monster.createPerk(PerkLib.NoGemsLost, 0, 0, 0, 0);
 	monster.gems = 0;
 }
 
@@ -629,10 +615,7 @@ internal function PCBeatsUpSalamanderSparring():void {
 	if(monster.HP <= monster.minHP()) outputText("<i>\"Kick my ass a little harder, why don't you?\"</i>");
 	else outputText("<i>\"Turn me on till I can't think straight, why don't you?\"</i>");
 	outputText("  You chuckle and offer her a hand up. The blushing Salamander takes it as you pull her into a tight embrace.  The cool wetness between her thighs a potent reminder of how much your lover seems to get off on violence.  Since she's so turned on, you could easily turn this into some rough loving.");
-	
-	//[Display "Rough" sex options]
 	heliaRoughSex(false);
-	//cleanupAfterCombat();
 }
 
 
@@ -766,7 +749,7 @@ private function talkToHel():void {
 	//Hel Talk 6 (Needs Isabella and Kiha at camp; at least 1 gem)(C)
 	else if(flags[kFLAGS.FOLLOWER_HEL_TALKS] == 5 && player.gems >= 1 && isabellaFollower() && kihaFollower.followerKiha()) {
 		outputText(images.showImage("helia-follower-poker"));		
-		var gems:int = 0;
+		var gems:int;
 		outputText("<i>\"Hey, [name],\"</i> Hel says with a sly grin.  <i>\"Me, Izzy, and spitfire were just playing a little game.  Wanna deal in?\"</i>");
 		
 		outputText("\n\n<i>\"Maybe.  What're you playing?\"</i>");
@@ -965,12 +948,6 @@ private function hugASmokeyTail():void {
 	doNext(camp.returnToCampUseOneHour);
 }
 
-//Talk about futafication, requires 75+ Helia Bonus Points. 
-private function talkAboutFuta():void {
-	clearOutput();
-
-}
-
 //What a horrible night to have a canyon vagina
 //Hel Has a Nightmare (Play 10% of the time you Cuddle Hel)
 public function sleepyNightMareHel():void {
@@ -989,96 +966,43 @@ private function heliaRoughSex(output:Boolean = true):void {
 		clearOutput();
 		outputText("<i>\"Mmm, need to blow off some steam, lover?\"</i>  Hel grins, reaching around to undo the straps of her scale bikini.  <i>\"Well, I'm all for that!\"</i>");
 	}
-	var buttons:int = 0;
-	//(Display Options: 
-	//PC has a dick: [Vaginal] [Anal] [Get Blown] [DP (Multi)] [Tail Wank]
-	//PC has Vag: [Get Licked]
-	//All: [Tail Peg]
-	//Morph-based: [Possession] [Mount Her] [Hanging 69] [Coil Her Up] [Tentafuck])
+	sceneHunter.print("Centaur and naga scenes are different from 'fuckbuddy' Hel.")
+	//check cocks
+	var cockV:int = player.cockThatFits(helCapacity());
+	var cockA:int = player.cockThatFits(helAnalCapacity());
 	menu();
-	if(player.hasCock() && player.lust >= 33) {
-		//85 vag capacity by base
-		if(player.cockThatFits(heliaCapacity()) >= 0 && buttons < 14)
-		{	
-			addButton(buttons,"FuckVag",helScene.beatUpHelAndStealHerWalletFromHerVagina).hint("Penetrate her vaginally.");
-			buttons++;
-		}
-		//85 ass capacity
-		if(player.cockThatFits(heliaAnalCapacity()) >= 0 && buttons < 14)
-		{
-			addButton(buttons,"Anal",helScene.fuckHelsAss).hint("Penetrate her anally.");
-			buttons++;
-		}
-		if(buttons < 14) {
-			addButton(buttons,"Get Blown",helScene.helBlowsYou).hint("Have her suck you off..");
-			buttons++;
-		}
-		if(player.cockThatFits(heliaCapacity()) >= 0 && player.cockThatFits2(heliaCapacity()) >= 0 && buttons < 14) 
-		{
-			addButton(buttons,"DoublePen",helScene.dpHel).hint("Fill both of her holes with your cocks.");
-			buttons++;
-		}
-		if(buttons < 14) {
-			addButton(buttons,"Tail Wank",helScene.helTailWanksYourDickBecauseSheLovesYouDesuDesuHoraHora).hint("Have her jerk you off using her tail.");
-			buttons++;
-		}
-	}
-	if(player.hasVagina() && player.lust >= 33 && buttons < 14) {
-		addButton(buttons,"GetLicked",helScene.getLickedByHel).hint("Have her lick your vagina.");
-		buttons++;
-	}
-	if(player.lust >= 33 && buttons < 14) {
-		addButton(buttons,"TailPeg",helScene.helTailPegging).hint("Have her peg your ass.");
-		buttons++;
-	}
-	//if (player.lust >= 33 && flags[kFLAGS.HELIA_FUTA] > 0) {
-	//	addButton(buttons, "Get Fucked", helScene.getFucked).hint("Have her penetrate you anally with her dick.");
-	//	buttons++;
-	//}
-	//Morph-based: [Possession] [Mount Her] [Hanging 69] [Coil Her Up] [Tentafuck])
-	if(player.lust >= 33 && player.isTaur()) 
-	{
-		if(player.hasCock()) 
-		{
-			if(player.cockThatFits(heliaCapacity()) >= 0 && buttons < 14) {
-				addButton(buttons,"Mount Her",centaurMountsCampHel);
-				buttons++;	
-			}
-		}
-		if(player.hasKeyItem("Centaur Pole") >= 0 && player.hasVagina() && buttons < 14) {
-			addButton(buttons,"CentaurToy",femtaurPlusCampHel);
-			buttons++;	
-		}
-	}
-	if(player.lust >= 33 && player.hasPerk(PerkLib.Incorporeality) && izmaFollower() && flags[kFLAGS.IZMA_NO_COCK] == 0 && buttons < 14) {
-		addButton(buttons,"Possess",heliaCampPossession);
-		buttons++;
-	}
-	if(player.lust >= 33 && (player.tentacleCocks() > 6 || player.stamenCocks() > 6)) {
-		addButton(buttons,"Tentacles",heliaFollowerTentafuck);
-		buttons++;	
-	}
-	if(player.lust >= 33 && player.isNaga()) 
-	{
-		//"Rough" Sex -- Naga Coil (Female w/ Naga Lower Body)
-		if(player.hasVagina() && buttons < 14) 
-		{
-			addButton(buttons,"NagaCoilF",nagaCoilForHelCampWithGirls);
-			buttons++;	
-		}
-		//"Rough" Sex (Well, it's in the menu, if not in spirit) -- Naga Coil (Male w/ Naga Lower Body)
-		//Male naga shit
-		if(player.hasCock() && buttons < 14) 
-		{
-			if(player.cockThatFits(heliaCapacity()) >= 0) {
-				addButton(buttons,"NagaCoilM",inCampHelNagaLuv);
-				buttons++;	
-			}
-		}
-	}
-	if (player.lust < 33) outputText("\n\n<b>You aren't turned on enough for sex right now.</b>");
-    if (CoC.instance.inCombat)
-        addButton(14, "Leave", cleanupAfterCombat);
+	addButton(0, "FuckHerVag", helScene.fuckHelsVag).hint("Penetrate her vaginally.")
+		.disableIf(cockV < 0, helNofitMsg);
+	addButton(5, "FuckHerAss", helScene.fuckHelsAss).hint("Penetrate her anally.")
+		.disableIf(cockA < 0, helAnalNofitMsg);
+	if (cockA == cockV) cockA = player.cockThatFits2(helAnalCapacity()); //find another one; fails if <2 cocks
+	addButton(10, "DoublePen", helScene.dpHel).hint("Fill both of her holes with your cocks.")
+		.disableIf(cockV < 0 || cockA < 0, helNofitMsg + "; " + helAnalNofitMsg);
+	addButton(1, "Get Blown", helScene.helBlowsYou).hint("Have her suck you off..")
+		.disableIf(!player.hasCock(), "Req. a cock!");
+	addButton(6, "Get Licked", helScene.getLickedByHel).hint("Have her lick your vagina.")
+		.disableIf(!player.hasVagina(), "Req. a vagina!");
+	addButton(11, "Possess", heliaCampPossession)
+		.disableIf(!player.hasPerk(PerkLib.Incorporeality) || flags[kFLAGS.IZMA_NO_COCK],
+			"Req. 'Incorporeality' perk from the ghost race! And Izma must have a cock.")
+		.disableIf(!izmaFollower(), "You lack someone in your camp.", "???");
+	addButton(2, "Tail Wank", helScene.helTailWank).hint("Have her jerk you off using her tail.")
+		.disableIf(!player.hasCock(), "Req. a cock!");
+	addButton(7, "GetTailPegged", helScene.helTailPegging).hint("Have her peg your ass.");
+	addButton(12, "Tentacles", heliaFollowerTentafuck)
+		.disableIf(player.countCocksWithType(CockTypesEnum.TENTACLE) < 7, "Req. at least 7 tentacle cocks!");
+	addButton(3, "NagaCoilM", inCampHelNagaLuv)
+		.disableIf(!player.isNaga() || cockV < 0,
+		"Req. to have Naga lower body; " + helNofitMsg);
+	addButton(8, "NagaCoilF", nagaCoilForHelCampWithGirls)
+		.disableIf(!player.isNaga() || !player.hasVagina(), "Req. to have Naga lower body and a vagina!");
+	addButtonDisabled(13, "o====8", "Old sex scenes are still available from the 'Mock Fight'!\n\n-SceneHunter")
+	addButton(4, "Mount Her", centaurMountsCampHel)
+		.disableIf(!player.isTaur() || cockV < 0, "Req. to have Taur lower body; " + helNofitMsg);
+	addButton(9, "CentaurToy", femtaurPlusCampHel)
+		.disableIf(!player.isTaur() || !player.hasVagina() || player.hasKeyItem("Centaur Pole") < 0,
+			"Req. to have Taur lower body, a vagina, and 'Centaur Pole' toy!");
+    if (CoC.instance.inCombat) addButton(14, "Leave", cleanupAfterCombat);
 	else addButton(14, "Back", heliaFollowerMenu);
 }
 
@@ -1189,7 +1113,7 @@ private function possessIzma():void {
 private function inCampHelNagaLuv():void {
 	clearOutput();
 	outputText(images.showImage("helia-follower-sex-nagamale"));
-	var x:int = player.cockThatFits(heliaCapacity());
+	var x:int = player.cockThatFits(helCapacity());
 	if(x < 0) x = player.smallestCockIndex();
 	outputText("You slither over to the salamander and circle around her, your serpentine lower body trailing around her legs as you sweep Helia into a tight embrace.  She grins wolfishly, pressing her lips to yours; you let her tongue enter your mouth, entwining with your tongue, letting her distract herself as you coil more and more of your snake-body around the salamander.  By the time Hel realizes what you're up to, there isn't much she can do about it - you grab her arms and press them to her sides as you bind her up past the waist, wrapping your lover in your lengthy, serpentine form.");
 	
@@ -1208,7 +1132,7 @@ private function inCampHelNagaLuv():void {
 	outputText("\n\nUnable to move much in your serpentine embrace, Hel begins to rapidly contract her vaginal and anal muscles, squeezing and grinding against your " + cockDescript(x) + " and tip.  Content to close your eyes and bask in the pleasures of your lover, ready to lose yourself in pleasure.  You relax, leaning back on yourself as you buck your hips into your lover's sweet hot box, flick your tail inside her ass, and play your tongue around her mouth, tasting her warm saliva and the aftertaste of beer.");
 	
 	outputText("\n\nYou cum easily, only a small grunt escaping your lips as Hel's delicious cunt brings you over, pulling your " + cockDescript(x) + " deep into her and tightening your hold around her.  The sudden squeeze is the last hurrah as you empty your ");
-	if(player.balls > 0) outputText("[balls]");
+	if(player.hasBalls()) outputText("[balls]");
 	else outputText("load");
 	outputText(" well into her womb.  Your tail spasms as you cum, running wild inside Hel's rectum until she cums too, yelping into your open mouth as she climaxes a moment after you, girlcum squirting out of her twat until your [hips] are thoroughly soaked.");
 	
@@ -1257,7 +1181,7 @@ private function nagaCoilForHelCampWithGirls():void {
 
 //"Rough" Sex -- Centaur Mounts Hel (PC has Centaur body & a dick)
 private function centaurMountsCampHel():void {
-	var x:int = player.cockThatFits(heliaCapacity());
+	var x:int = player.cockThatFits(helCapacity());
 	if(x < 0) x = player.smallestCockIndex();
 	clearOutput();
 	outputText(images.showImage("helia-follower-sex-mount"));
@@ -1276,7 +1200,7 @@ private function centaurMountsCampHel():void {
 	outputText("\n\nThen as quickly as it began, Hel's blowjob comes to a halt.  The salamander pops your prick out of her maw and, giving it one last kiss on the " + player.cockHead(x) + ", lets it fall aside as she moves.  You lean around yourself awkwardly as your lover ducks beneath your horse-half, clambering into her harness.  Hel disappears from view, completely obscured by your own body; all you can feel of her is her weight pulling down on your back and her powerful scaled legs hooking around your thighs, spreading wide as she grabs your cock again.  You groan pleasurably as the tip brushes her lower lips, the heat of her inhuman pussy radiating out to set your nerves ablaze.");
 	
 	outputText("\n\nWhen she finally guides you into her cunt's embrace, you nearly cum, the intense foreplay suddenly catching up to you.  You grit your teeth and stomp your hooves, desperately holding back as you adjust to the heat and pressure of her depths, finally coming to rest as she finishes sliding in as much cock as ");
-	if(player.cockArea(x) > heliaCapacity()) outputText("she can cram in, the rest of your length twitching between her legs");
+	if(player.cockArea(x) > helCapacity()) outputText("she can cram in, the rest of your length twitching between her legs");
 	else outputText("you have to offer her");
 	outputText(".  Finally, though, you manage to settle down, your breath coming ragged as Hel's vaginal muscles clamp and release, gently massaging your shaft with expert movements, always keeping you on edge until...");
 	
@@ -1342,8 +1266,8 @@ private function heliaFollowerTentafuck():void {
 	
 	outputText("\n\n\"<i>Oh, gods,</i>\" Hel groans around the cock on her mouth, \"<i>Stuff 'em in there!  Gods, YES!</i>\" she cries, clutching at your mouth-gaping cock as the second and third members ram into her cunt, moving faster, fucking her with wild abandon.  As your three salamander-stuffing pricks pound into Hel's two holes, though, your next two cocks slowly move into position.  Your fourth vine-like tool readies to pounce, and with one quick motion pierces Hel's ass, jamming its first inches into her backdoor with enough force to make her scream around the cock in her throat.  You push yourself further in, and further still, until the three cocks pile-driving into Hel's cunt and ass can feel each other through her walls, writhing against each other through the thin barrier of flesh separating her pussy and rear.  Another of your cocks soon joins the fray, wriggling up between Hel's prominent E-cups and thrusting itself upwards, seizing a tit-fucking while the salamander's distracted with your quad-attack.");
 	
-	outputText("\n\nWith five viney cocks assaulting her all at once, you watch with satisfaction as Hel's eyes roll back in her head, her back arching as all her holes are roughly abused by your inhuman manhoods.  With a grin, you make a sudden pelvic thrust and in so doing fully lift Helia off the ground, suspending her in mid-air a foot off the ground, supported by your powerful erections.  \"<i>Gaaaahhh!  Put me down!</i>\"  But you only laugh at her helpless cries, instead sending your muscles into over-drive.  Your many tentacles thrash around inside her, moving faster and faster until with an ear-piercing cry, Hel cums, throwing her head back and screaming her pleasure to the heavens.  Her wildly-spasm muscles, contracting ass and flailing tongue combine around your viney pricks, bringing you closer and closer to your climax until you too roar with pleasure and the first thick bursts of semen pour forth from your cocks, smearing Hel's chest, mouth, ass, and cunt with the slimey smears of seed.  Your tentacles pulse as great blobs of spunk surge through them, pumping your cum into Hel until your ");
-	if(player.balls > 0) outputText("[balls]");
+	outputText("\n\nWith five viney cocks assaulting her all at once, you watch with satisfaction as Hel's eyes roll back in her head, her back arching as all her holes are roughly abused by your inhuman manhoods.  With a grin, you make a sudden pelvic thrust and in so doing fully lift Helia off the ground, suspending her in midair a foot off the ground, supported by your powerful erections.  \"<i>Gaaaahhh!  Put me down!</i>\"  But you only laugh at her helpless cries, instead sending your muscles into over-drive.  Your many tentacles thrash around inside her, moving faster and faster until with an ear-piercing cry, Hel cums, throwing her head back and screaming her pleasure to the heavens.  Her wildly-spasm muscles, contracting ass and flailing tongue combine around your viney pricks, bringing you closer and closer to your climax until you too roar with pleasure and the first thick bursts of semen pour forth from your cocks, smearing Hel's chest, mouth, ass, and cunt with the slimey smears of seed.  Your tentacles pulse as great blobs of spunk surge through them, pumping your cum into Hel until your ");
+	if(player.hasBalls()) outputText("[balls]");
 	else outputText("wriggling tentacles");
 	outputText(" feel painfully empty and white slush pours from all her holes, painting the ground white beneath her dangling feet.");
 	
@@ -1363,10 +1287,24 @@ private function boxWithInCampHel():void {
 	outputText(images.showImage("helia-follower-boxing"));
 	outputText("You ask Hel if she'd like to get in some combat practice -- but brush her hand away from her scimitar's hilt when she reaches for it.  \"<i>Unarmed combat practice,</i>\" you clarify, balling your fists. Hel grins, and tosses her sword to the side -- and her scant clothes as well.  Wholly exposed, Hel drops into a fighting stance, legs spread wide and fists raised defensively.");
 	outputText("\n\n\"<i>Come on, lover mine,</i>\" she says, a playful grin spreading across her lips, \"<i>Let's dance!</i>\"");
-	
+
 	//{Make an INT or STR check, whichever is higher:
 	outputText("\n\nYou toss your [armor] aside and assume your own battle stance, your powerful muscles tightening beneath your " + player.skinFurScales() + ", ready to spring into action.  You move slowly, cautiously; you and Hel begin to circle each other like predators observing their prey, each watching the other for any momentary lapse, any split-second vulnerabilities.  Suddenly, Hel lashes out, a quick one-two jab at you, narrowly blocked in your guard.  You grind your feet into the ground, deflecting her inhumanly-strong blows as best you can.  She launches a third strike, but you duck aside, spinning into her guard and delivering a hard jab to her gut.  The salamander recoils, swinging her fiery tail at you as she gets some distance, staggering back from the hit.  You exchange another quick flurry of blows, punches connecting, blocked, or dodged in rapid succession.  The fight drags on, neither of you able to land a telling blow, your strikes deflected or dodged, your prowess in battle nearly matched.");
-	fatigue(5+rand(20));
+	fatigue(5 + rand(20));
+	if (player.hasCock()) {
+		if (player.lust >= 33) {
+			outputText("\n\nYou may beat her in sparring... but do you want to? Maybe you should just slow down a bit and let her win, hoping for some 'compensation'?");
+			menu();
+			addButton(0, "KeepFighting", keepFighting);
+			addButton(1, "SlowDown", muddyLizardFeet);
+		} else {
+			outputText("\n\nHer tits, constantly bouncing right before your eyes, distract you a little... but not enough to make you stand down! Perhaps if you were a little more horny...");
+			keepFighting();
+		}
+	} else keepFighting();
+}
+
+private function keepFighting():void {
 	//If INT check succeeds: 
 	if(player.inte/20 + 1 + rand(20) >= 13) {
 		outputText("\n\nUntil you see an opening: only for a second, Hel leaves her side exposed between attacks.  You take a step back, inviting her to attack; the salamander lunges just as planned, throwing a mighty punch your way, which you nimbly dodge, putting you just inside her guard.  With all your force, you slam your elbow into her side, throwing your fiery foe to the ground with an audible \"<i>OOF!</i>\"  She's barely landed on her big ol' ass before you jump on her, tackling Hel while she's down and pinning her.  The salamander flails, trying to throw you off, but you hold fast and count down:");
@@ -1391,16 +1329,14 @@ private function boxWithInCampHel():void {
 	}
 	//If PC fails the Check:  
 	else {
+		if(player.lust >= 33 && player.hasCock() && rand(2) == 0) {
+			muddyLizardFeet();
+			return;
+		}
 		outputText("\n\nAs you desperately fend off the salamander's flurry of blows, though, you feel yourself wearing down.  Her punches start getting through your guard, scaled knuckles hammering into your flanks and gut, too many and too hard to withstand.  Eventually, battered and bruised, a particularly hard blow throwing you to the ground.  You land with a groan, and a moment later feel Hel's soft, leathery sole pressing down on your [chest].");
 		outputText("\n\n\"<i>Ha! Not today, [name]! You're good, lover, but you're gonna need to practice a lot more to beat me!  Now then.... what shall the victor do with her spoils?</i>\"");
 		//[Proceed to Lose to Hel sex scenes]
 		dynStats("tou", 2);
-		if(player.lust >= 33 && player.hasCock() && rand(2) == 0) {
-			if(player.cockThatFits(helCapacity()) >= 0) {
-				muddyLizardFeet();
-				return;
-			}
-		}
 		heliaRoughSex(false);
 		addButton(14,"Leave",camp.returnToCampUseOneHour);
 	}
@@ -1419,7 +1355,7 @@ private function muddyLizardFeet():void {
 	outputText("\n\nHel grins down at you and shifts her weight onto the foot that had been on your chest, her other coming up between your [legs], the smooth flats of her claws caressing the underside of your turgid cock, quickly bringing it to full stiffness.  She coos merrily as her claws stroke the stiff shaft of your manhood, leaving thick, slimy trails of salamander-warmed mud trickling down your prick.  Seeing your reaction - or at least, that of your rock-hard [cock biggest], Hel presses down ever so slightly, moving her heel to the base of your cock and flattening it against your belly.  A little gasp escapes your mouth as your lover applies the tiniest amount of pressure, leaning in to tighly press your rod against you.");
 	
 	outputText("\n\n\"<i>Aww, he likes it,</i>\" Hel laughs, clutching your girth between her clawed, scaled toes.  Slowly, she moves her foot along your length with tantalizing slowness, her soft, warm soles made slick by the thick mud now slathered on your dick.  Her actions are smooth and fluid, her well-lubricated underside gliding easily down to the base of your prick, ");
-	if(player.balls > 0) outputText("her heel coming to caress your taut sack");
+	if(player.hasBalls()) outputText("her heel coming to caress your taut sack");
 	else if(player.hasVagina()) outputText("her heel brushing against the nub of your [clit]");
 	else outputText("her heel going so low as to brush your taint, making your [asshole] clench in surprise before she moves back up your length");
 	outputText(".  You groan lustily as her toes and soft sole jerk you off, gently urging the tight knot of pleasure in your gut to fruition.  Cupping one of her hefty tits, Hel licks her lips as the first thick smears of pre leak from your cock's [cockHead biggest], smearing onto her long-clawed toes.");
@@ -1429,7 +1365,7 @@ private function muddyLizardFeet():void {
 	outputText("\n\n\"<i>Oh, [name],</i>\" she moans, squeezing your chest against herself, shifting to let your head rest against her big, soft breasts.  She leans down to kiss you, her lizard-like tongue slithering into your mouth to play across your own.  You return her kiss, reaching down to caress her leathery-scaled legs, brushing your fingers up along her thighs until her breath catches in her throat.  Just as Hel starts to pick up the pace, bringing you closer and closer to the edge of bliss, you twist around in her grip, shifting to face the salamander.  Hel gasps, but quiets instantly when you take her in your arms and kiss her, pushing her back into the muck with the intensity of your passion.");
 	
 	outputText("\n\nHel's legs wrap back around your [hips], pulling you down against her, your slick cock grazing the hot slit of her pussy, just enough to part her lips ever so slightly.  Your lover breaks the kiss that binds you just long enough to moan your name, throwing her head back and clutching to you as you finally enter her, your cock spearing into her fiery depths with a slow, unyielding thrust.  You groan and moan, breath coming ragged as your [cock biggest] slides into the salamander's cunt.  You forge ahead, pressing your manhood into your lover until ");
-	if(player.biggestCockArea() > heliaCapacity()) outputText("you feel your [cockHead biggest] against the lips of her cervix, as fully into her as you can go");
+	if(player.biggestCockArea() > helCapacity()) outputText("you feel your [cockHead biggest] against the lips of her cervix, as fully into her as you can go");
 	else outputText("your groin meets Helia's, your [cock] wholly enveloped within her");
 	outputText(".  Before you can think to withdraw, Hel tightens her hold on you, whispering huskily, \"<i>Just leave it... just for a second, [name].  Oh, God,</i>\" she moans, her eyes closing as she savors the feeling of you buried so deep inside her, your slick prick twitching as her walls massage it, milking it of the precum that freely flows from your tip.");
 	
@@ -1439,7 +1375,7 @@ private function muddyLizardFeet():void {
 	
 	outputText("\n\nBefore you can blink, Hel shifts her grip on you and rolls you over, suddenly planting you back in the mud, leaving her on top, straddling your [hips], cock half-buried inside her.  She gives you a wink as she lifts up, letting your [cockHead biggest] taste the cool air.  You shudder with the sudden frigid sensation along your manhood as the salamander turns around, whispering, \"<i>I'm not ready for this to end just yet....</i>\"  She comes back down a second later, reaching back to spread her cheeks so that your [cock biggest] slides readily into her taut, muscular butt, trapped behind her as she gently grinds on you.  You groan, brought down from your near-orgasmic high by the sudden cold; Hel's butt is nothing compared to the sweltering embrace of her inner depths.");
 	
-	outputText("\n\nWinking at you over her shoulder, Hel grabs your [legs] for support as she starts to move, dragging your still-slick cock between her ass-cheeks.  She wastes no time with slowness, immediately bucking up and down on your fuckpole with all the speed she can muster, rutting like mad on top of you.  She's panting lustily in moments, her long tail swinging around to tease her empty twat, slipping a few inches in at the bottom of each bounce.  Unwilling to simply sit passively after you nearly had the both of you cumming buckets, you lean up and grab the slutty salamander's ass, sinking your fingers into her plush butt so hard she yelps.  You give her a little swat, chuckling as her flesh jiggles - and the impact shakes through her, making her clench around your prick.");
+	outputText("\n\nWinking at you over her shoulder, Hel grabs your [legs] for support as she starts to move, dragging your still-slick cock between her ass-cheeks.  She wastes no time with slowness, immediately bucking up and down on your fuckpole with all the speed she can muster, rutting like mad on top of you.  She's panting lustily in moments, her long tail swinging around to tease her empty twat, slipping a few inches in at the bottom of each bounce.  Unwilling to simply sit passively after you nearly had both of you cumming buckets, you lean up and grab the slutty salamander's ass, sinking your fingers into her plush butt so hard she yelps.  You give her a little swat, chuckling as her flesh jiggles - and the impact shakes through her, making her clench around your prick.");
 	
 	outputText("\n\nBefore you can try that again, though, Hel takes your hands in hers and guides them up to the soft mounds of her mammaries, letting you get something real to sink your fingers into.  You squeeze her tits roughly, teasing her stiff teats with a pinch or twist between each thrust, forcing little gasps and moans from her throat.  Soon, Hel's tongue is lolling out of her mouth, her back arching as she undulates atop you, squeezing hard on your [cock biggest] as you lean up to press your [chest] into her back.");
 	
@@ -1507,7 +1443,7 @@ private function takeABath():void {
 		
 		outputText("\n\n\"<i>Mmm, that's nice...</i>\" she moans, nuzzling against you. \"<i>Don't stop....</i>\"");
 		//Swim With Hel -- While Wearing Valeria
-		if(player.armor.name == "goo armor" && player.lust >= 33 && 9999 == 0) {
+		if((player.armor is GooArmor || flags[kFLAGS.VALERIA_AT_CAMP] == 1) && player.lust >= 33) {
 			outputText("\n\nYou and Helia cuddle in the steaming river, the minutes passing pleasantly in each other's embrace. After a moment, though, you notice a particularly blue patch of water swirling around Hel's bosom.  Curious, you reach down and cop a feel - of slimy goo.  You recoil, splashing back until a familiar voice drawls, \"<i>Howdy, partner!</i>\"");
 			outputText("\n\nHel leaps to her feet, yelping as her tits start to talk...  and form Valeria's face, a circlet of goo surrounding Helia's breasts as a second patch covers her nethers, effectively a bright blue goo bikini.");
 			
@@ -1518,9 +1454,7 @@ private function takeABath():void {
 			outputText("\n\nHel rolls her eyes, but cups her goo-coated breasts, giving Val - and her teats - a playful pinch.  With a yelp of surprise, though, Hel goes tumbling onto the riverbank, propelled by a pair of blue feet, a laughing voice echoing behind her as the two tumble into the sand.  \"<i>Why, you!</i>\" Hel giggles, spanking her own goo-covered ass in punishment.");
 			
 			outputText("\n\nSince both the girls are here, and in such playful spirits... do you want to have some fun?");
-			//[Display Val x Hel Threesome options]
-			menu();
-			//99999
+			doYesNo(helAndValeriaCampThreesomes, camp.returnToCampUseOneHour);
 		}
 		//Swim With Hel -- Lust less than 33
 		else {
@@ -1555,7 +1489,7 @@ private function teachHelToSwim():void {
 	outputText("\n\nYou spend the next few minutes urging and coaxing Hel to give it a try, telling her you'll be right there with her, ready to help if she needs it.  It takes some doing, but eventually, you see your friend visibly relax until she finally says, \"<i>Well... alright, I guess.  I trust you, [name].  Just... keep an eye on me, alright?  I don't want to drown.</i>\"  You assure her she won't drown, and wrapping your arm around the salamander's waist, lead her out of camp and down to the stream.");
 	
 	outputText("\n\nBy the time you arrive at the riverbed, you've already helped Helia out of her skimpy clothes, leaving her in a surprisingly bashful pose, covering her bare breasts with her arm as she approaches the river.  With a bit of urging, the salamander gingerly sticks her foot out, the long pale claw touching the water for the briefest instant before she recoils.");
-	
+
 	//If PC has Izma follower:
 	if(izmaFollower()) {
 		outputText("\n\nJust as Hel is about to put her foot in, a large red fin pokes out of the water.  You have just enough time to grab Hel and yank her back before a familiar shark-girl breaches the water, leaping onto shore with a wolfish grin.  \"<i>Heyya, Alpha,</i>\" Izma says, inclining her head to you as she wrings her hair out, grabbing a towel from behind a nearby rock.  \"<i>Oh, hi, Hel.  Don't see you around here much!</i>\"");
@@ -1584,30 +1518,17 @@ public function heliaThreesomes():void {
 	clearOutput();
 	outputText("You slip an arm around Hel's waist and ask if she's up for some... group activities?");
 	outputText("\n\nShe grins, her serpentine tongue flicking hungrily across her lips.  \"<i>Oh, you do know what I like, don't you?  So, who do you wanna bring in on the fun, [name]?</i>\"");
-	
-	//{Must have the appropriate followers, naturally:}
-	//Vapula/Hel
-//needs wings or 50+ str, dick, added as an option \"<i>Carry her to camp</i>\" when you defeat Hel while she is in Fuckbuddy mode.
-	//[Vapula]
-	//[Kiha]
 	menu();
-	if(vapulaSlave() && player.lust >= 33 && player.hasCock()) {
-		if(player.cockThatFits(heliaCapacity()) >= 0) {
-			addButton(1,"Vapula",heliaAndVapula);
-		}
-		else outputText("\n\nYou're too big to fuck Helia and Vapula with your cock.");
-	}
-	if(followerKiha() && player.lust >= 33 && player.gender > 0) {
-		addButton(0,"Kiha",campHelAndKihaThreeSome);
-	}
-	if((player.armor.name == "goo armor" || flags[kFLAGS.VALARIA_AT_CAMP] == 1) && player.lust >= 33/* && player.hasVagina()*/) {
-		addButton(2,"Valeria",helAndValeriaCampThreesomes);
-	}
-	if (player.lust >= 33 && bimboSophie())
-	{
-		addButton(3, "Sophie", helAndSluttyHarpy);
-	}
-	if(player.lust < 33) outputText("\n\n<b>You aren't horny enough to start a threesome.</b>");
+	addButton(0,"Kiha",campHelAndKihaThreeSome)
+		.disableIf(player.isGenderless(), "Not for genderless!")
+		.disableIf(!followerKiha(), "Why not lay a dragon?", "???");
+	addButton(1,"Vapula",heliaAndVapula)
+		.disableIf(player.cockThatFits(helCapacity()) < 0, helNofitMsg)
+		.disableIf(!vapulaSlave(), "Find some succubus for your pleasure.", "???");
+	addButton(2,"Valeria",helAndValeriaCampThreesomes)
+		.disableIf(!(player.armor is GooArmor || flags[kFLAGS.VALERIA_AT_CAMP] == 1), "Slime armor? What a bullshit.", "???");
+	addButton(3, "Sophie", helAndSluttyHarpy)
+		.disableIf(!bimboSophie(), "What about bimbo birds?", "???");
 	addButton(14,"Back",heliaFollowerMenu);
 }
 
@@ -1617,8 +1538,8 @@ public function heliaThreesomes():void {
 //Helia at Camp, Intro
 private function heliaAndVapula():void {
 	clearOutput();
-	var x:int = player.cockThatFits(heliaCapacity());
-	var y:int = player.cockThatFits2(heliaCapacity());
+	var x:int = player.cockThatFits(helCapacity());
+	var y:int = player.cockThatFits2(helCapacity());
 	outputText("You gab Hel and start for the edge of camp, where a certain succubus dwells....");
 	
 	outputText("\n\nYou are greeted by a bunch of imps that scatter as soon as they see you: they appeared to be have been busy on the purple woman.  You smile as you walk up to Vapula, the salamander girl still clinging to your shoulders.  The trembling succubus has trouble keeping an air of composure when she sees you.");
@@ -1668,7 +1589,7 @@ private function heliaAndVapula():void {
 	outputText("\n\nThe stark smell of your cum instantly wakes Vapula up and before she can think of anything her tongue instinctively starts slurping the drops of baby-batter dripping from the salamander's snatch.");
 	
 	outputText("\n\nThe display of two horny girls eating out each other is quite arousing and your " + cockDescript(x) + " is already erect while your ");
-	if(player.balls > 0) outputText("[balls] are");
+	if(player.hasBalls()) outputText("[balls] are");
 	else outputText("groin is");
 	outputText(" slowly filling back with more spunk for them.  You happily stride toward the couple of sluts, your junk ready for some more hole-filling.  Hel's tail is still lifted, the shining scales twisting hypnotically as the reptile girl gives and receives pleasure from both ends.  Her enticing butthole seems to be begging for a nice hard cock to be pierced with.  With a lust-filled grin, you grab her hot, bountiful buttocks for leverage and harshly jam her insides with your " + cockDescript(x) + ", knowing the fiery girl won't mind your rough ways. You utterly bury your " + cockDescript(x) + " inside her; her asshole obviously used to monstrous members as you have no difficulty sliding everything you can down her slippery colon.  Vapula trembles below her as you adamantly push the salamander girl back and forth with your enthusiastic dick-assaults to her backside.");
 	
@@ -1898,7 +1819,7 @@ private function heliaAnalTrainingPrompt():void {
 	heliaFollowerMenu(false);
 }
 //Give Her Ale
-private function giveHeliaAnalTraining():void {
+public function giveHeliaAnalTraining():void {
 	clearOutput();
 	outputText("You hand Helia a bottle of goblin ale and question if she’s sure this won’t make her loose.");
 	outputText("\n\nThe proud salamander berserker explains with a wink, \"<i>That won’t make my asshole any looser that it is right now.</i>\" She strips naked with aplomb, shaking her hiney in your direction while her tail snuggles around your neck, sinfully warm but less hot than appearances would indicate. A large, knotted buttplug appears in one of her hands, fitted with a tube that dangles down and connects to a bulb. Helia defly attaches the bottle of booze to the sexual contraption, causing the alcoholic beverage to trickle out of a tiny hole in the tip. The device shines wetly in the sun as she pumps it a few times to get it completely coated.");
@@ -1919,11 +1840,11 @@ private function giveHeliaAnalTraining():void {
 	outputText("\n\nThe sorely stretched salamander thrashes wildly as she cums, but her cock-tending affections somehow remain tender, pumping and toying with the distended dong, sometimes groaning and whispering, \"<i>I want you inside me.</i>\" into your immense phallus. Still impaled, Helia slowly comes down from her lascivious frenzy, still impaled on a knot so big it would look out of place on a giant hellhound.");
 	
 	outputText("\n\n\"<i>That was EPIC, lover mine!</i>\" she raggedly cheers, now focusing both her hands on stroking the lengthy shaft that’s pressing down upon her, keeping her tender backside as firmly impaled as possible. \"<i>Let me return the favor.</i>\" ");
-	if(player.balls > 0) outputText("She tilts forward to press her chin into your [sack] and begins to lather your [balls] with frothy, warm, salamander spit. One hand hefts a weighty nut as she works, caressing it as if it would somehow coax the cum out of it. ");
+	if(player.hasBalls()) outputText("She tilts forward to press her chin into your [sack] and begins to lather your [balls] with frothy, warm, salamander spit. One hand hefts a weighty nut as she works, caressing it as if it would somehow coax the cum out of it. ");
 	outputText("Helia slides her palms along either side of your urethra, letting her fingers handle the central, sensitive bit on the underside, following in the path of slick saliva she left for them to follow. She rubs her nose into the sensitive area just below your [cockHead biggest]. You grunt as pre-cum begins to pour in response, your bloated boner flexing atop Helia’s head as you feel a dangerously powerful orgasm welling up within you.");
 	
 	outputText("\n\nThe drunken salamander wiggles her stuffed backdoor happily around the impaling object as she strokes you faster and faster, talking into the bottom of your [cock biggest], begging it to dump a huge load all over, to drench her with gallons of spermy jism. As if you could hold back after such a lurid request. Your muscles clench powerfully");
-	if(player.balls > 0) outputText(", hard enough to lift your nuts in their [sack]");
+	if(player.hasBalls()) outputText(", hard enough to lift your nuts in their [sack]");
 	outputText(", and you erupt, cumming a steamy hot load of spunk straight onto Helia’s face, head, and back.");
 	if(player.cumQ() < 250) outputText(" You run out before long, but it’s still enough to make her a white painted mess. She licks the excess from her upper lip and shudders happily.");
 	else if(player.cumQ() < 2000) outputText(" You spurt rope after rope onto her, actually drenching her hair with alabaster moisture. Her back and face look equally smothered with spooge when you finish. She’s happy to wipe the goop out of her eyes and shovel it into her mouth, swallowing it down with a satisfied smile.");
@@ -1934,7 +1855,7 @@ private function giveHeliaAnalTraining():void {
 	}
 	outputText("\n\n\"<i>That’s what I’m talking about!</i>\" she cheers as she stands up, her legs looking an inch or two farther apart than normal as she rises. \"<i>I’m gonna leave this guy in another half hour or so to make sure this takes, ");
 	//increase Helia capacity.
-	flags[kFLAGS.HELIA_ANAL_TRAINING] = 1;
+	if (!recalling) flags[kFLAGS.HELIA_ANAL_TRAINING] = 1;
 	if(player.biggestCockArea() < helAnalCapacity()) {
 		outputText("then maybe I can handle you, my hung " + player.mf("stud","breeder") + ".");
 	}
@@ -1942,11 +1863,12 @@ private function giveHeliaAnalTraining():void {
 		outputText("then maybe we can see about trying something bigger.");
 	}
 	outputText("</i>\"");
-	
-	player.consumeItem(consumables.GOB_ALE,1);
-	player.sexReward("Default", "Default",true,false);
-	dynStats("sen", -1);
-	doNext(camp.returnToCampUseOneHour);	
+	if (!recalling) {
+		player.consumeItem(consumables.GOB_ALE, 1);
+		player.sexReward("no");
+		dynStats("sen", -1);
+		doNext(camp.returnToCampUseOneHour);
+	} else doNext(recallWakeUp);
 }
 
 private function heliaGapeSceneChoices():void {
@@ -1955,8 +1877,8 @@ private function heliaGapeSceneChoices():void {
 }
 
 //Anal Training #2
-private function heliaAnalTrainingPartTwo():void {
-	player.consumeItem(consumables.GOB_ALE,1);
+public function heliaAnalTrainingPartTwo():void {
+	if (!recalling) player.consumeItem(consumables.GOB_ALE,1);
 	clearOutput();
 	outputText("Pulling out another bottle of ale you dangle it before the slutty salamander, saying, \"<i>A present for my favorite buttslut.</i>\"");
 	outputText("\n\nHelia grabs it out of your hand and produces one of her own, clinking the two bottles together with a wink. \"<i>Thanks lover mine, but I bumped into a goblin myself not long ago. Being spit on my tail loosened her pouch strings nearly as much as her twat. She had so much fun that she even helped me modify this beasty with the features my other plug had.</i>\" Helia kicks an absolutely massive equine dong with her foot. \"<i>Got it from a shop in Tel’Adre. Supposedly it’s designed as a toy for centaur mares that have had gotten a bit big after a few births.... I’m told it’s a life size mold taken off some green imp-morph. Crazy rght?</i>\"");
@@ -1974,7 +1896,7 @@ private function noGapeSlutForHelia():void {
 	outputText("You step up and kiss Helia, telling her that she doesn’t have to this for you, at least not right now.");
 	outputText("\n\n\"<i>Seriously, lover mine? I thought you’d like to do a little anal adventuring with that massive pole you’re packin’,</i>\" the salamander asks while looking at you with some concern. A huge smile suddenly spreads across her mouth as she realizes just what’s going on. \"<i>You’re worried about me!</i>\" Helia slugs you on the shoulder none too softly before slamming you into a tight hug, pressing you into her heavy breasts and lifting you off the ground, her face nuzzling tenderly against you.");
 	outputText("\n\nYour [feet] hit the ground when the confident salamander drops you, and she says, \"<i>Your call. I’m gonna pour these into my still to give it a little extra kick. Don’t fret, the transformative shit should burn off right quick.</i>\" She turns and depart, her tail giving you a heat slap on the [butt]. \"<i>Catch ya later, [name].</i>\"");
-	doNext(camp.returnToCampUseOneHour);
+	doNext(recalling? recallWakeUp : camp.returnToCampUseOneHour);
 }
 
 
@@ -1982,10 +1904,10 @@ private function noGapeSlutForHelia():void {
 //Buttdevastation Ahoy!
 private function yesMakeHeliaAGapeSlut():void {
 	clearOutput();
-	flags[kFLAGS.HELIA_ANAL_TRAINING] = 2;
-	outputText("Helia hooks a finger into your [armor] and begins to tug you out of it, a task made difficult due to your ludicrous size. \"<i>Don’t think I’ll let you go without draining this monster, [name].</i>\" Inch after inch of semi-hard cock is pulled into Helia’s firm grip, expanding with every passing moment, thickening into a truly monstrous dong. She caress the [cockHead biggest], even going so far as to playfully finger the supersized cumslit at its apex, her eyes playfully flicking up to meet your own. \"<i>Now, sit back and enjoy the show.</i>\"");
+	if (!recalling) flags[kFLAGS.HELIA_ANAL_TRAINING] = 2;
+	outputText("Helia hooks a finger into your [armor] and begins to tug you out of it, a task made difficult due to your ludicrous size. \"<i>Don’t think I’ll let you go without draining this monster, [name].</i>\" Inch after inch of semi-hard cock is pulled into Helia’s firm grip, expanding with every passing moment, thickening into a truly monstrous dong. She caresses the [cockHead biggest], even going so far as to playfully finger the supersized cumslit at its apex, her eyes playfully flicking up to meet your own. \"<i>Now, sit back and enjoy the show.</i>\"");
 	
-	outputText("\n\nThe lustrous lizardwoman prances up onto small flat boulders that have been placed a foot in front of the immense toy. In her hand, the goblin ales clink and chime against each other, promising her the elasticity she so craves. You can’t help but admire the way her tits and ass shake and sway while she upturns the drinks into a more advanced looking reservoir. This time, there is no hand pump. The fluid is trapped inside a large metal canister that whirrs and chugs noisily once Helia pushes a button, though some of it immediately bubbles out from the sextoy’s blunted tip, whetting it will alcoholic moisture.");
+	outputText("\n\nThe lustrous lizardwoman prances up onto small flat boulders that have been placed a foot in front of the immense toy. In her hand, the goblin ales clink and chime against each other, promising her the elasticity she so craves. You can’t help but admire the way her tits and ass shake and sway while she upturns the drinks into a more advanced looking reservoir. This time, there is no hand pump. The fluid is trapped inside a large metal canister that whirrs and chugs noisily once Helia pushes a button, though some of it immediately bubbles out from the sextoy’s blunted tip, wetting it with alcoholic moisture.");
 	outputText("\n\n\"<i>Here goes nothing.</i>\" the scaley woman declares a moment before swiveling her hips to plant her shapely rump atop the ale-dripping, prick-shaped fountain. The giant black horsecock bows out in the middle, not sliding in a single inch in spite of Helia’s grunts and groans. Frustrated, she lashes at it with her tail, wrapping it twice over around the medial ring of the titanic tool in order to correct the deformation and more firmly plug her own pucker. She shivers, back going ramrod straight momentarily, then you see her whole body relax slightly.");
 	outputText("\n\nHelia groans, \"<i>Ohhh, it’s pumping inside me now. Shhhit, that stuff has some kick.</i>\" She relaxes a bit more, almost slouching atop the mock horse phallus, right up until you see her hips spread wide, proof of her already enhanced elasticity. There’s a wet pop and then Helia is moaning, rocking her ass back and forth with the big, fat flare lodged firmly inside her rectum. \"<i>It’s fucking huge!</i>\" she cries while looking incredulously at you. \"<i>It doesn’t hurt... warm though.</i>\" She wiggles sensually and cups her tits under her forearm, pulling them on display. \"<i>...feels purdy good actually,</i>\" she half moans half whines, sinking a half inch down the length.");
 	outputText("\n\nHelia tweaks her nipples and begs, \"<i>Could you... touch yourself for me? I wish it was that going inside me right now, maybe my asshole so soft and forgiving that it’ll cling to small cock or your rigid mast regardless of size. Jack off for me, lover mine. Spank it!</i>\" Her pussy glistens with moisture by the time she makes the last statement, dribbling down her taint and onto the black phallus’s length. You languidly handle your [cock biggest] with slow, purposeful strokes. There isn’t a point in blowing your load during the foreplay after all. Helia teases her breasts, squeezing and kneading them with enthusiasm, tweaking her nipples, her body sinking a little further with each excited grope.");
@@ -2003,8 +1925,10 @@ private function yesMakeHeliaAGapeSlut():void {
 	else outputText("allows you to hose her down with your ongoing waves of salty jism, soaking her in your sexual scent.");
 	outputText(" Helia burps. \"<i>Fuck me that was awesome! Whoah, don’t mind me, but I, uh... I think I’m gonna stay here for a little while, maybe just rock up and down till I come down off this buzz. She blushes and begins to finger her snatch again. Just let me... just let me get used to.</i>\" She shoos you away and goes back to toying with herself, getting used to her new \"flexibility\".");
 	outputText("\n\n\"<i>You’re gonna fall in love with my asshole, lover mine,</i>\" Helia calls after you.");
-	player.sexReward("vaginalFluids");
-	doNext(camp.returnToCampUseOneHour);
+	if (!recalling) {
+		player.sexReward("vaginalFluids", "Dick");
+		doNext(camp.returnToCampUseOneHour);
+	} else doNext(recallWakeUp);
 }
 
 //It's Helia's Birthday, Bitch (Or, how Helia officially crossed the Mary Sue line)
@@ -2019,8 +1943,8 @@ public function heliasBirthday():void {
 	outputText("\n\nHel rolls her eyes, overly dramatic.  \"<i>Ugh, come on, [name].  I asked you last week to come to town with me.  Dad and Kiri are probably waiting for us.</i>\"");
 	
 	outputText("\n\nYou can't recall Hel inviting you to anything, but whatever.  You could go along with the sexy salamander - and you can tell by her attire that it's going to be something special - or say no and hang around camp while she goes and has fun.");
-	
-	flags[kFLAGS.HELIA_BIRTHDAY_OFFERED] = 1;
+
+	flags[kFLAGS.HELIA_BIRTHDAY_LAST_YEAR] = date.fullYear;
 	menu();
 	addButton(1,"Stay Home",stayHomeFromHeliaParty);
 	addButton(0,"Go To Party",goWithHelia);
@@ -2058,7 +1982,7 @@ private function goWithHelia():void {
 	clearOutput();
 	outputText("\"<i>Sounds like fun.  Let's go,</i>\" you say, offering your arm to Hel.  She grins and takes it, holding herself close as she takes the lead, steady paces quickly drawing you out into the vast deserts of Mareth beside your lover.");
 	//{If Kiha, Isabella, and/or Valeria are at camp:}
-	if(isabellaFollower() || followerKiha() || flags[kFLAGS.VALARIA_AT_CAMP] == 1) {
+	if(isabellaFollower() || followerKiha() || flags[kFLAGS.VALERIA_AT_CAMP] == 1) {
 		outputText("  Looking over your shoulder as you depart, though, you notice that camp looks particularly... empty. Perhaps your other camp-mate");
 		if(camp.companionsCount() > 1) outputText("s are");
 		else outputText(" is");
@@ -2087,25 +2011,11 @@ private function goWithHelia():void {
 	
 	outputText("\n\nHel jumps back, practically falling into your arms as the bar lights up, filled with people: Hakon and Kiri at the forefront, her family smiling wide.  Behind them, surrounding a great big cake practically as tall as Hel is, stands ");
 	var list:Array = ["Edryn"];
-	if(flags[kFLAGS.VALARIA_AT_CAMP] == 1) list.push("Valeria");
+	if(flags[kFLAGS.VALERIA_AT_CAMP] == 1) list.push("Valeria");
 	if(followerKiha()) list.push("Kiha");
 	if(isabellaFollower()) list.push("Isabella");
 	list.push("a handful of her wide-hipped and winged half-sisters, the phoenixes");
 	outputText(formatStringArray(list) + ". You turn to Helia and cock a grin as you see the surprise etched on her face, followed by the growing smile.  \"<i>Happy birthday, Helia!</i>\" they all shout out at once, raising mugs frothing over with beer.");
-/*
-	addToList("Edryn");
-	if(flags[kFLAGS.VALARIA_AT_CAMP] == 1) {
-		addToList("Valeria");
-	}
-	if(followerKiha()) {
-		addToList("Kiha");
-	}
-	if(isabellaFollower()) {
-		addToList("Isabella");
-	}
-	addToList("a handful of her wide-hipped and winged half-sisters, the phoenixes");
-	outputText(outputList() + ". You turn to Helia and cock a grin as you see the surprise etched on her face, followed by the growing smile.  \"<i>Happy birthday, Helia!</i>\" they all shout out at once, raising mugs frothing over with beer.");
-*/	
 	outputText("\n\n\"<i>Oh my god you remembered!</i>\" the salamander smiles, \"<i>I-I didn't think any of you knew.</i>\"");
 	
 	outputText("\n\nKiri flutters up on her bright red wings, hugging her sister tight.  \"<i>I... may have mentioned it to a few friends.  Who had some friends.  And then Dad found some of my sisters ");
@@ -2133,8 +2043,6 @@ private function goWithHelia():void {
 	if(flags[kFLAGS.HEL_FOXY_FOURSOME_WARNED] == 1) outputText("a pair of lovely fox-eared herms");
 	else outputText("Miko and Mai");
 	outputText(" burst out, their big breasts covered in nothing but tiny pink pasties and an all-too-small thong sheathing their red pricks.  Arm in arm with tail wagging furiously, they cry out \"<i>Happy birthday, Hel!</i>\" before hopping out and slipping into the salamander's arms.  \"<i>Ladies,</i>\" Hel says, grinning like an idiot, a moment before she's pushed into a waiting chair behind her.  One of the girl's busts is quickly shoved into her face as the rest of the group laughs and starts passing out another round of drinks.");
-	
-	//{PC can play each short scene once}
 	helPartyMenu();
 }
 
@@ -2293,7 +2201,7 @@ private function helAndSluttyHarpyMale():void
 		outputText("\n\n<i>\"H-hey, don’t leave me hanging like that!\"</i> Helia yells as Sophie breaks the kiss to scream in orgasm from the sudden penetration. The bimbo harpie’s cunt feels shockingly cool compared to Hel’s, and allows you to get a better hold on yourself despite the extreme tightness. After a few thrusts you pull out and transition to Hel again, trading between the two every few seconds. Eventually you just slide your [cock] between the two pleasure-drunk girl’s pussies, rubbing into the sopping wet cleft between the two girls combined cunts..");
 
 		outputText("\n\nThe combination of both hot and cool rubbing is too much to handle, and soon causes the pressure in your");
-		if (player.balls > 0) outputText(" [balls]");
+		if (player.hasBalls()) outputText(" [balls]");
 		else outputText(" groin");
 		outputText(" to boil over. White jissom blasts from your [cock], coating Helia and Sophie’s stomachs, as well as the underside of the pair’s tits.");
 		if (player.vaginas.length > 0) outputText(" Your unused [vagina] cums with your cock in a show of sympathetic orgasm, coating your thighs with femcum.");
@@ -2303,7 +2211,7 @@ private function helAndSluttyHarpyMale():void
 	{
 		outputText("\n\nYou notice that your bimbo’s pussy is looking neglected, dripping warm fluids as she rubs it against your stomach. As you continue to rock your hips you line up your [cock biggest2] with Sophie’s wet snatch and slide it home. You hilt inside both of the lust crazed girls. The heat is tremendous. While you’re aware that Sophie’s insides are less heated than Helia’s the notion is almost lost on you. ");
 
-		outputText("\n\nYou piston a few more times, trying to hold back as long as possible. Your resistance is short lived, and you find yourself on the very edge in under a minute. You make one final thrust into the two girl’s depths and release a torrent of seed. Both girls are pumped");
+		outputText("\n\nYou piston a few more times, trying to hold back as long as possible. Your resistance is short-lived, and you find yourself on the very edge in under a minute. You make one final thrust into the two girl’s depths and release a torrent of seed. Both girls are pumped");
 		if (player.cumQ() < 500) outputText(" with your cum");
 		else
 		{
@@ -2328,7 +2236,7 @@ private function helAndSluttyHarpyMale():void
 		outputText(" asshole. She gasps at the sudden double penetration, and you reciprocate because of the furnace-like heat of both her holes. Your [cock biggest3] lines up with Sophie’s slutty pussy and drives home while your [cock smallest] does the same to her ass."); // Haha look at me being a lazy shit.
 
 		outputText("\n\nIt takes all of your might to hold out against the need to blast your seed inside all four holes. You try and last as long as you can against the inexorable tide of jizz welling up in your");
-		if (player.balls > 0) outputText(" [balls]");
+		if (player.hasBalls()) outputText(" [balls]");
 		else outputText(" groin");
 		outputText(". The two girls seem to share your problem, their teeth clenched and clinging tightly to each other trying to resist. Seeing their clearly shared pleasure in the moment puts you over the edge, and you let loose the torrent of liquid lust from [eachCock]. Sophie cums as the tsunami of jizz floods her levies, the copious amount spilling back out of her holes and pooling around your knees.");
 		if (player.cocks.length > 4) outputText(" Your extra cocks spray pearly cum all over the nearby ground.");
@@ -2418,7 +2326,7 @@ outputText("\n\n\"I’m up for anything with you, lover mine,\" Helia responds w
 
 outputText("\n\n<i>\"Go away, stupid harpy! I’m going to have some fun alone with [name].\"</i>");
 
-outputText("\n\n<i>\"Ummm, I’m sure [he] wouldn’t mind if we, like, shared [him] for some fun,\"</i> Sophie retorts to Helia’s growl. Before this can get out of hand you grab both of them by the waist and pull them down to sit on either side of you. Helia makes a surprised yelp and Sophie rubs her sizeable hips to comfort them. You look at the both of them and smile wide.");
+outputText("\n\n<i>\"Ummm, I’m sure [he] wouldn’t mind if we, like, shared [him] for some fun,\"</i> Sophie retorts to Helia’s growl. Before this can get out of hand you grab both of them by the waist and pull them down to sit on either side of you. Helia makes a surprised yelp and Sophie rubs her sizeable hips to comfort them. You look at both of them and smile wide.");
 
 outputText("\n\n<i>\"Now kiss. I don’t want any of this silly fighting over me;\"</i> you say in your most commanding voice. They both look like they’re about to start talking, but as soon as they open their mouths you pull their heads together into a forced kiss. Helia tries to fight it, but Sophie gives in almost immediately, giving the salamander girl the biggest kiss she can. She wraps her arms around the taller girl’s shoulders to pull herself up and try to suck Helia’s long tongue into her mouth. ");
 

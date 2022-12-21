@@ -20,17 +20,29 @@ public class PerkType extends BaseContent
 		{
 			return PERK_LIBRARY;
 		}
-
+		
 		private var _id:String;
-		private var _name:String;
-		private var _desc:String;
-		private var _longDesc:String;
-		private var _keepOnAscension:Boolean;
+		protected var _name:String;
+		protected var _desc:String;
+		protected var _longDesc:String;
+		protected var _keepOnAscension:Boolean;
 		public var buffs:Object;
 		public var defaultValue1:Number = 0;
 		public var defaultValue2:Number = 0;
 		public var defaultValue3:Number = 0;
 		public var defaultValue4:Number = 0;
+		public var tierList:/*PerkType*/Array = null;
+		
+
+		public function tierPos():int {
+			return tierList ? tierList.indexOf(this) : -1;
+		}
+		public function tierNext():PerkType {
+			return tierList ? tierList[tierPos()+1] : null;
+		}
+		public function tierPrev():PerkType {
+			return tierList ? tierList[tierPos()-1] : null;
+		}
 
 		/**
 		 * Unique perk id, should be kept in future game versions
@@ -85,10 +97,9 @@ public class PerkType extends BaseContent
 			PERK_LIBRARY[id] = this;
 		}
 
-
 		public function toString():String
 		{
-			return "\""+_id+"\"";
+			return "\""+_name+"\"";
 		}
 
 		/**
@@ -154,6 +165,7 @@ public class PerkType extends BaseContent
 					if(player.hasPerk(PerkLib.HaltedVitals)) Attribute = "libido";
 					return Attribute +" "+ value;
 				},
+				statictext: "Toughness "+value,
 				type: "attr",
 				attr: "tou",
 				value: value
@@ -273,165 +285,64 @@ public class PerkType extends BaseContent
 			});
 			return this;
 		}
-		public function requireHeartMutationSlot():PerkType {
+		public function requireMutationSlot(slot:String):PerkType {
 			requirements.push({
 				fn  : function(player:Player):Boolean {
-					return player.maxHeartMutations() > 0;
+					return player.maxCurrentMutationsInSlot(slot) > 0;
 				},
-				text: "Free Heart Mutation Slot",
-				type: "heartmutation"
+				text: "Free "+IMutationPerkType.Slots[slot].name+" Mutation Slot",
+				type: "mutationslot",
+				slot: slot
 			});
 			return this;
+		}
+		public function requireHeartMutationSlot():PerkType {
+			return requireMutationSlot(IMutationPerkType.SLOT_HEART);
 		}
 		public function requireMusclesMutationSlot():PerkType {
-			requirements.push({
-				fn  : function(player:Player):Boolean {
-					return player.maxMusclesMutations() > 0;
-				},
-				text: "Free Muscles Mutation Slot",
-				type: "musclesmutation"
-			});
-			return this;
+			return requireMutationSlot(IMutationPerkType.SLOT_MUSCLE);
 		}
 		public function requireMouthMutationSlot():PerkType {
-			requirements.push({
-				fn  : function(player:Player):Boolean {
-					return player.maxMouthMutations() > 0;
-				},
-				text: "Free Mouth Mutation Slot",
-				type: "mouthmutation"
-			});
-			return this;
+			return requireMutationSlot(IMutationPerkType.SLOT_MOUTH);
 		}
 		public function requireAdrenalGlandsMutationSlot():PerkType {
-			requirements.push({
-				fn  : function(player:Player):Boolean {
-					return player.maxAdrenalGlandsMutations() > 0;
-				},
-				text: "Free Adrenal Glands Mutation Slot",
-				type: "adrenalglandsmutation"
-			});
-			return this;
+			return requireMutationSlot(IMutationPerkType.SLOT_ADRENALS);
 		}
 		public function requireBloodsteamMutationSlot():PerkType {
-			requirements.push({
-				fn  : function(player:Player):Boolean {
-					return player.maxBloodstreamMutations() > 0;
-				},
-				text: "Free Bloodsteam Mutation Slot",
-				type: "bloodsteammutation"
-			});
-			return this;
+			return requireMutationSlot(IMutationPerkType.SLOT_BLOODSTREAM);
 		}
 		public function requireFatTissueMutationSlot():PerkType {
-			requirements.push({
-				fn  : function(player:Player):Boolean {
-					return player.maxFatTissueMutations() > 0;
-				},
-				text: "Free Fat Tissue Mutation Slot",
-				type: "fattissuemutation"
-			});
-			return this;
+			return requireMutationSlot(IMutationPerkType.SLOT_FAT);
 		}
 		public function requireLungsMutationSlot():PerkType {
-			requirements.push({
-				fn  : function(player:Player):Boolean {
-					return player.maxLungsMutations() > 0;
-				},
-				text: "Free Lungs Mutation Slot",
-				type: "lungsmutation"
-			});
-			return this;
+			return requireMutationSlot(IMutationPerkType.SLOT_LUNGS);
 		}
 		public function requireMetabolismMutationSlot():PerkType {
-			requirements.push({
-				fn  : function(player:Player):Boolean {
-					return player.maxMetabolismMutations() > 0;
-				},
-				text: "Free Metabolism Mutation Slot",
-				type: "metabolismmutation"
-			});
-			return this;
+			return requireMutationSlot(IMutationPerkType.SLOT_METABOLISM);
 		}
 		public function requireOvariesMutationSlot():PerkType {
-			requirements.push({
-				fn  : function(player:Player):Boolean {
-					return player.maxOvariesMutations() > 0;
-				},
-				text: "Free Ovaries Mutation Slot",
-				type: "ovariesmutation"
-			});
-			return this;
+			return requireMutationSlot(IMutationPerkType.SLOT_OVARIES);
 		}
 		public function requireBallsMutationSlot():PerkType {
-			requirements.push({
-				fn  : function(player:Player):Boolean {
-					return player.maxBallsMutations() > 0;
-				},
-				text: "Free Balls Mutation Slot",
-				type: "ballsmutation"
-			});
-			return this;
+			return requireMutationSlot(IMutationPerkType.SLOT_TESTICLES);
 		}
 		public function requireEyesMutationSlot():PerkType {
-			requirements.push({
-				fn  : function(player:Player):Boolean {
-					return player.maxEyesMutations() > 0;
-				},
-				text: "Free Eyes Mutation Slot",
-				type: "eyesmutation"
-			});
-			return this;
+			return requireMutationSlot(IMutationPerkType.SLOT_EYES);
 		}
 		public function requirePeripheralNervSysMutationSlot():PerkType {
-			requirements.push({
-				fn  : function(player:Player):Boolean {
-					return player.maxPeripheralNervSysMutations() > 0;
-				},
-				text: "Free NervSys Mutation Slot",
-				type: "nervsysmutation"
-			});
-			return this;
+			return requireMutationSlot(IMutationPerkType.SLOT_NERVSYS);
 		}
 		public function requireBonesAndMarrowMutationSlot():PerkType {
-			requirements.push({
-				fn  : function(player:Player):Boolean {
-					return player.maxBonesAndMarrowMutations() > 0;
-				},
-				text: "Free Bones and Marrow Mutation Slot",
-				type: "bonesandmarrowmutation"
-			});
-			return this;
+			return requireMutationSlot(IMutationPerkType.SLOT_BONE);
 		}
 		public function requireThyroidGlandMutationSlot():PerkType {
-			requirements.push({
-				fn  : function(player:Player):Boolean {
-					return player.maxThyroidGlandMutations() > 0;
-				},
-				text: "Free Thyroid Gland Mutation Slot",
-				type: "thyroidglandmutation"
-			});
-			return this;
+			return requireMutationSlot(IMutationPerkType.SLOT_THYROID);
 		}
 		public function requireParathyroidGlandMutationSlot():PerkType {
-			requirements.push({
-				fn  : function(player:Player):Boolean {
-					return player.maxParathyroidGlandMutations() > 0;
-				},
-				text: "Free Parathyroid Gland Mutation Slot",
-				type: "parathyroidglandmutation"
-			});
-			return this;
+			return requireMutationSlot(IMutationPerkType.SLOT_PARATHYROID);
 		}
 		public function requireAdaptationsMutationSlot():PerkType {
-			requirements.push({
-				fn  : function(player:Player):Boolean {
-					return player.maxAdaptationsMutations() > 0;
-				},
-				text: "Free Adaptations Mutation Slot",
-				type: "adaptationsmutation"
-			});
-			return this;
+			return requireMutationSlot(IMutationPerkType.SLOT_ADAPTATIONS);
 		}
 		public function requireDragonMutationSlot():PerkType {
 			requirements.push({
@@ -656,11 +567,12 @@ public class PerkType extends BaseContent
 		}
 
 		public function withBuffs(buffs:Object, showText:Boolean = true):PerkType {
-			this.buffs = buffs
+			this.buffs = buffs;
 			var tempText:String = "";
 			if(showText) {
 				var key:String;
 				for (key in this.buffs) {
+					StatUtils.validateBuff(key, "perk "+this.id);
 					tempText += " " + StatUtils.explainBuff(key, buffs[key]) + ",";
 				}
 				tempText = tempText.slice(0, tempText.length - 1) + "."

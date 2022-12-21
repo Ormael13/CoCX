@@ -5,6 +5,7 @@
 package classes.Scenes.NPCs
 {
 import classes.*;
+import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.HighMountains.MinotaurMob;
 import classes.Scenes.Monsters.Manticore;
@@ -42,12 +43,12 @@ public function repeatEnc():void
 {
 	spriteSelect(SpriteDb.s_etna);
 	clearOutput();
-	if (player.isRace(Races.MANTICORE)) {
+	if (player.isRace(Races.MANTICORE, 1, false)) {
 		if (flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 1 && !player.hasStatusEffect(StatusEffects.WildManticore)) {
 			outputText("You take a stroll in the mountain area when a spike passes a few inches away from your side.\n\n");
 			outputText("Etna moves out of the shadow of a nearby cave, adopting a combat stance. Seems you actually threaded on her hunting grounds. She makes a playful growl before calling to you.\n\n");
-			outputText("\"<i>Well hello there [name]. Seems you stepped in my territory yet again. As rival huntresses it is only proper that we fight for who’s going to rape who dont you think?\"</i>\"\n\n");
-			outputText("Well now if she wants to show she’s the top female around here let here come. You’re going to use her pretty mouth as your personal ride today.\n\n");
+			outputText("\"<i>Well hello there, [name]. Seems you stepped in my territory yet again. As rival huntresses, it is only proper that we fight for who’s going to rape who dont you think?\"</i>\"\n\n");
+			outputText("Well, now, if she wants to show she’s the top female around, let her come. You’re going to use her pretty mouth as your personal ride today.\n\n");
 			outputText("\"<i>Oh I have doubts about that. Hope you’re good at licking [name], because your going bottom!</i>\"\n\n");
 			outputText("Guess there's no avoiding it, you're catfighting with Etna again!");
 		}
@@ -55,7 +56,7 @@ public function repeatEnc():void
 			outputText("You take a stroll in the mountain area when a spike passes a few inches away from your side.\n\n");
 			outputText("The manticore moves out of the shadow of a nearby cave, adopting a combat stance. Seems you actually threaded on her hunting grounds and she’s about to defend it.\n\n");
 			outputText("\"<i>Hey you, this is my turf! All the bulls and other cumpumps in the surrounding few hundred miles are mine! Go hunt somewhere else.</i>\"\n\n");
-			outputText("Like hell you would, you hunt wherever you please and minotaurs are prime cut meals only fit for the tail of the strong. There's more than enough studs for the two of you here.\n\n");
+			outputText("Like hell, you would, you hunt wherever you please and minotaurs are prime cut meals only fit for the tail of the strong. There's more than enough studs for the two of you here.\n\n");
 			outputText("\"<i>Then we fight for dominance. Hope you’re good at licking cub, because your going bottom!</i>\"\n\n");
 			outputText("Guess there's no avoiding it, you're under attack by a manticore again!");
 		}
@@ -78,17 +79,13 @@ public function repeatEnc():void
 		doNext(playerMenu);
 	}
 }
-public function repeatEncWM():void {
-	player.createStatusEffect(StatusEffects.WildManticore, 0, 0, 0, 0);
-	repeatEnc();
-}
 
 public function repeatYandereEnc():void
 {
 	spriteSelect(SpriteDb.s_etna);
 	clearOutput();
 	outputText("You take a stroll in the area when a spike passes a few inches away from your side.\n\n");
-	outputText("Etna surge out of nowhere, adopting a predatory stance. \"<i>Why won't you just stay still and get shot like everyone else? Well whatever! I’m gonna make you mine whether you like it or not! You can’t run away from love forever [name]!</i>\"\n\n");
+	outputText("Etna surges out of nowhere, adopting a predatory stance. \"<i>Why won't you just stay still and get shot like everyone else? Well whatever! I’m gonna make you mine whether you like it or not! You can’t run away from love forever [name]!</i>\"\n\n");
 	outputText("You're under attack by Etna again!");
 	startCombat(new Etna());
 	doNext(playerMenu);
@@ -102,8 +99,17 @@ public function etnaRapesPlayer():void
 }
 public function etnaRapesPlayer2():void
 {
+	if (sceneHunter.uniHerms && player.isHerm()) {
+		sceneHunter.selectLossMenu([
+				[0, "LetHer", dickF, "Req. a cock", player.hasCock()],
+				[1, "Hide", vagF, "Req. a vagina", player.hasVagina()],
+			],
+			"Though you're obviously getting fucked, you can try to hide your cock from her view. Will you?\n\n"
+		);
+	} else if (player.hasCock()) dickF();
+	else vagF();
 	//Males and Herms
-	if (player.hasCock()) {
+	function dickF():void {
 		outputText("You fall down, defeated, and the manticore advances towards you with sadistic glee:\n\n\"<i>So that's all? I guess dinner is served, then. You can resist me all you want, it'll only be funnier when you break.</i>\"\n\nShe kicks you in the face making you roll on your back. You're still seeing stars as you feel her feet brutally stepping on your crotch the touch, for some reason, arousing you.\n\n");
 		outputText("\"<i>Oh? So someone likes being brutalized, huh? You sure are a complete sicko and that's exactly how I like it.</i>\"\n\nHer toe plays with your [cock], molesting you through the fabric of your clothes and, against your better judgment, you moan from this, amusing her further.\n\n\"<i>Aren't you pathetic? Are you seriously getting off from being stepped on?!</i>\"\n\n");
 		outputText("She proceeds to sit on your legs and holds your arms to the ground with her powerful paws. She looks terrifying as she towers over you and you can’t help but gulp as she moves her tail towards your body. She stings you and you feel all your resistance go away as you don't even have the energy to move. However your [cock] grows erect as if all of your blood is being concentrated into it.  She forcefully strips you and eyes your now painfully erect cock, licking her lips. To your horror, you see her tail tip open into a flower-like shape, except the inside of her ‘flower’ looks like a nightmarish fleshy hole constantly drooling god knows what. ");
@@ -126,10 +132,9 @@ public function etnaRapesPlayer2():void
 		if (player.hasStatusEffect(StatusEffects.WildManticore)) player.removeStatusEffect(StatusEffects.WildManticore);
 		player.sexReward("vaginalFluids","Dick");
 		cleanupAfterCombat();
-		return;
 	}
 	//Females
-	else {
+	function vagF():void {
 		if (flags[kFLAGS.ETNA_FEMALE_WIN_PUSSYTAIL_PLAY] < 2) {
 			outputText("You fall down to the ground as ");
 			if (flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 1 && !player.hasStatusEffect(StatusEffects.WildManticore)) outputText("Etna");
@@ -161,7 +166,7 @@ public function etnaRapesPlayer2():void
 		outputText(" moans in appreciation and return the favor, locking the pair of you in a debased grappling contest. After a while ");
 		if (flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 1 && !player.hasStatusEffect(StatusEffects.WildManticore)) outputText("Etna");
 		else outputText("the manticore");
-		outputText("'s breasts start to leak some milk and you move down to lick the drops as she fingers you, barely soothing the blazing furnace your pussy turned into. Every single stimulation is driving you completely nuts and the fact her tail repeatedly stings you every now and then does not help your frenzy to die down as your mad [pussy] drenches the ground with fluids. ");
+		outputText("'s breasts start to leak some milk and you move down to lick the drops as she fingers you, barely soothing the blazing furnace your pussy turned into. Every single stimulation is driving you completely nuts, and the fact her tail repeatedly stings you every now and then does not help your frenzy to die down as your mad [pussy] drenches the ground with fluids. ");
 		if (flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 1 && !player.hasStatusEffect(StatusEffects.WildManticore)) outputText("Etna");
 		else outputText("the manticore");
 		outputText(" is hardly satisfied however and shoves her tail pussy on your mouth which only causes you to start licking inside. Soon ");
@@ -174,7 +179,6 @@ public function etnaRapesPlayer2():void
 		if (player.hasStatusEffect(StatusEffects.WildManticore)) player.removeStatusEffect(StatusEffects.WildManticore);
 		player.sexReward("vaginalFluids");
 		cleanupAfterCombat();
-		return;
 	}
 }
 
@@ -187,14 +191,18 @@ public function etnaRapeIntro():void
 	if (monster.HP < 1)outputText("defeated");
 	else outputText("too horny to fight back");
 	outputText(". She looks at you with a hopeful expression as she holds her tail with one hand.\n\n\"<i>So strong... so powerful! If you would only let me taste you, I promise I will make it feel sooooo good.</i>\"\n\n");
+	if (player.lust < 33) {
+		outputText("Sadly, you're not aroused enough to fullfill her wish.");
+		doNext(etnaRapeNo);
+		return;
+	}
 	outputText("Do you grant her request?");
 	menu();
-	if (player.lust >= 33 && player.hasCock()) addButton(0, "Yes (M)", etnaRapeYesM);
-	if (player.lust >= 33 && player.hasVagina()) addButton(1, "Yes (F)", etnaRapeYesF);
-	addButton(2, "No", etnaRapeNo);
-	if (player.lust >= 33 && player.isAlraune()) addButton(3, "Fill her up!", EtnaFillHerUp);
-	SceneLib.uniqueSexScene.pcUSSPreChecksV2(etnaRapeIntro);
-	}
+	addButton(0, "Yes (M)", etnaRapeYesM).disableIf(!player.hasCock(), "Req. a cock!");
+	addButton(1, "Yes (F)", etnaRapeYesF).disableIf(!player.hasVagina(), "Req. a vagina!");
+	addButton(2, "Fill her up!", EtnaFillHerUp).disableIf(!player.isAlraune(), "Req. to be an alraune.");
+	addButton(4, "No", etnaRapeNo);
+}
 
 public function etnaRapeYesM():void
 {
@@ -244,9 +252,9 @@ public function etnaRapeYesF2():void
 	}
 	if (flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 1 && !player.hasStatusEffect(StatusEffects.WildManticore)) outputText("Etna");
 	else outputText("The manticore");
-	outputText(" wails as the both of you are being covered with her tail juice and that only serves to arouse you more. Unsatisfied with that alone you pick up a spike that fell off earlier.\n\n");
+	outputText(" wails as both of you are being covered with her tail juice and that only serves to arouse you more. Unsatisfied with that alone you pick up a spike that fell off earlier.\n\n");
 	outputText("\"<i>Y..you wouldn’t dare! This is completely sick!</i>\"\n\n");
-	outputText("Oh really? Well, she’s in for a surprise as you give ");
+	outputText("Oh, really? Well, she’s in for a surprise as you give ");
 	if (flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 1 && !player.hasStatusEffect(StatusEffects.WildManticore)) outputText("Etna");
 	else outputText("the manticore");
 	outputText(" a direct taste of her own poison. Soon ");
@@ -268,26 +276,17 @@ public function etnaRapeYesF2():void
 
 public function EtnaFillHerUp():void
 {
+	clearOutput();
+	if (!player.isLiliraune()) sceneHunter.print("More for Liliraunes!");
 	if (flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 1 && !player.hasStatusEffect(StatusEffects.WildManticore)) outputText("Etna");
 	else outputText("This manticore");
-	outputText(" is always ready to take a stamen in isn't she? Guess today you will give the happy kitten a treat." +
+	outputText(" is always ready to take a stamen in, isn't she? Guess today you will give the happy kitten a treat." +
 			"You tease her as you close in ");
 	if (flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 1 && !player.hasStatusEffect(StatusEffects.WildManticore)) outputText("\"<i>Hey Etna</i>");
 	else outputText("\"<i>Hey kitty</i>");
 	outputText("<i> you're always hungry for more ain't you?</i>\"\n\n");
-	if(player.isLiliraune()) {
-		outputText("Your other half chuckles, \"<i>Oh of course she is, she's always hungry for more. She's</i>\"\n\n");
-		//if(fidel){
-		outputText("<i> been</i>");
-		//}
-		outputText("<i> hunting minotaurs for their cocks</i>");
-		//if(!fidel){
-		outputText("<i> all day long.</i>");
-		//}
-		//if(fidel){
-		//outputText("<i> for like forever until we had her stop it.</i>\"\n\n");
-		//}
-	}
+	if(player.isLiliraune())
+		outputText("Your other half chuckles, \"<i>Oh of course she is, she's always hungry for more. She's been hunting minotaurs for their cocks all day long.</i>");
 	if(player.isLiliraune()) {
 		outputText("\"<i>Well </i>");
 		if (flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 1 && !player.hasStatusEffect(StatusEffects.WildManticore)) outputText("\"<i>Etna</i>");
@@ -312,7 +311,7 @@ public function EtnaFillHerUp():void
 			"She mewls in delight as your massive composite member begins to slither all the way down her hole." +
 			" Her tail feeling a member inside instinctively milks and squeezes your omnicocks, instincts kicking in, as the delirious manticore begs for you to keep going.\n\n")
 	if(player.isLiliraune()) {
-		outputText("You groan between panting commenting out on this situation. \"<i>Geeze, Ahhn!... I knew she was a slut but this is beyond ridiculous. This tail ain't a pussy, it's a living vacuum! Oh fuck keep going girl!</i>\"\n\n" +
+		outputText("You groan between panting commenting out on this situation. \"<i>Geeze, Ahhn!... I knew she was a slut but this is beyond ridiculous. This tail ain't a pussy, it's a living vacuum! Oh, fuck, keep going girl!</i>\"\n\n" +
 				"Your twin adds up. \"<i>OHHHH...You do realize this hole is just a glorified mouth? Might as well say she's giving us the ultimate blowjob.</i>\"\n\n" +
 				"Annoyed, you reply to her, \"<i>Sister I really don't care what that hole is, I'm filling this tail until she gets pregnant! And if it doesn't I'll just fill it again. So close to cumming now!</i>\"\n\n");
 	}
@@ -332,18 +331,6 @@ public function EtnaFillHerUp():void
 	if (player.hasStatusEffect(StatusEffects.WildManticore)) player.removeStatusEffect(StatusEffects.WildManticore);
 	else etnaAffection(10);
 	player.sexReward("vaginalFluids","Dick");
-	player.sexReward("vaginalFluids","Dick");
-	player.sexReward("vaginalFluids","Dick");
-	player.sexReward("vaginalFluids","Dick");
-	player.sexReward("vaginalFluids","Dick");
-	player.sexReward("vaginalFluids","Dick");
-	player.sexReward("vaginalFluids","Dick");
-	player.sexReward("vaginalFluids","Dick");
-	player.sexReward("vaginalFluids","Dick");
-	player.sexReward("vaginalFluids","Dick");
-	player.sexReward("vaginalFluids","Dick");
-	player.sexReward("vaginalFluids","Dick");
-	//yea you came from all 12 of your cock at the same fucking time
 	cleanupAfterCombat();
 }
 
@@ -367,8 +354,7 @@ public function etnaRape3rdWin():void
 	if (player.lust >= 33 && player.hasCock()) addButton(0, "Yes (M)", etnaRapeYesM);
 	if (player.lust >= 33 && player.hasVagina()) addButton(1, "Yes (F)", etnaRapeYesF);
 	addButton(2, "No", etnaRapeNo);
-	SceneLib.uniqueSexScene.pcUSSPreChecksV2(etnaRape3rdWin);
-	}
+}
 
 public function etnaReady2Come2Camp():void
 {
@@ -426,7 +412,7 @@ private function etnaCome2Camp():void
 		outputText("Etna replies smirking. \"<i>So what, you milfy bird? It’s not like you need more of [name]’s affection after your hundredth kid! Heck, I'm surprised a slut like you hasn’t already taken a permanent mate or maybe, you just don't consider men as such?</i>\"\n\nIt takes everything you have to prevent Sophie and Etna from fighting, but you eventually manage to calm them down and force them to make peace. Sophie begrudgingly shakes hands with Etna but you’re quite aware the odds of them becoming friends is quite slim.\n\n");
 	}
 	outputText("Her examination of your camp done, Etna proceeds to make herself comfortable and settle down.\n\n");
-	outputText("\n\n<b>Before settling in, as if remembering something Etna pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
+	outputText("\n\n<b>Before settling in, as if remembering something, Etna pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
 	if (player.hasKeyItem("Radiant shard") >= 0){
 		player.addKeyValue("Radiant shard",1,+1);
 	}
@@ -462,24 +448,25 @@ public function etnaRapeYandere():void
 	outputText("\"<i>You and I are going to play a game [name]. See these flowers on the table there. For each petal I pull and count as you loving me I’m going to stab you once and for each that I pull and count as hating me I’m going to stab you twice! So let us begin, you love me...</i>\"\n\n");
 	outputText("Etna impales your leg with her spike and this causes some of your blood to splatter on the ground, you start by screaming in pain then tormented pleasure due to aphrodisiac contained in the spike. Etna, however, is barely getting started!\n\n");
 	outputText("\"<i>You hate me...</i>\"\n\n");
-	outputText("This time she impales you in both legs! This cruel little game plays for a full hour as blood flies everywhere… painting the floor, the walls, and even Etna herself. Every time you think you are about to run out fluids to spill Etna pulls out a healing pill and force feeds it to you, closing your wounds and repeating this sick cycle of pain and pleasure anew. Etna keeps on wounding you until she reaches the final petal.\n\n");
+	outputText("This time she impales you in both legs! This cruel little game plays for a full hour as blood flies everywhere… painting the floor, the walls, and even Etna herself. Every time you think you are about to run out fluids to spill Etna pulls out a healing pill and force-feeds it to you, closing your wounds and repeating this sick cycle of pain and pleasure anew. Etna keeps on wounding you until she reaches the final petal.\n\n");
 	outputText("\"<i>You love me! See that?! Even the roses said so. <b>YOU LOVE ME!!!</b></i>\"\n\n");
 	outputText("She laughs, her fur and skin painted red with your blood. You are too afraid to reply to her that the simple act of pulling petals from flowers doesn’t mean anything in your relationship with her.\n\n");
 	outputText("\"<i>Ahhh [name]’s blood! Look at me, I’m entirely covered with your fluids, isn’t that a true show of my unwavering affection?! This is such a wonderful feeling, I would never ever wash again just so to preserve it forever!</i>\"\n\n");
 	outputText("She’s giving you a blissful stare as she tosses away the spike and pounces on you, her tail already open and drooling ");
 	if (player.hasCock()) outputText("as she prepares to feast");
 	else outputText("at the mere thought of finally having sex with you");
-	outputText(".\n\n\"<i>You are mine [name] whether you like it or not! I’ve been unable to think of anything but you for days and it is obvious that we were made for each others body. No one else can douse the fire burning in me like you do!</i>\"\n\n");
-	player.addCurse("tou", 5, 2);
-	statScreenRefresh();
-	etnaRapesPlayer();
-	if (player.tou >= 30) {
-		outputText("Thankfully, you wake up before Etna does and use the spike left on the ground to unbind yourself. Once done, you proceed to exit the place through a trap door and head back to camp before the love-crazed manticore notices you’ve escaped.\n\n");
-		if (player.hasCock()) player.sexReward("vaginalFluids","Dick",true,false);
-		player.sexReward("vaginalFluids");
-		cleanupAfterCombat();
-	}
-	else etnaRapeYandereBadEnd();
+	outputText(".\n\n\"<i>You are mine [name] whether you like it or not! I’ve been unable to think of anything but you for days and it is obvious that we were made for each other's body. No one else can douse the fire burning in me like you do!</i>\"\n\n");
+	if (!recalling) {
+		player.addCurse("tou", 5, 2);
+		statScreenRefresh();
+		etnaRapesPlayer();
+		if (player.tou >= 30) {
+			outputText("Thankfully, you wake up before Etna does and use the spike left on the ground to unbind yourself. Once done, you proceed to exit the place through a trap door and head back to camp before the love-crazed manticore notices you’ve escaped.\n\n");
+			if (player.hasCock()) player.sexReward("no", "Dick");
+			player.sexReward("vaginalFluids");
+			cleanupAfterCombat();
+		} else etnaRapeYandereBadEnd();
+	} else doNext(recallWakeUp);
 }
 
 public function etnaRapeYandereBadEnd():void
@@ -576,7 +563,7 @@ public function etnaRapeIntro2():void
 }
 
 public function etnaCampMenu2():void {
-	if (!player.hasStatusEffect(StatusEffects.LunaWasWarned)) {
+	if (!player.hasStatusEffect(StatusEffects.LunaOff) && !player.hasStatusEffect(StatusEffects.LunaWasWarned)) {
 		if ((flags[kFLAGS.LUNA_JEALOUSY] > 200 && rand(10) < 4) || (flags[kFLAGS.LUNA_JEALOUSY] > 300 && rand(10) < 8)) mishapsLunaEtna();
 		else etnaCampMenu();
 	}
@@ -594,24 +581,25 @@ public function etnaCampMenu():void
 	addButton(2, "Sex", etnaSexMenu).hint("Have some sex with Etna");
 	if (flags[kFLAGS.ETNA_DAILY_VENOM_VIAL] > 0) addButtonDisabled(3, "Req. Venom", "You already asked her for a vial today.");
 	else addButton(3, "Req. Venom", etnaDailyVenomVial).hint("Ask Etna for a vial of her venom.");
-	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) {
-		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Etna") addButtonDisabled(4, "Spar", "You can't fight against her as long she's in your team.");
-		else addButton(4, "Spar", etnaSparsWithPC).hint("Ask Etna for a mock battle with sex for the winner.");
-	}
+	addButton(4, "Spar", etnaSparsWithPC).hint("Ask Etna for a mock battle with sex for the winner.")
+		.disableIf(flags[kFLAGS.PLAYER_COMPANION_1] == "Etna", "You can't fight against her as long she's in your team.")
+		.disableIf(flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 2, "You need a good sparring ring for that.");
 	if (player.hasPerk(PerkLib.BasicLeadership)) {
 		if (flags[kFLAGS.PLAYER_COMPANION_1] == "") addButton(5, "Team", etnaHenchmanOption).hint("Ask Etna to join you in adventures outside camp.");
 		else if (flags[kFLAGS.PLAYER_COMPANION_1] == "Etna") addButton(5, "Team", etnaHenchmanOption).hint("Ask Etna to stay in camp.");
 		else addButtonDisabled(5, "Team", "You already have other henchman accompany you. Ask him/her to stay at camp before you talk with Etna about accompaning you.");
 	}
 	else addButtonDisabled(5, "Team", "You need to have at least Basic Leadership to form a team.");
-	if (flags[kFLAGS.MICHIKO_TALK_MARRIAGE] == 1 && flags[kFLAGS.ETNA_FOLLOWER] < 3 && (player.hasCock() || player.hasVagina())) addButton(6, "Marriage", etnaMarriage);
+	if (flags[kFLAGS.ETNA_FOLLOWER] < 3) addButton(6, "Marriage", etnaMarriage)
+		.disableIf(player.isGenderless(), "Come on, you're genderless!")
+		.disableIf(flags[kFLAGS.MICHIKO_TALK_MARRIAGE] == 0, "You don't even know if it's possible in Mareth. Try talking to random people in random river towns... maybe you'll find out?");
 	addButton(14, "Back", camp.campLoversMenu);
 }
 
 public function etnaAppearance():void
 {
 	clearOutput();
-	outputText("Etna is a manticore. Her flowing, red hair is tied up in a spiky ponytail, which only accentuates her wild appearance. Her red, cat-like eyes are always sparkling maliciously like she was planning something and her not-so-innocent cat toothed smirk only serves to make her look all the more the naughtier. Her lion ears are alert to sound, twitching as she hears you approaching. Currently, she is laying down on her carpet in a position quite reminiscent of a classic housecat.\n\n");
+	outputText("Etna is a manticore. Her flowing, red hair is tied up in a spiky ponytail, which only accentuates her wild appearance. Her red, cat-like eyes are always sparkling maliciously like she was planning something and her not-so-innocent cat toothed smirk only serves to make her look all the more naughty. Her lion ears are alert to sound, twitching as she hears you approaching. Currently, she is laying down on her carpet in a position quite reminiscent of a classic housecat.\n\n");
 	outputText("Her arms and legs end in powerful, feline paws, allowing her to move either on two or four legs. The bluish-black fur on her limbs climbs up to the middle of her thighs and shoulders turning white at the tip and contrasting with her light skin. Funnily, despite their feral appearance her hands armed with claws can hold and manipulate objects like human hands would, including, of course, a man’s pole. Her neck is hidden by a fluffy collar of white fur, not unlike that of a lion. ");
 	outputText("The comparison to a lion ends there, as a pair of large bat-like wings that can stretch up to 13 feet wide rest on her shoulders. From her well-shaped ass surges a scorpion-like tail covered in armor like chitin. At her tail tip is a large bulb covered with venomous spikes from which venom drips off. She can open her tail tip at will which expands into a star-shaped tail pussy of accommodating size that’s always ready to devour a man’s tool and is constantly drooling with moisture.\n\n");
 	outputText("As her nature of a sexual predator would tell, she is endowed with a pair of pert breasts easily reaching E cup and her perfect hourglass shape could make many succubi jealous.\n\n");
@@ -681,13 +669,13 @@ public function etnaMarriageNo():void
 public function etnaMarriageYes():void
 {
 	outputText("You drop down on one knee before Etna as she gives you a troubled stare before you open a small box containing the ruby ring. This begins in the same way as every Love Tale as you gather the courage and propose under her astonished expression.\n\n");
-	if (flags[kFLAGS.MARRIAGE_FLAG] != 0) {
+	if (!sceneHunter.canMarry()) {
 		outputText("Etna slowly shakes her head as she pushes the ring away, \"<i>Sorry [name]... You’ve already sworn your heart to someone else… You can still feed me, but I don’t feel right taking the role of your spouse when someone has already claimed your heart.</i>\"\n\n");
 		outputText("You nod your head sadly. While her rejection stings, her words carry merit and it’s not right to betray the trust of "+flags[kFLAGS.MARRIAGE_FLAG]+".\n\n");
 		doNext(etnaCampMenu);
 	}
 	else {
-		outputText("\"<i>F..for me? [name] out of everyone else you’ve chosen me?! Yes...yes my answer is YES! I will be your favored wife forever and ever.</i>\"\n\n");
+		outputText("\"<i>F..for me? [name], out of everyone else you’ve chosen me?! Yes...yes, my answer is YES! I will be your favored wife forever and ever.</i>\"\n\n");
 		player.destroyItems(jewelries.ENDGRNG, 1);
 		player.HP = player.maxHP();
 		player.lust = 0;
@@ -741,7 +729,7 @@ public function etnaMarriageYes4():void
 	outputText("Your mind is set, you know deep within your being that there is nobody else you’d rather spend eternity with.\n\n");
 	outputText("\"<i>I do.</i>\" You state.\n\n");
 	outputText("Tears begin streaming down Etna’s face as Sapphire speaks up, \"<i>By the power vested in me, I now pronounce you soulmates.</i>\"\n\n");
-	outputText("Etna wraps her svelte arms around you as you wrap yours around her waist. She pulls you in  for a loving kiss, locking your [lips] with hers. If only the moment could last an eternity, but before you know it, Etna pulls away, staring back at you with beams of hope in her eyes.\n\n");
+	outputText("Etna wraps her svelte arms around you as you wrap yours around her waist. She pulls you in  for a loving kiss, locking your lips with hers. If only the moment could last an eternity, but before you know it, Etna pulls away, staring back at you with beams of hope in her eyes.\n\n");
 	outputText("\"<i>I love you, [name]... I want you to never forget that.</i>\"\n\n");
 	outputText("You smile back at her, letting her know that you love her as well.\n\n");
 	outputText("You spend a moment celebrating the marriage until night falls and it is time to return back to camp. You bring Etna home and ready yourself to consummate your love with the manticore.\n\n");
@@ -752,7 +740,7 @@ public function etnaMarriageYes4():void
 	model.time.days++;
 	model.time.hours = 6;
 	flags[kFLAGS.ETNA_FOLLOWER] = 4;
-	flags[kFLAGS.MARRIAGE_FLAG] = "Etna";
+	sceneHunter.marry("Etna");
 	inventory.takeItem(weapons.VENCLAW, cleanupAfterCombat);
 }
 
@@ -791,11 +779,14 @@ public function etnaSexMenu():void
 	outputText("\"<i>What did you have in mind lover? You already know I am always up for it.</i>\"");
 	menu();
 	addButton(0, "LetHerBeInCharge", etnaLetHerBeInCharge);
-	if (player.hasVagina()) addButton(1, "BeTopGirl", etnaBeTheTopGirl);
-	if (player.hasCock()) addButton(2, "KittyTitFuck", etnaKittyTitFuck);
-	if (player.hasCock()) addButton(3, "Pussy Opera", etnaPussyOpera);
-	if (player.tailType == 28)  addButton(4, "Share a Drink", etnaShareDrink);
-	if (player.isAlraune()) addButton(5, "Fill her up", EtnaFillHerUp);
+	addButton(1, "BeTopGirl", etnaBeTheTopGirl).disableIf(!player.hasVagina(), "Req. a vagina!");
+	addButton(2, "KittyTitFuck", etnaKittyTitFuck).disableIf(!player.hasCock(), "Req. a cock!");
+	addButton(3, "Pussy Opera", etnaPussyOpera).disableIf(!player.hasCock(), "Req. a cock!");
+	addButton(4, "Share a Drink", etnaShareDrink).disableIf(player.tailType != Tail.MANTICORE_PUSSYTAIL, "Req. to have a manticore pussytail.");
+	addButton(5, "Fill her up", EtnaFillHerUp).disableIf(!player.isAlraune(), "Req. to be an alraune.");
+	addButton(6, "TailExplor", tailExploration)
+		.hint("Play with her tail using your goo body!", "Tail Exploration")
+		.disableIf(!player.isGoo(), "Req. goo body.");
 	addButton(14, "Back", etnaCampMenu);
 }
 
@@ -833,7 +824,7 @@ public function etnaPussyOpera2():void
 		outputText("You ask Etna if she feels like trying something different for once. She looks at you inquisitively until you point the somewhat very obvious hole between her legs. To your surprise, she blushes and hides it with both paws. You ask her how she can be shy about using her main pussy, after all, she has been basically fucking you for weeks now.\n\n");
 		outputText("\"<i>That's not the same thing at all! While my tail does feel like a pussy, there is a very large difference between feeding and having true sex; pregnancy and well... the other things that are part of it. I'm a virgin and, unlike you, I’ve been saving myself up.</i>\"\n\n");
 		outputText("Well... that's something new. You're surprised a crazed nymphomaniac like her could actually be a virgin, let alone shy about having normal sex.\n\n");
-		outputText("\"<i>Look, feeding is something that is necessary for us to survive, but just because we feed casually, doesn’t mean we give out our virginities quite so easily. However, I’ve been around you long enough to know what I want… If you will have me, I will offer myself to you earnestly. Still, I don’t feel myself to be ready for kids, so I will wait until I feel I am ready.</i>\"\n\n");
+		outputText("\"<i>Look, feeding is something that is necessary for us to survive, but just because we feed casually, doesn’t mean we give out our virginities quite so easily. However, I’ve been around you long enough to know what I want… If you have me, I will offer myself to you earnestly. Still, I don’t feel myself to be ready for kids, so I will wait until I feel I am ready.</i>\"\n\n");
 	}
 	else {
 		outputText("She fawns on you smiling. \"<i>I’m still not sure about kittens, but sure! I wouldn’t mind doing that again..</i>\"\n\n");
@@ -843,7 +834,7 @@ public function etnaPussyOpera2():void
 	outputText("If she enjoys it that much when you're not even in, you wonder how she will react when your rod fully penetrates her.\n\n");
 	outputText("You tease her for a few minutes making her moan continually then proceed to insert it entirely, making her \"<i>Eeep!</i>\" in surprise. You slowly ease yourself in, until you hear the manticore starting to... sing? She’s literally moaning you a full-blown opera as you fuck her. Her sensitivity must be off the charts as her vaginal walls convulse around your cock, gripping it like a vice, almost as if she was constantly orgasming and the way she moans can attest to that. However, you’ve barely gotten started and the short fuse of your partner won’t change anything about it. ");
 	outputText("You slowly piston in and out, trying to drive the best notes out of her as she weaves you an orgasmic symphony. Her tail seems to react in tandem with her main hole, considering the constant gushes of fluids onto the ground, which creates a small pool of girlcum underneath it. It thrashes wildly, in accordance to her orgasm, barely missing you several times, despite your best attempts to avoid it.\n\n");
-	outputText("You get one final, booming note out of her as you paint her insides white. Her tail jerks once more as Etna is rocked by a final orgasm and girlcum rains down upon the both of you as she shoots upward. Etna slowly crawls away on the ground, looking extremely exhausted.\n\n");
+	outputText("You get one final, booming note out of her as you paint her insides white. Her tail jerks once more as Etna is rocked by a final orgasm and girlcum rains down upon both of you as she shoots upward. Etna slowly crawls away on the ground, looking extremely exhausted.\n\n");
 	outputText("\"<i>That was... something else... I'll take the herb for a few days now.... looking forward to that again.</i>\"\n\n");
 	outputText("You give her a gentle kiss before leaving to clean yourself and give her a chance to recover.");
 	if (player.cumQ() < 500) player.cumMultiplier += 6;
@@ -860,11 +851,11 @@ public function etnaShareDrink():void
 	outputText("\"<i>Well... not many things. It's not like it’s extremely strong or heavy either but there's a few more... kinky application to it. Care to have a drink?</i>\"\n\n");
 	outputText("Now that's something you're very intrigued about and when you see your friend pull out a pair of very large straws out of a bag and get a large barrel filled to the brim with a somewhat milky substance there's little question as to what she has in mind.\n\n");
 	outputText("\"<i>Ok hold your tail upward just like this. Yea that’s it. I'll put a straw in yours, you get the one in mine.</i>\"\n\n");
-	outputText("You only understand what she meant by having a drink once she pours the barrel into both of your tails. Wow, your tail walls stretch magnificently, filled to the brim with fluid. Taking a taste of it in your pussy, you figure exactly what you're filled with.  That’s minotaur cum in it's rawest form, almost fresh from the tap! You smile lustfully as you proceed to drink from your lover’s pussy, just as she does the same with yours. Unsurprisingly, minotaur cum tastes wonderful and provides you with a spike in energy as your body metabolizes it into food.\n\n");
+	outputText("You only understand what she meant by having a drink once she pours the barrel into both of your tails. Wow, your tail walls stretch magnificently, filled to the brim with fluid. Taking a taste of it in your pussy, you figure exactly what you're filled with.  That’s minotaur cum in its rawest form, almost fresh from the tap! You smile lustfully as you proceed to drink from your lover’s pussy, just as she does the same with yours. Unsurprisingly, minotaur cum tastes wonderful and provides you with a spike in energy as your body metabolizes it into food.\n\n");
 	outputText("The two of you make wet slurping sounds for several minutes, drinking from each other’s pussy. It's a fun bonding experience as you not only taste the minotaur cum, but also a delicious cocktail of Etna’s own pussy juice mixed in with it. It’s likely that she is tasting you as well and from the face she's making you gather that you don't taste half bad. Deciding to add some extra flavor you grab one of her supple breasts and tweak it playfully until milk dribbles out into your waiting tail. Etna seems to like the idea too and toys with your breasts until some milk dribbles into her tail. You make a lewd smile and gently lick Etna’s tail insides making her gasp. ");
 	outputText("Etna smirks and reciprocates passing her rough cat tongue on your tail pussy lips. Having a tail pussy is a one of a kind feeling as you both feed and feel indecent pleasure from it. It would be hard for you to give up on that body part. You resume drinking both ways, orgasming at the same time as your tail pussy bottoms up and goes empty. Etna thankfully, however, has extra barrels and gives you both a refill");
 	if (player.hasVagina()) outputText(" the [pussy] between your legs wets the ground as a new cargo of cum fills your tail cavity");
-	outputText(".\n\nAfter several minutes, the both of you are done and there's no cum left. You lay down next to Etna for a moment, enjoying the afterglow of your shared dinner. That was quite a good meal and seeing as she has several barrels of this which she seems to replenish daily you like the idea of doing this again. You head back to your tent most satisfied.");
+	outputText(".\n\nAfter several minutes, both of you are done and there's no cum left. You lay down next to Etna for a moment, enjoying the afterglow of your shared dinner. That was quite a good meal and seeing as she has several barrels of this which she seems to replenish daily you like the idea of doing this again. You head back to your tent most satisfied.");
 	doNext(camp.returnToCampUseOneHour);
 	player.sexReward("cum");
 }
@@ -889,7 +880,7 @@ public function etnaSparsWithPC():void
 
 public function mishapsLunaEtna():void {
 	clearOutput();
-	outputText("You go check on Etna but find her sleeping in broad daylight. She acknowledge you for a second only.\n\n");
+	outputText("You go check on Etna but find her sleeping in broad daylight. She acknowledges you for a second only.\n\n");
 	outputText("\"<i>Yawn... Sorry [name] since I found those weird herbs next to my carpet I just feel so drowsy. We will talk again later okay?</i>\"\n\n");
 	outputText("Well, guess you will come back later then, but herbs? Now that you look at them these herbs indeed look like catnip. You remove them from Etna direct environment for now. Still who would actually do this kind of prank?\n\n");
 	if (player.hasStatusEffect(StatusEffects.CampLunaMishaps2)) player.addStatusValue(StatusEffects.CampLunaMishaps2, 1, 1);
@@ -898,6 +889,21 @@ public function mishapsLunaEtna():void {
 	else player.addStatusValue(StatusEffects.LunaWasCaugh, 1, 1);
 	if (player.statusEffectv1(StatusEffects.LunaWasCaugh) == 3) outputText("<b>That's it, you're sure of it now, it's all Luna's doing!</b>\n\n");
 	doNext(playerMenu);
+}
+
+private function tailExploration():void {
+	clearOutput();
+	outputText("Your eyes zero in on Etna's tail pussy. This thing is so juicy and filled with fluids it constantly drools. You lick your lips in anticipation, Etna giving you a worried look. \n"
+		+ "\n"
+		+ "“<i>Hey, uh... why are you eyeing my tail like that?</i>”\n"
+		+ "\n"
+		+ "You reply with a gooey perverted smile of your own before sloshing over to her and flowing straight into her tail. Etna screams in confusion and fear but this quickly turns to moans as you pour inside.\n"
+		+ "\n"
+		+ "“<i>Eeeeep, stop! You’re breaking me, I swear I’m going to break!</i>”\n"
+		+ "\n"
+		+ "Pint by pint you flood her cunt until you are all in, the manticore begging for you to stop. Midway you hear something hit the ground next to you but heck you don’t care, this cunt is a treasure trove. Every single crevice of her tail wall is dripping with girl fluids and you can even taste the residual cum of her few past meals. Etna/The manticore’s tail is twitching as you violate her insides like no other cock could. Her screams are so loud you can hear her moans of ecstasy from inside. Deciding to go to the depth of the matter you finally reach the end of her tail at the base of her ass which might as well be connected to her stomach and unsurprisingly it is. Since you aren't interested into a digestive acid bath you lick clean the rest of her tail walls with your body, making sure to remove any remnant of cum, and begin to flood out. As you finish oozing on the ground you hear a confused moan and turn over. Etna is on the ground, eyes crossed from the mind-blowing sex you performed inside her tailcunt. Eh?! You hope you didn’t break her, this must be quite the experience, one you would sure love to do again.\n");
+	player.sexReward("vaginalFluids");
+	doNext(camp.returnToCampUseOneHour);
 }
 
 	}

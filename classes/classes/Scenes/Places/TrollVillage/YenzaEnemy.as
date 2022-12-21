@@ -27,7 +27,7 @@ package classes.Scenes.Places.TrollVillage {
             this.tallness = 84;
             this.hips.type = Hips.RATING_FERTILE;
             this.butt.type = Butt.RATING_NOTICEABLE;
-            this.skinTone = "light";
+            this.bodyColor = "light";
             this.hairColor = "green";
             this.hairLength = 13;
             this.weaponName = "fists";
@@ -40,7 +40,6 @@ package classes.Scenes.Places.TrollVillage {
             this.HP = 1;
             this.level = 1;
             this.lust = 0;
-            this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
             this.gems = 100;
         }
     }

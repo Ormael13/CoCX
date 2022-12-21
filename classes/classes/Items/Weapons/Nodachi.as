@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Items.Weapons 
+package classes.Items.Weapons
 {
 	import classes.Items.Weapon;
 	import classes.Player;
@@ -11,7 +11,7 @@ package classes.Items.Weapons
 
 	public class Nodachi extends Weapon {
 		
-		public function Nodachi() 
+		public function Nodachi()
 		{
 			super("Nodachi","Nodachi","nodachi","a nodachi","keen cut",65,2600,"A curved over 3m long bladed weapon that cuts through flesh with the greatest of ease.", "Massive", "Dueling");
 		}
@@ -21,12 +21,12 @@ package classes.Items.Weapons
 			if (game.player.str >= 250) boost += 30;
 			if (game.player.str >= 200) boost += 20;
 			if (game.player.str >= 150) boost += 10;
-			return (5 + boost); 
+			return (5 + boost);
 		}
 		
-		override public function canUse():Boolean {
-			if (game.player.hasPerk(PerkLib.GigantGrip)) return super.canUse();
-			outputText("You aren't skilled in handling massive weapons, even when using both hands to use this sword.  ");
+		override public function canEquip(doOutput:Boolean):Boolean {
+			if (game.player.hasPerk(PerkLib.GigantGrip)) return super.canEquip(doOutput);
+			if (doOutput) outputText("You aren't skilled in handling massive weapons, even when using both hands to use this sword.  ");
 			return false;
 		}
 	}

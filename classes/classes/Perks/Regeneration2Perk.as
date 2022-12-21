@@ -1,4 +1,4 @@
-package classes.Perks 
+package classes.Perks
 {
 import classes.CoC;
 import classes.PerkClass;
@@ -10,11 +10,12 @@ import classes.PerkClass;
 		
 		override public function desc(params:PerkClass = null):String
 		{
+			if (!player || !params) return _desc;
 			if (CoC.instance.flags[kFLAGS.HUNGER_ENABLED] > 0 && CoC.instance.player.hunger < 25) return "<b>DISABLED</b> - You are too hungry!";
 			else return super.desc(params);
 		}
 		
-		public function Regeneration2Perk() 
+		public function Regeneration2Perk()
 		{
 			super("Regeneration II", "Regeneration II",
 				"Regenerates further 1% of max HP/hour and 0,5% of max HP/round.",

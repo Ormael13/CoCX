@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.Areas.Forest 
+package classes.Scenes.Areas.Forest
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -74,7 +74,7 @@ public class Alraune extends Monster
 			}
 			outputText("Unable to take your gaze away from her lewd show, you feel yourself getting more aroused. ");
 			var lustDmg:int = rand(player.lib / 20) + rand(this.lib / 10) + 10;
-			player.dynStats("lus", lustDmg);
+			player.takeLustDamage(lustDmg, true);
 			outputText("\n\n");
 		}
 		
@@ -93,7 +93,7 @@ public class Alraune extends Monster
 				lustDmg = Math.round(lustDmg);
 				outputText("You are hit by a pumpkin for " + damage + " damage! " + lustDmg + " lust damage!");
 				damage = player.takePhysDamage(damage, true);
-				player.dynStats("lus", lustDmg);
+				player.takeLustDamage(lustDmg, true);
 				outputText("\n");
 			}
 		}
@@ -140,21 +140,21 @@ public class Alraune extends Monster
 			SceneLib.forest.alrauneScene.alrauneDeepwoodsLost();
 		}
 		
-		public function Alraune() 
+		public function Alraune()
 		{
 			super();
 			if (Holidays.isHalloween()) {
 				this.a = "";
 				this.short = "Jack-O-Raune";
 				this.long = "You are fighting against a Jack-O-Raune, an intelligent plant with the torso of a woman and the lower body of a giant pumpkin with snaking tentacle vines. She seems really keen on raping you.";
-				this.skinTone = "pale orange";
+				this.bodyColor = "pale orange";
 				this.hairColor = "green";
 			}
 			else {
 				this.a = "an ";
 				this.short = "alraune";
 				this.long = "You are fighting against an Alraune, an intelligent plant with the torso of a woman and the lower body of a giant flower. She seems really keen on raping you.";
-				this.skinTone = "light green";
+				this.bodyColor = "light green";
 				this.hairColor = "dark green";
 			}
 			this.imageName = "alraune";
@@ -179,7 +179,6 @@ public class Alraune extends Monster
 			this.bonusLust = 174;
 			this.lust = 20 + rand(40);
 			this.lustVuln = 0.2;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 28;
 			this.gems = rand(20) + 5;
 			this.drop = new WeightedDrop().

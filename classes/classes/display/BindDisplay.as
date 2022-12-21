@@ -1,4 +1,4 @@
-package classes.display 
+package classes.display
 {
 import coc.view.BitmapDataSprite;
 import coc.view.Block;
@@ -15,7 +15,7 @@ import flash.display.MovieClip;
 	
 
 	/**
-	 * Defines a composite display object of all the seperate components required to display a 
+	 * Defines a composite display object of all the seperate components required to display a
 	 * single BoundControlMethod, its associated primary and secondary bindings with the buttons
 	 * used to bind methods to new keys.
 	 * @author Gedan
@@ -30,10 +30,10 @@ import flash.display.MovieClip;
 		/**
 		 * Create a new composite object, initilizing the label to be used for display, as well as the two
 		 * buttons used for user interface.
-		 * 
+		 *
 		 * @param	maxWidth	Defines the maximum available width that the control can consume for positining math
 		 */
-		public function BindDisplay(maxWidth:int) 
+		public function BindDisplay(maxWidth:int)
 		{
 			layoutConfig = {
 				type: Block.LAYOUT_GRID,
@@ -47,8 +47,8 @@ import flash.display.MovieClip;
 					font: 'Times New Roman',
 					size: 20,
 					align: 'right'
-		}
-				});
+				}
+			});
 			addElement(_button1 = new CoCButton({
 				labelText: 'Unbound',
 				bitmapClass: MainView.ButtonBackground0

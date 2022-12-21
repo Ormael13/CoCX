@@ -2,22 +2,13 @@
  * Coded by Liadri 2020-04-01.
  */
 package classes.Items.Consumables {
-import classes.Appearance;
 import classes.BodyParts.Antennae;
 import classes.BodyParts.Arms;
-import classes.BodyParts.BodyPart;
 import classes.BodyParts.Ears;
-import classes.BodyParts.Eyes;
 import classes.BodyParts.Face;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.RearBody;
-import classes.BodyParts.Skin;
-import classes.BodyParts.Tail;
-import classes.BodyParts.Tongue;
-import classes.BodyParts.Wings;
-import classes.EngineCore;
 import classes.Items.Consumable;
-import classes.PerkLib;
 import classes.CoC;
 
 public class CentipedeVenom extends Consumable {

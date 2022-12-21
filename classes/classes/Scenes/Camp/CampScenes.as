@@ -105,7 +105,7 @@ public function HaveABoysBath():void {
 		outputText(". Maybe he's not one for the heat.\n\n");
 	}
 	if (flags[kFLAGS.ZENJI_PROGRESS] == 8 || flags[kFLAGS.ZENJI_PROGRESS] == 9) outputText("Zenji rests in the hot spring, his short fur carried by the bubbling water.\n\n");
-	if (flags[kFLAGS.ZENJI_PROGRESS] == 11) outputText("Zenji rests in the hot spring, his short fur carried by the bubbling water.\n\n");
+	if (ZenjiScenes.isLover()) outputText("Zenji rests in the hot spring, his short fur carried by the bubbling water.\n\n");
 	if (emberScene.followerEmber() && flags[kFLAGS.EMBER_GENDER] == 1) outputText("Ember’s body and maleness could easily give all the other boys an inferiority complex.\n\n");
 	if (camp.loversHotBathCount() > 0) {
 		outputText("You discuss your goals with the other guys when a girl's voice ring out from outside the spring.\n\n");
@@ -231,7 +231,7 @@ public function HaveAGirlBath():void {
 	if (flags[kFLAGS.ETNA_FOLLOWER] > 0 && !player.hasStatusEffect(StatusEffects.EtnaOff)) outputText("Etna isn’t far from you, her tail tip covered with a towel for everyone else's safety.\n\n");
 	if (flags[kFLAGS.AYANE_FOLLOWER] >= 2) {
 		outputText("Ayane is enjoying some quality time in the other corner, tending to her fur");
-		if (player.isRace(Races.KITSUNE)) outputText(" and yours");
+		if (player.isRace(Races.KITSUNE, 1, false)) outputText(" and yours");
 		outputText(".\n\n");
 	}
 	if (flags[kFLAGS.SAMIRAH_FOLLOWER] > 9) outputText("As a naga Samirah takes a lot of space in the bath. You're glad you made your pool as large as you could.\n\n");
@@ -276,13 +276,13 @@ public function HeavenTribulationThunderDoom():void {
 }
 public function HclassHTintro():void {
 	spriteSelect(null);
-	outputText("\nAn expanse of ink-black clouds form from nowhere, engulfing the land in near-total darkness. You stand, looking up into the artificial night. You see a part of the clouds, directly above you, and from it, crimson lightning splits the sky, carving a trench in the ground in front of you. The unnatural lightning spreads, jagged webs across the black sky, the thunder roaring constantly in your ears. Your heart beats faster, your [skin] crawling with each crack.\n");
+	outputText("\nAn expanse of ink-black clouds form from nowhere, engulfing the land in near-total darkness. You stand, looking up into the artificial night. You see a part of the clouds, directly above you, and from it, crimson lightning splits the sky, carving a trench in the ground in front of you. The unnatural lightning spreads, jagged webs across the black sky, the thunder roaring constantly in your ears. Your heart beats faster, your [skin] crawling with each crack. The wind howls, and you break into a cold sweat. Your first tribulation starts now.\n");
 	startCombat(new HclassHeavenTribulation());
 }
 public function HclassHTbeaten():void {
 	clearOutput();
 	outputText("After your attack, the clouds part, the clear sky showing through. The hole widens, clouds scattered every which way by your counterattacks. Looking upward with contempt, you feel pride welling up within you. Your body feels lighter, stronger, your SoulForce pumping like blood through you. You've broken your limits.\n\n");
-	outputText("<b>You can now cultivate Daos of Elements.\n");
+	outputText("<b>You're now Early Soul Sprite.\nYou can now cultivate Daos of Elements.\n");
 	if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 0) {
 		var BTB:Number = 1;
 		if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 1) BTB += 2;
@@ -291,16 +291,26 @@ public function HclassHTbeaten():void {
 		player.createPerk(PerkLib.BodyTempering, BTB, 0, 0, 0);
 	}
 	outputText("(Gained Perk: H class Heaven Tribulation Survivor)</b>\n");
+	player.removeKeyItem("Heavenly Tribulation: Myths and Facts");
 	player.createPerk(PerkLib.HclassHeavenTribulationSurvivor, 0, 0, 0, 0);
-	player.XP = player.XP + 8000;
+	player.createPerk(PerkLib.SoulSprite, 0, 0, 0, 0);
+	player.addPerkValue(PerkLib.JobSoulCultivator, 1, -2);
+	player.addPerkValue(PerkLib.JobSoulCultivator, 2, 1);
+	flags[kFLAGS.SOUL_CULTIVATION] = 10;
+	player.XP += 2700;
 	cleanupAfterCombat();
 }
 public function HclassHTsurvived():void {
 	clearOutput();
-	outputText("You survived. You can feel the shocks coursing through you, your ears ringing with heavenly thunder, but things could've gone much worse. The Tribulations clouds disperse. You're battered and bruised, but your trial has ended.\n\n");
-	outputText("<b>You can now cultivate Daos of Elements.\n");
+	outputText("You survived. You can feel the shocks coursing through you, your ears ringing with heavenly thunder, but things could've gone much worse. The Tribulations clouds disperse. You're battered and bruised, but your trial has ended. You also feel silent 'pop' inside your body as cultivation base makes a breakthrough.\n\n");
+	outputText("<b>You're now Early Soul Sprite.\nYou can now cultivate Daos of Elements.\n");
 	outputText("(Gained Perk: H class Heaven Tribulation Survivor)</b>\n");
+	player.removeKeyItem("Heavenly Tribulation: Myths and Facts");
 	player.createPerk(PerkLib.HclassHeavenTribulationSurvivor, 0, 0, 0, 0);
+	player.createPerk(PerkLib.SoulSprite, 0, 0, 0, 0);
+	player.addPerkValue(PerkLib.JobSoulCultivator, 1, -2);
+	player.addPerkValue(PerkLib.JobSoulCultivator, 2, 1);
+	flags[kFLAGS.SOUL_CULTIVATION] = 10;
 	cleanupAfterCombat();
 }
 public function GclassHTintro():void {
@@ -310,8 +320,8 @@ public function GclassHTintro():void {
 }
 public function GclassHTbeaten():void {
 	clearOutput();
-	outputText("After your attack, the clouds part, the clear sky showing through. The hole widens, clouds scattered every which way by your counterattacks. Looking upward with contempt, you feel pride welling up within you. Your body feels lighter, stronger, your SoulForce pumping like blood through you. You kneel, feeling your SoulForce breaking through blockages in your body"+(player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 3 ? " and soul":"")+"\n\n");
-	outputText("<b>You can now freely fly.\n");
+	outputText("After your attack, the clouds part, the clear sky showing through. The hole widens, clouds scattered every which way by your counterattacks. Looking upward with contempt, you feel pride welling up within you. Your body feels lighter, stronger, your SoulForce pumping like blood through you. You kneel, feeling your SoulForce breaking through blockages in your body"+(player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 3 ? " and soul":"")+". You also feel silent 'pop' inside your body as cultivation base makes a breakthrough.\n\n");
+	outputText("<b>You're now Early Soul Elder.\nYou can now freely fly.\n");
 	if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 0) {
 		var BTB:Number = 1;
 		if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 1) BTB += 2;
@@ -332,26 +342,34 @@ public function GclassHTbeaten():void {
 	}
 	outputText("(Gained Perk: G class Heaven Tribulation Survivor)</b>\n");
 	player.createPerk(PerkLib.GclassHeavenTribulationSurvivor, 0, 0, 0, 0);
-	player.XP = player.XP + 27000;
+	player.createPerk(PerkLib.SoulElder, 0, 0, 0, 0);
+	player.addPerkValue(PerkLib.JobSoulCultivator, 1, -2);
+	player.addPerkValue(PerkLib.JobSoulCultivator, 2, 1);
+	flags[kFLAGS.SOUL_CULTIVATION] = 19;
+	player.XP += 10800;
 	cleanupAfterCombat();
 }
 public function GclassHTsurvived():void {
 	clearOutput();
-	outputText("You survived. You're in rough shape, but things could be worse. The Tribulation clouds disperse now that your trial has ended.\n\n");
-	outputText("<b>You can now freely fly.\n");
+	outputText("You survived. You're in rough shape, but things could be worse. The Tribulation clouds disperse now that your trial has ended. You also feel silent 'pop' inside your body as cultivation base makes a breakthrough.\n\n");
+	outputText("<b>You're now Early Soul Elder.\nYou can now freely fly.\n");
 	outputText("(Gained Perk: G class Heaven Tribulation Survivor)</b>\n");
 	player.createPerk(PerkLib.GclassHeavenTribulationSurvivor, 0, 0, 0, 0);
+	player.createPerk(PerkLib.SoulElder, 0, 0, 0, 0);
+	player.addPerkValue(PerkLib.JobSoulCultivator, 1, -2);
+	player.addPerkValue(PerkLib.JobSoulCultivator, 2, 1);
+	flags[kFLAGS.SOUL_CULTIVATION] = 19;
 	cleanupAfterCombat();
 }
 public function FclassHTintro():void {
 	spriteSelect(null);
-	outputText("\n An expanse of ink-black clouds form from nowhere, engulfing the land in near-total darkness. You stand, looking up into the artificial night. You see a part of the clouds, directly above you, and from it, crimson lightning splits the sky, carving a trench in the ground in front of you. The unnatural lightning spreads, jagged webs across the black sky, the thunder roaring constantly in your ears. Your heart beats faster, your [skin] crawling with each crack. The wind howls, and you break into a cold sweat. Your third tribulation starts now.\n");
+	outputText("\nAn expanse of ink-black clouds form from nowhere, engulfing the land in near-total darkness. You stand, looking up into the artificial night. You see a part of the clouds, directly above you, and from it, crimson lightning splits the sky, carving a trench in the ground in front of you. The unnatural lightning spreads, jagged webs across the black sky, the thunder roaring constantly in your ears. Your heart beats faster, your [skin] crawling with each crack. The wind howls, and you break into a cold sweat. Your third tribulation starts now.\n");
 	startCombat(new FclassHeavenTribulation());
 }
 public function FclassHTbeaten():void {
 	clearOutput();
-	outputText("After your attack clouds starts to disperce. Not from sending all their attacks against but due to been forcefully scattered by your counterattacks. Looking upward with contempt and haunty arrogance toward dispering tribulation clouds feeling few of blockages in your body"+(player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 3 ? " and soul":"")+" have been broken throu.\n\n");
-	outputText("<b>You can now create a clone, which could serve as main body replacement in case something bad happen to main body.\n");
+	outputText("After your attack clouds starts to disperce. Not from sending all their attacks against but due to been forcefully scattered by your counterattacks. Looking upward with contempt, you feel pride welling up within you. Your body feels lighter, stronger, your SoulForce pumping like blood through you. You kneel, feeling your SoulForce breaking through blockages in your body"+(player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 3 ? " and soul":"")+". You also feel silent 'pop' inside your body as cultivation base makes a breakthrough.\n\n");
+	outputText("<b>You're now Early Soul Overlord.\nYou can now create a clone, which could serve as main body replacement in case something bad happen to main body.\n");
 	if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 0) {
 		var BTBa:Number = 1;
 		if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 1) BTBa += 2;
@@ -369,7 +387,7 @@ public function FclassHTbeaten():void {
 	}
 	if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 3) {
 		var BTBaa:Number = 4;
-		if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 1) BTBaa += 5;
+		if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 4) BTBaa += 6;
 		if (player.hasPerk(PerkLib.SoulTempering)) {
 			outputText("Your Soul Tempering have progressed.\n");
 			player.addPerkValue(PerkLib.SoulTempering, 1, BTBaa);
@@ -381,15 +399,143 @@ public function FclassHTbeaten():void {
 	}
 	outputText("(Gained Perk: F class Heaven Tribulation Survivor)</b>\n");
 	player.createPerk(PerkLib.FclassHeavenTribulationSurvivor, 0, 0, 0, 0);
-	player.XP = player.XP + 40000;
+	player.createPerk(PerkLib.SoulOverlord, 0, 0, 0, 0);
+	player.addPerkValue(PerkLib.JobSoulCultivator, 1, -3);
+	player.addPerkValue(PerkLib.JobSoulCultivator, 2, 1);
+	flags[kFLAGS.SOUL_CULTIVATION] = 27;
+	player.XP += 23400;
 	cleanupAfterCombat();
 }
 public function FclassHTsurvived():void {
 	clearOutput();
-	outputText("You survived. You're in rough shape, but things could be worse. The Tribulation clouds disperse now that your trial has ended.\n\n");
-	outputText("<b>You can now create a clone. While this soulless husk can't be used now, should something happen to your main body, you can escape to this empty vessel.\n");
+	outputText("You survived. You're in rough shape, but things could be worse. The Tribulation clouds disperse now that your trial has ended. You also feel silent 'pop' inside your body as cultivation base makes a breakthrough.\n\n");
+	outputText("<b>You're now Early Soul Overlord.\nYou can now create a clone. While this soulless husk can't be used now, should something happen to your main body, you can escape to this empty vessel.\n");
 	outputText("(Gained Perk: F class Heaven Tribulation Survivor)</b>\n");
 	player.createPerk(PerkLib.FclassHeavenTribulationSurvivor, 0, 0, 0, 0);
+	player.createPerk(PerkLib.SoulOverlord, 0, 0, 0, 0);
+	player.addPerkValue(PerkLib.JobSoulCultivator, 1, -3);
+	player.addPerkValue(PerkLib.JobSoulCultivator, 2, 1);
+	flags[kFLAGS.SOUL_CULTIVATION] = 27;
+	cleanupAfterCombat();
+}
+public function FFclassHTintro():void {
+	spriteSelect(null);
+	outputText("\nAn expanse of ink-black clouds form from nowhere, engulfing the land in near-total darkness. You stand, looking up into the artificial night. You see a part of the clouds, directly above you, and from it, crimson lightning splits the sky, carving a trench in the ground in front of you. The unnatural lightning spreads, jagged webs across the black sky, the thunder roaring constantly in your ears. Your heart beats faster, your [skin] crawling with each crack. The wind howls, and you break into a cold sweat. Your fourth tribulation starts now.\n");
+	startCombat(new FFclassHeavenTribulation());
+}
+public function FFclassHTbeaten():void {
+	clearOutput();
+	outputText("After your attack clouds starts to disperce. Not from sending all their attacks against but due to been forcefully scattered by your counterattacks. Looking upward with contempt, you feel pride welling up within you. Your body feels lighter, stronger, your SoulForce pumping like blood through you. You kneel, feeling your SoulForce breaking through blockages in your body"+(player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 3 ? " and soul":"")+". You also feel silent 'pop' inside your body as cultivation base makes a breakthrough.\n\n");
+	outputText("<b>You're now Early Soul King.\nYou can now create three additional clones.\n");
+	if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 0) {
+		var BTBa:Number = 1;
+		if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 1) BTBa += 2;
+		if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 2) BTBa += 3;
+		if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 3) BTBa += 4;
+		if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 4) BTBa += 5;
+		if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 5) BTBa += 6;
+		if (player.hasPerk(PerkLib.BodyTempering)) {
+			outputText("Your Body Tempering have progressed.\n");
+			player.addPerkValue(PerkLib.BodyTempering, 1, BTBa);
+		}
+		else {
+			outputText("(Gained Perk: Body Tempering)\n");
+			player.createPerk(PerkLib.BodyTempering, BTBa, 0, 0, 0);
+		}
+	}
+	if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 3) {
+		var BTBaa:Number = 4;
+		if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 4) BTBaa += 6;
+		if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 5) BTBaa += 7;
+		if (player.hasPerk(PerkLib.SoulTempering)) {
+			outputText("Your Soul Tempering have progressed.\n");
+			player.addPerkValue(PerkLib.SoulTempering, 1, BTBaa);
+		}
+		else {
+			outputText("(Gained Perk: Soul Tempering)\n");
+			player.createPerk(PerkLib.SoulTempering, BTBaa, 0, 0, 0);
+		}
+	}
+	outputText("(Gained Perk: FF class Heaven Tribulation Survivor)</b>\n");
+	player.createPerk(PerkLib.FFclassHeavenTribulationSurvivor, 0, 0, 0, 0);
+	player.createPerk(PerkLib.SoulKing, 0, 0, 0, 0);
+	player.addPerkValue(PerkLib.JobSoulCultivator, 1, -3);
+	player.addPerkValue(PerkLib.JobSoulCultivator, 2, 1);
+	flags[kFLAGS.SOUL_CULTIVATION] = 35;
+	player.XP += 40800;
+	cleanupAfterCombat();
+}
+public function FFclassHTsurvived():void {
+	clearOutput();
+	outputText("You survived. You're in rough shape, but things could be worse. The Tribulation clouds disperse now that your trial has ended. You also feel silent 'pop' inside your body as cultivation base makes a breakthrough.\n\n");
+	outputText("<b>You're now Early Soul King.\nYou can now create three additional clones.\n");
+	outputText("(Gained Perk: FF class Heaven Tribulation Survivor)</b>\n");
+	player.createPerk(PerkLib.FFclassHeavenTribulationSurvivor, 0, 0, 0, 0);
+	player.createPerk(PerkLib.SoulKing, 0, 0, 0, 0);
+	player.addPerkValue(PerkLib.JobSoulCultivator, 1, -3);
+	player.addPerkValue(PerkLib.JobSoulCultivator, 2, 1);
+	flags[kFLAGS.SOUL_CULTIVATION] = 35;
+	cleanupAfterCombat();
+}
+public function EclassHTintro():void {
+	spriteSelect(null);
+	outputText("\nAn expanse of ink-black clouds form from nowhere, engulfing the land in near-total darkness. You stand, looking up into the artificial night. You see a part of the clouds, directly above you, and from it, crimson lightning splits the sky, carving a trench in the ground in front of you. The unnatural lightning spreads, jagged webs across the black sky, the thunder roaring constantly in your ears. Your heart beats faster, your [skin] crawling with each crack. The wind howls, and you break into a cold sweat. Your fifth tribulation starts now.\n");
+	startCombat(new EclassHeavenTribulation());
+}
+public function EclassHTbeaten():void {
+	clearOutput();
+	outputText("After your attack clouds starts to disperce. Not from sending all their attacks against but due to been forcefully scattered by your counterattacks. Looking upward with contempt, you feel pride welling up within you. Your body feels lighter, stronger, your SoulForce pumping like blood through you. You kneel, feeling your SoulForce breaking through blockages in your body"+(player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 3 ? " and soul":"")+". You also feel silent 'pop' inside your body as cultivation base makes a breakthrough.\n\n");
+	//outputText("<b>You're now Early Soul Ancestor.\nYou can now create three additional clones.\n");
+	if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 0) {
+		var BTBa:Number = 1;
+		if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 1) BTBa += 2;
+		if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 2) BTBa += 3;
+		if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 3) BTBa += 4;
+		if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 4) BTBa += 5;
+		if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 5) BTBa += 6;
+		if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 6) BTBa += 7;
+		if (player.hasPerk(PerkLib.BodyTempering)) {
+			outputText("Your Body Tempering have progressed.\n");
+			player.addPerkValue(PerkLib.BodyTempering, 1, BTBa);
+		}
+		else {
+			outputText("(Gained Perk: Body Tempering)\n");
+			player.createPerk(PerkLib.BodyTempering, BTBa, 0, 0, 0);
+		}
+	}
+	if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 3) {
+		var BTBaa:Number = 4;
+		if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 4) BTBaa += 6;
+		if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 5) BTBaa += 7;
+		if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 6) BTBaa += 8;
+		if (player.hasPerk(PerkLib.SoulTempering)) {
+			outputText("Your Soul Tempering have progressed.\n");
+			player.addPerkValue(PerkLib.SoulTempering, 1, BTBaa);
+		}
+		else {
+			outputText("(Gained Perk: Soul Tempering)\n");
+			player.createPerk(PerkLib.SoulTempering, BTBaa, 0, 0, 0);
+		}
+	}
+	outputText("(Gained Perk: E class Heaven Tribulation Survivor)</b>\n");
+	player.createPerk(PerkLib.EclassHeavenTribulationSurvivor, 0, 0, 0, 0);
+	player.createPerk(PerkLib.SoulAncestor, 0, 0, 0, 0);
+	player.addPerkValue(PerkLib.JobSoulCultivator, 1, -3);
+	player.addPerkValue(PerkLib.JobSoulCultivator, 2, 1);
+	flags[kFLAGS.SOUL_CULTIVATION] = 43;
+	player.XP += 63000;
+	cleanupAfterCombat();
+}
+public function EclassHTsurvived():void {
+	clearOutput();
+	outputText("You survived. You're in rough shape, but things could be worse. The Tribulation clouds disperse now that your trial has ended. You also feel silent 'pop' inside your body as cultivation base makes a breakthrough.\n\n");
+	//outputText("<b>You're now Early Soul Ancestor.\nYou can now create three additional clones.\n");
+	outputText("(Gained Perk: E class Heaven Tribulation Survivor)</b>\n");
+	player.createPerk(PerkLib.EclassHeavenTribulationSurvivor, 0, 0, 0, 0);
+	player.createPerk(PerkLib.SoulAncestor, 0, 0, 0, 0);
+	player.addPerkValue(PerkLib.JobSoulCultivator, 1, -3);
+	player.addPerkValue(PerkLib.JobSoulCultivator, 2, 1);
+	flags[kFLAGS.SOUL_CULTIVATION] = 43;
 	cleanupAfterCombat();
 }
 
@@ -452,10 +598,8 @@ private function goblinsBirthScene2():void {
 	outputText("Aw... She’s fully grown up now but hey, that's another pair of hands around the workshop, right?\n\n");
 	if (player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DRY) player.vaginas[0].vaginalWetness++;
 	if (player.breastRows.length == 0) {
-		player.createBreastRow();
-        player.breastRows[0].breasts = 2;
-        player.breastRows[0].nipplesPerBreast = 1;
-        player.breastRows[0].breastRating = 1;
+		player.createBreastRow(1);
+		transformations.UnlockBreasts();
 	}
 	else player.breastRows[0].breastRating += 1;
 	player.hips.type += 1;

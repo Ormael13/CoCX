@@ -114,7 +114,7 @@ public class SpiderMorphMob extends Monster
 			this.tallness = rand(8) + 70;
 			this.hips.type = Hips.RATING_AMPLE + 2;
 			this.butt.type = Butt.RATING_LARGE;
-			this.skinTone = "red";
+			this.bodyColor = "red";
 			this.hairColor = "black";
 			this.hairLength = 15;
 			initStrTouSpeInte(100, 80, 99, 99);
@@ -128,7 +128,6 @@ public class SpiderMorphMob extends Monster
 			this.bonusHP = 1200;
 			this.bonusLust = 93;
 			this.lustVuln = .2;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 23;
 			this.gems = rand(50)+100;
 			this.special1 = SceneLib.combat.packAttack;

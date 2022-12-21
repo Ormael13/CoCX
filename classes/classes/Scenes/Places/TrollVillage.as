@@ -124,7 +124,7 @@ public class TrollVillage extends BaseContent implements SaveableState{
                     "\n" +
                     "Suul raises an eyebrow as he turns his attention toward you again.\n" +
                     "\n" +
-                    "\"Hmm, never thought you’d want to… you know… after Yenza… Nevermind, you may enter.\"\n");
+                    "\"Hmm, never thought you’d want to… you know… after Yenza… Never mind, you may enter.\"\n");
             addButton(0, "Enter Village",EnterTheVillage,true);
         }
         else{
@@ -147,6 +147,7 @@ public class TrollVillage extends BaseContent implements SaveableState{
 
     public function EnterTheVillage(firsttime:Boolean = false):void{
         clearOutput();
+        menu();
         ZenjiFollowing = (flags[kFLAGS.PLAYER_COMPANION_1] == "Zenji");
         if (firsttime){
             outputText("You emerge at the troll village, the guard gives you a stern look but doesn’t obstruct you as you enter.\n");
@@ -173,13 +174,13 @@ public class TrollVillage extends BaseContent implements SaveableState{
             if (YenzaUnlocked > 0) outputText("You remember where Yenza’s hut is.\n");
             if (KaljiUnlocked) outputText("You can meet Kal’ji at his personal hut.\n");
             if (ZenjiVillageStage == 0) ZenjiVillageStage = 0.5;
-            var menuItems:Array = [];
-            menuItems.push("Dining Hall", SceneLib.trollVillage.diningHalls.GrabABite2Eat, "Catch a bite to eat.");
-            menuItems.push("Elder's Hut", SceneLib.trollVillage.elderstore.ElderShops, "Look for the elder of the village.");
-            menuItems.push((JabalaUnlocked && !ZenjiBerated)?"Jabala's Hut":"???", ((JabalaUnlocked && !ZenjiBerated)?SceneLib.trollVillage.jabala.JabalaHome:false), [(ZenjiVillageStage < 1)?"Look for the nice couple":"Look for Zenji's Parents", "You don't want to disturb the nice couple."]);
-            menuItems.push((YenzaUnlocked > 0)?"Yenza's Hut":"???", ((YenzaUnlocked > 0)?SceneLib.trollVillage.yenza.YenzaHome:false), ["Look for Yenza","You don't know who lives there."]);
-            menuItems.push((KaljiUnlocked == 5)?"Kalji's Hut":"???", ((KaljiUnlocked == 5)?SceneLib.trollVillage.kalji.KaljiHome:false), ["",""]);
-            menuGen(menuItems,0, camp.returnToCampUseOneHour);
+            var zenjiPreCheck:String = (ZenjiVillageStage < 1)?"Look for the nice couple":"Look for Zenji's Parents";
+            addButton(0,"Dining Hall", SceneLib.trollVillage.diningHalls.GrabABite2Eat).hint("Catch a bite to eat.");
+            addButton(1,"Elder's Hut", SceneLib.trollVillage.elderstore.ElderShops).hint("Look for the elder of the village.");
+            addButton(2,(JabalaUnlocked && !ZenjiBerated)?"Jabala's Hut":"???", SceneLib.trollVillage.jabala.JabalaHome).hint(zenjiPreCheck).disableIf((!JabalaUnlocked && ZenjiBerated),  "You don't want to disturb the nice couple.");
+            addButton(3,(YenzaUnlocked > 0)?"Yenza's Hut":"???", SceneLib.trollVillage.yenza.YenzaHome).hint("Look for Yenza").disableIf((YenzaUnlocked == 0),"You don't know who lives there.");
+            addButton(4,(KaljiUnlocked == 5)?"Kalji's Hut":"???", SceneLib.trollVillage.kalji.KaljiHome).disableIf(KaljiUnlocked != 5);
+            addButton(14, "Return", camp.returnToCampUseOneHour);
         }
     }
     }

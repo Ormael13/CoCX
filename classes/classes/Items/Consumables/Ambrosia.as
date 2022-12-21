@@ -3,7 +3,7 @@ package classes.Items.Consumables
     import classes.CoC;
     import classes.Items.Consumable;
     import classes.Player;
-    import classes.StatusEffects;
+    import classes.Scenes.SceneLib;
     import classes.internals.Utils;
 
     /**
@@ -17,7 +17,7 @@ package classes.Items.Consumables
         }
 
         override public function canUse():Boolean {
-            if (CoC.instance.player.statusEffectv1(StatusEffects.Exgartuan) == 1) { //Exgartuan doesn't like the pure honey products
+            if (SceneLib.exgartuan.dickPresent()) { //Exgartuan doesn't like the pure honey products
                 outputText("You uncork the bottle only to hear Exgartuan suddenly speak up.  <i>\"Hey kid, this beautiful cock here doesn’t need any of that special bee shit.  Cork that bottle up right now or I’m going to make it so that you can’t drink anything but me.\"</i>  You give an exasperated sigh and put the cork back in the bottle.");
 				return false;
 			}
@@ -64,7 +64,7 @@ package classes.Items.Consumables
             //Libido Reduction
 			if (player.cor > 0 && changes < changeLimit && Utils.rand(1.5) == 0 && player.lib > 40) {
 				outputText(" and settling your overcharged sex-drive a bit.");
-				dynStats("lus", -20);
+				dynStats("lus", -20, "scale", false);
 				player.addCurse("lib", 3, 1);
 				changes++;
 			}

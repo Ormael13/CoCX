@@ -2,6 +2,7 @@ package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
 import classes.CockTypesEnum;
+import classes.GeneticMemories.RaceMem;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
@@ -11,9 +12,33 @@ import classes.VaginaClass;
 public class RaijuRace extends Race {
 	public static const RaijuEyeColors:/*String*/Array = ["blue","green", "turquoise","light green"];
 	public static const RaijuHairColors:/*String*/Array = ["purple", "light blue", "yellow", "white", "lilac", "green", "stormy blue"];
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Raiju",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Glow",
+        /*Ears*/		"Raiju",
+        /*Eyes*/		"Raiju",
+        /*Face*/		"Weasel",
+        /*Gills*/		"None",
+        /*Hair*/		"Raiju",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Raiju",
+        /*RearBody*/	"Raiju",
+        /*Skin*/		"Raiju",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Glow",
+        /*Tail*/		"Raiju",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Thunder",
+        /*Penis*/		"Raiju",
+        /*Vagina*/		"Raiju",
+        /*Perks*/		"Human"];
 	
 	public function RaijuRace(id:int) {
-		super("Raiju", id);
+		super("Raiju", id, RaceBody);
 	}
 	
 	public override function setup():void {
@@ -25,11 +50,11 @@ public class RaijuRace extends Race {
 				.armType(ANY(Arms.RAIJU,Arms.RAIJU_PAWS), +1)
 				.legType(LowerBody.RAIJU, +1)
 				.tailType(Tail.RAIJU, +1)
-				.wingType(Wings.THUNDEROUS_AURA, +1)
+				.wingType(Wings.THUNDEROUS_AURA, +4)
 				.rearType(RearBody.RAIJU_MANE, +1)
 				.skinBasePattern(Skin.PATTERN_LIGHTNING_SHAPED_TATTOO,+1)
 				.hairType(Hair.STORM, +1)
-				.hairColor(ANY(RaijuHairColors), +1)
+				.hairColor1(ANY(RaijuHairColors), +1)
 				.customRequirement("","glowing nipples or asshole",
 						function (body:BodyData):Boolean {
 							return body.player.hasStatusEffect(StatusEffects.GlowingNipples) || body.player.hasStatusEffect(StatusEffects.GlowingAsshole);

@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Items.Weapons 
+package classes.Items.Weapons
 {
 	import classes.Items.Weapon;
 	import classes.Player;
@@ -21,12 +21,12 @@ package classes.Items.Weapons
 			if (game.player.str >= 250) boost += 24;
 			if (game.player.str >= 200) boost += 16;
 			if (game.player.str >= 150) boost += 8;
-			return (4 + boost); 
+			return (4 + boost);
 		}
 		
-		override public function canUse():Boolean {
-			if (game.player.hasPerk(PerkLib.GigantGrip)) return super.canUse();
-			outputText("You aren't skilled in handling massive weapons, even when using both hands to use this sword.  ");
+		override public function canEquip(doOutput:Boolean):Boolean {
+			if (game.player.hasPerk(PerkLib.GigantGrip)) return super.canEquip(doOutput);
+			if (doOutput) outputText("You aren't skilled in handling massive weapons, even when using both hands to use this sword.  ");
 			return false;
 		}
 	}

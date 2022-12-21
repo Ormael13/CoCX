@@ -36,23 +36,21 @@ package classes.Scenes.Camp
 			this.a = "the ";
 			this.short = "F class Heaven Tribulation";
 			this.imageName = "F class Heaven Tribulation";
-			this.long = "You're currently facing the F class Heavenly Tribulation: A gathering of jet black clouds that sends down a wrathful storm to test any soul cultivator dreaming to break to Soul King stage.";
+			this.long = "You're currently facing the F class Heavenly Tribulation: A gathering of jet black clouds that sends down a wrathful storm to test any soul cultivator dreaming to break to Soul Overlord stage.";
 			this.plural = false;
-			initStrTouSpeInte(10, 10, 10, 10);
+			initStrTouSpeInte(10, 450, 10, 10);
 			initWisLibSensCor(10, 10, 10, 50);
 			this.lustVuln = 0;
 			this.tallness = 144;
 			this.createBreastRow(0, 1);
 			initGenderless();
 			this.drop = NO_DROP;
-			this.level = 60;
-			this.bonusHP = 20;
-			this.bonusLust = 30;
+			this.level = 78;
+			this.bonusHP = 9000;
+			this.bonusLust = 98;
 			this.createStatusEffect(StatusEffects.Flying, 14, 0, 0, 0);
 			this.createStatusEffect(StatusEffects.GenericRunDisabled, 0, 0, 0, 0);
 			checkMonster();
 		}
-		
 	}
-
 }

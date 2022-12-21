@@ -1,4 +1,4 @@
-package classes.Items.HeadJewelries 
+package classes.Items.HeadJewelries
 {
 	import classes.Items.HeadJewelry;
 	
@@ -9,8 +9,8 @@ package classes.Items.HeadJewelries
 			super("noheadjewel", "noheadjewel", "nothing", "nothing", 0, 0, 0, "no jewelry", "headacc");
 		}
 		
-		override public function playerRemove():HeadJewelry {
-			return null; //There is nothing!
+		override public function get isNothing():Boolean {
+			return true;
 		}
 	}
 }

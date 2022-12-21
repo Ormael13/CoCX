@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.Areas.Forest 
+package classes.Scenes.Areas.Forest
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -83,28 +83,28 @@ public class WoodElvesHuntingParty extends Monster
 		{
 			outputText("The elves aren't just fighting, each and every movement of these graceful warriors is like a well refined pole dance giving you a playful glimpse of their privates. Through the motion of their clothes they manage to both entice your lust and vex your effort at fighting, making a complete sexy show of their combat performance. ");
 			outputText("While you're distracted, out of nowhere one closes the gap forcing you to block her strike. Using your confusion as an opportunity she crosses the distance between your weapon in a flash and delivers a surprise kiss before leaping back out of striking range.\n\n");
-			outputText("\"<i>Aw why all the violence when I could be having so much fun right now? Why don't you drop your weapon already so we can get to the nice and cuddly part?~♥</i>\"\n\n");
+			outputText("\"<i>Aw why all the violence when we could be having so much fun right now? Why don't you drop your weapon already so we can get to the nice and cuddly part?~♥</i>\"\n\n");
 			outputText("The elves giggle at this suggestion which only adds to both the humiliation and your arousal.");
-			player.dynStats("lus", 40 + rand(20));
+			player.takeLustDamage(40 + rand(20), true);
 		}
 		
 		public function Disarm():void
 		{
 			outputText("A random bow shot hits your weapon's hand forcing you to drop it. <b>You are disarmed from your ");
-			if (player.weapon != WeaponLib.FISTS) {
+			if (player.weapon.canUnequip(false)) {
 				outputText("melee weapon!</b>");
 				if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2) {
 					outputText(" \"<i>Woah who are you blond bimbos to dare remove <b>ME</b>?</i>\" <b>You Aether Twin melee weapon returned to your hand!</b>");
 				}
 				else {
 					flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = player.weapon.id;
-					player.setWeapon(WeaponLib.FISTS);
+					player.unequipWeapon(false);
 				}
 			}
 			else {
 				outputText("range weapon!</b>");
 				flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] = player.weaponRange.id;
-				player.setWeaponRange(WeaponRangeLib.NOTHING);
+				player.unequipWeaponRange(false);
 			}
 		}
 		public function pickUpMelee():void
@@ -136,14 +136,14 @@ public class WoodElvesHuntingParty extends Monster
 				else WoodElfsGroupAttack();
 			}
 			if (choice == 1) {
-				if (player.weapon == WeaponLib.FISTS && player.weaponRange == WeaponRangeLib.NOTHING) WoodElfsGroupAttack();
-				else Disarm();
+				if (player.weapon.canUnequip(false) || player.weaponRange.canUnequip(false)) Disarm();
+				else WoodElfsGroupAttack();
 			}
 			if (choice == 2) WoodElfsGroupAttack();
 			if (choice == 3) GroupTease();
 		}
 		
-		public function WoodElvesHuntingParty() 
+		public function WoodElvesHuntingParty()
 		{
 			this.a = "the ";
 			this.short = "wood elf hunting party";
@@ -159,7 +159,7 @@ public class WoodElvesHuntingParty extends Monster
 			this.hips.type = Hips.RATING_AMPLE + 1;
 			this.butt.type = Butt.RATING_AVERAGE + 1;
 			this.lowerBody = LowerBody.ELF;
-			this.skinTone = "light";
+			this.bodyColor = "light";
 			this.hairColor = "blonde";
 			this.hairLength = 13;
 			initStrTouSpeInte(30, 30, 80, 30);
@@ -176,7 +176,6 @@ public class WoodElvesHuntingParty extends Monster
 			this.bonusLust = 125;
 			this.lustVuln = .7;
 			this.lust = 50;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 14;
 			this.gems = rand(10) + 10;
 			this.drop = new WeightedDrop().

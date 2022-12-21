@@ -8,12 +8,25 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.internals.Utils;
 
-public class DinahFollower extends NPCAwareContent
+public class DinahFollower extends NPCAwareContent// implements TimeAwareInterface
+{
+	public function DinahFollower()
 	{
-		
-		public function DinahFollower() 
-		{}
-		
+		//EventParser.timeAwareClassAdd(this);
+	}
+/*
+	//Implementation of TimeAwareInterface
+	public function timeChange():Boolean
+	{
+		if (model.time.hours > 3) flags[kFLAGS.DINAH_ATTACKED_TODAY] = 0;
+		return false;
+	}
+
+	public function timeChangeLarge():Boolean {
+		return false;
+	}
+	//End of Interface Implementation
+*/
 		private var _extra:Number = 0;
 		private var _roulette1:Number = 0;
 		private var _roulette2:Number = 0;
@@ -24,7 +37,7 @@ public class DinahFollower extends NPCAwareContent
 			if (flags[kFLAGS.DINAH_AFFECTION] > 100) flags[kFLAGS.DINAH_AFFECTION] = 100;
 			return flags[kFLAGS.DINAH_AFFECTION];
 		}
-		
+
 		public function DinahIntro1():void {
 			clearOutput();//non-camp intro
 			_extra = (3 + rand(5));
@@ -56,6 +69,9 @@ public class DinahFollower extends NPCAwareContent
 			outputText(" They stop for a moment as if recalling something and then they pull off their hood, revealing a head covered with fiery black and purple hair parted by cat ears, and  two pairs of small horns. Looking at you, with her literally burning eyes, she only utters one word, with a clearly female voice now, before disapearing, \"<i>Dinah.</i>\"");
 			outputText("\n\n(<b>Dinah has been added to the Followers menu!</b>)\n\n");
 			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_CHIMERA);
+			if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard",1,+1);
+			else player.createKeyItem("Radiant shard", 1,0,0,0);
+			outputText("\n\n<b>Before fully settling in your camp as if remembering something Dinah pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
 			flags[kFLAGS.DINAH_LVL_UP] = 1;
 			flags[kFLAGS.DINAH_DEFEATS_COUNTER] = 0;
 			flags[kFLAGS.DINAH_AFFECTION] = 0;
@@ -73,8 +89,9 @@ public class DinahFollower extends NPCAwareContent
 			if (rand(2) == 0) _roulette2 = rand(3);
 			if (rand(2) == 0) _roulette3 = rand(6);
 			outputText("\"<i>Oh, Great Lady Godiva, tell us your will!</i>\" With religious zeal, Dinah pulls a coin out of nowhere and throws it into the air. But before it can fall on the ground, it vanishes. ");
-			if (rand(4) > 0 && flags[kFLAGS.DINAH_AFFECTION] < 90) {
-				outputText("\"<i>The Coin Told Me To <b>Cuddle</b> You.</i>\" her smile becomes even wider. You've got a <i>very</i> bad feeling about this. It looks like there is no other choice. You've gotta to beat some sense into her before getting back to buisness.");
+			if (rand(4) > 0 && flags[kFLAGS.DINAH_AFFECTION] < 90) {// && !flags[kFLAGS.DINAH_ATTACKED_TODAY]
+				outputText("\"<i>The coin told me to <b>cuddle</b> you.</i>\" her smile becomes even wider. You've got a <b>very</b> bad feeling about this. It looks like there is no other choice. You've gotta to beat some sense into her before getting back to buisness.");
+				//flags[kFLAGS.DINAH_ATTACKED_TODAY] = 1;
 				startCombat(new Dinah());
 			}
 			else {
@@ -92,12 +109,13 @@ public class DinahFollower extends NPCAwareContent
 			addButton(2, "Shop", DinahShopMainMenu);
 			if (atCamp) {
 				addButton(0, "Appearance", DinahAppearance);
-				addButton(1, "Spar", DinahSparring);
-				addButtonDisabled(3, "Talk", "NYI");
-				addButtonDisabled(4, "Sex", "NYI");
-				if (player.hasStatusEffect(StatusEffects.DinahGift)) addButtonDisabled(5, "Gift", "She not feel like she want...");
-				else addButton(5, "Gift", recieveGIFTfromDinah);
-				addButton(6, "Give Item", giveDinahItem);
+				addButton(1, "Spar", DinahSparring)
+					.disableIf(flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 2, "You need a good sparring ring for that.");
+				//addButtonDisabled(3, "Talk", "NYI");
+				//addButtonDisabled(4, "Sex", "NYI");
+				addButton(5, "Gift", recieveGIFTfromDinah)
+					.disableIf(player.hasStatusEffect(StatusEffects.DinahGift), "She doesn't have anything for you right now... Come back later!");
+				//addButton(6, "Give Item", giveDinahItem);
 				addButton(14, "Back", camp.campFollowers);
 			}
 			else {
@@ -112,6 +130,15 @@ public class DinahFollower extends NPCAwareContent
 			outputText("\n\nShe has " + dinahHips() + " and a " + dinahButt() + ". She has a pair of " + dinahTits() + " on her chest. They have "+dinahNippleSize()+"-inch nipples at their tips and must be at least " + Appearance.breastCup(flags[kFLAGS.DINAH_CUP_SIZE]) + "s.");
 			menu();//very long, flowing locks of - between shouled length and ass length - hair desc
 			addButton(14, "Back", DinahMainMenu);
+		}
+		
+		public function DinahWonSupriseAttack():void {
+			clearOutput();
+			cleanupAfterCombat(DinahMainMenu);
+		}
+		public function DinahLostSupriseAttack():void {
+			clearOutput();
+			cleanupAfterCombat(DinahMainMenu);
 		}
 		
 		public function DinahSparring():void {
@@ -182,7 +209,7 @@ public class DinahFollower extends NPCAwareContent
 			}
 			cleanupAfterCombat();
 		}
-		
+
 		public function DinahShopMainMenu():void {
 			clearOutput();
 			outputText("You begin to browse "+(flags[kFLAGS.DINAH_LVL_UP] > 0.5 ?"Dinah":"veiled merchant")+" shop inventory.");
@@ -197,14 +224,16 @@ public class DinahFollower extends NPCAwareContent
 			addButton(7, consumables.REDVIAL.shortName, buyItem3, 7).hint("Buy a vial of ominous red liquid.");
 			addButton(8, consumables.STRASCA.shortName, buyItem2, 8).hint("Buy a Strawberry shortcake.");
 			addButton(9, consumables.BCHCAKE.shortName, buyItem2, 9).hint("Buy a Big chocolate cake.");
-			if (player.headJewelry == headjewelries.HBHELM && player.armor == armors.HBARMOR) addButton(10, "HB M&U", buyHowlingBansheeMechAndUpgrades);
-			else addButtonDisabled(10, "???", "Offers only for those that are wearing HB Armor & HB Helmet.");
+			if (player.hasPerk(PerkLib.PrestigeJobNecromancer)) addButton(10, consumables.PODBONE.shortName, buyItem1, 10).hint("Buy a pack of demon bones.");
+			else addButtonDisabled(10, "???", "Offers only for Necromancers.");
+			if (player.headJewelry == headjewelries.HBHELM && player.armor == armors.HBARMOR) addButton(11, "HB M&U", buyHowlingBansheeMechAndUpgrades);
+			else addButtonDisabled(11, "???", "Offers only for those that are wearing HB Armor & HB Helmet.");
 			if (flags[kFLAGS.DINAH_LVL_UP] > 0.5) {
-				addButton(11, "Roulette", DinahShopMainMenu3).hint("You feelin' lucky champion?");
+				addButton(12, "Roulette", DinahShopMainMenu3).hint("You feelin' lucky champion?");
 				addButton(13, "BossTF's", DinahShopMainMenu2);
 			}
 			else {
-				addButtonDisabled(11, "Roulette", "Maybe if merchant would be more interested in you...");
+				addButtonDisabled(12, "Roulette", "Maybe if merchant would be more interested in you...");
 				addButtonDisabled(13, "Boss D.", "Maybe if merchant would be more interested in you...");
 			}
 			addButton(14, "Back", DinahMainMenu);
@@ -253,6 +282,7 @@ public class DinahFollower extends NPCAwareContent
 		private function buyItem1(item:Number = 0):void {
 			if (item == 0) catChimeraBuy1(consumables.AGILI_E);
 			if (item == 1) catChimeraBuy1(consumables.W_FRUIT);
+			if (item == 10) catChimeraBuy1(consumables.PODBONE);
 		}
 		private function buyItem2(item:Number = 0):void {
 			if (item == 2) catChimeraBuy2(consumables.WOFRUIT);
@@ -376,26 +406,26 @@ public class DinahFollower extends NPCAwareContent
 		
 		public function buyHowlingBansheeMechAndUpgrades():void {
 			menu();
-			if (player.hasStatusEffect(StatusEffects.BuyedHowlingBansheMech)) {/*
+			if (player.hasStatusEffect(StatusEffects.BuyedHowlingBansheMech)) {
 				if (player.hasKeyItem("HB Armor Plating") >= 0) {
-					if (player.keyItemvX("HB Armor Plating", 1) == 1) addButton(0, "Armor Plating v2", buyHowlingBansheeMechUpgrade, "Armor Plating v2", 2500).hint("Increase armor by 25.");
-					if (player.keyItemvX("HB Armor Plating", 1) == 2) addButton(0, "Armor Plating v3", buyHowlingBansheeMechUpgrade, "Armor Plating v3", 3500).hint("Increase armor by 35.");
-					if (player.keyItemvX("HB Armor Plating", 1) == 3) addButton(0, "Armor Plating v3", buyHowlingBansheeMechUpgrade, "Armor Plating v4", 4500).hint("Increase armor by 45.");
+					if (player.keyItemvX("HB Armor Plating", 1) == 1) addButton(0, "Armor Plating v2", buyHowlingBansheeMechUpgrade, "Armor Plating v2", 2500, 2).hint("Increase armor by 25.");
+					if (player.keyItemvX("HB Armor Plating", 1) == 2) addButton(0, "Armor Plating v3", buyHowlingBansheeMechUpgrade, "Armor Plating v3", 3500, 3).hint("Increase armor by 35.");
+					if (player.keyItemvX("HB Armor Plating", 1) == 3) addButton(0, "Armor Plating v3", buyHowlingBansheeMechUpgrade, "Armor Plating v4", 4500, 4).hint("Increase armor by 45.");
 					if (player.keyItemvX("HB Armor Plating", 1) == 4) addButtonDisabled(0, "Armor Plating v4", "Your HB Mech already have this upgrade.");
 				}
-				else addButton(0, "Armor Plating v1", buyHowlingBansheeMechUpgrade, "Armor Plating v1", 1500).hint("Increase armor by 15.");
+				else addButton(0, "Armor Plating v1", buyHowlingBansheeMechUpgrade, "Armor Plating v1", 1500, 1).hint("Increase armor by 15.");
 				if (player.hasKeyItem("HB Leather Insulation") >= 0) {
-					if (player.keyItemvX("HB Leather Insulation", 1) == 1) addButton(1, "Leather Insulation v2", buyHowlingBansheeMechUpgrade, "Leather Insulation v2", 2500).hint("Increase magic resistance by 25.");
-					if (player.keyItemvX("HB Leather Insulation", 1) == 2) addButton(1, "Leather Insulation v3", buyHowlingBansheeMechUpgrade, "Leather Insulation v3", 3500).hint("Increase magic resistance by 35.");
-					if (player.keyItemvX("HB Leather Insulation", 1) == 3) addButton(1, "Leather Insulation v4", buyHowlingBansheeMechUpgrade, "Leather Insulation v3", 4500).hint("Increase magic resistance by 45.");
+					if (player.keyItemvX("HB Leather Insulation", 1) == 1) addButton(1, "Leather Insulation v2", buyHowlingBansheeMechUpgrade, "Leather Insulation v2", 2500, 6).hint("Increase magic resistance by 25.");
+					if (player.keyItemvX("HB Leather Insulation", 1) == 2) addButton(1, "Leather Insulation v3", buyHowlingBansheeMechUpgrade, "Leather Insulation v3", 3500, 7).hint("Increase magic resistance by 35.");
+					if (player.keyItemvX("HB Leather Insulation", 1) == 3) addButton(1, "Leather Insulation v4", buyHowlingBansheeMechUpgrade, "Leather Insulation v3", 4500, 8).hint("Increase magic resistance by 45.");
 					if (player.keyItemvX("HB Leather Insulation", 1) == 4) addButtonDisabled(1, "Leather Insulation v4", "Your HB Mech already have this upgrade.");
 				}
-				else addButton(1, "Leather Insulation v1", buyHowlingBansheeMechUpgrade, "Leather Insulation v1", 1500).hint("Increase magic resistance by 15.");
+				else addButton(1, "Leather Insulation v1", buyHowlingBansheeMechUpgrade, "Leather Insulation v1", 1500, 5).hint("Increase magic resistance by 15.");
 				if (player.hasKeyItem("HB Agility") >= 0) {
 					if (player.keyItemvX("HB Agility", 1) == 1) addButtonDisabled(2, "Agility v2", "Your HB Mech already have this upgrade.");
-					else addButton(2, "Agility v2", buyHowlingBansheeMechUpgrade, "Agility v2", 1000).hint("Adding speed scaling similar to Quick Strike perk to melee mech attacks.");
+					else addButton(2, "Agility v2", buyHowlingBansheeMechUpgrade, "Agility v2", 1000, 10).hint("Adding speed scaling similar to Quick Strike perk to melee mech attacks.");
 				}
-				else addButton(2, "Agility v1", buyHowlingBansheeMechUpgrade, "Agility v1", 500).hint("Adding speed scaling similar to Speed Demon perk to melee mech attacks.");
+				else addButton(2, "Agility v1", buyHowlingBansheeMechUpgrade, "Agility v1", 500, 9).hint("Adding speed scaling similar to Speed Demon perk to melee mech attacks.");/*
 				if (player.hasKeyItem("HB Rapid Reload") >= 0) {
 					if (player.keyItemvX("HB Rapid Reload", 1) == 1) addButtonDisabled(3, "Rapid Reload v2", "Your HB Mech already have this upgrade.");
 					else addButton(3, "Rapid Reload v2", buyHowlingBansheeMechUpgrade, "Rapid Reload v2", 1500).hint("Adding speed scaling bonus to damage (half of normal bow dmg scaling based on speed) and increase base range atk by ~25%. +1 more range shoots per turn.");
@@ -406,18 +436,18 @@ public class DinahFollower extends NPCAwareContent
 					if (player.keyItemvX("HB Internal Systems", 1) == 2) addButtonDisabled(5, "Internal Systems v2", "Your HB Mech already have this upgrade.");
 					else addButton(5, "Internal Systems v2", buyHowlingBansheeMechUpgrade, "Internal Systems v2", 1500).hint("Decrease mech SF reserves drain by 20 pts and max SF capacity by 5,000 (when PC wear Ayo armor).");
 				}
-				else addButton(5, "Internal Systems v1", buyHowlingBansheeMechUpgrade, "Internal Systems v1", 750).hint("Decrease mech SF reserves drain by 10 pts and max SF capacity by 2,000 (when PC wear Ayo armor).");
+				else addButton(5, "Internal Systems v1", buyHowlingBansheeMechUpgrade, "Internal Systems v1", 750).hint("Decrease mech SF reserves drain by 10 pts and max SF capacity by 2,000 (when PC wear Ayo armor).");*/
 				if (player.hasKeyItem("HB Dragon's Breath Flamer") >= 0) {
-					if (player.keyItemvX("Dragon's Breath Flamer", 1) == 1) addButtonDisabled(6, "DB Flamer v2", "Your HB Mech already have this upgrade.");
-					else addButton(6, "DB Flamer v2", buyHowlingBansheeMechUpgrade, "Dragon's Breath Flamer v2", 3000).hint("Instal second Dragon's Breath Flamer weapon - adds second fire attack when using this special and cost of use increase twicefold.");
+					if (player.keyItemvX("HB Dragon's Breath Flamer", 1) == 2) addButtonDisabled(6, "DB Flamer v2", "Your HB Mech already have this upgrade.");
+					else addButton(6, "DB Flamer v2", buyHowlingBansheeMechUpgrade, "Dragon's Breath Flamer v2", 3000, 15).hint("Instal second Dragon's Breath Flamer weapon - adds second fire attack when using this special and cost of use increase twicefold.");
 				}
-				else addButton(6, "DB Flamer v1", buyHowlingBansheeMechUpgrade, "Dragon's Breath Flamer v1", 1500).hint("Add Dragon's Breath Flamer weapon - Allow to enter use special dealing fire damage.");
+				else addButton(6, "DB Flamer v1", buyHowlingBansheeMechUpgrade, "Dragon's Breath Flamer v1", 1500, 14).hint("Add Dragon's Breath Flamer weapon - Allow to enter use special dealing fire damage.");
 				if (player.hasKeyItem("HB Scatter Laser") >= 0) {
-					if (player.keyItemvX("HB Scatter Laser", 1) == 1) addButton(7, "Scatter Laser v2", buyHowlingBansheeMechUpgrade, "Scatter Laser v2", 2500).hint("Adds 2 more units that allow either double shot at lone targets or using all three against groups.");
-					if (player.keyItemvX("HB Scatter Laser", 1) == 2) addButton(7, "Scatter Laser v3", buyHowlingBansheeMechUpgrade, "Scatter Laser v3", 3500).hint("Adding 3 more units that allow either four shots at lone targets or using all six against groups.");
+					if (player.keyItemvX("HB Scatter Laser", 1) == 1) addButton(7, "Scatter Laser v2", buyHowlingBansheeMechUpgrade, "Scatter Laser v2", 2500, 12).hint("Adds 2 more units that allow either double shot at lone targets or using all three against groups.");
+					if (player.keyItemvX("HB Scatter Laser", 1) == 2) addButton(7, "Scatter Laser v3", buyHowlingBansheeMechUpgrade, "Scatter Laser v3", 3500, 13).hint("Adding 3 more units that allow either four shots at lone targets or using all six against groups.");
 					if (player.keyItemvX("HB Scatter Laser", 1) == 3) addButtonDisabled(7, "Scatter Laser v3", "Your HB Mech already have this upgrade.");
 				}
-				else addButton(7, "Scatter Laser v1", buyHowlingBansheeMechUpgrade, "Scatter Laser v1", 1500).hint("Add Scatter Laser weapon - Allow to enter use special dealing lightning damage.");
+				else addButton(7, "Scatter Laser v1", buyHowlingBansheeMechUpgrade, "Scatter Laser v1", 1500, 11).hint("Add Scatter Laser weapon - Allow to enter use special dealing lightning damage.");/*
 				//8
 				//9 - for prev button?
 				if (player.hasKeyItem("HB Stealth System") >= 0) {
@@ -459,7 +489,7 @@ public class DinahFollower extends NPCAwareContent
 			statScreenRefresh();
 			inventory.takeItem(vehicles.HB_MECH, buyHowlingBansheeMechAndUpgrades);
 		}
-		public function buyHowlingBansheeMechUpgrade(upgrade:String, cost:Number):void {
+		public function buyHowlingBansheeMechUpgrade(upgrade:String, cost:Number, type: Number):void {
 			clearOutput();
 			outputText("You point out " + upgrade + " upgrade options.\n\n");
 			outputText("\"<i>Oh this one? It costs " + (cost * _extra) + " gems to add to the mech. And bit of time for instaling it. Do you still want to proceed?</i>\"");
@@ -468,11 +498,52 @@ public class DinahFollower extends NPCAwareContent
 				doNext(buyHowlingBansheeMechAndUpgrades);
 				return;
 			}
-			doYesNo(Utils.curry(buyHowlingBansheeMechUpgrade1,upgrade,cost), buyHowlingBansheeMechAndUpgrades);
+			doYesNo(Utils.curry(buyHowlingBansheeMechUpgrade1,upgrade,cost,type), buyHowlingBansheeMechAndUpgrades);
 		}
-		public function buyHowlingBansheeMechUpgrade1(upgrade:String, cost:Number):void {
+		public function buyHowlingBansheeMechUpgrade1(upgrade:String, cost:Number, type: Number):void {
 			clearOutput();
-			outputText("Fancy Placeholder text how mini blackhole suck in mech and returns it upgraded ^^\n\n");
+			outputText("Dinah gives you a manic little grin, hopping onto your Howling Banshee mech’s foot. She gives you a mock-salute, and you can see her and your mech…rippling, like water disturbed by a thrown rock.\n\n");
+			outputText("\"<i>We’ll be back soon!</i>\" The world around your mech seems to darken, the ripples intensifying. You close your eyes, slightly nauseated by the effect, and when you open your eyes, both Dinah and your mech have seemingly vanished into thin air.\n\n");
+			outputText("\n\n\n\n<b>An hour later...</b>\n\n");
+			if (type == 30) {
+				outputText("\"<i>We’ll be back soon!</i>\"\n\n");
+				outputText("\"<i>We’ll be back soon!</i>\"\n\n");
+			}
+			else {
+				outputText("As you come back into camp, You see that odd, rippling effect. Dinah steps out of thin air, and she gives you an impish grin.\n\n");
+				outputText("\"<i>Good News for you!</i>\" She declares happily, throwing a hand towards her spot in camp. \"<i>It’s done!</i>\" You watch your mech ripple into existence, and the changes are apparent. You rub your hands in excitement. \"<i>Yeah, those little guys do some great work.</i>\"\n\n");
+				switch (type){
+						case 1:
+						case 2:
+						case 3:
+						case 4:
+							outputText("Your mech’s armour is visibly thicker, and you can tell that it’ll be harder to damage than before. The metal shines. \"<i>Yeah, apparently they designed their armour to survive deep pressure in the mines, but this stuff works just as well as armour plate.</i>\"\n\n");
+							break;
+						case 5:
+						case 6:
+						case 7:
+						case 8:
+							outputText("You enter your mech, and the interior is lined with leather, oiled and shimmering. Dinah grins. \"<i>This stuff is great at fizzling magic. This should help protect ya from the worst of magical attacks.</i>\"\n\n");
+							break;
+						case 9:
+						case 10:
+							outputText("Your mech’s limbs are slightly smaller, and Dinah follows your gaze. \"<i>Yep, improved alloy and optimised limb hydraulics. Smaller, but every bit as deadly as before. This mech is now a leaner, meaner killing machine. Have fun!</i>\"\n\n");
+							break;
+						case 11:
+						case 12:
+						case 13:
+							outputText("As you watch, a new hatch in your mech’s chest opens, and a glowing red tube opens up. Dinah squeals, hopping up and down. \"<i>Oh, I can hardly wait to see this baby in action! Kill some imps! No, some Demons! NO! Some GIANTS!</i>\" She pumps her fists. \"<i>I love lasers!</i>\"\n\n");
+							break;
+						case 14:
+						case 15:
+							outputText("On your mech’s arm is a gleaming new weapon. A tank mounted just at the shoulder, and a metal tube leading down the arm to a nozzle at the mech’s “hand”.\n\n");
+							outputText("\"<i>The Dragon’s Breath. They call it the ‘heavy flamer’. A weapon that engulfs enemies in burning fuel.</i>\" Dinah gives a dainty sigh. \"<i>I hope you like the smell of imp charcoal.</i>\"\n\n");
+							break;
+						case 16:
+							outputText("\"<i>We’ll be back soon!</i>\"\n\n");
+							break;
+					}
+			}
 			player.gems -= cost * _extra;
 			statScreenRefresh();
 			if (upgrade == "Armor Plating v1") player.createKeyItem("HB Armor Plating",1,0,0,0);
@@ -541,14 +612,14 @@ public class DinahFollower extends NPCAwareContent
 			outputText("You offer Dinah a bottle of purified succubus milk and tell her that you'd like her to make her bust bigger.");
 			if (flags[kFLAGS.DINAH_CUP_SIZE] < 28) {
 				outputText("\n\n\"<i>Alright, if you say so.</i>\"  Dinah lifts the bottle to her mouth, and drinks the substance down.  She then drops the empty bottle, allowing it to smash on the ground, clutching her breasts and moaning ecstatically as they visibly swell, her clothes growing tighter as they do. When they finish, she squeezes them with glee. \"<i>Mmm... That feels nice. Did you want something else?</i>\"\n\n");
-				dynStats("lus", 10);
+				dynStats("lus", 10, "scale", false);
 				player.consumeItem(consumables.P_S_MLK);
 				flags[kFLAGS.DINAH_CUP_SIZE]++;
 			}
 			else {
 				outputText("She looks thoughtful for a moment, then shakes her head reluctantly. \"<i>I'm sorry, but I think I've got big enough breasts as it is.</i>\" She then smirks, and playfully jiggles her abundant cleavage. \"<i>Don't you agree?</i>\" she teases.\n\n");
 				outputText("Swallowing hard, you have to agree, which makes Dinah laugh.");
-				dynStats("lus", 5);
+				dynStats("lus", 5, "scale", false);
 			}
 			doNext(giveDinahItem);
 		}
@@ -558,7 +629,7 @@ public class DinahFollower extends NPCAwareContent
 			outputText("You hold out a brown egg, telling her that it will make her butt grow.\n\n");
 			if (flags[kFLAGS.DINAH_ASS_HIPS_SIZE] < 35) {
 				outputText("\"<i>So, you want me to have a little more junk in the trunk, huh?</i>\" She giggles. \"<i>Well, I guess a little padding down there wouldn't hurt...</i>\" She takes the egg from you, her teeth effortlessly biting off the top, whereupon she sucks down the contents in a practiced gulp. Crushing the shell in her hand, her hands then press themselves to her butt as she spins around so that it faces you, trying to look over her shoulder as it visibly swells, straining her pants. She pats it a few times, then shakes her head. \"<i>I'm going to have to go and let these pants out a little now.</i>\" She apologizes, and then walks away.\n\n");
-				dynStats("lus", 10);
+				dynStats("lus", 10, "scale", false);
 				if (player.hasItem(consumables.BROWNEG)) {
 					player.consumeItem(consumables.BROWNEG);
 					flags[kFLAGS.DINAH_ASS_HIPS_SIZE] += 1+rand(2);
@@ -578,7 +649,7 @@ public class DinahFollower extends NPCAwareContent
 			outputText("You hold out a purple egg, telling her that it will make her hips grow.\n\n");
 			if (flags[kFLAGS.DINAH_HIPS_ASS_SIZE] < 20) {
 				outputText("She looks at it thoughtfully. \"<i>Wider hips...? Well, if you really want, I guess I can try it.</i>\" She takes the egg from you, her teeth effortlessly biting off the top, whereupon she sucks down the contents in a practiced gulp. Crushing the shell in her hand, she almost loses her balance as her hips suddenly jut wider, the growth happening much faster than she expected. \"<i>I'm going to have to get used to walking like this, now.</i>\" She mutters, and then she awkwardly walks away.\n\n");
-				dynStats("lus", 10);
+				dynStats("lus", 10, "scale", false);
 				if (player.hasItem(consumables.PURPLEG)) {
 					player.consumeItem(consumables.PURPLEG);
 					flags[kFLAGS.DINAH_HIPS_ASS_SIZE] += 1+rand(2);
@@ -599,7 +670,7 @@ public class DinahFollower extends NPCAwareContent
 			if (flags[kFLAGS.DINAH_CUP_SIZE] > 1) addButton(0, "Breasts", dinahReducto, 0);
 			if (flags[kFLAGS.DINAH_HIPS_ASS_SIZE] > 6) addButton(2, "Hips", dinahReducto, 1);
 			if (flags[kFLAGS.DINAH_ASS_HIPS_SIZE] > 6) addButton(3, "Butt", dinahReducto, 2);
-			addButton(14, "Nevermind", giveDinahItem);
+			addButton(14, "Never mind", giveDinahItem);
 		}
 		private function dinahReducto(part:int):void {
 			player.consumeItem(consumables.REDUCTO);

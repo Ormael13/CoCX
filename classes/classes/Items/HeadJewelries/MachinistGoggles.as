@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Items.HeadJewelries 
+package classes.Items.HeadJewelries
 {
 	import classes.Items.HeadJewelry;
 	import classes.PerkLib;
@@ -10,31 +10,21 @@ package classes.Items.HeadJewelries
 	public class MachinistGoggles extends HeadJewelry
 	{
 		
-		public function MachinistGoggles() 
+		public function MachinistGoggles()
 		{
-			super("MachGog", "MachinistGoggles", "Machinist Goggles", "a Machinist Goggles", 0, 0, 400, "A pair of ordinary machinist goggles. One of the basic tools of anyone working with engines. Helps prevent blindness.","Helmet");
+			super("MachGog", "MachinistGoggles", "Machinist Goggles", "a Machinist Goggles", 0, 0, 400, "A pair of ordinary machinist goggles. One of the basic tools of anyone working with engines. Helps prevent blindness.",HJT_HELMET);
+			withPerk(PerkLib.BlindImmunity, 0, 0, 0, 0)
 		}
 		
-		override public function canUse():Boolean {
-			if (!super.canUse()) {
+		override public function canEquip(doOutput:Boolean):Boolean {
+			if (!super.canEquip(doOutput)) {
 				return false;
 			}
-			if (game.player.tallness > 48) { //Taller than 4 ft
-				outputText("You try to put your goggles on but the things clearly weren't designed for someone your size. Frustrated, you put them back in the bag.\n\n");
+			if (game.player.basetallness > 48) { //Taller than 4 ft
+				if (doOutput) outputText("You try to put your goggles on but the things clearly weren't designed for someone your size. Frustrated, you put them back in the bag.\n\n");
 				return false;
 			}
 			return true;
-		}
-		
-		override public function playerEquip():HeadJewelry {
-			while (game.player.hasPerk(PerkLib.BlindImmunity)) game.player.removePerk(PerkLib.BlindImmunity);
-			game.player.createPerk(PerkLib.BlindImmunity,0,0,0,0);
-			return super.playerEquip();
-		}
-		
-		override public function playerRemove():HeadJewelry {
-			while (game.player.hasPerk(PerkLib.BlindImmunity)) game.player.removePerk(PerkLib.BlindImmunity);
-			return super.playerRemove();
 		}
 		
 	}

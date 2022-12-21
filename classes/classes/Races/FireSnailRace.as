@@ -7,9 +7,33 @@ import classes.Race;
 public class FireSnailRace extends Race {
 	public static const FireSnailEyeColors:/*String*/Array = ["red", "orange","yellow"];
 	public static const FireSnailSkinColors:/*String*/Array = ["red", "orange"];
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Elf",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Elven",
+        /*Eyes*/		"Elf",
+        /*Face*/		"Elf",
+        /*Gills*/		"None",
+        /*Hair*/		"Elf",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Elf",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Elf",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Elf",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Elf"];
 	
 	public function FireSnailRace(id:int) {
-		super("Fire Snail", id);
+		super("Fire Snail", id, []);//RaceBody);
 	}
 	
 	public override function setup():void {
@@ -17,7 +41,7 @@ public class FireSnailRace extends Race {
 				.antennaeType(Antennae.FIRE_SNAIL, +1)
 				.hairType(Hair.BURNING, +1)
 				.eyeColor(ANY(FireSnailEyeColors), +1)
-				.skinBaseColor(ANY(FireSnailSkinColors), +1)
+				.skinColor1(ANY(FireSnailSkinColors), +1)
 				.plainSkinOfAdj("sticky glistering", +1)
 				.customRequirement("","snail shell and no wings",
 						function (body:BodyData):Boolean {

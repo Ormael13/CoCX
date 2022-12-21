@@ -17,7 +17,7 @@ public class PyreBurstSpell extends AbstractWhiteSpell {
 				: "Teach your foes a lesson with the strength of a firestorm.",
 			TARGET_ENEMY,
 			TIMING_INSTANT,
-			[TAG_DAMAGING, TAG_AOE, TAG_FIRE]
+			[TAG_DAMAGING, TAG_AOE, TAG_FIRE, TAG_TIER1]
 		);
 		baseManaCost = 200;
 		baseWrathCost = ex ? 100 : 0;

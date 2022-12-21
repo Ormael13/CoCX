@@ -17,7 +17,7 @@ public class DuskWaveSpell extends AbstractBlackSpell {
 				: "This spell draws your own lust and wrath to condense part of the the ambivalent darkness into a wave to attack your enemies.",
 			TARGET_ENEMY,
 			TIMING_INSTANT,
-			[TAG_DAMAGING, TAG_DARKNESS, TAG_AOE]
+			[TAG_DAMAGING, TAG_DARKNESS, TAG_AOE, TAG_TIER1]
 		);
 		baseManaCost = 200;
 		if (ex) baseWrathCost = 100;
@@ -45,7 +45,7 @@ public class DuskWaveSpell extends AbstractBlackSpell {
 		var baseDamage:Number = 2 * scalingBonusIntelligence(randomize);
 		if (player.weaponRangeName == "Artemis") baseDamage *= 1.5;
 		if (ex) baseDamage *= 2;
-		return adjustSpellDamage(baseDamage, DamageType.ICE, CAT_SPELL_BLACK, monster, true, casting);
+		return adjustSpellDamage(baseDamage, DamageType.DARKNESS, CAT_SPELL_BLACK, monster, true, casting);
 	}
 	
 	override protected function doSpellEffect(display:Boolean = true):void {

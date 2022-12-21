@@ -6,7 +6,6 @@ package classes.Scenes.NPCs
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-import classes.display.SpriteDb;
 	
 	public class MitziFollower extends NPCAwareContent implements TimeAwareInterface
 	{
@@ -32,7 +31,6 @@ import classes.display.SpriteDb;
 		//End of Interface Implementation
 
 public function MitziCampMainMenu():void {
-	//spriteSelect(SpriteDb.s_electra);
 	clearOutput();
 	if (pregnancy.isPregnant && pregnancy.incubation == 0) {
 		MitziPoopsBabies();
@@ -72,7 +70,7 @@ public function MitziCampMainMenu2():void {
 			else if (flags[kFLAGS.PLAYER_COMPANION_1] == "Mitzi") addButton(5, "Assist me", mitziHenchmanOption).hint("Ask Mitzi to stay in camp.");
 			else addButtonDisabled(5, "Assist me", "You already have other henchman accompany you. Ask him/her to stay at camp before you talk with Mitzi about accompaning you.");
 		}
-		else addButtonDisabled(5, "Assist me", "She don't have enough daughters (6+) to accompany you.");
+		else addButtonDisabled(5, "Assist me", "She doesn't have enough daughters (6+) to accompany you.");
 	}
 	else addButtonDisabled(5, "Assist me", "You need to have at least Basic Leadership to form a team with Mitzi.");
 	addButton(4, "Sex", mitziSexMenu);
@@ -95,7 +93,7 @@ public function mitziHerself():void {
 	clearOutput();
 	outputText("What was she like before she became the incubus drider's cumdump. She hums to herself in thought.\n\n");
 	outputText("\"<i>To tell you the truth, I was pretty much like most goblins living in the forest. Constantly competing for territory and any studs that wandered by, of course. It isn't an easy life by far. A lot of wildlife and monsters that would see a lone goblin girl as a quick fuck and potential meal after.</i>\"\n\n");
-	outputText("Given her size and and struggling to survive out in the wilderness couldn't have been easy. Surely goblins can pull together and try to make it groups, right? She shakes her head.\n\n");
+	outputText("Given her size and struggling to survive out in the wilderness couldn't have been easy. Surely goblins can pull together and try to make it groups, right? She shakes her head.\n\n");
 	outputText("\"<i>Most goblins are in it for themselves really. They're constantly squabbling over who gets to fuck what or just worry about making more babies. To be fair, I was a bit guilty of that too, but it was for a good reason!</i>\"\n\n");
 	outputText("Well, from the goblins you've encountered, most of them were only after your seed to have more offspring. Is that pretty much their goal?\n\n");
 	outputText("\"<i>Well, for most, yes but some of us really have children to form our own tribes. As you said there are benefits in working together. What’s better than working with your own kids?</i>\"\n\n");
@@ -117,7 +115,7 @@ public function mitziCamp():void {
 	if (player.hasStatusEffect(StatusEffects.CampRathazul) || EvangelineFollower.EvangelineFollowerStage >= 1) outputText("\"<i>Gotta admit those alchemists really know their stuff. I wonder if they can help me with a few potions I wanted to whip up…</i>\"\n\n");
 	if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2) outputText("\"<i>You have a bear of a hunk over there. The way he works that hammer and anvil. Those rippling muscles… Mmm… He could be helpful indeed…</i>\"\n\n");
 	if (isabellaFollower()) {
-		outputText("\"<i>I don't really see cow girls too often but Isabella seems different somehow… Her milk's pretty tasty too. Maybe she'll let me have some more later.</i>\"\n\n");
+		outputText("\"<i>I don't really see cow-girls too often but Isabella seems different somehow… Her milk's pretty tasty too. Maybe she'll let me have some more later.</i>\"\n\n");
 		outputText("She giggles to herself.\n\n");
 	}
 	if (followerHel()) {
@@ -137,10 +135,10 @@ public function mitziCamp():void {
 		outputText("She looks over her shoulder to see Etna peeking out from behind a rock in a pouncing position. She has a smug cat like expression on her face, making Mitzi tense.\n\n");
 	}
 	if (flags[kFLAGS.ZENJI_PROGRESS] == 8 || flags[kFLAGS.ZENJI_PROGRESS] == 9) outputText("\"<i>Oh geez, I can’t remember the last time I saw a troll! Beefy all over, packed with muscle, just the way I like it… I just want him to help me with my needs…</i>\"\n\n");
-	if (flags[kFLAGS.ZENJI_PROGRESS] == 11) outputText("\"<i>Oh geez, I can’t remember the last time I saw a troll! Beefy all over, packed with muscle, just the way I like it… I just want him to help me with my needs… But he’s so hard to talk to.</i>\"\n\n");
+	if (ZenjiScenes.isLover()) outputText("\"<i>Oh geez, I can’t remember the last time I saw a troll! Beefy all over, packed with muscle, just the way I like it… I just want him to help me with my needs… But he’s so hard to talk to.</i>\"\n\n");
 	//Aenair
 	outputText("She nodded her head in approval then smiles up at you.\n\n");
-	outputText("\"<i>Your camp is definitely better than any place I've been. Pretty much like a well rounded community. I love it here, [name]!</i>\"\n\n");
+	outputText("\"<i>Your camp is definitely better than any place I've been. Pretty much like a well-rounded community. I love it here, [name]!</i>\"\n\n");
 	menu();
 	addButton(14, "Back", MitziCampMainMenu);
 }
@@ -179,27 +177,30 @@ public function mitziSexMenu():void {
 	clearOutput();
 	outputText("\"<i>Oh? Finally up for a little bit of fun [name]? I'm down for anything...</i>\"\n\n");
 	menu();
-	if (player.hasCock()) {
-		if (player.hasStatusEffect(StatusEffects.MitziPregnant)) addButtonDisabled(0, "Big Dick Sex", "You need to wait until Mitzi would give a birth.");
-		else if (player.biggestCockLength() < 20) addButtonDisabled(0, "Big Dick Sex", "You need 20+ inches cock for this.");
-		else addButton(0, "Big Dick Sex", mitziSexBigDickSex);
-		if (player.isBiped() && player.str >= 50 && player.tallness >= 60) addButton(1, "Jog Fuck", mitziSexJogFuck);
-		else addButtonDisabled(1, "Jog Fuck", "You must be bipedal, 5+ ft. tall and 50+ str for this.");
-		addButton(2, "Tit Job", mitziSexTitJob);
-		addButton(3, "Fuck Her", mitziSexFuckHer);
-	}
-	if (player.hasVagina()) addButton(3, "Eaten Out", mitziSexEatenOut);
+	addButton(0, "Tit Job", mitziSexTitJob)
+		.disableIf(!player.hasCock(), "Req. a cock.");
+	addButton(1, "Fuck Her", mitziSexFuckHer)
+		.disableIf(!player.hasCock(), "Req. a cock.");
+	addButton(2, "Jog Fuck", mitziSexJogFuck)
+		.disableIf(player.str < 50, "You're too weak to carry her.")
+		.disableIf(!player.isBiped() || player.tallness < 60, "You need to be biped and pretty tall to try that.")
+		.disableIf(!player.hasCock(), "Req. a cock.");
+	addButton(3, "Big Dick Sex", mitziSexBigDickSex)
+		.disableIf(!player.hasStatusEffect(StatusEffects.MitziPregnant), "You need to wait until Mitzi gives a birth.")
+		.disableIf(player.findCock(1, 20, -1, "length") < 0, "You need 20+ inches cock for this.");
+	addButton(4, "Eaten Out", mitziSexEatenOut)
+		.disableIf(!player.hasVagina(), "Req. a cock.");
 	addButton(14, "Back", MitziCampMainMenu);
 }
 public function mitziSexBigDickSex():void {
 	clearOutput();
 	outputText("You smirk then pick her up, carrying her to your "+(flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 ? "cabin":"tent")+". "+(player.isNaked() ? "You stand in front of her letting your [cock] hang free":"You begin to remove your [armor], revealing your [cock]")+". Mitzi eyes your large cock with an almost predatory gaze while licking her lips.\n\n");
-	outputText("\"<i>Mmm [name]... You know how much I love big fat cocks. The way they fill me up just right. The bigger the better I always say.</i>\"\n\n");
+	outputText("\"<i>Mmm [name]... You know how much I love big fat cocks. The way they fill me up just right. The bigger, the better I always say.</i>\"\n\n");
 	outputText("The goblin sheds her clothing, letting her giant tits bounce free from their confinement. She struts up to you then urges you to "+(flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 ? "lay back on the bed":"sit down")+" with your legs wide open. She lightly traces her fingers over your rapidly hardening erection. She coos, feeling it twitch from the barest of touches. With a smirk she wraps both her hands around your [cock]. She’s so small compared to it but she massages ");
 	outputText("your monstrous length with practiced ease, making you groan. The goblin leans in then gives the head of your cock a kiss, running her long tongue across the slit. Her tongue works along your length in tandem with her hands, drawing a moan from you. Your precum already begins to leak from your cumslit which Mitzi happily laps up. Just as you were about to let yourself completely indulge in the goblin's wonderful touches, she pulls away. ");
 	outputText("She then climbs on top of you. The goblin reaches back and grabs your dick then pulls it closer, rubbing the head of it against her deceivingly small wet slit and clit. She gives you a sultry look.\n\n");
 	outputText("\"<i>While most goblin girls can't handle anything this huge, I was specially made for this…</i>\"\n\n");
-	outputText("Mitzi lets out a long drawn out moan once she feels the crown of your [cock] starting to stretch out her cooter. You're taken aback, feeling her tight pussy easily mold around your monster length. You resist the urge to immediately blow your load within her warm depths as she steadily sinks, taking in inch after inch of you. Your amazed when her hips finally meets yours. The large bulge of your [cock] protrudes through her belly though she doesn't appear distressed. ");
+	outputText("Mitzi lets out a long-drawn-out moan once she feels the crown of your [cock] starting to stretch out her cooter. You're taken aback, feeling her tight pussy easily mold around your monster length. You resist the urge to immediately blow your load within her warm depths as she steadily sinks, taking in inch after inch of you. Your amazed when her hips finally meets yours. The large bulge of your [cock] protrudes through her belly though she doesn't appear distressed. ");
 	outputText("In fact, she appears more prideful than anything as she rubs the outline of it. Whatever magical enhancements she acquired gave her unprecedented levels of elasticity.\n\n");
 	outputText("\"<i>Now the fun can really begin…</i>\"\n\n");
 	outputText("She lifts herself up,practically climbing up your trunk-like dick before dropping back down. The feel of her wonderfully warm and slick walls wrapped around you has your head swimming. Everytime she moves up and down your length, it sends a pang of electricity through your loins. You unconsciously let out a moan each time your hips meet. She looks you in the eye with a lust filled gaze.\n\n");
@@ -228,10 +229,10 @@ public function mitziSexJogFuck():void {
 	outputText("You're more than happy to oblige. You break into a run, feeling her lithe curvy form bounce on your [cock], drawing out a cacophony of happy wails and moans from the goblin woman. Her purple nails dig into your skin as she hangs on, clenching and smashing her wobbly tits against you. You run hard, feeling her bounce and wriggle as her cunt and rapid breathing begins squeezing and milking you like never before. ");
 	outputText("You’re sure: if you could feel like this every time you took a jog, you’d be in great shape.\n\n\"<i>Ooh fuck [name], don't stop! I want you to fill me with your cum like this!</i>\"\n\n");
 	outputText("The familiar tightness of a coming orgasm grows in your groin, tightening as you near release. You pick the pace, full out sprinting, letting Mitzi bounce and jiggle as she clings to you, supported entirely by your [cock]. Your [balls] tighten, releasing the seed of your orgasm. The howl of a powerful orgasm fills your ears as your cumming sets the goblin woman off. One of her hands lets go, and starts rubbing her belly while she kisses and licks your belly-button. ");
-	outputText("Your enhanced body easily stuffs her full of cream. "+(player.hasStatusEffect(StatusEffects.MitziPregnant) ? "Though with her womb blocked off most of it washes back out":"Rounding her belly out slightly")+" and dripping down your [balls]. The orgasm is so potent that by the time you wind down, she looks heavily pregnant but her vice like grip prevents your cum from squirting out.\n\n");
+	outputText("Your enhanced body easily stuffs her full of cream. "+(player.hasStatusEffect(StatusEffects.MitziPregnant) ? "Though with her womb blocked off most of it washes back out":"Rounding her belly out slightly")+" and dripping down your [balls]. The orgasm is so potent that by the time you wind down, she looks heavily pregnant but her vice-like grip prevents your cum from squirting out.\n\n");
 	outputText("Eventually you grow tired and come to rest in a forest clearing with her. You slump against a tree with her leaning on your chest panting heavily. The combination of the brisk run and orgasm left you more than a little tired. Mitzi sits up, pulling you down into a tired kiss. You return it in kind. She pulls away looking more than a little flushed.\n\n");
 	outputText("\"<i>Now that was certainly a fun ride. We should definitely do this again! Perhaps everyday...</i>\"\n\n");
-	outputText("You wouldn't mind honestly. For now you could relax a bit before heading back. You let the goblin lay in your lap to rest for a while until you're both ready to head back to camp.\n\n");
+	outputText("You wouldn't mind honestly. For now, you could relax a bit before heading back. You let the goblin lay in your lap to rest for a while until you're both ready to head back to camp.\n\n");
 	mitziPreg();
 	player.sexReward("vaginalFluids","Dick");
 	doNext(camp.returnToCampUseOneHour);
@@ -260,7 +261,7 @@ public function mitziSexTitJob():void {
 	outputText("Dribbles of femcum stream down her legs. The mere feeling of hot seed on her skin pushes her into an orgasm.\n\nOnce you calm down, you pull away from Mitzi. Most of her face and breast are coated in a thick layer of cum. She scoops it out of her eyes then happily slurps it up from fingers.\n\n");
 	outputText("\"<i>Mmm… Now that was a tasty treat. I would gladly wallow in a bathtub full of your cum if a could… Hmm, maybe I should try and make it happen.</i>\"\n\n");
 	outputText("A crazy idea for sure but knowing her you wouldn't put it past her to try something like that. You offer to help her get cleaned up but she declines, preferring to rub your seed all over her body. You shake your head, laughing and leaving her to it.\n\n");
-	player.sexReward("Default","Dick",true,false);
+	player.sexReward("no", "Dick");
 	doNext(camp.returnToCampUseOneHour);
 }
 public function mitziSexFuckHer():void {
@@ -298,7 +299,7 @@ public function mitziSexEatenOut():void {
 	outputText("\"<i>So how was that [name]? Liked spending some girly time with me?</i>\"\n\n");
 	outputText("She gives you a sultry look then licks her lips. That tongue of hers is truly something. The goblin hops off you as you sit up and stretch, letting out a satisfied sigh.\n\n");
 	outputText("\"<i>Well that was definitely fun… Maybe can do this again soon, right?</i>\"\n\n");
-	outputText("You might just consider it. For now it's back to your daily routine. You gather your gear then say your goodbyes to Mitzi before heading off.\n\n");
+	outputText("You might just consider it. For now, it's back to your daily routine. You gather your gear then say your goodbyes to Mitzi before heading off.\n\n");
 	player.sexReward("saliva");
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -310,13 +311,12 @@ private function mitziPreg():void {
 	}
 }
 private function MitziPoopsBabies():void {
-	//spriteSelect(SpriteDb.s_izma);
 	clearOutput();
-	outputText("As you're strolling through camp, you hear a high pitched squeal catch your attention. You look to see Mitzi doubled over holding her belly. She staggers over to you, clutching her swollen belly with a heavy blush on her face.\n\n");
+	outputText("As you're strolling through camp, you hear a high-pitched squeal catch your attention. You look to see Mitzi doubled over holding her belly. She staggers over to you, clutching her swollen belly with a heavy blush on her face.\n\n");
 	outputText("\"<i>Ooooo [name]! I-It's time! They're coming!</i>\"\n\n");
 	outputText("Wasting no time, you guide the expecting mother to her usual secluded spot and help her lay down. You help her remove what little clothing she wears then start gently rubbing her belly and spread her legs. You notice the babies inside are moving more, eager to leave their confines. Mitzi tenses and moans out loudly when a contraction rocks through body. A gush of liquid pours out from between her leg.\n\n");
 	outputText("\"<i>A-Ah yes I can feel them moving!</i>\"\n\n");
-	outputText("The goblin is obviously aroused by just being in labor. You can see one of your daughters already moving downward. You waste no time in hurrying off to fetch some towels and heat water to help clean the babies once they’re born. You return as soon as you can and take Mitzi's hands in your own as she breaths and pushes. The goblin moans in pure pleasure as she forces her daughters from her womb, squeezing your hand tightly. You watch for any sign of the babies until finally you spot a head peek out from between her lips. Her moans turn into near incoherent babbling and squeals as the pleasure of giving birth overtakes her.\n\n");
+	outputText("The goblin is obviously aroused by just being in labor. You can see one of your daughters already moving downward. You waste no time in hurrying off to fetch some towels and heat water to help clean the babies once they’re born. You return as soon as you can and take Mitzi's hands in your own as she breathes and pushes. The goblin moans in pure pleasure as she forces her daughters from her womb, squeezing your hand tightly. You watch for any sign of the babies until finally you spot a head peek out from between her lips. Her moans turn into near incoherent babbling and squeals as the pleasure of giving birth overtakes her.\n\n");
 	outputText("\"<i>Yes-ah-yes! M-More it so-ah-good!</i>\"\n\n");
 	outputText("With one final push, the very first goblin girl finally pushes her way out of the birthing canal. You manage to catch her just as she emerges. She almost looks like a mini version of her mother. Surprisingly, her hair is "+player.hairColor+" just like yours. She meekly whines and cries in your grasp so you clean her up and bring the newborn goblin up to her mother's breast to nurse.\n\n");
 	outputText("\"<i>T-There's plenty-ah-more where she f-from-oooo!</i>\"\n\n");
@@ -329,10 +329,9 @@ private function MitziPoopsBabies():void {
 }
 
 public function MitziDaughtersCampMainMenu(first:Boolean = true):void {
-	//spriteSelect(SpriteDb.s_electra);
 	clearOutput();
 	if (first) {
-		outputText("You walk over to the small goblin to check on your daughters. You spot your eldest daughters mixing and pouring bubbling vials of strange liquids and ingredients into a large melding pot. The sickly sweet scent wafting in the air makes your head swim a bit and a heat build in your loins. One of them with short cut blue hair and wearing an apron looks up from the project when she notices you.\n\n");
+		outputText("You walk over to the small goblin to check on your daughters. You spot your eldest daughters mixing and pouring bubbling vials of strange liquids and ingredients into a large melding pot. The sickly sweet scent wafting in the air makes your head swim a bit and a heat build in your loins. One of them with shortcut blue hair and wearing an apron looks up from the project when she notices you.\n\n");
 		outputText("\"<i>Careful, "+player.mf("pa","ma")+". This stuff really packs a punch!</i>\"\n\n");
 		outputText("One of your other daughters speaks up, sliding up her goggles.\n\n");
 		outputText("\"<i>It'll pack even more of a punch with another dose of lust draft. They'll never know what'll hit 'em.</i>\"\n\n");
@@ -346,7 +345,7 @@ public function MitziDaughtersCampMainMenu(first:Boolean = true):void {
 		player.createStatusEffect(StatusEffects.MitziDaughtersBarrels,0,0,0,0);
 	}
 	else {
-		outputText("You walk over to the small goblin community to check on your daughters. You spot your eldest daughters mixing and pouring bubbling vials of strange liquids and ingredients into a large melding pot. The sickly sweet scent wafting in the air makes your head swim a bit and a heat build in your loins. One of them with short cut blue hair and wearing an apron looks up from the project when she notices you.\n\n");
+		outputText("You walk over to the small goblin community to check on your daughters. You spot your eldest daughters mixing and pouring bubbling vials of strange liquids and ingredients into a large melding pot. The sickly sweet scent wafting in the air makes your head swim a bit and a heat build in your loins. One of them with shortcut blue hair and wearing an apron looks up from the project when she notices you.\n\n");
 		outputText("\"<i>Hey, [name]! What can I do for you today? Maybe something a little fun?</i>\"\n\n");
 	}
 	menu();

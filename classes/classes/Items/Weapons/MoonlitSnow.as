@@ -1,11 +1,11 @@
-package classes.Items.Weapons 
+package classes.Items.Weapons
 {
 import classes.Items.Weapon;
 
 public class MoonlitSnow extends Weapon
 	{
 		
-		public function MoonlitSnow() 
+		public function MoonlitSnow()
 		{
 			super(
 				"Moonlit Snow","Moonlit Snow","Moonlit Snow","a Moonlit Snow","slash",40,2560,
@@ -15,11 +15,11 @@ public class MoonlitSnow extends Weapon
 		override public function get attack():Number {
 			var boost:int = 0;
 			boost += Math.round((100-game.player.cor) / 10);
-			return (12 + (2 * boost)); 
+			return (12 + (2 * boost));
 		}
-		override public function canUse():Boolean {
-			if (game.player.level >= 40) return super.canUse();
-			outputText("You try and wield the legendary weapon but to your disapointment the item simply refuse to stay in your hands. It would seem you yet lack the power and right to wield this item.");
+		override public function canEquip(doOutput:Boolean):Boolean {
+			if (game.player.level >= 40) return super.canEquip(doOutput);
+			if (doOutput) outputText("You try and wield the legendary weapon but to your disapointment the item simply refuse to stay in your hands. It would seem you yet lack the power and right to wield this item.");
 			return false;
 		}
 	}

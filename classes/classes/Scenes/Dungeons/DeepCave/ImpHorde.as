@@ -20,7 +20,7 @@ public class ImpHorde extends Monster
 			//(½ chance during any round):
 			if(rand(2) == 0) {
 				outputText("\nOne of the tiny demons latches onto one of your [legs] and starts humping it.  You shake the little bastard off and keep fighting!");
-				player.dynStats("lus", 3);
+				player.takeLustDamage(3, true);
 			}
 		}
 		
@@ -30,9 +30,9 @@ public class ImpHorde extends Monster
 				createStatusEffect(StatusEffects.ImpUber,0,0,0,0);
 			}
 			else {
-				//(OH SHIT IT GOES OFF) 
+				//(OH SHIT IT GOES OFF)
 				//+50 lust!
-				player.dynStats("lus", 500);
+				player.takeLustDamage(500, true);
 				outputText("The imps in the back finish their spell-casting, and point at you in unison.  A wave of pure arousal hits you with the force of a freight train.   Your equipment rubs across your suddenly violently sensitive " + nippleDescript(0));
 				if(player.biggestLactation() > 1) outputText(" as they begin to drip milk");
 				outputText(".  The lower portions of your coverings ");
@@ -65,37 +65,8 @@ public class ImpHorde extends Monster
 				//Clear damage from last loop
 				damage = 0;
 				//Blind dodge change
-				if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
-					outputText(capitalA + short + "' misguided spooge flies everyone.  A few bursts of it don't even land anywhere close to you!\n");
-				}
-				//Determine if dodged!
-				else if(player.spe - spe > 0 && rand(((player.spe-spe)/4)+90) > 80) {
+				if(player.getEvasionRoll()) {
 					damage = rand(4);
-					if(damage == 0) outputText("A wad of cum spatters into the floor as you narrowly sidestep it.\n");
-					else if(damage == 1) outputText("One of the imps launches his seed so hard it passes clean over you, painting the wall white.\n");
-					else if(damage == 2) outputText("You duck a glob of spooge and it passes harmlessly by.  A muffled grunt of disgust can be heard from behind you.\n");
-					else if(damage == 3) outputText("You easily evade a blast of white fluid.\n");
-				}
-				//Determine if evaded
-				else if(player.hasPerk(PerkLib.Evade) && rand(100) < 30) {
-					damage = rand(4);
-					outputText("(Evade) ");
-					if(damage == 0) outputText("A wad of cum spatters into the floor as you narrowly sidestep it.\n");
-					else if(damage == 1) outputText("One of the imps launches his seed so hard it passes clean over you, painting the wall white.\n");
-					else if(damage == 2) outputText("You duck a glob of spooge and it passes harmlessly by.  A muffled grunt of disgust can be heard from behind you.\n");
-					else if(damage == 3) outputText("You easily evade a blast of white fluid.\n");
-				}
-				else if(player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
-					outputText("(Misdirection) ");
-					if(damage == 0) outputText("A wad of cum spatters into the floor as you narrowly sidestep it.\n");
-					else if(damage == 1) outputText("One of the imps launches his seed so hard it passes clean over you, painting the wall white.\n");
-					else if(damage == 2) outputText("You duck a glob of spooge and it passes harmlessly by.  A muffled grunt of disgust can be heard from behind you.\n");
-					else if(damage == 3) outputText("You easily evade a blast of white fluid.\n");
-				}
-				//Determine if cat'ed
-				else if(player.hasPerk(PerkLib.Flexibility) && rand(100) < 15) {
-					damage = rand(4);
-					outputText("(Agility) ");
 					if(damage == 0) outputText("A wad of cum spatters into the floor as you narrowly sidestep it.\n");
 					else if(damage == 1) outputText("One of the imps launches his seed so hard it passes clean over you, painting the wall white.\n");
 					else if(damage == 2) outputText("You duck a glob of spooge and it passes harmlessly by.  A muffled grunt of disgust can be heard from behind you.\n");
@@ -110,7 +81,7 @@ public class ImpHorde extends Monster
 					if(damage == 3) outputText("Seed lands in your [hair], slicking you with demonic fluid.\n");
 					if(damage == 4) outputText("Another blast of jizz splatters against your face, coating your lips and forcing a slight taste of it into your mouth.\n");
 					if(damage == 5) outputText("The last eruption of cum soaks your thighs and the lower portions of your [armor], turning it a sticky white.\n");
-					player.dynStats("lus", (7+int(player.lib/40+player.cor/40)));
+					player.takeLustDamage((7+int(player.lib/40+player.cor/40)), true);
 				}
 				lust -= 5;
 				hits--;
@@ -131,27 +102,10 @@ public class ImpHorde extends Monster
 				//Clear damage from last loop
 				damage = 0;
 				//Blind dodge change
-				if(hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
-					outputText(capitalA + short + " completely misses you with a blind attack!\n");
-				}
-				//Determine if dodged!
-				else if(player.spe - spe > 0 && rand(((player.spe-spe)/4)+90) > 80) {
+				if(player.getEvasionRoll()) {
 					if(player.spe - spe < 8) outputText("You narrowly avoid " + a + short + "'s " + weaponVerb + "!\n");
 					else if(player.spe - spe >= 8 && player.spe-spe < 20) outputText("You dodge " + a + short + "'s " + weaponVerb + " with superior quickness!\n");
 					else if(player.spe - spe >= 20) outputText("You deftly avoid " + a + short + "'s slow " + weaponVerb + ".\n");
-				}
-				//Determine if evaded
-				else if(player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
-					outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s attack.\n");
-				}
-				else if(player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
-					outputText("With the easy movement afforded by your bodysuit and Raphael's teachings, you easily avoid " + a + short + "'s attack.\n");
-				}
-				//Determine if cat'ed
-				else if(player.hasPerk(PerkLib.Flexibility) && rand(100) < 6) {
-					outputText("With your incredible flexibility, you squeeze out of the way of " + a + short + "");
-					if(plural) outputText("' attacks.\n");
-					else outputText("'s attack.\n");
 				}
 				//OH SHIT SON YOU GOT REAPED
 				else {
@@ -212,7 +166,7 @@ public class ImpHorde extends Monster
 			this.tallness = 36;
 			this.hips.type = Hips.RATING_SLENDER;
 			this.butt.type = Butt.RATING_TIGHT;
-			this.skinTone = "red";
+			this.bodyColor = "red";
 			this.hairColor = "black";
 			this.hairLength = 1;
 			initStrTouSpeInte(50, 30, 25, 12);
@@ -227,13 +181,12 @@ public class ImpHorde extends Monster
 			this.bonusLust = 114;
 			this.lust = 10;
 			this.lustVuln = .5;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 24;
 			this.gems = 30 + rand(30);
 			this.additionalXP = 100;
 			this.drop = new WeightedDrop(armors.NURSECL, 1);
 			this.wings.type = Wings.IMP;
-			this.wings.desc = "imp wings";
+			this.wings.desc = "imp";
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);

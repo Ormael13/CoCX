@@ -1,5 +1,6 @@
 package classes.Scenes.Combat {
 import classes.Scenes.Combat.SpellsBlack.*;
+import classes.Scenes.Combat.SpellsGreen.*;
 import classes.Scenes.Combat.SpellsWhite.*;
 import classes.Scenes.Combat.SpellsHex.*;
 import classes.Scenes.Combat.SpellsDivine.*;
@@ -19,6 +20,7 @@ public class CombatAbilities {
 	public static const ChainLightningEx:ChainLightningSpell    = new ChainLightningSpell(true);
 	public static const Blind:BlindSpell                        = new BlindSpell();
 	public static const ChargeWeapon:ChargeWeaponSpell          = new ChargeWeaponSpell();
+	public static const ChargeRWeapon:ChargeRangeWeaponSpell    = new ChargeRangeWeaponSpell();
 	public static const ChargeArmor:ChargeArmorSpell            = new ChargeArmorSpell();
 	public static const Heal:HealSpell                          = new HealSpell();
 	public static const Blizzard:BlizzardSpell                  = new BlizzardSpell();
@@ -26,6 +28,8 @@ public class CombatAbilities {
 	public static const Cure:CureSpell                          = new CureSpell();
 	public static const FireStorm:FireStormSpell                = new FireStormSpell();
 	public static const MeteorShower:MeteorShowerSpell          = new MeteorShowerSpell();
+	public static const WhitefireSwiftcast:WhitefireSwiftcastSpell			= new WhitefireSwiftcastSpell();
+	public static const LightningBoltSwiftcast:LightningBoltSwiftcastSpell	= new LightningBoltSwiftcastSpell();
 	public static const ALL_WHITE_SPELLS:/*CombatAbility*/Array = [
 		Whitefire,
 		WhitefireEx,
@@ -37,13 +41,16 @@ public class CombatAbilities {
 		ChainLightningEx,
 		Blind,
 		ChargeWeapon,
+		ChargeRWeapon,
 		ChargeArmor,
 		Heal,
 		Blizzard,
 		MentalShield,
 		Cure,
 		FireStorm,
-		MeteorShower
+		MeteorShower,
+		WhitefireSwiftcast,
+		LightningBoltSwiftcast
 	];
 	
 	public static const IceSpike:IceSpikeSpell                  = new IceSpikeSpell();
@@ -62,6 +69,8 @@ public class CombatAbilities {
 	public static const IceRain:IceRainSpell                    = new IceRainSpell();
 	public static const Nosferatu:NosferatuSpell                = new NosferatuSpell();
 	public static const PolarMidnight:PolarMidnightSpell        = new PolarMidnightSpell();
+	public static const IceSpikeSwiftcast:IceSpikeSwiftcastSpell			= new IceSpikeSwiftcastSpell();
+	public static const DarknessShardSwiftcast:DarknessShardSwiftcastSpell	= new DarknessShardSwiftcastSpell();
 	public static const ALL_BLACK_SPELLS:/*CombatAbility*/Array = [
 		IceSpike,
 		IceSpikeEx,
@@ -78,7 +87,9 @@ public class CombatAbilities {
 		Regenerate,
 		IceRain,
 		Nosferatu,
-		PolarMidnight
+		PolarMidnight,
+		IceSpikeSwiftcast,
+		DarknessShardSwiftcast
 	];
 	
 	public static const Lifetap:LifetapSpell                     = new LifetapSpell();
@@ -112,11 +123,17 @@ public class CombatAbilities {
 	public static const BoneSpirit:BoneSpiritSpell              = new BoneSpiritSpell();
 	public static const BoneArmor:BoneArmorSpell                = new BoneArmorSpell();
 	public static const Boneshatter:BoneshatterSpell            = new BoneshatterSpell();
+	public static const NecroticRot:NecroticRotSpell            = new NecroticRotSpell();
+	public static const CorpseExplosion:CorpseExplosionSpell    = new CorpseExplosionSpell();
+	public static const BloodShower:BloodShowerSpell            = new BloodShowerSpell();
 
 	public static const ALL_NECRO_SPELLS:/*CombatAbility*/Array = [
 		BoneSpirit,
 		BoneArmor,
-		Boneshatter
+		Boneshatter,
+		NecroticRot,
+		CorpseExplosion,
+		BloodShower
 	];
 	
 	public static const ManaShield:ManaShieldSpell             = new ManaShieldSpell();
@@ -142,6 +159,10 @@ public class CombatAbilities {
 	public static const CorrosiveWaveEx:CorrosiveWaveSpell     = new CorrosiveWaveSpell(true);
 	public static const HydroAcid:HydroAcidSpell               = new HydroAcidSpell();
 	public static const AcidRain:AcidRainSpell                 = new AcidRainSpell();
+	public static const WaterBallSwiftcast:WaterBallSwiftcastSpell		= new WaterBallSwiftcastSpell();
+	public static const WindBulletSwiftcast:WindBulletSwiftcastSpell	= new WindBulletSwiftcastSpell();
+	public static const StalagmiteSwiftcast:StalagmiteSwiftcastSpell	= new StalagmiteSwiftcastSpell();
+	public static const AcidSpraySwiftcast:AcidSpraySwiftcastSpell		= new AcidSpraySwiftcastSpell();
 	//	if (player.hasStatusEffect(StatusEffects.KnowsWereBeast)) buttons.add("Were-beast",	were-beast spell goes here
 	
 	public static const ALL_GREY_SPELLS:/*CombatAbility*/Array = [
@@ -167,7 +188,11 @@ public class CombatAbilities {
 		CorrosiveWave,
 		CorrosiveWaveEx,
 		HydroAcid,
-		AcidRain
+		AcidRain,
+		WaterBallSwiftcast,
+		WindBulletSwiftcast,
+		StalagmiteSwiftcast,
+		AcidSpraySwiftcast
 	];
 	
 	public static const BloodMissiles:BloodMissilesSpell               = new BloodMissilesSpell();
@@ -188,6 +213,20 @@ public class CombatAbilities {
 		BloodField
 	];
 	
+	public static const PlantGrowth:PlantGrowthSpell     = new PlantGrowthSpell();
+	public static const Entangle:EntangleSpell           = new EntangleSpell();
+	public static const Briarthorn:BriarthornSpell       = new BriarthornSpell();
+	public static const DeathBlossom:DeathBlossomSpell   = new DeathBlossomSpell();
+	public static const GreenCovenant:GreenCovenantSpell = new GreenCovenantSpell();
+
+	public static const ALL_GREEN_SPELLS:/*CombatAbility*/Array = [
+		PlantGrowth,
+		Entangle,
+		Briarthorn,
+		DeathBlossom,
+		GreenCovenant
+	];
+	
 	public static const ALL_SPELLS:/*CombatAbility*/Array = []
 			.concat(ALL_WHITE_SPELLS)
 			.concat(ALL_BLACK_SPELLS)
@@ -196,6 +235,7 @@ public class CombatAbilities {
 			.concat(ALL_NECRO_SPELLS)
 			.concat(ALL_GREY_SPELLS)
 			.concat(ALL_BLOOD_SPELLS)
+			.concat(ALL_GREEN_SPELLS)
 	;
 	
 	/*

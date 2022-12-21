@@ -83,13 +83,13 @@ public class OnikiriSake extends Consumable {
 			}
 			if (selectedCock != -1) {
 				if (player.cocks[selectedCock].cockThickness < 4) {
-					temp = player.increaseCock(selectedCock, 2 + rand(4));
-					temp += player.cocks[selectedCock].thickenCock(1);
+					temp = player.growCock(selectedCock, 2 + rand(4));
+					temp += player.thickenCock(selectedCock, 1);
 					outputText("\n\nYour cock suddenly hardens, blood pumping in as it enlarges, growing both longer and thicker! The pleasure of the change cause you to orgasm, a big load of cum splattering the ground below you.");
 					outputText("  To your delight and surprise, you discover it has grown slightly thicker as well!");
 				}
 				else {
-					temp = player.increaseCock(selectedCock, 2 + rand(4));
+					temp = player.growCock(selectedCock, 2 + rand(4));
 					outputText("\n\nYour cock suddenly hardens, blood pumping in as it enlarges, growing both longer and thicker! The pleasure of the change cause you to orgasm, a big load of cum splattering the ground below you.");
 				}
 				changes++;
@@ -108,21 +108,21 @@ public class OnikiriSake extends Consumable {
 			CoC.instance.transformations.LowerBodyOni.applyEffect();
 			changes++;
 		}
-		if (player.lowerBody != LowerBody.ONI && player.lowerBody != LowerBody.HUMAN && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
+		if (!InCollection(player.lowerBody, LowerBody.ONI, LowerBody.HUMAN) && changes < changeLimit && rand(4) == 0) {
 			outputText("\n\n");
 			CoC.instance.transformations.LowerBodyHuman.applyEffect();
 			changes++;
 		}
 		//Arms
-		if (player.arms.type != Arms.ONI && player.arms.type != Arms.GARGOYLE && player.lowerBody == LowerBody.ONI && changes < changeLimit && rand(3) == 0) {
+		if (player.arms.type != Arms.ONI && player.lowerBody == LowerBody.ONI && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\n");
 			CoC.instance.transformations.ArmsOni.applyEffect();
 			changes++;
 		}
 		//Horn
-		if (rand(3) == 0 && changes < changeLimit && (player.horns.type != Horns.ONI_X2 || player.horns.type != Horns.ONI) && player.arms.type == Arms.ONI) {
+		if (rand(3) == 0 && changes < changeLimit && player.arms.type == Arms.ONI) {
 			outputText("\n\n");
-			if (rand(2) == 0) {
+			if (rand(2) == 0 || player.horns.type == Horns.ONI) {
 				CoC.instance.transformations.HornsOniDual.applyEffect();
 			}
 			else {
@@ -155,19 +155,17 @@ public class OnikiriSake extends Consumable {
 		//Face
 		if (player.ears.type == Ears.ONI && player.faceType != Face.ONI_TEETH && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\n");
-      CoC.instance.transformations.FaceOniTeeth.applyEffect();
+      		CoC.instance.transformations.FaceOniTeeth.applyEffect();
 			changes++;
 		}
 		//Skin
-		if (player.skinTone != "red" && player.skinTone != "reddish-orange" && player.skinTone != "purple" && player.skinTone != "blue" && !player.isGargoyle() && changes < changeLimit && rand(4) == 0) {
-			var colorSkin:String;
-			colorSkin = randomChoice("purple","reddish-orange","red","blue");
-			player.skinTone = colorSkin;
+		if (!InCollection(player.skinColor, "red", "reddish-orange", "purple", "blue") && changes < changeLimit && rand(4) == 0) {
+			player.skinColor = randomChoice("purple","reddish-orange","red","blue");
 			changes++;
 			outputText("\n\nThe heat of the alcohol is getting to you; it's like if your ");
-			if (player.hasFur()) outputText("skin");
+			if (player.isFurCovered()) outputText("skin");
 			else outputText(player.skinDesc);
-			outputText(" changed to  " + player.skinTone + ". Wait, it really did!");
+			outputText(" changed to  " + player.skinColor + ". Wait, it really did!");
 		}
 		//mutationStep(player.skin.base.type == PLAIN && !player.skin.hasBattleTattoo(), 3, function(): void {
 		if (player.skin.base.type == Skin.PLAIN && !player.skin.hasBattleTattoo() && rand(3) == 0 && changes < changeLimit) {
@@ -176,14 +174,14 @@ public class OnikiriSake extends Consumable {
 			changes++;
 		}
 		//});
-		if (!player.skin.hasBattleTattoo() && !player.hasPlainSkinOnly() && player.lowerBody != LowerBody.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
+		if (!player.skin.hasBattleTattoo() && !player.hasPlainSkinOnly() && rand(3) == 0 && changes < changeLimit) {
 			outputText("\n\n");
 			CoC.instance.transformations.SkinPlain.applyEffect();
 		}
 		//Taller
-		if (changes < changeLimit && rand(3) == 0 && player.tallness < 132) {
+		if (changes < changeLimit && rand(3) == 0 && player.basetallness < 132) {
 			temp = rand(5) + 3;
-			if (player.tallness > 117) temp = Math.floor(temp / 2);
+			if (player.basetallness > 117) temp = Math.floor(temp / 2);
 			if (temp == 0) temp = 1;
 			if (temp < 5) outputText("\n\nYou shift uncomfortably as you realize you feel off balance.  Gazing down, you realize you have grown SLIGHTLY taller.");
 			if (temp >= 5 && temp < 7) outputText("\n\nYou feel dizzy and slightly off, but quickly realize it's due to a sudden increase in height.");

@@ -36,7 +36,7 @@ package classes.Scenes.Areas.GlacialRift
 				doNext(camp.returnToCampUseTwoHours);
 			}
 			else {
-				if (player.isRace(Races.WENDIGO)) {
+				if (player.isRace(Races.WENDIGO, 1, false)) {
 					outputText("You walk steadily toward the lost girl to offer her support. Then you realise it's just another wendigo.\n\n");
 					outputText("\"<i>So hungry… kin please, do you have food… anything... I’m starving.</i>\"\n\n");
 					outputText("You don’t and truth be told even if you did you wouldn’t share it with her because if you did have food you would have eaten it already. Wendigos are the reason you are in this sorry state in the first place. Frustrated by your reply the wendigo turns back heels and wails as she resumes looking for food, which reminds you that you also need to look for lunch. You head back to camp still starving.\n\n");
@@ -96,7 +96,7 @@ package classes.Scenes.Areas.GlacialRift
 
 		public function becomeWendigo():void {
 			clearOutput();
-			outputText("Hungry… so damn hungry! You have been "+((flags[kFLAGS.HUNGER_ENABLED] <= 0 && player.lust >= player.maxLust()) ? "sexually ":"")+"starved for days now!\n\n");
+			outputText("Hungry… so damn hungry! You have been "+((flags[kFLAGS.HUNGER_ENABLED] <= 0 && player.lust >= player.maxOverLust()) ? "sexually ":"")+"starved for days now!\n\n");
 			outputText("Unable to stand it anymore, you head into the wild and look for something… anything to sate your maddening needs! As your luck has it an imp happens to show up right at the right time. The demon tries to cast a lust inducing spell on you but to no avail, nothing will distract you from your fixation on this meaty fat cock he's sporting.\n\nYou practically leap on the imp pushing him into the ground ");
 			outputText("as you begin ravenously feasting on his towering tool, licking at the flesh to coax him into orgasm. The confused demon struggles to get you off his prick but can only moan at the unrequited pleasure you coax into him from forcefully sucking him off. While the little bugger shifts and pushes around you discover new muscles and skills your tongue until now lacked and put them to good use. ");
 			outputText("It merely takes you a few seconds to finally force him to cum, and you begin gleefully feast on his seed, your unnatural hunger satisfied for a fraction of seconds before it resumes again. More… you need MORE!\n\nYour body begins changing as you resume coaxing the imp into orgasm, "+(player.arms.type == Arms.HUMAN ? "":"your arms taking back on their old human shape before ")+"your nails ");
@@ -107,11 +107,11 @@ package classes.Scenes.Areas.GlacialRift
 			outputText("Still hungry you resume eating out the imp dick for the next few hours until the poor thing just passes out unable to cum any further. In frustration, you head back to camp your hunger still nagging at you. You console yourself knowing that there's plenty of cock to suck and pussy to eat out, you will find some around, you just need to keep searching.\n\n");
 			player.removeStatusEffect(StatusEffects.WendigoPsychosis);
 			player.hairColor = "silver-white";
-			player.coatColor = "snow white";
+			player.furColor = "snow white";
 			if (player.faceType == Face.ANIMAL_TOOTHS) {
 				CoC.instance.transformations.FaceDeer.applyEffect(false);
 				if (!player.hasPlainSkinOnly() && !player.hasPartialCoat(Skin.FUR)) CoC.instance.transformations.SkinPlain.applyEffect(false);
-				else if (player.hasPlainSkinOnly()) CoC.instance.transformations.SkinFur(Skin.COVERAGE_LOW, {color: player.coatColor}).applyEffect(false);
+				else if (player.hasPlainSkinOnly()) CoC.instance.transformations.SkinFur(Skin.COVERAGE_LOW).applyEffect(false);
 			}
 			else {
 				CoC.instance.transformations.FaceAnimalTeeth.applyEffect(false);
@@ -139,6 +139,8 @@ package classes.Scenes.Areas.GlacialRift
 			player.createPerk(PerkLib.UnnaturalStrength, 0, 0, 0, 0);
 			player.createPerk(PerkLib.EndlessHunger, 0, 0, 0, 0);
 			player.createPerk(PerkLib.WendigoCurse, 0, 0, 0, 0);
+			if (player.hasPerk(PerkLib.RacialParagon))
+				flags[kFLAGS.APEX_SELECTED_RACE] = Races.WENDIGO;
 			player.hunger = 80;
 			doNext(camp.returnToCampUseOneHour);
 		}

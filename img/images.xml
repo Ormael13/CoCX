@@ -1777,10 +1777,6 @@
 				<ImageFile>./img/niamh-get-beer</ImageFile>
 				<ImageFile>./img/niamh-get-beer_1</ImageFile>
 			</ImageSet>
-			<ImageSet id="prison-cell">
-				<ImageFile>./img/prison-cell</ImageFile>
-				<ImageFile>./img/prison-cell_1</ImageFile>
-			</ImageSet>
 			<ImageSet id="rathazul-buy-dye">
 				<ImageFile>./img/rathazul-buy-dye</ImageFile>
 				<ImageFile>./img/rathazul-buy-dye_1</ImageFile>

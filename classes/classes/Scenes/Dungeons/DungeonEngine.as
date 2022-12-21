@@ -20,6 +20,7 @@ public class DungeonEngine extends DungeonAbstractContent {
     public var anzupalace:AnzuPalace = new AnzuPalace();
     public var ebonlabyrinth:EbonLabyrinth = new EbonLabyrinth;
     public var beehive:BeeHive = new BeeHive;
+    public var demonLab:DemonLab = new DemonLab();
     
     public var map:DungeonMaps = new DungeonMaps;
     
@@ -213,6 +214,19 @@ public class DungeonEngine extends DungeonAbstractContent {
             case DUNGEON_BEE_HIVE_3: return beehive.room2Center;
             case DUNGEON_BEE_HIVE_4: return beehive.room3West;
             case DUNGEON_BEE_HIVE_5: return beehive.room5North;
+            //Demon Lab
+            case DUNGEON_LAB_ENTRANCE: return demonLab.roomEntrance
+            case DUNGEON_LAB_BALLROOM_1: return demonLab.Ballroom1;
+            case DUNGEON_LAB_TYRANT_1: return demonLab.TyrantLab1;
+            case DUNGEON_LAB_TYRANT_PRISON: return demonLab.TyrantPrison;
+            case DUNGEON_LAB_TYRANT_2: return demonLab.TyrantLab2;
+            case DUNGEON_LAB_BALLROOM_2: return demonLab.Ballroom2;
+            case DUNGEON_LAB_FSPREADER: return demonLab.FSpreaderLab;
+            case DUNGEON_LAB_INCEL: return demonLab.IncelLab;
+            case DUNGEON_LAB_BALLROOM_3: return demonLab.Ballroom3;
+            case DUNGEON_LAB_NIGHTWALKER_1: return demonLab.NightwalkerLab1;
+            case DUNGEON_LAB_NIGHTWALKER_2: return demonLab.NightwalkerLab2;
+            case DUNGEON_LAB_PANIC_ROOM: return demonLab.Ballroom3;
             //error
             default: throw new Error("Illegal dungeon location!")
         }
@@ -326,8 +340,7 @@ public class DungeonEngine extends DungeonAbstractContent {
         if (southFunction != null) addButton(11, "South", navigateToRoom, southFunction);
         if (westFunction != null) addButton(10, "West", navigateToRoom, westFunction);
         if (eastFunction != null) addButton(12, "East", navigateToRoom, eastFunction);
-        if (player.lust >= 30) addButton(8, "Masturbate", SceneLib.masturbation.masturbateGo);
-        else addButtonDisabled(8, "Masturbate", "Req. 30+ lust.");
+        SceneLib.masturbation.masturButton(8);
         addButton(13, "Inventory", inventory.inventoryMenu).hint("The inventory allows you to use an item.  Be careful, as this leaves you open to a counterattack when in combat.");
         addButton(14, "Map", map.displayMap).hint("View the map of this dungeon.");
         setTopButtons();
@@ -344,12 +357,14 @@ public class DungeonEngine extends DungeonAbstractContent {
         addButton(14, "Map", map.displayMapOnlyOne).hint("View the map of this dungeon."); //replace map button with this "only one" thing
     }
 
+    /*
     public function setDungeonButtonsRD3D(northFunction:Function = null, southFunction:Function = null, westFunction:Function = null, eastFunction:Function = null, upFunction:Function = null, downFunction:Function = null):void {
         setDungeonButtonsRD(northFunction, southFunction, westFunction, eastFunction);
         //add Up/Down buttons
         if (upFunction != null) addButton(5, "Up", navigateToRoomRD, upFunction);
         if (downFunction != null) addButton(7, "Down", navigateToRoomRD, downFunction);
     }
+    */
 
     //Old button function here. The function itself was moved into EL, but can be brought back for new dungeons.
 	
@@ -374,8 +389,7 @@ public class DungeonEngine extends DungeonAbstractContent {
         addButton(13, "Down", navigateToRoomEL, downFunction);
         if (model.time.hours >= 21 || model.time.hours < 6) addButton(0, "Sleep", ebonlabyrinth.doSleepEL).hint("Turn yourself in for the night. May result in monster ambush!");
         else addButtonDisabled(0, "Sleep", "It's still too early to go to sleep.");
-        if (player.lust >= 30) addButton(5, "Masturbate", SceneLib.masturbation.masturbateGo);
-        else addButtonDisabled(5, "Masturbate", "Req. 30+ lust.");
+        SceneLib.masturbation.masturButton(5);
         addButton(9, "Inventory", inventory.inventoryMenu).hint("The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.");
         addButton(14, "Exit", AreYouSureAboutThat);
         setTopButtons();

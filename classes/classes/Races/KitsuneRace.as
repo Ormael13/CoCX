@@ -1,12 +1,12 @@
 package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
+import classes.GeneticMemories.RaceMem;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
-import classes.Player;
 import classes.Race;
-import classes.Transformations.Transformation;
-import classes.internals.Utils;
+import classes.Transformations.GradualTransformation;
+import classes.Transformations.TransformationGroupAny;
 
 /**
  * Tier 1: kitsune
@@ -21,14 +21,62 @@ public class KitsuneRace extends Race {
 	public static const BasicKitsuneHairColorSet:/*String*/Array = ["white", "black", "red"];
 	public static const BasicKitsuneFurColors:/*String*/Array = ["orange and white", "black", "black and white", "red", "red and white", "white"];
 	public static const ElderKitsuneColors:/*String*/Array = ["metallic golden", "golden blonde", "metallic silver", "silver blonde", "snow white", "iridescent gray"];
-	
+	public static const BasicKitsuneSkinColors:/*String*/Array = ["tan", "olive", "light"];
+	public static const ElderKitsuneSkinColors:/*String*/Array = ["dark", "ebony", "ashen", "sable", "milky white"];
+
 	public static const KitsuneHairColors:/*String*/Array = BasicKitsuneHairColorSet.concat(ElderKitsuneColors);
 	public static const KitsuneFurColors:/*String*/Array = BasicKitsuneFurColors.concat(ElderKitsuneColors);
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Kitsune",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Fox",
+        /*Eyes*/		"Fox",
+        /*Face*/		"Fox",
+        /*Gills*/		"None",
+        /*Hair*/		"Kitsune",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Fox",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Kitsune",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Kitsune",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Kitsune"];
 	
+	public const TfList:/*Transformation*/Array = [
+		game.transformations.EyesFox,
+		game.transformations.EarsFox,
+		game.transformations.TailFox(2, 1, false),
+		new TransformationGroupAny("SkinOrKitsuneTattoo", [
+					new GradualTransformation("SkinPlainKitsuneTattoed", [
+						game.transformations.SkinPlain,
+						game.transformations.SkinPatternKitsune
+					]),
+					game.transformations.SkinFur(Skin.COVERAGE_LOW, {colors: KitsuneFurColors})
+				]
+		),
+		game.transformations.ArmsHuman,
+		game.transformations.LowerBodyHuman,
+		new TransformationGroupAny("FaceHumanFoxOrAnimal", [
+			game.transformations.FaceHuman,
+			game.transformations.FaceFox,
+			game.transformations.FaceAnimalTeeth
+		]),
+		game.transformations.HairChangeColor(KitsuneHairColors),
+	];
+
 	public function KitsuneRace(id:int) {
-		super("Kitsune", id);
+		super("Kitsune", id, RaceBody);
 		mutationThreshold = 6;
-	}
+    }
 	
 	public override function setup():void {
 		addScores()
@@ -58,12 +106,7 @@ public class KitsuneRace extends Race {
 						}, 0, -2
 				)
 				.skinBaseType(Skin.PLAIN, +1, -3)
-				.hairColor(ANY(KitsuneHairColors), +1)
-				.customRequirement("vagina", "Vag of Holding",
-						function (body:BodyData):Boolean {
-							return body.player.vaginalCapacity() >= 8000;
-						},
-						+1)
+				.hairColor1(ANY(KitsuneHairColors), +1)
 				.hasPerk(PerkLib.StarSphereMastery, +1)
 				.hasAnyPerk([PerkLib.EnlightenedKitsune, PerkLib.CorruptedKitsune], +1)
 				.hasPerk(PerkLib.NinetailsKitsuneOfBalance, +1);
@@ -72,7 +115,7 @@ public class KitsuneRace extends Race {
 		addMutation(IMutationsLib.KitsuneThyroidGlandIM);
 		addMutation(IMutationsLib.KitsuneParathyroidGlandsIM);
 		
-		buildTier(9, "kitsune")
+		buildTier(8, "kitsune")
 				.namesTauric("kitsune", "kitsune-taur")
 				.require("2+ fox tails", function (body:BodyData):Boolean {
 					return body.tailType == Tail.FOX && body.tailCount >= 2
@@ -88,11 +131,11 @@ public class KitsuneRace extends Race {
 					"maxfatigue_base": +100
 				})
 				.withExtraBonuses(
-						"+100% SF Regeneration"
+						"+40% SF Regeneration"
 				)
 				.end();
-		buildTier(16, "nine tailed kitsune")
-				.namesTauric("nine tailed kitsune", "nine tailed kitsune-taur")
+		buildTier(15, "nine-tailed kitsune")
+				.namesTauric("nine-tailed kitsune", "nine-tailed kitsune-taur")
 				.requirePreviousTier()
 				.requireTailCount(9)
 				.buffs({
@@ -106,11 +149,11 @@ public class KitsuneRace extends Race {
 					"maxfatigue_base": +300
 				})
 				.withExtraBonuses(
-					"+100% SF Regeneration"
+					"+80% SF Regeneration"
 				)
 				.end();
-		buildTier(21, "nine tailed kitsune of balance")
-				.namesTauric("nine tailed kitsune of balance", "nine tailed kitsune-taur of balance")
+		buildTier(20, "nine-tailed kitsune of balance")
+				.namesTauric("nine-tailed kitsune of balance", "nine-tailed kitsune-taur of balance")
 				.requirePreviousTier()
 				.requirePerk(PerkLib.NinetailsKitsuneOfBalance)
 				.buffs({
@@ -124,10 +167,10 @@ public class KitsuneRace extends Race {
 					"maxfatigue_base": +500
 				})
 				.withExtraBonuses(
-					"+100% SF Regeneration"
+					"+130% SF Regeneration"
 				)
 				.end();
-		buildTier(26, "Inari")
+		buildTier(25, "Inari")
 				.namesTauric("Inari", "Inari-taur")
 				.requirePreviousTier()
 				.buffs({
@@ -141,7 +184,7 @@ public class KitsuneRace extends Race {
 					"maxfatigue_base": +1000
 				})
 				.withExtraBonuses(
-					"+100% SF Regeneration"
+					"+200% SF Regeneration"
 				)
 				.end();
 		

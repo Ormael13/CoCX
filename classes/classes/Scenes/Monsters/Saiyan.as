@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.Monsters 
+package classes.Scenes.Monsters
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -16,15 +16,15 @@ import classes.internals.*;
 	{
 		override public function defeated(hpVictory:Boolean):void {
 			if (hpVictory) {
-				
+			
 			}
 			else {
-				
+			
 			}
 			SceneLib.combat.finishCombat();
 		}
 		
-		public function Saiyan() 
+		public function Saiyan()
 		{
 			if (flags[kFLAGS.SAIYAN_ENEMY_NUMBER_COUNTER] == 1) {//female (change her to diff female stats)
 				this.long = "";
@@ -37,7 +37,7 @@ import classes.internals.*;
 				this.tallness = 72;
 				this.hips.type = Hips.RATING_CURVY + 3;
 				this.butt.type = Butt.RATING_LARGE + 2;
-				this.skinTone = "light";
+				this.bodyColor = "light";
 				this.hairColor = "green";
 				this.hairLength = 13;
 				this.weaponName = "fist";
@@ -57,10 +57,10 @@ import classes.internals.*;
 					this.level = 18;
 				}
 				if (statusEffectv2(StatusEffects.SaiyanNumber1a) == 2) {
-					
+				
 				}
 				if (statusEffectv2(StatusEffects.SaiyanNumber1a) == 3) {
-					
+				
 				}
 			}
 			if (flags[kFLAGS.SAIYAN_ENEMY_NUMBER_COUNTER] == 2) {
@@ -75,7 +75,7 @@ import classes.internals.*;
 				this.tallness = 72;
 				this.hips.type = Hips.RATING_BOYISH;
 				this.butt.type = Butt.RATING_TIGHT;
-				this.skinTone = "light";
+				this.bodyColor = "light";
 				this.hairColor = "red";
 				this.hairLength = 5;
 				this.weaponAttack = 54;
@@ -96,10 +96,10 @@ import classes.internals.*;
 					this.level = 18;
 				}
 				if (statusEffectv2(StatusEffects.SaiyanNumber2a) == 2) {
-					
+				
 				}
 				if (statusEffectv2(StatusEffects.SaiyanNumber2a) == 3) {
-					
+				
 				}
 			}
 			if (flags[kFLAGS.SAIYAN_ENEMY_NUMBER_COUNTER] == 3) {
@@ -114,7 +114,7 @@ import classes.internals.*;
 				this.tallness = 72;
 				this.hips.type = Hips.RATING_BOYISH;
 				this.butt.type = Butt.RATING_TIGHT;
-				this.skinTone = "light";
+				this.bodyColor = "light";
 				this.hairColor = "red";
 				this.hairLength = 13;
 				initStrTouSpeInte(130, 195, 330, 200);
@@ -143,7 +143,7 @@ import classes.internals.*;
 				this.tallness = 72;
 				this.hips.type = Hips.RATING_CURVY + 3;
 				this.butt.type = Butt.RATING_LARGE + 2;
-				this.skinTone = "light";
+				this.bodyColor = "light";
 				this.hairColor = "green";
 				this.hairLength = 13;
 				this.weaponName = "fist";
@@ -163,10 +163,10 @@ import classes.internals.*;
 					this.level = 18;
 				}
 				if (statusEffectv2(StatusEffects.SaiyanNumber4a) == 2) {
-					
+				
 				}
 				if (statusEffectv2(StatusEffects.SaiyanNumber4a) == 3) {
-					
+				
 				}
 			}
 			if (flags[kFLAGS.SAIYAN_ENEMY_NUMBER_COUNTER] == 5) {
@@ -181,7 +181,7 @@ import classes.internals.*;
 				this.tallness = 72;
 				this.hips.type = Hips.RATING_BOYISH;
 				this.butt.type = Butt.RATING_TIGHT;
-				this.skinTone = "light";
+				this.bodyColor = "light";
 				this.hairColor = "red";
 				this.hairLength = 13;
 				initStrTouSpeInte(130, 195, 330, 200);
@@ -211,7 +211,7 @@ import classes.internals.*;
 				this.tallness = 72;
 				this.hips.type = Hips.RATING_BOYISH;
 				this.butt.type = Butt.RATING_TIGHT;
-				this.skinTone = "light";
+				this.bodyColor = "light";
 				this.hairColor = "red";
 				this.hairLength = 13;
 				initStrTouSpeInte(130, 195, 330, 200);
@@ -240,7 +240,7 @@ import classes.internals.*;
 				this.tallness = 72;
 				this.hips.type = Hips.RATING_CURVY + 3;
 				this.butt.type = Butt.RATING_LARGE + 2;
-				this.skinTone = "light";
+				this.bodyColor = "light";
 				this.hairColor = "red";
 				this.hairLength = 13;
 				initStrTouSpeInte(130, 195, 330, 200);
@@ -270,7 +270,7 @@ import classes.internals.*;
 				this.tallness = 72;
 				this.hips.type = Hips.RATING_BOYISH;
 				this.butt.type = Butt.RATING_TIGHT;
-				this.skinTone = "light";
+				this.bodyColor = "light";
 				this.hairColor = "red";
 				this.hairLength = 13;
 				initStrTouSpeInte(130, 195, 330, 200);
@@ -299,7 +299,7 @@ import classes.internals.*;
 				this.tallness = 72;
 				this.hips.type = Hips.RATING_CURVY + 3;
 				this.butt.type = Butt.RATING_LARGE + 2;
-				this.skinTone = "light";
+				this.bodyColor = "light";
 				this.hairColor = "red";
 				this.hairLength = 13;
 				initStrTouSpeInte(130, 195, 330, 200);
@@ -319,7 +319,6 @@ import classes.internals.*;
 			}
 			this.a = "the ";
 			this.short = "Saiyan";
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.gems = 45 + rand(40);
 			this.drop = new ChainedDrop().
 					add(armors.S_SWMWR,1/12).

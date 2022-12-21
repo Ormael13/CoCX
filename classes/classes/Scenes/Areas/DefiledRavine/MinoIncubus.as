@@ -2,58 +2,52 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.Areas.DefiledRavine 
+package classes.Scenes.Areas.DefiledRavine
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.BodyParts.Butt;
-	import classes.BodyParts.Hips;
-	import classes.BodyParts.Face;
-	import classes.BodyParts.Horns;
-	import classes.BodyParts.LowerBody;
-	import classes.BodyParts.Tail;
-	import classes.CoC;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.Scenes.SceneLib;
+import classes.*;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Face;
+import classes.BodyParts.Hips;
+import classes.BodyParts.Horns;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Tail;
+import classes.GlobalFlags.kFLAGS;
+import classes.Items.DynamicItems;
+import classes.Scenes.SceneLib;
+import classes.internals.*;
+
+use namespace CoC;
 	
-	use namespace CoC;
-	
-	public class MinoIncubus extends Monster 
-	{		
+	public class MinoIncubus extends Monster
+	{
 		public function minoincubusPheromones():void {
 			outputText("The mino incubus smiles at you and lifts his loincloth, flicking it at you.  Thick ropes of pre-cum fly through the air, ");
 			if(rand(3) == 0) {
 				outputText("slapping into your face before you can react!  You wipe the slick snot-like stuff out of your eyes and nose, ");
 				if (player.lust > 75) {
 					outputText("swallowing it into your mouth without thinking.  ");
-					player.dynStats("lus", 20 + player.lib/8);
+					player.takeLustDamage(20 + player.lib/8, true);
 				}
 				else {
 					outputText("feeling your heart beat with desire as your tongue licks the residue from your lips.  ");
-					player.dynStats("lus", 10 + player.lib/16);
+					player.takeLustDamage(10 + player.lib/16, true);
 				}
 			}
 			else outputText("right past your head.  ");
 			outputText("The animalistic scent of it seems to get inside you, the musky aroma burning a path of liquid heat to your groin.");
-			player.dynStats("lus", 20 + player.lib/16);
+			player.takeLustDamage(20 + player.lib/16, true);
 			if(player.hasPerk(PerkLib.MinotaurCumAddict) || flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 2) {
 				if(rand(2) == 0) outputText("\n<b>You shiver with need, wanting nothing more than to bury your face under that loincloth and slurp out every drop of goopey goodness.</b>");
 				else outputText("\n<b>You groan and lick your lips over and over, craving the taste of him in your mouth.</b>");
-				player.dynStats("lus", 15+rand(15));
+				player.takeLustDamage(15+rand(15), true);
 			}
 		}
 		
 		public function minoincubusHeadbutt():void {
 			outputText("\"<i>Catch,</i>\" the demonic brute growls, moments before attempting to slam his forehead into your own.");
 			var damage:Number = ((str + weaponAttack) * 0.5) - rand(player.tou * 0.75);
-			if (damage <= 0 || combatMiss() || player.hasPerk(PerkLib.Flexibility)) {
+			if (damage <= 0 || player.getEvasionRoll()) {
 				outputText(" Luckily, you dodge aside.");
-			}
-			else if (player.hasPerk(PerkLib.Evade)) {
-				outputText(" Luckily, you evade.");
-			}
-			else if (player.hasPerk(PerkLib.Misdirection)) {
-				outputText(" Luckily, you misdirect his attack.");
 			}
 			else {
 				outputText(" He impacts with stunning force, leaving you reeling! ");
@@ -70,13 +64,13 @@ package classes.Scenes.Areas.DefiledRavine
 			//Used after stunning PC.
 			outputText("Before you can completely regain your wits, the brute is on you, easily holding your hand in one hand while he none-too-gently smacks his cock into your face, dragging his musky member back and forth across your cheeks before finally breaking contact.");
 			outputText(" Strands of his"+(player.hasPerk(PerkLib.MinotaurCumAddict) ? " god-like":"")+" spunk hang from your nose until your tongue lashes out to collect them. "+(player.hasPerk(PerkLib.MinotaurCumAddict) ? "Delicious.":"")+"Why did you do that? And why did it feel so good.");
-			player.dynStats("lus", 20 + player.lib/16);
+			player.takeLustDamage(20 + player.lib/16, true);
 		}
 		
 		public function  minoincubusBattleaxes():void {
 			outputText("The mino incubus carries his axes as if they weighed no more than a feather, brandishing them back and forth with such casual movements that you barely register his swings");
 			var damage:Number = ((str + weaponAttack) * 1.25) - rand(player.tou);
-			if (damage <= 0 || combatMiss() || player.hasPerk(PerkLib.Evade) || player.hasPerk(PerkLib.Flexibility) || player.hasPerk(PerkLib.Misdirection)) {
+			if (damage <= 0 || player.getEvasionRoll()) {
 				outputText(" in time to avoid it.");
 			}
 			else {
@@ -104,7 +98,7 @@ package classes.Scenes.Areas.DefiledRavine
 			SceneLib.defiledravine.demonScene.defeatMinoIncubus();
 		}
 		
-		public function MinoIncubus() 
+		public function MinoIncubus()
 		{
 			this.a = "the ";
 			this.short = "mino incubus";
@@ -143,12 +137,15 @@ package classes.Scenes.Areas.DefiledRavine
 			this.bonusLust = 211 + this.ballSize * 5 + rand(this.ballSize * 3);
 			this.lust = this.ballSize * 3;
 			this.lustVuln = 0.84;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = 46;
 			this.gems = rand(15) + 15;
 			//this.special1 = SceneLib.mountain.minotaurScene.minoPheromones;
 			this.tailType = Tail.COW;
 			this.bonusLust = 70 + this.ballSize * 4 + rand(this.ballSize * 3);
+			this.randomDropChance = 0.1;
+			this.randomDropParams = {
+				rarity: DynamicItems.RARITY_CHANCES_LESSER
+			};
 			this.drop = new WeightedDrop().
 					add(consumables.BROBREW, 1).
 					add(weapons.DL_AXE_, 2).

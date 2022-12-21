@@ -21,7 +21,7 @@ import classes.Scenes.Areas.Forest.BeeGirl;
 				outputText("The arousal and pleasure spike from the aphrodisiac in the sting leaves you stunned.");
 				if (!player.hasPerk(PerkLib.Resolute)) player.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 				createStatusEffect(StatusEffects.AbilityCooldown1,5,0,0,0);
-				player.dynStats("lus", 90 + rand(45));
+				player.takeLustDamage(90 + rand(45), true);
 			}
 		}
 		

@@ -2,9 +2,9 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.Monsters 
+package classes.Scenes.Monsters
 {
-	
+
 import classes.*;
 import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
@@ -17,8 +17,7 @@ import classes.internals.*;
 		public function oniHypermode():void {
 			if (hasStatusEffect(StatusEffects.Uber)) {
 				removeStatusEffect(StatusEffects.Uber);
-				if (hasStatusEffect(StatusEffects.Stunned) || hasStatusEffect(StatusEffects.FrozenSolid) || hasStatusEffect(StatusEffects.StunnedTornado) || hasStatusEffect(StatusEffects.Fear) || hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.ConstrictedWhip) || hasStatusEffect(StatusEffects.GooEngulf)
-				|| hasStatusEffect(StatusEffects.EmbraceVampire) || hasStatusEffect(StatusEffects.Pounce)) {
+				if (monsterIsStunned() || monsterIsConstricted() || hasStatusEffect(StatusEffects.Fear)) {
 					outputText(short+" reels in frustration as his concentration breaks under your assaults.\n\n");
 				}
 				else {
@@ -88,7 +87,7 @@ import classes.internals.*;
 			SceneLib.chichiScene.chichiSex5();
 		}
 		
-		public function OniIncubus() 
+		public function OniIncubus()
 		{
 			if (flags[kFLAGS.CHI_CHI_FOLLOWER] == 4) {
 				this.a = "";
@@ -117,7 +116,7 @@ import classes.internals.*;
 			this.tallness = 120;
 			this.hips.type = Hips.RATING_AVERAGE;
 			this.butt.type = Butt.RATING_TIGHT;
-			this.skinTone = "red";
+			this.bodyColor = "red";
 			this.hairColor = "golden";
 			this.hairLength = 25;
 			this.weaponName = "fist";
@@ -125,7 +124,6 @@ import classes.internals.*;
 			this.armorName = "pants";
 			this.lust = 10;
 			this.lustVuln = 0.33;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.gems = 50 + rand(50);
 			this.drop = new ChainedDrop().add(necklaces.OBNECK,1/5)
 					.elseDrop(consumables.ONISAKE);

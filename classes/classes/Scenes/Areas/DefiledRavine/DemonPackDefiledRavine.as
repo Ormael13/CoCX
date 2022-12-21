@@ -2,18 +2,18 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.Areas.DefiledRavine 
+package classes.Scenes.Areas.DefiledRavine
 {
 import classes.*;
 import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.BodyParts.Horns;
 import classes.BodyParts.Tail;
-import classes.GlobalFlags.kFLAGS;
+import classes.Items.DynamicItems;
 import classes.Scenes.SceneLib;
 import classes.internals.WeightedDrop;
-	
-	public class DemonPackDefiledRavine extends Monster
+
+public class DemonPackDefiledRavine extends Monster
 	{
 		
 		override public function teased(lustDelta:Number, isNotSilent:Boolean = true):void
@@ -26,7 +26,7 @@ import classes.internals.WeightedDrop;
 			applyTease(lustDelta);
 		}
 		
-		public function DemonPackDefiledRavine() 
+		public function DemonPackDefiledRavine()
 		{
 			this.a = "the ";
 			this.short = "large demons pack";
@@ -49,7 +49,7 @@ import classes.internals.WeightedDrop;
 			this.tallness = rand(8) + 70;
 			this.hips.type = Hips.RATING_AMPLE + 2;
 			this.butt.type = Butt.RATING_LARGE;
-			this.skinTone = "red";
+			this.bodyColor = "red";
 			this.hairColor = "black";
 			this.hairLength = 15;
 			initStrTouSpeInte(150, 170, 90, 100);
@@ -63,9 +63,12 @@ import classes.internals.WeightedDrop;
 			this.bonusHP = 1000;
 			this.bonusLust = 201;
 			this.lust = 30;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 41;
 			this.gems = rand(40)+70;
+			this.randomDropChance = 0.1;
+			this.randomDropParams = {
+				rarity: DynamicItems.RARITY_CHANCES_LESSER
+			};
 			this.drop = new WeightedDrop().addMany(1,
 							consumables.SUCMILK,
 							consumables.INCUBID,

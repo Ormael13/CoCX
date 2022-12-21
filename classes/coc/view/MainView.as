@@ -12,15 +12,15 @@
  ****/
 
 package coc.view {
-import coc.view.UIUtils;
+import classes.CoC;
+import classes.EngineCore;
 
 import fl.controls.ComboBox;
-import fl.controls.ScrollBarDirection;
 import fl.controls.UIScrollBar;
 import fl.data.DataProvider;
 
 import flash.display.BitmapData;
-
+import flash.display.DisplayObject;
 import flash.display.Sprite;
 import flash.events.Event;
 import flash.events.MouseEvent;
@@ -159,11 +159,11 @@ public class MainView extends Block {
 
 	public static const GAP:Number   = 4; // Gap between UI panels
 	public static const HALFGAP:Number = GAP/2;
-	internal static const BTN_W:Number = 150; // Button size
-	internal static const BTN_H:Number = 40;
+	public static const BTN_W:Number = 150; // Button size
+	public static const BTN_H:Number = 40;
 
-	internal static const SCREEN_W:Number       = 1420;
-	internal static const SCREEN_H:Number       = 800;
+	public static const SCREEN_W:Number       = 1420;
+	public static const SCREEN_H:Number       = 800;
 
 	// TOPROW: [Main Menu]/[New Game], [Data] ... [Appearance]
 	
@@ -234,7 +234,7 @@ public class MainView extends Block {
 	// monster stats (top right below sprite)
 	public static const MONSTER_X:Number          = COLUMN_3_X;
 	public static const MONSTER_W:Number          = SPRITE_MAX_W;
-	public static const MONSTER_H:Number          = 300;
+	public static const MONSTER_H:Number          = 270;
 	public static const MONSTER_Y:Number          = SPRITE_Y + SPRITE_MAX_H + GAP;
 	// corner stats (bottom right)
 	internal static const CORNERSTATS_X:Number      = COLUMN_3_X;
@@ -265,7 +265,7 @@ public class MainView extends Block {
 	public var monsterStatsView:MonsterStatsView;
 	public var sideBarDecoration:Sprite;
 
-	private var _onBottomButtonClick:Function;//(index:int)=>void
+	private var _onBottomButtonClick:Function;//(index:int, button:CoCButton)=>void
 	public var bottomButtons:Array;
 	private var currentActiveButtons:Array;
 	private var allButtons:Array;
@@ -285,6 +285,8 @@ public class MainView extends Block {
 	 * Is reset on `clearOutput()`
 	 */
 	public var linkHandler:Function;
+	private var customElement:DisplayObject = null;
+	public var hotkeysDisabled:Boolean = false;
 
 	public var charView:CharView;
 	public function MainView():void {
@@ -342,7 +344,7 @@ public class MainView extends Block {
 			bitmapClass: ButtonBackground4
 		}));
 		topRow.addElement(perksButton = new CoCButton({
-			labelText  : 'Perks',
+			labelText  : 'Perks & Opt.',
 			bitmapClass: ButtonBackground5
 		}));
 		topRow.addElement(appearanceButton = new CoCButton({
@@ -376,7 +378,7 @@ public class MainView extends Block {
 			}
 		});
 		mainText.addEventListener(TextEvent.LINK, function(e:TextEvent):void {
-			if (linkHandler != null) linkHandler(e.text);
+			if (linkHandler != null) linkHandler(decodeURI(e.text));
 		});
 		scrollBar = new UIScrollBar();
 		UIUtils.setProperties(scrollBar,{
@@ -444,6 +446,7 @@ public class MainView extends Block {
 		createBottomButtons();
 		var button:CoCButton;
 		for each (button in [newGameButton, dataButton, statsButton, levelButton, perksButton, appearanceButton]) {
+			hookButton(button);
 			this.allButtons.push(button);
 		}
 		this.toolTipView = new ToolTipView(this/*, this.model*/);
@@ -451,8 +454,6 @@ public class MainView extends Block {
 		this.addElement(this.toolTipView);
 
 		// hook!
-		hookBottomButtons();
-		hookAllButtons();
 		this.width  = SCREEN_W;
 		this.height = SCREEN_H;
 		this.scaleX = 1;
@@ -515,38 +516,32 @@ public class MainView extends Block {
 //			b.width  = BUTTON_REAL_WIDTH;   //The button symbols are actually 135 wide
 //			b.height = BUTTON_REAL_HEIGHT; //and 38 high. Not sure why the difference here.
 
-			button = new CoCButton({
-				bitmapClass: ButtonBackgrounds[bi % 10],
-				visible    : false,
-				x          : BOTTOM_X + BOTTOM_HGAP + c * (BOTTOM_HGAP * 2 + BTN_W),
-				y          : BOTTOM_Y + r * (GAP + BTN_H)
-			});
-			button.preCallback = (function(i:int):Function{
-				return function(b:CoCButton):void{
-					if (_onBottomButtonClick != null) _onBottomButtonClick(i);
-				};
-			})(bi);
+			button = createActionButton(bi);
+			button.visible = false;
+			button.x = BOTTOM_X + BOTTOM_HGAP + c * (BOTTOM_HGAP * 2 + BTN_W);
+			button.y = BOTTOM_Y + r * (GAP + BTN_H);
 			this.bottomButtons.push(button);
 			this.addElement(button);
 		}
 		this.allButtons = this.allButtons.concat(this.bottomButtons);
 	}
-
-	protected function hookBottomButtons():void {
-		var bi:Sprite;
-		for each(bi in this.bottomButtons) {
-			bi.addEventListener(MouseEvent.CLICK, this.executeBottomButtonClick);
-		}
+	
+	public function createActionButton(index:int):CoCButton {
+		var button:CoCButton = new CoCButton({
+			bitmapClass: ButtonBackgrounds[index % 10]
+		});
+		button.preCallback = function (b:CoCButton):void {
+			if (_onBottomButtonClick != null) _onBottomButtonClick(index, button);
+		};
+		hookButton(button);
+		button.addEventListener(MouseEvent.CLICK, this.executeBottomButtonClick);
+		return button;
 	}
 
-	protected function hookAllButtons():void {
-		var b:Sprite;
-
-		for each(b in this.allButtons) {
-			b.mouseChildren = false;
-			b.addEventListener(MouseEvent.ROLL_OVER, this.hoverElement);
-			b.addEventListener(MouseEvent.ROLL_OUT, this.dimElement);
-		}
+	protected function hookButton(b:Sprite):void {
+		b.mouseChildren = false;
+		b.addEventListener(MouseEvent.ROLL_OVER, this.hoverElement);
+		b.addEventListener(MouseEvent.ROLL_OUT, this.dimElement);
 	}
 
 	//////// Internal(?) view update methods ////////
@@ -576,7 +571,7 @@ public class MainView extends Block {
 		var button:CoCButton = this.bottomButtons[index] as CoCButton;
 		// Should error.
 		if (!button) return null;
-		return button.hide();
+		return button.reset();
 	}
 
 	public function hideCurrentBottomButtons():void {
@@ -815,9 +810,36 @@ public class MainView extends Block {
 
 	public function clearOutputText():void {
 		this.linkHandler = null;
+		if (this.customElement) {
+			this.removeElement(this.customElement);
+			this.customElement = null;
+		}
+		this.hotkeysDisabled = false;
 		this.mainText.htmlText = '';
 		this.scrollBar.update();
 	}
+	
+	/**
+	 * Display a custom UI element. Only 1 supported at a time (use container if more is needed).
+	 * It will be removed on clearOutput() call
+	 * @param element
+	 * @param afterText Position the element after current text (true, default) or on top of text (false)
+	 * @param stretch Stretch the element (default false)
+	 */
+	public function setCustomElement(element:DisplayObject, afterText:Boolean=true, stretch:Boolean=false):void {
+		if (this.customElement) {
+			this.removeElement(this.customElement);
+		}
+		this.addElement(element);
+		this.customElement = element;
+		element.x = mainText.x;
+		element.y = afterText ? mainText.y + mainText.textHeight : mainText.y;
+		if (stretch) {
+			element.width = mainText.width;
+			element.height = mainText.y + mainText.height - element.y;
+		}
+	}
+	
 
 	public function appendOutputText(text:String):void {
 		var fmt:TextFormat = this.mainText.defaultTextFormat;
@@ -829,6 +851,11 @@ public class MainView extends Block {
 		this.scrollBar.update();
 	}
 
+	// I think font ones are 90% false reports (because of some Flash weirdness)
+	// (no actual unclosed tag, but the font is off because dark magic)
+	// there's a workaround I might try - if the font is messed up, clear text (but save first), reset font, and print text again
+	private var fontKostyl:Boolean = false;
+
 	public function setOutputText(text:String):void {
 		var fmt:TextFormat     = this.mainText.defaultTextFormat;
 		fmt.bold = false;
@@ -838,7 +865,19 @@ public class MainView extends Block {
 		this.mainText.htmlText = text; // Altering htmlText can cause changes in defaultTextFormat
 		var fmtnew:TextFormat  = this.mainText.defaultTextFormat;
 		this.mainText.defaultTextFormat = fmt;
-		if (fmtnew.bold != fmt.bold || fmtnew.italic != fmt.italic || fmtnew.underline != fmt.underline) {this.mainText.htmlText += " /!\\ UNCLOSED TAG DETECTED (When reporting this bug, give information on your previous actions. You can check text history by pressing [H] (Mobile version does not support this).) /!\\ "
+		if (fmtnew.bold != fmt.bold || fmtnew.italic != fmt.italic || fmtnew.underline != fmt.underline) {
+			if (fontKostyl) {
+				//autofix failed, rerun didn't help
+				this.mainText.htmlText += " /!\\ UNCLOSED TAG DETECTED (When reporting this bug, give information on your previous actions. You can check text history by pressing [H] (Mobile version does not support this).) /!\\ ";
+			} else {
+				//attempt to autofix
+				var txt:String = CoC.instance.currentText;
+				EngineCore.clearOutputTextOnly(true);
+				CoC.instance.currentText = txt;
+				fontKostyl = true;
+				CoC.instance.flushOutputTextToGUI();
+				fontKostyl = false;
+			}
 		}
 		this.scrollBar.update();
 	}

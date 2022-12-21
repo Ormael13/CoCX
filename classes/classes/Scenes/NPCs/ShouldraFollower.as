@@ -6,11 +6,6 @@ import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
 public class ShouldraFollower extends NPCAwareContent {
-
-	public function ShouldraFollower()
-	{
-	}
-
 	/*Follower Shouldra tracks hours since her last fuck, similar to Exgartuan. Each sex scene involving her resets this counter and also puts her to "sleep" (length of sleep at least 16 hours). Shouldra will gradually fuck with the PC the longer they go without involving her in sex (length of time below)*/
 
 //const GENDERLESS_MASTURBATION_WITH_GHOST_COUNT:int = 511;
@@ -115,9 +110,10 @@ private function shouldraAndValaGetBigger():void {
 
 private function pureMacroValaCont():void {
 	clearOutput();
-	spriteSelect(SpriteDb.s_ghostGirl2);
-	//Male:
-	if(player.hasCock()) {
+	sceneHunter.selectGender(dickF, vagF);
+
+	//==============================
+	function dickF():void {
 		outputText("Bringing you up near her face, she examines your body and begins pushing her scaled-up forefinger against your prick, pressing it back onto your stomach.  The sensation of the giant fairy's caress causes you to gasp, and you try to move the finger around in a vain attempt to relieve some of the pressure. Shouldra coos at your pathetic efforts and begins to softly rub up and down your dick with the pad of her finger.  The smoothness of her skin allows the ridges of her fingerprint to glide over with little friction, sending sharp spikes of pleasure each time one rubs over the crown of your cock.  Your hips begin to feebly shake beneath her digit, pre leaking out of you and covering the tip of her finger.  Waves of pleasure wash over you, and you begin to relax against her hand.  Her soft palm provides a wonderfully warm place to rest as her finger massages your cock, the sticky feeling of your pre-cum intensifying the sensations tenfold.  Your entire body begins to move with her finger, your back gliding around her palm from your body's sweat.  It becomes difficult to think, your feeble attempts at escape turning into feeble attempts at holding onto her fingertip.  As the ridges continue to goad you towards orgasm, you quicken your pace.  The specter, amused, merely holds her finger in place, allowing you to slide up and down, desperately rubbing against her in an effort to nut.  Before the moment of release can come, she peels you off with her thumb, pushing you back into the softness of her hand and leaving you shaking from the denial.");
 		outputText("\n\n\"<i>Heh.  Look what you did!  Now my finger's all dirty...</i>\"");
 		outputText("\n\nShouldra gives her finger a gentle lick, getting a good taste of the mess.  After smacking her tongue a bit, a small blush runs across her face, obviously turned on by the perverted taste.  She begins to suck on her finger like a lollipop, letting out wet, seductive sounds with every motion.  Her tongue dances around the tip, lapping up every bit of the sticky pre-cum you left behind.  The sight becomes too much to bear and you begin masturbating in an effort to relieve your frustration yourself.  The possessed fae peeks down at you with a half-lidded eye and takes the finger out with a wet *pop*, bringing you closer to her face.");
@@ -125,10 +121,10 @@ private function pureMacroValaCont():void {
 		outputText("\n\nYou shake your head as hard as you can, desperate for a chance to relieve the pressure.  She brings you up to her lips and curls her tongue up towards your feet, guiding you into her mouth.  Each breath she takes engulfs your body in a warm, wet draft, wrapping around you like a hot blanket.  The comfortable sensation sends a chill up your spine, and your thoughts become momentarily blurred.  Slightly disorientated, you relax in the embrace of the surrounding heat, giving a long sigh as your legs begin to slip past the soft cushioning of her lips.  As more of you sinks into her mouth, you start shaking, the sensations spreading throughout your body far too much to handle.  Your dick slips past the soft barrier, eagerly greeted by the tip of her tongue, the rough, wet caress causing you to gasp as you are drawn further into her mouth.  Before you're past your neck she stops pulling you in, and begins using small sucking motions to adjust your position, making small, sucking motions that slide you around her mouth.");
 		outputText("\n\nShouldra begins moving her tongue, sliding it along your entire front, the movement tossing your body around.  The rough sensation of her taste buds sliding across your body causes you to buck, but the soft seal of her lips prevents you from moving in or out any further.  Your moaning seems to encourage her. Looking to the side, you see the corners of her mouth drift up slightly to form a coy smile.  The unique texture of her mouth feels incredible against your body, and the odd feeling causes more pre to leak out from you.  Tasting your need, her tongue redoubles its efforts, moving in waves inside her hot, moist orifice, grinding against your lower body.  Trapped between her lips, you can only gasp and moan as she treats you like a hard candy.  The only semblance of thought you have is to enjoy these feelings as long as possible, and you try your hardest to keep from coming.  Becoming impatient, Shouldra forces your body against the roof of her mouth, grinding her tongue against your groin, curving it to better accommodate your dick.  Your mind goes blank from the intense, focused sensations, and feel your abs begin to clench from the coming orgasm.  You start to cry out from the stimulation, trapped in the soft, wet prison holding you.  Each push from her tongue brings you closer and closer to the edge, until finally it becomes too much.  Cum bubbles up in your shaft before violently gushing out against her waiting tongue.");
 		outputText("\n\nShouldra moves Vala's tongue in a milking motion, rubbing its entirety against your length in an effort to squeeze it all out of you, every motion pushing you against the roof of her mouth as the spongy surface of her tongue wraps around your member.  Each undulation causes you to break even further, your already distant thoughts becoming hazier with each movement.  Eventually, the unseen torture stops and she draws you from her mouth.  Completely numb, you can only hang from her grasp, gasping as the cold air burns your lungs and makes your eyes water as you recover from the mind-shattering orgasm.  Through your confusion, you notice her bringing you close to her again.  She gently places you between her giant breasts, the soft skin sliding around your slick body lubricated by her saliva.  You sink into the depths of her cleavage, your dick gliding against her the entire way.  As you become completely encased in the soft prison, the stimulation proves too much, and you give a final, weak orgasm, still exhausted from the last release.  You sink into the warmth of her breasts as her heartbeat pounds a silent rhythm against your body and the remnants of your orgasm fade.  The last thing you notice is the swaying of her chest as she begins to go on the move.");
-		outputText("\n\nYou wake up outside your camp...");
+		player.sexReward("saliva", "Dick");
+		sharedEnd();
 	}
-	//Female:
-	else {
+	function vagF():void {
 		outputText("Her finger starts pressing firmly against your chest.  You try to push it away, but the size difference makes the effort futile.  The ghost girl starts grinding against your chest with her fingertip, the friction against your breasts causing a small gasp to escape your lips, and your nips to become slightly firmer.  She runs her pinky up your leg, stopping at your vagina, and you reflexively clench your legs together. Unfazed, Shouldra forces them back open with her fingers, exposing you to the open air.  A small breeze blows through, tickling your cunt and causing you to bite your lip.");
 		outputText("\n\nThe specter looks you over, and lowers her finger towards your pussy.  She starts rubbing it gently, causing you to try to tense your legs up again, only for them to be pushed back to the sides.  Her finger begins to increase in pressure against your slit, sending a shock of pleasure.  You give a sharp cry at the sudden stimulation, much to the delight of your captor.  Your sex begins to moisten from her touch, allowing the finger to glide over you with little friction.  Your hips begin to rock back and forth in time with her motions, until soon you're practically dry humping the digit.  Shouldra gives a smile at the display as you start to wrap your legs around her finger, pushing it as hard as you can into your cunny.  The ridges on her fingerprint cause you to pant as they run across your lower lips, spiking the pleasure with each bump.  Soon, her finger is almost completely covered with your lube, glistening in the sunlight.  As you near a final release, the digit is suddenly pulled away from you.  You cry out for its return, but are only met with an amused gaze.  You start shaking from the urge to cum, but before you can take care of the problem yourself, the finger that was grinding against you is suddenly laid out on your chest, preventing you from moving your arms.");
 		outputText("\n\n\"<i>You want to get off, right?</i>\"  You nod as hard as you can.  \"<i>Well first you have to clean up this mess you've made.  Getting my finger all dirty like that...</i>\" she says, her harsh words conflicting with the smile she gives you.");
@@ -136,13 +132,16 @@ private function pureMacroValaCont():void {
 		outputText("\n\nThe tip of her tongue gives a quick lick across the lips, the feeling causing you to let out a sharp gasp... In a last ditch effort to resist, you bite your lower lip, but to no avail.  As soon as you do, she begins to move you up, sliding you along her tongue, your cunt rubbing against it every inch on the way.  The extended spike of pleasure almost instantly breaks you down, and the thought of losing yourself to the sensations becomes very appealing.  The moist heat from her breath causes you to involuntarily relax your waist, and a numbing spreads throughout your lower body, save for your now over-sensitive crotch.  As you try to moan, you find it catch in your throat.  As the tongue slides itself back and forth along your underside, you begin bucking, riding it like a wild mustang.  The orgasm you've been waiting for begins to rise, and looking down, you're surprised to see your legs shaking, completely unaware of any feeling coming from them.  As the tongue thrusts forward one last time, you go over the edge, letting out a muffled squeal of delight in place of moan.");
 		outputText("\n\nThe tongue doesn't stop moving, causing your orgasm to ride itself out for over a full minute, each passing second amplifying the pleasure even further.  Even after it's over, the tongue doesn't stop.  Letting you ride it like an organic sybian, the bumps from the giantess's taste buds giving you chills.  Your eyes begin to roll back as you soon feel yourself begin to cum again.  For a second time, the relentless motions of the tongue extend the release out far longer than is normally possible.  Your head starts swimming in endorphins, and the only thing penetrating the dense fog of pleasure are the sensations around your cunt. You continue riding, cumming over and over again.");
 		outputText("\n\nFive, six, seven times, you start to lose count.");
-		outputText("\n\nAt one point you begin to black out from the sensations, but are quickly snapped out of it by the tip of her tongue poking at your entrance, playing with your rock hard clit.  It proves too much, and you come a final time before being pulled off and placed back on the giant fairy's palm.  You tremble from the experience, your mind in shambles.  Shouldra begins talking, but her voice is very distant, and shortly after being granted a reprieve from the pseudo-sexual torture, you pass out.");
+		outputText("\n\nAt one point you begin to black out from the sensations, but are quickly snapped out of it by the tip of her tongue poking at your entrance, playing with your rock hard clit.  It proves too much, and you come a final time before being pulled off and placed back on the giant fairy's palm.  You tremble from the experience, your mind in shambles.  Shouldra begins talking, but her voice is very distant, and shortly after being granted a reprieve from the pseudosexual torture, you pass out.");
 		outputText("\n\nYou awaken for a second, still tired and numb, in a very dark, warm place.  A sweet musk of sweat enters your nose, and you feel soft walls gently pushing against you.  Before you can figure out what happened, you're lulled back into sleep by a gently pulsing thump near your ear.");
-		outputText("\n\nYou wake up back at your camp...");
+		player.sexReward("saliva", "Vaginal");
+		sharedEnd();
 	}
-	shouldraSleeping(10+rand(15),true);
-	player.orgasm();
-	doNext(camp.returnToCampUseOneHour);
+	function sharedEnd():void {
+		outputText("\n\nYou wake up back at your camp...");
+		shouldraSleeping(10+rand(15),true);
+		doNext(camp.returnToCampUseOneHour);
+	}
 }
 
 
@@ -152,8 +151,7 @@ private function pureMacroValaCont():void {
 private function pureValaAndShouldraMacroMax():void {
 	spriteSelect(SpriteDb.s_ghostGirl2);
 	clearOutput();
-	player.slimeFeed();
-	outputText("Before she can do anything, you shout out a rather unusual suggestion, though to you it sounds quite exciting.  Vala or Shouldra, whoever she is, smiles wickedly and nods, lifting you up towards the glittering gash between her legs.");
+	outputText("Before she can do anything, you shout out a rather unusual suggestion, though it sounds quite exciting to you.  Vala or Shouldra, whoever she is, smiles wickedly and nods, lifting you up towards the glittering gash between her legs.");
 	outputText("\n\n\"<i>I didn't expect you to come up with such a great idea, Champ, but then again, great minds think alike!</i>\" you hear Shouldra comment through the faerie's soothing voice.");
 	outputText("\n\nUp higher, you can see her puffy labia on display, glistening with moisture that's already beginning to bead on the quickly-flushing skin.  Indeed, her rosy pussy stands in stark contrast to the creamy white skin around it, visibly pulsing and engorging as you close in on it.  A moment later, your nude body makes contact with Vala's honey-pot, pressing against her lips, into her slit and all over her mons.  A sweet, slightly musky smell smears across you as you bump into the gigantic snatch, growing dizzy as the aroma overpowers your senses.  Almost immediately, you give yourself over to that steamy muff, happily stuffing your arms through her curtain-like lips and pulling them wide.  The dripping moisture oozing from the pink chasm seems to fog the very air, and before you can do anything else, a fair hand is clamping around your [legs] and tilting you forward, up and in...");
 	outputText("\n\nYour vision goes pink as the channel devours you, sliming your hair with clear, female lubricants.  You can feel your shoulders sliding in after you, and in your excitement, you pull your arms in after, pushing and stroking the silky smooth walls as you explore the inner workings of the Vala's vagina.  You can see the flesh pulsate as you touch it, and after a few particularly successful gropes, the entire channel snaps closed around you, smothering you with pussy as it involuntarily clenches around you.  The entire thing vibrates with the faerie's moan, and she pushes the rest of you in faster, her giant clit bouncing over your [nipples] as she rams you in.");
@@ -171,7 +169,7 @@ private function pureValaAndShouldraMacroMax():void {
 	else outputText("[butt]");
 	outputText(" against the slick walls.  You push your way towards the pinkish slit in the distance begin to slide your [legs] over the inner edges of her lips, pressing your arms up above you for stability.");
 	outputText("\n\nYou must have hit her g-spot, because as soon as you do, a rush of lady-spunk envelops you.  The walls squeeze around you, this time rippling in waves up and down your body, squeezing you affectionately as your temporary shelter vents thick flows of girl-goo all around you.  You hold onto the pulsing walls for dear life, moaning into the steamy cunt while it gives you a full-body massage.");
-	if(player.hasCock()) {  
+	if(player.hasCock()) {
 		outputText("  [EachCock] is quickly brought to orgasm by the exotic situation, and you fire off your own load into the deluge of sex-juice.");
 		if(player.cumQ() >= 1000) outputText("  Somehow, you pour out almost as much spunk as Vala's orgasm, turning the inside of her honeypot into an off-white mess.");
 	}
@@ -187,13 +185,10 @@ private function pureValaAndShouldraMacroMax():void {
 	outputText("\n\nDriven nearly mad by lust, you swing your [legs] out of the tunnel and wrap them around the faerie's embiggened clit, grinding yourself against the top of the twat with the added leverage.  Your hands grab hold of your [nipples] and tug, tweaking and twisting as you writhe in Vala's pretty, pink pussy.  Her sodden snatch has become your entire world, and you give your body and its lusts over to it, doing everything in your power to please and be pleased by the cavernous obsession.");
 	outputText("\n\nThe swaying gait flexes your body to and fro as she moves, the bouncing, wiggling motion only adding to your irregular stimulation of her slit.  At least three times she stops and that tunnel goes tight around you, enveloping you in female flesh.  You lose yourself to it all, closing your eyes and subsuming yourself in pulsing... pink... pussy pleasure...  Though you manage to orgasm a few times as well, pleasing this gigantic cunt is infinitely more rewarding, and you get Vala's body off time after time, barely caring when you begin to lose consciousness from fatigue.  Even in slumber, you toss and turn, your body little more than an organic vibrator...");
 	outputText("\n\nYou wake in your camp, still smelling faintly of Vala's vagina but fully dressed.  You flush a little from the smell, but otherwise feel rather well rested.");
-	player.orgasm();
+	player.sexReward("vaginalFluids", "Default");
 	dynStats("lib", .5);
 	doNext(camp.returnToCampUseOneHour);
 }
-
-
-
 
 //corrupt vala
 public function shouldraMeetsCorruptVala():void {
@@ -281,9 +276,19 @@ public function sandWitchGetsGhostly():void {
 //slap at the end of current menu text
 //Genderless Masturbation
 private function shouldraFappinTimes():void {
-	spriteSelect(SpriteDb.s_ghostGirl2);
-	if(player.hasCock() && player.hasStatusEffect(StatusEffects.Infested)) {
+	if(player.hasCock() && player.hasStatusEffect(StatusEffects.Infested))
 		shouldraAndWormsYoureGonnaHaveABadTime();
+	else if (sceneHunter.uniHerms) {
+		clearOutput();
+		outputText("<b>Which part do you want Shouldra to play with?</b>");
+		menu();
+		addButton(0, "Dick", maleMasturbationProper)
+			.disableIf(!player.hasCock(), "You don't have any.");
+		addButton(1, "Pussy", girlyMasturbationWithGhosts)
+			.disableIf(!player.hasVagina(), "You don't have any.");
+		addButton(2, "GetLicked", shouldraTongueLicksPCs)
+			.disableIf(!player.hasVagina(), "You don't have a pussy to lick.");
+		addButton(4, "Back", shouldraSexMenu);
 	}
 	else if(player.gender == 0) genderlessShouldraMasturbation();
 	else if(player.hasCock() && (!player.hasVagina() || rand(2) == 0)) maleMasturbationProper();
@@ -306,26 +311,38 @@ private function genderlessShouldraMasturbation():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_ghostGirl2);
 	outputText("Shouldra runs your fingers along your ");
-	//[if (femininity < 50) 
+	//[if (femininity < 50)
 	if(player.femininity < 50) outputText("masculine ");
 	else if(player.femininity > 50) outputText("feminine ");
-	outputText("form while processing your request, your eyes glowing yellow as she mulls over her choices.");
+	outputText("form while processing your request, your eyes glowing yellow as she mulls over ");
+	if (player.isGenderless()) {
+		outputText("her choices");
+		if(flags[kFLAGS.SHOULDRA_GENDERLESS_FUCK_COUNT] == 0 && flags[kFLAGS.GENDERLESS_MASTURBATION_WITH_GHOST_COUNT] == 0) {
+			outputText("\n\nFully aware that your salacious options are sorely lacking downstairs, it would seem as though you've stumped your roommate not soon after handing her the keys.  However, your confidence is incredibly short-lived as a scheming grin spreads unbidden across your face.  \"<i>Unluckily for you, I've come prepared for these sorts of situations,</i>\" your ghostly half explains, knocking your knuckles against the vast expanse that is your crotch.  She's leaving no clue as to what she could be referring to, leaving you to only imagine what fate lies in store.");
+		}
+		//if SHOULDRA_GENDERLESS_FUCK_COUNT > 0 & event occurrence = 0
+		else if(flags[kFLAGS.SHOULDRA_GENDERLESS_FUCK_COUNT] > 0 && flags[kFLAGS.GENDERLESS_MASTURBATION_WITH_GHOST_COUNT] == 0) {
+			outputText("\n\n\"<i>So, Champ, you've left me this blank canvas to draw upon again.</i>\"  Elbow propped in your hand, a contemplative finger rests against your lips.  The land's greatest psychic would lack the foresight to predict what your ethereal roommate is concocting.  After the last time she employed - \"<i>Any means necessary,</i>\" your mouth interrupts, concluding your train of thought.  You're left with only a volatile cocktail of equal parts dread and curiosity as your hands rub together menacingly.");
+		}
+		//if event occurrence > 0
+		else {
+			outputText("\n\n\"<i>Up for another round then, Champ?</i>\" she asks, rubbing your hands down your [butt].  ");
+			//[if (corruption < 50)
+			if(player.cor < 50) outputText("There isn't an answer or outcome to that question that you're in favor of, honestly.");
+			else outputText("You sure as hell wouldn't have bothered asking if you weren't.");
+		}
+	} else {
+		outputText("your request.  \"<i>So, let me get this straight.  Despite[if (hasCock = true)  this dandy dick] [if (isHerm = true)  and][if (hasVagina = true)  this serviceable snatch] you want me to work with this?</i>\" the spirit asks, smacking your hand against your [butt].  A smug nod reaffirms your desire.  ");
+		if(flags[kFLAGS.GENDERLESS_MASTURBATION_WITH_GHOST_COUNT] == 0) {
+			outputText("Your spectral visitor cracks your knuckles in a blustering show of confidence.  \"<i>You think you've thrown down the gauntlet with your challenge, eh, Champ?  You think rules, regulations, sanctions, trade embargos... these things can keep me down?</i>\"  What is she blathering on about?  You suspect she's just stalling; call it your own sixth sense, but as she waves your hands around as she boasts, it feels like it's taking some willpower to not just listlessly stroke your goods.  At least, it seems that way until some errant thought interrupts her tirade, a knowing grin blossoming along your mug.  \"<i>No blockade can stop me.</i>\"");
+		}
+		else {
+			outputText("\"<i>Up for another round then, Champ?</i>\" she asks, your body striking a familiar boxing stance from bouts long since fought.  \"<i>If you think I'll be pulling any punches then you don't have a ghost of a chance.</i>\"  Only if you had the control of your body could you respond with even half the appropriate groan.");
+		}
+	}
 	//(same paragraph follows)
-	//{if SHOULDRA_GENDERLESS_FUCK_COUNT = 0 & event occurrence = 0}
-	if(flags[kFLAGS.SHOULDRA_GENDERLESS_FUCK_COUNT] == 0 && flags[kFLAGS.GENDERLESS_MASTURBATION_WITH_GHOST_COUNT] == 0) {
-		outputText("\n\nFully aware that your salacious options are sorely lacking downstairs, it would seem as though you've stumped your roommate not soon after handing her the keys.  However, your confidence is incredibly short lived as a scheming grin spreads unbidden across your face.  \"<i>Unluckily for you, I've come prepared for these sorts of situations,</i>\" your ghostly half explains, knocking your knuckles against the vast expanse that is your crotch.  She's leaving no clue as to what she could be referring to, leaving you to only imagine what fate lies in store.");
-	}
-	//if SHOULDRA_GENDERLESS_FUCK_COUNT > 0 & event occurrence = 0
-	else if(flags[kFLAGS.SHOULDRA_GENDERLESS_FUCK_COUNT] > 0 && flags[kFLAGS.GENDERLESS_MASTURBATION_WITH_GHOST_COUNT] == 0) {
-		outputText("\n\n\"<i>So, Champ, you've left me this blank canvas to draw upon again.</i>\"  Elbow propped in your hand, a contemplative finger rests against your lips.  The land's greatest psychic would lack the foresight to predict what your ethereal roommate is concocting.  After the last time she employed - \"<i>Any means necessary,</i>\" your mouth interrupts, concluding your train of thought.  You're left with only a volatile cocktail of equal parts dread and curiosity as your hands rub together menacingly.");
-	}
-	//if event occurrence > 0
-	else {
-		outputText("\n\n\"<i>Up for another round then, Champ?</i>\" she asks, rubbing your hands down your [butt].  ");
-		//[if (corruption < 50) 
-		if(player.cor < 50) outputText("There isn't an answer or outcome to that question that you're in favor of, honestly.");
-		else outputText("You sure as hell wouldn't have bothered asking if you weren't.");
-	}
+	//if event occurrence = 0
+
 	outputText("  The ghost girl promptly discards your [armor] before hurrying your naked body along into the wilderness away from camp.");
 	outputText("\n\nShe leads you to a small clearing in the woods, highlighted by an opening in the slightly dense canopy and a babbling brook a few feet further in.  To your right is a short, grassy embankment with a pile of large rocks and boulders embedded into the natural wall.  As the specter leads you towards them, a disconcerting realization sinks in: you have no memory of traveling here.  The last thing you can picture is sprinting away from the camp naked.  Either you really need to work on your mental issues or, more likely, Shouldra would rather you not come here on your own.");
 	outputText("\n\nSpeaking of the phantom, your bout of amnesia is the least of her concerns as she has you set aside one rock after another, revealing a tiny cavity in the wall.  ");
@@ -333,13 +350,17 @@ private function genderlessShouldraMasturbation():void {
 	else if(flags[kFLAGS.SHOULDRA_GENDERLESS_FUCK_COUNT] > 0 && flags[kFLAGS.GENDERLESS_MASTURBATION_WITH_GHOST_COUNT] == 0) outputText("The moment the light reveals what lies within, your [butthole] instinctively clenches shut.  \"<i>You didn't think I'd leave my most treasured possessions behind for some goblin to run into, did you?</i>\" It's the ghost girl's chest of dildos, as well-kept as the last time you laid worried eyes on it.");
 	else outputText("Inside rests the ghost's familiar treasure trove of dildos and other toys you have yet to discover.");
 	outputText("  She has you pull the container out from its hiding place, removing the clear tarp she used to protect it from the elements.  Despite the fact that you have yet to control your body once through this entire ordeal, an intrinsic urge to open the container has you bending over to pry into the contents within.");
-	outputText("\n\nHowever, an unusual stirring deep within your midsection grinds your pursuit to a halt; the familiar visage of your companion has formed atop your feature-less groin.  \"<i>Let me take care of this, Champ,</i>\" she exclaims before thrusting forward and - after carefully wiping it clean - using your [foot] to open and sift through the chest's contents.  While doing so, she begins to recite some manner of spell in a singsong voice; whatever her target is, she certainly seems to be enjoying herself.  You feel as though you could lose your balance at any time... if you actually had any command over it.  No, the poltergeist is in full control from your waist and downward, defying gravity as she continues chanting and searching through her collection.  Thanks to the incredibly awkward forward thrust you're locked in, you can't really make out the contents of her chest.  At least not visually, but as the specter guides your [foot] around you can plainly tell that it's full of all sorts of dildos... among other things.");
+	outputText("\n\nHowever, an unusual stirring deep within your midsection grinds your pursuit to a halt; the familiar visage of your companion has formed atop your ");
+	if (player.isGenderless()) outputText("featureless groin.  \"<i>Let me take care of this, Champ,</i>\" she exclaims");
+	else outputText("groin.  You can't decide whether to laugh or cry at the sight as she[if (hasCock = true)  substitutes your [cock] in place of her nose] [if (isHerm = true)  and she][if (hasVagina = true)  shuffles your [vagina] for a moment, using it as her mouth].  \"<i>I had to get dressed up for the occasion,</i>\" she jests");
+	outputText(" before thrusting forward and - after carefully wiping it clean - using your [foot] to open and sift through the chest's contents.  While doing so, she begins to recite some manner of spell in a singsong voice; whatever her target is, she certainly seems to be enjoying herself.  You feel as though you could lose your balance at any time... if you actually had any command over it.  No, the poltergeist is in full control from your waist and downward, defying gravity as she continues chanting and searching through her collection.  Thanks to the incredibly awkward forward thrust you're locked in, you can't really make out the contents of her chest.  At least not visually, but as the specter guides your [foot] around you can plainly tell that it's full of all sorts of dildos... among other things.");
 	if(flags[kFLAGS.SHOULDRA_GENDERLESS_FUCK_COUNT] > 0) outputText("  Just what else did she pack in there since last you peered at its contents back at the ruins?");
 	outputText("\n\n\"<i>Okay, here we go,</i>\" she declares, quickly ending whatever spell she was working on.  Shouldra pulls your [foot] back out of the chest, a ");
 	if(flags[kFLAGS.SHOULDRA_GENDERLESS_FUCK_COUNT] > 0 || flags[kFLAGS.GENDERLESS_MASTURBATION_WITH_GHOST_COUNT] > 0) outputText("familiar, ");
 	outputText("bumpy, eight-inch demon vibrator firmly in her \"grasp.\"  A tingling sensation coursing through your hind end draws your attention away from the ghost as she inspects her quarry.  You honestly aren't too surprised to peer around and discover your [butt] plumping up, each burst of expansion quaking your flesh.");
 	outputText("\n\n\"<i>Now, this will take me a minute to get used to...</i>\"");
-	outputText("\n\n...Yup, now she's speaking through your [butthole].  Some day you'll cease underestimating the lengths this eerie eidolon's creativity will reach in order to have a good time.  You glance forward to confirm that the woman's face has disappeared from your bare groin; this circus attraction has moved on to the main event.  ");
+	outputText("\n\n...Yup, now she's speaking through your [butthole].  Some day you'll cease underestimating the lengths this eerie eidolon's creativity will reach in order to have a good time.  You glance forward to confirm that the woman's face has disappeared from your" + (player.isGenderless() ? "bare" : "") + " groin; this circus attraction has moved on to the main event.  ");
+	//{if analLooseness < 3}
 	if(player.ass.analLooseness < 3) {
 		outputText("Your nerves screech out in pain as your rear revenant stretches out her puckered little \"jaw\" to something more fitting for what she has in store.  A few seconds later and the sensations begin to only register as pleasure.");
 		//[if (corruption < 50)
@@ -360,9 +381,12 @@ private function genderlessShouldraMasturbation():void {
 	outputText("\n\nWith preparation complete, the eager spirit gets right to action.  Your [foot] [if (isBiped = true) \"- still clutching the dildo while in the midst of making any yoga instructor jealous as it continues to hang in midair - \"]anxiously delivers its cargo to your possessed posterior.  The ghost girl uses her augmented cheeks to grab hold of the fun stick, allowing you to regain a normal posture as your [foot] returns to the ground.  The anxiety of the impending onslaught causes you to tense up; confoundment replaces anxiety when you go a few seconds without any forceful entry into your backstage.  Prying back over your shoulder, you find the ghoul merely rolling the dildo back and forth in front of her \"mouth\" tantalizingly.");
 	outputText("\n\n\"<i>If there were ever a more... appropriate time to say something profound... to say something poetic...</i>\"");
 	outputText("\n\nYou can't help but be perplexed by the sudden somber shift.  Though, honestly, it was just a ruse to disarm you; the ghost girl ardently crams the sucker down her gullet, sending shivers racing up your spine.  Nearly all eight inches of coarse demon pecker burrow deep within your haunted hole; the ghoul shifts the dildo around within you, thoroughly brushing your insides with its every nodule.  Dying to continue escalating things, the phantom swings her tongue up to the base and switches on the vibrator, triggering moans from both mouths.  Your bewitched butt grasps the rod once more, thrusting it in and out of you; the combined sensations of  the pseudo oral and anal assault is as only half as confusing as it is pleasurable.");
-	outputText("\n\nBut Shouldra is far from satisfied; without letting up on your current predicament, she directs your [foot] back inside her chest.  It begins indiscriminately shoving dildos of every variety up your besieged bum with undue haste.  Ectoplasmic slobber pours down your [legs] as each fun stick is switched on and added to the collection.  You think she makes it to five before her hold over your [legs] dissolves; lacking the ghost girl's willpower and gumption for ignoring simple laws of nature, you tumble to the ground, a small blessing in disguise as now you at least have things to grapple onto now.  Holding on with all your might is exactly what you do; the rear onslaught is rocking your entire body as every moist rod vibrates and rolls around in the confines of the ghost's gluttonous gullet.  Your inflated mutinous cheeks do their best to contain the invasion through each escalating thrust.");
+	outputText("\n\nBut Shouldra is far from satisfied; without letting up on your current predicament, she directs your [foot] back inside her chest.  It begins indiscriminately shoving dildos of every variety up your besieged bum with undue haste.  Ectoplasmic slobber pours down your [if (isBiped = true) legs] [if (isBiped = false) form] as each fun stick is switched on and added to the collection.  You think she makes it to five before her hold over your [legs] dissolves; lacking the ghost girl's willpower and gumption for ignoring simple laws of nature, you tumble to the ground, a small blessing in disguise as now you at least have things to grapple onto now.  Holding on with all your might is exactly what you do; the rear onslaught is rocking your entire body as every moist rod vibrates and rolls around in the confines of the ghost's gluttonous gullet.  Your inflated mutinous cheeks do their best to contain the invasion through each escalating thrust.");
 	outputText("\n\nThe moist quivering shafts - the bizarre conglomeration of shapes - the unnatural sounds and breathing emanating from your bottom - the unending geyser of diluted ectoplasmic drool soaking your body - the unorthodox tongue rooted in your asshole lashing about - your vexed cheeks simultaneously tightening around their cargo while their abnormal mass violently jiggles about - It's all too much!");
-	outputText("\n\nShouldra doubles down on her payload, yanking it free from your bruised bottom.  But this is no act of mercy.  You're left breathless as the fiend hammers her freight as far down your cargo hold as she can muster.  Now would be a horrible time for her to choke.  Having come as close to cumming as your featureless form can manage, your entire body goes limp.  Your humongous ass lightly quakes as the vibrating dildos continue their melodious humming, going lax in your gaping bum with the ghost girl's grip relaxing.  The torment - however alarmingly pleasurable it turned out to be - is over.");
+	outputText("\n\nShouldra doubles down on her payload, yanking it free from your bruised bottom.  But this is no act of mercy.  You're left breathless as the fiend hammers her freight as far down your cargo hold as she can muster.  Now would be a horrible time for her to choke.  ");
+	if (player.isGenderless()) outputText("Having come as close to cumming as your featureless form can manage, your entire body goes limp.");
+	else outputText("The final delivery throws you over the deep-end, [if (hasCock = true) your [cock] spraying cum everywhere] [if (isHerm = true)  while ][if (hasVagina = true) your [vagina] sprays femspunk, mixing in with the otherworldly drool already coating your [legs]].");
+	outputText("  Your humongous ass lightly quakes as the vibrating dildos continue their melodious humming, going lax in your gaping bum with the ghost girl's grip relaxing.  The torment - however alarmingly pleasurable it turned out to be - is over.");
 	outputText("\n\n\"<i>I'm not... through... yet,</i>\" the spirit spits out between deep breathes.  Too far gone to continue the yoga act, she begins dragging you back towards her treasury with your arms.  Your eyes go wide as she reaches inside and grabs onto something... massive.  Your grip cannot even fully encompass its girth.  ");
 	//if SHOULDRA_GENDERLESS_FUCK_COUNT > 0 OR event occurrence > 0
 	if(flags[kFLAGS.SHOULDRA_GENDERLESS_FUCK_COUNT] > 0 || flags[kFLAGS.GENDERLESS_MASTURBATION_WITH_GHOST_COUNT] > 0) outputText("You recognize it instantly as she pulls it free from her chest: the nearly foot-long floppy horse cock she impaled you on before.");
@@ -370,96 +394,14 @@ private function genderlessShouldraMasturbation():void {
 	else if(flags[kFLAGS.SHOULDRA_GENDERLESS_FUCK_COUNT] == 0) outputText("She holds her catch up clear for you to see; to your horror, you have clutched onto an enormous horse cock replica.  All 13 inches flop restlessly in your grip, seemingly taunting you with the foreboding future that lays before you.");
 	outputText("  Shouldra smacks the dildo of doom onto a nearby boulder as she wearily rises you to your [feet].  The inferior, forgotten playthings slide out uselessly from the ghoul's gasping craw as she slowly clambers over top the wiggling horsey wang.");
 	outputText("\n\nToo tired to object or plead, you meekly brace for impact as the wraith lines up its target.  Your immense cheeks part way.  Your rectum gapes wide.  Your anal tongue presses firmly against your taint.  \"<i>Down the hatch!</i>\"");
-	outputText("\n\nThe forest shudders with your scream.  The phantom easily downs six inches on the first go.  She wraps her tongue around the shaft, forcing more and more into you.  You swear your pelvis is bulging.  Muffled moans blended with laughter emit from your belabored behind.  You dare not guess how deep Shoudra drills the cock into you before she climaxes - hard.  Your voluptuous ass quavers with ferocity alongside her gagged yelping, throwing you from your perch atop the rock back down to the earth.  Her fun over, you begin to feel the magic subsiding.  Having no desire to learn of the consequences of leaving a massive wang lodged in your shrinking anus, you muster what little strength you can to plumb it free.  With the experience settling down, you can't help but laugh - closer to a timid chuckle, as its the best your exhausted body can offer.  You think you hear Shouldra saying something to you, but you're too worn out to listen to her boasting.");
-	outputText("\n\nYou wake some time later, having passed out on top of your clothes.  You're right back at camp.  The ghost girl managed to drag you back somehow - no doubt interested in keeping the location of her secret goodies safe.  For now, at least.  Your attempt to rise back to your [feet] is halted; your ass is still sore... and about as wide as before.  There's also a bottle at your side, full of <b>ectoplasm</b> - you hope this didn't come from where you think it came from.  You can only snicker to yourself, reflecting on the absurdity of it all.  When it comes right down to it, your spooky friend will really go to any means necessary.  It would pay to remember that for a change.");
-	//{analLooseness is now 5} {player receives ectoplasm}
-	player.ass.analLooseness = 5;
-	outputText("\n\n");
-	player.orgasm();
-	dynStats("sen", -2);
-	shouldraSleeping((10 + rand(26)), true);
-	flags[kFLAGS.GENDERLESS_MASTURBATION_WITH_GHOST_COUNT]++;
-	inventory.takeItem(consumables.ECTOPLS, camp.returnToCampUseOneHour);
-}
-
-//Anal Masturbation - Variant on Genderless Masturbation
-//Notes:
-//Includes callback to original genderless scene ( SHOULDRA_GENDERLESS_FUCK_COUNT )
-//Includes callback to meeting Zetsuko ( ZETSUKO_MET )
-//Includes event counter
-//Assumes follower Shouldra resides inside player during preceding choice
-//Uses [foot] fully aware that it will be awkward with hooves.  FUCK THOSE MONSTERS.
-//Variant not available to genderless PC
-private function nongenderlessAnalShouldraMasturbation():void {
-	clearOutput();
-	spriteSelect(SpriteDb.s_ghostGirl2);
-	outputText("Shouldra runs your fingers along your ");
-	//[if (femininity < 50) 
-	if(player.femininity < 50) outputText("masculine ");
-	else if(player.femininity > 50) outputText("feminine ");
-	outputText("form while processing your request, your eyes glowing yellow as she mulls over your request.  \"<i>So, let me get this straight.  Despite[if (hasCock = true)  this dandy dick] [if (isHerm = true)  and][if (hasVagina = true)  this serviceable snatch] you want me to work with this?</i>\" the spirit asks, smacking your hand against your [butt].  A smug nod reaffirms your desire.  ");
-	//(same paragraph follows)
-	//if event occurrence = 0
-	if(flags[kFLAGS.GENDERLESS_MASTURBATION_WITH_GHOST_COUNT] == 0) {
-		outputText("Your spectral visitor cracks your knuckles in a blustering show of confidence.  \"<i>You think you've thrown down the gauntlet with your challenge, eh, Champ?  You think rules, regulations, sanctions, trade embargos... these things can keep me down?</i>\"  What is she blathering on about?  You suspect she's just stalling; call it your own sixth sense, but as she waves your hands around as she boasts, it feels like it's taking some willpower to not just listlessly stroke your goods.  At least, it seems that way until some errant thought interrupts her tirade, a knowing grin blossoming along your mug.  \"<i>No blockade can stop me.</i>\"");
-	}
-	else {
-		outputText("\"<i>Up for another round then, Champ?</i>\" she asks, your body striking a familiar boxing stance from bouts long since fought.  \"<i>If you think I'll be pulling any punches then you don't have a ghost of a chance.</i>\"  Only if you had control of your body could you respond with even half the appropriate groan.");
-	}
-	outputText("  The ghost girl promptly discards your [armor] before hurrying your naked body along into the wilderness away from camp.");
-	outputText("\n\nShe leads you to a small clearing in the wood, highlighted by an opening in the slightly dense canopy and a babbling brook a few feet further in.  To your right is a short, grassy embankment with a pile of large rocks and boulders embedded into the natural wall.  As the specter leads you towards them, a disconcerting realization sinks in: you have no memory of traveling here.  The last thing you can picture is sprinting away from the camp naked.  Either you really need to work on your mental issues or, more likely, Shouldra would rather you not come here on your own.");
-	outputText("\n\nSpeaking of the phantom, your bout of amnesia is the least of her concerns as she has you set aside one rock after another, revealing a tiny cavity in the wall.  ");
-	//if SHOULDRA_GENDERLESS_FUCK_COUNT = 0 & event occurrence = 0
-	if(flags[kFLAGS.SHOULDRA_GENDERLESS_FUCK_COUNT] == 0 && flags[kFLAGS.GENDERLESS_MASTURBATION_WITH_GHOST_COUNT] == 0) outputText("Within lies a rather rustic yet well-built chest.");
-	else if(flags[kFLAGS.SHOULDRA_GENDERLESS_FUCK_COUNT] > 0 && flags[kFLAGS.GENDERLESS_MASTURBATION_WITH_GHOST_COUNT] == 0) outputText("The moment the light reveals what lies within, your [butthole] instinctively clenches shut.  \"<i>You didn't think I'd leave my most treasured possessions behind for some goblin to run into, did you?</i>\" It's the ghost girl's chest of dildos, as well-kept as the last time you laid worried eyes on it.");
-	else outputText("Inside rests the ghost's familiar treasure trove of dildos and other toys you have yet to discover.");
-	outputText("  She has you pull the container out from its hiding place, removing the clear tarp she used to protect it from the elements.  Despite the fact that you have yet to control your body once through this entire ordeal, an intrinsic urge to open the container has you bending over to pry into the contents within.");
-	outputText("\n\nHowever, an unusual stirring deep within your midsection grinds your pursuit to a halt; the familiar visage of your companion has pushed its way out of your groin.  You can't decide whether to laugh or cry at the sight as she[if (hasCock = true)  substitutes your [cock] in place of her nose] [if (isHerm = true)  and she][if (hasVagina = true)  shuffles your [vagina] for a moment, using it as her mouth].  \"<i>I had to get dressed up for the occasion,</i>\" she jests before thrusting forward and - after carefully wiping it clean - using your [foot] to open and sift through the chest's contents.  While doing so, she begins to recite some manner of spell in a singsong voice; whatever her target is, she certainly seems to be enjoying herself.  You feel as though you could lose your balance at any time... if you actually had any command over it.  No, the poltergeist is in full control from your waist and downward, defying gravity as she continues chanting and searching through her collection.  Thanks to the incredibly awkward forward thrust you're locked in, you can't really make out the contents of her chest.  At least not visually, but as the specter guides your [foot] around you can plainly tell that it's full of all sorts of dildos... among other things.");
-	//if SHOULDRA_GENDERLESS_FUCK_COUNT > 0
-	if(flags[kFLAGS.SHOULDRA_GENDERLESS_FUCK_COUNT] > 0) outputText("  Just what else did she pack in there since last you peered at its contents back at the ruins?");
-	outputText("\n\n\"<i>Okay, here we go,</i>\" she declares, quickly ending whatever spell she was working on.  Shouldra pulls your [foot] back out of the chest, a ");
-	//if SHOULDRA_GENDERLESS_FUCK_COUNT > 0 OR event occurrence > 0
-	if(flags[kFLAGS.SHOULDRA_GENDERLESS_FUCK_COUNT] > 0 || flags[kFLAGS.GENDERLESS_MASTURBATION_WITH_GHOST_COUNT] > 0) outputText("familiar, ");
-	outputText("bumpy, eight-inch demon vibrator firmly in her \"grasp.\" A tingling sensation coursing through your hind end draws your attention away from the ghost as she inspects her quarry.  You honestly aren't too surprised to peer around and discover your [butt] plumping up, each burst of expansion quaking your flesh.");
-	outputText("\n\n\"<i>Now, this will take me a minute to get used to...</i>\"");
-	outputText("\n\n...Yup, now she's speaking through your [butthole].  Some day you'll cease underestimating the lengths this eerie eidolon's creativity will reach in order to have a good time.  You glance forward to confirm that the woman's face has disappeared from your groin; this circus attraction has moved on to the main event.  ");
-	//{if analLooseness < 3}
-	if(player.ass.analLooseness < 3) {
-		outputText("Your nerves screech out in pain as your rear revenant stretches out her puckered little \"jaw\" to something more fitting for what she has in store.  A few seconds later and the sensations begin to only register as pleasure.");
-		if(player.cor < 50) outputText("  This only worries you further.");
-		outputText("  It doesn't take her long to <b>prepare your anus for any insidious ploy she's thought up.</b>");
-	}
-	else {
-		outputText("\"<i>Looks as though you already get plenty of action back here, chief,</i>\" she jests.  Nevertheless, the rear revenant massages her \"jaw\" even more lax than you already are.  Even stranger, each gyration provides more and more pleasurable feedback");
-		if(player.cor < 50) outputText(", which only serves to confuse you");
-		outputText(".");
-	}
-	outputText("\n\n\"<i>And now for the pièce de résistance.</i>\"");
-	outputText("\n\nWhat more could she possibly have to do? Just how much sorcery has she - some sort of slimy protrusion is sprouting out of your asshole.  ");
-	if(flags[kFLAGS.ZETSUKO_MET] > 0) outputText("\"<i>Your run-in with a particular kitsune inspired me,</i>\" Shouldra teases");
-	else outputText("Shouldra is too caught up in her machination to give you any hint as to what is going on, leaving you confused");
-	outputText(" as the foreign object circles your sphincter.  Though difficult to get a clear visual - the amative apparition still maintains authority over your lower half - you can make out what appears to be a long, emerald, translucent tongue.  The ectoplasmic slobber running down your [if (isBiped = true) leg] [if (isBiped = false) form] essentially confirms your presumptions.  The phantom tongue strokes along your skin, making clear the fact that you can experience its sense of touch just as well as you can with your own.  You count your blessings that the imparted feelings end there; a dual sense of taste would probably end poorly in this circumstance.");
-	outputText("\n\nWith preparation complete, the eager spirit gets right to action.  Your [foot] [if (isBiped = true) \"- still clutching the dildo while in the midst of making any yoga instructor jealous as it continues to hang in midair - \"]anxiously delivers its cargo to your possessed posterior.  The ghost girl uses her augmented cheeks to grab hold of the fun stick, allowing you to regain a normal posture as your [foot] returns to the ground.  The anxiety of the impending onslaught causes you to tense up; confoundment replaces anxiety when you go a few seconds without any forceful entry into your backstage.  Prying back over your shoulder, you find the ghoul merely rolling the dildo back and forth in front of her \"mouth\" tantalizingly.");
-	outputText("\n\n\"<i>If there were ever a more... appropriate time to say something profound... to say something poetic...</i>\"");
-	outputText("\n\nYou can't help but be perplexed by the sudden somber shift.  Though, honestly, it was just a ruse to disarm you; the ghost girl ardently crams the sucker down her gullet, sending shivers racing up your spine.  Nearly all eight inches of coarse demon pecker burrow deep within your haunted hole; the ghoul shifts the dildo around within you, thoroughly brushing your insides with its every nodule.  Dying to continue escalating things, the phantom swings her tongue up to the base and switches on the vibrator, triggering moans from both mouths.  Your bewitched butt grasps the rod once more, thrusting it in and out of you; the combined sensations of  the pseudo oral and anal assault is as only half as confusing as it is pleasurable.");
-	outputText("\n\nBut Shouldra is far from satisfied; without letting up on your current predicament, she directs your [foot] back inside her chest.  It begins indiscriminately shoving dildos of every variety up your besieged bum with undue haste.  Ectoplasmic slobber pours down your [if (isBiped = true) legs] [if (isBiped = false) form] as each fun stick is switched on and added to the collection.  You think she makes it to five before her hold over your [legs] dissolves; lacking the ghost girl's willpower and gumption for ignoring simple laws of nature, you tumble to the ground, a small blessing in disguise as now you at least have things to grapple onto now.  Holding on with all your might is exactly what you do; the rear onslaught is rocking your entire body as every moist rod vibrates and rolls around in the confines of the ghost's gluttonous gullet.  Your inflated mutinous cheeks do their best to contain the invasion through each escalating thrust.");
-	outputText("\n\nThe moist quivering shafts - the bizarre conglomeration of shapes - the unnatural sounds and breathing emanating from your bottom - the unending geyser of diluted ectoplasmic drool soaking your body - the unorthodox tongue rooted in your asshole lashing about - your vexed cheeks simultaneously tightening around their cargo while their abnormal mass violently jiggles about - It's all too much!");
-	outputText("\n\nShouldra doubles down on her payload, yanking it free from your bruised bottom.  But this is no act of mercy.  You're left breathless as the fiend hammers her freight as far down your cargo hold as she can muster.  Now would be a horrible time for her to choke.  The final delivery throws you over the deep-end, [if (hasCock = true) your [cock] spraying cum everywhere] [if (isHerm = true)  while ][if (hasVagina = true) your [vagina] sprays femspunk, mixing in with the otherworldly drool already coating your [legs]].  Your humongous ass lightly quakes as the vibrating dildos continue their melodious humming, going lax in your gaping bum with the ghost girl's grip relaxing.  The torment - however alarmingly pleasurable it turned out to be - is over.");
-	outputText("\n\n\"<i>I'm not... through... yet,</i>\" the spirit spits out between deep breathes.  Too far gone to pick up the yoga act again, she begins dragging you back towards her treasury with your arms.  Your eyes go wide as she reaches inside and grabs onto something... massive.  Your grip cannot even fully encompass its girth.  ");
-	//if SHOULDRA_GENDERLESS_FUCK_COUNT > 0 OR event occurrence > 0
-	if(flags[kFLAGS.SHOULDRA_GENDERLESS_FUCK_COUNT] > 0 || flags[kFLAGS.GENDERLESS_MASTURBATION_WITH_GHOST_COUNT] > 0) outputText("You recognize it instantly as she pulls it free from her chest: the nearly 2-foot floppy horse cock she impaled you on before.");
-	//if SHOULDRA_GENDERLESS_FUCK_COUNT = 0
-	else outputText("She holds her catch up clear for you to see; to your horror, you have clutched onto an enormous horse cock replica.  All 13 inches flop restlessly in your grip, seemingly taunting you with the foreboding future that lays before you.");
-	outputText("  Shouldra smacks the dildo of doom onto a nearby boulder as she wearily rises you to your [feet].  The inferior, forgotten playthings slide out uselessly from the ghoul's gasping craw as she slowly clambers over top the wiggling horsey wang.");
-	outputText("\n\nToo tired to object or plead, you meekly brace for impact as the wraith lines up its target.  Your immense cheeks part way.  Your rectum gapes wide.  Your anal tongue presses firmly against your taint.  \"<i>Down the hatch!</i>\"");
-	outputText("\n\nThe forest shudders with your scream.  The phantom easily downs six inches on the first go.  She wraps her tongue around the shaft, forcing more and more into you.  You swear your pelvis is bulging.  Muffled moans blended with laughter emit from your belabored behind.  You dare not guess how deep Shoudra drills the cock into you before she climaxes - hard.  Your voluptuous ass quavers with ferocity alongside her gagged yelping, throwing you from your perch atop the rock back down to the earth.  Her fun over, you begin to feel the magic subsiding.  Having no desire to learn of the consequences of leaving a massive wang lodged in your shrinking anus, you muster what little strength you can to plumb it free.  With the experience settling down, you can't help but laugh - closer to a timid chuckle, as its the best your exhausted body can offer.  You think you hear Shouldra saying something to you, but you're too worn out to listen to her boasting.");
-	outputText("\n\nYou wake some time later, having passed out on top of your clothes.  You're right back at camp.  The ghost girl managed to drag you back somehow - no doubt interested in keeping the location of her secret goodies safe.  For now, at least.  Your attempt to rise back to your [feet] is halted; your ass is still sore... and about as wide as before.  There's also a bottle at your side, full of <b>ectoplasm</b> - you hope this didn't come from where you think it came from.  You can only snicker to yourself, reflecting on the absurdity of it all.  When it comes right down to it, your spooky friend will really meet any challenge you confront her with.  It would pay to remember that for a change.");
+	outputText("\n\nThe forest shudders with your scream.  The phantom easily downs six inches on the first go.  She wraps her tongue around the shaft, forcing more and more into you.  You swear your pelvis is bulging.  Muffled moans blended with laughter emit from your belabored behind.  You dare not guess how deep Shoudra drills the cock into you before she climaxes - hard.  Your voluptuous ass quavers with ferocity alongside her gagged yelping, throwing you from your perch atop the rock back down to the earth.  Her fun over, you begin to feel the magic subsiding.  Having no desire to learn of the consequences of leaving a massive wang lodged in your shrinking anus, you muster what little strength you can to plumb it free.  With the experience settling down, you can't help but laugh - closer to a timid chuckle, as it's the best your exhausted body can offer.  You think you hear Shouldra saying something to you, but you're too worn out to listen to her boasting.");
+	outputText("\n\nYou wake some time later, having passed out on top of your clothes.  You're right back at camp.  The ghost girl managed to drag you back somehow - no doubt interested in keeping the location of her secret goodies safe.  For now, at least.  Your attempt to rise back to your [feet] is halted; your ass is still sore... and about as wide as before.  There's also a bottle at your side, full of <b>ectoplasm</b> - you hope this didn't come from where you think it came from.  You can only snicker to yourself, reflecting on the absurdity of it all.  When it comes right down to it, your spooky friend will really " + (player.isGenderless() ? "go to any means necessary" : "meet any challenge you confront her with") + ".  It would pay to remember that for a change.");
 	//analLooseness is now 5
-	player.orgasm();
-	dynStats("sen", -2);
 	player.ass.analLooseness = 5;
-	shouldraSleeping((10 + rand(26)), true);
 	outputText("\n\n");
+	player.sexReward("no", "Anal");
+	dynStats("sen", -2);
+	shouldraSleeping((10 + rand(26)), true);
 	flags[kFLAGS.GENDERLESS_MASTURBATION_WITH_GHOST_COUNT]++;
 	inventory.takeItem(consumables.ECTOPLS, camp.returnToCampUseOneHour);
 }
@@ -480,18 +422,18 @@ private function maleMasturbationProper():void {
 	outputText("\n\nYou crawl on your belly across to the flower's entrance, shuddering with delight as your [cock] slides, catches, and flops against each and every pedal on the way.  With an effort spurred by your ever-increasing desire to bone a thing, you lunge forward, a hand reaching forward... to smack into the edge of the flowery fuckbox.  You freeze momentarily as your body registers the sheer lubrication of the lips; whereas the pedals glistened with dew, the unnatural opening virtually leaks in an obviously spiritually-imparted sense of anticipation.");
 	outputText("\n\nFor a little while you gently poke and pinch at her soaking folds before you can confirm their validity.  Shouldra does good work; the vegetable organ even radiates a gentle heat.  There's nothing for it, then.  You drag yourself to your feet, line yourself up as best you can, then, with an excited cry, leap high into the air.  With a loud and delicious-sounding squelch, you drive your way into the rose.  Your momentum aids in the penetration, sinking further and further still until, with a dull smack, you hilt; an impressively deep insertion, you observe happily.");
 	outputText("\n\nThe plant immediately goes to work, the stuffed recesses expertly rippling and squeezing your [cock].  A shuddering sigh ripples from your very being at the milking.  \"<i>She seems to like you,</i>\" Shouldra whispers in your ear.  If you were in a more stable state of mind, you'd probably roll your eyes.  As it were, you simply hum your agreement, losing yourself in the heat of the moment.  She just chuckles and casts a small spell before falling silent once more.");
-	//if buals: 
-	if(player.balls > 0) outputText("\n\nYour sack");
+	//if buals:
+	if(player.hasBalls()) outputText("\n\nYour sack");
 	else outputText("\n\nYour prostate");
 	outputText(" shudders and churns, and you know enough about Shouldra to know exactly what's to come.  Another wave of lust hits you like a freight train, and the thirsty rose feasts on a multi-liter burst of pre.  Though you can't see the stalk around the span of the bloom, you can readily hear and imagine your initial offering sloshing down towards its roots.  The squishing and squeezing intensifies, the rose obviously spurred on by its appetizer.");
 	outputText("\n\nWith a final toe-curling compression of your shaft, the rose achieves the release it instinctively craves.  You can almost swear you can hear its triumphant cry as your cum-tunnel bulges with an unnaturally large load, and it's all you can do to even stay conscious with the barrage of pleasure bouncing around your thoughts.  The first gout of seed spills into the plant's greedy gullet, followed quickly by a fourth, and fifth, and sixth, and seventh...");
 	outputText("\n\nThe monstrous flower, seemingly overwhelmed by your overloading orgasm, tips to one side, releasing its grip on you and allowing you to tumble to the ground.  Thankfully, you land rather softly on your back; you glance back at Shouldra's creation and are shocked by the results.  The poor thing can hardly even stand up straight!  Your semen has bulged the rose's shaft in numerous places.  Judging by the steady drizzle of cum still pouring from your engorged member, Shouldra certainly overcharged her virility spell, this time around.");
 	outputText("\n\nAs the thought crosses your mind, a familiar-looking ghost sits up in your torso, clamoring out and leaning over you with a huge smile on her face.  \"<i>Have fun?</i>\" she asks innocently.  \"<i>I thought you might like that little trick.  Picked it up a few decades back from a dryad; nice bunch, as long as they warm up to you.</i>\"");
 	outputText("\n\nYou don't bother responding.  She reaches to you, and you take her hand, letting her guide you to your feet.");
-	//if cocksize <200: 
+	//if cocksize <200:
 	if(player.biggestCockArea() < 200) outputText("  You stagger a bit at the unaccustomed heft of your junk altering your center of gravity, but you know that will wear off soon enough.");
 	outputText("  She reaches into her tunic and tosses you a full bottle of ectoplasm, giving you a wink before incorporealizing once more and floating into you.  All's well that ends well.");
-	player.orgasm();
+	player.sexReward("no", "Dick");
 	dynStats("sen", -2);
 	outputText("\n\n");
 	shouldraSleeping((10 + rand(26)), true);
@@ -509,10 +451,10 @@ private function girlyMasturbationWithGhosts():void {
 	outputText("\n\nEach passing second of the pseudo-torture becomes more and more agonizing, and your swaying has soon become a sort of writhing as the denial becomes too much to bear.  You start pleading for Shouldra to give you a release, only to be met with a playful refusal.  As your begging becomes more and more pitiful, you notice that you've been speaking out loud, calling out into the empty glade for permission to orgasm.  The realization sends blood rushing to your face in embarrassment, which is quickly overcome by the still gnawing desire to cum.  You hear Shouldra's voice echo in your head:");
 	outputText("\"<i>Tsk!  Saying those kinds of things aloud!  Still... if you want to let it out so badly, I might let you if you beg a little more...</i>\"");
 	outputText("\n\nThe last word is punctuated by a change in your finger.  A small, but noticeable, vibration begins teasing your clit, spreading to the rest of your hand.  The feeling elicits a sharp gasp as it begins alternating its intensity.  You try to resist, squirming around in an effort to knock it off its position, but it's no use.  Your desires quickly win out over your shame, and you soon accept defeat.  You spread your legs, and begin begging, practically crying out into the sky for more of Shouldra's special technique.  You hear another giggle echo from within, and your hand begins to encircle your box, now completely soaked in anticipation for what's to come.");
-	outputText("\n\nCurving over your entrance, the vibrating palm presses against you, each pulse reverberating through the whole of your body as it times itself with your heartbeat.  The sensation is more than enough to send you over the edge after all the teasing, your moans catching in your throat as you forget to breathe.  But much like the cum that had been building up inside you, the animalistic noises explode out of you, the sounds startling a few surrounding birds out of their trees.  Satisfied, the ghost-girl allows you control of your arms, but continues whatever spell that generates the vibrations, much to your delight.  You indulge yourself a little more, basking in the intensity only her magic could provide.  Satisfied, you try to withdraw your hand, but to you dismay you find it adhering to the surface.  Panicking slightly, you twist and jerk, but nothing seems to break the bond between your still-pulsing hand and now overly-sensitive cunny.  In fact, each attempt seems to cause it to increase in potency, until eventually the titillating shocks of pleasure-pain become far too powerful to focus on anything else.");
+	outputText("\n\nCurving over your entrance, the vibrating palm presses against you, each pulse reverberating through the whole of your body as it times itself with your heartbeat.  The sensation is more than enough to send you over the edge after all the teasing, your moans catching in your throat as you forget to breathe.  But much like the cum that had been building up inside you, the animalistic noises explode out of you, the sounds startling a few surrounding birds out of their trees.  Satisfied, the ghost-girl allows you the control of your arms, but continues whatever spell that generates the vibrations, much to your delight.  You indulge yourself a little more, basking in the intensity only her magic could provide.  Satisfied, you try to withdraw your hand, but to you dismay you find it adhering to the surface.  Panicking slightly, you twist and jerk, but nothing seems to break the bond between your still-pulsing hand and now overly-sensitive cunny.  In fact, each attempt seems to cause it to increase in potency, until eventually the titillating shocks of pleasure-pain become far too powerful to focus on anything else.");
 	outputText("\n\nYou clutch your thighs together in a final act of defiance to the situation, but to no avail.  As your lower mouth begins drooling onto the ground below, the numbness of your legs spreads upward.  As it hits your head, thinking becomes a nigh-impossible task.  Your body twitches on the ground, and the thought of just surrendering and riding it out becomes increasingly appealing.  The edges of your vision turn pink and your tongue rolls out of your mouth as you lose yourself in the intense, otherworldly sensations.  You feel your honey pouring out on the ground below you, mixing in with the soil.  Before your mind and vision go completely dark, however, the pulsing stops, cutting off flow of pleasure that had just moments ago threatened to steal your sanity.");
 	outputText("\n\nA chill signifies Shouldra's exit of your body, and through the haze you make out her peeking her head over your form.  The odd quiver in your legs and the now sex-scented mud coating your ass are the only proof of what you had just experienced, and the fatigue quickly sets in as the last remnants of pleasure fade from your body.  As you lose consciousness, you feel yourself being picked up, and carried back to your camp.");
-	player.orgasm();
+	player.sexReward("no", "Vaginal");
 	dynStats("sen", -2);
 	shouldraSleeping((10 + rand(26)), true);
 	doNext(camp.returnToCampUseOneHour);
@@ -543,8 +485,15 @@ private function shouldraTongueLicksPCs():void {
 	else {
 		outputText("\n\nShouldra smiles and wonders aloud, \"<i>Think I could get your tongue in your cooch again?</i>\"");
 	}
+	menu();
+	addButton(0, "No", needMagic);
+	addButton(1, "Flexible", flexible)
+		.disableIf(!player.hasPerk(PerkLib.Flexibility), "Req. 'Flexibility' perk.");
+	addButton(2, "LongTongue", longTong)
+		.disableIf(!player.hasLongTongue(), "...Did you read the button name?");
+
 	//if PC is catgirl (has "flexibility" perk)
-	if(player.hasPerk(PerkLib.Flexibility)) {
+	function flexible():void {
 		//if event occurrence = 0
 		if(flags[kFLAGS.SHOULDRA_TONGUE_LICKS_TIMES] == 0) {
 			outputText("\n\nYou sheepishly pulse confirmation back to her that you can.  You're not really used to talking about that sort of thing, but you <b>are</b> sharing a body.  \"<i>Oh, now that's just adorable!</i>\" Shouldra exclaims, having already searched you for mental images of your own flexibility.  You blush at the tease, but you can feel her lust spike at the thoughts, telling you that it's more than just a fun thought for your ethereal partner.");
@@ -566,14 +515,14 @@ private function shouldraTongueLicksPCs():void {
 		outputText(" sliding fingers along the wet appendage, humming a little tune over your tongue until more than a foot of it droops from your mouth.  \"<i>Now we're getting somewhere,</i>\" you hear her thinking as she works her magic.  There doesn't seem to be a limit to how much she can pull out of your mouth, and soon she has more than three feet of pure tongue coiled in your lap.  Furrowing your brow in concentration, she tries to move your tongue about, but can't manage to wiggle more than the tip.  \"<i>Too thin,</i>\" she mutters, \"<i>much too weak. Doesn't feel right...</i>\"");
 	
 		outputText("\n\nTaking the midsection of your tongue in your hand, she slowly starts to rub her hand along some of its length.  It feels... odd, somehow, but not entirely unpleasant.  Though you shudder at the first rub, they start to feel more natural as she pushes you on.  Actually, it feels sort of good.  Her strokes remain constant, though some part of you wishes she'd go faster.  It doesn't even register as odd in your addled mind that your tongue is swelling in your hand with every stroke.  Shouldra starts to make wider movements along your smooth stretch of muscle.  Its girth plumps up to fill your palm nicely wherever she brings your hand, and the strange sensations of your flesh on its nerves wrack your body with shudders of pleasure even through Shouldra's grip.");
-		outputText("\n\nThough it's not just you feeling this anyhow.  For her part, your pale possessor seems to be enjoying this odd process even more than you are.  She pants in time with each and every stroke, occasionally rolling your neck and letting out a soft moan as your spine arches.  You surmise that she's somehow bumped up the sensitivity of the nerves on your tongue to rival that of those around your true sex, and rewired you to experience each touch in the same way.  By the time Shouldra reaches the end, your tongue is long, thick, and nicely tapered at the end, and she's having a hard time keeping your weight up as the pulses of pleasure rush through your body.");
+		outputText("\n\nThough it's not just you who are feeling this anyhow.  For her part, your pale possessor seems to be enjoying this odd process even more than you are.  She pants in time with each and every stroke, occasionally rolling your neck and letting out a soft moan as your spine arches.  You surmise that she's somehow bumped up the sensitivity of the nerves on your tongue to rival that of those around your true sex, and rewired you to experience each touch in the same way.  By the time Shouldra reaches the end, your tongue is long, thick, and nicely tapered at the end, and she's having a hard time keeping your weight up as the pulses of pleasure rush through your body.");
 		outputText("\n\n\"<i>That's... yeah, that's good,</i>\" she breathily determines.  With just a bit of its weight supported by your hand and a lot of concentration on her part, Shouldra manages to snake your tongue down to your cunt, still dripping need from the earlier licking.  With a little shake the first foot or so of your lengthy stretch goes rigid.  After a few probing pokes against your labia, she unceremoniously penetrates the appendage deep into your waiting honeypot.  The dual pleasures of your tongue and your cunt set your senses aflame, and your inner lust roils as the sensitive skin of your tongue caresses every nook and crevice of your sex.  Shouldra lets out a little squeaking noise, obviously even catching herself off-guard with the potent mixture of feeling.  She abandons trying to keep your body upright and topples onto your side.  She rolls you onto your back and arches your hips, moaning like a whore as your tongue shlicks in and out of you, slapping lewdly against you with each thrust.  Shouldra claws at the grass and dirt with your free hand, desperate to hold on to something as the whirlwind of pleasure tries to whisk her away.");
 		outputText("\n\nStuck in your mind as a helpless onlooker, you're forced to just ride out the storm.  You feel <b>everything</b> so clearly; every blade of grass tickling your shoulders, every drop of saliva smeared across your swollen [clit], every hard press of your possessed tongue against your craving walls. it all feels so much, like the pleasure is burning you so hot that it's going to tear you apart from the inside and drive you insane.  Your follower, apparently in possession of quite a will of her own, manages to overcome the feelings just long enough to roll herself onto her side and grab for the dildos.  She manages to drag them back, and all you can do is pray that they'll make this release come faster, as the buildup is especially torturous under the circumstances.  Now more confident in her ability to keep your tongue moving, she releases it, and reaches for the pair of phallic toys.");
 		outputText("\n\nOne in each of your shaking hands, she flops onto your back once more.  You hear a strained voice from within telling you to \"<i>get ready</i>,\" just before Shouldra jams one dildo in your cunt and crams the other in your mouth.  Their bumpy surfaces tickle the nerves of your tongue so perfectly and they make you feel so wonderfully full that thoughts of the agonizing wait you had to endure is dissolved almost immediately by orgasm.  Shouldra screams out around the one in your mouth, muffled wails of pleasure echoing among the rocks.  A tasty gush of your juices splash out over your tightly-packed tongue and onto your thighs and the ground.  Your vision begins to fade even before the  feelings of release leave you.  By the time it has and your tongue starts to return to its usual size, you're gone, floating unaware on a cloud of post-orgasmic bliss.");
-		//end catgirl scene, back to camp
+		sharedEnd();
 	}
 	// actually, draconic one is long enough as is even without her upgrades
-	else if(player.hasLongTongue()) {
+	function longTong():void {
 		outputText("\n\nYou tell your experimentative friend to see for herself.  She opens your jaw wide, letting inch after inch of your inhuman tongue spill out.  A happy squeak, made rather awkward by the floppy appendage, comes from you as Shouldra checks out what you've been packing in your mouth.  \"<i>Tho yuv ha tis-</i>\" she giggles at the sound of talking with it hanging out, but continues talking in your mind.  \"<i>So you've had this thing all this time and I haven't gotten to play with it?  Well that just won't do.</i>\"");
 		outputText("\n\nShe sits you down and lets her dildos fall to the ground, forgotten for the moment.  It feels absolutely <b>fantastic</b> as she begins to take a few testing licks at your pussy.  \"<i>Oooh, Champ, I could get used to this...</i>\"  Shouldra moans from somewhere within you.  Truth be told, it does pretty nice to have someone else doing the work for you.  Her vast pool of libido laps at you, arousing you and making every one of her flicks across your engorged " + clitDescript() + " feel better than they have any right to.  She caresses your slickening lips with your lengthy prehensile tongue, granting you all the pleasure of her expert technique.  Thoughts fog and blow away as you ride the waves of pleasure inside your mind, body a <b>very</b> willing slave to the ghostly girl's desires.");
 		outputText("\n\n\"<i>Need... more...</i>\" Without bothering to get your opinion on the matter, Shouldra starts to mutter a soft incantation into your steamy sex.  Much to your dismay, she momentarily snakes your tongue out from your crotch.  With the hand that she isn't propping you up on, she takes your " + tongueDescript() + " between your thumb and a couple fingers and begins to gently tug and stroke on it.  Though imperceptible at first, a few strokes later the change becomes obvious: even more inches of muscle spill forth from your mouth.");
@@ -581,13 +530,14 @@ private function shouldraTongueLicksPCs():void {
 		else outputText("\n\n She happily continues ");
 		outputText("sliding fingers along the wet appendage, humming a little tune over your tongue until more than an additional foot of it droops from your mouth.  \"<i>Now we're getting somewhere,</i>\" you hear her thinking as she works her magic.  There doesn't seem to be a limit to how much she can pull out of your mouth, and soon she has more than three feet of pure tongue coiled in your lap.  Furrowing your brow in concentration, she tries to move your tongue about, but can't manage to wiggle more than the tip.  \"<i>Too thin,</i>\" she mutters, \"<i>much too weak. Doesn't feel right...</i>\"");
 		outputText("\n\nTaking the midsection of your tongue in your hand, she slowly starts to rub her hand along some of its length.  It feels... odd, somehow, but not entirely unpleasant.  Though you shudder at the first rub, they start to feel more natural as she pushes you on.  Actually, it feels sort of good.  Her strokes remain constant, though some part of you wishes she'd go faster.  It doesn't even register as odd in your addled mind that your tongue is swelling in your hand with every stroke.  Shouldra starts to make wider movements along your smooth stretch of muscle.  Its girth plumps up to fill your palm nicely wherever she brings your hand, and the strange sensations of your flesh on its nerves wrack your body with shudders of pleasure even through Shouldra's grip.");
-		outputText("\n\nThough it's not just you feeling this anyhow.  For her part, your pale possessor seems to be enjoying this odd process even more than you are.  She pants in time with each and every stroke, occasionally rolling your neck and letting out a soft moan as your spine arches.  You surmise that she's somehow bumped up the sensitivity of the nerves on your tongue to rival that of those around your true sex, and rewired you to experience each touch in the same way.  By the time Shouldra reaches the end, your " + tongueDescript() + " is long, thick, and nicely tapered at the end, and she's having a hard time keeping your weight up as the pulses of pleasure rush through your body.");
+		outputText("\n\nThough it's not just you who are feeling this anyhow.  For her part, your pale possessor seems to be enjoying this odd process even more than you are.  She pants in time with each and every stroke, occasionally rolling your neck and letting out a soft moan as your spine arches.  You surmise that she's somehow bumped up the sensitivity of the nerves on your tongue to rival that of those around your true sex, and rewired you to experience each touch in the same way.  By the time Shouldra reaches the end, your " + tongueDescript() + " is long, thick, and nicely tapered at the end, and she's having a hard time keeping your weight up as the pulses of pleasure rush through your body.");
 		outputText("\n\n\"<i>That's... yeah, that's good,</i>\" she breathily determines.  With just a bit of its weight supported by your hand and a lot of concentration on her part, Shouldra manages to snake your tongue down to your cunt, still dripping need from the earlier licking.  With a little shake the first foot or so of your lengthy stretch goes rigid.  After a few probing pokes against your labia, she unceremoniously penetrates the appendage deep into your waiting honeypot.  The dual pleasures of your tongue and your cunt set your senses aflame, and your inner lust roils as the sensitive skin of your tongue caresses every nook and crevice of your sex.  Shouldra lets out a little squeaking noise, obviously even catching herself off-guard with the potent mixture of feeling.  She abandons trying to keep your body upright and topples onto your side.  She rolls you onto your back and arches your hips, moaning like a whore as your tongue shlicks in and out of you, slapping lewdly against you with each thrust.  Shouldra claws at the grass and dirt with your free hand, desperate to hold on to something as the whirlwind of pleasure tries to whisk her away.");
 		outputText("\n\nStuck in your mind as a helpless onlooker, you're forced to just ride out the storm.  You feel <b>everything</b> so clearly; every blade of grass tickling your shoulders, every drop of saliva smeared across your swollen [clit], every hard press of your possessed tongue against your craving walls.  It all feels so much, like the pleasure is burning you so hot that it's going to tear you apart from the inside and drive you insane.  Your follower, apparently in possession of quite a will of her own, manages to overcome the feelings just long enough to roll herself onto her side and grab for the dildos.  She manages to drag them back, and all you can do is pray that they'll make this release come faster, as the buildup is especially torturous under the circumstances.  Now more confident in her ability to keep your tongue moving, she releases it, and reaches for the pair of phallic toys.");
 		outputText("\n\nOne in each of your shaking hands, she flops onto your back once more.  You hear a strained voice from within telling you to \"<i>get ready</i>,\" just before Shouldra jams one dildo in your cunt and crams the other in your mouth.  Their bumpy surfaces tickle the nerves of your tongue so perfectly and they make you feel so wonderfully full that thoughts of the agonizing wait you had to endure is dissolved almost immediately by orgasm.  Shouldra screams out around the one in your mouth, muffled wails of pleasure echoing among the rocks.  A tasty gush of your juices splash out over your tightly-packed tongue and onto your thighs and the ground.  Your vision begins to fade even before the  feelings of release leave you.  By the time it has and your tongue starts to shrink back to its usual size, you're gone, floating unaware on a cloud of post-orgasmic bliss.");
+		sharedEnd();
 	}
 	//else
-	else {
+	function needMagic():void {
 		outputText("\n\nYou tell Shouldra that you unfortunately cannot, expecting her to be disappointed.  \"<i>Ah well, that's fine,</i>\" she replies without sounding put off one bit, \"<i>you will soon.</i>\"");
 		outputText("\n\nShe sits you down and lets her dildos fall to the ground, forgotten for the moment. Just to check that you truly can't get down there on yourself, she sticks your tongue as far out as your mouth can manage and tries all sorts of twists and contortions to get your face between your legs, but to no avail.  \"<i>Bah, on with it, then,</i>\" Shouldra says, finally conceding defeat to your body's rigidity.  \"<i>Rather not get the bones mixed up right now</i>.\"  You're thankful for that, knowing full well that your ghostly friend just might be able to do something like that.");
 		outputText("\n\nShouldra sticks your small tongue out once again.  \"<i>Need... more...</i>\"  Without bothering to get your opinion on the matter, Shouldra starts to mutter a soft incantation into.  With the hand that she isn't propping you up on, she takes your tongue between your thumb and a couple fingers and begins to gently tug and stroke on it.  Though imperceptible at first, a few strokes later the change becomes obvious: extra inches of muscle spill forth from your mouth.  ");
@@ -596,17 +546,20 @@ private function shouldraTongueLicksPCs():void {
 		outputText("sliding fingers along the wet appendage, humming a little tune over your tongue until more than a foot of it droops from your mouth.  \"<i>Now we're getting somewhere,</i>\" you hear her thinking as she works her magic.  There doesn't seem to be a limit to how much she can pull out of your mouth, and soon she has more than three feet of pure tongue coiled in your lap.  Furrowing your brow in concentration, she tries to move your tongue about, but can't manage to wiggle more than the tip. \"<i>Too thin,</i>\" she mutters, \"<i>much too weak. Doesn't feel right...</i>\"");
 		
 		outputText("\n\nTaking the midsection of your tongue in your hand, she slowly starts to rub her hand along some of its length.  It feels... odd, somehow, but not entirely unpleasant.  Though you shudder at the first rub, they start to feel more natural as she pushes you on.  Actually, it feels sort of good.  Her strokes remain constant, though some part of you wishes she'd go faster.  It doesn't even register as odd in your addled mind that your tongue is swelling in your hand with every stroke.  Shouldra starts to make wider movements along your smooth stretch of muscle.  Its girth plumps up to fill your palm nicely wherever she brings your hand, and the strange sensations of your flesh on its nerves wrack your body with shudders of pleasure even through Shouldra's grip.");
-		outputText("\n\nThough it's not just you feeling this anyhow.  For her part, your pale possessor seems to be enjoying this odd process even more than you are.  She pants in time with each and every stroke, occasionally rolling your neck and letting out a soft moan as your spine arches.  You surmise that she's somehow bumped up the sensitivity of the nerves on your tongue to rival that of those around your true sex, and rewired you to experience each touch in the same way.  By the time Shouldra reaches the end, your tongue is long, thick, and nicely tapered at the end, and she's having a hard time keeping your weight up as the pulses of pleasure rush through your body.");
+		outputText("\n\nThough it's not just you who are feeling this anyhow.  For her part, your pale possessor seems to be enjoying this odd process even more than you are.  She pants in time with each and every stroke, occasionally rolling your neck and letting out a soft moan as your spine arches.  You surmise that she's somehow bumped up the sensitivity of the nerves on your tongue to rival that of those around your true sex, and rewired you to experience each touch in the same way.  By the time Shouldra reaches the end, your tongue is long, thick, and nicely tapered at the end, and she's having a hard time keeping your weight up as the pulses of pleasure rush through your body.");
 		outputText("\n\n\"<i>That's... yeah, that's good,</i>\" she breathily determines.  With just a bit of its weight supported by your hand and a lot of concentration on her part, Shouldra manages to snake your tongue down to your cunt, still dripping need from the earlier licking.  With a little shake the first foot or so of your lengthy stretch goes rigid. After a few probing pokes against your labia, she unceremoniously penetrates the appendage deep into your waiting honeypot.  The dual pleasures of your tongue and your cunt set your senses aflame, and your inner lust roils as the sensitive skin of your tongue caresses every nook and crevice of your sex.  Shouldra lets out a little squeaking noise, obviously even catching herself off-guard with the potent mixture of feeling.  She abandons trying to keep your body upright and topples onto your side.  She rolls you onto your back and arches your hips, moaning like a whore as your tongue shlicks in and out of you, slapping lewdly against your skin with each thrust.  Shouldra claws at the grass and dirt with your free hand, desperate to hold on to something as the whirlwind of pleasure tries to whisk her away.");
 		outputText("\n\nStuck in your mind as a helpless onlooker, you're forced to just ride out the storm.  You feel <b>everything</b> so clearly; every blade of grass tickling your shoulders, every drop of saliva smeared across your swollen [clit], every hard press of your possessed tongue against your craving walls.  It all feels so much, like the pleasure is burning you so hot that it's going to tear you apart from the inside and drive you insane.  Your follower, apparently in possession of quite a will of her own, manages to overcome the feelings just long enough to roll herself onto her side and grab for the dildos.  She manages to drag them back, and all you can do is pray that they'll make this release come faster, as the buildup is especially torturous under the circumstances.  Now more confident in her ability to keep your tongue moving, she releases it, and reaches for the pair of phallic toys.");
 		outputText("\n\nOne in each of your shaking hands, she flops onto your back once more.  You hear a strained voice from within telling you to \"<i>get ready</i>,\" just before Shouldra jams one dildo in your cunt and crams the other in your mouth.  Their bumpy surfaces tickle the nerves of your tongue so perfectly and they make you feel so wonderfully full that thoughts of the agonizing wait you had to endure is dissolved almost immediately by orgasm.  Shouldra screams out around the one in your mouth, muffled wails of pleasure echoing among the rocks.  A tasty gush of your juices splash out over your tightly-packed tongue and onto your thighs and the ground.  Your vision begins to fade even before the  feelings of release leave you.  By the time it has and your tongue starts to shrink back to its usual size, you're gone, floating unaware on a cloud of post-orgasmic bliss.");
+		sharedEnd();
 	}
-	player.orgasm();
-	dynStats("lib", .25, "sen", -2);
-	outputText("\n\nYou wake some time later, lying naked beside a pile of your [armor].  You're right back at camp.  The ghost girl managed to drag you back somehow - no doubt interested in keeping the location of her secret goodies safe.");
-	shouldraSleeping((10 + rand(26)), true);
-	flags[kFLAGS.SHOULDRA_TONGUE_LICKS_TIMES]++;
-	doNext(camp.returnToCampUseOneHour);
+	function sharedEnd():void {
+		player.sexReward("vaginalFluids", "Lips");
+		dynStats("lib", .25, "sen", -2);
+		outputText("\n\nYou wake some time later, lying naked beside a pile of your [armor].  You're right back at camp.  The ghost girl managed to drag you back somehow - no doubt interested in keeping the location of her secret goodies safe.");
+		shouldraSleeping((10 + rand(26)), true);
+		flags[kFLAGS.SHOULDRA_TONGUE_LICKS_TIMES]++;
+		doNext(camp.returnToCampUseOneHour);
+	}
 }
 
 
@@ -624,7 +577,7 @@ public function shouldraDream1():void {
 		outputText("\n\nWithout thinking, your smooth hand reaches between your legs...  Same disappointing result.  You know something is there.  You can see it.  You <b>think</b> you can feel it; you aren't numb or tingling.  But the sensation is gone.  It's a pussy without a pulse, a moist, empty cavity.");
 		outputText("\n\nEach hollow sordid act only drives your resolve, however.  You refuse to just wallow in self-pity.  You got yourself into this situation... In for a penny, in for a pound as they say.");
 		outputText("\n\nSomething catches your attention.  A figure is coming into view, forming from your murky surroundings.  It's a tall woman.  She's alone, sitting underneath a tree in who-knows-where, enjoying a book she brought along with her.  It's been so long since you last saw someone - not an animal, but a being capable of thought.  Maybe you should approach her and...");
-		outputText("\n\nNo, wait.  You have a better idea; it's just a theory, but it's a sound one.  You look yourself over, double checking your body for any irregularities.  A satisfied smirk admits to your pride; looks like you can maintain your form without too much concentration now - quite the achievement.  But this is only relevant if you get caught, of which you won't.  Slowly, you approach the woman, careful not to make even the slightest sound.  It's as if your feet aren't even touching the ground.");
+		outputText("\n\nNo, wait.  You have a better idea; it's just a theory, but it's a sound one.  You look yourself over, double-checking your body for any irregularities.  A satisfied smirk admits to your pride; looks like you can maintain your form without too much concentration now - quite the achievement.  But this is only relevant if you get caught, of which you won't.  Slowly, you approach the woman, careful not to make even the slightest sound.  It's as if your feet aren't even touching the ground.");
 		outputText("\n\nYou're hanging over her shoulder now.  She still has no clue you're there, preoccupied by her entertainment.  You were afraid some sense of foreboding would at least trigger her to lurch around or something.  Hesitation is starting to creep up your spine.  Are you certain you can pull this off? What if something were to go wrong? What would the consequences be?");
 		outputText("\n\nDamn the consequences.  This is worth the risk, you reassure yourself.  Your mind is focused on your objective, certain of how you can do this.  You will do this.  The woman screams as you reach for her, your hand diving deep into her bare shoulder.  Instinct takes over as you continue to push yourself inside the damsel, ignoring her pleas and passing through her struggled swings.");
 		outputText("\n\nIt's dark.  Completely black.  But you can see.  You can see everything.  Looks like step one went according to plan.  However, your foresight didn't include this overwhelming deluge of thoughts, emotions, memories, and instincts.  A lesser being could lose themselves like this, subsumed by the sheer might that is the entirety of a being.  But fuck that.  You're better than even above-above average beings!  Fueled by determination, a singular vision comes into focus.");
@@ -644,7 +597,7 @@ public function shouldraDream1():void {
 		outputText("\n\nYou're shrouded by familiar darkness again, surrounded by the wholeness of one's being.  It's hardly much of a distraction to you at this point, however.  In just a few short moments, you gather your bearings and find yourself fully in control of the helpless farmhand.  You guide her hands along her slender figure, collecting a brief summary of the goods on display.  Perky b-cups, your normal pussy, a tight ass, all things you've come to expect from the females you find.  With the inventory done, you proceed to remove all articles of clothing from your new body.  No ripping or shredding, of course; you may be eager, but you're no savage!");
 		outputText("\n\n\"<i>Looks like you've done pretty well for yourself,</i>\" you announce to seemingly nothing.  But you're fully aware she's listening in.  You're surprised by her silence; most of your clientele like to try and fight.  \"<i>Awful shame that that doesn't amount to much these days.  Men trip over assets like these out in the streets everyday.</i>\" Still no response.  Clammed up either from fear, curiosity, or anger perhaps...you honestly don't care enough to find out.  You lock her fingers, turning them and stretching outwards to prepare the digits for the tasks you plan to put them through.");
 		outputText("\n\nHer fingers go straight for her clit, your skilled expertise guiding them with pinpoint accuracy.  It feels wonderful, just as it always does.  You could certainly get off with this...  at least you think you could.  Exploring everyone's nether regions has never stopped filling you with the sensations you crave, but the satisfaction is starting to wane.  It's been almost eight straight years of fingering, insertions, groping.  What else could you do to change things up?");
-		outputText("\n\nYou let off the woman's snatch, instead lifting her pussy-smelling hand under her nose as you begin to think.  You're a creative ghost.  There has to be something you can - wait, of course.  Your arcane arts! The magic you spent your... life... obsessing over! Surely you can bend it enough to indulge your lascivious libido.  You dig through the woman's knowledge of the surrounding area, discovering a small nearby shed that would be perfect as the birthplace of the rest of your afterlife.  As you turn and begin in it's direction, the caged soul finally decides to speak up, \"<i>W-where are you taking me? I-is my body not good enough for you or something?</i>\"");
+		outputText("\n\nYou let off the woman's snatch, instead lifting her pussy-smelling hand under her nose as you begin to think.  You're a creative ghost.  There has to be something you can - wait, of course.  Your arcane arts! The magic you spent your... life... obsessing over! Surely you can bend it enough to indulge your lascivious libido.  You dig through the woman's knowledge of the surrounding area, discovering a small nearby shed that would be perfect as the birthplace of the rest of your afterlife.  As you turn and begin in its direction, the caged soul finally decides to speak up, \"<i>W-where are you taking me? I-is my body not good enough for you or something?</i>\"");
 		outputText("\n\n\"<i>No, but it will be.</i>\"");
 		outputText("\n\nIgnoring the pleading of the now-spooked farmhand, you saunter into the dusty shed, a cool breeze teasing at your naked behind.  It's a small little workhouse, not much more than a counter, some stools, a stack of farm tools, and various other knickknacks these yokels depend on.  Moving some of the useless equipment out of the way, you pull out a large mirror, its location given away involuntarily by your gracious host.  Removing its protective covering, you're greeted by the rather austere figure of the farmhand and her lovely yellow glowing eyes.  You lean the glass up against a wall and drag one of the stools in front of it.");
 		outputText("\n\nYour mind races through your almost encyclopedic knowledge of the occult, trying its best to discover how to bend it to your lecherous whims.  As you mull over the possibilities, you again guide the woman's hands around her body, then begin massaging her breasts.  You know what you want to try first.  Holding the modest melons up, you decide to adlib a spell.  You pronounce each ancient syllable with exact certainty, applying just enough emphasis or stretching any key pronunciation where needed.  Your efforts are rewarded when you detect a warm tingling sensation racing through the woman's chest.  A proud smile wiggles its way onto her mouth as you enjoy the fruits of your labor, her swelling tit.");
@@ -741,7 +694,7 @@ public function shouldraDream1():void {
 	flags[kFLAGS.SHOULDRA_TALK_NEEDED] = 1;
 	doNext(playerMenu);
 }
-	
+
 //Talk 1 - First Possession Discussion
 private function shouldraYappin():void {
 	clearOutput();
@@ -760,7 +713,7 @@ private function shouldraYappin():void {
 			outputText("\n\nTrying to conceptualize this into something you can wrap your mind around isn't really gaining any traction with you.  Besides, you're more interested in just what the dream was about, and you explain as much to the speculative spirit.  \"<i>Oh, um... well, I believe that was my first flirtation with 'going ghost.'</i>\" Not even her air quotes make that alright, you think to yourself.  Desperate to claw the ghost girl away from her gnawing trademarks, you redirect her focus by asking what she was running from in the beginning.");
 			outputText("\n\n\"<i>Myself, honestly,</i>\" she admits coyly.  You're not that naive, though; her horrible answer makes clear to you her question dodging.  It's obviously a sore subject she isn't fond of sharing, so you decide to leave it alone and let her explain herself.  \"<i>I've already made it abundantly clear how much I rely on having a host to experience just about any sort of sensation.  But back then... it hadn't really sunk in.</i>\" Shouldra pauses for a moment, choosing her words carefully.  \"<i>I hadn't been... 'dead' for very long.  Not being able to satisfy basic needs - sexual or otherwise - was still a pretty foreign concept to me.</i>\"");
 			outputText("\n\nYou watch the spirit's face closely.  She doesn't seem too upset; aware of how long she's been a ghost, you assume this is something she had long since gotten over and forgotten.  \"<i>I hadn't even considered being able to possess someone before I came across that woman in the forest.  The only thing on my mind before I saw her was living out my life - well, afterlife - in this state of flux, unable to <b>feel</b> joy.</i>\" Shouldra shrugs off her introspective state, \"<i>But then I ran into that woman, things clicked into place, and I had a bitchin' few hundreds of years up until today.</i>\"");
-			outputText("\n\nCluing in on her reluctance to divulge any more on the pre-bitchin' years, you instead decide to ask about the woman.  This is probably one of the best leads on humans in Mareth you've ever had.  Unfortunately, Shouldra does not share your interest.  \"<i>Eh, yea humans were a thing a long time ago, I guess.  I was a little more interested in Numero Uno from that point on, though,</i>\" she admits, thumbing herself in the chest.  \"<i>I won't get you very far in any history classes I'm afraid.</i>\" You don't dare ask her straight up - honestly, you doubt you'd receive little more than a sarcastic empty remark - but you can't help but wonder if the otherwise egocentric eidolon has changed her tune even a little since setting up a shack with you.  Has she even hung out with any other person for longer than a one night stand?");
+			outputText("\n\nCluing in on her reluctance to divulge any more on the pre-bitchin' years, you instead decide to ask about the woman.  This is probably one of the best leads on humans in Mareth you've ever had.  Unfortunately, Shouldra does not share your interest.  \"<i>Eh, yea humans were a thing a long time ago, I guess.  I was a little more interested in Numero Uno from that point on, though,</i>\" she admits, thumbing herself in the chest.  \"<i>I won't get you very far in any history classes I'm afraid.</i>\" You don't dare ask her straight up - honestly, you doubt you'd receive little more than a sarcastic empty remark - but you can't help but wonder if the otherwise egocentric eidolon has changed her tune even a little since setting up a shack with you.  Has she even hung out with any other person for longer than a one-night stand?");
 			outputText("\n\nThe tangent disappears from your head as Shouldra stares at you, probably curious as to what you're obsessing over.  You redirect her back to the dream, specifically about the actual first possession.  \"<i>Well, I already had a pretty good grasp on the act.  Without divulging much information, let's just say for now that I've always had a unique fascination with magic.</i>\" Tired of pacing around - and potentially trying to keep you from digging too deep again - Shouldra directs you nearby to a little clearing where the two of you sit down, side by side.  \"<i>But all the books in the world don't really prepare you for what's it like.  Like most anything, really.</i>\"");
 			if( player.hasPerk(PerkLib.Incorporeality)) outputText("  Shouldra bumps you to the side a little as she makes her next point, \"<i>Even with your hoaky quasi-possession power, you don't really know what it's like to actually possess someone.</i>\" You look at her funny, unaware that you weren't really getting the full effect.  Not that you care!");
 			outputText("\n\nShouldra scootches over against you until almost half of her body is inside of yours.  She moves your arm and [leg] around as she illustrates her next point, \"<i>The expectation is that you're just 'putting on' the host.  Like a glove or a suit.  But the instant you dive inside someone");
@@ -780,10 +733,10 @@ private function shouldraYappin():void {
 			//unlocked with Dream 2
 			//unlocks grow/shrinking of body parts (See next section)
 			// Discusses dream with PC, further explaining her draw to magic-infused sex to them. "Imagine decades of the same old masturbation techniques." Eventually transitions to her offering to try and give the PC more permanent changes thanks to "some studying up and familiarity with the PC's body." Large cooldown between offers of at least 3 days
-			outputText("Shouldra quickly interrupts you before you can even think to open your mouth, \"<i>So you pried into another dream of mine, huh?</i>\"  You swear it wasn't on purpose, mustering a giggle from the sarcastic spirit as her head recedes back inside you.  The next moment she's walking right out of you, chin resting in her head.  \"<i>I'm positive that I dream about more than shit that happened centuries ago.  Sometimes I dream up things that never happened at all!  I bet you're just cherry picking things you want to bother me about.</i>\"  You shrug, admitting to not really having any control over any of this. Shouldra laughs again, \"<i>Yea, yea, I know.  Still can't help but wonder.</i>\"");
+			outputText("Shouldra quickly interrupts you before you can even think to open your mouth, \"<i>So you pried into another dream of mine, huh?</i>\"  You swear it wasn't on purpose, mustering a giggle from the sarcastic spirit as her head recedes back inside you.  The next moment she's walking right out of you, chin resting in her head.  \"<i>I'm positive that I dream about more than shit that happened centuries ago.  Sometimes I dream up things that never happened at all!  I bet you're just cherry-picking things you want to bother me about.</i>\"  You shrug, admitting to not really having any control over any of this. Shouldra laughs again, \"<i>Yea, yea, I know.  Still can't help but wonder.</i>\"");
 			outputText("\n\nYou decide to veer the ghost away from further speculation, pressing her about the farmhand.  \"<i>If you're asking about humans again, you won't get anything more specific out of me.  This happened centuries ago.  I don't even remember where this was.</i>\"  You figured as much.  \"<i>I do remember hanging around that farmland for a while.  There was a bunch of brats hanging around there making for easy pickings.  That's when I decided to start getting a little more hands-on with my selection instead of having to stalk everything.  I think I wound up scaring the whole lot of them away and moving on from there.  It was a while before I decided to settle down anywhere.</i>\"");
-			outputText("\n\nYou wonder just what made her decide to start using magic in the first place.  The typically enthusiastic spirit always seem to enjoy herself enough today, but back then it seemed to you like she just came up with it out of the blue.  Shouldra shrugs and puts her hands to her hips, \"<i>I don't know how plain it was to you, but imagine 8 years of nothing but fucking.</i>\"  Well, that certainly sounds like a splendid way to pass the time to you!  The ghost girl waves you off as you actually accept her daunting task.  \"<i>Believe me, it isn't all you'd think it be.  At least not in my case.  Most of what I ran into that first decade were just humans - Women, mostly. The men were the diamonds in the rough - but it honestly didn't make that much of a difference when I ran into any other race.  Keep in mind that the vast, vast majority of the time for me was spent doing 'solo' actions.</i>\"  You probably know better than anyone just how \"solo\" those actions really were.");
-			outputText("\n\n\"<i>Anyway, imagine eight years of just fingering, groping, the occasional dildo-shaped object down your snatch.  Eight years where you never got tired or hungry or chaffed or sore, either.  Sure the subjects come in different varieties - her clit's a little big, this one's got piercings, this bitch got me a dick to play with - but its honestly all cast from a similar mold.  My point is it gets <b>dull</b> after a while. It never stopped feeling good, mind you, but it just stopped getting nearly as satisfying.</i>\"  Sex getting boring sounds like a pretty sad afterlife to you.  Though you would hope that if it were come to that, you wouldn't be nearly as obsessed with it as the fanatical phantom before you.");
+			outputText("\n\nYou wonder just what has made  her decide to start using magic in the first place.  The typically enthusiastic spirit always seem to enjoy herself enough today, but back then it seemed to you like she just came up with it out of the blue.  Shouldra shrugs and puts her hands to her hips, \"<i>I don't know how plain it was to you, but imagine 8 years of nothing but fucking.</i>\"  Well, that certainly sounds like a splendid way to pass the time to you!  The ghost girl waves you off as you actually accept her daunting task.  \"<i>Believe me, it isn't all you'd think it is.  At least not in my case.  Most of what I ran into that first decade were just humans - Women, mostly. The men were the diamonds in the rough - but it honestly didn't make that much of a difference when I ran into any other race.  Keep in mind that the vast, the vast majority of the time for me was spent doing 'solo' actions.</i>\"  You probably know better than anyone just how \"solo\" those actions really were.");
+			outputText("\n\n\"<i>Anyway, imagine eight years of just fingering, groping, the occasional dildo-shaped object down your snatch.  Eight years where you never got tired or hungry or chaffed or sore, either.  Sure the subjects come in different varieties - her clit's a little big, this one's got piercings, this bitch got me a dick to play with - but it's honestly all cast from a similar mold.  My point is it gets <b>dull</b> after a while. It never stopped feeling good, mind you, but it just stopped getting nearly as satisfying.</i>\"  Sex getting boring sounds like a pretty sad afterlife to you.  Though you would hope that if it were come to that, you wouldn't be nearly as obsessed with it as the fanatical phantom before you.");
 			outputText("\n\n\"<i>And you saw my epiphany.  I was already a self-made expert on magic.  Just took some creative know-how to bend that around into something I could use.  It's been smooth sailing from that point on.</i>\"  There she goes again talking about her extensive knowledge of some arcane art form that involves some of the kinkiest sex you've ever witnessed.  You try and ask about it again, but Shouldra shoots you down, still uninterested in divulging something she evidently considers to be very personal.  You accept defeat, instead deciding to question how she didn't come to be just as bored of her enhanced sex as she did the normal variety.  \"<i>Other than the fact that it never stops feeling fucking great?</i>\"  Shouldra pauses for a moment, seriously considering her reasoning.");
 			outputText("\n\n\"<i>I've always had a fairly simple rule I try to follow.</i>\"  The ghost girl casually walks up to you and places her hand inside your chest.  Both your hands raise up in front of you, as if you had never seen them before.  It's a little creepy how easily she can manipulate you at this point.  \"<i>Everyone has two of these,</i>\" Shouldra explains.  \"<i>Sometimes three or four or - heaven forbid - one or none... but the bulk of the world has two.</i>\"  Suddenly your right hand magnetizes to your crotch, cupping it fervently.  \"<i>Most people have a one-hand job.  They can handle it themselves, even while doing something else.  I'm not interested in just living out someone else's life.</i>\"");
 			if(player.gender > 0) {
@@ -796,7 +749,7 @@ private function shouldraYappin():void {
 			outputText("\n\n\"<i>No potions, no tonics, no needles, no booze, no eggs, nothing.</i>\"   Your genitals pulse adding emphasis to the ghost's boast, quickly plumping up an extra step as your digits dig into your flesh.  \"<i>Nothing but me.  That's what makes me unique.</i>\"  Shouldra undoes your outfit with her free hand, releasing you from your constraints.  Without it in the way, the phantom directs your hands all along your [if (hasCock = true) burgeoning dickflesh][if (isHerm = true)  and ][if (hasVagina = true) widening feminine walls]");
 			if(player.gender == 0) outputText("burgeoning dickflesh");
 			outputText(".  It takes some gumption for you to work through the arousal and contribute to the conversation, but you manage to point out how you're pretty sure there are other people in Mareth with the same sort of power, to some degree at least.");
-			outputText("\n\n\"<i>Maybe demons, I suppose.  I haven't fucked around with them much.  But anyone else is either pumping you full of something or pulling a trick on you.  I'm sure of it.</i>\"  You also point out how her acts lack any sort of permanence.  \"<i>So?  I'm not interested in playing the dick fairy, giving all the good little men and women tree trunks to bring home.  Its always been for my amusement!</i>\"  Shouldra stares at your fattening flesh for a moment, your fingers pinching at your skin as they welcome each new centimeter.  Looks like the jade spirit is actually mulling over your question.");
+			outputText("\n\n\"<i>Maybe demons, I suppose.  I haven't fucked around with them much.  But anyone else is either pumping you full of something or pulling a trick on you.  I'm sure of it.</i>\"  You also point out how her acts lack any sort of permanence.  \"<i>So?  I'm not interested in playing the dick fairy, giving all the good little men and women tree trunks to bring home.  It's always been for my amusement!</i>\"  Shouldra stares at your fattening flesh for a moment, your fingers pinching at your skin as they welcome each new centimeter.  Looks like the jade spirit is actually mulling over your question.");
 			outputText("\n\n\"<i>I've never really tried any spells that stick; magic isn't always known for its durability, you know?  Thinking about it now, the biggest problem is just how different everyone is.  Even twins may as well be a world apart when you get right down to it.  I spent so much time with goblins - centuries easily - learning about how their breasts practically change just by looking at them funny.  I never actually realized the breakthrough I made when I got a slight few of their massive mammaries to stick around after I left.</i>\"");
 			outputText("\n\nYou're about knocked off your [feet] as your hands go into double time, covering every new square inch of flesh on your midsection.  ");
 			if(player.gender == 0) outputText("Your now erect dick is leaking out pre at an alarming rate, which your possessed hands greedly lap up and distribute all along your length.  ");
@@ -814,9 +767,9 @@ private function shouldraYappin():void {
 			//unlocked with Dream 3
 			outputText("You stare at Shouldra.  \"<i>Oh, <b>what</b>?</i>\"  You stare at Shouldra.  \"<i>She fucking pissed on my floor!</i>\"  You stare at Shouldra.  The ghost shakes her head, sinking it back inside your skin. The ghost girl quickly flies out of your chest.  \"<i>You don't fuck with my stuff!</i>\"");
 			outputText("\n\nYou shake your head and at least confess to how fucked up you found her solution to be.  \"<i>Uh, this just in: I'm a ghost!</i>\" Shouldra says sarcastically.  You surrender to her unique charms, admitting to being <b>completely</b> surprised by her antics.  Knowing that you're at least close to being on the same page as her, the vengeful spirit finally cracks a smile, \"<i>I know that you have yet to bear witness to it, but I do have other hobbies - or did at least.  And when I wasn't fucking <b>with</b> goblins, I was <b>fucking with goblins</b>.</i>\"");
-			outputText("\n\nYou grin at her rather candid explanation and take a seat.  Shouldra sits down beside you, eager to continue explaining herself, \"<i>Knocking my rocks off was always high on my list of shit to do.  But I also love just messing with people.  You may know it as 'haunting.'  And you know me; why would I bother with small time stuff like blowing a curtain or pretending to be a dead relative?</i>\"  This doesn't sound quite as innocent as she's making it out to be.  The sight of the crying, soaked goblin alone in the woods certainly didn't paint a pretty picture.");
+			outputText("\n\nYou grin at her rather candid explanation and take a seat.  Shouldra sits down beside you, eager to continue explaining herself, \"<i>Knocking my rocks off was always high on my list of shit to do.  But I also love just messing with people.  You may know it as 'haunting.'  And you know me; why would I bother with small-time stuff like blowing a curtain or pretending to be a dead relative?</i>\"  This doesn't sound quite as innocent as she's making it out to be.  The sight of the crying, soaked goblin alone in the woods certainly didn't paint a pretty picture.");
 			outputText("\n\nDetecting your mounting concern, Shouldra decides to pipe up, \"<i>Now, come on.  I'm not 'Shouldra the Friendly Ghost.'  I'm the sweet little gal you met that tried to punch your teeth in so I could have my way with you.  Keep things in perspective here!</i>\"  Well, that makes for a clear enough point.  \"<i>Anyway, when I finally settled down - oh, ten or thirty years ago - I came to discover the local area's just littered with goblins.  You couldn't walk a mile without tripping over one!  Most of them are fairly simple creatures; they just want to fuck and breed and fuck and throw a bottle of something at you and fuck.  Sometimes you could find one with a little more ambition or sense.  Those were my favorites.</i>\"");
-			outputText("\n\nShouldra leans back as she reminisces, \"<i>But those ruins were crawling with the little beasts.  I'm sure you won't believe me, but I'm not ALWAYS horny.  Usually, but not always.  And when I wasn't horny, I still loved messing with all those delicate little flowers as they fought over what precious few dicks come out there.</i>\"  Precious few?  You're pretty sure you've been finding things with cocks without too much trouble, telling the ghost as much.  \"<i>Eh, not really the case back where you found me, where I was staying.  And, honestly, looking at my catches over the last, say, hundred years?  If I had to wager to guess... maybe less than ten percent had a fun stick for me to play with.");
+			outputText("\n\nShouldra leans back as she reminisces, \"<i>But those ruins were crawling with the little beasts.  I'm sure you won't believe me, but I'm not ALWAYS horny.  Usually, but not always.  And when I wasn't horny, I still loved messing with all those delicate little flowers as they fought over what precious few dicks come out there.</i>\"  Precious few?  You're pretty sure you've been finding things with cocks without too much trouble, telling the ghost as much.  \"<i>Eh, not really the case back where you found me, where I was staying.  And, honestly, looking at my catches over the last, say, a hundred years?  If I had to wager to guess... maybe less than ten percent had a fun stick for me to play with.");
 			if(player.hasCock()) outputText("</i>\"  Shouldra eyes your [cock] gingerly, acting as if she can stare right through your outfit at it.  \"<i>");
 			else outputText("  ");
 			outputText("The half-millenium or so of scarcity has really shaped my interests.  I'm at the point now where I just lose it whenever I get these ghostly mitts on a slab of meat.  And the big ones?  ");
@@ -831,7 +784,7 @@ private function shouldraYappin():void {
 			outputText("\n\n\"<i>The tiger shark is just in shock - speechless.  I wasn't really paying attention, but I think I caught her wondering if some sort of divine intervention was saving her life.  How dumb is that?  Meanwhile, the goblin is getting super pissed, surprised at how stinging the mighty phallus' offensive was turning out to be.  She tried just jumping on it finally, smothering it with her flustered goblin bod, but the thing had tremendous strength, catapulting her off!  At that point the tiger shark's dick was super horny, and that fucking goblin was just a nuisance.  The shark starts floating in the air, suspended by her dick!  The goblin's really mad now, afraid of her triumphant story turning into how the big one got away.  She takes a step forward and BAM!  Shot of jizz right in her eyes.</i>\"");
 			outputText("\n\nYou palm your face and shake your head.  Shouldra's enthusiastic hijinks are about as paranormal as she is.  \"<i>The goblin starts thrashing around, blinded and fuming.  'I don't have the patience for your lackluster fuckings,' her dick proclaims, dragging the incredibly flustered tiger shark limply behind it as it floats through the air, away from her furious, shouting oppressor.</i>\"  Shouldra stops again, letting off a deep sigh through her ear-to-ear grin.");
 			outputText("\n\n\"<i>The rest of that day was pretty great.  I was so full of myself; inhabiting a big dick like that and ticking off that goblin went to my 'head,' so to speak.  At that point, I was just this big, thick rod mindlessly floating through the forest with this poor tiger shark dangling below me inches off  the ground, still paralyzed with shock.  Out of nowhere, she finally starts talking to her dick, thanking it profusely and asking all sorts of questions.  Must have been the blood rushing to her head or something.  It snapped me back to reality, but I kept up the charade, demanding that she satisfy me as payment for my actions.</i>\"  Shouldra shivers a little, the thought of what came next most likely having left a pleasant impact on her.");
-			outputText("\n\n\"<i>She was a really good sport, definitely one of my more recent favorites.  I think getting your ass kicked by a goblin, no matter how it comes about, really humbles you.  We spent the whole rest of the day together, me coming up with all these crazy ideas for her to do while I used all sorts of different magic.  She even had some good suggestions on how to have a good time.  I'd really love to tell you about what we did that day sometime; just let me know.  By the time the sun went down, I decided to come clean and introduced the slap happy spirit that had possessed her penis that day.  Again, she was a great sport about the whole thing, only asking I don't go sharing her unfortunate battle outcome.</i>\"");
+			outputText("\n\n\"<i>She was a really good sport, definitely one of my more recent favorites.  I think getting your ass kicked by a goblin, no matter how it comes about, really humbles you.  We spent the whole rest of the day together, me coming up with all these crazy ideas for her to do while I used all sorts of different magic.  She even had some good suggestions on how to have a good time.  I'd really love to tell you about what we did that day sometime; just let me know.  By the time the sun went down, I decided to come clean and introduced the happy spirit that had possessed her penis that day.  Again, she was a great sport about the whole thing, only asking I don't go sharing her unfortunate battle outcome.</i>\"");
 			outputText("\n\nThe ghost girl takes a deep breath, staring off into the sky.  \"<i>Sorry, Champ, didn't mean to drone on like that.  I could easily spend the rest of your life just recounting all the crazy shit I've done.  I've never really sat down and shared my stories with anyone before.  They just get indexed and filed away.</i>\"  You shrug and wave your hand, letting the spirit know that you actually enjoyed the chance to get to better know who's been haunting you all this time.  The ghost girl smiles and shakes her head, shoving your shoulder a little, \"<i>Let's do it again sometime, then.[if (hasCock = true)   Maybe I could commandeer that [cock] of yours to show you what I did with that frisky shark.  Just say the word]</i>\"");
 			outputText("\n\nShouldra leans against you, slowly sliding back into your body.  You count your blessings to not have been born a goblin as you get back off the ground.");
 		}
@@ -846,7 +799,7 @@ private function shouldraYappin():void {
 			outputText("\n\nYou sit in silence for a long while as she composes her thoughts, the silence only broken by Shouldra's shuddering breathing.  \"<i>Sorry,</i>\" she says somewhat lamely, not knowing how to proceed at all, \"<i>you're actually the first host who managed to catch a glimpse of my... life.  Most were lucky enough to not even see my dreams.  We just fucked the world until I moved on, but you...</i>\"");
 			outputText("\n\nShe stops again, drawing her knees to her chest and burying her face into the space between. \"<i>I tried to let the women go, you know,</i>\" she eventually continues, her voice muffled. \"<i>Of the ones that were still sane enough to understand me, they didn't see a point in leaving.  They just wanted to wait until the green men got up and made them feel good again.  And I was so close to being like that, too.  If it wasn't for that lucky-ass spell, I would've died as a bimbo-brained, cum-stuffed slave.</i>\"");
 			outputText("\n\nYou can't help asking: if she finds the idea of her own body getting bigger so repulsive, why does she take such pleasure into doing the same to others?  She gives you a wan smile and a little shrug.  \"<i>I didn't say I was completely unaffected by their churlish form of corruption.  I mentioned how much I love dicks, and huge assets are basically a must-have.  Just... my body is mine.  Mine to change, not some slobbering green-skinned lummox.  And such an unrefined technique... The assholes could have at least <b>cleaned</b> the hose!</i>\"");
-			outputText("\n\nShe starts rambling and venting, and you let her go off, realizing how long she has been keeping these feelings in. \"<i>If those stupid, grey-haired, liver-spotted, lice-ridden, senile, old fools had <b>listened</b> to me about building some actual <b>fucking</b> defenses, like a fucking <b>wall</b>, maybe we would have stood a ghost of a fucking <b>CHANCE</b>! What the fuck happened to those militia, anyway!?  They were fighting for their families and friends, and they let themselves get slaughtered! If I had the time to prepare some actual spells, things would have been different.</i>");
+			outputText("\n\nShe starts rambling and venting, and you let her go off, realizing how long she has been keeping these feelings in. \"<i>If those stupid, grey-haired, liver-spotted, lice-ridden, senile, old fools had <b>listened</b> to me about building some actual <b>fucking</b> defenses, like a fucking <b>wall</b>, maybe we would have stood a ghost of a fucking <b>CHANCE</b>! What the fuck happened to this militia, anyway!?  They were fighting for their families and friends, and they let themselves get slaughtered! If I had the time to prepare some actual spells, things would have been different.</i>");
 			outputText("\n\n\"<i>I didn't even have an apprentice!  I knew moving to that rickety old place would be the death of me.... I went to school with this one girl.  Swear to Mareth, her buttcheeks were bigger than her entire body... each!  I got a few girls out, you know.  Managed to usher them to the closest city and let them free.  I hope they made it alright.  I liked them well enough.... I keep on wondering what I could have done better.  If I knew the orcs would be stupid enough to stick around for so long, I could have escaped earlier and at least saved the women....</i>\"");
 			outputText("\n\nThis keeps up for at least a couple hours.  Eventually, even though she knows you're listening attentively, she trails off, fixing you with one of the sweetest looks you've ever seen grace her porcelain-looking features.  \"<i>You really care about all this,</i>\" she says softly, startling you a bit.  Of course you care; you agreed to stick around with her, and you don't consider something as easy as listening to her talk her problems out any trouble at all.");
 			outputText("\n\nShouldra's eyes waver a bit as she stares at you.  Before you can react, she bolts up to her feet, taking a running step and diving towards you.  Her arms wrap around your neck as she tackles you to the ground, and you happily reach around her to wrap her in a big hug.  You lie there for a couple minutes as she softly sobs the remnants of her sorrows into your shoulder, but she herself eventually breaks the hug.  Sitting back, she lets you free, and you both rise.  \"<i>Thanks, Champ,</i>\" she sighs, wiping her eyes of any moisture.  \"<i>I needed that... for centuries, I needed that.  But we have work to do.</i>\"");
@@ -880,26 +833,36 @@ public function shouldraFollowerScreen():void {
 		doNext(playerMenu);
 		return;
 	}
-	var sex:Function = null;
-	if(player.lust >= 33) sex = shouldraSexMenu;
-	simpleChoices("Talk", shouldraTalkMenu, "Sex", sex, "", null, "Go Away", kickFollowerShouldraOut, "Back", camp.campFollowers);
+	menu();
+	addButton(0, "Talk", shouldraTalkMenu);
+	addButton(1, "Sex", shouldraSexMenu)
+		.disableIf(player.lust < 33, "You're not aroused enough!");
+	if (sceneHunter.mockFights) addButton(3, "Mock Fight", mockShouldra);
+	addButton(3, "Go Away", kickFollowerShouldraOut);
+	addButton(4, "Back", camp.campFollowers);
+}
+
+private function mockShouldra():void {
+	clearOutput();
+	outputText("Shouldra always looks for something new - and it feels like you have a devious idea. You summon your ghostly companion and challenge her... for a fight. Not just a spar, but a regular fight by the 'rules of Mareth' - the winner fucks the loser! Just like before.");
+	outputText("\n\nWith an annoyed sigh, Shouldra's form starts to appear from your body - just her head at first, but then you see the same human girl as in the town. She smiles at you, preparing for a quick fight. <i>You want to just be fucked a bit rougher? Why didn't you just ask for that, eh?</i>");
+	mocking = true;
+	startCombat(new Shouldra());
 }
 
 private function shouldraSexMenu():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_ghostGirl2);
 	outputText("Shouldra stirs from somewhere deep inside you, excitement evident in the swiftness of her reaction.  \"<i>Is it time for some fun, Champ?</i>\" she asks happily, her increased lust affecting you just a bit.  Do you oblige her?");
-	var vala:Function = null;
-	if(flags[kFLAGS.FREED_VALA] != 0 && (model.time.hours >= 12 && model.time.hours <= 21)) {
-		outputText("\n\nVala might interest Shouldra.  You could go introduce them...");
-		vala = shouldraAndValaGetBigger;
-	}
-	var anal:Function = null;
-	if(player.gender > 0 && player.lust >= 33) {
-		anal = nongenderlessAnalShouldraMasturbation;
-		outputText("\n\nShouldra could also let you have a little anal fun, if you'd like.");
-	}
-	simpleChoices("GhostMasturbate", shouldraFappinTimes, "Anal Masturb", anal, "Visit Vala", vala, "", null, "Back", shouldraFollowerScreen);
+	addButton(0, "GhostMasturb", shouldraFappinTimes);
+	if (!player.isGenderless()) //variant of genderless masturbation
+		addButton(1, "AnalMasturb", genderlessShouldraMasturbation)
+			.hint("Shouldra could also let you have a little anal fun, if you'd like.");
+	addButton(2, "VisitVala", shouldraAndValaGetBigger)
+		.hint("Vala might interest Shouldra.  You could go introduce them...")
+		.disableIf(model.time.hours < 12 || model.time.hours > 21, "Vala is not available right now.")
+		.disableIf(!flags[kFLAGS.FREED_VALA], "Maybe found someone else who might be interesting to her?", "???");
+	addButton(4, "Back", shouldraFollowerScreen);
 }
 
 //Talk Options
@@ -925,25 +888,25 @@ private function shouldraTalkMenu():void {
 //Grow Bodypart
 //unlocks after Talk 2
 //works same as Gro+ with additional Butt option
-//3 day / 72 hour cooldown between uses. Does not appear while on cooldown. 
+//3 day / 72 hour cooldown between uses. Does not appear while on cooldown.
 //Selecting Grow Bodypart
 private function shouldraGroPlus():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_ghostGirl2);
 	outputText("You decide to take up Shouldra's offer on natural body enhancement.  Before you tell her as much, the eager spectre quickly assumes control of your body.  \"<i>Alright, Champ, now we're in business.  So, what did you have in mind?</i>\"");
-	//Balls     Breast     Clit     Cock     Nipples     Butt     Nevermind
+	//Balls     Breast     Clit     Cock     Nipples     Butt     Never mind
 	var balls:Function = null;
 	var breast:Function = shouldraGrowsYoTits;
 	var clit:Function = null;
 	var cock:Function = null;
 	var butt:Function = shouldrasButtBigginator;
 	var nipples:Function = shouldraGivesYaSomeFukkinTeats;
-	if(player.balls > 0) balls = groBallsBiggaGHOSTYSTYLE;
+	if(player.hasBalls()) balls = groBallsBiggaGHOSTYSTYLE;
 	if(player.hasCock()) cock = shouldraCockBloating101;
 	if(player.hasVagina()) clit = shouldraGrowsYoClit;
 	choices("Balls", balls, "Breasts", breast, "Clit", clit, "Cock", cock, "Nipples", nipples, "Butt", butt, "", null, "", null, "", null, "Back", shouldraTalkMenu);
 }
-		
+
 //Balls
 private function groBallsBiggaGHOSTYSTYLE():void {
 	flags[kFLAGS.SHOULDRA_MAGIC_COOLDOWN] = 72;
@@ -953,16 +916,16 @@ private function groBallsBiggaGHOSTYSTYLE():void {
 	//ballsize + 2 + rand(4) 20% chance
 	if(rand(5) == 0) {
 		player.ballSize += 2 + rand(4);
-		outputText("\n\nYour testicles rumble greatly, inch after inch of " + player.skinTone + " flesh enveloping their impressive new bulk.  Shouldra gives your enlarged [balls] a little squeeze and leaves you to reacquaint yourself with a new center of balance.");
+		outputText("\n\nYour testicles rumble greatly, inch after inch of [color] flesh enveloping their impressive new bulk.  Shouldra gives your enlarged [balls] a little squeeze and leaves you to reacquaint yourself with a new center of balance.");
 	}
 	//ballsize + 1 + rand(2) Else
 	else {
 		player.ballSize += 1 + rand(2);
-		outputText("\n\nA tingling sensation courses through your scrotum, your " + player.skinTone + " going taut as it gains additional mass.  Shouldra rewards your new [balls] with a light massage.");
+		outputText("\n\nA tingling sensation courses through your scrotum, your [color] going taut as it gains additional mass.  Shouldra rewards your new [balls] with a light massage.");
 	}
 	//if ballsize > 10
 	if(player.ballSize > 10) outputText("  You second guess your decision when your swinging cum barrels seem to impede walking.  Shouldra reassures you that the enhanced libido and baby batter supply is worth the wider gait.");
-	dynStats("lus", 10);
+	dynStats("lus", 10, "scale", false);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -975,7 +938,7 @@ private function shouldraGrowsYoTits():void {
 	//same growtits() as Gro+
 	if(player.breastRows.length == 1) player.growTits((1+rand(5)),1,true,1);
 	else player.growTits(1+rand(2),player.breastRows.length,true,1);
-	dynStats("lus", 10);
+	dynStats("lus", 10, "scale", false);
 	doNext(camp.returnToCampUseOneHour);
 }
 //Clit
@@ -995,14 +958,14 @@ private function shouldraCockBloating101():void {
 	flags[kFLAGS.SHOULDRA_MAGIC_COOLDOWN] = 72;
 	clearOutput();
 	spriteSelect(SpriteDb.s_ghostGirl2);
-	outputText("A satisfied grin develops on your face.  \"<i>I was hoping you'd spring for the male enhancement,</i>\" Shouldra teases, your hands darting into your armor and stroking your dick fervently.  You realize that the mere request to give your member a long-lasting lengthening has excited your paranormal partner enough that [eachCock] gets rock hard, gushing pre in anticipation.  You reign in the spirit, asking she not do anything too crazy.  Your head nods in response, and the eager wraith gets to work on her spell.\n\n");
+	outputText("A satisfied grin develops on your face.  \"<i>I was hoping you'd spring for the male enhancement,</i>\" Shouldra teases, your hands darting into your armor and stroking your dick fervently.  You realize that the mere request to give your member a long-lasting lengthening has excited your paranormal partner enough that [eachCock] gets rock hard, gushing pre in anticipation.  You reign in the spirit, asking her to not do anything too crazy.  Your head nods in response, and the eager wraith gets to work on her spell.\n\n");
 	//same growth as Gro+, depending on cock number
 	if(player.cocks.length == 1) {
 		outputText("Several more inches push their way from your ");
 		if(!player.hasSheath()) outputText("crotch");
 		else outputText("sheath");
 		outputText(" in short order.  Shouldra happily grasps your fuller dick, stroking it vigorously.  Knowing your inaction will strand you for the rest of the day, you're able to pry your haunted hands away from your crotch.");
-		player.increaseCock(0, 4);
+		player.growCock(0, 4);
 		player.cocks[0].cockLength += 1;
 		player.cocks[0].cockThickness += .25;
 	}
@@ -1010,7 +973,7 @@ private function shouldraCockBloating101():void {
 	else {
 		outputText("Your bouquet of cocks twitches and thickens, each gaining more than an inch of new vibrance.  Shouldra wastes no time in grouping them together, your hands stroking them vigorously.  Knowing your inaction will strand you for the rest of the day, you're able to pry your haunted hands away from your crotch.");
 		for(var i:Number =0;i<player.cocks.length;i++) {
-			player.increaseCock(i, 2);
+			player.growCock(i, 2);
 			player.cocks[i].cockLength += 1;
 			player.cocks[i].cockThickness += .25;
 		}
@@ -1028,21 +991,12 @@ private function shouldraGivesYaSomeFukkinTeats():void {
 	outputText("\n\nYour nipples press hard against your [armor], easily gaining at least a quarter of an inch in size.  Shouldra gives each [nipple] a hasty inspection, ensuring her work.");
 	//same increase and potential for fuckable nipples as Gro+
 	player.nippleLength += (rand(2) + 3)/10;
-	dynStats("lus", 15);
+	dynStats("lus", 15, "scale", false);
 	var temp2:Number = 0;
 	//NIPPLECUNTZZZ
 	if(!player.hasFuckableNipples() && rand(4) == 0) {
-		var i:int = player.breastRows.length;
-		//Set nipplecunts on every row.
-		while(i > 0) {
-			i--;
-			if(!player.breastRows[i].fuckable && player.nippleLength >= 2) {
-				player.breastRows[i].fuckable = true;
-				//Keep track of changes.
-				temp2++;
-			}
-		}
-		//Talk about if anything was changed.
+		if (transformations.NipplesFuckable.isPossible()) temp2++;
+		transformations.NipplesFuckable.applyEffect(false);
 		if(temp2 > 0) outputText("  While doing so, she manages to slip a few of your fingers within the engorged teats, ecstatcy flowing through you as your digits explore their inner workings.  \"<i>I may not be a doctor, Champ, but it looks to me like <b>you've managed to gain yourself a pair of fuckable nips.</b></i>\"  The ghost girl spends a few minutes running your fingers around your [nipples], inside and out, just to confirm her diagnosis.");
 	}
 	doNext(camp.returnToCampUseOneHour);
@@ -1069,7 +1023,7 @@ private function shouldraReductoMenu():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_ghostGirl2);
 	outputText("Shouldra's offer to shrink aspects of your body sounds right up your alley, and you pulse as much to your ghostly compatriot.  There's no response.  You remind her that it was HER suggestion in the first place.  \"<i>Come ooooon, Champ.  It was just a slip of the ol' spiritual tongue.</i>\"  You cross your arms and look up and off to the side, the best way you can figure to glare at something that isn't there. \"<i>Ugh, fine.  Let's just get this over with,</i>\" Shouldra concedes, removing your [armor].");
-	//Balls     Breast     Clit     Cock     Nipples     Butt     Nevermind
+	//Balls     Breast     Clit     Cock     Nipples     Butt     Never mind
 	var balls:Function = null;
 	var breasts:Function = null;
 	var clit:Function = null;
@@ -1079,7 +1033,7 @@ private function shouldraReductoMenu():void {
 	if(player.nippleLength > .25) nipples = shrinkDemNipplzForYoGhost;
 	if(player.biggestTitSize() >= 1) breasts = shouldraReductosYourTits;
 	if(player.butt.type >= 2) butt = shrinkDatBootyForYoGhost;
-	if(player.balls > 0 && player.ballSize > 1) balls = shouldraReductosYourBallsUpInsideYa;
+	if(player.hasBalls() && player.ballSize > 1) balls = shouldraReductosYourBallsUpInsideYa;
 	if(player.hasCock() && player.longestCockLength() > 4) cock = shouldraMakesCocksDisappear;
 	if(player.hasVagina() && player.clitLength > .25) clit = clittyVanishingActShouldra;
 	choices("Balls", balls, "Breasts", breasts, "Clit", clit, "Cock", cock, "Nipples", nipples, "Butt", butt, "", null, "", null, "", null, "Back", shouldraTalkMenu);
@@ -1127,24 +1081,13 @@ private function shouldraMakesCocksDisappear():void {
 	spriteSelect(SpriteDb.s_ghostGirl2);
 	outputText("Your hands dart for your [cocks] as if to protect your poor masculinity.  \"<i>You're kidding, right?  You can't mean to rob me of my pride and joy!</i>\"  You remind Shouldra just whose dick she's talking about; the eidolon is getting a little too accustomed to your [if (cocks = 1) dick][if (cocks > 1) dicks].  \"<i>Please, Champ.  Not the dick...</i>\"  You slowly remove your hands from your crotch, asking the ghost to proceed.  She complies with a frustrated sigh and a rather perturbed incantation.");
 	if(player.cocks.length == 1) {
-		outputText("\n\nYour penis vibrates slightly as the magic starts to take effect.  Your eyes just about bulge out of your skull when your rod starts to smoke and twitch violently.  The panic immediately subsides when it starts yelling.  \"<i>You ");
-		var choice:Number = rand(10);
-		if(choice == 0) outputText("murderer");
-		else if(choice == 1) outputText("bastard");
-		else if(choice == 2) outputText("jerk");
-		else if(choice == 3) outputText("monster");
-		else if(choice == 4) outputText("cretin");
-		else if(choice == 5) outputText("fiend");
-		else if(choice == 6) outputText("asshole");
-		else if(choice == 7) outputText("villain");
-		else outputText("dick");
-		outputText("!</i>\" it shouts.  The tiny voice fades away as your [cock] goes still, resting at two thirds of its original size.  A single tear rolls down your cheek; you suspect the melodramatic spirit is at fault here.");
+		outputText("\n\nYour penis vibrates slightly as the magic starts to take effect.  Your eyes just about bulge out of your skull when your rod starts to smoke and twitch violently.  The panic immediately subsides when it starts yelling.  \"<i>You " + randomChoice("murderer", "bastard", "jerk", "monster", "cretin", "fiend", "asshole", "villain", "dick") + "!</i>\" it shouts.  The tiny voice fades away as your [cock] goes still, resting at two thirds of its original size.  A single tear rolls down your cheek; you suspect the melodramatic spirit is at fault here.");
 		player.cocks[0].cockLength *= 2/3;
 		player.cocks[0].cockThickness *= 2/3;
 	}
 	//MULTI
 	else {
-		outputText("\n\nYour dicks vibrate slightly as the magic begins to sink in.  You about jump out of your skin when they [if (cocks < 2) both][if (cocks >= 2) all] suddenly start smoking and flailing about.  Your fear is short lived, however, when they begin to wail and cry.");
+		outputText("\n\nYour dicks vibrate slightly as the magic begins to sink in.  You about jump out of your skin when they [if (cocks < 2) both][if (cocks >= 2) all] suddenly start smoking and flailing about.  Your fear is short-lived, however, when they begin to wail and cry.");
 		outputText("\n\n\"<i>I'm sorry, [Master]!  Please have mercy on me!</i>\" your [cock biggest] pleads.");
 		outputText("\n\n\"<i>[Master], have mercy!  I'll make it up to you!  Please!</i>\" the [cock smallest] begs.");
 		if(player.cockTotal() > 2) outputText("\n\n\"<i>I'll fuck extra hard, [Master]!  Just give me a chaaaance!</i>\" another yells.");
@@ -1199,7 +1142,7 @@ private function shrinkDatBootyForYoGhost():void {
 		if(player.butt.type < 1) player.butt.type = 1;
 		outputText("\n\nIn a few brief seconds, your [butt] relaxes into its new, slightly tinier form.  Shouldra huffs and puffs inside you, not wanting to discuss your bottom any further.");
 	}
-	dynStats("lus", -10);
+	dynStats("lus", -10, "scale", false);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -1245,8 +1188,8 @@ public function shouldersWarnings():Boolean {
 	//4 days (96 hours) since last Shouldra scene
 	if(flags[kFLAGS.SHOULDRA_SLEEP_TIMER] == -96) {
 		spriteSelect(SpriteDb.s_ghostGirl2);
-		if(rand(3) == 0) outputText("\n\"<i>Hey, Champ, I appreciate the time together, but it's been a while since I got to let off some steam,</i>\" Shouldra says, her built up lust growing more evident.  \"<i>Next time you've got a moment, maybe give me a buzz and we'll have some fun.</i>\"\n");
-		else if(rand(2) == 0) outputText("\nYour hands start rubbing each other impatiently, no doubt spurred on by your antsy, deceased traveling companion.  \"<i>Champ, you think we can improve some monster's day soon?  I've also got some new spells to play with if you prefer it be just the two of us.  It's been a while since I had some action.</i>\"\n");
+		if(rand(3) == 0) outputText("\n\"<i>Hey, Champ, I appreciate the time together, but it's been a while since I got to let off some steam,</i>\" Shouldra says, her built-up lust growing more evident.  \"<i>Next time you've got a moment, maybe give me a buzz and we'll have some fun.</i>\"\n");
+		else if(rand(2) == 0) outputText("\nYour hands start rubbing each other impatiently, no doubt spurred on by your antsy, deceased traveling companion.  \"<i>Champ, you think we can improve some monster's day soon?  I've also got some new spells to play with if you prefer it to be just the two of us.  It's been a while since I had some action.</i>\"\n");
 		else outputText("\nA shiver works through your spine.  Seems as though the mounting lust of your incorporeal partner is making itself plain to you.  Shouldra can keep to herself for a while, but you should probably tend to her needs before she decides to do it herself.\n");
 		return true;
 	}
@@ -1265,9 +1208,9 @@ public function shouldersWarnings():Boolean {
 			outputText("\nShouldra keeps rubbing your hands all over your body, trying her best to get your attention.  The ghost girl is getting a little unhinged, enough so that her mounting lust is impeding into your own sexual cravings.  Looks as though you'll always be a little horny so long as she's in this state.\n\n<b>Minimum lust raised by 20.</b>\n");
 		}
 		else {
-			outputText("\nYour [leg] dances around fervently every so often.  At first you figure that its your nerves or something, but it soon dawns on you that your forgotten spectral partner is only getting hornier the longer she waits for you.  You appreciate not being nagged to death about it, but you'll have to deal with her lust encroaching on your own until she's satisfied.\n\n<b>Minimum lust raised by 20.</b>\n");
+			outputText("\nYour [leg] dances around fervently every so often.  At first, you figure that it's your nerves or something, but it soon dawns on you that your forgotten spectral partner is only getting hornier the longer she waits for you.  You appreciate not being nagged to death about it, but you'll have to deal with her lust encroaching on your own until she's satisfied.\n\n<b>Minimum lust raised by 20.</b>\n");
 		}
-		dynStats("lus", .1);
+		dynStats("lus", .1, "scale", false);
 		return true;
 	}
 	//Warning Three
@@ -1278,7 +1221,7 @@ public function shouldersWarnings():Boolean {
 		if(rand(3) == 0) outputText("\n\"<i>Look, Champ.  I've enjoyed the time together, but it's been too long since I got a turn on this ride.  I've been nice, but I'm on the brink here.  <b>If you think you can keep on ignoring me, you'll be sadly mistaken.</b></i>\"  You nod, unsure how exactly to take Shouldra's possible threat to your inaction.  The horny ghost certainly is already having her effect on your own libido.\n\n<b>Minimum lust raised by 30.</b>\n");
 		else if(rand(2) == 0) outputText("\n\nYour hands are beginning to cling desperately to any of your sexual organs.  You managed to win back control of them, but Shouldra doesn't seem too pleased.  \"<i>I'm trying to be nice here, Champ.  Really.  But when I signed on for this, I was under the impression both of us would get to have fun.</i>\"  Your horny passenger's desire only continues to press further into your own.  <b>Shouldra's about to reach her breaking point, and you aren't quite sure you want to find out what happens.</b>\n\n<b>Minimum lust raised by 30.</b>\n");
 		else outputText("\n\"<i>Champ, I like to think I'm a reasonable spirit.  I've respected your boundaries, haven't forced you into anything too wild for too long.  But if you think that I'm going to keep sitting in the corner like a quiet little girl, <b>you will be sorely mistaken.</b></i>\"  You know, call it a hunch, but you think Shouldra is getting really anxious for some sex.  Your ever-increasing libido only furthers your assumption.\n\n<b>Minimum lust raised by 30.</b>\n");
-		dynStats("lus", .1);
+		dynStats("lus", .1, "scale", false);
 		return true;
 	}
 	return false;
@@ -1286,15 +1229,16 @@ public function shouldersWarnings():Boolean {
 
 //Ignored Shouldra goes to town on the PC
 public function nightTimeShouldraRapesThePC():void {
+	var dick:Boolean = player.hasCock() && (!player.hasVagina() || rand(2) == 0);
 	//does not trigger for genderless PCs, leaving them at +50 minimum lust until performing a scene with Shouldra (e.g. anal masturbation) or gaining a dick/pussy
 	//when PC goes to sleep after warning three without satisfying Shouldra
 	//resets Shouldra's sex hour counter, erases minimum lust bonuses
 	//Scene increases libido, sensitivity, gives bottle of ectoplasm
 	flags[kFLAGS.SHOULDRA_SLEEP_TIMER] = 0;
 	spriteSelect(SpriteDb.s_ghostGirl2);
-	player.orgasm();
+	player.sexReward("no", dick ? "Dick" : "Vaginal");
 	dynStats("lib", 1, "sen", 4);
-	outputText("\nA chilling gust rouses you from your slumber.  Wind this fierce would probably tear apart your camp or at least make a serious mess.  Eyelids as heavy as boulders prove difficult to open.  You seem especially groggy, odd tingling and numb sensations radiating from all your body.  Your right hand feels especially odd.  Grasping onto your senses as well you can, you're at least able to make out a few pale objects in the dead dark of night.  Sounds of water crashing into rock in the distance are also becoming more clear.  Finally your vision comes into focus, greeting you with the faint emerald glow of your ghostly partner against a cold, dark blue horizon.  She appears to be standing at the precipice of some drop-off, transfixed on the blood red moon hanging in the sky.");
+	outputText("\nA chilling gust rouses you from your slumber.  Wind this fierce would probably tear apart your camp or at least make a serious mess.  Eyelids as heavy as boulders prove difficult to open.  You seem especially groggy, odd tingling and numb sensations radiating from all your body.  Your right hand feels especially odd.  Grasping onto your senses as well you can, you're at least able to make out a few pale objects in the dead dark of night.  Sounds of water crashing into rock in the distance are also becoming more clear.  Finally your vision comes into focus, greeting you with the faint emerald glow of your ghostly partner against a cold, dark blue horizon.  She appears to be standing at the precipice of some drop-off, transfixed on the blood-red moon hanging in the sky.");
 	//event occurance = 0
 	if(flags[kFLAGS.SHOULDRA_TIMES_NIGHT_RAPED_PC] == 0) {
 		outputText("\n\n\"<i>I've always loved coming out to this spot at night,</i>\" Shouldra says, her soft tone surprising you.  \"<i>Mareth can be so dull at night, shrouded in a thick, deep darkness.  But way up here, looking out into that forgotten sea, you can see as clear as day.</i>\"  What was that about the sea?  Way up here?  Where the fuck has she dragged you to?");
@@ -1307,38 +1251,38 @@ public function nightTimeShouldraRapesThePC():void {
 	outputText("\n\n\"<i>I'm not that big a fan of dry spells, you know.  They tend to make me a little... vindictive.</i>\"  Now you realize what this is all about.  \"<i>Typically these sobering times were due to either a spot of laziness or bad luck.  Not being able to relieve oneself is one thing.  It's quite another when you are teased with salvation for well over a week, exercising every thread of your self-control to stop yourself from just reaching out and taking it; all because you feel some sort of obligation to a so-called partner.</i>\"  Shouldra puts her translucent arms around your head, putting her lips to your ear, \"<i>Consider yourself obliged.</i>\"");
 	outputText("\n\nYou want to at least stand up, get a clearer picture of just what's going on - or about to.  Your body just won't cooperate, though, no matter how hard you try and shake it.  \"<i>If magic were a drug, you'd have OD'd something fierce by now,</i>\" Shouldra interjects as she rises back to her feet.  The spirit's been much busier than you thought.");
 	//if PC has cock
-	if(player.hasCock()) {
+	if(dick) {
 		outputText("\n\nThe calculated shade works her way over to your [cock], a vacant expression dominating her face.  You're unsure just what that means, but it becomes the least of your concerns when she jabs her thumb into your [cockHead]!  You instinctively wince in pain, but the sensation never comes.  Not much of anything registers, really.  This soon becomes a blessing as you witness the eidolon stretch your cock away from you, insert BOTH her hands into it, and stretch your slit high into the air.  She then casually slips inside it as if it were a sleeping bag, disappearing into its distended depths.  It all happened so fast, nothing really had time to register.  You try and touch your magnified member, only to discover that it's now rock solid.  No, not erect, but literally made of stone!");
 	}
 	//if PC has no cock, but has vagina
-	else if(player.hasVagina()) {
+	else {
 		outputText("\n\nThe calculated shade bends her way down to your [cunt], a vacant expression dominating her face.  You're unsure just what that means, but your concern is quickly forgotten as the spirit grasps your vaginal walls with both hands!  Oddly enough, you feel nothing.  No pain, but no pleasure either.  This soon becomes a blessing when the eidolon works her way around your canal, shaping it into a gaping wide hole!  Once its large enough, she casually slips inside and disappears into your depths.  It all happened so fast, nothing really had time to register.  You try and touch your stretched cunt, only to discover that it's sealed shut and rock solid.  Like, literally made of stone!");
 	}
 	outputText("\n\nYour groggy daze isn't helping matters much as you panic, hands exploring your solidified genitalia.  It doesn't feel any more dense or heavier than before, but there's a disconcerting texture alongside impossible rigidity.  \"<i>Tonight we're focusing on something of my own design,</i>\" Shouldra says, her voice reverberating in your head.  Her tone mirrors the stony-eyed demeanor you witnessed earlier.  Whatever she has in store probably won't be too kosher.");
 	outputText("\n\nEyes now alit with a bright yellow tinge, Shouldra reigns over your body's will.  She holds your right hand in front of your face while directing the floating illumination to move in closer.  \"<i>I did some prep work while you were napping.</i>\"  No wonder your hand felt weird; your fingers are all swollen, each slender digit resembling stout little sausages rubbing against one another, your joints hardly visible.  \"<i>I decided to save the rest of the spell for when you were awake, though.</i>\"  You try to wiggle the puffy pointers, but your body refuses to obey you.  Rather, it transitions into Shouldra's arcane magic, your mouth reciting the final phrases to finish her spell.");
-	outputText("\n\nThe skin of your flabby fingers waves and undulates, increasing in rhythm.  Your left hand grasps onto your right wrist in an attempt to steady the shaking.  Folds of flesh roll up your outstretched digits, accumulating at their tips.  Your hand is getting increasingly warm.  Incredibly odd sensations of some sort of transformation wrack your brain, unable to comprehend what is going on; they certainly aren't painful, probably due to the magic sedatives you feel you've been laced with.  The insides of your fingers distend a little, feeling as if...");
+	outputText("\n\nThe skin of your flabby fingers waves and undulates, increasing in rhythm.  Your left hand grasps onto your right wrist in an attempt to steady the shaking.  Folds of flesh roll up your outstretched digits, accumulating at their tips.  Your hand is getting increasingly warm.  Incredibly odd sensations of some sort of transformation wracks your brain, unable to comprehend what is going on; they certainly aren't painful, probably due to the magic sedatives you feel you've been laced with.  The insides of your fingers distend a little, feeling as if...");
 	outputText("\n\nIt hits you like a harpy's ass.  She really did it.  The bunched up skin slowly unfurls, confirming your suspicion.  Shouldra's changed your fingers into five stout, little dicks, beads of pre forming at each of their tips.  The otherwise impassive facade of your tormentor finally gives in, your face slowly becoming giddier as she marvels at her creation.  \"<i>You have no idea how glad I am this worked,</i>\" she says outwardly.  \"<i>Granted, I had a lot of time lately to perfect it.</i>\"  She wiggles your new fingers around, displaying the same range of movement they've always had.  Balling them into a fist, however, makes for an unusually rousing experience, your dick-fingers only increasing the flow from their- \"<i>You don't want to know what I had to do to get these little guys to squirt, Champ.</i>\"  That doesn't sound good.");
 	outputText("\n\nYour left hand further examines your new wrist-mounted bouquet.  They're incredibly sensitive; you can feel things just as you would normally, but any manipulation of them registers just the sort of reactions you would expect from a dick - or five in this case.  She rubs the shafts soothingly, your left thumb exploring under each glan, over each slit, and into each fold.  The attention sinks in swiftly, each of your phallic fingers getting rigid and a little harder to bend.  The handjob results in a five-pronged stiffy, each dick taut, drooling, and ready for insertion.");
 	outputText("\n\nYou noticed that the pace of your breathing has picked up; the horny ghost is really getting into this madness.  The foreplay - or is it five-play in this case? - isn't going to end so soon, however.  After a few more loving strokes from one hand to the other, Shouldra begins teasing your naked body with the squadron of cocks.  She runs their dribbling tips up along your [hips].  She glides their velvet shafts down your [legs].  She pinches your [nipple] with their bulbous heads");
 	if(player.biggestTitSize() >= 1) outputText(", circling their entire lengths around your [fullChest]");
 	outputText(".  It's quite amazing how ecstatic the tour feels, each pre-smeared exploration smothering you in sensual vibes.  Just moving the stiff little devils - particularly at your joints - sends shivers up your arm.");
 	outputText("\n\nShouldra finally parts your fingers wide and covers your face in warm, moist, excited dickflesh.  You can count the few seconds it takes for her to spend time rubbing your head before she eventually shoves your hand into your mouth.  You figure she's made your jaw just as flexible as the rest of your body, judging by how easily she was able to down the five treats.  Your hand slowly thrusts in and out of your maw, your tongue working overtime to accommodate the large arrival.  Even with otherworldly enhancements, though, the five-fingered blowjob proves to be quite the challenge, so the ghost girl opts to sucking on one or two at a time.");
-	outputText("\n\nMerry with her erotic fantasy, Shouldra swaps between dicks like someone sucking each finger free of errant flavors.  You at least agree that the rather bizarre act has actually felt quite wonderful.  The spirit quickens the pace, grasping your jaw with your new pinkie and thumb and the remaining three dick digits stuffing your face.  Pre trickles down your neck from the opposable penis and its cohort as they dig hard into your chin.  Meanwhile, the other trio of cocks continue their assault, escalating to a frenzied pitch.  Just as the spirit peaks, she locks your lower jaw into a deathgrip, each stiff appendage clamping on for all they're worth.");
+	outputText("\n\nMerry with her erotic fantasy, Shouldra swaps between dicks like someone sucking each finger free of errant flavors.  You at least agree that the rather bizarre act has actually felt quite wonderful.  The spirit quickens the pace, grasping your jaw with your new pinkie and thumb and the remaining three dick digits stuffing your face.  Pre trickles down your neck from the opposable penis and its cohort as they dig hard into your chin.  Meanwhile, the other trio of cocks continues their assault, escalating to a frenzied pitch.  Just as the spirit peaks, she locks your lower jaw into a deathgrip, each stiff appendage clamping on for all they're worth.");
 	outputText("\n\nShouldra moans in ecstasy, each finger shooting out one payload after another.  Your entire arm is spasming, forcing the ghost to grab onto it with your left hand.  Seemingly endless streams of cum spray against your head and down your throat.  You can hardly describe what you're feeling.  The poltergeist seems incredibly content with herself.  Your body is flush with sexual release.  But you find that, mentally, you're unfulfilled.  ...Shit, you hope Shouldra doesn't pick up on that as she enjoys your hand cannons.");
 	outputText("\n\nThankfully, the ghost seems to be in her own personal heaven, still filling your gullet full of cream, lightening her grasp in-between each pulse.  Finally, she finishes and lazily drags your soaked hand from your mouth, dangling the twitching members wearily in the air.");
 	outputText("\n\n\"<i>That felt even better than I imagined it would,</i>\" the satisfied spirit finally proclaims, leaning back on your left hand.  She lifts your flaccid fingers over your own petrified sex, dripping cum all over it.  It doesn't really surprise you as the jism soaks into your ");
-	if(player.hasCock()) outputText("[cock]");
+	if(dick) outputText("[cock]");
 	else outputText("[cunt]");
 	outputText(", softening the ");
-	if(player.hasCock()) outputText("magically enlarged member");
+	if(dick) outputText("magically enlarged member");
 	else outputText("magically gaped snatch");
 	outputText(" back to a much less craggy complexion.  Shouldra slowly drags you back to your [feet] after a minute or two of blissful respite and walks you closer to the cliffside to stare off into the moonlit horizon.  It never really dawned on you just how fucking high you are; just where the fuck did she take you?");
 	outputText("\n\n\"<i>Well, that was a lot of fun, Champ.  I hope that I made my point abundantly clear,</i>\" she says while vacantly rubbing your dick fingers.  She turns away from the ledge as if to leave, but stops after a few brief steps.  \"<i>Actually, I think I'll make sure you remember this occasion.</i>\"  She what- The fucking crazy bitch is running you off the cliff!  Things go from kooky fun to morbid chaos as you take a mighty leap hundreds of feet over seemingly uninviting waters, the little orb of light trailing closely behind you.  Suddenly you feel yourself in control of your body again.  \"<i>I had my fun.  Now it's your turn,</i>\" Shouldra blasts into your head, pointing your eyes to your ");
-	if(player.hasCock()) outputText("flailing cock");
+	if(dick) outputText("flailing cock");
 	else outputText("moist vagina");
 	outputText(".");
 	//if cock
-	if(player.hasCock()) {
+	if(dick) {
 		outputText("\n\nYou aren't sure why you kowtow to her little game.  Maybe it's the surge of adrenaline, the rapidly approaching water below or you're just horny after the less-than-fulfilling sex act before.  Either way, you grasp onto your rod with your left hand, pumping for all you're worth as you plummet helplessly.  But as your [cock] surges to life, you soon find that its enchanted size has easily made it more than a one-handed job!  Without any further hesitation, both of your hands- in your tense excitement, you forgot about your five-cocked feature.  The dicks-on-big-dick action is... it feels way too fucking good right now.");
 		outputText("\n\nWith all participants at full salute, your manic stroking commences.  The wind races past you while your beating heart pounds into your ears.  You hold your wang firmly against your [chest] in an attempt to keep it from flailing about, putting it square into your face.  Easily halfway down the descent, your pick up the pace of your caress, circling your massive [cockHead] with your mutated hand.  It doesn't take you long to reach your own precipice, phallic fingers pressing hard into your mast.  Just as you're about to climax, your body slams hard into the ocean.");
 	}
@@ -1389,7 +1333,7 @@ public function shouldraWakesUpOrPokesPCsForShitsAndGigglesIdunnoHowLongCanIMake
 		choices[choices.length] = 2;
 	}
 	//3 PC with balls
-	if(player.balls > 0) {
+	if(player.hasBalls()) {
 		choices[choices.length] = 3;
 		choices[choices.length] = 3;
 		choices[choices.length] = 3;
@@ -1410,7 +1354,7 @@ public function shouldraWakesUpOrPokesPCsForShitsAndGigglesIdunnoHowLongCanIMake
 		choices[choices.length] = 5;
 	}
 	//6 PC with Exgartuan and Shouldra //unlocked after deciding to keep Shouldra and Exgartuan together, for better or for worse (see below for scene)
-	if(player.statusEffectv1(StatusEffects.Exgartuan) == 1 && 9999 == 9999) {
+	if(SceneLib.exgartuan.dickPresent() && flags[kFLAGS.SHOULDRA_EXGARTUDRAMA] == 4) {
 		choices[choices.length] = 6;
 		choices[choices.length] = 6;
 		choices[choices.length] = 6;
@@ -1444,7 +1388,7 @@ public function shouldraWakesUpOrPokesPCsForShitsAndGigglesIdunnoHowLongCanIMake
 	//18 (has Incorporeality perk)
 	if(player.hasPerk(PerkLib.Incorporeality)) choices[choices.length] = 18;
 	//19 (possessed by Boobgartuan)
-	if(player.statusEffectv1(StatusEffects.Exgartuan) == 2) choices[choices.length] = 19;
+	if(SceneLib.exgartuan.boobsPresent()) choices[choices.length] = 19;
 	//20 (PC knows any spells)
 	if(player.hasSpells()) choices[choices.length] = 20;
 	//21 (PC has anemone dick)
@@ -1467,7 +1411,7 @@ public function shouldraWakesUpOrPokesPCsForShitsAndGigglesIdunnoHowLongCanIMake
 			else outputText("One of your hands begins playing with your [cock], no doubt spurred on by your paranormal passenger.  \"<i>You know, Champ, I could make you some easy gems.  Just find some know-nothing and introduce them to The Amazing Penis, capable of astounding feats like responding to any vocal coital commands!</i>\"  Playing the part of a sideshow attraction is quite the tangent to your typical daily activities.  Probably best not to think about it.");
 			break;
 		case 2:
-			//PC with BIG COCK 
+			//PC with BIG COCK
 			subSelect = rand(5);
 			if(subSelect == 0) outputText("Your [cock] begins to feel incredibly warm and dense. You place your hands along your enormous rod, causing it to illicit a low hum.  That \"<i>mmmm</i>\" sounded vaguely like Shouldra.  Best you can figure, the ghost girl is having the time of her life concentrating her being throughout your totem pole.  Shaking your head, you decide it best to carry on, doing your darndest to ignore her.");
 			else if(subSelect == 1) outputText("A wet feeling within your [armor] warrants checking, forcing you to stop and examine what's wrong.  Upon undoing your outfit, you discover an alarming stream of pre flowing from your... moaning urethra.  You scold the awestruck ghost girl, knocking her out of her trance.  \"<i>S-sorry, Champ!</i>\" your [cock] apologizes, slurping her \"drool\" back into her... its slit. After a listless stare, you sigh and continue on.");
@@ -1503,7 +1447,7 @@ public function shouldraWakesUpOrPokesPCsForShitsAndGigglesIdunnoHowLongCanIMake
 			else if(subSelect == 1) outputText("Your [vagina] puffs up slightly and begins nipping at your [armor].  \"<i>What's wrong? Are you getting hungry?</i>\" you ask emphatically... involuntarily.  The enthusiastic box yips in response.  \"<i>Don't worry, momma will get you something to eat real soon!</i>\"  You're left frozen in place to enjoy awkward silence as your [vagina] returns to its normal size.");
 			else if(subSelect == 2) outputText("You almost don't realize your hand creeping its way into your [armor], trying to sneak a quick fingering. Looks like Shouldra is getting antsy.");
 			else if(subSelect == 3) outputText("What the... ?  Your [vagina] has started gushing fluids everywhere, absolutely soaking your [legs]!  \"<i>Don't mind me, Champ.  I'm just testing to see how far I can push this. Part of something I have in mind for later...</i>\"  No good can come of this...");
-			else outputText("You can sense Shouldra laughing to herself over something.  Though its usually a poor idea, you decide to ask and see what's on her mind.  \"<i>I was just scheming.  Would you get too upset if I spooked your next fuck?</i>\"  As she asks, you feel your [vagina] clenching hard, giving you a clear idea of what the trickster has in mind.  There's no way that-  On second thought, maybe it could be kind of fun?");
+			else outputText("You can sense Shouldra laughing to herself over something.  Though it's usually a poor idea, you decide to ask and see what's on her mind.  \"<i>I was just scheming.  Would you get too upset if I spooked your next fuck?</i>\"  As she asks, you feel your [vagina] clenching hard, giving you a clear idea of what the trickster has in mind.  There's no way that-  On second thought, maybe it could be kind of fun?");
 			break;
 		//PC with Exgartuan and Shouldra
 		//unlocked after deciding to keep Shouldra and Exgartuan together, for better or for worse (see below for scene)
@@ -1511,10 +1455,10 @@ public function shouldraWakesUpOrPokesPCsForShitsAndGigglesIdunnoHowLongCanIMake
 			subSelect = rand(6);
 			if(subSelect == 0) outputText("While minding your business, you realize faint whispering is coming from your [cock].  Shouldra and Exgartuan are scheming something, probably something you wouldn't be a fan of.  Every so often your wang lets out a chuckle.  Maybe getting these two together wasn't in your best interest.");
 			else if(subSelect == 1) outputText("Your [cock] is wiggling around inside your [armor], making you incredibly uncomfortable.  You go to undo your outfit when the demonic dong plows its way out anyway, scaring you half to death.  Shouldra and Exgartuan just laugh, too content with one another to pay you much mind.  You never expected them to get along THIS well.");
-			else if(subSelect == 2) outputText("\"<i>So what other sorts of things can you concoct?</i>\" Exgartuan asks, shuffling around in your armor.  You're incredibly confused by the sudden question.\n\n\"<i>Honestly, that put me in the mood to make all of mother nature our bitch,</i>\" you respond... Shouldra responds.  The spirit is gabbing through your mouth to your possessed pecker.  The two prattle on like this for some time.");
+			else if(subSelect == 2) outputText("\"<i>So what other sorts of things can you concoct?</i>\" Exgartuan asks, shuffling around in your armor.  You're incredibly confused by the sudden question.\n\n\"<i>Honestly, that put me in the mood to make the mother nature our bitch,</i>\" you respond... Shouldra responds.  The spirit is gabbing through your mouth to your possessed pecker.  The two prattle on like this for some time.");
 			else if(subSelect == 3) outputText("Your hands slip inside your [armor], exploring your [cock].  Your fingers caress each little nub and nodule they come across.  \"<i>That's the ticket,</i>\" Exgartuan gleefully responds, getting rigid in the tight confines of your outfit.  Looks like your ghostly partner is out to make everyone happy.");
 			else if(subSelect == 4) outputText("\"<i>Why don't you help out during battles, babe?</i>\" Exgartuan asks rather bluntly.\n\n\"<i>Hey, I've offered to help out with Champ's more seductive poses like you do...</i>\"\n\nIt isn't like you have much choice in the matter as far as Exgartuan is concerned!  The two continue their discussion, belittling your apparently meager combat performance.  Maybe your possessors could actually help deal some real damage for a change!");
-			else outputText("Your [armor] has vanished!  You're butt naked!  It's pretty obvious who's at fau-\n\n\"<i>Really, [name], you don't even need it,</i>\" Exgartuan says, surprising you.\n\nShouldra laughs, \"<i>Right, Champ?  Two sexually-charged tyrants dwelling within you and you insist on sneaking around like common rabble?  Why not let it all hang out?</i>\"\n\nYour hands caress your [cock], exciting the demonic member into attention.  You remind the couple that your outfit isn't <b>just</b> for protection, citing many other-  Oh, your [armor] is back.  Guess they don't want to hear you prattle.");
+			else outputText("Your [armor] has vanished!  You're butt-naked!  It's pretty obvious who's at fau-\n\n\"<i>Really, [name], you don't even need it,</i>\" Exgartuan says, surprising you.\n\nShouldra laughs, \"<i>Right, Champ?  Two sexually-charged tyrants dwelling within you and you insist on sneaking around like common rabble?  Why not let it all hang out?</i>\"\n\nYour hands caress your [cock], exciting the demonic member into attention.  You remind the couple that your outfit isn't <b>just</b> for protection, citing many other-  Oh, your [armor] is back.  Guess they don't want to hear you prattle.");
 			break;
 		//General flavor text
 		case 7:
@@ -1595,8 +1539,6 @@ public function shouldraWakesUpOrPokesPCsForShitsAndGigglesIdunnoHowLongCanIMake
 	outputText("\n");
 }
 
-
-
 //Shouldra on-board with the PC will keep the worms encounter from occurring.
 //Intro
 //includes reference to SHOULDRA_WORM_SCENE_COUNTER
@@ -1638,7 +1580,7 @@ private function kickOutShouldra4YoWormyBuddies():void {
 private function kickOutWormiesForYourGhostPalPAL():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_ghostGirl2);
-	outputText("You concede to the paranormal plaintiff and agree to part with your parasitic companions, but under one condition: that she be the one to rid you of them.  Shouldra's happy to have won you over, but the prospect of having to deal with this issue doesn't sit well with her.  Your body trembles again as she focuses her attention back on your besieged dick.  A duo of worms are poking out from - they're quickly expelled with another violent shake.");
+	outputText("You concede to the paranormal plaintiff and agree to part with your parasitic companions, but under one condition: that she be the one to rid you of them.  Shouldra's happy to have won you over, but the prospect of having to deal with this issue doesn't sit well with her.  Your body trembles again as she focuses her attention back on your besieged dick.  A duo of worms is poking out from - they're quickly expelled with another violent shake.");
 	outputText("\n\n\"<i>Okay... I think I got this,</i>\" the spirit proclaims by way of your mouth.  Your body takes a shuddering deep breath as the ghost girl tries her best to focus on casting a spell.  A searing heat suddenly overtakes your [balls] causing the beasts to stir wildly within your crotch.  The bizarre sensation ruins Shouldra's concentration, causing your hands to grasp onto your head as she shouts and flails your wang about in the air.");
 	outputText("\n\n\"<i>I can't do this!</i>\"  the panicked spirit shouts from your maw.  You try and calm her down, cluing the spooked spook in on how the first half of her anguish is over now that the worms' home is no longer hospitable for them.  The second half of the problem is that, in their terrified state, they can't make the journey up your tower of terror.  Unable to focus long enough to work through an incantation, you spell out the only real solution for your troubled companion: that she needs to get hands-on.");
 	outputText("\n\n\"<i>You're a real fucking asshole, you know that?</i>\"  Shouldra says out loud.  Digging deep down for any shred of her trademark confidence, your trembling hands slowly work their way towards your infested manhood.  The confined worms are stirring around with ferocity in their attempt to flee, distending your urethra as they clump together at its base.  Shouldra freezes up, your trembling hands mere centimeters from your wriggling meat.  You give her a mental shout, forcing the spirit into action.  She screams incessantly as your hands move up and down your length, taking special care to avoid the undulating passageway in the front.  Your eyes slam shut as your head turns to face away from the spectacle.");
@@ -1734,10 +1676,11 @@ private function keepExgartuanInsteadOfShouldra():void {
 	outputText("\n\n\"<i>I didn't think you'd side with this actual prick, Champ.  When you-</i>\"");
 	outputText("\n\n\"<i>Blah, blah, blah,</i>\" Exgartuan interrupts, \"<i>Just get lost already.  The sun's almost up and we've cunts to fill.</i>\"");
 	outputText("\n\nShouldra gives you one last stink eye before doing a 180 and storming out of the " + camp.homeDesc() + ".  Exgartuan starts blathering on about something or other as you reflect on your decision.  No use dwelling on it too much, though; you figure you'll never be seeing the shade again.");
-	flags[kFLAGS.SHOULDRA_EXGARTUDRAMA] = -1;
-	//Shouldra gone for good
-	flags[kFLAGS.SHOULDRA_FOLLOWER_STATE] = -1;
-	doNext(playerMenu);
+	if (!recalling) {
+		flags[kFLAGS.SHOULDRA_EXGARTUDRAMA] = -1;
+		flags[kFLAGS.SHOULDRA_FOLLOWER_STATE] = -1;
+		doNext(playerMenu);
+	} else doNext(recallWakeUp);
 }
 //Keep Shouldra
 private function keepShouldraAndKickOutExgartuan():void {
@@ -1760,15 +1703,14 @@ private function keepShouldraAndKickOutExgartuan():void {
 	outputText("\n\n\"<i>Almost done, Champ!  Just help me out with the last push!</i>\" Shouldra shouts from somewhere.  You realize that your dick's carnal canal is still your previous magenta hue from before this altercation.  Shouldra must have prepped the demon for ejection.  You summon whatever strength you have left in you in order to rub your sore shaft.  Shouldra must have been up to something else, as it only takes you a few strokes along the incredibly sensitive monster until you orgasm.  Thick globules of inky-black cum shoot out of your purified penis, making a mess on your " + camp.homeDesc() + "'s inner wall.  The load is true to your legacy, the gargantuan tidal wave after wave of black ooze seemingly never ending.");
 	outputText("\n\nFinally, your penis goes the slightest bit limp, giving you relief from the boner to end all boners.  You stare at the rather disgusting pile of goop you managed to dislodge from your johnson.");
 	outputText("\n\n\"<i>Concentrated demonic possession,</i>\" Shouldra proclaims, her upper torso sticking out of your tower, \"<i>THAT Exgartuan won't get to enjoy any more 'hot dickings,'</i>\" she teases.  \"<i>Don't worry about that mess.  I think it'll eventually just evaporate without any vengeful demonic cock spirits haunting your " + camp.homeDesc() + " or something.</i>\"  The last thing you need after a trip like this is ANOTHER poltergeist.");
-	outputText("\n\n\"<i>You know, nothing in that pile effected your actual load,</i>\" Shouldra smiles, reaching over from her perch to rub your [balls].  \"<i>How's about we greet the morning sunrise with my brand new cock.  I never liked that grody demonic dong you had earlier.  I mean, just look at this thing.  I made the head nice and...</i>\"");
+	outputText("\n\n\"<i>You know, nothing in that pile effected your actual load,</i>\" Shouldra smiles, reaching over from her perch to rub your [balls].  \"<i>How's about we greet the morning sunrise with my brand-new cock.  I never liked that grody demonic dong you had earlier.  I mean, just look at this thing.  I made the head nice and...</i>\"");
 	outputText("\n\nShouldra goes on and on about her new toy.  She's certainly a spry little thing.  After paying one more glance to the mess in the side of your " + camp.homeDesc() + ", you finally get to move on with your day.  You really hope Shouldra was right about that sight evaporating on its own.");
-	//PC has human dick
-	player.cocks[0].cockType = CockTypesEnum.HUMAN;
-	//Exgartuan departs
-	player.removeStatusEffect(StatusEffects.Exgartuan);
-	//unlocks one more scene for later that night
-	flags[kFLAGS.SHOULDRA_EXGARTUDRAMA] = -0.5;
-	doNext(playerMenu);
+	if (!recalling) {
+		SceneLib.exgartuan.leaveDick();
+		player.cocks[0].cockType = CockTypesEnum.HUMAN;
+		flags[kFLAGS.SHOULDRA_EXGARTUDRAMA] = -0.5;
+		doNext(playerMenu);
+	} else doNext(keepShouldraPartIIExgartumonsUndeatH);
 }
 //Keeping Shouldra 2 - Exgartuan's back from the dead!
 public function keepShouldraPartIIExgartumonsUndeatH():void {
@@ -1781,7 +1723,7 @@ public function keepShouldraPartIIExgartumonsUndeatH():void {
 	outputText("\n\n\"<i>YOU THINK YOU CAN FUCKING GET RID OF ME THAT EASILY, CHAMPION!</i>\"");
 	outputText("\n\nHoly shit! your " + camp.bedDesc() + " just fucking spoke!  With Exgartuan's annoying voice!  You try and extricate yourself, but you're sucked in under the covers!  Your entire sleeping setup is compressing around you, the dead demon's laugh booming in from every angle.  In nothing but your birthday suit, you uselessly claw at your sheets to try and escape, but it's no use!");
 	outputText("\n\nYou fear for the worst as your bed and sheets close in on you.");
-	flags[kFLAGS.SHOULDRA_EXGARTUDRAMA] = 0;
+	if (!recalling) flags[kFLAGS.SHOULDRA_EXGARTUDRAMA] = 0;
 	//[next page]
 	doNext(keepShouldraPartIIIExgartumonsUndeatH);
 }
@@ -1792,13 +1734,14 @@ private function keepShouldraPartIIIExgartumonsUndeatH():void {
 	outputText("\n\nShouldra's head materializes out of your covers directly in front of yours, smiling smugly.");
 	outputText("\n\n\"<i>The look on your face,</i>\" the fabric phantom laughs.  You sigh and at least manage to poke your head out from under your haunted sheets.  Shouldra's head quickly follows you, forming on the outside to greet you.  The frisky ghost tucks you in nice and tight before she begins massaging your [cock] from every angle with her cot haunt arrangement.");
 	outputText("\n\nYou enjoy a peaceful night's sleep for a change.");
-	doNext(playerMenu);
+	doNext(recalling ? recallWakeUp : playerMenu);
 }
 //Keep Both!"
 //earth elemental
 private function keepAllTheGhosts():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_ghostGirl2);
+	if (!recalling) outputText("<b>New scene is unlocked in 'Recall' menu!</b>\n\n");
 	outputText("It blows your mind that these two can't get along.  You have no qualms with sharing your [cock] with all involved parties if they would just get along.  With everyone's attention finally in your possession, you explain to Exgartuan how useful Shouldra's magic could be to him.  Hopefully the demon will listen to reason so your loins will no longer be a contested battleground.");
 	outputText("\n\n\"<i>Are you fucking kidding me, champion?</i>\"");
 	outputText("\n\nOr not.  Looks like your silver tongue's failed you for a change.");
@@ -1815,7 +1758,7 @@ private function keepAllTheGhosts():void {
 	outputText("\n\n\"<i>If you want to fuck this and any other magnificent creation of mine, you need to stop being a dick and let me in on that dick for a change,</i>\" Shouldra shouts as she leans against her machination.  \"<i>She may not be one for conversation - or free will, really - but she'll work in a pinch no matter what you throw at her!</i>\" the ghost girl boasts, patting the giant's equally large ass.  Again, you wonder why she can't be bothered to lift a finger for you elsewhere.");
 	outputText("\n\n\"<i>I guess I can let you in on the fun after all then,</i>\" Exgartuan concedes, torrents of anticipatory pre gushing from his maw and soaking into the creature's hand.  \"<i>I suppose it's only natural for a girl to go to any lengths for a piece of this action.</i>\"");
 	outputText("\n\nShouldra doesn't even bother with the demon's snarky remark trying to maintain at least the illusion of his clout.  She orders her friend to return you to the ground.  \"<i>I knew you'd eventually see things my way,</i>\" the ghost says seductively as her form incorporealizes.  As seems to have been the case through this whole ordeal, you doubt that she was talking to you.  The spiritual mist envelops and seeps into your [cock], only making it warmer, harder, and fuller.");
-	outputText("\n\nA dead silence hits the early morning air now.  The vacant earth elemental doesn't seem to be much for speaking.  She casually strolls up to you and begins smearing your demonic lube all along your length.  Her giant, coarse hands feel surprisingly great on your sexual flesh; you just wish that there was life behind those vacant glowing eye holes.  The whole no-face thing isn't doing much for you.");
+	outputText("\n\nA dead silence hits the early morning air now.  The vacant earth elemental doesn't seem to be much for speaking.  She casually strolls up to you and begins smearing your demonic lube all along your length.  Her giant, coarse hands feel surprisingly great on your sexual flesh; you just wish that there was life behind those vacant glowing eyeholes.  The whole no-face thing isn't doing much for you.");
 	outputText("\n\nThe golem finishes its task in no time, your beating rod glistening in the dull orange light of the approaching sunrise.  You wonder just what exactly your dual-possessed cock is going to penetrate on the featureless machination; Shouldra spared no mental expense making the breasts as feature rich as she could, but the blank canvas of a pelvis isn't particularly inviting.  This issue is apparently only in your head, however, when the prepped penis drills right into the elemental, causing her to stumble forward and grasp onto your arms with her mighty grip.");
 	outputText("\n\nYour vision is obscured by creature's tits, your head sinking into the tightly-packed dirt globes.  You only go in further as the fervent couple in your manhood thrust in and out of their makeshift cunt.  The unrelenting pace, free of any preparatory foreplay, is murder on your pelvis[if (hasBalls = true) \"; the mighty swings of your [balls] between you and your partner aren't helping matters much either\"].  But you're forced to soldier on, unable to either resist the mighty force of your haunted demonic dong or the mammoth grip of the earth elemental.");
 	outputText("\n\nYour head completely swallowed by earthen mounds, you fail to notice the earth elemental slowly falling apart under the sheer force of your fucking.  Though anything important to your rod's endeavour remains flexible, firm, and unyielding, the elemental's exaggerated hourglass form takes its toll on her lower legs.  They soon break apart to return to the ground, sending the giantess to her knees and taking you down along with her.  This of course bears no consequence on your [cock], its mission remains unwavering.");
@@ -1827,12 +1770,12 @@ private function keepAllTheGhosts():void {
 	outputText("\n\nThe powerful grip surrounding you quavers and falls as she loses her arms.  And with one last, mighty thrust, your [cock] finally pierces through to the other side of the elemental, snuffing its life and sending a wall of earth crashing down on top of you.  A pile of dirt with an enormous dick sticking out of it would certainly be a sight for some random passerby to come across.  A few minutes worth of digging frees you from the cum-soaked digsite.  That was certainly an experience you have mixed feelings about.");
 	outputText("\n\nExgartuan and Shouldra seem content with one another now, though.  The powerful climax managed to knock both of them out.  Seems that fucking an elemental literally back to the earth it was spawned from really did it for them.  Their friendship will hopefully bring you some much wanted peace, but you worry about what strange things will come of their alliance.  It feels as though your [cock] can only endure so much, but those limits will surely be stretched.");
 	outputText("\n\nYou'll spend the rest of the early morning greeting the sunrise and cleaning off.");
-	//puts Shouldra and Exgartuan to sleep/resets their timers
-	shouldraSleeping(15,true);
-	player.changeStatusValue(StatusEffects.Exgartuan,2,(12 + rand(7)));
-	//unlocks follower dialog
-	flags[kFLAGS.SHOULDRA_EXGARTUDRAMA] = 4;
-	doNext(playerMenu);
+	if (!recalling) {
+		shouldraSleeping(15, true);
+		SceneLib.exgartuan.dickSleep(24 + rand(12));
+		flags[kFLAGS.SHOULDRA_EXGARTUDRAMA] = 4;
+		doNext(playerMenu);
+	} else doNext(recallWakeUp);
 }
 
 //Intro
@@ -1841,7 +1784,7 @@ public function shouldraBakeryIntro():void {
 	spriteSelect(SpriteDb.s_ghostGirl2);
 	outputText("You set off towards the bakery, and it's not long before the smell of freshly-baked pastries and sugary candies wafts through the air.  Something stirs in your mind as a familiar ghostly presence makes herself known; seems you're not the only one who noticed the scent of cinnamon.");
 	outputText("\n\n\"<i>Oh hey, a bakery!</i>\" She exclaims, \"<i>Are we gonna grab something?  All those years of being a ghost did a real number on my appetite.</i>\"  ");
-	//first time: 
+	//first time:
 	if(flags[kFLAGS.SHOULDRA_BAKERY_TIMES] == 0) outputText("You smirk, wondering how exactly a ghost manages to work up a hunger.  Your skepticism is met by an intense stabbing pain in your stomach, forcing you to buckle slightly from the cramping.  It lasts only a moment before it vanishes, however.  \"<i>You feel that, smartass?</i>\" The ghost girl sneers, \"<i>That's what decades of fasting will do to you.");
 	else outputText("You point out that she's already had something at the bakery.  \"<i>Yeah, I did.  And now I'm hungry again.  Deal with it.");
 	outputText("  Now, how about a snack?  Or two?</i>\" Her enthusiasm is clear...  and slightly worrying.");
@@ -1861,7 +1804,7 @@ private function feedShouldraACake():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_ghostGirl2);
 	outputText("You decide that there's no use getting cold feet now; you wanted to go the bakery anyway, no harm in letting Shouldra have some fun while you're there.  ");
-	//after first time: 
+	//after first time:
 	if(flags[kFLAGS.SHOULDRA_BAKERY_TIMES] > 0) outputText("Well, nothing <i>permanent</i>, anyway.  ");
 	outputText("You press on, soon arriving at the ramp leading down into the bakery's interior.  It's as busy as ever, with patrons milling about, chatting between bites of pastry.");
 	outputText("\n\nYou spy the pastry-woman Maddie working at the counter; seems she had to be pulled off baking duty for some reason.  As she glances around the room, your eyes meet, and she quickly looks away.  Is she...  blushing?  You didn't know she could do that.");
@@ -1888,7 +1831,7 @@ private function shouldraAndMaddieSittingInATree():void {
 private function goAlongWIthShouldrasEatingSpree():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_ghostGirl2);
-	//if repeat scene: 
+	//if repeat scene:
 	if(flags[kFLAGS.SHOULDRA_BAKERY_TIMES] > 0) outputText("\"Man, you're not sure you want that kind of impact on your figure again...  \"");
 	outputText("Ah, what the hell.  You were hungry anyway.  You let Shouldra guide the cake into your mouth.  Mmm, not bad; rich, sweet and delicate.  Shouldra chuckles in your mind as she releases her control slightly, letting you lick your fingers clean of any stray crumbs.  \"<i>Well, guess you're pretty hungry yourself!  Alright, Champ, I'll give you some freedom, but just remember you're not the only one with an appetite.</i>\" You wince as your hunger intensifies to the verge of pain; looks like you're eating for two.  Your eyes lock on to the feast before you and something snaps in your mind.  You need this food, all of this food, inside you.  <i>Now</i>.");
 	outputText("\n\nYou finish the torte, pausing only to scrape the platter clean and devour the crumbs before starting on some brownies.  As snack upon snack disappears down your maw, your stomach grows warm and full, feeling mildly bloated as the last brownie passes your lips.  \"<i>Ooh, is your poor lil' tummy feeling a bit full?</i>\" Shouldra snickers.  \"<i>Let's get it out of this cumbersome outfit.</i>\" An incantation echoes in your mind before your [armor] shimmers and vanishes.  Well, that was unexpected");
@@ -1906,15 +1849,17 @@ private function goAlongWIthShouldrasEatingSpree():void {
 	outputText(", before you realize that nobody seems to notice your predicament.  Shouldra reads your thoughts and responds, \"<i>Thought you might appreciate some privacy");
 	if(flags[kFLAGS.PC_FETISH] > 0) outputText(", even with that kink of yours");
 	outputText(", Champ.  Here's something extra anyway, just in case.</i>\" One ghostly incantation later, and ");
-	if(player.femininity <= 50) outputText("a buttoned shirt and pair of belted jeans");
+	if(player.femininity <= 50) outputText("a buttoned shirt and a pair of belted jeans");
 	else outputText("a tight-fitting tank top and skirt");
 	outputText(" adorn your person.");
+	flags[kFLAGS.SHOULDRA_BAKERY_TIMES]++;
+	sceneHunter.selectGender(dickF, vagF);
 	
-	if(player.hasCock()) {
+	function dickF():void {
 		outputText("\n\nYou run a hand down your chest, examining the new material.  Silky smooth...  As your hand slides across your stomach, you press in slightly.  You've only made a small dent in the food before you, but there's already a noticeable bulge beneath your belt, and a few slivers of " + player.skinFurScales() + " are visible between the buttons.  You rub the modest mound, resulting in a subdued gurgling and a content burp; you've gotten full pretty quickly.  Maybe you should just leave the rest of the food and- \"<i>Not so fast, bucko!</i>\" Shouldra fumes, causing you to jump in your seat.  \"<i>You might be full, but <b>I've</b> barely started!</i>\" Your gut churns violently as the ghost girl's inhuman appetite infects your own.  Oh dear...");
 		outputText("You quickly grab something, an eclair, from the table in an effort to ease the pain in your stomach.  The taste is incredible; you don't know if it's the hunger or Shouldra's magic, but this is easily the best eclair you've ever eaten.  You moan low in your throat as you savor the eclair, thick sweet cream exploding in your mouth, chilled chocolatey pastry caressing your tongue like a skilled lover.  Sugar and pastry mix and twirl around your mouth, and you can't help but close your eyes and relax, mind and body comforted by a glucose euphoria.");
 		if(silly()) outputText("  This is a <i>fucking good eclair</i>.");
-		outputText("\n\nCream-thick treats continue to be stuffed into your gullet, each equally as rich and blissful as the last.  The pastry payload is now making a sizeable bulge beneath your burgeoning belt, and the buttons around your navel are stretching by the second.  Tighter and tighter the hapless fastenings grow, until a large lump of cake sends one pinging haphazardly across the table.  An ethereal giggle burst out as Shouldra prods your exposed midriff.  \"<i>Whoops, guess I let you get a bit carried away there!</i>\" Her hand massages the bloated sphere, coaxing a few embarrassing burps from you.  \"<i>Still, if you're this far along, might as well go the whole hog.  Figuratively speaking.</i>\" Your stomach grumbles in agreement and you resume your pig-out with gusto.");
+		outputText("\n\nCream-thick treats continue to be stuffed into your gullet, each equally rich and blissful as the last.  The pastry payload is now making a sizeable bulge beneath your burgeoning belt, and the buttons around your navel are stretching by the second.  Tighter and tighter the hapless fastenings grow, until a large lump of cake sends one pinging haphazardly across the table.  An ethereal giggle burst out as Shouldra prods your exposed midriff.  \"<i>Whoops, guess I let you get a bit carried away there!</i>\" Her hand massages the bloated sphere, coaxing a few embarrassing burps from you.  \"<i>Still, if you're this far along, might as well go the whole hog.  Figuratively speaking.</i>\" Your stomach grumbles in agreement and you resume your pig-out with gusto.");
 		outputText("\n\nAs bite after delectable bite passes your lips, you can't help losing yourself in a gluttonous haze.  So many flavors, so many textures, creamy, smooth, crumbly, doughy, mmm...");
 		outputText("\n\nA slight bump against the bottom of your growing gut distracts you.  You reach around the strained dome to find your member is hard and rock-solid in your hand; seems the constant onslaught of food is getting to you.  \"<i>Oh dear,</i>\" Shouldra remarks as she stuffs another portion of fattening candy into your mouth, \"<i>Can't have you getting distracted, not when there's still so much food to go into your belly.  Hang on, I'll see what I can do about that.</i>\" A snap of your fingers later and Maddie is by your table with a bimbo grin.  \"<i>Hi!  Enjoying your meal?</i>\" She giggles and pats your taut stomach.  \"<i>Now, um, was there something you wanted, or...</i>\" There's a short pause before the cupcake girl's eyes glow that all-too-familiar yellow.  \"<i>Ooh, roomy!</i>\"  Shouldra runs her doughy hands over her new form, paying careful attention to Maddie's hefty breasts and plump well-rounded ass.");
 
@@ -1928,36 +1873,33 @@ private function goAlongWIthShouldrasEatingSpree():void {
 		if(player.cumQ() < 200) outputText("Modest spurts of semen shoot out into Shouldra's awaiting mouth.  She withdraws, swirls it around her tongue, then swallows your load in one gulp.  \"<i>Hmm...  needs cinnamon,</i>\" she jokes, licking her lips.");
 		//if (cumMedium = true)
 		else if(player.cumQ() <= 400) outputText("Several thick spurts of semen shoot out into Shouldra's awaiting mouth.  She withdraws, swilling the sizeable load around her mouth before swallowing it in a few gulps.  \"<i>Not bad...  could use a dash of ginger though,</i>\" she jokes, licking her lips.");
-		//if (cumHigh = true) 
+		//if (cumHigh = true)
 		else if(player.cumQ() <= 1000) outputText("Your groin roils as a thick jet of pearly cum floods Shouldra's mouth, followed by another, then another.  The ghost girl barely has time to swallow each load before the next comes, but she manages not to spill a drop of your virility.  \"<i>Mmm, pretty tasty!</i>\"  She says after wiping her mouth in satisfaction.  \"<i>Hints of pineapple, coconut...  delicious.</i>\"");
 		//if (cumVeryHigh = true)
 		else if(player.cumQ() <= 5000) outputText("Your loins tremble and quiver as an immense load of cloying cum bulges along your shaft and explodes in Shouldra's mouth.  A further wave of bulges assault the ghost girl's throat, forcing her to swallow all of your thick virile spunk.  Eventually the wave subsides, leaving a satisfied and somewhat bloated spook in its wake.  \"<i>Soo gooood...</i>\" she drawls, her goofy grin smattered with white.");
 		else outputText("A cock-distending wad of potent jizm works its way through your throbbing shaft, erupting from your urethra down the hapless ghost's gullet.  As bulge after obscene bulge forces itself inside Shouldra's stomach, her spongy abdomen balloons outwards, soon reaching the size of an adult human.  Streams of excess cum flow down her straining cheeks, and by the time you've stopped cumming the ghostly glutton is lying in a large sticky puddle of your spunk.  She tries to speak, but all that emerge are a sloppy belch and a few flecks of cum, and she resorts instead to hysterical giggling, lost in a cum-addled haze.");
 		outputText("  After a moment of rest, Shouldra squeezes out from under the table[if (cumQuantity > 1000) , her soft belly sloshing audibly,] and helps you to your feet; a task made seriously annoying by your titanic tummy digging in to the edge of the counter.  The other patrons remain blissfully unaware of the whole act, including your current nudity.  Speaking of which...");
-		outputText("\n\n\"<i>Oh, don't worry, Champ,</i>\" Shouldra says, having returned to your head, \"<i>No permanent damage intended. Here ya go!</i>\"  You feel slightly woozy as your abdomen collapses inwards, soon returning to its original, non-bloated state.  A moment later and you are once again clad in your [armor].  \"<i>Well, enough shenanigans for now, right?  Though you do look pretty cute with a pot belly... Heh, just teasing,</i>\" laughs the ghost, \"<i>Now c'mon, let's blow this joint!</i>\"");
+		outputText("\n\n\"<i>Oh, don't worry, Champ,</i>\" Shouldra says, having returned to your head, \"<i>No permanent damage intended. Here ya go!</i>\"  You feel slightly woozy as your abdomen collapses inwards, soon returning to its original, non-bloated state.  A moment later and you are once again clad in your [armor].  \"<i>Well, enough shenanigans for now, right?  Though you do look pretty cute with a pot-belly... Heh, just teasing,</i>\" laughs the ghost, \"<i>Now c'mon, let's blow this joint!</i>\"");
 		outputText("\n\nYou leave the bakery and head back to camp, leaving behind a very confused Maddie.");
-		player.orgasm();
+		player.sexReward("saliva", "Lips");
 		doNext(camp.returnToCampUseOneHour);
 	}
-	//[(if hasCock = false) 
-	else {
-		outputText("\n\nYou run a hand down your chest, examining the new material.  Silky smooth...  As your hand slides across your stomach, you press in slightly.  You've only made a small dent in the food before you, but there's already a noticeable bulge beneath the hem of your skirt, and a few inches of soft " + player.skinTone + " skin are visible beneath the top.  You rub the modest mound, resulting in a subdued gurgling and a content burp; you've gotten full pretty quickly.  Maybe you should just leave the rest of the food and- \"<i>Not so fast, bucko!</i>\"  Shouldra fumes, causing you to jump in your seat.  \"<i>You might be full, but </i>I've<i> barely started!</i>\"  Your gut churns violently as the ghost girl's inhuman appetite infects your own.  Oh dear...");
+	function vagF():void {
+		outputText("\n\nYou run a hand down your chest, examining the new material.  Silky smooth...  As your hand slides across your stomach, you press in slightly.  You've only made a small dent in the food before you, but there's already a noticeable bulge beneath the hem of your skirt, and a few inches of soft [color] skin are visible beneath the top.  You rub the modest mound, resulting in a subdued gurgling and a content burp; you've gotten full pretty quickly.  Maybe you should just leave the rest of the food and- \"<i>Not so fast, bucko!</i>\"  Shouldra fumes, causing you to jump in your seat.  \"<i>You might be full, but </i>I've<i> barely started!</i>\"  Your gut churns violently as the ghost girl's inhuman appetite infects your own.  Oh dear...");
 		outputText("\n\nYou quickly grab something, an eclair, from the table in an effort to ease the pain in your stomach.  The taste is incredible; you don't know if it's the hunger or Shouldra's magic, but this is easily the best eclair you've ever eaten.  You moan low in your throat as you savor the eclair, thick sweet cream exploding in your mouth, chilled chocolatey pastry caressing your tongue like a skilled lover.  Sugar and pastry mix and twirl around your mouth, and you can't help but close your eyes and relax, mind and body comforted by a glucose euphoria.");
 		if(silly()) outputText("  This is a <i>fucking good eclair</i>.");
-		outputText("\n\nCream-thick treats continue to be stuffed into your gullet, each equally as rich and blissful as the last.  The pastry payload is now making a sizeable bulge beneath your burgeoning top, and the hem of your skirt is stretching by the second.  Tighter and tighter the garment grows, until a large lump of cake rips the stitching along your thigh.  An ethereal giggle burst out as Shouldra prods your exposed midriff.  \"<i>Whoops, guess I let you get a bit carried away there!</i>\"  Her hand massages the bloated sphere, coaxing a few embarrassing burps from you.  \"<i>Still, if you're this far along, might as well go the whole hog.  Figuratively speaking.</i>\"  Your stomach grumbles in agreement and you resume your pig-out with gusto.");
+		outputText("\n\nCream-thick treats continue to be stuffed into your gullet, each equally rich and blissful as the last.  The pastry payload is now making a sizeable bulge beneath your burgeoning top, and the hem of your skirt is stretching by the second.  Tighter and tighter the garment grows, until a large lump of cake rips the stitching along your thigh.  An ethereal giggle burst out as Shouldra prods your exposed midriff.  \"<i>Whoops, guess I let you get a bit carried away there!</i>\"  Her hand massages the bloated sphere, coaxing a few embarrassing burps from you.  \"<i>Still, if you're this far along, might as well go the whole hog.  Figuratively speaking.</i>\"  Your stomach grumbles in agreement and you resume your pig-out with gusto.");
 		outputText("\n\nAs bite after delectable bite passes your lips, you can't help losing yourself in a gluttonous haze.  So many flavors, so many textures, creamy, smooth, crumbly, doughy, mmm...");
 		outputText("\n\nA slight moistness beneath the bottom of your growing gut distracts you.  You reach around the strained dome to find your pussy is soaking against your hand; seems the constant onslaught of food is getting to you.  \"<i>Oh dear,</i>\" Shouldra remarks as she stuffs another portion of fattening candy into your mouth, \"<i>Can't have you getting distracted, not when there's still so much food to go into your belly.  Hang on, I'll see what I can do about that.</i>\"  A snap of your fingers later and Maddie is by your table with a bimbo grin.  \"<i>Hi!  Enjoying your meal?</i>\"  She giggles and pats your taut stomach.  \"<i>Now, um, was there something you wanted, or...</i>\" There's a short pause before the cupcake girl's eyes glow that all-too-familiar yellow.  \"<i>Ooh, roomy!</i>\" Shouldra runs her doughy hands over her new form, paying careful attention to Maddie's hefty breasts and plump well-rounded ass.");
 		outputText("\n\n\"<i>Now, how about that delicious cunt of yours?</i>\"  The possessed pastry licks her full lips and crouches down, barely fitting under the table.  Your panties are pulled aside by her teeth as her warm breath teases your trembling slit.  Her glowing eyes close as those sumptuous icing-white lips kiss the soft folds of your nether-lips, the cherry tongue dancing and twirling around your [clit] like an artist, until she slowly, oh-so-slowly slips inch after inch of slick tonguemeat inside you.  Her enormous chocolate rump is visible on the other side of the booth, lulling back and forth in contented bliss.");
 		outputText("\n\nYou struggle forward in your seat and resume grazing on a stack of donuts, though you are hindered somewhat by both the ghost girl's pussy worship and your cramped stomach.  The bloated orb has by now pushed your shirt up around your [fullChest] and left your skirt in tatters; it rests between your thighs, your legs having been forced to part under its growing weight.  An ominous gurgle erupts from your overtaxed gut; perhaps you've overestimated yourself?  You massage the complaining flesh with one hand to ease the pressure while continuing to sate your insatiable appetite with the other, heavenly gouts of angel cake dropping into your abyss of a stomach.  Shouldra smiles as the churning and gurgling continues; her fucksucking lips slip off your drooling pussy-flesh and ascend, trailing supersized kisses across your crotch and up to your navel.  She nuzzles your bloated belly like a pillow, her hands digging gently into the flesh and kneading with equal parts care and roughness.  Your free hand stops massaging and cradles her head, and in a moment of impishness you shove a slice of something gooey and triple-layered into her unsuspecting candied maw.  She swallows, surprise turning quickly to a grin of friendly vengeance.  \"<i>So that's how we're playing it, big girl?</i>\"  Shouldra snickers, before giving your sensitive stomach a hearty slap.");
 		outputText("\n\nYou wince slightly before returning a sloppy food-filled grin...  Wait.  You're not feeding yourself.  What the fuck?  The ghost girl answers your confusion with a profiterole that soars into your slack mouth.  Damned ghoul, that's just playing dirty!  You both devolve into a fierce stuffing contest; your desperate hands snag anything they can from the spread and cram them into the ghost's gullet, while waves of pastries ram themselves into your own defenseless mouth.  The combination of the adrenaline-fueled force-feeding frenzy and the increasing pressure of your swelling gut on your button forms a familiar sensation; prickling loins, skipped heartbeats, an intense heat in your flushed cheeks.  As you feel the giddy euphoria of an oncoming food coma, Shouldra seizes the moment and dives down into your crotch, lapping and licking every oh-so-sensitive inch she can, teasing and tickling, probing your wet cunt with her jellied tongue.");
 		outputText("\n\nA guttural moan escapes your icing-caked lips as you sink into a creamy smooth orgasm, like sliding into a hot bath.  [if (isSquiter = true) \"Hot streams of liquid lust spurt across Maddie's face, drizzling her with your copious fem-spunk.  \"][if (isLactating = true) \"Droplets of milk form on your [nipples], soon forming rivers of cream that cascade down your fiery-hot flesh.  \"]After a moment of rest, Shouldra squeezes out from under the table, licking your girl-cum from her lips with a satisfied slurp, and helps you to your feet; a task made seriously annoying by your titanic tummy digging in to the edge of the counter.  The other patrons remain blissfully unaware of the whole act, including your current nudity. Speaking of which...");
-		outputText("\n\n\"<i>Oh, don't worry, Champ,</i>\" Shouldra says, having returned to your head, \"<i>No permanent damage intended.  Here ya go!</i>\"  You feel slightly woozy as your abdomen collapses inwards, soon returning to its original, non-bloated state.  A moment later and you are once again clad in your [armor].  \"<i>Well, enough shenanigans for now, right?  Though you do look pretty cute with a pot belly...  Heh, just teasing,</i>\" laughs the ghost, \"<i>Now c'mon, let's blow this joint!\"</i>");
+		outputText("\n\n\"<i>Oh, don't worry, Champ,</i>\" Shouldra says, having returned to your head, \"<i>No permanent damage intended.  Here ya go!</i>\"  You feel slightly woozy as your abdomen collapses inwards, soon returning to its original, non-bloated state.  A moment later and you are once again clad in your [armor].  \"<i>Well, enough shenanigans for now, right?  Though you do look pretty cute with a pot-belly...  Heh, just teasing,</i>\" laughs the ghost, \"<i>Now c'mon, let's blow this joint!\"</i>");
 		outputText("\n\nYou leave the bakery and head back to camp, leaving behind a very confused Maddie.");
-		player.orgasm();
+		player.sexReward("no", "Vaginal");
 		doNext(camp.returnToCampUseOneHour);
 	}
-	flags[kFLAGS.SHOULDRA_BAKERY_TIMES]++;
-	player.slimeFeed();
 }
 
 
@@ -1980,13 +1922,13 @@ private function resistBeingAFatass():void {
 	outputText("\n\n\"<i>Oh... oh gods...</i>\" gasps the girl as she's overwhelmed by the heady hedonism of her gluttonous lust, so sweet, so sinful.  Shouldra responds by taking a bite of eclair and kissing her deeply, swapping the cream between their tongues.  The bra gets lost in a flurry of touching, and the oversexed specter toys with a budding nipple between thumb and forefinger as the kissing continues relentlessly.  The table shrinks slightly, giving the ghost more room to perform.  Eventually Shouldra pulls away, placing a hand on the lust-addled girl's gurgling abdomen.  \"<i>Mmm, so full, so fat...</i>\" Suddenly she grabs the rest of the eclair and stuffs it into her partner's accepting mouth.  \"<i>I want you bigger, want you </i>fatter<i>.  Can you do that for me, babe?  Can you get big and fat for me?</i>\"  The girl nods dazedly.  Your ghostly companion has picked up a few odd kinks over the years, it seems.");
 	outputText("\n\nShouldra feeds treat after fattening treat to the naked girl, praising her vast tummy with tender caresses whilst grinding her own titanic tits against her partner.  As she finishes off a slice of lemon meringue pie, the girl moans loudly; a chorus of groans emanate from her roiling gut, followed by an almighty belch.  She winces and gingerly rubs the churning orb, which by now is roughly the size of a basketball.  \"<i>I think - urp - I think I'm full now,</i>\" she whimpers, a burp escaping her lips as her overworked stomach tries to relieve some pressure.");
 	outputText("\n\n\"<i>Full?  Don't be silly, you've got plenty of room still in there!</i>\"  Shouldra grabs the fleshy dome and jiggles it.  \"<i>It wouldn't be an 'All-You-Can-Eat' course if you didn't eat as much as you possibly could, now, would it?</i>\"  Before the beleaguered girl can complain, her mouth is filled with a fat nozzle-like teat.  Shouldra's eyes flicker dangerously as she presses the girl into her tit; you could swear that the chocolatey knockers are growing before your eyes, soon threatening to drown the overstuffed girl in breastflesh.  \"<i>Listen, bitch.  You promised to make yourself as big and fat for me as possible, so now you're gonna fulfill it.  Now drink up.</i>\"");
-	outputText("\n\nYou hear a squirting sound as Shouldra milks her massive udder into the hapless girl's gullet, forcing her cheeks to bulge and her throat to swallow huge mouthfuls of liquidy icing.  The feedee's throat bulges with each load of thick frosting, and her already strained stomach bloats out further to accommodate the calorie-laden onslaught.  Her feeder coos approvingly.  \"<i>Mmm, I just love filling skinny little girls like you.  Fattening you up until you can't take any more is such a turn-on.  Don't you worry now, soon this tiny body of yours will be so much sexier,</i>\" the ghost giggles.  \"<i>In fact...</i>\" Shouldra rattles off a quick spell.  Instantly, the girl's belly growls noisily, trembling and sloshing, before it starts slowly shrinking.  Wait, not just shrinking; the skin becomes less taut and a small roll develops as the food is converted with unnatural speed into belly pudge.  Her breasts grow slightly, though they remain perky and small by Marethian standards; her butt, however, thickens and rounds out into a gropable bubble-butt, while her panty strings are swallowed up by her newly fattened thighs.  The lusty ghost examines her prey's new pear shape mercilessly, grabbing rolls and pinching inches.  \"<i>Hmm, not bad!  Cute lil' tits, thick thighs, a big ol' badonkadonk and an adorable pot belly.</i>\"  She gives the gut a hearty jiggle, sending small ripples across the plump girls' naked flesh.");
+	outputText("\n\nYou hear a squirting sound as Shouldra milks her massive udder into the hapless girl's gullet, forcing her cheeks to bulge and her throat to swallow huge mouthfuls of liquidy icing.  The feedee's throat bulges with each load of thick frosting, and her already strained stomach bloats out further to accommodate the calorie-laden onslaught.  Her feeder coos approvingly.  \"<i>Mmm, I just love filling skinny little girls like you.  Fattening you up until you can't take anymore is such a turn-on.  Don't you worry now, soon this tiny body of yours will be so much sexier,</i>\" the ghost giggles.  \"<i>In fact...</i>\" Shouldra rattles off a quick spell.  Instantly, the girl's belly growls noisily, trembling and sloshing, before it starts slowly shrinking.  Wait, not just shrinking; the skin becomes less taut and a small roll develops as the food is converted with unnatural speed into belly pudge.  Her breasts grow slightly, though they remain perky and small by Marethian standards; her butt, however, thickens and rounds out into a gropable bubble-butt, while her panty strings are swallowed up by her newly fattened thighs.  The lusty ghost examines her prey's new pear shape mercilessly, grabbing rolls and pinching inches.  \"<i>Hmm, not bad!  Cute lil' tits, thick thighs, a big ol' badonkadonk and an adorable pot belly.</i>\"  She gives the gut a hearty jiggle, sending small ripples across the plump girls' naked flesh.");
 	outputText("\n\n\"<i>Okay, tell ya what,</i>\" says Shouldra, \"<i>I'm feeling generous, so I'll let you go if you can answer one simple question.</i>\"  She leans down, cupping the girl's chin and turning her head to face her own.  \"<i>Do you love it?</i>\"  Her voice lowers to a throaty whisper.  \"<i>Do you love being a plump slut?  Does your pussy ache for attention just as much as your greedy stomach aches for food?  Would you suck off every guy in the bakery just for one... more... bite?</i>\"  Wow, she's really getting into this.");
 	outputText("\n\nThe bedraggled girl mouths something inaudible.  \"<i>What was that?  You gonna speak up, or am I gonna have to shut you up with this?</i>\"  Shouldra asks, brandishing a bloated tit menacingly.");
 	outputText("\n\n\"<i>YES!</i>\"  yells the helpless feedee, \"<i>Y-yes, I love it.  I love being a fat slut for you, I want to eat and eat and make you happy.</i>\"  The ghost girl stares into her eyes for a moment, before grinning and planting a wet kiss on her lips.");
 	outputText("\n\n\"<i>Good answer babe.  Now get dressed and hurry home before I change my mind.</i>\"  The girl hastily grabs her clothes and dresses herself.  It's quite a challenge, but after some frantic struggling she's reasonably covered up; her jeans are unbuttoned and visibly straining at the seams, while her once-baggy sweater now hugs tightly against her marshmallowy tummy.  The girl then hurries away, glancing back with an odd expression - relief? - before slipping out onto the streets of Tel'Adre.");
 	outputText("\n\nYou suddenly realize that throughout the debauched encounter, none of the other patrons so much as glanced your way.  Must be magic, you think to yourself.  \"<i>Yup, wonderful, wonderful magic,</i>\" says Shouldra; seems she's returned to your head.  \"<i>Well, I've had my fun, Champ.  Let's blow this popsicle stand!</i>\"  You head out of the bakery and return to camp, leaving behind a very confused Maddie.");
-	dynStats("lus", 30);
+	dynStats("lus", 30, "scale", false);
 	doNext(camp.returnToCampUseOneHour);
 }
 }

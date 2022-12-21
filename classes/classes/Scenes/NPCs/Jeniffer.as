@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 	import classes.*;
 	import classes.BodyParts.Butt;
@@ -25,29 +25,9 @@ package classes.Scenes.NPCs
 		}
 		
 		public function Specials1():void {
-			//Blind dodge change
-			if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
-				outputText("J1c blindly tries to clinch you, but misses completely.\n");
-				return;
-			}
 			//Determine if dodged!
-			if (player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80) {
+			if (player.getEvasionRoll()) {
 				outputText("J1c tries to clinch you, but you use your speed to keep just out of reach.\n");
-				return;
-			}
-			//Determine if evaded
-			if (player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
-				outputText("J1c tries to clinch you, but she didn't count on your skills in evasion.  You manage to sidestep her at the last second.\n");
-				return;
-			}
-			//("Misdirection"
-			if (player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
-				outputText("J1c ducks and weaves forward to clinch you, but thanks to Raphael's teachings, you're easily able to misguide her and avoid the clumsy grab.\n");
-				return;
-			}
-			//Determine if cat'ed
-			if (player.hasPerk(PerkLib.Flexibility) && rand(100) < 6) {
-				outputText("J1c tries to lock you in a clinch, but your cat-like flexibility makes it easy to twist away from her grab.\n");
 				return;
 			}
 			var damage:Number = Math.round((str + weaponAttack) - rand(player.tou+player.armorDef));
@@ -82,7 +62,7 @@ package classes.Scenes.NPCs
 			}
 		}
 		
-		public function Jeniffer() 
+		public function Jeniffer()
 		{
 			this.a = "the ";
 			if (flags[kFLAGS.JENIFFER_LVL_UP] < 1) {
@@ -177,7 +157,7 @@ package classes.Scenes.NPCs
 			this.createStatusEffect(StatusEffects.BonusACapacity,10,0,0,0);
 			this.hips.type = Hips.RATING_BOYISH;
 			this.butt.type = Butt.RATING_BUTTLESS;
-			this.skinTone = "dark green";
+			this.bodyColor = "dark green";
 			this.hairColor = "purple";
 			this.hairLength = 4;
 			this.drop = NO_DROP;

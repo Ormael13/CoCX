@@ -59,7 +59,7 @@ public class ArouseSpell extends AbstractBlackSpell {
 				if (monster.lust100 >= 60) outputText("You see [monster his] [monster cocks] dribble pre-cum.  ");
 				if (monster.lust100 >= 30 && monster.lust100 < 60) {
 					if (monster.cocks.length == 1) {
-						outputText("[Themonster]'s " + monster.cockDescriptShort(0) + " hardens, distracting [monster him] further.");
+						outputText("[Themonster]'s [monster cockshort] hardens, distracting [monster him] further.");
 					} else {
 						outputText("You see [monster his] [monster cocks] harden uncomfortably.  ");
 					}
@@ -98,6 +98,10 @@ public class ArouseSpell extends AbstractBlackSpell {
 		monster.teased(lustDmg, false);
 		if (crit) outputText(" <b>Critical!</b>");
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
+		if (player.hasPerk(PerkLib.VerdantLeech)) {
+			if (monster.lustVuln != 0 && !monster.hasPerk(PerkLib.EnemyTrueAngel)) monster.lustVuln += 0.025;
+			HPChange(Math.round(player.maxHP() * 0.05), false);
+		}
 	}
 }
 }

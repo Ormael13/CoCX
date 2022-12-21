@@ -38,7 +38,7 @@ public class PhoenixSquad extends Monster
 		public function phoenixSquadLustbang():void {
 			outputText("\"<i>LUSTBANG OUT!</i>\" one of the rear-most phoenixes shouts, causing all the other warriors to duck down behind their shields.  Oh, shit!  A large glass sphere rolls out from the shield wall, and immediately explodes in a great pink cloud.  You cough and wave your arms, but by the time the cloud has dissipated, you feel lightheaded and lusty, barely able to resist the urge to throw yourself at the phoenixes and beg for their cocks and cunts.");
 			//(Effect: Large lust increase)
-			player.dynStats("lus", Math.round(30+(player.lib/2)));
+			player.takeLustDamage(Math.round(30+(player.lib/2)), true);
 		}
 		
 		override protected function performCombatAction():void
@@ -90,7 +90,7 @@ public class PhoenixSquad extends Monster
 			this.hips.type = Hips.RATING_AMPLE + 2;
 			this.butt.type = Butt.RATING_LARGE;
 			this.lowerBody = LowerBody.SALAMANDER;
-			this.skinTone = "red";
+			this.bodyColor = "red";
 			this.hairColor = "black";
 			this.hairLength = 15;
 			initStrTouSpeInte(183, 152, 143, 90);
@@ -105,7 +105,6 @@ public class PhoenixSquad extends Monster
 			this.bonusLust = 204;
 			this.lust = 20;
 			this.lustVuln = .15;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 41;
 			this.gems = rand(40)+300;
 			this.additionalXP = 100;

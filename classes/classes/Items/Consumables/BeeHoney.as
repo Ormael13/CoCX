@@ -11,16 +11,15 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
+import classes.Races;
 import classes.Races.BeeRace;
-import classes.Scenes.Areas.Forest.BeeGirlScene;
 import classes.CoC;
 import classes.CockTypesEnum;
 import classes.GlobalFlags.*;
 import classes.Items.Consumable;
-import classes.PerkLib;
 import classes.Player;
 import classes.PregnancyStore;
-import classes.StatusEffects;
+import classes.Scenes.SceneLib;
 import classes.internals.Utils;
 
 public class BeeHoney extends Consumable
@@ -43,7 +42,7 @@ public class BeeHoney extends Consumable
         }
 
 		override public function canUse():Boolean {
-            if (value == SPECIAL_HONEY_VALUE && CoC.instance.player.statusEffectv1(StatusEffects.Exgartuan) == 1) { //Exgartuan doesn't like the special honey
+            if (value == SPECIAL_HONEY_VALUE && SceneLib.exgartuan.dickPresent()) { //Exgartuan doesn't like the special honey
                 outputText("You uncork the bottle only to hear Exgartuan suddenly speak up.  <i>\"Hey kid, this beautiful cock here doesn’t need any of that special bee shit.  Cork that bottle up right now or I’m going to make it so that you can’t drink anything but me.\"</i>  You give an exasperated sigh and put the cork back in the bottle.");
 				return false;
 			}
@@ -98,7 +97,7 @@ public class BeeHoney extends Consumable
 				//Libido Reduction
 				if (player.cor > 0 && changes < changeLimit && Utils.rand(1.5) == 0 && player.lib > 40) {
 					outputText(" and settling your overcharged sex-drive a bit.");
-					dynStats("lus", -20);
+					dynStats("lus", -20, "scale", false);
 					player.addCurse("lib", 3, 1);
 					changes++;
 				}
@@ -139,15 +138,7 @@ public class BeeHoney extends Consumable
 			//-Remove extra breast rows
             if (changes < changeLimit && player.bRows() > 2 && Utils.rand(3) == 0 && !CoC.instance.flags[kFLAGS.HYPER_HAPPY]) {
                 changes++;
-				outputText("\n\nYou stumble back when your center of balance shifts, and though you adjust before you can fall over, you're left to watch in awe as your bottom-most " + player.breastDescript(player.breastRows.length - 1) + " shrink down, disappearing completely into your ");
-				if (player.bRows() >= 3) outputText("abdomen");
-				else outputText("chest");
-				outputText(". The " + Appearance.nippleDescription(player, player.breastRows.length - 1) + "s even fade until nothing but ");
-				if (player.hasFur()) outputText(player.skin.coat.color + " " + player.skinDesc);
-				else outputText(player.skinTone + " " + player.skinDesc);
-				outputText(" remains. <b>You've lost a row of breasts!</b>");
-				dynStats("sen", -5);
-				player.removeBreastRow(player.breastRows.length - 1, 1);
+				game.transformations.BreastRowsRemoveToOne.applyEffect();
 			}
 			//Antennae
 			if (changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && player.antennae.type != Antennae.BEE && Utils.rand(3) == 0) {
@@ -190,20 +181,12 @@ public class BeeHoney extends Consumable
 			}
 			//-Nipples reduction to 1 per tit.
 			if (player.averageNipplesPerBreast() > 1 && changes < changeLimit && Utils.rand(4) == 0) {
-				outputText("\n\nA chill runs over your " + Appearance.allBreastsDescript(player) + " and vanishes.  You stick a hand under your [armor] and discover that your extra nipples are missing!  You're down to just one per ");
-				if (player.biggestTitSize() < 1) outputText("'breast'.");
-				else outputText("breast.");
+				CoC.instance.transformations.NipplesPerBreastOne.applyEffect();
 				changes++;
-				//Loop through and reset nipples
-				for (var temp:int = 0; temp < player.breastRows.length; temp++) {
-					player.breastRows[temp].nipplesPerBreast = 1;
-				}
 			}
 			//Gain oviposition!
-			if (changes < changeLimit && !player.hasPerk(PerkLib.BeeOvipositor) && player.tailType == Tail.BEE_ABDOMEN && Utils.rand(2) == 0) {
-				outputText("\n\nAn odd swelling starts in your insectile abdomen, somewhere along the underside.  Curling around, you reach back to your extended, bulbous bee part and run your fingers along the underside.  You gasp when you feel a tender, yielding slit near the stinger.  As you probe this new orifice, a shock of pleasure runs through you, and a tubular, black, semi-hard appendage drops out, pulsating as heavily as any sexual organ.  <b>The new organ is clearly an ovipositor!</b>  A few gentle prods confirm that it's just as sensitive; you can already feel your internals changing, adjusting to begin the production of unfertilized eggs.  You idly wonder what laying them with your new bee ovipositor will feel like...");
-				outputText("\n\n(<b>Perk Gained:  Bee Ovipositor - Allows you to lay eggs in your foes!</b>)");
-				player.createPerk(PerkLib.BeeOvipositor, 0, 0, 0, 0);
+			if (changes < changeLimit && CoC.instance.transformations.OvipositorBee.isPossible() && Utils.rand(2) == 0) {
+				CoC.instance.transformations.OvipositorBee.applyEffect();
 				changes++;
 			}
 			//Bee butt - 66% lower chance if already has a tail
@@ -259,9 +242,7 @@ public class BeeHoney extends Consumable
 				//Begin TF
 				if (!player.hasCock()) {
 					outputText("\n\nYou double over in pain as the effects start to concentrate into your groin.  You need to get release, but what you’ve got just isn’t cutting it.  You fall to the ground and grab at your crotch, trying desperately to get the release you need.  Finally, it happens.  With a sudden burst of intense relief and sexual satisfaction, a new human looking penis bursts from your skin and sprays your seed all over the ground in front of you.  When you’re able to recover and take a look at your new possession.  <b>You now have an eight inch long human cock that is very sensitive to stimulation.</b>");
-					player.createCock();
-					player.cocks[0].cockLength = Utils.rand(3) + 8;
-					player.cocks[0].cockThickness = 2;
+					CoC.instance.transformations.CockHuman(0, Utils.rand(3) + 8, 2).applyEffect(false);
 					player.orgasm();
 					player.addCurse("sen", 10, 1);
 				}
@@ -286,11 +267,9 @@ public class BeeHoney extends Consumable
 					player.cocks[0].cockThickness += (0.1 * Utils.rand(5) + 0.5) * mult; //0.5 to 1 inches in thickness
 					player.addCurse("sen", 5, 1);
 				}
-				else if (player.cocks[0].cockType != CockTypesEnum.BEE && player.race() == "bee-morph") {
-					outputText("\n\nYour huge member suddenly starts to hurt, especially the tip of the thing.  At the same time, you feel your length start to get incredibly sensitive and the base of your shaft starts to itch.  You tear off your [armor] and watch in fascination as your [cock] starts to change.  The shaft turns black, while becoming hard and smooth to the touch, while the base develops a mane of four inch long yellow bee hair.  As the transformation continues, your member grows even larger than before.  However, it is the tip that keeps your attention the most, as a much finer layer of short yellow hairs grow around it.  Its appearance isn’t the thing that you care about right now, it is the pain that is filling it.\n\n");
-					outputText("It is entirely different from the usual feeling you get when you’re cock grows larger from imbibing transformative substances.  When the changes stop, the tip is shaped like a typical human mushroom cap covered in fine bee hair, but it feels nothing like what you’d expect a human dick to feel like.  Your whole length is incredibly sensitive, and touching it gives you incredible stimulation, but you’re sure that no matter how much you rub it, you aren’t going to cum by yourself.  You want cool honey covering it, you want tight walls surrounding it, you want to fertilize hundreds of eggs with it.  These desires are almost overwhelming, and it takes a lot of will not to just run off in search of the bee girl that gave you that special honey right now.  This isn’t good.\n\n");
-					outputText("<b>You now have a bee cock!</b>");
-					player.cocks[0].cockType = CockTypesEnum.BEE;
+				else if (player.cocks[0].cockType != CockTypesEnum.BEE && player.isRace(Races.BEE, 1, false)) {
+					CoC.instance.transformations.CockBee(0).applyEffect();
+					outputText("[pg]It takes a lot of will not to just run off in search of the bee girl that gave you that special honey right now.  This isn’t good.[pg]");
 					player.cocks[0].cockLength += 5 * mult;
 					player.cocks[0].cockThickness += 1 * mult;
 					player.addCurse("sen", 15, 1);

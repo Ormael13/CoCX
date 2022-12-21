@@ -16,7 +16,7 @@ import classes.internals.*;
 			outputText("Her pheromone cloud is getting to you, causing your manhood to stiffen with each passing moment, if you don’t finish this quickly you’ll eventually cave in! ");
 			var passivelust:Number = (lib / 6) + rand(8);
 			passivelust = Math.round(passivelust);
-			player.dynStats("lus", passivelust, "scale", false);
+			player.takeLustDamage(passivelust, true);
 			statScreenRefresh();
 		}
 		
@@ -100,7 +100,6 @@ import classes.internals.*;
 			this.bonusLust = 235;
 			this.lust = 20;
 			this.lustVuln = .7;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 38;
 			this.additionalXP = 125;
 			this.gems = 70 + rand(80);

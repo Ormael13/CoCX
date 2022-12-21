@@ -2,38 +2,39 @@
  * ...
  * @author ...
  */
-package classes.Scenes.Areas.Battlefield 
+package classes.Scenes.Areas.Battlefield
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Items.ItemConstants;
 import classes.Items.Weapon;
 import classes.Items.WeaponRange;
 
 public class DilapidatedShrine extends BaseContent
 	{
 		
-		public function DilapidatedShrine() 
+		public function DilapidatedShrine()
 		{}
 		
 		public function firstvisitshrineintro():void {
 			flags[kFLAGS.DILAPIDATED_SHRINE_UNLOCKED] = 2;
 			clearOutput();
-			outputText("As you explore the battlefield, you notice a dilapidated building not far from you. You cautiously approach as your curiosity takes hold of you. A sparse amount of trees surround a shrine. It almost sparkles within the faint ambient light.\n\n");
-			outputText("How could such a thing survive in a place where nothing but war has waged?\n\nYou enter what you can only assume to be the entreance. You push open the wooden door. ");
-			outputText("The vermillion hued gates are remarkably crafted, yet you remain wary of potential danger. As the entrance falls behind you, you notice at both your sides rest two statues of strange beings. They seem to be half-lion and half-dog, a creature the likes of which you've never seen. You marvel at their almost life-like features. One stands with its jaw agape, the other with its lips sealed.\n\n");
-			outputText("Deeper into the shrine is a large plaza with statues located on each of your cardinal directions.\n\n");
-			outputText("A voice rings, breaking your thoughts, \"<i>What brings you here, young one?</i>\" Its voice is slightly raspy, clearly aged."+(silly()?" That or they seriously need to stop smoking.":"")+"\n\n");
-			outputText("You turn to face an elderly person, judging by their voice and wear, not unlike something you'd expect a monk to be dressed in. Not an inch of skin is shown, everything is completely sealed within layers of fabric.\n\n");
-			outputText("\"<i>You looks confused. Oh, Don't mind little ol' me. I'm merely cleaning up here and there. I can't let the shrine of the four gods grow dusty, can I?</i>\"\n\n");
-			outputText("You only blink and in that instant, they've vanished. An apparition? Illusion? Best to keep your guard up, lest danger will get the best of you.\n\n");
+			outputText("As you explore the battlefield, you notice a gravel path, curiously well-maintained, unlike everything else in this crater-ridden wasteland. You decide to follow the path, and it leads to a decently sized green space. In the middle of this surprisingly calm place, a large square building stands. At first glance, it's a majestic old wooden structure, radiating old grandeur and spirituality. You cautiously approach, the sparse trees and ancient building still calming compared to the wasteland around it. \n\n");
+			outputText("How could such a thing survive in such a war-torn place?\n\n You push open the chipped, charred wooden door as quietly as you can, but the soft scraping of the wood on the stone floor seems to carry throughout the place. ");
+			outputText("The vermillion hued gates are remarkably built, damage unable to hide the craftsmanship. As you step in, you notice two statues of strange beings, on either side of you. They seem to be half-lion and half-dog, a creature the likes of which you've never seen. You marvel at their almost life-like features. One stands with its jaw agape, the other with its lips sealed.\n\n");
+			outputText("Deeper into the shrine is a large plaza with statues located on each of your cardinal directions. Between the statues, the stones of the floor are carved, inlaid with ceramic, each tile depicting two or more of the statues, locked in combat or ordering smaller, less defined stick figures into battle. \n\n");
+			outputText("A voice echoes through the sanctum, breaking your thoughts, \"<i>What brings you here, young one?</i>\" Its voice is slightly raspy, clearly aged."+(silly()?" That or they seriously need to stop smoking.":"")+"\n\n");
+			outputText("You turn to face an odd person. They stand a little less than six feet tall, slumped over slightly and leaning on an old, worn broom. You can't make out anything beyond their height. The monk shows no skin, everything is completely sealed within dark layers of fabric.\n\n");
+			outputText("You stare for a moment, taken aback, and the old monk waves you off with one hand. \"<i>Oh, Don't mind me, traveller. I'm merely cleaning up here and there. I can't let the shrine of the four gods grow dusty, can I?</i>\" They shuffle their feet, sending a small bit of Dust up from the floor.\n\n");
+			outputText("You blink and when you open your eyes, they've vanished. An apparition? Illusion? You ready yourself for combat, backing away. Perhaps it's best to leave for now. \n\n");
 			outputText("<b>You have discovered Dilapidated Shrine. You can visit it from Places menu.</b>");
 			mainmenu();
 		}
 		public function repeatvisitshrineintro():void {
 			clearOutput();
 			outputText("You decide to make a trip to the shrine. Entering the sacred grounds, you walk through the vermillion gates, passing the guardian statues.\n\n");
-			if (shinshoku()) outputText("As you reach the yard, you hear a voice again, \"<i>Oh, is that you again? Don't mind me, I'm simply maintaining the dust. They can get so riled up sometimes.</i>\" As you notice them, the old person that greeted you has returned to sweeping the shrine like you aren't even here.\n\n");
-			outputText("Upon reaching the main plaza, you see four major sections located on each cardinal direction. There are three smaller places located between the major wings.\n\n");
+			if (shinshoku()) outputText("As you reach the yard, you hear a voice again, \"<i>Oh, is that you again? I apologize for the dust...This place isn't the easiest to care for.</i>\" As you notice them, the old person that greeted you returns to sweeping the shrine like you aren't even here.\n\n");
+			outputText("Upon reaching the main plaza, you see four major sections located on each cardinal direction. There are three smaller rooms located between the major wings.\n\n");
 			outputText("You consider where to go or what you should do.");
 			mainmenu();
 		}
@@ -48,13 +49,13 @@ public class DilapidatedShrine extends BaseContent
 		}
 		private function mainmenu():void {
 			menu();
-			addButton(0, "Library", shrineLibrary);
-			addButtonDisabled(2, "North", "???");//magic god subshrine
-			addButtonDisabled(4, "Garden", "???");
+			//addButton(0, "Library", shrineLibrary);
+			//addButtonDisabled(2, "North", "???");//magic god subshrine
+			//addButtonDisabled(4, "Garden", "???");
 			addButton(6, "West", westSection);
-			addButtonDisabled(7, "Shinshoku", "???");//mysterious old housekeeper
-			addButtonDisabled(8, "East", "???");//life god subshrine
-			addButtonDisabled(10, "Crypt", "???");//heavenly kings resting place
+			//addButtonDisabled(7, "Shinshoku", "???");//mysterious old housekeeper
+			//addButtonDisabled(8, "East", "???");//life god subshrine
+			//addButtonDisabled(10, "Crypt", "???");//heavenly kings resting place
 			addButton(12, "South", southSection);
 			addButton(14, "Leave", camp.returnToCampUseOneHour);
 		}
@@ -62,7 +63,8 @@ public class DilapidatedShrine extends BaseContent
 		private function shinshoku():Boolean {
 			return rand(5) == 0 && ((model.time.hours > 6 && model.time.hours < 10) || (model.time.hours > 18 && model.time.hours < 22));
 		}
-		
+
+		/*
 		private function shrineLibrary():void {
 			clearOutput();
 			outputText("As you walk toward the small building, you find yourself inside a room with countless shelves, many of which contain an assortment of books haphazardly strewn on them. Despite the cleanliness of the place, you can see the passage of time on the surrounding furniture. This place seems to have been untouched for months, if not years.\n\n");
@@ -75,33 +77,19 @@ public class DilapidatedShrine extends BaseContent
 			addButtonDisabled(12, "Warmonger", "Placeholder button until one of the writers write write something on this subject ^^");//story about god of war				//addButtonDisabled(1, "The Descent", "Placeholder button until Lia write something on this subject ^^");//orgin of soul cultivators in Mareth (here or other place in mareth?)
 			addButton(14, "Back", shrinemainmenu);
 		}
-		
-		private function northSection():void {
-			clearOutput();
-			outputText("Standing inside the building located on north direction you see a statue in middle of it, ");
-			outputText("Before it lays on the ground medium sized plate, probably used to put on offering at times there was more visitors.\n\n");
-			menu();
-			addButton(14, "Back", shrinemainmenu);
-		}
-		
-		private function shrineGarden():void {
-			clearOutput();
-			outputText("\n\n");
-			menu();
-			addButton(14, "Back", shrinemainmenu);
-		}
+		*/
 		
 		private function westSection():void {
 			clearOutput();
-			outputText("Westward within the building, you see a statue in an open clearing. The towering figure portrays a hideously mesmerizing creature frozen in an aggressive pose as if it were watching you with scorn. Each limb comes from a different animal you have seen in this realm, yet all together seems to create a harmonical whole despite the chaotic ensemble.\n\n");
-			outputText("Each arm extends into sharp points, much like a blade. Its left arm resembles what appears to be a mantis blade, while the right arm is a kamaitachi blade. The statue wields each arm, seemingly ready to make a move, yet almost inviting as if it wishes to guide you somewhere.\n\n");
-			outputText("Its eyes seem ordinarily human-like, with an x shaped cross for pupils.\n\n");
-			outputText("At the base of the statue lies a metallic plaque. Given the rust coating it, the text is hard to decipher You can only make out, 'E.e.ie.'.\n\n");
+			outputText("Westward within the building, you see a statue in an open clearing. The towering figure portrays a hideously mesmerizing creature frozen in an aggressive pose, eyes dark and lips curled into a frown. Each limb comes from a different animal you have seen in this realm, yet all together seems to create a harmonious whole despite the statues' chaotic nature.\n\n");
+			outputText("Each arm extends into sharp points, much like a blade. Its left arm resembles what appears to be a mantis scythe, while the right arm is a kamaitachi blade. The statue brandishes each arm, ready to strike. You get a vague sense of impatience from the statue, like a sparring instructor waiting for a pupil to make the first move.\n\n");
+			outputText("Its eyes seem oddly human-like, except for the pupils, which are x shaped.\n\n");
+			outputText("At the base of the statue lies a metallic plaque. Given the rust coating it, the text is hard to decipher. You can only make out, 'E.e.ie.'.\n\n");
 			outputText("Below the plaque lies two ornate wooden bowls, presumably used to put offerings in a time when this was a place people actively visited.\n\n");
             //The hint gives everything away. Remove it, and people won't understand what to do. Maybe no checks here?
 			//if (shinshoku()) {
-            outputText("A soft voice rings not far from behind you, \"<i>Sometimes all you need is a small token of goodwill to get a response. Perhaps a few chilly peppers would be enough...</i>\"\n\n");
-            outputText("You turn around, expecting to see the old monk you've seen before. As you peer about, nobody is around. Are you hearing voices or was he truly here moments prior?\n\n");
+            outputText("A soft voice rings not far from behind you, \"<i>Sometimes all you need is a small token of goodwill. Chilly peppers were his favorite, in bunches of three...</i>\"\n\n");
+            outputText("You turn around, expecting to see the old monk you've seen before. As you peer about, nobody is around. Are you hearing voices or was he truly here?\n\n");
 			//}
 			//outputText("\n\n");
 			menu();
@@ -112,14 +100,14 @@ public class DilapidatedShrine extends BaseContent
 		private function westSectionOffering():void {
 			clearOutput();
 			player.destroyItems(consumables.CHILLYP, 3);
-			outputText("You place the peppers in one of the bowls, and wait for a bit. A noise distracts you for half a moment, but when you turn back, the peppers are gone, ");
+			outputText("You place the peppers in one of the bowls, and wait for a bit. You hear a rasping sound, like steel on stone, and you turn to face the noise. When you turn back, the peppers are gone, ");
 			switch(rand(10)) {
 				case 1:
-					outputText("in the other bowl, a small, glowing syringe.");
+					outputText("and in the other bowl sits a small, glowing syringe.");
 					inventory.takeItem(useables.E_ICHOR, westSection);
 					break;
 				case 3:
-					outputText("and a bottle of Nocello sitting in front of the statue.");
+					outputText("replaced by a bottle of Nocello sitting in front of the statue.");
 					inventory.takeItem(consumables.NOCELIQ, westSection);
 					break;
 				case 5:
@@ -135,7 +123,7 @@ public class DilapidatedShrine extends BaseContent
 					inventory.takeItem(consumables.INFWINE, westSection);
 					break;
 				default:
-					outputText("and nothing for your troubles. How disappointing.");
+					outputText("and the other bowl is empty. Disappointing.");
 					break;
 			}
 			outputText("\n\n")
@@ -143,35 +131,14 @@ public class DilapidatedShrine extends BaseContent
 			cheatTime(1/12);
 		}
 		
-		private function shrineShinshoku():void {
-			clearOutput();
-			outputText("\n\n");
-			menu();
-			addButton(14, "Back", shrinemainmenu);
-		}
-		
-		private function eastSection():void {
-			clearOutput();
-			outputText("Standing inside the building located on east direction you see a statue in middle of it, ");
-			outputText("Before it lays on the ground medium sized plate, probably used to put on offering at times there was more visitors.\n\n");
-			menu();
-			addButton(14, "Back", shrinemainmenu);
-		}
-		
-		private function shrineCrypt():void {
-			clearOutput();
-			outputText("\n\n");
-			menu();
-			addButton(14, "Back", shrinemainmenu);
-		}
-		
 		private function southSection():void {
 			clearOutput();
-			outputText("Southward within the building, you see a group of statues in an open clearing. The largest one portrays a being, one of peak strength and power.\n\n");
-			outputText("It's magnificent, how crafter manages to capture traits of the being's power allows the statue to radiate awe as you gaze toward it. It's as if the figure is filled with the intent to slay and destroy anything that stands in its way.\n\n");
-			outputText("The surrounding statuettes wield weapons high. Each one carrying dual weapons of a different caliber. Axes, blades, warhammers, almost recklessly waving their weapons about.\n\n");
+			outputText("Southward within the building, you see a group of statues in an open clearing. The largest one portrays a being with bulging muscles, wearing fine armor.\n\n");
+			outputText("The marble statue shimmers, polished stone and chiseled muscle radiating power and strength. \n\n");
+			outputText("The surrounding statuettes depict a wide variety of warriors of a wide variety of Marethian races. Each one holds a different pair of weapons. Axes, blades, warhammers...You could fill several armories with the blades in those statuettes' hands.\n\n");
 			outputText("At the base of the largest statue lies a metallic plaque. Given the rust coating it, the text is hard to decipher. You can only make out 'Krat..' within the text.\n\n");
-			outputText("Below the plaque lies an ornate wooden bowl, presumably used to put offerings in a time when this was a place people actively visited.\n\n");
+			outputText("Below the plaque lies an ornate wooden bowl, several rusted coins inside.\n\n");
+			outputText("From behind, you hear a whisper of a voice, like rasping steel. <i>\"Every weapon is treasured by the God of War. Offer him your tools of destruction, and share in the battles they've seen.\"</i> You turn your head, to face the speaker...But there's nobody there. \n\n");
 			menu();
 			addButton(0, "Offering", weaponsXPtrader);//southSectionOffering
 			addButton(14, "Back", shrinemainmenu);
@@ -180,7 +147,7 @@ public class DilapidatedShrine extends BaseContent
 		public function weaponsXPtrader():void{
 			clearOutput();
 			//Firearms and Archery is not supported yet cause classification is a bit blurry still.
-			var weaponClasses:Array = ["Gauntlet", "Sword", "Axe", "Mace/Hammer", "Dueling", "Polearm", "Spear", "Dagger", "Whip", "Exotic"]; //, "Thrown",  "Scythe", "Staff", "Tetsubo", "Ribbon"
+			var weaponClasses:Array = [ItemConstants.WT_GAUNTLET, ItemConstants.WT_SWORD, ItemConstants.WT_AXE, ItemConstants.WT_MACE_HAMMER, ItemConstants.WT_DUELING, ItemConstants.WT_POLEARM, ItemConstants.WT_SPEAR, ItemConstants.WT_DAGGER, ItemConstants.WT_WHIP, ItemConstants.WT_EXOTIC, ItemConstants.WT_THROWING, ItemConstants.WT_BOW, ItemConstants.WT_CROSSBOW, ItemConstants.WT_2H_FIREARM, ItemConstants.WT_RIFLE, ItemConstants.WT_PISTOL, ItemConstants.WT_DUAL_FIREARMS, ItemConstants.WT_EXOTIC, ItemConstants.WT_RIBBON]; // "Scythe", "Staff", "Tetsubo", "Ribbon", "Tome"
 			var btnInt:int = 0;
 			var tempAry:Array = [];
 			outputText("Welcome. Here, you can offer your weapons to the god of war, consuming the weapon to gain knowledge of the battles its seen.\n");
@@ -190,12 +157,12 @@ public class DilapidatedShrine extends BaseContent
 				try{
 					if (player.itemSlot(i).itype is Weapon){
 						itemClassReplace = player.itemSlot(i).itype as Weapon;
-						weaponType = itemClassReplace['type'];
+						weaponType = itemClassReplace['type'].split(',')[0];
 						//outputText(weaponType + "\n");
 					}
 					else if (player.itemSlot(i).itype is WeaponRange){
 						itemClassReplace = player.itemSlot(i).itype as WeaponRange;
-						weaponType = itemClassReplace['type'];
+						weaponType = itemClassReplace['perk'].split(',')[0];
 						//outputText(weaponType + "\n");
 					}
 					else{//I don't know why I decided to go with German with this. But it's funny.
@@ -205,6 +172,7 @@ public class DilapidatedShrine extends BaseContent
 					if (weaponClasses.indexOf(weaponType) >= 0){
 						tempAry.push([player.itemSlot(i).itype,weaponType])
 					}
+					else if (weaponType) outputText("\nYou canot offer "+player.itemSlot(i).itype.longName +" to the shrine.");
 				}
 				catch (e:Error){
 					outputText(e + "\n");
@@ -225,37 +193,62 @@ public class DilapidatedShrine extends BaseContent
 					outputText("Would you like to do that?");
 					doYesNo(curry(conv2mastery, wType, true),weaponsXPtrader);
 				}
-				else{
+				else{//"Staff", "Tome", "Scythe", "Ribbon"
 					switch (wType[1]){
-						case weaponClasses[0]:
-							player.gauntletXP(40);
+						case ItemConstants.WT_GAUNTLET:
+							combat.gauntletXP(40);
 							break;
-						case weaponClasses[1]:
-							player.swordXP(40);
+						case ItemConstants.WT_SWORD:
+                            combat.swordXP(40);
 							break;
-						case weaponClasses[2]:
-							player.axeXP(40);
+						case ItemConstants.WT_AXE:
+                            combat.axeXP(40);
 							break;
-						case weaponClasses[3]:
-							player.macehammerXP(40);
+						case ItemConstants.WT_MACE_HAMMER:
+                            combat.macehammerXP(40);
 							break;
-						case weaponClasses[4]:
-							player.duelingswordXP(40);
+						case ItemConstants.WT_DUELING:
+                            combat.duelingswordXP(40);
 							break;
-						case weaponClasses[5]:
-							player.polearmXP(40);
+						case ItemConstants.WT_POLEARM:
+                            combat.polearmXP(40);
 							break;
-						case weaponClasses[6]:
-							player.spearXP(40);
+						case ItemConstants.WT_SPEAR:
+                            combat.spearXP(40);
 							break;
-						case weaponClasses[7]:
-							player.daggerXP(40);
+						case ItemConstants.WT_DAGGER:
+                            combat.daggerXP(40);
 							break;
-						case weaponClasses[8]:
-							player.whipXP(40);
+						case ItemConstants.WT_WHIP:
+                            combat.whipXP(40);
 							break;
-						case weaponClasses[9]:
-							player.exoticXP(40);
+						case ItemConstants.WT_THROWING:
+                            combat.throwingXP(40);
+							break;
+						case ItemConstants.WT_BOW:
+                            combat.archeryXP(40);
+							break;
+						case ItemConstants.WT_CROSSBOW:
+                            combat.archeryXP(40);
+							break;
+						case ItemConstants.WT_2H_FIREARM:
+                            combat.firearmsXP(40);
+							break;
+						case ItemConstants.WT_RIFLE:
+                            combat.firearmsXP(40);
+							break;
+						case ItemConstants.WT_PISTOL:
+                            combat.firearmsXP(40);
+							break;
+						case ItemConstants.WT_DUAL_FIREARMS:
+                            combat.firearmsXP(40);
+                            combat.dualWieldFirearmsXP(40);
+							break;
+						case ItemConstants.WT_EXOTIC:
+                            combat.exoticXP(40);
+							break;
+						case ItemConstants.WT_RIBBON:
+                            combat.exoticXP(40);
 							break;
 						}
 					player.destroyItems(wType[0],1);

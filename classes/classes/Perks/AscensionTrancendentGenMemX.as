@@ -11,11 +11,13 @@ public class AscensionTrancendentGenMemX extends PerkType
 {
 
     override public function desc(params:PerkClass = null):String {
+        if (!player || !params) return _desc;
         var pVal:Number = player.perkv1(PerkLib.AscensionTrancendentalGeneticMemoryStageX);
-        return "Your body has learned to retain " + (5*pVal).toString() + " metamorphic adaptations.";
+        return "Your body has learned to retain " + (15*pVal).toString() + " metamorphic adaptations.";
     }
 
     override public function name(params:PerkClass=null):String {
+        if (!player || !params) return _name;
         var sufval:String = player.perkv1(PerkLib.AscensionTrancendentalGeneticMemoryStageX).toString();
         return "Ascension: Transcendental Genetic Memory Rank " + sufval;
     }

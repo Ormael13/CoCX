@@ -7,13 +7,14 @@ package classes.Items.Armors
 	import classes.PerkLib;
 	import classes.Player;
 
-	public final class InquisitorsRobes extends ArmorWithPerk {
+	public final class InquisitorsRobes extends Armor {
 		
 		public function InquisitorsRobes() {
-			super("I.Robes", "I.Robes", "inquisitor's robes", "inquisitor's robes", 0, 20, 2000, "These foreboding red and gold robes are embroidered with the symbols of a lost kingdom.  Wearing it will allow cast blood magic spells.", "Light", PerkLib.BloodMage, 0, 0, 0, 0);
+			super("I.Robes", "I.Robes", "inquisitor's robes", "inquisitor's robes", 0, 20, 2000, "These foreboding red and gold robes are embroidered with the symbols of a lost kingdom.  Wearing it will allow cast blood magic spells.", "Light");
+			withPerk(PerkLib.BloodMage, 0, 0, 0, 0);
 		}
 		
-		override public function useText():void {
+		override public function equipText():void {
 			outputText("You unfold the robes you received from the secret chamber in the swamp and inspect them.  They have not changed since the last time you saw them - perhaps the transformative magic promised in the letter has been exhausted.  Looking at the two separate parts to the outfit, it becomes clear that the mantle is constructed of a thicker fabric and is intended to be the primary protection of the outfit - what protection a robe can provide, at least.  The undershirt is made of a much lighter material, and you dare say that it could prove quite a classy number on its own.  You strip naked and then slip into the robe.\n\n");
 			outputText("The degree to which it fits you is moderately surprising.  For lack of a better word, it seems to be perfect.  The fabric does not cling to you, but gives you a full range of movement.  There is a clasp over the high collar, displaying a golden sword.  Though your arms are bare the holes through which your arms extend are comfortable, and have the same golden trim as the collar.  Along the middle of the robe the trim gathers around the waist, descending down the skirt in two lines.  As it reaches the bottom it explodes into elaborate embroidery circling around the back, patterning based on holy symbols and iconography that may have meant something long ago before the advent of demons.  Between the two lines of gold a sword is displayed, similar to the one on the collar's clasp.  You take a few dramatic movements to see how it responds, and find that you continue to enjoy free movement.\n\n");
 			outputText("Taking the heavier coat, you slide your hands into the sleeves, and secure the belt firmly around your waist.  Your initial concern was that the sleeves would be too open, but in making a few quick motions with your hands you don't feel that the cloth gets in the way.  The weight of the gold-trimmed hood surprises you somewhat, but you quickly grow accustomed.  After attempting to move the hood down you realize that doing so is remarkably difficult; it's designed by clever stitching and wires to stay up, and straight.  You suppose that unless you're overheating there's no real need to adjust it.  The coat covers the undershirt's waist decorations, hiding them completely behind its belt.  Now-familiar sword imagery runs over your back, along your spine.  The loops of the belt meet twice - once behind your back, and once beneath the clasp.\n\n");

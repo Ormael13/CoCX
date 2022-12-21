@@ -1,11 +1,11 @@
 ﻿package classes
 {
-import classes.BodyParts.Hair;
 import classes.BodyParts.Antennae;
 import classes.BodyParts.Arms;
 import classes.BodyParts.Ears;
 import classes.BodyParts.Eyes;
 import classes.BodyParts.Gills;
+import classes.BodyParts.Hair;
 import classes.BodyParts.Horns;
 import classes.BodyParts.RearBody;
 import classes.BodyParts.Tail;
@@ -20,7 +20,6 @@ import classes.Scenes.NPCs.XXCNPC;
 import classes.Scenes.SceneLib;
 import classes.Stats.BuffableStat;
 import classes.Stats.IStat;
-import classes.Stats.RawStat;
 import classes.internals.Jsonable;
 import classes.internals.SaveableState;
 import classes.lists.BreastCup;
@@ -376,17 +375,12 @@ public function saveLoad(e:MouseEvent = null):void
 	outputText("<i>If you want to be absolutely sure you don't lose a character, copy the .sol file for that slot out and back it up! <b>For more information, google flash shared objects.</b></i>\n\n");
 	outputText("<b>Why does the Save File and Load File option not work?</b>\n");
 	outputText("<i>Save File and Load File are limited by the security settings imposed upon CoC by Flash. These options will only work if you have downloaded the game from the website, and are running it from your HDD. Additionally, they can only correctly save files to and load files from the directory where you have the game saved.</i>");
-	//This is to clear the 'game over' block from stopping simpleChoices from working.  Loading games supercede's game over.
-
 	menu();
 	addButton(1, "Load", loadScreen);
 	addButton(2, "Delete", deleteScreen);
 	addButton(6, "Load File", openSave);
-	addButton(14, "Back", EventParser.gameOver, true);
 
-	if (mainView.getButtonText( 0 ) == "Game Over")
-	{
-		mainView.setButtonText( 0, "save/load" );
+	if (EventParser.badEnded) {
 		addButton(14, "Back", EventParser.gameOver, true);
 		return;
 	}
@@ -587,6 +581,7 @@ public function loadGame(slot:String):void
 		}
 		statScreenRefresh();
 		doNext(playerMenu);
+		EventParser.badEnded = false; //reset bad end if we're going from it
 	}
 }
 
@@ -628,6 +623,8 @@ public function savePermObject(isFile:Boolean):void {
 		saveFile.data.flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS] = flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS];
 		saveFile.data.flags[kFLAGS.SCENEHUNTER_OTHER] = flags[kFLAGS.SCENEHUNTER_OTHER];
 		saveFile.data.flags[kFLAGS.SCENEHUNTER_DICK_SELECT] = flags[kFLAGS.SCENEHUNTER_DICK_SELECT];
+		saveFile.data.flags[kFLAGS.SCENEHUNTER_LOSS_SELECT] = flags[kFLAGS.SCENEHUNTER_LOSS_SELECT];
+		saveFile.data.flags[kFLAGS.SCENEHUNTER_MOCK_FIGHTS] = flags[kFLAGS.SCENEHUNTER_MOCK_FIGHTS];
 		saveFile.data.flags[kFLAGS.SCENEHUNTER_UNI_HERMS] = flags[kFLAGS.SCENEHUNTER_UNI_HERMS];
         saveFile.data.flags[kFLAGS.WATERSPORTS_ENABLED] = flags[kFLAGS.WATERSPORTS_ENABLED];
 
@@ -638,7 +635,6 @@ public function savePermObject(isFile:Boolean):void {
 		saveFile.data.flags[kFLAGS.CHARVIEWER_ENABLED] = flags[kFLAGS.CHARVIEWER_ENABLED];
 		saveFile.data.flags[kFLAGS.CHARVIEW_STYLE] = flags[kFLAGS.CHARVIEW_STYLE];
 		saveFile.data.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] = flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN];
-		saveFile.data.flags[kFLAGS.USE_OLD_INTERFACE] = flags[kFLAGS.USE_OLD_INTERFACE];
 		saveFile.data.flags[kFLAGS.USE_OLD_FONT] = flags[kFLAGS.USE_OLD_FONT];
 		saveFile.data.flags[kFLAGS.BACKGROUND_STYLE] = flags[kFLAGS.BACKGROUND_STYLE];
 		saveFile.data.flags[kFLAGS.IMAGEPACK_OFF] = flags[kFLAGS.IMAGEPACK_OFF];
@@ -647,12 +643,10 @@ public function savePermObject(isFile:Boolean):void {
 		saveFile.data.flags[kFLAGS.USE_12_HOURS] = flags[kFLAGS.USE_12_HOURS];
 		saveFile.data.flags[kFLAGS.USE_METRICS] = flags[kFLAGS.USE_METRICS];
 		saveFile.data.flags[kFLAGS.AUTO_LEVEL] = flags[kFLAGS.AUTO_LEVEL];
-		saveFile.data.flags[kFLAGS.NO_GORE_MODE] = flags[kFLAGS.NO_GORE_MODE];
 		saveFile.data.flags[kFLAGS.STRENGTH_SCALING] = flags[kFLAGS.STRENGTH_SCALING];
 		saveFile.data.flags[kFLAGS.SPEED_SCALING] = flags[kFLAGS.SPEED_SCALING];
 		saveFile.data.flags[kFLAGS.WISDOM_SCALING] = flags[kFLAGS.WISDOM_SCALING];
 		saveFile.data.flags[kFLAGS.INTELLIGENCE_SCALING] = flags[kFLAGS.INTELLIGENCE_SCALING];
-		saveFile.data.flags[kFLAGS.MELEE_DAMAGE_OVERHAUL] = flags[kFLAGS.MELEE_DAMAGE_OVERHAUL];
 		saveFile.data.flags[kFLAGS.SECONDARY_STATS_SCALING] = flags[kFLAGS.SECONDARY_STATS_SCALING];
 		saveFile.data.flags[kFLAGS.TOUGHNESS_SCALING] = flags[kFLAGS.TOUGHNESS_SCALING];
 		//saveFile.data.settings = [];
@@ -696,6 +690,8 @@ public function loadPermObject():void {
             if (saveFile.data.flags[kFLAGS.SCENEHUNTER_OTHER] != undefined) flags[kFLAGS.SCENEHUNTER_OTHER] = saveFile.data.flags[kFLAGS.SCENEHUNTER_OTHER];
             if (saveFile.data.flags[kFLAGS.SCENEHUNTER_DICK_SELECT] != undefined) flags[kFLAGS.SCENEHUNTER_DICK_SELECT] = saveFile.data.flags[kFLAGS.SCENEHUNTER_DICK_SELECT];
             if (saveFile.data.flags[kFLAGS.SCENEHUNTER_UNI_HERMS] != undefined) flags[kFLAGS.SCENEHUNTER_UNI_HERMS] = saveFile.data.flags[kFLAGS.SCENEHUNTER_UNI_HERMS];
+			if (saveFile.data.flags[kFLAGS.SCENEHUNTER_LOSS_SELECT] != undefined) flags[kFLAGS.SCENEHUNTER_LOSS_SELECT] = saveFile.data.flags[kFLAGS.SCENEHUNTER_LOSS_SELECT];
+			if (saveFile.data.flags[kFLAGS.SCENEHUNTER_MOCK_FIGHTS] != undefined) flags[kFLAGS.SCENEHUNTER_MOCK_FIGHTS] = saveFile.data.flags[kFLAGS.SCENEHUNTER_MOCK_FIGHTS];
 
 			if (saveFile.data.flags[kFLAGS.MUTATIONS_SPOILERS] != undefined) flags[kFLAGS.MUTATIONS_SPOILERS] = saveFile.data.flags[kFLAGS.MUTATIONS_SPOILERS];
 			if (saveFile.data.flags[kFLAGS.NEWPERKSDISPLAY] != undefined) flags[kFLAGS.NEWPERKSDISPLAY] = saveFile.data.flags[kFLAGS.NEWPERKSDISPLAY];
@@ -704,7 +700,6 @@ public function loadPermObject():void {
 			if (saveFile.data.flags[kFLAGS.CHARVIEWER_ENABLED] != undefined) flags[kFLAGS.CHARVIEWER_ENABLED] = saveFile.data.flags[kFLAGS.CHARVIEWER_ENABLED];
 			if (saveFile.data.flags[kFLAGS.CHARVIEW_STYLE] != undefined) flags[kFLAGS.CHARVIEW_STYLE] = saveFile.data.flags[kFLAGS.CHARVIEW_STYLE];
 			if (saveFile.data.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] != undefined) flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] = saveFile.data.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN];
-			if (saveFile.data.flags[kFLAGS.USE_OLD_INTERFACE] != undefined) flags[kFLAGS.USE_OLD_INTERFACE] = saveFile.data.flags[kFLAGS.USE_OLD_INTERFACE];
 			if (saveFile.data.flags[kFLAGS.USE_OLD_FONT] != undefined) flags[kFLAGS.USE_OLD_FONT] = saveFile.data.flags[kFLAGS.USE_OLD_FONT];
 			if (saveFile.data.flags[kFLAGS.BACKGROUND_STYLE] != undefined) flags[kFLAGS.BACKGROUND_STYLE] = saveFile.data.flags[kFLAGS.BACKGROUND_STYLE];
 			if (saveFile.data.flags[kFLAGS.IMAGEPACK_OFF] != undefined) flags[kFLAGS.IMAGEPACK_OFF] = saveFile.data.flags[kFLAGS.IMAGEPACK_OFF];
@@ -713,12 +708,10 @@ public function loadPermObject():void {
 			if (saveFile.data.flags[kFLAGS.USE_12_HOURS] != undefined) flags[kFLAGS.USE_12_HOURS] = saveFile.data.flags[kFLAGS.USE_12_HOURS];
 			if (saveFile.data.flags[kFLAGS.USE_METRICS] != undefined) flags[kFLAGS.USE_METRICS] = saveFile.data.flags[kFLAGS.USE_METRICS];
 			if (saveFile.data.flags[kFLAGS.AUTO_LEVEL] != undefined) flags[kFLAGS.AUTO_LEVEL] = saveFile.data.flags[kFLAGS.AUTO_LEVEL];
-			if (saveFile.data.flags[kFLAGS.NO_GORE_MODE] != undefined) flags[kFLAGS.NO_GORE_MODE] = saveFile.data.flags[kFLAGS.NO_GORE_MODE];
 			if (saveFile.data.flags[kFLAGS.STRENGTH_SCALING] != undefined) flags[kFLAGS.STRENGTH_SCALING] = saveFile.data.flags[kFLAGS.STRENGTH_SCALING];
 			if (saveFile.data.flags[kFLAGS.SPEED_SCALING] != undefined) flags[kFLAGS.SPEED_SCALING] = saveFile.data.flags[kFLAGS.SPEED_SCALING];
 			if (saveFile.data.flags[kFLAGS.WISDOM_SCALING] != undefined) flags[kFLAGS.WISDOM_SCALING] = saveFile.data.flags[kFLAGS.WISDOM_SCALING];
 			if (saveFile.data.flags[kFLAGS.INTELLIGENCE_SCALING] != undefined) flags[kFLAGS.INTELLIGENCE_SCALING] = saveFile.data.flags[kFLAGS.INTELLIGENCE_SCALING];
-			if (saveFile.data.flags[kFLAGS.MELEE_DAMAGE_OVERHAUL] != undefined) flags[kFLAGS.MELEE_DAMAGE_OVERHAUL] = saveFile.data.flags[kFLAGS.MELEE_DAMAGE_OVERHAUL];
 			if (saveFile.data.flags[kFLAGS.SECONDARY_STATS_SCALING] != undefined) flags[kFLAGS.SECONDARY_STATS_SCALING] = saveFile.data.flags[kFLAGS.SECONDARY_STATS_SCALING];
 			if (saveFile.data.flags[kFLAGS.TOUGHNESS_SCALING] != undefined) flags[kFLAGS.TOUGHNESS_SCALING] = saveFile.data.flags[kFLAGS.TOUGHNESS_SCALING];
 		}
@@ -838,11 +831,11 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.weaponFlyingSwordsId = player.weaponFlyingSwords.id;
 		saveFile.data.headJewelryId = player.headJewelry.id;
 		saveFile.data.necklaceId = player.necklace.id;
-		saveFile.data.jewelryId = player.jewelry.id;
+		saveFile.data.jewelryId = player.jewelry1.id;
 		saveFile.data.jewelryId2 = player.jewelry2.id;
 		saveFile.data.jewelryId3 = player.jewelry3.id;
 		saveFile.data.jewelryId4 = player.jewelry4.id;
-		saveFile.data.miscJewelryId = player.miscJewelry.id;
+		saveFile.data.miscJewelryId = player.miscJewelry1.id;
 		saveFile.data.miscJewelryId2 = player.miscJewelry2.id;
 		saveFile.data.shieldId = player.shield.id;
 		saveFile.data.upperGarmentId = player.upperGarment.id;
@@ -905,58 +898,58 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.teaseLevel = player.teaseLevel;
 		saveFile.data.teaseXP = player.teaseXP;
 		//Mastery
-		saveFile.data.masteryFeralCombatLevel = player.masteryFeralCombatLevel;
-		saveFile.data.masteryFeralCombatXP = player.masteryFeralCombatXP;
-		saveFile.data.masteryGauntletLevel = player.masteryGauntletLevel;
-		saveFile.data.masteryGauntletXP = player.masteryGauntletXP;
-		saveFile.data.masteryDaggerLevel = player.masteryDaggerLevel;
-		saveFile.data.masteryDaggerXP = player.masteryDaggerXP;
-		saveFile.data.masterySwordLevel = player.masterySwordLevel;
-		saveFile.data.masterySwordXP = player.masterySwordXP;
-		saveFile.data.masteryAxeLevel = player.masteryAxeLevel;
-		saveFile.data.masteryAxeXP = player.masteryAxeXP;
-		saveFile.data.masteryMaceHammerLevel = player.masteryMaceHammerLevel;
-		saveFile.data.masteryMaceHammerXP = player.masteryMaceHammerXP;
-		saveFile.data.masteryDuelingSwordLevel = player.masteryDuelingSwordLevel;
-		saveFile.data.masteryDuelingSwordXP = player.masteryDuelingSwordXP;
-		saveFile.data.masteryPolearmLevel = player.masteryPolearmLevel;
-		saveFile.data.masteryPolearmXP = player.masteryPolearmXP;
-		saveFile.data.masterySpearLevel = player.masterySpearLevel;
-		saveFile.data.masterySpearXP = player.masterySpearXP;
-		saveFile.data.masteryWhipLevel = player.masteryWhipLevel;
-		saveFile.data.masteryWhipXP = player.masteryWhipXP;
-		saveFile.data.masteryExoticLevel = player.masteryExoticLevel;
-		saveFile.data.masteryExoticXP = player.masteryExoticXP;
-		saveFile.data.masteryArcheryLevel = player.masteryArcheryLevel;
-		saveFile.data.masteryArcheryXP = player.masteryArcheryXP;
-		saveFile.data.masteryThrowingLevel = player.masteryThrowingLevel;
-		saveFile.data.masteryThrowingXP = player.masteryThrowingXP;
-		saveFile.data.masteryFirearmsLevel = player.masteryFirearmsLevel;
-		saveFile.data.masteryFirearmsXP = player.masteryFirearmsXP;
-		saveFile.data.dualWSLevel = player.dualWSLevel;
-		saveFile.data.dualWSXP = player.dualWSXP;
-		saveFile.data.dualWNLevel = player.dualWNLevel;
-		saveFile.data.dualWNXP = player.dualWNXP;
-		saveFile.data.dualWLLevel = player.dualWLLevel;
-		saveFile.data.dualWLXP = player.dualWLXP;
-		saveFile.data.dualWFLevel = player.dualWFLevel;
-		saveFile.data.dualWFXP = player.dualWFXP;
+
+        //Mastery attributes
+        saveFile.data.combatMastery = [];
+		for(i = 0; i < player.combatMastery.length; i++) {
+            saveFile.data.combatMastery.push({index:i, level:player.combatMastery[i].level, experience:player.combatMastery[i].experience});
+        }
+
+//
+//        saveFile.data.masteryFeralCombatLevel = player.masteryFeralCombatLevel;
+//		saveFile.data.masteryFeralCombatXP = player.masteryFeralCombatXP;
+//		saveFile.data.masteryGauntletLevel = player.masteryGauntletLevel;
+//		saveFile.data.masteryGauntletXP = player.masteryGauntletXP;
+//		saveFile.data.masteryDaggerLevel = player.masteryDaggerLevel;
+//		saveFile.data.masteryDaggerXP = player.masteryDaggerXP;
+//		saveFile.data.masterySwordLevel = player.masterySwordLevel;
+//		saveFile.data.masterySwordXP = player.masterySwordXP;
+//		saveFile.data.masteryAxeLevel = player.masteryAxeLevel;
+//		saveFile.data.masteryAxeXP = player.masteryAxeXP;
+//		saveFile.data.masteryMaceHammerLevel = player.masteryMaceHammerLevel;
+//		saveFile.data.masteryMaceHammerXP = player.masteryMaceHammerXP;
+//		saveFile.data.masteryDuelingSwordLevel = player.masteryDuelingSwordLevel;
+//		saveFile.data.masteryDuelingSwordXP = player.masteryDuelingSwordXP;
+//		saveFile.data.masteryPolearmLevel = player.masteryPolearmLevel;
+//		saveFile.data.masteryPolearmXP = player.masteryPolearmXP;
+//		saveFile.data.masterySpearLevel = player.masterySpearLevel;
+//		saveFile.data.masterySpearXP = player.masterySpearXP;
+//		saveFile.data.masteryWhipLevel = player.masteryWhipLevel;
+//		saveFile.data.masteryWhipXP = player.masteryWhipXP;
+//		saveFile.data.masteryExoticLevel = player.masteryExoticLevel;
+//		saveFile.data.masteryExoticXP = player.masteryExoticXP;
+//		saveFile.data.masteryArcheryLevel = player.masteryArcheryLevel;
+//		saveFile.data.masteryArcheryXP = player.masteryArcheryXP;
+//		saveFile.data.masteryThrowingLevel = player.masteryThrowingLevel;
+//		saveFile.data.masteryThrowingXP = player.masteryThrowingXP;
+//		saveFile.data.masteryFirearmsLevel = player.masteryFirearmsLevel;
+//		saveFile.data.masteryFirearmsXP = player.masteryFirearmsXP;
+//		saveFile.data.dualWSLevel = player.dualWSLevel;
+//		saveFile.data.dualWSXP = player.dualWSXP;
+//		saveFile.data.dualWNLevel = player.dualWNLevel;
+//		saveFile.data.dualWNXP = player.dualWNXP;
+//		saveFile.data.dualWLLevel = player.dualWLLevel;
+//		saveFile.data.dualWLXP = player.dualWLXP;
+//		saveFile.data.dualWFLevel = player.dualWFLevel;
+//		saveFile.data.dualWFXP = player.dualWFXP;
 		//Mining
 		saveFile.data.miningLevel = player.miningLevel;
 		saveFile.data.miningXP = player.miningXP;
 		//Herbalism
 		saveFile.data.herbalismLevel = player.herbalismLevel;
 		saveFile.data.herbalismXP = player.herbalismXP;
-		//Prison STATS
+		//Hunger
 		saveFile.data.hunger = player.hunger;
-		saveFile.data.esteem = player.esteem;
-		saveFile.data.obey = player.obey;
-		saveFile.data.obeySoftCap = player.obeySoftCap;
-		saveFile.data.will = player.will;
-
-		saveFile.data.prisonItems = player.prisonItemSlots;
-		//saveFile.data.prisonArmor = prison.prisonItemSlotArmor;
-		//saveFile.data.prisonWeapon = prison.prisonItemSlotWeapon;
 		//LEVEL STATS
 		saveFile.data.XP = player.XP;
 		saveFile.data.level = player.level;
@@ -971,8 +964,10 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.femininity = player.femininity;
 		saveFile.data.thickness = player.thickness;
 		saveFile.data.tone = player.tone;
-		saveFile.data.tallness = player.tallness;
-		saveFile.data.hairColor = player.hairColor;
+        if(player.hasPerk(PerkLib.TitanicSize))
+            saveFile.data.tallness = player.tallness / 5;
+        else
+            saveFile.data.tallness = player.tallness;
 		saveFile.data.hairType = player.hairType;
 		saveFile.data.hairStyle = player.hairStyle;
 		saveFile.data.gillType = player.gills.type;
@@ -988,6 +983,10 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.horns = player.horns.count;
 		saveFile.data.hornType = player.horns.type;
 		saveFile.data.rearBody = player.rearBody.type;
+		saveFile.data.bodyMaterials = [];
+		for (i = 0; i < player.bodyMaterials.length; i++) {
+			saveFile.data.bodyMaterials[i] = player.bodyMaterials[i].saveToObject();
+		}
 		player.facePart.saveToSaveData(saveFile.data);
 		//player.underBody.saveToSaveData(saveFile.data);
 		player.lowerBodyPart.saveToSaveData(saveFile.data);
@@ -1584,6 +1583,8 @@ private function unFuckSaveDataBeforeLoading(data:Object):void {
 public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 {
     var game:CoC = CoC.instance;
+	var spillyFix:Boolean = false;
+	game.isLoadingSave = true;
 	inDungeon = false;
 	inRoomedDungeon = false;
 	inRoomedDungeonResume = null;
@@ -1645,12 +1646,15 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		player.nosePierced = saveFile.data.nosePierced;
 		player.nosePShort = saveFile.data.nosePShort;
 		player.nosePLong = saveFile.data.nosePLong;
-		player.level = saveFile.data.level;
+		if (saveFile.data.level > CoC.instance.levelCap) { //vanilla import with op levels
+			player.level = CoC.instance.levelCap;
+			spillyFix = true;
+		} else player.level = saveFile.data.level;
 
 		if (saveFile.data.statPoints == undefined)
 			player.statPoints = 0;
-		else
-			player.statPoints = saveFile.data.statPoints;
+		else if (spillyFix) player.statPoints = 0; //because I can
+		else player.statPoints = saveFile.data.statPoints;
 
 		if (data.stats) {
 			player.statStore.forEachStat(function(stat:IStat):void {
@@ -1679,227 +1683,58 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		player.wrath = saveFile.data.wrath;
 
 		//CLOTHING/ARMOR
-		var found:Boolean = false;
-		if (saveFile.data.weaponId){
-			player.setWeaponHiddenField((ItemType.lookupItem(saveFile.data.weaponId) as Weapon) || WeaponLib.FISTS);
-		} else {
-			player.setWeapon(WeaponLib.FISTS);
-			//player.weapon = WeaponLib.FISTS;
-			for each (var itype:ItemType in ItemType.getItemLibrary()) {
-				if (itype is Weapon && (itype as Weapon).name == saveFile.data.weaponName){
-					player.setWeaponHiddenField(itype as Weapon || WeaponLib.FISTS);
-					found = true;
-					break;
+		
+		function loadEquipment(slot:int, clazz:Class, savedId:String, savedName:String, defaultValue:Equipable):Boolean {
+			var itype:ItemType;
+			if (savedId) {
+				itype = ItemType.lookupItem(savedId);
+				if (itype && itype is clazz) {
+					player.internalEquipItem(slot, itype as Equipable, false, true);
+					return true;
 				}
 			}
+			if (savedName) {
+				for each (itype in ItemType.getItemLibrary()) {
+					if (itype is clazz && (itype as Equipable).name == savedName) {
+						player.internalEquipItem(slot, itype as Equipable, false, true);
+						return true;
+					}
+				}
+			}
+			player.internalEquipItem(slot, defaultValue, false, true);
+			return false;
 		}
-		if (saveFile.data.weaponRangeId){
-			player.setWeaponRangeHiddenField((ItemType.lookupItem(saveFile.data.weaponRangeId) as WeaponRange) || WeaponRangeLib.NOTHING);
-		} else {
-			player.setWeaponRange(WeaponRangeLib.NOTHING);
-			for each (itype in ItemType.getItemLibrary()) {
-				if (itype is WeaponRange && (itype as WeaponRange).name == saveFile.data.weaponRangeName){
-					player.setWeaponRangeHiddenField(itype as WeaponRange || WeaponRangeLib.NOTHING);
-					found = true;
-					break;
-				}
-			}
-		}
-		if (saveFile.data.weaponFlyingSwordsId){
-			player.setWeaponFlyingSwordsHiddenField((ItemType.lookupItem(saveFile.data.weaponFlyingSwordsId) as FlyingSwords) || FlyingSwordsLib.NOTHING);
-		} else {
-			player.setWeaponFlyingSwords(FlyingSwordsLib.NOTHING);
-			for each (itype in ItemType.getItemLibrary()) {
-				if (itype is FlyingSwords && (itype as FlyingSwords).name == saveFile.data.weaponFlyingSwordsName){
-					player.setWeaponFlyingSwordsHiddenField(itype as FlyingSwords || FlyingSwordsLib.NOTHING);
-					found = true;
-					break;
-				}
-			}
-		}
-		if (saveFile.data.shieldId){
-			player.setShieldHiddenField((ItemType.lookupItem(saveFile.data.shieldId) as Shield) || ShieldLib.NOTHING);
-		} else {
-			player.setShield(ShieldLib.NOTHING);
-			for each (itype in ItemType.getItemLibrary()) {
-				if (itype is Shield && (itype as Shield).name == saveFile.data.shieldName){
-					player.setShieldHiddenField(itype as Shield || ShieldLib.NOTHING);
-					found = true;
-					break;
-				}
-			}
-		}
-		if (saveFile.data.miscJewelryId){
-			player.setMiscJewelryHiddenField((ItemType.lookupItem(saveFile.data.miscJewelryId) as MiscJewelry) || MiscJewelryLib.NOTHING);
-		} else {
-			player.setMiscJewelry(MiscJewelryLib.NOTHING);
-			for each (itype in ItemType.getItemLibrary()) {
-				if (itype is MiscJewelry && (itype as MiscJewelry).name == saveFile.data.miscjewelryName){
-					player.setMiscJewelryHiddenField(itype as MiscJewelry || MiscJewelryLib.NOTHING);
-					found = true;
-					break;
-				}
-			}
-		}
-		if (saveFile.data.miscJewelryId2){
-			player.setMiscJewelryHiddenField2((ItemType.lookupItem(saveFile.data.miscJewelryId2) as MiscJewelry) || MiscJewelryLib.NOTHING);
-		} else {
-			player.setMiscJewelry2(MiscJewelryLib.NOTHING);
-			for each (itype in ItemType.getItemLibrary()) {
-				if (itype is MiscJewelry && (itype as MiscJewelry).name == saveFile.data.miscjewelryName2){
-					player.setMiscJewelryHiddenField2(itype as MiscJewelry || MiscJewelryLib.NOTHING);
-					found = true;
-					break;
-				}
-			}
-		}
-		if (saveFile.data.headJewelryId){
-			player.setHeadJewelryHiddenField((ItemType.lookupItem(saveFile.data.headJewelryId) as HeadJewelry) || HeadJewelryLib.NOTHING);
-		} else {
-			player.setHeadJewelry(HeadJewelryLib.NOTHING);
-			for each (itype in ItemType.getItemLibrary()) {
-				if (itype is HeadJewelry && (itype as HeadJewelry).name == saveFile.data.headjewelryName){
-					player.setHeadJewelryHiddenField(itype as HeadJewelry || HeadJewelryLib.NOTHING);
-					found = true;
-					break;
-				}
-			}
-		}/*
-		if (saveFile.data.jewelryId2){
-			player.setJewelryHiddenField2((ItemType.lookupItem(saveFile.data.jewelryId2) as Jewelry) || JewelryLib.NOTHING);
-		} else {
-			player.setJewelry2(JewelryLib.NOTHING);
-			for each (itype in ItemType.getItemLibrary()) {
-				if (itype is Jewelry && (itype as Jewelry).name == saveFile.data.jewelryName2){
-					player.setJewelryHiddenField2(itype as Jewelry || JewelryLib.NOTHING);
-					found = true;
-					break;
-				}
-			}
-		}*/
-		if (saveFile.data.necklaceId){
-			player.setNecklaceHiddenField((ItemType.lookupItem(saveFile.data.necklaceId) as Necklace) || NecklaceLib.NOTHING);
-		} else {
-			player.setNecklace(NecklaceLib.NOTHING);
-			for each (itype in ItemType.getItemLibrary()) {
-				if (itype is Necklace && (itype as Necklace).name == saveFile.data.necklaceName){
-					player.setNecklaceHiddenField(itype as Necklace || NecklaceLib.NOTHING);
-					found = true;
-					break;
-				}
-			}
-		}
-		if (saveFile.data.jewelryId){
-			player.setJewelryHiddenField((ItemType.lookupItem(saveFile.data.jewelryId) as Jewelry) || JewelryLib.NOTHING);
-		} else {
-			player.setJewelry(JewelryLib.NOTHING);
-			for each (itype in ItemType.getItemLibrary()) {
-				if (itype is Jewelry && (itype as Jewelry).name == saveFile.data.jewelryName){
-					player.setJewelryHiddenField(itype as Jewelry || JewelryLib.NOTHING);
-					found = true;
-					break;
-				}
-			}
-		}
-		if (saveFile.data.jewelryId2){
-			player.setJewelryHiddenField2((ItemType.lookupItem(saveFile.data.jewelryId2) as Jewelry) || JewelryLib.NOTHING);
-		} else {
-			player.setJewelry2(JewelryLib.NOTHING);
-			for each (itype in ItemType.getItemLibrary()) {
-				if (itype is Jewelry && (itype as Jewelry).name == saveFile.data.jewelryName2){
-					player.setJewelryHiddenField2(itype as Jewelry || JewelryLib.NOTHING);
-					found = true;
-					break;
-				}
-			}
-		}
-		if (saveFile.data.jewelryId3){
-			player.setJewelryHiddenField3((ItemType.lookupItem(saveFile.data.jewelryId3) as Jewelry) || JewelryLib.NOTHING);
-		} else {
-			player.setJewelry3(JewelryLib.NOTHING);
-			for each (itype in ItemType.getItemLibrary()) {
-				if (itype is Jewelry && (itype as Jewelry).name == saveFile.data.jewelryName3){
-					player.setJewelryHiddenField3(itype as Jewelry || JewelryLib.NOTHING);
-					found = true;
-					break;
-				}
-			}
-		}
-		if (saveFile.data.jewelryId4){
-			player.setJewelryHiddenField4((ItemType.lookupItem(saveFile.data.jewelryId4) as Jewelry) || JewelryLib.NOTHING);
-		} else {
-			player.setJewelry4(JewelryLib.NOTHING);
-			for each (itype in ItemType.getItemLibrary()) {
-				if (itype is Jewelry && (itype as Jewelry).name == saveFile.data.jewelryName4){
-					player.setJewelryHiddenField4(itype as Jewelry || JewelryLib.NOTHING);
-					found = true;
-					break;
-				}
-			}
-		}
-		if (saveFile.data.vehiclesId){
-			player.setVehicleHiddenField((ItemType.lookupItem(saveFile.data.vehiclesId) as Vehicles) || VehiclesLib.NOTHING);
-		} else {
-			player.setVehicle(VehiclesLib.NOTHING);
-			for each (itype in ItemType.getItemLibrary()) {
-				if (itype is Vehicles && (itype as Vehicles).name == saveFile.data.vehiclesName){
-					player.setVehicleHiddenField(itype as Vehicles || VehiclesLib.NOTHING);
-					found = true;
-					break;
-				}
-			}
-		}
-		if (saveFile.data.upperGarmentId){
-			player.setUndergarmentHiddenField((ItemType.lookupItem(saveFile.data.upperGarmentId) as Undergarment) || UndergarmentLib.NOTHING, UndergarmentLib.TYPE_UPPERWEAR);
-		} else {
-			player.setUndergarment(UndergarmentLib.NOTHING);
-			for each (itype in ItemType.getItemLibrary()) {
-				if (itype is Undergarment && (itype as Undergarment).name == saveFile.data.upperGarmentName){
-					player.setUndergarmentHiddenField(itype as Undergarment || UndergarmentLib.NOTHING, UndergarmentLib.TYPE_UPPERWEAR);
-					found = true;
-					break;
-				}
-			}
-		}
-		if (saveFile.data.lowerGarmentId){
-			player.setUndergarmentHiddenField((ItemType.lookupItem(saveFile.data.lowerGarmentId) as Undergarment) || UndergarmentLib.NOTHING, UndergarmentLib.TYPE_LOWERWEAR);
-		} else {
-			player.setUndergarment(UndergarmentLib.NOTHING);
-			for each (itype in ItemType.getItemLibrary()) {
-				if (itype is Undergarment && (itype as Undergarment).name == saveFile.data.lowerGarmentName){
-					player.setUndergarmentHiddenField(itype as Undergarment || UndergarmentLib.NOTHING, UndergarmentLib.TYPE_LOWERWEAR);
-					found = true;
-					break;
-				}
-			}
-		}
-		if (saveFile.data.armorId){
-			player.setArmorHiddenField((ItemType.lookupItem(saveFile.data.armorId) as Armor) || ArmorLib.COMFORTABLE_UNDERCLOTHES);
-			if (player.armor.name != saveFile.data.armorName) player.modArmorName = saveFile.data.armorName;
-		} else {
-			found = false;
-			player.setArmor(ArmorLib.COMFORTABLE_UNDERCLOTHES);
-			//player.armor = ArmorLib.COMFORTABLE_UNDERCLOTHES;
-			for each (itype in ItemType.getItemLibrary()) {
-				if (itype is Armor && (itype as Armor).name == saveFile.data.armorName){
-					player.setArmorHiddenField(itype as Armor || ArmorLib.COMFORTABLE_UNDERCLOTHES);
-					found = true;
-					break;
-				}
-			}
-			if (!found){
-				for each (itype in ItemType.getItemLibrary()){
-					if (itype is Armor){
-						var a:Armor = itype as Armor;
-						if (a.value == saveFile.data.armorValue &&
-								a.def == saveFile.data.armorDef &&
-								a.perk == saveFile.data.armorPerk){
-							player.setArmor(a);
-							//player.armor = a;
-							player.modArmorName = saveFile.data.armorName;
-							found = true;
-							break;
-						}
+		
+		var found:Boolean;
+		var itype:ItemType;
+		loadEquipment(ItemConstants.SLOT_WEAPON_MELEE, Weapon, saveFile.data.weaponId, saveFile.data.weaponName, WeaponLib.FISTS);
+		loadEquipment(ItemConstants.SLOT_WEAPON_RANGED, WeaponRange, saveFile.data.weaponRangeId, saveFile.data.weaponRangeName, WeaponRangeLib.NOTHING);
+		loadEquipment(ItemConstants.SLOT_FLYING_SWORD, FlyingSwords, saveFile.data.weaponFlyingSwordsId, saveFile.data.weaponFlyingSwordsName, FlyingSwordsLib.NOTHING);
+		loadEquipment(ItemConstants.SLOT_SHIELD, Shield, saveFile.data.shieldId,  saveFile.data.shieldName, ShieldLib.NOTHING);
+		loadEquipment(ItemConstants.SLOT_JEWELRY_MISC_1, MiscJewelry, saveFile.data.miscJewelryId,  saveFile.data.miscjewelryName, MiscJewelryLib.NOTHING);
+		loadEquipment(ItemConstants.SLOT_JEWELRY_MISC_2, MiscJewelry, saveFile.data.miscJewelryId2,  saveFile.data.miscjewelryName2, MiscJewelryLib.NOTHING);
+		loadEquipment(ItemConstants.SLOT_HEAD, HeadJewelry, saveFile.data.headJewelryId, saveFile.data.headjewelryName, HeadJewelryLib.NOTHING);
+		loadEquipment(ItemConstants.SLOT_NECK, Necklace, saveFile.data.necklaceId, saveFile.data.necklaceName, NecklaceLib.NOTHING);
+		loadEquipment(ItemConstants.SLOT_RING_1, Jewelry, saveFile.data.jewelryId, saveFile.data.jewelryName, JewelryLib.NOTHING);
+		loadEquipment(ItemConstants.SLOT_RING_2, Jewelry, saveFile.data.jewelryId2, saveFile.data.jewelryName2, JewelryLib.NOTHING);
+		loadEquipment(ItemConstants.SLOT_RING_3, Jewelry, saveFile.data.jewelryId3, saveFile.data.jewelryName3, JewelryLib.NOTHING);
+		loadEquipment(ItemConstants.SLOT_RING_4, Jewelry, saveFile.data.jewelryId4, saveFile.data.jewelryName4, JewelryLib.NOTHING);
+		loadEquipment(ItemConstants.SLOT_VEHICLE, Vehicles, saveFile.data.vehiclesId, saveFile.data.vehiclesName, VehiclesLib.NOTHING);
+		loadEquipment(ItemConstants.SLOT_UNDER_TOP, Undergarment, saveFile.data.upperGarmentId, saveFile.data.upperGarmentName,UndergarmentLib.NOTHING);
+		loadEquipment(ItemConstants.SLOT_UNDER_BOTTOM, Undergarment, saveFile.data.lowerGarmentId, saveFile.data.lowerGarmentName, UndergarmentLib.NOTHING);
+		found = loadEquipment(ItemConstants.SLOT_ARMOR, Armor, saveFile.data.armorId, saveFile.data.armorName, ArmorLib.COMFORTABLE_UNDERCLOTHES);
+		if (!found){
+			for each (itype in ItemType.getItemLibrary()){
+				if (itype is Armor){
+					var a:Armor = itype as Armor;
+					if (a.value == saveFile.data.armorValue &&
+							a.def == saveFile.data.armorDef &&
+							a.perk == saveFile.data.armorPerk){
+						player.setArmor(a,false,true);
+						//player.armor = a;
+						player.modArmorName = saveFile.data.armorName;
+						found = true;
+						break;
 					}
 				}
 			}
@@ -1916,151 +1751,63 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.teaseLevel = 0;
 		else
 			player.teaseLevel = saveFile.data.teaseLevel;
-		//Mastery
-		if (saveFile.data.masteryFeralCombatXP == undefined)
-			player.masteryFeralCombatXP = 0;
-		else
-			player.masteryFeralCombatXP = saveFile.data.masteryFeralCombatXP;
-		if (saveFile.data.masteryFeralCombatLevel == undefined)
-			player.masteryFeralCombatLevel = 0;
-		else
-			player.masteryFeralCombatLevel = saveFile.data.masteryFeralCombatLevel;
-		if (saveFile.data.masteryGauntletXP == undefined)
-			player.masteryGauntletXP = 0;
-		else
-			player.masteryGauntletXP = saveFile.data.masteryGauntletXP;
-		if (saveFile.data.masteryGauntletLevel == undefined)
-			player.masteryGauntletLevel = 0;
-		else
-			player.masteryGauntletLevel = saveFile.data.masteryGauntletLevel;
-		if (saveFile.data.masteryDaggerXP == undefined)
-			player.masteryDaggerXP = 0;
-		else
-			player.masteryDaggerXP = saveFile.data.masteryDaggerXP;
-		if (saveFile.data.masteryDaggerLevel == undefined)
-			player.masteryDaggerLevel = 0;
-		else
-			player.masteryDaggerLevel = saveFile.data.masteryDaggerLevel;
-		if (saveFile.data.masterySwordXP == undefined)
-			player.masterySwordXP = 0;
-		else
-			player.masterySwordXP = saveFile.data.masterySwordXP;
-		if (saveFile.data.masterySwordLevel == undefined)
-			player.masterySwordLevel = 0;
-		else
-			player.masterySwordLevel = saveFile.data.masterySwordLevel;
-		if (saveFile.data.masteryAxeXP == undefined)
-			player.masteryAxeXP = 0;
-		else
-			player.masteryAxeXP = saveFile.data.masteryAxeXP;
-		if (saveFile.data.masteryAxeLevel == undefined)
-			player.masteryAxeLevel = 0;
-		else
-			player.masteryAxeLevel = saveFile.data.masteryAxeLevel;
-		if (saveFile.data.masteryMaceHammerXP == undefined)
-			player.masteryMaceHammerXP = 0;
-		else
-			player.masteryMaceHammerXP = saveFile.data.masteryMaceHammerXP;
-		if (saveFile.data.masteryMaceHammerLevel == undefined)
-			player.masteryMaceHammerLevel = 0;
-		else
-			player.masteryMaceHammerLevel = saveFile.data.masteryMaceHammerLevel;
-		if (saveFile.data.masteryWhipXP == undefined)
-			player.masteryWhipXP = 0;
-		else
-			player.masteryWhipXP = saveFile.data.masteryWhipXP;
-		if (saveFile.data.masteryWhipLevel == undefined)
-			player.masteryWhipLevel = 0;
-		else
-			player.masteryWhipLevel = saveFile.data.masteryWhipLevel;
-		if (saveFile.data.masteryExoticXP == undefined)
-			player.masteryExoticXP = 0;
-		else
-			player.masteryExoticXP = saveFile.data.masteryExoticXP;
-		if (saveFile.data.masteryExoticLevel == undefined)
-			player.masteryExoticLevel = 0;
-		else
-			player.masteryExoticLevel = saveFile.data.masteryExoticLevel;
-		if (saveFile.data.masteryArcheryXP == undefined)
-			player.masteryArcheryXP = 0;
-		else
-			player.masteryArcheryXP = saveFile.data.masteryArcheryXP;
-		if (saveFile.data.masteryArcheryLevel == undefined)
-			player.masteryArcheryLevel = 0;
-		else
-			player.masteryArcheryLevel = saveFile.data.masteryArcheryLevel;
-		if (saveFile.data.masteryThrowingXP == undefined)
-			player.masteryThrowingXP = 0;
-		else
-			player.masteryThrowingXP = saveFile.data.masteryThrowingXP;
-		if (saveFile.data.masteryThrowingLevel == undefined)
-			player.masteryThrowingLevel = 0;
-		else
-			player.masteryThrowingLevel = saveFile.data.masteryThrowingLevel;
-		if (saveFile.data.masteryFirearmsXP == undefined)
-			player.masteryFirearmsXP = 0;
-		else
-			player.masteryFirearmsXP = saveFile.data.masteryFirearmsXP;
-		if (saveFile.data.masteryFirearmsLevel == undefined)
-			player.masteryFirearmsLevel = 0;
-		else
-			player.masteryFirearmsLevel = saveFile.data.masteryFirearmsLevel;
-		if (saveFile.data.masteryDuelingSwordXP == undefined)
-			player.masteryDuelingSwordXP = 0;
-		else
-			player.masteryDuelingSwordXP = saveFile.data.masteryDuelingSwordXP;
-		if (saveFile.data.masteryDuelingSwordLevel == undefined)
-			player.masteryDuelingSwordLevel = 0;
-		else
-			player.masteryDuelingSwordLevel = saveFile.data.masteryDuelingSwordLevel;
-		if (saveFile.data.masteryPolearmXP == undefined)
-			player.masteryPolearmXP = 0;
-		else
-			player.masteryPolearmXP = saveFile.data.masteryPolearmXP;
-		if (saveFile.data.masteryPolearmLevel == undefined)
-			player.masteryPolearmLevel = 0;
-		else
-			player.masteryPolearmLevel = saveFile.data.masteryPolearmLevel;
-		if (saveFile.data.masterySpearXP == undefined)
-			player.masterySpearXP = 0;
-		else
-			player.masterySpearXP = saveFile.data.masterySpearXP;
-		if (saveFile.data.masterySpearLevel == undefined)
-			player.masterySpearLevel = 0;
-		else
-			player.masterySpearLevel = saveFile.data.masterySpearLevel;
-		if (saveFile.data.dualWSXP == undefined)
-			player.dualWSXP = 0;
-		else
-			player.dualWSXP = saveFile.data.dualWSXP;
-		if (saveFile.data.dualWSLevel == undefined)
-			player.dualWSLevel = 0;
-		else
-			player.dualWSLevel = saveFile.data.dualWSLevel;
-		if (saveFile.data.dualWNXP == undefined)
-			player.dualWNXP = 0;
-		else
-			player.dualWNXP = saveFile.data.dualWNXP;
-		if (saveFile.data.dualWNLevel == undefined)
-			player.dualWNLevel = 0;
-		else
-			player.dualWNLevel = saveFile.data.dualWNLevel;
-		if (saveFile.data.dualWLXP == undefined)
-			player.dualWLXP = 0;
-		else
-			player.dualWLXP = saveFile.data.dualWLXP;
-		if (saveFile.data.dualWLLevel == undefined)
-			player.dualWLLevel = 0;
-		else
-			player.dualWLLevel = saveFile.data.dualWLLevel;
-		if (saveFile.data.dualWFXP == undefined)
-			player.dualWFXP = 0;
-		else
-			player.dualWFXP = saveFile.data.dualWFXP;
-		if (saveFile.data.dualWFLevel == undefined)
-			player.dualWFLevel = 0;
-		else
-			player.dualWFLevel = saveFile.data.dualWFLevel;
+/*
+       09 {combat: "Whip", 		level:0, experience:0, melee: true, desc:"<b>Dao of Whip</b>"},
+       10 {combat: "Exotic", 		level:0, experience:0, melee: true, desc:"<b>Dao of Exotic</b>"},
+       11 {combat: "Archery", 	level:0, experience:0, melee: false, desc:"\n<b>Dao of Archery</b>"},
+       12 {combat: "Throwing", 	level:0, experience:0, melee: false, desc:"<b>Dao of Throwing Weapons</b>"},
+       13 {combat: "Firearms", 	level:0, experience:0, melee: false, desc:"<b>Dao of Firearms</b>"},
+       14 {combat: "DualSmall", 	level:0, experience:0, melee: true, desc:"\n<b>Dual Wield Mastery - Small</b>"},
+       15 {combat: "DualNormal", 	level:0, experience:0, melee: true, desc:"<b>Dual Wield Mastery - Normal</b>"},
+       16 {combat: "DualLarge", 	level:0, experience:0, melee: true, desc:"<b>Dual Wield Mastery - Large</b>"},
+       17 {combat: "DualFirearm", level:0, experience:0, melee: false, desc:"<b>Dual Wield Mastery - Firearms</b>"},
+       18 {combat: "Small", 		level:0, experience:0, melee: true, desc:"\n<b>Weapon Mastery - Small</b>"},
+       19 {combat: "Normal", 		level:0, experience:0, melee: true, desc:"<b>Weapon Mastery - Normal</b>"},
+       20 {combat: "Large", 		level:0, experience:0, melee: true, desc:"<b>Weapon Mastery - Large</b>"},
+       21 {combat: "Range", 		level:0, experience:0, melee: false, desc:"<b>Weapon Mastery - Ranged</b>"}
+*/
+        //Mastery
+    	if(saveFile.data.combatMastery != undefined)
+        	player.loadCombatMastery(saveFile.data.combatMastery);
+        else {
+            if (saveFile.data.masteryFeralCombatXP != undefined) player.combatMastery[0].experience = saveFile.data.masteryFeralCombatXP;
+            if (saveFile.data.masteryFeralCombatLevel != undefined) player.combatMastery[0].level = saveFile.data.masteryFeralCombatLevel;
+            if (saveFile.data.masteryGauntletXP != undefined) player.combatMastery[1].experience = saveFile.data.masteryGauntletXP;
+            if (saveFile.data.masteryGauntletLevel != undefined) player.combatMastery[1].level = saveFile.data.masteryGauntletLevel;
+            if (saveFile.data.masteryDaggerXP != undefined) player.combatMastery[2].experience = saveFile.data.masteryDaggerXP;
+            if (saveFile.data.masteryDaggerLevel != undefined) player.combatMastery[2].level = saveFile.data.masteryDaggerLevel;
+            if (saveFile.data.masterySwordXP != undefined) player.combatMastery[3].experience = saveFile.data.masterySwordXP;
+            if (saveFile.data.masterySwordLevel != undefined) player.combatMastery[3].level = saveFile.data.masterySwordLevel;
+            if (saveFile.data.masteryAxeXP != undefined) player.combatMastery[4].experience = saveFile.data.masteryAxeXP;
+            if (saveFile.data.masteryAxeLevel != undefined) player.combatMastery[4].level = saveFile.data.masteryAxeLevel;
+            if (saveFile.data.masteryMaceHammerXP != undefined) player.combatMastery[5].experience = saveFile.data.masteryMaceHammerXP;
+            if (saveFile.data.masteryMaceHammerLevel != undefined) player.combatMastery[5].level = saveFile.data.masteryMaceHammerLevel;
+            if (saveFile.data.masteryDuelingSwordXP != undefined) player.combatMastery[6].experience = saveFile.data.masteryDuelingSwordXP;
+            if (saveFile.data.masteryDuelingSwordLevel != undefined) player.combatMastery[6].level = saveFile.data.masteryDuelingSwordLevel;
+            if (saveFile.data.masteryPolearmXP != undefined) player.combatMastery[7].experience = saveFile.data.masteryPolearmXP;
+            if (saveFile.data.masteryPolearmLevel != undefined) player.combatMastery[7].level = saveFile.data.masteryPolearmLevel;
+            if (saveFile.data.masterySpearXP != undefined) player.combatMastery[8].experience = saveFile.data.masterySpearXP;
+            if (saveFile.data.masterySpearLevel != undefined) player.combatMastery[8].level = saveFile.data.masterySpearLevel;
+            if (saveFile.data.masteryWhipXP != undefined) player.combatMastery[9].experience = saveFile.data.masteryWhipXP;
+            if (saveFile.data.masteryWhipLevel != undefined) player.combatMastery[9].level = saveFile.data.masteryWhipLevel;
+            if (saveFile.data.masteryExoticXP != undefined) player.combatMastery[10].experience = saveFile.data.masteryExoticXP;
+            if (saveFile.data.masteryExoticLevel != undefined) player.combatMastery[10].level = saveFile.data.masteryExoticLevel;
+            if (saveFile.data.masteryArcheryXP != undefined) player.combatMastery[11].experience = saveFile.data.masteryArcheryXP;
+            if (saveFile.data.masteryArcheryLevel != undefined) player.combatMastery[11].level = saveFile.data.masteryArcheryLevel;
+            if (saveFile.data.masteryThrowingXP != undefined) player.combatMastery[12].experience = saveFile.data.masteryThrowingXP;
+            if (saveFile.data.masteryThrowingLevel != undefined) player.combatMastery[12].level = saveFile.data.masteryThrowingLevel;
+            if (saveFile.data.masteryFirearmsXP != undefined) player.combatMastery[13].experience = saveFile.data.masteryFirearmsXP;
+            if (saveFile.data.masteryFirearmsLevel != undefined) player.combatMastery[13].level = saveFile.data.masteryFirearmsLevel;
+            if (saveFile.data.dualWSXP != undefined) player.combatMastery[14].experience = saveFile.data.dualWSXP;
+            if (saveFile.data.dualWSLevel != undefined) player.combatMastery[14].level = saveFile.data.dualWSLevel;
+            if (saveFile.data.dualWNXP != undefined) player.combatMastery[15].experience = saveFile.data.dualWNXP;
+            if (saveFile.data.dualWNLevel != undefined) player.combatMastery[15].level = saveFile.data.dualWNLevel;
+            if (saveFile.data.dualWLXP != undefined) player.combatMastery[16].experience = saveFile.data.dualWLXP;
+            if (saveFile.data.dualWLLevel != undefined) player.combatMastery[16].level = saveFile.data.dualWLLevel;
+            if (saveFile.data.dualWFXP != undefined) player.combatMastery[17].experience = saveFile.data.dualWFXP;
+            if (saveFile.data.dualWFLevel != undefined) player.combatMastery[17].level = saveFile.data.dualWFLevel;
+        }
+
 		//Mining
 		if (saveFile.data.miningXP == undefined)
 			player.miningXP = 0;
@@ -2079,70 +1826,18 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.herbalismLevel = 0;
 		else
 			player.herbalismLevel = saveFile.data.herbalismLevel;
-		//Prison STATS
+		//Hunger
 		if (saveFile.data.hunger == undefined)
 			player.hunger = 50;
 		else
 			player.hunger = saveFile.data.hunger;
-		if (saveFile.data.esteem == undefined)
-			player.esteem = 50;
-		else
-			player.esteem = saveFile.data.esteem;
-		if (saveFile.data.obey == undefined)
-			player.obey = 0;
-		else
-			player.obey = saveFile.data.obey;
-		if (saveFile.data.will == undefined)
-			player.will = 50;
-		else
-			player.will = saveFile.data.will;
-		if (saveFile.data.obeySoftCap == undefined)
-			player.obeySoftCap = true;
-		else
-			player.obeySoftCap = saveFile.data.obeySoftCap;
-		//Prison storage
-		//Items
-		if (saveFile.data.prisonItems == undefined) {
-			trace("Not found");
-			player.prisonItemSlots = [];
-		}
-		else {
-			trace("Items FOUND!");
-			//for (var k:int = 0; k < 10; i++) {
-				player.prisonItemSlots = saveFile.data.prisonItems;
-			//}
-		}
-		//Armour
-		/*if (saveFile.data.prisonArmor == undefined) {
-			trace("Armour not found");
-			prison.prisonItemSlotArmor = null;
-		}
-		else {
-			trace("Armour FOUND!");
-			if (saveFile.data.prisonArmor is ItemType) {
-				trace("Loading prison armour");
-				prison.prisonItemSlotArmor = saveFile.data.prisonArmor;
-			}
-		}
-		//Weapon
-		if (saveFile.data.prisonWeapon == undefined) {
-			trace("Weapon not found");
-			prison.prisonItemSlotWeapon = null;
-		}
-		else {
-			trace("Weapon FOUND!");
-			if (saveFile.data.prisonWeapon is ItemType) {
-				trace("Loading prison weapon");
-				prison.prisonItemSlotWeapon = saveFile.data.prisonWeapon;
-			}
-		}*/
 		//LEVEL STATS
 		player.XP = saveFile.data.XP;
 		player.gems = saveFile.data.gems || 0;
 		if (saveFile.data.perkPoints == undefined)
 			player.perkPoints = 0;
-		else
-			player.perkPoints = saveFile.data.perkPoints;
+		else if (spillyFix) player.perkPoints = player.level - saveFile.data.perks.length;
+		else player.perkPoints = saveFile.data.perkPoints;
 
 		if (saveFile.data.superPerkPoints == undefined)
 			player.superPerkPoints = 0;
@@ -2189,8 +1884,8 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		else
 			player.thickness = saveFile.data.thickness;
 
-		player.tallness = saveFile.data.tallness;
-		player.hairColor = saveFile.data.hairColor;
+
+            player.tallness = saveFile.data.tallness;
 		if (saveFile.data.hairType == undefined)
 			player.hairType = Hair.NORMAL;
 		else
@@ -2212,6 +1907,26 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		player.clawsPart.loadFromSaveData(data);
 		player.facePart.loadFromSaveData(data);
 		player.tail.loadFromSaveData(data);
+		if (data.bodyMaterials == undefined) {
+			player.hairColor = data.hairColor;
+			if (data.skin && data.skin.base && data.skin.coat) {
+				player.furColor        = player.hairColor;
+				player.skin.base.color = data.skin.base.color;
+				player.skin.coat.color = data.skin.coat.color;
+			} else {
+				player.skinColor = stringOr(data.skinTone, player.skinColor);
+				player.furColor  = stringOr(data.furColor, player.furColor);
+				player.chitinColor       = stringOr(data.chitinColor, player.chitinColor);
+				player.scaleColor        = stringOr(data.scalesColor, player.scaleColor);
+			}
+			
+		} else {
+			for (i = 0; i < player.bodyMaterials.length; i++) {
+				if (data.bodyMaterials[i]) {
+					player.bodyMaterials[i].loadFromObject(data.bodyMaterials[i], false);
+				}
+			}
+		}
 		if (saveFile.data.armType == undefined)
 			player.arms.type = Arms.HUMAN;
 		else
@@ -2386,15 +2101,11 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 
 		//This below is some weird witchcraft.... It doesn't update/swap anything, but somehow this fixes the id mismatch from mutations?
 		var mutationsShift:Array = [];
-		for each (var pperk1:PerkType in MutationsLib.mutationsArray("All",true)){
-			mutationsShift.push(pperk1.id);
-		}
 		for each (var pPerk2:IMutationPerkType in IMutationsLib.mutationsArray("All")){
 			mutationsShift.push(pPerk2.id);
 		}
 		mutationsShift.push(IMutationsLib.MutationsTemplateIM.id);
 		//Possibly ID updating.
-
 
 		//Populate Perk Array
 		for (i = 0; i < saveFile.data.perks.length; i++)
@@ -2418,15 +2129,17 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				id = "Lusty Regeneration";
 				hasLustyRegenPerk = true;
 			}
-
 			// Some shit checking to track if the incoming data has an available History perk
 			if (id.indexOf("History:") != -1) {
 				hasHistoryPerk = true;
 			}
 
+			//Mutations will be handled there instead.
+			if (MutationsLib.mutationsUpdate(id)) continue;
+
 			var ptype:PerkType = PerkType.lookupPerk(id);
 			if (ptype == null) {
-				CoC_Settings.error("Unknown perk id=" + id);
+				CoC_Settings.error("Unknown perk id: " + id);
 				//(saveFile.data.perks as Array).splice(i,1);
 				// NEVER EVER EVER MODIFY DATA IN THE SAVE FILE LIKE THIS. EVER. FOR ANY REASON.
 			} else {
@@ -2565,6 +2278,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 				inventory.createStorage();
 				var storage:ItemSlotClass = itemStorageGet()[i];
 				var savedIS:* = saveFile.data.itemStorage[i];
+				storage.unlocked = savedIS.unlocked;
 				if (savedIS.shortName)
 				{
 					if (savedIS.shortName.indexOf("Gro+") != -1)
@@ -2576,7 +2290,6 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 					storage.setItemAndQty(ItemType.lookupItem(savedIS.id || savedIS.shortName), savedIS.quantity);
 				else
 					storage.emptySlot();
-				storage.unlocked = savedIS.unlocked;
 			}
 		}
 
@@ -2590,7 +2303,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		{
 			for (i = 0; i < saveFile.data.pearlStorage.length && pearlStorageGet().length < 98; i++)
 			{
-				pearlStorageGet().push(new ItemSlotClass());
+				pearlStorageGet().push(new ItemSlotClass(ItemSlotClass.STORAGE_PEARL));
 					//trace("Initialize a slot for one of the item storage locations to load.");
 			}
 			//Populate storage slot array
@@ -2598,13 +2311,13 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			{
 				//trace("Populating a storage slot save with data");
 				storage = pearlStorageGet()[i];
+				storage.unlocked = saveFile.data.pearlStorage[i].unlocked;
 				if ((saveFile.data.pearlStorage[i].shortName == undefined && saveFile.data.pearlStorage[i].id == undefined)
                         || saveFile.data.pearlStorage[i].quantity == undefined
 						|| saveFile.data.pearlStorage[i].quantity == 0)
 					storage.emptySlot();
 				else
 					storage.setItemAndQty(ItemType.lookupItem(saveFile.data.pearlStorage[i].id || saveFile.data.pearlStorage[i].shortName),saveFile.data.pearlStorage[i].quantity);
-				storage.unlocked = saveFile.data.pearlStorage[i].unlocked;
 			}
 		}
 
@@ -2626,20 +2339,20 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			{
 				//trace("Populating a storage slot save with data");
 				storage = gearStorageGet()[i];
+				storage.unlocked = saveFile.data.gearStorage[i].unlocked;
 				if ((saveFile.data.gearStorage[i].shortName == undefined && saveFile.data.gearStorage[i].id == undefined)
                         || saveFile.data.gearStorage[i].quantity == undefined
 						|| saveFile.data.gearStorage[i].quantity == 0)
 					storage.emptySlot();
 				else
 					storage.setItemAndQty(ItemType.lookupItem(saveFile.data.gearStorage[i].id || saveFile.data.gearStorage[i].shortName),saveFile.data.gearStorage[i].quantity);
-				storage.unlocked = saveFile.data.gearStorage[i].unlocked;
 			}
 		}
 
 		//Set soulforce
 		if (saveFile.data.soulforce == undefined) player.soulforce = 25;
 		//Set wisdom
-		if (saveFile.data.wis == undefined) player.wisStat.core.value = 15;
+		if (saveFile.data.wis == undefined) player.wisStat.train.value = 15;
 		//Set wrath
 		if (saveFile.data.wrath == undefined) player.wrath = 0;
 		//Set mana
@@ -2849,7 +2562,9 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 
 		player.updateRacialAndPerkBuffs();
 		doNext(playerMenu);
+		EventParser.badEnded = false; //reset bad end if we're going from it
 	}
+	game.isLoadingSave = false;
 }
 
 public function unFuckSave():void
@@ -2867,7 +2582,6 @@ public function unFuckSave():void
 		}
 	}
 	while (player.perkDuplicated(PerkLib.NinetailsKitsuneOfBalance)) player.removePerk(PerkLib.NinetailsKitsuneOfBalance);
-	while (player.perkDuplicated(MutationsLib.KitsuneThyroidGland)) player.removePerk(MutationsLib.KitsuneThyroidGland);
 
 	if (player.hasStatusEffect(StatusEffects.KnockedBack))
 	{
@@ -3085,7 +2799,7 @@ public function unFuckSave():void
 	if (player.hasKeyItem("Laybans") >= 0) {
 		flags[kFLAGS.D3_MIRRORS_SHATTERED] = 1;
 	}
-	flags[kFLAGS.SHIFT_KEY_DOWN] = 0;
+	shiftKeyDown = false;
 }
 
     private function saveAllAwareClasses(game:CoC):void {

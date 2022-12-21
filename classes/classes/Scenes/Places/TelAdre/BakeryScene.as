@@ -6,11 +6,6 @@ import classes.Scenes.SceneLib;
 
 public class BakeryScene extends TelAdreAbstractContent {
 
-	public function BakeryScene()
-	{
-	}
-// LAST_EASTER_YEAR:int = 823;
-
 //[First time approach]
 public function bakeryuuuuuu():void {
 	if(isEaster() && player.hasCock() && (flags[kFLAGS.LAST_EASTER_YEAR] < date.fullYear || rand(20) == 0)) {
@@ -18,19 +13,19 @@ public function bakeryuuuuuu():void {
 		easterBakeSale();
 		return;
 	}
-	if(rand(10) <= 1 && SceneLib.shouldraFollower.followerShouldra() && player.gender > 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00242] == 4) {
+	if(rand(10) <= 1 && SceneLib.shouldraFollower.followerShouldra() && player.gender > 0 && flags[kFLAGS.MADDIE_QUEST_STATE] == 4) {
 		SceneLib.shouldraFollower.shouldraBakeryIntro();
 		return;
 	}
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00243]++;
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00243] = Math.round(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00243]);
+	flags[kFLAGS.MADDIE_OFFER_COUNTER]++;
+	flags[kFLAGS.MADDIE_OFFER_COUNTER] = Math.round(flags[kFLAGS.MADDIE_OFFER_COUNTER]);
 	//Chef meetings
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00242] == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00243] % 8 == 0) {
+	if(flags[kFLAGS.MADDIE_QUEST_STATE] == 0 && flags[kFLAGS.MADDIE_OFFER_COUNTER] % 8 == 0) {
 		telAdre.maddie.procMaddieOneIntro();
 		return;
 	}
 	//Maddie Epilogue trigger!
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00242] == 3) {
+	if(flags[kFLAGS.MADDIE_QUEST_STATE] == 3) {
 		telAdre.maddie.bakeryEpilogue();
 		return;
 	}
@@ -44,8 +39,8 @@ public function bakeryuuuuuu():void {
 	else {
 		//Kanga christmas!
 		if(Holidays.nieveHoliday()) {
-			Holidays.encounterKamiTheChristmasRoo();
-			if(flags[kFLAGS.KAMI_ENCOUNTER] == 1) addButton(3,"Pudding",Holidays.getWinterPudding);
+			SceneLib.holidays.encounterKamiTheChristmasRoo();
+			if(flags[kFLAGS.KAMI_ENCOUNTER] == 1) addButton(3,"Pudding",SceneLib.holidays.getWinterPudding);
 		}
 		//Normal repeats!
 		else outputText("You step into the bakery's domed interior and inhale, treated to a symphony of pleasant smells and the cozy warmth that radiates from the baking ovens.  There are plenty of tables and chairs around for one to eat at, and you find yourself stepping into line while you glance at the menu.\n\n");
@@ -60,13 +55,10 @@ public function bakeryuuuuuu():void {
 
 private function checkBakeryMenu():void {
 	clearOutput();
-	//var used for minotaur cum eclair in the menu
-	var minoCum:Function = null;
-	var gcupcake:Function = null;
 	//Turn on cum eclairs if PC is an addict!
 	if(player.hasPerk(PerkLib.MinotaurCumAddict) && flags[kFLAGS.MINOTAUR_CUM_ECLAIR_UNLOCKED] == 0) {
 		flags[kFLAGS.MINOTAUR_CUM_ECLAIR_UNLOCKED]++;
-		outputText("While you're in line, a shaking centauress glances at you and whispers, \"<i>You need some too, don't ya hun?</i>\"  You look on in confusion, not really sure what she's insinuating.  Her eyes widen and she asks, \"<i>Aren't you addicted?</i>\" You nod, dumbly, and she smiles knowingly.  \"<i>There's a minotaur that works here with a bit of a fetish... just order a special eclair and he'll fix you right up.  Just keep it on the hush hush and hope there's some left after I get my dozen.</i>\"  The centaur licks her lips and prances around impatiently.\n\n");
+		outputText("While you're in line, a shaking centauress glances at you and whispers, \"<i>You need some too, don't ya hun?</i>\"  You look on in confusion, not really sure what she's insinuating.  Her eyes widen and she asks, \"<i>Aren't you addicted?</i>\" You nod, dumbly, and she smiles knowingly.  \"<i>There's a minotaur that works here with a bit of a fetish... just order a special eclair and he'll fix you right up.  Just keep it on the hush and hope there's some left after I get my dozen.</i>\"  The centaur licks her lips and prances around impatiently.\n\n");
 	}
 	//(display menu)
 	//Generic baked goods
@@ -98,7 +90,7 @@ private function checkBakeryMenu():void {
 		addButton(8, "SpecialEclair", nomnomnom, "eclair", 10);
 	}
 	//Giant Cupcake
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00242] >= 4) {
+	if(flags[kFLAGS.MADDIE_QUEST_STATE] >= 4) {
 		outputText("Giant Chocolate Cupcake - 500 gems.\n");
 		addButton(9, "GiantCupcake", buySlutCake);
 	}
@@ -136,12 +128,12 @@ private function talkToBaker():void {
 	clearOutput();
 	outputText("The minotaur snorts as you approach him, but waves you into the kitchen.  \"<i>What?</i>\" he asks, patiently watching you.  \"<i>Want to hear about baking?");
 	//(Maddie 1 completed)
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00242] >= 4) outputText("  Or you want special order?");
+	if(flags[kFLAGS.MADDIE_QUEST_STATE] >= 4) outputText("  Or you want special order?");
 	outputText("</i>\"");
 	outputText("\n\nDespite his unrefined appearance and poor language ability, he seems eager to talk about his job.");
 
-	//[Brownie][Cookie][Cupcake][Doughnut][Pound Cake][Fox Berry][Ringtail Fig][Mouse Cocoa][Nevermind]
-	//[Nevermind] goes back to bakery main menu and is spacebar default
+	//[Brownie][Cookie][Cupcake][Doughnut][Pound Cake][Fox Berry][Ringtail Fig][Mouse Cocoa][Never mind]
+	//[Never mind] goes back to bakery main menu and is spacebar default
 	//all purchases offered after talking should spacebar to [No] and go to normal purchase output if [Yes], returning to bakery main menu afterward
 	menu();
 	addButton(0,"Brownie",talkAboutBrownies);
@@ -153,7 +145,7 @@ private function talkToBaker():void {
 	addButton(6,"Ringtail Fig",talkAFig);
 	addButton(7,"Mouse Cocoa", talkAboutMouseCocoa);
 	addButton(8,"R.Rvr Root",talkAboutRoot);
-	addButton(14,"Nevermind", talkBakeryMenu);
+	addButton(14,"Never mind", talkBakeryMenu);
 }
 
 //[Bakery - Talk - Baker - Brownie]
@@ -186,7 +178,7 @@ private function talkAboutCupcakes():void {
 
 	outputText("\n\n\"<i>Then,</i>\" he sighs, \"<i>make icing.  Soften butter, add milk and sugar and berry juice, beat mixture.  Beat a long time.  Beat until arm tired.  Spread on cupcakes when they come out.</i>\"");
 
-	outputText("\n\n\"<i>Too popular, too cheap.  Always making cupcakes, no time to experiment on recipes.  Want to raise price but cupcakes are best seller and customers get mad.</i>\"  A bell rings.  Sighing again, he walks over to the oven and opens it, then pulls out a tray of un-iced cupcakes.  \"<i>See?  Making now.  You buying one?  Four... no, still three gems I guess.</i>\"");
+	outputText("\n\n\"<i>Too popular, too cheap.  Always making cupcakes, no time to experiment on recipes.  Want to raise price but cupcakes are bestseller and customers get mad.</i>\"  A bell rings.  Sighing again, he walks over to the oven and opens it, then pulls out a tray of un-iced cupcakes.  \"<i>See?  Making now.  You buying one?  Four... no, still three gems I guess.</i>\"");
 	//[Yes][No]
 	menu();
 	addButton(0,"Yes",createCallBackFunction2(nomnomnom, "cupcakes", 3));
@@ -315,7 +307,7 @@ private function buyRoot():void {
 	outputText("You pay fourteen gems for the root.  ");
 	player.gems -= 14;
 	statScreenRefresh();
-	if (flags[kFLAGS.SHIFT_KEY_DOWN] == 1) {
+	if (shiftKeyDown) {
 		consumables.RDRROOT.useItem();
 		doNext(ingredientsMenu);
 	}
@@ -343,11 +335,11 @@ private function talkBakeryMenu():void {
 	if(Holidays.nieveHoliday()) {
 		if(flags[kFLAGS.KAMI_ENCOUNTER] > 0) {
 			outputText("\nYou could 'burn off some steam' with Kami during her lunch break, since you already know how that'll end up!\n");
-			addButton(2,"Kami",Holidays.approachKamiTheChristmasRoo);
+			addButton(2,"Kami",SceneLib.holidays.approachKamiTheChristmasRoo);
 		}
 		else {
 			outputText("\nYou could summon the curvaceous kangaroo waitress you ran into earlier - perhaps you can win her over.\n");
-			addButton(2,"Kangaroo",Holidays.approachKamiTheChristmasRoo);
+			addButton(2,"Kangaroo",SceneLib.holidays.approachKamiTheChristmasRoo);
 		}
 	}
 	outputText("\nYou see a bubblegum-pink girl at the bakery, walking around and eagerly trying to hand out fliers to people. Her \"uniform\" is more like a yellow bikini with frills circling the waist of the bottom half. If this didn’t make her stand out from the crowd then her hair certainly would; it’s a big, poofy, curly, dark pink mess that reaches down to her ass with a huge cupcake hat sitting on top.\n");
@@ -378,7 +370,7 @@ public function nomnomnom(name:String,price:Number):void {
 		else if(player.femininity <= 25) outputText("females squirm");
 		else outputText("other patrons squirm and fill out their pants");
 		outputText(", none of them tries to make a move.  Pity.");
-		dynStats("lus", (20+player.lib/10));
+		dynStats("lus", (20+player.lib/10), "scale", false);
 		player.minoCumAddiction(10);
 		player.refillHunger(20);
 	}
@@ -543,9 +535,9 @@ private function easterBakeSaleHelp():void {
 	//(if the pc is male)
 	if(player.gender == 1) outputText("[eachCock] jumps to full hardness.");
 	//(if the pc is female)
-	else if(player.hasVagina()) outputText("your nipples stiffening noticeably, while your [vagina] prepares for what's to come.");
+	else if(player.gender == 2) outputText("your nipples stiffening noticeably, while your [vagina] prepares for what's to come.");
 	//(if the pc is a herm)
-	else outputText("[eachCock jumping to full hardness, your nipples and [vagina] not far behind in getting ready for your encounter.");
+	else outputText("[eachCock] jumping to full hardness, your nipples and [vagina] not far behind in getting ready for your encounter.");
 	outputText("\n\nThe euphoria from your earlier drink fades, replaced by a more animalistic need.");
 	menu();
 	addButton(0,"Next",malesHelpOutWithEaster);
@@ -554,8 +546,8 @@ private function easterBakeSaleHelp():void {
 //[Male]
 private function malesHelpOutWithEaster():void {
 	clearOutput();
-	outputText("A idea crosses your mind; why not have the molten girl help you with your problem?  As if reading your mind, the girl continues her way to you, making her way with her eyes locked on your [cock biggest].  She is upon you now, flaccid streams drooling off her hand as she makes to grab your cock.  A heated pressure envelopes your shaft");
-	if(player.balls > 0) outputText(", sticky drops of chocolate trailing down your [balls]");
+	outputText("An idea crosses your mind; why not have the molten girl help you with your problem?  As if reading your mind, the girl continues her way to you, making her way with her eyes locked on your [cock biggest].  She is upon you now, flaccid streams drooling off her hand as she makes to grab your cock.  A heated pressure envelopes your shaft");
+	if(player.hasBalls()) outputText(", sticky drops of chocolate trailing down your [balls]");
 	outputText(", each movement a not unpleasant sensation as the warmth infuses you.  The center of the pressure loosens, and your chocolate partner takes it upon herself to pin you to the floor, her warmness surrounding you.  Almost immediately you feel a similar pressure to the previous upon your groin, pulsating now as if stroking your cock in earnest.  You work out that she has enveloped your rod in what you assume is a vagina.  As if to confirm your suspicions, your captor lets out a small moan, increasing the fervor with which she rings out your dong.");
 	outputText("\n\nUnable now to contain your own lust, you start idly pumping into her velvety depths, the extreme warmth of which does nothing to discourage you.  Delighted by your newfound vigor, the mass riding you lets a sound out halfway between a squeal and a moan, increasing the vehemence of her own ministrations.  You pull your hand free from its prison only to thrust it higher up, gripping the highly malleable breast of the buxom girl.  Increasing the intensity of your pelvic endeavor, you elicit another moan from the bodacious vixen's lips, only adding fuel to your frenzied motions.  Jamming into her depths, intense heat assaults your body.  As if setting a spark to kindling, a torrid wave sweeps through you before you realize you are towards your limit.");
 	outputText("\n\nDecided on making your mate peak before you, your attention turns to bringing pleasure from your awkward thrusts into her depths.  Finding your current position lacking the dominance you need for your vision, you struggle out from beneath the heated woman, leaving her confused with her ass in the air.  Satisfied with your new arrangement, you take up position behind her and push your hand into her pussy, testing its plasticity.  Wasting no more time, you line up your [cock biggest] with the woman's opening and administer your entire length in a quick thrust.  The woman openly moans from your treatment of her depths.  Still remembering your goal, you bring your hand down and find a harder globule of chocolate that must be her clitoris.  While passively administering jabs into her pussy, you concentrate your fingers on her love button, rubbing with both tenderness and vigor.  Moaning openly now, the girl lets out a keening wail that puts you dangerously close to the edge yourself.  With a final burst of energy you aren't sure you can afford, you begin plunging into her silky breach with near desperation.");
@@ -569,7 +561,7 @@ private function malesHelpOutWithEaster():void {
 	//(med cum vol)
 	else if(player.cumQ() < 500) outputText("\n\nYour cock shoots out several significant streams of seed, filling your partner's deepness while a small amount dribbles out.");
 	//(large cum vol)
-	else if(player.cumQ() < 1000) outputText("Your cock spews out a significant amount of seed, filling your partners deepness quickly while a small volume shoots out with some force.  You are happy to see that she seems to have gained a little weight from your baby-batter.");
+	else if(player.cumQ() < 1000) outputText("Your cock spews out a significant amount of seed, filling your partner's deepness quickly while a small volume shoots out with some force.  You are happy to see that she seems to have gained a little weight from your baby-batter.");
 	//(very large cum vol)
 	else if(player.cumQ() < 5000) outputText("Your cock spews into your partner's deepness, filling it almost instantly while a significant volume splatters out.  You are happy to see she seems to have gained a little weight from your baby-batter.");
 	else outputText("Your cock opens like a river, streaming into your partner with such force that her belly distends.  A spew begins to erupt from her vagina, empting the significant amount she could not take on to the floor.  You are happy to see she has gained some weight from your baby-batter.");

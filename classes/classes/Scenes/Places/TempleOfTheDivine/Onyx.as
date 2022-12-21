@@ -39,7 +39,7 @@ use namespace CoC;
 			outputText(" to the stone floor as [onyx ey] lowers a hand to your " + (player.hasCock() ? "[cock]" : "[cunt]"));
 			outputText(".\n\n[onyx Ey] gently and slowly " + (player.hasCock() ? "strokes" : "fingers") + " you until you're quite aroused and nearly as hot as [onyx ey] is, fawning over you for some time, wanting you to feel [onyx eir] appreciation and affection while getting you ready for what comes next.\n\n");
 			sceneHunter.print("Most scenes have variations for Gargoyle PC.");
-			player.dynStats("lus", 50);
+			player.dynStats("lus", 50, "scale", false);
 			//menu
 			menu();
 			addButtonIfTrue(0, "Tail Fuck", KrystalOnyxTailFuck, "Req. a vagina",
@@ -67,7 +67,7 @@ use namespace CoC;
 			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her stone breasts mashing against your chest as she");
 			else outputText("His rock hard cock across your chest as he");
 			outputText(" looks behind you both and slowly moves [onyx eir] tail toward your [cunt]. [onyx Ey] tickles your entrance for a moment with [onyx eir] tip, giving you a cute smile and making you gasp as [onyx ey] slowly inserts [onyx eir] tail into your snatch. You grow more aroused as [onyx ey] proceeds deeper and deeper until [onyx ey] reaches your cervix. You're filled so perfectly by [onyx eir] tail, despite the fact [onyx ey] is not moving the warmth and girth of [onyx eir] stone tail alone is enough to make you gasp.\n\n[onyx Ey] starts to slide [onyx eir] tail in and out of you, taking [onyx eir] time to tickle every sensitive spot inside your moist depths. [onyx Ey] seems to enjoy this as well since [onyx ey] moans lustily, and you assume that it's very likely in [onyx eir] former form [onyx ey] had developed a fetish for tail fucking to the point [onyx eir] tail is as responsive as a man's penis.\n\nSince [onyx ey] seems to be getting off on [onyx eir] own, you allow yourself to focus your mind on your own pleasure as [onyx ey] slowly but certainly brings you to the edge. A few seconds later you are both orgasming in perfect synchronization as you squirt all along [onyx eir] tail length. With a content smile you doze off next to [onyx em] in a scene of lovemaking fit for a master artist to paint in a fresco.\n\nYou wake up a while later and redress, heading back to camp.\n\n");
-			player.sexReward("Default", "Default", true, false);
+			player.sexReward("no");
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -79,7 +79,7 @@ use namespace CoC;
 			outputText("Soon you climax ");
 			if (player.isGargoyle()) outputText("and petrify along with Krystal, both of your bodies frozen in place for some time. You regain consciousness a while later and give her still frozen form a parting kiss as you head back to camp.\n\n");
 			else outputText("and cover Krystal's stone pussy with your girl cum. Krystal petrifies from the orgasm, frozen with an expression of extreme pleasure as you doze off on your statuesque lover. When you wake up, you give her still frozen form a parting kiss as you head back to camp.\n\n");
-			player.sexReward("Default", "Default", true, false);
+			player.sexReward("no");
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -116,7 +116,7 @@ use namespace CoC;
 			}
 			outputText(" You doze off tired and wake up an hour later, your mouth still where you left it. You resolve to pull it off [onyx name] who, still petrified in pleasure, will likely come to later.\n\n");
 			outputText("For now, you proceed to redress and head back to camp.\n\n");
-			player.sexReward("Default", "Default", true, false);
+			player.sexReward("no");
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -154,7 +154,7 @@ use namespace CoC;
 				outputText(" for several minutes as you calm down and recover your senses, then push [onyx eir] still frozen form off of you. Wow, what a fuck! If you didn’t know any better, you think you might get addicted to [onyx eir] dick.\n\n");
 				outputText("You head back to camp, giving the unconscious gargoyle a parting kiss.\n\n");
 			}
-			player.sexReward("Default", "Default", true, false);
+			player.sexReward("no");
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -182,7 +182,7 @@ use namespace CoC;
 				outputText("Eventually, an hour later you manage to slide out, a massive trail of cum following suit as you kept fucking her in your attempt to get free from her stony snatch.\n\n");
 				outputText("You proceed to redress and head back to camp.\n\n");
 			}
-			player.sexReward("Default", "Default", true, false);
+			player.sexReward("no");
 			doNext(camp.returnToCampUseOneHour);
 		}
 

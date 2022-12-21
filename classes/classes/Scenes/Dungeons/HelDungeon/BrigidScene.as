@@ -17,7 +17,7 @@ public class BrigidScene extends BaseContent
 		public function pcDefeatsBrigid():void {
 			clearOutput();
 			outputText("The harpy jailer collapses, ");
-			if(monster.lust >= monster.maxLust()) outputText("too turned on");
+			if(monster.lust >= monster.maxOverLust()) outputText("too turned on");
 			else outputText("too badly beaten");
 			outputText(" to continue the fight.  You quickly snatch the keys from inside her shield, and hook them onto your own belt.");
 			//(New Key Item: Harpy Key A)
@@ -84,7 +84,7 @@ public class BrigidScene extends BaseContent
 						outputText("\n\nYour eyes widen in shock at the sensation, and Kiri flinches at your expression.  \"<i>What,</i>\" Brigid asks, glowering at you, \"<i>did you think we'd let you go after what you did, just because we couldn't breed you?");
 						if (player.pregnancyIncubation > 0) outputText("  Once this disgusting thing you're carrying falls out of you, we'll use you more traditionally, but...</i>\"  She pauses to press uncomfortably on your pregnant belly, then resumes speaking.  \"<i>I have no intention of letting you sit idle for however long that takes.");
 						outputText("  For now, I've given you the most obvious modification - I can think of something else later.</i>\"");
-						outputText("\n\nShe squeezes Kiri's ass firmly with one hand, and lifts the girl partway out of your lap.  A smooth, hot sensation separates from your crotch and glides along nerves you hadn't noticed until now as Kiri's pussy slides upward, partially revealing the erect, " + player.skinTone + " flesh of a brand-new cock!  Brigid gloats at your confusion, laughing her delight to the roof of the chamber, then shoves Kiri's ass downward again, spearing her pussy on your new flesh and making the girl wince and grit her teeth.");
+						outputText("\n\nShe squeezes Kiri's ass firmly with one hand, and lifts the girl partway out of your lap.  A smooth, hot sensation separates from your crotch and glides along nerves you hadn't noticed until now as Kiri's pussy slides upward, partially revealing the erect, [color] flesh of a brand-new cock!  Brigid gloats at your confusion, laughing her delight to the roof of the chamber, then shoves Kiri's ass downward again, spearing her pussy on your new flesh and making the girl wince and grit her teeth.");
 						player.createCock();
 					}
 					outputText("\n\nThe jailer slaps the small half-breed on the butt, sending a pleasing tremor through your cock, then withdraws to a stool in the corner.  \"<i>Fuck... or I'll make you fuck,</i>\" she declares ominously, casting her riding crop aside and beckoning another harpy over.  She picks up a worn journal as the other woman sits on her leg, then begins turning the pages with a thumb as she plays with the harpy's pussy.  \"<i>Watch them for me, sweet,</i>\" Brigid says, kissing the woman on the neck.  \"<i>Make sure they do their jobs while I'm studying mom's notes.</i>\"  Her lover shivers and nods nervously, fixing her eyes on you.");

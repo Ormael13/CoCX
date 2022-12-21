@@ -1,10 +1,10 @@
 package classes.Items.Consumables
 {
-	import classes.GlobalFlags.kFLAGS;
-	import classes.Items.Consumable;
-	import classes.StatusEffects;
+import classes.GlobalFlags.kFLAGS;
+import classes.Items.Consumable;
+import classes.StatusEffects;
 
-	/**
+/**
 	 * Item that triggers succubus events.
 	 */
 	public class CeruleanPotion extends Consumable
@@ -24,7 +24,7 @@ package classes.Items.Consumables
 			if (player.gender == 0 && flags[kFLAGS.CERULEAN_POTION_NEUTER_ATTEMPTED] > 0) {
 				outputText("You take another sip of the Cerulean Potion.  You find it soothing and become very excited about the possibility of another visit from the succubus.");
 			}
-			else if (player.gender == 3 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00111] > 0) {
+			else if (player.gender == 3 && flags[kFLAGS.SCYLLA_CATS_RECALL_TRACKER] > 0) {
 				outputText("With anticipation, you chug down another bottle of the Cerulean Potion. A warm sensation radiates out from your stomach as you feel the potion course through your body.");
 			}
 			//All else

@@ -3,7 +3,6 @@ package classes.Scenes.Camp
 import classes.*;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
-import classes.Scenes.Camp;
 import classes.Scenes.Crafting;
 import classes.Scenes.SceneLib;
 
@@ -13,7 +12,7 @@ import classes.Scenes.SceneLib;
 	 */
 	public class CabinProgress extends BaseContent {
 		
-		public var maxNailSupply:int = 750;
+//		public var maxNailSupply:int = 750;
 		public function get maxWoodSupply():int {
 			if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3) return 1200;
 			return 400;
@@ -44,49 +43,19 @@ import classes.Scenes.SceneLib;
 			}
 			if (player.fatigue <= player.maxFatigue() - 50)
 			{
-				if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 1) { 
-					startWork();
-					return; 
-				}
-				if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 2) { 
-					startLayout();
-					return; 
-				}
-				if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 3) { 
-					startThinkingOfMaterials();
-					return; 
-				}
-				if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 4) { 
-					checkToolbox();
-					return; 
-				}
+				if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 1) startWork();
+				else if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 2) startLayout();
+				else if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 3) startThinkingOfMaterials();
+				else if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 4) checkToolbox();
 				//For stage 4, explore forest.
-				if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 5) { 
-					startCabinPart2();
-					return;
-				}
+				else if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 5) startCabinPart2();
 				//Build cabin!
-				if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 6) { 
-					buildCabinPart1();
-					return; 
-				}
-				if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 7) { 
-					buildCabinPart2();
-					return; 
-				}
-				if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 8) {
-					buildCabinPart3();
-					return;
-				}
-				if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 9) {
-					buildCabinPart4();
-					return;
-				}
+				else if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 6) buildCabinPart1();
+				else if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 7) buildCabinPart2();
+				else if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 8) buildCabinPart3();
+				else if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 9) buildCabinPart4();
 				//Furnish your cabin!
-				if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 10) {
-					enterCabinFirstTime();
-					return;
-				}
+				else if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 10) enterCabinFirstTime();
 			}
 			else
 			{	
@@ -108,7 +77,7 @@ import classes.Scenes.SceneLib;
 		public function startWork():void {
 			outputText("You wander around your camp for a good few moments when suddenly, something crosses your mind. Yes, that's it! A cabin! Just what you would need to live comfortably instead of your tent. You wander for a good while until you find a suitable location to build your cabin. You memorize the location.");
 			flags[kFLAGS.CAMP_CABIN_PROGRESS] = 2;
-			doNext(camp.returnToCampUseOneHour);
+			doNext(camp.returnToCampUseTwoHours);
 		}
 		
 		//STAGE 2 - Survey and clear area for cabin site.
@@ -123,6 +92,7 @@ import classes.Scenes.SceneLib;
 		private function startThinkingOfMaterials():void {
 			outputText("Now that you have cleared an area for your cabin, you'll have to figure out how to get the resources you need. You look at the trees in the distance. Clearly, you'll need something to cut down trees. Maybe there's a shop somewhere?");
 			if (player.hasItem(weapons.L__AXE) || player.weaponName == "large axe") outputText("\n\nYour large axe will suffice for the daunting task of gathering materials.");
+			else if (player.hasKeyItem("Carpenter's Toolbox") >= 0) outputText("\n\nHappily, you have already bought it!");
 			else 
 			{	
 				outputText("\n\nYou realize something; you need an axe!");
@@ -249,7 +219,7 @@ import classes.Scenes.SceneLib;
 			}
 		}
 		
-		public function quarrySite(nightExploration:Boolean = false):void {
+		public function quarrySite():void {
 			clearOutput();
 			if (player.hasStatusEffect(StatusEffects.ResourceNode1) && player.statusEffectv2(StatusEffects.ResourceNode1) >= 5) outputText("You return to the mountain area where you found before a very good mineral formation.");
 			else outputText("As you explore the mountain area you run into what appears to be a very good mineral formation.");
@@ -265,8 +235,8 @@ import classes.Scenes.SceneLib;
 				addButton(1, "Pickaxe", quarrySitePickaxe);
 			}
 			else {
-				if (nightExploration) addButton(0, "Mine(N)", quarrySiteMine);
-				else addButton(0, "Mine(D)", quarrySiteMine);
+				if (model.time.hours <= 5 || model.time.hours >= 21) addButton(0, "Mine (N)", quarrySiteMine, true);
+				else addButton(0, "Mine (D)", quarrySiteMine).hint("Some ores might be available only at night.");
 			}
 			addButton(14, "Leave", camp.returnToCampUseOneHour);
 		}
@@ -304,8 +274,7 @@ import classes.Scenes.SceneLib;
 				outputText(" Along with the stone you managed to dig up " + gemsMined + " gems!");
 				player.gems += gemsMined;
 			}
-			if (nightExploration) findOre(true);
-			else findOre();
+			findOre(nightExploration);
 		}
 		
 		private function findOre(nightExploration:Boolean = false):void {
@@ -403,27 +372,6 @@ import classes.Scenes.SceneLib;
 			outputText(")</b>");
 		}
 		
-		public function checkMaterials():void {
-			if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2) { 
-			outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/750" + " \n");
-			}
-			else { 
-			outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/250" + " \n");
-			}
-			if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3) {
-			outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/1200" + "\n");
-			}
-			else {
-			outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/400" + "\n");
-			}
-			if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4) {
-			outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/1200" + "\n");
-			}
-			else {
-			outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/400" + "\n");
-			}
-		}
-		
 		//STAGE 6 - Work on cabin part 2. Planning your cabin.
 		private function startCabinPart2():void {
 			outputText("You take out a paper, feather pen, and ink quill to draw some plans and diagrams. You spend one hour editing and perfecting your plans, reviewing and making some final changes to your plan before you fold the paper and put it away.");
@@ -442,7 +390,7 @@ import classes.Scenes.SceneLib;
 			}
 			//Got toolbox? Proceed!
 			outputText("Now that you have the carpenter's toolbox and your finished plans, you can work on building. Do you start work on framing your cabin? (Cost: 100 nails and 50 wood.)\n");
-			checkMaterials();
+			SceneLib.camp.campUpgrades.checkMaterials();
 			if (player.hasKeyItem("Carpenter's Toolbox")>=0)
 			{
 				if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 100 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 50)
@@ -490,7 +438,7 @@ import classes.Scenes.SceneLib;
 		private function buildCabinPart2():void {
 			clearOutput();
 			outputText("You can continue working on your cabin. Do you start working on walls and roof? (Cost: 200 nails and 125 wood.)\n");
-			checkMaterials();
+			SceneLib.camp.campUpgrades.checkMaterials();
 			if (player.hasKeyItem("Carpenter's Toolbox")>=0)
 			{
 				if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 200 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 125)
@@ -527,7 +475,7 @@ import classes.Scenes.SceneLib;
 		private function buildCabinPart3():void {
 			clearOutput();
 			outputText("You can continue working on your cabin. Do you start work on installing door and window for your cabin? (Cost: 100 nails and 50 wood.)\n");
-			checkMaterials();
+			SceneLib.camp.campUpgrades.checkMaterials();
 			if (player.hasKeyItem("Carpenter's Toolbox")>=0)
 			{
 				if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 100 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 50)
@@ -564,7 +512,7 @@ import classes.Scenes.SceneLib;
 		private function buildCabinPart4():void {
 			clearOutput();
 			outputText("You can continue working on your cabin. Do you start work on installing flooring for your cabin? (Cost: 200 nails and 50 wood.)\n"); //What about adding few stones here additionaly? 50 maybe?
-			checkMaterials();
+			SceneLib.camp.campUpgrades.checkMaterials();
 			if (player.hasKeyItem("Carpenter's Toolbox")>=0)
 			{
 				if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 200 && flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 50)

@@ -8,7 +8,7 @@ import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.BodyParts.Horns;
 import classes.BodyParts.Tail;
-import classes.GlobalFlags.kFLAGS;
+import classes.Items.DynamicItems;
 import classes.Scenes.SceneLib;
 import classes.internals.WeightedDrop;
 
@@ -73,7 +73,7 @@ public class LustyDemons extends Monster
 			this.tallness = rand(8) + 70;
 			this.hips.type = Hips.RATING_AMPLE + 2;
 			this.butt.type = Butt.RATING_LARGE;
-			this.skinTone = "red";
+			this.bodyColor = "red";
 			this.hairColor = "black";
 			this.hairLength = 15;
 			initStrTouSpeInte(180, 100, 10, 10);
@@ -89,7 +89,6 @@ public class LustyDemons extends Monster
 			this.bonusLust = 208;
 			this.lust = 30;
 			this.lustVuln = .3;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 28;
 			this.gems = 500 + rand(250);
 			this.special1 = SceneLib.combat.packAttack;
@@ -97,6 +96,10 @@ public class LustyDemons extends Monster
 			this.tailType = Tail.DEMONIC;
 			this.horns.type = Horns.DEMON;
 			this.horns.count = 2;
+			this.randomDropChance = 0.1;
+			this.randomDropParams = {
+				rarity: DynamicItems.RARITY_CHANCES_LESSER
+			};
 			this.drop = new WeightedDrop().
 					add(weapons.PSWHIP,5).
 					add(weapons.SUCWHIP,4).

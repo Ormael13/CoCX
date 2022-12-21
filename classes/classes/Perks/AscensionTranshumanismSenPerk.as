@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Perks 
+package classes.Perks
 {
 	import classes.PerkClass;
 	import classes.PerkType;
@@ -13,15 +13,16 @@ package classes.Perks
 		
 		override public function desc(params:PerkClass = null):String
 		{
+			if (!player || !params) return _desc;
 			return "(Rank: " + params.value1 + "/" + CoC.instance.charCreation.MAX_TRANSHUMANISM_SEN_LEVEL + ") Increases Sen by " + params.value1 * 16 + ".";
 		}
 		
-		public function AscensionTranshumanismSenPerk() 
+		public function AscensionTranshumanismSenPerk()
 		{
 			super("Ascension: Transhumanism (Sen)", "Ascension: Transhumanism (Sen)", "", "Increases Sen by 16.");
 		}
 		
-		override public function keepOnAscension(respec:Boolean = false):Boolean 
+		override public function keepOnAscension(respec:Boolean = false):Boolean
 		{
 			return true;
 		}

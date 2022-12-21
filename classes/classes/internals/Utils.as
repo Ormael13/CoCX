@@ -3,7 +3,7 @@
  */
 package classes.internals
 {
-	import classes.*;
+import classes.*;
 
 import flash.utils.describeType;
 
@@ -13,8 +13,9 @@ public class Utils extends Object
 		public static const NUMBER_WORDS_CAPITAL:Array		= ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"];
 		public static const NUMBER_WORDS_POSITIONAL:Array	= ["zeroth", "first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth"];
 
-		public function Utils()
-		{
+		//returns logical XOR of two values without much fuckery
+		public static function xor(a:Boolean, b:Boolean):Boolean {
+			return a && !b || !a && b;
 		}
 
         //returns n-th bit of the integer
@@ -26,6 +27,11 @@ public class Utils extends Object
         public static function setBit(x:int, bit:int, setTo:Boolean):int {
             return x & ~(1 << bit) | (int(setTo) << bit);
         }
+
+		//XORs n-th bit of the integer
+		public static function xorBit(x:int, bit:int):int {
+			return setBit(x, bit, !getBit(x, bit));
+		}
 
 		// curryFunction(f,args1)(args2)=f(args1.concat(args2))
 		// e.g. curryFunction(f,x,y)(z,w) = f(x,y,z,w)
@@ -73,10 +79,14 @@ public class Utils extends Object
 					(input is Number) ? input|0 : def;
 		}
 		public static function numberOr(input:*,def:Number=0):Number {
-			return (input is Number) ? input : def;
+			return (input is Number && !isNaN(input)) ? input : def;
 		}
 		public static function objectOr(input:*,def:Object=null):Object {
 			return (input is Object && input !== null) ? input : def;
+		}
+		public static function valueOrThrow(input:*, errorMsg:String="Missing value"):* {
+			if (input === null || input === undefined) throw new Error(errorMsg);
+			return input;
 		}
 		public static function ipow(base:Number,exp:int):Number {
 			// See wiki/Exponentiation_by_squaring
@@ -108,6 +118,11 @@ public class Utils extends Object
 			value = Math.floor(value*base)/base;
 			return ''+value.toFixed(decimals).replace(/\.?0+$/,'');
 			// no risk stripping 0s from 123000 because that's the case of decimals=0
+		}
+		public static function round(value:Number, decimals:int):Number {
+			if (decimals == 0) return Math.round(value);
+			var base:Number = ipow(10, decimals);
+			return Math.round(value*base)/base;
 		}
 		public static function boundInt(min:int, x:int, max:int):int {
 			return x < min ? min : x > max ? max : x;
@@ -253,6 +268,7 @@ public class Utils extends Object
 		public static function extend(dest:Object, src:Object, ...srcRest:Array):Object {
 			srcRest.unshift(src);
 			for each(src in srcRest) {
+				if (!src) continue;
 				for (var k:String in src) {
 					if (src.hasOwnProperty(k)) dest[k] = src[k];
 				}
@@ -264,6 +280,26 @@ public class Utils extends Object
 		 */
 		public static function shallowCopy(src:Object):Object {
 			return copyObject({},src);
+		}
+		
+		/**
+		 * Returns a deep copy of `src`
+		 */
+		public static function deepCopy(src:Object):Object {
+			var dst:Object = src is Array ? [] : {};
+			for (var k:String in src) {
+				if (src.hasOwnProperty(k)) {
+					var v:* = src[k];
+					if (v is Array) {
+						dst[k] = deepCopy(v);
+					} else if (typeof v === "object" && v !== null) {
+						dst[k] = deepCopy(v);
+					} else {
+						dst[k] = v;
+					}
+				}
+			}
+			return dst;
 		}
 		/**
 		 * Performs a shallow copy of properties from `src` to `dest`.
@@ -395,6 +431,21 @@ public class Utils extends Object
 			return returnArray;
 		}
 
+		public static function escapeXml(s:String):String {
+			return s.replace(/[\n\r'"<>&]/g,function ($0:String,...rest):String {
+				switch($0){
+					case '\r': return '&#13;';
+					case '\n': return '&#10;';
+					case "'": return '&apos;';
+					case '"': return '&quot;';
+					case '<': return '&lt;';
+					case '>': return '&gt;';
+					case '&': return '&amp;';
+					default: return $0;
+				}
+			});
+		}
+		
 		public static function num2Text(number:int):String {
 			if (number >= 0 && number <= 10) return NUMBER_WORDS_NORMAL[number];
 			return number.toString();
@@ -500,6 +551,102 @@ public class Utils extends Object
 		}
 
 		/**
+		 * Same as randomChoice(), but places the picked items into an array.
+		 * Accepts any type; Can also accept a *single* array of items, in which case it picks from the array instead.
+		 * @param unique If true, will pick unique items (works well with duplicates in the provided array)
+		 * @param count	 How much items to pick
+		 */
+		public static function randomChoices(unique:Boolean, count:int, ...args):Array {
+			var tar:Array = args.length == 1 && args[0] is Array ? args[0] : args;
+			if (unique && count > tar.length || count < 0) throw new Error("Wrong randomChoices usage.");
+
+			var ind:Array = [], res:Array = [];
+			var i:int;
+			// find unique indices
+			while (ind.length < count) {
+				i = rand(tar.length);
+				if (!unique || ind.indexOf(i) == -1)
+					ind.push(i);
+			}
+			for each (i in ind)
+				res.push(tar[i]);
+			return res;
+		}
+		
+		
+		/**
+		 * Pick a weighted random item.
+		 * Weights <= 0 or NaN are ignored.
+		 * Weight of Infinity means "return this value"
+		 * If no suitable item, return null
+		 * @param {[][]} pairs Pairs of [weight, value]
+		 * @example
+		 * weightedRandom([
+		 *   [1, "ketchup"],
+		 *   [5, "mayo"],
+		 *   [14, "cum"]
+		 * ])
+		 * // would return "ketchup" with 5% chance, "mayo" with 25%, and "cum" with 70%
+		 */
+		public static function weightedRandom(...pairs):* {
+			if (pairs.length == 0) {
+				return null;
+			}
+			if (pairs.length == 1) {
+				if (!(pairs[0] is Array)) return pairs[0];
+				// imitate spread
+				// 1st argument could be the list of pairs
+				if (pairs[0].length != 2) return weightedRandom.apply(null, pairs[0]);
+				// 2 options here:
+				// pairs = [ [weight, value] ]
+				// pairs = [ [pair1,  pair2] ]
+				if (pairs[0][0] is Array) return weightedRandom.apply(null, pairs[0]);
+			}
+			for each (var item:Array in pairs) {
+				if (!item || item.length != 2 ) {
+					throw new Error("Invalid weightedRandom item");
+				}
+			}
+			return weightedRandomBy(pairs, "0", "1");
+		}
+		/**
+		 * Pick a weighted random item.
+		 * Weights <= 0 or NaN are ignored.
+		 * Weight of Infinity means "return this value"
+		 * If no suitable item, return null
+		 * @param pairs Objects to select from
+		 * @param weightKey Property name indicating weight
+		 * @param valueKey Property name indicating value to return, or "" to return whole object
+		 * @example
+		 * weightedRandomBy([
+		 *   {chance:1, value:"ketchup"},
+		 *   {chance:5, value:"mayo"},
+		 *   {chance:14, value:cum"}
+		 * ], "chance", "value")
+		 * // would return "ketchup" with 5% chance, "mayo" with 25%, and "cum" with 70%
+		 * // removing 3rd arg would make it return {chance:1, value:"ketchup"} objects
+		 */
+		public static function weightedRandomBy(items:Array, weightKey:String, valueKey:String=""):* {
+			var sum:Number = 0;
+			for each (var item:Object in items) {
+				var weight:Number = valueOr(item[weightKey], 1);
+				if (weight === Infinity) return valueKey ? item[valueKey] : item;
+				if (isFinite(weight) && weight > 0) {
+					sum += weight;
+				}
+			}
+			var roll:Number = Math.random()*sum;
+			item = null;
+			for each (item in items) {
+				weight = valueOr(item[weightKey], 1);
+				if (!isFinite(weight) || weight <= 0) continue;
+				roll -= weight;
+				if (roll <= 0) break;
+			}
+			return valueKey ? item[valueKey] : item;
+		}
+
+		/**
 		 * Utility function to search for a specific value within a target array or collection of values.
 		 * Collection can be supplied either as an existing array or as varargs:
 		 * ex: 	InCollection(myValue, myArray)
@@ -569,6 +716,10 @@ public class Utils extends Object
 		public static function rand(max:Number):int
 		{
 			return int(Math.random() * max);
+		}
+		public static function randIntIn(minInclusive:Number, maxInclusive:Number):Number {
+			if (minInclusive >= maxInclusive) return minInclusive;
+			return Math.floor(Math.random()*(maxInclusive+1-minInclusive)+minInclusive);
 		}
 		public static function trueOnceInN(n:Number):Boolean
 		{
@@ -749,7 +900,7 @@ public class Utils extends Object
 			PF_TIME[methodName] = (PF_TIME[methodName]|0)+dt;
 			var pfcount:int   = PF_COUNT[methodName];
 			var pfintct:int   = PF_INTCOUNT[PF_DEPTH];
-			PF_INTERNALS[methodName] += pfintct;
+			PF_INTERNALS[methodName] = (PF_INTERNALS[methodName]|0) + pfintct;
 			var args:Array = PF_ARGS[PF_DEPTH];
 			if (shouldReportProfiling(classname,origMethodName,dt, pfcount)) {
 				var s:String = "[PROFILE] ";

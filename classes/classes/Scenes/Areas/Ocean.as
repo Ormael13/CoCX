@@ -8,7 +8,6 @@ package classes.Scenes.Areas
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.Scenes.Areas.Ocean.*;
 import classes.Scenes.NPCs.CeaniScene;
 import classes.Scenes.Places.Boat.SharkGirlScene;
@@ -42,7 +41,7 @@ use namespace CoC;
 			if (rand(4) == 0) choice[choice.length] = 6;	 //Find nothing! The rand will be removed from this once the Ocean is populated with more encounters.
 			
 			//Ceani
-			if ((model.time.hours >= 12 && model.time.hours <= 22) && flags[kFLAGS.CEANI_FOLLOWER] < 1 && flags[kFLAGS.CEANI_ARCHERY_TRAINING] == 4) {
+			if ((model.time.hours >= 12 && model.time.hours <= 22) && flags[kFLAGS.CEANI_FOLLOWER] < 1 && flags[kFLAGS.CEANI_ARCHERY_TRAINING] >= 4 && rand(4) == 0) {
 				ceaniScene.oceanInteractionsAfterArcheryTraining();
 				return;
 			}
@@ -53,7 +52,7 @@ use namespace CoC;
 					flags[kFLAGS.ANEMONE_OR_SEA_ANEMONE] = 2;
 					player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
 					player.createStatusEffect(StatusEffects.InWater,0,0,0,0);
-					SceneLib.anemoneScene.mortalAnemoneeeeee();
+					SceneLib.boat.anemoneScene.mortalAnemoneeeeee();
 					break;
 				case 1:
 					player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);

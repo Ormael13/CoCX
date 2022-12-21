@@ -70,7 +70,7 @@ use namespace CoC;
 			this.tallness = 120;
 			this.hips.type = Hips.RATING_AVERAGE;
 			this.butt.type = Butt.RATING_TIGHT;
-			this.skinTone = "light";
+			this.bodyColor = "light";
 			this.hairColor = "red";
 			this.hairLength = 13;
 			initStrTouSpeInte(130, 195, 330, 200);
@@ -86,7 +86,6 @@ use namespace CoC;
 			this.lust = 30;
 			this.lustVuln = .8;
 			this.level = 39;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.gems = 45 + rand(40);
 			this.drop = new ChainedDrop().
 					add(armors.S_SWMWR,1/12).//inne coś

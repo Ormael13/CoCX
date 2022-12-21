@@ -4,9 +4,18 @@
 package coc.view {
 import classes.internals.Utils;
 
+import fl.controls.Button;
+
+import fl.controls.ComboBox;
+import fl.controls.LabelButton;
+
+import fl.controls.TextInput;
+import fl.data.DataProvider;
+
 import flash.display.DisplayObject;
 import flash.display.Sprite;
 import flash.events.Event;
+import flash.events.MouseEvent;
 import flash.text.AntiAliasType;
 import flash.text.TextField;
 import flash.text.TextFieldAutoSize;
@@ -18,7 +27,7 @@ public class Block extends Sprite {
 	/**
 	 * Null layout. All elements' positions and sizes are NOT adjusted
 	 */
-						public static const LAYOUT_NONE:String = 'none';
+	public static const LAYOUT_NONE:String = 'none';
 	/**
 	 * Common layout parameters:
 	 * * padding{s,Horiz,Vert,Top,Right,Bottom,Left} - a distance from borders of this block to its elements
@@ -29,8 +38,11 @@ public class Block extends Sprite {
 	/**
 	 * Grid layout. Aligns elements in a grid of fixed cell size, fixed cell count
 	 * Config:
-	 * * `rows`, `cols` - number or rows and columns. Default 1
+	 * * `rows` - number of rows. Default 0 (indefinite number, keep adding more rows)
+	 * * `cols` - number of columns. Default 1 (or `columns` size)
+	 * * `columns` - column widths. -1: autosize, 0..1: fraction, >1: pixels. Defaults to 1.0 / rows
 	 * * `setWidth`, `setHeight - should set width/height of elements. Default false
+	 * * `gap` - gap between cells
 	 * Hints:
 	 * * `row`, `col` - 2D position in grid. Defaults to "next cell"
 	 * * `setWidth`, `setHeight - should set width/height of this element. Default to layout config
@@ -39,36 +51,92 @@ public class Block extends Sprite {
 	private function applyGridLayout():void {
 		var config:Object        = _layoutConfig;
 		var ignoreHidden:Boolean = 'ignoreHidden' in config ? config['ignoreHidden'] : false;
-		var rows:Number          = config["rows"] || 1;
-		var cols:Number          = config["cols"] || 1;
+		var rows:Number          = Utils.intOr(config["rows"], 0);
+		var cols:Number          = Utils.intOr(config["cols"], 1);
+		var gap:Number           = Utils.numberOr(config["gap"], 0);
 		var innerw:Number        = innerWidth;
-		var innerh:Number        = innerHeight;
-		var cellw:Number         = innerw / cols;
-		var cellh:Number         = innerh / rows;
+		var columns:Array        = config['columns'];
 		var setcw:Boolean        = config['setWidth'];
 		var setch:Boolean        = config['setHeight'];
-
+		var debug:Boolean        = config['debug'];
+		
+		if (!('cols' in config) && columns) cols = columns.length;
+		innerw -= gap*(cols-1);
+		if (!columns || columns.length != cols) {
+			columns = [];
+			for (var i:int = 0; i < cols; i++) {
+				columns[i] = -1; // 1fr
+			}
+		} else {
+			columns = columns.slice();
+		}
+		// calculate column size
+		var autocols:int = 0;
+		var freespace:Number = innerw;
+		// count autocols and convert fraction widths to pixels
+		for (i = 0; i < cols; i++) {
+			if (columns[i] < 0) {
+				autocols++;
+				continue;
+			} else if (columns[i] <= 1) {
+				// fraction
+				columns[i] *= innerw;
+			} // else size in pixels
+			freespace -= columns[i];
+		}
+		// calculate autocol sizes
+		if (autocols > 0) {
+			for (i = 0; i < cols; i++) {
+				if (columns[i] < 0) columns[i] = freespace/autocols;
+			}
+		}
+		
 		var row:int = 0;
 		var col:int = 0;
+		var grid:Array = [];
+		var innerh:Number = innerHeight - (rows > 1 ? gap*(rows-1) : 0);
+		var cellh:Number  = rows > 0 ? innerh / rows : 0;
 		for (var ci:int = 0, cn:int = _container.numChildren; ci < cn; ci++) {
 			var child:DisplayObject = _container.getChildAt(ci);
 			var hint:Object         = _layoutHints[child] || {};
 			if (hint['ignore'] || !child.visible && ignoreHidden) continue;
-			var setw:Boolean = 'setWidth' in hint ? hint['setWidth'] : setcw;
-			var seth:Boolean = 'setHeight' in hint ? hint['setHeight'] : setch;
 			if ('row' in hint && 'col' in hint) {
 				row = hint['row'];
 				col = hint['col'];
 			}
-			child.x = col * cellw + paddingLeft;
-			child.y = row * cellh + paddingTop;
-			if (setw) child.width = cellw;
-			if (seth) child.height = cellh;
-			col = col + 1;
+			if (!grid[row]) grid[row] = [];
+			grid[row][col] = child;
+			col++;
 			if (col >= cols) {
 				col = 0;
 				row++;
 			}
+		}
+		var y:Number = paddingTop+gap/2;
+		for (row = 0; row < grid.length; row++) {
+			if (!grid[row]) continue;
+			var h:Number = 0;
+			var x:Number = paddingLeft;
+			for (col = 0; col < columns.length; col++) {
+				child = grid[row][col];
+				if (child) {
+					if (debug) trace("[" + row + "][" + col + "] x="+(x|0)+" y="+(y|0)+" w="+(columns[col]|0)+" h="+(cellh|0)+" "+child);
+					var setw:Boolean = 'setWidth' in hint ? hint['setWidth'] : setcw;
+					var seth:Boolean = 'setHeight' in hint ? hint['setHeight'] : setch;
+					child.x          = x + gap / 2;
+					child.y          = y;
+					if (setw) {
+						child.width = columns[col];
+					}
+					if (seth) {
+						child.height = cellh;
+					}
+					if (debug) trace(""+child.x+" "+child.y+" "+child.width+" "+child.height);
+					h = Math.max(h, child.height);
+				}
+				x += columns[col]+gap;
+			}
+			y += h+gap;
 		}
 	}
 	/**
@@ -77,6 +145,7 @@ public class Block extends Sprite {
 	 * `direction` - 'row'|'column'. Defaults to 'row'
 	 * `gap` - Gap between neighbouring elements. Defaults to 2.
 	 * `ignoreHidden` defaults to true
+	 * `stretch` - Stretch children horizontally (column mode) or vertically (row mode). Default false
 	 * Hints:
 	 * `before`, `after` - Additional gap before/after that element. May be negative
 	 */
@@ -85,23 +154,30 @@ public class Block extends Sprite {
 		var config:Object        = _layoutConfig;
 		var ignoreHidden:Boolean = 'ignoreHidden' in config ? config['ignoreHidden'] : true;
 		var dir:String           = config['direction'] || 'row';
+		var stretch:Boolean      = config['stretch'];
 		var gap:Number           = 'gap' in config ? config['gap'] : 2;
 		var x:Number             = paddingLeft;
 		var y:Number             = paddingTop;
+		var column:Boolean       = dir === 'column';
 		for (var ci:int = 0, cn:int = _container.numChildren; ci < cn; ci++) {
 			var child:DisplayObject = _container.getChildAt(ci);
 			var hint:Object         = _layoutHints[child] || {};
 			if (hint['ignore'] || !child.visible && ignoreHidden) continue;
+			var stretchChild:Boolean = Utils.valueOr(hint["stretch"], stretch);
 			var before:Number = 'before' in hint ? hint['before'] : 0;
-			if (dir == 'column') {
+			if (column) {
 				y += before;
 			} else {
 				x += before;
 			}
 			child.x          = x;
 			child.y          = y;
+			if (stretchChild) {
+				if (column) child.width = innerWidth;
+				else child.height = innerHeight;
+			}
 			var after:Number = 'after' in hint ? hint['after'] : 0;
-			if (dir == 'column') {
+			if (column) {
 				y += child.height + after + gap;
 			} else {
 				x += child.width + after + gap;
@@ -165,6 +241,7 @@ public class Block extends Sprite {
 		}
 	}
 	private function resize():void {
+		invalidateLayout();
 		if (width > 0 || height > 0) {
 			graphics.clear();
 			graphics.beginFill(0, 0);
@@ -269,6 +346,7 @@ public class Block extends Sprite {
 	public function doLayout():void {
 		_dirty          = false;
 		var type:String = _layoutConfig["type"];
+		//if (type !== "none") trace("doLayout "+this+" ["+x+", "+y+" "+width+"x"+height+"]");
 		switch (type) {
 			case "grid":
 				applyGridLayout();
@@ -299,6 +377,7 @@ public class Block extends Sprite {
 		return e;
 	}
 	public function addTextField(options:Object, hint:Object = null):TextField {
+		if (options is String) return addTextField({text:options});
 		var e:TextField = new TextField();
 		e.antiAliasType = AntiAliasType.ADVANCED;
 		if ('defaultTextFormat' in options) {
@@ -311,6 +390,85 @@ public class Block extends Sprite {
 		if (!('mouseEnabled' in options) && options['type'] != 'input') e.mouseEnabled = false;
 		if (!('width' in options || 'height' in options || 'autoSize' in options)) {
 			e.autoSize = TextFieldAutoSize.LEFT;
+		}
+		addElement(e, hint);
+		return e;
+	}
+	
+	/**
+	 * Create text input
+	 * @param options TextInput properties
+	 * @param options.bindText [object, keyName]. On change set object[keyName]=value
+	 * @param options.bindNumber [object, keyName]. On change set object[keyName]=parseFloat(value) if not NaN
+	 * @param hint Layout hint
+	 */
+	public function addTextInput(options:Object, hint:Object = null):TextInput {
+		var e:TextInput = new TextInput();
+		UIUtils.setProperties(e, options);
+		if ('bindText' in options) {
+			var obj:Object = options.bindText[0];
+			var key:String = options.bindText[1];
+			e.text = obj[key];
+			e.addEventListener(Event.CHANGE, function(event:Event):void {
+				obj[key] = e.text;
+			});
+		} else if ('bindNumber' in options) {
+			obj = options.bindNumber[0];
+			key = options.bindNumber[1];
+			e.text = obj[key];
+			e.addEventListener(Event.CHANGE, function(event:Event):void {
+				var value:Number = parseFloat(e.text);
+				if (!isNaN(value)) obj[key] = value;
+			});
+		}
+		addElement(e, hint);
+		return e;
+	}
+	
+	/**
+	 * Create dropdown list
+	 * @param options ComboBox properties
+	 * @param options.items Array of objects or primitives to select from
+	 * @param options.labelKey Item property name to use as label, default "label"
+	 * @param options.valueKey Item property name to use as value, default "data"
+	 * @param options.bindValue [object, propname]. On change set object[propname] to selected item
+	 * @param hint Layout hint
+	 */
+	public function addComboBox(options:Object, hint:Object = null):ComboBox {
+		var e:ComboBox = new ComboBox();
+		UIUtils.setProperties(e, options, {value:null});
+		var labelKey:String = Utils.valueOr(options["labelKey"], "label");
+		var valueKey:String = Utils.valueOr(options["valueKey"], "data");
+		var selectedIndex:int = 0;
+		var selectedValue:*;
+		var bindObject:Object;
+		var bindProp:String;
+		if ('bindValue' in options) {
+			bindObject = options.bindValue[0];
+			bindProp = options.bindValue[1];
+			selectedValue = bindObject[bindProp];
+		} else if ('value' in options) {
+			selectedValue = options.value;
+		}
+		var i:int=0;
+		var items:Array = [];
+		for each (var item:* in options.items) {
+			var entry:Object;
+			if (item is Object && !(item is String) && item != null) {
+				entry = {label:item[labelKey], data:item[valueKey]}
+			} else {
+				entry = {label:""+item, data:item}
+			}
+			if (entry.data == selectedValue) selectedIndex = i;
+			items.push(entry);
+			i++;
+		}
+		e.dataProvider = new DataProvider(items);
+		if (bindObject) {
+			e.addEventListener(Event.CHANGE, function(event:Event):void {
+				event.preventDefault();
+				bindObject[bindProp] = e.selectedItem.data;
+			})
 		}
 		addElement(e, hint);
 		return e;

@@ -78,9 +78,6 @@ public class BaseCombatContent extends BaseContent {
 	protected function doTrueDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
 		return combat.doTrueDamage(damage, apply, display);
 	}
-	protected function combatMiss():Boolean {
-		return combat.combatMiss();
-	}
 	protected function combatParry():Boolean {
 		return combat.combatParry();
 	}
@@ -119,9 +116,6 @@ public class BaseCombatContent extends BaseContent {
 	}
 	protected function spellCount():Number {
 		return player.spellCount();
-	}
-	protected function spellCountWhiteBlack():Number {
-		return player.spellCountWhiteBlack();
 	}
 	protected function spellPerkUnlock():void {
 		combat.spellPerkUnlock();
@@ -186,7 +180,7 @@ public class BaseCombatContent extends BaseContent {
 	protected function scalingBonusSpeed(randomize:Boolean = true):Number {
 		return combat.scalingBonusSpeed(randomize);
 	}
-	protected function scalingBonusIntelligence(randomize:Boolean = true):Number {
+	public function scalingBonusIntelligence(randomize:Boolean = true):Number {
 		return combat.scalingBonusIntelligence(randomize);
 	}
 	protected function scalingBonusIntelligenceCompanion(randomize:Boolean = true):Number {
@@ -207,7 +201,7 @@ public class BaseCombatContent extends BaseContent {
 	protected function spellCost(mod:Number):Number {
 		return combat.magic.spellCostImpl(mod);
 	}
-	protected function spellCostWhite(mod:Number):Number {
+	public function spellCostWhite(mod:Number):Number {
 		return combat.magic.spellCostWhiteImpl(mod);
 	}
 	protected function spellCostBlack(mod:Number):Number {
@@ -249,6 +243,9 @@ public class BaseCombatContent extends BaseContent {
 	protected function spellBlackTier2Cooldown():Number {
 		return combat.magic.spellBlackTier2CooldownImpl();
 	}
+	protected function spellBlackTier3Cooldown():Number {
+		return combat.magic.spellBlackTier3CooldownImpl();
+	}
 	protected function spellGreyCooldown():Number {
 		return combat.magic.spellGreyCooldownImpl();
 	}
@@ -261,6 +258,9 @@ public class BaseCombatContent extends BaseContent {
 	protected function spellWhiteTier2Cooldown():Number {
 		return combat.magic.spellWhiteTier2CooldownImpl();
 	}
+	protected function spellWhiteTier3Cooldown():Number {
+		return combat.magic.spellWhiteTier3CooldownImpl();
+	}
 	protected function healMod():Number {
 		return combat.magic.healModImpl();
 	}
@@ -270,7 +270,7 @@ public class BaseCombatContent extends BaseContent {
 	protected function healModWhite():Number {
 		return combat.magic.healModWhiteImpl();
 	}
-	protected function calcInfernoMod(damage:Number, incCnt:Boolean):Number {
+	public function calcInfernoMod(damage:Number, incCnt:Boolean):Number {
 		return combat.magic.calcInfernoModImpl(damage, incCnt);
 	}
 	protected function calcGlacialMod(damage:Number, incCnt:Boolean):Number {

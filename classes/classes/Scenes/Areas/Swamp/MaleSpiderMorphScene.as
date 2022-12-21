@@ -70,7 +70,7 @@ public class MaleSpiderMorphScene extends BaseContent
 			menu();
 			spriteSelect(SpriteDb.s_spiderguy);
 			outputText("The male spider-morph collapses onto his hands and knees, ");
-			if (monster.lust >= monster.maxLust()) outputText("masturbating with furious abandon, working his ebon dick with such vigor that the spider's pre-cum-slicked dick-skin noisily slides itself back and forth over his fattened glans; it becomes apparent just how much foreskin he truly has at this point, as even with his frenzied rubbing his glans remains shrouded in the thick excess skin while his fist slaps lewdly against his groin.  Dribbles of pre-cum leak from between his fingers to spill on the ground.");
+			if (monster.lust >= monster.maxOverLust()) outputText("masturbating with furious abandon, working his ebon dick with such vigor that the spider's pre-cum-slicked dick-skin noisily slides itself back and forth over his fattened glans; it becomes apparent just how much foreskin he truly has at this point, as even with his frenzied rubbing his glans remains shrouded in the thick excess skin while his fist slaps lewdly against his groin.  Dribbles of pre-cum leak from between his fingers to spill on the ground.");
 			else outputText("wobbling back and forth as he tries to stay up and fight.  There's no way he can oppose you, as beaten as he is now.");
 			if (player.lust >= 33) {
 				outputText("\n\nWhat do you do?");
@@ -83,8 +83,8 @@ public class MaleSpiderMorphScene extends BaseContent
 						"Req. dick with area smaller than " + monster.analCapacity(),
 						player.findCock(1, monster.analCapacity(), -1) >= 0);
 				LustyMaidensArmor.addTitfuckButton(3);
-				SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatSpiderBoy);
 				addButton(14, "Leave", cleanupAfterCombat);
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatSpiderBoy);
 			}
 			else {
 				outputText("\n\nYou're not aroused enough to rape him.");
@@ -118,7 +118,7 @@ public class MaleSpiderMorphScene extends BaseContent
 			spriteSelect(SpriteDb.s_spiderguy);
 			//*Summary:  Reaming some anus.
 			outputText("You approach and turn the spider-boy around, pushing the spider's bulbous abdomen aside to give yourself a better view of his tight, heart-shaped ass.  ");
-			if (monster.lust >= monster.maxLust()) outputText("He's too distracted by his foreskin fondling to pay much attention to your anal-focused attentions.");
+			if (monster.lust >= monster.maxOverLust()) outputText("He's too distracted by his foreskin fondling to pay much attention to your anal-focused attentions.");
 			else outputText("He's too busy trying to stay upright to fight off your anal-focused attentions.");
 			outputText("  With a wide smile on your face, you grab a handful of his pale butt-cheek and squeeze your fingers into the soft flesh.  It spreads his dainty derrière just wide enough for you to see the puckered star of his rectum.  " + SMultiCockDesc() + " ");
 			if (player.lust < (player.maxLust() * 0.7)) outputText("hardens to full size");
@@ -131,7 +131,7 @@ public class MaleSpiderMorphScene extends BaseContent
 			outputText("</i>\"\n\n");
 
 			outputText("You grab his balls and caress them in one hand while you take off your equipment with the other.  The hapless victim starts to relax from the attentions, and pre-cum begins to leak from inside his foreskin ");
-			if (monster.lust < monster.maxLust()) outputText("after he starts touching himself.");
+			if (monster.lust < monster.maxOverLust()) outputText("after he starts touching himself.");
 			else outputText("while he fondles and caresses the sensitive flesh.");
 			outputText("  Meanwhile, you grab " + oMultiCockDesc() + " and line it up with the spider-boy's twitching rectum, rubbing the " + player.cockHead(x) + " over the tight little hole while you wait for it to slowly loosen.  A fresh dollop of pre-cream bubbles out of his cum-frothing foreskin in response, letting you know that in spite of his protests, your reluctant lover's body loves the anal stimulation.\n\n");
 
@@ -147,7 +147,7 @@ public class MaleSpiderMorphScene extends BaseContent
 			outputText("Chuckling at his admission of enjoyment, you let go of the spider's twitching ball-sack and take advantage of your free hand to slap his pale white ass.  It leaves a red, hand-shaped mark on his perfect little hiney, a temporary reminder of your authority.  His abdomen rubs against your belly as you start to fuck him, the heavy organ swaying with the gentle sawing motions of two bodies locked in anal coitus.  You gradually increase the tempo and quickly reach a point where your hips are slapping against his butt with loud, echoing smacks.\n\n");
 			outputText("The arachnid male squirms under you, whimpering, \"<i>W-Why is it feeling so good?  It's-ooohh-making my dick so hot.  It feels like it's gonna explode!</i>\"\n\n");
 			outputText("You whisper back that it feels good because he's a spider-slut, and you give him another hard slap to emphasize your point.  He whimpers and dribbles white cream into the dirt, his balls churning against you");
-			if (player.balls > 0) outputText("r own");
+			if (player.hasBalls()) outputText("r own");
 			outputText(" during the brief instant you've got him hilted.  Inspired by his submissive, orgasm-induced dribbling, you reach down to catch some of his cream in your hand.  He isn't squirting enough to fully fill your hand, so you lean back and hilt him again, roughly milking his spooge into your palm.  You take the handful of cum and hold it to his mouth.  He licks up his wasted seed like a good little bitch, shuddering in between swallows while you continue to dominate his asshole.\n\n");
 			outputText("Once he's had most of it, you wipe the rest off in his raven-black hair, marking him as your spooge-slurping semen-slut.  He looks back with tearful eyes, but his beet-red cheeks and pursed, white-glazed lips tell a different story.  The spider-boy keeps mewling and moaning, strangling off his own sounds of pleasure as if he could deny the steady flow of seed that drips from his droopy, foreskin-shrouded shaft.\n\n");
 
@@ -167,7 +167,7 @@ public class MaleSpiderMorphScene extends BaseContent
 			else if (player.cumQ() < 1000) outputText("streams");
 			else outputText("rivers");
 			outputText(" of semen sliding out of the abused opening.  He rolls onto his side and pants, still leaking his thick goo from the limp, weak little cock between his legs.  You bend down and wipe your dick off on his face, letting him lick at it like a trained puppy.  Once cleaned, you get dressed and wander back to camp, leaving the spider to recover from the ordeal.");
-			player.sexReward("Default","Dick",true,false);
+			player.sexReward("no", "Dick");
 			cleanupAfterCombat();
 		}
 
@@ -178,13 +178,13 @@ public class MaleSpiderMorphScene extends BaseContent
 			clearOutput();
 			spriteSelect(SpriteDb.s_spiderguy);
 			outputText("You push the ");
-			if (monster.lust >= monster.maxLust()) outputText("masturbating");
+			if (monster.lust >= monster.maxOverLust()) outputText("masturbating");
 			else outputText("injured");
 			outputText(" spider-morph over onto his back and laugh at his relatively tiny dick.  It's no wonder he jumped you wanting sex - the girls probably took one look at the unimpressive member and took off running.  You take off your [armor] and let " + sMultiCockDesc() + " flop free.  ");
 			if (player.cockTotal() == 1) outputText("Dropping it squarely ");
 			else outputText("Dropping the largest ");
 			outputText("atop his miniature cock, you virtually bury it in a superior male's heavy penile flesh.  ");
-			if (monster.lust >= monster.maxLust()) outputText("He pants in surprise and pleasure, clearly enjoying the weighty shaft rubbing against his drooping dick-skin");
+			if (monster.lust >= monster.maxOverLust()) outputText("He pants in surprise and pleasure, clearly enjoying the weighty shaft rubbing against his drooping dick-skin");
 			else outputText("He gasps in surprise and slowly growing pleasure, clearly enjoying the weighty shaft rubbing against his drooping dick-skin");
 			outputText(".  You sway your " + hipDescript() + " to drag your [cock "+x1+"] all over his body, and the defeated boy's pale white skin slowly colors pink with a full-body blush.\n\n");
 
@@ -207,7 +207,7 @@ public class MaleSpiderMorphScene extends BaseContent
 			outputText("\n\n");
 
 			outputText("You stretch and sigh with contentment, looking over your cum-covered conquest while he tries to clean himself off.  Absolutely perfect.");
-			player.sexReward("Default","Dick",true,false);
+			player.sexReward("no", "Dick");
 			cleanupAfterCombat();
 		}
 
@@ -229,7 +229,7 @@ public class MaleSpiderMorphScene extends BaseContent
 			outputText("\n\n");
 
 			outputText("The arachnid male looks up at you with wide, open eyes and a lusty expression, begging with his eyes for you to take his slippery black cock inside you.  Lucky for him, that's exactly what you have planned.  You mount the male spider's lithe body with a smooth, sensuous motion, ");
-			if (player.balls > 0) outputText("lifting your balls and ");
+			if (player.hasBalls()) outputText("lifting your balls and ");
 			outputText("placing your " + vaginaDescript() + " atop the floppy, folded skin that obscures his cockhead.  The drippy arachnid-cock easily slides inside you while your labia push the skin back, exposing his pre-cum-drooling cum-slit to your hot, inner walls.  You can feel him swelling further from the stimulation, his twitching cock trying to stuff you as effectively as possible.");
 			//(virgin check)
 			player.cuntChange(monster.cockArea(0), true, true, false);
@@ -418,7 +418,7 @@ public class MaleSpiderMorphScene extends BaseContent
 			outputText("You awaken later on, a sticky feeling between your legs to go with your wet pussy");
 			if (player.hasCock()) outputText(" and raging hard on");
 			outputText(". Looking around, you notice the slimy pool appears to have dried up, but the broken eggshells show that you weren't just dreaming. Tiny dots in the dirt form a trail leading to the swamp, and you can only guess where your offspring went.\n");
-			player.sexReward("Default","Vaginal",true,false);
+			player.sexReward("no", "Vaginal");
 		}
 	}
 }

@@ -1,13 +1,13 @@
 package classes.GeneticMemories {
-  import classes.BaseContent;
-  import classes.StatusEffects;
-  import classes.BodyParts.*;
-  import classes.BodyParts.Antennae;
+	import classes.BaseContent;
+	import classes.StatusEffects;
+	import classes.BodyParts.*;
+	import classes.BodyParts.Antennae;
 	import classes.internals.EnumValue;
 	import classes.Transformations.Transformation;
 	import classes.CoC;
 
-  public class AntennaeMem extends BaseContent {
+	public class AntennaeMem extends BaseContent {
 	/**
 	 * Entry properties:
 	 * - id: the identificator of the Metamorph inside GeneticStorage
@@ -39,9 +39,12 @@ package classes.GeneticMemories {
 
 	 */
 
-    public static var Memories:/*EnumValue*/ Array = [];
+		public static var Memories:/*EnumValue*/ Array = [];
+		private static var _partid:int = 0;
 
-		public static const NONE:int = 0;
+	  
+	  
+		public static const NONE:int = _partid++;
 		EnumValue.add(Memories, NONE, "NONE", {
 			id: "Unlocked Metamorph",
 			name: "No Antennae",
@@ -52,7 +55,62 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const MANTIS:int = 1;
+        public static const ANT:int = _partid++;
+        EnumValue.add(Memories, ANT, "ANT", {
+            id: "Ant Antennae",
+            name: "Ant Antennae",
+            cost: 100,
+            title: "Ant",
+            transformation: function(): Transformation {
+                return CoC.instance.transformations.AntennaeAnt;
+            }
+        });
+
+        public static const BEE:int = _partid++;
+        EnumValue.add(Memories, BEE, "BEE", {
+            id: "Bee Antennae",
+            name: "Bee Antennae",
+            cost: 100,
+            title: "Bee",
+            transformation: function(): Transformation {
+                return CoC.instance.transformations.AntennaeBee;
+            }
+        });
+
+        public static const CENTIPEDE:int = _partid++;
+        EnumValue.add(Memories, CENTIPEDE, "CENTIPEDE", {
+            id: "Centipede Antennae",
+            name: "Centipede Antennae",
+            cost: 100,
+            title: "Centipede",
+            transformation: function(): Transformation {
+                return CoC.instance.transformations.AntennaeCentipede;
+            }
+        });
+
+        public static const FIRE_SNAIL:int = _partid++;
+        EnumValue.add(Memories, FIRE_SNAIL, "FIRE_SNAIL", {
+            id: "Fire Snail Antennae",
+            name: "Fire Snail  Antennae",
+            cost: 100,
+            title: "Fire Snail",
+            transformation: function(): Transformation {
+                return CoC.instance.transformations.AntennaeFireSnail;
+            }
+        });
+
+        public static const JABBERWOCKY:int = _partid++;
+        EnumValue.add(Memories, JABBERWOCKY, "JABBERWOCKY", {
+            id: "Jabberwocky Antennae",
+            name: "Jabberwocky Antennae",
+            cost: 100,
+            title: "Jabberwocky",
+            transformation: function(): Transformation {
+                return CoC.instance.transformations.AntennaeJabberwocky;
+            }
+        });
+
+		public static const MANTIS:int = _partid++;
 		EnumValue.add(Memories, MANTIS, "MANTIS", {
 			id: "Mantis Antennae",
 			name: "Mantis Antennae",
@@ -63,14 +121,14 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const BEE:int = 2;
-		EnumValue.add(Memories, BEE, "BEE", {
-			id: "Bee Antennae",
-			name: "Bee Antennae",
+		public static const SEA_DRAGON:int = _partid++;
+		EnumValue.add(Memories, SEA_DRAGON, "SEA_DRAGON", {
+			id: "Sea Dragon Antennae",
+			name: "Sea Dragon Antennae",
 			cost: 100,
-			title: "Bee",
+			title: "Sea Dragon",
 			transformation: function(): Transformation {
-				return CoC.instance.transformations.AntennaeBee;
+				return CoC.instance.transformations.AntennaeSeaDragon;
 			}
 		});
 

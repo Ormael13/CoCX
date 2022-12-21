@@ -1,20 +1,20 @@
-package classes.Items.Armors 
+package classes.Items.Armors
 {
 	import classes.GlobalFlags.kFLAGS;
 	import classes.CoC;
 	import classes.ItemType;
 	import classes.Items.Armor;
-	import classes.Player;
+import classes.Items.Equipable;
+import classes.Player;
 
 	public class BeeArmor extends Armor
 	{
-		public function BeeArmor() 
+		public function BeeArmor()
 		{
 			super("BeeArmr","Bee Armor","sexy black chitin armor-plating","a set of chitinous armor",18,0,1080,"A suit of armor cleverly fashioned from giant bee chitin. It comes with a silken loincloth to protect your modesty.","Heavy");
 		}
 		
-		override public function useText():void
-		{
+		override public function equipText():void {
 			outputText("\n\nYou" + game.player.clothedOrNaked(" first strip yourself naked and ") + " equip your armor, one piece at a time. \n\nFirst, you clamber into the breastplate. ");
             if (CoC.instance.player.isBiped()) //Some variants.
             {

@@ -13,7 +13,7 @@ public class Naga extends Monster
 	{
 		//2a) Ability - Poison Bite - poisons player
 		protected function nagaPoisonBiteAttack():void {
-			//(Deals damage over 4-5 turns, invariably reducing 
+			//(Deals damage over 4-5 turns, invariably reducing
 			//your speed. It wears off once combat is over.)
 			outputText("The " + this.short + " strikes with the speed of a cobra, sinking her fangs into your flesh!  ");
 			if(!player.hasStatusEffect(StatusEffects.NagaVenom)) {
@@ -55,18 +55,12 @@ public class Naga extends Monster
 			}
 		}
 		
-		//2c) Abiliy - Tail Whip - minus ??? HP 
+		//2c) Abiliy - Tail Whip - minus ??? HP
 		//(base it on toughness?)
 		protected function nagaTailWhip():void {
 			outputText("The naga tenses and twists herself forcefully.  ");
 			//[if evaded]
-			if((player.hasPerk(PerkLib.Evade) && rand(6) == 0)) {
-				outputText("You see her tail whipping toward you and evade it at the last second. You quickly roll back onto your feet.");
-			}
-			else if(player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
-				outputText("Using Raphael's teachings and the movement afforded by your bodysuit, you anticipate and sidestep " + a + short + "'s tail-whip.");
-			}
-			else if(player.spe > rand(300)) {
+			if(player.getEvasionRoll()) {
 				outputText("You see her tail whipping toward you and jump out of the way at the last second. You quickly roll back onto your feet.");
 			}
 			else {
@@ -137,7 +131,7 @@ public class Naga extends Monster
 			this.butt.type = Butt.RATING_LARGE;
 			this.lowerBody = LowerBody.NAGA;
 			this.faceType = Face.SNAKE_FANGS;
-			this.skinTone = "mediterranean-toned";
+			this.bodyColor = "mediterranean-toned";
 			this.hairColor = "brown";
 			this.hairLength = 16;
 			initStrTouSpeInte(38, 50, 55, 42);
@@ -150,7 +144,6 @@ public class Naga extends Monster
 			this.armorMDef = 5;
 			this.bonusLust = 119;
 			this.lust = 30;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 9;
 			this.gems = rand(5) + 8;
 			this.abilities = [

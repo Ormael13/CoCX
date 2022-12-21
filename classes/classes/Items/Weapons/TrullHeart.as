@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Items.Weapons 
+package classes.Items.Weapons
 {
 	import classes.Items.Weapon;
 	import classes.PerkLib;
@@ -20,13 +20,15 @@ package classes.Items.Weapons
 			if (game.player.str >= 100) boost += 15;
 			if (game.player.str >= 50) boost += 10;
 			boost += Math.round((100-game.player.cor) / 5);
-			return (5 + boost); 
+			return (5 + boost);
 		}
 		
-		override public function canUse():Boolean {
-			if (game.player.hasPerk(PerkLib.DualWield) && game.player.hasPerk(PerkLib.GigantGrip)) return super.canUse();
-			if (!game.player.hasPerk(PerkLib.DualWield)) outputText("You aren't skilled in handling large weapons with one hand yet to effectively use those swords. Unless you want to hurt yourself instead enemies when trying to use them...  ");
-			else outputText("You aren't skilled enough to handle this pair of weapons!  ");
+		override public function canEquip(doOutput:Boolean):Boolean {
+			if ((game.player.hasPerk(PerkLib.DualWield) && (game.player.hasPerk(PerkLib.GigantGrip) || game.player.hasPerk(PerkLib.AntyDexterity))) || (game.player.hasPerk(PerkLib.GigantGrip) && game.player.hasPerk(PerkLib.AntyDexterity))) return super.canEquip(doOutput);
+			if (doOutput) {
+				if (game.player.hasPerk(PerkLib.GigantGrip) || game.player.hasPerk(PerkLib.AntyDexterity)) outputText("You aren't skilled in handling large weapons with one hand yet to effectively use those swords. Unless you want to hurt yourself instead enemies when trying to use them...  ");
+				else outputText("You aren't skilled enough to handle this pair of weapons!  ");
+			}
 			return false;
 		}
 	}

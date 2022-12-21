@@ -130,7 +130,7 @@ public class Holli extends Monster
 				outputText(", forever...</i>\" ");
 				//lust damage, fatigue damage, light HP damage
 				EngineCore.fatigue(10);
-				player.dynStats("lus", 25);
+				player.takeLustDamage(25, true);
 				var damage:Number = 20 + rand(10);
 				damage = player.takePhysDamage(damage, true);
 			}
@@ -155,7 +155,7 @@ public class Holli extends Monster
 				//sap rose shitposting
 				var damage:int = 10 + rand(5);
 				damage = player.takePhysDamage(damage, true);
-				player.dynStats("lus", 15);
+				player.takeLustDamage(15, true);
 				player.createStatusEffect(StatusEffects.HolliConstrict, 0, 0, 0, 0);
 			}
 		}
@@ -167,7 +167,7 @@ public class Holli extends Monster
 			player.addStatusValue(StatusEffects.HolliConstrict, 1, 9);
 			//Struggle Succeed
 			//if demon/dragon tongue, automatic success
-			if (player.tongue.type > Tongue.HUMAN) {
+			if (player.tongue.type == Tongue.DRACONIC || player.tongue.type == Tongue.DEMONIC) {
 				outputText("You can't move an arm nor a [leg] to bat the flower away... but she's literally holding your mouth open.  Your long tongue rolls out, gripping and ripping out several of the petals on the end of her stalk!  Holli screams and her roots slacken, allowing you to batter your way out of them.");
 				player.removeStatusEffect(StatusEffects.HolliConstrict);
 			}
@@ -192,7 +192,7 @@ public class Holli extends Monster
 			//lower monster lust by medium-lots and apply med sens-based lust damage
 			lust -= 20;
 			if (lust < 20) lust = 20;
-			player.dynStats("lus", 15 + player.effectiveSensitivity() / 5);
+			player.takeLustDamage(15 + player.effectiveSensitivity() / 5, true);
 		}
 
 //heal -Z
@@ -254,7 +254,7 @@ public class Holli extends Monster
 			this.tallness = rand(12) + 55;
 			this.hips.type = Hips.RATING_CURVY;
 			this.butt.type = Butt.RATING_LARGE;
-			this.skinTone = "black";
+			this.bodyColor = "black";
 			this.hairColor = "sandy-blonde";
 			this.hairLength = 15;
 			initStrTouSpeInte(150, 80, 80, 85);
@@ -269,7 +269,6 @@ public class Holli extends Monster
 			this.bonusLust = 135;
 			this.lust = 20;
 			this.lustVuln = .2;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 20;
 			this.gems = 0;
 			this.drop = NO_DROP;

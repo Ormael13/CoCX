@@ -41,7 +41,7 @@ public class SandWitchScene extends BaseContent implements TimeAwareInterface {
 			clearOutput();
 			outputText("A strange woman seems to appear from the dunes themselves.  She identifies herself as a sand witch, and politely asks if she can cast a spell on you.");
 			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_SANDWITCHES);
-			if (player.statusEffectv1(StatusEffects.Exgartuan) == 1 && player.biggestCockArea() > 100 && player.statusEffectv2(StatusEffects.Exgartuan) == 0) {
+			if (SceneLib.exgartuan.dickAwake()) {
 				outputText("\n\nThe [armor] covering your lower half hits the ground, as if yanked down by magic.  Your [cock] pulsates darkly, growing rigid in seconds as the demon within you takes over.  It barks, \"<i>Fuck, how about I cast my spell on you baby?</i>\"\n\n");
 				outputText("The sandwitch ");
 				if (player.cor < 50)
@@ -59,11 +59,7 @@ public class SandWitchScene extends BaseContent implements TimeAwareInterface {
 			if (player.hairColor == "sandy blonde") {
 				outputText("She smiles wickedly and intones, \"<i>Tresed eht retaw llahs klim ruoy.</i>\"\n\n");
 				if (player.breastRows.length == 0 || player.biggestTitSize() == 0) {
-					outputText("You grow a perfectly rounded pair of C-cup breasts!  ");
-					if (player.breastRows.length == 0) player.createBreastRow();
-					player.breastRows[0].breasts = 2;
-					player.breastRows[0].breastRating = 3;
-					if (player.breastRows[0].nipplesPerBreast < 1) player.breastRows[0].nipplesPerBreast = 1;
+					transformations.CreateBreastRow(3).applyEffect();
 					dynStats("sen", 2, "lus", 1);
 				}
 				if (player.biggestTitSize() >= 1 && player.biggestTitSize() <= 2) {
@@ -127,7 +123,7 @@ internal function sandwitchRape():void {
 	spriteSelect(SpriteDb.s_sandwich);
 	player.clearStatuses(false);
 	//LUST DEFEAT
-	if(player.lust >= player.maxLust()) {
+	if(player.lust >= player.maxOverLust()) {
 		//BAD END START
 		clearOutput();
 		if(player.biggestTitSize() >= 9 && player.biggestLactation() >= 3) {
@@ -289,7 +285,7 @@ private function sandwitchBewbs():void {
 	outputText("You wake up in the desert, immediately grabbing at your body to see if anything's changed...");
 	player.sexReward("milk");
 	player.refillHunger(35);
-	dynStats("lus", 25);
+	dynStats("lus", 25, "scale", false);
 	cleanupAfterCombat();
 	outputText("\n");
 }
@@ -387,7 +383,7 @@ private function centaurTF():void {
     //Grow tits
     if(player.biggestTitSize() == 0) {
         outputText("\n\n(You grow a perfectly rounded pair of C-cup breasts!)");
-        if(player.breastRows.length == 0) player.createBreastRow();
+        if(player.bRows() == 0) player.createBreastRow();
         player.breastRows[0].breasts = 2;
         player.breastRows[0].breastRating = 3;
         if(player.breastRows[0].nipplesPerBreast < 1) player.breastRows[0].nipplesPerBreast = 1;
@@ -573,15 +569,16 @@ private function rapeSandwitchMultiStone():void {
 internal function beatSandwitch():void {
 	spriteSelect(SpriteDb.s_sandwich);
 	clearOutput();
-	if(monster.lust >= monster.maxLust()) outputText("You smile in satisfaction as the " + monster.short + " drops down on all fours and begins masturbating feverishly.  ");
-	else outputText("You smile in satisfaction as the " + monster.short + " drops down on all fours and struggles to rise.  ");
+	if(monster.lust >= monster.maxOverLust()) outputText("You smile in satisfaction as the [monster name] drops down on all fours and begins masturbating feverishly.  ");
+	else outputText("You smile in satisfaction as the [monster name] drops down on all fours and struggles to rise.  ");
     //lust check
     if (player.lust < 33) {
         outputText("\nYou're not aroused enough to rape her.");
         cleanupAfterCombat();
+		return;
     }
     //more text
-    outputText("\nSadly you realize your own needs have not been met.  Of course you could always fuck the " + (monster.lust >= monster.maxLust() ? "horny " : "") + "witch... Will you rape her?");
+    outputText("\nSadly you realize your own needs have not been met.  Of course you could always fuck the " + (monster.lust >= monster.maxOverLust() ? "horny " : "") + "witch... Will you rape her?");
     outputText("  Of course, just taunting, teasing, and humiliating her for her arrogance would be equally amusing, <b>but it would give her plenty of time to turn the tables...</b>");
     //FuNnY and the real menu
 	menu();
@@ -628,9 +625,8 @@ public function sexMenu():void {
     addButtonIfTrue(7, "Ride", centaurRide, "Req. low corruption and centaur lower body", lowCor && player.isTaur());
     addButtonIfTrue(8, "Taur Rape", centaurRape, "Req. high corruption and centaur lower body", hiCor && player.isTaur());
 	addButtonIfTrue(9, "Lay Eggs", ovipositSandWitches, "Req. oviposition", player.gender > 0 && player.canOviposit());
-    
-	SceneLib.uniqueSexScene.pcUSSPreChecksV2(sexMenu);
 	addButton(14, "Leave", cleanupAfterCombat);
+	SceneLib.uniqueSexScene.pcUSSPreChecksV2(sexMenu);
 }
 
 //RAEP SAND-WITCH!
@@ -645,7 +641,7 @@ private function sandwitchGetsDildoed():void {
     EngineCore.outputText("You wiggle the toy about, enjoying having taken such advantage of your now-unconscious foe.  But you have places to be, and you pull out your toy, ");
     if(player.cor > 50) EngineCore.outputText("lick it clean, ");
     EngineCore.outputText("and head back towards camp, knowing full well you'll need to relieve some tension after such a hot encounter.");
-    player.dynStats("lus", (20+player.lib/5+player.cor/10));
+    player.dynStats("lus", (20+player.lib/5+player.cor/10), "scale", false);
     cleanupAfterCombat();
 }
 
@@ -828,7 +824,7 @@ private function getToFuckingWithZeEggsInWitch():void {
 	}
 	//both go to merge
 	doNext(laySomeEggsInThatWitchFinally);
-	dynStats("lus", 15);
+	dynStats("lus", 15, "scale", false);
 }
 
 //(Merge)
@@ -895,8 +891,13 @@ private function laySomeEggsInThatWitchFinally():void {
 	if (player.fertilizedEggs() > 0) {
 		if (player.canOvipositBee())
 			pregnancy.knockUpForce(PregnancyStore.PREGNANCY_BEE_EGGS, 192);
-		else
+		else if (player.canOvipositSpider())
 			pregnancy.knockUpForce(PregnancyStore.PREGNANCY_DRIDER_EGGS, 192);
+		else if (player.canOvipositMantis())
+			pregnancy.knockUpForce(PregnancyStore.PREGNANCY_MANTIS_EGGS, 192);
+		else if (player.canOvipositAnt())
+			pregnancy.knockUpForce(PregnancyStore.PREGNANCY_ANT_EGGS, 192);
+		else outputText ("A little ghost pops up. \"<i>Looks like something went wrong determining what kind of ovipositor you have. You should report this to the coders, along with what race you are.</i>\"");
 	}
 	player.dumpEggs();
 	player.sexReward("vaginalFluids","Dick");
@@ -953,7 +954,7 @@ private function helpZeWithBirfBabies():void {
 	}
 	//PC is everything else: 
 	else outputText("\n\nEasing a hand under her armpit, you give her the support she needs to hobble along the hot desert sand.  Which direction to hobble in gives you cause for concern though; you don't really know where you are at this point.  Making the only choice you can, you concentrate on the camp.  With the rough picture in mind you tell the sand witch to hold on, before the two of you slowly make your way across the dry desert sea...");
-	doNext(curry(sandwitchBirthsYourMonstrosities, false));
+	doNext(sandwitchBirthsYourMonstrosities, false);
 }
 
 //[Must I really?] (corr >=60)
@@ -974,7 +975,7 @@ private function reluctantlyHelpZeWitch():void {
 	}
 	//PC is everything else:  
 	else outputText("\n\nEasing a hand under her armpit, you give her the support she needs to hobble along the hot desert sand.  Which direction to hobble in gives you cause for concern though; you don't really know where you are at this point.  Making the only choice you can, you concentrate on the camp.  With the rough picture in mind you tell the sand witch to hold on, before the two of you slowly make your way across the dry desert sea...");
-	doNext(curry(sandwitchBirthsYourMonstrosities, true));
+	doNext(sandwitchBirthsYourMonstrosities, true);
 }
 
 
@@ -1018,7 +1019,7 @@ private function sandwitchSpanking():void {
 	if(monster.HP <= monster.minHP()) outputText("  You can't even stand up!");
 	else outputText("  You can't even stop masturbating, can you?");
 	outputText("</i>\"  You kick her hand away, and she tumbles down into a distraught heap, crying softly");
-	if(monster.lust >= monster.maxLust()) outputText(" but still masturbating");
+	if(monster.lust >= monster.maxOverLust()) outputText(" but still masturbating");
 	outputText(".  It's time for some fun!");
 	outputText("\n\nYou grab the helpless witch and flop her onto her back.  She gasps, glaring defiantly up at you while her arms fold closed over the front of her robe, concealing what looks like four large tits beneath.  None of that!  You tickle her sides in a surprise attack, and she starts to laugh.  Then, you move your scurrying fingertips to her belly and down her thighs.  The spellcaster giggles uproariously and tries to bat your arms away, which gives you the opening you need.  You easily slide past her laughter-addled strikes to the course fabric of her brown robes, and with a quick flex of your muscles, you tear the fabric down the middle, exposing a sea of tanned breast-flesh capped with four prominent nipples.");
 	outputText("\n\n\"<i>Nooo,</i>\" the witch protests once her laughter dies down.  Smirking, you start to pinch and pull at her nipples, tweaking the tender nubs until drops of milk are rolling down all four of her ponderous jugs.  You milk her effortlessly, tugging and tweaking the teats idly while you ply her with questions, asking her if she has anything better to do than try to shove rocks up strangers' assholes.  Her tanned cheeks color in embarrassment, but she stays mute, glowering at you while you play with her nipples.");
@@ -1046,7 +1047,7 @@ private function sandwitchSpanking():void {
 	outputText(".  Bruised and orgasmed into exhaustion, you pass out in the sand with your [armor] around your ankles.  Maybe next time you won't waste your chances gloating.");
 	monster.lust = 98;
 	monster.HP = 2;
-	player.lust = player.maxLust();
+	player.lust = player.maxOverLust();
 	flags[kFLAGS.COMBAT_BONUS_XP_VALUE] = monster.XP;
 	cleanupAfterCombat();
 	player.sexReward("vaginalFluids","Dick");

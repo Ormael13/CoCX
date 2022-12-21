@@ -4,13 +4,12 @@
  */
 package classes.Scenes.Areas.GlacialRift
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.BodyParts.*;
+import classes.GlobalFlags.kFLAGS;
 import classes.Items.WeaponLib;
-	import classes.CoC;
-	import classes.BodyParts.*;
-    import classes.display.SpriteDb;
-	import classes.Scenes.SceneLib;
+import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 public class YukiOnnaScene extends BaseContent
 	{
@@ -23,15 +22,15 @@ public class YukiOnnaScene extends BaseContent
 			clearOutput();
 			spriteSelect(SpriteDb.s_YukiOnna);
 			if (player.hasStatusEffect(StatusEffects.MetYukiOnna)) {
-				if (player.isRace(Races.YUKIONNA) && player.hasPerk(PerkLib.IcyFlesh)) {
+				if (player.isRace(Races.YUKIONNA, 1, false) && player.hasPerk(PerkLib.IcyFlesh)) {
 					outputText("As you explore the glacial rift the weather begins to take a turn for the worse, your visibility dimming out until you can barely see a few meters ahead of yourself. You begin considering going back to camp when a sweet female voice begins to sing amidst the blizzard. You know this song, melancholic, tragic even and something stirs you to fellow the song to its source, a Yuki Onna enjoying the blizzard standing next to a cliff, her snowish white silk like hair floating softly in the wind. She turns to you smiling, waving you to come closer.\n\n");
 					outputText("\"<i>Why hello there snow sister. I just can't find anything to warm me up, and I have been singing for hours, so how about we had some sisterly bonding, just you and I?</i>\"\n\n");
 					outputText("You catch her meaning right away, smiling coyly in approval as you toss your equipment to the snow bank on the side. Who needs a bed really? The snow is comfy enough, and it's certainly not like you or her is gonna die from the cold, though others might.\n\n");
 					outputText("She gently pulls you against her, your cold skins deliciously rubbing against one another. The contact of the snow is like a gentle velvet glove and when you both plunge into it the sensation of it molding to your entwined shape like a well-made bed, something you hadn't had since Ingnam. It isn't warm nor cold, it's just the right temperature for your frigid forms.\n\n");
 					outputText("She slides a hand between you, resting it against the underside of your left breast. You sigh at the caress replicating by tasting the curve of her tight with your right hand. Encouraged, she pulls you with her other hand into a soft wet kiss, your bluish tongue meeting with hers as her hand cups your breast, making you moan inside her mouth. Unsatisfied with these simple moves, you grind your pussy lips against hers, enjoying the building heat between your two labias. ");
-					outputText("Her motion follows yours, cold snow falling softly around and on the both of you as you make sisterly love to one another. This contrast between hot and cold is only all the more pleasurable to your frozen bodies.\n\n");
+					outputText("Her motion follows yours, cold snow falling softly around and on both of you as you make sisterly love to one another. This contrast between hot and cold is only all the more pleasurable to your frozen bodies.\n\n");
 					outputText("The experience is delightful but why stop there? You snap your fingers and use your snow control power to craft a well sized double ended dildo out of slippery ice. Satisfied with the shape you slide it between your two holes, enjoying the penetration as your pussy smacks against hers. You cry out in delight as the hastily crafted sex toy slides from your pussy depths to hers. ");
-					outputText("After a few minutes of this delicious experience, your paired orgasm now imminent, the both of you let out a banshee like scream as your cunts drenches the snowy mat below.\n\n");
+					outputText("After a few minutes of this delicious experience, your paired orgasm now imminent, both of you let out a banshee like scream as your cunts drenches the snowy mat below.\n\n");
 					outputText("Highly satisfied you depose a loving kiss on your partner's lips before dressing up and heading back to camp.\n\n");
 					player.sexReward("Default","Default",true,false);
 					doNext(camp.returnToCampUseOneHour);
@@ -87,18 +86,14 @@ public class YukiOnnaScene extends BaseContent
 				player.addCurse("tou", 30,2);
 			}
 			else {
-				if (rand(3) == 0) player.skinTone = "snow white";
-				else {
-					if (rand(2) == 0) player.skinTone = "light blue";
-					else player.skinTone = "glacial white";
-				}
-				player.skinAdj = "cold";
+				player.skinColor = randomChoice("snow white", "light blue", "glacial white");
+				player.skinAdj   = "cold";
 				outputText("At first, it felt horribly cold like you were dying, then the sensation began to fade as you finally felt yourself getting warmer. Or is it truly that you are getting warmer in the first place? Seeking to feel more you pull her closer, and she rewards you by gently sliding a finger into your folds. You gasp in her mouth, taking a deep breath of fresh cold air. Cold? Hot? You no longer really care as you are too lost in this smooth little world just between you and her. Her pale white skin touching yours, making you shiver exquisitely. ");
 				outputText("You help her out, sliding your own hand in her ice-cold pussy, barely feeling yourself anymore. Her mouth part ways with yours, a crystal clear strand of saliva breaking between you as she heads down to one of your cold hardened nipples and starts to suckle it out, her tongue flicking the tip and giving your chest some well needed attention. The contrast between cold and hot slowly dies out, eventually replaced by chilling pleasure, one of her cold delicate hands cupping your chest as you begin grinding your pussy against hers, ");
 				outputText("the pair of you moaning in delight as you approach your respective climax. The world around you seems to lose all color, bleaching to the color of white snow as you finally cum. The light fades as you slowly lose consciousness in your partner's arms, the last of your strength abandoning you. You barely remember her kissing you one last time and telling you sweet dreams as you lose to the black curtain entirely.\n\n");
 				if (player.statusEffectv1(StatusEffects.MetYukiOnna) == 1 || player.statusEffectv1(StatusEffects.MetYukiOnna) == 3) outputText("You wake up in a very different place from where you remember laying down. The bed is still there partially covered with a snowy blanket, but the hearth looks like it hasn't been used in years. There is a hole in the roof explaining where the snow came from and what isn't buried by snow is covered with a thin layer of dust like the place has been abandoned for years.\n\n");
 				else outputText("You wake up on the same snowcovered bed you slept in last night. Truth be told you are somewhat confused because despite the delicious experience, you fully expected to die. It's a mystery how you didn't die all things considered since your form has literally been buried under a thin blanket of snow for several hours now.\n\n");
-				outputText("You are stark naked yet despite this feel nothing… no cold… no warmth in a room in which obviously you should be freezing to death. A few thin strands of white is visible before your eyes, and you move it away, realising seconds later that those strands is your hair. Looking at your hand, you are surprised by the paleness of your "+player.skinTone+" skin... like that of a chilled corpse. Placing your hand on your chest, you don't feel the beating of your own heart either.. as if it had frozen along with the rest. ");
+				outputText("You are stark naked yet despite this feel nothing… no cold… no warmth in a room in which obviously you should be freezing to death. A few thin strands of white is visible before your eyes, and you move it away, realising seconds later that those strands is your hair. Looking at your hand, you are surprised by the paleness of your [color] skin... like that of a chilled corpse. Placing your hand on your chest, you don't feel the beating of your own heart either.. as if it had frozen along with the rest. ");
 				outputText("You still breathe, drawing air in and out, yet the air coming out is cold and creates none of the warm cloud a living being should make when breathing at such temperatures. Your feet are naked, yet the snow feels pleasant underneath them."+(player.gender == 3 ? " Whatever male asset you had is gone from your nether as well… you’re definitely fully female now.":"")+" You don't feel cold despite the ambient temperature yet… you yearn for the warmth of others, the warmth that you lost, this is all so unfair. ");
 				outputText("You desperately need to fill this empty void within you with something... anything. Surely they will share it if you ask nicely and if they don't... you will simply have to steal it from them.\n\n");
 				outputText("As if to mirror your growing jealous indignation the snow around you becomes agitated, turning into a small indoor blizzard, which only calms down once you do. You need to feel warmth again no matter what, and it doesn't matter if everyone around you has to freeze to death in order to satisfy YOUR needs. <b>Your soul has frozen over, you have become a Yuki Onna in body and heart.</b>\n\n");
@@ -171,7 +166,7 @@ public class YukiOnnaScene extends BaseContent
 				encounterYukiOnnaYes();
 			}
 			else {
-				outputText("Defeated by "+(player.lust >= player.maxLust() ? "your growing lust":"the ravaging cold")+" you pass out somewhat terrified to think of what will happen to you.\n\n");
+				outputText("Defeated by "+(player.lust >= player.maxOverLust() ? "your growing lust":"the ravaging cold")+" you pass out somewhat terrified to think of what will happen to you.\n\n");
 				outputText("After a while, you wake up, still dizzy. You don't know exactly how or when you did move, but you are now laying down on a silky white couch, in some beautiful and cozy house, fully stripped out of your gear and with the Yuki Onna snuggling against you, ready for a kiss. Even if you wanted to try and get out of this situation, you are still too weak from the battle to fight back.");
 				if (player.gender == 2 || player.gender == 3) {
 					outputText(" Sensing that you are terrified she gently shushes you, placing a finger on your trembling lips.\n\n");

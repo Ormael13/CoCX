@@ -12,6 +12,7 @@ import classes.Races;
 
 public class GorgonEyesMutation extends IMutationPerkType
     {
+        private static const mName:String = "Gorgon Eyes";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -42,7 +43,7 @@ public class GorgonEyesMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Gorgon Eyes" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -68,9 +69,8 @@ public class GorgonEyesMutation extends IMutationPerkType
         }
 
         //Mutations Buffs
-        override public function pBuffs(target:Creature = null):Object{
+        override public function buffsForTier(pTier:int):Object {
             var pBuffs:Object = {};
-            var pTier:int = currentTier(this, (target == null)? player : target);
             if (pTier == 1) {
                 pBuffs['spe.mult'] = 0.05;
                 pBuffs['sens'] = 5
@@ -83,8 +83,7 @@ public class GorgonEyesMutation extends IMutationPerkType
         }
 
         public function GorgonEyesMutation() {
-            super("Gorgon Eyes IM", "Gorgon Eyes", ".");
-            maxLvl = 2;
+            super(mName + " IM", mName, SLOT_EYES, 2);
         }
 
     }

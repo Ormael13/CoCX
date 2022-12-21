@@ -5,6 +5,8 @@ package classes.Scenes.Combat {
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.*;
+import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
+import classes.Items.EnchantmentLib;
 import classes.Items.JewelryLib;
 import classes.Items.NecklaceLib;
 import classes.PerkLib;
@@ -21,23 +23,23 @@ public class CombatMagic extends BaseCombatContent {
 
 	internal function applyAutocast():void {
 		outputText("\n\n");
-		if (!player.hasPerk(PerkLib.HexKnowledge)) {
-			if (player.hasPerk(PerkLib.Spellsword) && CombatAbilities.ChargeWeapon.isKnownAndUsable && flags[kFLAGS.AUTO_CAST_CHARGE_WEAPON] == 0) {
+		if (!player.hasPerk(PerkLib.HexKnowledge) && !player.hasPerk(PerkLib.HyperCasting)) {
+			if (player.hasPerk(PerkLib.Spellsword) && CombatAbilities.ChargeWeapon.isKnownAndUsable && flags[kFLAGS.AUTO_CAST_CHARGE_WEAPON_DISABLED] == 0) {
 				CombatAbilities.ChargeWeapon.autocast();
 			}
-			if (player.hasPerk(PerkLib.Spellarmor) && CombatAbilities.ChargeArmor.isKnownAndUsable && flags[kFLAGS.AUTO_CAST_CHARGE_ARMOR] == 0) {
+			if (player.hasPerk(PerkLib.Spellarmor) && CombatAbilities.ChargeArmor.isKnownAndUsable && flags[kFLAGS.AUTO_CAST_CHARGE_ARMOR_DISABLED] == 0) {
 				CombatAbilities.ChargeArmor.autocast();
 			}
 		}
-		if (!player.hasPerk(PerkLib.DivineKnowledge)) {
-			if (player.hasPerk(PerkLib.Battlemage) && CombatAbilities.Might.isKnownAndUsable && flags[kFLAGS.AUTO_CAST_MIGHT] == 0) {
+		if (!player.hasPerk(PerkLib.DivineKnowledge) && !player.hasPerk(PerkLib.HyperCasting)) {
+			if (player.hasPerk(PerkLib.Battlemage) && CombatAbilities.Might.isKnownAndUsable && flags[kFLAGS.AUTO_CAST_MIGHT_DISABLED] == 0) {
 				CombatAbilities.Might.autocast();
 			}
-			if (player.hasPerk(PerkLib.Battleflash) && CombatAbilities.Blink.isKnownAndUsable && flags[kFLAGS.AUTO_CAST_BLINK] == 0) {
+			if (player.hasPerk(PerkLib.Battleflash) && CombatAbilities.Blink.isKnownAndUsable && flags[kFLAGS.AUTO_CAST_BLINK_DISABLED] == 0) {
 				CombatAbilities.Blink.autocast();
 			}
 		}
-		if (player.hasPerk(PerkLib.Battleshield) && CombatAbilities.ManaShield.isKnownAndUsable && flags[kFLAGS.AUTO_CAST_MANA_SHIELD] == 0) {
+		if (player.hasPerk(PerkLib.Battleshield) && CombatAbilities.ManaShield.isKnownAndUsable && flags[kFLAGS.AUTO_CAST_MANA_SHIELD_DISABLED] == 0) {
 			CombatAbilities.ManaShield.autocast();
 		}
 	}
@@ -49,14 +51,16 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.CounterEclipsingShadow)) player.removeStatusEffect(StatusEffects.CounterEclipsingShadow);
 	}
 
-
 	internal function costChange_all():Number {
 		var costPercent:Number = 0;
+		costPercent += 100*player.spellcostStat.value;
         if (player.hasPerk(PerkLib.SeersInsight)) costPercent -= (100 * player.perkv1(PerkLib.SeersInsight));
 		if (player.hasPerk(PerkLib.SpellcastingAffinity)) costPercent -= player.perkv1(PerkLib.SpellcastingAffinity);
-		if (player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) costPercent -= player.perkv1(PerkLib.WizardsEnduranceAndSluttySeduction);
-		if (player.hasPerk(PerkLib.WizardsAndDaoistsEndurance)) costPercent -= player.perkv1(PerkLib.WizardsAndDaoistsEndurance);
-		if (player.hasPerk(PerkLib.WizardsEndurance)) costPercent -= player.perkv1(PerkLib.WizardsEndurance);
+		if (player.hasPerk(PerkLib.WarMageNovice)) costPercent -= 10;
+		if (player.hasPerk(PerkLib.WarMageApprentice)) costPercent -= 10;
+		if (player.hasPerk(PerkLib.WarMageAdept)) costPercent -= 10;
+		if (player.hasPerk(PerkLib.WarMageExpert)) costPercent -= 15;
+		if (player.hasPerk(PerkLib.WarMageMaster)) costPercent -= 20;
 		if (player.headjewelryName == "fox hairpin") costPercent -= 20;
         if (player.weapon == weapons.N_STAFF) costPercent += 200;
 		if (player.weapon == weapons.U_STAFF) costPercent -= 50;
@@ -65,10 +69,10 @@ public class CombatMagic extends BaseCombatContent {
 
     internal function costChange_spell():Number {
 		var costPercent:Number = 0;
-        if (player.level >= 24 && player.inte >= 60) costPercent += 50;
-		if (player.level >= 42 && player.inte >= 120) costPercent += 50;
-		if (player.level >= 60 && player.inte >= 180) costPercent += 50;
-		if (player.level >= 78 && player.inte >= 240) costPercent += 50;
+        if (player.level >= 27 && player.inte >= 100) costPercent += 50;
+		if (player.level >= 54 && player.inte >= 200) costPercent += 50;
+		if (player.level >= 78 && player.inte >= 300) costPercent += 50;
+		if (player.level >= 126 && player.inte >= 400) costPercent += 50;
         return costPercent;
     }
 
@@ -76,15 +80,15 @@ public class CombatMagic extends BaseCombatContent {
 		var costPercent:Number = 0;
         if (player.hasPerk(PerkLib.WisenedHealer)) {
 			costPercent += 100;
-			if (player.level >= 24 && player.wis >= 60) costPercent += 25;
-			if (player.level >= 42 && player.wis >= 120) costPercent += 25;
-			if (player.level >= 60 && player.wis >= 180) costPercent += 25;
-			if (player.level >= 78 && player.wis >= 240) costPercent += 25;
+			if (player.level >= 27 && player.wis >= 100) costPercent += 25;
+			if (player.level >= 54 && player.wis >= 200) costPercent += 25;
+			if (player.level >= 78 && player.wis >= 300) costPercent += 25;
+			if (player.level >= 126 && player.wis >= 400) costPercent += 25;
 		}
-		if (player.level >= 24 && player.inte >= 60) costPercent += 25;
-		if (player.level >= 42 && player.inte >= 120) costPercent += 25;
-		if (player.level >= 60 && player.inte >= 180) costPercent += 25;
-		if (player.level >= 78 && player.inte >= 240) costPercent += 25;
+		if (player.level >= 27 && player.inte >= 100) costPercent += 25;
+		if (player.level >= 54 && player.inte >= 200) costPercent += 25;
+		if (player.level >= 78 && player.inte >= 300) costPercent += 25;
+		if (player.level >= 126 && player.inte >= 400) costPercent += 25;
 		if (player.hasPerk(PerkLib.NaturalHealingMinor)) costPercent -= 10;
 		if (player.hasPerk(PerkLib.NaturalHealingMajor)) costPercent -= 15;
 		if (player.hasPerk(PerkLib.NaturalHealingEpic)) costPercent -= 20;
@@ -97,6 +101,7 @@ public class CombatMagic extends BaseCombatContent {
 		//Addiditive mods
 		if (player.weapon == weapons.ASCENSU) costPercent -= 15;
 		if (spellModImpl() > 1) costPercent += Math.round(spellModImpl() - 1) * 10;
+		if (player.hasPerk(PerkLib.AscensionMysticality)) costPercent -= (player.perkv1(PerkLib.AscensionMysticality) * 2);
 		//Limiting it and multiplicative mods
 		if (player.hasPerk(PerkLib.BloodMage) && costPercent < 50) costPercent = 50;
 		mod *= costPercent / 100;
@@ -118,21 +123,11 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.BloodDemonIntelligence)) costPercent -= 5;
 		if (player.weapon == weapons.ASCENSU) costPercent -= 15;
 		if (spellModImpl() > 1) costPercent += Math.round(spellModImpl() - 1) * 10;
+		if (player.hasPerk(PerkLib.AscensionMysticality)) costPercent -= (player.perkv1(PerkLib.AscensionMysticality) * 2);
 		//Limiting it and multiplicative mods
 		if (costPercent < 5) costPercent = 5;
 		mod *= costPercent / 100;
 		if (mod < 2) mod = 2;
-		mod = Math.round(mod * 100) / 100;
-		return mod;
-	}
-
-	internal function healCostImpl(mod:Number):Number {
-		var costPercent:Number = 100 + costChange_all() + costChange_heal();
-		//Addiditive mods
-		if (player.weapon == weapons.ASCENSU) costPercent -= 15;
-		if (healModImpl() > 1) costPercent += Math.round(healModImpl() - 1) * 10;
-		mod *= costPercent / 100;
-		if (mod < 5) mod = 5;
 		mod = Math.round(mod * 100) / 100;
 		return mod;
 	}
@@ -148,21 +143,12 @@ public class CombatMagic extends BaseCombatContent {
 		var costPercent:Number = 100 + costChange_all() + costChange_spell() + costChange_white();
 		//Addiditive mods
 		if (spellModWhiteImpl() > 1) costPercent += Math.round(spellModWhiteImpl() - 1) * 10;
+		if (player.hasPerk(PerkLib.AscensionMysticality)) costPercent -= (player.perkv1(PerkLib.AscensionMysticality) * 2);
 		//Limiting it and multiplicative mods
 		if (player.hasPerk(PerkLib.BloodMage) && costPercent < 50) costPercent = 50;
 		mod *= costPercent / 100;
 		if (player.hasPerk(PerkLib.BloodMage) && mod < 5) mod = 5;
 		else if (mod < 2) mod = 2;
-		mod = Math.round(mod * 100) / 100;
-		return mod;
-	}
-
-	internal function healCostWhiteImpl(mod:Number):Number {
-		var costPercent:Number = 100 + costChange_all() + costChange_heal() + costChange_white();
-		//Addiditive mods
-		if (healModWhiteImpl() > 1) costPercent += Math.round(healModWhiteImpl() - 1) * 10;
-		mod *= costPercent / 100;
-		if (mod < 5) mod = 5;
 		mod = Math.round(mod * 100) / 100;
 		return mod;
 	}
@@ -179,21 +165,12 @@ public class CombatMagic extends BaseCombatContent {
 		var costPercent:Number = 100 + costChange_all() + costChange_spell() + costChange_black();
 		//Addiditive mods
 		if (spellModBlackImpl() > 1) costPercent += Math.round(spellModBlackImpl() - 1) * 10;
+		if (player.hasPerk(PerkLib.AscensionMysticality)) costPercent -= (player.perkv1(PerkLib.AscensionMysticality) * 2);
 		//Limiting it and multiplicative mods
 		if (player.hasPerk(PerkLib.BloodMage) && costPercent < 50) costPercent = 50;
 		mod *= costPercent / 100;
 		if (player.hasPerk(PerkLib.BloodMage) && mod < 5) mod = 5;
 		else if (mod < 2) mod = 2;
-		mod = Math.round(mod * 100) / 100;
-		return mod;
-	}
-
-	internal function healCostBlackImpl(mod:Number):Number {
-		var costPercent:Number = 100 + costChange_all() + costChange_heal() + costChange_black();
-		//Addiditive mods
-		if (healModBlackImpl() > 1) costPercent += Math.round(healModBlackImpl() - 1) * 10;
-		mod *= costPercent / 100;
-		if (mod < 5) mod = 5;
 		mod = Math.round(mod * 100) / 100;
 		return mod;
 	}
@@ -209,6 +186,7 @@ public class CombatMagic extends BaseCombatContent {
 		var costPercent:Number = 100 + costChange_all() + costChange_spell() + costChange_grey();
 		//Addiditive mods
 		if (spellModGreyImpl() > 1) costPercent += Math.round(spellModGreyImpl() - 1) * 10;
+		if (player.hasPerk(PerkLib.AscensionMysticality)) costPercent -= player.perkv1(PerkLib.AscensionMysticality);
 		//Limiting it and multiplicative mods
 		if (player.hasPerk(PerkLib.BloodMage) && costPercent < 50) costPercent = 50;
 		mod *= costPercent / 100;
@@ -219,16 +197,7 @@ public class CombatMagic extends BaseCombatContent {
 	}
 
     internal function modChange_all():Number {
-		var mod:Number = 0;
-		if (player.hasPerk(PerkLib.WizardsFocus)) {
-			mod += player.perkv1(PerkLib.WizardsFocus);
-		}
-		if (player.hasPerk(PerkLib.WizardsAndDaoistsFocus)) {
-			mod += player.perkv1(PerkLib.WizardsAndDaoistsFocus);
-		}
-		if (player.hasPerk(PerkLib.SagesKnowledge)) {
-			mod += player.perkv1(PerkLib.SagesKnowledge);
-		}
+		var mod:Number = player.spellpowerStat.value - 1; // spellpower stat starts with 1
         if (player.jewelryEffectId == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
 		if (player.jewelryEffectId2 == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
 		if (player.jewelryEffectId3 == JewelryLib.MODIFIER_SPELL_POWER) mod += (player.jewelryEffectMagnitude / 100);
@@ -237,6 +206,10 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.upperGarmentName == "Drider-weave Armor") mod += 0.3;
 		if (player.countCockSocks("blue") > 0) mod += (player.countCockSocks("blue") * .05);
         if (player.hasPerk(PerkLib.ChiReflowMagic)) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
+		// hope it doesn't lag too much
+		for each (var e:SimpleRaceEnchantment in player.allEnchantments(EnchantmentLib.RaceSpellPowerBonus)) {
+			mod += 0.02 * e.power * player.racialTier(e.race);
+		}
         return mod;
     }
 
@@ -249,15 +222,14 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.GrandArchmage3rdCircle) && player.inte >= 175) mod += .6;
 		if (player.hasPerk(PerkLib.GrandMage) && player.inte >= 75) mod += .2;
 		if (player.hasPerk(PerkLib.JobSorcerer) && player.inte >= 25) mod += .1;
-		if (player.hasPerk(PerkLib.PrestigeJobGreySage)) mod += .2;
 		if (player.hasPerk(PerkLib.Mage) && player.inte >= 50) mod += .1;
 		if (player.hasPerk(PerkLib.Spellpower) && player.inte >= 50) mod += .1;
-		if (player.hasPerk(PerkLib.TraditionalMageI) && player.isUsingStaff() && player.isUsingTome()) mod += 1;
-		if (player.hasPerk(PerkLib.TraditionalMageII) && player.isUsingStaff() && player.isUsingTome()) mod += 1;
-		if (player.hasPerk(PerkLib.TraditionalMageIII) && player.isUsingStaff() && player.isUsingTome()) mod += 1;
-		if (player.hasPerk(PerkLib.TraditionalMageIV) && player.isUsingStaff() && player.isUsingTome()) mod += 1;
-		if (player.hasPerk(PerkLib.TraditionalMageV) && player.isUsingStaff() && player.isUsingTome()) mod += 1;
-		if (player.hasPerk(PerkLib.TraditionalMageVI) && player.isUsingStaff() && player.isUsingTome()) mod += 1;
+		if (player.hasPerk(PerkLib.TraditionalMageI) && (player.isUsingStaff() || (player.isUsingWand() && player.isUsingTome()))) mod += 1;
+		if (player.hasPerk(PerkLib.TraditionalMageII) && (player.isUsingStaff() || (player.isUsingWand() && player.isUsingTome()))) mod += 1;
+		if (player.hasPerk(PerkLib.TraditionalMageIII) && (player.isUsingStaff() || (player.isUsingWand() && player.isUsingTome()))) mod += 1;
+		if (player.hasPerk(PerkLib.TraditionalMageIV) && (player.isUsingStaff() || (player.isUsingWand() && player.isUsingTome()))) mod += 1;
+		if (player.hasPerk(PerkLib.TraditionalMageV) && (player.isUsingStaff() || (player.isUsingWand() && player.isUsingTome()))) mod += 1;
+		if (player.hasPerk(PerkLib.TraditionalMageVI) && (player.isUsingStaff() || (player.isUsingWand() && player.isUsingTome()))) mod += 1;
         if (player.hasPerk(PerkLib.Ambition)) {
 			mod += player.perkv2(PerkLib.Ambition);
 		}
@@ -302,9 +274,7 @@ public class CombatMagic extends BaseCombatContent {
 			}
 			if (player.hasPerk(PerkLib.SharedPower) && player.perkv1(PerkLib.SharedPower) > 0) mod += (0.1*player.perkv1(PerkLib.SharedPower));
 		}
-
         return mod;
-
     }
 
     internal function modChange_heal():Number {
@@ -318,16 +288,20 @@ public class CombatMagic extends BaseCombatContent {
     }
 
 	internal function spellModImpl():Number {
-		var mod:Number = player.spellpowerStat.value + modChange_all() + modChange_spell_1() + modChange_spell_2();
-		if (player.hasPerk(PerkLib.Obsession)) {
-			mod += player.perkv1(PerkLib.Obsession);
-		}
+		var mod:Number = 1 + modChange_all() + modChange_spell_1() + modChange_spell_2();
+		if (player.hasPerk(PerkLib.Obsession)) mod += player.perkv1(PerkLib.Obsession);
 		if (player.hasPerk(PerkLib.KnowledgeIsPower)) {
 			if (player.perkv1(IMutationsLib.RatatoskrSmartsIM) >= 3) mod += (Math.round(camp.codex.checkUnlocked() / 100) * 3);
 			else mod += Math.round(camp.codex.checkUnlocked() / 100);
 		}
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) mod += .3;
-
+		if (player.headJewelry == headjewelries.DMONSKUL) mod += player.cor * .006;
+		if (player.isGargoyle() && Forgefather.material == "alabaster") {
+			if (Forgefather.refinement == 0) mod += (.15);
+			if (Forgefather.refinement == 1) mod += (.25);
+			if (Forgefather.refinement == 2 || Forgefather.refinement == 3) mod += (.5);
+			if (Forgefather.refinement == 4) mod += (1);
+		}
 		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
 		if (player.weapon == weapons.PURITAS) mod *= 1.6;
 		if (player.weapon == weapons.DEPRAVA) mod *= 1.6;
@@ -338,43 +312,105 @@ public class CombatMagic extends BaseCombatContent {
 	}
 	
 	internal function spellModBloodImpl():Number {
-		var modS:Number = spellModImpl();
         var mod:Number = 1;
+		if (spellModImpl() > 1) mod += (spellModImpl() - 1);
 		if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) mod += .1;
-		if (player.hasPerk(PerkLib.WayOfTheBlood)) mod += .1;
-		if (player.hasPerk(PerkLib.YourPainMyPower)) mod += .1;
-		if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) mod += .1;
-		if (player.hasPerk(PerkLib.BloodDemonToughness)) mod += .1;
+		if (player.hasPerk(PerkLib.WayOfTheBlood)) mod += .15;
+		if (player.hasPerk(PerkLib.YourPainMyPower)) mod += .2;
+		if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) mod += .25;
+		if (player.hasPerk(PerkLib.BloodDemonToughness)) mod += .3;
 		//
-		if (player.hasPerk(PerkLib.BloodDemonWisdom)) mod += .1;
+		if (player.hasPerk(PerkLib.BloodDemonWisdom)) mod += .3;
 		//
-		if (player.hasPerk(PerkLib.BloodDemonIntelligence)) mod += .1;
+		if (player.hasPerk(PerkLib.BloodDemonIntelligence)) mod += .3;
         //
-        mod *= modS; //makes sense?
+		mod = Math.round(mod * 100) / 100;
+		return mod;
+	}
+	
+	internal function spellModGreyImpl():Number {
+		var mod:Number = 1;
+		if (spellModImpl() > 1) mod += (spellModImpl() - 1);
+		if (player.hasPerk(PerkLib.SpellpowerGrey) && player.inte >= 50) mod += .15;
+		if (player.hasPerk(PerkLib.GreyMageApprentice) && player.inte >= 75) mod += .1;
+		if (player.hasPerk(PerkLib.GreyMage) && player.inte >= 125) mod += .2;
+		if (player.hasPerk(PerkLib.GreyArchmage) && player.inte >= 175) mod += .3;
+		if (player.hasPerk(PerkLib.GrandGreyArchmage) && player.inte >= 225) mod += .4;
+		if (player.hasPerk(PerkLib.GrandGreyArchmage2ndCircle) && player.inte >= 275) mod += .5;
+		return mod;
+	}
+
+	internal function spellModWhiteImpl():Number {
+		var mod:Number = 1;
+		if (spellModImpl() > 1) mod += (spellModImpl() - 1);
+		if (player.hasStatusEffect(StatusEffects.BlessingOfDivineMarae)) {
+			mod += player.statusEffectv2(StatusEffects.BlessingOfDivineMarae);
+		}
+		if (player.hasPerk(PerkLib.AvatorOfPurity)) mod += .2;
+		if (Forgefather.purePearlEaten) mod +=.25;
+		if (player.hasPerk(PerkLib.UnicornBlessing) && player.cor <= 20) mod += .2;
+		if (player.hasPerk(PerkLib.PrestigeJobArchpriest)) mod += .2;
+		if (player.hasPerk(PerkLib.PrestigeJobWarlock)) mod -= .4;
+		if (player.hasKeyItem("Holy Symbol") >= 0) mod += .2;
+		if (player.necklace == necklaces.LEAFAMU) {
+			if (player.isElf()) mod += .2;
+			else mod += .1;
+		}
 		mod = Math.round(mod * 100) / 100;
 		return mod;
 	}
 
-	internal function spellGreyCooldownImpl():Number {
-		var mod:Number = 3;
-		if (mod < 0) mod = 0;
+	internal function spellModBlackImpl():Number {
+		var mod:Number = 1;
+		if (spellModImpl() > 1) mod += (spellModImpl() - 1);
+		if (player.hasPerk(PerkLib.AvatorOfCorruption)) mod += .3;
+		if (Forgefather.lethiciteEaten) mod +=.25;
+		if (player.hasPerk(PerkLib.BicornBlessing) && player.cor >= 80) mod += .2;
+		if (player.hasPerk(PerkLib.PrestigeJobArchpriest)) mod -= .4;
+		if (player.hasPerk(PerkLib.PrestigeJobWarlock)) mod += .2;
+		if (player.countMiscJewelry(miscjewelries.DMAGETO) > 0) mod += 0.25;
+		mod = Math.round(mod * 100) / 100;
 		return mod;
 	}
 
-	internal function spellGreyTier2CooldownImpl():Number {
-		var mod:Number = 6;
-		if (mod < 0) mod = 0;
+	internal function healCostImpl(mod:Number):Number {
+		var costPercent:Number = 100 + costChange_all() + costChange_heal();
+		//Addiditive mods
+		if (player.weapon == weapons.ASCENSU) costPercent -= 15;
+		if (healModImpl() > 1) costPercent += Math.round(healModImpl() - 1) * 10;
+		if (player.hasPerk(PerkLib.AscensionMysticality)) costPercent -= (player.perkv1(PerkLib.AscensionMysticality) * 2);
+		mod *= costPercent / 100;
+		if (mod < 5) mod = 5;
+		mod = Math.round(mod * 100) / 100;
+		return mod;
+	}
+
+	internal function healCostWhiteImpl(mod:Number):Number {
+		var costPercent:Number = 100 + costChange_all() + costChange_heal() + costChange_white();
+		//Addiditive mods
+		if (healModWhiteImpl() > 1) costPercent += Math.round(healModWhiteImpl() - 1) * 10;
+		if (player.hasPerk(PerkLib.AscensionMysticality)) costPercent -= (player.perkv1(PerkLib.AscensionMysticality) * 2);
+		mod *= costPercent / 100;
+		if (mod < 5) mod = 5;
+		mod = Math.round(mod * 100) / 100;
+		return mod;
+	}
+
+	internal function healCostBlackImpl(mod:Number):Number {
+		var costPercent:Number = 100 + costChange_all() + costChange_heal() + costChange_black();
+		//Addiditive mods
+		if (healModBlackImpl() > 1) costPercent += Math.round(healModBlackImpl() - 1) * 10;
+		if (player.hasPerk(PerkLib.AscensionMysticality)) costPercent -= (player.perkv1(PerkLib.AscensionMysticality) * 2);
+		mod *= costPercent / 100;
+		if (mod < 5) mod = 5;
+		mod = Math.round(mod * 100) / 100;
 		return mod;
 	}
 
 	internal function healModImpl():Number {
 		var mod:Number = 1 + modChange_all() + modChange_heal();
-		if (player.hasPerk(PerkLib.Obsession)) {
-			mod += player.perkv1(PerkLib.Obsession);
-		}
-		if (player.hasPerk(PerkLib.Ambition)) {
-			mod += player.perkv1(PerkLib.Ambition);
-		}
+		if (player.hasPerk(PerkLib.Obsession)) mod += player.perkv1(PerkLib.Obsession);
+		if (player.hasPerk(PerkLib.Ambition)) mod += player.perkv1(PerkLib.Ambition);
 		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) mod += (player.cor * .01)/2;
 		if (player.hasPerk(PerkLib.SeersInsight)) mod += player.perkv1(PerkLib.SeersInsight);
 		if (player.hasPerk(PerkLib.InariBlessedKimono)){
@@ -391,75 +427,11 @@ public class CombatMagic extends BaseCombatContent {
 		return mod;
 	}
 
-	internal function spellModBase():Number {
-		var mod:Number = player.spellpowerStat.value - 1 + modChange_all() + modChange_spell_1() + modChange_spell_2();
-		if (player.isGargoyle() && Forgefather.material == "alabaster")
-			{
-				if (Forgefather.refinement == 1) mod += (.15);
-				if (Forgefather.refinement == 2) mod += (.25);
-				if (Forgefather.refinement == 3 || Forgefather.refinement == 4) mod += (.5);
-				if (Forgefather.refinement == 5) mod += (1);
-			}
-
-        //mod += modChange_spell_2(); //old place
-
-		if (player.headJewelry == headjewelries.DMONSKUL) mod += player.cor * .006;
-        //no sus multiplying for now...
-		mod = Math.round(mod * 100) / 100;
-		return mod;
-	}
-	
-	internal function spellModGreyImpl():Number {
-		var mod:Number = 1;
-		if (player.hasPerk(PerkLib.SpellpowerGrey) && player.inte >= 50) mod += .15;
-		if (player.hasPerk(PerkLib.GreyMageApprentice) && player.inte >= 75) mod += .1;
-		if (player.hasPerk(PerkLib.GreyMage) && player.inte >= 125) mod += .2;
-		if (player.hasPerk(PerkLib.GreyArchmage) && player.inte >= 175) mod += .3;
-		if (player.hasPerk(PerkLib.GrandGreyArchmage) && player.inte >= 225) mod += .4;
-		if (player.hasPerk(PerkLib.GrandGreyArchmage2ndCircle) && player.inte >= 275) mod += .5;
-		return mod;
-	}
-
-	internal function spellModWhiteImpl():Number {
-		var mod:Number = 1;
-		mod += spellModBase();
-		if (player.hasStatusEffect(StatusEffects.BlessingOfDivineMarae)) {
-			mod += player.statusEffectv2(StatusEffects.BlessingOfDivineMarae);
-		}
-		if (player.hasPerk(PerkLib.AvatorOfPurity)) mod += .2;
-		if (player.hasPerk(PerkLib.UnicornBlessing) && player.cor <= 20) mod += .2;
-		if (player.hasPerk(PerkLib.PrestigeJobArchpriest)) mod += .2;
-		if (player.hasPerk(PerkLib.PrestigeJobWarlock)) mod -= .4;
-		if (player.hasKeyItem("Holy Symbol") >= 0) mod += .2;
-        if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
-		if (player.weapon == weapons.PURITAS) mod *= 1.6;
-		if (player.weapon == weapons.ASCENSU) mod *= 2.5; //BOOM!
-		mod = Math.round(mod * 100) / 100;
-		return mod;
-	}
-
-	internal function spellWhiteCooldownImpl():Number {
-		var mod:Number = 3;
-		if (player.hasPerk(PerkLib.AvatorOfPurity)) mod -= 1;
-		if (mod < 0) mod = 0;
-		return mod;
-	}
-
-	internal function spellWhiteTier2CooldownImpl():Number {
-		var mod:Number = 6;
-		if (player.hasPerk(PerkLib.AvatorOfPurity)) mod -= 1;
-		if (mod < 0) mod = 0;
-		return mod;
-	}
-
 	internal function healModWhiteImpl():Number {
-		var mod:Number = 1 + modChange_all() + modChange_heal();
-		if (player.hasPerk(PerkLib.Ambition)) {
-			mod += player.perkv2(PerkLib.Ambition);
-		}
-		if (player.hasStatusEffect(StatusEffects.BlessingOfDivineMarae)) {
-			mod += player.statusEffectv2(StatusEffects.BlessingOfDivineMarae);
-		}
+		var mod:Number = 1;
+		if (healModImpl() > 1) mod += (healModImpl() - 1);
+		if (player.hasPerk(PerkLib.Ambition)) mod += player.perkv2(PerkLib.Ambition);
+		if (player.hasStatusEffect(StatusEffects.BlessingOfDivineMarae)) mod += player.statusEffectv2(StatusEffects.BlessingOfDivineMarae);
 		if (player.hasPerk(PerkLib.AvatorOfPurity)) mod += .3;
 		if (player.hasPerk(PerkLib.UnicornBlessing) && player.cor <= 20) mod += .2;
 		if (player.hasKeyItem("Holy Symbol") >= 0) mod += .2;
@@ -471,40 +443,10 @@ public class CombatMagic extends BaseCombatContent {
 		return mod;
 	}
 
-	internal function spellModBlackImpl():Number {
-		var mod:Number = 1;
-		mod += spellModBase();
-		if (player.hasPerk(PerkLib.AvatorOfCorruption)) mod += .3;
-		if (player.hasPerk(PerkLib.BicornBlessing) && player.cor >= 80) mod += .2;
-		if (player.hasPerk(PerkLib.PrestigeJobArchpriest)) mod -= .4;
-		if (player.hasPerk(PerkLib.PrestigeJobWarlock)) mod += .2;
-		if (player.miscJewelry == miscjewelries.DMAGETO || player.miscJewelry2 == miscjewelries.DMAGETO) mod += 0.25;
-        if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
-		if (player.weapon == weapons.DEPRAVA) mod *= 1.6;
-		if (player.weapon == weapons.ASCENSU) mod *= 2.5; //BOOM!
-		mod = Math.round(mod * 100) / 100;
-		return mod;
-	}
-
-	internal function spellBlackCooldownImpl():Number {
-		var mod:Number = 3;
-		if (player.hasPerk(PerkLib.AvatorOfCorruption)) mod -= 1;
-		if (mod < 0) mod = 0;
-		return mod;
-	}
-
-	internal function spellBlackTier2CooldownImpl():Number {
-		var mod:Number = 6;
-		if (player.hasPerk(PerkLib.AvatorOfCorruption)) mod -= 1;
-		if (mod < 0) mod = 0;
-		return mod;
-	}
-
 	internal function healModBlackImpl():Number {
-		var mod:Number = 1 + modChange_all() + modChange_heal();
-		if (player.hasPerk(PerkLib.Obsession)) {
-			mod += player.perkv2(PerkLib.Obsession);
-		}
+		var mod:Number = 1;
+		if (healModImpl() > 1) mod += (healModImpl() - 1);
+		if (player.hasPerk(PerkLib.Obsession)) mod += player.perkv2(PerkLib.Obsession);
 		if (player.hasPerk(PerkLib.AvatorOfCorruption)) mod += .3;
 		if (player.hasPerk(PerkLib.BicornBlessing) && player.cor >= 80) mod += .2;
 		if (player.hasPerk(PerkLib.SeersInsight)) mod += player.perkv1(PerkLib.SeersInsight);
@@ -512,6 +454,92 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.weapon == weapons.DEPRAVA) mod *= 1.6;
 		if (player.weapon == weapons.ASCENSU) mod *= 2.5;
 		mod = Math.round(mod * 100) / 100;
+		return mod;
+	}
+
+	internal function spellGreyCooldownImpl():Number {
+		var mod:Number = 3;
+		if (player.hasPerk(PerkLib.NaturalSpellcasting)) {
+			if (player.necklace == necklaces.LEAFAMU && player.isElf()) mod -= 2;
+			else mod -= 1;
+		}
+		if (mod < 0) mod = 0;
+		return mod;
+	}
+
+	internal function spellGreyTier2CooldownImpl():Number {
+		var mod:Number = 6;
+		if (player.hasPerk(PerkLib.NaturalSpellcasting)) {
+			if (player.necklace == necklaces.LEAFAMU && player.isElf()) mod -= 2;
+			else mod -= 1;
+		}
+		if (mod < 0) mod = 0;
+		return mod;
+	}
+
+	internal function spellWhiteCooldownImpl():Number {
+		var mod:Number = 3;
+		if (player.hasPerk(PerkLib.AvatorOfPurity)) mod -= 1;
+		if (player.hasPerk(PerkLib.NaturalSpellcasting)) {
+			if (player.necklace == necklaces.LEAFAMU && player.isElf()) mod -= 2;
+			else mod -= 1;
+		}
+		if (mod < 0) mod = 0;
+		return mod;
+	}
+
+	internal function spellWhiteTier2CooldownImpl():Number {
+		var mod:Number = 6;
+		if (player.hasPerk(PerkLib.AvatorOfPurity)) mod -= 1;
+		if (player.hasPerk(PerkLib.NaturalSpellcasting)) {
+			if (player.necklace == necklaces.LEAFAMU && player.isElf()) mod -= 2;
+			else mod -= 1;
+		}
+		if (mod < 0) mod = 0;
+		return mod;
+	}
+
+	internal function spellWhiteTier3CooldownImpl():Number {
+		var mod:Number = 12;
+		if (player.hasPerk(PerkLib.AvatorOfPurity)) mod -= 1;
+		if (player.hasPerk(PerkLib.NaturalSpellcasting)) {
+			if (player.necklace == necklaces.LEAFAMU && player.isElf()) mod -= 2;
+			else mod -= 1;
+		}
+		if (mod < 0) mod = 0;
+		return mod;
+	}
+
+	internal function spellBlackCooldownImpl():Number {
+		var mod:Number = 3;
+		if (player.hasPerk(PerkLib.AvatorOfCorruption)) mod -= 1;
+		if (player.hasPerk(PerkLib.NaturalSpellcasting)) {
+			if (player.necklace == necklaces.LEAFAMU && player.isElf()) mod -= 2;
+			else mod -= 1;
+		}
+		if (mod < 0) mod = 0;
+		return mod;
+	}
+
+	internal function spellBlackTier2CooldownImpl():Number {
+		var mod:Number = 6;
+		if (player.hasPerk(PerkLib.AvatorOfCorruption)) mod -= 1;
+		if (player.hasPerk(PerkLib.NaturalSpellcasting)) {
+			if (player.necklace == necklaces.LEAFAMU && player.isElf()) mod -= 2;
+			else mod -= 1;
+		}
+		if (mod < 0) mod = 0;
+		return mod;
+	}
+
+	internal function spellBlackTier3CooldownImpl():Number {
+		var mod:Number = 12;
+		if (player.hasPerk(PerkLib.AvatorOfCorruption)) mod -= 1;
+		if (player.hasPerk(PerkLib.NaturalSpellcasting)) {
+			if (player.necklace == necklaces.LEAFAMU && player.isElf()) mod -= 2;
+			else mod -= 1;
+		}
+		if (mod < 0) mod = 0;
 		return mod;
 	}
 
@@ -689,6 +717,9 @@ public class CombatMagic extends BaseCombatContent {
     }
 	
 	public function MagicPrefixEffect():void {
+		//if (player.hasPerk(PerkLib.Spellsong) && player.hasStatusEffect(StatusEffects.Sing)) {
+		//	outputText(" You weave your song into magic to unleash a spell.\n\n");
+		//}
 		if (player.armorName == "Drider-Weave Sheer Robe") {
 			outputText("As your mana flows through your body, culminating in your hands, your sheer robe glows, giving [themonster] a good, long look at you.\n\n");
 			if (player.gender == 2 || (player.gender == 3 && rand(2) == 0)) {
@@ -721,6 +752,13 @@ public class CombatMagic extends BaseCombatContent {
 			}
 			if (monster.hasStatusEffect(StatusEffects.HypnosisNaga)) damage *= 0.5;
 			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
+			if (player.armor == armors.ELFDRES && player.isElf()) damage *= 2;
+        	if (player.armor == armors.FMDRESS && player.isWoodElf()) damage *= 2;
+			if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50) {
+				outputText("\nYou use your own lust against the enemy, cooling off a bit in the process.");
+				player.takeLustDamage(Math.round(-damage)/10, true);
+				damage *= 1.2;
+			}
 			monster.teased(Math.round(monster.lustVuln * damage));
 			if (crit) outputText(" <b>Critical!</b>");
 			SceneLib.combat.teaseXP(1 + SceneLib.combat.bonusExpAfterSuccesfullTease());
@@ -733,6 +771,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.Venomancy)) {
 			if (player.tailVenom >= player.VenomWebCost()) {
 				var injections:Number = 0;
+				//if (player.hasPerk(PerkLib.ArcaneVenom)) numberOfProcs *= (1 + AbstractSpell.stackingArcaneVenom());
 				while (player.tailVenom >= player.VenomWebCost() && injections < numberOfProcs) {
 					var damageB:Number = 35 + rand(player.lib / 10);
 					var poisonScaling:Number = 1;
@@ -755,6 +794,10 @@ public class CombatMagic extends BaseCombatContent {
 					if (monster.hasStatusEffect(venomType)) {
 							monster.addStatusValue(venomType, 3, 1);
 					} else monster.createStatusEffect(venomType, 0, 0, 1, 0);
+					if (player.hasPerk(PerkLib.WoundPoison)){
+						if (monster.hasStatusEffect(StatusEffects.WoundPoison)) monster.addStatusValue(StatusEffects.WoundPoison, 1, 10);
+						else monster.createStatusEffect(StatusEffects.WoundPoison, 10,0,0,0);
+					}
 					player.tailVenom -= player.VenomWebCost();
 					flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
 					injections++;
@@ -765,40 +808,27 @@ public class CombatMagic extends BaseCombatContent {
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.BalanceOfLife)) HPChange((player.maxHP() * numberOfProcs * 0.05), false);
-		
 	}
 
 	public function spellMagicBolt():void {
-		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
-		clearOutput();
-		useMana(40, Combat.USEMANA_MAGIC);
-		if(handleShell()){return;}
-		spellMagicBolt2();
+		spellMagicBolt2(false, false);
 	}
 	public function spellElementalBolt():void {
-		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
-		clearOutput();
-		useMana(80, Combat.USEMANA_MAGIC);
-		if(handleShell()){return;}
-		spellMagicBolt2();
+		spellMagicBolt2(true, false);
 	}
 	public function spellEdgyMagicBolt():void {
-		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
-		clearOutput();
-		useMana(40, Combat.USEMANA_MAGIC);
-		player.wrath -= 100;
-		if(handleShell()){return;}
-		spellMagicBolt2(true);
+		spellMagicBolt2(false, true);
 	}
 	public function spellEdgyElementalBolt():void {
+		spellMagicBolt2(true, true);
+	}
+	public function spellMagicBolt2(elemental:Boolean = false, edgy:Boolean = false):void {
+		useMana(elemental ? 80 : 40, Combat.USEMANA_MAGIC);
+		if (edgy) player.wrath -= 100;
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		useMana(80, Combat.USEMANA_MAGIC);
-		player.wrath -= 100;
-		if(handleShell()){return;}
-		spellMagicBolt2(true);
-	}
-	public function spellMagicBolt2(edgy:Boolean = false):void {
+		combat.darkRitualCheckDamage();
+		if (handleShell()) return;
 		outputText("You narrow your eyes, focusing your mind with deadly intent.  ");
 		if (player.hasPerk(PerkLib.StaffChanneling) && player.weaponSpecials("Staff")) outputText("You point your staff and shoot a magic bolt toward [themonster]!\n\n");
 		else outputText("You point your hand toward [themonster] and shoot a magic bolt!\n\n");
@@ -869,6 +899,13 @@ public class CombatMagic extends BaseCombatContent {
 			}
 			enemyAI();
 		}
+	}
+	
+	public function spellGreenCovenantOff():void {
+		clearOutput();
+		outputText("Information Noona Warning:\n\n\<b>Your Green Covenant is deactivated now.</b>");
+		player.removeStatusEffect(StatusEffects.GreenCovenant);
+		enemyAI();
 	}
 
 	private function handleShell():Boolean{

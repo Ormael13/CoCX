@@ -6,18 +6,6 @@ import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
 public class Dominika extends TelAdreAbstractContent {
-public function Dominika(){
-
-}
-//const DOMINIKA_TIMES_MULTICOCK_SLOBBERED:int = 386;
-//const DOMINIKA_TIMES_HYPNO_BJ:int = 387;
-//const DOMINIKA_LAST_HYPNO_SUCK_COUNT:int = 388;
-//const DOMINIKAS_SWORD_GIVEN:int = 416;
-
-public function fellatrixBarAppearance():void {
-	if(flags[kFLAGS.DOMINIKA_MET] == 0) outputText("\n\nYou spot a face you haven't seen before – or rather, eyes you haven't seen before. A woman sits at a table in the back, most of her features hidden beneath a white cloth wrapped around her head to form a turban and veil. The rest of her dress seems equally modest but loose, efficient for desert travel. She idly runs her finger and its accompanying black-painted fingernail over the top of an empty cup, staring off into the distance and thinking about some unknown detail. What skin you can see is pale but perhaps most notably for Tel'Adre, human. Blue eyes glance over and meet your own, and you are reminded of your village back home. Her reaction to your look is unreadable thanks to her veil, but she watches you for a few moments longer before turning away again.");
-	else if(flags[kFLAGS.DOMINIKA_SUCKED_SMALL] != -1) outputText("\n\nYou notice Dominika speaking to a city guard at one of the tables. You can't hear the conversation, but the guard leaves shortly after you arrive, and Dominika rests her chin on her hand, staring into the distance.");
-}
 public function fellatrixSucked():Boolean {
 	return timesFellatrixSucked() > 0;
 }
@@ -35,7 +23,7 @@ public function fellatrixBarApproach():void {
 		return;
 	}
 	//[First encounter, player is minotaur (If you lose minotaur characteristics and come back, Dominika will not recognize you and do a regular first encounter)]
-	if(player.isRace(Races.MINOTAUR) && player.faceType == Face.COW_MINOTAUR && player.gender == 1) {
+	if(player.isRace(Races.MINOTAUR, 1, false) && player.faceType == Face.COW_MINOTAUR && player.gender == 1) {
 		outputText("You approach the woman, delivering what you consider a polite greeting. Icily she turns to you, raises an eyebrow, and in a low husky voice snarls \"<i>Don't bother. I'm not interested in being your bimbo.</i>\" She turns away from you, and ignores any further attempts to start a conversation.\n\n");
 
 		outputText("A tavern maid with shaggy dreadlocks and a long tongue she can barely fit in her mouth waves you over. \"<i>Don't wowwy 'bout Dominika,</i>\" she says through her lisp, \"<i>The's a liddle wacist against, you know, your type. Thays you're only interethted in wape. Motht of uth aren't like dat.</i>\"\n\n");
@@ -59,7 +47,6 @@ public function fellatrixBarApproach():void {
 		outputText("After a bit more conversation she glances outside and says she should go. \"<i>It has been nice, though,</i>\" she adds, \"<i>I would enjoy speaking with you again.</i>\" She rests a hand on your shoulder as she leaves. Her eyes tell you she's smiling at you before she goes.");
 		doNext(camp.returnToCampUseOneHour);
 		flags[kFLAGS.DOMINIKA_MET]++;
-		return;
 	}
 	//[Second encounter, player has naga tail/centaur body/slime body]
 	else if(!player.isBiped()) {
@@ -76,7 +63,6 @@ public function fellatrixBarApproach():void {
 		}
 		cheatTime(1);
 		doNext(telAdre.barTelAdre);
-		return;
 	}
 	//Second encounter]
 	else if(flags[kFLAGS.DOMINIKA_MET] == 1) {
@@ -87,16 +73,12 @@ public function fellatrixBarApproach():void {
 		outputText("\"<i>Although...</i>\" she seems to think about something, glancing over at you for a few seconds. After a pause, she adds \"<i>If you'd like, my place is just a few blocks down, I could... impart some knowledge on you there.</i>\"\n\n");
 
 		simpleChoices("Sure", acceptDominikasKnowledge, "No Thanks", turnDownDominikasKnowledge, "", null, "", null, "", null);
-		return;
 	}
 	//[Follow-up Introduction]
 	else {
 		outputText("You make your way over to Dominika's table and strike up conversation with the modestly dressed woman. Her eyes give away her smile and the two of you discuss your exploits. She doesn't attempt to hide the casual way she ogles you during the conversation, and after a brief while, she invites you back to her place.");
 		simpleChoices("Sure", acceptDominikasKnowledge, "No Thanks", turnDownDominikasKnowledge, "", null, "", null, "", null);
-		return;
 	}
-	outputText("ERROR, ERROR, ALERT THE FENFEN!");
-	doNext(camp.returnToCampUseOneHour);
 }
 //[\"<i>No thanks</i>\"]
 private function turnDownDominikasKnowledge():void {
@@ -137,8 +119,39 @@ private function acceptDominikasKnowledge():void {
 		flags[kFLAGS.DOMINIKA_MAGIC_COOLDOWN] = 7 + rand(3);
 		outputText("\"<i>Now then,</i>\" she says. Her hands glow with a brief sense of power, and many of the tattoos shine with equal illumination. She gestures with her hand and the lamps all acquire an unearthly light, as green glowing circles appear interlinked on the floor. \"<i>How much do you know about magic?</i>\"\n\n");
 
+		//false - black, true - white
+		var spells:Array = [
+			//single-target damage spells
+			[StatusEffects.KnowsIceSpike, false],
+			[StatusEffects.KnowsWhitefire, true],
+			[StatusEffects.KnowsDarknessShard, false],
+			[StatusEffects.KnowsLightningBolt, true],
+			[StatusEffects.KnowsArouse, false],
+			//self-buffs
+			[StatusEffects.KnowsHeal, true],
+			[StatusEffects.KnowsMight, false],
+			[StatusEffects.KnowsCharge, true],
+			[StatusEffects.KnowsBlink, false],
+			[StatusEffects.KnowsChargeA, true],
+			[StatusEffects.KnowsRegenerate, false],
+			//debuffs/stuff
+			[StatusEffects.KnowsBlind, true],
+			[StatusEffects.KnowsBlizzard, false],
+			[StatusEffects.KnowsCure, true],
+			//stronger spells
+			[StatusEffects.KnowsNosferatu, false],
+			[StatusEffects.KnowsPyreBurst, true],
+			[StatusEffects.KnowsArcticGale, false],
+			[StatusEffects.KnowsChainLighting, true],
+			[StatusEffects.KnowsDuskWave, false],
+			//latest tier
+			[StatusEffects.KnowsMentalShield, true],
+			[StatusEffects.KnowsWaveOfEcstasy, false],
+			[StatusEffects.KnowsIceRain, true],
+			[StatusEffects.KnowsFireStorm, false],
+		];
 		//[If player knows all white/black spells]
-		if(player.spellCountWhiteBlack() == 22) {
+		if(player.spellCountWhiteBlack() >= spells.length) {
 			if(flags[kFLAGS.DOMINIKA_MAGIC_FAIL] == 0) {
 				flags[kFLAGS.DOMINIKA_MAGIC_FAIL]++;
 				outputText("You blink, then casually mention that you actually know quite a bit about magic. Dominika listens to you explain your skill in white and black magic, then coughs awkwardly and glances to the side. \"<i>O-oh,</i>\" she says, \"<i>Well. Uhm. I guess we can talk about magical theory, maybe?</i>\"\n\n");
@@ -148,164 +161,22 @@ private function acceptDominikasKnowledge():void {
 				//(Player receives Intelligence.)
 			dynStats("int", 1+rand(4));
 		}
-		//[If player knows some spells]
-		else if(player.spellCount() > 0) {
-			outputText("You take a step backwards in surprise, but your experience with magic makes you realize that she's not doing anything dangerous. You explain that you've learned a bit of sorcery from books, and she nods thoughtfully. \"<i>I see,</i>\" she muses, stroking her chin. \"<i>I think I may be able to show you a thing or two. Let's see here...</i>\"\n\n");
-
-			outputText("Dominika seems to be quite good at magic, and you find yourself picking up the spell she demonstrates fairly quickly.");
-			//(Player receives random unlearned spell.)
-			if(!player.hasStatusEffect(StatusEffects.KnowsIceSpike)) {
-				player.createStatusEffect(StatusEffects.KnowsIceSpike,0,0,0,0);
-				outputText("\n\n<b>New Black Magic Spell Learned: Ice Spike</b>");
-			}
-			else if(!player.hasStatusEffect(StatusEffects.KnowsDarknessShard)) {
-				player.createStatusEffect(StatusEffects.KnowsDarknessShard,0,0,0,0);
-				outputText("\n\n<b>New Black Magic Spell Learned: Darkness Shard</b>");
-			}
-			else if(!player.hasStatusEffect(StatusEffects.KnowsMight)) {
-				player.createStatusEffect(StatusEffects.KnowsMight,0,0,0,0);
-				outputText("\n\n<b>New Black Magic Spell Learned: Might</b>");
-			}
-			else if(!player.hasStatusEffect(StatusEffects.KnowsBlink)) {
-				player.createStatusEffect(StatusEffects.KnowsBlink,0,0,0,0);
-				outputText("\n\n<b>New Black Magic Spell Learned: Blink</b>");
-			}
-			else if(!player.hasStatusEffect(StatusEffects.KnowsRegenerate)) {
-				player.createStatusEffect(StatusEffects.KnowsRegenerate,0,0,0,0);
-				outputText("\n\n<b>New Black Magic Spell Learned: Regenerate</b>");
-			}
-			else if(!player.hasStatusEffect(StatusEffects.KnowsArouse)) {
-				player.createStatusEffect(StatusEffects.KnowsArouse,0,0,0,0);
-				outputText("\n\n<b>New Black Magic Spell Learned: Arouse</b>");
-			}
-			else if(!player.hasStatusEffect(StatusEffects.KnowsNosferatu)) {
-				player.createStatusEffect(StatusEffects.KnowsNosferatu,0,0,0,0);
-				outputText("\n\n<b>New Black Magic Spell Learned: Nosferatu</b>");
-			}
-			else if(!player.hasStatusEffect(StatusEffects.KnowsWhitefire)) {
-				player.createStatusEffect(StatusEffects.KnowsWhitefire,0,0,0,0);
-				outputText("\n\n<b>New White Magic Spell Learned: Whitefire</b>");
-			}
-			else if(!player.hasStatusEffect(StatusEffects.KnowsLightningBolt)) {
-				player.createStatusEffect(StatusEffects.KnowsLightningBolt,0,0,0,0);
-				outputText("\n\n<b>New White Magic Spell Learned: Lightning Bolt</b>");
-			}
-			else if(!player.hasStatusEffect(StatusEffects.KnowsCharge)) {
-				player.createStatusEffect(StatusEffects.KnowsCharge,0,0,0,0);
-				outputText("\n\n<b>New White Magic Spell Learned: Charge Weapon</b>");
-			}
-			else if(!player.hasStatusEffect(StatusEffects.KnowsChargeA)) {
-				player.createStatusEffect(StatusEffects.KnowsChargeA,0,0,0,0);
-				outputText("\n\n<b>New White Magic Spell Learned: Charge Armor</b>");
-			}
-			else if(!player.hasStatusEffect(StatusEffects.KnowsHeal)) {
-				player.createStatusEffect(StatusEffects.KnowsHeal,0,0,0,0);
-				outputText("\n\n<b>New White Magic Spell Learned: Heal</b>");
-			}
-			else if(!player.hasStatusEffect(StatusEffects.KnowsBlind)) {
-				player.createStatusEffect(StatusEffects.KnowsBlind,0,0,0,0);
-				outputText("\n\n<b>New White Magic Spell Learned: Blind</b>");
-			}
-			else if(!player.hasStatusEffect(StatusEffects.KnowsPyreBurst)) {
-				player.createStatusEffect(StatusEffects.KnowsPyreBurst,0,0,0,0);
-				outputText("\n\n<b>New White Magic Spell Learned: Pyre Burst</b>");
-			}
-			else if(!player.hasStatusEffect(StatusEffects.KnowsChainLighting)) {
-				player.createStatusEffect(StatusEffects.KnowsChainLighting,0,0,0,0);
-				outputText("\n\n<b>New White Magic Spell Learned: Chain Lighting</b>");
-			}
-			else if(!player.hasStatusEffect(StatusEffects.KnowsArcticGale)) {
-				player.createStatusEffect(StatusEffects.KnowsArcticGale,0,0,0,0);
-				outputText("\n\n<b>New Black Magic Spell Learned: Arctic Gale</b>");
-			}
-			else if(!player.hasStatusEffect(StatusEffects.KnowsDuskWave)) {
-				player.createStatusEffect(StatusEffects.KnowsDuskWave,0,0,0,0);
-				outputText("\n\n<b>New Black Magic Spell Learned: Dusk Wave</b>");
-			}
-			else if(!player.hasStatusEffect(StatusEffects.KnowsBlizzard)) {
-				player.createStatusEffect(StatusEffects.KnowsBlizzard,0,0,0,0);
-				outputText("\n\n<b>New White Magic Spell Learned: Blizzard</b>");
-			}
-			else if(!player.hasStatusEffect(StatusEffects.KnowsMentalShield)) {
-				player.createStatusEffect(StatusEffects.KnowsMentalShield,0,0,0,0);
-				outputText("\n\n<b>New White Magic Spell Learned: Mental Shield</b>");
-			}
-			else if(!player.hasStatusEffect(StatusEffects.KnowsCure)) {
-				player.createStatusEffect(StatusEffects.KnowsCure,0,0,0,0);
-				outputText("\n\n<b>New White Magic Spell Learned: Cure</b>");
-			}
-			else if(!player.hasStatusEffect(StatusEffects.KnowsFireStorm)) {
-				player.createStatusEffect(StatusEffects.KnowsFireStorm,0,0,0,0);
-				outputText("\n\n<b>New White Magic Spell Learned: Fire Storm</b>");
-			}
-			else if(!player.hasStatusEffect(StatusEffects.KnowsIceRain)) {
-				player.createStatusEffect(StatusEffects.KnowsIceRain,0,0,0,0);
-				outputText("\n\n<b>New Black Magic Spell Learned: Ice Rain</b>");
-			}
-			else outputText("==SOMETHING FUCKED UP.  TELL ORMAEL VIA DISCORD (link to it in Fenoxo forum mod thread first post)==");
-			dynStats("int", 2);
-		}
-		//[If player knows no spells]
 		else {
-			outputText("You nearly fall on your [butt] in surprise, fumbling to defend yourself from an attack, but Dominika laughs helplessly and tries to collect herself. \"<i>Oh goodness, oh I'm sorry, I'm sorry, this isn't anything. This is just flashy lights and constellation circles. This isn't going to hurt you, I'm sorry.</i>\" She walks over to you and extends a hand, helping you get to your feet and hugging you.\n\n");
-
-			outputText("\"<i>So sorry, again,</i>\" she says, those black lips curving into a big smile. \"<i>I guess I'll take that to mean 'not much', so, here. Let me show you some things.</i>\"\n\n");
-
-			outputText("Even with your inexperience, you find Dominika to be a good teacher. She helps you focus and train your mind, and you quickly find your first spell to be easy to perform.");
-			//(Player receives random unlearned spell.)
-			if(!player.hasStatusEffect(StatusEffects.KnowsMight)) {
-				player.createStatusEffect(StatusEffects.KnowsMight,0,0,0,0);
-				outputText("\n\n<b>New Black Magic Spell Learned: Might</b>");
+			if (player.spellCount() > 0) {
+				outputText("You take a step backwards in surprise, but your experience with magic makes you realize that she's not doing anything dangerous. You explain that you've learned a bit of sorcery from books, and she nods thoughtfully. \"<i>I see,</i>\" she muses, stroking her chin. \"<i>I think I may be able to show you a thing or two. Let's see here...</i>\"\n\n");
+				outputText("Dominika seems to be quite good at magic, and you find yourself picking up the spell she demonstrates fairly quickly.");
+			} else {
+				outputText("You nearly fall on your [butt] in surprise, fumbling to defend yourself from an attack, but Dominika laughs helplessly and tries to collect herself. \"<i>Oh goodness, oh I'm sorry, I'm sorry, this isn't anything. This is just flashy lights and constellation circles. This isn't going to hurt you, I'm sorry.</i>\" She walks over to you and extends a hand, helping you get to your feet and hugging you.\n\n");
+				outputText("\"<i>So sorry, again,</i>\" she says, those black lips curving into a big smile. \"<i>I guess I'll take that to mean 'not much', so, here. Let me show you some things.</i>\"\n\n");
+				outputText("Even with your inexperience, you find Dominika to be a good teacher. She helps you focus and train your mind, and you quickly find your first spell to be easy to perform.");
 			}
-			else if(!player.hasStatusEffect(StatusEffects.KnowsBlink)) {
-				player.createStatusEffect(StatusEffects.KnowsBlink,0,0,0,0);
-				outputText("\n\n<b>New Black Magic Spell Learned: Blink</b>");
+			for each (var spell:Array in spells) {
+				if (!player.hasStatusEffect(spell[0])) {
+					player.createStatusEffect(spell[0], 0, 0, 0, 0);
+					outputText("\n\n<b>New " + (spell[1] ? "white" : "black") + " magic spell Learned: " + (spell[0] as StatusEffectType).id.substr(6) + "</b>"); //substring to remove "Knows "
+					break;
+				}
 			}
-			else if(!player.hasStatusEffect(StatusEffects.KnowsRegenerate)) {
-				player.createStatusEffect(StatusEffects.KnowsRegenerate,0,0,0,0);
-				outputText("\n\n<b>New Black Magic Spell Learned: Regenerate</b>");
-			}
-			else if(!player.hasStatusEffect(StatusEffects.KnowsArouse)) {
-				player.createStatusEffect(StatusEffects.KnowsArouse,0,0,0,0);
-				outputText("\n\n<b>New Black Magic Spell Learned: Arouse</b>");
-			}
-			else if(!player.hasStatusEffect(StatusEffects.KnowsCharge)) {
-				player.createStatusEffect(StatusEffects.KnowsCharge,0,0,0,0);
-				outputText("\n\n<b>New White Magic Spell Learned: Charge Weapon</b>");
-			}
-			else if(!player.hasStatusEffect(StatusEffects.KnowsChargeA)) {
-				player.createStatusEffect(StatusEffects.KnowsChargeA,0,0,0,0);
-				outputText("\n\n<b>New White Magic Spell Learned: Charge Armor</b>");
-			}
-			else if(!player.hasStatusEffect(StatusEffects.KnowsHeal)) {
-				player.createStatusEffect(StatusEffects.KnowsHeal,0,0,0,0);
-				outputText("\n\n<b>New White Magic Spell Learned: Heal</b>");
-			}
-			else if(!player.hasStatusEffect(StatusEffects.KnowsBlind)) {
-				player.createStatusEffect(StatusEffects.KnowsBlind,0,0,0,0);
-				outputText("\n\n<b>New White Magic Spell Learned: Blind</b>");
-			}
-			else if(!player.hasStatusEffect(StatusEffects.KnowsWhitefire)) {
-				player.createStatusEffect(StatusEffects.KnowsWhitefire,0,0,0,0);
-				outputText("\n\n<b>New White Magic Spell Learned: Whitefire</b>");
-			}
-			else if(!player.hasStatusEffect(StatusEffects.KnowsIceSpike)) {
-				player.createStatusEffect(StatusEffects.KnowsIceSpike,0,0,0,0);
-				outputText("\n\n<b>New Black Magic Spell Learned: Ice Spike</b>");
-			}
-			else if(!player.hasStatusEffect(StatusEffects.KnowsLightningBolt)) {
-				player.createStatusEffect(StatusEffects.KnowsLightningBolt,0,0,0,0);
-				outputText("\n\n<b>New White Magic Spell Learned: Lightning Bolt</b>");
-			}
-			else if(!player.hasStatusEffect(StatusEffects.KnowsDarknessShard)) {
-				player.createStatusEffect(StatusEffects.KnowsDarknessShard,0,0,0,0);
-				outputText("\n\n<b>New Black Magic Spell Learned: Darkness Shard</b>");
-			}
-			else if(!player.hasStatusEffect(StatusEffects.KnowsBlizzard)) {
-				player.createStatusEffect(StatusEffects.KnowsBlizzard,0,0,0,0);
-				outputText("\n\n<b>New White Magic Spell Learned: Blizzard</b>");
-			}
-			else outputText("==SOMETHING FUCKED UP.  TELL ORMAEL VIA DICORD (link to it in first post of fen forum mod thread)==");
 			dynStats("int", 2);
 		}
 	}
@@ -356,7 +227,7 @@ private function declineFellatrixOral():void {
 		outputText("She raises her eyebrow and looks around. \"<i>...Really?</i>\" she asks after a few seconds. \"<i>Like, I mean... you're going to turn down a free blowjob?</i>\"\n\n");
 
 		outputText("She pauses. \"<i>Or cunnilingus, I mean, I haven't looked between your legs yet. You know what this place is like.</i>\"\n\nYou suppose it might not hurt.  Do you want to receive some oral?");
-		dynStats("lus", 10);
+		dynStats("lus", 10, "scale", false);
 		doYesNo(acceptFellatrixOral,declineFellatrixOralHARDCORE);
 	}
 	else {
@@ -376,7 +247,7 @@ private function declineFellatrixOralHARDCORE():void {
 	spriteSelect(SpriteDb.s_uncloaked_dominika);
 	clearOutput();
 	outputText("\"<i>Really?</i>\" she asks again. \"<i>But, I mean... fucking look at these!</i>\" She purses her dark lips, running her tongue over them to emphasize how they glisten in the light. \"<i>Don't tell me you don't think these would feel fucking rad on you.</i>\"\n\nIt's VERY tempting.  Maybe one little round of fellatio?");
-	dynStats("lus", (10 + player.lib/10));
+	dynStats("lus", (10 + player.lib/10), "scale", false);
 	doYesNo(acceptFellatrixOral,declineFellatrixOralSUPERHARDCORE);
 }
 
@@ -398,16 +269,15 @@ private function acceptFellatrixOral():void {
 	spriteSelect(SpriteDb.s_uncloaked_dominika);
 	clearOutput();
 	outputText(images.showImage("dominika-oral-sex"));
-	var x:Number = player.cockThatFits(36);
 	//[Random one-shot after Player has done a Scylla scene]
 	//Mind control at 6th suck
-	if(timesFellatrixSucked() >= 6 && timesFellatrixSucked() - 4 >= flags[kFLAGS.DOMINIKA_LAST_HYPNO_SUCK_COUNT]) {
+	if (timesFellatrixSucked() >= 6 && timesFellatrixSucked() - 4 >= flags[kFLAGS.DOMINIKA_LAST_HYPNO_SUCK_COUNT]) {
 		dominikaBlowjobs();
 		return;
 	}
 	//After 3+ blowjobs
-	if(timesFellatrixSucked() >= 3 && flags[kFLAGS.DOMINIKA_FOLLOWUP] == 0) {
-		if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] > 0) {
+	if (timesFellatrixSucked() >= 3 && flags[kFLAGS.DOMINIKA_FOLLOWUP] == 0) {
+		if (flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] > 0) {
 			outputText("The familiar slick and slurping brutality is enacted by Dominika's mouth upon you. Those lips engulf you, devour you, inhale you, and in the haze of pleasure you love every single moment. They shine in your mind, glamorized, an immaculate altar to which you can only cum, and cum, and cum, and...\n\n");
 
 			outputText("As you regain your composure, gasping on her bed, your mind wanders. The idle conversation that passes between you two is casual – Dominika is noncommittal for much of it, busy wiping off her chest. Glancing over you see her tongue slip over her lips in a final cleansing and shiver. As you stare at the pillows you have grown intimate with, a thought occurs to you. Dominika is not the first traveller you have met with such a hunger, but she seems more than any other to be in control of it. It's possible that she could know something that would be helpful to Scylla. You ask her if she's ever met the nun.\n\n");
@@ -422,8 +292,7 @@ private function acceptFellatrixOral():void {
 
 			outputText("She seems to be looking at you for affirmation.");
 			simpleChoices("Agree", agreeWithDominika, "Ehhh", ehhhhDominika, "Disagree", disagreeDominika, "", null, "", null);
-		}
-		else {
+		} else {
 			outputText("You arrive at Dominika's apartment and are led into the familiar adjacent room, where the familiar slick and slurping brutality is enacted by Dominika's mouth upon you.  Those lips engulf you, devour you, caress you, and in the haze of pleasure you love every single moment.  They shine in your mind glamorized, an immaculate altar to which you can only cum, and cum, and cum, and...\n\n");
 
 			outputText("The conversation as you recover is casual at best.  She seems more interested in cleaning up and adjusting her hair than the actual words she's saying, and you get ready to go.  As you stretch your eye is drawn to a piece of parchment left on one of the room's tables.  A series of dots is eventually interrupted by splatters of ink and large frustrated gashes through the paper.  With your curiousity piqued you move to get a closer look, and wind up surprised when Dominika's hand comes down on the paper.  \"<i>A project I had to abandon,</i>\" she smiles after a brief pause, though the expression seems born more out of politeness than genuine emotion.  She gathers up the parchment and puts it in a drawer, slamming it shut just a little too loudly.\n\n");
@@ -439,15 +308,34 @@ private function acceptFellatrixOral():void {
 			outputText("She crosses the room to return to you, resting a hand on your chest.  \"<i>I want my freedom back, and I do not care anymore what I have to destroy to get it.  Help me.</i>\"");
 			simpleChoices("Agree", agreeWithDominika, "Ehhh", ehhhhDominika, "Disagree", disagreeDominika, "", null, "", null);
 		}
-		player.orgasm();
+		player.sexReward("saliva");
 		dynStats("lib", -1, "sen", 1);
 		return;
 	}
-	if(x < 0) x = 0;
+	//find all cocks
+	var small:int = -1, big:int = -1, horse:int = -1, knot:int = -1;
+	var c:int = player.cocks.length;
+	while (c --> 0)
+		if (player.cockArea(c) < 36) {
+			if (player.hasKnot(c)) knot = c;
+			else if (player.cocks[c].cockType == CockTypesEnum.HORSE) horse = c;
+			else small = c;
+		} else big = c;
+	//SH-like menu because I want
+	outputText("But what... part of your body do you want to be caressed by these black lips?\n\n")
+	menu();
+	addButton(0, "Two Cocks", multiF).disableIf(player.cockTotal() < 2, "Req. at least 2 cocks.");
+	addButton(1, "Big Cock", bigF, big).disableIf(big < 0, "Req. a dick with area larger than 36.");
+	addButton(2, "Knotted Cock", knotF, knot).disableIf(knot < 0, "Req. a knotted dick with area smaller than 36.");
+	addButton(3, "Horse Cock", horseF, horse).disableIf(horse < 0, "Req. a horsecock with area smaller than 36 (but without a knot).");
+	addButton(4, "Normal Cock", smallF, small).disableIf(small < 0, "Req. a NON-horse dick with area smaller than 36 (and without a knot).");
+	addButton(5, "Vagina", vagF).disableIf(!player.hasVagina(), "Req. a vagina.");
+
+	//================================================
 	//[If \"<i>Yes</i>\" and vagina]
-	if(player.hasVagina() && (player.gender == 2 || rand(2) == 0)) {
-		if(flags[kFLAGS.DOMINIKA_LICKED_VAGINA] == 0) {
-			outputText("Dominika's dark lips curve up in a wicked grin and she leads you by the hand to another room. Within is a bed that looks to be more comfortable than any piece of furniture you've seen since leaving your village. You are more than happy to sit upon it when she gestures. The pale mage removes the bottom of your [armor] and claps her hands together in a giggling laugh when she sees your vagina. \"<i>Oh my goodness!</i>\" she grins, \"<i>You actually have a cute little vagina! That's SO HARD TO FIND here!</i>\" Climbing onto the bed with you she gives a surprising embrace, planting her ebony lips on your cheek. \"<i>Here, lay back,</i>\" she insists, leaning on your shoulders to have you lay down.\n\n");
+	function vagF():void {
+		if (flags[kFLAGS.DOMINIKA_LICKED_VAGINA] == 0) {
+			outputText("Dominika's dark lips curve up in a wicked grin and she leads you by the hand to another room. Within is a bed that looks to be more comfortable than any piece of furniture you've seen since leaving your village. You are more than happy to sit upon it when she gestures. The pale mage removes the bottom of your [armor] and claps her hands together in a giggling laugh when she sees your vagina. \"<i>Oh my goodness!</i>\" she grins, \"<i>You actually have a cute little vagina! That's SO HARD TO FIND here!</i>\" Climbing onto the bed with you, she gives a surprising embrace, planting her ebony lips on your cheek. \"<i>Here, lay back,</i>\" she insists, leaning on your shoulders to have you lay down.\n\n");
 			outputText("She straddles your belly, looking down at you with a mischievous grin. Curiously you feel metal rubbing against your bare skin, much like you saw between her legs earlier. Is she wearing a chastity belt? The tattooed teacher leans down and drags her darkened lips sensually over your own, sucking on your lower lip. The connection of flesh is almost electric in its stimulation – you quickly have to admit to yourself that her lips feel pretty damn good. Her tongue flicks out over the curves on your face and though you try to catch it her body is already sliding down your own. Her bare breasts tease your flesh as her nipples bump and catch against your skin.\n\n");
 			outputText("Those succulent soft lips slip along your belly, teasing you with their moisture. Her hands run along your thighs and guide them further apart as she goes. Your bare slit feels her breasts slide along it as she comes ever closer to the promised cunnilingus. One last push on both your thighs spreads your legs yet further, and as she lifts her head to look at your body you cannot help but feel prostrated before her on display. Your eyes wander down to the lips that have traced her path down your body. It was not intentional – they were simply the first thing to catch your eye, even though she was gazing back at you. Their fullness arouses you even more now that you have felt their touch.\n\n");
 			outputText("\"<i>Now then,</i>\" she purrs, and then descends. You feel her tongue first. There is a gentility in the touch, as it slips slowly over you. A groan forces its way out of you, more from relaxation than pleasure. The tensions from the endless combat and always encroaching lust of the realm slip away beneath her talented touch. Your hands reach down to stroke through her hair, but Dominika bats them away. \"<i>Now now,</i>\" she purrs, her breath and voice hot over you. \"<i>Just relax. Let me.</i>\" The way her lips curve when she speaks excites you again, even as you blush at the realization you focused on them once more.\n\n");
@@ -464,27 +352,30 @@ private function acceptFellatrixOral():void {
 		//Repeat
 		else {
 			outputText("Once you arrive at the second-story apartment, Dominika practically pulls you into the other room, eager to descend upon your " + vaginaDescript(0) + ". She lays you on the bed again, removing the bottom of your [armor] and laying beneath you. Gliding her hands over your thighs she aggressively begins lapping at your " + vaginaDescript(0) + " with her tongue, coating it in spit. \"<i>Mmm, I hope you squirt a river,</i>\" she purrs, giving your " + clitDescript() + " a kiss as intimate as a lover's. The way her lips move is intoxicating, sliding their slippery glossy surface over every inch of your " + vaginaDescript(0) + " before engulfing the delicate flesh.\n\n");
-			outputText("She forces your legs open and holds your hands at your side so that she can have free reign over your exposed cunt, hardly submissive even as she takes you in her mouth. Her lips twist from side to side as she rubs her mouth lewdly over your flesh. Spit drips between your legs, and deep satisfied slurping noises arise from the bobbing blonde hair before you. Her mouth is warm and breathy against you, but her plump lips press to your skin like a seal, letting you know that you can only leave her mouth when she is ready. The friction is electric, and you drool nectar into her mouth. All of it is slurped down into her waiting throat.\n\n");
+			outputText("She forces your legs open and holds your hands at your side so that she can have free rein over your exposed cunt, hardly submissive even as she takes you in her mouth. Her lips twist from side to side as she rubs her mouth lewdly over your flesh. Spit drips between your legs, and deep satisfied slurping noises arise from the bobbing blonde hair before you. Her mouth is warm and breathy against you, but her plump lips press to your skin like a seal, letting you know that you can only leave her mouth when she is ready. The friction is electric, and you drool nectar into her mouth. All of it is slurped down into her waiting throat.\n\n");
 			outputText("Her tongue aggressively shoves itself into you once more, slapping against the walls of your " + vaginaDescript(0) + " as though trying to break them down. You can practically feel your juices splattering across your cunt and then slurped up by her in the frenzy she approaches you with. Your world becomes consumed by raw sensation as effortlessly as your own " + vaginaDescript(0) + " is consumed by her ravenous maw, losing yourself in the pleasure granted you by those plump fuckable puckers. ");
-			if(player.cockTotal() == 0) outputText("A part of you even wishes that you had a cock so you could shove through them!\n\n");
+			if (player.cockTotal() == 0) outputText("A part of you even wishes that you had a cock so you could shove through them!\n\n");
 			else outputText("A part of you even wishes that she had chosen your cock so you could shove it through them!\n\n");
 			outputText("You don't speak, cannot speak as she sucks and gulps at your flesh. You can only offer up strangled gasps and shuddered squeals to her actions, prostrated like a servant before her, gripping the covers and mattress beneath you. Your " + vaginaDescript(0) + " is hers, to impose whatever demands she wishes, and the insatiable suckling upon you makes her demands clear. Her tongue twists about in you and against you, mocking your fingers with how much better it seems to know your pleasure.\n\n");
 			outputText("You cannot resist for long after she takes over your spot once again, grinding against it and forcing you to arc your back. Pleasure surrounds you as effortlessly as her lips surround your " + clitDescript() + ", and you find yourself cumming hard against her. She drinks everything you give her, sucking on your " + vaginaDescript(0) + " to ensure as little as possible escapes. You feel as though the orgasm could last forever, but settle slowly as she gently kisses your lips, stroking along your belly.\n\n");
 			outputText("\"<i>As always, delicious,</i>\" she smiles, cuddling with you in the afterglow of her meal. She caresses you until you regain your strength, and then politely helps you re-dress and sends you on your way, giving you a kiss to remember her. Those black lips linger in your mind as you walk the streets of Tel'Adre on your way back to camp.");
 		}
+		player.sexReward("saliva", "Vaginal");
 		flags[kFLAGS.DOMINIKA_LICKED_VAGINA]++;
+		sharedEnd();
 	}
+
 	//MULTICAWWWWK
-	else if(player.cockTotal() >= 2 && rand(2) == 0) {
+	function multiF():void {
 		//[If \"<i>Yes</i>\" and multi-cock]
-		if(flags[kFLAGS.DOMINIKA_TIMES_MULTICOCK_SLOBBERED] == 0) {
+		if (flags[kFLAGS.DOMINIKA_TIMES_MULTICOCK_SLOBBERED] == 0) {
 			outputText("She licks her teeth rather than her lips, reminding you in some ways of a predator observing prey.  You scarcely have time to contemplate this before she tugs you into the next room.  If the exceedingly comfortable-looking bed is any indication this would be where she sleeps.  Dominika insists upon you sitting on it and you find it to be exactly as comfortable as it looks, if not more so.  \"<i>I knew it was an offer you'd accept,</i>\" she coos.  \"<i>So few are worth my attentions, but you... you caught my eye, champion.</i>\"  She approaches you with a seductive slink in her step, grabbing hold of your [armor] and tugging away the bottom.  Her eyes light up with mischievous anticipation as she sees what waits beneath it.\n\n");
 
 			outputText("\"<i>My my my, you must have been looking forward to this, you brought me a bouquet,</i>\" she teases.  Curling her palm around your [cock], Dominika tosses you a smug smile.  \"<i>Although I hope I'm not disappointing you if I call it more of a buffet.</i>\"  While continuing to tease your [cock] with gentle friction, her other hand roams along your crotch.  The gentle fingers tease between your [cocks], taking the time to familiarize themselves with the texture of your flesh.  The grin spread across her deep lips does not lessen as her skin tastes yours.  \"<i>I'm always curious about the circumstances that lead to this point,</i>\" Dominika admits as her fingertips play about your head.  \"<i>Was it an addiction to Incubus Draft? A spell gone wrong? You certainly didn't come here equipped like this. But then...</i>\"  She leans in, flicking her tongue across the tip of your [cock]. \"<i>It's not particularly important, is it?</i>\"\n\n");
 
 			outputText("She leans in close to continue, her breasts rubbing across your [cocks] as a result.  \"<i>We're not after life stories, or deep introspection here,</i>\" she whispers slowly, her breath flowing heatedly over your [cock].  \"<i>You want me to do things to your body. It's that simple. And I...</i>\" Her black lower lip drags itself over your head, its full curve teasing your cumslit as it passes by.  \"<i>I want this.</i>\"  Fingernails trail over your skin as she runs the verbal foreplay across your [cock], carried in her breath.  Her tongue flicks across your slit, taunting it while her hands roam freely over you.  In the relaxation her pleasure provides, you reach forward to rest your hand on her head, only to be abruptly reprimanded by a slap to your wrist.  \"<i>No,</i>\" she hisses smugly, letting her lips drag against the side of your [cock] as she speaks.  Their softness quickens your breath, and you focus on the words she speaks to keep your head.  \"<i>I'm not interested in letting you set the pace, dear.  This is mine to play with.</i>\"\n\n");
 
-			outputText("She shifts in deeper, slurping lightly on the side of your base.  Her chin rubs against your " + cockDescript(1) + " as she teases your primary wang, letting her skin taunt everything in your lap from your thighs to your pricks with her proximity.  The plumpness of her breasts makes for a suitable cockrest as her ebony puckers glide over the straining flesh of your [cock].  They shift and move with her, pressing into your thigh as she swaps sides and sucks on the meat of your shaft.  Her dark lips feel better than you had imagined.  Their fullness belied a delicate touch that now, in the moment of finally experiencing them, borders on ecstasy.  You let your hands fall to the side to support yourself as Dominika works over your lap, accepting her terms if it means she labors over you like this.  The continued teasing over the side of your [cock] makes you eager to actually enter her mouth, but the casual way she claims dominion over your lap so that she can blow you is too enjoyable to interrupt.\n\n");
+			outputText("She shifts in deeper, slurping lightly on the side of your base.  Her chin rubs against your " + cockDescript(1) + " as she teases your primary wang, letting her skin taunt everything in your lap from your thighs to your pricks with her proximity.  The plumpness of her breasts makes for a suitable cockrest as her ebony puckers glide over the straining flesh of your [cock].  They shift and move with her, pressing into your thigh as she swaps sides and sucks on the meat of your shaft.  Her dark lips feel better than you had imagined.  Their fullness belied a delicate touch that now, in the moment of finally experiencing them, borders on ecstasy.  You let your hands fall to the side to support yourself as Dominika works over your lap, accepting her terms if it means she labors over you like this.  The continued teasing over the side of your [cock] makes you eager to actually enter her mouth, but the casual way she claims dominion over your lap is too enjoyable to interrupt.\n\n");
 
 			outputText("Fortunately, you don't have to wait long. As her midnight cocksuckers drag up your [cock] once more, they curl around your head.  Finally your dick finds the warmth and clinging flesh of a hole. A groan forces itself past your lips and you can feel Dominika's dark puckers smirk.  They twist from side to side around your shaft, her breasts shifting and knocking against your [cocks] and catching some of the sweat from your crotch on them. Her fingers play wantonly where they please, at times squeezing and rubbing into your thighs, at others caressing randomly across your flesh.  Your " + cockDescript(1) + " soon comes to know their touch quite intimately.  Despite all this – despite much of your [cocks] simply sitting out in the air, pressing against the tattooed woman for warmth – your mind is drawn to the sensations of her mouth, and the sensations of those  deep, dark lips.  You only lust for them more as they drag along you.  Every little twist, every gulp that pushes them in another direction sends a tensing shiver down your [cock].  Your breath catches in your throat, gasping when you feel the inside of her cheek grind against your prick.\n\n");
 
@@ -504,141 +395,149 @@ private function acceptFellatrixOral():void {
 		else {
 			outputText("You barely have time to nod your assent before Dominika drags you into the other room with a grin, nearly throwing you to the bed and licking her lips.  \"<i>C'mon then you cumfactory,</i>\" she smirks, tossing aside the bottom of your [armor] carelessly.  Her fingers trail at your thighs as she looks down at your [cocks] with an unsubtle hunger.  \"<i>Show me just how much you like what I do.</i>\"  Her hand curls around your " + cockDescript(1) + ", jerking it recklessly and lewdly.  You're hardly about to not get erect at her half-naked form and the administrations to your crotch – much less the sight of those deep, delicious lips – so the command feels a little silly.  You really stop caring about how silly it is as soon as her mouth slides over your " + cockDescript(1) + ".  She sucks casually on the prick, roaming over the base with one hand while the other taunts the head of your [cock].  Though you try to relax, a small amount of tension still sits in you, brought about by the knowledge of just how recklessly Dominika can assault your prick with her succulent full puckers.\n\n");
 
-			outputText("It's clear that it won't take long for her to reach that point.  Though she soon squeezes your cocks together and lashes her tongue across them, you can see her eyes settling on your [cock], hungry for the fattest one.  Those dark cocksuckers kiss every cumslit wetly in turn, but wrap around the foremost of your pricks soon after.  They slide and shift messily around, the cabalist unafraid to spit and drool over your [cock] as she works it over.  Every movement the soft flesh makes excites you.  Your prick presses into the roof of her mouth, into her cheeks, pressing down her tongue.  It roams about the wet maw not freely, but where she demands it go.  The wet warmth pulling at your prick ensures you don't mind at all.  Her tongue nearly flays your prick in her ravenous domination, grinding so intimately into you they might have been joined as one.  Saliva drips down your prick from her squeezing ebony kiss, only allowing her to move slicker and quicker about you.  The plump 'O'-shaped puckers dominate your thoughts as easily as they dominate your lap, nearly sealing around your [cock] and ensuring that you will not leave her mouth until she is ready for you to.  The control she exhibits is wildly arousing and you happily drool pre-cum into her gulping mouth.  She swallows it up at the same time as she pulls you into her throat, claiming your prick even more.\n\n");
+			outputText("It's clear that it won't take long for her to reach that point.  Though she soon squeezes your cocks together and lashes her tongue across them, you can see her eyes settling on your [cock], hungry for the fattest one.  Those dark cocksuckers kiss every cumslit wetly in turn, but wrap around the most of your pricks soon after.  They slide and shift messily around, the cabalist unafraid to spit and drool over your [cock] as she works it over.  Every movement the soft flesh makes excites you.  Your prick presses into the roof of her mouth, into her cheeks, pressing down her tongue.  It roams about the wet maw not freely, but where she demands it to go.  The wet warmth pulling at your prick ensures you don't mind at all.  Her tongue nearly flays your prick in her ravenous domination, grinding so intimately into you, they might have been joined as one.  Saliva drips down your prick from her squeezing ebony kiss, only allowing her to move slicker and quicker about you.  The plump 'O'-shaped puckers dominate your thoughts as easily as they dominate your lap, nearly sealing around your [cock] and ensuring that you will not leave her mouth until she is ready for you to.  The control she exhibits is wildly arousing and you happily drool pre-cum into her gulping mouth.  She swallows it up at the same time as she pulls you into her throat, claiming your prick even more.\n\n");
 
 			outputText("All the while the rest of your [cocks] find themselves in the grip of her delicate hands. Their softness speaks to the life of a magic-user. It seems as though the hardest she may have worked in her life was the rough pumping she gave your " + cockDescript(1) + ".  She is unrelenting in her treatment, ensuring you stay constantly stimulated even at the risk of overdoing it.  Dominika doesn't seem to care how much you groan, or gasp, or whimper at the pleasure and wet friction she gives you.  She cares only about making you cum.  Without those full black lips to focus on it feels as though she might make you pass out, but you can cling to the thought of them as tightly as they cling to you.  They engulf you, swallowing and sucking messily eternally.\n\n");
 
-			outputText("She drags you recklessly to the edge.  You know you will fall over it, and when you do you will pump load after load of sticky spunk out of your [cocks] drenching whatever has a grip on you or sits in front of you.  Dominika dominates this position, and her dripping maw's constant assault on your lap demands so much of your attention it becomes easy to forget that anything else exists.  You twitch and clench, pushing up and forwards until her face is hilted on you.  In that moment of slutty unity you can no longer resist her throat's demands.  Bulging out her swallowing hole, even your sense of self becomes momentarily replaced by nothing more than the need to cum and dump your jizm.  Maybe the two of you are a single entity, devouring and producing cum eternally.  You don't know. You just cum.  You don't stop cumming.  You pump and you thrust and you moan in unbroken pleasure.  The sensation seems eternal until a kiss on your cheek breaks the reverie, leaving you to fall backwards gasping.\n\n");
+			outputText("She drags you recklessly to the edge.  You know you will fall over it, and when you do you will pump load after load of sticky spunk out of your [cocks] drenching whatever has a grip on you or sits in front of you.  Dominika dominates this position, and her dripping maw's constant assault on your lap demands so much of your attention it becomes easy to forget that anything else exists.  You twitch and clench, pushing up and forwards until her face is hilted on you.  At that moment of slutty unity, you can no longer resist her throat's demands.  Bulging out her swallowing hole, even your sense of self becomes momentarily replaced by nothing more than the need to cum and dump your jizm.  Maybe the two of you are a single entity, devouring and producing cum eternally.  You don't know. You just cum.  You don't stop cumming.  You pump and you thrust and you moan in unbroken pleasure.  The sensation seems eternal until a kiss on your cheek breaks the reverie, leaving you to fall backwards gasping.\n\n");
 
 			outputText("\"<i>As always, delicious,</i>\" Dominika smiles, relaxing with you in the afterglow of her meal.  She caresses you until you regain your strength, and then politely helps you re-dress and sends you on your way, giving you a kiss to remember her.  Those black lips linger in your mind as you walk the streets of Tel'Adre.");
 		}
+		player.sexReward("saliva", "Dick");
 		flags[kFLAGS.DOMINIKA_TIMES_MULTICOCK_SLOBBERED]++;
+		sharedEnd();
 	}
-	//[If \"<i>Yes</i>\" and penis small enough to suck]
-	else if(player.cockArea(x) <= 36) {
-		//Dogcock suck
-		if(player.hasKnot(x)) {
-			// - first time dogsuck
-			if(flags[kFLAGS.DOMINIKA_SUCKED_KNOT] == 0) {
-				outputText("A confident chuckle comes from Dominika's throat as she takes your hand and leads you to another room. \"<i>Come then, sit down,</i>\" she smiles, patting the surprisingly luxurious bed within. \"<i>Make yourself comfortable, dear, as you'll not be standing up.</i>\" You quirk her head, but the nearly carnivorous way she licks those dark lips suggests that her 'certain dietary needs' are ones she pursues with some passion, and sitting down seems like a good idea. She in turn paces calmly around to face you, resting her hand on your shoulder as she does. A single, appraising glance is given you before she kneels and removes the bottom portion of your [armor].\n\n");
 
-				outputText("You were not prepared for the brief laugh that escapes her inky lips. \"<i>Ah, sorry, sorry,</i>\" she quickly explains, though she still smirks, \"<i>Just... mmm, fan of spicy food, I take it?</i>\" She brushes her hands over your " + cockDescript(x) + " and briefly rubs your knot with two fingers. \"<i>As long as you give me my food we shouldn't have any problems.</i>\" Those dark lips turn once more into a grin both confident and wicked. Leaning forward, her plump lower lip rests against the shaft of your " + cockDescript(x) + " before dragging slowly upwards, leaving behind a trail of subtle saliva. Her top lip curls over your tip as she arrives, giving the first small suck of your meat – one that feels incredible. The heat and warmth of her mouth is only teased at but you desire far more, to say little of the soft sensation from her curving pillows. The single action is capped off by her tongue flicking across your very tip, leaving behind the warm trail of her spit.\n\n");
+	//Dogcock suck
+	function knotF(x:int):void {
+		// - first time dogsuck
+		if (flags[kFLAGS.DOMINIKA_SUCKED_KNOT] == 0) {
+			outputText("A confident chuckle comes from Dominika's throat as she takes your hand and leads you to another room. \"<i>Come then, sit down,</i>\" she smiles, patting the surprisingly luxurious bed within. \"<i>Make yourself comfortable, dear, as you'll not be standing up.</i>\" You quirk her head, but the nearly carnivorous way she licks those dark lips suggests that her 'certain dietary needs' are ones she pursues with some passion, and sitting down seems like a good idea. She in turn paces calmly around to face you, resting her hand on your shoulder as she does. A single, appraising glance is given you before she kneels and removes the bottom portion of your [armor].\n\n");
 
-				outputText("A sense of strange regret comes as she lifts her mouth from you, but you know she's not going anywhere. Her fingers curl around you, almost undulating slowly as she makes them crawl down your " + cockDescript(x) + ". She watches your pleasured grunting with amusement, though her eyes continually flicker back down to the shaft in hand. \"<i>I hope you're not used to company licking your crotch,</i>\" she teases, leaning in and dragging her slippery tongue over the meeting of crotch and shaft. The side of her lips rub against your knot in turn, the contact as electric as it was before. Already you can feel yourself ready to swell up fuller and fuller, to lock yourself in her and flood her with the thick spunk waiting to be free, but your resolve restrains you for now. You are eager to see what else she – and those ebony pillows of hers – enacts upon you. Her tongue swirls around you, your " + cockDescript(x) + " gliding about her forehead and her cheeks as a result of the motion. The contact of the flesh helps soothe the lust you feel looking at the plump curves upon her face.\n\n");
+			outputText("You were not prepared for the brief laugh that escapes her inky lips. \"<i>Ah, sorry, sorry,</i>\" she quickly explains, though she still smirks, \"<i>Just... mmm, fan of spicy food, I take it?</i>\" She brushes her hands over your " + cockDescript(x) + " and briefly rubs your knot with two fingers. \"<i>As long as you give me my food we shouldn't have any problems.</i>\" Those dark lips turn once more into a grin both confident and wicked. Leaning forward, her plump lower lip rests against the shaft of your " + cockDescript(x) + " before dragging slowly upwards, leaving behind a trail of subtle saliva. Her top lip curls over your tip as she arrives, giving the first small suck of your meat – one that feels incredible. The heat and warmth of her mouth is only teased at but you desire far more, to say little of the soft sensation from her curving pillows. The single action is capped off by her tongue flicking across your very tip, leaving behind the warm trail of her spit.\n\n");
 
-				outputText("Eager to see those lusts slaked, you reach forward, moving to at the very least caress her hair and encourage what she's doing, but her hands come firmly to your wrists. \"<i>Down, boy,</i>\" she smirks up at you, \"<i>Do you think you're going to be setting this pace? No, no no no.</i>\" With a grip firm enough to inform you that she will not accept no for an answer she sets your hands to your side. You like the way her lips smile when you acquiesce to her insistence. \"<i>This is my toy to play with, not yours. I'm in control here.</i>\" The slow way she punctuates each word and the shapes her lips make as she does so tantalize you. The moment her lips make those shapes around your " + cockDescript(x) + " and start to grind, you realize that the feeling of those ebony curves forming around you is not nearly enough. Still, the heated breath emanating from between them and the brief brushes they give as they pass on by keep the blood stiff within your shaft, eager and awaiting what more she desires.\n\n");
-				outputText("Her tongue returns to the base of your " + cockDescript(x) + ", this time circling around your knot. Coming eventually to the bottom of it, her tongue begins another slow ascent, smearing the warmth of her mouth all along the already slick underside of your prick. A little torment plays out within you, wondering whether this was even better than the first lick, but the thought of those lips about to act upon you overwhelms all other frivolous imaginings. Every little bit that the tongue travels up you is one step closer to their ebony grip engulfing you.\n\n");
+			outputText("A sense of strange regret comes as she lifts her mouth from you, but you know she's not going anywhere. Her fingers curl around you, almost undulating slowly as she makes them crawl down your " + cockDescript(x) + ". She watches your pleasured grunting with amusement, though her eyes continually flicker back down to the shaft in hand. \"<i>I hope you're not used to company licking your crotch,</i>\" she teases, leaning in and dragging her slippery tongue over the meeting of crotch and shaft. The side of her lips rub against your knot in turn, the contact as electric as it was before. Already you can feel yourself ready to swell up fuller and fuller, to lock yourself in her and flood her with the thick spunk waiting to be free, but your resolve restrains you for now. You are eager to see what else she – and those ebony pillows of hers – enacts upon you. Her tongue swirls around you, your " + cockDescript(x) + " gliding about her forehead and her cheeks as a result of the motion. The contact of the flesh helps soothe the lust you feel looking at the plump curves upon her face.\n\n");
 
-				outputText("Saliva flicks across your tip as she finishes the slow lick. The lewd schlorp that follows makes you spasm, thighs twitching as you jerk forward. A strangled gasp is ripped from your throat, the abrupt penetration of the sorceress' mouth catching you unprepared even in your obsession with her maw in your mind.  She fills her mouth with you, wetly slipping around your " + cockDescript(x) + ", shoving your tip into her cheeks. It grinds against the soft and heated flesh within until she can no longer fit the swelling shaft between teeth and cheek. Her tongue then becomes the focus of the slow grind, rubbing itself from side to side along the underbelly of your " + cockDescript(x) + " as Dominika's warm mouth begins to bob about your length. The movement of those sinful lips is palpable, your prick able to track each movement of the full flesh as they slide along it. Never did you expect so much pleasant friction from so slick a substance! Though her mouth seems to effortlessly slip along you the drag of her flesh feels almost as though those plump lips could pull you off the bed.\n\n");
+			outputText("Eager to see those lusts slaked, you reach forward, moving to at the very least caress her hair and encourage what she's doing, but her hands come firmly to your wrists. \"<i>Down, boy,</i>\" she smirks up at you, \"<i>Do you think you're going to be setting this pace? No, no no no.</i>\" With a grip firm enough to inform you that she will not accept no for an answer she sets your hands to your side. You like the way her lips smile when you acquiesce to her insistence. \"<i>This is my toy to play with, not yours. I'm in control here.</i>\" The slow way she punctuates each word and the shapes her lips make as she does so tantalize you. The moment her lips make those shapes around your " + cockDescript(x) + " and start to grind, you realize that the feeling of those ebony curves forming around you is not nearly enough. Still, the heated breath emanating from between them and the brief brushes they give as they pass on by keep the blood stiff within your shaft, eager and awaiting what more she desires.\n\n");
+			outputText("Her tongue returns to the base of your " + cockDescript(x) + ", this time circling around your knot. Coming eventually to the bottom of it, her tongue begins another slow ascent, smearing the warmth of her mouth all along the already slick underside of your prick. A little torment plays out within you, wondering whether this was even better than the first lick, but the thought of those lips about to act upon you overwhelms all other frivolous imaginings. Every little bit that the tongue travels up you is one step closer to their ebony grip engulfing you.\n\n");
 
-				outputText("The ache of your desire feels so palpable you want to strangle it. You long to reach forward and take the occultist's head, to shove her down and let your knot lock her to your crotch and to dump endless depravity into her stomach. Every time you think of it you are reminded of the firm instructions she gave you not to, and the thought of disregarding those lips stresses you to uncomfortable levels. Your " + cockDescript(x) + " feels as though it is straining against the bondage of its very flesh as she grows more frenzied, wanting to burst out in infinite size and overwhelming jizz. You want more, and you want it from Dominika.\n\n");
+			outputText("Saliva flicks across your tip as she finishes the slow lick. The lewd schlorp that follows makes you spasm, thighs twitching as you jerk forward. A strangled gasp is ripped from your throat, the abrupt penetration of the sorceress' mouth catching you unprepared even in your obsession with her maw in your mind.  She fills her mouth with you, wetly slipping around your " + cockDescript(x) + ", shoving your tip into her cheeks. It grinds against the soft and heated flesh within until she can no longer fit the swelling shaft between teeth and cheek. Her tongue then becomes the focus of the slow grind, rubbing itself from side to side along the underbelly of your " + cockDescript(x) + " as Dominika's warm mouth begins to bob about your length. The movement of those sinful lips is palpable, your prick able to track each movement of the full flesh as they slide along it. Never did you expect so much pleasant friction from so slick a substance! Though her mouth seems to effortlessly slip along you the drag of her flesh feels almost as though those plump lips could pull you off the bed.\n\n");
 
-				outputText("Almost as though she was teasing your desire, her fingers close around your knot. Though the soft skin is pleasurable to the touch, they clench tightly, rubbing the spit dripping down your " + cockDescript(x) + " against the engorged skin. Above the knot, her face bounces harder and harder, the act more akin to a juicy cunt bouncing in your lap than the mouth shoving itself onto your dick. You're fucking her – or rather, she's fucking you, mounting you with her mouth the way a more traditional slut might have straddled your lap. Your knot swells into her fingers, the lust and the passion of the moment causing it to give up on pushing past those flawless ebony pillows that slip faster and faster over your " + cockDescript(x) + ". Lost in the passionate throes of animal rutting with a sloppy drooling maw, you close your eyes as your orgasm approaches.\n\n");
+			outputText("The ache of your desire feels so palpable you want to strangle it. You long to reach forward and take the occultist's head, to shove her down and let your knot lock her to your crotch and to dump endless depravity into her stomach. Every time you think of it you are reminded of the firm instructions she gave you not to, and the thought of disregarding those lips stresses you to uncomfortable levels. Your " + cockDescript(x) + " feels as though it is straining against the bondage of its very flesh as she grows more frenzied, wanting to burst out in infinite size and overwhelming jizz. You want more, and you want it from Dominika.\n\n");
 
-				outputText("Darkness fills your vision when you do – the darkness of those deep, sinful lips. You can focus on nothing else, imagining the lewd O they make around you. You picture her face, her jaw stretched out, those black pouty curves bidding you enter. Bidding you feed them. Hips twitching and rocking of their own accord you can no longer hold back. As though a dam had burst, spunk floods the passage of your " + cockDescript(x) + " and shoots into the swallowing throat of the tattooed magistrix. You slam your hips forward as though shoving yourself into the biggest-bootied bitch-whore you've met, and it feels like those plump plush pillows are providing even more cushioning. The spasms that rock your body threaten to give you whiplash, the raw unadulterated pleasure you feel here in this mouth, mind-blowing. Nothing exists in your mind but cum, and those lips, those perfect, immaculate, godly, dripping...\n\n");
+			outputText("Almost as though she was teasing your desire, her fingers close around your knot. Though the soft skin is pleasurable to the touch, they clench tightly, rubbing the spit dripping down your " + cockDescript(x) + " against the engorged skin. Above the knot, her face bounces harder and harder, the act more akin to a juicy cunt bouncing in your lap than the mouth shoving itself onto your dick. You're fucking her – or rather, she's fucking you, mounting you with her mouth the way a more traditional slut might have straddled your lap. Your knot swells into her fingers, the lust and the passion of the moment causing it to give up on pushing past those flawless ebony pillows that slip faster and faster over your " + cockDescript(x) + ". Lost in the passionate throes of animal rutting with a sloppy drooling maw, you close your eyes as your orgasm approaches.\n\n");
 
-				outputText("Softly her lips press against yours, and you start to relax. Glancing down, your " + cockDescript(x) + " has long since finished (though the knot remains thick), and Dominika sits beside you smirking. She gently massages your head as you recover from the fellatio, groaning slightly. It's hard to remember those last few moments, though you feel incredible. Just the sensation of the air on your sensitive prick makes you whimper a little. \"<i>I think I gave him a bit of a workout,</i>\" she teases, \"<i>It's always good to remind a dick that a good mouth can do oh so much to it.</i>\" You voice your appreciation, but can't help but ask why she wanted to blow you. \"<i>Oh I told you, dear,</i>\" she laughs slightly, licking her lips, \"<i>I need to eat. Still though, even if I wanted to...</i>\"\n\n");
+			outputText("Darkness fills your vision when you do – the darkness of those deep, sinful lips. You can focus on nothing else, imagining the lewd O they make around you. You picture her face, her jaw stretched out, those black pouty curves bidding you enter. Bidding you feed them. Hips twitching and rocking of their own accord you can no longer hold back. As though a dam had burst, spunk floods the passage of your " + cockDescript(x) + " and shoots into the swallowing throat of the tattooed magistrix. You slam your hips forward as though shoving yourself into the biggest-bootied bitch-whore you've met, and it feels like those plump plush pillows are providing even more cushioning. The spasms that rock your body threaten to give you whiplash, the raw unadulterated pleasure you feel here in this mouth, mind-blowing. Nothing exists in your mind but cum, and those lips, those perfect, immaculate, godly, dripping...\n\n");
 
-				outputText("She takes your hand and presses it to her crotch where you feel the unyielding strength of metal. She lowers her skirt slightly and you see the beginnings of a carefully crafted chastity belt. \"<i>It's alright though,</i>\" she smiles, kissing your cheek, \"<i>I enjoyed myself plenty.</i>\" She then gives an almost wicked grin, a fake expression of innocence dancing across her eyes. \"<i>Just take an hour before you try putting that in anyone else, is my advice.</i>\"\n\n");
+			outputText("Softly her lips press against yours, and you start to relax. Glancing down, your " + cockDescript(x) + " has long since finished (though the knot remains thick), and Dominika sits beside you smirking. She gently massages your head as you recover from the fellatio, groaning slightly. It's hard to remember those last few moments, though you feel incredible. Just the sensation of the air on your sensitive prick makes you whimper a little. \"<i>I think I gave him a bit of a workout,</i>\" she teases, \"<i>It's always good to remind a dick that a good mouth can do oh so much to it.</i>\" You voice your appreciation, but can't help but ask why she wanted to blow you. \"<i>Oh I told you, dear,</i>\" she laughs slightly, licking her lips, \"<i>I need to eat. Still though, even if I wanted to...</i>\"\n\n");
 
-				outputText("After a bit of small talk, she glances out the window, and suggests you get back to your adventuring. She kisses you once more as you go, and you taste the ebony curves on your lips as you return to the streets of Tel'Adre.");
-			}
-			else {
-				outputText("You arrive at the second-story apartment and Dominika unceremoniously drags you into the other room. \"<i>C'mon, bitch,</i>\" she says playfully, licking those deep lips.  She sits you on the bed and pulls your [armor] away from you, kneeling down. \"<i>I trust you've built up a good meal?</i>\" She rapidly starts pumping your " + cockDescript(x) + " with her hands, spitting on it for lube. Her fingertips shift down and start pressing tauntingly into your knot while her mouth comes down, bringing with it those gorgeous fat lips. The way they move is intoxicating, slipping about your shaft before sliding over the tip of your prick. Seeing the lewd O begin to form and grow larger only helps you get harder.\n\n");
+			outputText("She takes your hand and presses it to her crotch where you feel the unyielding strength of metal. She lowers her skirt slightly and you see the beginnings of a carefully crafted chastity belt. \"<i>It's alright though,</i>\" she smiles, kissing your cheek, \"<i>I enjoyed myself plenty.</i>\" She then gives an almost wicked grin, a fake expression of innocence dancing across her eyes. \"<i>Just take an hour before you try putting that in anyone else, is my advice.</i>\"\n\n");
 
-				outputText("Her hands are rough with you, forcing you to spread your legs so that your " + cockDescript(x) + " stands upright and exposed. You know she doesn't want your hands in the way, and you obey her desires. She's in control here, and with the way she makes your meat feel, you wouldn't want it any other way. If she wants you to be her blown bitch, so be it. Her lips twist from side to side as she pushes your tip into her mouth, making her cheeks bulge and dragging you against the roof of her mouth. Spit drips down your " + cockDescript(x) + ", and deep satisfied gulping noises arise from between your legs. Every inch of her mouth is warm and soft, but her plump lips close around you like a seal, letting you know that you can leave her mouth only when she is ready. The friction elicits full-body trembling, and you drool pre-cum into her mouth. All of it is slurped down into her waiting throat, and soon your prick follows as she begins to deepthroat you.\n\n");
+			outputText("After a bit of small talk, she glances out the window, and suggests you get back to your adventuring. She kisses you once more as you go, and you taste the ebony curves on your lips as you return to the streets of Tel'Adre.");
+		} else {
+			outputText("You arrive at the second-story apartment and Dominika unceremoniously drags you into the other room. \"<i>C'mon, bitch,</i>\" she says playfully, licking those deep lips.  She sits you on the bed and pulls your [armor] away from you, kneeling down. \"<i>I trust you've built up a good meal?</i>\" She rapidly starts pumping your " + cockDescript(x) + " with her hands, spitting on it for lube. Her fingertips shift down and start pressing tauntingly into your knot while her mouth comes down, bringing with it those gorgeous fat lips. The way they move is intoxicating, slipping about your shaft before sliding over the tip of your prick. Seeing the lewd O begin to form and grow larger only helps you get harder.\n\n");
 
-				outputText("Like your last visit, she facefucks herself on you, treating her mouth the way you've come to expect – acting as her only and favorite sex organ. Ravenous and depraved noises arise from your lap, the fellatrix finding intense pleasure in sucking on your " + cockDescript(x) + ". You can barely focus on it however, as your world increasingly consists of the raw sensation. Thinking on those plump, gorgeous lips helps keep your mind from floating away into bliss too soon. Her throat squeezes you possessively, tighter than a cunt and hotter than a forge. That wonderful tongue contorts itself around you, more worshipper than body part. Those fat black cocksuckers cling to you as though you'd run away without them. Even without looking, you can imagine them forming a succulent, seductive O, a single trail of saliva between them in the waiting cunt...\n\n");
+			outputText("Her hands are rough with you, forcing you to spread your legs so that your " + cockDescript(x) + " stands upright and exposed. You know she doesn't want your hands in the way, and you obey her desires. She's in control here, and with the way she makes your meat feel, you wouldn't want it any other way. If she wants you to be her blown bitch, so be it. Her lips twist from side to side as she pushes your tip into her mouth, making her cheeks bulge and dragging you against the roof of her mouth. Spit drips down your " + cockDescript(x) + ", and deep satisfied gulping noises arise from between your legs. Every inch of her mouth is warm and soft, but her plump lips close around you like a seal, letting you know that you can leave her mouth only when she is ready. The friction elicits full-body trembling, and you drool pre-cum into her mouth. All of it is slurped down into her waiting throat, and soon your prick follows as she begins to deepthroat you.\n\n");
 
-				outputText("Your knot presses past her lips, the ravenous maw feeding on your lap demanding all you can give her. You are all too happy to give it up. Even now you remember the ache from not pushing your swollen knot into her mouth the first time you met her. Her fingers dig into your thighs as she rapidly bounces on just this small portion of your " + cockDescript(x) + ", her throat gulping deeply around everything inserted in it. Her hair bounces so wildly it threatens to burst out of her bun. The swelling of your knot tells you what you already know – it will not be long before you paint Dominika's throat in your sticky fucksludge. Eventually your bucking hips seize and tremble as the first sticky load flings itself into her waiting maw. Her mouth buries itself into your lap as she drinks of your spunk, swallowing everything you give her and not letting a single drop through her plump, moist lips. Your knot feels like it might be as large as your head, so blissful and overwhelming the sensations below are. You cum until you can't cum anymore, and even then your orgasm persists until she delicately kisses your lips.\n\n");
+			outputText("Like your last visit, she facefucks herself on you, treating her mouth the way you've come to expect – acting as her only and favorite sex organ. Ravenous and depraved noises arise from your lap, the fellatrix finding intense pleasure in sucking on your " + cockDescript(x) + ". You can barely focus on it however, as your world increasingly consists of the raw sensation. Thinking on those plump, gorgeous lips helps keep your mind from floating away into bliss too soon. Her throat squeezes you possessively, tighter than a cunt and hotter than a forge. That wonderful tongue contorts itself around you, more worshipper than body part. Those fat black cocksuckers cling to you as though you'd run away without them. Even without looking, you can imagine them forming a succulent, seductive O, a single trail of saliva between them in the waiting cunt...\n\n");
 
-				outputText("\"<i>As always, delicious,</i>\" she smiles, relaxing with you in the afterglow of her meal. She caresses you until you regain your strength, and then politely helps you re-dress and sends you on your way, giving you a kiss to remember her. Those black lips linger in your mind as you walk the streets of Tel'Adre.");
-			}
-			flags[kFLAGS.DOMINIKA_SUCKED_KNOT]++;
+			outputText("Your knot presses past her lips, the ravenous maw feeding on your lap demanding all you can give her. You are all too happy to give it up. Even now you remember the ache from not pushing your swollen knot into her mouth the first time you met her. Her fingers dig into your thighs as she rapidly bounces on just this small portion of your " + cockDescript(x) + ", her throat gulping deeply around everything inserted in it. Her hair bounces so wildly it threatens to burst out of her bun. The swelling of your knot tells you what you already know – it will not be long before you paint Dominika's throat in your sticky fucksludge. Eventually your bucking hips seize and tremble as the first sticky load flings itself into her waiting maw. Her mouth buries itself into your lap as she drinks of your spunk, swallowing everything you give her and not letting a single drop through her plump, moist lips. Your knot feels like it might be as large as your head, so blissful and overwhelming the sensations below are. You cum until you can't cum anymore, and even then your orgasm persists until she delicately kisses your lips.\n\n");
+
+			outputText("\"<i>As always, delicious,</i>\" she smiles, relaxing with you in the afterglow of her meal. She caresses you until you regain your strength, and then politely helps you re-dress and sends you on your way, giving you a kiss to remember her. Those black lips linger in your mind as you walk the streets of Tel'Adre.");
 		}
-		//Horsecock suck
-		else if(player.cocks[x].cockType == CockTypesEnum.HORSE) {
-			// - first time horsesuck
-			if(flags[kFLAGS.DOMINIKA_SUCKED_HORSE] == 0) {
-				outputText("The smile that spreads across her face might have looked sinister on someone else. She takes your hand and guides you to the other room, licking her lips. Within rests an extraordinarily comfortable-looking bed, featuring a level of finery you had nearly forgotten existed. The cabalist leads you to it, and helps you sit down. \"<i>Yeah,</i>\" she smirks, \"<i>I figured you might say yes.</i>\" She reaches down to remove the bottom of your [armor], before chuckling lightly at the sight of your " + cockDescript(x) + ". \"<i>Oh yeah?</i>\" she says, \"<i>Do they call you the Icathian Stallion?</i>\"\n\n");
+		player.sexReward("saliva", "Dick");
+		flags[kFLAGS.DOMINIKA_SUCKED_KNOT]++;
+		sharedEnd();
+	}
 
-				outputText("You blink in confusion at her. \"<i>...You know, like... it's a nickname from... you know what, never mind.</i>\" She waves her hand dismissively and smiles. \"<i>I'm sure no matter how uninformed you are, you still blow a load.</i>\" Her hands reach down to slowly rub against the stiffening " + cockDescript(x) + ", eager to have its fun with the topless arcanist standing before it. There's a comfortable softness to her thumb as it plays over your flared tip. She settles down to kneel before you, continuing to stroke your " + cockDescript(x) + " and entice it into a much fuller form. Even just this close you can begin to feel her breath emanating from between those luscious, deeply-coloured lips. The warmth of the sensation is seductive, carrying promises of what is yet to come. Your " + cockDescript(x) + " practically leans towards her in anticipation.\n\n");
+	//Horsecock suck
+	function horseF(x:int):void {
+		// - first time horsesuck
+		if (flags[kFLAGS.DOMINIKA_SUCKED_HORSE] == 0) {
+			outputText("The smile that spreads across her face might have looked sinister on someone else. She takes your hand and guides you to the other room, licking her lips. Within rests an extraordinarily comfortable-looking bed, featuring a level of finery you had nearly forgotten existed. The cabalist leads you to it, and helps you sit down. \"<i>Yeah,</i>\" she smirks, \"<i>I figured you might say yes.</i>\" She reaches down to remove the bottom of your [armor], before chuckling lightly at the sight of your " + cockDescript(x) + ". \"<i>Oh yeah?</i>\" she says, \"<i>Do they call you the Icathian Stallion?</i>\"\n\n");
 
-				outputText("A single finger traces along the rim of the excited " + cockDescript(x) + ". Pulsing and hungry you grunt a little as a portion of pre-cum begins to form, slipping down from the cumslit. Your tattooed companion leans forward, catching it with her tongue before it slides down your shaft, and snapping it back into her mouth. A light smile tugs at the edge of her dark lips in turn. \"<i>Glad to see you're of some use,</i>\" she muses. Her fingers slip away from your head and stroke along the length of your prick instead, not wanting to get in the way of her intent. Once more her tongue touches the flat head of your " + cockDescript(x) + ", dragging up from the bottom and across your cumhole before flicking calmly off the top.  Then her lips touch you.\n\n");
+			outputText("You blink in confusion at her. \"<i>...You know, like... it's a nickname from... you know what, never mind.</i>\" She waves her hand dismissively and smiles. \"<i>I'm sure no matter how uninformed you are, you still blow a load.</i>\" Her hands reach down to slowly rub against the stiffening " + cockDescript(x) + ", eager to have its fun with the topless arcanist standing before it. There's a comfortable softness to her thumb as it plays over your flared tip. She settles down to kneel before you, continuing to stroke your " + cockDescript(x) + " and entice it into a much fuller form. Even just this close you can begin to feel her breath emanating from between those luscious, deeply-coloured lips. The warmth of the sensation is seductive, carrying promises of what is yet to come. Your " + cockDescript(x) + " practically leans towards her in anticipation.\n\n");
 
-				outputText("You nearly melt. You've had blowjobs before. You've kissed lips, put your fingers on them, had them brush across your cheek. You know what lips feel like. The ones resting on the top of your " + cockDescript(x) + " have a softness, a plumpness, and a fullness to them you can barely process. Immediately you take a breath and then let out a groan. You feel rather than hear her chuckle against your dick, each motion of those dark pillows rubbing across you as they pull in a slight smile. Stammering out some degree of praise (though with how distracted you have abruptly grown you're not sure that you even formed a coherent sentence) you grind your " + cockDescript(x) + " forward in hopes of pushing past the simple kiss that graces your top. Those pursed lips remain steadfast in their act and press lightly to your cumslit, before widening slightly and flicking her tongue against it.\n\n");
+			outputText("A single finger traces along the rim of the excited " + cockDescript(x) + ". Pulsing and hungry you grunt a little as a portion of pre-cum begins to form, slipping down from the cumslit. Your tattooed companion leans forward, catching it with her tongue before it slides down your shaft, and snapping it back into her mouth. A light smile tugs at the edge of her dark lips in turn. \"<i>Glad to see you're of some use,</i>\" she muses. Her fingers slip away from your head and stroke along the length of your prick instead, not wanting to get in the way of her intent. Once more her tongue touches the flat head of your " + cockDescript(x) + ", dragging up from the bottom and across your cumhole before flicking calmly off the top.  Then her lips touch you.\n\n");
 
-				outputText("Moaning once again, your hands come forward to stroke through her hair and encourage her, but you are abruptly surprised by the slapping of your wrists. \"<i>Down,</i>\" Dominika says to you, her fingers returning to stroking your base once your hands return to the bed. \"<i>This is mine to play with, not yours.</i>\" You respond the most well-spoken way you can at the moment, namely by panting slightly. Still, the thought of letting those dark lips act upon you is appealing. You can't come up with any compelling reasons to disobey her desires. Apparently satisfied with your passive inaction, Dominika returns her attentions to your " + cockDescript(x) + ", dragging those lush, gorgeous lips over your head and letting all of the sensitive flesh feel and grow enamored with them.\n\n");
+			outputText("You nearly melt. You've had blowjobs before. You've kissed lips, put your fingers on them, had them brush across your cheek. You know what lips feel like. The ones resting on the top of your " + cockDescript(x) + " have a softness, a plumpness, and a fullness you can barely process. Immediately you take a breath and then let out a groan. You feel rather than hear her chuckle against your dick, each motion of those dark pillows rubbing across you as they pull in a slight smile. Stammering out some degree of praise (though with how distracted you have abruptly grown you're not sure that you even formed a coherent sentence) you grind your " + cockDescript(x) + " forward in hopes of pushing past the simple kiss that graces your top. Those pursed lips remain steadfast in their act and press lightly to your cumslit, before widening slightly and flicking her tongue against it.\n\n");
 
-				outputText("To your regret, they soon slip away. To your delight, they move to the side of your " + cockDescript(x) + ", dragging her mouth up and down the side of your prick while her palm curls around your flattened crown. She opens up her warm maw enough that her tongue can press against your engorged shaft but not so much that it covers the fat bottom lip that slides deliciously along you. You think of all the times you've had to jerk yourself off at camp and wish that you had at least had just this much more to aid you. Even without entering her, the glossy slide of her inky, pillowy cocksuckers elicits uncontrollable and desperate throbbing from your " + cockDescript(x) + ", alive with a need it only just developed. More pre-cum rises out of your prick, practically bubbling in its eagerness to be devoured.\n\n");
+			outputText("Moaning once again, your hands come forward to stroke through her hair and encourage her, but you are abruptly surprised by the slapping of your wrists. \"<i>Down,</i>\" Dominika says to you, her fingers returning to stroking your base once your hands return to the bed. \"<i>This is mine to play with, not yours.</i>\" You respond the most well-spoken way you can at the moment, namely by panting slightly. Still, the thought of letting those dark lips act upon you is appealing. You can't come up with any compelling reasons to disobey her desires. Apparently satisfied with your passive inaction, Dominika returns her attentions to your " + cockDescript(x) + ", dragging those lush, gorgeous lips over your head and letting all of the sensitive flesh feel and grow enamored with them.\n\n");
 
-				outputText("Dominika fulfills its desire. Her flawless lips slide back up along the shaft, dragging themselves with a tauntingly slow speed up to the perverse summit of the " + cockDescript(x) + " she climbs. Her lower lip stops at the bottom of your flared head but the top presses onwards. She takes the leaked pre-cum into her awaiting mouth and more, her lip rising until she engulfs the tip of your prick. You enter her mouth  with a wet, messy noise. Spit drips down your shaft. Those lush, flawless midnight lips that you had so adored grinding against your side close around you, and it is better than you hoped. The wet warmth, the pinching suction, and the overwhelming softness make you shudder, and all the while her tongue lashes dominantly across your " + cockDescript(x) + ".\n\n");
+			outputText("To your regret, they soon slip away. To your delight, they move to the side of your " + cockDescript(x) + ", dragging her mouth up and down the side of your prick while her palm curls around your flattened crown. She opens up her warm maw enough that her tongue can press against your engorged shaft but not so much that it covers the fat bottom lip that slides deliciously along you. You think of all the times you've had to jerk yourself off at camp and wish that you had at least had just this much more to aid you. Even without entering her, the glossy slide of her inky, pillowy cocksuckers elicits uncontrollable and desperate throbbing from your " + cockDescript(x) + ", alive with a need it only just developed. More pre-cum rises out of your prick, practically bubbling in its eagerness to be devoured.\n\n");
 
-				outputText("You find yourself obsessing over those lips, picturing them in your mind when you are forced to lean back and blur your vision in your pleasure. You stare at nothing in particular – at the walls, the ceilings, the shifting blonde bun – and as you do you imagine them, pulling at your dick and sucking it into her mouth, their ebony flawless fatness curved in an obscene O. You can imagine them engulfing and pulling on your " + cockDescript(x) + " so vividly, and their image is so perfectly formed and dominant in your mind that it is hard to think about anything else. It is as though those gorgeous dark lips are sucking directly on your mind – but then, given how much the needs of your " + cockDescript(x) + " dominate your every action, perhaps they are.\n\n");
+			outputText("Dominika fulfills its desire. Her flawless lips slide back up along the shaft, dragging themselves with a tauntingly slow speed up to the perverse summit of the " + cockDescript(x) + " she climbs. Her lower lip stops at the bottom of your flared head but the top presses onwards. She takes the leaked pre-cum into her awaiting mouth and more, her lip rising until she engulfs the tip of your prick. You enter her mouth  with a wet, messy noise. Spit drips down your shaft. Those lush, flawless midnight lips that you had so adored grinding against your side close around you, and it is better than you hoped. The wet warmth, the pinching suction, and the overwhelming softness make you shudder, and all the while her tongue lashes dominantly across your " + cockDescript(x) + ".\n\n");
 
-				outputText("She bobs deeper, moving her head rougher. You enter her throat a few times before it becomes a far more frequent and rapid occurrence. It's difficult to remember that you're simply sitting down on the cabalist's bed, as the aggressive facefuck greatly resembles an uncontrolled rut. The act is all hers, assertively controlling your crotch with her mouth and using you for her own needs, recklessly slurping and coating your " + cockDescript(x) + " in her spit. She less fellates your prick than mounts it, treating her mouth as a slut's hungry cunt and aggressively claiming your crotch as a dildo for her needs. In the back of your mind you remember, though. It's not the sex she wants from you. It's your cum.\n\n");
+			outputText("You find yourself obsessing over those lips, picturing them in your mind when you are forced to lean back and blur your vision in your pleasure. You stare at nothing in particular – at the walls, the ceilings, the shifting blonde bun – and as you do you imagine them, pulling at your dick and sucking it into her mouth, their ebony flawless fatness curved in an obscene O. You can imagine them engulfing and pulling on your " + cockDescript(x) + " so vividly, and their image is so perfectly formed and dominant in your mind that it is hard to think about anything else. It is as though those gorgeous dark lips are sucking directly on your mind – but then, given how much the needs of your " + cockDescript(x) + " dominate your every action, perhaps they are.\n\n");
 
-				outputText("This thought proves catalyst enough for the last vestiges of control over your " + cockDescript(x) + " to vanish. Your mouth gapes in a deep and struggling moan, your body shaking as you lean back and let loose. The heat of your cum surges up the length of your " + cockDescript(x) + " and into Dominika's sucking, swallowing maw. Your prick becomes a delivery device for your thick spooge squeezed into submission by her fat, gorgeous, black, full, plush... you can barely process them. They're formed in your mind with such impossible perfection and desire. You long for them, ache for them, your entire body bucking and twisting with a desire to please the lips that curl around your base, engulfing your " + cockDescript(x) + " and using you, feasting on you. More, you have to cum more, you have to keep giving her everything you have. You're not even certain if you are cumming anymore, your mind locked in the brain-wiping haze of orgasm...\n\n");
+			outputText("She bobs deeper, moving her head rougher. You enter her throat a few times before it becomes a far more frequent and rapid occurrence. It's difficult to remember that you're simply sitting down on the cabalist's bed, as the aggressive facefuck greatly resembles an uncontrolled rut. The act is all hers, assertively controlling your crotch with her mouth and using you for her own needs, recklessly slurping and coating your " + cockDescript(x) + " in her spit. She less fellates your prick than mounts it, treating her mouth as a slut's hungry cunt and aggressively claiming your crotch as a dildo for her needs. In the back of your mind you remember, though. It's not the sex she wants from you. It's your cum.\n\n");
 
-				outputText("Softly her lips press against yours, and you start to relax. Glancing down, your " + cockDescript(x) + " has long since finished, and Dominika sits beside you smirking. She gently massages your sensitive shaft as you recover from the fellatio, groaning slightly. It's hard to remember those last few moments, though you feel incredible. Just the sensation of the air on your sensitive prick makes you whimper a little. \"<i>That's a good stallion,</i>\" she teases, \"<i>It's always good to remind a dick that a good mouth can do oh so much to it.</i>\" You voice your appreciation, but can't help but ask why she wanted to blow you. \"<i>Oh I told you, dear,</i>\" she laughs slightly, licking her lips, \"<i>I need to eat. Still though, even if I wanted to...</i>\"\n\n");
+			outputText("This thought proves catalyst enough for the last vestiges of control over your " + cockDescript(x) + " to vanish. Your mouth gapes in a deep and struggling moan, your body shaking as you lean back and let loose. The heat of your cum surges up the length of your " + cockDescript(x) + " and into Dominika's sucking, swallowing maw. Your prick becomes a delivery device for your thick spooge squeezed into submission by her fat, gorgeous, black, full, plush... you can barely process them. They're formed in your mind with such impossible perfection and desire. You long for them, ache for them, your entire body bucking and twisting with a desire to please the lips that curl around your base, engulfing your " + cockDescript(x) + " and using you, feasting on you. More, you have to cum more, you have to keep giving her everything you have. You're not even certain if you are cumming anymore, your mind locked in the brain-wiping haze of orgasm...\n\n");
 
-				outputText("She takes your hand and presses it to her crotch where you feel the unyielding strength of metal. She lowers her skirt slightly and you see the beginnings of a carefully crafted chastity belt. \"<i>It's alright though,</i>\" she smiles, kissing your cheek, \"<i>I enjoyed myself plenty.</i>\" She then gives an almost wicked grin, a fake expression of innocence dancing across her eyes. \"<i>Just take an hour before you try putting that in anyone else, is my advice.</i>\"\n\n");
+			outputText("Softly her lips press against yours, and you start to relax. Glancing down, your " + cockDescript(x) + " has long since finished, and Dominika sits beside you smirking. She gently massages your sensitive shaft as you recover from the fellatio, groaning slightly. It's hard to remember those last few moments, though you feel incredible. Just the sensation of the air on your sensitive prick makes you whimper a little. \"<i>That's a good stallion,</i>\" she teases, \"<i>It's always good to remind a dick that a good mouth can do oh so much to it.</i>\" You voice your appreciation, but can't help but ask why she wanted to blow you. \"<i>Oh I told you, dear,</i>\" she laughs slightly, licking her lips, \"<i>I need to eat. Still though, even if I wanted to...</i>\"\n\n");
 
-				outputText("After a bit of small talk, she glances out the window, and suggests you get back to your adventuring. She kisses you once more as you go, and you taste the ebony curves on your lips as you return to the streets of Tel'Adre.");
-			}
-			//Reppppppeat
-			else {
-				outputText("Nearly dragged into Dominika's bedroom, she pushes you to the bed so unceremoniously you fall onto your back. \"<i>Come on then,</i>\" she purrs aggressively as she moves towards you, licking those darkly-painted lips, \"<i>Show me you're more than an infertile mule.</i>\" She climbs up on the bed and puts a foot to your chest as you try to sit up, giggling and grinning at the controlling position before shifting down to her side. She tugs the bottom portion of your [armor] away to reveal your " + cockDescript(x) + ", jerking her hand along it as she glances back at you. \"<i>Keep producing the sticky glue I need and I won't have to turn you into it,</i>\" she sneers smugly. Her thumb grinds against your cumslit before pulling down and squeezing your base, replaced by her tongue and those fat, dark lips. They grind messily along the sides of your flared tip, accompanied by a casual spitting before wrapping around your meat, pulling it into her mouth.\n\n");
+			outputText("She takes your hand and presses it to her crotch where you feel the unyielding strength of metal. She lowers her skirt slightly and you see the beginnings of a carefully crafted chastity belt. \"<i>It's alright though,</i>\" she smiles, kissing your cheek, \"<i>I enjoyed myself plenty.</i>\" She then gives an almost wicked grin, a fake expression of innocence dancing across her eyes. \"<i>Just take an hour before you try putting that in anyone else, is my advice.</i>\"\n\n");
 
-				outputText("One hand slides along your belly, gripping lightly onto your skin while casually applying some force down to your body. She clearly enjoys holding you down as she fellates you. Her dominant assertiveness is an omnipresent reminder of how she views the sexual exchange, and you obey her wishes by simply laying back and pushing your " + cockDescript(x) + " out, offering it to her. She takes it. Her plump and luscious cockpillows grind into various portions of your prick in twisting and changing ways, shifting your head messily around inside of her mouth. Her tongue grinds against near every inch of it while pushing it into the roof of her mouth as well as her saliva-coated cheeks. The spit spilling from her mouth drips from your shaft to her bed, and in a moment of rare and silly clarity you wonder how often she has to change her sheets. The thought passes quickly, engulfed by the familiar desire of her fat, O-spread lips. They dominate your thoughts as easily as they dominate your lap, nearly sealing around your " + cockDescript(x) + " and ensuring that you will not leave her mouth until she is ready for you to. The control she exhibits is wildly arousing and you happily drool pre-cum into her gulping mouth. She swallows it up at the same time as she pulls you into her throat, claiming your prick even more.\n\n");
-
-				outputText("As is her way she face-fucks herself upon you, aggressively using her face as a simulacrum of the sex organ locked in chastity. Ravenous and depraved sounds rise up from your lap, the hallmarks of her lewd cock inhalations. You're not sure you have the focus to look down and watch her act, as the sensations grow more and more overwhelming. The thought of those full, gorgeous lips keeps you as grounded as you can be. Their image keeps you from breaking as her throat squeezes you tighter than a fleshlight and burns warmer than the most heated cunt. As though a supplicant before its god, her tongue bathes you in worship. All the while those lips close around you, locked tighter than her belt, keeping you with her until you give her her desires. The image of them opening up into a wide O, saliva strings dangling in that heated mouthcunt... it intoxicates you, leaving you melting for more.\n\n");
-
-				outputText("Those fat full lips bounce into your base and you practically yell your moan, so delighted are you at being fully trapped within her suckling maw. Your hips buck greedily and her head meets them, sliding over you and vibrating you in her throat. The shuddering ache inside your cock – to an extent inside your being – warns you what you already knew: you will dump your load in Dominika's throat. Eventually your bucking hips seize and tremble as the first sticky load flings itself into her waiting maw. Her mouth buries itself into your lap as she drinks of your spunk, swallowing everything you give her and not letting a single drop through her plump, moist lips. Your cock feels like it has no end, a consumed part of her throat, a single entity of orgasm and feeding united in singular purpose. You cum until you can't cum anymore, and even then your orgasm persists until she delicately kisses your lips.\n\n");
-
-				outputText("\"<i>As always, delicious,</i>\" she smiles, relaxing with you in the afterglow of her meal. She caresses you until you regain your strength, and then politely helps you re-dress and sends you on your way, giving you a kiss to remember her. Those black lips linger in your mind as you walk the streets of Tel'Adre.");
-			}
-			flags[kFLAGS.DOMINIKA_SUCKED_HORSE]++;
+			outputText("After a bit of small talk, she glances out the window, and suggests you get back to your adventuring. She kisses you once more as you go, and you taste the ebony curves on your lips as you return to the streets of Tel'Adre.");
 		}
-		//Human/fallback wang
+		//Reppppppeat
 		else {
-			// - first time wangsuck
-			if(flags[kFLAGS.DOMINIKA_SUCKED_SMALL] == 0) {
-				outputText("Dominika smiles, taking your hand and leading you to another room. Within is a surprisingly rich-looking bed, and she encourages you to sit down. \"<i>Thank you,</i>\" she says, and immediately follows it up with a truly wicked grin. \"<i>Now to make you realize you should be thanking me.</i>\"\n\n");
-				outputText("She removes the bottom of your [armor] and kneels in front of you. Taking your " + cockDescript(x) + " into her hands, her fingers begin a slow and steady massage along the length. She leans down and brings her lips to a soft kiss right on the tip of your " + cockDescript(x) + ". The glistening moisture you saw on them before feels almost unnatural, as though her lips are oiled up – but given what you've experienced in this land, such an idea does not startle you in the slightest. Her equally slick tongue slips out to press against the underside of your head and then flicks up, leaving saliva behind. The gentle touch of her palm presses against the spit and begins to spread it around. She swirls it slowly around your sensitive tip, enticing your erection further.  The ball of her thumb in particular works into the curve of your head, sliding against where it meets your shaft.\n\n");
-				//(if player has balls)
-				if(player.balls > 0) outputText("Meanwhile her mouth slips down your dick, planting a few kisses along the way before reaching your " + sackDescript() + ". Her dark lips press against each of your [balls] in turn, granting each her moist smooch. She exhales warmly over them, teasing the cumfactories with a grin. Her mouth slips partially over one, her tongue slipping around the soft flesh. She is gentle and delicate in her administrations, and you feel comfortable about your " + sackDescript() + " sitting in her warm mouth – though you would prefer she wrap those plump lips around something else. Your head continues to be stimulated by her soft palm, and now adds pre-cum to the saliva she slowly spreads. A grunt makes her smirk, lifting from your " + sackDescript() + " and sliding her lips slowly up your dick.\n\n");
-				outputText("\"<i>You like this, mm?</i>\" she asks, emphasizing her question with a gentle squeeze of her hand. \"<i>To think of the path I've walked,</i>\" she muses, \"<i>Once a capable cabalist, and now I'm a better fellatrix.  Still – as long as you enjoy your work.</i>\" She leans forward and quickly slurps up a drop of pre, gulping it down visibly. The trail of spit on your shaft hides any evidence that it was ever there, leaving only her smug grin as a tribute to its existence. Still holding your prick in her hand she ducks lower, using her tongue to take long deep slurps of your " + cockDescript(x) + ". Teasing swirls flick across your base and her jaw rubs into the space between your thighs.  Dripping dragged paths of saliva are tracked along either side of your length, before she returns to your head.\n\n");
-				outputText("The rush of pleasure could have staggered you if you were standing. One moment your " + cockDescript(x) + " was pressing into those soft black lips and moments later they had slipped around your head. She squeezes firmly with them and her tongue twists and contorts around your bulb, prostrating itself like an adherent before a god. Entering her mouth had been almost effortless. Her lips slipped apart like they were made to, while clinging to your girth like life support. A wet gulping noise accompanied a tight squeeze, her head beginning to shift around your " + cockDescript(x) + " in a careful and deliberate polishing.\n\n");
-				outputText("Her hands travel along your length and roam along your thighs, squeezing them and slipping over your flesh. She seems to revel in the sensations of sucking on you, her eyes closed and her head bobbing rhythmically. The warm heat of her mouth slips along your " + cockDescript(x) + ", her slick lips managing to generate more than enough friction, and more than you expected. Her flesh hugs to your " + cockDescript(x) + " as tight as any cunt you've encountered so far, and as she begins to move her head more and more excitedly it becomes easy to forget. Only the wriggling tongue constantly rubbing and slipping along your meat and the palpable pucker of her perfect lips inform you of the fuckhole she's using to get you off.  It's difficult for your mind to not fixate on the black curves working you over. They seem as though they could truly be more comfortable, more soft and slick and smooth to slide into than anything else you've ever entered.\n\n");
-				outputText("Her hands press to your thighs and push them apart slightly, and the reason why becomes quickly clear. She knocks your " + cockDescript(x) + " against the back of her  throat a few times before jamming you in, beginning to throatfuck herself on you. You gasp eagerly and move your hands up to her hair, but almost brutally she comes up and grabs your wrists, forcing you to place them on either side as she brutalizes her face on you. Spit practically flies off her chin and your shaft, dripping onto the bed and the floor. She fucks her mouth on you recklessly, acting like she was jamming a dildo into her cunt in a desperate frenzy to get off, but instead you feel her nose slamming into your crotch.  Those ebony slick suckers taunt you with how frictionless they seem to move, but they simultaneously push tightly against your skin with every inch they pass. You adore them.\n\n");
-				outputText("The friction, the mess, and the obscenity of it all prove too much for you. Giving a strangled noise your " + cockDescript(x) + " throbs and starts to fire its load. She shoves herself into your lap, her lips wrapping tight around your base and her cheeks hollowing in as she sucks your load out. Her hunger for your spunk feels ravenous, and it's almost as though she's tugging it directly out of you. If she had sucked this hard to begin with, perhaps she would have! Still, you can't object to her need, and you moan helplessly as your " + cockDescript(x) + " blasts its creamy load directly down her throat and into her belly, aching to just keep cumming. Your hips press forward, trying to insert more of your dick into those perfect black lips, almost flawlessly imagined in your mind. You want to cum, you want to keep splattering your thick spunk between those fat puckers, those immaculate dark cockpillows.  Their image dominates your mind, the thought of them curving into that wet O ripping more cum from you. Your orgasm is only enhanced by the knowledge that you can spread them into that obscene shape, helping to demonstrate every nuance of their gorgeous form.\n\n");
-				outputText("A wet pop signals her lips slipping over your tip. \"<i>Mmm...</i>\" she purrs softly. Your hips thrust forward slightly still, your " + cockDescript(x) + " tense and barely even relaxing, but your orgasm still rides out, pleasure overwhelming you. Gasping and weakly thrusting to the air, you shudder with tormented delight. Did the blowjob stop? It's hard to say. Your mind still fixates on those flawless lips, imagining their plush grip on your base. It was so good. It is so good, did it stop? You have to give them more cum, their plushness, their fullness needs to be helped.  She glides her hands up your body and rises. A soft kiss to your lips and you find your body willing to stop at last, falling back against her bed and gasping. \"<i>I appreciate it, love,</i>\" she smiles, climbing up and leaning against you, running a hand along your " + hairDescript() + ". \"<i>You were delicious.</i>\"\n\n");
-				outputText("She gently massages your head as you recover from the fellatio, groaning slightly. You look back down at your " + cockDescript(x) + ", watching it drip with saliva. \"<i>I think I gave him a bit of a workout,</i>\" she teases, \"<i>It's always good to remind a dick that a good mouth can do oh so much to it.</i>\" You voice your appreciation, but can't help but ask why she wanted to blow you. \"<i>Oh I told you, dear,</i>\" she laughs slightly, licking her lips, \"<i>I need to eat. Still though, even if I wanted to...</i>\"\n\n");
-				outputText("She takes your hand and presses it to her crotch where you feel the unyielding strength of metal. She lowers her skirt slightly and you see the beginnings of a carefully crafted chastity belt. \"<i>It's alright though,</i>\" she smiles, kissing your cheek, \"<i>I enjoyed myself plenty.</i>\" She then gives an almost wicked grin, a fake expression of innocence dancing across her eyes. You know the insincerity in that purity now. \"<i>Just take an hour before you try putting that in anyone else, is my advice.</i>\"\n\n");
-				outputText("After a bit of small talk, she glances out the window, and suggests you get back to your adventuring. She kisses you once more as you go, and you taste those dark curves on your lips as you return to camp.");
-			}
-			//[Follow-up Sex, player has penis]
-			else {
-				outputText("Once you arrive at the second-story apartment, Dominika practically pulls you into the other room, eager to suck your " + cockDescript(x) + ". She removes the bottom of your [armor] and kneels in front of you. Taking your " + cockDescript(x) + " into her hands, she aggressively begins lapping at it with her tongue, coating it in spit. \"<i>Mmm, give me all your cum,</i>\" she purrs, giving the top of your " + cockDescript(x) + " a kiss as intimate as a lover's. The way her lips move is intoxicating, sliding their slippery glossy surface over every inch of your " + cockDescript(x) + " before engulfing the sweaty meat.\n\n");
-				outputText("She forces your legs open and holds your hands at your side so that she can have free reign over your thrust-out shaft, hardly submissive even as she takes you in her mouth. Her lips twist from side to side as she pushes your head into every bit of her mouth, bulging out her cheeks and rubbing the roof of her mouth. Spit drips down your " + cockDescript(x) + ", and deep satisfied gulping noises arise from between your legs. Every inch of her mouth is warm and soft, but her plump lips close around you like a seal, letting you know that you can only leave her mouth when she is ready. The friction is electric, and you drool pre-cum into her mouth. All of it is slurped down into her waiting throat, and soon your prick follows as she begins to deepthroat you.\n\n");
-				outputText("Like before she facefucks herself on you, treating her mouth the same way an alley whore would treat her cunt. Ravenous and depraved noises arise from your lap, the fellatrix finding intense pleasure in sucking on your " + cockDescript(x) + ". You can barely focus on it however, as your world increasingly consists of the raw sensation. Her throat squeezes you possessively, tighter than a fleshlight and hotter than a forge. Her tongue contorts itself around you, more worshipper than body part. Those fat black cocksuckers cling to you as though you'd run away without them. Even without looking you can imagine them forming a succulent, seductive O, a single trail of saliva between them in the waiting cunt...\n\n");
-				outputText("You don't speak as it continues, merely grunting and gasping in the rapture that at that moment it seems only her mouth can bring. You try to push your " + cockDescript(x) + " deeper and deeper into her throat, trying to fuck as much of her face as humanly possible. Eventually your bucking hips seize and tremble as the first sticky load flings itself into her waiting maw. As before her mouth buries itself into your lap as she drinks of your spunk, swallowing everything you give her and not letting a single drop through her plump, moist lips. You cum until you can't cum anymore, and even then your orgasm persists until she delicately kisses your lips.\n\n");
-				outputText("\"<i>As always, delicious,</i>\" she smiles, cuddling with you in the afterglow of her meal. She caresses you until you regain your strength, and then politely helps you re-dress and sends you on your way, giving you a kiss to remember her. Those black lips linger in your mind as you walk the streets of Tel'dre on your way back to camp.");
-			}
-			flags[kFLAGS.DOMINIKA_SUCKED_SMALL]++;
+			outputText("Nearly dragged into Dominika's bedroom, she pushes you to the bed so unceremoniously you fall onto your back. \"<i>Come on then,</i>\" she purrs aggressively as she moves towards you, licking those darkly-painted lips, \"<i>Show me you're more than an infertile mule.</i>\" She climbs up on the bed and puts a foot to your chest as you try to sit up, giggling and grinning at the controlling position before shifting down to her side. She tugs the bottom portion of your [armor] away to reveal your " + cockDescript(x) + ", jerking her hand along it as she glances back at you. \"<i>Keep producing the sticky glue I need and I won't have to turn you into it,</i>\" she sneers smugly. Her thumb grinds against your cumslit before pulling down and squeezing your base, replaced by her tongue and those fat, dark lips. They grind messily along the sides of your flared tip, accompanied by a casual spitting before wrapping around your meat, pulling it into her mouth.\n\n");
+
+			outputText("One hand slides along your belly, gripping lightly onto your skin while casually applying some force down to your body. She clearly enjoys holding you down as she fellates you. Her dominant assertiveness is an omnipresent reminder of how she views the sexual exchange, and you obey her wishes by simply laying back and pushing your " + cockDescript(x) + " out, offering it to her. She takes it. Her plump and luscious cockpillows grind into various portions of your prick in twisting and changing ways, shifting your head messily around inside of her mouth. Her tongue grinds against near every inch of it while pushing it into the roof of her mouth as well as her saliva-coated cheeks. The spit spilling from her mouth drips from your shaft to her bed, and in a moment of rare and silly clarity you wonder how often she has to change her sheets. The thought passes quickly, engulfed by the familiar desire of her fat, O-spread lips. They dominate your thoughts as easily as they dominate your lap, nearly sealing around your " + cockDescript(x) + " and ensuring that you will not leave her mouth until she is ready for you to. The control she exhibits is wildly arousing and you happily drool pre-cum into her gulping mouth. She swallows it up at the same time as she pulls you into her throat, claiming your prick even more.\n\n");
+
+			outputText("As is her way she face-fucks herself upon you, aggressively using her face as a simulacrum of the sex organ locked in chastity. Ravenous and depraved sounds rise up from your lap, the hallmarks of her lewd cock inhalations. You're not sure you have the focus to look down and watch her act, as the sensations grow more and more overwhelming. The thought of those full, gorgeous lips keeps you as grounded as you can be. Their image keeps you from breaking as her throat squeezes you tighter than a fleshlight and burns warmer than the most heated cunt. As though a supplicant before its god, her tongue bathes you in worship. All the while those lips close around you, locked tighter than her belt, keeping you with her until you fullfill her desires. The image of them opening up into a wide O, saliva strings dangling in that heated mouthcunt... it intoxicates you, leaving you melting for more.\n\n");
+
+			outputText("Those fat full lips bounce into your base and you practically yell your moan, so delighted are you at being fully trapped within her suckling maw. Your hips buck greedily and her head meets them, sliding over you and vibrating you in her throat. The shuddering ache inside your cock – to an extent inside your being – warns you what you already knew: you will dump your load in Dominika's throat. Eventually your bucking hips seize and tremble as the first sticky load flings itself into her waiting maw. Her mouth buries itself into your lap as she drinks of your spunk, swallowing everything you give her and not letting a single drop through her plump, moist lips. Your cock feels like it has no end, a consumed part of her throat, a single entity of orgasm and feeding united in singular purpose. You cum until you can't cum anymore, and even then your orgasm persists until she delicately kisses your lips.\n\n");
+
+			outputText("\"<i>As always, delicious,</i>\" she smiles, relaxing with you in the afterglow of her meal. She caresses you until you regain your strength, and then politely helps you re-dress and sends you on your way, giving you a kiss to remember her. Those black lips linger in your mind as you walk the streets of Tel'Adre.");
 		}
+		player.sexReward("saliva", "Dick");
+		flags[kFLAGS.DOMINIKA_SUCKED_HORSE]++;
+		sharedEnd();
 	}
-	//[If \"<i>Yes</i>\" and penis too big to suck]
-	else {
+
+	//Human/fallback wang
+	function smallF(x:int):void {
 		// - first time wangsuck
-		if(flags[kFLAGS.DOMINIKA_SUCKED_BIG] == 0) {
+		if (flags[kFLAGS.DOMINIKA_SUCKED_SMALL] == 0) {
+			outputText("Dominika smiles, taking your hand and leading you to another room. Within is a surprisingly rich-looking bed, and she encourages you to sit down. \"<i>Thank you,</i>\" she says, and immediately follows it up with a truly wicked grin. \"<i>Now to make you realize you should be thanking me.</i>\"\n\n");
+			outputText("She removes the bottom of your [armor] and kneels in front of you. Taking your " + cockDescript(x) + " into her hands, her fingers begin a slow and steady massage along the length. She leans down and brings her lips to a soft kiss right on the tip of your " + cockDescript(x) + ". The glistening moisture you saw on them before feels almost unnatural, as though her lips are oiled up – but given what you've experienced in this land, such an idea does not startle you in the slightest. Her equally slick tongue slips out to press against the underside of your head and then flicks up, leaving saliva behind. The gentle touch of her palm presses against the spit and begins to spread it around. She swirls it slowly around your sensitive tip, enticing your erection further.  The ball of her thumb in particular works into the curve of your head, sliding against where it meets your shaft.\n\n");
+			//(if player has balls)
+			if (player.hasBalls()) outputText("Meanwhile her mouth slips down your dick, planting a few kisses along the way before reaching your " + sackDescript() + ". Her dark lips press against each of your [balls] in turn, granting each her moist smooch. She exhales warmly over them, teasing the cumfactories with a grin. Her mouth slips partially over one, her tongue slipping around the soft flesh. She is gentle and delicate in her administrations, and you feel comfortable about your " + sackDescript() + " sitting in her warm mouth – though you would prefer she wrap those plump lips around something else. Your head continues to be stimulated by her soft palm, and now adds pre-cum to the saliva she slowly spreads. A grunt makes her smirk, lifting from your " + sackDescript() + " and sliding her lips slowly up your dick.\n\n");
+			outputText("\"<i>You like this, mm?</i>\" she asks, emphasizing her question with a gentle squeeze of her hand. \"<i>To think of the path I've walked,</i>\" she muses, \"<i>Once a capable cabalist, and now I'm a better fellatrix.  Still – as long as you enjoy your work.</i>\" She leans forward and quickly slurps up a drop of pre, gulping it down visibly. The trail of spit on your shaft hides any evidence that it was ever there, leaving only her smug grin as a tribute to its existence. Still holding your prick in her hand she ducks lower, using her tongue to take long deep slurps of your " + cockDescript(x) + ". Teasing swirls flick across your base and her jaw rubs into the space between your thighs.  Dripping dragged paths of saliva are tracked along either side of your length, before she returns to your head.\n\n");
+			outputText("The rush of pleasure could have staggered you if you were standing. One moment your " + cockDescript(x) + " was pressing into those soft black lips and moments later they had slipped around your head. She squeezes firmly with them and her tongue twists and contorts around your bulb, prostrating itself like an adherent before a god. Entering her mouth had been almost effortless. Her lips slipped apart like they were made to, while clinging to your girth like life support. A wet gulping noise accompanied a tight squeeze, her head beginning to shift around your " + cockDescript(x) + " in a careful and deliberate polishing.\n\n");
+			outputText("Her hands travel along your length and roam along your thighs, squeezing them and slipping over your flesh. She seems to revel in the sensations of sucking on you, her eyes closed and her head bobbing rhythmically. The warm heat of her mouth slips along your " + cockDescript(x) + ", her slick lips managing to generate more than enough friction, and more than you expected. Her flesh hugs to your " + cockDescript(x) + " as tight as any cunt you've encountered so far, and as she begins to move her head more and more excitedly it becomes easy to forget. Only the wriggling tongue constantly rubbing and slipping along your meat and the palpable pucker of her perfect lips inform you of the fuckhole she's using to get you off.  It's difficult for your mind to not fixate on the black curves working you over. They seem as though they could truly be more comfortable, more soft and slick and smooth to slide into than anything else you've ever entered.\n\n");
+			outputText("Her hands press to your thighs and push them apart slightly, and the reason why becomes quickly clear. She knocks your " + cockDescript(x) + " against the back of her  throat a few times before jamming you in, beginning to throatfuck herself on you. You gasp eagerly and move your hands up to her hair, but almost brutally she comes up and grabs your wrists, forcing you to place them on either side as she brutalizes her face on you. Spit practically flies off her chin and your shaft, dripping onto the bed and the floor. She fucks her mouth on you recklessly, acting like she was jamming a dildo into her cunt in a desperate frenzy to get off, but instead you feel her nose slamming into your crotch.  Those ebony slick suckers taunt you with how frictionless they seem to move, but they simultaneously push tightly against your skin with every inch they pass. You adore them.\n\n");
+			outputText("The friction, the mess, and the obscenity of it all prove too much for you. Giving a strangled noise your " + cockDescript(x) + " throbs and starts to fire its load. She shoves herself into your lap, her lips wrapping tight around your base and her cheeks hollowing in as she sucks your load out. Her hunger for your spunk feels ravenous, and it's almost as though she's tugging it directly out of you. If she had sucked this hard to begin with, perhaps she would have! Still, you can't object to her need, and you moan helplessly as your " + cockDescript(x) + " blasts its creamy load directly down her throat and into her belly, aching to just keep cumming. Your hips press forward, trying to insert more of your dick into those perfect black lips, almost flawlessly imagined in your mind. You want to cum, you want to keep splattering your thick spunk between those fat puckers, those immaculate dark cockpillows.  Their image dominates your mind, the thought of them curving into that wet O ripping more cum from you. Your orgasm is only enhanced by the knowledge that you can spread them into that obscene shape, helping to demonstrate every nuance of their gorgeous form.\n\n");
+			outputText("A wet pop signals her lips slipping over your tip. \"<i>Mmm...</i>\" she purrs softly. Your hips thrust forward slightly still, your " + cockDescript(x) + " tense and barely even relaxing, but your orgasm still rides out, pleasure overwhelming you. Gasping and weakly thrusting to the air, you shudder with tormented delight. Did the blowjob stop? It's hard to say. Your mind still fixates on those flawless lips, imagining their plush grip on your base. It was so good. It is so good, did it stop? You have to give them more cum, their plushness, their fullness needs to be helped.  She glides her hands up your body and rises. A soft kiss to your lips and you find your body willing to stop at last, falling back against her bed and gasping. \"<i>I appreciate it, love,</i>\" she smiles, climbing up and leaning against you, running a hand along your " + hairDescript() + ". \"<i>You were delicious.</i>\"\n\n");
+			outputText("She gently massages your head as you recover from the fellatio, groaning slightly. You look back down at your " + cockDescript(x) + ", watching it drip with saliva. \"<i>I think I gave him a bit of a workout,</i>\" she teases, \"<i>It's always good to remind a dick that a good mouth can do oh so much to it.</i>\" You voice your appreciation, but can't help but ask why she wanted to blow you. \"<i>Oh I told you, dear,</i>\" she laughs slightly, licking her lips, \"<i>I need to eat. Still though, even if I wanted to...</i>\"\n\n");
+			outputText("She takes your hand and presses it to her crotch where you feel the unyielding strength of metal. She lowers her skirt slightly and you see the beginnings of a carefully crafted chastity belt. \"<i>It's alright though,</i>\" she smiles, kissing your cheek, \"<i>I enjoyed myself plenty.</i>\" She then gives an almost wicked grin, a fake expression of innocence dancing across her eyes. You know the insincerity in that purity now. \"<i>Just take an hour before you try putting that in anyone else, is my advice.</i>\"\n\n");
+			outputText("After a bit of small talk, she glances out the window, and suggests you get back to your adventuring. She kisses you once more as you go, and you taste those dark curves on your lips as you return to camp.");
+		}
+		//[Follow-up Sex, player has penis]
+		else {
+			outputText("Once you arrive at the second-story apartment, Dominika practically pulls you into the other room, eager to suck your " + cockDescript(x) + ". She removes the bottom of your [armor] and kneels in front of you. Taking your " + cockDescript(x) + " into her hands, she aggressively begins lapping at it with her tongue, coating it in spit. \"<i>Mmm, give me all your cum,</i>\" she purrs, giving the top of your " + cockDescript(x) + " a kiss as intimate as a lover's. The way her lips move is intoxicating, sliding their slippery glossy surface over every inch of your " + cockDescript(x) + " before engulfing the sweaty meat.\n\n");
+			outputText("She forces your legs open and holds your hands at your side so that she can have free rein over your thrust-out shaft, hardly submissive even as she takes you in her mouth. Her lips twist from side to side as she pushes your head into every bit of her mouth, bulging out her cheeks and rubbing the roof of her mouth. Spit drips down your " + cockDescript(x) + ", and deep satisfied gulping noises arise from between your legs. Every inch of her mouth is warm and soft, but her plump lips close around you like a seal, letting you know that you can only leave her mouth when she is ready. The friction is electric, and you drool pre-cum into her mouth. All of it is slurped down into her waiting throat, and soon your prick follows as she begins to deepthroat you.\n\n");
+			outputText("Like before she facefucks herself on you, treating her mouth the same way an alley whore would treat her cunt. Ravenous and depraved noises arise from your lap, the fellatrix finding intense pleasure in sucking on your " + cockDescript(x) + ". You can barely focus on it however, as your world increasingly consists of the raw sensation. Her throat squeezes you possessively, tighter than a fleshlight and hotter than a forge. Her tongue contorts itself around you, more worshipper than body part. Those fat black cocksuckers cling to you as though you'd run away without them. Even without looking you can imagine them forming a succulent, seductive O, a single trail of saliva between them in the waiting cunt...\n\n");
+			outputText("You don't speak as it continues, merely grunting and gasping in the rapture that at that moment it seems only her mouth can bring. You try to push your " + cockDescript(x) + " deeper and deeper into her throat, trying to fuck as much of her face as humanly possible. Eventually your bucking hips seize and tremble as the first sticky load flings itself into her waiting maw. As before her mouth buries itself into your lap as she drinks of your spunk, swallowing everything you give her and not letting a single drop through her plump, moist lips. You cum until you can't cum anymore, and even then your orgasm persists until she delicately kisses your lips.\n\n");
+			outputText("\"<i>As always, delicious,</i>\" she smiles, cuddling with you in the afterglow of her meal. She caresses you until you regain your strength, and then politely helps you re-dress and sends you on your way, giving you a kiss to remember her. Those black lips linger in your mind as you walk the streets of Tel'dre on your way back to camp.");
+		}
+		player.sexReward("saliva", "Dick");
+		flags[kFLAGS.DOMINIKA_SUCKED_SMALL]++;
+		sharedEnd();
+	}
+
+	//[penis too big to suck]
+	function bigF(x:int):void {
+		// - first time wangsuck
+		if (flags[kFLAGS.DOMINIKA_SUCKED_BIG] == 0) {
 			outputText("A surprisingly big grin spreads across Dominika's face and she takes your hand, leading you to a side room. Within is a very comfortable looking bed, and she encourages you to sit down upon the covers. \"<i>Excellent,</i>\" she says, before grinning just a little wickedly, \"<i>Now to break you upon my knee and leave you gasping for more.</i>\" You don't have words for that one. At least she's confident.\n\n");
 			outputText("She removes the bottom of your [armor], then blinks in surprise. Curiously she leans forward, running her hand over your head, then lifting your " + cockDescript(x) + " to look closer at it. Almost adorably she opens her mouth and leans forward, apparently comparing the two, before looking back up at you. \"<i>So in retrospect I probably should have noticed that you were barely keeping this contained, but uhm...</i>\" She lets out an awkward light cough, then glances back at your dick. There's an intake of breath as she figures out how precisely she wants to say whatever she's about to say. \"<i>I don't think I can fit this in my mouth...</i>\" Tilting her head in thought as she strokes slowly along you, she eventually smirks and shrugs. \"<i>Well I mean, not that I need to.</i>\"\n\n");
 			outputText("Her dark lips press forward, wetly moving against your cumslit in a slow kiss. That first contact is electric – their ebony curves are exactly as soft and slick as you could have wished for. Her tongue teases the hole briefly as she flicks across it. \"<i>Mm, the taste is not... undesirable,</i>\" she muses, winking at you. The slippery appendage slips out beneath your head to run along your glans, slipping between your foreskin and your flesh. You can't help but give an appreciative groan as her mouth begins its work. Her devilishly black pillows glide down the underside of your head to curl around your foreskin, pulling on it slightly before gently tugging it back. They circle slowly around the loose flesh, her chin and cheeks sliding against your " + cockDescript(x) + " in the process. Every last inch of foreskin finds itself gently lifted from your head, pulled away by a full, soft lip – clinging to the dark surface as it is almost adoringly. The fullness of your erection soon makes such play impossible, standing tall and proud before the tattooed acolyte.\n\n");
 			outputText("Once more her mouth shifts, moving its attention to the curve just beneath your head. Her tongue slips and grinds along the flare of your rod. \"<i>You don't get to bathe much as an adventurer, do you?</i>\" she muses as she does so. You're not sure how to take the comment.  Her lips occasionally close against your skin, sucking and kissing briefly. \"<i>I can taste all the grime and musk on you.</i>\" She purrs briefly, letting you know that she was not insulting you – this too then, was not undesirable to her. She takes long drags of her tongue along your flesh, before moving in close and grinding her dark, perfect lips from side to side across your " + cockDescript(x) + ". You can't help but watch them, entranced. The way those curving pillows of flesh tease you is incredible. More blood than ever seems to rush into your [cock], or perhaps your lust for them makes it more palpable.\n\n");
 			//(if balls)
-			if(player.balls > 0) outputText("While her mouth performs its work, you can't help but become aware of sensation elsewhere. One hand presses to your [balls], rolling in slow circles across them. The touch is slow, gentle – but at the same time firm. You get the sense she's inquiring about them, handling them like a customer examining fruit. Well, let her handle you how she wants, as long as it feels this good. Her slender fingers slip along the wrinkles as if massaging them out, while her thumb presses at the front of your sac just firmly enough to ensure you don't slip away. The touch is taunting, even more so when the delicate and barely felt slip of her fingernails crosses your sac, but she thankfully makes no attempts to harm you. You know you can trust those dark lips.\n\n");
+			if (player.hasBalls()) outputText("While her mouth performs its work, you can't help but become aware of sensation elsewhere. One hand presses to your [balls], rolling in slow circles across them. The touch is slow, gentle – but at the same time firm. You get the sense she's inquiring about them, handling them like a customer examining fruit. Well, let her handle you how she wants, as long as it feels this good. Her slender fingers slip along the wrinkles as if massaging them out, while her thumb presses at the front of your sac just firmly enough to ensure you don't slip away. The touch is taunting, even more so when the delicate and barely felt slip of her fingernails crosses your sac, but she thankfully makes no attempts to harm you. You know you can trust those dark lips.\n\n");
 			outputText("She shifts slightly, arcing her back a bit more to bring her breasts into greater visibility. Pressing forward she begins to rub the soft flesh over your shaft. Occasionally her nipple brushes across your veiny girth, sending a brief but agreeable little blush of pleasure. Your prick's sweat serves as suitable lubrication for the slow glide of her breasts, slipping against but not around your meat. Her back rocks repeatedly to grind her tits along you, in turn letting your " + cockDescript(x) + " rub against her collarbone. The delicate fingers of her hand coil around your rod to rub her palm over your head, and after giving you another wet lick Dominika looks up at you.\n\n");
 			outputText("\"<i>You'll give me a nice, big load with this big dick, right?</i>\" she purrs, licking those fat black cockpillows. They glisten teasingly in the light, and you can feel blood surging through your dick in excitement. She talks near your prick, ensuring that they brush against you as she slowly enunciates each word. The passage of her throat's warm air accompanies each syllable as well. \"<i>Give me all the cum I could ever want. Just dump all that sticky, thick load between these big, dark, perfect lips.</i>\" It's difficult not to stare at her lips as she speaks, hauntingly attractive as they are. The way they drag across your skin, the glistening pleasure they offer – you can't think of any reason not to give her what she wants.\n\n");
 			outputText("Your hips start to rock forward involuntarily, eager to rut even if you can't. A low purr comes from the back of Dominika's throat and she places those immaculate ebony puckers at your cumslit. Once again her tongue presses up against it, this time in a lewd motion that feels almost as though she were prying it open. Grinding yourself into those abundant cocksuckers feels amazing, and there is a tinge of actual regret in your mind that your " + cockDescript(x) + " is as big as it is. It takes little for the pleasure to override such emotions, however, and grunting you find yourself starting to pant like an animal as your release draws closer.\n\n");
@@ -646,8 +545,7 @@ private function acceptFellatrixOral():void {
 			outputText("Softly her lips press against yours, and you start to relax. Glancing down your " + cockDescript(x) + " has long since finished, and Dominika sits beside you smirking. She gently massages your head as you recover from the fellatio, groaning slightly. You shiver at the sensation on your over-sensitive prick. \"<i>I think I gave him a bit of a workout,</i>\" she teases, \"<i>It's always good to remind a dick that a good mouth can do oh so much to it.</i>\" You voice your appreciation, but can't help but ask why she wanted to blow you. \"<i>Oh I told you, dear,</i>\" she laughs slightly, licking her lips, \"<i>I need to eat. Still though, even if I wanted to...</i>\"\n\n");
 			outputText("She takes your hand and presses it to her crotch where you feel the unyielding strength of metal. She lowers her skirt slightly and you see the beginnings of a carefully crafted chastity belt. \"<i>It's alright though,</i>\" she smiles, kissing your cheek, \"<i>I enjoyed myself plenty.</i>\" She then gives an almost wicked grin, a fake expression of innocence dancing across her eyes. \"<i>Just take an hour before you try putting that in anyone else, is my advice.</i>\"\n\n");
 			outputText("After a bit of small talk, she glances out the window, and suggests you get back to your adventuring. She kisses you once more as you go, and you taste the ebony curves on your lips as you return to your camp.");
-		}
-		else {
+		} else {
 			//[Follow-up Sex, player has Too Big penis]
 			outputText("Once you arrive at the second-story apartment, Dominika practically pulls you into the other room, eager to suck on your " + cockDescript(x) + ". She removes the bottom of your [armor] and kneels in front of you. Taking your " + cockDescript(x) + " into her hands, she aggressively begins lapping at it with her tongue, coating it in spit. \"<i>Mmm, give me all your cum,</i>\" she purrs, giving the top of your " + cockDescript(x) + " a kiss as intimate as a lover's. The way her lips move is intoxicating, sliding their slippery glossy surface over every inch of your " + cockDescript(x) + " before messily pressing to the top in a wide O.\n\n");
 			outputText("She pushes your legs open and forces your " + cockDescript(x) + " to stand prominent, as though offering it up to her. Any attempt to hold on to her or guide her is quickly rebuffed, slapped away with her own hands. There is nothing submissive about her position. Her lips twist from side to side around your head, messily spilling warm drool down your prick. Your cumslit rubs against the roof of her mouth, against the inside of her cheek, tantalized and tormented by the wet flesh within. She gulps and sucks on your " + cockDescript(x) + " even with your limited entry, pulling on the flesh in a ravenous, sensual hunger. She fucks her mouth the best she can on your tremendous girth, only causing an increasingly wet mess.\n\n");
@@ -655,20 +553,17 @@ private function acceptFellatrixOral():void {
 			outputText("Your bucking hips seize and tremble as the first sticky load flings itself into her waiting maw. Her hands grip you with a possessive tightness, stroking along your " + cockDescript(x) + " as though coaxing every last drop out – and indeed, you give her every last drop you can, cumming until you can't anymore. Even then the orgasmic pleasure lingers in your mind, and you can't stop rocking your hips forward in a desire to let it continue. She slips away from your prick, finally rising up to kiss you on the lips. The touch of those dark puckers relaxes you, and you come down from the pleasure with a low, happy groan.\n\n");
 			outputText("\"<i>As always, delicious,</i>\" she smiles, cuddling with you in the afterglow of her meal. She caresses you until you regain your strength, and then politely helps you re-dress and sends you on your way, giving you a kiss to remember her. Those black lips linger in your mind as you walk the streets of Tel'Adre on your way back to camp.");
 		}
+		player.sexReward("saliva", "Dick");
 		flags[kFLAGS.DOMINIKA_SUCKED_BIG]++;
+		sharedEnd();
 	}
-	player.orgasm();
-	dynStats("lib", -1, "sen", 1);
 
-	if(timesFellatrixSucked() >= 4 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00175] == 0) doNext(dominidrama);
-	else doNext(camp.returnToCampUseTwoHours);
+	function sharedEnd():void {
+		dynStats("lib", -1, "sen", 1);
+		if (timesFellatrixSucked() >= 4 && flags[kFLAGS.DOMINIKA_COVENANT] == 0) doNext(dominidrama);
+		else doNext(camp.returnToCampUseTwoHours);
+	}
 }
-
-
-
-
-
-
 
 //[Agree with her]
 private function agreeWithDominika():void {
@@ -697,7 +592,7 @@ private function agreeWithDominika():void {
 
 		outputText("You think about her lips on the streets of Tel'adre.");
 	}
-	dynStats("lus", 25);
+	dynStats("lus", 25, "scale", false);
 	flags[kFLAGS.DOMINIKA_FOLLOWUP] = 1;
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -783,7 +678,7 @@ private function dominidramaYes():void {
 	outputText("She sighs lightly. \"<i>And as an aside, it would probably be for the best that you not visit this woman again.</i>\" Asa looks down the street and then smiles, pats your shoulder, and leaves. You feel a strange tension in your body, as though something upsetting has happened but you cannot name what it is. Glancing up you notice a dark-feathered crow seeming to watch you from a nearby roof, but you cannot decide whether you are being paranoid in thinking it is watching you or not. You then ask yourself what a crow would possibly be doing in a desert.\n\n");
 
 	outputText("Weary, you continue on your way out of Tel'Adre.");
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00175] = 1;
+	flags[kFLAGS.DOMINIKA_COVENANT] = 1;
 	doNext(camp.returnToCampUseOneHour);
 }
 //[No]
@@ -797,7 +692,7 @@ private function dominidramaNo():void {
 
 	outputText("You feel warm inside, filled with a confidence that seemed to come out of nowhere. You can imagine Dominika's dark lips in your mind smiling, opening and curving as if to say \"<i>Good work.</i>\" The thought empowers you. It feels good to protect her, you think to yourself. You stride confidently out of the city.");
 	dynStats("lus", 10, "cor", 1);
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00175] = 2;
+	flags[kFLAGS.DOMINIKA_COVENANT] = 2;
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -806,8 +701,6 @@ private function dominidramaNo():void {
 private function dominikaBlowjobs():void {
 	clearOutput();
 	outputText(images.showImage("dominika-gives-you-blowjob"));
-	var x:Number = player.cockThatFits(36);
-	if(x < 0) x = player.biggestCockIndex();
 
 	outputText("You open your eyes.  Are you lying down?  Why are you lying down?  Attempting to fight off the haze of awakening you look dimly around.  The familiar scenery takes you a moment to place it, but you soon recognize the magical markings that cover Dominika's loft.  Yes, that's right, you had spoken with Dominika at the bar, and she had invited you over, hadn't she?\n\n");
 
@@ -828,20 +721,26 @@ private function dominikaBlowjobs():void {
 	if(player.canFly()) outputText("Your wings barely have room to avoid being crushed.  ");
 	outputText("\"<i>You have a strength that is lacking from this world,</i>\" Dominika continues.  Her hand runs along your cheek briefly, in something that resembles affection in name only.  Those eerily star-like eyes flicker back to your own.  \"<i><b>Give it to me.</b></i>\"\n\n");
 
-	outputText("Her fingers have grown familiar to you.  They have stroked your chest, squeezed your thighs, and ");
-	//(if penis)
-	if(player.hasCock()) outputText("caressed your dick.");
-	else outputText("caressed your labia.");
-	outputText("  Now they curl around your chin, squeezing it and forcing you to look at her.  \"<i>If I am the moon, you will be the stars,</i>\" she hisses, \"<i>If I am the king you are the knight, and if I am the knight you are the sword.  If you are the sword then I am merchant, blacksmith, and miner.  <b>You are mine to mold and refine.</b>  If I am the rose you are the thorn.  If I am the siren, you are the rocks.  Should I be the spider, you are the web.  <b>You are a tool in my service, to defend me, to cut down what I say is to be cut down.</b></i>\"\n\n");
+	outputText("Her fingers have grown familiar to you.  They have stroked your chest, squeezed your thighs caressed ");
+	if(player.hasCock()) outputText("your dick");
+	if (player.isHerm()) outputText(" and ");
+	if (player.hasVagina()) outputText("your labia");
+	outputText(".  Now they curl around your chin, squeezing it and forcing you to look at her.  \"<i>If I am the moon, you will be the stars,</i>\" she hisses, \"<i>If I am the king you are the knight, and if I am the knight you are the sword.  If you are the sword then I am merchant, blacksmith, and miner.  <b>You are mine to mold and refine.</b>  If I am the rose you are the thorn.  If I am the siren, you are the rocks.  Should I be the spider, you are the web.  <b>You are a tool in my service, to defend me, to cut down what I say is to be cut down.</b></i>\"\n\n");
 
 	//(if low intelligence)
-	if(player.inte < 50) outputText("Her words echo in your head.  Though at first they bothered you there is a bizarre sense to them.  For reasons you cannot quite determine and yet do not care about, the fact that they are coming from those succulent, perfect lips gives them further credence.  Those statements must be true – beyond true, absolute even – if those full, gorgeous cockkissers are saying them.  You find yourself nodding along with what she says, staring and ogling her mouth.  Dominika and Dominika's lips mean the world to you in that moment, and nothing could come between you.\n\n");
+	if(player.inte < 50) outputText("Her words echo in your head.  Though at first they bothered you there is a bizarre sense to them.  For reasons, you cannot quite determine and yet do not care about, the fact that they are coming from those succulent, perfect lips gives them further credence.  Those statements must be true – beyond true, absolute even – if those full, gorgeous cockkissers are saying them.  You find yourself nodding along with what she says, staring and ogling her mouth.  Dominika and Dominika's lips mean the world to you in that moment, and nothing could come between you.\n\n");
 	//(if high intelligence)
 	else outputText("It's magic.  You're positive of it, you can practically feel it in the air.  It was hidden when she first started speaking, when she told you to relax, obfuscated by the twisting circles around the room.  The feeling that twists the most in the gut is the knowledge that you do not care.  You know she is ensnaring your mind – you can practically envision her lips dragging chains around you – but you trust her.  You know that the only reason you trust her right now is further magic and yet you dismiss this as a non-issue.  Worst of all even though you try as hard as you can to keep this knowledge in the forefront of your mind, every word Dominika utters pulls at your attention, demanding you surrender and let her lips engulf your mind – and you don't see a reason to deny her.\n\n");
+	sceneHunter.selectGender(dickF, vagF, null, null, 0);
 
+	//====================================================
 	//(Penis)
-	if(player.hasCock()) {
-		if(player.cockArea(x) <= 36) {
+	function dickF():void {
+		sceneHunter.selectFitNofit(fitF, nofitF, 36);
+
+		//==============================================
+		function fitF():void {
+			var x:int = player.findCock(1, -1, 36);
 			outputText("\"<i><b>You are my champion,</b></i>\" Dominika hisses slowly, trailing a finger over your lower lip.  \"<i><b>And it is my will you shall serve.</b></i>\"  With a low exhale the room settles from the warped space that had dominated the background.  You let out a staggering breath, realizing for the first time the edge you had been kept on.  Your " + cockDescript(x) + " aches with an uncanny stiffness, as solid as stone and as erect as a spire.  Dominika stands above you, her expression one of confidence.  An arcane circle-constellation forms in the air beneath her hand, her fingers looping through intangible curves.  \"<i>Off,</i>\" she says simply.  Piece by piece your [armor] removes itself, at times flinging into a corner of the room.  Soon you lay before her nude and vulnerable, forcibly but willingly exposed.  \"<i><b>You will give me everything.</b></i>\" Her hand closes, the circle dissipating, and she lowers herself once more.  Down she slinks past the limited vision your magical constriction offers.  Unable to see her features you must rely on sensation to know where she lurks – and it is clear that she is lurking in your lap.\n\n");
 
 			outputText("Her fingertips trail slowly down the swollen veins of your " + cockDescript(x) + " in a manner reminiscent of all the times you have visited her before.  You can trust her, so you must not have anything to worry about.  This will be like any other blowjob Dominika has given you.  When her tongue comes up to the underside of your prick and drags up the sweaty meat all the concerns that might have existed with the magical confinement melt away.  It must be her fetish.  You don't mind indulging her fetish, you're not an asshole.  You trust her.  You trust the dark softness of void given form as they curl around your head.  Her mouth slips fully around you and descends, skipping all foreplay.  Every inch of your " + cockDescript(x) + " enters her deep and hungry mouth.  The clenching heat of her throat pulls at your shaft as it slides down, swallowing around you.  Her hands no longer caress you to encourage your erection but instead clench your thighs to hold the cabalist up.\n\n");
@@ -876,8 +775,12 @@ private function dominikaBlowjobs():void {
 			outputText("In most situations Dominika's stiff nipples dragging across your belly would entice you.  Now you simply cannot respond.  She lays on your chest, caressing your cheek, lowering her head to look you in the eyes.  Your vision blurs a little as you do, but she holds your focus.  \"<i>You are drained, little lamb of Ingnam,</i>\" she whispers to you, through you.  \"<i>You have nothing left.  Your body has failed you.  Your people have abandoned you.  You are alone and nothing before the infinite night.  <b>Take this emptiness, this nothingness,</b></i>\" she hisses, and you know that the darkness you see is the pitch of her lips. \"<i><b>And fill it with me.</b></i>\"  She leans in and slowly kisses your lips, letting the dirty scent of her breath rest on your face.  Even after pistoning on you over and over again her lips are intoxicatingly soft.  Her hand rests on your chin, guiding your eyes to meet hers so she knows you see her.\n\n");
 
 			outputText("\"<i>Again.</i>\"");
+			player.sexReward("saliva", "Dick");
+			dynStats("lib", 5, "sen", -15);
+			doNext(dominikaBlowjobs2);
 		}
-		else {
+		function nofitF():void {
+			var x:int = player.findCock(1, -1, 36);
 			//(HUGE PENIS)
 			outputText("\"<i><b>You are my champion,</b></i>\" Dominika hisses slowly, trailing a finger over your lower lip.  \"<i><b>And it is my will you shall serve.</b></i>\"  With a low exhale the room settles from the warped space that had dominated the background.  You let out a staggering breath, realizing for the first time the edge you had been kept on.  Your " + cockDescript(x) + " aches with an uncanny stiffness, as solid as stone and as erect as a spire.  Dominika stands above you, her expression one of confidence.  An arcane circle-constellation forms in the air beneath her hand, her fingers looping through intangible curves.  \"<i>Off,</i>\" she says simply.  Piece by piece your [armor] removes itself, at times flinging into a corner of the room.  Soon you lay before her nude and vulnerable, forcibly but willingly exposed.  \"<i>I am going to give you what you always desired, little lamb,</i>\" she says smugly, \"<i>I am going to take you inside my deep, dark, perfect lips.  In exchange, <b>you will give me everything.</b></i>\"  Her hand closes, the circle dissipating, and she lowers herself once more. Down she slinks past the limited vision your magical constriction offers.  Unable to see her features you must rely on sensation to know where she lurks – and it is clear that she is lurking in your lap.\n\n");
 
@@ -913,12 +816,15 @@ private function dominikaBlowjobs():void {
 
 			outputText("Matching the fall of your " + cockDescript(x) + " your head falls to the side, staring into space.  Drool trickles over the side of your mouth, sheer exhaustion making you slow to swallow.  Sweat drenches your body.  Dominika lets your limp prick fall to the ground, dripping her spit into a puddle for it to lay in.  You don't even want to think about using it.  You're not sure you can think about using it.  You're spent.  Empty.  Absolutely finished.  Not a drop of cum is in your body.  Dominika has completely drained you.  Your thighs ache.  Your stomach feels as though you've run a marathon while doing situps.  Are the restraints still there?  You don't know.  Moving to check seems impossible.\n\n");
 
-			outputText("In most situations Dominika's stiff nipples dragging across your belly would entice you.  Now you simply cannot respond.  She lays on your chest, caressing your cheek, lowering her head to look you in the eyes.  Your vision blurs a little as you do, but she holds your focus.  \"<i>You are drained, little lamb of Ingnam,</i>\" she whispers to you, through you.  \"<i>You have nothing left.  Your body has failed you.  Your people have abandoned you.  You are alone and nothing before the infinite night.  <b>Take this emptiness, this nothingness,</b></i>\" she hisses, and you know that the darkness you see is the pitch of her lips.  \"<i><b>And fill it with me.</b></i>\"  She leans in and slowly kisses your lips, letting the dirty scent of her breath rest on your face.  Even after pistoning on you over and over again her lips are intoxicatingly soft.  Her hand rests on your chin, guiding your eyes to meet hers so she knows you see her.\n\n");
+			outputText("In most situations Dominika's stiff nipples dragging across your belly would entice you.  Now you simply cannot respond.  She lies on your chest, caressing your cheek, lowering her head to look you in the eyes.  Your vision blurs a little as you do, but she holds your focus.  \"<i>You are drained, little lamb of Ingnam,</i>\" she whispers to you, through you.  \"<i>You have nothing left.  Your body has failed you.  Your people have abandoned you.  You are alone and nothing before the infinite night.  <b>Take this emptiness, this nothingness,</b></i>\" she hisses, and you know that the darkness you see is the pitch of her lips.  \"<i><b>And fill it with me.</b></i>\"  She leans in and slowly kisses your lips, letting the dirty scent of her breath rest on your face.  Even after pistoning on you over and over again her lips are intoxicatingly soft.  Her hand rests on your chin, guiding your eyes to meet hers so she knows you see her.\n\n");
 
 			outputText("\"<i><b>Again.</b></i>\"");
+			player.sexReward("saliva", "Dick");
+			dynStats("lib", 5, "sen", -15);
+			doNext(dominikaBlowjobs2);
 		}
 	}
-	else {
+	function vagF():void {
 		outputText("\"<i><b>You are my champion,</b></i>\" Dominika hisses slowly, trailing a finger over your lower lip.  \"<i><b>And it is my will you shall serve.</b></i>\"  With a low exhale, the room settles from the warped space that had dominated the background.  You let out a staggering breath, realizing for the first time the edge you had been kept on.  Your " + vaginaDescript(0) + " is possessed with an incredible heat, nearly sopping wet and almost flooding you with lusty desire.  Dominika stands above you, her expression one of confidence.  An arcane circle-constellation forms in the air beneath her hand, her fingers looping through intangible curves.  \"<i>Off,</i>\" she says simply.  Piece by piece your [armor] removes itself, at times flinging into a corner of the room.  Soon you lay before her nude and vulnerable, forcibly but willingly exposed.  \"<i><b>You will give me everything.</b></i>\"  Her hand closes, the circle dissipating, and she lowers herself once more.  Down she slinks past the limited vision your magical constriction offers.  Unable to see her features, you must rely on sensation to know where she lurks – and it is clear that she is lurking in your lap.\n\n");
 
 		outputText("\"<i>Mm, you've kept yourself so pure,</i>\"  Dominika purrs over your crotch.  You can feel the breath coming from her mouth.  Her fingers trail slowly over your labia, quietly tracing the lines of your " + vaginaDescript(0) + ".  \"<i>Well, relatively speaking,</i>\" she adds.  You think you can feel her smirk.  \"<i>You don't have some quartet of tentacles writhing about.  Just a nice, polite little pussy.</i>\"  The next sensation she torments you with is her tongue, grinding slowly up the delicate flesh between your legs.  It flicks in a slow pattern, gliding lazily around the needy flesh.  She seems to refuse to plant it inside of you, even with your needy panting begging for deeper penetration, for some penetration.  You're wildly, heatedly horny, and nothing sounds like a better solution for that than Dominika's tongue plunging into your " + vaginaDescript(0) + " to slap and grind along the walls of your pussy.  Her fingers slide slowly over your skin, working their way down your legs to massage against your thighs.  They press in tightly, grinding into the stiff and restrained muscles firmly enough that the psuedo-massage forces occasional muscle spasms.  Why can't she just rub those deep full lips closer?  Why does she have to tease you with this delicate touch?\n\n");
@@ -939,14 +845,13 @@ private function dominikaBlowjobs():void {
 
 		outputText("\"<i><b>Again.</b></i>\" Dominika says it before your current orgasm feels even close to finished.  Another pulse of pleasure overwhelms you, colliding and joining with the existing one.  Your body strains in the binds, muscles twitching.  \"<i><b>Again.</b></i>\"  The individual sensations are impossible to note.  They consume each other and yourself.  Drool twitches out of your mouth.  Nothing is present but the pleasure... and Dominika.  She doesn't shift from her position beside you, continuing to work her finger into your " + vaginaDescript(0) + ".  Her lips continue to play over your ear even when she is silent, and you must think of them as you cum.  You cannot stop yourself.\n\n");
 
-		outputText("\"<i>Again.</i>\"  This time - rather than strain and yearn for more more more - your body collapses, falling into the puddle of your juices spread across the floor.  It's too much.  The pleasure is too much, too fast, too absolute.  Your " + vaginaDescript(0) + " feels nearly numb.  Your head lolls to the side.  Dominika's starry eyes are directly in front of yours, but you do not match her gaze.  You could not look at her if you tried.  \"<i>You are drained, little lamb of Ingnam,</i>\" she whispers to you, through you.  \"<i>You have nothing left.  Your body has failed you.  Your people have abandoned you.  You are alone and nothing before the infinite night.  <b>Take this emptiness, this nothingness,</b></i>\" she hisses, and you know that the darkness you see is the pitch of her lips.  \"<i><b>And fill it with me.</b></i>\"\n\n");
+		outputText("\"<i>Again.</i>\"  This time - rather than strain and yearn for more, more, MORE - your body collapses, falling into the puddle of your juices spread across the floor.  It's too much.  The pleasure is too much, too fast, too absolute.  Your " + vaginaDescript(0) + " feels nearly numb.  Your head lolls to the side.  Dominika's starry eyes are directly in front of yours, but you do not match her gaze.  You could not look at her if you tried.  \"<i>You are drained, little lamb of Ingnam,</i>\" she whispers to you, through you.  \"<i>You have nothing left.  Your body has failed you.  Your people have abandoned you.  You are alone and nothing before the infinite night.  <b>Take this emptiness, this nothingness,</b></i>\" she hisses, and you know that the darkness you see is the pitch of her lips.  \"<i><b>And fill it with me.</b></i>\"\n\n");
 
 		outputText("Her hand trails over your belly, down to your crotch. \"<i><b>Again.</b></i>\"\n\n");
+		player.sexReward("saliva", "Vaginal");
+		dynStats("lib", 5, "sen", -15);
+		doNext(dominikaBlowjobs2);
 	}
-	player.orgasm();
-	dynStats("lib", 5, "sen", -15);
-	//[Next]
-	doNext(dominikaBlowjobs2);
 }
 
 private function dominikaBlowjobs2():void {
@@ -976,7 +881,7 @@ private function dominikaBlowjobs2():void {
 public function dominikaSpellblade():void {
 	clearOutput();
 	//[Approach Dominika post-D2 in bar, on Dominika's \"<i>I'm a racist bitch</i>\" list]
-	if((player.isRace(Races.MINOTAUR) && player.faceType == Face.COW_MINOTAUR && player.gender == 1) || !player.isBiped()) {
+	if((player.isRace(Races.MINOTAUR, 1, false) && player.faceType == Face.COW_MINOTAUR && player.gender == 1) || !player.isBiped()) {
 		outputText("You greet Dominika and make small talk, but as usual she seems distracted and the conversation is strained at best.  Drumming her fingers on the table and glancing outside her attention is constantly drawn away from you, and eventually she outright cuts the conversation off.  \"<i>I need to go, I'm afraid,</i>\" she says quickly, and half-heartedly adds, \"<i>It was nice talking to you.</i>\"\n\n");
 
 		outputText("She exits, leaving you at the table alone.  You shrug a little and finish your drink, before noticing that she left something behind.  It looks like a wrapped sword and, while you don't know why she'd have such a thing, you figure you might as well give it back to her.  Hell, maybe she'll actually be worth a goddamn conversation afterwards.\n\n");
@@ -985,7 +890,7 @@ public function dominikaSpellblade():void {
 
 		outputText("Holding up the sword, you mention that she left it behind and offer it back to her.  She glances at it before telling you to keep it and turning away.  Surprised, you offer again to be sure.\n\n");
 
-		outputText("\"<i>I said fucking KEEP IT!</i>\" she snaps suddenly, turning again.  \"<i>Isn't it fucking CLEAR that I don't want to talk to you right now?</i>\" She draws breath sharply from the sudden outburst, then closes her eyes, rubbing the bridge of her nose.  After a few seconds she more calmly states, \"<i>While I apologize for snapping at you I am under a great deal of stress right now and would firmly prefer not to be bothered.  Thank you and good day.</i>\"\n\n");
+		outputText("\"<i>I said fucking KEEP IT!</i>\" she snaps suddenly, turning again.  \"<i>Isn't it fucking CLEAR that I don't want to talk to you right now?</i>\" She draws breath sharply from the sudden outburst, then closes her eyes, rubbing the bridge of her nose.  After a few seconds she more calmly states, \"<i>While I apologize for snapping at you, I am under a great deal of stress right now and would firmly prefer not to be bothered.  Thank you and good day.</i>\"\n\n");
 
 		outputText("She turns back around. You're not entirely certain, but you think you hear her speak again as she leaves.  \"<i>And I don't want any help from you.</i>\"\n\n");
 

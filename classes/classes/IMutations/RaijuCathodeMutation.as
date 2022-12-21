@@ -7,11 +7,11 @@ package classes.IMutations
 import classes.PerkClass;
 import classes.IMutationPerkType;
 import classes.Creature;
-import classes.Player;
 import classes.Races;
 
 public class RaijuCathodeMutation extends IMutationPerkType
     {
+        private static const mName:String = "Raiju Cathode";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -42,7 +42,7 @@ public class RaijuCathodeMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Raiju Cathode" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -65,9 +65,8 @@ public class RaijuCathodeMutation extends IMutationPerkType
         }
 
         //Mutations Buffs
-        override public function pBuffs(target:Creature = null):Object{
+        override public function buffsForTier(pTier:int):Object {
             var pBuffs:Object = {};
-            var pTier:int = currentTier(this, (target == null)? player : target);
             if (pTier == 1) pBuffs['spe.mult'] = 0.1;
             else if (pTier == 2) pBuffs['spe.mult'] = 0.25;
             else if (pTier == 3) pBuffs['spe.mult'] = 0.5;
@@ -75,8 +74,7 @@ public class RaijuCathodeMutation extends IMutationPerkType
         }
 
         public function RaijuCathodeMutation() {
-            super("Raiju Cathode IM", "Raiju Cathode", ".");
-            maxLvl = 3;
+            super(mName + " IM", mName, SLOT_NERVSYS, 3);
         }
         
     }

@@ -7,11 +7,11 @@ package classes.IMutations
 import classes.PerkClass;
 import classes.IMutationPerkType;
 import classes.Creature;
-import classes.Player;
 import classes.Races;
 
 public class FrozenHeartMutation extends IMutationPerkType
     {
+        private static const mName:String = "Frozen Heart";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -43,7 +43,7 @@ public class FrozenHeartMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Frozen Heart" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -66,15 +66,13 @@ public class FrozenHeartMutation extends IMutationPerkType
         }
 
         //Mutations Buffs
-        override public function pBuffs(target:Creature = null):Object{
+        override public function buffsForTier(pTier:int):Object {
             var pBuffs:Object = {};
-            var pTier:int = currentTier(this, (target == null)? player : target);
             return pBuffs;
         }
 
         public function FrozenHeartMutation() {
-            super("Frozen Heart IM", "Frozen Heart", ".");
-            maxLvl = 3;
+            super(mName + " IM", mName, SLOT_HEART, 3);
         }
 
     }

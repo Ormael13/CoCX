@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.Areas.Battlefield 
+package classes.Scenes.Areas.Battlefield
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -62,7 +62,7 @@ import classes.internals.*;
 			Ghosts.loseToAVengefulApparitions();
 		}
 		
-		public function VengefulApparitions() 
+		public function VengefulApparitions()
 		{
 			this.a = "the ";
 			this.short = "vengeful apparitions";
@@ -84,7 +84,7 @@ import classes.internals.*;
 			this.tallness = 78;
 			this.hips.type = Hips.RATING_SLENDER;
 			this.butt.type = Butt.RATING_TIGHT;
-			this.skinTone = "white";
+			this.bodyColor = "white";
 			this.hairColor = "white";
 			this.hairLength = 3;
 			this.weaponName = "fists";
@@ -92,7 +92,6 @@ import classes.internals.*;
 			this.armorName = "translucent clothes";
 			this.armorDef = 1;
 			this.lust = 10;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			if (rand(2) == 0) {
 				initStrTouSpeInte(44, 55, 66, 140);
 				initWisLibSensCor(140, 1, 140, 50);

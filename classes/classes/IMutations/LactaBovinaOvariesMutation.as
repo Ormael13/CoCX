@@ -12,6 +12,7 @@ import classes.Races;
 
 public class LactaBovinaOvariesMutation extends IMutationPerkType
     {
+        private static const mName:String = "Lacta Bovina Ovaries";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -42,7 +43,7 @@ public class LactaBovinaOvariesMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Lacta Bovina Ovaries" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -71,9 +72,8 @@ public class LactaBovinaOvariesMutation extends IMutationPerkType
         }
 
         //Mutations Buffs
-        override public function pBuffs(target:Creature = null):Object{
+        override public function buffsForTier(pTier:int):Object {
             var pBuffs:Object = {};
-            var pTier:int = currentTier(this, (target == null)? player : target);
             if (pTier == 2) pBuffs['lib.mult'] = 0.1;
             if (pTier == 3){
                 pBuffs['str.mult'] = 0.1;
@@ -84,8 +84,7 @@ public class LactaBovinaOvariesMutation extends IMutationPerkType
         }
 
         public function LactaBovinaOvariesMutation() {
-            super("Lacta Bovina Ovaries IM", "Lacta Bovina Ovaries", ".");
-            maxLvl = 3;
+            super(mName + " IM", mName, SLOT_OVARIES, 3);
         }
 
     }

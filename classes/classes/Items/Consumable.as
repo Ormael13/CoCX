@@ -6,10 +6,8 @@ package classes.Items
 import classes.CoC;
 import classes.DefaultDict;
 import classes.EngineCore;
-import classes.GlobalFlags.*;
 import classes.Player;
 import classes.Scenes.Camp;
-import classes.Scenes.Places.Prison;
 import classes.Scenes.SceneLib;
 import classes.internals.Utils;
 
@@ -27,12 +25,17 @@ import classes.internals.Utils;
 		protected function set changeLimit(val:int):void { mutations.changeLimit = val; }
 
 		protected function get player():Player { return CoC.instance.player; }
-		protected function get prison():Prison { return SceneLib.prison; }
 		protected function get flags():DefaultDict { return CoC.instance.flags; }
 		protected function get camp():Camp { return SceneLib.camp; }
-		protected function doNext(eventNo:Function):void { EngineCore.doNext(eventNo); }
+		protected function doNext(func:Function, ...args):void {
+			EngineCore.doNext.apply(null, [func].concat(args));
+		}
 		protected function rand(n:Number):int { return Utils.rand(n); }
-
+		
+		override public function get category():String {
+			return CATEGORY_CONSUMABLE;
+		}
+		
 		public function Consumable(id:String, shortName:String = null, longName:String = null, value:Number = 0, description:String = null) {
 			super(id, shortName, longName, value, description);
 		}
@@ -59,35 +62,5 @@ import classes.internals.Utils;
 		protected function dynStats(... args):void {
 			game.player.dynStats.apply(game.player, args);
 		}
-
-/*
-		public function canUse(player:Player,output:Boolean):Boolean
-		{
-			return true;
-		}
-*/
-
-		/**
-		 * Perform effect on player WITHOUT requiring item being in player's inventory and removing it
-		 */
-/*
-		public function doEffect(player:Player,output:Boolean):void
-		{
-			CoC_Settings.errorAMC("Consumable","doEffect",id);
-		}
-*/
-
-		/**
-		 * Removes item from player and does effect
-		 */
-/*
-		override public function useItem(player:Player, output:Boolean, external:Boolean):void
-		{
-			if (canUse(player,output)){
-				if (!external && !game.debug) player.consumeItem(this,1);
-				doEffect(player,output);
-			}
-		}
-*/
 	}
 }

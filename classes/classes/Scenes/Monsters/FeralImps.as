@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.Monsters 
+package classes.Scenes.Monsters
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -10,12 +10,12 @@ import classes.BodyParts.Hips;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
+import classes.Items.DynamicItems;
 import classes.Scenes.Dungeons.RiverDungeon;
-import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
-	
-	public class FeralImps extends Monster
+
+public class FeralImps extends Monster
 	{
 		public var floor1:RiverDungeon = new RiverDungeon();
 		
@@ -118,7 +118,7 @@ import classes.internals.*;
 		}
 		
 		//flags[kFLAGS.FERAL_EXTRAS] >>> 1 - feral imp, 2 - feral imp lord, 3 - feral imp warlord, 4 - feral imps, 5 - river dungeon feral imp
-		public function FeralImps() 
+		public function FeralImps()
 		{
 			if (flags[kFLAGS.FERAL_EXTRAS] == 1) {
 				this.a = "the ";
@@ -271,10 +271,13 @@ import classes.internals.*;
 			this.ass.analWetness = AssClass.WETNESS_NORMAL;
 			this.hips.type = Hips.RATING_BOYISH;
 			this.butt.type = Butt.RATING_TIGHT;
-			this.skinTone = "red";
+			this.bodyColor = "red";
 			this.hairColor = "black";
 			this.hairLength = 5;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
+			this.randomDropChance = 0.1;
+			this.randomDropParams = {
+				rarity: DynamicItems.RARITY_CHANCES_LESSER
+			};
 			this.drop = new WeightedDrop().
 					add(consumables.LABOVA_,2).
 					add(consumables.MINOBLO,1).

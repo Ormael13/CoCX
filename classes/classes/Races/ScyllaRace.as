@@ -1,16 +1,42 @@
 package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
+import classes.GeneticMemories.RaceMem;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
 import classes.VaginaClass;
 
 public class ScyllaRace extends Race {
-	public static const ScyllaEyeColors:/*String*/Array = ["bright pink", "light purple", "purple"]
+	public static const ScyllaEyeColors:/*String*/Array = ["bright pink", "light purple", "purple"];
+	public static const ScyllaSkinColors:/*String*/Array = ["ghostly pale"];
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Kraken",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Elfin",
+        /*Eyes*/		"Kraken",
+        /*Face*/		"Human",
+        /*Gills*/		"Human",
+        /*Hair*/		"Human",
+        /*Horns*/		"Kraken",
+        /*LowerBody*/	"Scylla",
+        /*RearBody*/	"Kraken",
+        /*Skin*/		"Kraken",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Scylla",
+        /*Perks*/		"Human"];
 	
 	public function ScyllaRace(id:int) {
-		super("Scylla", id);
+		super("Scylla", id, RaceBody);
 	}
 	
 	public override function setup():void {
@@ -26,7 +52,7 @@ public class ScyllaRace extends Race {
 						function (body:BodyData): Boolean {
 							return body.player.hasPlainSkinOnly() && body.skinBaseAdj == "slippery"
 						}, +1)
-				.skinBaseColor("ghostly pale", +1)
+				.skinColor1("ghostly pale", +1)
 				.rearType(RearBody.KRAKEN, +1)
 				.height(GREATER_THAN(96), +1)
 				.vaginaType(VaginaClass.SCYLLA, +1)

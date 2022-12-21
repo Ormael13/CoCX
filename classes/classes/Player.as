@@ -4,9 +4,7 @@ import classes.BodyParts.Arms;
 import classes.BodyParts.Ears;
 import classes.BodyParts.Eyes;
 import classes.BodyParts.Face;
-import classes.BodyParts.Hair;
 import classes.BodyParts.Horns;
-import classes.BodyParts.ISexyPart;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.RearBody;
 import classes.BodyParts.Skin;
@@ -17,35 +15,37 @@ import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
 import classes.Items.Armor;
 import classes.Items.ArmorLib;
+import classes.Items.Enchantment;
+import classes.Items.EnchantmentLib;
+import classes.Items.EnchantmentType;
+import classes.Items.Equipable;
 import classes.Items.FlyingSwords;
-import classes.Items.FlyingSwordsLib;
 import classes.Items.HeadJewelry;
 import classes.Items.HeadJewelryLib;
+import classes.Items.IDynamicItem;
+import classes.Items.ItemConstants;
 import classes.Items.ItemTags;
 import classes.Items.Jewelry;
 import classes.Items.JewelryLib;
 import classes.Items.MiscJewelry;
-import classes.Items.MiscJewelryLib;
 import classes.Items.Necklace;
 import classes.Items.NecklaceLib;
 import classes.Items.Shield;
-import classes.Items.ShieldLib;
 import classes.Items.Undergarment;
 import classes.Items.UndergarmentLib;
 import classes.Items.Vehicles;
-import classes.Items.VehiclesLib;
 import classes.Items.Weapon;
-import classes.Items.WeaponLib;
 import classes.Items.WeaponRange;
-import classes.Items.WeaponRangeLib;
-import classes.Races.ElementalRace;
 import classes.Races.HumanRace;
+import classes.Scenes.Combat.Combat;
 import classes.Scenes.Combat.CombatAbilities;
 import classes.Scenes.Combat.CombatAbility;
 import classes.Scenes.NPCs.AetherTwinsFollowers;
 import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.NPCs.Forgefather;
+import classes.Scenes.NPCs.LunaFollower;
+import classes.Scenes.NPCs.SophieFollowerScene;
 import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.Places.TelAdre.UmasShop;
@@ -54,6 +54,7 @@ import classes.Scenes.SceneLib;
 import classes.Stats.StatUtils;
 import classes.StatusEffects.HeatEffect;
 import classes.StatusEffects.RutEffect;
+import classes.internals.EnumValue;
 import classes.internals.Utils;
 import classes.lists.BreastCup;
 
@@ -91,6 +92,9 @@ use namespace CoC;
 			itemSlot19 = new ItemSlotClass();
 			itemSlot20 = new ItemSlotClass();
 			itemSlots = [itemSlot1, itemSlot2, itemSlot3, itemSlot4, itemSlot5, itemSlot6, itemSlot7, itemSlot8, itemSlot9, itemSlot10, itemSlot11, itemSlot12, itemSlot13, itemSlot14, itemSlot15, itemSlot16, itemSlot17, itemSlot18, itemSlot19, itemSlot20];
+			for each (var slot:EnumValue in ItemConstants.EquipmentSlots) {
+				_equipment[slot.value] = slot.nothing();
+			}
 		}
 
 		protected final function outputText(text:String, clear:Boolean = false):void
@@ -109,42 +113,46 @@ use namespace CoC;
 		public var lustVuln:Number = 1;
 
 		//Mastery attributes
-		public var masteryFeralCombatLevel:Number = 0;
-		public var masteryFeralCombatXP:Number = 0;
-		public var masteryGauntletLevel:Number = 0;
-		public var masteryGauntletXP:Number = 0;
-		public var masterySwordLevel:Number = 0;
-		public var masterySwordXP:Number = 0;
-		public var masteryAxeLevel:Number = 0;
-		public var masteryAxeXP:Number = 0;
-		public var masteryMaceHammerLevel:Number = 0;
-		public var masteryMaceHammerXP:Number = 0;
-		public var masteryDuelingSwordLevel:Number = 0;
-		public var masteryDuelingSwordXP:Number = 0;
-		public var masteryPolearmLevel:Number = 0;
-		public var masteryPolearmXP:Number = 0;
-		public var masterySpearLevel:Number = 0;
-		public var masterySpearXP:Number = 0;
-		public var masteryDaggerLevel:Number = 0;
-		public var masteryDaggerXP:Number = 0;
-		public var masteryWhipLevel:Number = 0;
-		public var masteryWhipXP:Number = 0;
-		public var masteryExoticLevel:Number = 0;
-		public var masteryExoticXP:Number = 0;
-		public var masteryArcheryLevel:Number = 0;
-		public var masteryArcheryXP:Number = 0;
-		public var masteryThrowingLevel:Number = 0;
-		public var masteryThrowingXP:Number = 0;
-		public var masteryFirearmsLevel:Number = 0;
-		public var masteryFirearmsXP:Number = 0;
-		public var dualWSLevel:Number = 0;
-		public var dualWSXP:Number = 0;
-		public var dualWNLevel:Number = 0;
-		public var dualWNXP:Number = 0;
-		public var dualWLLevel:Number = 0;
-		public var dualWLXP:Number = 0;
-		public var dualWFLevel:Number = 0;
-		public var dualWFXP:Number = 0;
+		public var combatMastery:Array =[
+        /*00*/	{combat: "Feral", 		level:0, experience:0, melee: true, desc:"<b>Dao of Feral Beast</b>"},
+        /*01*/	{combat: "Gauntlet", 	level:0, experience:0, melee: true, desc:"<b>Dao of Gauntlets</b>"},
+        /*02*/	{combat: "Dagger", 		level:0, experience:0, melee: true, desc:"<b>Dao of Dagger</b>"},
+        /*03*/	{combat: "Sword", 		level:0, experience:0, melee: true, desc:"<b>Dao of Sword</b>"},
+        /*04*/	{combat: "Axe", 		level:0, experience:0, melee: true, desc:"<b>Dao of Axe</b>"},
+        /*05*/	{combat: "Bludgeon", 	level:0, experience:0, melee: true, desc:"<b>Dao of Bludgeon</b>"},
+        /*06*/	{combat: "Dueling", 	level:0, experience:0, melee: true, desc:"<b>Dao of Dueling</b>"},
+        /*07*/	{combat: "Polearm", 	level:0, experience:0, melee: true, desc:"<b>Dao of Polearm</b>"},
+        /*08*/	{combat: "Spear", 		level:0, experience:0, melee: true, desc:"<b>Dao of Spear</b>"},
+        /*09*/	{combat: "Whip", 		level:0, experience:0, melee: true, desc:"<b>Dao of Whip</b>"},
+        /*10*/	{combat: "Exotic", 		level:0, experience:0, melee: true, desc:"<b>Dao of Exotic</b>"},
+        /*11*/	{combat: "Archery", 	level:0, experience:0, melee: false, desc:"\n<b>Dao of Archery</b>"},
+        /*12*/	{combat: "Throwing", 	level:0, experience:0, melee: false, desc:"<b>Dao of Throwing Weapons</b>"},
+        /*13*/	{combat: "Firearms", 	level:0, experience:0, melee: false, desc:"<b>Dao of Firearms</b>"},
+        /*14*/	{combat: "DualSmall", 	level:0, experience:0, melee: true, desc:"\n<b>Dual Wield Mastery - Small</b>"},
+        /*15*/	{combat: "DualNormal", 	level:0, experience:0, melee: true, desc:"<b>Dual Wield Mastery - Normal</b>"},
+        /*16*/	{combat: "DualLarge", 	level:0, experience:0, melee: true, desc:"<b>Dual Wield Mastery - Large</b>"},
+        /*17*/	{combat: "DualFirearm", level:0, experience:0, melee: false, desc:"<b>Dual Wield Mastery - Firearms</b>"},
+        /*18*/	{combat: "Small", 		level:0, experience:0, melee: true, desc:"\n<b>Weapon Mastery - Small</b>"},
+        /*19*/	{combat: "Normal", 		level:0, experience:0, melee: true, desc:"<b>Weapon Mastery - Normal</b>"},
+        /*20*/	{combat: "Large", 		level:0, experience:0, melee: true, desc:"<b>Weapon Mastery - Large</b>"},
+        /*21*/	{combat: "Massive", 	level:0, experience:0, melee: true, desc:"<b>Weapon Mastery - Massive</b>"},
+        /*22*/	{combat: "Range", 		level:0, experience:0, melee: false, desc:"<b>Weapon Mastery - Ranged</b>"},
+        /*23*/	{combat: "Unarmed", 	level:0, experience:0, melee: true, desc:"<b>Dao of Fists</b>"}
+		];
+
+        public function initCombatMastery():void{
+            for(var i:String in combatMastery){
+                combatMastery[i].level = 0 ;
+                combatMastery[i].experience = 0;
+            }
+        }
+        public function loadCombatMastery(saved:Array):void{
+//            [i, player.combatMastery[k].level, player.combatMastery[k].experience];
+            for(var i:int = 0; i < saved.length; i++){
+				combatMastery[saved[i].index].level = saved[i].level;
+				combatMastery[saved[i].index].experience = saved[i].experience;
+            }
+        }
 
 		//Combat ability cooldowns. Index is ability id.
 		public var cooldowns:/*int*/Array = [];
@@ -161,13 +169,8 @@ use namespace CoC;
 		public var teaseLevel:Number = 0;
 		public var teaseXP:Number = 0;
 
-		//Prison stats
-		public var hunger:Number = 0; //Also used in survival and realistic mode
-		public var obey:Number = 0;
-		public var esteem:Number = 0;
-		public var will:Number = 0;
-
-		public var obeySoftCap:Boolean = true;
+		//Only used in survival and realistic mode
+		public var hunger:Number = 0;
 
 		//Perks used to store 'queued' perk buys
 		public var perkPoints:Number = 0;
@@ -215,27 +218,11 @@ use namespace CoC;
 		public var itemSlot18:ItemSlotClass;
 		public var itemSlot19:ItemSlotClass;
 		public var itemSlot20:ItemSlotClass;
-		public var itemSlots:Array;
+		public var itemSlots:/*ItemSlotClass*/Array;
 
-		public var prisonItemSlots:Array = [];
 		public var previouslyWornClothes:Array = []; //For tracking achievement.
 
-		private var _weapon:Weapon = WeaponLib.FISTS;
-		private var _weaponRange:WeaponRange = WeaponRangeLib.NOTHING;
-		private var _weaponFlyingSwords:FlyingSwords = FlyingSwordsLib.NOTHING;
-		private var _armor:Armor = ArmorLib.COMFORTABLE_UNDERCLOTHES;
-		private var _miscjewelry:MiscJewelry = MiscJewelryLib.NOTHING;
-		private var _miscjewelry2:MiscJewelry = MiscJewelryLib.NOTHING;
-		private var _headjewelry:HeadJewelry = HeadJewelryLib.NOTHING;
-		private var _necklace:Necklace = NecklaceLib.NOTHING;
-		private var _jewelry:Jewelry = JewelryLib.NOTHING;
-		private var _jewelry2:Jewelry = JewelryLib.NOTHING;
-		private var _jewelry3:Jewelry = JewelryLib.NOTHING;
-		private var _jewelry4:Jewelry = JewelryLib.NOTHING;
-		private var _shield:Shield = ShieldLib.NOTHING;
-		private var _upperGarment:Undergarment = UndergarmentLib.NOTHING;
-		private var _lowerGarment:Undergarment = UndergarmentLib.NOTHING;
-		private var _vehicle:Vehicles = VehiclesLib.NOTHING;
+		private var _equipment:/*Equipable*/Array = [];
 		private var _modArmorName:String = "";
 
 		//override public function set armors
@@ -558,7 +545,10 @@ use namespace CoC;
 			_modArmorName = value;
 		}
 		public function isWearingArmor():Boolean {
-			return armor != ArmorLib.COMFORTABLE_UNDERCLOTHES && armor != ArmorLib.NOTHING;
+			return armor != ArmorLib.COMFORTABLE_UNDERCLOTHES && !armor.isNothing;
+		}
+		public function isWearingBra():Boolean {
+			return !upperGarment.isNothing;
 		}
 		public function isStancing():Boolean {
 			return (lowerBody == LowerBody.DRAGON && arms.type == Arms.DRACONIC) || (lowerBody == LowerBody.HINEZUMI && arms.type == Arms.HINEZUMI) || isFeralStancing() || isSitStancing();
@@ -575,24 +565,24 @@ use namespace CoC;
 		//Natural Armor (need at least to partialy covering whole body)
 		public function haveNaturalArmor():Boolean
 		{
-			return hasPerk(PerkLib.ThickSkin) || skin.hasFur() || skin.hasChitin() || skin.hasScales() || skin.hasBark() || skin.hasDragonScales() || skin.hasBaseOnly(Skin.STONE);
+			return hasPerk(PerkLib.ThickSkin) || skin.isFurCovered() || skin.isChitinCovered() || skin.isScaleCovered() || skin.hasBark() || skin.isDragonScaleCovered() || skin.hasBaseOnly(Skin.STONE);
 		}
 		//Unhindered related acceptable armor types
 		public function meetUnhinderedReq():Boolean
 		{
-			return armor.hasTag(ItemTags.AGILE);
+			return armor.hasTag(ItemTags.A_AGILE);
 		}
 		//override public function get armors
 		override public function get armorName():String {
 			if (_modArmorName.length > 0) return modArmorName;
-			else if (_armor.name == "nothing" && lowerGarmentName != "nothing") return lowerGarmentName;
-			else if (_armor.name == "nothing" && lowerGarmentName == "nothing") return "gear";
-			return _armor.name;
+			else if (armor.name == "nothing" && lowerGarmentName != "nothing") return lowerGarmentName;
+			else if (armor.name == "nothing" && lowerGarmentName == "nothing") return "gear";
+			return armor.name;
 		}
 		override public function get armorDef():Number {
 			var newGamePlusMod:int = this.newGamePlusMod()+1;
 			var armorDef:Number = super.armorDef;
-			armorDef += _armor.def;
+			armorDef += armor.def;
 			armorDef += upperGarment.armorDef;
 			armorDef += lowerGarment.armorDef;
 			var tier:int;
@@ -620,34 +610,35 @@ use namespace CoC;
 			}
 			//Stacks on top of Thick Skin perk.
 			var p:Boolean = skin.isCoverLowMid();
-			if (skin.hasFur()) armorDef += (p?1:2) * newGamePlusMod;
-			if (hasGooSkin() && skinAdj == "slimy") armorDef += (2 * newGamePlusMod);
-			if (skin.hasChitin()) armorDef += (p?2:4)*newGamePlusMod;
-			if (skin.hasScales()) armorDef += (p?3:6)*newGamePlusMod; //bee-morph (), mantis-morph (), scorpion-morph (wpisane), spider-morph (wpisane)
-			if (skin.hasBark() || skin.hasDragonScales()) armorDef += (p?4:8)*newGamePlusMod;
+			if (skin.isFurCovered()) armorDef += (p?1:2) * newGamePlusMod;
+			if (isGooSkin() && skinAdj == "slimy") armorDef += (2 * newGamePlusMod);
+			if (skin.isChitinCovered()) armorDef += (p?2:4)*newGamePlusMod;
+			if (skin.isScaleCovered()) armorDef += (p?3:6)*newGamePlusMod; //bee-morph (), mantis-morph (), scorpion-morph (wpisane), spider-morph (wpisane)
+			if (skin.hasBark() || skin.isDragonScaleCovered()) armorDef += (p?4:8)*newGamePlusMod;
 			if (skin.hasBaseOnly(Skin.STONE)) armorDef += (10 * newGamePlusMod);
 			//'Thick' dermis descriptor adds 1!
 			if (skinAdj == "smooth") armorDef += (1 * newGamePlusMod);
 			//Bonus defense
 			if (arms.type == Arms.YETI) armorDef += (1 * newGamePlusMod);
-			if (arms.type == Arms.SPIDER || arms.type == Arms.MANTIS || arms.type == Arms.BEE || arms.type == Arms.SALAMANDER) armorDef += (2 * newGamePlusMod);
+			if (arms.type == Arms.SPIDER || arms.type == Arms.MANTIS || arms.type == Arms.BEE || arms.type == Arms.SALAMANDER || arms.type == Arms.FEY_DRACONIC) armorDef += (2 * newGamePlusMod);
 			if (arms.type == Arms.DRACONIC || arms.type == Arms.JABBERWOCKY || arms.type == Arms.FROSTWYRM || arms.type == Arms.SEA_DRAGON) armorDef += (3 * newGamePlusMod);
 			if (arms.type == Arms.HYDRA) armorDef += (4 * newGamePlusMod);
-			if (tailType == Tail.SPIDER_ADBOMEN || tailType == Tail.MANTIS_ABDOMEN || tailType == Tail.BEE_ABDOMEN) armorDef += (2 * newGamePlusMod);
+			if (tailType == Tail.SPIDER_ADBOMEN || tailType == Tail.MANTIS_ABDOMEN || tailType == Tail.BEE_ABDOMEN || tailType == Tail.FEY_DRACONIC) armorDef += (2 * newGamePlusMod);
 			if (tailType == Tail.DRACONIC) armorDef += (3 * newGamePlusMod);
+			if (tailType == Tail.YGGDRASIL) armorDef += (4 * newGamePlusMod);
 			if (lowerBody == LowerBody.FROSTWYRM) armorDef += (6 * newGamePlusMod);
 			if (lowerBody == LowerBody.YETI) armorDef += (1 * newGamePlusMod);
-			if (lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS || lowerBody == LowerBody.BEE || lowerBody == LowerBody.MANTIS || lowerBody == LowerBody.SALAMANDER) armorDef += (2 * newGamePlusMod);
-			if (lowerBody == LowerBody.DRAGON || lowerBody == LowerBody.JABBERWOCKY || lowerBody == LowerBody.SEA_DRAGON) armorDef += (3 * newGamePlusMod);
-			if (lowerBody == LowerBody.DRIDER || lowerBody == LowerBody.HYDRA) armorDef += (4 * newGamePlusMod);
+			if (lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS || lowerBody == LowerBody.BEE || lowerBody == LowerBody.MANTIS || lowerBody == LowerBody.SALAMANDER || lowerBody == LowerBody.FEY_DRAGON) armorDef += (2 * newGamePlusMod);
+			if (lowerBody == LowerBody.KIRIN || lowerBody == LowerBody.DRAGON || lowerBody == LowerBody.JABBERWOCKY || lowerBody == LowerBody.SEA_DRAGON) armorDef += (3 * newGamePlusMod);
+			if (lowerBody == LowerBody.DRIDER || lowerBody == LowerBody.HYDRA || lowerBody == LowerBody.YGG_ROOT_CLAWS) armorDef += (4 * newGamePlusMod);
 			if (rearBody.type == RearBody.YETI_FUR) armorDef += (4 * newGamePlusMod);
 			if (hasPerk(PerkLib.Lycanthropy)) armorDef += 10 * newGamePlusMod;
 			if (isGargoyle() && Forgefather.material == "granite")
 			{
-				if (Forgefather.refinement == 1) armorDef *= (1.15);
-				if (Forgefather.refinement == 2) armorDef *= (1.25);
-				if (Forgefather.refinement == 3 || Forgefather.refinement == 4) armorDef *= (1.5);
-				if (Forgefather.refinement == 5) armorDef *= (2);
+				if (Forgefather.refinement == 0) armorDef *= (1.15);
+				if (Forgefather.refinement == 1) armorDef *= (1.25);
+				if (Forgefather.refinement == 2 || Forgefather.refinement == 3) armorDef *= (1.5);
+				if (Forgefather.refinement == 4) armorDef *= (2);
 			}
 			//if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) {
 				//if (arms.type == Arms.GARGOYLE || arms.type == Arms.GARGOYLE_2) armorDef += (30 * newGamePlusMod);
@@ -658,37 +649,38 @@ use namespace CoC;
 			//}
 			//if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) armorDef += (25 * newGamePlusMod);
 			//Soul Cultivators bonuses
-			if (hasPerk(PerkLib.BodyCultivator)) {
-				armorDef += (1 * newGamePlusMod);
-			}
 			if (hasPerk(PerkLib.FleshBodyApprenticeStage)) {
-				if (hasPerk(PerkLib.SoulApprentice)) armorDef += 2 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulPersonage)) armorDef += 2 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulWarrior)) armorDef += 2 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulApprentice)) armorDef += 4 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulPersonage)) armorDef += 4 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulWarrior)) armorDef += 4 * newGamePlusMod;
 			}
 			if (hasPerk(PerkLib.FleshBodyWarriorStage)) {
-				if (hasPerk(PerkLib.SoulSprite)) armorDef += 4 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulScholar)) armorDef += 4 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulElder)) armorDef += 4 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulSprite)) armorDef += 6 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulScholar)) armorDef += 6 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulGrandmaster)) armorDef += 6 * newGamePlusMod;
 			}
 			if (hasPerk(PerkLib.FleshBodyElderStage)) {
-				if (hasPerk(PerkLib.SoulExalt)) armorDef += 6 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulOverlord)) armorDef += 6 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulTyrant)) armorDef += 6 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulElder)) armorDef += 8 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulExalt)) armorDef += 8 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulOverlord)) armorDef += 8 * newGamePlusMod;
 			}
 			if (hasPerk(PerkLib.FleshBodyOverlordStage)) {
-				if (hasPerk(PerkLib.SoulKing)) armorDef += 8 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulEmperor)) armorDef += 8 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulAncestor)) armorDef += 8 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulTyrant)) armorDef += 10 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulKing)) armorDef += 10 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulEmperor)) armorDef += 0 * newGamePlusMod;
+			}
+			if (hasPerk(PerkLib.FleshBodyTyrantStage)) {
+				if (hasPerk(PerkLib.SoulAncestor)) armorDef += 12 * newGamePlusMod;
 			}
 			if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) armorDef += 6 * newGamePlusMod;
 			if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) armorDef += 9 * newGamePlusMod;
 			if (hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) armorDef += 12 * newGamePlusMod;
-			if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) armorDef += 15 * newGamePlusMod;
+			if (hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) armorDef += 15 * newGamePlusMod;
+			if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) armorDef += 18 * newGamePlusMod;
 			//Agility boosts armor ratings!
 			var speedBonus:int = 0;
 			if (hasPerk(PerkLib.Agility)) {
-				if (armorPerk == "Light" || _armor.name == "nothing" || _armor.name == "some taur paladin armor" || _armor.name == "some taur blackguard armor") {
+				if (armorPerk == "Light" || armor.name == "nothing" || armor.name == "some taur paladin armor" || armor.name == "some taur blackguard armor") {
 					speedBonus += Math.round(spe / 10);
 				}
 				else if (armorPerk == "Medium") {
@@ -696,12 +688,12 @@ use namespace CoC;
 				}
 			}
 			if (hasPerk(PerkLib.ArmorMaster)) {
-				if (armorPerk == "Heavy" || _armor.name == "Drider-weave Armor") speedBonus += Math.round(spe / 50);
+				if (armorPerk == "Heavy" || armor.name == "Drider-weave Armor") speedBonus += Math.round(spe / 50);
 			}
 			armorDef += speedBonus;
 			//Feral armor boosts armor ratings!
 			var toughnessBonus:int = 0;
-			if (hasPerk(PerkLib.FeralArmor) && haveNaturalArmor() && armor.hasTag(ItemTags.AGILE)) {
+			if (hasPerk(PerkLib.FeralArmor) && haveNaturalArmor() && armor.hasTag(ItemTags.A_AGILE)) {
 				toughnessBonus += Math.round(tou / 20);
 			}
 			if (perkv1(IMutationsLib.NukiNutsIM) >= 1) {
@@ -714,7 +706,7 @@ use namespace CoC;
 				toughnessBonus += Math.round(ballSize);
 			}
 			armorDef += toughnessBonus;
-			if (hasPerk(PerkLib.PrestigeJobSentinel) && (armorPerk == "Heavy" || _armor.name == "Drider-weave Armor")) armorDef += _armor.def;
+			if (hasPerk(PerkLib.PrestigeJobSentinel) && (armorPerk == "Heavy" || armor.name == "Drider-weave Armor")) armorDef += armor.def;
 			if (hasPerk(PerkLib.ShieldExpertise) && shieldName != "nothing" && isShieldsForShieldBash()) {
 				if (shieldBlock >= 4) armorDef += Math.round(shieldBlock * 0.25);
 				else armorDef += 1;
@@ -797,8 +789,8 @@ use namespace CoC;
 		}
 		override public function get armorMDef():Number {
 			var newGamePlusMod:int = this.newGamePlusMod()+1;
-			var armorMDef:Number = super.armorMDef;
-			armorMDef = _armor.mdef;
+			var armorMDef:Number;
+			armorMDef = armor.mdef;
 			armorMDef += upperGarment.armorMDef;
 			armorMDef += lowerGarment.armorMDef;
 			//Blacksmith history!
@@ -825,11 +817,11 @@ use namespace CoC;
 			}
 			//Stacks on top of Thick Skin perk.
 			var p:Boolean = skin.isCoverLowMid();
-			if (skin.hasFur()) armorMDef += (p?1:2)*newGamePlusMod;
-			if (hasGooSkin() && skinAdj == "slimy") armorMDef += (2 * newGamePlusMod);
-			if (skin.hasChitin()) armorMDef += (p?2:4)*newGamePlusMod;
-			if (skin.hasScales()) armorMDef += (p?3:6)*newGamePlusMod; //bee-morph (), mantis-morph (), scorpion-morph (wpisane), spider-morph (wpisane)
-			if (skin.hasBark() || skin.hasDragonScales()) armorMDef += (p?4:8)*newGamePlusMod;
+			if (skin.isFurCovered()) armorMDef += (p?1:2)*newGamePlusMod;
+			if (isGooSkin() && skinAdj == "slimy") armorMDef += (2 * newGamePlusMod);
+			if (skin.isChitinCovered()) armorMDef += (p?2:4)*newGamePlusMod;
+			if (skin.isScaleCovered()) armorMDef += (p?3:6)*newGamePlusMod; //bee-morph (), mantis-morph (), scorpion-morph (wpisane), spider-morph (wpisane)
+			if (skin.hasBark() || skin.isDragonScaleCovered()) armorMDef += (p?4:8)*newGamePlusMod;
 			if (skin.hasBaseOnly(Skin.STONE)) armorMDef += (10 * newGamePlusMod);/*
 			//'Thick' dermis descriptor adds 1!
 			if (skinAdj == "smooth") armorMDef += (1 * newGamePlusMod);/*
@@ -837,23 +829,24 @@ use namespace CoC;
 			
 			//Bonus defense
 			if (arms.type == Arms.YETI) armorMDef += (1 * newGamePlusMod);
-			if (arms.type == Arms.SPIDER || arms.type == Arms.MANTIS || arms.type == Arms.BEE || arms.type == Arms.SALAMANDER) armorMDef += (2 * newGamePlusMod);
+			if (arms.type == Arms.SPIDER || arms.type == Arms.MANTIS || arms.type == Arms.BEE || arms.type == Arms.SALAMANDER || arms.type == Arms.FEY_DRACONIC) armorMDef += (2 * newGamePlusMod);
 			if (arms.type == Arms.DRACONIC || arms.type == Arms.FROSTWYRM) armorMDef += (3 * newGamePlusMod);
 			if (arms.type == Arms.HYDRA) armorMDef += (4 * newGamePlusMod);
-			if (tailType == Tail.SPIDER_ADBOMEN || tailType == Tail.MANTIS_ABDOMEN || tailType == Tail.BEE_ABDOMEN) armorMDef += (2 * newGamePlusMod);
+			if (tailType == Tail.SPIDER_ADBOMEN || tailType == Tail.MANTIS_ABDOMEN || tailType == Tail.BEE_ABDOMEN || tailType == Tail.FEY_DRACONIC) armorMDef += (2 * newGamePlusMod);
 			if (tailType == Tail.DRACONIC) armorMDef += (3 * newGamePlusMod);
+			if (tailType == Tail.YGGDRASIL) armorMDef += (4 * newGamePlusMod);
 			if (tailType == LowerBody.FROSTWYRM) armorMDef += (6 * newGamePlusMod);
 			if (lowerBody == LowerBody.YETI) armorMDef += (1 * newGamePlusMod);
-			if (lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS || lowerBody == LowerBody.BEE || lowerBody == LowerBody.MANTIS || lowerBody == LowerBody.SALAMANDER) armorMDef += (2 * newGamePlusMod);
-			if (lowerBody == LowerBody.DRAGON) armorMDef += (3 * newGamePlusMod);
-			if (lowerBody == LowerBody.DRIDER) armorMDef += (4 * newGamePlusMod);
+			if (lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS || lowerBody == LowerBody.BEE || lowerBody == LowerBody.MANTIS || lowerBody == LowerBody.SALAMANDER || lowerBody == LowerBody.FEY_DRAGON) armorMDef += (2 * newGamePlusMod);
+			if (lowerBody == LowerBody.KIRIN || lowerBody == LowerBody.DRAGON || lowerBody == LowerBody.JABBERWOCKY || lowerBody == LowerBody.SEA_DRAGON) armorMDef += (3 * newGamePlusMod);
+			if (lowerBody == LowerBody.DRIDER || lowerBody == LowerBody.YGG_ROOT_CLAWS) armorMDef += (4 * newGamePlusMod);
 			//if (hasPerk(PerkLib.Vulpesthropy)) armorMDef += 10 * newGamePlusMod;
 			if (isGargoyle() && Forgefather.material == "alabaster")
 			{
-				if (Forgefather.refinement == 1) armorMDef *= (1.15);
-				if (Forgefather.refinement == 2) armorMDef *= (1.25);
-				if (Forgefather.refinement == 3 || Forgefather.refinement == 4) armorMDef *= (1.5);
-				if (Forgefather.refinement == 5) armorMDef *= (2);
+				if (Forgefather.refinement == 0) armorMDef *= (1.15);
+				if (Forgefather.refinement == 1) armorMDef *= (1.25);
+				if (Forgefather.refinement == 2 || Forgefather.refinement == 3) armorMDef *= (1.5);
+				if (Forgefather.refinement == 4) armorMDef *= (2);
 			}
 			//if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) armorMDef += (25 * newGamePlusMod);
 			//if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) {
@@ -865,29 +858,33 @@ use namespace CoC;
 			//}
 			//Soul Cultivators bonuses
 			if (hasPerk(PerkLib.FleshBodyApprenticeStage)) {
-				if (hasPerk(PerkLib.SoulApprentice)) armorMDef += 1 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulPersonage)) armorMDef += 1 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulWarrior)) armorMDef += 1 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulApprentice)) armorMDef += 4 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulPersonage)) armorMDef += 4 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulWarrior)) armorMDef += 4 * newGamePlusMod;
 			}
 			if (hasPerk(PerkLib.FleshBodyWarriorStage)) {
-				if (hasPerk(PerkLib.SoulSprite)) armorMDef += 3 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulScholar)) armorMDef += 3 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulElder)) armorMDef += 3 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulSprite)) armorMDef += 6 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulScholar)) armorMDef += 6 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulGrandmaster)) armorMDef += 6 * newGamePlusMod;
 			}
 			if (hasPerk(PerkLib.FleshBodyElderStage)) {
-				if (hasPerk(PerkLib.SoulExalt)) armorMDef += 5 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulOverlord)) armorMDef += 5 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulTyrant)) armorMDef += 5 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulElder)) armorMDef += 8 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulExalt)) armorMDef += 8 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulOverlord)) armorMDef += 8 * newGamePlusMod;
 			}
 			if (hasPerk(PerkLib.FleshBodyOverlordStage)) {
-				if (hasPerk(PerkLib.SoulKing)) armorMDef += 7 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulEmperor)) armorMDef += 7 * newGamePlusMod;
-				if (hasPerk(PerkLib.SoulAncestor)) armorMDef += 7 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulKing)) armorMDef += 10 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulTyrant)) armorMDef += 10 * newGamePlusMod;
+				if (hasPerk(PerkLib.SoulEmperor)) armorMDef += 10 * newGamePlusMod;
+			}
+			if (hasPerk(PerkLib.FleshBodyTyrantStage)) {
+				if (hasPerk(PerkLib.SoulAncestor)) armorMDef += 12 * newGamePlusMod;
 			}
 			if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) armorMDef += 4 * newGamePlusMod;
 			if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) armorMDef += 6 * newGamePlusMod;
 			if (hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) armorMDef += 8 * newGamePlusMod;
-			if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) armorMDef += 10 * newGamePlusMod;/*
+			if (hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) armorMDef += 10 * newGamePlusMod;
+			if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) armorMDef += 12 * newGamePlusMod;/*
 			//Agility boosts armor ratings!
 			var speedBonus:int = 0;
 			if (hasPerk(PerkLib.Agility)) {
@@ -981,13 +978,13 @@ use namespace CoC;
 			return armorMDef;
 		}
 		public function get armorBaseDef():Number {
-			return _armor.def;
+			return armor.def;
 		}
 		override public function get armorPerk():String {
-			return _armor.perk;
+			return armor.perk;
 		}
 		override public function get armorValue():Number {
-			return _armor.value;
+			return armor.value;
 		}
 		//Wing Slap compatibile wings + tiers of wings for dmg multi
 		public function haveWingsForWingSlap():Boolean
@@ -1000,17 +997,21 @@ use namespace CoC;
 		}
 		//Natural Claws (arm types and weapons that can substitude them)
 		public function haveNaturalClaws():Boolean { return Arms.Types[arms.type].claw || Arms.Types[arms.type].armSlam || Arms.Types[arms.type].scythe || LowerBody.hasClaws(this);}
-		public function haveNaturalClawsTypeWeapon():Boolean {return weaponName == "gauntlet with claws" || weaponName == "gauntlet with an aphrodisiac-coated claws" || weaponName == "Venoclaw" || weaponName == "hooked gauntlets" || (shield == game.shields.AETHERS && weapon == game.weapons.AETHERD && (AetherTwinsFollowers.AetherTwinsShape == "Human-tier Gaunlets" || AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets"));}
-		//Other natural weapon checks
+		public function haveNaturalClawsTypeWeapon():Boolean {return weaponName == "gauntlet with claws" || weaponName == "gauntlet with an aphrodisiac-coated claws" || weaponName == "Venoclaw" || weaponName == "hooked gauntlets" || (hasAetherTwinsTier1() || hasAetherTwinsTier2() || weaponName == "moonlight claws");}
+        public function isFeralCombat():Boolean { return flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && ( (weaponName == "fists" && haveNaturalClaws()) || haveNaturalClawsTypeWeapon() ) ;}
+        public function isUnarmedCombat():Boolean { return flags[kFLAGS.FERAL_COMBAT_MODE] != 1 && isFistOrFistWeapon() ;}
+        //Other natural weapon checks
 		public function hasABiteAttack():Boolean { return (lowerBody == LowerBody.HYDRA || Face.Types[faceType].bite);}
 		public function hasAWingAttack():Boolean { return (Wings.Types[wings.type].wingSlap || wings.type == Wings.THUNDEROUS_AURA || wings.type == Wings.WINDY_AURA);}
 		public function hasAGoreAttack():Boolean { return (Horns.Types[horns.type].gore);}
 		public function hasATailSlapAttack():Boolean { return (Tail.Types[tail.type].tailSlam || Tail.Types[tail.type].stinger || Tail.Types[tail.type].Energy || LowerBody.canTailSlam(this));}
 		public function hasTalonsAttack():Boolean{return LowerBody.hasTalons(this);}
 		public function hasTentacleAttacks():Boolean{return LowerBody.hasTentacles(this) || hasPerk(PerkLib.MorphicWeaponry);}
-		public function hasNaturalWeapons():Boolean { return (haveNaturalClaws() || hasABiteAttack() || hasAWingAttack() || hasAGoreAttack() || hasATailSlapAttack() || hasTalonsAttack || hasTentacleAttacks || isAlraune() || isTaur());}
+		public function hasNaturalWeapons():Boolean { return (haveNaturalClaws() || hasABiteAttack() || hasAWingAttack() || hasAGoreAttack() || hasATailSlapAttack() || hasTalonsAttack() || hasTentacleAttacks() || isAlraune() || isTaur());}
+		public function hasAetherTwinsTier1():Boolean { return shield == game.shields.AETHERS && weapon == game.weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Human-tier Gaunlets"; }
+		public function hasAetherTwinsTier2():Boolean { return shield == game.shields.AETHERS && weapon == game.weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets"; }
 		//Some other checks
-		public function isGoblinoid():Boolean { return (isRace(Races.GOBLIN) || isRace(Races.GREMLIN)); }
+		public function isGoblinoid(checkRP:Boolean = true):Boolean { return (isRace(Races.GOBLIN, 1, checkRP) || isRace(Races.GREMLIN, 1, checkRP)); }
 		public function isSlime():Boolean { return (hasPerk(PerkLib.DarkSlimeCore) || hasPerk(PerkLib.SlimeCore)); }
 		public function isHarpy():Boolean { return (isRace(Races.HARPY) || isRace(Races.THUNDERBIRD) || isRace(Races.PHOENIX)); }
 		public function isWerewolf():Boolean { return isRace(Races.WEREWOLF); }
@@ -1045,11 +1046,11 @@ use namespace CoC;
 		public function isDualLowGradeWrathWeapon():Boolean
 		{
 			return weapon == game.weapons.DBFSWO || weapon == game.weapons.ANGSTD || weapon == game.weapons.DBFWHIP;
-		}/*
+		}
 		public function isMidGradeWrathWeapon():Boolean
 		{
 			return weaponSpecials("MGWrath") || weapon == game.weapons.NTWHIP;
-		}*/
+		}
 		public function isDualMidGradeWrathWeapon():Boolean
 		{
 			return weapon == game.weapons.ASTERIUS;
@@ -1069,7 +1070,7 @@ use namespace CoC;
 		}
 		public function isNotHavingShieldCuzPerksNotWorkingOtherwise():Boolean
 		{
-			return shield == ShieldLib.NOTHING || shield == game.shields.AETHERS;
+			return shield.isNothing || shield == game.shields.AETHERS;
 		}
 
 		//weaponType check. Make sure weapon has the type filled in. Currently, Type is the last parameter in Weapon().
@@ -1078,7 +1079,7 @@ use namespace CoC;
 			return weaponName == "fists" || isGauntletWeapon();
 		}
 		public function isGauntletWeapon():Boolean {
-			return (weaponClass("Gauntlet")) || (shield == game.shields.AETHERS && weapon == game.weapons.AETHERD && (AetherTwinsFollowers.AetherTwinsShape == "" || AetherTwinsFollowers.AetherTwinsShape == "Human-tier Gaunlets" || AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets"));
+			return (weaponClass("Gauntlet")) || (hasAetherTwinsTier1() || hasAetherTwinsTier2());
 		}
 		//Sword-type weapons
 		public function isSwordTypeWeapon():Boolean {
@@ -1113,11 +1114,15 @@ use namespace CoC;
 		}
 		//Dagger-type weapons
 		public function isDaggerTypeWeapon():Boolean {
-			return (weaponClass("Dagger"));
+			return (weaponClass(ItemConstants.WT_DAGGER));
 		}
 		//Staff <<SCECOMM(scepter not staff)>>
 		public function isStaffTypeWeapon():Boolean {
-			return (weaponClass("Staff")) || weapon == game.weapons.ASCENSU || weapon == game.weapons.B_STAFF || weapon == game.weapons.DEPRAVA || weapon == game.weapons.PURITAS || weapon == game.weapons.WDSTAFF;
+			return (weaponClass(ItemConstants.WT_STAFF)) || weapon == game.weapons.ASCENSU || weapon == game.weapons.B_STAFF || weapon == game.weapons.DEPRAVA || weapon == game.weapons.PURITAS || weapon == game.weapons.WDSTAFF;
+		}
+		//Staff <<SCECOMM(scepter not staff)>>
+		public function isWandTypeWeapon():Boolean {
+			return (weaponClass(ItemConstants.WT_WAND));
 		}
 		//Whip-type weapons
 		public function isWhipTypeWeapon():Boolean {
@@ -1129,7 +1134,7 @@ use namespace CoC;
 		}
 		//Exotic-type weapons
 		public function isExoticTypeWeapon():Boolean {
-			return isRibbonTypeWeapon() || (weaponClass("Exotic"));
+			return (isRibbonTypeWeapon() || weaponClass("Exotic") || weaponClass("Scythe"));
 		}
 		//Partial staff type weapons
 		public function isPartiallyStaffTypeWeapon():Boolean {
@@ -1209,13 +1214,13 @@ use namespace CoC;
 		//Natural Jouster perks req check
 		public function isMeetingNaturalJousterReq():Boolean
 		{
-			return (((isTaur() || isDrider() || canFly()) && spe >= 60) && hasPerk(PerkLib.Naturaljouster) && (!(PerkLib.DoubleAttack) || (hasPerk(PerkLib.DoubleAttack) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)))
-             || (spe >= 150 && hasPerk(PerkLib.Naturaljouster) && hasPerk(PerkLib.DoubleAttack) && (!hasPerk(PerkLib.DoubleAttack) || (hasPerk(PerkLib.DoubleAttack) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)));
+			return (((isTaur() || isDrider() || canFly()) && spe >= 60) && hasPerk(PerkLib.Naturaljouster) && (!(PerkLib.WeaponNormalDoubleAttack) || (hasPerk(PerkLib.WeaponNormalDoubleAttack) && flags[kFLAGS.MULTIATTACK_STYLE] == 0)))
+             || (spe >= 150 && hasPerk(PerkLib.Naturaljouster) && hasPerk(PerkLib.WeaponNormalDoubleAttack) && (!hasPerk(PerkLib.WeaponNormalDoubleAttack) || (hasPerk(PerkLib.WeaponNormalDoubleAttack) && flags[kFLAGS.MULTIATTACK_STYLE] == 0)));
 		}
 		public function isMeetingNaturalJousterMasterGradeReq():Boolean
 		{
-			return (((isTaur() || isDrider() || canFly()) && spe >= 180) && hasPerk(PerkLib.NaturaljousterMastergrade) && (!hasPerk(PerkLib.DoubleAttack) || (hasPerk(PerkLib.DoubleAttack) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)))
-             || (spe >= 450 && hasPerk(PerkLib.NaturaljousterMastergrade) && hasPerk(PerkLib.DoubleAttack) && (!hasPerk(PerkLib.DoubleAttack) || (hasPerk(PerkLib.DoubleAttack) && flags[kFLAGS.DOUBLE_ATTACK_STYLE] == 0)));
+			return (((isTaur() || isDrider() || canFly()) && spe >= 180) && hasPerk(PerkLib.NaturaljousterMastergrade) && (!hasPerk(PerkLib.WeaponNormalDoubleAttack) || (hasPerk(PerkLib.WeaponNormalDoubleAttack) && flags[kFLAGS.MULTIATTACK_STYLE] == 0)))
+             || (spe >= 450 && hasPerk(PerkLib.NaturaljousterMastergrade) && hasPerk(PerkLib.WeaponNormalDoubleAttack) && (!hasPerk(PerkLib.WeaponNormalDoubleAttack) || (hasPerk(PerkLib.WeaponNormalDoubleAttack) && flags[kFLAGS.MULTIATTACK_STYLE] == 0)));
 		}
 		public function haveWeaponForJouster():Boolean
 		{
@@ -1227,18 +1232,115 @@ use namespace CoC;
 		}
 		public function playerHasFourArms():Boolean
 		{
-			return arms.type == Arms.DISPLACER;
+			return (arms.type == Arms.DISPLACER || arms.type == Arms.ANT);
 		}
+		public function flameBladeActive():Boolean
+		{
+			return ((isDuelingTypeWeapon() || isSwordTypeWeapon() || isAxeTypeWeapon() || isDaggerTypeWeapon() || isScytheTypeWeapon()) && hasStatusEffect(StatusEffects.FlameBlade));
+		}
+		public function ElectrifyWeaponActive():Boolean
+		{
+			return ((isMaceHammerTypeWeapon() || isDuelingTypeWeapon() || isSwordTypeWeapon() || isAxeTypeWeapon() || isDaggerTypeWeapon() || isScytheTypeWeapon()) && hasStatusEffect(StatusEffects.ElectrifyWeapon));
+		}
+
+		public function allEquipment():/*ItemType*/Array {
+			var result:Array = [];
+			for each (var slot:int in ItemConstants.EquipmentSlotIds) {
+				if (_equipment[slot] && !_equipment[slot].isNothing) result.push(_equipment[slot]);
+			}
+			return result;
+		}
+
+		/**
+		 * Silently turns equipped item into newItem
+		 * @return true if item was successfully replaced, false if it there is no such equipment.
+		 */
+		public function replaceEquipment(item:Equipable, newItem:Equipable):Boolean {
+			var slot:int = slotOfEquippedItem(item);
+			if (slot !== -1) {
+				internalEquipItem(slot, newItem as Equipable, false, true);
+			}
+			return false;
+		}
+		
+		public function hasEnchantment(type:EnchantmentType):Boolean {
+			for each (var itype:ItemType in allEquipment()) {
+				if (itype.hasEnchantment(type)) return true;
+			}
+			return false;
+		}
+		
+		/**
+		 * @param aggregate "sum"|"max"|"min".
+		 */
+		public function enchantmentPower(type:EnchantmentType, aggregate:String="sum"):Number {
+			var power:Number = 0;
+			for each (var itype:ItemType in allEquipment()) {
+				var ipower:Number = itype.enchantmentPower(type);
+				if (aggregate === "sum") {
+					power += ipower
+				} else if (aggregate === "max") {
+					power = Math.max(power, ipower);
+				} else if (aggregate === "min") {
+					power = Math.min(power, ipower);
+				}
+			}
+			return power;
+		}
+		
+		public function findEnchantment(type:EnchantmentType):Enchantment {
+			for each (var itype:ItemType in allEquipment()) {
+				var e:Enchantment = itype.enchantmentOfType(type);
+				if (e) return e;
+			}
+			return null;
+		}
+		
+		/**
+		 * @return {Array} pair [Enchantment,ItemType]
+		 */
+		public function findEnchantmentAndItem(type:EnchantmentType):Array {
+			for each (var itype:ItemType in allEquipment()) {
+				var e:Enchantment = itype.enchantmentOfType(type);
+				if (e) return [e, itype];
+			}
+			return null;
+		}
+		
+		public function allEnchantments(type:EnchantmentType):/*Enchantment*/Array {
+			var result:/*Enchantment*/Array = [];
+			for each (var itype:ItemType in allEquipment()) {
+				var e:Enchantment = itype.enchantmentOfType(type);
+				if (e) result.push(e);
+			}
+			return result;
+		}
+		public function equippedKnownCursedItems():/*ItemType*/Array {
+			var result:/*ItemType*/Array = [];
+			for each (var slot:int in ItemConstants.EquipmentSlotIds) {
+				var item:Equipable = _equipment[slot];
+				if (item && item is IDynamicItem && (item as IDynamicItem).curseStatus == ItemConstants.CS_KNOWN_CURSED) result.push(item);
+			}
+			return result;
+		}
+		public function carriedKnownCursedItems():/*ItemSlotClass*/Array {
+			var result:/*ItemSlotClass*/Array = [];
+			for each (var slot:ItemSlotClass in itemSlots) {
+				if (slot.unlocked && !slot.itype is IDynamicItem && (slot.itype as IDynamicItem).curseStatus == ItemConstants.CS_KNOWN_CURSED) result.push(slot);
+			}
+			return result;
+		}
+
 		//override public function get weapons
 		override public function get weaponName():String {
-			return _weapon.name;
+			return weapon.name;
 		}
 		override public function get weaponVerb():String {
-			return _weapon.verb;
+			return weapon.verb;
 		}
 		override public function get weaponAttack():Number {
 			var newGamePlusMod:int = this.newGamePlusMod()+1;
-			var attack:Number = _weapon.attack;
+			var attack:Number = weapon.attack;
 			if (hasPerk(PerkLib.JobSwordsman) && weaponSpecials("Large")) {
 				if (hasPerk(PerkLib.WeaponMastery) && str >= 100) {
 					if (hasPerk(PerkLib.WeaponGrandMastery) && str >= 140) attack *= 2;
@@ -1312,25 +1414,39 @@ use namespace CoC;
 			}
 			if (hasStatusEffect(StatusEffects.Berzerking) || hasStatusEffect(StatusEffects.Lustzerking)) {
 				var zerkersboost:Number = 0;
-				zerkersboost += (15 + (15 * newGamePlusMod));
-				if (hasPerk(PerkLib.ColdFury) || hasPerk(PerkLib.ColdLust)) zerkersboost += (5 + (5 * newGamePlusMod));
-				if (hasPerk(PerkLib.ColderFury) || hasPerk(PerkLib.ColderLust)) zerkersboost += (10 + (10 * newGamePlusMod));
+				var more:Number = 1;
+				if (hasStatusEffect(StatusEffects.Berzerking)) {
+					zerkersboost += (15 + (15 * newGamePlusMod));
+					if (hasPerk(PerkLib.ColdFury)) zerkersboost += (5 + (5 * newGamePlusMod));
+					if (hasPerk(PerkLib.ColderFury)) zerkersboost += (10 + (10 * newGamePlusMod));
+					if (hasPerk(PerkLib.PrestigeJobBerserker) && statusEffectv2(StatusEffects.Berzerking) >= 1) more += statusEffectv2(StatusEffects.Berzerking);
+				}
+				if (hasStatusEffect(StatusEffects.Lustzerking)) {
+					zerkersboost += (15 + (15 * newGamePlusMod));
+					if (hasPerk(PerkLib.ColdLust)) zerkersboost += (5 + (5 * newGamePlusMod));
+					if (hasPerk(PerkLib.ColderLust)) zerkersboost += (10 + (10 * newGamePlusMod));
+					if (hasPerk(PerkLib.PrestigeJobBerserker) && statusEffectv2(StatusEffects.Lustzerking) >= 1) more += statusEffectv2(StatusEffects.Lustzerking);
+				}
+				zerkersboost *= more;
 				if (perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 3) zerkersboost += (30 + (30 * newGamePlusMod));
 				if (hasPerk(PerkLib.Lustzerker) && (jewelryName == "Flame Lizard ring" || jewelryName2 == "Flame Lizard ring" || jewelryName3 == "Flame Lizard ring" || jewelryName4 == "Flame Lizard ring")) zerkersboost += (5 + (5 * newGamePlusMod));
 				if (hasPerk(PerkLib.BerserkerArmor)) zerkersboost += (5 + (5 * newGamePlusMod));
 				if (hasStatusEffect(StatusEffects.Berzerking) && hasStatusEffect(StatusEffects.Lustzerking)) {
-					if (hasPerk(PerkLib.ColderFury) || hasPerk(PerkLib.ColderLust)) zerkersboost *= 4;
-					else if (hasPerk(PerkLib.ColderFury) || hasPerk(PerkLib.ColderLust)) zerkersboost *= 3;
-					else zerkersboost *= 2.5;
+					var supp:Number = 1.5;
+					if (hasPerk(PerkLib.ColderFury)) zerkersboost += .5;
+					if (hasPerk(PerkLib.ColderLust)) zerkersboost += .5;
+					if (hasPerk(PerkLib.ColdFury)) zerkersboost += .25;
+					if (hasPerk(PerkLib.ColdLust)) zerkersboost += .25;
+					zerkersboost *= supp;
 				}
 				attack += zerkersboost;
 			}
 			if (isGargoyle() && Forgefather.material == "ebony")
 			{
-				if (Forgefather.refinement == 1) attack *= (1.15);
-				if (Forgefather.refinement == 2) attack *= (1.25);
-				if (Forgefather.refinement == 3 || Forgefather.refinement == 4) attack *= (1.5);
-				if (Forgefather.refinement == 5) attack *= (2);
+				if (Forgefather.refinement == 0) attack *= (1.15);
+				if (Forgefather.refinement == 1) attack *= (1.25);
+				if (Forgefather.refinement == 2 || Forgefather.refinement == 3) attack *= (1.5);
+				if (Forgefather.refinement == 4) attack *= (2);
 			}
 			if (hasStatusEffect(StatusEffects.ChargeWeapon)) {
 				if (weaponName == "fists" && !hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalWeapons)) attack += 0;
@@ -1340,16 +1456,16 @@ use namespace CoC;
 			return attack;
 		}
 		public function get weaponBaseAttack():Number {
-			return _weapon.attack;
+			return weapon.attack;
 		}
 		override public function get weaponPerk():String {
-			return _weapon.perk || "";
+			return weapon.perk || "";
 		}
 		override public function get weaponType():String {
-			return _weapon.type || "";
+			return weapon.type || "";
 		}
 		override public function get weaponValue():Number {
-			return _weapon.value;
+			return weapon.value;
 		}
 		//First arg is weapon type. Second is override, in case you want to check specific weapon.
 		public function weaponClass(pWeaponClass:String = "", orWeaponCheck:* = null):Boolean {
@@ -1414,14 +1530,14 @@ use namespace CoC;
 		}
 		//override public function get weapons
 		override public function get weaponRangeName():String {
-			return _weaponRange.name;
+			return weaponRange.name;
 		}
 		override public function get weaponRangeVerb():String {
-			return _weaponRange.verb;
+			return weaponRange.verb;
 		}
 		override public function get weaponRangeAttack():Number {
 			//var newGamePlusMod:int = this.newGamePlusMod()+1;
-			var rangeattack:Number = _weaponRange.attack;
+			var rangeattack:Number = weaponRange.attack;
 			if (hasPerk(PerkLib.PracticedShot) && str >= 60 && (weaponRangePerk == "Bow" || weaponRangePerk == "Crossbow" || weaponRangePerk == "Throwing")) {
 				if (hasPerk(PerkLib.EagleEye)) rangeattack *= 2;
 				else rangeattack *= 1.5;
@@ -1432,10 +1548,10 @@ use namespace CoC;
 			}
 			if (isGargoyle() && Forgefather.material == "sandstone")
 			{
-				if (Forgefather.refinement == 1) rangeattack *= (1.15);
-				if (Forgefather.refinement == 2) rangeattack *= (1.25);
-				if (Forgefather.refinement == 3 || Forgefather.refinement == 4) rangeattack *= (1.5);
-				if (Forgefather.refinement == 5) rangeattack *= (2);
+				if (Forgefather.refinement == 0) rangeattack *= (1.15);
+				if (Forgefather.refinement == 1) rangeattack *= (1.25);
+				if (Forgefather.refinement == 2 || Forgefather.refinement == 3) rangeattack *= (1.5);
+				if (Forgefather.refinement == 4) rangeattack *= (2);
 			}
 		/*	if(hasPerk(PerkLib.LightningStrikes) && spe >= 60 && weaponRangePerk != "Large") {
 				rangeattack += Math.round((spe - 50) / 3);
@@ -1457,20 +1573,20 @@ use namespace CoC;
 			if(hasStatusEffect(StatusEffects.Berzerking)) rangeattack += (30 + (15 * newGamePlusMod));
 			if(hasStatusEffect(StatusEffects.Lustzerking)) rangeattack += (30 + (15 * newGamePlusMod));
 			if(hasPerk(PerkLib.)) rangeattack += Math.round(statusEffectv1(StatusEffects.ChargeWeapon));
-		*/	if (hasStatusEffect(StatusEffects.ChargeWeapon) && !isUsingTome()) {
-				rangeattack += Math.round(statusEffectv1(StatusEffects.ChargeWeapon));
+		*/	if (hasStatusEffect(StatusEffects.ChargeRWeapon) && !isUsingTome()) {
+				rangeattack += Math.round(statusEffectv1(StatusEffects.ChargeRWeapon));
 			}
 			rangeattack = Math.round(rangeattack);
 			return rangeattack;
 		}
 		public function get weaponRangeBaseAttack():Number {
-			return _weaponRange.attack;
+			return weaponRange.attack;
 		}
 		override public function get weaponRangePerk():String {
-			return _weaponRange.perk || "";
+			return weaponRange.perk || "";
 		}
 		override public function get weaponRangeValue():Number {
-			return _weaponRange.value;
+			return weaponRange.value;
 		}
 		public function get ammo():int {
 			return flags[kFLAGS.FLINTLOCK_PISTOL_AMMO];
@@ -1481,184 +1597,184 @@ use namespace CoC;
 
 		//override public function get weapons
 		override public function get weaponFlyingSwordsName():String {
-			return _weaponFlyingSwords.name;
+			return weaponFlyingSwords.name;
 		}
 		override public function get weaponFlyingSwordsVerb():String {
-			return _weaponFlyingSwords.verb;
+			return weaponFlyingSwords.verb;
 		}
 		override public function get weaponFlyingSwordsAttack():Number {
 			//var newGamePlusMod:int = this.newGamePlusMod()+1;
-			var flyingswordsattack:Number = _weaponFlyingSwords.attack;
+			var flyingswordsattack:Number = weaponFlyingSwords.attack;
 			//flyingswordsattack = Math.round(flyingswordsattack);
 			return flyingswordsattack;
 		}
 		public function get weaponFlyingSwordsBaseAttack():Number {
-			return _weaponFlyingSwords.attack;
+			return weaponFlyingSwords.attack;
 		}
 		override public function get weaponFlyingSwordsPerk():String {
-			return _weaponFlyingSwords.perk || "";
+			return weaponFlyingSwords.perk || "";
 		}
 		override public function get weaponFlyingSwordsValue():Number {
-			return _weaponFlyingSwords.value;
+			return weaponFlyingSwords.value;
 		}
 
 		//override public function get miscjewelries.
 		override public function get miscjewelryName():String {
-			return _miscjewelry.name;
+			return miscJewelry1.name;
 		}
 		override public function get miscjewelryEffectId():Number {
-			return _miscjewelry.effectId;
+			return miscJewelry1.effectId;
 		}
 		override public function get miscjewelryEffectMagnitude():Number {
-			return _miscjewelry.effectMagnitude;
+			return miscJewelry1.effectMagnitude;
 		}
 		override public function get miscjewelryPerk():String {
-			return _miscjewelry.perk;
+			return miscJewelry1.perk;
 		}
 		override public function get miscjewelryValue():Number {
-			return _miscjewelry.value;
+			return miscJewelry1.value;
 		}
 		override public function get miscjewelryName2():String {
-			return _miscjewelry2.name;
+			return miscJewelry2.name;
 		}
 		override public function get miscjewelryEffectId2():Number {
-			return _miscjewelry2.effectId;
+			return miscJewelry2.effectId;
 		}
 		override public function get miscjewelryEffectMagnitude2():Number {
-			return _miscjewelry2.effectMagnitude;
+			return miscJewelry2.effectMagnitude;
 		}
 		override public function get miscjewelryPerk2():String {
-			return _miscjewelry2.perk;
+			return miscJewelry2.perk;
 		}
 		override public function get miscjewelryValue2():Number {
-			return _miscjewelry2.value;
+			return miscJewelry2.value;
 		}
 
 		//override public function get headjewelries.
 		override public function get headjewelryName():String {
-			return _headjewelry.name;
+			return headJewelry.name;
 		}
 		override public function get headjewelryEffectId():Number {
-			return _headjewelry.effectId;
+			return headJewelry.effectId;
 		}
 		override public function get headjewelryEffectMagnitude():Number {
-			return _headjewelry.effectMagnitude;
+			return headJewelry.effectMagnitude;
 		}
 		override public function get headjewelryPerk():String {
-			return _headjewelry.perk;
+			return headJewelry.perk;
 		}
 		override public function get headjewelryValue():Number {
-			return _headjewelry.value;
+			return headJewelry.value;
 		}
 
 		//override public function get necklaces.
 		override public function get necklaceName():String {
-			return _necklace.name;
+			return necklace.name;
 		}
 		override public function get necklaceEffectId():Number {
-			return _necklace.effectId;
+			return necklace.effectId;
 		}
 		override public function get necklaceEffectMagnitude():Number {
-			return _necklace.effectMagnitude;
+			return necklace.effectMagnitude;
 		}
 		override public function get necklacePerk():String {
-			return _necklace.perk;
+			return necklace.perk;
 		}
 		override public function get necklaceValue():Number {
-			return _necklace.value;
+			return necklace.value;
 		}
 
 		//override public function get jewelries.
 		override public function get jewelryName():String {
-			return _jewelry.name;
+			return jewelry1.name;
 		}
 		override public function get jewelryEffectId():Number {
-			return _jewelry.effectId;
+			return jewelry1.effectId;
 		}
 		override public function get jewelryEffectMagnitude():Number {
-			return _jewelry.effectMagnitude;
+			return jewelry1.effectMagnitude;
 		}
 		override public function get jewelryPerk():String {
-			return _jewelry.perk;
+			return jewelry1.perk;
 		}
 		override public function get jewelryValue():Number {
-			return _jewelry.value;
+			return jewelry1.value;
 		}
 		override public function get jewelryName2():String {
-			return _jewelry2.name;
+			return jewelry2.name;
 		}
 		override public function get jewelryEffectId2():Number {
-			return _jewelry2.effectId;
+			return jewelry2.effectId;
 		}
 		override public function get jewelryEffectMagnitude2():Number {
-			return _jewelry2.effectMagnitude;
+			return jewelry2.effectMagnitude;
 		}
 		override public function get jewelryPerk2():String {
-			return _jewelry2.perk;
+			return jewelry2.perk;
 		}
 		override public function get jewelryValue2():Number {
-			return _jewelry2.value;
+			return jewelry2.value;
 		}
 		override public function get jewelryName3():String {
-			return _jewelry3.name;
+			return jewelry3.name;
 		}
 		override public function get jewelryEffectId3():Number {
-			return _jewelry3.effectId;
+			return jewelry3.effectId;
 		}
 		override public function get jewelryEffectMagnitude3():Number {
-			return _jewelry3.effectMagnitude;
+			return jewelry3.effectMagnitude;
 		}
 		override public function get jewelryPerk3():String {
-			return _jewelry3.perk;
+			return jewelry3.perk;
 		}
 		override public function get jewelryValue3():Number {
-			return _jewelry3.value;
+			return jewelry3.value;
 		}
 		override public function get jewelryName4():String {
-			return _jewelry4.name;
+			return jewelry4.name;
 		}
 		override public function get jewelryEffectId4():Number {
-			return _jewelry4.effectId;
+			return jewelry4.effectId;
 		}
 		override public function get jewelryEffectMagnitude4():Number {
-			return _jewelry4.effectMagnitude;
+			return jewelry4.effectMagnitude;
 		}
 		override public function get jewelryPerk4():String {
-			return _jewelry4.perk;
+			return jewelry4.perk;
 		}
 		override public function get jewelryValue4():Number {
-			return _jewelry4.value;
+			return jewelry4.value;
 		}
 
 		//override public function get vehicle.
 		override public function get vehiclesName():String {
-			return _vehicle.name;
+			return vehicles.name;
 		}
 		override public function get vehiclesEffectId():Number {
-			return _vehicle.effectId;
+			return vehicles.effectId;
 		}
 		override public function get vehiclesEffectMagnitude():Number {
-			return _vehicle.effectMagnitude;
+			return vehicles.effectMagnitude;
 		}
 		override public function get vehiclesPerk():String {
-			return _vehicle.perk;
+			return vehicles.perk;
 		}
 		override public function get vehiclesValue():Number {
-			return _vehicle.value;
+			return vehicles.value;
 		}
 
 		//Shields for Bash
 		public function isShieldsForShieldBash():Boolean
 		{
 			return shield == game.shields.BSHIELD || shield == game.shields.BUCKLER || shield == game.shields.DRGNSHL || shield == game.shields.KITE_SH || shield == game.shields.TRASBUC || shield == game.shields.SPIL_SH || shield == game.shields.SANCTYN || shield == game.shields.SANCTYL || shield == game.shields.SANCTYD
-			 || shieldPerk == "Large" || shieldPerk == "Massive" || (shield == game.shields.AETHERS && weapon == game.weapons.AETHERD && (AetherTwinsFollowers.AetherTwinsShape == "Human-tier Gaunlets" || AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets"));
+			 || shieldPerk == "Large" || shieldPerk == "Massive" || (hasAetherTwinsTier1() || hasAetherTwinsTier2());
 		}
 		//override public function get shields
 		override public function get shieldName():String {
-			return _shield.name;
+			return shield.name;
 		}
 		override public function get shieldBlock():Number {
-			var block:Number = _shield.block;
+			var block:Number = shield.block;
 			if (hasPerk(PerkLib.JobKnight)) {
 				if (shieldPerk == "Massive") block += 3;
 				else if (shieldPerk == "Large") block += 2;
@@ -1683,410 +1799,547 @@ use namespace CoC;
 			return block;
 		}
 		override public function get shieldPerk():String {
-			return _shield.perk;
+			return shield.perk;
 		}
 		override public function get shieldValue():Number {
-			return _shield.value;
-		}
-		public function get shield():Shield
-		{
-			return _shield;
+			return shield.value;
 		}
 
 		//override public function get undergarment
 		override public function get upperGarmentName():String {
-			return _upperGarment.name;
+			return upperGarment.name;
 		}
 		override public function get upperGarmentPerk():String {
-			return _upperGarment.perk;
+			return upperGarment.perk;
 		}
 		override public function get upperGarmentValue():Number {
-			return _upperGarment.value;
-		}
-		public function get upperGarment():Undergarment
-		{
-			return _upperGarment;
+			return upperGarment.value;
 		}
 
 		override public function get lowerGarmentName():String {
-			return _lowerGarment.name;
+			return lowerGarment.name;
 		}
 		override public function get lowerGarmentPerk():String {
-			return _lowerGarment.perk;
+			return lowerGarment.perk;
 		}
 		override public function get lowerGarmentValue():Number {
-			return _lowerGarment.value;
+			return lowerGarment.value;
 		}
-		public function get lowerGarment():Undergarment
-		{
-			return _lowerGarment;
+		
+		public function equippedItem(slot:int):Equipable {
+			return _equipment[slot];
 		}
-
-		public function get armor():Armor
-		{
-			return _armor;
-		}
-
-		public function setArmor(newArmor:Armor):Armor {
-			//Returns the old armor, allowing the caller to discard it, store it or try to place it in the player's inventory
-			//Can return null, in which case caller should discard.
-			var oldArmor:Armor = _armor.playerRemove(); //The armor is responsible for removing any bonuses, perks, etc.
-			if (newArmor == null) {
-				CoC_Settings.error(short + ".armor is set to null");
-				newArmor = ArmorLib.COMFORTABLE_UNDERCLOTHES;
+		
+		/** slot no. of currently equipped item or -1 if not found */
+		public function slotOfEquippedItem(item:Equipable):int {
+			var slot:int;
+			var slots:Array = (item as Equipable).slots();
+			for each (slot in slots) {
+				if (_equipment[slot] == item) return slot;
 			}
-			_armor = newArmor.playerEquip(); //The armor can also choose to equip something else - useful for Ceraph's trap armor
-			return oldArmor;
+			return -1;
 		}
 
-		/*
-		public function set armor(value:Armor):void
-		{
-			if (value == null){
-				CoC_Settings.error(short+".armor is set to null");
-				value = ArmorLib.COMFORTABLE_UNDERCLOTHES;
+		public function equipmentSlotUnlocked(slot:int):Boolean {
+			if (slot == ItemConstants.SLOT_RING_4) return hasPerk(PerkLib.FourthRing);
+			if (slot == ItemConstants.SLOT_RING_3) return hasPerk(PerkLib.ThirdRing);
+			if (slot == ItemConstants.SLOT_RING_2) return hasPerk(PerkLib.SecondRing);
+			return true;
+		}
+		
+		/**
+		 * Find a suitable slot where item could be equipped into.
+		 * Returns -1 if not found.
+		 */
+		public function slotForItem(item:Equipable):int {
+			var slot:int;
+			var slots:Array = (item as Equipable).slots();
+			if (slots.length == 1) {
+				slot = slots[0];
+				if (equipmentSlotUnlocked(slot) && equippedItem(slot).canUnequip(false)) return slot;
+				return -1;
 			}
-			value.equip(this, false, false);
-		}
-		*/
-
-		// in case you don't want to call the value.equip
-		public function setArmorHiddenField(value:Armor):void
-		{
-			this._armor = value;
-		}
-
-		public function get weapon():Weapon
-		{
-			return _weapon;
-		}
-
-		public function setWeapon(newWeapon:Weapon):Weapon {
-			//Returns the old weapon, allowing the caller to discard it, store it or try to place it in the player's inventory
-			//Can return null, in which case caller should discard.
-			var oldWeapon:Weapon = _weapon.playerRemove(); //The weapon is responsible for removing any bonuses, perks, etc.
-			if (newWeapon == null) {
-				CoC_Settings.error(short + ".weapon (melee) is set to null");
-				newWeapon = WeaponLib.FISTS;
-			}
-			_weapon = newWeapon.playerEquip(); //The weapon can also choose to equip something else
-			return oldWeapon;
-		}
-
-		/*
-		public function set weapon(value:Weapon):void
-		{
-			if (value == null){
-				CoC_Settings.error(short+".weapon is set to null");
-				value = WeaponLib.FISTS;
-			}
-			value.equip(this, false, false);
-		}
-		*/
-
-		// in case you don't want to call the value.equip
-		public function setWeaponHiddenField(value:Weapon):void
-		{
-			this._weapon = value;
-		}
-
-		//Range Weapon, added by Ormael
-		public function get weaponRange():WeaponRange
-		{
-			return _weaponRange;
-		}
-
-		public function setWeaponRange(newWeaponRange:WeaponRange):WeaponRange {
-			//Returns the old shield, allowing the caller to discard it, store it or try to place it in the player's inventory
-			//Can return null, in which case caller should discard.
-			var oldWeaponRange:WeaponRange = _weaponRange.playerRemove();
-			if (newWeaponRange == null) {
-				CoC_Settings.error(short + ".weapon (range) is set to null");
-				newWeaponRange = WeaponRangeLib.NOTHING;
-			}
-			_weaponRange = newWeaponRange.playerEquip();
-			return oldWeaponRange;
-		}
-
-		// in case you don't want to call the value.equip
-		public function setWeaponRangeHiddenField(value:WeaponRange):void
-		{
-			this._weaponRange = value;
-		}
-
-		//Flying Swords, added by Ormael
-		public function get weaponFlyingSwords():FlyingSwords
-		{
-			return _weaponFlyingSwords;
-		}
-
-		public function setWeaponFlyingSwords(newWeaponFlyingSwords:FlyingSwords):FlyingSwords {
-			//Returns the old flying Swords, allowing the caller to discard it, store it or try to place it in the player's inventory
-			//Can return null, in which case caller should discard.
-			var oldWeaponFlyingSwords:FlyingSwords = _weaponFlyingSwords.playerRemove();
-			if (newWeaponFlyingSwords == null) {
-				CoC_Settings.error(short + ".weapon (flying swords) is set to null");
-				newWeaponFlyingSwords = FlyingSwordsLib.NOTHING;
-			}
-			_weaponFlyingSwords = newWeaponFlyingSwords.playerEquip();
-			return oldWeaponFlyingSwords;
-		}
-
-		// in case you don't want to call the value.equip
-		public function setWeaponFlyingSwordsHiddenField(value:FlyingSwords):void
-		{
-			this._weaponFlyingSwords = value;
-		}
-
-		//Misc Jewelry, added by Ormael
-		public function get miscJewelry():MiscJewelry
-		{
-			return _miscjewelry;
-		}
-
-		public function setMiscJewelry(newMiscJewelry:MiscJewelry):MiscJewelry {
-			//Returns the old misc jewelery, allowing the caller to discard it, store it or try to place it in the player's inventory
-			//Can return null, in which case caller should discard.
-			var oldMiscJewelry:MiscJewelry = _miscjewelry.playerRemove();
-			if (newMiscJewelry == null) {
-				CoC_Settings.error(short + ".miscjewelry is set to null");
-				newMiscJewelry = MiscJewelryLib.NOTHING;
-			}
-			_miscjewelry = newMiscJewelry.playerEquip(); //The head jewelry can also choose to equip something else - useful for Ceraph's trap armor
-			return oldMiscJewelry;
-		}
-		// in case you don't want to call the value.equip
-		public function setMiscJewelryHiddenField(value:MiscJewelry):void
-		{
-			this._miscjewelry = value;
-		}
-
-		public function get miscJewelry2():MiscJewelry
-		{
-			return _miscjewelry2;
-		}
-
-		public function setMiscJewelry2(newMiscJewelry:MiscJewelry):MiscJewelry {
-			//Returns the old misc jewelery, allowing the caller to discard it, store it or try to place it in the player's inventory
-			//Can return null, in which case caller should discard.
-			var oldMiscJewelry:MiscJewelry = _miscjewelry2.playerRemove();
-			if (newMiscJewelry == null) {
-				CoC_Settings.error(short + ".miscjewelry2 is set to null");
-				newMiscJewelry = MiscJewelryLib.NOTHING;
-			}
-			_miscjewelry2 = newMiscJewelry.playerEquip(); //The head jewelry can also choose to equip something else - useful for Ceraph's trap armor
-			return oldMiscJewelry;
-		}
-		// in case you don't want to call the value.equip
-		public function setMiscJewelryHiddenField2(value:MiscJewelry):void
-		{
-			this._miscjewelry2 = value;
-		}
-
-		//Head Jewelry, added by Ormael
-		public function get headJewelry():HeadJewelry
-		{
-			return _headjewelry;
-		}
-
-		public function setHeadJewelry(newHeadJewelry:HeadJewelry):HeadJewelry {
-			//Returns the old head jewelery, allowing the caller to discard it, store it or try to place it in the player's inventory
-			//Can return null, in which case caller should discard.
-			var oldHeadJewelry:HeadJewelry = _headjewelry.playerRemove();
-			if (newHeadJewelry == null) {
-				CoC_Settings.error(short + ".headjewelry is set to null");
-				newHeadJewelry = HeadJewelryLib.NOTHING;
-			}
-			_headjewelry = newHeadJewelry.playerEquip(); //The head jewelry can also choose to equip something else - useful for Ceraph's trap armor
-			return oldHeadJewelry;
-		}
-		// in case you don't want to call the value.equip
-		public function setHeadJewelryHiddenField(value:HeadJewelry):void
-		{
-			this._headjewelry = value;
-		}
-
-		//Necklace, added by Ormael
-		public function get necklace():Necklace
-		{
-			return _necklace;
-		}
-
-		public function setNecklace(newNecklace:Necklace):Necklace {
-			//Returns the old necklace, allowing the caller to discard it, store it or try to place it in the player's inventory
-			//Can return null, in which case caller should discard.
-			var oldNecklace:Necklace = _necklace.playerRemove();
-			if (newNecklace == null) {
-				CoC_Settings.error(short + ".necklace is set to null");
-				newNecklace = NecklaceLib.NOTHING;
-			}
-			_necklace = newNecklace.playerEquip(); //The necklace can also choose to equip something else - useful for Ceraph's trap armor
-			return oldNecklace;
-		}
-		// in case you don't want to call the value.equip
-		public function setNecklaceHiddenField(value:Necklace):void
-		{
-			this._necklace = value;
-		}
-
-		//Jewelry, added by Kitteh6660
-		public function get jewelry():Jewelry
-		{
-			return _jewelry;
-		}
-
-		public function setJewelry(newJewelry:Jewelry):Jewelry {
-			//Returns the old jewelry, allowing the caller to discard it, store it or try to place it in the player's inventory
-			//Can return null, in which case caller should discard.
-			var oldJewelry:Jewelry = _jewelry.playerRemove(); //The armor is responsible for removing any bonuses, perks, etc.
-			if (newJewelry == null) {
-				CoC_Settings.error(short + ".jewelry is set to null");
-				newJewelry = JewelryLib.NOTHING;
-			}
-			_jewelry = newJewelry.playerEquip(); //The jewelry can also choose to equip something else - useful for Ceraph's trap armor
-			return oldJewelry;
-		}
-		// in case you don't want to call the value.equip
-		public function setJewelryHiddenField(value:Jewelry):void
-		{
-			this._jewelry = value;
-		}
-
-		public function get jewelry2():Jewelry
-		{
-			return _jewelry2;
-		}
-
-		public function setJewelry2(newJewelry:Jewelry):Jewelry {
-			//Returns the old jewelry, allowing the caller to discard it, store it or try to place it in the player's inventory
-			//Can return null, in which case caller should discard.
-			var oldJewelry:Jewelry = _jewelry2.playerRemove(); //The armor is responsible for removing any bonuses, perks, etc.
-			if (newJewelry == null) {
-				CoC_Settings.error(short + ".jewelry2 is set to null");
-				newJewelry = JewelryLib.NOTHING;
-			}
-			_jewelry2 = newJewelry.playerEquip(); //The jewelry can also choose to equip something else - useful for Ceraph's trap armor
-			return oldJewelry;
-		}
-		// in case you don't want to call the value.equip
-		public function setJewelryHiddenField2(value:Jewelry):void
-		{
-			this._jewelry2 = value;
-		}
-
-		public function get jewelry3():Jewelry
-		{
-			return _jewelry3;
-		}
-
-		public function setJewelry3(newJewelry:Jewelry):Jewelry {
-			//Returns the old jewelry, allowing the caller to discard it, store it or try to place it in the player's inventory
-			//Can return null, in which case caller should discard.
-			var oldJewelry:Jewelry = _jewelry3.playerRemove(); //The armor is responsible for removing any bonuses, perks, etc.
-			if (newJewelry == null) {
-				CoC_Settings.error(short + ".jewelry2 is set to null");
-				newJewelry = JewelryLib.NOTHING;
-			}
-			_jewelry3 = newJewelry.playerEquip(); //The jewelry can also choose to equip something else - useful for Ceraph's trap armor
-			return oldJewelry;
-		}
-		// in case you don't want to call the value.equip
-		public function setJewelryHiddenField3(value:Jewelry):void
-		{
-			this._jewelry3 = value;
-		}
-
-		public function get jewelry4():Jewelry
-		{
-			return _jewelry4;
-		}
-
-		public function setJewelry4(newJewelry:Jewelry):Jewelry {
-			//Returns the old jewelry, allowing the caller to discard it, store it or try to place it in the player's inventory
-			//Can return null, in which case caller should discard.
-			var oldJewelry:Jewelry = _jewelry4.playerRemove(); //The armor is responsible for removing any bonuses, perks, etc.
-			if (newJewelry == null) {
-				CoC_Settings.error(short + ".jewelry2 is set to null");
-				newJewelry = JewelryLib.NOTHING;
-			}
-			_jewelry4 = newJewelry.playerEquip(); //The jewelry can also choose to equip something else - useful for Ceraph's trap armor
-			return oldJewelry;
-		}
-		// in case you don't want to call the value.equip
-		public function setJewelryHiddenField4(value:Jewelry):void
-		{
-			this._jewelry4 = value;
-		}
-
-		public function setShield(newShield:Shield):Shield {
-			//Returns the old shield, allowing the caller to discard it, store it or try to place it in the player's inventory
-			//Can return null, in which case caller should discard.
-			var oldShield:Shield = _shield.playerRemove(); //The shield is responsible for removing any bonuses, perks, etc.
-			if (newShield == null) {
-				CoC_Settings.error(short + ".shield is set to null");
-				newShield = ShieldLib.NOTHING;
-			}
-			_shield = newShield.playerEquip(); //The shield can also choose to equip something else.
-			return oldShield;
-		}
-
-		// in case you don't want to call the value.equip
-		public function setShieldHiddenField(value:Shield):void
-		{
-			this._shield = value;
-		}
-
-		public function setUndergarment(newUndergarment:Undergarment, typeOverride:int = -1):Undergarment {
-			//Returns the old undergarment, allowing the caller to discard it, store it or try to place it in the player's inventory
-			//Can return null, in which case caller should discard.
-			var oldUndergarment:Undergarment = UndergarmentLib.NOTHING;
-			if (newUndergarment.type == UndergarmentLib.TYPE_UPPERWEAR || typeOverride == 0) {
-				oldUndergarment = _upperGarment.playerRemove(); //The undergarment is responsible for removing any bonuses, perks, etc.
-				if (newUndergarment == null) {
-					CoC_Settings.error(short + ".upperGarment is set to null");
-					newUndergarment = UndergarmentLib.NOTHING;
+			// find empty
+			for each (slot in slots) {
+				if (equipmentSlotUnlocked(slot) && equippedItem(slot).isNothing) {
+					return slot;
 				}
-				_upperGarment = newUndergarment.playerEquip(); //The undergarment can also choose to equip something else.
 			}
-			else if (newUndergarment.type == UndergarmentLib.TYPE_LOWERWEAR || typeOverride == 1) {
-				oldUndergarment = _lowerGarment.playerRemove(); //The undergarment is responsible for removing any bonuses, perks, etc.
-				if (newUndergarment == null) {
-					CoC_Settings.error(short + ".lowerGarment is set to null");
-					newUndergarment = UndergarmentLib.NOTHING;
+			// find unequippable
+			for each (slot in slots) {
+				if (equipmentSlotUnlocked(slot) && equippedItem(slot).canUnequip(false)) {
+					return slot;
 				}
-				_lowerGarment = newUndergarment.playerEquip(); //The undergarment can also choose to equip something else.
 			}
-			return oldUndergarment;
+			return -1;
 		}
-
-		// in case you don't want to call the value.equip
-		public function setUndergarmentHiddenField(value:Undergarment, type:int):void
-		{
-			if (type == UndergarmentLib.TYPE_UPPERWEAR) this._upperGarment = value;
-			else this._lowerGarment = value;
-		}
-
-		//Vehicles, added by Ormael
-		public function get vehicles():Vehicles
-		{
-			return _vehicle;
-		}
-
-		public function setVehicle(newVehicle:Vehicles):Vehicles {
-			//Returns the old vehicle, allowing the caller to discard it, store it or try to place it in the player's inventory
-			//Can return null, in which case caller should discard.
-			var oldVehicle:Vehicles = _vehicle.playerRemove();
-			if (newVehicle == null) {
-				CoC_Settings.error(short + ".vehicle is set to null");
-				newVehicle = VehiclesLib.NOTHING;
+		
+		public function countSameEquippedItems(item:Equipable):int {
+			var n:int = 0;
+			for each (var slot:int in item.slots()) {
+				if (equippedItem(slot) == item) n++;
 			}
-			_vehicle = newVehicle.playerEquip(); //The vehicle can also choose to equip something else
-			return oldVehicle;
+			return n;
 		}
-		// in case you don't want to call the value.equip
-		public function setVehicleHiddenField(value:Vehicles):void
-		{
-			this._vehicle = value;
+		
+		/**
+		 * Equip an item into slot, replacing one equipped there.
+		 * It is caller's responsibility to take equipped item from inventory and handle returned item.
+		 * There are 3 cases:
+		 * - failed to unequip/equip (return value is null)
+		 * - equipped to empty slot or unequipped item disappeared (return value isNothing is true)
+		 * - equipped, replacing another item (return value isNothing is false) - put return value to inventory
+		 * @param slot
+		 * @param newItem
+		 * @param doOutput print text
+		 * @param force force unequip&equip, skip checks
+		 * @return returned item: null if failed to unequip, otherwise item to put into inventory (could be nothing!)
+		 */
+		public function internalEquipItem(slot:int, newItem:Equipable, doOutput:Boolean = true, force:Boolean = false):ItemType {
+			if (newItem.isNothing) {
+				return internalUnequipItem(slot, doOutput, force);
+			}
+			if (!force) {
+				if (!newItem.canEquip(doOutput)) return null;
+			}
+			var oldItem:Equipable = _equipment[slot];
+			var returnItem:ItemType;
+			if (oldItem.isNothing) {
+				returnItem = oldItem;
+			} else {
+				returnItem = internalUnequipItem(slot, doOutput, force);
+				if (returnItem == null) return null;
+			}
+			saveHPRatio();
+			var actualItem:Equipable = newItem.beforeEquip(doOutput);
+			if (actualItem && !actualItem.isNothing) {
+				_equipment[slot] = actualItem;
+				actualItem.afterEquip(doOutput);
+			}
+			restoreHPRatio();
+			return returnItem;
+		}
+		
+		/**
+		 * Unequip an item from slot
+		 * It is caller's responsibility to place returned item into inventory.
+		 * There are 3 cases:
+		 * - failed to unequip (return value is null)
+		 * - no unequipped item or unequipped item disappeared (return value isNothing is true)
+		 * - unequipped (return value isNothing is false) - put return value to inventory
+		 * To unequip item and put it into backpack, use inventory.unequipSlotToInventory
+		 * @param slot
+		 * @param doOutput print text
+		 * @param force force unequip, skip checks
+		 * @return null if failed to unequip, otherwise item to put into inventory (could be nothing!)
+		 */
+		public function internalUnequipItem(slot:int, doOutput:Boolean=true, force:Boolean=false):ItemType {
+			saveHPRatio();
+			var oldItem:Equipable = _equipment[slot];
+			if (oldItem.isNothing) return oldItem;
+			if (!force) {
+				if (!oldItem.canUnequip(doOutput)) return null;
+			}
+			var returnItem:ItemType = oldItem.beforeUnequip(doOutput);
+			if (returnItem == null) {
+				trace("[WARNING] beforeUnequip returned null from "+oldItem.id+", should return 'nothing' instead");
+				returnItem = ItemConstants.EquipmentSlots[slot].nothing();
+			}
+			_equipment[slot] = ItemConstants.EquipmentSlots[slot].nothing();
+			oldItem.afterUnequip(doOutput);
+			restoreHPRatio();
+			return returnItem;
+		}
+		
+		public function get armor():Armor {
+			return _equipment[ItemConstants.SLOT_ARMOR] as Armor;
+		}
+		
+		/**
+		 * @param newItem new equipment
+		 * @param doOutput print texts
+		 * @param force ignore canEquip/canUnequip
+		 * @return null if failed to equip/unequip, otherwise returned item (could be nothing)
+		 */
+		public function setArmor(newItem:Armor, doOutput:Boolean=true, force:Boolean=false):Armor {
+			return internalEquipItem(ItemConstants.SLOT_ARMOR, newItem, doOutput, force) as Armor;
+		}
+		/**
+		 * @param doOutput print texts
+		 * @param force ignore canUnequip
+		 * @return null if failed to unequip, otherwise returned item (could be nothing)
+		 */
+		public function unequipArmor(doOutput:Boolean=true, force:Boolean=false):Armor {
+			return internalUnequipItem(ItemConstants.SLOT_ARMOR, doOutput, force) as Armor;
+		}
+
+		public function get weapon():Weapon {
+			return _equipment[ItemConstants.SLOT_WEAPON_MELEE] as Weapon;
+		}
+		
+		/**
+		 * @param newItem new equipment
+		 * @param doOutput print texts
+		 * @param force ignore canEquip/canUnequip
+		 * @return null if failed to equip/unequip, otherwise returned item (could be nothing)
+		 */
+		public function setWeapon(newItem:Weapon, doOutput:Boolean=true, force:Boolean=false):Weapon {
+			return internalEquipItem(ItemConstants.SLOT_WEAPON_MELEE, newItem, doOutput, force) as Weapon;
+		}
+		/**
+		 * @param doOutput print texts
+		 * @param force ignore canUnequip
+		 * @return null if failed to unequip, otherwise returned item (could be nothing)
+		 */
+		public function unequipWeapon(doOutput:Boolean=true, force:Boolean=false):Weapon {
+			return internalUnequipItem(ItemConstants.SLOT_WEAPON_MELEE, doOutput, force) as Weapon;
+		}
+		
+		public function get weaponRange():WeaponRange {
+			return _equipment[ItemConstants.SLOT_WEAPON_RANGED] as WeaponRange;
+		}
+		
+		/**
+		 * @param newItem new equipment
+		 * @param doOutput print texts
+		 * @param force ignore canEquip/canUnequip
+		 * @return null if failed to equip/unequip, otherwise returned item (could be nothing)
+		 */
+		public function setWeaponRange(newItem:WeaponRange, doOutput:Boolean=true, force:Boolean=false):WeaponRange {
+			return internalEquipItem(ItemConstants.SLOT_WEAPON_RANGED, newItem, doOutput, force) as WeaponRange;
+		}
+		/**
+		 * @param doOutput print texts
+		 * @param force ignore canUnequip
+		 * @return null if failed to unequip, otherwise returned item (could be nothing)
+		 */
+		public function unequipWeaponRange(doOutput:Boolean=true, force:Boolean=false):WeaponRange {
+			return internalUnequipItem(ItemConstants.SLOT_WEAPON_RANGED, doOutput, force) as WeaponRange;
+		}
+		
+		public function get weaponFlyingSwords():FlyingSwords {
+			return _equipment[ItemConstants.SLOT_FLYING_SWORD] as FlyingSwords;
+		}
+		
+		/**
+		 * @param newItem new equipment
+		 * @param doOutput print texts
+		 * @param force ignore canEquip/canUnequip
+		 * @return null if failed to equip/unequip, otherwise returned item (could be nothing)
+		 */
+		public function setWeaponFlyingSwords(newItem:FlyingSwords, doOutput:Boolean=true, force:Boolean=false):FlyingSwords {
+			return internalEquipItem(ItemConstants.SLOT_FLYING_SWORD, newItem, doOutput, force) as FlyingSwords;
+		}
+		/**
+		 * @param doOutput print texts
+		 * @param force ignore canUnequip
+		 * @return null if failed to unequip, otherwise returned item (could be nothing)
+		 */
+		public function unequipWeaponFlyingSwords(doOutput:Boolean=true, force:Boolean=false):FlyingSwords {
+			return internalUnequipItem(ItemConstants.SLOT_FLYING_SWORD, doOutput, force) as FlyingSwords;
+		}
+
+		
+		public function emptyMiscJewelrySlot():int {
+			if (miscJewelry2.isNothing) return ItemConstants.SLOT_JEWELRY_MISC_2;
+			if (miscJewelry1.isNothing) return ItemConstants.SLOT_JEWELRY_MISC_1;
+			return -1;
+		}
+		
+		public function countMiscJewelry(itemType:MiscJewelry):int {
+			return (miscJewelry1 === itemType ? 1 : 0) +
+					(miscJewelry2 === itemType ? 1 : 0);
+		}
+		
+		public function get miscJewelry1():MiscJewelry {
+			return _equipment[ItemConstants.SLOT_JEWELRY_MISC_1] as MiscJewelry;
+		}
+		
+		/**
+		 * @param newItem new equipment
+		 * @param doOutput print texts
+		 * @param force ignore canEquip/canUnequip
+		 * @return null if failed to equip/unequip, otherwise returned item (could be nothing)
+		 */
+		public function setMiscJewelry1(newItem:MiscJewelry, doOutput:Boolean = true, force:Boolean = false):MiscJewelry {
+			return internalEquipItem(ItemConstants.SLOT_JEWELRY_MISC_1, newItem, doOutput, force) as MiscJewelry;
+		}
+		
+		/**
+		 * @param doOutput print texts
+		 * @param force ignore canUnequip
+		 * @return null if failed to unequip, otherwise returned item (could be nothing)
+		 */
+		public function unequipMiscJewelry1(doOutput:Boolean = true, force:Boolean = false):MiscJewelry {
+			return internalUnequipItem(ItemConstants.SLOT_JEWELRY_MISC_1, doOutput, force) as MiscJewelry;
+		}
+		
+		public function get miscJewelry2():MiscJewelry {
+			return _equipment[ItemConstants.SLOT_JEWELRY_MISC_2] as MiscJewelry;
+		}
+		
+		/**
+		 * @param newItem new equipment
+		 * @param doOutput print texts
+		 * @param force ignore canEquip/canUnequip
+		 * @return null if failed to equip/unequip, otherwise returned item (could be nothing)
+		 */
+		public function setMiscJewelry2(newItem:MiscJewelry, doOutput:Boolean = true, force:Boolean = false):MiscJewelry {
+			return internalEquipItem(ItemConstants.SLOT_JEWELRY_MISC_2, newItem, doOutput, force) as MiscJewelry;
+		}
+		
+		/**
+		 * @param doOutput print texts
+		 * @param force ignore canUnequip
+		 * @return null if failed to unequip, otherwise returned item (could be nothing)
+		 */
+		public function unequipMiscJewelry2(doOutput:Boolean = true, force:Boolean = false):MiscJewelry {
+			return internalUnequipItem(ItemConstants.SLOT_JEWELRY_MISC_2, doOutput, force) as MiscJewelry;
+		}
+		
+		public function get headJewelry():HeadJewelry {
+			return _equipment[ItemConstants.SLOT_HEAD] as HeadJewelry;
+		}
+		
+		/**
+		 * @param newItem new equipment
+		 * @param doOutput print texts
+		 * @param force ignore canEquip/canUnequip
+		 * @return null if failed to equip/unequip, otherwise returned item (could be nothing)
+		 */
+		public function setHeadJewelry(newItem:HeadJewelry, doOutput:Boolean = true, force:Boolean = false):HeadJewelry {
+			return internalEquipItem(ItemConstants.SLOT_HEAD, newItem, doOutput, force) as HeadJewelry;
+		}
+		
+		/**
+		 * @param doOutput print texts
+		 * @param force ignore canUnequip
+		 * @return null if failed to unequip, otherwise returned item (could be nothing)
+		 */
+		public function unequipHeadJewelry(doOutput:Boolean = true, force:Boolean = false):HeadJewelry {
+			return internalUnequipItem(ItemConstants.SLOT_HEAD, doOutput, force) as HeadJewelry;
+		}
+		
+		public function get necklace():Necklace {
+			return _equipment[ItemConstants.SLOT_NECK] as Necklace;
+		}
+		
+		/**
+		 * @param newItem new equipment
+		 * @param doOutput print texts
+		 * @param force ignore canEquip/canUnequip
+		 * @return null if failed to equip/unequip, otherwise returned item (could be nothing)
+		 */
+		public function setNecklace(newItem:Necklace, doOutput:Boolean = true, force:Boolean = false):Necklace {
+			return internalEquipItem(ItemConstants.SLOT_NECK, newItem, doOutput, force) as Necklace;
+		}
+		
+		/**
+		 * @param doOutput print texts
+		 * @param force ignore canUnequip
+		 * @return null if failed to unequip, otherwise returned item (could be nothing)
+		 */
+		public function unequipNecklace(doOutput:Boolean = true, force:Boolean = false):Necklace {
+			return internalUnequipItem(ItemConstants.SLOT_NECK, doOutput, force) as Necklace;
+		}
+
+		public function emptyJewelrySlot():int {
+			if (hasPerk(PerkLib.FourthRing) && jewelry4.isNothing) return ItemConstants.SLOT_RING_4;
+			if (hasPerk(PerkLib.ThirdRing) && jewelry3.isNothing) return ItemConstants.SLOT_RING_3;
+			if (hasPerk(PerkLib.SecondRing) && jewelry2.isNothing) return ItemConstants.SLOT_RING_2;
+			if (jewelry1.isNothing) return ItemConstants.SLOT_RING_1;
+			return -1;
+		}
+		
+		public function countRings(ringType:Jewelry):int {
+			return (jewelry1 === ringType ? 1 : 0) +
+					(jewelry2 === ringType ? 1 : 0) +
+					(jewelry3 === ringType ? 1 : 0) +
+					(jewelry4 === ringType ? 1 : 0);
+		}
+		
+		public function get jewelry1():Jewelry {
+			return _equipment[ItemConstants.SLOT_RING_1] as Jewelry;
+		}
+		
+		/**
+		 * @param newItem new equipment
+		 * @param doOutput print texts
+		 * @param force ignore canEquip/canUnequip
+		 * @return null if failed to equip/unequip, otherwise returned item (could be nothing)
+		 */
+		public function setJewelry1(newItem:Jewelry, doOutput:Boolean = true, force:Boolean = false):Jewelry {
+			return internalEquipItem(ItemConstants.SLOT_RING_1, newItem, doOutput, force) as Jewelry;
+		}
+		
+		/**
+		 * @param doOutput print texts
+		 * @param force ignore canUnequip
+		 * @return null if failed to unequip, otherwise returned item (could be nothing)
+		 */
+		public function unequipJewelry1(doOutput:Boolean = true, force:Boolean = false):Jewelry {
+			return internalUnequipItem(ItemConstants.SLOT_RING_1, doOutput, force) as Jewelry;
+		}
+		
+		public function get jewelry2():Jewelry {
+			return _equipment[ItemConstants.SLOT_RING_2] as Jewelry;
+		}
+		
+		/**
+		 * @param newItem new equipment
+		 * @param doOutput print texts
+		 * @param force ignore canEquip/canUnequip
+		 * @return null if failed to equip/unequip, otherwise returned item (could be nothing)
+		 */
+		public function setJewelry2(newItem:Jewelry, doOutput:Boolean = true, force:Boolean = false):Jewelry {
+			return internalEquipItem(ItemConstants.SLOT_RING_2, newItem, doOutput, force) as Jewelry;
+		}
+		
+		/**
+		 * @param doOutput print texts
+		 * @param force ignore canUnequip
+		 * @return null if failed to unequip, otherwise returned item (could be nothing)
+		 */
+		public function unequipJewelry2(doOutput:Boolean = true, force:Boolean = false):Jewelry {
+			return internalUnequipItem(ItemConstants.SLOT_RING_2, doOutput, force) as Jewelry;
+		}
+		
+		public function get jewelry3():Jewelry {
+			return _equipment[ItemConstants.SLOT_RING_3] as Jewelry;
+		}
+		
+		/**
+		 * @param newItem new equipment
+		 * @param doOutput print texts
+		 * @param force ignore canEquip/canUnequip
+		 * @return null if failed to equip/unequip, otherwise returned item (could be nothing)
+		 */
+		public function setJewelry3(newItem:Jewelry, doOutput:Boolean = true, force:Boolean = false):Jewelry {
+			return internalEquipItem(ItemConstants.SLOT_RING_3, newItem, doOutput, force) as Jewelry;
+		}
+		
+		/**
+		 * @param doOutput print texts
+		 * @param force ignore canUnequip
+		 * @return null if failed to unequip, otherwise returned item (could be nothing)
+		 */
+		public function unequipJewelry3(doOutput:Boolean = true, force:Boolean = false):Jewelry {
+			return internalUnequipItem(ItemConstants.SLOT_RING_3, doOutput, force) as Jewelry;
+		}
+		
+		public function get jewelry4():Jewelry {
+			return _equipment[ItemConstants.SLOT_RING_4] as Jewelry;
+		}
+		
+		/**
+		 * @param newItem new equipment
+		 * @param doOutput print texts
+		 * @param force ignore canEquip/canUnequip
+		 * @return null if failed to equip/unequip, otherwise returned item (could be nothing)
+		 */
+		public function setJewelry4(newItem:Jewelry, doOutput:Boolean = true, force:Boolean = false):Jewelry {
+			return internalEquipItem(ItemConstants.SLOT_RING_4, newItem, doOutput, force) as Jewelry;
+		}
+		
+		/**
+		 * @param doOutput print texts
+		 * @param force ignore canUnequip
+		 * @return null if failed to unequip, otherwise returned item (could be nothing)
+		 */
+		public function unequipJewelry4(doOutput:Boolean = true, force:Boolean = false):Jewelry {
+			return internalUnequipItem(ItemConstants.SLOT_RING_4, doOutput, force) as Jewelry;
+		}
+		
+		public function get shield():Shield {
+			return _equipment[ItemConstants.SLOT_SHIELD] as Shield;
+		}
+		
+		/**
+		 * @param newItem new equipment
+		 * @param doOutput print texts
+		 * @param force ignore canEquip/canUnequip
+		 * @return null if failed to equip/unequip, otherwise returned item (could be nothing)
+		 */
+		public function setShield(newItem:Shield, doOutput:Boolean = true, force:Boolean = false):Shield {
+			return internalEquipItem(ItemConstants.SLOT_SHIELD, newItem, doOutput, force) as Shield;
+		}
+		
+		/**
+		 * @param doOutput print texts
+		 * @param force ignore canUnequip
+		 * @return null if failed to unequip, otherwise returned item (could be nothing)
+		 */
+		public function unequipShield(doOutput:Boolean = true, force:Boolean = false):Shield {
+			return internalUnequipItem(ItemConstants.SLOT_SHIELD, doOutput, force) as Shield;
+		}
+		
+		public function get upperGarment():Undergarment {
+			return _equipment[ItemConstants.SLOT_UNDER_TOP] as Undergarment;
+		}
+		
+		/**
+		 * @param newItem new equipment
+		 * @param doOutput print texts
+		 * @param force ignore canEquip/canUnequip
+		 * @return null if failed to equip/unequip, otherwise returned item (could be nothing)
+		 */
+		public function setUnderTop(newItem:Undergarment, doOutput:Boolean = true, force:Boolean = false):Undergarment {
+			return internalEquipItem(ItemConstants.SLOT_UNDER_TOP, newItem, doOutput, force) as Undergarment;
+		}
+		
+		/**
+		 * @param doOutput print texts
+		 * @param force ignore canUnequip
+		 * @return null if failed to unequip, otherwise returned item (could be nothing)
+		 */
+		public function unequipUnderTop(doOutput:Boolean = true, force:Boolean = false):Undergarment {
+			return internalUnequipItem(ItemConstants.SLOT_UNDER_TOP, doOutput, force) as Undergarment;
+		}
+		
+		public function get lowerGarment():Undergarment {
+			return _equipment[ItemConstants.SLOT_UNDER_BOTTOM] as Undergarment;
+		}
+		
+		/**
+		 * @param newItem new equipment
+		 * @param doOutput print texts
+		 * @param force ignore canEquip/canUnequip
+		 * @return null if failed to equip/unequip, otherwise returned item (could be nothing)
+		 */
+		public function setUnderBottom(newItem:Undergarment, doOutput:Boolean = true, force:Boolean = false):Undergarment {
+			return internalEquipItem(ItemConstants.SLOT_UNDER_BOTTOM, newItem, doOutput, force) as Undergarment;
+		}
+		
+		/**
+		 * @param doOutput print texts
+		 * @param force ignore canUnequip
+		 * @return null if failed to unequip, otherwise returned item (could be nothing)
+		 */
+		public function unequipUnderBottom(doOutput:Boolean = true, force:Boolean = false):Undergarment {
+			return internalUnequipItem(ItemConstants.SLOT_UNDER_BOTTOM, doOutput, force) as Undergarment;
+		}
+		
+		public function get vehicles():Vehicles {
+			return _equipment[ItemConstants.SLOT_VEHICLE] as Vehicles;
+		}
+		
+		/**
+		 * @param newItem new equipment
+		 * @param doOutput print texts
+		 * @param force ignore canEquip/canUnequip
+		 * @return null if failed to equip/unequip, otherwise returned item (could be nothing)
+		 */
+		public function setVehicle(newItem:Vehicles, doOutput:Boolean = true, force:Boolean = false):Vehicles {
+			return internalEquipItem(ItemConstants.SLOT_VEHICLE, newItem, doOutput, force) as Vehicles;
+		}
+		
+		/**
+		 * @param doOutput print texts
+		 * @param force ignore canUnequip
+		 * @return null if failed to unequip, otherwise returned item (could be nothing)
+		 */
+		public function unequipVehicle(doOutput:Boolean = true, force:Boolean = false):Vehicles {
+			return internalUnequipItem(ItemConstants.SLOT_VEHICLE, doOutput, force) as Vehicles;
 		}
 
 		// Potions
@@ -2155,13 +2408,9 @@ use namespace CoC;
 			if(perkv1(IMutationsLib.MinotaurTesticlesIM) >= 2) lust -= 5;
 			if((hasPerk(PerkLib.UnicornBlessing) && cor <= 20) || (hasPerk(PerkLib.BicornBlessing) && cor >= 80)) lust -= 10;
 			if(hasPerk(PerkLib.ChiReflowLust)) lust -= UmasShop.NEEDLEWORK_LUST_LUST_RESIST;
-			if(jewelryEffectId == JewelryLib.MODIFIER_LUST_R) lust -= jewelryEffectMagnitude;
-			if(jewelryEffectId2 == JewelryLib.MODIFIER_LUST_R) lust -= jewelryEffectMagnitude2;
-			if(jewelryEffectId3 == JewelryLib.MODIFIER_LUST_R) lust -= jewelryEffectMagnitude3;
-			if(jewelryEffectId4 == JewelryLib.MODIFIER_LUST_R) lust -= jewelryEffectMagnitude4;
 			if(headjewelryEffectId == HeadJewelryLib.MODIFIER_LUST_R) lust -= headjewelryEffectMagnitude;
 			if(necklaceEffectId == NecklaceLib.MODIFIER_LUST_R) lust -= necklaceEffectMagnitude;
-			if(jewelryEffectId == JewelryLib.MODIFIER_LUST_R && jewelryEffectId2 == JewelryLib.MODIFIER_LUST_R && jewelryEffectId3 == JewelryLib.MODIFIER_LUST_R && jewelryEffectId4 == JewelryLib.MODIFIER_LUST_R && headjewelryEffectId == HeadJewelryLib.MODIFIER_LUST_R && necklaceEffectId == NecklaceLib.MODIFIER_LUST_R) lust -= 15;
+			if(jewelry1.hasBuff('res_lust') && jewelry2.hasBuff('res_lust') && jewelry3.hasBuff('res_lust') && jewelry4.hasBuff('res_lust') && headjewelryEffectId == HeadJewelryLib.MODIFIER_LUST_R && necklaceEffectId == NecklaceLib.MODIFIER_LUST_R) lust -= 15;
 			if(BelisaFollower.HolyBand2 > 0) lust -= 10 * BelisaFollower.HolyBand2;
 			if(lust < minLustCap) lust = minLustCap;
 			if(statusEffectv1(StatusEffects.BlackCatBeer) > 0) {
@@ -2226,6 +2475,30 @@ use namespace CoC;
 			return lust;
 		}
 
+		public function jewelryAttackModifier():Number {
+			var attackMod:Number = 1;
+			if(jewelryEffectId == JewelryLib.MODIFIER_ATTACK_POWER) attackMod *= 1 + (jewelryEffectMagnitude / 100);
+			if(jewelryEffectId2 == JewelryLib.MODIFIER_ATTACK_POWER) attackMod *= 1 + (jewelryEffectMagnitude / 100);
+			if(jewelryEffectId3 == JewelryLib.MODIFIER_ATTACK_POWER) attackMod *= 1 + (jewelryEffectMagnitude / 100);
+			if(jewelryEffectId4 == JewelryLib.MODIFIER_ATTACK_POWER) attackMod *= 1 + (jewelryEffectMagnitude / 100);
+			if(headjewelryEffectId == HeadJewelryLib.MODIFIER_ATTACK_POWER) attackMod *= 1 + (jewelryEffectMagnitude / 100);
+			if(necklaceEffectId == NecklaceLib.MODIFIER_ATTACK_POWER) attackMod *= 1 + (jewelryEffectMagnitude / 100);
+
+			return attackMod;
+		}
+
+		public function jewelryRangeModifier():Number {
+			var attackMod:Number = 1;
+			if(jewelryEffectId == JewelryLib.MODIFIER_R_ATTACK_POWER) attackMod *= 1 + (jewelryEffectMagnitude / 100);
+			if(jewelryEffectId2 == JewelryLib.MODIFIER_R_ATTACK_POWER) attackMod *= 1 + (jewelryEffectMagnitude / 100);
+			if(jewelryEffectId3 == JewelryLib.MODIFIER_R_ATTACK_POWER) attackMod *= 1 + (jewelryEffectMagnitude / 100);
+			if(jewelryEffectId4 == JewelryLib.MODIFIER_R_ATTACK_POWER) attackMod *= 1 + (jewelryEffectMagnitude / 100);
+			if(headjewelryEffectId == HeadJewelryLib.MODIFIER_R_ATTACK_POWER) attackMod *= 1 + (jewelryEffectMagnitude / 100);
+			if(necklaceEffectId == NecklaceLib.MODIFIER_R_ATTACK_POWER) attackMod *= 1 + (jewelryEffectMagnitude / 100);
+
+			return attackMod;
+		}
+
 		public function effectiveLibido():Number {
 			var mins:Object = getAllMinStats();
 			var baseLib:Number = lib;
@@ -2269,7 +2542,7 @@ use namespace CoC;
 				var gainedWrath:Number = 0;
 				gainedWrath += Math.sqrt(damage / 10);
 				gainedWrath = Math.round(gainedWrath * wrathFromHPmulti());
-				if (gainedWrath > 0) EngineCore.WrathChange(gainedWrath, false);
+				if (gainedWrath > 0) EngineCore.WrathChange(gainedWrath);
 			}
 		}
 
@@ -2280,15 +2553,12 @@ use namespace CoC;
 			var magicmult:Number = 1;
 			if (hasPerk(PerkLib.ImprovedManaShield)) magicmult *= 0.25;
 			// if magical damage, double efficiency
-			if (magic == true) magicmult *= 0.2;
+			if (magic) magicmult *= 0.2;
 			// defensive staff channeling
 			if (hasPerk(PerkLib.DefensiveStaffChanneling) && (isStaffTypeWeapon() || isPartiallyStaffTypeWeapon())) magicmult *= 0.5;
 			if (damage * magicmult <= mana) {
 				mana -= (damage * magicmult);
-				if (display) {
-					if (damage > 0) outputText("<b>(<font color=\"#800000\">Absorbed " + damage + "</font>)</b>");
-					else outputText("<b>(<font color=\"#000080\">Absorbed " + damage + "</font>)</b>");
-				}
+				if (display) SceneLib.combat.CommasForDigits(damage, false, "Absorbed ");
 				game.mainView.statsView.showStatDown('mana');
 				dynStats("lus", 0); //Force display arrow.
 				return 0;
@@ -2296,10 +2566,7 @@ use namespace CoC;
 			else {
 				var partial:Number = Math.round(mana / magicmult);
 				damage -= partial;
-				if (display) {
-					if (damage > 0) outputText("<b>(<font color=\"#800000\">Absorbed " + partial + "</font>)</b>");
-					else outputText("<b>(<font color=\"#000080\">Absorbed " + partial + "</font>)</b>");
-				}
+				if (display) SceneLib.combat.CommasForDigits(partial, false, "Absorbed ");
 				mana = 0;
 				game.mainView.statsView.showStatDown('mana');
 				dynStats("lus", 0); //Force display arrow.
@@ -2309,19 +2576,13 @@ use namespace CoC;
 		public function bloodShieldAbsorb(damage:Number, display:Boolean = false):Number{
 			if (damage <= statusEffectv1(StatusEffects.BloodShield)) {
 				addStatusValue(StatusEffects.BloodShield,1,-damage);
-				if (display) {
-					if (damage > 0) outputText("<b>(<font color=\"#800000\">Absorbed " + damage + "</font>)</b>");
-					else outputText("<b>(<font color=\"#000080\">Absorbed " + damage + "</font>)</b>");
-				}
+				if (display) SceneLib.combat.CommasForDigits(damage, false, "Absorbed ");
 				return 0;
 			}
 			else {
 				var partial:Number = statusEffectv1(StatusEffects.BloodShield);
 				damage -= partial;
-				if (display) {
-					if (damage > 0) outputText("<b>(<font color=\"#800000\">Absorbed " + partial + "</font>)</b>");
-					else outputText("<b>(<font color=\"#000080\">Absorbed " + partial + "</font>)</b>");
-				}
+				if (display) SceneLib.combat.CommasForDigits(partial, false, "Absorbed ");
 				removeStatusEffect(StatusEffects.BloodShield);
 				return damage;
 			}
@@ -2346,6 +2607,9 @@ use namespace CoC;
 			damage = difficultyDamageMultiplier(damage);
 			//all dmg reduction effect(s)
 			if (CoC.instance.monster.hasStatusEffect(StatusEffects.EnergyDrain)) damage *= 0.8;
+			if (hasStatusEffect(StatusEffects.GreenCovenant)) damage *= 0.25;
+			if (CoC.instance.monster.hasStatusEffect(StatusEffects.BloodShower)) damage *= 0.2;
+			if (CoC.instance.monster.hasStatusEffect(StatusEffects.CorpseExplosion)) damage *= (1 - (0.2 * CoC.instance.monster.statusEffectv1(StatusEffects.CorpseExplosion)));
 			//Round
 			damage = Math.round(damage);
 			// we return "1 damage received" if it is in (0..1) but deduce no HP
@@ -2422,18 +2686,15 @@ use namespace CoC;
 					//game.HPChange(-damage, display);
 					damage = Math.round(damage);
 					HP -= damage;
-					if (display) {
-						if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
-						else outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>");
-					}
+					if (display) SceneLib.combat.CommasForDigits(damage);
 					game.mainView.statsView.showStatDown('hp');
 					dynStats("lus", 0); //Force display arrow.
 				}
 				if (flags[kFLAGS.MINOTAUR_CUM_REALLY_ADDICTED_STATE] > 0) {
-					dynStats("lus", int(damage / 2));
+					dynStats("lus", int(damage / 2), "scale", false);
 				}
 				if (damagetype == 0 && flags[kFLAGS.YAMATA_MASOCHIST] > 1 && flags[kFLAGS.AIKO_BOSS_COMPLETE] < 1) {
-					dynStats("lus", int(damage / 8));
+					dynStats("lus", int(damage / 8), "scale", false);
 				}
 				//Prevent negatives
 				if (HP < minHP()){
@@ -2483,10 +2744,13 @@ use namespace CoC;
 			if (perkv1(IMutationsLib.YetiFatIM) >= 3) {
 				mult -= 20;
 			}
+			if (perkv1(IMutationsLib.AlphaHowlIM) >= 2) {
+				mult -= (2*LunaFollower.WerewolfPackMember);
+			}
 			if (hasPerk(PerkLib.FenrirSpikedCollar)) {
 				mult -= 15;
 			}
-			if (hasPerk(PerkLib.Juggernaut) && tou >= 100 && (armorPerk == "Heavy" || _armor.name == "Drider-weave Armor")) {
+			if (hasPerk(PerkLib.Juggernaut) && tou >= 100 && (armorPerk == "Heavy" || armor.name == "Drider-weave Armor")) {
 				mult -= 10;
 			}
 			if (hasPerk(PerkLib.ImmovableObject) && tou >= 75) {
@@ -2495,7 +2759,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.AyoArmorProficiency) && tou >= 100 && (armorPerk == "Light Ayo" || armorPerk == "Heavy Ayo" || armorPerk == "Ultra Heavy Ayo")) {
 				mult -= 10;
 			}
-			if (hasPerk(PerkLib.HeavyArmorProficiency) && tou >= 75 && (armorPerk == "Heavy" || _armor.name == "Drider-weave Armor")) {
+			if (hasPerk(PerkLib.HeavyArmorProficiency) && tou >= 75 && (armorPerk == "Heavy" || armor.name == "Drider-weave Armor")) {
 				mult -= 10;
 			}
 			if (hasPerk(PerkLib.ShieldHarmony) && tou >= 100 && isShieldsForShieldBash() && shieldName != "nothing" && !hasStatusEffect(StatusEffects.Stunned)) {
@@ -2504,7 +2768,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.KnightlySword) && isSwordTypeWeapon() && isShieldsForShieldBash()) {
 				mult -= 10;
 			}
-			if (hasPerk(PerkLib.NakedTruth) && spe >= 75 && lib >= 60 && armor.hasTag(ItemTags.REVEALING)) {
+			if (hasPerk(PerkLib.NakedTruth) && spe >= 75 && lib >= 60 && armor.hasTag(ItemTags.A_REVEALING)) {
 				mult -= 10;
 			}
 			if (hasPerk(PerkLib.FluidBody) && meetUnhinderedReq()) {
@@ -2540,13 +2804,9 @@ use namespace CoC;
 					else mult -= (lust100 - 50);
 				}
 			}
-			if (jewelryEffectId == JewelryLib.MODIFIER_PHYS_R) mult -= jewelryEffectMagnitude;
-			if (jewelryEffectId2 == JewelryLib.MODIFIER_PHYS_R) mult -= jewelryEffectMagnitude2;
-			if (jewelryEffectId3 == JewelryLib.MODIFIER_PHYS_R) mult -= jewelryEffectMagnitude3;
-			if (jewelryEffectId4 == JewelryLib.MODIFIER_PHYS_R) mult -= jewelryEffectMagnitude4;
 			if (headjewelryEffectId == HeadJewelryLib.MODIFIER_PHYS_R) mult -= headjewelryEffectMagnitude;
 			if (necklaceEffectId == NecklaceLib.MODIFIER_PHYS_R) mult -= necklaceEffectMagnitude;
-			if (jewelryEffectId == JewelryLib.MODIFIER_PHYS_R && jewelryEffectId2 == JewelryLib.MODIFIER_PHYS_R && jewelryEffectId3 == JewelryLib.MODIFIER_PHYS_R && jewelryEffectId4 == JewelryLib.MODIFIER_PHYS_R && headjewelryEffectId == HeadJewelryLib.MODIFIER_PHYS_R && necklaceEffectId == NecklaceLib.MODIFIER_PHYS_R) mult -= 9;
+			if (jewelry1.hasBuff('res_physical') && jewelry2.hasBuff('res_physical') && jewelry3.hasBuff('res_physical') && jewelry4.hasBuff('res_physical') && headjewelryEffectId == HeadJewelryLib.MODIFIER_PHYS_R && necklaceEffectId == NecklaceLib.MODIFIER_PHYS_R) mult -= 9;
 			//Defend = 35-95% reduction
 			if (hasStatusEffect(StatusEffects.Defend)) {
 				if (hasPerk(PerkLib.DefenceStance) && tou >= 80) {
@@ -2563,6 +2823,7 @@ use namespace CoC;
 			if (sac && sac.value1 == UmasShop.MASSAGE_RELAXATION) {
 				mult -= 100 * sac.value2;
 			}
+			mult -= resPhysicalStat.value;
 			//Caps damage reduction at 80/99%
 			if (hasStatusEffect(StatusEffects.Defend) && hasPerk(PerkLib.PerfectDefenceStance) && tou >= 160 && mult < 1) mult = 1;
 			if (!hasStatusEffect(StatusEffects.Defend) && mult < 20) mult = 20;
@@ -2609,7 +2870,7 @@ use namespace CoC;
 			mult -= armorMMod;
 			if (mult < 20) mult = 20;
 			//--PERKS--
-			if (hasPerk(PerkLib.NakedTruth) && spe >= 75 && lib >= 60 && armor.hasTag(ItemTags.REVEALING)) {
+			if (hasPerk(PerkLib.NakedTruth) && spe >= 75 && lib >= 60 && armor.hasTag(ItemTags.A_REVEALING)) {
 				mult -= 10;
 			}
 			if (perkv1(IMutationsLib.DraconicBonesIM) >= 2) {
@@ -2640,13 +2901,12 @@ use namespace CoC;
 			if (CoC.instance.monster.statusEffectv1(StatusEffects.EnemyLoweredDamageH) > 0) {
 				mult -= CoC.instance.monster.statusEffectv2(StatusEffects.EnemyLoweredDamageH);
 			}
-			if (jewelryEffectId == JewelryLib.MODIFIER_MAGIC_R) mult -= jewelryEffectMagnitude;
-			if (jewelryEffectId2 == JewelryLib.MODIFIER_MAGIC_R) mult -= jewelryEffectMagnitude2;
-			if (jewelryEffectId3 == JewelryLib.MODIFIER_MAGIC_R) mult -= jewelryEffectMagnitude3;
-			if (jewelryEffectId4 == JewelryLib.MODIFIER_MAGIC_R) mult -= jewelryEffectMagnitude4;
+			if (weapon == game.weapons.NEXUS) {
+				mult -= 20;
+			}
 			if (headjewelryEffectId == HeadJewelryLib.MODIFIER_MAGIC_R) mult -= headjewelryEffectMagnitude;
 			if (necklaceEffectId == NecklaceLib.MODIFIER_MAGIC_R) mult -= necklaceEffectMagnitude;
-			if (jewelryEffectId == JewelryLib.MODIFIER_MAGIC_R && jewelryEffectId2 == JewelryLib.MODIFIER_MAGIC_R && jewelryEffectId3 == JewelryLib.MODIFIER_MAGIC_R && jewelryEffectId4 == JewelryLib.MODIFIER_MAGIC_R && headjewelryEffectId == HeadJewelryLib.MODIFIER_MAGIC_R && necklaceEffectId == NecklaceLib.MODIFIER_MAGIC_R) mult -= 6;
+			if (jewelry1.hasBuff('res_magic') && jewelry2.hasBuff('res_magic') && jewelry3.hasBuff('res_magic') && jewelry4.hasBuff('res_magic') && headjewelryEffectId == HeadJewelryLib.MODIFIER_MAGIC_R && necklaceEffectId == NecklaceLib.MODIFIER_MAGIC_R) mult -= 6;
 			//Defend = 35-95% reduction
 			if (hasStatusEffect(StatusEffects.Defend)) {
 				if (hasPerk(PerkLib.DefenceStance) && tou >= 80) {
@@ -2663,6 +2923,7 @@ use namespace CoC;
 			if (sac && sac.value1 == UmasShop.MASSAGE_RELAXATION) {
 				mult -= 100 * sac.value2;
 			}
+			mult -= resMagicStat.value;
 			//Caps damage reduction at 80/99%
 			if (hasStatusEffect(StatusEffects.Defend) && hasPerk(PerkLib.PerfectDefenceStance) && tou >= 160 && mult < 1) mult = 1;
 			if (!hasStatusEffect(StatusEffects.Defend) && mult < 20) mult = 20;
@@ -2707,21 +2968,19 @@ use namespace CoC;
 			if (lowerGarmentName == "HB shorts") mult -= 10;
 			if (hasPerk(PerkLib.FromTheFrozenWaste) || hasPerk(PerkLib.ColdAffinity)) mult += 100;
 			if (hasPerk(PerkLib.FireAffinity)) mult -= 50;
+			if (hasPerk(PerkLib.VegetalAffinity)) mult -= 50;
 			if (hasStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff1) && (statusEffectv2(StatusEffects.ShiraOfTheEastFoodBuff1) > 0)) mult -= statusEffectv2(StatusEffects.ShiraOfTheEastFoodBuff1);
-			if (hasStatusEffect(StatusEffects.DaoOfFire) && (statusEffectv2(StatusEffects.DaoOfFire) > 2)) mult -= 10;
-			if (jewelryEffectId == JewelryLib.MODIFIER_FIRE_R) mult -= jewelryEffectMagnitude;
-			if (jewelryEffectId2 == JewelryLib.MODIFIER_FIRE_R) mult -= jewelryEffectMagnitude2;
-			if (jewelryEffectId3 == JewelryLib.MODIFIER_FIRE_R) mult -= jewelryEffectMagnitude3;
-			if (jewelryEffectId4 == JewelryLib.MODIFIER_FIRE_R) mult -= jewelryEffectMagnitude4;
+			if (hasStatusEffect(StatusEffects.DaoOfFire) && (statusEffectv2(StatusEffects.DaoOfFire) > 3)) mult -= (10 * (statusEffectv2(StatusEffects.DaoOfFire) - 3));
 			if (headjewelryEffectId == HeadJewelryLib.MODIFIER_FIRE_R) mult -= headjewelryEffectMagnitude;
 			if (necklaceEffectId == NecklaceLib.MODIFIER_FIRE_R) mult -= necklaceEffectMagnitude;
-			if (jewelryEffectId == JewelryLib.MODIFIER_FIRE_R && jewelryEffectId2 == JewelryLib.MODIFIER_FIRE_R && jewelryEffectId3 == JewelryLib.MODIFIER_FIRE_R && jewelryEffectId4 == JewelryLib.MODIFIER_FIRE_R && headjewelryEffectId == HeadJewelryLib.MODIFIER_FIRE_R && necklaceEffectId == NecklaceLib.MODIFIER_FIRE_R) mult -= 15;
+			if (jewelry1.hasBuff('res_fire') && jewelry2.hasBuff('res_fire') && jewelry3.hasBuff('res_fire') && jewelry4.hasBuff('res_fire') && headjewelryEffectId == HeadJewelryLib.MODIFIER_FIRE_R && necklaceEffectId == NecklaceLib.MODIFIER_FIRE_R) mult -= 15;
 			if (CoC.instance.monster.statusEffectv1(StatusEffects.EnemyLoweredDamageH) > 0) {
 				mult -= CoC.instance.monster.statusEffectv2(StatusEffects.EnemyLoweredDamageH);
 			}
 			if (hasStatusEffect(StatusEffects.WinterClaw)) {
 				mult += 100;
 			}
+			mult -= resFireStat.value;
 			//Caps damage reduction at 100%
 			if (mult < 0) mult = 0;
 			return mult;
@@ -2764,24 +3023,21 @@ use namespace CoC;
 			if (hasPerk(PerkLib.FromTheFrozenWaste) || hasPerk(PerkLib.ColdAffinity)) mult -= 50;
 			if (hasPerk(PerkLib.IcyFlesh)) mult -= 40;
 			if (hasPerk(PerkLib.FireAffinity) || hasPerk(PerkLib.AffinityIgnis)) mult += 100;
-			if (jewelryEffectId == JewelryLib.MODIFIER_ICE_R) mult -= jewelryEffectMagnitude;
-			if (jewelryEffectId2 == JewelryLib.MODIFIER_ICE_R) mult -= jewelryEffectMagnitude2;
-			if (jewelryEffectId3 == JewelryLib.MODIFIER_ICE_R) mult -= jewelryEffectMagnitude3;
-			if (jewelryEffectId4 == JewelryLib.MODIFIER_ICE_R) mult -= jewelryEffectMagnitude4;
 			if (headjewelryEffectId == HeadJewelryLib.MODIFIER_ICE_R) mult -= headjewelryEffectMagnitude;
 			if (necklaceEffectId == NecklaceLib.MODIFIER_ICE_R) mult -= necklaceEffectMagnitude;
-			if (jewelryEffectId == JewelryLib.MODIFIER_ICE_R && jewelryEffectId2 == JewelryLib.MODIFIER_ICE_R && jewelryEffectId3 == JewelryLib.MODIFIER_ICE_R && jewelryEffectId4 == JewelryLib.MODIFIER_ICE_R && headjewelryEffectId == HeadJewelryLib.MODIFIER_ICE_R && necklaceEffectId == NecklaceLib.MODIFIER_ICE_R) mult -= 15;
+			if (jewelry1.hasBuff('res_ice') && jewelry2.hasBuff('res_ice') && jewelry3.hasBuff('res_ice') && jewelry4.hasBuff('res_ice') && headjewelryEffectId == HeadJewelryLib.MODIFIER_ICE_R && necklaceEffectId == NecklaceLib.MODIFIER_ICE_R) mult -= 15;
 			if (hasStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff1) && (statusEffectv3(StatusEffects.ShiraOfTheEastFoodBuff1) > 0)) mult -= statusEffectv3(StatusEffects.ShiraOfTheEastFoodBuff1);
 			if (hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
 				if (isRace(Races.MOUSE, 2) && (jewelryName == "Infernal Mouse ring" || jewelryName2 == "Infernal Mouse ring" || jewelryName3 == "Infernal Mouse ring" || jewelryName4 == "Infernal Mouse ring")) mult += 90;
 				else mult += 100;
 			}
-			if (hasStatusEffect(StatusEffects.DaoOfIce) && (statusEffectv2(StatusEffects.DaoOfIce) > 2)) mult -= 10;
+			if (hasStatusEffect(StatusEffects.DaoOfIce) && (statusEffectv2(StatusEffects.DaoOfIce) > 3)) mult -= (10 * (statusEffectv2(StatusEffects.DaoOfIce) - 3));
 			if (rearBody.type == RearBody.YETI_FUR) mult -= 20;
 			if (CoC.instance.monster.statusEffectv1(StatusEffects.EnemyLoweredDamageH) > 0) {
 				mult -= CoC.instance.monster.statusEffectv2(StatusEffects.EnemyLoweredDamageH);
 			}
 			if (hasStatusEffect(StatusEffects.AlterBindScroll3)) mult = 0;
+			mult -= resIceStat.value;
 			//Caps damage reduction at 100%
 			if (mult < 0) mult = 0;
 			return mult;
@@ -2825,17 +3081,14 @@ use namespace CoC;
 			if (perkv1(IMutationsLib.HeartOfTheStormIM) >= 2) mult -= 10;
 			if (perkv1(IMutationsLib.HeartOfTheStormIM) >= 3) mult -= 30;
 			if (hasPerk(PerkLib.AquaticAffinity) || hasPerk(PerkLib.AffinityUndine)) mult += 100;
-			if (jewelryEffectId == JewelryLib.MODIFIER_LIGH_R) mult -= jewelryEffectMagnitude;
-			if (jewelryEffectId2 == JewelryLib.MODIFIER_LIGH_R) mult -= jewelryEffectMagnitude2;
-			if (jewelryEffectId3 == JewelryLib.MODIFIER_LIGH_R) mult -= jewelryEffectMagnitude3;
-			if (jewelryEffectId4 == JewelryLib.MODIFIER_LIGH_R) mult -= jewelryEffectMagnitude4;
 			if (headjewelryEffectId == HeadJewelryLib.MODIFIER_LIGH_R) mult -= headjewelryEffectMagnitude;
 			if (necklaceEffectId == NecklaceLib.MODIFIER_LIGH_R) mult -= necklaceEffectMagnitude;
-			if (jewelryEffectId == JewelryLib.MODIFIER_LIGH_R && jewelryEffectId2 == JewelryLib.MODIFIER_LIGH_R && jewelryEffectId3 == JewelryLib.MODIFIER_LIGH_R && jewelryEffectId4 == JewelryLib.MODIFIER_LIGH_R && headjewelryEffectId == HeadJewelryLib.MODIFIER_LIGH_R && necklaceEffectId == NecklaceLib.MODIFIER_LIGH_R) mult -= 15;
-			if (hasStatusEffect(StatusEffects.DaoOfLightning) && (statusEffectv2(StatusEffects.DaoOfLightning) > 2)) mult -= 10;
+			if (jewelry1.hasBuff('res_lightning') && jewelry2.hasBuff('res_lightning') && jewelry3.hasBuff('res_lightning') && jewelry4.hasBuff('res_lightning') && headjewelryEffectId == HeadJewelryLib.MODIFIER_LIGH_R && necklaceEffectId == NecklaceLib.MODIFIER_LIGH_R) mult -= 15;
+			if (hasStatusEffect(StatusEffects.DaoOfLightning) && (statusEffectv2(StatusEffects.DaoOfLightning) > 3)) mult -= (10 * (statusEffectv2(StatusEffects.DaoOfLightning) - 3));
 			if (CoC.instance.monster.statusEffectv1(StatusEffects.EnemyLoweredDamageH) > 0) {
 				mult -= CoC.instance.monster.statusEffectv2(StatusEffects.EnemyLoweredDamageH);
 			}
+			mult -= resLightningStat.value;
 			//Caps damage reduction at 100%
 			if (mult < 0) mult = 0;
 			return mult;
@@ -2873,17 +3126,14 @@ use namespace CoC;
 			if (upperGarmentName == "HB shirt") mult -= 10;
 			if (lowerGarmentName == "HB shorts") mult -= 10;
 			if (hasPerk(PerkLib.DarknessAffinity)) mult -= 50;
-			if (jewelryEffectId == JewelryLib.MODIFIER_DARK_R) mult -= jewelryEffectMagnitude;
-			if (jewelryEffectId2 == JewelryLib.MODIFIER_DARK_R) mult -= jewelryEffectMagnitude2;
-			if (jewelryEffectId3 == JewelryLib.MODIFIER_DARK_R) mult -= jewelryEffectMagnitude3;
-			if (jewelryEffectId4 == JewelryLib.MODIFIER_DARK_R) mult -= jewelryEffectMagnitude4;
 			if (headjewelryEffectId == HeadJewelryLib.MODIFIER_DARK_R) mult -= headjewelryEffectMagnitude;
 			if (necklaceEffectId == NecklaceLib.MODIFIER_DARK_R) mult -= necklaceEffectMagnitude;
-			if (jewelryEffectId == JewelryLib.MODIFIER_DARK_R && jewelryEffectId2 == JewelryLib.MODIFIER_DARK_R && jewelryEffectId3 == JewelryLib.MODIFIER_DARK_R && jewelryEffectId4 == JewelryLib.MODIFIER_DARK_R && headjewelryEffectId == HeadJewelryLib.MODIFIER_DARK_R && necklaceEffectId == NecklaceLib.MODIFIER_DARK_R) mult -= 15;
-			if (hasStatusEffect(StatusEffects.DaoOfDarkness) && (statusEffectv2(StatusEffects.DaoOfDarkness) > 2)) mult -= 10;
+			if (jewelry1.hasBuff('res_darkness') && jewelry2.hasBuff('res_darkness') && jewelry3.hasBuff('res_darkness') && jewelry4.hasBuff('res_darkness') && headjewelryEffectId == HeadJewelryLib.MODIFIER_DARK_R && necklaceEffectId == NecklaceLib.MODIFIER_DARK_R) mult -= 15;
+			if (hasStatusEffect(StatusEffects.DaoOfDarkness) && (statusEffectv2(StatusEffects.DaoOfDarkness) > 3)) mult -= (10 * (statusEffectv2(StatusEffects.DaoOfDarkness) - 3));
 			if (CoC.instance.monster.statusEffectv1(StatusEffects.EnemyLoweredDamageH) > 0) {
 				mult -= CoC.instance.monster.statusEffectv2(StatusEffects.EnemyLoweredDamageH);
 			}
+			mult -= resDarknessStat.value;
 			//Caps damage reduction at 100%
 			if (mult < 0) mult = 0;
 			return mult;
@@ -2920,18 +3170,16 @@ use namespace CoC;
 			var mult:Number = damageMagicalPercent();
 			if (perkv1(IMutationsLib.VenomGlandsIM) >= 2) mult -= 5;
 			if (perkv1(IMutationsLib.VenomGlandsIM) >= 3) mult -= 10;
-			if (jewelryEffectId == JewelryLib.MODIFIER_POIS_R) mult -= jewelryEffectMagnitude;
-			if (jewelryEffectId2 == JewelryLib.MODIFIER_POIS_R) mult -= jewelryEffectMagnitude2;
-			if (jewelryEffectId3 == JewelryLib.MODIFIER_POIS_R) mult -= jewelryEffectMagnitude3;
-			if (jewelryEffectId4 == JewelryLib.MODIFIER_POIS_R) mult -= jewelryEffectMagnitude4;
+			if (perkv1(IMutationsLib.VenomGlandsIM) >= 4) mult -= 15;
 			if (headjewelryEffectId == HeadJewelryLib.MODIFIER_POIS_R) mult -= headjewelryEffectMagnitude;
 			if (necklaceEffectId == NecklaceLib.MODIFIER_POIS_R) mult -= necklaceEffectMagnitude;
-			if (jewelryEffectId == JewelryLib.MODIFIER_POIS_R && jewelryEffectId2 == JewelryLib.MODIFIER_POIS_R && jewelryEffectId3 == JewelryLib.MODIFIER_POIS_R && jewelryEffectId4 == JewelryLib.MODIFIER_POIS_R && headjewelryEffectId == HeadJewelryLib.MODIFIER_POIS_R && necklaceEffectId == NecklaceLib.MODIFIER_POIS_R) mult -= 15;
-			if (hasStatusEffect(StatusEffects.DaoOfPoison) && (statusEffectv2(StatusEffects.DaoOfPoison) > 2)) mult -= 10;
+			if (jewelry1.hasBuff('res_poison') && jewelry2.hasBuff('res_poison') && jewelry3.hasBuff('res_poison') && jewelry4.hasBuff('res_poison') && headjewelryEffectId == HeadJewelryLib.MODIFIER_POIS_R && necklaceEffectId == NecklaceLib.MODIFIER_POIS_R) mult -= 15;
+			if (hasStatusEffect(StatusEffects.DaoOfPoison) && (statusEffectv2(StatusEffects.DaoOfPoison) > 3)) mult -= (10 * (statusEffectv2(StatusEffects.DaoOfPoison) - 3));
 			if (CoC.instance.monster.statusEffectv1(StatusEffects.EnemyLoweredDamageH) > 0) {
 				mult -= CoC.instance.monster.statusEffectv2(StatusEffects.EnemyLoweredDamageH);
 			}
 			if (hasStatusEffect(StatusEffects.AlterBindScroll3)) mult = 0;
+			mult -= resPoisonStat.value;
 			//Caps damage reduction at 100%
 			if (mult < 0) mult = 0;
 			return mult;
@@ -2973,10 +3221,11 @@ use namespace CoC;
 			if (headjewelryEffectId == HeadJewelryLib.MODIFIER_POIS_R) mult -= headjewelryEffectMagnitude;
 			if (necklaceEffectId == NecklaceLib.MODIFIER_POIS_R) mult -= necklaceEffectMagnitude;
 			if (jewelryEffectId == JewelryLib.MODIFIER_POIS_R && jewelryEffectId2 == JewelryLib.MODIFIER_POIS_R && jewelryEffectId3 == JewelryLib.MODIFIER_POIS_R && jewelryEffectId4 == JewelryLib.MODIFIER_POIS_R && headjewelryEffectId == HeadJewelryLib.MODIFIER_POIS_R && necklaceEffectId == NecklaceLib.MODIFIER_POIS_R) mult -= 15;*/
-			if (hasStatusEffect(StatusEffects.DaoOfWind) && (statusEffectv2(StatusEffects.DaoOfWind) > 2)) mult -= 10;
+			if (hasStatusEffect(StatusEffects.DaoOfWind) && (statusEffectv2(StatusEffects.DaoOfWind) > 3)) mult -= (10 * (statusEffectv2(StatusEffects.DaoOfWind) - 3));
 			if (CoC.instance.monster.statusEffectv1(StatusEffects.EnemyLoweredDamageH) > 0) {
 				mult -= CoC.instance.monster.statusEffectv2(StatusEffects.EnemyLoweredDamageH);
 			}
+			mult -= resWindStat.value;
 			//Caps damage reduction at 100%
 			if (mult < 0) mult = 0;
 			return mult;
@@ -3018,10 +3267,11 @@ use namespace CoC;
 			if (headjewelryEffectId == HeadJewelryLib.MODIFIER_POIS_R) mult -= headjewelryEffectMagnitude;
 			if (necklaceEffectId == NecklaceLib.MODIFIER_POIS_R) mult -= necklaceEffectMagnitude;
 			if (jewelryEffectId == JewelryLib.MODIFIER_POIS_R && jewelryEffectId2 == JewelryLib.MODIFIER_POIS_R && jewelryEffectId3 == JewelryLib.MODIFIER_POIS_R && jewelryEffectId4 == JewelryLib.MODIFIER_POIS_R && headjewelryEffectId == HeadJewelryLib.MODIFIER_POIS_R && necklaceEffectId == NecklaceLib.MODIFIER_POIS_R) mult -= 15;*/
-			if (hasStatusEffect(StatusEffects.DaoOfWater) && (statusEffectv2(StatusEffects.DaoOfWater) > 2)) mult -= 10;
+			if (hasStatusEffect(StatusEffects.DaoOfWater) && (statusEffectv2(StatusEffects.DaoOfWater) > 3)) mult -= (10 * (statusEffectv2(StatusEffects.DaoOfWater) - 3));
 			if (CoC.instance.monster.statusEffectv1(StatusEffects.EnemyLoweredDamageH) > 0) {
 				mult -= CoC.instance.monster.statusEffectv2(StatusEffects.EnemyLoweredDamageH);
 			}
+			mult -= resWaterStat.value;
 			//Caps damage reduction at 100%
 			if (mult < 0) mult = 0;
 			return mult;
@@ -3063,10 +3313,11 @@ use namespace CoC;
 			if (headjewelryEffectId == HeadJewelryLib.MODIFIER_POIS_R) mult -= headjewelryEffectMagnitude;
 			if (necklaceEffectId == NecklaceLib.MODIFIER_POIS_R) mult -= necklaceEffectMagnitude;
 			if (jewelryEffectId == JewelryLib.MODIFIER_POIS_R && jewelryEffectId2 == JewelryLib.MODIFIER_POIS_R && jewelryEffectId3 == JewelryLib.MODIFIER_POIS_R && jewelryEffectId4 == JewelryLib.MODIFIER_POIS_R && headjewelryEffectId == HeadJewelryLib.MODIFIER_POIS_R && necklaceEffectId == NecklaceLib.MODIFIER_POIS_R) mult -= 15;*/
-			if (hasStatusEffect(StatusEffects.DaoOfEarth) && (statusEffectv2(StatusEffects.DaoOfEarth) > 2)) mult -= 10;
+			if (hasStatusEffect(StatusEffects.DaoOfEarth) && (statusEffectv2(StatusEffects.DaoOfEarth) > 3)) mult -= (10 * (statusEffectv2(StatusEffects.DaoOfEarth) - 3));
 			if (CoC.instance.monster.statusEffectv1(StatusEffects.EnemyLoweredDamageH) > 0) {
 				mult -= CoC.instance.monster.statusEffectv2(StatusEffects.EnemyLoweredDamageH);
 			}
+			mult -= resEarthStat.value;
 			//Caps damage reduction at 100%
 			if (mult < 0) mult = 0;
 			return mult;
@@ -3108,10 +3359,11 @@ use namespace CoC;
 			if (headjewelryEffectId == HeadJewelryLib.MODIFIER_POIS_R) mult -= headjewelryEffectMagnitude;
 			if (necklaceEffectId == NecklaceLib.MODIFIER_POIS_R) mult -= necklaceEffectMagnitude;
 			if (jewelryEffectId == JewelryLib.MODIFIER_POIS_R && jewelryEffectId2 == JewelryLib.MODIFIER_POIS_R && jewelryEffectId3 == JewelryLib.MODIFIER_POIS_R && jewelryEffectId4 == JewelryLib.MODIFIER_POIS_R && headjewelryEffectId == HeadJewelryLib.MODIFIER_POIS_R && necklaceEffectId == NecklaceLib.MODIFIER_POIS_R) mult -= 15;*/
-			if (hasStatusEffect(StatusEffects.DaoOfAcid) && (statusEffectv2(StatusEffects.DaoOfAcid) > 2)) mult -= 10;
+			if (hasStatusEffect(StatusEffects.DaoOfAcid) && (statusEffectv2(StatusEffects.DaoOfAcid) > 3)) mult -= (10 * (statusEffectv2(StatusEffects.DaoOfAcid) - 3));
 			if (CoC.instance.monster.statusEffectv1(StatusEffects.EnemyLoweredDamageH) > 0) {
 				mult -= CoC.instance.monster.statusEffectv2(StatusEffects.EnemyLoweredDamageH);
 			}
+			mult -= resAcidStat.value;
 			//Caps damage reduction at 100%
 			if (mult < 0) mult = 0;
 			return mult;
@@ -3146,7 +3398,7 @@ use namespace CoC;
 
 		public function eyesOfTheHunterAdeptBoost():Boolean {
 			return CoC.instance.monster.hasPerk(PerkLib.EnemyHugeType) || CoC.instance.monster.hasPerk(PerkLib.EnemyGroupType) || CoC.instance.monster.hasPerk(PerkLib.EnemyBeastOrAnimalMorphType) || CoC.instance.monster.hasPerk(PerkLib.EnemyConstructType) || CoC.instance.monster.hasPerk(PerkLib.EnemyFeralType) || CoC.instance.monster.hasPerk(PerkLib.EnemyGooType)
-			|| CoC.instance.monster.hasPerk(PerkLib.EnemyTrueDemon) || CoC.instance.monster.hasPerk(PerkLib.EnemyEliteType);
+			|| CoC.instance.monster.hasPerk(PerkLib.EnemyTrueDemon) || CoC.instance.monster.hasPerk(PerkLib.EnemyTrueAngel) || CoC.instance.monster.hasPerk(PerkLib.EnemyEliteType);
 		}
 		public function eyesOfTheHunterExpertBoost():Boolean {
 			return CoC.instance.monster.hasPerk(PerkLib.EnemyGigantType) || CoC.instance.monster.hasPerk(PerkLib.EnemyLargeGroupType) || CoC.instance.monster.hasPerk(PerkLib.EnemyElementalType) || CoC.instance.monster.hasPerk(PerkLib.EnemyGhostType) || CoC.instance.monster.hasPerk(PerkLib.EnemyPlantType) || CoC.instance.monster.hasPerk(PerkLib.EnemyChampionType)
@@ -3168,19 +3420,6 @@ use namespace CoC;
 				outputText(" Zenji grits his teeth as he shields you, enduring several strikes from your opponent.");
 				addStatusValue(StatusEffects.CombatFollowerZenji, 3, 1);
 			}
-		}
-
-		/**
-		 * @return 0: did not avoid; 1-3: avoid with varying difference between
-		 * speeds (1: narrowly avoid, 3: deftly avoid)
-		 */
-		public function speedDodge(monster:Monster):int{
-			var diff:Number = spe - monster.spe;
-			var rnd:int = int(Math.random() * ((diff / 4) + 80));
-			if (rnd<=80) return 0;
-			else if (diff<8) return 1;
-			else if (diff<20) return 2;
-			else return 3;
 		}
 
 		//Body Type
@@ -3384,7 +3623,8 @@ use namespace CoC;
 		public function isRaceCached(race:Race, minTier:int=1):Boolean {
 			return racialTierCached(race) >= minTier;
 		}
-		
+
+		// returns the player's top race
 		public function raceObject(useCache:Boolean=false):Race {
 			if (!useCache) {
 				updateRacialCacheIfNeeded();
@@ -3401,6 +3641,8 @@ use namespace CoC;
 			scores.sortOn("1", Array.NUMERIC|Array.DESCENDING);
 			return scores[0][0];
 		}
+
+		// WARNING: NEVER USE IT FOR CHECKING THE RACE, THINGS WILL EVENTUALLY BREAK!!!
 		public function race():String {
 			updateRacialCache();
 			if (grandchimeraScore(true) >= 3) {
@@ -3412,27 +3654,6 @@ use namespace CoC;
 			var topRace:Race = raceObject(true);
 			var topScore:Number = racialScoreCached(topRace);
 			return topRace.nameFor(bodyData(), topScore);
-			/*
-			if (TopRace == "alicornkin") {
-				if (TopScore >= 12) {
-					if (horns.type == Horns.UNICORN) {
-						race = "alicornkin";
-					} else {
-						race = "nightmarekin";
-					}
-				}
-			}
-			
-			 */
-			//if (mutantScore() >= 5 && race == "human")
-			//	race = "corrupted mutant";
-			//if (humanScore() >= 5 && race == "corrupted mutant")
-			//	race = "somewhat human mutant";
-			//if (lowerBody == LowerBody.HOOFED && isTaur() && wings.type == Wings.FEATHERED_LARGE) {
-			//	race = "pegataur";
-			//}
-			//if (lowerBody == LowerBody.PONY)
-			//	race = "pony-kin";
 		}
 
 		public function humanScore():Number {
@@ -3443,11 +3664,11 @@ use namespace CoC;
 			return humanScore() >= HumanRace.maxScore;
 		}
 		
-		public function racialScore(race:Race):int {
-			return race.totalScore(bodyData());
+		public function racialScore(race:Race, checkRP:Boolean = true):int {
+			return race.totalScore(bodyData(), checkRP);
 		}
-		public function racialTier(race:Race):int {
-			return race.getTierNumber(bodyData());
+		public function racialTier(race:Race, checkRP:Boolean = true):int {
+			return race.getTierNumber(bodyData(), -1, checkRP);
 		}
 		public function racialTierObject(race:Race):RaceTier {
 			return race.getTier(bodyData());
@@ -3457,8 +3678,8 @@ use namespace CoC;
 		 * true if player qualifies as specified race and tier (or higher).
 		 * DOES NOT mean that this is player's top race!
 		 */
-		public function isRace(race:Race, minTier:int=1):Boolean {
-			return racialTier(race) >= minTier;
+		public function isRace(race:Race, minTier:int=1, checkRP:Boolean = true):Boolean {
+			return racialTier(race, checkRP) >= minTier;
 		}
 		/**
 		 * true if player qualifies as any of specified races at least of tier 1.
@@ -3603,14 +3824,14 @@ use namespace CoC;
 				mutantCounter++;
 			if (faceType == Face.HORSE)
 			{
-				if (hasFur())
+				if (isFurCovered())
 					mutantCounter--;
 				if (tailType == Tail.HORSE)
 					mutantCounter--;
 			}
 			if (faceType == Face.DOG)
 			{
-				if (hasFur())
+				if (isFurCovered())
 					mutantCounter--;
 				if (tailType == Tail.DOG)
 					mutantCounter--;
@@ -3751,6 +3972,8 @@ use namespace CoC;
 				hiddenJobs1++;
 			if (hasPerk(PerkLib.HiddenJobAsura))
 				hiddenJobs1++;
+			if (hasPerk(PerkLib.PrestigeJobGreySage))
+				hiddenJobs1++;
 			return hiddenJobs1;
 		}
 		public function maxHiddenJobs():Number {
@@ -3766,117 +3989,86 @@ use namespace CoC;
 			return hiddenJobs3;
 		}
 
-		public function maxHeartMutations():Number {
-			var heartMutations:Number = 1 + maxAscensionBoost();
-			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("Heart")){
-				if (hasMutation(mutation)) heartMutations--;
+		public function countMutationsInSlot(slot:String):int {
+			var count:int = 0;
+			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray(slot)){
+				if (hasMutation(mutation)) count++;
 			}
-			return heartMutations;
+			return count
+		}
+		public function maxTotalMutationsInSlot(slot:String):int {
+			switch (slot) {
+				case IMutationPerkType.SLOT_ADAPTATIONS:
+					return 2 + maxAscensionBoost();
+				case IMutationPerkType.SLOT_HEART:
+				case IMutationPerkType.SLOT_MUSCLE:
+				case IMutationPerkType.SLOT_MOUTH:
+				case IMutationPerkType.SLOT_ADRENALS:
+				case IMutationPerkType.SLOT_BLOODSTREAM:
+				case IMutationPerkType.SLOT_FAT:
+				case IMutationPerkType.SLOT_LUNGS:
+				case IMutationPerkType.SLOT_METABOLISM:
+				case IMutationPerkType.SLOT_OVARIES:
+				case IMutationPerkType.SLOT_TESTICLES:
+				case IMutationPerkType.SLOT_EYES:
+				case IMutationPerkType.SLOT_BONE:
+				case IMutationPerkType.SLOT_NERVSYS:
+				case IMutationPerkType.SLOT_THYROID:
+				case IMutationPerkType.SLOT_PARATHYROID:
+				default:
+					return 1 + maxAscensionBoost();
+			}
+		}
+		public function maxCurrentMutationsInSlot(slot:String):int {
+			return maxTotalMutationsInSlot(slot) - countMutationsInSlot(slot);
+		}
+		public function maxHeartMutations():Number {
+			return maxCurrentMutationsInSlot(IMutationPerkType.SLOT_HEART);
 		}
 		public function maxMusclesMutations():Number {
-			var musclesMutations:Number = 1 + maxAscensionBoost();
-			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("Muscle")){
-				if (hasMutation(mutation)) musclesMutations--;
-			}
-			return musclesMutations;
+			return maxCurrentMutationsInSlot(IMutationPerkType.SLOT_MUSCLE);
 		}
 		public function maxMouthMutations():Number {
-			var mouthMutations:Number = 1 + maxAscensionBoost();
-			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("Mouth")){
-				if (hasMutation(mutation)) mouthMutations--;
-			}
-			return mouthMutations;
+			return maxCurrentMutationsInSlot(IMutationPerkType.SLOT_MOUTH);
 		}
 		public function maxAdrenalGlandsMutations():Number {
-			var adrenalglandsMutations:Number = 1  + maxAscensionBoost();
-			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("Adrenals")){
-				if (hasMutation(mutation)) adrenalglandsMutations--;
-			}
-			return adrenalglandsMutations;
+			return maxCurrentMutationsInSlot(IMutationPerkType.SLOT_ADRENALS);
 		}
 		public function maxBloodstreamMutations():Number {
-			var bloodstreamMutations:Number = 1 + maxAscensionBoost();
-			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("Bloodstream")){
-				if (hasMutation(mutation)) bloodstreamMutations--;
-			}
-			return bloodstreamMutations;
+			return maxCurrentMutationsInSlot(IMutationPerkType.SLOT_BLOODSTREAM);
 		}
 		public function maxFatTissueMutations():Number {
-			var fattissueMutations:Number = 1 + maxAscensionBoost();
-			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("FaT")){
-				if (hasMutation(mutation)) fattissueMutations--;
-			}
-			return fattissueMutations;
+			return maxCurrentMutationsInSlot(IMutationPerkType.SLOT_FAT);
 		}
 		public function maxLungsMutations():Number {
-			var lungsMutations:Number = 1 + maxAscensionBoost();
-			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("Lungs")){
-				if (hasMutation(mutation)) lungsMutations--;
-			}
-			return lungsMutations;
+			return maxCurrentMutationsInSlot(IMutationPerkType.SLOT_LUNGS);
 		}
 		public function maxMetabolismMutations():Number {
-			var metabolismMutations:Number = 1 + maxAscensionBoost();
-			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("Metabolism")){
-				if (hasMutation(mutation)) metabolismMutations--;
-			}
-			return metabolismMutations;
+			return maxCurrentMutationsInSlot(IMutationPerkType.SLOT_METABOLISM);
 		}
 		public function maxOvariesMutations():Number {
-			var ovariesMutations:Number = 1 + maxAscensionBoost();
-			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("Ovaries")){
-				if (hasMutation(mutation)) ovariesMutations--;
-			}
-			return ovariesMutations;
+			return maxCurrentMutationsInSlot(IMutationPerkType.SLOT_OVARIES);
 		}
 		public function maxBallsMutations():Number {
-			var ballsMutations:Number = 1 + maxAscensionBoost();
-			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("Testicles")){
-				if (hasMutation(mutation)) ballsMutations--;
-			}
-			return ballsMutations;
+			return maxCurrentMutationsInSlot(IMutationPerkType.SLOT_TESTICLES);
 		}
 		public function maxEyesMutations():Number {
-			var eyesMutations:Number = 1 + maxAscensionBoost();
-			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("Eyes")){
-				if (hasMutation(mutation)) eyesMutations--;
-			}
-			return eyesMutations;
+			return maxCurrentMutationsInSlot(IMutationPerkType.SLOT_EYES);
 		}
 		public function maxPeripheralNervSysMutations():Number {
-			var nervsysMutations:Number = 1 + maxAscensionBoost();
-			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("Nerv/Sys")){
-				if (hasMutation(mutation)) nervsysMutations--;
-			}
-			return nervsysMutations;
+			return maxCurrentMutationsInSlot(IMutationPerkType.SLOT_NERVSYS);
 		}
 		public function maxBonesAndMarrowMutations():Number {
-			var bonesandmarrowMutations:Number = 1 + maxAscensionBoost();
-			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("Bone")){
-				if (hasMutation(mutation)) bonesandmarrowMutations--;
-			}
-			return bonesandmarrowMutations;
+			return maxCurrentMutationsInSlot(IMutationPerkType.SLOT_BONE);
 		}
 		public function maxThyroidGlandMutations():Number {
-			var thyroidglandMutations:Number = 1 + maxAscensionBoost();
-			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("Thyroid")){
-				if (hasMutation(mutation)) thyroidglandMutations--;
-			}
-			return thyroidglandMutations;
+			return maxCurrentMutationsInSlot(IMutationPerkType.SLOT_THYROID);
 		}
 		public function maxParathyroidGlandMutations():Number {
-			var parathyroidglandMutations:Number = 1 + maxAscensionBoost();
-			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("PThyroid")){
-				if (hasMutation(mutation)) parathyroidglandMutations--;
-			}
-			return parathyroidglandMutations;
+			return maxCurrentMutationsInSlot(IMutationPerkType.SLOT_PARATHYROID);
 		}
 		public function maxAdaptationsMutations():Number {
-			var adaptationsMutations:Number = 2 + maxAscensionBoost();
-			for each (var mutation:IMutationPerkType in IMutationsLib.mutationsArray("Adaptations")){
-				if (hasMutation(mutation)) adaptationsMutations--;
-			}
-			return adaptationsMutations;
+			return maxCurrentMutationsInSlot(IMutationPerkType.SLOT_ADAPTATIONS);
 		}
 		public function maxDragonMutations():Number {
 			var dragonMutations:Number = 1;
@@ -3994,7 +4186,6 @@ use namespace CoC;
 				else if (hasPerk(PerkLib.DeadMetabolism)) hungerActive = false;
 				else if (hasPerk(PerkLib.GargoylePure) || hasPerk(PerkLib.GargoyleCorrupted)) hungerActive = false;
 			}
-			if (flags[kFLAGS.IN_PRISON] > 0) hungerActive = true;
 			if (hungerActive) {
 				var oldHunger:Number = hunger;
 				var weightChange:int = 0;
@@ -4007,15 +4198,12 @@ use namespace CoC;
 				overeatingLimit += 20;overeating ex perk chyba		achiev polegający na przeżyciu x dni bez jedzenie czegokolwiek wiec każde podniesienie hunger resetuje ten timer xD
 				overeatingLimit += 40;overeating su perk chyba*/
 				hunger += amnt;
-				if (hunger > maxHunger()) {
-					while (hunger > (maxHunger() + overeatingLimit) && !SceneLib.prison.inPrison) {
-						weightChange++;
-						hunger -= overeatingLimit;
-					}
+				if (hunger > maxHunger() + overeatingLimit) {
+					weightChange = Math.ceil((hunger - (maxHunger() + overeatingLimit)) / overeatingLimit); //rounded UP to int
 					modThickness(maxThicknessCap(), weightChange);
-					hunger = maxHunger();
+					hunger = maxHunger(); //don't mind overeating?
 				}
-				if (hunger > oldHunger && flags[kFLAGS.USE_OLD_INTERFACE] == 0) CoC.instance.mainView.statsView.showStatUp('hunger');
+				if (hunger > oldHunger) CoC.instance.mainView.statsView.showStatUp('hunger');
 				//game.dynStats("lus", 0, "scale", false);
 				if (nl) outputText("\n\n");
 				//Messages
@@ -4044,7 +4232,7 @@ use namespace CoC;
 			var oldHunger:Number = hunger;
 			hunger += amnt;
 			if (hunger > maxHunger()) hunger = maxHunger();
-			if (hunger > oldHunger && flags[kFLAGS.USE_OLD_INTERFACE] == 0) CoC.instance.mainView.statsView.showStatUp('hunger');
+			if (hunger > oldHunger) CoC.instance.mainView.statsView.showStatUp('hunger');
 			//game.dynStats("lus", 0, "scale", false);
 			if (nl) outputText("\n");
 			if (hunger > oldHunger) CoC.instance.mainView.statsView.showStatUp("hunger");
@@ -4060,14 +4248,14 @@ use namespace CoC;
 			var oldHunger:Number = hunger;
 			hunger -= amnt;
 			if (hunger < 0) hunger = 0;
-			if (hunger < oldHunger && flags[kFLAGS.USE_OLD_INTERFACE] == 0) CoC.instance.mainView.statsView.showStatDown('hunger');
+			if (hunger < oldHunger) CoC.instance.mainView.statsView.showStatDown('hunger');
 			dynStats("lus", 0, "scale", false);
 		}
 
 		public function get corruptionTolerance():int {
-			var temp:int = perkv1(PerkLib.AscensionTolerance) * 5;
-			if (flags[kFLAGS.MEANINGLESS_CORRUPTION] > 0) temp += 100;
-			return temp;
+			if (flags[kFLAGS.CORRUPTION_TOLERANCE_MODE] == 1) return 0;
+			if (flags[kFLAGS.CORRUPTION_TOLERANCE_MODE] == 2) return 100;
+			return perkv1(PerkLib.AscensionTolerance) * (CoC.instance.gameSettings.sceneHunter_inst.other ? 10 : 5);
 		}
 		public function get corAdjustedUp():Number {
 			return boundFloat(0, cor + corruptionTolerance, 100);
@@ -4094,19 +4282,8 @@ use namespace CoC;
 			return minions;
 		}
 
-		public static function NewGamePlusMod():int {
-			var temp:int = CoC.instance.flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
-			//Constrains value between 0 and 5.
-			if (temp < 0) temp = 0;
-			if (temp > 5) temp = 5;
-			return temp;
-		}
 		public function newGamePlusMod():int {
-			return NewGamePlusMod();
-		}
-		
-		public static function NewGamePlusFactor():Number {
-			return NewGamePlusMod()+1;
+			return CoC.instance.newGamePlusMod();
 		}
 
 		public function buttChangeDisplay():void
@@ -4118,7 +4295,8 @@ use namespace CoC;
 			if (ass.analLooseness == 1) outputText("<b>You have lost your anal virginity.</b>");
 		}
 
-		public function slimeFeed():void{
+		public function slimeFeed(intakes:int = 1):void{
+			while (intakes --> 1) slimeFeed(1);
 			if (hasStatusEffect(StatusEffects.SlimeCraving)) {
 				//Reset craving value
 				changeStatusValue(StatusEffects.SlimeCraving,1,0);
@@ -4132,8 +4310,8 @@ use namespace CoC;
 				slimeGrowth();
 			}
 			if (hasPerk(PerkLib.Diapause)) {
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00228] += 3 + rand(3);
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00229] = 1;
+				flags[kFLAGS.DIAPAUSE_FLUID_STORE] += 3 + rand(3);
+				flags[kFLAGS.DIAPAUSE_DISPLAYED] = 1;
 			}
 			if (isGargoyle() && hasPerk(PerkLib.GargoyleCorrupted)) refillGargoyleHunger(30);
 			if (isRace(Races.JIANGSHI) && hasPerk(PerkLib.EnergyDependent)) EnergyDependentRestore();
@@ -4141,7 +4319,7 @@ use namespace CoC;
 
 		public function minoCumAddiction(raw:Number = 10):void {
 			//Increment minotaur cum intake count
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00340]++;
+			flags[kFLAGS.MINOCUM_INTAKES]++;
 			//Fix if variables go out of range.
 			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] < 0) flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] = 0;
 			if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] < 0) flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] = 0;
@@ -4201,12 +4379,12 @@ use namespace CoC;
 			var text:String = "";
 			//if (armor != ArmorLib.NOTHING) text += armorName;
 			//Join text.
-			if (armor != ArmorLib.NOTHING) textArray.push(armor.name);
-			if (upperGarment != UndergarmentLib.NOTHING) textArray.push(upperGarmentName);
-			if (lowerGarment != UndergarmentLib.NOTHING) textArray.push(lowerGarmentName);
+			if (!armor.isNothing) textArray.push(armor.name);
+			if (!upperGarment.isNothing) textArray.push(upperGarmentName);
+			if (!lowerGarment.isNothing) textArray.push(lowerGarmentName);
 			if (textArray.length > 0) text = formatStringArray(textArray);
 			//Naked?
-			if (upperGarment == UndergarmentLib.NOTHING && lowerGarment == UndergarmentLib.NOTHING && armor == ArmorLib.NOTHING) text = nakedText;
+			if (upperGarment.isNothing && lowerGarment.isNothing && armor.isNothing) text = nakedText;
 			return text;
 		}
 
@@ -4227,24 +4405,25 @@ use namespace CoC;
 			previouslyWornClothes.push(armor.shortName);
 		}
 
-		public function shrinkTits(ignore_hyper_happy:Boolean=false):void
+		public function shrinkTits(ignore_hyper_happy:Boolean=false, forceRow:int = -1):void
 		{
 			if (flags[kFLAGS.HYPER_HAPPY] && !ignore_hyper_happy)
 			{
 				return;
 			}
-			if(breastRows.length == 1) {
-				if(breastRows[0].breastRating > 0) {
+			if(breastRows.length == 1 || forceRow >= 0) {
+                var row:int = forceRow >= 0 ? forceRow : 0;
+				if(breastRows[row].breastRating > 0) {
 					//Shrink if bigger than N/A cups
 					var temp:Number;
 					temp = 1;
-					breastRows[0].breastRating--;
+					breastRows[row].breastRating--;
 					//Shrink again 50% chance
-					if(breastRows[0].breastRating >= 1 && rand(2) == 0 && !hasPerk(PerkLib.BigTits)) {
+					if(breastRows[row].breastRating >= 1 && rand(2) == 0 && !hasPerk(PerkLib.BigTits)) {
 						temp++;
-						breastRows[0].breastRating--;
+						breastRows[row].breastRating--;
 					}
-					if(breastRows[0].breastRating < 0) breastRows[0].breastRating = 0;
+					if(breastRows[row].breastRating < 0) breastRows[row].breastRating = 0;
 					//Talk about shrinkage
 					if(temp == 1) outputText("\n\nYou feel a weight lifted from you, and realize your breasts have shrunk!  With a quick measure, you determine they're now " + breastCup(0) + "s.");
 					if(temp == 2) outputText("\n\nYou feel significantly lighter.  Looking down, you realize your breasts are much smaller!  With a quick measure, you determine they're now " + breastCup(0) + "s.");
@@ -4282,6 +4461,7 @@ use namespace CoC;
 			//GrowthType 1 = smallest grows
 			//GrowthType 2 = Top Row working downward
 			//GrowthType 3 = Only top row
+			//GrowthType 4 = Grow the row indicated by (rowsGrown-1). This function needs a rework...
 			var temp2:Number = 0;
 			var temp3:Number = 0;
 			//Chance for "big tits" perked characters to grow larger!
@@ -4289,17 +4469,16 @@ use namespace CoC;
 
 			// Needs to be a number, since uint will round down to 0 prevent growth beyond a certain point
 			var temp:Number = breastRows.length;
-			if(growthType == 1) {
+			if(growthType == 1 || growthType == 4) {
 				//Select smallest breast, grow it, move on
 				while(rowsGrown > 0) {
-					//Temp = counter
-					temp = breastRows.length;
-					//Temp2 = smallest tits index
-					temp2 = 0;
-					//Find smallest row
-					while(temp > 0) {
-						temp--;
-						if(breastRows[temp].breastRating < breastRows[temp2].breastRating) temp2 = temp;
+					if (growthType == 1) {
+						//Temp2 = smallest tits index
+						temp2 = smallestTitRow();
+					} else {
+						//type 4 - select the row and stop the counter
+						temp2 = rowsGrown - 1;
+						rowsGrown = 0;
 					}
 					//Temp 3 tracks total amount grown
 					temp3 += amount;
@@ -4316,16 +4495,7 @@ use namespace CoC;
 							else
 								temp /=1.3;
 						}
-
-						// WHy are there three options here. They all have the same result.
 						if(breastRows[temp2].breastRating > 7)
-						{
-							if(!hasPerk(PerkLib.BigTits))
-								temp /=2;
-							else
-								temp /=1.5;
-						}
-						if(breastRows[temp2].breastRating > 9)
 						{
 							if(!hasPerk(PerkLib.BigTits))
 								temp /=2;
@@ -4569,13 +4739,9 @@ use namespace CoC;
 		//Determine minimum lust
 		public override function minLust():Number
 		{
-			var min:Number = 0;
 			var minCap:Number = maxLust();
-			//Bimbo body boosts minimum lust by 40
-			if (hasPerk(PerkLib.BimboBody) || hasPerk(PerkLib.BroBody) || hasPerk(PerkLib.FutaForm)) min += Math.round(minCap * 0.2);
+			var min:Number = minLustStat.value + minCap*minLustXStat.value;
 			if (hasStatusEffect(StatusEffects.BimboChampagne)) min += Math.round(minCap * 0.1);
-			//Omnibus' Gift
-			if (hasPerk(PerkLib.OmnibusGift)) min += Math.round(minCap * 0.35);
 			//Easter bunny eggballs
 			if (hasPerk(PerkLib.EasterBunnyBalls)) min += 10*ballSize;
 			//Fera Blessing
@@ -4584,25 +4750,12 @@ use namespace CoC;
 			if (hasPerk(PerkLib.Nymphomania)) min += Math.round(minCap * 0.15);
 			//Oh noes anemone!
 			if (hasStatusEffect(StatusEffects.AnemoneArousal)) min += Math.round(minCap * 0.3);
-			//Hot blooded perk raises min lust!
-			if (hasPerk(PerkLib.HotBlooded)) min += Math.round(minCap * 0.2);
-			if (hasPerk(PerkLib.LuststickAdapted)) min += Math.round(minCap * 0.1);
 			if (hasStatusEffect(StatusEffects.Infested)) min += Math.round(minCap * 0.5);
 			//Add points for Crimstone
 			min += Math.round(minCap * perkv1(PerkLib.PiercedCrimstone) * 0.01);
 			//Subtract points for Icestone!
 			min -= Math.round(minCap * perkv1(PerkLib.PiercedIcestone) * 0.01);
 			min += Math.round(minCap * perkv1(PerkLib.PentUp) * 0.01);
-			//Cold blooded perk reduces min lust, to a minimum of 20! Takes effect after piercings.
-			if (hasPerk(PerkLib.ColdBlooded)) {
-				if (min >= Math.round(minCap * 0.2)) min -= Math.round(minCap * 0.2);
-				else min = 0;
-			}
-			//Purity Blessing perk reduce min lust, to a minimum of 10! Takes effect after piercings.
-			if (hasPerk(PerkLib.PurityBlessing)) {
-				if (min >= Math.round(minCap * 0.1)) min -= Math.round(minCap * 0.1);
-				else min = 0;
-			}
 			//Harpy Lipstick and Drunken Power statuses rise minimum lust by 50.
 			if(hasStatusEffect(StatusEffects.Luststick)) min += Math.round(minCap * 0.5);
 			if(hasStatusEffect(StatusEffects.DrunkenPower)) min += Math.round(minCap * 0.5);
@@ -4637,21 +4790,23 @@ use namespace CoC;
 			//Werebeast
 			if (hasPerk(PerkLib.Lycanthropy)) min += Math.round(minCap * perkv1(PerkLib.Lycanthropy) * 0.01);
 			//Jewelry effects
-			if (jewelryEffectId == JewelryLib.MODIFIER_MINIMUM_LUST)
-			{
+			if (jewelryEffectId == JewelryLib.MODIFIER_MINIMUM_LUST) {
 				min += jewelryEffectMagnitude;
-				if (min > (minCap - jewelryEffectMagnitude) && jewelryEffectMagnitude < 0)
-				{
-					minCap += jewelryEffectMagnitude;
-				}
+			}
+			if (jewelryEffectId2 == JewelryLib.MODIFIER_MINIMUM_LUST) {
+				min += jewelryEffectMagnitude2;
+			}
+			if (jewelryEffectId3 == JewelryLib.MODIFIER_MINIMUM_LUST) {
+				min += jewelryEffectMagnitude3;
+			}
+			if (jewelryEffectId4 == JewelryLib.MODIFIER_MINIMUM_LUST) {
+				min += jewelryEffectMagnitude4;
 			}
 			if (armorName == "lusty maiden's armor" || armorName == "Succubus armor") min += Math.round(minCap * 0.3);
 			if (armorName == "tentacled bark armor") min += Math.round(minCap * 0.2);
-			if (hasPerk(PerkLib.HotNCold) && min > Math.round(minCap * 0.75)) min = Math.round(minCap * 0.75); 
+			if (hasPerk(PerkLib.HotNCold) && min > Math.round(minCap * 0.75)) min = Math.round(minCap * 0.75);
 			//Constrain values
-			if (min < 0) min = 0;
-			if (min > minCap) min = minCap;
-			return min;
+			return boundFloat(0, min, minCap);
 		}
 
 		public function maxToneCap():Number {
@@ -4780,8 +4935,14 @@ use namespace CoC;
 
 		public function updateRacialAndPerkBuffs():void{
 			updateRacialCache();
-			if (hasPerk(PerkLib.TitanicStrength)) statStore.replaceBuffObject({'str.mult':(0.01 * Math.round(tallness*4))}, 'Titanic Strength', { text: 'Titanic Strength' });
-			if (!hasPerk(PerkLib.TitanicStrength) && statStore.hasBuff('Titanic Strength')) statStore.removeBuffs('Titanic Strength');
+			if (effectiveTallness>=80 && hasPerk(PerkLib.TitanicStrength)) statStore.replaceBuffObject({'str.mult':(0.01 * Math.round(effectiveTallness/2))}, 'Titanic Strength', { text: 'Titanic Strength' });
+			if (effectiveTallness<80 && statStore.hasBuff('Titanic Strength')) statStore.removeBuffs('Titanic Strength');
+			if (effectiveTallness<=60 && hasPerk(PerkLib.CondensedPower)) statStore.replaceBuffObject({'str.mult':(0.01 * ((120 - Math.round(effectiveTallness))*10))}, 'Condensed Power', { text: 'Condensed Power' });
+			if (effectiveTallness>60 && statStore.hasBuff('Condensed Power')) statStore.removeBuffs('Condensed Power');
+			if (hasPerk(PerkLib.HarpyQueen) && (isRaceCached(Races.HARPY, 1) || isRaceCached(Races.PHOENIX, 1) || isRaceCached(Races.THUNDERBIRD, 1))) statStore.addBuffObject({"tou.mult":SophieFollowerScene.HarpyKids,"spe.mult":SophieFollowerScene.HarpyKids,"lib.mult":SophieFollowerScene.HarpyKids}, "Harpy Queen",{text:"Your motherly love for and from your many harpy childrens grants you incredible strength."});
+			if (!isRaceCached(Races.HARPY, 1) && !isRaceCached(Races.PHOENIX, 1) && !isRaceCached(Races.THUNDERBIRD, 1)) statStore.removeBuffs('Harpy Queen');
+			//if (hasPerk(PerkLib.TitanicStrength)) statStore.replaceBuffObject({'str.mult':(0.01 * Math.round(tallness/2))}, 'Titanic Strength', { text: 'Titanic Strength' });
+			//if (!hasPerk(PerkLib.TitanicStrength) && statStore.hasBuff('Titanic Strength')) statStore.removeBuffs('Titanic Strength');
 			if (hasPerk(PerkLib.Enigma)) statStore.replaceBuffObject({'str.mult':Math.round(((intStat.mult.value/2)+(wisStat.mult.value/2))),'tou.mult':Math.round(((intStat.mult.value/2)+(wisStat.mult.value/2)))}, 'Enigma', { text: 'Enigma' });
 			if (!hasPerk(PerkLib.Enigma) && statStore.hasBuff('Enigma')) statStore.removeBuffs('Enigma');
 			if (hasPerk(PerkLib.AvatorOfCorruption) && isRaceCached(Races.UNICORN,2)) statStore.replaceBuffObject({'lib.mult':Math.round(intStat.mult.value/2)}, 'Avatar Of Corruption', { text: 'Avatar Of Corruption' });
@@ -4821,6 +4982,7 @@ use namespace CoC;
 			}
 			if (!hasPerk(PerkLib.AbsoluteStrength) && statStore.hasBuff('Absolute Strength')) statStore.removeBuffs('Absolute Strength');
 			var buffs:Object = calcRacialBuffs(true);
+			statStore.removeBuffs("Racials");
 			statStore.replaceBuffObject(buffs, "Racials", {text:"Racials"});
 		}
 
@@ -4977,8 +5139,14 @@ use namespace CoC;
 			if(hasStatusEffect(StatusEffects.DragonLightningBreathCooldown) && (perkv1(IMutationsLib.DraconicLungIM) >= 1 || perkv1(IMutationsLib.DrakeLungsIM) >= 3)) {
 				removeStatusEffect(StatusEffects.DragonLightningBreathCooldown);
 			}
+			if(hasStatusEffect(StatusEffects.DragonPoisonBreathCooldown) && (perkv1(IMutationsLib.DraconicLungIM) >= 1 || perkv1(IMutationsLib.DrakeLungsIM) >= 3)) {
+				removeStatusEffect(StatusEffects.DragonPoisonBreathCooldown);
+			}
 			if(hasStatusEffect(StatusEffects.DragonWaterBreathCooldown) && (perkv1(IMutationsLib.DraconicLungIM) >= 1 || perkv1(IMutationsLib.DrakeLungsIM) >= 3)) {
 				removeStatusEffect(StatusEffects.DragonWaterBreathCooldown);
+			}
+			if(hasStatusEffect(StatusEffects.DragonFaerieBreathCooldown) && (perkv1(IMutationsLib.DraconicLungIM) >= 1 || perkv1(IMutationsLib.DrakeLungsIM) >= 3)) {
+				removeStatusEffect(StatusEffects.DragonFaerieBreathCooldown);
 			}
 			if(hasStatusEffect(StatusEffects.HeroBane)) {
 				removeStatusEffect(StatusEffects.HeroBane);
@@ -4988,7 +5156,7 @@ use namespace CoC;
 			}
 			if(hasStatusEffect(StatusEffects.Disarmed)) {
 				removeStatusEffect(StatusEffects.Disarmed);
-				if (weapon == WeaponLib.FISTS) {
+				if (weapon.isNothing) {
 //					weapon = ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID]) as Weapon;
 //					(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID]) as Weapon).doEffect(this, false);
 					setWeapon(ItemType.lookupItem(flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID]) as Weapon);
@@ -5069,6 +5237,12 @@ use namespace CoC;
 			return consumed;
 */
 		}
+		
+		public function itemSlotCount():int {
+			var n:int = 0;
+			for each (var slot:ItemSlotClass in itemSlots) if (slot.unlocked) n++
+			return n;
+		}
 
 		public function getLowestSlot(itype:ItemType):ItemSlotClass
 		{
@@ -5098,7 +5272,7 @@ use namespace CoC;
 		// 0..5 or -1 if no
 		public function roomInExistingStack(itype:ItemType):Number {
 			for (var i:int = 0; i<itemSlots.length; i++){
-				if(itemSlot(i).itype == itype && itemSlot(i).quantity != 0 && itemSlot(i).quantity < 5)
+				if(itemSlot(i).itype == itype && itemSlot(i).quantity != 0 && itemSlot(i).quantity < itype.stackSize)
 					return i;
 			}
 			return -1;
@@ -5319,11 +5493,14 @@ use namespace CoC;
 			return delta;
 		}
 
-		public function increaseCock(cockNum:Number, lengthDelta:Number):Number
+		public function growCock(cockNum:Number, lengthDelta:Number):Number
 		{
-			var bigCock:Boolean = false;
-			if (hasPerk(PerkLib.BigCock)) bigCock = true;
-			return cocks[cockNum].growCock(lengthDelta, bigCock);
+			return (cocks[cockNum] as Cock).growCock(lengthDelta, hasPerk(PerkLib.BigCock));
+		}
+
+		public function thickenCock(cockNum:Number, thickDelta:Number):Number
+		{
+			return (cocks[cockNum] as Cock).thickenCock(thickDelta, hasPerk(PerkLib.BigCock));
 		}
 
 		public function increaseEachCock(lengthDelta:Number):Number
@@ -5331,7 +5508,7 @@ use namespace CoC;
 			var totalGrowth:Number = 0;
 			for (var i:Number = 0; i < cocks.length; i++) {
 				trace( "increaseEachCock at: " + i);
-				totalGrowth += increaseCock(i as Number, lengthDelta);
+				totalGrowth += growCock(i as Number, lengthDelta);
 			}
 
 			return totalGrowth;
@@ -5406,755 +5583,145 @@ use namespace CoC;
 			return true;
 		}
 
-		public function maxFeralCombatLevel():Number {
-			var maxLevel:Number = 10;
-			if (level < 90) maxLevel += level;
-			else maxLevel += 90;
-			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) maxLevel += 50;
-			return maxLevel;
+		public function maxCombatLevel(melee:Boolean = true):Number{
+            var maxLevel:Number = 10;
+            if (level < 90) maxLevel += level;
+            else maxLevel += 90;
+            if (melee && hasPerk(PerkLib.MeleeWeaponsMasterySu)) maxLevel += 50;
+            if (!melee && hasPerk(PerkLib.RangeWeaponsMasterySu)) maxLevel += 50;
+            return maxLevel;
 		}
-		public function FeralCombatExpToLevelUp():Number {
-			var expToLevelUp:Number = 10;
-			var expToLevelUp00:Number = masteryFeralCombatLevel + 1;
-			var expToLevelUp01:Number = 5;
-			var expToLevelUp02:Number = masteryFeralCombatLevel + 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) expToLevelUp00 *= 0.5;
-			expToLevelUp00 = Math.round(expToLevelUp00);
-			if (expToLevelUp00 < 1) expToLevelUp00 = 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMastery)) expToLevelUp01 -= 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMasteryEx)) expToLevelUp02 *= 0.5;
-			expToLevelUp02 = Math.round(expToLevelUp02);
-			if (expToLevelUp02 < 1) expToLevelUp02 = 1;
-			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
-			return expToLevelUp;
+		public function CombatExpToLevelUp(masteryLevel:Number, melee:Boolean):Number{
+			var baseXPtoLevel:Number = 10;
+			var WeaponMasteryModifier:Number = 5;
+            if ((hasPerk(PerkLib.RangeWeaponsMastery) && !melee) || (hasPerk(PerkLib.MeleeWeaponsMastery) && melee)) WeaponMasteryModifier -= 1;
+			var WeaponMasteryEXModifier:Number = masteryLevel + 1;
+            if ((hasPerk(PerkLib.RangeWeaponsMasteryEx) && !melee) || (hasPerk(PerkLib.MeleeWeaponsMasteryEx) && melee)) WeaponMasteryEXModifier = Math.round(1 + (masteryLevel *.5));
+			var WeaponMasterySUModifier:Number = masteryLevel + 1;
+            if ((hasPerk(PerkLib.RangeWeaponsMasterySu) && !melee) || (hasPerk(PerkLib.MeleeWeaponsMasterySu) && melee)) WeaponMasterySUModifier = Math.round(1 + (masteryLevel *.5));
+			return (baseXPtoLevel + (WeaponMasteryModifier * WeaponMasteryEXModifier * WeaponMasterySUModifier));
 		}
-		public function feralCombatXP(XP:Number = 0):void {
-			while (XP > 0) {
-				if (XP == 1) {
-					masteryFeralCombatXP++;
-					XP--;
+
+		public function gainCombatXP(index:int, exp:Number):void{
+			var level:Number = combatMastery[index].level;
+			var levelUp:Boolean = false;
+			var experience:Number = combatMastery[index].experience;
+			var melee:Boolean = combatMastery[index].melee;
+			var desc:String = combatMastery[index].desc;
+
+			var xpToLevel:Number = CombatExpToLevelUp(level, melee);
+			var xpLoop:Number = exp;
+			// for tracking bonus attack masteries
+			var grantsBonusAttacks:Boolean = Combat.bonusAttackMasteries.indexOf(index) != -1;
+			var maxAttacksOld:int = SceneLib.combat.maxCurrentAttacks();
+			// This loop does weapon types ( dagger, sword, fist, claws, ... )
+			while (xpLoop > 0) {
+				experience += xpLoop;	// incremeent the XP of the weapon mastery
+				xpLoop = 0;				// clear that out.
+
+				// Did we level up?
+				if (level < maxCombatLevel(melee) && experience >= xpToLevel) {
+					levelUp = true;
+					outputText("\n<b>" + desc + " leveled up to " + (++level) + "!</b>\n");
+					// Any Leftover EXP?
+					xpLoop = experience - xpToLevel;
+					experience = 0;
+					// recalculate xp to next level ( dont want to gain 50 levels unexpectedly
+					xpToLevel = CombatExpToLevelUp(level, melee);
 				}
-				else {
-					masteryFeralCombatXP += XP;
-					XP -= XP;
-				}
-				//Level dat shit up!
-				if (masteryFeralCombatLevel < maxFeralCombatLevel() && masteryFeralCombatXP >= FeralCombatExpToLevelUp()) {
-					outputText("\n<b>Dao of Feral Beast leveled up to " + (masteryFeralCombatLevel + 1) + "!</b>\n");
-					masteryFeralCombatLevel++;
-					masteryFeralCombatXP = 0;
+			}
+            combatMastery[index].level = level;
+            combatMastery[index].experience = experience;
+			// Can we get any new attacks?
+			if (grantsBonusAttacks && levelUp) {// if it grants bonus attacks
+				var maxAttacksNew:int = SceneLib.combat.maxCurrentAttacks();
+				// remember the last value
+				var masteryArrays:Array = masteryBonusAttacks;
+				for each (var masteryArr:Array in masteryArrays) {
+					// if matches index, used right now
+					if (masteryArr[0] == index && masteryArr[1]) {
+						for (var bonusPos:int = 0; bonusPos < masteryArr[2].length; ++bonusPos) {
+							// AND grants a new attack at this level
+							if (combatMastery[masteryArr[0]].level == masteryArr[2][bonusPos]) {
+								outputText("\n<b>Thanks to your training, your maximum bonus attack count has increased to " + maxAttacksNew + "!</b>\n");
+								// before THIS level (new attack), it was maxed (0 in flag = 1 attack, 1 = 2 attacks, etc.)
+								if (flags[kFLAGS.MULTIATTACK_STYLE] == maxAttacksOld - 1) {
+									// keep up with the new max
+									flags[kFLAGS.MULTIATTACK_STYLE] = maxAttacksNew - 1;
+								}
+							}
+						}
+					}
 				}
 			}
 		}
 
-		public function maxGauntletLevel():Number {
-			var maxLevel:Number = 10;
-			if (level < 90) maxLevel += level;
-			else maxLevel += 90;
-			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) maxLevel += 50;
-			return maxLevel;
-		}
-		public function GauntletExpToLevelUp():Number {
-			var expToLevelUp:Number = 10;
-			var expToLevelUp00:Number = masteryGauntletLevel + 1;
-			var expToLevelUp01:Number = 5;
-			var expToLevelUp02:Number = masteryGauntletLevel + 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) expToLevelUp00 *= 0.5;
-			expToLevelUp00 = Math.round(expToLevelUp00);
-			if (expToLevelUp00 < 1) expToLevelUp00 = 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMastery)) expToLevelUp01 -= 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMasteryEx)) expToLevelUp02 *= 0.5;
-			expToLevelUp02 = Math.round(expToLevelUp02);
-			if (expToLevelUp02 < 1) expToLevelUp02 = 1;
-			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
-			return expToLevelUp;
-		}
-		public function gauntletXP(XP:Number = 0):void {
-			while (XP > 0) {
-				if (XP == 1) {
-					masteryGauntletXP++;
-					XP--;
-				}
-				else {
-					masteryGauntletXP += XP;
-					XP -= XP;
-				}
-				//Level dat shit up!
-				if (masteryGauntletLevel < maxGauntletLevel() && masteryGauntletXP >= GauntletExpToLevelUp()) {
-					outputText("\n<b>Dao of Gauntlet leveled up to " + (masteryGauntletLevel + 1) + "!</b>\n");
-					masteryGauntletLevel++;
-					masteryGauntletXP = 0;
-				}
-			}
+		public function get masteryBonusAttacks():Array {
+			return [
+				// Mastery, condition, array of attack boosts (from +1)
+				[Combat.MASTERY_FERAL, isFeralCombat(), [10, 20, 30, 40]],
+				[Combat.MASTERY_GAUNTLET, isGauntletWeapon(), [10, 20, 30, 40]],
+				[Combat.MASTERY_UNARMED, isUnarmedCombat(), [10, 20, 30, 40]],
+				[Combat.MASTERY_SMALL, weaponSpecials("Small") || weaponSpecials("Dual Small"), [10, 20, 30, 40]],
+				[Combat.MASTERY_LARGE, weaponSpecials("Large") || weaponSpecials("Dual Large"), [15, 30]],
+				[Combat.MASTERY_MASSIVE, weaponSpecials("Massive") || weaponSpecials("Dual Massive"), [30]],
+				[Combat.MASTERY_RANGED, isBowTypeWeapon() || isThrownTypeWeapon(), []],
+				[Combat.MASTERY_NORMAL, true, [10, 25, 40]] //the last one for "everything else"
+			];
 		}
 
-		public function maxSwordLevel():Number {
-			var maxLevel:Number = 10;
-			if (level < 90) maxLevel += level;
-			else maxLevel += 90;
-			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) maxLevel += 50;
-			return maxLevel;
-		}
-		public function SwordExpToLevelUp():Number {
-			var expToLevelUp:Number = 10;
-			var expToLevelUp00:Number = masterySwordLevel + 1;
-			var expToLevelUp01:Number = 5;
-			var expToLevelUp02:Number = masterySwordLevel + 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) expToLevelUp00 *= 0.5;
-			expToLevelUp00 = Math.round(expToLevelUp00);
-			if (expToLevelUp00 < 1) expToLevelUp00 = 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMastery)) expToLevelUp01 -= 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMasteryEx)) expToLevelUp02 *= 0.5;
-			expToLevelUp02 = Math.round(expToLevelUp02);
-			if (expToLevelUp02 < 1) expToLevelUp02 = 1;
-			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
-			return expToLevelUp;
-		}
-		public function swordXP(XP:Number = 0):void {
-			while (XP > 0) {
-				if (XP == 1) {
-					masterySwordXP++;
-					XP--;
-				}
-				else {
-					masterySwordXP += XP;
-					XP -= XP;
-				}
-				//Level dat shit up!
-				if (masterySwordLevel < maxSwordLevel() && masterySwordXP >= SwordExpToLevelUp()) {
-					outputText("\n<b>Dao of Sword leveled up to " + (masterySwordLevel + 1) + "!</b>\n");
-					masterySwordLevel++;
-					masterySwordXP = 0;
+		public function nextBonusAttack():int {
+			var masteryArrays:Array = masteryBonusAttacks;
+			for each (var masteryArr:Array in masteryArrays) {
+				if (masteryArr[1]) {
+					for (var bonusPos:int = 0; bonusPos < masteryArr[2].length; ++bonusPos) {
+						if (combatMastery[masteryArr[0]].level < masteryArr[2][bonusPos])
+							return masteryArr[2][bonusPos];
+					}
+					return -1; // attack found, all bonuses received
 				}
 			}
+			return -1; // attack not found
 		}
 
-		public function maxAxeLevel():Number {
-			var maxLevel:Number = 10;
-			if (level < 90) maxLevel += level;
-			else maxLevel += 90;
-			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) maxLevel += 50;
-			return maxLevel;
-		}
-		public function AxeExpToLevelUp():Number {
-			var expToLevelUp:Number = 10;
-			var expToLevelUp00:Number = masteryAxeLevel + 1;
-			var expToLevelUp01:Number = 5;
-			var expToLevelUp02:Number = masteryAxeLevel + 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) expToLevelUp00 *= 0.5;
-			expToLevelUp00 = Math.round(expToLevelUp00);
-			if (expToLevelUp00 < 1) expToLevelUp00 = 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMastery)) expToLevelUp01 -= 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMasteryEx)) expToLevelUp02 *= 0.5;
-			expToLevelUp02 = Math.round(expToLevelUp02);
-			if (expToLevelUp02 < 1) expToLevelUp02 = 1;
-			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
-			return expToLevelUp;
-		}
-
-		public function axeXP(XP:Number = 0):void {
-			while (XP > 0) {
-				if (XP == 1) {
-					masteryAxeXP++;
-					XP--;
-				}
-				else {
-					masteryAxeXP += XP;
-					XP -= XP;
-				}
-				//Level dat shit up!
-				if (masteryAxeLevel < maxAxeLevel() && masteryAxeXP >= AxeExpToLevelUp()) {
-					outputText("\n<b>Dao of Axe leveled up to " + (masteryAxeLevel + 1) + "!</b>\n");
-					masteryAxeLevel++;
-					masteryAxeXP = 0;
+		public function calculateMultiAttacks():int {
+			var rval:Number = 1;
+            var masteryArrays:Array = masteryBonusAttacks;
+			for each (var masteryArr:Array in masteryArrays) {
+				if (masteryArr[1]) {
+					for (var bonusPos:int = 0; bonusPos < masteryArr[2].length; ++bonusPos) {
+						if (combatMastery[masteryArr[0]].level >= masteryArr[2][bonusPos]) ++rval;
+						else break;
+					}
+					break;
 				}
 			}
+			// Spear gains a few extra due to Spear Dancing Flurry
+			if(isSpearTypeWeapon() && isNotHavingShieldCuzPerksNotWorkingOtherwise() && hasPerk(PerkLib.ELFElvenSpearDancingFlurry1to4) && isElf()) {
+                rval += perkv1(PerkLib.ELFElvenSpearDancingFlurry1to4);
+            }
+			// Feral starts off with +1 with history perk
+			if(isFeralCombat() && (hasPerk(PerkLib.HistoryFeral) || hasPerk(PerkLib.PastLifeFeral))){
+                rval += 1;
+			}
+
+			return rval;
 		}
 
-		public function maxMaceHammerLevel():Number {
-			var maxLevel:Number = 10;
-			if (level < 90) maxLevel += level;
-			else maxLevel += 90;
-			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) maxLevel += 50;
-			return maxLevel;
-		}
-		public function MaceHammerExpToLevelUp():Number {
-			var expToLevelUp:Number = 10;
-			var expToLevelUp00:Number = masteryMaceHammerLevel + 1;
-			var expToLevelUp01:Number = 5;
-			var expToLevelUp02:Number = masteryMaceHammerLevel + 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) expToLevelUp00 *= 0.5;
-			expToLevelUp00 = Math.round(expToLevelUp00);
-			if (expToLevelUp00 < 1) expToLevelUp00 = 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMastery)) expToLevelUp01 -= 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMasteryEx)) expToLevelUp02 *= 0.5;
-			expToLevelUp02 = Math.round(expToLevelUp02);
-			if (expToLevelUp02 < 1) expToLevelUp02 = 1;
-			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
-			return expToLevelUp;
-		}
-		public function macehammerXP(XP:Number = 0):void {
-			while (XP > 0) {
-				if (XP == 1) {
-					masteryMaceHammerXP++;
-					XP--;
-				}
-				else {
-					masteryMaceHammerXP += XP;
-					XP -= XP;
-				}
-				//Level dat shit up!
-				if (masteryMaceHammerLevel < maxMaceHammerLevel() && masteryMaceHammerXP >= MaceHammerExpToLevelUp()) {
-					outputText("\n<b>Dao of Mace/Hammer leveled up to " + (masteryMaceHammerLevel + 1) + "!</b>\n");
-					masteryMaceHammerLevel++;
-					masteryMaceHammerXP = 0;
-				}
+		public function getHighestMastery():Number{
+			var rval:Number = 0;
+			for(var i:int = 0; i < combatMastery.length; i++){
+				if( rval < combatMastery[i].level ){ rval = combatMastery[i].level ;}
 			}
+			return rval;
 		}
 
-		public function maxDuelingSwordLevel():Number {
-			var maxLevel:Number = 10;
-			if (level < 90) maxLevel += level;
-			else maxLevel += 90;
-			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) maxLevel += 50;
-			return maxLevel;
-		}
-		public function DuelingSwordExpToLevelUp():Number {
-			var expToLevelUp:Number = 10;
-			var expToLevelUp00:Number = masteryDuelingSwordLevel + 1;
-			var expToLevelUp01:Number = 5;
-			var expToLevelUp02:Number = masteryDuelingSwordLevel + 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) expToLevelUp00 *= 0.5;
-			expToLevelUp00 = Math.round(expToLevelUp00);
-			if (expToLevelUp00 < 1) expToLevelUp00 = 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMastery)) expToLevelUp01 -= 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMasteryEx)) expToLevelUp02 *= 0.5;
-			expToLevelUp02 = Math.round(expToLevelUp02);
-			if (expToLevelUp02 < 1) expToLevelUp02 = 1;
-			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
-			return expToLevelUp;
-		}
-		public function duelingswordXP(XP:Number = 0):void {
-			while (XP > 0) {
-				if (XP == 1) {
-					masteryDuelingSwordXP++;
-					XP--;
-				}
-				else {
-					masteryDuelingSwordXP += XP;
-					XP -= XP;
-				}
-				//Level dat shit up!
-				if (masteryDuelingSwordLevel < maxDuelingSwordLevel() && masteryDuelingSwordXP >= DuelingSwordExpToLevelUp()) {
-					outputText("\n<b>Dao of Dueling Sword leveled up to " + (masteryDuelingSwordLevel + 1) + "!</b>\n");
-					masteryDuelingSwordLevel++;
-					masteryDuelingSwordXP = 0;
-				}
-			}
-		}
 
-		public function maxPolearmLevel():Number {
-			var maxLevel:Number = 10;
-			if (level < 90) maxLevel += level;
-			else maxLevel += 90;
-			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) maxLevel += 50;
-			return maxLevel;
-		}
-		public function PolearmExpToLevelUp():Number {
-			var expToLevelUp:Number = 10;
-			var expToLevelUp00:Number = masteryPolearmLevel + 1;
-			var expToLevelUp01:Number = 5;
-			var expToLevelUp02:Number = masteryPolearmLevel + 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) expToLevelUp00 *= 0.5;
-			expToLevelUp00 = Math.round(expToLevelUp00);
-			if (expToLevelUp00 < 1) expToLevelUp00 = 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMastery)) expToLevelUp01 -= 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMasteryEx)) expToLevelUp02 *= 0.5;
-			expToLevelUp02 = Math.round(expToLevelUp02);
-			if (expToLevelUp02 < 1) expToLevelUp02 = 1;
-			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
-			return expToLevelUp;
-		}
-		public function polearmXP(XP:Number = 0):void {
-			while (XP > 0) {
-				if (XP == 1) {
-					masteryPolearmXP++;
-					XP--;
-				}
-				else {
-					masteryPolearmXP += XP;
-					XP -= XP;
-				}
-				//Level dat shit up!
-				if (masteryPolearmLevel < maxPolearmLevel() && masteryPolearmXP >= PolearmExpToLevelUp()) {
-					outputText("\n<b>Dao of Polearm leveled up to " + (masteryPolearmLevel + 1) + "!</b>\n");
-					masteryPolearmLevel++;
-					masteryPolearmXP = 0;
-				}
-			}
-		}
-
-		public function maxSpearLevel():Number {
-			var maxLevel:Number = 10;
-			if (level < 90) maxLevel += level;
-			else maxLevel += 90;
-			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) maxLevel += 50;
-			return maxLevel;
-		}
-		public function SpearExpToLevelUp():Number {
-			var expToLevelUp:Number = 10;
-			var expToLevelUp00:Number = masterySpearLevel + 1;
-			var expToLevelUp01:Number = 5;
-			var expToLevelUp02:Number = masterySpearLevel + 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) expToLevelUp00 *= 0.5;
-			expToLevelUp00 = Math.round(expToLevelUp00);
-			if (expToLevelUp00 < 1) expToLevelUp00 = 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMastery)) expToLevelUp01 -= 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMasteryEx)) expToLevelUp02 *= 0.5;
-			expToLevelUp02 = Math.round(expToLevelUp02);
-			if (expToLevelUp02 < 1) expToLevelUp02 = 1;
-			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
-			return expToLevelUp;
-		}
-		public function spearXP(XP:Number = 0):void {
-			while (XP > 0) {
-				if (XP == 1) {
-					masterySpearXP++;
-					XP--;
-				}
-				else {
-					masterySpearXP += XP;
-					XP -= XP;
-				}
-				//Level dat shit up!
-				if (masterySpearLevel < maxSpearLevel() && masterySpearXP >= SpearExpToLevelUp()) {
-					outputText("\n<b>Dao of Spear leveled up to " + (masterySpearLevel + 1) + "!</b>\n");
-					masterySpearLevel++;
-					masterySpearXP = 0;
-				}
-			}
-		}
-
-		public function maxDaggerLevel():Number {
-			var maxLevel:Number = 10;
-			if (level < 90) maxLevel += level;
-			else maxLevel += 90;
-			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) maxLevel += 50;
-			return maxLevel;
-		}
-		public function DaggerExpToLevelUp():Number {
-			var expToLevelUp:Number = 10;
-			var expToLevelUp00:Number = masteryDaggerLevel + 1;
-			var expToLevelUp01:Number = 5;
-			var expToLevelUp02:Number = masteryDaggerLevel + 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) expToLevelUp00 *= 0.5;
-			expToLevelUp00 = Math.round(expToLevelUp00);
-			if (expToLevelUp00 < 1) expToLevelUp00 = 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMastery)) expToLevelUp01 -= 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMasteryEx)) expToLevelUp02 *= 0.5;
-			expToLevelUp02 = Math.round(expToLevelUp02);
-			if (expToLevelUp02 < 1) expToLevelUp02 = 1;
-			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
-			return expToLevelUp;
-		}
-		public function daggerXP(XP:Number = 0):void {
-			while (XP > 0) {
-				if (XP == 1) {
-					masteryDaggerXP++;
-					XP--;
-				}
-				else {
-					masteryDaggerXP += XP;
-					XP -= XP;
-				}
-				//Level dat shit up!
-				if (masteryDaggerLevel < maxDaggerLevel() && masteryDaggerXP >= DaggerExpToLevelUp()) {
-					outputText("\n<b>Dao of Dagger leveled up to " + (masteryDaggerLevel + 1) + "!</b>\n");
-					masteryDaggerLevel++;
-					masteryDaggerXP = 0;
-				}
-			}
-		}
-
-		public function maxWhipLevel():Number {
-			var maxLevel:Number = 10;
-			if (level < 90) maxLevel += level;
-			else maxLevel += 90;
-			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) maxLevel += 50;
-			return maxLevel;
-		}
-		public function WhipExpToLevelUp():Number {
-			var expToLevelUp:Number = 10;
-			var expToLevelUp00:Number = masteryWhipLevel + 1;
-			var expToLevelUp01:Number = 5;
-			var expToLevelUp02:Number = masteryWhipLevel + 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) expToLevelUp00 *= 0.5;
-			expToLevelUp00 = Math.round(expToLevelUp00);
-			if (expToLevelUp00 < 1) expToLevelUp00 = 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMastery)) expToLevelUp01 -= 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMasteryEx)) expToLevelUp02 *= 0.5;
-			expToLevelUp02 = Math.round(expToLevelUp02);
-			if (expToLevelUp02 < 1) expToLevelUp02 = 1;
-			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
-			return expToLevelUp;
-		}
-		public function whipXP(XP:Number = 0):void {
-			while (XP > 0) {
-				if (XP == 1) {
-					masteryWhipXP++;
-					XP--;
-				}
-				else {
-					masteryWhipXP += XP;
-					XP -= XP;
-				}
-				//Level dat shit up!
-				if (masteryWhipLevel < maxWhipLevel() && masteryWhipXP >= WhipExpToLevelUp()) {
-					outputText("\n<b>Dao of Whip leveled up to " + (masteryWhipLevel + 1) + "!</b>\n");
-					masteryWhipLevel++;
-					masteryWhipXP = 0;
-				}
-			}
-		}
-
-		public function maxExoticLevel():Number {
-			var maxLevel:Number = 10;
-			if (level < 90) maxLevel += level;
-			else maxLevel += 90;
-			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) maxLevel += 50;
-			return maxLevel;
-		}
-		public function ExoticExpToLevelUp():Number {
-			var expToLevelUp:Number = 10;
-			var expToLevelUp00:Number = masteryExoticLevel + 1;
-			var expToLevelUp01:Number = 5;
-			var expToLevelUp02:Number = masteryExoticLevel + 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) expToLevelUp00 *= 0.5;
-			expToLevelUp00 = Math.round(expToLevelUp00);
-			if (expToLevelUp00 < 1) expToLevelUp00 = 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMastery)) expToLevelUp01 -= 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMasteryEx)) expToLevelUp02 *= 0.5;
-			expToLevelUp02 = Math.round(expToLevelUp02);
-			if (expToLevelUp02 < 1) expToLevelUp02 = 1;
-			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
-			return expToLevelUp;
-		}
-		public function exoticXP(XP:Number = 0):void {
-			while (XP > 0) {
-				if (XP == 1) {
-					masteryExoticXP++;
-					XP--;
-				}
-				else {
-					masteryExoticXP += XP;
-					XP -= XP;
-				}
-				//Level dat shit up!
-				if (masteryExoticLevel < maxExoticLevel() && masteryExoticXP >= ExoticExpToLevelUp()) {
-					outputText("\n<b>Dao of Exotic Weapons leveled up to " + (masteryExoticLevel + 1) + "!</b>\n");
-					masteryExoticLevel++;
-					masteryExoticXP = 0;
-				}
-			}
-		}
-
-		public function maxArcheryLevel():Number {
-			var maxLevel:Number = 10;
-			if (level < 90) maxLevel += level;
-			else maxLevel += 90;
-			if (hasPerk(PerkLib.RangeWeaponsMasterySu)) maxLevel += 50;
-			return maxLevel;
-		}
-		public function ArcheryExpToLevelUp():Number {
-			var expToLevelUp:Number = 10;
-			var expToLevelUp00:Number = masteryArcheryLevel + 1;
-			var expToLevelUp01:Number = 5;
-			var expToLevelUp02:Number = masteryArcheryLevel + 1;
-			if (hasPerk(PerkLib.RangeWeaponsMasterySu)) expToLevelUp00 *= 0.5;
-			expToLevelUp00 = Math.round(expToLevelUp00);
-			if (expToLevelUp00 < 1) expToLevelUp00 = 1;
-			if (hasPerk(PerkLib.RangeWeaponsMastery)) expToLevelUp01 -= 1;
-			if (hasPerk(PerkLib.RangeWeaponsMasteryEx)) expToLevelUp02 *= 0.5;
-			expToLevelUp02 = Math.round(expToLevelUp02);
-			if (expToLevelUp02 < 1) expToLevelUp02 = 1;
-			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
-			return expToLevelUp;
-		}
-		public function archeryXP(XP:Number = 0):void {
-			while (XP > 0) {
-				if (XP == 1) {
-					masteryArcheryXP++;
-					XP--;
-				}
-				else {
-					masteryArcheryXP += XP;
-					XP -= XP;
-				}
-				//Level dat shit up!
-				if (masteryArcheryLevel < maxArcheryLevel() && masteryArcheryXP >= ArcheryExpToLevelUp()) {
-					outputText("\n<b>Dao of Archery leveled up to " + (masteryArcheryLevel + 1) + "!</b>\n");
-					masteryArcheryLevel++;
-					masteryArcheryXP = 0;
-				}
-			}
-		}
-
-		public function maxThrowingLevel():Number {
-			var maxLevel:Number = 10;
-			if (level < 90) maxLevel += level;
-			else maxLevel += 90;
-			if (hasPerk(PerkLib.RangeWeaponsMasterySu)) maxLevel += 50;
-			return maxLevel;
-		}
-		public function ThrowingExpToLevelUp():Number {
-			var expToLevelUp:Number = 10;
-			var expToLevelUp00:Number = masteryThrowingLevel + 1;
-			var expToLevelUp01:Number = 5;
-			var expToLevelUp02:Number = masteryThrowingLevel + 1;
-			if (hasPerk(PerkLib.RangeWeaponsMasterySu)) expToLevelUp00 *= 0.5;
-			expToLevelUp00 = Math.round(expToLevelUp00);
-			if (expToLevelUp00 < 1) expToLevelUp00 = 1;
-			if (hasPerk(PerkLib.RangeWeaponsMastery)) expToLevelUp01 -= 1;
-			if (hasPerk(PerkLib.RangeWeaponsMasteryEx)) expToLevelUp02 *= 0.5;
-			expToLevelUp02 = Math.round(expToLevelUp02);
-			if (expToLevelUp02 < 1) expToLevelUp02 = 1;
-			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
-			return expToLevelUp;
-		}
-		public function throwingXP(XP:Number = 0):void {
-			while (XP > 0) {
-				if (XP == 1) {
-					masteryThrowingXP++;
-					XP--;
-				}
-				else {
-					masteryThrowingXP += XP;
-					XP -= XP;
-				}
-				//Level dat shit up!
-				if (masteryThrowingLevel < maxThrowingLevel() && masteryThrowingXP >= ThrowingExpToLevelUp()) {
-					outputText("\n<b>Dao of Throwing Weapons leveled up to " + (masteryThrowingLevel + 1) + "!</b>\n");
-					masteryThrowingLevel++;
-					masteryThrowingXP = 0;
-				}
-			}
-		}
-
-		public function maxFirearmsLevel():Number {
-			var maxLevel:Number = 10;
-			if (level < 90) maxLevel += level;
-			else maxLevel += 90;
-			if (hasPerk(PerkLib.RangeWeaponsMasterySu)) maxLevel += 50;
-			return maxLevel;
-		}
-		public function FirearmsExpToLevelUp():Number {
-			var expToLevelUp:Number = 10;
-			var expToLevelUp00:Number = masteryFirearmsLevel + 1;
-			var expToLevelUp01:Number = 5;
-			var expToLevelUp02:Number = masteryFirearmsLevel + 1;
-			if (hasPerk(PerkLib.RangeWeaponsMasterySu)) expToLevelUp00 *= 0.5;
-			expToLevelUp00 = Math.round(expToLevelUp00);
-			if (expToLevelUp00 < 1) expToLevelUp00 = 1;
-			if (hasPerk(PerkLib.RangeWeaponsMastery)) expToLevelUp01 -= 1;
-			if (hasPerk(PerkLib.RangeWeaponsMasteryEx)) expToLevelUp02 *= 0.5;
-			expToLevelUp02 = Math.round(expToLevelUp02);
-			if (expToLevelUp02 < 1) expToLevelUp02 = 1;
-			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
-			return expToLevelUp;
-		}
-		public function firearmsXP(XP:Number = 0):void {
-			while (XP > 0) {
-				if (XP == 1) {
-					masteryFirearmsXP++;
-					XP--;
-				}
-				else {
-					masteryFirearmsXP += XP;
-					XP -= XP;
-				}
-				//Level dat shit up!
-				if (masteryFirearmsLevel < maxFirearmsLevel() && masteryFirearmsXP >= FirearmsExpToLevelUp()) {
-					outputText("\n<b>Dao of Firearms Weapons leveled up to " + (masteryFirearmsLevel + 1) + "!</b>\n");
-					masteryFirearmsLevel++;
-					masteryFirearmsXP = 0;
-				}
-			}
-		}
-
-		public function maxDualWieldSmallLevel():Number {
-			var maxLevel:Number = 10;
-			if (level < 90) maxLevel += level;
-			else maxLevel += 90;
-			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) maxLevel += 50;
-			return maxLevel;
-		}
-		public function DualWieldSmallExpToLevelUp():Number {
-			var expToLevelUp:Number = 10;
-			var expToLevelUp00:Number = dualWSLevel + 1;
-			var expToLevelUp01:Number = 5;
-			var expToLevelUp02:Number = dualWSLevel + 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) expToLevelUp00 *= 0.5;
-			expToLevelUp00 = Math.round(expToLevelUp00);
-			if (expToLevelUp00 < 1) expToLevelUp00 = 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMastery)) expToLevelUp01 -= 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMasteryEx)) expToLevelUp02 *= 0.5;
-			expToLevelUp02 = Math.round(expToLevelUp02);
-			if (expToLevelUp02 < 1) expToLevelUp02 = 1;
-			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
-			return expToLevelUp;
-		}
-		public function dualWieldSmallXP(XP:Number = 0):void {
-			while (XP > 0) {
-				if (XP == 1) {
-					dualWSXP++;
-					XP--;
-				}
-				else {
-					dualWSXP += XP;
-					XP -= XP;
-				}
-				//Level dat shit up!
-				if (dualWSLevel < maxDualWieldSmallLevel() && dualWSXP >= DualWieldSmallExpToLevelUp()) {
-					outputText("\n<b>Dual Wield (Small) skill leveled up to " + (dualWSLevel + 1) + "!</b>\n");
-					dualWSLevel++;
-					dualWSXP = 0;
-				}
-			}
-		}
-
-		public function maxDualWieldNormalLevel():Number {
-			var maxLevel:Number = 10;
-			if (level < 90) maxLevel += level;
-			else maxLevel += 90;
-			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) maxLevel += 50;
-			return maxLevel;
-		}
-		public function DualWieldNormalExpToLevelUp():Number {
-			var expToLevelUp:Number = 10;
-			var expToLevelUp00:Number = dualWNLevel + 1;
-			var expToLevelUp01:Number = 5;
-			var expToLevelUp02:Number = dualWNLevel + 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) expToLevelUp00 *= 0.5;
-			expToLevelUp00 = Math.round(expToLevelUp00);
-			if (expToLevelUp00 < 1) expToLevelUp00 = 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMastery)) expToLevelUp01 -= 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMasteryEx)) expToLevelUp02 *= 0.5;
-			expToLevelUp02 = Math.round(expToLevelUp02);
-			if (expToLevelUp02 < 1) expToLevelUp02 = 1;
-			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
-			return expToLevelUp;
-		}
-		public function dualWieldNormalXP(XP:Number = 0):void {
-			while (XP > 0) {
-				if (XP == 1) {
-					dualWNXP++;
-					XP--;
-				}
-				else {
-					dualWNXP += XP;
-					XP -= XP;
-				}
-				//Level dat shit up!
-				if (dualWNLevel < maxDualWieldNormalLevel() && dualWNXP >= DualWieldNormalExpToLevelUp()) {
-					outputText("\n<b>Dual Wield (Normal) skill leveled up to " + (dualWNLevel + 1) + "!</b>\n");
-					dualWNLevel++;
-					dualWNXP = 0;
-				}
-			}
-		}
-
-		public function maxDualWieldLargeLevel():Number {
-			var maxLevel:Number = 10;
-			if (level < 90) maxLevel += level;
-			else maxLevel += 90;
-			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) maxLevel += 50;
-			return maxLevel;
-		}
-		public function DualWieldLargeExpToLevelUp():Number {
-			var expToLevelUp:Number = 10;
-			var expToLevelUp00:Number = dualWLLevel + 1;
-			var expToLevelUp01:Number = 5;
-			var expToLevelUp02:Number = dualWLLevel + 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMasterySu)) expToLevelUp00 *= 0.5;
-			expToLevelUp00 = Math.round(expToLevelUp00);
-			if (expToLevelUp00 < 1) expToLevelUp00 = 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMastery)) expToLevelUp01 -= 1;
-			if (hasPerk(PerkLib.MeleeWeaponsMasteryEx)) expToLevelUp02 *= 0.5;
-			expToLevelUp02 = Math.round(expToLevelUp02);
-			if (expToLevelUp02 < 1) expToLevelUp02 = 1;
-			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
-			return expToLevelUp;
-		}
-		public function dualWieldLargeXP(XP:Number = 0):void {
-			while (XP > 0) {
-				if (XP == 1) {
-					dualWLXP++;
-					XP--;
-				}
-				else {
-					dualWLXP += XP;
-					XP -= XP;
-				}
-				//Level dat shit up!
-				if (dualWLLevel < maxDualWieldLargeLevel() && dualWLXP >= DualWieldLargeExpToLevelUp()) {
-					outputText("\n<b>Dual Wield (Large) skill leveled up to " + (dualWLLevel + 1) + "!</b>\n");
-					dualWLLevel++;
-					dualWLXP = 0;
-				}
-			}
-		}
-
-		public function maxDualWieldFirearmsLevel():Number {
-			var maxLevel:Number = 10;
-			if (level < 90) maxLevel += level;
-			else maxLevel += 90;
-			if (hasPerk(PerkLib.RangeWeaponsMasterySu)) maxLevel += 50;
-			return maxLevel;
-		}
-		public function DualWieldFirearmsExpToLevelUp():Number {
-			var expToLevelUp:Number = 10;
-			var expToLevelUp00:Number = dualWFLevel + 1;
-			var expToLevelUp01:Number = 5;
-			var expToLevelUp02:Number = dualWFLevel + 1;
-			if (hasPerk(PerkLib.RangeWeaponsMasterySu)) expToLevelUp00 *= 0.5;
-			expToLevelUp00 = Math.round(expToLevelUp00);
-			if (expToLevelUp00 < 1) expToLevelUp00 = 1;
-			if (hasPerk(PerkLib.RangeWeaponsMastery)) expToLevelUp01 -= 1;
-			if (hasPerk(PerkLib.RangeWeaponsMasteryEx)) expToLevelUp02 *= 0.5;
-			expToLevelUp02 = Math.round(expToLevelUp02);
-			if (expToLevelUp02 < 1) expToLevelUp02 = 1;
-			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
-			return expToLevelUp;
-		}
-		public function dualWieldFirearmsXP(XP:Number = 0):void {
-			while (XP > 0) {
-				if (XP == 1) {
-					dualWFXP++;
-					XP--;
-				}
-				else {
-					dualWFXP += XP;
-					XP -= XP;
-				}
-				//Level dat shit up!
-				if (dualWFLevel < maxDualWieldFirearmsLevel() && dualWFXP >= DualWieldFirearmsExpToLevelUp()) {
-					outputText("\n<b>Dual Wield (Firearms) skill leveled up to " + (dualWFLevel + 1) + "!</b>\n");
-					dualWFLevel++;
-					dualWFXP = 0;
-				}
-			}
-		}
 
 		public function maxMiningLevel():Number {
 			var maxLevel:Number = 2;
-			//if (hasPerk(PerkLib.SuperSensual)) {
-				//if (level < 48) maxLevel += level;
-				//else maxLevel += 48;
-			//}
-			//else {
-				if (level < 18) maxLevel += level;
-				else maxLevel += 18;
-			//}
+			if (level < 18) maxLevel += level;
+			else maxLevel += 18;
 			return maxLevel;
 		}
 		public function MiningExpToLevelUp():Number {
@@ -6309,7 +5876,8 @@ use namespace CoC;
 
 		public function blockingBodyTransformations():Boolean {
 			return hasPerk(PerkLib.TransformationImmunity) || hasPerk(PerkLib.TransformationImmunityFairy) || hasPerk(PerkLib.TransformationImmunityAtlach)
-					|| hasPerk(PerkLib.Undeath) || hasPerk(PerkLib.WendigoCurse) || hasPerk(PerkLib.BlessingOfTheAncestorTree);
+					|| hasPerk(PerkLib.TransformationImmunityBeeHandmaiden) || hasPerk(PerkLib.Undeath) || hasPerk(PerkLib.WendigoCurse)
+					|| hasPerk(PerkLib.BlessingOfTheAncestorTree) || hasEnchantment(EnchantmentLib.TfImmunity);
 		}
 
 		public function manticoreFeed():void {
@@ -6399,7 +5967,7 @@ use namespace CoC;
 		 */
 		public function sexReward(fluidtype:String = 'Default', type:String = 'Default', real:Boolean = true, Wasfluidinvolved:Boolean = true):void
 		{
-			if (Wasfluidinvolved) {
+			if (Wasfluidinvolved && fluidtype && fluidtype.toLowerCase() != "no") {
 				slimeFeed();
 				if (isGargoyle() && hasPerk(PerkLib.GargoyleCorrupted)) refillGargoyleHunger(30);
 				if (isRace(Races.JIANGSHI) && hasPerk(PerkLib.EnergyDependent)) EnergyDependentRestore();
@@ -6431,11 +5999,22 @@ use namespace CoC;
 			}
 			SexXP(5+level);
 			if (armor == game.armors.SCANSC)SexXP(5+level);
-			orgasm(type,real);
-			if (type == "Dick") {
-				if (hasPerk(PerkLib.EasterBunnyBalls)) {
-					if (ballSize > 3) createStatusEffect(StatusEffects.EasterBunnyCame, 0, 0, 0, 0);
-				}
+			if (real) {
+				statStore.removeBuffs('Supercharged');
+				orgasm(type);
+			}
+		}
+
+		public function orgasm(type:String = "Default"):void
+		{
+			var finalType:String = orgasmFinalType(type);
+			dynStats("lus=", 0, "sca", false);
+			hoursSinceCum = 0;
+			flags[kFLAGS.TIMES_ORGASMED]++;
+			if (finalType == "Dick") {
+                if (SceneLib.exgartuan.dickPresent()) SceneLib.exgartuan.dickSleep(4 + rand(4)); //give him some sleep
+				if (hasPerk(PerkLib.EasterBunnyBalls) && ballSize > 3)
+					createStatusEffect(StatusEffects.EasterBunnyCame, 0, 0, 0, 0);
 				if (perkv1(IMutationsLib.NukiNutsIM) >= 2) {
 					var cumAmmount:Number = cumQ();
 					var payout:Number = 0;
@@ -6447,104 +6026,46 @@ use namespace CoC;
 					if (perkv1(IMutationsLib.NukiNutsIM) >= 3) payout *= 2;
 					if (payout > 0) {
 						gems += payout;
-						EngineCore.outputText("\n\nBefore moving on you grab the " + payout + " gems you came from from your " + cockDescript(0) + ".</b>\n\n");
+						EngineCore.outputText("\n\nBefore moving on you grab the " + payout + " gems you came from your " + cockDescript(0) + ".</b>\n\n");
 					}
 				}
+				if (countCockSocks("gilded") > 0) {
+					var randomCock:int = rand( cocks.length );
+					var bonusGems:int = rand( cocks[randomCock].cockThickness ) + countCockSocks("gilded"); // int so AS rounds to whole numbers
+					EngineCore.outputText("\n\nFeeling some minor discomfort in your " + cockDescript(randomCock) + " you slip it out of your [armor] and examine it. <b>With a little exploratory rubbing and massaging, you manage to squeeze out " + bonusGems + " gems from its cum slit.</b>\n\n");
+					gems += bonusGems;
+				}
 			}
+            if (SceneLib.exgartuan.boobsPresent()) SceneLib.exgartuan.boobsSleep(4 + rand(4)); //consider her touched, lol
 		}
 
-		public function orgasmReal():void
-		{
-			dynStats("lus=", 0, "sca", false);
-			hoursSinceCum = 0;
-			flags[kFLAGS.TIMES_ORGASMED]++;
-			if (countCockSocks("gilded") > 0) {
-				var randomCock:int = rand( cocks.length );
-				var bonusGems:int = rand( cocks[randomCock].cockThickness ) + countCockSocks("gilded"); // int so AS rounds to whole numbers
-				EngineCore.outputText("\n\nFeeling some minor discomfort in your " + cockDescript(randomCock) + " you slip it out of your [armor] and examine it. <b>With a little exploratory rubbing and massaging, you manage to squeeze out " + bonusGems + " gems from its cum slit.</b>\n\n");
-				gems += bonusGems;
-			}
-		}
-
-		public function orgasm(type:String = 'Default', real:Boolean = true):void
-		{
+		public function orgasmFinalType(type:String = "Default"):String {
 			switch (type) {
-					// Start with that, whats easy
-				case 'Vaginal': //if (CoC.instance.bimboProgress.ableToProgress() || flags[kFLAGS.TIMES_ORGASM_VAGINAL] < 10) flags[kFLAGS.TIMES_ORGASM_VAGINAL]++;
-					break;
-				case 'Anal':    //if (CoC.instance.bimboProgress.ableToProgress() || flags[kFLAGS.TIMES_ORGASM_ANAL]    < 10) flags[kFLAGS.TIMES_ORGASM_ANAL]++;
-					break;
-				case 'Dick':    //if (CoC.instance.bimboProgress.ableToProgress() || flags[kFLAGS.TIMES_ORGASM_DICK]    < 10) flags[kFLAGS.TIMES_ORGASM_DICK]++;
-					break;
-				case 'Lips':    //if (CoC.instance.bimboProgress.ableToProgress() || flags[kFLAGS.TIMES_ORGASM_LIPS]    < 10) flags[kFLAGS.TIMES_ORGASM_LIPS]++;
-					break;
-				case 'Tits':    //if (CoC.instance.bimboProgress.ableToProgress() || flags[kFLAGS.TIMES_ORGASM_TITS]    < 10) flags[kFLAGS.TIMES_ORGASM_TITS]++;
-					break;
-				case 'Nipples': //if (CoC.instance.bimboProgress.ableToProgress() || flags[kFLAGS.TIMES_ORGASM_NIPPLES] < 10) flags[kFLAGS.TIMES_ORGASM_NIPPLES]++;
-					break;
-				case 'Ovi':
-					break;
-					// Now to the more complex types
 				case 'VaginalAnal':
-					orgasm((hasVagina() ? 'Vaginal' : 'Anal'), real);
-					return; // Prevent calling orgasmReal() twice
+					return hasVagina() ? 'Vaginal' : 'Anal';
 				case 'DickAnal':
-					orgasm((rand(2) == 0 ? 'Dick' : 'Anal'), real);
-					return;
+					return hasCock() ? 'Dick' : 'Anal';
 				case 'Default':
 				case 'Generic':
+				case 'DickVaginal':
+					return hasCock() ? 'Dick' : hasVagina() ? 'Vaginal' : 'Anal';
 				default:
-					if (!hasVagina() && !hasCock()) {
-						orgasm('Anal'); // Failsafe for genderless PCs
-						return;
-					}
-					if (hasVagina() && hasCock()) {
-						orgasm((rand(2) == 0 ? 'Vaginal' : 'Dick'), real);
-						return;
-					}
-					orgasm((hasVagina() ? 'Vaginal' : 'Dick'), real);
-					return;
+					return type;
 			}
-
-			if (real) orgasmReal();
 		}
-		public function orgasmRaijuStyle():void
+
+		public function orgasmRaijuStyle(type:String = "Default"):void
 		{
-			if (game.player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
-				EngineCore.outputText("\n\nAs you finish masturbating you feel a jolt in your genitals, as if for a small moment the raiju discharge was brought back, increasing the intensity of the pleasure and your desire to touch yourself. Electricity starts coursing through your body again by intermittence as something in you begins to change.");
-				game.player.addStatusValue(StatusEffects.RaijuLightningStatus,1,6);
+			orgasm(type);
+			if (hasStatusEffect(StatusEffects.RaijuLightningStatus)) {
+				outputText("\n\nAs you finish masturbating you feel a jolt in your genitals, as if for a small moment the raiju discharge was brought back, increasing the intensity of the pleasure and your desire to touch yourself. Electricity starts coursing through your body again by intermittence as something in you begins to change.");
+				addStatusValue(StatusEffects.RaijuLightningStatus,1,6);
 				dynStats("lus", (60 + rand(20)), "sca", false);
-				game.mutations.voltageTopaz(false,CoC.instance.player);
+				game.mutations.voltageTopaz(false, this);
 			}
 			else {
-				EngineCore.outputText("\n\nAfter this electrifying orgasm your lust only raises higher than the sky above. You will need a partner to fuck with in order to discharge your ramping up desire and electricity.");
+				outputText("\n\nAfter this electrifying orgasm your lust only raises higher than the sky above. You will need a partner to fuck with in order to discharge your ramping up desire and electricity.");
 				dynStats("lus", (maxLust() * 0.1), "sca", false);
-			}
-			hoursSinceCum = 0;
-			flags[kFLAGS.TIMES_ORGASMED]++;
-		}
-		public function penetrated(where:ISexyPart, tool:ISexyPart, options:Object = null):void {
-			options = Utils.extend({
-				display:true,
-				orgasm:false
-			},options||{});
-			if (where.host != null && where.host != this) {
-				trace("Penetration confusion! Host is "+where.host);
-				return;
-			}
-			var size:Number = 8;
-			if ('size' in options) size = options.size;
-			else if (tool is Cock) size = (tool as Cock).cArea();
-			var otype:String = 'Default';
-			if (where is AssClass) {
-				buttChange(size, options.display);
-				otype = 'Anal';
-			} else if (where is VaginaClass) {
-				cuntChange(size, options.display);
-				otype = 'Vaginal';
-			}
-			if (options.orgasm) {
-				orgasm(otype);
 			}
 		}
 
@@ -6562,11 +6083,11 @@ use namespace CoC;
 			if (!CoC.instance.monster.hasPerk(PerkLib.EnemyTrueDemon)) {
 				if (hasStatusEffect(StatusEffects.AlterBindScroll2)) soulforce += maxSoulforce() * 0.08;
 				else soulforce += maxSoulforce() * 0.04;
-				if (soulforce > maxSoulforce()) soulforce = maxSoulforce();
+				if (soulforce > maxOverSoulforce()) soulforce = maxOverSoulforce();
 				outputText(" You feel slightly more alive from the soulforce you vampirised from your sexual partner orgasm.");
 			}
-			if (HP < maxHP()) EngineCore.HPChange(25 + (lib/2), true);
-			if (mana < maxMana()) EngineCore.ManaChange(25 + (inte/2), true);
+			EngineCore.HPChange(25 + (lib/2), true);
+			EngineCore.ManaChange(25 + (inte/2));
 			EngineCore.changeFatigue(-(25 + (spe/2)));
 			removeCurse("lib", 5, 1);
 			removeCurse("lib", 5, 2);
@@ -6594,8 +6115,7 @@ use namespace CoC;
 		}
 
 		public function hasUniquePregnancy():Boolean{
-			if (isSlime() || isHarpy() || isGoblinoid() || isAlraune()) return true;
-			else return false;
+			return isSlime() || isHarpy() || isGoblinoid() || isAlraune();
 		}
 
 		public function impregnationRacialCheck():void
@@ -6603,7 +6123,7 @@ use namespace CoC;
 		    if (isGoblinoid()) knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
 			else if (isSlime()) knockUp(PregnancyStore.PREGNANCY_GOO_GIRL, PregnancyStore.INCUBATION_GOO_GIRL);
 			else if (isHarpy()){
-				knockUp(PregnancyStore.PREGNANCY_OVIELIXIR_EGGS, PregnancyStore.INCUBATION_OVIELIXIR_EGGS, 1, 1);
+				knockUp(PregnancyStore.PREGNANCY_HARPY_EGGS, PregnancyStore.PREGNANCY_HARPY_EGGS, 1, 1);
 				createStatusEffect(StatusEffects.Eggs, Utils.rand(6), 0, Utils.rand(3) + 5, 0);
 			}
 			//until we get a real harpy knock up
@@ -6614,10 +6134,10 @@ use namespace CoC;
 			var max:Number = super.maxHP_base();
 			if (isGargoyle() && Forgefather.material == "granite")
 			{
-				if (Forgefather.refinement == 1) max *= (1.15);
-				if (Forgefather.refinement == 2) max *= (1.25);
-				if (Forgefather.refinement == 3 || Forgefather.refinement == 4) max *= (1.35);
-				if (Forgefather.refinement == 5) max *= (1.5);
+				if (Forgefather.refinement == 0) max *= (1.15);
+				if (Forgefather.refinement == 1) max *= (1.25);
+				if (Forgefather.refinement == 2 || Forgefather.refinement == 3) max *= (1.35);
+				if (Forgefather.refinement == 4) max *= (1.5);
 			}
 			if (hasPerk(PerkLib.ElementalBondFlesh) && statusEffectv1(StatusEffects.SummonedElementals) >= 2) max += maxHP_ElementalBondFleshMulti() * statusEffectv1(StatusEffects.SummonedElementals);
 			return max;
@@ -6652,7 +6172,9 @@ use namespace CoC;
 			if (hasPerk(PerkLib.Perfection)) additionalTransformationChancesCounter++;
 			if (hasPerk(PerkLib.Creationism)) additionalTransformationChancesCounter++;
 			if (hasPerk(PerkLib.EzekielBlessing)) additionalTransformationChancesCounter++;
-			if (hasPerk(PerkLib.TransformationResistance)) additionalTransformationChancesCounter--;
+			if (hasPerk(PerkLib.TransformationAcclimation)) additionalTransformationChancesCounter++;
+			if (hasPerk(PerkLib.TransformationResistance) && !hasPerk(PerkLib.TransformationAcclimation)) additionalTransformationChancesCounter--;
+			
 			return additionalTransformationChancesCounter;
 		}
 
@@ -6666,6 +6188,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.Saturation)) cap += 0.02;
 			if (hasPerk(PerkLib.Perfection)) cap += 0.02;
 			if (hasPerk(PerkLib.Creationism)) cap += 0.02;
+			if (hasPerk(PerkLib.TransformationAcclimation)) cap += 0.02;
 			if (hasPerk(PerkLib.MunchkinAtGym)) cap += 0.05;
             if (bonus == 0)
                 return false; //no bonus - no effect
@@ -6694,6 +6217,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.Saturation)) ABCap += 0.02;
 			if (hasPerk(PerkLib.Perfection)) ABCap += 0.02;
 			if (hasPerk(PerkLib.Creationism)) ABCap += 0.02;
+			if (hasPerk(PerkLib.TransformationAcclimation)) ABCap += 0.02;
 			if (hasPerk(PerkLib.MunchkinAtGym)) ABCap += 0.05;
 			removeCurse(statName, bonus, -2);
 			if (buff("Alchemical").getValueOfStatBuff(""+statName+".mult") < ABCap){
@@ -6755,7 +6279,7 @@ use namespace CoC;
 			}
 		}
 
-		override public function modStats(dstr:Number, dtou:Number, dspe:Number, dinte:Number, dwis:Number, dlib:Number, dsens:Number, dlust:Number, dcor:Number, scale:Boolean, max:Boolean):void {
+		override public function modStats(dstr:Number, dtou:Number, dspe:Number, dinte:Number, dwis:Number, dlib:Number, dsens:Number, dlust:Number, dcor:Number, scale:Boolean):void {
 			//Easy mode cuts lust gains!
 			if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 && dlust > 0 && scale) dlust /= 10;
 			//Set original values to begin tracking for up/down values if
@@ -6818,35 +6342,118 @@ use namespace CoC;
 				if(hasPerk(PerkLib.Lusty)) dlib += dlib * perkv1(PerkLib.Lusty);
 				if(hasPerk(PerkLib.Sensitive)) dsens += dsens * perkv1(PerkLib.Sensitive);
 				// Uma's Str Cap from Perks (Moved to max stats)
-				/*if (hasPerk(PerkLib.ChiReflowSpeed))
-				{
-					if (str > UmasShop.NEEDLEWORK_SPEED_STRENGTH_CAP)
-					{
-						str = UmasShop.NEEDLEWORK_SPEED_STRENGTH_CAP;
-					}
-				}
-				if (hasPerk(PerkLib.ChiReflowDefense))
-				{
-					if (spe > UmasShop.NEEDLEWORK_DEFENSE_SPEED_CAP)
-					{
-						spe = UmasShop.NEEDLEWORK_DEFENSE_SPEED_CAP;
-					}
-				}*/
 			}
 			//Change original stats
-			super.modStats(dstr,dtou,dspe,dinte,dwis,dlib,dsens,dlust,dcor,false,max);
-			//Refresh the stat pane with updated values
-			//mainView.statsView.showUpDown();
+			super.modStats(dstr,dtou,dspe,dinte,dwis,dlib,dsens,dlust,dcor,false);
 			if (dlust != 0){
 				raijuSuperchargedCheck();
 			}
-			if (!isRace(Races.RAIJU) && statStore.hasBuff('Supercharged')) statStore.removeBuffs('Supercharged');
+			if (!isRace(Races.RAIJU) && !isRace(Races.THUNDERBIRD) && !isRace(Races.KIRIN) && statStore.hasBuff('Supercharged')) statStore.removeBuffs('Supercharged');
 			EngineCore.showUpDown();
 			EngineCore.statScreenRefresh();
 		}
-
+		
+		public function get XPMultiplier():Number {
+			var gain:Number = 1.0;
+			gain += 0.05*enchantmentPower(EnchantmentLib.BonusXp);
+			return gain;
+		}
+		
+		public function get minFem():Number {
+			var min1:Number = 0;
+			if (!hasPerk(PerkLib.Androgyny)) {
+				if (gender == 0 || gender == 3) min1 = 20;
+				if (gender == 2) min1 = 30;
+			}
+			var min2:Number = enchantmentPower(EnchantmentLib.MinFem) + enchantmentPower(EnchantmentLib.Androgyny);
+			return Math.min(Math.max(min1, min2), 50);
+		}
+		public function get maxFem():Number {
+			var max1:Number = 100;
+			if (!hasPerk(PerkLib.Androgyny)) {
+				if (gender == 0 || gender == 3) max1 = 75;
+				if (gender == 1) max1 = 70;
+			}
+			var max2:Number = 100 - enchantmentPower(EnchantmentLib.MaxFem) - enchantmentPower(EnchantmentLib.Androgyny);
+			return Math.max(Math.min(max1, max2), 50);
+		}
+		//Modify femininity!
+		public function modFem(goal:Number, strength:Number = 1):String {
+			var output:String = "";
+			var old:String = faceDesc();
+			var oldN:Number = femininity;
+			var Changed:Boolean = false;
+			//If already perfect!
+			if (goal == femininity)
+				return "";
+			//If turning MANLYMAN
+			if (goal < femininity && goal <= 50)
+			{
+				femininity -= strength;
+				//YOUVE GONE TOO FAR! TURN BACK!
+				if (femininity < goal)
+					femininity = goal;
+			}
+			//if turning GIRLGIRLY, like duh!
+			if (goal > femininity && goal >= 50)
+			{
+				femininity += strength;
+				//YOUVE GONE TOO FAR! TURN BACK!
+				if (femininity > goal)
+					femininity = goal;
+			}
+			//Fix if it went out of bounds!
+			output += fixFemininity();
+			Changed = oldN != femininity;
+			//Abort if nothing changed!
+			if (!Changed)
+				return "";
+			//See if a change happened!
+			if (old != faceDesc()) {
+				//Gain fem?
+				if (goal > oldN)
+					output += "\n\n<b>Your facial features soften as your body becomes more feminine. (+" + strength + ")</b>";
+				if (goal < oldN)
+					output += "\n\n<b>Your facial features harden as your body becomes more masculine. (+" + strength + ")</b>";
+			} else {
+				//Barely noticable change!
+				if (goal > oldN)
+					output += "\n\nThere's a tingling in your [face] as it changes imperceptibly towards being more feminine. (+" + strength + ")";
+				else if (goal < oldN)
+					output += "\n\nThere's a tingling in your [face] as it changes imperciptibly towards being more masculine. (+" + strength + ")";
+			}
+			return output;
+		}
+		//Run this every hour to 'fix' femininity.
+		public function fixFemininity():String
+		{
+			var output:String = "";
+			if (femininity < minFem) {
+				output += "\n<b>Your [face] become a little bit softer from your body's changing hormones.";
+				/*if (hasBeard())
+				{
+					output += "  As if that wasn't bad enough, your " + beard() + " falls out too!";
+					beardLength = 0;
+					beardStyle = 0;
+				}*/
+				output += "</b>\n";
+				femininity = minFem;
+			} else if (femininity > maxFem) {
+				output += "\n<b>You find your [face] loses a little bit of its former female beauty due to your body's changing hormones.</b>\n";
+				femininity = maxFem;
+			}
+			/*if (hasBeard())
+			{
+				output += "  As if that wasn't bad enough, your " + beard() + " falls out too!";
+				beardLength = 0;
+				beardStyle = 0;
+			}*/
+			return output;
+		}
+		
+		
 		public function raijuSuperchargedCheck():void{
-			if (isRace(Races.RAIJU) && lust100>=75){
+			if ((isRace(Races.RAIJU) || isRace(Races.THUNDERBIRD) || isRace(Races.KIRIN)) && lust100>=75){
 				if (!statStore.hasBuff("Supercharged")){
 					var buff:Number = 1;
 					if (perkv1(IMutationsLib.RaijuCathodeIM) >= 3) buff *= 2
@@ -6854,7 +6461,7 @@ use namespace CoC;
 					CoC.instance.mainView.statsView.refreshStats(CoC.instance);
 					CoC.instance.mainView.statsView.showStatUp('spe');
 					outputText("\n\nAs your bottled up voltage ramps up you begin to lose yourself to lust turning increasingly feral as your overwhelming need to discharge override any rational thinking. FUCK… you need someone to fuck that voltage out of you!");
-					if(game.inCombat) outputText(" [monster] gulp as [he] see's your lust crazed expression. Should you win [he] won't get off the hook so easily!");
+					if(game.inCombat) outputText(" [themonster] gulps as [monster he] see's your lust crazed expression. Should you win [he] won't get off the hook so easily!");
 					outputText("\n\n<b>You entered the supercharged state!</b>\n\n");
 				}
 				if(lust100 >= 100){
@@ -6863,9 +6470,10 @@ use namespace CoC;
 			}
 		}
 
-		public override function takeLustDamage(lustDmg:Number, display:Boolean = true, applyRes:Boolean = true):Number{
+		public override function takeLustDamage(lustDmg:Number, display:Boolean = false, applyRes:Boolean = true):Number{
 			var x:Number = super.takeLustDamage(lustDmg, display, applyRes);
 			raijuSuperchargedCheck();
+			EngineCore.statScreenRefresh();
 			return x;
 		}
 

@@ -72,7 +72,7 @@ use namespace CoC;
 				//	wendigoScene.encounterWendigo();
 				//	break;
 				case 2: //Hellcat/Witches Sabbath
-					if ((flags[kFLAGS.WITCHES_SABBATH] > 3 && player.isRace(Races.HELLCAT) && player.gender == 3) || (flags[kFLAGS.WITCHES_SABBATH] > 0 && player.isRace(Races.CAT) && player.inte >= 40 && player.hasStatusEffect(StatusEffects.KnowsWhitefire))) SceneLib.ashlands.hellcatScene.WitchesSabbath();
+					if ((flags[kFLAGS.WITCHES_SABBATH] > 3 && player.isRace(Races.HELLCAT, 1, false) && player.gender == 3) || (flags[kFLAGS.WITCHES_SABBATH] > 0 && player.isRace(Races.CAT) && player.inte >= 40 && player.hasStatusEffect(StatusEffects.KnowsWhitefire))) SceneLib.ashlands.hellcatScene.WitchesSabbath();
 					else SceneLib.ashlands.hellcatScene.HellCatIntro();
 					break;
 				case 3:	//Cinderbloom
@@ -102,9 +102,8 @@ use namespace CoC;
 				default:
 					clearOutput();
 					outputText("You spend one hour exploring ashlands but you don't manage to find anything interesting.");
-					if (player.tou < 50){
+					if (player.trainStat("tou", +1, 50)){
 						outputText("But on your way back you feel you're a little more used to traveling through this harsh area.");
-						player.trainStat("tou", +1, 50);
 					}
 					dynStats("tou", .5);
 					doNext(camp.returnToCampUseOneHour);
@@ -119,7 +118,7 @@ use namespace CoC;
 			player.createKeyItem("Double barreled dragon gun", 0, 0, 0, 0);
 			doNext(camp.returnToCampUseOneHour);
 		}
-		
+
 		private function ahslandsSiteMine():void {
 			if (Forgefather.materialsExplained != 1) doNext(camp.returnToCampUseOneHour);
 			else {
@@ -134,6 +133,24 @@ use namespace CoC;
 				minedStones = Math.round(minedStones);
 				fatigue(50, USEFATG_PHYSICAL);
 				SceneLib.forgefatherScene.incrementGraniteSupply(minedStones);
+				player.mineXP(1);
+				findGem();
+				doNext(camp.returnToCampUseTwoHours);
+			}
+		}
+		private function findGem():void {
+			if (player.miningLevel > 4) {
+				if (rand(4) == 0) {
+					inventory.takeItem(useables.RBYGEM, camp.returnToCampUseTwoHours);
+					player.mineXP(2);
+				}
+				else {
+					outputText("After attempt to mine Rubies you ended with unusable piece.");
+					doNext(camp.returnToCampUseTwoHours);
+				}
+			}
+			else {
+				outputText(" Your mining skill is too low to find any Rubies.");
 				doNext(camp.returnToCampUseTwoHours);
 			}
 		}

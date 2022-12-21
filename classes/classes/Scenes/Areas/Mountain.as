@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Created by aimozg on 06.01.14.
  */
 package classes.Scenes.Areas
@@ -42,10 +42,17 @@ public class Mountain extends BaseContent
 					Encounters.group(/*game.commonEncounters.withImpGob,*/{
 						//General Golems, Goblin and Imp Encounters
 						name: "common",
+						chance: 0.4,
 						call: SceneLib.exploration.genericGolGobImpEncounters
+					}, {
+						//General Angels Encounters
+						name: "common",
+						chance: 0.4,
+						call: SceneLib.exploration.genericAngelsEncounters
 					}, {
 						//Helia monogamy fucks
 						name  : "helcommon",
+						night : false,
 						call  : SceneLib.helScene.helSexualAmbush,
 						chance: 0.2,
 						when  : SceneLib.helScene.helSexualAmbushCondition
@@ -53,12 +60,15 @@ public class Mountain extends BaseContent
 						name  : "etna",
 						when  : function():Boolean {
 							return flags[kFLAGS.ETNA_FOLLOWER] < 1
-								   && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2
 								   && !player.hasStatusEffect(StatusEffects.EtnaOff)
 								   && (player.level >= 20);
 						},
 						chance: 0.5,
-						call  : SceneLib.etnaScene.repeatYandereEnc
+						call  : function ():void {
+							if (flags[kFLAGS.ETNA_AFFECTION] < 2) SceneLib.etnaScene.firstEnc();
+							else if (flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2) SceneLib.etnaScene.repeatYandereEnc();
+							else SceneLib.etnaScene.repeatEnc();
+						}
 					}, {
 						name  : "alvina1",
 						when  : function():Boolean {
@@ -80,12 +90,6 @@ public class Mountain extends BaseContent
 						when: fn.not(salon.isDiscovered),
 						call: salon.hairDresser
 					},{
-						/* [INTERMOD: Revamp]
-						name: "mimic",
-						when: fn.ifLevelMin(3),
-						call: curry(game.mimicScene.mimicTentacleStart,2)
-					},{
-						*/
 						name: "highmountains",
 						when: function ():Boolean {
 							return !SceneLib.highMountains.isDiscovered()
@@ -96,20 +100,20 @@ public class Mountain extends BaseContent
 					},{
 						name: "snowangel",
 						when: function():Boolean {
-							return isHolidays()
+							return isChristmas()
 								   && player.gender > 0
 								   && flags[kFLAGS.GATS_ANGEL_DISABLED] == 0
 								   && flags[kFLAGS.GATS_ANGEL_GOOD_ENDED] == 0
 								   && (flags[kFLAGS.GATS_ANGEL_QUEST_BEGAN] > 0
 								   && player.hasKeyItem("North Star Key") < 0)
 						},
-						call: Holidays.gatsSpectacularRouter
+						call: SceneLib.holidays.gatsSpectacularRouter
 					},{
 						name:"jackfrost",
 						when: function ():Boolean {
-							return isHolidays() && flags[kFLAGS.JACK_FROST_YEAR] < date.fullYear;
+							return isChristmas() && flags[kFLAGS.JACK_FROST_YEAR] < date.fullYear;
 						},
-						call: Holidays.meetJackFrostInTheMountains
+						call: SceneLib.holidays.meetJackFrostInTheMountains
 					},{
 						name:"hellhound",
 						call:hellHoundScene.hellhoundEncounter,
@@ -144,11 +148,13 @@ public class Mountain extends BaseContent
 						call: wormsScene.wormEncounter
 					},{
 						name:"minotaur",
+						night : false,
 						chance:minotaurChance,
 						call:minotaurRouter,
 						mods:[SceneLib.exploration.furriteMod]
 					},{
 						name:"lacta_bovina",
+						night : false,
 						chance:0.7,
 						call:lactabovinaScene.lactaBovinaInto,
 						mods:[SceneLib.exploration.furriteMod]
@@ -160,6 +166,7 @@ public class Mountain extends BaseContent
 						call: SceneLib.dungeons.factory.enterDungeon
 					},{
 						name:"ceraph",
+						night : false,
 						chance:0.7,
 						when:function ():Boolean {
 							return !SceneLib.ceraphFollowerScene.ceraphIsFollower()
@@ -172,6 +179,7 @@ public class Mountain extends BaseContent
 						mods:[fn.ifLevelMin(2)]
 					},{
 						name:"hhound_master",
+						night : false,
 						chance:2,
 						when:function():Boolean {
 							//Requires canine face, [either two dog dicks, or a vag and pregnant with a hellhound], at least two other hellhound features (black fur, dog legs, dog tail), and corruption >=60.
@@ -191,6 +199,7 @@ public class Mountain extends BaseContent
 						call:hellHoundScene.HellHoundMasterEncounter
 					}, {
 						name: "electra",
+						night : false,
 						when: function ():Boolean {
 							return flags[kFLAGS.ELECTRA_FOLLOWER] < 2 && !player.hasStatusEffect(StatusEffects.ElectraOff);
 						},
@@ -210,7 +219,7 @@ public class Mountain extends BaseContent
 						when: function():Boolean {
 							return flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && DivaScene.instance.status >= 0 && !player.hasStatusEffect(StatusEffects.DivaOff);
 						},
-						call: DivaScene.encounter
+						call: DivaScene.instance.encounter
 					},{
 						name: "quarry",
 						when: function():Boolean {
@@ -242,23 +251,33 @@ public class Mountain extends BaseContent
 					}, {
 						name  : "mindbreaker",
 						call  : SceneLib.mindbreaker.findMindbreaker,
-						chance: 0.50,
+						chance: findMindbreakerChance,
 						when  : function ():Boolean {
-							return Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_NOT_STARTED && player.level >= 10 && !player.blockingBodyTransformations()
+							return Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_NOT_STARTED && player.level >= 10 && !player.blockingBodyTransformations() && flags[kFLAGS.MARAE_QUEST_START] >= 1
 						}
 					}, {
 						name  : "mindbreaker",
 						call  : SceneLib.mindbreaker.findMindbreakerAgain,
-						chance: 0.50,
+						chance: findMindbreakerChance,
 						when  : function ():Boolean {
-							return Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_METMB && player.level >= 10 && !player.blockingBodyTransformations()
+							return Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_METMB && player.level >= 10 && !player.blockingBodyTransformations() && flags[kFLAGS.MARAE_QUEST_START] >= 1
 						}
 					}, {
 						name:"hike",
 						chance:0.2,
 						call:hike
+					}, {
+						name: "mimic",
+						chance:0.25,
+						when: fn.ifLevelMin(3),
+						call: curry(SceneLib.mimicScene.mimicTentacleStart,2)
 					})
 			;
+		}
+		public function findMindbreakerChance():Number {
+			var fMC:Number = 5;
+			fMC *= Mindbreaker.MindbreakerEncounterChance;
+			return fMC;
 		}
 		//Explore Mountain
 		public function exploreMountain():void {
@@ -315,7 +334,7 @@ public class Mountain extends BaseContent
 				}
 				//Mino gangbang
 				if (!player.hasStatusEffect(StatusEffects.MinoPlusCowgirl) || rand(10) == 0) {
-					if (flags[kFLAGS.HAS_SEEN_MINO_AND_COWGIRL] == 1 && player.racialScore(Races.COW) >= 4 && player.lactationQ() >= 200 && player.biggestTitSize() >= 3 && (player.minotaurAddicted() || player.hasPerk(PerkLib.LactaBovineImmunity))) {
+					if (flags[kFLAGS.HAS_SEEN_MINO_AND_COWGIRL] == 1 && player.racialScore(Races.COW, false) >= 4 && player.lactationQ() >= 200 && player.biggestTitSize() >= 3 && (player.minotaurAddicted() || player.hasPerk(PerkLib.LactaBovineImmunity))) {
 						//PC must be a cowmorph (horns, legs, ears, tail, lactating, breasts at least C-cup)
 						//Must be addicted to minocum
 						outputText("As you pass a shadowy cleft in the mountainside, you hear the now-familiar call of a cowgirl echoing from within.  Knowing what's in store, you carefully inch closer and peek around the corner.");
@@ -445,7 +464,8 @@ public class Mountain extends BaseContent
 			if (player.hasVagina()) outputText("within your womb, knocked up by this manly beast");
 			else outputText("within your bowels");
 			outputText(".  \"<i>That's a good slut,</i>\" he grunts, pulling his cock off your belly and rubbing the slick, flat head against your awaiting [vagOrAss].  He teases you with the slight contact until you open your mouth to voice your complaints, then he suddenly thrusts inside.  Any words forming on your tongue fly away, replaced by a whine of relief as your hole gets stretched wide by the invading member.");
-			player.penetrated(player.vagorass,new Minotaur().cocks[0]);
+			if (player.hasVagina()) player.cuntChange(new Minotaur().cockArea(0), true);
+			else player.buttChange(new Minotaur().cockArea(0), true);
 
 			outputText("\n\n\"<i>Ahh, yeah.  That's some good ");
 			if (player.hasVagina()) outputText("cow-pussy");
@@ -507,11 +527,11 @@ public class Mountain extends BaseContent
 			outputText("\n\nYou awaken several hours later.  The minotaur and the cow-girl are nowhere to be seen, but your [armor] is left neatly folded next to you, along with a small bottle filled with some white liquid, most likely a gift from your \"bull\".");
 
 			outputText("\n\nYou quickly re-dress and head back to camp, spying the occassional goblin or imp scurrying from its hiding spot, no doubt recovering from their own self-inflicted orgasms.");
-			player.orgasm();
+			player.sexReward("cum", "VaginalAnal");
 			dynStats("lib", .5, "sen", -3, "cor", 1);
 			if (flags[kFLAGS.PC_FETISH] > 0) {
 				outputText("  A thrill runs through you.  Even though you were brought to such a satisfying climax, the whole thought that goblins and imps were watching you and getting off on it... it just makes you hornier than you were before.");
-				dynStats("lus=", player.maxLust());
+				dynStats("lus=", player.maxOverLust());
 			}
 			//Chance to impregnate PC, get mino-fix, and maybe relief from feeder perk.
 			player.minoCumAddiction(10);
@@ -536,7 +556,7 @@ public class Mountain extends BaseContent
 			outputText("\n\nWith a hearty thrust, the minotaur plunges into the cow-girl's eager fuck-hole, burying himself past one -- two of his oversized cock's three ridge rings.  She screams in half pain, half ecstasy and pushes back, hungry for his full length.  After pulling back only slightly, he pushes deeper, driving every inch of his gigantic dick into his willing partner who writhes in pleasure, impaled exactly as she wanted.");
 			outputText("\n\nThe pair quickly settles into a rhythm, punctuated with numerous grunts, groans, and moans of sexual excess.  To you, it's almost a violent assault sure to leave both of them bruised and sore, but the cow-girl's lolling tongue and expression of overwhelming desire tells you otherwise.  She's enjoying every thrust as well as the strokes, gropes, and seemingly painful squeezes the minotaur's powerful hands deliver to her jiggling ass and ponderous tits.  He's little better, his eyes glazed over with lust as he continues banging the fuck-hole he found and all but mauling its owner.");
 			//[Next]
-			dynStats("lus", 10);
+			dynStats("lus", 10, "scale", false);
 			menu();
 			addButton(0, "Next", watchMinoCumSlutII);
 		}
@@ -547,7 +567,7 @@ public class Mountain extends BaseContent
 			outputText("They go at it for nearly an hour, oblivious to you watching them, before their intensity heightens as they near orgasm.  The results are almost explosive, both of them crying out as they begin twitching uncontrollably.  Clinging desperately to the cow-girl's ass, the minotaur pumps so much cum into her depths that it begins spurting out.  This accidental lubrication releases his grip, and the pair collapse to the ground.  Yet the minotaur isn't finished, his man-milk spraying into the air almost like his still-erect dick is a hose and splattering down onto both of them.");
 			outputText("\n\nAs you look at the two cum-covered creatures laying there in their exhausted sex-induced stupors, the minotaur's thick horse-cock now slowly deflating, you realize that you've been touching yourself.  You make yourself stop in disgust.");
 			outputText("\n\nOnly now do you notice other faces peeking over ledges and ridges.  You count at least two goblins and one imp who quickly pull back.  From the sounds, they were busy getting themselves off.  Apparently this isn't an uncommon show, and the locals enjoy it immensely.");
-			dynStats("lus", 25);
+			dynStats("lus", 25, "scale", false);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -567,7 +587,7 @@ public class Mountain extends BaseContent
 			if (player.statusEffectv1(StatusEffects.MinoPlusCowgirl) == 0)
 				outputText("  Apparently this isn't an uncommon show, and the locals enjoy it immensely.");
 			//Lust!
-			dynStats("lus", 5 + player.lib / 20 + player.racialScore(Races.MINOTAUR) + player.racialScore(Races.COW));
+			dynStats("lus", 5 + player.lib / 20 + player.racialScore(Races.MINOTAUR, false) + player.racialScore(Races.COW, false), "scale", false);
 			doNext(camp.returnToCampUseOneHour);
 		}
 	}

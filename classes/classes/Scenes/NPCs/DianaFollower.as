@@ -2,16 +2,16 @@
  * ...
  * @author Ormael, written by Dragon Hearts/Liadri
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	
-	public class DianaFollower extends NPCAwareContent
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Items.*;
+
+import coc.view.ButtonDataList;
+
+public class DianaFollower extends NPCAwareContent
 	{
-		
-		public function DianaFollower() 
-		{}
 
 /*
 DIANA_FOLLOWER - status:
@@ -50,7 +50,7 @@ public function repeatEnc():void {
 public function postNameEnc():void {
 	clearOutput();
 	outputText("As you explore the area, you run into Diana.\n\n");
-	outputText("At first she doesn’t notice you, to busy examining a flower. You walk to her to say hi, but the sound of your feet on dry leaves immediately alerts her. She turns over with a startled  expression and grabs her staff to defend herself, but relax as she realise it’s you.\n\n");
+	outputText("At first, she doesn’t notice you, to busy examining a flower. You walk to her to say hi, but the sound of your feet on dry leaves immediately alerts her. She turns over with a startled  expression and grabs her staff to defend herself, but relax as she realises it’s you.\n\n");
 	outputText("\"<i>Oh hello [name]! I didn’t expect you. Say while you happen to be there, I’m in need of a sparring partner.</i>\". She takes a few steps towards you, spinning her staff with one hand. \"<i>Would you mind having a friendly fight with me?</i>\"\n\n");
 	menu();
 	addButton(1, "Sure", postNameEncSure);
@@ -74,7 +74,8 @@ public function wonOverDiana():void {
 	outputText("The horse morph kneels down defeated. Seems you can do whatever you want with her now. So, what will it be?\n\n");
 	menu();
 	levelingHerself();
-	if (player.lust >= 33) addButton(1, "Rape", wonOverDianaSex);
+	addButton(1, "Rape", wonOverDianaSex)
+		.disableIf(player.lust < 33, "Not aroused enough.");
 	addButton(0, "Spare", wonOverDianaSpare);
 }
 public function wonOverDianaSex():void {
@@ -132,14 +133,14 @@ public function wonOverDianaOralF():void {
 			outputText("start squeezing her with your ");
 			if (player.isNaga()) outputText("tail");
 			else outputText("tentacles");
-			outputText(" until she can’t breath, she gasps, trying to suck air into her crushed lungs, you tell her you'll loosen your grip once she starts to see");
+			outputText(" until she can’t breathe, she gasps, trying to suck air into her crushed lungs, you tell her you'll loosen your grip once she starts to see");
 		}
 		outputText(" the wisdom in licking you. She starts to quickly lick your pussy, trying to please you to stop your punishment.\n\n");
 	}
-	outputText("You moan happily as her large equine tongue eats your cunt out, you move your hands up to your breasts, grabbing and squeezing them under your hands while your fingers sink into your soft flesh. You moan and pinch your stiff nipples as she licks your pussy, you continuing to pleasure your breasts, helping the equine bring you to an orgasm, which you feel building.");
+	outputText("You moan happily as her large equine tongue eats your cunt out, you move your hands up to your breasts, grabbing and squeezing them under your hands while your fingers sink into your soft flesh. You moan and pinch your stiff nipples as she licks your pussy and continues to pleasure your breasts, helping the equine bring you to an orgasm, which you feel building.");
 	outputText(" Eventually it comes, and you moan loudly as you orgasm, spraying your girl juices over the equines face, soaking it and making her have to drink them.\n\n");
 	if (player.isBiped() || player.isTaur()) {
-		outputText("Satisfied you climb off the equine, and look down at her at her. She is lying on the ground panting again, but this time her face is soaked by your pussy’s juices");
+		outputText("Satisfied you climb off the equine, and look down at her. She is lying on the ground panting again, but this time her face is soaked by your pussy’s juices");
 		if (flags[kFLAGS.DIANA_FOLLOWER] >= 2) outputText(", which she eagerly licks off her face");
 		outputText(". Smirking, you redress and head off, finally leaving the equine to catch her breath.\n\n");
 	}
@@ -157,16 +158,16 @@ public function wonOverDianaOralF():void {
 }
 public function wonOverDianaOralM():void {
 	clearOutput();
-	var x:int = player.cockThatFits(36, "length");
+	var x:int = player.biggestCockIndex();
 	if (player.isBiped()) {
-		outputText("You walk towards your defeated equine foe who lies panting on the ground, trying to regain her breath. As you stand over her the sight of her panting lips gives you an idea of how to blow off some steam. You part your groin armour, pulling out your [cocks] [dickplural].");
+		outputText("You walk towards your defeated equine foe who lies panting on the ground, trying to regain her breath. As you stand over her the sight of her panting lips gives you an idea of how to blow off some steam. You part your groin armour, pulling out your [cocks].");
 		if (player.hasVagina() && flags[kFLAGS.DIANA_FOLLOWER] == 0) outputText(" Shocking the equine to find out you're actually a hermaphrodite.");
 		if (flags[kFLAGS.DIANA_FOLLOWER] >= 2) outputText(" The equine licks her lips eagerly at the sight of your [cockplural].");
 		outputText("\n\nYou step over her, standing above her torso while she watches you with ");
 		if (flags[kFLAGS.DIANA_FOLLOWER] == 0) outputText("nervous anticipation, unsure what you’re doing.");
 		else if (flags[kFLAGS.DIANA_FOLLOWER] == 1) outputText("dreaded anticipation, knowing what is coming next.");
 		else outputText("eager anticipation, looking at you with a come hither look.");
-		outputText("\n\nSmirking, you grab hold of your already hardening [cock] ");
+		outputText("\n\nSmirking, you grab hold of your already hardening [cock biggest] ");
 		if (player.cockTotal() > 1) outputText("from your bunch of [cocks]");
 		outputText(", before reaching down and yanking her head up by her mane. Making her ");
 		if (flags[kFLAGS.DIANA_FOLLOWER] >= 2) outputText("squeal happily, already eager to suck your cock");
@@ -174,10 +175,10 @@ public function wonOverDianaOralM():void {
 		outputText(", as you slap your [cockplural] against her cheek.\n\n");
 	}
 	if (player.isTaur()) {
-		outputText("You trot over to your defeated equine foe as she lays on the ground panting and trying to regain her breath, her panting lips giving you an idea of how to blow off some steam. You walk over her, showing off your semi erect [cocks] [dickplural] that hang between your hind legs.");
+		outputText("You trot over to your defeated equine foe as she lies on the ground panting and trying to regain her breath, her panting lips giving you an idea of how to blow off some steam. You walk over her, showing off your semi erect [cocks] that hang between your hind legs.");
 		if (player.hasVagina() && flags[kFLAGS.DIANA_FOLLOWER] == 0) outputText(" Shocking the equine to find out you're actually a hermaphrodite.");
 		if (flags[kFLAGS.DIANA_FOLLOWER] >= 2) outputText(" The equine licks her lips eagerly at the sight of your [cockplural].");
-		outputText("\n\nYou reach down and grab her by the shoulders before dragging her to a nearby " + object() + ","); 
+		outputText("\n\nYou reach down and grab her by the shoulders before dragging her to a nearby " + object() + ",");
 		if (flags[kFLAGS.DIANA_FOLLOWER] >= 2) outputText("the equine happily letting herself get manhandled while you prop her against a " + object() + "");
 		else outputText("the equine putting up a brief struggle before giving up and letting herself be propped against the " + object() + "");
 		outputText(", before you slap your [cockplural] against her cheek.\n\n");
@@ -189,13 +190,13 @@ public function wonOverDianaOralM():void {
 		outputText(" beside the defeated equine as she pants and tries to regain her breath. With a sly grin, you watch her moving lips and get an idea of how to blow off some steam. You slip into your ");
 		if (player.isNaga()) outputText("cavity");
 		else outputText("whatever");
-		outputText(" and pull out your [cocks] [dickplural].");
+		outputText(" and pull out your [cocks].");
 		if (player.hasVagina() && flags[kFLAGS.DIANA_FOLLOWER] == 0) outputText(" Shocking the equine to find out you're actually a hermaphrodite.");
 		if (flags[kFLAGS.DIANA_FOLLOWER] >= 2) outputText(" The equine licks her lips eagerly at the sight of your [cockplural].");
 		outputText("\n\nYou wrap your dexterous ");
 		if (player.isNaga()) outputText("naga tail");
 		else outputText("scylla tentacles");
-		outputText(" tightly around her waist, lifting her off the ground and into the air."); 
+		outputText(" tightly around her waist, lifting her off the ground and into the air.");
 		if (flags[kFLAGS.DIANA_FOLLOWER] >= 2) {
 			outputText("She gives you a sultry look as she runs her hands along your ");
 			if (player.isNaga()) outputText("tail");
@@ -218,7 +219,7 @@ public function wonOverDianaOralM():void {
 		outputText("cock, before lovingly running her tongue down your shaft as well as planting some loving kisses across it, showering it with her devotion. She eventually moves her mouth back up the length, reaching the head and planting another loving kiss on it.\n\n");
 		outputText("Pleased you start pushing your ");
 		if (player.cockTotal() > 1) outputText("largest ");
-		outputText("[cock] into her eager mouth, ");
+		outputText("[cock biggest] into her eager mouth, ");
 		if (player.cocks[x].cockLength >= 15) outputText("she happily takes every inch of your massive member as you force it into her mouth, stopping short of deepthroating her. She doesn’t even care that her mouth is being uncomfortable stretched, she just wants the rest of your cock");
 		else if (player.cocks[x].cockLength >= 9) outputText("she happily takes every inch of your large member as you force it into her mouth, stopping short of deepthroating her. She looks hungrily at the rest of your dick she has yet to take");
 		else if (player.cocks[x].cockLength >= 5) outputText("she happily takes all of the cock you push into her mouth, which is nearly your entire length until her mouth is full of cock");
@@ -238,7 +239,7 @@ public function wonOverDianaOralM():void {
 		else outputText("not wanting to serve you again, ");
 		outputText(" keeping her mouth shut tight. ");
 		if (player.isBiped()) outputText("Irritated, you twist her mane, causing her to whimper in pain. She keeps her lips closed, and you pull again, harder. She looks up at you, fear and anger in her gaze, but gives in and parts her lips.");
-		if (player.isTaur()) outputText("Irritated, you whack her head with one of your hind [feet]. She yelps in pain, but stubbornly keeps her mouth closed. You strike her again, then a third time. until she give in and opens her mouth.");
+		if (player.isTaur()) outputText("Irritated, you whack her head with one of your hind [feet]. She yelps in pain, but stubbornly keeps her mouth closed. You strike her again, then a third time. until she gives in and opens her mouth.");
 		if (player.isNaga() || player.isScylla()) {
 			outputText("Irritated, you squeeze her very tightly with your ");
 			if (player.isNaga()) outputText("tail");
@@ -247,7 +248,7 @@ public function wonOverDianaOralM():void {
 		}
 		outputText("\n\n.Satisfied you start pushing your ");
 		if (player.cockTotal() > 1) outputText("largest ");
-		outputText(" [cock] into her now open mouth, ");
+		outputText(" [cock biggest] into her now open mouth, ");
 		if (player.cocks[x].cockLength >= 15) outputText("forcing your massive dick into her mouth, only stopping short of deepthroating her, her mouth being forced nearly painfully wide to hold your massive girth, while her eyes look fearfully at how much is left to go");
 		else if (player.cocks[x].cockLength >= 9) outputText("forcing your large member into her mouth, stopping short of deepthroating her. She casts a worried gaze at how much of your dick is left out of her mouth");
 		else if (player.cocks[x].cockLength >= 5) outputText("making her take your near entire length until her mouth is full of your cock");
@@ -257,7 +258,7 @@ public function wonOverDianaOralM():void {
 		if (player.cocks[x].cockLength >= 15) outputText("Smirking, you start forcing your entire length in, making her eyes bulge and water as your massive member pushes its way into her throat and all the way down into her stomach, her neck bulging with the shape of your cock. You start thrusting your hips again, fucking her entire throat and stomach while enjoying every second of it, her watering eyes rolling back as her hands fall limply to her side, unable to bear it all");
 		else if (player.cocks[x].cockLength >= 9) outputText("Smirking, you start pushing your entire length in, her eyes widening as your cock slips down her throat, not giving her enough time to gag. You begin deepthroating her, letting your length rape nearly her entire throat, while you enjoy the feeling of her throat as she moans and whimpers");
 		else if (player.cocks[x].cockLength >= 5) outputText("Smirking, you start pushing the rest of your cock into her mouth, her eyes widen as your cock slips into her throat nearly causing her gag. You begin throat fucking her, letting your cock ravage the top of her throat while you enjoy the feeling of her tight neck around your cock head, as she lets out loud muffled moans");
-		else outputText("While you thrust your hips you order her to suck on your dick, which she does, sucking as hard as she can while you thrust into her mouth, you enjoying the feeling");
+		else outputText("While you thrust your hips you order her to suck on your dick, which she does, sucking as hard as she can while you thrust into her mouth, enjoying the feeling");
 	}
 	outputText(".\n\nYou continue to fuck her face for a good while, enjoying her mouth as much as you can, before you start to feel the coming onslaught of an orgasm. You speed up your thrusts, smacking her cheeks with your [hips]. You pump faster, the pressure building in your loins.");
 	if (flags[kFLAGS.DIANA_FOLLOWER] >= 2 && player.cockTotal() > 1) outputText(" Seeing you’re about to cum, she points your other [dickplural] at her, so you’ll cum on her.");
@@ -277,7 +278,7 @@ public function wonOverDianaOralM():void {
 			if (player.cockTotal() > 1) outputText(" while your other [cockplural] spray its load all over her face and body");
 			outputText(".");
 		}
-		outputText("\n\nEventually your orgasm finishes and you pull your [cock] out of her mouth, while she continues sucking on it as it comes out to remove the last of the cum from it. After she finishes she looks up at you with a satisfied cum stained smile, not unlike the grin on your own face. You help her stand up, and you two part.");
+		outputText("\n\nEventually your orgasm finishes and you pull your [cock biggest] out of her mouth, while she continues sucking on it as it comes out to remove the last of the cum from it. After she finishes she looks up at you with a satisfied cum stained smile, not unlike the grin on your own face. You help her stand up, and you two part.");
 		if (player.cumQ() >= 2000) outputText(" She staggers away, walk slightly troubled by how bloated her belly is.");
 	}
 	else {
@@ -291,7 +292,7 @@ public function wonOverDianaOralM():void {
 			else if (player.cocks[x].cockLength >= 5) outputText("You make sure she is taking your entire length before you cum, spraying your load right down her throat.");
 			else outputText("You force your hips against her face as you cum, spraying your load inside her mouth, making sure she swallows it.");
 		}
-		outputText("\n\nEventually your orgasm finishes and you pull your [cock] out of her mouth, ");
+		outputText("\n\nEventually your orgasm finishes and you pull your [cock biggest] out of her mouth, ");
 		if (player.isBiped() || player.isNaga()) outputText("releasing her from your grip before ");
 		outputText("letting her sink to the ground where she sits panting with her belly ");
 		if (player.cumQ() >= 2000) outputText("bloated with your cum");
@@ -315,10 +316,11 @@ private function virginity():Boolean {
 }
 public function wonOverDianaRape():void {
 	clearOutput();
-	var x:int = player.cockThatFits(36, "length");
+	var x:int = player.biggestCockIndex();
+	sceneHunter.print("Fork for taur, scylla, naga bodies.");
 	if (player.isBiped()) {
 		outputText("You look over the defeated equine as she lays sprawled across the ground. Her legs are slightly parted, so her exposed pussy catches your eye" + (virginity() ? ", looking untouched or used" : "again") + ". Licking your lips, you start undressing as the equine watches you, worry clear in her eyes" + (player.gender == 3 ? ", her worry only increasing when she sees that you're a hermaphrodite" : "") + ". You walk beside her and push her onto her stomach, ");
-		outputText("before grabbing both her hands and forcing them behind her back, she struggles, getting what you’re about to do, but you hold her firm and " + (player.cocks.length == 1 ? "grab you're already hardening [cock]" : "grab your already hardening [cockFit 36] from among your bunch of [cocks] cocks") + ".\n\n");
+		outputText("before grabbing both her hands and forcing them behind her back, she struggles, getting what you’re about to do, but you hold her firm and " + (player.cocks.length == 1 ? "grab you're already hardening [cock biggest]" : "grab your already hardening [cockFit 36] from among your bunch of [cocks] cocks") + ".\n\n");
 		if (virginity()) {
 			outputText("\"<i>NO WAIT, I'm saving my first time for my stallion!</i>\" she whimpers, trying to pull her hands free.\n\n");
 			outputText("\"<i>Too bad, you should’ve been more careful. Cause now I’m horny!</i>\" you say, while forcing her arse up into the air, giving you better access to her cunt.\n\n");
@@ -328,7 +330,7 @@ public function wonOverDianaRape():void {
 			outputText("\"<i>No, not again!</i>\" she groans, not even bothering to struggle this time and letting herself get manhandled into position, with her arse stuck up into the air.\n\n");
 			outputText("\"<i>Well you shouldn’t keep fighting me if you don’t want to end up like this,</i>\" you say, placing your cock against her already wettening cunt.\n\n");
 		}
-		outputText("Once she feels wet enough, you plunge your entire [cock] dick in at once, " + (virginity() ? "making her scream as her virginity is cruelly taken away by you in one stroke" : "making her moan loudly as her pussy is once against filled by your cock") + ". Once she quiets down, you start thrusting your hips, " + (virginity() ? "ignoring her whimpering and enjoying her tight virgin pussy" : "enjoying the tight pussy that you broke in") + ". ");
+		outputText("Once she feels wet enough, you plunge your entire [cock biggest] dick in at once, " + (virginity() ? "making her scream as her virginity is cruelly taken away by you in one stroke" : "making her moan loudly as her pussy is once against filled by your cock") + ". Once she quiets down, you start thrusting your hips, " + (virginity() ? "ignoring her whimpering and enjoying her tight virgin pussy" : "enjoying the tight pussy that you broke in") + ". ");
 		outputText("Soon she " + (virginity() ? "stops whimpering and" : "once again") + " starts moaning as you continue to fuck her cunt, encouraging you to thrust harder and making her moan louder.\n\n");
 		outputText("You let go of her hands, moving your hands to her hips so you can thrust deeper into her, since she has given up trying to escape. Once you’ve gotten a good rhythm you reach forward and tilt her head up, so you can see her face. She has a whorish expression on her face, her eyes are rolled back while her tongue hangs out of her open mouth.\n\n");
 		outputText("\"<i>What a slutty look you have on your face,</i>\" you note, as your hips hammer her cunt, \"<i>" + (virginity() ? "I bet you actually wanted to lose your virginity!?" : "Despite your struggling, you actually like being fucked by me?!") + "</i>\"\n\n");
@@ -337,18 +339,18 @@ public function wonOverDianaRape():void {
 		outputText("\"<i>Going to cum!</i>\" you say, warning her.\n\n");
 		outputText("\"<i>NO! Don’t cum inside meeee!</i>\" she moans, panicking, \"<i>I don’t want to get pregnant!</i>\"\n\n");
 		outputText("Grunting, you thrust even harder and pinch her nipples hard, making her pussy tighten further and her scream in masochistic pleasure, and just when you are about to cum, you pull out, spraying your load across her back and covering it with your cum. Panting, you get dressed, and leave the well fucked mare, to lay there with her arse sticking up into the air.\n\n");
-		outputText("You hope she can get up before a imp finds her.\n\n");
+		outputText("You hope she can get up before an imp finds her.\n\n");
 	}
 	if (player.isScylla()) {
-		outputText("You look over the defeated equine as she is sprawled across the ground, wondering what you’ll do to her you wrap your tentacles around her hands before dragging her into the air, making her hang in front of you. She struggles but your strong tentacles holds her hands trapped.\n\n");
+		outputText("You look over the defeated equine as she is sprawled across the ground. Wondering what you’ll do to her, you wrap your tentacles around her hands before dragging her into the air, making her hang in front of you. She struggles but your strong tentacles holds her hands trapped.\n\n");
 		outputText("\"<i>Mmmm, what should I do with you,</i>\" you ask, running your hands down her body, until your hands reach her pussy.\n\n");
 		if (virginity()) {
 			outputText("\"<i>Don’t touch me there!</i>\" she yells, trying to escape, \"<i>Going to cum!</i>\" you say, warning her.\n\n");
-			outputText("\"<i>Oh really?</i>\" you say, while slipping one of your fingers into her unprotected pussy, where you find out to your surprise that she is a virgin. \"<i>How surprising,</i>\" you note, pulling out your [cock] from out between your tentacles, it’s already erect in anticipation.\n\n");
+			outputText("\"<i>Oh really?</i>\" you say, while slipping one of your fingers into her unprotected pussy, where you find out to your surprise that she is a virgin. \"<i>How surprising,</i>\" you note, pulling out your [cock biggest] from out between your tentacles, it’s already erect in anticipation.\n\n");
 		}
 		else {
 			outputText("\"<i>No, not again!</i>\" she whines, once again in a similar position.\n\n");
-			outputText("\"<i>You really shouldn’t keep fighting me if you don’t want this to happen,</i>\" you say, pulling out your [cock] from out between your tentacles, it’s already erect in anticipation.\n\n");
+			outputText("\"<i>You really shouldn’t keep fighting me if you don’t want this to happen,</i>\" you say, pulling out your [cock biggest] from out between your tentacles, it’s already erect in anticipation.\n\n");
 		}
 		outputText("You force her legs open with some other tentacles, parting them as far apart as you can and giving you totally unrestricted access to her pussy. Grinning you line up your cock with her pussy, positioning it right up against her lips.\n\n");
 		if (virginity()) {
@@ -362,14 +364,14 @@ public function wonOverDianaRape():void {
 			}
 		}
 		else {
-			outputText("She moans as your cock touches her, her body seeming to remember getting getting fucked by you before making her pussy already grow moist.\n\n");
+			outputText("She moans as your cock touches her, her body seeming to remember getting fucked by you before making her pussy already grow moist.\n\n");
 			outputText("\"<i>For someone who says she hates this, your body sure seems to like it,</i>\" you taunt, grinding your cock against her to make her wetter.\n\n");
 		}
-		outputText("She doesn’t respond since she is already moaning as her " + (virginity() ? "virgin pussy is grinded against your cock, growing wetter with every grind until it’s soaked" : "moist pussy is grinded against your cock, it quickly becoming soaked and ready to be fucked again") + ".\n\n");
+		outputText("She doesn’t respond since she is already moaning as her " + (virginity() ? "virgin pussy is grinded against your cock, growing wetter with every grind until it’s soaked" : "moist pussy is grinded against your cock, quickly becoming soaked and ready to be fucked again") + ".\n\n");
 		if (virginity()) outputText("Adjusting her body you thrust your cock into her, making her whimper as your cock rips apart her hymen, taking her virginity.\n\n");
 		else outputText("Adjusting her body you thrust your cock into her, making her moan as her pussy is once again filled with your cock.\n\n");
 		outputText("Using your tentacles you start making her ride your cock, " + (virginity() ? "her whimpers soon becoming moans as her pussy is pounded" : "moaning loudly as the familiar cock pounds her pussy once again") + ". ");
-		outputText("You increase your tentacles movement, increasing the speed in which she humps you, leaving your hands free to play with her tits, making her gasp as you tug her nipples while your tentacles do all the work, teasing her breasts mercilessly until eventually you feel the oncoming orgasm. She moans, eyes wide, as your cock twitches inside her.\n\n");
+		outputText("You increase your tentacles' movement, increasing the speed in which she humps you, leaving your hands free to play with her tits, making her gasp as you tug her nipples while your tentacles do all the work, teasing her breasts mercilessly until eventually you feel the oncoming orgasm. She moans, eyes wide, as your cock twitches inside her.\n\n");
 		outputText("\"<i>Please, don’t cum inside me!</i>\" she begs, squirming against your tentacles.\n\n");
 		outputText("Feeling some pity, just as you're about to cum, you slip her off you, the feeling pushing you over the edge as you cum over her body, covering her fur in your white spunk.\n\n");
 		outputText("Satisfied, you dump her own the ground, leaving her there as you redress yourself and move on.\n\n");
@@ -379,11 +381,11 @@ public function wonOverDianaRape():void {
 		outputText("\"<i>Mmmm, what should I do with you,</i>\" you ask, running your hands down her shoulders, then down to her hips. She winces, trying to pull away, but you hold on, slowly running your hands across her front until they meet in the middle, just above her blushing pussy lips.\n\n");
 		if (virginity()) {
 			outputText("\"<i>Don’t touch me there!</i>\" she yells, trying to escape, \"<i>Going to cum!</i>\" you say, warning her.\n\n");
-			outputText("\"<i>Oh really?</i>\" you say, while slipping one of your fingers into her unprotected pussy, where you find out to your surprise that she is a virgin. \"<i>How surprising,</i>\" you note, pulling out your [cock] from your hidden cavity, it’s already erect in anticipation.\n\n");
+			outputText("\"<i>Oh really?</i>\" you say, while slipping one of your fingers into her unprotected pussy, where you find out to your surprise that she is a virgin. \"<i>How surprising,</i>\" you note, pulling out your [cock biggest] from your hidden cavity, it’s already erect in anticipation.\n\n");
 		}
 		else {
 			outputText("\"<i>No, not again!</i>\" she whines, once again in a similar position.\n\n");
-			outputText("\"<i>You really shouldn’t keep fighting me if you don’t want this to happen,</i>\" you say, pulling out your [cock] from your hidden cavity, it’s already erect in anticipation.\n\n");
+			outputText("\"<i>You really shouldn’t keep fighting me if you don’t want this to happen,</i>\" you say, pulling out your [cock biggest] from your hidden cavity, it’s already erect in anticipation.\n\n");
 		}
 		outputText("You force her legs open, parting them as far apart as you can, giving you unrestricted access to her pussy. Grinning, you line up your cock with her pussy, positioning it right up against her lips.\n\n");
 		if (virginity()) {
@@ -397,7 +399,7 @@ public function wonOverDianaRape():void {
 			}
 		}
 		else {
-			outputText("She moans as your cock touches her, her body seeming to remember getting getting fucked by you before making her pussy already grow moist.\n\n");
+			outputText("She moans as your cock touches her, her body seeming to remember getting fucked by you before making her pussy already grow moist.\n\n");
 			outputText("\"<i>For someone who says she hates this, your body sure seems to like it,</i>\" you taunt, grinding your cock against her to make her wetter.\n\n");
 		}
 		outputText("She doesn’t respond, already moaning as her " + (virginity() ? "virgin pussy is rubbed against your shaft, growing wetter with every stroke until it’s soaked" : "moist pussy is grinded against your cock, quickly becoming soaked and ready to be fucked again") + ".\n\n");
@@ -411,7 +413,7 @@ public function wonOverDianaRape():void {
 	}
 	if (player.isTaur()) {
 		outputText("You grab the fallen equine and drag her off to a nearby " + object() + ", draping her over it. You know exactly what you’re going to do with her. Not even bothering to undress, you climb over her, your cock erect and ready to go.\n\n");
-		outputText("Realizing what you’re trying to do, she tries to escape but you squash her under your body, trapping her between you and the " + object() + " until she stops struggling. Once she finally gives up, your adjust your hips, pressing your cock against her sex. You run the length of your shaft across her lips, making her moan and whimper slightly as your [cock] rubs against her folds.\n\n");
+		outputText("Realizing what you’re trying to do, she tries to escape but you squash her under your body, trapping her between you and the " + object() + " until she stops struggling. Once she finally gives up, your adjust your hips, pressing your cock against her sex. You run the length of your shaft across her lips, making her moan and whimper slightly as your [cock biggest] rubs against her folds.\n\n");
 		if (virginity()) {
 			outputText("\"<i>Please stop! I’m saving myself!!</i>\" she whimpers, feeling herself get wet under your assault.\n\n");
 			outputText("\"<i>Shouldn’t have tried to fight me then,</i>\" you grunt, guessing that she’ll soon be wet enough.\n\n");
@@ -421,11 +423,11 @@ public function wonOverDianaRape():void {
 			outputText("\"<i>Admit it, you like it!</i>\" you smirk, knowing that she’ll soon be wet enough.\n\n");
 		}
 		outputText("Adjusting your hips one more time, you start pressing your cock against her folds, making her whimper again. Grunting, you force your cock into her, making her " + (virginity() ? "whimper as your cock tears her hymen as" : "moan as") + " it fills up her pussy with your meaty rod, sinking in until she’s totally full of your cock. ");
-		outputText("Not satisfied with just this, you pull back your hips before plunging them back into her, making her moan loudly as you begin to thrust into her, the wet slapping noise of your hips slapping together filling the area as you rape her pussy, making her moan as your [cock] pounds her pussy, her body shaking with each thrust.\n\n");
+		outputText("Not satisfied with just this, you pull back your hips before plunging them back into her, making her moan loudly as you begin to thrust into her, the wet slapping noise of your hips slapping together filling the area as you rape her pussy, making her moan as your [cock biggest] pounds her pussy, her body shaking with each thrust.\n\n");
 		outputText("She shudders at one point, possibly because of an orgasm, making her, already tight, pussy clamp down harder on your cock, earning a grunt from you as you feel yourself grow closer to an orgasm yourself.\n\n");
 		outputText("\"<i>Gonna cum,</i>\" you grunt, speeding up your thrusts.\n\n");
 		outputText("\"<i>NO! Cum outside!! Outside!!</i>\" she screams, trying to escape again.\n\n");
-		outputText("Grunting, and with a huge amount of self control, you pull yourself out of her, spraying your load over her back. Satisfied, you climb off her, leaving her to hang off the " + object() + ", crying softly to herself, while you dress yourself and leave.\n\n");
+		outputText("Grunting, and with a huge amount of self-control, you pull yourself out of her, spraying your load over her back. Satisfied, you climb off her, leaving her to hang off the " + object() + ", crying softly to herself, while you dress yourself and leave.\n\n");
 	}
 	flags[kFLAGS.DIANA_FOLLOWER] = 3;
 	player.sexReward("vaginalFluids");
@@ -435,12 +437,12 @@ public function wonOverDianaSpare():void {
 	clearOutput();
 	if (flags[kFLAGS.DIANA_LVL_UP] == 8 && flags[kFLAGS.DIANA_FOLLOWER] < 3) {
 		outputText("You tell the girl you will let her go. You have no business with her. The horse morph however doesn't leave right away.\n\n");
-		outputText("\"<i>Thank you. I may have been too hasty to judge you and I think it’s high time we truly gets acquainted. I just wanted you to know that my name's Diana.</i>\"\n\n");
+		outputText("\"<i>Thank you. I may have been too hasty to judge you and I think it’s high time we truly get acquainted. I just wanted you to know that my name's Diana.</i>\"\n\n");
 		outputText("Well Diana, that’s one name you don't plan to forget. still, she'd better be off on her way now. She nods and runs off disappearing in the forest.\n\n");
 	}
 	else {
 		outputText("You tell the girl you will let her go. You have no business with her.\n\n");
-		outputText("At first she looks at you in confusion, then nods before running off in the forest. Maybe next time the two of you could meet on more friendly dispositions.\n\n");
+		outputText("At first, she looks at you in confusion, then nods before running off in the forest. Maybe next time the two of you could meet on more friendly dispositions.\n\n");
 	}
 	cleanupAfterCombat();
 }
@@ -464,7 +466,7 @@ public function beMyStallion():void {
 	outputText("Diana looks up at you, sadness in her eyes.\n\n");
 	outputText("\"<i>You know how hard it was?</i>\" Diana whimpers, her face flushed, \"<i>I’m always so horny that it hurt, there were so many times I just wanted to bend over to anything with a dick, just to let it fuck me until I was satisfied? My dreams were always full of me finally having sex, how wonderful it’ll be, but always to wake up in the morning and realize it was all a dream.</i>\"\n\n");
 	outputText("You feel sorry for the alicorn, even though she worked herself into such a state, she is clearly getting aroused by even the mere thought of having sex.\n\n");
-	outputText("\"<i>Everyone thought I was silly and just said to give up, but thanks to you I’ve finally managed to become an alicorn,</i>\" Diana says, calming down, \"<i>All I need is to find my stallion that I can give myself too, and... well... I...</i>\" Diana starts to stutter, her face turning a deep red, before she squeezes her eyes shut and asks, \"<i>Can you be my stallion, please?</i>\"\n\n");
+	outputText("\"<i>Everyone thought I was silly and just said to give up, but thanks to you, I’ve finally managed to become an alicorn,</i>\" Diana says, calming down, \"<i>All I need is to find my stallion that I can give myself too, and... well... I...</i>\" Diana starts to stutter, her face turning a deep red, before she squeezes her eyes shut and asks, \"<i>Can you be my stallion, please?</i>\"\n\n");
 	outputText("You tilt your head to side, and ask the obvious question, \"<i>Why?</i>\"\n\n");
 	outputText("\"<i>Cause, you’re so strong, and I really like that in a mate,</i>\" Diana says, her face as red as tomato, \"<i>I think I’ll be really happy with you too, and the thought of having you father my foals fills me up with such a warm feeling... also I... think I love you too... so please say you’ll be my stallion, I’ll be a good mare and satisfy all your desires, carry all the children you want, so please...</i>\"\n\n");
 	if (player.gender == 0 || player.gender == 2) {
@@ -477,7 +479,7 @@ public function beMyStallion():void {
 }
 public function beMyStallionRepeat():void {
 	clearOutput();
-	outputText("Diana ask with clear hopes in her eyes.\n\n");
+	outputText("Diana asks with clear hopes in her eyes.\n\n");
 	outputText("\"<i>Did you take your time to consider my request? Would you let me be your mare?</i>\"\n\n");
 	menu();
 	addButton(0, "Yes", breakingInYourMare);
@@ -486,7 +488,7 @@ public function beMyStallionRepeat():void {
 public function beMyStallionNo():void {
 	clearOutput();
 	outputText("You apologize to Diana but you can’t, not now not yet. You need some time to consider the option first.\n\n");
-	outputText("For a moment she look at you disappointed like she expected something else then finally reply.\n\n");
+	outputText("For a moment she looks at you disappointed like she expected something else then finally reply.\n\n");
 	outputText("\"<i>It’s all right take your time. Come back to me when you are ready to let me into your life. I can wait. </i>\"\n\n");
 	flags[kFLAGS.DIANA_FOLLOWER] = 5;
 	cleanupAfterCombat();
@@ -495,8 +497,7 @@ public function breakingInYourMare():void {
 	clearOutput();
 	if (!player.hasCock()) {
 		outputText("You take the mixture, groaning as you suddenly feel a sizeable cock growing between your legs.\n\n");
-		player.createCock(10 + rand(7), 2 + rand(10) / 10);
-		player.cocks[0].cockType = CockTypesEnum.HORSE;
+		transformations.CockHorse(0, 10 + rand(7), 2 + rand(10) / 10);
 	}
 	outputText("Diana, in a fit of excitement, suddenly climbs onto her knees and hands before turning around and presenting her rear for you to fuck, moving her tail out of the way of her virgin sex and her equally virgin arsehole, her whole body trembling in excitement.\n\n");
 	outputText("\"<i>Thank you!</i>\" Diana says, her voice full of happiness, as she shakes her behind temptingly. \"<i>I’ll be a good mare to you, but please fuck me!! I really can’t take it anymore, I just need your cock in me now!!</i>\" her voice desperate.\n\n");
@@ -560,11 +561,11 @@ public function breakingInYourMare():void {
 		outputText("\"<i>I’m just... I’m just so happy,</i>\" Diana says, trying to blink away the tears, \"<i>I feared this was another dream, but the pain feels so real, and just happy I’m able to be joined with you like this, I’m happy that you’ve taken both my first times at once and I’ll treasure this pain forever.</i>\"\n\n");
 		outputText("Smiling at Diana’s cute and sweet words, you start to pull your cocks out slowly, realizing you should probably make this more special for Diana, and make it more tender and loving. As your cocks slip out, Diana makes cute but slightly pained moaning noises, obviously still tender from having her virginities taken. Once your cocks are nearly out you thrust back in, as hard but gentle as possible, earning a happy moan from Diana as your cocks sink back into her.\n\n");
 		outputText("\"<i>You’re being so gentle...</i>\" Diana moans, looking back at you, her eyes full of her love for you.\n\n");
-		outputText("\"The least you can do is let her get used to it. You Resume your slow thrusts into her, helping her holes grow accustomed to your girth.\n\n");
+		outputText("The least you can do is let her get used to it. You Resume your slow thrusts into her, helping her holes grow accustomed to your girth.\n\n");
 		outputText("\"<i>Thank you, it feels really good...</i>\" Diana moans again, her body shuddering as you gently fuck her, \"<i>You really are my perfect stallion.</i>\"\n\n");
 		outputText("You wait for her lead before speeding up, smiling at your cute mare.\n\n");
 		outputText("\"<i>Go... go faster. I'm ready, I want more of you... I need more,</i>\" Diana moans, smiling back at you.\n\n");
-		outputText("Smiling, you speed up, beginning to piston you hips and slamming your cocks into her tight cunt and arse, earning a scream from Diana as her pussy and butt are finally pounded by your [cocks].\n\n");
+		outputText("Smiling, you speed up, beginning to piston your hips and slamming your cocks into her tight cunt and arse, earning a scream from Diana as her pussy and butt are finally pounded by your [cocks].\n\n");
 		outputText("")
 		outputText("\"<i>Don't stop! It just feels so good!</i>\" Diana moans, her body shaking as her inside are pounded, \"<i>Your cocks feels so good inside me!! You’re gonna make me cum soon!!</i>\"\n\n");
 		outputText("True to her word she cums, screaming into the ground as her pussy and arsehole tighten and convulse around your cock, while you continue to fuck her, making her scream and moan as you continue to pound her pussy and arse through her orgasm.\n\n");
@@ -601,6 +602,9 @@ public function breakingInYourMare2():void {
 	outputText("After resting a bit. You help your new mare clean up, teasing each other a little, and then help her gather up her stuff. The two of you head back to a small camp near the forest, where your new mare packs up her things.\n\n");
 	outputText("After you make sure she has everything she needs, the two of you head back to your camp.\n\n");
 	outputText("(<b>Diana has been added to the Lovers menu!</b>)\n\n");
+	if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard",1,+1);
+	else player.createKeyItem("Radiant shard", 1,0,0,0);
+	outputText("\n\n<b>Before fully settling in your camp as if remembering something Diana pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
 	flags[kFLAGS.DIANA_FOLLOWER] = 6;
 	doNext(playerMenu);
 }
@@ -612,7 +616,8 @@ public function mainCampMenu():void {
 	menu();
 	addButton(0, "Appearance", dianaAppearance);
 	//1 - Talk
-	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(2, "Spar", dianaSparsWithPC).hint("Ask Diana for a mock battle.");
+	addButton(2, "Spar", dianaSparsWithPC).hint("Ask Diana for a mock battle.")
+		.disableIf(flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 2, "You need a good sparring ring for that.");
 	//3 - ??
 	if (player.lust > 33) addButton(4, "Sex", mainSexMenu);
 	else addButtonDisabled(4, "Sex", "Req. 33+ lust");
@@ -627,17 +632,58 @@ public function mainCampMenu():void {
 		addButtonDisabled(7, "C.C.(Mult)", "Diana is not yet ready to cure your curses again.");
 	}
 	else {
-		addButtonDisabled(6, "C.C.(Base)", "You not have any curses to cure. (non-multiplier)");
-		addButtonDisabled(7, "C.C.(Mult)", "You not have any curses to cure. (multiplier)");
+		addButtonDisabled(6, "C.C.(Base)", "You don't have any curses to cure. (non-multiplier)");
+		addButtonDisabled(7, "C.C.(Mult)", "You don't have any curses to cure. (multiplier)");
 	}
+	addButton(8, "Uncurse", uncurseItemsMenu)
+			.disableIf(player.equippedKnownCursedItems().length == 0 && player.carriedKnownCursedItems().length == 0, "You don't have any cursed items");
+	
 	if (BelisaFollower.BelisaQuestOn && !BelisaFollower.BelisaQuestComp) addButton(13, "ToothacheQ", BelisaDianaTalk);
 	addButton(14, "Back", camp.campLoversMenu);
 }
+		public function uncurseCost(item:IDynamicItem, equipped:Boolean):int {
+			var cost:int = 250 * (1 + item.rarity);
+			if (equipped) cost *= 2;
+			return cost;
+		}
+		public function uncurseItemsMenu():void {
+			clearOutput();
+			outputText("Uncurse which item?");
+			var buttons:ButtonDataList = new ButtonDataList();
+			var cost:int;
+			for each (var slot:ItemSlotClass in player.carriedKnownCursedItems()) {
+				cost = uncurseCost(slot.itype as IDynamicItem, false);
+				buttons.add(slot.itype.shortName, curry(uncurseItem, slot))
+						.hint("Lift the curse from "+slot.itype.longName+" ("+cost+" gems)")
+						.disableIf(player.gems < cost, "Not enough gems ("+cost+")")
+			}
+			for each (var item:ItemType in player.equippedKnownCursedItems()) {
+				cost = uncurseCost(item as IDynamicItem, true);
+				buttons.add(item.shortName, curry(uncurseEquippedItem,item))
+						.hint("Lift the curse from "+item.longName+" ("+cost+" gems)")
+						.disableIf(player.gems < cost, "Not enough gems ("+cost+")")
+			}
+			submenu(buttons, mainCampMenu, 0, false);
+		}
+		public function uncurseItem(slot:ItemSlotClass):void {
+			clearOutput();
+			var newItem:ItemType = (slot.itype as IDynamicItem).uncursedCopy();
+			outputText("The curse is lifted from "+slot.itype.longName);
+			slot.setItemAndQty(newItem, slot.quantity);
+			doNext(mainCampMenu);
+		}
+		public function uncurseEquippedItem(item:ItemType):void {
+			clearOutput();
+			var newItem:ItemType = (item as IDynamicItem).uncursedCopy();
+			player.replaceEquipment(item as Equipable, newItem as Equipable);
+			outputText("The curse is lifted from "+newItem.longName+". You can unequip it now.");
+			doNext(mainCampMenu);
+		}
 
 public function dianaAppearance():void {
 	clearOutput();
 	outputText("Diana is a 7-foot-tall Alicorn with long white hair. Her body is well-muscled, and covered with soft, white fur. Her green eyes look at you, wisdom in her gaze. She's currently looking at you curiously, one of her large herbology books in her hands.\n\n");
-	outputText("Your eyes dip to her J cup breasts. You quickly look back up at her eyes, but if she noticed, she doesn't seem to care. Her legs, as with all horse morphs ends in hooves. Bound in iron, like the horseshoes back home, you know that those can be lethal weapons in a pinch. Her snow-white tail sits across her legs right now, strands of white hair covering her most intimate parts. You know Diana protected her virginity up to becoming a Alicorn, though now since you are her stallion, she is before anything your girlfriend.\n\n");
+	outputText("Your eyes dip to her J cup breasts. You quickly look back up at her eyes, but if she noticed, she doesn't seem to care. Her legs, as with all horse morphs ends in hooves. Bound in iron, like the horseshoes back home, you know that those can be lethal weapons in a pinch. Her snow-white tail sits across her legs right now, strands of white hair covering her most intimate parts. You know Diana protected her virginity up to becoming an Alicorn, though now since you are her stallion, she is before anything your girlfriend.\n\n");
 	menu();
 	addButton(14, "Back", mainCampMenu);
 }
@@ -673,7 +719,7 @@ public function HealingScene():void {
 	outputText("She then starts to move her hands across your body, rubbing sensually against your [skin], making you gasp as you feel a strong tingling feeling from her fingertips. Sparks of magic play across your [skin] as she leans in, arms rubbing your [hips]. You suspect she just wants some skinship, but her magic's still potent, washing away your pain and injuries.\n\n");
 	outputText("Diana starts to rub her chest against yours, causing more of the strange tingling as her soft mounds move against your [skin], your gasps soon turning into moans as her fingers move up your inner thigh, sparks of pleasure shooting up your spine as she runs her fingertips across your " + (player.hasCock() ? "" : "wo") + "manhood.\n\n");
 	outputText("The sparks of magic intensify, becoming almost painful. You grimace, but she hushes you, soft touch on your body countering the pain. Soon enough, it's all over. Diana lets go, stepping back. All your wounds and injuries have closed up, as if they never existed. You're healed, but now you feel rather aroused.\n\n");
-	dynStats("lus", 33);
+	dynStats("lus", 33, "scale", false);
 	HPChange(player.maxOverHP(), true);
 	EngineCore.changeFatigue( -(Math.round(player.maxFatigue() * 0.5)));
 	doNext(mainCampMenu);
@@ -687,7 +733,7 @@ public function CuringCurseScene1():void {	//value related curses removal
 	outputText("She then starts to move her hands across your body, rubbing sensually against your [skin], making you gasp as you feel a strong tingling feeling from her fingertips, washing away your curses.\n\n");
 	outputText("Diana gives you a wicked little smile, rubbing her chest against yours. Her magic flares, causing more of the strange, shocking sensation as her soft mounds move against your [skin], your gasps soon turning into moans as her fingers move from your hips to your groin, sparks of pleasure shooting up your spine as she caresses your " + (player.hasCock() ? "" : "wo") + "manhood.\n\n");
 	outputText("The sparks of magic intensify, becoming almost painful. You grimace, but she hushes you, soft touch on your body countering the pain. Soon enough, it's all over. Diana lets go, stepping back. Your curses have lessened, although now you feel rather aroused.\n\n");
-	dynStats("lus", 50);
+	dynStats("lus", 50, "scale", false);
 	for each (var stat:String in ["str","spe","tou","int","wis","lib","sens"]) {
 		player.removeCurse(stat, 10,1);
 		player.removeCurse(stat, 10,2);
@@ -754,7 +800,7 @@ public function SexMenuVaginal():void {
 	var x:int = player.cockThatFits(36, "length");/*
 	if (player.isTaur()) outputText("\"<i>Please hurry, I can’t wait!</i>\" Diana begs you, still hugging your head.\n\n");
 	else {*/
-		outputText("You order Diana to get on all fours. She couldn’t move quicker as she happily gets on all fours, looking back at you with excitement clearly written on her face. You get behind Diana, moving her tail out of the way while she tries to shake her rear enticingly. You place your hand on Diana’s thick lower lips, earning a happy whimper as well as a slight shiver.\n\n");
+		outputText("You order Diana to get on all fours. She happily gets on all fours, looking back at you with excitement clearly written on her face. You get behind Diana, moving her tail out-of-the-way while she tries to shake her rear enticingly. You place your hand on Diana’s thick lower lips, earning a happy whimper as well as a slight shiver.\n\n");
 		outputText("As soon as your hand runs across her lower lips you can already feel her growing dampness. You probably don’t even need to do much foreplay, since Diana gets wet so easily, but your mare deserves the full treatment. You start rubbing against her sex, making her moan as your fingers press and move along her thick lower lips, giving her clit a little flick once they reach the top, sending a bolt of pleasure up Diana’s spine and earning a gasp from her.\n\n");
 		outputText("When you pull your fingers away, your fingers are covered in her sticky juices, you show them to Diana, showing her how wet she is already. She moans softly, before taking the offered fingers in her mouth, licking and sucking them, cleaning them with her mouth, while with your other hand, you press a finger into her soaked cunt. She lets out a muffled moan through your fingers as your other fingers begin to thrust into her, causing more juices to spill down her legs.\n\n");
 		outputText("Once you deemed her ready, you pull your finger out of her, earning a muffled whimper, maybe she was close. You also remove your fingers from her mouth, which are now covered in her saliva and offer her your other finger to clean, which she does, greedy licking and sucking off her own juices before you also remove it.\n\n");
@@ -767,7 +813,7 @@ public function SexMenuVaginal():void {
 		outputText("\"<i>Wonderful as always,</i>\" you say, readjusting her clothes.\n\n");
 		outputText("\"<i>Although the cum is wasted on my back, maybe next time put it all in the proper place?</i>\" Diana says, gathering up some cum with one of her fingers and sucking it off.\n\n");
 		outputText("\"<i>Only if you're a good mare next time,</i>\" you say with a smirk on your face.\n\n");
-		outputText("Diana pouts a bit before you both say your goodbyes, you heading off.\n\n");
+		outputText("Diana pouts a bit before you both say your goodbyes, and then you head off.\n\n");
 	//}
 	player.sexReward("vaginalFluids","Dick");
 	doNext(camp.returnToCampUseOneHour);
@@ -777,7 +823,7 @@ public function SexMenuAnal():void {
 	var x:int = player.cockThatFits(36, "length");/*
 	if (player.isTaur()) outputText("\"<i>Please hurry, I can’t wait!</i>\" Diana begs you, still hugging your head.\n\n");
 	else {*/
-		outputText("You order Diana to get on all fours. She couldn’t move quicker as she happily gets on her hands and knees, looking back at you with excitement clearly written on her face. You get behind her, moving her tail aside before pulling apart her fat butt cheeks and revealing her puckered asshole.\n\n");
+		outputText("You order Diana to get on all fours. She happily gets on her hands and knees, looking back at you with excitement clearly written on her face. You get behind her, moving her tail aside before pulling apart her fat butt cheeks and revealing her puckered asshole.\n\n");
 		outputText("You suck on one of your fingers, getting it nice and wet, before bringing it down and pushing it into her rear, making her let out a little happy moan as your finger surprisingly, or maybe not, easily slips in.\n\n");
 		outputText("\"<i>Your fingers are in my butt!</i>\" Diana moans, looking over her shoulder at you.\n\n");
 		outputText("\"<i>Not yet,</i>\" you reply, before suddenly shoving another finger into her, making her gasp in surprise, \"<i>Now they are!</i>\"\n\n");
@@ -789,7 +835,7 @@ public function SexMenuAnal():void {
 		outputText("\"<i>Sorry!</i>\" Diana moans happily, very much enjoying the rough treatment. Her body trembles, barely able to keep herself from collapsing. \n\n");
 		outputText("Thinking that she is ready enough, even though you’re kind of curious how many fingers she can take, you remove your fingers. Diana lets out a sad whimper at the absence of your fingers, although that quickly changes when she feels your " + (player.cocks[x].cockLength >= 25 ? "monsterous" : "average") + " [cock] press against her rear. Wasting no time, and knowing that she is ready, you slam all your cock into her at once, ");
 		outputText("earning you a loud scream of pleasure from Diana, " + (player.cocks[x].cockLength >= 20 ? "as your cock stretches her tight little rear beyond normal" : "as your cock fills her tight little rear") + ", her eyes rolling back into her head and her face locked a sluttish grin as your cock begins to pound her arse hard " + (player.cocks[x].cockLength >= 20 ? "making her belly bulge out with your size" : "") + ".\n\n");
-		outputText("She is barely able to support her upper body as she tries her best to straighten up, but every time your hips smash into her arse, your cock slamming deep inside her, she loses all strength and she is back on her elbows. Eventually she loses all strength what so ever, and falls face first onto the ground, moaning happily.\n\n");
+		outputText("She is barely able to support her upper body as she tries her best to straighten up, but every time your hips smash into her arse, your cock slamming deep inside her, she loses all strength and she is back on her elbows. Eventually she loses all strength whatsoever, and falls face first onto the ground, moaning happily.\n\n");
 		outputText("\"<i>Naughty girl, told you stay up, didn’t I?</i>\" you playful chide her, making her moan in response.\n\n");
 		outputText("\"<i>Sorry, please punish your naughty mare...</i>\" Diana simpers, giving you a lust-filled smile.\n\n");
 		outputText("Deciding to do just that, you pull out your cock until only the tip is inside her. A fearful look appears on Diana’s face, thinking you’re actually going to punish her, but before she can think that long, you slam back into her as hard as possible, making her gasp in pleasure as her whole body shakes with the force" + (player.cocks[x].cockLength >= 20 ? ", her belly distorting in the shape of your cock" : "") + ".\n\n");
@@ -797,17 +843,17 @@ public function SexMenuAnal():void {
 		outputText("It almost made you cum too, and as you slam your length back in, you feel you won’t last long. With a final powerful and mighty thrust, making Diana scream again as she cums, maybe for the fourth time, you cum, ");
 		if (player.cumQ() >= 2000) {
 			outputText("blasting her intestines with your thick spunk, filling up her guts before swelling her stomach with the load, bloating her until she looks pregnant, once you finished your load, you pull out of her, cum spraying out of her open arsehole, making Diana moan loudly as she feels the cum being blasted back out of her guts, until it calms down and she rolls onto her side, panting.\n\n");
-			outputText("\"<i>Thank you so much for properly punishing me,</i>\" she giggles, rubbing her well fucked and cum covered arsehole, \"<i>I don’t think I’ll be able to sit down for awhile though. Please come back soon, otherwise my other hole will get lonely.</i>\"\n\n");
-			outputText("After promising you will later, you head back to your adventure, while Diana rests for awhile.\n\n");
+			outputText("\"<i>Thank you so much for properly punishing me,</i>\" she giggles, rubbing her well fucked and cum covered arsehole, \"<i>I don’t think I’ll be able to sit down for a while though. Please come back soon, otherwise my other hole will get lonely.</i>\"\n\n");
+			outputText("After promising you will later, you head back to your adventure, while Diana rests for a while.\n\n");
 		}
 		else {
 			outputText("spraying her intestines with your thick spunk, before removing your cock with a wet sound. Some of your spooge follows, trickling from her now gaping asshole. \n\n");
 			outputText("Diana rolls onto her side, panting from exhaustion, before giving you a loving look.\n\n");
-			outputText("\"<i>Thank you so much for properly punishing me,</i>\" she giggles, rubbing her well fucked arsehole, \"<i>I don’t think I’ll be able to sit down for awhile though. Though please come back soon, otherwise my other hole will get lonely.</i>\"\n\n");
-			outputText("After promising you will later, you head back to your adventure, while Diana rests for awhile.\n\n");
+			outputText("\"<i>Thank you so much for properly punishing me,</i>\" she giggles, rubbing her well fucked arsehole, \"<i>I don’t think I’ll be able to sit down for a while though. Though please come back soon, otherwise my other hole will get lonely.</i>\"\n\n");
+			outputText("After promising you will later, you head back to your adventure, while Diana rests for a while.\n\n");
 		}
 	//}
-	player.sexReward("Default","Dick", true,false);
+	player.sexReward("no", "Dick");
 	doNext(camp.returnToCampUseOneHour);
 }
 public function SexMenuTitsfuck():void {
@@ -822,8 +868,8 @@ public function SexMenuTitsfuck():void {
 	else {*/
 		if (tentacock >= 0) outputText("Diana gets on her knees, while your vine cocks move out around her, the largest one moves in front of her.\n\n");
 		else {
-			outputText("You sit down on a on a nearby " + object() + " while Diana gets on her knees in front of you, before undoing your [armor] and pulling out your erect " + (player.cocks.length == 1 ? "[cock]" : "[cocks]") + "");
-			if (player.isNaga()) outputText("from it’s protective snake slit");
+			outputText("You sit down on a nearby " + object() + " while Diana gets on her knees in front of you, before undoing your [armor] and pulling out your erect " + (player.cocks.length == 1 ? "[cock]" : "[cocks]") + "");
+			if (player.isNaga()) outputText("from your protective snake slit");
 			if (player.isScylla()) outputText("out of from between your tentacles");
 			outputText(".\n\n");
 		}
@@ -838,12 +884,12 @@ public function SexMenuTitsfuck():void {
 		outputText("\"<i>You cock is so hot between my breasts!</i>\" Diana compliments, her eyes hot with lust.\n\n");
 		outputText("You ask Diana to speed up and she nods, speeding up her movements slightly, " + (tentacock >= 0 ? "your other cock vines wrapping around her body, holding her close while others rub against her body, seeking pleasure. You lean your head back and sigh in pleasure, basking in the wonderful titjob" : "her breasts slapping against your chest when they come down") + ".\n\n");
 		if (tentacock >= 0) {
-			outputText("Want more pleasure, another vine cock coils around her neck before finding her mouth, prodding at her mouth. She complies, happily allowing herself to take the [cock] cock in her mouth, letting it fill her. You make her take all of the cock she can without deepthroating her, holding her there as she sucks and licks it like it is the tastiest of treats, her breasts still bouncing up and down the shaft, drool now now dripping on them from her mouth as she also thrusts her head.\n\n");
+			outputText("Want more pleasure, another vine cock coils around her neck before finding her mouth, prodding at her mouth. She complies, happily allowing herself to take the [cock] cock in her mouth, letting it fill her. You make her take all of the cock she can without deepthroating her, holding her there as she sucks and licks it like it is the tastiest of treats, her breasts still bouncing up and down the shaft, drool now dripping on them from her mouth as she also thrusts her head.\n\n");
 			outputText("Still wanting to feel more, your tentacles starts to move more, tightening their grip on her as they aggressively rub against her body, while the one in mouth and the one between start to thrust as well, the one in her mouth stopping short of deepthroating her.\n\n");
-			outputText("Soon you fill the building pressure in your cock" + (tentacock >= 0 ? "" : "s") + ", threatening to burst out and spray your load inside her cock stuffed mouth. You groan, as you feel it coming, building up and up and up, until it comes comes!\n\n");
+			outputText("Soon you fill the building pressure in your cock" + (tentacock >= 0 ? "" : "s") + ", threatening to burst out and spray your load inside her cock stuffed mouth. You groan, as you feel it coming, building up and up and up, until it comes!\n\n");
 			outputText("You vines tightening again as if to stop Diana escaping, which she has no such desire, before unleashing their loads. ");
 			if (player.cumQ() >= 2000) {
-				outputText("Each vine shooting out their load over whatever surface they can, covering her upper body in their hot cum as the vines spray their huge load all over her, her fur almost disappearing under all the cum thick, while the tentacle in her mouth unloads its huge payload down her throat, the vines around her neck bulging as they making sure she takes it all, her belly swelling with the amount of cum you’ve forced in her. ");
+				outputText("Each vine shooting out their load over whatever surface they can, covering her upper body in their hot cum as the vines spray their huge load all over her, her fur almost disappearing under all the cum thick, while the tentacle in her mouth unloads its huge payload down her throat, the vines around her neck bulging as they're making sure she takes it all, her belly swelling with the amount of cum you’ve forced in her. ");
 				outputText("As your vines finish their discharge, they remove themselves from her body, her sucking in a deep breath of air as one removes itself from her mouth and neck, before gulping down any remains in her mouth and smiling.\n\n");
 				outputText("\"<i>So much, my belly is now nice and full of your cum,</i>\" Diana says, rubbing her swollen belly, \"<i>But you turned me into quite the mess, didn’t you? I don’t think I’ll ever be able to wash out the smell of your cum, not that I mind.</i>\"\n\n");
 				outputText("\"<i>It suits you,</i>\" you say cheekily, giving her a playful kiss on the only non cum covered part of forehead.\n\n");
@@ -860,11 +906,11 @@ public function SexMenuTitsfuck():void {
 		}
 		else {
 			outputText("Though your lover is blissed out, eyes glazed over with pleasure, but you're not satisfied yet. Grabbing her horn, " + (player.cocks[x].cockLength >= 15 ? "guide her up onto your cock’s head" : "guide her down onto your cock") + ".\n\n");
-			outputText("Still wanting to feel more, you suddenly begin to move your hips slightly, surprising her as the cock slams into the depths of her mouth. Your hips slam into her cheeks, and she moans, sending vibrations down your shaft. Soon, you’re both moving, you thrusting her your hips slightly, while she continues to move her body up and down your cock.\n\n");
-			outputText("Soon you fill the building pressure in your cock" + (player.cocks.length == 1 ? "" : "s") + ", threatening to burst out and spray your load inside her vine stuffed mouth and her vine covered body. You groan, as you feel it coming, building up and up and up, until it comes comes!\n\n");
+			outputText("Still wanting to feel more, you suddenly begin to move your hips slightly, surprising her as the cock slams into the depths of her mouth. Your hips slam into her cheeks, and she moans, sending vibrations down your shaft. Soon, you’re both moving, you thrust her your hips slightly, while she continues to move her body up and down your cock.\n\n");
+			outputText("Soon you fill the building pressure in your cock" + (player.cocks.length == 1 ? "" : "s") + ", threatening to burst out and spray your load inside her vine stuffed mouth and her vine covered body. You groan, as you feel it coming, building up and up and up, until it comes!\n\n");
 			outputText("You pull down on Diana horn, surprising her as she suddenly as to take even more of your cock, but not as surprised as when you suddenly spray her mouth with cum. ");
 			if (player.cumQ() >= 2000) {
-				outputText("You cum so heavily that her cheeks bulge with the amount, and it happens so suddenly that some of it sprays out of her mouth onto her tits. Seeing the mess you're making, your force Diana to take the rest of your cock, making her moan as it slips into her throat, allowing your to unload your massive load right down her throat, making her belly bulge as you fill her stomach with your thick stuff.\n\n");
+				outputText("You cum so heavily that her cheeks bulge with the amount, and it happens so suddenly that some of it sprays out of her mouth onto her tits. Seeing the mess you're making, your force Diana to take the rest of your cock, making her moan as it slips into her throat, allowing you to unload your massive load right down her throat, making her belly bulge as you fill her stomach with your thick stuff.\n\n");
 				outputText("When you finally finish, you pull her off your cock, allowing her to take a deep breath, as cum leaks out onto her mouth and onto her breast as she pants.\n\n");
 				outputText("\"<i>So much, my belly is now nice and full of your cum,</i>\" Diana says, rubbing her swollen belly, \"<i>But you turned me into quite the mess, didn’t you?</i>\"\n\n");
 				outputText("\"<i>It suits you,</i>\" you says, cheeky, giving her a playful kiss on the forehead.\n\n");
@@ -880,7 +926,7 @@ public function SexMenuTitsfuck():void {
 			}
 		}
 	//}
-	player.sexReward("Default","Dick", true,false);
+	player.sexReward("no", "Dick");
 	doNext(camp.returnToCampUseOneHour);
 }
 

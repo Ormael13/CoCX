@@ -1,5 +1,9 @@
 ﻿package classes.Scenes.Areas.Forest{
 import classes.*;
+import classes.BodyParts.Arms;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Tail;
+import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
@@ -33,12 +37,12 @@ public function encounterFaerie():void {
 				outputText("\n\nYou grasp the dizzy faerie out of the air with ease, smiling as you feel the flood of wetness between her thighs moistening your hand.  She wriggles and moans, \"<i>No, not again!  I want another cum-bath so bad... but I'm losing myself to it.  It's hard to keep flowers pollinated when you're jilling off half the day and waiting for a nice hard cock to wander your way...</i>\"\n\nShe wants to get you off almost as you do.  Do you make her service you again?");
 			}
 			else outputText("\n\nYou lazily make a grab for her and easily snatch her out of the air.  Her body is sticky with a mix of desire and cum from your last encounter.  You can feel her humping against your pinky while she begs, \"<i>Come on, let me crawl into your [armor] and wrap myself around your shaft.  I promise I'll only drink a little pre-cum this time, just enough to let me get off.  I'll be a good faerie slut, just let me get you off!</i>\"\n\nDo you let the faerie get you off?");
-			dynStats("lus", player.lib/10+2);
+			dynStats("lus", player.lib/10+2, "scale", false);
 			doYesNo(faerieCaptureHJ, letFaerieGo);
 			if(player.statusEffectv1(StatusEffects.FaerieFucked) < 5) addButton(2, "Never", disableFaerieEncounterForGood);
 			return;
 		}
-		dynStats("lus", player.lib/10+2);
+		dynStats("lus", player.lib/10+2, "scale", false);
 		if(player.lust >= 90) {
 			outputText("\n\nYou groan miserably with frustration. Desperate for stimulation, you sink to your knees and start jacking off, the faerie's visage still fresh in your mind. You catch a fleeting glimpse of yourself tightly gripping the faerie's legs in each of your fists, dragging her toward ");
 			if(player.cockTotal() == 1) outputText("your dick");
@@ -205,7 +209,7 @@ private function faerieDoNothing():void {
 	}
 	else {
 		outputText("The faerie flies close to your ear and speaks in a volume that would be a whisper from another human, \"You've got some sexy parts girl, but you're too big for me. I hope you find someone to get you off, so I can watch.\" Then she flies in front of you, cutely kisses the bridge of your nose, and flies off.");
-		dynStats("lus", 5);
+		dynStats("lus", 5, "scale", false);
 		doNext(camp.returnToCampUseOneHour);
 	}
 }
@@ -255,7 +259,7 @@ private function faerieCaptureHJ():void {
 			//[Huge amount of cum:
 			else outputText("Your semen collides with her face, and she is propelled off of your cock onto the pre-soaked ground. Your [balls] continue pumping out cum like a hose until she's almost swimming in it.\n\n");
 		}
-		player.sexReward("Default", "Dick", true, false);
+		player.sexReward("no", "Dick");
 		dynStats("lib", -.5);
 		//Epilogue!
 		if(player.statusEffectv1(StatusEffects.FaerieFucked) < 10) outputText("The faerie burps and giggles again before glaring up at you, accusing you with a mildly unfocused glare and asking, \"<i>Did you know we get drunk on cum?  Caushe I TRY SO HARRD not to get meshed up like this.</i>\"\n\n");
@@ -268,10 +272,10 @@ private function faerieCaptureHJ():void {
 	else {
 		sceneHunter.print("Check failed: Taur body.");
 		outputText("The faerie reaches your swollen member and ");
-		if(player.hasKnot(0)) outputText("climbs atop your knot, wrapping her legs around the narrower shaft to hold on.  You can feel her cheeks resting atop the 'bulb' of your canine anatomy, teasing you with feminine features you're far too large to penetrate.  ");
-		else if(player.cocks[0].cockType == CockTypesEnum.HORSE) outputText("climbs atop your [cock], hanging onto your ring of prepuce and wrapping her legs as far around your horse-like maleness as she can.  ");
+		if(player.cocks[0].cockType == CockTypesEnum.HORSE) outputText("climbs atop your [cock], hanging onto your ring of prepuce and wrapping her legs as far around your horse-like maleness as she can.  ");
 		else if(player.cocks[0].cockType == CockTypesEnum.DEMON) outputText("climbs atop your [cock], hanging on to the corrupted nubs and nodules as she threads her legs between them, squeezing you tightly as she hangs on.  You can feel her wet gash sitting atop a particularly sensitive bump, teasing you with a tiny cunt you'll never be able to penetrate.  ");
 		else if(player.cocks[0].cockType == CockTypesEnum.TENTACLE) outputText("climbs onto your squirming [cock], wrapping her legs tightly around it as it wiggles and writhes with excitement.  Unbidden, it curls around and rubs its reddish-purple head against her face like an animal.  She gives it a gentle squeeze and licks it.  ");
+		else if(player.hasKnot(0)) outputText("climbs atop your knot, wrapping her legs around the narrower shaft to hold on.  You can feel her cheeks resting atop the 'bulb' of your canine anatomy, teasing you with feminine features you're far too large to penetrate.  ");
 		else outputText("climbs on to your hardness, wrapping her legs tightly around it as she secures a perch against you.   You can feel her wet gash rubbing against your sensitive skin, teasing you with a tiny cunt you'll never be able to penetrate.  ");
 		outputText("Your internal muscles clench unconsciously, squeezing out a dollop of pre that rolls down into the faerie's hair, soaking her head and face.  You can't see her reaction, but you can feel it oozing between her body and you, lubricating her as she humps and rubs against you.  Tiny muffled moans escape " + player.clothedOrNakedLower("your [armor]", "her mouth") + ", indicating that some part of her is enjoying the task.\n\n");
 		outputText("Though she can only stimulate a few inches of you at a time, it feels really good – better than it should, and a budding warmth on the edge of release builds inside you.  " + player.clothedOrNakedLower("Too late you realize you should have gotten at least partially undressed.  You cum before you can do anything about it, splattering your [armor] with seed and leaving a wet patch on the crotch.  You can feel it dripping back onto you, and the faerie as more spunk squirts out, soaking the tiny girl in spooge as the wet spot grows", "Good thing your junk is exposed as otherwise you would have ended up jizzing in your pants. You cum, splattering the faerie with seed. This continues until the tiny girl is soaked in spooge") + ".  ");
@@ -290,7 +294,7 @@ private function faerieCaptureHJ():void {
 		else outputText("The faerie burps and begins openly masturbating, panting and slurring happily, \"<i>Yush I-gasp-uh feel great!  MMMmmmhm, it makesh my twat so sensitive.  I'm gonna fly home and schtuff it full, then play with my clit till I fall ashleep!</i>\"\n\n");
 		if(player.statusEffectv1(StatusEffects.FaerieFucked) < 15) outputText("She licks her fingers and rolls around laughing, \"<i>Hehe, who caresh!  I'm happy! WHEEEEE!</i>\"\n\n");
 		outputText("The faerie takes off, still dripping, and flying in something less than a straight line...");
-		player.sexReward("Default", "Dick", true, false);
+		player.sexReward("no", "Dick");
 		dynStats("lib", -.5);
 		if(!player.hasStatusEffect(StatusEffects.Jizzpants) && player.armor.name != "nothing" && player.armor != armors.LTHCARM && player.armor != armors.GOOARMR) player.createStatusEffect(StatusEffects.Jizzpants,1,0,0,0);
 		if (player.armor == armors.GOOARMR) {
@@ -298,6 +302,61 @@ private function faerieCaptureHJ():void {
             SceneLib.valeria.feedValeria(player.cumQ() / 10);
         }
 	}
+	doNext(camp.returnToCampUseOneHour);
+}
+public function encounterFaerieDragon():void {
+	spriteSelect(SpriteDb.s_faerie);
+	clearOutput();
+	if (player.isFemale()) {
+		outputText("A faerie slightly taller and thicker than your middle finger flits about the air. Her flat chest and girlish bob of hair makes her look quite cute, but the solid black stockings and leather straps covering her chest show her slutty nature. Her wings are a light red, the color of aroused genitals.\n\n");
+		outputText("The faerie slows the beating of her wings and hovers towards you. You dismiss your fearful notions, certain a small faerie is quite harmless to you.\n\n");
+		outputText("How do you react?\n\n");
+		menu();
+		addButton(0, "Fairy Tales", encounterFaerieDragonStory);
+	}
+	else {
+		outputText("Your heart skips a beat as the little fairy draws near, seemingly as curious about you as you are her. You hold out a hand, and the tiny slut lands in your palm, tiny wings flapping nervously. Slowly, ever so slowly, you sit on the ground, your scales itching slightly. You keep your wings folded behind your back, slightly embarrassed about them. You stare at the tiny woman’s butterfly wings, how they shimmer in the light.\n\n");
+		outputText("\"<i>You like ‘em too, huh?</i>\" She flaps her wings gently. \"<i>Can’t say I blame you.</i>\" She sits down, legs crossed. You nod, asking her if she’s a princess among her people. She laughs, asking you why, and you grin, remarking that if legends in your homeland were true, that you’d be kidnapping her if that were the case.\n\n");
+		outputText("The little one laughs at that. \"<i>Yeah, otherworlders are a superstitious lot. Makes them that much more fun to mess with!</i>\" She begins to talk about a few foxes that come by her neck of the woods, and the pranks she pulls on them in response. She proves to be quite the chatterbox, and before you know it, you spend an hour or so talking with the odd little fae.\n\n");
+		outputText("Eventually, she sits down, cross-legged, in your palm, nuzzling one of your fingers with her cheek. \"<i>I missed this, y’know. Most of my people don’t like you giant-folk…But I used to talk with a few, before they got all fuck-crazy.</i>\" She gives you a smile. \"<i>I noticed that you’ve been hiding your own wings. Why? You embarrassed about ‘em or something?</i>\"\n\n");
+		outputText("You admit that your dragon wings are useful, but that you’d prefer it if they were… a little more pretty.\n\n");
+		outputText("\"<i>Well…Normally I’d just say tough luck and leave it at that…But you seem different than most of the…shall we say, ‘men’ around here.</i>\" She smiles. \"<i>If you want, I could help you with that. Give you wings that match mine.</i>\"\n\n");
+		encounterFaerieDragonStory2();
+	}
+}
+private function encounterFaerieDragonStory():void {
+	outputText("You feel strange as your body seems to react to the fairy’s presence. You can’t help but be jealous of the faerie’s carefree nature and beautiful butterfly wings, meanwhile you’re a big scaly lizard that might as well be kidnapping fairy tale princesses. The faerie seems to have noticed your envious stare.\n\n");
+	outputText("\"<i>Oh, you got something special about you, girl! If you let me, I could make you cute and nice just like us faeries. Would you like that?</i>\"\n\n");
+	outputText("How does she intend to do that anyway? It's not like you will suddenly shrink to pintsize.\n\n");
+	outputText("\"<i>Just you watch. I got just the thing. Here, sniff that!</i>\"\n\n");
+	encounterFaerieDragonStory2();
+}
+private function encounterFaerieDragonStory2():void {
+	outputText("A small flower not unlike a pinkish tulip grows at your feet out of nowhere. Well, if the fairy’s words are true, this small item will change you. Do you eat it?\n\n");
+	menu();
+	addButton(1, "No", encounterFaerieDragonStoryNo);
+	addButton(3, "Yes", encounterFaerieDragonStoryYes);
+}
+private function encounterFaerieDragonStoryNo():void {
+	spriteSelect(SpriteDb.s_faerie);
+	clearOutput();
+	outputText("You excuse yourself, saying that you like yourself the way you are. Then you turn back, making your way back to camp.\n\n");
+	doNext(camp.returnToCampUseOneHour);
+}
+private function encounterFaerieDragonStoryYes():void {
+	spriteSelect(SpriteDb.s_faerie);
+	clearOutput();
+	outputText("You smell the flower. Its scent is nice and soothing, like that of lavender. You feel euphoria reach toward your mind for unknown reason and giggle as your body begins to change.\n\n");
+	outputText("Your scale’s color slowly shifts towards a cheerful pinkish purple, similar to morning glory, while your hair color changes towards pink. The greatest change comes when your wings begin to shrivel up, rapturous ecstasy flowing through your appendages.. You feel lighter and lighter, shrinking a little in size as your wings turns into those of a butterfly. You flap them, hovering above the ground for a few second and smile wide, giddy from the flight. The faerie was telling the truth, and now you’re a Faerie dragon! You happily thank her for gifting you with this form.\n\n");
+	outputText("\"<i>All fine by me. See you around!</i>\"\n\n");
+	outputText("The faerie flutters off as you head back to camp with a whole new pinkish outlook on your life.\n\n");
+    player.hairColor = "pink";
+	player.scaleColor1 = "pinkish purple";
+	transformations.WingsFeyDragon.applyEffect(false);
+	transformations.TailFeyDraconic.applyEffect(false);
+	transformations.ArmsFeyDraconic.applyEffect(false);
+	transformations.LowerBodyFeyDraconic(player.legCount).applyEffect(false);
+	if (!player.hasPerk(PerkLib.DragonFaerieBreath)) player.createPerk(PerkLib.DragonFaerieBreath, 0, 0, 0, 0);
 	doNext(camp.returnToCampUseOneHour);
 }
 }

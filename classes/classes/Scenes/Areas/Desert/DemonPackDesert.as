@@ -5,7 +5,7 @@ import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.BodyParts.Horns;
 import classes.BodyParts.Tail;
-import classes.GlobalFlags.kFLAGS;
+import classes.Items.DynamicItems;
 import classes.Scenes.SceneLib;
 import classes.internals.WeightedDrop;
 
@@ -16,7 +16,7 @@ public class DemonPackDesert extends Monster
 		{
 			if (hpVictory) {
 				outputText("You strike out and the last of the demons tumbles to the ground with a thud. You stand there for a second surrounded by dead or unconscious demons feeling like a god of battle. Then you realize that if a god of battle does exist he lives on a demonic plane like this, so to avoid insulting him you take your hands off your hips and your [legs] off the head of the demon leader before you start to search the bodies.", true);
-				player.dynStats("lus", 1);
+				player.dynStats("lus", 1, "scale", false);
 			} else {
 				outputText("The demons stop attacking, and reach out to touch your body. Some are already masturbating like it's the only thing in the world and you know that right now, if you wanted to, you could make each and every one of them fuck you.");
 			}
@@ -102,7 +102,7 @@ public class DemonPackDesert extends Monster
 			this.tallness = rand(8) + 70;
 			this.hips.type = Hips.RATING_AMPLE + 2;
 			this.butt.type = Butt.RATING_LARGE;
-			this.skinTone = "red";
+			this.bodyColor = "red";
 			this.hairColor = "black";
 			this.hairLength = 15;
 			initStrTouSpeInte(50, 30, 10, 5);
@@ -116,9 +116,12 @@ public class DemonPackDesert extends Monster
 			this.bonusHP = 20;
 			this.bonusLust = 129;
 			this.lust = 30;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 9;
 			this.gems = rand(30)+20;
+			this.randomDropChance = 0.1;
+			this.randomDropParams = {
+				rarity: DynamicItems.RARITY_CHANCES_LESSER
+			};
 			this.drop = new WeightedDrop().addMany(1,
 							consumables.SUCMILK,
 							consumables.INCUBID,

@@ -6,18 +6,42 @@ import classes.Race;
 public class YukiOnnaRace extends Race {
 	public static const YukiOnnaSkinColors:/*String*/Array = ["snow white", "light blue", "glacial white"];
 	public static const YukiOnnaHairColors:/*String*/Array = ["snow white", "silver white", "platinum blonde", "quartz white"];
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Human",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Human",
+        /*Eyes*/		"Human",
+        /*Face*/		"Human",
+        /*Gills*/		"Human",
+        /*Hair*/		"Human",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Human",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Human",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Human"];
 	
 	public function YukiOnnaRace(id: int) {
-		super("Yuki Onna", id);
+		super("Yuki Onna", id, []);//RaceBody);
 	}
 	
 	public override function setup():void {
 		
 		addScores()
-				.skinBaseColor(ANY(YukiOnnaSkinColors), +1)
+				.skinColor1(ANY(YukiOnnaSkinColors), +1)
 				.skinBaseAdj("cold", +1)
 				.eyeColor("light purple", +1)
-				.hairColor(ANY(YukiOnnaHairColors), +1)
+				.hairColor1(ANY(YukiOnnaHairColors), +1)
 				.hairType(Hair.SNOWY, +1)
 				.legType(LowerBody.YUKI_ONNA, +1)
 				.armType(Arms.YUKI_ONNA, +1)

@@ -2,7 +2,6 @@ package classes.Scenes.NPCs
 {
 import classes.BaseContent;
 import classes.CoC;
-import classes.CoC;
 
 import coc.view.ButtonDataList;
 

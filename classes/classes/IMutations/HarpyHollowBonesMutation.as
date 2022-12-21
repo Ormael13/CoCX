@@ -7,11 +7,11 @@ package classes.IMutations
 import classes.PerkClass;
 import classes.IMutationPerkType;
 import classes.Creature;
-import classes.Player;
 import classes.Races;
 
 public class HarpyHollowBonesMutation extends IMutationPerkType
     {
+        private static const mName:String = "Harpy Hollow Bones";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -42,7 +42,7 @@ public class HarpyHollowBonesMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Harpy Hollow Bones" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -65,9 +65,8 @@ public class HarpyHollowBonesMutation extends IMutationPerkType
         }
 
         //Mutations Buffs
-        override public function pBuffs(target:Creature = null):Object{
+        override public function buffsForTier(pTier:int):Object {
             var pBuffs:Object = {};
-            var pTier:int = currentTier(this, (target == null)? player : target);
             if (pTier == 1) {
                 pBuffs['spe.mult'] = 0.2;
                 pBuffs['tou.mult'] = -0.05;
@@ -84,8 +83,7 @@ public class HarpyHollowBonesMutation extends IMutationPerkType
         }
 
         public function HarpyHollowBonesMutation() {
-            super("Harpy Hollow Bones IM", "Harpy Hollow Bones", ".");
-            maxLvl = 3;
+            super(mName + " IM", mName, SLOT_BONE, 3);
         }
         
     }

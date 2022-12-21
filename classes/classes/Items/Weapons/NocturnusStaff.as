@@ -1,8 +1,11 @@
-package classes.Items.Weapons 
+package classes.Items.Weapons
 {
-	import classes.PerkLib;
+import classes.EventParser;
+import classes.Items.Weapon;
+import classes.PerkLib;
+import classes.TimeAwareInterface;
 
-	public class NocturnusStaff extends WeaponWithPerk
+public class NocturnusStaff extends Weapon implements TimeAwareInterface
 	{
 		//Implementation of TimeAwareInterface
         //Recalculate Wizard's multiplier every hour
@@ -18,11 +21,13 @@ package classes.Items.Weapons
 		}
 		
         //Normal weapon stuff
-		public function NocturnusStaff() 
+		public function NocturnusStaff()
 		{
-			super("N.Staff", "N. Staff", "nocturnus staff", "a nocturnus staff", "smack", 10, 1600,
+			super("N.Staff", "N. Staff", "nocturnus staff", "a nocturnus staff", "bonk", 10, 1600,
 					"This corrupted staff is made in black ebonwood and decorated with a bat ornament in bronze. Malice seems to seep through the item, devouring the wielder’s mana to channel its unholy power.",
-					"Staff, +200% Spell cost, Spellpower bonus for corruption", PerkLib.WizardsFocus, 0.6, 0, 0, 0, "", "Staff");
+					"Large, Staff, +200% Spell cost, Spellpower bonus for corruption", WT_STAFF);
+			withBuff('spellpower', +0.6);
+			EventParser.timeAwareClassAdd(this);
 		}
 		
 		public function calcWizardsMult():Number {
@@ -36,11 +41,11 @@ package classes.Items.Weapons
 
         public function updateWizardsMult():void {
             if (game.player.cor != lastCor) {
-                weapPerk.value1 = calcWizardsMult();
-                if (game.player.weapon == game.weapons.N_STAFF) {
+				_buffs['spellpower'] = calcWizardsMult();
+                if (game.player.weapon == this) {
                     //re-requip to update player's perk
-                    playerRemove();
-                    playerEquip();
+                    afterUnequip(false);
+                    afterEquip(false);
                 }
             }
             lastCor = game.player.cor;
@@ -57,13 +62,9 @@ package classes.Items.Weapons
                 return _description;
         }
 		
-		override public function get verb():String { 
-			return game.player.hasPerk(PerkLib.StaffChanneling) >= 0 ? "shot" : "smack";
-		}
-
-		override public function canUse():Boolean {
-			if (game.player.level >= 40) return super.canUse();
-			outputText("You try and wield the legendary weapon but to your disapointment the item simply refuse to stay put in your hands. It would seem you yet lack the power and right to wield this item.");
+		override public function canEquip(doOutput:Boolean):Boolean {
+			if (game.player.level >= 40) return super.canEquip(doOutput);
+			if(doOutput) outputText("You try and wield the legendary weapon but to your disapointment the item simply refuse to stay put in your hands. It would seem you yet lack the power and right to wield this item.");
 			return false;
 		}
 

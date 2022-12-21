@@ -1,17 +1,25 @@
 ﻿package classes.Scenes.Places.TelAdre{
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.Items.WeaponLib;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Items.WeaponLib;
 
-	public class Library extends TelAdreAbstractContent{
-
-	public function Library()
-	{
+public class Library extends TelAdreAbstractContent implements TimeAwareInterface {
+	public function timeChange():Boolean {
+		if (flags[kFLAGS.MALI_BLADE_STATUS] > 1) --flags[kFLAGS.MALI_BLADE_STATUS];
+		return false;
 	}
 
-//const TIMES_VISITED_MALI:int = 860
-//const TIMES_BEEN_TO_LIBRARY:int = 861;
-//const MALI_TAKEN_BLADE:int = 862;
+	public function timeChangeLarge():Boolean {
+		return false;
+	}
+
+	public function Library() {
+		EventParser.timeAwareClassAdd(this);
+	}
+
+	private static function quinnHere():Boolean {
+		return model.time.hours >= 6 && model.time.hours <= 17;
+	}
 
 //[Mage's Tower]
 public function visitZeMagesTower():void {
@@ -19,16 +27,26 @@ public function visitZeMagesTower():void {
 	else towerFollowUpVisits();
 	menu();
 	addButton(0,"Study",studyInTA);
-	if (flags[kFLAGS.TIMES_BEEN_TO_LIBRARY] == 0 || model.time.hours <= 17) {
+	if (quinnHere()) {
 		addButton(1,"You Okay?",youOkayBuddy);
-		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00175] > 0) addButton(2,"Mali",talkToMali);
-	}
-	if (flags[kFLAGS.TIMES_VISITED_MALI] > 0) addButton(2,"Mali",talkToMali);
-	if (flags[kFLAGS.TIMES_BEEN_TO_LIBRARY] > 0 && player.gems >= 240) {
-		addButton(5, "A.Staff", buyStarterStaff, weapons.A_STAFF).hint("Buy Amphyst Staff.");
+		if(flags[kFLAGS.DOMINIKA_COVENANT] > 0) { //nothing but the quest, sadly
+			if (flags[kFLAGS.MALI_BLADE_STATUS] == 0 || flags[kFLAGS.MALI_BLADE_STATUS] == 1)
+				addButton(2, "Mali", talkToMali);
+			else if (flags[kFLAGS.MALI_BLADE_STATUS] > 1)
+				addButtonDisabled(2, "Mali", "She's not here yer. Check on her later, when she's done with catching the sorceress.");
+			//Nothing after the quest, sadly
+		}
+		addButton(5, "A.Staff", buyStarterStaff, weapons.A_STAFF).hint("Buy Amethyst Staff.");
 		addButton(6, "R.Staff", buyStarterStaff, weapons.R_STAFF).hint("Buy Ruby Staff.");
 		addButton(7, "S.Staff", buyStarterStaff, weapons.S_STAFF).hint("Buy Sapphire Staff.");
 		addButton(8, "T.Staff", buyStarterStaff, weapons.T_STAFF).hint("Buy Topaz Staff.");
+		if (player.gems >= 240) {
+			outputText("\n\n<b>You can buy different magic staves crafted by the Covenant.</b>");
+			if (silly()) outputText("\n<b>Sorry, the diamond staff is out of stock.</b>");
+		} else {
+			for (var i:int = 5; i <= 8; ++i)
+				button(i).disable("Not enough gems (240)!");
+		}
 	}
 	flags[kFLAGS.TIMES_BEEN_TO_LIBRARY]++;
 	addButton(14,"Back",telAdre.telAdreMenu);
@@ -38,7 +56,7 @@ private function buyStarterStaff(type:ItemType):void {
 	clearOutput();
 	player.gems -= 240;
 	statScreenRefresh();
-	outputText("You pay 240 gems and Quinn hands over choosen basic elemental staff to you.");
+	outputText("You pay 240 gems and Quinn hands over the chosen basic elemental staff to you.");
 	inventory.takeItem(type, telAdre.telAdreMenu);
 }
 
@@ -51,7 +69,7 @@ private function firstTowerVisit():void {
 	
 	outputText("\n\nA single room takes up the entirety of the space on the first floor.  Staircases up and down can be seen on opposing ends, but the majority of the room is furnished with simple seats and tables.  Scrolls and books litter the surfaces, likely pulled from a series of shelves set under the curving staircase.  There does not seem to be a connection between this library and the actual core of the tower.");
 	
-	if (model.time.hours <= 17) { //Don't want to meet Quinn if he's not supposed to be there
+	if (quinnHere()) { //Don't want to meet Quinn if he's not supposed to be there
 		outputText("  A single man carefully turns through the pages of one book");
 		commonQuinnTroduction();
 	}
@@ -64,7 +82,7 @@ private function firstTowerVisit():void {
 private function towerFollowUpVisits():void {
 	clearOutput();
 	if (flags[kFLAGS.TIMES_BEEN_TO_LIBRARY] == -1) { //Return visits before you meet Quinn. Either you meet him or you continue to go to the library at night like some bibliophile vampire
-		if(model.time.hours <= 17) {
+		if(quinnHere()) {
 			outputText("You return to the mage's tower.  Entering the main room, you're surprised to see a man carefully turning the pages of one of the tomes");
 			commonQuinnTroduction();
 		}
@@ -76,7 +94,7 @@ private function towerFollowUpVisits():void {
 	}
 	
 	//(follow-up visits, 6:00 – 17:00)
-	if(model.time.hours <= 17) {
+	if(quinnHere()) {
 		outputText("You return to the mage's tower.  Entering the main room, Quinn is carefully inspecting the pages of a book.  The room looks slightly more organized from when you last saw it, but it looks as though Quinn will be working on it for some time.");
 		outputText("\n\nHe notices you've arrived and quirks an eyebrow.  \"<i>Yes?</i>\" he asks wearily, \"<i>Is there something I can assist you with?</i>\"");
 		//If the player has encountered Asa Mali they may ask for Mali.  Otherwise they can either leave, ask to study, or ask Quinn if he is okay.
@@ -110,7 +128,7 @@ private function commonQuinnTroduction():void {
 private function studyInTA():void {
 	clearOutput();
 	//[Study, 6:00-17:00]
-	if(model.time.hours <= 17) {
+	if(quinnHere()) {
 		outputText("You ask Quinn if you can use the library to study and learn.");
 		outputText("\n\n\"<i>I'm afraid that I may have not made myself clear earlier, the library is not presently open,</i>\" Quinn sighs, rubbing his forehead.  \"<i>This means that it is closed, which is the opposite state of open.  While it is in this state its services are unavailable to the general public.  The general public in this particular instance are also the ones directly responsible for the necessity of it closing, leading to further hesitation in the Covenant's willingness to hasten the opening.  Your interest is noted, filed, and considered, but will be regarded as a data point and not the quote unquote voice of the people.</i>\"");
 		outputText("\n\nQuinn pauses for a few more moments, looking you in the eye thoughtfully before finishing with \"<i>That means no, in case we're unclear.</i>\"");
@@ -132,92 +150,33 @@ private function studyInTA():void {
 			dynStats("int", 3+rand(4));
 			player.trainStat("int", +1, 75);
 			player.KnowledgeBonus("int",2);
-			statScreenRefresh()
-			//(Intelligence increase)
-			//Smart enough for ice spike and doesnt have it
-			if (player.inte >= 20 && !player.hasStatusEffect(StatusEffects.KnowsIceSpike)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Ice Spike.</b>");
-				player.createStatusEffect(StatusEffects.KnowsIceSpike, 0, 0, 0, 0);
-			}
-			//Smart enough for darkness shard and doesnt have it
-			else if (player.inte >= 25 && !player.hasStatusEffect(StatusEffects.KnowsDarknessShard)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Darkness Shard.</b>");
-				player.createStatusEffect(StatusEffects.KnowsDarknessShard, 0, 0, 0, 0);
-			}
-			//Smart enough for arouse and doesnt have it
-			else if (player.inte >= 30 && !player.hasStatusEffect(StatusEffects.KnowsArouse)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Arouse.</b>");
-				player.createStatusEffect(StatusEffects.KnowsArouse, 0, 0, 0, 0);
-			}
-			//Smart enough for regenerate and doesnt have it
-			else if (player.inte >= 35 && !player.hasStatusEffect(StatusEffects.KnowsRegenerate)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Regenerate.</b>");
-				player.createStatusEffect(StatusEffects.KnowsRegenerate, 0, 0, 0, 0);
-			}
-			//Smart enough for might and doesnt have it
-			else if (player.inte >= 40 && !player.hasStatusEffect(StatusEffects.KnowsMight)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Might.</b>");
-				player.createStatusEffect(StatusEffects.KnowsMight, 0, 0, 0, 0);
-			}
-			//Smart enough for blink and doesnt have it
-			else if (player.inte >= 45 && !player.hasStatusEffect(StatusEffects.KnowsBlink)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Blink.</b>");
-				player.createStatusEffect(StatusEffects.KnowsBlink, 0, 0, 0, 0);
-			}
-			//Smart enough for arctic gale and doesnt have it
-			else if (player.inte >= 50 && !player.hasStatusEffect(StatusEffects.KnowsArcticGale)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Arctic Gale.</b>");
-				player.createStatusEffect(StatusEffects.KnowsArcticGale, 0, 0, 0, 0);
-			}
-			//Smart enough for dusk wave and doesnt have it
-			else if (player.inte >= 55 && !player.hasStatusEffect(StatusEffects.KnowsDuskWave)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Dusk Wave.</b>");
-				player.createStatusEffect(StatusEffects.KnowsDuskWave, 0, 0, 0, 0);
-			}
-			//Smart enough for whitefire and doesnt have it
-			else if (player.inte >= 20 && !player.hasStatusEffect(StatusEffects.KnowsWhitefire)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Whitefire.</b>");
-				player.createStatusEffect(StatusEffects.KnowsWhitefire, 0, 0, 0, 0);
-			}
-			//Smart enough for lightning bolt and doesnt have it
-			else if (player.inte >= 25 && !player.hasStatusEffect(StatusEffects.KnowsLightningBolt)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Lightning Bolt.</b>");
-				player.createStatusEffect(StatusEffects.KnowsLightningBolt, 0, 0, 0, 0);
-			}
-			//Smart enough for charge weapon and doesnt have it
-			else if (player.inte >= 30 && !player.hasStatusEffect(StatusEffects.KnowsCharge)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Charge Weapon.</b>");
-				player.createStatusEffect(StatusEffects.KnowsCharge, 0, 0, 0, 0);
-			}
-			//Smart enough for charge armor and doesnt have it
-			else if (player.inte >= 35 && !player.hasStatusEffect(StatusEffects.KnowsChargeA)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Charge Armor.</b>");
-				player.createStatusEffect(StatusEffects.KnowsChargeA, 0, 0, 0, 0);
-			}
-			//Smart enough for heal and doesnt have it
-			else if (player.inte >= 40 && !player.hasStatusEffect(StatusEffects.KnowsHeal)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Heal.</b>");
-				player.createStatusEffect(StatusEffects.KnowsHeal, 0, 0, 0, 0);
-			}
-			//Smart enough for blind and doesnt have it
-			else if (player.inte >= 45 && !player.hasStatusEffect(StatusEffects.KnowsBlind)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Blind.</b>");
-				player.createStatusEffect(StatusEffects.KnowsBlind, 0, 0, 0, 0);
-			}
-			//Smart enough for pyre burst and doesnt have it
-			else if (player.inte >= 50 && !player.hasStatusEffect(StatusEffects.KnowsPyreBurst)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Pyre Burst.</b>");
-				player.createStatusEffect(StatusEffects.KnowsPyreBurst, 0, 0, 0, 0);
-			}
-			//Smart enough for chain lighting and doesnt have it
-			else if (player.inte >= 55 && !player.hasStatusEffect(StatusEffects.KnowsChainLighting)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Chain Lighting.</b>");
-				player.createStatusEffect(StatusEffects.KnowsChainLighting, 0, 0, 0, 0);
-			}
-			//Smart enough for blizzard and doesnt have it
-			else if (player.inte >= 60 && !player.hasStatusEffect(StatusEffects.KnowsBlizzard)) {
-				outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: Blizzard.</b>");
-				player.createStatusEffect(StatusEffects.KnowsBlizzard, 0, 0, 0, 0);
+			statScreenRefresh();
+			//[Required int, effect]
+			var spells:Array = [
+				[20, StatusEffects.KnowsWhitefire],
+				[20, StatusEffects.KnowsIceSpike],
+				[25, StatusEffects.KnowsLightningBolt],
+				[25, StatusEffects.KnowsDarknessShard],
+				[30, StatusEffects.KnowsCharge],
+				[30, StatusEffects.KnowsArouse],
+				[35, StatusEffects.KnowsChargeA],
+				[35, StatusEffects.KnowsRegenerate],
+				[40, StatusEffects.KnowsHeal],
+				[40, StatusEffects.KnowsMight],
+				[45, StatusEffects.KnowsBlind],
+				[45, StatusEffects.KnowsBlink],
+				[50, StatusEffects.KnowsPyreBurst],
+				[50, StatusEffects.KnowsArcticGale],
+				[55, StatusEffects.KnowsChainLighting],
+				[55, StatusEffects.KnowsDuskWave],
+				[60, StatusEffects.KnowsBlizzard],
+			];
+			for each (var spell:Array in spells) {
+				if (player.inte >= spell[0] && !player.hasStatusEffect(spell[1])) {
+					player.createStatusEffect(spell[1], 0, 0, 0, 0);
+					outputText("\n\nYou blink in surprise, assaulted by the knowledge of a <b>new spell: " + (spell[1] as StatusEffectType).id.substr(6) + "</b>"); //substring to remove "Knows "
+					break;
+				}
 			}
 		}
 		//OR (player is bimbo/bimbro/whatever) 
@@ -255,7 +214,7 @@ private function talkToMali():void {
 		outputText("\n\nIt takes a few moments for anything to respond, but eventually the knob turns and the door opens. Behind it a harried but smiling Mali stands, raising her eyebrows curiously.  \"<i>Yes?</i>\" she asks, \"<i>What is it, Quinn?</i>\"");
 		outputText("\n\n\"<i>You have a visitor, dear,</i>\" Quinn says, gesturing to you.  \"<i>Please do remember that you have a shift later and it would be unwise to tire yourself out.</i>\"");
 		
-		outputText("\n\nMali closes her eyes for a moment and breathes in, but she's still smiling when she opens them.  \"<i>I will Quinn, thank you.</i>\"  She turns to you and steps out of the doorway.  \"<i>Please then, come in.</i>\"  As soon as you're out of the way she closes the door, walking briskly back to her desk.  Mali's room is cluttered with items whose nature is unclear to you, alien in their design and intent.  They seem magical, which if you think about it makes a hell of a lot of sense, given her job.  \"<i>It's [name], yes?</i>\" she smiles.  \"<i>It's been a little bit since we talked, I'm glad to see you showed up.</i>\"  The sorceress adjusts the moss scarf over her chest, sitting upright and folding her hands together.  \"<i>Let me formally introduce myself.  I am Inquisitor Asa Mali, officiator of security in Tel'adre.  I work closely with the city guard and serve as arbiter when determining punishment for crimes in the city.  In addition I work personally to resolve situations that may arise in which the city guard is for whatever reason not capable of contributing normally.</i>\"");
+		outputText("\n\nMali closes her eyes for a moment and breathes in, but she's still smiling when she opens them.  \"<i>I will Quinn, thank you.</i>\"  She turns to you and steps out of the doorway.  \"<i>Please then, come in.</i>\"  As soon as you're out of the way she closes the door, walking briskly back to her desk.  Mali's room is cluttered with items whose nature is unclear to you, alien in their design and intent.  They seem magical, which if you think about it makes a hell of a lot of sense, given her job.  \"<i>It's [name], yes?</i>\" she smiles.  \"<i>It's been a little bit since we talked, I'm glad to see you showed up.</i>\"  The sorceress adjusts the moss scarf over her chest, sitting upright and folding her hands together.  \"<i>Let me formally introduce myself.  I am Inquisitor Asa Mali, officiator of security in Tel'adre.  I work closely with the city guard and serve as arbiter when determining punishment for crimes in the city.  In addition, I work personally to resolve situations that may arise in which the city guard is for whatever reason not capable of contributing normally.</i>\"");
 		
 		outputText("\n\nShe leans back, rubbing her split lips together for a moment in thought.  \"<i>I approached you about one such situation earlier,</i>\" she continues.  \"<i>The cabalist Dominika.  Typically I would not be investing in the aid of citizens to resolve this matter, but I am afraid I initially misjudged what would be required for the case.  This sorceress is...</i>\" Mali glances away for a moment, thinking of the words.  Her hand idly moves down to a key on her desk, rolling it between her fingers.  \"<i>Clever,</i>\" she finally settled on, \"<i>More than I initially gave her credit for, at least.  I'm not entirely sure of her intentions, but I do not believe they will serve the city well.</i>\"");
 		
@@ -263,7 +222,7 @@ private function talkToMali():void {
 		
 		outputText("\n\nMali stands, walking around to the front of her desk and sitting upon it.  Despite describing the problems she faces a confident smile is upon her face.  \"<i>But I have encountered this magic before,</i>\" she explains.  \"<i>And I know how to stop it.</i>\"");
 		
-		outputText("\n\nThe investigator steps forward and rests her hands on your shoulders, smiling.  \"<i>Thank you very much for coming to me.  This is already more than most are capable of.</i>\"  Her eyes meet yours.  They're strange and alien, wide and bright, but not unpleasant.  \"<i>If you've met her before, she'll be willing to see you again.  I need you to continue to visit her.  To earn her trust.  What I need is an object she had placed power into,</i>\" she explains, \"<i>Something that she has inspired with her magic.  If you endear yourself to her, I am certain that she will offer such an object to you in time.</i>\"  She squeezes your shoulders, then claps her hands together.");
+		outputText("\n\nThe investigator steps forward and rests her hands on your shoulders, smiling.  \"<i>Thank you very much for coming to me.  This is already more than most are capable of.</i>\"  Her eyes meet yours.  They're strange and alien, wide and bright, but not unpleasant.  \"<i>If you've met her before, she'll be willing to see you again.  I need you to continue to visit her.  To earn her trust.  What I need is an object she had placed power into,</i>\" she explains, \"<i>Something that she has inspired by her magic.  If you endear yourself to her, I am certain that she will offer such an object to you in time.</i>\"  She squeezes your shoulders, then claps her hands together.");
 		
 		outputText("\n\n\"<i>Ah!</i>\" she exclaims, \"<i>But I am being such a poor hostess. Let me get you some tea.</i>\"");
 		
@@ -272,25 +231,42 @@ private function talkToMali():void {
 		doNext(camp.returnToCampUseOneHour);
 	}	
 	//[[Mali], player has spellblade]
-	else if((player.weaponName == "inscribed spellblade" || player.hasItem(weapons.S_BLADE)) && flags[kFLAGS.MALI_TAKEN_BLADE] == 0) {
+	else if((player.weaponName == "inscribed spellblade" || player.hasItem(weapons.S_BLADE)) && flags[kFLAGS.MALI_BLADE_STATUS] == 0) {
 		outputText("You tell Quinn you're here to see Mali.  He seems intrigued by the wrapped blade you're carrying, but doesn't ask any questions.  Unlocking the second floor as usual, he escorts you to Mali's quarters.");
 		outputText("\n\n\"<i>What's that?</i>\" Mali asks, curious when you pull out the inscribed spellblade.  You place it down on the desk and explain that you got it from... from...  Mali's eyes light up at your strained inability to explain.  \"<i>Yes!</i>\" she says excitedly, reaching over the desk and grabbing your cheeks.  She plants a quick and enthusiastic kiss on your lips in thanks, looking back down at the sword and running her hands over it.");
 		
 		outputText("\n\n\"<i>Yes, yes,</i>\" she says as she inspects it, \"<i>This is definitely... yes, I can sense her, now that I know.  I can feel the magic she poured into this.  Aaah!</i>\"  Bursting with excitement she can't help but ball her hands and shake them a little, hopping from one foot to the other.  \"<i>Yes, we can do it!  We can protect the city!</i>\"  Mali quickly steps around the table and pulls you into a large hug, her breasts squishing against your chest.  \"<i>Thank you so much,</i>\" she smiles, \"<i>You've done what no one else could.  I know it might not seem like much, but most people forget I've even asked about her.  You didn't just remember, you...</i>\"  She hugs you again, before excitedly running back around the desk and lifting up the sword, looking closer at it.");
 		
-		outputText("\n\n\"<i>I'm going to use this to track her,</i>\" she explains, \"<i>Then gather up some guards and find out just what she's up to.  You should rest up, prepare for lethal danger, then come back.</i>\"  The grin on her face doesn't seem to be going anywhere.  \"<i>I can't imagine doing this without your help now.</i>\"");
-		outputText("\n\n\"<i>Please, come back soon.</i>\"");
-		outputText("\n\n(<b>Conclusion not yet complete...</b>)");
-		if (player.weapon == weapons.S_BLADE) {
-			player.setWeapon(WeaponLib.FISTS);
-//			player.weapon.unequip(player, false, true);
-//			player.removePerk(PerkLib.WizardsFocus);
-		}
-		else {
-			player.consumeItem(weapons.S_BLADE);
-		}
-		flags[kFLAGS.MALI_TAKEN_BLADE] = 1;
+		outputText("\n\n\"<i>I'm going to use this to track her,</i>\" she explains, \"<i>Then gather up some guards and find out just what she's up to.</i>\"  The grin on her face doesn't seem to be going anywhere.");
+		outputText("\n\n\"<i>Please, come back soon. We'll try to catch her as fast as we can.</i>\"");
+		if (player.weapon == weapons.S_BLADE) player.setWeapon(WeaponLib.FISTS);
+		else player.consumeItem(weapons.S_BLADE);
+		flags[kFLAGS.MALI_BLADE_STATUS] = 24 * 2;
+		flags[kFLAGS.DOMINIKA_COVENANT] = 3; //stop Dominika encounters!
+		//SH: I don't like unfinished shit. So here, take a blade.
 		doNext(camp.returnToCampUseOneHour);
+	}
+	//[[Mali], spellblade done]
+	else if (flags[kFLAGS.MALI_BLADE_STATUS] == 1) {
+		outputText("You tell Quinn you're here to see Mali.  He rolls his eyes but doesn't say anything, unlocking the second floor and leading you up once more."
+			+ "n\n"
+			+ "The same moment when Mali notices you entering the room, she runs to you and hugs you, smiling brightly."
+			+ "\n\n"
+			+ "\"<i>We've done it! It wasn't easy, but my boys took care of her... I must thank you for helping us. The city was in an imminent danger, while that woman was here..</i>\""
+			+ "\n\n"
+			+ "The memory of Dominika's black lips still has not vanished completely, but you feel much better now - and now you know for sure that she was manipulating you. Looking at Mali, you ask her about the sword - if they don't need it anymore, perhaps you could take it back or something? Mali shrugs a little awkwardly, then leads you to the other side of the room."
+			+ "\n\n"
+			+ "\"<i>It's... not so easy. While we tried to figure out the nature of her magic, the original blade was damaged so badly that it couldn't be used anymore. But I've still found a way how to deal with it and not leave you without a proper reward. Our mages helped a lot - even Quinn took some small part in it. Here, take this.</i>\""
+			+ "\n\n"
+			+ "She passes you a tightly-wrapped package - not big enough for a sword, and somehow even smaller than a regular dagger! While she watches with curiosity, you unwrap the 'gift' - it looks like a... sword handle. Its form resembles that of the lost spellblade, but has a small crystal at its hilt. Before you take the modified handle, Mali stops you."
+			+ "\n\n"
+			+ "\"<i>Careful, don't point it at yourself! It's still a weapon. We called it after one ancient mage who used a magic sword - Tidarion. Well, it may not be as effective if you're affected by the corruption... but I'm sure it's not the case with you, right?</i>\""
+			+ "\n\n"
+			+ "The moment you take a handle in your hand, you see why she was so worried - a blade made of pure light, starts growing from it. After it reaches the size of a longsword, a white flame envelops it. Well... looks pretty useful. You thank Mali for the reward and leave.");
+		// Yes, it's a blunt reference to DA:I. No, you can't prevent me from inserting it.
+		// Also, my ending is shit. Please rewrite or improve or something - SH.
+		flags[kFLAGS.MALI_BLADE_STATUS] = -1;
+		inventory.takeItem(weapons.TIDAR, camp.returnToCampUseOneHour);
 	}
 	//[[Mali], player does not have spellblade]
 	else {

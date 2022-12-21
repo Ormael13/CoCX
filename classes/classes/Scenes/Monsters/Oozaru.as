@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.Monsters 
+package classes.Scenes.Monsters
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -15,7 +15,7 @@ import classes.internals.*;
 	public class Oozaru extends Monster
 	{
 		
-		public function Oozaru() 
+		public function Oozaru()
 		{
 			if (flags[kFLAGS.SAIYAN_ENEMY_NUMBER_COUNTER] == 1) {//female
 				this.long = "";
@@ -28,7 +28,7 @@ import classes.internals.*;
 				this.tallness = 30*12;
 				this.hips.type = Hips.RATING_CURVY + 3;
 				this.butt.type = Butt.RATING_LARGE + 2;
-				this.skinTone = "platinum brown";
+				this.bodyColor = "platinum brown";
 				this.hairColor = "platinum green";
 				this.hairLength = 5;
 				this.weaponName = "fist";
@@ -50,7 +50,6 @@ import classes.internals.*;
 			}
 			this.a = "the ";
 			this.short = "oozaru";
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.gems = 45 + rand(40);
 			this.drop = NO_DROP;
 			this.tailType = Tail.MONKEY;

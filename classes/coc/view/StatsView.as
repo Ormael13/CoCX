@@ -4,12 +4,15 @@ import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
 import classes.PerkLib;
 import classes.Player;
+import classes.Scenes.Holidays;
 import classes.Scenes.SceneLib;
 import classes.Stats.BuffableStat;
 import classes.Stats.IStat;
 import classes.Stats.PrimaryStat;
 import classes.Stats.StatUtils;
 import classes.internals.Utils;
+
+import coc.model.TimeModel;
 
 import flash.events.MouseEvent;
 
@@ -55,9 +58,6 @@ public class StatsView extends Block {
 	private var manaBar:StatBar;
 	private var soulforceBar:StatBar;
 	private var hungerBar:StatBar;
-	private var esteemBar:StatBar;
-	private var willBar:StatBar;
-	private var obeyBar:StatBar;
 
 	private var allStats:Array;
 
@@ -183,18 +183,6 @@ public class StatsView extends Block {
 			statName: "Satiety:",
 			showMax : true
 		}));
-		col2.addElement(esteemBar = new StatBar({
-			statName: "Self Esteem:",
-			showMax : true
-		}));
-		col2.addElement(willBar = new StatBar({
-			statName: "Willpower:",
-			showMax : true
-		}));
-		col2.addElement(obeyBar = new StatBar({
-			statName: "Obedience:",
-			showMax : true
-		}));
 		///////////////////////////
 		allStats = [];
 		for (var ci:int = 0, cn:int = col1.numElements; ci < cn; ci++) {
@@ -287,12 +275,6 @@ public class StatsView extends Block {
 				return corner.xpBar;
 			case 'gems':
 				return corner.gemsBar;
-			case 'will':
-				return willBar;
-			case 'esteem':
-				return esteemBar;
-			case 'obey':
-				return obeyBar;
 			case 'spiritstones':
 				return corner.spiritstonesBar;
 		}
@@ -328,8 +310,8 @@ public class StatsView extends Block {
 		wisBar.value          = player.wis;
 		libBar.maxValue       = player.libStat.max;
 		libBar.value          = player.lib;
-		senBar.maxValue       = player.sensStat.max;
-		senBar.value          = player.sens;
+		senBar.maxValue       = player.sens;
+		senBar.value          = player.effectiveSensitivity();
 		corBar.value          = player.cor;
 		hpBar.maxValue        = player.maxHP();
 		hpBar.value           = player.HP;
@@ -352,36 +334,19 @@ public class StatsView extends Block {
 		} else {
 			hungerBar.statName = 'Satiety:';
 		}
-		var inPrison:Boolean          = SceneLib.prison.inPrison;
-		esteemBar.visible     		  = inPrison;
-		willBar.visible      		  = inPrison;
-		obeyBar.visible       		  = inPrison;
-		corner.levelBar.visible      		  = !inPrison;
-		corner.xpBar.visible         		  = !inPrison;
-		corner.gemsBar.visible       		  = !inPrison;
-		corner.spiritstonesBar.visible       = !inPrison;
-		if (inPrison) {
-			corner.advancementText.htmlText = "<b>Prison Stats</b>";
-			esteemBar.maxValue       = 100;
-			esteemBar.value          = player.esteem;
-			willBar.maxValue         = 100;
-			willBar.value            = player.will;
-			obeyBar.maxValue         = 100;
-			obeyBar.value            = player.obey;
+
+		corner.advancementText.htmlText = "<b>Advancement</b>";
+		corner.levelBar.value           = player.level;
+		if (player.level < CoC.instance.levelCap) {
+			corner.xpBar.maxValue = player.requiredXP();
+			corner.xpBar.value    = player.XP;
 		} else {
-			corner.advancementText.htmlText = "<b>Advancement</b>";
-			corner.levelBar.value           = player.level;
-			if (player.level < CoC.instance.levelCap) {
-				corner.xpBar.maxValue = player.requiredXP();
-				corner.xpBar.value    = player.XP;
-			} else {
-				corner.xpBar.maxValue  = player.XP;
-				corner.xpBar.value     = player.XP;
-				corner.xpBar.valueText = 'MAX';
-			}
-			corner.gemsBar.valueText = Utils.addComma(Math.floor(player.gems));
-			corner.spiritstonesBar.valueText = game.flags[kFLAGS.SPIRIT_STONES];
+			corner.xpBar.maxValue  = player.XP;
+			corner.xpBar.value     = player.XP;
+			corner.xpBar.valueText = 'MAX';
 		}
+		corner.gemsBar.valueText = Utils.addComma(Math.floor(player.gems));
+		corner.spiritstonesBar.valueText = game.flags[kFLAGS.SPIRIT_STONES];
 
 		var minutesDisplay:String = "" + game.model.time.minutes;
 		if (minutesDisplay.length == 1) minutesDisplay = "0" + minutesDisplay;
@@ -395,8 +360,11 @@ public class StatsView extends Block {
 			hrs  = (hours % 12 == 0) ? "12" : "" + (hours % 12);
 			ampm = hours < 12 ? "am" : "pm";
 		}
-		corner.timeText.htmlText = "<u>Day#: " + game.model.time.days + "</u>"+
-						"\nTime: " + hrs + ":" + minutesDisplay + ampm;
+		corner.timeText.htmlText = "<u>Days Passed: " + game.model.time.days + "</u>\n"
+			+ (CoC.instance.model.time.useRealDate() ? '' : '<u>Date: ' + TimeModel.formatDate(CoC.instance.model.time.date) + '</u>\n')
+			+ "Time: " + hrs + ":" + minutesDisplay + ampm;
+		corner.debugBuildVersion.htmlText = "CoCX: " + CoC.instance.debugGameVer +
+				", NG: "+ CoC.instance.flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
 
 		invalidateLayout();
 	}
@@ -422,7 +390,7 @@ public class StatsView extends Block {
 			if (e.bar) e.bar.alpha    = style.barAlpha;
 			if (e.minBar) e.minBar.alpha = (1 - (1 - style.barAlpha) / 2); // 2 times less transparent than bar
 		}
-		for each(var tf:TextField in [nameText,coreStatsText,combatStatsText,corner.advancementText,corner.timeText]) {
+		for each(var tf:TextField in [nameText,coreStatsText,combatStatsText,corner.advancementText,corner.timeText,corner.debugBuildVersion]) {
 			dtf = tf.defaultTextFormat;
 			dtf.color = style.statTextColor;
 			tf.defaultTextFormat = dtf;
@@ -451,15 +419,16 @@ public class StatsView extends Block {
 					if (!primStat) return;
 					CoC.instance.mainView.toolTipView.header = bar.statName;
 					if (statname == "sens" || statname == "cor") isPositiveStat = false;
+					var s:String = "Core: "+primStat.core.value+"/"+primStat.core.max+". ";
+					s += "Training: "+primStat.train.value+"/"+primStat.train.max+". ";
 					if (statname == "tou" && (player.hasPerk(PerkLib.IcyFlesh) || player.hasPerk(PerkLib.HaltedVitals))) {
-						CoC.instance.mainView.toolTipView.text = "Base: "+primStat.core.value+"\n" +
-								"You are currently in a state of undeath and cannot benefit from bonus to toughness.";
+						s += "\nYou are currently in a state of undeath and cannot benefit from bonus to toughness.";
+					} else {
+						s += "\n" +
+								"" + StatUtils.describeBuffs(primStat.bonus, false, isPositiveStat) + "" +
+								"" + StatUtils.describeBuffs(primStat.mult, true, isPositiveStat) + "";
 					}
-					else{
-						CoC.instance.mainView.toolTipView.text = "Base: "+primStat.core.value+"\n" +
-								""+StatUtils.describeBuffs(primStat.bonus, false, isPositiveStat)+"" +
-								""+StatUtils.describeBuffs(primStat.mult, true, isPositiveStat)+"";
-					}
+					CoC.instance.mainView.toolTipView.text = s;
 					CoC.instance.mainView.toolTipView.showForElement(bar);
 					break;
 				}

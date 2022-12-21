@@ -175,20 +175,15 @@ public function clearBenoitPreggers():void
 }
 
 public function setBenoitShop(setButtonOnly:Boolean = false):void {
-	if (model.time.hours >= 9 && model.time.hours <= 17) {
-        if ((flags[kFLAGS.FEMOIT_NEXTDAY_EVENT_DONE] == 1 && CoC.instance.model.time.days >= flags[kFLAGS.FEMOIT_NEXTDAY_EVENT]) || flags[kFLAGS.FEMOIT_NEXTDAY_EVENT_DONE] != 1) {
-			if (flags[kFLAGS.TIMES_IN_BENOITS] == 0)
-			{
-				if (!setButtonOnly) outputText("\n\nYou notice a large market stall wedged between two wagons, swaddled in carpets and overflowing with all manner of objects.  On top of its looming fabric canopy is a wooden sign with the words \"<b>Geckos Garbidg</b>\" crudely scrawled upon them.  You wonder what that's all about.");
-				else addButton(0, "Market Stall", benoitIntro);
-			}
-			else
-			{
-				if (!setButtonOnly) outputText("\n\n[benoit name] the basilisk's stall looks open for business.  You could go see what's on offer.");
-				else addButton(0, "[benoit name]", benoitIntro);
-			}
+	if (model.time.hours >= 9 && model.time.hours <= 17 && (flags[kFLAGS.FEMOIT_NEXTDAY_EVENT_DONE] != 1 || CoC.instance.model.time.days >= flags[kFLAGS.FEMOIT_NEXTDAY_EVENT])) {
+		if (flags[kFLAGS.TIMES_IN_BENOITS] == 0) {
+			if (!setButtonOnly) outputText("\n\nYou notice a large market stall wedged between two wagons, swaddled in carpets and overflowing with all manner of objects.  On top of its looming fabric canopy is a wooden sign with the words \"Geckos Garbidg\" crudely scrawled upon them.  You wonder what that's all about.");
+			else addButton(0, "Market Stall", benoitIntro);
+		} else {
+			if (!setButtonOnly) outputText("\n\n[benoit name] the basilisk's stall looks open for business.  You could go see what's on offer.");
+			else addButton(0, "[benoit name]", benoitIntro);
 		}
-	}
+	} else addButtonDisabled(0, flags[kFLAGS.TIMES_IN_BENOITS] == 0 ? "???" : "[benoit name]", "Currently closed.")
 }
 
 //Introduction Scenes
@@ -294,13 +289,25 @@ public function benoitIntro():void {
 	addButton(2, "Talk", talkToBenoit);
 	addButton(14, "Leave", bazaar.enterTheBazaarAndMenu);
 	//Feminize & Herminize
-	if (flags[kFLAGS.FEMOIT_UNLOCKED] == 1 && flags[kFLAGS.BENOIT_STATUS] == 0) addButton(3, "Feminize", benoitFeminise);
-	if (flags[kFLAGS.BENOIT_STATUS] > 0 && flags[kFLAGS.BENOIT_STATUS] < 3) addButton(3, "Herminize", benoitHerminise);
+	if (flags[kFLAGS.FEMOIT_UNLOCKED] == 0) addButton(3, "HelpRace-Him", femoitInitialTalk)
+		.disableIf(flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS] > 0 || !sceneHunter.other,
+			"The problem is <i>already</i> solved.\n\n"
+			+ "<b>You can enable SH:Other to try this option too.</b>", "???")
+		.disableIf(benoitAffection() < 40, "He doesn't trust you enough.", "???")
+		.disableIf(flags[kFLAGS.BENOIT_TALKED_TO_PROPERLY] == 0, "You don't know him good enough.", "???");
+	else if (flags[kFLAGS.FEMOIT_UNLOCKED] == 1 && flags[kFLAGS.BENOIT_STATUS] == 0) addButton(3, "Feminize", benoitFeminise);
+	else if (flags[kFLAGS.BENOIT_STATUS] > 0 && flags[kFLAGS.BENOIT_STATUS] < 3) addButton(3, "Herminize", benoitHerminise);
 	//Basilisk Womb
-	if(flags[kFLAGS.BENOIT_WOMB_TALK_UNLOCKED] == 1 && (!(player.hasPerk(PerkLib.BasiliskWomb))) && flags[kFLAGS.BENOIT_TESTED_BASILISK_WOMB] == 0 && (flags[kFLAGS.BENOIT_STATUS] == 0 || flags[kFLAGS.BENOIT_STATUS] == 3)) addButton(4, "Basil. Womb", tryToConvertToBassyWomb);
+	if (flags[kFLAGS.BENOIT_WOMB_TALK_UNLOCKED] == 1 && (!(player.hasPerk(PerkLib.BasiliskWomb))) && flags[kFLAGS.BENOIT_TESTED_BASILISK_WOMB] == 0 && (flags[kFLAGS.BENOIT_STATUS] == 0 || flags[kFLAGS.BENOIT_STATUS] == 3)) addButton(4, "Basil. Womb", tryToConvertToBassyWomb);
+	else if (flags[kFLAGS.BENOIT_WOMB_TALK_UNLOCKED] == 0) addButton(4, "HelpRace-You", talkHelp)
+		.disableIf(!player.hasVagina(), "Req. a pussy.")
+		.disableIf(flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS] < 2, "Requires meeting Benoit a little <i>closer</i>.", "???");
 	//Suggest & sex
-	if(flags[kFLAGS.BENOIT_SUGGEST_UNLOCKED] > 0 && player.hasVagina() && (flags[kFLAGS.BENOIT_STATUS] == 0 || flags[kFLAGS.BENOIT_STATUS] == 3)) addButton(5, "Suggest", eggySuggest);
-	if (player.hasCock() && flags[kFLAGS.BENOIT_STATUS] > 0 && player.lust >= 33) addButton(6, "Sex", femoitSexIntro);
+	if (flags[kFLAGS.BENOIT_SUGGEST_UNLOCKED] > 0 && player.hasVagina() && (flags[kFLAGS.BENOIT_STATUS] == 0 || flags[kFLAGS.BENOIT_STATUS] == 3)) addButton(5, "Suggest", eggySuggest);
+	if (flags[kFLAGS.BENOIT_STATUS] > 0) {
+		if (flags[kFLAGS.FEMOIT_TALKED_TO] == 0) addButton(6, "What's next?", femoit1stTalk);
+		else addButton(6, "Sex", femoitSexIntro).disableIf(player.lust < 33, "Not aroused enough.");
+	}
 }
 
 //Buy or Sell First Time, only if prelover/prefem: You ask him what the deal is with his shop.
@@ -325,16 +332,25 @@ public function benoitsBuyMenu():void {
 		outputText("\"<i>Some may call zis junk,</i>\" says Benoit, indicating " + benoitMF("his","her") + " latest wares.  \"<i>Me... I call it garbage.</i>\"");
 	}
 	outputText("\n\n<b><u>[benoit name]'s Prices</u></b>");
-	outputText("\n" + ItemType.lookupItem(flags[kFLAGS.BENOIT_1]).longName + ": " + Math.round(buyMod * ItemType.lookupItem(flags[kFLAGS.BENOIT_1]).value));
-	outputText("\n" + ItemType.lookupItem(flags[kFLAGS.BENOIT_2]).longName + ": " + Math.round(buyMod * ItemType.lookupItem(flags[kFLAGS.BENOIT_2]).value));
-	outputText("\n" + ItemType.lookupItem(flags[kFLAGS.BENOIT_3]).longName + ": " + Math.round(buyMod * ItemType.lookupItem(flags[kFLAGS.BENOIT_3]).value));
-	outputText("\n" + ItemType.lookupItem(flags[kFLAGS.BENOIT_4]).longName + ": " + Math.round(buyMod * ItemType.lookupItem(flags[kFLAGS.BENOIT_4]).value));
-	outputText("\n" + ItemType.lookupItem(flags[kFLAGS.BENOIT_5]).longName + ": " + Math.round(buyMod * ItemType.lookupItem(flags[kFLAGS.BENOIT_5]).value));
-	simpleChoices(flags[kFLAGS.BENOIT_1],createCallBackFunction(benoitTransactBuy,1),
-			flags[kFLAGS.BENOIT_2],createCallBackFunction(benoitTransactBuy,2),
-			flags[kFLAGS.BENOIT_3],createCallBackFunction(benoitTransactBuy,3),
-			flags[kFLAGS.BENOIT_4],createCallBackFunction(benoitTransactBuy,4),
-			flags[kFLAGS.BENOIT_5],createCallBackFunction(benoitTransactBuy,5));
+	var shop:/*ItemType*/Array = [];
+	var item:ItemType;
+	var btn:int = 0;
+	for each (var flag:int in [kFLAGS.BENOIT_1, kFLAGS.BENOIT_2, kFLAGS.BENOIT_3, kFLAGS.BENOIT_4, kFLAGS.BENOIT_5])
+		shop.push(ItemType.lookupItem(flags[flag]));
+	menu();
+	for each (item in shop) {
+		var cost:int = int(buyMod * item.value);
+		outputText("\n" + item.longName + ": " + cost);
+		addButton(btn++, item.shortName, benoitTransactBuy, item)
+			.disableIf(player.gems < cost, "Not enough gems.");
+	}
+	if (sceneHunter.printChecks) {
+		outputText("\nCheck the new stock tomorrow!")
+		outputText("\nFull list of items: ");
+		for each (item in itemShop) outputText(item.shortName + ", ");
+		outputText("\nFull list of armors & materials: ");
+		for each (item in armorShop) outputText(item.shortName + ", ");
+	}
 	if (player.keyItemvX("Backpack", 1) < 12) addButton(5, "Backpack", buyBackpack).hint("This backpack will allow you to carry more items.");
 	if (flags[kFLAGS.BENOIT_CLOCK_BOUGHT] <= 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_NIGHTSTAND] > 0) addButton(6, "Alarm Clock", buyAlarmClock).hint("This mechanical clock looks like it was originally constructed by the Goblins before the corruption spreaded throughout Mareth.");
 	if (flags[kFLAGS.BENOIT_PISTOL_BOUGHT] < 2 && flags[kFLAGS.BENOIT_AFFECTION] == 100) addButton(7, "Zweihander", buyZweihander);
@@ -378,23 +394,11 @@ private function benoitSellMenu(page:int = 1):void {
 	addButton(14, "Back", benoitIntro);
 }
 
-private function benoitTransactBuy(slot:int = 1):void {
+private function benoitTransactBuy(itype:ItemType):void {
 	clearOutput();
-	var itype:ItemType;
 	var buyMod:Number = 2;
 
 	if (flags[kFLAGS.BENOIT_STATUS] == 1) buyMod = 1.66;
-
-	if(slot == 1) itype = ItemType.lookupItem(flags[kFLAGS.BENOIT_1]);
-	else if(slot == 2) itype = ItemType.lookupItem(flags[kFLAGS.BENOIT_2]);
-	else if(slot == 3) itype = ItemType.lookupItem(flags[kFLAGS.BENOIT_3]);
-	else if(slot == 4) itype = ItemType.lookupItem(flags[kFLAGS.BENOIT_4]);
-	else itype = ItemType.lookupItem(flags[kFLAGS.BENOIT_5]);
-	if(player.gems < int(buyMod * itype.value)) {
-		outputText("You consider making a purchase, but you lack the gems to go through with it.");
-		doNext(benoitsBuyMenu);
-		return;
-	}
 	if(benoitLover()) outputText("After examining what you've picked out with [benoit eir] fingers, [benoit name] hands it over and accepts your gems with a grin.");
 	else outputText("After examining what you've picked out with [benoit eir] fingers, [benoit name] hands it over, names the price and accepts your gems with a curt nod.\n\n");
 	//(+3 Affection)
@@ -409,7 +413,7 @@ private function benoitSellTransact(slot:int, sellMod:int):void {
 	clearOutput();
 	if(benoitLover()) outputText("[benoit name] gives your object the briefest of goings-over with [benoit eir] fingers before stowing it away and handing over your gem reward with a trusting smile.");
 	else outputText("Following a painstaking examination of what you've given [benoit em] with his hands and nose, Benoit grudgingly accepts it and carefully counts out your reward.");
-	if (flags[kFLAGS.SHIFT_KEY_DOWN] == 1) {
+	if (shiftKeyDown) {
 		while (player.itemSlots[slot].quantity > 0) {
 			player.gems += int(player.itemSlots[slot].itype.value / sellMod);
 			player.itemSlots[slot].removeOneItem();
@@ -445,187 +449,62 @@ private function benoitSellAllTransact(totalItems:int, sellMod:int):void {
 	doNext(benoitIntro);
 }
 
+// items by slots
+public static function get itemShop():/*ItemType*/Array {
+	return [
+		consumables.INCUBID,
+		consumables.MINOBLO,
+		consumables.MINOCUM,
+		consumables.EQUINUM,
+		consumables.BLACKPP,
+		consumables.SMART_T,
+		consumables.VITAL_T,
+		consumables.DBLPEPP,
+		consumables.PURHONY,
+		consumables.BEEHONY,
+		consumables.SUCMILK,
+		consumables.W_FRUIT,
+		consumables.WETCLTH,
+		consumables.GLDSEED,
+		consumables.LABOVA_,
+		consumables.SNAKOIL,
+		consumables.S_GOSSR,
+		consumables.HUMMUS_,
+		consumables.PIGTRUF,
+		consumables.B_GOSSR,
+		// rare before, now normal
+		consumables.L_PNKEG,
+		consumables.L_BLUEG,
+		consumables.BIMBOLQ,
+		consumables.BROBREW,
+		consumables.TSTOOTH,
+		consumables.W_PDDNG,
+		consumables.NUMBROX,
+		consumables.SENSDRF,
+	];
+}
+
+public static function get armorShop():/*ItemType*/Array {
+	return [
+		armors.W_ROBES,
+		armors.S_SWMWR,
+		useables.GREENGL,
+		useables.B_CHITN,
+		// rare before, now normal
+		armors.BONSTRP,
+		armors.NURSECL,
+	];
+}
+
 //All slots are reset each day.  Benoit buys items at 66% the rate Oswald does.
 public function updateBenoitInventory():void {
-	//Slot 1
-	switch(rand(5)) {
-		case 0:
-			flags[kFLAGS.BENOIT_1] = consumables.INCUBID.id;
-			break;
-		case 1:
-			flags[kFLAGS.BENOIT_1] = consumables.MINOBLO.id;
-			break;
-		case 2:
-			flags[kFLAGS.BENOIT_1] = consumables.MINOCUM.id;
-			break;
-		case 3:
-			flags[kFLAGS.BENOIT_1] = consumables.EQUINUM.id;
-			break;
-		case 4:
-			flags[kFLAGS.BENOIT_1] = consumables.BLACKPP.id;
-			break;
-		default:
-	}
-	if (rand(100) < 4) {
-		//There is a 4% chance the following items will appear in Slot 1
-		switch (rand(2)) {
-			case 0:
-				flags[kFLAGS.BENOIT_1] = consumables.L_PNKEG.id;
-				break;
-			default:
-				flags[kFLAGS.BENOIT_1] = consumables.L_BLUEG.id;
-				break;
-		}
-	}
-
-	//Slot 2
-	switch(rand(5)) {
-		case 0:
-			flags[kFLAGS.BENOIT_2] = consumables.SMART_T.id;
-			break;
-		case 1:
-			flags[kFLAGS.BENOIT_2] = consumables.VITAL_T.id;
-			break;
-		case 2:
-			flags[kFLAGS.BENOIT_2] = consumables.DBLPEPP.id;
-			break;
-		case 3:
-			flags[kFLAGS.BENOIT_2] = consumables.PURHONY.id;
-			break;
-		case 4:
-			flags[kFLAGS.BENOIT_2] = consumables.BEEHONY.id;
-			break;
-		default:
-	}
-	if (rand(100) < 4) {
-		//There is a 4% chance the following items will appear in Slot 2
-		switch (rand(2)) {
-			case 0:
-				flags[kFLAGS.BENOIT_2] = consumables.BIMBOLQ.id;
-				break;
-			case 1:
-				flags[kFLAGS.BENOIT_2] = consumables.BROBREW.id;
-				break;
-		}
-	}
-
-	//Slot 3
-	switch(rand(5)) {
-		case 0:
-			flags[kFLAGS.BENOIT_3] = consumables.SUCMILK.id;
-			break;
-		case 1:
-			flags[kFLAGS.BENOIT_3] = consumables.W_FRUIT.id;
-			break;
-		case 2:
-			flags[kFLAGS.BENOIT_3] = consumables.WETCLTH.id;
-			break;
-		case 3:
-			flags[kFLAGS.BENOIT_3] = consumables.GLDSEED.id;
-			break;
-		case 4:
-			flags[kFLAGS.BENOIT_3] = consumables.LABOVA_.id;
-			break;
-		default:
-	}
-	if (rand(100) < 4) {
-		//There is a 4% chance the following items will appear in Slot 3
-		switch (rand(2)) {
-			case 0:
-				flags[kFLAGS.BENOIT_3] = consumables.TSTOOTH.id;
-				break;
-			case 1:
-				flags[kFLAGS.BENOIT_3] = consumables.W_PDDNG.id;
-				break;
-		}
-	}
-
-	//Slot 4
-	switch(rand(5)) {
-		case 0:
-			flags[kFLAGS.BENOIT_4] = consumables.SNAKOIL.id;
-			break;
-		case 1:
-			flags[kFLAGS.BENOIT_4] = consumables.S_GOSSR.id;
-			break;
-		case 2:
-			flags[kFLAGS.BENOIT_4] = consumables.HUMMUS_.id;
-			break;
-		case 3:
-			flags[kFLAGS.BENOIT_4] = consumables.PIGTRUF.id;
-			break;
-		case 4:
-			flags[kFLAGS.BENOIT_4] = consumables.B_GOSSR.id;
-			break;
-		default:
-	}
-	if (rand(100) < 4) {
-		//There is a 4% chance the following item will appear in Slot 4
-		switch (rand(2)) {
-			case 0:
-				flags[kFLAGS.BENOIT_4] = consumables.NUMBROX.id;
-				break;
-			case 1:
-				flags[kFLAGS.BENOIT_4] = consumables.SENSDRF.id;
-				break;
-		}
-	}
-
-	//Slot 5
-	switch(rand(4)) {
-		case 0:
-			flags[kFLAGS.BENOIT_5] = armors.W_ROBES.id;
-			break;
-		case 1:
-			flags[kFLAGS.BENOIT_5] = armors.S_SWMWR.id;
-			break;
-		case 2:
-			flags[kFLAGS.BENOIT_5] = useables.GREENGL.id;
-			break;
-		case 3:
-			flags[kFLAGS.BENOIT_5] = useables.B_CHITN.id;
-			break;
-		default:
-	}
-	if (rand(100) < 10) {
-		//There is a 10% chance the following items will appear in Slot 5
-		switch (rand(2)) {
-			case 0:
-				flags[kFLAGS.BENOIT_5] = armors.BONSTRP.id;
-				break;
-			case 1:
-				flags[kFLAGS.BENOIT_5] = armors.NURSECL.id;
-				break;
-		}
-	}
-	//Slot 6 Herbal Contraceptive - 30 gems.  Only becomes available through PC fem path.  Reduces fertility by 90% for a week if taken.
+	var pickedItems:Array = randomChoices(true, 4, itemShop);
+	flags[kFLAGS.BENOIT_1] = pickedItems[0].id;
+	flags[kFLAGS.BENOIT_2] = pickedItems[1].id;
+	flags[kFLAGS.BENOIT_3] = pickedItems[2].id;
+	flags[kFLAGS.BENOIT_4] = pickedItems[3].id;
+	flags[kFLAGS.BENOIT_5] = randomChoice(armorShop).id;
 }
-
-//Unused... I guess?
-/*
-private function buyFlintlock():void {
-	clearOutput();
-	outputText("You wander [benoit name]'s shop for a good while as you're searching for something interesting until you spot something interesting.");
-	outputText("\n\nYou walk over to pick up whatever caught your attention and show it to [benoit name].  \"<i>Zis?  I do know that zis a weapon and it originally belonged to a goblin from long time ago,</i>\" [benoit ey] says.");
-	outputText("\n\nTime to test this weapon out.  You aim the pistol at one of the empty tin cans and pull the trigger.  A round launches from the pistol and hits the tin can, knocking it off shelf.  [benoit name] looks in surprise and says, \"<i>It works?  200 gems and it can be yours.</i>\"");
-	outputText("\n\nDo you buy the gun?  ");
-	doYesNo(buyFlintlockConfirmation, benoitsBuyMenu);
-}
-private function buyFlintlockConfirmation():void {
-	clearOutput();
-	if (player.gems < 200) {
-		outputText("You count out your gems and realize it's beyond your price range.");
-		doNext(benoitsBuyMenu);
-		return;
-	}
-	outputText("\"<i>Here you go.  I have no need for zis,</i>\" [benoit name] says.");
-	flags[kFLAGS.BENOIT_PISTOL_BOUGHT]++;
-	player.ammo = 4;
-	player.gems -= 200;
-	statScreenRefresh();
-	inventory.takeItem(weaponsrange.FLINTLK, benoitsBuyMenu);
-}
-*/
 
 private function buyAlarmClock():void {
 	clearOutput();
@@ -669,7 +548,7 @@ private function buyBackpack():void {
 	if (player.keyItemvX("Backpack", 1) < 8) addButton(3, "X Large", buyBackpackConfirmation, 8, "X Large", 400, "Grants additional eight slots. \n\nCost: 400 gems");
 	if (player.keyItemvX("Backpack", 1) < 10) addButton(4, "XX Large", buyBackpackConfirmation, 10, "XX Large", 500, "Grants additional ten slots. \n\nCost: 500 gems");
 	if (player.keyItemvX("Backpack", 1) < 12) addButton(5, "XXX Large", buyBackpackConfirmation, 12, "XXX Large", 600, "Grants additional twelve slots. \n\nCost: 600 gems");
-	addButton(14, "Nevermind", benoitsBuyMenu);
+	addButton(14, "Never mind", benoitsBuyMenu);
 }
 private function buyBackpackConfirmation(size:int = 2, sizeDesc:String = "Small", price:int = 100):void {
 	clearOutput();
@@ -717,37 +596,58 @@ private function buyZweihanderConfirmation():void {
 	inventory.takeItem(weapons.FRTAXE, benoitsBuyMenu);
 }
 
-//Talk
-private function talkToBenoit():void {
-	clearOutput();
-
+private function talkCount():void {
 	//(+5 Affection per day if used)
-	if(flags[kFLAGS.BENOIT_TALKED_TODAY] == 0) {
+	if (flags[kFLAGS.BENOIT_TALKED_TODAY] == 0) {
 		flags[kFLAGS.BENOIT_TALKED_TODAY] = 1;
 		benoitAffection(5);
 	}
-	//Basilisk Womb
-	//Requires: Had sex with Benoit at least twice, have vagina, select talk
-	if(((flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS] > 2 && player.inte >= 60 && flags[kFLAGS.BENOIT_WOMB_TALK_UNLOCKED] == 0) || flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS] == 2) && player.hasVagina()) {
-		outputText("You ask [benoit name] if [benoit ey] has ever thought about trying to do something to help his people's plight.");
+}
 
-		outputText("\n\nThe basilisk is silent for a time, running his claws along the counter pensively.  \"<i>Yes,</i>\" [benoit ey] says eventually, in a quiet tone.  \"<i>I 'ave.  Away from ze mountains, I 'ave 'ad time to sink.  I am not ze demons' slave anymore, and I am a funny joke of a basilisk anyway, so I 'ave often thought about... making certain zacrifices.  If we 'ad just one female, away from zeir corruption, zen...</i>\" [benoit ey] trails off, sighing heavily before smiling ruefully at you.  \"<i>Zose were ze kind of soughts I 'ad before I met you.  Crazy, yes?  Even more crazy to be still sinking zem when a good woman is giving me 'er love for no reason except through ze kindness of 'er 'art.  Still... it is so frustrating, being able to sink clearly about zese sings and not being able to do anysing about it.</i>\"");
+private function talkHelp():void {
+	clearOutput();
+	talkCount();
+	outputText("You ask [benoit name] if [benoit ey] has ever thought about trying to do something to help his people's plight.");
 
-		if(player.inte >= 60) {
-			outputText("\n\nYour mind wanders.  You doubt that even if you wanted to you could turn into a basilisk proper, but you wonder if there's some kind of transformation that would allow a human womb to mimic that of another race.");
-			outputText("\n\nBenoit answers warily.  \"<i>A double dose of ovi-elixer, a bottle of reptilum, goblin ale and some basilisk blood would probably do... if you were so minded.  But, [name], tell me you're not going to do somesing so reckless as experiment on your body?</i>\"");
-			//toggle on "Bas. Womb" from benoit's main menu.
-			flags[kFLAGS.BENOIT_WOMB_TALK_UNLOCKED] = 1;
-			outputText("\n\n(<b>Basilisk Womb option enabled in Benoit's menu!</b>)");
-		}
-		else {
-			outputText("\n\nYou rack your brain but can't think of anything that could help Benoit, so you end up simply sympathising with [benoit em].  \"<i>Do not beat yourself up over it,</i>\" says the basilisk, touching the tips of your fingers and smiling warmly.  \"<i>It is just foolishness.  And anyway, I told you: we are a race of bastards.  We are ze last guys who deserve someone sinking after us.</i>\"");
-			//don't trigger event again until the PC is smart enough!
-		}
-		doNext(camp.returnToCampUseOneHour);
+	outputText("\n\nThe basilisk is silent for a time, running his claws along the counter pensively.  \"<i>Yes,</i>\" [benoit ey] says eventually, in a quiet tone.  \"<i>I 'ave.  Away from ze mountains, I 'ave 'ad time to sink.  I am not ze demons' slave anymore, and I am a funny joke of a basilisk anyway, so I 'ave often thought about... making certain zacrifices.  If we 'ad just one female, away from zeir corruption, zen...</i>\" [benoit ey] trails off, sighing heavily before smiling ruefully at you.  \"<i>Zose were ze kind of soughts I 'ad before I met you.  Crazy, yes?  Even more crazy to be still sinking zem when a good woman is giving me 'er love for no reason except through ze kindness of 'er 'art.  Still... it is so frustrating, being able to sink clearly about zese sings and not being able to do anysing about it.</i>\"");
+
+	if (player.inte >= 60) {
+		outputText("\n\nYour mind wanders.  You doubt that even if you wanted to you could turn into a basilisk proper, but you wonder if there's some kind of transformation that would allow a human womb to mimic that of another race.");
+		outputText("\n\nBenoit answers warily.  \"<i>A double dose of ovi-elixer, a bottle of reptilum, goblin ale and some basilisk blood would probably do... if you were so minded.  But, [name], tell me you're not going to do somesing so reckless as experiment on your body?</i>\"");
+		//toggle on "Bas. Womb" from benoit's main menu.
+		flags[kFLAGS.BENOIT_WOMB_TALK_UNLOCKED] = 1;
+		outputText("\n\n(<b>Basilisk Womb option enabled in Benoit's menu!</b>)");
+	} else {
+		outputText("\n\nYou rack your brain but can't think of anything that could help Benoit, so you end up simply sympathising with [benoit em].  \"<i>Do not beat yourself up over it,</i>\" says the basilisk, touching the tips of your fingers and smiling warmly.  \"<i>It is just foolishness.  And anyway, I told you: we are a race of bastards.  We are ze last guys who deserve someone sinking after us.</i>\"");
+		//don't trigger event again until the PC is smart enough!
+		sceneHunter.print("Check failed: you're too dumb.");
 	}
+	doNext(camp.returnToCampUseOneHour);
+}
+
+private function femoit1stTalk():void {
+	clearOutput();
+	talkCount();
+	flags[kFLAGS.FEMOIT_TALKED_TO]++;
+	outputText("You ask Benoite if she intends to go back to the mountains now.  She laughs long and hard at this.  One thing the transformation has certainly gifted her is an extraordinarily filthy laugh.");
+
+	outputText("\n\n\"<i>Oh [name], you are so silly,</i>\" she says fondly.  \"<i>'Ow long do you sink a blind female basilisk would last up zair, eh?  If I was really lucky ze minotaurs would get me before ze demons did.  No, I will stay ere.  Ze uzzer basilisks, I cannot trust zem - zey are always exposed to ze corruption, some of zem even like it.  I will lay eggs far away from zere, I will raise my children to be different; away from ze corruption and with equal numbers of males and females, it will be different.  Zere are many empty places in zis world now zey can go to and be left alone.</i>\"  She pauses. \"<i>Or at least zese sings will 'appen once I work up ze courage to find a, er, donor.</i>\"");
+
+	if (!player.hasCock()) {
+		outputText("You ask if she's had any thoughts on that front.  \"<i>Not really,</i>\" Benoite sighs.  \"<i>I 'ave many male customers but zey all 'ave - 'ow you say? Rough round edges.  You now 'ow it is, [name], all men are pigs.</i>\"  You both laugh at this.  \"<i>I will find someone though, don't worry.  As I said before...</i>\" she points two fingers at her blind eyes and then at the stall entrance.  There's a distinct gleam in those cloudy grey depths you think would scare the hell out of most things with a penis.  \"<i>I 'ave a purpose now.</i>\"");
+	} else {
+		outputText("\n\nYou ask if she's had any thoughts on that front. \"<i>Well, I do 'ave zis one customer 'oo seems very kind.  And 'oo knows me a great deal better zan anyone else around 'ere,</i>\" Benoite mumbles, twiddling her fingers.  \"<i>But zis person 'as already done a great deal for me, so I don't know if... per'aps zis is asking too much. I will find someone though, never fear.  As I said before...</i>\" Benoite points two fingers at her blind eyes and then at the stall entrance.  There’s a distinct gleam in those cloudy grey depths you think would scare the hell out of most things with a penis. \"<i>I ‘ave a purpose now.</i>");
+		menu();
+		doYesNo(femoitFirstTimeYes, femoitFirstTimeNo);
+	}
+}
+
+//Talk
+private function talkToBenoit():void {
+	clearOutput();
+	talkCount();
 	//First time Talk:
-	else if(flags[kFLAGS.BENOIT_TALKED_TO_PROPERLY] == 0) {
+	if(flags[kFLAGS.BENOIT_TALKED_TO_PROPERLY] == 0) {
 		flags[kFLAGS.BENOIT_TALKED_TO_PROPERLY]++;
 		outputText("You take a moment to look the strange merchant over.  Although blind, [benoit ey] doesn't seem very old - [benoit ey] retains the tight, thin muscular frame of other basilisks you've seen, but looks to be slightly shorter and for all his proud, cruel profile seems slightly shabby around the edges.  In what is presumably a nod towards civilized manners, [benoit ey] is wearing a pair of denim long johns as well as his fez, perched upon one of his head spines.  You introduce yourself, and then decide to ask [benoit em] about basilisks.");
 
@@ -755,52 +655,22 @@ private function talkToBenoit():void {
 
 		outputText("\n\nHe shrugs. \"<i>What were we going to do?  Go down and throw ourselves on the mercy of the races 'oo despise us?  Ze demons offered to set us high in zeir service, augment our natural abilities if we agreed to help zem.  I suppose zey did, at zat.</i>\"  Benoit scratches a long groove in his counter, trembling with anger.  \"<i>By making us all male zey made sure we are always fixated on finding egg bearers, on keeping ze harpies down, and bringing scrap and statues to zem so zey don't do anysing worse to us.  We are just a brainless natural defence to zem now, in zeir mountain hideaways.  Don't go up ze mountain or ze evil basilisks will get you!  Bastards.  Bastards.</i>\"  Benoit finishes mutilating the wood in front of [benoit em] and sighs.  \"<i>But zat is by ze by.  Are you going to buy sumsing or not?</i>\"");
 	}
-	// First time Femoit talk
-	else if (flags[kFLAGS.FEMOIT_TALKED_TO] == 0 && flags[kFLAGS.BENOIT_STATUS] != 0)
-	{
-		flags[kFLAGS.FEMOIT_TALKED_TO]++;
-		outputText("You ask Benoite if she intends to go back to the mountains now.  She laughs long and hard at this.  One thing the transformation has certainly gifted her is an extraordinarily filthy laugh.");
-
-		outputText("\n\n\"<i>Oh [name], you are so silly,</i>\" she says fondly.  \"<i>'Ow long do you sink a blind female basilisk would last up zair, eh?  If I was really lucky ze minotaurs would get me before ze demons did.  No, I will stay ere.  Ze uzzer basilisks, I cannot trust zem - zey are always exposed to ze corruption, some of zem even like it.  I will lay eggs far away from zere, I will raise my children to be different; away from ze corruption and with equal numbers of males and females, it will be different.  Zere are many empty places in zis world now zey can go to and be left alone.</i>\"  She pauses. \"<i>Or at least zese sings will 'appen once I work up ze courage to find a, er, donor.</i>\"");
-
-		if (!player.hasCock())
-		{
-			outputText("You ask if she's had any thoughts on that front.  \"<i>Not really,</i>\" Benoite sighs.  \"<i>I 'ave many male customers but zey all 'ave - 'ow you say? Rough round edges.  You now 'ow it is, [name], all men are pigs.</i>\"  You both laugh at this.  \"<i>I will find someone though, don't worry.  As I said before...</i>\" she points two fingers at her blind eyes and then at the stall entrance.  There's a distinct gleam in those cloudy grey depths you think would scare the hell out of most things with a penis.  \"<i>I 'ave a purpose now.</i>\"");
-		}
-		else
-		{
-			outputText("\n\nYou ask if she's had any thoughts on that front. \"<i>Well, I do 'ave zis one customer 'oo seems very kind.  And 'oo knows me a great deal better zan anyone else around 'ere,</i>\" Benoite mumbles, twiddling her fingers.  \"<i>But zis person 'as already done a great deal for me, so I don't know if... per'aps zis is asking too much. I will find someone though, never fear.  As I said before...</i>\" Benoite points two fingers at her blind eyes and then at the stall entrance.  There’s a distinct gleam in those cloudy grey depths you think would scare the hell out of most things with a penis. \"<i>I ‘ave a purpose now.</i>");
-
-			menu();
-			doYesNo(femoitFirstTimeYes, femoitFirstTimeNo);
-		}
-
-		return;
-	}
-	else if (flags[kFLAGS.BENOIT_TALKED_TO_PROPERLY] != 0 && benoitAffection() >= 40 && (flags[kFLAGS.BENOIT_TIMES_SEXED_FEMPCS] == 0 || sceneHunter.other) && flags[kFLAGS.FEMOIT_UNLOCKED] == 0)
-	{
-		femoitInitialTalk();
-		doNext(camp.returnToCampUseOneHour);
-		return;
-	}
 	//Subsequent Talk
 	else {
 		var choice:int;
-
 		/* BUILD ZE CHOICES!*/
-		var choices:Array = [0,1,2,3,4,5,6,7,8];
+		var choices:Array = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 		//option 9 is non-lover non-fem only
-		if(!benoitLover() && benoitMF("he","she") == "he") choices[choices.length] = 9;
+		if (!benoitLover() && benoitMF("he", "she") == "he") choices[choices.length] = 9;
 		//Special male benoit fucker only talks
-		if(benoitLover() && benoitMF("he","she") == "he" && player.hasVagina()) {
+		if (benoitLover() && benoitMF("he", "she") == "he" && player.hasVagina()) {
 			choices[choices.length] = 10;
 			choices[choices.length] = 11;
 			choices[choices.length] = 12;
 			choices[choices.length] = 13;
 		}
 		// Femoit specials
-		if (flags[kFLAGS.BENOIT_STATUS] != 0)
-		{
+		if (flags[kFLAGS.BENOIT_STATUS] != 0) {
 			choices.push(14);
 			choices.push(15);
 			if (benoitLover()) choices.push(16);
@@ -809,131 +679,124 @@ private function talkToBenoit():void {
 		//Pick one and go!
 		choice = choices[rand(choices.length)];
 		//(Randomly generated)
-		if(choice == 0) {
-			outputText("You ask if all basilisks talk as [benoit ey] does.");
-			outputText("\n\n\"<i>Only on zis side of ze mountain,</i>\" comes the reply.  \"<i>Ze uzzer side are all stuck-up snobs who speak 'orribly.  Zey are all pale and flabby too, and zeir cooking is terrible.  Pwah!</i>\"  [benoit Ey] makes an exasperated gesture with a claw.");
-		}
-		else if(choice == 1) {
-			outputText("You ask [benoit name] about the dog.");
-			outputText("\n\n\"<i>Pierre 'asn't been giving you trouble, as 'e?  Big stupid mutt does not know 'is mouth from 'is arse.  Which is why 'e checks so often,</i>\" says the basilisk fondly, rubbing the Alsatian behind his ear.  \"<i>I found 'im prowling around eating scraps from ze food sellers when I first got ere; I sink 'e must 'ave belonged to anuzzer trader 'oo left [benoit em] behind.  I do not sink I could run this shop without [benoit em] - every evening I go out into the wilds with [benoit em] and 'unt down more salvage.  'Ee is so good at finding perfectly good sings other people 'ave left behind.  Particularly cloze.  'E loves robes, Pierre.  Don't you, boy?</i>\"  Pierre whines.");
-		}
-		else if(choice == 2) {
-			outputText("You ask [benoit em] about the sign above the shop.");
-			outputText("\n\n\"<i>It's good, isn't it?</i>\"  the trader says proudly.  \"<i>I got a catguy to do it when I first got 'ere and didn't know ze language so well.  'E suggested...</i>\"  [benoit Ey] spreads [benoit eir] claws expressively.  \"<i>'Salamander's Salubrious Salvage'.  Because, everyone likes salamanders, and once zey get in and realize I am not a salamander and it is just a play on words, zey would be so entranced by what I am selling zey would not care.</i>\"  [benoit name] taps the counter happily.  \"<i>In gold print, too!  It is a surprise it has not brought more customers in.</i>\"");
-			outputText("\n\nYou decide not to disillusion the blind basilisk.");
-		}
-		else if(choice == 3) {
-			outputText("You ask if [benoit ey] has always been blind.");
-			outputText("\n\n\"<i>I don't know,</i>\" [benoit ey] says. \"<i>Ask me what red is.</i>\"");
-			outputText("\n\nYou ask what red is.");
-			outputText("\n\n\"<i>'Ow ze fuck should I know?</i>\" the basilisk replies, deadpan.  \"<i>Stop asking stupid questions.</i>\"");
-			outputText("\n\nYou decide not to pursue the subject.");
-		}
-		else if(choice == 4) {
-			outputText("You ask [benoit name] how [benoit ey] got into this line of work.");
-			outputText("\n\n\"<i>I 'ave always worked with salvage,</i>\" [benoit ey] shrugs.  \"<i>Back in ze mountains I worked in ze magpie room - obviously, because I was no good on ze outside.  You can tell from ze weight of sings, and 'ow zey smell, what it is and 'ow much it is worth.  More zan zat you can tell... what it meant to its last owner.  Zat is ze true worse of an object.</i>\"  [benoit Ey] taps his claws on the counter, lost in thought.  \"<i>Ze magpie room is amazing, [name], I wish I could show it to you.  Such good acoustics, filled with ze sound and smell of a thousand pieces of junk - every day a new symphony.  And 'oo would ever steal ze demons' treasures?  You would 'ave to be mad to try to steal from a hall full of basilisks.  Or blind.</i>\"");
-			outputText("\n\n[benoit Ey] laughs throatily, then sighs.  \"<i>Ah, but it was rotten, really - always a sour note underneath everysing.  A thousand basilisks, driven by nussing but greed and lust.  I got sick of it, being stuck in zat place with zose thoughts, zat 'opeless cycle, and one day ran away.  I took what I could carry and used zat to start up here.  Away from ze mountains, I can zink clearly.  I can say what ze uzzer basilisks only know at ze back of zeir minds.</i>\"  [benoit name] slams a fist into the counter, making you jump.  \"<i>Don't ever make a deal with a demon, [name],</i>\" [benoit ey] says, voice thick with rage.  \"<i>Even when you sink it is a win-win?  Zey will still find a way to fuck you good.</i>\"");
-			dynStats("cor", -1);
-		}
-		else if(choice == 5) {
-			outputText("You ask Benoit if [benoit ey] can tell you anything about the Bazaar.");
+		switch (choice) {
+			case 0:
+				outputText("You ask if all basilisks talk as [benoit ey] does.");
+				outputText("\n\n\"<i>Only on zis side of ze mountain,</i>\" comes the reply.  \"<i>Ze uzzer side are all stuck-up snobs who speak 'orribly.  Zey are all pale and flabby too, and zeir cooking is terrible.  Pwah!</i>\"  [benoit Ey] makes an exasperated gesture with a claw.");
+				break;
+			case 1:
+				outputText("You ask [benoit name] about the dog.");
+				outputText("\n\n\"<i>Pierre 'asn't been giving you trouble, as 'e?  Big stupid mutt does not know 'is mouth from 'is arse.  Which is why 'e checks so often,</i>\" says the basilisk fondly, rubbing the Alsatian behind his ear.  \"<i>I found 'im prowling around eating scraps from ze food sellers when I first got ere; I sink 'e must 'ave belonged to anuzzer trader 'oo left [benoit em] behind.  I do not sink I could run this shop without [benoit em] - every evening I go out into the wilds with [benoit em] and 'unt down more salvage.  'Ee is so good at finding perfectly good sings other people 'ave left behind.  Particularly cloze.  'E loves robes, Pierre.  Don't you, boy?</i>\"  Pierre whines.");
+				break;
+			case 2:
+				outputText("You ask [benoit em] about the sign above the shop.");
+				outputText("\n\n\"<i>It's good, isn't it?</i>\"  the trader says proudly.  \"<i>I got a catguy to do it when I first got 'ere and didn't know ze language so well.  'E suggested...</i>\"  [benoit Ey] spreads [benoit eir] claws expressively.  \"<i>'Salamander's Salubrious Salvage'.  Because, everyone likes salamanders, and once zey get in and realize I am not a salamander and it is just a play on words, zey would be so entranced by what I am selling zey would not care.</i>\"  [benoit name] taps the counter happily.  \"<i>In gold print, too!  It is a surprise it has not brought more customers in.</i>\"");
+				outputText("\n\nYou decide not to disillusion the blind basilisk.");
+				break;
+			case 3:
+				outputText("You ask if [benoit ey] has always been blind.");
+				outputText("\n\n\"<i>I don't know,</i>\" [benoit ey] says. \"<i>Ask me what red is.</i>\"");
+				outputText("\n\nYou ask what red is.");
+				outputText("\n\n\"<i>'Ow ze fuck should I know?</i>\" the basilisk replies, deadpan.  \"<i>Stop asking stupid questions.</i>\"");
+				outputText("\n\nYou decide not to pursue the subject.");
+				break;
+			case 4:
+				outputText("You ask [benoit name] how [benoit ey] got into this line of work.");
+				outputText("\n\n\"<i>I 'ave always worked with salvage,</i>\" [benoit ey] shrugs.  \"<i>Back in ze mountains I worked in ze magpie room - obviously, because I was no good on ze outside.  You can tell from ze weight of sings, and 'ow zey smell, what it is and 'ow much it is worth.  More zan zat you can tell... what it meant to its last owner.  Zat is ze true worse of an object.</i>\"  [benoit Ey] taps his claws on the counter, lost in thought.  \"<i>Ze magpie room is amazing, [name], I wish I could show it to you.  Such good acoustics, filled with ze sound and smell of a thousand pieces of junk - every day a new symphony.  And 'oo would ever steal ze demons' treasures?  You would 'ave to be mad to try to steal from a hall full of basilisks.  Or blind.</i>\"");
+				outputText("\n\n[benoit Ey] laughs throatily, then sighs.  \"<i>Ah, but it was rotten, really - always a sour note underneath everysing.  A thousand basilisks, driven by nussing but greed and lust.  I got sick of it, being stuck in zat place with zose thoughts, zat 'opeless cycle, and one day ran away.  I took what I could carry and used zat to start up here.  Away from ze mountains, I can zink clearly.  I can say what ze uzzer basilisks only know at ze back of zeir minds.</i>\"  [benoit name] slams a fist into the counter, making you jump.  \"<i>Don't ever make a deal with a demon, [name],</i>\" [benoit ey] says, voice thick with rage.  \"<i>Even when you sink it is a win-win?  Zey will still find a way to fuck you good.</i>\"");
+				dynStats("cor", -1);
+				break;
+			case 5:
+				outputText("You ask Benoit if [benoit ey] can tell you anything about the Bazaar.");
 
-			outputText("\n\n\"<i>You are really asking zis question to a blind person?</i>\" comes the reply.  \"<i>Ok, I will tell you what I know, for what it is worth.  Over zeir by ze fire, I know zeir are lizans having a good time, because zey shout insults when zey get really drunk.  Zey would get violent with me I sink, if it weren't for Pierre.  Zeir leader has a big problem with her male hormones, judging from ze way she smells.</i>\"  [benoit Ey] sniggers with a distinct lack of sympathy.  \"<i>In ze uzzer direction, I can smell a lot of males together in one place.  Smell like zey are doing something very macho - and a bit painful, from ze sound of zeir walk afterwards.</i>\"  [benoit Ey] points in the opposite direction.  \"<i>Zerr are plenty of, ow you say, crumpets who work around here.  Some of zem can do some pretty wild sings for you, for a fee.  Or so I'm told.</i>\"  [benoit Ey] coughs.");
-		}
-		else if(choice == 6) {
-			outputText("You ask [benoit name] for any rumors going around.");
-			//[Deep cave cleared:
-			if(flags[kFLAGS.DEFEATED_ZETAZ] > 0) outputText("\n\n\"<i>Somesing strange did 'appen ze uzzer day, now you mention it,</i>\" [benoit ey] says, tapping a curved tooth.  \"<i>I got a big group of imps in ere.  I normally don't serve zem because zey are always stealing sings whilst one of zem is paying, but zese guys seemed too worked up to even sink about lifting ze shop - zey smelt of fear.  Zey were buying lots of food and survival gear - one of zem kept going on and on about ze fact zey left \"<i>ze fairy</i>\" behind, until one of ze uzzers slapped 'im and said if 'ee didn't shut up, 'ee would be ze fairy.</i>\"  [benoit name] shrugs.  \"<i>Nasty little sings.  Tasty, though.</i>\"");
-			//[Factory not cleared:
-			else if(flags[kFLAGS.FACTORY_SHUTDOWN] <= 0) outputText("\n\n\"<i>Not anysing very interesting,</i>\" [benoit ey] shrugs.  \"<i>I get a few customers from ze desert city, Tel'Adre, coming in 'ere in secret to pick up a few sings zey cannot find back 'ome.  So zey are still a sing.  You 'ave to wonder ow much longer zey can keep hiding, though.</i>\"");
-			else {
-				//[Factory destroyed:
-				if(flags[kFLAGS.FACTORY_SHUTDOWN] == 2){
-					outputText("\n\n\"<i>I don't know what is 'appening exactly,</i>\" [benoit ey] says, leaning over the counter. \"<i>But ze demons 'oo I trade with, zey seem very worked up about sumsing.  Sumsing went wrong at one of zeir facilities, I sink.  I also get a number of shark ladies coming in ere, asking if I sell fresh water.  Zey also seem very unhappy.</i>\"");
-				}
+				outputText("\n\n\"<i>You are really asking zis question to a blind person?</i>\" comes the reply.  \"<i>Ok, I will tell you what I know, for what it is worth.  Over zeir by ze fire, I know zeir are lizans having a good time, because zey shout insults when zey get really drunk.  Zey would get violent with me I sink, if it weren't for Pierre.  Zeir leader has a big problem with her male hormones, judging from ze way she smells.</i>\"  [benoit Ey] sniggers with a distinct lack of sympathy.  \"<i>In ze uzzer direction, I can smell a lot of males together in one place.  Smell like zey are doing something very macho - and a bit painful, from ze sound of zeir walk afterwards.</i>\"  [benoit Ey] points in the opposite direction.  \"<i>Zerr are plenty of, ow you say, crumpets who work around here.  Some of zem can do some pretty wild sings for you, for a fee.  Or so I'm told.</i>\"  [benoit Ey] coughs.");
+				break;
+			case 6:
+				outputText("You ask [benoit name] for any rumors going around.");
+				//[Deep cave cleared:
+				if (flags[kFLAGS.DEFEATED_ZETAZ] > 0) outputText("\n\n\"<i>Somesing strange did 'appen ze uzzer day, now you mention it,</i>\" [benoit ey] says, tapping a curved tooth.  \"<i>I got a big group of imps in ere.  I normally don't serve zem because zey are always stealing sings whilst one of zem is paying, but zese guys seemed too worked up to even sink about lifting ze shop - zey smelt of fear.  Zey were buying lots of food and survival gear - one of zem kept going on and on about ze fact zey left \"<i>ze fairy</i>\" behind, until one of ze uzzers slapped 'im and said if 'ee didn't shut up, 'ee would be ze fairy.</i>\"  [benoit name] shrugs.  \"<i>Nasty little sings.  Tasty, though.</i>\"");
+				//[Factory not cleared:
+				else if (flags[kFLAGS.FACTORY_SHUTDOWN] <= 0) outputText("\n\n\"<i>Not anysing very interesting,</i>\" [benoit ey] shrugs.  \"<i>I get a few customers from ze desert city, Tel'Adre, coming in 'ere in secret to pick up a few sings zey cannot find back 'ome.  So zey are still a sing.  You 'ave to wonder ow much longer zey can keep hiding, though.</i>\"");
+				else if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2) outputText("\n\n\"<i>I don't know what is 'appening exactly,</i>\" [benoit ey] says, leaning over the counter. \"<i>But ze demons 'oo I trade with, zey seem very worked up about sumsing.  Sumsing went wrong at one of zeir facilities, I sink.  I also get a number of shark ladies coming in ere, asking if I sell fresh water.  Zey also seem very unhappy.</i>\"");
 				else outputText("\n\n\"<i>I don't know what is 'appening exactly,</i>\" [benoit ey] says, leaning over the counter.  \"<i>But ze demons 'oo I trade with, zey seem very worked up about somesing.  Sumsing went wrong at one of zeir facilities, I sink.  I also hear a number of passers-by talking about ze lake.  Apparently it is much cleaner now; many are going back to use it for water.  Now if only someone could make zose crazy cultists go away, eh?</i>\"");
-			}
-		}
-		else if(choice == 7) {
-			outputText("You ask if [benoit ey]'s ever had any trouble with the demons who frequent the Bazaar.");
-			outputText("\n\n\"<i>Not really,</i>\" [benoit ey] replies.  \"<i>I don't like zem, but zey are my main source of income.  Zey are always coming in here to sell zeir fluids.  The truth is it's worthless - I pour most of ze disgusting stuff away.  But it is worth paying for zeir custom because zey are always buying many more potions.  It isn't a good demon party unless you 'ave sprouted two new dicks and four new nipples for it, apparently.  Always one of zem is asking if zey can 'do ze dinosaur' as way of payment.  I 'ate zem so much.</i>\"");
-			if(silly()) outputText("\n\nThe basilisk rubs Pierre behind the ear as [benoit ey] thinks.  \"<i>I did once get a group of demons coming in ere, asking me what 'cheese omelette' is in basilisk.  When I told zem, zey ran away laughing, shouting 'Zat is all you can say! Zat is all you can say!'</i>\"  [benoit Ey] shrugs, irritated.  \"<i>Arseholes.</i>\"");
-		}
-		else if(choice == 8) {
-			outputText("You ask [benoit name] what results when basilisks mate with harpies.");
-			outputText("\n\n\"<i>Most of ze time?  Basilisks,</i>\" [benoit ey] replies, carefully counting gems with [benoit eir] fingers.  \"<i>Some of ze time?  'Arpies.  But ze arpies feed zeir basilisk children to zeir chicks if ze former do not get away in time, so it works out.  Really, we are doing zem and ze world a favor by stealing zeir eggs - if we weren't around ze 'ole world would be drowned in guano by now.</i>\"  Satisfied with the takings, [benoit ey] stows the money away underneath the counter.  \"<i>Very rarely, you get cockatrices.  Now ZEY are weird-looking.</i>\"");
-		}
-		else if(choice == 9) {
-			//non-lover non-fem only
-			outputText("You ask if [benoit name] really can tell who you are just by smell.");
+				break;
+			case 7:
+				outputText("You ask if [benoit ey]'s ever had any trouble with the demons who frequent the Bazaar.");
+				outputText("\n\n\"<i>Not really,</i>\" [benoit ey] replies.  \"<i>I don't like zem, but zey are my main source of income.  Zey are always coming in here to sell zeir fluids.  The truth is its worthless - I pour most of ze disgusting stuff away.  But it is worth paying for zeir custom because zey are always buying many more potions.  It isn't a good demon party unless you 'ave sprouted two new dicks and four new nipples for it, apparently.  Always one of zem is asking if zey can 'do ze dinosaur' as way of payment.  I 'ate zem so much.</i>\"");
+				if (silly()) outputText("\n\nThe basilisk rubs Pierre behind the ear as [benoit ey] thinks.  \"<i>I did once get a group of demons coming in ere, asking me what 'cheese omelette' is in basilisk.  When I told zem, zey ran away laughing, shouting 'Zat is all you can say! Zat is all you can say!'</i>\"  [benoit Ey] shrugs, irritated.  \"<i>Arseholes.</i>\"");
+				break;
+			case 8:
+				outputText("You ask [benoit name] what results when basilisks mate with harpies.");
+				outputText("\n\n\"<i>Most of ze time? Basilisks,</i>\" [benoit ey] replies, carefully counting gems with [benoit eir] fingers."
+					+ " \"<i>Some of ze time? 'Arpies. But ze arpies feed zeir basilisk children to zeir chicks if ze former do not get away"
+					+ " in time, so it works out. Really, we are doing zem and ze world a favor by stealing zeir eggs - if we weren't around ze"
+					+ " 'ole world would be drowned in guano by now.</i>\" Satisfied with the takings, [benoit ey] stows the money away underneath"
+					+ " the counter. \"<i>Very rarely, you get cockatrices. Now ZEY are weird-looking.</i>\"");
+				if (flags[kFLAGS.COCKATRICES_UNLOCKED] <= 0) {
+					outputText("\n\n<b>Perhaps you should try to find one of these elusive hybrids."
+						+ " You suspect the high mountains would be the best place to look.</b>");
+					flags[kFLAGS.COCKATRICES_UNLOCKED] = 1;
+				}
+				break;
+			case 9:
+				//non-lover non-fem only
+				outputText("You ask if [benoit name] really can tell who you are just by smell.");
 
-			if(player.race() == "human") outputText("\n\n\"<i>Certainly!</i>\" [benoit ey] smiles.  \"<i>Ze smell of shaved monkey is distinctive.  I get very few 'uman customers, you know.</i>\"  The basilisk scratches [benoit eir] jaw absent-mindedly.  \"<i>If you do not mind me saying so, [name], you also smell... different.  Like you do not really belong 'ere.  In ze nicest possible way, of course.</i>\"");
-			else outputText("\n\n\"<i>Certainly!</i>\" [benoit ey] smiles.  \"<i>Ze smell of shaved monkey is distinctive.  I get very few 'uman customers, you know.</i>\"  You look down at yourself, then back at the basilisk suspiciously, before saying you don't much look or feel human.  \"<i>Oh, I do not doubt zat,</i>\" says the trader.  \"<i>You 'umans and your flexible genes - zat makes you very alluring, as I am sure you 'ave already noticed, eh?  I am sure somebody 'oo relied upon sight would not be able to tell you are 'uman.  But 'oo you are underneath all zat, zat never changes, and I can smell zat.  All you are doing really is dressing up as something else.  If you wanted to, you could change back tomorrow, if you 'ad ze right ingredienns.</i>\"");
-			//[(male Benoit only)
-			if(benoitMF("he","she") == "he") outputText("  There's a hint of longing jealousy in the basilisk's voice and when [benoit ey] lapses into silence you decide not to push the subject.");
-		}
-		//Male Benoit Lover Talk options
-		//(Randomly generated.  Added to normal talk options after PC has had sex with Benoit two times or more regardless of womb quest.)
-		else if(choice == 10) {
-			outputText("You ask Benoit there is anything useful [benoit ey] can tell you about the demon strongholds.");
-
-			outputText("\n\n\"<i>I'm afraid I cannot be very 'elpful zeir, [name],</i>\" [benoit ey] sighs.  \"<i>Unless you want me to tell you what zey smell like.  I do not sink you want to be knowing zis.  Ze demons, zey were not much in ze business of telling us what zeir plans were, and zey did not much like 'anging around us, which is understandable.   Zair is every treasure you can ever imagine in ze magpie room, but zeir is no way you could ever get at zem unless you could work out some way of making many undreds of basilisks close zeir eyes at once.</i>\"");
-		}
-		else if(choice == 11) {
-			outputText("You ask Benoit if [benoit ey] can suggest anything to help you fight his brethren in the high mountains.");
-			outputText("\n\n\"<i>You could carry a mirror with you,</i>\" [benoit ey] says, pointing.  \"<i>There's one over zair, isn't zair?</i>\" You report that it is cracked badly - at any rate, you're not carrying a bulky mirror up a mountain two or three times a day.  \"<i>I will give it to you half price,</i>\" [benoit ey] says hopefully.  \"<i>Sink 'ow useful it will be to check for transformations!  You could get somebody else to carry it for you... ok, alright, so you don't want ze mirror.  Most prey, my bruzzers are expecting zem to lash out in a panic.  So use sings which do not involve approaching.  We do not like magic or ranged sings, zey are too unpredictable - I suggest using zem.</i>\"");
-		}
-		else if(choice == 12) {
-			outputText("\"<i>Gnoll.</i>\"");
-			outputText("\n\n You make a gentle humming noise.");
-			outputText("\n\n\"<i>Bee maiden,</i>\" says Benoit after a moment.");
-			outputText("\n\nYou stamp your feet and snuffle and snort.");
-			outputText("\n\n\"<i>Minotaur,</i>\" says Benoit immediately.  You sigh - [benoit ey]'s too good at this game, and you're running out of creatures.  Thinking briefly, you make a clop-clopping whilst slapping the counter, throwing in a bit of heavy breathing for good measure.");
-
-			outputText("\n\n\"<i>What ze 'ell is zat supposed to be?</i>\" says Benoit, looking alarmed.  You tell " + benoitMF("him","her") + " it's a ");
-			outputText("Unitaur.");
-			outputText("\n\n\"<i>A what?</i>\"");
-
-			outputText("\n\nYou explain that a Unitaur is like a white centaur, only it has a horse's face.  It has massively strong human arms though, and it can cast magic better than anyone, and it can go faster than a cheetah, and... you can't help yourself and begin to giggle at the expression of terror that has emerged on Benoit's face.");
-
-			outputText("\n\n\"<i>Oh, I see.  You are pulling my tail.  Very amusing.</i>\"  You laugh even harder at the expression of wounded dignity which replaces the terror.");
-		}
-		else if(choice == 13) {
-			outputText("You ask Benoit if [benoit ey] really, <b>really</b> can tell who you are just by smell.");
-
-			outputText("\n\n\"<i>Well, of course I can,</i>\" [benoit ey] says teasingly.  \"<i>When you end up smelling like someone else for several hours, it is a difficult sing to mistake.  It is a memento of you and it reminds me of 'appiness; I wish I could smell zat way for longer.  My sexy little shaved monkey.</i>\"");
-		}
-		else if (choice == 14)
-		{
-			outputText("You ask Benoite how she’s getting on with being the opposite sex.  Benoite stops cleaning the tarnished silver plate in her hands to think.");
-
-			outputText("\n\n\"<i>It is... different,</i>\" she says eventually, before laughing at the platitude.  \"<i>Ze ‘ole wizzing situation, zis is terrible for instance.  I do not know [name], I am so busy during ze day and it ‘appened so suddenly, it is difficult to properly reflect.  Sometimes I am sinking somesing, like ‘ow somesing smells, and zen I catch myself sinking... would Benoit ‘ave sought zat? Is my perception different because I ‘ave different ‘ormones swirling around my ‘ead?</i>\" She turns the plate around in her hands absently. \"<i>Zerr are... uzzer sings, too.  Sometimes I am smelling a customer is finding me strange, and I realize I am doing somesing which is... male.  Like, somesing I would never ‘ave sought about before, walking with feet splayed instead of in a line.  A ‘undred and one sings to remember to not stand out.  Zat is wearying.</i>\"");
-
-			if (benoitLover() && player.hasCock() && player.hasVagina()) outputText("\n\nShe smiles shyly at you. \"<i>I am very lucky in one respect zo, because I ‘ave not ‘ad to resink what I find attractive to lie wizz you.  Whatever you ‘ave between your legs you smell and feel female to me, and zat is a comfort.</i>\"");
-			else if (benoitLover() && player.hasCock() && !player.hasVagina())
-			{
-				outputText("She smiles shyly at you. \"<i>One sing I ‘ave definitely ‘ad to resink is what I find attractive.  I did not find ze male form attractive before, so for my body to... respond... when you are close, zat is when I most feel ze disconnect between my experience and what I am now.  Per’aps zis is also why I ‘ave not sought about it too much; it is better just to rely on instinct.</i>\"");
-				outputText("\n\nCharming, you say.");
-				outputText("\n\nBenoite grins wider at your affected hurt. \"<i>Oh do not worry [name], you ‘ave a beautiful personality.  And ow important exactly do you sink your personal appearance is to me?</i>\"");
-	}
-			else
-			{
-				outputText("\n\nShe smiles shyly at you. \"<i>Listen to me, ow you say, riveting on.  You I am guessing do not see what ze big fuss is- you ‘umans can chop and change whenever you feel like, so to speak.  Must be nice.</i>\"");
-				outputText("\n\nYou point out that your mutability is not always an advantage- it can be used against you, and this land is full of types who would be only too keen to do so.");
-				outputText("\n\nBenoite nods thoughtfully. \"<i>I never sought about it like zat.  Ze demons just love slaves zey can change wizzer a few potions, don’t zey? You are right [name], I will count my blessings in ze future.</i>\"");
-			}
-		}
-		else if (choice == 15)
-		{
-			outputText("\n\nYou ask Benoite if she isn’t worried that demon customers won’t notice what she is.");
-
-			outputText("\n\n\"<i>Zat is why I am wearing zis cunning disguise,</i>\" she says, patting her large beret.  She lowers her voice to a growl. \"<i>And I talk like zis when I am serving zem.  Grr.  To be honest I do not sink I ‘ave to be worrying much,</i>\" she goes on in her normal tone, tightening her apron. \"<i>Most of ze demons 'oo come 'ere are not very bright, zey are not very interested in anysing except when zey are next banging zair bits together.  Also I sink most mammals are 'aving trouble telling ze difference between male and female reptiles wizzout looking closely.  Am I right?</i>\" She grins her long, meandering smile at you and you take her point.");
-		}
-		else if (choice == 16)
-		{
-			outputText("You ask Benoite if she really can tell who you are just by smell.");
-
-			outputText("\n\n\"<i>Well, of course I can, zilly,</i>\" she says teasingly. \"<i>When you end up smelling like someone else for several hours, it is a difficult sing to mistake.  It is a memento of you and it reminds me of appiness; I wish I could smell zat way for longer.  My sexy little shaved monkey.</i>\"");
+				if (player.isRace(Races.HUMAN, 1, false)) outputText("\n\n\"<i>Certainly!</i>\" [benoit ey] smiles.  \"<i>Ze smell of shaved monkey is distinctive.  I get very few 'uman customers, you know.</i>\"  The basilisk scratches [benoit eir] jaw absent-mindedly.  \"<i>If you do not mind me saying so, [name], you also smell... different.  Like you do not really belong 'ere.  In ze nicest possible way, of course.</i>\"");
+				else outputText("\n\n\"<i>Certainly!</i>\" [benoit ey] smiles.  \"<i>Ze smell of shaved monkey is distinctive.  I get very few 'uman customers, you know.</i>\"  You look down at yourself, then back at the basilisk suspiciously, before saying you don't much look or feel human.  \"<i>Oh, I do not doubt zat,</i>\" says the trader.  \"<i>You 'umans and your flexible genes - zat makes you very alluring, as I am sure you 'ave already noticed, eh?  I am sure somebody 'oo relied upon sight would not be able to tell you are 'uman.  But 'oo you are underneath all zat, zat never changes, and I can smell zat.  All you are doing really is dressing up as something else.  If you wanted to, you could change back tomorrow, if you 'ad ze right ingredienns.</i>\"");
+				//[(male Benoit only)
+				if (benoitMF("he", "she") == "he") outputText("  There's a hint of longing jealousy in the basilisk's voice and when [benoit ey] lapses into silence you decide not to push the subject.");
+				break;
+			//Male Benoit Lover Talk options
+			//(Randomly generated.  Added to normal talk options after PC has had sex with Benoit two times or more regardless of womb quest.)
+			case 10:
+				outputText("You ask Benoit there is anything useful [benoit ey] can tell you about the demon strongholds.");
+				outputText("\n\n\"<i>I'm afraid I cannot be very 'elpful zeir, [name],</i>\" [benoit ey] sighs.  \"<i>Unless you want me to tell you what zey smell like.  I do not sink you want to be knowing zis.  Ze demons, zey were not much in ze business of telling us what zeir plans were, and zey did not much like 'anging around us, which is understandable.   Zair is every treasure you can ever imagine in ze magpie room, but zeir is no way you could ever get at zem unless you could work out some way of making many undreds of basilisks close zeir eyes at once.</i>\"");
+				break;
+			case 11:
+				outputText("You ask Benoit if [benoit ey] can suggest anything to help you fight his brethren in the high mountains.");
+				outputText("\n\n\"<i>You could carry a mirror with you,</i>\" [benoit ey] says, pointing.  \"<i>There's one over zair, isn't zair?</i>\" You report that it is cracked badly - at any rate, you're not carrying a bulky mirror up a mountain two or three times a day.  \"<i>I will give it to you half price,</i>\" [benoit ey] says hopefully.  \"<i>Sink 'ow useful it will be to check for transformations!  You could get somebody else to carry it for you... ok, alright, so you don't want ze mirror.  Most prey, my bruzzers are expecting zem to lash out in a panic.  So use sings which do not involve approaching.  We do not like magic or ranged sings, zey are too unpredictable - I suggest using zem.</i>\"");
+				break;
+			case 12:
+				outputText("\"<i>Gnoll.</i>\"");
+				outputText("\n\n You make a gentle humming noise.");
+				outputText("\n\n\"<i>Bee maiden,</i>\" says Benoit after a moment.");
+				outputText("\n\nYou stamp your feet and snuffle and snort.");
+				outputText("\n\n\"<i>Minotaur,</i>\" says Benoit immediately.  You sigh - [benoit ey]'s too good at this game, and you're running out of creatures.  Thinking briefly, you make a clop-clopping whilst slapping the counter, throwing in a bit of heavy breathing for good measure.");
+				outputText("\n\n\"<i>What ze 'ell is zat supposed to be?</i>\" says Benoit, looking alarmed.  You tell " + benoitMF("him", "her") + " it's a ");
+				outputText("Unitaur.");
+				outputText("\n\n\"<i>A what?</i>\"");
+				outputText("\n\nYou explain that an Unitaur is like a white centaur, only it has a horse's face.  It has massively strong human arms though, and it can cast magic better than anyone, and it can go faster than a cheetah, and... you can't help yourself and begin to giggle at the expression of terror that has emerged on Benoit's face.");
+				outputText("\n\n\"<i>Oh, I see.  You are pulling my tail.  Very amusing.</i>\"  You laugh even harder at the expression of wounded dignity which replaces the terror.");
+				break;
+			case 13:
+				outputText("You ask Benoit if [benoit ey] really, <b>really</b> can tell who you are just by smell.");
+				outputText("\n\n\"<i>Well, of course I can,</i>\" [benoit ey] says teasingly.  \"<i>When you end up smelling like someone else for several hours, it is a difficult sing to mistake.  It is a memento of you and it reminds me of 'appiness; I wish I could smell zat way for longer.  My sexy little shaved monkey.</i>\"");
+				break;
+			case 14:
+				outputText("You ask Benoite how she’s getting on with being the opposite sex.  Benoite stops cleaning the tarnished silver plate in her hands to think.");
+				outputText("\n\n\"<i>It is... different,</i>\" she says eventually, before laughing at the platitude.  \"<i>Ze ‘ole wizzing situation, zis is terrible for instance.  I do not know [name], I am so busy during ze day and it ‘appened so suddenly, it is difficult to properly reflect.  Sometimes I am sinking somesing, like ‘ow somesing smells, and zen I catch myself sinking... would Benoit ‘ave sought zat? Is my perception different because I ‘ave different ‘ormones swirling around my ‘ead?</i>\" She turns the plate around in her hands absently. \"<i>Zerr are... uzzer sings, too.  Sometimes I am smelling a customer is finding me strange, and I realize I am doing somesing which is... male.  Like, somesing I would never ‘ave sought about before, walking with feet splayed instead of in a line.  A ‘undred and one sings to remember to not stand out.  Zat is wearying.</i>\"");
+				if (benoitLover() && player.hasCock() && player.hasVagina()) outputText("\n\nShe smiles shyly at you. \"<i>I am very lucky in one respect zo, because I ‘ave not ‘ad to resink what I find attractive to lie wizz you.  Whatever you ‘ave between your legs you smell and feel female to me, and zat is a comfort.</i>\"");
+				else if (benoitLover() && player.hasCock() && !player.hasVagina()) {
+					outputText("She smiles shyly at you. \"<i>One sing I ‘ave definitely ‘ad to resink is what I find attractive.  I did not find ze male form attractive before, so for my body to... respond... when you are close, zat is when I most feel ze disconnect between my experience and what I am now.  Per’aps zis is also why I ‘ave not sought about it too much; it is better just to rely on instinct.</i>\"");
+					outputText("\n\nCharming, you say.");
+					outputText("\n\nBenoite grins wider at your affected hurt. \"<i>Oh do not worry [name], you ‘ave a beautiful personality.  And ow important exactly do you sink your personal appearance is to me?</i>\"");
+				} else {
+					outputText("\n\nShe smiles shyly at you. \"<i>Listen to me, ow you say, riveting on.  You I am guessing do not see what ze big fuss is- you ‘umans can chop and change whenever you feel like, so to speak.  Must be nice.</i>\"");
+					outputText("\n\nYou point out that your mutability is not always an advantage- it can be used against you, and this land is full of types who would be only too keen to do so.");
+					outputText("\n\nBenoite nods thoughtfully. \"<i>I never sought about it like zat.  Ze demons just love slaves zey can change wizzer a few potions, don’t zey? You are right [name], I will count my blessings in ze future.</i>\"");
+				}
+				break;
+			case 15:
+				outputText("\n\nYou ask Benoite if she isn’t worried that demon customers won’t notice what she is.");
+				outputText("\n\n\"<i>Zat is why I am wearing zis cunning disguise,</i>\" she says, patting her large beret.  She lowers her voice to a growl. \"<i>And I talk like zis when I am serving zem.  Grr.  To be honest I do not sink I ‘ave to be worrying much,</i>\" she goes on in her normal tone, tightening her apron. \"<i>Most of ze demons 'oo come 'ere are not very bright, zey are not very interested in anysing except when zey are next banging zair bits together.  Also I sink most mammals are 'aving trouble telling ze difference between male and female reptiles wizzout looking closely.  Am I right?</i>\" She grins her long, meandering smile at you and you take her point.");
+				break;
+			case 16:
+				outputText("You ask Benoite if she really can tell who you are just by smell.");
+				outputText("\n\n\"<i>Well, of course I can, zilly,</i>\" she says teasingly. \"<i>When you end up smelling like someone else for several hours, it is a difficult sing to mistake.  It is a memento of you and it reminds me of appiness; I wish I could smell zat way for longer.  My sexy little shaved monkey.</i>\"");
+				break;
+			default:
+				CoC_Settings.error("Benoit talk is broken");
 		}
 	}
 	doNext(camp.returnToCampUseOneHour);
@@ -1021,15 +884,15 @@ public function eggySuggest():void {
 		outputText("\n\n\"<i>Zis will sound strange,</i>\" says [benoit name] in a low, thick voice, \"<i>But - would you mind if I just touched you a bit first?  All I know about you is your smell and ze sound of your voice.</i>\"  You acquiesce and draw close, taking [benoit eir] hands once again and gently laying them upon your body.  You sigh as, holding [benoit eir] index claws back, [benoit ey] begins to move them slowly up and down.");
 
 	//[Demon:
-		if(player.horns.count > 0 && player.horns.type == Horns.DEMON && player.tailType == Tail.DEMONIC && player.isRace(Races.DEMON)) outputText("\n\n[benoit Eir] warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  [benoit Ey] touches your horns and pauses; [benoit ey] reaches around, finds and grips your tail, running [benoit eir] pads up to the spaded point.  \"<i>So,</i>\" [benoit ey] says quietly.  \"<i>You are one of zem.</i>\"  [benoit Ey] is silent for a while before finding a warm smile.  \"<i>But I am being silly.  I know you are different inside.</i>\"");
+		if(player.horns.count > 0 && player.horns.type == Horns.DEMON && player.tailType == Tail.DEMONIC && player.isRace(Races.DEMON, 1, false)) outputText("\n\n[benoit Eir] warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  [benoit Ey] touches your horns and pauses; [benoit ey] reaches around, finds and grips your tail, running [benoit eir] pads up to the spaded point.  \"<i>So,</i>\" [benoit ey] says quietly.  \"<i>You are one of zem.</i>\"  [benoit Ey] is silent for a while before finding a warm smile.  \"<i>But I am being silly.  I know you are different inside.</i>\"");
 		//[Dog enough for ears and tail:
-		else if(player.ears.type == Ears.DOG && player.tailType == Tail.DOG && player.racialScore(Races.DOG) >= 3) outputText("\n\n[benoit Eir] warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  [benoit Ey] grins as [benoit ey] finds your floppy ears and outright laughs when [benoit ey] reaches around and touches your tail. \"<i>I like dogs, but not ZAT much, [name],</i>\" [benoit ey] laughs.");
+		else if(player.ears.type == Ears.DOG && player.tailType == Tail.DOG && player.racialScore(Races.DOG, false) >= 3) outputText("\n\n[benoit Eir] warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  [benoit Ey] grins as [benoit ey] finds your floppy ears and outright laughs when [benoit ey] reaches around and touches your tail. \"<i>I like dogs, but not ZAT much, [name],</i>\" [benoit ey] laughs.");
 		//[Cat/Bunny enough for ditto:
-		else if(player.racialScore(Races.CAT) >= 3 && player.tailType == Tail.CAT && player.ears.type == Ears.CAT) outputText("\n\n[benoit Eir] warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  [benoit Ey] grins as [benoit ey] finds your ears, outright laughs when [benoit ey] reaches around and touches your soft tail.  \"<i>I always wondered why Pierre gets all excited when 'e sees you,</i>\" [benoit ey] chuckles huskily.");
+		else if(player.racialScore(Races.CAT, false) >= 3 && player.tailType == Tail.CAT && player.ears.type == Ears.CAT) outputText("\n\n[benoit Eir] warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  [benoit Ey] grins as [benoit ey] finds your ears, outright laughs when [benoit ey] reaches around and touches your soft tail.  \"<i>I always wondered why Pierre gets all excited when 'e sees you,</i>\" [benoit ey] chuckles huskily.");
 		//[Avian with wings and feet:
 		else if(player.lowerBody == LowerBody.HARPY && player.wings.type == Wings.FEATHERED_LARGE) outputText("\n\n[benoit Eir] warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  [benoit Ey] finds your wings and follows them up as far as [benoit ey] can reach, making you twitch as [benoit ey] caresses your delicate pinfeathers; [benoit ey] carefully shifts [benoit eir] feet forward to touch at your own clawed toes.  \"<i>So,</i>\" [benoit ey] sighs, a smile playing on [benoit eir] lips as [benoit ey] touches your shoulder.  \"<i>What is in front of me is a terrible 'arpy.  Come from ze skies to ravish me.</i>\"");
 		//[Reptile/Naga:
-		else if(player.hasScales() && (player.racialScore(Races.LIZARD) >= 3 || player.racialScore(Races.NAGA) >= 3) || player.racialScore(Races.DRAGON) >= 3) outputText("\n\n[benoit Eir] warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  [benoit Ey] starts slightly when [benoit ey] touches your scales, and then caresses the reptilian parts of your body with increasing interest.  \"<i>I cannot believe I did not realize you were a sister of ze scales,</i>\" [benoit ey] says huskily.  \"<i>Zat is very... interesting.</i>\"  You can see real arousal in the tense lines of [benoit eir] face now.");
+		else if(player.isScaleCovered() && (player.racialScore(Races.LIZARD, false) >= 3 || player.racialScore(Races.NAGA, false) >= 3) || player.racialScore(Races.DRAGON) >= 3) outputText("\n\n[benoit Eir] warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  [benoit Ey] starts slightly when [benoit ey] touches your scales, and then caresses the reptilian parts of your body with increasing interest.  \"<i>I cannot believe I did not realize you were a sister of ze scales,</i>\" [benoit ey] says huskily.  \"<i>Zat is very... interesting.</i>\"  You can see real arousal in the tense lines of [benoit eir] face now.");
 		//[Bee:
 		else if((player.wings.type == Wings.BEE_SMALL || player.wings.type == Wings.BEE_LARGE) && player.lowerBody == LowerBody.BEE) outputText("\n\n[benoit Eir] warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  [benoit Ey] finds your diaphanous wings and follows them up as far as [benoit ey] can reach, [benoit eir] grip on your sensitive membranes making you twitch a bit; then [benoit ey] sends [benoit eir] hands trailing down your carapace-armored limbs.  \"<i>I sought you just liked wearing big boots,</i>\" [benoit ey] murmurs.  \"<i>But zis is actually a part of you?  'Ow... interesting.</i>\"");
 		//[Centaur:
@@ -1437,6 +1300,7 @@ public function popOutBenoitEggs():void {
 public function femoitInitialTalk():void
 {
 	clearOutput();
+	talkCount();
 
 	outputText("You ask [benoit name] if [benoit ey] has ever thought about trying to do something to help [benoit eir] people's plight.");
 
@@ -1448,7 +1312,7 @@ public function femoitInitialTalk():void
 
 		outputText("\n\n\"<i>Well... if you got a double dose of purified zuccubus milk, a large pink egg, zome ovi-elixir and some reptilum, you could probably do it...</i>\"");
 
-		outputText("\n\n(\"<i>Feminize</i>\" option added to [benoit name]'s menu.)");
+		outputText("\n\n(\"<b>Feminize</b>\" option added to [benoit name]'s menu.)");
 
 		flags[kFLAGS.FEMOIT_UNLOCKED] = 1;
 	}
@@ -1456,6 +1320,7 @@ public function femoitInitialTalk():void
 	{
 		outputText("\n\nYou rack your brain but can't think of anything that could help [benoit name], so end up simply sympathising with [benoit em].  \"<i>Do not beat yourself up over it,</i>\" says the basilisk, with a smile.  \"<i>It is a foolish dream.  And anyway, I told you: we are a race of bastards.  We are ze last guys who deserve someone sinking after us.</i>\"");
 	}
+	doNext(camp.returnToCampUseOneHour);
 }
 
 // Feminise
@@ -1544,13 +1409,13 @@ public function femoitFirstTimeYes():void
 
 	if (player.isTaur()) outputText("\n\nHer warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  \"<i>Good Gods,</i>\" she murmurs as her hands lead back onto your flanks.  \"<i>Good Gods!</i>\" she cries out as she follows you all the way back to your mighty, powerful rear.  \"<i>I knew you were a centaur because of all ze clopping,</i>\" she says, rubbing your side back and forth in wonder.  \"<i>But to know it and actually feel it, zey are very different.</i>\"  She sighs.  \"<i>Zis is going to be... awkward, but I guess you are probably used to zat by now, yes?</i>\"");
 	else if (player.isDrider()) outputText("\n\nHer warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  \"<i>Good Gods,</i>\" she murmurs as her hands lead back onto your abdomen. \"<i>Good Gods!</i>\" she cries out as she follows your bulging abdomen all the way back to your spinnerets. \"<i>I knew you were a spider because of all ze click clacking,</i>\" she says, her fingers feeling around one of your intricate, many-jointed legs in wonder . \"<i>But to know it and actually feel it, zey are very different.</i>\"");
-	else if (player.isRace(Races.DEMON)) outputText("\n\nHer warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  She touches your horns and pauses; she reaches around, finds and grips your tail, running her grasp up to the spaded point. \"<i>So,</i>\" she says quietly. \"<i>You are one of zem.</i>\" She is silent for a while before finding a warm smile. \"<i>But I am being zilly.  I know you are different inside.</i>\"");
-	else if (player.isRace(Races.DOG) && player.ears.type == 2 && player.tailType == 2) outputText("\n\nHer warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  She grins as she finds your floppy ears and outright laughs when she reaches around and touches your tail.  \"<i>I like dogs but not ZAT much, \"<i>[name],</i>\" she giggles.  \"<i>No wonder Pierre 'as been acting jealous recently.</i>\"");
-	else if ((player.racialScore(Races.BUNNY) >= 4 && player.ears.type == 7 && player.tailType == 10) || (player.racialScore(Races.CAT) >= 4 && player.ears.type == 5 && player.tailType == 8)) outputText("\n\nHer warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  She grins as she finds your ears, outright laughs when she reaches around and touches your soft tail.  \"<i>I always wondered why Pierre gets all excited when 'e sees you,</i>\" she giggles.");
-	else if (player.isRace(Races.HARPY) && player.wings.type != 0 && player.arms.type == 1) outputText("\n\nHer warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  She finds your wings and follows them up as far as she can reach; she carefully shifts her feet forward to touch at your own clawed toes.  \"<i>So zis is what irony is,</i>\" she murmurs, a smile playing on her lips as she touches your shoulder.  \"<i>My saviour is an 'arpy, come to ravish me.</i>\"");
-	else if (player.isRace(Races.BEE) && player.wings.type != 0 && player.lowerBody == 7) outputText("\n\nHer warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  She finds your diaphanous wings and follows them up as far as she can reach, her grip on your sensitive membranes making you twitch a bit; then she sends her hands trailing down your carapace-armored limbs. \"<i>I always sought you just liked wearing big boots,</i>\" she murmurs. \"<i>But zis is actually a part of you?  'Ow... interesting.</i>\"");
-	else if (player.racialScore(Races.SLIME) >= 4 && player.hasGooSkin()) outputText("\n\nHer warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  \"<i>I knew you were different from ze squishy sounds you made,</i>\" she murmurs as her hands sink into your soft, amorphous mass.  \"<i>But zis is... good Gods, zis is strange.  And zis doesn't 'urt you at all?</i>\" she asks incredulously as she gently pokes a finger into you.  You answer her question by laughing.  \"<i>Zat must come in very useful,</i>\" she says.  You push yourself slowly up her arms and tell her she has no idea.");
-	else if (player.hasScales()) outputText("\n\nHer warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  She starts slightly when she touches your scales, and then caresses the reptilian parts of your body with increasing interest.  \"<i>You didn't do zis just for me, did you [name]?</i>\" she murmurs.  \"<i>I 'ave to admit - it feels very good.</i>\"");
+	else if (player.isRace(Races.DEMON, 1, false)) outputText("\n\nHer warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  She touches your horns and pauses; she reaches around, finds and grips your tail, running her grasp up to the spaded point. \"<i>So,</i>\" she says quietly. \"<i>You are one of zem.</i>\" She is silent for a while before finding a warm smile. \"<i>But I am being zilly.  I know you are different inside.</i>\"");
+	else if (player.isRace(Races.DOG, 1, false) && player.ears.type == 2 && player.tailType == 2) outputText("\n\nHer warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  She grins as she finds your floppy ears and outright laughs when she reaches around and touches your tail.  \"<i>I like dogs but not ZAT much, \"<i>[name],</i>\" she giggles.  \"<i>No wonder Pierre 'as been acting jealous recently.</i>\"");
+	else if ((player.racialScore(Races.BUNNY, false) >= 4 && player.ears.type == 7 && player.tailType == 10) || (player.racialScore(Races.CAT, false) >= 4 && player.ears.type == 5 && player.tailType == 8)) outputText("\n\nHer warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  She grins as she finds your ears, outright laughs when she reaches around and touches your soft tail.  \"<i>I always wondered why Pierre gets all excited when 'e sees you,</i>\" she giggles.");
+	else if (player.isRace(Races.HARPY, 1, false) && player.wings.type != 0 && player.arms.type == 1) outputText("\n\nHer warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  She finds your wings and follows them up as far as she can reach; she carefully shifts her feet forward to touch at your own clawed toes.  \"<i>So zis is what irony is,</i>\" she murmurs, a smile playing on her lips as she touches your shoulder.  \"<i>My saviour is an 'arpy, come to ravish me.</i>\"");
+	else if (player.isRace(Races.BEE, 1, false) && player.wings.type != 0 && player.lowerBody == 7) outputText("\n\nHer warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  She finds your diaphanous wings and follows them up as far as she can reach, her grip on your sensitive membranes making you twitch a bit; then she sends her hands trailing down your carapace-armored limbs. \"<i>I always sought you just liked wearing big boots,</i>\" she murmurs. \"<i>But zis is actually a part of you?  'Ow... interesting.</i>\"");
+	else if (player.racialScore(Races.SLIME, false) >= 4 && player.isGooSkin()) outputText("\n\nHer warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  \"<i>I knew you were different from ze squishy sounds you made,</i>\" she murmurs as her hands sink into your soft, amorphous mass.  \"<i>But zis is... good Gods, zis is strange.  And zis doesn't 'urt you at all?</i>\" she asks incredulously as she gently pokes a finger into you.  You answer her question by laughing.  \"<i>Zat must come in very useful,</i>\" she says.  You push yourself slowly up her arms and tell her she has no idea.");
+	else if (player.isScaleCovered()) outputText("\n\nHer warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  She starts slightly when she touches your scales, and then caresses the reptilian parts of your body with increasing interest.  \"<i>You didn't do zis just for me, did you [name]?</i>\" she murmurs.  \"<i>I 'ave to admit - it feels very good.</i>\"");
 	else outputText("\n\nHer warm fingers travel over your body, brushing over your face, your belly, your [hips]; you feel as though you're being read like a book.  \"<i>You 'umans are so squishy, fuzzy and 'ot,</i>\" she giggles huskily. \"<i>'Ow can you stand it?</i>\"");
 
 	outputText("\n\nBenoite's hands travel down your torso until, with a sharp intake of breath, she touches your [cock].  After a pause, she slowly wraps her dry, smooth grasp around your semi-erect cock and moves it up and down, rubbing and coiling you until you are straining.");
@@ -1561,9 +1426,9 @@ public function femoitFirstTimeYes():void
 
 	outputText("Benoite's pussy is virginally tight and you go as slowly as you can, lightly moving your hips as you work more of your length in.  Sharp claws grasp your back as you feel resistance that gives as you push more of yourself in; blood trickles down your shaft to drip onto the floor.  You keep working her slowly, withdrawing almost completely before sinking yourself in, using your head on the outward pull to tease at the clit hidden in her folds.  Benoite seems almost frozen by what's happening; she simply clutches at your back, breathing heavily and allowing you to do all the work.  You don't mind; whatever her mind is thinking her body is responding to your methodical treatment, her lips widening and slick moisture oiling your dick as you press into that tight, graspingly tight tunnel.");
 	if (player.biggestCockLength() < 15 && player.balls == 0) outputText("  Eventually you manage to hilt yourself entirely in her depths, your stomach pressing against her own tight belly.");
-	else if (player.biggestCockLength() < 15 && player.balls > 0) outputText("  Eventually you manage to hilt yourself in her depths, your [balls] pressing into her sex as your stomach bumps into her own tight belly.");
+	else if (player.biggestCockLength() < 15 && player.hasBalls()) outputText("  Eventually you manage to hilt yourself in her depths, your [balls] pressing into her sex as your stomach bumps into her own tight belly.");
 	else if (player.biggestCockLength() >= 15 && player.balls == 0) outputText("  Eventually you manage to bottom out, your dick pressed against her cervix.");
-	else if (player.biggestCockLength() >= 15 && player.balls > 0) outputText("  Eventually you manage to bottom out, your dick pressed against her cervix, your [balls] swinging heavily below your shaft.");
+	else if (player.biggestCockLength() >= 15 && player.hasBalls()) outputText("  Eventually you manage to bottom out, your dick pressed against her cervix, your [balls] swinging heavily below your shaft.");
 	outputText("  Staying like that for a moment, you slowly withdraw almost all of the way out before pushing all the way in again, continuing the process, your grunts melding with Benoite's soft moans at the almost-agonizingly slow sex, exercising all the self-restraint you have not to begin pounding away at the basilisk's deliciously tight cunt.  Occasionally you pause at the deepest moment, waiting for your blood to cool down and letting Benoite get used to the sensation of being fully stuffed by you.");
 
 	outputText("\n\nSlowly, eventually, Benoite gets into it, her frozen limbs thawing to your loving, careful movement.  Beginning to pant, she moves her powerful hips with you, trying to draw your dick further into her.  Gratefully you begin to pick up the pace, thrusting into her with increasing force.  Her claws grip your back painfully as she pushes herself into you, the soft leather of her chest bumps squeezing into your [fullChest].");
@@ -1609,7 +1474,7 @@ public function femoitSexIntro():void
 			else outputText(" your stomach beating out a slapping rhythm against her bulging, gravid abdomen.  ");
 		}
  		outputText("Benoite moans, squeals and eventually screams to your exertions, her fluids spurting and spattering against your groin");
- 		if (player.balls > 0) outputText(" and [balls].  You tumble over your peak as her cunt suddenly tightens around yours, sending surge after surge of cum into her fertile depths, your body seized in a rictus of pleasure.");
+ 		if (player.hasBalls()) outputText(" and [balls].  You tumble over your peak as her cunt suddenly tightens around yours, sending surge after surge of cum into her fertile depths, your body seized in a rictus of pleasure.");
  		if (player.cumQ() >= 2500) outputText("  The quantity of it is such that it quickly dribbles back out around your cock and pools on the floor.");
 
 		outputText("\n\nAfter you have both rode out the last of your mutual orgasm you lie for a time on the floor tangled together, enjoying the feeling of your smooth, scaly lover.");

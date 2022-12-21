@@ -12,6 +12,7 @@ import classes.Races;
 
     public class ArachnidBookLungMutation extends IMutationPerkType
     {
+        private static const mName:String = "Arachnid Book Lung";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -42,7 +43,7 @@ import classes.Races;
                 default:
                     sufval = "";
             }
-            return "Arachnid Book Lung" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -67,9 +68,8 @@ import classes.Races;
         }
 
         //Mutations Buffs
-        override public function pBuffs(target:Creature = null):Object{
+        override public function buffsForTier(pTier:int):Object {
             var pBuffs:Object = {};
-            var pTier:int = currentTier(this, (target == null)? player : target);
             if (pTier == 1) pBuffs['int.mult'] = 0.05;
             else if (pTier == 2) pBuffs['int.mult'] = 0.15;
             else if (pTier == 3) pBuffs['int.mult'] = 0.3;
@@ -77,8 +77,7 @@ import classes.Races;
         }
 
         public function ArachnidBookLungMutation() {
-            super("Arachnid Book Lung IM", "Arachnid Book Lung", ".");
-            maxLvl = 3;
+            super(mName + " IM", mName, SLOT_ADAPTATIONS, 3);
         }
         
     }

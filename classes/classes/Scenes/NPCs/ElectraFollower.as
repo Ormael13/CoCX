@@ -11,10 +11,6 @@ import classes.display.SpriteDb;
 
 public class ElectraFollower extends NPCAwareContent
 	{
-		
-		public function ElectraFollower()
-		{}
-		
 //flag ELECTRA_TALKED_ABOUT_HER]: 0,1 - not know her name, 3 - know her name, 2/4+ - male sex scene variant for knowing or not what pour it all out mean ^^
 
 public function electraAffection(changes:Number = 0):Number
@@ -29,7 +25,7 @@ public function firstEnc():void {
 	spriteSelect(SpriteDb.s_electra);
 	clearOutput();
 	outputText("As you wander the mountain you hear the sound of echoing thunder though this time around it clearly didn’t come from the sky. You see multiple imps and even a minotaur run away from the spot where the sound was heard. As you go there to see what’s going on you come upon a single girl with animal morph features. She's panting on the ground with a hand under her dress.\n\n");
-	outputText("\"<i>Ahhhh someone... someone help me get rid of this maddening desire... rape me... fuck me, I don’t care how you do it. Gah why are they all fleeing!...come back! Come back so I can get rid of my itches... Come back so we can FUCK!</i>\"\n\n");
+	outputText("\"<i>Ahhhh someone... someone help me get rid of this maddening desire... rape me... fuck me, I don’t care how you do it. Gah, why are they all fleeing!...come back! Come back so I can get rid of my itches... Come back so we can FUCK!</i>\"\n\n");
 	outputText("She suddenly realizes you are there and her eyes glimmer with a hint of barely contained madness. She stands up, still playing with her pussy, and eyes you up with a manic smile on her face as electricity starts to dance in the air around her.\n\n");
 	outputText("\"<i>You will be my lightning rod!!!!</i>\"");
 	outputText("\n\nYou are under attack by a Raiju!");
@@ -60,8 +56,8 @@ public function repeatElectraEnc():void {
 	if (flags[kFLAGS.ELECTRA_TALKED_ABOUT_HER] >= 3) outputText("Electra");
 	else outputText("the Raiju girl");
 	outputText(" again. She's panting on the ground with a hand under her dress and masturbating like there is no tomorrow.\n\n");
-	outputText("\"<i>Ahhhh someone... someone help me get rid of this maddening desire... rape me... fuck me I don’t care how you do it. Gah why are they all fleeing!...come back! Come back so I can get rid of my itches... Come back so we can FUCK!</i>\"\n\n");
-	if (player.isRace(Races.RAIJU)) repeatEncAsRaijuPC();
+	outputText("\"<i>Ahhhh someone... someone help me get rid of this maddening desire... rape me... fuck me I don’t care how you do it. Gah, why are they all fleeing!...come back! Come back so I can get rid of my itches... Come back so we can FUCK!</i>\"\n\n");
+	if (player.isRace(Races.RAIJU, 1, false)) repeatEncAsRaijuPC();
 	else {
 		outputText("Shit! If she sees you now she will definitely attack. Just as you are about to leave, she realizes you're there and her eyes glimmer with a hint of barely contained madness. She stands up, still playing with her pussy, and eyes you up with a manic smile on her face as electricity starts to dance in the air around her.\n\n");
 		outputText("\"<i>Just who I need for relief!  Now stay still, I will make it short!!!</i>\"");
@@ -74,11 +70,11 @@ public function repeatElectraEnc():void {
 	}
 }
 public function repeatEncAsRaijuPC():void {
-	outputText("Not having made any effort to hide from her she swiftly notices you. She stands up, still playing with her pussy, and eyes you up for a second before sighing.\n\n");
+	outputText("Not having made any effort to hide from her, she swiftly notices you. She stands up, still playing with her pussy, and eyes you up for a second before sighing.\n\n");
 	outputText("\"<i>I just can’t find anyone to fuck the voltage out of me. And of course the only person that’d be willing to make out is another Raiju. Neither of us are discharging today.</i>\"");
 	menu();
 	addButton(1, "Relieve her", repeatEncAsRaijuPCRelieveHer);
-	addButton(3, "No thanks", repeatEncAsRaijuPCNoThanks);
+	addButton(3, "No, thanks", repeatEncAsRaijuPCNoThanks);
 }
 public function repeatEncAsRaijuPCNoThanks():void {
 	outputText("Can’t get her charge out? Too bad, because you have enough of yours to manage as it is. You bid her good luck then head back to camp.\n\n");
@@ -95,8 +91,8 @@ public function ElectraRecruiting():void {
 	clearOutput();
 	outputText("You run into Electra again this time around. Shockingly, she ain't chasing after the locals for sex. Instead she walks straight up to you, looking somewhat troubled. While she isn't sparking, she fidgets. It's almost as if she needs to say something to you.\n\n");
 	outputText("\"<i>I've have been looking for you");
-	if (player.isRace(Races.RAIJU)) outputText(""+player.mf("kinsman","kinswoman")+"");
-	outputText(". I'm kind of sorry for coming up to you like that all the time. Don't worry, I already discharged myself, this isn't what I wanted to see you for. See uh as it is I've been considering...us. you've been helping me out so often by now I've become dependant on your touch. ");
+	if (player.isRace(Races.RAIJU, 1, false)) outputText(""+player.mf("kinsman","kinswoman")+"");
+	outputText(". I'm kind of sorry for coming up to you like that all the time. Don't worry, I already discharged myself, this isn't what I wanted to see you for. See uh as it is I've been considering...us. you've been helping me out so often by now I've become dependent on your touch. ");
 	outputText("When I see you I can feel the surge running down my spine, the fondness of every attention you gave me imprinted in my mind and I… can I have your name please?</i>\"\n\n");
 	outputText("You tell her your name and that you are the Champion of Ignam, sent to protect your realm from demon invasion.\n\n");
 	outputText("\"<i>Ah… With a noble goal too. Well I can't delay it anymore, I need to spell it out, I'm in love with you. I'd like to ask you...Would you be okay with a girlfriend? It doesn't matter to me if you have someone else... I'm sure someone as nice as you must have someone else by now... But I want you. </i>\"\n\n");
@@ -129,7 +125,7 @@ public function ElectraRecruitingSure():void {
 		outputText("Electra responds with clear annoyance.\n\n");
 		outputText("\"<i>Nothing about taming here Etna, I'm not some wild beast you can hold on a leash. [name] just happened to be on my path when I needed "+player.mf("him","her")+" the most, willing to help of "+player.mf("his","her")+" own volition.</i>\"\n\n");
 	}
-	outputText("<b>Before setting in, as if remembering something Electra pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
+	outputText("<b>Before setting in, as if remembering something, Electra pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
 	if (player.hasKeyItem("Radiant shard") >= 0){
 		player.addKeyValue("Radiant shard",1,+1);
 	}
@@ -161,25 +157,25 @@ public function ElectraRecruitingAgain():void {
 public function ElectraCampMainMenu():void {
 	spriteSelect(SpriteDb.s_electra);
 	clearOutput();
-	outputText("You almost feel the static in the air as you head up to Electra. She perks up at your presence, ears on end.\n\n");
-	outputText("\"<i>Hey [name] good afternoon! I have been generating a lot of current lately, it's always difficult to keep it under control but since you"+(camp.hasCompanions() ? " and your friends...</i>\" She pauses licking her lips naughtily at the thought. This should be an alarm to you but so far no one complained. \"<i>..." : "")+"");
-	outputText("are here I can keep a lust free lucidity all the time, it's so nice to be able to think straight all the time.");
-	outputText("" + (player.hasStatusEffect(StatusEffects.CampRathazul) ? " The old rat regularly come over for plasma samples, don't know what he does with it though. Lightning in a bottle maybe? You should check out whatever he's been doing with my lightning, it might be worth your while." : "") + "");
-	outputText(" Anyway, did you come over to talk...or for some shock therapy?</i>\"\n\n");
-	outputText("The ambient energy in the air almost doubles as she says that. Who can say whether she is aroused or not right now.");
+	if (flags[kFLAGS.KIHA_FOLLOWER] == 1 && KihaFollower.ElectraInteractionHappened && rand(10) == 0) {
+		kihaFollower.electraInteraction(true);
+	}
+	else {
+		outputText("You almost feel the static in the air as you head up to Electra. She perks up at your presence, ears on end.\n\n");
+		outputText("\"<i>Hey [name] good afternoon! I have been generating a lot of current lately, it's always difficult to keep it under control but since you"+(camp.hasCompanions() ? " and your friends...</i>\" She pauses licking her lips naughtily at the thought. This should be an alarm to you but so far no one complained. \"<i>..." : "")+"");
+		outputText("are here I can keep a lust free lucidity all the time, it's so nice to be able to think straight all the time.");
+		outputText("" + (player.hasStatusEffect(StatusEffects.CampRathazul) ? " The old rat regularly come over for plasma samples, don't know what he does with it though. Lightning in a bottle maybe? You should check out whatever he's been doing with my lightning, it might be worth your while." : "") + "");
+		outputText(" Anyway, did you come over to talk...or for some shock therapy?</i>\"\n\n");
+		outputText("The ambient energy in the air almost doubles as she says that. Who can say whether she is aroused or not right now.");
+	}
 	menu();
 	addButton(0, "Appearance", electraAppearance).hint("Examine Electra's detailed appearance.");
 	addButton(1, "Talk", electraTalk).hint("Ask Electra about something.");
 	addButton(2, "Sex", electraSex).hint("Have some sex with Electra");
 	if (flags[kFLAGS.ELECTRA_DAILY_STORM_JEWEL] > 0) addButtonDisabled(3, "Req. Jewel", "You already asked her for a jewel today.");
 	else addButton(3, "Req. jewel", electraStromJewel).hint("Ask Electra for a storm jewel.");
-	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(4, "Spar", electraSpar).hint("Ask Electra for a mock battle with sex for the winner.");/*
-	if (player.hasPerk(PerkLib.BasicLeadership)) {
-		if (flags[kFLAGS.PLAYER_COMPANION_1] == "") addButton(5, "Team", etnaHenchmanOption).hint("Ask Etna to join you in adventures outside camp.");
-		else if (flags[kFLAGS.PLAYER_COMPANION_1] == "Etna") addButton(5, "Team", etnaHenchmanOption).hint("Ask Etna to stay in camp.");
-		else addButtonDisabled(5, "Team", "You already have another henchman with you. Ask him/her to stay at camp before you talk with Etna about accompaning you.");
-	}
-	else addButtonDisabled(5, "Team", "You need to have at least Basic Leadership to form a team.");*/
+	addButton(4, "Spar", electraSpar).hint("Ask Electra for a mock battle with sex for the winner.")
+		.disableIf(flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] < 2, "You need a good sparring ring for that.");
 	addButton(14, "Back", camp.campLoversMenu);
 }
 
@@ -187,9 +183,9 @@ public function electraAppearance():void {
 	clearOutput();
 	outputText("Electra is a raiju. Her hair is long, wild and unkempt, the strands running in front of her face twisting out and glowing at the tip like actual lightning bolts. Her green slitted eyes are similar to a weasel's, always staring with barely contained lust. Her mouth looks human, though underneath those lips hide ");
 	outputText("two small fangs, sharper than the others. Her furry weasel ears are well protected from extreme sound, otherwise she'd be constantly putting her hand over them when discharging thunder.\n\nElectra’s arms are human although her nails are sharp as claws and regularly flashing with telltale sign of a potent electric charge. ");
-	outputText("Speaking of those, you know for a fact that when she’s not looking at you she regularly sneaks in a claw to masturbate... Not that this does her any good as raiju are unable to achieve true release on their own. Her fur alters between purple, black, blue and white, the color of lightning. Her legs, unlike her arms ");
+	outputText("Speaking of those, you know for a fact that when she’s not looking at you, she regularly sneaks in a claw to masturbate... Not that this does her any good as raiju are unable to achieve true release on their own. Her fur alters between purple, black, blue and white, the color of lightning. Her legs, unlike her arms ");
 	outputText("have fur up to the middle of her thighs. Her neck is hidden by a fluffy collar of black and white fur, with lightning reliefs. Up her shapely ass she has a fluffy wild tail which puffs up when she becomes overcharged. It is spiky in appearance, the telltale sign of current running through as her fur rises up.\n\n");
-	outputText("Electra is well endowed with a pair of E cup breasts well contained within her kimono."+(player.inte > 50 ? " You idly ponder if she stores electricity in there like opposed polarity magnets." : "")+"\n\n");
+	outputText("Electra is well-endowed with a pair of E cup breasts well contained within her kimono."+(player.inte > 50 ? " You idly ponder if she stores electricity in there like opposed polarity magnets." : "")+"\n\n");
 	outputText("Her pussy is unsurprisingly trained albeith still tight as she tends to plug with males when in need to discharge. It's always drooling in anticipation of sex, it’s just a matter of how horny she is at the time.");
 	menu();
 	addButton(14, "Back", ElectraCampMainMenu);
@@ -209,7 +205,7 @@ public function electraTalkRaiju():void {
 	clearOutput();
 	outputText("So seriously what kind of species she hails from.\n\n");
 	outputText("\"<i>I'm a raiju?</i>\"\n\n");
-	outputText("No as in is she a weasel, a dog, a cat, some other morph you've never heard about.\n\n");
+	outputText("No, as in is she a weasel, a dog, a cat, some other morph you've never heard about.\n\n");
 	outputText("\"<i>As I said a raiju, we are our own species really, Sleipnir our patron god created us as is. And before you ask then yes being horny was also part of our original self. Hell if I know, maybe the sky god just thought it'd be funny or he did this while jerking his massive horsecock and the resulting orgasm created us. ");
 	outputText("The only confirmed fact is we were born of thunders and clouds and that like clouds when we are oversaturated we turn violent.</i>\"\n\n");
 	doNext(electraTalk);
@@ -218,15 +214,15 @@ public function electraTalkRaiju():void {
 public function electraTalkLocals():void {
 	clearOutput();
 	outputText("So why are all the locals fleeing from her anyway, you thought everyone on Mareth was drunk on sex?\n\n");
-	outputText("\"<i>Sure they’re all drunk on sex but no one enjoys being stuck in the pre orgasm phase until they find a cunt to fuck or get their ass fucked, let alone being on the receiving end. As a result I'm forced into chasing those so called sexual apex predators for a fuck.</i>\"\n\n");
+	outputText("\"<i>Sure they’re all drunk on sex but no one enjoys being stuck in the pre orgasm phase until they find a cunt to fuck or get their ass fucked, let alone being on the receiving end. As a result I'm forced into chasing those so-called sexual apex predators for a fuck.</i>\"\n\n");
 	outputText("Come to think of it that explains why her passage causes a mass exodus of minotaurs and imps, fleeing the region.\n\n");
 	doNext(electraTalk);
 	cheatTime(1/4);
 }
 public function electraTalkMasturbating():void {
 	clearOutput();
-	outputText("You regularly catches her in the act of masturbating is it because she just can't stop or is it because she likes it too much. Last you checked raiju can't cum on their own. Electra sighs in discouragement before responding.\n\n");
-	outputText("\"<i>Ugh I should be more discreet about that but yea it's really because I can't help it. My body unconsciously seeks out its next orgasm so my hands machinaly reaches for my privates when I'm not concentrating. It's... kind of embarrassing. ");
+	outputText("You regularly catch her in the act of masturbating, is it because she just can't stop, or is it because she likes it too much. Last you checked, raiju can't cum on their own. Electra sighs in discouragement before responding.\n\n");
+	outputText("\"<i>Ugh, I should be more discreet about that, but yea, it's really because I can't help it. My body unconsciously seeks out its next orgasm so my hands machinaly reach for my privates when I'm not concentrating. It's... kind of embarrassing. ");
 	outputText("Besides, it only makes the next time I frenzy that much closer. Maybe its like you say and I'm just a crazy nympho.</i>\"\n\n");
 	outputText("You never said she was crazy. Just that she needs help, and you're more than happy to provide it.\n\n");
 	doNext(electraTalk);
@@ -257,16 +253,12 @@ public function electraSpar():void {
 public function electraSex():void {
 	clearOutput();
 	outputText("Electra is smiling wide with that weaselly, naughty grin of hers.\n\n");
-	outputText("\"<i>Oh my… so how do you plan to take me?"+(!(player.isRace(Races.RAIJU) || player.isRace(Races.THUNDERBIRD)) ? " Keep in mind any bodily contact will result in a discharge, I can't help it." : "")+"</i>\"");
+	outputText("\"<i>Oh my… so how do you plan to take me?"+(!(player.isRace(Races.RAIJU, 1, false) || player.isRace(Races.THUNDERBIRD, 1, false)) ? " Keep in mind any bodily contact will result in a discharge, I can't help it." : "")+"</i>\"");
 	menu();
-	if (player.isRace(Races.RAIJU) || player.isRace(Races.THUNDERBIRD)) {
-		addButton(0, "Charge up", ElectraSeXChargeUp);
-		addButton(1, "Volt Transfer", ElectraVoltTransfer);
-	}
-	else {
-		addButtonDisabled(0, "Charge up", "Need to be Raiju for this scene");
-		addButtonDisabled(1, "Volt Transfer", "Need to be Raiju for this scene");
-	}
+	addButton(0, "Charge up", ElectraSeXChargeUp)
+		.disableIf(!player.isRace(Races.RAIJU, 1, false) && !player.isRace(Races.THUNDERBIRD, 1, false), "Only available to Raijus and Thunderbirds.");
+	addButton(1, "Volt Transfer", ElectraVoltTransfer)
+		.disableIf(!player.isRace(Races.RAIJU, 1, false) && !player.isRace(Races.THUNDERBIRD, 1, false), "Only available to Raijus and Thunderbirds.");
 	addButton(2, "Headpat", ElectraSeXHeadpat);
 	addButton(3, "Lets just fuck", ElectraSeXYes);
 	addButton(14, "Back", ElectraCampMainMenu);
@@ -323,11 +315,12 @@ public function PlayerSexElectra():void {
 		flags[kFLAGS.ELECTRA_TALKED_ABOUT_HER] = 1;
 	}
 	menu();
-	if (player.lust >= 33) addButton(0, "Yea Sure", ElectraSeXYes);
+	addButton(0, "Yea Sure", ElectraSeXYes).disableIf(player.lust < 33, "Not horny enough!")
+		.disableIf(player.isGenderless(), "Not for genderless!");
 	addButton(1, "No Way", ElectraSeXNo);
 	addButton(2, "Headpat", ElectraSeXHeadpat);
 	SceneLib.uniqueSexScene.pcUSSPreChecksV2(PlayerSexElectra);
-	}
+}
 public function ElectraSeXYes():void {
 	spriteSelect(SpriteDb.s_electra);
 	clearOutput();
@@ -336,8 +329,7 @@ public function ElectraSeXYes():void {
 	outputText(" surprises you by jumping on top of you before you can even finish your sentence.\n\n");
 	outputText("\"<i>Let's not waste any time then!</i>\"");
 	outputText("She swiftly takes ahold of your clothes and starts methodically stripping you. Briefly, you think she's turning the tables on you, but the genuine smile and excitement in her eyes gives her away. She's just so happy to finally get laid.\n\n");
-	if (player.hasCock()) ElectraSeXYesM();
-	else ElectraSeXYesF();
+	sceneHunter.selectGender(ElectraSeXYesM, player.hasVagina() ? ElectraSeXYesF : null);
 }
 public function ElectraSeXYesM():void {
 	outputText("\"<i>Ahhh gimme that lighting rod, please put it in!</i>\"");
@@ -352,89 +344,56 @@ public function ElectraSeXYesM():void {
 	if (flags[kFLAGS.ELECTRA_TALKED_ABOUT_HER] >= 3) outputText("Electra");
 	else outputText("the raiju");
 	outputText("’s lightning. The voltage is flowing out of her pussy straight to your dick! You moan as the current sets every one of your pleasure nerves into overdrive, causing you to reach orgasm almost instantly if not several times over and pump the raiju with your cum. The girl seems lost in the sensations of her pussy, tongue out and eyes rolling, as she gushes around your twitching cock. ");
-	outputText("This rapid fire set of orgasms lasts for a fair minute before the both of you fall on each other and lose consciousness.\n\nYou wake up with the raiju next to you. The ground is still a massive pool of cum, but for some reason you feel satisfied.\n\n");
+	outputText("This rapid fire set of orgasms lasts for a fair minute before both of you fall on each other and lose consciousness.\n\nYou wake up with the raiju next to you. The ground is still a massive pool of cum, but for some reason you feel satisfied.\n\n");
 	outputText("\"<i>Good morning, I was wondering when you would wake up. Thank you so much for helping me get rid of that energy...It's hard to deal with sometimes.</i>\"");
 	outputText(" She slowly slides off your cock with a satisfied smile. ");
+	player.sexReward("vaginalFluids","Dick");
+	afterYes();
+}
+public function ElectraSeXYesF():void {
+	outputText("Before you can protest, she begins to grind her pussy against your own, making you moan. Her soft E sized teats are bouncing as something not unlike static electricity begins to form between you. No wait...it is electricity! You are immediately zapped, your pussy gushing with fluids and your eyes widening as your pleasure buzzers are all set alight by the raiju’s electric current. You try to pull back, but your brain isn't responding, the buzz of the current rocketing through your body.");
+	outputText("She seems to be riding the orgasm of her life as her own pussy juices are mixing with yours, electricity dancing in the air around you two. You cum and cum again at such a speed you have no idea how you still manage to retain some semblance of consciousness from the mind-numbing pleasure in your switch. Both of you finally lose consciousness as the electric flow ebbs, your tongues lolling out from the intense pleasure.\n\n");
+	outputText("You wake up with the raiju next to you. The ground is still a massive pool of girl cum, but for some reason you feel satisfied.\n\n");
+	outputText("\"<i>Good morning, I was wondering when you would wake up. Thank you so much, you helped me release all the stockpiled energy I had.</i>\"");
+	outputText("She slowly pulls away from your pussy, looking at your lower-half with a satisfied smile. ");
+	player.sexReward("vaginalFluids", "Vaginal");
+	afterYes();
+}
+
+public function afterYes():void {
 	if (flags[kFLAGS.ELECTRA_FOLLOWER] < 2) {
 		outputText("Where's the crazy girl from before?\n\n");
 		outputText("\"<i>I have to go, but here. Take this jewel and these gems for your trouble. I hope we see each other again.</i>\"");
 		outputText("She hands you a yellow jewel and a good amount of gems before leaving. ");
-		if (player.isRace(Races.RAIJU)) outputText("Well your own energy management isn't getting any better, seems you will have to expel that on someone else.\n\n");
-		else {
-			outputText("As for you, your entire body feels sensitive and achesto be touched. Something however tells you that indulging yourself would be a bad idea.\n\n");
-			player.sexReward("vaginalFluids","Dick");
-			if (player.hasStatusEffect(StatusEffects.RaijuLightningStatus))
-				player.removeStatusEffect(StatusEffects.RaijuLightningStatus);
-			player.createStatusEffect(StatusEffects.RaijuLightningStatus,169,0,0,0);
-		}
-	}
-	else {
+		if (player.isRace(Races.RAIJU, 1, false)) outputText("Well your own energy management isn't getting any better, seems you will have to expel that on someone else.\n\n");
+		else outputText("As for you, your entire body feels sensitive and achesto be touched. Something however tells you that indulging yourself would be a bad idea.\n\n");
+	} else {
 		outputText("Electra sighs in absolute relief, a happy look in her eyes as she grips your shoulders.\n\n");
 		outputText("\"<i>You have no idea how satisfying that was [name] thanks again for helping me get relief.</i>\"");
 		outputText("Well you're no better than she was earlier, but you're glad you could be of some help. You redress and ready back for your adventures. Ugh, where are those goblin sluts when you need one?\n\n");
-		if (!player.isRace(Races.RAIJU)) {
-			player.sexReward("vaginalFluids","Dick");
-			if (player.hasStatusEffect(StatusEffects.RaijuLightningStatus))
-				player.removeStatusEffect(StatusEffects.RaijuLightningStatus);
-			player.createStatusEffect(StatusEffects.RaijuLightningStatus,169,0,0,0);
-		}
 	}
+	if (!player.isRace(Races.RAIJU)) {
+		if (player.hasStatusEffect(StatusEffects.RaijuLightningStatus))
+			player.removeStatusEffect(StatusEffects.RaijuLightningStatus);
+		player.createStatusEffect(StatusEffects.RaijuLightningStatus,169,0,0,0);
+	}
+	afterSex();
+}
+
+public function afterSex():void {
 	electraAffection(10);
 	if (flags[kFLAGS.ELECTRA_FOLLOWER] < 2) {
 		monster.createPerk(PerkLib.NoGemsLost, 0, 0, 0, 0);
 		inventory.takeItem(consumables.VOLTTOP, cleanupAfterCombat);
-	}
-	else {
+	} else {
 		if (CoC.instance.inCombat) {
 			monster.createPerk(PerkLib.NoGemsLost, 0, 0, 0, 0);
 			inventory.takeItem(consumables.VOLTTOP, cleanupAfterCombat);
 		}
-		inventory.takeItem(useables.RPLASMA, camp.returnToCampUseOneHour);
+		inventory.takeItem(useables.RPLASMA, cleanupAfterCombat); // = returnOneHour if not combat
 	}
 }
-public function ElectraSeXYesF():void {
-	outputText("Before you can protest, she begins to grind her pussy against your own, making you moan. Her soft E sized teats are bouncing as something not unlike static electricity begins to form between you. No wait...it is electricity! You are immediately zapped, your pussy gushing with fluids and your eyes widening as your pleasure buzzers are all set alight by the raiju’s electric current. You try to pull back, but your brain isn't responding, the buzz of the current rocketing through your body.");
-	outputText("She seems to be riding the orgasm of her life as her own pussy juices are mixing with yours, electricity dancing in the air around you two. You cum and cum again at such a speed you have no idea how you still manage to retain some semblance of consciousness from the mind numbing pleasure in your switch. Both of you finally lose consciousness as the electric flow ebbs, your tongues lolling out from the intense pleasure.\n\n");
-	outputText("You wake up with the raiju next to you. The ground is still a massive pool of girl cum, but for some reason you feel satisfied.\n\n");
-	outputText("\"<i>Good morning, I was wondering when you would wake up. Thank you so much, you helped me release all the stockpiled energy I had.</i>\"");
-	outputText("She slowly pulls away from your pussy, looking at your lower-half with a satisfied smile. ");
-	if (flags[kFLAGS.ELECTRA_FOLLOWER] < 2) {
-		outputText("Where's the crazy girl from before?\n\n");
-		outputText("\"<i>I have to go, but here. Take this jewel and these gems for your trouble. I hope we see each others again.</i>\"");
-		outputText("She hands you a yellow jewel and a good amount of gems before leaving. ");
-		if (!player.isRace(Races.RAIJU)) outputText("Welp your own energy management isn't getting any better, seems you will have to expel that on someone else.\n\n");
-		else {
-			outputText("As for you, your entire body feels sensitive and aches for touch from the slowly receding voltage. Something however tells you that indulging yourself would be a bad idea.\n\n");
-			player.sexReward("vaginalFluids");
-			if (player.hasStatusEffect(StatusEffects.RaijuLightningStatus))
-				player.removeStatusEffect(StatusEffects.RaijuLightningStatus);
-			player.createStatusEffect(StatusEffects.RaijuLightningStatus,169,0,0,0);
-		}
-	}
-	else {
-		outputText("Electra sighs in absolute relief, thankful.\n\n");
-		outputText("\"<i>You have no idea how satisfying that was [name] thanks again for helping me get relief.</i>\"");
-		outputText("Well you're in no better than she was earlier but your glad you could be of some help. You redress and ready back for your adventures. Ugh where are those goblin sluts when you need one.\n\n");
-		if (!player.isRace(Races.RAIJU)) {
-			player.sexReward("vaginalFluids");
-			if (player.hasStatusEffect(StatusEffects.RaijuLightningStatus))
-				player.removeStatusEffect(StatusEffects.RaijuLightningStatus);
-			player.createStatusEffect(StatusEffects.RaijuLightningStatus,169,0,0,0);
-		}
-	}
-	electraAffection(10);
-	if (flags[kFLAGS.ELECTRA_FOLLOWER] < 2) {
-		monster.createPerk(PerkLib.NoGemsLost, 0, 0, 0, 0);
-		inventory.takeItem(consumables.VOLTTOP, cleanupAfterCombat);
-	}
-	else {
-		if (CoC.instance.inCombat) {
-			monster.createPerk(PerkLib.NoGemsLost, 0, 0, 0, 0);
-			inventory.takeItem(consumables.VOLTTOP, cleanupAfterCombat);
-		}
-		inventory.takeItem(useables.RPLASMA, camp.returnToCampUseOneHour);
-	}
-}
+
 public function ElectraSeXChargeUp():void {
 	spriteSelect(SpriteDb.s_electra);
 	clearOutput();
@@ -457,7 +416,7 @@ public function ElectraSeXChargeUp():void {
 		if (flags[kFLAGS.ELECTRA_TALKED_ABOUT_HER] >= 3) outputText("Electra");
 		else outputText("She");
 		outputText(" moans in delight as her current slowly passes to you, stacking your lust on top of your own. In an effort to coax her climax faster you lean down and suckle on her positive and negative nipples in turn, coaxing the current right out of her. She moans in delight, eyelids fluttering with the pleasure. ");
-		outputText("You are well aware, most of the unfortunate one timers she meets are too busy jerking on the ground to actually take care of her. Her voltage transfer intensifies and you moan in pleasure as lightning arcs visibly between your Raiju lover's pussy and your genitals, ");
+		outputText("You are well aware, most of the unfortunate one-timers she meets are too busy jerking on the ground to actually take care of her. Her voltage transfer intensifies and you moan in pleasure as lightning arcs visibly between your Raiju lover's pussy and your genitals, ");
 		if (flags[kFLAGS.ELECTRA_TALKED_ABOUT_HER] >= 3) outputText("Electra's");
 		else outputText("the raiju");
 		outputText(" pussy gushing its fluid right unto yours. She finally cums, her juice and charge flowing out of her and unto you like current through a cable.\n\n");
@@ -486,7 +445,7 @@ public function ElectraVoltTransfer():void {
 	outputText("Voltage rushes out of your body as it transfers to your victim, massaging the shape of her E cup breasts, licking the entrance of her pussy and spreading across the rest of her skin. You smile in contentment as the haze of lust progressively clears from your mind... the opposite of what your victim is currently experiencing. The excess of your static slowly passes into Electra's prone form ");
 	outputText("and you almost achieve climax from the relief as you purge all of this lustful energy.\n\nYour victim, however, is not so lucky. As you pour in your lust she begins to completely lose control, attempting to fiercely masturbate this excess of desire out, to no avail. As you are close to done your partner is a wrecked mess on the floor, desperate to gain release but unable ");
 	outputText("to achieve it fully as the supernatural electricity keeps building, obliterating self-restraint and pride along the way. You move away from Electra just as her hands begin to draw fluids out of her lust filled endowment. You stay clear as your victim’s lust explodes, spewing girlcum and milk everywhere in the vicinity. ");
-	outputText("You can see the pulse of your statics as a small glow in every thrust of her hips as she keep fiercely masturbating in an attempt to expel the lust.\n\n");
+	outputText("You can see the pulse of your statics as a small glow in every thrust of her hips as she keeps fiercely masturbating in an attempt to expel the lust.\n\n");
 	outputText("You leave your lust receptacle there, it's unlikely Electra will stop masturbating anytime soon.");
 	player.sexReward("Default","Default",true,false);
 	doNext(camp.returnToCampUseOneHour);
@@ -495,7 +454,7 @@ public function ElectraSeXHeadpat():void {
 	outputText("For reasons unknown you feel like head patting ");
 	if (flags[kFLAGS.ELECTRA_TALKED_ABOUT_HER] >= 3) outputText("Electra");
 	else outputText("the raiju");
-	outputText(". At first she looks at you, somewhat confused, before a dopey smile starts breaking out on her face.\n\n");
+	outputText(". At first, she looks at you, somewhat confused, before a dopey smile starts breaking out on her face.\n\n");
 	outputText("You proceed to gently rub her hairs then her ears, something not unlike static electricity slowly charging beneath your fingers. As the static transfer from her body to yours it begins focusing down between your legs, your");
 	if (player.hasCock()) {
 		outputText(" cock fully reaching its full erect state within no time");
@@ -516,18 +475,8 @@ public function ElectraSeXHeadpat():void {
 	if (player.hasStatusEffect(StatusEffects.RaijuLightningStatus))
 		player.removeStatusEffect(StatusEffects.RaijuLightningStatus);
 	player.createStatusEffect(StatusEffects.RaijuLightningStatus, 169, 0, 0, 0);
-	electraAffection(10);
 	player.sexReward("Default","Default",true,false);
-	if (flags[kFLAGS.ELECTRA_FOLLOWER] < 2) {
-		monster.createPerk(PerkLib.NoGemsLost, 0, 0, 0, 0);
-		inventory.takeItem(consumables.VOLTTOP, cleanupAfterCombat);
-	}
-	else {
-		if (CoC.instance.inCombat) {
-			monster.createPerk(PerkLib.NoGemsLost, 0, 0, 0, 0);
-			inventory.takeItem(consumables.VOLTTOP, cleanupAfterCombat);
-		}
-	}
+	afterSex();
 }
 public function ElectraSeXNo():void {
 	spriteSelect(SpriteDb.s_electra);

@@ -410,7 +410,7 @@ public class DungeonMaps extends DungeonAbstractContent
 					'g': DUNGEON_RIVER_FLOOR_03_ROOM_27,
 					'h': DUNGEON_RIVER_FLOOR_03_ROOM_28,
 					'i': DUNGEON_RIVER_FLOOR_03_ROOM_29,
-					'j': DUNGEON_RIVER_FLOOR_03_ROOM_20,
+					'j': DUNGEON_RIVER_FLOOR_03_ROOM_30,
 					'k': DUNGEON_RIVER_FLOOR_03_ROOM_31,
 					'l': DUNGEON_RIVER_FLOOR_03_ROOM_32,
 					'm': DUNGEON_RIVER_FLOOR_03_ROOM_33,
@@ -517,6 +517,50 @@ public class DungeonMaps extends DungeonAbstractContent
 					'c': DUNGEON_BEE_HIVE_3,
 					'd': DUNGEON_BEE_HIVE_4,
 					'e': DUNGEON_BEE_HIVE_5
+				}
+			),
+			new DungeonMap("Demon Lab", [
+					"    [i]    ",
+					"     L     ",
+					"    [g]K[h]",
+					"     |     ",
+					"[e]K[d]—[f]",
+					"     |     ",
+					"[c]K[b]    ",
+					"     |     ",
+					"    [a]    ",
+				],
+				{
+					'a': DUNGEON_LAB_ENTRANCE,
+					'b': DUNGEON_LAB_BALLROOM_1,
+					'c': DUNGEON_LAB_TYRANT_1,
+					'd': DUNGEON_LAB_BALLROOM_2,
+					'e': DUNGEON_LAB_FSPREADER,
+					'f': DUNGEON_LAB_INCEL,
+					'g': DUNGEON_LAB_BALLROOM_3,
+					'h': DUNGEON_LAB_NIGHTWALKER_1,
+					'i': DUNGEON_LAB_PANIC_ROOM
+				},
+				function():Object { return {
+					'K': dungeons.demonLab.hasKeycard() ? "|": "L",
+					'L': dungeons.demonLab.canEnterPanic() ? "|": "L"
+				}; }
+			),
+			new DungeonMap("Demon Lab, drider prison", [
+					"    [b]    ",
+					"     |     ",
+					"    [a]    ",
+				],
+				{
+					'a': DUNGEON_LAB_TYRANT_PRISON,
+					'b': DUNGEON_LAB_TYRANT_2
+				}
+			),
+			new DungeonMap("Demon Lab, Nightwalker cave", [
+					"    [a]    ",
+				],
+				{
+					'a': DUNGEON_LAB_NIGHTWALKER_2
 				}
 			),
             //D3 maps. Note that they use 'currentRoom' instead of 'dungeonLoc'

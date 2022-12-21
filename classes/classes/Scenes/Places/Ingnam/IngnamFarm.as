@@ -20,7 +20,7 @@ public class IngnamFarm extends BaseContent
 			if (flags[kFLAGS.INGNAM_FARMER_MET] <= 0) {
 				outputText("\n\nYou hear a rustling from the swaying cornfield and instinctively tense up for a fight. To your relief, it is the farm's owner who emerges. The farmer is a woman of average build and she is modestly garbed in overalls. Wiping away her sweaty blond locks from her flushed face, she walks up to greet you with a warm smile.");
 				outputText("\n\n\"<i>I heard rumors that you're going to be the Champion of Ingnam, is that true [name]?.</i>\" the young farmer asks nervously. You affirm somberly, yes, you are the next Champion. Tears start to well up in her eyes as her voice begins to crack with emotion \"<i>I've known you since we were kids, I can't believe I won't be seeing you again [name]... This has to be some mistake.</i>\"");
-				outputText("\n\nYou embrace her and tell the shaking farmer that it is for the good of the village. Her tears start to roll down her reddened cheeks, you stroke her hair soothingly, whispering that everything will be fine.");
+				outputText("\n\nYou embrace her and tell the shaking farmer that it is for the good of the village. As her tears start to roll down her reddened cheeks, you stroke her hair soothingly, whispering that everything will be fine.");
 				outputText("\n\nAfter talking about your upcoming task, the farming girl calms down and offers you some gems, \"<i>You can still work here to get some gems. I'll pay you ten gems for each hour you work. This should help you out while on your journey...</i>\"");
 				flags[kFLAGS.INGNAM_FARMER_MET] = 1;
 			}
@@ -71,7 +71,7 @@ public class IngnamFarm extends BaseContent
 			}
 			if (player.hasPerk(PerkLib.HistorySlacker) || player.hasPerk(PerkLib.PastLifeSlacker)) fatigue(-2);
 			outputText("\n\nYou walk back to Ingnam.");
-			if (player.HP > player.maxHP()) player.HP = player.maxHP();
+			if (player.HP > player.maxOverHP()) player.HP = player.maxOverHP();
 			player.gems += 10;
 			statScreenRefresh();
 			doNext(camp.returnToCampUseOneHour);	

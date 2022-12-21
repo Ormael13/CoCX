@@ -2,24 +2,21 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.Areas.DefiledRavine 
+package classes.Scenes.Areas.DefiledRavine
 {
-	import classes.*;
-	import classes.internals.*;
-	import classes.BodyParts.Butt;
-	import classes.BodyParts.Hips;
-	import classes.BodyParts.Horns;
-	import classes.BodyParts.LowerBody;
-	import classes.BodyParts.Tail;
-	import classes.CockTypesEnum;
-	import classes.Monster;
-	import classes.PerkLib;
-	import classes.Scenes.SceneLib;
+import classes.*;
+import classes.BodyParts.Butt;
+import classes.BodyParts.Hips;
+import classes.BodyParts.Horns;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Tail;
+import classes.Items.DynamicItems;
+import classes.internals.*;
 
-	public class DemonCentauress extends Monster
+public class DemonCentauress extends Monster
 	{
 		
-		public function DemonCentauress() 
+		public function DemonCentauress()
 		{
 			this.a = "the ";
 			this.short = "demon centauress";
@@ -33,7 +30,7 @@ package classes.Scenes.Areas.DefiledRavine
 			this.ballSize = 3;
 			this.hips.type = Hips.RATING_CURVY;
 			this.butt.type = Butt.RATING_JIGGLY;
-			this.skinTone = "purple";
+			this.bodyColor = "purple";
 			this.hairColor = "blond";
 			this.hairLength = 6;
 			initStrTouSpeInte(210, 210, 120, 120);
@@ -49,6 +46,10 @@ package classes.Scenes.Areas.DefiledRavine
 			this.gems = 300 + rand(90);
 			this.level = 41;
 			this.lustVuln = 0.6;
+			this.randomDropChance = 0.1;
+			this.randomDropParams = {
+				rarity: DynamicItems.RARITY_CHANCES_LESSER
+			};
 			this.drop = new WeightedDrop().
 					add(consumables.CENTARI, 1).
 					add(consumables.EQUINUM, 10);

@@ -95,9 +95,9 @@ import classes.internals.SaveableState;
 		//WaizAbiStory: 1 - x, 2 - x, 3 - x
 		public function bimboMonkey():void {
 			clearOutput();
-			outputText("\"<i>O Hai there,</i>\" she says looking over you from head to feet and back. \"<i>Mmmmm maybe you could put a good 'fight' or if not then at least good beatdown...</i>\" she trails out licking her lips slowly.\n\n");
-			outputText("Wait what fight she mean? Is that some nonsense that any bimbo here would say or is ther deeper meaning to this?\n\n");
-			outputText("\"<i>I not know. Maybe it's up to you te decide what it mean. Right?</i>\" She awaits your reaction while sipping some liquid from the glass she hold.\n\n");
+			outputText("\"<i>O Hai there,</i>\" she says looking over you from head to feet and back. \"<i>Mmmmm maybe you could put a good 'fight'...If not, beating you down could be...Fun...</i>\" Her voice trails off, her gaze dropping to your [legs], her eyes half-lidded. She licks her lips slowly, gaze slowly moving back up your frame.\n\n");
+			outputText("On one hand, her muscular arms flex, but on the other, she's giving you a rather lascivious glance. You ask her why she's speaking in riddles. Is the bimbo asking for a fight, or a fuck?</i> You ask, only to get a smile, her lip curling ever so slightly. \n\n");
+			outputText("\"<i>Oh, poor little champion. Faced with a choice, and you don't know how to react.</i>\" She smirks, bringing one hand to grasp her formidible breast. \"<i> Maybe this is one thing that you get to choose. I get my fun either way. </i>\"She awaits your reaction, blatantly oogling your body while she sips from her wine glass.\n\n");
 			menu();
 			addButton(1, "Sex", bimboMonkeySex);//(Koshya appearance here)
 			addButton(2, "Fight", bimboMonkeyFight);//(And here)
@@ -107,21 +107,21 @@ import classes.internals.SaveableState;
 		public function bimboMonkeySex():void {
 			clearOutput();
 			outputText("Then maybe a good 'fight'?\n\n");
-			outputText("\"<i>Really???</i>\" her eyes nearly shines as she puts away the glass. After getting up she grabs your hand and leads you toward the entrance.\n\n");
-			outputText("\"<i>Stop right there you sexual offender...</i>\" after leaving inn you hear someone calling you out. After turning around you see pale blue skinned female of averange look with snow white wings folded on her back. She walks to you and standing between you and monkey bimbo cast you contempting look.\n\n");
-			outputText("\"<i>Return alone miss. I have someone to teach a lesson.</i>\" Newcommer speaks to monkey which after very long moment of hesistation nods and starting to walk away. Meanwhile blue-skinned angel points toward direction of Soul Arena. \"<i>Would you go on your own or should i drag you there?</i>\"\n\n");
-			outputText("Slight annoyed by missed 'fight' you walks to the arena and enter one of it sections.\n\n");
-			outputText("\"<i>Now, shall we start education?</i>\" After asking angelic woman assunme combat pose unfolding her wings.\n\n");
+			outputText("\"<i>Really???</i>\" her eyes light up, and she leaps to her feet, carelessly putting her glass to one side. After getting up she grabs your hand, and leads you to the entrance.\n\n");
+			outputText("\"<i>Stop right there!</i>\" An angry voice calls to you, heavy footsteps getting closer. You turn, catching sight of your pursuer. She's a pale blue skinned woman, with average-sized breasts and hips, both hidden under a layer of light armor. She pivots, unfolding a single snow-white wing, forcefully putting the limb between you and the bimbo monkey. Your would-be paramour lets out an annoyed groan, but a single glare from the angelic woman is all it takes to cow her. The blue-skinned woman forces her way in, glaring at you with her lips curled in disgust.\n\n");
+			outputText("\"<i>Return home, milady. Someone needs to be taught a lesson.</i>\" The newcomer silently glares at the bimbo-monkey, who eventually looks down and away, leaving the area with a huff. Once she's gone, the blue-skinned angel points towards the Soul Arena. \"<i>What's it going to be, sex-freak? Are you gonna join me in the ring, or do I need to drag you there myself?</i>\"\n\n");
+			outputText("Slightly annoyed by the interuption to your 'fight', you give the angel a slow nod, entering the arena.\n\n");
+			outputText("\"<i>Lesson one.</i>\" She sinks into a low combat stance,  unfolding her wings. <i>\"What happens when a pervert tries to take advantage of milady? Let me demonstrate!</i>\"");
 			startCombat(new Koshya());
 		}
 		public function bimboMonkeyFight():void {
 			clearOutput();
-			outputText("You're down for some good beatdown.\n\n");
-			outputText("\"<i>Ohhh beatdown. Well i can get behind that too.</i>\" she slowly puts away the glass. After getting up she grabs your hand and leads you toward the entrance.\n\n");
-			outputText("You follow her thou the village until both of you enter the Soul Arena. Picking one of empty parts of it both of you stand on oppposite of each others when pale blue skinned female of averange look with snow white wings folded on her back interrupts.\n\n");
-			outputText("\"<i>Miss. You shouldn't fight. Let this humble servant replace you in this brawl. I shall try my best to not dissapoint your opponent.</i>\" She speaks gently but you got some gut feeling she may get mroe forcefully as long her miss not agree to this request.\n\n");
-			outputText("\"<i>But why i can't even fight. No fuck no fights. You're such a boring servant.</i>\" Bimbo monkey pouts but still slowly walking toward the nearby stands. \"<i>Fine but next time you won;t interrupt my fight...</i>\"\n\n");
-			outputText("\"<i>Of course milady.</i>\" Replies angelic woman as she take the monkey spot before you unfolding her wings.\n\n");
+			outputText("You're in the mood for a good beatdown.\n\n");
+			outputText("\"<i>Ohhh, a beatdown? Well i can get behind that too.</i>\" she slowly puts the glass down. After getting up she takes your hand in a surprisingly strong grip, leading you out of the bar.\n\n");
+			outputText("You follow her past the marketplace, around the lesson hall and into the Soul Arena. You quickly find an empty arena, and the bimbo monkey grins as you begin to face off. She leans back, a sudden wind slamming into you as she screams. Her eyes begin to glow red, her tail whipping behind her. As she roars, teeth glinting, she takes a step towards you...and a blur of motion lands between you two. The bimbo monkey tries to dodge around, but a white wing intercepts. As she turns to face you, you get a better look at this interloper. She has pale blue skin, and an unassuming face, just feminine enough to leave no doubt as to her gender. Her build is completely unspectacular, bust, hips and muscles almost tailored to be as average as possible. \n\n");
+			outputText("\"<i>Ma'am, this battle is beneath you. I shall take your place in this battle.</i>\" She speaks gently, but the look in her eyes is stern. She may be acting as a servant, but this...almost sounds like an order.\n\n");
+			outputText("\"<i>But why can't I even fight? No fucks, no fights... You're supposed to be my servant, not my nanny.</i>\"The bimbo monkey pouts but still obeys, jumping toward the nearby stands. \"<i>This time, I'll let it slide. But you won't interrupt my next fight...</i>\"\n\n");
+			outputText("\"<i>Of course milady.</i>\" The angel woman brings her gaze to you. \"<i>Of course, you may still watch. This one should be able to provide you some entertainment.</i>\" \n\n");
 			startCombat(new Koshya());
 		}
 		public function bimboMonkeyDrink():void {

@@ -5,7 +5,6 @@
 package classes.Scenes.NPCs 
 {
 	import classes.*;
-import classes.BodyParts.LowerBody;
 import classes.GlobalFlags.kFLAGS;
 	import classes.Scenes.SceneLib;
 	
@@ -32,17 +31,17 @@ public function treeMenu():void {
 	if (flags[kFLAGS.FLOWER_LEVEL] == 1) {
 		outputText("The sprout looks about the same as when you first noticed it.  It's a simple, leafy shoot that only goes to about knee height.  It looks healthy and strong, with a few dozen branches and shiny green leaves.  You could easily destroy it.");
 		menu();
-		addButton(0, "Burn It", destroyDatTree);
-		if (player.fatigue + 50 < player.maxFatigue()) addButton(1, "Water It", waterIt);
-		addButton(14, "Back", inventory.inventoryMenu);
+		addButton(6, "Burn It", destroyDatTree);
+		addButton(7, "Water It", waterIt).disableIf(player.fatigue + 50 > player.maxFatigue(), "You're too tired!");
+		addButton(8, "Back", inventory.inventoryMenu);
 	}
 	else if (flags[kFLAGS.FLOWER_LEVEL] == 2) {
 		outputText("Before you is a large, waist-high plant of questionable origin.  A huge, violet bloom sits atop a strong, central stalk, and the obscene flower looks positively female in every sense, right down to a clit-shaped bump and moist, gently parted lips.  Inside that central passage, you can see a bevy of wiggling staman surrounding a larger, flared stalk.  The scent that wafts out of that opening is sweet and floral, but undoubtedly sexual.  It looks like an organic sex toy and it may be corrupted.  It wouldn't be hard to get rid of right now, assuming you don't let it grow larger.");
 		menu();
-		addButton(0, "Destroy It", destroyDatFuckingPlantAtP2);
-		if (player.fatigue + 50 < player.maxFatigue()) addButton(1, "Water It", waterIt);
-		if (player.HP > 150 && player.soulforce>= 50 && player.hasPerk(PerkLib.SoulApprentice)) addButton(2, "Use SFIB", useSouforceInfusedBlood);
-		addButton(14, "Back", inventory.inventoryMenu);
+		addButton(6, "Destroy It", destroyDatFuckingPlantAtP2);
+		addButton(7, "Water It", waterIt).disableIf(player.fatigue + 50 > player.maxFatigue(), "You're too tired!");
+		addButton(8, "Use SFIB", useSouforceInfusedBlood).disableIf(player.HP <= 150 && player.soulforce < 50 && !player.hasPerk(PerkLib.SoulApprentice), "You may lack one or all of those req.: Soul Apprentite perk, 150+ HP, 50+ SF!");
+		addButton(9, "Back", inventory.inventoryMenu);
 	}
 	else if (flags[kFLAGS.FLOWER_LEVEL] == 3) {
 		outputText("The familiar plant has blossomed into a nicely sized tree, though you doubt it has finished growing just yet.  It sports an outstretched canopy with nice, green leaves.  The vaginal flower is still there and is in full bloom, now several feet across and practically dripping with moisture.  Just up the trunk, there's a pair of small, roughly b-cup breasts bulging out of the bark.  They're exquisitely smooth and soft, and they ooze sweet-smelling sap that your tongue would love to taste.  In the canopy above, tentacle vines idly writhe about, though they show no signs of aggression.");
@@ -50,14 +49,14 @@ public function treeMenu():void {
 			outputText("\n\nIt could be burned down with your supernatural fire, but it would definitely tire you.");
 		}
 		menu();
-		addButton(0, "Torch It", torchP3Tree);
-		if (player.fatigue + 50 < player.maxFatigue()) addButton(1, "Water It", waterIt);
-		if (player.HP > 150 && player.soulforce>= 50 && player.hasPerk(PerkLib.SoulApprentice)) addButton(2, "Use SFIB", useSouforceInfusedBlood);
-		addButton(3, "Drink Sap", drinkThePlantGirlsSap);
-		addButton(14, "Back", inventory.inventoryMenu);
+		addButton(5, "Drink Sap", drinkThePlantGirlsSap);
+		addButton(6, "Torch It", torchP3Tree);
+		addButton(7, "Water It", waterIt).disableIf(player.fatigue + 50 > player.maxFatigue(), "You're too tired!");
+		addButton(8, "Use SFIB", useSouforceInfusedBlood).disableIf(player.HP <= 150 && player.soulforce < 50 && !player.hasPerk(PerkLib.SoulApprentice), "You may lack one or all of those req.: Soul Apprentite perk, 150+ HP, 50+ SF!");
+		addButton(9, "Back", inventory.inventoryMenu);
 	}
 	else if (flags[kFLAGS.FLOWER_LEVEL] == 4) {
-		if (flags[kFLAGS.ZENJI_PROGRESS] == 11 && rand(4) == 0) {
+		if (ZenjiScenes.isLover() && rand(4) == 0) {
 			outputText("You go up to meet with Holli, but you find Zenji is already there. \"<i>I do not trust you, you reek of de filth dat plagues dis land.</i>\" He says.");
 			outputText("\n\n\"<i>Don't be a prude, troll,</i>\" Holli responds, \"<i>Marae gifted your people with life, why don't you want to share it with me? After all, I know what a troll is capable of when they mate,</i>\" she says coyly.");
 			outputText("\n\n\"<i>And accept de taint you carry? I don' tink so.</i>\" He scoffs. Zenji leaves. Noticing you're approaching Holli, Zenji speaks up to you, \"<i>Be careful around dat ting, I don't trust her, even if she claims she’s from Marae, she has a foul stench about her.</i>\"");
@@ -79,7 +78,7 @@ public function treeMenu():void {
 		if(player.tentacleCocks() >= 10 && player.lust >= 33) addButton(1, "TentacleBone", fullOnTentacleTasticGangBangForHolli);
 	//	if(player.stamenCocks() >= 10) && player.lust >= 33) addButton(1, "StamenBone", fullOnTentacleTasticGangBangForHolli);
 		if (player.hasVagina() && player.lust >= 33) addButton(2, "Ride Holli", vaginalDomHollisTentacruels);
-		if (player.isAlraune()) addButton(3, "TentacleDuel", SceneLib.uniqueSexScene.alrauneExtraSceneWithHollicyntiaTentacleDuel);
+		if (player.isAlraune()) addButton(3, "TentacleDuel", SceneLib.holliScene.alrauneExtraSceneWithHollicyntiaTentacleDuel);
 		else addButtonDisabled(2, "TentacleDuel", "This scene requires to be an alraune of some kind.");
 		addButton(5, "Drink Sap", haveAMapleSyrupSnack);
 		if (flags[kFLAGS.HOLLI_FRUIT] > 0) addButton(6, "Eat A Fruit", eatHolliFruit);
@@ -251,7 +250,7 @@ public function treePhaseFourGo():void {
 	outputText("\n\nWell... you have a plant-woman on your hands; a dryad by the legends of your homeland.  She looks harmless, so long as you don't stand too close, and she's quite the alluring sight.  What now?\n\n<b>Hollicynthea is now available in the followers tab!</b>");
 	flags[kFLAGS.FLOWER_LEVEL] = 4;
 	flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] = 0;
-	dynStats("lus", 15);
+	dynStats("lus", 15, "scale", false);
 	doNext(treeMenu);
 }
 
@@ -266,14 +265,14 @@ private function holliGetsDickDommed():void {
 	outputText("\n\nYou congratulate her on her success in handling your dick and push on the back of her head with gentle but unforgiving pressure.  Pleasant body heat envelops your prick as it's gobbled down deep");
 	if(player.biggestCockArea() <= 80) {
 		outputText(", swallowed to the ");
-		if(player.balls > 0) outputText("[balls]");
+		if(player.hasBalls()) outputText("[balls]");
 		else outputText("[sheath]");
 		outputText(".");
 	}
 	else outputText(", swallowed as deep as Holli's distended neck can handle.");
 	outputText("  Gurgling, the demonic dryad flutters her lengthy eyelashes and looks up at your eyes, twinkling with happiness at her servitude.  You wiggle your crotch around, and it twists your [cock biggest] around her mouth and throat.  The tainted tree's tongue massages the underside of your length, embracing you with subtle moisture and frictionless pressure.");
 	outputText("\n\nBubbling sexual pleasure begins to build up inside you, making your ");
-	if(player.balls > 0) outputText("[sack] feel taut and ready to burst");
+	if(player.hasBalls()) outputText("[sack] feel taut and ready to burst");
 	else outputText("body feel strung tight like an over-tuned guitar");
 	outputText(".  Holli pulls back, inciting a snarl of displeasure to vibrate from you, but as soon as she's withdrawn, her hands clasp onto the slick shaft and begin to pump it with vigorous strokes.  Her mouth settles back into place around your [cockHead biggest], circling it with her tongue while she bobs up and down on it, snaring your most sensitive place with overwhelming sensations.");
 	outputText("\n\nYou grab hold of the hungry cock-sucker by her neck and push her back, up into her tree, releasing your [cock biggest] before it can blow.  It's a close thing - you're rigid and bobbing, muscles clenching involuntary right on the edge.  Holli makes a choking protestation as she's forced into place but doesn't struggle, fearful of your wrath.  You let the hungry slut go, unharmed but chastised by the rough treatment.  Your cum is destined for her twat, not to be wasted in her slutty noise-hole.");
@@ -314,7 +313,7 @@ private function fullOnTentacleTasticGangBangForHolli():void {
 	outputText("\n\nWhile the experience is intense, perhaps exquisite, you have four more manhoods left to tend to and precious little of her human shape left to abuse.  It's then that the drooping tentacles catch your eyes.  Not all of them are phallic, like your own.  Some are rather different... hollow and wet.  You release your remaining quartet of cocks to investigate these new arrivals, and as they probe at the slick entrances, you're greeted by pleasure as immediate as it is intense.  These are cunt-tentacles!  All four of the unsated penises thrust as one, snaring themselves into the sucking wet holes they've been presented with.  Holli's tube-pussies prove a perfect match for your virile green shafts - they devour your manhoods with unholy glee, easily swallowing up foot after foot of pulsing, tumescent flesh.");
 	outputText("\n\nYou're awash in an orgy of pleasure.  It radiates out from your groin in pulsing waves, forming into breakers as it travels up your spine.  Then, it breaks over your brain, and like a switch inside you is flipped, you go into a frenzy.  Every single one of your tentacles begins to move faster and faster, pumping with quick, hard strokes into its orifice of choice, be it fingers, cleavage, mouth, or twat.  You pound each hole brutally hard.  Fluids spray out with each thrust to spatter the ground.  You can't tell if they're yours or hers, only that the air fills with the scents and sounds of rampant sex.");
 	outputText("\n\nA tremendous upwelling of excitement surges through your meager frame, and you feel insignificant in the face of it, like your body is simply too small and simple for you to endure such agonizingly intense pleasure.  Your penises thrust and move of their own accord as your bliss builds, eyes rolled back into your head.  Holli watches you with a dopey, pleasure-dazed look in her eyes as she's thoroughly fucked, smiling faintly when she sees your [hips] begin to shake as orgasm overtakes you.");
-	if(player.balls > 0) outputText("  Your [balls] draw up tight to your groin and squeeze, rhythmically discharging their heavy loads.");
+	if(player.hasBalls()) outputText("  Your [balls] draw up tight to your groin and squeeze, rhythmically discharging their heavy loads.");
 	outputText("\n\nSemen distends each of your tools with spheroid bulges, rushing out from the root and through the stem.  Holli's plush body distends beautifully as the swollen shapes squeeze on her tentacle-wrapped form.  Her breasts even fountain a spray of syrup from the extra compression.  The first one to enter her comes through her mouth, stretching her jaw to its limits.  Distending her throat, the bulging spunk-globule passes down her esophagus to burst free from your flaring, purplish cock-tip and explodes into her waiting belly.  Her eyes widen in confusion as her abdomen is packed with spunk, all without her getting to taste a single, salty drop.");
 	outputText("\n\nWhile those spooge-filled distortions travel on, your body has already pushed out the next set");
 	if(player.cumQ() > 500) outputText(", and the next");
@@ -436,11 +435,7 @@ private function eatHolliFruit():void {
 			i++;
 		}
 		i = choices[rand(choices.length)];
-		outputText("\n\nYour " + num2Text2(i+1) + " penis itches, and you idly scratch at it.  As you do, it begins to grow longer and longer, all the way to the ground before you realize something is wrong.  You pull open your [armor] and look down, discovering your " + cockDescript(i) + " has become a tentacle!  As you watch, it shortens back up; it's colored green except for a purplish head, and evidence seems to suggest you can make it stretch out at will.  <b>You now have a");
-		if(player.tentacleCocks() > 0) outputText("nother");
-		outputText(" tentacle-cock!</b>");
-		player.cocks[i].cockType = CockTypesEnum.TENTACLE;
-		player.cocks[i].knotMultiplier = 1.3;
+		transformations.CockTentacle(i).applyEffect();
 		dynStats("sen", 3, "lus", 10);
 	}
 	flags[kFLAGS.HOLLI_FRUIT]--;

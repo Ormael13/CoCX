@@ -123,6 +123,7 @@ public class AbstractFleshGargoyle extends Monster {
 	
 	public function AbstractFleshGargoyle() 
 	{
+		createStatusEffect(StatusEffects.LowtierMagicImmunity, 0, 0, 0, 0);
 		createPerk(PerkLib.Resolute, 0, 0, 0, 0);
 		createPerk(PerkLib.Sentience, 0, 0, 0, 0);
 		createPerk(PerkLib.EnemyFleshConstructType, 0, 0, 0, 0);

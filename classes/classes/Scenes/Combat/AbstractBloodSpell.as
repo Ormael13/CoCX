@@ -30,7 +30,7 @@ public class AbstractBloodSpell extends AbstractSpell {
 		if (uc) return uc;
 		
 		if (player.isGargoyle()) {
-			return "You cannot use blood spells if you not have blood at all.";
+			return "You cannot use blood spells if you don't have blood at all.";
 		}
 		if (player.HP - player.minHP() - 1 < hpCost()) {
 			return "Your hp is too low to cast this spell."

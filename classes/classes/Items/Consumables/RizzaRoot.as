@@ -35,12 +35,12 @@ package classes.Items.Consumables
 				changes++;
 				outputText("\n\nA weird tingling runs through your scalp as your [hair] shifts slightly.  You reach up and your hand bumps against <b>your new pointed elfin ears</b>.  You bet they look cute!");
 			}
-			if ((changes < changeLimit) && (player.tallness < 108)){
+			if ((changes < changeLimit) && (player.basetallness < 108)){
 				player.tallness += changeLimit - changes + Utils.rand(2); //Add remaining changes as additional height
-				if (player.tallness > 108) player.tallness = 108;
+				if (player.basetallness > 108) player.tallness = 108;
 				outputText("\n\nA shiver runs down your spine.  You realize that it, along with the rest of your frame, is now a bit taller.");
 			}
-			else if (player.tallness >= 108){
+			else if (player.basetallness >= 108){
 				outputText("\n\nYou don’t feel anything happening along your spine.  Perhaps this is as tall as the rizza root can make you.");
 			}
         }

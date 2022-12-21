@@ -6,69 +6,6 @@ import classes.Scenes.NPCs.JojoScene;
 import classes.display.SpriteDb;
 
 public class Rubi extends TelAdreAbstractContent {
-public function Rubi(){
-
-}
-//const RUBI_AFFECTION:int = 604;
-//const RUBI_DISABLED:int = 605;
-
-//0 = not admitted (she), 1 = "he", 2 = "she"
-//const RUBI_ADMITTED_GENDER:int = 606;
-//const RUBI_INTRODUCED:int = 607;
-//const RUBI_BLU_BALLS:int = 608;
-//const RUBI_ORGASM_DENIAL:int = 609;
-//const RUBI_BIMBO:int = 610;
-//const RUBI_INCUBUS_PROGRESS:int = 611;
-//const RUBI_SUITCLOTHES:int = 612;
-//const RUBI_FETISH_CLOTHES:int = 613;
-//const RUBI_GREEN_ADVENTURER:int = 614;
-//const RUBI_TUBE_TOP:int = 615;
-//const RUBI_BODYSUIT:int = 616;
-//const RUBI_LONGDRESS:int = 617;
-//const RUBI_TIGHT_PANTS:int = 618;
-//const RUBI_NURSE_CLOTHES:int = 619;
-//const RUBI_SWIMWEAR:int = 620;
-//const RUBI_PROSTITUTION:int = 621;
-//const RUBIS_HOUSE_FIRST_TIME:int = 622;
-//const RUBI_GOT_BIMBO_SKIRT:int = 623;
-//const RUBI_PROFIT:int = 624;
-//const RUBI_BIMBO_MINIDRESS:int = 625;
-//const TIMES_RUBI_MASSAGED:int = 832;
-//Third's horrible new shit
-//const RUBI_BREAST_SIZE:int = 984;
-//const RUBI_COCK_SIZE:int = 985;
-//const RUBI_COCK_TYPE:int = 986;
-//const RUBI_LOWERBODY:int = 987;
-//const RUBI_HORNTYPE:int = 988;
-//0 = normal, 1 = black
-//const RUBI_NIPPLETYPE:int = 989;
-//const RUBI_NO_CUNT:int = 990;
-//const RUBI_CUNTTYPE:int = 991;
-//const RUBI_EYE_DESCRIPT:int = 992;
-//const RUBI_EYE_TYPE:int = 993;
-//const RUBI_SKIN:int = 994;
-//const RUBI_HAIR:int = 995;
-//const RUBI_HAIR_LENGTH:int = 996;
-//const RUBI_BALLS_TYPE:int = 997;
-//const RUBI_EAR_TYPE:int = 998;
-//const RUBI_HANDS:int = 999;
-//const RUBI_WHISKERS:int = 1000;
-//const RUBI_FEET:int = 1001;
-//const RUBI_DEBIMBO:int = 1002;
-//const RUBI_NIPPLE_TYPE:int = 1003;
-//HE/SHE
-//const RUBI_SHE:int = 1004;
-//const TIMES_DISCUSSED_RUBIS_IDENTITY:int = 1005;
-//const RUBI_ICECREAM_CONFESSION:int = 1006;
-//const TIMES_RUBI_DATED:int = 1007;
-//const RUBI_FANCY_CONFESSION:int = 1008;
-//const RUBI_BAR_CONFESSION:int = 1009;
-//const RUBI_TIMES_ANALLY_TRAINED:int = 1010;
-//const RUBI_TIMES_GIVEN_AN_ITEM:int = 1011;
-//const RUBI_BONDAGE_STRAPS:int = 1012;
-//const RUBI_INQUISITORS_CORSET:int = 1013;
-//const RUBI_SETUP:int = 1014;
-
 private function rubiSprite():void {
 	if(flags[kFLAGS.RUBI_HORNTYPE] > 0) spriteSelect(SpriteDb.s_rubi_horns);
 	else spriteSelect(SpriteDb.s_rubi_hornless);
@@ -88,11 +25,6 @@ private function initializeRubi():void {
 		flags[kFLAGS.RUBI_HAIR] = 1;
 	}
 	flags[kFLAGS.RUBI_SETUP] = 1;
-}
-private function rubiBalls():String {
-	return "normal";
-	return "swollen";
-	return "massively engorged";
 }
 
 private function rubiBimbo():Boolean {
@@ -672,7 +604,7 @@ public function rubisFuckingHouseYouPervert():void {
 	}
 	//[Fuck Rubi (if player has cock, OR at least a 4</i>\" clit)] [Dildo Fuck (If player has Deluxe Dildo)] [Tease] [Release (Only if Normal or Incubus Rubi who has been teased)] [Titfuck (Bimbo Rubi only)] [Give Item]
 	menu();
-	addButton(0,"Sex",rubiSexMenu);
+	addButtonIfTrue(0,"Sex",rubiSexMenu, "Not aroused enough.", player.lust >= 33);
 	addButton(1,"Closet",goInRubisClosetSoThatYouCanComeOutOfTheCloset);
 	addButton(2,"Talk",talkToRubiInHouse);
 	if(rubiAffection() >= 50 && flags[kFLAGS.RUBI_COCK_SIZE] > 0 && (!rubiBimbo() || flags[kFLAGS.RUBI_DEBIMBO] > 0)) {
@@ -692,25 +624,21 @@ public function rubisFuckingHouseYouPervert():void {
 private function rubiSexMenu():void {
 	//[Fuck Rubi (if player has cock, OR at least a 4</i>\" clit)] [Dildo Fuck (If player has Deluxe Dildo)] [Tease] [Release (Only if Normal or Incubus Rubi who has been teased)] [Titfuck (Bimbo Rubi only)] [Give Item]
 	menu();
-	if (player.lust >= 33) {
-		if (player.hasCock() || (player.hasVagina() && player.clitLength >= 4)) addButton(0, "Fuck", fuckRubi);
-		if (player.hasKeyItem("Deluxe Dildo") >= 0) addButton(1, "Dildo Fuck", dildoFuckRubi);
-	}
+	addButtonIfTrue(0, "Fuck", fuckRubiRouter, "Req. a cock or a long clit.",
+		player.hasCock() || player.hasVagina() && player.clitLength >= 4);
+	addButtonIfTrue(1, "Dildo Fuck", dildoFuckRubi, "Req. Deluxe Dildo.",
+		player.hasKeyItem("Deluxe Dildo") >= 0);
 	addButton(2, "Tease", teaseRubi);
-	if (flags[kFLAGS.RUBI_BLU_BALLS] > 0 && flags[kFLAGS.RUBI_ORGASM_DENIAL] > 0 && !rubiBimbo() && flags[kFLAGS.RUBI_COCK_SIZE] > 0) addButton(3, "Release", releaseRubi);
-
-	if (flags[kFLAGS.RUBI_AFFECTION] >= 75 && rubiCapacity() < player.biggestCockArea() && player.hasCock())
-		addButton(4, "Train", anallyTrainYourBitchBoySlutHowToBeAnalForDCL);
-	//Get Fucked
-	//PC gets fucked by Rubi
-	//Rubi must have at least a 5" cock
-	//Requires 75 Affection
+	addButtonIfTrue(3, "Release", releaseRubi, "Need to tease [rubi em] first.",
+		flags[kFLAGS.RUBI_BLU_BALLS] > 0 && flags[kFLAGS.RUBI_ORGASM_DENIAL] > 0 && !rubiBimbo() && flags[kFLAGS.RUBI_COCK_SIZE] > 0);
+	addButton(4, "AnalTrain", anallyTrainYourBitchBoySlutHowToBeAnalForDCL)
+		.disableIf(player.cockThatFits(rubiCapacity()) < 0, "Req. a cock fitting " + rubiCapacity() + " capacity.")
+		.disableIf(flags[kFLAGS.RUBI_AFFECTION] < 75, "You don't know [rubi em] well enough!");
 	if (flags[kFLAGS.RUBI_AFFECTION] >= 75 && flags[kFLAGS.RUBI_COCK_SIZE] >= 5)
-		addButton(5, "Get Fucked", getFuckedByRubi);
-	//Hotdogging
-	//PC hotdogs Rubi's ass
-	//PC must have a penis
-	if (player.hasCock()) addButton(6, "Hotdogging", rubiHotdogging);
+		addButton(5, "Get Fucked", getFuckedByRubi)
+			.disableIf(flags[kFLAGS.RUBI_COCK_SIZE] < 5, "Rubi doesn't have big enough cock!")
+			.disableIf(flags[kFLAGS.RUBI_AFFECTION] < 75, "You don't know [rubi em] good enough!");
+	addButton(6, "Hotdogging", rubiHotdogging).disableIf(!player.hasCock(), "Req. a cock!");
 	addButton(14, "Back", rubisFuckingHouseYouPervert);
 }
 
@@ -775,32 +703,26 @@ private function rubiIsAShe():void {
 //There are variants for Normal, Bimbo and Incubus Rubi, as well as smaller variations if you're currently teasing him or not.
 //Fuck Rubi
 //(available for players with cocks or large clits (at least 4</i>\")) (If Orgasm Denial is activated, adds 1 to Blue Balls)
-public function fuckRubi():void {
-	outputText(images.showImage("rubi-fuck"));
-	var x:int;
-	x = player.cockThatFits(rubiCapacity());
-	if(x < 0)
-		x = player.biggestCockIndex();
+public function fuckRubiRouter():void {
 	clearOutput();
-	rubiSprite();
+	if (!player.hasCock()) fuckRubi(-1);
+	else sceneHunter.callFitNofit(fuckRubi, rubiCapacity());
+}
+
+public function fuckRubi(x:int = -1):void {
+	outputText(images.showImage("rubi-fuck"));
 	//(-100 Arousal)
 	outputText("You take Rubi by the hand and head into the bedroom, clutching [rubi em] close.  You sit on the edge of the soft fluffy bed and pull the little demon " + rubiMF("boy","girl") + " onto your lap.  The two of you kiss, letting your " + tongueDescript() + " explore the depths of your partner's mouth.");
 	outputText("\n\nRunning your hands along Rubi's body, you pull and tear at the clothes keeping you apart.  Garments fly as you ravish each other, and it isn't long before you're both naked, with Rubi straddling your waist.  " + rubiMF("He giggles and reaches between his legs","She giggles and reaches between her legs") + ", wrapping slender fingers around your ");
-	if(player.hasCock())
-	{
-		// trace("Rubi - PlayerHasCock");
-		outputText(cockDescript(x));
-	}
-	else
-		outputText(clitDescript());
+	if(player.hasCock()) outputText(cockDescript(x));
+	else outputText(clitDescript());
 	outputText(".");
 
-	var size:int = 0;
-	var cock:Boolean = player.hasCock();
+	var size:int;
 	//(If player cock/clit at or under 4</i>\")
 	if(player.hasCock()) {
 		if(player.cocks[x].cockLength <= 4) size = 0;
-		else if(player.cockThatFits(rubiCapacity()) >= 0) size = 1;
+		else if(player.cockArea(x) < rubiCapacity()) size = 1;
 		else size = 2;
 	}
 	else {
@@ -909,7 +831,7 @@ public function fuckRubi():void {
 	outputText("fantastic babe,</i>\" [rubi ey] murmurs before drifting off into a sex-filled dreamland.");
 
 	outputText("\n\nYou're tempted to drift off as well, but as they say, you've got things to see and people to do.  So you peel yourself away from Rubi, grab a quick shower, and head off back to camp.");
-	player.orgasm();
+	player.sexReward("vaginalFluids", "Dick");
 	doNext(camp.returnToCampUseOneHour);
 	rubiAffection(1);
 	if(flags[kFLAGS.RUBI_ORGASM_DENIAL] > 0) flags[kFLAGS.RUBI_BLU_BALLS]++;
@@ -962,7 +884,7 @@ public function dildoFuckRubi():void {
 	//(Virginity/stretch check!)
 	player.cuntChange(30,true,true,false);
 
-	outputText("\n\nYou let the dildo inch further inside the both of you as you wiggle your way closer to Rubi.  Your little demon partner \"<i>oohs</i>\" and \"<i>aahs</i>\" with every little movement.  You feel the thickness of the toy increasing as more of your bodily juices seep into it.  Wanting a little extra, you reach down and grab the middle of the toy, rocking it back and forth, fucking both you and Rubi at the same time.");
+	outputText("\n\nYou let the dildo inch further inside both of you as you wiggle your way closer to Rubi.  Your little demon partner \"<i>oohs</i>\" and \"<i>aahs</i>\" with every little movement.  You feel the thickness of the toy increasing as more of your bodily juices seep into it.  Wanting a little extra, you reach down and grab the middle of the toy, rocking it back and forth, fucking both you and Rubi at the same time.");
 
 	outputText("\n\nYour body shudders as the warmth grows warmer.  Your body feels so hot, like it's on fire and the only way to quench that fire is orgasm.  Rubi is clutching at pillows, rocking [rubi emself] on the fake pink dong, which only adds fuel to your fire.");
 	//(Orgasm Denial on?)
@@ -1006,7 +928,7 @@ public function dildoFuckRubi():void {
 	//(PC lactating?)
 	if(player.lactationQ() > 0) outputText("  Your breasts shudder and quake as the orgasmic tsunami washes over them, spraying your sweet smelling milk all over yourself, Rubi and the couch.");
 
-	outputText("\n\nAbsolutely exhausted, you lay there limply, as does Rubi, as if you're both afraid to move and potentially awaken the monstrous dildo again.  With a satisfied sigh, however, you sit up and carefully pull out the shrinking dildo from the both of you.  A pink, cum-like liquid pours from both of your abused holes, pooling together into one puddle between you.");
+	outputText("\n\nAbsolutely exhausted, you lay there limply, as does Rubi, as if you're both afraid to move and potentially awaken the monstrous dildo again.  With a satisfied sigh, however, you sit up and carefully pull out the shrinking dildo from both of you.  A pink, cum-like liquid pours from both of your abused holes, pooling together into one puddle between you.");
 
 	outputText("\n\nRubi rubs [rubi eir] ");
 	if(flags[kFLAGS.RUBI_NO_CUNT] == 0) outputText("pussy");
@@ -1096,7 +1018,7 @@ public function teaseRubi():void {
 		outputText("\n\nYou slowly lick your fingers clean and kiss [rubi em], letting [rubi em] taste her own juices.  [rubi Ey] giggles and licks your face clean as well, until not a drop remains.");
 		outputText("\n\nWith your devious fun accomplished, you stand, make yourself look presentable, and head out the door.  Your last sight of Rubi is that of [rubi em] sitting spread eagle on the couch with a supremely satisfied look on [rubi eir] face.");
 	}
-	dynStats("lus", 5+player.lib/10);
+	dynStats("lus", 5+player.lib/10, "scale", false);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -1149,11 +1071,11 @@ public function releaseRubi():void {
 	//(Blueballs 4-5)
 	else if(flags[kFLAGS.RUBI_BLU_BALLS] <= 5) outputText("  It's quickly followed by another, less forceful jet of pearly white cum, then another, and another, each landing closer to [rubi eir] face.  Finally, it gives a few more token jerks, spurting out tiny globules of cum onto the surrounding area.  [rubi Eir] cock twitches and spasms, squirting nothing but air, as if [rubi eir] body is still craving release.");
 	//(Blueballs 6-7)
-	else if(flags[kFLAGS.RUBI_BLU_BALLS] <= 7) outputText("  It's quickly followed by another, more forceful jet of pearly white cum which splatters against the ceiling, dripping down onto the both of you.  Another spurt of cum bursts forth, then another, and another, each one liberally covering Rubi's stomach, chest and face.  [rubi Eir] cock finally gives a few last twitches and spasms, squirting nothing but air, as if [rubi eir] body is still craving release.");
+	else if(flags[kFLAGS.RUBI_BLU_BALLS] <= 7) outputText("  It's quickly followed by another, more forceful jet of pearly white cum which splatters against the ceiling, dripping down onto both of you.  Another spurt of cum bursts forth, then another, and another, each one liberally covering Rubi's stomach, chest and face.  [rubi Eir] cock finally gives a few last twitches and spasms, squirting nothing but air, as if [rubi eir] body is still craving release.");
 	//(Blueballs 8-9)
-	else if(flags[kFLAGS.RUBI_BLU_BALLS] <= 9) outputText("  It's quickly followed by another, more forceful jet of pearly white cum, which splatters against the ceiling, dripping down onto the both of you, and then another, and another.  It isn't long before the ceiling has a huge white cum-covered blotch right above you, drizzling down on you like dew dripping from trees.  Rubi's cock doesn't stop there, however, it continues twitching and spurting [rubi eir] seed until [rubi ey] is completely covered in the stuff.  Finally, mercifully, it ends, though [rubi eir] [rubi cock] continues to spasm, squirting nothing but air, as if [rubi eir] body is still craving release.");
+	else if(flags[kFLAGS.RUBI_BLU_BALLS] <= 9) outputText("  It's quickly followed by another, more forceful jet of pearly white cum, which splatters against the ceiling, dripping down onto both of you, and then another, and another.  It isn't long before the ceiling has a huge white cum-covered blotch right above you, drizzling down on you like dew dripping from trees.  Rubi's cock doesn't stop there, however, it continues twitching and spurting [rubi eir] seed until [rubi ey] is completely covered in the stuff.  Finally, mercifully, it ends, though [rubi eir] [rubi cock] continues to spasm, squirting nothing but air, as if [rubi eir] body is still craving release.");
 	//(Blueballs 10+)
-	else outputText("  It's quickly followed by another, more powerful jet of pearly white cum, which splatters against the ceiling, dripping down onto the both of you, and then another, and another.  It isn't long before the ceiling has a huge white cum-covered blotch right above you, drizzling down on you like dew dripping from the trees.  Rubi's cock doesn't stop there, however, it continues twitching and spurting [rubi eir] seed, liberally covering [rubi em]self, you and the surrounding area until everything appears to be in a white haze.");
+	else outputText("  It's quickly followed by another, more powerful jet of pearly white cum, which splatters against the ceiling, dripping down onto both of you, and then another, and another.  It isn't long before the ceiling has a huge white cum-covered blotch right above you, drizzling down on you like dew dripping from the trees.  Rubi's cock doesn't stop there, however, it continues twitching and spurting [rubi eir] seed, liberally covering [rubi em]self, you and the surrounding area until everything appears to be in a white haze.");
 
 	outputText("\n\nRubi's body visibly relaxes and [rubi eir] limbs go limp, along with [rubi eir] cock, albeit more slowly.  You lick your hands clean and give Rubi a sloppy smooch, to which [rubi ey] coos thankfully.  The release [rubi ey] so desired achieved, [rubi ey] drifts off into an orgasm-induced dream.");
 
@@ -1407,6 +1329,7 @@ private function releaseRubiMassage():void {
 		outputText("\n\nHis cum rolls out of [rubi em] in a thick, white wave, forcefully enough to immediately seep through the towel and voluminous enough that by [rubi eir] third squirt semen is dripping from the fringes of the sodden fabric.  Moaning like a whore, [rubi eir] hands knead your soaked bottom as [rubi eir] body is wracked by paroxysms of pleasure.  Muscles the femboy didn't even know [rubi ey] had are working triple-time to spray [rubi eir] bounty of liquid love out, and as [rubi eir] back arches involuntarily, [rubi eir] spurting jizz-fountain lifts to hose down your back, the cum beading on the oil like rain on glass.  [rubi Eir] balls are shrinking by the second, but the bed is turning into a hot, wet mess along with your body.  You watch as [rubi eir] eyes roll the whole way back, and [rubi eir] tongue lolls from [rubi eir] mouth - Rubi's brain has shut down under the onslaught of [rubi eir] pleasure, leaving [rubi eir] body to jizz on autopilot until [rubi ey] goes dry.");
 		outputText("\n\nSlowly, the flood dies down to a lazy drip, and then, with a whimper, it ends.  Rubi splashes down on your jizz-stained back nervelessly, [rubi eir] hands sinking into the puddles [rubi ey]'s turned the mattress into on either side of you.  You teasingly roll your cheeks from side to side, earning a few last twitches from [rubi eir] spent erection before you pull the exhausted femboy down beside you.  Rubi whimpers as you hug [rubi em] close and kiss [rubi em], ignoring the mess [rubi ey]'s made so that you can simply enjoy the tender moment with your lover.  It looks like you both got what you needed today, though Rubi's going to go through a few more towels before you're fit to depart...");
 	}
+	if (flags[kFLAGS.RUBI_BLU_BALLS] <= 7) sceneHunter.print("You can do better!");
 	flags[kFLAGS.RUBI_ORGASM_DENIAL] = 0;
 	flags[kFLAGS.RUBI_BLU_BALLS] = 0;
 	doNext(camp.returnToCampUseTwoHours);
@@ -1504,8 +1427,28 @@ private function rubiAppearance():void {
 	//[Give Item] [Get Dressed] [Back]
 	menu();
 	addButton(0,"Give Item",pickAnItemToFeedRubi);
-	addButton(1,"Get Dressed",playDressUp);
+	addButton(1,"Gift Dress",pickADressToGiftRubi);
+	addButton(2,"Get Dressed",playDressUp);
 	addButton(4,"Back",rubisFuckingHouseYouPervert);
+}
+
+private function getCloset():Array {
+	return [
+		["A Waitress's Uniform", "Uniform", true, putRubiInAWaitressUniform, null],
+		["Suitclothes", "Suit", flags[kFLAGS.RUBI_SUITCLOTHES], putOnASuitYouSlut, armors.CLSSYCL],
+		["Rubber Fetish Clothes", "Rubber", flags[kFLAGS.RUBI_FETISH_CLOTHES], rubiHasARubberFetish, armors.RBBRCLT],
+		["A Green Adventurer's Outfit", "Green Outfit", flags[kFLAGS.RUBI_GREEN_ADVENTURER], goOnAnAnalAdventureRubiNotReallyJustAnAdventurersOutfit, armors.ADVCLTH],
+		["A Tube Top", "Tube Top", flags[kFLAGS.RUBI_TUBE_TOP], putOnATubeTopYouWhore, armors.TUBETOP],
+		["A Sheer Bodysuit", "Bodysuit", flags[kFLAGS.RUBI_BODYSUIT], putOnMyBodysuitYouWhore, armors.T_BSUIT],
+		["A Long Dress", "Long Dress", flags[kFLAGS.RUBI_LONGDRESS], giveRubiALongDressToHideHerHideousBody, armors.B_DRESS],
+		["A Dashing Outfit With Tight Leather Pants", "DashingOutfit", flags[kFLAGS.RUBI_TIGHT_PANTS], putOnADashingOutfitYouWhore, armors.LTHRPNT],
+		["Nurse's Clothes", "Nurse'sClothes", flags[kFLAGS.RUBI_NURSE_CLOTHES], rubiPutsOnNursesClothesSoSheCanCheckYourTemperature, armors.NURSECL],
+		["Slutty Swimwear", "Swimwear", flags[kFLAGS.RUBI_SWIMWEAR], putOnSluttySwimwearYouSkank, armors.S_SWMWR],
+		["A Bimbo Minidress", "Bimbo Dress", flags[kFLAGS.RUBI_BIMBO_MINIDRESS], putOnADressYouBimbo, armors.BIMBOSK],
+		["Bondage Straps", "Bondage Straps", flags[kFLAGS.RUBI_BONDAGE_STRAPS], putOnBondageStrapsYouBondageTrap, armors.BONSTRP],
+		["An Inquisitor's Corset", "Corset", flags[kFLAGS.RUBI_INQUISITORS_CORSET], whyTheFuckIsRubiWearingAnInquisitorsCorset, armors.I_CORST],
+		["A Risque Waitress's Uniform", "RisqueUniform", flags[kFLAGS.RUBI_AFFECTION] >= 100, putOnAWaitressUniformYouWhore, null], //>=100 - intended, bool check!
+	];
 }
 
 //Get Dressed
@@ -1513,178 +1456,18 @@ private function playDressUp():void {
 	clearOutput();
 	rubiSprite();
 	outputText("You look over Rubi's vast collection of clothes.  What outfit would you like Rubi to put on?\n\n");
+	var closet:Array = getCloset();
+	//There's only 14! We can do it with one page.
+	var btn:int = 0;
+	outputText("<b>Rubi's Closet Contains:</b>\n");
 	menu();
-	var closet:Array = [];
-	var buttonNames:Array = [];
-	if(flags[kFLAGS.RUBI_SUITCLOTHES] == 1) {
-		closet[closet.length] = "Suitclothes";
-		buttonNames[buttonNames.length] = "Suit";
-	}
-	if(flags[kFLAGS.RUBI_FETISH_CLOTHES] == 1) {
-		closet[closet.length] = "Rubber Fetish Clothes";
-		buttonNames[buttonNames.length] = "Rubber";
-	}
-	if(flags[kFLAGS.RUBI_GREEN_ADVENTURER] == 1) {
-		closet[closet.length] = "A Green Adventurer's Outfit";
-		buttonNames[buttonNames.length] = "Green Outfit";
-	}
-	if(flags[kFLAGS.RUBI_TUBE_TOP] == 1) {
-		closet[closet.length] = "A Tube Top";
-		buttonNames[buttonNames.length] = "Tube Top";
-	}
-	if(flags[kFLAGS.RUBI_BODYSUIT] == 1) {
-		closet[closet.length] = "A Sheer Bodysuit";
-		buttonNames[buttonNames.length] = "Bodysuit";
-	}
-	if(flags[kFLAGS.RUBI_LONGDRESS] == 1) {
-		//trace("PRE-CRASH");
-		closet[closet.length] = "A Long Dress";
-		buttonNames[buttonNames.length] = "Long Dress";
-	}
-	if(flags[kFLAGS.RUBI_TIGHT_PANTS] == 1) {
-		closet[closet.length] = "A Dashing Outfit With Tight Leather Pants";
-		buttonNames[buttonNames.length] = "DashingOutfit";
-	}
-	if(flags[kFLAGS.RUBI_NURSE_CLOTHES] == 1) {
-		closet[closet.length] = "Nurse's Clothes";
-		buttonNames[buttonNames.length] = "Nurse'sClothes";
-	}
-	//(Slutty Swimwear (Normal))
-	if(flags[kFLAGS.RUBI_SWIMWEAR] == 1) {
-		closet[closet.length] = "Slutty Swimwear";
-		buttonNames[buttonNames.length] = "Swimwear";
-	}
-	if(flags[kFLAGS.RUBI_BIMBO_MINIDRESS] == 1) {
-		closet[closet.length] = "A Bimbo Minidress";
-		buttonNames[buttonNames.length] = "Bimbo Dress";
-	}
-	if(flags[kFLAGS.RUBI_BONDAGE_STRAPS] == 1) {
-		closet[closet.length] = "Bondage Straps";
-		buttonNames[buttonNames.length] = "Bondage Straps";
-	}
-	if(flags[kFLAGS.RUBI_INQUISITORS_CORSET] == 1) {
-		closet[closet.length] = "An Inquisitor's Corset";
-		buttonNames[buttonNames.length] = "Corset";
-	}
-	//RIsque waitress uniform
-	if(flags[kFLAGS.RUBI_AFFECTION] >= 100) {
-		closet[closet.length] = "A Risque Waitress's Uniform";
-		buttonNames[buttonNames.length] = "RisqueUniform";
-	}
-	closet[closet.length] = "Rubi's Waitress's Uniform";
-	if(closet.length > 0) {
-		outputText("<b>Rubi's Closet Contains:</b>\n");
-		for each (var item:String in closet){
-			outputText(item+"\n");
+	for each (var item:Array in closet) {
+		if (item[2]) {
+			outputText(item[0] + "\n");
+			addButton(btn++, item[1], item[3]);
 		}
-		outputText("\n");
 	}
-	var button:int = 0;
-	while(button < 14 && button < buttonNames.length) {
-		trace("BUTTONNAMES: " + buttonNames[button]);
-		trace("CLOSET: " + closet[button]);
-		if(button < 13 || closet.length < 14) addButton(button,buttonNames[button],dressUpRouter,closet[button]);
-		else addButton(13,"More",playDressUp2);
-		button++;
-	}
-	addButton(14,"Back",rubiAppearance);
-}
-private function playDressUp2():void {
-	clearOutput();
-	rubiSprite();
-	outputText("You look over Rubi's vast collection of clothes.  What outfit would you like Rubi to put on?\n\n");
-	menu();
-	var closet:Array = [];
-	var buttonNames:Array = [];
-	if(flags[kFLAGS.RUBI_SUITCLOTHES] == 1) {
-		closet[closet.length] = "Suitclothes";
-		buttonNames[buttonNames.length] = "Suit";
-	}
-	if(flags[kFLAGS.RUBI_FETISH_CLOTHES] == 1) {
-		closet[closet.length] = "Rubber Fetish Clothes";
-		buttonNames[buttonNames.length] = "Rubber";
-	}
-	if(flags[kFLAGS.RUBI_GREEN_ADVENTURER] == 1) {
-		closet[closet.length] = "A Green Adventurer's Outfit";
-		buttonNames[buttonNames.length] = "Green Outfit";
-	}
-	if(flags[kFLAGS.RUBI_TUBE_TOP] == 1) {
-		closet[closet.length] = "A Tube Top";
-		buttonNames[buttonNames.length] = "Tube Top";
-	}
-	if(flags[kFLAGS.RUBI_BODYSUIT] == 1) {
-		closet[closet.length] = "A Sheer Bodysuit";
-		buttonNames[buttonNames.length] = "Bodysuit";
-	}
-	if(flags[kFLAGS.RUBI_LONGDRESS] == 1) {
-		closet[closet.length] = "A Long Dress";
-		buttonNames[buttonNames.length] = "Long Dress";
-	}
-	if(flags[kFLAGS.RUBI_TIGHT_PANTS] == 1) {
-		closet[closet.length] = "A Dashing Outfit With Tight Leather Pants";
-		buttonNames[buttonNames.length] = "DashingOutfit";
-	}
-	if(flags[kFLAGS.RUBI_NURSE_CLOTHES] == 1) {
-		closet[closet.length] = "Nurse's Clothes";
-		buttonNames[buttonNames.length] = "Nurse'sClothes";
-	}
-	//(Slutty Swimwear (Normal))
-	if(flags[kFLAGS.RUBI_SWIMWEAR] == 1) {
-		closet[closet.length] = "Slutty Swimwear";
-		buttonNames[buttonNames.length] = "Swimwear";
-	}
-	if(flags[kFLAGS.RUBI_BIMBO_MINIDRESS] == 1) {
-		closet[closet.length] = "A Bimbo Minidress";
-		buttonNames[buttonNames.length] = "Bimbo Dress";
-	}
-	if(flags[kFLAGS.RUBI_BONDAGE_STRAPS] == 1) {
-		closet[closet.length] = "Bondage Straps";
-		buttonNames[buttonNames.length] = "Bondage Straps";
-	}
-	if(flags[kFLAGS.RUBI_INQUISITORS_CORSET] == 1) {
-		closet[closet.length] = "An Inquisitor's Corset";
-		buttonNames[buttonNames.length] = "Corset";
-	}
-	//RIsque waitress uniform
-	if(flags[kFLAGS.RUBI_AFFECTION] >= 100) {
-		closet[closet.length] = "A Risque Waitress's Uniform";
-		buttonNames[buttonNames.length] = "RisqueUniform";
-	}
-	if(closet.length > 0) {
-		outputText("<b>Rubi's Closet Contains:</b>\n");
-		for each (var item:String in closet){
-			outputText(item+"\n");
-		}
-		outputText("\n");
-	}
-	var button:int = 12;
-	while(button-12 < 14 && button < buttonNames.length) {
-		if(button == 12) addButton(0,"Previous",playDressUp);
-		else if(button <= closet.length) addButton(button-7,buttonNames[button],dressUpRouter,closet[button]);
-		button++;
-	}
-	addButton(14,"Back",rubiAppearance);
-}
-
-private function dressUpRouter(arg:String):void {
-	clearOutput();
-	rubiSprite();
-	if(arg == "Suitclothes") putOnASuitYouSlut();
-	else if(arg == "A Waitress's Uniform") putRubiInAWaitressUniform();
-	else if(arg == "Rubber Fetish Clothes") rubiHasARubberFetish();
-	else if(arg == "A Green Adventurer's Outfit") goOnAnAnalAdventureRubiNotReallyJustAnAdventurersOutfit();
-	else if(arg == "A Tube Top") putOnATubeTopYouWhore();
-	else if(arg == "A Sheer Bodysuit") putOnMyBodysuitYouWhore();
-	else if(arg == "A Long Dress") giveRubiALongDressToHideHerHideousBody();
-	else if(arg == "A Dashing Outfit With Tight Leather Pants") putOnADashingOutfitYouWhore();
-	else if(arg == "Nurse's Clothes") rubiPutsOnNursesClothesSoSheCanCheckYourTemperature();
-	else if(arg == "Slutty Swimwear") putOnSluttySwimwearYouSkank();
-	else if(arg == "A Bimbo Minidress") putOnADressYouBimbo();
-	else if(arg == "Bondage Straps") putOnBondageStrapsYouBondageTrap();
-	else if(arg == "An Inquisitor's Corset") whyTheFuckIsRubiWearingAnInquisitorsCorset();
-	else if(arg == "A Risque Waitress's Uniform") putOnAWaitressUniformYouWhore();
-	else if(arg == "An Adventurer's Outfit") goOnAnAnalAdventureRubiNotReallyJustAnAdventurersOutfit();
-
+	addButton(14, "Back", rubiAppearance);
 }
 
 //Waitress Uniform
@@ -2195,6 +1978,7 @@ private function barDate():void {
 //Must have a cock greater than Rubi's capacity.
 //Rubi's capacity won't go larger than 100.
 private function anallyTrainYourBitchBoySlutHowToBeAnalForDCL():void {
+	var x1:int = player.cockThatFits(rubiCapacity()) + 1;
 	clearOutput();
 	rubiSprite();
 	flags[kFLAGS.RUBI_TIMES_ANALLY_TRAINED]++;
@@ -2351,18 +2135,18 @@ private function anallyTrainYourBitchBoySlutHowToBeAnalForDCL():void {
 
 		outputText("\n\nRubi's breath grows more and more ragged as [rubi ey] gyrates [rubi eir] hips around on the dildo.  Breathy, primal moans escape [rubi eir] lips.  You've never seen [rubi em] this turned on before.  It must be something in the lube, or maybe [rubi ey] is really just an exhibitionist, getting off by putting this show on for you.  Either way, you're not exactly complaining, especially when [rubi eir] hands suddenly dart towards your [armor] grasping madly for the prize hidden within.");
 
-		outputText("\n\nNot one to disappoint, especially such an eager slut, you disrobe as quickly as you can manage, settling back into position in front of Rubi.  [EachCock] bobs to attention immediately.  [rubi Ey] wastes no time.  Leaning forward, [rubi ey] grasps the base with one hand, while guiding the [cockHead biggest] to [rubi eir] mouth with the other.");
+		outputText("\n\nNot one to disappoint, especially such an eager slut, you disrobe as quickly as you can manage, settling back into position in front of Rubi.  [EachCock] bobs to attention immediately.  [rubi Ey] wastes no time.  Leaning forward, [rubi ey] grasps the base with one hand, while guiding the [cockHead "+x1+"] to [rubi eir] mouth with the other.");
 
-		outputText("\n\nA warm sensation rolls over you as the demon-morph's tongue makes contact.  Soft and wet, it rolls around the tip of your cock like a wave.  A sex-starved, hungry wave.  The sensual, velvety wave is followed up by a pair of lips wrapping around your tremendous manhood, clamping down like a vice.  Rubi sucks, drawing what seems like all the blood from your body right to the tip of your dick, enhancing all the sensations assaulting your brain a hundred fold.");
+		outputText("\n\nA warm sensation rolls over you as the demon-morph's tongue makes contact.  Soft and wet, it rolls around the tip of your cock like a wave.  A sex-starved, hungry wave.  The sensual, velvety wave is followed up by a pair of lips wrapping around your tremendous manhood, clamping down like a vice.  Rubi sucks, drawing what seems like all the blood from your body right to the tip of your dick, enhancing all the sensations assaulting your brain a hundred-fold.");
 
-		outputText("\n\nAs the wanton slut between your legs goes to work, you notice the small air pump for [rubi eir] dildo laying next to you.  A devilish smile crosses your face.  With Rubi's eyes closed, [rubi eir] head bobbing up and down on your [cock biggest], [rubi ey] doesn't notice you take hold of it.  [rubi Ey] does notice, however, when you give it a light squeeze.  No doubt the knot firmly lodged in [rubi eir] ");
+		outputText("\n\nAs the wanton slut between your legs goes to work, you notice the small air pump for [rubi eir] dildo laying next to you.  A devilish smile crosses your face.  With Rubi's eyes closed, [rubi eir] head bobbing up and down on your [cock "+x1+"], [rubi ey] doesn't notice you take hold of it.  [rubi Ey] does notice, however, when you give it a light squeeze.  No doubt the knot firmly lodged in [rubi eir] ");
 		if(flags[kFLAGS.RUBI_NO_CUNT] == 1) outputText("anus");
 		else outputText("cunt");
 		outputText(" just widened slightly.  Rubi's eye go wide as [rubi ey] looks up at you with a mouth full of cock, moaning something you can't understand.");
 
 		outputText("\n\nYou wonder if [rubi ey] wants you to pump it again.  So you do.  Rubi's mouth vibrates around your cock as [rubi ey] moans louder, [rubi eir] eyes beginning to roll back into [rubi eir] head.  Another pump.  ");
 		if(flags[kFLAGS.RUBI_COCK_SIZE] > 0) outputText("You can feel your lover's cock straining against your leg, aching for some release.  You idly press your foot against it, feeling a slick layer of precum coating it from top to bottom already.  ");
-		outputText("A pleading look enters Rubi's eyes.  You hold up the pump and ask [rubi em] if [rubi ey] wants you to use it again.  [rubi Ey] gives [rubi eir] head a quick nod of assent, and reaffirms this by taking your [cock biggest] even deeper into [rubi eir] mouth.");
+		outputText("A pleading look enters Rubi's eyes.  You hold up the pump and ask [rubi em] if [rubi ey] wants you to use it again.  [rubi Ey] gives [rubi eir] head a quick nod of assent, and reaffirms this by taking your [cock "+x1+"] even deeper into [rubi eir] mouth.");
 
 		outputText("\n\nYou give it a quick pump, followed by a second, final one.  Rubi's ");
 
@@ -2394,7 +2178,7 @@ private function anallyTrainYourBitchBoySlutHowToBeAnalForDCL():void {
 		else outputText("feathered ear");
 		outputText(" that [rubi ey] should keep that in for a few hours, just to make sure this training takes hold.  Rubi gives you a small smile in response along with a small peck on the cheek before slipping under the sheets for a quick nap.");
 		outputText("\n\nYou decide this is the best time to head out as well, and make your way out of the apartment and back to camp.");
-		player.orgasm();
+		player.sexReward();
 	}
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -2499,7 +2283,7 @@ private function getFuckedByRubi():void {
 	outputText("Rubi doesn't stop there, however; [rubi ey] continues to assail your [vagOrAss], bringing you to several more miniature, body-shaking orgasms, until [rubi ey] just can't handle any more, and [rubi ey] pulls out, [rubi eir] cock still rather erect and looking cozy in its jacket-like foreskin.");
 
 	outputText("\n\nYou waggle a finger at [rubi em] hazily, and [rubi ey] climbs up onto the bed next to you.  You wrap your arms around [rubi em] and kiss [rubi em] passionately before pulling [rubi em] into a cuddling hug.  The two of you drift off into a short nap, contentedly wrapped up in each other's arms.");
-	player.orgasm();
+	player.sexReward("cum", "VaginalAnal");
 	dynStats("sen", 2);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -2564,7 +2348,7 @@ private function rubiHotdogging():void {
 	outputText(".");
 
 	outputText("\n\nYou think to yourself.  You could keep teasing [rubi em] like this, without letting [rubi em] cum, as [rubi ey] obviously delights in the feelings.  Or you could be generous and let [rubi em] pop [rubi eir] load right now... Which will it be?");
-	dynStats("lus=", player.maxLust(), "scale", false);
+	dynStats("lus=", player.maxOverLust(), "scale", false);
 	menu();
 	//[Tease] [Pop]
 	addButton(0,"Tease Rubi",teaseButtjobs);
@@ -2602,7 +2386,7 @@ private function teaseButtjobs():void {
 	outputText("\n\n\"<i>No, babe, I'm lucky to have found you,</i>\" [rubi ey] says, snuggling [rubi eir] naked body up against yours as the two of you drift off into a lazy, sex-induced nap.");
 	flags[kFLAGS.RUBI_BLU_BALLS]++;
 	flags[kFLAGS.RUBI_ORGASM_DENIAL] = 1;
-	player.orgasm();
+	player.sexReward("no", "Dick");
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -2652,7 +2436,7 @@ private function popButtjobs():void {
 	outputText("You laugh and give the demon-" + rubiMF("boy","girl") + " a kiss, remarking how lucky you are to be with [rubi em].");
 
 	outputText("\n\n\"<i>No, babe, I'm lucky to have found you,</i>\" [rubi ey] says, snuggling [rubi eir] naked body up against yours as the two of you drift off into a lazy, sex-induced nap.");
-	player.orgasm();
+	player.sexReward("cum", "Default");
 	flags[kFLAGS.RUBI_BLU_BALLS] = 0; //Since he just came so he should be cured of blue balls
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -3170,423 +2954,43 @@ private function rubiPenisReducto():void {
 	//Go back to item giving menu!
 }
 
+private function pickADressToGiftRubi():void {
+	clearOutput();
+	var closet:Array = getCloset();
+	var btn:int = 0;
+	outputText("<b>Rubi's Closet Contains:</b>\n");
+	menu();
+	for each (var item:Array in closet) {
+		if (item[2]) outputText(item[0] + "\n"); //Present
+		else if (item[4]) addButton(btn++, item[1], giveRubiClothes, item[4]).disableIf(!player.hasItem(item[4])); //not null - can gift!
+	}
+	if (btn == 0) { //no buttons = no Gifts!
+		outputText("\n\nYou've given Rubi all the clothes [rubi ey] would want to make use of.");
+		awardAchievement("Dress-tacular", kACHIEVEMENTS.GENERAL_DRESSTACULAR);
+		outputText("\n\n");
+	}
+	addButton(14, "Back", rubiAppearance);
+}
+
 //Give Item.
 private function pickAnItemToFeedRubi():void {
 	clearOutput();
-	rubiSprite();
 	var button:int = 0;
-	var closet:Array = [];
-	var gifts:Array = [];
 	menu();
-	if (flags[kFLAGS.RUBI_SUITCLOTHES] == 1)
-		closet[closet.length] = "Suitclothes";
-	else {
-		gifts.push("Suitclothes");
-		if (player.hasItem(armors.CLSSYCL)) addButton(button++, "Suitclothes", giveRubiClothes, armors.CLSSYCL);
-	}
-	
-	if (flags[kFLAGS.RUBI_FETISH_CLOTHES] == 1)
-		closet[closet.length] = "Rubber Fetish Clothes";
-	else {
-		gifts.push("Rubber Fetish Clothes");
-		if (player.hasItem(armors.RBBRCLT)) addButton(button++, "Rubberclothes", giveRubiClothes, armors.RBBRCLT);
-	}
-	
-	if (flags[kFLAGS.RUBI_GREEN_ADVENTURER] == 1)
-		closet[closet.length] = "A Green Adventurer's Outfit";
-	else {
-		gifts.push("A Green Adventurer's Outfit");
-		if (player.hasItem(armors.ADVCLTH)) addButton(button++, "Green Clothes", giveRubiClothes, armors.ADVCLTH);
-	}
-	
-	if (flags[kFLAGS.RUBI_TUBE_TOP] == 1)
-		closet[closet.length] = "A Tube Top";
-	else {
-		gifts.push("A Tube Top");
-		if (player.hasItem(armors.TUBETOP)) addButton(button++, "Tube Top", giveRubiClothes, armors.TUBETOP);
-	}
-	
-	if (flags[kFLAGS.RUBI_BODYSUIT] == 1)
-		closet[closet.length] = "A Sheer Bodysuit";
-	else {
-		gifts.push("A Sheer Bodysuit");
-		if (player.hasItem(armors.T_BSUIT)) addButton(button++, "Bodysuit", giveRubiClothes, armors.T_BSUIT);
-	}
-	
-	if (flags[kFLAGS.RUBI_LONGDRESS] == 1)
-		closet[closet.length] = "A Long Dress";
-	else {
-		gifts.push("A Long Dress");
-		if (player.hasItem(armors.B_DRESS)) addButton(button++, "Long Dress", giveRubiClothes, armors.B_DRESS);
-	}
-	
-	if (flags[kFLAGS.RUBI_TIGHT_PANTS] == 1)
-		closet[closet.length] = "A Dashing Outfit With Tight Leather Pants";
-	else {
-		gifts.push("A Dashing Outfit With Tight Leather Pants");
-		if (player.hasItem(armors.LTHRPNT)) addButton(button++, "Leather Pants", giveRubiClothes, armors.LTHRPNT);
-	}
-	
-	if (flags[kFLAGS.RUBI_NURSE_CLOTHES] == 1)
-		closet[closet.length] = "Nurse's Clothes";
-	else {
-		gifts.push("Nurse's Clothes");
-		if (player.hasItem(armors.NURSECL)) addButton(button++, "Nurse Clothes", giveRubiClothes, armors.NURSECL);
-	}
-	
-	if (flags[kFLAGS.RUBI_SWIMWEAR] == 1)
-		closet[closet.length] = "Slutty Swimwear";
-	else {
-		gifts.push("Slutty Swimwear");
-		if (player.hasItem(armors.S_SWMWR)) addButton(button++, "SluttySwim", giveRubiClothes, armors.S_SWMWR);
-	}
-	
-	if (flags[kFLAGS.RUBI_BIMBO_MINIDRESS] == 1)
-		closet[closet.length] = "A Bimbo Minidress";
-	else {
-		gifts.push("A Bimbo Minidress"); //No button, must be found in a special event
-		if (player.hasItem(armors.BIMBOSK)) addButton(button++, "BimboSk", giveRubiClothes, armors.BIMBOSK);
-	}
-	if (flags[kFLAGS.RUBI_BONDAGE_STRAPS] == 1)
-		closet[closet.length] = "Bondage Straps";
-	else {
-		gifts.push("Bondage Straps");
-		if (player.hasItem(armors.BONSTRP)) addButton(button++, "Bondage S.", giveRubiClothes, armors.BONSTRP);
-	}
-	
-	if (flags[kFLAGS.RUBI_INQUISITORS_CORSET] == 1)
-		closet[closet.length] = "An Inquisitor's Corset";
-	else {
-		gifts.push("An Iquisitor's Corset");
-		if (player.hasItem(armors.I_CORST)) addButton(button++, "I. Corset", giveRubiClothes, armors.I_CORST);
-	}
-	
-	if (flags[kFLAGS.RUBI_AFFECTION] >= 100)
-		closet[closet.length] = "A Risque Waitress's Uniform";
-	else
-		gifts.push("A Risque Waitress's Uniform");
-	
-	if (closet.length > 0) {
-		outputText("<b>Rubi's Closet:</b>");
-		for (var x:int = 0; x < closet.length; x++) outputText("\n" + closet[x]);
-		outputText("\n\n");
-	}
-	
-	if (gifts.length > 0) {
-		outputText("After a quick glance around Rubi's things, you bet [rubi ey] could really use... " + gifts[rand(gifts.length)] + ".\n\n");
-	}
-	else {
-		outputText("You've given Rubi all the clothes [rubi ey] would want to make use of.");
-		if (silly()) outputText("  (Achievement Unlocked: Dress-tacular)");
-		awardAchievement("Dress-tacular", kACHIEVEMENTS.GENERAL_DRESSTACULAR);
-		outputText("\n\n");
-	}
-	
-	if (!rubiBimbo() && !rubiIncubus() && rubiAffection() >= 100) {
-		outputText("You could give Rubi some incubi draft to make [rubi em] a little more manly but corrupt, or you could give Rubi a Bimbo Draft to turn [rubi em] into a smoking hot, female sex-bomb.\n\n");
-	}
+	if (!rubiBimbo() && !rubiIncubus() && rubiAffection() >= 100)
+		outputText("\n\nYou could give Rubi some incubi draft to make [rubi em] a little more manly but corrupt, or you could give Rubi a Bimbo Draft to turn [rubi em] into a smoking hot, female sex-bomb.\n\n");
 	outputText("What will you give [rubi em]?");
-	if (player.hasItem(consumables.BIMBOLQ) && !rubiBimbo()) addButton(button++, "Bimbo Liq", giveRubiATFItem, consumables.BIMBOLQ);
-	if (player.hasItem(consumables.INCUBID)) addButton(button++, "Incubi Draft", giveRubiATFItem, consumables.INCUBID);
-	if (player.hasItem(consumables.P_DRAFT)) addButton(button++, "Pure Draft", giveRubiATFItem, consumables.P_DRAFT);
-	if (player.hasItem(consumables.SUCMILK)) addButton(button++, "Sucb Milk", giveRubiATFItem, consumables.SUCMILK);
-	if (player.hasItem(consumables.P_S_MLK)) addButton(button++, "PureScbMlk", giveRubiATFItem, consumables.P_S_MLK);
-	if (player.hasItem(consumables.PURPEAC, 5)) addButton(button++, "Pure Peach", giveRubiATFItem, consumables.PURPEAC);
-	if (player.hasItem(consumables.EQUINUM)) addButton(button++, "Equinum", giveRubiATFItem, consumables.EQUINUM);
-	if (player.hasItem(consumables.W_FRUIT)) addButton(button++, "Whsk.Fruit", giveRubiATFItem, consumables.W_FRUIT);
-	if (player.hasItem(consumables.REDUCTO)) addButton(button++, "Reducto", giveRubiATFItem, consumables.REDUCTO);
-	if (player.hasItem(consumables.GROPLUS)) addButton(button++, "Gro Plus", giveRubiATFItem, consumables.GROPLUS);
-	if (player.hasItem(consumables.TRAPOIL)) addButton(button++, "Trap Oil", giveRubiATFItem, consumables.TRAPOIL);
-	addButton(9, "Back", rubiAppearance);
-
-	
-	
-/*	
-	var closet:Array = [];
-	var gifts:Array = [];
-	var buttonNames:Array = [];
-
-	if (flags[kFLAGS.RUBI_SUITCLOTHES] == 1)
-	{
-		closet[closet.length] = "Suitclothes";
-	}
-	else
-	{
-		gifts.push("Suitclothes");
-	}
-
-	if (flags[kFLAGS.RUBI_FETISH_CLOTHES] == 1)
-	{
-		closet[closet.length] = "Rubber Fetish Clothes";
-	}
-	else
-	{
-		gifts.push("Rubber Fetish Clothes");
-	}
-
-	if (flags[kFLAGS.RUBI_GREEN_ADVENTURER] == 1)
-	{
-		closet[closet.length] = "A Green Adventurer's Outfit";
-	}
-	else
-	{
-		gifts.push("A Green Adventurer's Outfit");
-	}
-
-	if (flags[kFLAGS.RUBI_TUBE_TOP] == 1)
-	{
-		closet[closet.length] = "A Tube Top";
-	}
-	else
-	{
-		gifts.push("A Tube Top");
-	}
-
-	if (flags[kFLAGS.RUBI_BODYSUIT] == 1)
-	{
-		closet[closet.length] = "A Sheer Bodysuit";
-	}
-	else
-	{
-		gifts.push("A Sheer Bodysuit");
-	}
-
-	if (flags[kFLAGS.RUBI_LONGDRESS] == 1)
-	{
-		// trace("PRE-CRASH");
-		closet[closet.length] = "A Long Dress";
-	}
-	else
-	{
-		gifts.push("A Long Dress");
-	}
-
-	if (flags[kFLAGS.RUBI_TIGHT_PANTS] == 1)
-	{
-		closet[closet.length] = "A Dashing Outfit With Tight Leather Pants";
-	}
-	else
-	{
-		gifts.push("A Dashing Outfit With Tight Leather Pants");
-	}
-
-	if (flags[kFLAGS.RUBI_NURSE_CLOTHES] == 1)
-	{
-		closet[closet.length] = "Nurse's Clothes";
-	}
-	else
-	{
-		gifts.push("Nurse's Clothes");
-	}
-
-	//(Slutty Swimwear (Normal))
-	if (flags[kFLAGS.RUBI_SWIMWEAR] == 1)
-	{
-		closet[closet.length] = "Slutty Swimwear";
-	}
-	else
-	{
-		gifts.push("Slutty Swimwear");
-	}
-
-	if (flags[kFLAGS.RUBI_BIMBO_MINIDRESS] == 1)
-	{
-		closet[closet.length] = "A Bimbo Minidress";
-	}
-	else
-	{
-		gifts.push("A Bimbo Minidress");
-	}
-
-	if (flags[kFLAGS.RUBI_BONDAGE_STRAPS] == 1)
-	{
-		closet[closet.length] = "Bondage Straps";
-	}
-	else
-	{
-		gifts.push("Bondage Straps");
-	}
-
-	if (flags[kFLAGS.RUBI_INQUISITORS_CORSET] == 1)
-	{
-		closet[closet.length] = "An Inquisitor's Corset";
-	}
-	else
-	{
-		gifts.push("An Iquisitor's Corset");
-	}
-
-	//RIsque waitress uniform
-	if (flags[kFLAGS.RUBI_AFFECTION] >= 100)
-	{
-		closet[closet.length] = "A Risque Waitress's Uniform";
-	}
-	else
-	{
-		gifts.push("A Risque Waitress's Uniform");
-	}
-
-	if(closet.length > 0) {
-		outputText("<b>Rubi's Closet:</b>\n");
-		temp = 0;
-		while(temp < closet.length) {
-			outputText(closet[temp] + "\n");
-			temp++;
-		}
-		outputText("\n");
-	}
-
-	if(gifts.length > 0) {
-		outputText("After a quick glance around Rubi's things, you bet [rubi ey] could really use... " + gifts[rand(gifts.length)] + ".\n\n");
-	}
-	else {
-		outputText("You've given Rubi all the clothes [rubi ey] would want to make use of.");
-		if (silly()) outputText("  (Achievement Unlocked: Dress-tacular)");
-		awardAchievement("Dress-tacular", kACHIEVEMENTS.GENERAL_DRESSTACULAR);
-		outputText("\n\n");
-	}
-
-	if(!rubiBimbo() && !rubiIncubus() && rubiAffection() >= 100) {
-		outputText("You could give Rubi some incubi draft to make [rubi em] a little more manly but corrupt, or you could give Rubi a Bimbo Draft to turn [rubi em] into a smoking hot, female sex-bomb.\n\n");
-	}
-	outputText("What will you give [rubi em]?");
-	//The following items can be given to Rubi at Relationship 20+: Suit Clothes, Rubber Fetish Outfit, Green Adventurer's Clothing, Tube Top, Bodysuit, Long Dress, Tight Leather Pants, Nurse Clothes, Slutty Swimwear.  Only once per item.
-	//The following items can be given to Rubi at Relationship 40+: Bimbo Liqueur (once), Incubus Draft (up to three times).  Incubus Rubi can't be given Bimbo Liqueur, and likewise Bimbo Rubi can't be given Incubus Draft.
-	var events:Array = [];
-	var functions:Array = [];
-	if(player.hasItem(armors.CLSSYCL) && flags[kFLAGS.RUBI_SUITCLOTHES] == 0) {
-		events[events.length] = 3879;
-		functions[functions.length] = eventParser;
-	}
-	if(player.hasItem(armors.RBBRCLT) && flags[kFLAGS.RUBI_FETISH_CLOTHES] == 0) {
-		events[events.length] = 3880;
-		functions[functions.length] = eventParser;
-	}
-	if(player.hasItem(armors.ADVCLTH) && flags[kFLAGS.RUBI_GREEN_ADVENTURER] == 0) {
-		events[events.length] = 3881;
-		functions[functions.length] = eventParser;
-	}
-	if(player.hasItem(armors.TUBETOP) && flags[kFLAGS.RUBI_TUBE_TOP] == 0) {
-		events[events.length] = 3882;
-		functions[functions.length] = eventParser;
-	}
-	if(player.hasItem(armors.T_BSUIT) && flags[kFLAGS.RUBI_BODYSUIT] == 0) {
-		events[events.length] = 3883;
-		functions[functions.length] = eventParser;
-	}
-	if(player.hasItem(armors.B_DRESS) && flags[kFLAGS.RUBI_LONGDRESS] == 0) {
-		events[events.length] = 3884;
-		functions[functions.length] = eventParser;
-	}
-	if(player.hasItem(armors.LTHRPNT) && flags[kFLAGS.RUBI_TIGHT_PANTS] == 0) {
-		events[events.length] = 3885;
-		functions[functions.length] = eventParser;
-	}
-	if(player.hasItem(armors.NURSECL) && flags[kFLAGS.RUBI_NURSE_CLOTHES] == 0) {
-		events[events.length] = 3886;
-		functions[functions.length] = eventParser;
-	}
-	if(player.hasItem(armors.S_SWMWR) && flags[kFLAGS.RUBI_SWIMWEAR] == 0) {
-		events[events.length] = 3887;
-		functions[functions.length] = eventParser;
-	}
-	if(player.hasItem(armors.BONSTRP) && flags[kFLAGS.RUBI_BONDAGE_STRAPS] == 0) {
-		events[events.length] = armors.BONSTRP;
-		functions[functions.length] = giveRubiClothes;
-	}
-	if(player.hasItem(armors.I_CORST) && flags[kFLAGS.RUBI_INQUISITORS_CORSET] == 0) {
-		events[events.length] = armors.I_CORST;
-		functions[functions.length] = giveRubiClothes;
-	}
-
-	if(player.hasItem(consumables.BIMBOLQ) && !rubiBimbo()) {
-		events[events.length] = consumables.BIMBOLQ;
-		functions[functions.length] = giveRubiATFItem;
-	}
-	if(player.hasItem(consumables.INCUBID)) {
-		events[events.length] = consumables.INCUBID;
-		functions[functions.length] = giveRubiATFItem;
-	}
-	if(player.hasItem(consumables.P_DRAFT)) {
-		events[events.length] = consumables.P_DRAFT;
-		functions[functions.length] = giveRubiATFItem;
-	}
-	if(player.hasItem(consumables.SUCMILK)) {
-		events[events.length] = consumables.SUCMILK;
-		functions[functions.length] = giveRubiATFItem;
-	}
-	if(player.hasItem(consumables.P_S_MLK)) {
-		events[events.length] = consumables.P_S_MLK;
-		functions[functions.length] = giveRubiATFItem;
-	}
-	if(player.hasItem(consumables.PURPEAC,5)) {
-		events[events.length] = consumables.PURPEAC;
-		functions[functions.length] = giveRubiATFItem;
-	}
-	if(player.hasItem(consumables.EQUINUM)) {
-		events[events.length] = consumables.EQUINUM;
-		functions[functions.length] = giveRubiATFItem;
-	}
-	if(player.hasItem(consumables.W_FRUIT)) {
-		events[events.length] = consumables.W_FRUIT;
-		functions[functions.length] = giveRubiATFItem;
-	}
-	if(player.hasItem(consumables.REDUCTO)) {
-		events[events.length] = consumables.REDUCTO;
-		functions[functions.length] = giveRubiATFItem;
-	}
-	if(player.hasItem(consumables.GROPLUS)) {
-		events[events.length] = consumables.GROPLUS;
-		functions[functions.length] = giveRubiATFItem;
-	}
-	if(player.hasItem(consumables.TRAPOIL)) {
-		events[events.length] = consumables.TRAPOIL;
-		functions[functions.length] = giveRubiATFItem;
-	}
-	while(events.length < 10) {
-		events[events.length] = 0;
-	}
-	var eventNames:Array = [];
-	temp = 0;
-	while(temp < 10) {
-		if(events[temp] == 3879) eventNames[eventNames.length] = "Suitclothes";
-		else if(events[temp] == 3880) eventNames[eventNames.length] = "Rubberclothes";
-		else if(events[temp] == 3881) eventNames[eventNames.length] = "Green Clothes";
-		else if(events[temp] == 3882) eventNames[eventNames.length] = "Tube Top";
-		else if(events[temp] == 3883) eventNames[eventNames.length] = "Bodysuit";
-		else if(events[temp] == 3884) eventNames[eventNames.length] = "Long Dress";
-		else if(events[temp] == 3885) eventNames[eventNames.length] = "Leather Pants";
-		else if(events[temp] == 3886) eventNames[eventNames.length] = "Nurse Clothes";
-		else if(events[temp] == 3887) eventNames[eventNames.length] = "SluttySwim";
-		else if(events[temp] == consumables.BIMBOLQ) eventNames[eventNames.length] = "Bimbo Liq";
-		else if(events[temp] == consumables.INCUBID) eventNames[eventNames.length] = "Incubi Draft";
-		else if(events[temp] == armors.BONSTRP) eventNames[eventNames.length] = "Bondage S.";
-		else if(events[temp] == armors.I_CORST) eventNames[eventNames.length] = "I. Corset";
-		else if(events[temp] == consumables.P_DRAFT) eventNames[eventNames.length] = "Pure Draft";
-		else if(events[temp] == consumables.SUCMILK) eventNames[eventNames.length] = "Sucb Milk";
-		else if(events[temp] == consumables.P_S_MLK) eventNames[eventNames.length] = "PureScbMlk";
-		else if(events[temp] == consumables.PURPEAC) eventNames[eventNames.length] = "Pure Peach";
-		else if(events[temp] == consumables.EQUINUM) eventNames[eventNames.length] = "Equinum";
-		else if(events[temp] == consumables.W_FRUIT) eventNames[eventNames.length] = "Whsk.Fruit";
-		else if(events[temp] == consumables.REDUCTO) eventNames[eventNames.length] = "Reducto";
-		else if(events[temp] == consumables.GROPLUS) eventNames[eventNames.length] = "Gro Plus";
-		else if(events[temp] == consumables.TRAPOIL) eventNames[eventNames.length] = "Trap Oil";
-		else {
-			eventNames[eventNames.length] = "FUCKIN TRAP: " + events[temp];
-			trace("FUCKIN TRAP: " + events[temp]);
-		}
-		temp++;
-	}
-	trace(eventNames.length + " " + events.length);
-	var counter:int = 0;
-	menu();
-	while(counter < events.length-1) {
-		if(events[counter] != 0) addButton(counter,eventNames[counter],functions[counter],events[counter]);
-		counter++;
-	}
+	if (!rubiBimbo()) addButton(button++, "Bimbo Liq", giveRubiATFItem, consumables.BIMBOLQ).disableIf(!player.hasItem(consumables.BIMBOLQ));
+	addButton(button++, "Incubi Draft", giveRubiATFItem, consumables.INCUBID).disableIf(!player.hasItem(consumables.INCUBID));if (player.hasItem(consumables.P_DRAFT)) addButton(button++, "Pure Draft", giveRubiATFItem, consumables.P_DRAFT).disableIf(!player.hasItem(consumables.P_DRAFT));
+	addButton(button++, "Sucb Milk", giveRubiATFItem, consumables.SUCMILK).disableIf(!player.hasItem(consumables.SUCMILK));
+	addButton(button++, "PureScbMlk", giveRubiATFItem, consumables.P_S_MLK).disableIf(!player.hasItem(consumables.P_S_MLK));
+	addButton(button++, "Pure Peach", giveRubiATFItem, consumables.PURPEAC).disableIf(!player.hasItem(consumables.PURPEAC, 5));
+	addButton(button++, "Equinum", giveRubiATFItem, consumables.EQUINUM).disableIf(!player.hasItem(consumables.EQUINUM));
+	addButton(button++, "Whsk.Fruit", giveRubiATFItem, consumables.W_FRUIT).disableIf(!player.hasItem(consumables.W_FRUIT));
+	addButton(button++, "Reducto", giveRubiATFItem, consumables.REDUCTO).disableIf(!player.hasItem(consumables.REDUCTO));
+	addButton(button++, "Gro Plus", giveRubiATFItem, consumables.GROPLUS).disableIf(!player.hasItem(consumables.GROPLUS));
+	addButton(button++, "Trap Oil", giveRubiATFItem, consumables.TRAPOIL).disableIf(!player.hasItem(consumables.TRAPOIL));
 	addButton(14, "Back", rubiAppearance);
-*/
-		//choices(eventNames[0],events[0],eventNames[1],events[1],eventNames[2],events[2],eventNames[3],events[3],eventNames[4],events[4],eventNames[5],events[5],eventNames[6],events[6],eventNames[7],events[7],eventNames[8],events[8],"Back",3898);
 }
 
 
@@ -3623,7 +3027,7 @@ public function hypnoBimboficationForRubiSloots():void
 	else if(flags[kFLAGS.RUBI_NO_CUNT] > 0) outputText("dick-girl");
 	else outputText("little slut");
 	outputText(" ready to lust after your cock openly, to cling to you whenever you arrive and grope your bulge in public. He needs to be less worried about propriety and more focused on sexual satiation and appeal... yes.");
-	outputText("\n\nRubi is watching you in open mouthed fascination. His lips move, stammering, trying to talk, but he just can't get the words out. It's no wonder, really - you've got your big, hard tool");
+	outputText("\n\nRubi is watching you in open-mouthed fascination. His lips move, stammering, trying to talk, but he just can't get the words out. It's no wonder, really - you've got your big, hard tool");
 	if(player.cockTotal() > 1) outputText("s");
 	outputText(" whipped out and swaying with your sinuous movements, and all he has is his comparatively undersized little pecker. You rock your whole body with the snake-like grace given to you by your naga body, swaying rhythmically as you meet his eyes. Knowing full well just what kinds of depravity you'd like to force him into, you feel a ");
 	if(JojoScene.monk >= 5) outputText("familiar ");
@@ -3662,7 +3066,7 @@ public function hypnoBimboficationForRubiSloots():void
 	outputText("\n\n\"<i>Would you like to feel like this all the time - happy and carefree?</i>\" you ask.");
 
 	outputText("\n\nRubi nods, a little more vigorously.");
-	outputText("\n\nA predatory smile spreads across your face. \"<i>That's natural. Everyone wants to be happy, and I'm going to help you become soooo happy.</i>\" Imagining your tail as some kind of psionic antennae.type, you channel your thoughts through it as you continue to speak and mold your hapless victim. \"<i>You feel good right now because you are aroused and empty-minded, Rubi. Your mind prevented you from experiencing this complete bliss. Even now, it's interfering, forcing me to reroute your thoughts down to your dick to give you this present.</i>\"");
+	outputText("\n\nA predatory smile spreads across your face. \"<i>That's natural. Everyone wants to be happy, and I'm going to help you become soooo happy.</i>\" Imagining your tail as some kind of psionic [antennae], you channel your thoughts through it as you continue to speak and mold your hapless victim. \"<i>You feel good right now because you are aroused and empty-minded, Rubi. Your mind prevented you from experiencing this complete bliss. Even now, it's interfering, forcing me to reroute your thoughts down to your dick to give you this present.</i>\"");
 	outputText("\n\nYou didn't think it possible, but Rubi's face slackens further.");
 
 	outputText("\n\n\"<i>I can help you fix that, Rubi, but I need your help. I need you to want it. I need you to want to be horny, thoughtless, and happy all the time. You need to truly want to feel this good all the time, and it does feel sooo good, doesn't it?</i>\"");
@@ -3690,6 +3094,6 @@ public function hypnoBimboficationForRubiSloots():void
 	rubiSexMenu();
 	rubiAffection(100);
 }
-//These need to stay here, I think.
+
 }
 }

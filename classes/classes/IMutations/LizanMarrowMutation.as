@@ -8,11 +8,11 @@ import classes.PerkClass;
 import classes.PerkLib;
 import classes.IMutationPerkType;
 import classes.Creature;
-import classes.Player;
 import classes.Races;
 
 public class LizanMarrowMutation extends IMutationPerkType
     {
+        private static const mName:String = "Lizan Marrow";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -43,7 +43,7 @@ public class LizanMarrowMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Lizan Marrow" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -66,15 +66,13 @@ public class LizanMarrowMutation extends IMutationPerkType
         }
 
         //Mutations Buffs
-        override public function pBuffs(target:Creature = null):Object{
+        override public function buffsForTier(pTier:int):Object {
             var pBuffs:Object = {};
-            var pTier:int = currentTier(this, (target == null)? player : target);
             return pBuffs;
         }
 
         public function LizanMarrowMutation() {
-            super("Lizan Marrow IM", "Lizan Marrow", ".");
-            maxLvl = 3;
+            super(mName + " IM", mName, SLOT_BONE, 3);
         }
 
     }

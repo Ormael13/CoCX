@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -15,7 +15,7 @@ use namespace CoC;
 	public class WaizAbi extends Monster
 	{
 		
-		public function WaizAbi() 
+		public function WaizAbi()
 		{
 			if (flags[kFLAGS.WAIZABI_LVL_UP] == 0) {
 				initStrTouSpeInte(20, 20, 20, 50);
@@ -67,7 +67,7 @@ use namespace CoC;
 			this.tallness = 72;
 			this.hips.type = Hips.RATING_CURVY + 3;
 			this.butt.type = Butt.RATING_LARGE + 2;
-			this.skinTone = "light";
+			this.bodyColor = "light";
 			//this.hairColor = "emerald"; - po tym jak z bimbo body zmieni na amazonian body ^^
 			this.hairColor = "platinum green";
 			this.hairLength = 13;
@@ -77,7 +77,6 @@ use namespace CoC;
 			this.lust = 30;
 			this.lustVuln = .8;
 			this.drop = NO_DROP;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			//this.tailType = Tail.MONKEY;
 			checkMonster();
 		}

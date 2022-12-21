@@ -62,7 +62,26 @@ import classes.internals.*;
 					(ballSize > 4?("  Barely visible below the tattered shreds of loincloth are " + Appearance.ballsDescription(true, true, this) + ", swollen with the minotaur's long pent-up need."):"")+
 					(hasAxe?"<b>This minotaur seems to have found a deadly looking axe somewhere!</b>":"");
 		}
-
+		
+		override public function handleAwardItemText(itype:ItemType):ItemType {
+			if (itype == weapons.L__AXE) {
+				//50% breakage!
+				if (rand(2) == 0) {
+					if (player.tallness < 78 && player.str < 90) {
+						outputText("\nYou find a large axe on the minotaur, but it is too big for a person of your stature to comfortably carry.  ");
+						if (rand(2) == 0) return null;
+						else return consumables.SDELITE;
+					}
+					//Not too tall, dont rob of axe!
+					else CoC.instance.plotFight = true;
+				} else {
+					outputText("\nThe minotaur's axe appears to have been broken during the fight, rendering it useless.  ");
+					return null;
+				}
+			}
+			return itype;
+		}
+		
 		public function Minotaur(axe:Boolean=false)
 		{
 			//Most times they dont have an axe
@@ -143,7 +162,6 @@ import classes.internals.*;
 			this.faceType = Face.COW_MINOTAUR;
 			this.lust = this.ballSize * 3;
 			this.lustVuln = hasAxe?0.84:0.87;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.abilities = [
 				{call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[], weight: 3},
 				{call: SceneLib.mountain.minotaurScene.minoPheromones, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[]}

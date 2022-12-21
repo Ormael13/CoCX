@@ -141,14 +141,14 @@ addButton (5, "Sex", CharySex );
   outputText("As you near the cove where Charybdis hangs out, you hear the clash of steel, and screams of the dying. You run over, to see several demons fleeing in terror. Three lie dead, their throats slashed, and two more are gurgling, held up by the neck, their blood spilling from their throats. Charybdis turns, flinging one of the held demons in your general direction, before scuttling towards you, his purple eyes tinged with red rage.  \n\n");
   outputText("The improvised projectile thankfully misses, hitting a rock, and you raise your arms. <i>\"Hey, it’s me, [name]!</i> The Scylla slams two tendrils down into the sand, nearly faceplanting, before blinking twice, apparently recognizing you. <i>\"Oh.\"</i> His black skin turns greyish. <i>\"Oh, [name]. I’m sorry you had to see that.\"</i> He turns his back, his deep voice shaking. <i>\"Lemme just deal with these.\"</i> He seems to realize he’s still holding an Incubus in one of his tentacles. He snaps its neck, chucking the dead demon back into the water. He looks at you, worried, the odd red gone from his eyes. \n\n");
   outputText("You put a hand on his shoulder and tell him not to worry. They were demons, and they attacked him, did they not? \n\n");
-  outputText("<i>\"Well, yeah, but…\"</i> He scowls. <i>\"Nevermind.\"</i> He tries to put a smile on his face, but it’s obviously hard for the guy. <i>\"Thanks for coming. Who knows? Next time, maybe you’ll be my hero, eh?\"</i> He bats his eyelashes, a clear mockery of a swooning maid, made all the funnier by the obvious maleness of the person doing it. You give him a laugh, and he smiles for real this time. <i>\"What can I do for ya?\"</i> \n\n");
+  outputText("<i>\"Well, yeah, but…\"</i> He scowls. <i>\"Never mind.\"</i> He tries to put a smile on his face, but it’s obviously hard for the guy. <i>\"Thanks for coming. Who knows? Next time, maybe you’ll be my hero, eh?\"</i> He bats his eyelashes, a clear mockery of a swooning maid, made all the funnier by the obvious maleness of the person doing it. You give him a laugh, and he smiles for real this time. <i>\"What can I do for ya?\"</i> \n\n");
   menu();
 addButton (1, "Talk",CharyTalk );
 addButton (2, "Hang",CharyHang );
 addButton (3, "Spar", CharySpar );
 
 addButton (4, "Sex", CharySex );
-if (CharySeenSkulls = true); {
+if (CharySeenSkulls = true) {
 addButton (5, "Skulls", CharyGiveSkulls );
 }
     break;

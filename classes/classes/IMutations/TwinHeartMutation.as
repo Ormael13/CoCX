@@ -12,20 +12,23 @@ import classes.Races;
 
 public class TwinHeartMutation extends IMutationPerkType
     {
+        private static const mName:String = "Twin Heart";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier == 1){
-                descS = "+40% fatigue recovery and +5 to max tou/spe (scalable). +100% fatigue recovery, reduce Charge fatigue cost by 10% as well as its cooldown by 1 round so long as your body is tauric/drider. (Also raise all Taur race score by 1, by 2 as long pc is tauric/drider)";
+                descS = "+40% fatigue recovery, with tauric/drider body: +100% fatigue recovery, reduce Charge fatigue cost by ~10% as well as its cooldown by 1.";
             }
             if (pTier == 2){
-                descS = "+80% fatigue recovery and +15 to max tou/spe (scalable). +200% fatigue recovery, reduce Charge fatigue cost by 20%, increase damage by 20%, its cooldown by 2 rounds so long as your body is tauric/drider. (Also raise all Taur race score by 2, by 4 as long pc is tauric/drider)";
+                descS = "+80% fatigue recovery, with tauric/drider body: +200% fatigue recovery, reduce Charge fatigue cost by ~20% as well as its cooldown by 2, increase damage by 20%.";
             }
             if (pTier == 3){
-                descS = "+120% fatigue recovery and +45 to max tou/spe (scalable). +300% fatigue recovery, reduce Charge fatigue cost by 30%, increase damage by 80%, its cooldown by 3 rounds so long as your body is tauric/drider. (Also raise all Taur race score by 3, by 6 as long pc is tauric/drider)";
+                descS = "+120% fatigue recovery, with tauric/drider body: +300% fatigue recovery, reduce Charge fatigue cost by ~30% as well as its cooldown by 3, increase damage by 80%.";
             }
-            if (descS != "")descS += ".";
+            if (pTier == 4){
+                descS = "+160% fatigue recovery, with tauric/drider body: +400% fatigue recovery, reduce Charge fatigue cost by ~40% as well as its cooldown by 4, increase damage by 200%.";
+            }
             return descS;
         }
 
@@ -39,10 +42,13 @@ public class TwinHeartMutation extends IMutationPerkType
                 case 3:
                     sufval = "(Evolved)";
                     break;
+                case 4:
+                    sufval = "(Final Form)";
+                    break;
                 default:
                     sufval = "";
             }
-            return "Twin Heart" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -67,9 +73,8 @@ public class TwinHeartMutation extends IMutationPerkType
         }
 
         //Mutations Buffs
-        override public function pBuffs(target:Creature = null):Object{
+        override public function buffsForTier(pTier:int):Object {
             var pBuffs:Object = {};
-            var pTier:int = currentTier(this, (target == null)? player : target);
             if (pTier == 1) {
                 pBuffs['tou.mult'] = 0.05;
                 pBuffs['spe.mult'] = 0.05;
@@ -79,15 +84,18 @@ public class TwinHeartMutation extends IMutationPerkType
                 pBuffs['spe.mult'] = 0.15;
             }
             else if (pTier == 3) {
-                pBuffs['tou.mult'] = 0.45;
-                pBuffs['spe.mult'] = 0.45;
+                pBuffs['tou.mult'] = 0.35;
+                pBuffs['spe.mult'] = 0.35;
+            }
+            else if (pTier == 4) {
+                pBuffs['tou.mult'] = 0.75;
+                pBuffs['spe.mult'] = 0.75;
             }
             return pBuffs;
         }
 
         public function TwinHeartMutation() {
-            super("Twin Heart IM", "Twin Heart", ".");
-            maxLvl = 3;
+            super(mName + " IM", mName, SLOT_ADAPTATIONS, 4);
         }
 
     }

@@ -121,16 +121,16 @@ package classes.Scenes.Areas.Lake
 
 			//[equine]
 			if (player.cocks[x].cockType == CockTypesEnum.HORSE) outputText("to your flare, sucking, teasing and ");
-			//[canine]
-			else if (player.hasKnot(x)) outputText("to the base of your cock, planting sloppy kisses on your knot, ");
 			//[demonic]
 			else if (player.cocks[x].cockType == CockTypesEnum.DEMON) outputText("to the demonic nodules ringing your cock, ");
 			//[anemone]
 			else if (player.cocks[x].cockType == CockTypesEnum.ANEMONE) outputText("to the little wriggling tentacles ringing the head and base of your cock, ");
+			//[canine]
+			else if (player.hasKnot(x)) outputText("to the base of your cock, planting sloppy kisses on your knot, ");
 			else outputText("to the sensitive little spot on the underside of the head, ");
 			outputText("lavishing it with attention.  Precum and saliva practically pour down the length of your shaft, tickling your ");
-			if (player.balls > 0 && player.hasVagina()) outputText("balls and cunt");
-			else if (player.balls > 0) outputText("balls");
+			if (player.hasBalls() && player.hasVagina()) outputText("balls and cunt");
+			else if (player.hasBalls()) outputText("balls");
 			else if (player.hasVagina()) outputText("cunt");
 			else outputText("ass");
 			outputText(" as they dribble down and form a small puddle between your [legs].");

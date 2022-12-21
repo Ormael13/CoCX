@@ -5,11 +5,9 @@
 package classes.Scenes.Places.TrollVillage {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.Items.ArmorLib;
-import classes.Items.UndergarmentLib;
 import classes.Scenes.NPCs.ZenjiScenes;
-import classes.Scenes.SceneLib;
 import classes.Scenes.Places.TrollVillage;
+import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
 public class Yenza extends TrollVillageAbstractContent{
@@ -20,7 +18,7 @@ public class Yenza extends TrollVillageAbstractContent{
         clearOutput();
         if (TrollVillage.YenzaUnlocked == 0){
             if (!TrollVillage.ZenjiFollowing){
-                if (player.femininity > 30 || player.hasBreasts()){
+                if ((player.femininity > 30 || player.hasBreasts()) && !flags[kFLAGS.LOW_STANDARDS_FOR_ALL]){
                     outputText("Your eyes roam around until you decide to approach the rather beautiful looking troll sitting by herself.\n" +
                             "\n" +
                             "As you approach she notices you. She scrunches her face in disgust. As you get closer she scoffs and turns away from you.\n" +
@@ -65,7 +63,7 @@ public class Yenza extends TrollVillageAbstractContent{
                         "\"<i>[name]... we should go… Don’t… don’t look...</i>\" He stands up, gesturing for you to follow him.\n" +
                         "\n" +
                         "Instead of following him, your gaze reflexively shifts back around to notice a very beautiful troll standing up now. She is the pinnacle of perfect femininity, with an hourglass figure and long, dark green silky hair. She is approaching fairly quickly. You barely have enough time to blink and she’s already positioned over the other side of the table, giving you a full view of her cleavage.\n");
-                outputText("\"<i>So, I see you found the tattered scraps of man I left behind, have you?</i>\" She smirks, \"<i>Has he been a good little boy? Trust me, I know just how tiny he is. Calling him a man is an understatement.</i>\"\n" +
+                outputText("\"<i>So, I see you found the tattered scraps of man I left behind, have you?</i>\" She smirks, \"<i>Has he been a good little boy? Trust me, I know just how tiny he is. Calling him a man is an overstatement.</i>\"\n" +
                         "\n" +
                         "You want to leave, but something compels you to stay. You can’t explain what, but there’s a certain gravity she has over you.\n" +
                         "\n" +
@@ -86,7 +84,7 @@ public class Yenza extends TrollVillageAbstractContent{
             }
         }
         else{
-            if (player.femininity > 30){
+            if (player.femininity > 30 && !flags[kFLAGS.LOW_STANDARDS_FOR_ALL]){
                 outputText("As you near in, her gaze shifts towards you and she rolls her eyes. She stands up and leaves, not even bothering to look at your direction again.\n" +
                         "\n" +
                         "Once she’s gone you figure there’s nothing left for you to do and you leave the diner as well.\n");
@@ -115,7 +113,7 @@ public class Yenza extends TrollVillageAbstractContent{
                     "Zenji is adamant about not going to her house. It’s probably for the best, it’d only stir more trouble.\n");
         }
         else{
-            if (player.hasBreasts() || player.femininity > 30){
+            if ((player.hasBreasts() || player.femininity > 30) && !flags[kFLAGS.LOW_STANDARDS_FOR_ALL]){
                 outputText("You knock on the door. After a few minutes of waiting, nobody responds, so you decide to take your leave\n");
             }
             else{
@@ -150,6 +148,7 @@ public class Yenza extends TrollVillageAbstractContent{
         if (player.cockThatFits(40)) addButton(2, "Cowgirl", YenzaCowgirl);
         else addButtonDisabled(2,"Cowgirl","Your dick is too big for her.");
         if (TrollVillage.YenzaUnlocked >= 4) addButton(3, "Submit", YenzaSubmit);
+        else addButtonDisabled(3, "???", "Req. to know her better.");
     }
 
     private function YenzaAppearance():void{
@@ -172,7 +171,7 @@ public class Yenza extends TrollVillageAbstractContent{
                 "She smirks as she guides you to the bedroom.\n" +
                 "\n" +
                 "\"<i>Let’s get out of these clothes…</i>\" She states as she unbuttons her blouse, letting it drop to the floor as she shimmies out of her panties.\n\n");
-        if (player.lowerGarment != UndergarmentLib.NOTHING || player.upperGarment != UndergarmentLib.NOTHING || player.armor != ArmorLib.NOTHING){
+        if (!player.lowerGarment.isNothing || !player.upperGarment.isNothing || !player.armor.isNothing){
             outputText("She approaches you and quickly makes way with your [armor] setting all of your clothing aside, making sure she has a full view of your body\n\n");
         }
         outputText("\"<i>Lie down, my little plaything…</i>\" she instructs once she’s ready.\n" +

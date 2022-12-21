@@ -2,7 +2,8 @@ package classes
 {
 import classes.BodyParts.IPhallic;
 import classes.CockTypesEnum;
-	import classes.internals.Utils;
+import classes.GlobalFlags.kFLAGS;
+import classes.internals.Utils;
 
 	public class Cock implements IPhallic
 	{		
@@ -68,163 +69,86 @@ import classes.CockTypesEnum;
 		{
 			return cockThickness * cockLength;
 		}
+
+        private function cockDR(curLength:Number, lengthDelta:Number, threshold:Number, bigCock:Boolean):Number {
+			if (lengthDelta > 0) { // growing
+				threshold = 24;
+				// BigCock Perk increases incoming change by 50% and adds 12 to the length before diminishing returns set in
+				if (bigCock) {
+					lengthDelta *= 1.5;
+					threshold *= 1.5;
+				}
+				// Not a human cock? Multiple the length before dimishing returns set in
+				if (cockType != CockTypesEnum.HUMAN)
+					threshold *= 2;
+				// Modify growth for cock socks
+				if (sock == "scarlet") lengthDelta *= 1.5;
+				else if (sock == "cobalt") lengthDelta *= .5;
+				// Do diminishing returns
+				if (!CoC.instance.flags[kFLAGS.HYPER_HAPPY]) {
+					if (curLength > threshold) lengthDelta /= 4;
+					else if (curLength > threshold / 2) lengthDelta /= 2;
+				}
+			}
+			else {
+				if (bigCock) lengthDelta *= 0.5;
+				// Modify growth for cock socks
+				if (sock == "scarlet") lengthDelta *= 0.5;
+				else if (sock == "cobalt") lengthDelta *= 1.5;
+                //No DR, shrinky is shrinky!
+			}
+            return lengthDelta;
+        }
 		
 		public function growCock(lengthDelta:Number, bigCock:Boolean):Number
 		{
-			
+            var increase:Number;
+            var increaseTotal:Number = 0;
 			if (lengthDelta == 0) {
 				trace("Whoops! growCock called with 0, aborting...");
 				return lengthDelta;
 			}
-			
-			var threshhold:int = 0;
-			
-			trace("growcock starting at:" +lengthDelta);
-
-
-			if (lengthDelta > 0) { // growing
-				trace("and growing...");
-				threshhold = 24;
-				// BigCock Perk increases incoming change by 50% and adds 12 to the length before diminishing returns set in
-				if (bigCock) {
-					trace("growCock found BigCock Perk");
-					lengthDelta *= 1.5;
-					threshhold += 12;
-				}
-				// Not a human cock? Multiple the length before dimishing returns set in by 3
-				if (cockType != CockTypesEnum.HUMAN)
-					threshhold *= 2;
-				// Modify growth for cock socks
-				if (sock == "scarlet") {
-					trace("growCock found Scarlet sock");
-					lengthDelta *= 1.5;
-				}
-				else if (sock == "cobalt") {
-					trace("growCock found Cobalt sock");
-					lengthDelta *= .5;
-				}
-				// Do diminishing returns
-				if (cockLength > threshhold) 
-					lengthDelta /= 4;
-				else if (cockLength > threshhold / 2)
-					lengthDelta /= 2;
-			}
-			else {
-				trace("and shrinking...");
-				
-				threshhold = 0;
-				// BigCock Perk doubles the incoming change value and adds 12 to the length before diminishing returns set in
-				if (bigCock) {
-					trace("growCock found BigCock Perk");
-					lengthDelta *= 0.5;
-					threshhold += 12;
-				}
-				// Not a human cock? Add 12 to the length before dimishing returns set in
-				if (cockType != CockTypesEnum.HUMAN)
-					threshhold += 12;
-				// Modify growth for cock socks
-				if (sock == "scarlet") {
-					trace("growCock found Scarlet sock");
-					lengthDelta *= 0.5;
-				}
-				else if (sock == "cobalt") {
-					trace("growCock found Cobalt sock");
-					lengthDelta *= 1.5;
-				}
-				// Do diminishing returns
-				if (cockLength > threshhold) 
-					lengthDelta /= 3;
-				else if (cockLength > threshhold / 2)
-					lengthDelta /= 2;
-			}
-
-			trace("then changing by: " + lengthDelta);
-
-			cockLength += lengthDelta;
-			
-			if (cockLength < 1)
-				cockLength = 1;
-
-			if (cockThickness > cockLength * .33)
-				cockThickness = cockLength * .33;
-
-			return lengthDelta;
+            while (lengthDelta != 0) {
+                increase = lengthDelta > 0 ? (lengthDelta < 1 ? lengthDelta : 1)
+                    : (lengthDelta > -1 ? lengthDelta : -1);
+                lengthDelta -= increase;
+                //apply an inch
+                increase = cockDR(cockLength, increase, 24, bigCock);
+                cockLength += increase;
+                increaseTotal += increase;
+            }
+            if (cockLength < 2) cockLength = 2;
+            return increaseTotal;
 		}
 		
-		public function thickenCock(increase:Number):Number
+		public function thickenCock(thickDelta:Number, bigCock:Boolean):Number
 		{
-			var amountGrown:Number = 0;
-			var temp:Number = 0;
-			if (increase > 0)
-			{
-				while (increase > 0)
-				{
-					if (increase < 1)
-						temp = increase;
-					else
-						temp = 1;
-					//Cut thickness growth for huge dicked
-					if (cockThickness > 1 && cockLength < 12)
-					{
-						temp /= 4;
-					}
-					if (cockThickness > 1.5 && cockLength < 18)
-						temp /= 5;
-					if (cockThickness > 2 && cockLength < 24)
-						temp /= 5;
-					if (cockThickness > 3 && cockLength < 30)
-						temp /= 5;
-					//proportional thickness diminishing returns.
-					if (cockThickness > cockLength * .15)
-						temp /= 3;
-					if (cockThickness > cockLength * .20)
-						temp /= 3;
-					if (cockThickness > cockLength * .30)
-						temp /= 5;
-					//massive thickness limiters
-					if (cockThickness > 4)
-						temp /= 2;
-					if (cockThickness > 5)
-						temp /= 2;
-					if (cockThickness > 6)
-						temp /= 2;
-					if (cockThickness > 7)
-						temp /= 2;
-					//Start adding up bonus length
-					amountGrown += temp;
-					cockThickness += temp;
-					temp = 0;
-					increase--;
-				}
-				increase = 0;
+            var increase:Number;
+            var increaseTotal:Number = 0;
+			if (thickDelta == 0) {
+				trace("Whoops! thickenCock called with 0, aborting...");
+				return thickDelta;
 			}
-			else if (increase < 0)
-			{
-				while (increase < 0)
-				{
-					temp = -1;
-					//Cut length growth for huge dicked
-					if (cockThickness <= 1)
-						temp /= 2;
-					if (cockThickness < 2 && cockLength < 10)
-						temp /= 2;
-					//Cut again for massively dicked
-					if (cockThickness < 3 && cockLength < 18)
-						temp /= 2;
-					if (cockThickness < 4 && cockLength < 24)
-						temp /= 2;
-					//MINIMUM Thickness of OF .5!
-					if (cockThickness <= .5)
-						temp = 0;
-					//Start adding up bonus length
-					amountGrown += temp;
-					cockThickness += temp;
-					temp = 0;
-					increase++;
+            while (thickDelta != 0) {
+                increase = thickDelta > 0.1 ? (thickDelta < 0.1 ? thickDelta : 0.1)
+                    : (thickDelta > -0.1 ? thickDelta : -0.1);
+                thickDelta -= increase;
+                //apply an inch
+                increase = cockDR(cockLength, increase, 6, bigCock);
+                if (increase > 0) {
+                    if (cockThickness > cockLength * .25) increase /= 2;
+                    if (cockThickness > cockLength * .33) increase /= 2;
+                    if (cockThickness > cockLength * .50) increase /= 4;
+                } else {
+					if (cockThickness < cockLength * .15) increase /= 2;
+					if (cockThickness < cockLength * .1) increase /= 2;
+					if (cockThickness < cockLength * .05) increase /= 4;
 				}
-			}
-			trace("thickenCock called and thickened by: " + amountGrown);
-			return amountGrown;
+                cockThickness += increase;
+                increaseTotal += increase;
+            }
+            if (cockThickness < 0.5) cockLength = 0.5;
+            return increaseTotal;
 		}	
 		
 		public function get cockLength():Number 

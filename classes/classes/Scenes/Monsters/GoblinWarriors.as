@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.Monsters 
+package classes.Scenes.Monsters
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -14,8 +14,7 @@ public class GoblinWarriors extends Goblin
 	{
 		public function goblinsDrugAttack():void {
 			var temp2:Number = rand(5);
-			var multiplier:Number = 2;
-			multiplier += player.newGamePlusMod() * 0.5;
+			var multiplier:Number = 6 + player.newGamePlusMod() * 0.5;
 			var color:String = "";
 			if(temp2 == 0) color = "red";
 			if(temp2 == 1) color = "green";
@@ -35,7 +34,7 @@ public class GoblinWarriors extends Goblin
 				return;
 			}
 			//Dodge chance!
-			if((player.hasPerk(PerkLib.Evade) && rand(10) <= 3) || (rand(100) < player.spe/5)) {
+			if(player.getEvasionRoll()) {
 				outputText("\nYou narrowly avoid the gush of alchemic fluids!\n");
 			}
 			else {
@@ -70,7 +69,7 @@ public class GoblinWarriors extends Goblin
 			if (det == 1) outputText("Few of " + a + short + " grabs their heel and lifts it to head in an amazing display of flexibility despite the armor they're wearing.  They caresses their snatches and gives you a come hither look.");
 			if (det == 2) outputText("Few of " + a + short + " bends over, putting on a show and jiggling their heart-shaped ass at you.  Their looks over the shoulder and sucks on their finger, batting their eyelashes.");
 			var lustDmg:int = rand(player.lib / 2) + 80;
-			player.dynStats("lus", lustDmg);
+			player.takeLustDamage(lustDmg, true);
 			outputText("  The display distracts you long enough to prevent you from taking advantage of their awkward pose, leaving you more than a little flushed.\n\n");
 		}
 		
@@ -126,7 +125,7 @@ public class GoblinWarriors extends Goblin
 			SceneLib.goblinScene.gobboSpecialBeatYaUp();
 		}
 		
-		public function GoblinWarriors() 
+		public function GoblinWarriors()
 		{
 			this.a = "the ";
 			this.short = "goblin warriors";
@@ -143,7 +142,7 @@ public class GoblinWarriors extends Goblin
 			this.tallness = 44 + rand(7);
 			this.hips.type = Hips.RATING_AMPLE + 2;
 			this.butt.type = Butt.RATING_LARGE;
-			this.skinTone = "dark green";
+			this.bodyColor = "dark green";
 			this.hairColor = "red";
 			this.hairLength = 4;
 			initStrTouSpeInte(175, 250, 170, 172);
@@ -158,7 +157,6 @@ public class GoblinWarriors extends Goblin
 			this.bonusLust = 290;
 			this.lust = 50;
 			this.lustVuln = 0.44;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 40;
 			this.gems = rand(50) + 75;
 			this.drop = new WeightedDrop().

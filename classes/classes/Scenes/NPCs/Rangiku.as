@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.BodyParts.Arms;
@@ -27,30 +27,29 @@ public class Rangiku extends Monster
 		}
 		/*
 		private function rangikuAttack2():void {
-			
+		
 		}
 		
 		private function rangikuAttack3():void {
-			
+		
 		}
 		
 		private function rangikuAttack4():void {
-			
+		
 		}
 		
 		private function rangikuUltimateAttack1():void {
-			
+		
 		}
 		
 		private function rangikuUltimateAttack2():void {
-			
+		
 		}
 		*/
 		private function rangikuRampage():void {
 			if (hasStatusEffect(StatusEffects.AbilityChanneled)) {
 				removeStatusEffect(StatusEffects.AbilityChanneled);
-				if (hasStatusEffect(StatusEffects.Stunned) || hasStatusEffect(StatusEffects.FrozenSolid) || hasStatusEffect(StatusEffects.StunnedTornado) || hasStatusEffect(StatusEffects.Fear) || hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.ConstrictedScylla)
-				|| hasStatusEffect(StatusEffects.GooEngulf) || hasStatusEffect(StatusEffects.EmbraceVampire) || hasStatusEffect(StatusEffects.Pounce)) {
+				if (monsterIsStunned() || monsterIsConstricted() || hasStatusEffect(StatusEffects.Fear)) {
 					outputText(capitalA + short + " reels in frustration as her concentration breaks under your assaults.\n\n");
 				}
 				else {
@@ -94,7 +93,7 @@ public class Rangiku extends Monster
 			return str;
 		}
 		
-		public function Rangiku() 
+		public function Rangiku()
 		{
 			this.a = "the ";
 			this.short = "oni";
@@ -108,7 +107,7 @@ public class Rangiku extends Monster
 			this.tallness = 92;
 			this.hips.type = Hips.RATING_CURVY + 4;
 			this.butt.type = Butt.RATING_JIGGLY + 1;
-			this.skinTone = "pale";
+			this.bodyColor = "pale";
 			this.hairColor = "strawberry blonde";
 			this.hairLength = 39;
 			if (flags[kFLAGS.RANGIKU_LVL_UP] < 1) {
@@ -178,7 +177,6 @@ public class Rangiku extends Monster
 			}*/
 			this.lust = 30;
 			this.lustVuln = .35;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.gems = 15 + rand(8);
 			this.drop = new ChainedDrop().
 					//add(armors.CHBIKNI,1/20).

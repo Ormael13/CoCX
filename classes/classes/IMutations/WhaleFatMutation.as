@@ -7,11 +7,11 @@ package classes.IMutations
 import classes.PerkClass;
 import classes.IMutationPerkType;
 import classes.Creature;
-import classes.Player;
 import classes.Races;
 
 public class WhaleFatMutation extends IMutationPerkType
     {
+        private static const mName:String = "Whale Fat";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -46,7 +46,7 @@ public class WhaleFatMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Whale Fat" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -69,9 +69,8 @@ public class WhaleFatMutation extends IMutationPerkType
         }
 
         //Mutations Buffs
-        override public function pBuffs(target:Creature = null):Object{
+        override public function buffsForTier(pTier:int):Object {
             var pBuffs:Object = {};
-            var pTier:int = currentTier(this, (target == null)? player : target);
             if (pTier == 1) pBuffs['tou.mult'] = 0.05;
             else if (pTier == 2) pBuffs['tou.mult'] = 0.15;
             else if (pTier == 3) pBuffs['tou.mult'] = 0.3;
@@ -79,8 +78,7 @@ public class WhaleFatMutation extends IMutationPerkType
         }
 
         public function WhaleFatMutation() {
-            super("Whale Fat IM", "Whale Fat", ".");
-            maxLvl = 3;
+            super(mName + " IM", mName, SLOT_FAT, 3);
         }
         
     }

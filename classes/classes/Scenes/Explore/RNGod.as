@@ -27,7 +27,7 @@ import classes.VaginaClass;
 			this.long = "You’re facing RNGod. As randomness of it telling " + player.mf("he", "she") +"'s probably stronger than you so why fight " + player.mf("him", "her") +"? Some rumors say that " + player.mf("he", "she") +"'s Lady Godiva parent. Crazy isn't it?";
 			this.plural = false;
 			this.tallness = player.tallness;
-			if (player.balls > 0) {
+			if (player.hasBalls()) {
 				this.balls = player.balls;
 				this.ballSize = player.ballSize;
 			}
@@ -56,7 +56,6 @@ import classes.VaginaClass;
 			this.bonusSoulforce = 100 * (1 + rand(10));
 			this.lustVuln = 0.1 * (1 + rand(10));
 			this.lust = 20;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = player.level + rand(16);
 			this.ass.analLooseness = player.ass.analLooseness;
 			this.ass.analWetness = player.ass.analWetness;

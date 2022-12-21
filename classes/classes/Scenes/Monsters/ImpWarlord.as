@@ -1,4 +1,4 @@
-package classes.Scenes.Monsters 
+package classes.Scenes.Monsters
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -6,6 +6,7 @@ import classes.BodyParts.Hips;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
+import classes.Items.DynamicItems;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
@@ -58,7 +59,7 @@ public class ImpWarlord extends Imp
 			SceneLib.impScene.loseToAnImpLord();
 		}
 		
-		public function ImpWarlord() 
+		public function ImpWarlord()
 		{
 			super(true);
 			this.a = "the ";
@@ -81,7 +82,7 @@ public class ImpWarlord extends Imp
 			this.hips.type = Hips.RATING_BOYISH;
 			this.butt.type = Butt.RATING_TIGHT;
 			this.lowerBody = LowerBody.HOOFED;
-			this.skinTone = "red";
+			this.bodyColor = "red";
 			initStrTouSpeInte(80, 71, 75, 56);
 			initWisLibSensCor(56, 71, 35, 100);
 			this.weaponName = "sword";
@@ -94,9 +95,12 @@ public class ImpWarlord extends Imp
 			this.bonusLust = 122;
 			this.lust = 30;
 			this.lustVuln = .4;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = 16;
 			this.gems = rand(20) + 40;
+			this.randomDropChance = 0.1;
+			this.randomDropParams = {
+				rarity: DynamicItems.RARITY_CHANCES_LESSER
+			};
 			this.drop = new WeightedDrop().
 					add(consumables.MINOBLO,2).
 					add(consumables.LABOVA_,2).

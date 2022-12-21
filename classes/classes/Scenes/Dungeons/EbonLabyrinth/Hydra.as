@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.Dungeons.EbonLabyrinth 
+package classes.Scenes.Dungeons.EbonLabyrinth
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -84,7 +84,7 @@ use namespace CoC;
 			SceneLib.dungeons.ebonlabyrinth.hydraScene.defeatedBy();
 		}
 		
-		public function Hydra() 
+		public function Hydra()
 		{
             var mod:int = inDungeon ? SceneLib.dungeons.ebonlabyrinth.enemyLevelMod : 0;
 			initStrTouSpeInte(136 + 38*mod, 250 + 40*mod, 158 + 28*mod, 142 + 21*mod);
@@ -94,8 +94,8 @@ use namespace CoC;
             this.bonusHP = 1000 + 1000*mod;
             this.bonusLust = 480 + 50*mod;
             this.level = 60 + 5*mod; //starts from 65 due to EL levelMod calculations;
-            this.gems = mod > 50 ? 0 : Math.floor((2000 + rand(400)) * Math.exp(0.3*mod));
-            this.additionalXP = mod > 50 ? 0 : Math.floor(9000 * Math.exp(0.3*mod));
+            this.gems = mod > 20 ? 0 : Math.floor((2000 + rand(400)) * Math.exp(0.3*mod));
+            this.additionalXP = mod > 20 ? 0 : Math.floor(9000 * Math.exp(0.3*mod));
 
 			this.a = "";
 			this.short = "Hydra";
@@ -113,7 +113,7 @@ use namespace CoC;
 			this.butt.type = Butt.RATING_LARGE;
 			this.lowerBody = LowerBody.HYDRA;
 			this.faceType = Face.SNAKE_FANGS;
-			this.skinTone = "mediterranean-toned";
+			this.bodyColor = "mediterranean-toned";
 			this.hairColor = "brown";
 			this.hairLength = 16;
 			this.weaponName = "fist";
@@ -121,7 +121,6 @@ use namespace CoC;
 			this.weaponAttack = 5;
 			this.armorName = "scales";
 			this.lust = 30;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.drop = new WeightedDrop(consumables.HYDRASC, 1);
 			this.createStatusEffect(StatusEffects.HydraTails, 5, 0, 0, 0);
 			this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);

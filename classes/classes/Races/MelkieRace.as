@@ -8,19 +8,43 @@ public class MelkieRace extends Race {
 	public static const MelkieSkinColors:/*String*/Array = ["light", "fair", "pale"];
 	public static const MelkieFurColors:/*String*/Array = ["grey", "silver", "white", "glacial white", "light gray"];
 	public static const MelkieHairColors:/*String*/Array = ["blonde", "platinum blonde"];
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Human",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Human",
+        /*Eyes*/		"Human",
+        /*Face*/		"Human",
+        /*Gills*/		"Human",
+        /*Hair*/		"Human",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Human",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Human",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Human"];
 	
 	public function MelkieRace(id:int) {
-		super("Melkie", id);
+		super("Melkie", id, []);//RaceBody);
 	}
 	
 	public override function setup():void {
 		
 		addScores()
-				.skinBaseColor(ANY(MelkieSkinColors), +1)
+				.skinColor1(ANY(MelkieSkinColors), +1)
 				.skinCoatType(Skin.FUR, +1)
-				.skinCoatColor(ANY(MelkieFurColors), +1)
+				.furColor1(ANY(MelkieFurColors), +1)
 				.hairType(Hair.NORMAL, +1)
-				.hairColor(ANY(MelkieHairColors), +1)
+				.hairColor1(ANY(MelkieHairColors), +1)
 				.eyeType(Eyes.HUMAN, +1)
 				.eyeColor("blue", +1)
 				.faceType(Face.ANIMAL_TOOTHS, +1)

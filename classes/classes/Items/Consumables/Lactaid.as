@@ -27,11 +27,7 @@ package classes.Items.Consumables
 			}
 			//Player doesn't lactate
 			if (player.biggestLactation() < 1) {
-				outputText("\n\n");
-				outputText("You feel your [nipple]s become tight and engorged.  A single droplet of milk escapes each, rolling down the curves of your breasts.  <b>You are now lactating!</b>");
-				for (i = 0; i < player.breastRows.length; i++) {
-					player.breastRows[i].lactationMultiplier += 2;
-				}
+				game.transformations.StartLactation.applyEffect();
 			}
 			//Boost lactation
 			else {
@@ -41,7 +37,7 @@ package classes.Items.Consumables
 					player.breastRows[i].lactationMultiplier += 1 + rand(10) / 10;
 				}
 			}
-			dynStats("lus", 10);
+			dynStats("lus", 10, "scale", false);
 			if (rand(3) == 0) {
 				outputText(player.modFem(95, 1));
 			}

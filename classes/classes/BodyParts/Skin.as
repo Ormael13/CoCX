@@ -45,9 +45,11 @@ public class Skin extends SaveableBodyPart {
 	 * - value: numerical id (0, 1, 2)
 	 * - id: name of the constant ("PLAIN", "FUR", "SCALES")
 	 * - name: human-readable default name, ("skin", "fur", "scales")
+	 * - adj: default adjective
 	 * - plural: is name a plural noun phrase (false, false, true)
 	 * - base: is valid base layer type (true, false, false)
 	 * - coat: is valid coat layer type (false, true, true)
+	 * - material: BodyMaterial this is made of
 	 */
 	public static var SkinTypes:/*EnumValue*/Array = [];
 
@@ -56,27 +58,32 @@ public class Skin extends SaveableBodyPart {
 		name:"skin",
 		appearanceDesc: "Your [skin base] has a completely normal texture, at least for your original world.",
 		plural: false,
-		base:true
+		base:true,
+		material: BodyMaterial.SKIN
 	});
 	public static const FUR: int = 1;
 	EnumValue.add(SkinTypes, FUR, "FUR", {
 		name:"fur",
 		appearanceDesc: "Your [skin base] is {partiallyOrCompletely} covered by [skin coat].",
 		plural: false,
-		coat:true
+		coat:true,
+		material: BodyMaterial.FUR
 	});
 	public static const SCALES: int = 2;
 	EnumValue.add(SkinTypes, SCALES, "SCALES", {
 		name:"scales",
 		appearanceDesc: "Your [skin base] is {partiallyOrCompletely} covered by [skin coat].",
-		plural: true
+		plural: true,
+		material: BodyMaterial.SCALES
 	});
 	public static const GOO: int = 3;
 	EnumValue.add(SkinTypes, GOO, "GOO", {
 		name:"skin",
+		adj: "goopey",
 		appearanceDesc: "Your [skin base] is {partiallyOrCompletely} made of [skin coat].",
 		plural: false,
-		base:true
+		base:true,
+		material: BodyMaterial.SKIN
 	});
 	public static const UNDEFINED: int = 4;//[Deprecated] Silently discarded upon loading save
 	public static const CHITIN: int = 5;
@@ -84,29 +91,33 @@ public class Skin extends SaveableBodyPart {
 		name:"chitin",
 		appearanceDesc: "Your [skin base] is {partiallyOrCompletely} covered by [skin coat].",
 		plural: false,
-		coat:true
+		coat:true,
+		material: BodyMaterial.CHITIN
 	});
 	public static const BARK: int = 6;
 	EnumValue.add(SkinTypes, BARK, "BARK", {
 		name:"bark",
-		appearanceDesc: "Your [skin base] is {partiallyOrCompletely} covered by [skin coat].",
+		appearanceDesc: "Your [skin base] has been replaced with a thick, sturdy layer of bark. The knotted wood is hard, and you can barely feel any pain through it, even when your skin is struck.",
 		plural: false,
-		coat:true
+		base:true,
+		material: BodyMaterial.BARK
 	});
 	public static const STONE: int = 7;
 	EnumValue.add(SkinTypes, STONE, "STONE", {
 		name:"stone",
 		appearanceDesc: "Your [skin base] is completely made of [gargoylematerial].",
 		plural: false,
-		base:true
+		base:true,
+		material: BodyMaterial.SKIN
 	});
 	public static const TATTOED: int = 8; // [Deprecated] Replaced on load with PLAIN + pattern
 	public static const AQUA_SCALES: int = 9;
 	EnumValue.add(SkinTypes, AQUA_SCALES, "AQUA_SCALES", {
-		name:"scales",
+		name:"aqua scales",
 		appearanceDesc: "Your [skin base] is {partiallyOrCompletely} covered by [skin coat].",
 		plural: true,
-		coat:true
+		coat:true,
+		material: BodyMaterial.SCALES
 	});
 	public static const PARTIAL_FUR: int = 10; // [Deprecated] Replaced on load with PLAIN + FUR
 	public static const PARTIAL_SCALES: int = 11; // [Deprecated] Replaced on load with PLAIN + SCALES
@@ -117,14 +128,16 @@ public class Skin extends SaveableBodyPart {
 		name:"dragon scales",
 		appearanceDesc: "Your [skin base] is {partiallyOrCompletely} covered by [skin coat].",
 		plural: false,
-		coat:true
+		coat:true,
+		material: BodyMaterial.SCALES
 	});
 	public static const MOSS: int = 15;
 	EnumValue.add(SkinTypes, MOSS, "MOSS", {
 		name:"moss",
 		appearanceDesc: "Your [skin base] is {partiallyOrCompletely} covered by [skin coat].",
 		plural: false,
-		coat:true
+		coat:true,
+		material: BodyMaterial.SKIN
 	});
 	public static const PARTIAL_DRAGON_SCALES: int = 16; // [Deprecated] Replaced on load with PLAIN + DRAGON_SCALES
 	public static const PARTIAL_STONE: int = 17; // [Deprecated] Replaced on load with PLAIN + STONE
@@ -134,7 +147,8 @@ public class Skin extends SaveableBodyPart {
 		name:"slippery rubber-like skin",
 		appearanceDesc: "Your [skin base] has a rubber-like texture.",
 		plural: false,
-		base:true
+		base:true,
+		material: BodyMaterial.SKIN
 	});
 	public static const TATTOED_ONI: int = 20; // [Deprecated] Replaced on load with PLAIN + pattern
 	public static const FEATHER: int = 21;
@@ -142,14 +156,16 @@ public class Skin extends SaveableBodyPart {
 		name:"feather",
 		appearanceDesc: "Your [skin base] is {partiallyOrCompletely} covered by [skin coat].",
 		plural: false,
-		base:true
+		base:true,
+		material: BodyMaterial.FEATHERS
 	});
 	public static const TRANSPARENT: int = 22;
 	EnumValue.add(SkinTypes, TRANSPARENT, "TRANSPARENT", {
 		name:"transparent",
 		appearanceDesc: "Your [skin base] is completely transparent, like a ghost's.",
 		plural: false,
-		base:true
+		base:true,
+		material: BodyMaterial.SKIN
 	});
 
 	/**
@@ -178,19 +194,19 @@ public class Skin extends SaveableBodyPart {
 	public static const PATTERN_ORCA_UNDERBODY: int = 2;
 	EnumValue.add(PatternTypes, PATTERN_ORCA_UNDERBODY, "ORCA_UNDERBODY", {
 		name:"orca underbody",
-		appearanceDesc: "A [skin color2] underbelly runs on the underside of your limbs bearing a glossy shine, similar to that of an orca.",
+		appearanceDesc: "A [skin base.color2] underbelly runs on the underside of your limbs bearing a glossy shine, similar to that of an orca.",
 		base:true
 	});
 	public static const PATTERN_BEE_STRIPES: int = 3;
 	EnumValue.add(PatternTypes, PATTERN_BEE_STRIPES, "BEE_STRIPES", {
 		name:"bee stripes",
-		appearanceDesc: "You have [skin color] [skin base] covered by a bee-like [skin color2] stripe pattern.",
+		appearanceDesc: "You have [skin coat.color1] [skin coat.nocolor] covered by a bee-like [skin coat.color2] stripe pattern.",
 		coat:true
 	});
 	public static const PATTERN_TIGER_STRIPES: int = 4;
 	EnumValue.add(PatternTypes, PATTERN_TIGER_STRIPES, "TIGER_STRIPES", {
 		name:"tiger stripes",
-		appearanceDesc: "You have [skin color] [skin base] covered by a tiger-like [skin color2] stripe pattern.",
+		appearanceDesc: "You have [skin coat] covered by a tiger-like [skin coat.color2] stripe pattern.",
 		coat:true
 	});
 	public static const PATTERN_BATTLE_TATTOO: int = 5;
@@ -202,7 +218,7 @@ public class Skin extends SaveableBodyPart {
 	public static const PATTERN_SPOTTED: int = 6;
 	EnumValue.add(PatternTypes, PATTERN_SPOTTED, "SPOTTED", {
 		name:"spotted",
-		appearanceDesc: "You have many [skin color2] spots around your [skin color] fur.",
+		appearanceDesc: "You have many [fur color2] spots around your [fur color1] fur.",
 		coat:true
 	});
 	public static const PATTERN_LIGHTNING_SHAPED_TATTOO: int = 7;
@@ -214,7 +230,7 @@ public class Skin extends SaveableBodyPart {
 	public static const PATTERN_RED_PANDA_UNDERBODY: int = 8;
 	EnumValue.add(PatternTypes, PATTERN_RED_PANDA_UNDERBODY, "RED_PANDA_UNDERBODY", {
 		name:"red panda underbody",
-		appearanceDesc: "You have an underbelly colored [skin color2].",
+		appearanceDesc: "You have an underbelly colored [skin coat.color2].",
 		coat:true
 	});
 	public static const PATTERN_SCAR_SHAPED_TATTOO: int = 9;
@@ -256,7 +272,7 @@ public class Skin extends SaveableBodyPart {
 	public static const PATTERN_SEA_DRAGON_UNDERBODY: int = 15;
 	EnumValue.add(PatternTypes, PATTERN_SEA_DRAGON_UNDERBODY, "SEA_DRAGON_UNDERBODY", {
 		name:"sea dragon underbody",
-		appearanceDesc: "An underbelly colored [skin color2] runs on the underside of your limbs bearing a glossy shine, on top of being lined up with bioluminescent dots like those of a deep sea fish.",
+		appearanceDesc: "An underbelly colored [skin base.color2] runs on the underside of your limbs bearing a glossy shine, on top of being lined up with bioluminescent dots like those of a deep sea fish.",
 		base:true
 	});
 	// Don't forget to add new types in DebugMenu.as lists SKIN_BASE_TYPES or SKIN_COAT_TYPES
@@ -282,14 +298,18 @@ public class Skin extends SaveableBodyPart {
 	public function set coverage(value:int):void {
 		_coverage = boundInt(COVERAGE_NONE, value, COVERAGE_COMPLETE);
 	}
-	public function get tone():String {
-		return color;
-	}
 	public function get color():String {
 		return skinValue(base.color, coat.color);
 	}
+	public function get color1():String {
+		return skinValue(base.color1, coat.color1);
+	}
 	public function get color2():String {
 		return skinValue(base.color2, coat.color2);
+	}
+	public function set color(value:String):void {
+		if (_coverage <= COVERAGE_MEDIUM) base.color = value;
+		if (_coverage >= COVERAGE_MEDIUM) coat.color = value;
 	}
 	public function get desc():String {
 		return skinValue(base.desc, coat.desc);
@@ -312,12 +332,11 @@ public class Skin extends SaveableBodyPart {
 		if (coverage > COVERAGE_NONE) return coat.type;
 		return base.type;
 	}
-
-    //used to determine default coat color -
-    public function isHairy():Boolean {
-        return (type == FUR || type == MOSS || type == FEATHER);
-    }
-
+	
+	override public function hasMaterial(type:int):Boolean {
+		return base.hasMaterial(type) || coat.hasMaterial(type);
+	}
+	
 	/**
 	 * Checks both layers against property set
 	 * @param p {color, type, adj, desc}
@@ -332,12 +351,6 @@ public class Skin extends SaveableBodyPart {
 	public function growCoat(type:int,options:Object=null,coverage:int=COVERAGE_HIGH):SkinLayer {
 		this.coverage = coverage;
 		this.coat.type = type;
-        if (!this.coat.color) {
-            if (isHairy()) //select default color
-		        this.coat.color = creature.hairColor;
-            else
-                this.coat.color = this.base.color;
-        }
 		if (options) this.coat.setProps(options);
 		return this.coat;
 	}
@@ -346,7 +359,7 @@ public class Skin extends SaveableBodyPart {
 	 */
 	public function growFur(options:Object=null,coverage:int=COVERAGE_HIGH):SkinLayer {
 		this.coverage = coverage;
-		this.coat.setProps({color: creature.hairColor, type: FUR});
+		this.coat.type = FUR;
 		if (options) this.coat.setProps(options);
 		return this.coat;
 	}
@@ -457,43 +470,43 @@ public class Skin extends SaveableBodyPart {
 	public function hasPartialCoatOfType(coat_type:int):Boolean {
 		return coverage == COVERAGE_LOW && coat.type == coat_type;
 	}
-	public function hasFur():Boolean {
+	public function isFurCovered():Boolean {
 		return hasCoatOfType(FUR);
 	}
 	public function get fur():SkinLayer {
-		return hasFur() ? coat : null;
+		return isFurCovered() ? coat : null;
 	}
-	public function hasChitin():Boolean {
+	public function isChitinCovered():Boolean {
 		return hasCoatOfType(CHITIN);
 	}
-	public function hasScales():Boolean {
+	public function isScaleCovered():Boolean {
 		return hasCoatOfType(SCALES, AQUA_SCALES, DRAGON_SCALES);
 	}
-	public function hasReptileScales():Boolean {
+	public function isReptileScaleCovered():Boolean {
 		return hasCoatOfType(SCALES, DRAGON_SCALES);
 	}
-	public function hasDragonScales():Boolean {
+	public function isDragonScaleCovered():Boolean {
 		return hasCoatOfType(DRAGON_SCALES);
 	}
-	public function hasLizardScales():Boolean {
+	public function isLizardScaleCovered():Boolean {
 		return hasCoatOfType(SCALES);
 	}
-	public function hasNonLizardScales():Boolean {
-		return hasScales() && !hasLizardScales();
+	public function isNonLizardScaleCovered():Boolean {
+		return isScaleCovered() && !isLizardScaleCovered();
 	}
 	public function hasBark():Boolean {
-		return coat.isAny(BARK);
+		return base.isAny(BARK);
 	}
-	public function hasGooSkin():Boolean {
+	public function isGooSkin():Boolean {
 		return base.isAny(GOO);
 	}
 	public function hasRubberSkin():Boolean {
 		return base.isAny(AQUA_RUBBER_LIKE);
 	}
-	public function hasGhostSkin():Boolean {
+	public function isGhostSkin():Boolean {
 		return base.isAny(TRANSPARENT);
 	}
-	public function hasFeather():Boolean {
+	public function isFeatherCovered():Boolean {
 		return coat.isAny(FEATHER);
 	}
 	public function hasMostlyPlainSkin():Boolean {
@@ -509,7 +522,7 @@ public class Skin extends SaveableBodyPart {
 		return coverage < COVERAGE_COMPLETE && base.type == PLAIN;
 	}
 	public function hasNoPattern():Boolean {
-		return base.pattern == PATTERN_NONE;
+		return base.pattern == PATTERN_NONE && coat.pattern == PATTERN_NONE;
 	}
 	public function hasMagicalTattoo():Boolean {
 		return base.pattern == PATTERN_MAGICAL_TATTOO;
@@ -661,22 +674,13 @@ public class Skin extends SaveableBodyPart {
 				}
 			}
 		}
-		var tone:String        = stringOr(savedata.skinTone, "albino");
-		var furColor:String    = stringOr(savedata.furColor, stringOr(savedata.hairColor, ""));
-		var chitinColor:String = stringOr(savedata.chitinColor, "");
-		var scalesColor:String = stringOr(savedata.scalesColor, "");
-		if (furColor === "no") furColor = "";
-		if (chitinColor === "no") chitinColor = "";
-		if (scalesColor === "no") scalesColor = "";
 		//noinspection JSDeprecatedSymbols
 		if (InCollection(type, PLAIN, GOO, TATTOED, STONE, SCALES, AQUA_SCALES, PARTIAL_DRAGON_SCALES, AQUA_RUBBER_LIKE, TATTOED_ONI)) {
 			coverage   = COVERAGE_NONE;
 			base.type  = type;
-			base.color = (type == SCALES && scalesColor) ? scalesColor : tone;
 			base.adj   = adj;
 			base.desc  = desc;
 			coat.type  = FUR;
-			if (coat.color == "no") coat.color = savedata.hairColor;
 		} else {
 			coverage = COVERAGE_HIGH;
 			if (type in PARTIAL_TO_FULL) {
@@ -686,22 +690,13 @@ public class Skin extends SaveableBodyPart {
 			coat.type  = type;
 			coat.adj   = adj;
 			coat.desc  = desc;
-			base.color = tone;
-			if (type === FUR) {
-				coat.color = furColor;
-			} else if (type === SCALES) {
-				coat.color = scalesColor;
-			} else if (type === CHITIN) {
-				coat.color = chitinColor;
-			}
-			if (!coat.color) coat.color = furColor || scalesColor || chitinColor || "white";
 		}
 	}
 	override protected function saveToOldSave(savedata:Object):void {
 		savedata.skinType    = type;
 		savedata.skinDesc    = desc;
 		savedata.skinAdj     = adj;
-		savedata.skinTone    = tone;
+		savedata.skinTone    = color;
 		savedata.furColor    = coat.color;
 		savedata.scalesColor = coat.color;
 		savedata.chitinColor = coat.color;
@@ -717,7 +712,7 @@ public class Skin extends SaveableBodyPart {
 	}
 
 	public static function getSkinPatternAppearanceDescription(creature: *):String {
-		const id: int = creature.skin.base.pattern;
+		const id: int = creature.skin.pattern;
 
 		return formatDescription((PatternTypes[id].appearanceDescFunc ? PatternTypes[id].appearanceDescFunc(creature) : PatternTypes[id].appearanceDesc) || "", creature);
 	}

@@ -34,13 +34,13 @@ public class PatchouliScene extends NPCAwareContent {
 	5 - Tied up in camp,
 	6/7 - Bimbofied
 	*/
-	private const MET:int        = 1;
-	private const OFFERTAKEN:int = 2;
-	private const BADENDED:int   = 3;
-	private const FORGIVEN:int   = 4;
-	private const TIEDINCAMP:int = 5;
-	private const BIMBO:int      = 6;
-	private const MATE:int       = 7;
+	public static const MET:int        = 1;
+	public static const OFFERTAKEN:int = 2;
+	public static const BADENDED:int   = 3;
+	public static const FORGIVEN:int   = 4;
+	public static const TIEDINCAMP:int = 5;
+	public static const BIMBO:int      = 6;
+	public static const MATE:int       = 7;
 
 	private var _allVisited:Boolean = false;
 
@@ -67,7 +67,7 @@ public class PatchouliScene extends NPCAwareContent {
 		if (follower < 1) {
 			outputText("As you explore the forest, you spot a particularly weird cat person sleeping in a tree. Weird isn’t exactly the proper term here, as its fur color simply seems out of this world; either he dyed them or he was born with green fur and pink stripes. While at first you thought he was a girl due to his lean features, long hair and somewhat feminine face, the absence of breasts and the somewhat male, albeit girlish and young voice of the cat tells you otherwise. You approach him and ask him who he is. He stretches, looks at you and gives you an impossibly wide grin.\n\n");
 			outputText("\"<i>Nyaaaaaaaaaaaa...Oh, hello traveler? Are you perhaps lost? My job is to guide people across this land to new destinations. Would you like a tour? My name’s Trusty Patchouli, by the way.</i>\"\n\n");
-			outputText("The way he says this, with that constant smile, is somewhat disturbing, but now that you think of it ");
+			outputText("The way he says this, with that constant smile, is somewhat disturbing, but now that you think of it");
 			if (visitedAllAreas()) {
 				outputText(", you’re pretty sure you saw each and every location on Mareth, so you ponder where he could lead you.");
 			} else {
@@ -80,10 +80,10 @@ public class PatchouliScene extends NPCAwareContent {
 			addButton(1, "Decline", camp.returnToCampUseOneHour);
 		}
 		else if (follower == MET || follower == FORGIVEN) {
-			outputText("As you explore the forest you come over Patchouli the cat again. Hes lazily resting on a nearby tree branch. The moment he notice you, he gives you his most unsettling smile before engaging the conversation.\n\n");
+			outputText("As you explore the forest you come over Patchouli the cat again. He's lazily resting on a nearby tree branch. The moment he notices you, he gives you his most unsettling smile before engaging the conversation.\n\n");
 			outputText("\"<i>Hello again, are you looking for a guide to new destinations? I can show you the way anytime so long as you ask.</i>\"\n\n");
 			if (follower == FORGIVEN) {
-				outputText("Will you really trust him? You already knows he might be leading you into a trap again.\n\n");
+				outputText("Will you really trust him? You already know he might be leading you into a trap again.\n\n");
 			}
 			menu();
 			addButton(0, "Yes", patchouliExploreLuckyWheel).hint("Let him lead you to new places.");
@@ -96,7 +96,7 @@ public class PatchouliScene extends NPCAwareContent {
 			outputText("\"<i>Uh... yeah, I’m pretty sure we didn’t... Ok, yes, fine, I did it. But there’s no need to get angry, yes? You're still alive and well. Please, forgive me, I sometimes have these urges to... eh, you know. Hehehe...please, let me... go?</i>\"\n\n");
 			menu();
 			addButton(0, "Forgive", patchouliForgiveHim);
-			addButton(1, "Rape", patchouliRapeHim);
+			addButton(1, "Rape", patchouliRapeHim).disableIf(player.isGenderless(), "Not for genderless!");
 			addButton(2, "Kill Him", patchouliKillHim);
 			if (silly()) addButton(3, "Finish Him", patchouliKillHim, true);
 		}
@@ -108,48 +108,6 @@ public class PatchouliScene extends NPCAwareContent {
 			outputText("\"<i>Thank you! Thank you! Don’t worry, I will never trick anyone again!</i>\"\n\n");
 			outputText("He vanishes into thin air and with his characteristic smirk and you simply head back to camp.");
 			flags[kFLAGS.PATCHOULI_FOLLOWER] = FORGIVEN;
-			doNext(camp.returnToCampUseOneHour);
-		}
-
-		function patchouliRapeHim():void {
-			spriteSelect(SpriteDb.s_patchouli_male);
-			clearOutput();
-			outputText("You got plans for this insolent cat. Let’s see how long he smiles once you're violating that ");
-			if (player.hasVagina()) {
-				outputText("tiny dick");
-			} else {
-				outputText("firm little ass");
-			}
-			outputText(" of his.\n\n");
-			if (player.hasVagina()) {
-				outputText("You force the catboy on his back and yank his shorts away, revealing his cute tiny barbed cock.\n\n");
-				outputText("\"<i>Uh, I’m sure we can sort that out in a different way! I can lead you to treasure, riches, a minotaur... wait, forget I ever said anything about the minotaur!</i>\"\n\n");
-				outputText("You won’t need a minotaur for now, as you got exactly what you want right here! You don’t give him the chance to teleport away as you grab him by the neck and take hold of his cock with your other hand. Patchouli starts to mewl with anguished pleasure as you stroke his cat cock with your hand. You thought that by now, he would have teleported, but you suspect he's secretly a complete sub and loves getting punished for his mischief, not that you care about his kinks. ");
-				outputText("What you care about is punishing that cock of his and getting your revenge. You spit on his cat cock and lube it properly before aligning your cunt with it. Patchouli screeches when you forcefully impale yourself on his dick and begin to pump for his boy milk. His barbs caress your walls in just the perfect way.\n\n");
-				outputText("\"<i>Please.. not so rough, my cock hurts!</i>\"\n\n");
-				outputText("He could at least pretend he likes it, you’re already are very kind, granting him the right to even get raped in the first place instead of straight out killing him. Soon, you find yourself on the verge of orgasm. Patchouli finally loses control of his cat cock as it twitches, filling you with kitty jizz and causing your orgasm shortly after.\n\n");
-				outputText("You keep milking the prankster for a few hours until he is passed out. Then bring him back to your camp and tie him to a tree.\n\n");
-				player.sexReward("cum","Vaginal");
-			} else {
-				var x:int = player.cockThatFits(36, "length");
-                if (x < 0)
-                    x = 0;
-				outputText("You force the catboy on his back and yank his shorts away, revealing his girly ass and his cute pucker. Patchouli gulps as your [cock] hardens, already aware of what is about to happen.\n\n");
-				outputText("\"<i>Uh I’m sure we can sort that out in a different way! I can lead you to treasure, riches, a minotaur... wait, forget I ever said anything about the minotaur!</i>\"\n\n");
-				outputText("You don’t give him the chance to teleport away as you grab him by the neck and force your [cock] in.\n\n");
-				if (player.cocks[x].cockLength >= 20) {
-					outputText("\"<i>Eeeeep you're tearing me apart! Please stop, I’m telling you that you're tearing my ass apart!</i>\"\n\n");
-					outputText("What a liar, you're all too aware that this jerk’s ability to play with dimensional travel allows him to send most of your cock into some other dimension. As a matter of fact, his stomach isn't even bulging from your insertion, but his pucker sure looks like it's stretched to its limit. ");
-				}
-				outputText("You begin to fuck his butt thoroughly in order to teach the little boyslut a lesson his ass won’t forget. His anus begins to contract and pulse around your dick like a vagina and who knows, maybe he somehow connected it to a cunt somewhere across the multiverse. Before long the sensation of Patchouli’s asscunt proves too much for you and you fill it full of your jizz. Patchouli seems to get off from his tormented ass, his cat cock pulsing as he reaches orgasm, splattering the grass below him with cum. He sighs in relief as you pull your [cock] out of his ass, then teases you.\n\n");
-				outputText("\"<i>Some poor girl in that village must be pregnant by now, you should be ashamed, you know?</i>\"\n\n");
-				outputText("This little asshole has pranked you long enough. You knock him unconscious and bring him back to camp, making sure to tie him to a nearby tree");
-				player.sexReward("Default","Default",true,false);
-				if (camp.getCampPopulation() >= 2)
-					outputText(". Leaving one of your friends to watch over him at all time");
-				outputText(".\n\n");
-			}
-			flags[kFLAGS.PATCHOULI_FOLLOWER] = TIEDINCAMP;
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -168,6 +126,56 @@ public class PatchouliScene extends NPCAwareContent {
 		}
 	}
 
+	public function patchouliRapeHim():void {
+		clearOutput();
+		if (!recalling) flags[kFLAGS.PATCHOULI_FOLLOWER] = TIEDINCAMP;
+		outputText("You got plans for this insolent cat.\n\n");
+		sceneHunter.selectGender(dickF, vagF, null, null, -1);
+
+		//============
+		function vagF():void {
+			outputText("Let’s see how long he smiles once you're violating that tiny dick of his.\n\n");
+			outputText("You force the catboy on his back and yank his shorts away, revealing his cute tiny barbed cock.\n\n");
+			outputText("\"<i>Uh, I’m sure we can sort that out in a different way! I can lead you to treasure, riches, a minotaur... wait, forget I ever said anything about the minotaur!</i>\"\n\n");
+			outputText("You won’t need a minotaur for now, as you got exactly what you want right here! You don’t give him the chance to teleport away as you grab him by the neck and take hold of his cock with your other hand. Patchouli starts to mewl with anguished pleasure as you stroke his cat cock with your hand. You thought that by now, he would have teleported, but you suspect he's secretly a complete sub and loves getting punished for his mischief, not that you care about his kinks. ");
+			outputText("What you care about is punishing that cock of his and getting your revenge. You spit on his cat cock and lube it properly before aligning your cunt with it. Patchouli screeches when you forcefully impale yourself on his dick and begin to pump for his boy milk. His barbs caress your walls in just the perfect way.\n\n");
+			outputText("\"<i>Please.. not so rough, my cock hurts!</i>\"\n\n");
+			outputText("He could at least pretend he likes it, you’re already are very kind, granting him the right to even get raped in the first place instead of straight out killing him. Soon, you find yourself on the verge of orgasm. Patchouli finally loses control of his cat cock as it twitches, filling you with kitty jizz and causing your orgasm shortly after.\n\n");
+			outputText("You keep milking the prankster for a few hours until he is passed out. Then bring him back to your camp and tie him to a tree\n\n");
+			if (camp.getCampPopulation() >= 2)
+				outputText(", leaving one of your friends to watch over him at all time");
+			outputText(".\n\n");
+			if (!recalling) {
+				player.sexReward("cum", "Vaginal");
+				doNext(camp.returnToCampUseOneHour);
+			} else doNext(recallWakeUp);
+		}
+
+		function dickF():void {
+			var x:int = player.cockThatFits(36, "length");
+			if (x < 0)
+				x = 0;
+			outputText("Let’s see how long he smiles once you're violating that firm little ass of his.\n\n");
+			outputText("You force the catboy on his back and yank his shorts away, revealing his girly ass and his cute pucker. Patchouli gulps as your [cock] hardens, already aware of what is about to happen.\n\n");
+			outputText("\"<i>Uh I’m sure we can sort that out in a different way! I can lead you to treasure, riches, a minotaur... wait, forget I ever said anything about the minotaur!</i>\"\n\n");
+			outputText("You don’t give him the chance to teleport away as you grab him by the neck and force your [cock] in.\n\n");
+			if (player.cocks[x].cockLength >= 20) {
+				outputText("\"<i>Eeeeep you're tearing me apart! Please stop, I’m telling you that you're tearing my ass apart!</i>\"\n\n");
+				outputText("What a liar, you're all too aware that this jerk’s ability to play with dimensional travel allows him to send most of your cock into some other dimension. As a matter of fact, his stomach isn't even bulging from your insertion, but his pucker sure looks like it's stretched to its limit. ");
+			} else sceneHunter.print("need a bigger dick");
+			outputText("You begin to fuck his butt thoroughly in order to teach the little boyslut a lesson his ass won’t forget. His anus begins to contract and pulse around your dick like a vagina and who knows, maybe he somehow connected it to a cunt somewhere across the multiverse. Before long the sensation of Patchouli’s asscunt proves too much for you and you fill it full of your jizz. Patchouli seems to get off from his tormented ass, his cat cock pulsing as he reaches orgasm, splattering the grass below him with cum. He sighs in relief as you pull your [cock] out of his ass, then teases you.\n\n");
+			outputText("\"<i>Some poor girl in that village must be pregnant by now, you should be ashamed, you know?</i>\"\n\n");
+			outputText("This little asshole has pranked you long enough. You knock him unconscious and bring him back to camp, making sure to tie him to a nearby tree");
+			if (camp.getCampPopulation() >= 2)
+				outputText("and leave one of your friends to watch over him at all time");
+			outputText(".\n\n");
+			if (!recalling) {
+				player.sexReward("Default", "Dick", true, false);
+				doNext(camp.returnToCampUseOneHour);
+			} else doNext(recallWakeUp);
+		}
+	}
+
 	private function patchouliExploreLuckyWheel():void {
 		if (flags[kFLAGS.PATCHOULI_FOLLOWER] < 2 || flags[kFLAGS.PATCHOULI_FOLLOWER] == FORGIVEN) {
 			flags[kFLAGS.PATCHOULI_FOLLOWER] = OFFERTAKEN;
@@ -175,7 +183,7 @@ public class PatchouliScene extends NPCAwareContent {
 
 		clearOutput();
 		outputText("The cat jumps down from the tree and walks ahead of you, showing you the way. Strangely, the landscape seems to change absurdly fast around you as you follow him until ");
-		if (visitedAllAreas()) {
+		if (player.level >= 30 && rand(2) == 0) {
 			if (flags[kFLAGS.PATCHOULI_AND_WONDERLAND] != 1) {
 				outputText("you end up in an exceedingly colorful version of the forest. Things here look weirder than usual, but not in a sexual way, rather it’s like the painting of a mad artist.\n\n");
 				outputText("\"<i>Well wow, out of all locations I didn’t expect us to end up in here... just... just pick up a fruit or two and I will escort you out.</i>\"\n\n");
@@ -277,25 +285,10 @@ public class PatchouliScene extends NPCAwareContent {
 					break;
 				case 8:
 					outputText("you end up in a somewhat hot area. You can see lava rivers every now and then across the ashen land.\n\n");
-					outputText("Just as you consider leaving this unfriendly land, the cat shouts something and what looks to be a harpy mixed up with a fiery lizard flies from a cliff toward the both of you. You see the damned cat disappearing, just before the battle starts.\n\n");
+					outputText("Just as you consider leaving this unfriendly land, the cat shouts something and what looks to be a harpy mixed up with a fiery lizard flies from a cliff toward both of you. You see the damned cat disappearing, just before the battle starts.\n\n");
 					if (!player.hasPerk(PerkLib.FireAffinity) && !player.hasPerk(PerkLib.AffinityIgnis)) SceneLib.volcanicCrag.ConstantHeatConditionsTick();
 					startCombat(new PhoenixPlatoon());
 					break;
-				/*case 9:
-
-					break;
-				case 10:
-
-					break;
-				case 11:
-
-					break;
-				case 12:
-
-					break;
-				case 13:
-
-					break;*/
 				default:
 					outputText("you end up in a somewhat mountainy area.\n\n");
 					outputText("As you turn a corner you end up looking at the back of a somewhat tall man with the features of a bull. You’re about to sneak away when Patchouli shouts.\n\n");
@@ -350,8 +343,11 @@ public class PatchouliScene extends NPCAwareContent {
 		outputText("Well now that she says it you're unsure this is a bright idea but fair is fair, and you promised. You untie the still wide grinning Patchouli.\n\n");
 		outputText("Her reaction is immediate, swift and somewhat unexpected. She disappears and reappears right above you, making you fall over. Before you know it, the cat woman is sitting on your chest, grinning widely again and you are almost afraid of what will happen next. Not in a million years did you imagine she would turn the tables.\n\n");
 		outputText("\"<i>Nyaaaaaa~, I’m in heat [name] and you know exactly what this means. I’m crazy for you, so let's fuck till you go crazy too!</i>\"\n\n");
-		outputText("What in hell?! You though giving him the liquor would turn him into a compliant nymphomaniac, not into a insane cat in heat.\n\n");
+		outputText("What in hell?! You though giving him the liquor would turn him into a compliant nymphomaniac, not into an insane cat in heat.\n\n");
 		outputText("\"<i>Oh but that's where you're wrong [name], I never was sane to begin with. Everyone from my homeland is mad one way or another and if I may be honest I’m one of the craziest. Now I’m not only crazy, I’m literally crazy for you so lets go mad together!</i>\"\n\n");
+		if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard",1,+1);
+		else player.createKeyItem("Radiant shard", 1,0,0,0);
+		outputText("<b>As if remembering something she pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>\n\n");
 		flags[kFLAGS.PATCHOULI_FOLLOWER]      = BIMBO;
 		flags[kFLAGS.PATCHOULI_GIRL_OR_MORPH] = 0;
 		flags[kFLAGS.PATCHOULI_CUP_SIZE]      = 5;
@@ -369,7 +365,7 @@ public class PatchouliScene extends NPCAwareContent {
 		clearOutput();
 		if (flags[kFLAGS.PATCHOULI_FOLLOWER] == TIEDINCAMP) {
 			spriteSelect(SpriteDb.s_patchouli_male);
-			outputText("Patchouli looks like your typical cat morph. However, the color of his fur is clearly unnatural. Striped black on a background of purple, Patchouli’s fur clearly does not belong on any normal cat. His fur is hardly the only thing ‘unnatural’ about him, as he almost smiles constantly, not just once in awhile, with the most unsettling grin he can muster. You would believe him to be up to some crazy mischief ");
+			outputText("Patchouli looks like your typical cat morph. However, the color of his fur is clearly unnatural. Striped black on a background of purple, Patchouli’s fur clearly does not belong on any normal cat. His fur is hardly the only thing ‘unnatural’ about him, as he almost smiles constantly, not just once in a while, with the most unsettling grin he can muster. You would believe him to be up to some crazy mischief ");
 			outputText("if somehow tying him up to a tree did not hold him from teleporting away. Go figure, why doesn’t he? It's likely some fucked up rule of his world. His green cat eyes have been observing you the whole time with interest, his tail twitching every now and then with the infinite patience of someone up to no good.\n\n");
 			outputText("\"<i>Nya, having a good view [name]? Feel free to admire me all you like I love being looked at.</i>\"\n\n");
 			outputText("You move your gaze away before it gets any more awkward than it already is.\n\n");
@@ -382,9 +378,9 @@ public class PatchouliScene extends NPCAwareContent {
 			} else {
 				outputText("look like your typical cat morph");
 			}
-			outputText(". However the color of her fur is clearly unnatural. Striped black on a background of purple, Patchoulie’s fur clearly does not belong on any normal cat. Her hair which used to be of the same messed up color as her fur are now divided between strands of platinum " + flags[kFLAGS.PATCHOULI_HAIR_COLOR] + " and purple, like someone whos head would feature on a deck of cards. ");
-			outputText("Her fur is hardly the only thing ‘unnatural’ about her as she almosts smile constantly, not just once in awhile, with the most unsettlingly lewd grin she can muster. Patchoulie’s latest joy of late is to make you as emotionally uncomfortable and guilty as she can before sex. She’s currently laid back on a tree branch, her green cat eyes observing you with interest, her tail twitching every now and then with the infinite patience of someone up to no good.\n\n");
-			outputText("\"<i>Nya, having a good view [name]? Feel free to admire me all you like I reaaaaally love being looked at. Especially when it's by you. Oh you are such an irredeemable pervert.</i>\"\n\n");
+			outputText(". However the color of her fur is clearly unnatural. Striped black on a background of purple, Patchoulie’s fur clearly does not belong on any normal cat. Her hair which used to be of the same messed up color as her fur are now divided between strands of platinum " + flags[kFLAGS.PATCHOULI_HAIR_COLOR] + " and purple, like someone whose head would feature on a deck of cards. ");
+			outputText("Her fur is hardly the only thing ‘unnatural’ about her as she almosts smile constantly, not just once in a while, with the most unsettlingly lewd grin she can muster. Patchoulie’s latest joy of late is to make you as emotionally uncomfortable and guilty as she can before sex. She’s currently laid back on a tree branch, her green cat eyes observing you with interest, her tail twitching every now and then with the infinite patience of someone up to no good.\n\n");
+			outputText("\"<i>Nya, having a good view [name]? Feel free to admire me all you like I reaaaaally love being looked at. Especially when it's by you. Oh, you are such an irredeemable pervert.</i>\"\n\n");
 			outputText("Gosh the worst is she’s bloody right. You indeed have been having short glances at her " + Appearance.breastCup(flags[kFLAGS.PATCHOULI_CUP_SIZE]) + " breasts and constantly dripping pussy");
 			if (flags[kFLAGS.PATCHOULI_COCK] > 0) {
 				outputText(", what of her " + flags[kFLAGS.PATCHOULI_COCK] + " inch " + flags[kFLAGS.PATCHOULI_COCK_TYPE] + " cock");
@@ -436,25 +432,26 @@ public class PatchouliScene extends NPCAwareContent {
 		outputText("\"<i>Me nya? I am everything and nothing, everywhere and nowhere. Nya to describe what I am is to also describe what I am not. Through for people like you the simple answer is a cheshire cat.</i>\"\n\n");
 		outputText("How can " + (tiedUp ? "he" : "she") + " be and not be at the same time that makes no senses.\n\n");
 		outputText("\"<i>I’m from a different world with a different mindset. One where simple rules such as your so called \"physics\" and \"logic\" do not apply. A mad dimension where such things are commonplace and the norm. How very amusing of you to question whether I make sense or not when the very stability of this dimension you call Mareth in itself makes so little sense. People fucking everywhere, mad mages trading their souls for power, animals talking and breeding, food that transforms you, people being jealous, hurting and stealing from each other? None of this makes sense, you know, yet you're here questioning a cat about the logics of ");
-		outputText((tiedUp ? "his" : "her") + " action? I say you're the crazy one. Know this... by the time your so called quest is over you will be even crazier then me");
+		outputText((tiedUp ? "his" : "her") + " action? I say you're the crazy one. Know this... by the time your so-called quest is over you will be even crazier then me");
 		if (tiedUp) outputText(". It’s like that rope and tree, why do you think I didn’t go elsewhere yet? It's because I don’t have a cheese on me to break free. I'm not bound by the same rules and reality, yet I’m bound all the same. You and I come from different worlds, [name]");
 		outputText(".</i>\"\n\nCome again? Is the cat actually calling you crazy? The cheshire teasingly replies with a wide smile.\n\n");
 		outputText("\"<i>To you what I say may make no sense, but things such as common sense are alien to me for common sense itself is based on logic. You can access that world too if you try... everyone has the potential to visit it from the depth of their mind, to touch it, if even for a second. A world different from this one, so close yet so far, but again, for someone like me distances holds little meaning. Maybe if you ask me nicely I will bring you to its gates sometimes.</i>\"\n\n");
-		if (tiedUp) outputText("Of course you would have to untie him first and that ain't happening anytime soon.\n\n");
+		if (tiedUp) outputText("Of course, you would have to untie him first and that ain't happening anytime soon.\n\n");
 		doNext(patchouleTalkMenu);
 		cheatTime(1 / 4);
 	}
 
 	private function patchouleSexHer():void {
 		menu();
-		if (player.hasVagina()) {
-			addButton(0, "Girl On Girl", patchouleGirlOnGirl);
-			if (flags[kFLAGS.PATCHOULI_COCK] > 0) addButton(1, "TakeVaginal", patchouleTakeVaginal);
-		}
-		if (player.hasCock()) {
-			addButton(2, "Vaginal", patchouleVaginal);
-			addButton(3, "Anal", patchouleAnal);
-		}
+		addButton(0, "Girl On Girl", patchouleGirlOnGirl)
+			.disableIf(!player.hasVagina(), "Req. a vagina!");
+		addButton(1, "TakeVaginal", patchouleTakeVaginal)
+			.disableIf(!flags[kFLAGS.PATCHOULI_COCK], "She doesn't have a cock!")
+			.disableIf(!player.hasVagina(), "Req. a vagina!");
+		addButton(2, "Vaginal", patchouleVaginal)
+			.disableIf(!player.hasCock(), "Req. a cock!");
+		addButton(3, "Anal", patchouleAnal)
+			.disableIf(!player.hasCock(), "Req. a cock!");
 		addButton(14, "Back", patchouleMainCampMenu);
 	}
 
@@ -466,7 +463,7 @@ public class PatchouliScene extends NPCAwareContent {
 		outputText("\"<i>Nyaaaa... I’m totally in heat for you [name] so let me take good care of you.</i>\"\n\n");
 		outputText("In heat. huh? Well she sure did put you in the mood as, lost in the moment, you grab her mouth and start exchanging kisses with her as she keeps fingering you. Her tail caresses your inner thigh and you almost cum on your own, however in your delirium you begin playing with your partner as well. Patchoulie rewards you with a set of happy mewls as your finger gets drenched with her pussy juice.\n\n");
 		outputText("\"<i>NYYAAAAAAaaa!!! Don’t stop! Please don’t stop... so close!</i>\"\n\n");
-		outputText("Gosh, she really must’ve been starving for attention. She gives you free access to her cunt and you don’t disappoint. Getting your hand further inside and tweaking her bitch button, you do all in your power to make her reach a wonderland of bliss! The two of you begin to lose track as you lose yourself to the pleasure countless times. You vaguely remember her wide smile as the both of you reached orgasm just before you lost consciousness.\n\n");
+		outputText("Gosh, she really must’ve been starving for attention. She gives you free access to her cunt and you don’t disappoint. Getting your hand further inside and tweaking her bitch button, you do all in your power to make her reach a wonderland of bliss! The two of you begin to lose track as you lose yourself to the pleasure countless times. You vaguely remember her wide smile as both of you reached orgasm just before you lost consciousness.\n\n");
 		if (flags[kFLAGS.PATCHOULI_FOLLOWER] == MATE) {
 			outputText("\"<i>Nyaaa... Always a pleasure to breed with you, [name]. Ask me whenever you are in the mood again, I’m looking forward to it.</i>\"\n\n");
 		}
@@ -504,7 +501,7 @@ public class PatchouliScene extends NPCAwareContent {
 		} else {
 			outputText("girl");
 		}
-		outputText(" mewls and moans as she milks you with her pussy. The fact she's a bimbo also somehow helps her skill despite having been a male not so long before. She lets her purple fur slide against your [skin] and you grope her ass as she joyfully bounces up and down along your cock length. You cum in her cunt as she howls a final \"NYYAAAAAAA\" skyward her tail straight like an iron bar. After this ordeal the both of you finally doze off to sleep.\n\n");
+		outputText(" mewls and moans as she milks you with her pussy. The fact she's a bimbo also somehow helps her skill despite having been a male not so long before. She lets her purple fur slide against your [skin] and you grope her ass as she joyfully bounces up and down along your cock length. You cum in her cunt as she howls a final \"NYYAAAAAAA\" skyward her tail straight like an iron bar. After this ordeal both of you finally doze off to sleep.\n\n");
 		outputText("When you wake up Patchoulie is resting on all four next to you in a seductive pose, still holding that unsettling smile that is her signature as she plays with one of the hair braid she likely got made while you were sleeping. You ought to admit, this new girl’s hair cut fits her well.\n\n");
 		if (flags[kFLAGS.PATCHOULI_FOLLOWER] == MATE) {
 			outputText("\"<i>Nyaaa... Always a pleasure to breed with you, [name]. Ask me whenever you are in the mood again, I’m looking forward to it.</i>\"\n\n");
@@ -549,7 +546,7 @@ public class PatchouliScene extends NPCAwareContent {
 		outputText("Well you sure are going to give her what she wants as you grab her by the thigh and force your [cock] in.\n\n");
 		if (player.cocks[x].cockLength >= 20) {
 			outputText("\"<i>Nyaaaaaa oooooooh my!!!! It's soooo huuuge I’m going to break!!!</i>\"\n\n");
-			outputText("What a liar, you're all too aware that this sluts ability to play with dimensional travel allows her to send most of your cock into some other dimension. As a matter of fact, her stomach isn't even bulging from your insertion, but her pucker sure looks like it's stretched to its limit and the best of it all is that she clearly enjoy it. ");
+			outputText("What a liar, you're all too aware that this slut's ability to play with dimensional travel allows her to send most of your cock into some other dimension. As a matter of fact, her stomach isn't even bulging from your insertion, but her pucker sure looks like it's stretched to its limit and the best of it all is that she clearly enjoy it. ");
 		}
 		outputText("You begin to fuck her butt thoroughly in order to teach the little slut a lesson her ass won’t forget. Her anus begins to contract and pulse around your dick like a vagina and who knows, maybe she somehow connected it to a cunt somewhere across the multiverse. Heck it might even be hers! Before long the sensation of Patchoulie’s asscunt proves too much for you and you fill it full of your jizz. Patchoulie seems to get off from her tormented ass, her pussy");
 		if (flags[kFLAGS.PATCHOULI_COCK] > 0) {
@@ -564,7 +561,7 @@ public class PatchouliScene extends NPCAwareContent {
 		}
 		outputText(". However I don’t mind it, It's exactly how I want my mate to be, completely perverted.</i>\"\n\n");
 		outputText("Well considering the cum still dripping from her cunt you guess the word mate applies as no matter how you sex her, she manages to get your dick in the right spot anyway.\n\n");
-		player.sexReward("Default","Dick",true,false);
+		player.sexReward("no", "Dick");
 		doNext(camp.returnToCampUseOneHour);
 	}
 
@@ -593,22 +590,22 @@ public class PatchouliScene extends NPCAwareContent {
 					outputText("You smile wide as the bimbo cheshire drinks the bottle. The effects are immediate and visible as she moans a loud mewl");
 					if (flags[kFLAGS.PATCHOULI_COCK] < 6) {
 						flags[kFLAGS.PATCHOULI_COCK] = 6;
-						outputText(" a small bulge forms at the base of her crotch. Patchoulie grows a brand new cock");
+						outputText(" a small bulge forms at the base of her crotch. Patchoulie grows a brand-new cock");
 					}
 					else {
 						flags[kFLAGS.PATCHOULI_COCK] += 2;
 						outputText(". Her shaft pulses with pleasure until it reaches a nice " +
 						           flags[kFLAGS.PATCHOULI_COCK] + " inch");
 					}
-					outputText(". She grabs it and start to fiercely masturbate as she turn over smiling wide and then pounces on you to make her intentions clear.\n\n");
-					outputText("\"<i>Nyaa well what you looking at, you lecher? Lets fuck already!</i>\"\n\n");
+					outputText(". She grabs it and start to fiercely masturbate as she turns over smiling wide and then pounces on you to make her intentions clear.\n\n");
+					outputText("\"<i>Nyaa, well, what you looking at, you lecher? Lets fuck already!</i>\"\n\n");
 					patchouleSexHer();
 					break;
 				case consumables.W_FRUIT:
 					outputText("You consider Patchoulie and decide her cock really would be better if it was a cat cock instead of a human one. You show her the fruit and ask her to eat it.\n\n");
 					outputText("\"<i>Nyaaaa, yea sure why not. It smells good anyway.</i>\"\n\n");
-					outputText("You smile wide as the bimbo cheshire eats the fruit. The effects are immediate and visible as she moans a loud mewl. Her cock bulges and changes shape as it covers with barbs, turning into a cat cock. She grabs it and start to fiercely masturbate as she turn over smiling wide and then pounces on you to make her intentions clear.\n\n");
-					outputText("\"<i>Nyaa well what you looking at, you lecher? Lets fuck already!</i>\"\n\n");
+					outputText("You smile wide as the bimbo cheshire eats the fruit. The effects are immediate and visible as she moans a loud mewl. Her cock bulges and changes shape as it covers with barbs, turning into a cat cock. She grabs it and start to fiercely masturbate as she turns over smiling wide and then pounces on you to make her intentions clear.\n\n");
+					outputText("\"<i>Nyaa, well, what you looking at, you lecher? Lets fuck already!</i>\"\n\n");
 					flags[kFLAGS.PATCHOULI_COCK_TYPE] = "feline";
 					patchouleSexHer();
 					break;
@@ -620,7 +617,7 @@ public class PatchouliScene extends NPCAwareContent {
 						outputText("You smile wide as the bimbo cheshire drinks the bottle. The effects are immediate and visible as she closes her eyes and moans a loud mewl her breast expending up to " +
 						           Appearance.breastCup(flags[kFLAGS.PATCHOULI_CUP_SIZE]) +
 						           ". She licks her lips in delight then look back at you.\n\n");
-						outputText("\"<i>Nyaa well what you looking at, you lecher? Lets fuck already!</i>\"\n\n");
+						outputText("\"<i>Nyaa, well, what you looking at, you lecher? Lets fuck already!</i>\"\n\n");
 					}
 					else {
 						outputText("You consider Patchoulie and decide she could use a shaving. You show her the bottle and ask her to drink it.\n\n");

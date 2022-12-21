@@ -21,7 +21,7 @@ import classes.Scenes.Dungeons.BeeHive.TheCorruptedHandmaidens;
 		
 		public function enterDungeon():void {
 			inDungeon = true;
-			if (flags[kFLAGS.DISCOVERED_BEE_HIVE_DUNGEON] < 2.75) room1Pass();
+			if (flags[kFLAGS.DISCOVERED_BEE_HIVE_DUNGEON] < 2.75 && flags[kFLAGS.TIFA_FOLLOWER] <= 5) room1Pass();
 			else room1South();
 		}
 		
@@ -41,7 +41,7 @@ import classes.Scenes.Dungeons.BeeHive.TheCorruptedHandmaidens;
 			outputText("Their almond-shaped eyes are solid black, their black hair is roughly trimmed short, their abdomens are huge and clearly solid muscle, tipped with smooth, venom-slick stingers as long as short swords. They look very imposing... and yet, at the same time, not very bright. One of them seems to be staring off into space, while her hand is... ");
 			outputText("You blink, and then you confirm that, yes, her hand is absently playing with her naked vagina, in an awkward, half-hearted way that suggests she has never actually done it before, or that she isn't entirely sure she should be doing so now.\n\n");
 			outputText("As you approach, the other Warrior Bee spots you and buzzes a quick \"<i>zzztop playing wizzz yourzzzelf!</i>\" to the first, who whines that she can't help it before joining her sister in threatening you. \"<i>Who goezzz there?</i>\" They snap as one.\n\n");
-			if (player.isRace(Races.BEE)) {
+			if (player.isRace(Races.BEE, 1, false)) {
 				if (player.gender == 0 || player.gender == 2) {
 					outputText("They stop, stare at you, and then look less threatening. \"<i>Where have you been, zzzizzzter? The queen wantzzz uzzz all to stay in the Hive until further notice!</i>\"\n\n");
 					outputText("You can't believe your luck, but make up a vague excuse and hurry past them as they usher you into the entrance. "+(player.inte >= 50 ? "Fortunately, the corruption is clearly messing with their brains, and so they obviously can't think straight enough to realize you're not one of their sisters.":"You can't believe you're luck, they must be really dumb.")+"\n\n");
@@ -88,7 +88,7 @@ import classes.Scenes.Dungeons.BeeHive.TheCorruptedHandmaidens;
 		}
 		public function room1LostToGuards():void {
 			clearOutput();
-			outputText("Defeated you fall to the ground"+(player.lust >= player.maxLust() ? " furiously masturbating":"")+". The guards roughly carry you a fair distance away from the hive dropping you in the trees from the air. Thanks to the leaves your landing isn't too harsh. You head back to camp for now to recover.");
+			outputText("Defeated you fall to the ground"+(player.lust >= player.maxOverLust() ? " furiously masturbating":"")+". The guards roughly carry you a fair distance away from the hive dropping you in the trees from the air. Thanks to the leaves your landing isn't too harsh. You head back to camp for now to recover.");
 			inDungeon = false;
 			cleanupAfterCombat();
 			doNext(camp.returnToCampUseOneHour);
@@ -159,7 +159,7 @@ import classes.Scenes.Dungeons.BeeHive.TheCorruptedHandmaidens;
 			outputText("This latest chamber you have found yourself in is made entirely from honeycombs. Extremely large cells of wax are positioned vertically all around you - each big enough to house at least one person. The largest one of all is in front of you, and it is covered in a cap of solidified wax. However, it's just translucent enough that you can see shadowy figures inside it... ");
 			outputText("especially as several of them are beating on the other side of the wax wall.\n\n\"<i>Let uzzz out of 'ere! You cannot do zizzz to uzzz! You cannot keep uzz prizzzner!</i>\" One of the shadows buzzes angrily.\n\n");
 			outputText("These, you realize, are prisoners - and it doesn't take a genius to realize that they are thusly members of the hive who haven't fallen to corruption. Approaching the wax cell, you call out to them.\n\n");
-			if (player.isRace(Races.BEE)) {
+			if (player.isRace(Races.BEE, 1, false)) {
 				outputText("\"<i>Let uzzz out of here, you zzzcum! Demon-tainted filth!</i>\" One of the figures buzzes shrilly.\n\n");
 				outputText("You protest that you are not a member of the corrupted bees - or any hive for that matter.\n\n");
 				outputText("They fall silent, but then one of them, the largest-looking shadow, speaks up. \"<i>Thizz accurzzzed wax blockzzz much of zzze zzzzentzzz, but... you don't zzzmell like a bee... and your aczzzent izzz awful. Maybe you're telling zzze truth.</i>\"\n\n");

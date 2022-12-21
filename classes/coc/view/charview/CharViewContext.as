@@ -17,29 +17,41 @@ import classes.BodyParts.Horns;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Piercing;
 import classes.BodyParts.RearBody;
+import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
 import classes.CoC;
+import classes.CockTypesEnum;
 import classes.GlobalFlags.kFLAGS;
+import classes.Items.Dynamic.DynamicArmor;
+import classes.Items.Dynamic.DynamicWeapon;
 import classes.PerkLib;
 import classes.Player;
 import classes.StatusEffects;
-import classes.CockTypesEnum;
 import classes.VaginaClass;
 import classes.lists.BreastCup;
 import classes.lists.Gender;
-import classes.BodyParts.Skin;
 
 import coc.view.*;
 import coc.xlogic.ExecContext;
 
-	public class CharViewContext extends ExecContext {
+public class CharViewContext extends ExecContext {
 		private var charview:CharView;
 
 		public function CharViewContext(charview:CharView, character:*) {
 			var player:Player = character as Player;
 			var game:CoC = CoC.instance;
+			var weaponSubtype:String = (player.weapon is DynamicWeapon) ? (player.weapon as DynamicWeapon).subtypeId : "";
+			var armorSubtype:String = (player.armor is DynamicArmor) ? (player.armor as DynamicArmor).subtypeId : "";
+
+			function showLegClothing():Boolean {
+				return !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && [LowerBody.GAZER, LowerBody.YETI, LowerBody.KIRIN, LowerBody.HOOFED, LowerBody.CLOVEN_HOOFED, LowerBody.HARPY, LowerBody.BUNNY, LowerBody.GOO, LowerBody.NAGA, LowerBody.HYDRA, LowerBody.DRIDER, LowerBody.ATLACH_NACHA, LowerBody.HINEZUMI, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.CANCER, LowerBody.GHOST_2].indexOf(player.lowerBody) == -1 && player.legCount == 2 && !player.isStancing();
+			}
+			function showPanty():Boolean {
+				return !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && [LowerBody.GAZER, LowerBody.GOO, LowerBody.NAGA, LowerBody.HYDRA, LowerBody.DRIDER, LowerBody.ATLACH_NACHA, LowerBody.HINEZUMI, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.CANCER, LowerBody.GHOST_2].indexOf(player.lowerBody) == -1 && player.legCount == 2 && !player.isStancing();
+			}
+
 			super([
 				{}, // local variables
 				character,
@@ -56,9 +68,10 @@ import coc.xlogic.ExecContext;
 					DarkSlimeCore: player.hasPerk(PerkLib.DarkSlimeCore),
 					showClothing: !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && [Arms.GAZER, Arms.DISPLACER].indexOf(player.arms.type) == -1 && !player.isAlraune() && !player.isSitStancing() && !player.isGargoyleStancing(),
 					showArmClothing: !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && [Arms.GAZER, Arms.DISPLACER, Arms.GARGOYLE, Arms.GARGOYLE_2, Arms.YETI, Arms.HINEZUMI].indexOf(player.arms.type) == -1 && !player.hasStatusEffect(StatusEffects.CancerCrabStance) && !player.isStancing(),
-					showLegClothing: !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && [LowerBody.GAZER, LowerBody.YETI, LowerBody.HOOFED, LowerBody.CLOVEN_HOOFED, LowerBody.HARPY, LowerBody.BUNNY, LowerBody.GOO, LowerBody.NAGA, LowerBody.HYDRA, LowerBody.DRIDER, LowerBody.ATLACH_NACHA, LowerBody.HINEZUMI, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.CANCER, LowerBody.GHOST_2].indexOf(player.lowerBody) == -1 && player.legCount == 2 && !player.isStancing(),
-					showPanty: !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && [LowerBody.GAZER, LowerBody.GOO, LowerBody.NAGA, LowerBody.HYDRA, LowerBody.DRIDER, LowerBody.ATLACH_NACHA, LowerBody.HINEZUMI, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.CANCER, LowerBody.GHOST_2].indexOf(player.lowerBody) == -1 && player.legCount == 2 && !player.isStancing(),
+					showLegClothing: showLegClothing(),
+					showPanty: showPanty(),
 					PlayerHasViewableOutfit: !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && player.isWearingArmor(),
+					PlayerHasABra: !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && player.isWearingBra(),
 					PlayerIsStancing: player.isStancing(),
 					PlayerIsFeralStancing: player.isFeralStancing(),
 					PlayerIsSitStancing: player.isSitStancing(),
@@ -66,13 +79,18 @@ import coc.xlogic.ExecContext;
 					playerHasWeaponWings: [Wings.VAMPIRE].indexOf(player.wings.type) == -1,
 					playerHasLargeLowerBody: player.isTaur() || [LowerBody.DRIDER, LowerBody.ATLACH_NACHA, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.CANCER].indexOf(player.lowerBody) != -1,
 					playerHasWeirdLowerBody: player.isTaur() || [LowerBody.DRIDER, LowerBody.ATLACH_NACHA, LowerBody.HYDRA, LowerBody.NAGA, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN].indexOf(player.lowerBody) != -1,
+					showDickDrippies: player.lust >= 0.8 * player.maxLust() && (player.lowerGarment.isNothing || !showPanty()) && (player.armor.isNothing || !showLegClothing()),
 
 					//Detect Weapon Skins
-					PlayerHasAWeapon: player.isStaffTypeWeapon() || player.isSwordTypeWeapon() || player.isAxeTypeWeapon() || player.isMaceHammerTypeWeapon() || player.isSpearTypeWeapon() || player.isSpearTypeWeapon() || player.isDuelingTypeWeapon(),
+					PlayerHasAWeapon: player.isWandTypeWeapon() || player.isStaffTypeWeapon() || player.isSwordTypeWeapon() || player.isAxeTypeWeapon() || player.isMaceHammerTypeWeapon() || player.isSpearTypeWeapon() || player.isSpearTypeWeapon() || player.isDuelingTypeWeapon(),
 
 					PlayerHasAStaff: player.isStaffTypeWeapon(),
 					PlayerHasAStaffHoly:player.weapon == game.weapons.U_STAFF,
 					PlayerHasAStaffUnholy:player.weapon == game.weapons.N_STAFF,
+
+					PlayerHasAWand: player.isWandTypeWeapon(),
+					PlayerHasAWandHoly:player.weapon == game.weapons.OCCULUS,
+					PlayerHasAWandUnholy:player.weapon == game.weapons.ECLIPSE,
 
 					PlayerHasASword: player.isSwordTypeWeapon(),
 					PlayerHasASwordHoly:player.weapon == game.weapons.EXCALIB || player.weapon == game.weapons.NPHBLDE,
@@ -93,7 +111,7 @@ import coc.xlogic.ExecContext;
 					PlayerHasASpearHoly:player.weapon == game.weapons.SESPEAR,
 					PlayerHasASpearUnholy:player.weapon == game.weapons.DSSPEAR,
 
-					PlayerHasKatana: player.weapon == game.weapons.UGATANA  || player.weapon == game.weapons.NODACHI  || player.weapon == game.weapons.MOONLIT || player.weapon == game.weapons.C_BLADE || player.weapon == game.weapons.BLETTER  || player.weapon == game.weapons.KATANA || player.weapon == game.weapons.MASAMUN,
+					PlayerHasKatana: weaponSubtype == "katana" || weaponSubtype == "uchigatana" || player.weapon == game.weapons.UGATANA  || player.weapon == game.weapons.NODACHI  || player.weapon == game.weapons.MOONLIT || player.weapon == game.weapons.C_BLADE || player.weapon == game.weapons.BLETTER  || player.weapon == game.weapons.KATANA || player.weapon == game.weapons.MASAMUN,
 					PlayerHasKatanaHoly:player.weapon == game.weapons.MOONLIT || player.weapon == game.weapons.MASAMUN,
 					PlayerHasKatanaUnholy:player.weapon == game.weapons.C_BLADE || player.weapon == game.weapons.BLETTER,
 
@@ -116,7 +134,7 @@ import coc.xlogic.ExecContext;
 					PlayerHasABowUnholy:player.weaponRange == game.weaponsrange.WILDHUN,
 
 					PlayerHasAThrownWeapon: player.isThrownTypeWeapon(),
-					PlayerHasAJavelin: player.weaponRange == game.weaponsrange.TRJAVEL || player.weaponRange == game.weaponsrange.GTHRSPE || player.weaponRange == game.weaponsrange.KSLHARP || player.weaponRange == game.weaponsrange.LEVHARP,
+					PlayerHasAJavelin: player.weaponRange == game.weaponsrange.O_JAVEL || player.weaponRange == game.weaponsrange.TRJAVEL || player.weaponRange == game.weaponsrange.GTHRSPE || player.weaponRange == game.weaponsrange.KSLHARP || player.weaponRange == game.weaponsrange.LEVHARP,
 					PlayerHasAJavelinHoly:player.weaponRange == game.weaponsrange.KSLHARP,
 					PlayerHasAJavelinUnholy:player.weaponRange == game.weaponsrange.LEVHARP,
 					PlayerHasAThrownAxe:player.weaponRange == game.weaponsrange.GTHRAXE,
@@ -125,6 +143,7 @@ import coc.xlogic.ExecContext;
 					PlayerHasADualWeapon: player.isDualWield(),
 
 					WeaponDisplay: game.flags[kFLAGS.WEAPON_DISPLAY_FLAG],
+					BoobDisplay: game.flags[kFLAGS.BOOB_DISPLAY_FLAG],
 					FireBuff: player.hasStatusEffect(StatusEffects.FlameBlade),
 
 					Antennae: Antennae,
@@ -158,9 +177,9 @@ import coc.xlogic.ExecContext;
 					armStanceNonBannedList: player.armor == game.armors.SCANSC || player.armor == game.armors.ERA || player.armor == game.armors.B_QIPAO || player.armor == game.armors.G_QIPAO || player.armor == game.armors.P_QIPAO || player.armor == game.armors.R_QIPAO || player.armor == game.armors.BERA,
 					sleevelessList: player.armor == game.armors.B_QIPAO || player.armor == game.armors.G_QIPAO || player.armor == game.armors.P_QIPAO || player.armor == game.armors.R_QIPAO || player.armor == game.armors.BERA,
 					playerWearsAStanceBannedDress: player.armor == game.armors.BLIZZ_K || player.armor == game.armors.SPKIMO || player.armor == game.armors.WKIMONO || player.armor == game.armors.BKIMONO || player.armor == game.armors.RKIMONO || player.armor == game.armors.PKIMONO || player.armor == game.armors.BLKIMONO || player.armor == game.armors.KBDRESS || player.armor == game.armors.GTECHC_ || player.armor == game.armors.IBKIMO || player.armor == game.armors.TCKIMO || player.armor == game.armors.OEKIMO || player.armor == game.armors.OTKIMO,
-					playerWearsAStanceBannedArmor: player.armor == game.armors.CTPALAD || player.armor == game.armors.EWPLTMA || player.armor == game.armors.FULLPLT || player.armor == game.armors.DBARMOR,
+					playerWearsAStanceBannedArmor: armorSubtype == "fullplate" || player.armor == game.armors.CTPALAD || player.armor == game.armors.EWPLTMA || player.armor == game.armors.FULLPLT || player.armor == game.armors.DBARMOR,
 
-					ComfyCLothes: player.armor == game.armors.C_CLOTH,
+					ComfyCLothes: armorSubtype == "clothes" || player.armor == game.armors.C_CLOTH,
 					MageRobe: player.armor == game.armors.M_ROBES || player.armor == game.armors.I_ROBES || player.armor == game.armors.I_CORST || player.armor == game.armors.EWROBE_ || player.armor == game.armors.A_ROBE_,
 					yukiDress: player.armor == game.armors.BLIZZ_K,
 					sakuraPetalKimono: player.armor == game.armors.SPKIMO,
@@ -192,11 +211,13 @@ import coc.xlogic.ExecContext;
 					fairyQueenRegalia: player.armor == game.armors.FQR,
 					berserkerArmor: player.armor == game.armors.BERA,
 					vladimirRegalia: player.armor == game.armors.VLAR,
+					elfVillagerDress: player.armor == game.armors.ELFDRES,
 					travelingMerchantOutfit: player.armor == game.armors.TRMOUTF,
 					chainMailBikini: player.armor == game.armors.CHBIKNI || player.armor == game.armors.LMARMOR,
-					platemail: player.armor == game.armors.EWPLTMA || player.armor == game.armors.FULLPLT || player.armor == game.armors.DBARMOR,
+					platemail: armorSubtype == "fullplate" || player.armor == game.armors.EWPLTMA || player.armor == game.armors.FULLPLT || player.armor == game.armors.DBARMOR,
 					elfClothing: player.armor == game.armors.ERA,
 					iceQueenGown: player.armor == game.armors.IQG,
+					gooArmor: player.armor == game.armors.GOOARMR,
 
 					//viewable bra list
 					goblinTechnomancerBra: player.upperGarment == game.undergarments.TECHBRA,
@@ -211,8 +232,8 @@ import coc.xlogic.ExecContext;
 					cowPanty: player.lowerGarment == game.undergarments.COW_PANTY,
 
 					// Unique misc Accessories
-					oniGourd: player.miscJewelry == game.miscjewelries.ONI_GOURD || player.miscJewelry2 == game.miscjewelries.ONI_GOURD,
-					demonTailRing: player.miscJewelry == game.miscjewelries.DMAGETO || player.miscJewelry2 == game.miscjewelries.DMAGETO,
+					oniGourd: player.countMiscJewelry(game.miscjewelries.ONI_GOURD) > 0,
+					demonTailRing: player.countMiscJewelry(game.miscjewelries.DMAGETO) > 0,
 
 					// Viewable neck Accessory lists
 					blueScarf: player.necklace == game.necklaces.BWSCARF,

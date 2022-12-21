@@ -2,7 +2,7 @@
  * ...
  * @author Zevos
  */
-package classes.Scenes.Places.HeXinDao 
+package classes.Scenes.Places.HeXinDao
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -42,7 +42,7 @@ public class IgnisArenaSeer extends Monster
 			outputText(" ");
 			var lustDmg:Number = player.lustVuln * ((this.inte / 10) + rand(player.lib + player.cor) / 5);
 			lustDmg = Math.round(lustDmg);
-			player.dynStats("lus", lustDmg, "scale", false);
+			player.takeLustDamage(lustDmg, true);
 			if (!hasStatusEffect(StatusEffects.IgnisCounter)) createStatusEffect(StatusEffects.IgnisCounter, 1, 0, 0, 0);
 			else addStatusValue(StatusEffects.IgnisCounter, 1, 1);
 		}
@@ -93,7 +93,7 @@ public class IgnisArenaSeer extends Monster
 					"Ignis’ left hand is lit up by an aura of blue flames, ready to flare up into gouts of foxfire at a moment’s notice. In his right hand is his metal staff, foxfire burning at it’s tip.";
 		}
 		
-		public function IgnisArenaSeer() 
+		public function IgnisArenaSeer()
 		{
 			this.a = "";
 			this.short = "Ignis, the Seer of the Arena";
@@ -112,7 +112,7 @@ public class IgnisArenaSeer extends Monster
 			this.tallness = rand(24) + 60;
 			this.hips.type = Hips.RATING_SLENDER;
 			this.butt.type = Butt.RATING_TIGHT;
-			this.skinTone = "white";
+			this.bodyColor = "white";
 			this.hairColor = "silver";
 			this.hairLength = 13 + rand(20);
 			initStrTouSpeInte(45, 75, 180, 160);
@@ -127,7 +127,6 @@ public class IgnisArenaSeer extends Monster
 			this.bonusLust = 200;
 			this.lust = 20;
 			this.lustVuln = 0.9;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = 45;//mają wtedy tylko 2 ogony ale z czasem jak PC też rośnie w siłe z lvl-em bdą mieć awans to lvl może 18-20 i trzeci ogon plus wzmocnienie statów itp.
 			this.gems = rand(20) + 20;
 			if (flags[kFLAGS.IGNIS_ARENA_SEER] < 3) {

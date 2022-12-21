@@ -7,9 +7,34 @@ import classes.StatusEffects;
 public class UshiOniRace extends Race{
 	public static const UshiOniSkinColors:/*String*/Array = ["green", "red", "grey", "sandy-tan", "pale", "purple"];
 	public static const UshiOniHairColors:/*String*/Array = ["dark green", "dark red", "blue", "brown", "white", "black"];
+	public static const UshiOniEyeColors:/*String*/Array = ["black", "red", "gray", "brown", "light blue","yellow"];
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Human",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Human",
+        /*Eyes*/		"Human",
+        /*Face*/		"Human",
+        /*Gills*/		"Human",
+        /*Hair*/		"Human",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Human",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Human",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Human"];
 	
 	public function UshiOniRace(id:int) {
-		super("Ushi-Onna", id);
+		super("Ushi-Onna", id, []);//RaceBody);
 		disabled = true;
 	}
 	
@@ -23,14 +48,14 @@ public class UshiOniRace extends Race{
 				.armType(Arms.USHI_ONI, +1)
 				.legType(LowerBody.USHI_ONI, +2)
 				.skinBasePattern(Skin.PATTERN_RED_PANDA_UNDERBODY, +2)
-				.hairTypeAndColor(Hair.NORMAL, ANY(UshiOniHairColors), +1);
+				.hairTypeAndColor1(Hair.NORMAL, ANY(UshiOniHairColors), +1);
 		addConditionedScores(
 				function (body:BodyData): Boolean {
 					return body.player.hasPlainSkinOnly();
 				},
 				"plain skin;"
 		)
-				.skinBaseColor(ANY(UshiOniSkinColors), +1);
+				.skinColor1(ANY(UshiOniSkinColors), +1);
 		
 		buildTier(11, "ushi-oni")
 				.customNamingFunction(function(body:BodyData):String {

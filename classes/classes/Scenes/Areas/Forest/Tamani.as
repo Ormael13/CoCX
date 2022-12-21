@@ -13,7 +13,7 @@ import classes.internals.*;
 public class Tamani extends Goblin
 	{
 
-				
+		
 		override protected function goblinTeaseAttack():void
 		{
 			if(flags[kFLAGS.TAMANI_TIMES_HYPNOTISED] > 0) {
@@ -79,7 +79,7 @@ public class Tamani extends Goblin
 					outputText("our [cocks] pulses and dribbles pre-cum, aching to do its duty and fire load after load into Tamani's perfect pussy.");
 				}
 			}
-			player.dynStats("lus", (rand(player.lib/5)+3+(flags[kFLAGS.TAMANI_TIMES_HYPNOTISED])));
+			player.takeLustDamage(rand(player.lib/5)+3+(flags[kFLAGS.TAMANI_TIMES_HYPNOTISED]), true);
 		}
 
 		override public function defeated(hpVictory:Boolean):void
@@ -130,7 +130,7 @@ public class Tamani extends Goblin
 			this.tallness = 40;
 			this.hips.type = Hips.RATING_AMPLE + 2;
 			this.butt.type = Butt.RATING_LARGE;
-			this.skinTone = "greenish gray";
+			this.bodyColor = "greenish gray";
 			this.hairColor = "pink and black";
 			this.hairLength = 16;
 			initStrTouSpeInte(37, 58, 55, 62);
@@ -145,7 +145,6 @@ public class Tamani extends Goblin
 			this.bonusLust = 137;
 			this.lust = 40;
 			this.lustVuln = 0.9;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 8;
 			this.gems = rand(35) + 10;
 			this.drop = new WeightedDrop().add(consumables.GOB_ALE,4)

@@ -4,11 +4,9 @@
  */
 package classes.Scenes.Places.HeXinDao 
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.Scenes.SceneLib;
-	
-	public class EraendirAndOrsbulg extends HeXinDaoAbstractContent
+import classes.*;
+
+public class EraendirAndOrsbulg extends HeXinDaoAbstractContent
 	{
 		
 		public function EraendirAndOrsbulg() 
@@ -24,7 +22,7 @@ package classes.Scenes.Places.HeXinDao
 		}
 		public function EraendirBuyMenu():void {
 			clearOutput();
-			outputText("\"<i>I think writer forgot to give me some witty remark to say here :(</i>\"");
+			outputText("The elf gives you a wide display of his many knife and swords. Small blades indeed but sharp and light, ideal to deliver many cuts in the time it normaly takes to deliver 1 strike.");
 			menu();
 			addButton(0, weapons.DAGGER.shortName, itemBuy1, weapons.DAGGER);
 			addButton(1, weapons.DDAGGER.shortName, itemBuy1, weapons.DDAGGER);
@@ -37,6 +35,7 @@ package classes.Scenes.Places.HeXinDao
 			addButton(8, weapons.TODAGGER.shortName, itemBuy1, weapons.TODAGGER);
 			addButton(9, weapons.ANGSTD.shortName, itemBuy1, weapons.ANGSTD);
 			addButton(10, weapons.FLYINGC.shortName, itemBuy1, weapons.FLYINGC);
+			addButton(10, weapons.S_SWORD.shortName, itemBuy1, weapons.S_SWORD);
 			addButton(14, "Back", EraendirMainMenu);
 		}
 		private function itemBuy1(itype:ItemType):void {

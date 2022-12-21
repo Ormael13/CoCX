@@ -2,25 +2,17 @@
  * Coded by Liadri 2020-04-01.
  */
 package classes.Items.Consumables {
-import classes.Appearance;
 import classes.BodyParts.Antennae;
 import classes.BodyParts.Arms;
-import classes.BodyParts.BodyPart;
 import classes.BodyParts.Ears;
 import classes.BodyParts.Eyes;
 import classes.BodyParts.Face;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.RearBody;
-import classes.BodyParts.Skin;
-import classes.BodyParts.Tail;
-import classes.BodyParts.Tongue;
-import classes.BodyParts.Wings;
-import classes.CockTypesEnum;
-import classes.EngineCore;
-import classes.Items.Consumable;
-import classes.PerkLib;
-import classes.VaginaClass;
 import classes.CoC;
+import classes.CockTypesEnum;
+import classes.Items.Consumable;
+import classes.VaginaClass;
 
 public class PotentVenom extends Consumable {
 	public function PotentVenom() {
@@ -54,7 +46,7 @@ public class PotentVenom extends Consumable {
 
 		if (player.wis > 20 && changes < changeLimit && rand(3) == 0) {
 			outputText("\n\nSomehow everything around seems so much duller. The world around you just seems so much more bland and uneventful.\n");
-			player.addCurse("wis",-5,1);
+			player.addCurse("wis",5,1);
 			changes++;
 		}
 		//end of stat change list and starts of body changes
@@ -138,13 +130,13 @@ public class PotentVenom extends Consumable {
 					if (playerhadabnormalVagina) outputText("You ");
 					else outputText("and ");
 					outputText("moan out as your pussy tingles and clenches, drooling a strange dark purple liquid. ");
-					player.vaginaType(7);
+					CoC.instance.transformations.VaginaCentipede().applyEffect(false);
 				}
 			}
 			//Male and herm area
 			if (player.cockTotal() > 1)//merge back cock into one
 			{
-				outputText("and watch spellbound as your cocks all merge togueter back into a single human one. ");
+				outputText("and watch spellbound as your cocks all merge together back into a single human one. ");
 				playerhadmorethenonecock = true;
 				player.cocks.length = 1;
 			}
@@ -169,7 +161,7 @@ public class PotentVenom extends Consumable {
 					if (playerhadasheath || playerhadmorethenonecock) outputText("You ");
 					else outputText("and ");
 					outputText("moan out, feeling your cock harden and tingle as it dribbles a strange dark purple liquid. ");
-					player.cocks[0].cockType = CockTypesEnum.OOMUKADE;
+					CoC.instance.transformations.CockCentipede().applyEffect(false);
 				}
 			}
 			if (player.hasVagina() && player.hasCock())
@@ -204,10 +196,14 @@ public class PotentVenom extends Consumable {
 						outputText("It would seems your venomous markings altered your newly aquired genitals into producing venom as well.");
 					}
 				}
-				if (player.vaginaType() != VaginaClass.VENOM_DRIPPING) player.vaginaType(VaginaClass.VENOM_DRIPPING);
-				if (player.cocks[0].cockType != CockTypesEnum.OOMUKADE) player.cocks[0].cockType = CockTypesEnum.OOMUKADE;
+				if (player.vaginaType() != VaginaClass.VENOM_DRIPPING) {
+					CoC.instance.transformations.VaginaCentipede().applyEffect(false);
+				}
+				if (player.cocks[0].cockType != CockTypesEnum.OOMUKADE) {
+					CoC.instance.transformations.CockCentipede().applyEffect(false);
+				}
 			}
-			dynStats("lus", 10);
+			dynStats("lus", 10, "scale", false);
 			player.MutagenBonus("lib", 3);
 			changes++;
 		}

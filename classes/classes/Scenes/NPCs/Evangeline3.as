@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -74,7 +74,6 @@ public class Evangeline3 extends Monster
 			if (hasPerk(PerkLib.JobSorcerer)) mod += .1;
 			if (hasPerk(PerkLib.Mage)) mod += .2;
 			if (hasPerk(PerkLib.Spellpower)) mod += .2;
-			if (hasPerk(PerkLib.WizardsFocus)) mod += .5;
 			return mod;
 		}
 		
@@ -129,8 +128,7 @@ public class Evangeline3 extends Monster
 			if(player.lust >= (player.maxLust() * 0.3) && player.lust < (player.maxLust() * 0.6)) outputText("You staggers, suddenly weak and having trouble focusing on staying upright.  ");
 			if(player.lust >= (player.maxLust() * 0.6)) outputText("Your eyes glaze over with desire for a moment.  ");
 			lustDmg = Math.round(lustDmg);
-			player.dynStats("lus", lustDmg, "scale", false);
-			outputText(" <b>(<font color=\"#ff00ff\">" + lustDmg + "</font>)</b>");
+			player.takeLustDamage(lustDmg, true);
 			fatigue += spellCostArouse();
 			flags[kFLAGS.EVANGELINE_SPELLS_CASTED]++;
 		}
@@ -201,7 +199,7 @@ public class Evangeline3 extends Monster
 			}
 		}//HPRatio() > .5 - to używać jeśli coś ma być użyte powyżej lub poniżej x% max HP Evangeline
 		
-		public function Evangeline3() 
+		public function Evangeline3()
 		{
 			this.a = "";
 			this.short = "Evangeline";
@@ -227,7 +225,7 @@ public class Evangeline3 extends Monster
 				this.lustVuln = .7;
 				this.additionalXP += 70;
 				this.level = 28;//succubus TF effects
-				this.createPerk(PerkLib.WizardsFocus, 0, 0, 0, 0);
+				this.buff("Wizard's Focus").addStat('spellpower', 0.5);
 			}
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 13) {
 				this.long = "You are currently fighting Evangeline, which is a eight feet tall cow-succubus hybryd with traces of taking in the past bimbo liquer. She's wearing lusty maiden's armor and using inscribed spellblade to attack.";
@@ -250,7 +248,7 @@ public class Evangeline3 extends Monster
 				this.lustVuln = .7;
 				this.additionalXP += 75;
 				this.level = 30;
-				this.createPerk(PerkLib.WizardsFocus, 0, 0, 0, 0);
+				this.buff("Wizard's Focus").addStat('spellpower', 0.5);
 				//this.createPerk(PerkLib., 0, 0, 0, 0);//pewnie perk dla demonów albo odzyskała jego efekt kiedy użyła succubus milk 2 lvl wcześniej a tu coś innego dać... ^^
 			}
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 14) {
@@ -274,7 +272,7 @@ public class Evangeline3 extends Monster
 				this.lustVuln = .65;
 				this.additionalXP += 85;
 				this.level = 34;//kitsune TF effects
-				this.createPerk(PerkLib.WizardsFocus, 0, 0, 0, 0);
+				this.buff("Wizard's Focus").addStat('spellpower', 0.5);
 				//this.createPerk(PerkLib., 0, 0, 0, 0);
 				//this.createPerk(PerkLib., 0, 0, 0, 0);
 				//this.createPerk(PerkLib., 0, 0, 0, 0);
@@ -300,7 +298,7 @@ public class Evangeline3 extends Monster
 				this.lustVuln = .65;
 				this.additionalXP += 90;
 				this.level = 36;
-				this.createPerk(PerkLib.WizardsFocus, 0, 0, 0, 0);
+				this.buff("Wizard's Focus").addStat('spellpower', 0.5);
 				//this.createPerk(PerkLib., 0, 0, 0, 0);
 				//this.createPerk(PerkLib., 0, 0, 0, 0);
 				//this.createPerk(PerkLib., 0, 0, 0, 0);
@@ -327,7 +325,7 @@ public class Evangeline3 extends Monster
 				this.lustVuln = .6;
 				this.additionalXP += 100;
 				this.level = 40;//dragoness TF effects
-				this.createPerk(PerkLib.WizardsFocus, 0, 0, 0, 0);
+				this.buff("Wizard's Focus").addStat('spellpower', 0.5);
 				//this.createPerk(PerkLib., 0, 0, 0, 0);
 				//this.createPerk(PerkLib., 0, 0, 0, 0);
 				//this.createPerk(PerkLib., 0, 0, 0, 0);
@@ -356,7 +354,7 @@ public class Evangeline3 extends Monster
 				this.lustVuln = .6;//im bedziej poteżna bedzie tym bliżej 0 powinno być czyli trudniej ją lustem pobijać ^^
 				this.additionalXP += 105;
 				this.level = 42;//nastepny lvl to xx w Evangeline 4 zamieścić etapy zmiany obejmujące inne rasy jak mantis/salamander a w Evangeline 5 awasowanie jako bogini (max do lvl 200) ^^
-				this.createPerk(PerkLib.WizardsFocus, 0, 0, 0, 0);
+				this.buff("Wizard's Focus").addStat('spellpower', 0.5);
 				//this.createPerk(PerkLib., 0, 0, 0, 0);
 				//this.createPerk(PerkLib., 0, 0, 0, 0);
 				//this.createPerk(PerkLib., 0, 0, 0, 0);
@@ -368,7 +366,7 @@ public class Evangeline3 extends Monster
 			this.createVagina(false, VaginaClass.WETNESS_DRY, VaginaClass.LOOSENESS_TIGHT);
 			this.ass.analLooseness = AssClass.LOOSENESS_VIRGIN;
 			this.ass.analWetness = AssClass.WETNESS_DRY;
-			this.skinTone = "olive";
+			this.bodyColor = "olive";
 			this.hairColor = "crimson platinum";
 			this.hairLength = 36;
 			this.fatigue = 0;

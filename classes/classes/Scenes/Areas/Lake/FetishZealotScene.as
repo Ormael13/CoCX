@@ -201,7 +201,7 @@ public class FetishZealotScene extends AbstractLakeContent
 						outputText("You take a hold of his nicely sized balls in one hand and the base of his cock in the other.  You give the tip a few licks before running your tongue down its length,  making sure to coat every bit of it in your saliva along the way.  His aroused groans let you know that you are giving a good demonstration.  You give his balls a soft rub as you stick the end inside your mouth and run your tongue around it; the taste of his pre is almost like candy to you.\n\n");
 						//cunalinguss
 						outputText("You stand up and indicate that it is now his turn, and while he is disappointed that the blowjob ended before he came, he still eagerly kneels down in front of your " + vaginaDescript(0) + ".  You gingerly lift up your skirt ");
-						if (player.balls > 0) {
+						if (player.hasBalls()) {
 							outputText("and move your [balls] out of the way ");
 						}
 						outputText("so he has access to your " + vaginaDescript(0) + ".  He sets to work, and you give him careful instructions on where to lick, how hard, and such.  He easily catches on, and soon he is probing all the right places, and giving the right amount of attention to every part of you.  ");
@@ -227,7 +227,7 @@ public class FetishZealotScene extends AbstractLakeContent
 				}
 				//After any zealot rape
 				//Reduce intelligence, set lust to zero, then add some lust based on libido and corruption
-				player.sexReward("Default", "Default", true, false);
+				player.sexReward("no");
 				dynStats("int", -1, "cor", 2);
 				//Trigger bad end if player's intelligence is less than 10 after being drained.
 				if (player.inte < 10 && rand(2) == 0) {
@@ -253,7 +253,7 @@ public class FetishZealotScene extends AbstractLakeContent
 					outputText("\n\nYou find that your [armor] are back to normal, and there is no sign of the strange clothes you were wearing before.");
 				}
 				outputText("  The ordeal has also left you with a slightly dulled mind, and some of the desire you felt still lingers.");
-				dynStats("lus", player.cor / 20 + player.lib / 10);
+				dynStats("lus", player.cor / 20 + player.lib / 10, "scale", false);
 				cleanupAfterCombat();
 			}
 		}
@@ -295,7 +295,7 @@ public class FetishZealotScene extends AbstractLakeContent
 				outputText("You remove your [armor] and stride up behind him, and grab his rear end to line up your [cock] with his loose hole as he continues his prayer: \"<i>Soon a man will violate my ass, like so many others have done in your holy worship.  Woe is me, to be treated like this by someone who doesn't follow us.</i>\" You shake your head at this absurdity and plunge your [cock] inside his waiting hole.  Amazingly, his hole somehow manages to fit you perfectly.  Since he seems to have no problem taking you, you waste no time in getting the anal rape on.\n\n");
 				outputText("\"<i>My shame brings the one within me their pleasure; such a tragedy has befallen me.</i>\" he continues.  \"<i>Shut up and take it like a man!</i>\" you tell him, and start fucking him more and more roughly.  You reach around him and grab his balls, and start to grip them painfully.    He isn't perturbed, and continues his prayers between his gasps: \"<i>Agh, The horror, I'm being tortur- ah, while being raped ungh, and I'm loving every moment.  Oug!</i>\"  Having had enough, you squeeze his sack hard, at the same time as you cum inside his ass.\n\n");
 				outputText("Your lusts sated for now, you rise up off of him and put your [armor] back on.  You decide to leave him lying there, still doubled over in pain from the damage you did to his balls.\n\n");
-				player.sexReward("Default", "Default", true, false);
+				player.sexReward("no");
 				cleanupAfterCombat();
 			}
 			function vagF():void {
@@ -316,6 +316,7 @@ public class FetishZealotScene extends AbstractLakeContent
 
 		private function mindbreakMaleCultist():void{
 			clearOutput();
+			if (silly()) outputText("<b>ASSUMING DIRECT CONTROL</b>\n\n");
 			outputText("As the fetish cultist drops to the ground, it occurs to you that Kaerb-Dnim wants you to invite more people to the ‘game’." +
 					" This guy doesn’t even need you in his brain to blabber insanity." +
 					" He's likely already insane, but perhaps you can fix him still." +
@@ -334,7 +335,7 @@ public class FetishZealotScene extends AbstractLakeContent
 			Mindbreaker.MindBreakerConvert ++;
 			if (Mindbreaker.MindBreakerConvert >= Mindbreaker.MindBreakerConvertGoal) SceneLib.mindbreaker.MindbreakerBrainEvolution();
 			else outputText(" This is all it takes to get your newest plaything running to the lair. You smile, knowing you have made yet another convert as you head back to camp still giggling.");
-			player.sexReward("Default", "Default",true,false);
+			player.sexReward("no", "Default");
 			cleanupAfterCombat();
 		}
 	}

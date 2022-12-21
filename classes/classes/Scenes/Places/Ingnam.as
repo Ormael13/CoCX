@@ -5,7 +5,6 @@ import classes.*;
 import classes.BodyParts.Ears;
 import classes.BodyParts.Horns;
 import classes.GlobalFlags.*;
-import classes.Items.*;
 import classes.Scenes.Places.Ingnam.*;
 import classes.Scenes.SceneLib;
 import classes.Scenes.Soulforce;
@@ -18,7 +17,7 @@ public class Ingnam extends BaseContent
 		public var thiefScene:ThiefScene = new ThiefScene();
 		public var soulforce:Soulforce = new Soulforce();
 		
-		public function get inIngnam():Boolean { return flags[kFLAGS.IN_INGNAM] > 0; }
+		public function get inIngnam():Boolean { return flags[kFLAGS.IN_INGNAM]; }
 		
 		public function Ingnam()
 		{
@@ -74,8 +73,7 @@ public class Ingnam extends BaseContent
 					removeButton(0);
 					removeButton(4);
 				}
-				addButton(8, "Masturbate", SceneLib.masturbation.masturbateMenu);
-				if ((((player.hasPerk(PerkLib.HistoryReligious) || player.hasPerk(PerkLib.PastLifeReligious)) && player.cor <= 66) || (player.hasPerk(PerkLib.Enlightened) && player.cor < 10)) && !(player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) == 0)) addButton(8, "Meditate", SceneLib.masturbation.masturbateMenu);
+				SceneLib.masturbation.masturButton(8);
 			}
 			//Show wait/rest/sleep depending on conditions.
 			addButton(9, "Wait", SceneLib.camp.doWait);
@@ -87,7 +85,7 @@ public class Ingnam extends BaseContent
 				removeButton(4);
                 addButton(9, "Sleep", SceneLib.camp.doSleep);
             }
-			if (player.hasPerk(PerkLib.JobSoulCultivator)) addButton(10, "Soulforce", soulforce.accessSoulforceMenu).hint("Spend some time on the cultivation or spend some of the soulforce.");
+			if (player.hasPerk(PerkLib.JobSoulCultivator) || !CoC.instance.lockCheats) addButton(10, "Soulforce", soulforce.accessSoulforceMenu).hint("Spend some time on the cultivation or spend some of the soulforce.");
 		}
 		
 		//The end of prologue, starts the game.
@@ -145,7 +143,7 @@ public class Ingnam extends BaseContent
 			clearOutput();
 			outputText("You enter the armor shop, noting the sign depicting armors. Some armor is proudly displayed on racks. You can hear the sound of hammering although it stops shortly after you enter. The local blacksmith, Ben, comes from the rear door, stepping up to the counter as he wipes the sweat from his brow, face red from the heat of his forge. \"<i>Welcome to my shop. Are you in need of protection? Or something sharp?</i>\"");
 			if (flags[kFLAGS.INGNAM_WEAPONSMITH_TALKED] <= 0 && flags[kFLAGS.INGNAM_PROLOGUE_COMPLETE] <= 0) {
-				outputText("\n\n\Before you can get a word in Ben lets out an exasperated sigh \"<i>Ah, just forget about…</i>\"");
+				outputText("\n\nBefore you can get a word in Ben lets out an exasperated sigh \"<i>Ah, just forget about…</i>\"");
 				outputText("\n\nYou crook an eyebrow questioningly at the blacksmith. Ben then realizes his blunder.");
 				outputText("\n\n\"<i>Ah, well it’s just… You’re the new Champion, right? None of the people I’ve seen who get sent to the portal brought a weapon and you would waste some gems. Still, if you want to train with weapons, you can go ahead and buy them. A little preparation never hurt anyone.</i>\" the blacksmith says.");
 				flags[kFLAGS.INGNAM_WEAPONSMITH_TALKED] = 1;
@@ -153,29 +151,30 @@ public class Ingnam extends BaseContent
 			outputText("\n\n<b><u>Blacksmith's pricings</u></b>");
 			menu();
 			if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) { //20% discount for History: Fighter
-				addShopItem(weapons.DAGGER, 48, 1);
-				addShopItem(weapons.PIPE, 40, 1);
-				addShopItem(weapons.SPEAR, 140, 1);
-				addShopItem(weapons.KATANA, 200, 1);
-				addShopItem(weapons.MACE, 80, 1);
+				addShopItem(weapons.DAGGER, 160, 1);
+				addShopItem(weapons.PIPE, 120, 1);
+				addShopItem(weapons.SPEAR, 480, 1);
+				addShopItem(weapons.KATANA, 720, 1);
+				addShopItem(weapons.MACE, 400, 1);
 			}
 			else {
-				addShopItem(weapons.DAGGER, 60, 1);
-				addShopItem(weapons.PIPE, 50, 1);
-				addShopItem(weapons.SPEAR, 175, 1);
-				addShopItem(weapons.KATANA, 250, 1);
-				addShopItem(weapons.MACE, 100, 1);
+				addShopItem(weapons.DAGGER, 200, 1);
+				addShopItem(weapons.PIPE, 150, 1);
+				addShopItem(weapons.SPEAR, 600, 1);
+				addShopItem(weapons.KATANA, 900, 1);
+				addShopItem(weapons.MACE, 500, 1);
 			}
 			if (player.hasPerk(PerkLib.HistorySmith) || player.hasPerk(PerkLib.PastLifeSmith)) { //20% discount for History: Smith perk
-				addShopItem(armors.LEATHRA, 40, 2);
-				addShopItem(armors.FULLCHN, 120, 2);
-				addShopItem(armors.SCALEML, 288, 2);
+				addShopItem(armors.LEATHRA, 120, 2);
+				addShopItem(armors.FULLCHN, 360, 2);
+				addShopItem(armors.SCALEML, 800, 2);
 			}
 			else {
-				addShopItem(armors.LEATHRA, 50, 2);
-				addShopItem(armors.FULLCHN, 150, 2);
-				addShopItem(armors.SCALEML, 360, 2);
+				addShopItem(armors.LEATHRA, 150, 2);
+				addShopItem(armors.FULLCHN, 450, 2);
+				addShopItem(armors.SCALEML, 1000, 2);
 			}
+			addShopItem(weapons.A_WAND, 225, 2);
 			addButton(14, "Leave", menuShops);
 		}
 		
@@ -185,15 +184,15 @@ public class Ingnam extends BaseContent
 			outputText("\n\n\"<i>Welcome to my shop. Do you need to get outfitted?</i>\" he says pulling keenly at the measuring tape draping his shoulders.");
 			outputText("\n\n<b><u>Tailor shop pricings</u></b>");
 			menu();
-			addShopItem(armors.C_CLOTH, 10, 3);
+			addShopItem(armors.C_CLOTH, 15, 3);
 			addShopItem(armors.ADVCLTH, 75, 3);
-			addShopItem(armors.CLSSYCL, 100, 3);
+			addShopItem(armors.CLSSYCL, 60, 3);
 			addShopItem(armors.TUBETOP, 40, 3);
-			addShopItem(armors.OVERALL, 30, 3);
-			addShopItem(armors.M_ROBES, 75, 3);
-			addShopItem(armors.LTHRPNT, 200, 3);
-			addShopItem(armors.RBBRCLT, 500, 3);
-			addShopItem(armors.T_BSUIT, 650, 3);
+			addShopItem(armors.OVERALL, 40, 3);
+			addShopItem(armors.M_ROBES, 40, 3);
+			addShopItem(armors.LTHRPNT, 30, 3);
+			addShopItem(armors.RBBRCLT, 225, 3);
+			addShopItem(armors.T_BSUIT, 75, 3);
 			addButton(14, "Leave", menuShops);
 		}
 		
@@ -241,7 +240,7 @@ public class Ingnam extends BaseContent
 			addShopItem(consumables.AGILI_E, 12, 5);
 			addShopItem(consumables.SMART_T, 30, 5);
 			addShopItem(consumables.INCOINS, 30, 5);
-			addShopItem(consumables.FISHFIL, 5, 5);
+			addShopItem(consumables.FISHFIL, 10, 5);
 			addShopItem(consumables.H_PILL, 10, 5);
 			addButton(10, "Sell", sellAtTradingPost);
 			addButton(14, "Leave", menuShops);
@@ -277,27 +276,30 @@ public class Ingnam extends BaseContent
 			addButton(14, "Back", shopTradingPost);
 		}
 		private function shopTradingPostSell(slot:int):void {
+			var itemValueOrgin:Number = player.itemSlots[slot].itype.value;
 			var itemValue:int = int(player.itemSlots[slot].itype.value / 3);
 			clearOutput();
-			if (flags[kFLAGS.SHIFT_KEY_DOWN] == 1) {
+			if (shiftKeyDown) {
 				if (itemValue == 0)
 					outputText("You hand over " + num2Text(player.itemSlots[slot].quantity) + " " +  player.itemSlots[slot].itype.shortName + " to trader.  He shrugs and says, \"<i>Well ok, it isn't worth anything, but I'll take it.</i>\"");
 				else outputText("You hand over " + num2Text(player.itemSlots[slot].quantity) + " " +  player.itemSlots[slot].itype.shortName + " to trader.  He nervously pulls out " + num2Text(itemValue * player.itemSlots[slot].quantity)  + " gems and drops them into your waiting hand.");
 				while (player.itemSlots[slot].quantity > 0){
 					player.itemSlots[slot].removeOneItem();
-					if (player.hasPerk(PerkLib.Greedy)) itemValue *= 2;
+					if (player.hasPerk(PerkLib.Greedy)) {
+						itemValue *= 2;
+						if (itemValue > itemValueOrgin) itemValue = itemValueOrgin;
+					}
 					player.gems += itemValue;
 				}
 			}
 			else {
 				if (player.hasPerk(PerkLib.Greedy)) itemValue *= 2;
 				if (player.hasPerk(PerkLib.TravelingMerchantOutfit)) itemValue *= 2;
-				if (itemValue == 0)
-				outputText("You hand over " + player.itemSlots[slot].itype.longName + " to trader.  He shrugs and says, \"<i>Well ok, it isn't worth anything, but I'll take it.</i>\"");
+				if (itemValue > itemValueOrgin) itemValue = itemValueOrgin;
+				if (itemValue == 0) outputText("You hand over " + player.itemSlots[slot].itype.longName + " to trader.  He shrugs and says, \"<i>Well ok, it isn't worth anything, but I'll take it.</i>\"");
 				else outputText("You hand over " + player.itemSlots[slot].itype.longName + " to trader.  He nervously pulls out " + num2Text(itemValue) + " gems and drops them into your waiting hand.");
 				player.itemSlots[slot].removeOneItem();
-				if (itemValue != 0 && player.hasPerk(PerkLib.Greedy) || player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your item for double the amount.");
-				if (itemValue != 0 && player.hasPerk(PerkLib.Greedy) && player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your item for four times the amount.");
+				if (itemValue != 0 && player.hasPerk(PerkLib.Greedy) || player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your item for more than normal.");
 				player.gems += itemValue;
 			}
 			statScreenRefresh();
@@ -313,11 +315,9 @@ public class Ingnam extends BaseContent
 					player.itemSlots[slot].quantity = 0;
 				}
 			}
-			if (player.hasPerk(PerkLib.Greedy)) itemValue *= 2;
-			if (player.hasPerk(PerkLib.TravelingMerchantOutfit)) itemValue *= 2;
+			if (player.hasPerk(PerkLib.Greedy) || player.hasPerk(PerkLib.TravelingMerchantOutfit)) itemValue *= 2;
 			outputText("You lay out all the items you're carrying on the counter in front of trader.  He examines them all and nods.  Nervously, he pulls out " + num2Text(itemValue) + " gems and drops them into your waiting hand.");
-			if (player.hasPerk(PerkLib.Greedy) || player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your item for double the amount.");
-			if (player.hasPerk(PerkLib.Greedy) && player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your item for four times the amount.");
+			if (player.hasPerk(PerkLib.Greedy) || player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your item for more than normal.");
 			player.gems += itemValue;
 			statScreenRefresh();
 			doNext(sellAtTradingPost);
@@ -446,7 +446,7 @@ public class Ingnam extends BaseContent
 			outputText("The innkeeper looks at you and says, \"<i>Welcome back! I've missed you! How did your adventures go?</i>\"");
 			outputText("\n\nYou tell the innkeeper about your adventures and how you've met various denizens in Mareth.\n\n");
 			if (flags[kFLAGS.TIMES_TRANSFORMED] <= 0) outputText("The innkeeper looks at you in awe and says, \"<i>Wow, you haven't changed at all! How did you manage to stay in that strange realm for years and still be normal?</i>\"");
-			else if (player.race() == "human") {
+			else if (player.isRace(Races.HUMAN, 1, false)) {
 				outputText("The innkeeper looks at you and says, \"<i>I can see that you have changed a bit.</i>\" ");
 			}
 			else {
@@ -457,7 +457,7 @@ public class Ingnam extends BaseContent
 			}
 			if (player.wings.type > 0) {
 				outputText("\n\nNext, he looks at your wings that sprout from your back and says, \"<i>Wings? I've never seen a person with wings before!</i>\" ");
-				if (player.canFly()) outputText("You tell him that you can fly. To demonstrate, you guide the innkeeper outside and you grit your teeth with effort as you flap your wings and you finally launch off from the ground and fly around the town! The people of Ingnam, including your family and friends, look at you in shock and some even say, \"<i>" + player.mf("He", "She") + " can fly!</i>\"");
+				if (player.canFly()) outputText("You tell him that you can fly. To demonstrate, you guide the innkeeper outside and you grit your teeth with effort as you flap your wings and you finally launch off from the ground and fly around the town! The people of Ingnam, including your family and friends, look at you in shock and some even say, \"<i>[He] can fly!</i>\"");
 			}
 			outputText("\n\nPLACEHOLDER.");
 			flags[kFLAGS.INGNAM_GREETED_AFTER_LONGTIME] = 1;
@@ -518,7 +518,7 @@ public class Ingnam extends BaseContent
 			player.gems -= 5;
 			outputText("\"<i>I'd like a glass of beer please,</i>\" you say. You hand over the five gems to the innkeeper and he pours you a glass of beer.");
 			outputText("\n\nYou kick back and drink the beer slowly. ");
-			dynStats("lus", 20);
+			dynStats("lus", 20, "scale", false);
 			player.refillHunger(10);
 			if (!player.hasStatusEffect(StatusEffects.Drunk)) {
 				player.createStatusEffect(StatusEffects.Drunk, 2, 1, 1, 0);

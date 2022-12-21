@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.BodyParts.Arms;
@@ -48,19 +48,19 @@ public class Asuka extends Monster
 		}
 		/*
 		private function asukaAttack3():void {
-			
+		
 		}
 		
 		private function asukaAttack4():void {
-			
+		
 		}
 		
 		private function asukaUltimateAttack1():void {
-			
+		
 		}
 		
 		private function asukaUltimateAttack2():void {
-			
+		
 		}
 		*/
 		private function asukaTripleThrust():void {
@@ -168,7 +168,7 @@ public class Asuka extends Monster
 			return str;
 		}//po dorośnieciu nosi inne armory w czasie walki: pure - no change of armor beside making it look more durable so still red bodysuit,
 		//balanced - skimpy bikini with cloth wrapped around chest instead of top and armor pieces at arms/legs/sides of torse or back in upper section (maybe smth liek that levitating heavy armor that only stick to body when you about to get hit), corrupted - Scandalous Succubus Clothing
-		public function Asuka() 
+		public function Asuka()
 		{
 			if (flags[kFLAGS.ASUKA_LVL_UP] < 1) {
 				initStrTouSpeInte(85, 85, 75, 90);
@@ -247,11 +247,10 @@ public class Asuka extends Monster
 			createStatusEffect(StatusEffects.BonusVCapacity,100,0,0,0);
 			this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
 			this.ass.analWetness = AssClass.WETNESS_DRY;
-			this.skinTone = "light";
+			this.bodyColor = "light";
 			this.hairColor = "auburn";
 			this.lust = 30;
 			this.lustVuln = .35;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.gems = 15 + rand(8);
 			this.drop = new ChainedDrop().
 					//add(armors.CHBIKNI,1/20).
@@ -267,7 +266,6 @@ public class Asuka extends Monster
 			this.createPerk(PerkLib.Lustzerker, 0, 0, 0, 0);
 			this.createPerk(PerkLib.JobSoulCultivator, 0, 0, 0, 0);
 			this.createPerk(PerkLib.SoulApprentice, 0, 0, 0, 0);
-			this.createPerk(PerkLib.BodyCultivator, 0, 0, 0, 0);
 			this.createPerk(PerkLib.FleshBodyApprenticeStage, 0, 0, 0, 0);
 			//this.createPerk(PerkLib.Berzerker, 0, 0, 0, 0);
 			checkMonster();

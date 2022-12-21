@@ -8,11 +8,11 @@ import classes.PerkClass;
 import classes.PerkLib;
 import classes.IMutationPerkType;
 import classes.Creature;
-import classes.Player;
 import classes.Races;
 
 public class EasterBunnyEggBagMutation extends IMutationPerkType
     {
+        private static const mName:String = "Easter Bunny Egg Bag";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -47,7 +47,7 @@ public class EasterBunnyEggBagMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Easter Bunny Egg Bag" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -71,15 +71,13 @@ public class EasterBunnyEggBagMutation extends IMutationPerkType
         }
 
         //Mutations Buffs
-        override public function pBuffs(target:Creature = null):Object{
+        override public function buffsForTier(pTier:int):Object {
             var pBuffs:Object = {};
-            var pTier:int = currentTier(this, (target == null)? player : target);
             return pBuffs;
         }
 
         public function EasterBunnyEggBagMutation() {
-            super("Easter Bunny Egg Bag IM", "Easter Bunny Egg Bag", ".");
-            maxLvl = 3;
+            super(mName + " IM", mName, SLOT_TESTICLES, 3);
         }
 
     }

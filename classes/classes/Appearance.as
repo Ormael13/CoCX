@@ -247,13 +247,13 @@ public class Appearance extends Utils
 				else description += "pierced ";
 				haveDescription = true;
 			}
-			if (!haveDescription && i_creature.hasGooSkin()) {
+			if (!haveDescription && i_creature.isGooSkin()) {
 				options = ["slime-slick ",
 					"goopy ",
 					"slippery "];
 				description += randomChoice(options);
 			}
-			if (!haveDescription && i_creature.hasGhostSkin()) {
+			if (!haveDescription && i_creature.isGhostSkin()) {
 				options = ["transparent "];
 				description += randomChoice(options);
 			}
@@ -393,8 +393,8 @@ public class Appearance extends Utils
 			}
 			var isPierced:Boolean = (creature.cocks.length == 1) && (creature.cocks[cockIndex].isPierced); //Only describe as pierced or sock covered if the creature has just one cock
 			var hasSock:Boolean = (creature.cocks.length == 1) && (creature.cocks[cockIndex].sock != "");
-			var isGooey:Boolean = (creature.skin.hasGooSkin());
-			var isGhastly:Boolean = (creature.skin.hasGhostSkin());
+			var isGooey:Boolean = (creature.skin.isGooSkin());
+			var isGhastly:Boolean = (creature.skin.isGhostSkin());
 			return cockDescription(cockType, creature.cocks[cockIndex].cockLength, creature.cocks[cockIndex].cockThickness, creature.lust, creature.cumQ(), isPierced, hasSock, isGooey, isGhastly);
 		}
 
@@ -1181,7 +1181,7 @@ public class Appearance extends Utils
 
 			}
 			//Slimy skin
-			if (i_creature.hasGooSkin()) {
+			if (i_creature.isGooSkin()) {
 				if (description) description += " ";
 				options = ["goopey",
 					"gooey",
@@ -1189,7 +1189,7 @@ public class Appearance extends Utils
 				description += randomChoice(options);
 			}
 			//Ghost skin
-			if (i_creature.hasGhostSkin()) {
+			if (i_creature.isGhostSkin()) {
 				if (description) description += " ";
 				options = ["transparent"];
 				description += randomChoice(options);
@@ -1300,7 +1300,7 @@ public class Appearance extends Utils
 				if (description != "") description += ", ";
 				description += "pierced";
 			}
-			if (description == "" && i_creature.hasGooSkin()) {
+			if (description == "" && i_creature.isGooSkin()) {
 				if (description != "")
 					description += ", ";
 				if (rand(2) == 0)
@@ -1308,7 +1308,7 @@ public class Appearance extends Utils
 				else
 					description += "slimy";
 			}
-			if (description == "" && i_creature.hasGhostSkin()) {
+			if (description == "" && i_creature.isGhostSkin()) {
 				if (description != "")
 					description += ", ";
 				description += "transparent";
@@ -1391,7 +1391,7 @@ public class Appearance extends Utils
 			//Descriptive descriptions - 50% chance of being called
 			if (rand(2) == 0) {
 				//Doggie descriptors - 50%
-				if (i_creature.hasFur() > 2 && !haveDescription && rand(2) == 0) {
+				if (i_creature.isFurCovered() > 2 && !haveDescription && rand(2) == 0) {
 					description += "bitch-";
 					haveDescription = true;
 				}
@@ -1861,6 +1861,14 @@ public class Appearance extends Utils
 				description += ANAL_TIGHTNESS_DESCRIPTORS[i_creature.ass.analLooseness];
 			}
 
+
+			if (i_creature.hasStatusEffect(StatusEffects.GlowingAsshole)) {
+				description += "neon blue ";
+				var options:Array = ["luminescent ",
+					"glowing "];
+				description += randomChoice(options);
+			}
+
 			//asshole descriptor
 			description += randomChoice("ass",
 					"anus",
@@ -1945,42 +1953,6 @@ public class Appearance extends Utils
 					[Gender.GENDER_HERM, "hermaphrodite"]
 				]
 		);
-		public static const DEFAULT_WING_DESCS:Object = createMapFromPairs(
-				[
-					[Wings.NONE, "non-existant"],
-					[Wings.BEE_SMALL, "small bee-like"],
-					[Wings.BEE_LARGE, "large bee-like"],
-					[Wings.HARPY, "large feathery"],
-					[Wings.IMP, "small"],
-					[Wings.BAT_LIKE_TINY, "tiny, bat-like"],
-					[Wings.BAT_LIKE_LARGE, "large, bat-like"],
-				//	[SHARK_FIN, ""],
-					[Wings.FEATHERED_LARGE, "large, feathered"],
-					[Wings.DRACONIC_SMALL, "small, draconic"],
-					[Wings.DRACONIC_LARGE, "large, draconic"],
-					[Wings.SEA_DRAGON, "large, aquatic"],
-					[Wings.GIANT_DRAGONFLY, "giant dragonfly"],
-					[Wings.BAT_LIKE_LARGE_2, "two large pairs of bat-like"],
-					[Wings.DRACONIC_HUGE, "large, majestic draconic"],
-					[Wings.FEATHERED_PHOENIX, "large crimson feathered"],
-					[Wings.FEATHERED_ALICORN, "large white feathered"],
-					[Wings.FEATHERED_SPHINX, "large feathered"],
-					[Wings.MANTIS_SMALL, "small mantis-like"],
-					[Wings.MANTIS_LARGE, "large mantis-like"],
-					[Wings.MANTIS_LARGE_2, "two large pairs of mantis-like"],
-					[Wings.GARGOYLE_LIKE_LARGE, "large stony"],
-					[Wings.PLANT, "three pairs of cockvines"],
-					[Wings.MANTICORE_SMALL, "small manticore-like"],
-					[Wings.MANTICORE_LARGE, "large manticore-like"],
-					[Wings.FEY_DRAGON, "large majestic fey draconic"],
-					[Wings.FEATHERED_AVIAN, "large feathery"],
-					[Wings.NIGHTMARE, "large leathery"],
-					[Wings.ETHEREAL, "etheral tendrils"],
-					[Wings.THUNDEROUS_AURA, "thunderous aura"],
-					[Wings.LEVITATION, "levitation"],
-					[Wings.FAIRY, "butterfly"],
-				]
-		);
 		// <mod name="Dragon patch" author="Stadler76">
 		public static const DEFAULT_PIERCING_NAMES:Object = createMapFromPairs(
 				[
@@ -2004,7 +1976,12 @@ public class Appearance extends Utils
 					[VaginaClass.DEMONIC, "fiendish"],
 					[VaginaClass.ALRAUNE, "floral"],
 					[VaginaClass.SCYLLA, "maw-like"],
-					[VaginaClass.NAGA, "deep"]
+					[VaginaClass.NAGA, "deep"],
+					[VaginaClass.BEE, "black honey dripping"],
+					[VaginaClass.MINDBREAKER, "tentacled"],
+					[VaginaClass.SHARK, "shark"],
+					[VaginaClass.RAIJU, "shocking"],
+					[VaginaClass.KIRIN, "shocking equine"]
 				]
 		);
 
@@ -2451,33 +2428,17 @@ public class Appearance extends Utils
 			var descript:String = "";
 			var currCock:Number = 0;
 			var totCock:Number = creature.cocks.length;
-			var dogCocks:Number = 0;
-			var horseCocks:Number = 0;
 			var normalCocks:Number = 0;
-			var normalCockKey:Number = 0;
-			var dogCockKey:Number = 0;
-			var horseCockKey:Number = 0;
 			var averageLength:Number = 0;
 			var averageThickness:Number = 0;
 			var same:Boolean = true;
 			//For temp14 random values
 			var rando:Number = 0;
-			var descripted:Boolean = false;
 			//Count cocks & Prep average totals
 			while (currCock <= totCock - 1) {
 				//trace("Counting cocks!");
-				if (creature.cocks[currCock].cockType == CockTypesEnum.HUMAN) {
+				if (creature.cocks[currCock].cockType == CockTypesEnum.HUMAN)
 					normalCocks++;
-					normalCockKey = currCock;
-				}
-				if (creature.cocks[currCock].cockType == CockTypesEnum.HORSE) {
-					horseCocks++;
-					horseCockKey = currCock;
-				}
-				if (creature.cocks[currCock].cockType == CockTypesEnum.DOG) {
-					dogCocks++;
-					dogCockKey = currCock;
-				}
 				averageLength += creature.cocks[currCock].cockLength;
 				averageThickness += creature.cocks[currCock].cockThickness;
 				//If cocks are matched make sure they still are
@@ -2489,23 +2450,15 @@ public class Appearance extends Utils
 			averageThickness /= currCock;
 			//Quantity descriptors
 			if (currCock == 1) {
-				if (dogCocks == 1) return cockNoun(CockTypesEnum.DOG);
-				if (horseCocks == 1) return cockNoun(CockTypesEnum.HORSE);
-				if (normalCocks == 1) return cockDescript(creature,0);
-				//Catch-all for when I add more cocks.  Let cock descript do the sorting.
-				if (creature.cocks.length == 1) return cockDescript(creature,0);
+				return cockDescript(creature,0);
 			}
 			if (currCock == 2) {
 				//For cocks that are the same
 				if (same) {
 					descript += randomChoice("a pair of ", "two ", "a brace of ", "matching ", "twin ");
 					descript += cockAdjectives(averageLength, averageThickness, creature.cocks[0].cockType, creature);
-					if (normalCocks == 2) descript += " " + cockNoun(CockTypesEnum.HUMAN) + "s";
-					if (horseCocks == 2) descript += ", " + cockNoun(CockTypesEnum.HORSE) + "s";
-					if (dogCocks == 2) descript += ", " + cockNoun(CockTypesEnum.DOG) + "s";
-					//Tentacles
-					if (creature.cocks[0].cockType.Index > 2)
-						descript += ", " + cockNoun(creature.cocks[0].cockType) + "s";
+					if (normalCocks != 2) descript += ",";
+					descript += " " + cockNoun(creature.cocks[0].cockType) + "s";
 				}
 				//Nonidentical
 				else {
@@ -2519,14 +2472,8 @@ public class Appearance extends Utils
 				if (same) {
 					descript += randomChoice("three ", "a group of ", "a <i>ménage à trois</i> of ", "a triad of ", "a triumvirate of ");
 					descript += cockAdjectives(averageLength, averageThickness, creature.cocks[currCock - 1].cockType, creature);
-					if (normalCocks == 3)
-						descript += " " + cockNoun(CockTypesEnum.HUMAN) + "s";
-					if (horseCocks == 3)
-						descript += ", " + cockNoun(CockTypesEnum.HORSE) + "s";
-					if (dogCocks == 3)
-						descript += ", " + cockNoun(CockTypesEnum.DOG) + "s";
-					//Tentacles
-					if (creature.cocks[0].cockType.Index > 2) descript += ", " + cockNoun(creature.cocks[0].cockType) + "s";   // Not sure what's going on here, referencing index *may* be a bug.
+					if (normalCocks != 3) descript += ",";
+					descript += " " + cockNoun(creature.cocks[0].cockType) + "s";
 
 				}
 				else {
@@ -2539,34 +2486,15 @@ public class Appearance extends Utils
 			if (currCock > 3) {
 				descript += randomChoice("a bundle of ", "an obscene group of ", "a cluster of ", "a wriggling group of ");
 				//Cock adjectives and nouns
-				descripted = false;
 				//If same types...
 				if (same) {
-					if (creature.cocks[0].cockType == CockTypesEnum.HUMAN) {
-						descript += cockAdjectives(averageLength, averageThickness, CockTypesEnum.HUMAN, creature) + " ";
-						descript += cockNoun(CockTypesEnum.HUMAN) + "s";
-						descripted = true;
-					}
-					if (creature.cocks[0].cockType == CockTypesEnum.DOG) {
-						descript += cockAdjectives(averageLength, averageThickness, CockTypesEnum.DOG, creature) + ", ";
-						descript += cockNoun(CockTypesEnum.DOG) + "s";
-						descripted = true;
-					}
-					if (creature.cocks[0].cockType == CockTypesEnum.HORSE) {
-						descript += cockAdjectives(averageLength, averageThickness, CockTypesEnum.HORSE, creature) + ", ";
-						descript += cockNoun(CockTypesEnum.HORSE) + "s";
-						descripted = true;
-					}
-					if (creature.cocks[0].cockType.Index > 2) {
-						descript += cockAdjectives(averageLength, averageThickness, CockTypesEnum.HUMAN, creature) + ", ";
-						descript += cockNoun(creature.cocks[0].cockType) + "s";
-						descripted = true;
-					}
+					descript += cockAdjectives(averageLength, averageThickness, CockTypesEnum.HUMAN, creature);
+					if (normalCocks == 0) descript += ","
+					descript += " " + cockNoun(creature.cocks[0].cockType) + "s";
 				}
 				//If mixed
-				if (!descripted) {
+				else {
 					descript += cockAdjectives(averageLength, averageThickness, creature.cocks[0].cockType, creature) + ", ";
-					rando = rand(4);
 					descript += randomChoice("mutated cocks", "mutated dicks", "mixed cocks", "mismatched dicks");
 				}
 			}

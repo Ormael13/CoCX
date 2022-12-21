@@ -4,28 +4,26 @@
  */
 package classes.Scenes.Places.HeXinDao
 {
-	import classes.*;
-	import classes.BodyParts.Arms;
-	import classes.BodyParts.Eyes;
-	import classes.BodyParts.Face;
-	import classes.BodyParts.Horns;
-	import classes.BodyParts.LowerBody;
-	import classes.BodyParts.Tail;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.GlobalFlags.kACHIEVEMENTS;
-import classes.Races.HumanRace;
+import classes.*;
+import classes.BodyParts.Arms;
+import classes.BodyParts.Eyes;
+import classes.BodyParts.Horns;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Tail;
+import classes.GlobalFlags.kACHIEVEMENTS;
+import classes.GlobalFlags.kFLAGS;
+import classes.Items.ArmorLib;
+import classes.Items.HeadJewelryLib;
+import classes.Items.ShieldLib;
+import classes.Items.UndergarmentLib;
+import classes.Items.WeaponLib;
+import classes.Items.WeaponRangeLib;
+import classes.Scenes.Dungeons.RiverDungeon;
 import classes.Scenes.SceneLib;
-	import classes.Scenes.Dungeons.RiverDungeon;
-	import classes.Items.ArmorLib;
-	import classes.Items.HeadJewelryLib;
-	import classes.Items.ShieldLib;
-	import classes.Items.UndergarmentLib;
-	import classes.Items.WeaponLib;
-	import classes.Items.WeaponRangeLib;
-	import classes.internals.SaveableState;
-    import classes.display.SpriteDb;
+import classes.display.SpriteDb;
+import classes.internals.SaveableState;
 
-	public class JourneyToTheEast extends HeXinDaoAbstractContent implements SaveableState
+public class JourneyToTheEast extends HeXinDaoAbstractContent implements SaveableState
 	{
 		public var riverdungeon:RiverDungeon = new RiverDungeon();
 
@@ -83,9 +81,9 @@ import classes.Scenes.SceneLib;
 			}
 			menu();
 			addButton(0, "Drink", drinkAlcohol);
-			addButton(2, "Felix", shadyPerson).hint("A strange two headed chimera with two tails is sitting near the bar.");
+			addButton(2, "Felix", shadyPerson).hint("A strange two-headed chimera with two tails is sitting near the bar.");
 			addButton(4, "Adv.Guild", SceneLib.adventureGuild.BoardkeeperYangMain);
-			//addButton(5, "Monkey", SceneLib.waizabi.bimboMonkey).hint("You see a massive-breasted woman sitting at a table on your right. At first, she seems human, but as you look, her monkey tail flicks up, grabbing her drink and bringing it to her lips. Her body is heavily muscled, almost amazonian.");//monkey bimbo go go - Waiz'abi
+			addButton(5, "Monkey", SceneLib.waizabi.bimboMonkey).hint("You see a massive-breasted woman sitting at a table on your right. At first, she seems human, but as you look, her monkey tail flicks up, grabbing her drink and bringing it to her lips. Her body is heavily muscled, almost amazonian.");//monkey bimbo go go - Waiz'abi
 			if (workHoursMadam() || workHoursTemptress()) addButton(6, "5/0/0", tableNo5);
 			else addButtonDisabled(6, "5/0/0", "Table No. 5 is curently empty.");
 			if (flags[kFLAGS.MICHIKO_FOLLOWER] < 1) addButton(8, "???", SceneLib.michikoFollower.firstMeetingMichiko).hint("You see a suspicious looking squirrel in one corner, nursing a drink and small bowl of peanuts.");
@@ -116,6 +114,7 @@ import classes.Scenes.SceneLib;
 			addButton(5, "Fiery S", buyDrink, consumables.FIERYS_, 1).hint("1 spirit stone");
 			addButton(6, "SalamFW", buyDrink, consumables.SALAMFW, 1).hint("1 spirit stone");
 			addButton(7, "NoceLiq", buyDrink, consumables.NOCELIQ, 2).hint("2 spirit stones");
+			addButton(8, "Asumaki", buyDrink, consumables.ASKIRIN, 1).hint("2 spirit stones");
 			addButton(12, "BimboL", buyDrink, consumables.BIMBOLQ, 100).hint("100 spirit stones");
 			addButton(13, "BroBrew", buyDrink, consumables.BROBREW, 100).hint("100 spirit stones");
 			addButton(14, "Back", notThirsty);
@@ -124,7 +123,7 @@ import classes.Scenes.SceneLib;
 		private function notThirsty():void {
 			clearOutput();
 			outputText("In the end you realise you are not thirsty after all and wave a goodbye before leaving.\n\n");
-			doNext(curry(enteringInn,false));
+			doNext(enteringInn,false);
 		}
 		private function buyDrink(drink:ItemType, amount:int):void{
 			var cost:int = amount;
@@ -148,6 +147,9 @@ import classes.Scenes.SceneLib;
 			outputText("\"<i>Welcome to 'Felix's Corner' traveler. Do you wanna buy something?</i>\" asks the cat head ending it with a short purr. \"<i>We have wares if you have the spirit stones.</i>\"\n\n");
 			outputText("After that the other head stops looking around, baring its teeth at you. \"<i>If you not interested in buying anything, then get lost... we don't have all day.</i>\"\n\n");
 			menu();
+			addButton(7, necklaces.NECRONE.shortName, itemBuy, necklaces.NECRONE).hint("120 spirit stones");
+			addButton(8, weapons.NECROWA.shortName, itemBuy, weapons.NECROWA).hint("128 spirit stones");
+			addButton(9, shields.NECROSH.shortName, itemBuy, shields.NECROSH).hint("100 spirit stones");
 			addButton(10, necklaces.EZEKIELN.shortName, itemBuy, necklaces.EZEKIELN).hint("50 spirit stones");
 			addButton(11, headjewelries.EZEKIELC.shortName, itemBuy, headjewelries.EZEKIELC).hint("40 spirit stones");
 			addButton(12, jewelries.EZEKIELS.shortName, itemBuy, jewelries.EZEKIELS).hint("10 spirit stones");
@@ -161,7 +163,7 @@ import classes.Scenes.SceneLib;
 			if(flags[kFLAGS.SPIRIT_STONES] < itype.value / 10) {
 				outputText("\n\nYou count out your spirit stones and realize it's beyond your price range.");
 				//Goto shop main menu
-				doNext(curry(shadyPerson,false));
+				doNext(shadyPerson,false);
 				return;
 			}
 			else outputText("\n\nDo you buy it?\n\n");
@@ -191,15 +193,15 @@ import classes.Scenes.SceneLib;
 			addButton(14, "Back", curry(enteringInn,false));
 		}
 		private function workHoursMadam():Boolean {
-			if ((model.time.hours >= 7 && model.time.hours <= 9) || (model.time.hours >= 18 && model.time.hours <= 22)) return true;
-			return false;
+			return (model.time.hours >= 7 && model.time.hours <= 9) || (model.time.hours >= 18 && model.time.hours <= 22);
+
 		}
 		private function visitMadam():void {
-			clearOutput();//Madam - female kishoo npc for stat points to perk points conversion		outputText("\"<i></i>\"\n\n");
-			if (AhriTavernTalks) outputText("\"<i>You came back? What do you seek from this Madam?</i>\" You can swear to see her eyes glow for a moment under the hood as she looking at you. \"<i>Another session to exchange your grown potential to increased ability to develop mystical abilities?</i>\"\n\n");
+			clearOutput();
+			if (AhriTavernTalks) outputText("\"<i>You came back? What do you seek from this Madam?</i>\" You can swear to see her eyes glow for a moment under the hood as she looks at you. \"<i>Another session to exchange your grown potential to increased ability to develop mystical abilities?</i>\"\n\n");
 			else {
 				outputText("You see a person covered wholy by the loose robe. For a moment it looks like it not noticed your presence next to it.\n\n");
-				outputText("\"<i>Greeting potential customer. You can call me Madam,</i>\" clearly female voice with undeniable subtle charm interrupts the silence. \"<i>You came to our table seeking my services? I not able to provide much... aside from something i call... 'conversion'.</i>\"\n\n");
+				outputText("\"<i>Greeting potential customer. You can call me Madam,</i>\" clearly female voice with undeniable subtle charm interrupts the silence. \"<i>You came to our table seeking my services? I am not able to provide much... aside from something i call... 'conversion'.</i>\"\n\n");
 				outputText("Conversion? Seeing your puzzle expression she continues, \"<i>I would take a bit of your grown potential to exchange it for increased ability to develop mystical abilities. But...</i>\" she make a gesture with one of her hands showing briefly her hand with five outstretched fingers \"<i>...I shall only do this five times. No more and no less than five.</i>\"\n\n");
 				outputText("Just like that? Without any string attatched?\n\n");
 				outputText("\"<i>Of course there would be additional price. Ten spirit stones.</i>\" She pause before asking \"<i>So, dear customer, would you like me to perform this conversion on you?</i>\"\n\n");
@@ -220,32 +222,32 @@ import classes.Scenes.SceneLib;
 				doNext(visitMadam);
 			}
 			else if (AhriStatsToPerksConvertCounter > 4 && AhriTavernTalks > 0) {
-				outputText("\"<i>It's unfotunate but i can't help you anymore,</i>\" Madam rise her hand to show five fingers, \"<i>My service can be repeated maximum five times and you dear customer reached this limit.</i>\"\n\n");
+				outputText("\"<i>It's unfotunate but I can't help you anymore,</i>\" Madam rise her hand to show five fingers, \"<i>My service can be repeated maximum five times and you, dear customer, have reached this limit.</i>\"\n\n");
 				doNext(visitMadam);
 			}
 			else {
 				outputText("After recieving payment Madam reaches down to her belt, depositing them into a small pouch. \"<i>Come we can't do 'it' here</i>\". She leads you into a short corridor at the back of the inn, with several rooms just off it. Opening one of the side room doors, she motions for you to come inside.\n\n");
 				outputText("\"<i>Please sit down. This process is strenuous, and will take some time.</i>\" She points toward a sofa in the middle of the room. You sit, and she walks behinds you. \"<i>Dear customer, please close your eyes.</i>\" Her voice is low, humming...almost buzzing. It's somehow both calming and enticing at once.\n\n");
 				outputText("You close your eyes as a strange energy fills your body. Nervousness washed away by her voice, you begin to nod off as the energy spreads. Starting from the sides of you head, down to your jaw... It feels extremely comfortable. Unwilling to move a muscle, you relax, drifting off. \n\n");
-				outputText("When you wake up, you groan, stretching your limbs. You're filled with a vaguely empty feeling in your muscles, but your brain feels...expanded, somehow. You snap awake, realizing that you're still in the inn. Looking around, there is nobody else in the room, with the door left wide open, almost like madam wanted to say 'return on your own'. Slightly unsatisfied you returns to the drinking hall.\n\n");
+				outputText("When you wake up, you groan, stretching your limbs. You're filled with a vaguely empty feeling in your muscles, but your brain feels...expanded, somehow. You snap awake, realizing that you're still in the inn. Looking around, there is nobody else in the room, with the door left wide open, almost like madam wanted to say 'return on your own'. Slightly unsatisfied, you return to the drinking hall.\n\n");
 				if (AhriStatsToPerksConvertCounter > 0) AhriStatsToPerksConvertCounter += 1;
 				else AhriStatsToPerksConvertCounter = 1;
 				flags[kFLAGS.SPIRIT_STONES] -= 10;
 				player.statPoints -= 5;
 				player.perkPoints += 1;
-				doNext(curry(enteringInn,false));
+				doNext(enteringInn,false);
 				eachMinuteCount(30);
 			}
 		}
 		private function workHoursTemptress():Boolean {
-			if ((model.time.hours >= 8 && model.time.hours <= 9) || (model.time.hours >= 18 && model.time.hours <= 23)) return true;
-			return false;
+			return (model.time.hours >= 8 && model.time.hours <= 9) || (model.time.hours >= 18 && model.time.hours <= 23);
+
 		}
 		private function visitTemptress():void {
 			clearOutput();//Temptress - female displacer devil npc for perk points to stat points conversion outputText("\"<i></i>\"\n\n");
 			if (EvelynnTavernTalks) outputText("\"<i>Did you came back longing for more?</i>\" Her eyes glow for a moment under the hood, her gaze piercing through you. \"<i>Another touch? You wish to exchange your experiences and skills for additional potential?</i>\"\n\n");
 			else {
-				outputText("You see a person covered entirely by a loose robe. She looks around until she finally notice you staring at her.\n\n");
+				outputText("You see a person covered entirely by a loose robe. She looks around until she finally notices you staring at her.\n\n");
 				outputText("A sultry voice, feminine and sizzling, interrupts the silence. \"<i>Hello, customer. I'm Temptress,</i>\" She smiles slightly, beckoning to you with one hand. \"<i>You came to this table seeking my services? I can provide you with 'change'.</i>\"\n\n");
 				outputText("Change? Seeing your puzzle expression she continues, \"<i>I would take a bit of your ability to develop mystical abilities to exchange it for increased grown potential. But...</i>\" she make a gesture with one of her hands showing briefly her hand with five outstretched fingers ending with long, sharp finger claws \"<i>...I would only do this five times.</i>\"\n\n");
 				outputText("Just like that? Without any strings attatched?\n\n");
@@ -280,7 +282,7 @@ import classes.Scenes.SceneLib;
 				flags[kFLAGS.SPIRIT_STONES] -= 10;
 				player.statPoints += 5;
 				player.perkPoints -= 1;
-				doNext(curry(enteringInn,false));
+				doNext(enteringInn,false);
 				eachMinuteCount(30);
 			}
 		}
@@ -288,7 +290,7 @@ import classes.Scenes.SceneLib;
 		public function NeisabutPCgotKOd():void {
 			clearOutput();
 			outputText("As you walk towards Neisa, she does a double take as she sees you alive and well.");
-			outputText("\"Well damn. How'd you survive.... nevermind. I don't want to know. You still owe me for that expedition, so I'll be waiting here until you're better prepared.\"");
+			outputText("\"Well damn. How'd you survive.... never mind. I don't want to know. You still owe me for that expedition, so I'll be waiting here until you're better prepared.\"");
 			outputText("Unless... you want to go back in now?")
 			menu();
 			addButton(1, "Yes", reenteringTheDungeon).hint("That will make you go to the dungeon right away!");
@@ -296,6 +298,10 @@ import classes.Scenes.SceneLib;
 		}
 		public function reenteringTheDungeon():void{
 			outputText("\n\nWith a nod, you shake her hand, and she gets up from her chair, before the two of you head back towards the dungeon.");
+			enterDungeonWithNeisa();
+		}
+
+		public function enterDungeonWithNeisa():void {
 			var strNeisa:Number = 50;
 			strNeisa *= (1 + (0.2 * player.newGamePlusMod()));
 			strNeisa = Math.round(strNeisa);
@@ -309,7 +315,7 @@ import classes.Scenes.SceneLib;
 		public function firstTimeMeetingNeisa():void {
 			clearOutput();
 			outputText("A woman in heavy armor is sitting on one of the chairs. You can barely see her blue eyes and black hair, hidden under a thick visor attached to her helmet.\n\n");
-			outputText("\"<i>What you looking at? If it's for a job, you came to the right place. Name's Neisa. Pay me right, and my blade is yours. If you're not gonna hire me, then you can get away from me and leave me to my drink.</i>\"\n\n");
+			outputText("\"<i>What are you looking at? If it's for a job, you came to the right place. Name's Neisa. Pay me right, and my blade is yours. If you're not gonna hire me, then you can get away from me and leave me to my drink.</i>\"\n\n");
 			outputText("You sit down, giving Neisa an interested look. She sits up, cracking her knuckles. You tell Neisa that yes, you're looking for a hired sword. One unafraid to enter that cave near the back of He'Din Xiao. \n\n");
 			outputText("She rolls her eyes, giving you a wave of the hand. \"<i>Oh this again? Not surprised there. Must've been ten people that went down there alone and never came back. The guards are probably sick of their crap. Sure I could accompany you in there...But for a price. The treasure in that cave? I want it. Hell, it doesn't look like you are getting in otherwise. What'll it be?</i>\"\n\n");
 			outputText("Do you purchase the mercenary's Services?\n\n");
@@ -324,21 +330,14 @@ import classes.Scenes.SceneLib;
 			outputText("Seeing as you come in pair the guards let you in thought with a final warning.\n\n");
 			outputText("\"<i>Try not to die down there. A lot of people went in and never came back.</i>\"\n\n");
 			outputText("You will keep that in mind.\n\n");
-			var strNeisa:Number = 50;
-			strNeisa *= (1 + (0.2 * player.newGamePlusMod()));
-			strNeisa = Math.round(strNeisa);
-			var meleeAtkNeisa:Number = 12;
-			meleeAtkNeisa += (1 + (int)(meleeAtkNeisa / 5)) * player.newGamePlusMod();
-			player.createStatusEffect(StatusEffects.CombatFollowerNeisa, strNeisa, meleeAtkNeisa, 0, 0);
-			flags[kFLAGS.PLAYER_COMPANION_1] = "Neisa";
 			flags[kFLAGS.NEISA_FOLLOWER] = 3;
-			doNext(riverdungeon.enterDungeon);
+			enterDungeonWithNeisa();
 		}
 		public function firstTimeMeetingNeisaNo():void {
-			outputText("You are not interested into a mercenary right now but you thank her for proposing. She shrug it off.\n\n");
+			outputText("You are not interested into a mercenary right now but you thank her for proposing. She shrugs it off.\n\n");
 			outputText("\"<i>No skin off my back. Come back over if ya change your mind.</i>\"\n\n");
 			flags[kFLAGS.NEISA_FOLLOWER] = 2;
-			doNext(curry(enteringInn,false));
+			doNext(enteringInn,false);
 		}
 		public function meetingNeisaAfterDecline():void {
 			outputText("The mercenary come to attention as you approach her.\n\n");
@@ -372,7 +371,7 @@ import classes.Scenes.SceneLib;
 		}
 		public function meetingNeisaPostDungeonExplorationDontPay():void {
 			outputText("You walk away to go get the cash. You're lucky she doesn't send the city guards on your back.\n\n");
-			doNext(curry(enteringInn,false));
+			doNext(enteringInn,false);
 		}
 		public function meetingNeisaPostDungeonExplorationPay():void {
 			flags[kFLAGS.SPIRIT_STONES] -= 10;
@@ -395,10 +394,10 @@ import classes.Scenes.SceneLib;
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function meetingNeisaPostDungeonExplorationNo():void {
-			outputText("Nah you don't have that much right now.\n\n");
+			outputText("Nah, you don't have that much right now.\n\n");
 			outputText("\"<i>Well, shit. I hope whatever you meet out there doesn't outright kill or fuck the soul out of you then. See me again if you ever change your mind.</i>\"\n\n");
 			if (flags[kFLAGS.NEISA_FOLLOWER] == 4) flags[kFLAGS.NEISA_FOLLOWER] = 5;
-			doNext(curry(enteringInn,false));
+			doNext(enteringInn,false);
 		}
 
 		public function firstTimeMeetingNekomataBoy():void {
@@ -423,7 +422,7 @@ import classes.Scenes.SceneLib;
 		public function firstTimeMeetingNekomataBoyNo():void {
 			outputText("Yeah no, this is looking too good to be true and truth be told it likely is. You tell the sketchy cat you will pass on it for now and head back towards the bar.\n\n");
 			flags[kFLAGS.CURSE_OF_THE_JIANGSHI] = 1;
-			doNext(curry(enteringInn,false));
+			doNext(enteringInn,false);
 		}
 		public function firstTimeMeetingNekomataBoyYes():void {
 			clearOutput();
@@ -443,7 +442,7 @@ import classes.Scenes.SceneLib;
 			outputText("\"<i>See, I have a client up there who is VERY fond of humans… human sex slaves that is. This guy likes his slaves obedient and always ready to serve with the bare minimum willpower yet willing and capable of defending him. Friend, it so happens that the slave market is an ever evolving business, one I intend to get rich with, so you’re going to help me with that. Did you know that by ");
 			outputText("violently stripping potential slaves of their life forces, pouring a decent amount of corruption and making them energy dependant, you can create efficient and willing sex zombies? You of all people shall become the fruit of my years of research into creating the perfect slave, I call this new model of sex zombie, Jiangshi. First things first though, let's make you better looking.</i>\"\n\n");
 			outputText("You try to protest but before you know it the mad cat grabs what appears to be a paper tag and sticks it to your forehead. The cat chuckles.\n\n");
-			outputText("\"<i>Don't you worry it will all be over soon, the suffering is momentary if there is any. All you will think about is sex and within seconds you will be too empty headed to care about anything else.</i>\"\n\n");
+			outputText("\"<i>Don't you worry it will all be over soon, the suffering is momentary if there is any. All you will think about is sex and within seconds you will be too empty-headed to care about anything else.</i>\"\n\n");
 			if (player.gender > 1 && player.biggestTitSize() > 0) {
 				outputText("You moan, confused as your breast begins to heat up and inflate, your nipples stiffening as your boobs balloons in to ");
 				if (player.biggestTitSize() < 7) {
@@ -458,15 +457,15 @@ import classes.Scenes.SceneLib;
 			}
 			if (player.gender == 1) {
 				outputText(" Your penis suddenly begins to drip pre as you immediately go erect, the blood vessels pulsing purple as if your cock was possessed while your member inflates in size, gaining " + (player.cocks[0].cockLength <= 12? "five": "two and a half")+" extra inches!");
-				player.increaseCock(0, 5);
+				player.growCock(0, 5);
 			}
 			if (player.femininity > 50) player.femininity = 100;
 			else player.femininity = 0;
 			outputText(" The sexual changes are so intense you cum at once, your expression turning vacant. Your face begins to tingle as the magic alters your hormones, maxing out your "+player.mf("masculinity","femininity")+", you sure must look great right now. It'd be nice if it ended there but it doesn't, you watch in horror as your skin begins to bleach out, becoming paler by the second. You hear the last ");
-			outputText("of your heartbeat a few seconds later before it falls silent. Your body stiffens to mimic this inertia, moving your joints is going to be difficult. Despite all this your sensations don't all die out, instead you begin to hear a different kind of heartbeat, the cat’s cock looks increasingly tempting now. How do you know it has a cock? It'd be a simple guess if not for the fact ");
+			outputText("of your heartbeat a few seconds later before it falls silent. Your body stiffens to mimic this inertia, moving your joints is going to be difficult. Despite all this, your sensations don't all die out, instead you begin to hear a different kind of heartbeat, the cat’s cock looks increasingly tempting now. How do you know it has a cock? It'd be a simple guess if not for the fact ");
 			outputText("that you can smell and literally see his soulforce accumulating at his crotch. You need to get off this table and get to it, you yearn for it desperately. Food… this thing is food! Your mind begins to recede into a sluggish state, all of your thoughts focusing on sex. You voice your need with a long dim witted moan, trying to reach for the cat morph’s robe with your stiff yet tied up arms.\n\n");
 			outputText("\"<i>Looks like the changes are about over, Ahh...I love that vacant, stupid expression of yours, that’s the look of someone who can only think about dicks and cunts. So, since you’re already this eager, how about you have a taste of mine, Eh???</i>\"\n\n");
-			outputText("He grins wide and opens up his wizard robe, revealing the hardening cock you have been focusing on all this time before he unstraps you from the table and lets you get up on your own. Without hesitation you take his cock inside your mouth. He grumbles to himself, annoyed at your sluggish, somewhat stiff motions, but you still manage to wrap your lips around him, rocking back and forth as you suck him off.\n\n");
+			outputText("He grins wide and opens up his wizard robe, revealing the hardening cock you have been focusing on all this time before he unstraps you from the table and lets you get up on your own. Without hesitation, you take his cock inside your mouth. He grumbles to himself, annoyed at your sluggish, somewhat stiff motions, but you still manage to wrap your lips around him, rocking back and forth as you suck him off.\n\n");
 			outputText("\"<i>Um, I didn't consider rigor mortis in my calculation, I will need to mention this hiccup to the client… at least "+player.mf("he","she")+" makes up for it with enthusiasm.</i>\"\n\n");
 			outputText("A few seconds later he finally orgasms, causing that amassed energy in his cock to flood down your throat in a white cascade. You almost faint as pleasure floods your head... You watch his reaction, waiting for an opening...You realize the fog has lifted somewhat! For whatever reason, this seems to not only restore your mind but also sharpen it. You bend your arm, and your range of motion also seems to have returned!. ");
 			outputText("It would seem your torturer messed up something in the charm and instead of removing your free will, he only emptied you of it, turning you into some kind of energy vampire that gets dumber when starved. Well your face might be stuck in that zombie like expression right now but your mind is racing as you take full awareness of the situation, and how easily it would be to turn the tables on your captor.\n\n");
@@ -475,10 +474,7 @@ import classes.Scenes.SceneLib;
 			outputText("You let him fall limply on the ground and look at him, he has foam at the mouth. Geeze your nails are poisonous too? While you doubt you killed him, you don't want him to just get away with this either so you dump him in the box he originally reserved for you and lock him up.\n\n");
 			outputText("Thinking your problems to be over, you attempt to remove the cursed spell tag on your forehead. You pull hard, but to your surprise it just doesn't come off. Guess you're stuck into this weird zombie like existence until you can find someone to help you with this. You literally hop out of the mage’s house, arm stretched forward, and head back to camp.\n\n");
 			outputText("(<b>Gained Perks: Halted vitals, Super strength, Poison nails, Rigidity, Life leech, Undeath, Energy dependent</b>)\n\n");
-			var skincolor:Number = rand(3);
-			if (skincolor == 0) player.skinTone = "snow white";
-			else if (skincolor == 1) player.skinTone = "ghostly pale";
-			else player.skinTone = "light blue";
+			player.skinColor = randomChoice("snow white", "ghostly pale", "light blue");
 			CoC.instance.transformations.FaceJiangshi.applyEffect(false);
 			player.eyes.type = Eyes.JIANGSHI;
 			CoC.instance.transformations.EyesChangeColor(["turquoise"]).applyEffect(false);
@@ -492,37 +488,41 @@ import classes.Scenes.SceneLib;
 			player.createPerk(PerkLib.Rigidity, 0, 0, 0, 0);
 			player.createPerk(PerkLib.LifeLeech, 0, 0, 0, 0);
 			player.createPerk(PerkLib.Undeath, 0, 0, 0, 0);
+			if (player.hasPerk(PerkLib.RacialParagon))
+				flags[kFLAGS.APEX_SELECTED_RACE] = Races.JIANGSHI;
 			player.createPerk(PerkLib.EnergyDependent, 0, 0, 0, 0);
 			if (flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD] == 0) flags[kFLAGS.HAIR_GROWTH_STOPPED_BECAUSE_LIZARD]++;
-			if (player.weapon != WeaponLib.FISTS) {
-				if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2) flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] = 1;
-				else flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = player.weapon.id;
-				player.setWeapon(WeaponLib.FISTS);
+			var item:ItemType;
+			if (!player.weapon.isNothing) {
+				item = player.unequipWeapon(false,true);
+				if (item && !item.isNothing) flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = item.id;
 			}
-			if (player.weaponRange != WeaponRangeLib.NOTHING) {
-				flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] = player.weaponRange.id;
-				player.setWeaponRange(WeaponRangeLib.NOTHING);
+			if (!player.weaponRange.isNothing) {
+				item = player.unequipWeaponRange(false,true);
+				if (item && !item.isNothing) flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] = item.id;
 			}
-			if (player.shield != ShieldLib.NOTHING) {
-				if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 2) flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] = 1;
-				else flags[kFLAGS.PLAYER_DISARMED_SHIELD_ID] = player.shield.id;
-				player.setShield(ShieldLib.NOTHING);
+			if (!player.shield.isNothing) {
+				item = player.unequipShield(false,true);
+				if (item && !item.isNothing) flags[kFLAGS.PLAYER_DISARMED_SHIELD_ID] = item.id;
 			}
-			if (player.armor != ArmorLib.NOTHING) {
-				if (player.armor == armors.GOOARMR) player.armor.removeText();
-				else flags[kFLAGS.PLAYER_DISARMED_ARMOR_ID] = player.armor.id;
+			if (!player.armor.isNothing) {
+				item = player.unequipArmor(false, true);
+				if (item && !item.isNothing) flags[kFLAGS.PLAYER_DISARMED_ARMOR_ID] = item.id;
 			}
-			player.setArmor(armors.TRADITC);
-			if (player.lowerGarment != UndergarmentLib.NOTHING) {
-				flags[kFLAGS.PLAYER_DISARMED_UNDERWEAR_BOTTOM_ID] = player.lowerGarment.id;
-				player.setUndergarment(UndergarmentLib.NOTHING, UndergarmentLib.TYPE_LOWERWEAR);
+			player.setArmor(armors.TRADITC, false, true);
+			if (!player.lowerGarment.isNothing) {
+				item = player.unequipUnderBottom(false, true);
+				if (item && !item.isNothing) flags[kFLAGS.PLAYER_DISARMED_UNDERWEAR_BOTTOM_ID] = item.id;
 			}
-			if (player.upperGarment != UndergarmentLib.NOTHING) {
-				flags[kFLAGS.PLAYER_DISARMED_UNDERWEAR_UPPER_ID] = player.upperGarment.id;
-				player.setUndergarment(UndergarmentLib.NOTHING, UndergarmentLib.TYPE_UPPERWEAR);
+			if (!player.upperGarment.isNothing) {
+				item = player.unequipUnderTop(false, true);
+				if (item && !item.isNothing) flags[kFLAGS.PLAYER_DISARMED_UNDERWEAR_UPPER_ID] = item.id;
 			}
-			if (player.headJewelry != HeadJewelryLib.NOTHING) flags[kFLAGS.PLAYER_DISARMED_HEAD_ACCESORY_ID] = player.headJewelry.id;
-			player.setHeadJewelry(headjewelries.JIANGCT);
+			if (!player.headJewelry.isNothing) {
+				item = player.unequipHeadJewelry(false, true);
+				if (item && !item.isNothing) flags[kFLAGS.PLAYER_DISARMED_HEAD_ACCESORY_ID] = item.id;
+			}
+			player.setHeadJewelry(headjewelries.JIANGCT, false, true);
 			if (player.hasPerk(PerkLib.BimboBody)) player.removePerk(PerkLib.BimboBody);
 			if (player.hasPerk(PerkLib.BimboBrains)) player.removePerk(PerkLib.BimboBrains);
 			if (player.hasPerk(PerkLib.BroBody)) player.removePerk(PerkLib.BroBody);
@@ -546,8 +546,8 @@ import classes.Scenes.SceneLib;
 			outputText(" sitting on one of the stool drinking sake.\n\n");
 			outputText("\"<i>Yeah, and after I told it I was the top girl here I punched it in the face, Woooooooo!</i>\"\n\n");
 			outputText("The barman sighs, pretending not to notice the drunken mouse, acknowledging her just to pass her another drink. Just as you are about to order something she realises you are there and engages in conversation.\n\n");
-			if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2) outputText("\"<i>Gaaaaah, [name], why do you hang around all those girls. Worse why do you fuck with them and not me?! Its like you are a " + player.mf("go go boy","cheap whore") + " selling your body to everyone and thish drives me mad! Yeaaa, I’m going to prove them all I’m the top shlut!</i>\"");
-			else if (flags[kFLAGS.CHI_CHI_FOLLOWER] == 1) outputText("\"<i>Hey... you’re that so called champ who lost in the arena?! Well I like you. I like you so much I’d want you as my " + player.mf("boy","girl") + "friend... but waaaah I’m way too shy to tell you that right! Well don’t go tell [name] I like " + player.mf("him","her") + " got it? Yeah who cares about that! Barman a round for [name] the best person I met woooo. Now let’s have sex!</i>\"\n\n");
+			if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2) outputText("\"<i>Gaaaaah, [name], why do you hang around all those girls. Worse why do you fuck with them and not me?! Its like you are a " + player.mf("go-go boy","cheap whore") + " selling your body to everyone and thish drives me mad! Yeaaa, I’m going to prove them all I’m the top shlut!</i>\"");
+			else if (flags[kFLAGS.CHI_CHI_FOLLOWER] == 1) outputText("\"<i>Hey... you’re that so-called champ who lost in the arena?! Well I like you. I like you so much I’d want you as my " + player.mf("boy","girl") + "friend... but waaaah I’m way too shy to tell you that right! Well don’t go tell [name] I like " + player.mf("him","her") + " got it? Yeah, who cares about that! Barman, a round for [name] the best person I've ever met, woooo. Now let’s have sex!</i>\"\n\n");
 			else outputText("\"<i>Hey you... yesh you, the tall person over there! Think you can fight?! Well I’m pretty sure nobody in this village hash the guts to anyway. If you show up in the arena, I'sh gonna beat the crap outta you... \"</i> She grins drunkenly, grabbing at your crotch with one hand. \" <i>Now that I think of it...Fightin' and fuckin'... I can beat anyone in both! I'sh Bet you're the kind who fucks every demon you meet. Well not tonight, letsh bang!</i>\"");
 			outputText("Wait, what? You barely have the time to mutter a reply before the red cheeked mousette pushes you on the nearest table and climbs over you. The barman pulls a curtain around your table, he must be used to this.\n\n");
 			outputText("\"<i>Yeshh you heard me you big idiot. I’m going to fuck you here and now! So don’t you dare try to run! You'sh wouldn't get far, and that would make...Momma...Mad.</i>\"\n\n");
@@ -568,8 +568,10 @@ import classes.Scenes.SceneLib;
 					outputText(" The mousette introduces herself.\n\n");
 					outputText("\"<i>My name’s Chi Chi by the way, but... oh why does it matter? We are about to have a lot of fun.</i>\"");
 				}
-				//post marriage
-				if (player.hasCock()) {
+				sceneHunter.selectGender(dickF, vagF);
+
+				//===============================
+				function dickF():void {
 					outputText(" Chi Chi initiates with a wet but warm kiss; Her tongue dancing tango with yours. While small in stature, she displays an uncommon level of strength rarely seen even among animal morphs. What’s more concerning is that you aren't sure how her burning tail and fur isn't actually setting everything on fire around her, especially you. You inquire on this matter.\n\n");
 					outputText("\"<i>That’sh because I’m burning with passion for you big idiot! My flamesh won’t burn anything I wish not to. Or maybe they will. I never recalled how that one inn caught fire. Just you wait, I'll set both of our body aflame with desire. Your cock will be as hot as my embers.</i>\"\n\n");
 					outputText("Well it's too late to back down anyway and, even if you did, the drunken megamouse is clearly going to keep you pinned down. Not to make your partner wait anymore, you slowly tease the entrance of her warm canal with your [cock]. If anything, despite being wet you can already feel how hot her oven is from the outside and can’t help but hope you won’t end up burned. Chi Chi however has no such concern and out of impatience starts stroking your dick with her embery tail.\n\n");
@@ -580,22 +582,25 @@ import classes.Scenes.SceneLib;
 					outputText("Both desperate for a way to get rid of the heat, the two of you manage to cum together, your jizz filling Chi Chi to the brim before slowly dripping on the ground. Chi Chi sighs in relief, falling limp on the table.\n\n");
 					outputText("\"<i>" + (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2 ? "You're the besht [name] you know that? Let'sh do thish again sometimes, I jusht can’t get enough of it." : "You're a good boyfriend you know that? Let'sh do thish again sometimes.") + "</i>\"\n\n");
 					outputText("Her eyes close, and you breathe a sigh of relief as her breathing slows. Groaning through your own exhaustion, you force yourself up, gently placing her back on the table. You wince, aching groin sending shivers through you, but you stagger up,  leaving the bar. You consider it wise to leave before Chi-Chi wakes up." + (flags[kFLAGS.CHI_CHI_FOLLOWER] == 2 ? " Especially because you're pretty sure she will beat you to death if she discovers the two of you had sex while she was drunk" : "") + ". You exit the bar, and as you leave, the barkeep sighs in relief. He motions to a bouncer, and the two men gingerly wrap Chi-Chi in the curtain and carry her out of the bar. From the extremely worried looks on their faces, Chi-Chi is likely to punch them if she wakes up now.\n\n");
+					player.sexReward("vaginalFluids", "Dick");
+					if (flags[kFLAGS.CHI_CHI_FOLLOWER] < 1) flags[kFLAGS.CHI_CHI_FOLLOWER] = 1;
+					doNext(camp.returnToCampUseOneHour);
 				}
-				else {
+				function vagF():void {
 					outputText("Chi Chi initiates with a wet but warm kiss, her tongue dancing tango with yours. While small in stature she displays an uncommon level of strength rarely seen even among animal morphs. What’s more concerning is that you aren't sure how come her burning tail and fur isn't actually setting on fire everything around her starting with you. You inquire on this matter.\n\n");
 					outputText("\"<i>Thatsh because I’m burning with passion for you, big idiot! My flamesh won’t burn anything I wish not to. Or maybe they will. I never recalled how that one inn caught fire. Just you wait I'll set both of our body aflame with desire. Your pussy will be as hot as my embers.</i>\"\n\n");
-					outputText("Well it's too late to back down anyway and, even if you did, the drunken megamouse is clearly going to keep you pinned down. Not to make your partner wait anymore you begin to grind your pussy lips against hers making her gasp in surprise at your initiative.\n\n");
+					outputText("Well it's too late to back down anyway and, even if you did, the drunken megamouse is clearly going to keep you pinned down. Not to make your partner wait any more, you begin to grind your pussy lips against hers making her gasp in surprise at your initiative.\n\n");
 					outputText("\"<i>Oh?! Finally fighting back? Good I love a girl that tries.</i>\"\n\n");
-					outputText("Chi Chi begins to grind herself in response, making you both moan. For a drunk she clearly knows what she’s doing. You’re swiftly forced back to reality as your blazing partner accelerates the tempo, causing you to moan in pleasure. There's no way you going to lose this! You take her mouse ears into your hands and start caressing them. Chi Chi gasps, squirming, her cheeks bright red. You keep it up, scratching her ears, bringing your lips to her neck. She shivers, goosebumps spreading across her nape. You're clearly getting to her. ");
+					outputText("Chi Chi begins to grind herself in response, making you both moan. For a drunk she clearly knows what she’s doing. You’re swiftly forced back to reality as your blazing partner accelerates the tempo, causing you to moan in pleasure. There's no way you're going to lose this! You take her mouse ears into your hands and start caressing them. Chi Chi gasps, squirming, her cheeks bright red. You keep it up, scratching her ears, bringing your lips to her neck. She shivers, goosebumps spreading across her nape. You're clearly getting to her. ");
 					outputText("The flaming mouse-girl moans, but her tail is still free. It lashes out like a whip and slides between you, aiming for your cunt. Before you can stop it you already have 15 inch of hot mouse tail in your [pussy] and Chi Chi uses it to fuck your brains out. You wriggle, her coiled tail pumping your folds as her heat spreads. Your cunt warms rapidly, heat spreading to your stomach and thighs, but it's not enough. Your cunt is on fire!");
 					outputText("only the cool passage of your girl-juices can free you from this heat! She grinds against her own tail bump, but you grit your teeth over the wave of pleasure. This bitch isn't getting her way entirely! You swiftly slide " + (player.tailType > Tail.NONE ? "your tail" : "a pair of fingers") + " into her smoking hot hinezumi cunt. She gasps, and you finger her harder, tweaking her bright-red button.\n\n");
 					outputText("Both desperate for a way to get rid of the heat and unable to fully outpace her, the two of you cum at the same time, your girl juices dripping down your cunts, pooling on the table before dripping onto the ground below. Chi Chi sighs in relief, steam rising from her as she falls limp on the table.\n\n");
 					outputText("\"<i>" + (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2 ? "You're the besht [name] you know that? Let'sh do thish again sometimes, I jusht can’t get enough of it." : "You're a good girlfriend you know that? Let'sh do thish again sometimes.") + "</i>\"\n\n");
 					outputText("Her eyes close, and you breathe a sigh of relief as her breathing slows. Groaning through your own exhaustion, you force yourself up, gently placing her back on the table. You wince, aching groin sending shivers through you, but you stagger up,  leaving the bar. You consider it wise to leave before Chi-Chi wakes up." + (flags[kFLAGS.CHI_CHI_FOLLOWER] == 2 ? " Especially because you're pretty sure she will beat you to death if she discovers the two of you had sex while she was drunk" : "") + ". You exit the bar, and as you leave, the barkeep sighs in relief. He motions to a bouncer, and the two men gingerly wrap Chi-Chi in the curtain and carry her out of the bar. From the extremely worried looks on their faces, Chi-Chi is likely to punch them if she wakes up now.\n\n");
+					player.sexReward("no", "Vaginal");
+					if (flags[kFLAGS.CHI_CHI_FOLLOWER] < 1) flags[kFLAGS.CHI_CHI_FOLLOWER] = 1;
+					doNext(camp.returnToCampUseOneHour);
 				}
-				player.orgasm();
-				if (flags[kFLAGS.CHI_CHI_FOLLOWER] < 1) flags[kFLAGS.CHI_CHI_FOLLOWER] = 1;
-				doNext(camp.returnToCampUseOneHour);
 			}
 		}
 	}

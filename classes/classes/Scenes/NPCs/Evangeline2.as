@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -101,7 +101,6 @@ public class Evangeline2 extends Monster
 			if (hasPerk(PerkLib.JobSorcerer)) mod += .1;
 			if (hasPerk(PerkLib.Mage)) mod += .2;
 			if (hasPerk(PerkLib.Spellpower)) mod += .2;
-			if (hasPerk(PerkLib.WizardsFocus)) mod += .5;
 			return mod;
 		}
 		
@@ -174,8 +173,7 @@ public class Evangeline2 extends Monster
 			if(player.lust >= (player.maxLust() * 0.3) && player.lust < (player.maxLust() * 0.6)) outputText("You staggers, suddenly weak and having trouble focusing on staying upright.  ");
 			if(player.lust >= (player.maxLust() * 0.6)) outputText("Your eyes glaze over with desire for a moment.  ");
 			lustDmg = Math.round(lustDmg);
-			player.dynStats("lus", lustDmg, "scale", false);
-			outputText(" <b>(<font color=\"#ff00ff\">" + lustDmg + "</font>)</b>");
+			player.takeLustDamage(lustDmg, true);
 			fatigue += spellCostArouse();
 			flags[kFLAGS.EVANGELINE_SPELLS_CASTED]++;
 		}
@@ -298,7 +296,7 @@ public class Evangeline2 extends Monster
 			}
 		}
 		
-		public function Evangeline2() 
+		public function Evangeline2()
 		{
 			this.a = "";
 			this.short = "Evangeline";
@@ -432,13 +430,13 @@ public class Evangeline2 extends Monster
 			this.createVagina(false, VaginaClass.WETNESS_DRY, VaginaClass.LOOSENESS_TIGHT);
 			this.ass.analLooseness = AssClass.LOOSENESS_VIRGIN;
 			this.ass.analWetness = AssClass.WETNESS_DRY;
-			this.skinTone = "olive";
+			this.bodyColor = "olive";
 			this.hairLength = 36;
 			initWisLibSensCor(15, 25, 35, 100);
 			this.fatigue = 0;
 			this.gems = 0;
 			this.drop = NO_DROP;
-			this.createPerk(PerkLib.WizardsFocus, 0, 0, 0, 0);
+			this.buff("Wizard's Focus").addStat('spellpower', 0.5);
 			this.createPerk(PerkLib.EzekielBlessing, 0, 0, 0, 0);
 			this.createPerk(PerkLib.JobGuardian, 0, 0, 0, 0);
 			this.createPerk(PerkLib.JobSorcerer, 0, 0, 0, 0);

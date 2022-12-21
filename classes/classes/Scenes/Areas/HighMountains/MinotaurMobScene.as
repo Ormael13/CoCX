@@ -52,7 +52,7 @@ public class MinotaurMobScene extends BaseContent implements TimeAwareInterface 
 public function meetMinotaurSons():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_minotaurSons);
-	dynStats("lus", 10);
+	dynStats("lus", 10, "scale", false);
 	flags[kFLAGS.MINOTAUR_SONS_TIMES_MET]++;
 	if (player.hasPerk(PerkLib.SoulSense) && flags[kFLAGS.SOUL_SENSE_MINOTAUR_SONS] < 2) flags[kFLAGS.SOUL_SENSE_MINOTAUR_SONS]++;
 	if (flags[kFLAGS.SOUL_SENSE_MINOTAUR_SONS] == 2) {
@@ -265,8 +265,8 @@ private function fightOTaurs():void {
 
 //[Submit]
 private function submitToMinotaurMob():void {
-	player.lust = player.maxLust();
-	dynStats("lus", 1);
+	player.lust = player.maxOverLust();
+	dynStats("lus", 1, "scale", false);
 	minotaurDeFeet();
 	spriteSelect(SpriteDb.s_minotaurSons);
 }
@@ -623,8 +623,8 @@ internal function victoryMinotaurGang():void {
 	else outputText("The last minotaur sinks to his knees, pulling aside his loincloth with thread-rending strength to expose the pulsating, needy shaft to the air.  He begins to masturbate himself just like his brother, spilling his pre-seed over the ground into the messy, growing puddle.  The smell hangs thick in the air, but you've won and kept enough of your wits about you to walk away if you want.\n\n");
 	//+lust regardless
 	if(player.lust < 33) player.lust = 33;
-	else dynStats("lus", 20);
-	dynStats("lus", 1);
+	else dynStats("lus", 20, "scale", false);
+	dynStats("lus", 1, "scale", false);
 	outputText("Your body is burning up, buzzing with growing lust from the obscenity going on a few feet away from you.  What do you do?");
 	victorySexMenu();
 }
@@ -641,9 +641,8 @@ public function victorySexMenu():void {
 	addButton(4, "Get Sucked", curry(forceMinitaurToGiveOral, 1),
 		"Req. a cock", player.hasCock());
 	addButton(5, "Discipline", disciplineEldestMinotaurSon);
-	SceneLib.uniqueSexScene.pcUSSPreChecksV2(victorySexMenu);
 	addButton(14, "Leave", cleanupAfterCombat);
-	}
+}
 //*[Victory Tit-Fuck] (for only the fattest of fat bitch titties)
 private function victoryMinotaurGangTitFuck():void {
 	clearOutput();
@@ -757,7 +756,7 @@ private function victoryAllThePenetrationsMinotaurGangBang():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_minotaurSons);
 	outputText("Deciding you wanted the same thing as your sons, you strip out of your [armor] and instruct the horny, defeated minotaurs to shed what's left of their loincloths.  They obey");
-	if(monster.lust >= monster.maxLust()) outputText(" nearly instantly, too aroused to turn down the idea of their mother doing ANYTHING with their hard shafts.");
+	if(monster.lust >= monster.maxOverLust()) outputText(" nearly instantly, too aroused to turn down the idea of their mother doing ANYTHING with their hard shafts.");
 	else outputText(" somewhat sluggishly as they work to get nude for you, despite their wounds.  As they finish, they start to move a bit faster, recovering from the battle quicker than you would have thought.");
 	outputText("  You saunter over to the closest cock and admire the twitching hardness of it, caressing the somewhat equine shaft with gentle touches as you position yourself squarely above it.\n\n");
 
@@ -872,7 +871,7 @@ private function forceMinitaurToGiveOral(choice:Number = 0):void {
 		}
 		//ELSE
 		else {
-			if(player.balls > 0) outputText("lift your balls and ");
+			if(player.hasBalls()) outputText("lift your balls and ");
 			outputText("spread your " + vaginaDescript() + " wide with your fingers, exposing the glistening pinkness of your womanhood.");
 		}
 		outputText("  Your " + clitDescript() + " slowly peeks out from its hood");
@@ -919,7 +918,7 @@ private function forceMinitaurToGiveOral(choice:Number = 0):void {
 		outputText("  His big brown eyes meet yours as he opens his muzzle and lets the full length of his tongue flop free.  It's roughly a foot and a half long fully extended, and " + sMultiCockDesc() + " twitches as you imagine what it must feel like.  Thankfully, he does not keep you waiting long.\n\n");
 
 		outputText("The serpent-like tongue snakes ");
-		if(player.balls > 0) outputText("around your " + sackDescript() + " before curling ");
+		if(player.hasBalls()) outputText("around your " + sackDescript() + " before curling ");
 		outputText("around the base of your [cocks].  It circles up ");
 		if(player.cockTotal() > 1) outputText("a");
 		else outputText("the");
@@ -1060,7 +1059,7 @@ private function minotaurGangBadEnd():void {
 
 	outputText("The minitaur looks down at you with a thankful expression on his monstrous muzzle.  The image is only broken by the lusty way he lets his tongue hang from his mouth as he mounts you, a few drops of saliva falling as he forgets himself in the passion of taking you.  A tiny rivulet of his constant, dripping pre-seed escapes from around his girth as he pushes in, finally butting his tip at your cervix, the slack skin of his sheath seeming to caress your labia and clitoris.  You squeal in happiness, feeling warmth spread outward from your pussy as more of his essence dribbles inside of you.\n\n");
 
-	outputText("Already experiencing a pleasant buzz and tingle, you grab his hips and throw yourself against him, bouncing the both of you in the pillowy room, grunts and moans of passion teasing the other girls as you're fucked with wild abandon by one they crave.  Your " + vaginaDescript() + " is like a furnace of lust, the fires of need inside only growing hotter with every stroke of wonderful minotaur-cock.  Panting, the smallest of your beast-men does his best to fuck you, and though his member is nowhere near as large as his brother's swollen shafts, the thick, pent-up drugs he's dripping into your uterus are keeping you so close the edge.\n\n");
+	outputText("Already experiencing a pleasant buzz and tingle, you grab his hips and throw yourself against him, bouncing both of you in the pillowy room, grunts and moans of passion teasing the other girls as you're fucked with wild abandon by one they crave.  Your " + vaginaDescript() + " is like a furnace of lust, the fires of need inside only growing hotter with every stroke of wonderful minotaur-cock.  Panting, the smallest of your beast-men does his best to fuck you, and though his member is nowhere near as large as his brother's swollen shafts, the thick, pent-up drugs he's dripping into your uterus are keeping you so close the edge.\n\n");
 
 	outputText("You feel like you're floating, cushioned in a bed of clouds with every nerve firing off nothing but pleasure and happiness.  There's a wet, slap-slap-slap nagging at you, but you close your eyes and forget it, letting your fingers play across your " + chestDesc() + " to ");
 	if(player.hasFuckableNipples()) outputText("slide inside your nipple-cunts and finger your chest pussies in a small approximation of what's happening below.");

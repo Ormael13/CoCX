@@ -1,14 +1,14 @@
 package classes.Scenes.Dungeons.D3 
 {
 import classes.BaseContent;
+import classes.EventParser;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Consumables.SimpleConsumable;
 import classes.Items.Vehicles;
 import classes.Items.Weapon;
 import classes.Scenes.SceneLib;
-import classes.EventParser;
-import classes.room;
 import classes.StatusEffects;
+import classes.room;
 
 /**
 	 * ...
@@ -236,24 +236,16 @@ import classes.StatusEffects;
 		
 		// Entrance/Exit
 		
-		public function discoverD3():Boolean
+		public function discoverD3():void
 		{
-			if (flags[kFLAGS.D3_DISCOVERED] == 0 && player.hasKeyItem("Zetaz's Map") >= 0 && rand(5) == 0)
-			{
-				flags[kFLAGS.D3_DISCOVERED] = 1;
-				
-				clearOutput();
-				outputText("During your exploration, you come across a familiar looking patch of ground. In fact... you pull out Zetaz’s map, your eyes widening as they realize what you’ve just found: Lethice’s Keep. You follow a concealed trail past several harpy nests directly to an almost invisible cave entrance. You never would’ve found it without the map.");
-				outputText("\n\n<b>You’ve discovered a hidden entrance to Lethice’s lair. It can be accessed from the Dungeons submenu in the future.</b>");
-				outputText("\n\nDo you step inside, or wait until you’re better prepared?");
-				
-				menu();
-				addButton(0, "Enter", enterD3);
-				addButton(1, "Leave", camp.returnToCampUseOneHour);
-				
-				return true;
-			}
-			return false;
+			flags[kFLAGS.D3_DISCOVERED] = 1;
+			clearOutput();
+			outputText("During your exploration, you come across a familiar looking patch of ground. In fact... you pull out Zetaz’s map, your eyes widening as they realize what you’ve just found: Lethice’s Keep. You follow a concealed trail past several harpy nests directly to an almost invisible cave entrance. You never would’ve found it without the map.");
+			outputText("\n\n<b>You’ve discovered a hidden entrance to Lethice’s lair. It can be accessed from the Dungeons submenu in the future.</b>");
+			outputText("\n\nDo you step inside, or wait until you’re better prepared?");
+			menu();
+			addButton(0, "Enter", enterD3);
+			addButton(1, "Leave", camp.returnToCampUseOneHour);
 		}
 		
 		public function enterD3():void
@@ -345,7 +337,7 @@ import classes.StatusEffects;
 			
 			addButton(13, "Inventory", inventory.inventoryMenu);
 			addButton(14, "Map", SceneLib.dungeons.map.displayMap);
-            if (player.lust >= 30) addButton(8, "Masturbate", SceneLib.masturbation.masturbateGo);
+			SceneLib.masturbation.masturButton(8);
         }
 		
 		public function move(roomName:String, timeToPass:Number = 0):void
@@ -548,7 +540,7 @@ import classes.StatusEffects;
 			if (player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) {
 				var item:Vehicles;
 				item = vehicles.GOBMPRI;
-				outputText("You decide to haul it back home and call on the walkie talkie system in your mech to tell your daughters to come and pick it up for you. It should be at camp the next time you're there and ready to install any and all upgrades you already own.");
+				outputText("You decide to haul it back home and call on the walkie-talkie system in your mech to tell your daughters to come and pick it up for you. It should be at camp the next time you're there and ready to install any and all upgrades you already own.");
 				flags[kFLAGS.D3_GOBLIN_MECH_PRIME] = 1;
 				inventory.takeItem(item, playerMenu);
 			}

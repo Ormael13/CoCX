@@ -1,4 +1,4 @@
-package classes.Scenes.Monsters 
+package classes.Scenes.Monsters
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -35,14 +35,14 @@ public class Priscilla extends Goblin
 			}
 			//Spell time!
 			//Charge Weapon
-			if (spellChooser == 0 && (mana + spellCostCharge) <= maxMana()) {
+			if (spellChooser == 0 && mana >= spellCostCharge) {
 				outputText("The goblin utters word of power, summoning an electrical charge around her sword. <b>It looks like she'll deal more physical damage now!</b>");
 				createStatusEffect(StatusEffects.ChargeWeapon, 15 * spellMultiplier(), 0, 0, 0);
 				this.weaponAttack += 15 * spellMultiplier();
 				mana -= spellCostCharge;
 			}
 			//Blind
-			else if (spellChooser == 1 && (mana + spellCostBlind) <= maxMana()) {
+			else if (spellChooser == 1 && mana >= spellCostBlind) {
 				outputText("The goblin glares at you and points at you! A bright flash erupts before you!  ");
 				if ((!player.perkv1(IMutationsLib.GorgonEyesIM) >= 1 && rand(player.inte / 5) <= 4) && !player.hasPerk(PerkLib.BlindImmunity)) {
 					outputText("<b>You are blinded!</b>");
@@ -57,7 +57,7 @@ public class Priscilla extends Goblin
 				mana -= spellCostBlind;
 			}
 			//Whitefire
-			else if (spellChooser == 2 && (mana + spellCostWhitefire) <= maxMana()) {
+			else if (spellChooser == 2 && mana >= spellCostWhitefire) {
 				outputText("The goblin narrows her eyes and focuses her mind with deadly intent. She snaps her fingers and you are enveloped in a flash of white flames!  ");
 				var damage:int = inte + rand(50) * spellMultiplier();
 				if (player.hasStatusEffect(StatusEffects.Blizzard)) {
@@ -78,16 +78,14 @@ public class Priscilla extends Goblin
 				mana -= spellCostWhitefire;
 			}
 			//Arouse
-			else if (spellChooser == 3 && (mana + spellCostArouse) <= maxMana()) {
+			else if (spellChooser == 3 && mana >= spellCostArouse) {
 				outputText("She makes a series of arcane gestures, drawing on her lust to inflict it upon you! ");
 				var lustDamage:int = (inte / 10) + (player.lib / 10) + rand(10) * spellMultiplier();
-				lustDamage = lustDamage * (EngineCore.lustPercent() / 100);
-				player.dynStats("lus", lustDamage, "scale", false);
-				outputText(" <b>(<font color=\"#ff00ff\">" + (Math.round(lustDamage * 10) / 10) + "</font>)</b>");
+				player.takeLustDamage(lustDamage, true);
 				mana -= spellCostArouse;
 			}
 			//Heal
-			else if (spellChooser == 4 && (mana + spellCostHeal) <= maxMana()) {
+			else if (spellChooser == 4 && mana >= spellCostHeal) {
 				outputText("She focuses on her body and her desire to end pain, trying to draw on her arousal without enhancing it.");
 				var temp:int = int(10 + (inte/2) + rand(inte/3)) * spellMultiplier();
 				outputText("She flushes with success as her wounds begin to knit! <b>(<font color=\"#008000\">+" + temp + "</font>)</b>.");
@@ -95,12 +93,13 @@ public class Priscilla extends Goblin
 				mana -= spellCostHeal;
 			}
 			//Might
-			else if (spellChooser == 5 && (mana + spellCostMight) <= maxMana()) {
+			else if (spellChooser == 5 && mana >= spellCostMight) {
 				outputText("She flushes, drawing on her body's desires to empower her muscles and toughen her up.");
 				outputText("The rush of success and power flows through her body.  She feels like she can do anything!");
 				this.statStore.addBuffObject({"str":+15 * spellMultiplier(), "tou":+15 * spellMultiplier()},"GoblinMight");
 				mana -= spellCostMight;
 			}
+			else outputText("[Themonster] tries to cast something, but fails miserably. Seems like she's out of mana!");
 		}
 		
 		//Melee specials
@@ -203,7 +202,7 @@ public class Priscilla extends Goblin
 			this.tallness = 48;
 			this.hips.type = Hips.RATING_AMPLE + 2;
 			this.butt.type = Butt.RATING_LARGE;
-			this.skinTone = "yellowish-green";
+			this.bodyColor = "yellowish-green";
 			this.hairColor = "dark green";
 			this.hairLength = 4;
 			this.weaponName = "primal sword";
@@ -212,7 +211,6 @@ public class Priscilla extends Goblin
 			this.fatigue = 0;
 			this.lust = 35;
 			this.lustVuln = 0.4;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.gems = rand(10) + 40;
 			this.drop = new WeightedDrop().
 					add(consumables.GOB_ALE, 5).

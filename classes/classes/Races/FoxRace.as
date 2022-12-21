@@ -2,12 +2,50 @@ package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
 import classes.CockTypesEnum;
-import classes.IMutations.IMutationsLib;
-import classes.PerkLib;
 import classes.Race;
+
 public class FoxRace extends Race {
+	public static const FoxHairColors:Array = ["golden blonde", "reddish-orange", "silver", "white", "red", "black"];
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Elf",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Elven",
+        /*Eyes*/		"Elf",
+        /*Face*/		"Elf",
+        /*Gills*/		"None",
+        /*Hair*/		"Elf",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Elf",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Elf",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Elf",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Elf"];
+	
+	public const TfList:/*Transformation*/Array = [
+		game.transformations.FaceFox,
+		game.transformations.EyesFox,
+		game.transformations.EarsFox,
+		game.transformations.TailFox(1, 1, true),
+		game.transformations.SkinFurGradual(Skin.COVERAGE_HIGH, {colors: FoxHairColors}),
+		game.transformations.ArmsFox,
+		game.transformations.LowerBodyFox(),
+		game.transformations.HairChangeColor(FoxHairColors),
+		game.transformations.CockChangeType(CockTypesEnum.FOX, false)
+	];
+	
+	
 	public function FoxRace(id:int) {
-		super("Fox", id);
+		super("Fox", id, []);//RaceBody);
 	}
 	
 	public override function setup():void {

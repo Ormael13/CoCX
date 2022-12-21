@@ -27,7 +27,7 @@ public class PolarMidnightSpell extends AbstractBlackSpell {
 	}
 	
 	override public function calcCooldown():int {
-		return spellBlackCooldown();
+		return spellBlackTier3Cooldown();
 	}
 	
 	override public function setCooldown():void {

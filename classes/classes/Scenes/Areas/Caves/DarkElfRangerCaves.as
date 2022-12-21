@@ -13,7 +13,7 @@ import classes.internals.*;
 
 	public class DarkElfRangerCaves extends DarkElfRanger
 	{
-		public function DarkElfRangerCaves() 
+		public function DarkElfRangerCaves()
 		{
 			this.a = "the ";
 			this.short = "dark elf ranger";
@@ -28,7 +28,7 @@ import classes.internals.*;
 			this.hips.type = Hips.RATING_CURVY;
 			this.butt.type = Butt.RATING_LARGE + 1;
 			this.lowerBody = LowerBody.ELF;
-			this.skinTone = "dark";
+			this.bodyColor = "dark";
 			this.hairColor = "silver";
 			this.hairLength = 13;
 			initStrTouSpeInte(115, 170, 230, 125);
@@ -45,7 +45,6 @@ import classes.internals.*;
 			this.bonusLust = 214;
 			this.lustVuln = .7;
 			this.lust = 50;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 48;
 			this.gems = rand(10) + 20;
 			this.drop = new WeightedDrop().

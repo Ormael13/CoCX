@@ -8,8 +8,8 @@ import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Dungeons.DeepCave.*;
 import classes.Scenes.SceneLib;
-import classes.internals.Utils;
 import classes.display.SpriteDb;
+import classes.internals.Utils;
 
 use namespace CoC;
 
@@ -104,7 +104,7 @@ use namespace CoC;
 			if (player.hasItem(consumables.BIMBOCH) && flags[kFLAGS.NIAMH_SEAN_BREW_BIMBO_LIQUEUR_COUNTER] == 0) {
 				outputText("\n\nSean could probably do something with the Bimbo Champagne if you had enough of it...");
 				if (player.hasItem(consumables.BIMBOCH, 5)) {
-					addButton(7, consumables.BIMBOLQ.shortName, SceneLib.telAdre.niamh.yeahSeanLetsBimbooze);
+					addButton(7, consumables.BIMBOLQ.shortName, SceneLib.telAdre.niamh.seanBimboBrewing);
 					outputText("  Luckily, you do!");
 				}
 			}
@@ -320,7 +320,7 @@ use namespace CoC;
 		//Fight Win-
 		public function fightValaVictory():void {
 			clearOutput();
-			outputText("The fairy girl collapses, well-drilled obedience robbing her limbs of their fight. She squirms to a crouching bow, fully accepting you as her new " + player.mf("Master","Mistress") + ". The warped fae's empty eyes look up at you, her face a mask of rapture as she anxiously awaits her punishment, wagging her butt in the air as lubrication gushes down her thighs. It seems being defeated has excited the broken creature to a breeding frenzy. Her endurance must be incredible to be this frisky after your battle.");
+			outputText("The fairy girl collapses, well-drilled obedience robbing her limbs of their fight. She squirms to a crouching bow, fully accepting you as her new [Master]. The warped fae's empty eyes look up at you, her face a mask of rapture as she anxiously awaits her punishment, wagging her butt in the air as lubrication gushes down her thighs. It seems being defeated has excited the broken creature to a breeding frenzy. Her endurance must be incredible to be this frisky after your battle.");
 			if (!recalling) flags[kFLAGS.TIMES_PC_DEFEATED_VALA]++;
 			outputText(" What will you do?");
 			menu();
@@ -356,7 +356,7 @@ use namespace CoC;
 
 			outputText("Grabbing the center one by his horns, you pull him forwards until your shaft is pressed against the back of his throat.  He gags audibly, but you pull him back before it can overwhelm him, only to slam it in deep again.  ");
 			outputText("The girly imp to your left, seeing how occupied your [cock] is, shifts his attention down to your ");
-			if(player.balls > 0) outputText(ballsDescriptLight());
+			if(player.hasBalls()) outputText(ballsDescriptLight());
 			else if(player.hasVagina()) outputText(vaginaDescript(0));
 			else outputText("ass");
 			outputText(", licking with care");
@@ -366,14 +366,14 @@ use namespace CoC;
 			outputText(" and pulls it tight, acting as an organic cock-ring.\n\n");
 
 			outputText("Fucking the little bitch of a demon is just too good, and you quickly reach orgasm.  ");
-			if(player.balls > 0) outputText("Cum boils in your balls, ready to paint your foe white.  ");
+			if(player.hasBalls()) outputText("Cum boils in your balls, ready to paint your foe white.  ");
 			outputText("With a mighty heave, you yank the imp forward, ramming your cock deep into his throat.  He gurgles noisily as you unload directly into his belly.   Sloshing wet noises echo in the room as his belly bulges slightly from the load, and his nose dribbles cum.   You pull him off and push him away.  He coughs and sputters, but immediately starts stroking himself, too turned on to care.");
 			if(player.cumQ() > 1000) outputText("  You keep cumming while the other two imps keep licking and servicing you.   By the time you finish, they're glazed in spooge and masturbating as well.");
 			outputText("\n\n");
 
 			outputText("Satisfied, you redress and prepare to continue with your exploration of the cave.");
             if (!recalling) {
-                player.sexReward("Default","Dick", true, false);
+                player.sexReward("no", "Dick");
                 cleanupAfterCombat();
             }
             else doNext(recallWakeUp);
@@ -668,7 +668,7 @@ use namespace CoC;
 		public function loseToZetaz():void {
 			clearOutput();
 			outputText("\"<i>Well, isn't this familiar?</i>\" asks Zetaz as he watches your ");
-			if(player.lust >= player.maxLust()) outputText("masturbating");
+			if(player.lust >= player.maxOverLust()) outputText("masturbating");
 			else outputText("prone");
 			outputText(" form with an amused expression, \"<i>The first champion in ages to retain " + player.mf("his","her") + " free will for more than a few minutes, and " + player.mf("he","she") + "'s brought to " + player.mf("his","her") + " knees by the very imp " + player.mf("he","she") + " escaped!  Once you've learned your proper place, you'll guarantee my safe return to my rightful station.  Perhaps I'll even get a promotion?  After all, you've defeated so many higher ranking demons already.</i>\"\n\n");
 
@@ -829,7 +829,7 @@ use namespace CoC;
 			outputText("With a flourish, the imp lord discards his loincloth, tossing it over his shoulder to reveal his erect demon dick.  He taunts, \"<i>Like what you see?</i>\" and orders his lackeys, \"<i>Go on, you know what to do.</i>\"  The pair of scrawny imps flit up to their perches while Zetaz advances and strokes himself, preparing for penetration.  Dozens of unanswered questions swarm through your mind, actually distracting you from your pending orgasm enough to ask, \"<i>Wha-what are you going to do to me?</i>\"\n\n");
 
 			outputText("\"<i>Shhhh, shhh,</i>\" responds Zetaz, \"<i>just relax my pet.</i>\"  He ");
-			if(player.balls > 0) outputText("gently shifts your  " + ballsDescript() + " out of the way and ");
+			if(player.hasBalls()) outputText("gently shifts your  " + ballsDescript() + " out of the way and ");
 			outputText("lines up with your drooling fuck-hole, and with a long smooth stroke, he's inside you.  You cum immediately and hard, barely noticing the chanting that has started up on the adjacent platforms.  Each squirt of cum is accompanied by a thrust from Zetaz, sliding over your lube-leaking walls with ease.  The orgasm lasts nearly twice as long as your last one.  It never seems to end, but when it slowly trails off, you find yourself wondering how soon you can cum again.\n\n");
 
 			outputText("You envision yourself on all fours, being taken in both openings by a pair of imps while you suck off a shadowy figure that your mind recognizes as your lord and master.  " + SMultiCockDesc() + " spurts and squirts with each penetration as your twin violators get off and stuff you full of their yummy imp cum, glazing your insides with corrupted white goo.  Maybe you'll get pregnant this time?  It's been a few weeks since your last litter.  You suck harder on your master's penis and caress his balls until he shows his affection by giving you a salty treat.  He pulls out and blasts a few ropes over your face and hair, so you do your best to look slutty to encourage him.  When he finishes, you lick your lips and beam at your master, Zetaz.\n\n");
@@ -840,7 +840,7 @@ use namespace CoC;
 
 			outputText("Your master finishes squirting inside you and withdraws, pawing at your milk-leaking teats for a moment as you continue to shudder and cum like a good bitch.  Wow, you really are a good bitch, aren't you?  Pride wells in your breast as the imp's chanting reaches a crescendo and a relaxed smile forms on your [face].  Yes, you're a good, breeding bitch.   Master is smiling up at you and you know you've made him feel very happy.  Hopefully he'll come back soon and fuck you some more.  Your pussy feels so empty without him.");
 			player.sexReward("cum", "Vaginal");
-			player.sexReward("Default", "Dick", true, false);
+			player.sexReward("no", "Dick");
 			doNext(zetazBadEndEpilogue_herm);
 		}
 
@@ -882,7 +882,7 @@ use namespace CoC;
 			outputText("You wake to a desert-dry, sandpapery feeling in the back of your throat as yet another moan escapes your mouth.   The ring gag is still there, and easily thwarts your tongues attempts to lick at your parched lips, but the jolts of pleasure exploding up your spine make it hard to get upset about it.  Hips rocking, you keep squirting and squirting from your orgasm, feeling each hot blast burst from your manhood until the wave of lust passes and you open your eyes.  You're in a dim cave, the one they used to hold Vala, and chained up to the wall in a similar manner.\n\n");
 
 			outputText("While you observe the room, you realize that the waves of pleasure sliding up your spinal cord haven't stopped, and that your entire body is being shaken rhythmically.  You look down with a look of incredible, still-drugged confusion and behold the last thing you expected to see.  Somehow " + sMultiCockDesc() + " has been shrunk to less than half of its previous size");
-			if(player.balls > 0) outputText(", and your balls have completely vanished");
+			if(player.hasBalls()) outputText(", and your balls have completely vanished");
 			outputText("!  Just below your pint-sized shaft, a massive imp-cock is plowing in and out of your new, wet snatch with juicy-sounding slaps.  Y-you're a hermaphrodite!?  And what's happening to your dick?\n\n");
 
 			outputText("A nearby imp with a limp dick and a bored-but-tired look on his face steps up after your orgasm and slathers your dick in some strange, pungent cream, chuckling up at you while he does so, \"Heh heh, your ");
@@ -1037,7 +1037,7 @@ use namespace CoC;
 				outputText(" and squeeze, forcing " + sMultiCockDesc() + " to inflate to readiness.  Deep inside your " + assholeDescript() + ", the tentacle starts to rub against your prostate.  It caresses the male organ on each side and pauses to squeeze the center of it, pushing a few drops of sticky cum from your trembling " + Appearance.cockNoun(CockTypesEnum.HUMAN) + ".\n\n");
 
 				outputText("The vine-like stalks currently hugging " + sMultiCockDesc() + " constrict the base and begin to swirl around it in a circular motion.  Warm fungi-flesh and viscous, drugged ooze work together to send hot spikes of pleasure up your spinal-cord.  Despite your recent orgasm, you aren't being given any chance to recover or refill your ");
-				if(player.balls > 0) outputText("balls");
+				if(player.hasBalls()) outputText("balls");
 				else outputText("prostate");
 				outputText(".  Things like logic and rest don't matter in this warm, soupy environment, at least not to your poor, unthinking mind and erect, sensitive dick");
 				if(player.cockTotal() > 1) outputText("s");
@@ -1072,7 +1072,7 @@ use namespace CoC;
             else outputText("Zetaz gave her one of the weaker imps to penetrate during the journey.  ");
             outputText("With preparations complete, Zetaz, the champion, and a few dozen imps flew to the mountain peak.\n\n");
             outputText("The champion was presented to Lethice, and the demonic mistress was so pleased with Zetaz's gift that she gave him a pair of nubile slave-girls and promoted him over a small army of his own kind.  Once the imps departed, Lethice put the champion through her paces, using her as a fucktoy whenever the mood took her.  The rest of the time the champion was kept bound and unable to orgasm, tortured with unholy levels of arousal, but she didn't mind.  When Lethice allowed her to cum, the champion's orgasms were long and intense enough for her to love her mistress in spite of having to be so pent-up.");
-            player.sexReward("Default", "Dick", true, false);
+            player.sexReward("no", "Dick");
             player.sexReward("cum", "Vaginal");
             EventParser.gameOver();
         }
@@ -1229,8 +1229,8 @@ use namespace CoC;
 			}
 			else {
 				dungeons.setDungeonButtons(null, roomGatheringHall, null, roomSecretPassage);
+				if (player.hasKeyItem("Soul Gem Research") < 0) addButton(0, "Drawer", ZetazsBedroomDrawer); //no conditions. Drawer was ALREADY there!
 			}
-			if ((flags[kFLAGS.GARGOYLE_QUEST] == 2 || player.hasStatusEffect(StatusEffects.AlvinaTraining)) && player.hasKeyItem("Soul Gem Research") < 0) addButton(0, "Drawer", ZetazsBedroomDrawer);
 		}
 
 		public function ZetazsBedroomDrawer():void {
@@ -1238,7 +1238,6 @@ use namespace CoC;
 			outputText("Inside the drawer you find a book of advanced research notes on Lethicite, as well as soul containment inside of gems. Such research seems to imply that the creation of a soul gem requires both a large amount of concentrated pure water and ectoplasm obtained from the manifested imprint of a soul that has survived for decades or more to be combined and crystallized through some complicated alchemical process.");
 			outputText("\n\n<b>(Key Item Acquired: Soul Gem Research!)</b>");
 			player.createKeyItem("Soul Gem Research", 0, 0, 0, 0);
-			if (flags[kFLAGS.GARGOYLE_QUEST] == 2) flags[kFLAGS.GARGOYLE_QUEST]++;
 			doNext(playerMenu);
 		}
 	}

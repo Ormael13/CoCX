@@ -1,7 +1,8 @@
-package classes.Scenes.Areas.Plains 
+package classes.Scenes.Areas.Plains
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Combat.Combat;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
@@ -9,7 +10,7 @@ import classes.internals.*;
 	 * ...
 	 * @author Kitteh6660
 	 */
-	public class BazaarGatekeeper extends Monster 
+	public class BazaarGatekeeper extends Monster
 	{
 		
 		public function scimitarSpecial():void {
@@ -53,7 +54,7 @@ import classes.internals.*;
 				outputText("The gatekeeper raises his scimitars! Judging from the way he is holding, <b>he is going to cross-slash you!</b>");
 				return;
 			}
-			if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] > 0) {
+			if (Combat.playerWaitsOrDefends()) {
 				outputText("The gatekeeper slashes his scimitar towards you! Thanks to your preparedness, you manage to avoid his scimitars in the nick of time.");
 			}
 			else if (hasStatusEffect(StatusEffects.Blind) && rand(3) > 0) {
@@ -135,7 +136,7 @@ import classes.internals.*;
 			doNext(cleanupAfterCombat);
 		}
 		
-		public function BazaarGatekeeper() 
+		public function BazaarGatekeeper()
 		{
 			this.a = "the ";
 			this.short = "guard";
@@ -148,7 +149,7 @@ import classes.internals.*;
 			this.tallness = 10*12;
 			this.hips.type = 2;
 			this.butt.type = 0;
-			this.skinTone = "crimson";
+			this.bodyColor = "crimson";
 			this.hairColor = "black";
 			this.hairLength = 8;
 			initStrTouSpeInte(124, 150, 104, 70);
@@ -165,7 +166,6 @@ import classes.internals.*;
 			this.bonusLust = 55;
 			this.lust = 0;
 			this.lustVuln = .15;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 33;
 			this.additionalXP = 300;
 			this.drop = new WeightedDrop().add(weapons.SCIMITR, 1);

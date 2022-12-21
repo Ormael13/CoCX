@@ -32,10 +32,10 @@ use namespace CoC;
 			}*/
 			//Tyrania
 			if (rand(3) == 0 && player.level >= 45 && TyrantiaFollower.TyrantiaFollowerStage < 4 && !TyrantiaFollower.TyraniaIsRemovedFromThewGame && !player.hasStatusEffect(StatusEffects.SpoodersOff)) {
-				if (TyrantiaFollower.TyrantiaFollowerStage > 2) SceneLib.tyrania.repeatEncounterBattlefield();
-				else if (TyrantiaFollower.TyrantiaAffectionMeter > 40 && TyrantiaFollower.TyrantiaFollowerStage > 1) SceneLib.tyrania.encounterBattlefieldAfter40Affection();
-				else if (TyrantiaFollower.TyrantiaFollowerStage > 0) SceneLib.tyrania.repeatEncounterBattlefield();
-				else SceneLib.tyrania.firstEncounter();
+				if (TyrantiaFollower.TyrantiaFollowerStage > 2) SceneLib.tyrantia.repeatEncounterBattlefield();
+				else if (TyrantiaFollower.TyrantiaAffectionMeter > 40 && TyrantiaFollower.TyrantiaFollowerStage > 1) SceneLib.tyrantia.encounterBattlefieldAfter40Affection();
+				else if (TyrantiaFollower.TyrantiaFollowerStage > 0) SceneLib.tyrantia.repeatEncounterBattlefield();
+				else SceneLib.tyrantia.firstEncounter();
 				return;
 			}
 			//Iridesian
@@ -54,7 +54,7 @@ use namespace CoC;
 				return;
 			}
 			//Diana
-			if (flags[kFLAGS.DIANA_FOLLOWER] < 6 && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff) && rand(5) == 0) {
+			if (flags[kFLAGS.DIANA_FOLLOWER] < 6 && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff) && rand(5) == 0 ) {
 				if ((flags[kFLAGS.DIANA_FOLLOWER] < 3 || flags[kFLAGS.DIANA_FOLLOWER] == 5) && flags[kFLAGS.DIANA_LVL_UP] >= 8)
                     SceneLib.dianaScene.postNameEnc();
                 else

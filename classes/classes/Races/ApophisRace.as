@@ -9,12 +9,37 @@ import classes.VaginaClass;
 public class ApophisRace extends Race {
 	public static const ApophisScaleColors:/*String*/Array = ["black", "midnight", "midnight black"];
 	public static const ApophisHairColors:/*String*/Array = ["black", "midnight", "midnight black"];
-	
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Human",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Human",
+        /*Eyes*/		"Human",
+        /*Face*/		"Human",
+        /*Gills*/		"Human",
+        /*Hair*/		"Human",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Human",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Human",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Human"];
+
 	public function ApophisRace(id:int) {
-		super("Apophis", id);
+		super("Apophis", id, []);//RaceBody);
 		disabled = true;
 		chimeraTier = 0;
 		grandChimeraTier = 0;
+        //tfRace = RaceMem.appendEnumVal("Apophis", CoC.instance.transformations.FullApophis);
 	}
 	
 	public override function setup():void {
@@ -22,10 +47,10 @@ public class ApophisRace extends Race {
 		addScores()
 				.isNaga(+3, -1000)
 				.armType(Arms.HUMAN, +1)
-				.hairColor(ANY(ApophisHairColors), +1)
-				.skinBaseColor("light purple", +1)
+				.hairColor1(ANY(ApophisHairColors), +1)
+				.skinColor1("light purple", +1)
 				.skinCoatType(Skin.SCALES, +1)
-				.skinCoatColor(ANY(ApophisScaleColors), +1)
+				.scaleColor1(ANY(ApophisScaleColors), +1)
 				.tongueType(Tongue.SNAKE, +1)
 				.faceType(Face.SNAKE_FANGS, +1)
 				.eyeTypeAndColor(Eyes.SNAKEFIENDISH, "yellow", +2)

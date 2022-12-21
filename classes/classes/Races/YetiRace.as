@@ -7,15 +7,39 @@ import classes.Race;
 public class YetiRace extends Race {
 	public static const YetiSkinColors:/*String*/Array = ["dark", "tan"];
 	public static const YetiEyeColors:/*String*/Array = ["siilver", "grey", "gray"];
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Human",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Human",
+        /*Eyes*/		"Human",
+        /*Face*/		"Human",
+        /*Gills*/		"Human",
+        /*Hair*/		"Human",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Human",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Human",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Human"];
 	
 	public function YetiRace(id: int) {
-		super("Yeti", id);
+		super("Yeti", id, []);//RaceBody);
 	}
 	
 	public override function setup():void {
 		
 		addScores()
-				.skinBaseColor(ANY(YetiSkinColors), +1)
+				.skinColor1(ANY(YetiSkinColors), +1)
 				.eyeColor(ANY(YetiEyeColors), +1)
 				.legType(LowerBody.YETI, +1)
 				.armType(Arms.YETI, +1)
@@ -24,9 +48,9 @@ public class YetiRace extends Race {
 				.earType(Ears.YETI, +1)
 				.faceType(Face.YETI_FANGS, +1)
 				.hairType(Hair.FLUFFY, +1)
-				.hairColor("white", +1)
+				.hairColor1("white", +1)
 				.skinCoatType(Skin.FUR, +1)
-				.skinCoatTypeAndColor(Skin.FUR, "white", +1)
+				.skinCoatTypeAndColor1(Skin.FUR, "white", +1)
 				.height(AT_LEAST(78), +1)
 				.customRequirement("butt", "thicc butt",
 						function (body:BodyData):Boolean {

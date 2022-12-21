@@ -6,8 +6,9 @@ package classes.Scenes.Places.TrollVillage {
 import classes.*;
 import classes.Items.ArmorLib;
 import classes.Items.UndergarmentLib;
-import classes.Scenes.SceneLib;
 import classes.Scenes.Places.TrollVillage;
+import classes.Scenes.SceneLib;
+
 public class Kalji extends TrollVillageAbstractContent{
     public function Kalji() {
     }
@@ -51,7 +52,7 @@ public class Kalji extends TrollVillageAbstractContent{
             if (!KaljiInteractTrack()) {
                 outputText("You tell Kal'ji that you want to get to know him a little more. Who is he, why did he join the council. Does he enjoy his position of power?\n" +
                         "\n" +
-                        "\"<i>My, you sure have a lot of questions,\" he replies, \"<i>Let's see…  I am Kal'ji, as you may know. I am not tall or strong by any means. I always felt a little… well, little. It was never a terrible deal, but… It’s as if I had the potential to be more, even if the others couldn’t see it. Childhood was rough, I wasn’t wealthy by any means. I climbed my way out from the dirt, I didn’t want to grow up to be a farmer like my parents. Thankfully my parents were supportive. Sadly they didn’t stick around for long, I don’t want to talk about it.</i>\"\n" +
+                        "\"<i>My, you sure have a lot of questions,</i>\" he replies, \"<i>Let's see…  I am Kal'ji, as you may know. I am not tall or strong by any means. I always felt a little… well, little. It was never a terrible deal, but… It’s as if I had the potential to be more, even if the others couldn’t see it. Childhood was rough, I wasn’t wealthy by any means. I climbed my way out from the dirt, I didn’t want to grow up to be a farmer like my parents. Thankfully my parents were supportive. Sadly they didn’t stick around for long, I don’t want to talk about it.</i>\"\n" +
                         "\n" +
                         "\"<i>With that aside, I enjoy being on the council, I try to keep things orderly and in conduct when the people get unruly and it’s not bad. People see me as a person in power and I’d have it no other way.</i>\"\n" +
                         "\n" +
@@ -68,7 +69,11 @@ public class Kalji extends TrollVillageAbstractContent{
         }
 
         function KaljiInteractTrack():Boolean {
-            if (TrollVillage.KaljiUnlocked < 4) {
+            if (TrollVillage.KaljiUnlocked >= 5){
+                TrollVillage.KaljiUnlocked = 5;
+                return false;
+            }
+            else if (TrollVillage.KaljiUnlocked < 4) {
                 TrollVillage.KaljiUnlocked++;
                 return false;
             } else {
@@ -141,8 +146,18 @@ public class Kalji extends TrollVillageAbstractContent{
 
     private function KaljiSex():void{
         clearOutput();
-        menu();
-        if (!player.hasCock() || (player.gender == 0  && player.smallestTitSize() >= 3 && player.femininity >= 45)){
+        if (sceneHunter.uniHerms) {
+            outputText("How would you pose yourself?\n\n");
+            menu();
+            addButtonIfTrue(0, "As Male", maleF, "Req. a cock OR low femininity.",
+                player.hasCock() || player.looksMale());
+            addButtonIfTrue(1, "As Female", femF, "Req. a vagina OR high femininity.",
+                player.hasVagina() || player.looksFemale());
+        }
+        else if (player.gender == 1 || !(player.gender == 2) && player.looksMale()) maleF();
+        else femF();
+        //===================================================
+        function femF():void {
             outputText("You ask Kal'ji if he’s willing to get a little more intimate with you.\n" +
                     "\n" +
                     "Kal'ji gives you a small smile, \"<i>Thanks [name]. I am very flattered, but I can’t say I’m too interested in you, you’re just… not my type…</i>\"\n" +
@@ -153,28 +168,28 @@ public class Kalji extends TrollVillageAbstractContent{
                     "\n" +
                     "\"<i>Get on your knees and service me.</i>\"\n" +
                     "\n" +
-                    "You consider for a moment, this is all you’re gonna get out of him. Do you accept his offer?\n")
+                    "You consider for a moment, this is all you’re gonna get out of him. Do you accept his offer?\n");
+            menu();
             addButton(0,"Blow Him", KjBJFY);
             addButton(1,"Do not", KjBJNF1);
         }
-        else if (!player.hasVagina() || (player.gender == 0  && player.smallestTitSize() <= 1 && player.femininity < 45)){
+        function maleF():void {
             outputText("You tell Kal'ji that you’d like to get a little more intimate with him.\n" +
                     "\n" +
                     "Kal'ji eyes you up and down before giving you a sneering grin. \"<i>Sure, but I’ll warn you… I’m kind of into rope… Hope you don’t mind.</i>\"\n" +
                     "\n" +
                     "Well, everyone has their kinks, are you willing to join in his idea?\n");
+            menu();
             addButton(0,"Get Tied", KjBDG);
             addButton(1,"Blow Him", KjBJMY);
             addButton(2,"Do not", KjBJMN);
-        } else{
-            outputText("")
         }
-
+        //========================================================
         function KjBJFY(resist:Boolean = false):void{
             clearOutput();
             outputText("You crawl onto your knees before him, pulling down his leather pants as all 7 inches of his glorious manhood is revealed to you. As his pants are pulled down, you see him pull out a dagger hidden from within them, he places it behind him. You gulp slightly at the sight of it.\n" +
                     "\n" +
-                    "You stroke the tip of his length with your hand, bringing his length up to full mast. His erection pokes out toward you, awaiting your advance. You bring your mouth closer to him. You press your [lips] at the head of his shaft, flitting your tongue along the tip of his erection. You lean forward further, wrapping your [tongue] around his manhood, slowly taking in more of his length.\n" +
+                    "You stroke the tip of his length with your hand, bringing his length up to full mast. His erection pokes out toward you, awaiting your advance. You bring your mouth closer to him. You press your lips at the head of his shaft, flitting your tongue along the tip of his erection. You lean forward further, wrapping your [tongue] around his manhood, slowly taking in more of his length.\n" +
                     "\n" +
                     "Kal'ji suddenly grabs the back of your head, forcing you down his cock. You gag as several inches are forced down your throat. You try to resist, but he keeps you locked firmly in place, your [face] pressed against his crotch.\n" +
                     "\n");
@@ -234,7 +249,7 @@ public class Kalji extends TrollVillageAbstractContent{
                     "\n" +
                     "\"<i>Why don’t you get comfortable before lying down on the bed as I get out the ropes..?</i>\"\n" +
                     "\n");
-            if (player.lowerGarment != UndergarmentLib.NOTHING || player.upperGarment != UndergarmentLib.NOTHING || player.armor != ArmorLib.NOTHING){
+            if (!player.lowerGarment.isNothing || !player.upperGarment.isNothing || !player.armor.isNothing){
                 outputText("You take off your [armor] before getting onto the rather comfortable bed.\n");
             }
             else{
@@ -286,7 +301,7 @@ public class Kalji extends TrollVillageAbstractContent{
                     "\n" +
                     "You crawl onto your knees before him, pulling down his leather pants as all 7 inches of his glorious manhood is revealed to you. As his pants are pulled down, you see him pull out a dagger hidden from within them, he places it behind him. You gulp slightly at the sight of it.\n" +
                     "\n" +
-                    "You stroke the tip of his length with your hand, bringing his length up to full mast. His erection pokes out toward you, awaiting your advance. You bring your mouth closer to him. You press your [lips] at the head of his shaft, flitting your tongue along the tip of his erection. You lean forward further, wrapping your [tongue] around his manhood, slowly taking in more of his length.\n" +
+                    "You stroke the tip of his length with your hand, bringing his length up to full mast. His erection pokes out toward you, awaiting your advance. You bring your mouth closer to him. You press your lips at the head of his shaft, flitting your tongue along the tip of his erection. You lean forward further, wrapping your [tongue] around his manhood, slowly taking in more of his length.\n" +
                     "\n" +
                     "Kal'ji suddenly grabs the back of your head, forcing you down his cock. You gag as several inches are forced down your throat. You try to resist, but he keeps you locked firmly in place, your [face] pressed against his crotch.\n" +
                     "\n" +
@@ -350,7 +365,7 @@ public class Kalji extends TrollVillageAbstractContent{
                         "He moves toward you, you squirm in desperation, but it’s all pointless. As he drags you to where his bed was before, your eyes widen in terror as you can see a medieval torture rack. He places you on top of it. It is very large and very wide, you’re unsure how he obtained it, or just how many people he’s mercilessly tortured on it. It can easily fit almost any sized creature on it with just how massive it is.\n" +
                         "\n" +
                         "Once you’re placed on the rack, he refastens your bindings, tying you to the torture rack until your [armdescription] and [legdescription] are hyperextended, spread far apart from each other.\n");
-                if (player.lowerGarment != UndergarmentLib.NOTHING || player.upperGarment != UndergarmentLib.NOTHING || player.armor != ArmorLib.NOTHING){
+                if (!player.lowerGarment.isNothing || !player.upperGarment.isNothing || !player.armor.isNothing){
                     outputText("He makes way with your [armor], removing it with deliberate slowness. \"<i>I’m gonna some have fun for a while...</i>\" he snickers\n");
                 }
                 if (player.hasPerk(PerkLib.Masochist) || silly()){
@@ -366,9 +381,9 @@ public class Kalji extends TrollVillageAbstractContent{
                             "\n" +
                             "\"<i>Hmm...</i>\" He sighs, \"<i>Fragile… Like the shopkeepers… Somehow you’re softer than the farmer the other day... I thought you'd take it better than that. So weak… so pitiful...</i>\"\n");
                     if (player.hasCock()){
-                        outputText("His hand reaches down to your [penis] as he gently begins to stroke it. \"<i>Perhaps there’s a better way to break you…</i>\"\n" +
+                        outputText("His hand reaches down to your [cock] as he gently begins to stroke it. \"<i>Perhaps there’s a better way to break you…</i>\"\n" +
                                 "\n" +
-                                "You cry out in desperation, but your voice is muffled from the gag. You squirm, trying to resist his perverted advance, but to no avail. His hand gently starts to rub your manhood as it spikes to full mast. You despise how good his soft fur feels on your [penis]\n");
+                                "You cry out in desperation, but your voice is muffled from the gag. You squirm, trying to resist his perverted advance, but to no avail. His hand gently starts to rub your manhood as it spikes to full mast. You despise how good his soft fur feels on your [cock]\n");
                     } else{
                         outputText("His hand reaches down to your groin. Despite your lack of a penis, he gently rubs his soft furred hand across your loins. \"<i>An interesting body, but one that will break nonetheless.</i>\"\n" +
                                 "\n" +

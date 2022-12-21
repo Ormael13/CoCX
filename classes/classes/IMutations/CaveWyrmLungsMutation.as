@@ -10,12 +10,13 @@ import classes.Creature;
 
     public class CaveWyrmLungsMutation extends IMutationPerkType
     {
+        private static const mName:String = "Cave Wyrm Lungs";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
             if (pTier >= 1){
-                descS += "";
+                descS += "";//Your lung has became accustomed to the presence of acid in your biology improving the corrosiveness and volatility of your biochemical weapons.
             }
             if (pTier >= 2){
                 descS += ", ";
@@ -40,7 +41,7 @@ import classes.Creature;
                 default:
                     sufval = "";
             }
-            return "Cave Wyrm Lungs" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -62,15 +63,13 @@ import classes.Creature;
         }
 
         //Mutations Buffs
-        override public function pBuffs(target:Creature = null):Object{
+        override public function buffsForTier(pTier:int):Object {
             var pBuffs:Object = {};
-            var pTier:int = currentTier(this, (target == null)? player : target);
             return pBuffs;
         }
 
         public function CaveWyrmLungsMutation() {
-            super("Cave Wyrm Lungs IM", "Cave Wyrm Lungs", ".");
-            maxLvl = 3;
+            super(mName + " IM", mName, SLOT_NONE, 3);
         }
         
     }

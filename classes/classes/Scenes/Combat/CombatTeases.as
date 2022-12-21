@@ -32,32 +32,32 @@ public class CombatTeases extends BaseCombatContent {
 	
 	public function teaseBaseLustDamage():Number {
 		var tBLD:Number = 27 + rand(9);
-		if (player.hasPerk(PerkLib.SensualLover)) tBLD += 6;
-		if (player.hasPerk(PerkLib.Seduction)) tBLD += 15;
-		if (player.hasPerk(PerkLib.SluttySeduction)) tBLD += (2 * player.perkv1(PerkLib.SluttySeduction));
-		if (player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) tBLD += (2 * player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction));
-		if (player.hasPerk(PerkLib.BimboBody) || player.hasPerk(PerkLib.BroBody) || player.hasPerk(PerkLib.FutaForm)) tBLD += 15;
-		if (player.hasPerk(PerkLib.FlawlessBody)) tBLD += 20;
-		tBLD += scalingBonusLibido() * 0.2;
-		if (player.hasPerk(PerkLib.JobSeducer)) tBLD += player.teaseLevel * 3;
-		else tBLD += player.teaseLevel * 2;
-		if (player.hasPerk(PerkLib.JobCourtesan) && monster.hasPerk(PerkLib.EnemyBossType)) tBLD *= 1.2;
-		switch (player.coatType()) {
-			case Skin.FUR:
-				tBLD += (2 * (1 + player.newGamePlusMod()));
-				break;
-			case Skin.SCALES:
-				tBLD += (4 * (1 + player.newGamePlusMod()));
-				break;
-			case Skin.CHITIN:
-				tBLD += (6 * (1 + player.newGamePlusMod()));
-				break;
-			case Skin.BARK:
-				tBLD += (8 * (1 + player.newGamePlusMod()));
-				break;
-		}
-		if (player.hasPerk(PerkLib.SluttySimplicity) && player.armorName == "nothing") tBLD *= (1 + ((10 + rand(11)) / 100));
-		if (player.isElf() && player.hasPerk(PerkLib.ELFElvenSpearDancingTechnique) && player.isSpearTypeWeapon()) tBLD += scalingBonusSpeed() * 0.1;
+		tBLD = combat.calculateBasicTeaseDamage(tBLD);
+		//if (player.hasPerk(PerkLib.SensualLover)) tBLD += 6;
+		//if (player.hasPerk(PerkLib.Seduction)) tBLD += 15;
+		//tBLD += (2 * player.teaseDmgStat.value);
+		//if (player.hasPerk(PerkLib.BimboBody) || player.hasPerk(PerkLib.BroBody) || player.hasPerk(PerkLib.FutaForm)) tBLD += 15;
+		//if (player.hasPerk(PerkLib.FlawlessBody)) tBLD += 20;
+		//tBLD += scalingBonusLibido() * 0.2;
+		//if (player.hasPerk(PerkLib.JobSeducer)) tBLD += player.teaseLevel * 3;
+		//else tBLD += player.teaseLevel * 2;
+		//if (player.hasPerk(PerkLib.JobCourtesan) && monster.hasPerk(PerkLib.EnemyBossType)) tBLD *= 1.2;
+		//switch (player.coatType()) {
+		//	case Skin.FUR:
+		//		tBLD += (2 * (1 + player.newGamePlusMod()));
+		//		break;
+		//	case Skin.SCALES:
+		//		tBLD += (4 * (1 + player.newGamePlusMod()));
+		//		break;
+		//	case Skin.CHITIN:
+		//		tBLD += (6 * (1 + player.newGamePlusMod()));
+		//		break;
+		//	case Skin.BARK:
+		//		tBLD += (8 * (1 + player.newGamePlusMod()));
+		//		break;
+		//}
+		//if (player.hasPerk(PerkLib.SluttySimplicity) && player.armor.hasTag(ItemTags.A_REVEALING)) tBLD *= (1 + ((10 + rand(11)) / 100));
+		//if (player.isElf() && player.hasPerk(PerkLib.ELFElvenSpearDancingTechnique) && player.isSpearTypeWeapon()) tBLD += scalingBonusSpeed() * 0.1;
 		return tBLD;
 	}
 
@@ -116,12 +116,12 @@ public class CombatTeases extends BaseCombatContent {
 		chance += player.upperGarment.sexiness;
 		chance += player.lowerGarment.sexiness;
 		//chance += player.jewelry.sexiness;
-		chance += player.miscJewelry.sexiness;
+		chance += player.miscJewelry1.sexiness;
 		chance += player.miscJewelry2.sexiness;
 		//10% for seduction perk
 		if (player.hasPerk(PerkLib.Seduction)) chance += 10;
 		//10% for sexy armor types
-		if (player.hasPerk(PerkLib.SluttySeduction) || player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) chance += 10;
+		if (player.teaseDmgStat.value > 0) chance += 10;
 		//10% for bimbo shits
 		if (player.hasPerk(PerkLib.BimboBody)) {
 			chance += 10;
@@ -593,7 +593,7 @@ public class CombatTeases extends BaseCombatContent {
 			choices[choices.length] = 44;
 		}
 		//45 - Lethicite armor
-		if (player.armor == armors.LTHCARM && player.upperGarment == UndergarmentLib.NOTHING && player.lowerGarment == UndergarmentLib.NOTHING) {
+		if (player.armor == armors.LTHCARM && player.upperGarment.isNothing && player.lowerGarment.isNothing) {
 			choices[choices.length] = 45;
 			choices[choices.length] = 45;
 			choices[choices.length] = 45;
@@ -919,7 +919,7 @@ public class CombatTeases extends BaseCombatContent {
 				break;
 				//22 SPOIDAH SILK
 			case 22:
-				outputText("Reaching back, you milk some wet silk from your spider-y abdomen and present it to [themonster], molding the sticky substance as [monster he] looks on curiously.  Within moments, you hold up a silken heart scuplture, and with a wink, you toss it at [monster him]. It sticks to [monster his] body, the sensation causing [monster him] to hastily slap the heart off.  " + monster.mf("He", "She") + " returns [monster his] gaze to you to find you turned around, [butt] bared and abdomen bouncing lazily.  \"<i>I wonder what would happen if I webbed up your hole after I dropped some eggs inside?</i>\" you hiss mischievously.  " + monster.mf("He", "She") + " gulps.");
+				outputText("Reaching back, you milk some wet silk from your spider-y abdomen and present it to [themonster], molding the sticky substance as [monster he] looks on curiously.  Within moments, you hold up a silken heart scuplture, and with a wink, you toss it at [monster him]. It sticks to [monster his] body, the sensation causing [monster him] to hastily slap the heart off.  [monster He] returns [monster his] gaze to you to find you turned around, [butt] bared and abdomen bouncing lazily.  \"<i>I wonder what would happen if I webbed up your hole after I dropped some eggs inside?</i>\" you hiss mischievously.  [monster He] gulps.");
 				ass = true;
 				break;
 				//23 RUT TEASE
@@ -941,7 +941,7 @@ public class CombatTeases extends BaseCombatContent {
 				break;
 				//TALL WOMAN TEASE
 			case 25:
-				outputText("You move close to your enemy, handily stepping over [monster his] defensive strike before leaning right down in [monster his] face, giving [monster him] a good long view at your cleavage.  \"<i>Hey, there, little " + monster.mf("guy", "girl") + ",</i>\" you smile.  Before [monster he] can react, you grab [monster him] and smoosh [monster his] face into your [fullchest], nearly choking [monster him] in the canyon of your cleavage.  " + monster.mf("He", "She") + " struggles for a moment.  You give [monster him] a little kiss on the head and step back, ready for combat.");
+				outputText("You move close to your enemy, handily stepping over [monster his] defensive strike before leaning right down in [monster his] face, giving [monster him] a good long view at your cleavage.  \"<i>Hey, there, little " + monster.mf("guy", "girl") + ",</i>\" you smile.  Before [monster he] can react, you grab [monster him] and smoosh [monster his] face into your [fullchest], nearly choking [monster him] in the canyon of your cleavage.  [monster He] struggles for a moment.  You give [monster him] a little kiss on the head and step back, ready for combat.");
 				breasts = true;
 				chance += 6;
 				damage += 12;
@@ -991,20 +991,20 @@ public class CombatTeases extends BaseCombatContent {
 				break;
 				//33 Crotch Revealing Clothes (herm only?)
 			case 33:
-				outputText("You do a series of poses to accentuate what you've got on display with your crotch revealing clothes, while asking if your " + player.mf("master", "mistress") + " is looking to sample what is on display.");
+				outputText("You do a series of poses to accentuate what you've got on display with your crotch revealing clothes, while asking if your [master] is looking to sample what is on display.");
 				chance += 6;
 				damage += 12;
 				break;
 				//34 Maid Costume (female only)
 			case 34:
-				outputText("You give a rather explicit curtsey towards [themonster] and ask them if your " + player.mf("master", "mistress") + " is interested in other services today.");
+				outputText("You give a rather explicit curtsey towards [themonster] and ask them if your [master] is interested in other services today.");
 				chance += 3;
 				damage += 6;
 				breasts = true;
 				break;
 				//35 Servant Boy Clothes (male only)
 			case 35:
-				outputText("You brush aside your crotch flap for a moment, then ask [themonster] if, " + player.mf("Master", "Mistress") + " would like you to use your [cocks] on them?");
+				outputText("You brush aside your crotch flap for a moment, then ask [themonster] if, [Master] would like you to use your [cocks] on them?");
 				penis = true;
 				chance += 3;
 				damage += 6;
@@ -1201,7 +1201,7 @@ public class CombatTeases extends BaseCombatContent {
 			case 46:
 				outputText("You let your vines crawl around your opponent, teasing all of [themonster]'s erogenous zones.  [Themonster] gasps in involuntary arousal at your ministrations, relishing the way your vines seek out all [themonster] pleasurable spots and relentlessly assaults them.");
 				if (player.isLiliraune()) {
-					outputText(" Meanwhile you and your twin smile in understanding. You begin to make out, slathering your respective bodies with sweet syrupy nectar and mashing your breasts against each other in order to give a lewd show to [themonster] as the both of you pull a nectar dripping hand out in invitation to your entangled opponent.\n\n");
+					outputText(" Meanwhile you and your twin smile in understanding. You begin to make out, slathering your respective bodies with sweet syrupy nectar and mashing your breasts against each other in order to give a lewd show to [themonster] as both of you pull a nectar dripping hand out in invitation to your entangled opponent.\n\n");
 				 	outputText("\"<i>Can't you see what delights you're missing out on?</i>\"\n\n");
 				 	outputText("\"<i>Just give up and we'll give you a good time.</i>\"\n\n");
 				 	outputText("\"<i>If you think you have the stamina to take both of us, that is.</i>\"\n\n");
@@ -1488,6 +1488,8 @@ public class CombatTeases extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.SuperSensual) && chance > 100) damagemultiplier += (0.02 * (chance - 100));
 			if (player.armorName == "desert naga pink and black silk dress") damagemultiplier += 0.1;
 			if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
+			if (player.armor == armors.ELFDRES && player.isElf()) damagemultiplier += 2;
+			if (player.armor == armors.FMDRESS && player.isWoodElf()) damagemultiplier += 2;
 			damage *= damagemultiplier;
 			bonusDamage *= damagemultiplier;
 			if (player.hasPerk(PerkLib.ChiReflowLust)) damage *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
@@ -1510,6 +1512,7 @@ public class CombatTeases extends BaseCombatContent {
 			if (rand(100) < critChance) {
 				crit = true;
 				damage *= 1.75;
+				if (monster.lustVuln != 0 && player.hasPerk(PerkLib.SweepDefenses) && !monster.hasPerk(PerkLib.EnemyTrueAngel)) monster.lustVuln += 0.05;
 			}
 			if (monster is JeanClaude) (monster as JeanClaude).handleTease(damage, true);
 			else if (monster is Doppleganger && !monster.hasStatusEffect(StatusEffects.Stunned)) (monster as Doppleganger).mirrorTease(damage, true);
@@ -1520,7 +1523,7 @@ public class CombatTeases extends BaseCombatContent {
 			if (flags[kFLAGS.PC_FETISH] >= 1 && !SceneLib.urtaQuest.isUrta()) {
 				if (player.lust < (player.maxLust() * 0.75)) outputText("\nFlaunting your body in such a way gets you a little hot and bothered.");
 				else outputText("\nIf you keep exposing yourself you're going to get too horny to fight back.  This exhibitionism fetish makes it hard to resist just stripping naked and giving up.");
-				if (!justText) dynStats("lus", 7 + rand(6));
+				if (!justText) player.takeLustDamage(7 + rand(6), true);
 			}
 			// Similar to fetish check, only add XP if the player IS the player...
 			if (!justText && !SceneLib.urtaQuest.isUrta()) player.SexXP(1 + bonusExpAfterSuccesfullTease());

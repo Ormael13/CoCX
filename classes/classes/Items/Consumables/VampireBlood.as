@@ -39,7 +39,7 @@ public class VampireBlood extends Consumable {
         if(first){
             outputText("Ew! This thing is indeed blood. It tastes awful, a strong, coppery taste, the liquid is thick from the iron content.\nAs you try to get the taste out of your mouth, you feel something begin to change in you.");
             first = false;
-        } else if (player.racialScore(Races.VAMPIRE) >= 6){
+        } else if (player.racialScore(Races.VAMPIRE, false) >= 6){
             outputText("The blood tastes wonderful, as always.\n\nYou have downed the whole vial much sooner than you would have liked, leaving you wishing for more even as the vampiric blood starts changing your body further.")
             if (EngineCore.silly()) outputText("\n\nYou filthy druggie.");
         } else if (pure) {
@@ -72,7 +72,7 @@ public class VampireBlood extends Consumable {
 
             if (rand(3) == 0 && changes < changeLimit && player.wings.type !== Wings.VAMPIRE) {
                 outputText("\n\n");
-                if (player.hasGooSkin()) {
+                if (player.isGooSkin()) {
                     CoC.instance.transformations.SkinPlain.applyEffect();
                     outputText("\n\n");
                 }
@@ -81,10 +81,10 @@ public class VampireBlood extends Consumable {
                 changes++;
             }
 
-            if (rand(3) == 0 && changes < changeLimit && player.skinTone !== "pale") {
+            if (rand(3) == 0 && changes < changeLimit && player.bodyColor !== "pale") {
                 outputText("\n\n");
                 outputText("Your skin suddenly starts itching, causing you to look at it just in time for you to see it finish paling into a shade that wouldn’t be     out of place on a corpse. You feel sleepy… horribly so, but you dismiss it as being the fault of the glaring light above your head. <b>You guess    you could use some extra sunlight with your pale skin.</b>");
-                player.skinTone = "pale";
+                player.skinColor = "pale";
 
                 changes++;
             }

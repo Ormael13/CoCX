@@ -6,8 +6,33 @@ import classes.PerkLib;
 import classes.Race;
 
 public class WoodElfRace extends Race{
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Human",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Human",
+        /*Eyes*/		"Human",
+        /*Face*/		"Human",
+        /*Gills*/		"Human",
+        /*Hair*/		"Human",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Human",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Human",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Human"];
+
 	public function WoodElfRace(id:int) {
-		super("Wood Elf", id);
+		super("Wood Elf", id, []);//RaceBody);
 	}
 	
 	public override function setup():void {
@@ -22,9 +47,9 @@ public class WoodElfRace extends Race{
 				.legType(LowerBody.ELF, +1)
 				.hairType(Hair.SILKEN, +1)
 				.noWings(+1)
-				.hairColor("golden blonde", +1, -1000)
+				.hairColor1("golden blonde", +1, -1000)
 				.eyeColor("light green",+1, -1000)
-				.skinBaseColor("light", +1)
+				.skinColor1("light", +1)
 				.customRequirement("skin","flawless skin",
 						function (body:BodyData):Boolean {
 							return body.player.skinType == Skin.PLAIN && body.skinBaseAdj == "flawless"
@@ -38,7 +63,8 @@ public class WoodElfRace extends Race{
 						}, +1)
 				.corruption(AT_LEAST(50), +1, -1000)
 				.hasPerk(PerkLib.FlawlessBody, +1)
-				.hasPerk(PerkLib.ElvenSense, +1);
+				.hasPerk(PerkLib.ElvenSense, +1)
+				.hasPerk(PerkLib.NaturalSpellcasting, +1);
 		
 		addBloodline(PerkLib.ElfsDescendant,PerkLib.BloodlineElf);
 		addMutation(IMutationsLib.ElvishPeripheralNervSysIM, +3);
@@ -48,10 +74,10 @@ public class WoodElfRace extends Race{
 				.buffs({
 					"str.mult": -0.10,
 					"tou.mult": -0.15,
-					"spe.mult": +5.50,
-					"int.mult": +4.95,
-					"lib.mult": +4.55,
-					"sens": +80,
+					"spe.mult": +3.75,
+					"int.mult": +3.55,
+					"lib.mult": +3.35,
+					"sens": +50,
 					"maxmana_mult": +0.1
 				})
 				.end()
@@ -60,10 +86,10 @@ public class WoodElfRace extends Race{
 				.buffs({
 					"str.mult": -0.10,
 					"tou.mult": -0.15,
-					"spe.mult": +4.95,
-					"int.mult": +4.45,
-					"lib.mult": +4.15,
-					"sens": +70,
+					"spe.mult": +4.30,
+					"int.mult": +4.05,
+					"lib.mult": +3.75,
+					"sens": +60,
 					"maxmana_mult": +0.2
 				})
 				.end()
@@ -72,10 +98,10 @@ public class WoodElfRace extends Race{
 				.buffs({
 					"str.mult": -0.10,
 					"tou.mult": -0.15,
-					"spe.mult": +4.30,
-					"int.mult": +4.05,
-					"lib.mult": +3.75,
-					"sens": +60,
+					"spe.mult": +4.95,
+					"int.mult": +4.45,
+					"lib.mult": +4.15,
+					"sens": +70,
 					"maxmana_mult": +0.3
 				})
 				.end()
@@ -84,10 +110,10 @@ public class WoodElfRace extends Race{
 				.buffs({
 					"str.mult": -0.10,
 					"tou.mult": -0.15,
-					"spe.mult": +3.75,
-					"int.mult": +3.55,
-					"lib.mult": +3.35,
-					"sens": +50,
+					"spe.mult": +5.50,
+					"int.mult": +4.95,
+					"lib.mult": +4.55,
+					"sens": +80,
 					"maxmana_mult": +0.4
 				})
 				.end()

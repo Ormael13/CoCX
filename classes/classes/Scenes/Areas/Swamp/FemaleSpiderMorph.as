@@ -48,7 +48,7 @@ import classes.internals.*;
 			this.hips.type = Hips.RATING_CURVY + 2;
 			this.butt.type = Butt.RATING_LARGE + 1;
 			this.lowerBody = LowerBody.CHITINOUS_SPIDER_LEGS;
-			this.skinTone = "dusky";
+			this.bodyColor = "dusky";
 			this.hairColor = "red";
 			this.hairLength = 13;
 			initStrTouSpeInte(70, 60, 99, 99);
@@ -65,7 +65,6 @@ import classes.internals.*;
 			this.bonusLust = 98;
 			this.lust = 20;
 			this.lustVuln = .6;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 18;
 			this.gems = rand(15) + 15;
 			this.drop = new WeightedDrop().add(consumables.S_GOSSR,5)

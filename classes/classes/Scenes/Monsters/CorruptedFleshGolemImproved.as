@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.Monsters 
+package classes.Scenes.Monsters
 {
 	import classes.*;
 	import classes.BodyParts.Butt;
@@ -26,7 +26,7 @@ package classes.Scenes.Monsters
 			else outputText("The corrupted golem mutters something. Before you have time to react the demonic golem's hand is filled with a bright red fire that she hurls at you.  The flames lick at your body leaving a painful burn on you torso, as well as an arousing heat in your groin. ");
 			damage = Math.round(damage);
 			player.takeFireDamage(damage, true);
-			player.dynStats("lus", 20 + player.cor / 10);
+			player.takeLustDamage(20 + player.cor / 10, true);
 		}
 		
 		override protected function performCombatAction():void
@@ -45,7 +45,7 @@ package classes.Scenes.Monsters
 			}
 		}
 		
-		public function CorruptedFleshGolemImproved() 
+		public function CorruptedFleshGolemImproved()
 		{
 			this.a = "the ";
 			this.short = "corrupted improved flesh golem";
@@ -66,7 +66,7 @@ package classes.Scenes.Monsters
 			this.tallness = 96;
 			this.hips.type = Hips.RATING_CURVY;
 			this.butt.type = Butt.RATING_JIGGLY;
-			this.skinTone = "pink";
+			this.bodyColor = "pink";
 			this.weaponName = "dual swords";
 			this.weaponVerb = "slash";
 			this.weaponAttack = 100;
@@ -79,7 +79,6 @@ package classes.Scenes.Monsters
 			this.lustVuln = .4;
 			this.level = 59;
 			this.additionalXP = 350;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.gems = rand(10)+5;
 			this.wings.type = Wings.BAT_LIKE_TINY;
 			this.tailType = Tail.DEMONIC;

@@ -17,7 +17,7 @@ public class TentacleBeastRaging extends Monster
 			var temp:int = int((str + weaponAttack) - Math.random()*(player.tou) - player.armorDef);
 			if(temp < 0) temp = 0;
 			//Miss
-			if(temp == 0 || (player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80)) {
+			if(temp == 0 || (player.speedDodge(this)>0)) {
 				outputText("However, you quickly evade the clumsy efforts of the abomination to strike you.");
 			}
 			//Hit
@@ -32,7 +32,7 @@ public class TentacleBeastRaging extends Monster
 			if (temp < 0) temp = 0;
 			this.wrath -= 200;
 			//Miss
-			if(temp == 0 || (player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80)) {
+			if(temp == 0 || (player.speedDodge(this)>0)) {
 				outputText("However, you quickly evade the clumsy efforts of the abomination to strike you.");
 			}
 			//Hit
@@ -116,7 +116,6 @@ public class TentacleBeastRaging extends Monster
 			this.bonusLust = 122;
 			this.lust = 10;
 			this.lustVuln = 0.8;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 11;
 			this.gems = rand(7)+3;
 			this.drop = new WeightedDrop().addMany(1,consumables.HEALHERB,

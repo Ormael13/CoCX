@@ -10,15 +10,14 @@ import classes.BodyParts.Ears;
 import classes.BodyParts.Hips;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Wings;
-import classes.Items.Useable;
+import classes.Scenes.Dungeons.DeepCave.ValaScene;
 import classes.Scenes.SceneLib;
 import classes.internals.WeightedDrop;
-import classes.Scenes.Dungeons.DeepCave.ValaScene;
 
 public class Phouka extends Monster
 	{
 		protected function phoukaFightAttack():void
-		{ 
+		{
 			var damage:int;
 			//Only the bunny, goat and horse forms make physical attacks
 			if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 1) {
@@ -79,7 +78,7 @@ public class Phouka extends Monster
 				else if (PhoukaScene.phoukaForm == PhoukaScene.PHOUKA_FORM_BUNNY)
 					outputText("He grabs you and rubs up against your body.  For a moment you are lost in the feeling of his soft black fur.  Then you feel his cock pressing against your ribs and shove him away.");
 				else outputText("You are hypnotized by the equine cock jabbing at the air.  Then the " + this.short + " charges past you and you can taste the musk in the air.");
-				player.dynStats("lus", 15 + player.lib / 10 + player.cor / 5 + rand(10));
+				player.takeLustDamage(15 + player.lib / 10 + player.cor / 5 + rand(10), true);
 			}
 		}
 
@@ -146,7 +145,7 @@ public class Phouka extends Monster
 				outputText("\n\nThe " + this.short + " hesitates and slows down.  You see its cock twitch and then it readies for the next attack.");
 			applyTease(lustDelta);
 		}
-        
+  
 		override public function defeated(hpVictory:Boolean):void
 		{
 			SceneLib.bog.phoukaScene.phoukaPlayerWins(hpVictory);
@@ -243,12 +242,13 @@ public class Phouka extends Monster
 			PhoukaScene.phoukaForm = PhoukaScene.PHOUKA_FORM_FAERIE;
 		}
 
-		override public function handleAwardItemText(itype:ItemType):void
+		override public function handleAwardItemText(itype:ItemType):ItemType
 		{
 			outputText("  You are just about to leave when you remember that glint from the hollow of that nearby tree.");
 			if (itype == null)
 				outputText("\n\nYou take a look and curse the " + this.short + ".  Looks like it used a piece of a broken bottle to lure you in.  At least you learned more about fighting the little pests.  You gain " + this.XP + " XP from your victory.");
 			else outputText("\n\nYou look inside the hollow and are pleased to find " + itype.longName + ".  You also gain " + this.XP + " XP from your victory, since you learned a bit more about fighting these little pests.\n\n");
+			return itype;
 		}
 
 		override public function handleAwardText():void
@@ -285,7 +285,7 @@ public class Phouka extends Monster
 			this.butt.type = Butt.RATING_TIGHT;
 			this.lowerBody = LowerBody.HUMAN;
 			this.arms.type = Arms.HUMAN;
-			this.skinTone = "black";
+			this.bodyColor = "black";
 			this.hairColor = "black";
 			this.hairLength = 1;
 			this.ears.type = Ears.ELFIN;

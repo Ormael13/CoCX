@@ -46,6 +46,7 @@ public class PerkTree extends BaseContent {
 	 * Returns Array of PerkType
 	 */
 	public function listUnlocks(p:PerkType):Array {
+		if (!pdata[p.id]) return [];
 		return pdata[p.id].unlocks.map(function(entry:PerkTreeEntry,idx:int,array:/*PerkTreeEntry*/Array):PerkType {
 			return entry.perk;
 		});

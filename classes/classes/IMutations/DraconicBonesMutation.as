@@ -15,6 +15,7 @@ import classes.Races;
 
 public class DraconicBonesMutation extends IMutationPerkType
     {
+        private static const mName:String = "Draconic Bones";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -45,7 +46,7 @@ public class DraconicBonesMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Draconic Bones" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -57,7 +58,7 @@ public class DraconicBonesMutation extends IMutationPerkType
                 if (pTier == 0){
                     this.requireBonesAndMarrowMutationSlot()
                     .requireCustomFunction(function (player:Player):Boolean {
-                        return (player.arms.type == Arms.DRACONIC || player.arms.type == Arms.FROSTWYRM || player.arms.type == Arms.SEA_DRAGON);
+                        return (player.arms.type == Arms.DRACONIC || player.arms.type == Arms.FROSTWYRM || player.arms.type == Arms.PLANT || player.arms.type == Arms.PLANT2 || player.arms.type == Arms.SEA_DRAGON || player.arms.type == Arms.FEY_DRACONIC);
                     }, "Dragon race or its variants arms")
                     .requireCustomFunction(function (player:Player):Boolean {
                         return (LowerBody.hasDraconicLegs(player));
@@ -65,7 +66,7 @@ public class DraconicBonesMutation extends IMutationPerkType
                     .requireCustomFunction(function (player:Player):Boolean {
                         return (Tail.hasDraconicTail(player) || LowerBody.hasDraconicLegs(player) && LowerBody.hasTail(player));
                     }, "Dragon race or its variants tail")
-                    .requireAnyRace(Races.DRAGON, Races.JABBERWOCKY, Races.FROSTWYRM, Races.SEA_DRAGON);
+                    .requireAnyRace(Races.DRAGON, Races.JABBERWOCKY, Races.FROSTWYRM, Races.YGGDRASIL, Races.SEA_DRAGON, Races.FAERIEDRAGON, Races.KIRIN);
                 }
                 else{
                     var pLvl:int = pTier * 30;
@@ -77,9 +78,8 @@ public class DraconicBonesMutation extends IMutationPerkType
         }
 
         //Mutations Buffs
-        override public function pBuffs(target:Creature = null):Object{
+        override public function buffsForTier(pTier:int):Object {
             var pBuffs:Object = {};
-            var pTier:int = currentTier(this, (target == null)? player : target);
             if (pTier == 1) pBuffs['tou.mult'] = 0.05;
             if (pTier == 2) pBuffs['tou.mult'] = 0.15;
             if (pTier == 3) pBuffs['tou.mult'] = 0.35;
@@ -87,8 +87,7 @@ public class DraconicBonesMutation extends IMutationPerkType
         }
 
         public function DraconicBonesMutation() {
-            super("Draconic Bones IM", "Draconic Bones", ".");
-            maxLvl = 3;
+            super(mName + " IM", mName, SLOT_BONE, 3);
         }
 
     }

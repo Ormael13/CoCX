@@ -61,7 +61,7 @@ public class Ember extends Monster
 		//Dragon Breath: Very rare attack, very high damage
 		private function embersSupahSpecialDragonBreath():void {
 			if(hasStatusEffect(StatusEffects.Blind) && rand(2) == 0) {
-				//Blind Ember: 
+				//Blind Ember:
 				outputText("The blinded dragon tracks you with difficulty as you sprint around the landscape; seeing an opportunity, you strafe around " + emberMF("his","her") + " side, planting yourself behind a large flat boulder near " + emberMF("him","her") + " and pelting " + emberMF("him","her") + " with a small rock.  The scream as the dragon turns the magical conflagration toward you, only to have it hit the rock and blow up in " + emberMF("his","her") + " face, is quite satisfying.");
 				//(Ember HP damage)
 				SceneLib.combat.doDamage(50);
@@ -114,7 +114,7 @@ public class Ember extends Monster
 				damage3 = player.takePhysDamage(damage3, true);
 			}
 		}
-				
+		
 		//Dragon Force: Tainted Ember only
 		private function dragonFarce():void {
 			//Effect: Stuns the PC for one turn and deals some damage, not much though. (Note: PC's version of this does something different and Ember has no cooldown to use this again. Obviously do not spam or peeps will rage.)
@@ -176,7 +176,7 @@ public class Ember extends Monster
 			this.a = " ";
 			this.short = "Ember";
 			this.imageName = "ember";
-			this.long = "You are currently 'battling' Ember, the dragon, in a playfight.  At least, that was the intention.  The way " + emberMF("he", "she") + " lashes " + emberMF("his", "her") + " tail along the ground, with claws spread and teeth bared ferociously, makes you wonder.";
+			this.long = "You are currently 'battling' Ember, the dragon, in a playfight.  At least, that was the intention.  The way [ember ey] lashes [ember eir] tail along the ground, with claws spread and teeth bared ferociously, makes you wonder.";
 			// this.plural = false;
 			var gender:int = game.flags[kFLAGS.EMBER_GENDER];
 			if (gender==0){
@@ -343,19 +343,19 @@ public class Ember extends Monster
 			this.tallness = rand(8) + 70;
 			this.hips.type = Hips.RATING_AMPLE + 2;
 			this.butt.type = Butt.RATING_LARGE;
-			this.skinTone = "red";
+			this.bodyColor = "red";
 			this.hairColor = "black";
 			this.hairLength = 15;
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
 			this.armorName = "scales";
 			this.lust = 20;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.gems = 0;
 			this.horns.type = Horns.DRACONIC_X4_12_INCH_LONG;
 			this.horns.count = 4;
 			this.tailType = Tail.DRACONIC;
 			this.drop = new ChainedDrop().add(useables.D_SCALE, 0.2);
+			this.noFetishDrop = true;
 			if (flags[kFLAGS.EMBER_LVL_UP] >= 1) this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
 			if (flags[kFLAGS.EMBER_LVL_UP] >= 2) {
 				this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);

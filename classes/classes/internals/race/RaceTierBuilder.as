@@ -165,8 +165,8 @@ public class RaceTierBuilder {
 		addSlotRequirement(BodyData.SLOT_SKIN_COAT_TYPE, type);
 		return this;
 	}
-	public function requireSkinCoatColor(color:*):RaceTierBuilder {
-		addSlotRequirement(BodyData.SLOT_SKIN_COAT_COLOR, color);
+	public function requireFurColor(color:*):RaceTierBuilder {
+		addSlotRequirement(BodyData.SLOT_FUR_COLORS, color);
 		return this;
 	}
 	public function requireTailType(type:*):RaceTierBuilder {
@@ -185,9 +185,17 @@ public class RaceTierBuilder {
 		addSlotRequirement(BodyData.SLOT_LEG_TYPE, type);
 		return this;
 	}
+	public function requireHornType(type:*):RaceTierBuilder {
+		addSlotRequirement(BodyData.SLOT_HORN_TYPE, type);
+		return this;
+	}
+	public function requireEyeType(type:*):RaceTierBuilder {
+		addSlotRequirement(BodyData.SLOT_EYE_TYPE, type);
+		return this;
+	}
 	public function requirePerk(perk:PerkType):RaceTierBuilder {
 		requirements.push(new RaceTierRequirement(
-				perk.name+" perk",
+				perk.name(null)+" perk",
 				RaceUtils.hasPerkFn(perk)
 		));
 		return this;
@@ -236,6 +244,7 @@ public class RaceTierBuilder {
 					extraBonuses
 			);
 		}
+		tier.requiresPreviousTier = requiresPreviousTier;
 		race.tiers.push(tier);
 		currentBuilder = null;
 	}

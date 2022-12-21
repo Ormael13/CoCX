@@ -1,14 +1,12 @@
 /**
  * Quest Dungeon: The Ebon Labyrinth (for Alvina Black Rose Quest)
- * @author Liadri
+ * @author Liadri, reworked by Svalkash
  */
 package classes.Scenes.Dungeons
 {
-import classes.CockTypesEnum;
 import classes.EventParser;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
-import classes.PerkLib;
 import classes.Races;
 import classes.Scenes.Areas.BlightRidge.Incubus;
 import classes.Scenes.Areas.BlightRidge.Omnibus;
@@ -61,6 +59,7 @@ public class EbonLabyrinth extends DungeonAbstractContent {
 
     //Scene instances
     public var chaosChimeraScene:ChaosChimeraScene = new ChaosChimeraScene();
+    public var mindbreakerScene:MindbreakerScene = new MindbreakerScene();
 
     public var darkSlimeEmpressScene:DarkSlimeEmpressScene = new DarkSlimeEmpressScene();
     public var hydraScene:HydraScene = new HydraScene();
@@ -151,7 +150,7 @@ public class EbonLabyrinth extends DungeonAbstractContent {
         }
         addButtonIfTrue(0, "Sleep", doSleepEL, "It's still too early to go to sleep.",
             model.time.hours >= 21 || model.time.hours < 6,  "Turn yourself in for the night. May result in monster ambush!");
-        addButtonIfTrue(5, "Masturbate", SceneLib.masturbation.masturbateGo, "Req. 30+ lust.", player.lust >= 30);
+        SceneLib.masturbation.masturButton(5);
         addButton(9, "Inventory", inventory.inventoryMenu);
         addButton(14, "Exit", confirmExit);
         dungeons.setTopButtons();
@@ -267,68 +266,7 @@ public class EbonLabyrinth extends DungeonAbstractContent {
             enemySelector(false);
             return;
         }
-        //normal sleep
-        //FUCK, LEARN ARITHMETICS
-        var timeQ:Number = 24 + 6 - model.time.hours;
-        if (player.isGargoyle()) outputText("You sit on your pedestal, your body petrifying like stone as you go to sleep, keen on continuing your exploration tomorrow.\n");
-        else if (player.isAlraune()) outputText("You lie down in your pitcher, dozing off for the night as you close off your petals to sleep.\n");
-        else outputText("You ready your bedroll and go to sleep, keen on continuing your exploration tomorrow.\n");
-        var multiplier:Number = 1.0;
-        var fatRecovery:Number = 20;
-        var hpRecovery:Number = 20;
-        if (player.level >= 24) {
-            fatRecovery += 10;
-            hpRecovery += 10;
-        }
-        if (player.level >= 42) {
-            fatRecovery += 10;
-            hpRecovery += 10;
-        }
-        if (player.hasPerk(PerkLib.SpeedyRecovery)) fatRecovery += 5;
-        if (player.hasPerk(PerkLib.SpeedyRecuperation)) fatRecovery += 10;
-        if (player.hasPerk(PerkLib.SpeedyRejuvenation)) fatRecovery += 20;
-        if (player.hasPerk(PerkLib.ControlledBreath)) fatRecovery *= 1.1;
-        if (player.hasStatusEffect(StatusEffects.BathedInHotSpring)) fatRecovery *= 1.2;
-        if (player.hasPerk(PerkLib.RecuperationSleep)) multiplier += 1;
-        if (player.hasPerk(PerkLib.RejuvenationSleep)) multiplier += 2;
-        if (flags[kFLAGS.HUNGER_ENABLED] > 0) {
-            if (player.hunger < 25) {
-                outputText("\nYou have difficulty sleeping as your stomach is growling loudly.\n");
-                multiplier *= 0.5;
-            }
-        }
-        //Marble withdrawl
-        if(player.hasStatusEffect(StatusEffects.MarbleWithdrawl)) {
-            outputText("\nYour sleep is very troubled, and you aren't able to settle down. You get up feeling tired and unsatisfied, always thinking of Marble's milk.\n");
-            multiplier *= 0.5;
-            player.addCurse("tou", 0.1, 2);
-            player.addCurse("int", 0.1, 2);
-        }
-        //Mino withdrawal
-        else if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] == 3) {
-            outputText("\nYou spend much of the night tossing and turning, aching for a taste of minotaur cum.\n");
-            multiplier *= 0.75;
-        }
-        //Bee cock
-        if (player.hasCock() && player.cocks[0].cockType == CockTypesEnum.BEE) {
-            outputText("\nThe desire to find the bee girl that gave you this cursed [cock] and have her spread honey all over it grows with each passing minute\n");
-        }
-        //Starved goo armor
-        if (player.armor == armors.GOOARMR && flags[kFLAGS.VALERIA_FLUIDS] <= 0) {
-            outputText("\nYou feel the fluid-starved goo rubbing all over your groin as if Valeria wants you to feed her.\n");
-        }
-        HPChange((timeQ * hpRecovery * multiplier), false);
-        fatigue( -(timeQ * fatRecovery * multiplier));
-        model.time.hours += timeQ;
-        SceneLib.combat.regeneration1(false);
-        if (player.hasPerk(PerkLib.JobSoulCultivator)) SceneLib.combat.soulforceregeneration1(false);
-        if (player.hasPerk(PerkLib.JobSorcerer)) SceneLib.combat.manaregeneration1(false);
-        SceneLib.combat.wrathregeneration1(false);
-        SceneLib.combat.fatigueRecovery1(false);
-        if (model.time.hours > 23) {
-            model.time.hours -= 24;
-            model.time.days++;
-        }
+        camp.cheatSleepUntilMorning(); //Let's not overcomplicate it, okay?
         doNext(playerMenu);
     }
 
@@ -397,6 +335,7 @@ public class EbonLabyrinth extends DungeonAbstractContent {
 	
     private function encountersFountainOfPurity():void {
         player.addStatusValue(StatusEffects.RathazulAprilFool, 3, 1);
+        clearOutput();
         outputText("As you explore the labyrinth you stumble upon what appears to be a room with fountain of purity.\n\n");
         outputText("<b>You've collected a vial from the fountain of purity.</b> It's time to bring it back to Rathazul.\n\n");
         doNext(roomStatic);
@@ -439,7 +378,7 @@ public class EbonLabyrinth extends DungeonAbstractContent {
     //selects an enemy and starts the encounter
     //'print' argument disables printing (used for night ambushes)
     private function enemySelector(print:Boolean = true):void {
-        var choices:Array = [displacerEL, darkSlimeEL, succubusEL, incubusEL, amogusEL, tentabeastEL, minotaurEL];
+        var choices:Array = [displacerEL, darkSlimeEL, succubusEL, incubusEL, amogusEL, tentabeastEL, minotaurEL, mindbreakerEL];
         choices[rand(choices.length)](print);
     }
     
@@ -457,21 +396,22 @@ public class EbonLabyrinth extends DungeonAbstractContent {
         startCombat(new DisplacerBeast(), true);
     }
     private function darkSlimeEL(print:Boolean = true):void {
-        if (player.isRace(Races.SLIME) || player.isRace(Races.MAGMASLIME) || player.isRace(Races.DARKSLIME)) {
+        if (player.isRace(Races.SLIME, 1, false) || player.isRace(Races.MAGMASLIME, 1, false) || player.isRace(Races.DARKSLIME, 1, false)) {
             if (!print) {
                 minotaurEL(false); //replace - slime won't attack another slime
                 return;
             }
-            spriteSelect(SpriteDb.s_darkgoogirlsprite_16bit);
+            spriteSelect(SpriteDb.s_darkgoogirlsprite);
             clearOutput();
-            outputText("You take the turn at the end of the corridor and run right into a dark slime. For a few second the both of you consider each other before the slime shrugs and simply asks.\n\n");
+            outputText("You take the turn at the end of the corridor and run right into a dark slime. For a few second both of you consider each other before the slime shrugs and simply asks.\n\n");
             outputText("\"<i>No luck finding fluids that way?</i>\"");
             outputText("You didn’t find any and if you did you would have pumped it out until it ran dry.\n\n");
             outputText("\"<i>Well darn, if you spot a fleshling do share!</i>\"");
             outputText("Well that was easy… you can only guess slimes don’t get much out of other slimes’ bodies. You proceed deeper into the labyrinth unhindered, though, you wish you indeed had found someone to milk the fluids off.\n\n");
+            doNext(playerMenu);
         }
         else {
-            spriteSelect(SpriteDb.s_darkgoogirlsprite_16bit);
+            spriteSelect(SpriteDb.s_darkgoogirlsprite);
             if (print) {
                 clearOutput();
                 outputText("As you wander into a new corridor, you come face to face with a purplish jelly-like woman. She giggles upon spotting you, her small, sphere-shaped core emitting an ominous light as she surges toward you with a gooey smile.\n\n");
@@ -515,6 +455,13 @@ public class EbonLabyrinth extends DungeonAbstractContent {
             outputText("Just as you turn the corner, you come face to face with a towering minotaur armed with a pair of huge battleaxes and equipped with a full plate armor. The beast smirks as his cock hardens in anticipation. It must’ve been months since he last fucked something!");
         }
         startCombat(new Minotaur(), true);
+    }
+    private function mindbreakerEL(print:Boolean = true):void {
+        if (print) {
+            clearOutput();
+            mindbreakerScene.encounter();
+        }
+        startCombat(new MindbreakerFemale(), true);
     }
 
     //==================================================================================================

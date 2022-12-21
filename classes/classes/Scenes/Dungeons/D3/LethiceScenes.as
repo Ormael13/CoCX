@@ -1,14 +1,14 @@
 package classes.Scenes.Dungeons.D3
 {
 import classes.BaseContent;
+import classes.CoC;
 import classes.EventParser;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
-import classes.Items.WeaponLib;
+import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.SceneLib;
-import classes.display.SpriteDb;
 import classes.StatusEffects;
+import classes.display.SpriteDb;
 
 public class LethiceScenes extends BaseContent
 	{
@@ -20,13 +20,14 @@ public class LethiceScenes extends BaseContent
 		public static const GAME_END_CONQUER_LOW:uint = 6;
 		public static const GAME_END_CONQUER_MED:uint = 7;
 		public static const GAME_END_CONQUER_HIGH:uint = 8;
+		public static const GAME_END_MINDBREAKER:uint = 9;
 		private function saveExport():void
 		{
 			clearOutput();
 			outputText("What would you like to do?");
 			menu();
 			//addButton(0, "Export", exportSaveData).hint("Export your save for possible use in CoC2.");
-			if (flags[kFLAGS.GAME_END] == GAME_END_CONSORT)
+			if (flags[kFLAGS.GAME_END] == GAME_END_CONSORT || flags[kFLAGS.GAME_END] == GAME_END_MINDBREAKER)
 				addButtonDisabled(1, "Continue", "Nuh-uh. Mareth is too fucked up to let you continue, and it's all due to the consequences you've made.");
 			else
 				addButton(1, "Continue", postEndingReturn).hint("Continue the game to complete anything you've missed.");
@@ -37,9 +38,8 @@ public class LethiceScenes extends BaseContent
 			clearOutput();
 			outputText("You may have defeated Lethice and completed the main story, but the fun isn't over! It's time for you to return to the game and begin a new era of Mareth.");
 			awardAchievement("Demon Slayer", kACHIEVEMENTS.STORY_FINALBOSS, true, true, false);
-			cleanupAfterCombat();
 			if (flags[kFLAGS.LETHICE_DEFEATED] <= 0) flags[kFLAGS.LETHICE_DEFEATED] = 1;
-			inventory.takeItem(weapons.L_WHIP, camp.returnToCampUseOneHour);
+			cleanupAfterCombat();
 		}
 		
 		private function quitToMenu():void {
@@ -100,6 +100,12 @@ public class LethiceScenes extends BaseContent
 			addButtonIfTrue(5, "Redemption", curry(redemption, hpVictory),
 				"Requires to have any lethicite shard, and purify Marae by shutting down the factory in a safe way.",
 				(player.hasKeyItem("Sheila's Lethicite") > 0) || (player.hasKeyItem("Stone Statue Lethicite") > 0) && flags[kFLAGS.MET_MARAE] == 1 && flags[kFLAGS.FACTORY_SHUTDOWN] == 1);
+			addButton(6, "Takeover", sorotityTakeover)
+				.hint("Take over her post with the followers of your mindbreaker cult.")
+				.disableIf(Mindbreaker.MindBreakerConvert < 200,
+					"Your mindbreaker cult needs more followers!")
+				.disableIf(Mindbreaker.MindBreakerQuest != Mindbreaker.QUEST_STAGE_ISMB,
+					"You have to be a mindbreaker for this one.");
 		}
 
 		private function plowHer():void
@@ -158,7 +164,7 @@ public class LethiceScenes extends BaseContent
 			outputText("\n\nWith a smirk, you grab Lethice by the hips and yank her off the throne once and for all, letting the well-fucked slut marinate in the pool of cum you’ve left on the floor. She gives a final gasp of unexpected pleasure, collapsing beside the throne with a mighty beat of her wings. Content in your final victory, you swing yourself into her throne in her stead, letting Lethice’s half-conscious head rest against your leg. The other demons look positively");
 			if (player.cor >= 66) outputText(" gleeful");
 			else outputText(" shocked");
-			outputText(" at what you’ve done, but none dare challenge the Champion in [hisHer] moment of victory.");
+			outputText(" at what you’ve done, but none dare challenge the Champion in [his] moment of victory.");
 			
 			outputText("\n\nAnd now, you’ve got a choice to make...");
 
@@ -193,11 +199,11 @@ public class LethiceScenes extends BaseContent
 			outputText("\n\nWith a contemptuous smirk, you push Lethice off her throne once and for all, letting the sodomized slut marinate in the pool of cum you’ve left on the floor. Content in your final victory, you swing yourself into her throne{ and prop your feet up on the Demon Queen’s prostrate back, smearing her face down in your seed}. The demons look positively");
 			if (player.cor >= 66) outputText(" gleeful");
 			else outputText(" shocked");
-			outputText(" at what you’ve done, but none dare challenge the Champion in [hisHer] moment of victory.");
+			outputText(" at what you’ve done, but none dare challenge the Champion in [his] moment of victory.");
 			
 			outputText("\n\nAnd now, you’ve got a choice to make...");
 
-			if (!recalling) player.sexReward("Default", "Dick", true, false);
+			if (!recalling) player.sexReward("no", "Dick");
 			theChoiceDunDunDun();
 		}
 
@@ -230,7 +236,7 @@ public class LethiceScenes extends BaseContent
 
 			if (!recalling) {
 				player.sexReward("vaginalFluids", "Dick");
-				player.sexReward("Default", "Dick", true, false);
+				player.sexReward("no", "Dick");
 			}
 			theChoiceDunDunDun();
 		}
@@ -441,7 +447,7 @@ public class LethiceScenes extends BaseContent
 			outputText("\n\nYou’d barely recognize her now, save the unchanging, statuesque form of her slender body. That, at least, remains unchanged - perhaps this is really how Lethice appeared even before her demonic transformation. With beauty like hers, then, she’d have had no reason to change her appearance.");
 			
 			outputText("\n\nWarily, you");
-			if (player.weapon == WeaponLib.FISTS) outputText(" flip a knife out of your pack");
+			if (player.weapon.isNothing) outputText(" flip a knife out of your pack");
 			else outputText(" take your [weapon]");
 			outputText(" and cut her bonds, trusting in the goddess’s power. With a soft, almost girlish moan, Lethice rolls onto her back and cradles her wrists, still reddened from the merciless grip of the rope. After a long moment, her eyes slowly open, groggily blinking away what seems like a hundred years of sleep. The once-golden irises, split like a drake’s, are now a soft, alluring golden brown, utterly human in shape and radiant with intelligence, compassion, and warmth. Traits so rare in Mareth that your breath catches in your throat a moment as you take in the change.");
 			
@@ -543,7 +549,7 @@ public class LethiceScenes extends BaseContent
 			clearOutput();
 
 			outputText("Stepping towards the infamous Demon Queen, you");
-			if (player.weapon == WeaponLib.FISTS) outputText(" raise your empty hands");
+			if (player.weapon.isNothing) outputText(" raise your empty hands");
 			else outputText(" set aside your [weapon]");
 			outputText(" and smile. Lethice cocks a bemused brow, crossing her legs and tracing her slender fingers around the rim of her Lethicite-filled goblet. None of her remaining minions move to stop you, allowing you to approach their queen, right to the foot of her throne.");
 			
@@ -551,7 +557,7 @@ public class LethiceScenes extends BaseContent
 			
 			outputText("\n\nNo, no. You have a very different speech in mind right about now. You sweep an arm back towards the defeated bodies of the Demon Queen’s most elite servants, her own personal guard and the very king of the minotaurs. Both");
 			if (flags[kFLAGS.DRIDERINCUBUS_KILLED] == 0 || flags[kFLAGS.MINOTAURKING_KILLED] == 0) outputText(" humiliated");
-			else outputText(" slain"); 
+			else outputText(" slain");
 			outputText(" by your hand back to back. Compared to you, they were nothing. Pathetic, really. Are they the best the mighty demons have to offer?");
 			
 			outputText("\n\nYour words seem to take the Demon Queen aback, actually leaving the haughty slut speechless for a moment. Keeping the momentum, you say that she clearly needs replacements for those useless weaklings. A mighty, beautiful queen like Lethice <i>deserves</i> someone who can properly defend her. Someone whose power is rival only to her own.");
@@ -667,17 +673,17 @@ public class LethiceScenes extends BaseContent
 			if (!player.isBiped()) outputText(" down");
 			else outputText(" to your knees");
 			outputText(",");
-			if (player.weapon != WeaponLib.FISTS) outputText(" your [weapon] clattering away across the stone");
+			if (!player.weapon.isNothing) outputText(" your [weapon] clattering away across the stone");
 			else outputText(" too weak to even ball your fists");
 			outputText(" as the victorious demon strides towards you.");
 			
-			outputText("\n\n<i>\"Ah, now <b>that</b> is what I like to see,\"</i> she purrs, lifting her arms triumphantly to the gibbering host of demons still crowding around the throne room. <i>\"Another would-be savior on [hisHer] knees before me! Once again,\"</i> she sneers, turning her gaze down to you, her demonic heels clacking one after the other on the cold floor, <i>\"we see that nothing... no one... can stand against me.\"</i>");
+			outputText("\n\n<i>\"Ah, now <b>that</b> is what I like to see,\"</i> she purrs, lifting her arms triumphantly to the gibbering host of demons still crowding around the throne room. <i>\"Another would-be savior on [his] knees before me! Once again,\"</i> she sneers, turning her gaze down to you, her demonic heels clacking one after the other on the cold floor, <i>\"we see that nothing... no one... can stand against me.\"</i>");
 			
 			outputText("\n\nLethice reaches down, cupping your chin with her long-nailed fingers and tilting your head up. She’s not forceful, more like a mother disappointed in her child, forcing you to confront your misdeeds. In her churchy outfit, you could easily mistake her for one of the priestesses that would teach you and the other children back in Ingnam, save for the tremendous wings and curling horns. She must recognize the look you give her, and she smiles almost beatifically. Beautifully.");
 			
 			outputText("\n\n<i>\"So powerful, so self-righteous... and here you are, kneeling before me like so many before you. Still, I have to give you credit, Champion. You got so much further than most: I almost broke a sweat breaking you.");
 			if (monster.lust < 50 && monster.HP > (monster.maxHP() * 0.5)) outputText(" Almost.");
-			outputText("\"</i> She licks her lips, and gives your chin a sharp release. <i>\"I think you deserve a special... reward... for your efforts, Champion. Oh, except that’s not what you are anymore, is it? A Champion doesn’t bow down, hoping a pretty little demon doesn’t rip [hisHer] soul out, does [he]? No, that’s something I’d expect my dog to do. Is that what you are: a dog?\"</i>");
+			outputText("\"</i> She licks her lips, and gives your chin a sharp release. <i>\"I think you deserve a special... reward... for your efforts, Champion. Oh, except that’s not what you are anymore, is it? A Champion doesn’t bow down, hoping a pretty little demon doesn’t rip [his] soul out, does [he]? No, that’s something I’d expect my dog to do. Is that what you are: a dog?\"</i>");
 			
 			outputText("\n\nYou look away from Lethice, trying");
 			if (hpVictory) outputText(" to hide just how turned on she’s left you... how close you are to orgasm, just in need of her lurid touch");
@@ -860,7 +866,7 @@ public class LethiceScenes extends BaseContent
 		{
 			clearOutput();
 			outputText("<b>Weeks later...</b>\nThey had it. The damned bastards had it. Syrena, the head researcher had figured out how to open a stable portal months ago, but for whatever reason, she kept it from Lethice. There’s a shortage of evidence about what she was actually scheming, but you’d guess she was planning to take a cadre of loyal demons to an untainted plane and set herself up as a queen.");
-			outputText("\n\nNo room for loyalty among demons, you suppose. Still, with the information in these books, you can go home. Taking them back to your camp, you work the rituals on the portal to Ingnam{, assisted by your follower{s}}, and before you know it, the portal’s hazy mists resolve into a perfectly circle opening, one that leads to a familiar cave.");
+			outputText("\n\nNo room for loyalty among demons, you suppose. Still, with the information in these books, you can go home. Taking them back to your camp, you work the rituals on the portal to Ingnam" + (camp.followersCount() > 0 ? ", assisted by your follower" + (camp.followersCount() > 1 ? "s" : "") : "") + ", and before you know it, the portal’s hazy mists resolve into a perfectly circular opening, one that leads to a familiar cave.");
 			outputText("\n\nWill you seek vengeance or justice or with your return?");
 
 			menu();
@@ -895,7 +901,7 @@ public class LethiceScenes extends BaseContent
 			// 9999 no idea what this is keyed off
 			// {, vivacious}
 			outputText(" warrior. With a seemingly infallable champion there to defend it");
-            if (SceneLib.camp.companionsCount() > 0) outputText(" to say nothing of " + player.mf("his", "her") + " bizarre friends");
+            if (SceneLib.camp.companionsCount() > 0) outputText(" to say nothing of [his] bizarre friends");
             outputText(", Ingnam prospered. The tiny village soon grew into a bustling town, and later a city.");
 			outputText("\n\nWhen age finally claimed the unexpected " + player.mf("hero", "heroine") +", a stone statue of immense proportions was erected so that future generations could forever live under the protection of their greatest hero.");
 			
@@ -1155,6 +1161,22 @@ public class LethiceScenes extends BaseContent
 
 				flags[kFLAGS.GAME_END] = GAME_END_CONQUER_HIGH;
 			}
+			saveExport();
+		}
+
+		public function sorotityTakeover():void {
+			clearOutput();
+			outputText("You kick Lethice to the ground, walking amongst the demons assembled in the throne room who now look at you with a sentiment they thought they had long-lost… fear. Standing in the middle of the room you smirk as you declare your intentions.\n"
+				+ "\n"
+				+ "”<i>Lethice, your reign is over and for the best. You demons thought that we were forgotten… extinct. You pushed us to the edges of the world, hiding from view, but we survived and we multiplied. You might be immortal and soulless, but don’t think for ONE second that we can’t infest your bodies, let alone change you into obedient little sisters and brothers. Sister Kaerb-Dnim and I will now bring this world into a new era of perfect depravity, starting with this fortress.</i>”\n"
+				+ "\n"
+				+ "You launch a telepathic call to tell your sisters waiting outside to move in, according to the plan hearing a quick mental response. Lethice watches you in horror as the sorority enters the room and proceeds to rape the demons inside one by one. The demons, being creatures of lust, give in quickly and before long, nearly everyone in the fortress is either a servant or a new mindbreaker. You sit on Lethice's throne, your first mission finally accomplished as the last demon falls prey to the sorority. You ponder your next move having finally accomplished what you came to Mareth for, and realize you have a new mission… every single creature in this world and beyond shall know the enlightenment of your sister’s tentacles! \n"
+				+ "\n"
+				+ "You turn your eyes to the few remaining pockets of purity in this world. You are amazed how gullible the people of Tel’Adre are, you thought by now they would check the corruption of people each time they enter. While the town wards were created to repel the demonic forces, the center of the city is quite vulnerable to corruptive influence and you plot to secretly corrupt the minds of the citizens from the inside to the ignorance of the watch. Not so long after, Tel'Adre is ready for assimilation as the townsfolk fight against each other. Amidst the chaos, you single-handedly take down the mage council that kept the city out of reach and you let your sisters enter, enslaving the city to the will of the sorority. You watch with glee as the townsfolk scream, first in horror, then in pleasure, their bodies and minds being warped into new, perfect forms. For many years, you and the sorority scour Mareth of all life. Infesting everything in your path until even the gods themselves yields to your combined, unstoppable might.\n"
+				+ "\n"
+				+ "Having conquered this world, now an eternal carnal pit, you turn your gaze back to the portal… back towards Ingnam. You lick your lips in perverted anticipation as you prepare your next unholy crusade.\n");
+			outputText("\n\n<b>THE END</b>");
+			flags[kFLAGS.GAME_END] = GAME_END_MINDBREAKER;
 			saveExport();
 		}
 		

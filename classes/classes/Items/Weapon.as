@@ -8,24 +8,43 @@ import classes.GlobalFlags.kFLAGS;
 import classes.PerkLib;
 import classes.Scenes.SceneLib;
 
-public class Weapon extends Useable //Equipable
+import coc.view.IconLib;
+
+public class Weapon extends Equipable
 	{
 		private var _verb:String;
 		private var _attack:Number;
 		private var _perk:String;
 		private var _type:String;
-		private var _name:String;
+		private var _perks:Array;
+		
+		override public function get category():String {
+			return CATEGORY_WEAPON_MELEE;
+		}
 		
 		public function Weapon(id:String, shortName:String, name:String,longName:String, verb:String, attack:Number, value:Number = 0, description:String = null, perk:String = "", type:String = "") {
-			super(id, shortName, longName, value, description);
-			this._name = name;
+			super(id, shortName, name, longName, value, description);
 			this._verb = verb;
 			this._attack = attack;
 			this._perk = perk;
+			this._perks = perk ? perk.split(", ") : null;
 			this._type = type;
 		}
 		
-		public function get verb():String { return _verb; }
+		
+		override public function get iconId():String {
+			return IconLib.pickIcon(ownIconId, "I_GenericWeapon_"+type, super.iconId);
+		}
+		
+		private static const SLOTS:Array = [SLOT_WEAPON_MELEE];
+		override public function slots():Array {
+			return SLOTS; // don't recreate every time
+		}
+		
+		public function get verb():String {
+			if (hasSpecial(WP_STAFF) && game.player.hasPerk(PerkLib.StaffChanneling)) return 'shot';
+			return _verb;
+		}
 		
 		public function get attack():Number { return _attack; }
 		
@@ -33,90 +52,67 @@ public class Weapon extends Useable //Equipable
 
 		public function get type():String { return _type; }
 		
-		public function get name():String { return _name; }
-		
 		public function get descBase():String { return _description; }
 		
-		override public function get description():String {
-			var desc:String = descBase;
-			//Type
-			desc += "\n\nType: Melee Weapon";
+		override public function effectDescriptionParts():Array {
+			var list:Array = super.effectDescriptionParts();
+			// Type
+			list.push([10,"Type: Melee Weapon"]);
 			if (type != "") {
-				desc += "\nWeapon Class: " + type;
+				list.push([15, "Weapon Class: " + type]);
 			}
-			if (perk != "") {
-				desc += "\nSpecials: " + specInterpret(perk);
+			// Attack
+			list.push([20,"Attack: "+attack]);
+			// Specials
+			if (_perks) {
+				list.push([60, "Specials: " + specInterpret()]);
 			}
-			/*else if (verb.indexOf("whip") >= 0) desc += "(Whip)";
-			else if (verb.indexOf("punch") >= 0) desc += "(Gauntlet)";
-			else if (verb == "slash" || verb == "keen cut") desc += "(Sword)";
-			else if (verb == "stab") desc += "(Dagger)";
-			else if (verb == "smash") desc += "(Blunt)";*/
-			//Attack
-			desc += "\nAttack: " + String(attack);
-			//Value
-			desc += "\nBase value: " + String(value);
-			return desc;
+			return list;
 		}
 
-		public function specInterpret(perkList:String = ""):String{
-			var temp:Array = perkList.split(", ");
-			var specTrans:Array = []
-			var result:String = ""
-			specTrans.push("Stun10", "+10% Stun");
-			specTrans.push("Stun15", "+15% Stun");
-			specTrans.push("Stun20", "+20% Stun");
-			specTrans.push("Stun25", "+25% Stun");
-			specTrans.push("Stun30", "+30% Stun");
-			specTrans.push("Stun40", "+40% Stun");
-			specTrans.push("Stun50", "+50% Stun");
-			specTrans.push("Bleed10", "+10% Bleed");
-			specTrans.push("Bleed25", "+25% Bleed");
-			specTrans.push("Bleed45", "+45% Bleed");
-			specTrans.push("Bleed100", "+100% Bleed");
-			specTrans.push("LGWrath", "Low Grade Wrath");
-			specTrans.push("MGWrath", "Mid Grade Wrath");
-
-			for each (var spec:String in temp){
-				if (specTrans.indexOf(spec) >= 0){
-					result += specTrans[specTrans.indexOf(spec) + 1];
-				}
-				else{
-					result += spec;
-				}
-				result += ", ";
-			}
-			return result.slice(0, -2);
+		public function hasSpecial(perk:String):Boolean {
+			return _perks && _perks.indexOf(perk) >= 0;
 		}
 		
-		override public function useText():void {
-			outputText("You equip " + longName + ".  ");
+		public function specInterpret():String{
+			var result:String = "";
+			
+			for (var i:int = 0; i < _perks.length; i++) {
+				var spec:String = _perks[i];
+				if (i > 0) result += ", ";
+				result += WEAPON_PERK_NAMES[spec] || spec;
+			}
+			return result;
 		}
 		
-		override public function canUse():Boolean {
-			if ((perk == "Large" && game.player.shield != ShieldLib.NOTHING && !game.player.hasPerk(PerkLib.GigantGrip)) || (perk == "Massive" && game.player.shield != ShieldLib.NOTHING)) {
-				outputText("Because this weapon requires the use of two hands, you have unequipped your shield. ");
-				SceneLib.inventory.unequipShield();
+		override public function canEquip(doOutput:Boolean):Boolean {
+			if ((perk == WP_LARGE && !game.player.shield.isNothing && !game.player.hasPerk(PerkLib.GigantGrip)) || (perk == WP_MASSIVE && !game.player.shield.isNothing)) {
+				if (doOutput) {
+					outputText("Because this weapon requires the use of two hands, you have unequipped your shield. ");
+					SceneLib.inventory.unequipShield();
+				}
 				return false;
 			}
-			else if ((perk == "Dual Large" || perk == "Dual" || perk == "Dual Small") && game.player.shield != ShieldLib.NOTHING) {
-				outputText("Because those weapons requires the use of two hands, you have unequipped your shield. ");
-				SceneLib.inventory.unequipShield();
+			if ((perk == WP_DUAL_LARGE || perk == WP_DUAL || perk == WP_DUAL_SMALL) && !game.player.shield.isNothing) {
+				if (doOutput) {
+					outputText("Because those weapons requires the use of two hands, you have unequipped your shield. ");
+					SceneLib.inventory.unequipShield();
+				}
 				return false;
 			}
-			else if (game.player.hasPerk(PerkLib.Rigidity)) {
-				outputText("You would very like to equip this item but your body stiffness prevents you from doing so.");
+			if (game.player.hasPerk(PerkLib.Rigidity)) {
+				if (doOutput) outputText("You would very like to equip this item but your body stiffness prevents you from doing so.");
 				return false;
 			}
 			return true;
 		}
 		
-		public function playerEquip():Weapon { //This item is being equipped by the player. Add any perks, etc. - This function should only handle mechanics, not text output
+		override public function beforeEquip(doOutput:Boolean):Equipable {
 			var temp:Array = perk.split(", ");
-			var temp2:Array = ["Large", "Massive", "Dual", "Dual Large", "Dual Small"]
+			var temp2:Array = [WP_LARGE, WP_MASSIVE, WP_DUAL, WP_DUAL_LARGE, WP_DUAL_SMALL]
 			for each (var temp3:String in temp2){
-				if (temp.indexOf(temp3) >= 0 && game.player.shield != ShieldLib.NOTHING){
-					if (temp3 == "Large") {
+				if (temp.indexOf(temp3) >= 0 && !game.player.shield.isNothing){
+					if (temp3 == WP_LARGE) {
 						if (game.player.hasPerk(PerkLib.GigantGrip)){
 								break;
 							}
@@ -132,14 +128,9 @@ public class Weapon extends Useable //Equipable
 			|| (game.player.shieldPerk == "Massive" && game.player.shield != ShieldLib.NOTHING && !game.player.hasPerk(PerkLib.GigantGrip))) {
 				SceneLib.inventory.unequipShield();
 			}*/
-			if (game.flags[kFLAGS.FERAL_COMBAT_MODE] == 1) game.flags[kFLAGS.FERAL_COMBAT_MODE] = 0;
-			return this;
+			if (game.flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && !game.player.isFeralCombat()) game.flags[kFLAGS.FERAL_COMBAT_MODE] = 0;
+			
+			return super.beforeEquip(doOutput);
 		}
-		
-		public function playerRemove():Weapon { //This item is being removed by the player. Remove any perks, etc. - This function should only handle mechanics, not text output
-			return this;
-		}
-		
-		public function removeText():void {} //Produces any text seen when removing the armor normally
 	}
 }

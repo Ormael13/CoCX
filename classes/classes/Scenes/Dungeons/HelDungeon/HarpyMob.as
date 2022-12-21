@@ -53,11 +53,11 @@ public class HarpyMob extends Monster
 			if(player.hasPerk(PerkLib.LuststickAdapted)) outputText("doing relatively little thanks to your adaptation");
 			else {
 				outputText("sending shivers of lust up your spine");
-				player.dynStats("lus", 5);
-				if(player.hasCock()) player.dynStats("lus", 15);
+				player.takeLustDamage(5, true);
+				if(player.hasCock()) player.takeLustDamage(15, true);
 			}
 			outputText(".");
-			player.dynStats("lus", 10);
+			player.takeLustDamage(10, true);
 		}
 
 		override protected function performCombatAction():void
@@ -110,7 +110,6 @@ public class HarpyMob extends Monster
 			this.bonusLust = 167;
 			this.lust = 20;
 			this.lustVuln = .2;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 32;
 			this.gems = rand(25)+140;
 			this.additionalXP = 50;

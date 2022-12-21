@@ -11,6 +11,7 @@ package classes.Perks
 
 		override public function desc(params:PerkClass = null):String
 		{
+			if (!player || !params) return _desc;
 			return "Increases fertility by " + params.value2 + "% and cum production by " + params.value1 + "mLs.";
 		}
 

@@ -105,7 +105,7 @@ public class ChameleonGirl extends Monster
 		}
 
 		/**
-		 * Pairs of skinTone/skinAdj
+		 * Pairs of bodyColor/skinAdj
 		 */
 		private const SKIN_VARIATIONS:Array = [
 			["red", "black"],
@@ -146,7 +146,6 @@ public class ChameleonGirl extends Monster
 			this.bonusLust = 133;
 			this.lust = 30;
 			this.lustVuln = .25;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 28;
 			this.gems = 50 + rand(60);
 			this.drop = NO_DROP;

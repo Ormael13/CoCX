@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.Areas.Caves 
+package classes.Scenes.Areas.Caves
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -14,7 +14,7 @@ import classes.internals.*;
 use namespace CoC;
 
 	public class DisplacerBeast extends Monster
-	{	
+	{
 		public function moveDisplacerBeastPhaseStrike():void {
 			outputText("The displacer beast blinks out and appears right behind you as it begins mauling you with its claws.");
             for (var i:int = 1; i < 4; ++i) {
@@ -52,7 +52,7 @@ use namespace CoC;
 			return str;
 		}
 		
-		public function DisplacerBeast() 
+		public function DisplacerBeast()
 		{
 			if (inDungeon) { //EL check
                 var mod:int = SceneLib.dungeons.ebonlabyrinth.enemyLevelMod;
@@ -89,7 +89,7 @@ use namespace CoC;
 			this.tallness = 72;
 			this.hips.type = Hips.RATING_CURVY;
 			this.butt.type = Butt.RATING_LARGE + 2;
-			this.skinTone = "";
+			this.bodyColor = "";
 			this.hairColor = "";
 			this.hairLength = 9;
 			this.weaponName = "claws";
@@ -98,7 +98,6 @@ use namespace CoC;
 			this.wrath = 130;
 			this.lustVuln = .35;
 			this.lust = 30;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.drop = new ChainedDrop().
 					add(useables.EBONBLO,1/20).
 					add(consumables.D_FRUIT,0.7);

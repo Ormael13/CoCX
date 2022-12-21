@@ -7,15 +7,40 @@ import classes.Race;
 import classes.VaginaClass;
 
 public class WendigoRace extends Race {
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Human",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Human",
+        /*Eyes*/		"Human",
+        /*Face*/		"Human",
+        /*Gills*/		"Human",
+        /*Hair*/		"Human",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Human",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Human",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Human"];
+
 	public function WendigoRace(id:int) {
-		super("Wendigo", id);
+		super("Wendigo", id, []);//RaceBody);
 	}
 	
 	public override function setup():void {
 		
 		addScores()
-				.hairColor("silver-white", +1)
-				.skinCoatColor("snow white", +1)
+				.hairColor1("silver-white", +1)
+				.furColor1("snow white", +1)
 				.eyeType(Eyes.DEAD, +1)
 				.eyeColor("spectral blue", +1)
 				.tongueType(Tongue.RAVENOUS_TONGUE, +1)
@@ -40,7 +65,7 @@ public class WendigoRace extends Race {
 					"str.mult": +0.70,
 					"tou.mult": +0.70,
 					"int.mult": +0.60,
-					"wis.mult": +0.50,
+					"wis.mult": -0.50,
 					"lib.mult": +0.50,
 					"sens": +50
 				})
@@ -48,12 +73,12 @@ public class WendigoRace extends Race {
 		
 		buildTier(25, "great wendigo")
 				.buffs({
-					"str.mult": +0.70,
-					"tou.mult": +0.70,
-					"spe.mult": +0.60,
-					"wis.mult": +0.50,
-					"lib.mult": +0.50,
-					"sens": +50
+					"str.mult": +1.60,
+					"tou.mult": +1.40,
+					"int.mult": +0.85,
+					"wis.mult": -0.50,
+					"lib.mult": +1.25,
+					"sens": +85
 				})
 				.end();
 	}

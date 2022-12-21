@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -445,7 +445,7 @@ use namespace CoC;
 			SceneLib.auroraFollower.AuroraWonSparring();
 		}
 		
-		public function Aurora() 
+		public function Aurora()
 		{
 			if (flags[kFLAGS.AURORA_LVL] == 1) {
 				initStrTouSpeInte(10, 300, 30, 80);
@@ -603,19 +603,18 @@ use namespace CoC;
 			this.tallness = 108;//9 feet
 			this.hips.type = Hips.RATING_CURVY + 4;
 			this.butt.type = Butt.RATING_EXPANSIVE + 1;
-			this.skinTone = "turquoise";
+			this.bodyColor = "turquoise";
 			this.hairColor = "navy blue";
 			this.hairLength = 20;
 			this.weaponName = "claws";
 			this.weaponVerb = "claw-slash";
 			this.armorName = "stone skin";
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.gems = 0;
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.EnemyConstructType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.Sentience, 0, 0, 0, 0);
 			this.createPerk(PerkLib.JobSoulCultivator, 0, 0, 0, 0);
-			this.createPerk(PerkLib.BodyCultivator, 0, 0, 0, 0);
+			this.createPerk(PerkLib.FleshBodyApprenticeStage, 0, 0, 0, 0);
 			this.createPerk(PerkLib.UnlockArdor, 0, 0, 0, 0);
 			this.createPerk(PerkLib.JobBeastWarrior, 0, 0, 0, 0);
 			if (flags[kFLAGS.AURORA_LVL] >= 2) {
@@ -627,60 +626,60 @@ use namespace CoC;
 				this.createPerk(PerkLib.BasicSelfControl, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.AURORA_LVL] >= 3) {
-				this.createPerk(PerkLib.FleshBodyApprenticeStage, 0, 0, 0, 0);
-				this.createPerk(PerkLib.ClawTraining, 0, 0, 0, 0);
+				this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
+				this.createPerk(PerkLib.WeaponClawsClawTraining, 0, 0, 0, 0);
 				this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.AURORA_LVL] >= 4) {
 				this.createPerk(PerkLib.SoulPersonage, 0, 0, 0, 0);
 				this.createPerk(PerkLib.FeralArmor, 0, 0, 0, 0);
-				this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
+				this.createPerk(PerkLib.HalfStepToImprovedSelfControl, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.AURORA_LVL] >= 5) {//lvl 25
 				this.createPerk(PerkLib.SoulWarrior, 0, 0, 0, 0);
-				this.createPerk(PerkLib.ExtraClawAttack, 0, 0, 0, 0);
-				this.createPerk(PerkLib.HalfStepToImprovedSelfControl, 0, 0, 0, 0);
+				this.createPerk(PerkLib.WeaponClawsExtraClawAttack, 0, 0, 0, 0);
+				this.createPerk(PerkLib.GoliathI, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.AURORA_LVL] >= 6) {//lvl 31
 				this.createPerk(PerkLib.HclassHeavenTribulationSurvivor, 0, 0, 0, 0);
 				this.createPerk(PerkLib.SoulSprite, 0, 0, 0, 0);
-				this.createPerk(PerkLib.GoliathI, 0, 0, 0, 0);
+				this.createPerk(PerkLib.FleshBodyWarriorStage, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.AURORA_LVL] >= 7) {//lvl 37
-				this.createPerk(PerkLib.FleshBodyWarriorStage, 0, 0, 0, 0);
-				this.createPerk(PerkLib.MultiClawAttack, 0, 0, 0, 0);
+				this.createPerk(PerkLib.EpicToughness, 0, 0, 0, 0);
+				this.createPerk(PerkLib.WeaponClawsMultiClawAttack, 0, 0, 0, 0);
 				this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.AURORA_LVL] >= 8) {//lvl 43
 				this.createPerk(PerkLib.SoulScholar, 0, 0, 0, 0);
-				this.createPerk(PerkLib.EpicToughness, 0, 0, 0, 0);
+				this.createPerk(PerkLib.CheetahI, 0, 0, 0, 0);
 				this.createPerk(PerkLib.ImprovedSelfControl, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.AURORA_LVL] >= 9) {//lvl 49
-				this.createPerk(PerkLib.SoulElder, 0, 0, 0, 0);
-				this.createPerk(PerkLib.ClawingFlurry, 0, 0, 0, 0);
-				this.createPerk(PerkLib.CheetahI, 0, 0, 0, 0);
+				this.createPerk(PerkLib.SoulGrandmaster, 0, 0, 0, 0);
+				this.createPerk(PerkLib.WeaponClawsClawingFlurry, 0, 0, 0, 0);
+				this.createPerk(PerkLib.EpicSpeed, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.AURORA_LVL] >= 10) {//lvl 55
 				this.createPerk(PerkLib.GclassHeavenTribulationSurvivor, 0, 0, 0, 0);
-				this.createPerk(PerkLib.SoulExalt, 0, 0, 0, 0);
-				this.createPerk(PerkLib.EpicSpeed, 0, 0, 0, 0);
+				this.createPerk(PerkLib.SoulElder, 0, 0, 0, 0);
+				this.createPerk(PerkLib.FleshBodyElderStage, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.AURORA_LVL] >= 11) {//lvl 61
-				this.createPerk(PerkLib.FleshBodyElderStage, 0, 0, 0, 0);
+				//this.createPerk(PerkLib., 0, 0, 0, 0);
 				this.createPerk(PerkLib.EpicStrength, 0, 0, 0, 0);
 				this.createPerk(PerkLib.HalfStepToAdvancedSelfControl, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.AURORA_LVL] >= 12) {//lvl 67
-				this.createPerk(PerkLib.SoulOverlord, 0, 0, 0, 0);
+				this.createPerk(PerkLib.SoulExalt, 0, 0, 0, 0);
 				this.createPerk(PerkLib.EpicLibido, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.AURORA_LVL] >= 13) {//lvl 73
-				this.createPerk(PerkLib.SoulTyrant, 0, 0, 0, 0);
+				this.createPerk(PerkLib.SoulOverlord, 0, 0, 0, 0);
 				this.createPerk(PerkLib.AdvancedSelfControl, 0, 0, 0, 0);
 			}
 			//prestige job sentinel? next step after epic tou/spe/str/lib?
 			checkMonster();
-		}	
+		}
 	}
 }

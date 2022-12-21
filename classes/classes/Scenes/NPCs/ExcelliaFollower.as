@@ -4,11 +4,10 @@
  */
 package classes.Scenes.NPCs 
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-    import classes.display.SpriteDb;
-	
-	public class ExcelliaFollower extends NPCAwareContent implements TimeAwareInterface
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+
+public class ExcelliaFollower extends NPCAwareContent implements TimeAwareInterface
 	{
 		public var pregnancy:PregnancyStore;
 		
@@ -52,7 +51,6 @@ public function fixed():Boolean {
 } 
 
 public function ExcelliaPathChoice():void {
-	//spriteSelect(SpriteDb.s_electra);
 	clearOutput();
 	if (followerShouldra()) {
 		outputText("When you arrive back at camp you notice the cow-queen Excellia sitting patiently by your bedroll, seemingly waiting for your return. Approaching carefully, she gently opens her eyes and reveals to you that Shouldra is still driving the Queen.\n\n");
@@ -68,7 +66,6 @@ public function ExcelliaPathChoice():void {
 	doNext(ExcelliaPathChoice2);
 }
 public function ExcelliaPathChoice2():void {
-	//spriteSelect(SpriteDb.s_electra);
 	clearOutput();
 	outputText("For the past few hours you've been sitting "+(flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 ? "in a chair":"inside your tent")+" waiting for the ex-cow queen to wake up. You find yourself dozing off a bit. Just as you're about to close your eyes you hear Excellia stirring. You look over to see the cow sitting up. She looks around somewhat dazed and confused, unsure of where she is. Her yellow eyes fall onto you but they appear glazed over and vaguely aware.\n\n");
 	outputText("\"<i>" + player.mf("Lord", "Lady") + "…? My... " + player.mf("Lord", "Lady") + "… Is it time?</i>\"\n\n");
@@ -83,7 +80,6 @@ public function ExcelliaPathChoice2():void {
 	addButton(3, "Make Slave", ExcelliaPathChoiceMakeSlave);
 }
 public function ExcelliaPathChoiceFixHer():void {
-	//spriteSelect(SpriteDb.s_electra);
 	clearOutput();
 	outputText("You shake your head, chasing away the thought. While it would probably feel more than amazing to take the ex-cow queen in this manner, it would probably do more harm than good at this given point and you let her know that much by getting up and turning her back around. She looks up at you, confused as to why you didn't take her. You explain to her that she doesn't have to service you. Her confusion seems to deepen.\n\n");
 	outputText("\"<i>I… don't understand… You don't want me…?</i>\"\n\n");
@@ -101,7 +97,6 @@ public function ExcelliaPathChoiceFixHer():void {
 	doNext(camp.returnToCampUseFourHours);
 }
 public function ExcelliaPathChoiceMakeSlave():void {
-	//spriteSelect(SpriteDb.s_electra);
 	clearOutput();
 	if (!recalling) outputText("<b>New scene is unlocked in 'Recall' menu!</b>\n\n");
 	outputText("It’s hard to resist a cowslut presenting herself to you begging to be fucked and you’re more willing to oblige.\n\n");
@@ -148,7 +143,6 @@ public function ExcelliaPathChoiceMakeSlave():void {
 }
 
 public function ExcelliaCampMainMenuFixHer():void {
-	//spriteSelect(SpriteDb.s_electra);
 	clearOutput();
 	if (pregnancy.isPregnant && pregnancy.incubation == 0) {
 		ExcelliaPoopsBabies1();
@@ -208,7 +202,6 @@ public function ExcelliaCampMainMenuFixHer2():void {
 	else addButton(14, "Back", camp.campFollowers);
 }
 public function ExcelliaCampFixHerAppearance():void {
-	//spriteSelect(SpriteDb.s_electra);
 	clearOutput();
 	outputText("Excellia is a 7 feet 2 inches tall " + humanCow("human female", "cowgirl")+ ", formerly the cow queen to the Minotaur King. Her smooth skin is light brown in color"+(flags[kFLAGS.EXCELLIA_LA_BOVA] == 2 ? " underneath red fur":"")+". She has a "+(flags[kFLAGS.EXCELLIA_LA_BOVA] == 2 ? "cow like":"human")+" face. Her eyes are yellow. She has a set of pouty lips coated in golden lipstick. She has a pair of "+ (flags[kFLAGS.EXCELLIA_HUMMUS_OR_SUCCUBUS_MILK] == 1 ? "human shaped" : "cow like") + " ears pierced with gold hoop earrings, ");
 	outputText("parting her long curly red hair with yellow highlights. A gold jewel encrusted tiara sits on her head. "+ humanCow("A pair of short bovine horns decorated with gold horn rings stick up from her head. They're not as long as minotaur horns but much longer than cow horn. ","") +"Strapped around her neck is a gold jewel encrusted cowbell. She ");
@@ -227,7 +220,6 @@ public function ExcelliaCampFixHerAppearance():void {
 	addButton(14, "Back", ExcelliaCampMainMenuFixHer);
 }
 public function ExcelliaCampFixHerHerself():void {
-	//spriteSelect(SpriteDb.s_electra);
 	clearOutput();
 	outputText("You're curious to know as to what the former cow queen was like before she became the Minotaur King's slave. ");
 	if (fixed()) {
@@ -254,13 +246,11 @@ public function ExcelliaCampFixHerHerself():void {
 	doNext(camp.returnToCampUseOneHour);
 }
 public function ExcelliaCampFixHerTalk():void {
-	//spriteSelect(SpriteDb.s_electra);
 	clearOutput();
 	outputText("You just wanna make some small talk with the [exc race]. Excellia seems more than happy to talk. The two of you idly chat about your adventures and conquests across Mareth. After about an hour, you think it's about time to be on your way. You say your goodbyes to Excellia before heading off.\n\n");
 	doNext(camp.returnToCampUseOneHour);
 }
 public function ExcelliaCampFixHerGetMilk():void {
-	//spriteSelect(SpriteDb.s_electra);
 	clearOutput();
 	outputText("You tell the ex-cow queen that you could really use a drink. She giggles then pushes her huge tits together, causing a small trickle of her sweet, creamy milk to dribble out.\n\n");
 	if (fixed()) outputText("\"<i>Oh, [name]... I will gladly share my milk with you. I could use a little relief myself honestly.</i>\"\n\n");
@@ -271,7 +261,6 @@ public function ExcelliaCampFixHerGetMilk():void {
 	addButton(3, "Bottle", ExcelliaCampFixHerGetMilkBottle);
 }
 public function ExcelliaCampFixHerGetMilkDrink():void {
-	//spriteSelect(SpriteDb.s_electra);
 	clearOutput();
 	outputText("Excellia plops down on the ground in front of you with a smile, beckoning you to come. With a wide grin on your face you seat yourself, noting her nipples are leaking even more. They're too tempting not to play with. You reach up to squeeze her impressive bosom, marveling at how big and round they are. They're perky and show no sign of sagging whatsoever. You lean in to kiss her seeping nipple, sucking the teat in between your lips and expertly rolling and sliding it between them, tickling its tip and savoring her sweet, warm and creamy milk. You use your hand to pinch and tug at her other free nipple.\n\n");
 	outputText("The [exc race] blushes and [exc moo]s as you play with her nipples. You start to suckle in earnest as your other hand reaches down to rub over her slick nether lips and plump clitty. Excellia squirms while you suckle and tease, delighting in the pleasure you are giving her as the delicious sweet milk cascades down your thirsty throat. Her bountiful breasts and the wonderful taste of her milk invigorates you. You don’t think you could ever get tired of the creamy, refreshing beverage. The soft [exc moo]s that accompanies each suckle and the soft caresses on your body only enhances the whole experience.\n\n");
@@ -280,37 +269,45 @@ public function ExcelliaCampFixHerGetMilkDrink():void {
 	if (fixed()) outputText("\"<i>Phew… W-Wow [name]. That was amazing. I do hope that you got your fill!</i>\"\n\n");
 	else outputText("\"<i>Oooo… T-Thank you for making use of me my " + player.mf("Lord", "Lady") + ". I hope it was to your liking.</i>\"\n\n");
 	outputText("You pat your full stomach telling her that you sure did. You stretch, feeling amazing. Excellia giggles as she gets up and kisses your cheek, happy that you enjoyed her milk. You thank her then head off feeling better than ever.\n\n");
-	HPChange((((player.level * 20) + 25) * 2 * (1 + player.newGamePlusMod())), true);
-	dynStats("lus", 15);
-	fatigue(-200);
-	player.refillHunger(100);
+	ExcelliaMilkEffects();
 	doNext(camp.returnToCampUseOneHour);
 }
+
+public function ExcelliaMilkEffects():void {
+	HPChange((((player.level * 20) + 25) * 2 * (1 + player.newGamePlusMod())), true);
+	dynStats("lus", 15, "scale", false);
+	fatigue(-200);
+	player.refillHunger(100);
+}
+
 public function ExcelliaCampFixHerGetMilkBottle():void {
-	//spriteSelect(SpriteDb.s_electra);
 	clearOutput();
 	outputText("You could use a delicious creamy beverage on the go. You pull out a glass bottle then hold it under Excellia's tits. She grabs her nipples then starts milking herself. A steady stream of her milk pours into the bottle until it's filled to the brim. You cork it then stash it away, thanking the [exc race]. <b>You obtained Excellia's Milk.</b>\n\n");
 	inventory.takeItem(consumables.EXCMILK, ExcelliaCampMainMenuFixHer);
 	cheatTime(1/4);
 }
 public function ExcelliaCampFixHerGiveItems():void {
-	//spriteSelect(SpriteDb.s_electra);
 	clearOutput();
 	if (fixed()) outputText("\"<i>Hm? You want to give me something [name]?</i>\"\n\n");
 	else outputText("\"<i>Oh? Does my " + player.mf("Lord", "Lady") + " have something for me?</i>\"\n\n");
 	menu();
+
 	if (flags[kFLAGS.EXCELLIA_MAN_UP_BEER] < 4)
-        addButtonIfTrue(0, "ManUpBeer", ExcelliaCampFixHerGiveItemsManUpBeer, "", player.hasItem(consumables.MANUP_B));
-	if (flags[kFLAGS.EXCELLIA_LA_BOVA] == 0 && flags[kFLAGS.EXCELLIA_HUMMUS_OR_SUCCUBUS_MILK] < 1) //mutually exclusive
-        addButtonIfTrue(1, "Hummus", ExcelliaCampFixHerGiveItemsHummus, "", player.hasItem(consumables.HUMMUS_));
-	if (flags[kFLAGS.EXCELLIA_HUMMUS_OR_SUCCUBUS_MILK] == 0 && flags[kFLAGS.EXCELLIA_LA_BOVA] < 2) //mutually exclusive
-        addButtonIfTrue(2, "PureLaBova", ExcelliaCampFixHerGiveItemsPureLaBova, "", player.hasItem(consumables.P_LBOVA));
-    if (flags[kFLAGS.EXCELLIA_RECRUITED] < 33)
-        addButtonIfTrue(4, "DeBimbo", ExcelliaCampFixHerGiveItemsDeBimbo, "", player.hasItem(consumables.DEBIMBO)).hint("Up to 3 doses. Giving all 3 will full cure her without need to wait."); //hint is overridden, right?
-    addButton(14, "Back", ExcelliaCampMainMenuFixHer);
+		addButton(0, consumables.MANUP_B.shortName, ExcelliaCampFixHerGiveItemsManUpBeer)
+			.disableIf(!player.hasItem(consumables.MANUP_B), "You don't have any!");
+	if (flags[kFLAGS.EXCELLIA_LA_BOVA] == 0 && flags[kFLAGS.EXCELLIA_HUMMUS_OR_SUCCUBUS_MILK] < 1)
+		addButton(1, consumables.HUMMUS_.shortName, ExcelliaCampFixHerGiveItemsHummus)
+			.disableIf(!player.hasItem(consumables.HUMMUS_), "You don't have any!");
+	if (flags[kFLAGS.EXCELLIA_HUMMUS_OR_SUCCUBUS_MILK] == 0 && flags[kFLAGS.EXCELLIA_LA_BOVA] < 2)
+		addButton(2, consumables.P_LBOVA.shortName, ExcelliaCampFixHerGiveItemsPureLaBova)
+			.disableIf(!player.hasItem(consumables.P_LBOVA), "You don't have any!");
+	if (flags[kFLAGS.EXCELLIA_RECRUITED] < 33)
+		addButton(2, consumables.DEBIMBO.shortName, ExcelliaCampFixHerGiveItemsDeBimbo)
+			.hint("Up to 3 doses. Giving all 3 will full cure her without need to wait.")
+			.disableIf(!player.hasItem(consumables.DEBIMBO), "You don't have any!");
+	addButton(14, "Back", ExcelliaCampMainMenuFixHer);
 }
 public function ExcelliaCampFixHerGiveItemsManUpBeer():void {
-	//spriteSelect(SpriteDb.s_electra);
 	clearOutput();
 	player.consumeItem(consumables.MANUP_B);
 	outputText("You pull out the can then hand it to her, telling her that she might enjoy it. Curious, she looks over the can before gulping it down. Moments after she finishes the beverage, she gasps as her body goes through changes. She looks thicker and her muscles look more pronounced. She flexes her arms, taking in her toned body.\n\n");
@@ -318,7 +315,6 @@ public function ExcelliaCampFixHerGiveItemsManUpBeer():void {
 	doNext(camp.returnToCampUseOneHour);
 }
 public function ExcelliaCampFixHerGiveItemsHummus():void {
-	//spriteSelect(SpriteDb.s_electra);
 	clearOutput();
 	player.consumeItem(consumables.HUMMUS_);
 	outputText("Excellia takes the hummus from you and then eats it. She shudders when it has an immediate effect on her. You notice her horns receding back into her head and her cow like tail shrivels up and falls to the ground. Her cow like ear shrinks and round out, becoming human in shape. She looks over herself in surprise.\n\n");
@@ -327,7 +323,6 @@ public function ExcelliaCampFixHerGiveItemsHummus():void {
 	doNext(camp.returnToCampUseOneHour);
 }
 public function ExcelliaCampFixHerGiveItemsPureLaBova():void {
-	//spriteSelect(SpriteDb.s_electra);
 	clearOutput();
 	player.consumeItem(consumables.P_LBOVA);
 	if (flags[kFLAGS.EXCELLIA_LA_BOVA] == 1) outputText("Excellia takes the purified la bova then gulps it down. She shudders when it has an immediate effect on her. She yelps and clutches her face as it reshapes into that of a cow. Her fingernails become harder and thicker. Patches of red fur grow on her body slowly filling in until she's covered from head to hooves in red fur.\n\n");
@@ -336,7 +331,6 @@ public function ExcelliaCampFixHerGiveItemsPureLaBova():void {
 	doNext(camp.returnToCampUseOneHour);
 }
 public function ExcelliaCampFixHerGiveItemsDeBimbo():void {
-	//spriteSelect(SpriteDb.s_electra);
 	clearOutput();
 	player.consumeItem(consumables.DEBIMBO);
 	if (flags[kFLAGS.EXCELLIA_RECRUITED] > 23) {
@@ -364,27 +358,18 @@ public function ExcelliaCampFixHerGiveItemsDeBimbo():void {
 	}
 	doNext(camp.returnToCampUseOneHour);
 }
-public function ExcelliaCampFixHerHenchmanOption():void {
-	//spriteSelect(SpriteDb.s_electra);
-	clearOutput();
-	outputText("Excellia perks up at your suggestion. She smirks, giving you a sultry look.");
-	outputText("\n\n");
-	outputText("\"<i>And what did you have in mind exactly?</i>\"\n\n");
-}
+
 public function ExcelliaCampFixHerSex():void {
-	//spriteSelect(SpriteDb.s_electra);
 	clearOutput();
 	outputText("Excellia perks up at your suggestion. She smirks, giving you a sultry look.\n\n");
 	outputText("\"<i>And what did you have in mind exactly?</i>\"\n\n");
 	menu();
 	addButton(0, "Fuck Her", ExcelliaCampFixHerSexFuckHer);
 	addButton(1, "Oral Fun", ExcelliaCampFixHerSexOralFun);
-	if (player.hasCock()) addButton(2, "SuckleFuck", ExcelliaCampFixHerSexSuckleFuck);
-	else addButtonDisabled(2, "SuckleFuck", "Req. Cock.");
+	addButton(2, "SuckleFuck", ExcelliaCampFixHerSexSuckleFuck).disableIf(!player.hasCock(), "Req. a cock.");
 	addButton(14, "Back", ExcelliaCampMainMenuFixHer);
 }
 public function ExcelliaCampFixHerSexFuckHer():void {
-	//spriteSelect(SpriteDb.s_electra);
 	clearOutput();
 	outputText("You lead the [exc race] to your "+(flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 ? "cabin":"tent")+". You take her inside and lay her back on your "+(flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 ? "bed":"bedroll")+" making sure she’s comfortable. She looks up at you with a deep blush on her face. "+(player.isNaked() ? "Seeing as you already don’t wear any clothing":"You strip off your gear then")+" you lean over her, taking in her beautiful curves and supple flesh. She loops her arms around your neck and pulls you down into a deep kiss. You kiss her back, slipping your tongue past her lips ");
 	outputText("to explore her mouth. "+(player.hasCock() ? "Her aphrodisiac laced lipstick has a profound effect on your body, your [cock] quickly hardening and poking against her thigh":"You're more than excited to have a taste of your sweet [exc race], your pussy becoming wetter by the second")+". Your hands roam along her body, discovering her most sensitive areas. She moans into your mouth from your light touches. You break the kiss, a small string of saliva connecting your mouths. She pants harder, the needy lust in her eyes becoming more apparent.\n\n");
@@ -417,9 +402,9 @@ public function ExcelliaCampFixHerSexFuckHer():void {
 		if (fixed()) outputText("\"<i>[name] please! K-ah-Keep going!</i>\"\n\n");
 		else outputText("\"<i>A-Ah yes! Right there m-my Lady!</i>\"\n\n");
 		outputText("Your thumb rubs against her hard button making her squeal in pleasure. Creamy milk leaks from her large teats dripping down the curve of her perky breasts. You lean down and lap at the sweet cream, letting your tongue swipe over her nipples. You gasp in surprise when you feel her reach down and rub her soft fingers against your wet nether lips and pleasure button. You moan when her fingers slip past your slick folds. Her other hand gropes at your [chest] and flickers her fingers over your nipples. ");
-		outputText("You lean up and kiss her, letting her lap at the taste of her own milk from your tongue. You moan into each other's mouths as you're both pushed over the edge. Excellia [exc moo]s loudly as her pussy clenches tightly around your intruding digits, drenching them in femcum. You gasp in pleasure when you cum around the [exc race]'s fingers. Her milk streams out, coating the both of you in sweet cream adding to the growing puddle beneath you.\n\n");
+		outputText("You lean up and kiss her, letting her lap at the taste of her own milk from your tongue. You moan into each other's mouths as you're both pushed over the edge. Excellia [exc moo]s loudly as her pussy clenches tightly around your intruding digits, drenching them in femcum. You gasp in pleasure when you cum around the [exc race]'s fingers. Her milk streams out, coating both of you in sweet cream adding to the growing puddle beneath you.\n\n");
 		outputText("You're both left panting and gasping as you fall over onto your sides. She giggles, pulling you close into her arms.\n\n");
-		player.sexReward("Default","Default", true, false);
+		player.sexReward("no");
         //
         sharedEnd();
     }
@@ -433,7 +418,6 @@ public function ExcelliaCampFixHerSexFuckHer():void {
 }
 
 public function ExcelliaCampFixHerSexOralFun():void {
-	//spriteSelect(SpriteDb.s_electra);
 	clearOutput();
 	outputText("You smirk at Excellia telling her that you would like a taste of her. She smiles giving you a knowing look.\n\n");
 	if (fixed()) outputText("\"<i>Of course you can have a little of this, [name]. That is if you'll let me have a little of you too.</i>\"\n\n");
@@ -453,7 +437,6 @@ public function ExcelliaCampFixHerSexOralFun():void {
 }
 
 public function ExcelliaCampFixHerSexSuckleFuck():void {
-	//spriteSelect(SpriteDb.s_electra);
 	clearOutput();
 	outputText("You're a little thirsty and in the mood for a good time. The [exc race] giggles at your suggestion then takes your hands pulling you inside her tent. "+(player.isNaked() ? "You suppose being nude definitely has its benefits seeings as you don't have to bother taking off pesky clothing":"She helps you strip off your clothing and haphazardly tosses them into a pile nearby")+". You sit in front of Excellia making sure you're comfortable before pulling her down to sit in your lap and straddle your waist.\n\n");
 	outputText("You lick your lips as her huge love pillows wobble enticingly in front of you filled with their sweet, creamy, goodness just waiting to be tapped into. She smiles pushing her breasts together, making them look even bigger. A few droplets of her milk slowly leak from her nipple. You can't help but lap up the escaping droplets, shivering the moment the restorative milk hits your tongue. Your [cock] slowly hardens, poking against her thick thighs. She coos, playfully squeezing it between her legs. You groan from the feeling of your dick being trapped between the [exc race]'s plush thighs, precum leaking down your length. ");
@@ -499,7 +482,6 @@ public function excelliaHenchmanOption():void {
 	cheatTime(1/12);
 }
 public function ExcelliaCampFixHerSleepToggle():void {
-	//spriteSelect(SpriteDb.s_electra);
 	clearOutput();
 	if(flags[kFLAGS.SLEEP_WITH] != "Excellia") {
 		outputText("You ask Excellia if she wouldn't mind sleeping with you at night. A warm smile appears on her face.\n\n");
@@ -514,11 +496,7 @@ public function ExcelliaCampFixHerSleepToggle():void {
 	menu();
 	addButton(0,"Next", ExcelliaCampMainMenuFixHer);
 }
-private function sleepWith(arg:String = ""):void {
-	flags[kFLAGS.SLEEP_WITH] = arg;
-}
 public function ExcelliaCampMainMenuMakeSlave():void {
-	//spriteSelect(SpriteDb.s_electra);
 	clearOutput();
 	if (pregnancy.isPregnant && pregnancy.incubation == 0) {
 		ExcelliaPoopsBabies2();
@@ -556,7 +534,6 @@ public function ExcelliaCampMainMenuMakeSlave2():void {
 }
 
 public function ExcelliaCampMakeSlaveAppearance():void {
-	//spriteSelect(SpriteDb.s_electra);
 	clearOutput();
 	outputText("Excellia is a 7 feet 2 inches tall [exc race], formerly the cow queen to the Minotaur King. Her smooth skin is light brown in color"+(flags[kFLAGS.EXCELLIA_LA_BOVA] == 2 ? " underneath red fur":"")+". She has a "+(flags[kFLAGS.EXCELLIA_LA_BOVA] == 2 ? "cow like":"human")+" face. Her eyes are yellow. She has a set of pouty lips coated in golden lipstick. She has a pair of cow like pierced with gold hoop earrings parting her long curly red hair with yellow highlights. A gold jewel encrusted tiara sits on her head. ");
 	outputText(""+(flags[kFLAGS.EXCELLIA_HUMMUS_OR_SUCCUBUS_MILK] == 3 ? "She has somewhat long demonic horns decorated with golden horn rings sticking up from her head":"A pair of short bovine horns decorated with gold horn rings stick up from her head. They're not as long as minotaur horns but much longer than cow horn")+"."+(flags[kFLAGS.EXCELLIA_HUMMUS_OR_SUCCUBUS_MILK] == 3 ? " A slowly undulating demonic tongue occasionally slips from between her lips. It hangs nearly two feet long when she lets the whole thing slide out.":"")+" Strapped around her neck is a gold jewel encrusted cowbell. She");
@@ -592,7 +569,6 @@ public function ExcelliaCampMakeSlaveHerself():void {
 	doNext(camp.returnToCampUseOneHour);
 }
 public function ExcelliaCampMakeSlaveSexGetMilk():void {
-	//spriteSelect(SpriteDb.s_electra);
 	clearOutput();
 	outputText("You ask your dairy [exc slut] to tell you more about herself. She hums in thought seemingly thinking of something to tell you before shrugging.\n\n");
 	outputText("\"<i>Sorry my " + player.mf("Lord", "Lady") + "... I don’t remember much really. I think maybe I was a warrior or something close to that…</i>\"\n\n");
@@ -601,36 +577,33 @@ public function ExcelliaCampMakeSlaveSexGetMilk():void {
 	addButton(3, "Bottle", ExcelliaCampMakeSlaveSexGetMilkBottle);
 }
 public function ExcelliaCampMakeSlaveSexGetMilkDrink():void {
-	//spriteSelect(SpriteDb.s_electra);
 	outputText("Excellia plops down on the ground in front of you with a smile beckoning you to come. With a wide grin on your face you seat yourself, noting her nipples are leaking even more. They're too tempting not to play with. You reach up to squeeze her impressive bosom marveling at how big and round they are. They're perky and show no sign of sagging whatsoever. You lean in to kiss her seeping nipple, sucking the teat in between your lips and expertly rolling and sliding it between them, tickling its tip and savoring her sweet, warm, creamy milk. You use your hand to pinch and tug at her other free nipple.\n\n");
 	outputText("The [exc race] blushes and moos as you play with her nipples. You start to suckle in earnest as your other hand reaches down to rub over her slick nether lips and plump clitty. Excellia squirms while you suckle and tease, delighting in the pleasure you are giving as in the delicious sweet milk cascading down your thirsty throat. Her bountiful breasts and the wonderful taste of her milk invigorates you. You don’t think you could ever get tired of the creamy, refreshing beverage. The soft moos that accompanies each suckle and the soft caresses on your body only enhances the whole experience.\n\n");
 	outputText("Eventually, your swallowing of the rich, freely flowing, creamy milk ceases as you drain her first teat. You still feel a slight pang of thirst and hunger, so you quickly latch onto her other nipple making the [exc race] squeak in surprise. She moans louder when your fingers slip into her wet snatch rubbing against her inner walls"+(flags[kFLAGS.EXCELLIA_HUMMUS_OR_SUCCUBUS_MILK] == 3 ? " her tiny wings frantically flapping behind her":"")+". The stream of milk trickling into your mouth practically turns into a jet. You sputter as you struggle to gulp down the deluge. Your stomach gurgles as its filled with even more of her energizing milk.\n\n");
 	outputText("Excellia lets out a loud moo, her pussy clenching around your invading fingers and drenching them in a spray of femcum. The last of her milk bursts into your mouth to which you eagerly gulp down. When the flow simmers down to just a trickle, you release her teat with a little letting out a burp. The [exc race] falls back looking flushed and panting.\n\n");
 	outputText("\"<i>Oooo… T-Thank you for making use of my milk " + player.mf("Lord", "Lady") + ". I hope it was to your liking.</i>\"\n\n");
 	outputText("You grin and pat your full stomach telling her that you sure did enjoy it. You reach over and give your cum [exc slut]'s nipple a little pinch causing her to squeak in surprise and a small spray of milk to leak out. You chuckle leaving her to knead and grope at her huge breasts moaning for more from you.\n\n");
-	HPChange((((player.level * 20) + 25) * 2 * (1 + player.newGamePlusMod())), true);
-	dynStats("lus", 15);
-	fatigue(-200);
-	player.refillHunger(100);
+	ExcelliaMilkEffects();
 	doNext(camp.returnToCampUseOneHour);
 }
 public function ExcelliaCampMakeSlaveSexGetMilkBottle():void {
-	//spriteSelect(SpriteDb.s_electra);
 	outputText("You could use a delicious creamy beverage on the go. You pull out a glass bottle then hold it under Excellia's tits. She grabs her nipples then starts milking herself. A steady stream of her milk pours into the bottle until it's filled to the brim. You cork it then stash it away patting your slutty dairy [exc slut] on the head. <b>You obtained Excellia's Milk.</b>\n\n");
 	inventory.takeItem(consumables.EXCMILK, ExcelliaCampMainMenuMakeSlave);
 	cheatTime(1/4);
 }
 public function ExcelliaCampMakeSlaveGiveItems():void {
-	//spriteSelect(SpriteDb.s_electra);
 	clearOutput();
 	outputText("\"<i>Oooo! Do you have something for me, my " + player.mf("Lord", "Lady") + "?</i>\"\n\n");
 	menu();
-	if (flags[kFLAGS.EXCELLIA_LA_BOVA] < 2 && player.hasItem(consumables.PROBOVA)) addButton(0, "ProBova", ExcelliaCampMakeSlaveGiveItemsProBova);
-	if (flags[kFLAGS.EXCELLIA_HUMMUS_OR_SUCCUBUS_MILK] < 3 && player.hasItem(consumables.SUCMILK)) addButton(1, "SuccubusMilk", ExcelliaCampMakeSlaveGiveItemsSuccubusMilk);
+	if (flags[kFLAGS.EXCELLIA_LA_BOVA] < 2)
+		addButton(0, consumables.PROBOVA.shortName, ExcelliaCampMakeSlaveGiveItemsProBova)
+			.disableIf(!player.hasItem(consumables.PROBOVA), "You don't have any!");
+	if (flags[kFLAGS.EXCELLIA_HUMMUS_OR_SUCCUBUS_MILK] < 3)
+		addButton(1, consumables.SUCMILK.shortName, ExcelliaCampMakeSlaveGiveItemsSuccubusMilk)
+			.disableIf(!player.hasItem(consumables.SUCMILK), "You don't have any!");
 	addButton(14, "Back", ExcelliaCampMainMenuMakeSlave);
 }
 public function ExcelliaCampMakeSlaveGiveItemsProBova():void {
-	//spriteSelect(SpriteDb.s_electra);
 	clearOutput();
 	player.consumeItem(consumables.PROBOVA);
 	if (flags[kFLAGS.EXCELLIA_LA_BOVA] == 1) outputText("You force Excellia to take the tainted la bova, forcing her to gulp it down. She [exc moo]s and shudders when it has an immediate effect on her. She yelps and clutches her face as it reshapes into that of a cow. Her fingernails become harder and thicker. Patches of red fur grow on her body slowly filling in until she's covered from head to hooves in red fur.\n\n");
@@ -639,7 +612,6 @@ public function ExcelliaCampMakeSlaveGiveItemsProBova():void {
 	doNext(camp.returnToCampUseOneHour);
 }
 public function ExcelliaCampMakeSlaveGiveItemsSuccubusMilk():void {
-	//spriteSelect(SpriteDb.s_electra);
 	clearOutput();
 	player.consumeItem(consumables.SUCMILK);
 	if (flags[kFLAGS.EXCELLIA_HUMMUS_OR_SUCCUBUS_MILK] == 2) outputText("Excellia eagerly opens her mouth as you pour the demonic milk into her mouth. She nearly squeals with glee as it has an immediate effect on her. Her cow like horns twist and reshape into more demonic looking ones. Tiny bat wings grow out from between her shoulder. A long demonic tongue snakes out of her mouth. She moans loudly as she orgasms, streams of her milk erupts from her breasts and femcum dribbles down between her legs. She pants heavily with lust in her eyes.\n\n");
@@ -649,7 +621,6 @@ public function ExcelliaCampMakeSlaveGiveItemsSuccubusMilk():void {
 	doNext(camp.returnToCampUseOneHour);
 }
 public function ExcelliaCampMakeSlaveSex():void {
-	//spriteSelect(SpriteDb.s_electra);
 	clearOutput();
 	outputText("Excellia nearly squeals with glee when you tell her what you want.\n\n");
 	outputText("\"<i>Oh yes! How will you use your loyal cumslut today my " + player.mf("Lord", "Lady") + "?</i>\"\n\n");
@@ -660,7 +631,6 @@ public function ExcelliaCampMakeSlaveSex():void {
 	addButton(14, "Back", ExcelliaCampMainMenuMakeSlave);
 }
 public function ExcelliaCampMakeSlaveSexFuckHer():void {
-	//spriteSelect(SpriteDb.s_electra);
 	clearOutput();
 	outputText("You drag the [exc race] to your "+(flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 ? "cabin":"tent")+". You take her inside making it a point to leave the "+(flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 ? "door and window curtains":"flap to your tent")+" open and push her back onto your "+(flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 ? "bed":"bedroll")+". She looks up at you with an excited grin on her face. "+(player.isNaked() ? "Seeing as you already don’t wear any clothing":"You strip off your gear then")+" you lean over her taking in her delicious curves and supple flesh. She loops her arms around your neck and pulls you down into a deep kiss. You roughly kiss her back slipping your tongue past her lips to ");
 	outputText("explore her mouth. "+(player.hasCock() ? "Her aphrodisiac laced lipstick has a profound effect on your body, your [cock] quickly hardening and poking against her thigh":"You're more than excited to have a taste of your delectable [exc slut], your pussy becoming wetter by the second")+". Your hands roam along her body discovering her most sensitive areas. She moans into your mouth from your light touches. You break the kiss, a small string of saliva connecting your mouths. She pants harder, the needy lust in her eyes becoming more apparent.\n\n");
@@ -692,7 +662,7 @@ public function ExcelliaCampMakeSlaveSexFuckHer():void {
 		outputText("You decide to slip another finger inside her exploring her innermost depths. She lets out a moan when brush over her sweet spot. You continue rubbing over it watching the [exc slut] squirm and moan as your skillful digits take advantage of her most sensitive area.\n\n");
 		outputText("\"<i>A-Ah yes! Right there m-my Lady! Please give me more!</i>\"\n\n");
 		outputText("Your thumb rubs against her hard button, making her squeal in pleasure. Creamy milk leaks from her large teats dripping down the curve of her perky breasts. You lean down and lap at the sweet cream sinking your teeth into her love pillow no doubt leaving a mark. You gasp in surprise when you feel her reach down and rub her soft fingers against your wet nether lips and pleasure button. You moan when her fingers slip past your slick folds. Her other hand gropes at your [chest] flickers her fingers over your nipples. ");
-		outputText("You lean up and kiss her forcing her to lap the taste of her own milk from your tongue. You moan into each other's mouths as you're both pushed over the edge. Excellia [exc moo]s loudly as her pussy clenches tightly around your intruding digits drenching them in femcum. You gasp in pleasure when you cum around the dairy [exc slut]'s fingers. Her milk streams out coating the both of you in sweet cream adding to the growing puddle beneath you.\n\n");
+		outputText("You lean up and kiss her forcing her to lap the taste of her own milk from your tongue. You moan into each other's mouths as you're both pushed over the edge. Excellia [exc moo]s loudly as her pussy clenches tightly around your intruding digits drenching them in femcum. You gasp in pleasure when you cum around the dairy [exc slut]'s fingers. Her milk streams out coating both of you in sweet cream adding to the growing puddle beneath you.\n\n");
 		outputText("You're both left panting and gasping as you fall over onto your sides. She giggles, pulling you into a boob crushing hug.\n\n");
 		outputText("\"<i>W-Wow my Lady… That was truly amazing! I'm so happy to serve you!</i>\"\n\n");
 		outputText("You smirk, patting your loyal slave on the head, telling her she performed adequately. You lay next to the [exc race] as she nuzzles up next to you for a rest. After a quick nap, you clean up leaving the still sleeping ex-cow queen to as you prepare to head back out.\n\n");
@@ -701,7 +671,6 @@ public function ExcelliaCampMakeSlaveSexFuckHer():void {
     }
 }
 public function ExcelliaCampMakeSlaveSexOralFun():void {
-	//spriteSelect(SpriteDb.s_electra);
 	clearOutput();
 	outputText("You grin at Excellia telling her that you would like a taste of her. She bounces up and down giddy.\n\n");
 	outputText("\"<i>Oh yes my " + player.mf("Lord", "Lady") + "! You can have as much of me as you like!</i>\"\n\n");
@@ -717,7 +686,6 @@ public function ExcelliaCampMakeSlaveSexOralFun():void {
 	doNext(camp.returnToCampUseOneHour);
 }
 public function ExcelliaCampMakeSlaveSexMilkyMassage():void {
-	//spriteSelect(SpriteDb.s_electra);
 	clearOutput();
 	outputText("While drinking her restorative milk can energize you and heal your wounds, you wonder if it will have an interesting effect on you if used in a different manner. You formulate an idea before settling on one that seems the most fun. Excellia notices the lusty look in your eyes. She bounces in place, giddy with excitement.\n\n");
 	outputText("\"<i>Oh my " + player.mf("Lord", "Lady") + " I know that look. You have something fun in mind.</i>\"\n\n");
@@ -752,7 +720,7 @@ private function ExcelliaPoopsBabies1():void {
 	outputText("A strange thought comes to mind as the [exc race] strains to push the child out but it just might make sense in this world. You work your way out of her crushing grip then slip between her legs. You lean down and give an experimental lick to her spasming pussy lips. The fluid has a bit of a tangy yet sweet taste, not at all unpleasant. She lets out a low moan that slowly turns into a [exc moo]. Seemingly having an effect on her, you gently push her legs further apart then lap at her sensitive pussy and suck on her hardened clitty. ");
 	outputText("She nearly squeals as pain slowly mixes with pleasure. Your child seems to move faster down her birth canal. Soon enough you can see the head peeking between her lips. She strains as the shoulders stretches her wider but with one final push the child slips out of her into your waiting arms with a gush of fluids.\n\n");
 	outputText("You grab a towel and wash off the crying child in your arms. It's a healthy baby " + humanCow("", "cow") + (player.statusEffectv1(StatusEffects.ExcelliaChildbirth) == 1 ? "boy":"girl"));
-	outputText("! You smile and cradle the newborn in your arms to calm " + (player.statusEffectv1(StatusEffects.ExcelliaChildbirth) == 1 ? "him":"her") + " down. H" + (player.statusEffectv1(StatusEffects.ExcelliaChildbirth) == 1 ? "is":"er") + " cries slowly quiet down as you soothe " + (player.statusEffectv1(StatusEffects.ExcelliaChildbirth) == 1 ? "him":"her") + ". " + (player.statusEffectv1(StatusEffects.ExcelliaChildbirth) == 1 ? "He":"She") + " looks up at you curiously cooing. " + (player.statusEffectv1(StatusEffects.ExcelliaChildbirth) == 1 ? "He":"She") + " has your eyes and Excellia's hair color. The tired [exc race] looks at the both of you with a warm smile.\n\n");
+	outputText("! You smile and cradle the newborn in your arms to calm " + (player.statusEffectv1(StatusEffects.ExcelliaChildbirth) == 1 ? "him":"her") + " down. H" + (player.statusEffectv1(StatusEffects.ExcelliaChildbirth) == 1 ? "is":"er") + " cries slowly quiet down as you soothe " + (player.statusEffectv1(StatusEffects.ExcelliaChildbirth) == 1 ? "him":"her") + ". " + (player.statusEffectv1(StatusEffects.ExcelliaChildbirth) == 1 ? "He":"She") + " looks up at you curiously cooing. " + (player.statusEffectv1(StatusEffects.ExcelliaChildbirth) == 1 ? "He":"She") + " has your eyes and Excellia's hair color. The tired [exc race] looks at both of you with a warm smile.\n\n");
 	outputText("\"<i>Come on [name]... I want to hold "+(player.statusEffectv1(StatusEffects.ExcelliaChildbirth) == 1 ? "him":"her")+" too…</i>\"\n\n");
 	outputText("You bring the newborn to "+(player.statusEffectv1(StatusEffects.ExcelliaChildbirth) == 1 ? "his":"her")+" mother as she scoops "+(player.statusEffectv1(StatusEffects.ExcelliaChildbirth) == 1 ? "him":"her")+" up into her arms. Your "+(player.statusEffectv1(StatusEffects.ExcelliaChildbirth) == 1 ? "son":"daughter")+" is quick to latch onto her teat and starts suckling. Excellia lets out a content motherly sigh, cradling her child in her arms.\n\n");
 	outputText("\"<i>"+(player.statusEffectv1(StatusEffects.ExcelliaChildbirth) == 1 ? "He":"She")+" is just so beautiful… Thank you… Thank you so much for this wonderful gift [name].</i>\"\n\n");
@@ -786,7 +754,6 @@ private function ExcelliaPoopsBabies2():void {
 }
 
 public function ExcelliaAndJojoCampScene():void {
-	//spriteSelect(SpriteDb.s_electra);
 	clearOutput();
 	outputText("You catch your resident [exc race], Excellia talking with Jojo. You notice that he shifts nervously in place as he talks to her, a slight blush on his face.\n\n");
 	outputText("\"<i>I-I'm just saying that maybe it would be better if you wore some uh… clothing. Surely it can't be too comfortable walking around like that?</i>\"\n\n");

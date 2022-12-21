@@ -1,5 +1,4 @@
 package classes.Races {
-import classes.BodyData;
 import classes.BodyParts.*;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
@@ -7,9 +6,34 @@ import classes.Race;
 
 public class DisplacerBeastRace extends Race {
 	public static const DisplacerFurColors:/*String*/Array = ["black", "midnight black", "midnight"];
-	
-	public function DisplacerBeastRace(id:int) {
-		super("Displacer beast", id);
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Human",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Human",
+        /*Eyes*/		"Human",
+        /*Face*/		"Human",
+        /*Gills*/		"Human",
+        /*Hair*/		"Human",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Human",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Human",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Human"];
+
+
+    public function DisplacerBeastRace(id:int) {
+		super("Displacer beast", id, []);//RaceBody);
 	}
 	
 	public override function setup():void {
@@ -24,18 +48,11 @@ public class DisplacerBeastRace extends Race {
 				.armType(Arms.DISPLACER, +3, -1000)
 				.rearType(RearBody.DISPLACER_TENTACLES, +2, -1000)
 				.skinCoatType(Skin.FUR, +1)
-				.skinCoatColor(ANY(DisplacerFurColors), +1)
-				.skinBaseColor("dark gray", +1)
+				.furColor1(ANY(DisplacerFurColors), +1)
+				.skinColor1("dark gray", +1)
 				.hasPerk(PerkLib.Flexibility, +1)
-				.customRequirement("","not other magical feline race",
-						function (body:BodyData):Boolean {
-							return !(CatRace.isSphinxLike(body)
-									|| body.tailType == Tail.MANTICORE_PUSSYTAIL
-									|| CatRace.isNekomataLike(body)
-									|| body.rearType == RearBody.LION_MANE
-									|| CatRace.isCheshireLike(body)
-									|| CatRace.isHellcatLike(body));
-						},0,-1000
+				.customRequirement("","more displacer features than other magical feline",
+						CatRace.isDisplacerSubrace,0,-1000
 				);
 		
 		addMutation(IMutationsLib.CatLikeNimblenessIM);

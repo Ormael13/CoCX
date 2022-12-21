@@ -5,39 +5,49 @@ package classes.BodyParts {
 import classes.Appearance;
 
 public class SkinLayer extends BodyPart {
-	private var _color:String  = "";
 	public var pattern:int   = Skin.PATTERN_NONE;
 	private var _desc:String = "";
 	private var _adj:String  = "";
-	private var _color2:String = "";
 	private var skin:Skin; // Reference to parent
 
+	public function get material():int {
+		return Skin.SkinTypes[type].material;
+	}
 	public function get color():String {
-		return _color || creature.hairColor;
+		return creature.bodyMaterials[material].color;
 	}
 	public function set color(value:String):void {
-		_color = value;
+		creature.bodyMaterials[material].color = value;
+	}
+	public function get color1():String {
+		return creature.bodyMaterials[material].color1;
+	}
+	public function set color1(value:String):void {
+		creature.bodyMaterials[material].color1 = value;
 	}
 	public function get color2():String {
-		return _color2 || color;
+		return creature.bodyMaterials[material].color2;
 	}
 	public function set color2(value:String):void {
-		_color2 = value;
+		creature.bodyMaterials[material].color2 = value;
 	}
-	public function get color2raw():String {
-		return _color2;
+	override public function hasMaterial(type:int):Boolean {
+		return material == type;
 	}
-	public function set color2raw(value:String):void {
-		_color2 = value;
+	override public function setProps(p:Object):void {
+		super.setProps(p);
+		if ("color" in p) color = p.color;
+		if ("color1" in p) color1 = p.color1;
+		if ("color2" in p) color2 = p.color2;
 	}
+	
 	public function defaultDesc():String {
         //if it throws an error hear, it means Svalkash fucked up again.
-        // Add the check like "if (Skin.SkinTypes[type])" then to check for undefined        
+        // Add the check like "if (Skin.SkinTypes[type])" then to check for undefined
 		return Skin.SkinTypes[type].name || "skin";
 	}
 	public function defaultAdj():String {
-		if (type === Skin.GOO) return "goopey";
-		return "";
+		return Skin.SkinTypes[type].adj || "";
 	}
 	public function get desc():String {
 		return _desc || defaultDesc();
@@ -57,16 +67,6 @@ public class SkinLayer extends BodyPart {
 	public function set adj(value:String):void {
 		_adj = value;
 	}
-	[Deprecated("Use color, not tone")]
-	public function get tone():String {
-		trace("[DEPRECATED] SkinLayer.tone get");
-		return color;
-	}
-	[Deprecated("Use color, not tone")]
-	public function set tone(value:String):void {
-		trace("[DEPRECATED] SkinLayer.tone = "+value);
-		this.color = value;
-	}
 	override public function set type(value:int):void {
 		if (type != value) {
 			super.type = value;
@@ -84,12 +84,11 @@ public class SkinLayer extends BodyPart {
 	}
 	override public function restore(keepColor:Boolean = true):void {
 		super.restore(keepColor);
-		if (!keepColor) color = "";
 		adj  = "";
 		desc = "";
 	}
 	public function SkinLayer(skin:Skin) {
-		super(skin.creature, ["adj", "desc", "color", "color2", "pattern"]);
+		super(skin.creature, ["adj", "desc", "pattern"]);
 		this.skin = skin;
 	}
 	public function describe(noAdj:Boolean = false, noColor:Boolean = false):String {

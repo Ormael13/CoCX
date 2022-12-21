@@ -1,13 +1,11 @@
 package classes
 {
-	import classes.CoC;
-	import flash.system.System;
-	
-	public class PregnancyStore extends Object
+public class PregnancyStore extends Object
 	{
 		//Pregancy types. Both butt and normal. Each type represents the father of this baby.
 		public static const PREGNANCY_IMP:int                   =   1;
 		public static const PREGNANCY_MINOTAUR:int              =   2;
+		public static const PREGNANCY_COCKATRICE:int            =   3;
 		public static const PREGNANCY_MOUSE:int                 =   4;
 		public static const PREGNANCY_OVIELIXIR_EGGS:int        =   5; //Also caused by Phoenixes apparently
 		public static const PREGNANCY_HELL_HOUND:int            =   6;
@@ -49,6 +47,10 @@ package classes
 		public static const PREGNANCY_GOBLIN:int				=  40;
 		public static const PREGNANCY_ZENJI:int                 =  41;
 		public static const PREGNANCY_AYANE:int                 =  42; //This is a placeholder for a future expansion.
+		public static const PREGNANCY_ANT_EGGS:int				=  43;
+		public static const PREGNANCY_MANTIS_EGGS:int			=  44;
+		public static const PREGNANCY_HARPY_EGGS:int        	=  45; //All Harpy eggs
+		public static const PREGNANCY_HARPY_HATCHING:int        =  46;
 		
 		public static const PREG_NOT_PREGANT:int                =   0; //The PREG_* consts are returned by the size function
 		public static const PREG_NO_SIGNS_UNKNOWN:int           =   1; //NPC has conceived but doesn’t know she’s pregnant, no visible signs
@@ -64,6 +66,7 @@ package classes
 //Old Value, replaced in Saves.unFuckSave()		public static const PREGNANCY_BUTT_DRIDER:int           =   3;
 //Old Value, replaced in Saves.unFuckSave()		public static const PREGNANCY_BUTT_SANDTRAP_FERTILE:int =   4;
 //Old Value, replaced in Saves.unFuckSave()		public static const PREGNANCY_BUTT_SANDTRAP:int         =   5; //Sandtrap did not have fertilized eggs
+		//TODO: clear this shit!
 
 		public static const INCUBATION_IMP:int                  = 432; //Time for standard imps. Imp lords, Ceraph, Lilium and the imp horde cause slightly faster pregnancies
 		public static const INCUBATION_MINOTAUR:int             = 432;
@@ -78,6 +81,7 @@ package classes
 		public static const INCUBATION_IZMA:int                 = 300;
 		public static const INCUBATION_SPIDER:int               = 400;
 		public static const INCUBATION_BASILISK:int             = 250;
+		public static const INCUBATION_COCKATRICE:int           = 225;
 		public static const INCUBATION_DRIDER:int               = 400;
 		public static const INCUBATION_GOO_GIRL:int             =  85;
 		public static const INCUBATION_EMBER:int                = 336;
@@ -174,9 +178,9 @@ package classes
 			if (!isPregnant) knockUpForce(newPregType, newPregIncubation);
 		}
 		
-		public function knockUpForce(newPregType:int = 0, newPregIncubation:int = 0):void
+		public function knockUpForce(newPregType:int = 0, newPregIncubation:int = 0, ignoreGargoyle:Boolean = false):void
 		{
-			if (CoC.instance.player.isGargoyle()) return;
+			if (CoC.instance.player.isGargoyle() && newPregType == PREGNANCY_PLAYER && !ignoreGargoyle) return; //gargoyles can't impreg
 			if (_pregnancyTypeFlag == 0 || _pregnancyIncubationFlag == 0) return; //Check that these variables were provided by the containing class
 			if (newPregType != 0) newPregType = (CoC.instance.flags[_pregnancyTypeFlag] & PREG_NOTICE_MASK) + newPregType;
 				//If a pregnancy 'continues' an existing pregnancy then do not change the value for last noticed stage

@@ -504,6 +504,7 @@ private function changeHairStyle():void {
 	addButton(7, "Wind Braid", chooseHairStyleFinalize, 7).hint("The four wind braid seen almost seldomly amonst student of the now near extinct four wind school.");
 	addButton(8, "Wind Long", chooseHairStyleFinalize, 8).hint("The four wind long hair cut seen almost seldomly amonst student of the now near extinct four wind school.");
 	addButton(9, "Taur Tail", chooseHairStyleFinalize, 9).hint("A haircut favored by centaur maidens. Hairs are tied into a single long ponytail not unlike a horse tail itself");
+	addButton(10, "Twin Ribbon", chooseHairStyleFinalize, 10).hint("An haircut which apparently was very popular amonst less masculine mens from the old kingdom before lethice became the current ruler. It has a feminine touch that works on either a man or a woman.");
 	addButton(14, "Back", salonPurchaseMenu);
 }
 
@@ -699,7 +700,7 @@ private function fuckLynnette():void {
 	}
 	//There is enough!
 	outputText("\n\nLynnette coos, \"<i>There it is... that yummy, nasty seed that you've let wait and bake for hour after hour.</i>\" She shivers in anticipation.  \"<i>You're going to stuff every single drop of that sticky stuff straight inside me, and it's going to be so thick it glues my snatch shut until it's time for birthing.  Got it?</i>\"  She squeezes down on [oneCock] with near-painful firmness, holding you completely and totally erect in the palm of her hand as she easily works off your [armor].  \"<i>Yes you are.... Oh, this is just what I needed today,</i>\" the green woman sighs while rubbing your ");
-	if(player.balls > 0) outputText("[balls]");
+	if(player.hasBalls()) outputText("[balls]");
 	else outputText("[sheath]");
 	outputText(" with hunger in her eyes.");
 
@@ -715,7 +716,7 @@ private function fuckLynnette():void {
 	outputText(" begun to bead clear droplets of precum. They run down the underside of your distended, eager cumvein");
 	if(player.cockTotal() > 1) outputText("s");
 	outputText(" and race down towards your ");
-	if(player.balls > 0) outputText("[balls]");
+	if(player.hasBalls()) outputText("[balls]");
 	else outputText("[sheath]");
 	outputText(", leaving a glossy, sexual shine in their wake, and they're only coming on faster and faster the longer you gaze upon Lynnette's emerald twat and inhale her prick-stiffening scent.");
 
@@ -734,18 +735,18 @@ private function fuckLynnette():void {
 	outputText(" The breeder grabs hold of your [hips] and tugs as hard as her meager strength will allow.  ");
 	if(player.cockArea(x) <= 90) {
 		outputText("Slapping against her hard enough to release a splash of girlish cum, you hilt yourself completely");
-		if(player.balls > 0) outputText(", [balls] resting on her soaked, juicy ass-cheeks.");
+		if(player.hasBalls()) outputText(", [balls] resting on her soaked, juicy ass-cheeks.");
 	}
 	else {
 		outputText("Eventually stopping, you look down to realize that she hasn't taken all of you. Going any farther would likely hurt her and ruin the fun, so you'll have to make to with partial strokes.");
-		if(player.balls > 0) outputText("  Her feet wrap around your [sack] to squeeze your [balls] affectionately, compensating quite nicely for her own shortcomings.");
+		if(player.hasBalls()) outputText("  Her feet wrap around your [sack] to squeeze your [balls] affectionately, compensating quite nicely for her own shortcomings.");
 	}
 
 	outputText("\n\nLynette is so goddamned wet! Her twat is a sopping-wet furnace around your " + cockDescript(x) + ", clenching down tightly to hold you still while she adjusts to the shape and size of hard-throbbing inseminator.  A happy, brainless smile spreads across her face in reaction to the mounting, though her hands remain stubbornly on your hips, helping to keep you from pounding away until she's ready.  While you're immobilized, you decide to avail yourself of the goblin's other features, gripping as much of one titanic tit as you possibility can.  Your hand barely covers a quarter of the swollen bosom, and your fingers sink deeply into the forgiving green flesh, eliciting a gasp of pleasure from the hairdresser when you shift your grope to place her nipple within your reach.");
 	outputText("\n\nLosing control of her abdominal muscles from the forcible, nipple-bound bliss, Lynnette's cock-arresting grip collapses, and you're free to saw away at her gushing nethers, dragging your " + cockDescript(x) + " out until only the head remains embedded within her purple-tinged interior and then, slamming it back in just as hard as your initial penetration.  Her hands slip off your [hips] and down to the sheets, where they gather up fistfuls of the increasingly sex-stained fabric and clench.  The honey hole around you flutters uncontrollably, clenching wildly as you thrust powerfully through it, mixing your pre-cum with its own copious leavings until there's a whitish slurry leaking from the increasingly puffy entrance.");
 	outputText("\n\nThe blissed-out goblin's eyelids droop closed a second after her eyes roll back, and she calls out, \"<i>Oh fuck yessssssss, that's the spot!  Fuck me!  Fuck me!  YES!</i>\"  Her body shudders, accompanied by a screech of pleasure.  \"<i>You're making me c-c-c-cum...!</i>\"  Lynnette's wonderfully fertile thighs roll with the waves of passion she's riding, rhythmically squeezing down on your dick with inadvertent muscular contractions that feel so good they almost suck the cum straight out of your [balls].");
 	outputText("\n\nSomehow, you don't blow your load into the dick-massaging goblin twat right then and there. Compelled by an urgent, instinctive need, you continue to saw your raging-hard phallus into Lynnette's musky cunt, splattering love-juices everywhere. The seed trapped inside your [balls] churns and roils as your body does its damnedest to maximize its output");
-	if(player.balls > 0) outputText(", making your sack feel tight, and your testes bloated and tender.");
+	if(player.hasBalls()) outputText(", making your sack feel tight, and your testes bloated and tender.");
 	else outputText(", making your gut clench and spasm with near-orgasmic contractions.");
 	outputText("  There's a tsunami of sperm building up inside you to the point where holding it in is actually starting to hurt you, but at the same time, your body refuses to give in and climax yet either.");
 	outputText("\n\nLynnette's huge, milk-dripping nipples erupt like the verdant volcano peaks they resemble, spraying gushes of ivory cream in lewd cascades that wash over you both, acting as a sweet, slick lubricant that allows her thighs to slip and slide over your own with ease.  She whimpers when your hands attach themselves to her leaky teats, attracted to the mounds as if by magnetism, and you squeeze down on them, pinching off the flow only to release the pressure, making her release her lactic load in huge, pulsing sprays.  She cries out, \"<i>Milk me!  Milk me like a dirty, bova slut!</i>\"  Her back lifts to press those squirting nubs more firmly between your fingers as another orgasm, smaller than the first, wracks her tender, tiny body.");

@@ -2,7 +2,7 @@
  * Side Dungeon: River Dungeon (Dungeon with multiple floors below He'Xin'Dao)
  * @author Ormael, Liadri
  */
-package classes.Scenes.Dungeons 
+package classes.Scenes.Dungeons
 {
 import classes.CoC;
 import classes.EventParser;
@@ -93,24 +93,20 @@ public class RiverDungeon extends DungeonAbstractContent
 		public function defeatedByFeralImp():void {
 			clearOutput();
 			outputText("Your opponent, done toying with your body, carries you all the way back to the dungeon entrance. They toss you onto the ground outside. Guess it's back to square one.\n\n");
-			//cleanupAfterCombat();
-			inDungeon = true;
 			dungeonLoc = DUNGEON_RIVER_FLOOR_01_ROOM_01;
-			playerMenu();
+			cleanupAfterCombat();
 		}
 		public function defeatedByGreenSlime():void {
 			clearOutput();
 			outputText("Your opponent, done toying with your body, carries you all the way back to the dungeon entrance. They toss you onto the ground outside. Guess it's back to square one.\n\n");
-			inDungeon = true;
 			dungeonLoc = DUNGEON_RIVER_FLOOR_01_ROOM_01;
-			playerMenu();
+			cleanupAfterCombat();
 		}
 		public function defeatedByHellHound():void {
 			clearOutput();
 			outputText("Your opponent, done toying with your body, carries you all the way back to the dungeon entrance. They toss you onto the ground outside. Guess it's back to square one.\n\n");
-			inDungeon = true;
 			dungeonLoc = DUNGEON_RIVER_FLOOR_01_ROOM_01;
-			playerMenu();
+			cleanupAfterCombat();
 		}
 		public function defeatedByAetherGolem():void {
 			clearOutput();
@@ -138,14 +134,13 @@ public class RiverDungeon extends DungeonAbstractContent
 			doNext(playerMenu);
 		}
 		public function takeAetherSister1b():void {
-			weapons.AETHERD.useText();
-			player.weapon.removeText();
+			var item:Weapon = player.setWeapon(weapons.AETHERD);
 			cleanupAfterCombat();
 			outputText("You tell the voice to come to you. With a giggle, the gauntlet that was covering the golem's arm moves, tendrils detaching from its previous host. The tendrils entwine, pulling it from the arm, crawling across the floor until it reaches you. The gauntlet's tendrils wrap around your arm, pulling it up and over your arm. \"<i>Let's bust some heads!");
 			if (flags[kFLAGS.AETHER_SINISTER_TWIN_AT_CAMP] == 2) outputText("</i>\" After this you hear other voice in your head. \"<i>The Aether twins united. Go go go twins!!!");
 			outputText("</i>\"\n\n");
-			var item:Weapon = player.setWeapon(weapons.AETHERD); //Item is now the player's old weapon
-			if (item == null) doNext(playerMenu);
+			if (item == null) inventory.takeItem(weapons.AETHERD, playerMenu); // failed to equip
+			else if (item.isNothing) doNext(playerMenu); // equip to empty slot
 			else inventory.takeItem(item, playerMenu);
 		}
 		public function takeAetherSister2():void {
@@ -166,14 +161,13 @@ public class RiverDungeon extends DungeonAbstractContent
 			doNext(playerMenu);
 		}
 		public function takeAetherSister2b():void {
-			shields.AETHERS.useText();
-			player.shield.removeText();
+			var item:Shield = player.setShield(shields.AETHERS); //Item is now the player's old shield
 			cleanupAfterCombat();
 			outputText("You tell the voice to come to you. With a giggle, the gauntlet that was covering the golem's arm moves, tendrils detaching from its previous host. The tendrils entwine, pulling it from the arm, crawling across the floor until it reaches you. The gauntlet's tendrils wrap around your arm, pulling it up and over your right arm. \"<i>Let's bust some heads!");
 			if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2) outputText("</i>\" After this you hear other voice in your head. \"<i>The Aether twins are united!");
 			outputText("</i>\"\n\n");
-			var item:Shield = player.setShield(shields.AETHERS); //Item is now the player's old shield
-			if (item == null) doNext(playerMenu);
+			if (item == null) inventory.takeItem(shields.AETHERS, playerMenu); // failed to equip
+			else if (item.isNothing) doNext(playerMenu); // equip to empty slot
 			else inventory.takeItem(item, playerMenu);
 		}
 		
@@ -271,30 +265,26 @@ public class RiverDungeon extends DungeonAbstractContent
 		public function defeatedByFireElemental():void {
 			clearOutput();
 			outputText("Your opponent punches you a few more times, then carries you all the way back to the floor entrance. Your flesh sizzles in its grasp, and you groan in pain. It drops your body there, turning back into the dungeon. \n\n");
-			inDungeon = true;
 			dungeonLoc = DUNGEON_RIVER_FLOOR_02_ROOM_01;
-			playerMenu();
+			cleanupAfterCombat();
 		}
 		public function defeatedByWaterElemental():void {
 			clearOutput();
 			outputText("Your opponent punches you few more times, then carries you all the way back to the floor entrance. It drops you there, soaking wet. Guess it's back to square one on this floor.\n\n");
-			inDungeon = true;
 			dungeonLoc = DUNGEON_RIVER_FLOOR_02_ROOM_01;
-			playerMenu();
+			cleanupAfterCombat();
 		}
 		public function defeatedByAirElemental():void {
 			clearOutput();
 			outputText("Your opponent knocks you to the ground in a stunned heap. It then carries you all the way back to the floor entrance, your [skin] tender from windburn. It tosses you, then returns to the dungeon. \n\n");
-			inDungeon = true;
 			dungeonLoc = DUNGEON_RIVER_FLOOR_02_ROOM_01;
-			playerMenu();
+			cleanupAfterCombat();
 		}
 		public function defeatedByEarthElemental():void {
 			clearOutput();
 			outputText("Your opponent knocks you to the ground in a stunned heap. It carries all the way back to the floor entrance and drops you there, covered in mud. Guess it's back to square one on this floor.\n\n");
-			inDungeon = true;
 			dungeonLoc = DUNGEON_RIVER_FLOOR_02_ROOM_01;
-			playerMenu();
+			cleanupAfterCombat();
 		}
 		public function defeatedByFireElementalSubBoss():void {
 			clearOutput();
@@ -466,37 +456,32 @@ public class RiverDungeon extends DungeonAbstractContent
 		public function defeatedByIceElemental():void {
 			clearOutput();
 			outputText("Your opponent punches you a few more times, then carries you all the way back to the floor entrance. It drops you by the entrance, shivering from its icy touch.\n\n");
-			inDungeon = true;
 			dungeonLoc = DUNGEON_RIVER_FLOOR_03_ROOM_01;
-			playerMenu();
+			cleanupAfterCombat();
 		}
 		public function defeatedByLightningElemental():void {
 			clearOutput();
 			outputText("Your opponent punches you a few more times, then carries you all the way back to the floor entrance. It drops you by the entrance, sparks playing across your [skin], your fingers numb from the creature's touch. \n\n");
-			inDungeon = true;
 			dungeonLoc = DUNGEON_RIVER_FLOOR_03_ROOM_01;
-			playerMenu();
+			cleanupAfterCombat();
 		}
 		public function defeatedByDarknessElemental():void {
 			clearOutput();
 			outputText("Your opponent punches you a few more times, then carries you all the way back to the floor entrance. It drops you by the entrance. You can barely see, your eyes struggling after being handled by that blob of black darkness. You shudder, barely able to see. \n\n");
-			inDungeon = true;
 			dungeonLoc = DUNGEON_RIVER_FLOOR_03_ROOM_01;
-			playerMenu();
+			cleanupAfterCombat();
 		}
 		public function defeatedByYeti():void {
 			clearOutput();
-			outputText("Placeholder Bad End.\n\n");
-			inDungeon = true;
+			outputText("As you fall on the ground you barely get a glimpse of the Yeti grabbing a rock and dropping it on your head. When you wake up you are back at the entrance of the dungeon. Guess this could've gone worse but now you have to do the whole thing all over again.\n\n");
 			dungeonLoc = DUNGEON_RIVER_FLOOR_03_ROOM_01;
-			playerMenu();
+			cleanupAfterCombat();
 		}
 		public function defeatedByRaiju():void {
 			clearOutput();
 			outputText("Placeholder Bad End.\n\n");
-			inDungeon = true;
 			dungeonLoc = DUNGEON_RIVER_FLOOR_03_ROOM_01;
-			playerMenu();
+			cleanupAfterCombat();
 		}
 		public function defeatedByDarknessElementalSubBoss():void {
 			clearOutput();
@@ -543,41 +528,7 @@ public class RiverDungeon extends DungeonAbstractContent
 			cleanupAfterCombat();
 			doNext(playerMenu);
 		}
-		
-		/*public function defeatedBy():void {
-			clearOutput();
-			outputText("Placeholder Bad End.\n\n");
-			inDungeon = true;
-			dungeonLoc = ;starting for each floor room
-			playerMenu();
-		}
-		public function defeatedBy():void {
-			clearOutput();
-			outputText("Placeholder Bad End.\n\n");
-			inDungeon = true;
-			dungeonLoc = ;starting for each floor room
-			playerMenu();
-		}
-		public function defeatedBy<Boss enemy>():void {
-			clearOutput();
-			outputText("Placeholder Bad End.\n\n");
-			//[GAME OVER]
-			EventParser.gameOver();
-		}
-		
-		public function defeat():void {
-			clearOutput();
-			outputText("Placeholder Good End.\n\n");
-			cleanupAfterCombat();
-			doNext(playerMenu);
-		}
-		public function defeat<Boss enemy>():void {
-			clearOutput();
-			outputText("Placeholder Good End.\n\n");
-			cleanupAfterCombat();
-			doNext(playerMenu);
-		}*/
-		
+
 		//Rooms
 		public function roomA01():void {
 			dungeonLoc = DUNGEON_RIVER_FLOOR_01_ROOM_01;
@@ -588,7 +539,7 @@ public class RiverDungeon extends DungeonAbstractContent
 			outputText("You run into an old campsite. By the looks of it an adventurer must have rested there, through the fire's long dead. It died a month ago, from what you can tell. What a peculiar fire too, just who the hell would grab bones, set them in a stone circle and then impale a skull on a rusty longsword before setting fire to it?");
 			dungeons.setDungeonButtonsRD(null, null, null, roomA02);
 			addButton(0, "Teleport C.", teleportCircleFloor1);
-			if (flags[kFLAGS.NEISA_AFFECTION] < 10 && flags[kFLAGS.NEISA_FOLLOWER] < 4) addButtonDisabled(10, "Up", "You would leave now but you have yet to find enough to pay Neisa."); 
+			if (flags[kFLAGS.NEISA_AFFECTION] < 10 && flags[kFLAGS.NEISA_FOLLOWER] < 4) addButtonDisabled(10, "Up", "You would leave now but you have yet to find enough to pay Neisa.");
 			else addButton(10, "Up", exitDungeon);
 		}
 		public function roomA02():void {
@@ -1004,8 +955,8 @@ public class RiverDungeon extends DungeonAbstractContent
 			dungeonLoc = DUNGEON_RIVER_FLOOR_02_ROOM_21;
 			clearOutput();
 			if (player.statusEffectv2(StatusEffects.RivereDungeonIB) == 0) {
-				outputText("A soft warble emanates from nearby, it sounds much like rolling waves, quickly approaching. You notice a large sphere of water rolling toward you.  It bounces, the ball jiggling with each hop before it quickly begins to take form.  ");
-				outputText("The body of water quickly coalesces into a humanoid form with clear masculine features.  Thje Undine focuses its attention on you, still dripping with water before it shifts aggressively, prepared to attack. It's a fight!");
+				outputText("A soft warble emanates from nearby; it sounds much like rolling waves, quickly approaching. You notice a large sphere of water rolling toward you.  It bounces, the ball jiggling with each hop before it quickly begins to take form.  ");
+				outputText("The body of water quickly coalesces into a humanoid form with clear masculine features.  The Undine focuses its attention on you, still dripping with water, before it shifts aggressively, prepared to attack. It's a fight!");
 				if (!player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
 				flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = 4;
 				startCombat(new WaterElemental(), true);
@@ -1518,50 +1469,23 @@ public class RiverDungeon extends DungeonAbstractContent
 			addButtonDisabled(2, "Floor 3", "You're currently at Floor 3.");
 			//floor 4
 			addButton(14, "Back", roomC01);
-		}/*
-		private function teleportCircleFloor4():void {
-			menu();
-			addButton(0, "Floor 1", teleportToFloor1);
-			addButton(1, "Floor 2", teleportToFloor2);
-			addButton(2, "Floor 3", teleportToFloor3);
-			addButtonDisabled(3, "Floor 4", "You're currently at Floor 4.");
-			addButton(14, "Back", roomD01);
-		}*/
-		private function teleportCircleFloor5():void {
-			
-		}
-		private function teleportCircleFloor6():void {
-			
-		}
-		private function teleportCircleFloor7():void {
-			
 		}
 		private function teleportToFloor1():void {
 			clearOutput();
 			outputText("A circle of energy slowly emerges, wrapping around your team. Magic surges as your vision blurs. In nearly an instant, you're transported to the first floor.\n\n");
-			inDungeon = true;
 			dungeonLoc = DUNGEON_RIVER_FLOOR_01_ROOM_01;
 			playerMenu();
 		}
 		private function teleportToFloor2():void {
 			clearOutput();
 			outputText("A circle of energy slowly emerges, wrapping around your team. Magic surges as your vision blurs. In nearly an instant, you're transported to the second floor.\n\n");
-			inDungeon = true;
 			dungeonLoc = DUNGEON_RIVER_FLOOR_02_ROOM_01;
 			playerMenu();
 		}
 		private function teleportToFloor3():void {
 			clearOutput();
 			outputText("A circle of energy slowly emerges, wrapping around your team. Magic surges as your vision blurs. In nearly an instant, you're transported to the third floor.\n\n");
-			inDungeon = true;
 			dungeonLoc = DUNGEON_RIVER_FLOOR_03_ROOM_01;
-			playerMenu();
-		}
-		private function teleportToFloor4():void {
-			clearOutput();
-			outputText("A circle of energy slowly emerges, wrapping around your team. Magic surges as your vision blurs. In nearly an instant, you're transported to the fourth floor.\n\n");
-			inDungeon = true;
-			//dungeonLoc = ;
 			playerMenu();
 		}
 	}

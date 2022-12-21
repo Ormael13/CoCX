@@ -6,9 +6,33 @@ import classes.Race;
 
 public class OrcRace extends Race {
 	public static const OrcSkinColors:/*String*/Array = ["green", "gray", "brown", "red", "sandy tan"];
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Human",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Human",
+        /*Eyes*/		"Human",
+        /*Face*/		"Human",
+        /*Gills*/		"Human",
+        /*Hair*/		"Human",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Human",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Human",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Human"];
 	
 	public function OrcRace(id:int) {
-		super("Orc", id);
+		super("Orc", id, []);//RaceBody);
 	}
 	
 	public override function setup():void {
@@ -23,7 +47,7 @@ public class OrcRace extends Race {
 				.hasPerk(PerkLib.Ferocity, +1)
 				.height(AT_LEAST(48), 0, -1000);
 		addScoresAfter(2)
-				.skinBaseColor(ANY(OrcSkinColors), +1)
+				.skinColor1(ANY(OrcSkinColors), +1)
 				.skinPlainOnly(+1)
 				.tone(AT_LEAST(70), +1)
 				.tone(AT_LEAST(105), +1)

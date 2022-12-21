@@ -98,14 +98,7 @@ public class CaiLin extends Monster
 			if (game.flags[kFLAGS.CAILIN_AFFECTION] >= 10) outputText("Cai'Lin");
 			else outputText("The gorgon");
 			outputText(" tenses and twists herself forcefully.  ");
-			//[if evaded]
-			if((player.hasPerk(PerkLib.Evade) && rand(6) == 0)) {
-				outputText("You see her tail whipping toward you and evade it at the last second. You quickly roll back onto your feet.");
-			}
-			else if(player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
-				outputText("Using Raphael's teachings and the movement afforded by your bodysuit, you anticipate and sidestep " + a + short + "'s tail-whip.");
-			}
-			else if(player.spe > rand(400)) {
+			if(player.getEvasionRoll()) {
 				outputText("You see her tail whipping toward you and jump out of the way at the last second. You quickly roll back onto your feet.");
 			}
 			else {
@@ -244,7 +237,6 @@ public class CaiLin extends Monster
 			this.armorName = "scales";
 			this.lust = 30;
 			this.fatigue = 0;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.gems = 0;
 			this.drop = new WeightedDrop().
 					add(null,1).

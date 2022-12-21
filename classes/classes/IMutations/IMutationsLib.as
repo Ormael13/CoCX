@@ -8,7 +8,6 @@ package classes.IMutations
 {
 import classes.CoC;
 import classes.IMutationPerkType;
-import classes.Creature;
 
 /**
  * The goal of Mutations 3.0 is to allow for everything related to the mutation itself to be hosted within its own file, and to reduce the number of perks being created for the player.
@@ -40,6 +39,7 @@ public class IMutationsLib
 		public static const HellcatParathyroidGlandsIM:IMutationPerkType = new HellcatParathyroidGlandMutation();
 		public static const CaveWyrmLungsIM:IMutationPerkType = new CaveWyrmLungsMutation();
 		//Mutations start here.
+		public static const AlphaHowlIM:IMutationPerkType = new AlphaHowlMutation();
 		public static const ArachnidBookLungIM:IMutationPerkType = new ArachnidBookLungMutation();
 		public static const BlackHeartIM:IMutationPerkType = new BlackHeartMutation();
 		public static const CatLikeNimblenessIM:IMutationPerkType = new CatLikeNimblenessMutation();
@@ -87,138 +87,25 @@ public class IMutationsLib
 		public static const YetiFatIM:IMutationPerkType = new YetiFatMutation();
 
 		/**
-		*Returns an array of arrays of mutation body parts in PerkType type.
-		*Can be specified to specific parts with the first argument.
-		*Must update here with an extra push to all mutations points.
-		*This feeds the Perks/Mutations DB and Evangeline's Mutations information.
-		*/
+		 * Returns an array of arrays of mutation body parts in PerkType type.
+		 * Can be specified to specific parts with the first argument.
+		 * Must update here with an extra push to all mutations points.
+		 * This feeds the Perks/Mutations DB and Evangeline's Mutations information.
+		 * @param spec any of the IMutationPerkType.SLOT_XXX constants, "" for all obtainable mutations, "All" for all mutations including deprecated
+		 * @return IMutationPerkType[]
+		 */
 		public static function mutationsArray(spec:String = ""):Array {
-			var IMutationsList:Array = []
-			function IMutationsHeart():void{
-				IMutationsList.push(BlackHeartIM, DraconicHeartIM, FrozenHeartIM, HeartOfTheStormIM, ObsidianHeartIM);
+			var list:Array = [];
+			if (spec && spec in IMutationPerkType.MutationsBySlot) {
+				list = IMutationPerkType.MutationsBySlot[spec].slice();
+			} else {
+				for (var slot:String in IMutationPerkType.MutationsBySlot) {
+					if (slot == "" && spec != "All") continue;
+					list = list.concat(IMutationPerkType.MutationsBySlot[slot]);
+				}
 			}
-			function IMutationsMuscle():void{
-				IMutationsList.push(MantislikeAgilityIM, OniMusculatureIM);
-			}
-			function IMutationsMouth():void{
-				IMutationsList.push(HollowFangsIM, VenomGlandsIM);
-			}
-			function IMutationsAdrGland():void{
-				IMutationsList.push(OrcAdrenalGlandsIM, SalamanderAdrenalGlandsIM);
-			}
-			function IMutationsBloodStream():void{
-				IMutationsList.push(FeyArcaneBloodstreamIM, HinezumiBurningBloodIM, VampiricBloodstreamIM);
-			}
-			function IMutationsFaT():void{
-				IMutationsList.push(NaturalPunchingBagIM, PigBoarFatIM, WhaleFatIM, YetiFatIM);
-			}
-			function IMutationsLungs():void{
-				IMutationsList.push(DraconicLungIM, DrakeLungsIM, MelkieLungIM);
-			}
-			function IMutationsMetabolism():void{
-				IMutationsList.push(DisplacerMetabolismIM, ManticoreMetabolismIM);
-				//IMutationsList.push(SlimeMetabolismIM);
-			}
-			function IMutationsOvaries():void{
-				IMutationsList.push(FloralOvariesIM, LactaBovinaOvariesIM);
-			}
-			function IMutationsTesticles():void{
-				IMutationsList.push(EasterBunnyEggBagIM, MinotaurTesticlesIM, NukiNutsIM);
-			}
-			function IMutationsEyes():void{
-				IMutationsList.push(GazerEyesIM, GorgonEyesIM);
-			}
-			function IMutationsPeriNervSys():void{
-				IMutationsList.push(EclipticMindIM, ElvishPeripheralNervSysIM, RatatoskrSmartsIM, RaijuCathodeIM, SharkOlfactorySystemIM);
-			}
-			function IMutationsBone():void{
-				IMutationsList.push(DraconicBonesIM, HarpyHollowBonesIM, LizanMarrowIM);
-			}
-			function IMutationsThyroidGlands():void{
-				IMutationsList.push(KitsuneThyroidGlandIM);
-			}
-			function IMutationsParaThyroidGlands():void{
-				IMutationsList.push(KitsuneParathyroidGlandsIM)
-			}
-			function IMutationsAdaptations():void{
-				IMutationsList.push(ArachnidBookLungIM, CatLikeNimblenessIM, ScyllaInkGlandsIM, TrachealSystemIM, TwinHeartIM);
-			}
-			function IMutationsDeprecated():void{
-				IMutationsList.push(MutationsTemplateIM, SlimeMetabolismIM, HellcatParathyroidGlandsIM, NekomataThyroidGlandIM, CaveWyrmLungsIM);
-			}
-			switch(spec){
-				case "Heart":
-					IMutationsHeart();
-					break;
-				case "Muscle":
-					IMutationsMuscle();
-					break;
-				case "Mouth":
-					IMutationsMouth();
-					break;
-				case "Adrenals":
-					IMutationsAdrGland();
-					break;
-				case "Bloodstream":
-					IMutationsBloodStream();
-					break;
-				case "FaT":
-					IMutationsFaT();
-					break;
-				case "Lungs":
-					IMutationsLungs();
-					break;
-				case "Metabolism":
-					IMutationsMetabolism();
-					break;
-				case "Ovaries":
-					IMutationsOvaries();
-					break;
-				case "Testicles":
-					IMutationsTesticles();
-					break;
-				case "Eyes":
-					IMutationsEyes();
-					break;
-				case "Bone":
-					IMutationsBone();
-					break;
-				case "Nerv/Sys":
-					IMutationsPeriNervSys();
-					break;
-				case "Thyroid":
-					IMutationsThyroidGlands();
-					break;
-				case "PThyroid":
-					IMutationsParaThyroidGlands();
-					break;
-				case "Adaptations":
-					IMutationsAdaptations();
-					break;
-				case "Deprecated":
-					IMutationsDeprecated();
-					break;
-				default:
-					IMutationsHeart();
-					IMutationsMuscle();
-					IMutationsMouth();
-					IMutationsAdrGland();
-					IMutationsBloodStream();
-					IMutationsFaT();
-					IMutationsLungs();
-					IMutationsMetabolism();
-					IMutationsOvaries();
-					IMutationsTesticles();
-					IMutationsEyes();
-					IMutationsBone();
-					IMutationsPeriNervSys();
-					IMutationsThyroidGlands();
-					IMutationsParaThyroidGlands();
-					IMutationsAdaptations();
-					if (spec == "All") IMutationsDeprecated();
-					IMutationsList.sort();
-			}
-			return IMutationsList;
+			list.sort();
+			return list;
 		}
 
 	}

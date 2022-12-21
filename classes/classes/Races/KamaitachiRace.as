@@ -6,9 +6,33 @@ import classes.Race;
 public class KamaitachiRace extends Race {
 	public static const KamaitachiHairColors:/*String*/Array = ["blonde", "yellow", "caramel", "brown", "emerald"];
 	public static const KamaitachiFurColors:/*String*/Array = KamaitachiHairColors;
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Human",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Human",
+        /*Eyes*/		"Human",
+        /*Face*/		"Human",
+        /*Gills*/		"Human",
+        /*Hair*/		"Human",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Human",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Human",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Human"];
 	
 	public function KamaitachiRace(id:int) {
-		super("Kamaitachi", id);
+		super("Kamaitachi", id, []);//RaceBody);
 	}
 	
 	public override function setup():void {
@@ -25,8 +49,8 @@ public class KamaitachiRace extends Race {
 				.tailType(Tail.WEASEL, +1)
 				.skinBasePattern(Skin.PATTERN_SCAR_WINDSWEPT, +1)
 				.hairType(Hair.WINDSWEPT, +1)
-				.hairColor(ANY(KamaitachiHairColors), +1)
-				.skinCoatColor(ANY(KamaitachiHairColors), +1);
+				.hairColor1(ANY(KamaitachiHairColors), +1)
+				.furColor1(ANY(KamaitachiHairColors), +1);
 		
 		addMutation(IMutationsLib.HeartOfTheStormIM);
 		

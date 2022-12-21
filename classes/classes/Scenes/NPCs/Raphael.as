@@ -1,4 +1,5 @@
 ﻿package classes.Scenes.NPCs{
+
 import classes.*;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
@@ -23,6 +24,10 @@ public function Raphael() {
 
 private var checkedRussetRogue:int;
 
+public function get dressTimerDisabled():Boolean {
+	return sceneHunter.other;
+}
+
 //Implementation of TimeAwareInterface
 public function timeChange():Boolean {
     checkedRussetRogue = 0; //Make sure we test just once in timeChangeLarge
@@ -34,11 +39,7 @@ public function timeChange():Boolean {
 }
 
 public function timeChangeLarge():Boolean {
-    if (checkedRussetRogue++ == 0 && model.time.hours == 6 && flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] >= 0 && player.hasKeyItem("Camp - Chest") >= 0 && player.gems >= 5 && player.statusEffectv1(StatusEffects.TelAdre) >= 1 && (flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0)) {
-        /*trace("RAPHAEL FINAL COUNTDOWN: " + flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER]);
-        trace("RAPHAEL MET: " + flags[kFLAGS.RAPHAEL_MET]);
-        trace("RAPHAEL DRESS TIMER: " + flags[kFLAGS.RAPHAEL_DRESS_TIMER]);
-        trace("RAPHAEL DISGUSTED: " + flags[kFLAGS.RAPHAEL_DISGUSTED_BY_PC_APPEARANCE]);*/
+    if (checkedRussetRogue++ == 0 && model.time.hours == 6 && flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] >= 0 && player.hasKeyItem("Camp - Chest") >= 0 && player.gems >= 5 && player.statusEffectv1(StatusEffects.TelAdre) >= 1 && !flags[kFLAGS.IN_INGNAM]) {
         if (flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] <= 0) { //Countdown to finale not currently engaged!
             //If the PC meets his criteria!
             if (RaphaelLikes()) { //Not yet met!  MEETING TIEM!
@@ -54,6 +55,8 @@ public function timeChangeLarge():Boolean {
                         return true;
                     }
                     //Dress followup - Call picnic date prologue!
+                    // First one - when the timer is ticking, first date or date after disgust
+                    // Second one - when the timer is stopped: dating, but not disgusted
                     if (player.armor == armors.R_BDYST && (flags[kFLAGS.RAPHAEL_DRESS_TIMER] > 1 && flags[kFLAGS.RAPHAEL_DRESS_TIMER] <= 4 || flags[kFLAGS.RAPHAEL_DRESS_TIMER] == -1)) {
                         outputText("<b>\nSomething unusual happens that morning...</b>\n");
                         doNext(RaphaelEncounterIIDressFollowup);
@@ -70,8 +73,12 @@ public function timeChangeLarge():Boolean {
                 //Dress countdown - if pc isn't wearing it yet, kick out to
                 //Finale!
                 if (flags[kFLAGS.RAPHAEL_DRESS_TIMER] == 1) {
-                    flags[kFLAGS.RAPHAEL_DRESS_TIMER] = -1;
-                    flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] = 7;
+					if (sceneHunter.other) flags[kFLAGS.RAPHAEL_DRESS_TIMER] = 4; //reset to nice state
+					else {
+						// date is dead, skip to the ending
+						flags[kFLAGS.RAPHAEL_DRESS_TIMER] = -1;
+						flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] = 7;
+					}
                 }
                 //PC get ready for the 2nd encounter and hasn't been
                 //shot down yet?
@@ -93,33 +100,13 @@ public function timeChangeLarge():Boolean {
 //End of Interface Implementation
 
 override public function RaphaelLikes():Boolean {
-	if (flags[kFLAGS.LOW_STANDARDS_FOR_ALL])
-	{
-		if (player.gender == 2 || player.gender == 3)	// you at least need a vagoo for raphael to fuck you. Otherwise the sex scenes will be rather broken.
-			return true;
-	}
-
-	//({If player has no legs, or a centaur body.}
-	if(!player.isBiped())
-		return false;
-	//({If player has above E cup breasts}
-	if(player.biggestTitSize() >= 12) return false;
-	//({If player has below C cup breasts}
-	if(player.biggestTitSize() < 3) return false;
-	//({If player has grown less than girly hips}
-	if(player.hips.type < 6) return false;
-	//({If player has gotten a massive butt}
-	if(player.butt.type >= 16) return false;
-	//({If female player has gotten bigger than 6 feet}
-	if(player.tallness > 72) return false;
-	//({If female player has gotten smaller than 4 feet}
-	if(player.tallness < 48) return false;
-	//({If player has grown ANY cock and balls}
-	if(player.balls > 0 || player.cockTotal() > 0) return false;
-	//(For now:
-	//({If player has lost all gender}
-	if(player.gender == 0) return false;
-	return true;
+	//Requirements: bipedal, tits C-E, medium-sized hips, 4-6 feet tall, vagina, no cocks or balls.
+	return player.hasVagina() && (flags[kFLAGS.LOW_STANDARDS_FOR_ALL] ||
+		player.isBiped() &&
+		player.biggestTitSize() >= 3 && player.biggestTitSize() < 12 &&
+		player.hips.type >= 6 && player.hips.type < 16 &&
+		player.tallness >= 48 && player.tallness <= 72 &&
+		!player.hasCock() && player.balls == 0);
 }
 
 
@@ -127,9 +114,13 @@ override public function RaphaelLikes():Boolean {
 //Female PC wakes up.
 
 //{First encounter}
-private function meetRaphael():void {
+public function meetRaphael():void {
 	clearOutput();
     spriteSelect(SpriteDb.s_raphael);
+	if (!recalling) {
+		flags[kFLAGS.RAPHAEL_MET] = 1;
+		outputText("<b>New scene is unlocked in 'Recall' menu!</b>\n\n");
+	}
 	if (camp.IsSleeping){
 		outputText("You stir in your sleep, bothered by a noise. It's the familiar creaking of your camp's storage chest, as if you've just opened it up to fill it with freshly found loot. Groaning, you hog your blankets and twist. Nothing to worry about then. You soon drift back into a pleasant dream about all the spoils you've accumulated over the time here. Life is good.\n\n");
 		outputText("Suddenly, you sit up straight and something occurs to you. If you're sleeping, then who's opening the chest?\n\n");
@@ -145,17 +136,19 @@ private function meetRaphael():void {
 	outputText("\"<i>Ha-hah!</i>\" it exclaims boastfully with a sharp, young, dashing voice while standing tall and proud on top of its perch. \"<i>Another daring caper committed by...</i>\"  The being takes the time to strike a pose. \"<i>...the Russet Rogue!</i>\"\n\n");
 
 	outputText("You rub your eyes, walk towards the wall and take a curious look up. It appears to be a red fox. He's looking down on you with a triumphant smirk on a tapered snout; most definitely male and masculine. Although not the broadest figure around, his muscles are lean and strong. His contoured torso flares up above narrow hips and gives him a body that has an agile deftness to it. He wears a loose, red-brown jacket and supple deerskin pants, with a red sash across the hip and soft-soled boots below. They do much to complement the vivid color of his fur, which is a vibrant crimson, broken only by the beige fur running down his chest and towards his crotch. Lithe, the only two things that are large about him is the clear bulge in his thin leather pants and the bushy tail that flicks playfully from side to side. The russet rogue takes quite a bit of pleasure from larceny it seems. Judging by his ornate outfit, he does it for the thrill of it. He himself must be well off.");
-	//Set first meeting complete
-	flags[kFLAGS.RAPHAEL_MET] = 1;
 	doNext(meetRaphaelPtII);
 }
 
 //~~~ Next Page ~~~
 private function meetRaphaelPtII():void {
 	clearOutput();
+	if (flags[kFLAGS.LOW_STANDARDS_FOR_ALL]) sceneHunter.print("The only thing you need to fuck Raphael is a vagina. Just don't disable Low Standards or things will blow up.")
+	else sceneHunter.print("Okay, for Raphael to like you, you need to have: bipedal body, tits C-E, medium-sized hips, height 4-6 feet, a vagina, no cocks or balls... or just enable Low Standards and let his writer go cry in their pillow.");
+	if (!RaphaelLikes()) sceneHunter.print("You'd better reload if you still want him. There's no second chance.");
+	//Requirements: .
 	outputText("Suddenly, Raphael's features grow soft and surprised as he looks down upon you. You get the feeling he's eyeing you up and catching a peek at your " + (player.mf("m", "f") == "f" ? "cleavage" : "groin") + ", but you can't be sure.\n\n");
 
-	outputText("\"<i>Marae must have cursed me for my audacity, for I am growing blind even at my young age.</i>\" The fox puts his hand to his forehead and pretends to faint. He rights himself just before he hits the ground, however and lands in a kneel before your feet.\n\n");
+	outputText("\"<i>Marae must have cursed me for my audacity, for I am growing blind even at my young age.</i>\" The fox puts his hand to his forehead and pretends to faint. He rights himself just before he hits the ground, however, and lands in a kneel before your feet.\n\n");
 
 	outputText("You can't help but smile a little at the amount of theatrical flourish.\n\n");
 
@@ -164,9 +157,18 @@ private function meetRaphaelPtII():void {
 	else outputText("\"<i>My apologies. I didn't notice you! I thought you were a lady, but you're not. Can you forgive me for not noticing you, my fair friend?</i>\" He takes your hand in both his paws, while looking deeply into your eyes. His own are a deep emerald green, contrasting sharply with his bright red coat. They are set below a sturdy brow that gives him playful maturity and a rough regal elegance.");
 
 	outputText("What do you do?");
-	//[Talk] [Slap] [Swoon]
-	if (RaphaelLikes()) simpleChoices("Talk", RaphaelFirstMeetingTALK, "Slap", RaphaelFirstMeetingSLAP, "Swoon", RaphaelFirstMeetingSWOON, "Rape", null, "", null);
-	else simpleChoices("Let Him Go", letRaphaelGoFirstMeeting, "Slap", RaphaelFirstMeetingSLAP, "Rape", (player.lust >= 33 && player.hasCock() && player.cor >= (60 - player.corruptionTolerance)) ? rapeRaphael : null, "", null, "", null);
+	menu();
+	if (RaphaelLikes()) {
+		addButton(0, "Talk", RaphaelFirstMeetingTALK);
+		addButton(1, "Swoon", RaphaelFirstMeetingSWOON);
+	}
+	addButton(2, "Slap", RaphaelFirstMeetingSLAP);
+	addButton(3, "Rape", rapeRaphael)
+		.disableIf(player.lust < 33, "Tsk. Not aroused enough.")
+		.disableIf(!player.hasCock(), "Req. a cock!")
+		.disableIf(player.cor < 60 - player.corruptionTolerance,
+			"Why would you do that? You're not corrupted enough to rape the poor guy.");
+	addButton(4, "Let Him Go", letRaphaelGoFirstMeeting);
 }
 
 //{When Player chooses Slap/refuse after the first encounter}
@@ -187,12 +189,13 @@ private function RaphaelFirstMeetingSLAP():void {
 	outputText("Raphael curtsies and tips his hat before making his escape. \"<i>You have my condolences.</i>\"\n\n");
 
 	outputText("You resolve to wash your hand. You're sure you've not seen the last of the russet rogue, but it will be time in coming before that happens with the severity of your rejection.");
-
-	//{Game Removal}
-	//No more meetings + endgame in 21 days
-	flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] = 0;
-	flags[kFLAGS.REJECTED_RAPHAEL] = 1;
-	doNext(playerMenu);
+	if (!recalling) {
+		//{Game Removal}
+		//No more meetings + endgame in 21 days
+		flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] = 0;
+		flags[kFLAGS.REJECTED_RAPHAEL] = 1;
+		doNext(playerMenu);
+	} else doNext(recallWakeUp);
 }
 
 //{When player chooses swoon after the first encounter}
@@ -206,17 +209,18 @@ private function RaphaelFirstMeetingSWOON():void {
 
 	outputText("\"<i>Why I am Raphael!</i>\" He lisps affectionately and rises slowly. \"<i>Adventurer extraordinaire, redistributors of misplaced wealth and connoisseur of all things fine in life.</i>\" He strides into camp with the kind of respectful confidence that makes the place his own. He pops open the tightly locked trunk with the mere kick of the boot and places his ill-gotten gains back into your belongings. \"<i>The orphanage will have to wait. Tonight, I will regale the small ones with tales of exceptional beauty instead.</i>\"\n\n");
 
-	outputText("A faint, nondescript sound is heard and you instantly pull away from the surreality of your little meeting, to realize others might not be so smitten by the apparently world famous thief. What if others discover him? Your mind races to come up with excuses for your illicit rendezvous, but clearly, you're more worried about Raphael's presence than he is. He merely smiles at the noise, keeps his cool and takes you by the hand. One more time he plants a kiss on top of it by bending through crossed knees.\n\n");
+	outputText("A faint, nondescript sound is heard and you instantly pull away from the surreality of your little meeting, to realize others might not be so smitten by the apparently world-famous thief. What if others discover him? Your mind races to come up with excuses for your illicit rendezvous, but clearly, you're more worried about Raphael's presence than he is. He merely smiles at the noise, keeps his cool and takes you by the hand. One more time he plants a kiss on top of it by bending through crossed knees.\n\n");
 
 	outputText("\"<i>For now, do not worry yourself my shining jewel. The russet rogue never forgets a mark. I will answer all your questions in good stead, but for now, patience. I can already tell a woman like you is deserving of delicacy and finesse, like the blooming rose needs nurturing and time to reveal her innermost beauty.</i>\"\n\n");
 
 	outputText("In a blink of an eye, the red fox jumps back up the wall. \"<i>We will meet again!</i>\" He exclaims in a hushed tone, while slinking over to the other side of the wall.\n\n");
 
 	outputText("You hold the hand he touched close to your chest.");
-
-	dynStats("str", -1,"tou", -1, "spe", 3, "sen", 1, "lus", 25);
-	player.trainStat("spe",3,100);
-	doNext(playerMenu);
+	if (!recalling) {
+		dynStats("str", -1,"tou", -1, "spe", 3, "sen", 1, "lus", 25);
+		player.trainStat("spe",3,100);
+		doNext(playerMenu);
+	} else doNext(recallWakeUp);
 }
 
 //{When you choose the [Talk] option in the first encounter}
@@ -236,13 +240,12 @@ private function RaphaelFirstMeetingTALK():void {
 	outputText("\"<i>No, my lady. If you ever want to inspect these particular goods, we will have to meet again!</i>\"  Raphael hops up the same wall, spinning about on one leg. \"<i>Do not worry yourself, my fair flower. The russet rogue never leaves a lady wanting. For now, patience. I can already tell a woman like you is deserving of delicacy and finesse, like the blooming rose needs nurturing and time to present her full glory.</i>\"\n\n");
 
 	outputText("In a blink of an eye, the red fox jumps back up the wall. \"<i>We will meet again!</i>\" He exclaims in a hushed tone, while slinking over the wall to land on the other side.\n\n");
-
-	//{Optional: Raph makes off with 5 gems)
-	player.gems -= 5;
-	if(player.gems < 0) player.gems = 0;
-	statScreenRefresh();
-
-	doNext(playerMenu);
+	if (!recalling) {
+		player.gems -= 5;
+		if (player.gems < 0) player.gems = 0;
+		statScreenRefresh();
+		doNext(playerMenu);
+	} else doNext(recallWakeUp);
 }
 
 private function letRaphaelGoFirstMeeting():void {
@@ -250,12 +253,14 @@ private function letRaphaelGoFirstMeeting():void {
 	outputText("You tell him to just let go.\n\n");
 
 	outputText("\"<i>Thank you, friend. We may meet again,</i>\" He says. With that, he saunters off into the distance.");
-	player.gems -= 5;
-	if(player.gems < 0) player.gems = 0;
-	statScreenRefresh();
-	flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] = 0;
-	flags[kFLAGS.REJECTED_RAPHAEL] = 0;
-	doNext(playerMenu);
+	if (!recalling) {
+		player.gems -= 5;
+		if (player.gems < 0) player.gems = 0;
+		statScreenRefresh();
+		flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] = 0;
+		flags[kFLAGS.REJECTED_RAPHAEL] = 0;
+		doNext(playerMenu);
+	} else doNext(recallWakeUp);
 }
 
 //Take that, homophobia!
@@ -263,12 +268,15 @@ private function rapeRaphael():void {
 	clearOutput();
 	outputText("That fox must be punished for his deeds. After all, he did try to rob you! You quickly grab him by the wrists and kick his rapier away.");
 	if (player.str + rand(30) < 50) { //Fail, Raphael escapes.
+		sceneHunter.print("Oops. Failed strength check.");
 		outputText("\n\nRaphael quickly wiggles out of your grip, picks up his rapier and runs away, denying you a chance to rape! Fortunately, he appears to have dropped some gems. You take the gems and pocket them.");
-		player.gems += 10 + rand(20);
-		statScreenRefresh();
-		flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] = 0;
-		flags[kFLAGS.REJECTED_RAPHAEL] = 1;
-		doNext(playerMenu);
+		if (!recalling) {
+			player.gems += 10 + rand(20);
+			statScreenRefresh();
+			flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] = 0;
+			flags[kFLAGS.REJECTED_RAPHAEL] = 1;
+			doNext(playerMenu);
+		} else doNext(recallWakeUp);
 		return;
 	}
 	outputText("\n\nYou pin him under your weight" + player.clothedOrNakedLower(", remove your [armor]", "") + " and quickly yank his pants off, exposing his tight butt-cheeks. \"<i>No! Don't put that in there!</i>\" Raphael cries. It's his loss and he must pay the ultimate price: his virginity.");
@@ -278,11 +286,13 @@ private function rapeRaphael():void {
 	if (player.findCockWithType(CockTypesEnum.TENTACLE, 1, 48, -1, "length")) //you CAN'T do all-way through with 1-inch dick :)
         outputText("You push your tentacle cock in all the way through. You can feel it snaking its way through his intestines and stomach before finally comes out of his mouth! The fox looks down, unable to speak. You laugh at the poor fox-thief and pull your cock so you're just fucking his anus.");
 	outputText("\n\nEventually, you can hold back no more and empty your seed into his bowels. Raphael cums as well, shooting ropes of fox-jizz. With your orgasmic high complete, you pull your cock out of his ass, cum still dripping from his abused butthole. You give him a naughty grin and take his gems and rapier while he's still dazed. To the victor go the spoils after all! ");
-	player.gems += 100 + rand(20);
-	player.sexReward("Default","Default",true,false);
-	flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] = 0;
-	flags[kFLAGS.REJECTED_RAPHAEL] = 1;
-	inventory.takeItem(weapons.RRAPIER, rapeRaphaelII);
+	if (!recalling) {
+		player.gems += 100 + rand(20);
+		player.sexReward("Default","Default",true,false);
+		flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] = 0;
+		flags[kFLAGS.REJECTED_RAPHAEL] = 1;
+		inventory.takeItem(weapons.RRAPIER, rapeRaphaelII);
+	} else doNext(recallWakeUp);
 }
 private function rapeRaphaelII():void {
 	clearOutput();
@@ -302,7 +312,7 @@ private function RaphaelDress():void {
 		outputText("A small pebble hits the ground near you, alerting you that something is going on. When a second one hits, you're sure someone is trying to draw your attention.\n\n");
 		outputText("You check on your camp confused as to what's going on. Sticking your head through the front wall of your " + camp.homeDesc() + ", you take a curious peek outside, but find no one around.\n\n");
 	}
-	outputText("The first thing you do is open your storage chest, to see if the Russet Rogue has robbed you again. This doesn't appear to be the case, and instantly, your eye is drawn to an addition instead of a subtraction from its contents. You seem to have gained a new outfit! Upon a carefully folded fabric of rose red color, a note is left below a gorgeous ruby pendant upon a golden setting and carried by a filigree chain. Curiously, you open the note and read it.\n\n");
+	outputText("The first thing you do is open your storage chest, to see if the Russet Rogue has robbed you again. This doesn't appear to be the case, and instantly, your eye is drawn to an addition instead of a subtraction from its contents. You seem to have gained a new outfit! Upon a carefully folded fabric of rose-red color, a note is left below a gorgeous ruby pendant upon a golden setting and carried by a filigree chain. Curiously, you open the note and read it.\n\n");
 
 	outputText("\"<i>I happened across this beautiful ensemble and was instantly reminded of the one thing in Mareth that makes its splendor pale in comparison. Fair trappings, to fit around a beautiful body.\n\n");
 
@@ -320,7 +330,7 @@ private function RaphaelDress():void {
 //~~~ Next Page ~~~
 private function RaphaelDressPtII():void {
 	clearOutput();
-	outputText("It's a one piece suit, combining intricate full-body stockings with a graceful corset and an elegant long sleeve, short top jacket sewn in. You try to slip into the unitard and soon figure out you're supposed to do so in the nude, with the tight outfit serving as underwear and overwear both. Made of the finest silk, the feeling is sensual when your naked body slides into the satin lattice and fills out the pliable lacework with your volume. Pulling on the zipper in the back, you seal yourself in and reign the corset tight. It causes the suit to hug and clutch every curve on you with comfortable snugness, bringing out the rounds and the flow of your body. With the incorporated leather corset pressing into your waist, it also forces you to maintain a dignified, elegant posture. It fits like a literal glove, with rings across each of your fingers to pull down its sleeves and leather padding below the stockings of your feet. You can't help but tug the corset's cords one more time to add upon the tightness and an added feeling of secure comfort. Other than that, the fabric is featherlight and you soon notice how some parts do a better job at covering you up than others.\n\n");
+	outputText("It's a one-piece suit, combining intricate full-body stockings with a graceful corset and an elegant long sleeve, short top jacket sewn in. You try to slip into the unitard and soon figure out you're supposed to do so in the nude, with the tight outfit serving as underwear and overwear both. Made of the finest silk, the feeling is sensual when your naked body slides into the satin lattice and fills out the pliable lacework with your volume. Pulling on the zipper in the back, you seal yourself in and reign the corset tight. It causes the suit to hug and clutch every curve on you with comfortable snugness, bringing out the rounds and the flow of your body. With the incorporated leather corset pressing into your waist, it also forces you to maintain a dignified, elegant posture. It fits like a literal glove, with rings across each of your fingers to pull down its sleeves and leather padding below the stockings of your feet. You can't help but tug the corset's cords one more time to add upon the tightness and an added feeling of secure comfort. Other than that, the fabric is featherlight and you soon notice how some parts do a better job at covering you up than others.\n\n");
 
 	outputText("All over your body where the gossamer isn't reinforced with jacket or corset, the density of the delicate velvet web varies. Although the silk hugs across your " + vaginaDescript(0) + " and through the crack of your ass as a triple layer that guards against prying eyes, the surface of your hips and legs is clearly seen through the transparent motif of flowers swirling across the lace. The cheeks of your [butt] feel equally exposed despite the presence of four sweeping rosebranches stitched across them, but at least the jacket trails past your lower back and partly covers your buttocks with its parted tailflaps.");
 	//({If player has tail}
@@ -337,20 +347,12 @@ private function RaphaelDressPtII():void {
 	inventory.takeItem(armors.R_BDYST, playerMenu);
 }
 
-/*DRESS HERE
-Descriptive: A high society bodysuit. It is as easy to mistake it for ballroom apparel as it is for boudoir lingerie. The thin transparent fabric is so light and airy that it makes avoiding blows a second nature.
-Optional:
-Multiplies evasion ratings. It has crap armor rating.
-~~~*/
-
 
 private function RaphaelEncounterIIDressFollowup():void {
 	//{Encounter two}
 	//{Requirement: PC is wearing High society bodysuit.
 	//Sequence: When PC wakes up the next day.})
 	flags[kFLAGS.RAPHAEL_SECOND_DATE] = 1;
-	//Clear dress countdown.  Its over and done with.
-	flags[kFLAGS.RAPHAEL_DRESS_TIMER] = -1;
 	clearOutput();
     spriteSelect(SpriteDb.s_raphael);
 	if (camp.IsSleeping){
@@ -375,6 +377,8 @@ private function RaphaelEncounterIIDressFollowup():void {
 		flags[kFLAGS.RAPHAEL_DISGUSTED_BY_PC_APPEARANCE] = 0;
 		//[Reject] [Frisk] [Date]
 		simpleChoices("Reject", RaphaelChooseReject, "Frisk", RaphaelChooseFrisk, "Date", RaphaelSelectDate, "", null, "", null);
+		//Clear dress countdown.  Its over and done with.
+		flags[kFLAGS.RAPHAEL_DRESS_TIMER] = -1;
 	}
 	//({If player does not meet the first encounter requirements:}
 	else {
@@ -400,7 +404,7 @@ private function RaphaelEncounterIIDressFollowup():void {
 		//({If female player has gotten smaller than 4 feet}
 		if(player.tallness < 48) outputText("Raphael squints like he has trouble seeing you from there, because of your dimunitive size. \"<i>I've dated goblins once... didn't work out.</i>\"\n\n");
 		//({If player has grown ANY cock and balls}
-		if(player.balls > 0 || player.cockTotal() > 0) outputText("\"<i>What is that bulge below the tight outfit I gave you?</i>\" The fox inspects your groin. \"<i>No, never mind. I don't want to know.</i>\"\n\n");
+		if(player.hasBalls() || player.cockTotal() > 0) outputText("\"<i>What is that bulge below the tight outfit I gave you?</i>\" The fox inspects your groin. \"<i>No, never mind. I don't want to know.</i>\"\n\n");
 		//(For now:
 		//({If player has lost all gender}
 		if(player.gender == 0) outputText("\"<i>There's... something different about you today. Your smell, it has changed.</i>\"\n\n");
@@ -409,10 +413,12 @@ private function RaphaelEncounterIIDressFollowup():void {
 
 		outputText("You clench your jaw as he vanishes, more than a bit offended.");
 
+		sceneHunter.print("Okay, now you have 7 days to fix everything or he leaves... Better hurry, huh?");
 		//{Game removal untill the PC complies with the requirements again.})
 		doNext(playerMenu);
 		flags[kFLAGS.RAPHAEL_DISGUSTED_BY_PC_APPEARANCE] = 1;
 		//7 days to fix or done with!
+		flags[kFLAGS.RAPHAEL_SECOND_DATE] = 7;
 	}
 }
 
@@ -501,7 +507,7 @@ private function RaphaelChooseFrisk():void {
 
 		outputText("\"<i>My, such an eager little thing.</i>\" He comments, pleased.\n\n");
 
-		outputText("You ask yourself the age old question if he's just happy to see you, but you suspect differently when you reach out for the firm lump and cup it.\n\n");
+		outputText("You ask yourself the age-old question if he's just happy to see you, but you suspect differently when you reach out for the firm lump and cup it.\n\n");
 
 		outputText("What do you do?");
 		//[Squeeze] [Fondle]
@@ -568,7 +574,7 @@ private function friskFondleChoice():void {
 //[Squeeze]
 private function friskSqueezeChoice():void {
 	clearOutput();
-	outputText("Vicious and eager to teach him some humility, you dig into the tender package and squeeze hard enough to drive the sharp edges of your pendant into Raphael's jewels. The fox immediately grabs you by the wrist, but this is one trap he isn't wriggling out of. You drive him to his knees while he lets out a high pitched, muffled squeal replete with a blank, agonized expression on his face.\n\n");
+	outputText("Vicious and eager to teach him some humility, you dig into the tender package and squeeze hard enough to drive the sharp edges of your pendant into Raphael's jewels. The fox immediately grabs you by the wrist, but this is one trap he isn't wriggling out of. You drive him to his knees while he lets out a high-pitched, muffled squeal replete with a blank, agonized expression on his face.\n\n");
 
 	outputText("\"<i>You have some balls stealing from me fox.</i>\" You comment and grin. \"<i>Just checking. Is that too soft or should I squeeze harder?</i>\"\n\n");
 
@@ -576,7 +582,7 @@ private function friskSqueezeChoice():void {
 
 	outputText("You chuckle and look around you to see if anyone heard. When you look back to see him squirming between your fingers however, all you're holding onto is the ruby pendant. Raphael has pulled off an amazing switching trick and has escaped. Instead, he stands on top the wall panting and defiant.\n\n");
 
-	outputText("\"<i>I'll be sure to repay the favor.</i>\" He warns you with a high pitched voice while clasping his poor genitals. \"<i>Nobody touches my goods like that and gets away with it.</i>\"\n\n");
+	outputText("\"<i>I'll be sure to repay the favor.</i>\" He warns you with a high-pitched voice while clasping his poor genitals. \"<i>Nobody touches my goods like that and gets away with it.</i>\"\n\n");
 
 	outputText("He raises just a single finger to the air and groans painfully. \"<i>We will meet again!</i>\"\n\n");
 
@@ -594,7 +600,7 @@ private function RaphaelPicnic():void {
 
 	outputText("\"<i>Mademoiselle?</i>\" Raphael inquires your readiness. \"<i>Breakfast, is served!</i>\" he exclaims while uncorking a bottle of wine.  He has neatly arranged a series of plates, each filled with small delicacies.\n\n");
 
-	outputText("You smile at the flower flanked arrangement. It almost looks far too good to be true, but the smell wafting from the still warm drumsticks is simply too good to pass up on. You sink to your knees and wait patiently for Raphael to join you. The wine babbles warm and softly upon the glass when he pours it, standing at a perfect 90 degree angle from the hips, his tail as a balance and one arm in the back. It gives you a chance to admire him. He's been wagging that tight butt in front of you the entire journey over here, while his silky tail almost appears to trap sunlight within its fine long hairs. From tip to bottom, a white streak runs down his body's underside. You're not sure whether you approve of his clothes. He's a fine dresser and you admire the color and quality of the leather covering his body, but you wonder if he'd look even better without them on. A pelt and clothes both seem like an odd combination, despite being fashionable.\n\n");
+	outputText("You smile at the flower flanked arrangement. It almost looks far too good to be true, but the smell wafting from the still warm drumsticks is simply too good to pass up on. You sink to your knees and wait patiently for Raphael to join you. The wine babbles warm and softly upon the glass when he pours it, standing at a perfect 90-degree angle from the hips, his tail as a balance and one arm in the back. It gives you a chance to admire him. He's been wagging that tight butt in front of you the entire journey over here, while his silky tail almost appears to trap sunlight within its fine long hairs. From tip to bottom, a white streak runs down his body's underside. You're not sure whether you approve of his clothes. He's a fine dresser and you admire the color and quality of the leather covering his body, but you wonder if he'd look even better without them on. A pelt and clothes both seem like an odd combination, despite being fashionable.\n\n");
 
 	outputText("Only when Raphael picks up a piece of bacon and nibbles on it, do you seek to satisfy your own urge by breaking off a piece of baguette and washing the moist bread down with a sip of wine. You're oddly at peace with consuming something of Raphael's. Not only because he partakes just as eagerly, but because spiking the food doesn't seem like his style. Going over the dangers in your mind however, you also quickly realize that this is simply his method of winning you over with charm. Deep down, you're still supposed to be the hero champion this realm needs. It will take more than just wine and pastry to win you over.");
 	//~~~ Next page ~~~
@@ -606,6 +612,7 @@ private function RaphaelPicnicII():void {
 
 	outputText("Curious and certain he has a great deal of knowledge on Mareth, you begin asking Raphael questions about his craft and his experiences. Soon enough, two distinct subjects come up as possible topics. Then again, the wine goes straight to your head and this seems like the perfect time to enjoy more leisurely activities and simply enjoy yourself.\n\n");
 	//[Discuss] [Skill] [Flirt]
+	sceneHunter.print("I'll be concise here. Two final scenes, depending on your training. If you train both, you can check the second one in 'Recall'.")
 	simpleChoices("Fencing", RaphaelPicnicSkill, "Thieving", RaphaelPicnicChooseThieving, "", null, "", null, "", null);
 }
 private function RaphaelPicnicEnd():void {
@@ -638,7 +645,7 @@ private function RaphaelPicnicEnd():void {
 }
 
 	//{Player chooses [Skill]}
-private function RaphaelPicnicSkill():void {
+public function RaphaelPicnicSkill():void {
 	clearOutput();
 	//{Introduction scene that Plays out only once.}
 	if(flags[kFLAGS.RAPHAEL_RAPIER_TRANING] == 0) {
@@ -668,7 +675,7 @@ private function RaphaelPicnicSkill():void {
 		//{Leads up to fencing variables}
 	}
 	//{Below 30 speed. PC chooses [Skill] Must play out at least once}
-	if(player.spe < 30 || flags[kFLAGS.RAPHAEL_RAPIER_TRANING] == 0) {
+	if(!recalling && player.spe < 30 || flags[kFLAGS.RAPHAEL_RAPIER_TRANING] == 0) {
 		outputText("The two of you amble over to a mossy field. Raphael is up front and waving about his rapier playfully, grazing the tip through the flora and even slashing at a wasp. You can't seem to spot the insect flying around after he does that.\n\n");
 
 		outputText("When you reach the center of the field however, Raphael throws the weapon to the ground with temperament and tells you to prepare.\n\n");
@@ -714,8 +721,8 @@ private function RaphaelPicnicSkill():void {
 		flags[kFLAGS.RAPHAEL_RAPIER_TRANING] = 1;
 	}
 	//{Fencing practice variables: Speed 30-39 Must play out at least once}
-	else if(player.spe < 39 || flags[kFLAGS.RAPHAEL_RAPIER_TRANING] == 1) {
-		outputText("In the middle of the mossy field, you grab Raphael by his paw as he offers it. The other you instinctively put around his shoulder, when he does the same around your waist. This forces the both of you to hold each other close. A little closer than what you're normally comfortable with. Raphael doesn't seem to mind when you lean away from him however. He treats it as a game between you.\n\n");
+	else if(!recalling && player.spe < 39 || flags[kFLAGS.RAPHAEL_RAPIER_TRANING] == 1) {
+		outputText("In the middle of the mossy field, you grab Raphael by his paw as he offers it. The other you instinctively put around his shoulder, when he does the same around your waist. This forces both of you to hold each other close. A little closer than what you're normally comfortable with. Raphael doesn't seem to mind when you lean away from him however. He treats it as a game between you.\n\n");
 
 		outputText("When you ask him if he's sure that this is part of a dance. He chortles. \"<i>M'lady, it takes two to tango!</i>\"\n\n");
 
@@ -725,7 +732,7 @@ private function RaphaelPicnicSkill():void {
 
 		outputText("He shifts from many intimidating steps towards you, to pulling your body towards his in fevered paces back. You struggle to keep your distance, tangled within his hold and circling around each other like soaring hawks. You grip his shoulder and hand firmly in an effort to make your resistance known, but Raphael simply growls while sweeping you along in heated exertion. You refuse to give in and eventually, you become a slave to the rhythm instead. Your steps are simply that much more elegant, your performance that much more inspired, when you press your lush body into that of the handsome rogue and tighten your steps, loosening your turns. Before you know it, your body rubs and undulates eagerly against the driving fox, until finally, Raphael sweeps you backward. Missing a winding turn, he throws you around his body and catches you just before you fall to the moss. Leaning in over you, he puts his snout to your ear and warbles something in a language of burbling groans unknown to you.\n\n");
 
-		outputText("When he picks you back up, he also appears to have picked up his rapier.  Within the hold of both your hands, a firm hilt is now felt and your swirls are accompanied by the sound of swishing metal. When he leads you off into a mutual sideward step across the marsh, it looks as though the both of you are following the rapier's tip as a united entity.\n\n");
+		outputText("When he picks you back up, he also appears to have picked up his rapier.  Within the hold of both your hands, a firm hilt is now felt and your swirls are accompanied by the sound of swishing metal. When he leads you off into a mutual sideward step across the marsh, it looks as though both of you are following the rapier's tip as a united entity.\n\n");
 
 		outputText("However, you dig your heels crudely into the moss and stop Raphael from moving any further.  Worried over the inclusion of the razor-sharp weapon, you object to the lack of safety.\n\n");
 
@@ -746,7 +753,7 @@ private function RaphaelPicnicSkill():void {
 		flags[kFLAGS.RAPHAEL_RAPIER_TRANING] = 2;
 	}
 	//{Fencing practice variables: Speed 40-49, Must play out at least once}
-	else if(player.spe < 49 || flags[kFLAGS.RAPHAEL_RAPIER_TRANING] == 2) {
+	else if(!recalling && player.spe < 49 || flags[kFLAGS.RAPHAEL_RAPIER_TRANING] == 2) {
 		outputText("Impressed by your fancy footwork - fast and accurate - Raphael has granted you the use of his rapier.  You are still unsure of how to wield such a precise instrument, but the fox circles you curiously while he makes you practice lunges.  It frustrates you.  They aren't fierce lunges, nor are they long ones.  You don't even get to sweep across the mossy field as playfully or as dramatically as Raphael makes fencing out to be.  Basically you're stuck in your place, walking a straight line and jabbing it limply at an invisible opponent or twisting your wrist in awkward angles to learn all the different parries.  Raphael has given you strict instructions on how to bear your body, but you have to admit that you pay such things lip service.  You'd much rather be impaling something or slashing off the top of a melon, looking cool while doing it.\n\n");
 
 		outputText("<i>\"No, no!\"</i> the fox berates you.  <i>\"All wrong! Merde! It feels like I'm working with an amateur here!\"</i> He waves his hands about in anguish and approaches you for the sixth time this session. <i>\"You'll have all the time you need to teach yourself flourish and fancy at a later date. For now, we perfect the basics! You need to have one unifying stance to fall back on. What's not to understand!?\"</i>\n\n");
@@ -781,10 +788,13 @@ private function RaphaelPicnicSkill():void {
 		outputText("<i>\"Spar with me over it.\"</i> The master fencer challenges you to what could only be an impossible fight.  He has taught you everything you know about fencing.\n\n");
 
 		outputText("What do you do?");
-		flags[kFLAGS.RAPHAEL_RAPIER_TRANING] = 4;
-		awardAchievement("Fencer", kACHIEVEMENTS.GENERAL_FENCER);
-		//[Fence] [Discuss]
-		simpleChoices("Fence", fenceRaphaelSexily, "Discus", fenceOfferChangeToDiscuss, "", null, "", null, "", null);
+		menu();
+		addButton(0, "Fence", fenceRaphaelSexily);
+		if (!recalling) {
+			flags[kFLAGS.RAPHAEL_RAPIER_TRANING] = 4;
+			awardAchievement("Fencer", kACHIEVEMENTS.GENERAL_FENCER);
+			addButton(1, "ChangeSubj", fenceOfferChangeToDiscuss);
+		}
 		return;
 	}
 	doNext(RaphaelPicnicEnd);
@@ -813,7 +823,7 @@ private function fenceRaphaelSexily():void {
 
 	outputText("<i>\"En garde,\"</i> the fox states with confidence, calm playfulness, and certain arrogance.\n\n");
 
-	outputText("Once again, you dance with the fox, the both of you circling the other while bodies pass by.  At first you hesitate to strike at him with the sharp metal, but Raphael quickly proves he won't let that happen.  You've gotten good with the rapier; just not good enough to actually hit the master fencer.  No matter how hard you try, the fox simply uses gymnastic feats of avoidance to dodge it, while kicking moss about and dragging furrows through the field with roving feet.  Meanwhile, he uses the scabbard to deflect and parry your blows eloquently, brushing it across your weapon's length to steer it away.  Weaved in with subtle strength and careful cunning, he then taps the metal away with powerful strokes of stiff leather.  It is as though your own fashion doesn't affect him, no match for his strength.  It wears you down, chasing after him, often forcing him into awkward positions below your assault, but never quite managing to strike him properly.\n\n");
+	outputText("Once again, you dance with the fox, both of you circling the other while bodies pass by.  At first you hesitate to strike at him with the sharp metal, but Raphael quickly proves he won't let that happen.  You've gotten good with the rapier; just not good enough to actually hit the master fencer.  No matter how hard you try, the fox simply uses gymnastic feats of avoidance to dodge it, while kicking moss about and dragging furrows through the field with roving feet.  Meanwhile, he uses the scabbard to deflect and parry your blows eloquently, brushing it across your weapon's length to steer it away.  Weaved in with subtle strength and careful cunning, he then taps the metal away with powerful strokes of stiff leather.  It is as though your own fashion doesn't affect him, no match for his strength.  It wears you down, chasing after him, often forcing him into awkward positions below your assault, but never quite managing to strike him properly.\n\n");
 
 	outputText("In the end, Raphael even manages to counterattack.  With more gentle care than you bother to apply, he often puts the leather tip into your ribcage as though scoring a hit.  When you begin to realize you're technically losing, the vulpine scoundrel remains gracious about it.  He simply smiles, pokes you a few more times in the wake of your ebbing frenzy, before he does the impossible.  Turning the scabbard back around, he anticipates one of your thrusts and turns the opening towards the incoming tip.\n\n");
 
@@ -876,22 +886,31 @@ private function RaphaelPostFenceSex():void {
 	outputText("When Raphael notices your attention, the time seems right for one of his one-liners.  'Do not fear the blade', 'look how the length stands firm upon the hilt', a lecture on the art of parrying, or the like is not forthcoming, however.  The fox says nothing instead and merely smiles knowingly at you from the side, knowing silent action is enough.  With his one remaining free arm, he claws around the silk of your womanhood and does indeed part the subtle opening of your interlapping folds. For a moment you gasp as his hot, slick cock falls freely into the denuded skin of your quaking " + vaginaDescript(0) + ".  It shouldn't come as a surprise that he knows of the secret opening in the clothes: he gifted them to you after all, perhaps planning it all along.\n\n");
 
 	outputText("You tremble as Raphael shifts back, angles his cock into the furrow of your womanhood and takes your moist opening in a single inward incursion.  ");
-	player.cuntChange(12,true);
+	if (!recalling) player.cuntChange(12,true);
 	outputText("After that he slowly begins to oscillate into you.  You're turned into a wreck as you hold on for dear life, feeling the russet rogue enter you repeatedly.  His paw continues to trace around your body to tease your tits or bother your lovebud.  Your one remaining foot has long since begun to buckle under the repeated bumps against your g-spot.  Raphael does not have an impressive girth, but he uses it well in rapid plunges into your yielding loins.  He often changes his angle, until not an inch of your loosening walls have been deprived of an pleasurable inner invasion, as he brushes into your walls with deep lunges.\n\n");
 
 	outputText("Finally, you can bear it no more with his hot breath across your neck.  Your body convulses limply around his upright impalement, the fox still standing tall and firm.  You try to close your leg or slip down his body, but with two firm hands Raphael holds you in climactic embrace like captured prey.  Only after you howl and rock your hips forth to the involuntary rhythm of orgasm does Raphael allow you to drop to the moss. The dew-dappled meadows feel like salvation, but little do you know that it does not end there.\n\n");
 
 	outputText("With a victorious glint, Raphael rolls you on your back while you're still dazed.  The fox, taking the sash from his hips and tying either end around your knees, brings your legs towards your chest.  He holds them there without any effort on the part of either of you, by putting his chest down on the cloth tied between them and mounting you again, lying on top of you.  More deep thrusts follow, this time deep enough for the tip to titilate even your cervix, while the slender knot at his base parts the sensitive entrance a little wider with every bottoming bump into you.\n\n");
-	outputText("It is how you spend the rest of that morning, filled a thousands times over and constantly driven past the edge of orgasmic bliss by the master fencer's trained thrusts.  His civilized smile has long since given way to the mean smirk of a sexual victor driving his victim to the edge of madness.");
-	player.sexReward("cum","Vaginal");
-	doNext(postRaphaelCoitus);
-
+	outputText("It is how you spend the rest of that morning, filled a thousand times over and constantly driven past the edge of orgasmic bliss by the master fencer's trained thrusts.  His civilized smile has long since given way to the mean smirk of a sexual victor driving his victim to the edge of madness.");
+	if (!recalling) player.sexReward("cum","Vaginal");
+	doNext(finishTraining);
 }
 
-private function postRaphaelCoitus():void {
-	clearOutput();
-	flags[kFLAGS.RAPHAEL_FUCKED] = 1;
-	outputText("When you wake up on a bed of soft moss, Raphael has disappeared completely.\n\n");
+private function finishTraining(fucked:Boolean = true):void {
+	if (recalling) {
+		recallWakeUp();
+		return;
+	}
+	if (fucked) {
+		clearOutput();
+		flags[kFLAGS.RAPHAEL_FUCKED] = 1;
+		outputText("When you wake up on a bed of soft moss, Raphael has disappeared completely.\n\n");
+	}
+	if (fucked)
+		outputText("<b>New scene is unlocked in 'Recall' menu!</b>\n\n");
+	if (!fucked || flags[kFLAGS.RAPHAEL_RAPIER_TRANING] == 4 && flags[kFLAGS.RAPHAEL_INTELLIGENCE_TRAINING] == 4)
+		outputText("<b>Alt scene is unlocked too!</b>\n\n");
 
 	//({When player had reached the SPE fencing apex}
 	if(flags[kFLAGS.RAPHAEL_RAPIER_TRANING] == 4) {
@@ -904,13 +923,15 @@ private function postRaphaelCoitus():void {
 	//({When player has reached the INT Conversation apex}
 	if(flags[kFLAGS.RAPHAEL_INTELLIGENCE_TRAINING] == 4) {
 		outputText("However, you realize he's left you with more than just pleasant memories of sitting with him around the picnic.  Realizing how skillfully you declined him and how deftly you led him around, you realize you may have mastered his art of keeping another's attention and leading them around with cunning and acting.  This misdirection could have great applications in battle.\n\n");
-		//Optional Perk: Misdirection. Intelligence adds to the chance to evade. Turns you into a true rogue together with the bodysuit.])
+		//[Optional Perk: Misdirection. Intelligence adds to the chance to evade. Turns you into a true rogue together with the bodysuit.])
 		player.createPerk(PerkLib.Misdirection,0,0,0,0);
+		outputText("(Gained Perk: Misdirection!)\n\n");
 	}
-	outputText("You return to camp, having cleaned up the picnic and taking the rations that were left with you.  You can't help but wonder if you'll ever see him again though.\n\n");
-	//[Removes Raph from the game. 7 days later, the Quicksilver scene plays out.]
+	outputText("You return to camp, having cleaned up the picnic and taking the rations that were left with you. You can't help but wonder if you'll ever see him again though.");
+
+	//[Removes Raphael from game. In 7 days, the quicksilver scene plays out]
 	flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] = 7;
-	//Next button if not taking Rapier
+	//If not taking item, go next.
 	if(flags[kFLAGS.RAPHAEL_RAPIER_TRANING] != 4) doNext(playerMenu);
 }
 
@@ -936,36 +957,12 @@ private function declinePuttingOutForRogues():void {
 	outputText("After a small while, the fox finally speaks.  <i>\"It seems like there isn't anything more I can teach you,\"</i> the fox claims.  <i>\"... I'm proud of you, my greatest student.\"</i>\n\n");
 
 	outputText("You turn around to smile at him.  However, Raphael has vanished.\n\n");
-
-	//({When player had reached the SPE fencing apex}
-	if(flags[kFLAGS.RAPHAEL_RAPIER_TRANING] == 4) {
-		outputText("The only thing left behind is his rapier, sticking out of the moss. He's bound it with his red sash around the length like a ribbon, like he has now gifted it to you. Perhaps it is his way of congratulating you.\n\n");
-		//[Weapon: Rapier. Speed, instead of strength, influences the damage rating. Never as strong as the heavier weapons or sword, but works great with speed & evasion, encouraged by the rapier.])
-		inventory.takeItem(weapons.RRAPIER, playerMenu);
-		player.createPerk(PerkLib.RapierTraining,0,0,0,0);
-		outputText("(Gained Perk: Rapier Training!)\n\n");
-
-	}
-	//({When player has reached the INT Conversation apex}
-	if(flags[kFLAGS.RAPHAEL_INTELLIGENCE_TRAINING] == 4) {
-		outputText("You realize he's left you with more than just pleasant memories of sitting with him around the picnic, though. Realizing how skillfully you declined him and how deftly you led him around, you realize you may have mastered his art of keeping another's attention and leading them around with cunning and acting. This misdirection could have great applications in battle.\n\n");
-		//[Optional Perk: Misdirection. Intelligence adds to the chance to evade. Turns you into a true rogue together with the bodysuit.])
-		player.createPerk(PerkLib.Misdirection,0,0,0,0);
-
-	}
-
-	outputText("You return to camp, having cleaned up the picnic and taking the rations that were left with you.  You can't help but wonder if you'll ever see him again.\n\n");
-
-	//[Removes Raph from the game. 7 days later, the Quicksilver scene plays out.]
-	flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] = 7;
-	flags[kFLAGS.REJECTED_RAPHAEL] = 1;
-	//Next button if not looting!
-	if(flags[kFLAGS.RAPHAEL_RAPIER_TRANING] != 4) doNext(playerMenu);
+	finishTraining(false);
 }
 
 //{Player chooses [Thieving] while in the picnic}
-private function RaphaelPicnicChooseThieving(newl:Boolean = true):void {
-	if(newl == true) clearOutput();
+public function RaphaelPicnicChooseThieving(newl:Boolean = true):void {
+	if(newl) clearOutput();
 	//(Introduction; plays out only once)
 	if(flags[kFLAGS.RAPHAEL_INTELLIGENCE_TRAINING] == 0) {
 		outputText("Faced by the 'world-renowned Russet Rogue' - self proclaimed though he may be - your mind fills itself with questions as you try to come up with topics of conversation.  The flamboyant fox must lead an interesting life; one made only more infamous by superstitious folktale and colorful exaggerations.  You intend to get to the bottom of it however!  You lean slightly forward and ask Raphael if everything they say about rogues is true.\n\n");
@@ -980,7 +977,7 @@ private function RaphaelPicnicChooseThieving(newl:Boolean = true):void {
 		//{Leads to [Thieving] scenes subjects to PC stats.}
 	}
 	//{[Thieving], intelligence (Less than 30): Must play out at least once.}
-	if(player.inte < 30 || flags[kFLAGS.RAPHAEL_INTELLIGENCE_TRAINING] == 0) {
+	if(!recalling && player.inte < 30 || flags[kFLAGS.RAPHAEL_INTELLIGENCE_TRAINING] == 0) {
 		outputText("<i>\"How do pickpockets do it?\"</i> you blurt out bashfully; the first thing coming to mind is how it's possible for them to reach into pockets without the victims even sensing it.\n\n");
 
 		outputText("When you pick up a nearby sparerib and nibble upon it, you notice how Raphael isn't partaking.  He merely stares at you, resting on his hip and with both hands on the blanket.  The triangular ears on the sides of his cuneate head perk up like that of a patient predator's.  Raphael's tail flicks about like the tip of a paintbrush, swept by a balmy breeze.  Whenever he raises it, a subtle draft of Raphael's fragrant male musk mingles with the sweet scent of meadow bloom.\n\n");
@@ -1001,7 +998,7 @@ private function RaphaelPicnicChooseThieving(newl:Boolean = true):void {
 		flags[kFLAGS.RAPHAEL_INTELLIGENCE_TRAINING] = 1;
 	}
 	//{Picnic Thieving 30-39 Int. Must play out at least once.}
-	else if(player.inte < 39 || flags[kFLAGS.RAPHAEL_INTELLIGENCE_TRAINING] == 1) {
+	else if(!recalling && player.inte < 39 || flags[kFLAGS.RAPHAEL_INTELLIGENCE_TRAINING] == 1) {
 		outputText("<i>\"Are rogues born to be what they are?\"</i> you ask him curiously.\n\n");
 
 		outputText("The fox, pouring you another glass of wine, laughs.  <i>\"Depends on the rogue.  I myself was definitely born with a gift, a pernicious scamp even as a toddler.  I would steal kisses, woo my aunties, and swipe small baubles before I even learned to walk.\"</i>  The fox smiles glib and leans back.  <i>\"Yes, I'm afraid I was destined for this line of work.  When you think about it, you can no more blame me for stealing and being a ladies' man than you could the sun for rising or a wolf for eating meat or reeking foul. Locking me up would surely be a crime against nature.\"</i>\n\n");
@@ -1010,7 +1007,7 @@ private function RaphaelPicnicChooseThieving(newl:Boolean = true):void {
 
 		outputText("When you ask him whether it is something he could teach, Raphael grins like he saw it coming.  <i>\"Well, I suppose, but for your lessons in womanly lovemaking I'd need to be there with you two ladies to guide your progress.  Perhaps even involve myself when it is absolutely called for.\"</i>  The fox shrugs coyly.  <i>\"Such are sacrifices I'd be willing to make if you insist though.\"</i>\n\n");
 
-		outputText("When you snicker and point out that's not what you meant, Raphael winks.  <i>\"You mean on men like me?  Oh but my jewel of the night's sky, I do not know if I'd have the heart to create such a potent combination of wiles and beauty.  To teach one such as you the art of seduction would be to hand the suns and stars a magnifying glass.  Every man you'd met would be smitten.  You'd be able to seduce your way into the courts of kings and the chambers of emperors, to sunder countries and topple empires.\"</i>\n\n");
+		outputText("When you snicker and point out that's not what you meant, Raphael winks.  <i>\"You mean on men like me?  Oh, but my jewel of the night's sky, I do not know if I'd have the heart to create such a potent combination of wiles and beauty.  To teach one such as you the art of seduction would be to hand the suns and stars a magnifying glass.  Every man you'd met would be smitten.  You'd be able to seduce your way into the courts of kings and the chambers of emperors, to sunder countries and topple empires.\"</i>\n\n");
 
 		outputText("The fox leans forwards, staring deeply into your eyes while waving his russet tail about.  <i>\"Mademoiselle, your beauty alone is more than the world can bear.  Surely, a goddess like you does not need deception to bring mere mortal men like I to their knees.\"</i>  He whispers and growls softly, almost forcing you to lean closer to him in turn.  He has begun to softly drown you in his expressive green eyes and the faint musk drifting off his body.  However, the moment you think about it and realize these things to be a deliberate ploy, you snap out of it.\n\n");
 
@@ -1018,7 +1015,7 @@ private function RaphaelPicnicChooseThieving(newl:Boolean = true):void {
 
 		outputText("You begin a conversation that hardly matters compared to what you're actually doing.  Something about body language, zones of comfort and distracting others with things they want to see, but it isn't as important as the way you say them.  You have begun to lower your voice as well, drawling it to be a little hoarser, forcing Raphael to lean in closer as well.  The fox, getting off his hip, has positioned himself playfully on hands and knees.\n\n");
 
-		outputText("Beneath you, a game of chess has started on the blanket's checkered surface.  The baskets, eating utensils, plates, wine and glasses have become your pieces.  You'd swear that Raphael is cheating in your game of drawing each other's faces closer by creeping towards you with the entirety of his body, but you're hard pressed to find proof as he doesn't appear to make any headway.  The salt and pepper shaker are still the exact same distance away from his knees as they were a minute ago - exactly two spaces - though the shakers themselves have appeared to draw closer to you instead.  You figure it out when you blink and spot him moving the pieces about the board with tail and hands, while distracting you and keeping you oblivious to the fact.  It's a delicate game.  If you'd stop talking right now you could easily point it out to him, but the fox uses his eyes, voice and swishing tail to prevent you from concerning yourself with the nearly unnoticeable.  You wouldn't want to stop the game either; the first one to break the mood loses for a lack of grace and subtlety.\n\n");
+		outputText("Beneath you, a game of chess has started on the blanket's checkered surface.  The baskets, eating utensils, plates, wine and glasses have become your pieces.  You'd swear that Raphael is cheating in your game of drawing each other's faces closer by creeping towards you with the entirety of his body, but you're hard-pressed to find proof as he doesn't appear to make any headway.  The salt and pepper shaker are still the exact same distance away from his knees as they were a minute ago - exactly two spaces - though the shakers themselves have appeared to draw closer to you instead.  You figure it out when you blink and spot him moving the pieces about the board with tail and hands, while distracting you and keeping you oblivious to the fact.  It's a delicate game.  If you'd stop talking right now you could easily point it out to him, but the fox uses his eyes, voice and swishing tail to prevent you from concerning yourself with the nearly unnoticeable.  You wouldn't want to stop the game either; the first one to break the mood loses for a lack of grace and subtlety.\n\n");
 
 		outputText("Two can play at the game, however.  Letting out a feminine giggle, putting up a charming smile, you inch backwards and angle your bosom forwards.  You wink at him and present the fox with a clear flash of your cleavage, before taking the sight away again by turning bashfully.  A few surprised, half-erotic coos later, alternated by a meaningful groan, and you're certain you've caught on.  Raphael continues to peer directly into your eyes, but you can almost feel him strain not to look down.  That he accidentally knocks over a bowl of sugar instead of deftly misplacing it, is a telling sign.  Using the fresh baguettes nearby, you begin to build a little fort of fresh bread around you, in an effort to halt him at your gates while leading his attention away from doing just that.\n\n");
 
@@ -1032,7 +1029,7 @@ private function RaphaelPicnicChooseThieving(newl:Boolean = true):void {
 		flags[kFLAGS.RAPHAEL_INTELLIGENCE_TRAINING] = 2;
 	}
 	//{Picnic Thieving at 40-49 Int. Must play out at least once.}
-	else if(player.inte < 39 || flags[kFLAGS.RAPHAEL_INTELLIGENCE_TRAINING] == 2) {
+	else if(!recalling && player.inte < 39 || flags[kFLAGS.RAPHAEL_INTELLIGENCE_TRAINING] == 2) {
 		outputText("<i>\"Are you always this much of a charmer?\"</i> you wonder about Raphael, and how he always manages to keep his cool.\n\n");
 		outputText("He draws a weary smile, not completely disheartened.  <i>\"It is my natural state of being... though I must confess; it takes effort to stay on top of my game.\"</i>\n\n");
 
@@ -1040,9 +1037,9 @@ private function RaphaelPicnicChooseThieving(newl:Boolean = true):void {
 
 		outputText("You try to imagine Raphael in a more homely situation while reaching for a croissant, but struggle to do so.  Is there any time of day he's actually alone?  Crashing after a long day of hopping up on walls, wooing women and pilfering pouches?  You'd like to think there is, a time where the fox is simply tired somewhere, lying on a green sofa in a dark room on a lazy afternoon, taking care of his own needs instead of what others think about him.  You'd wonder what it would be like to hang around him then.\n\n");
 
-		outputText("From the corner of your eye, you see the fox approach again, a familiar, playful glimmer in his eyes.  When he tries to put on airs however and do his little thing, you suddenly realize that your earlier musings have robbed him of all such charm.  He has become too human to take what only can be an act seriously.  With a half eaten croissant sticking out of your mouth in an unflattering way, you look upon his moves with luke-warm appraise.  His methods have become humorous, too strained, when you don't take them seriously.\n\n");
+		outputText("From the corner of your eye, you see the fox approach again, a familiar, playful glimmer in his eyes.  When he tries to put on airs however and do his little thing, you suddenly realize that your earlier musings have robbed him of all such charm.  He has become too human to take what only can be an act seriously.  With a half-eaten croissant sticking out of your mouth in an unflattering way, you look upon his moves with luke-warm appraise.  His methods have become humorous, too strained, when you don't take them seriously.\n\n");
 
-		outputText("Suddenly you realize what he meant with a game of togetherness. There is none when a rogue doesn't manage to engross his mark.  They're all just details now: his fine clothes, sweeping tail, deep eyes and playful smile.  With his voice he forms the sentences, but as he holds his little speech you catch onto a dozen little fibs and half truths to exaggerate your beauty.  They're endearing and you'd almost fall for them, but maintaining a hold on your mind and analyzing it all ethologically leaves it with no hold over you.  You've finally mastered the game, it seems, instead of the other way around.\n\n");
+		outputText("Suddenly you realize what he meant with a game of togetherness. There is none when a rogue doesn't manage to engross his mark.  They're all just details now: his fine clothes, sweeping tail, deep eyes and playful smile.  With his voice he forms the sentences, but as he holds his little speech you catch onto a dozen little fibs and half-truths to exaggerate your beauty.  They're endearing and you'd almost fall for them, but maintaining a hold on your mind and analyzing it all ethologically leaves it with no hold over you.  You've finally mastered the game, it seems, instead of the other way around.\n\n");
 
 		outputText("To humor Raphael, you let him get in close to you, returning his leer with a glazed stare.  This time you're perfectly aware of his desire to taste of your lips - or rather, nip from your croissant - and you simply crawl backwards to let the few remaining inches between you and him persist.  But you can't help but break from your apathetic posture when Raphael puts his paw on a tray of picnic butter and slips.\n\n");
 
@@ -1068,11 +1065,12 @@ private function RaphaelPicnicChooseThieving(newl:Boolean = true):void {
 		outputText("It occurs to you to change the subject to that of the rapier at his side but you are equally drawn to engaging the fox and satisfying your... curiosity.\n\n");
 
 		outputText("What do you do?");
-		flags[kFLAGS.RAPHAEL_INTELLIGENCE_TRAINING] = 4;
-		//[Fencing] [Flirt]
-		//[Fencing] {Leads to Fencing Variables}
-		//[Flirt] Leads towards the final Int Sex scene.
-		simpleChoices("Fencing", RaphaelPicnicSkill, "Flirt", thieveryEnding, "", null, "", null, "", null);
+		menu();
+		addButton(1, "Flirt", thieveryEnding);
+		if (!recalling) {
+			flags[kFLAGS.RAPHAEL_INTELLIGENCE_TRAINING] = 4;
+			addButton(0, "Fencing", RaphaelPicnicSkill);
+		}
 		return;
 	}
 	doNext(playerMenu);
@@ -1113,7 +1111,7 @@ private function thieveryEnding():void {
 
 	outputText("<i>\"Some games are meant to be lost.\"</i>  He nuzzles you, putting his snout to your ear.  <i>\"It will be... exquisite.  Lose yourself, in my capable hands.\"</i>\n\n");
 	outputText("Do you?");
-	dynStats("lus", 25);
+	if (!recalling) dynStats("lus", 25, "scale", false);
 	//Choose:
 	//[Yes] [No]
 	doYesNo(RaphaelThieverySmex,declinePuttingOutForRogues);
@@ -1130,46 +1128,18 @@ private function RaphaelThieverySmex():void {
 	outputText("You gasp when he spreads your legs by placing his in between and parting them. When he fondles you down there, fingers rubbing into your flushed  " + vaginaDescript(0) + ", you suddenly feel the wind passing through the hot bare inners of your parted folds.  Raphael has opened the silken opening of your suit. It shouldn't come as a shock.  He gifted them after all, perhaps planning for it all along.  Another surprise follows as you can feel something hot and rigid standing off his body and lying on top of yours. Raphael's vulpine cock is resting in the hollow of your bellybutton, through the fly of his pants.  The bright red, smooth tip rides up your tummy admiringly.  It lacks the mushroom shaped dome that human men have and instead, his cock is pointed and tapered, much like the weapons he prefers.  You can also feel a subtle, but noticeable canine bulb at the base, throbbing against your sensitive loins.\n\n");
 
 	outputText("When he finally lowers himself, positioning himself in front of your opening, you've already welcomed it.  In the time it took him, the wind's soft breeze has passed through and licked by your exposed cunt for long enough.  By now you long to get penetrated by something more substantial and indeed your wish is granted.  When you feel the tip of Raphael's foxy cock trail down your furrow, it hits the spot and he takes your moist opening in a single inward incursion.  ");
-	player.cuntChange(12,true);
+	if (!recalling) player.cuntChange(12,true);
 	outputText("After that he slowly begins to oscillate into you.  You're turned into a wreck as you hold on for dear life, feeling the russet rogue enter you repeatedly.  His paws grope your tits and pester the " + nippleDescript(0) + "s by twirling his abrasive hands around them.  With a knowing look upwards, he has also begun to nibble down on your shoulders with his sharp teeth, giving you little lovebites across your neck that make you gasp.  Your body has long since buckled under his luscious fur thanks to the repeated bumps against your g-spot.  Raphael does not have an impressive girth, but he uses it well in rapid plunges into your yielding loins. He often changes his angle, until not an inch of your loosening walls have been deprived of a pleasurable inner indentation, as he brushes into your walls with deep lunges.\n\n");
 
 	outputText("Finally, you can bear it no more.  Your body convulses limply below him, the fox still jamming himself in with consistent rhythm.  You raise your legs and clamp him around his hips as Raphael keeps up the motion, rocking into you like a voracious predator.  Only after you howl and pump your hips to the involuntary rhythm of orgasm does Raphael allow you a breather by sitting up, but his penis is still locked into your " + vaginaDescript(0) + ". Little do you guess that it does not end there.\n\n");
 
 	outputText("With a victorious glint, the fox takes the sash from his hips and, tying either end around your knees, brings your legs towards your chest. He holds them there without any effort on the part of either of you, by putting his chest down on the cloth tied between them and mounting you again, lying on top of you. More deep thrusts follow, this time deep enough for the tip to titilate even your cervix, while the slender knot at his base parts the sensitive entrance a little wider with every bottoming bump into you.\n\n");
 
-	outputText("It is how you spend the rest of that morning, filled a thousands times over and constantly driven past the edge of orgasmic bliss by the master fencer's trained thrusts. His civilized smile has long since given way to the mean smirk of a sexual victor, driving his prey to the edge of madness.");
+	outputText("It is how you spend the rest of that morning, filled a thousand times over and constantly driven past the edge of orgasmic bliss by the master fencer's trained thrusts. His civilized smile has long since given way to the mean smirk of a sexual victor, driving his prey to the edge of madness.");
 
 	//~~~ Next page ~~~
-	doNext(RaphaelThieverySmexPtII);
+	doNext(finishTraining);
 }
-
-private function RaphaelThieverySmexPtII():void {
-	clearOutput();
-	outputText("When you wake up on a bed of soft moss, Raphael has disappeared completely.\n\n");
-
-	//({When player had reached the SPE fencing apex}
-	if(flags[kFLAGS.RAPHAEL_RAPIER_TRANING] == 4) {
-		outputText("The only thing left behind is his rapier, sticking out of the moss.  He's bound it with his red sash around the length like a ribbon, as though he has now gifted it to you.  Perhaps it is his way of congratulating you.\n\n");
-		//[Weapon: Rapier. Speed, instead of strength, influences the damage rating. Never as strong as the heavier weapons or sword, but works great with speed & evasion, encouraged by the rapier.])
-		inventory.takeItem(weapons.RRAPIER, playerMenu);
-		player.createPerk(PerkLib.RapierTraining,0,0,0,0);
-		outputText("(Gained Perk: Rapier Training!)\n\n");
-	}
-	//({When player has reached the INT Conversation apex}
-	if(flags[kFLAGS.RAPHAEL_INTELLIGENCE_TRAINING] == 4) {
-		outputText("However, you realize he's left you with more than just pleasant memories of sitting with him around the picnic.  Realizing how skillfully you declined him and how deftly you led him around, you realize you may have mastered his art of keeping another's attention and leading them around with cunning and acting.  This misdirection could have great applications in battle.\n\n");
-		//[Optional Perk: Misdirection. Intelligence adds to the chance to evade. Turns you into a true rogue together with the bodysuit.])
-		player.createPerk(PerkLib.Misdirection,0,0,0,0);
-		outputText("(Gained Perk: Misdirection!)\n\n");
-	}
-	outputText("You return to camp, having cleaned up the picnic and taking the rations that were left with you. You can't help but wonder if you'll ever see him again though.");
-
-	//[Removes Raphael from game. In 7 days, the quicksilver scene plays out]
-	flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] = 7;
-	//If not taking item, go next.
-	if(flags[kFLAGS.RAPHAEL_RAPIER_TRANING] != 4) doNext(playerMenu);
-}
-
 
 //OH SHIT ENDGAME SHIT HERE SONS!
 //[Quicksilver scene]
@@ -1334,7 +1304,7 @@ public function orphanageIntro():void {
 		if(flags[kFLAGS.TIMES_ORPHANAGED_WITH_RAPHAEL] == 0) {
 			outputText("You spend some time around Tel'Adre looking for the orphanage Raphael mentioned, but you can't seem to find a building that looks like one.  Instead you resort to asking the locals, but their reactions are weird. Upstanding citizens, friendly and polite, turn away from you at the merest notion of it.  Young men get excited but dare not speak of it, women blush and turn away like you've just solicited them and, strangest of all, most children have never even heard of it.");
 			outputText("\n\nEventually, it takes the beggars and the organ grinders, the guards and the muggers, to tell you of its location.  More than that they do not say as they just grin at you, telling you should 'experience' it for yourself.  Well, the guards don't.  They just tell you to keep your nose clean.");
-			outputText("\n\nWhat sparse directions you have guide you to what must be one of the biggest buildings in Tel'adre - aside from the mage's tower.  It looks nothing like an orphanage and more like a fortified stronghold in the bad part of town, situated amongst slums and seedy bars.  It has thick stone walls, a massive oak door and ramparts on top, even though it has a distinctly ramshackle appearance to it.  Beams are sticking out everywhere, replete with pulleys and lengths of rope.  Windows are larger than they need to be and look like they can handle the intake of cargo.  It has something of a warehouse feel to it and it may just have been that, retrofitted into a reinforced bulwark.  For a moment you belief you might have had your leg pulled and that 'the orphanage' is something of a running joke within Tel'Adre.  You're reassured however, when you spot half a dozen little heads sticking out of one of the windows, giggling at you.  When you spot them, the children shoot back inside.");
+			outputText("\n\nWhat sparse directions you have guide you to what must be one of the biggest buildings in Tel'adre - aside from the mage's tower.  It looks nothing like an orphanage and more like a fortified stronghold in the bad part of town, situated amongst slums and seedy bars.  It has thick stone walls, a massive oak door and ramparts on top, even though it has a distinctly ramshackle appearance to it.  Beams are sticking out everywhere, replete with pulleys and lengths of rope.  Windows are larger than they need to be and look like they can handle the intake of cargo.  It has something of a warehouse feel to it and it may just have been that, retrofitted into a reinforced bulwark.  For a moment you believe you might have had your leg pulled and that 'the orphanage' is something of a running joke within Tel'Adre.  You're reassured however, when you spot half a dozen little heads sticking out of one of the windows, giggling at you.  When you spot them, the children shoot back inside.");
 			outputText("\n\nAt least there are orphans here, or at least children.  One teen even bumps in to you with the full of his body, before walking away in a hurry.  You quickly check your pockets to see if you've just been pickpocketed, but all is still there and you begin to suspect he copped a feel.");
 			outputText("\n\nWeary, you concentrate on getting the solid wooden door open.  It has no knocker or handles and you're forced to call for attention.");
 			outputText("\n\n\"<i>Hello!</i>\" you call out once, twice, thrice.  A head pops out between the ramparts, takes a quick look at you, before it ducks back inside. You've been noted.");
@@ -1359,7 +1329,7 @@ public function orphanageIntro():void {
 
 			outputText("\n\n\"<i>Well, alright. Maybe I haven't been entirely honest with you.</i>\"  He shmoozes, lowering his voice again to its usual hoarse timbre and making calming hand gestures towards you.  He's ever the charmer.  \"<i>With you, I feel like being... completely honest!</i>\"  He flashes his flawless smile, takes you by the hand and manages to sweep in close to you.  \"<i>However, not here on the streets.</i>\"");
 
-			outputText("\n\nYou're still waiting for an answer when he grabs a hidden piece of rope inside the wall and holds you tightly around your waist.  For a moment you wonder what's going on, but it becomes clear when he pulls the rope.  With great speed the rope pulls the both of you upwards, and in the blink of an eye you find yourself gently put down on the roof of the orphanage by the swinging arm of a crane.");
+			outputText("\n\nYou're still waiting for an answer when he grabs a hidden piece of rope inside the wall and holds you tightly around your waist.  For a moment you wonder what's going on, but it becomes clear when he pulls the rope.  With great speed the rope pulls both of you upwards, and in the blink of an eye you find yourself gently put down on the roof of the orphanage by the swinging arm of a crane.");
 
 			//~~~ Page ~~~
 			menu();
@@ -1421,7 +1391,7 @@ private function raphaelIntroPageTwo():void {
 
 	outputText("\n\n\"<i>It's a public establishment.  It provides homes to treasure seekers, fashion designers, antiquarians and the huddled masses.  I believe the law refers to us as pickpockets, strippers, fences and beggars.</i>\"  He shrugs.  \"<i>Can't say I blame them.  Right now we're having an auction.  You'd be surprised how many of these bored nobles are happy to get acquainted with valuables they'd forgotten about ten years ago.  They think they'll match the ones they still have in their attics... somewhere.</i>\"  He grins.  \"<i>They'll never care to look and in truth, I think they know deep down.  The coming of demons and the ruination of any semblance of a proper economy, it does much to skew people's perception of wealth.  The poor no longer have places to earn any and the rich sit on hoards they can no longer properly spend.  I give them a place that allows them their little indulgences, one that makes them feel wealthy again.  I then spend the proceedings on those that need it. I'm the middle man, the great equalizer.</i>\"  Raphael drifts by and walks further across the roof.");
 
-	outputText("\n\nWhen you wonder what made him equalize your possessions, he winks apologetic.  \"<i>I needed to cool my heels outside the city for a while.  I couldn't stay in the orphanage, nor Tel'Adre with the Quicksilvers breathing down my neck.  It would put too many people at risk.</i>\"  He takes you by the hands and fondles them with his thumbs.  \"<i>The beasts and demons carry little wealth and I remain a thief.  You were the only thing out there allowing me to profess my craft and keep me sane.</i>\"  He kneels before you, staring you in your eyes.  \"<i>And then you saved me, my salvation.</i>\"  He kisses your hand once.");
+	outputText("\n\nWhen you wonder what has made  him equalize your possessions, he winks apologetic.  \"<i>I needed to cool my heels outside the city for a while.  I couldn't stay in the orphanage, nor Tel'Adre with the Quicksilvers breathing down my neck.  It would put too many people at risk.</i>\"  He takes you by the hands and fondles them with his thumbs.  \"<i>The beasts and demons carry little wealth and I remain a thief.  You were the only thing out there allowing me to profess my craft and keep me sane.</i>\"  He kneels before you, staring you in your eyes.  \"<i>And then you saved me, my salvation.</i>\"  He kisses your hand once.");
 
 	menu();
 	addButton(0,"Next",evenMoreRaphaelIntro);
@@ -1465,9 +1435,9 @@ private function getTheFuckOutOfDodge():void {
 //Sex1
 private function kissRaphaelFirstTimeOrphanage():void {
 	clearOutput();
-	outputText("You drift into Raphael as easily as you would into a pillow.  The young thief leans in over you and begins to devour you softly with gentle tongue and nimble hands.  You are all too eager to reciprocate and let him pass through your mouth and across your back.  You try to wrestle him for control over your tangled tongues, but it turns all too quickly into a metaphor for his swordplay.  All your twirls and wriggles are met by sensuous swirls across areas of your tongue you never even knew you had.  Raphael has instantly turned it into an major erogenous zone.  You give up, but once again the fox does not relent.  He keeps lashing your tongue until you're forced to writhe limply to the rhythm.  When you attempt to imagine what would happen, were he to do the same to your already throbbing " + clitDescript() + ", your knees shudder.  When Raphael, just faintly, places his paws on the sides of your spine in just the right way, you nearly climax.  You fall into his waiting hand and he catches you by the neck and lower back.  You're enveloped in a soft sea of groping warmness.  His playful growls carry further into your body than they should.");
+	outputText("You drift into Raphael as easily as you would into a pillow.  The young thief leans in over you and begins to devour you softly with gentle tongue and nimble hands.  You are all too eager to reciprocate and let him pass through your mouth and across your back.  You try to wrestle him for control over your tangled tongues, but it turns all too quickly into a metaphor for his swordplay.  All your twirls and wriggles are met by sensuous swirls across areas of your tongue you never even knew you had.  Raphael has instantly turned it into a major erogenous zone.  You give up, but once again the fox does not relent.  He keeps lashing your tongue until you're forced to writhe limply to the rhythm.  When you attempt to imagine what would happen, were he to do the same to your already throbbing " + clitDescript() + ", your knees shudder.  When Raphael, just faintly, places his paws on the sides of your spine in just the right way, you nearly climax.  You fall into his waiting hand and he catches you by the neck and lower back.  You're enveloped in a soft sea of groping warmness.  His playful growls carry further into your body than they should.");
 	outputText("\n\nHe moves you back, further into the garden.  Just before you hit a rose entwined lattice, Raphael takes hold of you and lifts you up, pinning you squarely against it at mid-height.  Slightly startled by the gesture, you spread your arms to find a grip, but discover it to be easy, up against the plants.  The lattice is indeed rotten to the core, and it crumbles at your touch.  The thick, stubborn rosebushes, however, manage to hold your weight.  You quickly find two branches to grasp and your posterior finds a nook to sit upon.  Your legs you wrap around the fox's hips, as the rogue smiles at you with admiration and zeal.");
-	outputText("\n\nThere's a brief moment of vulnerability, as he finds an opening into your pants.  As sure as a master thief would find his way into the vault of a city, he quickly opens it.  The thorns at your back do bite while you hang limply between trunk and fox with your privates exposed mid air, but you are soon relieved of your awkward neglect when Raphael tilts his hips and drives deep a much larger implement.  Finally the embrace is whole again as you can feel his pelvis thump in against your netherlips. His bone-hard length has already breached you.");
+	outputText("\n\nThere's a brief moment of vulnerability, as he finds an opening into your pants.  As sure as a master thief would find his way into the vault of a city, he quickly opens it.  The thorns at your back do bite while you hang limply between trunk and fox with your privates exposed midair, but you are soon relieved of your awkward neglect when Raphael tilts his hips and drives deep a much larger implement.  Finally the embrace is whole again as you can feel his pelvis thump in against your netherlips. His bone-hard length has already breached you.");
 	player.cuntChange(5,true,true,false);
 
 	outputText("\n\nThere's something to be said for his slender and agile size, still clearly felt bottoming inside you.  You're never left waiting for too long.  You quickly settle into the distinctive rhythm, staring Mr. Fox into his eyes with a daring look.  You're willing to suffer the discomfort of the thorns to discover just how good he is now that you're in it for the duration.  You arch your back into the bushes, help to ease him into your passage and feel like the first of Spring's roses held proudly aloft by the gifted gardener.");
@@ -1489,11 +1459,11 @@ private function followupToFirstTimeOrphanageRaphSex():void {
 	//[ Scene after rose garden sex on top of the orphanage roof ]
 	outputText("You wake up startled.  The last thing you remember is a sunset rendezvous with the russet rogue upon a rooftop garden of roses, but when you look around you realize you're lying in a foreign bed.  It's an odd room you find yourself in.  It's a small wooden dive, but warmly decorated and enchanted by the playful flicker of candlelight shadows and the haunting undulation of curtains breezing in the wind.  There are pillows on the large bed, silken bedspreads and a worn rug.  A large wardrobe, a distant vanity, a table full of tools and the small creaky bed cast silhouettes in the darkness.  A single candle on the bedstand beside you provides all the light available and casts long shadows across the rough wooden floorboards.  You don't appear to be trapped, however.  The room has no door, but a large window opening leads out into the night sky.  For a moment you're startled by just how late it already is, but not enough to contain your curiosity.");
 
-	outputText("\n\nThere are cracks in the wooden floorboards and you get down on your knees and try to peek through the slits.  You're still in the orphanage, you confirm.  The same strange golden light that escaped momentarily when Raphael opened the front door can be seen on the other side and appears to surround the room like some magic entity.  You can hear music within the light, the faint sound of merry singing, children laughing and the soft hymn of ringing silver permeates it.  By comparison, this space is a sheltered oasis of musty calm and homely austerity.  Judging from the sundry of burglary tools on the nearby table and the easy access, this is some kind of a staging room for a thief's forays into the city, or a quick getaway pad when said forays go wrong.");
+	outputText("\n\nThere are cracks in the wooden floorboards and you get down on your knees and try to peek through the slits.  You're still in the orphanage, you confirm.  The same strange golden light that escaped momentarily when Raphael opened the front door can be seen on the other side and appears to surround the room like some magic entity.  You can hear music within the light, the faint sound of merry singing, children laughing and the soft hymn of ringing silver permeates it.  By comparison, this space is a sheltered oasis of musty calm and homely austerity.  Judging from the sundry of burglary tools on the nearby table and the easy access, this is some kind of staging room for a thief's forays into the city, or a quick getaway pad when said forays go wrong.");
 
 	outputText("\n\nWhen you feel like you're being watched, you turn towards the open window and see the perfect shadow of a fox lying on the sill.  You smile and ask the shadow what's on the other side, but Raphael shakes his head and steps into the light, the candlelight beating off his red fur.  \"<i>The motliest gathering of thieves, beggars and whores you ever did see.</i>\"  He sighs but at the same time, smiles with a sense of pride.  \"<i>But above all, they are mia famiglia.  My little family; and let none speak ill of it.</i>\"");
 
-	outputText("\n\n\"<i>Before you ask.</i>\"  Raphael winks and lays on finger on your lips.  \"<i>Not right now.  I must confess to having brought over women before... but one such as you?</i>\"  His snout moves slowly and deliberately to form the heavily accented words, \"<i>I would need the time to prepare a proper introduction, to properly reflect how impressed I am with having met you.  Also, we're entertaining guests for the foreseeable future.  I wouldn't want your introduction to the group to be eclipsed by the bustle.  Give me a few weeks.</i>\" and the rogue turns around, puts his rapier to his belt and prepares to jump out of the window by squatting on the sill.  Before he does, he throws one last look back across his shoulder.");
+	outputText("\n\n\"<i>Before you ask.</i>\"  Raphael winks and lays a finger on your lips.  \"<i>Not right now.  I must confess to having brought over women before... but one such as you?</i>\"  His snout moves slowly and deliberately to form the heavily accented words, \"<i>I would need the time to prepare a proper introduction, to properly reflect how impressed I am with having met you.  Also, we're entertaining guests for the foreseeable future.  I wouldn't want your introduction to the group to be eclipsed by the bustle.  Give me a few weeks.</i>\" and the rogue turns around, puts his rapier to his belt and prepares to jump out of the window by squatting on the sill.  Before he does, he throws one last look back across his shoulder.");
 
 	outputText("\n\n\"<i>Do you think you can remember which rope I pulled?</i>\" he asks you.  You think you can and Raphael nods.  \"<i>Good.  I wouldn't recommend pulling any other when you want to visit me in the meantime.</i>\" he winks.  \"<i>The russet rogue, he never leaves a lady wanting.  Visit me whenever you see this room lit at dusk, when it's still light enough for you to make your way back to camp afterwards and already dark enough for me to have woken up and prepare to leave for work.</i>\"  He turns his head and upper body around enough for him to look you in the eyes.  \"<i>I would be looking forward to it if you could make it.  Who knows?  Maybe this is your chance to steal into my room for a change and take me by surprise instead, no?</i>\"");
 
@@ -1536,7 +1506,7 @@ private function girlOnTopOfRedFoxesOhMy():void {
 	outputText("\n\nTriumphant, you finally point his tip towards your furls and drag through, towards the waiting hole of your [vagina].  Gently sitting down upon it, it slides in smoothly. Raphael rewards you by finally participating, softly running his velvet paws across your flanks, neck and fondling your [chest] admiringly.  Finally, a little bashful, you throw your head back, letting Raphael have his way with your body as you concentrate and enjoy riding him.");
 	player.cuntChange(5,true,true,false);
 
-	outputText("\n\nRaphael's cock is something else. It must be the bone running through it that gives it its firmness.  Instead of stuffing yourself with a nondescript roll of meat, you can clearly feel him penetrating you with his well defined and rock-hard shaft.  With the faintest twitch of the hip, you can change its angle and run it through in an entirely different manner and you eagerly start experimenting with what feels best.  Eventually you settle on jutting your ass backwards and pressing the middlemost of his solid length against the front wall of your [vagina] while the tip bottoms out against the back.  The position does not go unnoticed to Raph, and he trails his paws along your [butt].  You begin to bounce around on top him, jamming him into you more firmly and more securely with every rut in.  Raphael supports you by either grabbing you by the ass or cupping your tits, playing with them with his sandy paws.  He sinks in heavily, smoothly, with every gulp of your tightening cunt accompanied by a little wet slush around his hard manhood.");
+	outputText("\n\nRaphael's cock is something else. It must be the bone running through it that gives it its firmness.  Instead of stuffing yourself with a nondescript roll of meat, you can clearly feel him penetrating you with his well-defined and rock-hard shaft.  With the faintest twitch of the hip, you can change its angle and run it through in an entirely different manner and you eagerly start experimenting with what feels best.  Eventually you settle on jutting your ass backwards and pressing the middlemost of his solid length against the front wall of your [vagina] while the tip bottoms out against the back.  The position does not go unnoticed to Raph, and he trails his paws along your [butt].  You begin to bounce around on top him, jamming him into you more firmly and more securely with every rut in.  Raphael supports you by either grabbing you by the ass or cupping your tits, playing with them with his sandy paws.  He sinks in heavily, smoothly, with every gulp of your tightening cunt accompanied by a little wet slush around his hard manhood.");
 
 	outputText("\n\nDesperate for that little bit more, you reach down and start fondeling your " + clitDescript() + " too.  Your button brushing in against Raphael's soft white pubes tickles.");
 	outputText("\n\nLooking him in the eyes again, you slaver on top of the fox.  Raphael simply lays back, lazily fondles your breasts and ass and looks at you to put in the effort around his cock.  Only after minutes of this, almost driving yourself towards the brink, does Raphael suddenly sit up sharply - an anguished snarl on his face - to hold you in a tight embrace and groan conceitedly.  You can feel his cock jerk up and grow an inch in size, before his passion escapes into your womanhood.  Allowing yourself as well, you follow him with a lazy orgasm and join him in his growl, while he squeezes you on your waist.");
@@ -1551,13 +1521,13 @@ private function talkWithRedFoxLooksOutHesASpy():void {
 
 	outputText("\n\n\"<i>What about them?</i>\"  He shrugs, \"<i>They don't bother me.  They're not much for material wealth or fancy clothes, are they?</i>\"  He chuckles as he manages to retrieve a wooden goblet and a crystal glass.  \"<i>Unless it concerns golden phalluses or a jeweled nipple piercing.  Then I'd be all over it, although even I would need to consider stealing such 'used' goods.</i>\"");
 
-	outputText("\n\nYou jokingly refer him to an incubus and how a man like him should have come to know quite a few succubi on his journeys.  Raphael flashes a guilty little smile on return, some mineral water on hand.  \"<i>Hope you don't mind?  It's better that I not drink alcohol before going on the job.</i>\"  He sits down besides you and pours it, offering you the crystal glass.");
+	outputText("\n\nYou jokingly refer him to an incubus and how a man like him should have come to know quite a few succubi on his journeys.  Raphael flashes a guilty little smile on return, some mineral water on hand.  \"<i>Hope you don't mind?  It's better that I not drink alcohol before going on the job.</i>\"  He sits down beside you and pours it, offering you the crystal glass.");
 
 	outputText("\n\n\"<i>Like I said, they don't bother me much.  Make no mistake however; like any sane Tel'adrian, I think they're a threat to civilization.</i>\" he starts to explain.  \"<i>No sense of style.  Alors, I too have a reputation for chasing skirt.</i>\"  He smiles coyly while looking over the rim of his glass and tipping it backwards.  \"<i>But I'd like to think that I'm set apart from an incubus, by a sense of refinement.  I'm not quite ready to wander the desert, chasing random strumpets in barely any clothes at all.</i>\"  He finishes his sip.  \"<i>I mean, what a waste of a wardrobe that would be.</i>\"  He sits back, stretches his arms and straightens his fine leather jacket.  \"<i>In fact, I'd like to think that I'm hardly about sex at all!</i>\"  He states.");
 
 	outputText("\n\nWhen you ask him what he is about, Raphael's answer is a surprising one.  \"<i>About knowing succubi... yes, I knew quite a few quite intimately.  To say that I learned my skill at charming others from them wouldn't be far from the truth.</i>\"  He trails an idle finger across the rim of his goblet like he's reminiscing.  \"<i>The moment I became any good at remaining unseen, I made my way into the mountains to find one of these succubi.  I was young and curious.  I spied on them.  Let's say their pastime activities were of great interest to a young male.</i>\"  He grins.  \"<i>The moment I became good enough with the rapier to muster the courage, I confronted one.</i>\"  Raphael lets a deliberate pause fall in the discussion, lasting long enough for you to ask what happened next.  The fox gloats. \"<i>Let's just say I learned to realize what I want most from life, and the difference between loose women and dignified ladies.  Sneaking into their lairs makes you either a suicidal fool or a demon slaying hero and luckily, I am neither.  She played me for an idiot, telling me to just submit, lay down my weapon and get rewarded beyond my wildest dreams.  Enticing, true, but luckily, I found out that my desire to compete and win, is greater than my libido.  I recognized it as a game for control and not only did I manage to play along, but I began preying on her desires better than she could mine.  I never did lay down my rapier that night, always convincing her I either needed just one more sordid act to lose my mind to her, or already had.</i>\"  He observes.  \"<i>And the oddest thing happened.  The moment I was winning, I began losing interest in her.  My mind turned instead, to the city bank or some noble's vault, to ponder on how much harder these would be to get into than my lady friend.</i>\"  He chuckles a bit awkward.  \"<i>The following morning, I had gotten all I wanted from her and escaped unharmed.</i>\"");
 
-	outputText("\n\nHe looks over to you and frowns, worried.  \"<i>I wouldn't recommend attempting the same though.  My first succubus was a very young one, almost a decade ago.  In my puberty, I would proceed to try and seduce several more - even two incubi - to charm my way out of trouble whilst seeking demon treasure, but as time progressed, I got into serious trouble for it.  The smarter ones, higher up the ranks, outdid me and I can personally attest how demons have a corrupting influence to them.  Simply being around to stalk them was enough to make me careless.  I became addicted to the thrill.  Had I not broken a leg, forcing me to recover in the city and giving me time to reflect and recover, I'm not sure if I would be around today.  I mean, you can only pick the lock on the tiny cage they're using to cart you up the mountain so many times, before they decide to simply fuse it.</i>\"  He smiles.  \"<i>By then, I had learned to appreciate finer things. I have little enduring interest in the corrupt.</i>\"");
+	outputText("\n\nHe looks over to you and frowns, worried.  \"<i>I wouldn't recommend attempting the same though.  My first succubus was a very young one, almost a decade ago.  In my puberty, I would proceed to try and seduce several more - even two incubi - to charm my way out of trouble whilst seeking demon treasure, but as time passed, I got into serious trouble for it.  The smarter ones, higher up the ranks, outdid me and I can personally attest how demons have a corrupting influence to them.  Simply being around to stalk them was enough to make me careless.  I became addicted to the thrill.  Had I not broken a leg, forcing me to recover in the city and giving me time to reflect and recover, I'm not sure if I would be around today.  I mean, you can only pick the lock on the tiny cage they're using to cart you up the mountain so many times, before they decide to simply fuse it.</i>\"  He smiles.  \"<i>By then, I had learned to appreciate finer things. I have little enduring interest in the corrupt.</i>\"");
 
 	outputText("\n\n\"<i>But what I mean to say, is this: I put value in things such as modesty, dignity, decorum and a sense of style.  I don't think that demons do, or at least not in a way that would preserve these virtues.</i>\"  Raphael clears his throat and dips back into metaphors.  \"<i>I'm not about theft.  I'm about getting into hard to reach places.  I don't care what's in the vault.  Whatever it is, it must be valuable to be there, behind all those intricate traps, delicate locks, ornate guards and cultural heritage.  To finesse my way through all of that?</i>\"");
 

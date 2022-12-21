@@ -69,6 +69,14 @@ public class VaginaClass implements IOrifice {
 		EnumValue.add(Types, RAIJU, "RAIJU", {
 			name: "raiju"
 		});
+		public static const KIRIN:int          	= 17;
+		EnumValue.add(Types, KIRIN, "KIRIN", {
+			name: "kirin"
+		});
+		public static const BEE:int          	= 18;
+		EnumValue.add(Types, BEE, "BEE", {
+			name: "bee"
+		});
 		
 		public static const WETNESS_DRY:int       = 0;
 		public static const WETNESS_NORMAL:int    = 1;

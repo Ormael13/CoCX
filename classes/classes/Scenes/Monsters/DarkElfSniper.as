@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.Monsters 
+package classes.Scenes.Monsters
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -31,7 +31,7 @@ public class DarkElfSniper extends DarkElfScout
 			else outputText("An arrow missed you.\n\n");
 		}
 		
-		public function DarkElfSniper() 
+		public function DarkElfSniper()
 		{
 			this.a = "the ";
 			this.short = "dark elf sniper";
@@ -46,7 +46,7 @@ public class DarkElfSniper extends DarkElfScout
 			this.hips.type = Hips.RATING_CURVY;
 			this.butt.type = Butt.RATING_LARGE + 1;
 			this.lowerBody = LowerBody.ELF;
-			this.skinTone = "dark";
+			this.bodyColor = "dark";
 			this.hairColor = "silver";
 			this.hairLength = 13;
 			initStrTouSpeInte(120, 180, 240, 130);
@@ -63,7 +63,6 @@ public class DarkElfSniper extends DarkElfScout
 			this.bonusLust = 221;
 			this.lustVuln = .7;
 			this.lust = 50;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 51;
 			this.gems = rand(10) + 25;
 			this.drop = new WeightedDrop().

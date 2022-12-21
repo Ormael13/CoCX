@@ -84,7 +84,7 @@ public class FetishCultist extends Monster
 			else {
 				outputText("She suddenly starts mauling her shapely breasts, her fingers nearly disappearing briefly in the soft, full flesh, while fingering herself eagerly, emitting a variety of lewd noises.  You are entranced by the scene, the sexual excitement she's experiencing penetrating your body in warm waves coming from your groin.");
 			}
-			player.dynStats("lus", (player.lib/10 + player.cor/20)+4);
+			player.takeLustDamage((player.lib/10 + player.cor/20)+4, true);
 			if (player.lust >= player.maxOverLust())
 				doNext(SceneLib.combat.endLustLoss);
 			else doNext(SceneLib.combat.combatMenu);
@@ -107,7 +107,7 @@ public class FetishCultist extends Monster
 				else if(player.cockTotal() > 0) outputText("  A sudden influx of pre-cum blurts out and streams down your [cocks], painfully hardened by a vast amount of blood rushing to your groin.");
 				if(player.gender == 0) outputText("  Your genderless body is suddenly filled by a perverted warmth.");
 				outputText("\n\nYou notice that the young woman seems to have calmed down some.");
-				player.dynStats("lus", (lust/3 * (1 + player.cor/300)));
+				player.takeLustDamage((lust/3 * (1 + player.cor/300)), true);
 				lust -= 50;
 				if(lust < 0) lust = 10;
 			}
@@ -153,7 +153,7 @@ public class FetishCultist extends Monster
 			this.tallness = 5*12+7;
 			this.hips.type = Hips.RATING_AMPLE;
 			this.butt.type = Butt.RATING_LARGE;
-			this.skinTone = "pale";
+			this.bodyColor = "pale";
 			this.hairColor = "black";
 			this.hairLength = 15;
 			initStrTouSpeInte(40, 25, 30, 1);
@@ -166,7 +166,6 @@ public class FetishCultist extends Monster
 			this.armorMDef = 1;
 			this.bonusLust = 158;
 			this.lust = 25;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 3;
 			this.gems = 5+rand(10);
 			this.drop = new WeightedDrop().add(consumables.LABOVA_,1)

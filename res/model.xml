@@ -102,6 +102,7 @@
             <color name="neon blue">#29eaff</color>
             <color name="spectral blue">#29eaff</color>
             <color name="glacial blue">#94f6ff</color>
+			<color name="pure blue">#94f6ff</color>
             <color name="mahogany">#81473b</color>
             <color name="mahogany2">#672828</color>
             <color name="metallic">#9c9c9c</color>
@@ -162,6 +163,7 @@
             <color name="milky white">#f4dfdc</color>
             <color name="pale white">#fff4eb</color>
             <color name="pale yellow">#eeecaa</color>
+			<color name="pale purple">#d3d4e9</color>
             <color name="platinum blonde">#f7f3e8</color>
             <color name="platinum crimson">#ff745c</color>
             <color name="platinum-blonde">#ffe5c7</color>
@@ -171,6 +173,7 @@
 			<color name="eldritch purple">#7a5f95</color>
             <color name="quartz white">#ffffff</color>
             <color name="pure white">#ffffff</color>
+			<color name="immaculate white">#fdfdfc</color>
             <color name="reddish-orange">#df8453</color>
             <color name="rough gray">#525252</color>
             <color name="sandy blonde">#ebd69e</color>
@@ -187,7 +190,7 @@
             <color name="abyssal black">#000000</color>
             <color name="white and black">#eff3f6</color>
         </common>
-        <property name="hair" src="hairColor" default="#ffffff">
+        <property name="hair" src="hairColor1" default="#ffffff">
             <color name="red">#d85741</color>
             <color name="flaxen">#e1ba94</color>
             <color name="brown">#674f42</color>
@@ -197,24 +200,36 @@
             <color name="raven">#101728</color>
             <color name="snowy">#dddfe4</color>
         </property>
-        <property name="hair2" src="hairColor" default="#ffffff">
+        <property name="hair2" src="hairColor2" default="#ffffff">
+            <color name="red">#d85741</color>
+            <color name="flaxen">#e1ba94</color>
+            <color name="brown">#674f42</color>
+            <color name="black">#334252</color>
+            <color name="gray">#647a7d</color>
+            <color name="white">#aeaba3</color>
+            <color name="raven">#101728</color>
+            <color name="snowy">#dddfe4</color>
         </property>
-        <property name="fur" src="skin.coat.color" default="#ffffff">
+        <property name="fur" src="furColor1" default="#ffffff">
         </property>
-        <property name="fur2" src="skin.coat.color2" default="#ffffff">
+        <property name="fur2" src="furColor2" default="#ffffff">
         </property>
-        <property name="scales" src="skin.coat.color" default="#ffffff">
+        <property name="feather" src="featherColor1" default="#ffffff">
         </property>
-        <property name="scales2" src="skin.coat.color2" default="#ffffff">
+        <property name="feather2" src="featherColor2" default="#ffffff">
         </property>
-        <property name="chitin" src="skin.coat.color" default="#ffffff">
+        <property name="scales" src="scaleColor1" default="#ffffff">
         </property>
-        <property name="chitin2" src="skin.coat.color2" default="#ffffff">
+        <property name="scales2" src="scaleColor2" default="#ffffff">
         </property>
-        <property name="skin" src="skinTone" default="#ffffff">
+        <property name="chitin" src="chitinColor1" default="#ffffff">
+        </property>
+        <property name="chitin2" src="chitinColor2" default="#ffffff">
+        </property>
+        <property name="skin" src="skinColor1" default="#ffffff">
             <color name="pale">#f2e8e3</color>
         </property>
-        <property name="skin2" src="skin.base.color2" default="#ffffff">
+        <property name="skin2" src="skinColor2" default="#ffffff">
             <color name="pale">#f2e8e3</color>
         </property>
         <property name="iris" src="eyes.colour" default="#0000ff">
@@ -227,9 +242,19 @@
         <key src="#880088" base="hair" transform="darken(25)"/>
         <key src="#440044" base="hair" transform="darken(50)"/>
         <key src="#FFFF88" base="hair2" transform="lighten(25)"/>
+		<key src="#b0b000" base="hair2" transform="lighten(10)"/>
         <key src="#CCCC00" base="hair2"/>
         <key src="#999900" base="hair2" transform="darken(25)"/>
         <key src="#333300" base="hair2" transform="darken(50)"/>
+        <key src="#FFA54C" base="feather" transform="lighten(25)"/>
+		<key src="#FF8000" base="feather" transform="lighten(10)"/>
+        <key src="#CC6600" base="feather"/>
+        <key src="#994C00" base="feather" transform="darken(25)"/>
+        <key src="#663300" base="feather" transform="darken(50)"/>
+        <key src="#FFB2F4" base="feather2" transform="lighten(25)"/>
+        <key src="#FF7FED" base="feather2"/>
+        <key src="#CC66BE" base="feather2" transform="darken(25)"/>
+        <key src="#994C8E" base="feather2" transform="darken(50)"/>
         <key src="#88FF88" base="fur" transform="lighten(25)"/>
         <key src="#00CC00" base="fur"/>
 		<key src="#00ac00" base="fur" transform="darken(15)"/>
@@ -245,6 +270,7 @@
         <key src="#0000CC" base="scales" transform="darken(25)"/>
         <key src="#000033" base="scales" transform="darken(50)"/>
         <key src="#AAFFAA" base="scales2" transform="lighten(25)"/>
+		<key src="#55ab55" base="scales2" transform="lighten(10)"/>
         <key src="#66CC66" base="scales2"/>
         <key src="#448844" base="scales2" transform="darken(25)"/>
         <key src="#223322" base="scales2" transform="darken(50)"/>
@@ -302,6 +328,7 @@
         <cell rect="301,90,49,59" name="torso/scales" dx="79" dy="64"/>
         <cell rect="351,90,49,59" name="torso/goo" dx="79" dy="64"/>
         <cell rect="601,90,49,59" name="torso/panda" dx="79" dy="64"/>
+		<cell rect="1401,90,49,59" name="torso/redpanda" dx="79" dy="64"/>
         <cell rect="1101,90,49,59" name="torso/dscales" dx="79" dy="64"/>
 		<cell rect="1151,90,49,59" name="torso/shark" dx="79" dy="64"/>
         <cell rect="451,90,49,59" name="torso_pattern/Bstripe" dx="79" dy="64"/>
@@ -349,6 +376,7 @@
         <cell rect="601,150,49,59" name="arms_bg_pattern/Btatoo" dx="56" dy="64"/>
         <cell rect="951,150,49,59" name="arms_bg_pattern/Bvenom" dx="56" dy="64"/>
         <cell rect="1,1364,49,59" name="arms_bg/gazer" dx="65" dy="65"/>
+		<cell rect="1201,150,49,55" name="arms_bg/prayer" dx="78" dy="64"/>
         <cell rect="1,210,49,59" name="arms/human" dx="104" dy="64"/>
         <cell rect="51,210,49,59" name="arms/fur" dx="104" dy="64"/>
         <cell rect="551,210,49,59" name="arms/furracoon" dx="104" dy="64"/>
@@ -377,12 +405,8 @@
         <cell rect="201,913,49,59" name="arms/displacerquad_chitin" dx="101" dy="56"/>
         <cell rect="251,913,49,59" name="arms/displacerquad_orca" dx="101" dy="56"/>
         <cell rect="1,1124,49,59" name="arms/feral_human" dx="101" dy="56"/>
-        <cell rect="51,1124,49,59" name="arms_overlay/feral_fur" dx="101" dy="56"/>
-        <cell rect="101,1124,49,59" name="arms_overlay/feral_scales" dx="101" dy="56"/>
-        <cell rect="151,1124,49,59" name="arms_overlay/feral_pscales" dx="101" dy="56"/>
-        <cell rect="201,1124,49,59" name="arms_overlay/feral_chitin" dx="101" dy="56"/>
-        <cell rect="251,1124,49,59" name="arms_overlay/feral_orca" dx="101" dy="56"/>
-        <cell rect="351,1124,49,59" name="arms/feral_dragon" dx="101" dy="56"/>
+		<cell rect="1201,210,49,55" name="arms/prayer" dx="78" dy="64"/>
+		<cell rect="351,1124,49,59" name="arms/feral_dragon" dx="101" dy="56"/>
         <cell rect="801,210,49,59" name="arms/demonlewd" dx="100" dy="53"/>
         <cell rect="1,1184,99,119" name="arms/hinezumistanced_human" dx="58" dy="55"/>
         <cell rect="101,1184,99,119" name="arms/hinezumistanced_fur" dx="58" dy="55"/>
@@ -393,8 +417,14 @@
         <cell rect="601,210,49,59" name="arms/crabStance" dx="78" dy="64"/>
         <cell rect="820,520,90,90" name="arms/elemental" dx="60" dy="46"/>
         <cell rect="51,1364,49,59" name="arms/gazer" dx="92" dy="65"/>
+        <cell rect="51,1124,49,59" name="arms_overlay/feral_fur" dx="101" dy="56"/>
+        <cell rect="101,1124,49,59" name="arms_overlay/feral_scales" dx="101" dy="56"/>
+        <cell rect="151,1124,49,59" name="arms_overlay/feral_pscales" dx="101" dy="56"/>
+        <cell rect="201,1124,49,59" name="arms_overlay/feral_chitin" dx="101" dy="56"/>
+        <cell rect="251,1124,49,59" name="arms_overlay/feral_orca" dx="101" dy="56"/>
         <cell rect="851,210,49,59" name="arms_fg/demonlewd" dx="100" dy="53"/>
         <cell rect="638,702,90,90" name="arms_fg/manticore_sit" dx="60" dy="61"/>
+		<cell rect="1251,150,49,59" name="arms_fg/prayer" dx="78" dy="56"/>
         <cell rect="451,210,49,59" name="arms_pattern/Bstripe" dx="104" dy="64"/>
         <cell rect="501,210,49,59" name="arms_pattern/Blightning" dx="104" dy="64"/>
         <cell rect="651,210,49,59" name="arms_pattern/Btatoo" dx="104" dy="64"/>
@@ -414,12 +444,13 @@
 		<cell rect="401,270,49,59" name="hands_bg/dscales" dx="56" dy="64"/>
         <cell rect="451,270,49,59" name="hands_bg/human" dx="56" dy="64"/>
         <cell rect="501,270,49,59" name="hands_bg/fins-orca" dx="56" dy="64"/>
+		<cell rect="1051,270,49,59" name="hands_bg/fins-shark" dx="56" dy="64"/>
         <cell rect="551,270,49,59" name="hands_bg/goo" dx="56" dy="64"/>
         <cell rect="701,270,49,59" name="hands_bg/panda" dx="56" dy="64"/>
         <cell rect="301,1064,49,59" name="hand_bg/kumiho" dx="56" dy="56"/>
         <cell rect="851,150,49,59" name="hands_bg/wraithleft" dx="63" dy="75"/>
         <cell rect="651,270,49,59" name="hands_bg/frostWyrmleft" dx="62" dy="72"/>
-		<cell rect="1001,270,49,59" name="hands_bg/jabberwockyleft" dx="62" dy="72"/>
+		<cell rect="1001,270,49,59" name="hands_bg/jabberwockyLeft" dx="62" dy="72"/>
         <cell rect="801,270,49,59" name="hands_bg/blade-kamaitachiMantis" dx="56" dy="64"/>
         <cell rect="751,270,49,59" name="hands_bg/wendigo" dx="56" dy="64"/>
         <cell rect="901,270,49,59" name="hands_bg/mindbreaker" dx="61" dy="74"/>
@@ -437,13 +468,14 @@
 		<cell rect="401,330,49,59" name="hands/dscales" dx="104" dy="64"/>
         <cell rect="451,330,49,59" name="hands/human" dx="104" dy="64"/>
         <cell rect="501,330,49,59" name="hands/fins-orca" dx="104" dy="64"/>
+		<cell rect="1051,330,49,59" name="hands/fins-shark" dx="104" dy="64"/>
         <cell rect="551,330,49,59" name="hands/goo" dx="104" dy="64"/>
         <cell rect="701,330,49,59" name="hands/panda" dx="104" dy="64"/>
         <cell rect="729,520,90,90" name="hands/yeti" dx="57" dy="43"/>
         <cell rect="301,1124,49,59" name="hands/kumiho" dx="101" dy="56"/>
         <cell rect="901,210,49,59" name="hands/wraithright" dx="94" dy="75"/>
         <cell rect="651,330,49,59" name="hands/frostWyrmright" dx="98" dy="72"/>
-		<cell rect="1001,330,49,59" name="hands/jabberwockyright" dx="98" dy="72"/>
+		<cell rect="1001,330,49,59" name="hands/jabberwockyRight" dx="98" dy="72"/>
         <cell rect="801,330,49,59" name="hands/blade-kamaitachiMantis" dx="104" dy="64"/>
         <cell rect="751,330,49,59" name="hands/wendigo" dx="104" dy="64"/>
         <cell rect="1051,150,49,59" name="hands/gnomeLeft" dx="63" dy="42"/>
@@ -584,6 +616,7 @@
         <cell rect="1166,956,173,156" name="fullbody/femalesylph" dx="16" dy="21"/>
         <cell rect="1340,956,173,156" name="fullbody/malesylph" dx="16" dy="21"/>
 		<cell rect="1514,956,173,156" name="fullbody/cerberus" dx="16" dy="18"/>
+		<cell rect="1688,956,173,156" name="fullbodyBg/imp" dx="16" dy="21"/>
         <cell rect="260,620,21,28" name="neck/darkGooCore" dx="95" dy="67"/>
         <cell rect="162,59,54,31" name="neck/manticore" dx="77" dy="47"/>
         <cell rect="217,59,54,31" name="neck/weasel" dx="77" dy="50"/>
@@ -591,7 +624,7 @@
         <cell rect="217,91,15,9" name="neck/mindbreaker" dx="97" dy="63"/>
         <cell rect="217,27,54,31" name="rearbody/shark" dx="84" dy="72"/>
         <cell rect="61,689,100,100" name="rearbody/snail" dx="87" dy="82"/>
-        <cell rect="992,641,173,156" name="wings/gazer" dx="22" dy="10"/>
+        <cell rect="992,641,173,156" name="backtentacles/gazer" dx="22" dy="10"/>
         <cell rect="296,641,173,156" name="aura/windyaura" dx="21" dy="28"/>
         <cell rect="470,641,173,156" name="aura/ghostlyaura" dx="21" dy="28"/>
         <cell rect="644,641,173,156" name="aura/wraithaura" dx="21" dy="28"/>
@@ -601,6 +634,8 @@
         <cell rect="486,1574,30,20" name="clotheHead/fairyQueenCirclet" dx="88" dy="38"/>
         <cell rect="1013,12,40,28" name="clotheHead/merchantClotheHat" dx="81" dy="30"/>
         <cell rect="150,123,49,25" name="clotheHead_bg/warlockSkulls" dx="79" dy="36"/>
+		<cell rect="150,187,49,25" name="clotheHead_behindHorns/darkPriest" dx="79" dy="33"/>
+		<cell rect="201,210,49,25" name="clotheHead_behindHorns/priest" dx="79" dy="33"/>
         <cell rect="607,41,15,13" name="clotheAmulet/GoldStatAmulet" dx="97" dy="65"/>
         <cell rect="1029,41,15,13" name="clotheAmulet/CowBellAmulet" dx="97" dy="64"/>
         <cell rect="67,26,80,28" name="clotheScarf/scarfBlue" dx="94" dy="64"/>
@@ -644,6 +679,9 @@
         <cell rect="1612,158,40,55" name="clothe/mageRobe" dx="84" dy="68"/>
         <cell rect="1969,185,20,27" name="clothe/elfClothing" dx="94" dy="81"/>
         <cell rect="1927,158,40,55" name="clothe/elfClothingSkirt" dx="84" dy="87"/>
+		<cell rect="1427,325,80,108" name="clothe/darkPriest" dx="63" dy="64"/>
+		<cell rect="1427,434,80,108" name="clothe/priest" dx="63" dy="64"/>
+		<cell rect="1427,543,80,108" name="clothe/elfVillager" dx="63" dy="64"/>
         <cell rect="672,445,45,80" name="clotheLegs/comfortableClothes" dx="79" dy="90"/>
         <cell rect="751,158,40,54" name="clotheLegs/whiteKimonoBottom" dx="85" dy="121"/>
         <cell rect="919,158,40,54" name="clotheLegs/blackKimonoBottom" dx="85" dy="121"/>
@@ -661,12 +699,19 @@
         <cell rect="1654,158,40,56" name="clotheLegs/mageRobe" dx="85" dy="116"/>
         <cell rect="1843,158,40,55" name="clotheLegs/elfClothinglegs" dx="85" dy="120"/>
         <cell rect="1885,158,40,55" name="clotheLegs/elfClothinglegsLewd" dx="80" dy="119"/>
+		<cell rect="1591,325,80,104" name="clotheLegs/darkPriestSkirt" dx="65" dy="64"/>
+		<cell rect="1673,325,80,104" name="clotheLegs/darkPriestBoots" dx="66" dy="73"/>
+		<cell rect="1591,434,80,104" name="clotheLegs/priestSkirt" dx="65" dy="64"/>
+		<cell rect="1673,434,80,104" name="clotheLegs/priestBoots" dx="66" dy="73"/>
         <cell rect="776,12,45,27" name="armorNeck/fullplatetopFemale" dx="80" dy="63"/>
         <cell rect="728,12,45,27" name="armorNeck/fullplatetopFemaleLarge" dx="80" dy="63"/>
         <cell rect="833,12,45,27" name="armorNeck/fullplatetopMale" dx="80" dy="63"/>
         <cell rect="1104,12,45,27" name="armorNeck/blackFullplatetopFemale" dx="80" dy="63"/>
         <cell rect="1056,12,45,27" name="armorNeck/blackFullplatetopFemaleLarge" dx="80" dy="63"/>
         <cell rect="1161,12,45,27" name="armorNeck/blackFullplatetopMale" dx="80" dy="63"/>
+		<cell rect="1389,12,45,27" name="armorNeck/gooplatetopFemale" dx="80" dy="63"/>
+        <cell rect="1341,12,45,27" name="armorNeck/gooplatetopFemaleLarge" dx="80" dy="63"/>
+        <cell rect="1446,12,45,27" name="armorNeck/gooplatetopMale" dx="80" dy="63"/>
         <cell rect="644,798,173,156" name="armorNeck/walpurgisClothes" dx="20" dy="12"/>
         <cell rect="992,798,173,156" name="armorNeck/wendigoCloak" dx="20" dy="12"/>
         <cell rect="1013,70,40,28" name="armorNeck/merchantClotheCape_fg" dx="85" dy="59"/>
@@ -675,14 +720,18 @@
         <cell rect="548,1550,30,23" name="armorNeck/alraunedressLili" dx="55" dy="60"/>
         <cell rect="833,42,45,58" name="armorChest/fullplatebottom" dx="82" dy="75"/>
         <cell rect="1161,42,45,58" name="armorChest/blackFullplatebottom" dx="82" dy="75"/>
+		<cell rect="1446,42,45,58" name="armorChest/gooplatebottom" dx="82" dy="75"/>
         <cell rect="651,1430,44,58" name="armorChest/alraunedress" dx="87" dy="74"/>
         <cell rect="606,1430,44,58" name="armorChest/alraunedressLili" dx="42" dy="74"/>
         <cell rect="728,42,45,58" name="armorLegs/fullplateLegs" dx="82" dy="115"/>
         <cell rect="1056,42,45,58" name="armorLegs/blackFullplateLegs" dx="82" dy="115"/>
+		<cell rect="1341,42,45,58" name="armorLegs/gooplateLegs" dx="82" dy="115"/>
         <cell rect="882,12,125,75" name="armorLegs_fg/taurarmorbottom" dx="72" dy="96"/>
         <cell rect="1210,12,125,75" name="armorLegs_fg/blackTaurarmorbottom" dx="72" dy="96"/>
+		<cell rect="1495,12,125,75" name="armorLegs_fg/gooTaurarmorbottom" dx="72" dy="96"/>
         <cell rect="776,42,25,55" name="armorLeftArm/fullplateleftarm" dx="78" dy="66"/>
         <cell rect="1104,42,25,55" name="armorLeftArm/blackFullplateleftarm" dx="78" dy="66"/>
+		<cell rect="1389,42,25,55" name="armorLeftArm/gooplateleftarm" dx="78" dy="66"/>
         <cell rect="961,158,20,55" name="clothLeftArm/scandalousSuccubusClothingleftArm" dx="81" dy="68"/>
         <cell rect="1003,158,20,55" name="clothLeftArm/scandalousSuccubusClothingleftArmLewd" dx="85" dy="59"/>
         <cell rect="1234,158,20,55" name="clothLeftArm/vampireClothingleftArm" dx="81" dy="68"/>
@@ -695,8 +744,11 @@
         <cell rect="1486,158,40,55" name="clothLeftArm/mageRobe" dx="70" dy="59"/>
         <cell rect="1738,158,20,55" name="clothLeftArm/elfClothingleftArm" dx="81" dy="68"/>
         <cell rect="1780,158,20,55" name="clothLeftArm/elfClothingleftArmLewd" dx="84" dy="63"/>
+		<cell rect="2032,158,20,55" name="clothLeftArm/darkPriestPrayer" dx="82" dy="53"/>
+		<cell rect="2116,158,20,55" name="clothLeftArm/priestPrayer" dx="82" dy="53"/>
         <cell rect="804,42,25,55" name="armorRightArm/fullplaterightarm" dx="102" dy="66"/>
         <cell rect="1132,42,25,55" name="armorRightArm/blackFullplaterightarm" dx="102" dy="66"/>
+		<cell rect="1417,42,25,55" name="armorRightArm/gooplaterightarm" dx="102" dy="66"/>
         <cell rect="982,158,20,55" name="clothRightArm/scandalousSuccubusClothingRightArm" dx="109" dy="69"/>
         <cell rect="1024,158,20,55" name="clothRightArm/scandalousSuccubusClothingRightArmLewd" dx="104" dy="52"/>
         <cell rect="1759,158,20,55" name="clothRightArm/elfClothingRightArm" dx="108" dy="68"/>
@@ -708,6 +760,10 @@
         <cell rect="1322,489,40,44" name="clothRightArm/berserkerArmorArmsFeralQuadRight" dx="101" dy="56"/>
         <cell rect="1339,158,60,40" name="clothRightArm/merchantClotheArms" dx="74" dy="65"/>
         <cell rect="1528,158,40,55" name="clothRightArm/mageRobe" dx="98" dy="59"/>
+		<cell rect="1755,325,80,108" name="clothRightArm/darkPriest" dx="65" dy="52"/>
+		<cell rect="1755,434,80,108" name="clothRightArm/priest" dx="65" dy="52"/>
+		<cell rect="2053,158,20,55" name="clothRightArm/darkPriestPrayer" dx="105" dy="53"/>
+		<cell rect="2137,158,20,55" name="clothRightArm/priestPrayer" dx="105" dy="53"/>
         <cell rect="818,798,173,156" name="clothCape/walpurgisClothesBack" dx="19" dy="12"/>
         <cell rect="1166,798,173,156" name="clothCape/wendigoCloakBack" dx="19" dy="12"/>
         <cell rect="935,543,150,80" name="clothCape/fairyQueenDressUnder" dx="22" dy="61"/>
@@ -722,12 +778,17 @@
         <cell rect="1755,216,80,100" name="clothCape_bg/mageClotheCape_bg" dx="65" dy="64"/>
         <cell rect="2083,216,80,100" name="clothCape_bg/elfClotheCape_bg" dx="65" dy="64"/>
         <cell rect="1166,641,173,156" name="clothCape_bg/mindbreaker" dx="20" dy="29"/>
+		<cell rect="1509,325,80,108" name="clothCape_fg/darkPriestSkirt" dx="63" dy="55"/>
+		<cell rect="1509,434,80,108" name="clothCape_fg/priestSkirt" dx="63" dy="55"/>
         <cell rect="150,91,35,25" name="forehead/SpecialForeheadShadow" dx="81" dy="35"/>
         <cell rect="1045,158,20,55" name="glove_fg/scandalousSuccubusClothingRightArmFront" dx="104" dy="52"/>
         <cell rect="1318,158,20,55" name="glove_fg/vampireClothingRightArmFront" dx="104" dy="52"/>
         <cell rect="517,1550,30,20" name="glove_fg/fairyQueenDressArmFront" dx="105" dy="75"/>
         <cell rect="1822,158,20,55" name="glove_fg/elfClothingRightArmFront" dx="104" dy="52"/>
+		<cell rect="2074,158,40,55" name="glove_fg/darkPriestPrayer" dx="83" dy="61"/>
+		<cell rect="2158,158,40,55" name="glove_fg/priestPrayer" dx="83" dy="61"/>
         <cell rect="201,91,15,9" name="tailAccessory/demonTailJewelery" dx="133" dy="135"/>
+		<cell rect="233,91,15,9" name="overbreast/phylacteryExposed" dx="96" dy="69"/>
         <cell rect="296,1550,99,45" name="uniquePlantBath/lilirauneBath" dx="34" dy="88"/>
         <cell rect="546,1430,50,100" name="torso/liliraune" dx="36" dy="26"/>
         <cell rect="296,1596,85,20" name="face/lilirauneCorruptedSmile" dx="34" dy="50"/>
@@ -738,15 +799,21 @@
         <cell rect="441,1430,40,50" name="hair_bg/liliraune" dx="42" dy="22"/>
         <cell rect="396,1490,60,90" name="hair_bg/lilirauneLong" dx="22" dy="21"/>
         <cell rect="486,1550,25,22" name="ears/liliraune" dx="39" dy="44"/>
+		<cell rect="610,1550,25,22" name="eyes/liliraune" dx="52" dy="43"/>
+		<cell rect="641,1550,25,22" name="eyes/lilirauneCorrupt" dx="52" dy="43"/>
         <cell rect="486,1490,55,58" name="horns/LilirauneOrchid" dx="33" dy="12"/>
         <cell rect="486,1430,55,58" name="horns_bg/LilirauneOrchid" dx="33" dy="9"/>
         <cell rect="296,1430,49,29" name="breasts/0liliraune" dx="43" dy="68"/>
         <cell rect="296,1460,49,29" name="breasts/Bliliraune" dx="43" dy="68"/>
         <cell rect="296,1490,49,29" name="breasts/Dliliraune" dx="43" dy="68"/>
         <cell rect="296,1520,49,29" name="breasts/Fliliraune" dx="43" dy="68"/>
+		<cell rect="606,1490,49,29" name="breasts/Gliliraune" dx="43" dy="69"/>
         <cell rect="122,1620,80,102" name="weapon/staffGeneric" dx="38" dy="55"/>
         <cell rect="122,1726,80,102" name="weapon/staffHoly" dx="38" dy="55"/>
         <cell rect="122,1832,80,102" name="weapon/staffUnholy" dx="38" dy="55"/>
+		<cell rect="1202,1620,80,102" name="weapon/wandGeneric" dx="38" dy="55"/>
+        <cell rect="1202,1726,80,102" name="weapon/wandHoly" dx="38" dy="55"/>
+        <cell rect="1202,1832,80,102" name="weapon/wandUnholy" dx="38" dy="55"/>
         <cell rect="212,1620,80,90" name="weapon/swordGeneric" dx="38" dy="55"/>
         <cell rect="212,1726,80,90" name="weapon/swordHoly" dx="38" dy="55"/>
         <cell rect="212,1832,80,90" name="weapon/swordUnholy" dx="38" dy="55"/>
@@ -839,6 +906,7 @@
         <cell rect="361,136,59,65" name="hairLeft/sylph" dx="54" dy="26"/>
         <cell rect="421,136,59,65" name="hairRight/sylph" dx="98" dy="26"/>
 		<cell rect="721,136,59,65" name="hair/cow" dx="75" dy="21"/>
+		<cell rect="1081,350,87,98" name="hairRight/ribbon" dx="59" dy="3"/>
         <cell rect="1,449,28,30" name="hair/hairHood" dx="91" dy="39"/>
         <cell rect="1,482,28,30" name="hair/hairHoodFire" dx="91" dy="39"/>
     </spritemap>
@@ -852,6 +920,7 @@
         <cell rect="181,70,29,32" name="head/orca" dx="91" dy="37"/>
         <cell rect="211,70,29,32" name="head/goo" dx="90" dy="37"/>
         <cell rect="271,70,29,32" name="head/panda" dx="90" dy="37"/>
+		<cell rect="361,70,29,32" name="head/redpanda" dx="90" dy="37"/>
         <cell rect="301,70,29,32" name="head/dscales" dx="90" dy="37"/>
 		<cell rect="331,70,29,32" name="head/shark" dx="90" dy="37"/>
         <cell rect="1,110,29,32" name="face/human" dx="90" dy="37"/>
@@ -893,7 +962,9 @@
         <cell rect="361,150,29,32" name="eyes/caveWyrm" dx="90" dy="37"/>
         <cell rect="391,150,29,32" name="eyes/gazer" dx="90" dy="37"/>
         <cell rect="421,150,29,32" name="eyes/gremlin" dx="90" dy="37"/>
+		<cell rect="451,150,29,32" name="eyes/corruptcat" dx="90" dy="37"/>
         <cell rect="481,150,29,32" name="eyes/mindbreakerMale" dx="90" dy="37"/>
+		<cell rect="511,150,29,32" name="eyes_fg/corruptinfernal" dx="90" dy="37"/>
         <cell rect="1,190,29,32" name="ears_bg/human" dx="90" dy="37"/>
         <cell rect="31,190,29,32" name="ears/fur" dx="90" dy="37"/>
         <cell rect="61,190,59,32" name="ears_bg/elfin" dx="75" dy="36"/>
@@ -926,6 +997,7 @@
         <cell rect="601,256,29,65" name="ears/bear" dx="90" dy="4"/>
         <cell rect="631,190,29,65" name="ears_bg/panda" dx="90" dy="8"/>
         <cell rect="631,256,29,65" name="ears/panda" dx="90" dy="8"/>
+		<cell rect="181,470,29,65" name="ears_bg/redpanda" dx="90" dy="8"/>
         <cell rect="661,190,59,32" name="ears_bg/shark" dx="76" dy="38"/>
         <cell rect="661,223,59,32" name="ears/shark" dx="76" dy="38"/>
         <cell rect="721,190,59,32" name="ears_bg/caveWyrm" dx="76" dy="38"/>
@@ -941,9 +1013,11 @@
         <cell rect="361,396,59,65" name="horns/dragon" dx="75" dy="4"/>
         <cell rect="421,330,29,32" name="horns/unicorn" dx="86" dy="24"/>
         <cell rect="421,363,29,32" name="horns/bicorn" dx="83" dy="23"/>
+		<cell rect="451,330,29,32" name="horns/kirin" dx="83" dy="23"/>
         <cell rect="451,363,29,32" name="horns/2oni" dx="89" dy="40"/>
         <cell rect="211,396,29,30" name="horns/frostWyrm" dx="105" dy="23"/>
         <cell rect="211,429,29,30" name="horns/frostWyrmLeft" dx="73" dy="23"/>
+		<cell rect="631,396,58,32" name="horns/blackOracle" dx="74" dy="28"/>
         <cell rect="1,330,59,65" name="horns_bg/orchid" dx="73" dy="4"/>
         <cell rect="61,330,59,65" name="horns_bg/devil" dx="72" dy="4"/>
         <cell rect="121,330,59,65" name="horns_bg/cow" dx="75" dy="4"/>
@@ -989,12 +1063,19 @@
         <cell rect="861,320,49,29" name="fullbodyBalls/sylphlarge" dx="79" dy="104"/>
         <cell rect="861,350,49,29" name="fullbodyBalls/sylphhuge" dx="79" dy="105"/>
         <cell rect="861,380,49,29" name="fullbodyBalls/sylphsillyhuge" dx="79" dy="106"/>
+		<cell rect="961,200,49,29" name="fullbodyPenisFg/imp" dx="76" dy="86"/>
+        <cell rect="961,230,49,58" name="fullbodyPenisFg/impbig" dx="74" dy="64"/>
+		<cell rect="11,290,49,29" name="fullbodyBalls/Bimpsmall" dx="80" dy="99"/>
+        <cell rect="11,320,49,29" name="fullbodyBalls/Bimplarge" dx="80" dy="100"/>
+        <cell rect="11,350,49,29" name="fullbodyBalls/Bimphuge" dx="80" dy="100"/>
+        <cell rect="11,380,49,29" name="fullbodyBalls/Bimpsillyhuge" dx="80" dy="101"/>
         <cell rect="11,80,49,29" name="breasts/0" dx="79" dy="68"/>
         <cell rect="711,80,49,29" name="fullbodyBreast/gnome0" dx="79" dy="68"/>
         <cell rect="761,80,49,29" name="fullbodyBreast/ignis0" dx="79" dy="68"/>
         <cell rect="811,80,49,29" name="fullbodyBreast/undine0" dx="79" dy="68"/>
         <cell rect="861,80,49,29" name="fullbodyBreast/sylph0" dx="79" dy="68"/>
 		<cell rect="11,530,49,29" name="fullbodyBreast/cerberus" dx="78" dy="71"/>
+		<cell rect="11,80,49,29" name="fullbodyBreast/imp0" dx="80" dy="66"/>
         <cell rect="11,110,49,29" name="breasts/Bhuman" dx="79" dy="68"/>
         <cell rect="61,110,49,29" name="breasts/Bfur" dx="79" dy="68"/>
         <cell rect="61,110,49,29" name="breasts/Bpanda" dx="79" dy="68"/>
@@ -1010,6 +1091,7 @@
         <cell rect="761,110,49,29" name="fullbodyBreast/Bignis" dx="79" dy="68"/>
         <cell rect="811,110,49,29" name="fullbodyBreast/Bundine" dx="79" dy="68"/>
         <cell rect="861,110,49,29" name="fullbodyBreast/Bsylph" dx="79" dy="68"/>
+		<cell rect="11,110,49,29" name="fullbodyBreast/Bimp" dx="79" dy="67"/>
         <cell rect="11,140,49,29" name="breasts/Dhuman" dx="79" dy="68"/>
         <cell rect="61,140,49,29" name="breasts/Dfur" dx="79" dy="68"/>
         <cell rect="61,140,49,29" name="breasts/Dpanda" dx="79" dy="68"/>
@@ -1025,6 +1107,7 @@
         <cell rect="761,140,49,29" name="fullbodyBreast/Dignis" dx="79" dy="68"/>
         <cell rect="811,140,49,29" name="fullbodyBreast/Dundine" dx="79" dy="68"/>
         <cell rect="861,140,49,29" name="fullbodyBreast/Dsylph" dx="79" dy="68"/>
+		<cell rect="11,140,49,29" name="fullbodyBreast/Dimp" dx="79" dy="67"/>
         <cell rect="11,170,49,29" name="breasts/Fhuman" dx="79" dy="68"/>
         <cell rect="61,170,49,29" name="breasts/Ffur" dx="79" dy="68"/>
         <cell rect="61,170,49,29" name="breasts/Fpanda" dx="79" dy="68"/>
@@ -1040,6 +1123,23 @@
         <cell rect="761,170,49,29" name="fullbodyBreast/Fignis" dx="79" dy="68"/>
         <cell rect="811,170,49,29" name="fullbodyBreast/Fundine" dx="79" dy="68"/>
         <cell rect="861,170,49,29" name="fullbodyBreast/Fsylph" dx="79" dy="68"/>
+		<cell rect="11,170,49,29" name="fullbodyBreast/Fimp" dx="79" dy="67"/>
+		<cell rect="11,530,49,29" name="breasts/Ghuman" dx="79" dy="69"/>
+        <cell rect="61,530,49,29" name="breasts/Gfur" dx="79" dy="69"/>
+        <cell rect="61,530,49,29" name="breasts/Gpanda" dx="79" dy="69"/>
+        <cell rect="111,530,49,29" name="breasts/Gchitin" dx="79" dy="69"/>
+        <cell rect="161,530,49,29" name="breasts/Gbee" dx="79" dy="69"/>
+        <cell rect="211,530,49,29" name="breasts/Gpscales" dx="79" dy="69"/>
+        <cell rect="261,530,49,29" name="breasts/Gscales" dx="79" dy="69"/>
+        <cell rect="311,530,49,29" name="breasts/Gorca" dx="79" dy="69"/>
+        <cell rect="361,530,49,29" name="breasts/Ggoo" dx="79" dy="69"/>
+        <cell rect="661,530,49,29" name="breasts/Gdscales" dx="79" dy="69"/>
+        <cell rect="911,530,49,29" name="breasts/Gshark" dx="79" dy="69"/>
+        <cell rect="711,530,49,29" name="fullbodyBreast/Ggnome" dx="79" dy="69"/>
+        <cell rect="761,530,49,29" name="fullbodyBreast/Gignis" dx="79" dy="69"/>
+        <cell rect="811,530,49,29" name="fullbodyBreast/Gundine" dx="79" dy="69"/>
+        <cell rect="861,530,49,29" name="fullbodyBreast/Gsylph" dx="79" dy="69"/>
+        <cell rect="11,530,49,29" name="fullbodyBreast/Gimp" dx="79" dy="69"/>
         <cell rect="411,110,49,29" name="breasts_pattern/Bpstripe" dx="79" dy="68"/>
         <cell rect="411,140,49,29" name="breasts_pattern/Bstripe" dx="79" dy="69"/>
         <cell rect="411,170,49,29" name="breasts_pattern/Blstripe" dx="79" dy="69"/>
@@ -1165,10 +1265,12 @@
         <cell rect="561,110,49,29" name="overskin/Bpyeti" dx="79" dy="68"/>
         <cell rect="561,140,49,29" name="overskin/Byeti" dx="79" dy="68"/>
         <cell rect="561,170,49,29" name="overskin/Blyeti" dx="79" dy="68"/>
+		<cell rect="561,200,49,29" name="overskin/BHyeti" dx="79" dy="69"/>
         <cell rect="61,80,49,29" name="overskin/BfcaveWyrm" dx="79" dy="68"/>
         <cell rect="611,110,49,29" name="overskin/BpcaveWyrm" dx="79" dy="68"/>
         <cell rect="611,140,49,29" name="overskin/BcaveWyrm" dx="79" dy="68"/>
         <cell rect="611,170,49,29" name="overskin/BlcaveWyrm" dx="79" dy="68"/>
+		<cell rect="611,200,49,29" name="overskin/BHcaveWyrm" dx="79" dy="69"/>
         <cell rect="261,200,49,29" name="overskinpanty/yetipanty" dx="80" dy="99"/>
         <cell rect="311,200,49,29" name="overskinpanty/Ookumukadevenom" dx="75" dy="104"/>
         <cell rect="361,200,49,29" name="overskinpanty/caveWyrm" dx="80" dy="112"/>
@@ -1202,6 +1304,15 @@
         <cell rect="1111,410,49,29" name="bra_fg/elfClothingBraSmall" dx="79" dy="68"/>
         <cell rect="1111,440,49,29" name="bra_fg/elfClothingBraMedium" dx="79" dy="68"/>
         <cell rect="1111,470,49,29" name="bra_fg/elfClothingBraLarge" dx="79" dy="68"/>
+		<cell rect="1211,410,49,29" name="bra_fg/darkPriestBraSmall" dx="79" dy="68"/>
+        <cell rect="1211,440,49,29" name="bra_fg/darkPriestBraMedium" dx="79" dy="68"/>
+        <cell rect="1211,470,49,29" name="bra_fg/darkPriestBraLarge" dx="79" dy="68"/>
+		<cell rect="1261,410,49,29" name="bra_fg/priestBraSmall" dx="79" dy="68"/>
+        <cell rect="1261,440,49,29" name="bra_fg/priestBraMedium" dx="79" dy="68"/>
+        <cell rect="1261,470,49,29" name="bra_fg/priestBraLarge" dx="79" dy="68"/>
+		<cell rect="1311,410,49,29" name="bra_fg/elfDressBraSmall" dx="79" dy="68"/>
+        <cell rect="1311,440,49,29" name="bra_fg/elfDressBraMedium" dx="79" dy="68"/>
+        <cell rect="1311,470,49,29" name="bra_fg/elfDressBraLarge" dx="79" dy="68"/>
         <cell rect="11,410,49,29" name="bra/goblinTechnomancerBraSmall" dx="79" dy="68"/>
         <cell rect="11,440,49,29" name="bra/goblinTechnomancerBraMedium" dx="79" dy="68"/>
         <cell rect="11,470,49,29" name="bra/goblinTechnomancerBraLarge" dx="79" dy="68"/>
@@ -1244,6 +1355,7 @@
 		<cell rect="1161,410,49,29" name="bra/cowBraSmall" dx="79" dy="68"/>
         <cell rect="1161,440,49,29" name="bra/cowBraMedium" dx="79" dy="68"/>
         <cell rect="1161,470,49,29" name="bra/cowBraLarge" dx="79" dy="68"/>
+		<cell rect="1161,530,49,29" name="bra/cowBraMega" dx="79" dy="69"/>
         <cell rect="11,500,49,29" name="panty/goblinTechnomancerPanty" dx="79" dy="99"/>
         <cell rect="61,500,49,29" name="panty/sexyBlackBikiniPanty" dx="79" dy="99"/>
         <cell rect="111,500,49,29" name="panty/sexyAquamarineBikiniPanty" dx="79" dy="99"/>
@@ -1259,6 +1371,27 @@
         <cell rect="811,500,49,29" name="panty/dragonScalePanty" dx="79" dy="99"/>
         <cell rect="1011,500,49,29" name="panty/comfortablePanty" dx="79" dy="99"/>
 		<cell rect="1161,500,49,29" name="panty/cowPanty" dx="79" dy="99"/>
+		
+		<cell rect="511,200,46,28" name="cum/human" dx="78" dy="116"/>
+        <cell rect="511,200,46,28" name="cum/cat" dx="78" dy="116"/>
+        <cell rect="511,200,46,28" name="cum/canine" dx="78" dy="121"/>
+        <cell rect="511,200,46,28" name="cum/reptile" dx="72" dy="125"/>
+		<cell rect="511,200,46,28" name="cum/horse" dx="77" dy="134"/>
+		<cell rect="511,200,46,28" name="cum/humanbig" dx="72" dy="129"/>
+		<cell rect="511,200,46,28" name="cum/catbig" dx="69" dy="132"/>
+		<cell rect="511,200,46,28" name="cum/caninebig" dx="69" dy="134"/>
+        <cell rect="511,200,46,28" name="cum/reptilebig" dx="67" dy="137"/>
+        <cell rect="511,200,46,28" name="cum/horsebig" dx="74" dy="146"/>		
+		<cell rect="511,200,46,28" name="cum_taur/human_taur" dx="119" dy="145"/>
+        <cell rect="511,200,46,28" name="cum_taur/cat_taur" dx="119" dy="145"/>
+        <cell rect="511,200,46,28" name="cum_taur/canine_taur" dx="118" dy="150"/>
+        <cell rect="511,200,46,28" name="cum_taur/reptile_taur" dx="115" dy="152"/>
+		<cell rect="511,200,46,28" name="cum_taur/horse_taur" dx="117" dy="165"/>
+		<cell rect="511,200,46,28" name="cum_taur/humanbig_taur" dx="113" dy="159"/>
+		<cell rect="511,200,46,28" name="cum_taur/catbig_taur" dx="111" dy="162"/>
+		<cell rect="511,200,46,28" name="cum_taur/caninebig_taur" dx="108" dy="165"/>
+        <cell rect="511,200,46,28" name="cum_taur/reptilebig_taur" dx="109" dy="164"/>
+        <cell rect="511,200,46,28" name="cum_taur/horsebig_taur" dx="114" dy="176"/>		
     </spritemap>
     <spritemap file="tails.png">
         <cell rect="1,71,168,139" name="tail_bg/manticore" dx="20" dy="40"/>
@@ -1281,6 +1414,8 @@
         <cell rect="1,351,168,69" name="tail/reptile_taur" dx="67" dy="102"/>
         <cell rect="170,351,168,69" name="tail/demon" dx="19" dy="90"/>
         <cell rect="170,351,168,69" name="tail/demon_taur" dx="74" dy="93"/>
+		<cell rect="677,351,168,69" name="tail/blackOracle" dx="19" dy="90"/>
+        <cell rect="677,351,168,69" name="tail/blackOracle_taur" dx="74" dy="93"/>
         <cell rect="339,351,168,69" name="tail/gargoyle_axe" dx="16" dy="99"/>
         <cell rect="339,421,168,69" name="tail/gargoyle_mace" dx="16" dy="94"/>
         <cell rect="1,421,168,69" name="tail_fg/reptile_fire" dx="20" dy="90"/>
@@ -1291,6 +1426,8 @@
         <cell rect="508,421,168,69" name="tail/balrog_taur" dx="74" dy="93"/>
         <cell rect="677,421,168,69" name="tail/dragon" dx="18" dy="90"/>
         <cell rect="677,421,168,69" name="tail/dragon_taur" dx="62" dy="104"/>
+		<cell rect="677,491,168,69" name="tail/azazel" dx="18" dy="90"/>
+        <cell rect="677,491,168,69" name="tail/azazel_taur" dx="62" dy="104"/>
         <cell rect="1,491,83,69" name="tail/bunny" dx="95" dy="90"/>
         <cell rect="1,491,83,69" name="tail/bunny_taur" dx="141" dy="97"/>
         <cell rect="86,491,83,69" name="tail/goat" dx="94" dy="103"/>
@@ -1311,6 +1448,8 @@
         <cell rect="423,561,168,139" name="tail/thunderbird_taur" dx="34" dy="49"/>
         <cell rect="592,561,82,139" name="tail/raccoon" dx="95" dy="40"/>
         <cell rect="592,561,82,139" name="tail/raccoon_taur" dx="149" dy="50"/>
+		<cell rect="843,561,82,139" name="tail/redpanda" dx="95" dy="40"/>
+        <cell rect="843,561,82,139" name="tail/redpanda_taur" dx="149" dy="50"/>
         <cell rect="759,561,83,139" name="tail/wendigo" dx="95" dy="40"/>
         <cell rect="759,561,83,139" name="tail/wendigo_taur" dx="144" dy="49"/>
         <cell rect="508,351,82,69" name="tail/kamaitachi" dx="95" dy="87"/>
@@ -1344,7 +1483,25 @@
         <cell rect="175,701,173,156" name="tail_bg/fox8" dx="21" dy="37"/>
         <cell rect="175,701,173,156" name="tail_bg/fox8_taur" dx="60" dy="47"/>
         <cell rect="1,701,173,156" name="tail_bg/fox9" dx="21" dy="37"/>
-        <cell rect="1,701,173,156" name="tail_bg/fox9_taur" dx="60" dy="47"/>
+        <cell rect="1,701,173,156" name="tail_bg/fox9_taur" dx="60" dy="47"/>		
+		<cell rect="1,1486,173,156" name="tail_bg/firefox1" dx="4" dy="31"/>
+        <cell rect="1,1486,173,156" name="tail_bg/firefox1_taur" dx="60" dy="47"/>
+        <cell rect="523,1329,173,156" name="tail_bg/firefox2" dx="16" dy="36"/>
+        <cell rect="523,1329,173,156" name="tail_bg/firefox2_taur" dx="63" dy="43"/>
+        <cell rect="349,1329,173,156" name="tail_bg/firefox3" dx="17" dy="35"/>
+        <cell rect="349,1329,173,156" name="tail_bg/firefox3_taur" dx="67" dy="47"/>
+        <cell rect="175,1329,173,156" name="tail_bg/firefox4" dx="20" dy="36"/>
+        <cell rect="175,1329,173,156" name="tail_bg/firefox4_taur" dx="65" dy="47"/>
+        <cell rect="1,1329,173,156" name="tail_bg/firefox5" dx="21" dy="37"/>
+        <cell rect="1,1329,173,156" name="tail_bg/firefox5_taur" dx="61" dy="47"/>
+        <cell rect="523,1172,173,156" name="tail_bg/firefox6" dx="21" dy="37"/>
+        <cell rect="523,1172,173,156" name="tail_bg/firefox6_taur" dx="60" dy="47"/>
+        <cell rect="349,1172,173,156" name="tail_bg/firefox7" dx="21" dy="37"/>
+        <cell rect="349,1172,173,156" name="tail_bg/firefox7_taur" dx="60" dy="47"/>
+        <cell rect="175,1172,173,156" name="tail_bg/firefox8" dx="21" dy="37"/>
+        <cell rect="175,1172,173,156" name="tail_bg/firefox8_taur" dx="60" dy="47"/>
+        <cell rect="1,1172,173,156" name="tail_bg/firefox9" dx="21" dy="37"/>
+        <cell rect="1,1172,173,156" name="tail_bg/firefox9_taur" dx="60" dy="47"/>
         <cell rect="175,1015,173,156" name="tail_bg/Kumiho" dx="21" dy="37"/>
         <cell rect="175,1015,173,156" name="tail_bg/Kumiho_taur" dx="60" dy="47"/>
 		<cell rect="255,561,83,139" name="tail_bg/spider" dx="95" dy="40"/>
@@ -1370,24 +1527,34 @@
         <cell rect="339,210,84,139" name="wings_bg/nightmare" dx="20" dy="20"/>
         <cell rect="424,210,83,139" name="wings/nightmare" dx="105" dy="20"/>
         <cell rect="423,490,83,139" name="wings_front/nightmare" dx="105" dy="20"/>
+		<cell rect="846,350,84,139" name="wings_bg/blackOracle" dx="20" dy="20"/>
+        <cell rect="931,350,83,139" name="wings/blackOracle" dx="105" dy="20"/>
+        <cell rect="507,490,83,139" name="wings_front/blackOracle" dx="105" dy="20"/>
         <cell rect="508,70,84,139" name="wings_bg/devilfeather" dx="21" dy="12"/>
         <cell rect="593,70,83,139" name="wings/devilfeather" dx="105" dy="12"/>
+		<cell rect="677,70,84,139" name="wings_bg/couatl_large" dx="20" dy="20"/>
+        <cell rect="762,70,83,139" name="wings/couatl_large" dx="105" dy="20"/>
+        <cell rect="591,490,83,139" name="wings_front/couatl_large" dx="105" dy="20"/>
         <cell rect="339,350,168,139" name="wings/wraith" dx="27" dy="39"/>
         <cell rect="508,350,168,139" name="wings/ghost" dx="21" dy="27"/>
         <cell rect="170,350,168,139" name="rearbody/displacertentacle" dx="24" dy="20"/>
         <cell rect="1,630,248,139" name="wings_bg/vampire_bg" dx="-3" dy="30"/>
         <cell rect="254,630,168,139" name="overclothe/vampire" dx="20" dy="28"/>
-        <cell rect="677,350,83,139" name="wings_bg/atlach" dx="17" dy="-3"/>
-        <cell rect="747,350,83,139" name="wings/atlach" dx="87" dy="-3"/>
+        <cell rect="677,350,83,139" name="backtentacles_bg/atlach" dx="17" dy="-3"/>
+        <cell rect="747,350,83,139" name="backtentacles/atlach" dx="87" dy="-3"/>
         <cell rect="423,630,135,139" name="wings_bg/seaDragonLeft" dx="-25" dy="18"/>
         <cell rect="552,630,135,139" name="wings_bg/seaDragonRight" dx="104" dy="18"/>
         <cell rect="676,630,116,139" name="wings_bg/greatDragonLeft" dx="-12" dy="26"/>
         <cell rect="793,630,135,139" name="wings_bg/greatDragonRight" dx="105" dy="26"/>
+		<cell rect="929,630,116,139" name="wings_bg/jabberwockLeft" dx="0" dy="17"/>
+        <cell rect="1049,630,135,130" name="wings_bg/jabberwockRight" dx="104" dy="17"/>
+		<cell rect="1015,350,140,139" name="wings_bg/imp" dx="20" dy="-14"/>
     </spritemap>
 
 	<!-- LAYER AREA -->
     <layers>
 		<layer name="full_pattern"/>
+		<layer name="fullbodyPenisFg"/>
 		<layer name="fullbodyBreast"/>
 		<layer name="fullbodyMuscle"/>
 		<layer name="fullbodyPenis"/>
@@ -1422,6 +1589,7 @@
 		<layer name="armorLegs_fg"/>
 		<layer name="armorLeftArm"/>
 
+		<layer name="cum"/>
 		<layer name="penis"/> <!-- should never show if pc wears a panty -->
 		<layer name="balls"/> <!-- should never show if pc wears a panty -->
 
@@ -1432,6 +1600,7 @@
         <layer name="antennae"/>
         <layer name="horns"/>
         <layer name="ears"/>
+		<layer name="clotheHead_behindHorns"/>
 		<layer name="hairTop"/>
 		<layer name="hairRight"/>
 		<layer name="hair"/>
@@ -1446,6 +1615,7 @@
 
         <layer name="neck"/>
 		<layer name="horns_bg"/>
+		<layer name="overbreast"/>
 		<layer name="overskin"/>
 		<layer name="breasts_pattern"/>
         <layer name="breasts"/>
@@ -1465,6 +1635,7 @@
 		<layer name="uniquePlantBath"/>
 		<layer name="legs_fg"/>
 
+		<layer name="cum_taur"/>
 		<layer name="penis_taur"/> <!-- should never show if pc wears a panty -->
 		<layer name="balls_taur"/> <!-- should never show if pc wears a panty -->
 
@@ -1482,13 +1653,17 @@
 		<layer name="rearbody"/>
 		<layer name="tailAccessory"/>
         <layer name="tail_fg"/>
+		<layer name="clothCape_fg"/>
         <layer name="tail"/>
 		<layer name="clothCape"/>
 		<layer name="clothCape_bg"/>
 		<layer name="backAccessory"/>
+		<layer name="fullbodyBg"/>
 		<layer name="hair_bg"/>
 		<layer name="hairLeft"/>
 		<layer name="back_bg"/>
+		<layer name="backtentacles"/>
+		<layer name="backtentacles_bg"/>
 		<layer name="wings"/>
         <layer name="wings_bg"/>
 		<layer name="tail_bg"/>
@@ -1575,6 +1750,21 @@
 							</if>
 							<else>
 								<show part="weapon/staffGeneric"/>
+							</else>
+						</if>
+					</if>
+					
+					<!-- Wand -->
+					<if test="PlayerHasAWand">
+						<if test="PlayerHasAWandHoly or PlayerHasAWandUnholy">
+							<if test="PlayerHasAWandHoly">
+								<show part="weapon/wandHoly"/>
+							</if>
+							<if test="PlayerHasAWandUnholy">
+								<show part="weapon/wandUnholy"/>
+							</if>
+							<else>
+								<show part="weapon/wandGeneric"/>
 							</else>
 						</if>
 					</if>
@@ -1722,22 +1912,34 @@
 							<show part="weaponBuff/rapierFireBuff"/>
 						</if>
 					</if>
-					
+
 					<!-- Dagger -->
 					<if test="PlayerHasDagger">
 						<if test="PlayerHasDaggerHoly or PlayerHasDaggerUnholy">
 							<if test="PlayerHasDaggerHoly">
 								<show part="weapon/daggerHoly"/>
+								<if test="PlayerHasADualWeapon">
+									<show part="weapon/daggerHolyOH"/>
+								</if>
 							</if>
 							<if test="PlayerHasDaggerUnholy">
 								<show part="weapon/daggerUnholy"/>
+								<if test="PlayerHasADualWeapon">
+									<show part="weapon/daggerUnholyOH"/>
+								</if>
 							</if>
 							<else>
 								<show part="weapon/daggerGeneric"/>
+								<if test="PlayerHasADualWeapon">
+									<show part="weapon/daggerGenericOH"/>
+								</if>
 							</else>
 						</if>
 						<if test="FireBuff">
 							<show part="weaponBuff/daggerFireBuff"/>
+							<if test="PlayerHasADualWeapon">
+								<show part="weapon/daggerFireBuffOH"/>
+							</if>
 						</if>
 					</if>
 				</if>
@@ -1828,6 +2030,9 @@
 			<case values="Antennae.SEA_DRAGON">
                 <show part="neck/seaDragonWhisker"/>
             </case>
+			<case values="Antennae.JABBERWOCKY">
+                <show part="neck/jabberwockyWhisker"/>
+            </case>
             <default>
                 <show part="antennae/bee"/>
             </default>
@@ -1855,6 +2060,9 @@
             <case values="Horns.DRACONIC_X4_12_INCH_LONG">
                 <show part="horns_bg/dragon"/>
             </case>
+			<case values="Horns.JABBERWOCKY">
+                <show part="horns_bg/jabberwockycrown"/>
+            </case>
             <default><!--TODO DRACONIC_X2, , ANTLERS, RHINO, OAK-->
                 <show part="horns/2large"/>
             </default>
@@ -1863,6 +2071,9 @@
 			</case>
 			<case values="Horns.BICORN">
 				<show part="horns/bicorn"/>
+			</case>
+			<case values="Horns.KIRIN">
+				<show part="horns/kirin"/>
 			</case>
 			<case values="Horns.ONI_X2">
 				<show part="horns/2oni"/>
@@ -1899,6 +2110,10 @@
             <case values="Ears.COW,Ears.PIG,Ears.RHINO,Ears.ECHIDNA"><!--TODO-->
                 <show part="ears/goat"/>
                 <show part="ears_bg/goat"/>
+            </case>
+			<case values="Ears.KIRIN"><!--TODO-->
+                <show part="ears/kirin"/>
+                <show part="ears_bg/kirin"/>
             </case>
 			<case values="Ears.HORSE,Ears.DEER,Ears.KANGAROO">
                 <show part="ears_bg/horse"/>
@@ -1959,6 +2174,9 @@
                 <show part="ears/panda"/>
                 <show part="ears_bg/panda"/>
             </case>
+			<case values="Ears.RED_PANDA">
+                <show part="ears_bg/redpanda"/>
+            </case>
 			<case values="Ears.BEAR,Ears.WEASEL">
                 <show part="ears/bear"/>
                 <show part="ears_bg/bear"/>
@@ -1981,7 +2199,7 @@
                 <show part="ears_bg/ratatoskr"/>
                 <show part="ears_bg/ratatoskrRight"/>
             </case>
-            <default> <!-- TODO RED_PANDA, AVIAN, GRYPHON -->
+            <default> <!-- TODO AVIAN, GRYPHON -->
                 <show part="ears_bg/human"/>
             </default>
         </switch>
@@ -1999,7 +2217,7 @@
             <case values="Eyes.BLACK_EYES_SAND_TRAP">
                 <show part="eyes/sandtrap"/>
             </case>
-            <case values="Eyes.FOX,Eyes,Eyes.CAT,Eyes.LIZARD,Eyes.SNAKE,Eyes.GORGON,Eyes.DRACONIC,Eyes.ONI,Eyes.ELF,Eyes.VAMPIRE,Eyes.WEASEL,Eyes.FIENDISH">
+            <case values="Eyes.FOX,Eyes,Eyes.CAT,Eyes.LIZARD,Eyes.SNAKE,Eyes.GORGON,Eyes.DRACONIC,Eyes.ONI,Eyes.ELF,Eyes.VAMPIRE,Eyes.WEASEL,Eyes.FIENDISH,Eyes.DEMON">
                 <show part="eyes/cat"/>
             </case>
             <case values="Eyes.DEVIL,Eyes.FROSTWYRM,Eyes.SNAKEFIENDISH">
@@ -2076,6 +2294,29 @@
 						<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
 							<show part="overskin/Blyeti"/>
 						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.F"><!--A-B-->
+							<show part="overskin/Blyeti"/>
+						</case>
+                        <case test="breastRows[0].breastRating lte BreastCup.G"><!--A-B-->
+                            <if test="BoobDisplay == 0">
+                                <if test="PlayerHasViewableOutfit == false">
+                                    <if test="PlayerHasABra == false">
+                                        <show part="overskin/BHyeti"/>
+                                        <else>
+                                            <if test="cowBra">
+                                                <show part="overskin/BHyeti"/>
+                                                <else>
+                                                    <show part="overskin/Blyeti"/>
+                                                </else>
+											</if>
+										</else>
+									</if>
+									<else>
+										<show part="overskin/Blyeti"/>
+									</else>
+								</if>
+                            </if>
+                        </case>
 						<default>
 						</default>
 					</switch>
@@ -2088,15 +2329,16 @@
                 <show part="rearBody/snail"/>
             </case>
 			<case values="RearBody.TENTACLE_EYESTALKS">
-                <show part="wings/gazer"/>
+                <show part="backtentacles/gazer"/>
+				<hide part="wings_front/*"/>
             </case>
 			<case values="RearBody.FUR_COAT">
                 <show part="armorNeck/wendigoCloak"/>
 				<show part="clothCape/wendigoCloakBack"/>
             </case>
 			<case values="RearBody.ATLACH_NACHA">
-                <show part="wings/atlach"/>
-				<show part="wings_bg/atlach"/>
+                <show part="backtentacles/atlach"/>
+				<show part="backtentacles_bg/atlach"/>
             </case>
 			<case values="RearBody.MINDBREAKER">
                 <show part="neck/mindbreaker"/>
@@ -2364,6 +2606,13 @@
                             <hide part="hair_bg/hellcat"/>
                         </if>
                     </case>
+					<case values="Hair.TWINRIBBON">
+						<show part="hairRight/ribbon"/>
+						<if test="hairType == Hair.STORM or hairType == Hair.BURNING">
+                            <hide part="hair_bg/raiju3"/>
+                            <hide part="hair_bg/hellcat"/>
+                        </if>
+                    </case>
                     <default>
                         <if test="hairType != Hair.MINDBREAKERMALE and hairType != Hair.MINDBREAKER and hairType != Hair.STORM and hairType != Hair.BURNING and hairType != Hair.QUILL and hairType != Hair.FEATHER and hairType != Hair.CRAZY and hairType != Hair.RATATOSKR and hairType != Hair.COW and hairType != Hair.PRISMATIC">
                             <switch>
@@ -2416,6 +2665,10 @@
 						<if test="ears.type==Ears.PANDA">
 							<set var="skinb">panda</set>
 							<set var="skinx">panda</set>
+						</if>
+						<if test="ears.type==Ears.RED_PANDA">
+							<set var="skinb">redpanda</set>
+							<set var="skinx">redpanda</set>
 						</if>
                     </case>
                     <case values="Skin.SCALES">
@@ -2476,6 +2729,21 @@
             <if test="eyes.type= Eyes.CENTIPEDE">
                 <hide part="forehead/SpecialForeheadShadow"/>
             </if>
+			<switch value="eyes.type">
+				<case values="Eyes.HUMAN">
+					<hide part="eyes/*"/>
+					<show part="eyes/centipede"/>
+				</case>
+				<case values="Eyes.RAIJU,Eyes.MANTICORE,Eyes.FOX,Eyes,Eyes.CAT,Eyes.LIZARD,Eyes.SNAKE,Eyes.GORGON,Eyes.DRACONIC,Eyes.ONI,Eyes.ELF,Eyes.VAMPIRE,Eyes.WEASEL,Eyes.FIENDISH">
+					<hide part="eyes/*"/>
+					<show part="eyes/corruptcat"/>
+				</case>
+				<case values="Eyes.INFERNAL">
+					<show part="eyes_fg/corruptinfernal"/>
+				</case>
+				 <default>
+                 </default>
+            </switch>
         </if>
 
         <switch value="faceType">
@@ -2492,11 +2760,6 @@
 				<if test="cor &gt;=100">
 					<hide part="face/*"/>
 					<show part="face/fairySmile"/>
-				</if>
-				<if test="cor &gt;=100 and lowerBody == LowerBody.FLOWER_LILIRAUNE">
-					<hide part="face/*"/>
-					<show part="face/lilirauneCorruptedSmile"/>
-					<show part="forehead/lilirauneCorruptedShadow"/>
 				</if>
 				<if test="skin.base.type == Skin.GOO">
 					<hide part="face/*"/>
@@ -2539,7 +2802,7 @@
 			<case values="Face.RACCOON,Face.FERRET">
                 <show part="face/racoon"/>
             </case>
-            <case values="Face.SALAMANDER_FANGS,Face.SHARPTEETH,Face.VAMPIRE,Face.YETI_FANGS,Face.ONI_TEETH,Face.DRAGON_FANGS,Face.WEASEL,Face.DEVIL_FANGS,Face.ANIMAL_TOOTHS,Face.WOLF_FANGS,Face.SNAKE_FANGS,Face.CAT_CANINES,Face.MANTICORE">
+            <case values="Face.SALAMANDER_FANGS,Face.SHARPTEETH,Face.VAMPIRE,Face.YETI_FANGS,Face.ONI_TEETH,Face.DRAGON_FANGS,Face.WEASEL,Face.DEVIL_FANGS,Face.ANIMAL_TOOTHS,Face.WOLF_FANGS,Face.SNAKE_FANGS,Face.CAT_CANINES,Face.MANTICORE,Face.IMP">
                 <show part="face/human_fang"/>
                 <if test="eyes.type= Eyes.CENTIPEDE">
                     <hide part="face/human_fang"/>
@@ -2559,7 +2822,7 @@
                 <show part="face/orca"/>
             </case>
 			<case values="Face.CHESHIRE,Face.CHESHIRE_SMILE">
-                <show part="face/cheshire"/>
+                <show part="face/fairySmile"/>
             </case>
 			<case values="Face.PANDA">
                 <show part="face/panda"/>
@@ -2583,7 +2846,7 @@
             <case values="'never'"><!--TODO-->
                 <show part="face/insect"/>
             </case>
-            <default><!-- TODO Face.PLANT_DRAGON, -->
+            <default><!-- TODO Face.RED_PANDA, Face.PLANT_DRAGON, -->
                 <show part="face/human"/>
             </default>
         </switch>
@@ -2607,8 +2870,51 @@
 				<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
                     <show part="breasts/F$skinx"/>
                 </case>
-                <default>
+				<case test="breastRows[0].breastRating lte BreastCup.F"><!--A-B-->
                     <show part="breasts/F$skinx"/>
+                </case>
+                <case test="breastRows[0].breastRating lte BreastCup.G"><!--A-B-->
+                    <if test="BoobDisplay == 0">
+						<if test="PlayerHasViewableOutfit == false">
+							<if test="PlayerHasABra == false">
+								<show part="breasts/G$skinx"/>
+								<else>
+									<if test="cowBra">
+										<show part="breasts/G$skinx"/>
+										<else>
+											<show part="breasts/F$skinx"/>
+										</else>
+									</if>
+								</else>
+							</if>
+							<else>
+								<show part="breasts/F$skinx"/>
+							</else>
+						</if>
+                    </if>
+				</case>
+                <default>
+					<if test="BoobDisplay == 0">
+						<if test="PlayerHasViewableOutfit == false">
+							<if test="PlayerHasABra == false">
+								<show part="breasts/G$skinx"/>
+								<else>
+									<if test="cowBra">
+										<show part="breasts/G$skinx"/>
+										<else>
+											<show part="breasts/F$skinx"/>
+										</else>
+									</if>
+								</else>
+							</if>
+							<else>
+								<show part="breasts/F$skinx"/>
+							</else>
+						</if>
+						<else>
+							<show part="breasts/F$skinx"/>
+						</else>
+					</if>
                 </default>
             </switch>
         </if>
@@ -2631,8 +2937,51 @@
 				<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
                     <show part="overskin/BlcaveWyrm"/>
                 </case>
-                <default>
+				<case test="breastRows[0].breastRating lte BreastCup.F"><!--A-B-->
                     <show part="overskin/BlcaveWyrm"/>
+                </case>
+				<case test="breastRows[0].breastRating lte BreastCup.G"><!--A-B-->
+                    <if test="BoobDisplay == 0">
+						<if test="PlayerHasViewableOutfit == false">
+							<if test="PlayerHasABra == false">
+								<show part="overskin/BHcaveWyrm"/>
+								<else>
+									<if test="cowBra">
+										<show part="overskin/BHcaveWyrm"/>
+										<else>
+											<show part="overskin/BlcaveWyrm"/>
+										</else>
+									</if>
+								</else>
+							</if>
+							<else>
+								<show part="overskin/BlcaveWyrm"/>
+							</else>
+						</if>
+                    </if>
+				</case>
+                <default>
+					<if test="BoobDisplay == 0">
+						<if test="PlayerHasViewableOutfit == false">
+							<if test="PlayerHasABra == false">
+								<show part="overskin/BHcaveWyrm"/>
+								<else>
+									<if test="cowBra">
+										<show part="overskin/BHcaveWyrm"/>
+										<else>
+											<show part="overskin/BlcaveWyrm"/>
+										</else>
+									</if>
+								</else>
+							</if>
+							<else>
+								<show part="overskin/BlcaveWyrm"/>
+							</else>
+						</if>
+						<else>
+							<show part="overskin/BlcaveWyrm"/>
+						</else>
+					</if>
                 </default>
             </switch>
 			 </if>
@@ -2790,9 +3139,13 @@
                 <show part="hands/alraune"/>
                 <show part="hands_bg/alraune"/>
             </case>
-            <case values="Arms.FINS,Arms.SHARK">
+            <case values="Arms.FINS">
                 <show part="hands/fins-orca"/>
                 <show part="hands_bg/fins-orca"/>
+            </case>
+			<case values="Arms.SHARK">
+                <show part="hands/fins-shark"/>
+                <show part="hands_bg/fins-shark"/>
             </case>
             <case values="Arms.GARGOYLE,Arms.GARGOYLE_2">
 				<if test="PlayerHasAWeapon or PlayerHasAShield or PlayerHasADualWeapon">
@@ -2811,7 +3164,7 @@
                 <show part="arms/yeti"/>
 				<show part="hands/yeti"/>
             </case>
-            <case values="Arms.CAT,Arms.BEAR,Arms.MELKIE">
+            <case values="Arms.RED_PANDA,Arms.CAT,Arms.BEAR,Arms.MELKIE">
                 <show part="hands/fur"/>
                 <show part="hands_bg/fur"/>
 				<if test="ears.type==Ears.PANDA">
@@ -3093,6 +3446,10 @@
                 <show part="arms/gazer"/>
                 <show part="arms_bg/gazer"/>
             </case>
+			<case values="Arms.JABBERWOCKY">
+                <show part="hands/jabberwockyRight"/>
+                <show part="hands_bg/jabberwockyLeft"/>
+            </case>
             <default>
                 <!--see switch[value=skinType]-->
             </default>
@@ -3170,7 +3527,35 @@
                     </default>
                 </switch>
             </case>
-            <case values="LowerBody.BUNNY,LowerBody.KANGAROO,LowerBody.CAT,LowerBody.DOG,LowerBody.FOX,LowerBody.RAIJU,LowerBody.CANINE,LowerBody.WEASEL,LowerBody.RACCOON,LowerBody.FERRET,LowerBody.MOUSE,LowerBody.HINEZUMI,LowerBody.BEAR,LowerBody.SQUIRREL">
+			<case values="LowerBody.KIRIN">
+                <hide part="legs/*"/>
+                <switch>
+                    <case test="legCount==4">
+						<show part="legs/kirin"/>
+                        <show part="legs_fg/kirin"/>
+                    </case>
+                    <default>
+						<switch>
+							<case test="hasPartialCoatOfType(Skin.SCALES,Skin.AQUA_SCALES,Skin.DRAGON_SCALES)">
+								<show part="legs/hoof_pscales"/>
+							</case>
+							<case test="hasFullCoatOfType(Skin.FUR)">
+								<show part="legs/hoof_fur"/>
+							</case>
+							<case test="hasFullCoatOfType(Skin.CHITIN)">
+								<show part="legs/hoof_chitin"/>
+							</case>
+							<case test="hasFullCoatOfType(Skin.SCALES,Skin.AQUA_SCALES,Skin.DRAGON_SCALES)">
+								<show part="legs/hoof_scales"/>
+							</case>
+							<default>
+								<show part="legs/hoof_human"/>
+							</default>
+						</switch>
+                    </default>
+                </switch>
+            </case>
+            <case values="LowerBody.RED_PANDA, LowerBody.BUNNY,LowerBody.KANGAROO,LowerBody.CAT,LowerBody.DOG,LowerBody.FOX,LowerBody.RAIJU,LowerBody.CANINE,LowerBody.WEASEL,LowerBody.RACCOON,LowerBody.FERRET,LowerBody.MOUSE,LowerBody.HINEZUMI,LowerBody.BEAR,LowerBody.SQUIRREL">
                 <switch>
                     <case test="legCount==4">
                         <hide part="legs/*"/>
@@ -3327,7 +3712,7 @@
                 <hide part="legs/*"/>
                 <show part="legs/gooblob"/>
             </case>
-			<case values="LowerBody.LIZARD,LowerBody.DRAGON,LowerBody.SALAMANDER,LowerBody.CAVE_WYRM">
+			<case values="LowerBody.FEY_DRAGON,LowerBody.LIZARD,LowerBody.DRAGON,LowerBody.SALAMANDER,LowerBody.CAVE_WYRM">
                 <if test="legCount==4">
                     <hide part="legs/*"/>
 					<show part="legs/reptaur"/>
@@ -3408,14 +3793,22 @@
 				<show part="legs_fg/liliraune"/>
                 <show part="legs_bg/liliraune"/>
 				<show part="torso/liliraune"/>
-				<show part="face/liliraune"/>
 				<show part="arms/liliraune"/>
 				<show part="arms_bg/liliraune"/>
-
+				<show part="face/liliraune"/>
 				<show part="ears/liliraune"/>
 				<show part="horns/LilirauneOrchid"/>
 				<show part="horns_bg/LilirauneOrchid"/>
 				<show part="uniquePlantBath/lilirauneBath"/>
+				<hide part="face/*"/>
+				<show part="face/lilirauneCorruptedSmile"/>
+				<if test="cor &gt;=100 and lowerBody == LowerBody.FLOWER_LILIRAUNE">
+					<show part="eyes/lilirauneCorrupt"/>
+					<show part="forehead/lilirauneCorruptedShadow"/>
+					<else>
+						<show part="eyes/liliraune"/>
+					</else>
+				</if>
 
 				<!-- HAIR AREA -->
                 <if test="hairLength lt 16">
@@ -3446,8 +3839,51 @@
 						<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
 							<show part="breasts/Fliliraune"/>
 						</case>
-						<default>
+						<case test="breastRows[0].breastRating lte BreastCup.F"><!--A-B-->
 							<show part="breasts/Fliliraune"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.G"><!--A-B-->
+                            <if test="BoobDisplay == 0">
+								<if test="PlayerHasViewableOutfit == false">
+									<if test="PlayerHasABra == false">
+										<show part="breasts/Gliliraune"/>
+										<else>
+											<if test="cowBra">
+												<show part="breasts/Gliliraune"/>
+												<else>
+													<show part="breasts/Fliliraune"/>
+												</else>
+											</if>
+										</else>
+									</if>
+									<else>
+										<show part="breasts/Fliliraune"/>
+									</else>
+								</if>
+                            </if>
+						</case>
+						<default>
+							<if test="BoobDisplay == 0">
+								<if test="PlayerHasViewableOutfit == false">
+									<if test="PlayerHasABra == false">
+										<show part="breasts/Gliliraune"/>
+										<else>
+											<if test="cowBra">
+												<show part="breasts/Gliliraune"/>
+												<else>
+													<show part="breasts/Fliliraune"/>
+												</else>
+											</if>
+										</else>
+									</if>
+									<else>
+										<show part="breasts/Fliliraune"/>
+									</else>
+								</if>
+								<else>
+									<show part="breasts/Fliliraune"/>
+								</else>
+							</if>
 						</default>
 					</switch>
 				</if>
@@ -3630,6 +4066,9 @@
 				<hide part="legs/*"/>
                 <show part="legs_truefg/gazer"/>
             </case>
+			<case values="LowerBody.JABBERWOCKY">
+                <show part="feet/jabberwocky"/>
+            </case>
             <!--<case values="LowerBody.YGG_ROOT_CLAWS">TODO </case>-->
             <case values="'never'"><!--TODO liliraune-->
                 <hide part="legs/*"/>
@@ -3653,6 +4092,13 @@
                 <show part="wings_bg/feather_large"/>
 				<if test="playerHasLargeLowerBody">
 					<show part="wings_front/feather_large"/>
+				</if>
+            </case>
+			<case values="Wings.COUATL">
+                <show part="wings/couatl_large"/>
+                <show part="wings_bg/couatl_large"/>
+				<if test="playerHasLargeLowerBody">
+					<show part="wings_front/couatl_large"/>
 				</if>
             </case>
             <case values="Wings.IMP,Wings.BAT_LIKE_TINY,Wings.BAT_LIKE_LARGE,Wings.BAT_LIKE_LARGE_2,Wings.GARGOYLE_LIKE_LARGE"><!--TODO sizes -->
@@ -3737,6 +4183,10 @@
                 <show part="wings_bg/seaDragonLeft"/>
 				<show part="wings_bg/seaDragonRight"/>
             </case>
+			<case values="Wings.JABBERWOCKY">
+                <show part="wings_bg/jabberwockLeft"/>
+				<show part="wings_bg/jabberwockRight"/>
+            </case>
 			<case values="Wings.VAMPIRE">
                 <show part="overclothe/vampire"/>
 				<show part="wings_bg/vampire_bg"/>
@@ -3774,7 +4224,7 @@
 								<show part="tail_bg/spider"/>
 							</else>
 						</if>
-					</else>		
+					</else>
 				</if>
             </case>
             <case values="Tail.BEE_ABDOMEN">
@@ -3887,6 +4337,9 @@
             </case>
             <case values="Tail.FOX,Tail.WOLF,Tail.DOG">
 				<show part="tail_bg/fox$tailCount$taur"/>
+            </case>
+			<case values="Tail.KITSHOO">
+				<show part="tail_bg/firefox$tailCount$taur"/>
             </case>
             <case values="Tail.KANGAROO"><!--TODO -->
                 <show part="tail/cat"/>
@@ -4022,6 +4475,14 @@
 					</else>
 				</if>
             </case>
+			<case values="Tail.RED_PANDA">
+				<if test="isTaur()">
+					<show part="tail/redpanda_taur"/>
+					<else>
+						<show part="tail/redpanda"/>
+					</else>
+				</if>
+            </case>
 			<case values="Tail.BEAR">
 				<if test="isTaur()">
 					<show part="tail/bear_taur"/>
@@ -4035,6 +4496,14 @@
 					<show part="tail/panda_taur"/>
 					<else>
 						<show part="tail/panda"/>
+					</else>
+				</if>
+            </case>
+			<case values="Tail.KIRIN">
+				<if test="isTaur()">
+					<show part="tail/kirin_taur"/>
+					<else>
+						<show part="tail/kirin"/>
 					</else>
 				</if>
             </case>
@@ -4061,8 +4530,14 @@
                 <case values="CockTypesEnum.DOG,CockTypesEnum.WOLF,CockTypesEnum.FOX">
                     <if test="big">
                         <show part="penis$taur/caninebig$taur"/>
+						<if test="showDickDrippies">
+								<show part="cum$taur/caninebig$taur"/>
+						</if>
                         <else>
                             <show part="penis$taur/canine$taur"/>
+							<if test="showDickDrippies">
+								<show part="cum$taur/canine$taur"/>
+							</if>
                         </else>
                     </if>
                 </case>
@@ -4070,8 +4545,14 @@
 				<case values="CockTypesEnum.CAT,CockTypesEnum.DISPLACER">
 					<if test="big">
                         <show part="penis$taur/catbig$taur"/>
+						<if test="showDickDrippies">
+							<show part="cum$taur/catbig$taur"/>
+						</if>
                         <else>
                             <show part="penis$taur/cat$taur"/>
+							<if test="showDickDrippies">
+								<show part="cum$taur/cat$taur"/>
+							</if>
                         </else>
                     </if>
                 </case>
@@ -4079,8 +4560,14 @@
                 <case values="CockTypesEnum.LIZARD,CockTypesEnum.DRAGON">
 					<if test="big">
                         <show part="penis$taur/reptilebig$taur"/>
+						<if test="showDickDrippies">
+							<show part="cum$taur/reptilebig$taur"/>
+						</if>
                         <else>
                             <show part="penis$taur/reptile$taur"/>
+							<if test="showDickDrippies">
+								<show part="cum$taur/reptile$taur"/>
+							</if>
                         </else>
                     </if>
                 </case>
@@ -4088,8 +4575,14 @@
                 <case values="CockTypesEnum.HORSE">
 					<if test="big">
                         <show part="penis$taur/horsebig$taur"/>
+						<if test="showDickDrippies">
+							<show part="cum$taur/horsebig$taur"/>
+						</if>
                         <else>
                             <show part="penis$taur/horse$taur"/>
+							<if test="showDickDrippies">
+								<show part="cum$taur/horse$taur"/>
+							</if>
                         </else>
                     </if>
                 </case>
@@ -4097,8 +4590,14 @@
                 <case values="CockTypesEnum.BEE">
                     <if test="big">
                         <show part="penis$taur/chitinbig$taur"/>
+						<if test="showDickDrippies">
+							<show part="cum$taur/humanbig$taur"/>
+						</if>
                         <else>
                             <show part="penis$taur/chitin$taur"/>
+							<if test="showDickDrippies">
+								<show part="cum$taur/human$taur"/>
+							</if>
                         </else>
                     </if>
                 </case>
@@ -4111,7 +4610,7 @@
                         </else>
                     </if>
                 </case>
-				
+
 				<case values="CockTypesEnum.MINDBREAKERMALE">
                     <if test="big">
                         <show part="penis$taur/humanbig$taur"/>
@@ -4120,9 +4619,24 @@
                             <show part="penis$taur/humanbig$taur"/>
                         </else>
                     </if>
-                </case>	
+                </case>
 
-				<case values="CockTypesEnum.DOG,CockTypesEnum.RAIJU">
+				<case values="CockTypesEnum.DOG">
+                    <if test="big">
+                        <show part="penis$taur/caninebig$taur"/>
+						<if test="showDickDrippies">
+							<show part="cum$taur/caninebig$taur"/>
+						</if>
+                        <else>
+                            <show part="penis$taur/canine$taur"/>
+							<if test="showDickDrippies">
+								<show part="cum$taur/canine$taur"/>
+							</if>
+                        </else>
+                    </if>
+                </case>
+				
+				<case values="CockTypesEnum.RAIJU">
                     <if test="big">
                         <show part="penis$taur/raijubig$taur"/>
                         <else>
@@ -4130,22 +4644,43 @@
                         </else>
                     </if>
                 </case>
-				
+								
+				<case values="CockTypesEnum.DOG,CockTypesEnum.KIRIN">
+                    <if test="big">
+                        <show part="penis$taur/kirinbig$taur"/>
+                        <else>
+                            <show part="penis$taur/kirin$taur"/>
+                        </else>
+                    </if>
+                </case>
+
                 <!-- <case values="CockTypesEnum.HUMAN"></case> use default -->
                 <default>
 					<if test="skin.type == Skin.AQUA_SCALES or skin.base.pattern==Pattern.ORCA_UNDERBODY or skin.base.pattern==Pattern.SEA_DRAGON_UNDERBODY">
-						<if test="skin.base.pattern==Pattern.ORCA_UNDERBODY or skin.base.pattern==Pattern.SEA_DRAGON_UNDERBODY">		
+						<if test="skin.base.pattern==Pattern.ORCA_UNDERBODY or skin.base.pattern==Pattern.SEA_DRAGON_UNDERBODY">
 							<if test="big">
 								<show part="penis$taur/human2big$taur"/>
+								<if test="showDickDrippies">
+									<show part="cum$taur/humanbig$taur"/>
+								</if>
 								<else>
 									<show part="penis$taur/human2$taur"/>
+									<if test="showDickDrippies">
+										<show part="cum$taur/human$taur"/>
+									</if>
 								</else>
 							</if>
 							<else>
 								<if test="big">
 									<show part="penis$taur/sharkbig$taur"/>
+									<if test="showDickDrippies">
+										<show part="cum$taur/humanbig$taur"/>
+									</if>
 									<else>
 										<show part="penis$taur/shark$taur"/>
+										<if test="showDickDrippies">
+											<show part="cum$taur/human$taur"/>
+										</if>
 									</else>
 								</if>
 							</else>
@@ -4153,12 +4688,18 @@
 						<else>
 							<if test="big">
 								<show part="penis$taur/humanbig$taur"/>
+								<if test="showDickDrippies">
+									<show part="cum$taur/humanbig$taur"/>
+								</if>
 								<else>
 									<show part="penis$taur/human$taur"/>
+									<if test="showDickDrippies">
+										<show part="cum$taur/human$taur"/>
+									</if>
 								</else>
 							</if>
 						</else>
-					</if>								
+					</if>
                 </default>
             </switch>
             <if test="lowerBody == LowerBody.CANCER or lowerBody == LowerBody.PLANT_FLOWER or lowerBody == LowerBody.FLOWER_LILIRAUNE or lowerBody == LowerBody.GAZER or (lowerBody == LowerBody.HINEZUMI and arms.type == Arms.HINEZUMI)">
@@ -4603,8 +5144,20 @@
 						<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
 							<show part="armorNeck/fullplatetopMale"/>
 						</case>
-						<default>
+						<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+							<show part="armorNeck/fullplatetopMale"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
 							<show part="armorNeck/fullplatetopFemale"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+							<show part="armorNeck/fullplatetopFemale"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+							<show part="armorNeck/fullplatetopFemaleLarge"/>
+						</case>
+						<default>
+							<show part="armorNeck/fullplatetopFemaleLarge"/>
 						</default>
 					</switch>
 				</if>
@@ -4612,9 +5165,49 @@
 				<if test="(legCount!=4) and (showLegClothing)">
 					<show part="armorLegs/fullplateLegs"/>
 				</if>
-				<if test="showLegClothing">
+				<if test="showArmClothing">
 					<show part="armorLeftArm/fullplateleftarm"/>
 					<show part="armorRightArm/fullplaterightarm"/>
+				</if>
+			</if>
+		</if>
+		
+		<!-- Valeria -->
+		<if test="gooArmor">
+			<if test="showClothing">
+				<if test="breastRows.length gt 0">
+					<switch>
+						<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+							<show part="armorNeck/gooplatetopMale"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+							<show part="armorNeck/gooplatetopMale"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+							<show part="armorNeck/gooplatetopFemale"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+							<show part="armorNeck/gooplatetopFemale"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+							<show part="armorNeck/gooplatetopFemaleLarge"/>
+						</case>
+						<default>
+							<show part="armorNeck/gooplatetopFemaleLarge"/>
+						</default>
+					</switch>
+				</if>
+				<show part="armorChest/gooplatebottom"/>
+				<if test="showLegClothing">
+					<show part="armorLegs/gooplateLegs"/>
+					<if test="legCount==4">
+						<hide part="armorLegs/*"/>
+						<show part="armorLegs_fg/gootaurarmorbottom"/>
+					</if>
+				</if>
+				<if test="showArmClothing">
+					<show part="armorLeftArm/gooplateleftarm"/>
+					<show part="armorRightArm/gooplaterightarm"/>
 				</if>
 			</if>
 		</if>
@@ -4728,7 +5321,7 @@
 					<show part="panty/goblinTechnomancerPanty"/>
 					<hide part="penis/*"/>
 					<hide part="balls/*"/>
-				</if>	
+				</if>
 			</if>
 		</if>
 
@@ -4880,7 +5473,7 @@
 					<hide part="penis/*"/>
 					<hide part="balls/*"/>
 				</if>
-			</if>	
+			</if>
 		</if>
 
 		<!--Bikini set -->
@@ -5148,7 +5741,7 @@
 				</if>
 			</if>
 		</if>
-		
+
 		<!--Cow Undergarment-->
 		<if test="cowBra">
 			<if test="breastRows.length gt 0">
@@ -5168,8 +5761,23 @@
 					<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
 						<show part="bra/cowBraLarge"/>
 					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.G"><!--A-B-->
+                        <if test="BoobDisplay == 0">
+							<if test="PlayerHasViewableOutfit == false">
+								<show part="bra/cowBraMega"/>
+								<else>
+									<show part="bra/cowBraLarge"/>
+								</else>
+							</if>
+                        </if>
+					</case>
 					<default>
-						<show part="bra/cowBraLarge"/>
+						<if test="BoobDisplay == 0">
+							<show part="bra/cowBraMega"/>
+							<else>
+								<show part="bra/cowBraLarge"/>
+							</else>
+						</if>
 					</default>
 				</switch>
 			</if>
@@ -5523,6 +6131,34 @@
 				</if>
 			</if>
 		</if>
+		
+		<if test="elfVillagerDress">
+			<if test="showClothing">
+				<show part="clothe/elfVillager"/>
+				<if test="breastRows.length gt 0">
+					<switch>
+						<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+							<show part="bra_fg/elfDressBraSmall"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+							<show part="bra_fg/elfDressBraSmall"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+							<show part="bra_fg/elfDressBraMedium"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+							<show part="bra_fg/ElfDressBraMedium"/>
+						</case>
+						<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+							<show part="bra_fg/elfDressBraLarge"/>
+						</case>
+						<default>
+							<show part="bra_fg/elfDressBraLarge"/>
+						</default>
+					</switch>
+				</if>
+			</if>
+		</if>
 
 
 		<if test="vladimirRegalia">
@@ -5727,9 +6363,127 @@
 		<if test="showClothing == false">
 			<hide part="panty/*"/>
 		</if>
-		
+
 		<!-- FULL BODY AREA -->
 		
+		<!-- Imp -->
+		<if test="IsImp">
+			<!-- Hide everything else -->
+			<hide part="*"/>
+			<show part="fullbodyBg/imp"/>
+			<show part="face/human_fang"/>
+			<show part="eyes/cat"/>
+			<show part="ears_bg/elfin"/>
+			<show part="ears/elfin"/>
+			<show part="wings_bg/imp"/>
+			<if test="hasCock()">
+				<if test="big">
+                    <show part="fullbodyPenisFg/impbig"/>
+                    <else>
+						<show part="fullbodyPenisFg/imp"/>
+                    </else>
+                </if>
+			</if>
+			<if test="balls gt 0">
+				<switch>
+					<case test="ballSize ge 8">
+						<show part="fullbodyBalls/impsillyhuge"/>
+					</case>
+					<case test="ballSize ge 6">
+						<show part="fullbodyBalls/imphuge"/>
+					</case>
+					<case test="ballSize ge 4">
+						<show part="fullbodyBalls/implarge"/>
+					</case>
+					<default>
+						<show part="fullbodyBalls/impsmall"/>
+					</default>
+				</switch>
+			</if>
+			<if test="breastRows.length gt 0">
+				<switch>
+					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+						<show part="fullbodyBreast/Bimp"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.C"><!--C-D-->
+						<show part="fullbodyBreast/Dimp"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.D"><!--C-D-->
+						<show part="fullbodyBreast/Dimp"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.E"><!--E-F-->
+						<show part="fullbodyBreast/Fimp"/>
+					</case>
+					<default>
+						<show part="fullbodyBreast/Fimp"/>
+					</default>
+				</switch>
+				<else>
+					<show part="fullbodyBreast/imp0"/>
+                </else>
+			</if>
+			<if test="hairLength &gt; 0">
+				<switch value="hairType">
+					<default> <!-- covers Hair.NORMAL, Hair.GHOST, Hair.ANEMONE, Hair.QUILL, Hair.LEAF, Hair.FLUFFY, Hair.GRASS, Hair.SILKEN, Hair.STORM --> <!-- TODO  -->
+						<switch>
+							<case test="hairLength lt 16">
+								<show part="hair/0"/>
+								<show part="hair_bg/0"/>
+							</case>
+							<default>
+								<show part="hair/0"/>
+								<show part="hair_bg/02"/>
+							</default>
+						</switch>
+					</default>
+				</switch>
+				<switch value="hairStyle">
+                    <case values="Hair.PONYTAIL">
+                        <show part="hair_bg/ponytail"/>
+                    </case>
+                    <case values="Hair.LONGTRESSES">
+                        <show part="hair_bg/longTresse"/>
+                    </case>
+                    <case values="Hair.TWINTAILS">
+                        <show part="hair_bg/twinPigtail"/>
+                    </case>
+                    <case values="Hair.DWARVEN">
+                        <show part="hair_bg/dwarven"/>
+                    </case>
+					<case values="Hair.SNOWLILY">
+						<hide part="hair/*"/>
+						<hide part="hair_bg/*"/>
+                        <show part="hair/yukionna"/>
+						<show part="hair_bg/yukionna"/>
+                    </case>
+					<case values="Hair.FOURWIND">
+						<hide part="hair/*"/>
+						<hide part="hair_bg/*"/>
+                        <show part="hair/fourWindBraid"/>
+						<show part="hair_bg/fourWindBraid"/>
+                    </case>
+					<case values="Hair.FOURWINDL">
+						<hide part="hair/*"/>
+						<hide part="hair_bg/*"/>
+                        <show part="hair/fourWindBraid"/>
+						<show part="hair_bg/02"/>
+                    </case>
+					<case values="Hair.TAURPONYTAIL">
+						<show part="hair_bg/centaurPonytail"/>
+					</case>
+                    <default>
+                        <hide part="hair/*"/>
+                        <hide part="hair_bg/*"/>
+                        <show part="hair/0"/>
+                        <show part="hair_bg/02"/>
+                    </default>
+                </switch>
+			</if>
+		</if>
+
+
 		<!-- Earth Elemental -->
 		<if test="IsEarthElemental">
 			<!-- Hide everything else -->
@@ -5788,7 +6542,7 @@
                 </else>
 			</if>
 		</if>
-		
+
 		<!-- Fire elemental -->
 		<if test="IsFireElemental">
 			<!-- Hide everything else -->
@@ -5846,7 +6600,7 @@
                 </else>
 			</if>
 		</if>
-		
+
 		<!-- Water elemental -->
 		<if test="IsWaterElemental">
 			<!-- Hide everything else -->
@@ -5906,7 +6660,7 @@
                 </else>
 			</if>
 		</if>
-		
+
 		<!-- Wind elemental -->
 		<if test="IsWindElemental">
 			<!-- Hide everything else -->

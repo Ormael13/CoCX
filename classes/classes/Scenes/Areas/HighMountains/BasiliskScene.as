@@ -40,7 +40,7 @@ public class BasiliskScene extends BaseContent
 
 				outputText("Using every vestige of your willpower, you tear your gaze away from the terrible, paralyzing sight.  Panting and feeling groggy, you desperately hold the rock formation in the corner of your eye. A tall, thin bipedal shape disengages from the stone against which it had been camouflaging itself, and stalks predatorily towards you.  With small, quick glances you glean fleeting impressions of grey-green scales, a tightly muscled yellow underbelly, cruelly curved index claws, a whip like tail. The creature moves its snub head towards yours suddenly, trying to catch your gaze with its deadly grey eyes again.  You recoil and ready yourself to fight it as best you can.\n\n");
 				//(spd loss)
-				Basilisk.basiliskSpeed(player,5);
+				player.buff("Basilisk Slow").addStats( {"spe":-5} ).withText("Basilisk Slow").combatPermanent();
 				flags[kFLAGS.TIMES_ENCOUNTERED_BASILISK]++;
 				startCombat(new Basilisk());
 			}
@@ -163,14 +163,14 @@ public class BasiliskScene extends BaseContent
 			if(player.cocks[x].cockLength <= 13) {
 				sceneHunter.print("Check failed: dick longer than 13")
 				outputText("Soon your " + hipDescript() + " are clapping a staccato rhythm against its warm, muscly butt,");
-				if(player.balls > 0) outputText(" your [balls] slapping against it,");
+				if(player.hasBalls()) outputText(" your [balls] slapping against it,");
 				outputText(" the creature taking every inch of your length before you pull out and thrust all the way in again, forcing ragged gasps from the reptile's still throat.\n\n");
 			}
 			//(More than 13 inches:)
 			else {
 				outputText("You force as much of your huge member as you can into the creature's anus, clutching onto the creature's warm, muscly butt as you pull out and thrust yourself in again, brutally driving a bit more of yourself in each time, forcing ragged gasps from the reptile's still throat.  ");
 				//[(if balls)
-				if(player.balls > 0) outputText("Your [balls] swing heavily underneath your shaft, swelling as your rhythm picks up.  ");
+				if(player.hasBalls()) outputText("Your [balls] swing heavily underneath your shaft, swelling as your rhythm picks up.  ");
 				outputText("At the end of your reach you push against something spongy and yielding.  The basilisk emits a dry moan and underneath it, you see that you have forced its long, thin, shining cock from its genital slit.  With a cruel smile you thrust into it again and again, holding onto your depth at the height of your thrust just a little each time to put pressure on the helpless basilisk's prostate, forcing the creature into an involuntary, straining erection.  You slip one hand under its frozen legs and begin to pump the creature in time with your rhythm, leaning over it as you do, whispering every dark thought that bubbles up through your corrupt mind into its ear; telling it what a pathetic slutty little fuck toy it is, how turned on it is by your assault on it, how grateful it should be that you have deigned to give it your cock, knowing your words are sinking into its hypnotically stilled and pliable mind as easily as your " + cockDescript(x) + " is into its cum-oiled hole.\n\n");
 			}
 
@@ -182,7 +182,7 @@ public class BasiliskScene extends BaseContent
 			outputText("  You continue to fuck the creature as you ejaculate, forcing your tainted jizz deep inside it, glorying in how the spurting lubricant allows you to fuck its hole even better.  Eventually, after a series of orgasms, which feel like the sky is falling, you finally pull out of the basilisk's ravaged anus with a deeply satisfied sigh.  Your cum dribbles out of the creature's gaping butt; the only regret you feel in your deep haze is that there is nothing at hand to plug it in with.  You sit back and allow yourself to bask in the afterglow, safe in the knowledge that there will be no retaliation forthcoming from your partner.\n\n");
 
 			outputText("You are shaken out of it by an urgent, rasping moan from the basilisk. You sense movement overhead and look up. The lizard has seen in the water's reflection what you can take in with your own eyes; several harpies circling overhead like vultures, waiting patiently for you to leave.  The smiles, which plaster their faces, are possibly the least kind you have ever seen.  The basilisk whines again, this time with a desperate pleading edge.  You kneel down and comfortingly stroke your victim's scaled head, glorying in the moment of false hope you give it.  \"<i>Get hard,</i>\" you whisper.  The creature clenches as its no doubt aching cock strains to attention again.  \"<i>Don't worry,</i>\" you murmur into its ear. \"<i>I'm sure the nice birdies will shake you out of it.  Eventually.</i>\"  You get up, dress yourself, and leave.  A pitiless grin slowly spreads across your face as behind you, the opening strains of what promises to be a very long, violent, and feathery rape reach your ears...");
-			player.sexReward("Default","Dick",true,false);
+			player.sexReward("no", "Dick");
 			dynStats("cor", 1);
 			cleanupAfterCombat();
 		}
@@ -204,7 +204,7 @@ public class BasiliskScene extends BaseContent
 
 			outputText("It takes several moments for you to realize it when the basilisk steps away from you.  You are free of its spell!  Except... you can't move.  You are standing there, gazing into nothing, and you can't move.  You can feel your arms and legs, and the breeze on your skin, but the ability to do anything with them is simply not there; it's as if the nerve connections have been severed, leaving you utterly paralyzed.  The most you can manage is a raspy half-moan through your still throat. You can't even follow the basilisk with your eyes; although you can feel it; it gives you cause to moan again.\n\n");
 			//Undo slow to determine if bad end time
-			player.removeStatusEffect(StatusEffects.BasiliskSlow);
+			player.buff("Basilisk Slow").remove();
 			dynStats("spe", !player.hasPerk(PerkLib.BasiliskResistance) ? 3 : 1, "lus", 399);
 			//Bad end
 			if(player.spe < 5 && !player.hasPerk(PerkLib.BasiliskResistance)) {
@@ -475,7 +475,7 @@ public class BasiliskScene extends BaseContent
 				outputText("The harpy manages to cum twice on your hand, gobbling with excitement as she spatters your arm with her juices.  During this time you are forced to ride the potent cocktail of hypnotic sexual compulsion, and the pheromone lipstick again and again, until you feel you would have collapsed in a pool of steaming sex long ago if your knees allowed it.  Once she is finished with you the harpy clambers down, taking care to wipe her leaking twat on your naked front as she does so, before flapping off with a winsome smirk, entirely ignoring your own achingly deprived sex.\n\n");
 
 				outputText("After another ten or twenty minutes of being forced to stand still and savor your own shameful memories, you find with great relief you can begin to move your fingers again. Eventually with some effort you manage to work power into each corner of your body and finally shake free of the basilisk's curse; quickly, you redress before anything else finds you and, still reeking of harpy sex, you begin to make your way back down the mountain. You think woozily that maybe you should consider yourself lucky that nothing actually fucked you whilst you were in your helpless state, but your body thinks the exact opposite, and you really, really need to get back to camp and sort yourself out.");
-				dynStats("lus=", player.maxLust());
+				dynStats("lus=", player.maxOverLust());
 				cleanupAfterCombat();
 			}
 			//Genderless:
@@ -491,7 +491,7 @@ public class BasiliskScene extends BaseContent
 				outputText("The harpy manages to cum twice on your hand, gobbling with excitement as she spatters your arm with her juices.  During this time you are forced to ride the potent cocktail of hypnotic sexual compulsion, and the harpy's golden lipstick again and again, until you feel you would have collapsed in a pool of steaming sex long ago if your knees would only allow it.  Once she is finished with you the harpy clambers down, taking care to wipe her leaking twat on your naked front as she does so, before flapping off with a winsome smirk, entirely ignoring your own plight.\n\n");
 
 				outputText("After another ten or twenty minutes of being forced to stand still and savor your own shameful memories, you find with great relief you can begin to move your fingers again.  Eventually with some effort you manage to work power into each corner of your body and finally shake free of the basilisk's curse; quickly, you redress before anything else finds you and, still reeking of harpy sex, you begin to make your way back down the mountain.  You think woozily that maybe you should consider yourself lucky that nothing actually fucked you whilst you were in your helpless state, but your body thinks the exact opposite, and you really, really need to get back to camp and sort yourself out.");
-				dynStats("lus=", player.maxLust());
+				dynStats("lus=", player.maxOverLust());
 				cleanupAfterCombat();
 			}
 		}
@@ -694,7 +694,7 @@ public class BasiliskScene extends BaseContent
 				outputText(" demand");
 				if(player.cockTotal() == 1) outputText("s");
 				outputText(" attention, and you don't deny them, as you resume the pleasurable stroking you started earlier.  More white cream leaks out, landing on the earth and the basilisk's back.  The combined titillation of your ovipositor massaging the overgrown lizard's anus from the inside out and the stroking of " + sMultiCockDesc() + "  is more than your overly-sensitised body can handle for long.  Soon, the tell-tale feeling at the base of your spine ");
-				if(player.balls > 0) outputText("and inside your balls ");
+				if(player.hasBalls()) outputText("and inside your balls ");
 				outputText("is more than you can take, and ropes of thick semen coat the basilisk from the cheeks of its ass to the back of its head.  You give a guttural groan as your orgasm hurries the last of your eggs up the long black organ that is your ovipositor to be deposited into the tightly packed cavern that you've made the basilisk's intestines into.");
 				sharedEnd();
 			}

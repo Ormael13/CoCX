@@ -5,7 +5,7 @@ import classes.Monster;
 
 public class CoreStat extends RawStat{
 	public function CoreStat(host:Creature, name:String) {
-		super(host, name, {min:1, value:1, max: 100});
+		super(host, name, {min:0, value:0, max: 100});
 	}
 	
 	override public function get max():Number {

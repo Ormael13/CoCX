@@ -1,4 +1,4 @@
-﻿package classes
+package classes
 {
 import classes.BodyParts.Antennae;
 import classes.BodyParts.Arms;
@@ -19,7 +19,6 @@ import classes.BodyParts.Wings;
 import classes.GeneticMemories.*;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
-import classes.Items.*;
 import classes.Scenes.Areas.Desert.SandWitchScene;
 import classes.Scenes.Metamorph;
 import classes.Scenes.NPCs.JojoScene;
@@ -70,6 +69,7 @@ import coc.view.MainView;
 		public function CharCreation() {}
 
 		public function newGameFromScratch():void {
+			CoC.instance.isLoadingSave = false;
 			flags[kFLAGS.NEW_GAME_PLUS_LEVEL] = 0;
 			newGameGo();
 		}
@@ -88,6 +88,7 @@ import coc.view.MainView;
 		*/
 
 		public function newGameGo():void {
+			EventParser.badEnded = false; //reset bad end if we're going from it
 			XXCNPC.unloadSavedNPCs();
 			CoC.instance.saves.resetSaveableStates();
 			mainView.eventTestInput.x = -10207.5;
@@ -138,21 +139,24 @@ import coc.view.MainView;
             }
 
 			model.player = player;
-			player.strStat.core.value = 15;
-			player.touStat.core.value = 15;
-			player.speStat.core.value = 15;
-			player.intStat.core.value = 15;
-			player.wisStat.core.value = 15;
-			player.libStat.core.value = 15;
+			player.strStat.core.value = 0;
+			player.touStat.core.value = 0;
+			player.speStat.core.value = 0;
+			player.intStat.core.value = 0;
+			player.wisStat.core.value = 0;
+			player.libStat.core.value = 0;
+			player.strStat.train.value = 15;
+			player.touStat.train.value = 15;
+			player.speStat.train.value = 15;
+			player.intStat.train.value = 15;
+			player.wisStat.train.value = 15;
+			player.libStat.train.value = 15;
 			player.sensStat.redefine({base:15});
 			player.cor = 15;
 			player.soulforce = 50;
 			player.wrath = 0;
 			player.mana = 100;
 			player.hunger = 80;
-			player.obey = 10;
-			player.esteem = 50;
-			player.will = 80;
 			player.lust = 15;
 			player.gems = 0;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
@@ -191,9 +195,8 @@ import coc.view.MainView;
 			player.gills.type = Gills.NONE;
 			player.rearBody.type = RearBody.NONE;
 			player.wings.type = Wings.NONE;
-			player.wings.desc = "non-existant";
 			//Default
-			player.skinTone = "light";
+			player.skinColor = "light";
 			player.hairColor = "brown";
 			player.hairStyle = 0;
 			player.hairType = Hair.NORMAL;
@@ -279,7 +282,7 @@ import coc.view.MainView;
 				vagina.clitPLong = "";
 			}
 			//PLOTZ
-			JojoScene.monk                               = 0;
+			JojoScene.monk                               = JojoScene.JOJO_NOT_MET;
 			SandWitchScene.rapedBefore = false;
 			//Replaced by flag	CoC.instance.beeProgress = 0;
 			SceneLib.isabellaScene.isabellaOffspringData = []; //CLEAR!
@@ -288,9 +291,9 @@ import coc.view.MainView;
 			inDungeon = false;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
 				//Clothes clear
-				player.setArmor(armors.C_CLOTH);
-				player.setWeapon(WeaponLib.FISTS);
-				player.setWeaponRange(WeaponRangeLib.NOTHING);
+				player.setArmor(armors.C_CLOTH,false,true);
+				player.unequipWeapon(false,true)
+				player.unequipWeaponRange(false,true);
 				//Clear camp slots
 				inventory.clearStorage();
 				inventory.clearGearStorage();
@@ -329,7 +332,7 @@ import coc.view.MainView;
 					trace("1 vagina purged.");
 				}
 				//Keep gender and normalize genitals.
-				if (hadOldCock) player.createCock(5.5, 1, CockTypesEnum.HUMAN);
+				if (hadOldCock) player.createCock();
 				if (hadOldVagina) player.createVagina(true);
 				if (player.balls > 2) player.balls = 2;
 				if (player.ballSize > 2) player.ballSize = 2;
@@ -379,13 +382,14 @@ import coc.view.MainView;
             //keep settings flags
 			if (player.hasKeyItem("Ascension") >= 0) {
 				for each(var flag:int in [
+					kFLAGS.BACKGROUND_STYLE,
+					kFLAGS.CUSTOM_FONT_SIZE,
                     kFLAGS.NEW_GAME_PLUS_LEVEL,
                     kFLAGS.HUNGER_ENABLED,
                     kFLAGS.HARDCORE_MODE,
                     kFLAGS.HARDCORE_SLOT,
                     kFLAGS.GAME_DIFFICULTY,
                     kFLAGS.EASY_MODE_ENABLE_FLAG,
-                    kFLAGS.NO_GORE_MODE,
                     kFLAGS.WISDOM_SCALING,
                     kFLAGS.INTELLIGENCE_SCALING,
                     kFLAGS.STRENGTH_SCALING,
@@ -396,17 +400,19 @@ import coc.view.MainView;
                     kFLAGS.SCENEHUNTER_PRINT_CHECKS,
                     kFLAGS.SCENEHUNTER_OTHER,
                     kFLAGS.SCENEHUNTER_DICK_SELECT,
+					kFLAGS.SCENEHUNTER_LOSS_SELECT,
+					kFLAGS.SCENEHUNTER_MOCK_FIGHTS,
                     kFLAGS.SCENEHUNTER_UNI_HERMS,
                     kFLAGS.LOW_STANDARDS_FOR_ALL,
                     kFLAGS.HYPER_HAPPY,
                     kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM,
-                    kFLAGS.MELEE_DAMAGE_OVERHAUL,
                     kFLAGS.LVL_UP_FAST,
                     kFLAGS.MUTATIONS_SPOILERS,
                     kFLAGS.INVT_MGMT_TYPE,
                     kFLAGS.NEWPERKSDISPLAY,
                     kFLAGS.CHARVIEW_STYLE,
                     kFLAGS.CHARVIEW_ARMOR_HIDDEN,
+					kFLAGS.EXPLORE_MENU_STYLE,
                     kFLAGS.SPIRIT_STONES]) {
 					    newFlags[flag] = flags[flag];
 				}
@@ -540,8 +546,8 @@ import coc.view.MainView;
 		private function isAMan():void {
 			//Attributes
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
-				player.strStat.core.value += 3;
-				player.touStat.core.value += 2;
+				player.strStat.train.value += 3;
+				player.touStat.train.value += 2;
 			}
 			//Body attributes
 			player.fertility = 5;
@@ -553,9 +559,6 @@ import coc.view.MainView;
 			player.balls = 2;
 			player.ballSize = 1;
 			player.createCock();
-			player.cocks[0].cockLength = 5.5;
-			player.cocks[0].cockThickness = 1;
-			player.cocks[0].cockType = CockTypesEnum.HUMAN;
 			player.cocks[0].knotMultiplier = 1;
 
 			//Breasts
@@ -570,8 +573,8 @@ import coc.view.MainView;
 		private function isAWoman():void {
 			//Attributes
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
-				player.speStat.core.value += 3;
-				player.intStat.core.value += 2;
+				player.speStat.train.value += 3;
+				player.intStat.train.value += 2;
 			}
 			//Body attributes
 			player.fertility = 10;
@@ -597,10 +600,10 @@ import coc.view.MainView;
 		private function isAHerm():void {
 			//Attributes
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
-				player.strStat.core.value += 1;
-				player.touStat.core.value += 1;
-				player.speStat.core.value +=1;
-				player.intStat.core.value += 1;
+				player.strStat.train.value += 1;
+				player.touStat.train.value += 1;
+				player.speStat.train.value +=1;
+				player.intStat.train.value += 1;
 			}
 			//Body attributes
 			player.fertility = 10;
@@ -612,9 +615,6 @@ import coc.view.MainView;
 			player.createVagina();
 			player.clitLength = .5;
 			player.createCock();
-			player.cocks[0].cockLength = 5.5;
-			player.cocks[0].cockThickness = 1;
-			player.cocks[0].cockType = CockTypesEnum.HUMAN;
 			player.cocks[0].knotMultiplier = 1;
 
 			//Breasts
@@ -635,8 +635,8 @@ import coc.view.MainView;
 
 
 		private function buildLeanMale():void {
-			player.strStat.core.value -= 1;
-			player.speStat.core.value += 1;
+			player.strStat.train.value -= 1;
+			player.speStat.train.value += 1;
 
 			player.femininity = 34;
 			player.thickness = 30;
@@ -649,8 +649,8 @@ import coc.view.MainView;
 		}
 
 		private function buildSlenderFemale():void {
-			player.strStat.core.value -= 1;
-			player.speStat.core.value += 1;
+			player.strStat.train.value -= 1;
+			player.speStat.train.value += 1;
 
 			player.femininity = 66;
 			player.thickness = 30;
@@ -683,9 +683,9 @@ import coc.view.MainView;
 		}
 
 		private function buildThickMale():void {
-			player.speStat.core.value -= 4;
-			player.strStat.core.value += 2;
-			player.touStat.core.value += 2;
+			player.speStat.train.value -= 4;
+			player.strStat.train.value += 2;
+			player.touStat.train.value += 2;
 
 			player.femininity = 29;
 			player.thickness = 70;
@@ -698,9 +698,9 @@ import coc.view.MainView;
 		}
 
 		private function buildCurvyFemale():void {
-			player.speStat.core.value -= 2;
-			player.strStat.core.value += 1;
-			player.touStat.core.value += 1;
+			player.speStat.train.value -= 2;
+			player.strStat.train.value += 1;
+			player.touStat.train.value += 1;
 
 			player.femininity = 71;
 			player.thickness = 70;
@@ -712,8 +712,8 @@ import coc.view.MainView;
 		}
 
 		private function buildGirlyMale():void {
-			player.strStat.core.value -= 2;
-			player.speStat.core.value += 2;
+			player.strStat.train.value -= 2;
+			player.speStat.train.value += 2;
 
 			player.femininity = 50;
 			player.thickness = 50;
@@ -726,8 +726,8 @@ import coc.view.MainView;
 		}
 
 		private function buildTomboyishFemale():void {
-			player.strStat.core.value += 1;
-			player.speStat.core.value -= 1;
+			player.strStat.train.value += 1;
+			player.speStat.train.value -= 1;
 
 			player.femininity = 56;
 			player.thickness = 50;
@@ -753,7 +753,7 @@ import coc.view.MainView;
 		}
 
 		private function setComplexion(choice:String):void { //And choose hair
-			player.skinTone = choice;
+			player.skinColor = choice;
 			clearOutput();
 			outputText("You selected a " + choice + " complexion.\n\nWhat color is your hair?");
 			menu();
@@ -810,7 +810,7 @@ import coc.view.MainView;
 
 			outputText("You can finalize your appearance customization before you proceed to perk selection. You will be able to alter your appearance through the usage of certain items.\n\n");
 			outputText("Height: " + Math.floor(player.tallness / 12) + "'" + player.tallness % 12 + "\"\n");
-			outputText("Skin tone: " + player.skinTone + "\n");
+			outputText("Skin tone: " + player.skinColor + "\n");
 			outputText("Hair color: [haircolor]\n");
 			outputText("Eye color: [eyecolor]\n");
 			if (player.hasCock()) {
@@ -850,7 +850,7 @@ import coc.view.MainView;
 			addButton(14, "Back", genericStyleCustomizeMenu);
 		}
 		private function confirmComplexion(complexion:String):void {
-			player.skinTone = complexion;
+			player.skinColor = complexion;
 			genericStyleCustomizeMenu();
 		}
 
@@ -1421,6 +1421,8 @@ import coc.view.MainView;
 			else addButtonDisabled(11, "Tactician", "You already have this History as one of your Past Lives!");
 			if (!player.hasPerk(PerkLib.PastLifeWhore)) addButton(12, "Whoring", confirmHistory, PerkLib.HistoryWhore);
 			else addButtonDisabled(12, "Whoring", "You already have this History as one of your Past Lives!");
+			if (!player.hasPerk(PerkLib.PastLifeFeral)) addButton(13, "Feral", confirmHistory, PerkLib.HistoryFeral);
+			else addButtonDisabled(13, "Feral", "You already have this History as one of your Past Lives!");
 			addButton(14, "None", noHistoryAtAllCuzYouAscendedTooManyTimesAlready).hint("Your life hasn't been very specifically focused so far, or you've had so many past lives you can't separate them all. (No history perk, just bonus perk points)");
 
 		}
@@ -1432,7 +1434,7 @@ import coc.view.MainView;
 					outputText("You spent some time as an alchemist's assistant, and alchemical items always seem to be more reactive in your hands.  Is this your history?");
 					break;
 				case PerkLib.HistoryCultivator:
-					outputText("You spent much of your time cultivating your soul, reaching the point where you successfully took the first step towards spiritual enlightment, as well as attaining an uncanny purity of soulforce. You will start with Job: Soul Cultivator perk. Your max soulforce will be roughly 10% higher. Is this your history?");
+					outputText("You spent much of your time cultivating your soul, reaching the point where you successfully took the first step towards spiritual enlightment, as well as attaining an uncanny purity of soulforce. You will start with Soul Cultivator perk & Cultivation Manual: Duality. Your max soulforce will be roughly 10% higher. Is this your history?");
 					break;
 				case PerkLib.HistoryFighter:
 					outputText("You spent much of your time fighting other children, and you had plans to find work as a guard when you grew up.  You do 10% more damage with physical melee attacks.  You will also start out with 50 gems and Job: Warrior perk.  Is this your history?");
@@ -1463,6 +1465,9 @@ import coc.view.MainView;
 					break;
 				case PerkLib.HistoryTactician:
 					outputText("You were being groomed to take over the elderly chief's position until you were chosen as the Champion.  You will start with Job: Leader perk.  Is this your history?");
+					break;
+				case PerkLib.HistoryFeral:
+					outputText("You were abandoned as a child in the wild. Adopted into a pack of wolves, you quickly learned to survive. You will start with Job: Beast Warrior perk.  Is this your history?");
 					break;
 				default:
 					outputText("You managed to find work as a whore.  Because of your time spent trading seduction for profit, you're more effective at teasing (+15% tease damage).  You will start with Job: Seducer perk.  Is this your history?");
@@ -1507,12 +1512,10 @@ import coc.view.MainView;
 			clearOutput();
 			if (customPlayerProfile != null) {
 				customPlayerProfile();
-				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) doNext(chooseGameModes);
-				else doNext(startTheGame);
+				doNext(chooseTimescale);
 				return;
 			}
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) chooseGameModes();
-			else startTheGame();
+			chooseTimescale();
 		}
 
 		public function arrival():void {
@@ -1528,7 +1531,7 @@ import coc.view.MainView;
 			else outputText("and your body reacts with a sense of growing warmth focusing in your groin, your manhood hardening for no apparent reason.");
 			outputText(" You were warned of this and press forward, ignoring your body's growing needs.  A glowing purple-pink portal swirls and flares with demonic light along the back wall.  Cringing, you press forward, keenly aware that your body seems to be anticipating coming in contact with the tainted magical construct.  Closing your eyes, you gather your resolve and leap forwards.  Vertigo overwhelms you and you black out...");
 			showStats();
-			dynStats("lus", 15);
+			dynStats("lus", 15, "scale", false);
 			doNext(arrivalPartTwo);
 		}
 
@@ -1550,7 +1553,7 @@ import coc.view.MainView;
 		private function arrivalPartThree():void {
 			clearOutput();
 			hideUpDown();
-			dynStats("lus", -30);
+			dynStats("lus", -30, "scale", false);
 			outputText("The imp shakes the empty vial to emphasize his point.  You reel in shock at this revelation - you've just entered the demon realm and you've already been drugged!  You tremble with the aching need in your groin, but resist, righteous anger lending you strength.\n\nIn desperation you leap towards the imp, watching with glee as his cocky smile changes to an expression of sheer terror.  The smaller creature is no match for your brute strength as you pummel him mercilessly.  You pick up the diminutive demon and punt him into the air, frowning grimly as he spreads his wings and begins speeding into the distance.\n\n");
 			outputText("The imp says, \"<i>FOOL!  You could have had pleasure unending... but should we ever cross paths again you will regret humiliating me!  Remember the name Zetaz, as you'll soon face the wrath of my master!</i>\"\n\n");
 			outputText("Your pleasure at defeating the demon ebbs as you consider how you've already been defiled.  You swear to yourself you will find the demon responsible for doing this to you and the other Champions, and destroy him AND his pet imp.");
@@ -1672,6 +1675,30 @@ import coc.view.MainView;
 			addButton(6, "Xianxia MC", chooseModeXianxia);
 		}
 
+		private function chooseTimescale():void {
+			clearOutput();
+			outputText("Choose in-game timescale.\n"
+				+ "\n"
+				+ "The game contains numerous holiday events, some of which can be triggered multiple times with different results. There are two ways how the game can calculate the current date.\n"
+				+ "\n"
+				+ "<b>REAL</b>: The game uses the system date from your computer.\n"
+				+ "<b>DAYS</b>: The current day is calculated using in-game days counter. The length of one in-game year can be selected."
+				+ "\n"
+				+ "\nThe events/holidays will have day-of-the-month requirements with <b>REAL</b> and <b>DAYS-365</b> settings (e.g. exact days of Easter or Thanksgiving).");
+			menu();
+			addButton(2, "REAL", setTimescale, 0);
+			addButton(5, "DAYS-60", setTimescale, 60);
+			addButton(6, "DAYS-120", setTimescale, 120);
+			addButton(7, "DAYS-180", setTimescale, 180);
+			addButton(8, "DAYS-240", setTimescale, 240);
+			addButton(9, "DAYS-365", setTimescale, 365);
+
+			function setTimescale(val:int):void {
+				flags[kFLAGS.DAYS_PER_YEAR] = val;
+				chooseGameModes();
+			}
+		}
+
 		private function startTheGame():void {
 			player.startingRace = player.race();
 			if (flags[kFLAGS.HARDCORE_MODE] > 0) {
@@ -1698,30 +1725,35 @@ import coc.view.MainView;
 		}
 
 		public function chooseToPlay():void {
-			if (player.femininity >= 55) player.setUndergarment(undergarments.C_PANTY);
-			else player.setUndergarment(undergarments.C_LOIN);
-			if (player.biggestTitSize() >= 2) player.setUndergarment(undergarments.C_BRA);
-			else player.setUndergarment(undergarments.C_SHIRT);
-			if (player.hasPerk(PerkLib.HistoryCultivator) || (player.hasPerk(PerkLib.PastLifeCultivator) && player.hasKeyItem("PerksOverJobs") < 0)) player.createPerk(PerkLib.JobSoulCultivator, 0, 0, 0, 0);
+			if (player.femininity >= 55) player.setUnderBottom(undergarments.C_PANTY, false);
+			else player.setUnderBottom(undergarments.C_LOIN, false);
+			if (player.biggestTitSize() >= 2) player.setUnderTop(undergarments.C_BRA, false);
+			else player.setUnderTop(undergarments.C_SHIRT, false);
+			if (player.hasPerk(PerkLib.HistoryCultivator) || player.hasPerk(PerkLib.PastLifeCultivator)) {
+				player.createKeyItem("Cultivation Manual: Duality", 0, 0, 0, 0);
+				player.createPerk(PerkLib.JobSoulCultivator, 0, 0, 0, 0);
+				player.perkPoints += 1;
+			}
 			if (player.hasPerk(PerkLib.HistoryFighter) || (player.hasPerk(PerkLib.PastLifeFighter) && player.hasKeyItem("PerksOverJobs") < 0)) player.createPerk(PerkLib.JobWarrior, 0, 0, 0, 0);
 			if (player.hasPerk(PerkLib.HistoryScout) || (player.hasPerk(PerkLib.PastLifeScout) && player.hasKeyItem("PerksOverJobs") < 0)) player.createPerk(PerkLib.JobRanger, 0, 0, 0, 0);
 			if (player.hasPerk(PerkLib.HistoryScholar) || (player.hasPerk(PerkLib.PastLifeScholar) && player.hasKeyItem("PerksOverJobs") < 0)) player.createPerk(PerkLib.JobSorcerer, 0, 0, 0, 0);
 			if (player.hasPerk(PerkLib.HistorySmith) || (player.hasPerk(PerkLib.PastLifeSmith) && player.hasKeyItem("PerksOverJobs") < 0)) player.createPerk(PerkLib.JobGuardian, 0, 0, 0, 0);
 			if (player.hasPerk(PerkLib.HistoryTactician) || (player.hasPerk(PerkLib.PastLifeTactician) && player.hasKeyItem("PerksOverJobs") < 0)) player.createPerk(PerkLib.JobLeader, 0, 0, 0, 0);
 			if (player.hasPerk(PerkLib.HistoryWhore) || (player.hasPerk(PerkLib.PastLifeWhore) && player.hasKeyItem("PerksOverJobs") < 0)) player.createPerk(PerkLib.JobSeducer, 0, 0, 0, 0);
+			if (player.hasPerk(PerkLib.HistoryFeral) || (player.hasPerk(PerkLib.PastLifeFeral) && player.hasKeyItem("PerksOverJobs") < 0)) player.createPerk(PerkLib.JobBeastWarrior, 0, 0, 0, 0);
 			if (player.hasPerk(PerkLib.HistoryAlchemist)) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.HistoryFortune)) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.HistoryHealer)) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.HistoryReligious)) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.HistorySlacker)) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.HistorySlut)) player.perkPoints += 1;
-			if (player.hasPerk(PerkLib.PastLifeCultivator) && player.hasKeyItem("PerksOverJobs") >= 0) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.PastLifeFighter) && player.hasKeyItem("PerksOverJobs") >= 0) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.PastLifeScout) && player.hasKeyItem("PerksOverJobs") >= 0) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.PastLifeScholar) && player.hasKeyItem("PerksOverJobs") >= 0) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.PastLifeSmith) && player.hasKeyItem("PerksOverJobs") >= 0) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.PastLifeTactician) && player.hasKeyItem("PerksOverJobs") >= 0) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.PastLifeWhore) && player.hasKeyItem("PerksOverJobs") >= 0) player.perkPoints += 1;
+			if (player.hasPerk(PerkLib.PastLifeFeral) && player.hasKeyItem("PerksOverJobs") >= 0) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.PastLifeAlchemist)) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.PastLifeFortune)) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.PastLifeHealer)) player.perkPoints += 1;
@@ -1750,15 +1782,22 @@ import coc.view.MainView;
 			if (player.hasPerk(PerkLib.AscensionNaturalMetamorph)) {
 				player.createPerk(PerkLib.GeneticMemory, 0, 0, 0, 0);
 				player.createPerk(PerkLib.Metamorph, 0, 0, 0, 0);
+				player.createPerk(PerkLib.MetamorphEx, 0, 0, 0, 0);
+				//if(player.perkv1(PerkLib.AscensionTrancendentalGeneticMemoryStageX) > 6)
+               //     player.createPerk(PerkLib.MetamorphMastery, 0, 0, 0, 0);
 			}
 			player.perkPoints += 1;
 			//setupMutations();
+			Metamorph.resetMetamorph();
+			if (player.hasCock()) transformations.UnlockCocks();
+			if (player.hasBalls()) Metamorph.unlockMetamorphEx(BallsMem.getMemory(BallsMem.DUO));
+			if (player.hasVagina()) transformations.UnlockVagina();
+			if (player.hasBreasts()) transformations.UnlockBreasts();
 			clearOutput();
 			statScreenRefresh();
 			outputText("Would you like to play through the " + (1 * (1 + player.newGamePlusMod())) + "-day"+(player.newGamePlusMod() > 0 ? "s":"")+" prologue in Ingnam or just skip?");
 			player.updateRacialAndPerkBuffs();
 			player.HP = player.maxHP();
-			Metamorph.resetMetamorph();
 			//doYesNo(goToIngnam, arrival);
 			menu();
 			addButton(0, "Ingnam", goToIngnam);
@@ -1820,6 +1859,7 @@ import coc.view.MainView;
 			addButton(2, "Rare Perks(1)", rarePerks1).hint("Spend Ascension Points on rare special perks!", "Perk Selection");
 			addButton(3, "Rare Perks(2)", rarePerks2).hint("Spend Ascension Points on rare special perks!", "Perk Selection");
 			addButton(5, "Perm Perks", ascensionPermeryMenu).hint("Spend Ascension Perk Points to make certain perks permanent (5/10 points).", "Perk Selection");
+			genMemPatch();
 			if (player.hasStatusEffect(StatusEffects.TranscendentalGeneticMemory)) {
 				if (player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory) < player.statusEffectv1(StatusEffects.TranscendentalGeneticMemory)) {
 					addButton(6, "Perm Met.", ascensionMetamorphPermMenu).hint("Spend Ascension Perk Points to make certain Metamorphs permanent.", "Permanent Metamorphs");
@@ -1829,15 +1869,24 @@ import coc.view.MainView;
 
 			} else addButtonDisabled(6, "Perm Met.", "Spend Ascension Perk Points to make certain Metamorphs permanent.\n\n<b>In order to be able to select Metamorphs to make permanent, you need to buy Transcendental Genetic Memory from Rare Perks 2 first!</b>");
 			if (player.ascensionPerkPoints >= 5) addButton(7, "Past Life", historyTopastlife).hint("Spend Ascension Points to change current possessed History perk into Past Life perk (5 points).", "Perk Selection");
-			else addButtonDisabled(7, "Past Life", "You not have enough Ascension Perk Points to use this option.");
+			else addButtonDisabled(7, "Past Life", "You don't have enough Ascension Perk Points to use this option.");
 			if (player.hasPerk(PerkLib.AscensionCruelChimerasThesis) && flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3) {
 				if (player.ascensionPerkPoints >= 10) addButton(8, "Bloodline", bloodlineACQ).hint("Spend Ascension Points to change current possessed Descendant perk into Bloodline perk (10 points).", "Perk Selection");
-				else addButtonDisabled(8, "Bloodline", "You not have enough Ascension Perk Points to use this option.");
+				else addButtonDisabled(8, "Bloodline", "You don't have enough Ascension Perk Points to use this option.");
 			}
-			else addButtonDisabled(8, "???", "You not have Ascended enough times or/and have required ascension perk to use this option.");
+			else addButtonDisabled(8, "???", "You don't have Ascended enough times or/and have required ascension perk to use this option.");
 			addButton(10, "Rename", renamePrompt).hint("Change your name at no charge.");
 			if (!migration) addButton(14, "Reincarnate", reincarnatePrompt).hint("Reincarnate and start an entirely new adventure.");
 			else addButton(14, "Return", returnFromUpdateAscension).hint("Go back to your camp after updating your Ascension perks. (Only available during updates that refund points like this)");
+		}
+		private function genMemPatch():void{	//Cause for some fuckall rason the status gets wiped on ascending.
+			if (player.hasStatusEffect(StatusEffects.TranscendentalGeneticMemory))
+				player.removeStatusEffect(StatusEffects.TranscendentalGeneticMemory);
+			if (player.hasPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX)) {
+				var permedMetamorphCount:int = 0;
+				for (var k:* in Metamorph.PermanentMemoryStorage) permedMetamorphCount++;
+				player.createStatusEffect(StatusEffects.TranscendentalGeneticMemory, 15 * player.perkv1(PerkLib.AscensionTrancendentalGeneticMemoryStageX), permedMetamorphCount, 0, 0);
+			}
 		}
 		private function ascensionPerkMenu():void {
 			clearOutput();
@@ -1846,18 +1895,31 @@ import coc.view.MainView;
 			var maxRank:int = 5;
 			maxRank += maxRankValue();
 			menu();
-			addButton(0, "Killing Intent", ascensionPerkSelection, PerkLib.AscensionKillingIntent, MAX_KILLINGINTENT_LEVEL, null, PerkLib.AscensionKillingIntent.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionKillingIntent) + " / " + MAX_KILLINGINTENT_LEVEL);
-			addButton(1, "Bloodlust", ascensionPerkSelection, PerkLib.AscensionBloodlust, MAX_BLOODLUST_LEVEL, null, PerkLib.AscensionBloodlust.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionBloodlust) + " / " + MAX_BLOODLUST_LEVEL);
-			addButton(2, "Mysticality", ascensionPerkSelection, PerkLib.AscensionMysticality, MAX_MYSTICALITY_LEVEL, null, PerkLib.AscensionMysticality.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionMysticality) + " / " + MAX_MYSTICALITY_LEVEL);
-			addButton(3, "S.Enlight.", ascensionPerkSelection, PerkLib.AscensionSpiritualEnlightenment, MAX_SPIRITUALENLIGHTENMENT_LEVEL, null, PerkLib.AscensionSpiritualEnlightenment.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionSpiritualEnlightenment) + " / " + MAX_SPIRITUALENLIGHTENMENT_LEVEL);
-			addButton(4, "Tolerance", ascensionPerkSelection, PerkLib.AscensionTolerance, MAX_TOLERANCE_LEVEL, null, PerkLib.AscensionTolerance.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionTolerance) + " / " + MAX_TOLERANCE_LEVEL);
-			addButton(5, "Fertility", ascensionPerkSelection, PerkLib.AscensionFertility, MAX_FERTILITY_LEVEL, null, PerkLib.AscensionFertility.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionFertility) + " / " + MAX_FERTILITY_LEVEL);
-			addButton(6, "Virility", ascensionPerkSelection, PerkLib.AscensionVirility, MAX_VIRILITY_LEVEL, null, PerkLib.AscensionVirility.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionVirility) + " / " + MAX_VIRILITY_LEVEL);
-			addButton(7, "Wisdom", ascensionPerkSelection, PerkLib.AscensionWisdom, MAX_WISDOM_LEVEL, null, PerkLib.AscensionWisdom.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionWisdom) + " / " + maxRank);
-			addButton(8, "Milk Faucet", ascensionPerkSelection, PerkLib.AscensionMilkFaucet, MAX_MILK_FAUCET_LEVEL, null, PerkLib.AscensionMilkFaucet.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionMilkFaucet) + " / " + MAX_MILK_FAUCET_LEVEL);
-			addButton(9, "Cum Hose", ascensionPerkSelection, PerkLib.AscensionCumHose, MAX_CUM_HOSE_LEVEL, null, PerkLib.AscensionCumHose.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionCumHose) + " / " + MAX_CUM_HOSE_LEVEL);
-			addButton(10, "Fortune", ascensionPerkSelection, PerkLib.AscensionFortune, MAX_FORTUNE_LEVEL, null, PerkLib.AscensionFortune.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionFortune) + " / " + maxRank);
-			addButton(11, "Moral Shifter", ascensionPerkSelection, PerkLib.AscensionMoralShifter, MAX_MORALSHIFTER_LEVEL, null, PerkLib.AscensionMoralShifter.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionMoralShifter) + " / " + MAX_MORALSHIFTER_LEVEL);
+			var limitReached:String = "Limit Reached";
+			addButton(0, "Killing Intent", ascensionPerkSelection, PerkLib.AscensionKillingIntent, MAX_KILLINGINTENT_LEVEL, null, PerkLib.AscensionKillingIntent.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionKillingIntent) + " / " + MAX_KILLINGINTENT_LEVEL)
+				.disableIf(player.perkv1(PerkLib.AscensionKillingIntent) >= MAX_KILLINGINTENT_LEVEL, limitReached);
+			addButton(1, "Bloodlust", ascensionPerkSelection, PerkLib.AscensionBloodlust, MAX_BLOODLUST_LEVEL, null, PerkLib.AscensionBloodlust.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionBloodlust) + " / " + MAX_BLOODLUST_LEVEL)
+				.disableIf(player.perkv1(PerkLib.AscensionBloodlust) >= MAX_BLOODLUST_LEVEL, limitReached);
+			addButton(2, "Mysticality", ascensionPerkSelection, PerkLib.AscensionMysticality, MAX_MYSTICALITY_LEVEL, null, PerkLib.AscensionMysticality.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionMysticality) + " / " + MAX_MYSTICALITY_LEVEL)
+				.disableIf(player.perkv1(PerkLib.AscensionMysticality) >= MAX_MYSTICALITY_LEVEL, limitReached);
+			addButton(3, "S.Enlight.", ascensionPerkSelection, PerkLib.AscensionSpiritualEnlightenment, MAX_SPIRITUALENLIGHTENMENT_LEVEL, null, PerkLib.AscensionSpiritualEnlightenment.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionSpiritualEnlightenment) + " / " + MAX_SPIRITUALENLIGHTENMENT_LEVEL)
+				.disableIf(player.perkv1(PerkLib.AscensionSpiritualEnlightenment) >= MAX_SPIRITUALENLIGHTENMENT_LEVEL, limitReached);
+			addButton(4, "Tolerance", ascensionPerkSelection, PerkLib.AscensionTolerance, MAX_TOLERANCE_LEVEL, null, PerkLib.AscensionTolerance.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionTolerance) + " / " + MAX_TOLERANCE_LEVEL)
+				.disableIf(player.perkv1(PerkLib.AscensionTolerance) >= MAX_TOLERANCE_LEVEL, limitReached);
+			addButton(5, "Fertility", ascensionPerkSelection, PerkLib.AscensionFertility, MAX_FERTILITY_LEVEL, null, PerkLib.AscensionFertility.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionFertility) + " / " + MAX_FERTILITY_LEVEL)
+				.disableIf(player.perkv1(PerkLib.AscensionFertility) >= MAX_FERTILITY_LEVEL, limitReached);
+			addButton(6, "Virility", ascensionPerkSelection, PerkLib.AscensionVirility, MAX_VIRILITY_LEVEL, null, PerkLib.AscensionVirility.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionVirility) + " / " + MAX_VIRILITY_LEVEL)
+				.disableIf(player.perkv1(PerkLib.AscensionVirility) >= MAX_VIRILITY_LEVEL, limitReached);
+			addButton(7, "Wisdom", ascensionPerkSelection, PerkLib.AscensionWisdom, MAX_WISDOM_LEVEL, null, PerkLib.AscensionWisdom.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionWisdom) + " / " + maxRank)
+				.disableIf(player.perkv1(PerkLib.AscensionWisdom) >= maxRank, limitReached);
+			addButton(8, "Milk Faucet", ascensionPerkSelection, PerkLib.AscensionMilkFaucet, MAX_MILK_FAUCET_LEVEL, null, PerkLib.AscensionMilkFaucet.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionMilkFaucet) + " / " + MAX_MILK_FAUCET_LEVEL)
+				.disableIf(player.perkv1(PerkLib.AscensionMilkFaucet) >= MAX_MILK_FAUCET_LEVEL, limitReached);
+			addButton(9, "Cum Hose", ascensionPerkSelection, PerkLib.AscensionCumHose, MAX_CUM_HOSE_LEVEL, null, PerkLib.AscensionCumHose.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionCumHose) + " / " + MAX_CUM_HOSE_LEVEL)
+				.disableIf(player.perkv1(PerkLib.AscensionCumHose) >= MAX_CUM_HOSE_LEVEL, limitReached);
+			addButton(10, "Fortune", ascensionPerkSelection, PerkLib.AscensionFortune, MAX_FORTUNE_LEVEL, null, PerkLib.AscensionFortune.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionFortune) + " / " + maxRank)
+				.disableIf(player.perkv1(PerkLib.AscensionFortune) >= maxRank, limitReached);
+			addButton(11, "Moral Shifter", ascensionPerkSelection, PerkLib.AscensionMoralShifter, MAX_MORALSHIFTER_LEVEL, null, PerkLib.AscensionMoralShifter.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionMoralShifter) + " / " + MAX_MORALSHIFTER_LEVEL)
+				.disableIf(player.perkv1(PerkLib.AscensionMoralShifter) >= MAX_MORALSHIFTER_LEVEL, limitReached);
 			addButton(14, "Back", ascensionMenu);
 		}
 		private function ascensionPerkMenu2():void {
@@ -1865,20 +1927,35 @@ import coc.view.MainView;
 			outputText("You can spend your Ascension Perk Points on special perks not available at level-up!");
 			outputText("\n\nAscension Perk Points: " + player.ascensionPerkPoints);
 			menu();
-			addButton(0, "Desires", ascensionPerkSelection2, PerkLib.AscensionDesires, MAX_DESIRES_LEVEL, null, PerkLib.AscensionDesires.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionDesires) + " / " + MAX_DESIRES_LEVEL);
-			addButton(1, "Endurance", ascensionPerkSelection2, PerkLib.AscensionEndurance, MAX_ENDURANCE_LEVEL, null, PerkLib.AscensionEndurance.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionEndurance) + " / " + MAX_ENDURANCE_LEVEL);
-			addButton(2, "Hardiness", ascensionPerkSelection2, PerkLib.AscensionHardiness, MAX_HARDINESS_LEVEL, null, PerkLib.AscensionHardiness.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionHardiness) + " / " + MAX_HARDINESS_LEVEL);
-			addButton(3, "Soul Purity", ascensionPerkSelection2, PerkLib.AscensionSoulPurity, MAX_SOULPURITY_LEVEL, null, PerkLib.AscensionSoulPurity.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionSoulPurity) + " / " + MAX_SOULPURITY_LEVEL);
-			addButton(4, "Inner Power", ascensionPerkSelection2, PerkLib.AscensionInnerPower, MAX_INNERPOWER_LEVEL, null, PerkLib.AscensionInnerPower.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionInnerPower) + " / " + MAX_INNERPOWER_LEVEL);
-			addButton(5, "Fury", ascensionPerkSelection2, PerkLib.AscensionFury, MAX_FURY_LEVEL, null, PerkLib.AscensionFury.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionFury) + " / " + MAX_FURY_LEVEL);
-			addButton(6, "Transhuman.", ascensionPerkSelection2, PerkLib.AscensionTranshumanism, MAX_TRANSHUMANISM_LEVEL, null, PerkLib.AscensionTranshumanism.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionTranshumanism) + " / " + MAX_TRANSHUMANISM_LEVEL);
-			addButton(7, "T-Human.ST", ascensionPerkSelection2, PerkLib.AscensionTranshumanismStr, MAX_TRANSHUMANISM_STR_LEVEL, null, PerkLib.AscensionTranshumanismStr.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionTranshumanismStr) + " / " + MAX_TRANSHUMANISM_STR_LEVEL);
-			addButton(8, "T-Human.TO", ascensionPerkSelection2, PerkLib.AscensionTranshumanismTou, MAX_TRANSHUMANISM_TOU_LEVEL, null, PerkLib.AscensionTranshumanismTou.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionTranshumanismTou) + " / " + MAX_TRANSHUMANISM_TOU_LEVEL);
-			addButton(9, "T-Human.SP", ascensionPerkSelection2, PerkLib.AscensionTranshumanismSpe, MAX_TRANSHUMANISM_SPE_LEVEL, null, PerkLib.AscensionTranshumanismSpe.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionTranshumanismSpe) + " / " + MAX_TRANSHUMANISM_SPE_LEVEL);
-			addButton(10, "T-Human.IN", ascensionPerkSelection2, PerkLib.AscensionTranshumanismInt, MAX_TRANSHUMANISM_INT_LEVEL, null, PerkLib.AscensionTranshumanismInt.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionTranshumanismInt) + " / " + MAX_TRANSHUMANISM_INT_LEVEL);
-			addButton(11, "T-Human.WI", ascensionPerkSelection2, PerkLib.AscensionTranshumanismWis, MAX_TRANSHUMANISM_WIS_LEVEL, null, PerkLib.AscensionTranshumanismWis.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionTranshumanismWis) + " / " + MAX_TRANSHUMANISM_WIS_LEVEL);
-			addButton(12, "T-Human.Li", ascensionPerkSelection2, PerkLib.AscensionTranshumanismLib, MAX_TRANSHUMANISM_LIB_LEVEL, null, PerkLib.AscensionTranshumanismLib.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionTranshumanismLib) + " / " + MAX_TRANSHUMANISM_LIB_LEVEL);
-			addButton(13, "T-Human.SE", ascensionPerkSelection2, PerkLib.AscensionTranshumanismSen, MAX_TRANSHUMANISM_SEN_LEVEL, null, PerkLib.AscensionTranshumanismSen.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionTranshumanismSen) + " / " + MAX_TRANSHUMANISM_SEN_LEVEL);
+            var limitReached:String = "Limit Reached";
+			addButton(0, "Desires", ascensionPerkSelection2, PerkLib.AscensionDesires, MAX_DESIRES_LEVEL, null, PerkLib.AscensionDesires.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionDesires) + " / " + MAX_DESIRES_LEVEL)
+                    .disableIf(player.perkv1(PerkLib.AscensionDesires) >= MAX_DESIRES_LEVEL, limitReached);
+			addButton(1, "Endurance", ascensionPerkSelection2, PerkLib.AscensionEndurance, MAX_ENDURANCE_LEVEL, null, PerkLib.AscensionEndurance.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionEndurance) + " / " + MAX_ENDURANCE_LEVEL)
+                    .disableIf(player.perkv1(PerkLib.AscensionEndurance) >= MAX_ENDURANCE_LEVEL, limitReached);
+			addButton(2, "Hardiness", ascensionPerkSelection2, PerkLib.AscensionHardiness, MAX_HARDINESS_LEVEL, null, PerkLib.AscensionHardiness.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionHardiness) + " / " + MAX_HARDINESS_LEVEL)
+                    .disableIf(player.perkv1(PerkLib.AscensionHardiness) >= MAX_HARDINESS_LEVEL, limitReached);
+			addButton(3, "Soul Purity", ascensionPerkSelection2, PerkLib.AscensionSoulPurity, MAX_SOULPURITY_LEVEL, null, PerkLib.AscensionSoulPurity.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionSoulPurity) + " / " + MAX_SOULPURITY_LEVEL)
+                    .disableIf(player.perkv1(PerkLib.AscensionSoulPurity) >= MAX_SOULPURITY_LEVEL, limitReached);
+			addButton(4, "Inner Power", ascensionPerkSelection2, PerkLib.AscensionInnerPower, MAX_INNERPOWER_LEVEL, null, PerkLib.AscensionInnerPower.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionInnerPower) + " / " + MAX_INNERPOWER_LEVEL)
+                    .disableIf(player.perkv1(PerkLib.AscensionInnerPower) >= MAX_INNERPOWER_LEVEL, limitReached);
+			addButton(5, "Fury", ascensionPerkSelection2, PerkLib.AscensionFury, MAX_FURY_LEVEL, null, PerkLib.AscensionFury.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionFury) + " / " + MAX_FURY_LEVEL)
+                    .disableIf(player.perkv1(PerkLib.AscensionFury) >= MAX_FURY_LEVEL, limitReached);
+			addButton(6, "Transhuman.", ascensionPerkSelection2, PerkLib.AscensionTranshumanism, MAX_TRANSHUMANISM_LEVEL, null, PerkLib.AscensionTranshumanism.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionTranshumanism) + " / " + MAX_TRANSHUMANISM_LEVEL)
+                    .disableIf(player.perkv1(PerkLib.AscensionTranshumanism) >= MAX_TRANSHUMANISM_LEVEL, limitReached);
+			addButton(7, "T-Human.ST", ascensionPerkSelection2, PerkLib.AscensionTranshumanismStr, MAX_TRANSHUMANISM_STR_LEVEL, null, PerkLib.AscensionTranshumanismStr.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionTranshumanismStr) + " / " + MAX_TRANSHUMANISM_STR_LEVEL)
+				.disableIf(player.perkv1(PerkLib.AscensionTranshumanismStr) >= MAX_TRANSHUMANISM_STR_LEVEL, limitReached);
+			addButton(8, "T-Human.TO", ascensionPerkSelection2, PerkLib.AscensionTranshumanismTou, MAX_TRANSHUMANISM_TOU_LEVEL, null, PerkLib.AscensionTranshumanismTou.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionTranshumanismTou) + " / " + MAX_TRANSHUMANISM_TOU_LEVEL)
+				.disableIf(player.perkv1(PerkLib.AscensionTranshumanismTou) >= MAX_TRANSHUMANISM_TOU_LEVEL, limitReached);
+			addButton(9, "T-Human.SP", ascensionPerkSelection2, PerkLib.AscensionTranshumanismSpe, MAX_TRANSHUMANISM_SPE_LEVEL, null, PerkLib.AscensionTranshumanismSpe.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionTranshumanismSpe) + " / " + MAX_TRANSHUMANISM_SPE_LEVEL)
+				.disableIf(player.perkv1(PerkLib.AscensionTranshumanismSpe) >= MAX_TRANSHUMANISM_SPE_LEVEL, limitReached);
+			addButton(10, "T-Human.IN", ascensionPerkSelection2, PerkLib.AscensionTranshumanismInt, MAX_TRANSHUMANISM_INT_LEVEL, null, PerkLib.AscensionTranshumanismInt.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionTranshumanismInt) + " / " + MAX_TRANSHUMANISM_INT_LEVEL)
+				.disableIf(player.perkv1(PerkLib.AscensionTranshumanismInt) >= MAX_TRANSHUMANISM_INT_LEVEL, limitReached);
+			addButton(11, "T-Human.WI", ascensionPerkSelection2, PerkLib.AscensionTranshumanismWis, MAX_TRANSHUMANISM_WIS_LEVEL, null, PerkLib.AscensionTranshumanismWis.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionTranshumanismWis) + " / " + MAX_TRANSHUMANISM_WIS_LEVEL)
+				.disableIf(player.perkv1(PerkLib.AscensionTranshumanismWis) >= MAX_TRANSHUMANISM_WIS_LEVEL, limitReached);
+			addButton(12, "T-Human.Li", ascensionPerkSelection2, PerkLib.AscensionTranshumanismLib, MAX_TRANSHUMANISM_LIB_LEVEL, null, PerkLib.AscensionTranshumanismLib.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionTranshumanismLib) + " / " + MAX_TRANSHUMANISM_LIB_LEVEL)
+				.disableIf(player.perkv1(PerkLib.AscensionTranshumanismLib) >= MAX_TRANSHUMANISM_LIB_LEVEL, limitReached);
+			addButton(13, "T-Human.SE", ascensionPerkSelection2, PerkLib.AscensionTranshumanismSen, MAX_TRANSHUMANISM_SEN_LEVEL, null, PerkLib.AscensionTranshumanismSen.longDesc + "\n\nCurrent level: " + player.perkv1(PerkLib.AscensionTranshumanismSen) + " / " + MAX_TRANSHUMANISM_SEN_LEVEL)
+				.disableIf(player.perkv1(PerkLib.AscensionTranshumanismSen) >= MAX_TRANSHUMANISM_SEN_LEVEL, limitReached);
 			addButton(14, "Back", ascensionMenu);
 		}
 		private function maxRankValue():Number {
@@ -2117,13 +2194,15 @@ import coc.view.MainView;
 			}
 		}
 
-		private function perkRPConfirm(tier:int, perk:PerkType, pCost:int):void{
+		private function perkRPConfirm(tier:int, perk:PerkType, pCost:int, RPP:int = 1):void{
 			player.ascensionPerkPoints -= pCost* tier;
 			if (tier == 1) player.createPerk(perk,1,0,0,1);
 			else player.setPerkValue(perk,1,player.perkv1(perk) + 1);
 			clearOutput();
 			outputText("You have acquired "+ perk.name() + "!");
-			doNext(rarePerks1);
+			if (RPP == 1) doNext(rarePerks1);
+			else doNext(rarePerks2);
+
 		}
 
 		private function perkBloodlineHeritage():void {
@@ -2175,53 +2254,8 @@ import coc.view.MainView;
 			outputText("\n\nAscension Perk Points: " + player.ascensionPerkPoints);
 			menu();
 			var btn:int = 0;
-			//perkMetamorphAscCheck(btn);
-			//btn++
-			//Deprecating on next public Build.
-			if (player.ascensionPerkPoints >= 30 && !player.hasPerk(PerkLib.AscensionNaturalMetamorph)) addButton(btn, "N.Metamorph", perkNaturalMetamorph).hint("Perk allowing you to start with perks Genetic Memory and Metamorph.\n\nCost: 30 points");
-			else if (player.ascensionPerkPoints < 30 && !player.hasPerk(PerkLib.AscensionNaturalMetamorph)) addButtonDisabled(btn, "N.Metamorph", "You do not have enough ascension perk points!");
-			else addButtonDisabled(btn, "N.Metamorph", "You already bought Natural Metamorph perk.");
-			btn++;
-			if (player.hasPerk(PerkLib.AscensionNaturalMetamorph)) {
-				if (player.ascensionPerkPoints >= 15 && !player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1)) addButton(btn, "T.G.M.(S1)", perkTranscendentalGeneticMemoryStage1).hint("Perk allowing to retain up to 15 unlocked options from Metamorph menu.\n\nCost: 15 points");
-				else if (player.ascensionPerkPoints < 15 && !player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1)) addButtonDisabled(btn, "T.G.M.(S1)", "You not have enough ascension perk points!");
-				else addButtonDisabled(btn, "T.G.M.(S1)", "You already bought Transcendental Genetic Memory (Stage 1) perk.");
-			}
-			else addButtonDisabled(btn, "T.G.M.(S1)", "You need to buy Natural Metamorph perk first.");
-			btn++;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1)) {
-				if (player.ascensionPerkPoints >= 30 && !player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage2)) addButton(btn, "T.G.M.(S2)", perkTranscendentalGeneticMemoryStage2).hint("Perk allowing to retain up to 30(45) unlocked options from Metamorph menu.\n\nCost: 30 points");
-				else if (player.ascensionPerkPoints < 30) addButtonDisabled(btn, "T.G.M.(S2)", "You not have enough ascension perk points!");
-				else addButtonDisabled(btn, "T.G.M.(S2)", "You already bought Transcendental Genetic Memory (Stage 2) perk.");
-			}
-			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && !player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1)) addButtonDisabled(btn, "T.G.M.(S2)", "You need to buy Transcendental Genetic Memory (Stage 1) perk first.");
-			else addButtonDisabled(btn, "T.G.M.(S2)", "You need ascend more times to buy this perk.");
-			btn++;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage2)) {
-				if (player.ascensionPerkPoints >= 45 && !player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage3)) addButton(btn, "T.G.M.(S3)", perkTranscendentalGeneticMemoryStage3).hint("Perk allowing to retain up to 45(90) unlocked options from Metamorph menu.\n\nCost: 45 points");
-				else if (player.ascensionPerkPoints < 45) addButtonDisabled(btn, "T.G.M.(S3)", "You not have enough ascension perk points!");
-				else addButtonDisabled(btn, "T.G.M.(S3)", "You already bought Transcendental Genetic Memory (Stage 3) perk.");
-			}
-			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && !player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage2)) addButtonDisabled(btn, "T.G.M.(S3)", "You need to buy Transcendental Genetic Memory (Stage 2) perk first.");
-			else addButtonDisabled(btn, "T.G.M.(S3)", "You need ascend more times to buy this perk.");
-			btn++;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3 && player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage3)) {
-				if (player.ascensionPerkPoints >= 60 && !player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage4)) addButton(btn, "T.G.M.(S4)", perkTranscendentalGeneticMemoryStage4).hint("Perk allowing to retain up to 60(150) unlocked options from Metamorph menu.\n\nCost: 60 points");
-				else if (player.ascensionPerkPoints < 60) addButtonDisabled(btn, "T.G.M.(S4)", "You not have enough ascension perk points!");
-				else addButtonDisabled(btn, "T.G.M.(S4)", "You already bought Transcendental Genetic Memory (Stage 4) perk.");
-			}
-			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3 && !player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage3)) addButtonDisabled(btn, "T.G.M.(S4)", "You need to buy Transcendental Genetic Memory (Stage 3) perk first.");
-			else addButtonDisabled(btn, "T.G.M.(S4)", "You need ascend more times to buy this perk.");
-			btn++;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 4 && player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage4)) {
-				if (player.ascensionPerkPoints >= 75 && !player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage5)) addButton(btn, "T.G.M.(S5)", perkTranscendentalGeneticMemoryStage5).hint("Perk allowing to retain up to 75(225) unlocked options from Metamorph menu.\n\nCost: 75 points");
-				else if (player.ascensionPerkPoints < 75) addButtonDisabled(btn, "T.G.M.(S5)", "You not have enough ascension perk points!");
-				else addButtonDisabled(btn, "T.G.M.(S5)", "You already bought Transcendental Genetic Memory (Stage 5) perk.");
-			}
-			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 4 && !player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage4)) addButtonDisabled(btn, "T.G.M.(S5)", "You need to buy Transcendental Genetic Memory (Stage 4) perk first.");
-			else addButtonDisabled(btn, "T.G.M.(S5)", "You need ascend more times to buy this perk.");
-			btn++;
-			//End of deprecation.
+			perkMetamorphAscCheck(btn);
+			btn++
 			if (player.ascensionPerkPoints >= 5 && !player.hasPerk(PerkLib.AscensionUnderdog)) addButton(btn, "Underdog", perkUnderdog).hint("Perk allowing you to double base exp gains for fighting enemies above PC level, increasing max lvl diff when bonus is in effect will still increase from 20 to 40 above current PC lvl.\n\nCost: 5 points");// And... to live up to underdog role PC will 'accidentally' find few places to further power-up.
 			else if (player.ascensionPerkPoints < 5 && !player.hasPerk(PerkLib.AscensionUnderdog)) addButtonDisabled(btn, "Underdog", "You do not have enough ascension perk points!");
 			else addButtonDisabled(btn, "Underdog", "You already bought Underdog perk.");
@@ -2261,15 +2295,15 @@ import coc.view.MainView;
 			addButton(14, "Back", ascensionMenu);
 		}
 
-		//Unused for now
-		/*
 		private function perkMetamorphAscCheck(btn:int):void{
 			if (!player.hasPerk(PerkLib.AscensionNaturalMetamorph)){
 				if (player.ascensionPerkPoints < 30){
 					addButtonDisabled(btn, "Nat.MetaMph", "You do not have enough point to acquire Natural Metamorph.");
 				}
 				else{
-					perkRPConfirm(1,PerkLib.AscensionNaturalMetamorph, 30);
+					addButton(btn, "Nat.MetaMph", curry(perkRPConfirm, 1, PerkLib.AscensionNaturalMetamorph, 30, 2))
+						.hint("Gain free perks Genetic Memory, Metamorph, MetamorphEx at the start of the game\n\n"
+							+ "Cost: 30 points.");
 				}
 			}
 			else{
@@ -2279,7 +2313,9 @@ import coc.view.MainView;
 						addButtonDisabled(btn, "Gen. Memory", "You do not have enough point to acquire Genetic Memory.");
 					}
 					else{
-						addButton(btn, "Gen. Memory", perkRPConfirm, 1, PerkLib.AscensionTrancendentalGeneticMemoryStageX, pCost *1);
+						addButton(btn, "Gen. Memory", curry(perkRPConfirm, 1, PerkLib.AscensionTrancendentalGeneticMemoryStageX, pCost, 2))
+							.hint("Unlocks an ascension menu to make some metamorphs permanent and have them unlocked in your next runs.\n\n"
+								+ "Cost: " + pCost * 1 + " points.");
 					}
 				}
 				else {
@@ -2294,81 +2330,20 @@ import coc.view.MainView;
 						addButtonDisabled(btn, "Gen. Memory", "You have acquired the highest tier available.");
 					}
 					else {
-						addButton(btn, "Gen. Memory", perkRPConfirm, tier, PerkLib.AscensionTrancendentalGeneticMemoryStageX, pCost * tier);
 						if (tier == 1){
 							player.createStatusEffect(StatusEffects.TranscendentalGeneticMemory, 15, 0, 0, 9000);
 						}
 						else{
-							player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 1, 15 * tier);
+							player.changeStatusValue(StatusEffects.TranscendentalGeneticMemory, 1, pCost * tier);
 						}
+						addButton(btn, "Gen. Memory", curry(perkRPConfirm, tier, PerkLib.AscensionTrancendentalGeneticMemoryStageX, pCost, 2))
+							.hint("Increases the maximum number of permed metamorphs."
+								+ "Cost: " + pCost * tier + " points.");
 					}
 				}
 			}
 
 		}
-		*/
-
-		//Deprecating on next public build.
-		private function perkNaturalMetamorph():void {
-			player.ascensionPerkPoints -= 30;
-			player.createPerk(PerkLib.AscensionNaturalMetamorph,0,0,0,1);
-			clearOutput();
-			outputText("You gained Natural Metamorph perk.");
-			doNext(rarePerks2);
-		}
-		private function perkTranscendentalGeneticMemoryStage1():void {
-			player.ascensionPerkPoints -= 15;
-			player.createPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1, 0, 0, 0, 1);
-			player.createStatusEffect(StatusEffects.TranscendentalGeneticMemory, 15, 0, 0, 9000);
-			clearOutput();
-			outputText("Your gained Transcendental Genetic Memory (Stage 1) perk.");
-			doNext(rarePerks2);
-		}
-		private function perkTranscendentalGeneticMemoryStage2():void {
-			player.ascensionPerkPoints -= 30;
-			player.createPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage2, 0, 0, 0, 1);
-			player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 1, 30);
-			clearOutput();
-			outputText("Your gained Transcendental Genetic Memory (Stage 2) perk.");
-			doNext(rarePerks2);
-		}
-		private function perkTranscendentalGeneticMemoryStage3():void {
-			player.ascensionPerkPoints -= 45;
-			player.createPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage3, 0, 0, 0, 1);
-			player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 1, 45);
-			clearOutput();
-			outputText("Your gained Transcendental Genetic Memory (Stage 3) perk.");
-			doNext(rarePerks2);
-		}
-		private function perkTranscendentalGeneticMemoryStage4():void {
-			player.ascensionPerkPoints -= 60;
-			player.createPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage4, 0, 0, 0, 1);
-			player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 1, 60);
-			clearOutput();
-			outputText("Your gained Transcendental Genetic Memory (Stage 4) perk.");
-			doNext(rarePerks2);
-		}
-		private function perkTranscendentalGeneticMemoryStage5():void {
-			player.ascensionPerkPoints -= 75;
-			player.createPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage5, 0, 0, 0, 1);
-			player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 1, 75);
-			clearOutput();
-			outputText("Your gained Transcendental Genetic Memory (Stage 5) perk.");
-			doNext(rarePerks2);
-		}
-		//Unused for now
-		/*
-		private function perkTranscendentalGeneticMemoryStage6():void {
-			player.ascensionPerkPoints -= 90;
-			player.createPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage5, 0, 0, 0, 1);
-			player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 1, 90);
-			clearOutput();
-			outputText("Your gained Transcendental Genetic Memory (Stage 6) perk.");
-			doNext(rarePerks2);
-		}
-		*/
-
-		//End of Deprecation.
 		private function perkUnderdog():void {
 			player.ascensionPerkPoints -= 5;
 			player.createPerk(PerkLib.AscensionUnderdog,0,0,0,1);
@@ -2471,9 +2446,14 @@ import coc.view.MainView;
 				player.createPerk(PerkLib.PastLifeWhore,0,0,0,1);
 				historyTopastlife2();
 			}
+			else if (player.hasPerk(PerkLib.HistoryFeral)) {
+				player.removePerk(PerkLib.HistoryFeral);
+				player.createPerk(PerkLib.PastLifeFeral,0,0,0,1);
+				historyTopastlife2();
+			}
 			else {
 				clearOutput();
-				outputText("You not have any History perk to change into Past Life perk.");
+				outputText("You don't have any History perk to change into Past Life perk.");
 			}
 			doNext(ascensionMenu);
 		}
@@ -2537,7 +2517,7 @@ import coc.view.MainView;
 
 			else {
 				clearOutput();
-				outputText("You not have any Descendant perks to change into Bloodline perks.");
+				outputText("You don't have any Descendant perks to change into Bloodline perks.");
 			}
 			doNext(ascensionMenu);
 		}
@@ -2587,6 +2567,9 @@ import coc.view.MainView;
 				if (player.hasPerk(PerkLib.FerasBoonSeeder) && player.perkv4(PerkLib.FerasBoonSeeder) < 1) addButton(12, "FerasB.S.", permanentizePerk1, PerkLib.FerasBoonSeeder);
 				else if (player.hasPerk(PerkLib.FerasBoonSeeder) && player.perkv4(PerkLib.FerasBoonSeeder) > 0) addButtonDisabled(12, "FerasB.S.", "Feras Boon Seeder perk is already made permanent and will carry over in all subsequent ascensions.");
 				else addButtonDisabled(12, "FerasB.S.", "Feras Boon Seeder");
+				if (player.hasPerk(PerkLib.FerasBoonWideOpen) && player.perkv4(PerkLib.FerasBoonWideOpen) < 1) addButton(13, "FerasB.W.O.", permanentizePerk1, PerkLib.FerasBoonWideOpen);
+				else if (player.hasPerk(PerkLib.FerasBoonWideOpen) && player.perkv4(PerkLib.FerasBoonWideOpen) > 0) addButtonDisabled(13, "FerasB.W.O.", "Feras Boon Wide Open perk is already made permanent and will carry over in all subsequent ascensions.");
+				else addButtonDisabled(13, "FerasB.W.O.", "Feras Boon Wide Open");
 			}
 			if (page == 2) {
 				if (player.hasPerk(PerkLib.FireLord) && player.perkv4(PerkLib.FireLord) < 1) addButton(0, "FireLord", permanentizePerk2, PerkLib.FireLord);
@@ -2721,6 +2704,11 @@ import coc.view.MainView;
 
 			const menusList: Array = [
 				{
+					name: "Complete",
+					func: accessCompleteMenu,
+					hint: "Requires 6 tiers of Genetic Memories bought"
+				},
+				{
 					name: "Hair",
 					func: accessHairMenu
 				},
@@ -2779,6 +2767,34 @@ import coc.view.MainView;
 				{
 					name: "Tail",
 					func: accessTailMenu
+				},
+				{
+					name: "Breasts",
+					func: accessBreastsMenu
+				},
+				{
+					name: "Vagina Unlock",
+					func: accessVaginaUnlockMenu
+				},
+				{
+					name: "Vagina",
+					func: accessVaginaMenu
+				},
+				{
+					name: "PenisCount",
+					func: accessCockCountMenu
+				},
+				{
+					name: "Penis",
+					func: accessCockMenu
+				},
+				{
+					name: "Balls",
+					func: accessBallsMenu
+				},
+				{
+					name: "Specials",
+					func: accessSexSpecialsMenu
 				}
 			];
 
@@ -2791,11 +2807,16 @@ import coc.view.MainView;
 			var currentButton: int = 0;
 
 			for each (var menuObj: * in pageMenus) {
-				if (menuObj.hint) {
-					addButton(currentButton, menuObj.name, menuObj.func).hint(menuObj.hint);
-				} else {
-					addButton(currentButton, menuObj.name, menuObj.func);
-				}
+				if( menuObj.name == "Complete" && player.perkv1(PerkLib.AscensionTrancendentalGeneticMemoryStageX) < 5)
+                    addButtonDisabled(currentButton, menuObj.name, menuObj.func).hint(menuObj.hint);
+				else {
+                    if (menuObj.hint) {
+                        addButton(currentButton, menuObj.name, menuObj.func).hint(menuObj.hint);
+
+                    } else {
+                        addButton(currentButton, menuObj.name, menuObj.func);
+                    }
+                }
 				currentButton++;
 			}
 
@@ -2807,6 +2828,10 @@ import coc.view.MainView;
 			}
 
 			addButton(14, "Back", ascensionMenu);
+		}
+
+		private function accessCompleteMenu(currentPage: int = 0): void {
+			openPaginatedMetamorphMenu("Full Body", accessCompleteMenu, currentPage, RaceMem.Memories);
 		}
 
 		private function accessHornsMenu(currentPage: int = 0): void {
@@ -2879,6 +2904,34 @@ import coc.view.MainView;
 
 		private function accessTailMenu(currentPage: int = 0): void {
 			openPaginatedMetamorphMenu("Tail", accessTailMenu, currentPage, TailMem.Memories);
+		}
+
+		private function accessBreastsMenu(currentPage: int = 0): void {
+			openPaginatedMetamorphMenu("Breasts", accessBreastsMenu, currentPage, BreastMem.Memories);
+		}
+
+		private function accessVaginaUnlockMenu(currentPage: int = 0): void {
+			openPaginatedMetamorphMenu("Vagina Unlock", accessVaginaUnlockMenu, currentPage, VaginaCountMem.Memories);
+		}
+
+		private function accessVaginaMenu(currentPage: int = 0): void {
+			openPaginatedMetamorphMenu("Vagina", accessVaginaMenu, currentPage, VaginaMem.Memories);
+		}
+
+		private function accessCockMenu(currentPage: int = 0): void {
+			openPaginatedMetamorphMenu("Cock", accessCockMenu, currentPage, CockMem.Memories);
+		}
+
+		private function accessCockCountMenu(currentPage: int = 0): void {
+			openPaginatedMetamorphMenu("Cock Count", accessCockCountMenu, currentPage, CockCountMem.Memories);
+		}
+
+		private function accessBallsMenu(currentPage: int = 0): void {
+			openPaginatedMetamorphMenu("Balls", accessBallsMenu, currentPage, BallsMem.Memories);
+		}
+
+		private function accessSexSpecialsMenu(currentPage: int = 0): void {
+			openPaginatedMetamorphMenu("Specials", accessSexSpecialsMenu, currentPage, SpecialsMem.Memories);
 		}
 
 		private function openPaginatedMetamorphMenu (title: String, thisMenu: *, currentPage: int, memArray:Array): void {
@@ -3004,6 +3057,20 @@ import coc.view.MainView;
 
 		private function reincarnate():void {
 			Metamorph.resetMetamorph();
+			player.setArmor(armors.C_CLOTH, false, true);
+			player.unequipWeapon(false, true);
+			player.unequipWeaponRange(false, true);
+			player.unequipShield(false, true);
+			player.unequipHeadJewelry(false, true);
+			player.unequipNecklace(false, true);
+			player.unequipJewelry1(false, true);
+			player.unequipJewelry2(false, true);
+			player.unequipJewelry3(false, true);
+			player.unequipJewelry4(false, true);
+			player.unequipVehicle(false, true);
+			player.unequipMiscJewelry1(false, true);
+			player.unequipMiscJewelry2(false, true);
+			player.unequipWeaponFlyingSwords(false, true);
 			player.createKeyItem("Ascension", 0, 0, 0, 0);
 			customPlayerProfile = null;
 			newGameGo();
@@ -3032,7 +3099,6 @@ import coc.view.MainView;
 			player.gills.type = Gills.NONE;
 			player.arms.type = Arms.HUMAN;
 			player.wings.type = Wings.NONE;
-			player.wings.desc = "non-existant";
 			player.rearBody.type = RearBody.NONE;
 			player.lowerBody = LowerBody.HUMAN;
 			player.skin.base.pattern = Skin.PATTERN_NONE;
@@ -3041,42 +3107,7 @@ import coc.view.MainView;
 			player.tailType = Tail.NONE;
 			player.tailRecharge = 0;
 			player.level = 0;
-			player.masteryFeralCombatLevel = 0;
-			player.masteryFeralCombatXP = 0;
-			player.masteryGauntletLevel = 0;
-			player.masteryGauntletXP = 0;
-			player.masteryDaggerLevel = 0;
-			player.masteryDaggerXP = 0;
-			player.masterySwordLevel = 0;
-			player.masterySwordXP = 0;
-			player.masteryAxeLevel = 0;
-			player.masteryAxeXP = 0;
-			player.masteryMaceHammerLevel = 0;
-			player.masteryMaceHammerXP = 0;
-			player.masteryDuelingSwordLevel = 0;
-			player.masteryDuelingSwordXP = 0;
-			player.masteryPolearmLevel = 0;
-			player.masteryPolearmXP = 0;
-			player.masterySpearLevel = 0;
-			player.masterySpearXP = 0;
-			player.masteryWhipLevel = 0;
-			player.masteryWhipXP = 0;
-			player.masteryExoticLevel = 0;
-			player.masteryExoticXP = 0;
-			player.masteryArcheryLevel = 0;
-			player.masteryArcheryXP = 0;
-			player.masteryThrowingLevel = 0;
-			player.masteryThrowingXP = 0;
-			player.masteryFirearmsLevel = 0;
-			player.masteryFirearmsXP = 0;
-			player.dualWSLevel = 0;
-			player.dualWSXP = 0;
-			player.dualWNLevel = 0;
-			player.dualWNXP = 0;
-			player.dualWLLevel = 0;
-			player.dualWLXP = 0;
-			player.dualWFLevel = 0;
-			player.dualWFXP = 0;
+			player.initCombatMastery();
 			player.teaseLevel = 0;
 			player.teaseXP = 0;
 			player.herbalismLevel = 0;
@@ -3085,20 +3116,6 @@ import coc.view.MainView;
 			player.perkPoints = 0;
 			player.superPerkPoints = 0;
 			player.XP = 0;
-			player.setArmor(armors.C_CLOTH);
-			player.setWeapon(WeaponLib.FISTS);
-			player.setWeaponRange(WeaponRangeLib.NOTHING);
-			player.setShield(ShieldLib.NOTHING);
-			player.setHeadJewelry(HeadJewelryLib.NOTHING);
-			player.setNecklace(NecklaceLib.NOTHING);
-			player.setJewelry(JewelryLib.NOTHING);
-			player.setJewelry2(JewelryLib.NOTHING);
-			player.setJewelry3(JewelryLib.NOTHING);
-			player.setJewelry4(JewelryLib.NOTHING);
-			player.setVehicle(VehiclesLib.NOTHING);
-			player.setMiscJewelry(MiscJewelryLib.NOTHING);
-			player.setMiscJewelry2(MiscJewelryLib.NOTHING);
-			player.setWeaponFlyingSwords(FlyingSwordsLib.NOTHING);
 			inventory.clearStorage();
 			inventory.clearGearStorage();
 			inventory.initializeGearStorage();

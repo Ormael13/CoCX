@@ -4,12 +4,12 @@
  */
 package classes.Scenes.Places.HeXinDao 
 {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.Scenes.SceneLib;
-	import classes.internals.SaveableState;
-	
-	public class AdventurerGuild extends HeXinDaoAbstractContent implements SaveableState
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
+import classes.internals.SaveableState;
+
+public class AdventurerGuild extends HeXinDaoAbstractContent implements SaveableState
 	{
 		public static var Slot01:Number;
 		public static var Slot01Cap:Number;//imp skulls
@@ -20,14 +20,14 @@ package classes.Scenes.Places.HeXinDao
 		public static var Slot03Cap:Number;//minotaur horns
 		public static var Slot04:Number;
 		public static var Slot04Cap:Number;//demon skulls
-		//Iron plate
 		public static var Slot05:Number;
 		public static var Slot05Cap:Number;//feral tentacle beasts
+		//Iron plate
 		public static var Slot06:Number;
 		public static var Slot06Cap:Number;
-		//Bronze plate
 		public static var Slot07:Number;
 		public static var Slot07Cap:Number;
+		//Bronze plate
 		public static var Slot08:Number;
 		public static var Slot08Cap:Number;
 		public static var Slot09:Number;
@@ -314,14 +314,14 @@ package classes.Scenes.Places.HeXinDao
 		private function No():void {
 			clearOutput();
 			outputText("You aren’t interested in dungeon delving at the time. It's barely worth it while you're overburdened with your regular activities.");
-			doNext(curry(SceneLib.journeyToTheEast.enteringInn,false));
+			doNext(SceneLib.journeyToTheEast.enteringInn,false);
 		}
 		private function Yes():void{
 			clearOutput();
 			if (flags[kFLAGS.SPIRIT_STONES] < 5) {
 				outputText("Yeah sure, you will join. Or rather you would like to but you lack the required spirit stones for the membership fee.\n\n");
 				outputText("\"<i>It's ok just go to Moga Hen, he should be able to exchange those gem of yours for the local currency.</i>\"");
-				doNext(curry(SceneLib.journeyToTheEast.enteringInn,false));
+				doNext(SceneLib.journeyToTheEast.enteringInn,false);
 			}
 			else {
 				outputText("Yeah sure, you will join. You handle the ursine woman the spirit stones and sign the papers.\n\n");
@@ -446,12 +446,13 @@ package classes.Scenes.Places.HeXinDao
 					outputText("\"<i>Sorry [name] this job is only once per day. Come back tomorrow.</i>\"\n\n");
 				}
 				else if (player.statusEffectv1(StatusEffects.AdventureGuildQuests2) == 6) {
-					if (player.hasItem(useables.SEVTENT, 3)) {
+					if (player.hasItem(useables.SEVTENT, 3) || Slot05 >= 3) {
 						outputText("You turn in the quest and Yang nods in appreciation.\n\n");
 						outputText("\"<i>Good job there. I hope those plants did not prove to much trouble. Here is your payment.</i>\"\n\n");
 						player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter2, 1, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuests2, 1, 1);
-						player.destroyItems(useables.SEVTENT, 3);
+						if (Slot05 >= 3) Slot05 -= 3;
+						else player.destroyItems(useables.SEVTENT, 3);
 						flags[kFLAGS.SPIRIT_STONES] += 8;
 						statScreenRefresh();
 					}
@@ -462,12 +463,13 @@ package classes.Scenes.Places.HeXinDao
 					player.addStatusValue(StatusEffects.AdventureGuildQuests2, 1, 2);
 				}
 				else if (player.statusEffectv1(StatusEffects.AdventureGuildQuests2) == 3) {
-					if (player.hasItem(useables.SEVTENT, 2)) {
+					if (player.hasItem(useables.SEVTENT, 2) || Slot05 >= 2) {
 						outputText("You turn in the quest and Yang nods in appreciation.\n\n");
 						outputText("\"<i>Good job [name] here is your payment a special training scroll.</i>\"\n\n");
 						player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter2, 1, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuests2, 1, 1);
-						player.destroyItems(useables.SEVTENT, 2);
+						if (Slot05 >= 2) Slot05 -= 2;
+						else player.destroyItems(useables.SEVTENT, 2);
 						player.perkPoints += 1;
 					}
 					else outputText("You try turn in the quest but Yang tells you you don’t have enough tentacles yet.\n\n");
@@ -477,7 +479,7 @@ package classes.Scenes.Places.HeXinDao
 					player.addStatusValue(StatusEffects.AdventureGuildQuests2, 1, 1);
 				}
 				else {
-					if (player.hasItem(useables.SEVTENT, 1)) {
+					if (player.hasItem(useables.SEVTENT, 1) || Slot05 >= 1) {
 						outputText("You turn in the quest and Yang nods in appreciation.\n\n");
 						outputText("\"<i>My my, I wasn’t sure I would ever see you back.</i>\"\n\n");
 						outputText("Seems she misjudged you then?\n\n");
@@ -487,7 +489,8 @@ package classes.Scenes.Places.HeXinDao
 						player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter2, 1, 1);
 						player.addStatusValue(StatusEffects.AdventureGuildQuests2, 1, 1);
 						player.createPerk(PerkLib.SenseWrath, 0, 0, 0, 0);
-						player.destroyItems(useables.SEVTENT, 1);
+						if (Slot05 >= 1) Slot05 -= 1;
+						else player.destroyItems(useables.SEVTENT, 1);
 					}
 					else outputText("You try turn in the quest but Yang tells you you don’t have enough tentacles yet.\n\n");
 				}
@@ -557,7 +560,7 @@ package classes.Scenes.Places.HeXinDao
 						outputText("\"<i>Nice job [name] so about that special reward, it happens a traveling demon hunter has agreed to train whoever would kill demons in the art of slaying. Chika would you please come over? [name] cleared your bounty.</i>\"\n\n");
 						outputText("Chika appears to be a rattel morph with an eyepatch. Rattel, or honey badgers, are known for their ferocity; the set of throwing daggers and poison flasks hanging from her belt, the pair of scimitars on her side and the crossbow on her back tells everything you need about her, ");
 						outputText("she's clearly an expert killer. Chika's gaze goes through you and the inflexibility and sternness of it leaves you somewhat intimidated.\n\n");
-						outputText("\"<i>Doesn’t look like much... Ye sure " + player.mf("he", "she") + " smoked the targets?</i>\"\n\n");
+						outputText("\"<i>Doesn’t look like much... Ye sure [he] smoked the targets?</i>\"\n\n");
 						outputText("Yang goes by the affirmative.\n\n");
 						outputText("\"<i>Ye and I are going to have a lot of dealings in the future. But first I want ya to follow me out in the town training area. I have a few things I would like to teach ye.</i>\"\n\n");
 						outputText("You spend the four next hour with the rattel morph learning new demon killing tricks. By the end of your training you have accumulated a good bank of knowledge on demon weak points and how to exploit them. Chika leaves by the end warning that you and her will eventually meet again.\n\n");
@@ -610,7 +613,7 @@ package classes.Scenes.Places.HeXinDao
 					player.addStatusValue(StatusEffects.AdventureGuildQuests2, 2, 2);
 				}
 				else if (player.statusEffectv2(StatusEffects.AdventureGuildQuests2) == 3) {
-					if (player.hasItem(useables.FIMPSKL, 4) || Slot01 >= 4) {
+					if (player.hasItem(useables.FIMPSKL, 4) || Slot02 >= 4) {
 						outputText("You turn in the quest and Yang nods in appreciation.\n\n");
 						outputText("\"<i>Good job there. I heard those creatures are actually out there killing instead of raping, it’s quite chilling. Here is your payment a special training scroll.</i>\"\n\n");
 						player.addStatusValue(StatusEffects.AdventureGuildQuestsCounter2, 2, 1);
@@ -626,7 +629,7 @@ package classes.Scenes.Places.HeXinDao
 					player.addStatusValue(StatusEffects.AdventureGuildQuests2, 2, 1);
 				}
 				else {
-					if (player.hasItem(useables.FIMPSKL, 3) || Slot01 >= 3) {
+					if (player.hasItem(useables.FIMPSKL, 3) || Slot02 >= 3) {
 						outputText("You turn in the quest and Yang nods in appreciation.\n\n");
 						outputText("\"<i>My my, I wasn’t sure I would ever see you back.</i>\"\n\n");
 						outputText("Seems she misjudged you then?\n\n");
@@ -702,6 +705,7 @@ package classes.Scenes.Places.HeXinDao
 						if (Slot03 >= 2) Slot03 -= 2;
 						else player.destroyItems(useables.MINOHOR, 2);
 						inventory.takeItem(consumables.TCLEAVE, BoardkeeperYangQuest);
+						return;
 					}
 					else outputText("\"<i>Hey [name], I counted those horns and clearly you forgot a few. Get out there and bring me the remaining ones.</i>\"\n\n");
 				}
@@ -856,6 +860,7 @@ package classes.Scenes.Places.HeXinDao
 			outputText("\"<i>Guess there is no helping it then make sure she does not cause trouble.</i>\"\n\n");
 			doNext(SceneLib.galiaFollower.bringBackTheFemImp);
 		}
+		/*
 		public function BoardkeeperYangQuestEzekiel2():void {
 			clearOutput();
 			outputText("Placeholder for lazyLia writing ^^\n\n");//feral tentacle beasts capture
@@ -883,6 +888,7 @@ package classes.Scenes.Places.HeXinDao
 			outputText("Placeholder for lazyLia writing ^^\n\n");
 			doNext(BoardkeeperYangQuest);
 		}
+		*/
 		public function BoardkeeperYangGolemRetrievalJob():void {
 			clearOutput();
 			if (flags[kFLAGS.AURORA_LVL] == 0.3) {
@@ -890,7 +896,7 @@ package classes.Scenes.Places.HeXinDao
 				outputText("Yang nods \"<i>Yeah, sure we can do that. Just write a full job description and I will post it on the board. It will cost 10 spirit stones.</i>\"\n\n");
 				if (flags[kFLAGS.SPIRIT_STONES] < 10) {
 					outputText("You tell her you’ll be back with the stones the moment you have them.\n\n");
-					doNext(curry(SceneLib.journeyToTheEast.enteringInn,false));
+					doNext(SceneLib.journeyToTheEast.enteringInn,false);
 				}
 				else {
 					menu();
@@ -928,11 +934,13 @@ package classes.Scenes.Places.HeXinDao
 			outputText("\"<i>Me? No dear no I’m just the guild poster girl. I’m actually paid to stand there. That said there’s a few perk to it as I get to meet some of Mareth’s biggest badass face to face and sometime closer, if you catch my drift.</i>\"\n\n");
 			doNext(BoardkeeperYangTalk);
 		}
+		/*
 		public function BoardkeeperYangTalkHeXinDao():void {
 			clearOutput();
 			outputText("Placeholder for lazyLia writing ^^\n\n");
 			doNext(BoardkeeperYangTalk);
 		}
+		*/
 		public function BoardkeeperYangTalkRequests():void {
 			clearOutput();
 			outputText("Ok, you are a member now, how do you take on a job?\n\n");
@@ -989,6 +997,134 @@ package classes.Scenes.Places.HeXinDao
 				}
 			}
 			doNext(BoardkeeperYangMain);
+		}
+
+		public function questItemsBag():void {
+			clearOutput();
+			outputText("Would you like to put some quest items into the bag, and if so, with ones?\n\n");
+			if (Slot01Cap > 0) outputText("<b>Imp Skulls:</b> "+Slot01+" / "+Slot01Cap+"\n");
+			if (Slot02Cap > 0) outputText("<b>Feral Imp Skulls:</b> "+Slot02+" / "+Slot02Cap+"\n");
+			if (Slot03Cap > 0) outputText("<b>Minotaur Horns:</b> "+Slot03+" / "+Slot03Cap+"\n");
+			if (Slot04Cap > 0) outputText("<b>Demon Skulls:</b> "+Slot04+" / "+Slot04Cap+"\n");
+			if (Slot05Cap > 0) outputText("<b>Severed Tentacles:</b> "+Slot05+" / "+Slot05Cap+"\n");
+			menu();
+			if (Slot01 < Slot01Cap) {
+				if (player.hasItem(useables.IMPSKLL, 1)) addButton(0, "ImpSkull", questItemsBagImpSkull1UP);
+				else addButtonDisabled(0, "ImpSkull", "You don't have any imp skulls to store.");
+			}
+			else addButtonDisabled(0, "ImpSkull", "You can't store more imp skulls in your bag.");
+			if (Slot01 > 0) addButton(1, "ImpSkull", questItemsBagImpSkull1Down);
+			else addButtonDisabled(1, "ImpSkull", "You don't have any imp skulls in your bag.");
+			if (Slot02 < Slot02Cap) {
+				if (player.hasItem(useables.FIMPSKL, 1)) addButton(2, "FeralImpS.", questItemsBagFeralImpSkull1Up);
+				else addButtonDisabled(2, "FeralImpS.", "You don't have any feral imp skulls to store.");
+			}
+			else addButtonDisabled(2, "FeralImpS.", "You can't store more feral imp skulls in your bag.");
+			if (Slot02 > 0) addButton(3, "FeralImpS.", questItemsBagFeralImpSkull1Down);
+			else addButtonDisabled(3, "FeralImpS.", "You don't have any feral imp skulls in your bag.");
+			if (Slot03 < Slot03Cap) {
+				if (player.hasItem(useables.MINOHOR, 1)) addButton(5, "MinoHorns", questItemsBagMinotaurHorns1Up);
+				else addButtonDisabled(5, "MinoHorns", "You don't have any minotaur horns to store.");
+			}
+			else addButtonDisabled(5, "MinoHorns", "You can't store more minotaur horns in your bag.");
+			if (Slot03 > 0) addButton(6, "MinoHorns", questItemsBagMinotaurHorns1Down);
+			else addButtonDisabled(6, "MinoHorns", "You don't have any minotaur horns in your bag.");
+			if (Slot04 < Slot04Cap) {
+				if (player.hasItem(useables.DEMSKLL, 1)) addButton(7, "DemonSkull", questItemsBagDemonSkull1Up);
+				else addButtonDisabled(7, "DemonSkull", "You don't have any demon skulls to store.");
+			}
+			else addButtonDisabled(7, "DemonSkull", "You can't store more demon skulls in your bag.");
+			if (Slot04 > 0) addButton(8, "DemonSkull", questItemsBagDemonSkull1Down);
+			else addButtonDisabled(8, "DemonSkull", "You don't have any demon skulls in your bag.");
+			if (Slot05 < Slot05Cap) {
+				if (player.hasItem(useables.SEVTENT, 1)) addButton(10, "SeveredTent", questItemsBagSeveredTentacle1Up);
+				else addButtonDisabled(10, "SeveredTent", "You don't have any severed tentacles to store.");
+			}
+			else addButtonDisabled(10, "SeveredTent", "You can't store more severed tentacles in your bag.");
+			if (Slot05 > 0) addButton(11, "SeveredTent", questItemsBagSeveredTentacle1Down);
+			else addButtonDisabled(11, "SeveredTent", "You don't have any severed tentacles in your bag.");
+			addButton(14, "Back", camp.campActions);
+		}
+		private function questItemsBagImpSkull1UP():void {
+			player.destroyItems(useables.IMPSKLL, 1);
+			Slot01 += 1;
+			doNext(questItemsBag);
+		}
+		private function questItemsBagImpSkull1Down():void {
+			outputText("\n");
+			Slot01 -= 1;
+			inventory.takeItem(useables.IMPSKLL, questItemsBag);
+		}
+		private function questItemsBagFeralImpSkull1Up():void {
+			player.destroyItems(useables.FIMPSKL, 1);
+			Slot02 += 1;
+			doNext(questItemsBag);
+		}
+		private function questItemsBagFeralImpSkull1Down():void {
+			outputText("\n");
+			Slot02 -= 1;
+			inventory.takeItem(useables.FIMPSKL, questItemsBag);
+		}
+		private function questItemsBagMinotaurHorns1Up():void {
+			player.destroyItems(useables.MINOHOR, 1);
+			Slot03 += 1;
+			doNext(questItemsBag);
+		}
+		private function questItemsBagMinotaurHorns1Down():void {
+			outputText("\n");
+			Slot03 -= 1;
+			inventory.takeItem(useables.MINOHOR, questItemsBag);
+		}
+		private function questItemsBagDemonSkull1Up():void {
+			player.destroyItems(useables.DEMSKLL, 1);
+			Slot04 += 1;
+			doNext(questItemsBag);
+		}
+		private function questItemsBagDemonSkull1Down():void {
+			outputText("\n");
+			Slot04 -= 1;
+			inventory.takeItem(useables.DEMSKLL, questItemsBag);
+		}
+		private function questItemsBagSeveredTentacle1Up():void {
+			player.destroyItems(useables.SEVTENT, 1);
+			Slot05 += 1;
+			doNext(questItemsBag);
+		}
+		private function questItemsBagSeveredTentacle1Down():void {
+			outputText("\n");
+			Slot05 -= 1;
+			inventory.takeItem(useables.SEVTENT, questItemsBag);
+		}
+
+		public function roomInExistingStack(itype:ItemType):Number {
+			switch (itype) {
+				case useables.IMPSKLL: if (Slot01 < Slot01Cap) return Slot01;
+					break;
+				case useables.FIMPSKL: if (Slot02 < Slot02Cap) return Slot02;
+					break;
+				case useables.MINOHOR: if (Slot03 < Slot03Cap) return Slot03;
+					break;
+				case useables.DEMSKLL: if (Slot04 < Slot04Cap) return Slot04;
+					break;
+				case useables.SEVTENT: if (Slot05 < Slot05Cap) return Slot05;
+					break;
+			}
+			return -1;
+		}
+		public function placeItemInStack(itype:ItemType):Number {
+			switch (itype) {
+				case useables.IMPSKLL: questItemsBagImpSkull1UP();
+					break;
+				case useables.FIMPSKL: questItemsBagFeralImpSkull1Up();
+					break;
+				case useables.MINOHOR: questItemsBagMinotaurHorns1Up();
+					break;
+				case useables.DEMSKLL: questItemsBagDemonSkull1Up();
+					break;
+				case useables.SEVTENT: questItemsBagSeveredTentacle1Up();
+					break;
+			}
+			return -1;
 		}
 	}
 }

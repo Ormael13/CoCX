@@ -3,8 +3,11 @@
  */
 package coc.view {
 import classes.CoC;
+import classes.ItemSlotClass;
+import classes.ItemType;
 import classes.PerkLib;
 import classes.StatusEffects;
+import classes.internals.Utils;
 
 public class ButtonData {
 	public var text:String = "";
@@ -13,6 +16,12 @@ public class ButtonData {
 	public var visible:Boolean = true;
 	public var toolTipHeader:String = "";
 	public var toolTipText:String = "";
+	public var labelColor:String = CoCButton.DEFAULT_COLOR;
+	public var extraData:* = null;
+	public var draggable:Boolean = false;
+	public var slot:ItemSlotClass = null;
+	public var slotType:Function;
+	public var iconId:String = null;
 	public function ButtonData(text:String, callback:Function =null, toolTipText:String ="", toolTipHeader:String ="") {
 		this.text = text;
 		this.callback = callback;
@@ -25,11 +34,11 @@ public class ButtonData {
 		this.toolTipHeader = toolTipHeader;
 		return this;
 	}
-	public function enable(callback:Function,toolTipText:String=null,toolTipHeader:String=null):ButtonData {
-		this.callback = callback;
-		this.enabled = callback != null;
+	public function enable(callback:Function=null,toolTipText:String=null,toolTipHeader:String=null):ButtonData {
+		if (callback is Function) this.callback = callback;
 		if (toolTipText is String) this.toolTipText = toolTipText;
 		if (toolTipHeader is String) this.toolTipHeader = toolTipHeader;
+		this.enabled = this.callback != null; // no enabling for nulls!
 		return this;
 	}
 	public function disable(toolTipText:String=null,toolTipHeader:String=null, text:String = null):ButtonData {
@@ -40,18 +49,53 @@ public class ButtonData {
 		return this;
 	}
 	public function disableIf(condition:Boolean,toolTipText:String=null,toolTipHeader:String=null, text:String = null):ButtonData {
-		if (this.enabled && condition) {
+		if (condition) {
 			disable(toolTipText,toolTipHeader, text);
 		}
+		return this;
+	}
+	public function color(color:String):ButtonData {
+		labelColor = color;
+		return this;
+	}
+	public function icon(iconId:String):ButtonData {
+		this.iconId = iconId;
+		return this;
+	}
+	
+	/**
+	 * Associate custom data with the button.
+	 */
+	public function extra(extraData:*):ButtonData {
+		this.extraData = extraData;
+		return this;
+	}
+	public function forItem(item:ItemType):ButtonData {
+		text = item.shortName;
+		hint(item.description, Utils.capitalizeFirstLetter(item.longName));
+		labelColor = item.buttonColor;
+		iconId = item.iconId;
+		return this;
+	}
+	public function forItemSlot(slot:ItemSlotClass):ButtonData {
+		if (slot.isEmpty()) {
+			text = "Empty";
+			hint("");
+			labelColor = CoCButton.DEFAULT_COLOR;
+			return this;
+		}
+		forItem(slot.itype);
+		if (slot.itype.stackSize > 1 || slot.quantity > 1) text += " x"+slot.quantity;
 		return this;
 	}
 	public function applyTo(btn:CoCButton):void {
 		if (!visible) {
 			btn.hide();
-		} else if (!enabled) {
-			btn.showDisabled(text, toolTipText, toolTipHeader);
 		} else {
-			btn.show(text, callback, toolTipText, toolTipHeader);
+			btn.show(text, callback, toolTipText, toolTipHeader)
+					.color(labelColor)
+					.disableIf(!enabled)
+					.icon(iconId);
 		}
 	}
 	/**
@@ -121,6 +165,34 @@ public class ButtonData {
 			disable();
 			toolTipText += " <b>You are too tired to use this ability.</b>";
 		}
+		return this;
+	}
+
+	/**
+	 *
+	 */
+	public function drag(slot:ItemSlotClass, slotType:Function):ButtonData {
+		this.draggable = true;
+		this.slot = slot;
+		this.slotType = slotType;
+		return this;
+	}
+
+	/**
+	 * Fills most fields from an existing button
+	 * @param btn The button to copy
+	 */
+	public function fromButton(btn:CoCButton):ButtonData {
+		this.text = btn.labelText;
+		this.callback = btn.callback;
+		this.enabled = btn.enabled;
+		this.visible = btn.visible;
+		this.visible = btn.visible;
+		this.toolTipHeader = btn.toolTipHeader;
+		this.toolTipText = btn.toolTipText;
+		this.labelColor = btn.labelColor;
+		this.iconId = btn.iconId;
+		// Still not enough to copy fields associated with items
 		return this;
 	}
 }

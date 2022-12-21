@@ -40,5 +40,6 @@ package classes.GeneticMemories {
 	 */
 
     public static var Memories:/*EnumValue*/ Array = [];
+	private static var _partid:int = 0;
   }
 }

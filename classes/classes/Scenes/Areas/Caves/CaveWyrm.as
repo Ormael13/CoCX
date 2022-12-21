@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.Areas.Caves 
+package classes.Scenes.Areas.Caves
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -111,7 +111,7 @@ use namespace CoC;
 			return str;
 		}
 		
-		public function CaveWyrm() 
+		public function CaveWyrm()
 		{
 			this.a = "the ";
 			this.short = "cave wyrm";
@@ -134,7 +134,7 @@ use namespace CoC;
 			this.hips.type = Hips.RATING_INHUMANLY_WIDE;
 			this.butt.type = Butt.RATING_INCONCEIVABLY_BIG;
 			this.lowerBody = LowerBody.CAVE_WYRM;
-			this.skinTone = "dark blue";
+			this.bodyColor = "dark blue";
 			this.hairColor = "black";
 			this.hairLength = 9;
 			initStrTouSpeInte(142, 121, 110, 74);
@@ -151,7 +151,6 @@ use namespace CoC;
 			this.bonusLust = 185;
 			this.lustVuln = .35;
 			this.lust = 30;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 35;
 			this.gems = rand(10) + 20;
 			this.drop = new ChainedDrop().
@@ -160,6 +159,6 @@ use namespace CoC;
 			this.tailType = Tail.CAVE_WYRM;
 			this.tailRecharge = 0;
 			checkMonster();
-		}	
+		}
 	}
 }

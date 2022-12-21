@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.Explore 
+package classes.Scenes.Explore
 {
 import classes.*;
 import classes.GlobalFlags.*;
@@ -45,19 +45,19 @@ import classes.internals.ChainedDrop;
 			else super.performCombatAction();
 		}
 		
-		public function SeabedAlrauneBoss() 
+		public function SeabedAlrauneBoss()
 		{
 			super();
 			if (Holidays.isHalloween()) {
 				this.short = "Jack-O-Raune";
 				this.long = "You are fighting against a Jack-O-Raune, an intelligent plant with the torso of a woman and the lower body of a giant pumpkin with snaking tentacle vines. She seems really keen on raping you.";
-				this.skinTone = "pale orange";
+				this.bodyColor = "pale orange";
 				this.hairColor = "dark green";
 			}
 			else {
 				this.short = "aquatic alraune";
 				this.long = "You are fighting against an Aquatic Alraune, an intelligent plant with the torso of a woman and the lower body of a giant flower. She's huge and seems really keen on raping you.";
-				this.skinTone = "light green";
+				this.bodyColor = "light green";
 				this.hairColor = "dark green";
 			}
 			initStrTouSpeInte(540, 1240, 820, 560);

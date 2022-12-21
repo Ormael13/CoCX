@@ -10,7 +10,7 @@ package classes.Scenes.Areas.Bog
 
 	public class ChameleonGirlScene extends BaseContent
 	{
-				
+		
 		public function ChameleonGirlScene()
 		{
 		}
@@ -46,7 +46,7 @@ package classes.Scenes.Areas.Bog
 			if (flags[kFLAGS.TIMES_MET_CHAMELEON] == 0) {
 				outputText("You work your way through the dense foliage of the bog, pushing aside branches and slogging through the thick mud in search of something new.  Feeling exhausted, you slow down and look for a place to rest; finding a small clearing with shallow water no more than a couple inches deep and firmer ground, you sit back against a tree to catch your breath.  You're so soaked by now that you hardly notice the murky water beneath you and the slick mud on the trunk seeping into your [armor].  You lean your head back and close your eyes, enjoying a few moments of peace.");
 
-				outputText("\n\nYour brief respite is disturbed by the sensation of warm breath against your face.  You snap your head up to see a humanoid face hanging upside down in front of you, watching you intently.  Startled, you scramble to your feet, pressing your back against the tree.  Before you have a chance to get a better look at whatever was observing you, it drops from the branch and flips itself over in a whirl, landing on its feet in a crouched position.  Your observer is some sort of lizard-like humanoid, though it appears to have smooth " + monster.skinTone + " skin rather than any sort of scales.  Long, " + monster.skinAdj + " stripes run along its body from ankle to shoulder.   It straightens itself up, allowing you to see that it's definitely female:  she has a slender body with slightly pronounced hips, their bones easily visible beneath her skin, and her breasts look to be about B-cups.  Her arms and legs are a bit longer than they would be on a human body, and her tail is quite long by a lizard's standards.  Her hands, too, are disproportionately large and look as though they're made to better grip and climb trees.  The skin on her front side is a light tan, and looks softer than the rest.   A set of long, brown horns protrudes forward from her forehead.  She's hardly clothed, wearing only a thick silken cloth tied around her back to hide her chest and a thong tied at her hip cut from the same material.  Her long, thin tongue hangs out of her slightly parted mouth.  She licks her lips grotesquely and slurps it back into her mouth as she eyes you up and down.");
+				outputText("\n\nYour brief respite is disturbed by the sensation of warm breath against your face.  You snap your head up to see a humanoid face hanging upside down in front of you, watching you intently.  Startled, you scramble to your feet, pressing your back against the tree.  Before you have a chance to get a better look at whatever was observing you, it drops from the branch and flips itself over in a whirl, landing on its feet in a crouched position.  Your observer is some sort of lizard-like humanoid, though it appears to have smooth " + monster.bodyColor + " skin rather than any sort of scales.  Long, " + monster.skinAdj + " stripes run along its body from ankle to shoulder.   It straightens itself up, allowing you to see that it's definitely female:  she has a slender body with slightly pronounced hips, their bones easily visible beneath her skin, and her breasts look to be about B-cups.  Her arms and legs are a bit longer than they would be on a human body, and her tail is quite long by a lizard's standards.  Her hands, too, are disproportionately large and look as though they're made to better grip and climb trees.  The skin on her front side is a light tan, and looks softer than the rest.   A set of long, brown horns protrudes forward from her forehead.  She's hardly clothed, wearing only a thick silken cloth tied around her back to hide her chest and a thong tied at her hip cut from the same material.  Her long, thin tongue hangs out of her slightly parted mouth.  She licks her lips grotesquely and slurps it back into her mouth as she eyes you up and down.");
 
 				outputText("\n\nAfter a few moments of this uncomfortable standoff, she speaks.  \"<i>W-what are you doing in my bog?!</i>\"  She makes what you can only guess to be a menacing sneer and snaps her jaws in an attempt at intimidating you.");
 
@@ -126,7 +126,7 @@ package classes.Scenes.Areas.Bog
 		{
 			var x:int = rand(player.cockTotal());
 			spriteSelect(SpriteDb.s_chameleon);
-			outputText("\n\nRecognizing that you're no danger, her skin shifts back into its natural " + monster.skinTone + " coloration as she walks towards you.  She swings her hips seductively as she splashes slowly through the water and licks her lips with a loud smack of her tongue, then reaches out and forcefully pulls your [armor] above your waist before you can even try to resist her advances, and pushes you back against a tree.  With a few quick pulls of fabric she's stripped her own clothes, and she tosses her thong over a low-hanging branch.  The other band of silk she uses to quickly bind your wrists.  Were you in any shape to fight back you could pull free, but you're too ");
+			outputText("\n\nRecognizing that you're no danger, her skin shifts back into its natural " + monster.bodyColor + " coloration as she walks towards you.  She swings her hips seductively as she splashes slowly through the water and licks her lips with a loud smack of her tongue, then reaches out and forcefully pulls your [armor] above your waist before you can even try to resist her advances, and pushes you back against a tree.  With a few quick pulls of fabric she's stripped her own clothes, and she tosses her thong over a low-hanging branch.  The other band of silk she uses to quickly bind your wrists.  Were you in any shape to fight back you could pull free, but you're too ");
 			if (player.lust >= player.maxOverLust()) outputText("overwhelmed by lust");
 			else outputText("battered");
 			outputText(" to even rip the makeshift binding.");
@@ -166,11 +166,10 @@ package classes.Scenes.Areas.Bog
 
 			outputText("\n\nYou enjoy it a lot, actually.  Despite her awkward attempts at domination, her vivid display of pleasure manages to arouse you greatly, filling you with the need to have something inside yourself.  You pull your [armor] open, allowing you access to your own " + vaginaDescript(0) + ", and you put a couple fingers inside.  It's not enough.  Looking down, you spot her long, slender tail twitching weakly in the water beside you.  You reach down and take the end in one hand, your other still pulling her hips against you.  Without letting up in the siege of her inflamed genitals, you slide the tail slowly towards you and slip it between your own moist folds.  The chameleon girl seems too caught up in her own sensations to notice or care, moaning and grinding her pussy into your face.  You push the nearly neon appendage deeper into yourself, gasping as you push in thicker and thicker tail-flesh.  Filling yourself, you begin to slide it in and out, your moans of pleasure joining hers in the air as you continue to eat her out.  The tip of her tail flits lightly about inside you as the chameleon girl loses herself.");
 
-			outputText("\n\nHer moans quickly grow more insistent above you, though, and she nearly collapses forwards onto your head as she cums loudly.  You steady her with one hand, still using her tail like a smooth sex-toy in the other as her skin fades back to its normal " + monster.skinTone + " coloration.  Mind apparently cleared by her orgasm, she suddenly jerks her tail back, forcing it out of your hand and " + vaginaDescript(0) + ".  \"<i>Wha... no!  B-bitches like you don't get to cum!</i>\"  She puts her most menacing smile back on, with yet no idea how to manage one.  \"<i>And, umm, you better not come back to my bog!</i>\"  She turns and quickly scampers off, pulling her wet clothes up off the ground as she goes.  You chuckle a bit as the wannabe dominatrix runs back into the trees, but stop as you realize she did beat you and leave you horny.  With a frustrated \"<i>Hmph!</i>\" you pull your [armor] back up.");
+			outputText("\n\nHer moans quickly grow more insistent above you, though, and she nearly collapses forwards onto your head as she cums loudly.  You steady her with one hand, still using her tail like a smooth sex-toy in the other as her skin fades back to its normal " + monster.bodyColor + " coloration.  Mind apparently cleared by her orgasm, she suddenly jerks her tail back, forcing it out of your hand and " + vaginaDescript(0) + ".  \"<i>Wha... no!  B-bitches like you don't get to cum!</i>\"  She puts her most menacing smile back on, with yet no idea how to manage one.  \"<i>And, umm, you better not come back to my bog!</i>\"  She turns and quickly scampers off, pulling her wet clothes up off the ground as she goes.  You chuckle a bit as the wannabe dominatrix runs back into the trees, but stop as you realize she did beat you and leave you horny.  With a frustrated \"<i>Hmph!</i>\" you pull your [armor] back up.");
 
 			//set lust to 100, return to camp
-			dynStats("lus=", player.maxLust());
-			player.lust = player.maxLust();
+			dynStats("lus=", player.maxOverLust());
 			cleanupAfterCombat();
 		}
 
@@ -180,13 +179,13 @@ package classes.Scenes.Areas.Bog
 			clearOutput();
 			spriteSelect(SpriteDb.s_chameleon);
 			//-Win by lust
-			if (monster.lust >= monster.maxLust()) {
-				outputText("Unable to control her arousal, the chameleon girl collapses to her knees and begins masturbating underneath her thong, having lost all capacity to fight you; she moans and throws her head back as her hand splashes in and out of the water she's kneeling in.  Her skin returns to its usual " + monster.skinTone + " and then keeps going, shifting closer and closer to pink as her moans increase in both volume and volubility.");
+			if (monster.lust >= monster.maxOverLust()) {
+				outputText("Unable to control her arousal, the chameleon girl collapses to her knees and begins masturbating underneath her thong, having lost all capacity to fight you; she moans and throws her head back as her hand splashes in and out of the water she's kneeling in.  Her skin returns to its usual " + monster.bodyColor + " and then keeps going, shifting closer and closer to pink as her moans increase in both volume and volubility.");
 				if (player.lust >= 33) outputText("  Do you help the horny girl to get you both off?  Or maybe you could punish her bad attitude with something from your bag...");
 			}
 			//-Win by HP
 			else {
-				outputText("Too weak to continue fighting, the chameleon girl drops to her knees, exhausted.  Her skin returns to its usual " + monster.skinTone + ", unable to maintain the camouflage.");
+				outputText("Too weak to continue fighting, the chameleon girl drops to her knees, exhausted.  Her skin returns to its usual " + monster.bodyColor + ", unable to maintain the camouflage.");
 				if (player.lust >= 33) outputText("  Do you use the girl in her weakened state to get yourself off?  Or maybe you could punish her bad attitude with an item from your bags...");
 			}
 			if (player.lust < 33 || player.gender == 0) {
@@ -204,8 +203,8 @@ package classes.Scenes.Areas.Bog
                 (player.hasItem(consumables.SUCMILK) || player.hasItem(consumables.P_S_MLK)) && player.cockThatFits(monster.vaginalCapacity()) >= 0);
             addButtonIfTrue(4, "Lust&SensD", giveTheChameleonASuccubiMilk, "Req. LustDraft + Sens./Fuck Draft",
                 player.hasItem(consumables.SENSDRF) && (player.hasItem(consumables.L_DRAFT) || player.hasItem(consumables.F_DRAFT)));
-			SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatChameleonGirl);
             addButton(14, "Leave", cleanupAfterCombat);
+			SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatChameleonGirl);
 		}
 
 		//-Herm Victory (Z edited)
@@ -242,7 +241,7 @@ package classes.Scenes.Areas.Bog
 			spriteSelect(SpriteDb.s_chameleon);
 			var x:int = player.biggestCockIndex();
 			outputText("You approach the fallen girl, and she looks up at you, a pleading expression in her eyes.  You might feel worse for her if she hadn't tried to assault you in a bog.  Reaching down behind her, you find the knot of the cloth covering her breasts, and with a quick pull you yank it off and toss it aside, then drop your [armorName], revealing your erect prick.  Her eyes widen when she sees it and her mouth parts slightly, letting a bit of her tongue slip out to lick her lips.  Quietly disdainful of the slutty girl's open arousal, you decide that if she wants to taste it so badly, she may.  But when you put your hand on the back of her head to push her onto your stiff cock, she manages to work up the strength to grab your arm with a free hand and resist its impulse.  Looking her over, you can see that her sudden burst of energy is due to ");
-			if (monster.lust >= monster.maxLust()) outputText("her masturbating even more furiously than before at the thought of having your cock.");
+			if (monster.lust >= monster.maxOverLust()) outputText("her masturbating even more furiously than before at the thought of having your cock.");
 			//[if lost by HP:
 			else outputText("her starting to work the fingers of her free hand in and out of her own sex.");
 
@@ -251,7 +250,7 @@ package classes.Scenes.Areas.Bog
 			outputText("\n\nVery soon, drops of pre-cum begin to dribble from the tip of your cock.  She immediately darts the tip of her tongue around to catch them and wipe them up.  Her eyes roll back and she sighs heavily at the taste, thrusting her fingers deep into herself and enjoying the feeling for a moment.  The red tint of the chameleon girl's skin almost immediately changes to a bright pink, and she reaches up with her free hand to grip an uncovered part of your shaft near the base.  Her grip is firm, but the flesh on her palms and long fingers is thick and soft.  She begins pumping with her hand in time with the contractions of her tongue, and the supple skin gently but forcefully works with the wet muscle to bring you closer to orgasm.  Her tongue catches and wipes away every bit of pre-cum that she ekes out, the poor girl nearly driving herself insane with the need for more of it to taste.  The pace at which she works your cock increases, and you can feel that you'll cum soon at this rate.");
 
 			outputText("\n\nAs if sensing this, she loosens her tongue's grip, letting her hand take over; supple flesh glides along the slick saliva left behind.  It bunches up under the tip of your cock, ready to catch your cum.  With a few final tugs, ");
-			if (player.balls > 0) outputText("your [balls] clench and ");
+			if (player.hasBalls()) outputText("your [balls] clench and ");
 			outputText("the semen erupts from the end of your " + cockDescript(x) + " spilling out hot spunk over her folded tongue.  She gasps audibly and arches her back as the thick ropes of your jizz coat her tongue, shoving her long fingers as far as she possibly can into her dripping pussy, and flashes so brightly pink she nearly glows.");
 			if (player.cumQ() > 750) outputText("  The torrent of cum bursting from your cock just doesn't stop, and her eyes roll back into her head as your semen coats her face and runs off her tongue, drenching her breasts and belly in white.  Her head falls back and her tongue goes limp as she's sent into ecstasy by the flood.");
 
@@ -269,9 +268,9 @@ package classes.Scenes.Areas.Bog
 			clearOutput();
 			spriteSelect(SpriteDb.s_chameleon);
 			outputText("You shed your [armor] and approach the fallen chameleon girl");
-			if (monster.lust >= monster.maxLust()) outputText(", her moans of pleasure growing more desperate as you approach");
+			if (monster.lust >= monster.maxOverLust()) outputText(", her moans of pleasure growing more desperate as you approach");
 			outputText(".  You look her up and down, following the smooth curves of her thin body with your eyes.  Squatting down beside her, you take her weak body by the shoulders in one arm and trail your fingertips lightly up her torso with the other, feeling the soft skin of her belly.");
-			if (monster.lust >= monster.maxLust()) outputText("  She coos lustily at the sensation.");
+			if (monster.lust >= monster.maxOverLust()) outputText("  She coos lustily at the sensation.");
 			else outputText("  Her eyes widen, and she looks from your hand to your face and back again.");
 			outputText("  When your hand reaches the silk cloth covering her chest, you pull it off with a light tug and cast it off to the side.  You cup her small breast in your palm, and as you squeeze it her skin tone changes perceptibly, flashing to a much brighter shade of the colors it was.");
 
@@ -334,7 +333,7 @@ package classes.Scenes.Areas.Bog
 			if (x <= 0 || sceneHunter.uniHerms && rand(3) == 0) {
 				outputText("\n\nYou reach under her thong and toy with her clit for just a moment.  She nearly jumps, almost managing to sit up before collapsing back down into the water, and you slip a couple fingers into her slick cunt to be immediately met with a gush of her fluids.  She cries out loudly and her pussy clenches around your fingers as she cums, getting off quickly after all her waiting; then curls up on her side as her tail thrashes wildly while orgasm slowly melts her painful nerves down to normal levels.  After a minute she slackens and spreads out on the ground, panting heavily as she recovers.  Smiling down at the tired chameleon girl, you wish her luck with her new nerves and untie her hands.  She's too exhausted to get up, though, and you leave her lying there to sleep in the swampy water.");
 				//player.lust+=30;
-				dynStats("lus", 30);
+				dynStats("lus", 30, "scale", false);
 			}
 			//(else if at least one cock of appropriate size)
 			else {
@@ -342,7 +341,7 @@ package classes.Scenes.Areas.Bog
 				outputText("\n\nYou trace one finger lightly up and down her belly again, and she squirms as the powerful chemicals and sensations you've given her make her cum again and again.  Her eyes roll up and she pants openly, her mind completely broken by the overwhelming pleasure.  You start to notice that she feels almost a bit <i>too</i> good around you, and you wonder if the magic of the tainted liquids might also be affecting you to some extent, seeping into your system as her sexual fluids bathe your " + cockDescript(x) + ".  The squeezes of her hands on your skin feel as crisp as pinches but lack the pain, and you can feel the warm, wet folds of her pussy pressing against every inch of your prick.  Your thrusting intensifies as your whole body aches with need, and she wriggles and squeals as you push deeper into her, as if to outdistance your own orgasm building inside of you.  Her legs wrap around your back and hold you deep inside as you cum, and so much erupts from your " + cockDescript(x) + " that not even her vise-like wringing can prevent it from gushing back out and dripping down to the base of your cock.  Her grip on you loosens as she feels the proof of your lovemaking inside her.  You run a hand along her skin and she shudders, though your presence barely registers with her at this point.  Doubtful that this one will try to assert her dominance over you again any time soon, you pull your softening member out of the blissed-out chameleon-girl and stand up, donning your [armor] and leaving the semi-conscious girl there in the bog to recover.  The chemicals that you've gotten a contact high from leave you feeling somewhat aroused as you make your way back to camp.");
 				//player.lust = base + 20;
 				player.sexReward("Default","Default",true,false);
-				dynStats("lus", 20);
+				dynStats("lus", 20, "scale", false);
 			}
 			//send player back to camp, remove sens/fuck draft, reset hours since cum, add gems and exp and time
 			player.consumeItem(consumables.SENSDRF);

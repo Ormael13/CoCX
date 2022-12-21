@@ -10,8 +10,6 @@ import classes.Scenes.API.Encounters;
 import classes.Scenes.API.FnHelpers;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Plains.*;
-import classes.Scenes.Holidays;
-import classes.Scenes.NPCs.SidonieFollower;
 import classes.Scenes.SceneLib;
 
 use namespace CoC;
@@ -27,9 +25,6 @@ use namespace CoC;
 		{
 			onGameInit(init);
 		}
-		public function isDiscovered():Boolean {
-			return flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 0;
-		}
 		public function discover():void {
 			flags[kFLAGS.TIMES_EXPLORED_PLAINS] = 1;
 			outputText(images.showImage("area-plain"));
@@ -40,16 +35,30 @@ use namespace CoC;
 		private var explorationEncounter:GroupEncounter = null;
 
 		private function init():void {
-			const game:CoC     = CoC.instance;
 			const fn:FnHelpers = Encounters.fn;
 			explorationEncounter = Encounters.group(/*SceneLib.commonEncounters,*/ {
 				//General Golems, Goblin and Imp Encounters
 				name: "common",
-				call: SceneLib.exploration.genericGolGobImpEncounters
-			}, {
+				chance: 0.4,
+				call: function ():void {
+					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
+					SceneLib.exploration.genericGolGobImpEncounters();
+				}
+			}, {/*
+				//General Angels Encounters
+				name: "common",
+				call: function ():void {
+					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
+					SceneLib.exploration.genericAngelsEncounters();
+				}
+			}, {*/
 				//Helia monogamy fucks
 				name  : "helcommon",
-				call  : SceneLib.helScene.helSexualAmbush,
+				night : false,
+				call  : function ():void {
+					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
+					SceneLib.helScene.helSexualAmbush();
+				},
 				chance: 0.2,
 				when  : SceneLib.helScene.helSexualAmbushCondition
 			}, {
@@ -61,14 +70,19 @@ use namespace CoC;
 						   && (player.level >= 20);
 				},
 				chance: 0.5,
-				call: SceneLib.etnaScene.repeatYandereEnc
+				call: function ():void {
+					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
+					SceneLib.etnaScene.repeatYandereEnc();
+				}
 			}, {
 				name: "electra",
+				night : false,
 				when: function():Boolean {
 					return flags[kFLAGS.ELECTRA_FOLLOWER] < 2 && flags[kFLAGS.ELECTRA_AFFECTION] >= 2 && !player.hasStatusEffect(StatusEffects.ElectraOff) && (player.level >= 20);
 				},
 				chance: 0.5,
 				call: function ():void {
+					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
 					if (flags[kFLAGS.ELECTRA_AFFECTION] == 100) {
 						if (flags[kFLAGS.ELECTRA_FOLLOWER] == 1) SceneLib.electraScene.ElectraRecruitingAgain();
 						else SceneLib.electraScene.ElectraRecruiting();
@@ -76,27 +90,48 @@ use namespace CoC;
 					else SceneLib.electraScene.repeatPlainsEnc();
 				}
 			}, {
+				name  : "werewolfFemale",
+				day : false,
+				call  : function ():void {
+					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
+					SceneLib.werewolfFemaleScene.introWerewolfFemale();
+				},
+				chance: 0.50
+			}, {
 				name: "sidonie",
+				night : false,
 				when: function ():Boolean {
 					return flags[kFLAGS.SIDONIE_FOLLOWER] < 1
 						   && flags[kFLAGS.SIDONIE_RECOLLECTION] < 1;
 				},
-				call: SceneLib.sidonieFollower.meetingSidonieAtPlains
+				call: function ():void {
+					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
+					SceneLib.sidonieFollower.meetingSidonieAtPlains();
+				}
 			}, {
 				name: "diana",
+				night : false,
 				when: function():Boolean {
 					return flags[kFLAGS.DIANA_FOLLOWER] < 6 && !(flags[kFLAGS.DIANA_FOLLOWER] != 3 && flags[kFLAGS.DIANA_LVL_UP] >= 8) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff);
 				},
-				call: SceneLib.dianaScene.repeatEnc
+				call: function ():void {
+					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
+					SceneLib.dianaScene.repeatEnc();
+				}
 			}, {
 				name: "dianaName",
+				night : false,
 				when: function():Boolean {
 					return ((flags[kFLAGS.DIANA_FOLLOWER] < 3 || flags[kFLAGS.DIANA_FOLLOWER] == 5) && flags[kFLAGS.DIANA_LVL_UP] >= 8) && !player.hasStatusEffect(StatusEffects.DianaOff) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1;
 				},
-				call: SceneLib.dianaScene.postNameEnc
+				call: function ():void {
+					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
+					SceneLib.dianaScene.postNameEnc();
+				}
 			}, {
 				//Dem Kangasluts!  Force Sheila relationship phase!
 				name  : "sheila_xp3",
+				night : false,
 				chance: Encounters.ALWAYS,
 				when  : function ():Boolean {
 					return flags[kFLAGS.SHEILA_DEMON] == 0
@@ -104,35 +139,49 @@ use namespace CoC;
 						   && model.time.hours == 20
 						   && flags[kFLAGS.SHEILA_CLOCK] >= 0;
 				},
-				call  : SceneLib.sheilaScene.sheilaXPThreeSexyTime
+				call  : function ():void {
+					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
+					SceneLib.sheilaScene.sheilaXPThreeSexyTime();
+				}
 			}, {
 				//Add some holiday cheer
 				name: "candy_cane",
 				when: function ():Boolean {
-					return isHolidays() && date.fullYear > flags[kFLAGS.CANDY_CANE_YEAR_MET];
+					return isChristmas() && date.fullYear > flags[kFLAGS.CANDY_CANE_YEAR_MET];
 				},
-				call: Holidays.candyCaneTrapDiscovery
+				call: function ():void {
+					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
+					SceneLib.holidays.candyCaneTrapDiscovery();
+				}
 			}, {
 				name: "polar_pete",
 				when: function ():Boolean {
-					return isHolidays() && date.fullYear > flags[kFLAGS.POLAR_PETE_YEAR_MET];
+					return isChristmas() && date.fullYear > flags[kFLAGS.POLAR_PETE_YEAR_MET];
 				},
-				call: Holidays.polarPete
+				call: function ():void {
+					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
+					SceneLib.holidays.polarPete();
+				}
 			}, {
 				//Find Niamh
 				name: "niamh",
+				night : false,
 				when: function ():Boolean {
 					return flags[kFLAGS.NIAMH_MOVED_OUT_COUNTER] == 1
 				},
 				call: SceneLib.telAdre.niamh.niamhPostTelAdreMoveOut
 			}, {
 				name  : "owca",
+				night : false,
 				chance: 0.3,
 				when  : function ():Boolean {
 					return flags[kFLAGS.OWCA_UNLOCKED] == 0;
 				},
 				mods  : [fn.ifLevelMin(24)],
-				call  : SceneLib.owca.gangbangVillageStuff
+				call  : function ():void {
+					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
+					SceneLib.owca.gangbangVillageStuff();
+				}
 			}, {
 				name: "bazaar",
 				when: function ():Boolean {
@@ -141,6 +190,7 @@ use namespace CoC;
 				call: SceneLib.bazaar.findBazaar
 			}, {
 				name  : "helXizzy",
+				night : false,
 				chance: 0.2,
 				when  : function ():Boolean {
 					return flags[kFLAGS.ISABELLA_CAMP_APPROACHED] != 0
@@ -161,31 +211,48 @@ use namespace CoC;
 				chance: 0.5
 			}, {
 				name  : "gnoll",
+				night : false,
 				chance: 0.7,
-				call  : gnollSpearThrowerScene.gnoll2Encounter
+				call  : function ():void {
+					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
+					gnollSpearThrowerScene.gnoll2Encounter();
+				}
 			}, {
 				name  : "gnoll2",
+				night : false,
 				chance: 0.7,
-				call  : gnollScene.gnollEncounter
+				call  : function ():void {
+					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
+					gnollScene.gnollEncounter();
+				}
 			}, {
 				name: "bunny",
+				night : false,
 				chance: 0.3,
 				call: bunnyGirl.bunnbunbunMeet
 			}, {
 				name: "isabella",
+				night : false,
 				when: function ():Boolean {
 					return flags[kFLAGS.ISABELLA_PLAINS_DISABLED] == 0
 				},
-				call: SceneLib.isabellaScene.isabellaGreeting
+				call: function ():void {
+					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
+					SceneLib.isabellaScene.isabellaGreeting();
+				}
 			}, {
 				name  : "helia",
+				night : false,
 				chance: function ():Number {
 					return flags[kFLAGS.HEL_REDUCED_ENCOUNTER_RATE] ? 0.75 : 1.5;
 				},
 				when  : function ():Boolean {
 					return !SceneLib.helScene.followerHel();
 				},
-				call  : SceneLib.helScene.encounterAJerkInThePlains
+				call  : function ():void {
+					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
+					SceneLib.helScene.encounterAJerkInThePlains();
+				}
 			}, {
 				name: "ted",
 				when: function():Boolean {
@@ -201,15 +268,23 @@ use namespace CoC;
 				call: partsofSnippler
 			},{
 				name: "satyr",
+				night : false,
 				chance: 0.7,
-				call: satyrScene.satyrEncounter
+				call: function ():void {
+					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
+					satyrScene.satyrEncounter();
+				}
 			}, {
 				name: "sheila",
+				night : false,
 				when: function ():Boolean {
 					return flags[kFLAGS.SHEILA_DISABLED] == 0 && flags[kFLAGS.SHEILA_CLOCK] >= 0
 				},
 				chance: 0.5,
-				call: SceneLib.sheilaScene.sheilaEncounterRouter
+				call: function ():void {
+					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
+					SceneLib.sheilaScene.sheilaEncounterRouter();
+				}
 			});
 		}
 		public function explorePlains():void {

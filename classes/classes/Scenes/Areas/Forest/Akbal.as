@@ -21,23 +21,13 @@ public class Akbal extends Monster
 				outputText(capitalA + short + " seems to have no problem guiding his attacks towards you, despite his blindness.\n");
 			}
 			//Determine if dodged!
-			if (player.spe - spe > 0 && int(Math.random() * (((player.spe - spe) / 4) + 80)) > 80) {
+			if (player.getEvasionRoll()) {
 				if (player.spe - spe < 8)
 					outputText("You narrowly avoid " + a + short + "'s " + weaponVerb + "!");
 				if (player.spe - spe >= 8 && player.spe - spe < 20)
 					outputText("You dodge " + a + short + "'s " + weaponVerb + " with superior quickness!");
 				if (player.spe - spe >= 20)
 					outputText("You deftly avoid " + a + short + "'s slow " + weaponVerb + ".");
-				return;
-			}
-			//Determine if evaded
-			if (player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
-				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s attack.");
-				return;
-			}
-			//Determine if flexibilitied
-			if (player.hasPerk(PerkLib.Flexibility) && rand(100) < 10) {
-				outputText("Using your cat-like agility, you twist out of the way of " + a + short + "'s attack.");
 				return;
 			}
 			//Determine damage - str modified by enemy toughness!
@@ -96,7 +86,7 @@ public class Akbal extends Monster
 				outputText("You hear whispering in your head. Akbal begins speaking to you as he circles you, telling all the ways he'll dominate you once he beats the fight out of you.");
 				var lustattack1:Number = 9 + rand(9);
 				if (flags[kFLAGS.AKBAL_LVL_UP] >= 1) lustattack1 += flags[kFLAGS.AKBAL_LVL_UP] + rand(flags[kFLAGS.AKBAL_LVL_UP]);
-				player.dynStats("lus", lustattack1);
+				player.takeLustDamage(lustattack1, true);
 				player.createStatusEffect(StatusEffects.Whispered,0,0,0,0);
 			}
 			//Continuous Lust Attack - 
@@ -105,7 +95,7 @@ public class Akbal extends Monster
 				outputText("The whispering in your head grows, many voices of undetermined sex telling you all the things the demon wishes to do to you. You can only blush.");
 				var lustattack2:Number = 12 + rand(12);
 				if (flags[kFLAGS.AKBAL_LVL_UP] >= 1) lustattack2 += 3 + flags[kFLAGS.AKBAL_LVL_UP] + rand(flags[kFLAGS.AKBAL_LVL_UP]);
-				player.dynStats("lus", lustattack2);
+				player.takeLustDamage(lustattack2, true);
 			}
 		}
 		
@@ -125,7 +115,7 @@ public class Akbal extends Monster
 				outputText("Akbal releases an ear-splitting roar, hurling a torrent of emerald green flames towards you.\n");
 				//(high HP damage)
 				//Determine if dodged!
-				if (player.spe - spe > 0 && int(Math.random() * (((player.spe - spe) / 4) + 80)) > 80)
+				if (player.getEvasionRoll())
 				{
 					if (player.spe - spe < 8)
 						outputText("You narrowly avoid " + a + short + "'s fire!");
@@ -135,32 +125,18 @@ public class Akbal extends Monster
 						outputText("You deftly avoid " + a + short + "'s slow fire-breath.");
 					return;
 				}
-				//Determine if evaded
-				if (player.hasPerk(PerkLib.Evade) && rand(100) < 20)
-				{
-					outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s fire-breath.");
-					return;
-				}
-				//Determine if flexibilitied
-				if (player.hasPerk(PerkLib.Flexibility) && rand(100) < 10)
-				{
-					outputText("Using your cat-like agility, you contort your body to avoid " + a + short + "'s fire-breath.");
-					return;
-				}
 				if (player.hasStatusEffect(StatusEffects.Blizzard)) {
 					player.addStatusValue(StatusEffects.Blizzard, 1, -1);
 					var damage2:int = inte / 4;
 					if (flags[kFLAGS.AKBAL_LVL_UP] >= 1) damage2 *= (1 + (flags[kFLAGS.AKBAL_LVL_UP] * 0.1));
-					damage2 = Math.round(damage2);
 					outputText("Surrounding your blizzard absorbed huge part of the attack at the price of loosing some of it protective power.\n");
 					outputText("You are burned badly by the flames! ");
-					damage2 = player.takeFireDamage(damage2, true);
+					player.takeFireDamage(damage2, true);
 					return;
 				}
 				var damage:int = inte;
-				damage = Math.round(damage);
 				outputText("You are burned badly by the flames! ");
-				damage = player.takeFireDamage(damage, true);
+				player.takeFireDamage(damage, true);
 			}
 		}
 		
@@ -221,7 +197,6 @@ public class Akbal extends Monster
 			this.armorName = "shimmering pelt";
 			this.lust = 30;
 			this.lustVuln = 0.8;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.gems = 40;
 			this.drop = new WeightedDrop().
 					add(consumables.INCUBID,4).
@@ -229,13 +204,13 @@ public class Akbal extends Monster
 					add(consumables.AKBALSL,2).
 					add(weapons.PIPE,1);
 			this.abilities = [
-				{call: eAttack(), type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY]},
+				{call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY]},
 				{call: akbalLustAttack, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[]},
 				{call: akbalSpecial, type: ABILITY_MAGIC, range: RANGE_RANGED, tags:[TAG_FIRE]},
 				{call: akbalHeal, type: ABILITY_MAGIC, range: RANGE_SELF, tags:[TAG_HEAL]},
 			];
 			this.tailType = Tail.CAT;
-			this.createPerk(PerkLib.FireVulnerability, 0, 0, 0, 0);
+			this.createPerk(PerkLib.IceVulnerability, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			this.createPerk(PerkLib.OverMaxHP, (20 + mod*6), 0, 0, 0);

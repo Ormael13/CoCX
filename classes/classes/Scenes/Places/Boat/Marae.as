@@ -1,7 +1,8 @@
-package classes.Scenes.Places.Boat 
+package classes.Scenes.Places.Boat
 {
 import classes.*;
 import classes.GlobalFlags.*;
+import classes.Scenes.Combat.Combat;
 import classes.Scenes.SceneLib;
 
 public class Marae extends Monster
@@ -30,10 +31,7 @@ public class Marae extends Monster
 			else if (evade != null) outputText("You manage to avoid her tentacles thanks to your superior evasion!");
 			else {
 				outputText("You attempt to slap away the tentacles but it's too late! The tentacles tickle your groin and you can feel your [ass] being teased! \"<i>You know you want me!</i>\" Marae giggles. ");
-				var lustDmg:int = (150 + rand(player.cor / 5) + rand(player.effectiveSensitivity() / 5) + rand(player.lib / 5) + rand(50)) * (EngineCore.lustPercent() / 100);
-				player.dynStats("lust", lustDmg, "scale", false);
-				outputText("(+" + lustDmg + " lust)");
-				
+				player.takeLustDamage(150 + rand(player.cor / 5) + rand(player.effectiveSensitivity() / 5) + rand(player.lib / 5) + rand(50), true);
 			}
 		}
 		public function maraePollenCloud():void {
@@ -68,7 +66,7 @@ public class Marae extends Monster
 			createStatusEffect(StatusEffects.Uber, 1, 0, 0, 0);
 		}
 		public function smiteHit():void {
-			if (game.flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) {
+			if (Combat.playerWaitsOrDefends()) {
 				outputText("You look up in the sky to see the lightning incoming! Thanks to your preparedness, you manage to leap away before the lightning hits you! ");
 			}
 			else {
@@ -121,7 +119,7 @@ public class Marae extends Monster
 			SceneLib.boat.marae.loseAgainstMarae();
 		}
 		
-		public function Marae() 
+		public function Marae()
 		{
 			this.a = "";
 			this.short = "Marae";
@@ -174,7 +172,7 @@ public class Marae extends Monster
 			this.tallness = 10*12;
 			this.hips.type = 10;
 			this.butt.type = 8;
-			this.skin.base.color = "white";
+			this.bodyColor = "white";
 			this.hairColor = "green";
 			this.hairLength = 36;
 			this.weaponPerk = "";
@@ -183,7 +181,6 @@ public class Marae extends Monster
 			this.bonusHP = 17500;
 			this.lust = 30;
 			this.lustVuln = .04;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 140;
 			this.drop = NO_DROP;
 			this.gems = 1000;

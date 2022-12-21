@@ -10,6 +10,7 @@ import classes.PerkClass;
 
     public class MutationTemplate extends IMutationPerkType
     {
+        private static const mName:String = "PerkName Here";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -40,7 +41,7 @@ import classes.PerkClass;
                 default:
                     sufval = "";
             }
-            return "PerkName Here" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -63,9 +64,8 @@ import classes.PerkClass;
 
 
         //Mutations Buffs
-        override public function pBuffs(target:Creature = null):Object{
+        override public function buffsForTier(pTier:int):Object {
             var pBuffs:Object = {};
-            var pTier:int = currentTier(this, (target == null)? player : target);
             /*
             if (pTier == 1) {
                 pBuffs['spe.mult'] = 0;
@@ -80,8 +80,8 @@ import classes.PerkClass;
         }
 
         public function MutationTemplate() {
-            super("PerkName Here IM", "PerkName Here", ".");
-            maxLvl = 3;
+            // replace SLOT_NONE with other SLOT_XXXX constant
+            super(mName + " IM", mName, SLOT_NONE, 3);
         }
 
     }

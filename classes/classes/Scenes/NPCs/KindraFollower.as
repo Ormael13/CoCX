@@ -3,13 +3,11 @@
  * @author Ormael (idea) & Liadri (writing)
  */
 package classes.Scenes.NPCs {
-	
-	import classes.*;
-	import classes.GlobalFlags.*;
-	import classes.Scenes.Camp;
-	import classes.Scenes.NPCs.Kindra;
-	
-	use namespace CoC;
+
+import classes.*;
+import classes.GlobalFlags.*;
+
+use namespace CoC;
 	
 	public class KindraFollower extends NPCAwareContent {
 	//implements TimeAwareInterface {
@@ -33,7 +31,6 @@ public function lostFightToKindra():void {
 	clearOutput();
 	outputText("The sheep girl approach your defeated form and knock you out with a rock. You wake up not so far from the warning sign. Still sore, you head back to camp.");
 	cleanupAfterCombat();
-	return;
 }
 
 public function firstWonFightWithKindra():void {
@@ -42,7 +39,6 @@ public function firstWonFightWithKindra():void {
 	flags[kFLAGS.KINDRA_AFFECTION] = 2;
 	flags[kFLAGS.KINDRA_LVL_UP] = 2;
 	cleanupAfterCombat();
-	return;
 }
 
 public function secondWonFightWithKindra():void {
@@ -51,106 +47,60 @@ public function secondWonFightWithKindra():void {
 	flags[kFLAGS.KINDRA_AFFECTION]++;
 	flags[kFLAGS.KINDRA_LVL_UP]++;
 	cleanupAfterCombat();
-	return;
 }
 
 public function thirdWonFightWithKindra():void {
 	clearOutput();
-	outputText("The sheep girl fall fall down defeated then look at you finally speaking for the first time.\n\n");
+	outputText("The sheep girl falls down defeated then look at you finally speaking for the first time.\n\n");
 	outputText("\"<i>I guess my grounds below to you now hunter. I will have to head out and hunt elsewhere...</i>\"\n\n");
-	outputText("Whoa wait you just wanted to talk to her and get she was constantly attacking you.\n\n");
+	outputText("Whoa, wait, you just wanted to talk to her and get she was constantly attacking you.\n\n");
 	outputText("\"<i>A hunter has to defend its territory lest it be taken by others. You won it fair and square also the game was becoming scarce in the area anyway it’s time for me to move.</i>\"\n\n");
-	outputText("You tell her she don’t have to go this far just for you not to mention the area around your camp is ripe for hunting.\n\n");
+	outputText("You tell her she doesn’t have to go this far just for you not to mention the area around your camp is ripe for hunting.\n\n");
 	outputText("\"<i>Bah I stuck next to these coward up to now because I need supplies but truth be told you look like you can handle yourself so I'll come with you. Names Kindra by the way make sure you remember it.</i>\"\n\n");
-	outputText("You tell her your name is [name] and that she's free to hunt around your camp. She grunt in approval then follow you back to camp.\n\n");
+	outputText("You tell her your name is [name] and that she's free to hunt around your camp. She grunts in approval then follows you back to camp.\n\n");
 	outputText("(<b>Kindra has been added to the Followers menu!</b>)\n\n");
+	if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard",1,+1);
+	else player.createKeyItem("Radiant shard", 1,0,0,0);
+	outputText("\n\n<b>Before fully settling in your camp as if remembering something Kindra pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
 	flags[kFLAGS.KINDRA_AFFECTION]++;
 	flags[kFLAGS.KINDRA_FOLLOWER] = 1;
 	cleanupAfterCombat();
-	return;
 }
 
 public function wonFightWithKindra():void {
 	clearOutput();
 	outputText("Kindra put a knee down defeated.\n\n");
-	outputText("\"<i>That was a good skirmish [name] as much as I hate to admit it your the greater hunter in these grounds.</i>\"\n\n");
-	outputText("You tell her she don’t have to worry about her talent as an huntress either.\n\n");
+	outputText("\"<i>That was a good skirmish, [name], as much as I hate to admit it, you're the greatest hunter in these grounds.</i>\"\n\n");
+	outputText("You tell her she doesn’t have to worry about her talent as a huntress either.\n\n");
 	outputText("\"<i>You don’t really get my point but it's fine perhaps you will get it eventually.</i>\"\n\n");
-	outputText("The both of you head back to camp.");
+	outputText("Both of you head back to camp.");
 	if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) {
 		if (flags[kFLAGS.KINDRA_DEFEATS_COUNTER] >= 1) flags[kFLAGS.KINDRA_DEFEATS_COUNTER]++;
 		else flags[kFLAGS.KINDRA_DEFEATS_COUNTER] = 1;
-		if (flags[kFLAGS.KINDRA_DEFEATS_COUNTER] == 8 && flags[kFLAGS.KINDRA_LVL_UP] == 6) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 8));
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 8), 0, 0, 0);
+		if (flags[kFLAGS.KINDRA_LVL_UP] < 15 && flags[kFLAGS.KINDRA_DEFEATS_COUNTER] >= flags[kFLAGS.KINDRA_LVL_UP] + 2) {
+			var addToV1:Number = player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * flags[kFLAGS.KINDRA_DEFEATS_COUNTER];
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2))
+				player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 1, addToV1);
+			else
+				player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, addToV1, 0, 0, 0);
 			flags[kFLAGS.KINDRA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.KINDRA_LVL_UP] = 7;
-		}
-		if (flags[kFLAGS.KINDRA_DEFEATS_COUNTER] == 9 && flags[kFLAGS.KINDRA_LVL_UP] == 7) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 9));
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 9), 0, 0, 0);
-			flags[kFLAGS.KINDRA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.KINDRA_LVL_UP] = 8;
-		}
-		if (flags[kFLAGS.KINDRA_DEFEATS_COUNTER] == 10 && flags[kFLAGS.KINDRA_LVL_UP] == 8) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 10));
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 10), 0, 0, 0);
-			flags[kFLAGS.KINDRA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.KINDRA_LVL_UP] = 9;
-		}
-		if (flags[kFLAGS.KINDRA_DEFEATS_COUNTER] == 11 && flags[kFLAGS.KINDRA_LVL_UP] == 9) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 11));
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 11), 0, 0, 0);
-			flags[kFLAGS.KINDRA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.KINDRA_LVL_UP] = 10;
-		}
-		if (flags[kFLAGS.KINDRA_DEFEATS_COUNTER] == 12 && flags[kFLAGS.KINDRA_LVL_UP] == 10) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 12));
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 12), 0, 0, 0);
-			flags[kFLAGS.KINDRA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.KINDRA_LVL_UP] = 11;
-		}
-		if (flags[kFLAGS.KINDRA_DEFEATS_COUNTER] == 13 && flags[kFLAGS.KINDRA_LVL_UP] == 11) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 13));
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 13), 0, 0, 0);
-			flags[kFLAGS.KINDRA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.KINDRA_LVL_UP] = 12;
-		}
-		if (flags[kFLAGS.KINDRA_DEFEATS_COUNTER] == 14 && flags[kFLAGS.KINDRA_LVL_UP] == 12) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 14));
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 14), 0, 0, 0);
-			flags[kFLAGS.KINDRA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.KINDRA_LVL_UP] = 13;
-		}
-		if (flags[kFLAGS.KINDRA_DEFEATS_COUNTER] == 15 && flags[kFLAGS.KINDRA_LVL_UP] == 13) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 15));
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 15), 0, 0, 0);
-			flags[kFLAGS.KINDRA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.KINDRA_LVL_UP] = 14;
-		}
-		if (flags[kFLAGS.KINDRA_DEFEATS_COUNTER] == 16 && flags[kFLAGS.KINDRA_LVL_UP] == 14) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 1, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 16));
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 16), 0, 0, 0);
-			flags[kFLAGS.KINDRA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.KINDRA_LVL_UP] = 15;
+			++flags[kFLAGS.KINDRA_LVL_UP];
 		}
 	}
 	kindraAffection(1);
 	cleanupAfterCombat();
-	return;
 }
 public function lostFightWithKindra():void {
 	clearOutput();
 	outputText("As you fall down to the ground Kindra move to you.\n\n");
 	outputText("\"<i>Losing isn’t in your habits [name] I trust you just got distracted and got yourself hurt as a result. Focus your mind on the prey not the horizon and you should be fine.</i>\"\n\n");
-	outputText("You thank her for this advice as she help you stand back up the both of you heading back to camp.");
+	outputText("You thank her for this advice as she helps you stand back up both of you heading back to camp.");
 	cleanupAfterCombat();
-	return;
 }
 
 public function meet2Kindra():void {
 	clearOutput();
-	outputText("You find Kindra hunting for food in the vicinity. She notice you're there grumble about an escaped target then address you.\n\n");
+	outputText("You find Kindra hunting for food in the vicinity. She notices you're there grumble about an escaped target then address you.\n\n");
 	outputText("\"<i>What is it you wanted exactly [name]?</i>\"\n\n");
 	menu();
 	addButton(0, "Appearance", kindraAppearance).hint("Examine Kindra's detailed appearance.");
@@ -163,9 +113,9 @@ public function meet2Kindra():void {
 public function kindraAppearance():void
 {
 	clearOutput();
-	outputText("Kindra is a sheep morph or so you believe. Her white hair flow on the back of her head like a mace. Her cyan pupils have something ominous about them through you cannot guess what. Her long sheep ears are alert to sound and she use them alot when hunting. She doesn't wear any clothing letting her natural sheep wool grow wherever it is necessary to cover her privates. ");
-	outputText("While it doesn't cover her body she carry around a strange and ominous mask on her head in the shape of some beast.\n\n");
-	outputText("Her arms looks about human albeit for the wool but her legs are shaped like those of a sheep ending in a pair of small hooves. Her lunar white skin is covered in strange tattoo design that seems to glow at time. From her well shaped ass grow a small sheep tail.\n\n");
+	outputText("Kindra is a sheep morph or so you believe. Her white hair flow on the back of her head like a mace. Her cyan pupils have something ominous about them through you cannot guess what. Her long sheep ears are alert to sound and she uses them alot when hunting. She doesn't wear any clothing letting her natural sheep wool grow wherever it is necessary to cover her privates. ");
+	outputText("While it doesn't cover her body, she carries around a strange and ominous mask on her head in the shape of some beast.\n\n");
+	outputText("Her arms look about human albeit for the wool but her legs are shaped like those of a sheep ending in a pair of small hooves. Her lunar white skin is covered in strange tattoo design that seems to glow at time. From her well shaped ass grow a small sheep tail.\n\n");
 	outputText("Surprisingly for a sheep morph her breast almost reach C cup.\n\n");
 	outputText("Her fairly fair pussy is hidden under a small layer of wool.\n\n");
 	menu();
@@ -180,12 +130,13 @@ public function fight2Kindra():void {
 
 public function trainingArcheryWithKindra():void {
 	clearOutput();
+	if (!player.hasStatusEffect(StatusEffects.Kelt)) player.createStatusEffect(StatusEffects.Kelt, 5, 0, 0, 0);
 	if (flags[kFLAGS.KINDRA_DAILY_TRAINING] < 1) {
 		if (player.statusEffectv1(StatusEffects.Kindra) >= 140) {
 			if (player.isArtifactBow()) {
 				outputText("You ready your magical bow and shoot putting both your dexterity and will at the task and pushing them to the limit. Your arrows all impale one another the last striking the target with such impossible power the target fissure by the center in a cross shape and falls ground in rubble.\n\n");
 				outputText("Kindra applaud you.\n\n");
-				outputText("\"<i>Well wow I didn’t expect you to not only manage this feat but also actually destroy the target in the process pup. I can hereby and without doubt call you one of Mareth best archer your training is complete.</i>\"\n\n");
+				outputText("\"<i>Well wow I didn’t expect you to not only manage this feat but also actually destroy the target in the process pup. I can hereby and without doubt call you one of the Mareth's best archers! Your training is complete.</i>\"\n\n");
 				outputText("\"<b>Learned Sidewinder ability!</b>\"\n\n");
 				if (!player.hasStatusEffect(StatusEffects.KnowsSidewinder)) player.createStatusEffect(StatusEffects.KnowsSidewinder, 0, 0, 0, 0);
 				bowSkill(10);
@@ -198,16 +149,16 @@ public function trainingArcheryWithKindra():void {
 			flags[kFLAGS.KINDRA_DAILY_TRAINING] = 1;
 			doNext(camp.returnToCampUseFourHours);
 		}
-		if (player.statusEffectv1(StatusEffects.Kindra) >= 100 && player.statusEffectv1(StatusEffects.Kindra) < 140) {
+		else if (player.statusEffectv1(StatusEffects.Kindra) >= 100) {
 			if (flags[kFLAGS.KINDRA_ADV_ARCHERY] == 4) {
 				outputText("You head back to the archery field to resume training.\n\n");
 			}
 			else {
 				outputText("Kindra brings you to the field again this time there's but a single target.\n\n");
 				outputText("\"<i>Your final test is to hit the center five consecutive times without fail.</i>\"\n\n");
-				outputText("At first you think this is a joke... the test has to be harder than that so you ask her what's the catch?\n\n");
+				outputText("At first, you think this is a joke... the test has to be harder than that so you ask her what's the catch?\n\n");
 				outputText("\"<i>The catch is that you can’t hit anywhere but the absolute center of this target of course which means....</i>\"\n\n");
-				outputText("She draw her bow and shoots six time. You watch spellbound as all of her arrows lands not only in the center but literally impale one another striking the point zero with absolute and terrifying precision. This..this is impossible, how does she plan you to do that?!\n\n");
+				outputText("She draws her bow and shoots six time. You watch spellbound as all of her arrows lands not only in the center but literally impale one another striking the point zero with absolute and terrifying precision. This..this is impossible, how does she plan you to do that?!\n\n");
 				outputText("\"<i>There is no time limit to this training pup. I personally expect even in the best conditions it will take you at least a month of constant training to even get this trick now get to it.</i>\"\n\n");
 				flags[kFLAGS.KINDRA_ADV_ARCHERY] = 4;
 			}
@@ -224,7 +175,7 @@ public function trainingArcheryWithKindra():void {
 			flags[kFLAGS.KINDRA_DAILY_TRAINING] = 1;
 			doNext(camp.returnToCampUseFourHours);
 		}
-		if (player.statusEffectv1(StatusEffects.Kindra) >= 50 && player.statusEffectv1(StatusEffects.Kindra) < 100) {
+		else if (player.statusEffectv1(StatusEffects.Kindra) >= 50) {
 			if (flags[kFLAGS.KINDRA_ADV_ARCHERY] == 2) {
 				outputText("You head to the training field with Kindra to resume shooting.\n\n");
 			}
@@ -252,13 +203,13 @@ public function trainingArcheryWithKindra():void {
 			flags[kFLAGS.KINDRA_DAILY_TRAINING] = 1;
 			doNext(camp.returnToCampUseFourHours);
 		}
-		if (player.statusEffectv1(StatusEffects.Kelt) >= 100 && player.statusEffectv1(StatusEffects.Kindra) < 50) {
+		else if (player.statusEffectv1(StatusEffects.Kelt) >= 100 && player.statusEffectv1(StatusEffects.Kindra) < 50) {
 			if (flags[kFLAGS.KINDRA_ADV_ARCHERY] == 1) {
-				outputText("\"<i>I see you here for more archery training pup... lets see what you can do.</i>\"\n\n");
+				outputText("\"<i>I see you're here for more archery training pup... lets see what you can do.</i>\"\n\n");
 			}
 			else {
-				outputText("You ask Kindra if she would mind to teach you how to properly use a bow. She’s quite skilled. She ask a few question then nod satisfied.\n\n");
-				outputText("\"<i>You know the basics which is a good start and something I can work with. Keep in mind I won’t be going easy on you. If you thought your first teacher was a cold hearted jackass then know I will likely be pushing you hard just as much if not more pup. Our training begins now.</i>\"\n\n");
+				outputText("You ask Kindra if she would mind to teach you how to properly use a bow. She’s quite skilled. She asks a few question then nod satisfied.\n\n");
+				outputText("\"<i>You know the basics which is a good start and something I can work with. Keep in mind I won’t be going easy on you. If you thought your first teacher was a cold-hearted jackass, then know I will likely be pushing you hard just as much if not more pup. Our training begins now.</i>\"\n\n");
 				flags[kFLAGS.KINDRA_ADV_ARCHERY] = 1;
 			}
 			outputText("She leads you to a nearby field where she set a target and has you practice your aim in various sometime weird condition such as doing jump shots or shooting while running. It doesn’t come as a surprise that the majority of your shots miss.\n\n");
@@ -276,9 +227,8 @@ public function trainingArcheryWithKindra():void {
 			else bowSkill(10);
 			flags[kFLAGS.KINDRA_DAILY_TRAINING] = 1;
 			doNext(camp.returnToCampUseFourHours);
-		}
-		if (player.statusEffectv1(StatusEffects.Kelt) < 100) {
-			outputText("You ask Kindra if she would mind to teach you how to properly use a bow. She’s quite skilled. She ask a few question then sigh in disappointment.\n\n");
+		} else {
+			outputText("You ask Kindra if she would mind to teach you how to properly use a bow. She’s quite skilled. She asks a few question then sigh in disappointment.\n\n");
 			outputText("\"<i>You don’t seem to have any proper training. You will need to learn the base from someone else as I don’t teach to beginners.</i>\"\n\n");
 			doNext(meet2Kindra);
 		}

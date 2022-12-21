@@ -6,6 +6,7 @@ import classes.BodyParts.Hips;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Combat.Combat;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
@@ -29,7 +30,7 @@ public class Harpy extends Monster
 			}
 			//(Harpy special attack 1, part two if PC does anything but "Wait")
 			else {
-				if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 0) {
+				if (!Combat.playerWaitsOrDefends()) {
 					outputText("The harpy lets out a terrible cry and drops, reaching an almost impossible speed as she dives down at you.  Her eyes are narrowed like a true bird of prey.  You were too busy with your own attack to avoid it!  Her claws surge down and pierce your [armor] like paper, driving hard into the flesh beneath and making you cry out in pain.  The harpy dumps you onto the ground, your wounds bleeding profusely. ");
 					var damage:Number = (160 + rand(20)) * (1 + (player.newGamePlusMod() / 2));
 					player.takePhysDamage(damage, true);
@@ -48,7 +49,7 @@ public class Harpy extends Monster
 		protected function harpyTease():void
 		{
 			outputText("The harpy charges at you carelessly, her body striking you with the full weight of her motherly hips.  The pair of you go crashing backwards onto the ground.  You grapple with her weighty ass, trying your best not to think dirty thoughts, but the way she's maniacally flapping and writhing her curvy body against you makes it impossible! After a brief, groping wrestle on the ground, she pushes you away and takes flight again.");
-			player.dynStats("lus", (12 + rand(player.effectiveSensitivity() / 5)));
+			player.takeLustDamage((12 + rand(player.effectiveSensitivity() / 5)), true);
 		}
 
 		public function hasUber():Boolean {
@@ -120,12 +121,14 @@ public class Harpy extends Monster
 			this.bonusLust = 120;
 			this.lust = 10;
 			this.lustVuln = .7;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 20;
 			this.gems = 30 + rand(14);
 			this.drop = new ChainedDrop().add(armors.W_ROBES,1/10)
 					.add(consumables.SKYSEED,1/5)
 					.elseDrop(consumables.GLDSEED);
+			if (player.hasPerk(PerkLib.LuststickAdapted)) {
+				(this.drop as ChainedDrop).add(consumables.LUSTSTK, 1/3)
+			}
 			this.wings.type = Wings.HARPY;
 			this.abilities = [
 				{ call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY]},

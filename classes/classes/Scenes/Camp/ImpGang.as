@@ -46,7 +46,7 @@ public class ImpGang extends Imp
 			this.tallness = 36;
 			this.tailType = Tail.DEMONIC;
 			this.wings.type = Wings.IMP;
-			this.skinTone = "green";
+			this.bodyColor = "green";
 			this.createStatusEffect(StatusEffects.GenericRunDisabled, 0, 0, 0, 0);
 			this.long = "The imps stand anywhere from two to four feet tall, with scrawny builds and tiny demonic wings. Their red and orange skin is dirty, and their dark hair looks greasy. Some are naked, but most are dressed in ragged loincloths that do little to hide their groins. They all have a cocks as long and thick as a man's arm, far oversized for their bodies.";
 			this.pronoun1 = "they";
@@ -64,7 +64,6 @@ public class ImpGang extends Imp
 			this.bonusLust = 104;
 			this.lust = 30;
 			this.lustVuln = .65;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = 14;
 			this.gems = rand(15) + 25;
 			this.drop = NO_DROP;

@@ -8,11 +8,11 @@ import classes.PerkClass;
 import classes.PerkLib;
 import classes.IMutationPerkType;
 import classes.Creature;
-import classes.Player;
 import classes.Races;
 
 public class DraconicLungMutation extends IMutationPerkType
     {
+        private static const mName:String = "Draconic Lung";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -43,7 +43,7 @@ public class DraconicLungMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Draconic Lung" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -67,9 +67,8 @@ public class DraconicLungMutation extends IMutationPerkType
         }
 
         //Mutations Buffs
-        override public function pBuffs(target:Creature = null):Object{
+        override public function buffsForTier(pTier:int):Object {
             var pBuffs:Object = {};
-            var pTier:int = currentTier(this, (target == null)? player : target);
             if (pTier == 1) pBuffs['spe.mult'] = 0.05;
             if (pTier == 2) pBuffs['spe.mult'] = 0.15;
             if (pTier == 3) pBuffs['spe.mult'] = 0.35;
@@ -77,8 +76,7 @@ public class DraconicLungMutation extends IMutationPerkType
         }
 
         public function DraconicLungMutation() {
-            super("Draconic Lung IM", "Draconic Lung", ".");
-            maxLvl = 3;
+            super(mName + " IM", mName, SLOT_LUNGS, 3);
         }
 
     }

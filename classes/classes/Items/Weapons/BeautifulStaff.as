@@ -1,10 +1,11 @@
-package classes.Items.Weapons 
+package classes.Items.Weapons
 {
-	import classes.PerkLib;
+import classes.Items.Weapon;
+import classes.PerkLib;
 	import classes.EventParser;
     import classes.TimeAwareInterface;
 
-	public class BeautifulStaff extends WeaponWithPerk implements TimeAwareInterface {
+	public class BeautifulStaff extends Weapon implements TimeAwareInterface {
         //Implementation of TimeAwareInterface
         //Recalculate Wizard's multiplier every hour
 		public function timeChange():Boolean
@@ -19,9 +20,10 @@ package classes.Items.Weapons
 		}
 		
         //Normal weapon stuff
-		public function BeautifulStaff() 
+		public function BeautifulStaff()
 		{
-			super("B.Staff", "B.Staff", "beautiful staff", "a beautiful shining staff", "bonk", 2, 160, "This beautiful staff shines brilliantly in the light, showing the flawless craftsmanship.  The pommel and guard are heavily decorated in gold and brass.  Some craftsman clearly poured his heart and soul into this staff.", "Staff, Spellpower bonus for purity", PerkLib.WizardsFocus, 0, 0, 0, 0, "", "Staff");
+			super("B.Staff", "B.Staff", "beautiful staff", "a beautiful shining staff", "bonk", 2, 160, "This beautiful staff shines brilliantly in the light, showing the flawless craftsmanship.  The pommel and guard are heavily decorated in gold and brass.  Some craftsman clearly poured his heart and soul into this staff.", "Large,Staff, Spellpower bonus for purity", WT_STAFF);
+			withBuff('spellpower', 0);
             EventParser.timeAwareClassAdd(this);
 		}
 		
@@ -41,11 +43,11 @@ package classes.Items.Weapons
 
         public function updateWizardsMult():void {
             if (game.player.cor != lastCor) {
-                weapPerk.value1 = calcWizardsMult();
-                if (game.player.weapon == game.weapons.B_STAFF) {
+				_buffs['spellpower'] = calcWizardsMult();
+                if (game.player.weapon == this) {
                     //re-requip to update player's perk
-                    playerRemove();
-                    playerEquip();
+					afterUnequip(false);
+					afterEquip(false);
                 }
                 lastCor = game.player.cor;
             }
@@ -63,13 +65,9 @@ package classes.Items.Weapons
                 return _description;
         }
 		
-		override public function get verb():String { 
-			return game.player.hasPerk(PerkLib.StaffChanneling) ? "shot" : "bonk";
-		}
-		
-		override public function canUse():Boolean {
-			if (game.player.cor < (33 + game.player.corruptionTolerance)) return super.canUse();
-			outputText("You grab hold of the handle of the staff only to have it grow burning hot. You're forced to let it go lest you burn yourself. Something within the staff must be displeased.");
+		override public function canEquip(doOutput:Boolean):Boolean {
+			if (game.player.cor < (33 + game.player.corruptionTolerance)) return super.canEquip(doOutput);
+			if(doOutput) outputText("You grab hold of the handle of the staff only to have it grow burning hot. You're forced to let it go lest you burn yourself. Something within the staff must be displeased.");
 			return false;
 		}
 

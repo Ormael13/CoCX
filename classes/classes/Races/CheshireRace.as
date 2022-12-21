@@ -6,8 +6,33 @@ import classes.PerkLib;
 import classes.Race;
 
 public class CheshireRace extends Race{
-	public function CheshireRace(id:int) {
-		super("Cheshire", id);
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Human",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Human",
+        /*Eyes*/		"Human",
+        /*Face*/		"Human",
+        /*Gills*/		"Human",
+        /*Hair*/		"Human",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Human",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Human",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Human"];
+
+    public function CheshireRace(id:int) {
+		super("Cheshire", id, []);//RaceBody);
 	}
 	
 	public override function setup():void {
@@ -22,19 +47,14 @@ public class CheshireRace extends Race{
 				.armType(Arms.CAT, +1)
 				.legType(LowerBody.CAT, +1)
 				.skinCoatType(Skin.FUR, +1)
-				.customRequirement("", "lilac and white striped hair and fur",
+				.customRequirement("", "lilac and white hair and fur",
 						function (body:BodyData):Boolean {
-							return body.hairColor == "lilac and white striped" &&
-									body.skinCoatColor == "lilac and white striped"
+							return body.hairColors == "lilac and white" &&
+									body.furColors == "lilac and white"
 						}, +2)
 				.hasPerk(PerkLib.Flexibility, +1)
-				.customRequirement("","not other magical feline race",
-						function (body:BodyData):Boolean {
-							return !(CatRace.isNekomataLike(body)
-									|| body.rearType == RearBody.LION_MANE
-									|| CatRace.isHellcatLike(body)
-									|| CatRace.isDisplacerLike(body));
-						},0,-1000
+				.customRequirement("","more cheshire features than other magical feline",
+						CatRace.isCheshireSubrace,0,-1000
 				);
 		
 		addMutation(IMutationsLib.CatLikeNimblenessIM);

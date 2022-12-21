@@ -34,18 +34,6 @@ public class CoCLoader {
 	[Embed(source="../../../content/coc.xml", mimeType="application/octet-stream")]
 	public static var BUNDLE_CONTENT_COC_XML:Class;
 	bundleText("content/coc.xml", BUNDLE_CONTENT_COC_XML);
-	
-	[Embed(source="../../../content/coc/desert.xml", mimeType="application/octet-stream")]
-	public static var BUNDLE_CONTENT_COC_DESERT_XML:Class;
-	bundleText("content/coc/desert.xml", BUNDLE_CONTENT_COC_DESERT_XML);
-	
-	[Embed(source="../../../content/coc/NPC/celess.xml", mimeType="application/octet-stream")]
-	public static var BUNDLE_CONTENT_COC_NPC_CELESS_XML:Class;
-	bundleText("content/coc/NPC/celess.xml", BUNDLE_CONTENT_COC_NPC_CELESS_XML);
-
-	[Embed(source="../../../content/coc/NPC/diva.xml",mimeType="application/octet-stream")]
-	public static var BUNDLE_CONTENT_COC_NPC_DIVA_XML:Class;
-	bundleText("content/coc/NPC/diva.xml",BUNDLE_CONTENT_COC_NPC_DIVA_XML);
 
     [Embed(source="../../../content/coc/NPC/teladreshops.xml", mimeType="application/octet-stream")]
     public static var BUNDLE_CONTENT_COC_NPC_TELADRESHOPS_XML:Class;
@@ -61,6 +49,14 @@ public class CoCLoader {
 // [Embed(source="../../../res/char1.png", mimeType="image/png")]
 //	public static var BUNDLE_RES_CHAR1_PNG:Class;
 //	ldbmp("res/char1.png",BUNDLE_RES_CHAR1_PNG);
+
+	[Embed(source="../../../res/icons/items.png", mimeType="image/png")]
+	public static var BUNDLE_RES_ICONS_ITEMS_PNG:Class;
+	bundleImage("res/icons/items.png", BUNDLE_RES_ICONS_ITEMS_PNG);
+
+	[Embed(source="../../../res/icons.xml", mimeType="application/octet-stream")]
+	public static var BUNDLE_RES_ICONS_XML:Class;
+	bundleText("res/icons.xml", BUNDLE_RES_ICONS_XML);
 
 	[Embed(source="../../../res/charview/body.png", mimeType="image/png")]
 	public static var BUNDLE_RES_CHARVIEW_BODY_PNG:Class;
@@ -93,6 +89,9 @@ public class CoCLoader {
 	public static function bundleImage(key:String, c:Class):void {
 		var o:BitmapData = c ? ((new c() as Bitmap).bitmapData) : null;
 		if (o) IMAGE_BUNDLE[key] = o;
+	}
+	public static function getEmbedText(path:String):String {
+		return TEXT_BUNDLE[path];
 	}
 	/**
 	 * @param path

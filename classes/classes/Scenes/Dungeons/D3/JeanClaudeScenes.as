@@ -44,7 +44,7 @@ import classes.StatusEffects;
 			outputText("You breathe deep, steel yourself");
 			if (player.hasKeyItem("Laybans") >= 0) outputText(", put your shades on");
 			outputText(" and stride out onto the gantry. The plan is simple. You’ll keep your eyes up and march across as if you belong there, as if you are on official business.");
-			if (player.isRace(Races.DEMON)) outputText("  You can’t be mistaken for anything but a demon, after all.");
+			if (player.isRace(Races.DEMON, 1, false)) outputText("  You can’t be mistaken for anything but a demon, after all.");
 			outputText("  If or when the lizards realize who you are, you’ll make a break for it, and hopefully by then you’ll be in reach of the exit. It’s straight-forward, it’s elegant, it will work, whatever your hammering pulse has to say on the matter.");
 
 			outputText("\n\nYou try and not look down as you proceed, back straight and as aloof as you can.");
@@ -267,7 +267,7 @@ import classes.StatusEffects;
 
 				if (player.skinAdj != "smooth" || player.skinAdj != "latex" || player.skinAdj != "rubber") {
 					outputText("\n\nHe turns, snaps his fingers and raps out some instructions, too fast for you to follow, and a number of basilisks break off to hurry towards the back of the hall. His eyes are away from yours for a moment, but it doesn’t matter; your mind is floating in the vast golden sea, your body submerged in its radiance. When an object is pushed into your hands, it takes you a while to focus upon it, a while longer to recognise what it is. An egg- a black egg. You look up in dozy confusion to find Jean-Claude staring back deep into your eyes, amusement curling his long mouth. Why have they given you this? You must have asked for it. Yes- it’s obvious now, what you have to do. You crack the egg’s shell and greedily gulp down its contents.");
-					if (player.hasFur()) outputText("  Your fur drops away in ragged clumps as you drink.");
+					if (player.isFurCovered()) outputText("  Your fur drops away in ragged clumps as you drink.");
 					outputText("  Once you are finished another black egg is pushed into your hands, then another... you sigh as the viscous gloop slides down your throat, and your flesh begins to thrum, your pores puckering and then shrinking into themselves as your skin begins to gleam with the clean starkness of rubber. You slowly examine yourself once the transformation is complete, marvelling at your living, latex flesh. Yes. This feels right.");
 
 					outputText("\n\nJean-Claude watches, sharing in your admiration of your new body before stepping in to casually touch you himself. He slides his hand down your flank, rounding your [butt] before suddenly digging his claws cruelly into your rubber flesh. This time you do flinch, unable to stop yourself gasping as the pain trades with your heavy arousal.");

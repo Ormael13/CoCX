@@ -9,9 +9,34 @@ import classes.VaginaClass;
 
 public class DemonRace extends Race {
 	public static const DemonSkinColors:/*String*/Array = ["shiny black", "sky blue", "indigo", "ghostly white", "light purple", "purple", "red", "grey", "blue"];
-	
-	public function DemonRace(id:int) {
-		super("Demon", id);
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Human",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Human",
+        /*Eyes*/		"Human",
+        /*Face*/		"Human",
+        /*Gills*/		"Human",
+        /*Hair*/		"Human",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Human",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Human",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Human"];
+
+
+    public function DemonRace(id:int) {
+		super("Demon", id, []);//RaceBody);
 		mutationThreshold = 6;
 	}
 	
@@ -34,7 +59,7 @@ public class DemonRace extends Race {
 		}, "cor 50+;", 5)
 				.hornTypeAndCount(Horns.DEMON, GREATER_THAN(4), +4)
 				.plainSkinOfAdj(NOT("slippery"), +1)
-				.skinBaseColor(ANY(DemonSkinColors), +1)
+				.skinColor1(ANY(DemonSkinColors), +1)
 				.faceType(ANY(Face.HUMAN, Face.ANIMAL_TOOTHS, Face.DEVIL_FANGS), +1)
 				.armType(Arms.HUMAN, +1);
 		

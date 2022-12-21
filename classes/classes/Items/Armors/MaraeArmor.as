@@ -1,4 +1,4 @@
-package classes.Items.Armors 
+package classes.Items.Armors
 {
 	import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
@@ -12,7 +12,7 @@ import classes.ItemType;
 	 */
 	public class MaraeArmor extends Armor
 	{
-		public function MaraeArmor() 
+		public function MaraeArmor()
 		{
 			super("TB.Armr","T.B.Armor","tentacled bark armor","a suit of tentacled bark armor",55,55,13200,"This suit of armor is finely made from the white bark from corrupted Marae you've defeated. It comes with tentacles though.","Heavy");
 		}
@@ -22,7 +22,7 @@ import classes.ItemType;
 		override public function get def():Number { return 5 + int(game.player.cor / 2); }
 		override public function get mdef():Number { return 5 + int(game.player.cor / 2); }
 		
-		override public function useText():void
+		override public function equipText():void
 		{
 			outputText("You " + game.player.clothedOrNaked("strip yourself naked before you ") + "proceed to put on the armor. ");
             if (CoC.instance.player.cor < 33) outputText("You shudder at the idea of wearing armor that is infested with tentacles but you proceed anyway. ");

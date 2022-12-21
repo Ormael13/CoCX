@@ -111,7 +111,6 @@ public class WinterWolf extends Monster
 			this.bonusLust = 324;
 			this.lust = 10;
 			this.lustVuln = 0.4;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = 99;
 			this.additionalXP = 5000;
 			this.gems = 200 + rand(50);

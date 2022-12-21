@@ -2,8 +2,13 @@
 package classes.Scenes.Dungeons.EbonLabyrinth
 {
 import classes.BaseContent;
+import classes.GeneticMemories.LowerBodyMem;
+import classes.GeneticMemories.TailMem;
+import classes.GlobalFlags.kFLAGS;
 import classes.Player;
+import classes.Races;
 import classes.Races.AtlachNachaRace;
+import classes.Scenes.Metamorph;
 import classes.StatusEffects;
 import classes.display.SpriteDb;
 import classes.PerkLib;
@@ -71,13 +76,19 @@ public class AtlachNachaScene extends BaseContent {
         dynStats("cor", 100);
         player.tailType = Tail.SPIDER_ADBOMEN;
         player.lowerBody = LowerBody.ATLACH_NACHA;
+        Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.ATLACH_NACHA));
+        Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.SPIDER_ADBOMEN));
         player.legCount = 8;
         if (!player.hasVagina()) player.createVagina();
         player.vaginaType(5);
         if (player.tailRecharge < 15) player.tailRecharge = 15;
         player.createPerk(PerkLib.SpiderOvipositor,0,0,0,0);
         player.createPerk(PerkLib.TransformationImmunityAtlach,0,0,0,0);
-        player.createPerk(PerkLib.Venomancy,0,0,0,0);
+        if (player.hasPerk(PerkLib.RacialParagon))
+            flags[kFLAGS.APEX_SELECTED_RACE] = Races.ATLACH_NACHA;
+        player.createPerk(PerkLib.Venomancy, 0, 0, 0, 0);
+		outputText("\n\nEverything makes so much sense now. You were blind to the truth but thanks to the voice of the master in your head your eyes are now open. You have access to knowledge you thought you didn't possess about your reality and the reality between the reality. ");
+		outputText("Such knowledge is not for your mind alone though you want to share it with the world. Their blindness and mind untouched by him is a disease and you just happen to have the cure.  (<b>Gained Perk: Insanity!</b>)");
         player.createPerk(PerkLib.Insanity,0,0,0,0);
         player.removeAllRacialMutation();
         doNext(playerMenu);
@@ -91,7 +102,7 @@ public class AtlachNachaScene extends BaseContent {
 
     public function defeatedBy():void {
         clearOutput();
-        outputText(" You fall to the ground defeated " + (player.lust >= player.maxLust() ? "by your growing lust":"") + ((player.inte <= 0 || player.wis <= 0) ? "as you lose your grip on reality going insane":"") + ". The last thing anyone will hear from you is your tortured screams as the nightmarish spiders cocoons you. ");
+        outputText(" You fall to the ground defeated " + (player.lust >= player.maxOverLust() ? "by your growing lust":"") + ((player.inte <= 0 || player.wis <= 0) ? "as you lose your grip on reality going insane":"") + ". The last thing anyone will hear from you is your tortured screams as the nightmarish spiders cocoons you. ");
         outputText("What will happen to you from now on is perhaps too horrible to be told and you will lose your sanity long before you die of fatigue, serving as this creature's plaything until you no longer can go on with your life.\n\n");
         //[GAME OVER]
         EventParser.gameOver();

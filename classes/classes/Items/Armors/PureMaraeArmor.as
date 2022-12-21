@@ -1,4 +1,4 @@
-package classes.Items.Armors 
+package classes.Items.Armors
 {
 	import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
@@ -12,7 +12,7 @@ import classes.ItemType;
 	 */
 	public class PureMaraeArmor extends Armor
 	{
-		public function PureMaraeArmor() 
+		public function PureMaraeArmor()
 		{
 			super("DB.Armr","D.B.Armor","divine bark armor","a suit of divine bark armor",60,60,14400,"This suit of armor is finely made from the white bark you've received from Marae as a reward.","Heavy");
 		}
@@ -22,7 +22,7 @@ import classes.ItemType;
 		override public function get def():Number { return 60 - int(game.player.cor / 2); }
 		override public function get mdef():Number { return 60 - int(game.player.cor / 2); }
 		
-		override public function useText():void
+		override public function equipText():void
 		{
 			outputText("You strip yourself naked before you proceed to put on the armor. ");
 			

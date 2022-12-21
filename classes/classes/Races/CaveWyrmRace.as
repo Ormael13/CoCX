@@ -9,16 +9,41 @@ import classes.StatusEffects;
 import classes.VaginaClass;
 
 public class CaveWyrmRace extends Race {
-	
-	public function CaveWyrmRace(id:int) {
-		super("Cave Wyrm", id);
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Human",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Human",
+        /*Eyes*/		"Human",
+        /*Face*/		"Human",
+        /*Gills*/		"Human",
+        /*Hair*/		"Human",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Human",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Human",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Human"];
+
+
+    public function CaveWyrmRace(id:int) {
+		super("Cave Wyrm", id, []);//RaceBody);
 	}
 	
 	public override function setup():void {
 		addScores()
 				.skinCoatType(Skin.SCALES, +1)
-				.skinCoatTypeAndColor(Skin.SCALES, "midnight black", +1)
-				.skinBaseColor("grayish-blue", +1)
+				.skinCoatTypeAndColor1(Skin.SCALES, "midnight black", +1)
+				.skinColor1("grayish-blue", +1)
 				.earType(Ears.CAVE_WYRM, +1)
 				.eyeType(Eyes.CAVE_WYRM, +1)
 				.eyeColor("neon blue", +1)

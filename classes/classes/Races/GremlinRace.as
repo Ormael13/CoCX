@@ -8,10 +8,35 @@ import classes.Race;
 public class GremlinRace extends Race {
 	public static const GremlinEyeColors:/*String*/Array = ["red", "yellow", "purple", "orange"];
 	public static const GremlinSkinColors:/*String*/Array = ["light", "tan", "dark"];
-	public static const GremlinHairColos:/*String*/Array = ["emerald", "green", "dark green", "aqua", "light green"];
+	public static const GremlinHairColors:/*String*/Array = ["emerald", "green", "dark green", "aqua", "light green"];
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Human",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Snake",
+        /*Eyes*/		"Gorgon",
+        /*Face*/		"Snake",
+        /*Gills*/		"None",
+        /*Hair*/		"Gorgon",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Snake",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Snake",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Snake",
+        /*Wings*/		"Human",
+        /*Penis*/		"Lizard",
+        /*Vagina*/		"Lizard",
+        /*Perks*/		"Human"];
 	
 	public function GremlinRace(id:int) {
-		super("Gremlin", id);
+		super("Gremlin", id, []);//RaceBody);
+        //tfRace = RaceMem.GREMLIN;
 	}
 	
 	public override function setup():void {
@@ -28,9 +53,7 @@ public class GremlinRace extends Race {
 				.corruption(AT_LEAST(20), +1)
 				.hasPerk(PerkLib.GoblinoidBlood, +1)
 				.hasPerk(PerkLib.BouncyBody, +1)
-		/*	if (hasPerk(PerkLib.Phylactery))
-				gremlinCounter += 5;
-			if (hasPerk(MutationsLib.BlackHeart))
+		/*	if (hasPerk(MutationsLib.BlackHeart))
 				gremlinCounter++;
 			if (hasPerk(MutationsLib.BlackHeartPrimitive))
 				gremlinCounter++;
@@ -48,8 +71,8 @@ public class GremlinRace extends Race {
 					return body.player.hasPlainSkinOnly();
 				},
 				"plain skin; ")
-				.skinBaseColor(ANY(GremlinSkinColors), +1, -1000)
-				.skinBaseColor(ANY(GremlinHairColos), +1)
+				.skinColor1(ANY(GremlinSkinColors), +1, -1000)
+				.hairColor1(ANY(GremlinHairColors), +1)
 				.armType(Arms.HUMAN, +1)
 				.legType(LowerBody.HUMAN, +1)
 				.noWings(+1)

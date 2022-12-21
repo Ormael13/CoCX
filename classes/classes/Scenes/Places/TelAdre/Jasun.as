@@ -1,27 +1,7 @@
 ﻿package classes.Scenes.Places.TelAdre{
-	import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kFLAGS;
 
-	public class Jasun extends TelAdreAbstractContent{
-
-	public function Jasun()
-	{
-	}
-
-//Jasun, the Male Shark-Morph
-//It's important to provide some context for what I'm trying to achieve with this submission. My submission involves one character right now, the most important of the characters I'd like to write up if I had a bit more time. Additionally, given more time I'd probably write a scene for when Urta visits the gym, but given only a few days this is what I came up with. The character I have is met at the 'Changing Rooms', which would be an option to go to once you've paid to get in and such. This paves the way for encountering other people at the gym so you don't have to keep stuffing new characters into different hours at the bar (this is especially reasonable because not all of the characters would even make sense to encounter them at the bar).
-//If you insist on not having the changing room, which is totally your prerogative, and you like the character enough to have it win anything, I'd be more than happy to adjust the text to satisfy whatever implementation you desire.
-//Also, if this gets picked as the winner, I'd really like to expand it in the future to have race-specific text for shark-girls. They don't get any real work done specifically for them and I think they deserve it. I'd have written it into this, but really, working 8 hours a day and only having a few days to write for this contest limited the amount of work I could do on it. All I have to say is this: UNDERWATER SEX SCENE! Hopefully what's here is awesome enough for purposes of this contest, though!
-//Lastly before we get to the submission itself, I want to explain why I didn't make this shark-morph incredibly aggressive as males tend to be. By having escaped his captivity as a breeding-tool, he really has no love for their way of life. Furthermore, he's had a lot of time to think about what has happened and has come to terms with it; he's ready to move on away from his people. Him meeting the character is like a blessing in disguise, seeing as the character can provide him a very real memory of home without him having to face his people down. I felt that a male shark-morph really could be no other way having gotten away from the fate normally designed for him. Now hopefully you enjoy my entry!
-
-//REQUIREMENTS:
-//Female (Male Shark-Morphs don't deal with other men by their very nature, and aren't really into the herms of their species)
-//Max fitness (He doesn't shun you right away, but you can't have sex with him unless your fitness is maxed; he's used to shark-girls.)
-//Wearing a skimpy bikini from the shark-girls. (Come on, this is perfect and you know it!)
-
-//((I use brackets [] to denote buttons that the player can select at a given juncture))
-//-----
-//GO TO GYM (FROM TEL'ADRE)
-
+public class Jasun extends TelAdreAbstractContent{
 public function changingRoom():void {
 	//Charge for gym if no lifetime member!
 	clearOutput();
@@ -31,7 +11,7 @@ public function changingRoom():void {
 		statScreenRefresh();
 	}
 	//AT CHANGING ROOM (1ST TIME)
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00179] == 0) {
+	if(flags[kFLAGS.JASUN_MET] == 0) {
 		outputText("You walk into the largest of the changing rooms and take a look about.  The room's walls appear to be some kind of adobe material and are rough to the touch, but flush and with few cracks.  You'd hazard that this building must be pretty new.  Looking to the right of the entrance, you find a series of rudimentary sinks and shiny metal plates on the walls above them which function as mirrors.  In front of you are six changing stalls, and immediately to your left are a few bathroom stalls.  You find it pretty practical that all of these things are together in one room, but are rather curious as to why there are so few of these rooms in the first place.\n\n");
 	}
 	//AT CHANGING ROOM (2ND+ TIME)
@@ -39,7 +19,7 @@ public function changingRoom():void {
 		outputText("You enter back into the largest of the changing rooms. Everything seems to be as it was the last time you poked your head in here. Everything somehow stays so clean in this particular place despite that so much sex and debauchery goes down in this city. You find it all rather refreshing, quite honestly.");
 	}
 	//[Look Around]
-	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00181] == 0)
+	if (flags[kFLAGS.JASUN_NAME_LEARNED] == 0)
 		simpleChoices("Look Around", meetJasun, "", null, "", null, "", null, "Leave", telAdre.gymDesc);
 	else simpleChoices("Jasun", meetJasun, "", null, "", null, "", null, "Leave", telAdre.gymDesc);
 }
@@ -47,8 +27,8 @@ public function changingRoom():void {
 //AT CHANGING ROOM (SELECTING TO SEE THE SHARK OR LOOK AROUND IF FIRST TIME)
 private function meetJasun():void {
 	clearOutput();
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00179] == 0) {
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00179]++;
+	if(flags[kFLAGS.JASUN_MET] == 0) {
+		flags[kFLAGS.JASUN_MET]++;
 		outputText("As your eyes survey the room, you see a very thick figure step out from one of the changing stalls.  He is at least six feet tall from your guesstimate and has a massive barreled chest, the kind that could no doubt bench press anything the creature's own weight.  His shoulder span must be at least ");
 		if(silly()) outputText("six");
 		else outputText("three");
@@ -82,19 +62,19 @@ private function meetJasun():void {
 			if(player.tone < 75) {
 				outputText("\"<i>Hrm, I was going to suggest something, but quite frankly, you'd just hold me back. Maybe we'll meet each other again at some point when you're better fleshed out.</i>\" He grins and thrusts himself past you to leave the changing room. You feel flushed from contact with his skin and otherwise long to be around him more - to think, he hadn't even introduced himself.  You leave the changing room and try to get your wits back about you for whatever happens next.\n\n");
 				//(+15 Lust, back to gym entrance)
-				dynStats("lus", (10+player.lib/10));
+				dynStats("lus", (10+player.lib/10), "scale", false);
 				outputText("You book it out of there.  What a waste.");
 				doNext(telAdre.gymDesc);
 				return;
 			}
 			//IF PASS FITNESS CHECK
-			outputText("\"<i>You know, looking over your form, maybe this could work out for the both of us...</i>\"  As he sort of trails off, your eyebrows perk up, clearly intrigued by whatever he could possibly suggest to you.  \"<i>I've been looking for a challenge in the water... I haven't had a real challenge in a very long time.</i>\"  You aren't sure what he means exactly, especially as he's been very ambiguous with you so far, but you have a pretty good feeling what he needs of you.\n\n");
+			outputText("\"<i>You know, looking over your form, maybe this could work out for both of us...</i>\"  As he sort of trails off, your eyebrows perk up, clearly intrigued by whatever he could possibly suggest to you.  \"<i>I've been looking for a challenge in the water... I haven't had a real challenge in a very long time.</i>\"  You aren't sure what he means exactly, especially as he's been very ambiguous with you so far, but you have a pretty good feeling what he needs of you.\n\n");
 	
 			//IF DONT HAVE THE BIKINI ON
 			if(player.armorName != "slutty swimwear") {
 				outputText("\"<i>I was going to ask you to swim with me for a bit to get my blood really pumping, but you don't look like you're prepped for swimming at all!  Come back with the right gear on and maybe we can talk more about this.</i>\"  He walks with a very justified pose out of the room, almost exaggeratedly, and brushes by you just enough to make you blush from contact with his rough, and yet very arousing skin.  The right gear? Surely he's talking about a swimsuit?  Where can you get one of those... maybe the tailor in town has one, but if not there, then maybe you'll just have to find one on your journey.\n\n");
 				//(+15 Lust, back to gym entrance)
-				dynStats("lus", (10+player.lib/10));
+				dynStats("lus", (10+player.lib/10), "scale", false);
 				outputText("You book it out of there.  What a waste.");
 				doNext(telAdre.gymDesc);
 				return;
@@ -107,10 +87,10 @@ private function meetJasun():void {
 		}
 	}
 	//Met Jasun but not boned!
-	else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00179] > 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00180] == 0) {
-		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00181] == 0) {
+	else if(flags[kFLAGS.JASUN_MET] > 0 && flags[kFLAGS.JASUN_TIMES_FUCKED] == 0) {
+		if(flags[kFLAGS.JASUN_NAME_LEARNED] == 0) {
 			outputText("While you look around the changing room, one of the gym's other patron asks you if you're looking for Jasun.  Seeing your confusion, they describe the hunky shark guy you met before.  You nod and smile, happy to have learned his name.\n\n");
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00181]++;
+			flags[kFLAGS.JASUN_NAME_LEARNED]++;
 		}
 		//IF MALE
         if (silly() && (player.gender <= 1 || player.gender == 3 && player.mf("m", "f") == "m") && player.armor == armors.BONSTRP) {
@@ -135,7 +115,7 @@ private function meetJasun():void {
 			else outputText("a little more compatible with me");
 			outputText(", we can go swim.</i>\" He hesitates for a moment at the mirror, and then walks past you quickly without making eye contact. Feeling dejected and suddenly very alone, you ignore the sensation caused by his skin brushing against yours and walk back to the gym's entrance. Maybe you can work yourself back into Jasun's graces with time.\n\n");
 			//(-15 Lust, back to gym entrance)
-			dynStats("lus", -15);
+			dynStats("lus", -15, "scale", false);
 			doNext(telAdre.gymDesc);
 			return;
 		}
@@ -164,7 +144,7 @@ private function meetJasun():void {
 			
 			outputText("\"<i>[name], you know, I see that a lot has changed with you. That's fine, and it's entirely up to you, but I think today I should probably swim alone. You can come and visit me anytime, of course, maybe things will be like they were before in time.</i>\" He hesitates for a moment at the mirror, and then walks past you quickly without making eye contact. Feeling dejected and suddenly very alone, you ignore the sensation caused by his skin brushing against yours and walk back to the gym's entrance. Maybe you can work yourself back into Jasun's graces with time.\n\n");
 			//(-15 Lust, back to gym entrance)
-			dynStats("lus", -15);
+			dynStats("lus", -15, "scale", false);
 			doNext(telAdre.gymDesc);
 			return;
 		}
@@ -185,7 +165,7 @@ private function meetJasun2():void {
 	outputText("and then suddenly stops. The light in the room blinds you for a moment, but then your eyes adjust and what you see makes you gasp. There's an entire swimming pool in here, and it's absolutely gargantuan! You pull away from the shark-man and walk up to the water, running your hand through it and looking about like a kid who just walked into a toy store. He walks up behind you slowly and sits down on the ledge into the pool beside you.\n\n");
 
 	outputText("\"<i>My name is Jasun, [name]. My people love the water, but most of them are ferocious and have lost their way. Seeing as I could no longer stay with them without risking my own life constantly, I came to Tel'Adre and set about working with the gym here to set up this wondrous pool. I spend most of my time here. Not many people get to use it, but I think you are ready.</i>\" He smiles at you without baring his teeth and you're flattered, knowing how difficult that must be for something with his jaw structure. \"<i>Come, let's swim.</i>\" He puts out his hand, palm up, literally asking for your hand for him to take you into the water.\n\n");
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00181] = 1;
+	flags[kFLAGS.JASUN_NAME_LEARNED] = 1;
 	//[Accept] [Turn Away]
 	simpleChoices("Accept", acceptJasunsAdvances, "Turn Away", turnAwayFromAdj, "", null, "", null, "", null);
 }
@@ -216,7 +196,7 @@ private function jasunSecks():void {
 	clearOutput();
 	//Increment 'times had sex'
 	player.slimeFeed();
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00180] == 0) {
+	if(flags[kFLAGS.JASUN_TIMES_FUCKED] == 0) {
 		outputText("He grips your back firmly in one of his thick, clawed hands and kisses your neck thoroughly. As he does so, he uses his other hand to play with your nipples, working them up to standing on end with little to no work necessary. You gasp as he sucks on your neck, biting down with some of his front teeth slightly in order to tease you further. One of your hands reaches back behind his head, grabs his hair, and tugs. He chuckles in response, finding your aggression refreshing given how soft you've been with each other thus far. He goes back to nibbling at your neck and playing with your nipples. In response to this constant arousal, you use your other hand to start playing with his huge cock, toying with the rim and otherwise stroking his rod under the water. You notice immediately after touching it that it's slick to the touch, as if the males of his species do the lubrication. Swooning from his constant teasing torture, you stroke him up and down, fondling the large sack at the base of his dick with your fingers. He twitches in response to this, and you smile in finding some way to get back at him for his handiwork. He keeps going, but now his hand falls from your nipple down to your womanhood. As his finger trails down the length of your body, he uses one of his claws to cut an ever so thin line down your flesh, mixing pain with pleasure as you yearn for him to reach inside of you.\n\n");
 	
 		outputText("He reaches your silky folds, pushes aside your skimpy bikini, and reaches in with first one, and then two fingers. His claws poke you thoroughly, but manage to only add in a constant measure of pain to all of the pleasure of the experience; you don't mind at all. The more work he does on you, the more work you do on him, now gripping his shaft with both of your hands and working it ferociously. You fondle the tip and the base at once, and in response to the pain he gives you, occasionally grip hard enough to make him wince. It seems that he enjoys this sort of aggression, though, and presses into you stronger each time you do it. After a bit more work on your part, pre-cum starts bubbling out of his penis and filling the water around the two of you. It's colorless, but nearly causes you to orgasm when it hits your slick cunt, making it practically beg to be filled. You thrust your hips onto his hand, Jasun now ramming his whole hand in and out of you rhythmically, opening you up for him to enter you himself. You almost lose consciousness from the mix of his pre in the water turning you on and the pain and pleasure of your coming orgasm, but somehow manage to keep working him, tightening your grip around his head and shaft, making him grunt more frequently in response. Just then, you throw your head back in ecstasy and cum from his fisting you, and his cock erupts straight into the water at practically the same time, splashing your breasts with his juices underwater. The water seems to be warming up significantly, raising noticeably in temperature from cum mixing in with it. Sighing in release, you find yourself turned on yet again by his cum flushing your skin, and are not quite ready for this to be over. Bringing your head back down to meet his eyes with yours, he knows what you want, and you nod meekly, practically begging for him to join with you.\n\n");
@@ -240,7 +220,7 @@ private function jasunSecks():void {
 
 		outputText("When you wake back up, you find that your bikini is next to you and that everything else seems to be fine. You put your bikini back on and look around, unable to see Jasun anywhere. You walk toward the gym's exit and reminisce of your experience today, ready for whatever your next escapade will bring.");
 	}
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00180]++;
+	flags[kFLAGS.JASUN_TIMES_FUCKED]++;
 	player.orgasm();
 	dynStats("sen", -1);
 	doNext(camp.returnToCampUseOneHour);

@@ -5,22 +5,11 @@
 package classes.Scenes.NPCs
 {
 import classes.*;
-import classes.BodyParts.Antennae;
-import classes.BodyParts.Arms;
-import classes.BodyParts.Eyes;
-import classes.BodyParts.Horns;
-import classes.BodyParts.LowerBody;
-import classes.BodyParts.RearBody;
-import classes.BodyParts.Tail;
-import classes.BodyParts.Wings;
+import classes.BodyParts.*;
 import classes.GlobalFlags.kFLAGS;
 
 public class TifaFollower extends NPCAwareContent
 	{
-		
-		public function TifaFollower()
-		{
-		}
 
 public function tifaAffection(changes:Number = 0):Number {
 	flags[kFLAGS.TIFA_AFFECTION] += changes;
@@ -42,10 +31,13 @@ public function tifaMainMenu():void {
 public function tifaMainMenuAppearance():void {
 	clearOutput();
 	outputText("Tifa is a bee girl. Her flowing, yellow and black, hair is kept short and flat on her head accentuating her tomboyish outlook. Her eyes, like most bees, are solid black though you somehow can always figure where she is looking at. Above her hair rests a pair of antenna which from what you know allows for mental communication with the rest of the hive. ");
-	outputText("Not being a full fledged queen yet, she is still capable of moving around.\n\n");
-	outputText("Her arms and legs are covered with black armor like chitin. The chitin on her limbs climbs up to the middle of her thighs and shoulders ending with yellow fuzz. A large pair of diaphanous wings rest on her shoulders. From her well-shaped ass protrudes her abdomen covered in armor like chitin. At the tip of said abdomen of course rests her stinger from which venom occasionally drips off.\n\n");
-	outputText("Tifa is gifted with a pair of pert breasts easily reaching D cup and her wasp shape, all bugs jokes avoided, would be difficult to beat.\n\n");
-	outputText("Her pussy ever drips with a steady flow of honey albeit not as much as the handmaidens.\n\n");
+	if (player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)) outputText("Currently, she is laying down on a small bed of resin the workers made for her, she does not get to move much anymore");
+	else outputText("Not being a full fledged queen yet, she is still capable of moving around");
+	outputText(".\n\nHer arms and legs are covered with black armor like chitin. The chitin on her limbs climbs up to the middle of her thighs and shoulders ending with yellow fuzz. A large pair of diaphanous wings rest on her shoulders"+(player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)?" though due to her new size she doesn’t use them as much as she did before":"")+". ");
+	outputText("From her well-shaped ass protrudes her"+(player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)?" egg lidden":"")+" abdomen covered in armor like chitin. At the tip of said abdomen of course rests her stinger from which venom occasionally drips off.\n\nTifa is gifted with a pair of pert breasts easily reaching "+(player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)?"F":"D")+" cup and her wasp shape, all bugs jokes avoided, would be difficult to beat.\n\n");
+	if (player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)) outputText("She’s got one primary pussy on the front and many other slits lining the sides of her abdomen which her drone consorts proceed to regularly fill as to keep the egg production going");
+	else outputText("Her pussy ever drips with a steady flow of honey albeit not as much as the handmaidens");
+	outputText(".\n\n");
 	doNext(tifaMainMenu);
 }
 
@@ -57,7 +49,7 @@ public function tifaMainMenuTalk():void {
 	addButton(0, "Her", tifaMainMenuTalkHer);
 	addButton(1, "Bee life?", tifaMainMenuTalkBeeLife);
 	addButton(2, "Relations", tifaMainMenuTalkRelations);
-	if (player.gender > 1 && flags[kFLAGS.TIFA_AFFECTION] >= 100 && flags[kFLAGS.TIFA_FOLLOWER] == 9 && player.isRace(Races.BEE)) addButton(2, "Handmaiden", tifaMainMenuTalkRelations).hint("Become her handmaiden.");
+	if (player.gender > 1 && flags[kFLAGS.TIFA_AFFECTION] >= 100 && flags[kFLAGS.TIFA_FOLLOWER] == 9 && player.isRace(Races.BEE, 1, false)) addButton(2, "Handmaiden", tifaMainMenuTalkRelations).hint("Become her handmaiden.");
 	else if (flags[kFLAGS.TIFA_FOLLOWER] > 9) addButtonDisabled(3, "Handmaiden", "You're already her handmaiden.");
 	else addButtonDisabled(3, "Handmaiden", "Become her handmaiden. (Req. female or herm bee morph and discussed all conversation at least once, also have an affection rating with Tifa of 100)");
 	addButton(4, "Back", tifaMainMenu);
@@ -69,7 +61,7 @@ public function tifaMainMenuTalkReturn():void {
 	addButton(0, "Her", tifaMainMenuTalkHer);
 	addButton(1, "Bee life?", tifaMainMenuTalkBeeLife);
 	addButton(2, "Relations", tifaMainMenuTalkRelations);
-	if (player.gender > 1 && flags[kFLAGS.TIFA_AFFECTION] >= 100 && flags[kFLAGS.TIFA_FOLLOWER] == 9 && player.isRace(Races.BEE)) addButton(2, "Handmaiden", tifaMainMenuTalkBecomeHerHandmaiden).hint("Become her handmaiden.");
+	if (player.gender > 1 && flags[kFLAGS.TIFA_AFFECTION] >= 100 && flags[kFLAGS.TIFA_FOLLOWER] == 9 && player.isRace(Races.BEE, 1, false)) addButton(2, "Handmaiden", tifaMainMenuTalkBecomeHerHandmaiden).hint("Become her handmaiden.");
 	else if (flags[kFLAGS.TIFA_FOLLOWER] > 9) addButtonDisabled(3, "Handmaiden", "You're already her handmaiden.");
 	else addButtonDisabled(3, "Handmaiden", "Become her handmaiden. (Req. female or herm bee morph and discussed all conversation at least once, also have an affection rating with Tifa of 100)");
 	addButton(4, "Back", tifaMainMenu);
@@ -97,7 +89,7 @@ public function tifaMainMenuTalkBeeLife():void {
 }
 public function tifaMainMenuTalkRelations():void {
 	clearOutput();
-	outputText("What's the standing of relations between bees and the other races."+(player.isRace(Races.PHOENIX) ? " You overheard that the sand witches and harpies had very close relationships with the hives.":"")+"\n\n");
+	outputText("What's the standing of relations between bees and the other races."+(player.isRace(Races.PHOENIX, 1, false) ? " You overheard that the sand witches and harpies had very close relationships with the hives.":"")+"\n\n");
 	outputText("\"<i>While the hivezzz are open to any alliance that may involve willing incubatorzzz for our eggzzz, outsiderzzz aren’t allowed in the hivezzz proper and are limited to parley with the queen’zzz emizzzary, often a handmaiden. Thizzz helpzzz keep threats to the hive outzzzide, however azzz you might have notizzzed thizzz izzz not a failproof zzzolution and ");
 	outputText("zzzometimezzz a corrupted bee hazzz to be put down for the good of everyone.</i>\"\n\nWhat does it take for outsiders to gain entry then?\n\n");
 	outputText("\"<i>Outsiderzzz don’t gain entry. They never do. However zzzome bee morphzzz who aren’t affiliated to a hive are zzzometimezzz allowed the gift of bonding. As you may know pure bee honey hazzz powerful tranzzzformative capabilitiezzz and can fully transform even a native marethian into a bee morph. For mozzzt thizzz izzz azzz far azzz it goezzz azzz even thizzz tranzzzformativezzz cannot fully grant you our anatomy. ");
@@ -113,12 +105,11 @@ public function tifaMainMenuTalkBecomeHerHandmaiden():void {
 	outputText("You ask Tifa if she would actually like to start her hive for real.\n\n");
 	outputText("\"<i>Well I didn’t actually plan to become queen zzzo zzzoon. Heck I would rather continue living however I like. No matter what laying eggzzz muzzzt feel like, I appreciate my freedom more. Alzzzo I’m worried I won’t be able to zzzee you again azzz my brood will likely lock you out for my own zzzafety.</i>\"\n\n");
 	outputText("What if you were of her brood to begin with? You would gladly carry her eggs if it’s what is necessary to get her started.\n\n");
-	outputText("\"<i>You… you would go thizzz far azzz to bind your mind to mine and become my handmaiden?… Juzzzt for me to accept my role azzz a queen of my people? -PCname- I… fair enough yezzz I will become your queen. Do you promizzze to faithfully zzzerve me for the rezzzt of your life azzz my bezzzt friend, lover and daughter?</i>\"\n\n");
+	outputText("\"<i>You… you would go thizzz far azzz to bind your mind to mine and become my handmaiden?… Juzzzt for me to accept my role azzz a queen of my people? [name] I… fair enough yezzz I will become your queen. Do you promizzze to faithfully zzzerve me for the rezzzt of your life azzz my bezzzt friend, lover and daughter?</i>\"\n\n");
 	outputText("You would of course, otherwise you wouldn't have proposed this in the first place.\n\n");
 	outputText("\"<i>You do realizzze the implicationzzz of thizzz right? Onzzze you become a true bee there will be no way back. Tranzzzformation itemzzz won’t give you back your humanity.</i>\"\n\n");
 	menu();
-	addButtonDisabled(1, "Yes", "Soon");
-	//addButton(1, "Yes", tifaMainMenuTalkBecomeHerHandmaidenYes).hint("Become her handmaiden");
+	addButton(1, "Yes", tifaMainMenuTalkBecomeHerHandmaidenYes).hint("Become her handmaiden");
 	addButton(3, "No", tifaMainMenuTalkBecomeHerHandmaidenNo).hint("Think about it first");
 }
 public function tifaMainMenuTalkBecomeHerHandmaidenYes():void {
@@ -127,7 +118,7 @@ public function tifaMainMenuTalkBecomeHerHandmaidenYes():void {
 	outputText("\"<i>Then… then pleazzze have thizzz… I… I kept thizzz item in cazzze zzzomeday I would need it. Thizzz izzz some of my own royal jelly and it should allow you to become the firzzzt true member of my hive and my mozzzt cherizzzhed handmaiden.</i>\"\n\n");
 	outputText("She hands you a small candy like item. The way she’s saying it, it's almost as awkward as a wedding proposal but you already know your answer is a yes. \n\n");
 	outputText("You take a deep breath before accepting the candy from your insectoid lover. It is a small, round and shaped like a teardrop, about an inch long and half an inch thick. You put it in your mouth. It is soft and sweet, but has a bit of a sour aftertaste. After a few moments, you feel like your head is spinning, and you lie back down on the flower while Tifa moves over you and gently caresses your face with her chitin covered arms. ");
-	outputText("Suddenly your whole body start to ache, then burn. You look down at yourself to see what is happening, only to see a layer of "+(player.coatColor == "black"?"brown":"black")+" chitin slowly growing across your torso, in the same places as a true bee! Looks like you’re turning into a full bee now.\n\n");
+	outputText("Suddenly your whole body start to ache, then burn. You look down at yourself to see what is happening, only to see a layer of "+(player.chitinColor == "black"?"brown":"black")+" chitin slowly growing across your torso, in the same places as a true bee! Looks like you’re turning into a full bee now.\n\n");
 	outputText("Your energy rapidly fades as more of your body changes. You try to steady your breathing while the transformation progresses. It isn’t easy, especially when something fundamental about your pussy changes, and you feel something viscous start to flow out of it. Thankfully, it isn’t gasps of pain that are making it hard to take deep breaths anymore, but gasps of pleasure. ");
 	outputText("You can’t wait to feel another part of your body rearrange itself and to experience the rush of new feelings from them. The sensations from your new honeypot in particular are almost overwhelming and every few moments another torrent of honey sprays out.\n\n");
 	outputText("Eventually, the transformation ends, and you open your eyes again. Still dizzy you try to stand back up. You look over your body, and find that you have indeed become just like a handmaiden. You push out your lips a bit and find that yes, you now have luscious black lips. Your whole body is now covered in chitin plating, in the same way as a true bees would be. Finally, you check your womanhood and find that it is now secreting honey, not unlike the bee maidens surrounding Tifa. ");
@@ -141,20 +132,32 @@ public function tifaMainMenuTalkBecomeHerHandmaidenYes():void {
 	outputText("It doesn’t take much longer for the process of being filled with your lover’s eggs to finish, and the stinger is retracted from your body. You pant, exhausted from the ordeal. Tifa is tired too, likely because it's her first time. You lean on her a little, still panting and she caresses your hair in response.\n\n");
 	outputText("\"<i>Well, we are in thizzz for the better and the worzzze. I love you [name], now and until death do uzzz part.</i>\"\n\n");
 	outputText("You do too and you know what you must do next. It's time to head out and find someone to carry these eggs, your abdomen is just this full.\n\n");
-	player.antennae.type == Antennae.BEE;
+	player.antennae.type = Antennae.BEE;
 	player.eyes.type = Eyes.BLACK_EYES_SAND_TRAP;
-	player.tailType = Tail.NONE;
+	player.ears.type = Ears.HUMAN;
+	player.faceType = Face.HUMAN;
+	player.tailType = Tail.BEE_ABDOMEN;
 	player.arms.type = Arms.BEE;
 	player.lowerBody = LowerBody.BEE;
-	//player.tongue.type = Tongue.ELF;
+	player.tongue.type = Tongue.BEE;
 	player.wings.type = Wings.BEE_LARGE;
 	player.horns.type = Horns.NONE;
 	player.horns.count = 0;
-	player.rearBody.type = RearBody.NONE;
-	player.killCocks(-1);
-	//player.createPerk(PerkLib.,0,0,0,0) - tf immunity perk
+	player.rearBody.type = RearBody.BEE_HANDMAIDEN;
+	player.skin.setBaseOnly({type:Skin.CHITIN, pattern: Skin.PATTERN_BEE_STRIPES});
+	player.killCocks( -1);
+	player.vaginaType(VaginaClass.BLACK_SAND_TRAP);
+	player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_DROOLING;
+	if (!player.hasStatusEffect(StatusEffects.BlackNipples)) player.createStatusEffect(StatusEffects.BlackNipples, 0, 0, 0, 0);
+	player.createPerk(PerkLib.TransformationImmunityBeeHandmaiden, 0, 0, 0, 0);
+	if (!player.hasPerk(PerkLib.BeeOvipositor)) player.createPerk(PerkLib.BeeOvipositor, player.maxEggs, 0, 0, 0);
+	else player.setPerkValue(PerkLib.BeeOvipositor, 1, player.maxEggs);
+	dynStats("lus", ((40 + rand(21)) * 0.01 * player.maxLust()), "scale", false);
+	if (player.cor >= 50) player.cor -= 50;
+	else player.cor = 0;
 	player.removeAllRacialMutation();
 	outputText("\n\n");
+	flags[kFLAGS.TIFA_FOLLOWER]++;
 	CoC.instance.mainViewManager.updateCharviewIfNeeded();
 	doNext(tifaMainMenuTalkReturn);
 }
@@ -179,6 +182,8 @@ public function tifaMainMenuSex():void {
 		addButtonDisabled(1, "Sixty 9", "Not for genderless ones.");
 		addButtonDisabled(2, "Breast Play", "Not for genderless ones.");
 	}
+	addButton(3, "Sex with the queen", tifaMainMenuSexWithTheQueen)
+		.disableIf(!player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden), "Req. <b>bee</b>ing a little more like bees.");
 	addButton(4, "Back", tifaMainMenu);
 }
 
@@ -244,9 +249,23 @@ public function tifaMainMenuSexBreastPlay():void {
 		else outputText("massive amount of your baby batter, her upper body no longer recognizable as a result of the copious amount of spooge covering her");
 	}
 	outputText(".\n\nFinally spent, you collapse down beside her and drift off to sleep, satisfied with your little escapade.");
-	if (player.hasCock()) player.sexReward("Default", "Dick", true, false);
-	if (player.hasVagina()) player.sexReward("Default", "Vaginal", true, false);
+	if (player.hasCock()) player.sexReward("no", "Dick");
+	if (player.hasVagina()) player.sexReward("no", "Vaginal");
 	tifaAffection(10);
+	doNext(tifaMainMenuTalkReturn);
+}
+public function tifaMainMenuSexWithTheQueen():void {
+	clearOutput();
+	outputText("You cheerfully walk over to Tifa’s sizable ovipositor, anticipating with glee what it will be like to be filled by it. Tifa waves in happiness, glad to see you came for more. Ready for your queen to fill you, you lay down comfortably to receive the eggs.\n\n");
+	outputText("\"<i>Herezzz your load love, do come back afterwardzzz you know I have plenty.</i>\"\n\n");
+	outputText("You don’t get much of a chance to reply anything, as Tifa promptly takes it upon herself to jam the royal tool inside your honeypot. You shriek in pleasure from the sudden intruder filling your body. Your legs quickly fail you, and you topple over, thankfully one of your many bee girlfriends catches you before you hit the floor. You don’t pay much attention though, you’re too busy seeing white from the intense penetration going on between your legs.\n\n");
+	outputText("Tifa’s ovipositor soon starts to unload huge amounts of bee eggs deep into your womb, filling you up. You cum at once, this is what you were meant to do. This is what you want to spend your whole life doing. It feels so damn good to be filled up by her, and her satisfaction at the sentiment within your mind only makes it better.\n\n");
+	outputText("Another orgasm passes through your body, and you look behind yourself to see your filled up abdomen, feeling how bloated it has become. In fact, when you can feel that it is still growing, your body is pushed over the edge of another orgasm.\n\n");
+	outputText("It doesn’t take much longer for the process of being filled with your lover’s eggs to finish, and the stinger is retracted from your body. You pant, exhausted and mushy from the ordeal. It's time to head out now and find someone to carry these.\n\n");
+	player.sexReward("no", "Vaginal");
+	player.setPerkValue(PerkLib.BeeOvipositor, 1, player.maxEggs); //get the eggs
+	player.trainStat("lib", +1, 100);
+	player.dynStats("cor", -10);
 	doNext(tifaMainMenuTalkReturn);
 }
 private function pcGotTentaclesForFun():Boolean {

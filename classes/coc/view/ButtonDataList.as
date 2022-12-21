@@ -11,11 +11,21 @@ public class ButtonDataList {
 		list.push(bd);
 		return bd;
 	}
+	public function get(index:int):ButtonData {
+		return list[index];
+	}
 	public function clear():void {
 		list.splice(0);
 	}
 	public function get length():int {
 		return list.length;
+	}
+	public function get active():int {
+		var activeBtns:int = 0;
+		for each(var i:ButtonData in list) {
+			if (i["enabled"]) activeBtns++;
+		}
+		return activeBtns;
 	}
 }
 }

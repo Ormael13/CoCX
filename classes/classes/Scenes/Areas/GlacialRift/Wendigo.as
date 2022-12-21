@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.Areas.GlacialRift 
+package classes.Scenes.Areas.GlacialRift
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -105,7 +105,7 @@ import classes.internals.*;
 			return str;
 		}
 		
-		public function Wendigo() 
+		public function Wendigo()
 		{
 			this.a = "the ";
 			this.short = "wendigo";
@@ -135,7 +135,6 @@ import classes.internals.*;
 			this.bonusLust = 609;
 			this.lust = 20;
 			this.lustVuln = .05;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 84;
 			this.additionalXP = 600;
 			this.gems = 120 + rand(40);
@@ -143,7 +142,6 @@ import classes.internals.*;
 					.add(consumables.SNOWW_D, 5)
 					.add(consumables.ICICLE_, 2);
 			this.wings.type = Wings.LEVITATION;
-			this.wings.desc = "levitation";
 			this.createStatusEffect(StatusEffects.Flying, 50, 0, 0, 0);
 			this.createPerk(PerkLib.IceNature, 0, 0, 0, 0);
 			checkMonster();

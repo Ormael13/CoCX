@@ -122,8 +122,8 @@ public function encounterTamanisDaughters():void {
 			addButton(3, "Let Them", legTamanisDaughtersRAEPYou);
 		}
 		else {
-			addButtonDisabled(2, "Fuck Them", "You not have cock.");
-			addButtonDisabled(3, "Let Them", "You not have cock.");
+			addButtonDisabled(2, "Fuck Them", "You don't have cock.");
+			addButtonDisabled(3, "Let Them", "You don't have cock.");
 		}
 		return;
 	}
@@ -145,8 +145,8 @@ public function encounterTamanisDaughters():void {
 		addButton(3, "Let Them", legTamanisDaughtersRAEPYou);
 	}
 	else {
-		addButtonDisabled(2, "Fuck Them", "You not have cock.");
-		addButtonDisabled(3, "Let Them", "You not have cock.");
+		addButtonDisabled(2, "Fuck Them", "You don't have cock.");
+		addButtonDisabled(3, "Let Them", "You don't have cock.");
 	}
 	if(flags[kFLAGS.TIMES_FUCKED_TAMANIS_DAUGHTERS] == 0) //first time
 		addButton(4, "Play Dumb", playDumbToTamanisDaughters);
@@ -175,8 +175,8 @@ private function playDumbToTamanisDaughters():void {
 		addButton(3, "Let Them", legTamanisDaughtersRAEPYou);
 	}
 	else {
-		addButtonDisabled(2, "Fuck Them", "You not have cock.");
-		addButtonDisabled(3, "Let Them", "You not have cock.");
+		addButtonDisabled(2, "Fuck Them", "You don't have cock.");
+		addButtonDisabled(3, "Let Them", "You don't have cock.");
 	}
 }
 
@@ -221,7 +221,7 @@ private function fuckYoDaughtersHomie():void {
 			outputText("You pick a random body from the crowd, impaling her on your [cock " + (x+1) + "].  The others crowd around, jealous of your chosen cock-sleeve.  She looks up at you, blissful as she hugs against you and grinds her tight body down, raping her virginal hole on the firmness of your [cock " + (x+1) + "].  The others massage your [legs], licking and nibbling your skin as they compete to tempt you into taking them next.");
 			if (tamaniPresent) {
 				outputText("  Tamani pushes aside the smaller sluts and ");
-				if (player.balls > 0) outputText("cups your [balls].");
+				if (player.hasBalls()) outputText("cups your [balls].");
 				else outputText("licks your taint.");
 			}
 			outputText("\n\n");
@@ -261,7 +261,7 @@ private function fuckYoDaughtersHomie():void {
 			//(Go to End if < 10 daughters), else keep goin
 			if (daughters > 10) {
 				outputText("As your orgasm trails off, your green cock-sleeve is removed.  You sigh happily, glad the ordeal is over.  Your [cock] manages to continue to throb, and you wonder just how long you'll have to wait for the goblin drugs to wear off.  The answer comes sooner than you think, in the form of a large vial of sweet-tasting liquid.  Your nose is pinched shut by a teal hand and your throat is massaged until you swallow the entire thing.  The result is immediate.  Slight shakes work their way through your body as it reacts to the corrupted drugs.  ");
-				if (player.balls > 0) outputText("Your balls visibly puff up and slosh as one of your daughters plays with them, filling with more seed than ever before.");
+				if (player.hasBalls()) outputText("Your balls visibly puff up and slosh as one of your daughters plays with them, filling with more seed than ever before.");
 				else outputText("Your gut clenches painfully as something inside puffs up.  Pressure builds at the base of your cock and you realize somehow you're more full of cum than ever before.");
 				outputText("\n\n");
 				if (tamaniPresent) {
@@ -283,7 +283,7 @@ private function fuckYoDaughtersHomie():void {
 				outputText("of the girls have spooge-slicked cunts and big grins.\n\n");
 
 				outputText("As your ");
-				if (player.balls > 0) outputText(ballsDescriptLight() + " empty");
+				if (player.hasBalls()) outputText(ballsDescriptLight() + " empty");
 				else outputText("prostate empties");
 				outputText(", one of the girls wanders over and asks, \"<i>How does it feel knowing your daughter is pregnant with even more children? Does it turn you on, <b>Daddy</b>?</i>\"\n\n");
 
@@ -325,12 +325,12 @@ private function fuckYoDaughtersHomie():void {
 				outputText("Cum bubbles from the first goblin's nose as she falls off you, getting a massive facial in the process.  Her twin sister happily jacks you off, aiming your tool down at the row of cunts below you.  The sticky spooge splatters into their holes, painting their toned midriffs and ample thighs with sticky whiteness as you're used like some kind of fertility sprinkler. Tamani shoves her artificial dong further into your backdoor and somehow you manage to squeeze out a few more splattering drops of whiteness for her daughters.\n\n");
 
 				outputText("Spent, your [cock] wilts, drooping downward as it drips the last of its seed.  Tamani seems oblivious to that fact though, and continues to violate you from behind.  You're about to reach around to dislodge the tiny anal rapist when another squirt of aphrodisiacs releases inside you, catching some of your prostate with the goop.  A torrent of blood rushes to your [cock] and you're suddenly achingly hard again.");
-				if (player.balls > 0) outputText("  Your [balls] ache from the strain, but struggle to churn up more sperm.  ");
+				if (player.hasBalls()) outputText("  Your [balls] ache from the strain, but struggle to churn up more sperm.  ");
 				outputText("A drop of pre-cum beads on the tip and you find yourself relaxing, letting Tamani slide her drug-slicked horse-cock the rest of the way into you.\n\n");
 			}
 			else sceneHunter.print("Failed check - Tamani is not present.");
 			outputText("A third goblin suddenly attacks your taint, licking between your " + assholeDescript() + " and ");
-			if (player.balls > 0) outputText(ballsDescriptLight());
+			if (player.hasBalls()) outputText(ballsDescriptLight());
 			else if (player.hasVagina()) outputText(vaginaDescript(0));
 			else outputText("shaft");
 			outputText(" as she presses her hard nipples up against your [legs]. ");
@@ -452,7 +452,7 @@ private function legTamanisDaughtersRAEPYou():void {
 				outputText("You drool, accepting the truth.  She's so right, there's no way you'd ever forget the feeling of hot wetness as it rubs around your shaft.  Tamani keeps talking, confidently riding you as your mind soaks up her instructions, \"<i>My hot little cunt needs filling, and your cock knows it.  It wants it.</i>\"  She leans back, allowing you a glimpse of pinkness and sticky female juices while she teases her button, \"<i>Just the sight of my pussy gets you hard and ready.  The thought of feeling that hot hole mounting you just diverts all your blood and willpower into your ready fuckstick.  You CAN'T resist my pussy.</i>\"\n\n");
 
 				outputText("The words she's saying stop mattering.  All that matters is how much a slave your cock is to that tight little hole, and how great it feels to give yourself over it.  Your spunk-hungry wife never shuts up, and you just lie there, listening placidly, contentedly twitching against her as orgasm approaches.  A happy smile spreads over your face as you feel your ");
-				if (player.balls > 0) outputText("balls");
+				if (player.hasBalls()) outputText("balls");
 				else outputText("groin");
 				outputText(" churning with lust and desire, ready to give life to another batch of daughters for your mistress.  ");
 				if (flags[kFLAGS.TAMANI_TIMES_HYPNOTISED] < 10) outputText("'Wait... wife... mistress?' your mind wonders, rejecting the foreign thoughts.  You look up at Tamani, confused for a moment");
@@ -502,7 +502,7 @@ private function legTamanisDaughtersRAEPYou():void {
 					outputText("\n\n");
 
 					outputText("You're exhausted from the sexual battering you've had to endure, but the giggling swarm won't let you rest.  Tiny hands pry open your jaws and force a bubbling concoction past your lips.  Another one massages your throat and you're forced to swallow the stuff.   The drug's effects are strong and immediate.  Your ");
-					if(player.balls > 0) outputText("balls begin swelling, trembling as they visibly inflate, preparing a massive load of seed.");
+					if(player.hasBalls()) outputText("balls begin swelling, trembling as they visibly inflate, preparing a massive load of seed.");
 					else outputText("groin shifts uncomfortably, trembling as it begins preparing a massive load of seed.");
 					outputText("  Your [cocks] spasms, twitching as unearned pleasures fill the flesh and bring you to climax.\n\n");
 
@@ -514,7 +514,7 @@ private function legTamanisDaughtersRAEPYou():void {
 
 					if(daughters < 40) {
 						outputText("Locked in a ceaseless orgasm, you're raped by one goblin after another.  A parade of tight pink pussies and their green-skinned owners passes by you, and once each of them is dripping with white seed, they take the time for a second pass.  By the time it's over, you're raw and sore, and your ");
-						if(player.balls > 0) outputText(ballsDescriptLight() + " hurt");
+						if(player.hasBalls()) outputText(ballsDescriptLight() + " hurt");
 						else outputText("crotch hurts");
 						outputText(" from having to generate such a ridiculous quantity of spooge.  The crowd of milling goblins seems much less frantic now that they've gotten what they want.  You're kissed and licked and massaged by the thankful mass, and you lose yourself to unconsciousness, still dribbling semen.");
 						sceneHunter.print("Failed check")
@@ -556,7 +556,7 @@ private function legTamanisDaughtersRAEPYou():void {
 				if(player.biggestTitSize() < 1) outputText("chest");
 				else outputText(allBreastsDescript());
 				outputText(", sending a fresh surge of arousal through your [cocks].   Another one of the girls leans down between your [legs] licking your ");
-				if(player.balls > 0) outputText("balls");
+				if(player.hasBalls()) outputText("balls");
 				else if(player.hasVagina()) outputText("pussy");
 				else outputText("taint");
 				outputText(", massaging your ");
@@ -719,7 +719,7 @@ private function legTamanisDaughtersRAEPYou():void {
 				outputText("She's completely right.  You're past truly comprehending words, all you know is how hot your wife is making your cock and had bad it wants to cum in her.   Tamani smirks knowingly and begins sliding herself along the sensitive shaft again, slowly bringing you closer to an inevitable orgasm with her glorious vagina.  She leans over and whispers, \"<i>You'll be a good obedient husband and fuck your wife, won't you?  That's a husband's duty – to worship his wife's beautiful pussy, bathe it in semen, and be obedient in her presence.</i>\"\n\n");
 
 				outputText("The words she's saying stop mattering.  All that matters is how much a slave your cock is to that wonderful, wet gash, and how great it feels to give yourself over to it.  Your spunk-hungry wife never shuts up, and you just lie there, listening placidly, contentedly twitching against her as orgasm approaches.  A happy smile spreads over your face as you feel your ");
-				if(player.balls > 0) outputText("balls");
+				if(player.hasBalls()) outputText("balls");
 				else outputText("groin");
 				outputText(" churning with lust and desire, ready to give life to another batch of daughters for your mistress.  ");
 				if(flags[kFLAGS.TAMANI_TIMES_HYPNOTISED] < 10) outputText("'Wait... wife... mistress?' your mind wonders, rejecting the foreign thoughts.  You look up at Tamani, confused for a moment");
@@ -759,9 +759,9 @@ private function tamaniDaughtersCombatLossDrain():void {
 	if(player.HP < 1) outputText("defeated");
 	else outputText("lust weakened");
 	outputText(" form, pulling you off your feet and carrying the whole of your body off.  ");
-	if(player.lust >= player.maxLust()) {
+	if(player.lust >= player.maxOverLust()) {
 		outputText("It doesn't bother you too much... they keep ");
-		if(player.balls > 0) outputText("fondling your balls and ");
+		if(player.hasBalls()) outputText("fondling your balls and ");
 		outputText("stroking your shaft to keep you nice and excited, squirming helplessly with desire.");
 	}
 	else outputText("Your abused body slips in and out of consciousness, but the crowd applies salves as they travel to slowly invigorate your form.  Their hands keep touching and stroking you, and despite your mighty efforts to resist, you find yourself aroused and willing in short order.");
@@ -818,7 +818,7 @@ private function tamaniDaughtersCombatLossDrain():void {
 	outputText("\n\n");
 
 	outputText("A trickle of warm fluid flows into you, and immediately your skin tingles, burning with heat and need.  ");
-	if(player.balls > 0) outputText("Your balls tighten inside your sack and swell up like sponges, slowly increasing in size in time with your desire.");
+	if(player.hasBalls()) outputText("Your balls tighten inside your sack and swell up like sponges, slowly increasing in size in time with your desire.");
 	else outputText("Your body feels tight and needy, your gut clenching as your body adjusts to the drugs it's absorbing so readily through your " + assholeDescript() + ".");
 	outputText("  The suckling pleasure around ");
 	if(cocks > 1) outputText("each of ");
@@ -832,7 +832,7 @@ private function tamaniDaughtersCombatLossDrain():void {
 	outputText("The goblins, upon seeing your change in demeanor, begin smiling to one another and congratulating each other on their hard work.  The girl at the console twists a few more levers and the warmth inside you seems to double as more drugs are forced into your captive frame.  You start " + player.mf("laughing","giggling") + ", the narcotics and pleasure overwhelming your thought processes, leaving you feeling like you're floating in heaven.  To anyone watching, you're panting and moaning in between the laughter, slobbering all over the milky goblin-tit in your mouth as your body begins squirting pre-cum into the cock-milker.\n\n");
 
 	outputText("A few seconds away from your orgasm, the goblin running the machinery makes a few adjustments, and you feel the flow into your rectum growing stronger until you start to feel full and bloated.  Your body caves in to the pleasure, every inch of your skin tingling as you're forced to climax.  ");
-	if(player.balls > 0) outputText("Straining and shaking, your [balls] clench against you, feeling tight as your body struggles to pump out the spooge they're producing.");
+	if(player.hasBalls()) outputText("Straining and shaking, your [balls] clench against you, feeling tight as your body struggles to pump out the spooge they're producing.");
 	else outputText("Straining and shaking , your body struggles through the orgasm as it tries to deal with all the cum your prostate and glands are putting out.");
 	outputText("  The drugs and milking machines squish, suck, and whir noisily as you cum, flooding the tubes above the mechanical cunt-bulb with white.\n\n");
 
@@ -886,7 +886,7 @@ private function tamaniDaughtersBadEndChoice():void {
 
 	outputText("A goblin leans over your face and hugs her jiggling breasts against you as she gushes, \"<i>Thank you so much daddy!   You probably can't see with all the straps holding you down, but you got me and my sisters totally pregnant.  There's even enough of your spunk left over to knock us up a few more times!  We decided that even though we don't need you to cum right now, we'd let you keep coming forever.  Do you want that?</i>\"\n\n");
 
-	if(player.statusEffectv1(StatusEffects.Exgartuan) == 1) outputText("Exgartuan barks, \"<i>Hell yes I do!</i>\" but the goblin only smirks down for a moment before looking back at you.\n\n");
+	if(SceneLib.exgartuan.dickPresent()) outputText("Exgartuan barks, \"<i>Hell yes I do!</i>\" but the goblin only smirks down for a moment before looking back at you.\n\n");
 
 	outputText("(Options: Yes, No, I'd rather fill your cunts individually & personally)");
 	simpleChoices("Yes", tamaniDaughtersYesBadEndMePlease, "No", tamaniDaughtersDeclineBadEnd, "Individual", tamanisDaughtersFillIndividuallyBADEND, "", null, "", null);
@@ -899,7 +899,7 @@ private function tamaniDaughtersYesBadEndMePlease():void {
 	outputText("\"<i>Wonderful!</i>\" cries the excited pregnant slut.   She gives you a quick peck on the cheek as she prances back over to the machine.  You brace yourself in anticipation, eager to lose yourself to an eternal orgasm.  A switch clicks, and a dial whirs as it's turned up to the maximum.  The fluids pumping into your backside and directly into your veins suddenly jump in pressure, stinging painfully for a moment before the pleasure returns.  Your eyes slowly roll back, your jaw goes slack, and your [cocks] spew");
 	if(player.cockTotal() == 1) outputText("s");
 	outputText(" cum into the tubes.\n\n");
-	if(player.statusEffectv1(StatusEffects.Exgartuan) == 1) outputText("Exgartuan moans, \"<i>Ohhhhhh yeeeeaaaaahhhh...</i>\" before slipping into silence.\n\n");
+	if(SceneLib.exgartuan.dickPresent()) outputText("Exgartuan moans, \"<i>Ohhhhhh yeeeeaaaaahhhh...</i>\" before slipping into silence.\n\n");
 
 	outputText("You spend the rest of your life trapped in orgasm, constantly feeding the growth of what becomes the biggest goblin tribe in all the land of Mareth.  Even when every single one of them is pregnant, they let you enjoy your reward.  Over time your capacity for memory, morals, or anything other feeling besides pleasure dwindles.  Trapped in a heaven of your own choosing, you gave up everything that you were for never-ending bliss.");
 	EventParser.gameOver();
@@ -976,7 +976,7 @@ private function loseToDaughtersWithTamaniThere():void {
 	outputText("Of course she's right – you can feel her wetness on your chest and you want to bury your face in it while she strokes you.  Tamani watches your eyes and turns to give you a better view, presenting her snatch while she leans back to stroke you.  She titters, \"<i>Yes, get a good look at your wife's cunt.  It looks so delicious, so warm, so inviting.  You want nothing more than to bury your cock or face into it, don't you?  That's because it's your wife's cunt, and you're a good husband.</i>\"\n\n");
 
 	outputText("Her hand starts stroking you faster and her juices start to drip down the sides of your torso");
-	if(player.skinType == Skin.FUR) outputText(", matting your [skin coat.color] fur");
+	if(player.hasFullCoatOfType(Skin.FUR)) outputText(", matting your [fur color] fur");
 	outputText(" as she continues ");
 	if(flags[kFLAGS.TAMANI_TIMES_HYPNOTISED] < 10) outputText("filling your mind with truths");
 	else outputText("reinforcing your image of yourself as an obedient husband");
@@ -1089,7 +1089,7 @@ internal function combatWinAgainstDaughters():void {
 	}
 	else {
 		outputText("You smile in satisfaction as your daughters collapse in upon themselves, devolving into a frenzied orgy.  It looks like they're too distracted to continue fighting.  They're putting on quite a show...\n\n");
-		dynStats("lus", 5);
+		dynStats("lus", 5, "scale", false);
 		if(player.lust >= 33 && player.hasCock()) {
 			outputText("You could still fuck them, but things might get out of hand...\n\nDo you fuck them?");
 			doYesNo(fuckYoDaughtersHomie, cleanupAfterCombat);
@@ -1099,7 +1099,7 @@ internal function combatWinAgainstDaughters():void {
 }
 
 internal function loseToDaughters():void {
-	if(player.lust >= player.maxLust()) {
+	if(player.lust >= player.maxOverLust()) {
 		if(player.hasStatusEffect(StatusEffects.Infested)) {
 			SceneLib.mountain.wormsScene.infestOrgasm();
 			outputText("\n\nThe goblins sigh and say, \"<i>Dad, that's just gross.  Don't get us wrong, we're still gonna have you knock us up, but I hate the feeling of those worms inside me.</i>\"");

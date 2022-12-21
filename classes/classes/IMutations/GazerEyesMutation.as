@@ -4,16 +4,14 @@
  */
 package classes.IMutations
 {
-import classes.BodyParts.RearBody;
 import classes.PerkClass;
 import classes.IMutationPerkType;
 import classes.Creature;
-import classes.Player;
 import classes.Races;
-import classes.StatusEffects;
 
 public class GazerEyesMutation extends IMutationPerkType
     {
+        private static const mName:String = "Gazer Eyes";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -44,7 +42,7 @@ public class GazerEyesMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Gazer Eyes" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -67,9 +65,8 @@ public class GazerEyesMutation extends IMutationPerkType
         }
         
         //Mutations Buffs
-        override public function pBuffs(target:Creature = null):Object{
+        override public function buffsForTier(pTier:int):Object {
             var pBuffs:Object = {};
-            var pTier:int = currentTier(this, (target == null)? player : target);
             if (pTier == 1){
                 pBuffs['int.mult'] = 0.05;
             }
@@ -85,8 +82,7 @@ public class GazerEyesMutation extends IMutationPerkType
         }
 
         public function GazerEyesMutation() {
-            super("Gazer Eyes IM", "Gazer Eyes", ".");
-            maxLvl = 3;
+            super(mName + " IM", mName, SLOT_EYES, 3);
         }
 
     }

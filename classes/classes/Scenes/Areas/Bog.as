@@ -26,7 +26,7 @@ public class Bog extends BaseContent
 			}
 			flags[kFLAGS.BOG_EXPLORED]++;
 			//Helia monogamy fucks
-			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !SceneLib.helFollower.followerHel()) {
+			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !SceneLib.helFollower.followerHel() && !isNightTime) {
 				SceneLib.helScene.helSexualAmbush();
 				return;
 			}
@@ -36,7 +36,7 @@ public class Bog extends BaseContent
 				return;
 			}
 			//Zenji
-			if (rand(5) == 0 && flags[kFLAGS.ZENJI_PROGRESS] != -1 && (flags[kFLAGS.ZENJI_PROGRESS] < 8 || flags[kFLAGS.ZENJI_PROGRESS] == 10)) {
+			if (rand(5) == 0 && flags[kFLAGS.ZENJI_PROGRESS] != -1 && (flags[kFLAGS.ZENJI_PROGRESS] < 8 || flags[kFLAGS.ZENJI_PROGRESS] == 10) && !isNightTime) {
 				if (flags[kFLAGS.ZENJI_PROGRESS] >= 4) {
 					if (flags[kFLAGS.ZENJI_PROGRESS] == 6) {
 						if (flags[kFLAGS.ZENJI_PERSPECTIVE_ON_PLAYER] == 100) {

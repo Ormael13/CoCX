@@ -244,7 +244,7 @@ import classes.Scenes.SceneLib;
 			outputText("\n\nFlushing, the demoness whimpers, \"<i>...don't think I can do that again, but I don't think you'll be able to turn me on like that twice!</i>\"");
 			
 			this.lust = 0;
-			player.dynStats("lus", 15);
+			player.takeLustDamage(15, true);
 		}
 		
 		private function healUp():void

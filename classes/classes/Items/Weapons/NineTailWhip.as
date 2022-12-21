@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Items.Weapons 
+package classes.Items.Weapons
 {
 	import classes.PerkLib;
 	import classes.Player;
@@ -11,9 +11,10 @@ package classes.Items.Weapons
 	public class NineTailWhip extends Weapon
 	{
 		
-		public function NineTailWhip() 
+		public function NineTailWhip()
 		{
 			super("NTWhip ", "NineTailWhip", "nine tail whip", "a nine tail whip", "whipping", 18, 720, "A rope that unravelled into three small ropes, each of which is unravelled again designed to whip your foes into submission.", "Large, Whipping", "Whip");
+			withBuffs({'teasedmg': 40});
 		}
 		//przerobić na mid grade wrath weapon?
 		override public function get attack():Number {
@@ -28,12 +29,12 @@ package classes.Items.Weapons
 				if (game.player.hasPerk(PerkLib.ArcaneLash)) boost += 2;
 			}
 			if (((game.player.str + game.player.spe) < 60) && game.player.hasPerk(PerkLib.ArcaneLash)) boost += 2;
-			return (5 + base + boost); 
+			return (5 + base + boost);
 		}
 		
-		override public function canUse():Boolean {
-			if (game.player.hasPerk(PerkLib.GigantGrip)) return super.canUse();
-			outputText("You aren't skilled in handling large weapons with one hand yet to effectively use this whip. Unless you want to hurt yourself instead enemies when trying to use it...  ");
+		override public function canEquip(doOutput:Boolean):Boolean {
+			if (game.player.hasPerk(PerkLib.GigantGrip)) return super.canEquip(doOutput);
+			if (doOutput) outputText("You aren't skilled in handling large weapons with one hand yet to effectively use this whip. Unless you want to hurt yourself instead enemies when trying to use it...  ");
 			return false;
 		}
 	}

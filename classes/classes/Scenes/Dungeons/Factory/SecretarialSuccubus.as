@@ -43,7 +43,7 @@ public class SecretarialSuccubus extends AbstractSuccubus
 			this.hips.type = Hips.RATING_CURVY;
 			this.butt.type = Butt.RATING_LARGE + 1;
 			this.lowerBody = LowerBody.DEMONIC_HIGH_HEELS;
-			this.skinTone = "blue";
+			this.bodyColor = "blue";
 			this.hairColor = "blond";
 			this.hairLength = 13;
 			initStrTouSpeInte(60, 50, 85, 35);
@@ -59,7 +59,6 @@ public class SecretarialSuccubus extends AbstractSuccubus
 			this.bonusHP = 200;
 			this.bonusLust = 162;
 			this.lust = 30;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 12;
 			this.gems = rand(25) + 20;
 			this.additionalXP = 75;

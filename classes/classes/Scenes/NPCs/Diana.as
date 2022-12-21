@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 	import classes.*;
 	import classes.BodyParts.Butt;
@@ -62,18 +62,23 @@ package classes.Scenes.NPCs
 		}
 		public function soulskillCostManyBirds():Number {
 			var cost:Number = 10;
-			if (hasPerk(PerkLib.DaoistCultivator)) cost -= 1;
+			if (hasPerk(PerkLib.DaoistApprenticeStage)) cost -= 1;
+			if (hasPerk(PerkLib.DaoistWarriorStage)) cost -= 1;
+			if (hasPerk(PerkLib.DaoistElderStage)) cost -= 1;
+			if (hasPerk(PerkLib.DaoistOverlordStage)) cost -= 1;
 			return cost;
 		}
 		public function soulskillCostHailOfBlades1():Number {
 			var cost:Number = 50;
-			if (hasPerk(PerkLib.DaoistCultivator)) cost -= 5;
+			if (hasPerk(PerkLib.DaoistApprenticeStage)) cost -= 5;
+			if (hasPerk(PerkLib.DaoistWarriorStage)) cost -= 5;
+			if (hasPerk(PerkLib.DaoistElderStage)) cost -= 5;
+			if (hasPerk(PerkLib.DaoistOverlordStage)) cost -= 5;
 			return cost;
 		}
 		
 		public function HealMod():Number {
 			var mod1:Number = 1;
-			if (hasPerk(PerkLib.WizardsFocus)) mod1 += .4;
 			if (hasPerk(PerkLib.SpellpowerHealing)) mod1 += .2;
 			if (hasPerk(PerkLib.NaturalHealingMinor)) mod1 += .3;
 			if (hasPerk(PerkLib.NaturalHealingMajor)) mod1 += .4;
@@ -86,16 +91,30 @@ package classes.Scenes.NPCs
 			if (hasPerk(PerkLib.Spellpower)) mod2 += .1;
 			if (hasPerk(PerkLib.Channeling)) mod2 += .2;
 			if (hasPerk(PerkLib.JobSorcerer)) mod2 += .1;
-			if (hasPerk(PerkLib.WizardsFocus)) mod2 += .4;
 			return mod2;
 		}
 		public function SoulskillMod():Number {
 			var mod3:Number = 1;
-			if (hasPerk(PerkLib.DaoistCultivator)) mod3 += .2;
 			if (hasPerk(PerkLib.DaoistApprenticeStage)) {
-				if (hasPerk(PerkLib.SoulApprentice)) mod3 += .4;
-				if (hasPerk(PerkLib.SoulPersonage)) mod3 += .4;
-				if (hasPerk(PerkLib.SoulWarrior)) mod3 += .4;
+				if (hasPerk(PerkLib.SoulApprentice)) mod3 += .3;
+				if (hasPerk(PerkLib.SoulPersonage)) mod3 += .3;
+				if (hasPerk(PerkLib.SoulWarrior)) mod3 += .3;
+			}
+			if (hasPerk(PerkLib.DaoistWarriorStage)) {
+				if (hasPerk(PerkLib.SoulSprite)) mod3 += .6;
+				if (hasPerk(PerkLib.SoulScholar)) mod3 += .6;
+				if (hasPerk(PerkLib.SoulGrandmaster)) mod3 += .6;
+			}
+			if (hasPerk(PerkLib.DaoistElderStage)) {
+				if (hasPerk(PerkLib.SoulElder)) mod3 += 1;
+				if (hasPerk(PerkLib.SoulExalt)) mod3 += 1;
+				if (hasPerk(PerkLib.SoulOverlord)) mod3 += 1;
+			}
+			if (hasPerk(PerkLib.DaoistOverlordStage)) {
+				if (hasPerk(PerkLib.SoulTyrant)) mod3 += 1.4;
+				if (hasPerk(PerkLib.SoulKing)) mod3 += 1.4;
+				if (hasPerk(PerkLib.SoulEmperor)) mod3 += 1.4;
+				//if (hasPerk(PerkLib.SoulAncestor)) mod3 += 1.4;
 			}
 			return mod3;
 		}
@@ -320,7 +339,7 @@ package classes.Scenes.NPCs
 			else dianaScene.lostToDiana();
 		}
 		
-		public function Diana() 
+		public function Diana()
 		{
 			if (flags[kFLAGS.DIANA_LVL_UP] == 0) {
 				initStrTouSpeInte(25, 25, 25, 75);
@@ -623,18 +642,17 @@ package classes.Scenes.NPCs
 			this.ass.analLooseness = AssClass.LOOSENESS_VIRGIN;
 			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.lowerBody = LowerBody.HOOFED;
-			this.skinTone = "light";
+			this.bodyColor = "light";
 			this.hairColor = "white";
 			this.weaponName = "staff";
 			this.weaponVerb="smack";
 			this.armorName = "fur";
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.ears.type = Ears.HORSE;
 			this.faceType = Face.HORSE;
 			this.tailType = Tail.HORSE;
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.AlwaysSuccesfullRunaway, 0, 0, 0, 0);
-			this.createPerk(PerkLib.WizardsFocus, 0, 0, 0, 0);
+			this.buff("Wizard's Focus").addStat('spellpower', 0.4);
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 1) {
 				this.createPerk(PerkLib.JobSorcerer, 0, 0, 0, 0);
 				this.createPerk(PerkLib.JobHealer, 0, 0, 0, 0);
@@ -661,65 +679,67 @@ package classes.Scenes.NPCs
 				this.createPerk(PerkLib.NaturalHealingMinor, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 6) {
-				this.createPerk(PerkLib.DaoistCultivator, 0, 0, 0, 0);
+				this.createPerk(PerkLib.DaoistApprenticeStage, 0, 0, 0, 0);
 				this.createPerk(PerkLib.HalfStepToImprovedSelfControl, 0, 0, 0, 0);
 				this.createPerk(PerkLib.ImprovedDiehard, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 7) {
 				this.createPerk(PerkLib.SoulSprite, 0, 0, 0, 0);
-				this.createPerk(PerkLib.DaoistApprenticeStage, 0, 0, 0, 0);
+				this.createPerk(PerkLib.Channeling, 0, 0, 0, 0);
 				this.createPerk(PerkLib.NaturalHealingMajor, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 8) {
 				this.createPerk(PerkLib.HclassHeavenTribulationSurvivor, 0, 0, 0, 0);
-				this.createPerk(PerkLib.Channeling, 0, 0, 0, 0);
+				this.createPerk(PerkLib.NaturalHealingEpic, 0, 0, 0, 0);
 				this.createPerk(PerkLib.DaoistWarriorStage, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 9) {
 				this.createPerk(PerkLib.SoulScholar, 0, 0, 0, 0);
-				this.createPerk(PerkLib.NaturalHealingEpic, 0, 0, 0, 0);
+				this.createPerk(PerkLib.EpicToughness, 0, 0, 0, 0);
 				this.createPerk(PerkLib.ImprovedSpirituality, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 10) {
 				this.createPerk(PerkLib.NaturalHealingLegendary, 0, 0, 0, 0);
-				this.createPerk(PerkLib.SoulElder, 0, 0, 0, 0);
+				this.createPerk(PerkLib.SoulGrandmaster, 0, 0, 0, 0);
 				this.createPerk(PerkLib.GreaterDiehard, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 11) {
 				this.createPerk(PerkLib.GclassHeavenTribulationSurvivor, 0, 0, 0, 0);
 				this.createPerk(PerkLib.DaoistElderStage, 0, 0, 0, 0);
-				this.createPerk(PerkLib.EpicToughness, 0, 0, 0, 0);
+				this.createPerk(PerkLib.EpicIntelligence, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 12) {
-				this.createPerk(PerkLib.SoulExalt, 0, 0, 0, 0);
+				this.createPerk(PerkLib.SoulElder, 0, 0, 0, 0);
 				this.createPerk(PerkLib.EpicDiehard, 0, 0, 0, 0);
 				this.createPerk(PerkLib.HalfStepToAdvancedSpirituality, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 13) {
-				this.createPerk(PerkLib.SoulOverlord, 0, 0, 0, 0);
-				this.createPerk(PerkLib.EpicIntelligence, 0, 0, 0, 0);
+				this.createPerk(PerkLib.SoulExalt, 0, 0, 0, 0);
+				this.createPerk(PerkLib.EpicWisdom, 0, 0, 0, 0);
 				this.createPerk(PerkLib.ImprovedSelfControl, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 14) {
 				this.createPerk(PerkLib.FclassHeavenTribulationSurvivor, 0, 0, 0, 0);
-				this.createPerk(PerkLib.SoulTyrant, 0, 0, 0, 0);
+				this.createPerk(PerkLib.SoulOverlord, 0, 0, 0, 0);
 				this.createPerk(PerkLib.AdvancedSpirituality, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 15) {
 				this.createPerk(PerkLib.DaoistOverlordStage, 0, 0, 0, 0);
-				this.createPerk(PerkLib.EpicWisdom, 0, 0, 0, 0);
+				this.createPerk(PerkLib.LegendaryToughness, 0, 0, 0, 0);
 				this.createPerk(PerkLib.Spellpower, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 16) {
-				this.createPerk(PerkLib.SoulKing, 0, 0, 0, 0);
+				this.createPerk(PerkLib.SoulTyrant, 0, 0, 0, 0);
 				this.createPerk(PerkLib.HalfStepToSuperiorSpirituality, 0, 0, 0, 0);
+				this.createPerk(PerkLib.LegendaryIntelligence, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 17) {
-				this.createPerk(PerkLib.EclassHeavenTribulationSurvivor, 0, 0, 0, 0);
-				this.createPerk(PerkLib.SoulEmperor, 0, 0, 0, 0);
+				this.createPerk(PerkLib.FFclassHeavenTribulationSurvivor, 0, 0, 0, 0);
+				this.createPerk(PerkLib.SoulKing, 0, 0, 0, 0);
+				this.createPerk(PerkLib.LegendaryWisdom, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 18) {
-				this.createPerk(PerkLib.SoulAncestor, 0, 0, 0, 0);
+				this.createPerk(PerkLib.SoulEmperor, 0, 0, 0, 0);
 				this.createPerk(PerkLib.SuperiorSpirituality, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.DIANA_FOLLOWER] == 3) this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);

@@ -6,7 +6,6 @@ package classes.Scenes.Areas.Swamp
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Items.WeaponLib;
-	import classes.StatusEffects.Combat.WebDebuff;
 
 public class AbstractSpiderMorph extends Monster
 	{
@@ -34,41 +33,23 @@ public class AbstractSpiderMorph extends Monster
 		 * flight once hit.*/
 		public function spiderMorphWebAttack():void
 		{
-			outputText("Turning to the side, " + a + short + " raises " + mf("his", "her") + " abdomen and unleashes a spray of webbing in your direction!  ");
-			//Blind dodge change
-			if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
-				outputText(capitalA + short + " misses completely due to their blindness.");
-			}
+			outputText("Turning to the side, [themonster] raises [monster his] abdomen and unleashes a spray of webbing in your direction!  ");
 			//Determine if dodged!
-			else if (player.spe - spe > 0 && int(Math.random() * (((player.spe - spe) / 4) + 80)) > 80) {
+			if (player.getEvasionRoll()) {
 				outputText("You dodge away, avoiding the sticky strands!");
-			}
-			//Determine if evaded
-			else if (player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
-				outputText("You evade, avoiding the sticky strands!");
-			}
-			//("Misdirection"
-			else if (player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
-				outputText("Your misleading movements allow you to easily sidestep the sticky strands!");
-			}
-			//Determine if cat'ed
-			else if (player.hasPerk(PerkLib.Flexibility) && rand(100) < 6) {
-				outputText("You throw yourself out of the way with cat-like agility at the last moment, avoiding " + mf("his", "her") + " attack.\n");
 			}
 			//Got hit
 			else {
-				var web:WebDebuff = player.statusEffectByType(StatusEffects.Web) as WebDebuff;
-				if (web == null) {
+				if (player.buff("Web").isPresent()) {
+					outputText("The silky strands hit you, weighing you down and restricting your movement even further.\n");
+					player.buff("Web").addStats( {"spe":-25} ).withText("Web").combatPermanent();
+				}
+				else {
 					outputText("The silky strands hit you, webbing around you and making it hard to move with any degree of speed.");
 					if (player.canFly()) outputText("  Your wings struggle uselessly in the bindings, no longer able to flap fast enough to aid you.");
 					outputText("\n");
-					web = new WebDebuff();
-					player.addStatusEffect(web);
+					player.buff("Web").addStats( {"spe":-25} ).withText("Web").combatPermanent();
 				}
-				else {
-					outputText("The silky strands hit you, weighing you down and restricting your movement even further.\n");
-				}
-				web.increase();
 			}
 		}
 
@@ -76,7 +57,7 @@ public class AbstractSpiderMorph extends Monster
 		public function getBitten():void
 		{
 			//-Languid Bite - Inflicted on PC's who have been reduced to 1 speed by webbing, raises arousal by 60.
-			if (player.spe < 2 && player.hasStatusEffect(StatusEffects.Web)) {
+			if (player.spe < 2 && player.buff("Web").isPresent()) {
 				outputText("The arachnid aggressor slowly saunters forward while you struggle under the heaps of webbing, gently placing " + mf("his", "her") + " arms around your back in a tender hug.  " + mf("His", "Her") + " fangs slide into your neck with agonizing slowness, immediately setting off a burning heat inside you that makes you dizzy and weak.  ");
 				if (player.hasCock()) {
 					outputText(player.SMultiCockDesc() + " turns rock hard and squirts weakly, suddenly so aroused that it starts soaking your " + player.armorName);
@@ -94,25 +75,9 @@ public class AbstractSpiderMorph extends Monster
 				return;
 			}
 			outputText("The spider-" + mf("boy", "girl") + " lunges forward with " + mf("his", "her") + " mouth open, " + mf("his", "her") + " two needle-like fangs closing rapidly.  ");
-			//Blind dodge change
-			if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
-				outputText(capitalA + short + " misses completely due to their blindness.");
-			}
 			//Determine if dodged!
-			else if (player.spe - spe > 0 && int(Math.random() * (((player.spe - spe) / 4) + 80)) > 80) {
+			if (player.getEvasionRoll()) {
 				outputText("You dodge away, avoiding " + mf("his", "her") + " bite!");
-			}
-			//Determine if evaded
-			else if (player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
-				outputText("You evade, avoiding the bite!");
-			}
-			//("Misdirection"
-			else if (player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
-				outputText("Your misleading movements allow you to easily sidestep the spider bite!");
-			}
-			//Determine if cat'ed
-			else if (player.hasPerk(PerkLib.Flexibility) && rand(100) < 6) {
-				outputText("You throw yourself out of the way with cat-like agility at the last moment, avoiding " + mf("his", "her") + " attack.\n");
 			}
 			else {
 				if (rand(5) == 0) {
@@ -133,25 +98,9 @@ public class AbstractSpiderMorph extends Monster
 		public function spiderDisarm():void
 		{
 			outputText(capitalA + short + " shifts and sprays webbing, aiming a tight strand of it at your [weapon].  ");
-			//Blind dodge change
-			if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
-				outputText("The blind web-shot goes horribly wide, missing you entirely.");
-			}
 			//Determine if dodged!
-			else if (player.spe - spe > 0 && int(Math.random() * (((player.spe - spe) / 4) + 80)) > 80) {
+			if (player.speedDodge(this)>0) {
 				outputText("You pull your weapon back and the webbing goes wide, missing entirely.");
-			}
-			//Determine if evaded
-			else if (player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
-				outputText("You pull your weapon back evasively and the webbing goes wide, missing entirely!");
-			}
-			//("Misdirection"
-			else if (player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
-				outputText("Your misleading movements allow you to easily sidestep the webbing!");
-			}
-			//Determine if cat'ed
-			else if (player.hasPerk(PerkLib.Flexibility) && rand(100) < 6) {
-				outputText("You throw yourself out of the way with cat-like agility at the last moment, avoiding " + mf("his", "her") + " attack.\n");
 			}
 			//Shield Ward
 			else if (player.hasPerk(PerkLib.ShieldWard) && rand (2) == 0) {
@@ -176,25 +125,9 @@ public class AbstractSpiderMorph extends Monster
 		public function spiderSilence():void
 		{
 			outputText(capitalA + short + " squirts a concentrated spray of " + mf("his", "her") + " webs directly at your face!  ");
-			//Blind dodge change
-			if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
-				outputText("The blind web-shot goes horribly wide, missing you entirely.");
-			}
 			//Determine if dodged!
-			else if (player.spe - spe > 0 && int(Math.random() * (((player.spe - spe) / 4) + 80)) > 80) {
+			if (player.getEvasionRoll()) {
 				outputText("You lean back and let them pass harmlessly overhead, avoiding the attack.");
-			}
-			//Determine if evaded
-			else if (player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
-				outputText("You pull your weapon back evasively and the webbing goes wide, missing entirely.");
-			}
-			//("Misdirection"
-			else if (player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
-				outputText("Your misleading movements allow you to easily sidestep the webbing!");
-			}
-			//Determine if cat'ed
-			else if (player.hasPerk(PerkLib.Flexibility) && rand(100) < 6) {
-				outputText("You throw yourself out of the way with cat-like agility at the last moment, avoiding " + mf("his", "her") + " attack.\n");
 			}
 			else {
 				outputText("They hit you before you can move, covering most of your nose and mouth and making it hard to breathe.  You'll be unable to use your magic while you're constantly struggling just to draw air!\n");

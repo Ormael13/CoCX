@@ -97,6 +97,10 @@ public class WaveOfEcstasySpell extends AbstractBlackSpell {
 		if (crit) outputText(" <b>Critical!</b>");
 		if (!monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
+		if (player.hasPerk(PerkLib.VerdantLeech)) {
+			if (monster.lustVuln != 0 && !monster.hasPerk(PerkLib.EnemyTrueAngel)) monster.lustVuln += 0.025;
+			HPChange(Math.round(player.maxHP() * 0.05), false);
+		}
 	}
 }
 }

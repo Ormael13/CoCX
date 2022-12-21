@@ -8,11 +8,11 @@ import classes.PerkClass;
 import classes.PerkLib;
 import classes.IMutationPerkType;
 import classes.Creature;
-import classes.Player;
 import classes.Races;
 
 public class BlackHeartMutation extends IMutationPerkType
     {
+        private static const mName:String = "Black Heart";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -43,7 +43,7 @@ public class BlackHeartMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Black Heart" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -67,9 +67,8 @@ public class BlackHeartMutation extends IMutationPerkType
         }
 
         //Mutations Buffs
-        override public function pBuffs(target:Creature = null):Object{
+        override public function buffsForTier(pTier:int):Object {
             var pBuffs:Object = {};
-            var pTier:int = currentTier(this, (target == null)? player : target);
             if (pTier == 1) pBuffs['lib.mult'] = 0.05;
             else if (pTier == 2) pBuffs['lib.mult'] = 0.15;
             else if (pTier == 3) pBuffs['lib.mult'] = 0.3;
@@ -77,8 +76,7 @@ public class BlackHeartMutation extends IMutationPerkType
         }
 
         public function BlackHeartMutation() {
-            super("Black Heart IM", "Black Heart", ".");
-            maxLvl = 3;
+            super(mName + " IM", mName, SLOT_HEART, 3);
         }
 
         

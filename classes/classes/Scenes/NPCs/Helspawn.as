@@ -159,7 +159,7 @@ private function calledShot():void {
 			this.tallness = 78;
 			this.hips.type = Hips.RATING_CURVY + 2;
 			this.butt.type = Butt.RATING_LARGE + 1;
-			this.skinTone = "dusky";
+			this.bodyColor = "dusky";
 			this.hairColor = "red";
 			this.hairLength = 13;
 			initStrTouSpeInte(60, 60, 64, 50);
@@ -179,7 +179,6 @@ private function calledShot():void {
 			this.bonusLust = 118;
 			this.lust = 30;
 			this.lustVuln = .55;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 18;
 			this.gems = 10 + rand(5);
 			this.tailType = Tail.SALAMANDER;

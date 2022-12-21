@@ -45,7 +45,7 @@ package classes.Scenes.Areas.Mountain
 				outputText("As you are exploring, a rather pungent, peaty smell assails your nostrils. You hear a strange rustling and an off-kilter squishing noise in the distance. As you explore the area you come upon a most grotesque sight. Before you is a cohesive mass of writhing, wriggling worms! While normally solitary creatures, these appear to have coalesced into a monstrous living colony!\n\n");
 				outputText("You have never before seen such a bizarre freak of nature. You see the mass of annelids creep about across your path. It stops and spreads slightly in your direction before halting. The stench of the mass is indescribable and a thick, viscous slime covers each of the countless worms forming the collective.\n\n");
 				outputText("You stop dead in your tracks, wondering what this swarm will do. After a few tense moments, the mass crawls away in a direction opposite of both you and your current path. You breathe a sigh of relief as you are confident that no good could have come from confronting such a zoological travesty.");
-				dynStats("lus", -10);
+				dynStats("lus", -10, "scale", false);
 				player.createStatusEffect(StatusEffects.MetWorms, 0, 0, 0, 0);
 				doNext(camp.returnToCampUseOneHour);
 			}
@@ -194,7 +194,7 @@ package classes.Scenes.Areas.Mountain
 				return;
 			}
 			if(player.statStore.hasBuff("SheilaCorruption")) {
-				outputText("You expose yourself and attempt to focus on expelling your squirming pets toward Sheila but as you picture launching a flood of parasites from [eachCock], the fantasy she sent returns to you, breaking your concentration!  Your hand darts automatically to your crotch, stroking [oneCock] as you imagine unloading into her cunt... only with effort do you pull it away!\n\n");
+				outputText("You expose yourself and attempt to focus on expelling your squirming pets toward [sheilaname] but as you picture launching a flood of parasites from [eachCock], the fantasy she sent returns to you, breaking your concentration!  Your hand darts automatically to your crotch, stroking [oneCock] as you imagine unloading into her cunt... only with effort do you pull it away!\n\n");
 				outputText("\"<i>Oh, my,</i>\" the demon teases.  \"<i>You don't have to masturbate yourself, [name]... I'll be happy to do it for you.</i>\"\n\n");
 				dynStats("lus", 5 + player.effectiveSensitivity()/10, "scale", false);
 				enemyAI();
@@ -206,7 +206,7 @@ package classes.Scenes.Areas.Mountain
 			//Viable target?
 			if(monster.short == "minotaur" || monster.short == "imp") {
 				if(monster.lust > 70) {
-					outputText("Your load washes over the " + monster.short + " and [monster he] stops dead in [monster his] tracks as [monster he] chokes and sputters to clear the cum from [monster his] face and nose to breathe. The " + monster.short + " stumbles, attempting to stand in your fresh cum puddle and quickly busts its ass on the ground. The worms quickly take over and swarm around the " + monster.short + "' s " + monster.cockDescriptShort(0) + ". With wild hunger, the worms easily push into the " + monster.short + "'s urethra and begin venturing into your victim's body. The " + monster.short + " begins to convulse wildly as [monster his] body begins to react to the squirming invaders. The " + monster.short + " quickly peaks and cum flies in all directions, along with some worms. You laugh hysterically as the " + monster.short + " must now endure the endless orgasms your new pets provide. You choose to unload one last batch on your fallen foe to ensure a good infestation and walk away to leave the " + monster.short + " in the hell of endless pleasure.\n");
+					outputText("Your load washes over the [monster name] and [monster he] stops dead in [monster his] tracks as [monster he] chokes and sputters to clear the cum from [monster his] face and nose to breathe. The [monster name] stumbles, attempting to stand in your fresh cum puddle and quickly busts its ass on the ground. The worms quickly take over and swarm around the [monster name]' s [monster cockshort]. With wild hunger, the worms easily push into the [monster name]'s urethra and begin venturing into your victim's body. The [monster name] begins to convulse wildly as [monster his] body begins to react to the squirming invaders. The [monster name] quickly peaks and cum flies in all directions, along with some worms. You laugh hysterically as the [monster name] must now endure the endless orgasms your new pets provide. You choose to unload one last batch on your fallen foe to ensure a good infestation and walk away to leave the [monster name] in the hell of endless pleasure.\n");
 					monster.lust = 100;
 					cleanupAfterCombat();
 					return;
@@ -228,10 +228,10 @@ package classes.Scenes.Areas.Mountain
 			//nonviable
 			else {
 				clearOutput();
-				outputText("While your fluids bathe the " + monster.short + " in your salty lust, the worms take no interest in your foe and scurry off.\n");
+				outputText("While your fluids bathe the [monster name] in your salty lust, the worms take no interest in your foe and scurry off.\n");
 			}
 			awardAchievement("Cum Cannon", kACHIEVEMENTS.COMBAT_CUM_CANNON);
-			dynStats("lus", -20);
+			dynStats("lus", -20, "scale", false);
 			enemyAI();
 		}
 

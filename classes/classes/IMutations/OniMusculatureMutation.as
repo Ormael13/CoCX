@@ -12,6 +12,7 @@ import classes.Races;
 
 public class OniMusculatureMutation extends IMutationPerkType
     {
+        private static const mName:String = "Oni Musculature";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -42,7 +43,7 @@ public class OniMusculatureMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Oni Musculature" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -68,9 +69,8 @@ public class OniMusculatureMutation extends IMutationPerkType
         }
 
         //Mutations Buffs
-        override public function pBuffs(target:Creature = null):Object{
+        override public function buffsForTier(pTier:int):Object {
             var pBuffs:Object = {};
-            var pTier:int = currentTier(this, (target == null)? player : target);
             if (pTier == 1) pBuffs['str.mult'] = 0.05;
             if (pTier == 2) pBuffs['str.mult'] = 0.15;
             if (pTier == 3) pBuffs['str.mult'] = 0.3;
@@ -78,8 +78,7 @@ public class OniMusculatureMutation extends IMutationPerkType
         }
 
         public function OniMusculatureMutation() {
-            super("Oni Musculature IM", "Oni Musculature", ".");
-            maxLvl = 3;
+            super(mName + " IM", mName, SLOT_MUSCLE, 3);
         }
         
     }

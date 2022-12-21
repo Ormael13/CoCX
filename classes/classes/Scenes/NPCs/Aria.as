@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -37,7 +37,7 @@ import classes.internals.*;
 			return str;
 		}
 		
-		public function Aria() 
+		public function Aria()
 		{
 			this.a = "the ";
 			this.short = "Melkie huntress";
@@ -62,7 +62,7 @@ import classes.internals.*;
 			this.tallness = 132;
 			this.hips.type = Hips.RATING_CURVY + 2;
 			this.butt.type = Butt.RATING_LARGE + 1;
-			this.skinTone = "black with a white underside";
+			this.bodyColor = "black with a white underside";
 			this.hairColor = "blond";
 			this.hairLength = 13;
 			this.weaponName = "harpoon";
@@ -72,7 +72,6 @@ import classes.internals.*;
 			this.bonusLust = 182;
 			this.lust = 30;
 			this.lustVuln = .8;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.gems = 50;
 			this.drop = new ChainedDrop().
 				//	add(armors.INDESSR,1/10).

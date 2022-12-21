@@ -23,7 +23,7 @@ public class SeaAnemone extends Monster
 			super.eAttack();
 		}
 
-		override public function eOneAttack():int
+		override public function eOneAttack(display:Boolean = false):int
 		{
 			applyVenom(rand(STAT_DOWN_FLAT + STAT_DOWN_MULT*player.newGamePlusMod() + player.effectiveSensitivity() / 20) + 1);
 			return 1;
@@ -39,16 +39,16 @@ public class SeaAnemone extends Monster
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			SceneLib.anemoneScene.defeatAnemone();
+			SceneLib.boat.anemoneScene.defeatAnemone();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			if(pcCameWorms){
-				outputText("\n\nYour foe doesn't seem to mind at all...");
+				outputText("\n\nThe anemone, having reached out to try and catch some of the load but missing the grab, sets her face in an irate scowl and approaches you...");
 				doNext(SceneLib.combat.endLustLoss);
 			} else {
-				SceneLib.anemoneScene.loseToAnemone();
+				SceneLib.boat.anemoneScene.loseToAnemone();
 			}
 		}
 
@@ -74,7 +74,7 @@ public class SeaAnemone extends Monster
 			this.tallness = 5*12+5;
 			this.hips.type = Hips.RATING_CURVY;
 			this.butt.type = Butt.RATING_NOTICEABLE;
-			this.skinTone = "purple";
+			this.bodyColor = "purple";
 			this.hairColor = "purplish-black";
 			this.hairLength = 20;
 			this.hairType = Hair.ANEMONE;
@@ -90,7 +90,6 @@ public class SeaAnemone extends Monster
 			this.bonusLust = 270;
 			this.lust = 30;
 			this.lustVuln = .8;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 50;
 			this.gems = rand(50) + 70;
 			this.drop = new WeightedDrop(consumables.DRYTENT, 1);

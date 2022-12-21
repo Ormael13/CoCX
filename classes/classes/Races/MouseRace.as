@@ -12,9 +12,33 @@ import classes.Race;
  */
 public class MouseRace extends Race {
 	public static const MouseHairColors:/*String*/Array = ["red", "orange", "pinkish orange", "platinum crimson"];
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Human",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Human",
+        /*Eyes*/		"Human",
+        /*Face*/		"Human",
+        /*Gills*/		"Human",
+        /*Hair*/		"Human",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Human",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Human",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Human"];
 	
 	public function MouseRace(id:int) {
-		super("Mouse", id);
+		super("Mouse", id, []);//RaceBody);
 	}
 	
 	public override function setup():void {
@@ -27,7 +51,7 @@ public class MouseRace extends Race {
 				.armType(Arms.HINEZUMI, +1)
 				.eyeTypeAndColor(Eyes.HINEZUMI, "blazing red", +1)
 				.hairType(Hair.BURNING, +1)
-				.hairColor(ANY(MouseHairColors), +1)
+				.hairColor1(ANY(MouseHairColors), +1)
 				.skinCoatType(Skin.FUR, +1);
 		addConditionedScores(function (body:BodyData): Boolean {
 			return body.skinCoatType == Skin.FUR;

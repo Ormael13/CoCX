@@ -45,17 +45,17 @@ use namespace CoC;
 				return;
 			}
 			//Lily
-			if (!player.hasStatusEffect(StatusEffects.SpoodersOff) && LilyFollower.LilyFollowerState == false && rand(3) == 0) {
+			if (!player.hasStatusEffect(StatusEffects.SpoodersOff) && !LilyFollower.LilyFollowerState && rand(3) == 0) {
 				SceneLib.lily.lilyEncounter();
 				return;
 			}
 			//KIHA X HEL THREESOME!
-			if (!SceneLib.kihaFollower.followerKiha() && player.cor < 60 && flags[kFLAGS.KIHA_AFFECTION_LEVEL] >= 1 && flags[kFLAGS.HEL_FUCKBUDDY] > 0 && player.hasCock() && flags[kFLAGS.KIHA_AND_HEL_WHOOPIE] == 0) {
+			if (!SceneLib.kihaFollower.followerKiha() && player.cor < 60 + player.corruptionTolerance && flags[kFLAGS.KIHA_AFFECTION_LEVEL] >= 1 && flags[kFLAGS.HEL_FUCKBUDDY] > 0 && player.hasCock() && flags[kFLAGS.KIHA_AND_HEL_WHOOPIE] == 0 && !isNightTime) {
 				SceneLib.kihaFollower.kihaXSalamander();
 				return;
 			}
 			//Helia monogamy fucks
-			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !SceneLib.helFollower.followerHel()) {
+			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !SceneLib.helFollower.followerHel() && !isNightTime) {
 				SceneLib.helScene.helSexualAmbush();
 				return;
 			}
@@ -78,9 +78,10 @@ use namespace CoC;
 			//Drider
 			choices[choices.length] = 2;
 			//ROGAR
-			if (flags[kFLAGS.ROGAR_DISABLED] == 0 && flags[kFLAGS.ROGAR_PHASE] < 3)
+			if (flags[kFLAGS.ROGAR_DISABLED] == 0 && flags[kFLAGS.ROGAR_PHASE] < 3 && !isNightTime)
 				choices[choices.length] = 3;
 			//Kiha
+			if (!isNightTime)
 			choices[choices.length] = 4;
 
 			//Pick from the choices and pull the encounter.

@@ -75,7 +75,7 @@ public class MinotaurKingScenes extends BaseContent
 			clearOutput();
 			if (SceneLib.shouldraFollower.followerShouldra()) {
 				outputText("You ask your ghostly partner to take care of the cow slut and help her find her way to the camp. This place will become a huge mess soon.");
-				outputText("\n\n<i>\"But... I wanted to watch your fight with Lettice! Maybe you'll even got a chance to... ah, nevermind.\"</i>");
+				outputText("\n\n<i>\"But... I wanted to watch your fight with Lettice! Maybe you'll even got a chance to... ah, never mind.\"</i>");
 				outputText("\n\nShouldra clearly doesn't want to leave you, but you insist - someone has to show the way to the poor cowgirl. And you obviously can't do it right now.\n\n");
 				if (SceneLib.marbleScene.marbleFollower())
 					outputText("\n\n<i>\"But... How will I explain this to Marble? 'Hey, look, there's another cow who will live here. And she's aso a mindless milk-leaking corrupted bitch. Deal with it.'\"</i> The ghost girl even exits your body to imitate your lover.");
@@ -104,6 +104,7 @@ public class MinotaurKingScenes extends BaseContent
 
 		private function dockucocku(cockIdx:int):void
 		{
+            var x1:int = cockIdx + 1;
 			clearOutput();
 			outputText("With a dick that big and that hard at your disposal... you could do something that some might consider crazy, something with enough erotic potential that it makes your [cocks] even harder than the fuck-scent in the air and the nude, well-endowed figures before you.");
 			outputText("\n\nThe wildly flaring tip of the Minotaur King’s dick is neatly adorned with a nice, big cumslit, one that’s spread wide by pre-cum even now. It’s big enough to be a pussy. Bigger than some goblins’ pussies, you bet, and twice as wet looking. The three medial rings that stud the length between sheath and tip would make great grips for your hands, the better to hold onto while you literally fuck the exotic minotaur-dick. You briefly wonder if those extra rings make such cocks even more pleasurable to ride than");
@@ -112,10 +113,10 @@ public class MinotaurKingScenes extends BaseContent
 			outputText(", but you discard the thought as irrelevant.");
 			outputText("\n\nYou’ll be the one doing the fucking this time.");
 			outputText("\n\nYou grab the monarch’s masturbating hands and pull them from your prize, a task made easier by his physical exhaustion. He grumbles weakly, but when your fingers make contact, he abruptly goes quiet, realizing that someone else may do him the favor of bringing him off. Little does he know just what you have planned. His jet-black member is slicker than you would have thought possible, coated with layer upon layer of jism. Your hands feel buttery after the briefest contact, like you’ve dipped them in a vat of grease.");
-			outputText("\n\nHis bulging flare and unique anatomy help you to wrangle the rebelliously twitching boner, aiding you in holding still while you line [cock "+cockIdx+"] up with the dribbling slit. His flesh is hot in your hands, and his free-flowing fluids feel like bathing warm oil on your [cockHead "+ cockIdx+"]. You tremble, awash in the delirious desire to thrust it home all at once, to impale this massive beast-cock on your smaller length in one massive stroke.");
-			outputText("\n\nBut you hold back for now, starting by gently easing your [cockHead "+cockIdx+"] into the welcoming embrace of the Minotaur King’s larger erection. He grunts in discomfort at the sensation, weakly craning his head up to watch you, but after a second he slumps right back down on the ground, moaning. He’s too turned on to care that you’re feeding inch after inch of your penis into his own; he’d accept anything that would get him off at this point. What a slut.");
-			outputText("\n\nYou waver momentarily, bathing your [cock "+cockIdx+"]");
-			if (player.balls > 0) outputText(" and [balls]");
+			outputText("\n\nHis bulging flare and unique anatomy helps you to wrangle the rebelliously twitching boner, aiding you in holding still while you line [cock "+x1+"] up with the dribbling slit. His flesh is hot in your hands, and his free-flowing fluids feel like bathing warm oil on your [cockHead "+ x1+"]. You tremble, awash in the delirious desire to thrust it home all at once, to impale this massive beast-cock on your smaller length in one massive stroke.");
+			outputText("\n\nBut you hold back for now, starting by gently easing your [cockHead "+x1+"] into the welcoming embrace of the Minotaur King’s larger erection. He grunts in discomfort at the sensation, weakly craning his head up to watch you, but after a second he slumps right back down on the ground, moaning. He’s too turned on to care that you’re feeding inch after inch of your penis into his own; he’d accept anything that would get him off at this point. What a slut.");
+			outputText("\n\nYou waver momentarily, bathing your [cock "+x1+"]");
+			if (player.hasBalls()) outputText(" and [balls]");
 			outputText(" in the steady flow of pre that leaks around your dong, savoring this moment for what it is. You might not get another chance to do something like this once you take down Lethice, and you want it to be memorable. Grinning up at her, you mouth, <i>\"You’re next,\"</i> and resume feeding the rest of yourself into your cylindrical fucktube.");
 			outputText("\n\nThe inside is tight, blessedly tight, but so wet that you could probably slide two of yourself in side-by-side and still manage to enjoy yourself. You squeeze down with your fingers the moment you hilt yourself, cranking the pressure up another notch. The defeated beast-man’s heart is hammering, sending rolling waves of pneumatic pleasure through his cock-pussy, massaging you with his own excitement.");
 			outputText("\n\nFeeling generous, or at least turned on enough not to care, you catch some of the drooling pre in your hand and slather it over the hulk’s glistening prong. A beast like this deserves to be rewarded for being so complacent, so you begin to fuck him and stroke him, working him to a simultaneous beat, stimulating his gigantic cock from inside and out. You swear, the sweltering fuck-tube is getting warmer, or at the very least wetter, like your [cock] could just melt into a puddle of ecstatic bliss.");
@@ -150,15 +151,15 @@ public class MinotaurKingScenes extends BaseContent
 			else
 			{
 				menu();
-				addButton(0, "Next", dockucockuknotu, cockIdx);
+				addButton(0, "Next", dockucockuknotu, x1);
 			}
 		}
 
-		private function dockucockuknotu(cockIdx:int):void
+		private function dockucockuknotu(x1:int):void
 		{
 			clearOutput();
 			outputText("When you try to pull out, there’s a problem: your knot. It inflated while you were cumming, and now that you’ve finished, it has expanded to lock you inside your unusual mate. No matter how you tug or pull, you can’t seem to extricate yourself from the cream-filled cow-man, and worse still, he’s starting to moan and squirm. Getting filled full of your spunk must have been more enjoyable for him than you thought.");
-			outputText("\n\nThe Minotaur King is moaning, and his cock is getting still harder in your hands, making it even harder to pull yourself free. Panicked now, you tug in vain, anything to get free before your cum, and a wave of bovine beast-cum flows back into you. Your [feet] slip in the puddled juices, and the surging bull’s member pulls you over onto his chest, still joined at the crotch. He catches you, holding you an angle so as not to damage either of your members, and then you feel it: pre-cum mixed with your liquid relief pushing back into your [cock " + cockIdx + "].");
+			outputText("\n\nThe Minotaur King is moaning, and his cock is getting still harder in your hands, making it even harder to pull yourself free. Panicked now, you tug in vain, anything to get free before your cum, and a wave of bovine beast-cum flows back into you. Your [feet] slip in the puddled juices, and the surging bull’s member pulls you over onto his chest, still joined at the crotch. He catches you, holding you an angle so as not to damage either of your members, and then you feel it: pre-cum mixed with your liquid relief pushing back into your [cock " + x1 + "].");
 			outputText("\n\nOrgasmic pressure has reversed the liquid flow, and the moment his hips lift from the floor, carrying you with them, the pressure redoubles, turning your urethra into a minotaur cum pipeline. Some of your own is mixed in of course, but you’ve never had the alabaster jism applied to your body so directly. You sag bonelessly into the brute’s grip as he turns you into his personal twinkie");
 			if (player.balls == 0) outputText(", fat with bull-cream.");
 			else outputText(". Your [sack] swells larger and larger, complete with the realization that your [balls] are being transformed into spooge-filled balloons.");
@@ -204,8 +205,8 @@ public class MinotaurKingScenes extends BaseContent
 			}
 			outputText(". If you didn’t have better things to do, or his scent toying with your mind, driving your ardor higher and higher the longer you breath it in, you could savor this for hours. But you’re dizzy with need and in a hurry.");
 			outputText("\n\nDeciding to give yourself a little reward, you lean forward and slip your tongue against the pre-soaked surface of the King’s majestic cock, trembling in orgiastic ecstasy as the taste pushes you over the edge.");
-			if (player.hasKnot()) outputText(" Your knot balloons.");
-			else if (player.horseCocks() > 0) outputText(" Your flare expands right on cue, matching the one pressing back against your tongue.");
+			if (player.horseCocks() > 0) outputText(" Your flare expands right on cue, matching the one pressing back against your tongue.");
+			else if (player.hasKnot()) outputText(" Your knot balloons.");
 			else outputText(" His flare blooms with all the force of a mushroom cloud, nearly pushing your tongue back into your mouth.");
 			outputText(" You erupt a split-second before he does, squirting thick ropes of jism into his sucking asshole. Then he goes off, shooting a torrent of spunk twenty feet into the air. Horned goblins dance in the deluge, tongues extended and hands cupped to catch as much as possible.");
 			outputText("\n\nSome lands in your mouth while you’re moaning and cumming, hot and fresh, somehow making your orgasm hotter still, juicier than you can truly comprehend.");
@@ -216,7 +217,7 @@ public class MinotaurKingScenes extends BaseContent
 				if (player.cumQ() > 5000)
 				{
 					outputText(", but you’re far from done. You pressurize his entire digestive system. The last few ejaculations backblast out over");
-					if (player.balls > 0) outputText(" your balls");
+					if (player.hasBalls()) outputText(" your balls");
 					else outputText(" your crotch");
 					outputText(", creating a sticky, salty puddle on the floor");
 				}
@@ -225,8 +226,8 @@ public class MinotaurKingScenes extends BaseContent
 			outputText("\n\nThe beaten brute squirms and writhes long after you both of you finish cumming, lost in barely understood pleasure. You pull out before his over-eager motions carry you with him, noisily licking his residue from your lips and preparing to get on with your business. The taste might be keeping you hard, but you feel more than sated enough to take on a demon queen.");
 
 			if (!recalling) {
-				player.sexReward("Default", "Dick", true, false);
-				dynStats("lus", 10);
+				player.sexReward("no", "Dick");
+				dynStats("lus", 10, "scale", false);
 				flags[kFLAGS.MINOTAURKING_FUCKED] = 1;
 				cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			}
@@ -368,33 +369,33 @@ public class MinotaurKingScenes extends BaseContent
 
 		private function sloppySeconds():void
 		{
-			var x:int = player.biggestCockIndex() + 1;
+			var x1:int = player.biggestCockIndex() + 1;
 
 			clearOutput();
 			outputText("Why resort to making use of the brutal minotaur when there’s a puddle of wet trollop so close at hand? It’s a good thing that all the spunk leaking from between her legs actually smells");
 			if (player.hasPerk(PerkLib.MinotaurCumAddict)) outputText(" wonderful");
 			else outputText(" sort of... nice... sexy even");
-			outputText(", or you might have had second thoughts. Her creampied honeypot ought to feel like teflon-treated silk against your [cock " + x + "]. It glitters in the flickering, bedroom light of Lethice’s throne room, beckoning you to plunge inside and see just how good it will feel.");
+			outputText(", or you might have had second thoughts. Her creampied honeypot ought to feel like teflon-treated silk against your [cock " + x1 + "]. It glitters in the flickering, bedroom light of Lethice’s throne room, beckoning you to plunge inside and see just how good it will feel.");
 			outputText("\n\n<i>\"Hrmmm, again?\"</i> Excellia dreamily coos, lifting her ass up into position. <i>\"...yes sir, I’m always rarin’ for a fuck.\"</i> She happily sighs and wiggles her ass in your direction, completely unaware that you’re the one advancing toward her ass with a aching cock");
-			if (player.balls > 0)
+			if (player.hasBalls())
 			{
 				outputText(" and "+num2Text(player.balls)+" balls full of cum");
 			}
 			else outputText(" and a load of backed-up cum");
-			outputText(". You don’t see much point in correcting her, not when she’s presenting so enthusiastically. Grabbing hold of her tail, you yank her into position, positioning your [cockHead "+x+"] just outside the cream-drizzling gates of her cunt.");
+			outputText(". You don’t see much point in correcting her, not when she’s presenting so enthusiastically. Grabbing hold of her tail, you yank her into position, positioning your [cockHead "+x1+"] just outside the cream-drizzling gates of her cunt.");
 			outputText("\n\nExcellia moans, <i>\"So gentle, Lord! Please, don’t make me wait!\"</i>");
 			outputText("\n\nSavagely tugging on her tail, you bury yourself into well-stuffed quim, unable to believe that this passes for gentle in the service of the Minotaur King. Each");
-			if (player.balls > 0) outputText(" ball");
+			if (player.hasBalls()) outputText(" ball");
 			else outputText(" ass");
 			outputText("-slapping impact ripples through the plush cow-slave’s derriere like waves through a pond. She exhales blissful little moos, pushing back against you to the same tempo, ever the faithful cock-milker.");
 			if (player.biggestCockLength() < 18) outputText(" You don’t think she could possibly confuse your less-impressive erection for her minotaur master’s, but she doesn’t give any sign of caring. Perhaps all the minotaur jism stuffed in her twat has left her beyond caring, or maybe she’s just happy to serve a dick - any dick.");
 			else if (player.biggestCockLength() <= 30) outputText(" You didn’t think she’d confuse your prick for her master’s, but she’s happily fucking it all the same. It probably stretches her cunt just about as much.");
 			else outputText(" You don’t think she could possibly confuse your slab of cock for a smaller sample like her minotaur master’s, but she doesn’t show much sign of caring. Perhaps all the minotaur jism stuffed in her twat has left her so inundated with pleasure that worry is beyond her. So long as she’s split with a massive shaft, what’s the difference?");
 			outputText(" You can see why the overgrown beast-man keeps her around.");
-			outputText("\n\nThe quivering cow-slut’s cunt is fucking magic too. It feels like her muscles are pulling you deeper with every thrust, coaxing your [cock "+x+"] to sprout another inch if only to better fill. Gods, you’re getting harder and harder. She feels so damned good that it’s making your head spin, making it impossible to do anything but grab hold of her ass and squeeze like your life depends on it. At this moment, bereft of anything but the sinful squelches emanating from Excellia’s too-moist muff, you feel like you love her, or at least her pussy.");
+			outputText("\n\nThe quivering cow-slut’s cunt is fucking magic too. It feels like her muscles are pulling you deeper with every thrust, coaxing your [cock "+x1+"] to sprout another inch if only to better fill. Gods, you’re getting harder and harder. She feels so damned good that it’s making your head spin, making it impossible to do anything but grab hold of her ass and squeeze like your life depends on it. At this moment, bereft of anything but the sinful squelches emanating from Excellia’s too-moist muff, you feel like you love her, or at least her pussy.");
 			outputText("\n\nFuck, you could love almost anyone right now. If the crowd around you wasn’t composed of soulless abominations, you’d probably love them too. You knead her ass some more, watching it give beneath your fingers. Your digits nearly disappear into the cushy, fuckable asscheeks, and you grunt in approval. It’s hypnotic. You’re still fucking her, of course. You couldn’t stop if you wanted to, but there’s a strange disconnect between your hips and the rest of your awareness, like there’s so much pleasure that you’ve gone with numb it.");
 			outputText("\n\nArcs of electric bliss hum and sizzle through your [cock] from second to second, popping in starbursts behind your eyes that make it hard to focus on anything but the swaying ass in front of you. You ravage Excellia on autopilot, groaning in delight as realization finally dawns on you - all the minotaur cum inside of her is affecting you, somehow. And there’s so much of the stuff! Creamy white blobs slop out whenever you pull out or thrust in, but there’s always more inside her to bathe your member, cocooning it in layer after layer of narcotic aphrodisiac.");
-			outputText("\n\nPart of you wants to stop, but that part of you is getting smaller with every thrust. This is wonderful, the raw, almost feral feeling of an athletic fuck unbounded by civilization or decency. Excellia’s pussy was designed to glove your [cock "+x+"] perfectly, to match its ravenous thrusting with a sordid massage. Faintly, you hear cheering and the greedy slut begging for more. She wants you to cum inside of her; you can tell. Everything from her body-language to the pitch of her delirious voice is begging you to feed her overactive ovaries their second meal of the hour. Her body is ravenous for cum, even when she’s so stuffed with it that it won’t stop pouring out.");
+			outputText("\n\nPart of you wants to stop, but that part of you is getting smaller with every thrust. This is wonderful, the raw, almost feral feeling of an athletic fuck unbounded by civilization or decency. Excellia’s pussy was designed to glove your [cock "+x1+"] perfectly, to match its ravenous thrusting with a sordid massage. Faintly, you hear cheering and the greedy slut begging for more. She wants you to cum inside of her; you can tell. Everything from her body-language to the pitch of her delirious voice is begging you to feed her overactive ovaries their second meal of the hour. Her body is ravenous for cum, even when she’s so stuffed with it that it won’t stop pouring out.");
 			outputText("\n\nYou need to get off more than you ever thought possible. Logically, you want this over quickly so that you can fu- face Lethice in all her naked glory. You bet you’ll even get to squeeze her tits at least once before you take her down... Those purple orbs beckon for your fingertips. But then there’s the ecstatic undulations wreathing you in fleshy heaven, caressing your nerves with individualized attention, playing your body like a harp. How could you possibly want this to end? You’ve grown so addicted to this pleasure in such a short time that ever leaving it seems an alien concept to your cunt-obsessed mind. You want to fuck this pussy <i>forever.</i>");
 			outputText("\n\nThe light shimmers across Excellia’s sweat-shined ass hypnotically from the hard-fucking you’re giving her. You swat it, just to watch it ripple - and to feel the way Excellia clenches down around you, her voice lilting into an almost musical, blissful moo. It’s fascinating, how her body reacts to your thrusts, the way she seems to wrap her whole self around you. You barely register than you’re panting or that your [cock] is hard enough to cut diamonds.");
 			if (player.cocks.length == 2) outputText(" Your other penis is enjoying sliding between her perspiring thighs almost as much.");
@@ -409,7 +410,7 @@ public class MinotaurKingScenes extends BaseContent
 			outputText("\n\n");
 			if (player.hasKnot() && player.cumQ() >= 5000) outputText(" Excellia’s belly bulges into an exceedingly pregnant state, stuffed with so much of your cum that she looks nine months pregnant and then some. Her belly button pops out just before you finish squirting into her, diluting the bestial brute’s druggy load with the seed of a Champion.");
 			else if (player.cumQ() >= 5000 && !player.hasKnot()) outputText(" Excellia’s muscular control is no match for the sheer virility of your load. The gates of her cunt give out in short order, releasing a flood of Champion-diluted minotaur spunk onto the ground. She whimpers and cries out in ecstasy, driven to the peak again and again by the continuous flooding of her womb with your seed.");
-			outputText("\n\nPivoting on your prick, dragging her velvety dicksleeve in a delightful 180 on your length, Excellia crawls atop you, still shaking. Her pussy is still squeezing and clenching down around your [cock "+x+"], keeping your attention focused solely on the itch between your thighs. Your overstimulated crotch has no choice but to climax once more, orgasming to the insatiable mynx’s demands. There’s not much to left to give her, but that doesn’t stop you from writhing in ecstasy, or groping her tits in wild excitement.");
+			outputText("\n\nPivoting on your prick, dragging her velvety dicksleeve in a delightful 180 on your length, Excellia crawls atop you, still shaking. Her pussy is still squeezing and clenching down around your [cock "+x1+"], keeping your attention focused solely on the itch between your thighs. Your overstimulated crotch has no choice but to climax once more, orgasming to the insatiable mynx’s demands. There’s not much to left to give her, but that doesn’t stop you from writhing in ecstasy, or groping her tits in wild excitement.");
 			outputText("\n\nYou aren’t sure how many more times you give it to her, but by the time you finally manage to extract yourself from her wanton lips, the Minotaur King has been dragged into the crowd.");
 			outputText("\n\nLethice looks bored, drumming her fingers on the edge of her throne. Time to deal with her.");
 			if (!recalling) {
@@ -491,7 +492,7 @@ public class MinotaurKingScenes extends BaseContent
 		{
 			clearOutput();
 			outputText("\n\nYou square yourself off at the demon queen");
-			if (player.weapon != WeaponLib.FISTS) outputText(", [weapon] in hand");
+			if (!player.weapon.isNothing) outputText(", [weapon] in hand");
 			else outputText(", balled fists raised");
 			outputText(" and reject her offer out of hand. <i>\"");
 			if (player.hasPerk(PerkLib.BimboBrains) || player.hasPerk(PerkLib.FutaFaculties)) outputText("Ummm, like, I’m not </i>that<i> horny. Besides, I can fuck all I want once I take you out, cutie!");

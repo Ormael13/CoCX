@@ -9,11 +9,11 @@ import classes.PerkClass;
 import classes.PerkLib;
 import classes.IMutationPerkType;
 import classes.Creature;
-import classes.Player;
 import classes.Races;
 
 public class KitsuneParathyroidGlandMutation extends IMutationPerkType
     {
+        private static const mName:String = "Kitsune Parathyroid Gland";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -44,7 +44,7 @@ public class KitsuneParathyroidGlandMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Kitsune Parathyroid Gland" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -55,8 +55,8 @@ public class KitsuneParathyroidGlandMutation extends IMutationPerkType
                 this.requirements = [];
                 if (pTier == 0){
                     this.requireParathyroidGlandMutationSlot()
-                    .requireAnyPerk(PerkLib.EnlightenedKitsune, PerkLib.CorruptedKitsune)
-                    .requireRace(Races.KITSUNE);
+                    .requireAnyPerk(PerkLib.EnlightenedKitsune, PerkLib.CorruptedKitsune, PerkLib.StarSphereMastery)
+                    .requireAnyRace(Races.KITSUNE, Races.KITSHOO);
                 }
                 else{
                     var pLvl:int = pTier * 30;
@@ -68,9 +68,8 @@ public class KitsuneParathyroidGlandMutation extends IMutationPerkType
         }
 
         //Mutations Buffs
-        override public function pBuffs(target:Creature = null):Object{
+        override public function buffsForTier(pTier:int):Object {
             var pBuffs:Object = {};
-            var pTier:int = currentTier(this, (target == null)? player : target);
             if (pTier == 1) {
                 pBuffs['spe.mult'] = 0.05;
                 pBuffs['int.mult'] = 0.05;
@@ -87,8 +86,7 @@ public class KitsuneParathyroidGlandMutation extends IMutationPerkType
         }
 
         public function KitsuneParathyroidGlandMutation() {
-            super("Kitsune Parathyroid Gland IM", "Kitsune Parathyroid Gland", ".");
-            maxLvl = 3;
+            super(mName + " IM", mName, SLOT_PARATHYROID, 3);
         }
         
     }

@@ -28,7 +28,7 @@ use namespace CoC;
 			outputText(". ");
 			if (player.isLactating()) outputText("One of them even made suction cup tentacles in order to milk your breasts. ");
 			outputText("You’re being violated from all sides and in all possible ways by a full harem of jelly girls!\n\n");
-			player.dynStats("lus", 17 + rand(7) + this.sens / 5, "scale", false);
+			player.takeLustDamage(17 + rand(7) + this.sens / 5, true);
 			if (!hasStatusEffect(StatusEffects.LingeringSlime)) createStatusEffect(StatusEffects.LingeringSlime, 0, 0, 0, 0);
 		}
 
@@ -48,16 +48,15 @@ use namespace CoC;
 			td += player.lib / 8;
 			td += player.effectiveSensitivity() / 8;
 			td = Math.round(td);
-			td = td * (EngineCore.lustPercent() / 100);
 			if (!hasStatusEffect(StatusEffects.LingeringSlime)) createStatusEffect(StatusEffects.LingeringSlime, 0, 0, 0, 0);
-			outputText("\nLust swells up in your body as the substance splash on you. <b>(<font color=\"#ff00ff\">" + (Math.round(td * 10) / 10) + "</font>)</b> lust damage.");
-			player.dynStats("lus", td, "scale", false);
+			outputText("\nLust swells up in your body as the substance splash on you.");
+			player.takeLustDamage(td, true);
 		}
 
 		private function gooGroupGrapple():void
 		{
 			outputText("The slime girls suddenly attempt to grapple you one after another to restrict your movements!");
-			if((player.hasPerk(PerkLib.Evade) && rand(6) == 0) || (player.spe > ((this.spe * 1.5) + rand(200)))) outputText("You barely manage to break out of their clingy bodies!");
+			if(player.getEvasionRoll()) outputText("You barely manage to break out of their clingy bodies!");
 			else {
 				outputText("Before you know it you’re covered and pulled down by their combined bodies.");
 				if (!player.hasStatusEffect(StatusEffects.GooBind)) player.createStatusEffect(StatusEffects.GooBind, 0, 0, 0, 0);
@@ -67,7 +66,7 @@ use namespace CoC;
 		override protected function performCombatAction():void {
 			if (hasStatusEffect(StatusEffects.LingeringSlime)) {
 				outputText("Small stains of lingering slimes cling to your body, insidiously pouring you with aphrodisiacs.\n\n");
-				player.dynStats("lus", (10 + int(player.lib / 12 + player.cor / 14)));
+				player.takeLustDamage((10 + int(player.lib / 12 + player.cor / 14)), true);
 				removeStatusEffect(StatusEffects.LingeringSlime);
 			}
 			super.performCombatAction();
@@ -94,8 +93,8 @@ use namespace CoC;
             this.bonusHP = 10000 + 2500*mod;
             this.bonusLust = 505 + 65*mod;
             this.level = 60 + 5*mod; //starts from 65 due to EL levelMod calculations;
-            this.gems = mod > 50 ? 0 : Math.floor((2500 + rand(500)) * Math.exp(0.3*mod));
-            this.additionalXP = mod > 50 ? 0 : Math.floor(10000 * Math.exp(0.3*mod));
+            this.gems = mod > 20 ? 0 : Math.floor((2500 + rand(500)) * Math.exp(0.3*mod));
+            this.additionalXP = mod > 20 ? 0 : Math.floor(10000 * Math.exp(0.3*mod));
             
 			this.a = "";
 			this.short = "Dark Slime Empress";
@@ -121,7 +120,6 @@ use namespace CoC;
 			this.armorName = "gelatinous skin";
 			this.lust = 45;
 			this.lustVuln = .75;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.drop = new WeightedDrop(consumables.DSLIMEJ, 1);
 			this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.FireVulnerability, 0, 0, 0, 0);

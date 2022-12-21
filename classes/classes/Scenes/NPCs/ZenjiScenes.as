@@ -8,6 +8,7 @@ import classes.*;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Areas.Forest.CorruptedGlade;
 import classes.Scenes.Places.TrollVillage;
 import classes.display.SpriteDb;
 import classes.internals.SaveableState;
@@ -116,7 +117,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_TROLLS);
 			menu();
 			if (player.gems >= 25) addButton(0, "Pay w Gems", part1TrollEncounterPayWithGems);
-			else addButtonDisabled(0, "Pay w Gems", "You not have enough gems!");
+			else addButtonDisabled(0, "Pay w Gems", "You don't have enough gems!");
 			addButton(1, "Sex", part1TrollEncounterSex);
 			addButton(2, "Challenge", part1TrollEncounterChallange);
 			addButton(3, "Fight", part1TrollEncounterFight);
@@ -131,7 +132,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			outputText("You think for a moment on how you want to deal with the situation.\n\n");
 			menu();
 			if (player.gems >= 25) addButton(0, "Pay w Gems", part1TrollEncounterPayWithGems);
-			else addButtonDisabled(0, "Pay w Gems", "You not have enough gems!");
+			else addButtonDisabled(0, "Pay w Gems", "You don't have enough gems!");
 			addButton(2, "Challenge", part1TrollEncounterChallange);
 			addButton(3, "Fight", part1TrollEncounterFight);
 			addButton(4, "Leave", part1TrollEncounterLeave);
@@ -805,7 +806,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			addButton(0, "Appearance", followerZenjiMainCampMenuAppearance).hint("Examine Zenji.");
 			addButton(1, "Talk", followerZenjiTalks).hint("Talk to Zenji.");
 			if (player.lust > 33) addButton(2, "Sex", followerZenjiSex).hint("Perhaps the hunk could be open to share an intimate moment with you.");
-			if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] >= 0 && flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] < 100) addButton(3, "Glades", followerZenjiGlades).hint("Ask Zenji for help in destroying the corrupted glades.");
+			if (CorruptedGlade.canBeDestroyed()) addButton(3, "Glades", followerZenjiGlades).hint("Ask Zenji for help in destroying the corrupted glades.");
 			addButton(4, "Training", followerZenjiMainCampMenuTraining).hint("Train with Zenji to increase your stats.");
 			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) addButton(5, "Spar", followerZenjiSpar).hint("Spar with Zenji.");
 			else addButtonDisabled(5, "Spar", "You can spar with him, but you need to build a sparring ring first!");
@@ -1130,10 +1131,8 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
-		public var loadVolume:Number = 1300;
-		
 		public function loverZenjiMainCampMenu2():void {
-			if (!player.hasStatusEffect(StatusEffects.LunaWasWarned)) {
+			if (!player.hasStatusEffect(StatusEffects.LunaOff) && !player.hasStatusEffect(StatusEffects.LunaWasWarned)) {
 				if ((flags[kFLAGS.LUNA_JEALOUSY] > 200 && rand(10) < 4) || (flags[kFLAGS.LUNA_JEALOUSY] > 300 && rand(10) < 8)) mishapsLunaZenji();
 				else loverZenjiMainCampMenu();
 			}
@@ -1174,7 +1173,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			addButton(0, "Appearance", loverZenjiMainCampMenuAppearance).hint("Examine Zenji.");
 			addButton(1, "Talk", loverZenjiTalks).hint("Talk to Zenji.");
 			addButton(2, "Sex", loverZenjiSex).hint("Perhaps the hunk could be open to share an intimate moment with you.");
-			if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] >= 0 && flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] < 100) addButton(3, "Glades", loverZenjiGlades).hint("Have Zenji help you in destroying the corrupted glades.");
+			if (CorruptedGlade.canBeDestroyed()) addButton(3, "Glades", loverZenjiGlades).hint("Have Zenji help you in destroying the corrupted glades.");
 			addButton(4, "Nightwatch", loverZenjiNightWatch).hint("Toggle Zenji’s night watch on or off.");
 			if (player.hasPerk(PerkLib.BasicLeadership)) {
 				if (flags[kFLAGS.PLAYER_COMPANION_1] == "") addButton(5, "Assist Me", zenjiHenchmanOption).hint("Ask Zenji to join you in adventures outside camp.");
@@ -1581,7 +1580,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			menu();
 			addButton(1, "Penis", loverZenjiGiveItemGroPlusPenis);
 			addButton(2, "Tusks", loverZenjiGiveItemGroPlusTusks);
-			addButton(4, "Nevermind", loverZenjiGiveItemGroPlusNevermind);
+			addButton(4, "Never mind", loverZenjiGiveItemGroPlusNevermind);
 		}
 		public function loverZenjiGiveItemGroPlusPenis():void {
 			spriteSelect(SpriteDb.s_zenji);
@@ -1643,7 +1642,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			menu();
 			addButton(1, "Penis", loverZenjiGiveItemReductoPenis);
 			addButton(2, "Tusks", loverZenjiGiveItemReductoTusks);
-			addButton(4, "Nevermind", loverZenjiGiveItemReductoNevermind);
+			addButton(4, "Never mind", loverZenjiGiveItemReductoNevermind);
 		}
 		public function loverZenjiGiveItemReductoPenis():void {
 			spriteSelect(SpriteDb.s_zenji);
@@ -1767,7 +1766,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 				if (player.lib < 85) addButtonDisabled(11, "Tease", "You aren't lewd enough to consider mocking him right now.");
 				else addButtonDisabled(11, "Tease", "You do not have the correct lower body for this scene.");
 			}
-			addButton(14, "Nevermind", loverZenjiSexNevermind).hint("Decide that you do not want to have sex anymore.");
+			addButton(14, "Never mind", loverZenjiSexNevermind).hint("Decide that you do not want to have sex anymore.");
 			if (player.lust > 33) {
 				addButton(0, "Take Anal", loverZenjiTakeAnal).hint("Have Zenji penetrate you anally.");
 				if (player.hasVagina()) addButton(1, "Take Vaginal", loverZenjiTakeVaginal).hint("Have Zenji penetrate you vaginally.");
@@ -1931,7 +1930,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			outputText("After spending some time within his embrace you decide you should return to your day. Despite his wonderful ass, you can’t spend all day buried within him.\n\n");
 			outputText("Zenji blushes slightly… \"<i>Ah… tanks [name]...</i>\"\n\n");
 			player.addStatusValue(StatusEffects.ZenjiZList, 3, 1);
-			player.sexReward("Default","Dick",true,false);
+			player.sexReward("no", "Dick");
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -2162,7 +2161,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			outputText("You sigh softly, the feeling of being filled consumes you as the water crashes against your back. You rock back and forth up his length, trying to match the rhythm of his gentle thrusting. "+(player.statusEffectv3(StatusEffects.ZenjiModificationsList) == 32 ? "The outline of his massive manhood bulges through your stomach. ":"")+"His dense balls scrape your underside, they’re so large and full of his virile seed, you can tell he’s more than ready to take you.\n\n");
 			player.cuntChange(15,true,true,false);
 			outputText("You grasp onto his shoulders, allowing yourself to grind yourself against him with more ease as he continues holding you by the hips. "+(player.tallness < 72 ? "You look up towards him, he tilts his head down to meet your gaze, giving you a gentle smirk followed by a soft, seductive growl":"You look down at Zenji, his eyes are closed in pleasure as he continues growling softly")+".\n\n");
-			outputText("You hold onto him as if at any moment the water will carry you away from his embrace. Zenji begins to pick up the pace, trying to fit more of his length into your womb. You rest your head onto his neck as he pounds away at you. You can feel the force of his growl reverberate through the both of you while you’re pressed up so close to him.\n\n");
+			outputText("You hold onto him as if at any moment the water will carry you away from his embrace. Zenji begins to pick up the pace, trying to fit more of his length into your womb. You rest your head onto his neck as he pounds away at you. You can feel the force of his growl reverberate through both of you while you’re pressed up so close to him.\n\n");
 			outputText("Soon enough you can feel a familiar pressure build within your loins as you clutch onto him tighter. As if sensing your impending orgasm, Zenji tilts your chin to meet his face as he pulls you in for a kiss. His tongue explores your mouth as you moan softly into his embrace. It doesn’t take long before your orgasm hits, rocking you to your core. You cum over his shaft, further lubricating yourself for him beneath the water."+(player.hasCock() ? " Your erection reacts as well, pulsing desperately and shooting ropes of cum towards his chest as it is carried off by the water.":"")+"\n\n");
 			outputText("Zenji growls harder as his length twitches desperately within you. With a loud howl he finally orgasms, unleashing loads of cum into your awaiting womb, you couldn’t hope to contain it all as some of it leaks out into the water. \"<i>So hot…</i>\" He whispers. It’s impossible to ignore his profuse sweating.\n\n");
 			outputText("Zenji is panting from the intense heat, \"<i>Let’s get outta de water. It’s so hot…</i>\" Zenji stands up, holding onto you tightly as he lifts you out of the hotspring, placing you on the ground as he lifts himself out as well, picking up his loincloth on the way out. Once you’re out you reach up and caress his sweaty face. His tail swishes along the ground affectionately as you fondle him.\n\n");
@@ -2195,7 +2194,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			if (!player.isNaked()) outputText("Zenji helps pull your clothes back up once you’ve recovered from your high.\n\n");
 			outputText("\"<i>Now den… As much as I do like spending time wit ya, dere’s other tings I need ta attend to.</i>\" Zenji says, giving you a gentle kiss on the cheek before leaving.\n\n");
 			player.addStatusValue(StatusEffects.ZenjiZList, 3, 1);
-			player.sexReward("Default","Vaginal",true,false);
+			player.sexReward("no", "Vaginal");
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -2214,7 +2213,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			if (!player.isNaked()) outputText("Zenji helps pull your clothes back up once you’ve recovered from your high.\n\n");
 			outputText("\"<i>Now den… As much as I do like spending time wit ya, dere’s other tings I need ta attend to.</i>\" Zenji says, giving you a gentle kiss on the cheek before leaving.\n\n");
 			player.addStatusValue(StatusEffects.ZenjiZList, 3, 1);
-			player.sexReward("Default","Dick",true,false);
+			player.sexReward("no", "Dick");
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -2233,7 +2232,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			outputText("He leers at you, \"<i>I have my ways...</i>\" He replies as he crawls up to you. He turns your face to him as he lies down on his side adjacent to you. \"<i>I'm glad we can do this now, I'm glad you liked it, you're really special to me, don't you forget it.</i>\"\n\n");
 			outputText("Zenji helps you up and redresses you. Soon enough you're ready to continue your day.\n\n");
 			player.addStatusValue(StatusEffects.ZenjiZList, 3, 1);
-			player.sexReward("Default","Vaginal",true,false);
+			player.sexReward("no", "Vaginal");
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -2265,7 +2264,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			outputText("\"<i>Well, I hope ya would be willing to return the favor later, hmm?</i>\" he teases, giving a taunting grin.\n\n");
 			outputText("You tell him you'll consider it. You give him a brief kiss before you gently break out of his embrace, ready to start your day again.\n\n");
 			player.addStatusValue(StatusEffects.ZenjiZList, 3, 1);
-			player.sexReward("Default","Dick",true,false);
+			player.sexReward("no", "Dick");
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -2362,9 +2361,6 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			}
 			menu();
 			addButton(0,"Next", loverZenjiMainCampMenu);
-		}
-		private function sleepWith(arg:String = ""):void {
-			flags[kFLAGS.SLEEP_WITH] = arg;
 		}
 		
 		public function loverZenjiSleepWithMorning():void {
@@ -2854,7 +2850,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 		}
 		
 		public function ZenjiProposalScene():void{
-			if (flags[kFLAGS.MARRIAGE_FLAG] != 0){
+			if (!sceneHunter.canMarry()){
 				outputText("You call Zenji to you, to which he immediately approaches you with a stride in his step. His deep voice rings to you as he stands in front of you, \"<i>You called?</i>\"\n" +
 						"\n" +
 						"You grab Zenji by his wrists. Zenji holds onto you gently, eyeing you carefully, unsure of where you’re going with this, \"<i>Mi costilla... someting wrong?</i>\"\n" +
@@ -2874,8 +2870,9 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 				doNext(loverZenjiTalks);
 			}
 			else{
+				player.destroyItems(jewelries.ENDGRNG, 1);
 				outputText("You call Zenji to you, to which he immediately approaches you with a stride in his step. His deep voice rings to you as he stands in front of you, \"You called?\"\n" + "\n");
-				if (flags[kFLAGS.MALE_OR_FEMALE] == 0 && player.gender == 2 || flags[kFLAGS.MALE_OR_FEMALE] == 2){
+				if (player.mf("m", "f") == "f"){
 					outputText("You grab Zenji by his wrists. Zenji holds onto you gently, eyeing you carefully, unsure of where you’re going with this, \"<i>Mi costilla... someting wrong?</i>\"\n" +
 							"\n" +
 							"You reach for Zenji's soft hand, admiring the fuzzy feeling of it within your grasp as you lower yourself to one knee. You tell Zenji that he means a lot to you, and with all the crazy havoc, sinister beings, and harm that could be brought at any moment. You know deep down that you want to spend the rest of your life with him. You pull out the wedding ring.\n" +
@@ -2996,7 +2993,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 						"\n" +
 						"You turn around to look at yourself in the mirror. What a sight, the layers of silken fabric, the strapless dress molds to your form accenting your features incredibly. The seamstress passes you a tiara with a silken veil, white gloves, and flats. Jabala helps put the silken flats on your feet, once you’re fully dressed the seamstress places the tiara over your head as the veil flows over your face.\n" +
 						"\n" +
-						"\"<i>You are ready,<i>\" the seamstress states. \"<i>Truly a beautiful sight, I’m sure your partner will be excited to see such beauty.</i>\"\n" +
+						"\"<i>You are ready,</i>\" the seamstress states. \"<i>Truly a beautiful sight, I’m sure your partner will be excited to see such beauty.</i>\"\n" +
 						"\n" +
 						"Jabala wipes her tears from her face, \"<i>Follow me, [name] we will get you prepared for the ceremony.</i>\"\n");
 			}
@@ -3109,7 +3106,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 								"You take your leave without another word.\n");
 					}
 				}
-				else if (player.isRace(Races.DEMON)){
+				else if (player.isRace(Races.DEMON, 1, false)){
 					outputText("With your mind set, you speak up. \"I do,\" you reply.\n" +
 							"\n" +
 							"Tears begin to stream down his face as you smile at him. You look toward Zenji with faux reassurance as you hold out your hand for him.\n" +
@@ -3181,6 +3178,11 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 
 		public function ZenjiMarriageSceneCinco():void{
 			clearOutput();
+			if (!recalling) {
+				flags[kFLAGS.ZENJI_PROGRESS] = 12; //for SH tracking
+				sceneHunter.marry("Zenji");
+				outputText("<b>New scene is unlocked in 'Recall' menu!</b>\n\n");
+			}
 			outputText("Once Yenza is defeated the trolls quickly escort her out.\n"+
 			"Zenji looks mortified, but you stand back on the altar before gently caressing his face. His expression eases and his body relaxes. You tell him that she will no longer bother him, this time you know as a fact. It's just you and him now, nothing could ever undo the love you two share.\n" +
 					"\n" +
@@ -3323,7 +3325,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 				if (player.ass.analLooseness == AssClass.LOOSENESS_VIRGIN){
 					outputText("You have been waiting for someone you truly loved before giving it all away.");
 				}
-				outputText("Zenji gives a contented smile, \"<i>I’ve been waiting all night for ya [name]. I love you, and now I’m gonna show you just how much I mean by dat.\" He licks his hand seductively before lathering his length in his spit, then aligning his manhood with your rear. His strong hand gropes at your cheeks, getting you prepared for his entrance.\n");
+				outputText("Zenji gives a contented smile, \"<i>I’ve been waiting all night for ya [name]. I love you, and now I’m gonna show you just how much I mean by dat.</i>\" He licks his hand seductively before lathering his length in his spit, then aligning his manhood with your rear. His strong hand gropes at your cheeks, getting you prepared for his entrance.\n");
 				if (player.analCapacity() < 7){
 					if (player.ass.analLooseness == AssClass.LOOSENESS_VIRGIN){
 						outputText("\"You have waited your entire life for dis, [name]... Dat takes some real dedication. Now I will show you how a real troll makes love.\"\n");
@@ -3437,7 +3439,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 						"\n" +
 						"You nod, if he’s okay with it, that is.\n" +
 						"\n" +
-						"Zenji glances around slightly nervously, \"<i>I can’t lie, I’ve been wondering if I really wanted to, but… Well, you are my husband, aren’tcha? It’d be a shame if I neva gave you a chance.\</i>\n");
+						"Zenji glances around slightly nervously, \"<i>I can’t lie, I’ve been wondering if I really wanted to, but… Well, you are my husband, aren’tcha? It’d be a shame if I neva gave you a chance.</i>\n");
 				if (player.statusEffectv4(StatusEffects.ZenjiZList) > 0){
 					outputText("You were de first one ta take me dere,");
 				}
@@ -3491,10 +3493,11 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 							"You plan on sleeping for the rest of the night, wrapped within the warmth of your husband’s embrace.\n");
 				}
 			}
-			doNext(curry(ZenjiMarriageSexTime2, options));
+			doNext(ZenjiMarriageSexTime2, options);
 		}
 
 		private function ZenjiMarriageSexTime2(options:int):void{
+			clearOutput();
 			if (options == 1){
 				outputText("You wake up in the middle of the night to the sound of faint conversation.\n" +
 						"\n" +
@@ -3540,7 +3543,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 						"\n" +
 						"You turn to face Zenji, he unconsciously pulls you closer to him as you drift back to sleep in his embrace.\n");
 			}
-			doNext(curry(ZenjiMarriageSexTime3, options));
+			doNext(ZenjiMarriageSexTime3, options);
 		}
 		
 		private function ZenjiMarriageSexTime3(options:int):void{
@@ -3563,13 +3566,13 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 						"\n" +
 						"Zenji sits up, \"<i>Wait… uh… I didn’t tink dis through…</i>\"\n" +
 						"\n" +
-						"You hear a knocking on the door, \"I have your clothes right here!\" Jabala shouts.\n" +
+						"You hear a knocking on the door, \"<i>I have your clothes right here!</i>\" Jabala shouts.\n" +
 						"\n" +
-						"\"Ah, motha! Were you eavesdropping?</i>\"\n" +
+						"\"<i>Ah, motha! Were you eavesdropping?</i>\"\n" +
 						"\n" +
 						"\"No! I was… just… gardening!</i>\"\n" +
 						"\n" +
-						"\"<i>You were gardening… inside..?<i>\"\n" +
+						"\"<i>You were gardening… inside..?</i>\"\n" +
 						"\n" +
 						"\"<i>Yes! I’m tending to the shade plants!</i>\"\n" +
 						"\n" +
@@ -3623,7 +3626,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			else if (options == 3){
 				outputText("You wake up the next morning, as you open your eyes your face is resting against Zenji’s muscular pecs, comfortably nestled within his chest tuft. Daylight pours into the room and you give a small yawn and look up at Zenji, his eyes are resting upon your face.\n" +
 						"\n" +
-						"\"<i>Good morning [name]. Sleep well?<i>\" he asks, giving you a gentle smile.\n" +
+						"\"<i>Good morning [name]. Sleep well?</i>\" he asks, giving you a gentle smile.\n" +
 						"\n" +
 						"You tell him that indeed you did. You’re glad to spend the night with your husband.\n" +
 						"\n" +
@@ -3633,7 +3636,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 						"\n" +
 						"You nod your head, looking around before asking Zenji where your clothes are.\n" +
 						"\n" +
-						"Zenji sits up, \"<i>Wait… uh… I didn’t tink dis through…<i>\"\n" +
+						"Zenji sits up, \"<i>Wait… uh… I didn’t tink dis through…</i>\"\n" +
 						"\n" +
 						"You hear a knocking on the door, \"<i>I have your clothes right here!</i>\" Jabala shouts.\n" +
 						"\n" +
@@ -3655,9 +3658,14 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 						"\n" +
 						"You say your goodbyes to Jabala and Halkano, assuring them that you will return soon as you return to your camp, ready to live your life with your newlywed husband.\n");
 			}
-			flags[kFLAGS.MARRIAGE_FLAG] = "Zenji";
-			var timeShift:int = (24 - time.hours) + 8
-			doNext(createCallBackFunction(camp.returnToCamp,timeShift));
+			if (!recalling) {
+				var timeShift:int = (24 - time.hours) + 8;
+				doNext(createCallBackFunction(camp.returnToCamp, timeShift));
+			} else doNext(recallWakeUp);
+		}
+
+		public static function isLover():Boolean {
+			return flags[kFLAGS.ZENJI_PROGRESS] >= 11;
 		}
 	}
 }

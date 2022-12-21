@@ -1,5 +1,7 @@
 ﻿package classes {
+import classes.GlobalFlags.kFLAGS;
 import classes.Items.*;
+import classes.Parser.Parser;
 import classes.Scenes.Camp;
 import classes.Scenes.Combat.Combat;
 import classes.Scenes.Dungeons.D3.D3;
@@ -7,18 +9,18 @@ import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.Scenes.Holidays;
 import classes.Scenes.Inventory;
 import classes.Scenes.Places.Ingnam;
-import classes.Scenes.Places.Prison;
 import classes.Scenes.SceneLib;
 import classes.Transformations.TransformationLib;
 import classes.internals.Utils;
 
 import coc.model.GameModel;
 import coc.model.TimeModel;
-import coc.script.Eval;
+import coc.view.Block;
 import coc.view.ButtonData;
 import coc.view.ButtonDataList;
 import coc.view.CoCButton;
 import coc.view.MainView;
+import coc.view.charview.DragButton;
 import coc.xxc.StoryContext;
 
 /**
@@ -31,11 +33,6 @@ import coc.xxc.StoryContext;
 	 */
 	public class BaseContent extends Utils
 	{
-        public function BaseContent()
-		{
-
-		}
-
 		protected function cheatTime(time:Number, needNext:Boolean = false):void
 		{
 			EventParser.cheatTime(time, needNext);
@@ -56,8 +53,18 @@ import coc.xxc.StoryContext;
 			return CoC.instance.timeQ > 0 || CoC.instance.timeQmin > 0;
 		}
 
-		protected function get isNightTime():Boolean {
+		public static function get isNightTime():Boolean {
 			return (model.time.hours <= 5 || model.time.hours >= 22);
+		}
+		
+		/**
+		 * Examples:
+		 * - isTimeBetween(12, 16) - 12:00..15:59
+		 * - isTimeBetween(0, 6) - 0:00..5:59
+		 * - isTimeBetween(18, 24) - 18:00..23:59
+		 * */
+		public static function isTimeBetween(startHour:Number, endHour:Number):Boolean {
+			return (model.time.hours >= startHour && model.time.hours < endHour)
 		}
 
 		protected function get camp():Camp {
@@ -66,10 +73,6 @@ import coc.xxc.StoryContext;
 
 		protected function get ingnam():Ingnam {
 			return SceneLib.ingnam;
-		}
-
-		protected function get prison():Prison {
-			return SceneLib.prison;
 		}
 
 		protected function get d3():D3 {
@@ -106,9 +109,9 @@ import coc.xxc.StoryContext;
 			return Holidays.isValentine();
 		}
 
-		protected function isHolidays():Boolean
+		protected function isChristmas():Boolean
 		{
-			return Holidays.isHolidays();
+			return Holidays.isChristmas();
 		}
 
 		public function isEaster():Boolean
@@ -126,9 +129,9 @@ import coc.xxc.StoryContext;
 			return Holidays.isAprilFools();
 		}
 
-		protected function get date():Date
+		protected static function get date():Date
 		{
-			return CoC.instance.date;
+			return CoC.instance.model.time.date;
 		}
 
 		protected function get inDungeon():Boolean
@@ -235,7 +238,10 @@ import coc.xxc.StoryContext;
 		}
 
 		protected static function printLink(linkText:String, eventArgument:String):void {
-			outputText('<u><a href="event:'+Eval.escapeString(eventArgument)+'">'+linkText+"</a></u>");
+			outputText(mkLink(linkText, eventArgument));
+		}
+		protected static function mkLink(linkText:String, eventArgument:String):String {
+			return '<u><a href="event:'+encodeURI(eventArgument)+'">'+linkText+"</a></u>";
 		}
 		
 		protected static function outputText(output:String):void
@@ -252,13 +258,13 @@ import coc.xxc.StoryContext;
 			EngineCore.displayHeader(string);
 		}
 
-		protected function flushOutputTextToGUI():void {
+		protected static function flushOutputTextToGUI():void {
 			CoC.instance.flushOutputTextToGUI();
 		}
 
-		protected function doNext(eventNo:Function):void //Now typesafe
+		protected function doNext(func:Function, ...args):void //Now typesafe
 		{
-			EngineCore.doNext(eventNo);
+			EngineCore.doNext.apply(null, [func].concat(args));
 		}
 
 		protected static function menu():void
@@ -326,8 +332,10 @@ import coc.xxc.StoryContext;
 		{
 			return EngineCore.addButtonDisabled(pos, text, toolTipText, toolTipHeader);
 		}
-		protected function addButtonIfTrue(pos:int, text:String, func1:Function, toolTipDisabled:String, condition:Boolean, tooltipText:String = ""):CoCButton {
-            return EngineCore.addButtonIfTrue(pos, text, func1, toolTipDisabled, condition, tooltipText);
+		//This function is completely useless, but I'm too lazy to properly replace all its mentions. - SH
+		protected function addButtonIfTrue(pos:int, text:String, func1:Function, toolTipDisabled:String, condition:Boolean, tooltipText:String = "", toolTipHeader:String = ""):CoCButton {
+			return EngineCore.addButton(pos, text, func1, null, null, null, tooltipText, toolTipHeader)
+				.disableIf(!condition, toolTipDisabled);
         }
 		protected static function button(pos:int):CoCButton
 		{
@@ -572,13 +580,14 @@ import coc.xxc.StoryContext;
 		public static const USEFATG_BLACK:int = 6;
 		public static const USEFATG_WHITE_NOBM:int = 7;
 		public static const USEFATG_BLACK_NOBM:int = 8;
-		protected function fatigue(mod:Number,type:Number=0):void {
+
+		protected function fatigue(mod:Number, type:Number = USEFATG_NORMAL):void {
 			EngineCore.fatigue(mod, type);
 		}
 
-		protected function useMana(mod:Number,type:Number=0):void
-		{
-			SceneLib.combat.useManaImpl(mod,type);
+		public static const USEMANA_NORMAL:int = 0;
+		protected function useMana(mod:Number, type:Number = USEMANA_NORMAL):void {
+			SceneLib.combat.useManaImpl(mod, type);
 		}
 
 		protected static function playerMenu():void { EventParser.playerMenu(); }
@@ -645,10 +654,13 @@ import coc.xxc.StoryContext;
 		protected function get transformations():TransformationLib {
 			return CoC.instance.transformations;
 		}
-		protected function get consumables():ConsumableLib{
+		protected function get itemTemplates():ItemTemplateLib{
+			return ItemTemplateLib.instance;
+		}
+		protected static function get consumables():ConsumableLib{
 			return CoC.instance.consumables;
 		}
-		protected function get useables():UseableLib{
+		protected static function get useables():UseableLib{
 			return CoC.instance.useables;
 		}
 		protected function get weapons():WeaponLib{
@@ -660,7 +672,7 @@ import coc.xxc.StoryContext;
 		protected function get weaponsflyingswords():FlyingSwordsLib{
 			return CoC.instance.weaponsflyingswords;
 		}
-		protected function get armors():ArmorLib{
+		protected static function get armors():ArmorLib{
 			return CoC.instance.armors;
 		}
 		protected function get miscjewelries():MiscJewelryLib{
@@ -698,7 +710,7 @@ import coc.xxc.StoryContext;
 			CoC.instance.time = val;
 		}
 
-		protected function get mainView():MainView
+		protected static function get mainView():MainView
 		{
 			return CoC.instance.mainView;
 		}
@@ -708,7 +720,7 @@ import coc.xxc.StoryContext;
 			return CoC.instance.mainViewManager;
 		}
 
-		protected function get model():GameModel
+		protected static function get model():GameModel
 		{
 			return CoC.instance.model;
 		}
@@ -718,14 +730,9 @@ import coc.xxc.StoryContext;
 			CoC.instance.model = val;
 		}
 
-		protected function get flags():DefaultDict
+		protected static function get flags():DefaultDict
 		{
 			return CoC.instance.flags;
-		}
-
-		protected function set flags(val:DefaultDict):void
-		{
-			CoC.instance.flags = val;
 		}
 
 		protected function get achievements():DefaultDict
@@ -752,6 +759,12 @@ import coc.xxc.StoryContext;
 		protected function recallWakeUp():void {
 			CoC.instance.gameSettings.sceneHunter_inst.recallWakeUpImpl();
 		}
+		protected function get mocking():Boolean {
+			return CoC.instance.gameSettings.sceneHunter_inst._mocking;
+		}
+		protected function set mocking(val:Boolean):void {
+			CoC.instance.gameSettings.sceneHunter_inst._mocking = val;
+		}
 		//============================
 
 		protected function showStatDown(arg:String):void
@@ -775,6 +788,13 @@ import coc.xxc.StoryContext;
 		protected function buttonIsVisible(index:int):Boolean {
 			return EngineCore.buttonIsVisible(index);
 		}
+		
+		protected static function get shiftKeyDown():Boolean {
+			return flags[kFLAGS.SHIFT_KEY_DOWN];
+		}
+		protected static function set shiftKeyDown(value:Boolean):void {
+			flags[kFLAGS.SHIFT_KEY_DOWN] = value;
+		}
 
 		protected function darkTheme():Boolean {
 			return CoC.instance.mainViewManager.darkThemeImpl();
@@ -785,7 +805,17 @@ import coc.xxc.StoryContext;
 		protected function get context():StoryContext {
 			return CoC.instance.context;
 		}
-		protected static function submenu(buttons:ButtonDataList,back:Function=null,page:int=0,IsSorted:Boolean = true):void {
+
+		/**
+		 * Print a submenu from the provided buttons
+		 * @param buttons List of buttons for the menu
+		 * @param back Function for the "Back" button (14)
+		 * @param page Currently displayed page
+		 * @param IsSorted If true, the buttons will be sorted by their names
+		 * @param buttonsPerPage How many buttons is displayed per page. By default, 12 (buttons 12-13 reserved for Prev-Next pages, 14 for Back)
+		 * @return this
+		 */
+		public static function submenu(buttons:ButtonDataList, back:Function=null, page:int=0, IsSorted:Boolean = true, buttonsPerPage:int = 12):void {
 			var list:/*ButtonData*/Array = buttons.list.filter(function(e:ButtonData, i:int, a:Array):Boolean{
 				return e.visible;
 			});
@@ -794,52 +824,87 @@ import coc.xxc.StoryContext;
 			}
 			menu();
 			var total:int = list.length;
-			var n:int = Math.min(total,(page+1)*12);
-			for (var bi:int = 0,li:int=page*12; li<n; li++,bi++) {
-				list[li].applyTo(button(bi%12));
+			var n:int = Math.min(total,(page+1)*buttonsPerPage);
+			for (var bi:int = 0,li:int=page*buttonsPerPage; li<n; li++,bi++) {
+				list[li].applyTo(button(bi%buttonsPerPage));
 			}
-			if (page!=0 || total>12) {
+			if (page!=0 || total>buttonsPerPage) {
 				button(12).show("Prev Page", curry(submenu, buttons, back, page - 1, IsSorted)).disableIf(page == 0);
 				button(13).show("Next Page", curry(submenu, buttons, back, page + 1, IsSorted)).disableIf(n >= total);
 			}
 			if (back != null) button(14).show("Back",back);
 		}
-  
-		/**Returns an autocreated menu.
-		 * Structure for menuItems array is: ["Button name", function/false/"ignore", ["Available desc", "Not available desc"]/ ""].
-		 * function/false/"ignore" = addbtn, addbtndisabled, no button.
-		 * btnStat returns how many buttons are active.
-         * isChecking - only check if the menu is non-empty?
+		
+		/**
+		 * Display a 5xN button grid after the current text.
+		 * @param bd Button data, row-by-row.
+		 * If label is an empty string, it's an empty cell.
+		 * If bd.extraData is "text", a text field is added instead of button (to add text between button rows)
+		 * @example
+		 * var bd:ButtonDataList = new ButtonDataList();
+		 * // Row 1
+		 * bd.add("");
+		 * bd.add("North", goNorth);
+		 * bd.add("");
+		 * bd.add("");
+		 * bd.add("Climb Up", climbUp).disableIf(!canClimbUp);
+		 * // Row 2
+		 * bd.add("West", goWest);
+		 * bd.add("South", goSouth);
+		 * bd.add("East", goEast);
+		 * bd.add("");
+		 * bd.add("Climb Down", climbDown);
+		 *
+		 * bigButtonGrid(bd);
 		 */
-		protected function menuGen(menuItems:Array, page:int, back:Function=null):void {
-			var buttons:ButtonDataList = new ButtonDataList();
-			for (var i:int = 0; i < menuItems.length; i += 3){
-                if (menuItems[i + 1] is Function)
-					buttons.add(menuItems[i], menuItems[i+1], menuItems[i+2] is Array ? menuItems[i+2][0] : menuItems[i+2]);
-				else if (!menuItems[i + 1]) //hope it works
-					buttons.add(menuItems[i], null, menuItems[i+2] is Array ? menuItems[i+2][1] : menuItems[i+2]);
-				else if (menuItems[i + 1] == "ignore") //"Legal" ignore
-					trace("MenuGen ignored " + menuItems[i] + " when creating the button menu.\n");
-				else
-                    CoC_Settings.error("Non-function in menuGen!")
+		protected static function bigButtonGrid(bd:ButtonDataList):void {
+			DragButton.cleanUp();
+			flushOutputTextToGUI();
+			var grid:Block = new Block({
+				layoutConfig: {
+					type: "grid",
+					cols: 5
+				}
+			});
+			for (var i:int = 0; i<bd.list.length; i++) {
+				var b:ButtonData = bd.list[i];
+				if (b.extraData == "text") {
+					grid.addTextField({
+						width: MainView.BTN_W,
+						height: MainView.BTN_H,
+						htmlText: Parser.recursiveParser(b.text),
+						defaultTextFormat: mainView.mainText.defaultTextFormat
+					});
+				} else if (b.text == "") {
+					// add spacer
+					grid.addElement(new Block({width: MainView.BTN_W, height: MainView.BTN_H}));
+				} else {
+					// add button
+					var btn:CoCButton = mainView.createActionButton(i);
+					b.applyTo(btn);
+					grid.addElement(btn);
+					if (b.draggable)
+						new DragButton(b.slot, btn, b.slotType);
+				}
 			}
-			submenu(buttons, back, page, false);
+			mainView.setCustomElement(grid, true, true);
+			grid.doLayout();
 		}
 
-		/**Counts active buttons inside of the menu.
-		 * Structure for menuItems array is: ["Button name", function/false/"ignore", ["Available desc", "Not available desc"]/ ""].
-		 * function/false/"ignore" = addbtn, addbtndisabled, no button.
-		 * btnStat returns how many buttons are active.
-         * isChecking - only check if the menu is non-empty?
+        /**
+		 * Displays a selection to call the function with a number
+		 * @param fun Function to call
+		 * @param from Minimum number (inclusive)
+		 * @param to Maximum number (inclusive)
+		 * @param back "Back" button function (optional)
 		 */
-        protected function menuActiveButtons(menuItems:Array):int {
-            //just check actives, that's all
-			var btnsActive: int = 0;
-            for (var i:int = 0; i < menuItems.length; i += 3)
-                if (menuItems[i + 1] && menuItems[i + 1] != "ignore") //count even non-functions, let's make it explode!
-                    ++btnsActive;
-            return btnsActive;
-        }
+		public static function pickANumber(fun:Function, from:int, to:int, back:Function = null):void {
+			var bd:ButtonDataList = new ButtonDataList();
+			for (var i:int = from; i <= to; ++i) bd.add(i.toString(), curry(fun, i))
+			BaseContent.submenu(bd, back, 0, false);
+		}
+
+
 	}
 
 }

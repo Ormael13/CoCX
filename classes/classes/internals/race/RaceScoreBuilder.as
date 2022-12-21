@@ -42,6 +42,14 @@ public class RaceScoreBuilder {
 		addSlotRequirement(BodyData.SLOT_BIGGEST_TIT_SIZE, size, score, failScore, customName);
 		return this;
 	}
+	public function chitinColors(color:*, score:int, failScore:int =0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_CHITIN_COLORS, color, score, failScore, customName);
+		return this;
+	}
+	public function chitinColor1(color:*, score:int, failScore:int =0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_CHITIN_COLOR1, color, score, failScore, customName);
+		return this;
+	}
 	public function earType(type:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
 		addSlotRequirement(BodyData.SLOT_EAR_TYPE, type, score, failScore, customName);
 		return this;
@@ -70,6 +78,14 @@ public class RaceScoreBuilder {
 		addSlotRequirement(BodyData.SLOT_FACE_TYPE, type, score, failScore, customName);
 		return this;
 	}
+	public function furColors(color:*, score:int, failScore:int =0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_FUR_COLORS, color, score, failScore, customName);
+		return this;
+	}
+	public function furColor1(color:*, score:int, failScore:int =0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_FUR_COLOR1, color, score, failScore, customName);
+		return this;
+	}
 	public function gillType(value:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
 		addSlotRequirement(BodyData.SLOT_GILLS_TYPE, value, score, failScore, customName);
 		return this;
@@ -81,16 +97,20 @@ public class RaceScoreBuilder {
 		addSlotRequirement(BodyData.SLOT_HAIR_TYPE, type, score, failScore, customName);
 		return this;
 	}
-	public function hairColor(type:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
-		addSlotRequirement(BodyData.SLOT_HAIR_COLOR, type, score, failScore, customName);
+	public function hairColors(type:*, score:int, failScore:int =0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_HAIR_COLORS, type, score, failScore, customName);
 		return this;
 	}
-	public function hairTypeAndColor(type:*, color:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
+	public function hairColor1(type:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_HAIR_COLOR1, type, score, failScore, customName);
+		return this;
+	}
+	public function hairTypeAndColor1(type:*, color:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
 		addRequirement(
 				RacialRequirement.joinAnd(
 						"hair",
 						"; ",
-						slotRequirement(BodyData.SLOT_HAIR_COLOR, color, score, failScore),
+						slotRequirement(BodyData.SLOT_HAIR_COLOR1, color, score, failScore),
 						slotRequirement(BodyData.SLOT_HAIR_TYPE, type, score, failScore)
 				), customName
 		);
@@ -146,6 +166,34 @@ public class RaceScoreBuilder {
 	public function noRearBody(score:int, failScore:int=0):RaceScoreBuilder {
 		return rearType(RearBody.NONE, score, failScore);
 	}
+	public function scaleColors(color:*, score:int, failScore:int =0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_SCALE_COLORS, color, score, failScore, customName);
+		return this;
+	}
+	public function scaleColor1(color:*, score:int, failScore:int =0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_SCALE_COLOR1, color, score, failScore, customName);
+		return this;
+	}
+	public function scaleColor2(color:*, score:int, failScore:int =0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_SCALE_COLOR2, color, score, failScore, customName);
+		return this;
+	}
+
+	public function featherColors(color:*, score:int, failScore:int =0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_FEATHER_COLORS, color, score, failScore, customName);
+		return this;
+	}
+
+	public function featherColor1(color:*, score:int, failScore:int =0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_FEATHER_COLOR1, color, score, failScore, customName);
+		return this;
+	}
+
+	public function featherColor2(color:*, score:int, failScore:int =0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_FEATHER_COLOR2, color, score, failScore, customName);
+		return this;
+	}
+
 	public function skinCoverage(coverage:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
 		addSlotRequirement(BodyData.SLOT_SKIN_COVERAGE, coverage, score, failScore, customName);
 		return this;
@@ -154,16 +202,16 @@ public class RaceScoreBuilder {
 		addSlotRequirement(BodyData.SLOT_SKIN_TYPE, type, score, failScore, customName);
 		return this;
 	}
-	public function skinColor(value:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
-		addSlotRequirement(BodyData.SLOT_SKIN_COLOR, value, score, failScore, customName);
+	public function bodyColors(value:*, score:int, failScore:int =0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_BODY_COLORS, value, score, failScore, customName);
+		return this;
+	}
+	public function bodyColor1(value:*, score:int, failScore:int =0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_BODY_COLOR1, value, score, failScore, customName);
 		return this;
 	}
 	public function skinBaseType(type:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
 		addSlotRequirement(BodyData.SLOT_SKIN_BASE_TYPE, type, score, failScore, customName);
-		return this;
-	}
-	public function skinBaseColor(value:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
-		addSlotRequirement(BodyData.SLOT_SKIN_BASE_COLOR, value, score, failScore, customName);
 		return this;
 	}
 	public function skinBasePattern(value:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
@@ -178,30 +226,38 @@ public class RaceScoreBuilder {
 		addSlotRequirement(BodyData.SLOT_SKIN_COAT_TYPE, type, score, failScore, customName);
 		return this;
 	}
-	public function skinCoatColor(type:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
-		addSlotRequirement(BodyData.SLOT_SKIN_COAT_COLOR, type, score, failScore, customName);
+	public function skinColors(color:*, score:int, failScore:int =0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_SKIN_COLORS, color, score, failScore, customName);
 		return this;
 	}
-	public function skinCoatColorPair(color1:*, color2:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
-		addRequirement(
-				RacialRequirement.joinAnd(
-						"skin coat",
-						" and ",
-						slotRequirement(BodyData.SLOT_SKIN_COAT_COLOR, color1, score, failScore, false),
-						slotRequirement(BodyData.SLOT_SKIN_COAT_COLOR2, color2, score, failScore)
-				)
-		);
+	public function skinColor1(color:*, score:int, failScore:int =0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_SKIN_COLOR1, color, score, failScore, customName);
 		return this;
 	}
-	public function skinCoatTypeAndColor(type:*, color:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
+	public function skinCoatTypeAndColors(type:*, color:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
 		addRequirement(
 				RacialRequirement.joinAnd(
 						"skin coat",
 						" colored ",
-						slotRequirement(BodyData.SLOT_SKIN_COAT_COLOR, color, score, failScore, false),
+						slotRequirement(BodyData.SLOT_SKIN_COAT_COLORS, color, score, failScore, false),
 						slotRequirement(BodyData.SLOT_SKIN_COAT_TYPE, type, score, failScore)
 				), customName
 		);
+		return this;
+	}
+	public function skinCoatTypeAndColor1(type:*, color:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
+		addRequirement(
+				RacialRequirement.joinAnd(
+						"skin coat",
+						" colored ",
+						slotRequirement(BodyData.SLOT_SKIN_COAT_COLOR1, color, score, failScore, false),
+						slotRequirement(BodyData.SLOT_SKIN_COAT_TYPE, type, score, failScore)
+				), customName
+		);
+		return this;
+	}
+	public function skinCoatPattern(value:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_SKIN_COAT_PATTERN, value, score, failScore, customName);
 		return this;
 	}
 	public function skinPlainOnly(score:int, failScore:int=0):RaceScoreBuilder {
@@ -227,13 +283,13 @@ public class RaceScoreBuilder {
 				failScore
 		);
 	}
-	public function plainSkinOfColor(color:*, score:int, failScore:int=0):RaceScoreBuilder {
+	public function plainSkinOfColor1(color:*, score:int, failScore:int=0):RaceScoreBuilder {
 		var oo:Object = RaceUtils.parseOperatorObject(color, BodyData.defaultPhraseFn(" plain skin",null));
 		return customRequirement(
 				"skin",
 				oo.name,
 				function(body:BodyData):Boolean {
-					return body.player.hasPlainSkinOnly() && oo.operatorFn(body.skinBaseColor);
+					return body.player.hasPlainSkinOnly() && oo.operatorFn(body.skinColor1);
 				},
 				score,
 				failScore
@@ -247,14 +303,19 @@ public class RaceScoreBuilder {
 		return tailType(Tail.NONE, score);
 	}
 	public function tailTypeAndCount(type:*, count:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
-		addRequirement(
-				RacialRequirement.joinAnd(
-						"tail",
-						" ",
-						slotRequirement(BodyData.SLOT_TAIL_COUNT, count, score, failScore, false),
-						slotRequirement(BodyData.SLOT_TAIL_TYPE, type, score, failScore)
-				), customName
-		)
+		var req:RacialRequirement = RacialRequirement.joinAnd(
+				"tail",
+				" ",
+				slotRequirement(BodyData.SLOT_TAIL_COUNT, count, score, failScore, false),
+				slotRequirement(BodyData.SLOT_TAIL_TYPE, type, score, failScore, false)
+		);
+		if (count is Number) {
+			if (count > 1) req.name += " tails";
+			else req.name += " tail";
+		} else {
+			req.name += " tail(s)"
+		}
+		addRequirement(req, customName);
 		return this;
 	}
 	public function tongueType(type:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {

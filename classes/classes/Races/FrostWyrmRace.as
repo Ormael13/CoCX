@@ -9,9 +9,33 @@ import classes.Race;
 public class FrostWyrmRace extends Race {
 	public static const FrostWyrmHairColors:/*String*/Array = ["white", "snow white", "glacial white", "silver", "platinum silver"];
 	public static const FrostWyrmScaleColos:/*String*/Array = ["bluish black", "dark gray", "black", "midnight black", "midnight"];
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Elf",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Elven",
+        /*Eyes*/		"Elf",
+        /*Face*/		"Elf",
+        /*Gills*/		"None",
+        /*Hair*/		"Elf",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Elf",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Elf",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Elf",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Elf"];
 	
 	public function FrostWyrmRace(id:int) {
-		super("Frost Wyrm", id);
+		super("Frost Wyrm", id, []);//RaceBody);
 		chimeraTier = 0;
 		grandChimeraTier = 0;
 		mutationThreshold = 6;
@@ -32,8 +56,8 @@ public class FrostWyrmRace extends Race {
 		addScoresAfter(5)
 				.noWings(+4)
 				.hornType(NONE(Horns.DRACONIC_X4_12_INCH_LONG, Horns.DRACONIC_X2), 0, -2)
-				.hairColor(ANY(FrostWyrmHairColors), +1)
-				.skinCoatColor(ANY(FrostWyrmScaleColos), +1)
+				.hairColor1(ANY(FrostWyrmHairColors), +1)
+				.scaleColor1(ANY(FrostWyrmScaleColos), +1)
 				.hasCockOfType(CockTypesEnum.DRAGON, +1)
 				.customRequirement("","male with big cock or female with big tits",
 						function (body:BodyData):Boolean {
@@ -51,6 +75,7 @@ public class FrostWyrmRace extends Race {
 		
 		buildTier(18, "frost wyrm")
 				.buffs({
+					"maxhp_mult": +0.05,
 					"str.mult": +1.30,
 					"tou.mult": +1.10,
 					"spe.mult": +0.70,
@@ -61,15 +86,16 @@ public class FrostWyrmRace extends Race {
 				})
 				.end();
 		
-		buildTier(26, "greater frost wyrm")
+		buildTier(26, "elder frost wyrm")
 				.buffs({
+					"maxhp_mult": +0.10,
 					"str.mult": +1.80,
 					"tou.mult": +1.50,
 					"spe.mult": +0.90,
 					"int.mult": -1.00,
 					"lib.mult": +0.70,
-					"def": +1,
-					"mdef": +1
+					"def": +2,
+					"mdef": +2
 				})
 				.end();
 	}

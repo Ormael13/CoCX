@@ -76,7 +76,7 @@ public class Kelt extends Monster
 				if(player.lust >= 80) outputText("Your hand moves towards your groin seemingly of its own volition.");
 				else outputText("Your hands twitch towards your groin but you arrest them.  Still, the idea seems to buzz at the back of your brain, exciting you.");
 			}
-			player.dynStats("lus", player.lib/5 + rand(10));
+			player.takeLustDamage(player.lib/5 + rand(10), true);
 		}
 
 		//Attacks as normal + daydream "attack"
@@ -152,7 +152,7 @@ public class Kelt extends Monster
 			this.butt.type = Butt.RATING_AVERAGE + 1;
 			this.lowerBody = LowerBody.HOOFED;
 			this.legCount = 4;
-			this.skinTone = "tan";
+			this.bodyColor = "tan";
 			this.hairColor = randomChoice("black","brown");
 			this.hairLength = 3;
 			initStrTouSpeInte(70, 80, 50, 20);
@@ -167,7 +167,6 @@ public class Kelt extends Monster
 			this.bonusLust = 78;
 			this.lust = 40;
 			this.lustVuln = 0.83;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = 13;
 			this.gems = rand(15) + 25;
 			this.tailType = Tail.HORSE;

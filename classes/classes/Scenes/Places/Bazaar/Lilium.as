@@ -2,8 +2,6 @@
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.PregnancyStore;
-import classes.StatusEffects;
-import classes.PerkLib;
 import classes.display.SpriteDb;
 
 public class Lilium extends BazaarAbstractContent{
@@ -28,7 +26,7 @@ public class Lilium extends BazaarAbstractContent{
 public function LiliumText(output:Boolean = false):Function {
 	if(output) {
 		//Before paying:
-		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00267] == 0) outputText("\n\nYou can see a pale, scantily clad demon woman leaning casually against the wall of a building.");
+		if(flags[kFLAGS.TIMES_FUCKED_LILIUM] == 0) outputText("\n\nYou can see a pale, scantily clad demon woman leaning casually against the wall of a building.");
 		//After paying:
 		else outputText("\n\nYou can see Lilium standing in her usual spot.");
 	}
@@ -41,7 +39,7 @@ private function approachLilium():void {
 	spriteSelect(SpriteDb.s_lilium);
 	var pay:Function = null;
 	//#########FIRST TIME INTRODUCTION#########
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00267] == 0) {
+	if(flags[kFLAGS.TIMES_FUCKED_LILIUM] == 0) {
 		outputText("As you approach the demon woman, her gaze shifts to you, and she runs her eyes down your body, scrutinizing you.  You respond in kind, taking in her form.  Two nearly foot-long horns grow up and out of her forehead, one of which is adorned with a shiny, silver band.  Her dark hair spills across her bare shoulders in loose coils and her black lipstick and heavy eyeshadow contrast with the paleness of her skin.  A black underbust corset wraps around her waist, leaving her breasts exposed, and long black gloves adorn her arms up to the shoulder.  She also wears a crinoline skirt with an opening at the front which reveals her smooth bare legs, a tail which wraps around her thigh like a garter, and her crotch, which sports an average cock curiously clad in a lacy sock in spite of her otherwise brazen exposure.\n\n");
 
 		outputText("Her assessment of you seems to be positive, as a smile crosses her face and she says, \"<i>You look like you've got more than a few gems to rub together; looking for a little fun?</i>\"\n\n");
@@ -78,37 +76,33 @@ private function payForLilium():void {
 		return;
 	}
 	//First time - Pay:
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00267] == 0) {
+	if(flags[kFLAGS.TIMES_FUCKED_LILIUM] == 0) {
 		outputText("\"<i>Sounds good,</i>\" you answer while fishing for your gem stash.\n\n");
 
 		outputText("\"<i>I'm Lilium, by the way,</i>\" she states, as you give the woman your name and your payment in return.\n\n");
 
 		//(If player name is also Lilium)
 		if(player.short == "Lilium") outputText("\"<i>No way!</i>\" she cries upon learning of your identical name.  \"<i>Well... I hope you're not going to ask me to scream your name during sex.  That might be a bit awkward.</i>\"\n\nHow do you want to have the whore?\n\n");
-
-		outputText("What will you do with her?");
+		else outputText("What will you do with her?");
 	}
 	else {
 		outputText("You toss the gems to the hooker and while she counts them, you wonder just what you want her to do this time.");
 	}
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00267]++;
+	flags[kFLAGS.TIMES_FUCKED_LILIUM]++;
 	player.gems -= 200;
 	statScreenRefresh();
 	//Sex Menu here
-	var buttFuck:Function = null;
-	var nippleFuck:Function = null;
-	var rideHer:Function = null;
-	if(player.hasCock() && player.hasLongTongue()) buttFuck = buttFuckTongueJeorb;
-	if(player.hasCock()) nippleFuck = liliumNippleFuck;
-	if(player.hasVagina()) rideHer = liliumDickRidah;
-	simpleChoices("Buttfuck", buttFuck, "Ride Her", rideHer, "Nipple-Fuck", nippleFuck, "", null, "", null);
+	menu();
+	addButtonIfTrue(0, "Buttfuck", buttFuckTongueJeorb, "Req. a cock and a long tongue.", player.hasCock() && player.hasLongTongue());
+	addButtonIfTrue(1, "Nipple-Fuck", liliumNippleFuck, "Req. a cock.", player.hasCock());
+	addButtonIfTrue(2, "Ride Her", liliumDickRidah, "Req. a vagina.", player.hasVagina());
 }
 
 //- Leave:
 private function leaveLilium():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_lilium);
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00267] == 0) outputText("\"<i>I'm deathly allergic to fun, unfortunately,</i>\" you reply before moving on to examine more of the bazaar.");
+	if(flags[kFLAGS.TIMES_FUCKED_LILIUM] == 0) outputText("\"<i>I'm deathly allergic to fun, unfortunately,</i>\" you reply before moving on to examine more of the bazaar.");
 	else outputText("\"<i>Just passing through, and I thought I'd see how you were doing,</i>\" you reply, and leave Lilium alone at her post.");
 	doNext(bazaar.enterTheBazaar);
 }
@@ -150,7 +144,7 @@ private function buttFuckTongueJeorb():void {
 
 	outputText("After you both recover, you get up to don your [armor], thanking Lilium and beginning the trip back to camp.  Maybe you'll take a bath too...");
 
-	player.orgasm();
+	player.sexReward("no", "Dick");
 	dynStats("cor", 1);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -204,7 +198,6 @@ private function liliumDickRidah():void {
 
 	outputText("After a moment of recovery time you get up to get dressed before starting your journey back to camp.  \"<i>Don't be a stranger, now,</i>\" calls the voice over your shoulder. A slight smile appears on your face.\n\n");
 	player.sexReward("cum","Vaginal");
-	player.orgasm();
 	dynStats("cor", 1);
 	//(imp preg check)
 	if (!player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 14, 61); //Lilium causes faster pregnancies
@@ -265,7 +258,7 @@ private function liliumNippleFuck():void {
 	outputText(" and soaked sock, you brush a wayward strand of hair from her face.  Her eyes make their way up to meet yours and you give her a wink as you both smile lasciviously.\n\n");
 
 	outputText("You get dressed again and begin to leave; as you look back over shoulder, Lilium - still seated and leaning against the wall - blows you a kiss.");
-	player.orgasm();
+	player.sexReward("vaginalFluids", "Dick");
 	doNext(camp.returnToCampUseOneHour);
 }
 }

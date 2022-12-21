@@ -77,7 +77,7 @@ public class IsabellaScene extends NPCAwareContent implements TimeAwareInterface
 		}
 
 		public function timeChangeLarge():Boolean {
-			if (checkedIsabella++ == 0 && model.time.hours == 6 && isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0 && flags[kFLAGS.ISABELLA_BLOWJOBS_DISABLED] == 0 && player.hasCock() && (model.time.days % 2 == 0 || !player.hasPerk(PerkLib.MarblesMilk)) && player.shortestCockLength() <= 9 && !prison.inPrison) {
+			if (checkedIsabella++ == 0 && model.time.hours == 6 && isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0 && flags[kFLAGS.ISABELLA_BLOWJOBS_DISABLED] == 0 && player.hasCock() && (model.time.days % 2 == 0 || !player.hasPerk(PerkLib.MarblesMilk)) && player.shortestCockLength() <= 9) {
 				spriteSelect(SpriteDb.s_isabella);
 				isabellaFollowerScene.isabellaMorningWakeupCall();
 				return true;
@@ -106,6 +106,7 @@ public class IsabellaScene extends NPCAwareContent implements TimeAwareInterface
 public function isabellaGreeting():void {
 	spriteSelect(SpriteDb.s_isabella);
 	clearOutput();
+	sceneHunter.print("I'll just say it here - a LOT of her scenes have difference for people taller and shorter than 6'6\". And also she prefers small cocks and would like to suck one.");
 	var suck:Function = null;
 	//Not approached yet - the prequel!
 	if(flags[kFLAGS.ISABELLA_CAMP_APPROACHED] == 0) {
@@ -133,8 +134,10 @@ public function isabellaGreeting():void {
 		if(player.hasStatusEffect(StatusEffects.Marble)) outputText("She's like Marble - she has a human face with horns and cow-like ears.");
 		else outputText("She has a human face, but the top of her head is also adorned with a pair of stubby, bovine horns and floppy cow-ears.");
 		outputText("  Her skin is tanned dark, practically milk-chocolate brown, but a few rounded spots of white, pearly skin break up the uniformity.  The cow-girl is wearing a diaphanous silk shirt supported by a black leather corset and red lace.  She also wears a plain, olive-toned skirt that barely protects her modesty, and nearly fails in its purpose with every subtle breeze.  Her wide hips flare into spacious thighs before disappearing under a layer of shaggy, auburn fur that grows thicker and thicker the closer it gets to her hooves.\n\n");
+		sceneHunter.print("And here go some tallness checks. Not that they block anything, but being taller or shorter than 6'6\" may open some nice scene variations.");
 		//(tall PC's 6'6</i>\"+)
 		if(player.tallness > 78) {
+			sceneHunter.print("Check failed... or not? You're taller than she <i>usually</i> likes.");
 			outputText("The cow-girl narrows her eyebrows in irritation as she sizes up your impressively large form.  She speaks with a strange accent, \"<i>Who are you and vat are you doing here?</i>\"\n\n");
 			outputText("You answer and begin to explain yourself, but she interrupts, \"<i>Get out!  Zis is mein camp and I vill not tolerate you here!</i>\"\n\n");
 			outputText("A bit taken aback by her violent reaction, you blink in confusion as she pulls a titanic shield from behind her chair and slides her arm comfortably into the strap.  What do you do?\n\n");
@@ -163,6 +166,7 @@ public function isabellaGreeting():void {
 	}
 	//Camp Meeting – Repeat Unwelcome
 	else if(player.tallness > 78 && flags[kFLAGS.ISABELLA_OKAY_WITH_TALL_FOLKS] == 0) {
+		sceneHunter.print("Check failed... or not? You're taller than she <i>usually</i> likes.");
 		outputText("You stumble through the grass, nearly tripping as it parts to reveal the now-familiar sight of Isabella's camp.  The cow-girl spots you instantly and snarls, \"<i>Begone!  I varned you once already!</i>\"");
         isabellaFollowerScene.isabellaAffection(-5);
 		//[Talk] [Fight] [Leave]
@@ -194,9 +198,10 @@ public function isabellaGreeting():void {
 	}
 	//Camp Meeting – Welcomed Short but Not Tall
 	else if(flags[kFLAGS.ISABELLA_MET_SHORT_PC] > 0 && flags[kFLAGS.ISABELLA_OKAY_WITH_TALL_FOLKS] == 0 && player.tallness > 78) {
+		sceneHunter.print("Check failed... or not? You're taller than she <i>usually</i> likes.");
 		outputText("You easily brush through the tall grasses and stride into Isabella the cow-girl's camp.  It looks like she was sitting in her chair mending a blanket when you arrived, and you take a moment to watch her hunched posture squeeze her breasts tightly against the gauzy silk top she's so fond of wearing.  The outline of a single areola is clearly visible through the diaphanous material, but most striking is that each areola has four VERY prominent nipple-tips.  She looks at you, first in fright, and then in embarrassment as she recognizes you AND realizes what you were doing in a single instant.\n\n");
 		//(+lust!)
-		dynStats("lus", 10+rand(10));
+		dynStats("lus", 10+rand(10), "scale", false);
 		outputText("Isabella complains, \"<i>Vere you just checking me out?  Vell I must confess, I liked you better ven you were shorter.  Maybe if you ask nicely I might give you a peak and a drink.  That vould be nice, nein?\n\n");
         isabellaFollowerScene.isabellaAffection(-5); //unhappy, but she knows you already
 		flags[kFLAGS.ISABELLA_OKAY_WITH_TALL_FOLKS]++;
@@ -315,6 +320,7 @@ public function nomOnMommaIzzysTits():void {
 	var x:Number = player.cockThatFits(20);
 	//[Voluntary Nursing – PC is a big one or taur]
 	if(player.tallness > 78 || player.isTaur()) {
+		sceneHunter.print("Check failed... or not? You're taller than she <i>usually</i> likes.");
 		outputText("Isabella's face lights up when you let her know that you could use a drink.  She grabs one of her blankets from atop a chest and throws it out over the ground.  The fabric of her intricately-patterned spread settles over the dirt, amazing you with its quality and size.  It's well over 10 feet from edge to edge and does a fantastic job of making the patch of dirt feel a lot more comfortable.  The busty cow-girl walks onto it, almost like a carpet, but then she lies down on her side and begins casually unlacing the red cord from her black corset.  Her mountainous mammaries wobble dangerously with each tug, and then she's tossing the corset aside.  With it out of the way, there's nothing between you and the cow-girl's glistening, sun-kissed skin except for a gauzy layer of silk.\n\n");
 
 		outputText("You approach, salivating slightly in anticipation of the taste of the cow-girl's milk and unintentionally growing more and more aroused by her 'concealed' and yet totally exposed breasts.  ");
@@ -360,13 +366,13 @@ public function nomOnMommaIzzysTits():void {
 		//(Male and it fits end)
 		if(player.hasCock() && x >= 0) {
 			outputText("You wake after an hour of highly erotic dreams to find yourself snuggled against Isabella, held tightly in the crook of her arm.  She's snoring soundly, so you quietly extricate yourself from underneath her limb and cover her back up with her blanket.  As you stretch, you realize you're completely naked, your crotch is sore, and you absolutely reek of feminine lust.");
-			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00261] == 0) outputText("  S-she fucked you in your sleep?  That explains how good your dreams were.  On one hand you feel a little violated, but on the other you have to wonder how long this woman has held her camp against the demons with nothing to please her.");
+			if(flags[kFLAGS.ISABELLA_SLEEP_RAPES] == 0) outputText("  S-she fucked you in your sleep?  That explains how good your dreams were.  On one hand you feel a little violated, but on the other you have to wonder how long this woman has held her camp against the demons with nothing to please her.");
 			else outputText("  It looks like she fucked you in your sleep again.  You wish you wouldn't fall asleep so soundly after drinking her milk so that you could contribute to the sex, but you wake so COMPLETELY SATED in every way that you know it's going to be hard to ever turn her down.");
 			//(no lust!, minus 50 fatigue)
 			player.sexReward("milk");
 			fatigue(-50);
 			//increment sleep rape counter
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00261]++;
+			flags[kFLAGS.ISABELLA_SLEEP_RAPES]++;
 		}
 		//(Generic End)
 		else {
@@ -422,9 +428,9 @@ public function nomOnMommaIzzysTits():void {
 		//(Male and it fits end)
 		if(player.hasCock() && x >= 0) {
 			outputText("You wake up an hour later in a massive sprawl of blankets.  There's a soft pillow below you and another one above, and you struggle to dig your way out until a pair of arms wrap around you.  Those aren't pillows – you're trapped between the cow-girl's breasts!  You carefully slide downwards, giving her large, leaking nipples a longing look as you extricate yourself from the embrace with care.  She snores on, blissfully ignorant of your departure as you find your [armor] and re-dress.  There's a hint of tight soreness in your groin, and after reaching down to adjust yourself, your hand comes up reeking of feminine cow-girl.  ");
-			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00261] == 0) {
+			if(flags[kFLAGS.ISABELLA_SLEEP_RAPES] == 0) {
 				outputText("S-she raped you in your sleep?  You aren't sure how she pulled it off, but your ");
-				if(player.balls > 0) outputText("balls feel");
+				if(player.hasBalls()) outputText("balls feel");
 				else outputText("body feels");
 				outputText(" so empty and sated you must have gotten off a few times.  Well, all things considered you feel quite rested, even if you got a bit more than you asked for.  Maybe next time you'll at least stay awake for the fun parts!");
 			}
@@ -439,7 +445,7 @@ public function nomOnMommaIzzysTits():void {
 			player.sexReward("vaginalFluids");
 			fatigue(-50);
 			//increment sleep rape counter
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00261]++;
+			flags[kFLAGS.ISABELLA_SLEEP_RAPES]++;
 		}
 		//(GENERIC)
 		else {
@@ -504,13 +510,14 @@ public function izzyGivesSmallWangsFreeOral():void {
 
 	outputText("The feeling is something like a strange hybrid between a vagina and a blowjob, bathing your entire length with syrupy, warm sensations.  ");
 
+	sceneHunter.print("Lust check: 50%")
 	//(Low sensitivity success!)
-	if(player.sens < 50) {
+	if(player.lust < 0.5 * player.maxLust()) {
 		outputText("You moan happily, hips rocking instinctively against the cow-girl's vacuum-tight tongue-job as she cranks up her efforts to the maximum in an effort to make you blow already.  Panting lustily, you grab her horns and pull her face partway back, then slam it down while your " + cockDescript(x) + " drips pre-cum onto the top of her tongue.  She flaps it back and forth, smearing your " + player.cockHead(x) + " with the slippery stuff and torturing you with exquisite sensations that would have lesser individuals spurting in seconds.\n\n");
 		if(isabellaAccent()) outputText("Isabella grunts and pulls back, pulling her horns from your pleasure-weakened fingers and panting heavily.  She groans, \"<i>Nein, I cannot believe it!  Such a small, hard little cock and I couldn't make it spurt, not even vith mein special techniques!</i>\"  She looks up at you with her flushed, breathy face and coos, \"<i>You are NOT a pervert after all.  Not a " + player.mf("boy","maid") + ", but a " + player.mf("man","woman") + " with a beautiful, succulent little cock for Isabella to suck.  How lucky I am!</i>\"\n\n");
 		else outputText("Isabella grunts and pulls back, pulling her horns from your pleasure-weakened fingers and panting heavily.  She groans, \"<i>No, I can't believe it!  Such a small, hard little cock and I couldn't make it spurt, not even with my special techniques!</i>\"  She looks up at you with her flushed, breathy face and coos, \"<i>You aren't a pervert after all.  Not a " + player.mf("boy","maid") + ", but a " + player.mf("man","woman") + " with a beautiful, succulent little cock for Isabella to suck.  How lucky I am!</i>\"\n\n");
 		outputText("The cow-girl returns to her task with gusto, snaring your " + cockDescript(x) + " with her tongue, but instead of going all-out with her corkscrew technique, she's pumping it, sliding her hot wetness up and down your shaft with practiced ease.  ");
-		if(player.balls > 0) outputText("She cups your [balls] and begins caressing the twitching orbs, giving them gentle squeezes each time the pleasure forces them to involuntarily contract towards your groin.");
+		if(player.hasBalls()) outputText("She cups your [balls] and begins caressing the twitching orbs, giving them gentle squeezes each time the pleasure forces them to involuntarily contract towards your groin.");
 		else if(player.hasVagina()) {
 			outputText("She probes your " + vaginaDescript() + " with her fingers, running them over your engorged lips and giving your " + clitDescript() + " ");
 			if(player.clitLength < 3) outputText("gentle squeezes");
@@ -563,10 +570,10 @@ public function izzyGivesSmallWangsFreeOral():void {
 	else {
 		outputText("You try to fight the heaven around your " + cockDescript(x) + ", but it's too much for your poor, sensitive body to endure.  Giving up, you relax, hips pistoning instinctively into her mouth as the warm tightness of an orgasm rises inside you.  Isabella's eyes stare up at your face, watching intently while she keeps her lips wrapped tightly ");
 		if(player.hasSheath()) outputText("around your sheath");
-		else if(player.balls > 0) outputText("above your balls");
+		else if(player.hasBalls()) outputText("above your balls");
 		else outputText("around your base");
 		outputText(".  She keeps her position, rocking with each of your involuntarily movements, ");
-		if(player.balls > 0) outputText("her hand stroking and gently squeezing at your [balls] as if she could milk a bigger load from them that way.");
+		if(player.hasBalls()) outputText("her hand stroking and gently squeezing at your [balls] as if she could milk a bigger load from them that way.");
 		else if(player.cockTotal() > 1) outputText("her hand stroking and squeezing your neglected " + cockDescript(1) + " almost as an afterthought.");
 		else outputText("her hand stroking in an effort to milk your load from you.");
 		outputText("\n\n");
@@ -598,7 +605,7 @@ public function izzyGivesSmallWangsFreeOral():void {
 		}
 		isabellaFollowerScene.isabellaAffection(7); //disappointed, but anyway..
 	}
-	player.sexReward("vaginalFluids");
+	player.sexReward("saliva", "Dick");
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -650,7 +657,8 @@ public function volunteerToSlurpCowCunt():void {
 		outputText("Isabella sighs contentedly and says, \"<i>Thank you, [name].  You're a wonderful pussy licker.  Perhaps one of these times I will keep you for myself, huh?  I kid, I kid.</i>\"  She blushes heavily, as if realizing what she just said and turns to busy herself with cleaning up.  You get dressed, having some difficulty hiding the lust the act inspired in you.\n\n");
 	}
 	//(+lots of lust)
-	dynStats("lus", (10+player.lib/10));
+	dynStats("lus", (10+player.lib/10), "scale", false);
+	player.slimeFeed();
 	if(player.hasCock()) {
 		outputText("The cow-girl suddenly glances back at your crotch ");
 		if(player.cocks[player.shortestCockIndex()].cockLength >= 9) outputText("before sighing wistfully.");
@@ -664,6 +672,7 @@ public function volunteerToSlurpCowCunt():void {
 	}
 	isabellaFollowerScene.isabellaAffection(15); //thankful!
 	if(!isabellaFollower() || !player.hasVagina() || player.biggestTitSize() < 1) {
+		sceneHunter.print("Check failed: Isabella follower, vagina, tits.");
 		doNext(camp.returnToCampUseOneHour);
 	}
 	else {
@@ -673,7 +682,6 @@ public function volunteerToSlurpCowCunt():void {
 		//[Leave] [Get Cowlicked]
 		simpleChoices("Get Licked", isabellaFollowerScene.receiveAllTheCowTOngues, "Leave", camp.returnToCampUseOneHour, "", null, "", null, "", null);
 	}
-	player.slimeFeed()
 }
 
 public function IsabellaWinsAndSpanks():void {
@@ -683,7 +691,7 @@ public function IsabellaWinsAndSpanks():void {
 		if(player.HP < 1) outputText("You collapse at Isabella's feet, nearly senseless from all the damage you've taken.");
 		else outputText("You collapse at Isabella's feet, masturbating pathetically as she glares down at you.");
 		outputText("  A hand grabs hold of the back of your [armor] and lifts you up, placing you firmly over the cow-girl's fur-covered knee.  You can feel the transition from fur to skin underneath your belly, at the midpoint of her thigh.  ");
-		if(player.lust >= player.maxLust()) outputText("You start trying to hump and grind, but the angry cow will have none of it.  ");
+		if(player.lust >= player.maxOverLust()) outputText("You start trying to hump and grind, but the angry cow will have none of it.  ");
 		outputText("SMACK!  A powerful impact slams into your [ass], making you gasp out in pain");
 		if(player.hasPerk(PerkLib.Masochist)) outputText(" and pleasure");
 		outputText(".  The next blow follows shortly after, equally hard but placed upon your other, yet-unbruised butt-cheek.");
@@ -744,7 +752,7 @@ public function IsabellaWinsAndSpanks():void {
 		if(player.HP < 1) outputText("You collapse at Isabella's feet, nearly senseless from all the damage you've taken.");
 		else outputText("You collapse at Isabella's feet, masturbating pathetically as she glares down at you.");
 		outputText("  A hand grabs hold of the back of your [armor] and props you up, ass in the air.  ");
-		if(player.lust >= player.maxLust()) outputText("You start trying to masturbate yourself, but the angry cow will have none of it.  ");
+		if(player.lust >= player.maxOverLust()) outputText("You start trying to masturbate yourself, but the angry cow will have none of it.  ");
 		outputText("SMACK!  A powerful impact slams into your [ass], making you gasp out in pain");
 
 		if(player.hasPerk(PerkLib.Masochist)) outputText(" and pleasure");
@@ -805,20 +813,17 @@ public function IsabellaWinsAndSpanks():void {
 	flags[kFLAGS.ISABELLA_ANGRY_AT_PC_COUNTER] = 0; //She's already nice to you.
 	if(player.hasCock() && player.shortestCockLength() < 9)
 		doNext(IsabellaPostSpankFeedSex);
+	else sceneHunter.print("Check failed: you need a short cock!");
 	cleanupAfterCombat();
 }
 
 //[Isabella rapes you with her ass]
-public function isabellaRapesYouWithHerAss():void {
-	clearOutput();
-	var x:Number = player.cockThatFits(38);
-	if(x < 0) x = 0;
-
+public function isabellaRapesYouWithHerAss(x:int):void {
 
 	if(player.HP < 1) outputText("You collapse at Isabella's feet, nearly senseless from all the damage you've taken.");
 	else outputText("You collapse at Isabella's feet, masturbating pathetically as she glares down at you.");
 	outputText("  The cow-girl plants a hoof on your chest, pinning you into the dusty sod of her camp while she looks you up and down.  The victorious redhead leers at your groin while she begins to tear off your [armor].  It doesn't take her more than a few seconds to expose your [cocks].");
-	if(player.lust >= player.maxLust())
+	if(player.lust >= player.maxOverLust())
 	{
 		outputText("  Your twitching hardness brings a smile to Isabella's face as she coos, \"");
 		if(isabellaAccent()) outputText("<i>Oooh, so eager to be taught a lesson, ja?  Very vell, Izabella vill give you your punishment!</i>\"\n\n");
@@ -859,7 +864,7 @@ public function isabellaRapesYouWithHerAss():void {
 	if(isabellaAccent()) outputText("I vant you to apologize for being so wicked and nasty from the bottom of your heart.  Until you do, I'll keep squeezing and rubbing with mein heiny!");
 	else outputText("I want you to apologize for being so wicked and nasty - from the bottom of your heart! Until you do, I'll keep squeezing and rubbing!");
 	outputText("</i>\"  You close your eyes and try to focus on the limited pleasure she's giving you – maybe you can get off without having to apologize?  The cow-girl will have none of it, and each time you feel the telltale warmth of an approaching orgasm");
-	if(player.balls > 0) outputText(" or the tightening of your " + sackDescript() + " as it pulls your "+ ballsDescriptLight());
+	if(player.hasBalls()) outputText(" or the tightening of your " + sackDescript() + " as it pulls your "+ ballsDescriptLight());
 	outputText(", she eases up, denying you your sloppy prize.  You try to earn more friction with subtle lifts of your hips, but that gets you another ear-ringing slap.\n\n");
 
 	outputText("There's no choice.  You're getting so hard it hurts, and Isabella is a relentless tease.  Whenever you close your eyes, she squirts your face with milk, and by the time you blink her cream from your eyes, she's pulled her gauzy top back into place.  Still, you can see the outline of her quad-tipped areola through the milk-wet fabric, and it only enhances the flow of blood to your already painfully-erect prick.  There's no way around it.  You swallow your pride, trying to ignore the teardrops running from your eyes, and beg as earnestly as you can, \"<i>Okay okay, I'm sorry!  I'll be good. I promise.  Just let me cum!  It hurrrrts!</i>\"\n\n");
@@ -868,14 +873,14 @@ public function isabellaRapesYouWithHerAss():void {
 	if(isabellaAccent()) outputText("No, zat is not sorrow.  You are sorry you can't cum, not sorry for being such a beast.  You must convince me!");
 	else outputText("No, that's not sorrow. You're sorry that you can't cum, not for being such a beast.");
 	outputText("</i>\" she commands.  You stick out your lower lip and look up pathetically, determined to earn your orgasm from the cruel cow.  You whine, \"<i>Please Isabella, I've been a very bad [boy]!  My naughty");
-	if(player.cockThatFits(38) >= 0) outputText(" little");
+	if(player.cockArea(x) < 38) outputText(" little");
 	else outputText(", nasty");
 	outputText(" cock is so hard and swollen and I promise to be good for you if you just let me cum.  Please! I'll drink your milk and lick your cunt whenever you want.  I'll do anything!</i>\"\n\n");
 
 	outputText("The cow-girl grins like a cat with a mouthful of cream, though in this case the 'cat' makes plenty of her own.  She coos, \"<i>Mmmm, that's a good [boy], and I like to give my good [boy]s lots of treats.  Are you ready for momma Izabella to make you feel so good?</i>\"  You nod with enough enthusiasm to strain your neck, getting a cute giggle from the redhead.  ");
 	//(FORK – too big or small enough)
 	//[GOOD FIT]
-	if(player.cockThatFits(38) >= 0) {
+	if(player.cockArea(x) < 38) {
 		outputText("She slides her plump ass back down, arching her back to press your " + player.cockHead(x) + " firmly against her tight, pre-moistened anus.  The cow-girl relaxes slowly, letting her muscles dilate to allow your member inside. The tight ring of muscle slides over your tip, clenching just under the head for a moment before the tension oozes back out of her muscles.  Her large, rounded ass-cheeks flex involuntarily as inch after inch of your " + cockDescript(x) + " is devoured by her anal passage.  The process is excruciating, but eventually the redhead is pressing her plush bottom against your groin");
 		if(player.cockTotal() > 1) outputText(", smushing against your other dick");
 		if(player.cockTotal() > 2) outputText("s");
@@ -884,7 +889,7 @@ public function isabellaRapesYouWithHerAss():void {
 		outputText("After a brief period of accommodation, Isabella begins to rock up and down, panting and grunting as your " + cockDescript(x) + " coats her inner walls with drippy pre-cum.  The rounded, bronzed cow-butt slaps against you with every lewd, cock-slurping butt-fuck.  You groan, delirious from the crushing tightness of the muscular cow-woman's back-door and the torturous foreplay.  For her part, the bovine broad is busy licking her lips and tugging her nipples, splashing you with a constant downpour of mother's milk that ebbs and flows in time with her bouncing butt.\n\n");
 
 		outputText("You can't hold back – not after all that teasing!  The tightness in your loins is palpable, surging to newer, greater heights with each passing second.  ");
-		if(player.balls > 0) outputText("Involuntary muscles contract, tugging your " + sackDescript() + " up against your crotch while your [balls] visibly contract, loading your body full of liquid lust that's about to explode.");
+		if(player.hasBalls()) outputText("Involuntary muscles contract, tugging your " + sackDescript() + " up against your crotch while your [balls] visibly contract, loading your body full of liquid lust that's about to explode.");
 		else outputText("Involuntary muscles contract, clenching inside you as your prostate loads your urethra with liquid lust that's about to explode.");
 		outputText("  In one violent, cock-swelling twitch, you blast the first thick ropes of seed into the cow-girl's waiting hole.  Her tail, displaying a surprising amount of control, curls around your ");
 		if(!player.hasSheath()) outputText("base");
@@ -918,7 +923,7 @@ public function isabellaRapesYouWithHerAss():void {
 		outputText("\n\n");
 
 		outputText("After so much teasing and torture, you cum brutally hard.  ");
-		if(player.balls > 0) outputText("Your " + sackDescript() + " pulls tight against your body, each of your [balls] quivering and pushing its load through you.");
+		if(player.hasBalls()) outputText("Your " + sackDescript() + " pulls tight against your body, each of your [balls] quivering and pushing its load through you.");
 		else outputText("Your body seems to pull tight, like a violin string, and you feel your organs quivering and working to push your load through you.");
 		outputText("  Warm pressure builds higher and higher, and then at once you're shooting, spraying ropes of jism a half-dozen feet into the air.  Your urethra bulges, and you spurt out the next batch to splatter on Isabella's back.  Some of it lands on her black leather corset, glazing it with an off-white sheen.");
 		if(player.cockTotal() > 1) {
@@ -940,7 +945,7 @@ public function isabellaRapesYouWithHerAss():void {
 	}
 	isabellaFollowerScene.isabellaAffection(6); //not like you're redeemed, but she has her fun
 	flags[kFLAGS.ISABELLA_ANGRY_AT_PC_COUNTER] = 0; //She's already nice to you.
-	player.sexReward("saliva");
+	player.sexReward("vaginalFluids", "Dick");
 	dynStats("sen", 2);
 	cleanupAfterCombat();
 }
@@ -985,14 +990,18 @@ public function IsabellaPostSpankFeedSex():void {
 	else outputText("\"<i>You're a very good [boy]! I hope I taught you some manners. Maybe you should come and visit me some time, but be polite for me or I'll have to give you another spanking!</i>\"");
 	outputText(" She climbs up on woozy legs and walks off, leaving you to doze in the defiled well of earth like a discarded tissue.\n\n");
 	isabellaFollowerScene.isabellaAffection(4); //some more for small ones
-	player.sexReward("milk");
+	player.sexReward("saliva", "Dick");
 }
 
 //LOSS
 public function isabellaDefeats():void {
 	if(monster.statusEffectv1(StatusEffects.Sparring) <= 1) {
-		if(player.hasCock() && rand(2) == 0) isabellaRapesYouWithHerAss();
-		else IsabellaWinsAndSpanks();
+		sceneHunter.selectLossMenu([
+				[0, "Fuck", curry(sceneHunter.callFitNofit, isabellaRapesYouWithHerAss, 38), "Req. a cock.", player.hasCock()],
+				[1, "Spanking", IsabellaWinsAndSpanks],
+			],
+			"Seems like the cow-girl is going to teach you a lesson.. how exactly?\n\n"
+		);
 	}
 	else {
 		cleanupAfterCombat();
@@ -1002,88 +1011,15 @@ public function isabellaDefeats():void {
 //[VICTORY!]
 public function defeatIsabella():void {
 	clearOutput();
-	if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) {
-		if (flags[kFLAGS.ISABELLA_FOLLOWER_ACCEPTED] == 1) {
-			if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] >= 1) flags[kFLAGS.ISABELLA_DEFEATS_COUNTER]++;
-			else flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 1;
-		}
-		if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] == 4 && flags[kFLAGS.ISABELLA_LVL_UP] < 1) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 4));
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 4), 0, 0);
+	if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2 && flags[kFLAGS.ISABELLA_FOLLOWER_ACCEPTED] == 1) {
+		if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] >= 1) flags[kFLAGS.ISABELLA_DEFEATS_COUNTER]++;
+		else flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 1;
+		if (flags[kFLAGS.ISABELLA_LVL_UP] < 13 &&  flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] >= flags[kFLAGS.ISABELLA_LVL_UP] + 4) {
+			var vAdd:int = player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * flags[kFLAGS.ISABELLA_DEFEATS_COUNTER];
+			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, vAdd);
+			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, vAdd, 0, 0);
 			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.ISABELLA_LVL_UP] = 1;
-		}
-		if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] == 5 && flags[kFLAGS.ISABELLA_LVL_UP] == 1) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 5));
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 5), 0, 0);
-			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.ISABELLA_LVL_UP] = 2;
-		}
-		if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] == 6 && flags[kFLAGS.ISABELLA_LVL_UP] == 2) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 6));
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 6), 0, 0);
-			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.ISABELLA_LVL_UP] = 3;
-		}
-		if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] == 7 && flags[kFLAGS.ISABELLA_LVL_UP] == 3) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 7));
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 7), 0, 0);
-			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.ISABELLA_LVL_UP] = 4;
-		}
-		if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] == 8 && flags[kFLAGS.ISABELLA_LVL_UP] == 4) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 8));
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 8), 0, 0);
-			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.ISABELLA_LVL_UP] = 5;
-		}
-		if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] == 9 && flags[kFLAGS.ISABELLA_LVL_UP] == 5) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 9));
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 9), 0, 0);
-			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.ISABELLA_LVL_UP] = 6;
-		}
-		if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] == 10 && flags[kFLAGS.ISABELLA_LVL_UP] == 6) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 10));
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 10), 0, 0);
-			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.ISABELLA_LVL_UP] = 7;
-		}
-		if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] == 11 && flags[kFLAGS.ISABELLA_LVL_UP] == 7) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 11));
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 11), 0, 0);
-			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.ISABELLA_LVL_UP] = 8;
-		}
-		if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] == 12 && flags[kFLAGS.ISABELLA_LVL_UP] == 8) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 12));
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 12), 0, 0);
-			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.ISABELLA_LVL_UP] = 9;
-		}
-		if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] == 13 && flags[kFLAGS.ISABELLA_LVL_UP] == 9) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 13));
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 13), 0, 0);
-			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.ISABELLA_LVL_UP] = 10;
-		}
-		if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] == 14 && flags[kFLAGS.ISABELLA_LVL_UP] == 10) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 14));
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 14), 0, 0);
-			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.ISABELLA_LVL_UP] = 11;
-		}
-		if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] == 15 && flags[kFLAGS.ISABELLA_LVL_UP] == 11) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 15));
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 15), 0, 0);
-			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.ISABELLA_LVL_UP] = 12;
-		}
-		if (flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] == 16 && flags[kFLAGS.ISABELLA_LVL_UP] == 12) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers1)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers1, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 16));
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers1, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 16), 0, 0);
-			flags[kFLAGS.ISABELLA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.ISABELLA_LVL_UP] = 13;
+			++flags[kFLAGS.ISABELLA_LVL_UP];
 		}
 	}
 	if(monster.statusEffectv1(StatusEffects.Sparring) == 2) {
@@ -1103,14 +1039,11 @@ public function defeatIsabella():void {
 	if(monster.HP <= monster.minHP()) outputText("gr");
 	else outputText("m");
 	outputText("oans, \"<i>");
-	if (monster.HP < 1)
-	{
+	if (monster.HP < 1) {
 		if (isabellaAccent()) outputText("Vhy must you be so like them?  You act like a demon!  Stay away from mein milk!");
 		else outputText("Why must you be so like them? You act just like a demon! Stay away from my milk!");
 
-	}
-	else
-	{
+	} else {
 		if (isabellaAccent()) outputText("I didn't vant this!  ...but, please, I have so much milk... drink my moOOOO-ilk!");
 		else outputText("I didn't want this! Please, I have so much milk... dink my moOOO-ilk!");
 	}
@@ -1118,25 +1051,26 @@ public function defeatIsabella():void {
 	if(monster.HP <= monster.minHP()) outputText("She acts so haughty, but she can't hide how her nipples are tenting her sheer top.");
 	else outputText("She acts like all she needs is a milking, but you can smell the dampness she's trickling from 'down under'.");
 	if (player.lust < 33) {
+		outputText("\n\nSadly, you're not aroused anough to fuck her.")
 		cleanupAfterCombat();
 		return;
 	}
-	var lactation:Function = null;
-	if(player.biggestLactation() >= 1) lactation = victoryLactation69;
-	var buttsex:Function = null;
-	var sixtyNine:Function = null;
-	if(player.gender > 0 && player.lust >= 33) sixtyNine = victoryAgainstIzzzzzySixtyNine;
-	var bigTitFuck:Function = null;
-	var smallTitFuck:Function = null;
-	var vaginalSex:Function = null;
-	if(player.hasCock()) {
-		if(player.cockThatFits(monster.analCapacity()) != -1 && player.lust >= 33) buttsex = PCVictoryOnIsabellaButtsex;
-		if(player.cockThatFits(monster.vaginalCapacity()) != -1 && player.lust >= 33) vaginalSex = vaginalProdNPokeIsabella;
-		if(player.cockArea(player.biggestCockIndex()) > 70 && player.lust >= 33) bigTitFuck = tooBigVictoryTittyFuckingFuntimesWithMilk;
-		if(player.cocks[player.shortestCockIndex()].cockLength < 9 && player.lust >= 33) smallTitFuck = tinyVictoryTittyFuckingFuntimesWithMilk;
-	}
-	choices("Lactation69", lactation, "Buttsex", buttsex, "Sixty-Nine", sixtyNine, "Vaginal", vaginalSex, "Big Titfuck", bigTitFuck,
-		"Small Titfuck", smallTitFuck, "", null, "", null, "", null, "Leave", cleanupAfterCombat);
+	menu();
+	addButton(0, "Lactation69", victoryLactation69)
+		.disableIf(player.biggestLactation() < 1, "You don't lactate enough!");
+	addButton(1, "Buttsex", PCVictoryOnIsabellaButtsex)
+		.disableIf(player.cockThatFits(monster.analCapacity()) < 0, "Req. a cock fitting "+monster.analCapacity()+" capacity.");
+	addButton(2, "Sixty-Nine", curry(sceneHunter.selectGender,
+		curry(sceneHunter.callFitNofit, victoryAgainstIzzzzzySixtyNine, 38),
+		curry(victoryAgainstIzzzzzySixtyNine, -1)
+	)).disableIf(player.isGenderless(), "Req. a gender.");
+	addButton(3, "Vaginal", vaginalProdNPokeIsabella)
+		.disableIf(player.cockThatFits(monster.vaginalCapacity()) < 0, "Req. a cock fitting "+monster.vaginalCapacity()+" capacity.");
+	addButton(4, "Big Titfuck", tooBigVictoryTittyFuckingFuntimesWithMilk)
+		.disableIf(!player.hasCock() || player.biggestCockArea() < 70, "Req. a cock with area larger than 70.");
+	addButton(5, "Small Titfuck", tinyVictoryTittyFuckingFuntimesWithMilk)
+		.disableIf(!player.hasCock() || player.shortestCockLength() >= 9, "Req. a cock shorter than 9 inches.");
+	addButton(14, "Leave", cleanupAfterCombat);
 }
 //[LACTATION 69]
 public function victoryLactation69():void {
@@ -1190,7 +1124,7 @@ public function victoryLactation69():void {
 	//(Cock)
 	if(player.hasCock()) {
 		outputText("  With a few more solid pumps " + sMultiCockDesc() + " goes rock hard");
-		if(player.balls > 0) outputText(", your [balls] pulling tight against your groin");
+		if(player.hasBalls()) outputText(", your [balls] pulling tight against your groin");
 		outputText(".  Warmth spreads from your groin as ropes of spunk shoot and spray over the dirt, a few even hitting Isabella's head.  She doesn't give any sign of knowing or caring, so intent is she on your milk.");
 		if(player.cumQ() >= 1000) outputText("  You squirt and drip for ages, making a nice big puddle around both of you.");
 	}
@@ -1220,7 +1154,7 @@ public function victoryLactation69():void {
 	player.changeStatusValue(StatusEffects.Feeder,2,0);
 	//Reset anger
 	flags[kFLAGS.ISABELLA_ANGRY_AT_PC_COUNTER] = 0;
-	player.sexReward("saliva");
+	player.sexReward("milk", "Lips");
 	cleanupAfterCombat();
 }
 //[VICTORY BUTTSEX]
@@ -1228,8 +1162,9 @@ public function PCVictoryOnIsabellaButtsex():void {
 	var x:Number = player.cockThatFits(monster.analCapacity());
 	var y:Number = player.cockThatFits2(monster.analCapacity());
 	clearOutput();
+	if (y < 0) sceneHunter.print("You could use another one!");
 	outputText("Milk, huh?  No, that won't do.  You tell the ");
-	if(monster.lust >= monster.maxLust()) outputText("horny ");
+	if(monster.lust >= monster.maxOverLust()) outputText("horny ");
 	outputText("cow-slut to roll over and get on all fours.  ");
 	if(monster.HP <= monster.minHP()) outputText("She struggles to comply, heaving her hefty body until she's wobbling on all fours, nearly falling into the dirt.");
 	else outputText("She struggles to comply, pulling her hands away from her erogenous zones as she wobbles onto shaky hands and knees.");
@@ -1311,14 +1246,12 @@ public function PCVictoryOnIsabellaButtsex():void {
 	outputText(".  Isabella slumps down and closes her eyes, though her rump stays pointed up in the air, displaying the seed you left puddling in her rectum.  Amazingly, the milk she was leaking in the mud seems to have been absorbed already, leaving the earth dry and dusty once again.\n\n");
 
 	outputText("You get dressed and set off, feeling quite proud of how you handled the haughty foreign bovine.");
-	player.sexReward("Default", "Default", true,false);
+	player.sexReward("Default", "Dick", true,false);
 	cleanupAfterCombat();
 }
 
 //[Victory 69]
-public function victoryAgainstIzzzzzySixtyNine():void {
-	var x:Number = player.cockThatFits(38);
-	if(x < 0) x = 0;
+public function victoryAgainstIzzzzzySixtyNine(x:int):void {
 	clearOutput();
 	outputText("You aren't interested in her milk though.  You came for a different sort of relief, and Isabella should be thankful you plan to share it.  The confused, beaten cow watches you with wide, helpless eyes as you disrobe, dropping your [armor] heavily on some of her rugs.  Her skirt shouldn't pose a problem; a quick push has it bunched up around Isabella's waistline.  With the offending garment moved, you can get a good look at a sight you plan to get <b>intimately</b> familiar with for the next fifteen minutes or so.\n\n");
 
@@ -1328,15 +1261,15 @@ public function victoryAgainstIzzzzzySixtyNine():void {
 	outputText("  It doesn't surprise you that they glisten, or that her nethers are slowly parting to reveal her pinky-sized clit and moist canal, but what does surprise you is the sweet, pleasant scent the red-head's lips exude.  After watching the teasing display with such rapt attention, you finally notice the teardrop-shaped thatch of red pubes above her entrance.  It seems to match her blooming 'flower' perfectly, undulating with the cow-cunt's incessant, nervous squirming.\n\n");
 
 	outputText("You twist sinuously, sliding your " + hipDescript() + " over Isabella until your groin is hovering over her mouth and your [legs] are brushing her ears.  She tentatively opens her mouth, spreading her dusky lips wide as her tongue licks them.  The cow-girl grabs hold of your [ass], knowing full well what's expected of her, and pulls up to ");
-	if(player.gender == 2) outputText("nuzzle your " + vaginaDescript(0) + ", smearing your vulva with her lips even she spreads the folds to access your " + clitDescript());
-	else if(player.cockThatFits(38) != -1) outputText("swallow your " + cockDescript(x) + " whole, plying her smooth, spit-covered tongue over every inch of it");
+	if(x < 0) outputText("nuzzle your " + vaginaDescript(0) + ", smearing your vulva with her lips even she spreads the folds to access your " + clitDescript());
+	else if(player.cockArea(x)) outputText("swallow your " + cockDescript(x) + " whole, plying her smooth, spit-covered tongue over every inch of it");
 	else outputText("lick your " + cockDescript(x) + ", fondling it with her long, smooth tongue in ways that no human could");
 	outputText(".\n\n");
 
 	outputText("The bovine beauty pauses her attentions, blowing hot air on your genitals as she awaits reciprocation.  For someone who just lost a fight, she sure is full of herself.  You dive down on her muff, feeling the surprisingly soft hairs above her pubic mound tickling on your chin.  The velvet folds draw back like a curtain, and you lash your tongue over them, just barely sinking the tip into her channel to taste her.  She tastes as sweet as she smells, with only a hint of tang that clings to your tongue.  For now you avoid her swollen clit – this bitch is going to have to earn whatever pleasure that big bud is going to get.\n\n");
 
 	//(VAGOOZLES)
-	if(player.gender == 2) {
+	if(x < 0) {
 		outputText("Isabella returns to her task with gusto, muff-diving deep and hard to plant her exquisitely long tongue far inside you.  Her lips circle your " + clitDescript() + ", ");
 		if(player.clitLength >= 5) outputText("struggling with the cock-like appendage");
 		else if(player.clitLength >= 2) outputText("suckling the large button with slow, measured inhalations");
@@ -1348,7 +1281,7 @@ public function victoryAgainstIzzzzzySixtyNine():void {
 		outputText(".  Curling into a tube-like shape, Isabella's tongue begins pistoning in and out of you, fucking you as hard as any cock while still maintaining the flexibility to arch inside and press every button you've got.  You tremble from her masterful technique, bombarded with hellish levels of sensation.");
 	}
 	//(WANGS - fits)
-	else if(player.cockThatFits(38) != -1) {
+	else if(player.cockArea(x) < 38) {
 		outputText("Isabella resumes her task with gusto, wrapping her lips around your ");
 		if(player.hasSheath()) outputText("sheath");
 		else outputText("base");
@@ -1365,12 +1298,12 @@ public function victoryAgainstIzzzzzySixtyNine():void {
 		if(player.hasSheath()) outputText("sheath");
 		else outputText("base");
 		outputText(" numerous times before bobbing her head up and down.  She's using her tongue like some kind of onahole, and the warm, slippery pressure makes your " + cockDescript(x) + " want to melt with pleasure.  The cow-girl slides all the way to the tip");
-		if(player.hasKnot(x)) outputText(", struggling with the knot");
-		else if(player.cocks[x].cockType == CockTypesEnum.HORSE) outputText(", getting stuck at the medial ring");
+		if(player.cocks[x].cockType == CockTypesEnum.HORSE) outputText(", getting stuck at the medial ring");
 		else if(player.cocks[x].cockType == CockTypesEnum.DEMON) outputText(", slowed by all the nubs");
 		else if(player.cocks[x].cockType == CockTypesEnum.CAT) outputText(", slowed by all the spines");
 		else if(player.cocks[x].cockType == CockTypesEnum.TENTACLE) outputText(", stopping under the mushroom-like head");
 		else if(player.cocks[x].cockType == CockTypesEnum.ANEMONE) outputText(", giggling from the 'stings' your anemone-like prick gave her");
+        else if(player.hasKnot(x)) outputText(", struggling with the knot");
 		else outputText(", rubbing her mouth against your urethral bulge");
 		outputText(" before she plants a kiss on your opening.  She tenderly kisses the cum-slit, all the while keeping her tongue-sheath securely around your member.  You tremble from her masterful technique, bombarded with hellish levels of sensation.");
 	}
@@ -1382,14 +1315,14 @@ public function victoryAgainstIzzzzzySixtyNine():void {
 	outputText("Thick, viscous cream fountains from under you, sliming your belly with the first few blasts before the fountains turn into milky fire-hoses.\n\n");
 
 	//(Vagoo)
-	if(player.gender == 2) {
+	if(x < 0) {
 		outputText("Even as you exult in victory, the humming pleasure-squeals of Isabella's orgasm vibrate through her lips and tongue, straight up your " + clitDescript() + ".  Orgasm hits you hard enough to knock the strength from your arms, and you collapse on top of the cow-girl, reflexively grinding your " + hipDescript() + " into her face.  Your " + vaginaDescript() + " ripples and clenches, squeezing Isabella's tongue as if it could milk some kind of cum from it.  The mouthful of pussy you have doesn't stop you from giving voice to your climax, and as you ");
 		if(player.wetness() < 5) outputText("squirt");
 		else outputText("drip");
 		outputText(" into Isabella's mouth, she's screaming into yours with equal intensity.  It takes some time for your sweaty bodies to stop shaking with pleasure.");
 	}
 	//(Dick Fitzwell)
-	else if(player.cockThatFits(38) > 0) {
+	else if(player.cockArea(x) < 38) {
 		outputText("Even as you exult in your victory, the humming pleasure-squeals from Isabella vibrate your entire " + cockDescript(x) + ".  The tongue-sleeve tremors and convulses, losing cohesion as you lose control.  Seed bubbles from your tip, slathering Isabella's tongue, throat, and cheeks with the stuff before she can gulp it down.  One long swallow later, she's devoured ");
 		if(player.cumQ() >= 250) {
 			outputText("it, but you're just warming up.  The next rope fills the cow-girl's mouth with cream, and the one after nearly chokes her.  She devours every salty drop");
@@ -1419,12 +1352,12 @@ public function victoryAgainstIzzzzzySixtyNine():void {
 	outputText("\n\n");
 
 	outputText("Finally and completely sated, you roll off, ");
-	if(player.hasCock()) outputText("twitching as your member disentangles itself from her tongue.");
+	if(x >= 0) outputText("twitching as your member disentangles itself from her tongue.");
 	else outputText("twitching weakly as your clit catches her tongue one last time.");
 	outputText("  It takes you a moment to catch your breath, but once you do, you stand with renewed vigor and satisfaction – Isabella is delirious and panting.  You lean down to listen and she whispers, \"<i>..love you.  Lick lick lick slurp slurp cum cum! Fun fun cum cum...</i>\"  The poor girl is completely blissed out!  Hell, it sounds like she's already forgiven you for the rough treatment, just as she should.\n\n");
 	outputText("You get dressed and leave with a smile.");
 	//(slimefeed + izzy unmad!)
-	player.sexReward("milk");
+	player.sexReward("saliva", "Default");
 	isabellaFollowerScene.isabellaAffection(15); //okay, redeemed)
 	flags[kFLAGS.ISABELLA_ANGRY_AT_PC_COUNTER] = 0;
     if (CoC.instance.inCombat) cleanupAfterCombat();
@@ -1436,7 +1369,7 @@ public function tooBigVictoryTittyFuckingFuntimesWithMilk():void {
 	var x:Number = player.biggestCockIndex();
 	clearOutput();
 	outputText("You toss aside your [armor] to reveal your " + cockDescript(x) + " to the ");
-	if(monster.lust >= monster.maxLust()) outputText("lusty");
+	if(monster.lust >= monster.maxOverLust()) outputText("lusty");
 	else outputText("weakened");
 	outputText(" cow-girl.  Her eyes go wide as she beholds the full, revealed length, watching it ");
 	if(player.lust >= (player.maxLust() * 0.7)) outputText("pulsate with your raging lust");
@@ -1452,7 +1385,7 @@ public function tooBigVictoryTittyFuckingFuntimesWithMilk():void {
 	if(player.cor < 33) outputText("I'm sorry, but you're too hot to resist, and it's better I do this than try to force it in a hole that could never accept it,");
 	else if(player.cor < 66) {
 		outputText("This isn't up for discussion.  ");
-		if(monster.lust >= monster.maxLust()) outputText("You're so drippy that you want this anyway,");
+		if(monster.lust >= monster.maxOverLust()) outputText("You're so drippy that you want this anyway,");
 		else outputText("You lost and you've got to deal with the consequences,");
 	}
 	else outputText("Tough shit,");
@@ -1482,7 +1415,7 @@ public function tooBigVictoryTittyFuckingFuntimesWithMilk():void {
 	if(player.cocks[x].cockLength < 50) outputText("to her mouth");
 	else outputText("to smother her face in heavy dick-flesh");
 	outputText(".  Meanwhile, Isabella's expression is one of unthinking, overwhelming pleasure.  Even her eyes seem unfocused and slightly crossed - she's getting off on being titty-fucked!  There's actually a growing  puddle of slippery girl-jizz deepening around your [foot] as it leaks from Isabella's plush-lipped pussy.");
-	if(player.balls > 0) outputText("  Your balls pull tight to your loins, accompanied by a burst of warmth");
+	if(player.hasBalls()) outputText("  Your balls pull tight to your loins, accompanied by a burst of warmth");
 	else outputText("  A bubble of warmth grows in your loins");
 	outputText(", and you know there's no stopping your climax now.\n\n");
 
@@ -1505,7 +1438,7 @@ public function tooBigVictoryTittyFuckingFuntimesWithMilk():void {
 	outputText(" her breasts.  She's mooing contentedly and tugging on her teats now, squeezing the last of her cream out while you watch.  The cow-girl barely seems conscious of your presence at this point.\n\n");
 	isabellaFollowerScene.isabellaAffection(6); //happier
 	outputText("Shrugging, you wipe " + sMultiCockDesc() + " off on her lips and get dressed.  This cow is one marvelous cum-dump.");
-	player.sexReward("milk");
+	player.sexReward("milk", "Dick");
 	cleanupAfterCombat();
 }
 
@@ -1515,7 +1448,7 @@ public function vaginalProdNPokeIsabella():void {
 	if(x < 0) x = 0;
 	clearOutput();
 	outputText("You smirk down at Isabella as you tell her that milk is the least of your concerns.  The ");
-	if(monster.lust >= monster.maxLust()) outputText("lusty");
+	if(monster.lust >= monster.maxOverLust()) outputText("lusty");
 	else outputText("defeated");
 	outputText(" cow-girl pales and asks, ");
 	if (isabellaAccent()) outputText("\"<i>But vhy not?  Mein milk is so gooood.</i>\"");
@@ -1587,7 +1520,7 @@ public function vaginalProdNPokeIsabella():void {
 	flags[kFLAGS.ISABELLA_ANGRY_AT_PC_COUNTER] = 0;
 	isabellaFollowerScene.isabellaAffection(9); //yep. redeemed
 	cleanupAfterCombat();
-	player.sexReward("vaginalFluids");
+	player.sexReward("vaginalFluids", "Dick");
 }
 
 //[Small dick tit-fucking] (Dicks less than 9 inches)
@@ -1595,7 +1528,7 @@ public function tinyVictoryTittyFuckingFuntimesWithMilk():void {
 	var x:Number = player.smallestCockIndex();
 	clearOutput();
 	outputText("You toss aside your [armor] to reveal your " + cockDescript(x) + " to the ");
-	if(monster.lust >= monster.maxLust()) outputText("lusty");
+	if(monster.lust >= monster.maxOverLust()) outputText("lusty");
 	else outputText("weakened");
 	outputText(" cow-girl.  She squeals in delight at the sight of your " + multiCockDescriptLight());
 	if(player.cockTotal() > 1) outputText(", singling the smallest one out for some reason");
@@ -1607,7 +1540,7 @@ public function tinyVictoryTittyFuckingFuntimesWithMilk():void {
 	else if(player.cor < 66) outputText("bringing a tiny blush to your cheeks");
 	else outputText("but you aren't really bothered by it in the slightest");
 	outputText(".  You clear your throat and try to regain control of the situation by demanding that she service you with her breasts.  Isabella happily accedes, even going so far as to clap excitedly as she sheds her top.  She seems to genuinely relish the idea, to a degree that makes her forget ");
-	if(monster.lust >= monster.maxLust()) outputText("her own needs.");
+	if(monster.lust >= monster.maxOverLust()) outputText("her own needs.");
 	else outputText("her wounds.");
 	outputText("\n\n");
 
@@ -1644,7 +1577,7 @@ public function tinyVictoryTittyFuckingFuntimesWithMilk():void {
 	isabellaFollowerScene.isabellaAffection(12); //she LOVES it
 	flags[kFLAGS.ISABELLA_ANGRY_AT_PC_COUNTER] = 0;
 	cleanupAfterCombat();
-	player.sexReward("vaginalFluids");
+	player.sexReward("milk", "Dick");
 }
 
 //[Discuss Isabella]

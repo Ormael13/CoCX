@@ -78,7 +78,7 @@ import classes.Scenes.SceneLib;
 
 				outputText("\n\nIt appears that your only options are to walk away, suck his cock, or fight him.");
 
-				dynStats("lus", 10);
+				player.takeLustDamage(10, true);
 				addButton(1, "Suck Dick", suckIncubusDick);
 				addButton(2, "Fight", startCombatImmediate, new IncubusMechanic());
 			}
@@ -90,7 +90,7 @@ import classes.Scenes.SceneLib;
 
 				outputText("\n\nDo you leave, pay him for the lift, suck his dick, or just fight him and be done with it?");
 
-				dynStats("lus", 10);
+				player.takeLustDamage(10, true);
 				addButtonIfTrue(0, "Pay Toll", payDaToll, "\n\n<b>You do not have enough gems to pay the required toll!</b>", player.gems >= 500);
 				addButton(1, "Suck Dick", suckIncubusDick);
 				addButton(2, "Fight", startCombatImmediate, new IncubusMechanic());
@@ -204,7 +204,7 @@ doNext(SceneLib.d3.exitD3);
 			addButton(1, "Let Go", letMechanicGo, hpVictory);
 			addButtonIfTrue(2, "Buttfuck", curry(buttfuckTheMechanic, hpVictory), "Req. a cock with area smaller than 200", player.cockThatFits(200) >= 0);
 			addButtonIfTrue(3, "Ride Cock", rideMechanicsCock, "Req. a vagina", player.hasVagina());
-			if (recalling) addButton(4, "Suck Dick", suckIncubusDick).hint("Maybe you should have just sucked his dick instead of fighting?");;
+			if (recalling) addButton(4, "Suck Dick", suckIncubusDick).hint("Maybe you should have just sucked his dick instead of fighting?");
 		}
 
 		private function killMechanic():void
@@ -322,7 +322,7 @@ doNext(SceneLib.d3.exitD3);
 
 			outputText("\n\nYou wipe your " + cockDescript(x) + " off on his practically glowing bottom before turning to re-dress. When you turn back, he's gone, though a trail of white drops indicates the direction of his flight. It looks like he fled towards the cliff, perhaps growing wings. Oh well, that's one less obstacle between you and Lethice.");
 			if (!recalling) {
-				player.sexReward("Default", "Dick", true, false);
+				player.sexReward("no", "Dick");
 				dynStats("cor+", 5);
 				cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			}
@@ -407,13 +407,13 @@ doNext(SceneLib.d3.exitD3);
 			}
 
 			//ALL CONTINUE TO THIS:
-			outputText("\n\nYou dare not delay any further. Your [vagina] is so hot and slick with lube that it feels almost like it's steaming. It aches for penetration. Lifting yourself up off your [legs], you guide your wanton honeypot up until it's poised just above the " + monster.cockDescriptShort());
+			outputText("\n\nYou dare not delay any further. Your [vagina] is so hot and slick with lube that it feels almost like it's steaming. It aches for penetration. Lifting yourself up off your [legs], you guide your wanton honeypot up until it's poised just above the [monster cockshort]");
 			if (player.wetness() <= 2) outputText(", letting your free-flowing pussyjuice wash over it, lubricating it with your glorious girlcum");
 			else if (player.wetness() <= 3) outputText(", letting your oh-so-juicy vagina drip and dribble, soaking it with your copious girlcum");
 			else outputText(", letting your lubricant drip over it");
-			outputText(". You stuff two fingers inside and stroke deep before pulling them out and using them to spread you wide open. The " + monster.cockDescriptShort() + " pulsates with every beat of its demonic owner's heart, needing you every bit as much as you now need it.");
+			outputText(". You stuff two fingers inside and stroke deep before pulling them out and using them to spread you wide open. The [monster cockshort] pulsates with every beat of its demonic owner's heart, needing you every bit as much as you now need it.");
 
-			outputText("\n\nLetting your [legs] go slack, you press down upon the incubus' length. His " + monster.cockHead() + " presses poignantly at your entrance, throbbing gently. Small blooms of warm tickle over your lips, warm and wet as he leaks his liquid excitement into your nethers, lubricating you further. You relax a bit more");
+			outputText("\n\nLetting your [legs] go slack, you press down upon the incubus' length. His [monster cockhead] presses poignantly at your entrance, throbbing gently. Small blooms of warm tickle over your lips, warm and wet as he leaks his liquid excitement into your nethers, lubricating you further. You relax a bit more");
 
 			var mCockArea:Number = monster.cockArea(0);
 			var pCuntArea:Number = player.vaginalCapacity();
@@ -430,7 +430,7 @@ doNext(SceneLib.d3.exitD3);
 			//Decent Fit - Player cunt can fit between 95% - 149% of the total cock area
 			else if (pCuntArea >= (mCockArea * 0.95))
 			{
-				outputText(" and feel the girthy boner slowly start to slide through your clinging lips. He's so big and yet fits so well. It's like his " + monster.cockDescriptShort() + " was made to violate your channel - to slip and to slide through you while keeping you oh-so-pleasantly full. You're so busy enjoying the agonizingly slow pleasure that you barely notice when you bottom out above his balls");
+				outputText(" and feel the girthy boner slowly start to slide through your clinging lips. He's so big and yet fits so well. It's like his [monster cockshort] was made to violate your channel - to slip and to slide through you while keeping you oh-so-pleasantly full. You're so busy enjoying the agonizingly slow pleasure that you barely notice when you bottom out above his balls");
 				if (cType == MECHANIC_HORZ_GOG) outputText(", your belly bulging with his equine shape");
 				else if (cType == MECHANIC_DOG_COCK) outputText(", your lips slurping noisily about his knot");
 				outputText(".");
@@ -448,7 +448,7 @@ doNext(SceneLib.d3.exitD3);
 			else
 			{
 				tightFit = true;
-				outputText(" and feel the immensely girthy boner butt up against your lips, too wide to slip even the tiniest bit inside. Grunting in frustration, you grind against him, slicking his head further and applying more force. You push harder and harder, actually bending his rigid shaft slightly from the force. He groans in pain and pleasure. Suddenly, your voice joins his. His " + monster.cockHead() + " finally powers through your sopping gates and into your tunnel, stretching it painfully wide as it goes. The intensity of the combined pain and pleasure shocks you so badly that you nearly faint, and your [legs] go limp, forcing your body to slide down the belly-stretching meat-pole. You quiver and cry, sobbing words that sometimes sound like no and sometimes sound like yes, filled with more cock than you ever hoped to handle.");
+				outputText(" and feel the immensely girthy boner butt up against your lips, too wide to slip even the tiniest bit inside. Grunting in frustration, you grind against him, slicking his head further and applying more force. You push harder and harder, actually bending his rigid shaft slightly from the force. He groans in pain and pleasure. Suddenly, your voice joins his. His [monster cockhead] finally powers through your sopping gates and into your tunnel, stretching it painfully wide as it goes. The intensity of the combined pain and pleasure shocks you so badly that you nearly faint, and your [legs] go limp, forcing your body to slide down the belly-stretching meat-pole. You quiver and cry, sobbing words that sometimes sound like no and sometimes sound like yes, filled with more cock than you ever hoped to handle.");
 			}
 			if (!recalling) player.cuntChange(monster.cockArea(0), false, false, false);
 
@@ -500,7 +500,7 @@ doNext(SceneLib.d3.exitD3);
 
 			outputText("\n\nYou both cum for what feels like hours. Yet, all good things must come to an end. You do have a queen bitch to depose, after all.");
 			if (cType == MECHANIC_DOG_COCK) outputText(" When you try to rise, you find that his knot is still stubbornly inflated, trying to hold all his fertile sperm deep inside you. It won't come out! Glaring at him, you put as much of your gear on as possible and start dragging him through the dungeon after you until he has the good sense to shift his cock into another shape. He weakly slides out, panting something about seeing you at your camp. He's gone by the time your gear is properly settled.");
-			else outputText(" When you rise, it amazes you just how many inches of cock are sliding out of your well-used snatch. The " + monster.cockHead() + " eventually slips free, and you watch in awe at how his musky semen runs out from your gaped, thoroughly creamed lips. By the time you dress, he's vanished, but you recall hearing him panting something about seeing you at camp.");
+			else outputText(" When you rise, it amazes you just how many inches of cock are sliding out of your well-used snatch. The [monster cockhead] eventually slips free, and you watch in awe at how his musky semen runs out from your gaped, thoroughly creamed lips. By the time you dress, he's vanished, but you recall hearing him panting something about seeing you at camp.");
 
 			outputText("\n\nHe's a demon. Maybe he'll actually find his way to your camp to be your fucktoy. More likely he was just saying whatever would save his hide and sharing his excessive perversions with you. You wouldn't mind him fucking you every morning, would you?");
 
@@ -679,7 +679,7 @@ doNext(SceneLib.d3.exitD3);
 			if (player.isAlraune()) {
 				SceneLib.uniqueSexScene.AlrauneDungeonBadEnd();
 			} else {
-				outputText("The champion finally got to cum once Lethice had her turn, but by that point, pussy was all " + player.mf("he", "she") + " could think about. Release came more frequently with the demon queen's permission. It didn't really matter, though. The champion was addicted to riding on the edge of climax, broken into nothing more than a demonic vibrator.");
+				outputText("The champion finally got to cum once Lethice had her turn, but by that point, pussy was all [he] could think about. Release came more frequently with the demon queen's permission. It didn't really matter, though. The champion was addicted to riding on the edge of climax, broken into nothing more than a demonic vibrator.");
 
 				EventParser.gameOver(); // G-G-G-GAMEOVER.
 			}

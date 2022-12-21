@@ -565,30 +565,24 @@ import classes.Scenes.SceneLib;
 		public static const NEEDLEWORK_MAGIC:int = 3;
 		public static const NEEDLEWORK_ATTACK:int = 4;
 
-		public const NEEDLEWORK_SPEED_PERK:PerkType = PerkLib.ChiReflowSpeed;
 		public static const NEEDLEWORK_SPEED_PERK_DESC:String = "Uma's Acupuncture Needlework has gifted you with the 'Chi Reflow - Speed' perk. As a result your strength is capped but speed reductions are halved.";
 		public static const NEEDLEWORK_SPEED_STRENGTH_CAP:int = 60;
-		public static const NEEDLEWORK_SPEED_SPEED_MULTI:Number = 0.5;
 
-		public const NEEDLEWORK_LUST_PERK:PerkType = PerkLib.ChiReflowLust;
 		public static const NEEDLEWORK_LUST_PERK_DESC:String = "Uma's Acupuncture Needlework has gifted you with the 'Chi Reflow - Lust' perk. As a result your Lust resistance and Tease attack are enhanced, but Libido and Sensitivity gains are increased.";
 		public static const NEEDLEWORK_LUST_LUST_RESIST:int = 10;
 		public static const NEEDLEWORK_LUST_TEASE_MULTI:Number = 10;
 		public static const NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI:Number = 1.1;
 		public static const NEEDLEWORK_LUST_LIBSENSE_MULTI:Number = 1.1;
 
-		public const NEEDLEWORK_DEFENSE_PERK:PerkType = PerkLib.ChiReflowDefense;
 		public static const NEEDLEWORK_DEFENSE_PERK_DESC:String = "Uma's Acupuncture Needlework has gifted you with the 'Chi Reflow - Defense' perk. As a result your body has gained passive damage resistance and extra health, but speed is capped.";
 		public static const NEEDLEWORK_DEFENSE_DEFENSE_MULTI:Number = 1.1;
 		public static const NEEDLEWORK_DEFENSE_EXTRA_HP:int = 50;
 		public static const NEEDLEWORK_DEFENSE_SPEED_CAP:int = 60;
 
-		public const NEEDLEWORK_MAGIC_PERK:PerkType = PerkLib.ChiReflowMagic;
 		public static const NEEDLEWORK_MAGIC_PERK_DESC:String = "Uma's Acupuncture Needlework has gifted you with the 'Chi Reflow - Magic' perk. As a result your spells are now more powerful, but regular attacks are weaker.";
 		public static const NEEDLEWORK_MAGIC_SPELL_MULTI:Number = 0.25; // Additive bonus to the other magic damage bonuses
 		public static const NEEDLEWORK_MAGIC_REGULAR_MULTI:Number = 0.75; // Multiplier tagged onto the end of damage calculations for the player.
 
-		public const NEEDLEWORK_ATTACK_PERK:PerkType = PerkLib.ChiReflowAttack;
 		public static const NEEDLEWORK_ATTACK_PERK_DESC:String = "Uma's Acupuncture Needlework has gifted you with the 'Chi Reflow - Attack' perk. As a result your regular attacks are more powerful, but your damage reduction is decreased.";
 		public static const NEEDLEWORK_ATTACK_REGULAR_MULTI:Number = 1.1;
 		public static const NEEDLEWORK_ATTACK_DEFENSE_MULTI:Number = 0.9;
@@ -622,37 +616,6 @@ import classes.Scenes.SceneLib;
 			}
 
 			return "<b>Somethin' dun fucked up.  Please insert bugreport!</b> ";
-		}
-
-		/**
-		 * To save having to bullshit around with the perk list description stuff, the functions been modified to call this function to get
-		 * descriptions about accpuncture PerkLib. Let's us contain all of the related content together in a neater manner.
-		 * @param	perkName	PerkName currently being searched for
-		 * @return				Description of what the perk does.
-		 */
-		public function listPerkDescription(perkName:String):String
-		{
-			switch(perkName)
-			{
-				case PerkLib.ChiReflowAttack.name():
-					return PerkLib.ChiReflowAttack.desc();
-					break;
-				case PerkLib.ChiReflowDefense.name():
-					return PerkLib.ChiReflowDefense.desc();
-					break;
-				case PerkLib.ChiReflowLust.name():
-					return PerkLib.ChiReflowLust.desc();
-					break;
-				case PerkLib.ChiReflowMagic.name():
-					return PerkLib.ChiReflowMagic.desc();
-					break;
-				case PerkLib.ChiReflowSpeed.name():
-					return PerkLib.ChiReflowSpeed.desc();
-					break;
-				default:
-					return "";
-					break;
-			}
 		}
 
 		/**
@@ -952,7 +915,7 @@ import classes.Scenes.SceneLib;
 
 			outputText("You tell her that, if it's not too personal, you'd like to ask her some questions about her sexuality?\n\n");
 			outputText("\"<i>Oh, I'm okay with talking about that.  You're not the first person to ask me about that...</i>\"  She looks distant for a short while, but then looks at you and smiles.  \"<i>So, what do you want to know, exactly?</i>\"\n\n");
-			outputText("You think for a while, and finally ask why she considers herself a lesbian?  Won't she have sex with herms too?  Wouldn't that make her bisexual?  In fact... what made her think of herself as a lesbian in the first place?\n\n");
+			outputText("You think for a while, and finally ask why she considers herself a lesbian?  Won't she have sex with herms too?  Wouldn't that make her bisexual?  In fact... what has made  her think of herself as a lesbian in the first place?\n\n");
 			outputText("Uma stops to think for a while then replies,  \"<i>Well... I guess it was my studies.  Being an acupuncturist means I have to know a lot about bodies in general, and while I do know all the ins-and-outs of male anatomy, I've always found girls more... beautiful.</i>\"  She thinks for a while longer, then shrugs.  \"<i>I suppose that's all I can say about that... I really don't know why I find girls more attractive, I just do.  And, well, I'm not entirely against having sex with males either, so long as they're pretty and girly to begin with, so maybe you're right.  Maybe I am more bi than lesbian.</i>\"\n\n");
 			outputText("So, it's not so much that she's unattracted to dicks as that she needs a fairly feminine face, and preferably physique as well, to get turned on by someone? You ask, interested.  Uma nods.  \"<i>That is correct, I like my partners pretty...</i>\"  She laughs lightly.\n\n");
 			outputText("You ask if that makes it at all challenging to find partners, when she's feeling in the mood?\n\n");
@@ -982,8 +945,6 @@ import classes.Scenes.SceneLib;
 			// random call to one of the loppeTalks functors
 			_loppeTalks[rand(_loppeTalks.length)]();
 		}
-
-		private var _sceneNum:int = 0;
 
 		/**
 		 * Centralise the end-of-talk loppe stuffs
@@ -1016,7 +977,7 @@ import classes.Scenes.SceneLib;
 			outputText("You wonder if maybe you should tell her that she doesn't have to try so hard to impress you; you want to be able to say you like her for who she is, the real her, not some act she forces herself to go through.  You don't realize you've been musing aloud until Uma responds.\n\n");
 			outputText("\"<i>Dear, that wouldn't help at all.  She wouldn't be with you if she thought you would leave her if she was rude, but she owes it to herself to act like a proper lady around you.  So the best you can do is pretend to buy into her act.</i>\"\n\n");
 			outputText("You sigh quietly and tell Uma you understand, but ask if maybe she could drop a hint to her daughter about trying too hard, hmm?\n\n");
-			outputText("\"<i>I can do that, but I don't think it's going to help.  When she was young I told her she didn't have push herself so hard, but she insists on doing so anyway.  She can be quite stubborn, you know?</i>\"\n\n");
+			outputText("\"<i>I can do that, but I don't think it's going to help.  When she was young I told her not to push herself so hard, but she insists on doing so anyway.  She can be quite stubborn, you know?</i>\"\n\n");
 			outputText("You confess that you've had that impression from her, yes.  You thank Uma for giving you an insight into her daughter's history, but tell her it's time you were on your way.\n\n");
 			outputText("\"<i>You're welcome, see you around.</i>\"  Uma waves you goodbye as you excuse yourself and return to camp.");
 
@@ -1489,7 +1450,7 @@ import classes.Scenes.SceneLib;
 			outputText("You tell Uma that, if it's alright with her, you'd like to have sex with her.  Uma looks you over appraisingly.\n\n");
 
 			// Check femininity
-			if (player.femininity >= UMA_CONSIDER_PC_FEM)
+			if (player.femininity >= UMA_CONSIDER_PC_FEM || flags[kFLAGS.LOW_STANDARDS_FOR_ALL])
 			{
 				outputText("\"<i>Aren't you cute!  Such curves, such full lips!  Oh girl, you have just what it takes to get an old mare going, don't you?</i>\" Uma grins at you.  \"<i>Now, I know better than to just assume, so I have to ask... what are you packing inside that [armorname] of yours?</i>\"\n\n");
 
@@ -1549,20 +1510,11 @@ import classes.Scenes.SceneLib;
 		private function buildSexMenu():void
 		{
 			menu();
-
 			addButton(0, "EroMassage", sexEroticMassage);
 			addButton(1, "Eat Her Out", sexEatHerOut);
-
-			if (player.gender >= 2 && player.lowerBody != 4) // Vaginas & not centaurs
-			{
-				addButton(2, "Fingerbang", sexGetFingered);
-			}
-
-			if (player.hasCock()) // Has a dick
-			{
-				addButton(3, "Handjob", sexHandjob);
-				addButton(4, "Get Blown", sexGetABJFromDisMilfyLesboSlut);
-			}
+			addButtonIfTrue(2, "Fingerbang", sexGetFingered, "Req. a vagina and non-taur lower body.", player.hasVagina() && !player.isTaur());
+			addButtonIfTrue(3, "Handjob", sexHandjob, "Req. a cock.", player.hasCock());
+			addButtonIfTrue(4, "Get Blown", sexGetABJFromDisMilfyLesboSlut, "Req. a cock", player.hasCock());
 			addButton(14,"Back",buildCoreMenu);
 		}
 
@@ -1630,12 +1582,11 @@ import classes.Scenes.SceneLib;
 			outputText("Remembering what sex with Loppe is like, you decide Uma was a genius for coming up with such a trick, and tell her as much.  \"<i>You're quite good at flattery aren't you dear?  Well, I hope you enjoyed yourself, but now I must be going, so you just rest up until you're feeling well enough to leave.  Bye, dear,</i>\" the mare sashays to the cupboard, fetching a towel that she uses to clean her hand and arm before collecting her robes and casually walking out the door, still naked and without a hint of worry as her tail waves behind her, displaying the firm, round cheeks of her toned butt.\n\n");
 			outputText("You nod absently at her departure and settle down to regain your strength.  Once you feel recovered from your earth-shaking orgasm, you pick yourself up, redress, and quietly make your way back to camp; Uma's already busy with another client as you go.\n\n");
 
-			// DONT CARE HAD SEX
 			// Scene says we've only cum a little so err I guess store the players hoursSinceCum, do statmod, then reset it to a smaller value?
 			var hoursSinceCum:int = player.hoursSinceCum;
-			dynStats("lust=", 0);
+			if (player.hasVagina()) player.sexReward("no", "Vaginal");
+			if (player.hasCock()) player.sexReward("no", "Dick");
 			player.hoursSinceCum = Math.ceil(hoursSinceCum * 0.75);
-			flags[kFLAGS.TIMES_ORGASMED]++;
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -1687,7 +1638,7 @@ import classes.Scenes.SceneLib;
 
 			outputText("You moan, already shivering in anticipation, waiting to see what a skilled lesbian can do with your most precious feminine treasure.  \"<i>Just a heads up, dear.  I'm pretty confident no one can hear what takes place here, and I'm not above getting myself a little dirty, so feel free to let loose and enjoy it as much and as loudly as you want, okay?</i>\"\n\n");
 			outputText("The mare's hands gently circle your netherlips, sometimes brushing against your [clit], but only enough to send small jolts of electric pleasure running up your spine.  Slowly one questing finger begins prodding your entrance, before driving itself in.\n\n");
-
+			sceneHunter.print("Vag looseness check: virgin, tight, looser");
 			if (player.hasVirginVagina())
 			{
 				outputText("\"<i>Oh, so tight!  Tell me something, dear.  Are you, perhaps, a virgin?  No, wait!  Don't tell me.  I'll just find out myself,</i>\"  wiggling her finger to slowly inch her way inside, Uma explores your nethers as deep as she can, deep enough to reach your hymen.  \"<i>Oh!  So you are!  How rare!  I don't even remember how long it's been since I last had the pleasure of helping a virgin, ah, Nothing quite like it,</i>\"  the milf mare chuckles, reminiscing over old times.  \"<i>Oh, dear, just thinking about it makes me wet.  A pussy that's never known the pleasure of a cock, ripe to be plumbed by my fingers.  I can't grant you the same pleasure as a skilled lover can dear,  but I assure you that by the time I'm finished with you, you will be as sated as you can be,</i>\" the mare delivers a gentle kiss to your neck.\n\n");
@@ -1732,7 +1683,7 @@ import classes.Scenes.SceneLib;
 				outputText("\"<i>Oh, moist and easy.  I wonder how much of this is Loppe's fault?  Maybe I should tell her to be a bit more gentle?</i>\" the mare suggests, adding a couple more fingers inside you.\n\n");
 				outputText("Well, maybe a little you manage to squeak out; you're really more concerned with just how good Uma's fingers feel inside you - they're not a nice big fat cock, but they're a pretty good substitute.\n\n");
 				outputText("\"<i>Still feels like I have some room to work with here, so how about another one?</i>\" the mare states, even as she adds another finger to the ones already inside you.  \"<i>If we continue down this road I might just be able to squeeze a hand down there, you don't mind do you, dear?</i>\"\n\n");
-				outputText("Mmm, the more the merrier you unthinkingly reply.  You didn't get this stretched out by not liking to be filled, after all.\n\n");
+				outputText("Mmm, the more, the merrier you unthinkingly reply.  You didn't get this stretched out by not liking to be filled, after all.\n\n");
 				outputText("\"<i>Good, I'll see if I can't accommodate you later, but for now there's something I'm looking for,</i>\"  She begins moving her fingers inside of you, feeling around your rippling walls, looking for that special spot within you.\n\n");
 				outputText("It's not easy for her, you're looser than most, but you enjoy her efforts all the same, playfully teasing and encouraging her as she strokes and fondles and fiddles.  Finally, almost by accident, her finger brushes up against that part you love so much and you moan your delight, letting her know she's hit the jackpot.\n\n");
 				outputText("\"<i>Hmm, that took longer than usual, but I see I still have the touch.  Now to make this as good as possible for my future daughter-in-law,</i>\" Uma teases you, adding her last finger to your [vagina], shoving her entire hand inside.  She massages your innards as she begins pumping her hand, touching, massaging, teasing and squelching.  Every time that wonder hand of hers drives itself inside you, you feel jolts of electricity run up along your body as each finger of hers takes a turn dancing, teasing and pinching that special spot within your treasure.\n\n");
@@ -1743,7 +1694,7 @@ import classes.Scenes.SceneLib;
 				outputText("You chuckle at her, painstakingly hauling yourself up, and get dressed.  Thanking Uma for showing you her magic fingers, you blow her a teasing kiss and then head back to camp.\n\n");
 			}
 
-			dynStats("lust=", 0);
+			player.sexReward("no", "Vaginal");
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -1820,9 +1771,10 @@ import classes.Scenes.SceneLib;
 
 			outputText(".  See you later, dear.  And don't be a stranger,</i>\" the mare tells you as she waves you goodbye.\n\n");
 
-			dynStats("lust=", 0);
+			player.sexReward("no", "Dick");
 			doNext(camp.returnToCampUseOneHour);
 		}
+
 		//Needs Cock.
 		private function sexGetABJFromDisMilfyLesboSlut():void
 		{
@@ -1847,7 +1799,7 @@ import classes.Scenes.SceneLib;
 			outputText("\n\n\"<i>Strip, dear,</i>\" Uma says cheerfully while beginning to strip herself.  You need no further encouragement, eagerly getting naked ");
 			if(flags[kFLAGS.PC_FETISH] >= 1) {
 				outputText(", unable to resist either the tingle of lust that runs through you at being naked in front of Uma or the urge to flaunt your feminine physique for her own gratification.  Gathering your clothes up is a bit of an afterthought, but you make sure to bend over and proudly present your [butt]");
-				if(player.balls > 0) outputText(" and [balls]");
+				if(player.hasBalls()) outputText(" and [balls]");
 				outputText(".");
 			}
 			else outputText(", gathering your clothes up in your arms as you do so.");
@@ -1938,7 +1890,7 @@ import classes.Scenes.SceneLib;
 				else if(player.cumQ() <= 100)
 				{
 					outputText("She dutifully attempts to swallow every drop, but your load is a little bigger than average, and she's forced to let some of the frothy spit and jizz mixture wash back out over your length.");
-					if(player.balls > 0) outputText("  It rolls down to your [sack], coating it in warm, wet cum-shine.");
+					if(player.hasBalls()) outputText("  It rolls down to your [sack], coating it in warm, wet cum-shine.");
 				}
 				else {
 					outputText("She dutifully attempts to swallow, but your load is so massive that the first shot has her cheeks bulging.  She's used to dealing with you, though.  The canny mother relaxes the seal of her lips and begins to stroke you with her tongue once more, using your massive ejaculations as lubrication.  She pumps up and down, faster and faster, letting your jizz wash back out her lips and over your crotch, making this orgasm one of the biggest and messiest you've had in a while.");
@@ -1996,10 +1948,11 @@ import classes.Scenes.SceneLib;
 					outputText("\n\nUma gets dressed while you cool off.  She comes back with your clothes and helps you into them, giving your package an appreciative squeeze \"to make sure it emptied\" before sending you on your way to camp.");
 				}
 			}
-			dynStats("lust=", 0);
+			player.sexReward("saliva", "Dick");
 			flags[kFLAGS.UMA_TIMES_SUCKED_YOU]++;
 			doNext(camp.returnToCampUseOneHour);
 		}
+
 		private function sexEatHerOut():void
 		{
 			clearOutput();
@@ -2043,22 +1996,8 @@ import classes.Scenes.SceneLib;
 			outputText("You lick your lips and wipe the aftermath from your face, smiling broadly at the mare's flattery.  Shaking herself, Uma yawns loudly, one hand in front of her face to be more demure.  \"<i>That really felt wonderful... I think... I think I'm going to take a little rest.  Would you be a dear and flip the sign to Closed on your way out, dear?</i>\" she asks, settling back on her table as if she really is about to have a nap here in her own workroom. \n\n");
 			outputText("You rub her thigh affectionately, promising to do so, then redress yourself and head back to camp.\n\n");
 			dynStats("lust", 30);
+			player.sexReward("vaginalFluids", "Lips", false);
 			doNext(camp.returnToCampUseOneHour);
-
 		}
-		/**
-		 * Incomplete in the doc
-		 */
-		/* private function trainLoppe():void
-		{
-	You mention to Uma that her daughter has mentioned something about Uma wanting her to learn the family trade?
-
-The mare nods at you. \"<i>Yes, that's true.  Don't get me wrong, my little girl's a wonderful dancer, but, well, dancing's such a demanding and unreliable way to make a living - at least with acupuncture and massage there's always going to be people wanting to use your skills.  Believe me, I'm run off my hooves with all the customers I get hoping to ease the tension that comes from living in these troubled times.  Plus... well, call me a pervy old woman if you must, but I'd like to see grandkids at some point in my life.</i>\"  She shrugs helplessly.  \"<i>But I can't really spare the time to train her on my own, and I couldn't in good conscience just let her loose on my paying customers.</i>\"
-
-You think the matter over, and ask what if you volunteered to help Loppe with her training?  The MILFy horse-morph gives you a joyous smile.  \"<i>That would be wonderful!  All my little girl really needs is some practice and she can be officially credited with her license.  Please, wait here for a few minutes while I go and fetch her.</i>\"  She asks you, and you quietly agree, making yourself comfortable even as she grabs some belongings and heads out.
-
-[We should probably try and brainstorm how this will work.]
-[Should we move this to its own doc? Give the rest over to Fen to implement?]
-		}*/
 	}
 }

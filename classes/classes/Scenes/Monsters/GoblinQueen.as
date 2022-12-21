@@ -1,4 +1,4 @@
-package classes.Scenes.Monsters 
+package classes.Scenes.Monsters
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -8,7 +8,7 @@ import classes.internals.*;
 public class GoblinQueen extends Goblin
 	{
 		//użyć ten wzór do zrobienia tej succubigoblinqueen ^^
-		public function GoblinQueen() 
+		public function GoblinQueen()
 		{
 			this.a = "the ";
 			this.short = "goblin queen";
@@ -23,7 +23,7 @@ public class GoblinQueen extends Goblin
 			this.tallness = 47;
 			this.hips.type = Hips.RATING_AMPLE + 2;
 			this.butt.type = Butt.RATING_LARGE;
-			this.skinTone = "dark green";
+			this.bodyColor = "dark green";
 			this.hairColor = "dark green";
 			this.hairLength = 4;
 			initStrTouSpeInte(85, 64, 70, 100);
@@ -39,7 +39,6 @@ public class GoblinQueen extends Goblin
 			this.bonusLust = 104;
 			this.lust = 35;
 			this.lustVuln = 0.4;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 14;
 			this.gems = rand(15) + 15;
 			this.drop = new WeightedDrop().

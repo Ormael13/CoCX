@@ -3,14 +3,9 @@ import classes.*;
 import classes.BodyParts.Tongue;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
+import classes.internals.SaveableState;
 
-public class SophieFollowerScene extends NPCAwareContent {
-
-		public function SophieFollowerScene()
-		{
-		}
-
-		private function get pregnancy():PregnancyStore { return SceneLib.sophieScene.pregnancy; } //Quick way to access sophie's pregnancyStore
+public class SophieFollowerScene extends NPCAwareContent implements SaveableState {
 
 //Make Sophie \"smart\" again: Doing the Deed
 //Visit Rathazul and he bitches.
@@ -28,20 +23,55 @@ public class SophieFollowerScene extends NPCAwareContent {
 //const NO_PURE_SOPHIE_RECRUITMENT:int = 754;
 //const SOPHIE_FOLLOWER_PROGRESS:int = 755;
 
+	public static var HarpyKids:int;
+	public static var HarpyEggDay:int;
+	public static var HarpyEggHatching:Boolean;
+	public static var HarpyEggReady:Boolean;
 
+	public function stateObjectName():String {
+		return "SophieFollowerScene";
+	}
 
-override public function sophieFollower():Boolean {
-	if(flags[kFLAGS.SOPHIE_DISABLED] > 0) return false;
-	if(sophieBimbo.bimboSophie()) return false;
-	if(flags[kFLAGS.SOPHIE_BIMBO_ACCEPTED] > 0 && flags[kFLAGS.SOPHIE_DEBIMBOED] > 0) return true;
-	if(flags[kFLAGS.SOPHIE_RECRUITED_PURE] > 0) return true;
-	return false;
-}
+	public function resetState():void {
+		HarpyKids = 0;
+		HarpyEggDay = 0;
+		HarpyEggHatching = false;
+		HarpyEggReady = false;
+	}
 
-public function sophieSprite():void
-{
-	SceneLib.sophieBimbo.sophieSprite();
-}
+	public function saveToObject():Object {
+		return {
+			"HKids": HarpyKids,
+			"HEggDay": HarpyEggDay,
+			"HEggHatching": HarpyEggHatching,
+			"HEggReady": HarpyEggReady
+		};
+	}
+
+	public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
+		if (o) {
+			HarpyEggHatching = o["HEggHatching"];
+			HarpyEggReady = o["HEggReady"];
+			if ("HEggDay" in o) HarpyEggDay = o["HEggDay"];
+			else HarpyEggDay = 0;
+			if ("HKids" in o) HarpyKids = o["HKids"];
+			else HarpyKids = 0;
+		} else resetState();
+	}
+
+	override public function sophieFollower():Boolean {
+		return !flags[kFLAGS.SOPHIE_DISABLED] && !sophieBimbo.bimboSophie() && (flags[kFLAGS.SOPHIE_RECRUITED_PURE] || flags[kFLAGS.SOPHIE_BIMBO_ACCEPTED] && flags[kFLAGS.SOPHIE_DEBIMBOED]);
+	}
+
+	public function SophieFollowerScene()
+	{
+		Saves.registerSaveableState(this);
+	}
+
+	public function sophieSprite():void
+	{
+		SceneLib.sophieBimbo.sophieSprite();
+	}
 
 //Un-Bimbo*
 internal function unbimboSophie():void {
@@ -169,12 +199,12 @@ private function letDebimboSophieGo():void {
 		if(player.cor < 40) {
 			outputText("  You blink repeatedly, trying to clear your head of these idle thoughts, but are nonetheless aroused.");
 			//{+10 AROUSAL}
-			dynStats("lus", 10);
+			dynStats("lus", 10, "scale", false);
 		}
 		else {
 			outputText("\n\nYou let these fantasies run wild through your head, imagining a group of three opportunistic minotaurs gangbanging a flight-exhausted Sophie; their ribbed, flared cocks completely renovating her yielding pussy and convulsing asshole while she gurgles helplessly around a third pulsing horseshaft lodged deep in her throat.  The two double-penetrating her holes grunt, their grossly sperm-swollen, watermelon-sized ball sacs and quivering dark taints rubbing up against one another in a fevered race to see who can cum first and claim this bimbo bird as their own personal cumdump and breeding slave.");
 			
-			outputText("\n\nThe pheremonal scent of pussy wetting equine musk in the air becomes steadily more suffocating as the minotaurs grow nearer and nearer to climaxing and releasing the aching pressure that's been built up in their engorged balls over the past two-months.  Their frenzied pace, going from rough hole-pounding to ramming balls-deep, shows how eager each wants to claim this Milfy harpy, her body only fit for pleasing cocks and birthing more babies.  Owning such a fertile 'mare' would mean that their ever-expanding minotaur cum factories would never again throb with the pain of holding pent up loads.");
+			outputText("\n\nThe pheremonal scent of pussy wetting equine musk in the air becomes steadily more suffocating as the minotaurs grow nearer and nearer to climaxing and releasing the aching pressure that's been built up in their engorged balls over the past two-months.  Their frenzied pace, going from rough hole-pounding to ramming balls-deep, shows how eager each wants to claim this Milfy harpy, her body only fit for pleasing cocks and birthing more babies.  Owning such a fertile 'mare' would mean that their ever-expanding minotaur cum factories would never again throb with the pain of holding pent-up loads.");
 			
 			outputText("\n\nSuddenly, the minotaur pounding Sophie's face emits a loud bellow, thick spongy equine shaft widening apart her already tortuously stretched, yellow lips with thick pulses of cum that race towards a fully-widened flared head.  It blocks any hope of air reaching Sophie's aching lungs, a bestial flesh cone pushed directly into her stomach, dripping, and cum-tube pointed towards its deepest, hungry depths.  As hot cum emerges from the equine fleshcork, Sophie's blue eyes roll back in her head, completely overwhelmed by the minotaur's aphrodisiac ball juice.  She doesn't feel pain from each progressively thicker ribbed-shaft layer scraping past her teeth, forcing her jaw wider and wider, or from the minotaur's flared head pulling up against her narrow esophagus, trying to escape.  The minotaur gives in fully to his victory orgasm, hilting all two-feet of his cock down Sophie's throat, her nose pressing firmly against his animalistic crotch, saliva frothing over the minotaur's rapidly deflating black orbs.  Sophia responds immediately to the minotaur jism bulging and doming her increasingly shiny stomach, her battered cock holders flexing powerfully as a masochistic orgasm wracks her, pounding her into the ground with great force and raising her exposed, tailfeathered bubble-butt high to the musk-filled air for deeper penetration.  The thick, darkly ribbed minotaur meat moving in and out of her tight butthole and squishy pussy produce more squeezing shudders, further teasing the cocks inside her as she's orgasming on them.");
 			
@@ -186,7 +216,7 @@ private function letDebimboSophieGo():void {
 			
 			outputText("\n\nYou smile perversely from your fantasy, thoroughly aroused by it.");
 			//{+25 AROUSAL}
-			dynStats("lus", 25);
+			dynStats("lus", 25, "scale", false);
 		}
 	}
 	flags[kFLAGS.SOPHIE_DISABLED] = 1;
@@ -272,7 +302,7 @@ public function followerSophieMainScreen():void {
 		else outputText("she's quite skilled at it");
 		outputText(".  \"<i>Ohhh, come on, [name]!  Just give it to me like a good " + player.mf("boy","girl") + ", would you?  I could even give you a special treat.  <b>Just give. It. To. Me.</b></i>\"");
 		outputText("\n\nYou guess there's no way Sophie would really accept any non-impregnating kind of sex right now, but you could refuse... or pick that special treat over your usual sex.");
-		dynStats("lus", 20);
+		dynStats("lus", 20, "scale", false);
 		//[Vaginal][Special]
   		//[Vaginal] → Leads to the \"fertile\" variation of vaginal smex!
 		//[Special]
@@ -304,34 +334,52 @@ public function followerSophieMainScreen():void {
 
 		outputText("\n\n\"<i>Need something from Momma Sophie?</i>\" she coos.");
 	}
-	
-	//BimboBody Sophie Follower, Options*
+
 	menu();
-	addButton(0,"Appearance",sophieAppearance);
-	if(player.lust >= 33) addButton(1,"Sex",sexWithFollowerSophie);
-	else outputText("\n\nYou aren't aroused enough to sleep with Sophie at the moment.");
-	if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) addButton(8,"Sleep With",sleepWithSophieToggle);
-	if(flags[kFLAGS.SLEEP_WITH] == "Sophie" && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) {
-		addButton(8,"NoSleepWith",sleepWithSophieToggle);
-		outputText("\n\nYou're currently sharing your bed with Sophie at night, but you could kick her out, if you wanted.");
+	addButton(0, "Appearance", sophieAppearance);
+	addButton(1, "Sex", sexWithFollowerSophie)
+		.disableIf(player.lust < 33, "You aren't aroused enough to sleep with Sophie at the moment.");
+	if (flags[kFLAGS.SOPHIE_DAUGHTER_MATURITY_COUNTER] > 0) addButton(7, "Daughter", sophieBimbo.daughterCheckup);
+	if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE]) {
+		addButton(2, "Go Camp", backToCamp);
+		if (flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE]) {
+			addButton(3, "Change Eggs", changeEggs);
+			addButton(4, "Stop Harvest", stopHarvest);
+		} else addButton(3, "Harvest Eggs", harvestEggs);
+		addButton(14, "Back", SceneLib.farm.farmCorruption.rootScene);
+	} else {
+		if (flags[kFLAGS.SOPHIE_CAMP_EGG_COUNTDOWN] > 0) outputText("\n\n<b>Sophie's egg is sitting nearby.</b>");
+		if (flags[kFLAGS.FARM_CORRUPTION_STARTED]) addButton(2, "Farm Work", sendToFarm);
+		if (flags[kFLAGS.SOPHIE_BROACHED_SLEEP_WITH] == 1) {
+			if (flags[kFLAGS.SLEEP_WITH] != "Sophie") addButton(8, "Sleep With", sleepWithSophieToggle);
+			else {
+				outputText("\n\nYou're currently sharing your bed with Sophie at night, but you could kick her out, if you wanted.");
+				addButton(8, "NoSleepWith", sleepWithSophieToggle);
+			}
+		}
+		if (sceneHunter.mockFights) addButton(10, "Mock Fight", mockSophie);
+		addButton(14, "Back", camp.campFollowers);
 	}
-	if(flags[kFLAGS.SOPHIE_CAMP_EGG_COUNTDOWN] > 0 && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) outputText("\n\n<b>Sophie's egg is sitting nearby.</b>");
-	if(flags[kFLAGS.SOPHIE_DAUGHTER_MATURITY_COUNTER] > 0) {
-		addButton(7,"Daughter",sophieBimbo.daughterCheckup);
+}
+
+private function mockSophie():void {
+	clearOutput();
+	outputText("You come up with a brilliant idea - fly back to the mountain and try to do things just like before. Why not remember the old times?"
+		+ "\n\n"
+		+ "Surprisingly, Sophie doesn't object much - she even helps you to fly to the mountain faster. Though, when you suggest fighting for dominance, she looks slightly concerned."
+		+ "\n\n"
+		+ "<i>Maybe fight another time, [name]? We can do much sweeter things here...</i>"
+		+ "\n\n"
+		+ "Will you agree to consensual sex, or do you still want to fight?");
+	menu();
+	addButton(0, "Agree", sophieScene.consensualSexSelector);
+	addButton(1, "FIGHT!", fight);
+
+	function fight():void {
+		outputText("With a smile, Sophie flies in the air, ready for a battle.");
+		mocking = true;
+		startCombat(new Sophie());
 	}
-	if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) addButton(14, "Back", camp.campFollowers);
-	else addButton(14, "Back", SceneLib.farm.farmCorruption.rootScene);
-	
-	if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0 && flags[kFLAGS.FARM_CORRUPTION_STARTED] == 1) addButton(2, "Farm Work", sendToFarm);
-	if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 1) addButton(2, "Go Camp", backToCamp);
-	
-	if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 1 && flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE] == 0) addButton(3, "Harvest Eggs", harvestEggs);
-	if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 1 && flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE] == 1) 
-	{
-		addButton(3, "Change Eggs", changeEggs);
-		addButton(4, "Stop Harvest", stopHarvest);
-	}
-	
 }
 
 private function sendToFarm():void
@@ -464,12 +512,14 @@ private function sexWithFollowerSophie():void {
 	outputText("\"<i>Oh, really? I was kind of hoping you'd want a taste of me soon.</i>\"  Sophie somewhat perks up at the mention of having sex with you.  \"<i>So, what'd you like? The usual, or should Momma do something special for you this time around?</i>\"  She licks her lips at the suggestion.");
 	
 	//[Usual] [Nurse] [YouMove] [IMove] [Titfuck] [GetDMilked] [Extra1] [....]
-	if(player.hasCock()) {
-		if(player.cockThatFits(sophieBimbo.sophieCapacity()) >= 0) addButton(0,"Vaginal",fuckFollowerSophie);
-		addButton(1,"Blowjob",sophieFollowerGivesBlowjobs);
-	}
-	if(flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] > 0 && flags[kFLAGS.SOPHIE_FAMILY_INCEST] > 0 && player.cockThatFits(sophieBimbo.sophieCapacity()) >= 0)
-		addButton(8,"DaughterFuck",sophieIncestInHerCooterOrSomethingIDunno);
+	addButton(0,"Vaginal",fuckFollowerSophie)
+		.disableIf(!sophieBimbo.cockFits, sophieBimbo.nofitMsg);
+	addButton(1,"Blowjob",sophieFollowerGivesBlowjobs)
+		.disableIf(!player.hasCock(), "Req. a cock!");
+	if (!(flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] > 0 && flags[kFLAGS.SOPHIE_FAMILY_INCEST] == 0))
+		addButton(4, "DaughterFuck", sophieIncest)
+			.disableIf(!sophieBimbo.cockFits, sophieBimbo.nofitMsg)
+			.disableIf(flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] == 0, "This scene requires some actions when Sophie's... not so smart.\n\n", "???");
 	addButton(14,"Back",followerSophieMainScreen);
 }
 
@@ -496,7 +546,7 @@ private function sophieAppearance():void {
 	if (SceneLib.farm.farmCorruption.hasTattoo("sophie"))
 	{
 		outputText("\n\n");
-		if (SceneLib.farm.farmCorruption.sophieFullTribalTats())
+		if (SceneLib.farm.farmCorruption.fullTribalTats("sophie"))
 		{
 			outputText("She is covered from head to tail in tribal tattoos, erotic lines snaking all over her naked frame, giving her the look of a barely tamed savage.")
 		}
@@ -643,7 +693,6 @@ private function sophieVagFollowerFollowup():void {
 	clearOutput();
 	var x:int = player.cockThatFits(sophieBimbo.sophieCapacity());
 	if(x < 0) x = player.smallestCockIndex();
-	var y:int = player.cockThatFits2(sophieBimbo.sophieCapacity());
 
 	outputText("You're roused a few moments later by a smiling Sophie, the proof of your union dripping between her thighs.  She quips, \"<i>");
 	if(sophieBimbo.sophieIsInSeason()) outputText("If that didn't take, I don't know what will!");
@@ -706,11 +755,11 @@ private function sophieBlowsSixtyNine():void {
 	outputText("\n\nHer tongue and yours seem to be the only things that matter anymore.  Hers circles the entirety of your " + cockDescript(x) + ", accompanied by golden lips that leave behind their drugged, amber residue.  The enjoyable tingling that those chemicals induce is driving you wild with desire.  Your heart is hammering like crazy in your chest, each thrumming beat reinforcing the thickness of your erection in the bird-woman's mouth.");
 	if(player.hasVagina()) {
 		outputText("  She tenderly");
-		if(player.balls > 0) outputText(" reaches under your [balls] and");
+		if(player.hasBalls()) outputText(" reaches under your [balls] and");
 		outputText(" explores your [vagina] with two fingers, her thumb brushing across your [clit] every few seconds.  It seems the harpy is considerate of even your feminine needs - ones that serve to make you even harder, so full it almost hurts.");
 	}
 	//else
-	else if(player.balls > 0) {
+	else if(player.hasBalls()) {
 		outputText("  She tenderly caresses your [sack], allowing her fingers to dance over your [balls].  It seems the harpy is considerate of all your needs in a way that makes you even harder, so full it almost hurts.");
 	}
 	else outputText("She tenderly strokes a long nail across the sensitive skin of your taint.  It seems she's being very considerate to your pleasure, so considerate she has you so hard and full that it almost hurts.");
@@ -740,7 +789,7 @@ private function sophieBlowsSixtyNine():void {
 	//+10 lust
 	player.sexReward("vaginalFluids","Dick");
 	dynStats("sen", 1);
-	dynStats("lus", 10);
+	dynStats("lus", 10, "scale", false);
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -754,7 +803,7 @@ private function forceSophieBlowjob():void {
 	outputText("You grab hold of her and push her down on her knees, a task aided by Sophie's utter, uncomprehending surprise.  She hits the ground, pouting, her thick thighs flexing to try and help her rise.  You scold her - if she didn't want to suck your dick, she shouldn't have moved into your camp.  Instead, she should be glad that you decided to ALLOW her to stay in your camp for a simple blowjob.  Pointing out her oozing snatch, you remind her that she's clearly enjoying this as much as you, and that she ought to just get to work and tend to her own needs while she satisfies you.");
 	
 	outputText("\n\nSophie grumbles, but one of her hands does nestle itself down between her feathery thighs, her other going to your groin to fish out your " + cockDescript(x) + ".  She looks up at you through angry eyebrows softened slightly by concealed lust.  \"<i>I'll suck you off... this time,</i>\" she declares, ");
-	if(player.balls > 0) outputText("fondling your [balls] with almost eager attention,");
+	if(player.hasBalls()) outputText("fondling your [balls] with almost eager attention,");
 	else outputText("rubbing your length with almost eager attention,");
 	outputText(" \"<i>but don't make a habit of this, or you'll wake up alone.</i>\"  Sophie's tongue flicks across your " + player.cockHead(x) + " experimentally.  \"<i>At least you taste good.</i>\"  The slippery muscle slides across your sensitive dick-skin again, longer this time, lingering on the underside as the golden lips edge closer.");
 	
@@ -768,13 +817,13 @@ private function forceSophieBlowjob():void {
 	else if(player.cockTotal() > 2) outputText("  Your extra cocks flop against her cheeks, catching on her ear and shoulder and slowly leaking pre-cum into her down-soft hair.");
 	
 	outputText("\n\nSophie abruptly grabs hold of one of her big, motherly tits and gropes herself passionately.  Her lips open just enough to separate from your " + cockDescript(x) + " and exude a lascivious moan as she masturbates herself.  The quivering tongue tickling at your underside is utterly enjoyable, a fact enhanced by the golden gloss now smeared all over your rod.  There's a tingling, pulsating quickening inside you.");
-	if(player.balls > 0) outputText("  Your [balls] feel almost like they're filling up, taut with liquid weight that begs to pump out");
+	if(player.hasBalls()) outputText("  Your [balls] feel almost like they're filling up, taut with liquid weight that begs to pump out");
 	else outputText("  It feels tight, like you're filling up with a warm liquid weight that's just begging to be let out");
 	outputText(" all over the motherly harpy's face.  You groan out loud with sheer excitement and fixate your eyes on Sophie's bodacious rump and thick thighs, partly obscured by her trembling tailfeathers.");
 	
 	outputText("\n\nSlobber and drool drip down");
-	if(player.balls > 0) outputText(" your [sack] and over");
-	outputText(" your legs.  Sophie's eyes roll back slightly - not all the way but enough to proudly display her penultimate pleasure as she cums.  Her syrupy girl-cum splatters off the waste-land earth below, though the sound changes to a wetter, muddy splashing after a few seconds.  Squeezing tightly, the harpy's throat convulses around you.  Her lips lock tight as she hums in ecstasy, languidly beginning to suckle your " + cockDescript(x) + " as her own orgasm dies down.  You force her to move faster, pushing her head to pop back and forth, too eager for release to care for her comfort.  Judging by the steady, squelching pumping that begins anew, she doesn't care that much either.");
+	if(player.hasBalls()) outputText(" your [sack] and over");
+	outputText(" your legs.  Sophie's eyes roll back slightly - not all the way but enough to proudly display her penultimate pleasure as she cums.  Her syrupy girl-cum splatters off the wasteland earth below, though the sound changes to a wetter, muddy splashing after a few seconds.  Squeezing tightly, the harpy's throat convulses around you.  Her lips lock tight as she hums in ecstasy, languidly beginning to suckle your " + cockDescript(x) + " as her own orgasm dies down.  You force her to move faster, pushing her head to pop back and forth, too eager for release to care for her comfort.  Judging by the steady, squelching pumping that begins anew, she doesn't care that much either.");
 	outputText("\n\nSophie suddenly compresses her gold-lacquered cock-pillows around you and sucks harder.  She flicks her eyes up at you to beg for your cum with a sluttier expression than you thought the harpy matron capable, inaudibly demanding you release inside her.  Your [hips] lurch forward to pound your " + cockDescript(x) + " deep into her face, and your " + player.cockHead(x) + " tingles, expanding in orgasm.");
 	if(player.hasKnot(x)) outputText("  The knot inflates just behind her lips, a golden orb that entraps you within her slick mouth and makes sure all your salty cremè is going to go down her throat.");
 	outputText("\n\nSemen jets from your urethra almost immediately, the long lance of jizz spouting right into Sophie's throat where it can dribble down into her belly.  You let your mouth hang open and close your eyes, instantly envisioning yourself surrounded by a brood of harpy girls, most pregnant and kissing you while the others milk your dick with their bird twats, again and again.  The drug-fueled fantasy ensures that your orgasm lasts even longer than it otherwise would, and you continue to erupt slippery spunk straight into Sophie's stomach.");
@@ -819,7 +868,7 @@ public function sophieSmallDongTeases():void {
 	var x:int = player.smallestCockIndex();
 	outputText("\n<b><u>As you're waking up that morning...</u></b>");
 	outputText("\nTingly warmth envelops your [oneCock] with supple, soft sensation, wrapping it up tight in pulsing warmth.  A slippery protrusion slithers around your girth, tickling at your [sheath]");
-	if(player.balls > 0) outputText(" and [balls]");
+	if(player.hasBalls()) outputText(" and [balls]");
 	outputText(" before lavishing its slickness along the underside.  You get so stiff - so hard - in just seconds, " + cockDescript(x) + " swelling to try and fill the slick prison, but no matter how hard you get, that compressing cavern still seems so much larger and more capable than the small penis that it has to contort itself around.");
 	outputText("\n\nAbruptly, your lusty erection is removed from the heated embrace and left cold and wanting.  You shiver in your bed, still not quite woken, at least not until a playful flick slaps the " + cockDescript(x) + " as it pulsates, just hard enough to be noticed without pain.  You start to jolt upright, but are immediately pushed back down by a taloned footclaw pressing down on your shoulder.  You catch a view of feathers and gigantic breasts - it must be the harpy matron, Sophie, come to play with you in the morning.");
 	if(player.str >= 70) outputText("  You could force her off you if you wanted, but you didn't bring her to bed for nothing.");
@@ -846,13 +895,14 @@ public function sophieSmallDongTeases():void {
 	outputText("\n\nSophie pulls herself a little further up, almost bumping you with her pussy.  \"<i>Now, I'll get to see what kind of girl you are- a slut who cums all over herself just from a little pussy-breath, or one that spurts from a brush with my soaked lips.  Which is it?  You <b>WILL</b> cum from one, my messy little squirt-girl...</i>\" she promises, staring into her eyes as she slides closer.");
 	
 	outputText("\n\nThe warmth around you seems to double, moisture beading on your [cock smallest] from the foggy lust within Sophie's thigh-canyon.  She slowly spreads her legs until they're split almost horizontal, hanging off of you to either side, her moist vulva closing in on you with each passing second.  She mouths, \"<i>You can cum, if you want to be a total bitch...</i>\"  Her hands hook onto the slippery skin and spread her passage wide, so close to you that your petite maleness can practically taste the pussy.  You throb in painful pleasure and wonder if this is it...");
+	sceneHunter.print("Lust check - 50%!");
 	//{Low Sensitivity}
-	if(player.sens/5 + rand(20) + 1 <= 20) {
+	if(player.lust < 0.5 * player.maxLust()) {
 		outputText("\n\nEven though you're so hard, so very very hard, climax eludes you.  A small part of you wonders why you couldn't cum and be Sophie's bitch, yet you hastily dismiss it, focusing back on her breasts.  Sophie smiles tauntingly, smooshing her bouncy bosom together to give you a better view as she taunts, \"<i>Awww, your delicate boner must not be trained well enough.  Still, you look so close, and I'm sure a submissive slut like you will cream the outside of my nether-lips once I touch you...</i>\"  Her voice rings out, erotic and compelling, \"<i>Can't you feel the pressure in your [balls]?  All that cum just ready to burst out across my slick pussy?  It must be so hard to hold in, and your weak erection can't possibly keep all that slutty, submissive cum inside you for long, right?</i>\"");
 		
 		outputText("\n\nSophie slides her hips closer, just barely avoiding a sensuous brush across your [cock smallest].  You whine plaintively, feeling that upwelling jism inside, her hypnotic compulsions bending your perceptions to plant you right atop the peak, right on the edge of submission.  She coos, \"<i>Not yet...  I'll let you cum, but only after you beg me to touch your pathetic dick.  Beg!  Say, 'Please Momma Sophie, touch my slutty cock!'  <b>Do it!</b></i>\"");
 		
-		outputText("\n\nNearly crying from how pent up you are, you comply without thinking, only wanting release- to feel her juicy, slobbering snatch against you as it grants orgasm, \"<i>Yes!  Please, Momma Sophie!  Rub my slutty cock!  Touch it, make it waste its seed on you!  Anything, just let me cum!</i>\"");
+		outputText("\n\nNearly crying from how pent-up you are, you comply without thinking, only wanting release- to feel her juicy, slobbering snatch against you as it grants orgasm, \"<i>Yes!  Please, Momma Sophie!  Rub my slutty cock!  Touch it, make it waste its seed on you!  Anything, just let me cum!</i>\"");
 		
 		outputText("\n\nRubbing her chin, the harpy matron slowly begins to nod.  \"<i>Not bad, though maybe next time I'll put some makeup on you first, to complete the experience.</i>\"  She flicks your boner again and asks, \"<i>Are you ready?</i>\"");
 		outputText("\n\nYou bite your lip and nod eagerly, nearly cumming from that single touch.  Your ");
@@ -926,7 +976,7 @@ private function sophieSpecial():void {
 	outputText("\n\nSlowly, she sinks to her knees, fishing out your " + cockDescript(x) + " from your [armor], licking her lips eagerly.  \"<i>First, we cover it with a lot of my special lipstick, so you'll stay hard no matter what.  That, and, well, so you can't resist when Momma Sophie wants you to squirt.</i>\"");
 	
 	outputText("\n\nIndeed, her plush golden lips wrap about your " + cockDescript(x) + ", slathering it with both her saliva and lipstick as she bobs her head up and down on your member, causing it to become painfully hard as you thrust your [hips] instinctively, seeking more of this delicious mouth.  She grumbles, displeased at you moving and tries to hold you in place by grabbing your [ass] and trying to hold you in place; however, this proves to be rather uneffective as you begin to shake from her oral assault, her tongue licking up and down your " + cockDescript(x) + ", covering it completely in a mix of slutty spit and drugged lipstick... as a matter of fact, you feel light in the head");
-	if(player.balls > 0) outputText(", and your [balls] are just waiting to unload a virile, sticky package down her throat");
+	if(player.hasBalls()) outputText(", and your [balls] are just waiting to unload a virile, sticky package down her throat");
 	outputText(".  Sophie seems to sense it and chuckles, pulling her mouth off your " + cockDescript(x) + ", causing you to whine as you seek out her mouth again.  \"<i>There, there, my little cum pump.  Momma Sophie wouldn't be so mean as to leave you and your ");
 	if(player.cockArea(x) <= 5) outputText("squirting clitty");
 	else if(player.cockArea(x) <= 30) outputText("needy boy-cock");
@@ -936,7 +986,7 @@ private function sophieSpecial():void {
 	outputText("\n\nYou feel Sophie simultanously push at your [chest] and pull at your [legs], causing you to slowly move down on your back, as you realize your [armor] has apparently disappeared in the meantime.  The confident harpy matron smirks and giggles while stepping over your body and showing you her plump, jiggly ass as her wet pussy lowers towards your " + cockDescript(x) + ", eager to devour it.  With a wet squelch, you're buried inside her and shuddering beneath her big, wobbly ass.  \"<i>My, my... you really can't hold it in at all, can you? I've barely even put you inside me and you're already so eager to paint my walls white that you're simply going to squirt straight away?</i>\"");
 	
 	outputText("\n\nYou're not able to recognize if there's a command behind those words, but with a loud moan, you simply discharge the contents of your ");
-	if(player.balls > 0) outputText("[balls] and ");
+	if(player.hasBalls()) outputText("[balls] and ");
 	outputText(cockDescript(x) + " inside Sophie's schlong-milking passage, causing her to moan in satisfaction as the first of your virile cum hits her inner walls.");
 	if(player.cumQ() < 250) outputText("  She milks you for all you're worth.");
 	else if(player.cumQ() < 750) outputText("  She whimpers at how much you've discharged into her.");
@@ -980,7 +1030,7 @@ private function sophieSpecial():void {
 	
 	outputText("\n\nIt feels like you're drowning in liquid... but it's way too sticky, her vaginal muscles clenching around you as you're treated to a faceful of boob when she roughly pushes your face against them, her cunt picking up where it left. Your " + cockDescript(x) + " is sore and sensitive, and you definitely already shot out everything you've had, but the harpy's lipstick and her sheer lust for being impregnated seem to keep you going. You almost black out from being suffocated in her breasts, but every few loud smacks she pulls you away for a while, letting you breathe while her breeding passage sups at your erection, drinking your pre and the remains of cum from your urethra greedily, seeking to slowly build another orgasm in you.");
 	
-	outputText("\n\nYou feel Sophie's lips on your own before she coos in your ear, enticing you to keep going and to cum together with her again.  \"<i>Hold it in for a while... just let me have my fun, dear... and I will let you cum again.  Yes, you should cum as soon as I do.  Don't worry, you breeding me got me so horny it won't take long... and your sensitive, tormented");
+	outputText("\n\nYou feel Sophie's lips on your own before she coos in your ear, enticing you to keep going and to cum together with her again.  \"<i>Hold it in for a while... just let me have my fun, dear... and I will let you cum again.  Yes, you should cum as soon as I do.  Don't worry, your breeding me got me so horny it won't take long... and your sensitive, tormented");
 	if(player.cockArea(x) <= 5) outputText(" clitty");
 	else if(player.cockArea(x) <= 30) outputText(", pretty cock");
 	else outputText(", humongous cunt-stretcher");
@@ -1017,7 +1067,7 @@ public function sophieFollowerIntro():void {
 	outputText("\n\nYou snap back into reality, waking up to find the object of your obsession bouncing gleefully on your exposed groin.  Her tousled hair jumps around with every plunge of the bird-woman's heavenly thighs.  She quickly notices your stark awakening, and blushes hard while she tries to remove herself.");
 	
 	outputText("\n\n\"<i>Oh shit - dear, it's hardly what you think.  I've just always been the one to capture young men to bone me raw, but ever since you've come along, all I can think about is your cock!  Oh and you, of course.  Please don't get mad darling, it was hard enough to try and find this place, and-</i>\"");
-	dynStats("lus", 10);
+	dynStats("lus", 10, "scale", false);
 	//Plus lust!
 	//[Kiss Her][Get Out]
 	menu();
@@ -1031,7 +1081,7 @@ private function getOutSophieRecruitment():void {
 	outputText("Invading your camp is one thing, but Sophie's overstepping her boundaries by thinking she can get sex from you whenever she wants.  You push her off of your body, standing up to announce that you'll get sex when you need it, not when she desires.  The poor bird nods feverishly, completely embarrassed by the entire ordeal.");
 	outputText("\n\n\"<i>Absolutely dear, let's never speak of this again.  I'll be off now.</i>\"");
 	outputText("\n\nWith that, she darts above the camp, flying back to her home in the high mountains.  You were having such a nice dream, too.");
-	dynStats("lus", -5);
+	dynStats("lus", -5, "scale", false);
 	flags[kFLAGS.NO_PURE_SOPHIE_RECRUITMENT] = 1;
 	doNext(playerMenu);
 }
@@ -1050,7 +1100,7 @@ private function kissSophieRecruitment():void {
 	outputText("\n\nThe two of you slump back, exhausted over a good night's sex.  Sophie lies in your arms, twirling her finger around your chest.");
 
 	outputText("\n\n\"<i>You've got a cute set up here, sweetheart.  I don't mind moving away from all those harpies, if there was the possibility that I could stay here with you.</i>\"");
-	dynStats("lus", 20);
+	dynStats("lus", 20, "scale", false);
 	//[Sure][No] – Note: [No] leads to the [Get Out] scene.
 	menu();
 	addButton(0,"Sure",sophieRecruitmentFinale);
@@ -1084,15 +1134,16 @@ daughter 4: Body as curvy and voluptuous as sophie, very soft wings.
 all purpose vaginal and anal sex scene, with modifiers for each daughters body type
 
 intro for all scenes*/
-internal function sophieIncestInHerCooterOrSomethingIDunno():void {
+internal function sophieIncest():void {
 	clearOutput();
 	outputText("Approaching the harpy nest you call out for one of your daughters.  ");
 	if(flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] > 1) outputText("The prospect of their " + player.mf("father","mother") + "'s attention causes a small scuffle to break out between your feathery daughters. Thankfully, the small fight is soon ended and one of your daughters flies down and stands before you.  ");
 	else outputText("Your daughter, hearing your call, is more than happy to come to you.  ");
-	outputText("The curvy girl smiles at you, her eyes bright and attentive, positively sparkling with the taboo affection she holds for her beloved daddy.  Smirking to her you give her an appraising look, your eyes wandering up and down her beautiful womanly body.");
+	outputText("The curvy girl smiles at you, her eyes bright and attentive, positively sparkling with the taboo affection she holds for her beloved daddy.  Smirking to her, you give her an appraising look, your eyes wandering up and down her beautiful womanly body.");
 	
 	var daughterCap:int = flags[kFLAGS.SOPHIE_ADULT_KID_COUNT];
 	if(daughterCap > 4) daughterCap = 4;
+	sceneHunter.print("You have "+daughterCap+" daughters. Up to 4 can be picked randomly.");
 	daughterCap = rand(daughterCap);
 	
 	if(daughterCap == 0) {
@@ -1116,7 +1167,7 @@ internal function sophieIncestInHerCooterOrSomethingIDunno():void {
 		if(flags[kFLAGS.DAUGHTER_TWO_BIMBO] > 0) outputText("bimbo ");
 		outputText("lips and blows you a kiss.  She slides her hands over her hips, pushing her taut butt out even more before spanking herself for your pleasure, her lips gasping at the feeling of her self-spank as she tries to work you into a breeding frenzy.");
 		
-		outputText("\n\nYou bite your lip at her erotic display, the sight of your own daughter trying so hard to entice you into a incestuous romp.  The growing desire to grab your girl and fuck her right then and there only grows stronger when you smell her.  The hungry harpy fans her long feathers to blow her hot and heady scent to you, letting you smell her arousal, the scent of a ripe and wanting female, ready to be bred.  ");
+		outputText("\n\nYou bite your lip at her erotic display, the sight of your own daughter trying so hard to entice you into an incestuous romp.  The growing desire to grab your girl and fuck her right then and there only grows stronger when you smell her.  The hungry harpy fans her long feathers to blow her hot and heady scent to you, letting you smell her arousal, the scent of a ripe and wanting female, ready to be bred.  ");
 		if(flags[kFLAGS.DAUGHTER_TWO_BIMBO] > 0 && flags[kFLAGS.SOPHIES_DAUGHTERS_DEBIMBOED] == 0) outputText("\"<i>Mmmm... doncha want to just like, pound my sexy ass, " + player.mf("Daddy","Mommy") + "?  It's so big, it's just begging to be spanked and squeezed till it's totally red and sensitive</i>\"");
 		else outputText("\"<i>Come on, " + player.mf("Daddy","Mommy") + ", touch me, spank me like the bad girl I am, lusting after my " + player.mf("Daddy","Mommy") + " like this.  Give it to me hard, spank my big round ass and pound my hot tight cunt like I know you want</i>\"");
 		
@@ -1195,8 +1246,8 @@ private function phaseTwoOfIncest(daughter:int):void {
 	outputText("\n\nKissing the horny, needy girl back, you force your tongue against hers, plunging into her warm, wet mouth and silencing her rampant, lusty moans.  Sliding a hand down, you grab a handful of your daughter's ample, spankable butt and squeeze, using her body as a handhold while you screw her and claim her quivering form as yours.  Like her mother before her, she belongs to you.  Your daughter's body is your property, made to sate your boiling lust and take your seed deep into her womb to mother your young as a good, fertile female should.  Already you can feel the swelling pressure inside you, the searing hot pleasure of your impending orgasm, the seed that gave your daughter life soon to be flooding her womb in an explosion of " + player.mf("father","mother") + "ly lust.");
 
 	outputText("\n\nSoon, the swelling might of your climax falls upon you.  Valiantly, you hold back as long as you can.  ");
-	if(player.balls > 0 && player.ballSize < 8) outputText("Your seed swollen balls clench and lurch under the power of your orgasm, sending forth your creamy load into her waiting depths.  ");
-	else if(player.balls > 0) outputText("Your huge, breeder balls slap hard against your daughter's soft, creamy skin, letting her feel how heavy and overflowing they are with your virile essence.  The very feeling of your aching orbs against her body makes her shudder in delight at the thought of having your frothy seed bloating her belly.  Clenching with mighty contractions, your fat, bloated sack discharges its gushing virility in great, geyserious bursts of thick, sperm-packed spunk.  ");
+	if(player.hasBalls() && player.ballSize < 8) outputText("Your seed swollen balls clench and lurch under the power of your orgasm, sending forth your creamy load into her waiting depths.  ");
+	else if(player.hasBalls()) outputText("Your huge, breeder balls slap hard against your daughter's soft, creamy skin, letting her feel how heavy and overflowing they are with your virile essence.  The very feeling of your aching orbs against her body makes her shudder in delight at the thought of having your frothy seed bloating her belly.  Clenching with mighty contractions, your fat, bloated sack discharges its gushing virility in great, geyserious bursts of thick, sperm-packed spunk.  ");
 	outputText("Your distended cumvein bulges as your sticky seed dilates your " + player.cockHead(x) + ", streaming forth in great lances of egg-raping potency.  The very feeling of your spermy seed flooding her clenching, quivering cunt, drives your curvaceous daughter into an eye rolling orgasm, her body bucking and writhing in raw, mind-bending ecstasy as her body clenches and squeezes you tightly.");
 	
 	outputText("\n\nHolding your bodies close together, you jerk and grind your hips against hers, making sure that all of your precious seed goes only where it oh so rightfully belongs, into your sweet daughter's eager cunt and fertile womb.");
@@ -1207,7 +1258,7 @@ private function phaseTwoOfIncest(daughter:int):void {
 	//[cum volume high:
 	else if(player.cumQ() < 2000) outputText("  Gush after gush of thick rich cum flows from you, basting your daughter's womb with your virile spunk.  Wedging yourself as tightly against her as you can, you make sure that every drop packs into her fertile belly.  The potent flow of your seed quickly swells her stomach into a cute cum bloated paunch.");
 	else outputText("  Your seed floods your daughter's tight, squeezing cunt like a flood, wave after wave of your thick, frothy spunk forces its way through her convulsing cunt and right into her eager, waiting womb.  Geysers of thick, frothy spunk force their way into her womb, filling it fuller and fuller until her belly swells and swells.  Her once tight, flat tummy rounds out into a healthy round cumbaby, your thick, yogurt-like spunk overflowing from her overstuffed snatch in thick, sticky streams.");
-	outputText("  In a moment of lucidity, you look down at your daughter and see the blissed-out look on her face; her creamy skin red; her eyes rolling up into her head.  Her tongue is lolling out from her plump, cocksucking lips.  The sight of your daughter consumed by such mind bending pleasure, the ecstasy of having her " + player.mf("father","mother") + " cumming inside her, only gives you a sense of pride and affection for your sweet daughter.");
+	outputText("  In a moment of lucidity, you look down at your daughter and see the blissed-out look on her face; her creamy skin red; her eyes rolling up into her head.  Her tongue is lolling out from her plump, cocksucking lips.  The sight of your daughter consumed by such mind-bending pleasure, the ecstasy of having her " + player.mf("father","mother") + " cumming inside her, only gives you a sense of pride and affection for your sweet daughter.");
 	
 	outputText("\n\nWhen you finally come down from your orgasmic high, you let out a sigh and lean down, snuggling up with your daughter.  Your arms wrap around her body, her legs not once loosening as she wraps her feathery arms around you and starts kissing you softly.  She coos to you as she kisses you over and over.");
 	if(bimbo) outputText("  \"<i>Oh, " + player.mf("Daddy","Mommy") + ", oh, " + player.mf("Daddy","Mommy") + "...  So good!  My " + player.mf("Daddy","Mommy") + "'s such a hot, sexy " + player.mf("stud","herm") + ".  I so totally thought I was going to like, lose my mind for a second.  I love you, " + player.mf("Daddy","Mommy") + ".</i>\"");

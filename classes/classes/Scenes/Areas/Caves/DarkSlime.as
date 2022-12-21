@@ -25,27 +25,9 @@ use namespace CoC;
 			if (hasPerk(PerkLib.Acid)) outputText("Her body quivering from your flames, the dark slime ");
 			else outputText("The dark slime holds its hands up and they morph into a replica of your [weapon].  Happily, she swings at you");
 			//Determine if dodged!
-			if (player.spe - spe > 0 && int(Math.random() * (((player.spe - spe) / 4) + 80)) > 80) {
+			if (player.getEvasionRoll()) {
 				if (hasPerk(PerkLib.Acid)) outputText("tries to slap you, but you dodge her attack.");
 				else outputText(", missing as you dodge aside.");
-				return;
-			}
-			//Determine if evaded
-			if (player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
-				if (hasPerk(PerkLib.Acid)) outputText("tries to slap you, but you evade her attack.");
-				else outputText(", but you evade the clumsy attack.");
-				return;
-			}
-			//("Misdirection"
-			if (player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
-				if (hasPerk(PerkLib.Acid)) outputText("tries to slap you.  You misdirect her, avoiding the hit.");
-				else outputText(", missing as you misdirect her attentions.");
-				return;
-			}
-			//Determine if cat'ed
-			if (player.hasPerk(PerkLib.Flexibility) && rand(100) < 6) {
-				if (hasPerk(PerkLib.Acid)) outputText("tries to slap you, but misses due to your cat-like evasion.");
-				else outputText(", missing due to your cat-like evasion.");
 				return;
 			}
 			//Determine damage - str modified by enemy toughness!
@@ -86,14 +68,14 @@ use namespace CoC;
 		private function gooPlay():void
 		{
 			outputText("The dark slime lunges, wrapping her slimy arms around your waist in a happy hug, hot muck quivering excitedly against you. She looks up, empty eyes confused by your lack of enthusiasm and forms her mouth into a petulant pout before letting go.  You shiver in the cold air, regretting the loss of her embrace.");
-			player.dynStats("lus", 4 + rand(4) + player.effectiveSensitivity() / 9);
+			player.takeLustDamage(4 + rand(4) + player.effectiveSensitivity() / 9, true);
 		}
 		private function gooThrow():void
 		{
 			outputText("The girl reaches into her torso, pulls a large clump of goo out, and chucks it at you like a child throwing mud. The slime splatters on your chest and creeps under your [armor], tickling your skin like fingers dancing across your body. ");
 			var damage:Number = weaponAttack;
 			player.takePhysDamage(damage, true);
-			player.dynStats("lus", 7 + rand(4) + player.effectiveSensitivity() / 9);
+			player.takeLustDamage(7 + rand(4) + player.effectiveSensitivity() / 9, true);
 		}
 		private function gooEngulph():void
 		{
@@ -112,7 +94,7 @@ use namespace CoC;
 			if (inte >= 151 && inte < 201) damage += ((inte * 1.5) + rand(inte * 2));
 			if (inte >= 201) damage += ((inte * 1.75) + rand(inte * 2.25));
 			player.takeMagicDamage(damage, true);
-			player.dynStats("lus", 20 + rand(8) + player.effectiveSensitivity() / 7);
+			player.takeLustDamage(20 + rand(8) + player.effectiveSensitivity() / 7, true);
 		}
 		private function darkslimePoison():void
 		{
@@ -126,7 +108,7 @@ use namespace CoC;
 			if (inte >= 151 && inte < 201) damage += ((inte * 1.5) + rand(inte * 2));
 			if (inte >= 201) damage += ((inte * 1.75) + rand(inte * 2.25));
 			player.takePoisonDamage(damage, true);
-			player.dynStats("lus", 20 + rand(8) + player.effectiveSensitivity() / 7);
+			player.takeLustDamage(20 + rand(8) + player.effectiveSensitivity() / 7, true);
 		}
 
 		override public function defeated(hpVictory:Boolean):void
@@ -190,7 +172,6 @@ use namespace CoC;
 			this.armorName = "gelatinous skin";
 			this.lust = 45;
 			this.lustVuln = .75;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.drop = new ChainedDrop().add(weapons.PIPE,1/10)
 					.add(consumables.DSLIMEJ,1/2)
 					.elseDrop(useables.GREENGL);

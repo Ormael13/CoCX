@@ -7,11 +7,11 @@ package classes.IMutations
 import classes.PerkClass;
 import classes.IMutationPerkType;
 import classes.Creature;
-import classes.Player;
 import classes.Races;
 
 public class FeyArcaneBloodstreamMutation extends IMutationPerkType
     {
+        private static const mName:String = "Fey Arcane Bloodstream";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -42,7 +42,7 @@ public class FeyArcaneBloodstreamMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Fey Arcane Bloodstream" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -53,7 +53,7 @@ public class FeyArcaneBloodstreamMutation extends IMutationPerkType
                 this.requirements = [];
                 if (pTier == 0){
                     this.requireBloodsteamMutationSlot()
-                    .requireRace(Races.FAIRY);
+                    .requireAnyRace(Races.FAIRY, Races.FAERIEDRAGON);
                 }
                 else{
                     var pLvl:int = pTier * 30;
@@ -65,9 +65,8 @@ public class FeyArcaneBloodstreamMutation extends IMutationPerkType
         }
 
         //Mutations Buffs
-        override public function pBuffs(target:Creature = null):Object{
+        override public function buffsForTier(pTier:int):Object {
             var pBuffs:Object = {};
-            var pTier:int = currentTier(this, (target == null)? player : target);
             if (pTier == 1) pBuffs['int.mult'] = 0.05;
             if (pTier == 2) pBuffs['int.mult'] = 0.15;
             if (pTier == 3) pBuffs['int.mult'] = 0.35;
@@ -75,8 +74,7 @@ public class FeyArcaneBloodstreamMutation extends IMutationPerkType
         }
 
         public function FeyArcaneBloodstreamMutation() {
-            super("Fey Arcane Bloodstream IM", "Fey Arcane Bloodstream", ".");
-            maxLvl = 3;
+            super(mName + " IM", mName, SLOT_BLOODSTREAM, 3);
         }
 
     }

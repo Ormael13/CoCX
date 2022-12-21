@@ -7,11 +7,11 @@ package classes.IMutations
 import classes.PerkClass;
 import classes.IMutationPerkType;
 import classes.Creature;
-import classes.Player;
 import classes.Races;
 
 public class HeartOfTheStormMutation extends IMutationPerkType
     {
+        private static const mName:String = "Heart Of The Storm";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -20,7 +20,7 @@ public class HeartOfTheStormMutation extends IMutationPerkType
                 descS += "Increase the power of all Wind and Lightning racial abilities";
             }
             if (pTier >= 3){
-                descS += ", you can fly continuously as long as you yourself can fly, if you have enery attacks they now include a chance to stun";
+                descS += ", you can fly continuously as long as you yourself can fly, if you have energy attacks they now include a chance to stun";
             }
             if (pTier >=2){
                 descS += " and you increase wind and electricity resistance by ";
@@ -44,7 +44,7 @@ public class HeartOfTheStormMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Heart Of The Storm" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -55,7 +55,7 @@ public class HeartOfTheStormMutation extends IMutationPerkType
                 this.requirements = [];
                 if (pTier == 0){
                     this.requireHeartMutationSlot()
-                        .requireAnyRace(Races.RAIJU, Races.THUNDERBIRD, Races.KAMAITACHI, Races.COUATL);
+                        .requireAnyRace(Races.RAIJU, Races.THUNDERBIRD, Races.KAMAITACHI, Races.COUATL, Races.KIRIN);
                 }
                 else{
                     var pLvl:int = pTier * 30;
@@ -67,9 +67,8 @@ public class HeartOfTheStormMutation extends IMutationPerkType
         }
 
         //Mutations Buffs
-        override public function pBuffs(target:Creature = null):Object{
+        override public function buffsForTier(pTier:int):Object {
             var pBuffs:Object = {};
-            var pTier:int = currentTier(this, (target == null)? player : target);
             if (pTier == 1) pBuffs['spe.mult'] = 0.05;
             if (pTier == 2) pBuffs['spe.mult'] = 0.15;
             if (pTier == 3) pBuffs['spe.mult'] = 0.35;
@@ -77,8 +76,7 @@ public class HeartOfTheStormMutation extends IMutationPerkType
         }
 
         public function HeartOfTheStormMutation() {
-            super("Heart Of The Storm IM", "Heart Of The Storm", ".");
-            maxLvl = 3;
+            super(mName + " IM", mName, SLOT_HEART, 3);
         }
         
     }

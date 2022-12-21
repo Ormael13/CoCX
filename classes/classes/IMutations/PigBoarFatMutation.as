@@ -12,6 +12,7 @@ import classes.Races;
 
 public class PigBoarFatMutation extends IMutationPerkType
     {
+        private static const mName:String = "Pig Boar Fat";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -43,7 +44,7 @@ public class PigBoarFatMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Pig Boar Fat" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -69,9 +70,8 @@ public class PigBoarFatMutation extends IMutationPerkType
         }
 
         //Mutations Buffs
-        override public function pBuffs(target:Creature = null):Object{
+        override public function buffsForTier(pTier:int):Object {
             var pBuffs:Object = {};
-            var pTier:int = currentTier(this, (target == null)? player : target);
             if (pTier == 1) pBuffs['tou.mult'] = 0.05;
             if (pTier == 2) pBuffs['tou.mult'] = 0.15;
             if (pTier == 3) pBuffs['tou.mult'] = 0.3;
@@ -79,8 +79,7 @@ public class PigBoarFatMutation extends IMutationPerkType
         }
 
         public function PigBoarFatMutation() {
-            super("Pig Boar Fat IM", "Pig Boar Fat", ".");
-            maxLvl = 3;
+            super(mName + " IM", mName, SLOT_FAT, 3);
         }
 
     }

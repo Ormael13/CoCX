@@ -76,7 +76,7 @@ public class DiningHalls extends TrollVillageAbstractContent{
 
         function ZenjiPaysorPC():void{  //So I don't have to copy/paste this....
             if (TrollVillage.ZenjiFollowing){
-                outputText("Zenji forks over 8 gems, \"<i>I gotcha covered, [name]<i>\"\n\n");
+                outputText("Zenji forks over 8 gems, \"<i>I gotcha covered, [name]</i>\"\n\n");
             }
             else{
                 outputText("You pass 8 gems toward the busgirl.");
@@ -127,13 +127,23 @@ public class DiningHalls extends TrollVillageAbstractContent{
         }
         outputText("Once you’ve finished your food you look around, there’s plenty of other trolls around, you consider if you want to talk to anyone.\n");
         var menuItems:Array = [];
-        menuItems.push("Waitress", SceneLib.trollVillage.kuru.KuruDining, "Talk to " + TrollVillage.KuruUnlocked?"Kuru":"the Waitress");
-        menuItems.push("Halkano", (rand(4) == 1? SceneLib.trollVillage.halkano.TalksWithHalkano:"ignore"), "Talk to Halkano");
-        menuItems.push("Jabala", (rand(4) == 1? SceneLib.trollVillage.jabala.JabalaDining:"ignore"), "Talk to Jabala");
-        menuItems.push("Yenza", ((rand(4) == 1 && TrollVillage.YenzaUnlocked == 0|| (TrollVillage.YenzaUnlocked && !TrollVillage.ZenjiFollowing))? SceneLib.trollVillage.yenza.YenzaChecks:"ignore"), "Talk to Yenza");
-        menuItems.push("Elder(M)", (rand(4) == 1? SceneLib.trollVillage.kalji.TalkWithKalji:"ignore"), "Talk to Kalji");
-        menuItems.push("Elder(F)", (rand(4) == 1? SceneLib.trollVillage.yubi.TalkWithYubi:"ignore"), "Talk to Yubi");
-        menuGen(menuItems, 0, LeaveTheHalls2);
+        var iter:int = 0;
+        addButton(0,"Waitress", SceneLib.trollVillage.kuru.KuruDining).hint("Talk to " + TrollVillage.KuruUnlocked?"Kuru":"the Waitress");
+
+        menuItems.push(["Halkano", SceneLib.trollVillage.halkano.TalksWithHalkano, "Talk to Halkano"]);
+        menuItems.push(["Jabala", SceneLib.trollVillage.jabala.JabalaDining, "Talk to Jabala"]);
+        menuItems.push(["Yenza",  SceneLib.trollVillage.yenza.YenzaChecks, "Talk to Yenza", (TrollVillage.YenzaUnlocked == 0|| (TrollVillage.YenzaUnlocked && !TrollVillage.ZenjiFollowing))]);
+        menuItems.push(["Elder(M)", SceneLib.trollVillage.kalji.TalkWithKalji, "Talk to Kalji"]);
+        menuItems.push(["Elder(F)", SceneLib.trollVillage.yubi.TalkWithYubi, "Talk to Yubi"]);
+        for each(var i:Array in menuItems){
+            var cond:* = true;
+            if (i.length == 4) cond = i[3];
+            if (rand(4) == 1 && cond){
+                addButton(iter, i[0],i[1]).hint(i[2]);
+                iter++;
+            }
+        }
+        addButton(14, "Leave", LeaveTheHalls2)
 
         function LeaveTheHalls2():void{
             outputText("You decide that you’ve spent enough time in the dining hall and take your leave.\n");

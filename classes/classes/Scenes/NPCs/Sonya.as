@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -20,7 +20,7 @@ use namespace CoC;
 	public class Sonya extends Monster
 	{
 		public var sonyaScene:SonyaFollower = new SonyaFollower();
-	/*	
+	/*
 		override public function defeated(hpVictory:Boolean):void
 		{
 			if (flags[kFLAGS.ETNA_FOLLOWER] >= 2) etnaScene.etnaRapeIntro2();
@@ -34,8 +34,8 @@ use namespace CoC;
 			if (flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2) etnaScene.etnaRapeYandere();
 			etnaScene.etnaRapesPlayer();
 		}
-	*/	
-		public function Sonya() 
+	*/
+		public function Sonya()
 		{
 			if (game.flags[kFLAGS.SONYA_TALKED_ABOUT_HER] >= 1) {
 				this.a = "";
@@ -56,7 +56,7 @@ use namespace CoC;
 			this.tallness = 144;
 			this.hips.type = Hips.RATING_CURVY + 2;
 			this.butt.type = Butt.RATING_LARGE + 1;
-			this.skinTone = "light";
+			this.bodyColor = "light";
 			this.hairColor = "red";
 			this.hairLength = 1;
 			initStrTouSpeInte(250, 200, 150, 180);
@@ -71,7 +71,6 @@ use namespace CoC;
 			this.bonusLust = 130;
 			this.lust = 30;
 			this.lustVuln = .8;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 30;
 			this.gems = 45 + rand(40);
 			this.drop = new ChainedDrop().

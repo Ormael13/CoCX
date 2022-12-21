@@ -12,6 +12,7 @@ import classes.Races;
 
 public class MinotaurTesticlesMutation extends IMutationPerkType
     {
+        private static const mName:String = "Minotaur Testicles";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -42,7 +43,7 @@ public class MinotaurTesticlesMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Minotaur Testicles" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -71,9 +72,8 @@ public class MinotaurTesticlesMutation extends IMutationPerkType
         }
 
         //Mutations Buffs
-        override public function pBuffs(target:Creature = null):Object{
+        override public function buffsForTier(pTier:int):Object {
             var pBuffs:Object = {};
-            var pTier:int = currentTier(this, (target == null)? player : target);
             if (pTier == 2) pBuffs['lib.mult'] = 0.1;
             if (pTier == 3){
                 pBuffs['str.mult'] = 0.1;
@@ -84,8 +84,7 @@ public class MinotaurTesticlesMutation extends IMutationPerkType
         }
 
         public function MinotaurTesticlesMutation() {
-            super("Minotaur Testicles IM", "Minotaur Testicles", ".");
-            maxLvl = 3;
+            super(mName + " IM", mName, SLOT_TESTICLES, 3);
         }
 
     }

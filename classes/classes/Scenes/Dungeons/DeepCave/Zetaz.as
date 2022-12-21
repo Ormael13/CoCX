@@ -33,11 +33,6 @@ public class Zetaz extends Monster
 			}
 			var select:Number=1;
 			var rando:Number=1;
-			//Exgartuan gets to do stuff!
-			if(player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) == 0 && rand(3) == 0) {
-				SceneLib.exgartuan.exgartuanCombatUpdate();
-				outputText("\n\n");
-			}
 			if(hasStatusEffect(StatusEffects.Constricted)) {
 				//Enemy struggles -
 				outputText("Your prey pushes at your tail, twisting and writhing in an effort to escape from your tail's tight bonds.");
@@ -55,23 +50,20 @@ public class Zetaz extends Monster
 				outputText("The imp lord shudders from his wounds and the pulsing member that's risen from under his tattered loincloth.  He strokes it and murmurs under his breath for a few moments.  You're so busy watching the spectacle of his masturbation that you nearly miss the sight of his bruises and wounds closing!  Zetaz releases his swollen member, and it deflates slightly.  He's used some kind of black magic to convert some of his lust into health!");
 				addHP(0.25 * maxHP());
 				lust -= 20;
-				player.dynStats("lus", 2);
+				player.takeLustDamage(2, true);
 			}
 			else {
 				var attackChoice:Number = rand(3);
 				if(attackChoice == 0) {
 					//Chucks faux-heat draft ala goblins. -
 					outputText("Zetaz grabs a bottle from a drawer and hurls it in your direction!  ");
-					if((player.hasPerk(PerkLib.Evade) && rand(4) == 0) ||
-						(player.hasPerk(PerkLib.Flexibility) && rand(6) == 0) ||
-						(player.spe > 65 && rand(10) == 0) ||
-						(player.hasPerk(PerkLib.Misdirection) && rand(100) < 20 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia"))) {
+					if(player.getEvasionRoll()) {
 						outputText("You sidestep it a moment before it shatters on the wall, soaking the tapestries with red fluid!");
 					}
 					else {
 						outputText("You try to avoid it, but the fragile glass shatters against you, coating you in sticky red liquid.  It seeps into your [skin.type] and leaves a pleasant, residual tingle in its wake.  Oh no...");
 						//[Applies: "Temporary Heat" status]
-						if(!player.hasStatusEffect(StatusEffects.TemporaryHeat)) player.createStatusEffect(StatusEffects.TemporaryHeat,0,0,0,0);
+						if(!player.hasStatusEffect(StatusEffects.TemporaryHeat)) player.createStatusEffect(StatusEffects.TemporaryHeat,0,10,0,0);
 					}
 				}
 				else if(attackChoice == 1) {
@@ -100,7 +92,7 @@ public class Zetaz extends Monster
 		
 		public function gigaArouse():void {
 			outputText("You see " + a + short + " make familiar arcane gestures at you, but his motions seem a lot more over the top than you'd expect from an imp.\n\n");
-			player.dynStats("lus", rand(player.lib/10)+player.cor/10+15);
+			player.takeLustDamage(rand(player.lib/10)+player.cor/10+15, true);
 			if(player.lust < 30) outputText("Your nethers pulse with pleasant warmth that brings to mind pleasant sexual memories.  ");
 			if(player.lust >= 30 && player.lust < 60) outputText("Blood rushes to your groin in a rush as your body is hit by a tidal-wave of arousal.  ");
 			if(player.lust >= 60) outputText("Your mouth begins to drool as you close your eyes and imagine yourself sucking off Zetaz, then riding him, letting him sate his desires in your inviting flesh.  The unnatural visions send pulses of lust through you so strongly that your body shivers.  ");
@@ -115,7 +107,7 @@ public class Zetaz extends Monster
 				if(player.lust >= 60 && player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DROOLING && player.vaginas.length > 0) outputText("Thick runners of girl-lube stream down the insides of your thighs as your crotch gives into the demonic magics.  You wonder what " + a + short + "'s cock would feel like inside you?  ");
 				if (player.lust >= 60 && player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING && player.vaginas.length == 1) outputText("Your [vagina] instantly soaks your groin with the heady proof of your need.  You wonder just how slippery you could " + a + short + "'s dick when it's rammed inside you?  ");
 			}
-			if(player.lust >= player.maxLust()) doNext(SceneLib.combat.endLustLoss);
+			if(player.lust >= player.maxOverLust()) doNext(SceneLib.combat.endLustLoss);
 		}
 
 		
@@ -123,7 +115,7 @@ public class Zetaz extends Monster
 			if(!hasStatusEffect(StatusEffects.round)) {
 				createStatusEffect(StatusEffects.round,1,0,0,0);
 				outputText("Zetaz asks, \"<i>Do you even realize how badly you fucked up my life, ");
-				if(player.isRace(Races.HUMAN)) outputText("human");
+				if(player.isRace(Races.HUMAN, 1, false)) outputText("human");
 				else outputText("'human'");
 				outputText("?  No, of course not.  That's the kind of attitude I'd expect from one of you!</i>\"");
 			}
@@ -178,7 +170,7 @@ public class Zetaz extends Monster
 			this.hips.type = Hips.RATING_BOYISH;
 			this.butt.type = Butt.RATING_TIGHT;
 			this.lowerBody = LowerBody.HOOFED;
-			this.skinTone = "red";
+			this.bodyColor = "red";
 			this.hairColor = "black";
 			this.hairLength = 5;
 			initStrTouSpeInte(125, 100, 70, 55);
@@ -193,13 +185,11 @@ public class Zetaz extends Monster
 			this.bonusLust = 120;
 			this.lust = 40;
 			this.lustVuln = .35;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = 30;
 			this.gems = rand(75) + 175;
 			this.additionalXP = 200;
 			this.drop = new WeightedDrop(consumables.BIMBOLQ, 1);
 			this.wings.type = Wings.IMP;
-			this.wings.desc = "small";
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);

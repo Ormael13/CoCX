@@ -66,7 +66,7 @@ import classes.StatusEffects;
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Neisa" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] = 1;
 			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Neisa" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] = 1;
 			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Neisa" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] = 1;
-			if (monster.HP <= monster.minHP() || monster.lust >= monster.maxLust()) enemyAI();
+			if (monster.HP <= monster.minHP() || monster.lust >= monster.maxOverLust()) enemyAI();
 		}
 		public function neisaCombatActions0():void {
 			outputText("Neisa looks for an opening in the battle.\n\n");
@@ -157,7 +157,7 @@ import classes.StatusEffects;
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Etna" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] = 1;
 			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Etna" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] = 1;
 			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Etna" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] = 1;
-			if (monster.HP <= monster.minHP() || monster.lust >= monster.maxLust()) enemyAI();
+			if (monster.HP <= monster.minHP() || monster.lust >= monster.maxOverLust()) enemyAI();
 		}
 		public function etnaCombatActions0():void {
 			outputText("Etna flies around, looking for an opportunity to strike.\n\n");
@@ -215,7 +215,7 @@ import classes.StatusEffects;
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Aurora" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] = 1;
 			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Aurora" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] = 1;
 			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Aurora" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] = 1;
-			if (monster.HP <= monster.minHP() || monster.lust >= monster.maxLust()) enemyAI();
+			if (monster.HP <= monster.minHP() || monster.lust >= monster.maxOverLust()) enemyAI();
 		}
 		public function auroraCombatActions0():void {
 			outputText("Aurora look for an opening in the battle.\n\n");
@@ -357,7 +357,7 @@ import classes.StatusEffects;
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Alvina" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] = 1;
 			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Alvina" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] = 1;
 			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Alvina" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] = 1;
-			if (monster.HP <= monster.minHP() || monster.lust >= monster.maxLust()) enemyAI();
+			if (monster.HP <= monster.minHP() || monster.lust >= monster.maxOverLust()) enemyAI();
 		}
 		public function alvinaCombatActions0():void {
 			outputText("Alvina is studying her spellbook, readying her next action.\n\n");
@@ -392,8 +392,10 @@ import classes.StatusEffects;
 			outputText("Alvina slices at [themonster] with her scythe, leaving deep wounds. ");
 			doDamage(dmg1, true, true);
 			outputText("\n\n");
-			if (monster.hasStatusEffect(StatusEffects.Hemorrhage2)) monster.addStatusValue(StatusEffects.Hemorrhage2, 1, 1);
-			else monster.createStatusEffect(StatusEffects.Hemorrhage2, 3, 0.1, 0, 0);
+			if (!monster.isImmuneToBleed()) {
+				if (monster.hasStatusEffect(StatusEffects.Hemorrhage2)) monster.addStatusValue(StatusEffects.Hemorrhage2, 1, 1);
+				else monster.createStatusEffect(StatusEffects.Hemorrhage2, 3, 0.1, 0, 0);
+			}
 		}
 		public function alvinaCombatActions4():void {
 			var damage2:Number = player.statusEffectv2(StatusEffects.CombatFollowerAlvina);
@@ -412,7 +414,7 @@ import classes.StatusEffects;
 			outputText("\"<i>[name] I am seriously going to fall asleep at this rate so if you would let me handle this...</i>\"\n\n");
 			outputText("Without any warning she opens both hands, her scythe floating by her side as she gets to work, tracing a pattern in the air as the very reality in front of you collapses! You watch in horror and awe as a swirling hole of empty blackness pulls your opponent into what looks to be a null space between dimensions. ");
 			outputText(monster.capitalA + monster.short + " reappears a few seconds later with gashes and wounds all over as the black hole, for what else could it be, collapses on itself and explodes in a deflagration of black magic so strong you are pushed back a few meters. ");
-			doDamage(dmg, true, true);
+			doMagicDamage(dmg, true, true);
 			outputText("\n\n");
 		}
 		
@@ -450,7 +452,7 @@ import classes.StatusEffects;
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Mitzi" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] = 1;
 			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Mitzi" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] = 1;
 			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Mitzi" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] = 1;
-			if (monster.HP <= monster.minHP() || monster.lust >= monster.maxLust()) enemyAI();
+			if (monster.HP <= monster.minHP() || monster.lust >= monster.maxOverLust()) enemyAI();
 		}
 		public function mitziCombatActions0():void {
 			outputText("Mitzi and her daughters stand by, waiting for an opportunity to attack.\n\n");
@@ -465,10 +467,12 @@ import classes.StatusEffects;
 		}
 		public function mitziCombatActions2():void {
 			outputText("Lildea pulls out a bubbling vial of a green liquid then tosses at [themonster]. The vial shatters on contact, causing the contents to spill onto [monster him]. ");
-			doPoisonDamage((((player.statusEffectv2(StatusEffects.CombatFollowerMitzi)/4)+20)*increasedEfficiencyOfAttacks()), true, true);
-			outputText("\n\n");
-			if (monster.hasStatusEffect(StatusEffects.PoisonDoTH)) monster.addStatusValue(StatusEffects.PoisonDoTH,1,1);
-			else monster.createStatusEffect(StatusEffects.PoisonDoTH,4,0.02,0,0);
+			if (!monster.hasPerk(PerkLib.EnemyConstructType) || !monster.hasPerk(PerkLib.EnemyGhostType)) {
+				doPoisonDamage((((player.statusEffectv2(StatusEffects.CombatFollowerMitzi)/4)+20)*increasedEfficiencyOfAttacks()), true, true);
+				outputText("\n\n");
+				if (monster.hasStatusEffect(StatusEffects.PoisonDoTH)) monster.addStatusValue(StatusEffects.PoisonDoTH, 1, 1);
+				else monster.createStatusEffect(StatusEffects.PoisonDoTH, 4, 0.02, 0, 0);
+			}
 		}
 		public function mitziCombatActions3():void {
 			var lustDmg:Number = Math.round((player.statusEffectv3(StatusEffects.CombatFollowerMitzi) / 6) * increasedEfficiencyOfAttacks());
@@ -521,7 +525,7 @@ import classes.StatusEffects;
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Excellia" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] = 1;
 			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Excellia" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] = 1;
 			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Excellia" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] = 1;
-			if (monster.HP <= monster.minHP() || monster.lust >= monster.maxLust()) enemyAI();
+			if (monster.HP <= monster.minHP() || monster.lust >= monster.maxOverLust()) enemyAI();
 		}
 		public function excelliaCombatActions0():void {
 			outputText("Excellia glares at [themonster], looking for an opportunity to strike\n\n");
@@ -565,7 +569,7 @@ import classes.StatusEffects;
 			outputText("\"<i>[name]! Hang on!</i>\"\n\n");
 			outputText("She quickly grabs you and shoves you down onto one of her leaking nipples. The restorative milk squirts into your mouth, giving you a burst of energy and healing some of your wounds.\n\n");
 			HPChange(Math.round(player.maxHP() * .25), true);
-            dynStats("lus", 5);
+            dynStats("lus", 5, "scale", false);
             fatigue(-50);
 		}
 		
@@ -603,7 +607,7 @@ import classes.StatusEffects;
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Amily" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] = 1;
 			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Amily" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] = 1;
 			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Amily" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] = 1;
-			if (monster.HP <= monster.minHP() || monster.lust >= monster.maxLust()) enemyAI();
+			if (monster.HP <= monster.minHP() || monster.lust >= monster.maxOverLust()) enemyAI();
 		}
 		public function amilyCombatActions0():void {
 			outputText("Amily remains hidden, making sure she has escaped from sight.\n\n");
@@ -637,12 +641,16 @@ import classes.StatusEffects;
 			outputText("Amily rushes out with her dagger. Blitzing through, she slices through them with a flurry of swift cuts before leaping off of them, away from view. ");
 			doDamage(dmg6, true, true);
 			outputText(" ");
-			doPoisonDamage(((player.statusEffectv2(StatusEffects.CombatFollowerAmily)/4)+20), true, true);
-			outputText("\n\n");
-			if (monster.hasStatusEffect(StatusEffects.Hemorrhage2)) monster.addStatusValue(StatusEffects.Hemorrhage2, 1, 1);
-			else monster.createStatusEffect(StatusEffects.Hemorrhage2, 3, 0.1, 0, 0);
-			if (monster.hasStatusEffect(StatusEffects.PoisonDoTH)) monster.addStatusValue(StatusEffects.PoisonDoTH,1,1);
-			else monster.createStatusEffect(StatusEffects.PoisonDoTH,4,0.02,0,0);
+			if (!monster.hasPerk(PerkLib.EnemyConstructType) || !monster.hasPerk(PerkLib.EnemyGhostType)) {
+				doPoisonDamage(((player.statusEffectv2(StatusEffects.CombatFollowerAmily)/4)+20), true, true);
+				outputText("\n\n");
+				if (!monster.isImmuneToBleed()) {
+				  if (monster.hasStatusEffect(StatusEffects.Hemorrhage2)) monster.addStatusValue(StatusEffects.Hemorrhage2, 1, 1);
+				  else monster.createStatusEffect(StatusEffects.Hemorrhage2, 3, 0.1, 0, 0);
+				}
+				if (monster.hasStatusEffect(StatusEffects.PoisonDoTH)) monster.addStatusValue(StatusEffects.PoisonDoTH,1,1);
+				else monster.createStatusEffect(StatusEffects.PoisonDoTH,4,0.02,0,0);
+			}
 		}
 		
 		public function siegweirdCombatActions():void {
@@ -725,7 +733,7 @@ import classes.StatusEffects;
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Zenji" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] = 1;
 			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Zenji" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] = 1;
 			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Zenji" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] = 1;
-			if (monster.HP <= monster.minHP() || monster.lust >= monster.maxLust()) enemyAI();
+			if (monster.HP <= monster.minHP() || monster.lust >= monster.maxOverLust()) enemyAI();
 		}
 		public function zenjiCombatActions0():void {
 			outputText("Zenji remains fixated on your opponent, ready to deflect their blows.\n\n");
@@ -836,7 +844,7 @@ import classes.StatusEffects;
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Tyrantia" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] = 1;
 			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Tyrantia" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] = 1;
 			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Tyrantia" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] = 1;
-			if (monster.HP <= monster.minHP() || monster.lust >= monster.maxLust()) enemyAI();
+			if (monster.HP <= monster.minHP() || monster.lust >= monster.maxOverLust()) enemyAI();
 		}
 		public function tyrantiaCombatActions0():void {
 			outputText("Your Drider companion stares at the [themonster], making no movements towards them.\n\n");
@@ -869,8 +877,10 @@ import classes.StatusEffects;
 				monster.createStatusEffect(StatusEffects.PouncedByCompanion,2+rand(2),0,0,0);
 			}
 			else outputText("To your surprise, Tyrantia flinches, backing off from [themonster]. They fight their way to their feet, and take a fighting stance.");
-			if (monster.hasStatusEffect(StatusEffects.Hemorrhage2)) monster.addStatusValue(StatusEffects.Hemorrhage2, 1, 1);
-			else monster.createStatusEffect(StatusEffects.Hemorrhage2, 3, 0.1, 0, 0);
+			if (!monster.isImmuneToBleed()) {
+				if (monster.hasStatusEffect(StatusEffects.Hemorrhage2)) monster.addStatusValue(StatusEffects.Hemorrhage2, 1, 1);
+				else monster.createStatusEffect(StatusEffects.Hemorrhage2, 3, 0.1, 0, 0);
+			}
 			doDamage(dmg15, true, true);
 			outputText("\n\n");
 		}

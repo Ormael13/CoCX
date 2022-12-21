@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 	import classes.*;
 	import classes.internals.*;
@@ -28,7 +28,7 @@ package classes.Scenes.NPCs
 			return str;
 		}
 		
-		public function Carrera() 
+		public function Carrera()
 		{
 			createBreastRow(Appearance.breastCupInverse("L"));
 			this.tallness = 8*12+6;
@@ -59,7 +59,7 @@ package classes.Scenes.NPCs
 			this.tallness = 72;
 			this.hips.type = Hips.RATING_CURVY;
 			this.butt.type = Butt.RATING_LARGE;
-			this.skinTone = "tan";
+			this.bodyColor = "tan";
 			this.hairColor = "turquoise";
 			this.hairLength = 7;
 			this.weaponName = "fist";
@@ -68,7 +68,6 @@ package classes.Scenes.NPCs
 			this.lustVuln = .1;
 			this.lust = 30;
 			this.drop = NO_DROP;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.horns.type = Horns.DEMON;
 			this.horns.count = 12;
 			this.wings.type = Wings.BAT_LIKE_TINY;

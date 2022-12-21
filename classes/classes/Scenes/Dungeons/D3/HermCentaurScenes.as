@@ -95,7 +95,7 @@ import classes.Scenes.SceneLib;
 			outputText(".  [EachCock] is a hard, throbbing mess by the time you're aligned behind her, so close to her drooling gash that the waves hot, slippery heat rolling off it make [eachCock] glisten, shining dully in the light.  It feels so good that it makes your head swim, and you haven't even pushed inside that black-lipped vice yet!  Almost of their own volition, your [hips] surge forward to bury your "+ cockDescript(y) +" into the demon's channel, a gush of fresh fluids splattering out to soak your loins as the unholy warmth shrouds your member in bliss.");
 
 			outputText("\n\nYour unholy companion's human-half sighs into a relaxed stupor, moaning happily at the forceful plowing of her folds.");
-			if (player.balls > 0) outputText(" Slapping wetly against hers, your [balls] ring in an increasing torrent of fleshy slaps.");
+			if (player.hasBalls()) outputText(" Slapping wetly against hers, your [balls] ring in an increasing torrent of fleshy slaps.");
 			outputText(" She props herself up on the crook of her arm and lifts a breast to her mouth, hungry for her own aphrodisiac milk.  You can't help but smile at the surge of tension and heat it brings to her steamy sex.  Even more amusing, her enormous cock starts bouncing up against her belly, flinging long ropes of liquid pre everywhere in the demon's throes of passion.  Still, she hasn't come, not yet.");
 
 			outputText("\n\nSlapping at her quivering hindquarters, you begin to truly ride your captive mare, mounting her over and over, your cock slipping and squishing through the plush, juice-drooling gash.  The black lips of her pouty pussy are drenched in a veritable ocean of estrus, soaked in liquid arousal that's already forming into a slick puddle beneath her bulk.  Her snatch moulds perfectly to your [hips] with every mighty thrust and warms your loins with own bestial fervor.  Your head in swimming from the sensations and scents, and you know you can't hold back in such circumstances for long.");
@@ -282,7 +282,7 @@ import classes.Scenes.SceneLib;
 				if (player.hasCock()) 
 				{
 					outputText(" and");
-					if (player.balls > 0) outputText(" [sack]");
+					if (player.hasBalls()) outputText(" [sack]");
 					else outputText(" " + multiCockDescriptLight());
 				}
 				outputText(" to the pervy, sexy equine.");
@@ -371,7 +371,7 @@ import classes.Scenes.SceneLib;
 
 				outputText("\n\nThe rest of your days are lived out like that, interrupted only for fresh injections of demonic chemicals and thick centaur-cum.  Amazingly, the demon's experiments bear fruit, and you have the honor of birthing the first true demon offspring - the first of many.  Though you're eventually traded to a new owner once you're well-used and other sluts have been similar prepared, you keep a sense of a perverse pride through it all.  You were the first demon mother.  You helped the new species propagate and assure their dominance over lesser forms of life, like yourself.");
 
-				dynStats("lus=", player.maxLust(), "lib", 50, "cor", 50);
+				dynStats("lus=", player.maxOverLust(), "lib", 50, "cor", 50);
 				EventParser.gameOver();
 			}
 		}
@@ -416,7 +416,7 @@ import classes.Scenes.SceneLib;
 			outputText("\n\nThe equine half of your oppressor is directly above you, dripping strands of thick, female cum onto your face while her hard cock rains its pre-jizz over [eachCock] in a show of supreme dominance.  Still, you try to rise - perhaps due to foolish pride, desire, or just sheer instinct.  The centaur drops down before you get a few inches up, smashing her cunny into your face and bearing you to the ground.  Her weight is immense, and though some is kept on her forelegs and little spread to the haunches on either side of your face, you still get buried nose-deep in sloppy, black-lipped snatch.");
 
 			outputText("\n\nThick balls settle over your neck, and you can feel the shaft of her gigantic horse-dong stretching across your [chest] towards your waist, pulsing fitfully.  With her heavy, furred body in the way, you can't get to your own loins.  Hell, you can barely breathe, and what little breath you do suck in is so filled with pheromones that your");
-			if (player.balls > 0) outputText(" [balls] feel fit to burst!");
+			if (player.hasBalls()) outputText(" [balls] feel fit to burst!");
 			else outputText(" manhood feels swollen to bursting!");
 			outputText("  Realizing the only way out will be with your tongue, you open wide");
 			if (player.tongue.type != 0) outputText(" and uncoil your inhuman length to spear");

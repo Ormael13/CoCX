@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -83,7 +83,7 @@ import classes.internals.*;
 			}
 		}
 		
-		public function Galia() 
+		public function Galia()
 		{
 			if (flags[kFLAGS.GALIA_LVL_UP] < 1) {
 				this.a = "the ";
@@ -226,10 +226,9 @@ import classes.internals.*;
 				this.weaponVerb = "claw-slash";
 				this.armorName = "leathery skin";
 			}
-			this.skinTone = "red";
+			this.bodyColor = "red";
 			this.hairColor = "black";
 			this.plural = false;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.drop = NO_DROP;
 			if (flags[kFLAGS.GALIA_LVL_UP] < 5) this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyFeralType, 0, 0, 0, 0);

@@ -7,11 +7,11 @@ package classes.IMutations
 import classes.PerkClass;
 import classes.IMutationPerkType;
 import classes.Creature;
-import classes.Player;
 import classes.Races;
 
 public class TrachealSystemMutation extends IMutationPerkType
     {
+        private static const mName:String = "Tracheal System";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -49,7 +49,7 @@ public class TrachealSystemMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Tracheal System" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -59,7 +59,8 @@ public class TrachealSystemMutation extends IMutationPerkType
                 //This helps keep the requirements output clean.
                 this.requirements = [];
                 if (pTier == 0){
-                    this.requireAnyRace(Races.MANTIS, Races.SCORPION, Races.SPIDER, Races.CANCER, Races.ATLACH_NACHA);
+                    this.requireAdaptationsMutationSlot()
+                    .requireRacialGroup(Races.InsectRaces, "Any insect race");
                 }
                 else{
                     var pLvl:int = pTier * 30;
@@ -71,9 +72,8 @@ public class TrachealSystemMutation extends IMutationPerkType
         }
 
         //Mutations Buffs
-        override public function pBuffs(target:Creature = null):Object{
+        override public function buffsForTier(pTier:int):Object {
             var pBuffs:Object = {};
-            var pTier:int = currentTier(this, (target == null)? player : target);
             if (pTier == 1){
                 pBuffs['str.mult'] = 0.01;
                 pBuffs['spe.mult'] = 0.02;
@@ -97,8 +97,7 @@ public class TrachealSystemMutation extends IMutationPerkType
         }
 
         public function TrachealSystemMutation() {
-            super("Tracheal System IM", "Tracheal System", ".");
-            maxLvl = 4;
+            super(mName + " IM", mName, SLOT_ADAPTATIONS, 4);
         }
 
     }

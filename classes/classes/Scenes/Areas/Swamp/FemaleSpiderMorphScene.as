@@ -97,7 +97,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 				if (rand(2) == 0) {
 					outputText("After you've both had your fill of talk, the spider-girl asks, \"<i>I-I w-was wondering if you'd do me a favor... I have certain... urges, and");
 					if (player.gender == 0) {
-						outputText(" o-oh nevermind, you're genderless... crap.</i>\"  She blushes and lifts her abdomen, shooting a web into the trees that she uses to escape from the awkward situation.  You're left utterly alone, once again.");
+						outputText(" o-oh never mind, you're genderless... crap.</i>\"  She blushes and lifts her abdomen, shooting a web into the trees that she uses to escape from the awkward situation.  You're left utterly alone, once again.");
 						doNext(camp.returnToCampUseOneHour);
 						return;
 					}
@@ -127,9 +127,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 		//*OPTION 1 Yes - Let Her Fuck You
 		private function voluntaryFemaleSpiderMorphRapesYou():void
 		{
-			startCombat(new FemaleSpiderMorph());
-			spriteSelect(SpriteDb.s_spidergirl);
-            CoC.instance.inCombat = false;
+			monster = new FemaleSpiderMorph();
             loseToFemaleSpiderMorph();
 		}
 
@@ -268,9 +266,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 			player.sexReward("saliva","Vaginal");
 			player.sexReward("vaginalFluids","Lips");
 			dynStats("lib", 2, "sen", 1);
-            if (!CoC.instance.inCombat)
-                doNext(camp.returnToCampUseOneHour);
-			else cleanupAfterCombat();
+            cleanupAfterCombat();
 		}
 
 		//*Defeat Male
@@ -321,7 +317,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 			outputText("You wince from the onset of tightness and wonder if you'll be able to cum like this, but she immediately shoots out more of her silky strands, sealing a perfect sheath of non-sticky fibers around your " + cockDescript(x) + ", anchored to the ring.\n\n");
 
 			outputText("\"<i>We wouldn't want me to get pregnant from a ");
-			if (!player.isRace(Races.SPIDER)) outputText("beast's seed");
+			if (!player.isRace(Races.SPIDER, 1, false)) outputText("beast's seed");
 			else outputText("strange, itinerate spider's seed");
 			outputText(", would we?</i>\" asks your captor.  Your eyes go wide, and you start to plead with her, but she quickly muffles you with a spray of webbing that blocks your mouth, but leaves your nose open.  A carapace-covered hand");
 			if (player.cockTotal() > 1) {
@@ -375,9 +371,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 
 			player.sexReward("Default","Dick");
 			dynStats("lib", 2, "sen", 1);
-            if (!CoC.instance.inCombat)
-                doNext(camp.returnToCampUseOneHour);
-			else cleanupAfterCombat();
+            cleanupAfterCombat();
 		}
 
 		//*Defeat Male - Too Big
@@ -446,20 +440,16 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 			else if (player.cumQ() < 2000) outputText("an exercise-ball sized mass of cum hanging from the tip of it, drooping over your body and sloshing wetly with all the submissive seed you pumped into it.");
 			else {
 				outputText("a person-sized mass of cum hanging from it, draped over you and filled with all the submissive seed you pumped into it.");
-				if (player.cumQ() >= 4000) outputText("  It pops, too weak to contain all that liquid pressure, soaking the both of you with your spunk!");
+				if (player.cumQ() >= 4000) outputText("  It pops, too weak to contain all that liquid pressure, soaking both of you with your spunk!");
 			}
 			outputText("  You sigh and fall into a fitful slumber, barely registering the spider-girl cutting your restraints.");
 			player.sexReward("Default","Dick");
 			dynStats("lib", 2, "sen", 1);
-            if (!CoC.instance.inCombat)
-                doNext(camp.returnToCampUseOneHour);
-			else cleanupAfterCombat();
+            cleanupAfterCombat();
 		}
 
 		public function loseToFemaleSpiderMorph():void
 		{
-			CoC.instance.inCombat = false;
-
 			if (player.gender == 0) {
 				clearOutput();
 				if (CoC.instance.inCombat)
@@ -475,7 +465,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 				],
 				CoC.instance.inCombat ?
 					"You've almost lost. The spider-girl seems horny, but reasonable, maybe you could make the upcoming rape pleasuring for both of you? Don't expect her going too light on you though...\n\n" :
-					"The spider-girl stands before you, waiting. <i>So, what do you have in mind? We can do a lot of things together..."
+					"\n\nThe spider-girl stands before you, waiting. <i>So, what do you have in mind? We can do a lot of things together...</i>"
 			);
 		}
 
@@ -485,7 +475,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 			clearOutput();
 			spriteSelect(SpriteDb.s_spidergirl);
 			outputText("The spider-girl drops to her knees and wobbles unsteadily");
-			if (monster.lust >= monster.maxLust()) outputText(", thrusting two of her carapace-covered fingertips deep into her sloppy box as she gives into her lust.  She actually has the temerity to demand, \"<i>Fuck me, fuck me now!</i>\"");
+			if (monster.lust >= monster.maxOverLust()) outputText(", thrusting two of her carapace-covered fingertips deep into her sloppy box as she gives into her lust.  She actually has the temerity to demand, \"<i>Fuck me, fuck me now!</i>\"");
 			else outputText(", too wounded to fight back or run away.");
 			if (player.lust >= 33) {
 				outputText("\n\nWhat do you do to her?");
@@ -496,8 +486,8 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 					"<b>You don't have a dick small enough to fuck her vagina.</b>  Req. a cock with area smaller than " + monster.vaginalCapacity(),
 					player.cockThatFits(monster.vaginalCapacity()) >= 0);
 				addButtonIfTrue(2, "Scissor", fSpiderMorphRape, "Req. a vagina", player.hasVagina());
+				addButton(14, "Leave", cleanupAfterCombat);
                 SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatASpiderBitch);
-				addButton(14, "Leave", cleanupAfterCombat)
 			}
 			else {
 				outputText("You're not aroused enough to rape her.");
@@ -516,7 +506,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 			outputText(".  You slap her hands away and pry her legs open, getting a nice, close look at her vagina.\n\n");
 
 			outputText("Her pussy is dark, like her nipples, though the lips of her sex are closer to a pure midnight-black than the dusky skin of those tiny nubs.  A sheen of feminine lube has built up over her vulva, making her outer labia and skin glisten noticeably in the muted sunlight that filters down to the swamp floor.  Around her vagina, the skin rapidly fades from dark chocolate back to the porcelain white of the rest of her body.  You prod and play with the moist slit, feeling the soft skin part around your fingers like a soft velvet glove.  She grows wetter in response, giving up plaintive little moans at your incursion");
-			if (monster.lust >= monster.maxLust()) outputText(" until she's panting and her tiny clit has emerged, hard as a rock");
+			if (monster.lust >= monster.maxOverLust()) outputText(" until she's panting and her tiny clit has emerged, hard as a rock");
 			outputText(".\n\n");
 
 			outputText("The spider-kin's honeyed onyx-hued pussy is irresistible, and you remove your [armor] to prepare for the coming sex.  While you're distracted, the defeated arachnid-morph begins to masturbate while watching you with wide, eager eyes.  You grab a nearby vine and yank the slut's hands away from her pussy.  She protests, but you smirk and inform her she won't get her mitts back until she gets you off.  The spider-girl nods mutely, though confusion crosses her face once you start circling her, coming up next to her chest.\n\n");
@@ -599,7 +589,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 			outputText(" for cumming early while the spastic milking motions of her quivering cunt finally bring you to the edge.\n\n");
 
 			outputText("You bottom out");
-			if (player.balls > 0) outputText(" and slap your balls into her soaked taint");
+			if (player.hasBalls()) outputText(" and slap your balls into her soaked taint");
 			outputText(", " + cockDescript(x) + " twitching");
 			if (player.cockTotal() > 1) {
 				outputText(" while the ");
@@ -642,10 +632,10 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 			clearOutput();
 			spriteSelect(SpriteDb.s_spidergirl);
 			outputText("You peel off your [armor] while you gaze disdainfully down at your prize.  ");
-			if (monster.lust >= monster.maxLust()) outputText("She's moaning plaintively and happily fingering herself, practically offering her juicy box to you.");
+			if (monster.lust >= monster.maxOverLust()) outputText("She's moaning plaintively and happily fingering herself, practically offering her juicy box to you.");
 			else outputText("She's groaning painfully and struggling to move before falling back down, legs akimbo, inadvertantly displaying her pussy to you.");
 			outputText("  Sighing, you grab her narrow frame, admiring the lightness of her body as you heft her up and position her onto her hands and knees.  ");
-			if (monster.lust >= monster.maxLust()) outputText("She mewls with disappointment.  ");
+			if (monster.lust >= monster.maxOverLust()) outputText("She mewls with disappointment.  ");
 			outputText("This is a much better position for her; ass-up, with her pussy and pucker fully exposed.\n\n");
 
 			outputText("The spider-morph looks back fearfully, but she flexes her back to raise up her abdomen and allow you easier access to her holes like the obedient slut she truly is.  You wrap your arms around the heavy, exoskeletal organ and step forward, leveraging your " + cockDescript(x) + " to slide it into her welcoming pussy.  The arachnid cunt sucks you in with a wet slurp, welcoming your cock to the oozing sheath with uncommon eagerness until the plush black pussy lips are compressing against your loins.  You have trouble not giving into the hot, moist pressure of the silken canal and rutting her like a beast then and there, but a tighter, better hole beckons for your now-lubricated fuck-stick's attention.\n\n");
@@ -667,7 +657,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 			if (y == -1) outputText("by splattering her fragrant lady-spunk into the dirt");
 			else {
 				outputText("by splattering your " + cockDescript(y));
-				if (player.balls > 0) outputText(" and balls");
+				if (player.hasBalls()) outputText(" and balls");
 				outputText(" with her copious lady-spunk");
 			}
 			outputText(".  Still a ways from a climax of your own, you toy with the insensate spider's spinnerets, tugging, pulling, and eventually prodding a finger inside their openings experimentally.  Your anal fuck-toy goes hog-wild, bucking and shivering, her whole body shaking and writhing while her moan escalates in pitch and volume until it borders on being too high-pitched to detect.\n\n");
@@ -677,7 +667,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 			outputText(" and watch her cheeks jiggle from the force of your blow.\n\n");
 
 			outputText("Fucking her like this, it doesn't take long to reach orgasm, and ");
-			if (player.balls > 0) outputText("with your balls squirming and unloading");
+			if (player.hasBalls()) outputText("with your balls squirming and unloading");
 			else outputText("prostate unloading");
 			outputText(", you pump injections of fertile cream deep into her empty bowels");
 			if (y != -1) outputText(" and pussy");

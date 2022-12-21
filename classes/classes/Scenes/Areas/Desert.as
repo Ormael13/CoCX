@@ -5,15 +5,11 @@ package classes.Scenes.Areas
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.Scenes.API.Encounters;
 import classes.Scenes.API.FnHelpers;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Desert.*;
 import classes.Scenes.SceneLib;
-
-import coc.xxc.BoundStory;
-import coc.xxc.stmts.ZoneStmt;
 
 use namespace CoC;
 
@@ -31,18 +27,18 @@ use namespace CoC;
 		{
 			onGameInit(init);
 		}
-		private var story:BoundStory;
 		
 		private var _desertEncounter:GroupEncounter = null;
 		public function get desertEncounter():GroupEncounter {
 			return _desertEncounter;
 		}
 		private function init():void {
-            const game:CoC = CoC.instance;
             const fn:FnHelpers = Encounters.fn;
 			_desertEncounter = Encounters.group("desert",
-					//game.commonEncounters,
 					{
+						name: "walk",
+						call: walkingDesertStatBoost
+					}, {
 						name: "naga",
 						when: fn.ifLevelMin(4),
 						call: nagaScene.nagaEncounter
@@ -53,22 +49,26 @@ use namespace CoC;
 						call  : sandTrapScene.encounterASandTarp
 					}, {
 						name: "sandwitch",
+						night : false,
 						when: function ():Boolean {
 							return player.level >= 3 && flags[kFLAGS.SAND_WITCH_LEAVE_ME_ALONE] == 0;
 						},
 						call: sandWitchScene.encounter
 					}, {
 						name: "cumwitch",
+						night : false,
 						when: function ():Boolean {
 							return flags[kFLAGS.CUM_WITCHES_FIGHTABLE] > 0;
 						},
 						call: SceneLib.dungeons.desertcave.fightCumWitch
 					}, {
 						name  : "wanderer",
+						night : false,
 						chance: 0.2,
 						call  : wanderer.wandererRouter
 					}, {
 						name: "sw_preg",
+						night : false,
 						when: function ():Boolean {
 							return sandWitchScene.pregnancy.event == 2;
 						},
@@ -91,6 +91,7 @@ use namespace CoC;
 						call: SceneLib.telAdre.discoverTelAdre
 					}, {
 						name  : "ants",
+						night : false,
 						when  : function ():Boolean {
 							return player.level >= 9 && flags[kFLAGS.ANT_WAIFU] == 0 && flags[kFLAGS.ANTS_PC_FAILED_PHYLLA] == 0 && flags[kFLAGS.ANT_COLONY_KEPT_HIDDEN] == 0;
 						},
@@ -143,11 +144,13 @@ use namespace CoC;
 						call  : SceneLib.exgartuan.fountainEncounter
 					}, {
 						name  : "mirage",
+						night : false,
 						chance: 0.25,
 						when  : fn.ifLevelMin(2),
 						call  : mirageDesert
 					}, {
 						name  : "oasis",
+						night : false,
 						chance: 0.25,
 						when  : fn.ifLevelMin(2),
 						call  : oasis.oasisEncounter
@@ -162,26 +165,29 @@ use namespace CoC;
 					}, {
 						//Helia monogamy fucks
 						name  : "helcommon",
+						night : false,
 						call  : SceneLib.helScene.helSexualAmbush,
 						chance: 0.2,
 						when  : SceneLib.helScene.helSexualAmbushCondition
+					}, {
+						name: "mimic",
+						chance: 0.25,
+						when: fn.ifLevelMin(3),
+						call: curry(SceneLib.mimicScene.mimicTentacleStart, 1)
+					}, {
+						name  : "desertloot",
+						chance: 0.3,
+						call  : findDesertLoot
 					});
-			story = ZoneStmt.wrap(_desertEncounter,game.rootStory).bind(game.context);
 		}
 		//Explore desert
-		public function exploreDesert():void {
-			player.exploredDesert++;
+		public function exploreDesert():void
+		{
 			clearOutput();
-			doNext(camp.returnToCampUseOneHour); // default button
-			story.execute();
-			flushOutputTextToGUI();
-		}
-		//Finding inner part of desert
-		public function discoverDesertInnerPart():void {
-			player.exploredDesert++;
-			clearOutput();
-			
 			doNext(camp.returnToCampUseOneHour);
+			player.exploredDesert++;
+			(desertEncounter as GroupEncounter).execEncounter();
+			flushOutputTextToGUI();
 		}
 
 		public function sandWitchPregnancyEvent():void {
@@ -190,12 +196,16 @@ use namespace CoC;
 		}
 
 		public function chestEncounter():void {
-			story.display("strings/chest/a");
+			clearOutput();
+			outputText("While wandering the trackless sands of the desert, you break the silent monotony with a loud 'thunk'.\n"
+				+ "You look down and realize you're standing on the lid of an old chest, somehow intact and buried in the sand. Overcome with curiosity, you dig it out, only to discover that it's empty.\n"
+				+ "\n"
+				+ "You decide to bring it back to your campsite.");
 			for (var i:int = 0; i < 6; i++) {
 				inventory.createStorage();
 			}
 			player.createKeyItem("Camp - Chest", 0, 0, 0, 0);
-			story.display("strings/chest/b");
+			outputText("\n\n<b>You now have six storage item slots at camp.</b>");
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -208,12 +218,12 @@ use namespace CoC;
 		}
 
 		public function nailsEncounter():void {
-			clearOutput();
-			story.display("strings/nails/a");
 			var extractedNail:int = 5 + rand(player.inte / 5) + rand(player.str / 10) + rand(player.tou / 10) + rand(player.spe / 20) + 5;
 			flags[kFLAGS.ACHIEVEMENT_PROGRESS_SCAVENGER] += extractedNail;
 			flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] += extractedNail;
-			story.display("strings/nails/b",{$extractedNail:extractedNail});
+			outputText("While exploring the desert, you find the wreckage of a building. Judging from the debris, it's the remains of the library that was destroyed by the fire.\n"
+				+ "\n"
+				+ "You circle the wreckage for a good while and you can't seem to find anything to salvage until something shiny catches your eye. There are exposed nails! You take your hammer out of your toolbox and you spend time extracting "+extractedNail+" nails. Some of them are bent but others are in incredibly good condition. You could use these for construction.");
 			outputText("\n\nNails: ");
 			if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2) {
 				if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 750 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 750;
@@ -223,7 +233,6 @@ use namespace CoC;
 				if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 250 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 2) flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 250;
 				outputText(flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/250")
 			}
-			doNext(camp.returnToCampUseOneHour);
 		}
 
 		public function wstaffEncounter():void {
@@ -248,7 +257,7 @@ use namespace CoC;
 		{
 			clearOutput();
 			outputText("While exploring the desert, you see a shimmering tower in the distance.  As you rush towards it, it vanishes completely.  It was a mirage!   You sigh, depressed at wasting your time.");
-			dynStats("lus", -15);
+			dynStats("lus", -15, "scale", false);
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -259,19 +268,25 @@ use namespace CoC;
 			//Chance of boost == 50%
 			if (rand(2) == 0) {
 				//50/50 strength/toughness
-				if (rand(2) == 0 && player.str < 50) {
+				if (rand(2) == 0 && player.canTrain('str', 50)) {
 					outputText("The effort of struggling with the uncertain footing has made you stronger.");
 					player.trainStat("str", 1, 50);
 					dynStats("str", .5);
 				}
 				//Toughness
-				else if (player.tou < 50) {
+				else if (player.canTrain('tou', 50)) {
 					outputText("The effort of struggling with the uncertain footing has made you tougher.");
 					player.trainStat("tou", 1, 50);
 					dynStats("tou", .5);
 				}
 			}
 			doNext(camp.returnToCampUseOneHour);
+		}
+
+		private function findDesertLoot():void {
+			clearOutput();
+			outputText("Miraculously, you spot a lone pouch lying in the sand. Opening it, you find a neatly wraped cake!\n");
+			inventory.takeItem(consumables.HDEWCAK, camp.returnToCampUseOneHour);
 		}
 	}
 }

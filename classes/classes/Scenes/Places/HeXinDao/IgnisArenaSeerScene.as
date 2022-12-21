@@ -4,15 +4,10 @@
  */
 package classes.Scenes.Places.HeXinDao 
 {
-	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.Scenes.Places.HeXinDao.IgnisArenaSeer;
 
 	public class IgnisArenaSeerScene extends HeXinDaoAbstractContent
 	{
-		public function IgnisArenaSeerScene() 
-		{}
-		
 		public function mainIgnisMenu():void {
 			clearOutput();
 			outputText("You walk up to Ignis, waving in greeting. ");
@@ -60,6 +55,7 @@ package classes.Scenes.Places.HeXinDao
 			outputText("in search of adventure or merely a more serious life, so we often ply our trade as magicians. Or tailors, as vanity and an appreciation for finer things are instilled in us at a young age.</i>\"   Suddenly, Ignis clenches his palm, the foxfire disappearing in a \"<b>fwump</b>\".");
 			doNext(ignisTalks);
 		}
+		/*
 		public function ignisTalkMagic():void {
 			clearOutput();
 			outputText("Ignis sets down his notebook. \"<i>What do you want to talk about?</i>\"");
@@ -71,6 +67,7 @@ package classes.Scenes.Places.HeXinDao
 			outputText("Ignis sets down his notebook. \"<i>What do you want to talk about?</i>\"\n\n\n\n");
 			doNext(ignisTalks);
 		}
+		 */
 		
 		public function sparringWithIgnis():void {
 			clearOutput();

@@ -1,13 +1,20 @@
 package classes {
+import classes.BodyParts.*;
 import classes.GlobalFlags.*;
-
+import classes.Items.*;
+import classes.Scenes.Places.Mindbreaker;
+import classes.Stats.BuffableStat;
+import classes.Stats.IStat;
+import classes.Stats.PrimaryStat;
+import classes.Stats.RawStat;
+import classes.Stats.StatUtils;
+import classes.StatusEffects.CombatStatusEffect;
+import coc.view.CoCLoader;
 import coc.view.MainView;
-import coc.view.StatsView;
-
-import flash.display.StageQuality;
+import flash.net.FileReference;
 import flash.text.TextFormat;
 
-import classes.SceneHunter;
+import flash.utils.ByteArray;
 
 /**
  * ...
@@ -17,13 +24,16 @@ public class GameSettings extends BaseContent {
 
     public var sceneHunter_inst:SceneHunter = new SceneHunter();
 
-	public function GameSettings() {}
-
 	public function get charviewEnabled():Boolean {
 		return flags[kFLAGS.CHARVIEWER_ENABLED];
 	}
-	public function settingsScreenMain():void {
-        CoC.instance.saves.savePermObject(false);
+
+	private var daysPerYear_temp:int; //used for storing the flag value without exiting the menu (to avoid issues while cycling through 'real' date.
+
+	public function settingsScreenMain(justOpened:Boolean = false):void {
+		CoC.instance.saves.savePermObject(false);
+		if (justOpened) daysPerYear_temp = flags[kFLAGS.DAYS_PER_YEAR];
+		else model.time.changeDPY(daysPerYear_temp);
         mainView.showMenuButton(MainView.MENU_NEW_MAIN);
 		mainView.showMenuButton(MainView.MENU_DATA);
 		clearOutput();
@@ -34,9 +44,10 @@ public class GameSettings extends BaseContent {
 		addButton(1, "Interface", settingsScreenInterfaceSettings);
 		addButton(2, "QoL", settingsScreenQoLSettings).hint("Quality of Life Settings by Jtecx.");
 		addButton(3, "Font Size", fontSettingsMenu);
-		addButton(4, "Controls", displayControls);		
+		addButton(4, "Controls", displayControls);
 		addButton(5, "Gameplay(2)", settingsScreenGameSettings2);
 		addButton(6, "SceneHunter", sceneHunter_inst.settingsPage);
+		if (debug) addButton(12, "gamedata.js", exportGameDataJs).hint("Export gamedata.js file for (new) save editor");
 		addButton(14, "Back", CoC.instance.mainMenu.mainMenu);
         if (flags[kFLAGS.HARDCORE_MODE] > 0) {
 			debug                               = false;
@@ -50,6 +61,7 @@ public class GameSettings extends BaseContent {
 	// GAMEPLAY
 	//------------
 	public function settingsScreenGameSettings():void {
+
 		clearOutput();
 		displayHeader("Gameplay Settings");
 		if (flags[kFLAGS.HARDCORE_MODE] > 0) outputText("<font color=\"#ff0000\">Hardcore mode is enabled. Cheats are disabled.</font>\n\n");
@@ -97,8 +109,18 @@ public class GameSettings extends BaseContent {
 			outputText("Automatic Leveling: <font color=\"#800000\"><b>OFF</b></font>\n Leveling up is done manually.");
 		outputText("\n\n");
 
-		outputText("<b>The following flags are not fully implemented yet (e.g. they don't apply in <i>all</i> cases where they could be relevant).</b>\n");
-		outputText("Additional note: You <b>must</b> be <i>in a game session</i> (e.g. load your save, hit \"Main Menu\", change the flag settings, and then hit \"Resume\") to change these flags. They're saved into the saveGame file, so if you load a save, it will clear them to the state in that save.");
+		outputText("<b><u>SAVE-RELATED FLAGS</u></b>\n");
+		outputText("The following flags are applied to the save - you <b>must</b> be <i>in a game session</i> (e.g. load your save, hit \"Main Menu\", change them. If you load a save, they will be set to the saved values.");
+
+		outputText("\n\n");
+		if (daysPerYear_temp == 0) {
+			outputText("Timescale: <font color=\"#008000\"><b>REAL</b></font>\n In-game date (used for holiday events) uses real date from your computer.");
+			if (flags[kFLAGS.DAYS_PER_YEAR] > 0) outputText("\n<font color=\"#800000\"><b>WARNING: your current in-game date will be erased after you exit this menu.</b></font>");
+		} else {
+			outputText("Timescale: <font color=\"#000080\"><b>DAYS ("+daysPerYear_temp+" in-game days per year)</b></font>\n In-game date is calculated from the days spent in Mareth.");
+		}
+		outputText("\nDay of the month event requirements (e.g. exact days of Easter/Thanksgiving) <b>" + (daysPerYear_temp == 0 || daysPerYear_temp == 365 ? "ARE" : "are NOT") + "</b> taken into account with the selected option.");
+
 		outputText("\n\n");
 		if (flags[kFLAGS.LOW_STANDARDS_FOR_ALL]) {
 			outputText("Low standards Mode: <font color=\"#008000\"><b>ON</b></font>\n NPCs ignore body type preferences.");
@@ -113,28 +135,29 @@ public class GameSettings extends BaseContent {
 		}
 		else
 			outputText("Hyper Happy Mode: <font color=\"#800000\"><b>OFF</b></font>\n Male enhancement potions shrink female endowments, and vice versa.");
-		outputText("\n\n");
 		menu();
 		addButton(0, "Toggle Debug", toggleDebug).hint("Turn on debug mode. Debug mode is intended for testing purposes but can be thought of as a cheat mode.  Items are infinite and combat is easy to escape from.  Weirdness and bugs are to be expected.");
 		if (player) {
 			addButton(1, "Difficulty", difficultySelectionMenu).hint("Adjust the game difficulty to make it easier or harder.");
-			if (flags[kFLAGS.GAME_DIFFICULTY] <= 0) addButton(7, "Easy Mode", toggleEasyModeFlag).hint("Toggles easy mode.  Enemy damage is 10% of normal and bad-ends can be ignored.");
+			if (flags[kFLAGS.GAME_DIFFICULTY] <= 0) addButton(7, "Easy Mode", toggleFlag, kFLAGS.EASY_MODE_ENABLE_FLAG, settingsScreenGameSettings).hint("Toggles easy mode.  Enemy damage is 10% of normal and bad-ends can be ignored.");
 			else addButtonDisabled(7, "Easy Mode", "Diffulty setting is too high to allow toggle easy mod.");
 			addButton(8, "Enable Surv", enableSurvivalPrompt).hint("Enable Survival mode. This will enable hunger. \n\n<font color=\"#080000\">Note: This is permanent and cannot be turned off!</font>");
 			addButton(9, "Enable Real", enableRealisticPrompt).hint("Enable Realistic mode. This will make the game a bit realistic. \n\n<font color=\"#080000\">Note: This is permanent and cannot be turned off! Do not turn this on if you have hyper endowments.</font>");
 			addButton(5, "Fetishes", fetishSubMenu).hint("Toggle some of the weird fetishes such as watersports and worms.");
+			addButton(10, "Timescale", timescaleCycle).hint("Change the way how time and date work in the game.");
 		}
 		else {
-			addButtonDisabled(1, "Difficulty", "Req. to have loaded any save.");
-			addButtonDisabled(7, "Easy Mode", "Req. to have loaded any save.");
-			addButtonDisabled(8, "Enable Surv", "Req. to have loaded any save.");
-			addButtonDisabled(9, "Enable Real", "Req. to have loaded any save.");
-			addButtonDisabled(5, "Fetishes", "Req. to have loaded any save.");
+			addButtonDisabled(1, "Difficulty", "Requires a loaded save.");
+			addButtonDisabled(7, "Easy Mode", "Requires a loaded save.");
+			addButtonDisabled(8, "Enable Surv", "Requires a loaded save.");
+			addButtonDisabled(9, "Enable Real", "Requires a loaded save.");
+			addButtonDisabled(5, "Fetishes", "Requires a loaded save.");
+			addButtonDisabled(10, "Timescale", "Requires a loaded save.");
 		}
-		addButton(2, "Silly Toggle", toggleSillyFlag).hint("Toggles silly mode. Funny, crazy and nonsensical scenes may occur if enabled.");
-		addButton(3, "Low Standards", toggleStandards);
-		addButton(4, "Hyper Happy", toggleHyperHappy);
-		addButton(6, "Auto level", toggleAutoLevel).hint("Toggles automatic leveling when you accumulate sufficient experience.");
+		addButton(2, "Silly Toggle", toggleFlag, kFLAGS.SILLY_MODE_ENABLE_FLAG, settingsScreenGameSettings).hint("Toggles silly mode. Funny, crazy and nonsensical scenes may occur if enabled.");
+		addButton(3, "Low Standards", toggleFlag, kFLAGS.LOW_STANDARDS_FOR_ALL, settingsScreenGameSettings);
+		addButton(4, "Hyper Happy", toggleFlag, kFLAGS.HYPER_HAPPY, settingsScreenGameSettings);
+		addButton(6, "Auto level", toggleFlag, kFLAGS.AUTO_LEVEL, settingsScreenGameSettings).hint("Toggles automatic leveling when you accumulate sufficient experience.");
 		if (flags[kFLAGS.HUNGER_ENABLED] >= 0.5) {
 			removeButton(8);
 		}
@@ -146,12 +169,352 @@ public class GameSettings extends BaseContent {
 			removeButton(1);
 			removeButton(3);
 			removeButton(4);
-			debug                               = false;
-			flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = 0;
-			flags[kFLAGS.HYPER_HAPPY]           = 0;
-			flags[kFLAGS.LOW_STANDARDS_FOR_ALL] = 0;
 		}
 		addButton(14, "Back", settingsScreenMain);
+
+		//===========================
+		function timescaleCycle():void {
+			var cycle:Array = [0, 60, 120, 180, 240, 365];
+			daysPerYear_temp = cycle[(cycle.indexOf(daysPerYear_temp) + 1) % cycle.length];
+			settingsScreenGameSettings();
+		}
+	}
+	private function exportGameDataJs():void {
+		var p:Player           = new Player();
+		var k:String;
+		var entry:Object;
+		var subentry:Object;
+		var file:FileReference = new FileReference();
+		var bytes:ByteArray    = new ByteArray();
+		// see devTools/saveEditor/js/gamedata.d.ts
+		var gamedata:Object    = {
+			version: CoC.instance.ver,
+			versionNumber: CoC.instance.modSaveVersion,
+			/** key: flag_id, value: IGDFlag */
+			flags: {},
+			/** key: perk_id, value: IGDPerk */
+			perks: {},
+			/** key: perk_id, value: IGDMutation */
+			mutations: {},
+			/** key: slot_id, value: IGDMutationSlot */
+			mutation_slots: {
+				"": {name: "Other"}
+			},
+			/** key: item_category, subkey: item_id, value: IGDItem */
+			items: {
+				armor: {},
+				consumable: {},
+				flyingsword: {},
+				headjewelry: {},
+				jewelry: {},
+				miscjewelry: {},
+				necklace: {},
+				shield: {},
+				/** value: IGDItemUndergarment */
+				undergarment: {},
+				useable: {},
+				vehicle: {},
+				weapon: {},
+				weaponrange: {},
+				
+				other: {}
+			},
+			itemTemplates: {},
+			// key: status_id
+			statuses: {},
+			// key: keyitem_id
+			keyitems: {},
+			// key: part
+			// subkey: type_id
+			bptypes: {
+				antennae: {},
+				arms: {},
+				beard: {},
+				claws: {},
+				ears: {},
+				eyes: {},
+				face: {},
+				gills: {},
+				hair: {},
+				hairstyle: {},
+				horns: {},
+				// extra properties: legCount, taur, noTail, tail
+				legs: {},
+				materials: {},
+				rear: {},
+				// extra properties: base, coat
+				skin: {},
+				// extra properties: base, coat
+				pattern: {},
+				tail: {},
+				tongue: {},
+				vagina: {},
+				wings: {}
+			},
+			// value: { name:string, rgb:string }
+			colors: [],
+			// value: { id, name, type="primary"|"buffable"|"raw", isPercentage }
+			stats: [],
+			maxBreastCup: Appearance.BREAST_CUP_NAMES.length - 1,
+			breastCups: Appearance.BREAST_CUP_NAMES,
+			itemSlotCount: p.itemSlots.length
+		};
+		// flags
+		for each(k in keys(kFLAGS, true)) {
+			if (kFLAGS[k] is Number) {
+				gamedata.flags[kFLAGS[k]] = {id: kFLAGS[k], name: k, desc: ""};
+			}
+		}
+		// perks & mutations
+		var monsterPerks:Array = PerkLib.enemyPerkList();
+		var levelupPerks:Array = PerkTree.obtainablePerks();
+		// perk requirement type -> list of extra properties
+		const perkRequirementMappings:Object = {
+			"custom":[],
+			"level": ["value"],
+			"attr": ["attr", "value"],
+			"attr-lt": ["attr", "value"],
+			"ng+": ["value"],
+			"minlust": ["value"],
+			"minsensitivity": ["value"],
+			"soulforce": ["value"], // max soulforce
+			"mana": ["value"], // max mana
+			"venom_web": ["value"], // max venom/web
+			"advanced": [], // free advanced job slot
+			"prestige": [], // free prestige job slot
+			"mutationslot": ["slot"],
+			"dragonmutation": [], // free dragon mutation slot
+			"kitsunemutation": [], // free kitsune mutation slot
+			"hungerflag": [], // hunger enabled
+			"effect": ["effect"],
+			"race": ["race", "tier"],
+			"anyrace": ["races"],
+			"perk": ["perk"],
+			"anyperk": ["perks"],
+			"allperks": ["allperks"],
+			"mutation": ["perk"]
+		};
+		function exportValue(v:*):* {
+			if (v is StatusEffectType) {
+				return (v as StatusEffectType).id;
+			} else if (v is PerkType) {
+				return (v as PerkType).id;
+			} else if (v is Race) {
+				return (v as Race).id;
+			} else if (v is Array) {
+				return v.map(varargify(exportValue));
+			} else {
+				return v;
+			}
+		}
+		for (k in PerkType.getPerkLibrary()) {
+			var pt:PerkType          = PerkType.lookupPerk(k);
+			var mt:IMutationPerkType = pt as IMutationPerkType;
+			var tags:Array           = [];
+			if (mt) {
+				gamedata.mutations[k] = {
+					id: k,
+					name: mt.name(null),
+					desc: mt.desc(null),
+					maxLevel: mt.maxLvl,
+					tags: tags,
+					slot: mt.slot
+				}
+			} else {
+				if (monsterPerks.indexOf(pt) >= 0) tags.push('monster');
+				else if (levelupPerks.indexOf(pt) >= 0) tags.push('levelup');
+				else tags.push('unobtainable');
+				entry = {
+					id: k,
+					name: pt.name(null),
+					desc: pt.desc(null),
+					tags: tags,
+					defaultValues: [pt.defaultValue1, pt.defaultValue2, pt.defaultValue3, pt.defaultValue4],
+					requirements: [],
+					unlocks: []
+				};
+				for each (var pt2:PerkType in CoC.instance.perkTree.listUnlocks(pt)) {
+					entry.unlocks.push(pt2.id);
+				}
+				for each (var r:Object in pt.requirements) {
+					subentry = {
+						text: r.text is String ? r.text : r.statictext,
+						type: r.type
+					};
+					if (r.type in perkRequirementMappings) {
+						for each (var k2:String in perkRequirementMappings[r.type]) {
+							subentry[k2] = exportValue(r[k2]);
+						}
+					}
+					entry.requirements.push(subentry);
+				}
+				gamedata.perks[k] = entry;
+			}
+		}
+		// mutation slots
+		for (k in IMutationPerkType.Slots) {
+			gamedata.mutation_slots[k] = {id:k, name:IMutationPerkType.Slots[k].name};
+		}
+		// items
+		for (k in ItemType.getItemLibrary()) {
+			var it:ItemType = ItemType.lookupItem(k);
+			entry = {name: it.longName, id: k};
+			if (it is Armor) {
+				entry.category = "armor";
+				gamedata.items.armor[k] = entry;
+			} else if (it is Consumable) {
+				entry.category = "consumable";
+				gamedata.items.consumable[k] = entry;
+			} else if (it is FlyingSwords) {
+				entry.category = "flyingsword";
+				gamedata.items.flyingsword[k] = entry;
+			} else if (it is HeadJewelry) {
+				entry.category = "headjewelry";
+				gamedata.items.headjewelry[k] = entry;
+			} else if (it is Jewelry) {
+				entry.category = "jewelry";
+				gamedata.items.jewelry[k] = entry;
+			} else if (it is MiscJewelry) {
+				entry.category = "miscjewelry";
+				gamedata.items.miscjewelry[k] = entry;
+			} else if (it is Necklace) {
+				entry.category = "necklace";
+				gamedata.items.necklace[k] = entry;
+			} else if (it is Shield) {
+				entry.category = "shield";
+				gamedata.items.shield[k] = entry;
+			} else if (it is Undergarment) {
+				entry.category = "undergarment";
+				entry.type = (it as Undergarment).type;
+				gamedata.items.undergarment[k] = entry;
+			} else if (it is Vehicles) {
+				entry.category = "vehicle";
+				gamedata.items.vehicle[k] = entry;
+			} else if (it is Weapon) {
+				entry.category = "weapon";
+				gamedata.items.weapon[k] = entry;
+			} else if (it is WeaponRange) {
+				entry.category = "weaponrange";
+				gamedata.items.weaponrange[k] = entry;
+			} else if (it is Useable) {
+				entry.category = "useable";
+				gamedata.items.useable[k] = entry;
+			} else {
+				entry.category = "other";
+				gamedata.items.other[k] = entry;
+			}
+		}
+		// item templates
+		for (k in ItemTemplate.getLibrary()) {
+			var tem:ItemTemplate = ItemTemplate.lookupTemplate(k);
+			gamedata.itemTemplates[tem.templateId] = {
+				id: tem.templateId,
+				name: tem.name,
+				metadata: deepCopy(tem.metadata)
+			}
+		}
+		// statuses
+		for (k in StatusEffectType.getStatusEffectLibrary()) {
+			var st:StatusEffectType = StatusEffectType.lookupStatusEffect(k);
+			gamedata.statuses[k] = {
+				id: k,
+				combat: st.create(0,0,0,0) is CombatStatusEffect
+			}
+		}
+		// body part types
+		// [target, enumValues, extraProperties]
+		// extra props - array of propname or [nameInSource, nameInTarget]
+		var bprec:Array = [
+			[gamedata.bptypes.antennae, Antennae.Types],
+			[gamedata.bptypes.arms, Arms.Types],
+			[gamedata.bptypes.beard, Beard.Types],
+			[gamedata.bptypes.claws, Claws.Types],
+			[gamedata.bptypes.ears, Ears.Types],
+			[gamedata.bptypes.eyes, Eyes.Types],
+			[gamedata.bptypes.face, Face.Types],
+			[gamedata.bptypes.gills, Gills.Types],
+			[gamedata.bptypes.hair, Hair.Types],
+			[gamedata.bptypes.hairstyle, Hair.Styles],
+			[gamedata.bptypes.horns, Horns.Types],
+			[gamedata.bptypes.legs, LowerBody.Types, ["legCount","canTaur","noTail","tail"]],
+			[gamedata.bptypes.materials, BodyMaterial.Types],
+			[gamedata.bptypes.rear, RearBody.Types],
+			[gamedata.bptypes.skin, Skin.SkinTypes, ["base","coat",["name","desc"],"adj"]],
+			[gamedata.bptypes.pattern, Skin.PatternTypes, ["base","coat"]],
+			[gamedata.bptypes.tail, Tail.Types],
+			[gamedata.bptypes.tongue, Tongue.Types],
+			[gamedata.bptypes.vagina, VaginaClass.Types],
+			[gamedata.bptypes.wings, Wings.Types, ["desc"]]
+		];
+		for each (var a:Array in bprec) {
+			// a = [ target, EnumValue[], extra_props ]
+			for each (var ev:Object in a[1]) {
+				if (!ev) continue;
+				entry = {
+					value: ev.value,
+					name: ev.name,
+					id: ev.id
+				};
+				if (a[2]) {
+					for each (var o:* in a[2]) {
+						if (o is Array) {
+							// [exported_name, enumvalue_name]
+							entry[o[1]] = ev[o[0]]
+						} else {
+							entry[o] = ev[o];
+						}
+					}
+				}
+				a[0][ev.value] = entry;
+			}
+		}
+		// colors
+		var model:XML = XML(CoCLoader.getEmbedText("res/model.xml"));
+		var map:Object = {}
+		for each(var prop:XML in model.palette.property) {
+			for each (var color:XML in prop.color) {
+				k = color.@name.toString();
+				map[k] = {
+					name: k,
+					rgb: color.text().toString()
+				};
+			}
+		}
+		for each(color in model.palette.common.color) {
+			k = color.@name.toString();
+			map[k] = {
+				name: k,
+				rgb: color.text().toString()
+			};
+		}
+		gamedata.colors = values(map).sort();
+		// stats
+		for each (var stat:IStat in p.statStore.allStats()) {
+			entry = {
+				id: stat.statName,
+				name: StatUtils.nameOfStat(stat.statName),
+				isPercentage: StatUtils.isPercentageStat(stat.statName)
+			};
+			if (stat is BuffableStat) {
+				entry.type = "buffable";
+				entry.base = (stat as BuffableStat).base;
+				entry.aggregate = (stat as BuffableStat).aggregate;
+			} else if (stat is RawStat) {
+				entry.type = "raw";
+			} else if (stat is PrimaryStat) {
+				entry.type = "primary";
+			} else {
+				entry.type = "unknown"
+			}
+			gamedata.stats.push(entry);
+		}
+		
+		bytes.writeUTFBytes(
+				"// GENERATED FOR " + CoC.instance.version + "\n" +
+				"/** @type {IExportedGameData} */\n" +
+				"let ExportedGamedata=");
+		bytes.writeUTFBytes(JSON.stringify(gamedata));
+		file.save(bytes, "gamedata.js");
 	}
 	public function settingsScreenGameSettings2():void {
 		clearOutput();
@@ -196,33 +559,26 @@ public class GameSettings extends BaseContent {
 		else
 			outputText("Intelligence Scaling: <font color=\"#800000\"><b>Old</b></font>\n Values are more random and a bit lower on average than in new scaling.");
 		outputText("\n\n");
-		if (flags[kFLAGS.MELEE_DAMAGE_OVERHAUL] >= 1) {
-			outputText("Damage Overhaul: <font color=\"#008000\"><b>On</b></font>\n Damage uses new calculation system.");
-		}
-		else
-			outputText("Damage Overhaul: <font color=\"#800000\"><b>Off</b></font>\n Damage uses old calculation system.");
-		outputText("\n\n");
 		if (flags[kFLAGS.ITS_EVERY_DAY]) {
 			outputText("Eternal Holiday Mode: <font color=\"#008000\"><b>ON</b></font>\n All holiday events like Eastern/X-mas and etc. can happen at any day of the year.");
 		}
 		else
 			outputText("Eternal Holiday Mode: <font color=\"#800000\"><b>OFF</b></font>\n All holiday events happen only during their respective holiday times.");
 		outputText("\n\n");
-		if (flags[kFLAGS.NO_GORE_MODE] >= 1) {
-			outputText("No Blood Mode: <font color=\"#008000\"><b>ON</b></font>\n Excessive Bloody or Gore scenes variants are disabled.");
-		}
-		else
-			outputText("No Blood Mode: <font color=\"#800000\"><b>OFF</b></font>\n Excessive Bloody or Gore scenes variants are enabled.");
 		menu();
-		addButton(0, "Eternal Holiday", toggleEternalHoliday).hint("Toggles eternal holiday mode. All holiday events like Eastern/X-mas and etc. can happen at any day of the year.");
-		addButton(1, "No Blood Toggle", toggleNOGORE).hint("Toggles No Blood Mode. If enabled, scenes could have more gruesome/bloody variants showed. Not for the weak of heart players.");
+
+		addButton(0, "Eternal Holiday", toggleFlag, kFLAGS.ITS_EVERY_DAY, settingsScreenGameSettings2).hint("Toggles eternal holiday mode. All holiday events like Eastern/X-mas and etc. can happen at any day of the year.");
 		addButton(2, "Sec.Mon.Stat", difficultySelectionMenu2).hint("Adjusts monsters secondary stats multiplier to make game easier or harder.");
-		addButton(3, "Damage Overhaul", toggleDamageOverhaul).hint("Toggles Damage Overhaul. If enabled, melee and range attacks would deal random damage between 15% to 115%. Int and Wis could increase both values.");
-		addButton(5, "Wis scaling", toggleWisScaling).hint("Toggles Wisdom scaling for all attacks using it. If enabled, wisdom scaling would be less random with big generally a bit higher values on average.");
-		addButton(6, "Int scaling", toggleIntScaling).hint("Toggles Intelligance scaling for all attacks using it. If enabled, intelligence scaling would be less random with values being a bit higher on average.");
-		addButton(7, "Str scaling", toggleStrScaling).hint("Toggles Strength scaling for all attacks using it. If enabled, strength scaling would be less random with values being a bit higher on average.");
-		addButton(8, "Spe scaling", toggleSpeScaling).hint("Toggles Speed scaling for all attacks using it. If enabled, speed scaling would be less random with values being a bit higher on average.");
+		addButton(5, "Wis scaling", toggleFlag, kFLAGS.WISDOM_SCALING, settingsScreenGameSettings2).hint("Toggles Wisdom scaling for all attacks using it. If enabled, wisdom scaling would be less random with big generally a bit higher values on average.");
+		addButton(6, "Int scaling", toggleFlag, kFLAGS.INTELLIGENCE_SCALING, settingsScreenGameSettings2).hint("Toggles Intelligance scaling for all attacks using it. If enabled, intelligence scaling would be less random with values being a bit higher on average.");
+		addButton(7, "Str scaling", toggleFlag, kFLAGS.STRENGTH_SCALING, settingsScreenGameSettings2).hint("Toggles Strength scaling for all attacks using it. If enabled, strength scaling would be less random with values being a bit higher on average.");
+		addButton(8, "Spe scaling", toggleFlag, kFLAGS.SPEED_SCALING, settingsScreenGameSettings2).hint("Toggles Speed scaling for all attacks using it. If enabled, speed scaling would be less random with values being a bit higher on average.");
 		addButton(14, "Back", settingsScreenMain);
+	}
+
+	public function toggleFlag(flagID:int, menuFun:Function):void {
+		flags[flagID] = !flags[flagID];
+		menuFun();
 	}
 
 	public function settingsScreenQoLSettings():void{
@@ -234,6 +590,7 @@ public class GameSettings extends BaseContent {
 		mutationsSpoilersSetting();
 		simpPerkSetting();
 		invMgmtSetting();
+		USSdisplayOpt();
 
 		outputText("\n\n");
 		menu();
@@ -242,6 +599,7 @@ public class GameSettings extends BaseContent {
 		addButton(1, "Mutation Assist", flagUpdate, kFLAGS.MUTATIONS_SPOILERS, 1).hint("Mutation Tracker Spoiler Mode. For when you want to discover mutations by yourself, or with some help.");
 		addButton(2, "PerkView Simplfied", flagUpdate, kFLAGS.NEWPERKSDISPLAY, 1).hint("Simplified Perk Viewing. So duplicate entries/tiers don't show up.");
 		addButton(3, "Inventory Mgmt", flagUpdate, kFLAGS.INVT_MGMT_TYPE, 1).hint("Toggle between existing SHIFT to remove items vs an extra menu. Recommended to enable for Mobile users.");
+		addButton(4,"USS Display Opt.", flagUpdate, kFLAGS.USSDISPLAY_STYLE,1).hint("Switches between USS Display options.");
 		addButton(14, "Back", settingsScreenMain);
 
 		function fastLvlSettings():void{
@@ -290,27 +648,23 @@ public class GameSettings extends BaseContent {
 			outputText("\n\n");
 		}
 
+		function USSdisplayOpt():void{
+			if (flags[kFLAGS.USSDISPLAY_STYLE] > 0){
+				outputText("USS Display: <b>Default</b>\n All options will be shown.");
+			}
+			else{
+				outputText("Inventory Mgmt: <b>Shuffled</b>\n Options that can be used will show up first.");
+			}
+			outputText("This toggle is used to hide extra scenes.");
+			outputText("\n\n");
+		}
+
 		function flagUpdate(flag:*, max:int = 1):void{
 			flags[flag]++;
 			if (flags[flag] > max) flags[flag] = 0;
 			settingsScreenQoLSettings();
 		}
 	}
-
-	/* [INTERMOD: Revamp]
-	 public function togglePrison():void
-	 {
-	 //toggle prison
-	 if (flags[kFLAGS.PRISON_ENABLED])
-	 flags[kFLAGS.PRISON_ENABLED] = false;
-	 else
-	 flags[kFLAGS.PRISON_ENABLED] = true;
-
-	 mainView.showMenuButton(MainView.MENU_DATA);
-	 settingsScreenGameSettings();
-	 return;
-	 }
-	 */
 
 	public function toggleDebug():void {
 		//toggle debug
@@ -341,38 +695,6 @@ public class GameSettings extends BaseContent {
 		flags[kFLAGS.GAME_DIFFICULTY] = difficulty;
 		settingsScreenGameSettings();
 	}
-
-	public function toggleEasyModeFlag():void {
-		//toggle easy mode
-		if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 0) flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = 1;
-		else flags[kFLAGS.EASY_MODE_ENABLE_FLAG] = 0;
-		settingsScreenGameSettings();
-	}
-
-	public function toggleSillyFlag():void {
-		//toggle silly mode
-		flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] = !flags[kFLAGS.SILLY_MODE_ENABLE_FLAG];
-		settingsScreenGameSettings();
-	}
-
-	public function toggleStandards():void {
-		//toggle low standards
-		flags[kFLAGS.LOW_STANDARDS_FOR_ALL] = !flags[kFLAGS.LOW_STANDARDS_FOR_ALL];
-		settingsScreenGameSettings();
-	}
-
-	public function toggleHyperHappy():void {
-		//toggle hyper happy
-		flags[kFLAGS.HYPER_HAPPY] = !flags[kFLAGS.HYPER_HAPPY];
-		settingsScreenGameSettings();
-	}
-
-	public function toggleAutoLevel():void {
-		if (flags[kFLAGS.AUTO_LEVEL] < 1) flags[kFLAGS.AUTO_LEVEL] = 1;
-		else flags[kFLAGS.AUTO_LEVEL] = 0;
-		settingsScreenGameSettings();
-	}
-
 
 //Survival Mode
 	public function enableSurvivalPrompt():void {
@@ -407,16 +729,11 @@ public class GameSettings extends BaseContent {
 
 	public function fetishSubMenu():void {
 		menu();
-		addButton(0, "Watersports", toggleWatersports).hint("Toggles watersports scenes. (Scenes related to urine fetish)"); //Enables watersports.
+		addButton(0, "Watersports", toggleFlag, kFLAGS.WATERSPORTS_ENABLED, fetishSubMenu).hint("Toggles watersports scenes. (Scenes related to urine fetish)","Watersports "+(flags[kFLAGS.WATERSPORTS_ENABLED] < 1? "OFF" : "ON")); //Enables watersports.
 		if (player.hasStatusEffect(StatusEffects.WormsOn) || player.hasStatusEffect(StatusEffects.WormsOff)) addButton(1, "Worms", toggleWormsMenu).hint("Enable or disable worms. This will NOT cure infestation, if you have any.");
 		else addButtonDisabled(1, "Worms", "Find the sign depicting the worms in the mountains to unlock this.");
+		addButtonIfTrue(2, "Mindbreaker", toggleMindbreaker, "You are too late, you cannot turn back now!", Mindbreaker.MindBreakerQuest < Mindbreaker.QUEST_STAGE_ISMB,"Toggles Mindbreaker scenes.", "Mindbreaker "+(Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_MBOFF? "OFF":"ON"));
 		addButton(4, "Back", settingsScreenGameSettings);
-	}
-
-	public function toggleWatersports():void {
-		if (flags[kFLAGS.WATERSPORTS_ENABLED] < 1) flags[kFLAGS.WATERSPORTS_ENABLED] = 1;
-		else flags[kFLAGS.WATERSPORTS_ENABLED] = 0;
-		fetishSubMenu();
 	}
 
 	private function toggleWormsMenu():void {
@@ -452,46 +769,12 @@ public class GameSettings extends BaseContent {
 		toggleWormsMenu();
 	}
 
-	public function toggleEternalHoliday():void {
-		//toggle eternal holiday
-		flags[kFLAGS.ITS_EVERY_DAY] = !flags[kFLAGS.ITS_EVERY_DAY];
-		settingsScreenGameSettings2();
-	}
-
-	public function toggleNOGORE():void {
-		if (flags[kFLAGS.NO_GORE_MODE] < 1) flags[kFLAGS.NO_GORE_MODE] = 1;
-		else flags[kFLAGS.NO_GORE_MODE] = 0;
-		settingsScreenGameSettings2();
-	}
-
-	public function toggleStrScaling():void {
-		if (flags[kFLAGS.STRENGTH_SCALING] < 1) flags[kFLAGS.STRENGTH_SCALING] = 1;
-		else flags[kFLAGS.STRENGTH_SCALING] = 0;
-		settingsScreenGameSettings2();
-	}
-
-	public function toggleSpeScaling():void {
-		if (flags[kFLAGS.SPEED_SCALING] < 1) flags[kFLAGS.SPEED_SCALING] = 1;
-		else flags[kFLAGS.SPEED_SCALING] = 0;
-		settingsScreenGameSettings2();
-	}
-
-	public function toggleWisScaling():void {
-		if (flags[kFLAGS.WISDOM_SCALING] < 1) flags[kFLAGS.WISDOM_SCALING] = 1;
-		else flags[kFLAGS.WISDOM_SCALING] = 0;
-		settingsScreenGameSettings2();
-	}
-
-	public function toggleIntScaling():void {
-		if (flags[kFLAGS.INTELLIGENCE_SCALING] < 1) flags[kFLAGS.INTELLIGENCE_SCALING] = 1;
-		else flags[kFLAGS.INTELLIGENCE_SCALING] = 0;
-		settingsScreenGameSettings2();
-	}
-
-	public function toggleDamageOverhaul():void {
-		if (flags[kFLAGS.MELEE_DAMAGE_OVERHAUL] < 1) flags[kFLAGS.MELEE_DAMAGE_OVERHAUL] = 1;
-		else flags[kFLAGS.MELEE_DAMAGE_OVERHAUL] = 0;
-		settingsScreenGameSettings2();
+	public function toggleMindbreaker():void {
+		if (Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_MBOFF)
+			Mindbreaker.MindBreakerQuest = Mindbreaker.QUEST_STAGE_NOT_STARTED;
+		else if (Mindbreaker.MindBreakerQuest < Mindbreaker.QUEST_STAGE_ISMB)
+				Mindbreaker.MindBreakerQuest = Mindbreaker.QUEST_STAGE_MBOFF
+		fetishSubMenu();
 	}
 	
 	public function difficultySelectionMenu2():void {
@@ -523,15 +806,6 @@ public class GameSettings extends BaseContent {
 	public function settingsScreenInterfaceSettings():void {
 		clearOutput();
 		displayHeader("Interface Settings");
-
-		/*if (flags[kFLAGS.USE_OLD_INTERFACE] >= 1)
-		 {
-		 outputText("Stats Pane Style: <b>Old</b>\n Old stats panel will be used.");
-		 }
-		 else
-		 outputText("Stats Pane Style: <b>New</b>\n New stats panel will be used.");
-
-		 outputText("\n\n");*/
 
 		if (flags[kFLAGS.USE_OLD_FONT] >= 1) {
 			outputText("Font: <b>Lucida Sans Typewriter</b>\n");
@@ -602,7 +876,7 @@ public class GameSettings extends BaseContent {
 		outputText("\n\n");
 
 		menu();
-		addButton(0, "Side Bar Font", toggleFont).hint("Toggle between old and new font for side bar.");
+		addButton(0, "Side Bar Font", toggleFlag, kFLAGS.USE_OLD_FONT, settingsScreenInterfaceSettings).hint("Toggle between old and new font for side bar.");
 		addButton(1, "Main BG", menuMainBackground).hint("Choose a background for main game interface.");
 		addButton(2, "Text BG", menuTextBackground).hint("Choose a background for text.");
 		addButton(3, "Sprites", menuSpriteSelect).hint("Turn sprites on/off and change sprite style preference.");
@@ -611,7 +885,7 @@ public class GameSettings extends BaseContent {
 		addButton(6, "Time Format", toggleTimeFormat).hint("Toggles between 12-hour and 24-hour format.");
 		addButton(7, "Measurements", toggleMeasurements).hint("Switch between imperial and metric measurements.  \n\nNOTE: Only applies to your appearance screen.");
 		addButton(8, "Toggle CharView", toggleCharViewer).hint("Turn PC visualizer on/off.");
-		addButton(9, "Charview Armor",toggleCharViewerArmor).hint("Turn PC armor and underwear display on/off");
+		addButton(9, "Charview Armor",toggleFlag, kFLAGS.CHARVIEW_ARMOR_HIDDEN, settingsScreenInterfaceSettings).hint("Turn PC armor and underwear display on/off");
 		addButton(14, "Back", settingsScreenMain);
 	}
 	public function menuMainBackground():void {
@@ -657,24 +931,6 @@ public class GameSettings extends BaseContent {
 		settingsScreenInterfaceSettings();
 	}
 
-	public function toggleCharViewerArmor():void {
-		flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] = flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] ? 0 : 1;
-		settingsScreenInterfaceSettings();
-	}
-    
-
-	public function toggleInterface():void {
-		if (flags[kFLAGS.USE_OLD_INTERFACE] < 1) flags[kFLAGS.USE_OLD_INTERFACE] = 1;
-		else flags[kFLAGS.USE_OLD_INTERFACE] = 0;
-		settingsScreenInterfaceSettings();
-	}
-
-	public function toggleFont():void {
-		if (flags[kFLAGS.USE_OLD_FONT] < 1) flags[kFLAGS.USE_OLD_FONT] = 1;
-		else flags[kFLAGS.USE_OLD_FONT] = 0;
-		settingsScreenInterfaceSettings();
-	}
-
 	public function setMainBackground(type:int):void {
 			flags[kFLAGS.BACKGROUND_STYLE]     = type;
 			mainViewManager.setTheme();
@@ -696,27 +952,6 @@ public class GameSettings extends BaseContent {
 
 	}
 
-	//Needed for keys
-	public function cycleBackground():void {
-		if (!mainView.textBGWhite.visible) {
-			mainView.textBGWhite.visible = true;
-		}
-		else if (!mainView.textBGTan.visible) {
-			mainView.textBGTan.visible = true;
-		}
-		else {
-			mainView.textBGWhite.visible = false;
-			mainView.textBGTan.visible   = false;
-		}
-	}
-
-	public function cycleQuality():void {
-        if (CoC.instance.stage.quality == StageQuality.LOW) CoC.instance.stage.quality = StageQuality.MEDIUM;
-        else if (CoC.instance.stage.quality == StageQuality.MEDIUM) CoC.instance.stage.quality = StageQuality.HIGH;
-        else if (CoC.instance.stage.quality == StageQuality.HIGH) CoC.instance.stage.quality = StageQuality.LOW;
-        settingsScreenInterfaceSettings();
-	}
-
 	public function toggleImages():void {
 		if (flags[kFLAGS.IMAGEPACK_OFF] < 1) flags[kFLAGS.IMAGEPACK_OFF] = 1;
 		else flags[kFLAGS.IMAGEPACK_OFF] = 0;
@@ -729,17 +964,6 @@ public class GameSettings extends BaseContent {
 		settingsScreenInterfaceSettings();
 	}
 
-	/* [INTERMOD: Revamp
-	 public function toggleQuickLoadConfirm():void {
-	 flags[kFLAGS.DISABLE_QUICKLOAD_CONFIRM] ^= 1; // Bitwise XOR. Neat trick to toggle between 0 and 1
-	 settingsScreenInterfaceSettings();
-	 }
-
-	 public function toggleQuickSaveConfirm():void {
-	 flags[kFLAGS.DISABLE_QUICKSAVE_CONFIRM] ^= 1; // Bitwise XOR. Neat trick to toggle between 0 and 1
-	 settingsScreenInterfaceSettings();
-	 }
-	 */
 	public function toggleMeasurements():void {
 		if (flags[kFLAGS.USE_METRICS] < 2) flags[kFLAGS.USE_METRICS] += 1;
 		else flags[kFLAGS.USE_METRICS] = 0;

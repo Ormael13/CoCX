@@ -56,10 +56,10 @@ public class SandMother extends Monster
 			//Interrupted:
 			else {
 				if (player.hasStatusEffect(StatusEffects.Blizzard)) {
-					outputText("Thumbling back to the ground from your damaging hit, the Sand Mother grabs at her head, one flame going out.  She recovers in time to grab the staff and fling it towards you, but it's at a fraction of the strength she intended.  Still, it burns all the same. ");
+					outputText("Tumbling back to the ground from your damaging hit, the Sand Mother grabs at her head, one flame going out.  She recovers in time to grab the staff and fling it towards you, but it's at a fraction of the strength she intended.  Still, it burns all the same. ");
 				}
 				else {
-					outputText("Thumbling back to the ground from your damaging hit, the Sand Mother grabs at her head, one flame going out.  She recovers in time to grab the staff and fling it towards you, but it's at a fraction of the strength she intended.  Still, it burns all the same. ");
+					outputText("Tumbling back to the ground from your damaging hit, the Sand Mother grabs at her head, one flame going out.  She recovers in time to grab the staff and fling it towards you, but it's at a fraction of the strength she intended.  Still, it burns all the same. ");
 				}
 			}
 			if (player.hasStatusEffect(StatusEffects.Blizzard)) {
@@ -71,7 +71,7 @@ public class SandMother extends Monster
 			damage = player.takeFireDamage(damage, true);
 			removeStatusEffect(StatusEffects.Gigafire);
 		}
-			
+		
 		//*Telekinesis
 		//Throws the PC against the wall.  Does more damage to shorter, thinner PCs.
 		public function sandMotherTelekinesis():void {
@@ -106,7 +106,7 @@ public class SandMother extends Monster
 		public function getWhispered():void {
 			outputText("Mouthing, \"<i>Can you hear me?</i>\" the witch's voice intrudes into your mind, matching her mouth word for word.  She floods your psyche with words and thoughts, all of your defeat or submission, each more degrading and more humiliating than the last.  Perhaps the worst are the ones where she turns you over to Lethice after you're broken...  The tumultous thoughts and emotions both stun and arouse you, preventing you from attacking while you try to clear your beleaguered consciousness.");
 			player.createStatusEffect(StatusEffects.Whispered,0,0,0,0);
-			player.dynStats("lus", 15);
+			player.takeLustDamage(15, true);
 		}
 		public function sandStormAttack():void {
 			outputText("With a smirk, the Sand Mother decrees, \"<i>You fight not just me, but the shifting sands as well.</i>\"  She casually flicks her wrist, and sand rises up from the floors, the walls, everywhere really.  It begins to spin about, blown by an unseen wind, and the entire chamber is wreathed in a shifting sandstorm.  The grit constantly tries to get into your eyes.  It's likely you're going to be blinded by it every now and then.");
@@ -141,7 +141,7 @@ public class SandMother extends Monster
 			this.tallness = 8*12+6;
 			this.hips.type = Hips.RATING_CURVY;
 			this.butt.type = Butt.RATING_LARGE;
-			this.skinTone = "bronzed";
+			this.bodyColor = "bronzed";
 			this.hairColor = "platinum-blonde";
 			this.hairLength = 15;
 			initStrTouSpeInte(64, 80, 55, 64);
@@ -158,7 +158,6 @@ public class SandMother extends Monster
 			this.bonusLust = 112;
 			this.lust = 20;
 			this.lustVuln = .6;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 12;
 			this.gems = rand(30) + 70;
 			this.createPerk(PerkLib.Resolute,0,0,0,0);

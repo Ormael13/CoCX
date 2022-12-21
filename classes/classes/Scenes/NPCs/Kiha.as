@@ -7,7 +7,6 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
-import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.*;
 import classes.Scenes.SceneLib;
@@ -17,14 +16,21 @@ public class Kiha extends Monster
 	{
 		private function kihaTimeWaster():void {
 			outputText("She supports the axe on a shoulder, cracking her neck and arching her back to stretch herself, giving you an unintended show.  ");
-			player.dynStats("lus", 5);
+			player.takeLustDamage(5, true);
+		}
+
+		private function finalizeDamage(damage:int):int {
+			if (flags[kFLAGS.KIHA_LVL_UP] >= 1) damage *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.1));
+			if (flags[kFLAGS.KIHA_LVL_UP] >= 8) damage *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.2));
+			if (flags[kFLAGS.KIHA_LVL_UP] >= 13) damage *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.3));
+			return damage;
 		}
 
 		//This could be silly mode worthy! Should Expand? oh ok
 		private function sillyModeKihaAttack():void {
 			outputText("Before you can stop to think, the dragon-woman steps back - throwing her axe into the air before she starts sprinting towards you. In seconds she's reached a hair's distance between her lithe form and your own, her fist recoiling and time seemingly stopping to allow you to note the powerful energy seeping from her arms.  ");
 			//Miss:
-			if(player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80) {
+			if(player.speedDodge(this)>0) {
 				outputText("You take the opportunity to walk away, watching the slow-motion attack unravel before you; the fire bursts from her knuckle in the shape of a bird in flight, wings unfurled.  ");
 				if(rand(2) == 0) outputText("You only owned an XJasun back home, so you don't really understand the reference.");
 				else outputText("You stifle a laugh as your memories turn to many an evening spent with your friends in front of your SharkCube console, contesting each other in games of ridiculous, stylized combat.");
@@ -33,21 +39,17 @@ public class Kiha extends Monster
 				//Determine damage - str modified by enemy toughness!
 				var damage:int = int((str + weaponAttack) - rand(player.tou) - player.armorDef);
 				damage += 5;
-				if (flags[kFLAGS.KIHA_LVL_UP] >= 1) damage *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.1));
-				if (flags[kFLAGS.KIHA_LVL_UP] >= 8) damage *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.2));
-				if (flags[kFLAGS.KIHA_LVL_UP] >= 13) damage *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.3));
-				damage = Math.round(damage);
+				damage = finalizeDamage(damage);
 				if (player.hasStatusEffect(StatusEffects.Blizzard)) {
 					player.addStatusValue(StatusEffects.Blizzard, 1, -1);
 					damage *= 0.2;
-					damage = Math.round(damage);
 				}
 				
 				outputText("A torrent of heat bursts from between her fingertips as she thrusts her clenched fist forward, the ball of intense flame writhing and burning with a fury unknown to mankind. With one fell swoop, the combined power of her love, anger, and sorrow pushes you backward, launching you out of the swamp and into Marble's pillowy chest. \"<i>Ara ara,</i>\" she begins, but you've already pushed yourself away from the milky hell-prison as you run back towards ");
 				if(!SceneLib.kihaFollower.followerKiha()) outputText("the swamp");
 				else outputText("the fight");
 				outputText(". ");
-				damage = player.takeFireDamage(damage, true);
+				player.takeFireDamage(damage, true);
 				outputText("\n");
 				if(player.HP >= 1) outputText("You follow the shrill cry of \"<i>B-BAKA!</i>\" in the distance until you reach the exact location you were in a few seconds earlier, prepared to fight again.");
 			}
@@ -57,30 +59,15 @@ public class Kiha extends Monster
 			outputText("The draconic girl throws her trusty weapon into the sodden ground, using the distraction to build up balls of flame around her fists.  She runs towards you, launching herself in your direction with a flurry of punches.\n");
 
 			//Dodged
-			if(player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80) {
+			if(player.getEvasionRoll()) {
 				outputText("You manage to jump to the side, intense heat rushing past you as you narrowly avoid her advance.  You twist around, finding that she's reunited with her axe and angrier than before.");
-			}
-			//Determine if evaded
-			else if(player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
-				outputText("Using your skills at evasion, you manage to jump to the side, intense heat rushing past you as you narrowly avoid her advance.  You twist around, finding that she's reunited with her axe and angrier than before.");
-			}
-			//("Misdirection"
-			else if(player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
-				outputText("Using your skills at misdirection, you manage to make Kiha think you're going to dodge one way before stepping in the other direction.  You turn back, finding she has her axe in hand and looks rather steamed.");
-			}
-			//Determine if cat'ed
-			else if(player.hasPerk(PerkLib.Flexibility) && rand(100) < 6) {
-				outputText("Using your cat-like reflexes, you manage to jump to the side, intense heat rushing past you as you narrowly avoid her advance.  You twist around, finding that she's reunited with her axe and angrier than before.");
 			}
 			//HIT!
 			else {
 				var damage:int = int((str) - (player.armorDef));
-				if (flags[kFLAGS.KIHA_LVL_UP] >= 1) damage *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.1));
-				if (flags[kFLAGS.KIHA_LVL_UP] >= 8) damage *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.2));
-				if (flags[kFLAGS.KIHA_LVL_UP] >= 13) damage *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.3));
-				damage = Math.round(damage);
+				damage = finalizeDamage(damage);
 				outputText("Before you can react, you're struck by the power of her blows, feeling an intense pain in your chest as each fist makes contact.  With a final thrust, you're pushed backwards onto the ground; the dragoness smiles as she pulls her axe out of the ground, her hands still steaming from the fingertips. ");
-				damage = player.takeFireDamage(damage, true);
+				player.takeFireDamage(damage, true);
 				outputText("\n");
 			}
 		}
@@ -91,25 +78,14 @@ public class Kiha extends Monster
 			outputText("Kiha throws her arms back and roars, exhaling a swirling tornado of fire directly at you!\n");
 			//Miss:
 			//Determine if evaded
-			if(player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
+			if(player.getEvasionRoll()) {
 				outputText("Using your talent for evasion, you manage to sidestep the flames in the nick of time; much to the dragoness' displeasure.");
-			}
-			//("Misdirection"
-			else if(player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
-				outputText("Using your talent for misdirection, you manage to sidestep the flames in the nick of time; much to the dragoness' displeasure.");
-			}
-			//Determine if cat'ed
-			else if(player.hasPerk(PerkLib.Flexibility) && rand(100) < 6) {
-				outputText("Using your cat-like flexibility, you manage to sidestep the flames in the nick of time; much to the dragoness' displeasure.");
 			}
 			else {
 				var damage:Number = Math.round(90 + rand(10) + (player.newGamePlusMod() * 30));
-				if (flags[kFLAGS.KIHA_LVL_UP] >= 1) damage *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.1));
-				if (flags[kFLAGS.KIHA_LVL_UP] >= 8) damage *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.2));
-				if (flags[kFLAGS.KIHA_LVL_UP] >= 13) damage *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.3));
-				damage = Math.round(damage);
+				damage = finalizeDamage(damage);
 				outputText("You try to avoid the flames, but you're too slow!  The inferno slams into you, setting you alight!  You drop and roll on the ground, putting out the fires as fast as you can.  As soon as the flames are out, you climb back up, smelling of smoke and soot. ");
-				damage = player.takeFireDamage(damage, true);
+				player.takeFireDamage(damage, true);
 				outputText("\n");
 			}
 		}
@@ -140,12 +116,9 @@ public class Kiha extends Monster
 		{
 			super.postAttack(damage);
 			var flame:int = level + rand(6);
-			if (flags[kFLAGS.KIHA_LVL_UP] >= 1) flame *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.1));
-			if (flags[kFLAGS.KIHA_LVL_UP] >= 8) flame *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.2));
-			if (flags[kFLAGS.KIHA_LVL_UP] >= 13) flame *= (1 + (flags[kFLAGS.KIHA_LVL_UP] * 0.3));
-			flame = Math.round(flame);
+			flame = finalizeDamage(flame);
 			outputText("\nAn afterwash of flames trails behind her blow, immolating you! ");
-			flame = player.takeFireDamage(flame, true);
+			player.takeFireDamage(flame, true);
 		}
 
 		override public function defeated(hpVictory:Boolean):void
@@ -324,7 +297,7 @@ public class Kiha extends Monster
 			this.long = "Kiha is standing across from you, holding a double-bladed axe that's nearly as big as she is.  She's six feet tall, and her leathery wings span nearly twelve feet extended.  Her eyes are pure crimson, save for a black slit in the center, and a pair of thick draconic horns sprout from her forehead, arcing over her ruby-colored hair to point behind her.  Dim red scales cover her arms, legs, back, and strong-looking tail, providing what protection they might to large areas of her body.  The few glimpses of exposed skin are dark, almost chocolate in color, broken only by a few stray scales on the underside of her bosom and on her cheekbones.  ";
 			if (game.flags[kFLAGS.KIHA_UNDERGARMENTS] > 0)
 				this.long += "Damp patch forms in her silk " + (game.flags[kFLAGS.KIHA_UNDERGARMENTS] == 1 ? "panties" : "loincloth") + ", regardless of her state of arousal.  Despite her near nudity, Kiha stands with the confidence and poise of a trained fighter.";
-			else 
+			else
 				this.long += "Her vagina constantly glistens with moisture, regardless of her state of arousal.  Despite her nudity, Kiha stands with the confidence and poise of a trained fighter.";
 			// this.plural = false;
 			this.createVagina(false, VaginaClass.WETNESS_DROOLING, VaginaClass.LOOSENESS_NORMAL);
@@ -338,8 +311,8 @@ public class Kiha extends Monster
 			this.butt.type = Butt.RATING_AVERAGE + 1;
 			this.lowerBody = LowerBody.HOOFED;
 			this.skin.coverage = Skin.COVERAGE_MEDIUM;
-			this.skin.base.color = "dark";
-			this.skin.coat.color = "red";
+			this.skinColor     = "dark";
+			this.scaleColor    = "red";
 			this.skin.coat.type = Skin.SCALES;
 			this.hairColor = "red";
 			this.hairLength = 3;
@@ -349,27 +322,27 @@ public class Kiha extends Monster
 			if (game.flags[kFLAGS.KIHA_UNDERGARMENTS] > 0) this.armorDef += (2 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			this.lust = 10;
 			this.lustVuln = 0.4;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.gems = rand(15) + 95;
+			this.noFetishDrop = true;
 			this.drop = new ChainedDrop().add(useables.D_SCALE, 0.2);
 			this.wings.type = Wings.DRACONIC_LARGE;
 			this.wings.desc = "huge";
 			this.tailType = Tail.LIZARD;
-			if (flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] == 1) ( 
+			if (flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] == 1) (
 				this.abilities = [
 					{call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_WEAPON]},
 					{call: kihaTimeWaster, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[]},
 					{call: kihaFireBreath, type: ABILITY_PHYSICAL, range: RANGE_RANGED, tags:[TAG_BODY]},
-					{call: sillyModeKihaAttack(), type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY,TAG_FIRE], condition: function():Boolean { return EngineCore.silly() } },
-				] 
+					{call: sillyModeKihaAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY,TAG_FIRE], condition: function():Boolean { return EngineCore.silly() } },
+				]
 			);
-			else ( 
+			else (
 				this.abilities = [
 					{call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_WEAPON]},
 					{call: kihaTimeWaster, type: ABILITY_TEASE, range: RANGE_RANGED, tags:[]},
 					{call: kihaFireBreath, type: ABILITY_PHYSICAL, range: RANGE_RANGED, tags:[TAG_BODY]},
-					{call: kihaFirePunch(), type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY,TAG_FIRE], condition: function():Boolean { return !EngineCore.silly() } },
-				] 
+					{call: kihaFirePunch, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_BODY,TAG_FIRE], condition: function():Boolean { return !EngineCore.silly() } },
+				]
 			);
 			if (flags[kFLAGS.KIHA_LVL_UP] >= 1) {
 				this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);

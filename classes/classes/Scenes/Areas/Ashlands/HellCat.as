@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.Areas.Ashlands 
+package classes.Scenes.Areas.Ashlands
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -18,9 +18,7 @@ import classes.internals.*;
 		public function castArouse():void {
 			outputText("She makes a series of arcane gestures, drawing on her lust to inflict it upon you! ");
 			var lustDamage:int = (inte / 5) + rand(10);
-			lustDamage = lustDamage * (EngineCore.lustPercent() / 100);
-			player.dynStats("lus", lustDamage, "scale", false);
-			outputText(" <b>(<font color=\"#ff00ff\">" + (Math.round(lustDamage * 10) / 10) + "</font>)</b>");
+			player.takeLustDamage(lustDamage);
 			mana -= spellCostArouse;
 		}
 		
@@ -87,7 +85,7 @@ import classes.internals.*;
 			SceneLib.ashlands.hellcatScene.DefeatedByHellCat();
 		}
 		
-		public function HellCat() 
+		public function HellCat()
 		{
 			this.a = "the ";
 			this.short = "hellcat";
@@ -105,7 +103,7 @@ import classes.internals.*;
 			this.hips.type = Hips.RATING_CURVY + 2;
 			this.butt.type = Butt.RATING_LARGE + 1;
 			this.tailType = Tail.BURNING;
-			this.skinTone = "ashen";
+			this.bodyColor = "ashen";
 			this.hairColor = "midnight black";
 			this.hairLength = 13;
 			initStrTouSpeInte(70, 70, 150, 210);
@@ -122,12 +120,12 @@ import classes.internals.*;
 			this.bonusLust = 241;
 			this.lust = 20;
 			this.lustVuln = .1;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 46;
 			this.gems = rand(55) + 40;
-			this.drop = new WeightedDrop().add(consumables.W_FRUIT,5)
-					//.add(useables.T_SSILK,1)
-					.add(null,4);
+			this.drop = new WeightedDrop().addMany(5,
+					consumables.W_FRUIT,
+					weapons.H_WAND,
+					null);
 			this.createPerk(PerkLib.FireNature, 0, 0, 0, 0);
 			checkMonster();
 		}

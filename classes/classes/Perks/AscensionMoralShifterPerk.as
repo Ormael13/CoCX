@@ -1,4 +1,4 @@
-package classes.Perks 
+package classes.Perks
 {
 	import classes.PerkClass;
 	import classes.PerkType;
@@ -9,18 +9,19 @@ package classes.Perks
 		
 		override public function desc(params:PerkClass = null):String
 		{
+			if (!player || !params) return _desc;
 			return "(Rank: " + params.value1 + "/" + CoC.instance.charCreation.MAX_MORALSHIFTER_LEVEL + ") Increases corruption gains and losses by " + params.value1 * 20 + "%.";
 		}
 
-		public function AscensionMoralShifterPerk() 
+		public function AscensionMoralShifterPerk()
 		{
 			super("Ascension: Moral Shifter", "Ascension: Moral Shifter", "", "All corruption gains and losses are increased by 20% per level.");
 		}
 		
-		override public function keepOnAscension(respec:Boolean = false):Boolean 
+		override public function keepOnAscension(respec:Boolean = false):Boolean
 		{
 			return true;
-		}		
+		}
 	}
 
 

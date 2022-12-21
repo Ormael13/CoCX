@@ -103,6 +103,15 @@ Buff multiple stats. If buff already present, **increase** it.
 ----
 
 ```js
+player.buff("Poison").subtractStats( {"str": -10, "spe": -10} );
+// same as
+player.buff("Poison").addStats( {"str": 10, "spe": 10} );
+```
+Un-buff multiple stats (apply reverse numbers).
+
+----
+
+```js
 player.buff("Poison").setStats( {"str": -10, "spe": -10} );
 ```
 Buff multiple stats. If buff already present, **reset** it.

@@ -2,10 +2,12 @@
  * ...
  * @author Ormael
  */
-package classes.Items.Weapons 
+package classes.Items.Weapons
 {
-	import classes.Items.Weapon;
-	import classes.PerkLib;
+import classes.ItemType;
+import classes.Items.Weapon;
+import classes.Items.WeaponLib;
+import classes.PerkLib;
 	import classes.Player;
 	import classes.GlobalFlags.kFLAGS;
 	//import classes.Scenes.NPCs.AetherTwinsFollowers;
@@ -13,9 +15,9 @@ package classes.Items.Weapons
 	
 	public class AetherD extends Weapon {
 		
-		public function AetherD() 
+		public function AetherD()
 		{
-			super("AetherD", "AetherD", "Aether (Dex)", "an Aether (Dex)", "punch", 0, 0, "Aether - dexter part of mysterious sentient weapons pair rumored to be forged by the god of blacksmiths.");
+			super("AetherD", "AetherD", "Aether (Dex)", "an Aether (Dex)", "punch", 0, 0, "Aether - dexter part of mysterious sentient weapons pair rumored to be forged by the god of blacksmiths.", "", "Gauntlet");
 		}
 		
 		override public function get description():String {
@@ -37,23 +39,29 @@ package classes.Items.Weapons
 		override public function get attack():Number {
 			var boost:int = 0;
 			boost += game.player.statusEffectv1(StatusEffects.AetherTwins1);
-			return (0 + boost); 
+			return (0 + boost);
 		}
 		
 		override public function useText():void {
 			outputText("\n\n\"<i>Well alright then, [name]!</i>\" Aether (Dex) says excitedly, \"<i>Let's go!</i>\"\n\n");
 		}
-		override public function playerEquip():Weapon { //This item is being equipped by the player. Add any perks, etc.
+		
+		override public function afterEquip(doOutput:Boolean):void {
 			game.flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] = 2;
-			return super.playerEquip();
+			super.afterEquip(doOutput);
 		}
 		
-		override public function removeText():void { //Produces any text seen when removing the armor normally
+		override public function unequipText():void {
 			outputText("Aether (Dex) lays on the ground for a moment, \"<i>I will be waiting in the camp</i>\" she says before teleporting back to your camp.\n\n(<b>Aether (Dex) is now available in the followers tab!</b>)");
 		}
-		override public function playerRemove():Weapon { //This item is being removed by the player. Remove any perks, etc.
+		
+		override public function afterUnequip(doOutput:Boolean):void {
 			game.flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] = 1;
-			return null; //Can't put Aether (Dex) in your inventory
+			super.afterUnequip(doOutput);
+		}
+		
+		override public function beforeUnequip(doOutput:Boolean):ItemType {
+			return WeaponLib.FISTS;
 		}
 	}
 }

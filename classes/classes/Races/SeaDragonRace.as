@@ -7,9 +7,33 @@ import classes.Race;
 
 public class SeaDragonRace extends Race{
 	public static const SeaDragonEyeColors:/*String*/Array = ["orange","yellow","light green"];
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Human",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Human",
+        /*Eyes*/		"Human",
+        /*Face*/		"Human",
+        /*Gills*/		"Human",
+        /*Hair*/		"Human",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Human",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Human",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Human"];
 	
 	public function SeaDragonRace(id:int) {
-		super("Sea Dragon", id);
+		super("Sea Dragon", id, []);//RaceBody);
 		chimeraTier = 0;
 		grandChimeraTier = 0;
 	}
@@ -52,9 +76,9 @@ public class SeaDragonRace extends Race{
 		buildTier(20,"sea dragon")
 				.namesMaleFemaleTaur("sea dragon-boy", "sea dragon-girl","sea dragon-taur")
 				.buffs({
-					"str.mult": +2.00,
-					"spe.mult": +1.00,
-					"tou.mult": +1.00,
+					"str.mult": +1.10,
+					"spe.mult": +0.70,
+					"tou.mult": +0.70,
 					"int.mult": +0.50,
 					"def": +1,
 					"mdef": +1
@@ -64,9 +88,9 @@ public class SeaDragonRace extends Race{
 		buildTier(30,"leviathan")
 				.namesMaleFemaleTaur("leviathan-boy", "leviathan-girl","leviathan-taur")
 				.buffs({
-					"str.mult": +1.10,
-					"spe.mult": +0.70,
-					"tou.mult": +0.70,
+					"str.mult": +2.00,
+					"spe.mult": +1.00,
+					"tou.mult": +1.00,
 					"int.mult": +0.50,
 					"def": +5,
 					"mdef": +5

@@ -8,7 +8,7 @@ import classes.*;
 import classes.Scenes.SceneLib;
 import classes.internals.ChainedDrop;
 
-	public class TheCorruptedHandmaidens extends BeeGuards {
+public class TheCorruptedHandmaidens extends BeeGuards {
 		
 		public function corruptedHandmaidensStinger():void {
 			outputText("One of the handmaidens strikes through your defenses, trying to burrow her stinger in. ");
@@ -19,7 +19,7 @@ import classes.internals.ChainedDrop;
 				outputText("The arousal and pleasure spike from the aphrodisiac in the sting leaves you stunned.");
 				if (!player.hasPerk(PerkLib.Resolute)) player.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 				createStatusEffect(StatusEffects.AbilityCooldown1,5,0,0,0);
-				player.dynStats("lus", 100 + rand(50));
+				player.takeLustDamage(100 + rand(50), true);
 			}
 		}
 		
@@ -35,12 +35,12 @@ import classes.internals.ChainedDrop;
 				createStatusEffect(StatusEffects.CHCompellingAria, CHCA, 0, 0, 0);
 				createStatusEffect(StatusEffects.AbilityCooldown2, 6, 0, 0, 0);
 			}
-			player.dynStats("lus", statusEffectv1(StatusEffects.CHCompellingAria));
+			player.takeLustDamage(statusEffectv1(StatusEffects.CHCompellingAria), true);
 		}
 		
 		override protected function performCombatAction():void {
 			if (monsterIsStunned()) removeStatusEffect(StatusEffects.CHCompellingAria);
-			if (hasStatusEffect(StatusEffects.CHCompellingAria)) corruptedHandmaidensCompellingAria();
+			else if (hasStatusEffect(StatusEffects.CHCompellingAria)) corruptedHandmaidensCompellingAria();
 			else {
 					if (rand(2) == 0 && !hasStatusEffect(StatusEffects.AbilityCooldown1) && !hasStatusEffect(StatusEffects.AbilityCooldown2)) {
 					if (!hasStatusEffect(StatusEffects.AbilityCooldown1)) corruptedHandmaidensCompellingAria();

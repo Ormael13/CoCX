@@ -65,7 +65,7 @@ import classes.Scenes.SceneLib;
 		
 		public function handleTease(lustDelta:Number, successful:Boolean):void
 		{
-			if (!player.hasStatusEffect(StatusEffects.RemovedArmor) && player.armor != ArmorLib.NOTHING)
+			if (!player.hasStatusEffect(StatusEffects.RemovedArmor) && !player.armor.isNothing)
 			{
 				outputText("\n\nJean-Claude stops circling you, looking mildly surprised as you attempt to entice him with your body.");
 

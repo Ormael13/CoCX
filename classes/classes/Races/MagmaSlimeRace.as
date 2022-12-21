@@ -7,32 +7,51 @@ import classes.StatusEffects;
 
 public class MagmaSlimeRace extends Race {
 	public static const MagmaSlimeSkinColors:/*String*/Array = ["red", "orange", "reddish orange"];
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Human",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Human",
+        /*Eyes*/		"Human",
+        /*Face*/		"Human",
+        /*Gills*/		"Human",
+        /*Hair*/		"Human",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Human",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Human",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Human"];
 	
 	public function MagmaSlimeRace(id:int) {
-		super("Magma Slime", id);
+		super("Magma Slime", id, []);//RaceBody);
 	}
 	
 	public override function setup():void {
 		
 		addScores()
-				.skinBaseColor(ANY(MagmaSlimeSkinColors), +1)
+				.skinColor1(ANY(MagmaSlimeSkinColors), +1, -1000)
 				.hairType(Hair.GOO, +1)
 				.armType(Arms.GOO, +1)
 				.legType(LowerBody.GOO, +3)
 				.rearType(RearBody.METAMORPHIC_GOO, +2)
 				.customRequirement("skin", "slimy goo skin", function (body:BodyData):Boolean {
-					return body.player.hasGooSkin() && body.skinBaseAdj == "slimy"
+					return body.player.isGooSkin() && body.skinBaseAdj == "slimy"
 				}, +1)
-				.customRequirement("vagina", "Vag of Holding",
-						function (body:BodyData):Boolean {
-							return body.player.vaginalCapacity() >= 9000;
-						},
-						+1)
 				.hasStatusEffect(StatusEffects.SlimeCraving, "Slime Craving", +1)
 				.hasPerk(PerkLib.MagmaSlimeCore, +1);
 		
 		addConditionedScores(function (body:BodyData):Boolean {
-			return body.player.hasGooSkin() && body.skinBaseAdj == "slimy"
+			return body.player.isGooSkin() && body.skinBaseAdj == "slimy"
 		}, "slimy goo skin;")
 				.faceType(Face.HUMAN, +1)
 				.eyeType(ANY(Eyes.HUMAN), +1)
@@ -43,7 +62,7 @@ public class MagmaSlimeRace extends Race {
 				.noWings(+1)
 				.noGills(+1);
 		
-		buildTier(13, "magma slime")
+		buildTier(12, "magma slime")
 				.namesMaleFemale("magma slime boi", "magma slime girl")
 				.buffs({
 					"str.mult": +0.35,
@@ -53,7 +72,7 @@ public class MagmaSlimeRace extends Race {
 				})
 				.end();
 		
-		buildTier(17, "magma slime queen")
+		buildTier(16, "magma slime queen")
 				.buffs({
 					"str.mult": +0.45,
 					"tou.mult": +1.15,

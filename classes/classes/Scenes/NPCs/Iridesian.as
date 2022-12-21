@@ -2,7 +2,7 @@
  * ...
  * @author Ormael (for now)
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -18,38 +18,41 @@ import classes.internals.*;
 	{
 		public function soulskillCostHailofBlades():Number {
 			var cost:Number = 50;
-			if (hasPerk(PerkLib.DaoistCultivator)) cost -= 5;
+			if (hasPerk(PerkLib.DaoistApprenticeStage)) cost -= 5;
+			if (hasPerk(PerkLib.DaoistWarriorStage)) cost -= 5;
 			return cost;
 		}
 		public function soulskillCostGrandioseHailofBlades():Number {
 			var cost:Number = 200;
-			if (hasPerk(PerkLib.DaoistCultivator)) cost -= 20;
+			if (hasPerk(PerkLib.DaoistApprenticeStage)) cost -= 20;
+			if (hasPerk(PerkLib.DaoistWarriorStage)) cost -= 20;
 			return cost;
 		}
 		public function soulskillCostGrandioseHailofMoonBlades():Number {
 			var cost:Number = 800;
-			if (hasPerk(PerkLib.DaoistCultivator)) cost -= 80;
+			if (hasPerk(PerkLib.DaoistApprenticeStage)) cost -= 80;
+			if (hasPerk(PerkLib.DaoistWarriorStage)) cost -= 80;
 			return cost;
 		}
 		public function soulskillCostEnergyProjection():Number {
 			var cost:Number = 20;
-			if (hasPerk(PerkLib.DaoistCultivator)) cost -= 2;
+			if (hasPerk(PerkLib.DaoistApprenticeStage)) cost -= 2;
+			if (hasPerk(PerkLib.DaoistWarriorStage)) cost -= 2;
 			if (hasStatusEffect(StatusEffects.TrueFormAngel)) cost *= 2;
 			return cost;
 		}
 		
 		public function SoulskillMod():Number {
 			var mod1:Number = 1;
-			if (hasPerk(PerkLib.DaoistCultivator)) mod1 += .2;
 			if (hasPerk(PerkLib.DaoistApprenticeStage)) {
-				if (hasPerk(PerkLib.SoulApprentice)) mod1 += .4;
-				if (hasPerk(PerkLib.SoulPersonage)) mod1 += .4;
-				if (hasPerk(PerkLib.SoulWarrior)) mod1 += .4;
+				if (hasPerk(PerkLib.SoulApprentice)) mod1 += .3;
+				if (hasPerk(PerkLib.SoulPersonage)) mod1 += .3;
+				if (hasPerk(PerkLib.SoulWarrior)) mod1 += .3;
 			}
 			if (hasPerk(PerkLib.DaoistWarriorStage)) {
 				if (hasPerk(PerkLib.SoulSprite)) mod1 += .6;
 				if (hasPerk(PerkLib.SoulScholar)) mod1 += .6;
-				if (hasPerk(PerkLib.SoulElder)) mod1 += .6;
+				if (hasPerk(PerkLib.SoulGrandmaster)) mod1 += .6;
 			}
 			return mod1;
 		}
@@ -222,7 +225,7 @@ import classes.internals.*;
 			touStat.core.value += TB;
 			speStat.core.value += SB;
 			wisStat.core.value += WB;
-			addPerkValue(PerkLib.DieHardHP, 1, 10);
+			addPerkValue(PerkLib.DieHardHP, 1, 30);
 			addPerkValue(PerkLib.MonsterRegeneration, 1, 3);
 			addStatusValue(StatusEffects.TranscendentSoulField, 1, 10);
 			addStatusValue(StatusEffects.TranscendentSoulField, 2, 10);
@@ -230,7 +233,7 @@ import classes.internals.*;
 			lustVuln += 0.15;
 			bonusWrath += 500;
 			bonusSoulforce += 1000;
-			outputText("Staggering back, Oculicorn wastes no time and above his head starts to manifest sort of halo. It have wings on the sides and in the middle of fron forms something resambliong eyeball. After halo formation a wave of light wash over it changing him. His horn grows longer, his monoeye pupil split into three seperate ones and his teeth grow longer and sharper. ");
+			outputText("Staggering back, Oculicorn wastes no time and above his head starts to manifest sort of halo. It have wings on the sides and in the middle of it forms something reasambling eyeball. After halo formation a wave of light wash over it changing him. His horn grows longer, his monoeye pupil split into three seperate ones and his teeth grow longer and sharper. ");
 			outputText("Eyestalks behind his back shows grew additional eyeballs located along the length of the stalks. Bottom half not change much aside gorwing fur all over it. After the wave reach his feet he starts to levitate.");
 			outputText("\n\n\"<i>Behold my true form foul creature!!!</i>\" he speaks with barely hidden content and reassume combat pose.");
 			createStatusEffect(StatusEffects.TrueFormAngel, 0, 0, 0, 0);
@@ -265,7 +268,7 @@ import classes.internals.*;
 			return str;
 		}
 		
-		public function Iridesian() 
+		public function Iridesian()
 		{
 			initStrTouSpeInte(32, 259, 97, 112);
             initWisLibSensCor(270, 160, 103, 0);
@@ -298,7 +301,7 @@ import classes.internals.*;
 			this.lowerBody = LowerBody.HOOFED;
 			this.faceType = Face.ANIMAL_TOOTHS;
 			this.tailType = Tail.HORSE;
-			this.skinTone = "light grey";
+			this.bodyColor = "light grey";
 			this.hairColor = "black";
 			this.hairLength = 10;
 			this.weaponName = "fist";
@@ -307,17 +310,15 @@ import classes.internals.*;
 			this.armorName = "skin";
 			this.lustVuln = .75;
 			this.lust = 30;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.drop = new WeightedDrop(consumables.ME_DROP, 1);
 			this.createStatusEffect(StatusEffects.TranscendentSoulField, 10, 10, 0, 0);//X times less dmg, +X lvl diff bonus
 			this.createPerk(PerkLib.EpicWisdom, 0, 0, 0, 0);
 			//this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.InsightfulResourcesI, 0, 0, 0, 0);
 			//this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
-			this.createPerk(PerkLib.DieHardHP, 10, 0, 0, 0);
+			this.createPerk(PerkLib.DieHardHP, 30, 0, 0, 0);
 			this.createPerk(PerkLib.MonsterRegeneration, 2, 0, 0, 0);
 			this.createPerk(PerkLib.JobSoulCultivator, 0, 0, 0, 0);
-			this.createPerk(PerkLib.DaoistCultivator, 0, 0, 0, 0);
 			this.createPerk(PerkLib.DaoistApprenticeStage, 0, 0, 0, 0);
 			this.createPerk(PerkLib.SoulApprentice, 0, 0, 0, 0);
 			this.createPerk(PerkLib.SoulPersonage, 0, 0, 0, 0);
@@ -325,7 +326,7 @@ import classes.internals.*;
 			this.createPerk(PerkLib.DaoistWarriorStage, 0, 0, 0, 0);
 			this.createPerk(PerkLib.SoulSprite, 0, 0, 0, 0);
 			this.createPerk(PerkLib.SoulScholar, 0, 0, 0, 0);
-			this.createPerk(PerkLib.SoulElder, 0, 0, 0, 0);
+			this.createPerk(PerkLib.SoulGrandmaster, 0, 0, 0, 0);
 			checkMonster();
 		}
 	}

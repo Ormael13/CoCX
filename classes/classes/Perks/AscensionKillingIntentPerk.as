@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Perks 
+package classes.Perks
 {
 	import classes.PerkClass;
 	import classes.PerkType;
@@ -13,18 +13,19 @@ package classes.Perks
 		
 		override public function desc(params:PerkClass = null):String
 		{
+			if (!player || !params) return _desc;
 			return "(Rank: " + params.value1 + "/" + CoC.instance.charCreation.MAX_KILLINGINTENT_LEVEL + ") Increases melee physical attacks multiplier by " + params.value1 * 10 + "% multiplicatively.";
 		}
 		
-		public function AscensionKillingIntentPerk() 
+		public function AscensionKillingIntentPerk()
 		{
 			super("Ascension: Killing Intent", "Ascension: Killing Intent", "", "Increases melee physical attacks multiplier by 10% per level, multiplicatively.");
 		}
 		
-		override public function keepOnAscension(respec:Boolean = false):Boolean 
+		override public function keepOnAscension(respec:Boolean = false):Boolean
 		{
 			return true;
-		}		
+		}
 	}
 
 }

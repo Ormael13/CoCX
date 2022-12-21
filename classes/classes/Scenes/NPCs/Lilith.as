@@ -2,7 +2,7 @@
  * ...
  * @author Ormael (for now)
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -51,8 +51,7 @@ import classes.internals.*;
 			outputText("Goth girl start drawing symbols in the air toward you.");
 			var lustDmg:Number = this.lust / 10 + this.lib / 10 + this.inte / 10 + this.wis / 10 + this.sens / 10;
 			lustDmg = Math.round(lustDmg);
-			player.dynStats("lus", lustDmg, "scale", false);
-			outputText(" <b>(<font color=\"#ff00ff\">" + lustDmg + "</font>)</b>");
+			player.takeLustDamage(lustDmg, true);
 		}
 		
 		override protected function performCombatAction():void
@@ -78,7 +77,7 @@ import classes.internals.*;
 			touStat.core.value += TB;
 			speStat.core.value += SB;
 			wisStat.core.value += WB;
-			addPerkValue(PerkLib.DieHardHP, 1, 10);
+			addPerkValue(PerkLib.DieHardHP, 1, 9);
 			addPerkValue(PerkLib.MonsterRegeneration, 1, 3);
 			addStatusValue(StatusEffects.TranscendentSoulField, 1, 10);
 			addStatusValue(StatusEffects.TranscendentSoulField, 2, 10);
@@ -94,7 +93,7 @@ import classes.internals.*;
 		
 		override public function get long():String
 		{
-			var str:String = "";//You're fighting pale skinned woman with snow black hair. Even her eyes or lips are pitch black. And you would mistake her for normal human woman wearing catsuit if not noticable goat-like horns, small bat wings or arrow tipped tail. 
+			var str:String = "";//You're fighting pale skinned woman with snow black hair. Even her eyes or lips are pitch black. And you would mistake her for normal human woman wearing catsuit if not noticable goat-like horns, small bat wings or arrow tipped tail.
 			if (hasStatusEffect(StatusEffects.TrueFormAngel)) str += "</i>";
 			else {
 				str += "You're fighting devilish cute goth girl. She stands about nine feet tall and is hugely voluptuous, with breasts two times the size of her head. Her hips flare out into an exaggerated hourglass shape, with a long tail tipped with a fleshy arrow-head spade that waves above her spankable butt. ";
@@ -109,7 +108,7 @@ import classes.internals.*;
 			return str;
 		}
 		
-		public function Lilith() 
+		public function Lilith()
 		{
 			createBreastRow(Appearance.breastCupInverse("RR"));//G_BIG ?K - 1 head size, RR - 2 heads size, ZZ - 3 heads size?
 			this.tallness = 9*12+2;
@@ -138,7 +137,7 @@ import classes.internals.*;
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 30, 0, 0, 0);
 			this.ass.analLooseness = AssClass.LOOSENESS_NORMAL;
 			this.ass.analWetness = AssClass.WETNESS_NORMAL;
-			this.skinTone = "light";
+			this.bodyColor = "light";
 			this.hairColor = "raven";
 			this.weaponName = "fist";
 			this.weaponVerb="punch";
@@ -146,7 +145,6 @@ import classes.internals.*;
 			this.lustVuln = .75;
 			this.lust = 30;
 			this.drop = NO_DROP;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.horns.type = Horns.DEMON;
 			this.horns.count = 12;
 			this.wings.type = Wings.BAT_LIKE_TINY;
@@ -154,7 +152,7 @@ import classes.internals.*;
 			this.tailType = Tail.DEMONIC;
 			this.lowerBody = LowerBody.DEMONIC_HIGH_HEELS;
 			this.createPerk(PerkLib.OverMaxHP, 18, 0, 0, 0);
-			this.createPerk(PerkLib.DieHardHP, 10, 0, 0, 0);
+			this.createPerk(PerkLib.DieHardHP, 9, 0, 0, 0);
 			this.createPerk(PerkLib.MonsterRegeneration, 1, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueAngel, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);

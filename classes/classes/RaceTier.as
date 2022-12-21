@@ -12,6 +12,7 @@ public class RaceTier {
 	public var minScore:int;
 	protected var _buffs:Object;
 	public var extraBonuses:/*String*/Array;
+	public var requiresPreviousTier:Boolean = false;
 	
 	public function RaceTier(
 			tierNumber:int,
@@ -50,7 +51,7 @@ public class RaceTier {
 	 */
 	public function buffs(body:BodyData):Object {
 		var buffs:Object = unscaledBuffs(body);
-		var factor:Number = Player.NewGamePlusFactor();
+		var factor:Number = CoC.instance.newGamePlusFactor();
 		if (factor == 1) return buffs;
 		for each(var buffName:String in StatUtils.NgScaledRacialBuffs) {
 			if (buffName in buffs) buffs[buffName] *= factor;

@@ -5,6 +5,7 @@ import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
+import classes.Items.DynamicItems;
 import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
@@ -32,7 +33,7 @@ public class Imp extends Monster
 			}
 			else if (pcCameWorms) {
 				outputText("\n\nThe imp grins at your already corrupted state...");
-				player.lust = player.maxLust();
+				player.lust = player.maxOverLust();
 				doNext(SceneLib.impScene.impRapesYou);
 			}
 			else if (EvangelineFollower.EvangelineAffectionMeter == 1) {
@@ -46,7 +47,7 @@ public class Imp extends Monster
 
 		protected function lustMagicAttack():void {
 			outputText("You see " + a + short + " make sudden arcane gestures at you!\n\n");
-			player.dynStats("lus", player.lib / 10 + player.cor / 10 + 10);
+			player.takeLustDamage(player.lib / 10 + player.cor / 10 + 10, true);
 			if (player.lust < (player.maxLust() * 0.3)) outputText("You feel strangely warm.  ");
 			if (player.lust >= (player.maxLust() * 0.3) && player.lust < (player.maxLust() * 0.6)) outputText("Blood rushes to your groin as a surge of arousal hits you, making your knees weak.  ");
 			if (player.lust >= (player.maxLust() * 0.6)) outputText("Images of yourself fellating and fucking the imp assault your mind, unnaturally arousing you.  ");
@@ -87,7 +88,7 @@ public class Imp extends Monster
 
 		protected function lustMagicAttack1():void {
 			outputText("You see " + a + short + " make sudden arcane gestures at you!\n\n");
-			player.dynStats("lus", player.lib / 20 + player.cor / 20 + 5);
+			player.takeLustDamage(player.lib / 20 + player.cor / 20 + 5, true);
 			if (player.lust < (player.maxLust() * 0.3)) outputText("You feel strangely warm.  ");
 			if (player.lust >= (player.maxLust() * 0.3) && player.lust < (player.maxLust() * 0.6)) outputText("Blood rushes to your groin as a surge of arousal hits you, making your knees weak.  ");
 			if (player.lust >= (player.maxLust() * 0.6)) outputText("Images of yourself fellating and fucking the imp assault your mind, unnaturally arousing you.  ");
@@ -151,7 +152,7 @@ public class Imp extends Monster
 			this.tallness = rand(24) + 25;
 			this.hips.type = Hips.RATING_BOYISH;
 			this.butt.type = Butt.RATING_TIGHT;
-			this.skinTone = "red";
+			this.bodyColor = "red";
 			this.hairColor = "black";
 			this.hairLength = 5;
 			initStrTouSpeInte(18, 9, 18, 11);
@@ -164,13 +165,16 @@ public class Imp extends Monster
 			this.armorMDef = 0;
 			this.bonusLust = 91;
 			this.lust = 40;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = 1;
 			this.gems = rand(5) + 5;
 			this.drop = new WeightedDrop().
 					add(consumables.SUCMILK,3).
 					add(consumables.INCUBID,3).
 					add(consumables.IMPFOOD,4);
+			this.randomDropChance = 0.1;
+			this.randomDropParams = {
+				rarity: DynamicItems.RARITY_CHANCES_LESSER
+			};
 			this.abilities = [
 				{call: eAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[]},
 				{call: lustMagicAttack1, type: ABILITY_MAGIC, range: RANGE_RANGED, tags:[]}

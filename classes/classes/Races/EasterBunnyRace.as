@@ -2,12 +2,38 @@ package classes.Races {
 import classes.BodyData;
 import classes.BodyParts.*;
 import classes.CockTypesEnum;
+import classes.GeneticMemories.RaceMem;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
 public class EasterBunnyRace extends Race {
-	public function EasterBunnyRace(id:int) {
-		super("Easter Bunny", id);
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Human",
+        /*Balls*/		"Bunny",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Bunny",
+        /*Eyes*/		"Human",
+        /*Face*/		"Bunny",
+        /*Gills*/		"Human",
+        /*Hair*/		"Human",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Bunny",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Fur",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Bunny",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Human",
+        /*Penis*/		"EasterBunny",
+        /*Vagina*/		"Human",
+        /*Perks*/		"EasterBunny"];
+
+    public function EasterBunnyRace(id:int) {
+		super("Easter Bunny", id, RaceBody);
 	}
 	
 	public override function setup():void {

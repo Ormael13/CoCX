@@ -7,12 +7,12 @@ package classes.Scenes.Places
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.WeaponLib;
+import classes.Scenes.Places.TempleOfTheDivine.*;
 import classes.Scenes.SceneLib;
 import classes.Stats.Buff;
 import classes.display.SpriteDb;
-import classes.Scenes.Places.TempleOfTheDivine.*;
 
-	public class TempleOfTheDivine extends BaseContent {
+public class TempleOfTheDivine extends BaseContent {
 
 		public function TempleOfTheDivine() {}
 
@@ -39,12 +39,12 @@ import classes.Scenes.Places.TempleOfTheDivine.*;
 			outputText("\n\n\"<i>Demons... do not pray, you clearly still have a soul. Perhaps I misjudged you.</i>\"");
 			outputText("\n\nWith little ceremony, she roughly sets you back on the ground, caring little for your well-being, merely in order to thoroughly examine you. You tell her that you ");
 			if (SceneLib.dungeons.checkFactoryClear()) {
-				if (!player.isRace(Races.HUMAN)) outputText("were");
+				if (!player.isRace(Races.HUMAN, 1, false)) outputText("were");
 				else outputText("are");
 				outputText(" a human, a champion, sent by your village as tribute to the demons under the guise of being a hero.");
 			}
 			else {
-				if (!player.isRace(Races.HUMAN)) outputText("were");
+				if (!player.isRace(Races.HUMAN, 1, false)) outputText("were");
 				else outputText("are");
 				outputText(" a human, a champion, sent by your village to defeat the demons. However, just what is this place and who is she?");
 			}
@@ -252,20 +252,20 @@ import classes.Scenes.Places.TempleOfTheDivine.*;
 			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] >= 2) {
 				clearOutput();
 				outputText("Would you like to repair something in the temple?\n\n");
-				SceneLib.camp.cabinProgress.checkMaterials();
+				SceneLib.camp.campUpgrades.checkMaterials();
 				menu();
 				addButton(0, "Altars", rebuildGodsAltairs).hint("Repair the altar.");
 				if ((flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] == 3 || flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] == 4) && flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] == 1) {
 					if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 150) addButton(1, "Statue of Marae", rebuildStatueOfMarae).hint("Repair the statue.");
-					else addButtonDisabled(1, "Statue of Marae", "You not have enough stones. Required: 150");
+					else addButtonDisabled(1, "Statue of Marae", "You don't have enough stones. Required: 150");
 				}
 				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] >= 5 && flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] < 7) {
 					if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 500) addButton(2, "Gargoyles", repairGargoylesOnTheWalls).hint("Repair some of the decorative gargoyles.");
-					else addButtonDisabled(2, "Gargoyles", "You not have enough stones. Required: 500");
+					else addButtonDisabled(2, "Gargoyles", "You don't have enough stones. Required: 500");
 				}
 				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] >= 7 && flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] < 17) {
 					if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 50 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 10) addButton(3, "Prayer Bench", makeNewPrayerBenches).hint("Repair some of the temple banches.");
-					else addButtonDisabled(3, "Prayer Bench", "You not have enough wood (50) or/and nails (10).");
+					else addButtonDisabled(3, "Prayer Bench", "You don't have enough wood (50) or/and nails (10).");
 				}
 				addButton(13, "CheckProgress", currentStateOfTemple).hint("See how far the sculpture has progressed.");
 				addButton(14, "Back", templeMainMenu);
@@ -391,8 +391,8 @@ import classes.Scenes.Places.TempleOfTheDivine.*;
 			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FENRIR] < 1) outputText("damaged Altar of Fenrir. Even in this state its aura is ominous, promising eventual demise to everyone.You almost dare not approach, lest your journey ends here.");
 			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FENRIR] == 1) outputText("Altar of Fenrir, an ominous aura radiates from it as it sits dark and foreboding.");
 			outputText("\n\nOn the side is the ");
-			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FENRIR] < 1) outputText("broken altar of Fera. You believe it was damaged way before the demons came in, likely by the priesthood tending the temple.");
-			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FENRIR] == 1) outputText("Altar of Fera. An aura of depraved lust rise from it, inviting you to unknown pleasure. This altar radiate a clearly demonic aura and dims the sanctity of the temple like an idol.");
+			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FERA] < 1) outputText("broken altar of Fera. You believe it was damaged way before the demons came in, likely by the priesthood tending the temple.");
+			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FERA] == 1) outputText("Altar of Fera. An aura of depraved lust rise from it, inviting you to unknown pleasure. This altar radiate a clearly demonic aura and dims the sanctity of the temple like an idol.");
 			outputText("\n\nMarae's statue ");
 			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] < 5) outputText("lies on the ground, its head shattered to pieces");
 			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] >= 5) outputText("in the background awaits the worshippers with its serene and compassionate expression");
@@ -470,22 +470,19 @@ import classes.Scenes.Places.TempleOfTheDivine.*;
 		}
 		public function templeBasement():void {
 			clearOutput();
-			if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] == 2) {
-				outputText("You wander back into the Temple basement atelier.\n\n");
-				outputText("There is a plinth, surrounded by what looks to be depictions of various gargoyles, of all materials and forms. You're pretty sure that using these as a refernce, you could craft a gargoyle statue of your own, albeit of raw stone.");
-				menu();
-				addButton(0, "Statue", playerBuilder.currentStateOfStatue).hint("Check on the statue.");
-				addButton(1, "Strange Book", playerBuilder.strangeBookOfGolems).hint("Examine the strange book.");
-                if (flags[kFLAGS.ONYX_PATH] < 1) addButtonIfTrue(2, "Spare Statue", onyx.makingNewGargoyle, "You can't do anything with it... unless you manage to find a filled soul gem somewhere?", player.hasKeyItem("Black Soul Gem") >= 0, "Check on the spare statue.");
-				addButton(4, "Back", templeMainMenu);
-			}
 			if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] == 1) {
 				outputText("As you wander down into the basement of the temple you find what looks like an old abandoned Atelier. Down there is a plinth, surrounded by various depictions of what looks like gargoyles. One could follow their examples and create a gargoyle of their own.");
 				flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE]++;
-				menu();
-				addButton(0, "Begin", playerBuilder.chooseToWorkOnStoneStatue);
-				addButton(4, "Back", templeMainMenu);
+			} else {
+				outputText("You wander back into the Temple basement atelier.\n\n");
+				outputText("There is a plinth, surrounded by what looks to be depictions of various gargoyles, of all materials and forms. You're pretty sure that using these as a refernce, you could craft a gargoyle statue of your own, albeit of raw stone.");
 			}
+			menu();
+			addButton(0, "Strange Book", playerBuilder.strangeBookOfGolems).hint("Examine the strange book.");
+			if (flags[kFLAGS.GARGOYLE_QUEST] > 0) addButton(1, "Statue", playerBuilder.currentStateOfStatue).hint("Check on the statue.");
+			if (flags[kFLAGS.GARGOYLE_QUEST] > 0 && flags[kFLAGS.ONYX_PATH] < 1)
+				addButtonIfTrue(2, "Spare Statue", onyx.makingNewGargoyle, "You can't do anything with it... unless you manage to find a filled soul gem somewhere?", player.hasKeyItem("Black Soul Gem") >= 0, "Check on the spare statue."); //DON'T RESET THE QUEST VALUE!!!
+			addButton(4, "Back", templeMainMenu);
 		}
 	}
 }

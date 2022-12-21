@@ -47,6 +47,7 @@ import classes.Scenes.SceneLib;
 			}, {
 				//Helia monogamy fucks
 				name  : "helcommon",
+				night : false,
 				call  : SceneLib.helScene.helSexualAmbush,
 				chance: 0.2,
 				when  : SceneLib.helScene.helSexualAmbushCondition
@@ -64,6 +65,7 @@ import classes.Scenes.SceneLib;
 			}, {
 				// Ceani
 				name: "ceani",
+				night : false,
 				call: function ():void {
 					player.createStatusEffect(StatusEffects.NearWater, 0, 0, 0, 0);
 					if (flags[kFLAGS.CEANI_AFFECTION] >= 2 && flags[kFLAGS.CEANI_ARCHERY_TRAINING] < 4) {
@@ -80,17 +82,19 @@ import classes.Scenes.SceneLib;
 			}, {
 				// Ceani post training
 				name: "ceani post training",
+				night : false,
 				call: function ():void {
 					player.createStatusEffect(StatusEffects.NearWater, 0, 0, 0, 0);
 					ceaniScene.beachInteractionsAfterArcheryTraining();
 				},
 				chance: 1,
 				when: function ():Boolean {
-					return (model.time.hours >= 6 && model.time.hours <= 11) && flags[kFLAGS.CEANI_FOLLOWER] < 1 && flags[kFLAGS.CEANI_ARCHERY_TRAINING] == 4;
+					return (model.time.hours >= 6 && model.time.hours <= 11) && flags[kFLAGS.CEANI_FOLLOWER] < 1 && flags[kFLAGS.CEANI_ARCHERY_TRAINING] >= 4;
 				}
 			}, {
 				// Pinchou swimwear shop
 				name: "pinchou shop",
+				night : false,
 				call: function ():void {
 					player.createStatusEffect(StatusEffects.NearWater, 0, 0, 0, 0);
 					if (flags[kFLAGS.PINCHOU_SHOP] >= 1) pinchoushop.encounteringPinchouRepeat();
@@ -100,6 +104,7 @@ import classes.Scenes.SceneLib;
 			}, {
 				// Beach demons
 				name: "beach demons",
+				night : false,
 				call: function ():void {
 					player.createStatusEffect(StatusEffects.NearWater, 0, 0, 0, 0);
 					demonsPack.demonspackEncounter();
@@ -218,7 +223,7 @@ import classes.Scenes.SceneLib;
             addButton(0, "Yes", beachSiteMine);
             addButton(1, "No", camp.returnToCampUseOneHour);
 		}
-		
+
 		private function beachSiteMine():void {
 			if (Forgefather.materialsExplained != true) NothingHappened();
 			else {
@@ -233,6 +238,25 @@ import classes.Scenes.SceneLib;
 				minedStones = Math.round(minedStones);
 				fatigue(50, USEFATG_PHYSICAL);
 				SceneLib.forgefatherScene.incrementSandstoneSupply(minedStones);
+				player.mineXP(1);
+				findGem();
+				doNext(camp.returnToCampUseTwoHours);
+			}
+		}
+
+		private function findGem():void {
+			if (player.miningLevel > 4) {
+				if (rand(4) == 0) {
+					inventory.takeItem(useables.EMDGEM, camp.returnToCampUseTwoHours);
+					player.mineXP(2);
+				}
+				else {
+					outputText("After attempt to mine Emeralds you ended with unusable piece.");
+					doNext(camp.returnToCampUseTwoHours);
+				}
+			}
+			else {
+				outputText(" Your mining skill is too low to find any Emeralds.");
 				doNext(camp.returnToCampUseTwoHours);
 			}
 		}

@@ -43,7 +43,7 @@
 				if (player.str < 40) outputText("easily pull the sword free, surprising yourself with how easy it was to remove.  ");
 				outputText("Remarkably the tree's trunk is entirely intact.  While marveling at this new development, a leaf brushes your shoulder.  You look up and watch as every single leaf turns from healthy green, to brilliant orange, and finally changes to brown.  The leaves rain down around you, covering the ground in dead plant-matter, leaving you alone with the withering skeleton of a dead tree.  The sight saddens you, though you cannot fathom why.\n\n");
 				outputText("The blade itself is three and a half feet of the purest, shining steel you have ever seen.  It truly is a beautiful blade.\n\n");
-				dynStats("lus", -15);
+				dynStats("lus", -15, "scale", false);
 				inventory.takeItem(weapons.B_SWORD, camp.returnToCampUseOneHour);
 				player.createStatusEffect(StatusEffects.TookBlessedSword,0,0,0,0);
 			}
@@ -84,7 +84,7 @@
 				if (player.str < 40) outputText("easily pull the bow free, surprising yourself with how easy it was to remove.  ");
 				outputText("Remarkably the tree's trunk is entirely intact.  While marveling at this new development, a leaf brushes your shoulder.  You look up and watch as every single leaf turns from healthy green, to brilliant orange, and finally changes to brown.  The leaves rain down around you, covering the ground in dead plant-matter, leaving you alone with the withering skeleton of a dead tree.  The sight saddens you, though you cannot fathom why.\n\n");
 				outputText("The bow itself is three and a half feet of the purest, wood you have ever seen.  It truly is a beautiful bow.\n\n");
-				dynStats("lus", -15);
+				dynStats("lus", -15, "scale", false);
 				inventory.takeItem(weaponsrange.BEA_BOW, camp.returnToCampUseOneHour);
 				player.createStatusEffect(StatusEffects.TookBlessedBow,0,0,0,0);
 			}
@@ -125,7 +125,7 @@
 				if (player.str < 40) outputText("easily pull the staff free, surprising yourself with how easy it was to remove.  ");
 				outputText("Remarkably the tree's trunk is entirely intact.  While marveling at this new development, a leaf brushes your shoulder.  You look up and watch as every single leaf turns from healthy green, to brilliant orange, and finally changes to brown.  The leaves rain down around you, covering the ground in dead plant-matter, leaving you alone with the withering skeleton of a dead tree.  The sight saddens you, though you cannot fathom why.\n\n");
 				outputText("The staff itself is four and a half feet of the purest, shining steel you have ever seen.  It truly is a beautiful staff.\n\n");
-				dynStats("lus", -15);
+				dynStats("lus", -15, "scale", false);
 				inventory.takeItem(weapons.B_STAFF, camp.returnToCampUseOneHour);
 				player.createStatusEffect(StatusEffects.TookBlessedStaff,0,0,0,0);
 			}
@@ -166,7 +166,7 @@
 				if (player.str < 40) outputText("easily pull the shield free, surprising yourself with how easy it was to remove.  ");
 				outputText("Remarkably the tree's trunk is entirely intact.  While marveling at this new development, a leaf brushes your shoulder.  You look up and watch as every single leaf turns from healthy green, to brilliant orange, and finally changes to brown.  The leaves rain down around you, covering the ground in dead plant-matter, leaving you alone with the withering skeleton of a dead tree.  The sight saddens you, though you cannot fathom why.\n\n");
 				outputText("The shield itself is made from purest, shining steel you have ever seen.  It truly is a beautiful shield.\n\n");
-				dynStats("lus", -15);
+				dynStats("lus", -15, "scale", false);
 				inventory.takeItem(shields.BSHIELD, camp.returnToCampUseOneHour);
 				player.createStatusEffect(StatusEffects.TookBlessedShield,0,0,0,0);
 			}

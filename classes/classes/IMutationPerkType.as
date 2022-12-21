@@ -5,29 +5,118 @@
 package classes
 {
 import classes.Scenes.SceneLib;
+import classes.Stats.StatUtils;
+import classes.internals.Utils;
 
 public class IMutationPerkType extends PerkType
 	{
-		private var _maxLvl:int = 3;
+		/**
+		 * For deprecated/not implemented mutations
+		 */
+		public static const SLOT_NONE:String        = "";
+		public static const SLOT_HEART:String       = "Heart";
+		public static const SLOT_MUSCLE:String      = "Muscle";
+		public static const SLOT_MOUTH:String       = "Mouth";
+		public static const SLOT_ADRENALS:String    = "Adrenals";
+		public static const SLOT_BLOODSTREAM:String = "Bloodstream";
+		public static const SLOT_FAT:String         = "FaT";
+		public static const SLOT_LUNGS:String       = "Lungs";
+		public static const SLOT_METABOLISM:String  = "Metabolism";
+		public static const SLOT_OVARIES:String     = "Ovaries";
+		public static const SLOT_TESTICLES:String   = "Testicles";
+		public static const SLOT_EYES:String        = "Eyes";
+		public static const SLOT_BONE:String        = "Bone";
+		public static const SLOT_NERVSYS:String     = "Nerv/Sys";
+		public static const SLOT_THYROID:String     = "Thyroid";
+		public static const SLOT_PARATHYROID:String = "PThyroid";
+		public static const SLOT_ADAPTATIONS:String = "Adaptations";
+		// when adding more slots, add an entry in the list below!
+		
+		/**
+		 * key: SLOT_XXX
+		 * value: {
+		 * 	name: readable name
+		 * }
+		 */
+		public static const Slots:Object = Utils.createMapFromPairs([
+			[SLOT_HEART, {name: "Heart"}],
+			[SLOT_MUSCLE, {name: "Muscles"}],
+			[SLOT_MOUTH, {name: "Mouth"}],
+			[SLOT_ADRENALS, {name: "Adrenal glands"}],
+			[SLOT_BLOODSTREAM, {name: "Bloodstream"}],
+			[SLOT_FAT, {name: "Fat Tissue"}],
+			[SLOT_LUNGS, {name: "Lungs"}],
+			[SLOT_METABOLISM, {name: "Metabolism"}],
+			[SLOT_OVARIES, {name: "Ovaries"}],
+			[SLOT_TESTICLES, {name: "Balls"}],
+			[SLOT_EYES, {name: "Eyes"}],
+			[SLOT_BONE, {name: "Bones and Marrow"}],
+			[SLOT_NERVSYS, {name: "NervSys"}],
+			[SLOT_THYROID, {name: "Thyroid Gland"}],
+			[SLOT_PARATHYROID, {name: "Parathyroid Gland"}],
+			[SLOT_ADAPTATIONS, {name: "Adaptations"}],
+		]);
+		public static const SlotList:/*String*/Array = [
+			SLOT_HEART,
+			SLOT_MUSCLE,
+			SLOT_MOUTH,
+			SLOT_ADRENALS,
+			SLOT_BLOODSTREAM,
+			SLOT_FAT,
+			SLOT_LUNGS,
+			SLOT_METABOLISM,
+			SLOT_OVARIES,
+			SLOT_TESTICLES,
+			SLOT_EYES,
+			SLOT_BONE,
+			SLOT_NERVSYS,
+			SLOT_THYROID,
+			SLOT_PARATHYROID,
+			SLOT_ADAPTATIONS,
+		];
+		
+		/**
+		 * key: SLOT_XXXX
+		 * value: IMutationPerkType[]
+		 */
+		public static const MutationsBySlot:Object = {};
+		
+		private var _maxLvl:int;
+		private var _slot:String;
 		private var _pBuffs:Object;
 
-		public function IMutationPerkType(id:String, name:String, desc:String, longDesc:String = null, keepOnAscension:Boolean = false) {
-			super(id, name, desc, longDesc, keepOnAscension);
+		public function IMutationPerkType(id:String, name:String, slot:String, maxLvl:int) {
+			super(id, name, name, name, false);
+			this._maxLvl = maxLvl;
+			this._slot = slot;
+			(MutationsBySlot[slot] ||= []).push(this);
 		}
 
 		public function get maxLvl():int{
 			return _maxLvl;
 		}
 
-		public function set maxLvl(Lvl:int):void{
-			_maxLvl = Lvl;
+		public function get slot():String{
+			return _slot;
 		}
 
 		public function pReqs():void{
 		}
 
-		public function pBuffs(target:Creature = null):Object{
+		public function buffsForTier(pTier:int):Object {
 			return _pBuffs;
+		}
+
+		public function explainBuffs(pTier:int):String {
+			var tempObj:Object = buffsForTier(pTier);
+			var res:String = "";
+			for (var key:String in tempObj)
+				res += StatUtils.explainBuff(key, tempObj[key]);
+			return res;
+		}
+
+		public function pBuffs(target:Creature = null):Object{
+			return buffsForTier(currentTier(this, (target == null) ? player : target));
 		}
 
 		/**

@@ -40,8 +40,9 @@ package classes.GeneticMemories {
 	 */
 
     public static var Memories:/*EnumValue*/ Array = [];
+	  private static var _partid:int = 0;
 
-		public static const HUMAN:int = 0;
+		public static const HUMAN:int =_partid++;
 		EnumValue.add(Memories, HUMAN, "HUMAN", {
 			id: "Unlocked Metamorph",
 			name: "Human Face",
@@ -52,7 +53,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const HORSE:int = 1;
+		public static const HORSE:int =_partid++;
 		EnumValue.add(Memories, HORSE, "HORSE", {
 			id: "Horse Face",
 			name: "Horse Face",
@@ -63,7 +64,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const COW_MINOTAUR:int = 2;
+		public static const COW_MINOTAUR:int =_partid++;
 		EnumValue.add(Memories, COW_MINOTAUR, "COW_MINOTAUR", {
 			id: "Cow/Minotaur Face",
 			name: "Bovine Face",
@@ -74,7 +75,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const SHARK_TEETH:int = 3;
+		public static const SHARK_TEETH:int =_partid++;
 		EnumValue.add(Memories, SHARK_TEETH, "SHARK_TEETH", {
 			id: "Shark Teeth Face",
 			name: "Shark Teeth",
@@ -85,7 +86,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const SNAKE_FANGS:int = 4;
+		public static const SNAKE_FANGS:int =_partid++;
 		EnumValue.add(Memories, SNAKE_FANGS, "SNAKE_FANGS", {
 			id: "Snake Fangs Face",
 			name: "Snake Fangs",
@@ -96,7 +97,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const CAT:int = 5;
+		public static const CAT:int =_partid++;
 		EnumValue.add(Memories, CAT, "CAT", {
 			id: "Cat Face",
 			name: "Cat Face",
@@ -107,7 +108,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const CAT_CANINES:int = 6;
+		public static const CAT_CANINES:int =_partid++;
 		EnumValue.add(Memories, CAT_CANINES, "CAT_CANINES", {
 			id: "Cat Canines Face",
 			name: "Cat Canines",
@@ -118,7 +119,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const LIZARD:int = 7;
+		public static const LIZARD:int =_partid++;
 		EnumValue.add(Memories, LIZARD, "LIZARD", {
 			id: "Lizard Face",
 			name: "Lizard Face",
@@ -129,7 +130,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const SPIDER:int = 8;
+		public static const SPIDER:int =_partid++;
 		EnumValue.add(Memories, SPIDER, "SPIDER", {
 			id: "Spider Fangs Face",
 			name: "Spider Fangs",
@@ -140,7 +141,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const FOX:int = 9;
+		public static const FOX:int =_partid++;
 		EnumValue.add(Memories, FOX, "FOX", {
 			id: "Fox Face",
 			name: "Fox Face",
@@ -151,7 +152,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const PIG:int = 10;
+		public static const PIG:int = _partid++;
 		EnumValue.add(Memories, PIG, "PIG", {
 			id: "Pig Face",
 			name: "Pig Face",
@@ -162,7 +163,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const BOAR:int = 11;
+		public static const BOAR:int = _partid++;
 		EnumValue.add(Memories, BOAR, "BOAR", {
 			id: "Boar Face",
 			name: "Boar Face",
@@ -173,7 +174,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const MANTICORE:int = 12;
+		public static const MANTICORE:int = _partid++;
 		EnumValue.add(Memories, MANTICORE, "MANTICORE", {
 			id: "Manticore Face",
 			name: "Manticore Fangs",
@@ -184,7 +185,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const SALAMANDER_FANGS:int = 13;
+		public static const SALAMANDER_FANGS:int = _partid++;
 		EnumValue.add(Memories, SALAMANDER_FANGS, "SALAMANDER_FANGS", {
 			id: "Salamander Fangs Face",
 			name: "Salamander Fangs",
@@ -195,7 +196,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const ORCA:int = 14;
+		public static const ORCA:int = _partid++;
 		EnumValue.add(Memories, ORCA, "ORCA", {
 			id: "Orca Face",
 			name: "Orca Face",
@@ -206,7 +207,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const DRAGON:int = 15;
+		public static const DRAGON:int = _partid++;
 		EnumValue.add(Memories, DRAGON, "DRAGON", {
 			id: "Draconic Face",
 			name: "Draconic Face",
@@ -217,7 +218,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const DRAGON_FANGS:int = 16;
+		public static const DRAGON_FANGS:int = _partid++;
 		EnumValue.add(Memories, DRAGON_FANGS, "DRAGON_FANGS", {
 			id: "Draconic Fangs Face",
 			name: "Draconic Fangs",
@@ -228,18 +229,18 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const ONI_TEETH:int = 17;
+		public static const ONI_TEETH:int = _partid++;
 		EnumValue.add(Memories, ONI_TEETH, "ONI_TEETH", {
 			id: "Oni Teeth Face",
 			name: "Oni Teeth",
 			cost: 100,
-			title: "Oni Teeh",
+			title: "Oni Teeth",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.FaceOniTeeth;
 			}
 		});
 
-		public static const WEASEL:int = 18;
+		public static const WEASEL:int = _partid++;
 		EnumValue.add(Memories, WEASEL, "WEASEL", {
 			id: "Weasel Face",
 			name: "Weasel Face",
@@ -250,7 +251,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const VAMPIRE:int = 19;
+		public static const VAMPIRE:int = _partid++;
 		EnumValue.add(Memories, VAMPIRE, "VAMPIRE", {
 			id: "Vampire Face",
 			name: "Vampire Fangs",
@@ -261,7 +262,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const RED_PANDA:int = 20;
+		public static const RED_PANDA:int = _partid++;
 		EnumValue.add(Memories, RED_PANDA, "RED_PANDA", {
 			id: "Red Panda Face",
 			name: "Red Panda Face",
@@ -272,7 +273,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const CHESHIRE:int = 21;
+		public static const CHESHIRE:int = _partid++;
 		EnumValue.add(Memories, CHESHIRE, "CHESHIRE", {
 			id: "Cheshire Face",
 			name: "Cheshire Face",
@@ -284,7 +285,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const CHESHIRE_SMILE:int = 22;
+		public static const CHESHIRE_SMILE:int = _partid++;
 		EnumValue.add(Memories, CHESHIRE_SMILE, "CHESHIRE_SMILE", {
 			id: "Cheshire Smile Face",
 			name: "Cheshire Smile",
@@ -296,7 +297,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const ORC_FANGS:int = 23;
+		public static const ORC_FANGS:int = _partid++;
 		EnumValue.add(Memories, ORC_FANGS, "ORC_FANGS", {
 			id: "Orc Fangs Face",
 			name: "Orc Fangs",
@@ -307,7 +308,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const DEVIL_FANGS:int = 24;
+		public static const DEVIL_FANGS:int = _partid++;
 		EnumValue.add(Memories, DEVIL_FANGS, "DEVIL_FANGS", {
 			id: "Devil Fangs Face",
 			name: "Demonic Fangs",
@@ -317,7 +318,8 @@ package classes.GeneticMemories {
 				return CoC.instance.transformations.FaceDevilFangs;
 			}
 		});
-	  	public static const ELF_FACE:int = 25;
+
+	  	public static const ELF_FACE:int = _partid++;
 	  	EnumValue.add(Memories, ELF_FACE, "ELF_FACE", {
 		  	id: "Elf Face",
 		  	name: "Elf Face",
@@ -327,7 +329,8 @@ package classes.GeneticMemories {
 			  	return CoC.instance.transformations.FaceElf;
 		  	}
 	  	});
-	  	public static const WOLF_FACE:int = 26;
+
+	  	public static const WOLF_FACE:int = _partid++;
 	  	EnumValue.add(Memories, WOLF_FACE, "WOLF_FACE", {
 		  	id: "Wolf Face",
 		  	name: "Wolf Face",
@@ -337,7 +340,8 @@ package classes.GeneticMemories {
 			  	return CoC.instance.transformations.FaceWolf;
 		  	}
 	  	});
-	  	public static const ANIMAL_TOOTHS:int = 27;
+
+	  	public static const ANIMAL_TOOTHS:int = _partid++;
 	  	EnumValue.add(Memories, ANIMAL_TOOTHS, "ANIMAL_TOOTHS", {
 		  	id: "Animal Teeth",
 		  	name: "Animal Teeth",
@@ -347,7 +351,8 @@ package classes.GeneticMemories {
 			  	return CoC.instance.transformations.FaceAnimalTeeth;
 		  	}
 	  	});
-	  	public static const BUCKTEETH:int = 28;
+
+	  	public static const BUCKTEETH:int = _partid++;
 	  	EnumValue.add(Memories, BUCKTEETH, "BUCKTEETH", {
 		  	id: "Buck Teeth",
 		  	name: "Buck Teeth",
@@ -357,7 +362,8 @@ package classes.GeneticMemories {
 			  	return CoC.instance.transformations.FaceBuckteeth;
 		  	}
 	  	});
-	  	public static const MOUSE:int = 29;
+
+	  	public static const MOUSE:int = _partid++;
 	  	EnumValue.add(Memories, MOUSE, "MOUSE", {
 		  	id: "Mouse Teeth",
 		  	name: "Mouse Teeth",
@@ -367,6 +373,84 @@ package classes.GeneticMemories {
 			  	return CoC.instance.transformations.FaceMouse;
 		  	}
 	  	});
+
+		public static const YETI:int = _partid++;
+		EnumValue.add(Memories, YETI, "YETI", {
+		  id: "Yeti Fangs",
+		  name: "Yeti Fangs",
+		  cost: 100,
+		  title: "Yeti Fangs",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.FaceYetiFangs;
+		  }
+		});
+
+		public static const ANT:int = _partid++;
+		EnumValue.add(Memories, ANT, "ANT", {
+			id: "Ant mandibles Face",
+			name: "Ant mandibles",
+			cost: 100,
+			title: "Ant mandibles",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.FaceAnt;
+			}
+		});
+
+		public static const RACCOONMASK:int = _partid++;
+		EnumValue.add(Memories, RACCOONMASK, "RACCOONMASK", {
+			id: "Raccoon Mask Face",
+			name: "Raccoon Mask",
+			cost: 100,
+			title: "Raccoon Mask",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.FaceRaccoonMask;
+			}
+		});
+
+		public static const RACCOON:int = _partid++;
+		EnumValue.add(Memories, RACCOON, "RACCOON", {
+			id: "Raccoon Face",
+			name: "Raccoon",
+			cost: 100,
+			title: "Raccoon",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.FaceRaccoon;
+			}
+		});
+
+		public static const PANDA:int = _partid++;
+		EnumValue.add(Memories, PANDA, "PANDA", {
+			id: "Panda Face",
+			name: "Panda",
+			cost: 100,
+			title: "Panda",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.FacePanda;
+			}
+		});
+
+		public static const FIRE_SNAIL:int = _partid++;
+		EnumValue.add(Memories, FIRE_SNAIL, "FIRE_SNAIL", {
+			id: "Fire Snail Face",
+			name: "Fire Snail",
+			cost: 100,
+			title: "Fire Snail",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.FaceFireSnail;
+			}
+		});
+
+		public static const GHOST:int = _partid++;
+		EnumValue.add(Memories, GHOST, "GHOST", {
+			id: "Ghost Face",
+			name: "Ghost",
+			cost: 100,
+			title: "Ghost",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.FaceGhost;
+			}
+		});
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

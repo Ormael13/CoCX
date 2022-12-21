@@ -1,14 +1,13 @@
-package classes.Items 
+package classes.Items
 {
 	/**
 	 * ...
 	 * @author Ormael
 	 */
-	import classes.Items.Necklaces.*;
-	import classes.PerkLib;
-	import classes.PerkType;
-	
-	public final class NecklaceLib 
+
+import classes.Items.Necklaces.*;
+
+public final class NecklaceLib extends ItemConstants
 	{
 		public static const MODIFIER_SF:int = 				1;
 		public static const MODIFIER_MP:int = 				2;
@@ -51,18 +50,20 @@ package classes.Items
 		public const MAGINEC:Necklace = new Necklace("MagiNec", "Magic Neck", "necklace of magical protection", "an enchanted necklace of magical protection", MODIFIER_MAGIC_R, 10, 8000, "This necklace is topped with pyrite gemstones. It is said that this will make you protected from magic. \n\nType: Jewelry (Necklace) \nBase value: 8,000 \nSpecial: Increases magic resistance by 10%.","Necklace");
 		public const PHYSNEC:Necklace = new Necklace("PhysNec", "Phys Neck", "necklace of physical protection", "an enchanted necklace of physical protection", MODIFIER_PHYS_R, 15, 8000, "This necklace is topped with hematite gemstones. It is said that this will make you protected from physical harm. \n\nType: Jewelry (Necklace) \nBase value: 8,000 \nSpecial: Increases physical resistance by 15%.","Necklace");
 		//armor, mag resis protection necklaces........
-		public const NECKINT:NecklaceOfIntelligence = new NecklaceOfIntelligence();
-		public const NECKLIB:NecklaceOfLibido = new NecklaceOfLibido();
-		public const NECKSEN:NecklaceOfSensitivity = new NecklaceOfSensitivity();
-		public const NECKSPE:NecklaceOfSpeed = new NecklaceOfSpeed();
-		public const NECKSTR:NecklaceOfStrength = new NecklaceOfStrength();
-		public const NECKTOU:NecklaceOfToughness = new NecklaceOfToughness();
-		public const NECKWIS:NecklaceOfWisdom = new NecklaceOfWisdom();
+		public const NECKINT:Necklace = new Necklace("NeckInt", "NecklaceOfIntelligence", "Necklace of Intelligence", "a Necklace of Intelligence", 0, 0, 4000, "A simple necklace to boost intelligence.","Necklace").withBuffs({"int.mult":+0.25}) as Necklace;
+		public const NECKLIB:Necklace = new Necklace("NeckLib", "NecklaceOfLibido", "Necklace of Libido", "a Necklace of Libido", 0, 0, 4000, "A simple necklace to boost libido.","Necklace").withBuffs({"lib.mult":+0.25}) as Necklace;
+		public const NECKSEN:Necklace = new Necklace("NeckSen", "NecklaceOfSensitivity", "Necklace of Sensitivity", "a Necklace of Sensitivity", 0, 0, 4000, "A simple necklace to boost sensitivity.","Necklace").withBuffs({"sens":+25}) as Necklace;
+		public const NECKSPE:Necklace = new Necklace("NeckSpe", "NecklaceOfSpeed", "Necklace of Speed", "a Necklace of Speed", 0, 0, 4000, "A simple necklace to boost speed.","Necklace").withBuffs({"spe.mult":+0.25}) as Necklace;
+		public const NECKSTR:Necklace = new Necklace("NeckStr", "NecklaceOfStrength", "Necklace of Strength", "a Necklace of Strength", 0, 0, 4000, "A simple necklace to boost strength.","Necklace").withBuffs({"str.mult":+0.25}) as Necklace;
+		public const NECKTOU:Necklace = new Necklace("NeckTou", "NecklaceOfToughness", "Necklace of Toughness", "a Necklace of Toughness", 0, 0, 4000, "A simple necklace to boost toughness.","Necklace").withBuffs({"tou.mult":+0.25}) as Necklace;
+		public const NECKWIS:Necklace = new Necklace("NeckWis", "NecklaceOfWisdom", "Necklace of Wisdom", "a Necklace of Wisdom", 0, 0, 4000, "A simple necklace to boost wisdom.","Necklace").withBuffs({"wis.mult":+0.25}) as Necklace;
 		public const EZEKIELN:Necklace = new Necklace("EzekielN", "EzekielNecklace", "Ezekiel's Necklace", "an Ezekiel's Necklace", 0, 0, 500, "A necklace rumored to be blessed by the Ezekiel himself. Is that real one or just another fake necklace merchant sold you? \n\nType: Jewelry (Necklace) \nBase value: 500","Necklace");
 		public const WRATHLE:Necklace = new Necklace("Wrathle", "Wrathless", "Wrathless", "a Wrathless", MODIFIER_SPELL_POWER, 10, 4500, "This necklace is topped with unknown type of gemstone. It is said that this will make your spells/m. specials free from wrath influence. \n\nType: Jewelry (Necklace) \nBase value: 4,500 \nSpecial: Increases spellpower by 10%.", "Necklace");
+		public const NECRONE:NecroNecklace = new NecroNecklace();
 		public const COWBELL:Necklace = new Necklace("CowBell", "CowBell", "Cow bell", "a Cow bell", 0, 0, 1500, "A bell often worn by Lacta Bovines, it raises milk productivity and immunizes the wearer against the negative effects of cum addition just like a cowgirl. If worn by an actual lacta bovine it also increases strength and libido.  \n\nType: Jewelry (Necklace) \nBase value: 1,500","Necklace");
+		public const LEAFAMU:Necklace = new Necklace("LeafAmu", "LeafAmulet", "Leaf Amulet", "a Leaf Amulet", 0, 0, 4500, "This beautiful necklace improves its wearer natural evasiveness and affinity for white magic by 10%. It is more powerful when used by elves.  \n\nType: Jewelry (Necklace) \nBase value: 4,500","Necklace");
 
-		public function NecklaceLib() 
+		public function NecklaceLib()
 		{
 		}
 	}

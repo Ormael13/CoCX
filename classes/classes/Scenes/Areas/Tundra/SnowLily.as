@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.Areas.Tundra 
+package classes.Scenes.Areas.Tundra
 {
 import classes.*;
 import classes.GlobalFlags.*;
@@ -24,19 +24,19 @@ public class SnowLily extends Alraune
 			SceneLib.forest.alrauneScene.alrauneDeepwoodsLost();
 		}
 		
-		public function SnowLily() 
+		public function SnowLily()
 		{
 			super();
 			if (Holidays.isHalloween()) {
 				this.short = "Jack-O-Raune";
 				this.long = "You are fighting against a Jack-O-Raune, an intelligent plant with the torso of a woman and the lower body of a giant pumpkin with snaking tentacle vines. She seems really keen on raping you.";
-				this.skinTone = "pale orange";
+				this.bodyColor = "pale orange";
 				this.hairColor = "dark green";
 			}
 			else {
 				this.short = "snow lily alraune";
 				this.long = "You are fighting against an Snow Lily, an intelligent plant with the torso of a woman and the lower body of a giant flower. She seems really keen on raping you.";
-				this.skinTone = "light blue";
+				this.bodyColor = "light blue";
 				this.hairColor = "white";
 			}
 			this.imageName = "snow lily alraune";

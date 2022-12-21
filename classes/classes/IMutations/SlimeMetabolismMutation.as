@@ -10,6 +10,7 @@ import classes.Creature;
 
     public class SlimeMetabolismMutation extends IMutationPerkType
     {
+        private static const mName:String = "Slime Mutation";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -40,7 +41,7 @@ import classes.Creature;
                 default:
                     sufval = "";
             }
-            return "Slime Mutation" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -62,15 +63,13 @@ import classes.Creature;
         }
 
         //Mutations Buffs
-        override public function pBuffs(target:Creature = null):Object{
+        override public function buffsForTier(pTier:int):Object {
             var pBuffs:Object = {};
-            var pTier:int = currentTier(this, (target == null)? player : target);
             return pBuffs;
         }
 
         public function SlimeMetabolismMutation() {
-            super("Slime Metabolism IM", "Slime Metabolism", ".");
-            maxLvl = 3;
+            super(mName + " IM", mName, SLOT_NONE, 3);
         }
         
     }

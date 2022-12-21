@@ -5,6 +5,7 @@ import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Combat.Combat;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
@@ -142,10 +143,10 @@ public class Minerva extends Monster
 		private function bootyShortInYoFaceSon():void
 		{
 			outputText("The blue beauty turns around and bends over so far that she uses her halberd like a pole to support herself.  She lifts her shark tail up so you can see her short-shorts hugging perfectly against her ample bottom.  Her tail waves to the left and to the right as she does a little booty shake for you.  The siren gives her big ass a nice, hard slap that echoes off the tower walls, and making it jiggle even more.  She quickly turns around to face you, smirking at what she just did. ");
-			if (flags[kFLAGS.MINERVA_LVL_UP] >= 12) player.dynStats("lus", 50 + player.lib / 10 + rand(8));
-			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 8) player.dynStats("lus", 40 + player.lib / 10 + rand(7));
-			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 4) player.dynStats("lus", 30 + player.lib / 10 + rand(6));
-			else player.dynStats("lus", 20 + player.lib / 10 + rand(5));
+			if (flags[kFLAGS.MINERVA_LVL_UP] >= 12) player.takeLustDamage(50 + player.lib / 10 + rand(8), true);
+			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 8) player.takeLustDamage(40 + player.lib / 10 + rand(7), true);
+			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 4) player.takeLustDamage(30 + player.lib / 10 + rand(6), true);
+			else player.takeLustDamage(20 + player.lib / 10 + rand(5), true);
 		}
 
 //Lust Attacks for all Minervas
@@ -153,10 +154,10 @@ public class Minerva extends Monster
 		private function lickDatPole():void
 		{
 			outputText("Minerva stands, holding her halberd straight up next to her as she looks it over with a seductive stare.  Giving you a suggestive look she rolls out a two-foot long tongue from her mouth, licking a good length of the massive weapon, even wrapping her tongue around it a few times.  Suddenly she sucks her tongue back into her mouth and gives you a little smirk, almost to say \"<i>Yeah, I can do that... and more.</i>\" ");
-			if (flags[kFLAGS.MINERVA_LVL_UP] >= 12) player.dynStats("lus", 50 + player.lib / 10 + rand(8));
-			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 8) player.dynStats("lus", 40 + player.lib / 10 + rand(7));
-			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 4) player.dynStats("lus", 30 + player.lib / 10 + rand(6));
-			else player.dynStats("lus", 20 + player.lib / 10 + rand(5));
+			if (flags[kFLAGS.MINERVA_LVL_UP] >= 12) player.takeLustDamage(50 + player.lib / 10 + rand(8), true);
+			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 8) player.takeLustDamage(40 + player.lib / 10 + rand(7), true);
+			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 4) player.takeLustDamage(30 + player.lib / 10 + rand(6), true);
+			else player.takeLustDamage(20 + player.lib / 10 + rand(5), true);
 		}
 
 //Special attack
@@ -172,11 +173,11 @@ public class Minerva extends Monster
 			else {
 				outputText("Her hum becomes a song.  A magnificent song without words, a sound that should be impossible for any human, or creature for that matter, to make naturally.");
 				//If wait:
-				if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) outputText("  You cover your ears before she even opens her lips, wary of its power.  Judging by the dim feeling of pleasure simmering through you with the little sound you're picking up regardless, it probably was for the better.");
+				if (Combat.playerWaitsOrDefends()) outputText("  You cover your ears before she even opens her lips, wary of its power.  Judging by the dim feeling of pleasure simmering through you with the little sound you're picking up regardless, it probably was for the better.");
 				//No wait - insta loss:
 				else {
 					outputText("  Your mind clouds over as the song flows through your ears and fills your mind with sweet bliss.");
-					player.dynStats("lus", 1000);
+					player.takeLustDamage(1000, true);
 					if (player.lust >= player.maxOverLust()) outputText("  You lower your [weapon] and dreamily walk into the siren's sweet embrace.  You absent-mindedly disrobe yourself as you move in closer, the song getting louder with each step you take, until you finally bury yourself into the siren's soft bosom and she wraps her feathery arms around your body.  She stops singing her beautiful song and whispers into your ear, \"<i>You're all mine now.</i>\"");
 				}
 				removeStatusEffect(StatusEffects.SirenSong);
@@ -203,12 +204,16 @@ public class Minerva extends Monster
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			SceneLib.highMountains.minervaScene.beatUpDatSharpie();
+			if (flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] >= 10)
+				SceneLib.highMountains.minervaScene.minervaCorruption.corruptWin();
+			else SceneLib.highMountains.minervaScene.beatUpDatSharpie();
 		}
 
 		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
 		{
-			SceneLib.highMountains.minervaScene.loseToMinerva();
+			if (flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] >= 10)
+				SceneLib.highMountains.minervaScene.minervaCorruption.corruptLoss();
+			else SceneLib.highMountains.minervaScene.loseToMinerva();
 		}
 
 		public function Minerva()
@@ -247,6 +252,19 @@ public class Minerva extends Monster
 				this.level = 23 + 6*lvlMulti;
 				this.additionalXP = 50 + 50*lvlMulti;
 			}//level up giving 2x all growns and so follow next level ups's as long each npc break lvl 100 (also makes npc use new better gear)
+			//corrupted minerva {
+			//TODO: - Increase Corrupt Minerva’s combat stats by 10%
+			//TODO: - Minerva bace lust up by 20
+			if (flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] >= 10) {
+				initStrTouSpeInte(this.str * 1.1, this.tou * 1.1, this.spe * 1.1, this.inte * 1.1);
+				initWisLibSensCor(this.wis * 1.1, this.lib * 1.1, this.sens * 1.1, 80);
+				this.weaponAttack *= 1.1;
+				this.armorDef *= 1.1;
+				this.armorMDef *= 1.1;
+				this.bonusHP *= 1.1;
+				this.bonusLust *= 1.2;
+				this.additionalXP *= 1.1;
+			}
 			this.a = "";
 			this.short = "Minerva";
 			//Set imageName based on pure/corrupt
@@ -275,7 +293,7 @@ public class Minerva extends Monster
 			this.tallness = 8*12+4;
 			this.hips.type = Hips.RATING_CURVY;
 			this.butt.type = Butt.RATING_LARGE + 1;
-			this.skinTone = "blue";
+			this.bodyColor = "blue";
 			this.hairColor = "red";
 			this.hairLength = 25;
 			if (flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] >= 10) cor = 0; //Set to 0 corruption if purified.
@@ -289,9 +307,10 @@ public class Minerva extends Monster
 			this.armorValue = 5;
 			this.lust = 20;
 			this.lustVuln = .2;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.gems = rand(40)+25;
-			this.drop = new WeightedDrop(consumables.PURPEAC, 1);
+			this.drop = new WeightedDrop();
+			if (flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] < 10)
+				(this.drop as WeightedDrop).add(consumables.PURPEAC, 1); //corrupted still non-existent
 			this.wings.type = Wings.HARPY;
 			this.wings.desc = "fluffy feathery";
 			this.createPerk(PerkLib.UniqueNPC, 0, 0, 0, 0);

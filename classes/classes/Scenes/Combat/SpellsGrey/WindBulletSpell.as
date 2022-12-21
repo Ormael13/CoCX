@@ -17,7 +17,7 @@ public class WindBulletSpell extends AbstractGreySpell {
 				: "Devastate the enemy ranks with a barrage of wind bullets.",
 			TARGET_ENEMY,
 			TIMING_INSTANT,
-			[TAG_DAMAGING, TAG_WIND]
+			[TAG_DAMAGING, TAG_WIND, TAG_TIER1]
 		);
 		baseManaCost = 40;
 		if (ex) baseWrathCost = 100;

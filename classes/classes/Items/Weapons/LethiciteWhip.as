@@ -8,6 +8,7 @@ package classes.Items.Weapons
 		
 		public function LethiciteWhip() {
 			super("L. Whip","L. Whip","flaming whip","a flaming whip once belonged to Lethice","whip-crack", 20, 1600, "This whip once belonged to Lethice who was defeated at your hands. It gives off flames when you crack this whip.", "Whipping", "Whip");
+			withBuffs({'teasedmg': 50});
 		}
 		
 		override public function get attack():Number {

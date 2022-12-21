@@ -8,11 +8,11 @@ import classes.PerkClass;
 import classes.PerkLib;
 import classes.IMutationPerkType;
 import classes.Creature;
-import classes.Player;
 import classes.Races;
 
 public class ScyllaInkGlandsMutation extends IMutationPerkType
     {
+        private static const mName:String = "Scylla Ink Glands";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
@@ -43,7 +43,7 @@ public class ScyllaInkGlandsMutation extends IMutationPerkType
                 default:
                     sufval = "";
             }
-            return "Scylla Ink Glands" + sufval;
+            return mName + sufval;
         }
 
         //Mutation Requirements
@@ -53,7 +53,8 @@ public class ScyllaInkGlandsMutation extends IMutationPerkType
                 //This helps keep the requirements output clean.
                 this.requirements = [];
                 if (pTier == 0){
-                    this.requirePerk(PerkLib.InkSpray)
+                    this.requireAdaptationsMutationSlot()
+                    .requirePerk(PerkLib.InkSpray)
                     .requireRace(Races.SCYLLA);
                 }
                 else{
@@ -66,9 +67,8 @@ public class ScyllaInkGlandsMutation extends IMutationPerkType
         }
 
         //Mutations Buffs
-        override public function pBuffs(target:Creature = null):Object{
+        override public function buffsForTier(pTier:int):Object {
             var pBuffs:Object = {};
-            var pTier:int = currentTier(this, (target == null)? player : target);
             if (pTier == 1) pBuffs['str.mult'] = 0.1;
             //else if (pTier == 2) pBuffs['int.mult'] = 0;
             //else if (pTier == 3) pBuffs['int.mult'] = 0;
@@ -76,8 +76,7 @@ public class ScyllaInkGlandsMutation extends IMutationPerkType
         }
 
         public function ScyllaInkGlandsMutation() {
-            super("Scylla Ink Glands IM", "Scylla Ink Glands", ".");
-            maxLvl = 1;
+            super(mName + " IM", mName, SLOT_ADAPTATIONS, 1);
         }
         
     }

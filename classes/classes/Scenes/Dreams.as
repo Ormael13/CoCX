@@ -8,7 +8,6 @@ import classes.GlobalFlags.kFLAGS;
 import classes.PerkLib;
 import classes.Player;
 import classes.Races;
-import classes.StatusEffects;
 import classes.internals.Utils;
 
 public class Dreams {
@@ -25,11 +24,11 @@ public class Dreams {
         //BUILD UP CHOICES ARRAY
         var scores:Array = [
                 [player.humanScore(), 0],
-                [player.racialScore(Races.HORSE), 1],
-                [player.racialScore(Races.DOG),   2],
-                [player.racialScore(Races.COW),   3],
-                [player.racialScore(Races.CAT),   4],
-                [player.racialScore(Races.DEMON), 5]
+                [player.racialScore(Races.HORSE, false), 1],
+                [player.racialScore(Races.DOG, false),   2],
+                [player.racialScore(Races.COW, false),   3],
+                [player.racialScore(Races.CAT, false),   4],
+                [player.racialScore(Races.DEMON, false), 5]
         ];
         for each (var score:Array in scores){
             for(var i:int = score[0]; i > 0; i--){
@@ -52,13 +51,13 @@ public class Dreams {
             choices[choices.length] = 7;
         }
         //Exgartuboobs
-        if(player.statusEffectv1(StatusEffects.Exgartuan) == 2) {
+        if(SceneLib.exgartuan.boobsPresent()) {
             choices[choices.length] = 8;
             choices[choices.length] = 8;
             choices[choices.length] = 8;
         }
         //Exgartucock
-        if(player.statusEffectv1(StatusEffects.Exgartuan) == 1 && player.hasCock()) {
+        if(SceneLib.exgartuan.dickPresent()) {
             choices[choices.length] = 9;
             choices[choices.length] = 9;
             choices[choices.length] = 9;
@@ -87,19 +86,19 @@ public class Dreams {
             choices[choices.length] = 14;
             choices[choices.length] = 14;
         }
-        if(SceneLib.anemoneScene.kidAXP() >= 40 && player.lust >= 70 && player.gender > 0) {
+        if(SceneLib.kidAScene.kidAXP() >= 40 && player.lust >= 70 && player.gender > 0) {
             choices[choices.length] = 15;
             choices[choices.length] = 15;
             choices[choices.length] = 15;
         }
         //Sand trap
-        if(player.racialScore(Races.SANDTRAP) >= 2) {
+        if(player.racialScore(Races.SANDTRAP, false) >= 2) {
             choices[choices.length] = 16;
             choices[choices.length] = 16;
             choices[choices.length] = 16;
             choices[choices.length] = 16;
         }
-        if(player.racialScore(Races.MOUSE) >= 3) {
+        if(player.racialScore(Races.MOUSE, false) >= 3) {
             choices[choices.length] = 17;
             choices[choices.length] = 17;
             choices[choices.length] = 17;
@@ -120,7 +119,7 @@ public class Dreams {
         // Well Adjusted cuts by half
         if (player.hasPerk(PerkLib.WellAdjusted)) dreamLust = (dreamLust / 2);
 
-        if (dreamLust > 0) player.dynStats("lus", dreamLust);
+        if (dreamLust > 0) player.dynStats("lus", dreamLust, "scale", false);
 
         //ACTUAL DREAM TEXTS
         if(dreamtemp > 5) {
@@ -233,7 +232,7 @@ public class Dreams {
 
                 EngineCore.outputText("Her hands stroke her tits, encouraging you to push in deeper, harder.  She jiggles the overabundant flesh, sending comfortable ripples down all of her obscene cleavage.  \"<i>Harder,</i>\" she pants out eagerly, \"<i>harder!</i>\"  You grunt and pound, gripping onto her huge nipples to brace yourself.  Under her chin your cockhead bursts up, grinding into her neck and making her gasp excitedly.\n\n");
 
-                EngineCore.outputText("Eventually you cum, splattering your spunk all across her features and the top of her tits.  It runs down the massive flesh in slow dribbles, dimples in the enormous bust causing the spooge to puddle slowly.  Licking her lips, she grinds the cum into her breasts before pausing.  Looking at you carefully, she speaks.  \"<i>So, is this your dream?</i>\" Exgartuan asks.  \"<i>Or mine?</i>\"\n\n");
+                EngineCore.outputText("Eventually you cum, splattering your spunk all across her features and the top of her tits.  It runs down the massive flesh in slow dribbles, dimples in the enormous bust causing the spooge to puddle slowly.  Licking her lips, she grinds the cum into her breasts before pausing.  Looking at you carefully, she speaks.  \"<i>So, is this your dream?</i>\" Xenora asks.  \"<i>Or mine?</i>\"\n\n");
 
                 EngineCore.outputText("You awake with a start.  Your " + player.breastDescript(0) + " jiggles grumpily.");
             }
@@ -301,7 +300,7 @@ public class Dreams {
             }
             else if(daydream == 15) {
                 EngineCore.outputText("something unusual...\n");
-                SceneLib.anemoneScene.kidADreams();
+                SceneLib.kidAScene.kidADreams();
             }
             else if(daydream == 16) {
                 if(player.gender <= 1) {
@@ -325,12 +324,12 @@ public class Dreams {
                         //end dream
                         //lust increase
                     }
-                    player.dynStats("lus", 25);
+                    player.dynStats("lus", 25, "scale", false);
                 }
                 else {
                     //Female Trap Dream:
                     EngineCore.outputText("odd things...\nYou find it difficult to find deep sleep, your rest tormented by strange desires which pluck at your subconscious and tease at your supple tomboy body.   You dream of rough leather on your skin, tough cotton tight upon your [fullChest] and the smell of medicinal alcohol in your nose.  You dream of swaggering down the roads of your old home town, meeting the eyes of everyone you pass, daring them to ask; you dream of haunting bars and parties in a perpetual twilight, sweet talking every girl you see with casual, lust charged ease.  Women want you and men want to be you in the whirl of your sleeping mind.  There is a buzz running through these thoughts and images which energises and stupefies you; you find yourself charging through dream after tantalising dream, exhausting yet somehow never satisfying yourself.");
-                    player.dynStats("lus", 25);
+                    player.dynStats("lus", 25, "scale", false);
                 }
             }
             else if(daydream == 17) {
@@ -433,8 +432,8 @@ public class Dreams {
                 EngineCore.outputText("You wake up in a sweat.  Fuck.");
             }
         }
-        if(CoC.instance.player.cor < 50) CoC.instance.player.dynStats("lus", 10);
-        else CoC.instance.player.dynStats("lus", 25);
+        if(CoC.instance.player.cor < 50) CoC.instance.player.dynStats("lus", 10, "scale", false);
+        else CoC.instance.player.dynStats("lus", 25, "scale", false);
         EngineCore.doNext(EventParser.playerMenu);
     }
 
@@ -495,8 +494,7 @@ public class Dreams {
         while (x > 0) {
             x--;
             if(CoC.instance.player.cocks[x].sock == "amaranthine" && CoC.instance.player.cocks[x].cockType != CockTypesEnum.DISPLACER) {
-                if(CoC.instance.player.cocks[x].cockType != CockTypesEnum.DOG) CoC.instance.player.cocks[x].knotMultiplier = 1.5;
-                CoC.instance.player.cocks[x].cockType = CockTypesEnum.DISPLACER;
+                CoC.instance.transformations.CockDisplacer(x).applyEffect(false);
             }
         }
         EngineCore.doNext(EventParser.playerMenu);

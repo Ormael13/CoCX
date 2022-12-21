@@ -99,7 +99,7 @@ public class Halkano extends TrollVillageAbstractContent{
         clearOutput();
         outputText("You tell Halkano that you wanted to get to know more about him, who he is, and what he does, does he enjoy his time here?\n" +
                 "Halkano thinks for a moment, \"<i>It’s well, I do my best ta keep my wife happy… and well… I tink I did a little too good of a job at dat…</i>\" He gives an infatuated sigh. \"<i>Yeah... </i>\" His dopey expression shifts to dismay, \"<i>It was because my son left us, I can’t say for sure why, or what caused it, but I loved him with everyting I had to give, my heart, my soul…</i>\"\n");
-                if (flags[kFLAGS.MARRIAGE_FLAG] == "Zenji"){
+                if (sceneHunter.married("Zenji")){
                     outputText(", \"<i>Tanks ta you though, Zenji is back and I’m honored ta call you family.</i>\"\n");
                 }
                 outputText("\"<i>Aside from dat though,</i>\" He sighs, \"<i>I am a carpenter, I like what I do and I’m good at it. Good wit my hands, years and years of practice and hard work does pay off.</i>\"\n" +
@@ -244,7 +244,7 @@ public class Halkano extends TrollVillageAbstractContent{
                 "His body is very muscular with considerable heft. His bare chest is chunky and beefy, almost invitingly comfortable with his soft fur. He is currently only wearing fur pants that cover his lower body and legs, held up by a silky sash. He has the average features you’d expect on a male troll. Toned and muscular arms and legs, each supporting 4 fingers or toes. A fuzzy tail, about 3 feet long, as well as fur covering his entire body.\n" +
                 "\n" +
                 "Halkano gives a polite smile as you eye him up and down.\n");
-        SceneLib.trollVillage.jabala.JabalaHalkanoTalk();
+        doNext(SceneLib.trollVillage.jabala.JabalaHalkanoTalk);
     }
 
     public function JHalkanoSexScenes():void{

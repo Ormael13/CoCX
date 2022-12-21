@@ -40,8 +40,9 @@ package classes.GeneticMemories {
 	 */
 
     public static var Memories:/*EnumValue*/ Array = [];
+	  private static var _partid:int = 0;
 
-		public static const HUMAN:int = 0;
+		public static const HUMAN:int = _partid++;
 		EnumValue.add(Memories, HUMAN, "HUMAN", {
 			id: "Unlocked Metamorph",
 			name: "Human Tongue",
@@ -52,7 +53,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const SNAKE:int = 1;
+		public static const SNAKE:int = _partid++;
 		EnumValue.add(Memories, SNAKE, "SNAKE", {
 			id: "Snake Tongue",
 			name: "Snake Tongue",
@@ -63,7 +64,18 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const DEMONIC:int = 2;
+		public static const DOG:int = _partid++;
+		EnumValue.add(Memories, DOG, "DOG", {
+			id: "Dog Tongue",
+			name: "Dog Tongue",
+			cost: 100,
+			title: "Dog",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.TongueDog;
+			}
+		});
+
+		public static const DEMONIC:int = _partid++;
 		EnumValue.add(Memories, DEMONIC, "DEMONIC", {
 			id: "Demon Tongue",
 			name: "Demon Tongue",
@@ -74,7 +86,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const DRACONIC:int = 3;
+		public static const DRACONIC:int = _partid++;
 		EnumValue.add(Memories, DRACONIC, "DRACONIC", {
 			id: "Draconic Tongue",
 			name: "Draconic Tongue",
@@ -85,7 +97,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const CAT:int = 4;
+		public static const CAT:int = _partid++;
 		EnumValue.add(Memories, CAT, "CAT", {
 			id: "Cat Tongue",
 			name: "Cat Tongue",
@@ -96,7 +108,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const ELF:int = 5;
+		public static const ELF:int = _partid++;
 		EnumValue.add(Memories, ELF, "ELF", {
 			id: "Elf Tongue",
 			name: "Elf Tongue",
@@ -107,7 +119,7 @@ package classes.GeneticMemories {
 			}
 		});
 
-		public static const CAVE_WYRM:int = 6;
+		public static const CAVE_WYRM:int = _partid++;
 		EnumValue.add(Memories, CAVE_WYRM, "CAVE_WYRM", {
 			id: "Cave Wyrm Tongue",
 			name: "Cave Wyrm Tongue",
@@ -117,6 +129,52 @@ package classes.GeneticMemories {
 				return CoC.instance.transformations.TongueCaveWyrm;
 			}
 		});
+		
+		
+		public static const MELKIE:int = _partid++;
+		EnumValue.add(Memories, MELKIE, "MELKIE", {
+			id: "Melkie Tongue",
+			name: "Melkie Tongue",
+			cost: 100,
+			title: "Melkie",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.TongueMelkie;
+			}
+		});
+		
+		public static const RATATOSKR:int = _partid++;
+		EnumValue.add(Memories, RATATOSKR, "RATATOSKR", {
+			id: "Ratatoskr Tongue",
+			name: "Ratatoskr Tongue",
+			cost: 100,
+			title: "Ratatoskr",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.TongueRatatoskr;
+			}
+		});
+		
+		public static const GHOST:int = _partid++;
+		EnumValue.add(Memories, GHOST, "GHOST", {
+			id: "Ghost Tongue",
+			name: "Ghost Tongue",
+			cost: 100,
+			title: "Ghost",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.TongueGhost;
+			}
+		});
+		
+		public static const RAVENOUS_TONGUE:int = _partid++;
+		EnumValue.add(Memories, RAVENOUS_TONGUE, "RAVENOUS_TONGUE", {
+			id: "Ravenous Tongue",
+			name: "Ravenous Tongue",
+			cost: 100,
+			title: "Ravenous",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.TongueRavenous;
+			}
+		});
+
 
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];

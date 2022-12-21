@@ -1,4 +1,4 @@
-package classes.Scenes.Areas.Bog 
+package classes.Scenes.Areas.Bog
 {
 import classes.*;
 import classes.GlobalFlags.*;
@@ -7,16 +7,16 @@ import classes.Scenes.SceneLib;
 
 public class LizanRogueScene extends BaseContent
 	{
-				
-		public function LizanRogueScene() 
+		
+		public function LizanRogueScene()
 		{
-			
+		
 		}
 		
 		public function lizanIntro():void {
 			clearOutput();
 			if (player.cor > 33 + player.corruptionTolerance) {
-				outputText("As you walk through the bog you happen upon a lone lizan male covered in " + monster.skinTone + " scales. Upon hearing your approach he jumps back, your sudden appearance must have surprised him. After an initial moment of surprise, the lizan tentatively sniffs the air between the two of you. Without warning, he jumps back, flashing his claws and releasing a loud hiss. Apparently he smells something he doesn't like. You ready for an attack, but he just sits there, making noise and puffing himself up. For all the ferocity he displays he doesn't attack, and you realize he's waiting for you to back down. What will you do?");
+				outputText("As you walk through the bog you happen upon a lone lizan male covered in " + monster.bodyColor + " scales. Upon hearing your approach he jumps back, your sudden appearance must have surprised him. After an initial moment of surprise, the lizan tentatively sniffs the air between the two of you. Without warning, he jumps back, flashing his claws and releasing a loud hiss. Apparently he smells something he doesn't like. You ready for an attack, but he just sits there, making noise and puffing himself up. For all the ferocity he displays he doesn't attack, and you realize he's waiting for you to back down. What will you do?");
 				camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_LIZANS);
 				menu();
 				addButton(0, "Fight", fightLizan, false, null, null, "Fight the lizan!");
@@ -27,12 +27,12 @@ public class LizanRogueScene extends BaseContent
                 addButton(2, "Leave", leaveLizan, false);
 			}
 			else {
-				outputText("As you walk through the bog you happen upon a lone lizan male covered in " + monster.skinTone + " scales. Upon hearing your approach he jumps back, your sudden appearance must have surprised him. After an initial moment of surprise, the lizan tentatively sniffs the air between the two of you. ");
+				outputText("As you walk through the bog you happen upon a lone lizan male covered in " + monster.bodyColor + " scales. Upon hearing your approach he jumps back, your sudden appearance must have surprised him. After an initial moment of surprise, the lizan tentatively sniffs the air between the two of you. ");
 				if (flags[kFLAGS.MET_LIZAN_FIRST_TIME] <= 0) {
 					if (player.tallness > 64) outputText("He is shorter than you and wearing nothing but a loincloth with a pack belted onto it.");
 					else if (player.tallness >= 60) outputText("He is about the same height as you and wearing nothing but a loincloth with a pack belted onto it.");
 					else outputText("He is taller than you and wearing nothing but a loincloth with a pack belted onto it.");
-					outputText("\n\nThis shows off his toned but slim chest, arms and legs covered in " + monster.skinTone + " scales. ");
+					outputText("\n\nThis shows off his toned but slim chest, arms and legs covered in " + monster.bodyColor + " scales. ");
 					flags[kFLAGS.MET_LIZAN_FIRST_TIME] = 1;
 				}
 				outputText("After a moment of silent consideration, he speaks. \n\n\"<i>Hey there,</i>\" he says, his lizard lips pulling into a big grin, \"<i>... and who might you be?</i>\" You answer with the truth, your name. ");
@@ -123,13 +123,13 @@ public class LizanRogueScene extends BaseContent
 		public function loseToLizan():void {
 			clearOutput();
 			if (player.cor > 30) {
-				outputText("Unable to continue fighting, you collapse from " + (player.lust >= player.maxLust() ? "overwhelming desires": "your injuries") + ". The lizan steps over to you, intent on punishing you. ");
+				outputText("Unable to continue fighting, you collapse from " + (player.lust >= player.maxOverLust() ? "overwhelming desires": "your injuries") + ". The lizan steps over to you, intent on punishing you. ");
 				cleanupAfterCombat();
 			}
 			else {
 				outputText("You are forced to raise your hand in defeat, and the lizan celebrates with a few acrobatic flips and plenty of bragging. After a quick friendly chat the two of you part ways, having gotten a good workout in the process. ");
 				cleanupAfterCombat();
-			}			
+			}
 		}
 		
 		public function haveSexWithLizan(continuation:Boolean = false):void {
@@ -150,16 +150,13 @@ public class LizanRogueScene extends BaseContent
             //start
 			clearOutput();
 			outputText("The lizan watches you with obvious interest as he asks \"<i>How do you like to do this?</i>\"");
-			outputText("\n\nYou tell him you want his ass, making sure to assert your dominance. He doesn't seem to mind as he turns away and peels off his loincloth, exposing his tight little toned ass with a lift of his glistening " + monster.skinTone + " tail. After he has discarded the meager clothing he turns back around to face you, displaying dual bumpy purple lizan dicks, neither of which are small.");
+			outputText("\n\nYou tell him you want his ass, making sure to assert your dominance. He doesn't seem to mind as he turns away and peels off his loincloth, exposing his tight little toned ass with a lift of his glistening " + monster.bodyColor + " tail. After he has discarded the meager clothing he turns back around to face you, displaying dual bumpy purple lizan dicks, neither of which are small.");
 			outputText("\n\nTaking charge of the situation you take him by the shoulders and push him down to his knees. He doesn't seem to mind the gentle reminder of your dominance. From the way he begins flicking his tongue at [eachCock] you feel that he is actually quite turned on by the gesture.");
             //select size first
             sceneHunter.callBigSmall(consButt_multiSel, 12, 7, "length");
 
             function consButt_multiSel(cock:int):void {
-                sceneHunter.selectSingleMulti(
-                    curry(scene, cock, false),
-                    curry(scene, cock, true)
-                );
+                sceneHunter.selectSingleMulti(curry(scene, cock, false), curry(scene, cock, true));
             }
 
             function scene(x:int, multi:Boolean):void {
@@ -175,16 +172,16 @@ public class LizanRogueScene extends BaseContent
                 }
                 else { //Multi cocks
                     outputText("\n\nLike a snake his tongue slithers from his lips and begins to encircle your " + player.cockDescript(x) + ", the moves on until it has formed at least two coils around each of your cocks. The surprisingly firm snake like organ massages all of your dicks in firm rhythmic strokes. It feels like a family of hot, wet snakes are writhing around [eachCock], squeezing with practiced ease as saliva trickles down your shafts. ");
-                    if (player.balls > 0) outputText("You groan as you feel his spit drip down your [balls] and [legs].");
+                    if (player.hasBalls()) outputText("You groan as you feel his spit drip down your [balls] and [legs].");
                     if (player.isBiped()) outputText("\n\nPrompting you to spread your [legs] and lean back, letting the lizan know how much you're enjoying this odd tongue job.");
                     outputText("\n\nThis lizan is obviously used to orally accommodating multiple cocks. His head begins to bob slightly, pulling [eachCock] wrapped in his gloriously talented tongue with it. The lizan rubs your [legs] with his cool scaly hands, causing you to thrust towards his face. After a few minutes of intense cock squeezing, he begins to untangle his insanely long tongue from [eachCock]. The process gives your surging erections time to cool down before the main event. Once finished, he licks his lips before giving you a self-satisfied smile.");
                 }
-                outputText("\n\nAs you marvel at the lizan's oral talents he gets on his back and wraps his arms around his well-defined calf muscles. You feel like the luckiest guy in the world as you watch the flexible lizan practically fold himself in half. The lean globes of his toned " + monster.skinTone + " ass points up at you, a natural part forming to make his naked hole visible. The way his hole winks at you causes [eachCock] to twitch in anticipation.");
+                outputText("\n\nAs you marvel at the lizan's oral talents he gets on his back and wraps his arms around his well-defined calf muscles. You feel like the luckiest guy in the world as you watch the flexible lizan practically fold himself in half. The lean globes of his toned " + monster.bodyColor + " ass points up at you, a natural part forming to make his naked hole visible. The way his hole winks at you causes [eachCock] to twitch in anticipation.");
                 outputText("\n\nBefore you can get down there and take full advantage of his position his tongue makes an encore appearance. You watch as it slithers down his body, tickling his pert nippples before diving down to his sculpted abdominals. It moves like a snake, wrapping around his dual cocks before the tip dips into his spread hole. He begins to lube up his anal passage, even stretching his hole a little bit. The lizan roughly tongue fucks his own hole, making a show of it as he swishes his tail and pulls his legs closer to his chest. He begins to release soft little sexy gasps as he drills his tongue deeper and deeper into his well relaxed hole. [EachCock] twitches at the sight, and soon he slurps his last and retracts his tongue. You can't help but smile as you push him forward and aim straight for his wet little rosebud.");
                 if (player.cocks[x].cockLength < 7) {
                     outputText("\n\nYou push your " + player.cockDescript(x) + " into a slickened passage suffused with sweltering heat. The lizan sighs as you begin to rock back and forth inside of him, obviously enjoying the repeated incursions of your " + player.cockDescript(x) + " as it moves through him. He widens his legs and teasingly flicks that talented tongue at you. You accept his little challenge and promptly begin roughly pounding the lizan's upturned hole. Beneath you his two bouncing dicks are already leaking small droplets of pale fluid as each thrust causes them to bounce across his toned little stomach.");
                 }
-                else if (player.cocks[x].cockLength < 12) { 
+                else if (player.cocks[x].cockLength < 12) {
                     outputText("\n\nYou push your " + player.cockDescript(x) + " into the lizan, his hot wet innards fit your " + player.cockDescript(x) + " like a glove. He groans as you begin to move, rocking your [hips] to get a steady rhythm going. He widens his scaled legs, an invitation to drill his upturned ass harder and deeper. An invitation, which you gladly accept. As you slowly increase tempo, his eyes begin to roll into the back of his head as his little clawed toes curl at the edge of your vision. Every stroke sends a quiver through your " + player.cockDescript(x) + " and soon you're fucking the lizan with gusto, pounding his upturned hole at top speed and forcibly drawing grunts and groans from the lizan as he takes all you have to offer. You can tell he is loving it from the way his eyes roll into the back of his head as his bouncing lizan dicks spray you both with droplets of creamy fluid.");
                 }
                 else {
@@ -192,14 +189,14 @@ public class LizanRogueScene extends BaseContent
                     outputText("\n\nSlightly frustrated you shove, causing a sharp yelp to come from your partner. He gives you a withering look before your apologetic smile causes him to smile back at you, excusing your impatience. As you begin again, the lizan's hole is finally beginning to open up. You can tell from the slight edge in his voice that your " + player.cockDescript(x) + " is breaching unexplored territory. You rock yourself in deeper and deeper until you've completely shafted the guy. His chest heaves as you hold your entire length deep inside of his quivering anal sleeve. It takes him a few moments to get used to your " + player.cockDescript(x) + " and once he gives you the go ahead you begin to fuck him at a medium pace. He trembles and grunts, rolling his hips and convulsing as you big cock makes him practically delirious.");
                     outputText("\n\nAfter a while you decide to pick up the pace. After a few moderate strokes into the tight wet sleeve you lean forward and press his knees into his chest. The lizan growls as you begin to fuck his little scaly ass as hard as you can. Beneath you his two bumpy purple lizan dicks are leaking a heavy river of sticky pale fluid as your madly pumping " + player.cockDescript(x) + " causes them to flap around on his toned and heaving stomach.");
                 }
-                outputText("\n\nYour thrusts are a echoing smack against his " + monster.skinTone + " ass as you begin fucking him with the entire length of your " + player.cockDescript(x) + ". Soon, your abuse of his prostate becomes too much. His rectal passage clenches tightly as his twin shafts burst, spraying dual torrents of pale cream across everywhere as you fuck him through his orgasm. His flexing tail hole and the sight of his exploding lizan dicks push you over the edge.");
+                outputText("\n\nYour thrusts are a echoing smack against his " + monster.bodyColor + " ass as you begin fucking him with the entire length of your " + player.cockDescript(x) + ". Soon, your abuse of his prostate becomes too much. His rectal passage clenches tightly as his twin shafts burst, spraying dual torrents of pale cream across everywhere as you fuck him through his orgasm. His flexing tail hole and the sight of his exploding lizan dicks push you over the edge.");
                 if (player.cumQ() < 350) outputText("Your [face] twists around a strained groan, and you spray your own impressive load deep into the lizan's bowels.");
                 else if (player.cumQ() < 1000) outputText("Your [face] twists around a deep growl as you pour your load deep into the lizan's bowels. As you fuck your seed deeper into his clenching bowls you can feel some of it gushing out and dripping down your [legs].");
                 else if (player.cumQ() < 2500) outputText("Your [face] twists into a chilling howl as you explode deep within the lizan's bowels. As you fuck your seed deep into his bowels his stomach becomes a little less defined, a testament to how much seed you've poured into him. You can even feel it dripping down your [legs].");
                 else outputText("Your [face] twists into a titanic roar as [eachCock] explodes with enough force to blast out of the lizan's rectal embrace. Torrents of creamy white fluid blast from [eachCock]. Soon the lizan's upturned ass and the base of his tail are covered, but you're still going. By the time you're finished the lizan is grinning from ear to ear amidst a small lake of cum.");
                 outputText("\n\nSpent and breathing hard you collapse. For a second you just lie there [fullChest] against his abs, and his legs wrapped around your [hips] while lying in the hot glorious mess of his lizan spunk. Both of you are panting, both of you have been satisfied. Then you push yourself off of him and go to collect your [armor]. He takes it upon himself to clean your [fullChest] with his tongue and as soon as he is done, " + player.clothedOrNaked("you pull on your [armor]", "you recollect whatever you had") + ". Before you leave, you reward him with a deep kiss, snaking your [tongue] into his mouth before heading back to camp.");
                 flags[kFLAGS.LIZAN_ROGUE_SEX_COUNTER]++;
-                player.sexReward("Default","Dick",true,false);
+                player.sexReward("no", "Dick");
                 doNext(camp.returnToCampUseOneHour);
                 if (CoC.instance.inCombat) cleanupAfterCombat();
             }
@@ -207,12 +204,12 @@ public class LizanRogueScene extends BaseContent
 		
 		public function consensualGetFucked():void {
 			clearOutput();
-			outputText("The lizan watches you with unabashed interest and asks \"<i>How would you like to do this?</i>\" you tell him you are going to ride him, which causes a huge grin to spread across his face. He confidently peels off his loincloth, exposing two bumpy purple erect lizan dicks not lacking in length or girth. He is a stunning visage with his " + monster.skinTone + " scales, powerful tail and dual cocks all on display for you, his audience of one.");
+			outputText("The lizan watches you with unabashed interest and asks \"<i>How would you like to do this?</i>\" you tell him you are going to ride him, which causes a huge grin to spread across his face. He confidently peels off his loincloth, exposing two bumpy purple erect lizan dicks not lacking in length or girth. He is a stunning visage with his " + monster.bodyColor + " scales, powerful tail and dual cocks all on display for you, his audience of one.");
 			outputText("\n\nWhen the two of you come together he displays his patience by sliding his hands onto your waist and pulling you into a kiss. As your tongues wrestle, he massages your lower back, and you feel the tension draining from your body. ");
             outputText("\n\nThe lizan begins to paint kisses down your neck, leaving a trail of tender suck marks in his wake. ");
 			if (player.isLactating() && (!player.hasFuckableNipples() || rand(2) == 0)) outputText("When he reaches your [fullChest] he takes one look at your [nipples] and cocks his head to the side in confusion. His tongue slips out to taste a single bead of creamy white, a taste you see repeated on the next breast. He seems to really like your lactating nipples. He opens his mouth wide and latches on to one of your [nipples], his hand playing with another. The tingling sensation he causes is quite pleasant. He quite happily slurps milk from your [nipples] and massages the soft flesh in a way that is both firm and erotic.");
 			else if (player.hasFuckableNipples()) outputText("When he reaches your [fullChest] he takes one look at your [nipples] and does a double take. For a moment he is at a loss for words but when you clear your throat he quickly collects his wits and sticks his tongue into your fuckable nipples. The sensation is similar to getting your pussy licked but much higher up. You groan as he suckles each nipple in turn while massaging your [chest]");
-			else outputText("When he reaches your [fullChest] he takes one look at your [nipples] and dives right in. He makes a show of pulling one into his mouth. All you can see is his " + monster.skinTone + " lips but inside you can feel his tongue swirling around your sensitive nipples. He sucks off with a pop that sends a tingle down to your groin before he latches on to the next one and repeats this torturous practice.");
+			else outputText("When he reaches your [fullChest] he takes one look at your [nipples] and dives right in. He makes a show of pulling one into his mouth. All you can see is his " + monster.bodyColor + " lips but inside you can feel his tongue swirling around your sensitive nipples. He sucks off with a pop that sends a tingle down to your groin before he latches on to the next one and repeats this torturous practice.");
 			outputText("\n\nOnce he's done with your [fullChest] you place your hand on his chest and use it to direct him to the ground. Once the lizan is on his back you select the dick you like more and begin sliding your hand up and down its rigid length. The shaft is covered in smooth textured bumps that will make sliding it in your [vagina] very interesting. Your gentle caress causes pearly white fluid to leak from the slit, which you use your thumb to rub across the crown.");
 			outputText("\n\nWhen you begin to squat onto his throbbing member he says something about putting his other dick in your [ass] as well. You let him know that is not going to happen and, despite looking a little disappointed, he doesn't push the issue. He watches you with a bitten lip as you sit upon the swollen head of his lizan dick at the entrance to your [vagina].");
 			if (player.averageVaginalLooseness() <= 1) { //Virgin or tight
@@ -251,7 +248,7 @@ public class LizanRogueScene extends BaseContent
 			else {
 				outputText("You begin to cum so hard your body trembles. Your [vagina] tingles, and your entire being feels as if you're falling through an ocean of pure ecstasy. Your body quakes as your climax rages on, filling your entire being with so much pleasure you can't take it. Just before you feel as if you can't take it anymore the sensation begins to recede, leaving your body achingly sensitive in its wake.");
 			}
-			outputText("\n\nFor a second you lie there [fullChest] against his " + monster.skinTone + " abs. Around the two of you lies the hot glorious mess of your combined sexual fluids. Both of you are panting, both of you are satisfied. Then you push yourself off of him and collect your [armor]. He takes it upon himself to clean your [fullChest] and [vagina] with his long tongue and as soon as he is done, " + player.clothedOrNaked("you pull on your [armor]", "you recollect whatever you had") + ". Before you leave you reward him with a deep kiss, snaking your [tongue] into his mouth before heading back to camp.");
+			outputText("\n\nFor a second you lie there [fullChest] against his " + monster.bodyColor + " abs. Around the two of you lies the hot glorious mess of your combined sexual fluids. Both of you are panting, both of you are satisfied. Then you push yourself off of him and collect your [armor]. He takes it upon himself to clean your [fullChest] and [vagina] with his long tongue and as soon as he is done, " + player.clothedOrNaked("you pull on your [armor]", "you recollect whatever you had") + ". Before you leave you reward him with a deep kiss, snaking your [tongue] into his mouth before heading back to camp.");
 			player.knockUp(PregnancyStore.PREGNANCY_OVIELIXIR_EGGS, PregnancyStore.INCUBATION_OVIELIXIR_EGGS);
 			player.createStatusEffect(StatusEffects.Eggs, rand(6), 0, rand(3) + 5, 0);
 			flags[kFLAGS.LIZAN_ROGUE_SEX_COUNTER]++;
@@ -316,7 +313,7 @@ public class LizanRogueScene extends BaseContent
 			outputText("\n\nHe steps into you, leaning in for a kiss. As you kiss him you wrap your arms around his shoulders, and he reaches down to cup your [ass], massaging your rear end with deligted fingers. Then he breaks the kiss and begins painting kisses down your neck.");
 			if (player.isLactating() && (!player.hasFuckableNipples() || rand(2) == 0)) outputText("\n\nWhen he reaches your [fullChest] he takes one look at your [nipples] and cocks his head to the side. He takes a tentative slurp and looks up into your [face] as if to ask whether milk coming out of your tits is normal. You just nod, and he shrugs and begins playing with your [fullChest] like a happy kid at the park. At one point his tongue slithers across each nipple at once as if to see whether the milk coming from each tastes the same. He quite happily slurps milk from your [nipples] and massages the soft flesh in a way that is both firm and erotic.");
 			else if (player.hasFuckableNipples()) outputText("\n\nWhen he reaches your [fullChest] he takes one look at your [nipples] and does a double take. For a moment he is at a loss for words but when you clear your throat he quickly collects his wits and sticks his tongue into your fuckable nipples. The sensation is similar to getting your pussy licked but much higher up. You groan as he suckles each nipple in turn while massaging your [chest].");
-			else outputText("\n\nWhen he reaches your [fullChest] he takes one look at your [nipples] and dives right in. He makes a show of pulling one into his mouth. All you can see is his " + monster.skinTone + " lips but inside you can feel his tongue swirling around your sensitive nipples. He sucks off with a pop that sends a tingle down to your groin before he latches on to the next one and repeats this torturous practice.");
+			else outputText("\n\nWhen he reaches your [fullChest] he takes one look at your [nipples] and dives right in. He makes a show of pulling one into his mouth. All you can see is his " + monster.bodyColor + " lips but inside you can feel his tongue swirling around your sensitive nipples. He sucks off with a pop that sends a tingle down to your groin before he latches on to the next one and repeats this torturous practice.");
 			outputText("\n\nOnce he's finished with your [nipples] his lips find yours again, and you can taste yourself on his tongue as it dives right into your mouth.");
 			if (player.wings.type > 0) outputText("\n\nAs he kisses you his hands graze your [wings]. He lightly massages the base, causing an odd rolling sensation that is actually kind of pleasant. Despite this you get the feeling he's just curious to touch them. He's very tender with your [wings] as if he doesn't want to hurt you. Once his curiosity has been sated though he releases the base of your [wings] and pulls you into him, your lips still locked together.");
 			outputText("\n\nHis hands slide down to your [ass]. He gets a good grope in, massaging your rear and using it as a lever to pull you against him. " + (player.tailType > 0 ? "He even wraps his scaled hand around the base of your [tail], softly massaging the point where it meets your [ass].": "") + "");
@@ -391,7 +388,7 @@ public class LizanRogueScene extends BaseContent
 			outputText("\n\nThe lizan rubs his belly, enjoying the warm urine you're giving him. By now, your bladder is empty, and you make sure to get the last of your urine out. He scoops up the murky water, washes off the urine and gets up. \"<i>All right, now it's my turn. I need release too,</i>\" he says.");
 			outputText("\n\nYou comply and lean back against the tree. He aims his twin cocks towards you and begins peeing all over you. It feels good with his warm urine on your body. He aims left and right, his urine streams go wide and splash into the murky waters. He aims back at you again, letting you revel in his warm urine.");
 			outputText("\n\nHis urine flows eventually stop, and you scoop up some murky water to wash off the urine.");
-			dynStats("lus", 10);
+			dynStats("lus", 10, "scale", false);
 			menu();
 			addButton(0, "Continue", haveSexWithLizan, true, null, null, "Continue having sex.");
 			addButton(1, "Done", finishWatersports);
@@ -406,14 +403,14 @@ public class LizanRogueScene extends BaseContent
         }
 
         public function rLITA_start(x:int):void {
-            if (monster.lust >= monster.maxLust()) {
+            if (monster.lust >= monster.maxOverLust()) {
                 outputText("After spit shining your " + player.cockDescript(x) + " you aim it towards the horny guy's back door, and enter without one thought of knocking.");
             }
             else {
                 outputText("\n\nFrom the looks of things he's no virgin but neither does he look like a frequent taker. When you slide a curious finger across the surface of his little hole he tenses before arching his back, and you can see his little rose bud relax. You spit into your hand and begin lubing up your " + player.cockDescript(x) + " and aim it towards the beaten lizan's back door.");
             }
 			outputText("\n\nYou leave the passed out lizan where he lies, his newly abused little hole dripping your cream. You raid his pack and leave.");
-			player.sexReward("Default","Dick",true,false);
+			player.sexReward("no", "Dick");
 			cleanupAfterCombat();
         }
 
@@ -421,7 +418,7 @@ public class LizanRogueScene extends BaseContent
             var x:int = player.findCock(1, -1, 7, "length");
 
             rLITA_start(x);
-            if (monster.lust >= monster.maxLust()) {
+            if (monster.lust >= monster.maxOverLust()) {
                 outputText("\n\nThe lizan groans as you sink into his heated tunnel. With your " + player.cockDescript(x) + " inside his anal ring flexes against you, tightening around your dick as he pushes back against you. You grab his hips and begin roughly pounding the lizan's hole. With every rough thrust the lizan spreads his legs and tail, attempting to allow you deeper access. As you wreck his ass with your " + player.cockDescript(x) + " he continues pumping his dual dicks, even as his chest and chin slide through the dirt. You toss your head back, lost in the sensation of his squeezing hole while he obviously loves the feeling of your " + player.cockDescript(x) + ".");
             }
             else {
@@ -434,7 +431,7 @@ public class LizanRogueScene extends BaseContent
             var x:int = player.findCock(1, 7, 11, "length");
 
             rLITA_start(x);
-            if (monster.lust >= monster.maxLust()) {
+            if (monster.lust >= monster.maxOverLust()) {
                 outputText("\n\nThe lizan squirms as you sink into his hot, tight tunnel. You can feel his anal ring quivering around your " + player.cockDescript(x) + " as you forcibly hilt him. The lust crazed lizan begins to rise for some reason, and you have to shove his chest back into the ground, keeping your weight on his back. When you begin pounding the shape out of the tight-fitting rectal passage he spreads his legs and tail to give you deeper access. The lizan grunts with every brutal thrust as you violently take his ass in deep full length thrusts. His hot little tail hole is a perfect combination of heat and tightness and you and your " + player.cockDescript(x) + " relish beating the little puckering hole inward.");
             }
             else {
@@ -448,7 +445,7 @@ public class LizanRogueScene extends BaseContent
             var x:int = player.findCock(1, 11, -1, "length");
 
             rLITA_start(x);
-            if (monster.lust >= monster.maxLust()) {
+            if (monster.lust >= monster.maxOverLust()) {
                 outputText("\n\nThe lizan yelps and squirms as your [cockHead] begins to stretch his anal ring wide. It is hard work to force the rest of your " + player.cockDescript(x) + " into the lizan's unaccommodating back door. He doesn't seem to be in pain though, quite the opposite, his hands feverishly pump his dual cocks with renewed vigor as he spreads his legs in an attempt to open up for you. Inch by inch you slide in, tugging the lust crazed lizan’s slender hips while thrusting forward.");
                 outputText("\n\nOnce you've buried your entire bone in the lizard man’s backyard an intense spasm rocks his body. His tail curls around you, holding you close as his anal walls clench, and you know he has just sprayed the bog floor with lizan spooge. Once his tail loosens its grip you grab his hips and begin pounding the lizan's tight little tail hole into a new shape. You have to maintain your hold to keep him in position. His ass is a hot tunnel that fights you of its own accord but with every thrust you feel yourself slowly winning this uphill battle. The problem is that you’re just too big but that doesn’t stop you from enjoying the lizan’s upturned hole as he squirms and groans, too lost in pleasure to do anything else.");
             }
@@ -461,7 +458,7 @@ public class LizanRogueScene extends BaseContent
         }
 
         public function rLITA_end(x:int):void {
-            if (monster.lust >= monster.maxLust()) {
+            if (monster.lust >= monster.maxOverLust()) {
                 outputText("\n\nYour brutal thrusts coupled with his lust addled brain sends the lizan over the edge. As he reaches climax his hole begins to milk your deeply embedded " + player.cockDescript(x) + ". As his orgasm makes his body spasm you can feel your own orgasm building until you're exploding, still pounding the lizan into the bog floor as the two of you spill your seed together.");
 				if (player.cumQ() >= 1000) outputText("\n\nYou continue to fuck him into the bog floor as your seed pours out of you. With every thrust his stomach swells until he looks pregnant.");
 				else if (player.cumQ() >= 2500) outputText("\n\nYou continue to pound him as your seed pours out of you. Every thrust causes it to spurt out of his tail hole. Soon you’re fucking him into a lake of semen even as his lizan’s stomach swells till he looks pregnant.");
@@ -473,13 +470,13 @@ public class LizanRogueScene extends BaseContent
 				else if (player.cumQ() >= 2500) outputText("\n\nYou listen to the lizan squeal as your spasming dick pumps him full and overflowing. By the time you’re done cumming he is not only lying in a small lake of hot cum but looking pregnant from the seed sloshing around in his stomach.");
             }
 			outputText("\n\nYou leave the passed out lizan where he lies, his newly abused little hole dripping your cream. You raid his pack and leave.");
-			player.sexReward("Default","Dick",true,false);
+			player.sexReward("no", "Dick");
 			cleanupAfterCombat();
         }
 		
 		public function rapeLizanInTheAss():void {
 			clearOutput();
-			if (monster.lust >= monster.maxLust()) {
+			if (monster.lust >= monster.maxOverLust()) {
 				outputText("The lizan does little to resist. He just continues his intense masturbation as you push him over to make his rectal passage more accessible. The horny guy even lifts his tail, eagerly giving you access to his back door. From the look of things he is neither a virgin nor a frequent taker. ");
 				outputText("\n\nWith his chest on the ground he continues to pump his cocks, his hole winking in invitation. When you slide your hands across his self parting ass cheeks he arches his back and groans, begging for it. Not being one to disappoint you spit into your hand while marveling at how simple lust has turned this pure creature into your hot little boy slut.\n");
 			}
@@ -500,7 +497,7 @@ public class LizanRogueScene extends BaseContent
 			else if (player.looseness() < VaginaClass.LOOSENESS_GAPING) {
 				outputText("\n\nWith a sigh, you descend, engulfing one of his bumpy purple dicks. The tingling feeling of fullness hits you as one cock slides up into your [vagina] while the other slides against your [asshole]. Below you the lizan cringes, eyes wide as you slowly ride him. You watch a war of emotions stream across his face. Disbelief rages against desire, pride slowing loses to lust. Soon all the right emotions prove victorious as a decision is made. Two scaled hands slide onto your waist as he begins thrusting up into your [pussy].");
 				player.cuntChange(24, true, true, true);
-				outputText("\n\nYou smile upon your living throne of hot flesh. Your lust crazed servant worships your body with his hands and mouth as he grinds around inside your [pussy]. His lips suck your [chest] one nipple at a time as his hands rub and massage your body. Chest to chest he serves you like the monarch you are.");				
+				outputText("\n\nYou smile upon your living throne of hot flesh. Your lust crazed servant worships your body with his hands and mouth as he grinds around inside your [pussy]. His lips suck your [chest] one nipple at a time as his hands rub and massage your body. Chest to chest he serves you like the monarch you are.");
 			}
 			else {
 				outputText("\n\nWith a grin you press both of his lizan cocks together and descend, engulfing them both. Inside you feel blissfully full, your very experienced [vagina] more than able to take the combined girths. Beneath you the lizan’s entire being cringes with disbelief. His breaths are ragged, his voice on edge as he says, \"Gods give me strength.\" Then the war of emotions begins. His face contorts as duty and pride struggle valiantly against desire. You squeeze his dicks together, and the tide turns. His hands slide onto your hips, and he thrusts upward, eyes flooded with desire.");

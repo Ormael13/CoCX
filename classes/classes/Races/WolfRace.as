@@ -1,6 +1,7 @@
 package classes.Races {
 import classes.BodyParts.*;
 import classes.CockTypesEnum;
+import classes.GeneticMemories.RaceMem;
 import classes.PerkLib;
 import classes.Race;
 
@@ -10,8 +11,35 @@ import classes.Race;
  * Tier 3: Fenrir
  */
 public class WolfRace extends Race {
+	public static const BasicWolfFurColors:/*String*/Array = ["glacial white"];
+	public static const BasicWolfHairColors:/*String*/Array = ["glacial white"];
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Wolf",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Wolf",
+        /*Eyes*/		"Fenrir",
+        /*Face*/		"Wolf",
+        /*Gills*/		"Human",
+        /*Hair*/		"Wolf",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Wolf",
+        /*RearBody*/	"Fenrir",
+        /*Skin*/		"Fenrir",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Wolf",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Human",
+        /*Penis*/		"Wolf",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Human"];
+
 	public function WolfRace(id:int) {
-		super("Wolf", id);
+		super("Wolf", id, RaceBody);
 	}
 	
 	public override function setup():void {
@@ -26,8 +54,8 @@ public class WolfRace extends Race {
 				.legType(LowerBody.WOLF, +1)
 				.tailType(Tail.WOLF, +1)
 				.skinCoatType(Skin.FUR, +2)
-				.skinCoatColor("glacial white", +1)
-				.hairColor("glacial white", +1)
+				.furColor1("glacial white", +1)
+				.hairColor1("glacial white", +1)
 				.wingType(Wings.NONE, +1)
 				.rearType(RearBody.FENRIR_ICE_SPIKES, +6)
 				.hasPerk(PerkLib.FreezingBreath, +3)
@@ -44,7 +72,7 @@ public class WolfRace extends Race {
 		buildTier(10, "winter wolf")
 				.namesMaleFemaleTaur("winter wolf", "winter wolf", "winter wolf-taur")
 				.requireSkinCoatType(Skin.FUR)
-				.requireSkinCoatColor("glacial white")
+				.requireFurColor("glacial white")
 				.buffs({
 					"str.mult": +0.65,
 					"tou.mult": +0.40,

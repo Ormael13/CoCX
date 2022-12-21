@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.BodyParts.Arms;
@@ -67,7 +67,7 @@ use namespace CoC;
 				}
 				outputText(" You are slashed for ");
 				player.takePhysDamage(damage, true);
-				player.dynStats("lus", damageLust, "scale", false);
+				player.takeLustDamage(damageLust, true);
 				outputText(" damage. The lingering electricity on her claws leaves you aroused. <b>(<font color=\"#ff00ff\">" + damageLust + "</font>)</b> lust damage.");
 			}
 		}
@@ -89,11 +89,11 @@ use namespace CoC;
 					if (flags[kFLAGS.ELECTRA_LVL_UP] >= 7) discharge += 2;
 					if (flags[kFLAGS.ELECTRA_LVL_UP] >= 11) discharge += 2;
 				}
-				player.dynStats("lus", discharge);
+				player.takeLustDamage(discharge, true);
 			}
 			else {
 				player.createStatusEffect(StatusEffects.RaijuStaticDischarge, 0, 0, 0, 0);
-				player.dynStats("lus", discharge);
+				player.takeLustDamage(discharge, true);
 			}
 			outputText("\n\n");
 		}
@@ -109,7 +109,7 @@ use namespace CoC;
 				if (flags[kFLAGS.ELECTRA_LVL_UP] >= 7) damageLust += Math.round(this.lib / 20);
 				if (flags[kFLAGS.ELECTRA_LVL_UP] >= 11) damageLust += Math.round(this.lib / 20);
 			}
-			player.dynStats("lus", damageLust, "scale", false);
+			player.takeLustDamage(damageLust, true);
 			outputText(" gleefully fingers herself while looking at you with a half crazed look.\n\n");
 			outputText("\"<i>Do you know... How frustrating it is to be dependant on someone else to achieve release? Ohhhh soon you will find out!</i>\"\n\n");
 			outputText("The display left you aroused but likely she's preparing something. <b>(<font color=\"#ff00ff\">" + damageLust + "</font>)</b> lust damage.\n\n");
@@ -133,7 +133,7 @@ use namespace CoC;
 					if (flags[kFLAGS.ELECTRA_LVL_UP] >= 11) damageLust += lust;
 				}
 				damageLust = Math.round(damageLust);
-				player.dynStats("lus", damageLust, "scale", false);
+				player.takeLustDamage(damageLust, true);
 				outputText(" You are zapped clean but instead of feeling pain, you feel intense electric pleasure coursing through your body as the Raiju shares some of her unbridled arousal. <b>(<font color=\"#ff00ff\">" + damageLust + "</font>)</b> lust damage.");
 			}
 			lust -= lust * 0.2;
@@ -197,7 +197,7 @@ use namespace CoC;
 			else electraScene.ElectraSexPlayer();
 		}
 		
-		public function Electra() 
+		public function Electra()
 		{
 			if (flags[kFLAGS.ELECTRA_TALKED_ABOUT_HER] >= 1 && !player.hasStatusEffect(StatusEffects.RiverDungeonA)) {
 				this.a = "";
@@ -261,7 +261,7 @@ use namespace CoC;
 			this.tallness = 72;
 			this.hips.type = Hips.RATING_CURVY + 2;
 			this.butt.type = Butt.RATING_LARGE + 1;
-			this.skinTone = "light";
+			this.bodyColor = "light";
 			this.hairColor = "blue";
 			this.hairLength = 13;
 			this.weaponName = "claw";
@@ -269,7 +269,6 @@ use namespace CoC;
 			this.armorName = "indecent spider silk robe";
 			this.lust = 30;
 			this.lustVuln = .8;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.gems = 500;
 			this.drop = new ChainedDrop().
 					add(armors.INDESSR,1/10).

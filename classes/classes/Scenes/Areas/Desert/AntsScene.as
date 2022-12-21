@@ -175,7 +175,7 @@ public class AntsScene extends BaseContent
 			//►Introduction to Combat
             if (player.cor >= 66 - player.corruptionTolerance) {
                 outputText("You hesitate for a moment, fighting the urge to just sit there and watch the demons rape the poor ant.");
-                outputText("\n<b>Alt scene is unlocked in 'Recall' menu!</b>\n\n");
+                if (sceneHunter.other) outputText("\n<b>Alt scene is unlocked in 'Recall' menu!</b>\n\n");
             }
 			outputText("As the demons bear down on the ant-girl, you burst from your hiding place, raising your [weapon] to the air and uttering an impressive war cry.  Nobody, ant or otherwise, is getting raped if you have any say in the matter!");
 			outputText("\n\nYou are now fighting demons!");
@@ -234,7 +234,7 @@ public class AntsScene extends BaseContent
 		}
 
 //The Challenges
-		private function antColonyChallenge():void
+		public function antColonyChallenge():void
 		{
 			clearOutput();
 			spriteSelect(SpriteDb.s_antguards);
@@ -260,6 +260,10 @@ public class AntsScene extends BaseContent
 			else {
 				outputText("Your feet bring you back to the ant colony and the guard motions you down the only lit tunnel once more.  You enter the colosseum, and as you step out into the cavern, you are greeted, again, by a thin male ant-morph holding a clipboard.  He looks up at you.");
 				outputText("\n\n\"<i>Oh good, you're here.  I was beginning to think you were a coward.</i>\"  Before you can respond to his insult, he cuts you off.  \"<i>We're ready to start when you are.  Let's hope you survive longer than the last guy.</i>\"");
+				if (player.hasPerk(PerkLib.SoulSense) && !flags[kFLAGS.SOUL_SENSE_ANTHILL]) {
+					outputText("\n\n<b>Now you can find the colony using soul sense!</b>\n\n");
+					flags[kFLAGS.SOUL_SENSE_ANTHILL] = 1;
+				}
 			}
 			//[Fight] [Leave]
 			simpleChoices("Fight", antColiseumFight, "", null, "", null, "", null, "Leave", leaveAntColony);
@@ -463,8 +467,8 @@ public class AntsScene extends BaseContent
 			//Use Penis - Male Continuation
 			//Use Vagina - Female Continuation
 			menu();
-			if (player.hasCock()) addButton(0, "Use Penis", phyllaFirstTimePenis);
-			if (player.hasVagina()) addButton(1, "Use Vagina", phyllaFirstTimeVagina);
+			addButton(0, "Use Penis", phyllaFirstTimePenis).disableIf(!player.hasCock(), "Req. a cock.");
+			addButton(1, "Use Vagina", phyllaFirstTimeVagina).disableIf(!player.hasVagina(), "Req. a vagina.");
 			addButton(3, "Not Now", declineAntSexForNow);
 			addButton(4, "Reject", rejectAntSex);
 		}
@@ -616,7 +620,7 @@ public class AntsScene extends BaseContent
             var x:int = player.cockThatFits(phyllaCapacity);
 			outputText("For a while, you allow Phylla to slowly adapt to your presence inside of her and the stretching of her vaginal walls; something she reacts to with soft moans of pleasurable appreciation.  She wears her obvious discomfort at being forcefully stretched by your " + cockDescript(x) + ", but you see she can hardly complain as her body cradles yours in an attempt to keep you where you are.  Once you feel she's comfortable you start slowly pumping away at her, gradually building your own rut.");
 			outputText("\n\nYou feel the smaller set of her hands move between your [legs] and start to fondle your ");
-			if (player.balls > 0) outputText("[balls]");
+			if (player.hasBalls()) outputText("[balls]");
 			else outputText("sensitive taint");
 			outputText(".  The moans that escape her lips pick up in both volume and stress as she knowingly encourages your lustful efforts on.  The working of her hips in concert with your thrusts affirms her readiness for your full force, giving you the all clear to pin her down and free your sexual aggression on her tight little love hole; slamming your cock into her, picking up the force and tempo behind each thrust.");
 			outputText("\n\nPhylla's own sporadic moaning begins to mimic your movements, increasing in sync with each hard thrust into her.  The many soft, delicate hands of the ant morph cling to the bedding and tighten with each gyration, intent on not letting go until you both achieve your mutual satisfaction.");
@@ -703,7 +707,7 @@ public class AntsScene extends BaseContent
 			if (y >= 0) outputText(" and her ass.");
 			else outputText(", and onto the bedspread below.");
 			outputText("  As her pulsing cunt works to suck the semen out of your ");
-			if (player.balls > 0) outputText("balls");
+			if (player.hasBalls()) outputText("balls");
 			else outputText("shaft");
 			outputText(", Phylla retaliates with her own orgasm, flooding your groin with her sticky girl cum.  You glance down to your joined nethers and find a massive amount of Phylla's cum has pooled around your knees and more seems to be flowing every second.  Clearly, she's a squirter.");
 
@@ -778,7 +782,7 @@ public class AntsScene extends BaseContent
 			outputText(" down?  I mean, I'm not complaining!  But I... just... I mean... you... inside me,</i>\" she shyly remarks, obviously wanting something more... traditional.");
 			//(Player lust increases to 100)
 			if (!recalling) {
-				dynStats("lus=", player.maxLust());
+				dynStats("lus=", player.maxOverLust());
 				flags[kFLAGS.DIDNT_FUCK_PHYLLA_ON_RECRUITMENT] = 1;
 			}
 			//Where the fuck is this going?
@@ -865,7 +869,7 @@ public class AntsScene extends BaseContent
 				outputText("  Your [cocks] now resting comfortably out of the open room, Phylla positions herself to scissor your pussy.");
 				outputText("\n\n\"<i>Y-you had me worried for a second. I mean, I've never seen something... So <b>big!</b></i>\" she teases.");
 				//(Transitions to Freakishly huge dick(s):)
-				outputText("\n\nYou start rocking your hips and your pussies kiss, fluids mixing harmoniously together as shots of pleasure pass through both of you.  Her clit seems to penetrate further and further into yours with every push, and though it's not enough to fully enter you, the sensation on the inside sends wave after wave of euphoric bliss over the both of you.");
+				outputText("\n\nYou start rocking your hips and your pussies kiss, fluids mixing harmoniously together as shots of pleasure pass through both of you.  Her clit seems to penetrate further and further into yours with every push, and though it's not enough to fully enter you, the sensation on the inside sends wave after wave of euphoric bliss over both of you.");
 				scissorContinue(false);
 			}
 			function nofitF():void {
@@ -930,11 +934,13 @@ public class AntsScene extends BaseContent
 		}
 
 //[Come to Camp]
-		private function getAntWaifuYoShit():void
-		{
+		private function getAntWaifuYoShit():void {
 			clearOutput();
 			outputText("You smile at her and tell her you would love for her to join you at your camp.  Her face brightens like the sun and she quickly gathers the very few possessions she owns - mostly clothing, the pillows, and some jewelry.  Together you promptly leave the colony and head back to camp.");
 			outputText("\n\n(<b>Phylla has moved in!  She can be found in the lovers tab!</b>)");
+			if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard",1,+1);
+			else player.createKeyItem("Radiant shard", 1,0,0,0);
+			outputText("\n\n<b>Before fully settling in your camp as if remembering something Phylla pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
 			flags[kFLAGS.ANT_WAIFU] = 1;
 			doNext(camp.returnToCampUseOneHour);
 		}

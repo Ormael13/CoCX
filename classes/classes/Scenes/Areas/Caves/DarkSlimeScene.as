@@ -4,39 +4,20 @@
  */
 package classes.Scenes.Areas.Caves
 {
-	import classes.*;
-	import classes.BodyParts.Antennae;
-	import classes.BodyParts.Arms;
-	import classes.BodyParts.Ears;
-	import classes.BodyParts.Eyes;
-	import classes.BodyParts.Face;
-	import classes.BodyParts.Gills;
-	import classes.BodyParts.Hair;
-	import classes.BodyParts.Horns;
-	import classes.BodyParts.LowerBody;
-	import classes.BodyParts.RearBody;
-	import classes.BodyParts.Skin;
-	import classes.BodyParts.Tail;
-	import classes.BodyParts.Tongue;
-	import classes.BodyParts.Wings;
-	import classes.Items.Shields.DarkAegis;
-	import classes.Scenes.Dungeons.EbonLabyrinth;
-	import classes.Scenes.SceneLib;
-    import classes.display.SpriteDb;
-	import classes.internals.*;
-	import classes.GlobalFlags.kFLAGS;
-	import classes.lists.BreastCup;
-	import classes.CoC;
+import classes.*;
+import classes.BodyParts.Gills;
+import classes.BodyParts.Skin;
+import classes.BodyParts.Tail;
+import classes.display.SpriteDb;
+import classes.lists.BreastCup;
 
 public class DarkSlimeScene extends BaseContent
 {
-	public function DarkSlimeScene() {}
-
     public function cavesDarkSlimeEncounter():void {
         clearOutput();
-        spriteSelect(SpriteDb.s_darkgoogirlsprite_16bit);
-        if (player.isRace(Races.SLIME) || player.isRace(Races.MAGMASLIME) || player.isRace(Races.DARKSLIME)) {
-            outputText("You take the turn at the end of the cave and run right into a dark slime. For a few second the both of you consider each other before the slime shrugs and simply asks.\n\n");
+        spriteSelect(SpriteDb.s_darkgoogirlsprite);
+        if (player.isRace(Races.SLIME, 1, false) || player.isRace(Races.MAGMASLIME, 1, false) || player.isRace(Races.DARKSLIME, 1, false)) {
+            outputText("You take the turn at the end of the cave and run right into a dark slime. For a few second both of you consider each other before the slime shrugs and simply asks.\n\n");
             outputText("\"<i>No luck finding fluids that way?</i>\"");
             outputText("You didn’t find any and if you did you would have pumped it out until it ran dry.\n\n");
             outputText("\"<i>Well darn, if you spot a fleshling do share!</i>\"");
@@ -135,23 +116,17 @@ public class DarkSlimeScene extends BaseContent
         " You set out with a drooling pleasure addled smile looking for a fleshling to feed from.\n\n");
         outputText("<b>You have been transformed into a dark slime!</b>\n\n");
         outputText("\n\n");
+        CoC.instance.transformations.SkinGoo(Skin.COVERAGE_COMPLETE, 2).applyEffect(false);
         CoC.instance.transformations.HairGoo.applyEffect(false);
         CoC.instance.transformations.ArmsGoo.applyEffect(false);
-        player.lowerBody = LowerBody.GOO;
-        player.rearBody.type = RearBody.METAMORPHIC_GOO;
-        player.skin.setBaseOnly({adj: "slimy", type: Skin.GOO, pattern: Skin.PATTERN_NONE});
-        var darkgooSkinColors:Array = ["indigo", "light purple", "purple", "purplish black", "dark purple"];
-        var choosencolor:String = randomChoice(darkgooSkinColors);
-        player.skin.base.color = choosencolor;
-        player.hairColor = choosencolor;
+        CoC.instance.transformations.LowerBodyGoo.applyEffect(false);
+        CoC.instance.transformations.RearBodyMetamorphicGoo.applyEffect(false);
         CoC.instance.transformations.EyesFiendish.applyEffect(false);
         CoC.instance.transformations.EyesChangeColor(["red"]).applyEffect(false);
         CoC.instance.transformations.EarsElfin.applyEffect(false);
         CoC.instance.transformations.FaceHuman.applyEffect(false);
         CoC.instance.transformations.TongueHuman.applyEffect(false);
-        if (!player.hasVagina()) player.createVagina()
-        if (!player.hasStatusEffect(StatusEffects.BonusVCapacity)) player.createStatusEffect(StatusEffects.BonusVCapacity, 9000, 0, 0, 0);
-        else player.addStatusValue(StatusEffects.BonusVCapacity, 1, 9000);
+        CoC.instance.transformations.VaginaHuman().applyEffect(false);
         CoC.instance.transformations.AntennaeNone.applyEffect(false);
         CoC.instance.transformations.HornsNone.applyEffect(false);
         CoC.instance.transformations.WingsNone.applyEffect(false);
@@ -197,7 +172,7 @@ public class DarkSlimeScene extends BaseContent
     public function beatingDarkSlimeUseHer2():void {
         outputText("Regardless of the number of tendrils massaging you in every right way, your having one hell of a great session. The slime is pleasing you in a rhythmic tempo not unlike that of your heartbeat its body pulsing with every small drop of fluid you produce. At this rate, you won’t be able to hold off any further and the slime knowing it speeds up its pace eager for the reward.\n\n");
         outputText("You cum magnificently your fluids mixing and flooding in the slime’s body mass. You almost doze off to sleep too but the mass of the slime moving off from you jar you awake, guess she does not double up as a real bed for resting purposes. She waves off goodbye as she takes her departure leaving you there to ponder who truly raped who.\n\n");
-        player.sexReward("Default", "Default",true,false);
+        player.sexReward("no", "Default");
         cleanupAfterCombat();
     }
 

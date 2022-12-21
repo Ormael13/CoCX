@@ -6,6 +6,7 @@ package classes.Items.Armors
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armor;
 import classes.Items.ArmorLib;
+import classes.Items.Equipable;
 import classes.Scenes.SceneLib;
 
 public final class SeductiveArmor extends Armor {
@@ -15,7 +16,7 @@ public final class SeductiveArmor extends Armor {
 			super("SeductA", "SeductA", "scandalously seductive armor", "a set of scandalously seductive armor", 0, 0, 1, "A complete suit of scalemail shaped to hug tightly against every curve, it has a solid steel chest-plate with obscenely large nipples molded into it.  The armor does nothing to cover the backside, exposing the wearer's cheeks to the world.","Heavy");
 		}
 		
-		override public function useText():void {
+		override public function equipText():void {
 			if (!SceneLib.ceraphFollowerScene.ceraphIsFollower()) {
 				outputText("After struggling to get it on, you feel a sudden shift in your scandalous new armor.  To your horror, it begins folding into itself, revealing more and more of your " + game.player.skinDesc + " and the comfortable underclothes you had on underneath it.  The transforming armor gradually covers less and less of you until it's little more than a pair of huge nipple-coverings and a silver chain.  A loud KA-CHUNK startles you, and then you're screaming as you feel something stabbing through your nipples.  Goosebumps cover your flesh as you twist in unexpected agony.\n\n");
 				outputText("After you've had a chance to recover, you inspect your abused nipples and discover that your armor has totally disappeared.  The only thing left behind is a pair of seamless black nipple-studs, embedded into your vulnerable flesh.  There doesn't appear to be any way to remove them either.  Thankfully, your comfortable underclothes have been unaffected by the sudden disappearance of your armor.  The thought of having to run around naked stays stubbornly locked in your mind, and you mentally curse the demon for what she's done to you.\n\n");
@@ -33,10 +34,10 @@ public final class SeductiveArmor extends Armor {
 				outputText("\n\nShe's gone before you can reply.  Sometimes she's more trouble than she's worth.");
 			}
 		}
-		
-		override public function playerEquip():Armor {
-			super.playerEquip();
-			return ArmorLib.COMFORTABLE_UNDERCLOTHES; //After seductive armor magic the player is left in their underclothes
-		}
+	
+	override public function beforeEquip(doOutput:Boolean):Equipable {
+		super.beforeEquip(doOutput);
+		return ArmorLib.COMFORTABLE_UNDERCLOTHES; //After seductive armor magic the player is left in their underclothes
+	}
 	}
 }

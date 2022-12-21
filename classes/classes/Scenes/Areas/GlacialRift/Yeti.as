@@ -138,7 +138,6 @@ public class Yeti extends Monster
 			this.armorName = "thick fur";
 			this.lust = 10;
 			this.lustVuln = 0.4;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.drop = new WeightedDrop()
 					.add(consumables.YETICUM, 1)
 					.add(null, 2);

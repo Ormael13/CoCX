@@ -23,11 +23,11 @@ use namespace CoC;
 			var bonus:int = 0;
 			if (player.hasCock()) bonus++;
 			if (player.hasVagina()) bonus++;
-			if (player.balls > 0) bonus++;
+			if (player.hasBalls()) bonus++;
 			if (player.bRows() > 1) bonus++;
 			if (player.bRows() > 2) bonus++;
 			player.createStatusEffect(StatusEffects.LustTransferance,bonus,0,0,0);
-			player.dynStats("lus", bonus * 2 + 5 + player.effectiveSensitivity()/5);
+			player.takeLustDamage(bonus * 2 + 5 + player.effectiveSensitivity()/5, true);
 		}
 		
 		private function livingFailureIdInsinuation():void {
@@ -65,7 +65,7 @@ use namespace CoC;
 				dynStats("cor", 20);
 			}
 			outputText("\n\n");
-			player.dynStats("lus", (10 + int(player.lib / 10 + player.effectiveSensitivity() / 10 + player.cor / 10)));
+			player.takeLustDamage((10 + int(player.lib / 10 + player.effectiveSensitivity() / 10 + player.cor / 10)), true);
 		}
 		
 		private function livingFailureDefileBody():void {
@@ -77,7 +77,7 @@ use namespace CoC;
 			if (player.hasVagina()) outputText(" and clit");
 			outputText(" inflating. As a result of this pleasurable transformation reducing your general agility and greatly increasing your sensitivity. Resisting the thing lusty assault is gonna become increasingly difficult.\n\n");
 			if (player.biggestTitSize() >= 1) player.breastRows[0].breastRating++;
-			if (player.hasCock()) player.increaseCock(0, rand(2) + 1);
+			if (player.hasCock()) player.growCock(0, rand(2) + 1);
 			if (player.hasVagina()) player.clitLength += .25;
 			player.addCurse("spe.mult", 0.10,3);
 			player.addCurse("sen", 10,3);
@@ -132,8 +132,8 @@ use namespace CoC;
             this.bonusHP = mod == 0 ? 0 : 2000*(mod-1);
             this.bonusLust = 395 + 75*mod;
             this.level = 60 + 5*mod; //starts from 65 due to EL levelMod calculations;
-            this.gems = mod > 50 ? 0 : Math.floor((1200 + rand(200)) * Math.exp(0.3*mod));
-            this.additionalXP = mod > 50 ? 0 : Math.floor(4000 * Math.exp(0.3*mod));
+            this.gems = mod > 20 ? 0 : Math.floor((1200 + rand(200)) * Math.exp(0.3*mod));
+            this.additionalXP = mod > 20 ? 0 : Math.floor(4000 * Math.exp(0.3*mod));
 			
 			this.a = " ";
 			this.short = "Living Failure";

@@ -190,7 +190,7 @@ import classes.internals.WeightedDrop;
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			giantScene.winAgainstYoungGiant();
+			giantScene.winAgainstGiant();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -230,7 +230,6 @@ import classes.internals.WeightedDrop;
 			this.bonusLust = 84;
 			this.lust = 10;
 			this.lustVuln = 0.3;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = 47;
 			this.gems = 45 + rand(25);
 			this.drop = new WeightedDrop()

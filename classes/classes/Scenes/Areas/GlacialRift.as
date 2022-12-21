@@ -14,6 +14,8 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.RearBody;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.API.Encounters;
+import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.GlacialRift.*;
 import classes.Scenes.Areas.Tundra.Valkyrie;
 import classes.Scenes.Holidays;
@@ -31,213 +33,273 @@ use namespace CoC;
 		public var winterwolfScene:WinterWolfScene = new WinterWolfScene();
 		public var wendigoScene:WendigoScene = new WendigoScene();
 
+		public var glacialRiftEncounter:GroupEncounter;
 		public function GlacialRift()
 		{
+			onGameInit(init);
 		}
-
-		public function exploreGlacialRift():void {
-			flags[kFLAGS.DISCOVERED_GLACIAL_RIFT]++;
-			if (!player.hasPerk(PerkLib.ColdAffinity)) SubZeroConditionsTick();
-			doNext(playerMenu);
-
-			var choice:Array = [];
-			var select:int;
-
-			//Build choice list!
-			choice[choice.length] = 0; //Yuki Onna (lvl 71) OR Frost Giant (lvl 89)
-			choice[choice.length] = 1; //Yeti (lvl 76)
-			choice[choice.length] = 2; //Frost Giant (lvl 89)
-			choice[choice.length] = 3; //Winter Wolf (lvl 99)
-			choice[choice.length] = 4; //Ice True Golems (lvl 80)
-			choice[choice.length] = 5; //Glacial Troll (M & F variants) (lvl 94)
-			choice[choice.length] = 6; //Wendigo (lvl 84)
-			if ((flags[kFLAGS.HARPY_QUEEN_EXECUTED] != 0 || flags[kFLAGS.HEL_REDUCED_ENCOUNTER_RATE] > 0) && flags[kFLAGS.VALARIA_AT_CAMP] == 0 && flags[kFLAGS.TOOK_GOO_ARMOR] == 0 && player.armor != armors.GOOARMR) choice[choice.length] = 7; //Valeria
-			if (rand(3) == 0) choice[choice.length] = 8; //Freebie items!
-			if (rand(15) == 0) choice[choice.length] = 9; //Ornate Chest or cache of gems/pile of stones
-			choice[choice.length] = 10; //Find nothing!
-
-			//DLC april fools
-			if (isAprilFools() && flags[kFLAGS.DLC_APRIL_FOOLS] == 0) {
-                Holidays.DLCPrompt("Extreme Zones DLC", "Get the Extreme Zones DLC to be able to visit Glacial Rift and Volcanic Crag and discover the realms within!", "$4.99");
-                return;
-			}
-			//Helia monogamy fucks
-			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !SceneLib.helScene.followerHel()) {
-				GlacialRiftConditions();
-				SceneLib.helScene.helSexualAmbush();
-				return;
-			}
-			//Etna
-			if (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && !player.hasStatusEffect(StatusEffects.EtnaOff) && rand(5) == 0 && (player.level >= 20)) {
-				GlacialRiftConditions();
-				SceneLib.etnaScene.repeatYandereEnc();
-				return;
-			}
-			//Anzu
-			if (flags[kFLAGS.ANZU_PALACE_UNLOCKED] < 1 && rand(5) == 0) {
-				SceneLib.anzu.initialPalaceEncounter();
-				return;
-			}
-			//Yu shop
-			if (flags[kFLAGS.YU_SHOP] < 2 && rand(5) == 0) {
-				SceneLib.glacialYuShop.YuIntro();
-				return;
-			}
-			//Fenrir ruined shrine
-			if ((player.faceType == Face.WOLF || player.faceType == Face.ANIMAL_TOOTHS) && player.ears.type == Ears.WOLF && player.arms.type == Arms.WOLF && player.lowerBody == LowerBody.WOLF && player.tailType == Tail.WOLF && player.hasFur() && player.hairColor == "glacial white" && player.coatColor == "glacial white" && player.hasKeyItem("Gleipnir Collar") < 0 && rand(5) == 0) {
-				FenrirRuinedShrine();
-				return;
-			}
-			select = choice[rand(choice.length)];
-			switch(select) {
-				case 0: //Yuki Onna OR Frost Gigant
-					clearOutput();
+		private function init():void {
+			glacialRiftEncounter = Encounters.group("glacialRift", {
+				//DLC april fools
+				name: "aprilFools",
+				chance: Encounters.ALWAYS,
+				when: function():Boolean {
+					return isAprilFools() && flags[kFLAGS.DLC_APRIL_FOOLS] == 0;
+				},
+				call: function():void {
+					SceneLib.holidays.DLCPrompt("Extreme Zones DLC", "Get the Extreme Zones DLC to be able to visit Glacial Rift and Volcanic Crag and discover the realms within!", "$4.99");
+				}
+			}, {
+				//Helia monogamy fucks
+				name  : "helcommon",
+				night : false,
+				call  : function():void {
+					GlacialRiftConditions();
+					SceneLib.helScene.helSexualAmbush();
+				},
+				chance: 0.2,
+				when  : SceneLib.helScene.helSexualAmbushCondition
+			}, {
+				name  : "etna",
+				when  : function():Boolean {
+					return flags[kFLAGS.ETNA_FOLLOWER] < 1
+							&& flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2
+							&& !player.hasStatusEffect(StatusEffects.EtnaOff)
+							&& (player.level >= 20);
+				},
+				call  : function():void {
+					GlacialRiftConditions();
+					SceneLib.etnaScene.repeatYandereEnc();
+				}
+			}, {
+				//Anzu
+				name: "anzu",
+				night : false,
+				chance: 0.20,
+				when: function ():Boolean {
+					return flags[kFLAGS.ANZU_PALACE_UNLOCKED] < 1
+				},
+				call: SceneLib.anzu.initialPalaceEncounter
+			}, {
+				//Yu shop
+				name: "yu",
+				chance: 0.20,
+				when: function():Boolean {
+					return flags[kFLAGS.YU_SHOP] < 2
+				},
+				call: SceneLib.glacialYuShop.YuIntro
+			}, {
+				//Fenrir ruined shrine
+				name: "fenrir",
+				chance: 0.20,
+				when: function():Boolean {
+					return (player.faceType == Face.WOLF || player.faceType == Face.ANIMAL_TOOTHS) && player.ears.type == Ears.WOLF && player.arms.type == Arms.WOLF && player.lowerBody == LowerBody.WOLF && player.tailType == Tail.WOLF && player.isFurCovered() && player.hairColor == "glacial white" && player.furColor == "glacial white" && player.hasKeyItem("Gleipnir Collar") < 0;
+				},
+				call: FenrirRuinedShrine
+			}, {
+				name: "yukiOnna",
+				day : false,
+				call: function():void {
 					if (rand(2) == 0 && flags[kFLAGS.YU_SHOP] > 0) {
 						yukionnaScene.encounterYukiOnna();
-					}
-					else {
+					} else {
 						outputText("You wander the frozen landscape of the Rift, frozen rocks, frosted hills and forested mountains your only landmarks. As you cross the peak of a rather large, lightly forested hill, you come face to gigantic face with a Frost Giant! He belches fiercely at you and you tumble back down the hill. He mostly steps over it as you come to your senses. You quickly draw your [weapon] and withdraw from the hill to prepare for battle.\n\n");
 						GlacialRiftConditions();
 						startCombat(new FrostGiant());
 					}
-					break;
-				case 1: //Yeti
-					clearOutput();
-					outputText("You grow tired trudging through the hard-packed snow under you, shielding your face with an arm as the wind lashes against you, slowing your progress. The whistle of the wind rings in your ears, only broken with the dull crunch of snow compacting underfoot. You can’t help but regret wandering into this storm and wish for shelter and warmth. Your body freezes at the sound of a loud crack, and turning your head to see the source of the noise, you notice too late that your lower body is sinking in the snow floor. You flail your limbs as your body is swept under by the moving snow, and you feel yourself sliding down some sort of shaft: it’s too dark to see where you are going. With a thump, you come to a stop.\n\n");
-					if (flags[kFLAGS.MET_YETI_FIRST_TIME] <= 0) {
-						outputText("Quickly wiping the snow off your body, you take in your surroundings. There are torches overhead that provide light and a small amount of warmth, making the ice cavern almost beautiful to be in, the light reflecting and shimmering off the polished ice walls, ceiling, and large icicles. There are a number of holes like the one you must have came out of, like a network of chutes that all lead to your location. You are surprised to find something under you, a large pile of white furs broke your fall. Though you are unnerved to find a large collection of bones lining the sides of the ice cavern, all white like snow, cleaned to a shine. Taking all this in, it’s obvious you are in someone’s or something’s residence. ");
-						if (silly()) {
-							outputText("You notice the bodies of a number of strange, bipedal horse-like creatures, all covered in thick white fur hanging from the nearby wall; laying beneath one is a strange metallic cylinder, not unlike a sword hilt, that gives off a strange, soft heat. ")
-						}
-						outputText("You brush off the snow and get to your feet, turning your head as you notice a passageway.\n\n");
-						flags[kFLAGS.MET_YETI_FIRST_TIME] = 1;
+				}
+			}, {
+				//Yeti (lvl 76)
+				name: "yeti",
+				call: encounterYeti
+			}, {
+				//Frost Giant (lvl 89)
+				name: "frostGiant",
+				night : false,
+				call: encounterFrostGiant
+			}, {
+				//Winter Wolf (lvl 99)
+				name: "winterWolf",
+				call: encounterWinterWolf
+			}, {
+				//Ice True Golems (lvl 80)
+				name: "iceTrueGolems",
+				call: encounterGolems
+			}, {
+				//Glacial Troll (M & F variants) (lvl 94)
+				name: "troll",
+				night : false,
+				call: encounterTroll
+			}, {
+				//Wendigo (lvl 84)
+				name: "wendigo",
+				day : false,
+				call: wendigoScene.encounterWendigo
+			}, {
+				//Valeria
+				name: "valeria",
+				when: function():Boolean {
+					return (flags[kFLAGS.HARPY_QUEEN_EXECUTED] != 0 || flags[kFLAGS.HEL_REDUCED_ENCOUNTER_RATE] > 0) && flags[kFLAGS.VALERIA_AT_CAMP] == 0 && flags[kFLAGS.TOOK_GOO_ARMOR] == 0 && player.armor != armors.GOOARMR;
+				},
+				call: encounterValeria
+			}, {
+				//Freebie items!
+				name: "loot",
+				chance: 0.33,
+				call: encounterItem
+			}, {
+				//Ornate Chest or cache of gems/pile of stones
+				name: "chest",
+				chance: 0.07,
+				call: encounterChest
+			}, {
+				//Find nothing!
+				name: "nothing",
+				call: encounterNothing
+			})
+		}
+		
+		public function exploreGlacialRift():void {
+			flags[kFLAGS.DISCOVERED_GLACIAL_RIFT]++;
+			if (!player.hasPerk(PerkLib.ColdAffinity)) SubZeroConditionsTick();
+			clearOutput();
+			glacialRiftEncounter.execEncounter();
+			flushOutputTextToGUI();
+		}
+		
+		public function encounterNothing():void {
+			clearOutput();
+			outputText("You spend an hour trudging through the bleak and bitingly cold glaciers but you don’t find anything interesting. ");
+			if (player.canTrain('tou', 50)) {
+				outputText("But on your way back you feel you're a little more used to traveling through this harsh area.");
+				player.trainStat("tou", +1, 50);
+			}
+			dynStats("tou", .5);
+			doNext(camp.returnToCampUseOneHour);
+		}
+		
+		public function encounterChest():void {
+			if (player.hasKeyItem("Camp - Ornate Chest") < 0) {
+				var gemsFound:int = 400 + rand(400);
+				outputText("While you're minding your own business, you spot an ornately-decorated chest somewhat buried in the snow. You walk on the snowy grounds you finally reach the chest. As you open the chest, you find " + String(gemsFound) + " gems inside the chest! You pocket the gems and haul the chest home. It looks nice and would make a good storage.");
+				player.createKeyItem("Camp - Ornate Chest", 0, 0, 0, 0);
+				for (var i:int = 0; i < 4; i++) {
+					inventory.createStorage();
+				}
+				player.gems += gemsFound;
+				statScreenRefresh();
+				outputText("\n\n<b>You now have " + num2Text(inventory.itemStorageDirectGet().length) + " storage item slots at camp.</b>");
+			} else {
+				if (rand(2) == 0) {
+					var stonesHarvested:Number = 10;
+					var stonesCapacity:Number  = 300;
+					if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4) stonesCapacity += 600;
+					outputText("You find a big amount of stone rubble in the rift and begin to harvest them for your constructions. ");
+					if (SceneLib.emberScene.followerEmber() || SceneLib.kihaFollower.followerKiha()) {
+						stonesHarvested += 10;
+						if (SceneLib.emberScene.followerEmber() && SceneLib.kihaFollower.followerKiha()) {
+							outputText("Kiha and Ember");
+							stonesHarvested += 10;
+						} else if (SceneLib.emberScene.followerEmber()) {
+							outputText("Ember");
+							if (SceneLib.kihaFollower.followerKiha()) outputText(" and ");
+						} else outputText("Kiha");
+						outputText(" assist you into bringing as many as possible back to camp. ");
 					}
-					else {
-						outputText("Taking in the familiar surroundings, you realize you must have fallen through one of those chutes again. You begin to wonder if they are for the Yeti’s use, or if they are meant to bring in unsuspecting travelers. A meal delivery service set up with their limited ice magic? You shake off the snow on you and get to your feet. Looking to the passage, sure enough shadows dance along the walls as the thumps reach your ears.\n\n")
-					}
-					outputText("Hearing a thunderous roar, you ready yourself for a fight");
-					if (player.weaponName != "fists") outputText(", holding your [weapon] at the ready");
-					if (player.isRace(Races.YETI) && player.hasVagina() && player.femininity > 40) {
-						yetiScene.FemalePCMeetYeti();
-						break;
-					}
-					else {
-						sceneHunter.print("Check failed: yeti race, vagina, high femininity");
-						outputText(". A massive hulking creature barrels around the corner and sets its gaze on you, its clawed hands and feet launching its body over the iced caverns with ease as you stare the beast down. The white blur of an ice yeti attacks you!");
-						GlacialRiftConditions();
-						startCombat(new Yeti());
-						break;
-					}
-				case 2: //Frost Giant
-					clearOutput();
-					outputText("You wander the frozen landscape of the Rift, frozen rocks, frosted hills and forested mountains your only landmarks. As you cross the peak of a rather large, lightly forested hill, you come face to gigantic face with a Frost Giant! He belches fiercely at you and you tumble back down the hill. He mostly steps over it as you come to your senses. You quickly draw your [weapon] and withdraw from the hill to prepare for battle.\n\n");
-					GlacialRiftConditions();
-					startCombat(new FrostGiant());
-					break;
-				case 3: //Winter Wolf
-					clearOutput();
-					spriteSelect(SpriteDb.s_winterWolf);
-					outputText("A titanic howling sound is heard nearby as an enormous shape jump off a nearby cliff into the snow right in front of you. As the flying snow clear off you see a wolf of immaculate pelt and size bordering the absurd. You likely accidentally stepped into its hunting territory and to clearly show its displeasure the ten feet tall monster growl at you showing its dagger-like teeth then start running in your direction howling what sounds to be a challenge.\n\n");
-					GlacialRiftConditions();
-					startCombat(new WinterWolf());
-					break;
-				case 4: //True Ice Golems
-					clearOutput();
-					outputText("As you take a stroll, out of the nearby glaciers emerge a group of golems. Looks like you have encountered some true ice golems! You ready your [weapon] for a fight!");
-					GlacialRiftConditions();
-					startCombat(new GolemsTrueIce());
-					break;
-				case 5:
-					if (rand(2) == 0) SceneLib.trollScene.encounterAdultGlacialFemaleTroll();
-					else SceneLib.trollScene.encounterAdultGlacialMaleTroll();
-					break;
-				case 6:
-					wendigoScene.encounterWendigo();
-					break;
-				case 7: //Find Valeria! She can be found there if you rejected her offer initially at Tower of the Phoenix or didn't find her. She can never be Lost Forever.
-					spriteSelect(SpriteDb.s_valeria);
-					flags[kFLAGS.VALERIA_FOUND_IN_GLACIAL_RIFT] = 1;
-					clearOutput();
-					outputText("As you make your way across the Rift's icy extremities, you hear a metallic CLANK CLANK approaching through the snow flurries. You turn in time to see a suit of plated mail charging toward you, its helm and limbs filled with bright blue goo. It skids to a stop a few yards away, a greatsword forming from the goo of its hand. A beautiful, feminine face appears beneath the armor’s visor grinning at you. You suddenly recognize her face!\n\n");
-					outputText("\"<i>This is my territory!</i>\" she shouts, bringing her two-handed sword to bare. \"<i>You’ll give me your fluids, or I’ll take them.</i>\"");
-					addButton(0, "Fight", fightValeria);
-					addButton(1, "Submit", SceneLib.valeria.pcWinsValeriaSparDefeat, true);
-					break;
-				case 8: //Find Aria of item!
-					clearOutput();/*
+					if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + stonesHarvested < stonesCapacity) flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += stonesHarvested;
+					else flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] = stonesCapacity;
+				} else {
+					var gemsFound2:int = 40 + rand(160);
+					outputText("As you wander the rift your foot hits something burrowed under the snow. It is a treasure chest and it looks packed to the brim.\n\n Inside was " + String(gemsFound) + " gems! ");
+					player.gems += gemsFound2;
+					statScreenRefresh();
+				}
+			}
+			doNext(camp.returnToCampUseOneHour);
+		}
+		
+		public function encounterItem():void {
+			clearOutput();/*
 					if (rand(2) == 0) {
 						SceneLib.ariaScene.MelkieEncounter();
 					}
 					else {*/
-						var itemChooser:Number = rand(2);
-						if (itemChooser == 0) {
-							outputText("As you cross one of the floating ice sheets that make up the bulk of the rift, your eyes are drawn to a bright glint amidst the white backdrop.  As you eagerly approach the gleam, you discover a single tiny spire of ice, jutting from the surrounding snow.  You pluck it gently from the ground, give it a quick glance over and, satisfied that it won’t try and kill you, drop it in your bag. ");
-							inventory.takeItem(consumables.ICICLE_, camp.returnToCampUseOneHour);
-						}
-						else if (itemChooser == 1) {
-							outputText("As you make your way across the icy wastes, you notice a small corked ivory horns half-buried under the snow, filled with a thick sweet-looking liquor. You stop and dig it up, sniffing curiously at the liquid. The scent reminds you of the honey secreted by the bee-girls of Mareth, though with hints of alcohol and... something else. You place the horns of mead in your bag and continue on your way. ");
-							inventory.takeItem(consumables.GODMEAD, camp.returnToCampUseOneHour);
-						}
-					//}
-					break;
-				case 9: //Find ornate chest!
-					if (player.hasKeyItem("Camp - Ornate Chest") < 0) {
-						var gemsFound:int = 400 + rand(400);
-						outputText("While you're minding your own business, you spot an ornately-decorated chest somewhat buried in the snow. You walk on the snowy grounds you finally reach the chest. As you open the chest, you find " + String(gemsFound) + " gems inside the chest! You pocket the gems and haul the chest home. It looks nice and would make a good storage.");
-						player.createKeyItem("Camp - Ornate Chest", 0, 0, 0, 0);
-						for (var i:int = 0; i < 4; i++) {
-							inventory.createStorage();
-						}
-						player.gems += gemsFound;
-						statScreenRefresh();
-						outputText("\n\n<b>You now have " + num2Text(inventory.itemStorageDirectGet().length) + " storage item slots at camp.</b>");
-					}
-					else {
-						if (rand(2) == 0) {
-							var stonesHarvested:Number = 10;
-							var stonesCapacity:Number = 300;
-							if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4) stonesCapacity += 600;
-							outputText("You find a big amount of stone rubble in the rift and begin to harvest them for your constructions. ");
-							if (SceneLib.emberScene.followerEmber() || SceneLib.kihaFollower.followerKiha()) {
-								stonesHarvested += 10;
-								if (SceneLib.emberScene.followerEmber() && SceneLib.kihaFollower.followerKiha()) {
-									outputText("Kiha and Ember");
-									stonesHarvested += 10;
-								}
-								else if (SceneLib.emberScene.followerEmber()) {
-									outputText("Ember");
-									if (SceneLib.kihaFollower.followerKiha()) outputText(" and ");
-								}
-								else outputText("Kiha");
-								outputText(" assist you into bringing as many as possible back to camp. ");
-							}
-							if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + stonesHarvested < stonesCapacity) flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += stonesHarvested;
-							else flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] = stonesCapacity;
-						}
-						else {
-							var gemsFound2:int = 40 + rand(160);
-							outputText("As you wander the rift your foot hits something burrowed under the snow. It is a treasure chest and it looks packed to the brim.\n\n Inside was " + String(gemsFound) + " gems! ");
-							player.gems += gemsFound2;
-							statScreenRefresh();
-						}
-					}
-					doNext(camp.returnToCampUseOneHour);
-					break;
-				default:
-					clearOutput();
-					outputText("You spend an hour trudging through the bleak and bitingly cold glaciers but you don’t find anything interesting. ");
-					if (player.tou < 50){
-						outputText("But on your way back you feel you're a little more used to traveling through this harsh area.");
-						player.trainStat("tou", +1, 50);
-					}
-					dynStats("tou", .5);
-					doNext(camp.returnToCampUseOneHour);
+			var itemChooser:Number = rand(2);
+			if (itemChooser == 0) {
+				outputText("As you cross one of the floating ice sheets that make up the bulk of the rift, your eyes are drawn to a bright glint amidst the white backdrop.  As you eagerly approach the gleam, you discover a single tiny spire of ice, jutting from the surrounding snow.  You pluck it gently from the ground, give it a quick glance over and, satisfied that it won’t try and kill you, drop it in your bag. ");
+				inventory.takeItem(consumables.ICICLE_, camp.returnToCampUseOneHour);
+			} else if (itemChooser == 1) {
+				outputText("As you make your way across the icy wastes, you notice a small corked ivory horns half-buried under the snow, filled with a thick sweet-looking liquor. You stop and dig it up, sniffing curiously at the liquid. The scent reminds you of the honey secreted by the bee-girls of Mareth, though with hints of alcohol and... something else. You place the horns of mead in your bag and continue on your way. ");
+				inventory.takeItem(consumables.GODMEAD, camp.returnToCampUseOneHour);
+			}
+			//}
+		}
+		
+		public function encounterValeria():void {
+			spriteSelect(SpriteDb.s_valeria);
+			flags[kFLAGS.VALERIA_FOUND_IN_GLACIAL_RIFT] = 1;
+			clearOutput();
+			outputText("As you make your way across the Rift's icy extremities, you hear a metallic CLANK CLANK approaching through the snow flurries. You turn in time to see a suit of plated mail charging toward you, its helm and limbs filled with bright blue goo. It skids to a stop a few yards away, a greatsword forming from the goo of its hand. A beautiful, feminine face appears beneath the armor’s visor grinning at you. You suddenly recognize her face!\n\n");
+			outputText("\"<i>This is my territory!</i>\" she shouts, bringing her two-handed sword to bare. \"<i>You’ll give me your fluids, or I’ll take them.</i>\"");
+			addButton(0, "Fight", fightValeria);
+			addButton(1, "Submit", SceneLib.valeria.pcWinsValeriaSparDefeat, true);
+		}
+		
+		public function encounterTroll():void {
+			if (rand(2) == 0) SceneLib.trollScene.encounterAdultGlacialFemaleTroll();
+			else SceneLib.trollScene.encounterAdultGlacialMaleTroll();
+		}
+		
+		public function encounterGolems():void {
+			clearOutput();
+			outputText("As you take a stroll, out of the nearby glaciers emerge a group of golems. Looks like you have encountered some true ice golems! You ready your [weapon] for a fight!");
+			GlacialRiftConditions();
+			startCombat(new GolemsTrueIce());
+		}
+		
+		public function encounterWinterWolf():void {
+			clearOutput();
+			spriteSelect(SpriteDb.s_winterWolf);
+			outputText("A titanic howling sound is heard nearby as an enormous shape jump off a nearby cliff into the snow right in front of you. As the flying snow clear off you see a wolf of immaculate pelt and size bordering the absurd. You likely accidentally stepped into its hunting territory and to clearly show its displeasure the ten feet tall monster growl at you showing its dagger-like teeth then start running in your direction howling what sounds to be a challenge.\n\n");
+			GlacialRiftConditions();
+			startCombat(new WinterWolf());
+		}
+		
+		public function encounterFrostGiant():void {
+			clearOutput();
+			outputText("You wander the frozen landscape of the Rift, frozen rocks, frosted hills and forested mountains your only landmarks. As you cross the peak of a rather large, lightly forested hill, you come face to gigantic face with a Frost Giant! He belches fiercely at you and you tumble back down the hill. He mostly steps over it as you come to your senses. You quickly draw your [weapon] and withdraw from the hill to prepare for battle.\n\n");
+			GlacialRiftConditions();
+			startCombat(new FrostGiant());
+		}
+		
+		public function encounterYeti():void {
+			clearOutput();
+			outputText("You grow tired trudging through the hard-packed snow under you, shielding your face with an arm as the wind lashes against you, slowing your progress. The whistle of the wind rings in your ears, only broken with the dull crunch of snow compacting underfoot. You can’t help but regret wandering into this storm and wish for shelter and warmth. Your body freezes at the sound of a loud crack, and turning your head to see the source of the noise, you notice too late that your lower body is sinking in the snow floor. You flail your limbs as your body is swept under by the moving snow, and you feel yourself sliding down some sort of shaft: it’s too dark to see where you are going. With a thump, you come to a stop.\n\n");
+			if (flags[kFLAGS.MET_YETI_FIRST_TIME] <= 0) {
+				outputText("Quickly wiping the snow off your body, you take in your surroundings. There are torches overhead that provide light and a small amount of warmth, making the ice cavern almost beautiful to be in, the light reflecting and shimmering off the polished ice walls, ceiling, and large icicles. There are a number of holes like the one you must have came out of, like a network of chutes that all lead to your location. You are surprised to find something under you, a large pile of white furs broke your fall. Though you are unnerved to find a large collection of bones lining the sides of the ice cavern, all white like snow, cleaned to a shine. Taking all this in, it’s obvious you are in someone’s or something’s residence. ");
+				if (silly()) {
+					outputText("You notice the bodies of a number of strange, bipedal horse-like creatures, all covered in thick white fur hanging from the nearby wall; laying beneath one is a strange metallic cylinder, not unlike a sword hilt, that gives off a strange, soft heat. ")
+				}
+				outputText("You brush off the snow and get to your feet, turning your head as you notice a passageway.\n\n");
+				flags[kFLAGS.MET_YETI_FIRST_TIME] = 1;
+			} else {
+				outputText("Taking in the familiar surroundings, you realize you must have fallen through one of those chutes again. You begin to wonder if they are for the Yeti’s use, or if they are meant to bring in unsuspecting travelers. A meal delivery service set up with their limited ice magic? You shake off the snow on you and get to your feet. Looking to the passage, sure enough shadows dance along the walls as the thumps reach your ears.\n\n")
+			}
+			outputText("Hearing a thunderous roar, you ready yourself for a fight");
+			if (player.weaponName != "fists") outputText(", holding your [weapon] at the ready");
+			if (player.isRace(Races.YETI) && player.hasVagina() && player.femininity > 40) {
+				yetiScene.FemalePCMeetYeti();
+			} else {
+				sceneHunter.print("Check failed: yeti race, vagina, high femininity");
+				outputText(". A massive hulking creature barrels around the corner and sets its gaze on you, its clawed hands and feet launching its body over the iced caverns with ease as you stare the beast down. The white blur of an ice yeti attacks you!");
+				GlacialRiftConditions();
+				startCombat(new Yeti());
 			}
 		}
-
+		
 		public function GlacialRiftConditions():void {
 			if (!player.headJewelry == headjewelries.SKIGOGG) player.createStatusEffect(StatusEffects.Snowstorms,0,0,0,0);
-			if (!player.miscJewelry == miscjewelries.SNOWBOA && !player.miscJewelry2 == miscjewelries.SNOWBOA) player.createStatusEffect(StatusEffects.Snow,0,0,0,0);
+			if (player.countMiscJewelry(miscjewelries.SNOWBOA) == 0) player.createStatusEffect(StatusEffects.Snow,0,0,0,0);
 			if (!player.hasPerk(PerkLib.ColdAffinity)) player.createStatusEffect(StatusEffects.SubZeroConditions,0,0,0,0);
 		}
 
@@ -326,7 +388,7 @@ use namespace CoC;
 			else if (flags[kFLAGS.FENRIR_COLLAR] < 1) {
 				outputText("This seems like a bad idea. You don't doubt that the dark god has shown you the truth, but you've come this far without making choices you can't take back, and this choice in particular doesn't feel like the place to start. You return your paw to your side and move to leave the cavern, and Fenrir's voice echoes around you one more time.");
 				outputText("\n\n\"<i>Your choice is your own, feeble one. I speak the truth; I shall not force you. You will be a fitting vessel for my power only if you take it willingly, and knowing full well what it entails. Until you decide differently I will wait here, patiently. But know this: it was the weight of Urdr's thread that brought you to this place, and you may find resisting it as hard a burden as the one you already bear. Make no mistake, so long as you bear the shape of my scattered children we will meet here again, and you will have to choose once more.</i>\"");
-				outputText("\n\nOn those word Fenrir falls silent again as you make your way back to your camp.");
+				outputText("\n\nOn these words Fenrir falls silent again as you make your way back to your camp.");
 				flags[kFLAGS.FENRIR_COLLAR] = 1;
 			}
 			doNext(camp.returnToCampUseOneHour);

@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.Dungeons.EbonLabyrinth 
+package classes.Scenes.Dungeons.EbonLabyrinth
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -66,7 +66,7 @@ use namespace CoC;
 			SceneLib.dungeons.ebonlabyrinth.hellfireSnailScene.defeatedBy();
 		}
 		
-		public function HellfireSnail() 
+		public function HellfireSnail()
 		{
             var mod:int = inDungeon ? SceneLib.dungeons.ebonlabyrinth.enemyLevelMod : 0;
             initStrTouSpeInte(100 + 20*mod, 300 + 50*mod, 80 + 30*mod, 150 + 30*mod);
@@ -76,8 +76,8 @@ use namespace CoC;
             this.bonusHP = 12500 + 10000*mod; //THICC
             this.bonusLust = 525 + 55*mod;
             this.level = 60 + 5*mod; //starts from 65 due to EL levelMod calculations;
-            this.gems = mod > 50 ? 0 : Math.floor((1000 + rand(200)) * Math.exp(0.3*mod));
-            this.additionalXP = mod > 50 ? 0 : Math.floor(5000 * Math.exp(0.3*mod));
+            this.gems = mod > 20 ? 0 : Math.floor((1000 + rand(200)) * Math.exp(0.3*mod));
+            this.additionalXP = mod > 20 ? 0 : Math.floor(5000 * Math.exp(0.3*mod));
 			
 			this.a = "";
 			this.short = "Hellfire Snail";
@@ -95,7 +95,7 @@ use namespace CoC;
 			this.butt.type = Butt.RATING_LARGE;
 			this.lowerBody = LowerBody.FIRE_SNAIL;
 			this.faceType = Face.FIRE_SNAIL;
-			this.skinTone = "red";
+			this.bodyColor = "red";
 			this.hairColor = "red";
 			this.hairLength = 16;
 			this.weaponName = "fist";
@@ -103,7 +103,6 @@ use namespace CoC;
 			this.weaponAttack = 5;
 			this.armorName = "sticky glistering skin";
 			this.lust = 30;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.drop = new WeightedDrop(consumables.FSNAILS, 1);
 			this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);

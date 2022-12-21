@@ -1,4 +1,4 @@
-package classes.Scenes.Areas.HighMountains 
+package classes.Scenes.Areas.HighMountains
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -8,6 +8,7 @@ import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Combat.Combat;
 import classes.Scenes.SceneLib;
 import classes.internals.ChainedDrop;
 
@@ -39,7 +40,7 @@ public class Phoenix extends Monster
 				createStatusEffect(StatusEffects.Uber, 0, 0, 0, 0);
 			}
 			else {
-				if (flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) {
+				if (Combat.playerWaitsOrDefends()) {
 					outputText("You dive to the ground just as the phoenix breathes a great gout of flame at you. The fire blooms over your back, singeing your [armor], but doesn’t harm you. As she swoops low you see the phoenix scowl, looking quite disappointed, but it’s clear she isn’t done yet!");
 				}
 				//MASSIVE DAMAGE!
@@ -71,9 +72,8 @@ public class Phoenix extends Monster
 				if (player.hasCock() && player.hasVagina()) outputText("whilst your");
 				if (player.hasVagina()) outputText("thighs are suddenly soaked by a torrent of girlcum as your body reacts to the potent chemicals");
 				outputText(".");
-				var lustDmg:Number = (30 + rand(30)) * (EngineCore.lustPercent()/100);
-				player.dynStats("lus", lustDmg, "scale", false);
-				outputText(" <b>(<font color=\"#ff00ff\">" + (Math.round(lustDmg*10)/10) + "</font>)</b>");
+				var lustDmg:Number = 30 + rand(30);
+				player.takeLustDamage(lustDmg, true);
 			}
 		}
 		
@@ -117,7 +117,7 @@ public class Phoenix extends Monster
 			}
 		}
 		
-		public function Phoenix() 
+		public function Phoenix()
 		{
 			this.a = "the ";
 			this.short = "phoenix";
@@ -137,7 +137,7 @@ public class Phoenix extends Monster
 			this.butt.type = Butt.RATING_JIGGLY;
 			this.lowerBody = LowerBody.SALAMANDER;
 			this.skin.growCoat(Skin.SCALES,{color:"crimson"});
-			this.skin.base.color = "light";
+			this.skinColor = "light";
 			this.hairColor = "red";
 			this.hairLength = 16;
 			initStrTouSpeInte(125, 110, 120, 84);
@@ -152,7 +152,6 @@ public class Phoenix extends Monster
 			this.bonusLust = 110;
 			this.lust = 10;
 			this.lustVuln = .7;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 30;
 			this.gems = 60 + rand(45);
 			this.drop = new ChainedDrop().add(useables.EBONBLO,1/20)

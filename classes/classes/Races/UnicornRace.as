@@ -13,9 +13,33 @@ public class UnicornRace extends Race{
 	public static const BicornHairColors:/*String*/Array = ["silver","black", "midnight black", "midnight"];
 	public static const UnicornFurColors:/*String*/Array  = ["white", "pure white"];
 	public static const UnicornHairColors:/*String*/Array = ["platinum blonde","silver", "white", "pure white"];
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Human",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Human",
+        /*Eyes*/		"Human",
+        /*Face*/		"Human",
+        /*Gills*/		"Human",
+        /*Hair*/		"Human",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Human",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Human",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Human"];
 	
 	public function UnicornRace(id:int) {
-		super("Unicorn", id);
+		super("Unicorn", id, []);//RaceBody);
 		chimeraTier = 2;
 		grandChimeraTier = 3;
 	}
@@ -38,8 +62,8 @@ public class UnicornRace extends Race{
 				.vaginaType(VaginaClass.EQUINE, +1)
 				.hornTypeAndCount(Horns.UNICORN, LESS_THAN(6), +1, 0, "Unicorn branch - size 1-5 unicorn horn")
 				.hornTypeAndCount(Horns.UNICORN, AT_LEAST(6), +2, 0, "Unicorn branch - size 6+ unicorn horn")
-				.hornTypeAndCount(Horns.UNICORN, LESS_THAN(6), +1, 0, "Bicorn branch - size 1-5 bicorn horns")
-				.hornTypeAndCount(Horns.UNICORN, AT_LEAST(6), +2, 0, "Bicorn branch - size 6+ bicorn horns");
+				.hornTypeAndCount(Horns.BICORN, LESS_THAN(6), +1, 0, "Bicorn branch - size 1-5 bicorn horns")
+				.hornTypeAndCount(Horns.BICORN, AT_LEAST(6), +2, 0, "Bicorn branch - size 6+ bicorn horns");
 		addConditionedScores(
 				function(body:BodyData):Boolean {
 					return body.hornType == Horns.UNICORN;
@@ -49,8 +73,8 @@ public class UnicornRace extends Race{
 						"hair color: "+UnicornHairColors.join("/")+
 						"; coat color: "+UnicornFurColors.join("/"),
 						function (body:BodyData):Boolean {
-							return Utils.InCollection(body.hairColor, UnicornHairColors) &&
-									Utils.InCollection(body.skinCoatColor, UnicornFurColors)
+							return Utils.InCollection(body.hairColor1, UnicornHairColors) &&
+									Utils.InCollection(body.furColor1, UnicornFurColors)
 						},
 						+1)
 				.eyeColor("blue", +1)
@@ -64,8 +88,8 @@ public class UnicornRace extends Race{
 						"hair color: "+BicornHairColors.join("/")+
 						"; coat color: "+BicornFurColors.join("/"),
 						function (body:BodyData):Boolean {
-							return Utils.InCollection(body.hairColor, BicornHairColors) &&
-									Utils.InCollection(body.skinCoatColor, BicornFurColors)
+							return Utils.InCollection(body.hairColor1, BicornHairColors) &&
+									Utils.InCollection(body.furColor1, BicornFurColors)
 						},
 						+1)
 				.eyeColor("red", +1)

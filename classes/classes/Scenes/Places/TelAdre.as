@@ -2,11 +2,11 @@
 import classes.*;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
-import classes.Scenes.Holidays;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.Places.TelAdre.*;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
+//import classes.Scenes.Places.AbandonedTownRebuilt;
 
 /**
  * The lovely town of Tel Adre
@@ -32,6 +32,7 @@ import classes.display.SpriteDb;
 		public var lottie:Lottie = new Lottie();
 		public var maddie:Maddie = new Maddie();
 		public var niamh:Niamh = new Niamh();
+		public var pablo:PabloScene = new PabloScene();
 		public var rubi:Rubi = new Rubi();
 		public var scylla:Scylla = new Scylla();
 		public var sexMachine:SexMachine = new SexMachine();
@@ -86,14 +87,14 @@ private function encounterTelAdre():void {
 private function telAdreCrystal():void {
 	if(!player.hasStatusEffect(StatusEffects.TelAdre)) player.createStatusEffect(StatusEffects.TelAdre,0,0,0,0);
 	//-70+ corruption, or possessed by exgartuan
-	if (player.hasStatusEffect(StatusEffects.Exgartuan) || player.cor >= 70 + player.corruptionTolerance) {
+	if (SceneLib.exgartuan.anyPresent() || player.cor >= 70 + player.corruptionTolerance) {
 		outputText("The crystal pendant begins to vibrate in the air, swirling around and glowing dangerously black.  Edryn snatches her hand back and says, \"<i>I'm sorry, but you're too far gone to step foot into our city.  If by some miracle you can shake the corruption within you, return to us.</i>\"\n\n");
 		outputText("You shrug and step back.  You could probably defeat these two, but you know you'd have no hope against however many friends they had beyond the walls.  You turn around and leave, a bit disgruntled at their hospitality.  After walking partway down the dune you spare a glance over your shoulder and discover the city has vanished!  Surprised, you dash back up the dune, flinging sand everywhere, but when you crest the apex, the city is gone.");
 		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
-	//-50+ corruption or corrupted Jojo
-	else if(player.cor >= 50 || JojoScene.monk >= 5) {
+	//-66+ corruption or corrupted Jojo as marae
+	else if(player.cor >= 66 || JojoScene.monk >= 5) {
 		outputText("The crystal pendant shimmers, vibrating in place and glowing a purple hue.  Edryn steps back, watching you warily, \"<i>You've been deeply touched by corruption.  You balance on a razor's edge between falling completely and returning to sanity.  You may enter, but we will watch you closely.</i>\"\n\n");
 	}
 	//-25+ corruption or corrupted Marae
@@ -125,8 +126,8 @@ private function telAdreTour():void {
 }
 
 public function telAdreMenu():void {
-	if(flags[kFLAGS.VALENTINES_EVENT_YEAR] < date.fullYear && player.balls > 0 && player.hasCock() && flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] >= 4 && flags[kFLAGS.TIMES_MET_SCYLLA_IN_ADDICTION_GROUP] > 0 && isValentine()) {
-		Holidays.crazyVDayShenanigansByVenithil();
+	if(flags[kFLAGS.VALENTINES_EVENT_YEAR] < date.fullYear && player.hasBalls() && player.hasCock() && flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] >= 4 && flags[kFLAGS.TIMES_MET_SCYLLA_IN_ADDICTION_GROUP] > 0 && isValentine()) {
+		SceneLib.holidays.crazyVDayShenanigansByVenithil();
 		return;
 	}
 	if(!SceneLib.urtaQuest.urtaBusy() && flags[kFLAGS.PC_SEEN_URTA_BADASS_FIGHT] == 0 && rand(15) == 0 && model.time.hours > 15) {
@@ -175,7 +176,7 @@ public function telAdreMenu():void {
 		SceneLib.urtaPregs.urtaSpecialDeliveries();
 		return;
 	}
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00242] == -1) {
+	if(flags[kFLAGS.MADDIE_QUEST_STATE] == -1) {
 		maddie.runAwayMaddieFollowup();
 		return;
 	}
@@ -192,7 +193,29 @@ public function telAdreMenu():void {
 	outputText("Steam boils from the top of a dome-shaped structure near the far end of the street, and simple lettering painted on the dome proclaims it to be a bakery.  Perhaps those shops will be interesting as well.  One shop named Kaiba cosmetic emporium specialises in magical trinkets and other oddities.");
 	if (flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] == -2 && !SceneLib.raphael.RaphaelLikes()) {
 		outputText("\n\nYou remember Raphael's offer about the Orphanage, but you might want to see about shaping yourself more to his tastes first.  He is a picky fox, after all, and you doubt he would take well to seeing you in your current state.");
-	}
+	}/*
+	if (AbandonedTownRebuilt.TelAdreScouts = 1) {
+		var choice0:Number = rand(4);
+			switch (choice0) {
+				case 0:
+				outputText("As you enter the city, you notice a small group of mice inside the city. They travel in a group, but their awed expressions and general naivety make them stick out. One of them recognizes you, splitting off from the group. \n\n");
+				outputText("<i>“Hi, "+ player.mf("dad", "mom") +", we’re just buying some supplies. This city is amazing, though!”</i> You tell them to watch themselves, and he nods. <i>“Oh, I know "+ player.mf("dad", "mom") +". That’s why we’re sticking together.”</i> He eyes the armoury enviously. <i>“I just wish we had half of the gear in this place.”</i> He blinks, realising his group’s moved on. <i>“Oh crap, I’ve got the gems! Gotta go! Love ya, "+ player.mf("dad", "mom") +"!”</i> The mouselet scampers off, leaving you alone. What were you doing here, again? \n\n");
+				AbandonedTownRebuilt.TelAdreSuppliesBought = true;
+				
+					break;
+				case 1:
+					
+					break;
+				case 2:
+					
+					break;
+				case 3:
+					
+					break;
+				default:
+					
+			}
+	}*/
 	telAdreMenuShow();
 }
 
@@ -353,27 +376,27 @@ private function oswaldPawnMenu2():void {
 
 private function oswaldPawnSell(slot:int):void { //Moved here from Inventory.as
 	spriteSelect(SpriteDb.s_oswald);
+	var itemValueOrgin:Number = player.itemSlots[slot].itype.value;
 	var itemValue:int = int(player.itemSlots[slot].itype.value / 2);
 	clearOutput();
-	if (flags[kFLAGS.SHIFT_KEY_DOWN] == 1) {
+	if (player.hasPerk(PerkLib.Greedy)) itemValue *= 2;
+	if (player.hasPerk(PerkLib.TravelingMerchantOutfit)) itemValue *= 2;
+	if (itemValue > itemValueOrgin) itemValue = itemValueOrgin;
+	if (itemValue != 0 && player.hasPerk(PerkLib.Greedy) || player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your items for more than normal.");
+	if (shiftKeyDown == 1) {
 		if (itemValue == 0)
 			outputText("You hand over " + num2Text(player.itemSlots[slot].quantity) + " " +  player.itemSlots[slot].itype.shortName + " to Oswald.  He shrugs and says, \"<i>Well ok, it isn't worth anything, but I'll take it.</i>\"");
 		else outputText("You hand over " + num2Text(player.itemSlots[slot].quantity) + " " +  player.itemSlots[slot].itype.shortName + " to Oswald.  He nervously pulls out " + num2Text(itemValue * player.itemSlots[slot].quantity)  + " gems and drops them into your waiting hand.");
 		while (player.itemSlots[slot].quantity > 0){
 			player.itemSlots[slot].removeOneItem();
-			if (player.hasPerk(PerkLib.Greedy)) itemValue *= 2;
 			player.gems += itemValue;
 		}
 	}
 	else {
-		if (player.hasPerk(PerkLib.Greedy)) itemValue *= 2;
-		if (player.hasPerk(PerkLib.TravelingMerchantOutfit)) itemValue *= 2;
 		if (itemValue == 0)
-		outputText("You hand over " + player.itemSlots[slot].itype.longName + " to Oswald.  He shrugs and says, \"<i>Well ok, it isn't worth anything, but I'll take it.</i>\"");
+			outputText("You hand over " + player.itemSlots[slot].itype.longName + " to Oswald.  He shrugs and says, \"<i>Well ok, it isn't worth anything, but I'll take it.</i>\"");
 		else outputText("You hand over " + player.itemSlots[slot].itype.longName + " to Oswald.  He nervously pulls out " + num2Text(itemValue) + " gems and drops them into your waiting hand.");
 		player.itemSlots[slot].removeOneItem();
-		if (itemValue != 0 && player.hasPerk(PerkLib.Greedy) || player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your item for double the amount.");
-		if (itemValue != 0 && player.hasPerk(PerkLib.Greedy) && player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your item for four times the amount.");
 		player.gems += itemValue;
 	}
 	statScreenRefresh();
@@ -390,12 +413,9 @@ private function oswaldPawnSellAll():void {
 			player.itemSlots[slot].quantity = 0;
 		}
 	}
-	if (player.hasPerk(PerkLib.Greedy)) itemValue *= 2;
-	if (player.hasPerk(PerkLib.TravelingMerchantOutfit)) itemValue *= 2;
+	if (player.hasPerk(PerkLib.Greedy) || player.hasPerk(PerkLib.TravelingMerchantOutfit)) itemValue *= 2;
 	outputText("You lay out all the items you're carrying on the counter in front of Oswald.  He examines them all and nods.  Nervously, he pulls out " + num2Text(itemValue) + " gems and drops them into your waiting hand.");
-	if (player.hasPerk(PerkLib.Greedy) || player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your item for double the amount.");
-	if (player.hasPerk(PerkLib.Greedy) && player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your item for four times the amount.");
-
+	if (player.hasPerk(PerkLib.Greedy) || player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your item for more than normal.");
 	player.gems += itemValue;
 	statScreenRefresh();
 	doNext(oswaldPawn);
@@ -412,7 +432,7 @@ private function buyBackpack():void {
 	menu();
 	if (player.keyItemvX("Backpack", 1) < 2) addButton(0, "Small", buyBackpackConfirmation, 2, "Small", 100, "Grants additional two slot. \n\nCost: 100 gems");
 	if (player.keyItemvX("Backpack", 1) < 4) addButton(1, "Medium", buyBackpackConfirmation, 4, "Medium", 200, "Grants additional four slots. \n\nCost: 200 gems");
-	addButton(14, "Nevermind", oswaldPawnMenu2);
+	addButton(14, "Never mind", oswaldPawnMenu2);
 }
 private function buyBackpackConfirmation(size:int = 2, sizeDesc:String = "Small", price:int = 100):void {
 	spriteSelect(SpriteDb.s_oswald);
@@ -445,7 +465,7 @@ private function anotherButton(button:int, nam:String, func:Function, arg:* = -9
 	return button;
 }
 private function enterBarTelAdre():void {
-	if(isThanksgiving() && flags[kFLAGS.PIG_SLUT_DISABLED] == 0) Holidays.pigSlutRoastingGreet();
+	if(isThanksgiving() && flags[kFLAGS.PIG_SLUT_DISABLED] == 0) SceneLib.holidays.pigSlutRoastingGreet();
 	else barTelAdre();
 }
 
@@ -463,7 +483,7 @@ public function barTelAdre():void {
 	}
 	outputText(images.showImage("location-teladre-thewetbitch"));
 	outputText("The interior of The Wet Bitch is far different than the mental picture its name implied.  It looks like a normal tavern, complete with a large central hearth, numerous tables and chairs, and a polished dark wood bar.  The patrons all seem to be dressed and interacting like normal people, that is if normal people were mostly centaurs and dog-morphs of various sub-species.  The atmosphere is warm and friendly, and ");
-	if (!player.isRace(Races.HUMAN)) outputText("despite your altered appearance, ");
+	if (!player.isRace(Races.HUMAN, 1, false)) outputText("despite your altered appearance, ");
 	outputText("you hardly get any odd stares.  There are a number of rooms towards the back, as well as a stairway leading up to an upper level.");
 
 	scylla.scyllaBarSelectAction(); //Done before anything else so that other NPCs can check scylla.action to see what she's doing
@@ -474,9 +494,16 @@ public function barTelAdre():void {
 	//AMILY!
 	if(flags[kFLAGS.AMILY_VISITING_URTA] == 1) {
 		button = anotherButton(button,"Ask4Amily",SceneLib.followerInteractions.askAboutAmily);
+	}/*
+	if (RuinedTownRebuilt.AmilyAtWetBitch && AbandonedTownRebuilt.AmilyAngerCooldown > 0) {
+		button = anotherButton(button, "AmilyTalk", AbandonedTownRebuilt.AmilyMadBar);
 	}
+	if (RuinedTownRebuilt.AmilyAtWetBitch && RuinedTownRebuilt.AmilyAngerCooldown == 0) {
+		button = anotherButton(button, "AmilyTalk", AbandonedTownRebuilt.AmilyBarTalk);
+	}*/
+
 	//DOMINIKA
-	if(model.time.hours > 17 && model.time.hours < 20 && flags[kFLAGS.DOMINIKA_MET] != -1) {
+	if(model.time.hours > 17 && model.time.hours < 20 && flags[kFLAGS.DOMINIKA_MET] != -1 && flags[kFLAGS.DOMINIKA_COVENANT] < 3) {
 		button = anotherButton(button,"Dominika",dominika.fellatrixBarApproach);
 	}
 	//EDRYN!
@@ -536,7 +563,7 @@ public function barTelAdre():void {
 	//NANCY
 	if (auntNancy.auntNancy(false)) {
 		auntNancy.auntNancy(true);
-		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00263] > 0) button = anotherButton(button,"Nancy",auntNancy.interactWithAuntNancy);
+		if (flags[kFLAGS.NANCY_MET] > 0) button = anotherButton(button,"Nancy",auntNancy.interactWithAuntNancy);
 		else button = anotherButton(button,"Barkeep",auntNancy.interactWithAuntNancy);
 	}
 	else outputText("\n\nIt doesn't look like there's a bartender working at the moment.");
@@ -1175,6 +1202,8 @@ public function kaibaShopMainMenu2():void {
 			addButtonDisabled(4, "T.M.Outfit", "You already bought item from Kaiba today.");
 			addButtonDisabled(5, "W.I.Cloak", "You already bought item from Kaiba today.");
 			addButtonDisabled(6, "S.S.Clothing", "You already bought item from Kaiba today.");
+			addButtonDisabled(7, "MoonClaws", "You already bought item from Kaiba today.");
+			addButtonDisabled(8, "Leaf Amulet", "You already bought item from Kaiba today.");
 		}
 		else {
 			addButton(0, "S.Ornament", buyItem, headjewelries.DMONSKUL).hint("Skull hair ornament - An unique hair accessory for evil wizards greatly empower ones magic power scaling with corruption, An unique find buy it while you can because this won't last forever!");
@@ -1184,6 +1213,8 @@ public function kaibaShopMainMenu2():void {
 			addButton(4, "T.M.Outfit", buyItem, armors.TRMOUTF).hint("Traveling Merchant Outfit - Increase all gems gained by 100% and increase the potency of gem based ability by 150%, reduce spellcasting cost by 60%.");
 			addButton(5, "W.I.Cloak", buyItem, armors.WALIC).hint("Walpurgis Izalia Cloak - Increase fire and darkness damage by 100%, weaken all other elemental damage by 99%, increase fire resistance by 25%, reduce spellcasting cost by 60%.");
 			addButton(6, "S.S.Clothing", buyItem, armors.SCANSC).hint("Scandalous Succubus Clothing - Slutty seduction 15, Count as naked, +25% to Lust strike tease damage, Double tease experience gained, Raise corruption over time, Incompatible with bra or panty, double the effect of Masochist and Sadist.");
+			addButton(7, "MoonClaws", buyItem, weapons.MCLAWS).hint("Moonlight Claws - dealing magical dmg instead of physical, using charge weapon will give 2x larger bonus and can use range attack in case there is no range weapon equipped.");
+			addButton(8, "Leaf Amulet", buyItem, necklaces.LEAFAMU).hint("Leaf Amulet - Increase white magic damage and evasion by 10%. (Effect doubled for elves) Decrease spells cooldown by 1 turn if used by elf. This is a temporary sale.");
 		}
 		//addButton(0, "Necklace", buyItem, necklaces.CSNECK);
 		addButton(12, "-1-", kaibaShopMainMenuPage1);
@@ -1245,57 +1276,29 @@ public function tripxiShopMainMenu():void {
 	clearOutput();
 	if (player.statusEffectv2(StatusEffects.TelAdreTripxi) > 0) {
 		outputText("You enter the shop and deliver the gun parts to Tripxi who overjoyed begins to rebuild the gun immediately drawing schematics in the process.\n\n");
-		outputText("\"<i>Great job with this we are one step closer to restoring what was lost in the demon war all thanks to you! Come back tomorrow and I will have a brand new gun ready for you.</i>\"\n\n");
+		outputText("\"<i>Great job! We are one step closer to restoring what was lost in the demon war... Come back tomorrow and I will have a brand-new gun ready for you.</i>\"\n\n");
 		if (model.time.hours >= 15) player.addStatusValue(StatusEffects.TelAdreTripxi, 3, 16);
 		else player.addStatusValue(StatusEffects.TelAdreTripxi, 3, 8);
-		player.addStatusValue(StatusEffects.TelAdreTripxi, 2, -1);
-		if (player.hasKeyItem("Desert Eagle") >= 0) {
-			player.removeKeyItem("Desert Eagle");
-			player.addStatusValue(StatusEffects.TelAdreTripxiGuns1, 1, 1);
-		}
-		if (player.hasKeyItem("M1 Cerberus") >= 0) {
-			player.removeKeyItem("M1 Cerberus");
-			player.addStatusValue(StatusEffects.TelAdreTripxiGuns2, 1, 1);
-		}
-		if (player.hasKeyItem("Tripxi Fatbilly") >= 0) {
-			player.removeKeyItem("Tripxi Fatbilly");
-			player.addStatusValue(StatusEffects.TelAdreTripxiGuns3, 1, 1);
-		}
-		if (player.hasKeyItem("Snippler") >= 0) {
-			player.removeKeyItem("Snippler");
-			player.addStatusValue(StatusEffects.TelAdreTripxiGuns4, 1, 1);
-		}
-		if (player.hasKeyItem("Touhouna M3") >= 0) {
-			player.removeKeyItem("Touhouna M3");
-			player.addStatusValue(StatusEffects.TelAdreTripxiGuns5, 1, 1);
-		}
-		if (player.hasKeyItem("Twin Grakaturd") >= 0) {
-			player.removeKeyItem("Twin Grakaturd");
-			player.addStatusValue(StatusEffects.TelAdreTripxiGuns6, 1, 1);
-		}
-		if (player.hasKeyItem("Dart pistol") >= 0) {
-			player.removeKeyItem("Dart pistol");
-			player.addStatusValue(StatusEffects.TelAdreTripxiGuns1, 2, 1);
-		}
-		if (player.hasKeyItem("Twin Dart pistol") >= 0) {
-			player.removeKeyItem("Twin Dart pistol");
-			player.addStatusValue(StatusEffects.TelAdreTripxiGuns2, 2, 1);
-		}
-		if (player.hasKeyItem("Harpoon gun") >= 0) {
-			player.removeKeyItem("Harpoon gun");
-			player.addStatusValue(StatusEffects.TelAdreTripxiGuns3, 2, 1);
-		}
-		if (player.hasKeyItem("Derpnade Launcher") >= 0) {
-			player.removeKeyItem("Derpnade Launcher");
-			player.addStatusValue(StatusEffects.TelAdreTripxiGuns5, 2, 1);
-		}
-		if (player.hasKeyItem("Double barreled dragon gun") >= 0) {
-			player.removeKeyItem("Double barreled dragon gun");
-			player.addStatusValue(StatusEffects.TelAdreTripxiGuns1, 3, 1);
-		}
-		if (player.hasKeyItem("Lactoblasters") >= 0) {
-			player.removeKeyItem("Lactoblasters");
-			player.addStatusValue(StatusEffects.TelAdreTripxiGuns2, 3, 1);
+		player.changeStatusValue(StatusEffects.TelAdreTripxi, 2, 0);
+		var guns:Array = [
+			["Desert Eagle", StatusEffects.TelAdreTripxiGuns1, 1],
+			["M1 Cerberus", StatusEffects.TelAdreTripxiGuns2, 1],
+			["Tripxi Fatbilly", StatusEffects.TelAdreTripxiGuns3, 1],
+			["Snippler", StatusEffects.TelAdreTripxiGuns4, 1],
+			["Touhouna M3", StatusEffects.TelAdreTripxiGuns5, 1],
+			["Twin Grakaturd", StatusEffects.TelAdreTripxiGuns6, 1],
+			["Dart pistol", StatusEffects.TelAdreTripxiGuns1, 2],
+			["Twin Dart pistol", StatusEffects.TelAdreTripxiGuns2, 2],
+			["Harpoon gun", StatusEffects.TelAdreTripxiGuns3, 2],
+			["Derpnade Launcher", StatusEffects.TelAdreTripxiGuns5, 2],
+			["Double barreled dragon gun", StatusEffects.TelAdreTripxiGuns1, 3],
+			["Lactoblasters", StatusEffects.TelAdreTripxiGuns2, 3],
+		];
+		for each (var gun:Array in guns) {
+			if (player.hasKeyItem(gun[0]) >= 0) {
+				player.removeKeyItem(gun[0]);
+				player.addStatusValue(gun[1], gun[2], 1);
+			}
 		}
 		doNext(telAdreMenu);
 	}
@@ -1454,47 +1457,42 @@ private function buyItemT3No():void {
 	doNext(tripxiShopMainMenu2c);
 }
 
-private function tripxiShopTalk():void {
+private function tripxiShopTalk(talkOver:int = 1):void {
 	clearOutput();
 	menu();
-	outputText("You tell the goblin shopkeeper you would like to have a talk with her.\n\n")
-	outputText("\"<i>Just wanted a chat? Well okay fine but make it quick, my time is both researches and gems and I would rather not waste either.</i>\"\n\n");
+	if (talkOver == 1){
+		outputText("You tell the goblin shopkeeper you would like to have a talk with her.\n\n")
+		outputText("\"<i>Just wanted a chat? Well okay, fine but make it quick, my time is mostly for either researching or gems and I would rather not waste either.</i>\"\n\n");
+	}
+	else{
+		outputText("Tripxi looks semi bored but tries to keep the professional attitude.\n\n")
+		outputText("\"<i>Well now that's sorted, is there anything else you wanted to talk about?</i>\"\n\n");
+	}
 	addButton(3, "Goblins", tripxiShopTalkGoblins);
-	addButton(4, "Tel'adre", tripxiShopTalkTelAdre);
-	if (player.statusEffectv1(StatusEffects.TelAdreTripxi) > 0) addButtonDisabled(5, "Small Selection", "You already talked about this subject.");
-	else addButton(5, "SmallSelection", tripxiShopTalkSmallSelection);
-	addButton(14, "Leave", tripxiShopInside);
-}
-private function tripxiShopTalk2():void {
-	clearOutput();
-	menu();
-	outputText("Tripxi looks semi bored but try and keep the professionnal attitude.\n\n")
-	outputText("\"<i>Well now that this is sorted is there anything else you wanted to talk about?</i>\"\n\n");
-	if (player.statusEffectv1(StatusEffects.TelAdreTripxi) > 0) addButtonDisabled(5, "Small Selection", "You already talked about this subject.");
+	addButton(4, "Tel Adre", tripxiShopTalkTelAdre);
+	if (player.statusEffectv1(StatusEffects.TelAdreTripxi) > 0) addButtonDisabled(5, "Small Selection", "You have already talked about this subject.");
 	else addButton(5, "SmallSelection", tripxiShopTalkSmallSelection);
 	addButton(14, "Leave", tripxiShopInside);
 }
 
 private function tripxiShopTalkGoblins():void {
 	clearOutput();
-	outputText("Just what was the goblin civilisation like? You haven't found ");/*(if found a goblin city in some expac) much save for (end of cut)*/outputText("a single of their city this far while traveling mareth.\n\n");
-	outputText("\"<i>By all mean goblin civilisation was THE thing. You guys marvels at magic swords and spells but we had the true power of technology on our side. I wouldn't want to mean offense but the lot of you people might as well be savages and barbarians. When the demons knocked to our doors we laughed them off or blasted them with artillery ");
-	outputText("however the demons aren't stupid they knew if they couldn't get in they could destroy us through our surounding. Inevitably it was not the demon themselves who toppled down the goblin civilisation but contaminated waters. Our geniuses fell into madness or breeding frenzy and not long after everything our society meant fell into a race ");
-	outputText("to see who could breed faster. There may be only a few goblins left on Mareth that is not obsessed with getting impregnated by everything. You're looking at one of them.</i>\"\n\n");
-	doNext(tripxiShopTalk2);
+	outputText("Just what was the goblin civilisation like? You haven't found ");/*(if found a goblin city in some expac) much save for (end of cut)*/outputText("a single hint of their city this far while traveling Mareth.\n\n");
+	outputText("\"<i>By all means, goblin civilisation was THE thing. You guys marvel at magic swords and spells, but we had the true power of technology on our side. I wouldn't want to mean offense, but a lot of you people might as well be savages and barbarians. When the demons knocked to our doors, we laughed them off or blasted them with artillery. However, the demons aren't stupid. They knew that if they couldn't get in, they could destroy us through our surounding. Inevitably, it was not the demons themselves who toppled down the goblin civilisation, but contaminated waters. Our geniuses fell into madness or breeding frenzy, and not long after everything our society meant fell into a race  to see who could breed faster. There may be only a few goblins left on Mareth who are not obsessed with getting impregnated by everything. You're looking at one of them.</i>\"");
+	doNext(tripxiShopTalk, 2);
 }
 private function tripxiShopTalkTelAdre():void {
 	clearOutput();
-	outputText("Last you checked the majority of the goblin population has gone prego freak mode. How was she accepted in Tel Adre?\n\n\"<i>It's simple, I've simply always been there! ");
-	outputText("While my peers were busy drinking drugged water back at our capital I was managing my shop here. I didn't made weapon until now though only explosives. I began working as a standard issue firearm vendor when Tel'adre guards requested I procure them pistols. Ain't like those idiots can use anything more advanced than that anyway.</i>\"\n\n");
-	doNext(tripxiShopTalk2);
+	outputText("Last you checked, the majority of the goblin population has gone prego freak mode. How has she been accepted in Tel Adre?\n\n\"<i>It's simple, I've simply always been there! ");
+	outputText("While my peers were busy drinking drugged water back at our capital, I was managing my shop here. I haven't been making weapon until now though, only explosives. I began working as a standard issue firearm vendor when Tel'adre guards requested I procure them pistols. Ain't like those idiots can use anything more advanced than that anyway.</i>\"\n\n");
+	doNext(tripxiShopTalk, 2);
 }
 private function tripxiShopTalkSmallSelection():void {
 	clearOutput();
 	outputText("You look up her inventory and note that she only sell basic firearms.\n\n");
-	outputText("\"<i>Well yes I do? That's because the tech was lost when our civilisation fell. No one makes guns anymore and I barely got the base knowledge to assemble these pieces of junk, primitive isn't it? We had stuff ranging from bomb launchers to gatling guns and all of it is now lost god knows were in the waste of Mareth. This said you're an adventurer, aren't you?</i>\"\n\n");
+	outputText("\"<i>Well, yes, I do? That's because the tech has been lost when our civilisation fell. No one makes guns anymore, and I barely got the base knowledge to assemble these pieces of junk. Primitive, isn't it? We had stuff ranging from bomb launchers to gatling guns, and all of it is now lost god knows were in the waste of Mareth. This said, you're an adventurer, aren't you?</i>\"\n\n");
 	outputText("You nod to that, you are indeed an adventuring hero, the champion of Ingnam to be exact.\n\n");
-	outputText("\"<i>Yea sure whatever this just means you could help me with something. Fact is goblin technology is lost but not gone. There are good odds that while traveling around Mareth you may run into old gun parts. Gather them and bring them back here. I will study them and create brand new firearms for you.</i>\"\n\n");
+	outputText("\"<i>Yea sure whatever this just means, you could help me with something. Fact is, goblin technology is lost, but not gone. There are good odds that while traveling around Mareth, you may run into old gun parts. Gather them and bring them back here. I will study them and create brand-new firearms for you.</i>\"\n\n");
 	player.createStatusEffect(StatusEffects.TelAdreTripxiGuns1, 0, 0, 0, 0);
 	player.createStatusEffect(StatusEffects.TelAdreTripxiGuns2, 0, 0, 0, 0);
 	player.createStatusEffect(StatusEffects.TelAdreTripxiGuns3, 0, 0, 0, 0);
@@ -1502,7 +1500,7 @@ private function tripxiShopTalkSmallSelection():void {
 	player.createStatusEffect(StatusEffects.TelAdreTripxiGuns5, 0, 0, 0, 0);
 	player.createStatusEffect(StatusEffects.TelAdreTripxiGuns6, 0, 0, 0, 0);
 	player.addStatusValue(StatusEffects.TelAdreTripxi, 1, 1);
-	doNext(tripxiShopTalk2);
+	doNext(tripxiShopTalk, 2);
 }
 
 //[Invetigate]
@@ -1558,53 +1556,28 @@ public function gymDesc():void {
 		outputText("\n\nYou spot Loppe the laquine wandering around, towel slung over her shoulder.  When she sees you, she smiles and waves to you and you wave back.");
 	}
 	if(model.time.hours > 9 && model.time.hours < 14) heckel.heckelAppearance();
+
 	gymMenu();
 }
 
 private function gymMenu():void {
-
-	var membership:Function =null;
-	var cotton2:Function =null;
-	var cottonB:String = "Horsegirl";
-	var hyena:Function =null;
-	var hyenaB:String = "Hyena";
-	var ifris2:Function =null;
-	var ifrisB:String = "Girl";
-	var lottie2:Function = lottie.lottieAppearance(false);
-	var lottieB:String = "Pig-Lady";
-	var loppe2:Function =null;
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00281] > 0)
-		lottieB = "Lottie";
-	if(ifris.ifrisIntro())
-		ifris2 = ifris.approachIfris;
-	if(flags[kFLAGS.MET_IFRIS] > 0)
-		ifrisB = "Ifris";
-	if(model.time.hours > 9 && model.time.hours <= 15) {
-		hyena = heckel.greetHeckel;
-		if(flags[kFLAGS.MET_HECKEL] > 0)
-			hyenaB = "Heckel";
-	}
-	if(flags[kFLAGS.LIFETIME_GYM_MEMBER] == 0 && player.gems >= 500)
-		membership = buyGymLifeTimeMembership;
-	if(flags[kFLAGS.PC_IS_A_DEADBEAT_COTTON_DAD] == 0) {
-		if(cotton.cottonsIntro())
-			cotton2 = cotton.cottonGreeting;
-	}
-	if(flags[kFLAGS.COTTON_MET_FUCKED] > 0)
-		cottonB = "Cotton";
-	if(flags[kFLAGS.LOPPE_MET] > 0 && flags[kFLAGS.LOPPE_DISABLED] == 0)
-		loppe2 = loppe.loppeGenericMeetings;
-
-	choices("ChangeRoom",jasun.changingRoom,
-			cottonB,cotton2,
-			hyenaB,hyena,
-			ifrisB,ifris2,
-			"Jog",goJogging,
-			"LiftWeights",weightLifting,
-			"Life Member",membership,
-			lottieB,lottie2,
-			"Loppe",loppe2,
-			"Leave",telAdreMenu);
+	menu();
+	//Core gym interactions
+	addButton(0, "ChangeRoom", jasun.changingRoom).hint("Investigate the change room. Maybe you'll find somebody interesting?");
+	addButton(1, "Jog", goJogging).hint("Jog on the track and improve your speed.");
+	addButton(2, "LiftWeights", weightLifting).hint("Build up your strength with the weights.", "Lift Weight");
+	if (flags[kFLAGS.LIFETIME_GYM_MEMBER] == 0)
+		addButtonIfTrue(4, "Life Member", buyGymLifeTimeMembership,
+			"You cannot afford to purchase the lifetime membership for the gym. You need 500 gems.", player.gems >= 500,
+			"Buy lifetime membership for 500 gems? It could save you gems in the long run.", "Lifetime Membership");
+	//NPCs
+	if (flags[kFLAGS.PC_IS_A_DEADBEAT_COTTON_DAD] == 0 && cotton.cottonsIntro()) addButton(5, flags[kFLAGS.COTTON_MET_FUCKED] > 0 ? "Cotton" : "Horsegirl", cotton.cottonGreeting);
+	if (model.time.hours > 9 && model.time.hours <= 15) addButton(6, flags[kFLAGS.MET_HECKEL] > 0 ? "Heckel" : "Hyena", heckel.greetHeckel);
+	if (ifris.ifrisIntro()) addButton(7, flags[kFLAGS.MET_IFRIS] > 0 ? "Ifris" : "Demon-Girl", ifris.approachIfris);
+	addButton(8, flags[kFLAGS.LOTTIE_TIMES_ENCOUNTERED] > 0 ? "Lottie" : "Pig-Girl", lottie.lottieAppearance(false));
+	if (flags[kFLAGS.LOPPE_MET] > 0 && flags[kFLAGS.LOPPE_DISABLED] == 0) addButton(9, "Loppe", loppe.loppeGenericMeetings);
+	if (pablo.pabloIntro() && flags[kFLAGS.PABLO_FREAKED_OUT_OVER_WORMS] != 1) addButton(10, flags[kFLAGS.PABLO_MET] > 0 ? "Pablo" : "Imp?", pablo.approachPablo);
+	addButton(14, "Leave", telAdreMenu);
 }
 
 private function buyGymLifeTimeMembership():void {
@@ -1613,8 +1586,8 @@ private function buyGymLifeTimeMembership():void {
 	if (silly()) outputText("You tell \"<i>Shut up and take my gems!</i>\" as you pull out your gem-pouch. \n\n"); //Shut up and take my gems!
 	outputText("You fish into your pouches and pull out 500 gems, dumping them into the centaur's hands.  Her eyes widen as she turns and trots towards a counter in the back.  She leans over as she counts, giving you a generous view down her low-cut top at the cleavage she barely bothers to conceal.");
 	if(player.hasCock()) {
-		outputText("  It brings a flush to your face that has nothing to do with exercise.  Maybe you'll be able to con her into some alone time later?");
-		dynStats("lus", (10+player.lib/10));
+		outputText("  It brings a flush to your face that has nothing to do with exercise."); // no you won't...
+		dynStats("lus", (10+player.lib/10), "scale", false);
 	}
 	flags[kFLAGS.LIFETIME_GYM_MEMBER] = 1;
 	player.gems -= 500;
@@ -1661,19 +1634,16 @@ private function weightLifting():void {
 	//Body changes here
 	//Muscleness boost!
 	outputText(player.modTone(85,5+rand(5)));
-	outputText("\n\nDo you want to hit the showers before you head back to camp?");
+	outputText("\n\nDo you want to hit the showers before you leave the gym??");
 	if(flags[kFLAGS.BROOKE_MET] == 1) {
 		menu();
-		if (flags[kFLAGS.DISABLED_SEX_MACHINE] == 0) {
-			addButton(0,"\"Showers\"",sexMachine.exploreShowers);
+		if (flags[kFLAGS.SEX_MACHINE_STATUS] >= 0) {
+			addButton(0,"«Machine»",sexMachine.exploreShowers);
 			addButton(1,"Showers",brooke.repeatChooseShower);
-			addButton(4, "Leave", camp.returnToCampUseOneHour);
-		}
-		else {
-			doYesNo(brooke.repeatChooseShower,camp.returnToCampUseOneHour);
-		}
+			addButton(4, "Leave", stopGoingBackEveryHourGymCheck);
+		} else doYesNo(brooke.repeatChooseShower,stopGoingBackEveryHourGymCheck);
 	}
-	else doYesNo(sexMachine.exploreShowers,camp.returnToCampUseOneHour);
+	else doYesNo(sexMachine.exploreShowers,stopGoingBackEveryHourGymCheck);
 }
 
 private function goJogging():void {
@@ -1754,19 +1724,26 @@ private function goJogging():void {
 	outputText(player.modThickness(1,5+rand(2)));
 	//Muscleness boost!
 	outputText(player.modTone(player.maxToneCap(),2+rand(4)));
-	outputText("\n\nDo you want to hit the showers before you head back to camp?");
+	outputText("\n\nDo you want to hit the showers before you leave the gym??");
 	if(flags[kFLAGS.BROOKE_MET] == 1) {
 		menu();
-		if (flags[kFLAGS.DISABLED_SEX_MACHINE] == 0) {
-			addButton(0,"\"Showers\"",sexMachine.exploreShowers);
+		if (flags[kFLAGS.SEX_MACHINE_STATUS] >= 0) {
+			addButton(0,"''Showers''",sexMachine.exploreShowers);
 			addButton(1,"Showers",brooke.repeatChooseShower);
-			addButton(4, "Leave", camp.returnToCampUseOneHour);
-		}
-		else {
-			doYesNo(brooke.repeatChooseShower,camp.returnToCampUseOneHour);
-		}
+			addButton(4, "Leave", stopGoingBackEveryHourGymCheck);
+		} else doYesNo(brooke.repeatChooseShower,stopGoingBackEveryHourGymCheck);
 	}
-	else doYesNo(sexMachine.exploreShowers,camp.returnToCampUseOneHour);
+	else doYesNo(sexMachine.exploreShowers,stopGoingBackEveryHourGymCheck);
+}
+
+public function stopGoingBackEveryHourGymCheck():void{
+	if (CoC.instance.model.time.hours + 1 < 21){
+		cheatTime(1);
+		gymDesc();
+	}
+	else{
+		camp.returnToCampUseOneHour();
+	}
 }
 
 public function meetingLunaFirstTime():void {
@@ -1778,8 +1755,7 @@ public function meetingLunaFirstTime():void {
 	outputText("\"<i>This... this can't be happening again... why... </i>\"\n\n");
 	outputText("Unable to ignore the poor girl's distress, and against your better judgment, you decide to intervene and speak to her. Poking your nose in other people's business rarely seems to end well in Mareth, but a crying girl is a crying girl no matter what world you're in, you reflect; surely one of the great truths of the cosmos, you think profoundly.\n\n");
 	outputText("The girl starts as she hears your approach and turns to face you with her tear-stained face. You ask her what's going on.");
-	outputText("\"<i>Awawawawa-!</i>" +
-			" she cries, stumbling back from you a few steps. You put your palms up to indicate you mean no harm, and after she fixes you with an oddly intense stare for a moment she relaxes her guard and speaks to you in an even, professional tone; or tries, at least, as she seems still to be working through her tears.\"\n\n");
+	outputText("\"<i>Awawawawa-!</i>\" she cries, stumbling back from you a few steps. You put your palms up to indicate you mean no harm, and after she fixes you with an oddly intense stare for a moment she relaxes her guard and speaks to you in an even, professional tone; or tries, at least, as she seems still to be working through her tears.\"\n\n");
 	outputText("\"<i>M-my apologies, " + player.mf("Sir","Miss") + ", for my shameful outburst. You startled me. A-as you can see, I've just been f-f-f-f... h-had my employment terminated from the William estate.</i>\"" +
 			" She grits her teeth for a moment in a frightful grimace, and fresh tears fall from her eyes. After a few seconds she relaxes a bit and continues. " +
 			"\"<i>Mistre-I mean, Mrs. William caught her husband attempting to... to se-seduce me.</i>\"" +
@@ -1787,7 +1763,7 @@ public function meetingLunaFirstTime():void {
 			"\"<i>B-but, of course, that wasn't my fault! I am... was, merely their lowly maid! I can only resist my Master so much... Anyway! She threw me out in a fit of jealous rage... I'm sure she must be screaming at him now. Serves him right! You heard the terrible things she called me, as if it were my fault!</i>\"" +
 			" As she finishes her story her tone changes from despair to anger, and her eyes glint a bit dangerously as she mentions her former Mistress.");
 	outputText("You tell her that sounds like an awful ordeal, and ask her if she has anywhere to go now.\n\n");
-	outputText("\"<i>I... I dont' kn-know...</i>\"" +
+	outputText("\"<i>I... I don't kn-know...</i>\"" +
 			" She looks around for a few seconds, as if expecting to see a door opening or help arriving, then her shoulders slump and she drops to her knees. " +
 			"\"<i>No, I have nothing. Nothing! You heard her, she's going to have me blackballed! I'll never work as a maid again in Tel'Andre, and I don't know anywhere else but the stupid desert and terrible forest full of monsters and... aaAAAAAAAAHHHH!</i>\"" +
 			" She screams into her apron, pushing the cloth into her face to muffle her cry of anguish.\n\n");
@@ -1855,9 +1831,12 @@ public function meetingLunaCamp():void {
 	if (camp.companionsCount() > 2) outputText(", or on your other companions milling about");
 	outputText(". On the contrary, she's hardly taken her big, golden eyes off you for the entire trip over, and if she had a tail you're sure it would be wagging delightfully as she looks around.\n\n");
 	outputText("Realizing that you still haven't told her name, you introduce yourself formally, a bit embarrassed at the oversight. She gives you a graceful curtsey.\n\n");
-	outputText("\"<i>As I told you before, my name is Luna, " + player.mf("Master","Mistress") + " [name]. From now on, I will serve you to the best of my abilities. Please do not hesitate to call on me for anything... anything at all</i>\"\n\n");
+	outputText("\"<i>As I told you before, my name is Luna, [Master] [name]. From now on, I will serve you to the best of my abilities. Please do not hesitate to call on me for anything... anything at all</i>\"\n\n");
 	outputText("She gives you one last gaze with damp eyes, then bows and immediately begins rushing about the camp, neatening things, removing debris and rocks from the main concourse, and gathering laundry for washing. It would seem that life in the camp is going to be significantly easier, and you smile, sure that you've made the correct choice and will suffer no unforeseen consequences whatsoever from this.\n\n");
 	outputText("(<b>Luna has been added to the Followers menu!</b>)\n\n");
+	if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard",1,+1);
+	else player.createKeyItem("Radiant shard", 1,0,0,0);
+	outputText("\n\n<b>Before fully settling in your camp as if remembering something Luna pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
 	flags[kFLAGS.LUNA_FOLLOWER] = 4;
 	flags[kFLAGS.LUNA_LVL_UP] = 0;
 	flags[kFLAGS.LUNA_DEFEATS_COUNTER] = 0;

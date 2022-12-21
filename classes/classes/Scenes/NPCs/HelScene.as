@@ -13,7 +13,6 @@ public function HelScene()
 {
     pregnancy = new PregnancyStore(kFLAGS.HELIA_PREGNANCY_TYPE, kFLAGS.HEL_PREGNANCY_INCUBATION, 0, 0);
     pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_PLAYER, 300, 200, 100);
-                                        //Event: 0 (= not pregnant),  1,   2,   3,  4 (< 100)
     EventParser.timeAwareClassAdd(this);
 }
 
@@ -27,9 +26,11 @@ public function timeChange():Boolean
     if (model.time.hours > 23) {
         if (flags[kFLAGS.HELSPAWN_GROWUP_COUNTER] > 0) flags[kFLAGS.HELSPAWN_GROWUP_COUNTER]++;
         if (flags[kFLAGS.HEL_RAPED_TODAY] == 1) flags[kFLAGS.HEL_RAPED_TODAY] = 0;
+		//countdown until father's event
+		if (helSpawnScene.helspawnFollower() && flags[kFLAGS.HELSPAWN_DADDY] != 0 && flags[kFLAGS.HELSPAWN_DAD_EVENT] > 0) --flags[kFLAGS.HELSPAWN_DAD_EVENT];
     }
-    if (model.time.hours == 3 && followerHel() && flags[kFLAGS.SLEEP_WITH] == "Helia" && rand(10) == 0 && (flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0)) {
-        SceneLib.helFollower.sleepyNightMareHel();
+    if (model.time.hours == 3 && followerHel() && flags[kFLAGS.SLEEP_WITH] == "Helia" && rand(10) == 0 && !flags[kFLAGS.IN_INGNAM]) {
+        helFollower.sleepyNightMareHel();
         return true;
     }
     return false;
@@ -41,26 +42,38 @@ public function timeChangeLarge():Boolean {
         helSpawnScene.heliaBonusPointsAward();
         return true;
     }
-    if (model.time.hours == 8 && helFollower.followerHel() && flags[kFLAGS.HEL_NTR_TRACKER] == 1 && (flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0)) {
+    if (model.time.hours == 8 && helFollower.followerHel() && flags[kFLAGS.HEL_NTR_TRACKER] == 1 && !flags[kFLAGS.IN_INGNAM]) {
         helSpawnScene.helGotKnockedUp();
         return true;
     }
     if (flags[kFLAGS.HEL_FOLLOWER_LEVEL] == 1 && flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED] > 0 && helFollower.helAffection() >= 100 &&
-        flags[kFLAGS.HELIA_FOLLOWER_DISABLED] == 0 && model.time.hours == 2 && (flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0)) {
+        flags[kFLAGS.HELIA_FOLLOWER_DISABLED] == 0 && model.time.hours == 2 && !flags[kFLAGS.IN_INGNAM]) {
         helFollower.heliaFollowerIntro();
         return true;
     }
-    if (flags[kFLAGS.HEL_FOLLOWER_LEVEL] == -1 && model.time.hours == 6 && (flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0)) {
+    if (flags[kFLAGS.HEL_FOLLOWER_LEVEL] == -1 && model.time.hours == 6 && !flags[kFLAGS.IN_INGNAM]) {
         SceneLib.dungeons.heltower.morningAfterHeliaDungeonAgreements();
         return true;
     }
+	//Helspawn dad visits
+	if (helSpawnScene.helspawnFollower() && flags[kFLAGS.HELSPAWN_DADDY] > 0 && flags[kFLAGS.HELSPAWN_DAD_EVENT] == 0) {
+		if (flags[kFLAGS.HELSPAWN_DADDY] == 1 && model.time.hours == 6) {
+			helSpawnScene.spiderBrosGift();
+			return true;
+		}
+		if (flags[kFLAGS.HELSPAWN_DADDY] == 2 && model.time.hours == 12) {
+			helSpawnScene.maiVisitsHerKids();
+			return true;
+		}
+
+	}
     //Helspawn night smex!
     if (flags[kFLAGS.HELSPAWN_AGE] == 2 && (model.time.hours == 2 || model.time.hours == 3 || model.time.hours == 4) && flags[kFLAGS.HELSPAWN_GROWUP_COUNTER] == 7 && flags[kFLAGS.HELSPAWN_FUCK_INTERRUPTUS] == 0) {
         helSpawnScene.helspawnIsASlut();
         return true;
     }
     //Chance of threesomes!
-    if (checkedHeliaIsabellaThreesome++ == 0 && flags[kFLAGS.HEL_FUCKBUDDY] == 1 && SceneLib.isabellaFollowerScene.isabellaFollower() && model.time.hours == 2 && model.time.days % 11 == 0 && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0 && (flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0)) {
+    if (checkedHeliaIsabellaThreesome++ == 0 && flags[kFLAGS.HEL_FUCKBUDDY] == 1 && SceneLib.isabellaFollowerScene.isabellaFollower() && model.time.hours == 2 && model.time.days % 11 == 0 && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0 && !flags[kFLAGS.IN_INGNAM]) {
         trace("ISABELLA/HELL TEST");
         if (flags[kFLAGS.HEL_ISABELLA_THREESOME_ENABLED] == 0) { //Hell/Izzy threesome intro
             spriteSelect(SpriteDb.s_isabella);
@@ -78,20 +91,14 @@ public function timeChangeLarge():Boolean {
 //End of Interface Implementation
 
 override public function followerHel():Boolean {
-if(flags[kFLAGS.HEL_FOLLOWER_LEVEL] == 2) return true;
-//This is a temporary fix
-if(flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED] == 1) return false;
-if(flags[kFLAGS.HEL_FOLLOWER_LEVEL] > 0) return true;
-return false;
+	return (flags[kFLAGS.HEL_FOLLOWER_LEVEL] == 2 || flags[kFLAGS.HEL_FOLLOWER_LEVEL] > 0 && flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED] != 1);
 }
 
 public function fuckBuddyHel():Boolean {
 return (flags[kFLAGS.HEL_FUCKBUDDY] == 1);
 }
 //VARS
-//const HEL_TALKED_ABOUT_BERSERKING:int = 390;
 //const HEL_TALKED_ABOUT_HER:int = 391;
-//const HEL_TALKED_ABOUT_ATTACKING_YOU:int = 392;
 //const HEL_FUCKBUDDY:int = 393;
 //const HEL_FUCK_COUNTER:int = 394;
 //const HEL_AFFECTION:int = 395;
@@ -156,7 +163,7 @@ private function greetHelAsFuckbuddies():void {
 	outputText("\"<i>Hey there, [name],</i>\" she says, quickly wrapping you in a tight hug.  You return it, and spend the next few minutes chatting amicably with your salamander lover.  After a while, though, Hel steps back from your embrace and, giving her ample endowments a little shake, asks, \"<i>So, lover mine, care to blow off some steam?</i>\"");
 	if(player.lust < 40) {
 		player.lust = 40;
-		dynStats("lus", 1);
+		dynStats("lus", 1, "scale", false);
 	}
 	//(Normal Player Victory sex options display)
 	helFuckMenu();
@@ -164,12 +171,7 @@ private function greetHelAsFuckbuddies():void {
 
 //PARTING FUCKBUDDIES (edited)
 private function postHelFuckBuddyFollowup():void {
-	helSprite();
-	if(followerHel()) {
-		camp.returnToCampUseOneHour();
-		return;
-	}
-	if(flags[kFLAGS.HEL_FUCKBUDDY] == 0) {
+	if(followerHel() || flags[kFLAGS.HEL_FUCKBUDDY] == 0) {
 		camp.returnToCampUseOneHour();
 		return;
 	}
@@ -191,17 +193,18 @@ internal function loseToSalamander():void {
 	else outputText("Your arousal is too great, and your mind can no longer focus on anything but a desperate need for release.  Your knees buckle and you collapse");
 	if(flags[kFLAGS.HEL_TIMES_ENCOUNTERED] == 1) outputText(", lying just a few paces from the defeated Gnoll.\n\nYou look up to see the salamander girl looming over you, slowly removing her bikini, revealing her ample breasts and a shaved cunt already glistening with lubricant.  For the first time, she speaks.  \"<i>All right!</i>\" she exclaims, grinning, \"<i>You're not bad with your [weapon], you know. Damn, but it's hard to find someone worth my time around here,</i>\" she nods to the defeated Gnoll \"<i>... And you're not bad looking, either.  You know, there's nothing better after a fight than a good fuck, huh? Whadda ya say?</i>\"  Taken aback by the reckless berzerker's sudden calm, friendly attitude, you try to open your mouth to answer her, but she quickly plants a scaled heel on your chest.  Getting the idea, you shut up; you don't have much choice here, so you might as well enjoy it.\n\n");
 	else outputText(".\n\nYou look up to see the salamander girl looming over you, slowly removing her bikini, revealing her ample breasts and a glistening cunt.  \"<i>You're a worthy opponent, you know that?  C'mon, there's no shame in losing,</i>\" she says, offering a hand up.  Shakily, you take it – and she pulls you right into a rough kiss.\n\n\"<i>But, to the victor go the spoils,</i>\" she says, pushing her chest into you.  Well, you might as well enjoy yourself...");
-	var x:Number = 0;
-	if (rand(4) == 0 && player.gender > 0) {
-		trace("Peg scene GO!");
-		menu();
-		addButton(0, "Next", helTailPegging, true);
-		return;
-	}
-	//TO ZE RAPES!
-	//Player Loss – Rape – Male =< 85 cockarea
-	if(player.hasCock() && (player.gender == 1 || rand(4) < 3) && player.cockThatFits(85) >= 0) {
-		x = player.cockThatFits(85);
+	sceneHunter.selectLossMenu([
+			[0, "UseDick", dickF, "Req. a cock", player.cockThatFits(helFollower.helCapacity()) >= 0],
+			player.hasVagina() ?
+				[1, "UseVagina", vagF] :
+				[1, "UseAss", glessF],
+		],
+		"\n\nAnd how exactly are you going to 'enjoy yourself'?"
+	);
+
+	//======================================================
+	function dickF():void {
+		var x:int = player.cockThatFits(helFollower.helCapacity());
 		outputText("The salamander pulls off your [armor] with practiced speed, ");
 		if(player.gender == 3) outputText("revealing your " + vaginaDescript(0) + " and ");
 		outputText("letting your " + cockDescript(x) + " flop free, already hardened and ready for action.  She kneels down, straddling you, and grasps your " + cockDescript(x) + " firmly in both of her smoothly scaled, clawed hands.  You're nervous for a moment, eyes flickering to her long, sharp nails.  Seeing the concern in your eye, she laughs amicably.  \"<i>Hey, don't worry, lover.  I wouldn't ruin a perfectly good cock like this...  At least, not without getting a sample first...</i>\" she says, grinning.  For emphasis, she leans down and gives your " + cockDescript(x) + " a slow, sensuous lick with her long, forked tongue.\n\n");
@@ -219,11 +222,13 @@ internal function loseToSalamander():void {
 		outputText(".  She gasps at the sensation and grabs your hips as another shot goes off inside her.  Panting, she gives you one massive, final thrust and cums herself, squeezing your " + cockDescript(x) + " hard inside her and screaming as brutal a scream as any warcry to the heavens.");
 
 		outputText("She collapses atop you, panting heavily.  \"<i>That.  Was.  Awesome,</i>\" she laughs, reaching up to give your nipple a pinch as she nestles her head on you.  Your cock begins to deflate inside her as trickles of spooge spill out around your girth, but she doesn't seem intent on leaving any time soon, and you have to admit, the warmth of her against you is more than nice.  The salamander gives you one last grin and withdraws her tail from your lips.  A moment later, she slides it under your head like a pillow, and closes her eyes, exhausted.  Soon, you, too, fall into a peaceful sleep.\n\n");
+		player.sexReward("vaginalFluids","Dick");
 	}
 	//Player Loss – Rape – Female
-	else if(player.hasVagina()) {
+	//else if(player.hasVagina()) {
+	function vagF():void {
 		outputText("\"<i>Hmm, I've always loved a tumble with another woman,</i>\" the salamander admits, stripping your armor off with a speed so quick that you can't help but think she's had plenty of experience.  ");
-		if(player.gender == 3) outputText("\"<i>Though not exactly a woman, are we?</i>\" she laughs, giving your " + cockDescript(x) + " a quick stroke.  ");
+		if(player.gender == 3) outputText("\"<i>Though not exactly a woman, are we?</i>\" she laughs, giving your [cock] a quick stroke.  ");
 		outputText("She takes a step forward and kneels down atop your shoulders, pinning your arms to the ground and pushing her cunt toward your face.  \"<i>And I love taking charge even more! Now lick, and I might let you get off, too.</i>\"\n\n");
 
 		outputText("Obediently, you lift your face between her legs and give the lips of her drooling cunt an experimental lick.  You recoil suddenly, feeling like your tongue is on fire.  Seemingly as reassurance, the salamander makes an uncharacteristically gentle gesture and runs her scaled fingers through your " + hairDescript() + ", her sharp claws only just brushing your scalp.  \"<i>C'mon, c'mon,</i>\" she insists, pushing your face back up toward her.  You steel yourself for another burn, but when you give her another lick, you find her lips cooler the second time.  Without further ado, you begin your ministrations, probing into her welcoming cunt with measured skill.  She gasps with pleasure and again strokes your head encouragingly, even as her other hand drops to your " + chestDesc() + " and begins to play with your nipples.\n\n");
@@ -241,13 +246,16 @@ internal function loseToSalamander():void {
 		outputText(".\n\n");
 
 		outputText("Before your mind has settled, your new friend has collapsed on top of you, resting her cheek on your " + chestDesc() + ".  Her breath is ragged, not unlike yours, and her eyelids seem suddenly heavy.  Smiling, she slowly withdraws her cum-soaked tail from your " + vaginaDescript(0) + " and slips it under your head like a pillow, soft and warm, if not a little moist.  Seeing as she doesn't seem intent on going anywhere, you, too, close your eyes and drift off to a peaceful sleep.");
+		player.sexReward("no", "Vaginal");
+		player.sexReward("vaginalFluids","Lips");
 	}
-	//Player Loss – Rape – Genderless & Male >85 cockarea
-	else {
+	//Player Loss – Rape – Genderless & Male >helFollower.helCapacity() cockarea
+	//else {
+	function glessF():void {
 		//(Genderless)
 		if(player.gender == 0) outputText("\"<i>Hmm, what do we have here,</i>\" the salamander asks, yanking your [armor] off to reveal your genderless crotch.  \"<i>Well, that's... Different.  Well, your loss, I suppose...</i>\" she trails off, stepping up and pushing her cunt into your face.  \"<i>Now lick, and maybe I'll think up a way to get you off, too</i>\".\n\n");
 		//(Cock(s) too big to fit)
-		else if (player.hasCock()) outputText("\"<i>Hot damn.  That's impressive, but even I'm not tough enough to handle that.  But maybe I can still get you off by... other means,</i>\" she says with a wink.\n\n");
+		else if (player.hasCock() && player.cockThatFits(helFollower.helCapacity()) < 0) outputText("\"<i>Hot damn.  That's impressive, but even I'm not tough enough to handle that.  But maybe I can still get you off by... other means,</i>\" she says with a wink.\n\n");
 
 		else outputText("\"<i>Hot damn.  That's impressive, but even I'm not tough enough to handle that.  But maybe I can still get you off by... other means,</i>\" she says with a wink.\n\n");
 
@@ -264,8 +272,9 @@ internal function loseToSalamander():void {
 		outputText("All good things must come to an end, however, and soon the salamander's hot cunt contracts around your tongue as she cums, squirting girl-juice all over your face and neck.  You give her a last good tongue-fucking, picking up the pace and bringing her to a screaming, shuddering climax.  The power of her orgasm has a welcome side effect, as her tail begins to thrash wildly within you, battering your ass and bringing you, too, to a massive, mind-numbing climax.\n\n");
 
 		outputText("Before your mind has settled, your new friend has collapsed on top of you, resting her cheek on your " + chestDesc() + ".  Her breath is ragged, not unlike yours, and her eyelids seem suddenly heavy.  Smiling, she slowly withdraws her tail from your " + assholeDescript() + " and slips it under your head like a pillow, soft and warm, if not a little moist.  Seeing as she doesn't seem intent on going anywhere, you, too, close your eyes and drift off to a peaceful sleep.");
+		player.sexReward("vaginalFluids","Lips");
+		player.sexReward("Default","Anal",true,false);
 	}
-	player.sexReward("Default","Default",true,false);
 	dynStats("sen", 1);
 	flags[kFLAGS.HEL_FUCK_COUNTER]++;
 	flags[kFLAGS.HEL_AFFECTION]++;
@@ -278,46 +287,27 @@ internal function loseToSalamander():void {
 public function beatUpHel():void {
 	helSprite();
 	clearOutput();
-	//Various intros
 	if(monster.HP <= monster.minHP()) outputText("Unable to withstand your onslaught, the salamander collapses to a knee, barely supporting her weight on her sword.");
 	else outputText("Panting heavily, knees shaking, she collapses onto the ground, heavily leaning upon her sword.");
 	outputText("\n\n");
-	if(player.cor < 85) helDefeatedNormal();
-	else helDefeatedCorrupt();
+	if(player.cor > 85 + player.corruptionTolerance) helDefeatedCorrupt();
+	else helDefeatedNormal();
 }
 private function helDefeatedCorrupt():void {
-	helSprite();
-	//[(corruption = high)
 	outputText("By the way she's huffing and puffing, you figure you've got a minute or so to take advantage of her while she's vulnerable...  Do you?");
-	//(Display Options: [Rape her Ass(for wangs)] [Get Rimjob] and [Wait])
-
 	menu();
 
-	if (player.lust < 33)
-	{
-		if (player.lust < 33) outputText("\n\nYou aren't turned on enough to fuck her right now.");
-	}
-	else
-	{
-		if (player.hasCock() && player.cockThatFits(85) >= 0 && player.lust >= 33)
-		{
-			addButton(0, "Rape Ass", rapingHelsAssMeansYourCorruptCauseAnalIsEvil);
-		}
-		else if (player.hasCock() && player.cockThatFits(85) == -1)
-		{
-			outputText("\n\nYour dick is too big to fuck her anally.");
-		}
-
+	if (player.lust < 33) outputText("\n\nYou aren't turned on enough to fuck her right now.");
+	else {
+		addButton(0, "Rape Ass", rapingHelsAssMeansYourCorruptCauseAnalIsEvil)
+			.disableIf(player.cockThatFits(helFollower.helAnalCapacity()) < 0, helFollower.helAnalNofitMsg);
 		addButton(1, "Get Rimjob", receiveCorruptRimjobsFromHel);
 	}
-
-	addButton(4, "Wait", createCallBackFunction(helDefeatedNormal, true));
-	//(Wait takes you to \"<i>normal</i>\" post-victory, below)
+	addButton(4, "Wait", helDefeatedNormal);
 }
-//COMBAT – PLAYER WINS w/ LESS THAN 85 CORRUPTION
-private function helDefeatedNormal(clear:Boolean = false):void {
-	helSprite();
-	if(clear) clearOutput();
+
+private function helDefeatedNormal():void {
+	clearOutput();
 	if(flags[kFLAGS.HEL_TIMES_ENCOUNTERED] == 1) {
 		outputText("Suddenly, she looks up at you with her fiery eyes and beams, smiling ear to ear.  \"<i>That was fucking AWESOME!</i>\" she shouts, bursting into sudden, hearty laughter.  A moment ago, you were worried for your life, but the sight of the enraged berzerker breaking into laughter can't help but make you grin yourself.\n\n");
 
@@ -329,110 +319,52 @@ private function helDefeatedNormal(clear:Boolean = false):void {
 		outputText("Suddenly, she looks up at you with her fiery eyes and beams, smiling ear to ear.  \"<i>Damn, you're good,</i>\" she says, suddenly laughing.  \"<i>I almost had you, though.  Next time, watch your ass or I'm liable to stick this bad boy inside it!</i>\"  She gestures crudely with her tail at this last remark.\n\n");
 		outputText("\"<i>But, to the victor go the spoils, after all.  What do you say we blow off some steam, huh?  Nothing better after a good fight than a good fuck, you know?</i>\"");
 	}
-	/*if(player.lust < 40) {
-		player.lust = 40;
-		dynStats("lus", 0.1);
-	}*/
 	helFuckMenu();
 }
 
 private function helFuckMenu(isAmbush:Boolean = false):void {
-	helSprite();
-	//Leave appropriate way
-	var leave:Function = declineHelSexings;
-	if (isAmbush) leave = pussyOutOfHelSexAmbush;
-
-	if(player.lust < 33) {
-		outputText("\n\n<b>You aren't really up for sex right now.</b>");
-		simpleChoices("", null, "", null, "", null, "", null, "Leave", leave);
-		return;
-	}
-	var getLicked:Function = null;
-	if(player.hasVagina()) {
-		getLicked = getLickedByHel;
-	}
-	var fuckVag:Function = null;
-	var fuckAss:Function = null;
-	var tailWank:Function = null;
-	var dp:Function = null;
-	var getBlown:Function = null;
+	//ha-ha, very funny...
 	if (isAprilFools() && flags[kFLAGS.DLC_APRIL_FOOLS] == 0) {
 		outputText("\n\n<b>Helia DLC is required!</b>");
 		menu();
-        addButton(0, "Get DLC", Holidays.DLCPrompt, "Helia DLC", "Get Helia DLC to be able to have sex with Helia! The DLC also comes with an epic amount of content, including Tower of the Phoenix and Goo Armor!", "$4.99", "Find out about Helia DLC!");
-        addButton(4, "Leave", declineHelSexings);
+		addButton(0, "Get DLC", SceneLib.holidays.DLCPrompt, "Helia DLC", "Get Helia DLC to be able to have sex with Helia! The DLC also comes with an epic amount of content, including Tower of the Phoenix and Goo Armor!", "$4.99", "Find out about Helia DLC!");
+		addButton(4, "Leave", declineHelSexings);
 		return;
 	}
-	if(player.hasCock()) {
-		if(player.cockThatFits(85) >= 0) {
-			fuckVag = beatUpHelAndStealHerWalletFromHerVagina;
-			fuckAss = fuckHelsAss;
-		}
-		else outputText("\n\n<b>You're too big to penetrate the salamander.</b>");
-		tailWank = helTailWanksYourDickBecauseSheLovesYouDesuDesuHoraHora;
-		if(player.cockTotal() > 1 && player.cockThatFits(85) >= 0 && player.cockThatFits2(85) >= 0)
-			dp = dpHel;
-		getBlown = helBlowsYou;
+	if(player.lust < 33 && !isAmbush) { //let people be fucked if it's an ambush.
+		outputText("\n\n<b>You aren't really up for sex right now.</b>");
+		doNext(declineHelSexings);
+		return;
 	}
-	var tailFuck:Function = helTailPegging;
-	//ALTERNATE BODY BUTTONS
-	var bodyText:String = "";
-	var bodyButt:Function = null;
-	var bodyText2:String = "";
-	var bodyButt2:Function = null;
-	//Player's Options (Male): [Fuck her Vag] [Fuck her Ass] [Get Blown] [Tail Wank] [DP] [No Thanks]
-	//Player's Options (Female): [Get Licked] [Tail Fuck] [No Thanks]
-	//Player's Options (Herm): [Fuck her Vag] [Fuck her Ass] [Get Blown] [Get Licked] [Tail Fuck] [DP] [Tail Wank] [No Thanks]
-	//Player's Options (Genderless): [Tail Fuck] [No Thanks] (No racial options)
-//	Note:: Vaginal/Anal capacity is max 85 cockarea for Male/Herm characters. If their primary cock is too big, go to the second, etc. If all are too large, the male/herm cannot use \"<i>Fuck her Vag/Ass</i>\" options. He may still \"<i>Get Blown,</i>\" or get a \"<i>Tail Fuck.</i>\"
-
-	//Racial Specific Options: [Naga: Coil her Up (69)] [M. Centaur: Mount Her] [F. Centaur: Hanging 69]
-	//[Possession]
-	if(player.isNaga()) {
-		if(player.hasCock() && player.cockThatFits(85) >= 0) {
-			bodyButt = nagaCoilsUpHel;
-			bodyText = "CoilFuck";
-		}
-		else {
-			bodyText2 = "TailsInButts";
-			bodyButt2 = nagaCoilsUpAnalNaga;
-		}
-	}
-	else if(player.isTaur()) {
-		if(player.hasCock() && player.cockThatFits(85) >= 0) {
-			bodyText = "Mount Her";
-			bodyButt = mountHel;
-		}
-		if(player.hasVagina()) {
-			bodyText2 = "Hanging69";
-			bodyButt2 = helVaginaTaur69;
-		}
-	}
-	//Possess crams in free spot or overlaps another.
-	if(player.hasPerk(PerkLib.Incorporeality)) {
-		//Taurs or nagas with both scenes, replace 1!
-		if(bodyButt != null && bodyButt2 != null) {
-			if(rand(2) == 0) {
-				bodyText = "Possess";
-				bodyButt = helPossessionShitPoopCock;
-			}
-			else {
-				bodyText2 = "Possess";
-				bodyButt2 = helPossessionShitPoopCock;
-			}
-		}
-		//Second button slot is free
-		else if(bodyButt2 == null) {
-			bodyText2 = "Possess";
-			bodyButt2 = helPossessionShitPoopCock;
-		}
-		//First button slot is free
-		else {
-			bodyText = "Possess";
-			bodyButt = helPossessionShitPoopCock;
-		}
-	}
-	choices("Get Licked",getLicked,"FuckHerVag",fuckVag,"FuckHerAss",fuckAss,"GetTailPegged",tailFuck,"Tail Wank",tailWank,"DoublePen",dp,"Get Blown",getBlown,bodyText,bodyButt,bodyText2,bodyButt2,"Leave",leave);
+	//check cocks
+	var cockV:int = player.cockThatFits(helFollower.helCapacity());
+	var cockA:int = player.cockThatFits(helFollower.helAnalCapacity());
+	menu();
+	addButton(0, "FuckHerVag", fuckHelsVag)
+		.disableIf(cockV < 0, helFollower.helNofitMsg);
+	addButton(5, "FuckHerAss", fuckHelsAss)
+		.disableIf(cockA < 0, helFollower.helAnalNofitMsg);
+	if (cockA == cockV) cockA = player.cockThatFits2(helFollower.helAnalCapacity()); //find another one; fails if <2 cocks
+	addButton(10, "DoublePen", dpHel)
+		.disableIf(cockV < 0 || cockA < 0, helFollower.helNofitMsg + "; " + helFollower.helAnalNofitMsg);
+	addButton(1, "Get Blown", helBlowsYou)
+		.disableIf(!player.hasCock(), "Req. a cock!");
+	addButton(6, "Get Licked", getLickedByHel)
+		.disableIf(!player.hasVagina(), "Req. a vagina!");
+	addButton(11, "Possess", helPossessionShitPoopCock)
+		.disableIf(!player.hasPerk(PerkLib.Incorporeality), "Req. 'Incorporeality' perk from the ghost race!");
+	addButton(2, "Tail Wank", helTailWank)
+		.disableIf(!player.hasCock(), "Req. a cock!");
+	addButton(7, "GetTailPegged", helTailPegging);
+	addButton(3, "CoilFuck", nagaCoilsUpHel)
+		.disableIf(!player.isNaga() || cockV < 0, "Req. to have Naga lower body; " + helFollower.helNofitMsg);
+	addButton(8, "TailsInButts", nagaCoilsUpAnalNaga)
+		.disableIf(!player.isNaga(), "Req. to have Naga lower body!");
+	addButton(4, "Mount Her", mountHel)
+		.disableIf(!player.isTaur() || cockV < 0, "Req. to have Taur lower body; " + helFollower.helNofitMsg);
+	addButton(9, "Hanging69", helVaginaTaur69)
+		.disableIf(!player.isTaur() || !player.hasVagina(), "Req. to have Taur lower body and a vagina!");
+	addButton(14, "Leave", isAmbush ? pussyOutOfHelSexAmbush : declineHelSexings);
 }
 
 //[b]Player Win – Victory Un-Fuck – No Thanks (Any Gender)
@@ -451,12 +383,30 @@ if (CoC.instance.inCombat) outputText("\"<i>Aw, hell.  You're no fun,</i>\" she 
 	else doNext(camp.returnToCampUseOneHour);
 }
 
+private function afterSex():void {
+	flags[kFLAGS.HEL_FUCK_COUNTER]++;
+	flags[kFLAGS.HEL_AFFECTION]++;
+	helFollower.helAffection(5);
+	if (CoC.instance.inCombat) cleanupAfterCombat();
+	else doNext(postHelFuckBuddyFollowup);
+}
+
+private function afterRape():void {
+	flags[kFLAGS.HEL_FUCK_COUNTER]++;
+	if (!mocking) { //if mock-fight, she's good! - SH.
+		flags[kFLAGS.HEL_AFFECTION]--;
+		helFollower.helAffection(-15);
+	}
+	if (CoC.instance.inCombat) cleanupAfterCombat();
+	else doNext(postHelFuckBuddyFollowup);
+}
+
 //Player Win – Victory Fuck – Fuck her Vag
-internal function beatUpHelAndStealHerWalletFromHerVagina():void {
+internal function fuckHelsVag():void {
 	helSprite();
 	clearOutput();
 	outputText(images.showImage("helia-vagfuck"));
-	var x:Number = player.cockThatFits(helFollower.heliaCapacity());
+	var x:Number = player.cockThatFits(helFollower.helCapacity());
 	outputText("You tell her that, sure, you could blow off some steam.  Still grinning, she tosses off her skimpy scale bikini and flops down on her back, already starting to finger her cunt.  You follow suit, stripping off your [armor] and straddling her hips.  She reaches forward and grasps your " + cockDescript(x) + " in her scaly, clawed hands, causing you to miss a heartbeat before, smiling, she starts to pump it.  Her other hand continues to finger her cunt, preparing it for your " + cockDescript(x) + "'s penetration.  Content to let her lead for the moment, you grasp her wide hips just above where the crimson scales turn to soft flesh, tensing up as she begins to guide you into her slit.\n\n");
 
 	outputText("The tip of your cock brushes against the lips of her cunt – it's burning hot, making you recoil a bit in her grasp.  But the salamander doesn't let up, instead guiding your cock head into her burning cunt, and then grasping your [ass] and pushing you the rest of the way in with one mighty pull!  You gasp as the explosive heat of her innermost depths overwhelms you, numbing your mind to any sensation but her burning cunt and the muscles contracting over your cock, already starting to milk you.\n\n");
@@ -473,13 +423,7 @@ internal function beatUpHelAndStealHerWalletFromHerVagina():void {
 
 	outputText("Exhausted, you can't help but collapse into her cleavage, your cheek coming to rest between her soft breasts.  You smile at her, and cup one of them even as she begins to stroke your cheek, smiling.  Your eyes feel heavy, and exhaustion begins to overtake you.  Slowly, you drift off into a peaceful sleep in the embrace of your lover.");
 	player.sexReward("vaginalFluids","Dick");
-	flags[kFLAGS.HEL_FUCK_COUNTER]++;
-	flags[kFLAGS.HEL_AFFECTION]++;
-	//Bump up follower tracking affection too
-	helFollower.helAffection(5);
-    if (CoC.instance.inCombat)
-        cleanupAfterCombat();
-	else doNext(postHelFuckBuddyFollowup);
+	afterSex();
 }
 
 
@@ -488,7 +432,7 @@ internal function fuckHelsAss():void {
 	helSprite();
 	clearOutput();
 	outputText(images.showImage("helia-buttfuck"));
-	var x:Number = player.cockThatFits(helFollower.heliaAnalCapacity());
+	var x:Number = player.cockThatFits(helFollower.helAnalCapacity());
 	outputText("You tell her that, yes, you want to blow off some steam, and motion for her to get on hands and knees.\n\n");
 
 	outputText("\"<i>Oh, I think I know what we both want,</i>\" she says, grinning wolfishly as she strips out of her skimpy bikini and gets down on her hands and knees, turning so that her muscular ass is facing you.  Seductively, she lifts her tail in the air and waggles it in a 'come hither' motion before getting it out of your way, revealing your prize beneath it – her tight little pucker.\n\n");
@@ -510,13 +454,7 @@ internal function fuckHelsAss():void {
 	outputText("She strokes your cheek as you drift off into a nice, peaceful sleep.");
 	//(reduce lust, increment Helgate flag by 1)
 	player.sexReward("default","Default",true,false);
-	flags[kFLAGS.HEL_FUCK_COUNTER]++;
-	flags[kFLAGS.HEL_AFFECTION]++;
-	//Bump up follower tracking affection too
-	helFollower.helAffection(5);
-    if (CoC.instance.inCombat)
-        cleanupAfterCombat();
-	else doNext(postHelFuckBuddyFollowup);
+	afterSex();
 }
 
 //Player Win – Victory Fuck – Get Blown (Male) (edited)
@@ -540,20 +478,14 @@ internal function helBlowsYou():void {
 	outputText("Exhausted, you collapse onto her soft tits.  Smiling at you, she strokes your cheeks as you drift off into a peaceful sleep.");
 	//(reduce lust, increment Helgate flag by 1)
 	player.sexReward("saliva");
-	flags[kFLAGS.HEL_FUCK_COUNTER]++;
-	flags[kFLAGS.HEL_AFFECTION]++;
-	//Bump up follower tracking affection too
-	helFollower.helAffection(5);
-    if (CoC.instance.inCombat)
-        cleanupAfterCombat();
-	else doNext(postHelFuckBuddyFollowup);
+	afterSex();
 }
 
 //Player Win – DP(Multicock Only) (edited)
 internal function dpHel():void {
 	helSprite();
-	var x:Number = player.cockThatFits(helFollower.heliaCapacity());
-	var y:Number = player.cockThatFits2(helFollower.heliaCapacity());
+	var x:Number = player.cockThatFits(helFollower.helCapacity());
+	var y:Number = player.cockThatFits2(helFollower.helCapacity());
 	clearOutput();
 	outputText(images.showImage("helia-doublepenetration"));
 	outputText("You tell her that, yes, you want to blow off some steam.  You start to undo your [armor], and quickly her eyes go wide.  \"<i>You've got something extra, don't ya!</i>\" she laughs, looking mighty impressed.  \"<i>Well, I think we can take care of that " + cockDescript(y) + ", too. Just sit back and relax, lover!</i>\"\n\n");
@@ -574,14 +506,8 @@ internal function dpHel():void {
 	outputText("\"<i>Hot damn,</i>\" the salamander finally says, grinning from ear to ear as she begins to stroke your cheeks.  \"<i>Oh, damn, two cocks are the fucking BEST.</i>\"  She laughs to herself as you nestle your cheek on her soft breasts, slowly drifting off to a pleasant, peaceful sleep.");
 	//(reduce lust, increment Helgate flag by 1)
 	player.sexReward("vaginalFluids","Dick");
-	flags[kFLAGS.HEL_FUCK_COUNTER]++;
-	flags[kFLAGS.HEL_AFFECTION]++;
 	flags[kFLAGS.TIMES_HELIA_DOUBLE_DONGED]++;
-	//Bump up follower tracking affection too
-	helFollower.helAffection(5);
-    if (CoC.instance.inCombat)
-        cleanupAfterCombat();
-	else doNext(postHelFuckBuddyFollowup);
+	afterSex();
 }
 
 //Player Win – Get Licked (Vagita) (edited)
@@ -605,17 +531,11 @@ internal function getLickedByHel():void {
 	outputText("She gives a little laugh and strokes your cheek as you drift off into a contented, peaceful sleep.");
 	//(reduce lust, increment Helgate flag by 1)
 	player.sexReward("saliva");
-	flags[kFLAGS.HEL_FUCK_COUNTER]++;
-	flags[kFLAGS.HEL_AFFECTION]++;
-	//Bump up follower tracking affection too
-	helFollower.helAffection(5);
-    if (CoC.instance.inCombat)
-        cleanupAfterCombat();
-	else doNext(postHelFuckBuddyFollowup);
+	afterSex();
 }
 
 //Player Win – Tail Wank (dix of any size) (edited)
-internal function helTailWanksYourDickBecauseSheLovesYouDesuDesuHoraHora():void {
+internal function helTailWank():void {
 	helSprite();
 	clearOutput();
 	outputText(images.showImage("helia-tailwank"));
@@ -634,14 +554,8 @@ internal function helTailWanksYourDickBecauseSheLovesYouDesuDesuHoraHora():void 
 
 	outputText("When she releases you, you cannot help but collapse onto her lap.  Only vaguely are you aware as she withdraws her tail from around you.  With a clawed finger, she scrapes a pool of cum from her pillowy breast and slips it into her mouth.  \"<i>Mmm, salty and delicious; just how I like it, lover,</i>\" she laughs, scooping up more of your seed into her hungry mouth.  You, however, drift off to sleep, content and at peace.\n\n");
 	//(reduce lust, increment Helgate flag by 1)
-	player.sexReward("Default", "Default", true, false);
-	flags[kFLAGS.HEL_FUCK_COUNTER]++;
-	flags[kFLAGS.HEL_AFFECTION]++;
-	//Bump up follower tracking affection too
-	helFollower.helAffection(5);
-    if (CoC.instance.inCombat)
-        cleanupAfterCombat();
-	else doNext(postHelFuckBuddyFollowup);
+	player.sexReward("no");
+	afterSex();
 }
 
 //Player Win – Tail Pegging (Anal) (edited)
@@ -673,14 +587,8 @@ internal function helTailPegging(loss:Boolean = false):void {
 
 	outputText("Seeing you collapsed in a writhing mess of your own pleasure must evoke some tenderness in the berserker.  A moment later she lifts you up off the ground and nestles your head between her pillowy breasts, stroking your cheek and smiling lovingly at you. Contented, you drift off into a deep, peaceful sleep.");
 	//(reduce lust, increment Helgate flag by 1)
-	player.sexReward("Default", "Default", true, false);
-	flags[kFLAGS.HEL_FUCK_COUNTER]++;
-	flags[kFLAGS.HEL_AFFECTION]++;
-	//Bump up follower tracking affection too
-	helFollower.helAffection(5);
-    if (CoC.instance.inCombat)
-        cleanupAfterCombat();
-	else doNext(postHelFuckBuddyFollowup);
+	player.sexReward("no");
+	afterSex();
 }
 
 //Player Win – Coil her Up (Wang Naga) (edited)
@@ -688,8 +596,8 @@ private function nagaCoilsUpHel():void {
 	helSprite();
 	clearOutput();
 	outputText(images.showImage("helia-nagacoil"));
-	var x:Number = player.cockThatFits(85);
-	var y:Number = player.cockThatFits2(85);
+	var x:Number = player.cockThatFits(helFollower.helCapacity());
+	var y:Number = player.cockThatFits2(helFollower.helAnalCapacity());
 	outputText("You slither closer to the salamander and tell her that, yeah, you could stand to work off some steam.  She grins at that and closes the distance between you, reaching out to caress your serpentine half.  \"<i>Mmm.  Sexy tail, lover,</i>\" she says, reaching around and giving your [butt] a squeeze in her smooth, scaled hands.  \"<i>It'd be a real shame for such beautiful coils to go unused, you know...</i>\" she adds, giving you a little wink.\n\n");
 
 	outputText("You get the idea in a hurry, and discard your [armor] as she disrobes, giving you a good view of her smooth snatch and her big, soft breasts.  The sight of her nude form causes your " + cockDescript(x) + " to quickly slip out of its hidey-hole in your reptilian half; she grabs it and starts to stroke it, bringing it to full hardness as you coil your tail around her feet.  She gasps from the sudden tightness around her belly as you make a full loop around her, binding her arms to her side and pulling her up off the ground with your strong tail.\n\n");
@@ -717,13 +625,7 @@ private function nagaCoilsUpHel():void {
 	outputText("massive orgasm, you collapse onto your back and release your salamander lover from your grasp.  She crawls up to you and nuzzles into your " + chestDesc() + ", wrapping her own tail around you in return.  Soon, you drift off into a calm, peaceful sleep.");
 	//(reduce lust, increment Helgate flag by 1)
 	player.sexReward("vaginalFluids","Dick");
-	flags[kFLAGS.HEL_FUCK_COUNTER]++;
-	flags[kFLAGS.HEL_AFFECTION]++;
-	//Bump up follower tracking affection too
-	helFollower.helAffection(5);
-    if (CoC.instance.inCombat)
-        cleanupAfterCombat();
-	else doNext(postHelFuckBuddyFollowup);
+	afterSex();
 }
 
 
@@ -748,20 +650,14 @@ private function nagaCoilsUpAnalNaga():void {
 
 	outputText("When you come to your senses, you're lying on your back, panting and gasping for breath.  Slowly, you salamander lover drags herself to her feet, only to collapse on top of you a second later.  Seemingly content, she nuzzles into your " + chestDesc() + " and strokes your cheek.  No less than exhausted yourself, you soon drift off into a peaceful sleep.");
 	//(reduce lust, increment Helgate flag by 1)
-	player.sexReward("Default", "Default", true, false);
-	flags[kFLAGS.HEL_FUCK_COUNTER]++;
-	flags[kFLAGS.HEL_AFFECTION]++;
-	//Bump up follower tracking affection too
-	helFollower.helAffection(5);
-    if (CoC.instance.inCombat)
-        cleanupAfterCombat();
-	else doNext(postHelFuckBuddyFollowup);
+	player.sexReward("no");
+	afterSex();
 }
 
 //Player Win – Mount Her (Wangbearing Centaurs of height >= 60</i>\") (edited)
 private function mountHel():void {
 	helSprite();
-	var x:Number = player.cockThatFits(85);
+	var x:Number = player.cockThatFits(helFollower.helCapacity());
 	if(x < 0) x = player.smallestCockIndex();
 	clearOutput();
 	outputText(images.showImage("helia-mount"));
@@ -799,13 +695,7 @@ private function mountHel():void {
 	outputText("Chuckling, you assure her you'll be back when you can, and soon, you've both drifted off into a contented, restful sleep beneath the lone tree amidst the plains.");
 	//(reduce lust, increment Helgate flag by 1)
 	player.sexReward("vaginalFluids","Dick");
-	flags[kFLAGS.HEL_FUCK_COUNTER]++;
-	flags[kFLAGS.HEL_AFFECTION]++;
-	//Bump up follower tracking affection too
-	helFollower.helAffection(5);
-    if (CoC.instance.inCombat)
-        cleanupAfterCombat();
-	else doNext(postHelFuckBuddyFollowup);
+	afterSex();
 }
 
 //Player Win – Hanging 69 (Vaginataurs of height >= 60</i>\") (edited)
@@ -853,13 +743,7 @@ private function helVaginaTaur69():void {
 	//(reduce lust, reduce HP?, increment Helgate flag by 1)
 	player.sexReward("Default","Default",true,false);
 	if(player.hasCock()) player.sexReward("vaginalFluids","Dick");
-	flags[kFLAGS.HEL_FUCK_COUNTER]++;
-	flags[kFLAGS.HEL_AFFECTION]++;
-	//Bump up follower tracking affection too
-	helFollower.helAffection(5);
-    if (CoC.instance.inCombat)
-        cleanupAfterCombat();
-	else doNext(postHelFuckBuddyFollowup);
+	afterSex();
 }
 
 //Player Win – Possession (Ghost Morphs w/ Possession Power) (ehrdaterd)
@@ -911,21 +795,15 @@ private function helPossessionShitPoopCock():void {
 	outputText("You laugh, and let out a long, contented yawn.  At the salamander's invitation, you find a secluded clearing in the grass not far away, and snuggle up to nap off the post-sex fatigue.");
 	//(reduce lust, increment Helgate flag by 1)
 	player.sexReward("vaginalFluids");
-	flags[kFLAGS.HEL_FUCK_COUNTER]++;
-	flags[kFLAGS.HEL_AFFECTION]++;
-	//Bump up follower tracking affection too
-	helFollower.helAffection(5);
-    if (CoC.instance.inCombat)
-        cleanupAfterCombat();
-	else doNext(postHelFuckBuddyFollowup);
+	afterSex();
 }
 
 
 //Player Win – Corrupt Rape – Rape her Ass (wangers and mash) (edited)
 private function rapingHelsAssMeansYourCorruptCauseAnalIsEvil():void {
 	helSprite();
-	var x:Number = player.cockThatFits(85);
-	var y:Number = player.cockThatFits2(85);
+	var x:Number = player.cockThatFits(helFollower.helAnalCapacity());
+	var y:Number = player.cockThatFits2(helFollower.helCapacity());
 	clearOutput();
 
 	outputText("Already getting hard in your [armor], you circle around the downed salamander and give her a rough kick in the scaly back.  She yelps and takes a face-plant, leaving her muscular ass and long, hot tail waggling invitingly in the air.  Grinning, you hastily toss your [armor] aside and tear her bikini bottom off, revealing the gash of her pussy, as well as your real prize – her tight little pucker, nearly hidden in the shadow of her tail.  As you get ready to claim the spoils of your victory, the still defiant salamander lashes out with that same tail!\n\n");
@@ -949,13 +827,7 @@ private function rapingHelsAssMeansYourCorruptCauseAnalIsEvil():void {
 	outputText("You yank yourself out of her in one quick pull; she collapses onto her side without you to support her, and shudders when another wave of her protracted orgasm hits her as she absently fingers herself.  The sight turns you on a bit, but you decide to leave her there and head back to camp, though you're sure to snatch her coinpurse before you go.");
 	//(reduce lust, decrement Helgate flag by 1 to a minimum of 0)
 	player.sexReward("Default", "Dick", true,false);
-	flags[kFLAGS.HEL_FUCK_COUNTER]++;
-	flags[kFLAGS.HEL_AFFECTION]--;
-	//Bump down follower tracking affection too
-	helFollower.helAffection(-15);
-    if (CoC.instance.inCombat)
-        cleanupAfterCombat();
-	else doNext(postHelFuckBuddyFollowup);
+	afterRape();
 }
 
 //Player Win – Corrupt Rape – Get Rimjob (edited)
@@ -979,24 +851,23 @@ private function receiveCorruptRimjobsFromHel():void {
 	outputText("Wide-eyed and panting, you struggle to your feet and, sure to grab a few gems from her supine form, stagger back to camp to recover from your fucking.");
 	//(reduce lust, decrement Helgate flag by 1 to a minimum of 0)
 	player.sexReward("Default", "Default", true,false);
-	flags[kFLAGS.HEL_FUCK_COUNTER]++;
-	flags[kFLAGS.HEL_AFFECTION]--;
-	//Bump up follower tracking affection too
-	helFollower.helAffection(-15);
-    if (CoC.instance.inCombat)
-        cleanupAfterCombat();
-	else doNext(postHelFuckBuddyFollowup);
+	afterRape();
 }
 
 //===========================================================================
 //MINOTAUR THREESOME ENCOUNTER & ACHIEVING SALAMANDER FUCKBUDDY STATUS (minotaurs don't live near the plains dogg) (edited)
 //===========================================================================
+private var minoTalkBerserk:Boolean = false;
+private var minoTalkAttack:Boolean = false;
+
 //triggers only after you've incremented the Helgate flag five times with 'consensual' sex (win or lose), but not Corrupt Rape options.
-private function helMinotaurThreesome():void {
+public function helMinotaurThreesome():void {
 	helSprite();
-	//Reset the additional talk options
-	flags[kFLAGS.HEL_TALKED_ABOUT_BERSERKING] = 0;
-	flags[kFLAGS.HEL_TALKED_ABOUT_ATTACKING_YOU] = 0;
+	if (!recalling) {
+		//Reset the additional talk options
+		minoTalkBerserk = false;
+		minoTalkAttack = false;
+	}
 	clearOutput();
 	outputText(images.showImage("helia-threesome-minotaur"));
 	outputText("As you wander the grasslands, you wipe your brow in the hot air, wondering where the normal denizens hereabouts have gotten off to – normally you'd have encountered SOMETHING by now.  Your mind turns faintly toward your salamander friend, if you can call her that after the disjointed encounters you've had, and if the stirring in your loins is any indication, you're fairly sure you kind of miss her.\n\n");
@@ -1013,19 +884,21 @@ private function helMinotaurThreesome():void {
 
 	///Player's Options:
 	//Male/Herm – [Fuck her Ass] [Mino Lick] [Leave]
-	if (player.hasCock() && player.cockThatFits(85) >= 0)
-		simpleChoices("FuckHerAss", fuckHerAss, "Mino Lick", helMinoThreeSomeLickItsDick, "", null, "", null, "Nope", leaveMinotaurHelThreesome);
-	//Female/Genderless – [Mino Lick] [Leave]
-	else simpleChoices("", null, "Mino Lick", helMinoThreeSomeLickItsDick, "", null, "", null, "Nope", leaveMinotaurHelThreesome);
+	menu();
+	addButton(0, "FuckHerAss", fuckHerAss)
+		.disableIf(player.cockThatFits(helFollower.helAnalCapacity()) < 0, helFollower.helAnalNofitMsg);
+	addButton(1, "Mino Lick", helMinoThreeSomeLickItsDick);
+	addButton(4, "Nope", leaveMinotaurHelThreesome);
 }
 //[Leave]
 private function leaveMinotaurHelThreesome():void {
 	helSprite();
 	clearOutput();
 	outputText("You shake your head with a deprecating smile, and turn to leave her to her pleasures.");
-	//(reset Helgate flag to 0)
-	flags[kFLAGS.HEL_AFFECTION] = 0;
-	doNext(camp.returnToCampUseOneHour);
+	if (!recalling) {
+		flags[kFLAGS.HEL_AFFECTION] = 0;
+		doNext(camp.returnToCampUseOneHour);
+	} else doNext(recallWakeUp);
 }
 
 //THREESOME – FUCK HER ASS (wang of area =< 85) (edited)
@@ -1033,7 +906,7 @@ private function fuckHerAss():void {
 	helSprite();
 	clearOutput();
 	outputText(images.showImage("helia-threesome-minotaur-buttfuck"));
-	var x:Number = player.cockThatFits(85);
+	var x:Number = player.cockThatFits(helFollower.helAnalCapacity());
 	if(x < 0) x = 0;
 	outputText("Well, damned if you're going to let a chance to fuck her good, hot ass slip by.  You quickly strip out of your [armor] and grab your " + cockDescript(x) + ", stroking it to hardness as you approach the salamander and her Minotaur.  You drop to your knees behind the salamander and push her tail out of the way (not an easy task as she bounces happily atop the 'taur) to reveal her other hole.  You slip your cockhead in, meeting more than a little resistance, as your lover has trouble relaxing her muscles mid-fuck, but eventually force your way inside her, eliciting a deep, lusty moan from her lips.\n\n");
 
@@ -1048,15 +921,14 @@ private function fuckHerAss():void {
 	outputText("After a moment of stillness, the salamander tightens her hold on your hands and rolls off the 'taur, taking you with her so that she's lying on your chest, your cock still buried in her ass.  After taking a minute to recover, the minotaur shakily lurches to his feet and tosses a sack full of gems at his new friend before staggering off.\n\n");
 
 	outputText("She bursts out laughing at the sight of the 'taur wandering off with a fistful of his own jism coating his fur.  \"<i>Oh, poor guy,</i>\" she laughs, \"<i>wandered a bit too far from home and ran into me.  Just like someone else I know.</i>\"  To your surprise, she rolls over atop you and plants a long kiss on your lips, eyes closed and tail wagging softly behind her.");
-	//(reduce PC lust)
-	player.sexReward("Default", "Dick", true,false);
-	dynStats("sen", -2);
-	flags[kFLAGS.HEL_AFFECTION]++;
-	//Bump up follower tracking affection too
-	helFollower.helAffection(5);
-	flags[kFLAGS.HEL_FUCK_COUNTER]++;
-	//POST THREESOME RESULT
-	doNext(postMinoThreesomeDecisionTime);
+	if (!recalling) {
+		player.sexReward("no", "Dick");
+		dynStats("sen", -2);
+		flags[kFLAGS.HEL_AFFECTION]++;
+		helFollower.helAffection(5);
+		flags[kFLAGS.HEL_FUCK_COUNTER]++;
+		doNext(postMinoThreesomeDecisionTime);
+	} else doNext(recallWakeUp);
 }
 
 
@@ -1081,15 +953,14 @@ private function helMinoThreeSomeLickItsDick():void {
 	outputText(".\n\n");
 
 	outputText("Finally, your orgasm ends, and you roll off the minotaur.  Shakily, he staggers to his hooves, throws a handful of gems onto the prone salamander, and stumbles off to recover.  You look up from your collapsed state, and see your friend wallowing in a thick pool of cum – hers, yours, the 'taurs – panting heavily.  A huge stream of it is pouring from her cunt like a waterfall, a half-dozen backed-up minotaur orgasms unleashed at once.  Seeing you stare, your friend chuckles and stands, walking over to you and cuddling up, her head rested on your chest for just a moment before she leans up and plants a surprisingly tender kiss on your lips.\n\n");
-	//(reduce lust)
-	player.sexReward("cum");
-	dynStats("sen", -2);
-	flags[kFLAGS.HEL_AFFECTION]++;
-	//Bump up follower tracking affection too
-	helFollower.helAffection(5);
-	flags[kFLAGS.HEL_FUCK_COUNTER]++;
-	//POST THREESOME RESULT
-	doNext(postMinoThreesomeDecisionTime);
+	if (!recalling) {
+		player.sexReward("cum", "Lips");
+		dynStats("sen", -2);
+		flags[kFLAGS.HEL_AFFECTION]++;
+		helFollower.helAffection(5);
+		flags[kFLAGS.HEL_FUCK_COUNTER]++;
+		doNext(postMinoThreesomeDecisionTime);
+	} else doNext(recallWakeUp);
 }
 
 //AFTER THREESOME SCENE (edited)
@@ -1097,10 +968,6 @@ private function postMinoThreesomeDecisionTime():void {
 	helSprite();
 	clearOutput();
 	outputText("When she breaks the kiss, she leans back on her elbows and smiles at you, surprisingly prettily.  For once, you don't feel cripplingly exhausted after meeting her – no fight to tire you out before sex – so perhaps this would be a good time to interview your red-headed warrioress.\n\n");
-
-	//Player's Options (All Genders): (Note: Each option disappears after it is selected once)
-	//[Berserker Mode] [Her] [Attacking You] [Seconds?][Bug the Fuck Out From This Cuddling Shit]/[Leave]
-	//MAKE SURE players need to take the HER option, if nothing else, before progressing the relationship– don't display Seconds or Attacking You until they do! Otherwise, they'll never know her name, which is problematic in the Threesome with Isabella.
 	helChatMenu();
 }
 
@@ -1127,7 +994,7 @@ private function berserkMode():void {
 	outputText("She kisses you again.\n\n");
 
 	outputText("\"<i>... And you're a lot better than half-decent.</i>\"\n\n");
-	flags[kFLAGS.HEL_TALKED_ABOUT_BERSERKING] = 1;
+	minoTalkBerserk = true;
 	helChatMenu();
 }
 
@@ -1167,7 +1034,7 @@ private function askHelAboutAttackingYou():void {
 	outputText("\"<i>Hey, I don't mean anything by it.  It's just... I can't control myself sometimes.  I've spent so long killing and raping everything out here, that I guess I just don't know how else to operate.  You know I'd never really hurt you, right?  Oh, I tease and play, but you're special.  You're a good " + player.mf("guy","girl") + ".  One of the best, I think.</i>\"\n\n");
 
 	outputText("You suppose you could ask her to stop attacking you anyway, though.  One less threat out here couldn't hurt, and maybe – just maybe – you could skip the formalities when you meet and go straight to the really fun part.\n\n");
-	flags[kFLAGS.HEL_TALKED_ABOUT_ATTACKING_YOU] = 1;
+	minoTalkAttack = true;
 	//[Stop] [Say Nothing]
 	simpleChoices("Stop",telHelSTOPATTACKINGMEYOUBITCH,"Say Nothing",helChatMenu,"",null,"",null,"",null);
 }
@@ -1176,15 +1043,14 @@ private function askHelAboutAttackingYou():void {
 private function helChatMenu():void {
 	helSprite();
 	outputText(images.showImage("helia-interview"));
-	if (flags[kFLAGS.HEL_TALKED_ABOUT_HER] == 0)
-		simpleChoices("About Her", askHelAboutHer, "", null, "", null, "", null, "Leave", bugOutAfterHelMinoThreesome);
-	else {
-		var zerk:Function = null;
-		var attackin:Function = null;
-		if (flags[kFLAGS.HEL_TALKED_ABOUT_ATTACKING_YOU] == 0) attackin = askHelAboutAttackingYou;
-		if (flags[kFLAGS.HEL_TALKED_ABOUT_BERSERKING] == 0) zerk = berserkMode;
-		choices("", null, "Berserking?", zerk, "Y Attack Me", attackin, "Seconds", askMommaHelForSecondsAfterDinner, "MinosRBad", telHelToGetOffTheMInoCock, "", null, "", null, "", null, "", null, "Leave", leaveHelAfterMinoThreeSomeChat);
-	}
+	menu();
+	if (!flags[kFLAGS.HEL_TALKED_ABOUT_HER]) addButton(0, "About Her", askHelAboutHer);
+	if (!minoTalkBerserk) addButton(1, "Berserking?", berserkMode);
+	if (!flags[kFLAGS.HEL_FUCKBUDDY] && !minoTalkAttack) addButton(2, "YouAttackMe", askHelAboutAttackingYou);
+	addButton(2, "SecondTime", askMommaHelForSecondsAfterDinner);
+	addButton(3, "MinosAreBad", telHelToGetOffTheMInoCock); //disables this talk forever
+	if (flags[kFLAGS.HEL_TALKED_ABOUT_HER]) addButton(4, "Leave", leaveHelAfterMinoThreeSomeChat);
+	else addButton(4, "Bug Out", bugOutAfterHelMinoThreesome);
 }
 
 //[Stop]
@@ -1216,7 +1082,7 @@ private function askMommaHelForSecondsAfterDinner():void {
 	//(Normal sex options appear, scene concludes afterwards)
 	if(player.lust < 40) {
 		player.lust = 40;
-		dynStats("lus", 1);
+		dynStats("lus", 1, "scale", false);
 	}
 	helFuckMenu();
 }
@@ -1230,7 +1096,7 @@ private function leaveHelAfterMinoThreeSomeChat():void {
 	outputText("\"<i>I'll see you soon, lover mine,</i>\" she whispers, planting a kiss on your neck.\n\n");
 
 	outputText("You tell her to count on it, and make your way back to camp.");
-	dynStats("lus", 2);
+	dynStats("lus", 2, "scale", false);
 	doNext(camp.returnToCampUseOneHour);
 }
 //===================
@@ -1240,11 +1106,11 @@ private function leaveHelAfterMinoThreeSomeChat():void {
 	public function helXIzzy():void {
 		//Hell/Izzy threesome intro
 		if (flags[kFLAGS.HEL_ISABELLA_THREESOME_ENABLED] == 0) {
-			SceneLib.helScene.salamanderXIsabellaPlainsIntro();
+			salamanderXIsabellaPlainsIntro();
 		}
 		//Propah threesomes here!
 		else if (flags[kFLAGS.HEL_ISABELLA_THREESOME_ENABLED] == 1) {
-			SceneLib.helScene.isabellaXHelThreeSomePlainsStart();
+			isabellaXHelThreeSomePlainsStart();
 		}
 	}
 //Isabella x salamander Threesome – Plains Version Intro (edited)
@@ -1493,17 +1359,15 @@ private function nomOnIzzyTitWithSallyMancer():void {
 	else outputText("\"<i>I want you.  I need you.  Both of you.  Here and now.</i>\"\n\n");
 
 	outputText("That finally serves to get Hel off of Isabella's tit.  With a smirk that's still drooling breast milk, the salamander says, \"<i>Oooh, a three-way.  Now we're talking!  What do you say, lover?  Want to join in on a little girl-on-girl?</i>\"\n\n");
-	dynStats("lus", 40);
+	dynStats("lus", 40, "scale", false);
 	fatigue(-40);
 
 	var dick:Function = null;
-	var dick2:Number = 0;
-	var dick4:Number = 0;
 	var vag:Function = null;
 	//(If PC is Herm::)
 	if(player.hasCock() && player.hasVagina()) {
 		outputText("You'll need to decide which of your sex organs to use on the hot redheads.\n\n");
-		if(player.cockThatFits(85) >= 0) {
+		if(player.cockThatFits(helFollower.helCapacity()) >= 0) {
 			dick = stuffIzzyAndSalamanderWithDicks;
 		}
 		else outputText("<b>You're too big to fuck them with your man-bits...</b>");
@@ -1511,7 +1375,7 @@ private function nomOnIzzyTitWithSallyMancer():void {
 	}
 	else if(player.hasVagina()) vag = izzySallyThreeSomeVagoozlaz;
 	else if(player.hasCock()) {
-		if(player.cockThatFits(85) >= 0) {
+		if(player.cockThatFits(helFollower.helCapacity()) >= 0) {
 			dick = stuffIzzyAndSalamanderWithDicks;
 		}
 		else outputText("<b>You're too big to fuck them with your man-bits...</b>\n\n");
@@ -1530,7 +1394,7 @@ private function noThreesomeSexWithSallyAndIssyLastMinute():void {
 	outputText("With a heavy heart, you tell the girls you'll have to pass.  Though they both look disappointed, Hel is quick to whisper huskily, \"<i>Don't you worry, you big ol' cow.  I'll take gooood care of you...</i>\"\n\n");
 
 	outputText("With a chuckle, you head on back to camp with a full belly");
-	if(player.balls > 0) outputText(" and balls bluer than the lake");
+	if(player.hasBalls()) outputText(" and balls bluer than the lake");
 	outputText(".");
 	if(model.time.hours < 6) doNext(playerMenu);
 	else doNext(camp.returnToCampUseOneHour);
@@ -1552,7 +1416,7 @@ private function stuffIzzyAndSalamanderWithDicks():void {
 	var i:int = player.cocks.length;
 	while(i > 0) {
 		i--;
-		if(player.cockArea(i) <= 85) {
+		if(player.cockArea(i) <= helFollower.helCapacity()) {
 			if(x == -1) x = i;
 			else if(y == -1) y = i;
 			else if(z == -1) z = i;
@@ -1768,7 +1632,7 @@ internal function foxyFluffsFoursomeAsMale():void {
 	helSprite();
 	clearOutput();
 	outputText(images.showImage("helia-fox-foursome-male"));
-	var x:Number = player.cockThatFits(85);
+	var x:Number = player.cockThatFits(helFollower.helCapacity());
 	if(x < 0) x = player.smallestCockIndex();
 	outputText("You strip out of your [armor] and grab your " + cockDescript(x) + ".  Giggling drunkenly, Miko flops onto her back on the bed and begins to stroke her knotty cock as Helia and Mai get on their knees, Hel burying herself between Miko's spread legs as her sister wraps her soft hands around your " + cockDescript(x) + " and guides it into her mouth.  You run your hands through Mai's silver hair as she sucks you off, jerking off the base of your cock and flicking her wet tongue across the head and shaft, her full lips wrapped around your girth in a cute little \"<i>O.</i>\" She carries on for another minute, letting you guide the speed and force of her blowjob with your hands planted on her head.\n\n");
 
@@ -1874,6 +1738,7 @@ private function helCanFuckMinosWhenever():void {
 //[Satisfy Her]
 private function satisfyHelSoSheStopsMinoFucking():void {
 	clearOutput();
+	if (!recalling) outputText("<b>New scene is unlocked in 'Recall' menu!</b>\n\n");
 	outputText("After a moment of contemplation, you give the salamander a lusty grin and tell her you'll just have to satisfy her tremendous sexual appetite yourself.  She seems taken aback by your offer, blinking hard at you.");
 
 	outputText("\n\n\"<i>Well, that's a hell of an offer,</i>\" she laughs, rolling over to straddle your [hips].  \"<i>Careful you don't make a promise you can't keep, lover mine...  We salamanders have incredible libidos.  Would be a shame if you couldn't keep up...</i>\"");
@@ -1895,13 +1760,13 @@ private function satisfyHelSoSheStopsMinoFucking():void {
 		outputText("\n\nShe smiles at you, clawed hands clutching tightly to your " + player.skinFurScales() + ". \"<i>Don't worry about a thing, lover mine.  I'll be careful not to hurt you... too much.</i>\"");
 	}
 	if(player.lust < 33) {
-		dynStats("lus", 0.1);
+		dynStats("lus", 0.1, "scale", false);
 		player.lust = 33;
 	}
-	//(Display sex options)
-	//(Mino Threesome will NEVER proc again)
-	flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] = 1;
-	flags[kFLAGS.HEL_FUCKBUDDY] = 1;
+	if (!recalling) {
+		flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] = 1;
+		flags[kFLAGS.HEL_FUCKBUDDY] = 1;
+	}
 	helFuckMenu();
 }
 
@@ -1909,7 +1774,7 @@ private function satisfyHelSoSheStopsMinoFucking():void {
 		return flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1
 			   && flags[kFLAGS.HEL_RAPED_TODAY] == 0
 			   && player.gender > 0
-			   && !SceneLib.helScene.followerHel();
+			   && !followerHel();
 	}
 //Hel Sexual Ambush
 //(Proc's once per day when [Exploring] anywhere)
@@ -1918,13 +1783,9 @@ public function helSexualAmbush():void {
 	outputText("As you make your way around, you hear footfalls rapidly approaching.  Alarmed, you lift your [weapon] and spin - just in time for a blazing salamander to bull-rush you to the ground.  The two of you tumble back, eventually coming to a stop with Hel straddling you, already throwing off her scale bikini and clawing at your [armor] - you can see that her thighs are slick with her juices and her skin is flushed with arousal.");
 
 	outputText("\n\n\"<i>Come on, [name],</i>\" she growls, throwing her top aside, letting her big, bouncy breasts free. \"<i>You wanted me not to fuck 'taurs?  Fine... but I NEED you.  NOW!</i>\"");
-	dynStats("lus", 10+player.lib/20);
+	dynStats("lus", 10+player.lib/20, "scale", false);
 	if(player.lust < 33) player.lust = 33;
 	flags[kFLAGS.HEL_RAPED_TODAY] = 1;
-	//(Raise PC lust; Display sex options)
-
-	// Why is this the only place in the whole game where buttonEvents is directly written to?
-//Got rid of this, now handled by passing true:	CoC.instance.buttonEvents[9] = pussyOutOfHelSexAmbush;
 	helFuckMenu(true);
 }
 

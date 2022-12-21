@@ -41,7 +41,7 @@ public class HarpyQueen extends Monster
 		public function lustSpikeAttack():void {
 			outputText("The Harpy Queen draws a strange arcane circle in the air, lines of magic remaining wherever the tip of her staff goes.  You try to rush her, but the circle seems to have created some kind of barrier around her.  You can only try to force it open - but too late!  A great pink bolt shoots out of the circle, slamming into your chest.  You suddenly feel light-headed and so very, very horny...");
 			//(Effect: Heavy Lust Damage)
-			player.dynStats("lus", (50 + rand(this.lib / 4)));
+			player.takeLustDamage((50 + rand(this.lib / 4)), true);
 		}
 
 		//ATTACK THREE: Wind Slam!
@@ -79,7 +79,6 @@ public class HarpyQueen extends Monster
 			if (hasPerk(PerkLib.JobSorcerer)) mod += .1;
 			if (hasPerk(PerkLib.Mage)) mod += .2;
 			if (hasPerk(PerkLib.Spellpower)) mod += .2;
-			if (hasPerk(PerkLib.WizardsFocus)) mod += .6;
 			return mod;
 		}
 
@@ -126,7 +125,6 @@ public class HarpyQueen extends Monster
 			this.fatigue = 0;
 			this.lust = 20;
 			this.lustVuln = .15;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.level = 30;
 			this.gems = rand(25)+160;
 			this.additionalXP = 50;
@@ -144,7 +142,7 @@ public class HarpyQueen extends Monster
 			this.createPerk(PerkLib.Mage, 0, 0, 0, 0);
 			this.createPerk(PerkLib.ManaAffinityI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.MindOverBodyI, 0, 0, 0, 0);
-			this.createPerk(PerkLib.WizardsFocus, 0, 0, 0, 0);
+			this.buff("Wizard's Focus").addStat('spellpower', 0.6);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			checkMonster();
 		}

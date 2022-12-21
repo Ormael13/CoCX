@@ -29,7 +29,7 @@ package classes.Items.Consumables
 			}
 			else { //Not dodged
 				var damage:Number = 40 + Utils.rand(61) + (game.player.str * 2);
-				outputText(game.monster.capitalA + game.monster.short + " is hit with the wingstick!  It breaks apart as it lacerates " + game.monster.pronoun2 + ". <b>(<font color=\"#800000\">" + damage + "</font>)</b>");
+				outputText(game.monster.capitalA + game.monster.short + " is hit with the wingstick!  It breaks apart as it lacerates " + game.monster.pronoun2 + ". <b>([font-damage]" + damage + "</font>)</b>");
 				game.monster.HP -= damage;
 				if (game.monster.HP < 0) game.monster.HP = 0;
 			}

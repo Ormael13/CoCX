@@ -9,9 +9,33 @@ import classes.lists.Gender;
 
 public class JabberwockyRace extends Race {
 	public static const JabberwockyScaleColors:/*String*/Array = ["magenta", "pink"];
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Human",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Human",
+        /*Eyes*/		"Human",
+        /*Face*/		"Human",
+        /*Gills*/		"Human",
+        /*Hair*/		"Human",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Human",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Human",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Human"];
 	
 	public function JabberwockyRace(id:int) {
-		super("Jabberwocky", id);
+		super("Jabberwocky", id, []);//RaceBody);
 		mutationThreshold = 6;
 	}
 	
@@ -22,16 +46,16 @@ public class JabberwockyRace extends Race {
 				.faceType(NONE(Face.DRAGON, Face.DRAGON_FANGS), 0, -10)
 				.eyeType(Eyes.DRACONIC, +1)
 				.eyeColor("red", +1)
-				.hairColor("purplish-pink", +1)
-				.skinCoatColor(ANY(JabberwockyScaleColors), +1)
+				.hairColor1("purplish-pink", +1)
+				.scaleColor1(ANY(JabberwockyScaleColors), +1)
 				.skinCoatType(Skin.DRAGON_SCALES, +1)
-				.skinBaseColor("caramel", +1)
+				.skinColor1("caramel", +1)
 				.hornType(Horns.JABBERWOCKY, +2)
 				.earType(Ears.BUNNY, +1)
 				.tailType(Tail.DRACONIC, +1)
 				.tongueType(Tongue.DRACONIC, +1)
 				.antennaeType(Antennae.JABBERWOCKY, +1)
-				.wingType(Wings.FEY_DRAGON, +4, -1000)
+				.wingType(Wings.JABBERWOCKY, +4, -1000)
 				.legType(LowerBody.JABBERWOCKY, +1)
 				.legType(NOT(LowerBody.FROSTWYRM), 0, -1000)
 				.armType(Arms.JABBERWOCKY, +1)
@@ -43,10 +67,10 @@ public class JabberwockyRace extends Race {
 		addScoresAfter(10)
 				.height(GREATER_THAN(120),+1);
 		
+		addBloodline(PerkLib.DragonsDescendant,PerkLib.BloodlineDragon);
 		addMutation(IMutationsLib.DraconicBonesIM);
 		addMutation(IMutationsLib.DraconicHeartIM);
 		addMutation(IMutationsLib.DrakeLungsIM);
-		addBloodline(PerkLib.DragonsDescendant,PerkLib.BloodlineDragon);
 		
 		buildTier(10, "lesser jabberwocky")
 				.namesTauric("lesser jabberwocky", "lesser jabberwocky-taur")

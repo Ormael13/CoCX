@@ -2,13 +2,11 @@
  * ...
  * @author Ormael
  */
-package classes.Items 
+package classes.Items
 {
-	import classes.Items.FlyingSwords.*;
-	import classes.PerkLib;
-	import classes.PerkType;
-	
-	public final class FlyingSwordsLib 
+import classes.Items.FlyingSwords.*;
+
+public final class FlyingSwordsLib extends ItemConstants
 	{
 		public static const DEFAULT_VALUE:Number = 6;	//cena bazowa dla latających mieczy to 50 gems a nie 40 gems
 		public static const NOTHING:Nothing = new Nothing();
@@ -22,7 +20,7 @@ package classes.Items
 		public const S_TWINS:FlyingSwords = new FlyingSwords("S.Twins", "Sky Twins", "Sky Twins", "Sky Twins", "slash", 12, 1200, "Pair of solid swords that could be used to fly or to tear enemies apart.", "Large Two");
 		public const W_HALFM:FlyingSwords = new FlyingSwords("W.HalfM","White Half-Moon","White Half-Moon","White Half-Moon","slash",6,600,"Sword that was forged from metal repeadly bathed in the lava.", "Small");
 		
-		public function FlyingSwordsLib() 
+		public function FlyingSwordsLib()
 		{
 		}
 	}

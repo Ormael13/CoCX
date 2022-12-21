@@ -9,9 +9,33 @@ public class PigRace extends Race{
 	public static const PigSkinColors:/*String*/Array = ["pink", "tan", "sable"];
 	public static const BoarSkinColors:/*String*/Array = ["pink", "dark blue"];
 	public static const BoarFurColors:/*String*/Array = ["dark brown", "brown", "black", "red", "grey"];
+    public static const RaceBody:/*String*/Array = [
+        /*Antenna*/		"Human",
+        /*Arms*/		"Human",
+        /*Balls*/		"Human",
+        /*Breasts*/		"Human",
+        /*Nips*/		"Human",
+        /*Ears*/		"Human",
+        /*Eyes*/		"Human",
+        /*Face*/		"Human",
+        /*Gills*/		"Human",
+        /*Hair*/		"Human",
+        /*Horns*/		"Human",
+        /*LowerBody*/	"Human",
+        /*RearBody*/	"Human",
+        /*Skin*/		"Human",
+        /*Ovipositor*/	"Human",
+        /*Oviposition*/	"Human",
+        /*GlowingAss*/	"Human",
+        /*Tail*/		"Human",
+        /*Tongue*/		"Human",
+        /*Wings*/		"Human",
+        /*Penis*/		"Human",
+        /*Vagina*/		"Human",
+        /*Perks*/		"Human"];
 	
 	public function PigRace(id:int) {
-		super("Pig", id);
+		super("Pig", id, []);//RaceBody);
 	}
 	
 	public override function setup():void {
@@ -23,7 +47,7 @@ public class PigRace extends Race{
 				.armType(ANY(Arms.PIG, Arms.BOAR), +2)
 				.legType(LowerBody.CLOVEN_HOOFED, +1)
 				.skinPlainOnly(+1)
-				.skinBaseColor(ANY(PigSkinColors), +1)
+				.skinColor1(ANY(PigSkinColors), +1)
 				.thickness(AT_LEAST(75), +1)
 				.hasCockOfType(CockTypesEnum.PIG, +1)
 		addConditionedScores(
@@ -31,8 +55,8 @@ public class PigRace extends Race{
 					return body.faceType === Face.BOAR || body.armType === Arms.BOAR
 				}, "boar arms or face;"
 		)
-				.skinBaseColor(ANY(BoarSkinColors), +2)
-				.skinCoatTypeAndColor(Skin.FUR, ANY(BoarFurColors), +2);
+				.skinColor1(ANY(BoarSkinColors), +2)
+				.skinCoatTypeAndColor1(Skin.FUR, ANY(BoarFurColors), +2);
 		addScoresAfter(4)
 				.skinCoatType(Arms.HUMAN, +1)
 				.noWings(+1)

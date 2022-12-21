@@ -10,7 +10,7 @@ import classes.internals.*;
 	 * ...
 	 * @author ...
 	 */
-	public class Shouldra extends Monster 
+	public class Shouldra extends Monster
 	{
 
 		private function shouldrattack():void {
@@ -18,18 +18,8 @@ import classes.internals.*;
 			//return to combat menu when finished
 			doNext(EventParser.playerMenu);
 			//Determine if dodged!
-			if(player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80) {
+			if(player.getEvasionRoll()) {
 				outputText("The girl wades in for a swing, but you deftly dodge to the side. She recovers quickly, spinning back at you.");
-				return;
-			}
-			//("Misdirection"
-			if(player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
-				outputText("The girl wades in for a swing, but you deftly misdirect her and avoid the attack. She recovers quickly, spinning back at you.");
-				return;
-			}
-			//Determine if cat'ed
-			if(player.hasPerk(PerkLib.Flexibility) && rand(100) < 6) {
-				outputText("The girl wades in for a swing, but you deftly twist your flexible body out of the way. She recovers quickly, spinning back at you.");
 				return;
 			}
 			//Determine damage - str modified by enemy toughness!
@@ -65,7 +55,7 @@ import classes.internals.*;
 		private function shouldraLustAttack():void {
 			if(rand(2) == 0) outputText("The girl spins away from one of your swings, her tunic flaring around her hips. The motion gives you a good view of her firm and moderately large butt. She notices your glance and gives you a little wink.\n");
 			else outputText("The girl's feet get tangled on each other and she tumbles to the ground. Before you can capitalize on her slip, she rolls with the impact and comes up smoothly. As she rises, however, you reel back and raise an eyebrow in confusion; are her breasts FILLING the normally-loose tunic? She notices your gaze and smiles, performing a small pirouette on her heel before squaring up to you again. Your confusion only heightens when her torso comes back into view, her breasts back to their normal proportions. A trick of the light, perhaps? You shake your head and try to fall into the rhythm of the fight.\n");
-			player.dynStats("lus", (8+player.effectiveLibido()/10));
+			player.takeLustDamage((8+player.effectiveLibido()/10), true);
 		}
 		//(magic attack)
 		private function shouldraMagicLazers():void {
@@ -118,7 +108,7 @@ import classes.internals.*;
 			this.tallness = 65;
 			this.hips.type = Hips.RATING_AMPLE;
 			this.butt.type = Butt.RATING_AVERAGE + 1;
-			this.skinTone = "white";
+			this.bodyColor = "white";
 			this.hairColor = "white";
 			this.hairLength = 3;
 			initStrTouSpeInte(55, 40, 10, 140);
@@ -132,7 +122,6 @@ import classes.internals.*;
 			this.bonusHP = 30;
 			this.bonusLust = 133;
 			this.lust = 10;
-			this.temperment = TEMPERMENT_LUSTY_GRAPPLES;
 			this.level = 12;
 			this.gems = 0;
 			this.drop = new ChainedDrop().add(consumables.ECTOPLS, 1 / 3);

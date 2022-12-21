@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.BodyParts.Arms;
@@ -120,92 +120,18 @@ use namespace CoC;
 			SceneLib.ceaniScene.sparringWithCeaniLost();
 		}
 		
-		public function Ceani() 
+		public function Ceani()
 		{
-			if (flags[kFLAGS.CEANI_LVL_UP] < 5) {
-				this.armorDef = 25;
-				this.armorMDef = 5;
-			}
-			if (flags[kFLAGS.CEANI_LVL_UP] == 0) {
-				initStrTouSpeInte(150, 300, 170, 200);
-				initWisLibSensCor(200, 200, 80, 50);
-				this.weaponAttack = 16;
-				this.bonusLust = 318;
-				this.level = 38;
-			}
-			if (flags[kFLAGS.CEANI_LVL_UP] == 1) {
-				initStrTouSpeInte(180, 300, 190, 200);
-				initWisLibSensCor(200, 200, 85, 50);
-				this.weaponAttack = 24;
-				this.bonusLust = 331;
-				this.level = 46;
-			}
-			if (flags[kFLAGS.CEANI_LVL_UP] == 2) {
-				initStrTouSpeInte(210, 300, 210, 200);
-				initWisLibSensCor(200, 200, 90, 50);
-				this.weaponAttack = 32;
-				this.bonusLust = 344;
-				this.level = 54;
-			}
-			if (flags[kFLAGS.CEANI_LVL_UP] == 3) {
-				initStrTouSpeInte(240, 300, 230, 200);
-				initWisLibSensCor(200, 200, 95, 50);
-				this.weaponAttack = 40;
-				this.bonusLust = 357;
-				this.level = 62;
-			}
-			if (flags[kFLAGS.CEANI_LVL_UP] == 4) {
-				initStrTouSpeInte(270, 300, 250, 200);
-				initWisLibSensCor(200, 200, 100, 50);
-				this.weaponAttack = 48;
-				this.bonusLust = 368;
-				this.level = 68;
-			}
-			if (flags[kFLAGS.CEANI_LVL_UP] == 5) {
-				initStrTouSpeInte(300, 320, 270, 210);
-				initWisLibSensCor(210, 210, 105, 50);
-				this.weaponAttack = 56;
-				this.armorDef = 27;
-				this.armorMDef = 6;
-				this.bonusLust = 389;
-				this.level = 74;
-			}
-			if (flags[kFLAGS.CEANI_LVL_UP] == 6) {
-				initStrTouSpeInte(330, 340, 290, 220);
-				initWisLibSensCor(220, 220, 110, 50);
-				this.weaponAttack = 64;
-				this.armorDef = 29;
-				this.armorMDef = 7;
-				this.bonusLust = 410;
-				this.level = 80;
-			}
-			if (flags[kFLAGS.CEANI_LVL_UP] == 7) {
-				initStrTouSpeInte(360, 360, 310, 230);
-				initWisLibSensCor(230, 230, 115, 50);
-				this.weaponAttack = 72;
-				this.armorDef = 31;
-				this.armorMDef = 8;
-				this.bonusLust = 431;
-				this.level = 86;
-			}
-			if (flags[kFLAGS.CEANI_LVL_UP] == 8) {
-				initStrTouSpeInte(390, 380, 330, 240);
-				initWisLibSensCor(240, 240, 120, 50);
-				this.weaponAttack = 80;
-				this.armorDef = 33;
-				this.armorMDef = 9;
-				this.bonusLust = 352;
-				this.level = 92;
-			}
-			if (flags[kFLAGS.CEANI_LVL_UP] == 9) {
-				initStrTouSpeInte(420, 400, 350, 250);
-				initWisLibSensCor(250, 250, 125, 50);
-				this.weaponAttack = 88;
-				this.armorDef = 35;
-				this.armorMDef = 10;
-				this.bonusLust = 473;
-				this.level = 98;
-			}//level up giving 2x all growns and so follow next level ups's as long each npc break lvl 100 (also makes npc use new better gear)
+			var lvl:int = flags[kFLAGS.CEANI_LVL_UP];
+			var lvl4:int = lvl > 4 ? lvl - 4 : 0;
+			initStrTouSpeInte(150 + lvl*30, 300 + lvl4*20, 170 + lvl*20, 200 + lvl4*10);
+			initWisLibSensCor(200 + lvl4*10, 200 + lvl4*10, 80 + lvl*5, 50);
+			this.weaponAttack = 16 + lvl*8;
+			this.armorDef = 25 + lvl4*2;
+			this.armorMDef = 5 + lvl4;
+			this.bonusLust = 280 + lvl*21;
+			this.level = 35 + lvl*7;
+
 			this.a = "";
 			this.short = "Ceani";
 			this.long = "You are sparing with Ceani the orca morph. While she is normally smiling all the time this time around she looks like an angry beast about to tear you to shreds. You realise only now how scary her sharp teeth are let alone that massive harpoon she wields. Both strong and swift, she easily proves that underneath her friendly, and at time goofy, demeanor she still is a deadly fighter most people on mareth would rather avoid the wrath of.";
@@ -218,7 +144,7 @@ use namespace CoC;
 			this.tallness = 132;
 			this.hips.type = Hips.RATING_CURVY + 2;
 			this.butt.type = Butt.RATING_LARGE + 1;
-			this.skinTone = "black with a white underside";
+			this.bodyColor = "black with a white underside";
 			this.hairColor = "blue";
 			this.hairLength = 13;
 			this.weaponName = "harpoon";
@@ -227,7 +153,6 @@ use namespace CoC;
 			this.bonusHP = 2000;
 			this.lust = 30;
 			this.lustVuln = .8;
-			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.gems = 50;
 			this.drop = new ChainedDrop().
 				//	add(armors.INDESSR,1/10).

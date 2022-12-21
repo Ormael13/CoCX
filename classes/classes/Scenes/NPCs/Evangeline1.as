@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -48,7 +48,7 @@ public class Evangeline1 extends Monster
 		SalamanderAdrenalGlands
 		TrachealSystem
 		?DeityJobMunchkin? - tylko czy możliwe skoro nie ma duszy na stałe w ciele wiec nie może nauczyć zostać Soul Cultivator a może w jej wypadku zignorowąć ten wymóg lub wytłumaczyć tym iż jej dusza w lethice może zostać soul cultivator i ona majac odrobine jej ze sobą potrafi w bardzo ograniczonym stopniu używać soulforce...
-		*/	
+		*/
 		public function spellCostChargeWeapon():Number {
 			var cost:Number = 30;
 			if (flags[kFLAGS.EVANGELINE_SPELLS_CASTED] >= 10) cost -= 3;
@@ -127,7 +127,6 @@ public class Evangeline1 extends Monster
 			if (hasPerk(PerkLib.JobSorcerer)) mod += .1;
 			if (hasPerk(PerkLib.Mage)) mod += .2;
 			if (hasPerk(PerkLib.Spellpower)) mod += .2;
-			if (hasPerk(PerkLib.WizardsFocus)) mod += .5;
 			return mod;
 		}
 		
@@ -198,8 +197,7 @@ public class Evangeline1 extends Monster
 			if(player.lust >= (player.maxLust() * 0.6)) outputText("Your eyes glaze over with desire for a moment.  ");
 			lustDmg *= 0.5;
 			lustDmg = Math.round(lustDmg);
-			player.dynStats("lus", lustDmg, "scale", false);
-			outputText(" <b>(<font color=\"#ff00ff\">" + lustDmg + "</font>)</b>");
+			player.takeLustDamage(lustDmg, true);
 			mana -= spellCostArouse();
 			flags[kFLAGS.EVANGELINE_SPELLS_CASTED]++;
 		}
@@ -305,7 +303,7 @@ public class Evangeline1 extends Monster
 			}
 		}
 		
-		public function Evangeline1() 
+		public function Evangeline1()
 		{
 			this.a = "";
 			this.short = "Evangeline";
@@ -434,7 +432,7 @@ public class Evangeline1 extends Monster
 			}
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 4) {
 				this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
-				this.createPerk(PerkLib.WizardsFocus, 0, 0, 0, 0);
+				this.buff("Wizard's Focus").addStat('spellpower', 0.5);
 			}
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] >= 5) {
 			}

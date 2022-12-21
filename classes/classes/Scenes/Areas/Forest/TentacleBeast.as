@@ -18,7 +18,7 @@ public class TentacleBeast extends Monster
 			if (inDungeon) temp += str + weaponAttack;
 			if(temp < 0) temp = 0;
 			//Miss
-			if(temp == 0 || (player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80)) {
+			if(temp == 0 || (player.speedDodge(this)>0)) {
 				outputText("However, you quickly evade the clumsy efforts of the abomination to strike you.");
 			}
 			//Hit
@@ -32,7 +32,7 @@ public class TentacleBeast extends Monster
 			//Not Trapped yet
 			if(!player.hasStatusEffect(StatusEffects.TentacleBind)) {
 				//Success
-				if(int(Math.random()*(((player.spe)/2))) > 15 || (player.hasPerk(PerkLib.Evade) && int(Math.random()*(((player.spe)/2))) > 15)) {
+				if(player.getEvasionRoll()) {
 					outputText("In an impressive display of gymnastics, you dodge, duck, dip, dive, and roll away from the shower of grab-happy arms trying to hold you. Your instincts tell you that this was a GOOD thing.\n");
 				}
 				//Fail
@@ -44,7 +44,7 @@ public class TentacleBeast extends Monster
 					else if(player.hasVagina()) outputText("The creature quickly positions a long tentacle with a single sucker over your clitoris. You feel the power of the suction on you, and your body quickly heats up.  Your clit engorges, prompting the beast to latch the sucker onto your [clit].\n");
 					//Genderless
 					else outputText("The creature quickly positions a long tentacle against your " + Appearance.assholeDescript(player) + ". It circles your pucker with slow, delicate strokes that bring unexpected warmth to your body.\n");
-					player.dynStats("lus", (8+player.effectiveSensitivity()/20));
+					player.takeLustDamage((8+player.effectiveSensitivity()/20), true);
 					player.createStatusEffect(StatusEffects.TentacleBind,0,0,0,0);
 				}
 			}
@@ -171,7 +171,6 @@ public class TentacleBeast extends Monster
 			this.armorName = "rubbery skin";
 			this.lust = 10;
 			this.lustVuln = 0.8;
-			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
 			this.drop = new WeightedDrop().addMany(1,consumables.HEALHERB,
 					consumables.HEALHERB,
 					consumables.HEALHERB,

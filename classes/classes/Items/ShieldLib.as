@@ -1,14 +1,14 @@
-package classes.Items 
+package classes.Items
 {
 	/**
 	 * ...
 	 * @author Kitteh6660
 	 */
-	import classes.Items.Shields.*;
-	import classes.PerkLib;
-	import classes.PerkType;
-	
-	public final class ShieldLib 
+
+import classes.Items.Shields.*;
+import classes.PerkLib;
+
+public final class ShieldLib extends ItemConstants
 	{
 		public static const DEFAULT_VALUE:Number = 6;	//cena dla tarcz bazowa to 50 gems a nie 40 gems
 		
@@ -17,12 +17,15 @@ package classes.Items
 		public const AETHERS:AetherS = new AetherS();
 		public const BATTNET:Shield = new Shield("BattNet", "BattleNet", "Battle Net", "a Battle Net", 0, 100, "A battle net used in the off hand to impair the opponent's movement. Also very good for fishing.");
 		public const BSHIELD:BeautifulShield = new BeautifulShield();
-		public const BLASPHE:Blasphemy = new Blasphemy();
+		public const BLASPHE:Shield = new Shield("Blasphe", "Blasphemy", "Blasphemy", "a Blasphemy", 1, 200, "Metal prayer beads, engraved with holy symbols of dead gods.", "Obsession").withPerk(PerkLib.Obsession, 0.2, 0.15, 0, 0) as Shield;
 		public const BUCKLER:Shield = new Shield("Buckler", "Buckler", "buckler", "a buckler", 5, 250, "A simple wooden rounded shield.");
 		public const DRGNSHL:DragonShellShield = new DragonShellShield();
 		public const GREATSH:GreatShield = new GreatShield();
 		public const KITE_SH:Shield = new Shield("Kite Sh", "KiteShield", "kite shield", "a kite shield", 14, 700, "An average-sized kite shield.");
-		public const MABRACE:ManaBracer = new ManaBracer();
+		public const MABRACE:Shield = new Shield("MaBrace", "ManaBracer", "mana bracer", "a mana bracer", 2, 200,
+				"Runed bracers such as this are popular amongst mages that can afford them. This silver bracer augments a mage’s spell power while leaving the hand open to make gestures used in spellcasting.",
+				"Magic").withBuff('spellpower', +0.5) as Shield;
+		public const NECROSH:NecroShield = new NecroShield();
 		public const SPI_FOC:SpiritFocus = new SpiritFocus();
 		public const TRASBUC:Shield = new Shield("TraSBuc", "TrainSBuckler", "training soul buckler", "a training soul buckler", 3, 300, "A simple rounded shield made of soulmetal used to train soulforce by soul cultivator novices.");
 		public const TOWERSH:Shield = new TowerShield();
@@ -38,7 +41,7 @@ package classes.Items
 			return new Shield(id,shortName,name,longName,effectId,effectMagnitude,value,description,type,perk);
 		}*/
 		
-		public function ShieldLib() 
+		public function ShieldLib()
 		{
 		}
 	}

@@ -39,509 +39,479 @@ package classes.GeneticMemories {
 		});
 
 	 */
+// TODO: Khovel - Taur Toggle button - Remember Taur setting in Metamorph only
 
     public static var Memories:/*EnumValue*/ Array = [];
+	  private static var _partid:int = 0;
 
-		public static const HUMAN: int = 0;
-		EnumValue.add(Memories, HUMAN, "HUMAN", {
-		  id: "Unlocked Metamorph",
-			name: "Human Legs",
-		  cost: 500,
-		  title: "Human",
-		  transformation: function(): Transformation {
-		    return CoC.instance.transformations.LowerBodyHuman
-		  }
-		});
+      public static const HUMAN: int = _partid++;
+      EnumValue.add(Memories, HUMAN, "HUMAN", {
+          id: "Unlocked Metamorph",name: "Human Legs",
+          cost: 500,
+          title: "Human",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyHuman}});
 
-		public static const TAUR: int = 1;
-		EnumValue.add(Memories, TAUR, "TAUR", {
-		  id: "Taur Lower Body",
-			name: "Taur Lower Body",
-		  cost: 100,
-		  title: "Taur",
-		  transformation: function(): Transformation {
-		    return CoC.instance.transformations.LowerBodyTaur()
-		  }
-		});
+      public static const TAUR: int = _partid++;
+      EnumValue.add(Memories, TAUR, "TAUR", {
+          id: "Taur Lower Body",name: "Taur Lower Body",
+          cost: 100,
+          title: "Taur",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyTaur()}});
 
-		public static const HOOFED: int = 2;
-		EnumValue.add(Memories, HOOFED, "HOOFED", {
-		  id: "Hoofed Lower Body",
-			name: "Hooves (Legs)",
-		  cost: 100,
-		  title: "Hoofed",
-			unlockText: "Now you can metamorph into the Taur variant of any lower body part you unlocked when available!",
-		  transformation: function(): Transformation {
-		    return CoC.instance.transformations.LowerBodyHoofed(2)
-		  }
-		});
+      public static const ALRAUNE: int = _partid++;
+      EnumValue.add(Memories, ALRAUNE, "ALRAUNE", {
+          id: "Alraune Lower Body",name: "Alraune Legs",
+          cost: 200,
+          title: "Alraune",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyPlantFlower}});
 
-		public static const HOOFED_TAUR: int = 3;
-		EnumValue.add(Memories, HOOFED_TAUR, "HOOFED_TAUR", {
-		  id: "Hoofed Lower Body",
-			name: "Hooves (Legs)",
-		  cost: 200,
-		  title: "Hoofed (4)",
-		  transformation: function(): Transformation {
-		    return CoC.instance.transformations.LowerBodyHoofed(4)
-		  },
-			taurVariant: true
-		});
+      public static const ANT: int = _partid++;
+      EnumValue.add(Memories, ANT, "ANT", {
+          id: "Ant Lower Body",name: "Ant Legs",
+          cost: 100,
+          title: "Ant",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyAnt}});
 
-		public static const NAGA: int = 4;
-		EnumValue.add(Memories, NAGA, "NAGA", {
-		  id: "Snake Lower Body",
-			name: "Naga Lower Body",
-		  cost: 100,
-		  title: "Naga",
-		  transformation: function(): Transformation {
-		    return CoC.instance.transformations.LowerBodySnake
-		  }
-		});
+      public static const ATLACH_NACHA: int = _partid++;
+      EnumValue.add(Memories, ATLACH_NACHA, "ATLACH_NACHA", {
+          id: "AtlachNacha Lower Body",name: "AtlachNacha Legs",
+          cost: 200,
+          title: "AtlachNacha",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyAtlachNacha}});
 
-		public static const DEMONIC_HIGH_HEELS: int = 5;
-		EnumValue.add(Memories, DEMONIC_HIGH_HEELS, "DEMONIC_HIGH_HEELS", {
-		  id: "Demon High Heels Lower Body",
-			name: "Demonic High Heels",
-		  cost: 100,
-		  title: "Dem. H. Heels",
-		  transformation: function(): Transformation {
-		    return CoC.instance.transformations.LowerBodyDemonHighHeels
-		  }
-		});
+      public static const AVIAN: int = _partid++;
+      EnumValue.add(Memories, AVIAN, "AVIAN", {
+          id: "Avian Lower Body",name: "Avian Legs",
+          cost: 200,
+          title: "Avian",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyAvian}});
 
-		public static const DEMONIC_CLAWS: int = 6;
-		EnumValue.add(Memories, DEMONIC_CLAWS, "DEMONIC_CLAWS", {
-		  id: "Demon Clawed Lower Body",
-			name: "Demonic Clawed Feet",
-		  cost: 100,
-		  title: "Dem. Claws",
-		  transformation: function(): Transformation {
-		    return CoC.instance.transformations.LowerBodyDemonClawed
-		  }
-		});
+      public static const BEAR: int = _partid++;
+      EnumValue.add(Memories, BEAR, "BEAR", {
+          id: "Bear Lower Body",name: "Bear Legs",
+          cost: 200,
+          title: "Bear",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyBearToggle(true)}});
 
-		public static const BEE: int = 7;
-		EnumValue.add(Memories, BEE, "BEE", {
-		  id: "Bee Lower Body",
-			name: "Bee Legs",
-		  cost: 100,
-		  title: "Bee",
-		  transformation: function(): Transformation {
-		    return CoC.instance.transformations.LowerBodyBee
-		  }
-		});
+      public static const BEE: int = _partid++;
+      EnumValue.add(Memories, BEE, "BEE", {
+          id: "Bee Lower Body",name: "Bee Legs",
+          cost: 100,
+          title: "Bee",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyBee}});
 
-		public static const CAT: int = 8;
-		EnumValue.add(Memories, CAT, "CAT", {
-		  id: "Cat Lower Body",
-			name: "Cat Paws (Legs)",
-		  cost: 100,
-		  title: "Cat",
-		  transformation: function(): Transformation {
-		    return CoC.instance.transformations.LowerBodyCat(2)
-		  }
-		});
+      public static const BUNNY: int = _partid++;
+      EnumValue.add(Memories, BUNNY, "BUNNY", {
+          id: "Bunny Lower Body",name: "Bunny Legs",
+          cost: 200,
+          title: "Bunny",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyBunny}});
 
-		public static const CAT_TAUR: int = 9;
-		EnumValue.add(Memories, CAT_TAUR, "CAT_TAUR", {
-		  id: "Cat Lower Body",
-			name: "Cat Paws (Legs)",
-		  cost: 200,
-		  title: "Cat (4)",
-		  transformation: function(): Transformation {
-		    return CoC.instance.transformations.LowerBodyCat(4)
-		  },
-			taurVariant: true
-		});
+      public static const CANCER: int = _partid++;
+      EnumValue.add(Memories, CANCER, "CANCER", {
+          id: "Cancer Lower Body",name: "Cancer Legs",
+          cost: 200,
+          title: "Cancer",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyCancer}});
 
-		public static const LIZARD: int = 10;
-		EnumValue.add(Memories, LIZARD, "LIZARD", {
-		  id: "Lizard Lower Body",
-			name: "Lizard Legs",
-		  cost: 100,
-		  title: "Lizard",
-		  transformation: function(): Transformation {
-		    return CoC.instance.transformations.LowerBodyLizard(2)
-		  }
-		});
+      public static const CAT: int = _partid++;
+      EnumValue.add(Memories, CAT, "CAT", {
+          id: "Cat Lower Body",name: "Cat Paws (Legs)",
+          cost: 100,
+          title: "Cat",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyCatToggle(true)}});
 
-		public static const LIZARD_TAUR: int = 11;
-		EnumValue.add(Memories, LIZARD_TAUR, "LIZARD_TAUR", {
-		  id: "Lizard Lower Body",
-			name: "Lizard Legs",
-		  cost: 200,
-		  title: "Lizard (4)",
-		  transformation: function(): Transformation {
-		    return CoC.instance.transformations.LowerBodyLizard(4)
-		  },
-			taurVariant: true
-		});
+      public static const CAVE_WYRM: int = _partid++;
+      EnumValue.add(Memories, CAVE_WYRM, "CAVE_WYRM", {
+          id: "Cave Wyrm Lower Body",name: "Cave Wyrm Legs",
+          cost: 100,
+          title: "Cave Wyrm",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyCaveWyrm}});
 
-		public static const HARPY: int = 12;
-		EnumValue.add(Memories, HARPY, "HARPY", {
-		  id: "Harpy Lower Body",
-			name: "Harpy Lower Body",
-		  cost: 100,
-		  title: "Harpy",
-		  transformation: function(): Transformation {
-		    return CoC.instance.transformations.LowerBodyHarpy
-		  }
-		});
+      public static const CENTIPEDE: int = _partid++;
+      EnumValue.add(Memories, CENTIPEDE, "CENTIPEDE", {
+          id: "Centipede Lower Body",name: "Centipede Legs",
+          cost: 200,
+          title: "Centipede",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyCentipede}});
 
-		public static const CHITINOUS_SPIDER_LEGS: int = 13;
-		EnumValue.add(Memories, CHITINOUS_SPIDER_LEGS, "CHITINOUS_SPIDER_LEGS", {
-		  id: "Spider Lower Body",
-			name: "Spider Lower Body",
-		  cost: 100,
-		  title: "Spider",
-		  transformation: function(): Transformation {
-		    return CoC.instance.transformations.LowerBodySpider
-		  }
-		});
+      public static const CHITINOUS_SPIDER_LEGS: int = _partid++;
+      EnumValue.add(Memories, CHITINOUS_SPIDER_LEGS, "CHITINOUS_SPIDER_LEGS", {
+          id: "Spider Lower Body",name: "Spider Lower Body",
+          cost: 100,
+          title: "Spider",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodySpider}});
 
-		public static const DRIDER: int = 14;
-		EnumValue.add(Memories, DRIDER, "DRIDER", {
-		  id: "Drider Lower Body",
-			name: "Drider Lower Body",
-		  cost: 300,
-		  title: "Drider",
-		  transformation: function(): Transformation {
-		    return CoC.instance.transformations.LowerBodyDrider
-		  },
-			info: "Includes Spider tail and lower body parts."
-		});
+      public static const CLOVEN_HOOFED: int = _partid++;
+      EnumValue.add(Memories, CLOVEN_HOOFED, "CLOVEN_HOOFED", {
+          id: "Cloven Hoofed Lower Body",name: "Cloven Hooves (Legs)",
+          cost: 100,
+          title: "Cl. Hoofed",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyClovenHoofedToggle(true)}});
 
-		public static const FOX: int = 15;
-		EnumValue.add(Memories, FOX, "FOX", {
-		  id: "Fox Lower Body",
-			name: "Fox Paws (Legs)",
-		  cost: 100,
-		  title: "Fox",
-		  transformation: function(): Transformation {
-		    return CoC.instance.transformations.LowerBodyFox(2)
-		  }
-		});
+      public static const CRAB: int = _partid++;
+      EnumValue.add(Memories, CRAB, "CRAB", {
+          id: "Crab Lower Body",name: "Crab Legs",
+          cost: 200,
+          title: "Crab",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyCrab}});
 
-		public static const FOX_TAUR: int = 16;
-		EnumValue.add(Memories, FOX_TAUR, "FOX_TAUR", {
-		  id: "Fox Lower Body",
-			name: "Fox Paws (Legs)",
-		  cost: 200,
-		  title: "Fox (4)",
-		  transformation: function(): Transformation {
-		    return CoC.instance.transformations.LowerBodyFox(4)
-		  },
-			taurVariant: true
-		});
+      public static const DEMONIC_CLAWS: int = _partid++;
+      EnumValue.add(Memories, DEMONIC_CLAWS, "DEMONIC_CLAWS", {
+          id: "Demon Clawed Lower Body",name: "Demonic Clawed Feet",
+          cost: 100,
+          title: "Dem. Claws",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyDemonClawed}});
 
-		public static const DRAGON: int = 17;
-		EnumValue.add(Memories, DRAGON, "DRAGON", {
-		  id: "Draconic Lower Body",
-			name: "Draconic Legs",
-		  cost: 100,
-		  title: "Dragon",
-		  transformation: function(): Transformation {
-		    return CoC.instance.transformations.LowerBodyDraconic(2)
-		  }
-		});
+      public static const DEMONIC_HIGH_HEELS: int = _partid++;
+      EnumValue.add(Memories, DEMONIC_HIGH_HEELS, "DEMONIC_HIGH_HEELS", {
+          id: "Demon High Heels Lower Body",name: "Demonic High Heels",
+          cost: 100,
+          title: "Dem. H. Heels",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyDemonHighHeels}});
 
-		public static const DRAGON_TAUR: int = 18;
-		EnumValue.add(Memories, DRAGON_TAUR, "DRAGON_TAUR", {
-		  id: "Draconic Lower Body",
-			name: "Draconic Legs",
-		  cost: 200,
-		  title: "Dragon (4)",
-		  transformation: function(): Transformation {
-		    return CoC.instance.transformations.LowerBodyDraconic(4)
-		  },
-			taurVariant: true
-		});
+      public static const DOG: int = _partid++;
+      EnumValue.add(Memories, DOG, "DOG", {
+          id: "Dog Lower Body",name: "Dog Legs",
+          cost: 200,
+          title: "Dog",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyDogToggle(true)}});
 
-		public static const CLOVEN_HOOFED: int = 19;
-		EnumValue.add(Memories, CLOVEN_HOOFED, "CLOVEN_HOOFED", {
-		  id: "Cloven Hoofed Lower Body",
-			name: "Cloven Hooves (Legs)",
-		  cost: 100,
-		  title: "Cl. Hoofed",
-		  transformation: function(): Transformation {
-		    return CoC.instance.transformations.LowerBodyClovenHoofed(2)
-		  }
-		});
+      public static const DRAGON: int = _partid++;
+      EnumValue.add(Memories, DRAGON, "DRAGON", {
+          id: "Draconic Lower Body",name: "Draconic Legs",
+          cost: 100,
+          title: "Dragon",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyDraconicToggle(true)}});
 
-		public static const CLOVEN_HOOFED_TAUR: int = 20;
-		EnumValue.add(Memories, CLOVEN_HOOFED_TAUR, "CLOVEN_HOOFED_TAUR", {
-		  id: "Cloven Hoofed Lower Body",
-			name: "Cloven Hooves (Legs)",
-		  cost: 200,
-		  title: "Cl. Hoofed (4)",
-		  transformation: function(): Transformation {
-		    return CoC.instance.transformations.LowerBodyClovenHoofed(4)
-		  },
-			taurVariant: true
-		});
+      public static const DRIDER: int = _partid++;
+      EnumValue.add(Memories, DRIDER, "DRIDER", {
+          id: "Drider Lower Body",name: "Drider Lower Body",
+          cost: 300,
+          title: "Drider",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyDrider},info: "Includes Spider tail and lower body parts."});
 
-		public static const SALAMANDER: int = 21;
-		EnumValue.add(Memories, SALAMANDER, "SALAMANDER", {
-		  id: "Salamander Lower Body",
-			name: "Salamander Legs",
-		  cost: 100,
-		  title: "Salamander",
-		  transformation: function(): Transformation {
-		    return CoC.instance.transformations.LowerBodySalamander(2)
-		  }
-		});
+      public static const ELF: int = _partid++;
+      EnumValue.add(Memories, ELF, "ELF", {
+          id: "Elf Lower Body",name: "Elf Legs",
+          cost: 100,
+          title: "Elf",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyElf}});
 
-		public static const SALAMANDER_TAUR: int = 22;
-		EnumValue.add(Memories, SALAMANDER_TAUR, "SALAMANDER_TAUR", {
-		  id: "Salamander Lower Body",
-			name: "Salamander Legs",
-		  cost: 200,
-		  title: "Salam. (4)",
-		  transformation: function(): Transformation {
-		    return CoC.instance.transformations.LowerBodySalamander(4)
-		  },
-			taurVariant: true
-		});
+      public static const FEY_DRAGON: int = _partid++;
+      EnumValue.add(Memories, FEY_DRAGON, "FEY_DRAGON", {
+          id: "Fey Draconic Lower Body",name: "Fey Draconic Legs",
+          cost: 100,
+          title: "Fey Dragon",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyFeyDraconicToggle(true)}});
 
-		public static const MANTIS: int = 23;
-		EnumValue.add(Memories, MANTIS, "MANTIS", {
-		  id: "Mantis Lower Body",
-			name: "Mantis Lower Body",
-		  cost: 100,
-		  title: "Mantis",
-		  transformation: function(): Transformation {
-		    return CoC.instance.transformations.LowerBodyMantis(2)
-		  }
-		});
+      public static const FERRET: int = _partid++;
+      EnumValue.add(Memories, FERRET, "FERRET", {
+          id: "Ferret Lower Body",name: "Ferret Legs",
+          cost: 200,
+          title: "Ferret",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyFerret}});
 
-		public static const MANTIS_TAUR: int = 24;
-		EnumValue.add(Memories, MANTIS_TAUR, "MANTIS_TAUR", {
-		  id: "Mantis Lower Body",
-			name: "Mantis Lower Body",
-		  cost: 200,
-		  title: "Mantis (4)",
-		  transformation: function(): Transformation {
-		    return CoC.instance.transformations.LowerBodyMantis(4)
-		  },
-			taurVariant: true
-		});
+      public static const FIRE_SNAIL: int = _partid++;
+      EnumValue.add(Memories, FIRE_SNAIL, "FIRE_SNAIL", {
+          id: "FireSnail Lower Body",name: "FireSnail Legs",
+          cost: 200,
+          title: "FireSnail",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyFireSnail}});
 
-		public static const SHARK: int = 25;
-		EnumValue.add(Memories, SHARK, "SHARK", {
-		  id: "Shark Lower Body",
-			name: "Shark Legs",
-		  cost: 100,
-		  title: "Shark",
-		  transformation: function(): Transformation {
-		    return CoC.instance.transformations.LowerBodyShark(2)
-		  }
-		});
+      public static const FOX: int = _partid++;
+      EnumValue.add(Memories, FOX, "FOX", {
+          id: "Fox Lower Body",name: "Fox Paws (Legs)",
+          cost: 100,
+          title: "Fox",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyFoxToggle(true)}});
 
-		public static const SHARK_TAUR: int = 26;
-		EnumValue.add(Memories, SHARK_TAUR, "SHARK_TAUR", {
-		  id: "Shark Lower Body",
-			name: "Shark Legs",
-		  cost: 200,
-		  title: "Shark",
-		  transformation: function(): Transformation {
-		    return CoC.instance.transformations.LowerBodyShark(4)
-		  },
-			taurVariant: true
-		});
+      public static const FROSTWYRM: int = _partid++;
+      EnumValue.add(Memories, FROSTWYRM, "FROSTWYRM", {
+          id: "Frost wyrm Lower Body",name: "Frost wyrm Lower Body",
+          cost: 100,
+          title: "Frost wyrm",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyFrostwyrm}});
 
-		public static const LION: int = 27;
-		EnumValue.add(Memories, LION, "LION", {
-		  id: "Lion Lower Body",
-			name: "Lion Paws (Legs)",
-		  cost: 100,
-		  title: "Lion",
-		  transformation: function(): Transformation {
-		    return CoC.instance.transformations.LowerBodyLion(2)
-		  }
-		});
+      public static const GAZER: int = _partid++;
+      EnumValue.add(Memories, GAZER, "GAZER", {
+          id: "Gazer Lower Body",name: "Gazer Legs",
+          cost: 100,
+          title: "Gazer",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyGazer}});
 
-		public static const LION_TAUR: int = 28;
-		EnumValue.add(Memories, LION_TAUR, "LION_TAUR", {
-		  id: "Lion Lower Body",
-			name: "Lion Paws (Legs)",
-		  cost: 200,
-		  title: "Lion (4)",
-		  transformation: function(): Transformation {
-		    return CoC.instance.transformations.LowerBodyLion(4)
-		  },
-			taurVariant: true
-		});
+      public static const GHOST_2: int = _partid++;
+      EnumValue.add(Memories, GHOST_2, "GHOST_2", {
+          id: "Ghost2 Lower Body",name: "Ghost2 Legs",
+          cost: 200,
+          title: "Ghost2",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyGhost2}});
 
-		public static const ORCA: int = 29;
-		EnumValue.add(Memories, ORCA, "ORCA", {
-		  id: "Orca Lower Body",
-			name: "Orca Legs",
-		  cost: 100,
-		  title: "Orca",
-		  transformation: function(): Transformation {
-		    return CoC.instance.transformations.LowerBodyOrca(2)
-		  }
-		});
+      public static const GHOST: int = _partid++;
+      EnumValue.add(Memories, GHOST, "GHOST", {
+          id: "Ghost Lower Body",name: "Ghost Legs",
+          cost: 200,
+          title: "Ghost",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyGhost}});
 
-		public static const ORCA_TAUR: int = 30;
-		EnumValue.add(Memories, ORCA_TAUR, "ORCA_TAUR", {
-		  id: "Orca Lower Body",
-			name: "Orca Legs",
-		  cost: 200,
-		  title: "Orca (4)",
-		  transformation: function(): Transformation {
-		    return CoC.instance.transformations.LowerBodyOrca(4)
-		  },
-			taurVariant: true
-		});
+      public static const GOO: int = _partid++;
+      EnumValue.add(Memories, GOO, "GOO", {
+          id: "Goo Lower Body",name: "Goo Lower Body",
+          cost: 100,
+          title: "Goo",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyGoo}});
 
-		public static const ONI: int = 31;
-		EnumValue.add(Memories, ONI, "ONI", {
-		  id: "Oni Lower Body",
-			name: "Oni Legs",
-		  cost: 100,
-		  title: "Oni",
-		  transformation: function(): Transformation {
-		    return CoC.instance.transformations.LowerBodyOni
-		  }
-		});
+      public static const GRYPHON: int = _partid++;
+      EnumValue.add(Memories, GRYPHON, "GRYPHON", {
+          id: "Gryphon Lower Body",name: "Gryphon Legs",
+          cost: 200,
+          title: "Gryphon",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyGryphonToggle(true)}});
 
-		public static const ELF: int = 32;
-		EnumValue.add(Memories, ELF, "ELF", {
-		  id: "Elf Lower Body",
-			name: "Elf Legs",
-		  cost: 100,
-		  title: "Elf",
-		  transformation: function(): Transformation {
-		    return CoC.instance.transformations.LowerBodyElf
-		  }
-		});
+      public static const HARPY: int = _partid++;
+      EnumValue.add(Memories, HARPY, "HARPY", {
+          id: "Harpy Lower Body",name: "Harpy Lower Body",
+          cost: 100,
+          title: "Harpy",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyHarpy}});
 
-		public static const RAIJU: int = 33;
-		EnumValue.add(Memories, RAIJU, "RAIJU", {
-		  id: "Raiju Lower Body",
-			name: "Raiju Paws (Legs)",
-		  cost: 100,
-		  title: "Raiju",
-		  transformation: function(): Transformation {
-		    return CoC.instance.transformations.LowerBodyRaiju(2)
-		  }
-		});
+      public static const HINEZUMI: int = _partid++;
+      EnumValue.add(Memories, HINEZUMI, "HINEZUMI", {
+          id: "Hinezumi Lower Body",name: "Hinezumi Legs",
+          cost: 100,
+          title: "Hinezumi",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyHinezumi}});
 
-		public static const RAIJU_TAUR: int = 34;
-		EnumValue.add(Memories, RAIJU_TAUR, "RAIJU_TAUR", {
-		  id: "Raiju Lower Body",
-			name: "Raiju Paws (Legs)",
-		  cost: 200,
-		  title: "Raiju (4)",
-		  transformation: function(): Transformation {
-		    return CoC.instance.transformations.LowerBodyRaiju(4)
-		  },
-			taurVariant: true
-		});
+      public static const HOOFED: int = _partid++;
+      EnumValue.add(Memories, HOOFED, "HOOFED", {
+          id: "Hoofed Lower Body",name: "Hooves (Legs)",
+          cost: 100,
+          title: "Hoofed",
+          unlockText: "Now you can metamorph into the Taur variant of any lower body part you unlocked when available!",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyHoofedToggle(true)}});
 
-		public static const RED_PANDA: int = 35;
-		EnumValue.add(Memories, RED_PANDA, "RED_PANDA", {
-		  id: "Red Panda Lower Body",
-			name: "Red Panda Paws (Legs)",
-		  cost: 100,
-		  title: "Red Panda",
-		  transformation: function(): Transformation {
-		    return CoC.instance.transformations.LowerBodyRedPanda
-		  }
-		});
+      public static const HYDRA: int = _partid++;
+      EnumValue.add(Memories, HYDRA, "HYDRA", {
+          id: "Hydra Lower Body",name: "Hydra Lower body",
+          cost: 200,
+          title: "Hydra",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyHydra}});
 
-		public static const ORC: int = 36;
-		EnumValue.add(Memories, ORC, "ORC", {
-		  id: "Orc Lower Body",
-			name: "Orc Legs",
-		  cost: 100,
-		  title: "Orc",
-		  transformation: function(): Transformation {
-		    return CoC.instance.transformations.LowerBodyOrc
-		  }
-		});
+      public static const JABBERWOCKY: int = _partid++;
+      EnumValue.add(Memories, JABBERWOCKY, "JABBERWOCKY", {
+          id: "Jabberwocky Lower Body",name: "Jabberwocky Legs",
+          cost: 200,
+          title: "Jabberwocky",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyJabberwocky}});
 
-		public static const WOLF: int = 37;
-		EnumValue.add(Memories, WOLF, "WOLF", {
-		  id: "Wolf Lower Body",
-			name: "Wolf Legs",
-		  cost: 100,
-		  title: "Wolf",
-		  transformation: function(): Transformation {
-		    return CoC.instance.transformations.LowerBodyWolf(2)
-		  }
-		});
+      public static const JIANGSHI: int = _partid++;
+      EnumValue.add(Memories, JIANGSHI, "JIANGSHI", {
+          id: "Jiangshi Lower Body",name: "Jiangshi Legs",
+          cost: 200,
+          title: "Jiangshi",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyJiangshi}});
 
-		public static const WOLF_TAUR: int = 38;
-		EnumValue.add(Memories, WOLF_TAUR, "WOLF_TAUR", {
-		  id: "Wolf Lower Body",
-			name: "Wolf Paws (Legs)",
-		  cost: 200,
-		  title: "Wolf (4)",
-		  transformation: function(): Transformation {
-		    return CoC.instance.transformations.LowerBodyWolf(4)
-		  },
-			taurVariant: true
-		});
+      public static const KANGAROO: int = _partid++;
+      EnumValue.add(Memories, KANGAROO, "KANGAROO", {
+          id: "Kangaroo Lower Body",name: "Kangaroo Legs",
+          cost: 200,
+          title: "Kangaroo",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyKangaroo}});
 
-		public static const CAVE_WYRM: int = 39;
-		EnumValue.add(Memories, CAVE_WYRM, "CAVE_WYRM", {
-		  id: "Cave Wyrm Lower Body",
-			name: "Cave Wyrm Legs",
-		  cost: 100,
-		  title: "Cave Wyrm",
-		  transformation: function(): Transformation {
-		    return CoC.instance.transformations.LowerBodyCaveWyrm
-		  }
-		});
+      public static const KIRIN: int = _partid++;
+      EnumValue.add(Memories, KIRIN, "KIRIN", {
+          id: "Kirin Lower Body",name: "Kirin Legs",
+          cost: 200,
+          title: "Kirin",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyKirinToggle(true)}});
 
-		public static const MOUSE: int = 40;
-		EnumValue.add(Memories, MOUSE, "MOUSE", {
-		  id: "Mouse Lower Body",
-			name: "Mouse Legs",
-		  cost: 100,
-		  title: "Mouse",
-		  transformation: function(): Transformation {
-		    return CoC.instance.transformations.LowerBodyMouse
-		  }
-		});
+      public static const KRAKEN: int = _partid++;
+      EnumValue.add(Memories, KRAKEN, "KRAKEN", {
+          id: "Kraken Lower Body",name: "Kraken Tentacles",
+          cost: 300,
+          title: "Kraken",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyKraken}});
 
-		public static const HINEZUMI: int = 41;
-		EnumValue.add(Memories, HINEZUMI, "HINEZUMI", {
-		  id: "Hinezumi Lower Body",
-			name: "Hinezumi Legs",
-		  cost: 100,
-		  title: "Hinezumi",
-		  transformation: function(): Transformation {
-		    return CoC.instance.transformations.LowerBodyHinezumi
-		  }
-		});
+      public static const LION: int = _partid++;
+      EnumValue.add(Memories, LION, "LION", {
+          id: "Lion Lower Body",name: "Lion Paws (Legs)",
+          cost: 100,
+          title: "Lion",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyLionToggle(true)}});
 
-		public static const GAZER: int = 42;
-		EnumValue.add(Memories, GAZER, "GAZER", {
-		  id: "Gazer Lower Body",
-			name: "Gazer Legs",
-		  cost: 100,
-		  title: "Gazer",
-		  transformation: function(): Transformation {
-		    return CoC.instance.transformations.LowerBodyGazer
-		  }
-		});
+      public static const LIZARD: int = _partid++;
+      EnumValue.add(Memories, LIZARD, "LIZARD", {
+          id: "Lizard Lower Body",name: "Lizard Legs",
+          cost: 100,
+          title: "Lizard",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyLizardToggle(true)}});
 
-		public static const FROSTWYRM: int = 43;
-		EnumValue.add(Memories, FROSTWYRM, "FROSTWYRM", {
-		  id: "Frost wyrm Lower Body",
-			name: "Frost wyrm Lower Body",
-		  cost: 100,
-		  title: "Frost wyrm",
-		  transformation: function(): Transformation {
-		    return CoC.instance.transformations.LowerBodyFrostwyrm
-		  }
-		});
+      public static const MANTIS: int = _partid++;
+      EnumValue.add(Memories, MANTIS, "MANTIS", {
+          id: "Mantis Lower Body",name: "Mantis Lower Body",
+          cost: 100,
+          title: "Mantis",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyMantisToggle(true)}});
 
-		public static function getMemory(memoryId: Number): * {
+      public static const MELKIE: int = _partid++;
+      EnumValue.add(Memories, MELKIE, "MELKIE", {
+          id: "Melkie Lower Body",name: "Melkie Legs",
+          cost: 200,
+          title: "Melkie",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyMelkie}});
+
+      public static const MOUSE: int = _partid++;
+      EnumValue.add(Memories, MOUSE, "MOUSE", {
+          id: "Mouse Lower Body",name: "Mouse Legs",
+          cost: 100,
+          title: "Mouse",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyMouse}});
+
+      public static const NAGA: int = _partid++;
+      EnumValue.add(Memories, NAGA, "NAGA", {
+          id: "Snake Lower Body",name: "Naga Lower Body",
+          cost: 100,
+          title: "Naga",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodySnake}});
+
+      public static const ONI: int = _partid++;
+      EnumValue.add(Memories, ONI, "ONI", {
+          id: "Oni Lower Body",name: "Oni Legs",
+          cost: 100,
+          title: "Oni",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyOni}});
+
+      public static const ORC: int = _partid++;
+      EnumValue.add(Memories, ORC, "ORC", {
+          id: "Orc Lower Body",name: "Orc Legs",
+          cost: 100,
+          title: "Orc",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyOrc}});
+
+      public static const ORCA: int = _partid++;
+      EnumValue.add(Memories, ORCA, "ORCA", {
+          id: "Orca Lower Body",name: "Orca Legs",
+          cost: 100,
+          title: "Orca",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyOrcaToggle(true)}});
+
+      public static const PLANT_HIGH_HEELS: int = _partid++;
+      EnumValue.add(Memories, PLANT_HIGH_HEELS, "PLANT_HIGH_HEELS", {
+          id: "PlantHighHeels Lower Body",name: "PlantHighHeels Legs",
+          cost: 200,
+          title: "PlantHighHeels",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyPlantHighHeels}});
+
+      public static const PLANT_ROOT_CLAWS: int = _partid++;
+      EnumValue.add(Memories, PLANT_ROOT_CLAWS, "PLANT_ROOT_CLAWS", {
+          id: "PlantRootClaws Lower Body",name: "PlantRootClaws Legs",
+          cost: 200,
+          title: "PlantRootClaws",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyPlantRootClaws}});
+
+      public static const RACCOON: int = _partid++;
+      EnumValue.add(Memories, RACCOON, "RACCOON", {
+          id: "Raccoon Lower Body",name: "Raccoon Legs",
+          cost: 200,
+          title: "Raccoon",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyRaccoon}});
+
+      public static const RAIJU: int = _partid++;
+      EnumValue.add(Memories, RAIJU, "RAIJU", {
+          id: "Raiju Lower Body",name: "Raiju Paws (Legs)",
+          cost: 100,
+          title: "Raiju",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyRaijuToggle(true)}});
+
+      public static const RED_PANDA: int = _partid++;
+      EnumValue.add(Memories, RED_PANDA, "RED_PANDA", {
+          id: "Red Panda Lower Body",name: "Red Panda Paws (Legs)",
+          cost: 100,
+          title: "Red Panda",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyRedPanda}});
+
+      public static const SALAMANDER: int = _partid++;
+      EnumValue.add(Memories, SALAMANDER, "SALAMANDER", {
+          id: "Salamander Lower Body",name: "Salamander Legs",
+          cost: 100,
+          title: "Salamander",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodySalamanderToggle(true)}});
+
+      public static const SCYLLA: int = _partid++;
+      EnumValue.add(Memories, SCYLLA, "SCYLLA", {
+          id: "Scylla Lower Body",name: "Scylla Tentacles",
+          cost: 200,
+          title: "Scylla",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyScylla}});
+
+      public static const SEA_DRAGON: int = _partid++;
+      EnumValue.add(Memories, SEA_DRAGON, "SEA_DRAGON", {
+          id: "SeaDragon Lower Body",name: "SeaDragon Legs",
+          cost: 200,
+          title: "SeaDragon",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodySeaDragonToggle(true)}});
+
+      public static const SHARK: int = _partid++;
+      EnumValue.add(Memories, SHARK, "SHARK", {
+          id: "Shark Lower Body",name: "Shark Legs",
+          cost: 100,
+          title: "Shark",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodySharkToggle(true)}});
+
+      public static const SQUIRREL: int = _partid++;
+      EnumValue.add(Memories, SQUIRREL, "SQUIRREL", {
+          id: "Squirrel Lower Body",name: "Squirrel Legs",
+          cost: 200,
+          title: "Squirrel",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodySquirrel}});
+
+      public static const USHI_ONI: int = _partid++;
+      EnumValue.add(Memories, USHI_ONI, "USHI_ONI", {
+          id: "UshiOni Lower Body",name: "UshiOni Legs",
+          cost: 200,
+          title: "UshiOni",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyUshiOni}});
+
+      public static const WEASEL: int = _partid++;
+      EnumValue.add(Memories, WEASEL, "WEASEL", {
+          id: "Weasel Lower Body",name: "Weasel Legs",
+          cost: 200,
+          title: "Weasel",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyWeaselToggle(true)}});
+
+      public static const WENDIGO: int = _partid++;
+      EnumValue.add(Memories, WENDIGO, "WENDIGO", {
+          id: "Wendigo Lower Body",name: "Wendigo Legs",
+          cost: 200,
+          title: "Wendigo",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyWendigo}});
+
+      public static const WOLF: int = _partid++;
+      EnumValue.add(Memories, WOLF, "WOLF", {
+          id: "Wolf Lower Body",name: "Wolf Legs",
+          cost: 100,
+          title: "Wolf",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyWolfToggle(true)}});
+
+      public static const YETI: int = _partid++;
+      EnumValue.add(Memories, YETI, "YETI", {
+          id: "Yeti Lower Body",name: "Yeti Lower Body",
+          cost: 100,
+          title: "Yeti",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyYeti;}});
+
+      public static const YUKI_ONNA: int = _partid++;
+      EnumValue.add(Memories, YUKI_ONNA, "YUKI_ONNA", {
+          id: "YukiOnna Lower Body",name: "YukiOnna Legs",
+          cost: 200,
+          title: "YukiOnna",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyYukiOnna}});
+
+
+
+
+
+      public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}
   }
