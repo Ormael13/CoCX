@@ -3145,7 +3145,7 @@ import flash.utils.getQualifiedClassName;
 					outputText("<b>Death Blossom effect wore off!</b>[pg]");
 				} else {
 					addStatusValue(StatusEffects.DeathBlossom, 1, -1);
-					addStatusValue(StatusEffects.DeathBlossom, 1, 0.2);
+					addStatusValue(StatusEffects.DeathBlossom, 2, 0.2);
 				}
 			}
 			if(hasStatusEffect(StatusEffects.LustStick)) {

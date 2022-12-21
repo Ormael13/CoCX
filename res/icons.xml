@@ -44,15 +44,30 @@
 
         "I_" is prepended automatically
     -->
-    <file name="icons/items.png" prefix="I_" cellwidth="36" cellheight="36">
+    <file name="icons/items.png" prefix="I_" cellwidth="32" cellheight="32">
         <row>
             <icon>IncubiD</icon>
+            <icon>GenericItem_consumable</icon>
+        </row>
+        <row>
+            <icon>red potion icon id</icon>
+            <icon>GenericWeapon_Sword</icon>
+            <icon>GenericWeapon_Bow</icon>
+            <icon>bow2 id</icon>
+            <icon>tease id</icon>
+        </row>
+        <row>
+            <icon></icon>
+            <icon>GenericItem_shield</icon>
+            <icon>HealHerb</icon>
+            <icon>GenericItem_necklace</icon>
+            <icon>bookid</icon>
         </row>
     </file>
 
     <!-- Ability icons, iconId = "A_" + abilityId -->
     <!--
-     <file name="icons/abilities.png" prefix="A_" cellwidth="36" cellheight="36">
+     <file name="icons/abilities.png" prefix="A_" cellwidth="32" cellheight="32">
      </file>
      -->
 
@@ -62,5 +77,15 @@
             Existing icon "I_IncubiD" is also available under id "I_HairDye"
             <alias icon="I_IncubiD" alias="I_HairDye"/>
         -->
+        <alias icon="I_HealHerb" alias="I_HealHerb"/>
+        <alias icon="I_HealHerb" alias="I_MoonGrass"/>
+        <alias icon="I_HealHerb" alias="I_SnakFlowr"/>
+        <alias icon="I_HealHerb" alias="I_IronWeed"/>
+        <alias icon="I_HealHerb" alias="I_BladeFerns"/>
+        <alias icon="I_HealHerb" alias="I_RauneNectar"/>
+        <alias icon="I_bookid" alias="I_B__BOOK"/>
+        <alias icon="I_bookid" alias="I_W__BOOK"/>
+        <alias icon="I_bookid" alias="I_G__BOOK"/>
+        <alias icon="I_bookid" alias="I_RMANUSC"/>
     </aliases>
 </icons>
