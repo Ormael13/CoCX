@@ -637,7 +637,7 @@ public class Camp extends NPCAwareContent{
 			return;
 		}
 		//Zenji freaks out about corrupted celess
-		if (ZenjiScenes.isLover() && CelessScene.instance.isCorrupt && !CelessScene.instance.setDeadOrRemoved() && rand(4) == 0) {
+		if (ZenjiScenes.isLover() && CelessScene.instance.isCorrupt && !CelessScene.instance.setDeadOrRemoved() && !sceneHunter.other && rand(4) == 0) {
 			finter.zenjiFreaksOverCorruptCeless();
 			hideMenus();
 			return;

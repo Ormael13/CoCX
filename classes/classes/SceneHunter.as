@@ -105,6 +105,7 @@ public class SceneHunter extends BaseContent {
         outputText("\n- 'Recall' - opens up alt versions of some scenes that probably nobody wants to see normally, but still might be interesting.");
         outputText("\n- The cabin doesn't disable imp attacks anymore. You still can build a wall or something else though.");
         outputText("\n- Disables Raphael dress timer - you can't fail his date by not wearing it.");
+        outputText("\n- Disables Zenji vs Celess freakout. Stupid troll shouldn't ask you to kill your daughter.");
         outputText("\n<i>Most changes are lore-accurate and explained in the game (so everything feels logical), but be warned that the original writers probably intended some details to work the other way.</i>");
         outputText("\n<i>Some one-time scenes with many options and checks can be replayed using 'Camp Actions > Spend Time > Recall'.</i>");
 
