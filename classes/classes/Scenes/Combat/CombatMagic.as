@@ -253,6 +253,12 @@ public class CombatMagic extends BaseCombatContent {
 				else mod += 1.25;
 			} else mod += 1;
 		}
+        if (player.hasStatusEffect(StatusEffects.PerfectClarity)) {
+			if (player.perkv1(IMutationsLib.DiamondHeartIM) >= 2) {
+				if (player.perkv1(IMutationsLib.DiamondHeartIM) >= 3) mod += 2.5;
+				else mod += 1.25;
+			} else mod += 1;
+		}
 		if (player.hasPerk(PerkLib.InariBlessedKimono)){
 			var mod2:Number = 0.5;
 			mod2 -= player.cor / 100;

@@ -3737,8 +3737,6 @@ public class PerkLib
 		public static const ElvenBounty:ElvenBountyPerk = new ElvenBountyPerk();
 		public static const ElvenRangerArmor:PerkType = mk("Elven Ranger Armor", "Elven Ranger Armor",
 				"+50% to Bow and spear damage, Count as naked, Slutty seduction +8.");
-		public static const Exorcism:PerkType = mk("Exorcism", "Exorcism",
-				"Damage any creature above 25% corruption for 50% of its hit point total. Can be used only once per battle.");
 		public static const FeralHunter:FeralHunterPerk = new FeralHunterPerk();
 		public static const FerasBoonAlpha:PerkType = mk("Fera's Boon - Alpha", "Fera's Boon - Alpha",
 				"Increases the rate your cum builds up and cum production in general.");
@@ -3765,11 +3763,9 @@ public class PerkLib
 		public static const Hellfire:PerkType = mk("Hellfire", "Hellfire",
 				"Grants a corrupted fire breath attack, like the hellhounds in the mountains.");
 		public static const Immortality:PerkType = mk("Immortality", "Immortality",
-				"Cannot loose combat by damage. Damage taken below 0 instead cause player to take serious lust damage.");
+				"Cannot lose combat by damage. Damage taken below 0 instead cause player to take serious lust damage.");
 		public static const IntermediateLeadership:PerkType = mk("Intermediate Leadership", "Intermediate Leadership",
 				"Allows to form 3 people party.");
-		public static const JudgementFlare:PerkType = mk("Judgement Flare", "Judgement Flare",
-				"Grants a purifying flare attack, dealing light and fire damage with a chance to stun.");
 		public static const LuststickAdapted:PerkType = mk("Luststick Adapted", "Luststick Adapted",
 				"Grants immunity to the lust-increasing effects of lust-stick and allows its use.")
 				.withBuffs({'minlustx':0.1});
@@ -3802,8 +3798,6 @@ public class PerkLib
 				"Your soul has been safely stored into a phylactery allowing you to fully unlock your potential as a demon.").withBuffs({'int.mult':0.75});
 		public static const InnerPhylactery:PerkType = mk("InnerPhylactery", "InnerPhylactery",
 				"Your soul has been safely stored into a phylactery allowing you to fully unlock your potential as a demon, since fusing back into your body to sit beside your heart.").withBuffs({'int.mult':0.75});
-		public static const PerfectClarity:PerkType = mk("Perfect Clarity", "Perfect Clarity",
-				"Deal increased magic damage but take more physical damage, increase evasion slightly.");
 		public static const PilgrimsBounty:PerkType = mk("Pilgrim's Bounty", "Pilgrim's Bounty",
 				"Causes you to always cum as hard as if you had max lust.");
 		public static const ProductivityDrugs:PerkType = new ProductivityDrugsPerk();
@@ -7308,4 +7302,4 @@ public class PerkLib
         }
 	}
 }
-}
+}

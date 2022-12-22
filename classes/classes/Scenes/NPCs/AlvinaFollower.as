@@ -17,6 +17,7 @@ use namespace CoC;
 
 public class AlvinaFollower extends NPCAwareContent implements TimeAwareInterface, SaveableState
 {
+	public var JojoDevilPurification:int;
 	public var DefeatedAlvinaFirstStage:Boolean;
 	public var GaveAlvinaFafnirTear:Boolean;
 	public var GaveAlvinaFlowers:Boolean;
@@ -30,6 +31,7 @@ public class AlvinaFollower extends NPCAwareContent implements TimeAwareInterfac
 	public var FirstDateSuccess:Boolean;
 	public var SecondDateSuccess:Boolean;
 	public var FightForAlvina:Boolean;
+	public var AlvinaFightingToCorruptYou:Boolean;
 	public var AlvinaPurified:Boolean;
 	public var AlvinaInfernalOilAsked:Boolean;
 	public var AlvinaInfernalOilCooldown:int;
@@ -38,6 +40,7 @@ public class AlvinaFollower extends NPCAwareContent implements TimeAwareInterfac
 		return "AlvinaFollower";
 	}
 	public function resetState():void {
+		JojoDevilPurification = 0;
 		DefeatedAlvinaFirstStage = false;
 		GaveAlvinaFafnirTear = false;
 		GaveAlvinaFlowers = false;
@@ -51,6 +54,7 @@ public class AlvinaFollower extends NPCAwareContent implements TimeAwareInterfac
 		FirstDateSuccess = false;
 		SecondDateSuccess = false;
 		FightForAlvina = false;
+		AlvinaFightingToCorruptYou = false;
 		AlvinaPurified = false;
 		AlvinaInfernalOilAsked = false;
 		AlvinaInfernalOilCooldown = 0;
@@ -58,6 +62,7 @@ public class AlvinaFollower extends NPCAwareContent implements TimeAwareInterfac
 
 	public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
 		if (o) {
+			JojoDevilPurification = "JojoDevilPurification" in o ? o["JojoDevilPurification"] : 0;
 			DefeatedAlvinaFirstStage = "DefeatedAlvinaFirstStage" in o ? o["DefeatedAlvinaFirstStage"] : false;
 			GaveAlvinaFafnirTear = "GaveAlvinaFafnirTear" in o ? o["GaveAlvinaFafnirTear"] : false;
 			GaveAlvinaFlowers = "GaveAlvinaFlowers" in o ? o["GaveAlvinaFlowers"] : false;
@@ -71,6 +76,7 @@ public class AlvinaFollower extends NPCAwareContent implements TimeAwareInterfac
 			FirstDateSuccess = "FirstDateSuccess" in o ? o["FirstDateSuccess"] : false;
 			SecondDateSuccess = "SecondDateSuccess" in o ? o["SecondDateSuccess"] : false;
 			FightForAlvina = "FightForAlvina" in o ? o["FightForAlvina"] : false;
+			AlvinaFightingToCorruptYou = "AlvinaFightingToCorruptYou" in o ? o["AlvinaFightingToCorruptYou"] : false;
 			AlvinaPurified = "AlvinaPurified" in o ? o["AlvinaPurified"] : false;
 			AlvinaInfernalOilAsked = "AlvinaInfernalOilAsked" in o ? o["AlvinaInfernalOilAsked"] : false;
 			AlvinaInfernalOilCooldown = "AlvinaInfernalOilCooldown" in o ? o["AlvinaInfernalOilCooldown"] : 0;
@@ -79,6 +85,7 @@ public class AlvinaFollower extends NPCAwareContent implements TimeAwareInterfac
 
 	public function saveToObject():Object {
 		return {
+			"JojoDevilPurification": JojoDevilPurification,
 			"DefeatedAlvinaFirstStage": DefeatedAlvinaFirstStage,
 			"GaveAlvinaFafnirTear": GaveAlvinaFafnirTear,
 			"GaveAlvinaFlowers": GaveAlvinaFlowers,
@@ -92,6 +99,7 @@ public class AlvinaFollower extends NPCAwareContent implements TimeAwareInterfac
 			"FirstDateSuccess": FirstDateSuccess,
 			"SecondDateSuccess": SecondDateSuccess,
 			"FightForAlvina": FightForAlvina,
+			"AlvinaFightingToCorruptYou": AlvinaFightingToCorruptYou,
 			"AlvinaPurified": AlvinaPurified,
 			"AlvinaInfernalOilAsked": AlvinaInfernalOilAsked,
 			"AlvinaInfernalOilCooldown": AlvinaInfernalOilCooldown
@@ -332,6 +340,13 @@ public function alvinaThirdEncounterYesNeverWon():void
 }
 public function alvinaThirdEncounterYesNeverLost():void
 {
+	if (AlvinaFightingToCorruptYou) {
+		outputText("You wake up with Alvina towering over you.[pg]");
+		outputText("\"<i>I took the liberty of fixing you like I said I would, you fool. Dont do that again or I will end you.</i>\"");
+		player.removeStatusEffect(StatusEffects.DevilPurificationScar);
+		player.dynStats("cor", 50);
+		doNext(camp.returnToCampUseEightHours);
+	}
 	outputText("You wake up, somewhat horny, in the middle of the blight ridge.\n\n");
 	outputText("It would seem Alvina already took the liberty of disposing of your soul. All in all, she was quite merciful to only turn you into a demon and not rip you apart or worse, turn you into a lab rat. Well, at least you're still alive and well, right? You proceed to spend the rest of your life in the same way most demons do, ");
 	outputText("heading back to the portal to start collecting slaves, beginning with the next Champion, to amass power and eventually claim revenge. After many years of harvest, your power rises up to rival Alvina's own and you challenge her again. Whether you won or lost, however, was and will never be known to anyone.\n\n");
@@ -698,6 +713,7 @@ public function alvinaMainCampMenu():void
 	spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2_16bit);
 	clearOutput();
 	outputText("You head out to meet Alvina in her hidden camp. She is in the middle of an experiment, as usual.\n\n");
+	if (player.hasStatusEffect(StatusEffects.DevilPurificationScar))
 	outputText("\"<i>Well hello [name], what brings you to me today?</i>\"\n\n");
 	menu();
 	addButton(0, "Appearance", alvinaMainCampMenuAppearance).hint("Examine Alvina detailed appearance.");
@@ -764,6 +780,37 @@ public function alvinaMainCampMenuAppearance():void
 	outputText("</i>\"\n\n");
 	menu();
 	addButton(14, "Back", alvinaMainCampMenu);
+}
+
+public function alvinaFreaksDevilPurification():void
+{
+	spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2_16bit);
+	clearOutput();
+	outputText("You walk to Alvina with renewed resolve. You put up with her shenanigans because you loved her, going all the way down to becoming like her and nearly losing yourself.[pg]");
+	outputText("Alvina closes her book, acknowledging your presence.[pg]");
+	outputText("\"<i>So you've decided to go against it eh [name]? You know your whole fight is meaningless. Why battle corruption at all? You're weakening yourself, hurting yourself, all for a concept of virtues established by others. For this I cannot forgive them.</i>\"[pg]");
+	outputText("Oh so she's stopped acting tough all of a sudden?[pg]");
+	outputText("\"<i>That you would try and purify yourself never crossed my mind, let alone the fact I didn't plan for this.</i>\"[pg]");
+	outputText("Instead of lamenting that you managed to fix yourself, how about she considered to do the opposite? With her powers and a bit of good will she could part ways with her own corruption too.[pg]");
+	outputText("\"<i>That's foolish, completely mad cap! If you intend to be like that then I'll just break your phylactery!</i>\"[pg]");
+	outputText("She won't do it though, you call her out on that.[pg]");
+	outputText("\"<i>Oh and why is that? Tell me what's stopping me from killing you here and now?</i>\"[pg]");
+	outputText("Because while she try to pretend otherwise she's been in love with you since the day you two met. You feel the same way which is the very reason you became a demon in order to follow in her footsteps and get closer to her but this was a mistake. Instead of changing for her you should've found ways to help her out. To kill you now would be no different from hurting herself all over again. The very reason she's so afraid of her emotions in the first place that she would seal most of them away in a pendant![pg]");
+	outputText("\"<i>I'm not running away, you're the one distancing yourself from me, you idiot!</i>\"[pg]");
+	outputText("Alvina grabs her scythe and sigh \"<i>Looks like the only way I have to cure you of your own stupidity is through brute force. Don't worry it won't hurt, I'll just beat you unconscious then pour corruption into your body until I'm sure you will never break on me again.</i>\"[pg]");
+	outputText("So what, her whole ideology was flawed from the start and you had to experience it first hand to know it yourself. Whats the point of eternal life if the two of you are cursed to never be able to fully love one another! Her so-called perfect world utopia was never gonna be a thing in the first place. It will just end up as a world with no joy, no sadness, no love, no hate and most of all likely no life because those are all two sides of the same coin![pg]");
+	outputText("\"<i>It will work… I guarantee it!</i>\"[pg]");
+	outputText("Does she truly believe that? Who is she even trying to convince anymore?[pg]");
+	outputText("She laughs but it sounds hollow… empty like all strength and will to argue has left her.[pg]");
+	outputText("\"<i>You are right indeed, however, I am the beginning and the end of your quest [name], the one who started it all… you're right I've been lying so hard to myself desperately clinging to this final escape to my reality… I'm far too tired of this existence [name]… I've just been desperately trying to delude myself into believing that I'm not… those past two hundred years… my only remaining sibling was the price for them and only now do I truly regret everything. I may as well have spent them in hell. This pendant right here is all that ties me to this world.</i>\"[pg]");
+	outputText("Alvina clutches her necklace firmly then stare at you with determination, grabbing her weapon.[pg]");
+	outputText("\"<i>I'm too far gone to go back on my ways now [name] if your ideals are worth dying for… then fight for them. You think redemption is possible even for us soulless bodies then prove it! For the sake of my own goals however I will put you to the test. Show me the strength of your resolve and the power of all that which you believe in! That so-called power you claim is stronger than all of which I have sought.\"</i>[pg]");
+	outputText("On these world Alvina aura flares with a pillar of raw magic power as she transforms into a whole new form easily over 10 ft tall, her wings unfolding as the magic from her aura spreads to the ground beneath her and catch fire setting the whole area ablaze. Amidst this vision of hell Alvina stands proudly, her scythe having split into two sickles of which she holds one in each hand."+(player.basetallness < 9*12 ? " She practically towers above you.":"")+"[pg]");
+	outputText("\"<i>Fixing me, hah! You're the one who needs to be fixed. Trust me you will thank me for it later.</i>\"[pg]");
+	outputText("She's your teacher and lover as well as the most powerful opponent you've ever faced, but for your sake and hers, you have to stop her. There's no holding back now.[pg]");
+
+	FightForAlvina = true;
+	startCombat(new Alvina());
 }
 
 public function alvinaMainCampMenuDiary():void

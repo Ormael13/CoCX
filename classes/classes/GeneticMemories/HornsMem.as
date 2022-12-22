@@ -218,6 +218,17 @@ package classes.GeneticMemories {
 		  }
 	  });
 
+	  public static const KIRIN:int = _partid++;
+	  EnumValue.add(Memories, KIRIN, "KIRIN", {
+		  id: "Kirin Horn",
+		  name: "Kirin Horn",
+		  cost: 100,
+		  title: "Kirin",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.HornsKirin;
+		  }
+	  });
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}
