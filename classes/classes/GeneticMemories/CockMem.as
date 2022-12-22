@@ -370,6 +370,17 @@ package classes.GeneticMemories {
 			}
 		});
 
+		public static const KIRIN:int = _partid++;
+		EnumValue.add(Memories, KIRIN, "KIRIN", {
+			id: "Kirin cock",
+			name: "Kirin cock",
+			cost: 200,
+			title: "Kirin",
+			transformation: function(cockIndex:int): Transformation {
+				return CoC.instance.transformations.CockKirin(cockIndex);
+			}
+		});
+
 
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];

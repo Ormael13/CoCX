@@ -181,7 +181,7 @@ public class CockTransformations extends MutationsHelper {
 					if (doOutput) outputText("<b>  Unable to hold the flow of pleasure back you spontaneously cum from your [cock "+(cock+1)+"], splattering thick ropes of plasma with intense force.</b>");
 
 					transformations.UnlockCocks();
-					//Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.KIRIN));
+					Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.KIRIN));
 				},
 				// is present
 				function ():Boolean {

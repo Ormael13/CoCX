@@ -351,6 +351,17 @@ import classes.CoC;
 			}
 		});
 
+		public static const KIRIN:int = _partid++;
+		EnumValue.add(Memories, KIRIN, "KIRIN", {
+			id: "Kirin Tail",
+			name: "Kirin Tail",
+			cost: function():Number { return getTailCost(player.tailCount, 1);},
+			title: "Kirin",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.TailKirin;
+			}
+		});
+
 		public static const KITSHOO:int = _partid++;
 		EnumValue.add(Memories, KITSHOO, "KITSHOO", {
 			id: "Kitshoo Tail",
