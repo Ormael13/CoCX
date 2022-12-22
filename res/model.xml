@@ -2821,16 +2821,13 @@
             <case values="Face.ORCA">
                 <show part="face/orca"/>
             </case>
-			<case values="Face.CHESHIRE,Face.CHESHIRE_SMILE">
-                <show part="face/fairySmile"/>
-            </case>
 			<case values="Face.PANDA">
                 <show part="face/panda"/>
             </case>
 			<case values="Face.COW_MINOTAUR">
                 <show part="face/bovine"/>
             </case>
-			<case values="Face.FAIRY,Face.CRAZY,Face.SMUG,Face.ELF">
+			<case values="Face.FAIRY,Face.CRAZY,Face.SMUG,Face.ELF,Face.CHESHIRE,Face.INNOCENT">
                 <show part="face/fairySmile"/>
             </case>
 			<case values="Face.GHOST">
@@ -4087,7 +4084,7 @@
             <case values="Wings.BEE_SMALL,Wings.BEE_LARGE">
                 <show part="wings/bee"/>
             </case>
-            <case values="Wings.HARPY,Wings.FEATHERED,Wings.FEATHERED_SPHINX,Wings.FEATHERED_ALICORN,Wings.FEATHERED_PHOENIX,Wings.FEATHERED_AVIAN,Wings.FEATHERED_LARGE">
+            <case values="Wings.HARPY,Wings.FEATHERED,Wings.FEATHERED_SPHINX,Wings.FEATHERED_ALICORN,Wings.FEATHERED_PHOENIX,Wings.FEATHERED_AVIAN,Wings.FEATHERED_LARGE,Wings.PUREDEVILFEATHER">
                 <show part="wings/feather_large"/>
                 <show part="wings_bg/feather_large"/>
 				<if test="playerHasLargeLowerBody">
@@ -4392,6 +4389,14 @@
 					<show part="tail/goat_taur"/>
 					<else>
 						<show part="tail/goat"/>
+					</else>
+				</if>
+            </case>
+			<case values="Tail.AZAZEL">
+				<if test="isTaur()">
+					<show part="tail/azazel_taur"/>
+					<else>
+						<show part="tail/azazel"/>
 					</else>
 				</if>
             </case>
@@ -4911,6 +4916,11 @@
 		<!-- SLIME CORES -->
 		<if test="DarkSlimeCore">
 			<show part="neck/darkGooCore"/>
+		</if>
+		
+		<!-- Phylactery -->
+		<if test="AzazelPhylactery">
+			<show part="overbreast/phylacteryExposed"/>
 		</if>
 
 		<!-- DRESS AREA -->
