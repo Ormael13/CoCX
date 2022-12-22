@@ -14657,6 +14657,8 @@ public final class Mutations extends MutationsHelper {
         //Eyes
         if (!transformations.EyesGoat.isPresent()) {
             transformations.EyesGoat.applyEffect(false);
+            if (rand(3) == 0) transformations.EyesChangeColor(["gold"]).applyEffect(false);
+            else transformations.EyesChangeColor(["pure blue"]).applyEffect(false);
             changes++;
         }
 
@@ -14678,10 +14680,13 @@ public final class Mutations extends MutationsHelper {
         player.featherColor = "snow white";
         outputText("Your hair also changes color to match this becoming immaculate white, wich is the color of purity come to think of it. Your fangs retract, your mouth becoming more human and you can't help but smile serenely at the idea of your body being purged of all that nasty stuff leaving space for the perfect you.");
         if (player.tail.type == Tail.DEMONIC)
-            outputText(" Finally your tail covers with fur and scales taking on a noble draconic appearance, gone is the last remnant of the demonic you.");
+            outputText(" Finally your tail covers with fur and scales taking on a noble draconic appearance, gone is the last remnant of the demonic you. ");
+
+        if (rand(3) == 0) transformations.EyesChangeColor(["gold"]).applyEffect();
+        else transformations.EyesChangeColor(["pure blue"]).applyEffect();
 
         if (!player.hasPerk(PerkLib.Phylactery)) {
-            outputText("Finaly your soul begins to resonate with your next form, its power concentrating into a large gem that manifests on your torso. Well you didn't have a phylactery before but I guess that's a thing now? It reminds you of Alvina owns gem come to think of it.\n\n");
+            outputText(" Finaly your soul begins to resonate with your next form, its power concentrating into a large gem that manifests on your torso. Well you didn't have a phylactery before but I guess that's a thing now? It reminds you of Alvina owns gem come to think of it.\n\n");
             player.createPerk(PerkLib.InnerPhylactery, 0,0,0,0);
         }
         outputText("As Alvina herself declared, Want becomes so much more when used not for oneself but others.");

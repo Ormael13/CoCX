@@ -8,6 +8,7 @@ import classes.Race;
 import classes.VaginaClass;
 
 public class AzazelRace extends Race {
+	public static const AzazelEyeColors:/*String*/Array = ["gold","pure blue"];
     public static const RaceBody:/*String*/Array = [
         /*Antenna*/		"Human",
         /*Arms*/		"Human",
@@ -53,6 +54,7 @@ public class AzazelRace extends Race {
 							return !(DevilRace.isDevilLike(body));
 						}, 0, -1000);
 		addScoresAfter(8)
+				.eyeColor(ANY(AzazelEyeColors), +1)
 				.height(LESS_THAN(48), +1)
 				//.cockOrVaginaOfType(CockTypesEnum.HORSE, VaginaClass.DEMONIC, +1)
 				.corruption(0, +3)
