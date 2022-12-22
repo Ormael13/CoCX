@@ -436,9 +436,9 @@ package classes.GlobalFlags
 		public static const EPIC_F_H_B_S_CURVIER_5:int					= 389;
 		public static const FASHION_SUBJECT_DELTA:int					= 390;
 		public static const FASHION_BUSHIDO_THE_WAY_OF_THE_WARRIOR:int	= 391;
-		public static const UNKNOWN_ACHIEVEMENT_392:int					= 392;
-		public static const UNKNOWN_ACHIEVEMENT_393:int					= 393;
-		public static const UNKNOWN_ACHIEVEMENT_394:int					= 394;
+		public static const THE_END_AND_THE_BEGINNING:int				= 392;
+		public static const BEYOND_GODS_AND_MORTALS:int					= 393;
+		public static const DAWN_CHASING_AWAY_THE_NIGHT:int				= 394;
 		public static const UNKNOWN_ACHIEVEMENT_395:int					= 395;
 		public static const UNKNOWN_ACHIEVEMENT_396:int					= 396;
 		public static const UNKNOWN_ACHIEVEMENT_397:int					= 397;

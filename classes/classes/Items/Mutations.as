@@ -14695,9 +14695,9 @@ public final class Mutations extends MutationsHelper {
             outputText(" Finaly your soul begins to resonate with your next form, its power concentrating into a large gem that manifests on your torso. Well you didn't have a phylactery before but I guess that's a thing now? It reminds you of Alvina owns gem come to think of it.\n\n");
             player.createPerk(PerkLib.InnerPhylactery, 0,0,0,0);
         }
-        outputText("As Alvina herself declared, Want becomes so much more when used not for oneself but others.");
+        outputText("[pg]As Alvina herself declared, Want becomes so much more when used not for oneself but others.");
         if (silly()) outputText("Well friendship is magic as they say and love is the ultimate weapon. The ponies at the lake would applaud your statement.");
-        outputText("Nothing can compare to the sheer joy of being delivered from your corrupt self, this time you hope for good.\n\n");
+        outputText("Nothing can compare to the sheer joy of being delivered from your corrupt self, this time you hope for good.[pg]");
 
         outputText("You became a shining light in the darkness, an ascendant who transcended and triumphed over evil that of yours and others. A being beyond the demons power with none of the flaws. You are now an Azazel.\n\n");
         player.consumeItem(item);

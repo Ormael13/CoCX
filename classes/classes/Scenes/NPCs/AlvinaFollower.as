@@ -7,6 +7,7 @@ package classes.Scenes.NPCs
 import classes.*;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
+import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Consumable;
 import classes.Scenes.Holidays;
@@ -335,16 +336,22 @@ public function alvinaThirdEncounterYesNeverWon():void
 		outputText("<b>Found Alvina's Shattered Phylactery</b>\n\n");
 		player.createKeyItem("Alvina's Shattered Phylactery", 0, 0, 0, 0);
 		flags[kFLAGS.ALVINA_FOLLOWER] = 12;
+		awardAchievement("The end and the beginning", kACHIEVEMENTS.THE_END_AND_THE_BEGINNING);
+		if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) awardAchievement("Beyond gods and mortals", kACHIEVEMENTS.BEYOND_GODS_AND_MORTALS);
 		doNext(camp.returnToCampUseSixHours);
 	}
 }
 public function alvinaThirdEncounterYesNeverLost():void
 {
+	clearOutput();
 	if (AlvinaFightingToCorruptYou) {
 		outputText("You wake up with Alvina towering over you.[pg]");
-		outputText("\"<i>I took the liberty of fixing you like I said I would, you fool. Dont do that again or I will end you.</i>\"");
+		outputText("\"<i>You are really hopeless aren't you… it's fine I'll fix your mess for you this one time, but don't do that ever again or I will end you.</i>\"");
+		outputText("Forcefully taking your phylactery into her clawed grasp, she pours a torrent of corruption into you straight through your soul. The effect is instantanious, stripping you of your defiance, with teh added effect of healing the scar left by the artifact in the purification ritual.[pg]");
+		outputText("\"<i>You don't need purity, moral conduct or a sense of justice concieved by others, all you need is me, [name].</i>\"[pg]");
+		outputText("And you guess she's right, and she always was. As such you take the decision not to disappoint her again.");
 		player.removeStatusEffect(StatusEffects.DevilPurificationScar);
-		player.dynStats("cor", 50);
+		player.dynStats("cor", 100);
 		doNext(camp.returnToCampUseEightHours);
 	}
 	outputText("You wake up, somewhat horny, in the middle of the blight ridge.\n\n");
@@ -607,6 +614,7 @@ public function alvinaThirdEncounterTakeHer():void
 		outputText("What of it? This is Mareth. If she has another lover then she could just let herself be shared? Tons of people do it around here.\n\n");
 		outputText("She falls silenct, staring at the emptiness before her, hood over her eyes as if trying to mask the storm of emotions assailing her heart. \n\n");
 		outputText("\"<i>Find the defiled ravine and look for a cave with magical wards that's my field laboratory… we shall meet there.</i>\"\n\n");
+		outputText("With this Alvina squeezes your hand tightly before letting go almost regretfully and running off, vanishing into the night. What could be the reason for her running away like this? It looks like you will find out at the defiled ravine.\n\n");
 		SecondDateSuccess = true;
 		doNext(camp.returnToCampUseFourHours);
 	}
@@ -675,7 +683,8 @@ public function alvinaThirdEncounterTakeHer():void
 		AlvinaPurified = true;
 		outputText("You head back to camp, Alvina following you.\n\n");
 		outputText("<b>Alvina has joined you as a follower.</b>\n\n");
-		flags[kFLAGS.ALVINA_FOLLOWER] = 19;
+		flags[kFLAGS.ALVINA_FOLLOWER] = 13;
+		awardAchievement("Dawn chasing away the night", kACHIEVEMENTS.DAWN_CHASING_AWAY_THE_NIGHT);
 
 		alvinaMakeLovePure();
 	}

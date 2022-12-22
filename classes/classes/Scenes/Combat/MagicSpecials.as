@@ -3578,7 +3578,7 @@ public class MagicSpecials extends BaseCombatContent {
 			return;
 		}
 		clearOutput();
-		outputText("You concentrate and weave an arcane sign, causing a holy fire to surge from below and scorching your opponent ");
+		outputText("You smite [themonster] by drawing on [monster his] inner corruption and igniting it like a match in an oil barrel. [Themonster] wails in pain as you deliver the devastating blow, [monster his] body shining as it is burnt from the inside by [monster his] own corruption. Repent sinner!");
 		var damage:Number = (monster.maxHP()-monster.minHP())/2;
 		if (monster.cor < 25) {
 			damage = 0;
