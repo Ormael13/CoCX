@@ -14596,6 +14596,12 @@ public final class Mutations extends MutationsHelper {
             player.tallness -= 1 + rand(3);
             changes++;
         }
+
+        if (player.perkv1(IMutationsLib.DiamondHeartIM) >= 1) {
+            outputText("[pg]Your Diamond Heart mutation has transformed to Obsidian heart!");
+            player.createPerk(IMutationsLib.ObsidianHeartIM, player.perkv1(IMutationsLib.DiamondHeartIM),0,0,0);
+            player.removePerk(IMutationsLib.DiamondHeartIM);
+        }
 		DrunkenPowerEmpowerIfPossible();
         player.refillHunger(10);
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
@@ -14696,18 +14702,26 @@ public final class Mutations extends MutationsHelper {
         outputText("You became a shining light in the darkness, an ascendant who transcended and triumphed over evil that of yours and others. A being beyond the demons power with none of the flaws. You are now an Azazel.\n\n");
         player.consumeItem(item);
 
-        //TODO add all Azazel perks effects
-        player.createPerk(PerkLib.JudgementFlare, 0,0,0,0);
-        outputText("<b>Obtained perk: JudgementFlare</b>  "+PerkLib.JudgementFlare.longDesc+"\n");
-        player.createPerk(PerkLib.Exorcism, 0,0,0,0);
-        outputText("<b>Obtained perk: Exorcism</b>  "+PerkLib.Exorcism.longDesc+"\n");
+        if (player.perkv1(IMutationsLib.ObsidianHeartIM) >= 1) {
+            outputText("[pg]Your Obsidian Heart mutation has transformed to Diamond heart!");
+            player.createPerk(IMutationsLib.DiamondHeartIM, player.perkv1(IMutationsLib.ObsidianHeartIM),0,0,0);
+            player.removePerk(IMutationsLib.ObsidianHeartIM);
+        }
+
+        //TODO add Azazel perks effects
+        outputText("<b>Obtained ability: JudgementFlare</b>  The counterpart to infernal flare.\n");
+
+        outputText("<b>Obtained ability: Exorcism</b>  Damage any creature above 25% corruption for 50% of its hit point total. Can be used only once per battle.\n");
+
         player.createPerk(PerkLib.Immortality, 0,0,0,0);
         outputText("<b>Obtained perk: Immortality</b>  "+PerkLib.Immortality.longDesc+"\n");
-        player.createPerk(PerkLib.SealSin, 0,0,0,0);
+
+        player.createPerk(PerkLib.SealSin, 0,0,0,0); //TODO add Azazel perks effects
         outputText("<b>Obtained perk: SealSin</b>  "+PerkLib.SealSin.longDesc+"\n");
-        player.createPerk(PerkLib.PerfectClarity, 0,0,0,0);
-        outputText("<b>Obtained perk: PerfectClarity</b>  "+PerkLib.PerfectClarity.longDesc+"\n");
-        player.createPerk(PerkLib.ConvictionOfPurpose, 0,0,0,0);
+
+        outputText("<b>Obtained ability: PerfectClarity</b>  Deal increased magic damage but take more physical damage, increase evasion slightly.\n");
+
+        player.createPerk(PerkLib.ConvictionOfPurpose, 0,0,0,0); //TODO add Azazel perks effects
         outputText("<b>Obtained perk: ConvictionOfPurpose</b>  "+PerkLib.ConvictionOfPurpose.longDesc+"\n");
 
         player.refillHunger(10);

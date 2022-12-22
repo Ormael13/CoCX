@@ -60,7 +60,7 @@ public class AzazelRace extends Race {
 				.corruption(0, +3)
 				.hasPerk(PerkLib.InnerPhylactery, +5);
 
-		addMutation(IMutationsLib.ObsidianHeartIM);
+		addMutation(IMutationsLib.DiamondHeartIM);
 		
 		buildTier(11, "azazelkin")
 				.namesTauric("azazelkin", "azazelkin-taur")

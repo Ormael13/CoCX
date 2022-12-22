@@ -400,6 +400,10 @@ public class Combat extends BaseContent {
 			player.HP = player.minHP() + 1;
             combatMenu(false);
 		}
+        else if (player.hasPerk(PerkLib.Immortality)) {
+            player.HP = player.minHP() + 1;
+            combatMenu(false);
+        }
         else monster.won_(true, false);
     }
 
@@ -9572,6 +9576,12 @@ public class Combat extends BaseContent {
                 outputText("<b>Maleficium effect wore off!</b>\n\n");
             } else player.addStatusValue(StatusEffects.Maleficium, 1, -1);
         }
+        if (player.hasStatusEffect(StatusEffects.PerfectClarity)) {
+            if (player.statusEffectv1(StatusEffects.PerfectClarity) <= 0) {
+                player.removeStatusEffect(StatusEffects.PerfectClarity);
+                outputText("<b>Perfect Clarity effect wore off!</b>\n\n");
+            } else player.addStatusValue(StatusEffects.PerfectClarity, 1, -1);
+        }
         if (player.hasStatusEffect(StatusEffects.WinterClaw)) {
             if (player.statusEffectv1(StatusEffects.WinterClaw) <= 0) {
                 player.removeStatusEffect(StatusEffects.WinterClaw);
@@ -15801,4 +15811,4 @@ private function touSpeStrScale(stat:int):Number {
         return damage;
     }
 }
-}
+}
