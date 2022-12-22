@@ -9745,7 +9745,7 @@ public final class Mutations extends MutationsHelper {
         }
         //SPECIAL:
         //Harpy Womb – All eggs are automatically upgraded to large, requires legs + tail to be harpy.
-        if (player.hasPerk(PerkLib.HarpyWomb) < 0 && player.lowerBody == LowerBody.HARPY && player.tailType == Tail.THUNDERBIRD && rand(4) == 0 && changes < changeLimit) {
+        if (!player.hasPerk(PerkLib.HarpyWomb) && player.lowerBody == LowerBody.HARPY && player.tailType == Tail.THUNDERBIRD && rand(4) == 0 && changes < changeLimit) {
             player.createPerk(PerkLib.HarpyWomb, 0, 0, 0, 0);
             outputText("[pg]There's a rumbling in your womb, signifying that some strange change has taken place in your most feminine area. No doubt something in it has changed to be more like a harpy. (<b>You've gained the Harpy Womb perk! All the eggs you lay will always be large so long as you have harpy legs and a thunderbird tail.</b>)");
             changes++;
