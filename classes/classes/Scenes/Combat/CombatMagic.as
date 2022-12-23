@@ -777,7 +777,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.Venomancy)) {
 			if (player.tailVenom >= player.VenomWebCost()) {
 				var injections:Number = 0;
-				//if (player.hasPerk(PerkLib.ArcaneVenom)) numberOfProcs *= (1 + AbstractSpell.stackingArcaneVenom());
+				if (player.hasPerk(PerkLib.ArcaneVenom)) numberOfProcs += AbstractSpell.stackingArcaneVenom();
 				while (player.tailVenom >= player.VenomWebCost() && injections < numberOfProcs) {
 					var damageB:Number = 35 + rand(player.lib / 10);
 					var poisonScaling:Number = 1;

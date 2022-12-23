@@ -298,7 +298,8 @@ use namespace CoC;
 							return !player.hasStatusEffect(StatusEffects.PureCampJojo)
 								   && !camp.campCorruptJojo()
 								   && flags[kFLAGS.JOJO_DEAD_OR_GONE] <= 0
-								   && (JojoScene.monk < 2 || rand(2) == 0);
+								   && (JojoScene.monk < 2 || rand(2) == 0)
+								   || SceneLib.alvinaFollower.JojoDevilPurification == 1;
 						},
 						mods  : [fn.ifLevelMin(4)],
 						chance: function ():Number {
@@ -898,7 +899,9 @@ use namespace CoC;
 
 		private function jojoEncounter():void {
 			clearOutput();
-			if (JojoScene.monk == JojoScene.JOJO_NOT_MET && !player.hasStatusEffect(StatusEffects.PureCampJojo)) {
+			if (SceneLib.alvinaFollower.JojoDevilPurification == 1) {
+				SceneLib.jojoScene.jojoForestPurifyMeFromDevilry();
+			} else if (JojoScene.monk == JojoScene.JOJO_NOT_MET && !player.hasStatusEffect(StatusEffects.PureCampJojo)) {
 				if (player.cor < 25) SceneLib.jojoScene.lowCorruptionJojoEncounter();
 				else SceneLib.jojoScene.highCorruptionJojoEncounter();
 			} else if (JojoScene.monk == JojoScene.JOJO_MET || JojoScene.monk < 0) { //Negative monk value indicates rape is disabled.

@@ -62,10 +62,10 @@ public class BriarthornSpell extends AbstractGreenSpell {
 	
 	override protected function doSpellEffect(display:Boolean = true):void {
 		if (display) {
-			outputText("You concentrate on the vines causing them to grow vicious thorns that tear through your opponent's flesh delivering a noxious poison.\n");
+			outputText("You concentrate on the vines causing them to grow vicious thorns that tear through your opponent's flesh delivering a noxious poison.");
 			if (monster.lustVuln == 0) {
 				if (display) {
-					outputText("It has no effect!  Your foe clearly does not experience lust in the same way as you.\n\n");
+					outputText("\nIt has no effect!  Your foe clearly does not experience lust in the same way as you.\n\n");
 				}
 				return;
 			}

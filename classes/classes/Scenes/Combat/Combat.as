@@ -9133,10 +9133,12 @@ public class Combat extends BaseContent {
 		if (monster.hasStatusEffect(StatusEffects.Briarthorn) && monster.lustVuln > 0) {
 			outputText("The poison inflicted by the thorns gnaws at your opponent countenance.");
 			var damageB:Number = scalingBonusIntelligence() * 0.075 * spellModWhite();
-			/*var arveB:Number = 1;
-			if (player.hasPerk(PerkLib.ArcaneVenom)) arveB += AbstractSpell.stackingArcaneVenom();
-			while (arveB-->0) repeatArcaneVenom(damageB, 0, 0);*/
-			var RandomCritAV1:Boolean = false;
+			/*var arveBL:Number = 1;
+			var arveB:Number = 0;
+			if (player.hasPerk(PerkLib.ArcaneVenom)) arveBL += AbstractSpell.stackingArcaneVenom();
+			while (arveB < arveBL) {
+				//repeatArcaneVenom(damageB, 0, 0);*/
+				var RandomCritAV1:Boolean = false;
 			if (player.hasPerk(PerkLib.VegetalAffinity)) damageB *= 1.5;
 			if (player.hasPerk(PerkLib.GreenMagic)) damageB *= 2;
 			if (player.hasStatusEffect(StatusEffects.GreenCovenant)) damageB *= 2;

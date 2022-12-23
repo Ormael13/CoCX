@@ -54,13 +54,13 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");// (Liadri)
-			outputText("-\n");// (aimozg)
-			outputText("-\n");// (Svalkash)
-			outputText("-\n");// (EragonX)
-			outputText("-\n");// (Jtecx)
-			outputText("-\n");// (Furrin Gok)
-			outputText("-\n");// (khovel)
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
 			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
@@ -68,13 +68,13 @@ public class Changelog extends BaseContent
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-\n");// (Liadri)
+			outputText("-\n");// (aimozg)
+			outputText("-\n");// (Svalkash)
+			outputText("-\n");// (EragonX)
+			outputText("-\n");// (Jtecx)
+			outputText("-\n");// (Furrin Gok)
+			outputText("-\n");// (khovel)
 			outputText("-\n");
 			outputText("-Fixed bugs: \n");
 			//remove this line when other two lines below get added ingame --- outputText("-Boss type enemies gained additional bonuses: Diehard effect of 7,5% of max HP + 2,250 HP * NG tier, OverMax HP effect of 15% magnitude.\n");
