@@ -36,7 +36,7 @@ outputText("Whitney marches up to you as soon as you approach the farm, a stoic 
 		return;
 	}
 	
-	if (farmCorruption.takeoverPrompt() == true) return;
+	if (farmCorruption.takeoverPrompt()) return;
 	
 	if (flags[kFLAGS.FARM_DISABLED] == 1)
 	{
@@ -54,7 +54,6 @@ outputText("Whitney marches up to you as soon as you approach the farm, a stoic 
 		return;
 	}
 	
-	var temporary:Number = 0;
 	//Farm not yet discovered
 	if(player.statusEffectv1(StatusEffects.MetWhitney) < 2) {
 		clearOutput();
@@ -93,11 +92,6 @@ outputText("Whitney marches up to you as soon as you approach the farm, a stoic 
 		else if(flags[kFLAGS.WHITNEY_FLIPPED_OUT_OVER_KELLY] == 1) outputText("You aren't welcome on the farm proper, but you can see Kelly cantering about the fields, looking for you.");
 		else outputText("Whitney's farm is remarkably large for such a humble operation.  What do you want to do?");
 		menu();
-		var keltEvent:Number = 0;
-		var milkYou:Number = 0;
-		var milkJojo:Number = 0;
-		var cockMilk:Number = 0;
-		var marble:Number = 0;
 		if(player.hasStatusEffect(StatusEffects.Kelt) && !player.hasStatusEffect(StatusEffects.KeltOff) && flags[kFLAGS.KELT_KILLED] <= 0) {
 			if(flags[kFLAGS.KELT_BREAK_LEVEL] >= 4) addButton(1,"Kelly",kelly.breakingKeltOptions);
 			else addButton(1,"Kelt",kelly.breakingKeltOptions);
@@ -130,15 +124,17 @@ outputText("Whitney marches up to you as soon as you approach the farm, a stoic 
 private function whitneyMilkerHookup(breast:Boolean = true):void {
 	spriteSelect(SpriteDb.s_whitney);
 	clearOutput();
-	outputText("Whitney takes the gear back to her farm after promising to have it working within the hour.  She did leave you with a cryptic warning to \"<i>leave the milkings to the beasts, lest you become one</i>.</i>\"\n\nYou shrug and head back to check up on camp.");
+	outputText("Whitney takes the gear back to her farm after promising to have it working within the hour.  She did leave you with a cryptic warning to \"<i>leave the milkings to the beasts, lest you become one</i>.</i>\"\n\n");
 	if(breast) {
 		player.createKeyItem("Breast Milker - Installed At Whitney's Farm",0,0,0,0);
 		player.removeKeyItem("Breast Milker");
 	}
 	else {
+		outputText("Oh and [name], you might be able to find an additional attachment for this thing which could boost the productivity. ");
 		player.createKeyItem("Cock Milker - Installed At Whitney's Farm",0,0,0,0);
 		player.removeKeyItem("Cock Milker");
 	}
+	outputText("You shrug and head back to check up on camp.\n\n");
 	doNext(camp.returnToCampUseOneHour);
 }
 //[NO]
@@ -526,7 +522,6 @@ public function meetMarble():void {
 }
 
 public function exploreFarm():void {
-	var marbling:Number = 0;
 	var explore:Number = 0;
 	
 	//Marble after-rape

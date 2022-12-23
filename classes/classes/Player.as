@@ -2698,6 +2698,7 @@ use namespace CoC;
 				}
 				//Prevent negatives
 				if (HP < minHP()){
+					if (hasPerk(PerkLib.Immortality)) takeLustDamage(minHP() - HP);
 					HP = minHP();
 					//This call did nothing. There is no event 5010: if (game.inCombat) game.doNext(5010);
 				}
@@ -2817,6 +2818,14 @@ use namespace CoC;
 					else mult -= 50;
 				}
 				else mult -= 35;
+			}
+			if(statusEffectv1(StatusEffects.PerfectClarity) > 0) {
+				if (perkv1(IMutationsLib.DiamondHeartIM) >= 3) {
+					mult += 20;
+				}
+				else {
+					mult += 35;
+				}
 			}
 			// Uma's Massage bonuses
 			var sac:StatusEffectClass = statusEffectByType(StatusEffects.UmasMassage);

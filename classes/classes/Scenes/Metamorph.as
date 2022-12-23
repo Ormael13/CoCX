@@ -1918,8 +1918,8 @@ import classes.internals.SaveableState;
 			switch(arr[14]) {// Ovipositor ( Bee/Spider egg laying )
 				case "Ant": 	if(!player.canOvipositAnt()) CoC.instance.transformations.OvipositorAnt.applyEffect();		break;
 				case "Human": 	if(!player.canOviposit()) CoC.instance.transformations.RemoveOvipositor.applyEffect();		break;
-				case "Spider": 	if(player.canOvipositSpider()) CoC.instance.transformations.OvipositorSpider.applyEffect();
-                                player.createPerk(PerkLib.SpiderOvipositor, 0, 0, 0, 0);break;
+				case "Mantis": 	if(!player.canOvipositMantis()) CoC.instance.transformations.OvipositorMantis.applyEffect();break;
+				case "Spider": 	if(!player.canOvipositSpider()) CoC.instance.transformations.OvipositorSpider.applyEffect();break;
 				default:		if(player.canOviposit()) CoC.instance.transformations.RemoveOvipositor.applyEffect();		break;
 			}
 			switch(arr[15]) {// Oviposition ( Harpy / Reptile egg laying )

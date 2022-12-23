@@ -368,9 +368,21 @@ public class MagicSpecials extends BaseCombatContent {
 			else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			else bd.requireFatigue(spellCost(40),true);
 		}
+		if (player.isRaceCached(Races.AZAZEL) || player.perkv1(IMutationsLib.DiamondHeartIM) >= 1) {
+			bd = buttons.add("Exorcism",exorcism).disableIf(player.hasStatusEffect(StatusEffects.Exorcism), "Already used in this fight.").hint("Damage any creature above 25% corruption for 50% of its hit point total. Can be used only once per battle. \n");
+			if (player.perkv1(IMutationsLib.DiamondHeartIM) >= 3) bd.requireMana(spellCost(100),true);
+			else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+			else bd.requireMana(spellCost(80),true);
+		}
 		if (player.isRaceCached(Races.DEVIL) || player.perkv1(IMutationsLib.ObsidianHeartIM) >= 1) {
 			bd = buttons.add("Infernal flare", infernalflare).hint("Use corrupted flames to burn your opponent. \n");
 			if (player.perkv1(IMutationsLib.ObsidianHeartIM) >= 3) bd.requireMana(spellCost(50),true);
+			else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+			else bd.requireMana(spellCost(40),true);
+		}
+		if (player.isRaceCached(Races.AZAZEL) || player.perkv1(IMutationsLib.DiamondHeartIM) >= 1) {
+			bd = buttons.add("JudgementFlare",judgementflare).hint("Unleash a burst of holy fire. \n");
+			if (player.perkv1(IMutationsLib.DiamondHeartIM) >= 3) bd.requireMana(spellCost(50),true);
 			else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			else bd.requireMana(spellCost(40),true);
 		}
@@ -727,6 +739,12 @@ public class MagicSpecials extends BaseCombatContent {
 			bd = buttons.add("Maleficium", maleficium).hint("Infuse yourself with corrupt power empowering your magic but reducing your resistance to carnal assault.");
 			if(player.hasStatusEffect(StatusEffects.Maleficium)) {
 				bd.disable("You already empowered with corrupt power!");
+			}
+		}
+		if (player.isRaceCached(Races.AZAZEL) || player.perkv1(IMutationsLib.DiamondHeartIM) >= 1) {
+			bd = buttons.add("PerfectClarity", perfectclarity).hint("Infuse yourself with holy power empowering your magic but reducing your resistance to physical assault.");
+			if(player.hasStatusEffect(StatusEffects.PerfectClarity)) {
+				bd.disable("You already empowered with holy power!");
 			}
 		}
 		if (player.isRaceCached(Races.CHESHIRE)) {
@@ -3389,7 +3407,7 @@ public class MagicSpecials extends BaseCombatContent {
 			return;
 		}
 		clearOutput();
-		outputText("You grin malevolently and weave an arcane sign, causing an infernal fire to surges from below and scorching your opponent ");
+		outputText("You grin malevolently and weave an arcane sign, causing an infernal fire to surge from below and scorching your opponent ");
 		var damage:Number = scalingBonusIntelligence() * 3.2;
 		if (player.perkv1(IMutationsLib.ObsidianHeartIM) >= 2) damage += scalingBonusIntelligence() * 0.8;
 		if (player.perkv1(IMutationsLib.ObsidianHeartIM) >= 3) damage += scalingBonusIntelligence() * 1.6;
@@ -3423,6 +3441,156 @@ public class MagicSpecials extends BaseCombatContent {
 			if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		}
 		if(monster.short == "Holli" && !monster.hasStatusEffect(StatusEffects.HolliBurning)) (monster as Holli).lightHolliOnFireMagically();
+		outputText("\n\n");
+		checkAchievementDamage(damage);
+		flags[kFLAGS.SPELLS_CAST]++;
+	//	if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+	//	spellPerkUnlock();
+		combat.heroBaneProc(damage);
+		statScreenRefresh();
+		if (monster.HP <= monster.minHP())
+		{
+			doNext(endHpVictory);
+		}
+		else
+		{
+			if (monster is Lethice && (monster as Lethice).fightPhase == 3)
+			{
+				outputText("\n\n<i>\"Ouch. Such arcane skills for one so uncouth,\"</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>\"How will you beat me without your magics?\"</i>\n\n");
+				monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
+			}
+			enemyAI();
+		}
+	}
+
+
+	public function perfectclarity():void {
+		clearOutput();
+		player.lust += 50;
+		var clarityDuration:Number = 10;
+		if (player.perkv1(IMutationsLib.DiamondHeartIM) >= 2) clarityDuration += 5;
+		outputText("You gasp as your body fills with holy powers, empowering your spells but making you feel more fragile.\n\n");
+		//if (player.cor < 60 && player.perkv1(IMutationsLib.DiamondHeartIM) >= 1) dynStats("cor", 0.3);
+		player.createStatusEffect(StatusEffects.PerfectClarity,clarityDuration,0,0,0);
+		enemyAI();
+	}
+
+	public function judgementflare():void {
+		clearOutput();
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		doNext(combatMenu);
+		if (player.perkv1(IMutationsLib.DiamondHeartIM) >= 3) useMana(50, Combat.USEMANA_MAGIC);
+		else useMana(40, Combat.USEMANA_MAGIC);
+		combat.darkRitualCheckDamage();
+		//if (player.cor < 60 && player.perkv1(IMutationsLib.ObsidianHeartIM) >= 1) dynStats("cor", 0.3);
+		if (monster.hasStatusEffect(StatusEffects.Shell)) {
+			outputText("As soon as your attack touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your attack!\n\n");
+			flags[kFLAGS.SPELLS_CAST]++;
+			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+			spellPerkUnlock();
+			enemyAI();
+			return;
+		}
+		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
+			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
+			enemyAI();
+			return;
+		}
+		clearOutput();
+		outputText("You concentrate and weave an arcane sign, causing a holy fire to surge from below and scorching your opponent ");
+		var damage:Number = scalingBonusIntelligence() * 3.2;
+		if (player.perkv1(IMutationsLib.DiamondHeartIM) >= 2) damage += scalingBonusIntelligence() * 0.8;
+		if (player.perkv1(IMutationsLib.DiamondHeartIM) >= 3) damage += scalingBonusIntelligence() * 1.6;
+		damage *= spellMod();
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combatMagicalCritical();
+		if (player.perkv1(IMutationsLib.DiamondHeartIM) >= 3) critChance += 20;
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		damage = combat.monsterPureDamageBonus(damage);
+		//High damage to goes.
+		damage = calcInfernoMod(damage, true);
+		if (monster.short == "goo-girl") damage = Math.round(damage * 1.5);
+		if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2);
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
+		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+		if (player.countMiscJewelry(miscjewelries.DMAGETO) > 0) damage *= 1.25;
+		damage = Math.round(damage * combat.fireDamageBoostedByDao());
+		outputText("for ");
+		doFireDamage(damage, true, true);
+		outputText(" damage.");
+		if (crit) outputText(" <b>*Critical Hit!*</b>");
+		//Using fire attacks on the goo]
+		if(monster.short == "goo-girl") {
+			outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy [monster color] skin has lost some of its shimmer.");
+			if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
+		}
+		if(monster.short == "Holli" && !monster.hasStatusEffect(StatusEffects.HolliBurning)) (monster as Holli).lightHolliOnFireMagically();
+		outputText("\n\n");
+		checkAchievementDamage(damage);
+		flags[kFLAGS.SPELLS_CAST]++;
+	//	if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+	//	spellPerkUnlock();
+		combat.heroBaneProc(damage);
+		statScreenRefresh();
+		if (monster.HP <= monster.minHP())
+		{
+			doNext(endHpVictory);
+		}
+		else
+		{
+			if (monster is Lethice && (monster as Lethice).fightPhase == 3)
+			{
+				outputText("\n\n<i>\"Ouch. Such arcane skills for one so uncouth,\"</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>\"How will you beat me without your magics?\"</i>\n\n");
+				monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
+			}
+			enemyAI();
+		}
+	}
+
+	public function exorcism():void {
+		clearOutput();
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		clearOutput();
+		doNext(combatMenu);
+		if (player.perkv1(IMutationsLib.DiamondHeartIM) >= 3) useMana(100, Combat.USEMANA_MAGIC);
+		else useMana(80, Combat.USEMANA_MAGIC);
+		//if (player.cor < 60 && player.perkv1(IMutationsLib.ObsidianHeartIM) >= 1) dynStats("cor", 0.3);
+		if (monster.hasStatusEffect(StatusEffects.Shell)) {
+			outputText("As soon as your attack touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your attack!\n\n");
+			flags[kFLAGS.SPELLS_CAST]++;
+			if(!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell,0,0,0,0);
+			spellPerkUnlock();
+			enemyAI();
+			return;
+		}
+		if ((monster is FrostGiant || monster is YoungFrostGiant) && player.hasStatusEffect(StatusEffects.GiantBoulder)) {
+			if (monster as FrostGiant) (monster as FrostGiant).giantBoulderHit(2);
+			if (monster as YoungFrostGiant) (monster as YoungFrostGiant).youngGiantBoulderHit(2);
+			enemyAI();
+			return;
+		}
+		clearOutput();
+		outputText("You concentrate and weave an arcane sign, causing a holy fire to surge from below and scorching your opponent ");
+		var damage:Number = (monster.maxHP()-monster.minHP())/2;
+		if (monster.cor < 25) {
+			damage = 0;
+			outputText(", but unfortunately for you, the attack has no effect on [themonster] as it is not corrupt enough!")
+		}
+		player.createStatusEffect(StatusEffects.Exorcism, 0, 0, 0, 0);
+
+		if (damage > 0) {
+			outputText("for ");
+			doDamage(damage, true, true);
+			outputText(" damage.");
+		}
 		outputText("\n\n");
 		checkAchievementDamage(damage);
 		flags[kFLAGS.SPELLS_CAST]++;

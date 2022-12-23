@@ -9745,7 +9745,7 @@ public final class Mutations extends MutationsHelper {
         }
         //SPECIAL:
         //Harpy Womb – All eggs are automatically upgraded to large, requires legs + tail to be harpy.
-        if (player.hasPerk(PerkLib.HarpyWomb) < 0 && player.lowerBody == LowerBody.HARPY && player.tailType == Tail.THUNDERBIRD && rand(4) == 0 && changes < changeLimit) {
+        if (!player.hasPerk(PerkLib.HarpyWomb) && player.lowerBody == LowerBody.HARPY && player.tailType == Tail.THUNDERBIRD && rand(4) == 0 && changes < changeLimit) {
             player.createPerk(PerkLib.HarpyWomb, 0, 0, 0, 0);
             outputText("[pg]There's a rumbling in your womb, signifying that some strange change has taken place in your most feminine area. No doubt something in it has changed to be more like a harpy. (<b>You've gained the Harpy Womb perk! All the eggs you lay will always be large so long as you have harpy legs and a thunderbird tail.</b>)");
             changes++;
@@ -14596,6 +14596,12 @@ public final class Mutations extends MutationsHelper {
             player.tallness -= 1 + rand(3);
             changes++;
         }
+
+        if (player.perkv1(IMutationsLib.DiamondHeartIM) >= 1) {
+            outputText("[pg]Your Diamond Heart mutation has transformed to Obsidian heart!");
+            player.createPerk(IMutationsLib.ObsidianHeartIM, player.perkv1(IMutationsLib.DiamondHeartIM),0,0,0);
+            player.removePerk(IMutationsLib.DiamondHeartIM);
+        }
 		DrunkenPowerEmpowerIfPossible();
         player.refillHunger(10);
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
@@ -14657,6 +14663,8 @@ public final class Mutations extends MutationsHelper {
         //Eyes
         if (!transformations.EyesGoat.isPresent()) {
             transformations.EyesGoat.applyEffect(false);
+            if (rand(3) == 0) transformations.EyesChangeColor(["gold"]).applyEffect(false);
+            else transformations.EyesChangeColor(["pure blue"]).applyEffect(false);
             changes++;
         }
 
@@ -14678,10 +14686,13 @@ public final class Mutations extends MutationsHelper {
         player.featherColor = "snow white";
         outputText("Your hair also changes color to match this becoming immaculate white, wich is the color of purity come to think of it. Your fangs retract, your mouth becoming more human and you can't help but smile serenely at the idea of your body being purged of all that nasty stuff leaving space for the perfect you.");
         if (player.tail.type == Tail.DEMONIC)
-            outputText(" Finally your tail covers with fur and scales taking on a noble draconic appearance, gone is the last remnant of the demonic you.");
+            outputText(" Finally your tail covers with fur and scales taking on a noble draconic appearance, gone is the last remnant of the demonic you. ");
+
+        if (rand(3) == 0) transformations.EyesChangeColor(["gold"]).applyEffect();
+        else transformations.EyesChangeColor(["pure blue"]).applyEffect();
 
         if (!player.hasPerk(PerkLib.Phylactery)) {
-            outputText("Finaly your soul begins to resonate with your next form, its power concentrating into a large gem that manifests on your torso. Well you didn't have a phylactery before but I guess that's a thing now? It reminds you of Alvina owns gem come to think of it.\n\n");
+            outputText(" Finaly your soul begins to resonate with your next form, its power concentrating into a large gem that manifests on your torso. Well you didn't have a phylactery before but I guess that's a thing now? It reminds you of Alvina owns gem come to think of it.\n\n");
             player.createPerk(PerkLib.InnerPhylactery, 0,0,0,0);
         }
         outputText("As Alvina herself declared, Want becomes so much more when used not for oneself but others.");
@@ -14691,18 +14702,26 @@ public final class Mutations extends MutationsHelper {
         outputText("You became a shining light in the darkness, an ascendant who transcended and triumphed over evil that of yours and others. A being beyond the demons power with none of the flaws. You are now an Azazel.\n\n");
         player.consumeItem(item);
 
-        //TODO add all Azazel perks effects
-        player.createPerk(PerkLib.JudgementFlare, 0,0,0,0);
-        outputText("<b>Obtained perk: JudgementFlare</b>  "+PerkLib.JudgementFlare.longDesc+"\n");
-        player.createPerk(PerkLib.Exorcism, 0,0,0,0);
-        outputText("<b>Obtained perk: Exorcism</b>  "+PerkLib.Exorcism.longDesc+"\n");
+        if (player.perkv1(IMutationsLib.ObsidianHeartIM) >= 1) {
+            outputText("[pg]Your Obsidian Heart mutation has transformed to Diamond heart!");
+            player.createPerk(IMutationsLib.DiamondHeartIM, player.perkv1(IMutationsLib.ObsidianHeartIM),0,0,0);
+            player.removePerk(IMutationsLib.ObsidianHeartIM);
+        }
+
+        //TODO add Azazel perks effects
+        outputText("<b>Obtained ability: JudgementFlare</b>  The counterpart to infernal flare.\n");
+
+        outputText("<b>Obtained ability: Exorcism</b>  Damage any creature above 25% corruption for 50% of its hit point total. Can be used only once per battle.\n");
+
         player.createPerk(PerkLib.Immortality, 0,0,0,0);
         outputText("<b>Obtained perk: Immortality</b>  "+PerkLib.Immortality.longDesc+"\n");
-        player.createPerk(PerkLib.SealSin, 0,0,0,0);
+
+        player.createPerk(PerkLib.SealSin, 0,0,0,0); //TODO add Azazel perks effects
         outputText("<b>Obtained perk: SealSin</b>  "+PerkLib.SealSin.longDesc+"\n");
-        player.createPerk(PerkLib.PerfectClarity, 0,0,0,0);
-        outputText("<b>Obtained perk: PerfectClarity</b>  "+PerkLib.PerfectClarity.longDesc+"\n");
-        player.createPerk(PerkLib.ConvictionOfPurpose, 0,0,0,0);
+
+        outputText("<b>Obtained ability: PerfectClarity</b>  Deal increased magic damage but take more physical damage, increase evasion slightly.\n");
+
+        player.createPerk(PerkLib.ConvictionOfPurpose, 0,0,0,0); //TODO add Azazel perks effects
         outputText("<b>Obtained perk: ConvictionOfPurpose</b>  "+PerkLib.ConvictionOfPurpose.longDesc+"\n");
 
         player.refillHunger(10);

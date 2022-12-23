@@ -305,7 +305,7 @@ public class TailTransformations extends MutationsHelper {
 				player.tailCount = 1;
 
 				if (doOutput) outputText(desc);
-				//Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.KIRIN));
+				Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.KIRIN));
 			},
 			// is present
 			function (): Boolean {
