@@ -458,6 +458,9 @@ public class PerkLib
 		public static const LiftOff:PerkType = mk("Lift Off", "Lift Off",
 				"Allows you to start combat already flying.",
 				"You've chosen the 'Lift Off' perk, allowing you to start combat already flying.");
+		public static const LustingWarrior:PerkType = mk("Lusting Warrior", "Lusting Warrior",
+				"As a salamander, while in heat or rutting add your libido to your strength as your lust for battle and sex empowers you with might.",
+				"");
 		public static const GreyMagic:PerkType = mk("Grey Magic", "Grey Magic",
 				"Access to learn and cast grey magic spells. (+30 to max lust)",
 				"You've chosen the 'Grey Magic' perk, gaining access to grey spells. (+30 to max lust)")
