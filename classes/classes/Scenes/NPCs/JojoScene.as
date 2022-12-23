@@ -7,8 +7,6 @@ import classes.display.SpriteDb;
 
 import coc.view.CoCButton;
 
-import flash.display.Scene;
-
 public class JojoScene extends NPCAwareContent implements TimeAwareInterface {
 
 		public var pregnancy:PregnancyStore;
@@ -2856,7 +2854,7 @@ private function pureJojoSexMenu():void {
 	jojoSprite();
 	clearOutput();
 	outputText("You ask Jojo if he's in the mood for sex right now. ");
-	if (player.hasPerk(PerkLib.Phylactery) && !player.hasStatusEffect(StatusEffects.DevilPurificationScar)) {
+	if (player.hasPerk(PerkLib.Phylactery) && !player.hasStatusEffect(StatusEffects.DevilPurificationScar) && SceneLib.alvinaFollower.JojoDevilPurification == 0) {
 		jojoFreaksOutSoulless();
 	}
 

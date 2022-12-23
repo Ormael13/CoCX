@@ -37,7 +37,7 @@ import classes.StatusEffects;
 		}
 
 		override public function canUse():Boolean {
-			if (player.isRace(Races.AZAZEL, 1, false))
+			if (player.isRace(Races.DEVIL, 1, false))
 			{
 				if (player.hasPureLegendaryItem()) {
 					return true;
