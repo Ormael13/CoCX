@@ -3579,7 +3579,8 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		clearOutput();
 		outputText("You smite [themonster] by drawing on [monster his] inner corruption and igniting it like a match in an oil barrel. [Themonster] wails in pain as you deliver the devastating blow, [monster his] body shining as it is burnt from the inside by [monster his] own corruption. Repent sinner!");
-		var damage:Number = (monster.maxHP()-monster.minHP())/2;
+		var damage:Number = ((monster.maxHP()-monster.minHP()) * ((monster.cor / 2) / 100) / 2);
+		//Deal damage to any creature above 25% corruption for 50% for a percentage of hit point equal to half its corruption percentage
 		if (monster.cor < 25) {
 			damage = 0;
 			outputText(", but unfortunately for you, the attack has no effect on [themonster] as it is not corrupt enough!")

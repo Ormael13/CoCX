@@ -14628,7 +14628,6 @@ public final class Mutations extends MutationsHelper {
         //physical changes
         //legs
         if (player.lowerBody != LowerBody.HOOFED) {
-            outputText("[pg]");
             CoC.instance.transformations.LowerBodyHoofed(2).applyEffect(false);
             changes++;
         }
@@ -14656,10 +14655,11 @@ public final class Mutations extends MutationsHelper {
         }
         //Face
         if (player.faceType != Face.INNOCENT) {
-            outputText("[pg]");
             transformations.FaceInnocent.applyEffect(false);
             changes++;
         }
+        if (player.hairType != Hair.NORMAL)
+            transformations.HairHuman.applyEffect(false);
         //Eyes
         if (!transformations.EyesGoat.isPresent()) {
             transformations.EyesGoat.applyEffect(false);
@@ -14671,19 +14671,19 @@ public final class Mutations extends MutationsHelper {
         outputText("You feel smarter and clearer of mind then before however as you finish the Sage medecine the legendary gear in your inventory begins to radiate along with your "+
                 (player.hasPerk(PerkLib.Phylactery) ? "Phylactery":"chest") + " as your very soul begin shining.\n\n");
 
-
         if (player.hasPerk(PerkLib.Phylactery) && !player.hasPerk(PerkLib.InnerPhylactery)) {
-            outputText("[pg]You begin crying torrent as emotions overflow your mind again, no longer dimmed by the phylactery and all encompassing. Like a beating heart the pendant press against your chest, the gem slowly going through like if your body was fluid until it rest at your core where it has always belonged, the gem fusing with the flesh of your torso as body and soul are reunited.\n\n");
+            outputText("You begin crying torrent as emotions overflow your mind again, no longer dimmed by the phylactery and all encompassing. Like a beating heart the pendant press against your chest, the gem slowly going through like if your body was fluid until it rest at your core where it has always belonged, the gem fusing with the flesh of your torso as body and soul are reunited.\n\n");
             player.createPerk(PerkLib.InnerPhylactery, 0,0,0,0);
         }
-
-        outputText("As the holy item within your hand is turned to purifying energies the black of any remaining corruption is washed away from you like night by the morning sun, your body surging with raw magic. Your powers feels boundless only restricted by your imagination and how you plan to use them. Overcome by the torrent of swirling emotions, flowing power and the pleasure of the change you achieve what may be the greatest orgasm in your life cuming witheout reserve or shame is this what they call true fulfillment?");
+        outputText("As the holy item within your hand is turned to purifying energies the black of any remaining corruption is washed away from you like night by the morning sun, your body surging with raw magic. Your powers feels boundless only restricted by your imagination and how you plan to use them. Overcome by the torrent of swirling emotions, flowing power and the pleasure of the change you achieve what may be the greatest orgasm in your life cuming witheout reserve or shame is this what they call true fulfillment?\n\n");
 
         //transformation texts
         if (player.wings.type != Wings.NONE) outputText("Your wings change color and shape turning into large feathery white wings larger then your old pair. ");
         else outputText("A knot of pain forms in your shoulders as they tense up. With a surprising force, a pair of immaculate white feathered wings sprout from your back, ripping a pair of holes in the back of your [armor].");
-        player.hairColor = "snow white";    //TODO update color
-        player.featherColor = "snow white";
+        player.hairColor = "immaculate white";
+        player.featherColor = "immaculate white";
+        player.furColor = "immaculate white";
+        player.scaleColor = "immaculate white";
         outputText("Your hair also changes color to match this becoming immaculate white, wich is the color of purity come to think of it. Your fangs retract, your mouth becoming more human and you can't help but smile serenely at the idea of your body being purged of all that nasty stuff leaving space for the perfect you.");
         if (player.tail.type == Tail.DEMONIC)
             outputText(" Finally your tail covers with fur and scales taking on a noble draconic appearance, gone is the last remnant of the demonic you. ");

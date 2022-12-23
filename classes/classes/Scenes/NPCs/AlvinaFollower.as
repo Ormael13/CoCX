@@ -319,7 +319,7 @@ public function alvinaThirdEncounterYesNeverWon():void
 		startCombat(new Alvina());
 	}
 
-	if (FightForAlvina) alvinaDontFightWon();
+	else if (FightForAlvina) alvinaDontFightWon();
 	else if (player.level == 185) {
 		outputText("Alvina backs away terrified as you beat on her, attack after attack unleashing powers not meant to be used by mortals hand against the confused archdemon who in panic replies.\n\n");
 		outputText("\"<i>Who are you… WHAT are you?! These are no abilities a simple mortal should ever be able to wear just what is this monstrous power! This is ridiculous, completely absurd! I am stronger than a god. I should be able to topple a little insect like you with ease so why...WHY AM I LOSING?!</i>\"\n\n");
@@ -667,9 +667,9 @@ public function alvinaThirdEncounterTakeHer():void
 		outputText("\"<i>Release my emotions? Repent? I'm a demon [name] do I have to spell it for you? D E M O N! Do you realise that me becoming human again would require nothing short of a damn miracle?!? What are you going to do? Purge the corruption out of me?</i>\"\n\n");
 		outputText("From your pocket you pull out the Marae pearl. Purity manifest, the immaculate pearl shines before Alvina eyes which tremble before it.\n\n");
 		outputText("\"<i>Pure… immaculate… the will of the tree goddess in the form of a gem. Did you actually plan for this all along?</i>\"\n\n");
-		outputText("She might pretend she's a demon but her soul still exists albeit outside her body. While she is indeed deeply corrupted there's no telling that a powerful purifying agent couldn't fix her up so long as she genuinely wishes to change, her demonic nature as a natural shapeshifter should play itself up and assist it though you have no idea of what a purified demon would look like. \n\n");
+		outputText("She might pretend she's a demon but her soul still exists albeit outside her body. While she is indeed deeply corrupted there's no telling that a powerful purifying agent couldn't fix her up so long as she genuinely wishes to change, her demonic nature as a natural shapeshifter should play itself up and assist it, though you have no idea of what a purified demon would look like. \n\n");
 		outputText("\"<i>The very notion is ludicrous, absurd. You're telling me that if I reject my own corrupted nature hard enough it will just work? What kind of whimsical way of thinking is that?! Do you hear yourself talk here?! Well know what, just to humor you I'll try, and if I fail I can always just off myself as I had originally planned.</i>\"\n\n");
-		outputText("Alvina grabs the pearl from your hands, her fell eyes reflecting on the surface before she gulps it down. She begin to focus, closing her eyes and at first nothing seems to happen. You're about to sigh in disappointment when the tips of her pitch black hair strands begin to bleach, growing increasingly pale. At first the white gains a few centimeters before the black slightly swallows it back, but it is like pushing back against a tidal wave as the white begins creeping all the way up to the root. While she doesn't exactly become human again, many of her fiendish traits are revised into something more natural and noble, turning her into some kind of new chimeric hybrid. Her demon tail writhes and changes shape before covering in immaculate fur and draconic scales. Finally Alvina skin tone lightens up slightly as her fleshy wings membrane melt and change, covered with feathers of pure white. Alvina opens her formerly embery, now golden horizontal slitted eyes in absolute confusion marveling as her entire body is reshaped.\n\n");
+		outputText("Alvina grabs the pearl from your hands, her fell eyes reflecting on the surface before she gulps it down. She begin to focus, closing her eyes and at first nothing seems to happen. You're about to sigh in disappointment when the tips of her pitch black hair strands begin to bleach, growing increasingly pale. At first the white gains a few centimeters before the black slightly swallows it back, but it is like pushing back against a tidal wave as the white begins creeping all the way up to the root. While she doesn't exactly become human again, many of her fiendish traits are revised into something more natural and noble, turning her into some kind of new chimeric hybrid. Her demon tail writhes and changes shape before covering in immaculate white fur and draconic scales. Finally Alvina's skin tone lightens up slightly as her fleshy wings membranes melt and change, covered with feathers of pure white. Alvina opens her formerly embery, now golden horizontal slitted eyes in absolute confusion marveling as her entire body is reshaped.\n\n");
 		outputText("\"<i>I… I am one with myself and the world, I've seen the depths of wants but also acquired the understanding. This feeling [name], it's like staring at the world first the first time, a dimension beneath the dimensions where all rules of creation converge. It's like I stand as a grain of sand in the middle of everything so small but capable of altering the fabrics of reality so long as it keep flowing harmoniously with the natural order. Is this godhood? No it is not… gods are limited in what they can do… their wants are restrained by their own petty desires and lack of imagination. To see what I see right now [name]. I have to concentrate not to lose myself into the sea of possible past futures and alternatives. It is as you first said, Mareth is damaged… wounded but not beyond repair. The gods can't fix this, heck if no one does anything the wound will only get worse. But I can… I and my descendents can fix this wound caused by the corruption. </i>\"\n\n");
 		outputText("\"<i>Removing the demon's will not fix Mareth; the corruption has run too deep; it's literally in the mind of the denizens now. Even if we remove the plant and kill all the demon's new demons could easily arise from the remaining corrupted roots. All it takes is for a particularly lusty mortal to go on a lust craze and spontaneously lose their soul and we will be back to square one. As for you [name], you may think you are but a huma,n but within you rest a spark capable of rewriting history as we see it.</i>\"\n\n");
 		outputText("\"<i>The power to beat impossible odds and change yourself infinitely, to rewrite your own mistakes into success to the desired outcome and change the future… only… are you even aware of your own power? Maybe you use it subconsciously to begin with. You are an anomaly [name], one of the few beings capable of changing their own fates and that of others at will. I see now what I must do, and it starts by pledging my body and souls to you so as to ensure that you may accomplish everything you set your goals upon. Undo past mistakes and put Mareth onto the right track. You embody everything I've worked so hard to see.</i>\"\n\n");
@@ -683,7 +683,7 @@ public function alvinaThirdEncounterTakeHer():void
 		AlvinaPurified = true;
 		outputText("You head back to camp, Alvina following you.\n\n");
 		outputText("<b>Alvina has joined you as a follower.</b>\n\n");
-		flags[kFLAGS.ALVINA_FOLLOWER] = 13;
+		flags[kFLAGS.ALVINA_FOLLOWER] = 12;
 		awardAchievement("Dawn chasing away the night", kACHIEVEMENTS.DAWN_CHASING_AWAY_THE_NIGHT);
 
 		alvinaMakeLovePure();
@@ -700,7 +700,7 @@ public function alvinaThirdEncounterTakeHer():void
 		outputText("With a heavy heart you pick up the broken pendant if only as a memento. She deserved better than this.\n\n");
 		outputText("<b>Found Alvina's Shattered Phylactery</b>\n\n");
 		player.createKeyItem("Alvina's Shattered Phylactery", 0, 0, 0, 0);
-		flags[kFLAGS.ALVINA_FOLLOWER] = 13;
+		flags[kFLAGS.ALVINA_FOLLOWER] = 12;
 		doNext(camp.returnToCampUseSixHours);
 	}
 	public function alvinaMakeLovePure():void {
@@ -723,6 +723,7 @@ public function alvinaMainCampMenu():void
 	clearOutput();
 	outputText("You head out to meet Alvina in her hidden camp. She is in the middle of an experiment, as usual.\n\n");
 	if (player.hasStatusEffect(StatusEffects.DevilPurificationScar))
+		alvinaFreaksDevilPurification();
 	outputText("\"<i>Well hello [name], what brings you to me today?</i>\"\n\n");
 	menu();
 	addButton(0, "Appearance", alvinaMainCampMenuAppearance).hint("Examine Alvina detailed appearance.");
@@ -1664,10 +1665,9 @@ public function postMarriageSleep():void {
 		addButton(0, "Infernal Oil", alvinaPureInfernalOil)
 			//.disableIf(!player.hasPerk(PerkLib.Phylactery) || !player.hasPerk(PerkLib.Soulless), "Requires you to be soulless")
 			.disableIf(player.hasItem(consumables.INFWINE), "You need this item to ask her about it DUH...")
-			.disableIf(AlvinaInfernalOilCooldown > 0);	//TODO
+			.disableIf(AlvinaInfernalOilCooldown > 0);
 		addButton(1, "Sex", alvinaPureSexMenu);
-		if (sceneHunter.other)
-			addButton(5, "Corrupt Alvi", alvinaMainCampMenu).hint("Follows Corrupt Alvina as though you had joined her before the fight.");
+		addButton(14, "Back", camp.campLoversMenu);
 	}
 
 	public function alvinaPureInfernalOil():void {
