@@ -336,8 +336,8 @@ public function alvinaThirdEncounterYesNeverWon():void
 		outputText("<b>Found Alvina's Shattered Phylactery</b>\n\n");
 		player.createKeyItem("Alvina's Shattered Phylactery", 0, 0, 0, 0);
 		flags[kFLAGS.ALVINA_FOLLOWER] = 12;
-		awardAchievement("The end and the beginning", kACHIEVEMENTS.THE_END_AND_THE_BEGINNING);
-		if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) awardAchievement("Beyond gods and mortals", kACHIEVEMENTS.BEYOND_GODS_AND_MORTALS);
+		awardAchievement("The end and the beginning", kACHIEVEMENTS.GENERAL_THE_END_AND_THE_BEGINNING);
+		if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) awardAchievement("Beyond gods and mortals", kACHIEVEMENTS.GENERAL_BEYOND_GODS_AND_MORTALS);
 		doNext(camp.returnToCampUseSixHours);
 	}
 }
@@ -684,7 +684,7 @@ public function alvinaThirdEncounterTakeHer():void
 		outputText("You head back to camp, Alvina following you.\n\n");
 		outputText("<b>Alvina has joined you as a follower.</b>\n\n");
 		flags[kFLAGS.ALVINA_FOLLOWER] = 12;
-		awardAchievement("Dawn chasing away the night", kACHIEVEMENTS.DAWN_CHASING_AWAY_THE_NIGHT);
+		awardAchievement("Dawn chasing away the night", kACHIEVEMENTS.GENERAL_DAWN_CHASING_AWAY_THE_NIGHT);
 
 		alvinaMakeLovePure();
 	}
