@@ -1,10 +1,7 @@
-﻿package classes.Scenes.Places {
+package classes.Scenes.Places {
 import classes.*;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
-import classes.Items.Consumables.SimpleConsumable;
-import classes.Items.Other.SimpleUseable;
-import classes.Scenes.NPCs.AlvinaFollower;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.Places.TelAdre.*;
 import classes.Scenes.SceneLib;
