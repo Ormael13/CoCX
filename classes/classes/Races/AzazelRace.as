@@ -41,20 +41,24 @@ public class AzazelRace extends Race {
 	
 	public override function setup():void {
 		addScores()
-				.legType(LowerBody.HOOFED, +1)
-				.tailType(ANY(Tail.GOAT, Tail.AZAZEL), +1)
-				.wingType(ANY(Wings.PUREDEVILFEATHER), +4)
-				.armType(Arms.DEVIL, +1)
 				.hornType(ANY(Horns.GOAT, Horns.GOATQUAD), +1)
 				.earType(Ears.GOAT, +1)
 				.faceType(Face.INNOCENT, +1)
+				.tongueType(Tongue.HUMAN, +1)
 				.eyeType(ANY(Eyes.GOAT), +1)
+				.tailType(ANY(Tail.GOAT, Tail.AZAZEL), +1)
+				.armType(Arms.DEVIL, +1)
+				.legType(LowerBody.HOOFED, +1)
+				.wingType(ANY(Wings.PUREDEVILFEATHER), +4)
 				.customRequirement("","not Devil",
 						function (body:BodyData):Boolean {
 							return !(DevilRace.isDevilLike(body));
 						}, 0, -1000);
 		addScoresAfter(8)
 				.eyeColor(ANY(AzazelEyeColors), +1)
+				.hairTypeAndColor1(ANY(Hair.NORMAL),ANY("immaculate white"), +2)
+				.featherColor1(ANY("immaculate white"), +1)
+				.furColor1(ANY("immaculate white"), +1)
 				.height(LESS_THAN(48), +1)
 				//.cockOrVaginaOfType(CockTypesEnum.HORSE, VaginaClass.DEMONIC, +1)
 				.corruption(0, +3)
@@ -68,7 +72,7 @@ public class AzazelRace extends Race {
 					"str.mult": +0.55,
 					"spe.mult": -0.20,
 					"int.mult": +0.80,
-					"lib.mult": +0.65,
+					"wis.mult": +0.65,
 					"maxlust_base": +90,
 					"sens": +15
 				})
@@ -81,20 +85,20 @@ public class AzazelRace extends Race {
 					"str.mult": +0.75,
 					"spe.mult": -0.25,
 					"int.mult": +1.30,
-					"lib.mult": +1.00,
+					"wis.mult": +1.00,
 					"maxlust_base": +170,
 					"sens": +40
 				})
 				.end();
-		
-		buildTier(21, "true azazel")
+
+		buildTier(29, "true azazel")
 				.namesTauric("true azazel", "true azazel-taur")
 				.requirePreviousTier()
 				.buffs({
-					"str.mult": +0.95,
+					"str.mult": +1.00,
 					"spe.mult": -0.30,
-					"int.mult": +1.80,
-					"lib.mult": +1.20,
+					"int.mult": +2.50,
+					"wis.mult": +1.50,
 					"maxlust_base": +220,
 					"sens": +50
 				})

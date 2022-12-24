@@ -40,7 +40,7 @@ import classes.StatusEffects;
 	}
 	
 	public function calcDamage(monster:Monster, randomize:Boolean = true, casting:Boolean = true):Number { //casting - Increase Elemental Counter while casting (like Raging Inferno)
-		var baseDamage:Number = (combat.teases.teaseBaseLustDamage() * spellModWhite());
+		var baseDamage:Number = (combat.teases.teaseBaseLustDamage() * 3 * spellModWhite());
 		if (player.hasPerk(PerkLib.VegetalAffinity)) baseDamage *= 1.5;
 		if (player.hasPerk(PerkLib.GreenMagic)) baseDamage *= 2;
 		if (player.hasStatusEffect(StatusEffects.GreenCovenant)) baseDamage *= 2;
@@ -49,11 +49,12 @@ import classes.StatusEffects;
 	
 	override protected function doSpellEffect(display:Boolean = true):void {
 		if (display) {
-			outputText("You concentrate your desire on the nearby plants causing their flowers to spontaneously bloom in a cloud of corrupted pollen.\n");
+			outputText("You concentrate your desire on the nearby plants causing their flowers to spontaneously bloom in a cloud of corrupted pollen.");
 			monster.createStatusEffect(StatusEffects.DeathBlossom, 5, 1, 0, 0);
-			/*var arve:Number = 1;
+			var arve:Number = 1;
 			if (player.hasPerk(PerkLib.ArcaneVenom)) arve += stackingArcaneVenom();
-			while (arve-->0)*/ doSpellEffect2();
+			while (arve-->0) doSpellEffect2();
+			outputText("\n");
 		}
 	}
 	

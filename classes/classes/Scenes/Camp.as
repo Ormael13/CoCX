@@ -1162,7 +1162,7 @@ public class Camp extends NPCAwareContent{
 
 	public function loversCount():Number {
 		var counter:Number = 0;
-		if (flags[kFLAGS.ALVINA_FOLLOWER] > 19) counter++;
+		if (flags[kFLAGS.ALVINA_FOLLOWER] > 19 || SceneLib.alvinaFollower.AlvinaPurified) counter++;
 		if (arianScene.arianFollower()) counter++;
 		if (BelisaFollower.BelisaInCamp) counter++;
 		if (LilyFollower.LilyFollowerState) counter++;
@@ -1795,7 +1795,7 @@ public class Camp extends NPCAwareContent{
 				buttons.add("Aurora", SceneLib.auroraFollower.auroraCampMenu).hint("Check up on Aurora.").disableIf(player.statusEffectv2(StatusEffects.CampSparingNpcsTimers4) > 0, "Training.");
 			}
 			//Alvina
-			if (flags[kFLAGS.ALVINA_FOLLOWER] > 12 && flags[kFLAGS.ALVINA_FOLLOWER] < 20) {
+			if (flags[kFLAGS.ALVINA_FOLLOWER] > 12 && flags[kFLAGS.ALVINA_FOLLOWER] < 20 && !SceneLib.alvinaFollower.AlvinaPurified) {
 				outputText("Alvina isn’t so far from here, having made her [camp] in a corrupted plant groove she created so to have easy access to reagents.\n\n");
 				buttons.add("Alvina", SceneLib.alvinaFollower.alvinaMainCampMenu).hint("Check up on Alvina.");
 			}

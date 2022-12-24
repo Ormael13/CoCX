@@ -20,16 +20,14 @@ public class HellHound extends Monster
 			}
 			else {
 				//Determine the damage to be taken
-				var temp:Number = 15 + rand(10);
+				var temp:Number = (tou + rand(10)) * 2;
 				temp = Math.round(temp);
 				if (player.hasStatusEffect(StatusEffects.Blizzard)) {
-				player.addStatusValue(StatusEffects.Blizzard,1,-1);
-				temp *= 0.2;
-				outputText("Both the hellhound's heads breathe in deeply before blasting a wave of dark fire at you. While the flames don't burn much due to protection of blizzard, the unnatural heat fills your body with arousal. ");
+					player.addStatusValue(StatusEffects.Blizzard,1,-1);
+					temp *= 0.2;
+					outputText("Both the hellhound's heads breathe in deeply before blasting a wave of dark fire at you. While the flames don't burn much due to protection of blizzard, the unnatural heat fills your body with arousal. ");
 				}
-				else {
-				outputText("Both the hellhound's heads breathe in deeply before blasting a wave of dark fire at you. While the flames don't burn much, the unnatural heat fills your body with arousal. ");
-				}
+				else outputText("Both the hellhound's heads breathe in deeply before blasting a wave of dark fire at you. While the flames don't burn much, the unnatural heat fills your body with arousal. ");
 				temp = Math.round(temp);
 				player.takeFireDamage(temp, true);
 				player.takeLustDamage(20+(player.effectiveSensitivity()/10), true);
@@ -83,6 +81,26 @@ public class HellHound extends Monster
 
 		public function HellHound(noInit:Boolean=false)
 		{
+			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) {
+				initStrTouSpeInte(64, 64, 50, 1);
+				initWisLibSensCor(1, 95, 20, 100);
+				this.weaponAttack = 10;
+				this.armorDef = 7;
+				this.armorMDef = 1;
+				this.bonusLust = 125;
+				this.level = 10;
+				this.gems = 15+rand(12);
+			}
+			else {
+				initStrTouSpeInte(81, 81, 70, 1);
+				initWisLibSensCor(1, 97, 22, 100);
+				this.weaponAttack = 12;
+				this.armorDef = 11;
+				this.armorMDef = 2;
+				this.bonusLust = 129;
+				this.level = 20;
+				this.gems = 25+rand(7);
+			}
 			if (noInit) return;
 			trace("HellHound Constructor!");
 			this.a = "the ";
@@ -108,18 +126,10 @@ public class HellHound extends Monster
 			this.skin.growFur({color:"black"});
 			this.hairColor = "red";
 			this.hairLength = 3;
-			initStrTouSpeInte(64, 64, 50, 1);
-			initWisLibSensCor(1, 95, 20, 100);
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
-			this.weaponAttack = 10;
 			this.armorName = "thick fur";
-			this.armorDef = 7;
-			this.armorMDef = 1;
-			this.bonusLust = 125;
 			this.lust = 25;
-			this.level = 10;
-			this.gems = 15+rand(12);
 			this.drop = new WeightedDrop().add(consumables.CANINEP, 3)
 					.addMany(1, consumables.BULBYPP,
 							consumables.KNOTTYP,

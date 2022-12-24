@@ -137,10 +137,10 @@ public class DarkElfScout extends Monster
 			this.armorName = "elven armor";
 			this.armorDef = 4;
 			this.armorMDef = 4;
-			this.bonusLust = 125;
+			this.bonusLust = 124;
 			this.lustVuln = .7;
 			this.lust = 50;
-			this.level = 15;
+			this.level = 14;
 			this.gems = rand(10) + 10;
 			this.drop = new WeightedDrop().
 					add(weaponsrange.BOWLIGH,1).

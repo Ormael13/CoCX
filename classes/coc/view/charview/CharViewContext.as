@@ -66,6 +66,7 @@ public class CharViewContext extends ExecContext {
 					CancerCrabStance: player.hasStatusEffect(StatusEffects.CancerCrabStance),
 					SlimeCore: player.hasPerk(PerkLib.SlimeCore),
 					DarkSlimeCore: player.hasPerk(PerkLib.DarkSlimeCore),
+					AzazelPhylactery: player.hasPerk(PerkLib.InnerPhylactery),
 					showClothing: !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && [Arms.GAZER, Arms.DISPLACER].indexOf(player.arms.type) == -1 && !player.isAlraune() && !player.isSitStancing() && !player.isGargoyleStancing(),
 					showArmClothing: !game.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] && [Arms.GAZER, Arms.DISPLACER, Arms.GARGOYLE, Arms.GARGOYLE_2, Arms.YETI, Arms.HINEZUMI].indexOf(player.arms.type) == -1 && !player.hasStatusEffect(StatusEffects.CancerCrabStance) && !player.isStancing(),
 					showLegClothing: showLegClothing(),
