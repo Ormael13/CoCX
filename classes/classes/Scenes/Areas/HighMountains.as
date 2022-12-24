@@ -142,7 +142,7 @@ public class HighMountains extends BaseContent {
         }, {
             name: "darkelf",
             chance: 0.5,
-            call: darkelfScene.introDarkELfSlaver
+            call: darkelfScene.introDarkELfSniper
         });
     }
 

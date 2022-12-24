@@ -656,7 +656,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			if (!player.hasPerk(PerkLib.Immortality) && player.isRaceCached(Races.AZAZEL)) {
 				outputText("\nYou regain your sence of invulnerability as you are now an Azazel.\n");
-				player.createPerk(PerkLib.Immortality, 0, 0, 0);
+				player.createPerk(PerkLib.Immortality, 0, 0, 0, 0);
 				needNext = true;
 			}
 			//No better place for these since the code for the event is part of CoC.as or one of its included files

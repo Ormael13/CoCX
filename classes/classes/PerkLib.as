@@ -458,9 +458,6 @@ public class PerkLib
 		public static const LiftOff:PerkType = mk("Lift Off", "Lift Off",
 				"Allows you to start combat already flying.",
 				"You've chosen the 'Lift Off' perk, allowing you to start combat already flying.");
-		public static const LustingWarrior:PerkType = mk("Lusting Warrior", "Lusting Warrior",
-				"As a salamander, while in heat or rutting add your libido to your strength as your lust for battle and sex empowers you with might.",
-				"");
 		public static const GreyMagic:PerkType = mk("Grey Magic", "Grey Magic",
 				"Access to learn and cast grey magic spells. (+30 to max lust)",
 				"You've chosen the 'Grey Magic' perk, gaining access to grey spells. (+30 to max lust)")
@@ -3541,6 +3538,8 @@ public class PerkLib
 				"Allows access to Fenrir (AoE) freezing breath attack.");
 		public static const FreezingBreathYeti:PerkType = mk("Freezing Breath (Y)", "Freezing Breath (Y)",
 				"Allows access to Yeti freezing breath attack.");
+		public static const FromTheFrozenWaste:PerkType = mk("From the frozen waste", "Lord of the Frozen Wastes",
+				"The icy wastes where winter reigns are your domain. You are resistant to cold but vulnerable to heat.");
 		public static const FutaFaculties:PerkType = mk("Futa Faculties", "Futa Faculties",
 				"It's super hard to think about stuff that like, isn't working out or fucking!").withBuffs({'int.mult':-0.50});
 		public static const FutaForm:PerkType = mk("Futa Form", "Futa Form",
@@ -3604,8 +3603,8 @@ public class PerkLib
 				"Your natural weapons are charged with raiju electricity adding a lusty discharge effect to all attacks.");
 		public static const LizanRegeneration:PerkType = mk("Lizan Regeneration", "Lizan Regeneration",
 				"Regenerates 1.5% of HP per round in combat and 3% of HP per hour and additional slightly increasing maximal attainable natural healing rate.");
-		public static const FromTheFrozenWaste:PerkType = mk("From the frozen waste", "Lord of the Frozen Wastes",
-				"The icy wastes where winter reigns are your domain. You are resistant to cold but vulnerable to heat.");
+		public static const LustingWarrior:PerkType = mk("Lusting Warrior", "Lusting Warrior",
+				"As a salamander, while in heat or rutting add your libido to your strength as your lust for battle and sex empowers you with might.");
 		public static const Lustzerker:PerkType = mk("Lustzerker", "Lustzerker",
 				"Lustserking increases attack and physical defenses resistance but reduces lust resistance.")
 				.withBuffs({'maxwrath_base':+500});
