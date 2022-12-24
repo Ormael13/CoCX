@@ -341,6 +341,9 @@ public function alvinaThirdEncounterYesNeverWon():void
 		doNext(camp.returnToCampUseSixHours);
 	}
 }
+private function alvinaDies():void {
+	inventory.takeItem(weapons.ATWINSCY);
+}
 public function alvinaThirdEncounterYesNeverLost():void
 {
 	clearOutput();
@@ -538,7 +541,7 @@ public function alvinaThirdEncounterTakeHer():void
 		outputText("Alvina is shocked and confused but decides to nod to your invitation regardless. The two of you go out sightseeing the entire city for the next few hours and even stop at the bakery to share desserts. At the end of the day you climb up a building and take a look at the sky.\n\n");
 		outputText("\"<i>Well I had forgotten how beautiful the stars are with the clouds covering the sky and what not. You clearing the factory that was spraying cloudy fumes all over the place is a blessing.</i>\"\n\n");
 		outputText("You agree that seeing the star is definitively less depressing than the clouds but that it wouldn't be as great if you were alone doing it. Doing things with her today made everything better.\n\n");
-		outputText("Alvina seems lost in thought for a moment before replying \"<i>Everything we see here is impermanent… Those folks will die one day and the food will be consumed or will spoil and rot on its own. Even this city… There's no telling when It'll become a ghost town and be forgotten by everyone and everything. People die [name] because they are bound by a set of laws they can't escape. It kind of sucks because this also creates loss, the other inevitability. One day inevitably you will lose things dear to you… how will you react to it? What's the point of getting attached to things that may be gone tomorrow? Maybe we should just let the demon's win so everyone can live on forever.</i>>\"\n\n");
+		outputText("Alvina seems lost in thought for a moment before replying \"<i>Everything we see here is impermanent… Those folks will die one day and the food will be consumed or will spoil and rot on its own. Even this city… There's no telling when It'll become a ghost town and be forgotten by everyone and everything. People die [name] because they are bound by a set of laws they can't escape. It kind of sucks because this also creates loss, the other inevitability. One day inevitably you will lose things dear to you… how will you react to it? What's the point of getting attached to things that may be gone tomorrow? Maybe we should just let the demon's win so everyone can live on forever.</i>\"\n\n");
 
 		menu();
 		addButton(0, "None", alvinaDateNone).hint("There is no point it's all going to be gone either way.");
@@ -681,6 +684,7 @@ public function alvinaThirdEncounterTakeHer():void
 		outputText("\"<i>[name] I've been fighting it hard until now, pride and everything blinding me to my own feelings but I would like you to take me… here and now, please make me yours.</i>\"\n\n");
 		outputText("You know where this is going ahead of time. This is a story eternally retold in Mareth. Except maybe this one will be slightly different.\n\n");
 		AlvinaPurified = true;
+		player.consumeItem(consumables.P_PEARL);
 		outputText("You head back to camp, Alvina following you.\n\n");
 		outputText("<b>Alvina has joined you as a follower.</b>\n\n");
 		flags[kFLAGS.ALVINA_FOLLOWER] = 12;
@@ -1664,7 +1668,7 @@ public function postMarriageSleep():void {
 		menu();
 		addButton(0, "Infernal Oil", alvinaPureInfernalOil)
 			//.disableIf(!player.hasPerk(PerkLib.Phylactery) || !player.hasPerk(PerkLib.Soulless), "Requires you to be soulless")
-			.disableIf(player.hasItem(consumables.INFWINE), "You need this item to ask her about it DUH...")
+			.disableIf(!player.hasItem(consumables.INFWINE), "You need this item to ask her about it DUH...")
 			.disableIf(AlvinaInfernalOilCooldown > 0);
 		addButton(1, "Sex", alvinaPureSexMenu);
 		addButton(14, "Back", camp.campLoversMenu);
@@ -1681,7 +1685,7 @@ public function postMarriageSleep():void {
 			outputText("You never said you wanted it as is. Could she purify it for you?\n\n");
 			outputText("\"<i>Wait you mean to say you… how flattering. Of all the possible shapes, you would like to look just like me. I would kiss you but you seem to be low on time. This is fine though, give me a day while I concentrate on altering this product and tadaa you will be an Azazel too in no time!</i>\"\n\n");
 			AlvinaInfernalOilCooldown = 1;
-			player.destroyItems(consumables.INFWINE, 1);
+			player.consumeItem(consumables.INFWINE);
 			AlvinaInfernalOilAsked = true;
 			eachMinuteCount(15);
 			doNext(playerMenu);

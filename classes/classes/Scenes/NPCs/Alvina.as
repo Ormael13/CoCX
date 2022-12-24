@@ -371,7 +371,6 @@ public class Alvina extends Monster
 				this.armorMDef = 100;
 				if (SceneLib.alvinaFollower.DefeatedAlvinaFirstStage){
 					this.bonusHP = 4000000;
-					this.drop = new ChainedDrop().add(weapons.DEMSCYT, 1);
 					alvinaMaleficium();
 				}
 				else {
