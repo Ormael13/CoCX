@@ -431,6 +431,23 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					needNext = true;
 				}
 			}
+			//Salamander bullshit
+			if (player.isRaceCached(Races.SALAMANDER,2) && !player.hasPerk(PerkLib.LustingWarrior) && player.hasStatusEffect(StatusEffects.Overheat))
+			{
+
+				outputText("\n\nYour so horny right now... so damn horny, you would beat up someone if only for something to blow up the steam." +
+						" As the thought rush to your mind your body react strangely it would seem your overwelming need as a salamander and your ability to lustzerk has actualy unlocked some form of new power within you." +
+						" You feel newfound strength, the strength required to defeat any adversary if only for a chance to fuck and you are very keen on using it right about now.");
+				player.createPerk(PerkLib.LustingWarrior, 0, 0, 0,0);
+				needNext = true;
+			}
+			if (!player.isRaceCached(Races.SALAMANDER, 2) && player.hasPerk(PerkLib.LustingWarrior))
+			{
+				outputText("\n\nAs you become less of a salamander the prodigious strength granted to you by your incontrollable libido recedes.");
+				player.removePerk(PerkLib.LustingWarrior);
+				needNext = true;
+			}
+
 			if (!player.hasStatusEffect(StatusEffects.Overheat) && (player.isRaceCached(Races.SALAMANDER) || player.isRaceCached(Races.KITSHOO) || player.isRaceCached(Races.HELLCAT) || player.hasStatusEffect(StatusEffects.HinezumiCoat)))
 			{
 				//Argument 1 is weither pc is in heat stage or not 1 means active
