@@ -53,7 +53,7 @@ public class BriarthornSpell extends AbstractGreenSpell {
 	}
 	
 	public function calcDamage(monster:Monster, randomize:Boolean = true, casting:Boolean = true):Number { //casting - Increase Elemental Counter while casting (like Raging Inferno)
-		var baseDamage:Number = (combat.teases.teaseBaseLustDamage() * spellModWhite());
+		var baseDamage:Number = (combat.teases.teaseBaseLustDamage() * 3 * spellModWhite());
 		if (player.hasPerk(PerkLib.VegetalAffinity)) baseDamage *= 1.5;
 		if (player.hasPerk(PerkLib.GreenMagic)) baseDamage *= 2;
 		if (player.hasStatusEffect(StatusEffects.GreenCovenant)) baseDamage *= 2;
@@ -65,14 +65,15 @@ public class BriarthornSpell extends AbstractGreenSpell {
 			outputText("You concentrate on the vines causing them to grow vicious thorns that tear through your opponent's flesh delivering a noxious poison.");
 			if (monster.lustVuln == 0) {
 				if (display) {
-					outputText("\nIt has no effect!  Your foe clearly does not experience lust in the same way as you.\n\n");
+					outputText("\nIt has no effect!  Your foe clearly does not experience lust in the same way as you.\n");
 				}
 				return;
 			}
 			monster.createStatusEffect(StatusEffects.Briarthorn, 6, 0, 0, 0);
-			/*var arve:Number = 1;
+			var arve:Number = 1;
 			if (player.hasPerk(PerkLib.ArcaneVenom)) arve += stackingArcaneVenom();
-			while (arve-->0)*/ doSpellEffect2();
+			while (arve-->0) doSpellEffect2();
+			outputText("\n");
 		}
 	}
 	

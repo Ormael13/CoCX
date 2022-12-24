@@ -340,10 +340,10 @@ public function alvinaThirdEncounterYesNeverWon():void
 		if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) awardAchievement("Beyond gods and mortals", kACHIEVEMENTS.GENERAL_BEYOND_GODS_AND_MORTALS);
 		doNext(camp.returnToCampUseSixHours);
 	}
-}
+}/*
 private function alvinaDies():void {
 	inventory.takeItem(weapons.ATWINSCY);
-}
+}*/
 public function alvinaThirdEncounterYesNeverLost():void
 {
 	clearOutput();
@@ -651,7 +651,6 @@ public function alvinaThirdEncounterTakeHer():void
 		outputText("What do you want to prove? The strength of your conviction of course! Still, proving that you are right is not enough, you want to save this one lost girl from herself. \n\n");
 		outputText("This reply seems to anger Alvina \"<i>I'm through with this shit… Save me? Seriously? You think I can be SAVED? Give me a break, the last thing I deserve is your mercy! If you won't do it then I WILL</i>\"\n\n");
 		outputText("Alvina suddenly grabs her necklace and tosses it on the ground in front of her. You can see the scene going in slow motion as the fallen archmage grabs her scythe with both hands and prepares to smash the pendant with all her might.\n\n");
-
 		menu();
 		addButton(0, "Stop her", alvinaDestroyPhylactoryStopHer)
 			.disableIf(player.spe100 < 80, "You are simply not fast enough to stop her.")
@@ -1776,3 +1775,4 @@ public function postMarriageSleep():void {
 }
 
 }
+
