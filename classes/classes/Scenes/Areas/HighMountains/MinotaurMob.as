@@ -176,7 +176,7 @@ import classes.display.SpriteDb;
 		override public function defeated(hpVictory:Boolean):void
 		{
 			if (flags[kFLAGS.ETNA_FOLLOWER] == 3) SceneLib.etnaScene.etnaMarriageYes4();
-			else SceneLib.highMountains.minotaurMobScene.victoryMinotaurGang();
+			else SceneLib.mountain.minotaurMobScene.victoryMinotaurGang();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -187,7 +187,7 @@ import classes.display.SpriteDb;
 				outputText("\n\nThe minutaurs share a laugh while you cum, but their throbbing erections don't subside in the slightest.");
 				doNext(SceneLib.combat.endLustLoss);
 			} else {
-				SceneLib.highMountains.minotaurMobScene.minotaurDeFeet();
+				SceneLib.mountain.minotaurMobScene.minotaurDeFeet();
 			}
 		}
 

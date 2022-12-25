@@ -30,7 +30,8 @@ public class NosferatuSpell extends AbstractBlackSpell {
 	}
 	
 	override public function calcCooldown():int {
-		return 7;
+		var calcC:int = 7;
+		return calcC;
 	}
 	
 	public function calcDamage(monster:Monster, randomize:Boolean = true, casting:Boolean = true):Number { //casting - Increase Elemental Counter while casting (like Raging Inferno)

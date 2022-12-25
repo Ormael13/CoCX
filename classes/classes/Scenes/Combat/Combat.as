@@ -315,6 +315,10 @@ public class Combat extends BaseContent {
         return magic.spellGreyTier2CooldownImpl();
     }
 
+    public function spellGenericCooldown():Number {
+        return magic.spellGenericCooldownImpl();
+    }
+
     public function healMod():Number {
         return magic.healModImpl();
     }
@@ -6115,7 +6119,7 @@ public class Combat extends BaseContent {
                 WrathWeaponsProc();
                 heroBaneProc(damage);
                 EruptingRiposte();
-                if (player.hasPerk(PerkLib.SwiftCasting) && flags[kFLAGS.ELEMENTAL_MELEE] > 0 && (player.isOneHandedWeapons() || (player.weaponSpecials("Large") && player.hasPerk(PerkLib.GigantGrip))) && player.isHavingFreeOffHand() && !player.statStore.hasBuff("Supercharged")) {
+                if (player.hasPerk(PerkLib.SwiftCasting) && flags[kFLAGS.ELEMENTAL_MELEE] > 0 && (player.isOneHandedWeapons() || player.weapon == weapons.ATWINSCY || (player.weaponSpecials("Large") && player.hasPerk(PerkLib.GigantGrip))) && player.isHavingFreeOffHand() && !player.statStore.hasBuff("Supercharged")) {
                     if (flags[kFLAGS.ELEMENTAL_MELEE] == 1 && CombatAbilities.WhitefireSwiftcast.isUsable) {
                         CombatAbilities.WhitefireSwiftcast.perform();
                     }
