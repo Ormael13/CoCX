@@ -22,6 +22,7 @@ import classes.Scenes.Places.*;
 import classes.Scenes.Places.Boat.SharkGirlScene;
 import classes.Scenes.Places.HeXinDao.AdventurerGuild;
 import classes.Scenes.Places.HeXinDao.JourneyToTheEast;
+import classes.Scenes.Places.TelAdre.Loppe;
 import classes.Scenes.Quests.UrtaQuest;
 
 public class SceneLib {
@@ -226,6 +227,8 @@ public class SceneLib {
     public static var tifaFollower:TifaFollower = new TifaFollower();
 
     public static var tyrantia:TyrantiaFollower = new TyrantiaFollower();
+
+    public static var loppe:Loppe = new Loppe();
 
     public static var urta:Urta = new Urta();
 

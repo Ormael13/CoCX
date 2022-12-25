@@ -231,6 +231,12 @@ use namespace CoC;
 				chance: 0.3,
 				call: bunnyGirl.bunnbunbunMeet
 			}, {
+				name: "usagi",
+				night : false,
+				when: function ():Boolean { return SceneLib.loppe.canEncounterUsagi() },
+				chance: 0.3,
+				call: SceneLib.loppe.encounterUsagi
+			}, {
 				name: "isabella",
 				night : false,
 				when: function ():Boolean {
