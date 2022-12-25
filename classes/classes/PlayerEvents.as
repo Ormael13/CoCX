@@ -1366,7 +1366,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			//Lustzerker perk
 			if (!player.hasPerk(PerkLib.Lustzerker) && (player.isRaceCached(Races.SALAMANDER) || player.isRaceCached(Races.PHOENIX) || player.isRaceCached(Races.KITSHOO))) { //Check for gain of lustzerker - requires legs, arms and tail
-				outputText("\nYou start to feel a weird, slightly unpleasant feeling inside your body. Like many tiny flames coursing through your veins, making you ponder what is happening with your body. Remembering about salamanders' natural talent for entering a berserk-like state, you quess that should be it. [pg](Gained Perk: Lustzerker)");
+				outputText("\nYou start to feel a weird, slightly unpleasant feeling inside your body. Like many tiny flames coursing through your veins, making you ponder what is happening with your body. Remembering about salamanders' natural talent for entering a berserk-like state, you guess that should be it. [pg](Gained Perk: Lustzerker)");
 				player.createPerk(PerkLib.Lustzerker, 0, 0, 0, 0);
 				needNext = true;
 			}
