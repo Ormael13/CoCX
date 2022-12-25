@@ -261,6 +261,9 @@ public class BaseCombatContent extends BaseContent {
 	protected function spellWhiteTier3Cooldown():Number {
 		return combat.magic.spellWhiteTier3CooldownImpl();
 	}
+	protected function spellGenericCooldown():Number {
+		return combat.magic.spellGenericCooldownImpl();
+	}
 	protected function healMod():Number {
 		return combat.magic.healModImpl();
 	}

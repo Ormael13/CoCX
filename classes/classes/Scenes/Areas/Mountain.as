@@ -12,6 +12,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.API.Encounters;
 import classes.Scenes.API.FnHelpers;
 import classes.Scenes.API.GroupEncounter;
+import classes.Scenes.Areas.HighMountains.*;
 import classes.Scenes.Areas.Mountain.*;
 import classes.Scenes.Holidays;
 import classes.Scenes.Monsters.DarkElfScene;
@@ -30,6 +31,7 @@ public class Mountain extends BaseContent
 		public var wormsScene:WormsScene = new WormsScene();
 		public var salon:Salon = new Salon();
 		public var darkelfScene:DarkElfScene = new DarkElfScene();
+		public var minotaurMobScene:MinotaurMobScene = new MinotaurMobScene();
 		
 		public function Mountain()
 		{
@@ -103,6 +105,14 @@ public class Mountain extends BaseContent
 				call: discoverLM,
 				chance: Encounters.ALWAYS
 			},{
+				name: "minomob",
+				night : false,
+				when: function ():Boolean {
+					return flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] >= 3 && player.hasVagina() && flags[kFLAGS.SOUL_SENSE_MINOTAUR_SONS] < 3;
+				},
+				call: minotaurMobScene.meetMinotaurSons,
+				mods: [SceneLib.exploration.furriteMod]
+			}, {
 				name:"minotaur",
 				night : false,
 				chance:minotaurChance,
