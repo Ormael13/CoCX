@@ -18,9 +18,9 @@ public class Minerva extends Monster
 		{
 			outputText("The siren paces around you in circles, waiting for the right moment to strike.  Unexpectedly quick thanks to her clawed feet, she propels herself toward you at full speed.  Her maw opens wide to chomp on you, showing off multiple rows of glinting, razor-sharp teeth.");
 			var damage:int = int((str + 5) - rand(player.tou) - player.armorDef);
-			if (flags[kFLAGS.MINERVA_LVL_UP] >= 12) damage + 340;
-			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 8) damage + 255;
-			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 4) damage + 170;
+			if (flags[kFLAGS.MINERVA_LVL_UP] >= 10) damage + 340;
+			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 6) damage + 255;
+			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 2) damage + 170;
 			else damage + 85;
 			if (player.getEvasionRoll()) {
 				outputText("  You get out of the way just in time, Minerva making a loud chomping sound as she only catches the air.");
@@ -43,9 +43,9 @@ public class Minerva extends Monster
 		{
 			outputText("The blue beauty flaps her wings and launches herself into the air.  Once she's gained as much altitude as she can, she dive-bombs you, her demon-clawed feet leading the attack.");
 			var damage:int = int((str + weaponAttack + 100) - rand(player.tou) - player.armorDef);
-			if (flags[kFLAGS.MINERVA_LVL_UP] >= 12) damage += 400;
-			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 8) damage += 200;
-			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 4) damage += 100;
+			if (flags[kFLAGS.MINERVA_LVL_UP] >= 10) damage += 400;
+			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 6) damage += 200;
+			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 2) damage += 100;
 			speStat.core.value -= 70;
 			if (player.getEvasionRoll()) {
 				outputText("  You jump out of the landing zone just in time, piles of dirt exploding in all directions as Minerva slams into the ground.");
@@ -64,9 +64,9 @@ public class Minerva extends Monster
 		private function tailWhip():void
 		{
 			var damage:int = int((str + 35) - rand(player.tou) - player.armorDef);
-			if (flags[kFLAGS.MINERVA_LVL_UP] >= 12) damage += 140;
-			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 8) damage += 70;
-			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 4) damage += 35;
+			if (flags[kFLAGS.MINERVA_LVL_UP] >= 10) damage += 140;
+			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 6) damage += 70;
+			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 2) damage += 35;
 			outputText("She runs at you, holding the weapon like she's about to chop into your side.  You brace yourself, but when she's only a few feet away, she starts to turn her body.");
 			//[else block]
 			if (damage <= 0) outputText("  Lashing out with a fierce kick you intercept the tail-whip, your [foot] impacting against her strong appendage and totally neutralizing its momentum.");
@@ -86,9 +86,9 @@ public class Minerva extends Monster
 		{
 			outputText("Minerva charges at you, brandishing her halberd's sharp tip toward you.");
 			var damage:int = int((str + weaponAttack) - rand(player.tou));
-			if (flags[kFLAGS.MINERVA_LVL_UP] >= 12) damage += 100;
-			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 8) damage += 50;
-			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 4) damage += 25;
+			if (flags[kFLAGS.MINERVA_LVL_UP] >= 10) damage += 100;
+			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 6) damage += 50;
+			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 2) damage += 25;
 			if (player.getEvasionRoll()) outputText("  You sidestep the attack just as she thrusts the point past your face.");
 			//[else block]
 			else if (damage < 0) outputText("  With all your strength, you swing your [weapon], the blow landing on the side of Minerva's halberd and deflecting the goring strike away from you.");
@@ -104,9 +104,9 @@ public class Minerva extends Monster
 		{
 			outputText("She moves in close, practically right in front of you and raises the halberd.");
 			var damage:int = int((str + 100) - rand(player.tou) - player.armorDef);
-			if (flags[kFLAGS.MINERVA_LVL_UP] >= 12) damage += 400;
-			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 8) damage += 200;
-			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 4) damage += 100;
+			if (flags[kFLAGS.MINERVA_LVL_UP] >= 10) damage += 400;
+			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 6) damage += 200;
+			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 2) damage += 100;
 			if (player.getEvasionRoll()) outputText("  You get out of the way quickly, her attack chopping deeply into the earth. ");
 			//[else block]
 			else if (damage < 0) outputText("  In a mad show of pure skill, you lift your hands, clamping them down on the cheeks of the halberd blade and stop Minerva's attack cold, bewildering the siren in the process.");
@@ -121,9 +121,9 @@ public class Minerva extends Monster
 		private function kiteFire():void
 		{
 			var inteused:Number = inte;
-			if (flags[kFLAGS.MINERVA_LVL_UP] >= 12) inteused *= 4;
-			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 8) inteused *= 3;
-			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 4) inteused *= 2;
+			if (flags[kFLAGS.MINERVA_LVL_UP] >= 10) inteused *= 4;
+			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 6) inteused *= 3;
+			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 2) inteused *= 2;
 			var damage:int = int(10 + (inteused / 3 + rand(inteused / 2)) * 1.5);
 			damage = Math.round(damage);
 			if (player.hasStatusEffect(StatusEffects.Blizzard)) {
@@ -143,9 +143,9 @@ public class Minerva extends Monster
 		private function bootyShortInYoFaceSon():void
 		{
 			outputText("The blue beauty turns around and bends over so far that she uses her halberd like a pole to support herself.  She lifts her shark tail up so you can see her short-shorts hugging perfectly against her ample bottom.  Her tail waves to the left and to the right as she does a little booty shake for you.  The siren gives her big ass a nice, hard slap that echoes off the tower walls, and making it jiggle even more.  She quickly turns around to face you, smirking at what she just did. ");
-			if (flags[kFLAGS.MINERVA_LVL_UP] >= 12) player.takeLustDamage(50 + player.lib / 10 + rand(8), true);
-			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 8) player.takeLustDamage(40 + player.lib / 10 + rand(7), true);
-			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 4) player.takeLustDamage(30 + player.lib / 10 + rand(6), true);
+			if (flags[kFLAGS.MINERVA_LVL_UP] >= 10) player.takeLustDamage(50 + player.lib / 10 + rand(8), true);
+			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 6) player.takeLustDamage(40 + player.lib / 10 + rand(7), true);
+			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 2) player.takeLustDamage(30 + player.lib / 10 + rand(6), true);
 			else player.takeLustDamage(20 + player.lib / 10 + rand(5), true);
 		}
 
@@ -154,9 +154,9 @@ public class Minerva extends Monster
 		private function lickDatPole():void
 		{
 			outputText("Minerva stands, holding her halberd straight up next to her as she looks it over with a seductive stare.  Giving you a suggestive look she rolls out a two-foot long tongue from her mouth, licking a good length of the massive weapon, even wrapping her tongue around it a few times.  Suddenly she sucks her tongue back into her mouth and gives you a little smirk, almost to say \"<i>Yeah, I can do that... and more.</i>\" ");
-			if (flags[kFLAGS.MINERVA_LVL_UP] >= 12) player.takeLustDamage(50 + player.lib / 10 + rand(8), true);
-			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 8) player.takeLustDamage(40 + player.lib / 10 + rand(7), true);
-			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 4) player.takeLustDamage(30 + player.lib / 10 + rand(6), true);
+			if (flags[kFLAGS.MINERVA_LVL_UP] >= 10) player.takeLustDamage(50 + player.lib / 10 + rand(8), true);
+			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 6) player.takeLustDamage(40 + player.lib / 10 + rand(7), true);
+			else if (flags[kFLAGS.MINERVA_LVL_UP] >= 2) player.takeLustDamage(30 + player.lib / 10 + rand(6), true);
 			else player.takeLustDamage(20 + player.lib / 10 + rand(5), true);
 		}
 
@@ -205,31 +205,31 @@ public class Minerva extends Monster
 		override public function defeated(hpVictory:Boolean):void
 		{
 			if (flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] >= 10)
-				SceneLib.highMountains.minervaScene.minervaCorruption.corruptWin();
-			else SceneLib.highMountains.minervaScene.beatUpDatSharpie();
+				SceneLib.mountain.minervaScene.minervaCorruption.corruptWin();
+			else SceneLib.mountain.minervaScene.beatUpDatSharpie();
 		}
 
 		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
 		{
 			if (flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] >= 10)
-				SceneLib.highMountains.minervaScene.minervaCorruption.corruptLoss();
-			else SceneLib.highMountains.minervaScene.loseToMinerva();
+				SceneLib.mountain.minervaScene.minervaCorruption.corruptLoss();
+			else SceneLib.mountain.minervaScene.loseToMinerva();
 		}
 
 		public function Minerva()
 		{
 			if (flags[kFLAGS.MINERVA_LVL_UP] < 1) {
-				initStrTouSpeInte(64, 80, 110, 75);
-				initWisLibSensCor(70, 30, 25, 45);
-				this.weaponAttack = 50;
-				this.armorDef = 7;
-				this.armorMDef = 2;
-				this.bonusHP = 470;
-				this.bonusLust = 78;
-				this.level = 23;//potem zrobic jak purification udane to dostaje nieco lvl up i stat up tez
-				this.additionalXP = 50;
+				initStrTouSpeInte(98, 120, 150, 105);
+				initWisLibSensCor(100, 52, 45, 45);
+				this.weaponAttack = 70;
+				this.armorDef = 11;
+				this.armorMDef = 4;
+				this.bonusHP = 1410;
+				this.bonusLust = 132;
+				this.level = 35;//potem zrobic jak purification udane to dostaje nieco lvl up i stat up tez
+				this.additionalXP = 150;
 			}
-			else if (flags[kFLAGS.MINERVA_LVL_UP] == 12) {
+			else if (flags[kFLAGS.MINERVA_LVL_UP] == 10) {
 				initStrTouSpeInte(268, 320, 350, 255);
 				initWisLibSensCor(250, 162, 145, 45);
 				this.weaponAttack = 170;
@@ -242,15 +242,15 @@ public class Minerva extends Monster
 			}
 			else {	//leave min and max levels to easily balance npc combat
 				var lvlMulti:Number = flags[kFLAGS.MINERVA_LVL_UP];
-				initStrTouSpeInte(64 + 17*lvlMulti, 80 + 20*lvlMulti, 110 + 20*lvlMulti, 75 + 15*lvlMulti);
-				initWisLibSensCor(70 + 15*lvlMulti, 30 + 11*lvlMulti, 25 + 10*lvlMulti, 45);
-				this.weaponAttack = 50 + 10*lvlMulti;
-				this.armorDef = 7 + 2*lvlMulti;
-				this.armorMDef = 2 + lvlMulti;
-				this.bonusHP = 470 + 470*lvlMulti;
-				this.bonusLust = 78 + 27*lvlMulti;
-				this.level = 23 + 6*lvlMulti;
-				this.additionalXP = 50 + 50*lvlMulti;
+				initStrTouSpeInte(98 + 17*lvlMulti, 120 + 20*lvlMulti, 150 + 20*lvlMulti, 105 + 15*lvlMulti);
+				initWisLibSensCor(100 + 15*lvlMulti, 52 + 11*lvlMulti, 45 + 10*lvlMulti, 45);
+				this.weaponAttack = 70 + 10*lvlMulti;
+				this.armorDef = 11 + 2*lvlMulti;
+				this.armorMDef = 4 + lvlMulti;
+				this.bonusHP = 1410 + 470*lvlMulti;
+				this.bonusLust = 132 + 27*lvlMulti;
+				this.level = 35 + 6*lvlMulti;
+				this.additionalXP = 150 + 50*lvlMulti;
 			}//level up giving 2x all growns and so follow next level ups's as long each npc break lvl 100 (also makes npc use new better gear)
 			//corrupted minerva {
 			//TODO: - Increase Corrupt Minerva’s combat stats by 10%
@@ -314,18 +314,18 @@ public class Minerva extends Monster
 			this.wings.type = Wings.HARPY;
 			this.wings.desc = "fluffy feathery";
 			this.createPerk(PerkLib.UniqueNPC, 0, 0, 0, 0);
-			if (flags[kFLAGS.MINERVA_LVL_UP] >= 1) this.createPerk(PerkLib.JobWarrior, 0, 0, 0, 0);
-			if (flags[kFLAGS.MINERVA_LVL_UP] >= 2) this.createPerk(PerkLib.JobBrawler, 0, 0, 0, 0);
-			if (flags[kFLAGS.MINERVA_LVL_UP] >= 3) this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
-			if (flags[kFLAGS.MINERVA_LVL_UP] >= 4) this.createPerk(PerkLib.EpicStrength, 0, 0, 0, 0);
-			if (flags[kFLAGS.MINERVA_LVL_UP] >= 5) this.createPerk(PerkLib.JobSorcerer, 0, 0, 0, 0);
-			if (flags[kFLAGS.MINERVA_LVL_UP] >= 6) this.createPerk(PerkLib.EpicSpeed, 0, 0, 0, 0);
-			if (flags[kFLAGS.MINERVA_LVL_UP] >= 7) this.createPerk(PerkLib.LegendaryStrength, 0, 0, 0, 0);
-			if (flags[kFLAGS.MINERVA_LVL_UP] >= 8) this.createPerk(PerkLib.CheetahI, 0, 0, 0, 0);
-			if (flags[kFLAGS.MINERVA_LVL_UP] >= 9) this.createPerk(PerkLib.LegendarySpeed, 0, 0, 0, 0);
-			if (flags[kFLAGS.MINERVA_LVL_UP] >= 10) this.createPerk(PerkLib.PrestigeJobTempest, 0, 0, 0, 0);
-			if (flags[kFLAGS.MINERVA_LVL_UP] >= 11) this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
-			if (flags[kFLAGS.MINERVA_LVL_UP] >= 12) this.createPerk(PerkLib.MythicalSpeed, 0, 0, 0, 0);
+			this.createPerk(PerkLib.JobWarrior, 0, 0, 0, 0);
+			this.createPerk(PerkLib.JobBrawler, 0, 0, 0, 0);
+			if (flags[kFLAGS.MINERVA_LVL_UP] >= 1) this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
+			if (flags[kFLAGS.MINERVA_LVL_UP] >= 2) this.createPerk(PerkLib.EpicStrength, 0, 0, 0, 0);
+			if (flags[kFLAGS.MINERVA_LVL_UP] >= 3) this.createPerk(PerkLib.JobSorcerer, 0, 0, 0, 0);
+			if (flags[kFLAGS.MINERVA_LVL_UP] >= 4) this.createPerk(PerkLib.EpicSpeed, 0, 0, 0, 0);
+			if (flags[kFLAGS.MINERVA_LVL_UP] >= 5) this.createPerk(PerkLib.LegendaryStrength, 0, 0, 0, 0);
+			if (flags[kFLAGS.MINERVA_LVL_UP] >= 6) this.createPerk(PerkLib.CheetahI, 0, 0, 0, 0);
+			if (flags[kFLAGS.MINERVA_LVL_UP] >= 7) this.createPerk(PerkLib.LegendarySpeed, 0, 0, 0, 0);
+			if (flags[kFLAGS.MINERVA_LVL_UP] >= 8) this.createPerk(PerkLib.PrestigeJobTempest, 0, 0, 0, 0);
+			if (flags[kFLAGS.MINERVA_LVL_UP] >= 9) this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
+			if (flags[kFLAGS.MINERVA_LVL_UP] >= 10) this.createPerk(PerkLib.MythicalSpeed, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

@@ -30,7 +30,9 @@ public class BloodChainsSpell extends AbstractBloodSpell {
 	}
 	
 	override public function calcCooldown():int {
-		return 3;
+		var calcC:int = 3;
+		calcC += spellGenericCooldown();
+		return calcC;
 	}
 	
 	public function calcDuration():int {

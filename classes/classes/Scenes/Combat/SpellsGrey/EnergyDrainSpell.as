@@ -25,7 +25,9 @@ public class EnergyDrainSpell extends AbstractGreySpell {
 	}
 	
 	override public function calcCooldown():int {
-		return 7;
+		var calcC:int = 4;
+		calcC += spellGenericCooldown();
+		return calcC;
 	}
 	
 	public function calcDuration():int {

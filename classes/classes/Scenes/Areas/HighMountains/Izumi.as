@@ -17,28 +17,28 @@ public class Izumi extends Monster
 		{
 			var lvlMulti:Number = flags[kFLAGS.IZUMI_LVL_UP];
 			if (flags[kFLAGS.IZUMI_LVL_UP] < 1) {
-				initStrTouSpeInte(230, 150, 110, 110);
-				initWisLibSensCor(110, 30, 25, 15);
-				this.weaponAttack = 50;
-				this.armorDef = 14;
-				this.armorMDef = 10;
-				this.bonusHP = 800;
-				this.bonusLust = 85;
-				this.level = 30;
-				this.additionalXP = 150;
+				initStrTouSpeInte(280, 190, 140, 130);
+				initWisLibSensCor(130, 50, 35, 15);
+				this.weaponAttack = 60;
+				this.armorDef = 16;
+				this.armorMDef = 12;
+				this.bonusHP = 1200;
+				this.bonusLust = 127;
+				this.level = 42;
+				this.additionalXP = 200;
 			}
-			else if (flags[kFLAGS.IZUMI_LVL_UP] <= 5) {	//leave min and max levels to easily balance npc combat
-				initStrTouSpeInte(230 + 25*lvlMulti, 150 + 20*lvlMulti, 110 + 15*lvlMulti, 110 + 10*lvlMulti);
-				initWisLibSensCor(110 + 10*lvlMulti, 30 + 10*lvlMulti, 25 + 5*lvlMulti, 15);
-				this.weaponAttack = 50 + 5*lvlMulti;
-				this.armorDef = 14 + lvlMulti;
-				this.armorMDef = 10 + lvlMulti;
-				this.bonusHP = 800 + 200*lvlMulti;
-				this.bonusLust = 85 + 21*lvlMulti;
-				this.level = 30 + 6*lvlMulti;
-				this.additionalXP = 150 + 25*lvlMulti;
+			else if (flags[kFLAGS.IZUMI_LVL_UP] <= 3) {	//leave min and max levels to easily balance npc combat
+				initStrTouSpeInte(280 + 25*lvlMulti, 190 + 20*lvlMulti, 140 + 15*lvlMulti, 130 + 10*lvlMulti);
+				initWisLibSensCor(130 + 10*lvlMulti, 50 + 10*lvlMulti, 35 + 5*lvlMulti, 15);
+				this.weaponAttack = 60 + 5*lvlMulti;
+				this.armorDef = 16 + lvlMulti;
+				this.armorMDef = 12 + lvlMulti;
+				this.bonusHP = 1200 + 200*lvlMulti;
+				this.bonusLust = 127 + 21*lvlMulti;
+				this.level = 42 + 6*lvlMulti;
+				this.additionalXP = 200 + 25*lvlMulti;
 			}
-			else if (flags[kFLAGS.IZUMI_LVL_UP] <= 9) {
+			else if (flags[kFLAGS.IZUMI_LVL_UP] <= 7) {
 				lvlMulti -= 6;
 				initStrTouSpeInte(385 + 30*lvlMulti, 275 + 25*lvlMulti, 205 + 20*lvlMulti, 110 + 10*lvlMulti);
 				initWisLibSensCor(110 + 10*lvlMulti, 30 + 10*lvlMulti, 25 + 5*lvlMulti, 15);
@@ -50,7 +50,7 @@ public class Izumi extends Monster
 				this.level = 66 + 6*lvlMulti;
 				this.additionalXP = 300 + 50*lvlMulti;
 			}
-			else if (flags[kFLAGS.IZUMI_LVL_UP] == 10) {
+			else if (flags[kFLAGS.IZUMI_LVL_UP] == 8) {
 				initStrTouSpeInte(510, 405, 290, 220);
 				initWisLibSensCor(220, 140, 80, 15);
 				this.weaponAttack = 125;
@@ -61,7 +61,7 @@ public class Izumi extends Monster
 				this.level = 90;
 				this.additionalXP = 500;
 			}
-			else if (flags[kFLAGS.IZUMI_LVL_UP] == 11) {
+			else if (flags[kFLAGS.IZUMI_LVL_UP] == 9) {
 				initStrTouSpeInte(545, 460, 315, 240);
 				initWisLibSensCor(240, 160, 90, 15);
 				this.weaponAttack = 140;
@@ -96,17 +96,17 @@ public class Izumi extends Monster
 			this.drop = new ChainedDrop().add(armors.SPKIMO,1/10)
 					.add(necklaces.OBNECK,1/5)
 					.elseDrop(consumables.ONISAKE);
-			if (flags[kFLAGS.IZUMI_LVL_UP] >= 1) this.createPerk(PerkLib.JobWarrior, 0, 0, 0, 0);
-			if (flags[kFLAGS.IZUMI_LVL_UP] >= 2) this.createPerk(PerkLib.EpicStrength, 0, 0, 0, 0);
-			if (flags[kFLAGS.IZUMI_LVL_UP] >= 3) this.createPerk(PerkLib.JobBrawler, 0, 0, 0, 0);
-			if (flags[kFLAGS.IZUMI_LVL_UP] >= 4) this.createPerk(PerkLib.EpicToughness, 0, 0, 0, 0);
-			if (flags[kFLAGS.IZUMI_LVL_UP] >= 5) this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
-			if (flags[kFLAGS.IZUMI_LVL_UP] >= 6) this.createPerk(PerkLib.LegendaryStrength, 0, 0, 0, 0);
-			if (flags[kFLAGS.IZUMI_LVL_UP] >= 7) this.createPerk(PerkLib.JobGuardian, 0, 0, 0, 0);
-			if (flags[kFLAGS.IZUMI_LVL_UP] >= 8) this.createPerk(PerkLib.LegendaryToughness, 0, 0, 0, 0);
-			if (flags[kFLAGS.IZUMI_LVL_UP] >= 9) this.createPerk(PerkLib.PrestigeJobBerserker, 0, 0, 0, 0);
-			if (flags[kFLAGS.IZUMI_LVL_UP] >= 10) this.createPerk(PerkLib.MythicalStrength, 0, 0, 0, 0);
-			if (flags[kFLAGS.IZUMI_LVL_UP] >= 11) IMutationsLib.OniMusculatureIM.acquireMutation(this, "none");
+			this.createPerk(PerkLib.JobWarrior, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EpicStrength, 0, 0, 0, 0);
+			if (flags[kFLAGS.IZUMI_LVL_UP] >= 1) this.createPerk(PerkLib.JobBrawler, 0, 0, 0, 0);
+			if (flags[kFLAGS.IZUMI_LVL_UP] >= 2) this.createPerk(PerkLib.EpicToughness, 0, 0, 0, 0);
+			if (flags[kFLAGS.IZUMI_LVL_UP] >= 3) this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
+			if (flags[kFLAGS.IZUMI_LVL_UP] >= 4) this.createPerk(PerkLib.LegendaryStrength, 0, 0, 0, 0);
+			if (flags[kFLAGS.IZUMI_LVL_UP] >= 5) this.createPerk(PerkLib.JobGuardian, 0, 0, 0, 0);
+			if (flags[kFLAGS.IZUMI_LVL_UP] >= 6) this.createPerk(PerkLib.LegendaryToughness, 0, 0, 0, 0);
+			if (flags[kFLAGS.IZUMI_LVL_UP] >= 7) this.createPerk(PerkLib.PrestigeJobBerserker, 0, 0, 0, 0);
+			if (flags[kFLAGS.IZUMI_LVL_UP] >= 8) this.createPerk(PerkLib.MythicalStrength, 0, 0, 0, 0);
+			if (flags[kFLAGS.IZUMI_LVL_UP] >= 9) IMutationsLib.OniMusculatureIM.acquireMutation(this, "none");
 			checkMonster();
 		}
 
@@ -114,7 +114,7 @@ public class Izumi extends Monster
 		override public function defeated(hpVictory:Boolean):void
 		{
 			this.cleanup();
-			SceneLib.highMountains.izumiScenes.touchThatFluffyHorn();
+			SceneLib.mountain.izumiScenes.touchThatFluffyHorn();
 		}
 		
 		// Monster won, not player, gg for descriptive method names
@@ -123,9 +123,9 @@ public class Izumi extends Monster
 			flags[kFLAGS.IZUMI_TIMES_LOST_FIGHT]++;
 			this.cleanup();
 			if (player.hasStatusEffect(StatusEffects.Titsmother))
-				SceneLib.highMountains.izumiScenes.deathBySnuSnuIMeanGiantOniTits();
+				SceneLib.mountain.izumiScenes.deathBySnuSnuIMeanGiantOniTits();
 			else
-				SceneLib.highMountains.izumiScenes.fuckedUpByAFuckhugeOni();
+				SceneLib.mountain.izumiScenes.fuckedUpByAFuckhugeOni();
 		}
 		
 		// Override combat AI
@@ -196,8 +196,8 @@ public class Izumi extends Monster
 		{
 			outputText("Quick as a flash, Izumi lashes out with her free hand, aiming for your head.");
 			var damage:int = int((str + 175) - rand(player.tou) - player.armorDef);
-			if (flags[kFLAGS.IZUMI_LVL_UP] >= 4) damage += 50;
-			if (flags[kFLAGS.IZUMI_LVL_UP] >= 8) damage += 50;
+			if (flags[kFLAGS.IZUMI_LVL_UP] >= 2) damage += 50;
+			if (flags[kFLAGS.IZUMI_LVL_UP] >= 6) damage += 50;
 			if (player.getEvasionRoll())
 			{
 				outputText("  You deftly dodge under the lightning-quick punch.");
@@ -225,15 +225,15 @@ public class Izumi extends Monster
 			if (player.cor >= 50 || player.lib >= 50 || player.sens >= 50)
 			{
 				outputText("You fall backwards and stagger away, already feeling a flush of warmth colouring your cheeks, trying to drag your mind back to the fight and away from... other things.");
-				if (flags[kFLAGS.IZUMI_LVL_UP] >= 8) player.takeLustDamage(30 + player.lib / 10, true);
-				else if (flags[kFLAGS.IZUMI_LVL_UP] >= 4) player.takeLustDamage(20 + player.lib / 10, true);
+				if (flags[kFLAGS.IZUMI_LVL_UP] >= 6) player.takeLustDamage(30 + player.lib / 10, true);
+				else if (flags[kFLAGS.IZUMI_LVL_UP] >= 2) player.takeLustDamage(20 + player.lib / 10, true);
 				else player.takeLustDamage(10 + player.lib / 10, true);
 			}
 			else
 			{
 				outputText("You furrow a brow at the Oni's ineffectual attack, not entirely sure if she was intending to hurt you or turn you on.  Her thighs did look rather tantalizing though...");
-				if (flags[kFLAGS.IZUMI_LVL_UP] >= 8) player.takeLustDamage(15 + player.lib / 20, true);
-				else if (flags[kFLAGS.IZUMI_LVL_UP] >= 4) player.takeLustDamage(10 + player.lib / 20, true);
+				if (flags[kFLAGS.IZUMI_LVL_UP] >= 6) player.takeLustDamage(15 + player.lib / 20, true);
+				else if (flags[kFLAGS.IZUMI_LVL_UP] >= 2) player.takeLustDamage(10 + player.lib / 20, true);
 				else player.takeLustDamage(5 + player.lib / 20, true);
 			}
 		}
@@ -306,8 +306,8 @@ public class Izumi extends Monster
 			outputText("The hit is extreme enough to leave you dazed for a moment, splayed out across the floor.  When you rouse yourself back to full consciousness a few seconds later, the cave is still echoing with the sound of the impact, a testament to the strength of the Oni - and your resilience.");
 			
 			var damage:int = int ((str + 225) - rand(player.tou) - player.armorDef);
-			if (flags[kFLAGS.IZUMI_LVL_UP] >= 4) damage += 100;
-			if (flags[kFLAGS.IZUMI_LVL_UP] >= 8) damage += 100;
+			if (flags[kFLAGS.IZUMI_LVL_UP] >= 2) damage += 100;
+			if (flags[kFLAGS.IZUMI_LVL_UP] >= 6) damage += 100;
 			player.takePhysDamage(damage, true);
 		}
 		
@@ -377,8 +377,8 @@ public class Izumi extends Monster
 			outputText("first into Izumi - specifically, into her chest.  Shocked by suddenly having your face rammed into the pillowy soft expanse of Izumi’s bust, you rear back only to be slammed straight back into the mountainous expanse by Izumi’s arm.");
 			
 			player.createStatusEffect(StatusEffects.Titsmother, 0, 0, 0, 0);
-			if (flags[kFLAGS.IZUMI_LVL_UP] >= 8) player.takeLustDamage((player.lib / 15) + 15 + rand(15), true);
-			else if (flags[kFLAGS.IZUMI_LVL_UP] >= 4) player.takeLustDamage((player.lib / 15) + 10 + rand(10), true);
+			if (flags[kFLAGS.IZUMI_LVL_UP] >= 6) player.takeLustDamage((player.lib / 15) + 15 + rand(15), true);
+			else if (flags[kFLAGS.IZUMI_LVL_UP] >= 2) player.takeLustDamage((player.lib / 15) + 10 + rand(10), true);
 			else player.takeLustDamage((player.lib / 15) + 5 + rand(5), true);
 		}
 		

@@ -25,7 +25,8 @@ public class MentalShieldSpell extends AbstractWhiteSpell{
 	}
 	
 	override public function calcCooldown():int {
-		var calcC:int = 10;
+		var calcC:int = 7;
+		calcC += spellGenericCooldown();
 		return calcC;
 	}
 	

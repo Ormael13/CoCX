@@ -32,12 +32,18 @@ public class Mountain extends BaseContent
 		public var salon:Salon = new Salon();
 		public var darkelfScene:DarkElfScene = new DarkElfScene();
 		public var minotaurMobScene:MinotaurMobScene = new MinotaurMobScene();
+		public var minervaScene:MinervaScene = new MinervaScene();
+		public var izumiScenes:IzumiScene = new IzumiScene();
+		public var basiliskScene:BasiliskScene = new BasiliskScene();
+		public var harpyScene:HarpyScene = new HarpyScene();
 		
 		public function Mountain()
 		{
 			onGameInit(init);
 		}
-		//private var explorationEncounter:GroupEncounter = null;
+		//Hills: lvl 10-15
+		//Low Mountains: lvl 20-30
+		//Moutains: lvl 35-55
 		private var _hillsEncounter:GroupEncounter = null;
 		private var _lowmountainEncounter:GroupEncounter = null;
 		private var _mountainEncounter:GroupEncounter = null;
@@ -388,6 +394,35 @@ public class Mountain extends BaseContent
 						else SceneLib.electraScene.repeatMountainEnc();
 					}
 				}
+			}, {
+				name: "minerva",
+				night : false,
+				when: function ():Boolean {
+					return flags[kFLAGS.MET_MINERVA] < 4;
+				},
+				call: minervaScene.encounterMinerva
+			}, {
+				name: "izumi",
+				when: function ():Boolean {
+					return flags[kFLAGS.SOUL_SENSE_IZUMI] < 3;
+				},
+				call: izumiScenes.encounter
+			}, {
+				name: "harpy",
+				night : false,
+				call: harpyScene.encounter
+			}, {
+				name: "basilisk",
+				call: basiliskScene.basiliskGreeting
+			}, {
+				name: "sophie",
+				night : false,
+				when: function ():Boolean {
+					return flags[kFLAGS.SOPHIE_BIMBO_ACCEPTED] <= 0
+						&& flags[kFLAGS.SOPHIE_DISABLED] <= 0
+						&& !SceneLib.sophieFollowerScene.sophieFollower();
+				},
+				call: SceneLib.sophieScene.sophieRouter
 			}, {
 				name: "darkelf",
 				call: darkelfScene.introDarkELfRanger
