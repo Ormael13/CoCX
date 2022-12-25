@@ -903,7 +903,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 
 	private function incestMasturbate():void{
 		clearOutput();
-		outputText("You simply help her by masturbating her horse dong to satisfaction." + _name + " thanks you afterward and goes to sit in a corner to rest.");
+		outputText("You simply help her by masturbating her horse dong to satisfaction. " + _name + " thanks you afterward and goes to sit in a corner to rest.");
 		doNext(camp.returnToCampUseOneHour);
 	}
 
@@ -995,7 +995,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				addButton(0, "Next", incestPureCorruption);
 			}
 			else {
-				outputText("Just as you're about to go, however, you catch a glimpse of" + _name +"’s horse dong as it resumes acting up, just as you wanted. " +
+				outputText("Just as you're about to go, however, you catch a glimpse of " + _name +"’s horse dong as it resumes acting up, just as you wanted. " +
 						"You’ll need to keep her constantly aroused to educate her properly and set her on the path to depravity if she's to become a proper daughter of yours.");
 				dynStats("cor", -1);
 				doNext(camp.returnToCampUseOneHour);
