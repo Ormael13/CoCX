@@ -315,6 +315,10 @@ public class Combat extends BaseContent {
         return magic.spellGreyTier2CooldownImpl();
     }
 
+    public function spellGenericCooldown():Number {
+        return magic.spellGenericCooldownImpl();
+    }
+
     public function healMod():Number {
         return magic.healModImpl();
     }

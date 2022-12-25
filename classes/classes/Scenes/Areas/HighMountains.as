@@ -18,7 +18,6 @@ public class HighMountains extends BaseContent {
     public var basiliskScene:BasiliskScene = new BasiliskScene();
     public var harpyScene:HarpyScene = new HarpyScene();
     public var minervaScene:MinervaScene = new MinervaScene();
-    public var minotaurMobScene:MinotaurMobScene = new MinotaurMobScene();
     public var izumiScenes:IzumiScene = new IzumiScene();
     public var phoenixScene:PhoenixScene = new PhoenixScene();
     public var darkelfScene:DarkElfScene = new DarkElfScene();
@@ -80,14 +79,6 @@ public class HighMountains extends BaseContent {
                 return flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] < 1;
             },
             call: SceneLib.templeofdivine.firstvisitintro
-        }, {
-            name: "minomob",
-            night : false,
-            when: function ():Boolean {
-                return flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] >= 3 && player.hasVagina() && flags[kFLAGS.SOUL_SENSE_MINOTAUR_SONS] < 3;
-            },
-            call: minotaurMobScene.meetMinotaurSons,
-            mods: [SceneLib.exploration.furriteMod]
         }, {
             name: "harpychicken",
             night : false,

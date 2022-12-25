@@ -47,7 +47,7 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Sweep Defenses. Gained when training with Chelsea and having 200+ libido. Effect: Critical tease also weakens your opponent's resistance to lust by 5%. (EragonX)\n");
 			outputText("-Added Hills & Low Mountains area before Mountain. Some of the encounters orginal in Mountain was moved to the new areas. Some of encouters from high mountains was moved to mountain area too.\n");
 			outputText("-Hellhounds and infected hellhouds lvl increased from 10 to 20.\n");
-			outputText("-\n");
+			//outputText("-New event perk: Hyper Casting. Gained by spending 1 super perk point and having Equilibrium super perk. Effects: Allow to reach OverMax Mana equal to 130% of current max mana. Decrease CD for spells: -1 for tier 1, -2 for tier 2 and -4 for tier 3. Allow to always autocast buff spells.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
