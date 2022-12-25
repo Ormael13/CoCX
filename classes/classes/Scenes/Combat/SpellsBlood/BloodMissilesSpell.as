@@ -26,7 +26,10 @@ public class BloodMissilesSpell extends AbstractBloodSpell {
 	}
 	
 	override public function calcCooldown():int {
-		return 2;
+		var calcC:int = -1;
+		calcC += spellGenericCooldown();
+		if (calcC < 0) calcC = 0;
+		return calcC;
 	}
 	
 	public function calcDamage(target:Monster, randomize:Boolean=true, casting:Boolean = true):Number {

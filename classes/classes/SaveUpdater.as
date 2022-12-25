@@ -1945,6 +1945,11 @@ public class SaveUpdater extends NPCAwareContent {
 				}
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.037;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.038) {
+				if (flags[kFLAGS.IZUMI_LVL_UP] > 1) flags[kFLAGS.IZUMI_LVL_UP] -= 2;
+				if (flags[kFLAGS.MINERVA_LVL_UP] > 1) flags[kFLAGS.MINERVA_LVL_UP] -= 2;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.038;
+			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
 		}

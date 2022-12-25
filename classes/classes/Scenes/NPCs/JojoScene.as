@@ -2260,7 +2260,7 @@ public function talkMenu():void
 	if (flags[kFLAGS.FACTORY_SHUTDOWN] > 0) addButton(5, "Factory", jojoTalkFactory).hint("Tell him about how you've shut down the factory.");
 	if (flags[kFLAGS.SAND_WITCHES_COWED] == 1 || flags[kFLAGS.SAND_WITCHES_FRIENDLY] == 1 || flags[kFLAGS.SAND_MOTHER_DEFEATED] == 1) addButton(6, "SandCave", jojoTalkSandCave).hint("Tell him about your encounter in the Sand Cave in the desert.");
 	if (flags[kFLAGS.UNLOCKED_JOJO_TRAINING] == 0 && flags[kFLAGS.TIMES_TALKED_WITH_JOJO] >= 4) addButton(7, "Training", apparantlyJojoDOESlift).hint("Ask him if he's willing to train you.");
-	if (flags[kFLAGS.MINERVA_PURIFICATION_JOJO_TALKED] == 1 && flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] < 10) addButton(8, "Purification", SceneLib.highMountains.minervaScene.minervaPurification.purificationByJojoPart1).hint("Ask him if he can exorcise the demonic parasite infesting Minerva.");
+	if (flags[kFLAGS.MINERVA_PURIFICATION_JOJO_TALKED] == 1 && flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] < 10) addButton(8, "Purification", SceneLib.mountain.minervaScene.minervaPurification.purificationByJojoPart1).hint("Ask him if he can exorcise the demonic parasite infesting Minerva.");
 	//Sex button
 	if (player.cor <= 10 && player.lust >= 33) {
 		addButton(9, "Sex?", offerSexFirstTime).hint("Ask him if he's willing to have sex with you.");

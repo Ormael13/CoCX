@@ -881,16 +881,16 @@ public class PlayerInfo extends BaseContent {
 		if (flags[kFLAGS.AKBAL_LVL_UP] == 13) outsideCampNpcsStats += "<b>Akbal lvl:</b> 98 (current max lvl he can reach)\n";
 		else if (flags[kFLAGS.AKBAL_LVL_UP] < 1) outsideCampNpcsStats += "<b>Akbal lvl:</b> 20\n";
 		else outsideCampNpcsStats += getNPCLevel("Akbal", 20, 0, 13, 6, flags[kFLAGS.AKBAL_LVL_UP]);
-		if (flags[kFLAGS.IZUMI_LVL_UP] == 11) outsideCampNpcsStats += "<b>Izumi lvl:</b> 96 (current max lvl she can reach)\n";
-		else if (flags[kFLAGS.IZUMI_LVL_UP] < 1) outsideCampNpcsStats += "<b>Izumi lvl:</b> 30\n";
-		else outsideCampNpcsStats += getNPCLevel("Izumi", 30, 0, 11, 6, flags[kFLAGS.IZUMI_LVL_UP]);
+		if (flags[kFLAGS.IZUMI_LVL_UP] == 9) outsideCampNpcsStats += "<b>Izumi lvl:</b> 96 (current max lvl she can reach)\n";
+		else if (flags[kFLAGS.IZUMI_LVL_UP] < 1) outsideCampNpcsStats += "<b>Izumi lvl:</b> 42\n";
+		else outsideCampNpcsStats += getNPCLevel("Izumi", 42, 0, 9, 6, flags[kFLAGS.IZUMI_LVL_UP]);
 		if (flags[kFLAGS.MET_KITSUNES] == 4) outsideCampNpcsStats += "<b>Kitsune sisters lvl:</b> 37 (current max lvl they can reach)\n";
 		if (flags[kFLAGS.MET_KITSUNES] == 3) outsideCampNpcsStats += "<b>Kitsune sisters lvl:</b> 31\n";
 		if (flags[kFLAGS.MET_KITSUNES] == 2) outsideCampNpcsStats += "<b>Kitsune sisters lvl:</b> 25\n";
 		if (flags[kFLAGS.MET_KITSUNES] < 2) outsideCampNpcsStats += "<b>Kitsune sisters lvl:</b> 19\n";
-		if (flags[kFLAGS.MINERVA_LVL_UP] == 12) outsideCampNpcsStats += "<b>Minerva lvl:</b> 95 (current max lvl she can reach)\n";
-		else if (flags[kFLAGS.MINERVA_LVL_UP] < 1) outsideCampNpcsStats += "<b>Minerva lvl:</b> 23\n";
-		else outsideCampNpcsStats += getNPCLevel("Minerva", 23, 0, 12, 6, flags[kFLAGS.MINERVA_LVL_UP]);
+		if (flags[kFLAGS.MINERVA_LVL_UP] == 10) outsideCampNpcsStats += "<b>Minerva lvl:</b> 95 (current max lvl she can reach)\n";
+		else if (flags[kFLAGS.MINERVA_LVL_UP] < 1) outsideCampNpcsStats += "<b>Minerva lvl:</b> 35\n";
+		else outsideCampNpcsStats += getNPCLevel("Minerva", 35, 0, 10, 6, flags[kFLAGS.MINERVA_LVL_UP]);
 		if (flags[kFLAGS.PRISCILLA_TALK_COUNTER] >= 1) {
 			if (flags[kFLAGS.PRISCILLA_LVL_UP] == 11) outsideCampNpcsStats += "<b>Priscilla lvl:</b> 98 (current max lvl she can reach)\n";
 			else if (flags[kFLAGS.PRISCILLA_LVL_UP] < 1) outsideCampNpcsStats += "<b>Priscilla lvl:</b> 32\n";
@@ -1005,7 +1005,7 @@ public class PlayerInfo extends BaseContent {
 		if (SceneLib.marbleScene.pregnancy.isPregnant)
 			pregnancies += "<b>Marble</b>\n";
 
-		if (SceneLib.highMountains.minervaScene.pregnancy.isPregnant)
+		if (SceneLib.mountain.minervaScene.pregnancy.isPregnant)
 			pregnancies += "<b>Minerva</b> \n"
 
 		if (SceneLib.mitziFollower.pregnancy.isPregnant)
@@ -1960,31 +1960,7 @@ public class PlayerInfo extends BaseContent {
 			doNext(playerMenu);
 		}
 	}
-			/*	DeityJobMunchkin.requirePerk(JobWarlord)
-                                .requirePerk(JobMonk)
-                                .requirePerk(JobKnight)
-                                .requirePerk(JobGolemancer)
-                                .requirePerk(JobHunter)
-                                .requirePerk(JobEromancer)
-                                .requirePerk(JobEnchanter)
-                                .requirePerk(JobElementalConjurer)
-                                .requirePerk(JobCourtesan)
-                                .requirePerk(JobDervish)
-                                .requirePerk(JobDefender)
-                                .requirePerk(JobBrawler)
-                                .requirePerk(JobBeastWarrior)
-                                .requirePerk(JobSwordsman)
-                                .requirePerk(JobAllRounder)
-                                .requireStr(150)
-                                .requireTou(150)
-                                .requireSpe(150)
-                                .requireInt(150)
-                                .requireWis(150)
-                                .requireLib(90)
-								.requireSen(90)
-                                .requireLevel(30); //requirePerk(JobEromancer)
-			*/	//(Still need some other related stuff added to make PC true Munchkin
-
+	
 	public function superPerkBuyMenu(page:int = 1):void {
 		clearOutput();
 		outputText("If you meet requirements and have enough points you can pick one or more super perks.\n");
@@ -2197,12 +2173,22 @@ public class PlayerInfo extends BaseContent {
 					}
 				}
 				else addButtonDisabled(1, "Eq", "You need to reach level 10 first.");
+				if (player.level >= 20) {
+					if (player.hasPerk(PerkLib.HyperCasting)) addButtonDisabled(2, "HC", "You already have this super perk.");
+					else {
+						if (player.hasPerk(PerkLib.Equilibrium)) addButton(2, "HC", perkHyperCasting).hint("Choose the 'Hyper Casting' super perk. Decrease CD for spells: -1 for tier 1, -2 for tier 2 and -4 for tier 3. Reduce spells costs by 20%. Allow to always autocast buff spells. (+10% of OverMax Mana)");
+						else addButtonDisabled(2, "HC", "You need to first have the 'Equilibrium' super perk.");
+					}
+				}
+				else addButtonDisabled(2, "HC", "You need to reach level 20 first.");
 			}
 			else {
 				if (player.hasPerk(PerkLib.PrestigeJobGreySage)) addButtonDisabled(0, "HJ:GS", "You already have this perk.");
 				else addButtonDisabled(0, "HJ:GS", "You do not have enough super perk points to obtain this perk.");
 				if (player.hasPerk(PerkLib.Equilibrium)) addButtonDisabled(1, "Eq", "You already have this perk.");
 				else addButtonDisabled(1, "Eq", "You do not have enough super perk points to obtain this perk.");
+				if (player.hasPerk(PerkLib.HyperCasting)) addButtonDisabled(2, "HC", "You already have this perk.");
+				else addButtonDisabled(2, "HC", "You do not have enough super perk points to obtain this perk.");
 			}
 			addButton(13, "Previous", superPerkBuyMenu, page - 1);
 			addButton(14, "Back", playerMenu);
@@ -2357,6 +2343,13 @@ public class PlayerInfo extends BaseContent {
 		player.createPerk(PerkLib.Equilibrium,0,0,0,0);
 		clearOutput();
 		outputText("You gained 'Equilibrium' super perk.");
+		doNext(superPerkBuyMenu, 4);
+	}
+	private function perkHyperCasting():void {
+		player.superPerkPoints--;
+		player.createPerk(PerkLib.HyperCasting,0,0,0,0);
+		clearOutput();
+		outputText("You gained 'Hyper Casting' super perk.");
 		doNext(superPerkBuyMenu, 4);
 	}
 }

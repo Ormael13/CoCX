@@ -15,10 +15,6 @@ import classes.display.SpriteDb;
 use namespace CoC;
 
 public class HighMountains extends BaseContent {
-    public var basiliskScene:BasiliskScene = new BasiliskScene();
-    public var harpyScene:HarpyScene = new HarpyScene();
-    public var minervaScene:MinervaScene = new MinervaScene();
-    public var izumiScenes:IzumiScene = new IzumiScene();
     public var phoenixScene:PhoenixScene = new PhoenixScene();
     public var darkelfScene:DarkElfScene = new DarkElfScene();
     public var cockatriceScene:CockatriceScene = new CockatriceScene();
@@ -67,13 +63,6 @@ public class HighMountains extends BaseContent {
             chance: 0.5,
             call: SceneLib.etnaScene.repeatYandereEnc
         }, {
-            name: "minerva",
-            night : false,
-            when: function ():Boolean {
-                return flags[kFLAGS.MET_MINERVA] < 4;
-            },
-            call: minervaScene.encounterMinerva
-        }, {
             name: "templeofthediving",
             when: function ():Boolean {
                 return flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] < 1;
@@ -102,34 +91,12 @@ public class HighMountains extends BaseContent {
             },
             call: caveScene
         }, {
-            name: "harpy",
-            night : false,
-            call: harpyScene.encounter
-        }, {
-            name: "basilisk",
-            call: basiliskScene.basiliskGreeting
-        }, {
             name: "cockatrice",
             night : false,
             when: function ():Boolean {
                 return flags[kFLAGS.COCKATRICES_UNLOCKED] > 0;
             },
             call: cockatriceScene.greeting
-        }, {
-            name: "sophie",
-            night : false,
-            when: function ():Boolean {
-                return flags[kFLAGS.SOPHIE_BIMBO_ACCEPTED] <= 0
-                    && flags[kFLAGS.SOPHIE_DISABLED] <= 0
-                    && !SceneLib.sophieFollowerScene.sophieFollower();
-            },
-            call: SceneLib.sophieScene.sophieRouter
-        }, {
-            name: "izumi",
-            when: function ():Boolean {
-                return flags[kFLAGS.SOUL_SENSE_IZUMI] < 3;
-            },
-            call: izumiScenes.encounter
         }, {
             name: "darkelf",
             chance: 0.5,

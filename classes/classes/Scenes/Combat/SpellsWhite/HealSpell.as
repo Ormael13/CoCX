@@ -24,7 +24,8 @@ public class HealSpell extends AbstractWhiteSpell {
 	}
 	
 	override public function calcCooldown():int {
-		var calcC:int = 6;
+		var calcC:int = 3;
+		calcC += spellGenericCooldown();
 		if (player.weapon == weapons.U_STAFF) calcC -= 2;
 		return calcC;
 	}
