@@ -40,7 +40,7 @@ public class Cockatrice extends Monster {
                     + " them in your mind’s eye, staring in at your thoughts, making you feel sluggish and unable to coordinate."
                     + " Something about the helplessness of it feels so good... you can’t banish the feeling that really,"
                     + " you want to look in the cockatrice’s eyes forever, for it to have total control over you.");
-                player.takeLustDamage(3, true);
+                player.takeLustDamage(Math.round(player.maxLust() * 0.03), true);
                 //apply status here
                 player.buff("Basilisk Slow").addStats( {"spe":-20} ).withText("Basilisk Slow").combatPermanent();
                 player.createStatusEffect(StatusEffects.BasiliskCompulsion, 0, 0, 0, 0);
@@ -167,6 +167,32 @@ public class Cockatrice extends Monster {
         this.tallness = 6 * 12 + 2;
         this.hips.type = Hips.RATING_AMPLE;
         this.butt.type = Butt.RATING_TIGHT;
+        this.hairType = Hair.FEATHER;
+        this.bodyColor = "midnight blue";
+        this.skinType = Skin.SCALES;
+        this.hairColor = "blue";
+        this.hairLength = 2;
+        initStrTouSpeInte(215, 200, 235, 80);
+        initWisLibSensCor(60, 75, 45, 20);
+        this.weaponName = "talons";
+        this.weaponVerb = "claw";
+        this.weaponAttack = 50;
+        this.armorName = "scales and feathers";
+        this.armorDef = 100;
+		this.armorMDef = 50;
+        this.armorPerk = "";
+        this.armorValue = 70;
+        this.bonusHP = 2000;
+		this.bonusLust = 199;
+        this.lust = 30;
+        this.lustVuln = .5;
+        this.level = 79;
+        this.gems = rand(50) + 210;
+        this.drop = new WeightedDrop()
+            .add(consumables.REPTLUM, 35)
+            .add(consumables.GLDSEED, 35)
+            //.add(consumables.TOTRICE, 20) //same.
+            .add(null, 10);
         //TODO: Requires importing Cockatrice transformatives and transformation itself
         /*
         this.lowerBody = LowerBody.COCKATRICE;
@@ -176,32 +202,6 @@ public class Cockatrice extends Monster {
         this.eyes.type = Eyes.COCKATRICE;
         this.tail.type = Tail.COCKATRICE;
         */
-        this.hairType = Hair.FEATHER;
-        this.bodyColor = "midnight blue";
-        this.skinType = Skin.SCALES;
-        this.hairColor = "blue";
-        this.hairLength = 2;
-        initStrTouSpeInte(65, 50, 85, 70);
-        initWisLibSensCor(50, 65, 25, 20);
-        this.weaponName = "talons";
-        this.weaponVerb = "claw";
-        this.weaponAttack = 30;
-        this.armorName = "scales and feathers";
-        this.armorDef = 10;
-		this.armorMDef = 5;
-        this.armorPerk = "";
-        this.armorValue = 70;
-        this.bonusHP = 200;
-		this.bonusLust = 112;
-        this.lust = 30;
-        this.lustVuln = .5;
-        this.level = 22;
-        this.gems = rand(10) + 10;
-        this.drop = new WeightedDrop()
-            .add(consumables.REPTLUM, 35)
-            .add(consumables.GLDSEED, 35)
-            //.add(consumables.TOTRICE, 20) //same.
-            .add(null, 10);
         this.tail.recharge = 0;
 		this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
         this.createPerk(PerkLib.BasiliskResistance, 0, 0, 0, 0);

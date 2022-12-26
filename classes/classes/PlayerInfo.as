@@ -2176,7 +2176,7 @@ public class PlayerInfo extends BaseContent {
 				if (player.level >= 20) {
 					if (player.hasPerk(PerkLib.HyperCasting)) addButtonDisabled(2, "HC", "You already have this super perk.");
 					else {
-						if (player.hasPerk(PerkLib.Equilibrium)) addButton(2, "HC", perkHyperCasting).hint("Choose the 'Hyper Casting' super perk. Decrease CD for spells: -1 for tier 1, -2 for tier 2 and -4 for tier 3. Reduce spells costs by 20%. Allow to always autocast buff spells. (+10% of OverMax Mana)");
+						if (player.hasPerk(PerkLib.Equilibrium)) addButton(2, "HC", perkHyperCasting).hint("Choose the 'Hyper Casting' super perk. Decrease CD for spells: -1 for tier 1, -2 for tier 2 and -4 for tier 3. Reduce spells costs by 20% (that affect bones used by necro spells too). Allow to always autocast buff spells. (+10% of OverMax Mana)");
 						else addButtonDisabled(2, "HC", "You need to first have the 'Equilibrium' super perk.");
 					}
 				}
