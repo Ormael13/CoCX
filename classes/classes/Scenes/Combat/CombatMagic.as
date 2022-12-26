@@ -61,6 +61,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.WarMageAdept)) costPercent -= 10;
 		if (player.hasPerk(PerkLib.WarMageExpert)) costPercent -= 15;
 		if (player.hasPerk(PerkLib.WarMageMaster)) costPercent -= 20;
+		if (player.hasPerk(PerkLib.HyperCasting)) costPercent -= 20;
 		if (player.headjewelryName == "fox hairpin") costPercent -= 20;
         if (player.weapon == weapons.N_STAFF) costPercent += 200;
 		if (player.weapon == weapons.U_STAFF) costPercent -= 50;
@@ -559,8 +560,11 @@ public class CombatMagic extends BaseCombatContent {
 
 	internal function spellGenericCooldownImpl():Number {
 		var mod:Number = 3;
+		if (player.hasPerk(PerkLib.NaturalSpellcasting)) {
+			if (player.necklace == necklaces.LEAFAMU && player.isElf()) mod -= 2;
+			else mod -= 1;
+		}
 		if (player.hasPerk(PerkLib.HyperCasting)) mod -= 1;
-		if (mod < 0) mod = 0;
 		return mod;
 	}
 

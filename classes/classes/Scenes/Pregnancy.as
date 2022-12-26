@@ -1478,7 +1478,7 @@ public class Pregnancy extends NPCAwareContent {
             if (player.pregnancyType == PregnancyStore.PREGNANCY_BASILISK) {
                 player.knockUpForce(); //Clear Pregnancy
                 displayedUpdate = true;
-                SceneLib.highMountains.basiliskScene.basiliskBirth();
+                SceneLib.mountain.basiliskScene.basiliskBirth();
             }
             //Satyr vag preg
             if (player.pregnancyType == PregnancyStore.PREGNANCY_SATYR) {
@@ -1942,8 +1942,8 @@ public class Pregnancy extends NPCAwareContent {
             //Give birth to sirens.
             if (player.pregnancyType == PregnancyStore.PREGNANCY_MINERVA) {
 
-                if (flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] >= 10) SceneLib.highMountains.minervaScene.minervaCorruption.corruptPlayerBirth();
-                else SceneLib.highMountains.minervaScene.minervaPurification.playerGivesBirth();
+                if (flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] >= 10) SceneLib.mountain.minervaScene.minervaCorruption.corruptPlayerBirth();
+                else SceneLib.mountain.minervaScene.minervaPurification.playerGivesBirth();
 
                 if(player.hips.type < 10) {
                     player.hips.type++;

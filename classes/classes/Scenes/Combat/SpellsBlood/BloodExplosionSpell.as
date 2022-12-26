@@ -30,7 +30,9 @@ public class BloodExplosionSpell extends AbstractBloodSpell {
 	}
 	
 	override public function calcCooldown():int {
-		return 3;
+		var calcC:int = 0;
+		calcC += spellGenericCooldown();
+		return calcC;
 	}
 	
 	public function calcDamage(target:Monster, randomize:Boolean=true, casting:Boolean = true):Number { //casting - Increase Elemental Counter while casting (like Raging Inferno)

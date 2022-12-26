@@ -26,7 +26,9 @@ public class WaveOfEcstasySpell extends AbstractBlackSpell {
 	}
 	
 	override public function calcCooldown():int {
-		return 6;
+		var calcC:int = 3;
+		calcC += spellGenericCooldown();
+		return calcC;
 	}
 	
 	override public function describeEffectVs(target:Monster):String {

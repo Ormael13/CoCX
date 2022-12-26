@@ -1308,7 +1308,7 @@ import classes.Stats.Buff;
 			if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) {
 				if (flags[kFLAGS.IZUMI_DEFEATS_COUNTER] >= 1) flags[kFLAGS.IZUMI_DEFEATS_COUNTER]++;
 				else flags[kFLAGS.IZUMI_DEFEATS_COUNTER] = 1;
-				if (flags[kFLAGS.IZUMI_LVL_UP] < 11 && flags[kFLAGS.IZUMI_DEFEATS_COUNTER] >= flags[kFLAGS.IZUMI_LVL_UP] + 1) {
+				if (flags[kFLAGS.IZUMI_LVL_UP] < 9 && flags[kFLAGS.IZUMI_DEFEATS_COUNTER] >= flags[kFLAGS.IZUMI_LVL_UP] + 1) {
 					flags[kFLAGS.IZUMI_DEFEATS_COUNTER] = 0;
 					++flags[kFLAGS.IZUMI_LVL_UP];
 				}

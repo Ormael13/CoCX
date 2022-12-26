@@ -3879,9 +3879,9 @@ public class Camp extends NPCAwareContent{
 				.hint("Visit Chicken Harpy in the High Mountains.")
 				.disableIf(!player.hasItem(consumables.OVIELIX), "You need to have at least 1-2 ovi elixirs to have reason to look for her.")
 				.disableIf(flags[kFLAGS.TIMES_MET_CHICKEN_HARPY] <= 1, "Search the high mountains with ovi elixir.", null, "???");
-		bd.add("Oasis Tower", SceneLib.highMountains.minervaScene.encounterMinerva)
-				.hint("Visit the ruined tower in the high mountains where Minerva resides.")
-				.disableIf(flags[kFLAGS.MET_MINERVA] < 4, "Search the high mountains.", null, "???");
+		bd.add("Oasis Tower", SceneLib.mountain.minervaScene.encounterMinerva)
+				.hint("Visit the ruined tower in the mountains where Minerva resides.")
+				.disableIf(flags[kFLAGS.MET_MINERVA] < 4, "Search the mountains.", null, "???");
 		// Row 4 - places/NPCs 11-15
 		bd.add("Elven grove", SceneLib.woodElves.GroveLayout)
 				.hint("Visit the elven grove where the wood elves spend their somewhat idylic lives.")
@@ -4041,8 +4041,8 @@ public class Camp extends NPCAwareContent{
 
 		if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] > 0) addButton(5, "Shrine", SceneLib.kitsuneScene.kitsuneShrine).hint("Visit the kitsune shrine in the deepwoods.");
 		else addButtonDisabled(5, "???", "Search the deepwoods.");
-		if (flags[kFLAGS.MET_MINERVA] >= 4) addButton(6, "Oasis Tower", SceneLib.highMountains.minervaScene.encounterMinerva).hint("Visit the ruined tower in the high mountains where Minerva resides.");
-		else addButtonDisabled(6, "???", "Search the high mountains.");
+		if (flags[kFLAGS.MET_MINERVA] >= 4) addButton(6, "Oasis Tower", SceneLib.mountain.minervaScene.encounterMinerva).hint("Visit the ruined tower in the mountains where Minerva resides.");
+		else addButtonDisabled(6, "???", "Search the mountains.");
 		if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] > 0) addButton(7, "Temple", SceneLib.templeofdivine.repeatvisitintro).hint("Visit the temple in the high mountains where Sapphire resides.");
 		else addButtonDisabled(7, "???", "Search the high mountains.");
 		if (flags[kFLAGS.YU_SHOP] == 2) addButton(8, "Winter Gear", SceneLib.glacialYuShop.YuIntro).hint("Visit the Winter gear shop.");

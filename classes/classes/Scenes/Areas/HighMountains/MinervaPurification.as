@@ -12,7 +12,7 @@ import classes.lists.Gender;
 public class MinervaPurification extends BaseContent
 	{
 		public function get minervaScene():MinervaScene {
-			return SceneLib.highMountains.minervaScene;
+			return SceneLib.mountain.minervaScene;
 		}
 
 		
