@@ -54,7 +54,11 @@ use namespace CoC;
 				night : false,
 				call: snowLilyEncounter
 			}, {
-				// choice[choice.length] = 4; //Ice Golem (lvl 64)
+				name: "fafnir tear",
+				call: findATear,
+				chance: 0.25
+			}, {
+				// Werewolf huntress
 				name: "werewolf huntress",
 				day : false,
 				call: SceneLib.werewolfFemaleScene.introWerewolfHuntress,
@@ -163,6 +167,11 @@ use namespace CoC;
 				findGem();
 				doNext(camp.returnToCampUseTwoHours);
 			}
+		}
+
+		private function findATear():void {
+			outputText("While exploring the tundra you spot a peculiar white flower. It glows feintly as if from some magical residue.");
+			inventory.takeItem(consumables.F_TEAR, camp.returnToCampUseOneHour);
 		}
 
 		private function findGem():void {
