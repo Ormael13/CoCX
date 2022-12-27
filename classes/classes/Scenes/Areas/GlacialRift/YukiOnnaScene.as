@@ -86,8 +86,6 @@ public class YukiOnnaScene extends BaseContent
 				player.addCurse("tou", 30,2);
 			}
 			else {
-				player.skinColor = randomChoice("snow white", "light blue", "glacial white");
-				player.skinAdj   = "cold";
 				outputText("At first, it felt horribly cold like you were dying, then the sensation began to fade as you finally felt yourself getting warmer. Or is it truly that you are getting warmer in the first place? Seeking to feel more you pull her closer, and she rewards you by gently sliding a finger into your folds. You gasp in her mouth, taking a deep breath of fresh cold air. Cold? Hot? You no longer really care as you are too lost in this smooth little world just between you and her. Her pale white skin touching yours, making you shiver exquisitely. ");
 				outputText("You help her out, sliding your own hand in her ice-cold pussy, barely feeling yourself anymore. Her mouth part ways with yours, a crystal clear strand of saliva breaking between you as she heads down to one of your cold hardened nipples and starts to suckle it out, her tongue flicking the tip and giving your chest some well needed attention. The contrast between cold and hot slowly dies out, eventually replaced by chilling pleasure, one of her cold delicate hands cupping your chest as you begin grinding your pussy against hers, ");
 				outputText("the pair of you moaning in delight as you approach your respective climax. The world around you seems to lose all color, bleaching to the color of white snow as you finally cum. The light fades as you slowly lose consciousness in your partner's arms, the last of your strength abandoning you. You barely remember her kissing you one last time and telling you sweet dreams as you lose to the black curtain entirely.\n\n");
@@ -116,6 +114,8 @@ public class YukiOnnaScene extends BaseContent
 				if (player.skin.base.pattern != Skin.PATTERN_NONE) {
 					CoC.instance.transformations.SkinPatternNone.applyEffect(false);
 				}
+				player.skinColor = randomChoice("snow white", "light blue", "glacial white");
+				player.skinAdj = "cold";
 				if (!player.hasPerk(PerkLib.ColdAffinity)) player.createPerk(PerkLib.ColdAffinity, 0, 0, 0, 0);
 				if (player.hasCock()) player.killCocks(-1);
 				player.createPerk(PerkLib.DeadMetabolism, 0, 0, 0, 0);

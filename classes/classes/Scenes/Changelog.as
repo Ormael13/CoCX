@@ -77,7 +77,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");// (khovel)
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-Fixed bugs: MindUp option req. wrong items in Rath menu, MOney strike been unusable against groups\n");
+			outputText("-Fixed bugs: MindUp option req. wrong items in Rath menu, Money strike been unusable against groups, Fetish Zealots blocking boat before they intro scene at lake plays\n");
 			//remove this line when other two lines below get added ingame --- outputText("-Boss type enemies gained additional bonuses: Diehard effect of 7,5% of max HP + 2,250 HP * NG tier, OverMax HP effect of 15% magnitude.\n");
 			//outputText("-New perk for enemies: Elite type enemy. Bonuses for are: Diehard effect of 2,5% of max HP + 750 HP * NG tier, OverMax HP effect of 5% magnitude.\n");
 			//outputText("-New perk for enemies: Champion type enemy. Bonuses for are: Diehard effect of 5% of max HP + 1,500 HP * NG tier, OverMax HP effect of 10% magnitude.\n");

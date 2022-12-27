@@ -143,26 +143,26 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
         clearOutput();
         Followercount = 0; //reset it first, right?
         if (TyrantiaFollower.TyrantiaFollowerStage == 4) {
-            outputText("You look at your map, and as you do so, your giantess lover walks towards you, armour on and Dick over one shoulder. “<i>Are you going there?</i>” Tyrantia asks, anger in her gaze. You nod, and she shakes her head. “<i>Then I’m going with you.</i>” Her gaze brooks no dissent, and you nod. She falls in behind you.  \n\n");
+            outputText("You look at your map, and as you do so, your giantess lover walks towards you, armour on and Dick over one shoulder. “<i>Are you going there?</i>” Tyrantia asks, anger in her gaze. You nod, and she shakes her head. “<i>Then I’m going with you.</i>” Her gaze brooks no dissent, and you nod. She falls in behind you.\n\n");
             //Tyrantia will fight beside you for the Dungeon Crawl
             TyrantFollower = true;
             ++Followercount;
         }
         if (flags[kFLAGS.KIHA_FOLLOWER] == 1) {
-            outputText("As you head out of camp, you notice a familiar, dusky-skinned dragoness above you. You motion her down, and Kiha gives you a glare. “<i>Idiot.</i>” You protest, but she holds a hand out. “<i>No. If you’re going to the demon’s lab, you’re taking me with you. I’m not arguing.</i>” You sigh. God Damn it, Kiha.  \n\n");
+            outputText("As you head out of camp, you notice a familiar, dusky-skinned dragoness above you. You motion her down, and Kiha gives you a glare. “<i>Idiot.</i>” You protest, but she holds a hand out. “<i>No. If you’re going to the demon’s lab, you’re taking me with you. I’m not arguing.</i>” You sigh. God Damn it, Kiha.\n\n");
             //Kiha will fight beside you for the dungeon crawl
             KihaFollower = true;
             ++Followercount;
         }
 
         if (DivaScene.instance.isCompanion()) {
-            outputText("You near the mountains, to find a familiar figure waiting for you. “<i>Mine ally. Thou doth approach the lab.</i>” She shudders, looking away. “<i>Thou art foolish…But brave. If thou wishes to defeat the ones encamped there, you will require assistance.</i>” She squares her shoulders. “<i>Fear not! The terror of the night shall aid you!</i>”   \n\n");
+            outputText("You near the mountains, to find a familiar figure waiting for you. “<i>Mine ally. Thou doth approach the lab.</i>” She shudders, looking away. “<i>Thou art foolish…But brave. If thou wishes to defeat the ones encamped there, you will require assistance.</i>” She squares her shoulders. “<i>Fear not! The terror of the night shall aid you!</i>” \n\n");
             DivaFollower = true;
             ++Followercount;
         }
 
         if (!EnteredBefore) {
-            outputText("The map Zetaz had given you leads up the mountains, not to the top of one, but halfway up. You climb easily, this part of the mountain unmarked, but clearly tamed. Several times you hear the flapping of wings overhead, both harpy, and the leathery flapping of demonic wings. So far, however, no demon seems to notice you as you clamber from rock to rock.  \n\n");
+            outputText("The map Zetaz had given you leads up the mountains, not to the top of one, but halfway up. You climb easily, this part of the mountain unmarked, but clearly tamed. Several times you hear the flapping of wings overhead, both harpy, and the leathery flapping of demonic wings. So far, however, no demon seems to notice you as you clamber from rock to rock.\n\n");
         }
         outputText("As you enter an inconspicuous-seeming cave entrance, the rock is replaced immediately by cold, hard metallic flooring. This cave looked different from the outside! Looking back, you can make out a shimmering, translucent barrier between this odd room and the outside. You poke this barrier, but your finger passes through it. Apparently this odd spell is an illusion only, designed to conceal this...place. ");
         inDungeon = true;
@@ -171,8 +171,8 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
 
     public function roomEntrance():void {
         dungeonLoc = DUNGEON_LAB_ENTRANCE;
-        outputText("The floors, walls and ceiling are all constructed from an odd, almost white metal, and every footstep sends echoes through the place.  \n\n");
-        outputText("The only notable features in this room, other than the sterile white orbs floating next to the ceiling and two overturned padded tables, are several sets of shackles along the back wall. Upon closer inspection, you see a drain in the center of the room, and an odd rubber tube and nozzle tucked into the back-right corner. The thought of what fluids must have once stained this floor sends a chill down your spine.  \n\n");
+        outputText("The floors, walls and ceiling are all constructed from an odd, almost white metal, and every footstep sends echoes through the place.\n\n");
+        outputText("The only notable features in this room, other than the sterile white orbs floating next to the ceiling and two overturned padded tables, are several sets of shackles along the back wall. Upon closer inspection, you see a drain in the center of the room, and an odd rubber tube and nozzle tucked into the back-right corner. The thought of what fluids must have once stained this floor sends a chill down your spine.\n\n");
         if (!EnteredBefore) {
             EnteredBefore = true;
             outputText("You hear a muffled voice behind you, and you duck behind one of the overturned tables. Two demons are approaching the hidden lab from the same path you came from! \n\n");
