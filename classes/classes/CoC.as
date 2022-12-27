@@ -121,7 +121,7 @@ public class CoC extends MovieClip
     public var compiler:StoryCompiler = new StoryCompiler("content/").attach(rootStory);
     public var context:StoryContext;
 
-    public var perkTree:PerkTree = new PerkTree();
+    public var perkTree:PerkTree;
 
     /****
      This is used purely for bodges while we get things cleaned up.
