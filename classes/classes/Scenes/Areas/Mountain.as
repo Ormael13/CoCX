@@ -43,7 +43,7 @@ public class Mountain extends BaseContent
 		}
 		//Hills: lvl 10-15
 		//Low Mountains: lvl 20-30
-		//Moutains: lvl 35-55
+		//Mountains: lvl 35-55
 		private var _hillsEncounter:GroupEncounter = null;
 		private var _lowmountainEncounter:GroupEncounter = null;
 		private var _mountainEncounter:GroupEncounter = null;
@@ -174,12 +174,11 @@ public class Mountain extends BaseContent
 				call: curry(SceneLib.mimicScene.mimicTentacleStart,2)
 			});
 			_lowmountainEncounter = Encounters.group("low mountains", {
-				//General Angels, Golems, Goblin and Imp Encounters
+				//General Angels, Goblin and Imp Encounters
 				name: "common",
 				chance: 0.8,
 				call: function ():void{
-					if (rand(2) == 0) SceneLib.exploration.genericGolGobImpEncounters();
-					else SceneLib.exploration.genericAngelsEncounters();
+					SceneLib.exploration.genericGobImpAngEncounters();
 				}
 			}, {
 				//Helia monogamy fucks
@@ -337,7 +336,7 @@ public class Mountain extends BaseContent
 				when: fn.ifLevelMin(3),
 				call: curry(SceneLib.mimicScene.mimicTentacleStart,2)
 			});
-			_mountainEncounter = Encounters.group("mountain", {
+			_mountainEncounter = Encounters.group("mountain", {/*
 				//General Angels, Golems, Goblin and Imp Encounters
 				name: "common",
 				chance: 0.8,
@@ -345,7 +344,7 @@ public class Mountain extends BaseContent
 					if (rand(2) == 0) SceneLib.exploration.genericGolGobImpEncounters();
 					else SceneLib.exploration.genericAngelsEncounters();
 				}
-			}, {
+			}, {*/
 				//Helia monogamy fucks
 				name  : "helcommon",
 				night : false,

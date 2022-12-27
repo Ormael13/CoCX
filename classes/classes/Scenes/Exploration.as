@@ -642,6 +642,16 @@ public class Exploration extends BaseContent
 				}
 			}
 		}
+		public function genericGobImpAngEncounters(even:Boolean = false):void {
+			var gobImpAngChooser:int = rand(20);
+			if (gobImpAngChooser >= 5) SceneLib.goblinScene.goblinShamanEncounter();
+			//else if (gobImpAngChooser >= 10) angeloid
+			//else if (gobImpAngChooser >= 15) angeloid
+			else {
+				SceneLib.impScene.impOverlordEncounter();
+				spriteSelect(SpriteDb.s_impOverlord);
+			}
+		}
 		public function genericImpEncounters2(even:Boolean = false):void {
 			//Imptacular Encounter
 			var impChooser:int = rand(100);
@@ -673,14 +683,14 @@ public class Exploration extends BaseContent
 		}
 		public function genericDemonsEncounters1(even:Boolean = false):void {
 			//Imptacular Encounter
-			var demonChooser:int = rand(100);
+			var demonChooser:int = rand(15);
 			//Succubus
-			if (demonChooser >= 40 && demonChooser < 70) {
+			if (demonChooser >= 5 && demonChooser < 10) {
 				SceneLib.defiledravine.demonScene.SuccubusEncounter();
 				return;
 			}
 			//Incubus
-			else if (demonChooser >= 70) {
+			else if (demonChooser >= 10) {
 				SceneLib.defiledravine.demonScene.IncubusEncounter();
 				return;
 			}
@@ -767,20 +777,23 @@ public class Exploration extends BaseContent
 			clearOutput();
 			//Mid-rank Angel
 			if (angelsChooser >= 10 && angelsChooser < 20) {
-				outputText("A mid-ranked angel wings out of the sky and attacks!");
-				startCombat(new AngelMR());
+				outputText("A mid-ranked angeloid wings out of the sky and attacks!");
+				player.createStatusEffect(StatusEffects.AngelsChooser,2,0,0,0);
+				startCombat(new Angeloid());
 				return;
 			}
 			//High-rank Angel
 			else if (angelsChooser >= 20 && angelsChooser < 30) {
-				outputText("A high-ranked angel wings out of the sky and attacks!");
-				startCombat(new AngelHR());
+				outputText("A high-ranked angeloid wings out of the sky and attacks!");
+				player.createStatusEffect(StatusEffects.AngelsChooser,3,0,0,0);
+				startCombat(new Angeloid());
 				return;
 			}
 			//Low-rank Angel
 			else {
-				outputText("A low-ranked angel wings out of the sky and attacks!");
-				startCombat(new AngelLR());
+				outputText("A low-ranked angeloid wings out of the sky and attacks!");
+				player.createStatusEffect(StatusEffects.AngelsChooser,1,0,0,0);
+				startCombat(new Angeloid());
 				return;
 			}
 		}

@@ -4020,7 +4020,7 @@ public class PerkLib
 		public static const Equilibrium:PerkType = mk("Equilibrium", "Equilibrium",
 				"You can cast now any spell you learned even if you missing additional materials or not meet requirements. Slight increase cap on stored bones for necromancers. (+10% to OverMax Mana)");
 		public static const HyperCasting:PerkType = mk("Hyper Casting", "Hyper Casting",
-				"Decrease CD for spells: -1 for tier 1, -2 for tier 2 and -4 for tier 3. Allow to always autocast buff spells. (+10% to OverMax Mana)");
+				"Decrease CD for spells: -1 for tier 1, -2 for tier 2 and -4 for tier 3. Reduce spells costs by 20% (that affect bones used by necro spells too). Allow to always autocast buff spells. (+10% to OverMax Mana)");
 		public static const DeityJobMunchkin:PerkType = mk("Deity Job: Munchkin", "Job ( Deity ): Munchkin",
 				"You're Munchkin, an ultimate being that possess a god-like body and powers. (+20% max HP/Lust/Wrath, +10% max SF/Mana/Fatigue, increase limit of negative HP equal to all stats (aside of corruption) added up)")
 				.withBuffs({
