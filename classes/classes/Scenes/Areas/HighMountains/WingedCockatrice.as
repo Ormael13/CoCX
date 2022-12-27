@@ -24,6 +24,7 @@ import classes.BodyParts.Wings;
 			this.createStatusEffect(StatusEffects.Flying,50,0,0,0);
 			wings.type = Wings.FEATHERED_LARGE;
 			this.dynStats("spe", 10);
+			this.short = "winged cockatrice";
 			this.imageName = "cockatricewithwings";
 		}
 	}

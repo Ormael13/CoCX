@@ -49,7 +49,7 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Sweep Defenses. Gained when training with Chelsea and having 200+ libido. Effect: Critical tease also weakens your opponent's resistance to lust by 5%. (EragonX)\n");
 			outputText("-Hellhounds and Infected Hellhouds lvl increased by 10 levels. Harpy and Basilisk levels increased by 15 levels. Starting lvl of Izumi and Minerva increased by 12. Minotaur sons starting lvl was lowered by 10. Cockatrice enemies lvl increased by 55/62(winged).\n");
 			outputText("-Phoenixes meet outside tower are now all called quasi-phoenixes (since they weren't succesfull hybryds but their 'mother' was persistent to call them as success so in tower they are called as her mother wish for). Quasi-phoenix enemies in High Mountains increased lvl by 32.\n");
-			outputText("-\n");
+			outputText("-Adds 'perk distance' - a score indicating how difficult perk requirements are. Adds different sorting modes to PerkDatabase - by name, distance, relative distance. By default, perks in database are sorted by relative distance, so perks that are easier for player character to obtain will go first. (aimozg)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
