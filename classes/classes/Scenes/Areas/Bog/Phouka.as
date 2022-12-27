@@ -309,17 +309,16 @@ public class Phouka extends Monster
 					.add(consumables.GROPLUS, 2)
 					.add(consumables.SDELITE, 2)
 					.add(consumables.P_WHSKY, 2)
-					.add(consumables.CHOCBOX, 2)
+					.add(consumables.CHOCBOX, 8)
 					.add(useables.S_SHARD, 40);
 			}
 			else {
-				this.drop = new WeightedDrop().add(consumables.BLACK_D, 20)
+				this.drop = new WeightedDrop().add(consumables.BLACK_D, 15)
 					.add(consumables.RIZZART, 10)
 					.add(consumables.GROPLUS, 2)
 					.add(consumables.SDELITE, 13)
 					.add(consumables.P_WHSKY, 10)
-					.add(consumables.CHOCBOX, 10)
-					.add(null, 10);
+					.add(consumables.CHOCBOX, 15);
 			}
 			this.wings.type = Wings.FAIRY;
 			this.wings.desc = "small black faerie wings";

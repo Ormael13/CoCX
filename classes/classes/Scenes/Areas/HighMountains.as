@@ -28,7 +28,8 @@ public class HighMountains extends BaseContent {
         return _highMountainsEncounter;
     }
 
-    private function init():void {
+    //High Mountains: lvl 60-90
+	private function init():void {
         _highMountainsEncounter = Encounters.group("highmountains", {
             name: "d3",
             when: function ():Boolean {

@@ -175,11 +175,11 @@ public function alvinaSecondEncounterTalk():void
 	outputText("Alvina lowers her book to look at you for a moment, adjusting her glasses in front of her embery eyes.\n\n");
 	outputText("\"<i>Still want to know more, do you? Sure, I can share the knowledge but be quick with your queries, I still have a book to read.</i>\"\n\n");
 	menu();
-	addButton(0, "Her", alvinaSecondEncounterTalkHer);
-	addButton(1, "Hobby", alvinaSecondEncounterTalkHobby);
+	addButton(0, "Her", alvinaSecondEncounterTalkHer, alvinaSecondEncounterTalk);
+	addButton(1, "Hobby", alvinaSecondEncounterTalkHobby, alvinaSecondEncounterTalk);
 	addButton(4, "Leave", camp.returnToCampUseOneHour);
 }
-public function alvinaSecondEncounterTalkHer():void
+public function alvinaSecondEncounterTalkHer(next:Function):void
 {
 	clearOutput();
 	outputText("So, who is she exactly? Is she native to Mareth?\n\n");
@@ -187,15 +187,15 @@ public function alvinaSecondEncounterTalkHer():void
 	outputText("Well, that explains a lot. So she was born with two set of breasts and a second vagina?\n\n");
 	outputText("\"<i>You could say it like that, yes, though I had these traits corrected since.</i>\"\n\n");
 	if (player.inte > 150) outputText("There’s something she’s not telling you, likely it being related to her relation with the sand witches. She probably left in very bad terms. Regardless, you find it more prudent to talk about something else.\n\n");
-	doNext(alvinaSecondEncounterTalk);
+	doNext(next);
 }
-public function alvinaSecondEncounterTalkHobby():void
+public function alvinaSecondEncounterTalkHobby(next:Function):void
 {
 	clearOutput();
 	outputText("Those books she reads look very interesting, what language is that? You can’t understand a single word of it save for a few letters.\n\n");
 	outputText("\"<i>These are advanced arcanic texts meant for the adept only. If you were better at magic, perhaps you would understand the symbols and patterns in them. You may think you have mastered spellcasting after your first whitefire, but magic is way more complicated than that. To most students, it takes years to achieve true mastery. Perhaps if you try hard enough, someday I will teach you.</i>\"\n\n");
 	outputText("That’s something you will have to consider, for now, you decide to change the subject.\n\n");
-	doNext(alvinaSecondEncounterTalk);
+	doNext(next);
 }
 
 public function alvinaSecondBonusEncounter():void
@@ -412,30 +412,34 @@ public function alvinaThirdEncounterTakeHer():void
 
 		function gaveAnyPresent():Boolean { return GaveAlvinaFlowers || GaveAlvinaFafnirTear || GaveAlvinaChocolate || GaveAlvinaMrPaw || GaveAlvinaWand; }
 
-		alvinaBarTalkOptions();
+		menu();
+		addButton(0, "Talk", alvinaSecondEncounterTalk);
+		addButton(1, "Gift", alvinaBarGiftOptions);
+		if (gaveAllPresents() && !DateFailed && !FirstDateSuccess)
+			addButton(1, "Date", alvinaDate);
+		if (FirstDateSuccess && flags[kFLAGS.LETHICE_DEFEATED] > 0)
+			addButton(1, "Date", alvinaSecondDate);
+		function gaveAllPresents():Boolean { return GaveAlvinaFafnirTear && GaveAlvinaChocolate && GaveAlvinaMrPaw && GaveAlvinaWand && WandCooldown < 0; }
+		addButton(14, "Leave", telAdre.telAdreMenu);
+
 	}
-	public function alvinaBarTalkOptions():void {
+	public function alvinaBarGiftOptions():void {
 		menu();
 		//if has Fafnir Tear
-		if (!GaveAlvinaFafnirTear)
+		if (!GaveAlvinaFafnirTear && hasFlowers())
 				addButton(0, "Give Flower", alvinaGiveAFlower).disableIf(!hasFlowers(), "You might want to give her a flower");
-		if (!GaveAlvinaChocolate)
+		if (!GaveAlvinaChocolate && player.hasItem(consumables.CHOCBOX))
 			addButton(1, "Give Chocolate", alvinaGiveChocolate).disableIf(!player.hasItem(consumables.CHOCBOX), "You want to give her something sweet, maybe those Phouka in the bog might have something?");
-		if (!GaveAlvinaMrPaw)
+		if (!GaveAlvinaMrPaw && player.hasItem(useables.TEDDY))
 			addButton(2, "Give MrPaw", alvinaGiveMrPaw).disableIf(!player.hasItem(useables.TEDDY), "You need a gift to give to her, maybe check the Oddities shop?", "???");
-		if (!GaveAlvinaWand)
+		if (!GaveAlvinaWand && player.hasItem(weapons.O_WAND))
 			addButton(3, "Give Wand", alvinaGiveWand).disableIf(!player.hasItem(weapons.O_WAND), "You need a gift to give to her, maybe check the Oddities shop?", "???");
-		if (gaveAllPresents() && !DateFailed && !FirstDateSuccess)
-			addButton(0, "Date", alvinaDate);
-		if (FirstDateSuccess && flags[kFLAGS.LETHICE_DEFEATED] > 0)
-			addButton(0, "Date", alvinaSecondDate);
-		addButton(14, "Leave", telAdre.telAdreMenu);
+		addButton(4, "Back", alvinaMeetAtBar);
 
 		function hasFlowers():Boolean {
 			return player.hasItem(consumables.F_TEAR) || player.hasItem(consumables.DRAKHRT) || player.hasItem(consumables.STRFLOW) || player.hasItem(consumables.SNAKEBANE);
 		}
-		function gaveAllPresents():Boolean { return GaveAlvinaFafnirTear && GaveAlvinaChocolate && GaveAlvinaMrPaw && GaveAlvinaWand && WandCooldown < 0; }
-	}
+		}
 
 	public function alvinaGiveAFlower():void {
 		spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2Concealed_16bit);
@@ -483,7 +487,7 @@ public function alvinaThirdEncounterTakeHer():void
 		outputText("\"Well, anything else you wanted to talk about?\"");
 		GaveAlvinaFlowers = true;
 		player.destroyItems(flower, 1);
-		alvinaBarTalkOptions();
+		alvinaBarGiftOptions();
 	}
 	public function alvinaGiveMrPaw():void {
 		spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2Concealed_16bit);
@@ -498,7 +502,7 @@ public function alvinaThirdEncounterTakeHer():void
 		outputText("\"<i>Anything else you wanted to talk to me about [Name]?</i>\"\n\n");
 		player.destroyItems(useables.TEDDY, 1);
 		GaveAlvinaMrPaw = true;
-		alvinaBarTalkOptions();
+		alvinaBarGiftOptions();
 	}
 	public function alvinaGiveWand():void {
 		spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2Concealed_16bit);
@@ -510,7 +514,7 @@ public function alvinaThirdEncounterTakeHer():void
 		player.destroyItems(weapons.O_WAND, 1);
 		GaveAlvinaWand = true;
 		WandCooldown = 1;
-		alvinaBarTalkOptions();
+		alvinaBarGiftOptions();
 	}
 	public function alvinaGiveChocolate():void {
 		spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2Concealed_16bit);
@@ -531,7 +535,7 @@ public function alvinaThirdEncounterTakeHer():void
 		outputText("You ask how it went with the magical tool, and she hands the wand to you fully repaired.\n\n");
 		outputText("\"<i>Good as new. Though you are not the original owner, it will still work quite well, though probably not quite as well as if itd been custom made for you. Blast off some imps with that for practice if you need to.</i>\"\n\n");
 		WandCooldown = -1;
-		inventory.takeItem(weapons.R_WAND, alvinaBarTalkOptions);
+		inventory.takeItem(weapons.R_WAND, alvinaBarGiftOptions);
 	}
 
 	public function alvinaDate():void {

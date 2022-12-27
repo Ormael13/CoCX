@@ -787,11 +787,13 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("You need more time before you can use Displacement again.\n\n");
 			}
 		}
-		if (player.isRaceCached(Races.RACCOON, 2) && !monster.plural) {
-			bd = buttons.add("Prank", Prank).hint("Distract the enemy for 1 round interupting its action. \n\nWould go into cooldown after use for: "+(player.hasPerk(PerkLib.NaturalInstincts) ? "4":"5")+" rounds", "Prank");
-			if (player.hasStatusEffect(StatusEffects.CooldownPrank)) {
-				bd.disable("You need more time before you can prank your opponent again.");
-			} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+		if (player.isRaceCached(Races.RACCOON, 2)) {
+			if (!monster.plural) {
+				bd = buttons.add("Prank", Prank).hint("Distract the enemy for 1 round interupting its action. \n\nWould go into cooldown after use for: "+(player.hasPerk(PerkLib.NaturalInstincts) ? "4":"5")+" rounds", "Prank");
+				if (player.hasStatusEffect(StatusEffects.CooldownPrank)) {
+					bd.disable("You need more time before you can prank your opponent again.");
+				} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+			}
 			bd = buttons.add("Money Strike", MoneyStrike).hint("Attack your opponent using magically enhanced money. Damage is based on personal wealth. Cost some gems upon use.", "Money Strike");
 			bd.requireFatigue(spellCost(40),true);
 			if (player.gems < 100) bd.disable("You need more gems in order to use Money Strike.");
