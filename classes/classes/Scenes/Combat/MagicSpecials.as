@@ -794,6 +794,8 @@ public class MagicSpecials extends BaseCombatContent {
 					bd.disable("You need more time before you can prank your opponent again.");
 				} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
+		}
+		if (player.isRaceCached(Races.RACCOON, 2) || player.perkv1(IMutationsLib.NukiNutsIM) >= 1) {
 			bd = buttons.add("Money Strike", MoneyStrike).hint("Attack your opponent using magically enhanced money. Damage is based on personal wealth. Cost some gems upon use.", "Money Strike");
 			bd.requireFatigue(spellCost(40),true);
 			if (player.gems < 100) bd.disable("You need more gems in order to use Money Strike.");
@@ -4414,7 +4416,7 @@ public class MagicSpecials extends BaseCombatContent {
 		lustDmgF = lustDmgF * monster.lustVuln;
 		if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmgF *= 1.50;
-		if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50 && flags[kFLAGS.COMBAT_TEASE_HEALING]) {
+		if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50 && flags[kFLAGS.COMBAT_TEASE_HEALING] == 0) {
 			outputText("\nYou use your own lust against the enemy, cooling off a bit in the process.");
 			player.takeLustDamage(Math.round(-lustDmgF)/40, true);
 			lustDmgF *= 1.2;
@@ -4754,7 +4756,7 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-		if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50 && flags[kFLAGS.COMBAT_TEASE_HEALING]) {
+		if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50 && flags[kFLAGS.COMBAT_TEASE_HEALING] == 0) {
 			outputText("\nYou use your own lust against the enemy, cooling off a bit in the process.");
 			player.takeLustDamage(Math.round(-lustDmg)/40, true);
 			lustDmg *= 1.2;
@@ -4821,7 +4823,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if(player.armorName == "Scandalous Succubus Clothing") lustDmg *= 1.25;
 		if (player.armor == armors.ELFDRES && player.isElf()) lustDmg *= 2;
 		if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg *= 2;
-		if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50 && flags[kFLAGS.COMBAT_TEASE_HEALING]) {
+		if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50 && flags[kFLAGS.COMBAT_TEASE_HEALING] == 0) {
 			outputText("\nYou use your own lust against the enemy, cooling off a bit in the process.");
 			player.takeLustDamage(Math.round(-lustDmg)/40, true);
 			lustDmg *= 1.2;
@@ -4952,7 +4954,7 @@ public class MagicSpecials extends BaseCombatContent {
 				damage += Math.round(player.lust * 0.1);
 				player.lust -= Math.round(player.lust * 0.1);
 			}
-			if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50 && flags[kFLAGS.COMBAT_TEASE_HEALING]) {
+			if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50 && flags[kFLAGS.COMBAT_TEASE_HEALING] == 0) {
 				outputText("\nYou use your own lust against the enemy, cooling off a bit in the process.");
 				player.takeLustDamage(Math.round(-damage)/40, true);
 				damage *= 1.2;
