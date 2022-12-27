@@ -189,7 +189,7 @@ public class PerkMenu extends BaseContent {
 			outputText("Combat Tease can cause lust reduction: " + (
 					flags[kFLAGS.COMBAT_TEASE_HEALING] == 0 ? "Enabled" : "Disabled"
 			));
-			addButton(5, "C. Tease Heal", curry(toggleFlagMisc, kFLAGS.COMBAT_TEASE_HEALING));
+			addButton(10, "C. Tease Heal", curry(toggleFlagMisc, kFLAGS.COMBAT_TEASE_HEALING));
 		}
 		//
 		addButton(14, "Back", displayPerks);
