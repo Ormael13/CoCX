@@ -371,12 +371,10 @@ public class Alvina extends Monster
 				this.armorMDef = 100;
 				if (SceneLib.alvinaFollower.DefeatedAlvinaFirstStage){
 					this.bonusHP = 4000000;
-					this.drop = new ChainedDrop().add(weapons.DEMSCYT, 1);
 					alvinaMaleficium();
 				}
 				else {
 					this.bonusHP = 400000;
-					this.drop = NO_DROP;
 				}
 				this.bonusMana = 30000;
 				this.bonusLust = 1180;
@@ -395,7 +393,6 @@ public class Alvina extends Monster
 				else this.bonusHP = 200000;
 				this.bonusMana = 15000;
 				this.bonusLust = 590;
-				this.drop = NO_DROP;
 			}
 			this.weaponName = "demonic scythe";
 			this.weaponVerb="slash";
@@ -404,6 +401,7 @@ public class Alvina extends Monster
 			if (hasStatusEffect(StatusEffects.Maleficium)) this.lustVuln = 0.75;
 			else this.lustVuln = 0.5;
 			this.level = 100;
+			this.drop = NO_DROP;
 			this.gems = rand(25) + 138;
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);

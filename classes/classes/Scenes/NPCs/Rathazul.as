@@ -292,11 +292,11 @@ private function rathazulWorkOffer():Boolean {
 		}
 		else if(flags[kFLAGS.RATHAZUL_MINDUP_OFFERED] > 0) {
 			outputText("You recall that Rathazul is willing to make something to restore sanity for 250 gems and five incenses of Insight.");
-			if(player.hasItem(consumables.MIND_UP,5) && player.gems >= 250) {
+			if(player.hasItem(consumables.INCOINS,5) && player.gems >= 250) {
 				totalOffers++;
 				mindup = true;
 			}
-			else if(!player.hasItem(consumables.MIND_UP,5)) outputText("  You should probably find some if you want that...");
+			else if(!player.hasItem(consumables.INCOINS,5)) outputText("  You should probably find some if you want that...");
 			else outputText("  You need more gems to afford that, though.");
 			outputText("\n\n");			
 		}

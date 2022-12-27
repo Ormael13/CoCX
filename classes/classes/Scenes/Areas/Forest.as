@@ -90,20 +90,13 @@ use namespace CoC;
 		private function init():void {
             const fn:FnHelpers = Encounters.fn;
 			_forestOutskirtsEncounter = Encounters.group("outskirtsforest", {
-						//General Golems, Goblin and Imp Encounters
+						//General Golems, Goblin, Angels and Imp Encounters
 						name: "common",
-						chance: 0.4,
+						chance: 0.8,
 						call: function ():void {
 							player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
-							SceneLib.exploration.genericGolGobImpEncounters();
-						}
-					}, {
-						//General Angels Encounters
-						name: "common",
-						chance: 0.4,
-						call: function ():void {
-							player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
-							SceneLib.exploration.genericAngelsEncounters();
+							if (rand(4) == 0) SceneLib.exploration.genericAngelsEncounters();
+							else SceneLib.exploration.genericGolGobImpEncounters();
 						}
 					}, {
 						//Helia monogamy fucks

@@ -34,7 +34,9 @@ public class LifestealEnchantmentSpell extends AbstractBloodSpell {
 	}
 	
 	public function calcDuration():int {
-		return 5;
+		var calcC:int = 2;
+		calcC += spellGenericCooldown();
+		return calcC;
 	}
 	
 	override public function advance(display:Boolean):void {

@@ -26,7 +26,9 @@ public class BloodWaveSpell extends AbstractBloodSpell {
 	}
 	
 	override public function calcCooldown():int {
-		return 5;
+		var calcC:int = 2;
+		calcC += spellGenericCooldown();
+		return calcC;
 	}
 	
 	public function calcDamage(target:Monster, randomize:Boolean=true, casting:Boolean = true):Number { //casting - Increase Elemental Counter while casting (like Raging Inferno)

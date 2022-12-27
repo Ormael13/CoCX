@@ -37,21 +37,15 @@ use namespace CoC;
 		private function init():void {
 			const fn:FnHelpers = Encounters.fn;
 			explorationEncounter = Encounters.group(/*SceneLib.commonEncounters,*/ {
-				//General Golems, Goblin and Imp Encounters
+				//General Golems, Goblin, Angels and Imp Encounters
 				name: "common",
-				chance: 0.4,
+				chance: 0.8,
 				call: function ():void {
 					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
-					SceneLib.exploration.genericGolGobImpEncounters();
+					if (rand(4) == 0) SceneLib.exploration.genericAngelsEncounters();
+					else SceneLib.exploration.genericGolGobImpEncounters();
 				}
-			}, {/*
-				//General Angels Encounters
-				name: "common",
-				call: function ():void {
-					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
-					SceneLib.exploration.genericAngelsEncounters();
-				}
-			}, {*/
+			}, {
 				//Helia monogamy fucks
 				name  : "helcommon",
 				night : false,

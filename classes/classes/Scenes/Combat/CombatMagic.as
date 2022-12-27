@@ -61,6 +61,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.WarMageAdept)) costPercent -= 10;
 		if (player.hasPerk(PerkLib.WarMageExpert)) costPercent -= 15;
 		if (player.hasPerk(PerkLib.WarMageMaster)) costPercent -= 20;
+		if (player.hasPerk(PerkLib.HyperCasting)) costPercent -= 20;
 		if (player.headjewelryName == "fox hairpin") costPercent -= 20;
         if (player.weapon == weapons.N_STAFF) costPercent += 200;
 		if (player.weapon == weapons.U_STAFF) costPercent -= 50;
@@ -469,6 +470,7 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.necklace == necklaces.LEAFAMU && player.isElf()) mod -= 2;
 			else mod -= 1;
 		}
+		if (player.hasPerk(PerkLib.HyperCasting)) mod -= 1;
 		if (mod < 0) mod = 0;
 		return mod;
 	}
@@ -479,6 +481,7 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.necklace == necklaces.LEAFAMU && player.isElf()) mod -= 2;
 			else mod -= 1;
 		}
+		if (player.hasPerk(PerkLib.HyperCasting)) mod -= 2;
 		if (mod < 0) mod = 0;
 		return mod;
 	}
@@ -490,6 +493,7 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.necklace == necklaces.LEAFAMU && player.isElf()) mod -= 2;
 			else mod -= 1;
 		}
+		if (player.hasPerk(PerkLib.HyperCasting)) mod -= 1;
 		if (mod < 0) mod = 0;
 		return mod;
 	}
@@ -501,6 +505,7 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.necklace == necklaces.LEAFAMU && player.isElf()) mod -= 2;
 			else mod -= 1;
 		}
+		if (player.hasPerk(PerkLib.HyperCasting)) mod -= 2;
 		if (mod < 0) mod = 0;
 		return mod;
 	}
@@ -512,6 +517,7 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.necklace == necklaces.LEAFAMU && player.isElf()) mod -= 2;
 			else mod -= 1;
 		}
+		if (player.hasPerk(PerkLib.HyperCasting)) mod -= 4;
 		if (mod < 0) mod = 0;
 		return mod;
 	}
@@ -523,6 +529,7 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.necklace == necklaces.LEAFAMU && player.isElf()) mod -= 2;
 			else mod -= 1;
 		}
+		if (player.hasPerk(PerkLib.HyperCasting)) mod -= 1;
 		if (mod < 0) mod = 0;
 		return mod;
 	}
@@ -534,6 +541,7 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.necklace == necklaces.LEAFAMU && player.isElf()) mod -= 2;
 			else mod -= 1;
 		}
+		if (player.hasPerk(PerkLib.HyperCasting)) mod -= 2;
 		if (mod < 0) mod = 0;
 		return mod;
 	}
@@ -545,7 +553,18 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.necklace == necklaces.LEAFAMU && player.isElf()) mod -= 2;
 			else mod -= 1;
 		}
+		if (player.hasPerk(PerkLib.HyperCasting)) mod -= 4;
 		if (mod < 0) mod = 0;
+		return mod;
+	}
+
+	internal function spellGenericCooldownImpl():Number {
+		var mod:Number = 3;
+		if (player.hasPerk(PerkLib.NaturalSpellcasting)) {
+			if (player.necklace == necklaces.LEAFAMU && player.isElf()) mod -= 2;
+			else mod -= 1;
+		}
+		if (player.hasPerk(PerkLib.HyperCasting)) mod -= 1;
 		return mod;
 	}
 
@@ -760,7 +779,7 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 			if (player.armor == armors.ELFDRES && player.isElf()) damage *= 2;
         	if (player.armor == armors.FMDRESS && player.isWoodElf()) damage *= 2;
-			if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50 && flags[kFLAGS.COMBAT_TEASE_HEALING]) {
+			if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50 && flags[kFLAGS.COMBAT_TEASE_HEALING] == 0) {
 				outputText("\nYou use your own lust against the enemy, cooling off a bit in the process.");
 				player.takeLustDamage(Math.round(-damage)/40, true);
 				damage *= 1.2;
@@ -777,7 +796,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.Venomancy)) {
 			if (player.tailVenom >= player.VenomWebCost()) {
 				var injections:Number = 0;
-				if (player.hasPerk(PerkLib.ArcaneVenom)) numberOfProcs += AbstractSpell.stackingArcaneVenom();
+				if (player.hasPerk(PerkLib.ArcaneVenom)) numberOfProcs *= AbstractSpell.stackingArcaneVenom();
 				while (player.tailVenom >= player.VenomWebCost() && injections < numberOfProcs) {
 					var damageB:Number = 35 + rand(player.lib / 10);
 					var poisonScaling:Number = 1;

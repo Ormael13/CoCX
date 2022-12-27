@@ -649,6 +649,16 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.Lycanthropy);
 				needNext = true;
 			}
+			if (player.hasPerk(PerkLib.Immortality) && !player.isRaceCached(Races.AZAZEL)) {
+				outputText("\nYou lose your sence of invulnerability as you are no longer an Azazel.\n");
+				player.removePerk(PerkLib.Immortality);
+				needNext = true;
+			}
+			if (!player.hasPerk(PerkLib.Immortality) && player.isRaceCached(Races.AZAZEL)) {
+				outputText("\nYou regain your sence of invulnerability as you are now an Azazel.\n");
+				player.createPerk(PerkLib.Immortality, 0, 0, 0, 0);
+				needNext = true;
+			}
 			//No better place for these since the code for the event is part of CoC.as or one of its included files
 			if (flags[kFLAGS.TIME_SINCE_VALA_ATTEMPTED_RAPE_PC] > 0) flags[kFLAGS.TIME_SINCE_VALA_ATTEMPTED_RAPE_PC]--; //Vala post-rape countdown
 			if (flags[kFLAGS.GATS_ANGEL_TIME_TO_FIND_KEY] > 0 && flags[kFLAGS.GATS_ANGEL_TIME_TO_FIND_KEY] < 500) flags[kFLAGS.GATS_ANGEL_TIME_TO_FIND_KEY]++;
@@ -1356,7 +1366,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			//Lustzerker perk
 			if (!player.hasPerk(PerkLib.Lustzerker) && (player.isRaceCached(Races.SALAMANDER) || player.isRaceCached(Races.PHOENIX) || player.isRaceCached(Races.KITSHOO))) { //Check for gain of lustzerker - requires legs, arms and tail
-				outputText("\nYou start to feel a weird, slightly unpleasant feeling inside your body. Like many tiny flames coursing through your veins, making you ponder what is happening with your body. Remembering about salamanders' natural talent for entering a berserk-like state, you quess that should be it. [pg](Gained Perk: Lustzerker)");
+				outputText("\nYou start to feel a weird, slightly unpleasant feeling inside your body. Like many tiny flames coursing through your veins, making you ponder what is happening with your body. Remembering about salamanders' natural talent for entering a berserk-like state, you guess that should be it. [pg](Gained Perk: Lustzerker)");
 				player.createPerk(PerkLib.Lustzerker, 0, 0, 0, 0);
 				needNext = true;
 			}

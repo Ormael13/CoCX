@@ -58,10 +58,10 @@ public class DarkElfRanger extends DarkElfScout
 			this.armorName = "elven armor";
 			this.armorDef = 12;
 			this.armorMDef = 12;
-			this.bonusLust = 189;
+			this.bonusLust = 197;
 			this.lustVuln = .7;
 			this.lust = 50;
-			this.level = 39;
+			this.level = 47;
 			this.gems = rand(10) + 20;
 			this.drop = new WeightedDrop().
 					add(weaponsrange.BOWLIGH,1).

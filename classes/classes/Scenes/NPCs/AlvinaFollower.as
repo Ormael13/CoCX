@@ -175,11 +175,11 @@ public function alvinaSecondEncounterTalk():void
 	outputText("Alvina lowers her book to look at you for a moment, adjusting her glasses in front of her embery eyes.\n\n");
 	outputText("\"<i>Still want to know more, do you? Sure, I can share the knowledge but be quick with your queries, I still have a book to read.</i>\"\n\n");
 	menu();
-	addButton(0, "Her", alvinaSecondEncounterTalkHer);
-	addButton(1, "Hobby", alvinaSecondEncounterTalkHobby);
+	addButton(0, "Her", alvinaSecondEncounterTalkHer, alvinaSecondEncounterTalk);
+	addButton(1, "Hobby", alvinaSecondEncounterTalkHobby, alvinaSecondEncounterTalk);
 	addButton(4, "Leave", camp.returnToCampUseOneHour);
 }
-public function alvinaSecondEncounterTalkHer():void
+public function alvinaSecondEncounterTalkHer(next:Function):void
 {
 	clearOutput();
 	outputText("So, who is she exactly? Is she native to Mareth?\n\n");
@@ -187,15 +187,15 @@ public function alvinaSecondEncounterTalkHer():void
 	outputText("Well, that explains a lot. So she was born with two set of breasts and a second vagina?\n\n");
 	outputText("\"<i>You could say it like that, yes, though I had these traits corrected since.</i>\"\n\n");
 	if (player.inte > 150) outputText("There’s something she’s not telling you, likely it being related to her relation with the sand witches. She probably left in very bad terms. Regardless, you find it more prudent to talk about something else.\n\n");
-	doNext(alvinaSecondEncounterTalk);
+	doNext(next);
 }
-public function alvinaSecondEncounterTalkHobby():void
+public function alvinaSecondEncounterTalkHobby(next:Function):void
 {
 	clearOutput();
 	outputText("Those books she reads look very interesting, what language is that? You can’t understand a single word of it save for a few letters.\n\n");
 	outputText("\"<i>These are advanced arcanic texts meant for the adept only. If you were better at magic, perhaps you would understand the symbols and patterns in them. You may think you have mastered spellcasting after your first whitefire, but magic is way more complicated than that. To most students, it takes years to achieve true mastery. Perhaps if you try hard enough, someday I will teach you.</i>\"\n\n");
 	outputText("That’s something you will have to consider, for now, you decide to change the subject.\n\n");
-	doNext(alvinaSecondEncounterTalk);
+	doNext(next);
 }
 
 public function alvinaSecondBonusEncounter():void
@@ -333,13 +333,18 @@ public function alvinaThirdEncounterYesNeverWon():void
 		outputText("“<i>Checkmates uh… I guess that's just what I deserve for all the things I've done... tsk some justice this world has. Mother... Dad... I'm coming home at last.\"</i>\n\n");
 		outputText("Her shape starts to bloat with light as the immense powers she used to control overwhelms her. Alvina seems to silently accept death before exploding in a conflagration of arcane magic turning to ashes.\n\n");
 		outputText("You turn your eyes away, nauseated at the scene… This is what happens to those who play with forbidden powers, quite a fitting end. You prepare to leave the cave feeling like you have rid Mareth of a powerful villain but before you do you grab the shattered remains of Alvina phylactery with you. Someone is bound to know what to do with this.\n\n");
-		outputText("<b>Found Alvina's Shattered Phylactery</b>\n\n");
-		player.createKeyItem("Alvina's Shattered Phylactery", 0, 0, 0, 0);
-		flags[kFLAGS.ALVINA_FOLLOWER] = 12;
 		awardAchievement("The end and the beginning", kACHIEVEMENTS.GENERAL_THE_END_AND_THE_BEGINNING);
 		if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) awardAchievement("Beyond gods and mortals", kACHIEVEMENTS.GENERAL_BEYOND_GODS_AND_MORTALS);
-		doNext(camp.returnToCampUseSixHours);
+		alvinaDies(camp.returnToCampUseSixHours);
 	}
+}
+private function alvinaDies(next:Function):void {
+	outputText("\n<b>Found Alvina's Shattered Phylactery</b>\n\n");
+	player.createKeyItem("Alvina's Shattered Phylactery", 0, 0, 0, 0);
+	flags[kFLAGS.ALVINA_FOLLOWER] = 12;
+	if (flags[kFLAGS.GAME_DIFFICULTY] >= 2)
+		inventory.takeItem(weapons.ATWINSCY, next);
+	else doNext(next);
 }
 public function alvinaThirdEncounterYesNeverLost():void
 {
@@ -396,10 +401,13 @@ public function alvinaThirdEncounterTakeHer():void
 		outputText("You sit right next to her, and she closes her book in response, turning to you.\n\n");
 		if (!MetAlvinaAtBar){
 			MetAlvinaAtBar = true;
-			outputText("It was Alvina, the stranger you met on your travels!  ");
+			outputText("You approach the cloaked figure and recognise her from before. It's Alvina the wanderer you met out in the wild. She is currently busy reading a book but is swift to acknowledge your presence when you sit right next to her. Adjusting her glasses and turning her green gaze toward you with an amused smile.[pg]");
+			outputText("\"<i>Oh you again? I did half expect you to find your way here but it is a nice surprise. So tell me how is your adventuring going?</i>\"[pg]");
+			outputText("You provide Alvina with all the details of your recent exploration.[pg]");
+			outputText("\"<i>Not bad, you might just make it out there. So [name], anything I can do for you today?</i>\"[pg]");
 		}
 		if (gaveAnyPresent()) outputText("\"<i>Ah [name], how nice to see you. ");
-		else outputText("\"Ah champion, a welcome sight indeed. ");
+		else outputText("\"Ah [name], a welcome sight indeed. ");
 		outputText("What can I do for you today?</i>\"\n\n");
 
 		if (GaveAlvinaWand && WandCooldown == 0)
@@ -407,30 +415,34 @@ public function alvinaThirdEncounterTakeHer():void
 
 		function gaveAnyPresent():Boolean { return GaveAlvinaFlowers || GaveAlvinaFafnirTear || GaveAlvinaChocolate || GaveAlvinaMrPaw || GaveAlvinaWand; }
 
-		alvinaBarTalkOptions();
+		menu();
+		addButton(0, "Talk", alvinaSecondEncounterTalk);
+		addButton(1, "Gift", alvinaBarGiftOptions);
+		if (gaveAllPresents() && !DateFailed && !FirstDateSuccess)
+			addButton(1, "Date", alvinaDate);
+		if (FirstDateSuccess && flags[kFLAGS.LETHICE_DEFEATED] > 0)
+			addButton(1, "Date", alvinaSecondDate);
+		function gaveAllPresents():Boolean { return GaveAlvinaFafnirTear && GaveAlvinaChocolate && GaveAlvinaMrPaw && GaveAlvinaWand && WandCooldown < 0; }
+		addButton(14, "Leave", telAdre.telAdreMenu);
+
 	}
-	public function alvinaBarTalkOptions():void {
+	public function alvinaBarGiftOptions():void {
 		menu();
 		//if has Fafnir Tear
-		if (!GaveAlvinaFafnirTear)
+		if (!GaveAlvinaFafnirTear && hasFlowers())
 				addButton(0, "Give Flower", alvinaGiveAFlower).disableIf(!hasFlowers(), "You might want to give her a flower");
-		if (!GaveAlvinaChocolate)
+		if (!GaveAlvinaChocolate && player.hasItem(consumables.CHOCBOX))
 			addButton(1, "Give Chocolate", alvinaGiveChocolate).disableIf(!player.hasItem(consumables.CHOCBOX), "You want to give her something sweet, maybe those Phouka in the bog might have something?");
-		if (!GaveAlvinaMrPaw)
+		if (!GaveAlvinaMrPaw && player.hasItem(useables.TEDDY))
 			addButton(2, "Give MrPaw", alvinaGiveMrPaw).disableIf(!player.hasItem(useables.TEDDY), "You need a gift to give to her, maybe check the Oddities shop?", "???");
-		if (!GaveAlvinaWand)
+		if (!GaveAlvinaWand && player.hasItem(weapons.O_WAND))
 			addButton(3, "Give Wand", alvinaGiveWand).disableIf(!player.hasItem(weapons.O_WAND), "You need a gift to give to her, maybe check the Oddities shop?", "???");
-		if (gaveAllPresents() && !DateFailed && !FirstDateSuccess)
-			addButton(0, "Date", alvinaDate);
-		if (FirstDateSuccess && flags[kFLAGS.LETHICE_DEFEATED] > 0)
-			addButton(0, "Date", alvinaSecondDate);
-		addButton(14, "Leave", telAdre.telAdreMenu);
+		addButton(4, "Back", alvinaMeetAtBar);
 
 		function hasFlowers():Boolean {
 			return player.hasItem(consumables.F_TEAR) || player.hasItem(consumables.DRAKHRT) || player.hasItem(consumables.STRFLOW) || player.hasItem(consumables.SNAKEBANE);
 		}
-		function gaveAllPresents():Boolean { return GaveAlvinaFafnirTear && GaveAlvinaChocolate && GaveAlvinaMrPaw && GaveAlvinaWand && WandCooldown < 0; }
-	}
+		}
 
 	public function alvinaGiveAFlower():void {
 		spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2Concealed_16bit);
@@ -478,7 +490,7 @@ public function alvinaThirdEncounterTakeHer():void
 		outputText("\"Well, anything else you wanted to talk about?\"");
 		GaveAlvinaFlowers = true;
 		player.destroyItems(flower, 1);
-		alvinaBarTalkOptions();
+		alvinaBarGiftOptions();
 	}
 	public function alvinaGiveMrPaw():void {
 		spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2Concealed_16bit);
@@ -493,7 +505,7 @@ public function alvinaThirdEncounterTakeHer():void
 		outputText("\"<i>Anything else you wanted to talk to me about [Name]?</i>\"\n\n");
 		player.destroyItems(useables.TEDDY, 1);
 		GaveAlvinaMrPaw = true;
-		alvinaBarTalkOptions();
+		alvinaBarGiftOptions();
 	}
 	public function alvinaGiveWand():void {
 		spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2Concealed_16bit);
@@ -505,7 +517,7 @@ public function alvinaThirdEncounterTakeHer():void
 		player.destroyItems(weapons.O_WAND, 1);
 		GaveAlvinaWand = true;
 		WandCooldown = 1;
-		alvinaBarTalkOptions();
+		alvinaBarGiftOptions();
 	}
 	public function alvinaGiveChocolate():void {
 		spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2Concealed_16bit);
@@ -526,7 +538,7 @@ public function alvinaThirdEncounterTakeHer():void
 		outputText("You ask how it went with the magical tool, and she hands the wand to you fully repaired.\n\n");
 		outputText("\"<i>Good as new. Though you are not the original owner, it will still work quite well, though probably not quite as well as if itd been custom made for you. Blast off some imps with that for practice if you need to.</i>\"\n\n");
 		WandCooldown = -1;
-		inventory.takeItem(weapons.R_WAND, alvinaBarTalkOptions);
+		inventory.takeItem(weapons.R_WAND, alvinaBarGiftOptions);
 	}
 
 	public function alvinaDate():void {
@@ -538,7 +550,7 @@ public function alvinaThirdEncounterTakeHer():void
 		outputText("Alvina is shocked and confused but decides to nod to your invitation regardless. The two of you go out sightseeing the entire city for the next few hours and even stop at the bakery to share desserts. At the end of the day you climb up a building and take a look at the sky.\n\n");
 		outputText("\"<i>Well I had forgotten how beautiful the stars are with the clouds covering the sky and what not. You clearing the factory that was spraying cloudy fumes all over the place is a blessing.</i>\"\n\n");
 		outputText("You agree that seeing the star is definitively less depressing than the clouds but that it wouldn't be as great if you were alone doing it. Doing things with her today made everything better.\n\n");
-		outputText("Alvina seems lost in thought for a moment before replying \"<i>Everything we see here is impermanent… Those folks will die one day and the food will be consumed or will spoil and rot on its own. Even this city… There's no telling when It'll become a ghost town and be forgotten by everyone and everything. People die [name] because they are bound by a set of laws they can't escape. It kind of sucks because this also creates loss, the other inevitability. One day inevitably you will lose things dear to you… how will you react to it? What's the point of getting attached to things that may be gone tomorrow? Maybe we should just let the demon's win so everyone can live on forever.</i>>\"\n\n");
+		outputText("Alvina seems lost in thought for a moment before replying \"<i>Everything we see here is impermanent… Those folks will die one day and the food will be consumed or will spoil and rot on its own. Even this city… There's no telling when It'll become a ghost town and be forgotten by everyone and everything. People die [name] because they are bound by a set of laws they can't escape. It kind of sucks because this also creates loss, the other inevitability. One day inevitably you will lose things dear to you… how will you react to it? What's the point of getting attached to things that may be gone tomorrow? Maybe we should just let the demon's win so everyone can live on forever.</i>\"\n\n");
 
 		menu();
 		addButton(0, "None", alvinaDateNone).hint("There is no point it's all going to be gone either way.");
@@ -648,7 +660,6 @@ public function alvinaThirdEncounterTakeHer():void
 		outputText("What do you want to prove? The strength of your conviction of course! Still, proving that you are right is not enough, you want to save this one lost girl from herself. \n\n");
 		outputText("This reply seems to anger Alvina \"<i>I'm through with this shit… Save me? Seriously? You think I can be SAVED? Give me a break, the last thing I deserve is your mercy! If you won't do it then I WILL</i>\"\n\n");
 		outputText("Alvina suddenly grabs her necklace and tosses it on the ground in front of her. You can see the scene going in slow motion as the fallen archmage grabs her scythe with both hands and prepares to smash the pendant with all her might.\n\n");
-
 		menu();
 		addButton(0, "Stop her", alvinaDestroyPhylactoryStopHer)
 			.disableIf(player.spe100 < 80, "You are simply not fast enough to stop her.")
@@ -681,6 +692,7 @@ public function alvinaThirdEncounterTakeHer():void
 		outputText("\"<i>[name] I've been fighting it hard until now, pride and everything blinding me to my own feelings but I would like you to take me… here and now, please make me yours.</i>\"\n\n");
 		outputText("You know where this is going ahead of time. This is a story eternally retold in Mareth. Except maybe this one will be slightly different.\n\n");
 		AlvinaPurified = true;
+		player.consumeItem(consumables.P_PEARL);
 		outputText("You head back to camp, Alvina following you.\n\n");
 		outputText("<b>Alvina has joined you as a follower.</b>\n\n");
 		flags[kFLAGS.ALVINA_FOLLOWER] = 12;
@@ -698,10 +710,7 @@ public function alvinaThirdEncounterTakeHer():void
 		outputText("\"<i>What are you even apologizing for? I only regret that you didn't appear in this world sooner and catched me before I slipped.</i>\"\n\n");
 		outputText("Alvina suddenly takes the initiative and kisses you for the first and last time before her body completely vanishes. The proof of a love found and then just as swiftly lost. The only thing remaining of the fallen archmage is her broken phylactery, a reminder that Alvina Shadowmantle the witch from which the demon calamity began once upon a time did live on Mareth.\n\n");
 		outputText("With a heavy heart you pick up the broken pendant if only as a memento. She deserved better than this.\n\n");
-		outputText("<b>Found Alvina's Shattered Phylactery</b>\n\n");
-		player.createKeyItem("Alvina's Shattered Phylactery", 0, 0, 0, 0);
-		flags[kFLAGS.ALVINA_FOLLOWER] = 12;
-		doNext(camp.returnToCampUseSixHours);
+		alvinaDies(camp.returnToCampUseSixHours);
 	}
 	public function alvinaMakeLovePure():void {
 		menu();
@@ -835,8 +844,8 @@ public function alvinaMainCampMenuDiary():void
 		outputText("It has been five years since I began my research but I am this close to uncovering the secret of true immortality and power. Lust and desire seems to draw the soul temporarily closer to the heart before stressing it into producing a massive amount of energy. I need to find a way to reproduce this reaction infinitely and, to this end, ");
 		outputText("more live test subjects will be needed. It doesn't matter anymore how many die in the process, I’m about to realise my greatest dream!\n\n");
 		outputText("Day 170 year 91\n\n");
-		outputText("After two years of experimentations I have finally created an immortal. However the \"demon\" as I call it lacks a moral compass and is obsessed with sex. It is a curious creature. It does not hunger, thirst or even seem to age. It also seems to naturally have an affinity for magic. The stone produced out of the subject seems to be a source of immense powers and so I took it with me in order to research it. ");
-		outputText("However it seems the test subject’s condition is highly contagious and might destroy the entire kingdom if allowed to roam, and as I have already lost two apprentices to him, it clearly cannot be contained without resorting to force. For this reason I caged the fiend and my now transformed apprentices in order to study the condition further. Truth be told I am genuinely intrigued by this development.\n\n");
+		outputText("After two years of experimentation, I have finally created an immortal. However the \"demon\" as I call it lacks a moral compass and is obsessed with sex. It is a curious creature. It does not hunger, thirst or even seem to age. It also seems to naturally have an affinity for magic. The stone produced out of the subject seems to be a source of immense powers and so I took it with me in order to research it. ");
+		outputText("However it seems the test subject’s condition is highly contagious and might destroy the entire kingdom if allowed to roam, and as I have already lost two apprentices to him, it clearly cannot be contained without resorting to force. For this reason I caged the fiend and my now transformed apprentices in order to study the condition further. Truth be told, I am genuinely intrigued by this development.\n\n");
 		outputText("Day 171 year 91\n\n");
 		outputText("Just as I suspected, this experiment is a failure. While powerful, the creature I now call demon cannot draw on the power of a soul to bolster his black magic as he lacks one entirely. Black magic when used at its maximum output begins to melt the soul out of the body as it tries to escape its container. ");
 		outputText("I need to find a way to attain the maximum pleasure and power without losing my soul like him in order to obtain the power I seek. Perhaps encasing the soul in an artificial containment from which it won’t be able to escape is the solution.\n\n");
@@ -845,9 +854,9 @@ public function alvinaMainCampMenuDiary():void
 		outputText("Even Lethice seems to have fallen prey to this madness as she started calling BDSM and fetishes the new trend. Therefore I fled the capital as everything was going to hell. Regardless, I have made a breakthrough! After separating one of these furry savages from its soul, I found how to bind it to an object that I will call a phylactery. ");
 		outputText("I intend to bind mine soon in order to achieve the power of the demons along with the perfect clarity of mind I need to control my new powers without falling prey to this weird madness that has clouded my colleagues judgements.\n\n");
 		outputText("Day 150 year 130\n\n");
-		outputText("Dear journal, after much calculation and experimentation I created a new form of fiend. My creation shall be small and combine the characteristic of the wise revered goat with those of the current demon model. I thought I would be less inclined to carnal activity and wastes of time if I used a body closer to my purpose as a wizard and I was right all along, this form will suit me well. ");
+		outputText("Dear journal, after much calculation and experimentation I created a new form of fiend. My creation shall be small and combine the characteristics of the wise revered goat with those of the current demon model. I thought I would be less inclined to carnal activity and wastes of time if I used a body closer to my purpose as a wizard and I was right all along, this form will suit me well. ");
 		outputText("I shall call this new breed of Demon the Devils. Devils got what my first creation, the demons don’t have despite all their power and that's restraint. With the power to shape the world around them, live forever and actually overcome any trials my new breed of fiend should be able to achieve my dream of a perfect world ruled by immortals. ");
-		outputText("What I have left to do however is to create an easier ritual as the creation of devils seems to be a difficult one. That said I’m definitely going to perform the ritual for myself.\n\n");
+		outputText("What I have left to do however is to create an easier ritual as the creation of devils seems to be a difficult one. That said, I’m definitely going to perform the ritual for myself.\n\n");
 		outputText("Day 170 year 130\n\n");
 		outputText("Dear journal, I finally achieved what I sought for all those years. True immortality, however it did not come for free. In order to achieve the ritual I had to corrupt my own body in order to facilitate the soul passage to the phylactery. I realised all too late as I became a devil that despite keeping my head clear I would soon lose the ability to process morality, ");
 		outputText("what has made  me human in the first place. Bah, who need theses anyway, morality is just a tether in the way of progress and true advancement can only be achieved by discarding it. Did I ever even have a moral code in the first place? Well I guess I somewhat did but I have chosen to ignore it, otherwise I wouldn't have gotten this far.</i>\n\n");
@@ -861,21 +870,21 @@ public function alvinaMainCampMenuDiary():void
 	else if (flags[kFLAGS.ALVINA_DIARY] == 3) {
 		outputText("While Alvina is busy out of view you open her diary and keep on reading. The journal continues detailing Alvina vile progress toward wizardhood but, uninterested in the next sixty years which consist mostly of laboratory log and magical experiment, you skip a few pages.\n\n");
 		outputText("<i>Day 213 Year 70\n\n");
-		outputText("I finally found what I needed as a final ingredient and my sister conveniently happens to have it within her bosom. Only blood can call to blood and in the current case her heart is the component I need in order to become young again so I can continue on my work. That said I considered my options time and time again. In the end it's my life or hers and I am not ready to die just yet, ");
+		outputText("I finally found what I needed as a final ingredient and my sister conveniently happens to have it within her bosom. Only blood can call to blood and in the current case her heart is the component I need in order to become young again so I can continue on my work. That said I considered my options time and time again, not without great anguish, how could I kill my own sibling? Yet in the end it's my life or hers and I am not ready to die just yet, ");
 		outputText("she might just be 2 years younger than me but she will do regardless. Am I a monster? No... It's the world around me that is cruel and so long as I don’t find a way to fix it, sacrifices will need to be made. Stopping here and now would make the deaths of everyone who willingly or unwillingly gave their lives for me to get this far be in vain.\n\n");
 		outputText("Day 215 year 71\n\n");
 		outputText("Elizabeth proved little of a challenge for my magic… I stormed her house and ran right to her. What does she have to lose? 65 years old, her kids are gone and she lived happily, she is likely going to die anyway in a few years from a common disease so might as well sacrifice her so I can become young again right? It didn’t go that well. ");
 		outputText("At first, I tried to end her life in the most humanly possible way but these words... Those horrible words she and her husband threw at me. I am not a monster and I didn’t kill mom and dad! How dare she tell me this?! At that moment, something snapped in me and I lost all pretense of restraint. ");
 		outputText("I ripped the bitch’s heart out once her head was no more. For me to recover all those years I have lost researching untold magic I need to perform this ritual and in order to extend my remaining time I need her heart. It is a sacrifice I am willing to make in the name of accomplishing my dreams.\n\n");
 		outputText("Day 216 year 71\n\n");
-		outputText("I did it, I’m young again as if I was 18. Now all I need is the financial support to resume my experiments as I look toward a more permanent solution to this silly disease called aging. That said the fiend I previously summoned offered to train me further in the magical arts. Perhaps I can learn from him something even the best wizards ignore.\n\n");
+		outputText("I did it, I’m young again as if I was 18. Now all I need is the financial support to resume my experiments as I look toward a more permanent solution to this silly disease called ageing. That said the fiend I previously summoned offered to train me further in the magical arts. Perhaps I can learn from him something even the best wizards ignore, for a few sacrifices of course, but there’s plenty of trash out in the city street whose presence won't be missed.\n\n");
 		outputText("Day 170 year 72\n\n");
-		outputText("This is all too perfect. That idiotic court mage up at the king's stronghold took me in as an apprentice. Soon I will have unlimited access to the royal library and of course the old bastard's own notes. That said he has very little useful information to give. The people here are way too pious and pure, it reminds me of that old teacher I killed so long ago. ");
+		outputText("This is all too perfect. That idiotic court mage up at the king's stronghold took me in as an apprentice. Soon I will have unlimited access to the royal library, and of course the old bastard's own notes. That said he has very little useful information to give. The people here are way too pious and pure, it reminds me of that old teacher I killed so long ago. ");
 		outputText("I have seen the power of darkness firsthand and clearly those fools know nothing about true magic.</i>\n\n");
 		outputText("You skip a few pages to see what happened.\n\n");
 		outputText("<i>Day 102 year 80\n\n");
-		outputText("I was finally named archmage out of all the fools at the palace. Truth be told, poisoning the old codgers with undetectable toxins turned out to be perfect because most people think the wizards died from aging. I can now fully devote my time to my research using all the old man had at his disposal.</i>\n\n");
-		outputText("Alvina almost catches you this time but you manage to act like you didn't open her diary or read it. This is starting to become dangerous, maybe you should stop your reading now? You head back to camp.\n\n");
+		outputText("I was finally named archmage out of all the fools at the palace. Truth be told, poisoning the old codgers with undetectable toxins turned out to be perfect because most people think the wizards died from ageing. I can now fully devote my time to my research using all the old man had at his disposal.</i>\n\n");
+		outputText("Alvina almost catches you this time but you manage to act like you didn't open her diary or read it. This is starting to become dangerous. Maybe you should stop your reading now? You head back to camp.\n\n");
 		flags[kFLAGS.ALVINA_DIARY] = 4;
 		doNext(camp.campFollowers);
 		eachMinuteCount(20);
@@ -883,24 +892,24 @@ public function alvinaMainCampMenuDiary():void
 	else if (flags[kFLAGS.ALVINA_DIARY] == 2) {
 		outputText("While Alvina is busy out of view you open her diary and keep on reading.\n\n");
 		outputText("<i>Day 10 Year 7\n\n");
-		outputText("I am an orphan. Father and mother died of illness 5 years ago. Despite the money I brought home for them to be cured, nothing worked and the doctor said no amount of money would matter now. I have nothing left but my now 8-year-old sister still at the orphanage we were sent to and this strange power ever-growing inside of me. This year I left the orphanage because I decided to attend magic studies. ");
+		outputText("I am an orphan. Father and mother died of illness 5 years ago. Despite the money I brought home for them to be cured, nothing worked and the doctor said no amount of money would matter now. Once in a while I visit mom's grave with a bouquet of Fafnir tears, she loved those flowers so much. I have nothing left but my now 8-year-old sister still at the orphanage we were sent to and this strange power ever-growing inside of me. This year I left the orphanage because I decided to attend magic studies. ");
 		outputText("Fact is I was selected amongst many to become a wizard due to my high intelligence, though no one suspected I still heard the voice of Mephi from time to time in my mind. However the school where I study is so boring and way too strict. The teachers are stubborn and close minded… Restricted area they say? ");
 		outputText("There's no such thing as a restricted area in the library for me… What if a ritual to revive papa and mama was in there? Sooner or later I will find these secret books.\n\n");
 		outputText("Day 35 Year 7\n\n");
-		outputText("I finally deciphered a ritual in the books and just in time too! The teacher had it confiscated but not before I managed to transcribe a copy. I finally found how to summon that creature I met five years ago. This is very creepy magic but I’m willing to pay any price to have my parents back and if that Mephi thing can help I will seek him out. ");
-		outputText("Heck the teacher is likely just jealous or afraid I will actually surpass him thanks to Mephi’s help, how short-sighted!\n\n");
+		outputText("I finally deciphered a ritual in the books and just in time too! The teacher had it confiscated but not before I managed to transcribe a copy. I finally found how to summon that creature I met five years ago. This is very creepy magic but I’m willing to pay any price to have my parents back; and if that Mephi thing can help I will seek him out. ");
+		outputText("Heck, the teacher is likely just jealous or afraid I will actually surpass him thanks to Mephi’s help, how short-sighted!\n\n");
 		outputText("Day 65 Year 7\n\n");
 		outputText("Mephi killed a few students, said it was the price of my debt and that either I had to pay it or they would, I took the wise option. He offered to mentor me but only in exchange for an even greater sacrifice, I am not willing to do such a thing just yet. Since Mephi won’t help without me paying even more I decided not to rely on him for now although he said I would inevitably call him again ");
 		outputText("in due time. I need to continue researching for a way to revive my parents so I will keep looking over these books. At worse, I could also revive those dead students so long as I have their corpse right? The teachers are none the wiser, they think someone accidentally summoned that creature in the school and that it started going on a rampage. ");
 		outputText("They know little of the fact I traded the lives of my classmates to him in order to gain the information I wanted.\n\n");
 		outputText("Day 110 Year 7\n\n");
 		outputText("How dare they! I got expelled from the mage school just as I finally found what I needed. The principal called me an undisciplined little witch while the bullies laughed behind my back, well fine I will show them how much of a witch I am! Tonight I will summon Mephi like I did several months ago and this time I will let it feast on everyone. ");
-		outputText("Once they are all dead I will pick up the tome the teacher took from me and attempt this resurrection ritual.\n\n");
+		outputText("Once they are all dead I will pick up the book the teacher took from me and attempt this resurrection ritual.\n\n");
 		outputText("Day 111 Year 7\n\n");
-		outputText("Mephi killed everyone as predicted and even allowed me to forge a true pact after he sated himself on the souls of those jerks. The teacher proved to be an annoying challenge but with my newfound knowledge and new otherworldly assistant, dispatching the old scholar was an easy task. Mephi is interesting and willing to help, perhaps I should learn how to harness such powers from him? ");
-		outputText("However to my dismay when I went to attempt the revival ritual for my parents and came for their corpses I discovered to my horror that they had already been disposed of by cremation. Tonight I truly am an orphan for good… I will make my peace with this dream of mine and mourn them then move on.\n\n");
+		outputText("Mephi killed everyone as predicted and even allowed me to forge a true pact after he gorged himself on the souls of those jerks. The teacher proved to be an annoying challenge but with my newfound knowledge and new otherworldly assistant, dispatching the old scholar was an easy task. Mephi is interesting and willing to help, perhaps I should learn how to harness such powers from him? ");
+		outputText("However to my dismay when I went to attempt the revival ritual for my parents and dug up their corpses I discovered to my horror that they had already been disposed of by cremation, only the urn remains and I need an at least partially complete or decaying corpse to perform this magic. Tonight I truly am an orphan for good… I will make my peace with this dream of mine and mourn them then move on.\n\n");
 		outputText("Day 160 Year 7\n\n");
-		outputText("They are still investigating the incident at the school but as I predicted I am far away now and with the entirety of the forbidden collection. It is unlikely they will find out anything about what happened let alone trace it back to me. I also left them a parting gift and should someone try and visit the school in the following years they will have a nasty surprise.</i>\n\n");
+		outputText("They are still investigating the incident at the school, but as I predicted I am far away now and with the entirety of the forbidden collection. It is unlikely they will find out anything about what happened, let alone trace it back to me, because for all they know there were no survivors. I also left them a parting gift, and should someone try and visit the school in the following years they will have a nasty surprise.</i>\n\n");
 		outputText("You decide to close the book before Alvina catches you reading it. This is getting creepier the more you know about her. Thankfully she didn’t notice and so you head back to camp.\n\n");
 		flags[kFLAGS.ALVINA_DIARY] = 3;
 		doNext(camp.campFollowers);
@@ -1664,7 +1673,7 @@ public function postMarriageSleep():void {
 		menu();
 		addButton(0, "Infernal Oil", alvinaPureInfernalOil)
 			//.disableIf(!player.hasPerk(PerkLib.Phylactery) || !player.hasPerk(PerkLib.Soulless), "Requires you to be soulless")
-			.disableIf(player.hasItem(consumables.INFWINE), "You need this item to ask her about it DUH...")
+			.disableIf(!player.hasItem(consumables.INFWINE), "You need this item to ask her about it DUH...")
 			.disableIf(AlvinaInfernalOilCooldown > 0);
 		addButton(1, "Sex", alvinaPureSexMenu);
 		addButton(14, "Back", camp.campLoversMenu);
@@ -1681,7 +1690,7 @@ public function postMarriageSleep():void {
 			outputText("You never said you wanted it as is. Could she purify it for you?\n\n");
 			outputText("\"<i>Wait you mean to say you… how flattering. Of all the possible shapes, you would like to look just like me. I would kiss you but you seem to be low on time. This is fine though, give me a day while I concentrate on altering this product and tadaa you will be an Azazel too in no time!</i>\"\n\n");
 			AlvinaInfernalOilCooldown = 1;
-			player.destroyItems(consumables.INFWINE, 1);
+			player.consumeItem(consumables.INFWINE);
 			AlvinaInfernalOilAsked = true;
 			eachMinuteCount(15);
 			doNext(playerMenu);

@@ -2673,10 +2673,10 @@ public static const IN_COMBAT_PLAYER_BLOOD_PUPPIES_ATTACKED:int                 
 public static const DISPLACER_BEAST_WINS:int                                   		= 2665;
 public static const HERM_CAVE_WYRM:int                                   			= 2666;
 public static const DISCOVERED_CAVES:int                                   			= 2667;
-public static const DISCOVERED_ASHLANDS:int                                   		= 2668;	//Not Yet Used Flag
+public static const DISCOVERED_ASHLANDS:int                                   		= 2668;
 public static const DISCOVERED_TUNDRA:int                                   		= 2669;
-public static const DISCOVERED_02670:int                                   = 2670;			//Not Yet Used Flag
-public static const DISCOVERED_02671:int                                   = 2671;			//Not Yet Used Flag
+public static const DISCOVERED_HILLS:int                                   			= 2670;			//Not Yet Used Flag
+public static const DISCOVERED_LOW_MOUNTAIN:int                                   	= 2671;			//Not Yet Used Flag
 public static const AURORA_LVL:int                                   				= 2672;
 public static const AURORA_DEFEATS_COUNTER:int                                   	= 2673;
 public static const AURORA_02674:int                                   = 2674;				//Not Yet Used Flag

@@ -67,10 +67,10 @@ public class CoC extends MovieClip
         return _instance;
     }
     //Game Version
-    public var debugGameVer:String = "v0.8s6.02";
+    public var debugGameVer:String = "v0.8s6.07";
 
     //Mod save version.
-    public var modSaveVersion:Number = 36.037;
+    public var modSaveVersion:Number = 36.038;
     public var levelCap:Number = 185;
 
     //Lock cheats menus from public
@@ -121,7 +121,7 @@ public class CoC extends MovieClip
     public var compiler:StoryCompiler = new StoryCompiler("content/").attach(rootStory);
     public var context:StoryContext;
 
-    public var perkTree:PerkTree = new PerkTree();
+    public var perkTree:PerkTree;
 
     /****
      This is used purely for bodges while we get things cleaned up.
