@@ -906,7 +906,7 @@
         <cell rect="361,136,59,65" name="hairLeft/sylph" dx="54" dy="26"/>
         <cell rect="421,136,59,65" name="hairRight/sylph" dx="98" dy="26"/>
 		<cell rect="721,136,59,65" name="hair/cow" dx="75" dy="21"/>
-		<cell rect="1081,350,87,98" name="hairRight/ribbon" dx="59" dy="3"/>
+		<cell rect="1081,350,87,98" name="hairFront/ribbon" dx="59" dy="3"/>
         <cell rect="1,449,28,30" name="hair/hairHood" dx="91" dy="39"/>
         <cell rect="1,482,28,30" name="hair/hairHoodFire" dx="91" dy="39"/>
     </spritemap>
@@ -1562,6 +1562,7 @@
 		<layer name="full_patternUnder"/>
 		<layer name="fullbody"/>
 		<layer name="horns_overclothe"/>
+		<layer name="hairFront"/>
 		<layer name="overclothe"/>
 		<layer name="shield"/>
 		<layer name="weapon"/>
@@ -2607,7 +2608,7 @@
                         </if>
                     </case>
 					<case values="Hair.TWINRIBBON">
-						<show part="hairRight/ribbon"/>
+						<show part="hairFront/ribbon"/>
 						<if test="hairType == Hair.STORM or hairType == Hair.BURNING">
                             <hide part="hair_bg/raiju3"/>
                             <hide part="hair_bg/hellcat"/>
@@ -2888,6 +2889,9 @@
 								<show part="breasts/F$skinx"/>
 							</else>
 						</if>
+						<else>
+							<show part="breasts/F$skinx"/>
+						</else>
                     </if>
 				</case>
                 <default>
