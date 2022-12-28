@@ -42,8 +42,8 @@ use namespace CoC;
 				chance: 0.8,
 				call: function ():void {
 					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
-					if (rand(2) == 0) SceneLib.exploration.genericGolGobImpEncounters();
-					else SceneLib.exploration.genericAngelsEncounters();
+					if (rand(4) == 0) SceneLib.exploration.genericAngelsEncounters();
+					else SceneLib.exploration.genericGolGobImpEncounters();
 				}
 			}, {
 				//Helia monogamy fucks

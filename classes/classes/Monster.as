@@ -1237,6 +1237,7 @@ import flash.utils.getQualifiedClassName;
 				if (hasPerk(PerkLib.ShieldWielder)) minXP *= 1.5;
 				if (hasPerk(PerkLib.EnemyBossType)) minXP *= 2;
 				if (hasPerk(PerkLib.EnemyHugeType)) minXP *= 2;
+				if (hasPerk(PerkLib.EnemyTrueAngel)) minXP *= 3;
 				if (hasPerk(PerkLib.EnemyGigantType)) minXP *= 4;
 				if (hasPerk(PerkLib.EnemyColossalType)) minXP *= 6;
 				if (hasPerk(PerkLib.EnemyGroupType)) minXP *= 5;

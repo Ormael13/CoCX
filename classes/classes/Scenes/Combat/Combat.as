@@ -6513,7 +6513,8 @@ public class Combat extends BaseContent {
     }
 
     public function isFireTypeWeapon():Boolean {
-        return ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && (player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "ruby")) || (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) || (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) || player.hasStatusEffect(StatusEffects.FlameBlade) || player.weapon == weapons.TIDAR || player.weapon == weapons.ATWINSCY;
+        return ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && (player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "ruby")) || (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) || (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat))
+		|| player.hasStatusEffect(StatusEffects.FlameBlade) || player.weapon == weapons.TIDAR || player.weapon == weapons.ATWINSCY;
     }
 
     public function isIceTypeWeapon():Boolean {
@@ -6633,6 +6634,11 @@ public class Combat extends BaseContent {
                 damage += player.tou;
                 damage += scalingBonusToughness() * 0.25;
             }
+            else if (SpecialEffect == "fire breath"){
+                damage += player.lib;
+                damage += scalingBonusLibido() * 0.25;
+                if (player.hasPerk(PerkLib.FireLord)) damage *= 2;
+            }
             else{
                 damage += player.str;
                 damage += scalingBonusStrength() * 0.25;
@@ -6720,6 +6726,7 @@ public class Combat extends BaseContent {
                 damage *= FeraldamageMultiplier;
 				if (BelisaFollower.HolyBand6 > 0) damage *= 1.25;
 				if (SpecialEffect == "fire") doFireDamage(damage, true, true);
+                if (SpecialEffect == "fire breath") doFireDamage(damage, true, true);
 				else if (SpecialEffect == "ice") doIceDamage(damage, true, true);
 				else if (SpecialEffect == "lightning") doLightingDamage(damage, true, true);
 				else if (SpecialEffect == "darkness") doDarknessDamage(damage, true, true);
@@ -15733,4 +15740,4 @@ private function touSpeStrScale(stat:int):Number {
         return damage;
     }
 }
-}
+}

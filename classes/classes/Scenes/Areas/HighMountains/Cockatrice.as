@@ -193,7 +193,7 @@ public class Cockatrice extends Monster {
             .add(consumables.GLDSEED, 35)
             //.add(consumables.TOTRICE, 20) //same.
             .add(null, 10);
-        //TODO: Requires importing Cockatrice transformatives and transformation itself
+        //Requires importing Cockatrice transformatives and transformation itself
         /*
         this.lowerBody = LowerBody.COCKATRICE;
         this.faceType = Face.COCKATRICE;

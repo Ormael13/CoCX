@@ -80,7 +80,7 @@ public class Boat extends AbstractLakeContent
 					return;
 				case 3:
 				case 4:
-					if (flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && player.level > 2 && !isNightTime) lake.fetishZealotScene.zealotBoat();
+					if (flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && player.level > 2 && player.hasStatusEffect(StatusEffects.FetishOn) && !isNightTime) lake.fetishZealotScene.zealotBoat();
 					else sharkGirlScene.sharkGirlEncounter();
 					return;
 				case 5:
