@@ -224,7 +224,7 @@ public class UniqueSexScenes extends BaseContent
 			submenu(menuItems, backFunc, 0, false);
         }
 
-		public function ScenePostProc(sList:Array){
+		public function ScenePostProc(sList:Array):Array{
 			var temp:Array = [];
 			var temp2:Array = [];
 			for each(var x:Array in sList){
