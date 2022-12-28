@@ -34,9 +34,14 @@ public class Changelog extends BaseContent
 			//0 of 11 pages
 			outputText("<b>Version 0.8s6:</b>\n\n");// ()
 			outputText("-New tier 9 misc lvl-up perk: Arcane Venom. Req. Verdant Leech perk, Intelligence 200+, Libido 200+, Corruption 50+. Effect: Spells that inflict poison add a number of direct applications equal to your intelligence (core + trained parts) divided by 50.\n");
+			outputText("-New event perk: Fueled by Desire. Gained when training with Chelsea and having 100+ libido. Effect: When using the tease action or an arousal spell, clear a small amount of lust to deal increased tease damage. This only works if lust is above 50%. (EragonX)\n");
+			outputText("-New event perk: Graceful Beauty. Gained when training with Chelsea and having 150+ libido. Effect: Add a small measure of your speed to your tease damage. (EragonX)\n");
+			outputText("-New event perk: Sweep Defenses. Gained when training with Chelsea and having 200+ libido. Effect: Critical tease also weakens your opponent's resistance to lust by 5%. (EragonX)\n");
 			outputText("-New event perk: Hyper Casting. Gained by spending 1 super perk point and having Equilibrium super perk. Effects: Allow to reach OverMax Mana equal to 130% of current max mana. Decrease CD for spells: -1 for tier 1, -2 for tier 2 and -4 for tier 3. Reduce spells costs by 20% (that affect bones used by necro spells too). Allow to always autocast buff spells.\n");
 			outputText("-New NPC to interact in wood village: Chelsea - Former Lacta Bovina turned Wood Elf. During Sensual training she can teach some perks related to lust. (EragonX)\n");
 			outputText("-Added Hills & Low Mountains area before Mountain. Some of the encounters orginal in Mountain was moved to the new areas. Some of encouters from high mountains was moved to mountain area too.\n");
+			outputText("-Hellhounds and Infected Hellhouds lvl increased by 10 levels. Harpy and Basilisk levels increased by 15 levels. Starting lvl of Izumi and Minerva increased by 12. Minotaur sons starting lvl was lowered by 10. Cockatrice enemies lvl increased by 55/62(winged).\n");
+			outputText("-Phoenixes meet outside tower are now all called quasi-phoenixes (since they weren't succesfull hybryds but their 'mother' was persistent to call them as success so in tower they are called as her mother wish for). Quasi-phoenix enemies in High Mountains increased lvl by 32.\n");
 			outputText("-Metamorph: Add Kirin parts (EragonX)\n");
 			outputText("-Fixes: double negative and harpywomb thunderbird. (liruyo)\n");
 			//outputText("-Dam can be upgraded 2 times (up to 3rd tier of wood dam) and Fishery once (to allow 2 npc's working at it - it also gonna increase each worker fish production by 20%)\n");
@@ -44,11 +49,6 @@ public class Changelog extends BaseContent
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
-			outputText("-New event perk: Fueled by Desire. Gained when training with Chelsea and having 100+ libido. Effect: When using the tease action or an arousal spell, clear a small amount of lust to deal increased tease damage. This only works if lust is above 50%. (EragonX)\n");
-			outputText("-New event perk: Graceful Beauty. Gained when training with Chelsea and having 150+ libido. Effect: Add a small measure of your speed to your tease damage. (EragonX)\n");
-			outputText("-New event perk: Sweep Defenses. Gained when training with Chelsea and having 200+ libido. Effect: Critical tease also weakens your opponent's resistance to lust by 5%. (EragonX)\n");
-			outputText("-Hellhounds and Infected Hellhouds lvl increased by 10 levels. Harpy and Basilisk levels increased by 15 levels. Starting lvl of Izumi and Minerva increased by 12. Minotaur sons starting lvl was lowered by 10. Cockatrice enemies lvl increased by 55/62(winged).\n");
-			outputText("-Phoenixes meet outside tower are now all called quasi-phoenixes (since they weren't succesfull hybryds but their 'mother' was persistent to call them as success so in tower they are called as her mother wish for). Quasi-phoenix enemies in High Mountains increased lvl by 32.\n");
 			outputText("-Adds 'perk distance' - a score indicating how difficult perk requirements are. Adds different sorting modes to PerkDatabase - by name, distance, relative distance. By default, perks in database are sorted by relative distance, so perks that are easier for player character to obtain will go first. (aimozg)\n");
 			outputText("-\n");
 			outputText("-\n");
