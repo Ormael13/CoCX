@@ -1,4 +1,4 @@
-﻿package classes.Scenes.NPCs{
+package classes.Scenes.NPCs{
 import classes.*;
 import classes.BodyParts.LowerBody;
 import classes.GlobalFlags.*;
@@ -2741,13 +2741,13 @@ public function wormRemoval():void {
 public function jojoFreaksOutSoulless():void {
 	outputText("Jojo suddenly takes notice of the all damning aura of corruption surrounding you and backs off in horror.\n\n");
 	outputText("\"<i>Wait, that's not possible, how could I have missed this aura of smothering corruption?!? You're no longer normal, you're actually a demon! What have you done to your soul [name]!</i>\"\n\n");
-	outputText("Jojo is already adopting a defensive pose ready to defend his purity and chastity. What will you do?\n\n");
+	outputText("Jojo is already adopting a defensive pose ready to defend his purity and chastity. What will you do?\n");
 	menu();
 	addButton(0, "Save me", saveMeFromMyWickedness).hint("You might have lost your soul but despite all odds you might have managed to keep a karma good enough that Jojo will still be willing to hear you out.");
 	addButton(4, "Rape", jojoAtCampRape).hint("It's time to initiate that virgin to sex!");
 
 	function saveMeFromMyWickedness():void {
-		outputText("[pg]You kneel down before the monk who stares at you astonished as working out what could have been the last fading glimmer of your purity you beg him to save you from yourself. You've gone too far, you see that now. You're growing afraid of what you've become and what you might do to your friends. Temptation invites you to turn them into toys yet you resist. What even led you down this path?! Yet despite how messed up you've become you still got a soul… sealed within a pendant next to your heart. Telling Jojo of this is the next best thing to laying down and offering your head in apology if he decides to execute you yet you know this is the only way you're getting out of this mess.");
+		outputText("[pg]You kneel down before the monk, who stares at you astonished, as though working out what could have been the last fading glimmer of your purity. You beg him to save you from yourself. You've gone too far, you see that now. You're growing afraid of what you've become and what you might do to your friends. Temptation invites you to turn them into toys yet you resist. What even led you down this path?! Yet despite how messed up you've become you still have a soul… sealed within a pendant next to your heart. Telling Jojo of this is the next best thing to laying down and offering your head in apology, if he decides to execute you. Yet you know this is the only way you're getting out of this mess.");
 		outputText("[pg]Jojo eyes you down before replying solemnly \"<i>The path to redemption is a harsh one [name], each impurity chaining your soul will be twice as hard to remove now. Thankfully you still got a soul albeith outside your body otherwise I would be powerless to do anything at all. If you indeed are serious about it I will need to purge the corruption out of your body bit by bit. You're not likely to ever be pure again and will still be constantly at war with yourself to contain your demonic urges but at least that's a start I will need something extraordinary to perform what I'm about to do here. I know this might sound impossible but in order to cleanse you I will require an artefact of great purity, some item of legend sanctified by the gods. A miracle requires a miracle and thus the item will probably be destroyed in the process.</i>\"");
 		outputText("[pg]On this note, Jojo takes a safe distance from you. He doesn't trust you fully… not anymore but still he's willing to give you a chance.");
 		outputText("[pg]\"<i>Once you have the item, meet me in the forest. For my own safety I'm leaving your camp until you do.</i>\"");
@@ -2774,13 +2774,14 @@ public function jojoForestPurifyMeFromDevilry():void {
 	addButton(14, "Never mind", camp.returnToCampUseOneHour);
 
 	function jojoDevilPurificationScene(item:ItemType):void {
-		outputText("Jojo begins to draw circles into the ground.[pg]");
+		outputText("[pg]Jojo begins to draw circles into the ground.[pg]");
 		outputText("\"<i>Sit in the middle and embrace the artefact like your soul depend on it wich may or may not be the case. You must thoroughly reject your corruption for this to work or nothing will happen there is no faking it or half hearted measure here. Brace yourself because it will hurt… a lot.</i>\"[pg]");
 		outputText("You do as jojo says, each second in the circle seems to stretch into an eternity of torture. You yearn for pleasure yet you deny yourself. At first the contact with the holy item is just a tingling but after a while it feels like a hot iron searing your flesh. You embrace pain, pain is your punishment, pain is your atonement. Through suffering you somehow slowly gain back focus as your corrupt though recedes one by one, burnt into the holy pyre of suffering that is your body at the time. This agonizing treatment continue for what seems to stretch like forever before Jojo calls out to you.[pg]");
 		outputText("\"<i>[name] are you all right?! I saw you burning as if engulfed in whitefire! The ritual worked but by Marae what I witnessed was not pretty… You just spent the past five minutes screaming I thought you were going to die!</i>\"[pg]");
 		outputText("Your body singed by pain is regenerating itself already but pain did cleanses your mind. Were the now consumed holy item used to be now rest a burnt mark not unlike a rune, clear reminder of your resolve to see this through. You can see everything with clarity again. Jojo notice the change too.[pg]");
-		outputText("\"<i>It worked, your corruption is down to an acceptable, yet somewhat bad amount. I can't do much more for you -PCname- you may have to find your own solutions from now on.</i>\"[pg]");
+		outputText("\"<i>It worked! Your corruption is down to an acceptable, yet somewhat bad amount. I can't do much more for you [name], you will have to find your own solutions from now on.</i>\"[pg]");
 		player.createStatusEffect(StatusEffects.DevilPurificationScar, 0, 0, 0, 0);
+		player.cor -= 50;
 		SceneLib.alvinaFollower.JojoDevilPurification = 2;
 		player.consumeItem(item);
 		doNext(camp.returnToCampUseFourHours);
@@ -2856,6 +2857,7 @@ private function pureJojoSexMenu():void {
 	outputText("You ask Jojo if he's in the mood for sex right now. ");
 	if (player.hasPerk(PerkLib.Phylactery) && !player.hasStatusEffect(StatusEffects.DevilPurificationScar) && SceneLib.alvinaFollower.JojoDevilPurification == 0) {
 		jojoFreaksOutSoulless();
+		return;
 	}
 
 	if (flags[kFLAGS.JOJO_SEX_COUNTER] < 3) outputText("Jojo looks into your eyes and says, \"<i>Only if you're going to be gentle.</i>\"");

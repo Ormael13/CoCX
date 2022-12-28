@@ -515,5 +515,9 @@ public class Arms extends BodyPart {
 
 		return Types[id].feline || false;
 	}
+
+	public function hasPawsOrHands():String {
+		return Types[type].canPounce ? "paws" : "hands";
+	}
 }
 }
