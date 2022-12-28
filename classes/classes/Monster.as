@@ -1237,6 +1237,7 @@ import flash.utils.getQualifiedClassName;
 				if (hasPerk(PerkLib.ShieldWielder)) minXP *= 1.5;
 				if (hasPerk(PerkLib.EnemyBossType)) minXP *= 2;
 				if (hasPerk(PerkLib.EnemyHugeType)) minXP *= 2;
+				if (hasPerk(PerkLib.EnemyTrueAngel)) minXP *= 3;
 				if (hasPerk(PerkLib.EnemyGigantType)) minXP *= 4;
 				if (hasPerk(PerkLib.EnemyColossalType)) minXP *= 6;
 				if (hasPerk(PerkLib.EnemyGroupType)) minXP *= 5;
@@ -2400,7 +2401,7 @@ import flash.utils.getQualifiedClassName;
 			lust += lustDelta;
 			lustDelta = Math.round(lustDelta * 10)/10;
 			outputText(" <b>([font-lust]" + lustDelta + "</font>)</b>");
-			if (player.armor == armors.ELFDRES && flags[kFLAGS.COMBAT_TEASE_HEALING]) {
+			if (player.armor == armors.ELFDRES && flags[kFLAGS.COMBAT_TEASE_HEALING] == 0) {
 				outputText("\nYou cool down a little bit");
 				player.takeLustDamage(Math.round(-lustDelta)/20);
 			}

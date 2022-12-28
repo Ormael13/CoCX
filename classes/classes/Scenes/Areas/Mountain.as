@@ -63,8 +63,8 @@ public class Mountain extends BaseContent
 				name: "common",
 				chance: 0.8,
 				call: function ():void{
-					if (rand(2) == 0) SceneLib.exploration.genericGolGobImpEncounters();
-					else SceneLib.exploration.genericAngelsEncounters();
+					if (rand(4) == 0) SceneLib.exploration.genericAngelsEncounters();
+					else SceneLib.exploration.genericGolGobImpEncounters();
 				}
 			}, {
 				//Helia monogamy fucks

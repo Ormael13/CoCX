@@ -6513,7 +6513,8 @@ public class Combat extends BaseContent {
     }
 
     public function isFireTypeWeapon():Boolean {
-        return ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && (player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "ruby")) || (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) || (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) || player.hasStatusEffect(StatusEffects.FlameBlade) || player.weapon == weapons.TIDAR || player.weapon == weapons.ATWINSCY;
+        return ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && (player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "ruby")) || (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) || (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat))
+		|| player.hasStatusEffect(StatusEffects.FlameBlade) || player.weapon == weapons.TIDAR || player.weapon == weapons.ATWINSCY;
     }
 
     public function isIceTypeWeapon():Boolean {
@@ -6586,7 +6587,7 @@ public class Combat extends BaseContent {
         var damage:Number = (player.inte / 5 * spellMod() + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
         if (player.armor == armors.ELFDRES && player.isElf()) damage *= 2;
         if (player.armor == armors.FMDRESS && player.isWoodElf()) damage *= 2;
-        if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50 && flags[kFLAGS.COMBAT_TEASE_HEALING]) {
+        if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50 && flags[kFLAGS.COMBAT_TEASE_HEALING] == 0) {
             outputText("\nYou use your own lust against the enemy, cooling off a bit in the process.");
             player.takeLustDamage(Math.round(-damage)/40, true);
             damage *= 1.2;
@@ -6632,6 +6633,11 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.VerdantMight)){
                 damage += player.tou;
                 damage += scalingBonusToughness() * 0.25;
+            }
+            else if (SpecialEffect == "fire breath"){
+                damage += player.lib;
+                damage += scalingBonusLibido() * 0.25;
+                if (player.hasPerk(PerkLib.FireLord)) damage *= 2;
             }
             else{
                 damage += player.str;
@@ -6720,6 +6726,7 @@ public class Combat extends BaseContent {
                 damage *= FeraldamageMultiplier;
 				if (BelisaFollower.HolyBand6 > 0) damage *= 1.25;
 				if (SpecialEffect == "fire") doFireDamage(damage, true, true);
+                if (SpecialEffect == "fire breath") doFireDamage(damage, true, true);
 				else if (SpecialEffect == "ice") doIceDamage(damage, true, true);
 				else if (SpecialEffect == "lightning") doLightingDamage(damage, true, true);
 				else if (SpecialEffect == "darkness") doDarknessDamage(damage, true, true);
@@ -12158,7 +12165,7 @@ public function calculateBasicTeaseDamage(BaseTeaseDamage:Number = 18):Number {
     damage *= damagemultiplier;
     if (player.hasPerk(PerkLib.ChiReflowLust)) damage *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
     if (player.hasPerk(PerkLib.ArouseTheAudience) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType))) damage *= 1.5;
-    if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50 && flags[kFLAGS.COMBAT_TEASE_HEALING]) {
+    if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50 && flags[kFLAGS.COMBAT_TEASE_HEALING] == 0) {
         outputText("\nYou use your own lust against the enemy, cooling off a bit in the process.");
         player.takeLustDamage(Math.round(-damage)/40, true);
         damage *= 1.2;
@@ -15733,4 +15740,4 @@ private function touSpeStrScale(stat:int):Number {
         return damage;
     }
 }
-}
+}

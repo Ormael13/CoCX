@@ -644,9 +644,9 @@ public class Exploration extends BaseContent
 		}
 		public function genericGobImpAngEncounters(even:Boolean = false):void {
 			var gobImpAngChooser:int = rand(20);
-			if (gobImpAngChooser >= 5) SceneLib.goblinScene.goblinShamanEncounter();
-			//else if (gobImpAngChooser >= 10) angeloid
-			//else if (gobImpAngChooser >= 15) angeloid
+			if (gobImpAngChooser >= 8) SceneLib.goblinScene.goblinShamanEncounter();
+			//else if (gobImpAngChooser >= 16) angeloid
+			//else if (gobImpAngChooser >= 18) angeloid
 			else {
 				SceneLib.impScene.impOverlordEncounter();
 				spriteSelect(SpriteDb.s_impOverlord);
@@ -770,20 +770,20 @@ public class Exploration extends BaseContent
 			}
 		}
 		public function genericAngelsEncounters(even:Boolean = false):void {
-			var angelsChooser:int = rand(30);
+			var angelsChooser:int = rand(15);
 			//Limit chooser range
-			if (player.level < 6 && angelsChooser >= 10) angelsChooser = 9;
-			else if (player.level < 12 && angelsChooser >= 20) angelsChooser = 19;
+			if (player.level < 6 && angelsChooser >= 10) angelsChooser = 4;
+			else if (player.level < 12 && angelsChooser >= 20) angelsChooser = 9;
 			clearOutput();
 			//Mid-rank Angel
-			if (angelsChooser >= 10 && angelsChooser < 20) {
+			if (angelsChooser >= 5 && angelsChooser < 10) {
 				outputText("A mid-ranked angeloid wings out of the sky and attacks!");
 				player.createStatusEffect(StatusEffects.AngelsChooser,2,0,0,0);
 				startCombat(new Angeloid());
 				return;
 			}
 			//High-rank Angel
-			else if (angelsChooser >= 20 && angelsChooser < 30) {
+			else if (angelsChooser >= 10) {
 				outputText("A high-ranked angeloid wings out of the sky and attacks!");
 				player.createStatusEffect(StatusEffects.AngelsChooser,3,0,0,0);
 				startCombat(new Angeloid());

@@ -2377,6 +2377,17 @@ public class KitsuneScene extends BaseContent
 					player.statStore.replaceBuffObject({"wis.mult":0.10,"int.mult":0.10}, "KitsuneShrine",{text:"Kitsune shrine Meditation", rate:Buff.RATE_DAYS, tick:7});
 					dynStats("wis", 5,"int", 5, "lus", -50, "cor", -2);
 				}
+			} else if (player.hasItem(consumables.RUBYCRY) && player.ears.type == Ears.FOX && player.tailType == Tail.KITSHOO && player.tailCount >= 2 && flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] > 0 && !player.hasPerk(PerkLib.StarSphereMastery)) {
+				outputText("Nearing the end of your meditation, you are inexplicably compelled to reach into your bag and pull out the small teardrop-shaped jewel you were carrying.  As you stare past the translucent surface of the bead and into the dancing eerie red fluid within, the jewel begins to dissolve in your hand, the liquid within spilling out and spreading over your body.\n\n");
+				outputText("You look down and notice a weird ball filled with light sitting on the ground next to you. Somehow you can feel this item is connected to you and also very important. Ayane, noticing what happened, approaches and congratulates you.\n\n");
+				outputText("\"<i>It seems you are kitsune subfamily member now. You formed your own star sphere. Hold on to it dearly, for your true essence resides in your star sphere, and should it be stolen, the thief could control you entirely, forcing you to do whatever it wishes.</i>\"\n\n");
+				outputText("<b>You acquired your own star sphere.</b>\n\n");
+				player.statStore.replaceBuffObject({"wis.mult":0.10,"int.mult":0.10}, "KitsuneShrine",{text:"Kitsune shrine Meditation", rate:Buff.RATE_DAYS, tick:7});
+				dynStats("wis", 5,"int", 5, "lus", -50, "cor", -5);
+				player.createPerk(PerkLib.StarSphereMastery, 1, 0, 0, 0);
+				player.createKeyItem("Kitsune Star Sphere", 0, 0, 0, 0);
+				player.consumeItem(consumables.RUBYCRY);
+				doNext(camp.returnToCampUseOneHour);
 			} else {
 				//Normal:
 				outputText("As you open your eyes again, you feel as if a great burden has been lifted from your shoulders.\n\nWith a renewed vigor for your quest, you stand up and set off for camp.");

@@ -11,6 +11,25 @@ import flash.utils.Dictionary;
 public class PerkType extends BaseContent
 	{
 		private static var PERK_LIBRARY:Dictionary = new Dictionary();
+		
+		// Perk distance values
+		// "Distance" is how far perk requirements are from the starting player.
+		public static const DISTANCE_STARTING: Number = 10; // all perks start with 10
+		public static const DISTANCE_DEFAULT: Number = 10; // custom requirement default distance
+		public static const DISTANCE_PER_LEVEL: Number = 10;
+		public static const DISTANCE_PER_PERK: Number = 10; // 1 perk = 1 level
+		public static const DISTANCE_PER_NG: Number = 1000; // 1 NG+ = 100 levels
+		public static const DISTANCE_PER_PRIMARY_STAT: Number = 1; // 10 stat = 1 level
+		public static const DISTANCE_PER_SENS: Number = 0.5; // 20 sens = 1 level
+		public static const DISTANCE_PER_COR: Number = 0.5; // 20 cor = 1 level
+		public static const DISTANCE_PER_MINLUST: Number = 0.25; // 40 minlust = 1 level
+		public static const DISTANCE_PER_MAXMANA: Number = 0.25; // 40 maxmana = 1 level
+		public static const DISTANCE_PER_MAXVENOM: Number = 0.25; // 40 maxvenom = 1 level
+		public static const DISTANCE_PER_RACIAL_TIER: Number = 60.0; // 1 racial tier = 6 levels
+		public static const DISTANCE_ADVANCED_JOB_SLOT: Number = 100.0; // 1 adv job slot = 10 levels
+		public static const DISTANCE_HIDDEN_JOB_SLOT: Number = 200.0; // 1 hidden job slot = 20 levels
+		public static const DISTANCE_PRESTIGE_JOB_SLOT: Number = 300.0; // 1 prestige job slot = 30 levels
+		public static const DISTANCE_MUTATION_SLOT: Number = 100.0; // 1 mutation slot = 10 levels
 
 		public static function lookupPerk(id:String):PerkType{
 			return PERK_LIBRARY[id];
@@ -107,11 +126,37 @@ public class PerkType extends BaseContent
 		 * {
 		 *   fn: (Player)=>Boolean,
 		 *   text: String,
-		 *   type: String
+		 *   type: String,
+		 *   distance: Number,
+		 *   distanceFor: (Player)=>Number,
 		 *   // additional depending on type
 		 * }
 		 */
 		public var requirements:Array = [];
+		/**
+		 * Absolute distance - how "far" is that perk in the progression.
+		 */
+		public var distance:Number = 0;
+		
+		/**
+		 * Computes relative distance - how "far" is specific player to obtain that perk.
+		 * 0 = player has perk.
+		 * DISTANCE_STARTING = player doesn't have the perk, but all requirements are passed
+		 */
+		public function distanceFor(player:Player):Number {
+			if (player.hasPerk(this)) return 0;
+			var d:Number = DISTANCE_STARTING;
+			for each (var req:Object in requirements) {
+				// skip if player passes the requirement
+				if (req.fn(player)) continue;
+				if (req.distanceFor is Function) {
+					d += Math.max(0, req.distanceFor(player));
+				} else if (req.distance is Number && isFinite(req.distance) && req.distance > 0) {
+					d += req.distance;
+				}
+			}
+			return d;
+		}
 
 		public function available(player:Player):Boolean {
 			for each (var c: Object in requirements) {
@@ -120,11 +165,12 @@ public class PerkType extends BaseContent
 			return true;
 		}
 
-		public function requireCustomFunction(playerToBoolean:Function, requirementText:String, internalType:String = "custom"):PerkType {
+		public function requireCustomFunction(playerToBoolean:Function, requirementText:String, distance:Number = DISTANCE_DEFAULT, internalType:String = "custom"):PerkType {
 			requirements.push({
-				fn  : playerToBoolean,
-				text: requirementText,
-				type: internalType
+				fn      : playerToBoolean,
+				text    : requirementText,
+				type    : internalType,
+				distance: distance
 			});
 
 			return this;
@@ -135,7 +181,9 @@ public class PerkType extends BaseContent
 				fn  : fnRequireAttr("level", value),
 				text: "Level " + value,
 				type: "level",
-				value: value
+				value: value,
+				distance: value*DISTANCE_PER_LEVEL,
+				distanceFor: fnDistanceAttr("level", value, DISTANCE_PER_LEVEL)
 			});
 			return this;
 		}
@@ -145,7 +193,9 @@ public class PerkType extends BaseContent
 				text: "Strength " + value,
 				type: "attr",
 				attr: "str",
-				value: value
+				value: value,
+				distance: Math.max(1,value*DISTANCE_PER_PRIMARY_STAT),
+				distanceFor: fnDistanceAttr("str", value, DISTANCE_PER_PRIMARY_STAT)
 			});
 			return this;
 		}
@@ -161,14 +211,21 @@ public class PerkType extends BaseContent
 				text: function(player:Player):String {
 					// return true if player meets perk requirements
 					var Attribute:String = "Toughness";
-					if(player.hasPerk(PerkLib.IcyFlesh)) Attribute = "intelligence";
-					if(player.hasPerk(PerkLib.HaltedVitals)) Attribute = "libido";
+					if(player.hasPerk(PerkLib.IcyFlesh)) Attribute = "Intelligence";
+					if(player.hasPerk(PerkLib.HaltedVitals)) Attribute = "Libido";
 					return Attribute +" "+ value;
 				},
 				statictext: "Toughness "+value,
 				type: "attr",
 				attr: "tou",
-				value: value
+				value: value,
+				distance: Math.max(1,value*DISTANCE_PER_PRIMARY_STAT),
+				distanceFor: function(player:Player):Number {
+					var Attribute:String = "tou";
+					if(player.hasPerk(PerkLib.IcyFlesh)) Attribute = "inte";
+					if(player.hasPerk(PerkLib.HaltedVitals)) Attribute = "lib";
+					return (value-player[Attribute])*DISTANCE_PER_PRIMARY_STAT
+				}
 			});
 			return this;
 		}
@@ -178,7 +235,9 @@ public class PerkType extends BaseContent
 				text: "Speed " + value,
 				type: "attr",
 				attr: "spe",
-				value: value
+				value: value,
+				distance: Math.max(1,value*DISTANCE_PER_PRIMARY_STAT),
+				distanceFor: fnDistanceAttr("spe", value, DISTANCE_PER_PRIMARY_STAT)
 			});
 			return this;
 		}
@@ -188,7 +247,9 @@ public class PerkType extends BaseContent
 				text: "Intellect " + value,
 				type: "attr",
 				attr: "inte",
-				value: value
+				value: value,
+				distance: Math.max(1,value*DISTANCE_PER_PRIMARY_STAT),
+				distanceFor: fnDistanceAttr("inte", value, DISTANCE_PER_PRIMARY_STAT)
 			});
 			return this;
 		}
@@ -198,7 +259,9 @@ public class PerkType extends BaseContent
 				text: "Wisdom " + value,
 				type: "attr",
 				attr: "wis",
-				value: value
+				value: value,
+				distance: Math.max(1,value*DISTANCE_PER_PRIMARY_STAT),
+				distanceFor: fnDistanceAttr("wis", value, DISTANCE_PER_PRIMARY_STAT)
 			});
 			return this;
 		}
@@ -208,7 +271,9 @@ public class PerkType extends BaseContent
 				text: "Libido " + value,
 				type: "attr",
 				attr: "lib",
-				value: value
+				value: value,
+				distance: Math.max(1,value*DISTANCE_PER_PRIMARY_STAT),
+				distanceFor: fnDistanceAttr("lib", value, DISTANCE_PER_PRIMARY_STAT)
 			});
 			return this;
 		}
@@ -218,7 +283,9 @@ public class PerkType extends BaseContent
 				text: "Sensitivity " + value,
 				type: "attr",
 				attr: "sens",
-				value: value
+				value: value,
+				distance: value*DISTANCE_PER_SENS,
+				distanceFor: fnDistanceAttr("sens", value, DISTANCE_PER_SENS)
 			});
 			return this;
 		}
@@ -228,7 +295,9 @@ public class PerkType extends BaseContent
 				text: "Corruption " + value,
 				type: "attr",
 				attr: "cor",
-				value: value
+				value: value,
+				distance: value*DISTANCE_PER_COR,
+				distanceFor: fnDistanceAttr("cor", value, DISTANCE_PER_COR)
 			});
 			return this;
 		}
@@ -240,7 +309,9 @@ public class PerkType extends BaseContent
 				text: "Libido &lt; " + value,
 				type: "attr-lt",
 				attr: "lib",
-				value: value
+				value: value,
+				distance: value*DISTANCE_PER_PRIMARY_STAT,
+				distanceFor: fnDistanceAttr("lib", value, -DISTANCE_PER_PRIMARY_STAT)
 			});
 			return this;
 		}
@@ -251,7 +322,9 @@ public class PerkType extends BaseContent
 				},
 				text: "New Game+ " + value,
 				type: "ng+",
-				value: value
+				value: value,
+				distance: value*DISTANCE_PER_NG,
+				distanceFor: fnDistanceAttr("newGamePlusMod", value, DISTANCE_PER_NG)
 			});
 			return this;
 		}
@@ -261,7 +334,8 @@ public class PerkType extends BaseContent
 					return player.freeAdvancedJobsSlots() > 0;
 				},
 				text: "Free Advanced Job Slot",
-				type: "advanced"
+				type: "advanced",
+				distance: DISTANCE_ADVANCED_JOB_SLOT
 			});
 			return this;
 		}
@@ -271,7 +345,8 @@ public class PerkType extends BaseContent
 					return player.freeHiddenJobsSlots() > 0;
 				},
 				text: "Free Hidden Job Slot",
-				type: "hidden"
+				type: "hidden",
+				distance: DISTANCE_HIDDEN_JOB_SLOT
 			});
 			return this;
 		}
@@ -281,7 +356,8 @@ public class PerkType extends BaseContent
 					return player.freePrestigeJobsSlots() > 0;
 				},
 				text: "Free Prestige Job Slot",
-				type: "prestige"
+				type: "prestige",
+				distance: DISTANCE_PRESTIGE_JOB_SLOT
 			});
 			return this;
 		}
@@ -292,7 +368,8 @@ public class PerkType extends BaseContent
 				},
 				text: "Free "+IMutationPerkType.Slots[slot].name+" Mutation Slot",
 				type: "mutationslot",
-				slot: slot
+				slot: slot,
+				distance: DISTANCE_MUTATION_SLOT
 			});
 			return this;
 		}
@@ -350,7 +427,8 @@ public class PerkType extends BaseContent
 					return player.maxDragonMutations() > 0;
 				},
 				text: "Free Dragon Mutation Slot",
-				type: "dragonmutation"
+				type: "dragonmutation",
+				distance: DISTANCE_DEFAULT
 			});
 			return this;
 		}
@@ -360,7 +438,8 @@ public class PerkType extends BaseContent
 					return player.maxKitsuneMutations() > 0;
 				},
 				text: "Free Kitsune Mutation Slot",
-				type: "kitsunemutation"
+				type: "kitsunemutation",
+				distance: DISTANCE_DEFAULT
 			});
 			return this;
 		}
@@ -370,7 +449,8 @@ public class PerkType extends BaseContent
 					return CoC.instance.flags[kFLAGS.HUNGER_ENABLED] > 0;
 				},
 				text: "Hunger enabled",
-				type: "hungerflag"
+				type: "hungerflag",
+				distance: DISTANCE_DEFAULT
 			});
 			return this;
 		}
@@ -381,7 +461,9 @@ public class PerkType extends BaseContent
 				},
 				text: "Min. Lust "+value,
 				type: "minlust",
-				value: value
+				value: value,
+				distance: value*DISTANCE_PER_MINLUST,
+				distanceFor: fnDistanceAttr("minLust", value, DISTANCE_PER_MINLUST)
 			});
 			return this;
 		}
@@ -392,7 +474,8 @@ public class PerkType extends BaseContent
 				},
 				text: "Min. Sensitivity "+value,
 				type: "minsensitivity",
-				value: value
+				value: value,
+				distance: DISTANCE_DEFAULT
 			});
 			return this;
 		}
@@ -403,7 +486,8 @@ public class PerkType extends BaseContent
 				},
 				text: "Max. Soulforce "+value,
 				type: "soulforce",
-				value: value
+				value: value,
+				distance: DISTANCE_DEFAULT
 			});
 			return this;
 		}
@@ -414,7 +498,9 @@ public class PerkType extends BaseContent
 				},
 				text: "Max. Mana "+value,
 				type: "mana",
-				value: value
+				value: value,
+				distance: value*DISTANCE_PER_MAXMANA,
+				distanceFor: fnDistanceAttr("maxMana", value, DISTANCE_PER_MAXMANA)
 			});
 			return this;
 		}
@@ -425,7 +511,9 @@ public class PerkType extends BaseContent
 				},
 				text: "Max. Venom/Web "+value,
 				type: "venom_web",
-				value: value
+				value: value,
+				distance: value*DISTANCE_PER_MAXVENOM,
+				distanceFor: fnDistanceAttr("maxVenom", value, DISTANCE_PER_MAXMANA)
 			});
 			return this;
 		}
@@ -434,14 +522,33 @@ public class PerkType extends BaseContent
 				return player[attrname] >= value;
 			};
 		}
-		public function requireStatusEffect(effect:StatusEffectType, text:String):PerkType {
+		
+		/**
+		 * Create a relative distance computing function that returns a score for player's property "attrname"
+		 * distance to "target" value.
+		 * For example, fnDistanceAttr("str", 60, 0.5) creates a function that counts 0.5 per player strength below 60.
+		 * If property goes down, for example "corruption no more than 50", multiply scale by -1.
+		 * @param attrname Player property name. Should be a number or no-arg function returning number
+		 * @param target Target value.
+		 * @param scale Score per 1 of difference
+		 * @return {(Player)=>Number} distance function
+		 */
+		private function fnDistanceAttr(attrname:String,target:Number,scale:Number):Function {
+			return function(player:Player):Number {
+				var attr:* = player[attrname];
+				if (attr is Function) attr = attr();
+				return (target - attr) * scale;
+			}
+		}
+		public function requireStatusEffect(effect:StatusEffectType, text:String, distance:Number = DISTANCE_DEFAULT):PerkType {
 			requirements.push({
 				fn  : function (player:Player):Boolean {
 					return player.hasStatusEffect(effect);
 				},
 				text: text,
 				type: "effect",
-				effect: effect
+				effect: effect,
+				distance: distance
 			});
 			return this;
 		}
@@ -471,7 +578,11 @@ public class PerkType extends BaseContent
 				text: text,
 				type: "race",
 				race: race,
-				tier: minTier
+				tier: minTier,
+				distance: minTier*DISTANCE_PER_RACIAL_TIER,
+				distanceFor: function(player:Player):Number {
+					return (minTier - player.racialTier(race)) * DISTANCE_PER_RACIAL_TIER;
+				}
 			});
 			return this;
 		}
@@ -508,7 +619,8 @@ public class PerkType extends BaseContent
 				},
 				text: text,
 				type: "anyrace",
-				races: races
+				races: races,
+				distance: DISTANCE_PER_RACIAL_TIER
 			});
 			return this;
 		}
@@ -519,7 +631,11 @@ public class PerkType extends BaseContent
 				},
 				text: perk.name(),
 				type: "perk",
-				perk: perk
+				perk: perk,
+				// distance is computed in PerkTree
+				distanceFor: function(player:Player):Number {
+					return perk.distanceFor(player);
+				}
 			});
 			return this;
 		}
@@ -538,7 +654,15 @@ public class PerkType extends BaseContent
 				},
 				text: text.join(" or "),
 				type: "anyperk",
-				perks: perks
+				perks: perks,
+				// distance is computed in PerkTree
+				distanceFor: function(player:Player):Number {
+					var mindist:Number = Infinity;
+					for each(var perk:PerkType in perks) {
+						mindist = Math.min(mindist, perk.distanceFor(player));
+					}
+					return DISTANCE_PER_PERK + (isFinite(mindist) ? mindist : 0);
+				}
 			});
 			return this;
 		}
@@ -561,7 +685,15 @@ public class PerkType extends BaseContent
 				},
 				text: text.join(" and "),
 				type: "allperks",
-				allperks: perks
+				allperks: perks,
+				// distance is computed in PerkTree
+				distanceFor: function(player:Player):Number {
+					var maxdist:Number = -Infinity;
+					for each(var perk:PerkType in perks) {
+						maxdist = Math.max(maxdist, perk.distanceFor(player));
+					}
+					return DISTANCE_PER_PERK*perks.length + (isFinite(maxdist) ? maxdist : 0);
+				}
 			});
 			return this;
 		}
@@ -589,7 +721,11 @@ public class PerkType extends BaseContent
 				},
 				text: mutation.name(),
 				type: "mutation",
-				perk: mutation
+				perk: mutation,
+				distance: DISTANCE_PER_PERK,
+				distanceFor: function(player:Player):Number {
+					return mutation.distanceFor(player);
+				}
 			});
 			return this;
 		}

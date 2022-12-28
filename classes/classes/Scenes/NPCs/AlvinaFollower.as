@@ -401,10 +401,13 @@ public function alvinaThirdEncounterTakeHer():void
 		outputText("You sit right next to her, and she closes her book in response, turning to you.\n\n");
 		if (!MetAlvinaAtBar){
 			MetAlvinaAtBar = true;
-			outputText("It was Alvina, the stranger you met on your travels!  ");
+			outputText("You approach the cloaked figure and recognise her from before. It's Alvina the wanderer you met out in the wild. She is currently busy reading a book but is swift to acknowledge your presence when you sit right next to her. Adjusting her glasses and turning her green gaze toward you with an amused smile.[pg]");
+			outputText("\"<i>Oh you again? I did half expect you to find your way here but it is a nice surprise. So tell me how is your adventuring going?</i>\"[pg]");
+			outputText("You provide Alvina with all the details of your recent exploration.[pg]");
+			outputText("\"<i>Not bad, you might just make it out there. So [name], anything I can do for you today?</i>\"[pg]");
 		}
 		if (gaveAnyPresent()) outputText("\"<i>Ah [name], how nice to see you. ");
-		else outputText("\"Ah champion, a welcome sight indeed. ");
+		else outputText("\"Ah [name], a welcome sight indeed. ");
 		outputText("What can I do for you today?</i>\"\n\n");
 
 		if (GaveAlvinaWand && WandCooldown == 0)

@@ -49,7 +49,7 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Sweep Defenses. Gained when training with Chelsea and having 200+ libido. Effect: Critical tease also weakens your opponent's resistance to lust by 5%. (EragonX)\n");
 			outputText("-Hellhounds and Infected Hellhouds lvl increased by 10 levels. Harpy and Basilisk levels increased by 15 levels. Starting lvl of Izumi and Minerva increased by 12. Minotaur sons starting lvl was lowered by 10. Cockatrice enemies lvl increased by 55/62(winged).\n");
 			outputText("-Phoenixes meet outside tower are now all called quasi-phoenixes (since they weren't succesfull hybryds but their 'mother' was persistent to call them as success so in tower they are called as her mother wish for). Quasi-phoenix enemies in High Mountains increased lvl by 32.\n");
-			outputText("-\n");
+			outputText("-Adds 'perk distance' - a score indicating how difficult perk requirements are. Adds different sorting modes to PerkDatabase - by name, distance, relative distance. By default, perks in database are sorted by relative distance, so perks that are easier for player character to obtain will go first. (aimozg)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -77,7 +77,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");// (khovel)
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-Fixed bugs: MindUp option req. wrong items in Rath menu, MOney strike been unusable against groups\n");
+			outputText("-Fixed bugs: MindUp option req. wrong items in Rath menu, Money strike been unusable against groups, Fetish Zealots blocking boat before they intro scene at lake plays\n");
 			//remove this line when other two lines below get added ingame --- outputText("-Boss type enemies gained additional bonuses: Diehard effect of 7,5% of max HP + 2,250 HP * NG tier, OverMax HP effect of 15% magnitude.\n");
 			//outputText("-New perk for enemies: Elite type enemy. Bonuses for are: Diehard effect of 2,5% of max HP + 750 HP * NG tier, OverMax HP effect of 5% magnitude.\n");
 			//outputText("-New perk for enemies: Champion type enemy. Bonuses for are: Diehard effect of 5% of max HP + 1,500 HP * NG tier, OverMax HP effect of 10% magnitude.\n");
