@@ -3413,6 +3413,7 @@ public class Creature extends Utils
 		// <mod name="Predator arms" author="Stadler76">
 		public function claws():String { return clawsPart.descriptionFull(); }
 		public function finger():String { return clawsPart.descriptionFinger(); }
+		public function hands():String { return arms.hasPawsOrHands(); }
 		// </mod>
 
 		public function legs():String { return lowerBodyPart.legs(); }

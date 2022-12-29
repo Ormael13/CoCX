@@ -23,7 +23,7 @@ public class CombatMagic extends BaseCombatContent {
 
 	internal function applyAutocast():void {
 		outputText("\n\n");
-		if (!player.hasPerk(PerkLib.HexKnowledge) && !player.hasPerk(PerkLib.HyperCasting)) {
+		if (!player.hasPerk(PerkLib.HexKnowledge) || (player.hasPerk(PerkLib.HexKnowledge) && player.hasPerk(PerkLib.HyperCasting))) {
 			if (player.hasPerk(PerkLib.Spellsword) && CombatAbilities.ChargeWeapon.isKnownAndUsable && flags[kFLAGS.AUTO_CAST_CHARGE_WEAPON_DISABLED] == 0) {
 				CombatAbilities.ChargeWeapon.autocast();
 			}
@@ -31,7 +31,7 @@ public class CombatMagic extends BaseCombatContent {
 				CombatAbilities.ChargeArmor.autocast();
 			}
 		}
-		if (!player.hasPerk(PerkLib.DivineKnowledge) && !player.hasPerk(PerkLib.HyperCasting)) {
+		if (!player.hasPerk(PerkLib.DivineKnowledge) || (player.hasPerk(PerkLib.DivineKnowledge) && player.hasPerk(PerkLib.HyperCasting))) {
 			if (player.hasPerk(PerkLib.Battlemage) && CombatAbilities.Might.isKnownAndUsable && flags[kFLAGS.AUTO_CAST_MIGHT_DISABLED] == 0) {
 				CombatAbilities.Might.autocast();
 			}

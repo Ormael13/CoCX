@@ -1518,7 +1518,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Icy flesh
-			if (!player.hasPerk(PerkLib.IceQueenGown) && player.hasPerk(PerkLib.IcyFlesh) && !player.isRaceCached(Races.YUKIONNA)) {
+			if (!player.isRaceCached(Races.YUKIONNA) && player.hasPerk(PerkLib.IcyFlesh)) {
 				outputText("\nYour body slowly comes back to life as if it has been hibernating for a long time. You feel sickly as if dying, hungry as if you'd been starving for weeks and thirstier than if you'd been wandering the desert without drinks for about half as much.\n\n(<b>Lost Perks: "+((player.hasPerk(PerkLib.ColdAffinity) && !player.isRaceCached(Races.YETI)) ? "Cold Affinity, ":"")+"Dead metabolism and Icy flesh</b>)\n");
 				if (player.hasPerk(PerkLib.ColdAffinity) && !player.isRaceCached(Races.YETI)) player.removePerk(PerkLib.ColdAffinity);
 				player.removePerk(PerkLib.DeadMetabolism);

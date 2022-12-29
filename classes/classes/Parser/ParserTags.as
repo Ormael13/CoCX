@@ -90,6 +90,7 @@ public class ParserTags {
         "hairshortdesc"         : function ():* { return Appearance.hairShortDescription(CoC.instance.player); },
         "haircolor"             : function ():* { return CoC.instance.player.hairColor; },
         "hairorfur"             : function ():* { return CoC.instance.player.hairOrFur(); },
+        "hands"                 : function ():* { return CoC.instance.player.hands(); },
         "he"                    : function ():* { return CoC.instance.player.mf("he", "she"); },
         "him"                   : function ():* { return CoC.instance.player.mf("him", "her"); },
         "himself"               : function ():* { return CoC.instance.player.mf("himself", "herself"); },
