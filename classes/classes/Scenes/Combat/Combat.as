@@ -5246,14 +5246,17 @@ public class Combat extends BaseContent {
             outputText("\n");
         }
         //Unique attack werewolf
-        if (player.isRaceCached(Races.WEREWOLF) && player.hasMutation(IMutationsLib.AlphaHowlIM)) {
+        if ((player.isRaceCached(Races.WEREWOLF) || player.isRaceCached(Races.CERBERUS)) && player.hasMutation(IMutationsLib.AlphaHowlIM)) {
             var WerewolfPackDamageMultiplier:Number = 0.5;
+            var packMembers:Number = LunaFollower.WerewolfPackMember;
+            if (player.hasMutation(PerkLib.HellhoundFireBalls)) packMembers += player.perkv3(PerkLib.HellhoundFireBalls);
             outputText("Your beta, Luna, jumps into the melee");
-            if (LunaFollower.WerewolfPackMember >= 1){
+            if (packMembers >= 1){
                 outputText("your other pack member");
-                if (LunaFollower.WerewolfPackMember >= 2)outputText("s");
+                if (packMembers >= 2)outputText("s");
                 outputText(" joining in to deliver bites and claw swipes from all sides.");
-                WerewolfPackDamageMultiplier += (LunaFollower.WerewolfPackMember/2);
+                if (player.perkv3(PerkLib.HellhoundFireBalls) > 0)
+                WerewolfPackDamageMultiplier += (packMembers/2);
             }
             ExtraNaturalWeaponAttack(WerewolfPackDamageMultiplier);
         }
@@ -7625,8 +7628,10 @@ public class Combat extends BaseContent {
         if (player.perkv1(IMutationsLib.AlphaHowlIM) >= 3) {
             var packmultiplier:Number = 1.0;
             var PerkMultiplier:Number = 2;
+            var packMembers:Number = LunaFollower.WerewolfPackMember;
+            if (player.hasMutation(PerkLib.HellhoundFireBalls)) packMembers += player.perkv3(PerkLib.HellhoundFireBalls);
             if (player.perkv1(IMutationsLib.AlphaHowlIM) >= 4) PerkMultiplier = 5;
-            packmultiplier += (LunaFollower.WerewolfPackMember*PerkMultiplier)/100
+            packmultiplier += (packMembers*PerkMultiplier)/100
             damage *= packmultiplier;
         }
         doDamage(damage, apply, display);
@@ -15740,4 +15745,4 @@ private function touSpeStrScale(stat:int):Number {
         return damage;
     }
 }
-}
+}

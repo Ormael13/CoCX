@@ -2605,6 +2605,7 @@ public class Creature extends Utils
 				quantity *= 3;
 			if (hasPerk(PerkLib.ProductivityDrugs))
 				quantity += (perkv3(PerkLib.ProductivityDrugs));
+			if (hasMutation(PerkLib.HellhoundFireBalls)) quantity += perkv3(PerkLib.HellhoundFireBalls);
 			//if(hasPerk("Elven Bounty") >= 0) quantity += 250;;
 			quantity += perkv1(PerkLib.ElvenBounty);
 			if (hasPerk(PerkLib.BroBody))
@@ -3135,7 +3136,7 @@ public class Creature extends Utils
 		//create vagoo
 		public function createVagina(virgin:Boolean = true, vaginalWetness:Number = 1, vaginalLooseness:Number = 0):Boolean
 		{
-			if (vaginas.length >= 1)
+			if (vaginas.length >= 2)
 				return false;
 			var newVagina:VaginaClass = new VaginaClass(vaginalWetness,vaginalLooseness,virgin);
 			newVagina.host = this;
@@ -3434,6 +3435,11 @@ public class Creature extends Utils
 			return perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 3 || game.player.isRace(Races.ELF) || game.player.isRace(Races.WOODELF);
 		}
 		public function isWoodElf():Boolean { return  game.player.isRace(Races.WOODELF); }
+		public function isHellHound():Boolean { return ((faceType == Face.DOG && cor >= 60) && dogCocks() >= 2 && ((tail.type == Tail.DOG ? 1 : 0) ||
+				(lowerBody == LowerBody.DOG) ||
+				(hairColor == "midnight black") ||
+				(furColor == "midnight black")
+		))}
 
 		public function isFlying():Boolean {
 			return hasStatusEffect(StatusEffects.Flying);

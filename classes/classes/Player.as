@@ -2746,7 +2746,9 @@ use namespace CoC;
 				mult -= 20;
 			}
 			if (perkv1(IMutationsLib.AlphaHowlIM) >= 2) {
-				mult -= (2*LunaFollower.WerewolfPackMember);
+				var packMembers:Number = LunaFollower.WerewolfPackMember;
+				if (hasMutation(PerkLib.HellhoundFireBalls)) packMembers += perkv3(PerkLib.HellhoundFireBalls);
+				mult -= (2*packMembers);
 			}
 			if (hasPerk(PerkLib.FenrirSpikedCollar)) {
 				mult -= 15;
@@ -4729,6 +4731,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.Soulless)) minCor += 50;
 			if (hasPerk(PerkLib.Phylactery)) minCor = 100;
 			if (hasPerk(PerkLib.BlessingOfTheAncestorTree)) minCor = 50;
+			if (hasPerk(PerkLib.HellfireCoat)) minCor = 50;
 			if (this.hasStatusEffect(StatusEffects.DevilPurificationScar)) {minCor-=50;}
 			if (hasPerk(PerkLib.Phylactery) && hasPerk(PerkLib.SageMedicine)) minCor = 0;
 			if (this.hasPerk(PerkLib.PurityElixir)) minCor -= (this.perkv1(PerkLib.PurityElixir) * 20);
@@ -5970,7 +5973,7 @@ use namespace CoC;
 		public function blockingBodyTransformations():Boolean {
 			return hasPerk(PerkLib.TransformationImmunity) || hasPerk(PerkLib.TransformationImmunityFairy) || hasPerk(PerkLib.TransformationImmunityAtlach)
 					|| hasPerk(PerkLib.TransformationImmunityBeeHandmaiden) || hasPerk(PerkLib.Undeath) || hasPerk(PerkLib.WendigoCurse)
-					|| hasPerk(PerkLib.BlessingOfTheAncestorTree) || hasEnchantment(EnchantmentLib.TfImmunity);
+					|| hasPerk(PerkLib.BlessingOfTheAncestorTree) || hasPerk(PerkLib.HellfireCoat) || hasEnchantment(EnchantmentLib.TfImmunity);
 		}
 
 		public function manticoreFeed():void {
@@ -6127,6 +6130,9 @@ use namespace CoC;
 					var bonusGems:int = rand( cocks[randomCock].cockThickness ) + countCockSocks("gilded"); // int so AS rounds to whole numbers
 					EngineCore.outputText("\n\nFeeling some minor discomfort in your " + cockDescript(randomCock) + " you slip it out of your [armor] and examine it. <b>With a little exploratory rubbing and massaging, you manage to squeeze out " + bonusGems + " gems from its cum slit.</b>\n\n");
 					gems += bonusGems;
+				}
+				if (hasPerk(PerkLib.HellhoundFireBalls)) {
+					addPerkValue(PerkLib.HellhoundFireBalls, 2, 1);
 				}
 			}
             if (SceneLib.exgartuan.boobsPresent()) SceneLib.exgartuan.boobsSleep(4 + rand(4)); //consider her touched, lol

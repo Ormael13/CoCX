@@ -649,6 +649,16 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.Lycanthropy);
 				needNext = true;
 			}
+			if (player.isRaceCached(Races.CERBERUS) && player.hasMutation(PerkLib.HellhoundFireBalls)) {
+				var pTier:Number = player.perkv1(PerkLib.HellhoundFireBalls);
+				if (pTier < 4 && player.level >= 30*pTier && player.perkv2(PerkLib.HellhoundFireBalls) >= 30*2*pTier) {
+					PerkLib.HellhoundFireBalls.acquireMutation(player, hellhoundFireballsMutate);
+					needNext = true;
+				}
+				function hellhoundFireballsMutate():void {
+					outputText("\nYour balls begin to suddenly feel heavier… warmer. You begin pumping your two penis absentmindedly thinking of all the bitches you recently broke on your twin shaft as the heat rushes all the way to your pair of erect members. You cum a humongous load of smoking warm cum, way to warm for normal seeds. It looks like your balls are progressively continuing their evolution to be more hellhound-like as your seed takes on burning hot property just like that of a hellhound.\n");
+				}
+			}
 			if (player.hasPerk(PerkLib.Immortality) && !player.isRaceCached(Races.AZAZEL)) {
 				outputText("\nYou lose your sence of invulnerability as you are no longer an Azazel.\n");
 				player.removePerk(PerkLib.Immortality);
@@ -2873,6 +2883,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					SceneLib.holidays.datTurkeyRumpMeeting(); //TURKEY SURPRISE
                     return true;
                 }
+				if (player.isHellHound() && player.hasPerk(PerkLib.Hellfire) && camp.IsSleeping && player.hasKeyItem("Marae's Lethicite") >= 0
+						&& player.keyItemvX("Marae's Lethicite", 1) > 0 ) { //&& !player.raceCached(Cerberus)
+					SceneLib.camp.campUniqueScenes.hellhoundCapture();
+				}
 
                 if (LunaFullMoonScene){
                     if (camp.IsSleeping)

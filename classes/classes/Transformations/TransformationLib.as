@@ -287,6 +287,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const ArmsWeasel: Transformation 			= arms.ArmsWeasel;
 	public const ArmsWendigo: Transformation 			= arms.ArmsWendigo;
 	public const ArmsWolf: Transformation 				= arms.ArmsWolf;
+	public const ArmsHound: Transformation 				= arms.ArmsHound;
 	public const ArmsYeti: Transformation 				= arms.ArmsYeti;
 	public const ArmsYukiOnna: Transformation 			= arms.ArmsYukiOnna;
 
@@ -658,6 +659,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
     public const HairGhost: Transformation 		= hair.HairGhost;
     public const HairRatatoskr: Transformation 	= hair.HairRatatoskr;
     public const HairWindswept: Transformation 	= hair.HairWindswept;
+    public const HairWild: Transformation 		= hair.HairWild;
     public const HairAnemone: Transformation 	= hair.HairAnemone;
     public const HairFluffy: Transformation 	= hair.HairFluffy;
     public const HairCrazy: Transformation 		= hair.HairCrazy;
@@ -862,6 +864,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const RearBodyAtlachNacha: Transformation 		= rearBody.RearBodyAtlachNacha;
 	public const RearBodyCobraHood: Transformation 			= rearBody.RearBodyCobraHood;
 	public const RearBodyWolfCollar: Transformation 		= rearBody.RearBodyWolfCollar;
+	public const RearBodyHellhoundCollar: Transformation 	= rearBody.RearBodyHellhoundCollar;
 
 
 //SKIN
@@ -1025,6 +1028,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
     public function UnlockVagina(): void { return vaginas.UnlockVagina(); }
     public function VaginaNone(vagina:int = 0): Transformation { return vaginas.VaginaNone(vagina); }
     public function CockToVagina(vagina:int = 0): Transformation { return vaginas.CockToVagina(vagina); }
+    public const SecondVagina: Transformation = vaginas.SecondVagina;
     public function VaginaHuman(vagina:int = 0): Transformation { return vaginas.VaginaHuman(vagina); }
     public function VaginaHorse(vagina:int = 0): Transformation { return vaginas.VaginaHorse(vagina); }
     public function VaginaKirin(vagina:int = 0): Transformation { return vaginas.VaginaKirin(vagina); }

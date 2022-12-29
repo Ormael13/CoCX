@@ -327,6 +327,22 @@ public class HairTransformations extends MutationsHelper {
 			}
 	);
 
+	public const HairWild: Transformation = new SimpleTransformation("Wild Hair",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "Your hair stands in all directions as though you have just been through a windstorm. <b>You now have wild hair!</b>";
+
+				player.hairLength = 1;
+
+				if (doOutput) outputText(desc);
+				player.hairType = Hair.WILD;
+			},
+			// is present
+			function (): Boolean {
+				return player.hairType === Hair.WILD;
+			}
+	);
+
 	public const HairAnemone: Transformation = new SimpleTransformation("Anemone Hair",
 			// apply effect
 			function (doOutput: Boolean): void {
