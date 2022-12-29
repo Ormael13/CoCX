@@ -58,7 +58,10 @@ public class Achievements extends BaseContent
 			//addAchievement("Jumanji", kACHIEVEMENTS., "Explore the jungle 100 times.");
 			addAchievement("Vacationer", kACHIEVEMENTS.ZONE_VACATIONER, "Explore the lake 100 times.");
 			addAchievement("Dehydrated", kACHIEVEMENTS.ZONE_DEHYDRATED, "Explore the desert 100 times.");
-			addAchievement("Rookie", kACHIEVEMENTS.ZONE_ROOKIE, "Explore the outer battlefield 100 times.");
+			addAchievement("Rookie", kACHIEVEMENTS.ZONE_ROOKIE, "Explore the boundary battlefield 100 times.");
+			addAchievement("Friggin' Golems!", kACHIEVEMENTS.ZONE_FRIGGIN_GOLEMS, "Explore the outer battlefield 100 times.");
+			addAchievement("Hiking", kACHIEVEMENTS.ZONE_HIKING, "Explore the hills 100 times.");
+			addAchievement("Trekking", kACHIEVEMENTS.ZONE_TREKKING, "Explore the low mountains 100 times.");
 			addAchievement("Mountaineer", kACHIEVEMENTS.ZONE_MOUNTAINEER, "Explore the mountains 100 times.");
 			addAchievement("Light-headed", kACHIEVEMENTS.ZONE_LIGHT_HEADED, "Explore the high mountains 100 times.");
 			addAchievement("Rolling Hills", kACHIEVEMENTS.ZONE_ROLLING_HILLS, "Explore the plains 100 times.");
@@ -222,6 +225,7 @@ public class Achievements extends BaseContent
 			//learn all grey spells
 			//learn all white/black/grey spells
 			//learn all blood spells
+			//learn all warlock/archpriest/green spells (3 diff achievs)
 			addAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER, "Cast your first wrath-empowered spell.", "", true);
 			addAchievement("Cum Cannon", kACHIEVEMENTS.COMBAT_CUM_CANNON, "Cum in the middle of battle.");
 			addAchievement("How Do I Shot Web?", kACHIEVEMENTS.COMBAT_SHOT_WEB, "Fire your webbings at your opponent.");
@@ -250,6 +254,7 @@ public class Achievements extends BaseContent
 			addAchievement("A Christmas Carol", kACHIEVEMENTS.HOLIDAY_CHRISTMAS_II, "Complete Carol's mini-quest (Christmas)", "", true);
 			addAchievement("The Lovable Snowman", kACHIEVEMENTS.HOLIDAY_CHRISTMAS_III, "Have Nieve as lover (Christmas/Winter)", "", true);
 			addAchievement("Will You Be My Valentine?", kACHIEVEMENTS.HOLIDAY_VALENTINE, "Visit the Wet Bitch during Valentine's day. (Valentine)", "", true);
+			//visit H'X'D during lunar new year
 
 			titleAchievementSection("Survival/Realistic Mode"); //15 achievements
 			addAchievement("Tastes Like Chicken", kACHIEVEMENTS.REALISTIC_TASTES_LIKE_CHICKEN, "Refill your hunger for the first time.");

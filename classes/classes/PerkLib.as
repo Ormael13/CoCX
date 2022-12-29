@@ -437,8 +437,8 @@ public class PerkLib
 				"You've chosen the 'War Mage ( Master )' perk, increasing maximum wrath by 250, decrease mana costs of spells by 20%, mana recovery increased by 1% of max mana and safe limit for spellcasting increased by 5%.")
 				.withBuffs({'maxwrath_base':+250});
 		public static const FlyingSwordPath:PerkType = mk("Flying Sword Path", "Flying Sword Path",
-				"Allows you to control flying swords. With spending enough soulforce can even fly on them. (+50 max soulforce)",
-				"You've chosen the 'Flying Sword Path' perk. Allows you to control flying swords. With spending enough soulforce can even fly on them. (+50 max soulforce)")
+				"Allows you to control flying swords. With spending enough soulforce can even fly on them.",
+				"You've chosen the 'Flying Sword Path' perk. Allows you to control flying swords. With spending enough soulforce can even fly on them.")
 				.withBuffs({'maxsf_base':+50});
 		public static const SoaringBlades:PerkType = mk("Soaring Blades", "Soaring Blades",
 				"Reduce SF cost of attacking with flying swords or flying on them by 20% per each stage of dantain attained.",
