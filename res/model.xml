@@ -1750,6 +1750,7 @@
 		<!-- VARIABLES AREA -->
 		<set var="hydraTails" value="statusEffectv1(StatusEffects.HydraTailsPlayer)"/>
 		<set var="big" value="(cocks[0].cockLength gt 12) ? 'big' : ''"/>
+		<set var="bigHorse" value="(cocks[0].cockLength gt 25) ? 'big' : ''"/>
 		<!--<set var="CaveWyrmNipples" value="hasStatusEffect(StatusEffects.GlowingNipples)"/>-->
 
 		<!-- CLOTHING VARIABLES AREA -->
@@ -4626,7 +4627,7 @@
                 </case>
 
                 <case values="CockTypesEnum.HORSE">
-					<if test="big">
+					<if test="bigHorse">
                         <show part="penis$taur/horsebig$taur"/>
 						<if test="showDickDrippies">
 							<show part="cum$taur/horsebig$taur"/>
@@ -4698,8 +4699,8 @@
                     </if>
                 </case>
 								
-				<case values="CockTypesEnum.DOG,CockTypesEnum.KIRIN">
-                    <if test="big">
+				<case values="CockTypesEnum.KIRIN">
+                    <if test="bigHorse">
                         <show part="penis$taur/kirinbig$taur"/>
                         <else>
                             <show part="penis$taur/kirin$taur"/>
