@@ -71,7 +71,7 @@ public class Achievements extends BaseContent
 			addAchievement("Defiled", kACHIEVEMENTS.ZONE_DEFILED, "Explore the defiled ravine 100 times.");
 			addAchievement("Sunburned", kACHIEVEMENTS.ZONE_SUNBURNED, "Explore the beach 100 times.");
 			addAchievement("Sea-Legs", kACHIEVEMENTS.ZONE_SAILOR, "Explore the ocean 100 times.");
-			addAchievement("Diver", kACHIEVEMENTS.ZONE_DIVER, "Explore the deep sea 100 times.");
+			//addAchievement("Diver", kACHIEVEMENTS.ZONE_DIVER, "Explore the deep sea 100 times.");
 			addAchievement("Caveman", kACHIEVEMENTS.ZONE_CAVEMAN, "Explore the caves 100 times.");
 			//addAchievement("Spelunker", kACHIEVEMENTS., "Explore the deep caves 100 times.");
 			addAchievement("Sub-Zero", kACHIEVEMENTS.ZONE_SUB_ZERO, "Explore the tundra 100 times.");
@@ -450,8 +450,7 @@ public class Achievements extends BaseContent
 			addAchievement("Ultimate Lifeform", kACHIEVEMENTS.GENERAL_ULTIMATE_LIFEFORM, "Have at least 128 racial internal mutation perks.", "", true);
 			addAchievement("The end and the beginning", kACHIEVEMENTS.GENERAL_THE_END_AND_THE_BEGINNING, "Defeat Archmage Alvina.");
 			addAchievement("Beyond gods and mortals", kACHIEVEMENTS.GENERAL_BEYOND_GODS_AND_MORTALS, "Defeat Alvina at the peak of her power on Xianxia Difficulty.");
-			addAchievement("Dawn chasing away the night", kACHIEVEMENTS.GENERAL_DAWN_CHASING_AWAY_THE_NIGHT, "Successfully redeem the broken soul who lost everything. This is the dawn of a new era for Mareth.");
-
+			//addAchievement("Dawn chasing away the night", kACHIEVEMENTS.GENERAL_DAWN_CHASING_AWAY_THE_NIGHT, "Successfully redeem the broken soul who lost everything. This is the dawn of a new era for Mareth.");
 		}
 		
 		public function achievementsScreen():void {

@@ -730,11 +730,11 @@ public function alvinaMainCampMenu():void
 {
 	spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2_16bit);
 	clearOutput();
-	outputText("You head out to meet Alvina in her hidden camp. She is in the middle of an experiment, as usual.\n\n");
+	outputText("You head out to meet Alvina in her hidden camp. She is in the middle of an experiment, as usual.\n\n");/*
 	if (player.hasStatusEffect(StatusEffects.DevilPurificationScar)) {
 		alvinaFreaksDevilPurification();
 		return;
-	}
+	}*/
 	outputText("\"<i>Well hello [name], what brings you to me today?</i>\"\n\n");
 	menu();
 	addButton(0, "Appearance", alvinaMainCampMenuAppearance).hint("Examine Alvina detailed appearance.");

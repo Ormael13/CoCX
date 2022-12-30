@@ -67,7 +67,7 @@ public class CoC extends MovieClip
         return _instance;
     }
     //Game Version
-    public var debugGameVer:String = "v0.8s6.11-12+final";
+    public var debugGameVer:String = "v0.8s6";
 
     //Mod save version.
     public var modSaveVersion:Number = 36.038;
@@ -282,7 +282,7 @@ public class CoC extends MovieClip
 
 			//Version NUMBER
 			ver = "1.0.2_mod_Xianxia_" + debugGameVer;
-			ver += " (<b></b>)";
+			ver += " (<b>Bugfixing, Pure Alvina romance option, 2 new/old areas, Kitshoo tf official release</b>)";
 
         this.images = new ImageManager(stage, mainView);
         this.inputManager = new InputManager(stage, mainView, false);
