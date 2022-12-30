@@ -8,7 +8,7 @@ import classes.Race;
 import classes.VaginaClass;
 
 public class AzazelRace extends Race {
-	public static const AzazelEyeColors:/*String*/Array = ["gold","pure blue"];
+	public static const AzazelEyeColors:/*String*/Array = ["golden","pure blue"];
     public static const RaceBody:/*String*/Array = [
         /*Antenna*/		"Human",
         /*Arms*/		"Human",

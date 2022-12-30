@@ -1613,7 +1613,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			if ((player.isRaceCached(Races.RAIJU) || player.isRaceCached(Races.THUNDERBIRD) || player.isRaceCached(Races.KIRIN)) && !player.hasPerk(PerkLib.LightningAffinity)) {
 				outputText("\nYou suddenly feel a rush of electricity run across your skin as your arousal builds up and begin to masturbate in order to get rid of your creeping desire. However even after achieving orgasm not only are you still aroused but you are even hornier than before! You realise deep down that the only way for you to be freed from this jolting pleasure is to have sex with a partner!\n");
-				if (player.isRaceCached(Races.THUNDERBIRD)) player.createStatusEffect(StatusEffects.IsThunderbird,0,0,0,0);
+				if (player.isRaceCached(Races.THUNDERBIRD)){
+					player.createStatusEffect(StatusEffects.IsThunderbird,0,0,0,0);
+					player.createPerk(PerkLib.Supercharged,0,0,0,0);
+				}
 				if (player.isRaceCached(Races.RAIJU)) {
 					player.createStatusEffect(StatusEffects.IsRaiju,0,0,0,0);
 					player.createPerk(PerkLib.LightningClaw,0,0,0,0);
@@ -1651,6 +1654,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removeStatusEffect(StatusEffects.IsThunderbird);
 				player.removePerk(PerkLib.LightningAffinity);
 				player.removePerk(PerkLib.ElectrifiedDesire);
+				player.removePerk(PerkLib.Supercharged);
 				needNext = true;
 			}
 			else if (!player.isRaceCached(Races.SEA_DRAGON) && player.hasPerk(PerkLib.LightningAffinity) && !player.hasStatusEffect(StatusEffects.IsKirin) && !player.hasStatusEffect(StatusEffects.IsThunderbird) && !player.hasStatusEffect(StatusEffects.IsRaiju)) {
