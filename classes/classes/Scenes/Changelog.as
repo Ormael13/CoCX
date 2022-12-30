@@ -50,8 +50,8 @@ public class Changelog extends BaseContent
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			outputText("-Adds 'perk distance' - a score indicating how difficult perk requirements are. Adds different sorting modes to PerkDatabase - by name, distance, relative distance. By default, perks in database are sorted by relative distance, so perks that are easier for player character to obtain will go first. (aimozg)\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-3 new achievments.\n");
+			outputText("-Sheep Milk and Spring Water on top of fixed flat amount of fatigue & lust removed also removes % values - 5%/5% and 2%/6%.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
