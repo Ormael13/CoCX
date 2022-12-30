@@ -243,7 +243,7 @@ public class Achievements extends BaseContent
 			addAchievement("Uncanny Reiterpallasch", kACHIEVEMENTS.COMBAT_UNCANNY_REITERPALLASCH, "Deal a total of 5,000,000 damage.", "", true);
 			addAchievement("Arrow to the Knee", kACHIEVEMENTS.COMBAT_ARROW_TO_THE_KNEE, "Use your bow/crossbow for a first time.");
 
-			titleAchievementSection("Holiday Events"); //10 achievements
+			titleAchievementSection("Holiday Events"); //11 achievements
 			addAchievement("Egg Hunter", kACHIEVEMENTS.HOLIDAY_EGG_HUNTER, "Find 10 eggs as random drops during Easter event.", "", true);
 			addAchievement("Happy Birthday, Helia!", kACHIEVEMENTS.HOLIDAY_HELIA_BIRTHDAY, "Participate into Helia's birthday event. (August)", "", true);
 			addAchievement("Thankslutting", kACHIEVEMENTS.HOLIDAY_THANKSGIVING_I, "Meet the Piggy-Slut (Thanksgiving)", "", true);
@@ -254,7 +254,7 @@ public class Achievements extends BaseContent
 			addAchievement("A Christmas Carol", kACHIEVEMENTS.HOLIDAY_CHRISTMAS_II, "Complete Carol's mini-quest (Christmas)", "", true);
 			addAchievement("The Lovable Snowman", kACHIEVEMENTS.HOLIDAY_CHRISTMAS_III, "Have Nieve as lover (Christmas/Winter)", "", true);
 			addAchievement("Will You Be My Valentine?", kACHIEVEMENTS.HOLIDAY_VALENTINE, "Visit the Wet Bitch during Valentine's day. (Valentine)", "", true);
-			//visit H'X'D during lunar new year
+			addAchievement("Year of the Goat", kACHIEVEMENTS.HOLIDAY_YEAR_OF_THE_GOAT, "Visit the He'Xin'Dao during Lunar New Year. (Winter)", "", true);
 
 			titleAchievementSection("Survival/Realistic Mode"); //15 achievements
 			addAchievement("Tastes Like Chicken", kACHIEVEMENTS.REALISTIC_TASTES_LIKE_CHICKEN, "Refill your hunger for the first time.");
@@ -448,8 +448,8 @@ public class Achievements extends BaseContent
 			addAchievement("Elder Chimera", kACHIEVEMENTS.GENERAL_ELDER_CHIMERA, "Have at least 32 racial internal mutation perks.");
 			addAchievement("Legendary Chimera", kACHIEVEMENTS.GENERAL_LEGENDARY_CHIMERA, "Have at least 64 racial internal mutation perks.");
 			addAchievement("Ultimate Lifeform", kACHIEVEMENTS.GENERAL_ULTIMATE_LIFEFORM, "Have at least 128 racial internal mutation perks.", "", true);
-			addAchievement("The end and the beginning", kACHIEVEMENTS.GENERAL_THE_END_AND_THE_BEGINNING, "Defeat Archmage Alvina");
-			addAchievement("Beyond gods and mortals", kACHIEVEMENTS.GENERAL_BEYOND_GODS_AND_MORTALS, "Defeat Alvina at the peak of her power on Xianxia Difficulty");
+			addAchievement("The end and the beginning", kACHIEVEMENTS.GENERAL_THE_END_AND_THE_BEGINNING, "Defeat Archmage Alvina.");
+			addAchievement("Beyond gods and mortals", kACHIEVEMENTS.GENERAL_BEYOND_GODS_AND_MORTALS, "Defeat Alvina at the peak of her power on Xianxia Difficulty.");
 			addAchievement("Dawn chasing away the night", kACHIEVEMENTS.GENERAL_DAWN_CHASING_AWAY_THE_NIGHT, "Successfully redeem the broken soul who lost everything. This is the dawn of a new era for Mareth.");
 
 		}
