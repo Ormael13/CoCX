@@ -1896,6 +1896,10 @@ public class Creature extends Utils
 		{
 			return this._statusEffects.addStatusValue(stype, statusValueNum, bonus);
 		}
+		public function createOrAddStatusEffect(stype:StatusEffectType, statusValueNum:Number = 1, bonus:Number = 0):void
+		{
+			return this._statusEffects.createOrAddStatusEffect(stype, statusValueNum, bonus);
+		}
 
 		public function getStatusValue(stype:StatusEffectType, statusValueNum:int):Number
 		{
@@ -2605,7 +2609,13 @@ public class Creature extends Utils
 				quantity *= 3;
 			if (hasPerk(PerkLib.ProductivityDrugs))
 				quantity += (perkv3(PerkLib.ProductivityDrugs));
-			if (hasMutation(PerkLib.HellhoundFireBalls)) quantity += perkv3(PerkLib.HellhoundFireBalls);
+			if (hasMutation(PerkLib.HellhoundFireBalls))
+				switch (perkv1(PerkLib.HellhoundFireBalls)) {
+					case 1:
+					case 2:
+					case 3: quantity *= 1.25; break;
+					case 4: quantity *= 2; break;
+				}
 			//if(hasPerk("Elven Bounty") >= 0) quantity += 250;;
 			quantity += perkv1(PerkLib.ElvenBounty);
 			if (hasPerk(PerkLib.BroBody))

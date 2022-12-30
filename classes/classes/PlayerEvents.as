@@ -652,13 +652,11 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			if (player.isRaceCached(Races.CERBERUS) && player.hasMutation(PerkLib.HellhoundFireBalls)) {
 				var pTier:Number = player.perkv1(PerkLib.HellhoundFireBalls);
 				if (pTier < 4 && player.level >= 30*pTier && player.perkv2(PerkLib.HellhoundFireBalls) >= 30*2*pTier) {
-					PerkLib.HellhoundFireBalls.acquireMutation(player, hellhoundFireballsMutate);
+					PerkLib.HellhoundFireBalls.acquireMutation(player, outputText("\nYour balls begin to suddenly feel heavier… warmer. You begin pumping your two penis absentmindedly thinking of all the bitches you recently broke on your twin shaft as the heat rushes all the way to your pair of erect members. You cum a humongous load of smoking warm cum, way to warm for normal seeds. It looks like your balls are progressively continuing their evolution to be more hellhound-like as your seed takes on burning hot property just like that of a hellhound.\n"));
 					needNext = true;
 				}
-				function hellhoundFireballsMutate():void {
-					outputText("\nYour balls begin to suddenly feel heavier… warmer. You begin pumping your two penis absentmindedly thinking of all the bitches you recently broke on your twin shaft as the heat rushes all the way to your pair of erect members. You cum a humongous load of smoking warm cum, way to warm for normal seeds. It looks like your balls are progressively continuing their evolution to be more hellhound-like as your seed takes on burning hot property just like that of a hellhound.\n");
-				}
 			}
+			if (player.hasPerk(PerkLib.DominantAlpha)) player.DominantAlphaBonus();
 			if (player.hasPerk(PerkLib.Immortality) && !player.isRaceCached(Races.AZAZEL)) {
 				outputText("\nYou lose your sence of invulnerability as you are no longer an Azazel.\n");
 				player.removePerk(PerkLib.Immortality);
@@ -847,6 +845,14 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				//Siegweird
 				if (player.statusEffectv1(StatusEffects.SiegweirdTraining2) == 1 && flags[kFLAGS.SIEGWEIRD_FOLLOWER] < 10) flags[kFLAGS.SIEGWEIRD_FOLLOWER]++;
 				if (player.statusEffectv1(StatusEffects.SiegweirdSoup) == 1) player.addStatusValue(StatusEffects.SiegweirdSoup, 1, -1);
+				//Dominant Alpha buff
+				if (player.statusEffectv1(StatusEffects.DominantAlpha) >= 1) {
+					player.addStatusValue(StatusEffects.DominantAlpha, 1, -1);
+					if (player.statusEffectv1(StatusEffects.DominantAlpha) == 0) {
+						player.removeStatusEffect(StatusEffects.DominantAlpha);
+						player.buff("Dominant Alpha").removeFromStat("str");
+					}
+				}
 				//Mishaps reset
 				if (player.hasStatusEffect(StatusEffects.CampLunaMishaps1)) player.removeStatusEffect(StatusEffects.CampLunaMishaps1);
 				if (player.hasStatusEffect(StatusEffects.CampLunaMishaps2)) player.removeStatusEffect(StatusEffects.CampLunaMishaps2);
@@ -1604,7 +1610,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Fire Affinity
-			if ((player.racialScoreCached(Races.SALAMANDER) >= 4 || player.isRaceCached(Races.PHOENIX) || player.isRaceCached(Races.HELLCAT) || player.isRaceCached(Races.FIRESNAILS) || (player.isRaceCached(Races.MOUSE, 2)) || player.isRaceCached(Races.KITSHOO)) && !player.hasPerk(PerkLib.FireAffinity)) {
+			if ((player.racialScoreCached(Races.SALAMANDER) >= 4 || player.isRaceCached(Races.PHOENIX) || player.isRaceCached(Races.HELLCAT) || player.isRaceCached(Races.FIRESNAILS) || (player.isRaceCached(Races.MOUSE, 2)) || player.isRaceCached(Races.KITSHOO) || player.isRaceCached(Races.CERBERUS)) && !player.hasPerk(PerkLib.FireAffinity)) {
 				outputText("\nYou suddenly feels your body temperature rising to ridiculus level. You pant for several minutes until you're finally at ease with your bodily heat. You doubt any more heat is going to make you more uncomfortable then this as you quietly soak in the soothing warmth your body naturally produce. It's like your body is made out of living fire.\n\n(<b>Gained Perk: Fire Affinity</b>)\n");
 				player.createPerk(PerkLib.FireAffinity, 0, 0, 0, 0);
 				needNext = true;

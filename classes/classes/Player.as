@@ -6108,6 +6108,7 @@ use namespace CoC;
 			hoursSinceCum = 0;
 			flags[kFLAGS.TIMES_ORGASMED]++;
 			if (finalType == "Dick") {
+				if (CoC.instance.inCombat) if (hasPerk(PerkLib.DominantAlpha)) createOrAddStatusEffect(StatusEffects.DominantAlpha, 1, 3)
                 if (SceneLib.exgartuan.dickPresent()) SceneLib.exgartuan.dickSleep(4 + rand(4)); //give him some sleep
 				if (hasPerk(PerkLib.EasterBunnyBalls) && ballSize > 3)
 					createStatusEffect(StatusEffects.EasterBunnyCame, 0, 0, 0, 0);
@@ -6360,6 +6361,22 @@ use namespace CoC;
 						"that Mareth is filled with idiots doesn't help that." +
 						" Despite draining your victim into something about as smart as a mineral you fail to extract anything noteworthy.");
 			}
+		}
+
+		public function DominantAlphaBonus():void
+		{
+			var bonus:Number = SceneLib.camp.submissivesAtCampCount() * 0.02;
+			if (buff("Dominant Alpha").getValueOfStatBuff("int.mult") < bonus){
+				buff("Dominant Alpha").addStat("str.mult",0.02);
+				buff("Dominant Alpha").addStat("tou.mult",0.02);
+				buff("Dominant Alpha").addStat("spe.mult",0.02);
+				buff("Dominant Alpha").addStat("int.mult",0.02);
+				buff("Dominant Alpha").addStat("wis.mult",0.02);
+				buff("Dominant Alpha").addStat("lib.mult",0.02);
+				CoC.instance.mainView.statsView.refreshStats(CoC.instance);
+			}
+			if (hasStatusEffect(StatusEffects.DominantAlpha) && statusEffectv1(StatusEffects.DominantAlpha) > 1 && buff("Dominant Alpha").getValueOfStatBuff("str") < 200)
+				buff("Dominant Alpha").addStat("str",200);
 		}
 
 		public function VenomWebCost():Number

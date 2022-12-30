@@ -1993,7 +1993,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         if (player.hasVagina() && player.vaginas.length == 1 && type == 3) {
-            transformations.SecondVagina.applyEffect();
+            transformations.SecondVagina().applyEffect();
             changes++;
         }
         //Go into heat
@@ -2186,34 +2186,39 @@ public final class Mutations extends MutationsHelper {
             player.killCocks(1);
         }
         if (player.hasVagina() && player.vaginas.length < 2)
-            transformations.SecondVagina.applyEffect(doOutput);
+            transformations.SecondVagina().applyEffect(doOutput);
         if (player.hasVagina() && player.bRows() < 3)
             transformations.BreastRowsThree.applyEffect(doOutput);
         transformations.BallsQuad(3, true).applyEffect(doOutput);
         if (player.tone < 80) player.tone = 90;
         if (player.thickness > 20) player.thickness = 20;
+        if (!player.hasPerk(PerkLib.DominantAlpha)) {
+            player.createPerk(PerkLib.DominantAlpha, 0, 0, 0, 0);
+            outputText("\n<b>Gained Perk: Dominant Alpha!</b> "+PerkLib.DominantAlpha.longDesc);
+        }
         if (!player.hasPerk(PerkLib.TitanicStrength)) {
-            if (doOutput) outputText("\n<b>Gained Perk: Titanic Strength!</b>");
             player.createPerk(PerkLib.TitanicStrength, 0, 0, 0, 0);
+            outputText("\n<b>Gained Perk: Titanic Strength!</b> " +PerkLib.TitanicStrength.longDesc);
         }
         if (!player.hasPerk(PerkLib.FireAffinity)) {
-            if (doOutput) outputText("\n<b>Gained Perk: Fire Affinity!</b>");
             player.createPerk(PerkLib.FireAffinity, 0, 0, 0, 0);
+            outputText("\n<b>Gained Perk: Fire Affinity!</b> " +PerkLib.FireAffinity.longDesc);
         }
         if (!player.hasPerk(PerkLib.Hellfire)) {
-            if (doOutput) outputText("\n<b>Gained Ability: Hellfire!</b>");
             player.createPerk(PerkLib.Hellfire, 0, 0, 0, 0);
+            outputText("\n<b>Gained Ability: Hellfire!</b> "+PerkLib.Hellfire.longDesc);
         }
-        if (doOutput) outputText("\n<b>Gained Ability: Hellfire Coat</b>");
         player.createPerk(PerkLib.HellfireCoat, 0, 0, 0, 0);
+        outputText("\n<b>Gained Ability: Hellfire Coat</b> "+PerkLib.HellfireCoat.longDesc);
 
-        if (doOutput) outputText("\n<b>Upgraded Ability: Bite -> Tripple Bite</b>");
-        if (doOutput) outputText("\n<b>Upgraded Ability: Hellfire -> tripple effect</b>");
-        if (doOutput) outputText("\n<b>Gained Ability: Terrifying Howl</b>");
+
+        outputText("\n<b>Upgraded Ability: Bite -> Tripple Bite</b>");
+        outputText("\n<b>Upgraded Ability: Hellfire -> tripple effect</b>");
+        outputText("\n<b>Gained Ability: Terrifying Howl</b>");
 
         if (player.cor < 50) player.cor = 50;
-
-
+        outputText("\n<b>Gained Mutation: Hellhound Fireballs</b>")
+        PerkLib.HellhoundFireBalls.acquireMutation(player,"none");
     }
     
     public function impFood(player:Player):void {

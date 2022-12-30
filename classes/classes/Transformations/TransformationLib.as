@@ -1028,7 +1028,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
     public function UnlockVagina(): void { return vaginas.UnlockVagina(); }
     public function VaginaNone(vagina:int = 0): Transformation { return vaginas.VaginaNone(vagina); }
     public function CockToVagina(vagina:int = 0): Transformation { return vaginas.CockToVagina(vagina); }
-    public const SecondVagina: Transformation = vaginas.SecondVagina;
+    public function SecondVagina(): Transformation { return vaginas.SecondVagina(); }
     public function VaginaHuman(vagina:int = 0): Transformation { return vaginas.VaginaHuman(vagina); }
     public function VaginaHorse(vagina:int = 0): Transformation { return vaginas.VaginaHorse(vagina); }
     public function VaginaKirin(vagina:int = 0): Transformation { return vaginas.VaginaKirin(vagina); }

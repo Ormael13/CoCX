@@ -103,20 +103,22 @@ public class VaginaTransformations extends MutationsHelper {
 		return desc;
 	}
 
-	public const SecondVagina: Transformation = new SimpleTransformation("Human Vagina",
-			// apply effect
-			function (doOutput:Boolean):void {
-				var desc:String = "";
+	public function SecondVagina(): Transformation {
+		return new SimpleTransformation("Human Vagina",
+				// apply effect
+				function (doOutput:Boolean):void {
+					var desc:String = "";
 
-				desc += GrowVaginaGenericText();
-				transformations.UnlockVagina();
-				if (doOutput) outputText(desc);
-			},
-			// is present
-			function ():Boolean {
-				return player.vaginas.length == 2;
-			}
-	);
+					desc += GrowVaginaGenericText();
+					transformations.UnlockVagina();
+					if (doOutput) outputText(desc);
+				},
+				// is present
+				function ():Boolean {
+					return player.vaginas.length == 2;
+				}
+		);
+	}
 
 	public function VaginaHuman(vagina:int = 0): Transformation {
 		return new SimpleTransformation("Human Vagina",

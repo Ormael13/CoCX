@@ -171,7 +171,6 @@ private function hellhoundCaptureFuckEveryone():void {
 	outputText("With a primal roar, you spontaneously cum as Marae’s Lethicite begins shining, its power filling your body with strength and heat far surpassing the paltry flames of the hellhound’s fluids. The two hounds that were fucking you up until now suddenly are drawn to you. The one in your ass pulls, sending silver shocks of pain as it tries to rip itself out of your asshole. You grab the one in your throat, biting down on him as his body begins to melt.[pg]");
 	outputText("Your former tormentors yip in terror as their bodies are distorted and warped, their forms melting into yours. This hurts, your body now writhing uncontrollably as your fur bristles, the hellhound’s flesh spreading your pores as it covers you. You howl as a hot, sharp pain fills your mind. Your frame widens, your muscles bulge up with added mass. Your bones crunch as the hellhound’s pale skeleton turns to powder, drawn in as well.[pg]");
 
-	CoC.instance.mutations.forceCerberus();
 
 	outputText("When you open your eyes again, you realize that you’ve gained several new inches in size, your body now towering above the terrified succubus behind the observation window, but also in cock length, the masses of your combined pricks fusing into one. A few seconds later, the only thing remaining of the two little shits rests squarely on your shoulders… or so you thought. As you feel a slightly painful ripping near your throbbing cocks, you look down to see an additional set of balls is added to your own. You howl as, as if unable to sustain the newly accumulated semen from your three separated orgasms, your dicks explode into a torrent of burning cum, covering the observation glass with still-steaming, white hellhound seed.[pg]");
 	outputText("Regaining your countenance, you stare at the pair of confused hellhound heads now attached to your shoulders. A quick check reveals the three of you are not only capable of independent thoughts but capable of controlling the main body, at least to an extent.[pg]");
@@ -185,6 +184,7 @@ private function hellhoundCaptureFuckEveryone():void {
 	outputText("Only when you’ve destroyed every room twice, torn every Incubus you can find to shreds, and sent over two dozen Succubi to the ground in a gaping, pleasure-soaked heap is your rage satiated. You gather the bitches into one pile, covering them in a veritable shell of white spooge before finally looking for an exit.[pg]");
 	outputText("The final obstacle is a steel door with a large exit sign written in red on a panel. A gentle push from you slams the door open as you head back to your camp.[pg]");
 
+	CoC.instance.mutations.forceCerberus();
 	player.sexReward("vaginalFluids", "Dick");
 	player.sexReward("vaginalFluids", "Dick");
 	player.sexReward("vaginalFluids", "Dick");

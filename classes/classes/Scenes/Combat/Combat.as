@@ -4869,7 +4869,19 @@ public class Combat extends BaseContent {
                 }
             }
             outputText(".");
+
+            if (player.hasPerk(PerkLib.HellfireCoat))
+                ExtraNaturalWeaponAttack(biteMultiplier, "fire");
             ExtraNaturalWeaponAttack(biteMultiplier);
+            if (player.isRaceCached(Races.CERBERUS)) {
+                if (player.hasPerk(PerkLib.HellfireCoat)) {
+                    ExtraNaturalWeaponAttack(biteMultiplier, "fire");
+                    ExtraNaturalWeaponAttack(biteMultiplier, "fire");
+                } else {
+                    ExtraNaturalWeaponAttack(biteMultiplier);
+                    ExtraNaturalWeaponAttack(biteMultiplier);
+                }
+            }
             outputText(".\n");
             if (player.hasStatusEffect(StatusEffects.HydraTailsPlayer)){ //WTF, This can be so much simplier.   //There I simplified it :)
                 biteMultiplier = 1;
@@ -4945,8 +4957,13 @@ public class Combat extends BaseContent {
 				}
 			}
 			else{
-                ExtraNaturalWeaponAttack(ClawDamageMultiplier);
-                ExtraNaturalWeaponAttack(ClawDamageMultiplier);
+                if (player.hasPerk(PerkLib.HellfireCoat)) {
+                    ExtraNaturalWeaponAttack(ClawDamageMultiplier, "fire");
+                    ExtraNaturalWeaponAttack(ClawDamageMultiplier, "fire");
+                } else {
+                    ExtraNaturalWeaponAttack(ClawDamageMultiplier);
+                    ExtraNaturalWeaponAttack(ClawDamageMultiplier);
+                }
             }
             outputText("\n");
             if (player.arms.type == Arms.WOLF && player.hasPerk(PerkLib.Lycanthropy)){
@@ -4984,23 +5001,40 @@ public class Combat extends BaseContent {
             else{
                 outputText("You rear up and claw at your opponent with your forepaws.");
             }
-            ExtraNaturalWeaponAttack();
-            ExtraNaturalWeaponAttack();
+
+            if (player.hasPerk(PerkLib.HellfireCoat)) {
+                ExtraNaturalWeaponAttack(1, "fire");
+                ExtraNaturalWeaponAttack(1, "fire");
+            } else {
+                ExtraNaturalWeaponAttack();
+                ExtraNaturalWeaponAttack();
+            }
             outputText("\n");
         }
         //POUNCING FOR THE KILL
         if (player.canPounce()) {
             outputText("You leap up at [themonster] raking [monster him] with your hind claws twice.");
-            ExtraNaturalWeaponAttack();
-            ExtraNaturalWeaponAttack();
+
+            if (player.hasPerk(PerkLib.HellfireCoat)) {
+                ExtraNaturalWeaponAttack(1, "fire");
+                ExtraNaturalWeaponAttack(1, "fire");
+            } else {
+                ExtraNaturalWeaponAttack();
+                ExtraNaturalWeaponAttack();
+            }
             outputText("\n");
         }
         //TALON
         if (player.isFlying()){
             if (player.hasTalonsAttack()){
                 outputText("You rend at your opponent with your talons twice.");
-                ExtraNaturalWeaponAttack();
-                ExtraNaturalWeaponAttack();
+                if (player.hasPerk(PerkLib.HellfireCoat)) {
+                    ExtraNaturalWeaponAttack(1, "fire");
+                    ExtraNaturalWeaponAttack(1, "fire");
+                } else {
+                    ExtraNaturalWeaponAttack();
+                    ExtraNaturalWeaponAttack();
+                }
                 outputText("\n");
             }
         }
@@ -5044,7 +5078,11 @@ public class Combat extends BaseContent {
                 monster.removeStatusEffect(StatusEffects.GoreBleed);
                 monster.createStatusEffect(StatusEffects.GoreBleed,16,0,0,0);
             }
-            ExtraNaturalWeaponAttack(1.5);
+            if (player.hasPerk(PerkLib.HellfireCoat)) {
+                ExtraNaturalWeaponAttack(1.5, "fire");
+            } else {
+                ExtraNaturalWeaponAttack(1.5);
+            }
             outputText("\n");
         }
         //TAIL SLAPPING FOR THE KILL
@@ -5153,7 +5191,11 @@ public class Combat extends BaseContent {
             }
             else{
                 outputText("You hit your opponent with a slam of your mighty tail.")
-                ExtraNaturalWeaponAttack(TailDamageMultiplier);
+                if (player.hasPerk(PerkLib.HellfireCoat)) {
+                    ExtraNaturalWeaponAttack(TailDamageMultiplier, "fire");
+                } else {
+                    ExtraNaturalWeaponAttack(TailDamageMultiplier);
+                }
                 outputText("\n");
             }
         }
@@ -5206,6 +5248,14 @@ public class Combat extends BaseContent {
                 }
             }
         }
+        //Unique attack Cerberus fire breath
+        if (player.isRaceCached(Races.CERBERUS) && player.hasPerk(PerkLib.Hellfire)) {
+            outputText("You unleash a tripple blast of fire from your heads, engulfing [themonster] in Hellfire.");
+            ExtraNaturalWeaponAttack(1, "fire breath");
+            ExtraNaturalWeaponAttack(1, "fire breath");
+            ExtraNaturalWeaponAttack(1, "fire breath");
+            outputText("\n");
+        }
         //Unique attack Slime
         if (player.hasPerk(PerkLib.MorphicWeaponry)) {
             outputText("You form tentacles out of your slimy body and batter your opponent with them.");
@@ -5215,18 +5265,9 @@ public class Combat extends BaseContent {
         //Unique attack Alraune
         if (player.isAlraune()) {
             outputText("You lash at your opponent with your many vines, striking twelve times.");
-            ExtraNaturalWeaponAttack();
-            ExtraNaturalWeaponAttack();
-            ExtraNaturalWeaponAttack();
-            ExtraNaturalWeaponAttack();
-            ExtraNaturalWeaponAttack();
-            ExtraNaturalWeaponAttack();
-            ExtraNaturalWeaponAttack();
-            ExtraNaturalWeaponAttack();
-            ExtraNaturalWeaponAttack();
-            ExtraNaturalWeaponAttack();
-            ExtraNaturalWeaponAttack();
-            ExtraNaturalWeaponAttack();
+            var x:int = 12
+            while (x-->0)
+                ExtraNaturalWeaponAttack();
         }
         //Unique TENTACLES STRIKES
         if ((player.isScylla() || player.isKraken()) && player.effectiveTallness >= 70){

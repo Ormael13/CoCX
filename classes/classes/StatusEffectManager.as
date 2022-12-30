@@ -121,6 +121,18 @@ public class StatusEffectManager {
         if (statusValueNum == 4) sac.value4 += bonus;
     }
 
+    public function createOrAddStatusEffect(stype:StatusEffectType, statusValueNum:Number = 1, bonus:Number = 0):void
+    {
+        if (statusValueNum < 1 || statusValueNum > 4) {
+            CoC_Settings.error("ChangeStatusValue called with invalid status value number.");
+            return;
+        }
+        if (!this.hasStatusEffect(stype)) {
+            createStatusEffect(stype, 0, 0, 0, 0);
+        }
+        addStatusValue(stype, statusValueNum, bonus);
+    }
+
     public function getStatusValue(stype:StatusEffectType, statusValueNum:Number): Number
     {
         if (statusValueNum < 1 || statusValueNum > 4) {
