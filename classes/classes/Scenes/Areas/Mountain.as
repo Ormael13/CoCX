@@ -597,13 +597,14 @@ public class Mountain extends BaseContent
 		}
 		public function discoverLM():void {
 			clearOutput();
-			outputText("While exploring the hills, you come across a relatively safe way to get at its higher reaches.  You judge that with this route you'll be able to get about two thirds of the way up the mountain.  With your newfound discovery fresh in your mind, you return to camp.\n\n(<b>Low Mountain exploration location unlocked!</b>)");
+			outputText("While exploring the hill you come upon a particular trail. It looks to lead deeper into the mountain range. Having met the many unsavory denizens of the hill already you clench your fist ready for a new challenge as you take up the trail toward the mountain. The atmosphere changes quickly as plants become scarcer and rocky formation more common. ");
+			outputText("Caves previously a rare occurrence now are a regular sight. You have found the way to the low mountain range area.\n\n(<b>Low Mountain exploration location unlocked!</b>)");
 			flags[kFLAGS.DISCOVERED_LOW_MOUNTAIN]++;
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function discoverM():void {
 			clearOutput();
-			outputText("While exploring the low mountains, you come across a relatively safe way to get at its higher reaches.  You judge that with this route you'll be able to get about two thirds of the way up the mountain.  With your newfound discovery fresh in your mind, you return to camp.\n\n(<b>Mountain exploration location unlocked!</b>)");
+			outputText("As you explore the low mountain range you hear thunder booming overhead, shaking you out of your thoughts.  High above, dark clouds encircle a distant mountain peak.  You get an ominous feeling in your gut as you gaze up at it. Forward is a path leading deeper higher into the mountains and possibly harder trials.\n\n<b>You've discovered the Mountain!</b>");
 			player.exploredMountain = 1;
 			doNext(camp.returnToCampUseOneHour);
 		}

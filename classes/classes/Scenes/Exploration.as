@@ -893,17 +893,10 @@ public class Exploration extends BaseContent
 					flags[kFLAGS.DISCOVERED_HILLS] = 1;
 					player.explored++;
 					clearOutput();
-					outputText(".\n\n<b>You've discovered the Hills!</b>");
+					outputText("As you walk the large open wasteland of mareth you begin to notice an elevation in the ground. Far in the distance you can see a mountain chain but from where you stand is a hillside. Well you got tired of the monotony of the flat land anyway maybe going up will yield new interesting discoveries.\n\n<b>You found the Hills!</b>");
 					doNext(camp.returnToCampUseOneHour);
 					return;
-				}/*
-				if (flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] > 0 && player.exploredMountain <= 0 && (player.level + combat.playerLevelAdjustment()) >= 5) {
-					outputText("Thunder booms overhead, shaking you out of your thoughts.  High above, dark clouds encircle a distant mountain peak.  You get an ominous feeling in your gut as you gaze up at it.\n\n<b>You've discovered the Mountain!</b>");
-					player.explored++;
-					player.exploredMountain = 1;
-					doNext(camp.returnToCampUseOneHour);
-					return;
-				}*/
+				}
 				if (flags[kFLAGS.DISCOVERED_HILLS] > 0 && flags[kFLAGS.TIMES_EXPLORED_PLAINS] <= 0 && (player.level + combat.playerLevelAdjustment()) >= 9) {
 					flags[kFLAGS.TIMES_EXPLORED_PLAINS] = 1;
 					player.explored++;
