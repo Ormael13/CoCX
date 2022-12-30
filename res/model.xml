@@ -616,6 +616,7 @@
         <cell rect="1166,956,173,156" name="fullbody/femalesylph" dx="16" dy="21"/>
         <cell rect="1340,956,173,156" name="fullbody/malesylph" dx="16" dy="21"/>
 		<cell rect="1514,956,173,156" name="fullbody/cerberus" dx="16" dy="18"/>
+		<cell rect="1514,1114,173,156" name="fullbody/greenfireCerberus" dx="16" dy="18"/>
 		<cell rect="1688,956,173,156" name="fullbodyBg/imp" dx="16" dy="21"/>
         <cell rect="260,620,21,28" name="neck/darkGooCore" dx="95" dy="67"/>
         <cell rect="162,59,54,31" name="neck/manticore" dx="77" dy="47"/>
@@ -837,6 +838,15 @@
         <cell rect="482,1620,80,107" name="weapon/spearGeneric" dx="39" dy="53"/>
         <cell rect="482,1729,80,107" name="weapon/spearHoly" dx="39" dy="53"/>
         <cell rect="482,1838,80,107" name="weapon/spearUnholy" dx="39" dy="53"/>
+		
+		<cell rect="1292,1620,87,107" name="weapon/scytheShaftGeneric" dx="39" dy="53"/>
+        <cell rect="1292,1729,87,107" name="weapon/scytheShaftHoly" dx="39" dy="53"/>
+        <cell rect="1292,1838,87,107" name="weapon/scytheShaftUnholy" dx="39" dy="53"/>
+		<cell rect="1382,1620,87,107" name="weapon_bg/scytheBladeGeneric" dx="53" dy="39"/>
+        <cell rect="1382,1729,87,107" name="weapon_bg/scytheBladeHoly" dx="53" dy="39"/>
+        <cell rect="1382,1838,87,107" name="weapon_bg/scytheBladeUnholy" dx="53" dy="39"/>
+		<cell rect="1382,1947,87,107" name="weaponBuff_bg/scytheFireBuff" dx="53" dy="1"/>
+		
         <cell rect="662,1620,80,90" name="weapon/rapierGeneric" dx="38" dy="55"/>
         <cell rect="662,1726,80,90" name="weapon/rapierHoly" dx="38" dy="55"/>
         <cell rect="662,1832,80,90" name="weapon/rapierUnholy" dx="38" dy="55"/>
@@ -1172,46 +1182,56 @@
         <cell rect="661,230,49,58" name="penis/raijubig" dx="77" dy="103"/>
 		<cell rect="911,290,49,58" name="penis/kirin" dx="77" dy="103"/>
         <cell rect="911,350,49,58" name="penis/kirinbig" dx="77" dy="103"/>
-        <cell rect="11,290,49,29" name="balls/Bhumansmall" dx="79" dy="104"/>
+ <cell rect="11,290,49,29" name="balls/Bhumansmall" dx="79" dy="104"/>
         <cell rect="11,320,49,29" name="balls/Bhumanlarge" dx="79" dy="104"/>
         <cell rect="11,350,49,29" name="balls/Bhumanhuge" dx="79" dy="105"/>
         <cell rect="11,380,49,29" name="balls/Bhumansillyhuge" dx="79" dy="106"/>
-        <cell rect="11,290,49,29" name="balls/Bpscalessmall" dx="79" dy="104"/>
-        <cell rect="11,320,49,29" name="balls/Bpscaleslarge" dx="79" dy="104"/>
-        <cell rect="11,350,49,29" name="balls/Bpscaleshuge" dx="79" dy="105"/>
-        <cell rect="11,380,49,29" name="balls/Bpscalessillyhuge" dx="79" dy="106"/>
+        <cell rect="11,560,49,36" name="balls/Bhumangigahuge" dx="82" dy="114"/>
+        <cell rect="211,290,49,29" name="balls/Bpscalessmall" dx="79" dy="104"/>
+        <cell rect="211,320,49,29" name="balls/Bpscaleslarge" dx="79" dy="104"/>
+        <cell rect="211,350,49,29" name="balls/Bpscaleshuge" dx="79" dy="105"/>
+        <cell rect="211,380,49,29" name="balls/Bpscalessillyhuge" dx="79" dy="106"/>
+        <cell rect="211,560,49,36" name="balls/Bpscalesgigahuge" dx="82" dy="114"/>
         <cell rect="61,290,49,29" name="balls/Bfursmall" dx="79" dy="104"/>
         <cell rect="61,320,49,29" name="balls/Bfurlarge" dx="79" dy="104"/>
         <cell rect="61,350,49,29" name="balls/Bfurhuge" dx="79" dy="105"/>
         <cell rect="61,380,49,29" name="balls/Bfursillyhuge" dx="79" dy="106"/>
+        <cell rect="61,560,49,36" name="balls/Bfurgigahuge" dx="82" dy="114"/>
         <cell rect="61,290,49,29" name="balls/Bpandasmall" dx="79" dy="104"/>
         <cell rect="61,320,49,29" name="balls/Bpandalarge" dx="79" dy="104"/>
         <cell rect="61,350,49,29" name="balls/Bpandahuge" dx="79" dy="105"/>
         <cell rect="61,380,49,29" name="balls/Bpandasillyhuge" dx="79" dy="106"/>
+        <cell rect="61,560,49,36" name="balls/Bpandagigahuge" dx="82" dy="114"/>
         <cell rect="111,290,49,29" name="balls/Bchitinsmall" dx="79" dy="104"/>
         <cell rect="111,320,49,29" name="balls/Bchitinlarge" dx="79" dy="104"/>
         <cell rect="111,350,49,29" name="balls/Bchitinhuge" dx="79" dy="105"/>
         <cell rect="111,380,49,29" name="balls/Bchitinsillyhuge" dx="79" dy="106"/>
+        <cell rect="111,560,49,36" name="balls/Bchitingigahuge" dx="82" dy="114"/>
         <cell rect="161,290,49,29" name="balls/Bscalesmall" dx="79" dy="104"/>
         <cell rect="161,320,49,29" name="balls/Bscaleslarge" dx="79" dy="104"/>
         <cell rect="161,350,49,29" name="balls/Bscaleshuge" dx="79" dy="105"/>
         <cell rect="161,380,49,29" name="balls/Bscalessillyhuge" dx="79" dy="106"/>
+        <cell rect="161,560,49,36" name="balls/Bscalesgigahuge" dx="82" dy="114"/>
         <cell rect="161,290,49,29" name="balls/Bdscalesmall" dx="79" dy="104"/>
         <cell rect="161,320,49,29" name="balls/Bdscaleslarge" dx="79" dy="104"/>
         <cell rect="161,350,49,29" name="balls/Bdscaleshuge" dx="79" dy="105"/>
         <cell rect="161,380,49,29" name="balls/Bdscalessillyhuge" dx="79" dy="106"/>
-        <cell rect="211,290,49,29" name="balls/Borcasmall" dx="79" dy="104"/>
-        <cell rect="211,320,49,29" name="balls/Borcalarge" dx="79" dy="104"/>
-        <cell rect="211,350,49,29" name="balls/Borcahuge" dx="79" dy="105"/>
-        <cell rect="211,380,49,29" name="balls/Borcasillhugehuge" dx="79" dy="106"/>
+        <cell rect="161,560,49,36" name="balls/Bdscalesgigahuge" dx="82" dy="114"/>
+        <cell rect="311,290,49,29" name="balls/Borcasmall" dx="79" dy="104"/>
+        <cell rect="311,320,49,29" name="balls/Borcalarge" dx="79" dy="104"/>
+        <cell rect="311,350,49,29" name="balls/Borcahuge" dx="79" dy="105"/>
+        <cell rect="311,380,49,29" name="balls/Borcasillhugehuge" dx="79" dy="106"/>
+        <cell rect="311,560,49,36" name="balls/Borcagigahuge" dx="82" dy="114"/>
         <cell rect="211,290,49,29" name="balls/Bbeesmall" dx="79" dy="104"/>
         <cell rect="211,320,49,29" name="balls/Bbeelarge" dx="79" dy="104"/>
         <cell rect="211,350,49,29" name="balls/Bbeehuge" dx="79" dy="105"/>
         <cell rect="211,380,49,29" name="balls/Bbeesillyhuge" dx="79" dy="106"/>
-		<cell rect="261,290,49,29" name="balls/Bsharksmall" dx="79" dy="104"/>
+        <cell rect="211,560,49,36" name="balls/Bbeegigahuge" dx="82" dy="114"/>
+        <cell rect="261,290,49,29" name="balls/Bsharksmall" dx="79" dy="104"/>
         <cell rect="261,320,49,29" name="balls/Bsharklarge" dx="79" dy="104"/>
         <cell rect="261,350,49,29" name="balls/Bsharkhuge" dx="79" dy="105"/>
         <cell rect="261,380,49,29" name="balls/Bsharksillyhuge" dx="79" dy="106"/>
+        <cell rect="261,560,49,36" name="balls/Bsharkgigahuge" dx="82" dy="114"/>
         <cell rect="11,230,49,29" name="penis_taur/human_taur" dx="119" dy="135"/>
         <cell rect="11,260,49,29" name="penis_taur/cat_taur" dx="119" dy="135"/>
         <cell rect="461,230,49,58" name="penis_taur/catbig_taur" dx="119" dy="135"/>
@@ -1662,6 +1682,8 @@
 		<layer name="fullbodyBg"/>
 		<layer name="hair_bg"/>
 		<layer name="hairLeft"/>
+		<layer name="weapon_bg"/>
+		<layer name="weaponBuff_bg"/>
 		<layer name="back_bg"/>
 		<layer name="backtentacles"/>
 		<layer name="backtentacles_bg"/>
@@ -1943,6 +1965,28 @@
 							</if>
 						</if>
 					</if>
+					
+					<!-- Scythe -->
+					<if test="PlayerHasAScythe">
+						<if test="PlayerHasAScytheHoly or PlayerHasAScytheUnholy">
+							<if test="PlayerHasAScytheHoly">
+								<show part="weapon/scytheShaftHoly"/>
+								<show part="weapon_bg/scytheBladeHoly"/>
+							</if>
+							<if test="PlayerHasAScytheUnholy">
+								<show part="weapon/scytheShaftUnholy"/>
+								<show part="weapon_bg/scytheBladeUnholy"/>
+							</if>
+							<else>
+								<show part="weapon/scytheShaftGeneric="/>
+								<show part="weapon_bg/scytheBladeGeneric"/>
+							</else>
+						</if>
+						<if test="FireBuff">
+							<show part="weaponBuff_bg/scytheFireBuff"/>
+						</if>
+					</if>
+					
 				</if>
 				<!-- Shield -->
 				<if test="PlayerHasAShield">
@@ -4728,6 +4772,9 @@
 		<!-- BALLS AREA -->
         <if test="balls gt 0">
             <switch>
+			<case test="ballSize ge 12">
+                <set var="ballsz">gigahuge</set>
+            </case>
             <case test="ballSize ge 8">
                 <set var="ballsz">sillyhuge</set>
             </case>
@@ -6739,6 +6786,23 @@
 					</if>
 				</else>
 			</if>
+		</if>
+		
+		<!-- Cerberus -->
+		<if test="Cerberus">
+			<!-- Hide everything else -->
+			<hide part="*"/>
+			<if test="AkbalFire">
+				<show part="fullbody/greenfireCerberus"/>
+				<else>
+					<show part="fullbody/cerberus"/>
+				</else>
+			</if>
+			<if test="breastRows[0].breastRating lte BreastCup.FLAT">
+				<else>
+					<show part="fullbody/femaleCerberus"/>
+				</else>
+			</if>	
 		</if>
 
 		<!-- Jiangshi -->
