@@ -5500,7 +5500,7 @@ use namespace CoC;
 			}
 		}
 
-		public function killCocks(deadCock:Number):void
+		public function killCocks(deadCock:Number, doOutput:Boolean = true):void
 		{
 			//Count removal for text bits
 			var removed:Number = 0;
@@ -5530,33 +5530,33 @@ use namespace CoC;
 			}
 			//Texts
 			if (removed == 1) {
-				if (cocks.length == 0) {
+				if (cocks.length == 0 && doOutput) {
 					outputText("<b>Your manhood shrinks into your body, disappearing completely.</b>");
 					if (hasStatusEffect(StatusEffects.Infested)) outputText("  Like rats fleeing a sinking ship, a stream of worms squirts free from your withering member, slithering away.");
 				}
-				if (cocks.length == 1) {
+				if (cocks.length == 1 && doOutput) {
 					outputText("<b>Your smallest penis disappears, shrinking into your body and leaving you with just one [cock].</b>");
 				}
-				if (cocks.length > 1) {
+				if (cocks.length > 1 && doOutput) {
 					outputText("<b>Your smallest penis disappears forever, leaving you with just your [cocks].</b>");
 				}
 			}
 			if (removed > 1) {
-				if (cocks.length == 0) {
+				if (cocks.length == 0 && doOutput) {
 					outputText("<b>All your male endowments shrink smaller and smaller, disappearing one at a time.</b>");
 					if (hasStatusEffect(StatusEffects.Infested)) outputText("  Like rats fleeing a sinking ship, a stream of worms squirts free from your withering member, slithering away.");
 				}
-				if (cocks.length == 1) {
+				if (cocks.length == 1 && doOutput) {
 					outputText("<b>You feel " + num2Text(removed) + " cocks disappear into your groin, leaving you with just your [cock].</b>");
 				}
-				if (cocks.length > 1) {
+				if (cocks.length > 1 && doOutput) {
 					outputText("<b>You feel " + num2Text(removed) + " cocks disappear into your groin, leaving you with [cocks].</b>");
 				}
 			}
 			//remove infestation if cockless
 			if (cocks.length == 0) removeStatusEffect(StatusEffects.Infested);
 			if (cocks.length == 0 && balls > 0) {
-				outputText(" <b>Your " + sackDescript() + " and [balls] shrink and disappear, vanishing into your groin.</b>");
+				if (doOutput) outputText(" <b>Your " + sackDescript() + " and [balls] shrink and disappear, vanishing into your groin.</b>");
 				balls = 0;
 				ballSize = 1;
 			}

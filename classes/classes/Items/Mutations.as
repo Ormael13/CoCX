@@ -2177,18 +2177,25 @@ public final class Mutations extends MutationsHelper {
         transformations.SkinColor(["dark"]).applyEffect(doOutput);
         transformations.SkinFur(Skin.COVERAGE_LOW, {color: "midnight black"}).applyEffect(doOutput);
         if (player.wings.type != Wings.NONE) transformations.WingsNone.applyEffect(doOutput);
-        transformations.CockDog(0, 14, 3).applyEffect(doOutput);
-        transformations.CockDog(1, 14, 3).applyEffect(doOutput);
+        var cockBonus:Number = 0;
         while (player.cocks.length > 2) {
-            if (player.cocks[0].cockLength < player.cocks[2].cockLength)
-                player.growCock(0, 2+rand(3));
-            else player.growCock(1, 2+rand(3));
-            player.killCocks(1);
+            cockBonus += 2+rand(3);
+            if (doOutput) outputText("\n");
+            player.killCocks(1, doOutput);
         }
+        if (doOutput) outputText("\n");
+        transformations.CockDog(0).applyEffect(doOutput);
+        if (doOutput) outputText("\n");
+        transformations.CockDog(1).applyEffect(doOutput);
+        player.growCock(0, cockBonus/2);
+        player.growCock(1, cockBonus/2);
+        if (doOutput) outputText("\n");
         if (player.hasVagina() && player.vaginas.length < 2)
             transformations.SecondVagina().applyEffect(doOutput);
+        if (doOutput) outputText("\n");
         if (player.hasVagina() && player.bRows() < 3)
             transformations.BreastRowsThree.applyEffect(doOutput);
+        if (doOutput) outputText("\n");
         transformations.BallsQuad(3, true).applyEffect(doOutput);
         if (player.tone < 80) player.tone = 90;
         if (player.thickness > 20) player.thickness = 20;
