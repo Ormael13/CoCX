@@ -3933,14 +3933,14 @@ use namespace CoC;
 				prestigeJobs1++;
 			if (hasPerk(PerkLib.PrestigeJobArchpriest))
 				prestigeJobs1++;
+			if (hasPerk(PerkLib.PrestigeJobBard))
+				prestigeJobs1++;
 			if (hasPerk(PerkLib.PrestigeJobBerserker))
 				prestigeJobs1++;
 			if (hasPerk(PerkLib.PrestigeJobBindmaster))
 				prestigeJobs1++;
 			if (hasPerk(PerkLib.PrestigeJobDruid))
 				prestigeJobs1++;
-		//	if (hasPerk(PerkLib.PrestigeJobGreySage))
-		//		prestigeJobs1++;
 			if (hasPerk(PerkLib.PrestigeJobNecromancer))
 				prestigeJobs1++;
 			if (hasPerk(PerkLib.PrestigeJobSeer))
@@ -6590,4 +6590,4 @@ use namespace CoC;
 			}
 		}
 	}
-}
+}

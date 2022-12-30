@@ -268,7 +268,7 @@ public function alvinaThirdEncounterYesContinue():void
 	menu();
 	if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] >= 4) addButtonDisabled(0, "Sure", "There's no way you would be able to have HER in your camp at the same time as Siegweird. He'd kill her or she'd kill him.");
 	else addButton(0, "Sure", alvinaThirdEncounterYesSure);
-	//if (SecondDateSuccess) addButton(3, "Stop It!", alvinaDontFight);
+	if (SecondDateSuccess) addButton(3, "Stop It!", alvinaDontFight);
 	addButton(4, "Never", alvinaThirdEncounterYesNever);
 }
 public function alvinaThirdEncounterYesSure():void
@@ -730,11 +730,11 @@ public function alvinaMainCampMenu():void
 {
 	spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2_16bit);
 	clearOutput();
-	outputText("You head out to meet Alvina in her hidden camp. She is in the middle of an experiment, as usual.\n\n");/*
+	outputText("You head out to meet Alvina in her hidden camp. She is in the middle of an experiment, as usual.\n\n");
 	if (player.hasStatusEffect(StatusEffects.DevilPurificationScar)) {
 		alvinaFreaksDevilPurification();
 		return;
-	}*/
+	}
 	outputText("\"<i>Well hello [name], what brings you to me today?</i>\"\n\n");
 	menu();
 	addButton(0, "Appearance", alvinaMainCampMenuAppearance).hint("Examine Alvina detailed appearance.");
@@ -1782,4 +1782,4 @@ public function postMarriageSleep():void {
 	}
 }
 
-}
+}

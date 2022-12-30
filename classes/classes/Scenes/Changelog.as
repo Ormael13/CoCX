@@ -32,7 +32,7 @@ public class Changelog extends BaseContent
 		private function Changelog44():void {
 			clearOutput();
 			//0 of 11 pages
-			outputText("<b>Version 0.8s6:</b>\n\n");// ()
+			outputText("<b>Version 0.8s6 (Bugfixing, Pure Alvina romance option, 2 new/old areas, Kitshoo tf official release):</b>\n\n");
 			outputText("-New tier 9 misc lvl-up perk: Arcane Venom. Req. Verdant Leech perk, Intelligence 200+, Libido 200+, Corruption 50+. Effect: Spells that inflict poison add a number of direct applications equal to your intelligence (core + trained parts) divided by 50.\n");
 			outputText("-New event perk: Fueled by Desire. Gained when training with Chelsea and having 100+ libido. Effect: When using the tease action or an arousal spell, clear a small amount of lust to deal increased tease damage. This only works if lust is above 50%. (EragonX)\n");
 			outputText("-New event perk: Graceful Beauty. Gained when training with Chelsea and having 150+ libido. Effect: Add a small measure of your speed to your tease damage. (EragonX)\n");
@@ -50,6 +50,8 @@ public class Changelog extends BaseContent
 			outputText("-First part of Alvina pure romance path is now available. (Gotta use brain and look for clues to do it no cheat sheet to use ;) ) (EragonX)\n");
 			outputText("-Metamorph: Add Kirin parts (EragonX)\n");
 			outputText("-Fixes: double negative and harpywomb thunderbird. (liruyo)\n");
+			outputText("-Fixed bugs: MindUp option req. wrong items in Rath menu, Money strike been unusable against groups, Fetish Zealots blocking boat before they intro scene at lake plays\n");
+			outputText("<b>Version 0.8s7:</b>\n\n");// ()
 			//outputText("-Dam can be upgraded 2 times (up to 3rd tier of wood dam) and Fishery once (to allow 2 npc's working at it - it also gonna increase each worker fish production by 20%)\n");
 			//outputText("-New tier 11 wisdom lvl-up perk: Elemental Conjurer Knowledge (Su). Req. Elemental Conjurer Knowledge (Ex) and Elemental Contract Rank 10 perks, 300+ wis. Effect: .\n");
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
@@ -58,13 +60,8 @@ public class Changelog extends BaseContent
 			//outputText("-New race: Azazel - gained by following new path for Alvina - it's smth akin to purified devil tf with abilites to be not so corrupted and etc. (written by Liadri and coded by EragonX). Azazelkin/Azazel/True Azazel racial bonuses (11/16/29 race points): ");
 			//outputText("+55/75/100% top str multi, -20/25/30% to spe multi, +80/130/250% to int multi, +65/100/150% ot wis multi, +90/170/220 to max lust, +15/40/50 to sens\n");
 			//outputText("-1 new achievments.\n");
-			outputText("-Fixed bugs: MindUp option req. wrong items in Rath menu, Money strike been unusable against groups, Fetish Zealots blocking boat before they intro scene at lake plays\n");
-			//remove this line when other two lines below get added ingame --- outputText("-Boss type enemies gained additional bonuses: Diehard effect of 7,5% of max HP + 2,250 HP * NG tier, OverMax HP effect of 15% magnitude.\n");
-			//outputText("-New perk for enemies: Elite type enemy. Bonuses for are: Diehard effect of 2,5% of max HP + 750 HP * NG tier, OverMax HP effect of 5% magnitude.\n");
-			//outputText("-New perk for enemies: Champion type enemy. Bonuses for are: Diehard effect of 5% of max HP + 1,500 HP * NG tier, OverMax HP effect of 10% magnitude.\n");
-			/*ostatni punkt changelogu
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Electra now acknowledges that more then just Raiju can volt transfer. Tbird can get supercharged too. More accounting for Kirin existing. Added centaur support to Supercharged scene, , Horsecock now become big starting higher then 25 inch seeing as a normal horse cock is 20 inch. (Liadri)\n");
+			outputText("-Fixed bugs: Bard not affected by cap of prestige jobs\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -84,6 +81,10 @@ public class Changelog extends BaseContent
 			outputText("-\n");// (khovel)
 			outputText("-\n");
 			outputText("-\n");
+			//remove this line when other two lines below get added ingame --- outputText("-Boss type enemies gained additional bonuses: Diehard effect of 7,5% of max HP + 2,250 HP * NG tier, OverMax HP effect of 15% magnitude.\n");
+			//outputText("-New perk for enemies: Elite type enemy. Bonuses for are: Diehard effect of 2,5% of max HP + 750 HP * NG tier, OverMax HP effect of 5% magnitude.\n");
+			//outputText("-New perk for enemies: Champion type enemy. Bonuses for are: Diehard effect of 5% of max HP + 1,500 HP * NG tier, OverMax HP effect of 10% magnitude.\n");
+			/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD

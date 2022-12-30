@@ -381,7 +381,7 @@ public class UniqueSexScenes extends BaseContent
 				outputText(" plasma dripping cock already rock hard at the thought of FINALLY finding a hole to plug. Your body is overflowing with latent electricity. Your [cock] throbs in eager anticipation at the thought of pumping your victim with every volt of energy you have.\n\n" +
 						"[monster He] pleads for you to stop, yet in your lust-addled state, the only reply you can manage to give them is an intense stare of unbridled lust. There is nothing to hold you back now, rain would be more likely to flow back into the sky at their command.\n\n" +
 						"This poor, unfortunate soul is your long-awaited outlet, and nothing can hold you from unloading every ounce of seed into them. Your presence was warning enough, they had time to run.\n\n");
-				if(player.isTaur){
+				if(player.isTaur()){
 					outputText("You trot toward your opponent your ");
 					if ((player.horseCocks() >= 1) || (player.kirinCocks() >= 1)) outputText(" bestial equine");
 					outputText("shaft dripping plasma on the ground as your dreamily think of the of the hole you're about to plow." +
