@@ -315,6 +315,10 @@ public class Combat extends BaseContent {
         return magic.spellGreyTier2CooldownImpl();
     }
 
+    public function spellGenericCooldown():Number {
+        return magic.spellGenericCooldownImpl();
+    }
+
     public function healMod():Number {
         return magic.healModImpl();
     }
@@ -400,6 +404,10 @@ public class Combat extends BaseContent {
 			player.HP = player.minHP() + 1;
             combatMenu(false);
 		}
+        else if (player.hasPerk(PerkLib.Immortality)) {
+            player.HP = player.minHP() + 1;
+            combatMenu(false);
+        }
         else monster.won_(true, false);
     }
 
@@ -5908,6 +5916,15 @@ public class Combat extends BaseContent {
                         if (monster.hasStatusEffect(StatusEffects.BurnDoT)) monster.addStatusValue(StatusEffects.BurnDoT,1,1);
                         else monster.createStatusEffect(StatusEffects.BurnDoT, 5, 0.05, 0, 0);
                     }
+                    if (player.weapon == weapons.ATWINSCY) {
+                        outputText("  Reeling in pain [themonster] begins to burn.");
+                        if (monster.hasStatusEffect(StatusEffects.BurnDoT)) monster.addStatusValue(StatusEffects.BurnDoT,1,3);
+                        else monster.createStatusEffect(StatusEffects.BurnDoT, 5, 0.05, 0, 0);
+                        if (monster.mana > 100)
+                        outputText("\n\nYour scythes also strip away measure of the enemies mana");
+                        monster.mana -= 100;
+                        if (monster.mana <0) monster.mana = 0;
+                    }
                     if (player.hasPerk(PerkLib.PoisonNails) && player.isFistOrFistWeapon()) {
                         var lust0damage:Number = 35 + rand(player.lib / 10);
                         lust0damage *= 0.14;
@@ -6102,7 +6119,7 @@ public class Combat extends BaseContent {
                 WrathWeaponsProc();
                 heroBaneProc(damage);
                 EruptingRiposte();
-                if (player.hasPerk(PerkLib.SwiftCasting) && flags[kFLAGS.ELEMENTAL_MELEE] > 0 && (player.isOneHandedWeapons() || (player.weaponSpecials("Large") && player.hasPerk(PerkLib.GigantGrip))) && player.isHavingFreeOffHand() && !player.statStore.hasBuff("Supercharged")) {
+                if (player.hasPerk(PerkLib.SwiftCasting) && flags[kFLAGS.ELEMENTAL_MELEE] > 0 && (player.isOneHandedWeapons() || player.weapon == weapons.ATWINSCY || (player.weaponSpecials("Large") && player.hasPerk(PerkLib.GigantGrip))) && player.isHavingFreeOffHand() && !player.statStore.hasBuff("Supercharged")) {
                     if (flags[kFLAGS.ELEMENTAL_MELEE] == 1 && CombatAbilities.WhitefireSwiftcast.isUsable) {
                         CombatAbilities.WhitefireSwiftcast.perform();
                     }
@@ -6496,7 +6513,8 @@ public class Combat extends BaseContent {
     }
 
     public function isFireTypeWeapon():Boolean {
-        return ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && (player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "ruby")) || (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) || (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) || player.hasStatusEffect(StatusEffects.FlameBlade) || player.weapon == weapons.TIDAR;
+        return ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && (player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "ruby")) || (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) || (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat))
+		|| player.hasStatusEffect(StatusEffects.FlameBlade) || player.weapon == weapons.TIDAR || player.weapon == weapons.ATWINSCY;
     }
 
     public function isIceTypeWeapon():Boolean {
@@ -6569,9 +6587,9 @@ public class Combat extends BaseContent {
         var damage:Number = (player.inte / 5 * spellMod() + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
         if (player.armor == armors.ELFDRES && player.isElf()) damage *= 2;
         if (player.armor == armors.FMDRESS && player.isWoodElf()) damage *= 2;
-        if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50) {
+        if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50 && flags[kFLAGS.COMBAT_TEASE_HEALING] == 0) {
             outputText("\nYou use your own lust against the enemy, cooling off a bit in the process.");
-            player.takeLustDamage(Math.round(-damage)/10, true);
+            player.takeLustDamage(Math.round(-damage)/40, true);
             damage *= 1.2;
         }
         return monster.lustVuln * damage;
@@ -6615,6 +6633,11 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.VerdantMight)){
                 damage += player.tou;
                 damage += scalingBonusToughness() * 0.25;
+            }
+            else if (SpecialEffect == "fire breath"){
+                damage += player.lib;
+                damage += scalingBonusLibido() * 0.25;
+                if (player.hasPerk(PerkLib.FireLord)) damage *= 2;
             }
             else{
                 damage += player.str;
@@ -6703,6 +6726,7 @@ public class Combat extends BaseContent {
                 damage *= FeraldamageMultiplier;
 				if (BelisaFollower.HolyBand6 > 0) damage *= 1.25;
 				if (SpecialEffect == "fire") doFireDamage(damage, true, true);
+                if (SpecialEffect == "fire breath") doFireDamage(damage, true, true);
 				else if (SpecialEffect == "ice") doIceDamage(damage, true, true);
 				else if (SpecialEffect == "lightning") doLightingDamage(damage, true, true);
 				else if (SpecialEffect == "darkness") doDarknessDamage(damage, true, true);
@@ -9076,36 +9100,7 @@ public class Combat extends BaseContent {
         if (player.hasStatusEffect(StatusEffects.PlantGrowth) && monster.lustVuln > 0) {
             outputText("The vine slithers around [monster him] before groping at [monster his] erogenous zones, enticing them as their focus and grip on combat weakens.");
 			var damagePG:Number = scalingBonusIntelligence() * 0.05 * spellModWhite();
-            /*var arvePG:Number = 1;
-			if (player.hasPerk(PerkLib.ArcaneVenom)) arvePG += AbstractSpell.stackingArcaneVenom();
-			while (arvePG-->0) repeatArcaneVenom(damagePG, 1, 0);*/
-			var RandomCritAV3:Boolean = false;
-			if (player.hasPerk(PerkLib.VegetalAffinity)) damagePG *= 1.5;
-			if (player.hasPerk(PerkLib.GreenMagic)) damagePG *= 2;
-			if (player.hasStatusEffect(StatusEffects.GreenCovenant)) damagePG *= 2;
-			//Determine if critical tease!
-			var critChanceAV1:int = 5;
-			if (player.hasPerk(PerkLib.CriticalPerformance)) {
-				if (player.lib <= 100) critChanceAV1 += player.lib / 5;
-				if (player.lib > 100) critChanceAV1 += 20;
-			}
-			if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChanceAV1 = 0;
-			if (rand(100) < critChanceAV1) {
-				RandomCritAV3 = true;
-				damagePG *= 1.75;
-			}
-			if (player.hasPerk(PerkLib.RacialParagon)) damagePG *= combat.RacialParagonAbilityBoost();
-			if (player.hasPerk(PerkLib.NaturalArsenal)) damagePG *= 1.50;
-			if (player.armor == armors.ELFDRES && player.isElf()) damagePG *= 2;
-			if (player.armor == armors.FMDRESS && player.isWoodElf()) damagePG *= 2;
-			damagePG = Math.round(damagePG * monster.lustVuln);
-			monster.teased(damagePG, false);
-			if (RandomCritAV3) outputText(" Critical hit!");
-			combat.teaseXP((1 + combat.bonusExpAfterSuccesfullTease()*2));
-			if (player.hasPerk(PerkLib.VerdantLeech)) {
-				if (monster.lustVuln != 0 && !monster.hasPerk(PerkLib.EnemyTrueAngel)) monster.lustVuln += 0.025;
-				HPChange(Math.round(player.maxHP() * 0.05), false);
-			}
+            repeatArcaneVenom(damagePG, 1, 0);
 			outputText("\n\n");
         }
 		//Entagled
@@ -9120,36 +9115,7 @@ public class Combat extends BaseContent {
 		if (monster.hasStatusEffect(StatusEffects.Briarthorn) && monster.lustVuln > 0) {
 			outputText("The poison inflicted by the thorns gnaws at your opponent countenance.");
 			var damageB:Number = scalingBonusIntelligence() * 0.075 * spellModWhite();
-			/*var arveB:Number = 1;
-			if (player.hasPerk(PerkLib.ArcaneVenom)) arveB += AbstractSpell.stackingArcaneVenom();
-			while (arveB-->0) repeatArcaneVenom(damageB, 0, 0);*/
-			var RandomCritAV1:Boolean = false;
-			if (player.hasPerk(PerkLib.VegetalAffinity)) damageB *= 1.5;
-			if (player.hasPerk(PerkLib.GreenMagic)) damageB *= 2;
-			if (player.hasStatusEffect(StatusEffects.GreenCovenant)) damageB *= 2;
-			//Determine if critical tease!
-			var critChanceAV2:int = 5;
-			if (player.hasPerk(PerkLib.CriticalPerformance)) {
-				if (player.lib <= 100) critChanceAV2 += player.lib / 5;
-				if (player.lib > 100) critChanceAV2 += 20;
-			}
-			if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChanceAV2 = 0;
-			if (rand(100) < critChanceAV2) {
-				RandomCritAV1 = true;
-				damageB *= 1.75;
-			}
-			if (player.hasPerk(PerkLib.RacialParagon)) damageB *= combat.RacialParagonAbilityBoost();
-			if (player.hasPerk(PerkLib.NaturalArsenal)) damageB *= 1.50;
-			if (player.armor == armors.ELFDRES && player.isElf()) damageB *= 2;
-			if (player.armor == armors.FMDRESS && player.isWoodElf()) damageB *= 2;
-			damageB = Math.round(damageB * monster.lustVuln);
-			monster.teased(damageB, false);
-			if (RandomCritAV1) outputText(" Critical hit!");
-			combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
-			if (player.hasPerk(PerkLib.VerdantLeech)) {
-				if (monster.lustVuln != 0 && !monster.hasPerk(PerkLib.EnemyTrueAngel)) monster.lustVuln += 0.025;
-				HPChange(Math.round(player.maxHP() * 0.05), false);
-			}
+			repeatArcaneVenom(damageB, 0, 0);
 			outputText("\n\n");
 		}
 		//Death Blossom
@@ -9157,40 +9123,9 @@ public class Combat extends BaseContent {
 			outputText("The airborne poisons and aphrodisiacs spread by the blossoming flowers thickens.");
 			var damageDBH:Number = scalingBonusIntelligence() * 0.1 * spellModWhite() * monster.statusEffectv2(StatusEffects.DeathBlossom);
 			damageDBH = Math.round(damageDBH * poisonDamageBoostedByDao());
-			doPoisonDamage(damageDBH, true, true);//remove when arcane venome would be working
-			if (monster.lustVuln > 0) {
-				var damageDBL:Number = scalingBonusIntelligence() * 0.015 * spellModWhite() * monster.statusEffectv2(StatusEffects.DeathBlossom);
-				/*var arveDBL:Number = 1;
-				if (player.hasPerk(PerkLib.ArcaneVenom)) arveDBL += AbstractSpell.stackingArcaneVenom();
-				while (arveDBL-->0) repeatArcaneVenom(damageDBL, 0, damageDBH);*/
-				var RandomCritAV2:Boolean = false;
-				if (player.hasPerk(PerkLib.VegetalAffinity)) damageDBL *= 1.5;
-				if (player.hasPerk(PerkLib.GreenMagic)) damageDBL *= 2;
-				if (player.hasStatusEffect(StatusEffects.GreenCovenant)) damageDBL *= 2;
-				//Determine if critical tease!
-				var critChanceAV3:int = 5;
-				if (player.hasPerk(PerkLib.CriticalPerformance)) {
-					if (player.lib <= 100) critChanceAV3 += player.lib / 5;
-					if (player.lib > 100) critChanceAV3 += 20;
-				}
-				if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChanceAV3 = 0;
-				if (rand(100) < critChanceAV3) {
-					RandomCritAV2 = true;
-					damageDBL *= 1.75;
-				}
-				if (player.hasPerk(PerkLib.RacialParagon)) damageDBL *= combat.RacialParagonAbilityBoost();
-				if (player.hasPerk(PerkLib.NaturalArsenal)) damageDBL *= 1.50;
-				if (player.armor == armors.ELFDRES && player.isElf()) damageDBL *= 2;
-				if (player.armor == armors.FMDRESS && player.isWoodElf()) damageDBL *= 2;
-				damageDBL = Math.round(damageDBL * monster.lustVuln);
-				monster.teased(damageDBL, false);
-				if (RandomCritAV2) outputText(" Critical hit!");
-				combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
-				if (player.hasPerk(PerkLib.VerdantLeech)) {
-					if (monster.lustVuln != 0 && !monster.hasPerk(PerkLib.EnemyTrueAngel)) monster.lustVuln += 0.025;
-					HPChange(Math.round(player.maxHP() * 0.05), false);
-				}
-			}
+			var damageDBL:Number = 0;
+			if (monster.lustVuln > 0) damageDBL += scalingBonusIntelligence() * 0.015 * spellModWhite() * monster.statusEffectv2(StatusEffects.DeathBlossom);
+			repeatArcaneVenom(damageDBL, 0, damageDBH);
 			outputText("\n\n");
 		}
         if (player.hasStatusEffect(StatusEffects.Bound) && flags[kFLAGS.PC_FETISH] >= 2) {
@@ -9562,6 +9497,12 @@ public class Combat extends BaseContent {
                 player.removeStatusEffect(StatusEffects.Maleficium);
                 outputText("<b>Maleficium effect wore off!</b>\n\n");
             } else player.addStatusValue(StatusEffects.Maleficium, 1, -1);
+        }
+        if (player.hasStatusEffect(StatusEffects.PerfectClarity)) {
+            if (player.statusEffectv1(StatusEffects.PerfectClarity) <= 0) {
+                player.removeStatusEffect(StatusEffects.PerfectClarity);
+                outputText("<b>Perfect Clarity effect wore off!</b>\n\n");
+            } else player.addStatusValue(StatusEffects.PerfectClarity, 1, -1);
         }
         if (player.hasStatusEffect(StatusEffects.WinterClaw)) {
             if (player.statusEffectv1(StatusEffects.WinterClaw) <= 0) {
@@ -10415,7 +10356,6 @@ public class Combat extends BaseContent {
     }
 	
 	private function repeatArcaneVenom(dmg:Number, subtype:Number, poisonele:Number):void {
-		if (poisonele != 0) doPoisonDamage(poisonele, true, true);
 		var RandomCritAV:Boolean = false;
 		if (player.hasPerk(PerkLib.VegetalAffinity)) dmg *= 1.5;
 		if (player.hasPerk(PerkLib.GreenMagic)) dmg *= 2;
@@ -10435,10 +10375,18 @@ public class Combat extends BaseContent {
 		if (player.hasPerk(PerkLib.NaturalArsenal)) dmg *= 1.50;
         if (player.armor == armors.ELFDRES && player.isElf()) dmg *= 2;
         if (player.armor == armors.FMDRESS && player.isWoodElf()) dmg *= 2;
+		var arve:Number = 1;
+		if (player.hasPerk(PerkLib.ArcaneVenom)) arve += AbstractSpell.stackingArcaneVenom();
+		while (arve-->0) {
+			if (RandomCritAV) repeatArcaneVenom2(dmg, 0, poisonele);
+			else repeatArcaneVenom2(dmg, 0, poisonele, false);
+		}
+	}
+	private function repeatArcaneVenom2(dmg:Number, subtype:Number, poisonele:Number, crit:Boolean = true):void {
+		if (poisonele != 0) doPoisonDamage(poisonele, true, true);
 		dmg = Math.round(dmg * monster.lustVuln);
-		outputText(" Damage AV:"+dmg+" ");
 		monster.teased(dmg, false);
-		if (RandomCritAV) outputText(" Critical hit!");
+		if (crit) outputText(" Critical hit!");
 		if (subtype == 1) combat.teaseXP((1 + combat.bonusExpAfterSuccesfullTease()*2));
 		else combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		if (player.hasPerk(PerkLib.VerdantLeech)) {
@@ -12217,9 +12165,9 @@ public function calculateBasicTeaseDamage(BaseTeaseDamage:Number = 18):Number {
     damage *= damagemultiplier;
     if (player.hasPerk(PerkLib.ChiReflowLust)) damage *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
     if (player.hasPerk(PerkLib.ArouseTheAudience) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType))) damage *= 1.5;
-    if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50) {
+    if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50 && flags[kFLAGS.COMBAT_TEASE_HEALING] == 0) {
         outputText("\nYou use your own lust against the enemy, cooling off a bit in the process.");
-        player.takeLustDamage(Math.round(-damage)/10, true);
+        player.takeLustDamage(Math.round(-damage)/40, true);
         damage *= 1.2;
     }
     damage = (damage * monster.lustVuln);

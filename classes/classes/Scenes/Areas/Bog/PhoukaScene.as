@@ -458,7 +458,7 @@ public class PhoukaScene extends BaseContent implements TimeAwareInterface {
 						outputText(".  You could take advantage of the situation to slake your lust.");
 					else outputText(".  It would be so easy to rape this perverted faerie, how can you resist?");
 					menu();
-					addButton(0, "Leave", phoukaLeaveOnLustWin);
+					addButton(14, "Leave", phoukaLeaveOnLustWin);
 					addButton(1, "Anal Ride", phoukaSexFaeriePostCombat); //Works for all
 					if (player.hasCock()) addButton(2, "Fuck Faerie", phoukaSexFaerieFemalePostCombat); //Male or Herm Only
 					SceneLib.uniqueSexScene.pcUSSPreChecksV2(phoukaPlayerWins2);

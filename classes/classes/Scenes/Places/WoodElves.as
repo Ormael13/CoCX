@@ -683,8 +683,8 @@ package classes.Scenes.Places{
 				.disableIf(!player.hasVagina(), "Alyssa has personal preferences in regards to the people she will train with... it's not like the spear is a girl only discipline, but the way she uses it might as well be...");
 			addButton(5, "Lutien", Lutien)
 					.disableIf(hasTrainedToday, "You need a break from your recent training before you can train again.");
-		//	addButton(6, "Chelsea", Chelsea)
-		//			.disableIf(hasTrainedToday, "You need a break from your recent training before you can train again.");
+			addButton(6, "Chelsea", Chelsea)
+					.disableIf(hasTrainedToday, "You need a break from your recent training before you can train again.");
 			addButton(14, "Leave", camp.returnToCampUseOneHour);
 		}
 
@@ -1423,17 +1423,17 @@ package classes.Scenes.Places{
 			hasTrainedToday = true;
 			player.SexXP((5+player.level) * 10);
 			player.trainStat("lib", 4, 300);
-			if (!player.hasPerk(PerkLib.FueledByDesire) && player.lib >= 100) {
-				player.createPerk(PerkLib.FueledByDesire,0,0,0,0);
-				outputText("\n\nBetter refining of your charms allowed you to learn a new technique. <b>Gained Perk: Fueled by Desire</b>");
+			if (player.hasPerk(PerkLib.GracefulBeauty) && !player.hasPerk(PerkLib.SweepDefenses) && player.lib >= 200) {
+				player.createPerk(PerkLib.SweepDefenses,0,0,0,0);
+				outputText("\n\nBetter refining of your charms allowed you to learn a new technique. <b>Gained Perk: Sweep Defenses</b>");
 			}
 			if (player.hasPerk(PerkLib.FueledByDesire) && !player.hasPerk(PerkLib.GracefulBeauty) && player.lib >= 150) {
 				player.createPerk(PerkLib.GracefulBeauty,0,0,0,0);
 				outputText("\n\nBetter refining of your charms allowed you to learn a new technique. <b>Gained Perk: Graceful Beauty</b>");
 			}
-			if (player.hasPerk(PerkLib.GracefulBeauty) && !player.hasPerk(PerkLib.SweepDefenses) && player.lib >= 200) {
-				player.createPerk(PerkLib.SweepDefenses,0,0,0,0);
-				outputText("\n\nBetter refining of your charms allowed you to learn a new technique. <b>Gained Perk: Sweep Defenses</b>");
+			if (!player.hasPerk(PerkLib.FueledByDesire) && player.lib >= 100) {
+				player.createPerk(PerkLib.FueledByDesire,0,0,0,0);
+				outputText("\n\nBetter refining of your charms allowed you to learn a new technique. <b>Gained Perk: Fueled by Desire</b>");
 			}
 			//New Legendary Armor: Forest Mage Dress	//TODO special effect with green magic, other effects complete
 			//Type: Light

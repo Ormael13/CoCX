@@ -49,7 +49,7 @@ public class DarkElfSniper extends DarkElfScout
 			this.bodyColor = "dark";
 			this.hairColor = "silver";
 			this.hairLength = 13;
-			initStrTouSpeInte(120, 180, 240, 130);
+			initStrTouSpeInte(120, 190, 260, 130);
 			initWisLibSensCor(130, 80, 90, 95);
 			this.weaponName = "dagger";
 			this.weaponVerb= "stab";
@@ -60,10 +60,10 @@ public class DarkElfSniper extends DarkElfScout
 			this.armorName = "elven armor";
 			this.armorDef = 16;
 			this.armorMDef = 16;
-			this.bonusLust = 221;
+			this.bonusLust = 231;
 			this.lustVuln = .7;
 			this.lust = 50;
-			this.level = 51;
+			this.level = 61;
 			this.gems = rand(10) + 25;
 			this.drop = new WeightedDrop().
 					add(weaponsrange.BOWLIGH,1).

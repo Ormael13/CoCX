@@ -29,7 +29,8 @@ public class BalanceOfLifeSpell extends AbstractGreySpell {
 	}
 	
 	override public function calcCooldown():int {
-		var calcC:int = 8;
+		var calcC:int = 5;
+		calcC += spellGenericCooldown();
 		if (player.weapon == weapons.U_STAFF) calcC -= 2;
 		return calcC;
 	}

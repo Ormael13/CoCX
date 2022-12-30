@@ -14,7 +14,7 @@ public class Changelog extends BaseContent
 		{}
 		
 		public function accessChangelogMenu():void {
-			Changelog43();
+			Changelog44();
 		}
 		//zrobić do 2022 na świeta event z reniferami i nie odblokowywać go do ok. 20-24 grudnia 2021 xD
 		private function Changelog46():void {
@@ -32,15 +32,38 @@ public class Changelog extends BaseContent
 		private function Changelog44():void {
 			clearOutput();
 			//0 of 11 pages
-			//outputText("<b>Version 0.8s6 ():</b>\n\n");
+			outputText("<b>Version 0.8s6:</b>\n\n");// ()
+			outputText("-New tier 9 misc lvl-up perk: Arcane Venom. Req. Verdant Leech perk, Intelligence 200+, Libido 200+, Corruption 50+. Effect: Spells that inflict poison add a number of direct applications equal to your intelligence (core + trained parts) divided by 50.\n");
+			outputText("-New event perk: Fueled by Desire. Gained when training with Chelsea and having 100+ libido. Effect: When using the tease action or an arousal spell, clear a small amount of lust to deal increased tease damage. This only works if lust is above 50%. (EragonX)\n");
+			outputText("-New event perk: Graceful Beauty. Gained when training with Chelsea and having 150+ libido. Effect: Add a small measure of your speed to your tease damage. (EragonX)\n");
+			outputText("-New event perk: Sweep Defenses. Gained when training with Chelsea and having 200+ libido. Effect: Critical tease also weakens your opponent's resistance to lust by 5%. (EragonX)\n");
+			outputText("-New event perk: Hyper Casting. Gained by spending 1 super perk point and having Equilibrium super perk. Effects: Allow to reach OverMax Mana equal to 130% of current max mana. Decrease CD for spells: -1 for tier 1, -2 for tier 2 and -4 for tier 3. Reduce spells costs by 20% (that affect bones used by necro spells too). Allow to always autocast buff spells.\n");
+			outputText("-New NPC to interact in wood village: Chelsea - Former Lacta Bovina turned Wood Elf. During Sensual training she can teach some perks related to lust. (EragonX)\n");
+			outputText("-New race + tf: Kitshoo - req. Ruby Jewel made from salamander and kitsune tf's by Evangeline (it's also as expected kitsune/salamander hybryd - some calls them napalm foxes). They have access to basic kitsune and salamander abilities. Kitshoo/Elder Kitshoo/Nine-Tailed Elder Kitshoo racial bonuses (at 8/16/24 race points): ");
+			outputText("+0/15/20% to str multi, +15/50/80% to tou multi, +15/40/70% to spe multi, +40/70/100% to int multi, +50/80/110% to wis multi, +50/90/30% to lib multi, +50/100/150 to sens, +20/40/60 to max lust, +15/25/35% to max sf multi, +30/40/50% sf regeneration\n");
+			outputText("-Added Hills & Low Mountains area before Mountain. Some of the encounters orginal in Mountain was moved to the new areas. Some of encouters from high mountains was moved to mountain area too.\n");
+			outputText("-Hellhounds and Infected Hellhouds lvl increased by 10 levels. Harpy and Basilisk levels increased by 15 levels. Starting lvl of Izumi and Minerva increased by 12. Minotaur sons starting lvl was lowered by 10. Cockatrice enemies lvl increased by 55/62(winged).\n");
+			outputText("-Phoenixes meet outside tower are now all called quasi-phoenixes (since they weren't succesfull hybryds but their 'mother' was persistent to call them as success so in tower they are called as her mother wish for). Quasi-phoenix enemies in High Mountains increased lvl by 32.\n");
+			outputText("-6 new achievments. (1 shadow one)\n");
+			outputText("-Sheep Milk and Spring Water on top of fixed flat amount of fatigue & lust removed also removes % values - 5%/5% and 2%/6%.\n");
+			outputText("-Adds 'perk distance' - a score indicating how difficult perk requirements are. Adds different sorting modes to PerkDatabase - by name, distance, relative distance. By default, perks in database are sorted by relative distance, so perks that are easier for player character to obtain will go first. (aimozg)\n");
+			outputText("-First part of Alvina pure romance path is now available. (Gotta use brain and look for clues to do it no cheat sheet to use ;) ) (EragonX)\n");
+			outputText("-Metamorph: Add Kirin parts (EragonX)\n");
+			outputText("-Fixes: double negative and harpywomb thunderbird. (liruyo)\n");
 			//outputText("-Dam can be upgraded 2 times (up to 3rd tier of wood dam) and Fishery once (to allow 2 npc's working at it - it also gonna increase each worker fish production by 20%)\n");
 			//outputText("-New tier 11 wisdom lvl-up perk: Elemental Conjurer Knowledge (Su). Req. Elemental Conjurer Knowledge (Ex) and Elemental Contract Rank 10 perks, 300+ wis. Effect: .\n");
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
-			//outputText("-New event perk: Fueled by Desire. Gained when training with Chelsea and having 100+ libido. Effect: When using the tease action or an arousal spell, clear a small amount of lust to deal increased tease damage. This only works if lust is above 50%. (EragonX)\n");
-			//outputText("-New event perk: Graceful Beauty. Gained when training with Chelsea and having 150+ libido. Effect: Add a small measure of your speed to your tease damage. (EragonX)\n");
-			//outputText("-New event perk: Sweep Defenses. Gained when training with Chelsea and having 200+ libido. Effect: Critical tease also weakens your opponent's resistance to lust by 5%. (EragonX)\n");
+			//outputText("-New race: Azazel - gained by following new path for Alvina - it's smth akin to purified devil tf with abilites to be not so corrupted and etc. (written by Liadri and coded by EragonX). Azazelkin/Azazel/True Azazel racial bonuses (11/16/29 race points): ");
+			//outputText("+55/75/100% top str multi, -20/25/30% to spe multi, +80/130/250% to int multi, +65/100/150% ot wis multi, +90/170/220 to max lust, +15/40/50 to sens\n");
+			//outputText("-1 new achievments.\n");
+			outputText("-Fixed bugs: MindUp option req. wrong items in Rath menu, Money strike been unusable against groups, Fetish Zealots blocking boat before they intro scene at lake plays\n");
+			//remove this line when other two lines below get added ingame --- outputText("-Boss type enemies gained additional bonuses: Diehard effect of 7,5% of max HP + 2,250 HP * NG tier, OverMax HP effect of 15% magnitude.\n");
+			//outputText("-New perk for enemies: Elite type enemy. Bonuses for are: Diehard effect of 2,5% of max HP + 750 HP * NG tier, OverMax HP effect of 5% magnitude.\n");
+			//outputText("-New perk for enemies: Champion type enemy. Bonuses for are: Diehard effect of 5% of max HP + 1,500 HP * NG tier, OverMax HP effect of 10% magnitude.\n");
+			/*ostatni punkt changelogu
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -61,21 +84,6 @@ public class Changelog extends BaseContent
 			outputText("-\n");// (khovel)
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
@@ -145,7 +153,9 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -210,17 +220,24 @@ public class Changelog extends BaseContent
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");*/
+			outputText("\n\n\n");
+			outputText("Plans for future builds (I know some of them are HUGE ones but without dreams to chase how can one change?):\n");
+			outputText("-Add more soulforce options.\n");
+			outputText("-Add soulforce stuff to our lovely monk-ish mouse ^^\n");
+			outputText("-Add soulforce stuff to kitsune encounters.\n");
+			outputText("-Add Wuxia themed area and enemies.\n");
+			outputText("-Add few new options during chara creation.\n");
+			outputText("-Add option to upgrade some of the items ingame (ofc using soulforce) and generaly few new shiny things to find/buy/store/use.\n");
+			outputText("-More camp build options (involving using stones and etc.)\n");
+			outputText("-Make use of Metamorph perk (ofc all TF would be powered by soulforce ^^)\n");
 			menu();
 			addButton(0, "Next", Changelog43);
 			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
 		}
 		private function Changelog43():void {
 			clearOutput();
-			outputText("(Part 2/2) <b>Version 0.8s5:</b>\n\n");// (Cultivation: Rebirth, Green Magic, return of Grey Sage, tons of QoL changes)
+			outputText("(Part 2/2) <b>Version 0.8s5 (Cultivation: Rebirth, Green Magic, return of Grey Sage, tons of QoL changes):</b>\n\n");
 			outputText("-For Kitsune thyroid gland or parathyroid glands req. perks would include Star Sphere Mastery perk too and Kitshoo race (paratyr) or Kitshoo tails (thyr).\n");
 			outputText("-Frostwyrm gained bonus of +5/10% to max HP on 1st and 2nd tier of racial bonuses (also second tier is called elder not greater).\n");
 			outputText("-Yggdrasil TF would now grant diff type of wings that come in three tiers. They would grant up to 6 pts for racial score.\n");
@@ -386,33 +403,19 @@ public class Changelog extends BaseContent
 			outputText("-Fixed Bugs: Akbal been weak to fire not ice, Insightful Resources I-VI perks bonus to SF been lower than 5 per wis point, recovery of fatigue when waiting been lower than when attacking, Dao of Elements not giving additional % resistances after first 10%, missing bonus to acid elemental arrows, Holy Bands Managment locked behind having 3rd one band, ");
 			outputText("Centaur race bonuses error fixed to orginal values, Aether Twins following PC throu ascension in case they been equipped, Lusty Maiden Armor treated as already legendary item, wrong labeled gorgon eyes on race page, Jiaghsi curing leaving leftover effects of Cursed Tag options, tier 3 spells have incrrectly calculated cooldowns, Wood Elf archer training bugs, ");
 			outputText("Fera Boon - Wide Open perk not been permable on ascension, Bone Soul perk not increasing cap on stored demon bones, Traveling Merchant Outfit & Greedy effects allowing to get more than 100% of item worth during selling it, Metamorph accesable from camp menu if not yet started on Soul Cultivator path for perm tf'd PC\n");
-			//remove this line when other two lines below get added ingame --- outputText("-Boss type enemies gained additional bonuses: Diehard effect of 7,5% of max HP + 2,250 HP * NG tier, OverMax HP effect of 15% magnitude.\n");
-			//outputText("-New perk for enemies: Elite type enemy. Bonuses for are: Diehard effect of 2,5% of max HP + 750 HP * NG tier, OverMax HP effect of 5% magnitude.\n");
-			//outputText("-New perk for enemies: Champion type enemy. Bonuses for are: Diehard effect of 5% of max HP + 1,500 HP * NG tier, OverMax HP effect of 10% magnitude.\n");
-			outputText("\n\n\n");
-			outputText("Plans for future builds (I know some of them are HUGE ones but without dreams to chase how can one change?):\n");
-			outputText("-Add more soulforce options.\n");
-			outputText("-Add soulforce stuff to our lovely monk-ish mouse ^^\n");
-			outputText("-Add soulforce stuff to kitsune encounters.\n");
-			outputText("-Add Wuxia themed area and enemies.\n");
-			outputText("-Add few new options during chara creation.\n");
-			outputText("-Add option to upgrade some of the items ingame (ofc using soulforce) and generaly few new shiny things to find/buy/store/use.\n");
-			outputText("-More camp build options (involving using stones and etc.)\n");
-			outputText("-Make use of Metamorph perk (ofc all TF would be powered by soulforce ^^)\n");
 			menu();
 			addButton(0, "Next", Changelog42);
 			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
 		}
 		private function Changelog42():void {
 			clearOutput();
-			outputText("(Part 1/2) <b>Version 0.8s5:</b>\n\n");// (Cultivation: Rebirth, Green Magic, return of Grey Sage, tons of QoL changes)
+			outputText("(Part 1/2) <b>Version 0.8s5 (Cultivation: Rebirth, Green Magic, return of Grey Sage, tons of QoL changes):</b>\n\n");
 			outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk with full bonus to soulforce (+950). Effect: Opening more options to change PC body: cock types, ball count, pussie types, breast rows count, nipple types/count, special options (ovipositors - only if pc got req. tail and will be lost when changing tail). (also increase max SF by 50 + 100 each day up to 1,050)\n");
 			outputText("-New tier 3 misc lvl-up perk: Green magic. Req. Natural Spellcasting perk, Intelligence 80+, Libido 80+, Corruption 50+. Effect: Your Elven spell effects are twice as strong and last twice as long.\n");
 			outputText("-(Liadri) New tier 4 speed lvl-up perk: Wound Poison Req. Job: Rogue perk. Effect: Poisons now inflict increasing damage vulnerability on each application and tick.\n");
 			outputText("-New tier 6 intelligence lvl-up perk: Expert War Mage. Req. Adept War Mage perk, 160+ int. Effect: Increasing maximum wrath by 200, decrease mana costs of spells by 15%, mana recovery increased by 0,5% of max mana and safe limit for spellcasting increased by 5%.\n");
 			outputText("-New tier 6 misc lvl-up perk: Verdant Leech. Req. Green magic perk, Intelligence 140+, Libido 140+, Corruption 50+. Effect: Your Elven spells and black magic raises your opponent's weakness to lust and heals you for 5% of your health each time they inflict poison.\n");
 			outputText("-New tier 8 intelligence lvl-up perk: Master War Mage. Req. Expert War Mage perk, 200+ int. Effect: Increasing maximum wrath by 250, decrease mana costs of spells by 20%, mana recovery increased by 1% of max mana and safe limit for spellcasting increased by 5%.\n");
-			//outputText("-New tier 9 misc lvl-up perk: Arcane Venom. Req. Verdant Leech perk, Intelligence 200+, Libido 200+, Corruption 50+. Effect: Spells that inflict poison add a number of direct applications equal to your intelligence (core + trained parts) divided by 50.\n");
 			outputText("-New mutation perk: Cat-like Nimbleness (Final Form). Req. having Cat-like Nimbleness (Evolved) perk. Effects: +1 to cat races score, +50% spe multi, +10% evasion, +10% to ghost speed.\n");
 			outputText("-New mutation perk: Venom Glands (Final Form). Req. having Venom Glands (Evolved) perk. Effects: +1 to venomous races scores, +15% poison resistance, +30% tou multi, increased by ~66% max venom capacity, +10 to venom production.\n");
 			outputText("-New mutation perk: Shark Olfactory System (Final Form). Req. having Shark Olfactory System (Evolved) perk. Effects: +1 to shark/siren race scores, +10/15/25% to int/wis/spe multi, +50% to bleed damage, +25% more dmg done to bleeding enemies.\n");
@@ -470,7 +473,6 @@ public class Changelog extends BaseContent
 			outputText("making angel treated as few lvl higher than it's for purpose of mechanic that reduce dmg based on level difference between PC and enemy. Each of them is considered to constantly flying. (Ok so you thinking... that alot of stuff they get, right? You wrong they still got ace to play if things go west ... or east) They also have special transformation ability to assume their 'true form'. ");
 			outputText("Usualy it involve getting more... eyes and halo (some angels could have halo and more eyes even before change which would only make it... more eyes and halo to show off). It boosts their tou/spe/wis, sometimes even increase regeneration or enhance their protection field, could even allow to use new abilities.\n");
 			outputText("-New NPC to interact in wood village: Lutien - bit on flat end of spectrum wood elf gal with 'smol' secret. During training she can teach PC all green spells as long req. to learn each is reached.\n");
-			//outputText("-New NPC to interact in wood village: Chelsea - Former Lacta Bovina turned Wood Elf. During Sensual training she can teach some perks related to lust. (EragonX)\n");
 			outputText("-True Angel enemies getting innate Diehard effect. It would be % one with number matching enemy current lvl. They all would also receive 2% of max HP innate HP regen.\n");
 			outputText("-Low tier magic immunity - some of the enemies now would have immunity to tier 1 spells. They still can be hurt by tier 2 or 3 spells thou or magical specials.\n");
 			outputText("-New weapon type Wands (Liadri)\n");

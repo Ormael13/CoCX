@@ -58,7 +58,10 @@ public class Achievements extends BaseContent
 			//addAchievement("Jumanji", kACHIEVEMENTS., "Explore the jungle 100 times.");
 			addAchievement("Vacationer", kACHIEVEMENTS.ZONE_VACATIONER, "Explore the lake 100 times.");
 			addAchievement("Dehydrated", kACHIEVEMENTS.ZONE_DEHYDRATED, "Explore the desert 100 times.");
-			addAchievement("Rookie", kACHIEVEMENTS.ZONE_ROOKIE, "Explore the outer battlefield 100 times.");
+			addAchievement("Rookie", kACHIEVEMENTS.ZONE_ROOKIE, "Explore the boundary battlefield 100 times.");
+			addAchievement("Friggin' Golems!", kACHIEVEMENTS.ZONE_FRIGGIN_GOLEMS, "Explore the outer battlefield 100 times.");
+			addAchievement("Hiking", kACHIEVEMENTS.ZONE_HIKING, "Explore the hills 100 times.");
+			addAchievement("Trekking", kACHIEVEMENTS.ZONE_TREKKING, "Explore the low mountains 100 times.");
 			addAchievement("Mountaineer", kACHIEVEMENTS.ZONE_MOUNTAINEER, "Explore the mountains 100 times.");
 			addAchievement("Light-headed", kACHIEVEMENTS.ZONE_LIGHT_HEADED, "Explore the high mountains 100 times.");
 			addAchievement("Rolling Hills", kACHIEVEMENTS.ZONE_ROLLING_HILLS, "Explore the plains 100 times.");
@@ -68,7 +71,7 @@ public class Achievements extends BaseContent
 			addAchievement("Defiled", kACHIEVEMENTS.ZONE_DEFILED, "Explore the defiled ravine 100 times.");
 			addAchievement("Sunburned", kACHIEVEMENTS.ZONE_SUNBURNED, "Explore the beach 100 times.");
 			addAchievement("Sea-Legs", kACHIEVEMENTS.ZONE_SAILOR, "Explore the ocean 100 times.");
-			addAchievement("Diver", kACHIEVEMENTS.ZONE_DIVER, "Explore the deep sea 100 times.");
+			//addAchievement("Diver", kACHIEVEMENTS.ZONE_DIVER, "Explore the deep sea 100 times.");
 			addAchievement("Caveman", kACHIEVEMENTS.ZONE_CAVEMAN, "Explore the caves 100 times.");
 			//addAchievement("Spelunker", kACHIEVEMENTS., "Explore the deep caves 100 times.");
 			addAchievement("Sub-Zero", kACHIEVEMENTS.ZONE_SUB_ZERO, "Explore the tundra 100 times.");
@@ -222,6 +225,7 @@ public class Achievements extends BaseContent
 			//learn all grey spells
 			//learn all white/black/grey spells
 			//learn all blood spells
+			//learn all warlock/archpriest/green spells (3 diff achievs)
 			addAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER, "Cast your first wrath-empowered spell.", "", true);
 			addAchievement("Cum Cannon", kACHIEVEMENTS.COMBAT_CUM_CANNON, "Cum in the middle of battle.");
 			addAchievement("How Do I Shot Web?", kACHIEVEMENTS.COMBAT_SHOT_WEB, "Fire your webbings at your opponent.");
@@ -239,7 +243,7 @@ public class Achievements extends BaseContent
 			addAchievement("Uncanny Reiterpallasch", kACHIEVEMENTS.COMBAT_UNCANNY_REITERPALLASCH, "Deal a total of 5,000,000 damage.", "", true);
 			addAchievement("Arrow to the Knee", kACHIEVEMENTS.COMBAT_ARROW_TO_THE_KNEE, "Use your bow/crossbow for a first time.");
 
-			titleAchievementSection("Holiday Events"); //10 achievements
+			titleAchievementSection("Holiday Events"); //11 achievements
 			addAchievement("Egg Hunter", kACHIEVEMENTS.HOLIDAY_EGG_HUNTER, "Find 10 eggs as random drops during Easter event.", "", true);
 			addAchievement("Happy Birthday, Helia!", kACHIEVEMENTS.HOLIDAY_HELIA_BIRTHDAY, "Participate into Helia's birthday event. (August)", "", true);
 			addAchievement("Thankslutting", kACHIEVEMENTS.HOLIDAY_THANKSGIVING_I, "Meet the Piggy-Slut (Thanksgiving)", "", true);
@@ -250,6 +254,7 @@ public class Achievements extends BaseContent
 			addAchievement("A Christmas Carol", kACHIEVEMENTS.HOLIDAY_CHRISTMAS_II, "Complete Carol's mini-quest (Christmas)", "", true);
 			addAchievement("The Lovable Snowman", kACHIEVEMENTS.HOLIDAY_CHRISTMAS_III, "Have Nieve as lover (Christmas/Winter)", "", true);
 			addAchievement("Will You Be My Valentine?", kACHIEVEMENTS.HOLIDAY_VALENTINE, "Visit the Wet Bitch during Valentine's day. (Valentine)", "", true);
+			addAchievement("Year of the Goat", kACHIEVEMENTS.HOLIDAY_YEAR_OF_THE_GOAT, "Visit the He'Xin'Dao during Lunar New Year. (Winter)", "", true);
 
 			titleAchievementSection("Survival/Realistic Mode"); //15 achievements
 			addAchievement("Tastes Like Chicken", kACHIEVEMENTS.REALISTIC_TASTES_LIKE_CHICKEN, "Refill your hunger for the first time.");
@@ -443,6 +448,9 @@ public class Achievements extends BaseContent
 			addAchievement("Elder Chimera", kACHIEVEMENTS.GENERAL_ELDER_CHIMERA, "Have at least 32 racial internal mutation perks.");
 			addAchievement("Legendary Chimera", kACHIEVEMENTS.GENERAL_LEGENDARY_CHIMERA, "Have at least 64 racial internal mutation perks.");
 			addAchievement("Ultimate Lifeform", kACHIEVEMENTS.GENERAL_ULTIMATE_LIFEFORM, "Have at least 128 racial internal mutation perks.", "", true);
+			addAchievement("The end and the beginning", kACHIEVEMENTS.GENERAL_THE_END_AND_THE_BEGINNING, "Defeat Archmage Alvina.");
+			addAchievement("Beyond gods and mortals", kACHIEVEMENTS.GENERAL_BEYOND_GODS_AND_MORTALS, "Defeat Alvina at the peak of her power on Xianxia Difficulty.");
+			//addAchievement("Dawn chasing away the night", kACHIEVEMENTS.GENERAL_DAWN_CHASING_AWAY_THE_NIGHT, "Successfully redeem the broken soul who lost everything. This is the dawn of a new era for Mareth.");
 		}
 		
 		public function achievementsScreen():void {

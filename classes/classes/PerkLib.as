@@ -437,8 +437,8 @@ public class PerkLib
 				"You've chosen the 'War Mage ( Master )' perk, increasing maximum wrath by 250, decrease mana costs of spells by 20%, mana recovery increased by 1% of max mana and safe limit for spellcasting increased by 5%.")
 				.withBuffs({'maxwrath_base':+250});
 		public static const FlyingSwordPath:PerkType = mk("Flying Sword Path", "Flying Sword Path",
-				"Allows you to control flying swords. With spending enough soulforce can even fly on them. (+50 max soulforce)",
-				"You've chosen the 'Flying Sword Path' perk. Allows you to control flying swords. With spending enough soulforce can even fly on them. (+50 max soulforce)")
+				"Allows you to control flying swords. With spending enough soulforce can even fly on them.",
+				"You've chosen the 'Flying Sword Path' perk. Allows you to control flying swords. With spending enough soulforce can even fly on them.")
 				.withBuffs({'maxsf_base':+50});
 		public static const SoaringBlades:PerkType = mk("Soaring Blades", "Soaring Blades",
 				"Reduce SF cost of attacking with flying swords or flying on them by 20% per each stage of dantain attained.",
@@ -2559,6 +2559,8 @@ public class PerkLib
 		public static const Sadist:PerkType = mk("Sadist", "Sadist",
 				"Deal 20% more damage, but gain lust at the same time.",
 				"You've chosen the 'Sadist' perk, increasing damage by 20 percent but causing you to gain lust from dealing damage.");
+		public static const SageMedicine:PerkType = mk("Sage Medicine", "Sage Medicine",
+				"Sage Medicine used for the Azazel ascension, reduces minimum corruption caused by havinng a soul Phylactery");
 		public static const Saint:PerkType = mk("Saint", "Saint",
 				"You go on periodic journeys to spread your faith and help those in need. These constant pilgrimages decrease your minimum libido and boost lust resistance. (-2 min libido/+5% to lust resistance)",
 				"You've chosen the 'Saint' perk, lowering min libido by 2 and raise lust resistance by 5%.");
@@ -3536,6 +3538,8 @@ public class PerkLib
 				"Allows access to Fenrir (AoE) freezing breath attack.");
 		public static const FreezingBreathYeti:PerkType = mk("Freezing Breath (Y)", "Freezing Breath (Y)",
 				"Allows access to Yeti freezing breath attack.");
+		public static const FromTheFrozenWaste:PerkType = mk("From the frozen waste", "Lord of the Frozen Wastes",
+				"The icy wastes where winter reigns are your domain. You are resistant to cold but vulnerable to heat.");
 		public static const FutaFaculties:PerkType = mk("Futa Faculties", "Futa Faculties",
 				"It's super hard to think about stuff that like, isn't working out or fucking!").withBuffs({'int.mult':-0.50});
 		public static const FutaForm:PerkType = mk("Futa Form", "Futa Form",
@@ -3545,6 +3549,8 @@ public class PerkLib
 				"Your body can remember almost any transformation it undergone.");
 		public static const Ghostslinger:PerkType = mk("Ghost-slinger", "Ghost-slinger",
 				"Increases damage with guns and thrown weapons by 15%.");
+		public static const GiantMight:PerkType = mk("Giant might", "Giant might",
+				"You count as five times taller than your effective base size for the purpose of perk effects.");
 		public static const GoblinoidBlood:PerkType = mk("Goblinoid blood", "Goblinoid blood",
 				"Your blood is highly susceptible to chemical drugs, stimulants and poisons.");
 		public static const Greedy:PerkType = mk("Greedy", "Greedy",
@@ -3599,8 +3605,8 @@ public class PerkLib
 				"Your natural weapons are charged with raiju electricity adding a lusty discharge effect to all attacks.");
 		public static const LizanRegeneration:PerkType = mk("Lizan Regeneration", "Lizan Regeneration",
 				"Regenerates 1.5% of HP per round in combat and 3% of HP per hour and additional slightly increasing maximal attainable natural healing rate.");
-		public static const FromTheFrozenWaste:PerkType = mk("From the frozen waste", "Lord of the Frozen Wastes",
-				"The icy wastes where winter reigns are your domain. You are resistant to cold but vulnerable to heat.");
+		public static const LustingWarrior:PerkType = mk("Lusting Warrior", "Lusting Warrior",
+				"As a salamander, while in heat or rutting add your libido to your strength as your lust for battle and sex empowers you with might.");
 		public static const Lustzerker:PerkType = mk("Lustzerker", "Lustzerker",
 				"Lustserking increases attack and physical defenses resistance but reduces lust resistance.")
 				.withBuffs({'maxwrath_base':+500});
@@ -3628,8 +3634,6 @@ public class PerkLib
 				"Your vision is magical in nature and see the world as it truly is defeating glamors, illusions and spatial displacement. You also have a +20% to your base accuracy from your peerless view.");
 		public static const Omnicaster:PerkType = mk("Omnicaster", "Omnicaster",
 				"Your magic power is as manyfold as the number of your eyes. Deal less individual damage but cast multiple spells at the same time.");
-		public static const GiantMight:PerkType = mk("Giant might", "Giant might",
-				"You count as five times taller than your effective base size for the purpose of perk effects.");
 		public static const Oviposition:PerkType = mk("Oviposition", "Oviposition",
 				"Causes you to regularly lay eggs when not otherwise pregnant.");
 		public static const PhantomShooting:PerkType = mk("Phantom Shooting", "Phantom Shooting",
@@ -3710,6 +3714,8 @@ public class PerkLib
 				"Grants immunity to Basilisk's paralyzing gaze. Disables Basilisk Bad End.");
 		public static const BulgeArmor:PerkType = mk("Bulge Armor", "Bulge Armor",
 				"Grants a 5 point damage bonus to dick-based tease attacks.");
+		public static const ConvictionOfPurpose:PerkType = mk("Conviction of purpose", "Conviction of purpose",
+				"Corruption meter now increase lust resistance based on purity.");
 		public static const Cornucopia:PerkType = mk("Cornucopia", "Cornucopia",
 				"Vaginal and Anal capacities increased by 30.");
 		public static const CraftedArrows:PerkType = mk("Crafted Arrows", "Crafted Arrows",
@@ -3758,6 +3764,8 @@ public class PerkLib
 				"Add a small measure of your speed to your tease damage.");
 		public static const Hellfire:PerkType = mk("Hellfire", "Hellfire",
 				"Grants a corrupted fire breath attack, like the hellhounds in the mountains.");
+		public static const Immortality:PerkType = mk("Immortality", "Immortality",
+				"Cannot lose combat by damage. Damage taken below 0 instead cause player to take serious lust damage.");
 		public static const IntermediateLeadership:PerkType = mk("Intermediate Leadership", "Intermediate Leadership",
 				"Allows to form 3 people party.");
 		public static const LuststickAdapted:PerkType = mk("Luststick Adapted", "Luststick Adapted",
@@ -3790,11 +3798,15 @@ public class PerkLib
 				"Your constant desire for sex causes your sexual organs to be able to take larger insertions and disgorge greater amounts of fluid.");
 		public static const Phylactery:PerkType = mk("Phylactery", "Phylactery",
 				"Your soul has been safely stored into a phylactery allowing you to fully unlock your potential as a demon.").withBuffs({'int.mult':0.75});
+		public static const InnerPhylactery:PerkType = mk("InnerPhylactery", "InnerPhylactery",
+				"Your soul has been safely stored into a phylactery allowing you to fully unlock your potential as a demon, since fusing back into your body to sit beside your heart.").withBuffs({'int.mult':0.75});
 		public static const PilgrimsBounty:PerkType = mk("Pilgrim's Bounty", "Pilgrim's Bounty",
 				"Causes you to always cum as hard as if you had max lust.");
 		public static const ProductivityDrugs:PerkType = new ProductivityDrugsPerk();
 		public static const PureAndLoving:PerkType = mk("Pure and Loving", "Pure and Loving",
 				"Your caring attitude towards love and romance makes you slightly more resistant to lust and corruption.");
+		public static const SealSin:PerkType = mk("Seal Sin", "Seal Sin",
+				"Silence black magic and shut down tease type ability.");
 		public static const SenseCorruption:PerkType = mk("Sense Corruption", "Sense Corruption",
 				"Allow you to determine how corrupted or pure the enemy is.");
 		public static const SenseWrath:PerkType = mk("Sense Wrath", "Sense Wrath",
@@ -4008,7 +4020,7 @@ public class PerkLib
 		public static const Equilibrium:PerkType = mk("Equilibrium", "Equilibrium",
 				"You can cast now any spell you learned even if you missing additional materials or not meet requirements. Slight increase cap on stored bones for necromancers. (+10% to OverMax Mana)");
 		public static const HyperCasting:PerkType = mk("Hyper Casting", "Hyper Casting",
-				"Decrease CD for spells: -1 for tier 1, -2 for tier 2 and -4 for tier 3. Allow to always autocast buff spells. (+10% to OverMax Mana)");
+				"Decrease CD for spells: -1 for tier 1, -2 for tier 2 and -4 for tier 3. Reduce spells costs by 20% (that affect bones used by necro spells too). Allow to always autocast buff spells. (+10% to OverMax Mana)");
 		public static const DeityJobMunchkin:PerkType = mk("Deity Job: Munchkin", "Job ( Deity ): Munchkin",
 				"You're Munchkin, an ultimate being that possess a god-like body and powers. (+20% max HP/Lust/Wrath, +10% max SF/Mana/Fatigue, increase limit of negative HP equal to all stats (aside of corruption) added up)")
 				.withBuffs({
@@ -4025,11 +4037,13 @@ public class PerkLib
 		public static const AsuraToughness:PerkType = mk("Asura Toughness", "Asura Toughness",
 				"X th Asura super perk. (+10% of OverMax Wrath/Base TOU Cap)");
 		public static const BloodDemonWisdom:PerkType = mk("Blood Demon Wisdom", "Blood Demon Wisdom",
-				"X th Blood demon super perk. (+10% of OverMax HP, -5% blood spells/soulskills cost, +30% blood spells/soulskills power/Base WIS Cap)");
+				"X th Blood demon super perk. (+10% of OverMax HP, -5% blood spells/soulskills cost, +30% blood spells/soulskills power, +10% Base WIS Cap)");
 		public static const AsuraSpeed:PerkType = mk("Asura Speed", "Asura Speed",
 				"X th Asura super perk. (+10% of OverMax Wrath/Base SPE Cap)");
 		public static const BloodDemonIntelligence:PerkType = mk("Blood Demon Intelligence", "Blood Demon Intelligence",
-				"X th Blood demon super perk. (+10% of OverMax HP, -5% blood spells/soulskills cost, +30% blood spells/soulskills power/Base INT Cap)");
+				"X th Blood demon super perk. (+10% of OverMax HP, -5% blood spells/soulskills cost, +30% blood spells/soulskills power, +10% Base INT Cap)");
+		public static const GreySageIntelligence:PerkType = mk("Grey Sage Intelligence", "Grey Sage Intelligence",
+				"X th Grey Sage super perk. (+10% of OverMax Mana, , +10% Base INT Cap)");
 		public static const HiddenJob4:PerkType = mk("Hidden Job: 4", "Hidden Job: 4",
 				".");
 		public static const HiddenJob3:PerkType = mk("Hidden Job: 3", "Hidden Job: 3",
@@ -7071,12 +7085,12 @@ public class PerkLib
 					return player.playerMinionsCount() >= 10;
 					}, "10+ pets/minions");
 			LimitBreakerFlesh1stStage.requireLevel(54)
-					.requirePerk(LimitBreakerHeart1stStage);/*
+					.requirePerk(LimitBreakerHeart1stStage);
 			ArcaneVenom.requireLevel(54)
 					.requirePerk(VerdantLeech)
 					.requireInt(200)
 					.requireLib(200)
-					.requireCor(50);*/
+					.requireCor(50);
             //Tier 10
             ChimericalBodySemiPeerlessStage.requirePerk(ChimericalBodySuperiorStage)
                     .requireLevel(60)
@@ -7292,4 +7306,4 @@ public class PerkLib
         }
 	}
 }
-}
+}

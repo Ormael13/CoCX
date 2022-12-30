@@ -44,7 +44,9 @@ public class CurseOfWeepingSpell extends AbstractHexSpell {
 	}
 	
 	override public function calcCooldown():int {
-		return 10;
+		var calcC:int = 7;
+		calcC += spellGenericCooldown();
+		return calcC;
 	}
 	
 	override protected function usabilityCheck():String {

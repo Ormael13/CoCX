@@ -1162,7 +1162,7 @@ public class Camp extends NPCAwareContent{
 
 	public function loversCount():Number {
 		var counter:Number = 0;
-		if (flags[kFLAGS.ALVINA_FOLLOWER] > 19) counter++;
+		if (flags[kFLAGS.ALVINA_FOLLOWER] > 19 || SceneLib.alvinaFollower.AlvinaPurified) counter++;
 		if (arianScene.arianFollower()) counter++;
 		if (BelisaFollower.BelisaInCamp) counter++;
 		if (LilyFollower.LilyFollowerState) counter++;
@@ -1303,7 +1303,11 @@ public class Camp extends NPCAwareContent{
 				buttons.add("DriderTown", SceneLib.dridertown.DriderTownEnter).hint("Check up on Belisa, Lily & Tyrantia.");
 			}
 			//Alvina
-			if (flags[kFLAGS.ALVINA_FOLLOWER] > 19) {
+			if (SceneLib.alvinaFollower.AlvinaPurified) {
+				SceneLib.alvinaFollower.alvinaPureCampDescript();
+				buttons.add("Alvina", SceneLib.alvinaFollower.alvinaPureMainCampMenu).hint("Check up on Alvina.");
+			}
+			else if (flags[kFLAGS.ALVINA_FOLLOWER] > 19) {
 				outputText("Alvina isn’t so far from here, having made her [camp] in a corrupted plant groove she created so to have easy access to reagents.\n\n");
 				buttons.add("Alvina", SceneLib.alvinaFollower.alvinaMainCampMenu).hint("Check up on Alvina.");
 			}
@@ -1791,7 +1795,7 @@ public class Camp extends NPCAwareContent{
 				buttons.add("Aurora", SceneLib.auroraFollower.auroraCampMenu).hint("Check up on Aurora.").disableIf(player.statusEffectv2(StatusEffects.CampSparingNpcsTimers4) > 0, "Training.");
 			}
 			//Alvina
-			if (flags[kFLAGS.ALVINA_FOLLOWER] > 12 && flags[kFLAGS.ALVINA_FOLLOWER] < 20) {
+			if (flags[kFLAGS.ALVINA_FOLLOWER] > 12 && flags[kFLAGS.ALVINA_FOLLOWER] < 20 && !SceneLib.alvinaFollower.AlvinaPurified) {
 				outputText("Alvina isn’t so far from here, having made her [camp] in a corrupted plant groove she created so to have easy access to reagents.\n\n");
 				buttons.add("Alvina", SceneLib.alvinaFollower.alvinaMainCampMenu).hint("Check up on Alvina.");
 			}
@@ -1835,6 +1839,8 @@ public class Camp extends NPCAwareContent{
 					else outputText("Joy herself is nowhere to be found, she's probably out frolicking about or sitting atop the boulder.");
 					outputText("\n\n");
 					buttons.add("Joy", joyScene.approachCampJoy).hint("Go find Joy around the edges of your [camp] and meditate with her or have sex with her.");
+				} if (SceneLib.alvinaFollower.JojoDevilPurification == 1 && !player.hasStatusEffect(StatusEffects.DevilPurificationScar)) {
+					outputText("Jojo is waiting in the forrest, bring him a pure artifact and he will cleanse you of your taint.");
 				} else {
 					outputText("There is a small bedroll for Jojo near your own");
 					if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0) outputText(" cabin");
@@ -3185,7 +3191,7 @@ public class Camp extends NPCAwareContent{
 //-----------------
 	public function restMenu():void {
 		menu();
-		addButton(0, "1 Hour", 	restFor, 1).hint("Rest for one hour.");
+		addButton(0, "1 Hour",  restFor, 1).hint("Rest for one hour.");
 		addButton(1, "2 Hours", restFor, 2).hint("Rest for two hours.");
 		addButton(2, "3 Hours", restFor, 3).hint("Rest for three hours.");
 		addButton(3, "4 Hours", restFor, 4).hint("Rest for four hours.");
@@ -3287,6 +3293,16 @@ public class Camp extends NPCAwareContent{
 			//Hungry
 			if (flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger < 25) {
 				outputText("\nYou have difficulty resting as you toss and turn with your stomach growling.\n");
+			}
+			if (SceneLib.alvinaFollower.AlvinaPurified) {
+				var mincor:int = player.getAllMinStats().cor;
+				if (player.cor == 0 || player.cor <= mincor) {}
+				else {
+					outputText("\nYour purified lover Alvina exudes a calming and purifying aura which helps you shed some of your build up corruption.\n");
+					if (player.cor >= mincor+10) dynStats("cor", -10);
+					else dynStats("cor", -(player.cor - mincor));
+				}
+
 			}
 
 			EngineCore.HPChangeNotify(player.HP - hpBefore);
@@ -3863,9 +3879,9 @@ public class Camp extends NPCAwareContent{
 				.hint("Visit Chicken Harpy in the High Mountains.")
 				.disableIf(!player.hasItem(consumables.OVIELIX), "You need to have at least 1-2 ovi elixirs to have reason to look for her.")
 				.disableIf(flags[kFLAGS.TIMES_MET_CHICKEN_HARPY] <= 1, "Search the high mountains with ovi elixir.", null, "???");
-		bd.add("Oasis Tower", SceneLib.highMountains.minervaScene.encounterMinerva)
-				.hint("Visit the ruined tower in the high mountains where Minerva resides.")
-				.disableIf(flags[kFLAGS.MET_MINERVA] < 4, "Search the high mountains.", null, "???");
+		bd.add("Oasis Tower", SceneLib.mountain.minervaScene.encounterMinerva)
+				.hint("Visit the ruined tower in the mountains where Minerva resides.")
+				.disableIf(flags[kFLAGS.MET_MINERVA] < 4, "Search the mountains.", null, "???");
 		// Row 4 - places/NPCs 11-15
 		bd.add("Elven grove", SceneLib.woodElves.GroveLayout)
 				.hint("Visit the elven grove where the wood elves spend their somewhat idylic lives.")
@@ -4025,8 +4041,8 @@ public class Camp extends NPCAwareContent{
 
 		if (flags[kFLAGS.KITSUNE_SHRINE_UNLOCKED] > 0) addButton(5, "Shrine", SceneLib.kitsuneScene.kitsuneShrine).hint("Visit the kitsune shrine in the deepwoods.");
 		else addButtonDisabled(5, "???", "Search the deepwoods.");
-		if (flags[kFLAGS.MET_MINERVA] >= 4) addButton(6, "Oasis Tower", SceneLib.highMountains.minervaScene.encounterMinerva).hint("Visit the ruined tower in the high mountains where Minerva resides.");
-		else addButtonDisabled(6, "???", "Search the high mountains.");
+		if (flags[kFLAGS.MET_MINERVA] >= 4) addButton(6, "Oasis Tower", SceneLib.mountain.minervaScene.encounterMinerva).hint("Visit the ruined tower in the mountains where Minerva resides.");
+		else addButtonDisabled(6, "???", "Search the mountains.");
 		if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] > 0) addButton(7, "Temple", SceneLib.templeofdivine.repeatvisitintro).hint("Visit the temple in the high mountains where Sapphire resides.");
 		else addButtonDisabled(7, "???", "Search the high mountains.");
 		if (flags[kFLAGS.YU_SHOP] == 2) addButton(8, "Winter Gear", SceneLib.glacialYuShop.YuIntro).hint("Visit the Winter gear shop.");
@@ -4687,4 +4703,4 @@ public function rebirthFromBadEnd():void {
 	}
 
 }
-}
+}

@@ -94,6 +94,8 @@ private function checkBakeryMenu():void {
 		outputText("Giant Chocolate Cupcake - 500 gems.\n");
 		addButton(9, "GiantCupcake", buySlutCake);
 	}
+	outputText("Box of Chocolates - 50 gems.\n");
+	addButton(11, "Chocolates", buyChocolates);
 	outputText("\n");
 	displayIngredients();
 	outputText("\nWhat will you order?");
@@ -505,6 +507,19 @@ private function buyHummus():void {
 	player.gems -= 100;
 	statScreenRefresh();
 	inventory.takeItem(consumables.HUMMUS_, checkBakeryMenu);
+}
+
+private function buyChocolates():void {
+	clearOutput();
+	if (player.gems < 50) {
+		outputText("You can't afford one of those!");
+		doNext(checkBakeryMenu);
+		return;
+	}
+	outputText("You pay fifty gems for a box of chocolates.  ");
+	player.gems -= 50;
+	statScreenRefresh();
+	inventory.takeItem(consumables.CHOCBOX, checkBakeryMenu);
 }
 
 private function easterBakeSale():void {

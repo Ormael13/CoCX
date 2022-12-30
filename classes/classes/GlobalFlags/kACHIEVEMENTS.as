@@ -232,7 +232,7 @@ package classes.GlobalFlags
 		public static const GENERAL_STATS_300:int					= 198;
 		public static const GENERAL_STATS_500:int					= 199;
 		public static const ZONE_DIVER:int							= 200; //Explore Deep Sea 100 times.
-		public static const ZONE_ROOKIE:int							= 201; //Explore Outer Battlefield 100 times.
+		public static const ZONE_ROOKIE:int							= 201; //Explore Boundary Battlefield 100 times.
 		public static const DUNGEON_TIGER_STALKING_THE_DRAGON:int	= 202;
 		public static const DUNGEON_SLAIN_THE_HEROSLAYER:int		= 203;
 		public static const GENERAL_BAD_ENDER_2:int					= 204; //Cause 4 bad ends to various NPCs.
@@ -240,7 +240,7 @@ package classes.GlobalFlags
 		public static const GENERAL_BAD_ENDER_4:int					= 206; //Cause 16 bad ends to various NPCs.
 		public static const DUNGEON_DELVER_EXPERT:int				= 207;
 		public static const DUNGEON_DELVER_GRAND_MASTER:int			= 208;
-		public static const UNKNOWN_ACHIEVEMENT_209:int				= 209; //Explore Outer Battlefield 100 times.
+		public static const ZONE_FRIGGIN_GOLEMS:int					= 209; //Explore Outer Battlefield 100 times.
 		public static const UNKNOWN_ACHIEVEMENT_210:int				= 210; //Explore Inner Battlefield 100 times.
 		public static const UNKNOWN_ACHIEVEMENT_211:int				= 211; //Explore 3rd area post inner battlefield 100 times.
 		public static const GENERAL_LESSER_CHIMERA:int				= 212;
@@ -331,7 +331,7 @@ package classes.GlobalFlags
 		public static const GENERAL_PLAY_DEAD_FIDO_3_IM_BACK:int				= 286;
 		
 		public static const ZONE_CAVEMAN:int						= 287; //100 exploration of Caves
-		public static const ZONE_288:int		= 288;//100 exploration of Deep Desert
+		public static const ZONE_288:int		= 288;//100 exploration of Desert (Inner)
 		public static const ZONE_289:int		= 289;//100 exploration of Inner Battlefield (Warmoger lub dla 3 obszaru battlefield-a)
 		public static const ZONE_DEFILED:int						= 290;//100 exploration of Defiled Ravine
 		public static const ZONE_291:int		= 291;//100 exploration of Marsh
@@ -347,8 +347,8 @@ package classes.GlobalFlags
 		public static const ZONE_301:int		= 301;//100 exploration of 2nd plains related area
 		public static const ZONE_302:int		= 302;//100 exploration of 3rd plains related area
 		public static const ZONE_303:int		= 303;//100 exploration of Deeper Caves
-		public static const ZONE_304:int		= 304;//100 exploration of x1
-		public static const ZONE_305:int		= 305;//100 exploration of x2
+		public static const ZONE_HIKING:int							= 304;//100 exploration of Hills
+		public static const ZONE_TREKKING:int						= 305;//100 exploration of Low Mountains
 		
 		public static const GENERAL_TEXAS_RANGER:int					= 306;
 		public static const UNKNOWN_ACHIEVEMENT_307:int					= 307;	//GENERAL_VAN_DAMME_IT
@@ -436,10 +436,10 @@ package classes.GlobalFlags
 		public static const EPIC_F_H_B_S_CURVIER_5:int					= 389;
 		public static const FASHION_SUBJECT_DELTA:int					= 390;
 		public static const FASHION_BUSHIDO_THE_WAY_OF_THE_WARRIOR:int	= 391;
-		public static const UNKNOWN_ACHIEVEMENT_392:int					= 392;
-		public static const UNKNOWN_ACHIEVEMENT_393:int					= 393;
-		public static const UNKNOWN_ACHIEVEMENT_394:int					= 394;
-		public static const UNKNOWN_ACHIEVEMENT_395:int					= 395;
+		public static const GENERAL_THE_END_AND_THE_BEGINNING:int		= 392;
+		public static const GENERAL_BEYOND_GODS_AND_MORTALS:int			= 393;
+		public static const GENERAL_DAWN_CHASING_AWAY_THE_NIGHT:int		= 394;
+		public static const HOLIDAY_YEAR_OF_THE_GOAT:int				= 395;
 		public static const UNKNOWN_ACHIEVEMENT_396:int					= 396;
 		public static const UNKNOWN_ACHIEVEMENT_397:int					= 397;
 		public static const UNKNOWN_ACHIEVEMENT_398:int					= 398;

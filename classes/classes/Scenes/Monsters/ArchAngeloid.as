@@ -9,20 +9,27 @@ package classes.Scenes.Monsters
 	import classes.BodyParts.Wings;
 	import classes.Scenes.SceneLib;
 	
-	public class AngelMR extends AbstractAngel
+	public class ArchAngeloid extends AbstractAngel
 	{
 		private function angelReactsToLustiness():void {
-			outputText("Angel stops their actions clearly overflowing with lust.");
+			outputText("ArchAngeloid stops their actions clearly overflowing with lust.");
 			outputText("\n\n\"<i>Sinner!!! We.Must.Contact.Supreviser.</i>\"");
-			outputText("\n\nThe angel starts to burn more and more intense causing you to temporaly avert your gaze. When you look agian at spot it was you could only see a bit of ashes.");
+			outputText("\n\nThe archangeloid starts to burn more and more intense causing you to temporaly avert your gaze. When you look again at spot it was you could only see a bit of ashes.");
 			gems = 0;
 			XP = 0;
 			HP = minHP() - 1;
 			SceneLib.combat.cleanupAfterCombatImpl();
 		}
 		
+		private function AngelHailOfBlades():void {
+			
+		}
+		private function AngelHailOfBladesD():void {
+			
+		}
+		
 		private function AngelEnergyRays():void {
-			outputText("Angel fixates you with all of its eyes unleashing a barrage of rays at you! ");
+			outputText("ArchAngeloid fixates you with all of its eyes unleashing a barrage of rays at you! ");
 			var omni:Number = 4;
 			if (hasStatusEffect(StatusEffects.TrueFormAngel)) omni *= 4;
 			while (omni-->0) AngelEnergyRaysD();
@@ -36,7 +43,7 @@ package classes.Scenes.Monsters
 		}
 		
 		private function AngelBaseAttack():void {
-			outputText("Angel gather energy and then blasts it toward you. ");
+			outputText("ArchAngeloid gather energy and then blasts it toward you. ");
 			var damage:Number = eBaseWisdomDamage() * 0.5;
 			damage += eBaseIntelligenceDamage() * 0.1;
 			damage = Math.round(damage);
@@ -47,16 +54,16 @@ package classes.Scenes.Monsters
 		override protected function performCombatAction():void
 		{
 			if (hasStatusEffect(StatusEffects.TrueFormAngel)) {
-				if (!hasStatusEffect(StatusEffects.TranscendentSoulField) && soulforce >= 10) createStatusEffect(StatusEffects.TranscendentSoulField, 10, 10, 0, 0);
+				if (!hasStatusEffect(StatusEffects.TranscendentSoulField) && soulforce >= 20) createStatusEffect(StatusEffects.TranscendentSoulField, 20, 20, 0, 0);
 				if (hasStatusEffect(StatusEffects.TranscendentSoulField)) {
-					if (soulforce >= 10) soulforce -= 10;
+					if (soulforce >= 20) soulforce -= 20;
 					else removeStatusEffect(StatusEffects.TranscendentSoulField);
 				}
 			}
 			else {
-				if (!hasStatusEffect(StatusEffects.TranscendentSoulField) && soulforce >= 5) createStatusEffect(StatusEffects.TranscendentSoulField, 5, 5, 0, 0);
+				if (!hasStatusEffect(StatusEffects.TranscendentSoulField) && soulforce >= 10) createStatusEffect(StatusEffects.TranscendentSoulField, 10, 10, 0, 0);
 				if (hasStatusEffect(StatusEffects.TranscendentSoulField)) {
-					if (soulforce >= 5) soulforce -= 5;
+					if (soulforce >= 10) soulforce -= 10;
 					else removeStatusEffect(StatusEffects.TranscendentSoulField);
 				}
 			}
@@ -73,14 +80,14 @@ package classes.Scenes.Monsters
 			touStat.core.value += TB;
 			speStat.core.value += SB;
 			wisStat.core.value += WB;
-			createPerk(PerkLib.MonsterRegeneration, 1, 0, 0, 0);
-			addPerkValue(PerkLib.DieHardHP, 1, 6);
-			addStatusValue(StatusEffects.TranscendentSoulField, 1, 5);
-			addStatusValue(StatusEffects.TranscendentSoulField, 2, 5);
+			createPerk(PerkLib.MonsterRegeneration, 2, 0, 0, 0);
+			addPerkValue(PerkLib.DieHardHP, 1, 12);
+			addStatusValue(StatusEffects.TranscendentSoulField, 1, 10);
+			addStatusValue(StatusEffects.TranscendentSoulField, 2, 10);
 			HP = maxHP();
 			bonusWrath += 200;
 			bonusSoulforce += 400;
-			outputText("Staggering back, Angel wastes no time and above it head starts to manifest sort of halo. All irises become uniform purple colored. And around it body manifest three crossed circles with three eyes looking exactly the same as main eye down to each detail including dual irises.\n"
+			outputText("Staggering back, ArchAngeloid wastes no time and above it head starts to manifest sort of halo. All irises become uniform purple colored. And around it body manifest three crossed circles with three eyes looking exactly the same as main eye down to each detail including dual irises.\n"
 				+ "\"<i>Don't be afraid!!!</i>\" it whispers loud enough for you to hear before launching up to continue the fight.");
 			createStatusEffect(StatusEffects.TrueFormAngel, 0, 0, 0, 0);
 			SceneLib.combat.combatRoundOver();
@@ -100,7 +107,8 @@ package classes.Scenes.Monsters
 		
 		override public function get long():String
 		{
-			var str:String = "You're currently fighting mid-rank angel. It's looks like winged eyeball with small mouth full of jagged teeth and two eye having two";
+			var str:String = "You're currently fighting ";
+			str += "mid - rank angel. It's looks like winged eyeball with small mouth full of jagged teeth and two eye having two";
 			if (hasStatusEffect(StatusEffects.TrueFormAngel)) str += " purple irises each. Around it body are three circles each with three eyes looking the same as the main eye and above head hoover halo.";
 			else str += " irises each, one red and the other blue.";
 			if (hasStatusEffect(StatusEffects.TranscendentSoulField))
@@ -112,33 +120,54 @@ package classes.Scenes.Monsters
 			return str;
 		}
 		
-		public function AngelMR() 
+		public function ArchAngeloid() 
 		{
 			super(false);
 			this.a = "the ";
-			this.short = "mid-rank angel";
-			this.imageName = "angel";
+			this.imageName = "archangeloid";
 			this.long = "";
-			initStrTouSpeInte(5, 60, 30, 15);
-			initWisLibSensCor(120, 3, 20, 0);
+			if (player.statusEffectv1(StatusEffects.AngelsChooser) == 1) {
+				this.short = "low-rank archangeloid";
+				initStrTouSpeInte(10, 120, 60, 30);
+				initWisLibSensCor(160, 6, 50, 0);
+				this.level = 24;
+				this.bonusHP = 1000;
+				this.bonusLust = 80;
+				this.bonusWrath = 250;
+				this.bonusSoulforce = 500;
+				this.additionalXP = 150;
+				this.weaponAttack = 10;
+				this.armorDef = 30;
+				this.armorMDef = 30;
+				this.createPerk(PerkLib.DieHardHP, 12, 0, 0, 0);
+			}
+			if (player.statusEffectv1(StatusEffects.AngelsChooser) == 2)  {
+				this.short = "mid-rank archangeloid";
+				initStrTouSpeInte(12, 140, 70, 35);
+				initWisLibSensCor(180, 7, 60, 0);
+				this.level = 30;
+				this.bonusHP = 1200;
+				this.bonusLust = 97;
+				this.bonusWrath = 300;
+				this.bonusSoulforce = 600;
+				this.additionalXP = 180;
+				this.weaponAttack = 12;
+				this.armorDef = 36;
+				this.armorMDef = 36;
+				this.createPerk(PerkLib.DieHardHP, 15, 0, 0, 0);
+			}
+			if (player.statusEffectv1(StatusEffects.AngelsChooser) == 3)  {
+				this.short = "high-rank archangeloid";
+			}
 			this.tallness = 30;
 			this.drop = NO_DROP;
 			this.level = 12;
-			this.bonusHP = 400;
-            this.bonusLust = 33;
-			this.bonusWrath = 100;
-			this.bonusSoulforce = 200;
-			this.additionalXP = 60;
 			this.weaponName = "energy blast";
 			this.weaponVerb = "shoot";
-			this.weaponAttack = 4;
 			this.armorName = "skin";
-			this.armorDef = 12;
-			this.armorMDef = 12;
 			this.wings.type = Wings.FEATHERED_AVIAN;
-			this.createStatusEffect(StatusEffects.TranscendentSoulField, 5, 5, 0, 0);//X times less dmg, +X lvl diff bonus
+			this.createStatusEffect(StatusEffects.TranscendentSoulField, 10, 10, 0, 0);//X times less dmg, +X lvl diff bonus
 			this.createStatusEffect(StatusEffects.Flying, 50, 0, 0, 0);
-			this.createPerk(PerkLib.DieHardHP, 6, 0, 0, 0);
 			checkMonster();
 		}
 		

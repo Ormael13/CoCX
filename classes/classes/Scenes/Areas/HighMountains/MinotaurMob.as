@@ -176,7 +176,7 @@ import classes.display.SpriteDb;
 		override public function defeated(hpVictory:Boolean):void
 		{
 			if (flags[kFLAGS.ETNA_FOLLOWER] == 3) SceneLib.etnaScene.etnaMarriageYes4();
-			else SceneLib.highMountains.minotaurMobScene.victoryMinotaurGang();
+			else SceneLib.mountain.minotaurMobScene.victoryMinotaurGang();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -187,7 +187,7 @@ import classes.display.SpriteDb;
 				outputText("\n\nThe minutaurs share a laugh while you cum, but their throbbing erections don't subside in the slightest.");
 				doNext(SceneLib.combat.endLustLoss);
 			} else {
-				SceneLib.highMountains.minotaurMobScene.minotaurDeFeet();
+				SceneLib.mountain.minotaurMobScene.minotaurDeFeet();
 			}
 		}
 
@@ -244,8 +244,8 @@ import classes.display.SpriteDb;
 				bonusHP += 50 * (game.flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] - 3);
 				if((game.flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] - 3) * 2 > 13) lustVuln = .3;
 				else lustVuln -= (game.flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] - 3) * 0.02;
-				this.bonusLust = 115 * Math.round((game.flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] - 3)/2);
-				var level:int = 26 + Math.round((game.flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] - 3)/2);
+				this.bonusLust = 105 * Math.round((game.flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] - 3)/2);
+				var level:int = 16 + Math.round((game.flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] - 3)/2);
 				if(level > 29) level = 29;
 				this.level = level;
 			}
@@ -262,5 +262,4 @@ import classes.display.SpriteDb;
 			checkMonster();
 		}
 	}
-
 }

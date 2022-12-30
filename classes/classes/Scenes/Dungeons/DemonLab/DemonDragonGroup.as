@@ -25,7 +25,7 @@ public class DemonDragonGroup extends Monster {
         //this.imageName = "goblinwarrior";
         this.long = "Five crimson-scaled beings stand in front of you. Four are female, D-cup breasts and drooling cunts fully exposed. Small demonic horns jut from their foreheads, and their scaled tails are black and red, with a slight spade at the end. They grin at you, reptilian eyes wide with anticipation as they bob from side to side on taloned feet. In their hands are thin steel spears, and as they eye you, undisguised lust in their eyes. The final draconic being stands a half-foot taller than the next largest dragonoid, barrel-chested and heavily armoured, wielding a sword over eight feet long, he takes a step towards you. Bull-like horns on the top of his head glint in the firelight, and his scent, like burnt semen, washes over you.";
         this.plural = true;
-        if (player.hasCock()) this.long += "\n\n  While the four dragonesses seem interested in your manmeat, the male seems angered by the attention you seem to be getting";
+        if (player.hasCock()) this.long += "\n\nWhile the four dragonesses seem interested in your manmeat, the male seems angered by the attention you seem to be getting";
         this.createVagina(false, VaginaClass.WETNESS_DROOLING, VaginaClass.LOOSENESS_NORMAL);
         //this.createCock ();
         this.createStatusEffect(StatusEffects.BonusVCapacity, 20, 0, 0, 0);

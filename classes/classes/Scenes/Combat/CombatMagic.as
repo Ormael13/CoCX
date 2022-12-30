@@ -23,7 +23,7 @@ public class CombatMagic extends BaseCombatContent {
 
 	internal function applyAutocast():void {
 		outputText("\n\n");
-		if (!player.hasPerk(PerkLib.HexKnowledge) && !player.hasPerk(PerkLib.HyperCasting)) {
+		if (!player.hasPerk(PerkLib.HexKnowledge) || (player.hasPerk(PerkLib.HexKnowledge) && player.hasPerk(PerkLib.HyperCasting))) {
 			if (player.hasPerk(PerkLib.Spellsword) && CombatAbilities.ChargeWeapon.isKnownAndUsable && flags[kFLAGS.AUTO_CAST_CHARGE_WEAPON_DISABLED] == 0) {
 				CombatAbilities.ChargeWeapon.autocast();
 			}
@@ -31,7 +31,7 @@ public class CombatMagic extends BaseCombatContent {
 				CombatAbilities.ChargeArmor.autocast();
 			}
 		}
-		if (!player.hasPerk(PerkLib.DivineKnowledge) && !player.hasPerk(PerkLib.HyperCasting)) {
+		if (!player.hasPerk(PerkLib.DivineKnowledge) || (player.hasPerk(PerkLib.DivineKnowledge) && player.hasPerk(PerkLib.HyperCasting))) {
 			if (player.hasPerk(PerkLib.Battlemage) && CombatAbilities.Might.isKnownAndUsable && flags[kFLAGS.AUTO_CAST_MIGHT_DISABLED] == 0) {
 				CombatAbilities.Might.autocast();
 			}
@@ -61,6 +61,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.WarMageAdept)) costPercent -= 10;
 		if (player.hasPerk(PerkLib.WarMageExpert)) costPercent -= 15;
 		if (player.hasPerk(PerkLib.WarMageMaster)) costPercent -= 20;
+		if (player.hasPerk(PerkLib.HyperCasting)) costPercent -= 20;
 		if (player.headjewelryName == "fox hairpin") costPercent -= 20;
         if (player.weapon == weapons.N_STAFF) costPercent += 200;
 		if (player.weapon == weapons.U_STAFF) costPercent -= 50;
@@ -250,6 +251,12 @@ public class CombatMagic extends BaseCombatContent {
         if (player.hasStatusEffect(StatusEffects.Maleficium)) {
 			if (player.perkv1(IMutationsLib.ObsidianHeartIM) >= 2) {
 				if (player.perkv1(IMutationsLib.ObsidianHeartIM) >= 3) mod += 2.5;
+				else mod += 1.25;
+			} else mod += 1;
+		}
+        if (player.hasStatusEffect(StatusEffects.PerfectClarity)) {
+			if (player.perkv1(IMutationsLib.DiamondHeartIM) >= 2) {
+				if (player.perkv1(IMutationsLib.DiamondHeartIM) >= 3) mod += 2.5;
 				else mod += 1.25;
 			} else mod += 1;
 		}
@@ -463,6 +470,7 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.necklace == necklaces.LEAFAMU && player.isElf()) mod -= 2;
 			else mod -= 1;
 		}
+		if (player.hasPerk(PerkLib.HyperCasting)) mod -= 1;
 		if (mod < 0) mod = 0;
 		return mod;
 	}
@@ -473,6 +481,7 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.necklace == necklaces.LEAFAMU && player.isElf()) mod -= 2;
 			else mod -= 1;
 		}
+		if (player.hasPerk(PerkLib.HyperCasting)) mod -= 2;
 		if (mod < 0) mod = 0;
 		return mod;
 	}
@@ -484,6 +493,7 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.necklace == necklaces.LEAFAMU && player.isElf()) mod -= 2;
 			else mod -= 1;
 		}
+		if (player.hasPerk(PerkLib.HyperCasting)) mod -= 1;
 		if (mod < 0) mod = 0;
 		return mod;
 	}
@@ -495,6 +505,7 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.necklace == necklaces.LEAFAMU && player.isElf()) mod -= 2;
 			else mod -= 1;
 		}
+		if (player.hasPerk(PerkLib.HyperCasting)) mod -= 2;
 		if (mod < 0) mod = 0;
 		return mod;
 	}
@@ -506,6 +517,7 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.necklace == necklaces.LEAFAMU && player.isElf()) mod -= 2;
 			else mod -= 1;
 		}
+		if (player.hasPerk(PerkLib.HyperCasting)) mod -= 4;
 		if (mod < 0) mod = 0;
 		return mod;
 	}
@@ -517,6 +529,7 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.necklace == necklaces.LEAFAMU && player.isElf()) mod -= 2;
 			else mod -= 1;
 		}
+		if (player.hasPerk(PerkLib.HyperCasting)) mod -= 1;
 		if (mod < 0) mod = 0;
 		return mod;
 	}
@@ -528,6 +541,7 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.necklace == necklaces.LEAFAMU && player.isElf()) mod -= 2;
 			else mod -= 1;
 		}
+		if (player.hasPerk(PerkLib.HyperCasting)) mod -= 2;
 		if (mod < 0) mod = 0;
 		return mod;
 	}
@@ -539,7 +553,18 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.necklace == necklaces.LEAFAMU && player.isElf()) mod -= 2;
 			else mod -= 1;
 		}
+		if (player.hasPerk(PerkLib.HyperCasting)) mod -= 4;
 		if (mod < 0) mod = 0;
+		return mod;
+	}
+
+	internal function spellGenericCooldownImpl():Number {
+		var mod:Number = 3;
+		if (player.hasPerk(PerkLib.NaturalSpellcasting)) {
+			if (player.necklace == necklaces.LEAFAMU && player.isElf()) mod -= 2;
+			else mod -= 1;
+		}
+		if (player.hasPerk(PerkLib.HyperCasting)) mod -= 1;
 		return mod;
 	}
 
@@ -754,9 +779,9 @@ public class CombatMagic extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 			if (player.armor == armors.ELFDRES && player.isElf()) damage *= 2;
         	if (player.armor == armors.FMDRESS && player.isWoodElf()) damage *= 2;
-			if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50) {
+			if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50 && flags[kFLAGS.COMBAT_TEASE_HEALING] == 0) {
 				outputText("\nYou use your own lust against the enemy, cooling off a bit in the process.");
-				player.takeLustDamage(Math.round(-damage)/10, true);
+				player.takeLustDamage(Math.round(-damage)/40, true);
 				damage *= 1.2;
 			}
 			monster.teased(Math.round(monster.lustVuln * damage));
@@ -771,7 +796,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.Venomancy)) {
 			if (player.tailVenom >= player.VenomWebCost()) {
 				var injections:Number = 0;
-				//if (player.hasPerk(PerkLib.ArcaneVenom)) numberOfProcs *= (1 + AbstractSpell.stackingArcaneVenom());
+				if (player.hasPerk(PerkLib.ArcaneVenom)) numberOfProcs *= AbstractSpell.stackingArcaneVenom();
 				while (player.tailVenom >= player.VenomWebCost() && injections < numberOfProcs) {
 					var damageB:Number = 35 + rand(player.lib / 10);
 					var poisonScaling:Number = 1;

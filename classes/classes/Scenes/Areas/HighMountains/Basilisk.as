@@ -30,7 +30,7 @@ import classes.internals.ChainedDrop;
 				}
 				else {
 					outputText("You can't help yourself... you glimpse the reptile's grey, slit eyes. You look away quickly, but you can picture them in your mind's eye, staring in at your thoughts, making you feel sluggish and unable to coordinate. Something about the helplessness of it feels so good... you can't banish the feeling that really, you want to look in the basilisk's eyes forever, for it to have total control over you.");
-					player.takeLustDamage(3, true);
+					player.takeLustDamage(Math.round(player.maxLust() * 0.03), true);
 					//apply status here
 					player.buff("Basilisk Slow").addStats( {"spe":-20} ).withText("Basilisk Slow").combatPermanent();
 					player.createStatusEffect(StatusEffects.BasiliskCompulsion,0,0,0,0);
@@ -45,28 +45,27 @@ import classes.internals.ChainedDrop;
 			}
 		}
 
-
-
 		//Special 3: basilisk tail swipe (Small physical damage):
 		private function basiliskTailSwipe():void {
 			outputText("The basilisk suddenly whips its tail at you, swiping your [feet] from under you!  You quickly stagger upright, being sure to hold the creature's feet in your vision.  ");
-			if (player.takePhysDamage(int((str + 20) - Math.random()*(player.tou+player.armorDef)), true) == 0)
-				outputText("The fall didn't harm you at all.  ");
+			if (player.takePhysDamage(int((str + 20) - Math.random()*(player.tou+player.armorDef)), true) == 0) outputText("The fall didn't harm you at all.  ");
 		}
 
-		//basilisk physical attack: With lightning speed, the basilisk slashes you with its index claws!
-		//Noun: claw
+		private function basiliskClawSlash():void {
+			outputText("With lightning speed, the basilisk slashes you with its index claws! ");
+			player.takePhysDamage(eBaseDamage(), true);
+		}
 
 		override protected function performCombatAction():void
 		{
 			if(!player.hasStatusEffect(StatusEffects.BasiliskCompulsion) && rand(3) == 0 && !hasStatusEffect(StatusEffects.Blind)) compulsion();
 			else if(rand(3) == 0) basiliskTailSwipe();
-			else eAttack();
+			else basiliskClawSlash();
 		}
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			SceneLib.highMountains.basiliskScene.defeatBasilisk();
+			SceneLib.mountain.basiliskScene.defeatBasilisk();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -75,7 +74,7 @@ import classes.internals.ChainedDrop;
 				outputText("\n\nThe basilisk smirks, but waits for you to finish...");
 				doNext(SceneLib.combat.endLustLoss);
 			} else {
-				SceneLib.highMountains.basiliskScene.loseToBasilisk();
+				SceneLib.mountain.basiliskScene.loseToBasilisk();
 			}
 		}
 
@@ -100,25 +99,25 @@ import classes.internals.ChainedDrop;
 			this.skin.growCoat(Skin.SCALES,{color:"gray"},Skin.COVERAGE_COMPLETE);
 			this.hairColor = "none";
 			this.hairLength = 0;
-			initStrTouSpeInte(98, 107, 45, 80);
-			initWisLibSensCor(80, 50, 35, 60);
+			initStrTouSpeInte(138, 167, 75, 130);
+			initWisLibSensCor(130, 50, 35, 60);
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
-			this.weaponAttack = 38;
+			this.weaponAttack = 58;
 			this.armorName = "scales";
-			this.armorDef = 18;
-			this.armorMDef = 18;
+			this.armorDef = 36;
+			this.armorMDef = 36;
 			this.armorPerk = "";
 			this.armorValue = 70;
-			this.bonusHP = 200;
-			this.bonusLust = 109;
+			this.bonusHP = 2000;
+			this.bonusLust = 124;
 			this.lust = 30;
-			this.lustVuln = .5;
-			this.level = 24;
-			this.gems = rand(20) + 40;
+			this.lustVuln = .4;
+			this.level = 39;
+			this.gems = rand(10) + 60;
 			this.drop = new ChainedDrop().add(useables.EBONBLO,1/20)
 					.elseDrop(consumables.REPTLUM);
-			this.tailType = Tail.COW;
+			this.tailType = Tail.LIZARD;
 			this.tailRecharge = 0;
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			checkMonster();

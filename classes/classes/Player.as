@@ -2698,6 +2698,7 @@ use namespace CoC;
 				}
 				//Prevent negatives
 				if (HP < minHP()){
+					if (hasPerk(PerkLib.Immortality)) takeLustDamage(minHP() - HP);
 					HP = minHP();
 					//This call did nothing. There is no event 5010: if (game.inCombat) game.doNext(5010);
 				}
@@ -2817,6 +2818,14 @@ use namespace CoC;
 					else mult -= 50;
 				}
 				else mult -= 35;
+			}
+			if(statusEffectv1(StatusEffects.PerfectClarity) > 0) {
+				if (perkv1(IMutationsLib.DiamondHeartIM) >= 3) {
+					mult += 20;
+				}
+				else {
+					mult += 35;
+				}
 			}
 			// Uma's Massage bonuses
 			var sac:StatusEffectClass = statusEffectByType(StatusEffects.UmasMassage);
@@ -4720,6 +4729,8 @@ use namespace CoC;
 			if (hasPerk(PerkLib.Soulless)) minCor += 50;
 			if (hasPerk(PerkLib.Phylactery)) minCor = 100;
 			if (hasPerk(PerkLib.BlessingOfTheAncestorTree)) minCor = 50;
+			if (this.hasStatusEffect(StatusEffects.DevilPurificationScar)) {minCor-=50;}
+			if (hasPerk(PerkLib.Phylactery) && hasPerk(PerkLib.SageMedicine)) minCor = 0;
 			if (this.hasPerk(PerkLib.PurityElixir)) minCor -= (this.perkv1(PerkLib.PurityElixir) * 20);
 			if (minLib < 1) minLib = 1;
 			if (minCor < 0) minCor = 0;
@@ -4945,6 +4956,8 @@ use namespace CoC;
 			//if (!hasPerk(PerkLib.TitanicStrength) && statStore.hasBuff('Titanic Strength')) statStore.removeBuffs('Titanic Strength');
 			if (hasPerk(PerkLib.Enigma)) statStore.replaceBuffObject({'str.mult':Math.round(((intStat.mult.value/2)+(wisStat.mult.value/2))),'tou.mult':Math.round(((intStat.mult.value/2)+(wisStat.mult.value/2)))}, 'Enigma', { text: 'Enigma' });
 			if (!hasPerk(PerkLib.Enigma) && statStore.hasBuff('Enigma')) statStore.removeBuffs('Enigma');
+			if (hasPerk(PerkLib.LustingWarrior) && hasStatusEffect(StatusEffects.Overheat)) statStore.replaceBuffObject({'str.mult':Math.round(libStat.mult.value)}, 'Lusting Warrior', { text: 'Lusting Warrior' });
+			if (!hasPerk(PerkLib.LustingWarrior) && statStore.hasBuff('Lusting Warrior')) statStore.removeBuffs('Lusting Warrior');
 			if (hasPerk(PerkLib.AvatorOfCorruption) && isRaceCached(Races.UNICORN,2)) statStore.replaceBuffObject({'lib.mult':Math.round(intStat.mult.value/2)}, 'Avatar Of Corruption', { text: 'Avatar Of Corruption' });
 			if ((!hasPerk(PerkLib.AvatorOfCorruption) || !isRaceCached(Races.UNICORN,2)) && statStore.hasBuff('Avatar Of Corruption')) statStore.removeBuffs('Avatar Of Corruption');
 			if (hasPerk(PerkLib.AvatorOfPurity) && isRaceCached(Races.UNICORN,2)) statStore.replaceBuffObject({'wis.mult':Math.round(intStat.mult.value/2)}, 'Avatar Of Purity', { text: 'Avatar Of Purity' });
@@ -5267,6 +5280,86 @@ use namespace CoC;
 				if (itemSlot.itype == itype) count += itemSlot.quantity;
 			}
 			return count;
+		}
+
+		public function hasLegendaryItem():Boolean {
+			for each (var item:ItemType in CoC.instance.weapons.Legendary())
+				for each (var itemSlot:ItemSlotClass in itemSlots){
+					if (itemSlot.itype == item) return true
+				}
+			for each (item in CoC.instance.weaponsrange.Legendary())
+				for each (itemSlot in itemSlots){
+					if (itemSlot.itype == item) return true
+				}
+			for each (item in CoC.instance.shields.Legendary())
+				for each (itemSlot in itemSlots){
+					if (itemSlot.itype == item) return true
+				}
+			for each (item in CoC.instance.armors.Legendary())
+				for each (itemSlot in itemSlots){
+					if (itemSlot.itype == item) return true
+				}
+			return false;
+		}
+		public function allLegendaryItems():Array {
+			var list: Array = [];
+			for each (var item:ItemType in CoC.instance.weapons.Legendary())
+				for each (var itemSlot:ItemSlotClass in itemSlots){
+					if (itemSlot.itype == item) list.push(item);
+				}
+			for each (item in CoC.instance.weaponsrange.Legendary())
+				for each (itemSlot in itemSlots){
+					if (itemSlot.itype == item) list.push(item);
+				}
+			for each (item in CoC.instance.shields.Legendary())
+				for each (itemSlot in itemSlots){
+					if (itemSlot.itype == item) list.push(item);
+				}
+			for each (item in CoC.instance.armors.Legendary())
+				for each (itemSlot in itemSlots){
+					if (itemSlot.itype == item) list.push(item);
+				}
+			return  list;
+		}
+
+		public function hasPureLegendaryItem():Boolean {
+			for each (var item:ItemType in CoC.instance.weapons.LegendaryPure())
+				for each (var itemSlot:ItemSlotClass in itemSlots){
+					if (itemSlot.itype == item) return true
+				}
+			for each (item in CoC.instance.weaponsrange.LegendaryPure())
+				for each (itemSlot in itemSlots){
+					if (itemSlot.itype == item) return true
+				}
+			for each (item in CoC.instance.shields.LegendaryPure())
+				for each (itemSlot in itemSlots){
+					if (itemSlot.itype == item) return true
+				}
+			for each (item in CoC.instance.armors.LegendaryPure())
+				for each (itemSlot in itemSlots){
+					if (itemSlot.itype == item) return true
+				}
+			return false;
+		}
+		public function allPureLegendaryItems():Array {
+			var list: Array = [];
+			for each (var item:ItemType in CoC.instance.weapons.LegendaryPure())
+				for each (var itemSlot:ItemSlotClass in itemSlots){
+					if (itemSlot.itype == item) list.push(item);
+				}
+			for each (item in CoC.instance.weaponsrange.LegendaryPure())
+				for each (itemSlot in itemSlots){
+					if (itemSlot.itype == item) list.push(item);
+				}
+			for each (item in CoC.instance.shields.LegendaryPure())
+				for each (itemSlot in itemSlots){
+					if (itemSlot.itype == item) list.push(item);
+				}
+			for each (item in CoC.instance.armors.LegendaryPure())
+				for each (itemSlot in itemSlots){
+					if (itemSlot.itype == item) list.push(item);
+				}
+			return  list;
 		}
 
 		// 0..5 or -1 if no

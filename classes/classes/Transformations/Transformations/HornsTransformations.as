@@ -103,7 +103,7 @@ public class HornsTransformations extends MutationsHelper {
 				player.horns.type = Horns.KIRIN;
 
 				if (doOutput) outputText(desc);
-				//Metamorph.unlockMetamorph(HornsMem.getMemory(HornsMem.KIRIN));
+				Metamorph.unlockMetamorph(HornsMem.getMemory(HornsMem.KIRIN));
 			},
 			// is present
 			function (): Boolean {

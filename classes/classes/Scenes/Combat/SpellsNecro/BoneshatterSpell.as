@@ -22,7 +22,9 @@ public class BoneshatterSpell extends AbstractNecroSpell {
 	}
 	
 	override public function calcCooldown():int {
-		return 3;
+		var calcC:int = 0;
+		calcC += spellGenericCooldown();
+		return calcC;
 	}
 	
 	override public function get isKnown():Boolean {
@@ -30,7 +32,9 @@ public class BoneshatterSpell extends AbstractNecroSpell {
 	}
 	
 	override public function demonBonesCost():int {
-		return 5;
+		var calcDBC:int = 5;
+		if (player.hasPerk(PerkLib.HyperCasting)) calcDBC -= 1;
+		return calcDBC;
 	}
 	
 	override protected function usabilityCheck():String {

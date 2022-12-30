@@ -641,6 +641,12 @@ public class Face extends SaveableBodyPart {
 		humanShaped: true,
 		bite:true
 	});
+	public static const INNOCENT: int = 59;
+	EnumValue.add(Types, INNOCENT, "INNOCENT", {
+		name: "innocent expression",
+		appearanceDesc: "Your face is human in shape and structure. You bear an innocent and almost angelic smile which soothes the soul of those who see you.",
+		humanShaped: true
+	});
 
 	public function Face(creature:Creature) {
 		super(creature,"facePart",[]);

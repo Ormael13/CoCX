@@ -79,7 +79,7 @@ package classes.GeneticMemories {
 			name: "Gain Oviposition",
 			cost: 400,
 			title: "Oviposition",
-			hint: "Need to be a compatible race first ()",
+			hint: "Need to be a compatible race first",
 			transformation: function(): Transformation {
 				return CoC.instance.transformations.GainOviposition;
 			}

@@ -64,7 +64,9 @@ public class CureSpell extends AbstractWhiteSpell{
 	}
 	
 	override public function calcCooldown():int {
-		return 7;
+		var calcC:int = 4;
+		calcC += spellGenericCooldown();
+		return calcC;
 	}
 	
 	override protected function doSpellEffect(display:Boolean = true):void {

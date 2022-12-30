@@ -181,6 +181,8 @@ private function theSlipperySqueeze():void {
 	if(flags[kFLAGS.JOEY_OFFERED_MILKER] > 0 && player.hasKeyItem("Cock Milker") < 0 && player.hasKeyItem("Cock Milker - Installed At Whitney's Farm") < 0)
 		milker = askJoeyAboutOffer;
 	//	[Joey] [Sara] [][] [Leave]
+	if (player.hasKeyItem("Cock Milker - Installed At Whitney's Farm") && !player.hasKeyItem("Cock Milker: Anal Attachment"))
+			milker = askJoeyAboutAttachment;
 
 	//simpleChoices("JoeyMassage",joeyMassage,"Androgyny",androgyny,"Joey'sOffer",milker,"",0,"Leave",2855);
 	menu();
@@ -229,6 +231,28 @@ private function buyCockMilker():void {
 	player.createKeyItem("Cock Milker",0,0,0,0);
 	simpleChoices("JoeyMassage", joeyMassage, "Androgyny", null, "Joey'sOffer", null, "", null, "Leave", enterTheBazaar);
 }
+private function askJoeyAboutAttachment():void {
+	clearOutput();
+	outputText("You ask the effeminate masseuse if he happens to know where you could find an attachment for a Cock Milker, since you now have one installed at the farm.\n\n");
+	outputText("\"<i>Oh hey, I might just have one of those in the back! Let me go check for you.</i>\"\n\n");
+	outputText("He comes back a few minutes later with an anal stimulant attachment for the Cock Milker. \"<i>Is this what you are looking for? I can sell it to you for 200 gems if you want it?</i>\"");
+	if(player.gems < 200) {
+		outputText("\n\n<b>You don't have enough money.</b>");
+		doNext(noMilkerPlzJoey);
+		return;
+	}
+	//[Yes] [No]
+	doYesNo(buyCockMilkerAttachment,noMilkerPlzJoey);
+}
+	private function buyCockMilkerAttachment():void {
+		clearOutput();
+		outputText("\"<i>Fantastic, fantastic!  Here you go!</i>\"  He dumps the atatchment in your arms, taking the gems from you in the same motion.  You hastily begin stuffing the contraption in your pack.  \"<i>Now, don't get too attached.  A machine's never gonna beat the real thing.</i>\"  He flexes his delicate fingers.  \"<i>Speaking of which, need something?</i>\"");
+		outputText("\n\n(<b>Key Item Acquired: Cock Milker: Anal Attachment</b>)");
+		player.gems -= 200;
+		statScreenRefresh();
+		player.createKeyItem("Cock Milker: Anal Attachment",0,0,0,0);
+		simpleChoices("JoeyMassage", joeyMassage, "Androgyny", null, "Joey'sOffer", null, "", null, "Leave", enterTheBazaar);
+	}
 
 private function joeyAndrogyny():void {
 	clearOutput();

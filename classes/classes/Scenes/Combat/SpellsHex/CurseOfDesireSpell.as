@@ -45,7 +45,9 @@ public class CurseOfDesireSpell extends AbstractHexSpell {
 	}
 	
 	override public function calcCooldown():int {
-		return 15;
+		var calcC:int = 12;
+		calcC += spellGenericCooldown();
+		return calcC;
 	}
 	
 	override public function advance(display:Boolean):void {

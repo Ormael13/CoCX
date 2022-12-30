@@ -871,18 +871,25 @@ private function loppeSexChoice(bakery:Boolean = false):void {
 	//[Cowgirl][Frot][TakeVaginal][Boobjob][TakeAnal][Bail]
 	menu();
 	//if(flags[kFLAGS.LOPPE_TIMES_SEXED] > 0)
-	if(player.hasCock() && player.lust >= 33) {
-		if(player.cockThatFits(loppeCapacity()) >= 0)
-			addButton(0,"Cow-girl",loppeRidesCocks);
-	}
-	if(player.hasCock() && player.lust >= 33)
-		addButton(1,"Get BJ",loppeWorshipsDicks);
-	if(player.hasVagina() && player.lust >= 33)
-		addButton(2,"TakeVaginal",getFuckedInYerTwatYaCunt);
-	if(player.biggestTitSize() >= 4) addButton(3,"Boob-job",boobjobLoppe);
-	if(flags[kFLAGS.LOPPE_TIMES_SEXED] > 0) addButton(4,"SqueezeJob",loppeSqueezedickWhateverThatIs);
-	if(player.isTaur() && player.lust >= 33) addButton(5,"TakeAnal",getAssFuckedByLoppeAsACentaur);
-	else if(player.lust >= 33) addButton(5,"TakeAnal",getButtFuckedNonHoarseByLoppe);
+	addButton(0,"Cow-girl",loppeRidesCocks)
+			.disableIf(!player.hasCock(), "Must have a cock")
+			.disableIf(player.lust < 33, "Not horny enough")
+			.disableIf(player.cockThatFits(loppeCapacity()) < 0, "Your need a cock that fits");
+	addButton(1,"Get BJ",loppeWorshipsDicks)
+			.disableIf(!player.hasCock(), "Must have a cock")
+			.disableIf(player.lust < 33, "Not horny enough");
+	addButton(2,"TakeVaginal",getFuckedInYerTwatYaCunt)
+			.disableIf(!player.hasVagina(), "Must have a cock")
+			.disableIf(player.lust < 33, "Not horny enough");
+	addButton(3,"Boob-job",boobjobLoppe)
+			.disableIf(player.biggestTitSize() < 4, "You need bigger breasts");
+	addButton(4,"SqueezeJob",loppeSqueezedickWhateverThatIs)
+			.disableIf(flags[kFLAGS.LOPPE_TIMES_SEXED] <= 0, "Must have experience her first");
+	if (player.isTaur())
+		addButton(5,"TakeAnal",getAssFuckedByLoppeAsACentaur)
+			.disableIf(player.lust < 33, "Not horny enough");
+	else addButton(6,"TakeAnal",getButtFuckedNonHoarseByLoppe)
+			.disableIf(player.lust < 33, "Not horny enough");
 	addButton(14,"Leave",beATeaseAndLeaveLoppeAfterSexInvite);
 }
 

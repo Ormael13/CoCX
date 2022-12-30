@@ -594,6 +594,31 @@ public class WingsTransformations extends MutationsHelper {
 			}
 	);
 
+	public const WingsPureDevilfeather: Transformation = new SimpleTransformation("Purified Devilfeather Wings",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				if ((player.wings.type == Wings.BAT_LIKE_LARGE)) {
+					desc += "Your wing shrivels before suddenly changing and covering themselves with immaculate white feathers. They still look demonic in a sense, albeit they are feathered now. <b>You now have white, feathered wings!</b>";
+				} else if (player.wings.type == Wings.BEE_SMALL || player.wings.type == Wings.BEE_LARGE) {
+					desc += "The muscles around your shoulders bunch up uncomfortably, changing to support your wings as you feel their weight increasing. You twist your head as far as you can for a look and realize they've changed into <b>immaculate white, feathered wings!</b>";
+				} else if (player.wings.type != Wings.NONE) {
+					desc += "A sensation of numbness suddenly fills your wings. When it dies away, they feel... different. Looking back, you realize that they have been replaced by <b>immaculate white, feathered wings!</b>";
+				} else {
+					desc += "A knot of pain forms in your shoulders as they tense up. With a surprising force, a pair of immaculate white feathered wings sprout from your back, ripping a pair of holes in the back of your [armor]. <b>You now have white, feathered wings!</b>";
+				}
+
+				player.wings.type = Wings.PUREDEVILFEATHER;
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(WingsMem.getMemory(WingsMem.PUREDEVILFEATHER));
+			},
+			// is present
+			function (): Boolean {
+				return player.wings.type === Wings.DEVILFEATHER;
+			}
+	);
+
 	public const WingsFeyDragon: Transformation = new SimpleTransformation("Fey Dragon Wings",
 			// apply effect
 			function (doOutput: Boolean): void {

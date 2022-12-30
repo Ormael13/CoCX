@@ -9,6 +9,7 @@ package classes.Scenes.Places {
 
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.Scenes.Areas.Forest.TentacleBeast;
 import classes.Scenes.Areas.Mountain.HellHound;
 import classes.Scenes.Areas.Swamp.CorruptedDrider;
@@ -49,6 +50,7 @@ public class HeXinDao extends BaseContent
 		flags[kFLAGS.LUNAR_NEW_YEAR] = date.fullYear%12;
         flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] = zodiacName[int(flags[kFLAGS.LUNAR_NEW_YEAR])];
         outputText("You go deeper in, and the crimson banners never seem to end. The entire town is decked out for the festival. What should you check out first?");
+		awardAchievement("Year of the Goat", kACHIEVEMENTS.HOLIDAY_YEAR_OF_THE_GOAT);
 		menu();
 		if (!player.hasStatusEffect(StatusEffects.CanGetLunarGift)) addButton(0, "Gifts", riverislandVillageStuffLunarGifts);
 		addButton(1, "Food", riverislandVillageStuffLunarFood);

@@ -90,20 +90,13 @@ use namespace CoC;
 		private function init():void {
             const fn:FnHelpers = Encounters.fn;
 			_forestOutskirtsEncounter = Encounters.group("outskirtsforest", {
-						//General Golems, Goblin and Imp Encounters
+						//General Golems, Goblin, Angels and Imp Encounters
 						name: "common",
-						chance: 0.4,
+						chance: 0.8,
 						call: function ():void {
 							player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
-							SceneLib.exploration.genericGolGobImpEncounters();
-						}
-					}, {
-						//General Angels Encounters
-						name: "common",
-						chance: 0.4,
-						call: function ():void {
-							player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
-							SceneLib.exploration.genericAngelsEncounters();
+							if (rand(4) == 0) SceneLib.exploration.genericAngelsEncounters();
+							else SceneLib.exploration.genericGolGobImpEncounters();
 						}
 					}, {
 						//Helia monogamy fucks
@@ -298,7 +291,8 @@ use namespace CoC;
 							return !player.hasStatusEffect(StatusEffects.PureCampJojo)
 								   && !camp.campCorruptJojo()
 								   && flags[kFLAGS.JOJO_DEAD_OR_GONE] <= 0
-								   && (JojoScene.monk < 2 || rand(2) == 0);
+								   && (JojoScene.monk < 2 || rand(2) == 0)
+								   || SceneLib.alvinaFollower.JojoDevilPurification == 1;
 						},
 						mods  : [fn.ifLevelMin(4)],
 						chance: function ():Number {
@@ -898,7 +892,9 @@ use namespace CoC;
 
 		private function jojoEncounter():void {
 			clearOutput();
-			if (JojoScene.monk == JojoScene.JOJO_NOT_MET && !player.hasStatusEffect(StatusEffects.PureCampJojo)) {
+			if (SceneLib.alvinaFollower.JojoDevilPurification == 1) {
+				SceneLib.jojoScene.jojoForestPurifyMeFromDevilry();
+			} else if (JojoScene.monk == JojoScene.JOJO_NOT_MET && !player.hasStatusEffect(StatusEffects.PureCampJojo)) {
 				if (player.cor < 25) SceneLib.jojoScene.lowCorruptionJojoEncounter();
 				else SceneLib.jojoScene.highCorruptionJojoEncounter();
 			} else if (JojoScene.monk == JojoScene.JOJO_MET || JojoScene.monk < 0) { //Negative monk value indicates rape is disabled.

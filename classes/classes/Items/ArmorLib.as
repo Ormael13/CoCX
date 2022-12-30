@@ -9,6 +9,34 @@ import classes.PerkLib;
 
 public final class ArmorLib extends ItemConstants
 	{
+		public function Legendary():Array {
+			return LegendaryPure().concat(LegendaryCorrupt());
+		}
+		public function LegendaryPure():Array {
+			return [
+				BMARMOR,
+				IBKIMO,
+				IBKIMO,
+				IBKIMO,
+				IBKIMO,
+				IBKIMO,
+				OEKIMO
+			];
+		}
+		public function LegendaryCorrupt():Array {
+			return [
+				S_ARMOR,
+				TCKIMO,
+				TCKIMO,
+				TCKIMO,
+				TCKIMO,
+				TCKIMO,
+				OTKIMO,
+				CTBGUAR
+			];
+		}
+
+
 		public static const COMFORTABLE_UNDERCLOTHES:Armor = new ComfortableUnderclothes();
 		public static const NOTHING:Armor = new Nothing();
 		

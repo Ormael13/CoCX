@@ -107,18 +107,18 @@ import classes.internals.*;
 			this.skin.growFur({color:"black"});
 			this.hairColor = "red";
 			this.hairLength = 3;
-			initStrTouSpeInte(75, 64, 50, 1);
+			initStrTouSpeInte(87, 74, 58, 1);
 			initWisLibSensCor(1, 95, 20, 100);
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
-			this.weaponAttack = 5;
+			this.weaponAttack = 6;
 			this.armorName = "thick fur";
-			this.armorDef = 7;
-			this.armorMDef = 1;
-			this.bonusLust = 125;
+			this.armorDef = 11;
+			this.armorMDef = 2;
+			this.bonusLust = 135;
 			this.lust = 50;
 			this.lustVuln = 0.87;
-			this.level = 10;
+			this.level = 20;
 			this.gems = 15 + rand(12);
             this.drop = new WeightedDrop().add(consumables.CANINEP, 3)
             					.addMany(1, consumables.BULBYPP,

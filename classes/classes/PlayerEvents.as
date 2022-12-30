@@ -431,6 +431,23 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					needNext = true;
 				}
 			}
+			//Salamander bullshit
+			if (player.isRaceCached(Races.SALAMANDER,2) && !player.hasPerk(PerkLib.LustingWarrior) && player.hasStatusEffect(StatusEffects.Overheat))
+			{
+
+				outputText("\n\nYour so horny right now... so damn horny, you would beat up someone if only for something to blow up the steam." +
+						" As the thought rush to your mind your body react strangely it would seem your overwelming need as a salamander and your ability to lustzerk has actualy unlocked some form of new power within you." +
+						" You feel newfound strength, the strength required to defeat any adversary if only for a chance to fuck and you are very keen on using it right about now.");
+				player.createPerk(PerkLib.LustingWarrior, 0, 0, 0,0);
+				needNext = true;
+			}
+			if (!player.isRaceCached(Races.SALAMANDER, 2) && player.hasPerk(PerkLib.LustingWarrior))
+			{
+				outputText("\n\nAs you become less of a salamander the prodigious strength granted to you by your incontrollable libido recedes.");
+				player.removePerk(PerkLib.LustingWarrior);
+				needNext = true;
+			}
+
 			if (!player.hasStatusEffect(StatusEffects.Overheat) && (player.isRaceCached(Races.SALAMANDER) || player.isRaceCached(Races.KITSHOO) || player.isRaceCached(Races.HELLCAT) || player.hasStatusEffect(StatusEffects.HinezumiCoat)))
 			{
 				//Argument 1 is weither pc is in heat stage or not 1 means active
@@ -630,6 +647,16 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.createPerk(PerkLib.LycanthropyDormant,0,0,0,0);
 				player.statStore.removeBuffs("Lycanthropy");
 				player.removePerk(PerkLib.Lycanthropy);
+				needNext = true;
+			}
+			if (player.hasPerk(PerkLib.Immortality) && !player.isRaceCached(Races.AZAZEL)) {
+				outputText("\nYou lose your sence of invulnerability as you are no longer an Azazel.\n");
+				player.removePerk(PerkLib.Immortality);
+				needNext = true;
+			}
+			if (!player.hasPerk(PerkLib.Immortality) && player.isRaceCached(Races.AZAZEL)) {
+				outputText("\nYou regain your sence of invulnerability as you are now an Azazel.\n");
+				player.createPerk(PerkLib.Immortality, 0, 0, 0, 0);
 				needNext = true;
 			}
 			//No better place for these since the code for the event is part of CoC.as or one of its included files
@@ -1339,7 +1366,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			//Lustzerker perk
 			if (!player.hasPerk(PerkLib.Lustzerker) && (player.isRaceCached(Races.SALAMANDER) || player.isRaceCached(Races.PHOENIX) || player.isRaceCached(Races.KITSHOO))) { //Check for gain of lustzerker - requires legs, arms and tail
-				outputText("\nYou start to feel a weird, slightly unpleasant feeling inside your body. Like many tiny flames coursing through your veins, making you ponder what is happening with your body. Remembering about salamanders' natural talent for entering a berserk-like state, you quess that should be it. [pg](Gained Perk: Lustzerker)");
+				outputText("\nYou start to feel a weird, slightly unpleasant feeling inside your body. Like many tiny flames coursing through your veins, making you ponder what is happening with your body. Remembering about salamanders' natural talent for entering a berserk-like state, you guess that should be it. [pg](Gained Perk: Lustzerker)");
 				player.createPerk(PerkLib.Lustzerker, 0, 0, 0, 0);
 				needNext = true;
 			}
@@ -1491,7 +1518,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Icy flesh
-			if (!player.hasPerk(PerkLib.IceQueenGown) && player.hasPerk(PerkLib.IcyFlesh) && !player.isRaceCached(Races.YUKIONNA)) {
+			if (!player.isRaceCached(Races.YUKIONNA) && player.hasPerk(PerkLib.IcyFlesh)) {
 				outputText("\nYour body slowly comes back to life as if it has been hibernating for a long time. You feel sickly as if dying, hungry as if you'd been starving for weeks and thirstier than if you'd been wandering the desert without drinks for about half as much.\n\n(<b>Lost Perks: "+((player.hasPerk(PerkLib.ColdAffinity) && !player.isRaceCached(Races.YETI)) ? "Cold Affinity, ":"")+"Dead metabolism and Icy flesh</b>)\n");
 				if (player.hasPerk(PerkLib.ColdAffinity) && !player.isRaceCached(Races.YETI)) player.removePerk(PerkLib.ColdAffinity);
 				player.removePerk(PerkLib.DeadMetabolism);

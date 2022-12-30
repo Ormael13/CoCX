@@ -163,6 +163,14 @@ use namespace CoC;
 			doNext(roomRepairCloset);
 		}
 
+		private function takeAnalAttachment():void {
+			clearOutput();
+			outputText("You take the attachment from the box, now you just need to get it fitted to the cock milker at the farm.\n\nYou gained a <b>Cock Milker: Anal Attachment</b>!");
+			outputText("\n\nYou'll need a little help to use it though.");
+			player.createKeyItem("Cock Milker:Anal Attachment",0,0,0,0);
+			doNext(roomRepairCloset);
+		}
+
 		private function buildBreastMilker():void {
 			clearOutput();
 			outputText("You puzzle out how to build a fully functional breast-milker from the spare parts here and assemble it.\n\nYou gained a <b>Breast Milker</b>!");
@@ -1751,6 +1759,10 @@ use namespace CoC;
 						addButton(0, "Breast Milker", buildBreastMilker);
 					}
 				}
+			}
+			if (!player.hasKeyItem("Cock Milker: Anal Attachment") && player.hasKeyItem("Cock Milker - Installed At Whitney's Farm")) {
+				outputText("You see a box in the bottom of the cupboard you didnt notice before and go to open it up. Inside you find a strange device that looks like it may be part of a Cock Milker.\n\nDo you take the Cock Milker: Anal Attachment?\n\n");
+				addButton(1, "Anal Attachment", takeAnalAttachment);
 			}
 			outputText("The only exit is back to the south.");
 		}

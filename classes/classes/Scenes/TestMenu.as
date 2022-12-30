@@ -71,7 +71,7 @@ public class TestMenu extends BaseContent
 		bd.add("EvaMutateReq", mutateReqNope, "Turns on/off mutation requirements");
 		bd.add("IdentifyAll", identifyAll, "Identify all items");
 		bd.add("UncurseAll", uncurseAll, "Uncurse all items");
-		bd.add("FaeDragonB", FaeDragTest1, "Add missing breath perk.").disableIf(player.hasPerk(PerkLib.DragonFaerieBreath));
+		bd.add("Gren Mag perks", FaeDragTest1, "Add gren magic boosting perks.").disableIf(player.hasPerk(PerkLib.ArcaneVenom));
 		bd.add("FaeDragBParts", FaeDragTest2, "Add missing fairy dragon bodyparts.");
 		bd.add("FixFJiasngshi", fixFormerJiangshi, "Removig leftover effects of cursed tag after curginh Jiangshi state.");
 		//bd.add("DinCheatShop", curry(SceneLib.dinahScene.openShop, true), "Open Dinah shop with everything unlocked. Normally, you have to defeat a boss to unlock its TF; and all 'Roulette' items appear randomly.")
@@ -110,7 +110,26 @@ public class TestMenu extends BaseContent
 		bd.add("BelisaTest", belisatest3, "Belisa Trigger").disableIf(BelisaFollower.BelisaInGame && BelisaFollower.BelisaFollowerStage < 3);
 		bd.add("Test dynamic stat", TestDynamicStats, "Test Dynamic stats.");
 		bd.add("Kiha Wedding", kihaWedding, "Test Kiha Wedding Content before D4 completed");
+		bd.add("Alvina Pure", alvinaSaveFromHerself, "Test Alvina purification");
 		submenu(bd, SoulforceCheats, 0, false);
+	}
+
+	private function FaeDragTest2():void{
+		clearOutput();
+		player.tailType = Tail.FEY_DRACONIC;
+		player.arms.type = Arms.FEY_DRACONIC;
+		player.lowerBody = LowerBody.FEY_DRAGON;
+		outputText("Faerie dragon bodyparts gained.");
+		doNext(SoulforceCheats);
+	}
+
+	private function FaeDragTest1():void{
+		clearOutput();
+		if (!player.hasPerk(PerkLib.GreenMagic)) player.createPerk(PerkLib.GreenMagic, 0, 0, 0, 0);
+		if (!player.hasPerk(PerkLib.VerdantLeech)) player.createPerk(PerkLib.VerdantLeech, 0, 0, 0, 0);
+		if (!player.hasPerk(PerkLib.ArcaneVenom)) player.createPerk(PerkLib.ArcaneVenom, 0, 0, 0, 0);
+		outputText("Green magic boosting perks gained.");
+		doNext(SoulforceCheats);
 	}
 
 	private function hangoverS4():void{
@@ -174,22 +193,6 @@ public class TestMenu extends BaseContent
 			if (player.hasStatusEffect(StatusEffects.AlterBindScroll4)) player.removeStatusEffect(StatusEffects.AlterBindScroll4);
 			if (player.hasStatusEffect(StatusEffects.AlterBindScroll5)) player.removeStatusEffect(StatusEffects.AlterBindScroll5);
 		}
-		doNext(SoulforceCheats);
-	}
-
-	private function FaeDragTest2():void{
-		clearOutput();
-		player.tailType = Tail.FEY_DRACONIC;
-		player.arms.type = Arms.FEY_DRACONIC;
-		player.lowerBody = LowerBody.FEY_DRAGON;
-		outputText("Faerie dragon bodyparts gained.");
-		doNext(SoulforceCheats);
-	}
-
-	private function FaeDragTest1():void{
-		clearOutput();
-		player.createPerk(PerkLib.DragonFaerieBreath, 0, 0, 0, 0);
-		outputText("Faerie dragon breath gained.");
 		doNext(SoulforceCheats);
 	}
 	
@@ -287,6 +290,9 @@ public class TestMenu extends BaseContent
 	}
 	public function kihaWedding():void {
 		SceneLib.kihaFollower.KihaProposal();
+	}
+	public function alvinaSaveFromHerself():void {
+		SceneLib.alvinaFollower.alvinaDontFightWon();
 	}
     public function cheatFixShards():void { //wrapper for fixShards to use it in cheat menu
 		clearOutput();

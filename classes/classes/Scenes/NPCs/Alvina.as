@@ -10,9 +10,9 @@ import classes.BodyParts.Hips;
 import classes.BodyParts.LowerBody;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
-import classes.internals.*;
+import classes.internals.ChainedDrop;
 
-	public class Alvina extends Monster
+public class Alvina extends Monster
 	{
 		override public function interruptAbility():void {
 			if (PolarMidnightSequance > 0 || SoulTearInitiated)
@@ -63,6 +63,10 @@ import classes.internals.*;
 					damage += eBaseIntelligenceDamage() * 40;
 					if (hasStatusEffect(StatusEffects.Maleficium)) damage *= 2;
 					outputText("The room gets darker as lights are snuffed out, and it gets colder by the second. ");
+					if (flags[kFLAGS.GAME_DIFFICULTY] >= 2){
+						outputText("Alvina snaps her fingers and large spear-like shards of ice form all around you before raining from all directions. You are impaled from all sides by spears, your blood dripping on the floor. This is, however, only the first phase of this terrifying spell. ");
+						player.createStatusEffect(StatusEffects.IzmaBleed, 3, 0, 0, 0);
+					}
 					outputText("You barely have time to scream as the air around you freezes solid. You are encased in a thick layer of black ice! ");
 					player.takeIceDamage(damage, true);//, true
 					player.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
@@ -96,7 +100,34 @@ import classes.internals.*;
 			outputText("\n");
 		}
 
-		//Meteor storm
+		private function alvinaMeteorStorm():void {
+			if (MeteorStormSequence == 0) {
+				outputText("Alvina weaves her scythe above her head tracing complicated arcane signs.");
+				MeteorStormSequence++;
+				createStatusEffect(StatusEffects.Uber, 0, 0,0,0);
+			} else {
+				var damage:Number = 0;
+				damage += eBaseIntelligenceDamage() * 10;
+				outputText("“<i>You know [name], I wonder if you can endure this. I doubt it, but again no such thing as overkill when it comes to getting rid of you. Be glad you get to see true magic! Magic worthy of gods before your end!</i>”\n\n");
+				outputText("A seal forms under your feet as the two of you are teleported outside. You're in the middle of the blight ridge and Alvina is standing on a faraway hill, incanting god knows what. You're about to run to her when you see it, in the sky above you, a massive arcane circle the size of the entire ridge with patterns so complex, even if you had her level of skill with magic you would fail to get a grasp of whatever spell she is using!\n\n");
+				outputText("The clouds part if only for an instant to reveal a vision of horrors. A full set of meteors, each the size of a small house, are falling in your direction.  You are sure to be caught in the barrage and so you hope whatever protection you have will be enough.\n\n");
+				if (player.getEvasionRoll()) {
+					outputText("You are crushed by the meteor storm! ");
+					damage *= 1.5;
+				} else {
+					outputText("You barely manage to lessen your injury, still getting hit by the meteor storm.");
+				}
+
+				player.takeFireDamage(damage);
+				player.takeDamage(damage);
+				if (rand(100) < 40 && !player.hasPerk(PerkLib.Resolute)) {
+					player.createStatusEffect(StatusEffects.Stunned, 4, 0, 0, 0);
+				}
+				outputText("You are teleported back to Alvina’s laboratory afterward. She’s far from done with you.");
+				MeteorStormSequence = 0;
+				MeteorStormCooldown = 10;
+			}
+		}
 
 		private function alvinaMaleficium():void {
 			outputText("Alvina's skin flushes in arousal as purple flames start to rise from the ground around her.  A telltale sign of a severe power increase.\n\n");
@@ -149,8 +180,8 @@ import classes.internals.*;
 
 		private function alvinaTimeStop():void {
 			outputText("\"<i>Enough!</i>\"\n\n");
-			outputText("Alvina snaps her finger and suddenly you find yourself unable to move as if frozen in time yet you are conscious of your surroundings, horrifyingly so even as Alvina casually walk to you, cupping your chin with her claws.\n\n");
-			outputText("\"<i>I could behead you with a single swing, but where would be the satisfaction with that. I'm impressed that you managed to last this long, however this all ends now. I can only admire your tenacity making it this far, so I will give you the honor of watching the entire orchestration of your impending demise.</i>\"\n\n");
+			outputText("Alvina snaps her finger and suddenly you find yourself unable to move as if frozen in time yet you are conscious of your surroundings, horrifyingly so even as Alvina casually walks up to you, cupping your chin with her claws.\n\n");
+			outputText("\"<i>I could behead you with a single swing, but where would be the satisfaction with that. I'm impressed that you managed to last this long, however this all ends now. I can only admire your tenacity in making it this far, so I will give you the honor of watching the entire orchestration of your impending demise.</i>\"\n\n");
 			outputText("Alvina lifts your time frozen body telekinetically in the air. Being an object frozen in time of course you don't fall down. ");
 			if (player.hasPerk(PerkLib.Mage)) outputText("Your magic might be strong but this is on a whole new level, she is actually playing with the very fabric of reality and time right before your eyes. ");
 			outputText("She walks to the side and starts weavings her hands in so many arcane patterns it becomes hard for you to fellow, not unlike a maestro weaving a symphony of death come to think of it as thousands of ethereal swords appears out of thin air all around you, circling around in a perfect spherical shape, ");
@@ -180,7 +211,17 @@ import classes.internals.*;
 			timeStopUsed = true;
 		}
 
-		//Blackfire dance
+		private function alvinaBlackfireDance():void {
+			outputText("Alvina suddenly charges at you swinging both of her blazing scythes in a deadly arc burning you in the process. You feel your very life force being seared away.");
+			for (var i:int = 0; i < 5 && soulforce >= maxSoulforce() * 0.2; i++) {
+				if (!player.getEvasionRoll()){
+					var damage:int = eBaseIntelligenceDamage() * 2;
+					player.takeFireDamage(damage);
+					player.mana -= player.mana * 0.2;
+				}
+				soulforce -= maxSoulforce() * 0.2;
+			}
+		}
 
 		// AI variables
 		public var VerdictCooldown:int = 0;
@@ -189,12 +230,15 @@ import classes.internals.*;
 		public var PolarMidnightSequance:int = 0;
 		public var SoulTearInitiated:Boolean = false;
 		public var SoulTearCooldown:int = 0;
+		public var MeteorStormSequence:int = 0;
+		public var MeteorStormCooldown:int = 0;
 
 		override public function combatRoundUpdate():void {
 			super.combatRoundUpdate();
 			if (SoulTearCooldown > 0) SoulTearCooldown--;
 			if (hasChanneledVerdict > 0) hasChanneledVerdict--;
 			if (VerdictCooldown > 0) VerdictCooldown--;
+			if (MeteorStormCooldown > 0) MeteorStormCooldown--;
 		}
 		/*
 					if (HPRatio() < .5 && !hasStatusEffect(StatusEffects.TimeStopUsed)) alvinaTimeStop();
@@ -225,13 +269,16 @@ import classes.internals.*;
 				outputText("Alvina seems to be recovering her energy.\n");
 				return;
 			}
-			else{
-				RandomiseAction();
+			if (MeteorStormSequence > 0) {
+				alvinaMeteorStorm();
+				return;
 			}
+
+			RandomiseAction();
 		}
 
 		protected function RandomiseAction():void {
-			var choice:Number = rand(9);
+			var choice:Number = rand((flags[kFLAGS.GAME_DIFFICULTY] >= 2) ? 11 : 9);
 			switch (choice) {
 				case 0:
 					alvinaInfernalFlare();
@@ -266,6 +313,14 @@ import classes.internals.*;
 					if (SoulTearCooldown <= 0) alvinaSoulTear();
 					else RandomiseAction();
 					break;
+				case 9:
+					if (MeteorStormCooldown <= 0) alvinaMeteorStorm();
+					else RandomiseAction();
+					break;
+				case 10:
+					if (soulforce100 > 20) alvinaBlackfireDance();
+					else RandomiseAction();
+					break;
 				default:
 					alvinaInfernalFlare();
 			}
@@ -282,7 +337,10 @@ import classes.internals.*;
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			cleanupAfterCombat();
-			SceneLib.alvinaFollower.alvinaThirdEncounterYesNeverLost();
+			if (flags[kFLAGS.GAME_DIFFICULTY] >= 2)
+				SceneLib.alvinaFollower.alvinaThirdEncounterYesNeverLostNightmare();
+			else
+				SceneLib.alvinaFollower.alvinaThirdEncounterYesNeverLost();
 		}
 
 		public function Alvina()
@@ -290,7 +348,6 @@ import classes.internals.*;
 			this.a = "";
 			this.short = "Archmage Alvina Shadowmantle, Mother of Black Magic";
 			this.imageName = "alvina";
-			this.long = "Alvina is a goat-like succubus. While she is barely taller than 3 and a half feet, she is obviously an accomplished spellcaster.  From the way she holds her scythe in one hand and her spellbook in the other you also expect her to be very strong,  despite the fact that she wears glasses. A powerful aura of black magic emanates from her.";
 			// this.plural = false;
 			this.createVagina(false, VaginaClass.WETNESS_SLAVERING, VaginaClass.LOOSENESS_GAPING);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 20, 0, 0, 0);
@@ -298,30 +355,55 @@ import classes.internals.*;
 			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
 			this.ass.analWetness = AssClass.WETNESS_DRY;
 			this.createStatusEffect(StatusEffects.BonusACapacity,15,0,0,0);
-			this.tallness = 3*12+6;
 			this.hips.type = Hips.RATING_AVERAGE;
 			this.butt.type = Butt.RATING_AVERAGE;
 			this.lowerBody = LowerBody.HOOFED;
 			this.bodyColor = "purple";
 			this.hairColor = "black";
 			this.hairLength = 20;
-			initStrTouSpeInte(375, 455, 390, 480);
-			initWisLibSensCor(480, 375, 115, 100);
+			if (flags[kFLAGS.GAME_DIFFICULTY] >= 2 || SceneLib.alvinaFollower.FightForAlvina) {
+				this.long = "Alvina is a goat-like succubus. She is obviously an accomplished spellcaster.  She holds a pair of burning scythes in both hands, her spellbook levitating around her. The aura of black magic emanating from her is almost smothering you. She has taken on a way more intimidating form, reaching 11 feet tall with ease. Her black wings stretch from one side of the room to the other while the very ground she walks catches on fire as if unable to support her energy pressure.";
+				this.tallness = 11*12;
+				initStrTouSpeInte(750, 910, 780, 960);
+				initWisLibSensCor(960, 750, 230, 100);
+				this.weaponAttack = 750;
+				this.armorDef = 100;
+				this.armorMDef = 100;
+				if (SceneLib.alvinaFollower.DefeatedAlvinaFirstStage){
+					this.bonusHP = 4000000;
+					alvinaMaleficium();
+				}
+				else {
+					this.bonusHP = 400000;
+				}
+				this.bonusMana = 30000;
+				this.bonusLust = 1180;
+				this.level = 185;
+			} else {
+				this.long = "Alvina is a goat-like succubus. While she is barely taller than 4 and a half feet, she is obviously an accomplished spellcaster.  From the way she holds her scythe in one hand and her spellbook in the other you also expect her to be very strong,  despite the fact that she wears glasses. A powerful aura of black magic emanates from her.";
+				this.tallness = 4*12+6;
+				initStrTouSpeInte(375, 455, 390, 480);
+				initWisLibSensCor(480, 375, 115, 100);
+				this.weaponAttack = 25;
+				this.armorDef = 50;
+				this.armorMDef = 50;
+				if (SceneLib.alvinaFollower.DefeatedAlvinaFirstStage){
+					this.bonusHP = 2000000;
+					alvinaMaleficium();
+				}
+				else this.bonusHP = 200000;
+				this.bonusMana = 15000;
+				this.bonusLust = 590;
+				this.level = 100;
+			}
 			this.weaponName = "demonic scythe";
 			this.weaponVerb="slash";
-			this.weaponAttack = 25;
 			this.armorName = "demon-skin";
-			this.armorDef = 50;
-			this.armorMDef = 50;
-			this.bonusHP = 200000;
-			this.bonusMana = 15000;
-			this.bonusLust = 590;
 			this.lust = 30;
 			if (hasStatusEffect(StatusEffects.Maleficium)) this.lustVuln = 0.75;
 			else this.lustVuln = 0.5;
-			this.level = 100;
-			this.gems = rand(25) + 138;
 			this.drop = NO_DROP;
+			this.gems = rand(25) + 138;
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.MindOverBodyI, 0, 0, 0, 0);

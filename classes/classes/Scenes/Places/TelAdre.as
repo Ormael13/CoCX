@@ -1,4 +1,4 @@
-﻿package classes.Scenes.Places {
+package classes.Scenes.Places {
 import classes.*;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
@@ -491,6 +491,13 @@ public function barTelAdre():void {
 		//So it's safe to return to this menu, Helia or Urta can't suddenly disappear or appear just from leaving and re-entering the bar.
 
 	menu();
+	//ALVINA
+	if (model.time.hours >= 7 && model.time.hours <= 17 && SceneLib.alvinaFollower.alvinaCanMeetAtBar()) {
+		SceneLib.alvinaFollower.alvinaBarDescription();
+		if(!SceneLib.alvinaFollower.MetAlvinaAtBar)
+			button = anotherButton(button, "???", SceneLib.alvinaFollower.alvinaMeetAtBar);
+		else button = anotherButton(button, "Alvina", SceneLib.alvinaFollower.alvinaMeetAtBar);
+	}
 	//AMILY!
 	if(flags[kFLAGS.AMILY_VISITING_URTA] == 1) {
 		button = anotherButton(button,"Ask4Amily",SceneLib.followerInteractions.askAboutAmily);
@@ -1172,6 +1179,8 @@ public function kaibaShopMainMenu2():void {
 	}
 	if (flags[kFLAGS.KAIBA_SHELFS] == 1) {
 		if (player.hasStatusEffect(StatusEffects.KaibaDailyLimit)) {
+			addButtonDisabled(0, "Teddy Bear", "You already bought item from Kaiba today.");
+			addButtonDisabled(1, "Old Wand", "You already bought item from Kaiba today.");
 			addButtonDisabled(2, "C.S.Necklace", "You already bought item from Kaiba today.");
 			addButtonDisabled(3, "B.Armor", "You already bought item from Kaiba today.");
 			addButtonDisabled(4, "Soul Drill", "You already bought item from Kaiba today.");
@@ -1181,6 +1190,8 @@ public function kaibaShopMainMenu2():void {
 			addButtonDisabled(8, "Storm Ruler", "You already bought item from Kaiba today.");
 		}
 		else {
+			addButton(0, "Teddy Bear", buyItem, useables.TEDDY).hint("An old Teddy bear with a small paper with the name Mister Paw tied to it.");
+			addButton(1, "Old Wand", buyItem, weapons.O_WAND).hint("An old wand. It seems to be broken or worn out, perhaps it can be repaired by a skilled wizard? It is not very useful in its current state but may be able to boost your spellpower if repaired.");
 			addButton(2, "C.S.Necklace", buyItem, necklaces.CSNECK).hint("Crinos Shape necklace - Allow PC to use Crinos Shape even without perk Job: Beast Warrior with wrath costs and boost as the one gained from picking Job: Beast Warrior.");
 			addButton(3, "B.Armor", buyItem, armors.BERA).hint("Berzerker Armor - Augments the potency of all rage effects as well as Crinos shape. Wrath Gained from taking damage and dealing damage increased. Does not hinder movement or beast warrior powers.");
 			addButton(4, "Soul Drill", buyItem, weapons.SDRILL).hint("Soul Drill - 1H large weapon that can deal more damage the more soulforce is feed to it each turn.");
@@ -1245,7 +1256,12 @@ public function kaibaShopInside():void {
 private function buyItem(odd:ItemType):void{
 	clearOutput();
 	var cost:int = odd.value;// * 3
-	outputText("While you point toward one of the items on the display Kaiba says, \"<i>Oh, this one is quite the find. If you are Interested it is merely " + odd.value + " gems.</i>\"\n\n");
+	if (odd.shortName == "O.Wand") {
+		outputText("Kaiba acknowledges your interest in the old wand in the corner of the shop.\n\n");
+		outputText("\"<i>Oh that it's just an old relic from ages past. An adventurer pawned this to me one day and it's been here ever since. The item is clearly no longer functioning correctly but who am I to dissuade you? A strong enough wizard could probably fix the thing for you. I will part with it for only " + odd.value + " gems… what do you say?</i>\"\n\n");
+	} else {
+		outputText("While you point toward one of the items on the display Kaiba says, \"<i>Oh, this one is quite the find. If you are Interested it is merely " + odd.value + " gems.</i>\"\n\n");
+	}
 	if (player.gems < cost){
 		outputText("You realise you don’t have enough gems for this item. When you tell the shopkeeper so it causes Kaiba to sigh in disappointment.\n\n");
 		outputText("\"<i>Fair enough keep looking around I’m sure we have a cheaper product you may need.</i>\"\n\n");

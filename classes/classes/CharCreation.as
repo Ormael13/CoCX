@@ -2699,6 +2699,7 @@ import coc.view.MainView;
 			outputText("You can spend Ascension points to keep the available Metamorphs indefinitely, regardless of how many times you Ascend.\n\n");
 			outputText("<b>Metamorphs Permanentized:</b> " + player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory) + "/" + player.statusEffectv1(StatusEffects.TranscendentalGeneticMemory) + "\n\n");
 			outputText("Ascension Perk Points: " + player.ascensionPerkPoints);
+			outputText("GenMem Tier: " + player.perkv1(PerkLib.AscensionTrancendentalGeneticMemoryStageX));
 
 			menu();
 
@@ -2839,7 +2840,7 @@ import coc.view.MainView;
 		}
 
 		private function accessHairMenu(currentPage: int = 0): void {
-			openPaginatedMetamorphMenu("Hair", accessLowerBodyMenu, currentPage, HairMem.Memories);
+			openPaginatedMetamorphMenu("Hair", accessHairMenu, currentPage, HairMem.Memories);
 		}
 
 		private function accessFaceMenu(currentPage: int = 0): void {

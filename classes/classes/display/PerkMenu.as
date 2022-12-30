@@ -6,6 +6,7 @@ import classes.BaseContent;
 import classes.BodyParts.Face;
 import classes.BodyParts.Tail;
 import classes.CoC;
+import classes.CoC_Settings;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutationPerkType;
 import classes.IMutations.*;
@@ -14,7 +15,6 @@ import classes.PerkLib;
 import classes.PerkTree;
 import classes.PerkType;
 import classes.Races;
-import classes.Scenes.Dungeons.BeeHive.CorruptBeeQueen;
 import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.SceneLib;
@@ -72,6 +72,7 @@ public class PerkMenu extends BaseContent {
 		}
 		addButton(2, "SuperPerk Up", CoC.instance.playerInfo.superPerkBuyMenu);
 		addButton(3, "Mutations DB", mutationsDatabase, 0, true);
+		if (sorter === sorterRelativeDistance) sortedPerks = null; // clear cache, relative distance could've been changed
 		addButton(4, "Perks Database", perkDatabase);
 		if ((player.calculateMultiAttacks() > 1) || combat.canSpearDance() ||player.hasPerk(PerkLib.Poisoning) || player.hasPerk(PerkLib.SwiftCasting) ||
 			((player.hasPerk(PerkLib.JobBeastWarrior) || player.hasPerk(PerkLib.HistoryFeral) || player.hasPerk(PerkLib.PastLifeFeral)) && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon())) || player.hasPerk(PerkLib.NaturalInstincts) || player.hasPerk(PerkLib.WayOfTheWarrior) || player.hasPerk(PerkLib.Berzerker) ||
@@ -174,7 +175,7 @@ public class PerkMenu extends BaseContent {
 		// auto hit mode :)
 		outputText("\n\nYou can choose to stand still when selecting the 'Wait' actions. This way, you won't attempt to dodge or block any attacks. Why would you do that?!");
 		outputText("\nCurrent 'Wait' behaviour: <b>" + (flags[kFLAGS.WAIT_STAND_STILL] ? "Standing still" : "Dodging") + "</b>");
-		addButton(6, "StandStill", curry(toggleFlagMisc, kFLAGS.WAIT_STAND_STILL));
+		addButton(6, "Wait", curry(toggleFlagMisc, kFLAGS.WAIT_STAND_STILL));
 		// corruption tolerance
 		if (player.hasPerk(PerkLib.AscensionTolerance) || !CoC.instance.lockCheats) {
 			outputText("\n\nYou can temporarily enable or disable your corruption tolerance.");
@@ -183,6 +184,13 @@ public class PerkMenu extends BaseContent {
 				flags[kFLAGS.CORRUPTION_TOLERANCE_MODE] == 0 ? "Enabled (" + player.corruptionTolerance + ")" :
 					flags[kFLAGS.CORRUPTION_TOLERANCE_MODE] == 1 ? "Disabled (0)" : "CHEAT (100)") + "</b>");
 			addButton(7, "CorTolerance", toggleCorruptionTolerance);
+		}
+		// tease healing
+		if (player.hasPerk(PerkLib.FueledByDesire) || player.armor == armors.ELFDRES) {
+			outputText("Combat Tease can cause lust reduction: " + (
+					flags[kFLAGS.COMBAT_TEASE_HEALING] == 0 ? "Enabled" : "Disabled"
+			));
+			addButton(10, "C. Tease Heal", curry(toggleFlagMisc, kFLAGS.COMBAT_TEASE_HEALING));
 		}
 		//
 		addButton(14, "Back", displayPerks);
@@ -911,8 +919,40 @@ public class PerkMenu extends BaseContent {
 		outputText("\n");
 	}
 
+	// Sort by perk name
+	private function sorterName(e:PerkType):* {
+		return e.name(null).toUpperCase();
+	}
+	// Sort by absolute distance (from zero)
+	private function sorterDistance(e:PerkType):* {
+		return e.distance
+	}
+	// Sort by relative distance (from player)
+	private function sorterRelativeDistance(e:PerkType):* {
+		return e.distanceFor(player);
+	}
+	private var sorter:Function = sorterRelativeDistance;
+	private var sortedPerks:/*PerkType*/Array;
+	
+	public function formatPerkRequirements(ptype:PerkType):String {
+		var reqs:Array = [];
+		var color:String;
+		for each (var cond:Object in ptype.requirements) {
+			if (cond.fn(player)) color=(darkTheme()?'#ffffff':'#000000');
+			else color=darkTheme()?'#ff4444':'#aa2222';
+			if (cond.text is String){
+				reqs.push("<font color='"+color+"'>"+cond.text+"</font>");
+			}
+			else {
+				reqs.push("<font color='"+color+"'>"+cond.text(player)+"</font>");
+			}
+		}
+		return ("<b>Requires:</b> " + reqs.join(", ")+". " +
+				(CoC_Settings.debugBuild ? "<i>Distance: "+ptype.distanceFor(player)+"/"+ptype.distance+"</i>" : ""));
+	}
+	
 	public function perkDatabase(page:int=0, count:int=50):void {
-		var allPerks:Array = PerkTree.obtainablePerks().sort();
+		var allPerks:/*PerkType*/Array = sortedPerks ? sortedPerks : (sortedPerks = sortedBy(PerkTree.obtainablePerks(),sorter));
 		var mutationList2:Array = IMutationsLib.mutationsArray("All");
 
 		var temp:Array = [];
@@ -938,18 +978,7 @@ public class PerkMenu extends BaseContent {
 			outputText("<font color='" +color +"'><b>"+ptype.name()+"</b></font>: ");
 			outputText(pclass?ptype.desc(pclass):ptype.longDesc);
 			if (!pclass && ptype.requirements.length>0) {
-				var reqs:Array = [];
-				for each (var cond:Object in ptype.requirements) {
-					if (cond.fn(player)) color=(darkTheme()?'#ffffff':'#000000');
-					else color=darkTheme()?'#ff4444':'#aa2222';
-					if (cond.text is String){
-						reqs.push("<font color='"+color+"'>"+cond.text+"</font>");
-					}
-					else {
-						reqs.push("<font color='"+color+"'>"+cond.text(player)+"</font>");
-					}
-				}
-				outputText("<ul><li><b>Requires:</b> " + reqs.join(", ")+".</li></ul>");
+				outputText("<ul><li>"+formatPerkRequirements(ptype)+"</li></ul>");
 			} else {
 				outputText("\n");
 			}
@@ -958,7 +987,26 @@ public class PerkMenu extends BaseContent {
 		else addButtonDisabled(0,"Prev");
 		if (page*count<allPerks.length) addButton(1,"Next",perkDatabase,page+1);
 		else addButtonDisabled(1,"Next");
+		addButton(5,
+				sorter === sorterName ? "Sort: Name"
+						: sorter === sorterDistance ? "Sort: Dist."
+						: "Sort: RelDist",
+				perkDbToggleSort, page)
+				.hint("Sort by Name - self-explanatory\n" +
+						"Sort by Distance - perks with fewer/easier total requirements first\n" +
+						"Sort by Relative Distance - perks with fewer/easier unfulfilled requirements first");
 		addButton(9, "Back", displayPerks);
+	}
+	private function perkDbToggleSort(page:int):void {
+		if (sorter === sorterName) {
+			sorter = sorterDistance;
+		} else if (sorter === sorterDistance) {
+			sorter = sorterRelativeDistance;
+		} else {
+			sorter = sorterName;
+		}
+		sortedPerks = null;
+		perkDatabase(page);
 	}
 
 	public function perkDatabase2():void { //Messy code... Again, probably optimizable by someone else with more experience.

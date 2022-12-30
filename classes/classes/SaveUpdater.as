@@ -104,25 +104,28 @@ public class SaveUpdater extends NPCAwareContent {
 			["Sightseer", kACHIEVEMENTS.ZONE_SIGHTSEER, camp.placesCount() >= 10],
 			["Where am I?", kACHIEVEMENTS.ZONE_WHERE_AM_I, player.explored >= 1],
 			["Forest Ranger", kACHIEVEMENTS.ZONE_FOREST_RANGER, player.exploredForest >= 100],
+			["We Need to Go Deeper", kACHIEVEMENTS.ZONE_WE_NEED_TO_GO_DEEPER, player.statusEffectv1(StatusEffects.ExploredDeepwoods) >= 100],
 			["Vacationer", kACHIEVEMENTS.ZONE_VACATIONER, player.exploredLake >= 100],
 			["Dehydrated", kACHIEVEMENTS.ZONE_DEHYDRATED, player.exploredDesert >= 100],
-			["Rookie", kACHIEVEMENTS.ZONE_ROOKIE, flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] >= 100],
+			["Rookie", kACHIEVEMENTS.ZONE_ROOKIE, flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] >= 100],
+			["Friggin' Golems!", kACHIEVEMENTS.ZONE_FRIGGIN_GOLEMS, flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] >= 100],
+			["Hiking", kACHIEVEMENTS.ZONE_HIKING, flags[kFLAGS.DISCOVERED_HILLS] >= 100],
+			["Trekking", kACHIEVEMENTS.ZONE_TREKKING, flags[kFLAGS.DISCOVERED_LOW_MOUNTAIN] >= 100],
 			["Mountaineer", kACHIEVEMENTS.ZONE_MOUNTAINEER, player.exploredMountain >= 100],
+			["Light-headed", kACHIEVEMENTS.ZONE_LIGHT_HEADED, flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] >= 100],
 			["Rolling Hills", kACHIEVEMENTS.ZONE_ROLLING_HILLS, flags[kFLAGS.TIMES_EXPLORED_PLAINS] >= 100],
 			["Wet All Over", kACHIEVEMENTS.ZONE_WET_ALL_OVER, flags[kFLAGS.TIMES_EXPLORED_SWAMP] >= 100],
-			["Tainted", kACHIEVEMENTS.ZONE_TAINTED, flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] >= 100],
-			["Sunburned", kACHIEVEMENTS.ZONE_SUNBURNED, flags[kFLAGS.DISCOVERED_BEACH] >= 100],
-			["Caveman", kACHIEVEMENTS.ZONE_CAVEMAN, flags[kFLAGS.DISCOVERED_CAVES] >= 100],
-			["We Need to Go Deeper", kACHIEVEMENTS.ZONE_WE_NEED_TO_GO_DEEPER, player.statusEffectv1(StatusEffects.ExploredDeepwoods) >= 100],
-			["Light-headed", kACHIEVEMENTS.ZONE_LIGHT_HEADED, flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] >= 100],
 			["All murky", kACHIEVEMENTS.ZONE_ALL_MURKY, flags[kFLAGS.BOG_EXPLORED] >= 100],
+			["Tainted", kACHIEVEMENTS.ZONE_TAINTED, flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] >= 100],
 			["Defiled", kACHIEVEMENTS.ZONE_DEFILED, flags[kFLAGS.DISCOVERED_DEFILED_RAVINE] >= 100],
+			["Sunburned", kACHIEVEMENTS.ZONE_SUNBURNED, flags[kFLAGS.DISCOVERED_BEACH] >= 100],
 			["Sea-Legs", kACHIEVEMENTS.ZONE_SAILOR, flags[kFLAGS.DISCOVERED_OCEAN] >= 100],
+			["Diver", kACHIEVEMENTS.ZONE_DIVER, flags[kFLAGS.DISCOVERED_DEEP_SEA] >= 100],
+			["Caveman", kACHIEVEMENTS.ZONE_CAVEMAN, flags[kFLAGS.DISCOVERED_CAVES] >= 100],
 			["Sub-Zero", kACHIEVEMENTS.ZONE_SUB_ZERO, flags[kFLAGS.DISCOVERED_TUNDRA] >= 100],
 			["Frozen", kACHIEVEMENTS.ZONE_FROZEN, flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] >= 100],
 			["Ashes to ashes, dust to dust", kACHIEVEMENTS.ZONE_ASHES_TO_ASHES_DUST_TO_DUST, flags[kFLAGS.DISCOVERED_ASHLANDS] >= 100],
 			["Roasted", kACHIEVEMENTS.ZONE_ROASTED, flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] >= 100],
-			["Diver", kACHIEVEMENTS.ZONE_DIVER, flags[kFLAGS.DISCOVERED_DEEP_SEA] >= 100],
 			["Sailor", kACHIEVEMENTS.ZONE_SEA_LEGS, player.statusEffectv1(StatusEffects.BoatDiscovery) >= 15],
 			["Farmer", kACHIEVEMENTS.ZONE_FARMER, player.statusEffectv1(StatusEffects.MetWhitney) >= 30],
 			["Archaeologist", kACHIEVEMENTS.ZONE_ARCHAEOLOGIST, flags[kFLAGS.AMILY_VILLAGE_EXPLORED] >= 15],
@@ -1944,6 +1947,11 @@ public class SaveUpdater extends NPCAwareContent {
 					}
 				}
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.037;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.038) {
+				if (flags[kFLAGS.IZUMI_LVL_UP] > 1) flags[kFLAGS.IZUMI_LVL_UP] -= 2;
+				if (flags[kFLAGS.MINERVA_LVL_UP] > 1) flags[kFLAGS.MINERVA_LVL_UP] -= 2;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.038;
 			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);

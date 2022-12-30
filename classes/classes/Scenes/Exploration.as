@@ -140,22 +140,28 @@ public class Exploration extends BaseContent
 			bd.add("");
 			bd.add("");
 			// Row 5
+			bd.add("Hills", SceneLib.mountain.exploreHills)
+					.hint("Visit the hills. "
+							+ (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_HILLS] : ""))
+					.disableIf(!flags[kFLAGS.DISCOVERED_HILLS], "Discovered when using 'Explore' after finding Battlefield (Boundary).");
+			bd.add("Low Mountain", SceneLib.mountain.exploreLowMountain)
+					.hint("Visit the low mountains. "
+							+ (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_LOW_MOUNTAIN] : ""))
+					.disableIf(!flags[kFLAGS.DISCOVERED_LOW_MOUNTAIN], "Discovered when exploring Hills.");
 			bd.add("Mountain", SceneLib.mountain.exploreMountain)
 					.hint("Visit the mountain. "
 							+ (debug ? "\n\nTimes explored: " + player.exploredMountain : ""))
-					.disableIf(player.exploredMountain == 0, "Discovered when using 'Explore' after finding Battlefield (Boundary).");
+					.disableIf(player.exploredMountain == 0, "Discovered when exploring Low Mountains.");
 			bd.add("High Mountain", SceneLib.highMountains.exploreHighMountain)
 					.hint("Visit the high mountains where basilisks and harpies are found. "
 							+ (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] : ""))
 					.disableIf(!flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN], "Discovered when exploring Mountain.");
 			bd.add("");
-			bd.add("");
-			bd.add("");
 			// Row 6
 			bd.add("Plains", SceneLib.plains.explorePlains)
 					.hint("Visit the plains. "
 							+ (debug ? "\n\nTimes explored: " + flags[kFLAGS.TIMES_EXPLORED_PLAINS] : ""))
-					.disableIf(flags[kFLAGS.TIMES_EXPLORED_PLAINS] == 0, "Discovered when using 'Explore' after finding Mountain.");
+					.disableIf(flags[kFLAGS.TIMES_EXPLORED_PLAINS] == 0, "Discovered when using 'Explore' after finding Hills.");
 			bd.add(""); // plains inner part
 			bd.add("");
 			bd.add("");
@@ -294,10 +300,10 @@ public class Exploration extends BaseContent
 			
 			if (flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] > 0) addButton(5, "Battlefield (B)", SceneLib.battlefiledboundary.exploreBattlefieldBoundary).hint("Visit the battlefield boundary. " + (player.level < 16 ? "\n\nIt's still too dangerous place to visit lightly!" : "") + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] : ""));
 			else addButtonDisabled(5, "Battlefield (B)", "Discovered when using 'Explore' after finding Desert.");
-			if (player.exploredMountain > 0) addButton(6, "Mountain", SceneLib.mountain.exploreMountain).hint("Visit the mountain. " + (debug ? "\n\nTimes explored: " + player.exploredMountain : ""));
-			else addButtonDisabled(6, "Mountain", "Discovered when using 'Explore' after finding Battlefield (Boundary).");
+			if (flags[kFLAGS.DISCOVERED_HILLS] > 0) addButton(6, "Hills", SceneLib.mountain.exploreHills).hint("Visit the hills. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_HILLS] : ""));
+			else addButtonDisabled(6, "Hills", "Discovered when using 'Explore' after finding Battlefield (Boundary).");
 			if (flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 0) addButton(7, "Plains", SceneLib.plains.explorePlains).hint("Visit the plains. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.TIMES_EXPLORED_PLAINS] : ""));
-			else addButtonDisabled(7, "Plains", "Discovered when using 'Explore' after finding Mountain.");
+			else addButtonDisabled(7, "Plains", "Discovered when using 'Explore' after finding Hills.");
 			if (flags[kFLAGS.TIMES_EXPLORED_SWAMP] > 0) addButton(8, "Swamp", SceneLib.swamp.exploreSwamp).hint("Visit the wet swamplands. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.TIMES_EXPLORED_SWAMP] : ""));
 			else addButtonDisabled(8, "Swamp", "Discovered when using 'Explore' after finding Plains.");
 			
@@ -327,8 +333,8 @@ public class Exploration extends BaseContent
 			else addButtonDisabled(2, "???", "Search the lake.");
 			//2 - desert inner part
 			//addButtonDisabled(2, "Desert(I)", "Discovered when exploring Desert.");
-			if (flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] > 0) addButton(3, "High Mountain", SceneLib.highMountains.exploreHighMountain).hint("Visit the high mountains where basilisks and harpies are found. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] : ""));
-			else addButtonDisabled(3, "High Mountain", "Discovered when exploring Mountain.");
+			if (flags[kFLAGS.DISCOVERED_LOW_MOUNTAIN] > 0) addButton(3, "Low Mountain", SceneLib.mountain.exploreLowMountain).hint("Visit the low mountains. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_LOW_MOUNTAIN] : ""));
+			else addButtonDisabled(3, "Low Mountain", "Discovered when exploring Hills.");
 			
 			if (flags[kFLAGS.DISCOVERED_DEFILED_RAVINE] > 0) addButton(5, "Defiled Ravine", SceneLib.defiledravine.exploreDefiledRavine).hint("Visit the defiled ravine. \n\nRecommended level: 41" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_DEFILED_RAVINE] : ""));
 			else addButtonDisabled(5, "Defiled Ravine", "Discovered when exploring Blight Ridge.");
@@ -363,6 +369,8 @@ public class Exploration extends BaseContent
 			else addButtonDisabled(0, "Deepwoods", "Discovered when exploring Forest (I).");
 			//addButtonDisabled(1, "Shore", "TBA");//Discovered when exploring using Lake Boat.
 			//if (flags[kFLAGS.DISCOVERED_DEEP_SEA] > 0 && player.canSwimUnderwater()) addButton(2, "Deep Sea", SceneLib.deepsea.exploreDeepSea).hint("Visit the 'almost virgin' deep sea. But beware of... krakens. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_DEEP_SEA] : ""));
+			if (player.exploredMountain > 0) addButton(3, "Mountain", SceneLib.mountain.exploreMountain).hint("Visit the mountain. " + (debug ? "\n\nTimes explored: " + player.exploredMountain : ""));
+			else addButtonDisabled(3, "Mountain", "Discovered when exploring Low .");
 			
 			if (flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] > 0) addButton(10, "Glacial Rift(O)", SceneLib.glacialRift.exploreGlacialRift).hint("Visit the chilly glacial rift (outer part). " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] : ""));
 			else addButtonDisabled(10, "Glacial Rift(O)", "Discovered when exploring Tundra.");
@@ -379,6 +387,19 @@ public class Exploration extends BaseContent
 			flags[kFLAGS.EXPLORATION_PAGE] = 4;
 			hideMenus();
 			menu();
+			if (flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] > 0) addButton(3, "High Mountain", SceneLib.highMountains.exploreHighMountain).hint("Visit the high mountains where basilisks and harpies are found. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] : ""));
+			else addButtonDisabled(3, "High Mountain", "Discovered when exploring Mountain.");
+			
+			addButton(4, "Next", goBackToPageV);
+			addButton(9, "Previous", goBackToPageIII);
+			if (debug) addButton(13, "Debug", exploreDebug.doExploreDebug);
+			addButton(14, "Back", playerMenu);
+		}
+		
+		private function explorePageV():void {
+			flags[kFLAGS.EXPLORATION_PAGE] = 5;
+			hideMenus();
+			menu();
 			if (player.level >= 31) addButton(0, "LL Explore", tryDiscoverLL).hint("Explore to find weakest new enemies.");
 			else addButtonDisabled(0, "LL Explore", "Req. lvl 31+");
 			if (player.level >= 51) addButton(1, "ML Explore", tryDiscoverML).hint("Explore to find weaker new enemies.");
@@ -390,7 +411,7 @@ public class Exploration extends BaseContent
 			if (player.level >= 125) addButton(4, "XXHL Explore", tryDiscoverXXHL).hint("Explore to find strong new enemies.");
 			else addButtonDisabled(4, "XXHL Explore", "Req. lvl 125+");
 			
-			addButton(9, "Previous", goBackToPageIII);
+			addButton(9, "Previous", goBackToPageIV);
 			if (silly()) addButton(12, "42", tryRNGod).hint("Explore to find the answer for your prayers. Or maybe you really not wanna find it fearing answer will not be happy with you?");
 			else addButtonDisabled(12, "???", "Only in Silly Mode...");
 			if (debug) addButton(13, "Debug", exploreDebug.doExploreDebug);
@@ -414,6 +435,11 @@ public class Exploration extends BaseContent
 		
 		private function goBackToPageIV():void {
 			flags[kFLAGS.EXPLORATION_PAGE] = 4;
+			doExplore();
+		}
+		
+		private function goBackToPageV():void {
+			flags[kFLAGS.EXPLORATION_PAGE] = 5;
 			doExplore();
 		}
 
@@ -616,6 +642,16 @@ public class Exploration extends BaseContent
 				}
 			}
 		}
+		public function genericGobImpAngEncounters(even:Boolean = false):void {
+			var gobImpAngChooser:int = rand(20);
+			if (gobImpAngChooser >= 8) SceneLib.goblinScene.goblinShamanEncounter();
+			//else if (gobImpAngChooser >= 16) angeloid
+			//else if (gobImpAngChooser >= 18) angeloid
+			else {
+				SceneLib.impScene.impOverlordEncounter();
+				spriteSelect(SpriteDb.s_impOverlord);
+			}
+		}
 		public function genericImpEncounters2(even:Boolean = false):void {
 			//Imptacular Encounter
 			var impChooser:int = rand(100);
@@ -647,14 +683,14 @@ public class Exploration extends BaseContent
 		}
 		public function genericDemonsEncounters1(even:Boolean = false):void {
 			//Imptacular Encounter
-			var demonChooser:int = rand(100);
+			var demonChooser:int = rand(15);
 			//Succubus
-			if (demonChooser >= 40 && demonChooser < 70) {
+			if (demonChooser >= 5 && demonChooser < 10) {
 				SceneLib.defiledravine.demonScene.SuccubusEncounter();
 				return;
 			}
 			//Incubus
-			else if (demonChooser >= 70) {
+			else if (demonChooser >= 10) {
 				SceneLib.defiledravine.demonScene.IncubusEncounter();
 				return;
 			}
@@ -734,27 +770,30 @@ public class Exploration extends BaseContent
 			}
 		}
 		public function genericAngelsEncounters(even:Boolean = false):void {
-			var angelsChooser:int = rand(30);
+			var angelsChooser:int = rand(15);
 			//Limit chooser range
-			if (player.level < 6 && angelsChooser >= 10) angelsChooser = 9;
-			else if (player.level < 12 && angelsChooser >= 20) angelsChooser = 19;
+			if (player.level < 6 && angelsChooser >= 10) angelsChooser = 4;
+			else if (player.level < 12 && angelsChooser >= 20) angelsChooser = 9;
 			clearOutput();
 			//Mid-rank Angel
-			if (angelsChooser >= 10 && angelsChooser < 20) {
-				outputText("A mid-ranked angel wings out of the sky and attacks!");
-				startCombat(new AngelMR());
+			if (angelsChooser >= 5 && angelsChooser < 10) {
+				outputText("A mid-ranked angeloid wings out of the sky and attacks!");
+				player.createStatusEffect(StatusEffects.AngelsChooser,2,0,0,0);
+				startCombat(new Angeloid());
 				return;
 			}
 			//High-rank Angel
-			else if (angelsChooser >= 20 && angelsChooser < 30) {
-				outputText("A high-ranked angel wings out of the sky and attacks!");
-				startCombat(new AngelHR());
+			else if (angelsChooser >= 10) {
+				outputText("A high-ranked angeloid wings out of the sky and attacks!");
+				player.createStatusEffect(StatusEffects.AngelsChooser,3,0,0,0);
+				startCombat(new Angeloid());
 				return;
 			}
 			//Low-rank Angel
 			else {
-				outputText("A low-ranked angel wings out of the sky and attacks!");
-				startCombat(new AngelLR());
+				outputText("A low-ranked angeloid wings out of the sky and attacks!");
+				player.createStatusEffect(StatusEffects.AngelsChooser,1,0,0,0);
+				startCombat(new Angeloid());
 				return;
 			}
 		}
@@ -850,14 +889,15 @@ public class Exploration extends BaseContent
 					doNext(camp.returnToCampUseOneHour);
 					return;
 				}
-				if (flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] > 0 && player.exploredMountain <= 0 && (player.level + combat.playerLevelAdjustment()) >= 5) {
-					outputText("Thunder booms overhead, shaking you out of your thoughts.  High above, dark clouds encircle a distant mountain peak.  You get an ominous feeling in your gut as you gaze up at it.\n\n<b>You've discovered the Mountain!</b>");
+				if (flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] > 0 && flags[kFLAGS.DISCOVERED_HILLS] <= 0 && (player.level + combat.playerLevelAdjustment()) >= 5) {
+					flags[kFLAGS.DISCOVERED_HILLS] = 1;
 					player.explored++;
-					player.exploredMountain = 1;
+					clearOutput();
+					outputText("As you walk the large open wasteland of mareth you begin to notice an elevation in the ground. Far in the distance you can see a mountain chain but from where you stand is a hillside. Well you got tired of the monotony of the flat land anyway maybe going up will yield new interesting discoveries.\n\n<b>You found the Hills!</b>");
 					doNext(camp.returnToCampUseOneHour);
 					return;
 				}
-				if (player.exploredMountain >= 1 && flags[kFLAGS.TIMES_EXPLORED_PLAINS] <= 0 && (player.level + combat.playerLevelAdjustment()) >= 9) {
+				if (flags[kFLAGS.DISCOVERED_HILLS] > 0 && flags[kFLAGS.TIMES_EXPLORED_PLAINS] <= 0 && (player.level + combat.playerLevelAdjustment()) >= 9) {
 					flags[kFLAGS.TIMES_EXPLORED_PLAINS] = 1;
 					player.explored++;
 					outputText("You find yourself standing in knee-high grass, surrounded by flat plains on all sides.  Though the mountain, forest, and lake are all visible from here, they seem quite distant.\n\n<b>You've discovered the plains!</b>");

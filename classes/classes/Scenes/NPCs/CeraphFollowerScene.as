@@ -116,7 +116,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 
 		private function ceraphSexMenu():void
 		{
-			clearOutput();
+			menu();
 			addButton(0, "Fuck Pussy", fuckFollowerCeraphsVagoo).disableIf(!player.hasCock(), "Req. a cock.");
 			addButton(1, "Get Tongued", followerCeraphTongueFucking).disableIf(!player.hasVagina(), "Req. a vagina.");
 			addButton(2, "Please All", ceraphTentacleGrape).disableIf(!player.isHerm(), "Req. to be a herm.");
@@ -135,7 +135,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			addButton(0, "Defeat Her", ceraphScene.winChoices);
 			addButton(1, "Lose to Her", ceraphScene.ceraphRapesYouBADDAWGYODIGGITY);
 			addButton(2, "Be A Pet", sumissivenessToCeraphFollower)
-				.disableIf(!player.isGenderless(), "Not for genderless!");
+				.disableIf(player.isGenderless(), "Not for genderless!");
 			addButtonDisabled(5, "???");
 			addButtonDisabled(6, "???");
 			addButtonDisabled(7, "???");
