@@ -66,7 +66,7 @@ public class CerberusRace extends Race {
 				.furColor1(ANY(CerberusFurColors), +1)
 				.skinColors(ANY[CerberusSkinColors], +1)
 				.noWings(+4)
-				.height(AT_LEAST(7*12), +1)
+				.height(AT_LEAST(11*12), +1)
 				.tone(GREATER_THAN(80), +1)
 				.thickness(LESS_THAN(20), +1)
 				.corruption(AT_LEAST(50), +1)

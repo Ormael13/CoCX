@@ -2192,6 +2192,8 @@ public final class Mutations extends MutationsHelper {
         transformations.BallsQuad(3, true).applyEffect(doOutput);
         if (player.tone < 80) player.tone = 90;
         if (player.thickness > 20) player.thickness = 20;
+        if (doOutput) outputText("\nYou gain "+ Measurements.inchesOrCentimetres(11*12 - player.tallness, 0) +" in height");
+        if (player.tallness < 11*12) player.tallness = 11*12;
         if (!player.hasPerk(PerkLib.DominantAlpha)) {
             player.createPerk(PerkLib.DominantAlpha, 0, 0, 0, 0);
             outputText("\n<b>Gained Perk: Dominant Alpha!</b> "+PerkLib.DominantAlpha.longDesc);
