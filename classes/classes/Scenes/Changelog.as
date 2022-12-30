@@ -42,6 +42,7 @@ public class Changelog extends BaseContent
 			outputText("-Added Hills & Low Mountains area before Mountain. Some of the encounters orginal in Mountain was moved to the new areas. Some of encouters from high mountains was moved to mountain area too.\n");
 			outputText("-Hellhounds and Infected Hellhouds lvl increased by 10 levels. Harpy and Basilisk levels increased by 15 levels. Starting lvl of Izumi and Minerva increased by 12. Minotaur sons starting lvl was lowered by 10. Cockatrice enemies lvl increased by 55/62(winged).\n");
 			outputText("-Phoenixes meet outside tower are now all called quasi-phoenixes (since they weren't succesfull hybryds but their 'mother' was persistent to call them as success so in tower they are called as her mother wish for). Quasi-phoenix enemies in High Mountains increased lvl by 32.\n");
+			outputText("-Adds 'perk distance' - a score indicating how difficult perk requirements are. Adds different sorting modes to PerkDatabase - by name, distance, relative distance. By default, perks in database are sorted by relative distance, so perks that are easier for player character to obtain will go first. (aimozg)\n");
 			outputText("-Metamorph: Add Kirin parts (EragonX)\n");
 			outputText("-Fixes: double negative and harpywomb thunderbird. (liruyo)\n");
 			//outputText("-Dam can be upgraded 2 times (up to 3rd tier of wood dam) and Fishery once (to allow 2 npc's working at it - it also gonna increase each worker fish production by 20%)\n");
@@ -49,11 +50,12 @@ public class Changelog extends BaseContent
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
-			outputText("-Adds 'perk distance' - a score indicating how difficult perk requirements are. Adds different sorting modes to PerkDatabase - by name, distance, relative distance. By default, perks in database are sorted by relative distance, so perks that are easier for player character to obtain will go first. (aimozg)\n");
-			outputText("-3 new achievments.\n");
+			outputText("-7 new achievments. (1 shadow one)\n");
 			outputText("-Sheep Milk and Spring Water on top of fixed flat amount of fatigue & lust removed also removes % values - 5%/5% and 2%/6%.\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New race + tf: Kitshoo - req. Ruby Jewel made from salamander and kitsune tf's by Evangeline (it's also as expected kitsune/salamander hybryd - some calls them napalm foxes). They have access to basic kitsune and salamander abilities. Kitshoo/Elder Kitshoo/Nine-Tailed Elder Kitshoo racial bonuses (at 8/16/24 race points): ");
+			outputText("+0/15/20% to str multi, +15/50/80% to tou multi, +15/40/70% to spe multi, +40/70/100% to int multi, +50/80/110% to wis multi, +50/90/30% to lib multi, +50/100/150 to sens, +20/40/60 to max lust, +15/25/35% to max sf multi, +30/40/50% sf regeneration\n");
+			outputText("-New race: Azazel - gained by following new path for Alvina - it's smth akin to purified devil tf with abilites to be not so corrupted and etc. (written by Liadri and coded by EragonX). Azazelkin/Azazel/True Azazel racial bonuses (11/16/29 race points): ");
+			outputText("+55/75/100% top str multi, -20/25/30% to spe multi, +80/130/250% to int multi, +65/100/150% ot wis multi, +90/170/220 to max lust, +15/40/50 to sens\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

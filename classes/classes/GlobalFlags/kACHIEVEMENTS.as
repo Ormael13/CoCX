@@ -439,7 +439,7 @@ package classes.GlobalFlags
 		public static const GENERAL_THE_END_AND_THE_BEGINNING:int		= 392;
 		public static const GENERAL_BEYOND_GODS_AND_MORTALS:int			= 393;
 		public static const GENERAL_DAWN_CHASING_AWAY_THE_NIGHT:int		= 394;
-		public static const UNKNOWN_ACHIEVEMENT_395:int					= 395;
+		public static const HOLIDAY_YEAR_OF_THE_GOAT:int				= 395;
 		public static const UNKNOWN_ACHIEVEMENT_396:int					= 396;
 		public static const UNKNOWN_ACHIEVEMENT_397:int					= 397;
 		public static const UNKNOWN_ACHIEVEMENT_398:int					= 398;

@@ -268,7 +268,7 @@ public function alvinaThirdEncounterYesContinue():void
 	menu();
 	if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] >= 4) addButtonDisabled(0, "Sure", "There's no way you would be able to have HER in your camp at the same time as Siegweird. He'd kill her or she'd kill him.");
 	else addButton(0, "Sure", alvinaThirdEncounterYesSure);
-	if (SecondDateSuccess) addButton(3, "Stop It!", alvinaDontFight);
+	//if (SecondDateSuccess) addButton(3, "Stop It!", alvinaDontFight);
 	addButton(4, "Never", alvinaThirdEncounterYesNever);
 }
 public function alvinaThirdEncounterYesSure():void
