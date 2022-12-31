@@ -1,4 +1,4 @@
-package classes.Scenes.Places {
+﻿package classes.Scenes.Places {
 import classes.*;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
@@ -28,7 +28,6 @@ import classes.display.SpriteDb;
 		public var katherineEmployment:KatherineEmployment = new KatherineEmployment();
 		public var katherineThreesome:KatherineThreesome = new KatherineThreesome();
 		public var library:Library = new Library();
-		public var loppe:Loppe = new Loppe();
 		public var lottie:Lottie = new Lottie();
 		public var maddie:Maddie = new Maddie();
 		public var niamh:Niamh = new Niamh();
@@ -478,7 +477,7 @@ public function barTelAdre():void {
 	var button:int = 0;
 	clearOutput();
 	if(flags[kFLAGS.LOPPE_DISABLED] == 0 && flags[kFLAGS.LOPPE_MET] == 0 && rand(10) == 0) {
-		loppe.loppeFirstMeeting();
+		SceneLib.loppe.loppeFirstMeeting();
 		return;
 	}
 	outputText(images.showImage("location-teladre-thewetbitch"));
@@ -1569,7 +1568,8 @@ public function gymDesc():void {
 	}
 	lottie.lottieAppearance();
 	if(flags[kFLAGS.LOPPE_MET] > 0 && flags[kFLAGS.LOPPE_DISABLED] == 0) {
-		outputText("\n\nYou spot Loppe the laquine wandering around, towel slung over her shoulder.  When she sees you, she smiles and waves to you and you wave back.");
+		if (SceneLib.loppe.pregnancy.isPregnant) SceneLib.loppe.loppePregAppearance();
+		else outputText("\n\nYou spot Loppe the laquine wandering around, towel slung over her shoulder.  When she sees you, she smiles and waves to you and you wave back.");
 	}
 	if(model.time.hours > 9 && model.time.hours < 14) heckel.heckelAppearance();
 
@@ -1591,7 +1591,8 @@ private function gymMenu():void {
 	if (model.time.hours > 9 && model.time.hours <= 15) addButton(6, flags[kFLAGS.MET_HECKEL] > 0 ? "Heckel" : "Hyena", heckel.greetHeckel);
 	if (ifris.ifrisIntro()) addButton(7, flags[kFLAGS.MET_IFRIS] > 0 ? "Ifris" : "Demon-Girl", ifris.approachIfris);
 	addButton(8, flags[kFLAGS.LOTTIE_TIMES_ENCOUNTERED] > 0 ? "Lottie" : "Pig-Girl", lottie.lottieAppearance(false));
-	if (flags[kFLAGS.LOPPE_MET] > 0 && flags[kFLAGS.LOPPE_DISABLED] == 0) addButton(9, "Loppe", loppe.loppeGenericMeetings);
+	if (flags[kFLAGS.LOPPE_MET] > 0 && flags[kFLAGS.LOPPE_DISABLED] == 0 && SceneLib.loppe.pregnancy.isPregnant) addButton(9, "Loppe", SceneLib.loppe.loppePreggoApproached);
+	else if (flags[kFLAGS.LOPPE_MET] > 0 && flags[kFLAGS.LOPPE_DISABLED] == 0) addButton(9, "Loppe", SceneLib.loppe.loppeGenericMeetings);
 	if (pablo.pabloIntro() && flags[kFLAGS.PABLO_FREAKED_OUT_OVER_WORMS] != 1) addButton(10, flags[kFLAGS.PABLO_MET] > 0 ? "Pablo" : "Imp?", pablo.approachPablo);
 	addButton(14, "Leave", telAdreMenu);
 }

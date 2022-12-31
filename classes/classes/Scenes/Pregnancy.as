@@ -2045,6 +2045,11 @@ public class Pregnancy extends NPCAwareContent {
                 player.knockUpForce(); //Clear Pregnancy
                 displayedUpdate = true;
             }
+            if (player.pregnancyType == PregnancyStore.PREGNANCY_LOPPE) {
+                SceneLib.loppe.pcGivesBirthToLoppeKits();
+                player.knockUpForce(); //Clear Pregnancy
+                displayedUpdate = true;
+            }
         }
         //IF INCUBATION IS ANAL
         if(player.buttPregnancyIncubation > 1) {

@@ -877,6 +877,8 @@ import classes.Scenes.SceneLib;
 			addButton(1, "Sexuality", talkSexuality);
 			addButton(2, "Loppe", talkLoppe);
 			addButton(3, "Loppe's Dad", talkLoppesDad);
+			if (flags[kFLAGS.TIMES_ASKED_LOPPE_ABOUT_LOPPE] >= 2)
+					addButton(4, "Train Loppe", trainLoppe);
 			addButton(14, "Back", enterClinic, true);
 		}
 
@@ -1512,9 +1514,9 @@ import classes.Scenes.SceneLib;
 			menu();
 			addButton(0, "EroMassage", sexEroticMassage);
 			addButton(1, "Eat Her Out", sexEatHerOut);
-			addButtonIfTrue(2, "Fingerbang", sexGetFingered, "Req. a vagina and non-taur lower body.", player.hasVagina() && !player.isTaur());
-			addButtonIfTrue(3, "Handjob", sexHandjob, "Req. a cock.", player.hasCock());
-			addButtonIfTrue(4, "Get Blown", sexGetABJFromDisMilfyLesboSlut, "Req. a cock", player.hasCock());
+			addButton(2, "Fingerbang", sexGetFingered).disableIf(player.hasVagina() && !player.isTaur(), "Req. a vagina and non-taur lower body.");
+			addButton(3, "Handjob", sexHandjob).disableIf( player.hasCock(), "Req. a cock.");
+			addButton(4, "Get Blown", sexGetABJFromDisMilfyLesboSlut).disableIf( player.hasCock(), "Req. a cock");
 			addButton(14,"Back",buildCoreMenu);
 		}
 
@@ -1998,6 +2000,18 @@ import classes.Scenes.SceneLib;
 			dynStats("lust", 30);
 			player.sexReward("vaginalFluids", "Lips", false);
 			doNext(camp.returnToCampUseOneHour);
+		}
+
+		private function trainLoppe():void
+		{
+			clearOutput();
+			outputText("You mention to Uma that her daughter has mentioned something about Uma wanting her to learn the family trade?[pg]");
+			outputText("The mare nods at you. “<i>Yes, that’s true.  Don’t get me wrong, my little girl’s a wonderful dancer, but, well, dancing’s such a demanding and unreliable way to make a living - at least with acupuncture and massage there’s always going to be people wanting to use your skills.  Believe me, I’m run off my hooves with all the customers I get hoping to ease the tension that comes from living in these troubled times.  Plus... well, call me a pervy old woman if you must, but I’d like to see grandkids at some point in my life.</i>”  She shrugs helplessly.  “<i>But I can’t really spare the time to train her on my own, and I couldn’t in good conscience just let her loose on my paying customers.</i>”[pg]");
+			outputText("You think the matter over, and ask what if you volunteered to help Loppe with her training?  The horse-morph gives you a joyous smile.  “<i>That would be wonderful!  All my little girl really needs is some practice and she can be officially credited with her license.  Please, wait here for a few minutes while I go and fetch her.</i>”  She asks you, and you quietly agree, making yourself comfortable even as she grabs some belongings and heads out.[pg]");
+			outputText("[pg]NEED MORE TEXTS[pg]");
+			outputText("Maybe adjust texts of Uma's massages to her showing Loppe how, or even Loppe doing the massage instead[pg]");
+			flags[kFLAGS.LOPPE_TRAINING]++;
+			//set loppe training active
 		}
 	}
 }
