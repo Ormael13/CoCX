@@ -15184,6 +15184,9 @@ public function meleePhysicalForce():Number {
     if (player.hasPerk(PerkLib.JobRogue)) mod += .2;
     if (player.hasPerk(PerkLib.JobMonk)) mod += .2;
     if (player.hasPerk(PerkLib.JobBeastWarrior)) mod += .2;
+	if (player.hasPerk(PerkLib.MeleeWeaponsMastery)) mod += .05;
+	if (player.hasPerk(PerkLib.MeleeWeaponsMasteryEx)) mod += .1;
+	if (player.hasPerk(PerkLib.MeleeWeaponsMasterySu)) mod += .15;
     if (player.hasPerk(PerkLib.ThunderousStrikes)) mod += .05;
     if (player.hasPerk(PerkLib.BrutalBlows)) mod += .05;
     if (player.hasPerk(PerkLib.FuriousStrikes)) mod += .05;
@@ -15229,7 +15232,7 @@ public function meleePhysicalForce():Number {
     if (player.hasPerk(PerkLib.WarCaster)) mod += .2;
     if (player.hasPerk(PerkLib.VampiricBlade)) mod += .2;
     if (player.hasPerk(PerkLib.TwinRiposte)) mod += .2;
-    if (player.hasPerk(PerkLib.PerfectStrike)) mod += .2;//780~830~930% up to here
+    if (player.hasPerk(PerkLib.PerfectStrike)) mod += .2;//810~860~960% up to here
     if (player.hasPerk(PerkLib.AscensionKillingIntent)) mod *= 1 + (player.perkv1(PerkLib.AscensionKillingIntent) * 0.1);
     mod = Math.round(mod * 100) / 100;
     return mod;
@@ -15240,6 +15243,9 @@ public function rangePhysicalForce():Number {
     if (player.hasPerk(PerkLib.JobRanger)) mod += .1;
     if (player.hasPerk(PerkLib.JobHunter)) mod += .2;
     if (player.hasPerk(PerkLib.JobGunslinger)) mod += .2;
+	if (player.hasPerk(PerkLib.RangeWeaponsMastery)) mod += .05;
+	if (player.hasPerk(PerkLib.RangeWeaponsMasteryEx)) mod += .1;
+	if (player.hasPerk(PerkLib.RangeWeaponsMasterySu)) mod += .15;
     if (player.hasPerk(PerkLib.CarefulButRecklessAimAndShooting)) mod += .05;
     if (player.hasPerk(PerkLib.Sharpshooter)) mod += .05;
     if (player.hasPerk(PerkLib.PowerShot)) mod += .05;
@@ -15253,10 +15259,10 @@ public function rangePhysicalForce():Number {
     if (player.hasPerk(PerkLib.AnatomyExpert)) mod += .15;
     if (player.hasPerk(PerkLib.EagleEye)) mod += .15;
     if (player.hasPerk(PerkLib.SilverForMonsters)) mod += .15;
-    if (player.hasPerk(PerkLib.NamedBullet)) mod += .2;//195% up to here
+    if (player.hasPerk(PerkLib.NamedBullet)) mod += .2;//225% up to here
     if (player.hasPerk(PerkLib.PrestigeJobArcaneArcher)) mod += .4;
     if (player.hasPerk(PerkLib.ElementalArrows)) mod += .2;
-    if (player.hasPerk(PerkLib.Cupid)) mod += .2;//275% up to here
+    if (player.hasPerk(PerkLib.Cupid)) mod += .2;//305% up to here
     if (player.hasPerk(PerkLib.AscensionBloodlust)) mod *= 1 + (player.perkv1(PerkLib.AscensionBloodlust) * 0.1);
     if (player.hasPerk(PerkLib.HistoryScout) || player.hasPerk(PerkLib.PastLifeScout)) mod *= historyScoutBonus();
     if (player.hasPerk(PerkLib.JobRanger)) mod *= 1.05;

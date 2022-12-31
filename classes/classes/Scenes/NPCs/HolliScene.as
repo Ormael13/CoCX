@@ -257,8 +257,9 @@ public function getASprout():void {
 	outputText("  You look closer and see purple veins on the undersides of the leaves, throbbing with what can only be the tainted liquids that suffuse much of this planet.  Fully grown, it might spread its corruption to your camp.\n\n<b>Do you destroy it?</b>");
 	flags[kFLAGS.FUCK_FLOWER_LEVEL] = 1;
 	flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] = 0;
-	//[Yes] [No]
-	doYesNo(destroyDatFukkinTree, letZeFuckingSproutLive);
+	menu();
+	addButton(6, "Yes", destroyDatFukkinTree);
+	addButton(8, "No", letZeFuckingSproutLive);
 }
 //[Yes] Destroy Tree (edited)
 private function destroyDatFukkinTree():void {
