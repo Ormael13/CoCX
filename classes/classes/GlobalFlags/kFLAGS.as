@@ -1320,8 +1320,8 @@ public static const TIMES_ENCOUNTERED_COCKATRICES:int                           
 public static const CODEX_ENTRY_COCKATRICES:int                                   	= 1312;
 public static const WHITNEY_ORAL_TRAINING_VAG:int                                   = 1313;
 public static const RATHAZUL_MINDUP_OFFERED:int                                     = 1314;
-public static const UNKNOWN_FLAG_NUMBER_01315:int                                   = 1315;
-public static const UNKNOWN_FLAG_NUMBER_01316:int                                   = 1316;
+public static const LOPPE_INCUBATION:int                                            = 1315;
+public static const LOPPE_PREGNANCY_TYPE:int                                        = 1316;
 public static const UNKNOWN_FLAG_NUMBER_01317:int                                   = 1317;
 public static const UNKNOWN_FLAG_NUMBER_01318:int                                   = 1318;
 public static const UNKNOWN_FLAG_NUMBER_01319:int                                   = 1319;
