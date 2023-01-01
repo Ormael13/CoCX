@@ -4703,4 +4703,4 @@ public function rebirthFromBadEnd():void {
 	}
 
 }
-}
+}
