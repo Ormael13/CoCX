@@ -124,6 +124,11 @@ private function telAdreTour():void {
 	doNext(telAdreMenu);
 }
 
+public function visitTelAdre():void {
+	justRejectedLuna = false; //resetting Luna thingy so she is encounterable again
+	telAdreMenu();
+}
+
 public function telAdreMenu():void {
 	if(flags[kFLAGS.VALENTINES_EVENT_YEAR] < date.fullYear && player.hasBalls() && player.hasCock() && flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] >= 4 && flags[kFLAGS.TIMES_MET_SCYLLA_IN_ADDICTION_GROUP] > 0 && isValentine()) {
 		SceneLib.holidays.crazyVDayShenanigansByVenithil();
@@ -179,7 +184,7 @@ public function telAdreMenu():void {
 		maddie.runAwayMaddieFollowup();
 		return;
 	}
-	if (flags[kFLAGS.LUNA_FOLLOWER] < 2 && !player.hasStatusEffect(StatusEffects.LunaOff) && rand(10) == 0) {
+	if (flags[kFLAGS.LUNA_FOLLOWER] < 2 && !player.hasStatusEffect(StatusEffects.LunaOff) && !justRejectedLuna && rand(10) == 0) {
 		if (flags[kFLAGS.LUNA_FOLLOWER] == 1) meetingLunaRepated();
 		else meetingLunaFirstTime();
 		return;
@@ -1763,6 +1768,8 @@ public function stopGoingBackEveryHourGymCheck():void{
 	}
 }
 
+private var justRejectedLuna:Boolean = false;
+
 public function meetingLunaFirstTime():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_luna_maid);
@@ -1793,6 +1800,7 @@ public function meetingLunaFirstTime():void {
 	addButton(1, "Can'tHelp", meetingLunaFirstTimeLeave).hint("As nice as it sounds to have a maid, you still think it's a bad idea to get too involved.");
 }
 public function meetingLunaFirstTimeLeave():void {
+	justRejectedLuna = true;
 	outputText("Sadly you see no way you could help her out; but, unwilling to leave the poor girl to offer herself to the brothels or join a gang, you point her in the direction of The Wet Bitch. They always seem busy, so perhaps they might hire her as a waitress? Waitresses and maids are similar, aren't they?\n\n");
 	outputText("The young woman looks up at you in surprise, her eyes widening and her mouth forming a cute little \"o\". You realize she's actually rather cute, with features that lean more toward soft and sweet than sultry and soft-looking, light brown hair and big golden-colored eyes. She doesn't quite smile at you, but her expression does ease a bit and she replies, saying" +
 			" \"<i>Thank you, kind stranger. I'll do that, I guess; it's not like I have any better options. If... if I do get hired there, will you come see me? My name is Luna. I'd... I'd like it if you came to see me again.</i>\"");
@@ -1820,6 +1828,7 @@ public function meetingLunaRepated():void {
 	addButton(1, "No", meetingLunaRepatedNo);
 }
 public function meetingLunaRepatedNo():void {
+	justRejectedLuna = true;
 	outputText("There is nothing you can do for her. You leave her be, for now");
 	if (player.gems >= 200) {
 		outputText(", after dropping a handful of gems in her cup out of sympathy");
