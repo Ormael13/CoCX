@@ -378,6 +378,7 @@ public class Alvina extends Monster
 				}
 				this.bonusMana = 30000;
 				this.bonusLust = 1180;
+				this.level = 185;
 			} else {
 				this.long = "Alvina is a goat-like succubus. While she is barely taller than 4 and a half feet, she is obviously an accomplished spellcaster.  From the way she holds her scythe in one hand and her spellbook in the other you also expect her to be very strong,  despite the fact that she wears glasses. A powerful aura of black magic emanates from her.";
 				this.tallness = 4*12+6;
@@ -393,6 +394,7 @@ public class Alvina extends Monster
 				else this.bonusHP = 200000;
 				this.bonusMana = 15000;
 				this.bonusLust = 590;
+				this.level = 100;
 			}
 			this.weaponName = "demonic scythe";
 			this.weaponVerb="slash";
@@ -400,7 +402,6 @@ public class Alvina extends Monster
 			this.lust = 30;
 			if (hasStatusEffect(StatusEffects.Maleficium)) this.lustVuln = 0.75;
 			else this.lustVuln = 0.5;
-			this.level = 100;
 			this.drop = NO_DROP;
 			this.gems = rand(25) + 138;
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);

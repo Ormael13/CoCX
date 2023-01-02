@@ -117,8 +117,8 @@ public class Exploration extends BaseContent
 			bd.add("");
 			bd.add("");
 			// Row 3
-			bd.add("Desert", SceneLib.desert.exploreDesert)
-					.hint("Visit the dry desert. "
+			bd.add("Desert (O)", SceneLib.desert.exploreDesert)
+					.hint("Visit the dry desert (outer part). "
 							+ (debug ? "\n\nTimes explored: " + player.exploredDesert : ""))
 					.disableIf(player.exploredDesert == 0, "You need to 'Explore' Mareth more.");
 			bd.add(""); // Desert(I)
@@ -130,7 +130,7 @@ public class Exploration extends BaseContent
 					.hint("Visit the battlefield boundary. "
 							+ (player.level < 16 ? "\n\nIt's still too dangerous place to visit lightly!" : "")
 							+ (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] : ""))
-					.disableIf(flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] == 0, "Discovered when using 'Explore' after finding Desert.");
+					.disableIf(flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] == 0, "Discovered when using 'Explore' after finding Desert (Outer).");
 			bd.add("Battlefield (O)", SceneLib.battlefiledouter.exploreOuterBattlefield)
 					.hint("Visit the outer battlefield. "
 							+ (player.level < 18 ? "\n\nIt's still too dangerous place to visit lightly!" : "")
@@ -295,11 +295,11 @@ public class Exploration extends BaseContent
 			if (SceneLib.forest.isDiscovered()) addButton(1, "Forest (O)", SceneLib.forest.exploreForestOutskirts).hint("Visit the lush forest. " + (debug ? "\n\nTimes explored: " + SceneLib.forest.timesExplored() : ""));
 			if (player.exploredLake > 0) addButton(2, "Lake", SceneLib.lake.exploreLake).hint("Visit the lake and explore the beach. " + (player.level < 3 ? "\n\nLooks like it's still quiet here!" : "") + (debug ? "\n\nTimes explored: " + player.exploredLake : ""));
 			else addButtonDisabled(2, "Lake", "You need to 'Explore' Mareth more.");
-			if (player.exploredDesert > 0) addButton(3, "Desert", SceneLib.desert.exploreDesert).hint("Visit the dry desert. " + (debug ? "\n\nTimes explored: " + player.exploredDesert : ""));
+			if (player.exploredDesert > 0) addButton(3, "Desert (O)", SceneLib.desert.exploreDesert).hint("Visit the dry desert (outer part). " + (debug ? "\n\nTimes explored: " + player.exploredDesert : ""));
 			else addButtonDisabled(3, "Desert", "You need to 'Explore' Mareth more.");
 			
 			if (flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] > 0) addButton(5, "Battlefield (B)", SceneLib.battlefiledboundary.exploreBattlefieldBoundary).hint("Visit the battlefield boundary. " + (player.level < 16 ? "\n\nIt's still too dangerous place to visit lightly!" : "") + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] : ""));
-			else addButtonDisabled(5, "Battlefield (B)", "Discovered when using 'Explore' after finding Desert.");
+			else addButtonDisabled(5, "Battlefield (B)", "Discovered when using 'Explore' after finding Desert (Outer).");
 			if (flags[kFLAGS.DISCOVERED_HILLS] > 0) addButton(6, "Hills", SceneLib.mountain.exploreHills).hint("Visit the hills. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_HILLS] : ""));
 			else addButtonDisabled(6, "Hills", "Discovered when using 'Explore' after finding Battlefield (Boundary).");
 			if (flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 0) addButton(7, "Plains", SceneLib.plains.explorePlains).hint("Visit the plains. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.TIMES_EXPLORED_PLAINS] : ""));
@@ -874,7 +874,7 @@ public class Exploration extends BaseContent
 					else if (player.lowerBody == LowerBody.DOG) outputText("in your paws");
 					else if (player.isNaga()) outputText("in your scales");
 					else outputText("inside your footwear, between your toes");
-					outputText(".\n\n<b>You've discovered the Desert!</b>");
+					outputText(".\n\n<b>You've discovered the Desert (Outer)!</b>");
 					player.exploredDesert = 1;
 					player.explored++;
 					doNext(camp.returnToCampUseOneHour);
@@ -893,17 +893,10 @@ public class Exploration extends BaseContent
 					flags[kFLAGS.DISCOVERED_HILLS] = 1;
 					player.explored++;
 					clearOutput();
-					outputText(".\n\n<b>You've discovered the Hills!</b>");
+					outputText("As you walk the large open wasteland of mareth you begin to notice an elevation in the ground. Far in the distance you can see a mountain chain but from where you stand is a hillside. Well you got tired of the monotony of the flat land anyway maybe going up will yield new interesting discoveries.\n\n<b>You found the Hills!</b>");
 					doNext(camp.returnToCampUseOneHour);
 					return;
-				}/*
-				if (flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] > 0 && player.exploredMountain <= 0 && (player.level + combat.playerLevelAdjustment()) >= 5) {
-					outputText("Thunder booms overhead, shaking you out of your thoughts.  High above, dark clouds encircle a distant mountain peak.  You get an ominous feeling in your gut as you gaze up at it.\n\n<b>You've discovered the Mountain!</b>");
-					player.explored++;
-					player.exploredMountain = 1;
-					doNext(camp.returnToCampUseOneHour);
-					return;
-				}*/
+				}
 				if (flags[kFLAGS.DISCOVERED_HILLS] > 0 && flags[kFLAGS.TIMES_EXPLORED_PLAINS] <= 0 && (player.level + combat.playerLevelAdjustment()) >= 9) {
 					flags[kFLAGS.TIMES_EXPLORED_PLAINS] = 1;
 					player.explored++;

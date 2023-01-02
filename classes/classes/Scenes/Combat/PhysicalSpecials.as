@@ -1294,7 +1294,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.ExplosiveCartridge) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 			if (player.hasPerk(PerkLib.NamedBullet) && monster.hasPerk(PerkLib.EnemyBossType)) damage *= 1.5;
 		}
-		damage *= combat.rangePhysicalForce();
+		if (player.weaponRangePerk == "Bow") damage *= combat.rangePhysicalForce();
+		else damage *= combat.firearmsForce();
 		damage *= SAMulti;
 		var crit:Boolean = false;
 		var critChance:int = 5;

@@ -21,6 +21,13 @@ package classes.Scenes.Monsters
 			SceneLib.combat.cleanupAfterCombatImpl();
 		}
 		
+		private function AngelHailOfBlades():void {
+			
+		}
+		private function AngelHailOfBladesD():void {
+			
+		}
+		
 		private function AngelEnergyRays():void {
 			outputText("ArchAngeloid fixates you with all of its eyes unleashing a barrage of rays at you! ");
 			var omni:Number = 4;

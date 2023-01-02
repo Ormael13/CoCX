@@ -32,26 +32,43 @@ public class Changelog extends BaseContent
 		private function Changelog44():void {
 			clearOutput();
 			//0 of 11 pages
-			outputText("<b>Version 0.8s6:</b>\n\n");// ()
+			outputText("<b>Version 0.8s6 (Bugfixing, Pure Alvina romance option, 2 new/old areas, Kitshoo tf official release):</b>\n\n");
 			outputText("-New tier 9 misc lvl-up perk: Arcane Venom. Req. Verdant Leech perk, Intelligence 200+, Libido 200+, Corruption 50+. Effect: Spells that inflict poison add a number of direct applications equal to your intelligence (core + trained parts) divided by 50.\n");
 			outputText("-New event perk: Fueled by Desire. Gained when training with Chelsea and having 100+ libido. Effect: When using the tease action or an arousal spell, clear a small amount of lust to deal increased tease damage. This only works if lust is above 50%. (EragonX)\n");
 			outputText("-New event perk: Graceful Beauty. Gained when training with Chelsea and having 150+ libido. Effect: Add a small measure of your speed to your tease damage. (EragonX)\n");
 			outputText("-New event perk: Sweep Defenses. Gained when training with Chelsea and having 200+ libido. Effect: Critical tease also weakens your opponent's resistance to lust by 5%. (EragonX)\n");
 			outputText("-New event perk: Hyper Casting. Gained by spending 1 super perk point and having Equilibrium super perk. Effects: Allow to reach OverMax Mana equal to 130% of current max mana. Decrease CD for spells: -1 for tier 1, -2 for tier 2 and -4 for tier 3. Reduce spells costs by 20% (that affect bones used by necro spells too). Allow to always autocast buff spells.\n");
 			outputText("-New NPC to interact in wood village: Chelsea - Former Lacta Bovina turned Wood Elf. During Sensual training she can teach some perks related to lust. (EragonX)\n");
+			outputText("-New race + tf: Kitshoo - req. Ruby Crystal made from salamander and kitsune tf's by Evangeline (it's also as expected kitsune/salamander hybryd - some calls them napalm foxes). They have access to basic kitsune and salamander abilities. Kitshoo/Elder Kitshoo/Nine-Tailed Elder Kitshoo racial bonuses (at 8/16/24 race points): ");
+			outputText("+0/15/20% to str multi, +15/50/80% to tou multi, +15/40/70% to spe multi, +40/70/100% to int multi, +50/80/110% to wis multi, +50/90/30% to lib multi, +50/100/150 to sens, +20/40/60 to max lust, +15/25/35% to max sf multi, +30/40/50% sf regeneration\n");
 			outputText("-Added Hills & Low Mountains area before Mountain. Some of the encounters orginal in Mountain was moved to the new areas. Some of encouters from high mountains was moved to mountain area too.\n");
 			outputText("-Hellhounds and Infected Hellhouds lvl increased by 10 levels. Harpy and Basilisk levels increased by 15 levels. Starting lvl of Izumi and Minerva increased by 12. Minotaur sons starting lvl was lowered by 10. Cockatrice enemies lvl increased by 55/62(winged).\n");
 			outputText("-Phoenixes meet outside tower are now all called quasi-phoenixes (since they weren't succesfull hybryds but their 'mother' was persistent to call them as success so in tower they are called as her mother wish for). Quasi-phoenix enemies in High Mountains increased lvl by 32.\n");
+			outputText("-6 new achievments. (1 shadow one)\n");
+			outputText("-Sheep Milk and Spring Water on top of fixed flat amount of fatigue & lust removed also removes % values - 5%/5% and 2%/6%.\n");
+			outputText("-Adds 'perk distance' - a score indicating how difficult perk requirements are. Adds different sorting modes to PerkDatabase - by name, distance, relative distance. By default, perks in database are sorted by relative distance, so perks that are easier for player character to obtain will go first. (aimozg)\n");
+			outputText("-First part of Alvina pure romance path is now available. (Gotta use brain and look for clues to do it no cheat sheet to use ;) ) (EragonX)\n");
 			outputText("-Metamorph: Add Kirin parts (EragonX)\n");
 			outputText("-Fixes: double negative and harpywomb thunderbird. (liruyo)\n");
+			outputText("-Fixed bugs: MindUp option req. wrong items in Rath menu, Money strike been unusable against groups, Fetish Zealots blocking boat before they intro scene at lake plays\n");
+			outputText("<b>Version 0.8s7:</b>\n\n");// ()
+			outputText("-Electra now acknowledges that more then just Raiju can volt transfer. Tbird can get supercharged too. More accounting for Kirin existing. Added centaur support to Supercharged scene, Horsecock now become big starting higher then 25 inch seeing as a normal horse cock is 20 inch. (Liadri)\n");
+			outputText("-Loppe can start training at Uma's shop. Loppe can remove her contraceptive spell if training high enough. Can meet Loppe's 'dad' in the plains for a few new scenes. (EragonX)\n");
 			//outputText("-Dam can be upgraded 2 times (up to 3rd tier of wood dam) and Fishery once (to allow 2 npc's working at it - it also gonna increase each worker fish production by 20%)\n");
 			//outputText("-New tier 11 wisdom lvl-up perk: Elemental Conjurer Knowledge (Su). Req. Elemental Conjurer Knowledge (Ex) and Elemental Contract Rank 10 perks, 300+ wis. Effect: .\n");
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
-			outputText("-Adds 'perk distance' - a score indicating how difficult perk requirements are. Adds different sorting modes to PerkDatabase - by name, distance, relative distance. By default, perks in database are sorted by relative distance, so perks that are easier for player character to obtain will go first. (aimozg)\n");
-			outputText("-\n");
-			outputText("-\n");
+			//outputText("-New race: Azazel - gained by following new path for Alvina - it's smth akin to purified devil tf with abilites to be not so corrupted and etc. (written by Liadri and coded by EragonX). Azazelkin/Azazel/True Azazel racial bonuses (11/16/29 race points): ");
+			//outputText("+55/75/100% top str multi, -20/25/30% to spe multi, +80/130/250% to int multi, +65/100/150% ot wis multi, +90/170/220 to max lust, +15/40/50 to sens\n");
+			//outputText("-1 new achievments.\n");
+			outputText("-Green Covenant spell req. to be Wood Elf or one of Plant races to cast.\n");
+			outputText("-New tier 0 misc lvl-up perk: Melee Weapons Attack Multiplier. Req. Melee Weapons Mastery perk, lvl 3+ and 25+ str/tou/spe. Effect: +5% melee physical attacks multiplier and then adds 50% on top of final result.\n");
+			outputText("-New tier 0 misc lvl-up perk: Range Weapons Attack Multiplier. Req. Range Weapons Mastery perk, lvl 3+ and 25+ str/tou/spe. Effect: +5% range physical attacks multiplier and then adds 50% on top of final result.\n");
+			outputText("-New tier 1 misc lvl-up perk: Firearms Attack Multiplier. Req. Range Weapons Attack Multiplier and Job: Gunslinger perks, 35+ str/tou/spe. Effect: +5% firearms attacks multiplier and then adds 50% on top of final result.\n");
+			outputText("-Job: Gunslinger effect of +20% to range physical attacks multiplier changed into +10% to range physical/firearms attacks multiplier.");
+			outputText("-Firearms dmg would be now multiplied by firearms attacks multiplier which is range physical multiply + seperate bonuses for all firearms only.\n");
+			outputText("-Alchemical Cartridge, Church of the gun, Explosive cartridge, Tainted Magazine, Silver for Monsters, Named Bullet perk effects of +X% to range physical attacks multiplier changed into +X/2% to range physical/firearms attacks multiplier.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -75,12 +92,10 @@ public class Changelog extends BaseContent
 			outputText("-\n");// (Jtecx)
 			outputText("-\n");// (Furrin Gok)
 			outputText("-\n");// (khovel)
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-Fixed bugs: MindUp option req. wrong items in Rath menu, Money strike been unusable against groups, Fetish Zealots blocking boat before they intro scene at lake plays\n");
-			//remove this line when other two lines below get added ingame --- outputText("-Boss type enemies gained additional bonuses: Diehard effect of 7,5% of max HP + 2,250 HP * NG tier, OverMax HP effect of 15% magnitude.\n");
+			//remove this line when other two lines below get added ingame
 			//outputText("-New perk for enemies: Elite type enemy. Bonuses for are: Diehard effect of 2,5% of max HP + 750 HP * NG tier, OverMax HP effect of 5% magnitude.\n");
 			//outputText("-New perk for enemies: Champion type enemy. Bonuses for are: Diehard effect of 5% of max HP + 1,500 HP * NG tier, OverMax HP effect of 10% magnitude.\n");
+			outputText("-Fixed bugs: Bard not affected by cap of prestige jobs, last one checks for holli's kill/survive moved into less troublesome spot\n");
 			/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
@@ -172,7 +187,6 @@ public class Changelog extends BaseContent
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
-			outputText("\n");
 			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
 			outputText("\n");
 			outputText("\n");full stats bonuses not added yet to: Dragonne, Echidna, Ferret-morph, Kitshoo-morph, Scorpion-morph
@@ -189,6 +203,21 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -473,6 +502,7 @@ public class Changelog extends BaseContent
 			outputText("-New NPC to interact in wood village: Lutien - bit on flat end of spectrum wood elf gal with 'smol' secret. During training she can teach PC all green spells as long req. to learn each is reached.\n");
 			outputText("-True Angel enemies getting innate Diehard effect. It would be % one with number matching enemy current lvl. They all would also receive 2% of max HP innate HP regen.\n");
 			outputText("-Low tier magic immunity - some of the enemies now would have immunity to tier 1 spells. They still can be hurt by tier 2 or 3 spells thou or magical specials.\n");
+			outputText("-Boss type enemies gained additional bonuses: Diehard effect of 7,5% of max HP + 2,250 HP * NG tier, OverMax HP effect of 15% magnitude.\n");
 			outputText("-New weapon type Wands (Liadri)\n");
 			outputText("-New Legendary Wand Occulus (Liadri)\n");
 			outputText("-New Legendary wand Eclipse (Liadri)\n");
