@@ -271,7 +271,6 @@ Gamedata.keyitems = {
 	"Spare Key to Urta's House": { name: "Spare Key to Urta's House" },
 	"Spring Boots": { name: "Spring Boots" },
 	"Stimpack Dispenser 1.0": { name: "Stimpack Dispenser 1.0" },
-	"Stone Building Guide": { name: "Stone Building Guide" },
 	"Stone Statue Lethicite": { name: "Stone Statue Lethicite" },
 	"Super Reducto": { name: "Super Reducto" },
 	"Supervisor's Key": { name: "Supervisor's Key" },

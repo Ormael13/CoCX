@@ -1097,48 +1097,6 @@ public function carpentryShopBuySet2No():void {
 	doNext(carpentryShopInside);
 }
 
-//Stone Buildings
-public function carpentryShopBuySet3():void {
-	clearOutput();
-	if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 5)
-	{
-		outputText("<b>You already own this guide!</b>");
-		doNext(carpentryShopInside);
-		return;
-	}
-	outputText("You walk around for a while until you see leather-bound book. It's titled 'Stone Building Guide' and briefly looking over contest you notice is about how to use stone along few other materials to make stronger than wooden structures. What is more interesting it even has project instructions for at lest few things that you think will be good to have constructed in camp! Just what you need to upgrade your steady growning settlment to next 'civilization' level. \n\n");
-	outputText("\"<i>One hundred gems and it's all yours,</i>\" as usual the shopkeeper says.\n\n");
-	outputText("Do you buy it?");
-	if (player.gems >= 100)
-	{
-		doYesNo(carpentryShopBuySet3Yes, carpentryShopBuySet3No);
-	}
-	else
-	{
-		outputText("\n\nYou count out your gems and realize it's beyond your price range.");
-		doNext(carpentryShopInside);
-	}
-}
-
-public function carpentryShopBuySet3Yes():void {
-	clearOutput();
-	player.gems -= 100;
-	outputText("You hand over a hundred gems to the shopkeeper. ");
-	outputText("\"<i>Here you go,</i>\" he says. You feel so proud to have guide to building stone structures! \n\n");
-	outputText("<b>Gained Key Item: Stone Building Guide!</b>");
-	player.createKeyItem("Stone Building Guide", 0, 0, 0, 0);
-	flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] += 1;
-	statScreenRefresh();
-	doNext(carpentryShopInside);
-}
-
-public function carpentryShopBuySet3No():void {
-	clearOutput();
-	outputText("\"<i>No thanks,</i>\" you tell him. \n\n");
-	outputText("\"<i>Suit yourself,</i>\" he says as you put the book back where it was.");
-	doNext(carpentryShopInside);
-}
-
 private function urtaIsABadass():void {
 	flags[kFLAGS.PC_SEEN_URTA_BADASS_FIGHT] = 1;
 	clearOutput();
