@@ -69,10 +69,10 @@ public class Changelog extends BaseContent
 			outputText("-Job: Gunslinger effect of +20% to range physical attacks multiplier changed into +10% to range physical/firearms attacks multiplier.");
 			outputText("-Firearms dmg would be now multiplied by firearms attacks multiplier which is range physical multiply + seperate bonuses for all firearms only.\n");
 			outputText("-Alchemical Cartridge, Church of the gun, Explosive cartridge, Tainted Magazine, Silver for Monsters, Named Bullet perk effects of +X% to range physical attacks multiplier changed into +X/2% to range physical/firearms attacks multiplier.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Make Siegweird's quest take Alvina's purification into account. (EragonX)\n");
+			outputText("-Fixes: Polygamy toggling with no marriages, Marae prank option, Sandmother vaginal fuck button (Svalkash)\n");
+			outputText("-Fixed being unable to aquire the achievements and duel scythes for beating Alvina if you are level 185. (Aduro)\n");
+			outputText("-New tier 3 speed lvl-up perk: Power Shot (Ex). Req. Power Shot perk. Effect: Power Shoot p. special damage increased by ~2,5x. Add some of your strength (~40/10% of str / spe scaling value) to normal bow damage / (~40/10% of spe / str scaling value) throwing damage. (+10% range physical attacks multiplier)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -95,7 +95,7 @@ public class Changelog extends BaseContent
 			//remove this line when other two lines below get added ingame
 			//outputText("-New perk for enemies: Elite type enemy. Bonuses for are: Diehard effect of 2,5% of max HP + 750 HP * NG tier, OverMax HP effect of 5% magnitude.\n");
 			//outputText("-New perk for enemies: Champion type enemy. Bonuses for are: Diehard effect of 5% of max HP + 1,500 HP * NG tier, OverMax HP effect of 10% magnitude.\n");
-			outputText("-Fixed bugs: Bard not affected by cap of prestige jobs, last one checks for holli's kill/survive moved into less troublesome spot\n");
+			outputText("-Fixed bugs: Bard not affected by cap of prestige jobs, last one checks for holli's kill/survive moved into less troublesome spot, Benoit/Oswald taking full price for simple backpack size upgade\n");
 			/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");

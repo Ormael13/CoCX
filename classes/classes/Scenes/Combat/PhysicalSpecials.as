@@ -852,6 +852,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage += player.spe;
 		damage += scalingBonusSpeed() * 0.2;
 		damage += scalingBonusStrength() * 0.4;
+		if (player.hasPerk(PerkLib.PowerShotEx)) {
+			damage += player.spe * 1.5;
+			damage += scalingBonusSpeed() * 0.3;
+			damage += scalingBonusStrength() * 0.6;
+		}
 		if (damage < 10) damage = 10;
 		if (!player.hasPerk(PerkLib.DeadlyAim)) damage *= (monster.damageRangePercent() / 100);
 		damage = combat.rangeAttackModifier(damage);

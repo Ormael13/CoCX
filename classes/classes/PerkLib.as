@@ -535,6 +535,9 @@ public class PerkLib
 		public static const FirearmsAttackMultiplier:PerkType = mk("Firearms Attack Multiplier", "Firearms Attack Multiplier",
 				"+5% firearms attacks multiplier bonus and then adds 50% on top of final result.",
 				"You've chosen the 'Firearms Attack Multiplier' perk. +5% firearms attacks multiplier bonus and then adds 50% on top of final result.");
+		public static const PowerShotEx:PerkType = mk("Power Shoot (Ex)", "Power Shoot (Ex)",
+				"Power Shoot p. special damage increased by ~2,5x. Add some of your strength (~40/10% of str / spe scaling value) to normal bow damage / (~40/10% of spe / str scaling value) throwing damage. (+10% range physical attacks multiplier)",
+				"You've chosen the 'Power Shoot (Ex)' perk. Power Shoot p. special damage increased by ~2,5x. Add some of your strength (~40/10% of str / spe scaling value) to normal bow damage / (~40/10% of spe / str scaling value) throwing damage. (+10% range physical attacks multiplier)");
 
 		public static const ElementsOfMarethBasic:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
@@ -542,9 +545,6 @@ public class PerkLib
 		/*public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk, .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, .");
@@ -608,8 +608,8 @@ public class PerkLib
 				"Boosts armor points by a portion of your speed on light/medium armors.",
 				"You've chosen the 'Agility' perk, increasing the effectiveness of light/medium armor by a portion of your speed.");
 		public static const AlchemicalCartridge:PerkType = mk("Alchemical cartridge", "Alchemical cartridge",
-				"Add your intelligence to gun damage as a modifier. (+2.5% range physical / firearms attacks multiplier)",
-				"You've chosen the 'Alchemical cartridge' perk, adding intelligence scaling to firearms damage. (+2.5% range physical / firearms attacks multiplier)");
+				"Add your intelligence to gun damage as a modifier. (+5% firearms attacks multiplier)",
+				"You've chosen the 'Alchemical cartridge' perk, adding intelligence scaling to firearms damage. (+5% firearms attacks multiplier)");
 		public static const AllSeeing:PerkType = mk("All-Seeing", "All-Seeing",
 				"You see everything... so you should have expected this description, and the 10% soul force gain.",
 				"You've chosen the 'All-Seeing' perk, gaining +10% max Soulforce.")
@@ -939,8 +939,8 @@ public class PerkLib
 				"",
 				"You've chosen the 'Chimerical Body:  Stage' perk.").withBuffs({'str.mult':0.05,'int.mult':0.05,'wis.mult':0.05});
 		public static const ChurchOfTheGun:PerkType = mk("Church of the gun", "Church of the gun",
-				"Add your wisdom to gun damage as a modifier. (+5% range physical / firearms attacks multiplier)",
-				"You've chosen the 'Church of the gun' perk, adding wisdom scaling to firearms damage. (+5% range physical / firearms attacks multiplier)");
+				"Add your wisdom to gun damage as a modifier. (+10% firearms attacks multiplier)",
+				"You've chosen the 'Church of the gun' perk, adding wisdom scaling to firearms damage. (+10% firearms attacks multiplier)");
 		public static const CloseToDeath:PerkType = mk("Close to death", "Close to death",
 				"Increasing healing spells effect by 50% when below 25% max HP.",
 				"You've chosen the 'Close to death' perk, increasing healing spells effect when below 25% max HP.");
@@ -5109,6 +5109,8 @@ public class PerkLib
             QuickStrike.requirePerk(SpeedDemon)
                     .requireSpe(120)
                     .requireLevel(18);
+            PowerShotEx.requirePerk(PowerShot)
+					.requireLevel(18);
             Poisoning.requireLevel(18)
                     .requirePerk(JobRogue)
                     .requireCustomFunction(function (player:Player):Boolean {
