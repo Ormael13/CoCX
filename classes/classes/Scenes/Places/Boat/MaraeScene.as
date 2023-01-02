@@ -193,7 +193,7 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
         addButton(0, "Run", runFromPervertedGoddess);
         addButton(1, "Lethicite", maraeStealLethicite).hint("Try to rush in and steal the lethicite crystal!", "Steal Lethicite");
         if (!recalling) addButton(2, "Accept", maraeBadEnd);
-        addButton(3, "Prank", maraeStealLethicite).hint("Play a practical joke on the corrupted goddess and <b>pretend</b> to steal her Lethicite. Why would you do this?", "Practical Joke");
+        addButton(3, "Prank", maraeStealLethicite, true).hint("Play a practical joke on the corrupted goddess and <b>pretend</b> to steal her Lethicite. Why would you do this?", "Practical Joke");
         if (!recalling) addButton(4, "FIGHT!", promptFightMarae1);
     }
 
