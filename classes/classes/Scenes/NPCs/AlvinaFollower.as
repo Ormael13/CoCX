@@ -333,8 +333,6 @@ public function alvinaThirdEncounterYesNeverWon():void
 		outputText("“<i>Checkmates uh… I guess that's just what I deserve for all the things I've done... tsk some justice this world has. Mother... Dad... I'm coming home at last.\"</i>\n\n");
 		outputText("Her shape starts to bloat with light as the immense powers she used to control overwhelms her. Alvina seems to silently accept death before exploding in a conflagration of arcane magic turning to ashes.\n\n");
 		outputText("You turn your eyes away, nauseated at the scene… This is what happens to those who play with forbidden powers, quite a fitting end. You prepare to leave the cave feeling like you have rid Mareth of a powerful villain but before you do you grab the shattered remains of Alvina phylactery with you. Someone is bound to know what to do with this.\n\n");
-		awardAchievement("The end and the beginning", kACHIEVEMENTS.GENERAL_THE_END_AND_THE_BEGINNING);
-		if (flags[kFLAGS.GAME_DIFFICULTY] >= 4) awardAchievement("Beyond gods and mortals", kACHIEVEMENTS.GENERAL_BEYOND_GODS_AND_MORTALS);
 		alvinaDies(camp.returnToCampUseSixHours);
 	}
 }
@@ -342,6 +340,9 @@ private function alvinaDies(next:Function):void {
 	outputText("\n<b>Found Alvina's Shattered Phylactery</b>\n\n");
 	player.createKeyItem("Alvina's Shattered Phylactery", 0, 0, 0, 0);
 	flags[kFLAGS.ALVINA_FOLLOWER] = 12;
+	awardAchievement("The end and the beginning", kACHIEVEMENTS.GENERAL_THE_END_AND_THE_BEGINNING);
+	if (flags[kFLAGS.GAME_DIFFICULTY] >= 4)
+		awardAchievement("Beyond gods and mortals", kACHIEVEMENTS.GENERAL_BEYOND_GODS_AND_MORTALS);
 	if (flags[kFLAGS.GAME_DIFFICULTY] >= 2)
 		inventory.takeItem(weapons.ATWINSCY, next);
 	else doNext(next);
@@ -377,9 +378,7 @@ public function alvinaThirdEncounterYesNeverLostNightmare():void
 public function alvinaThirdEncounterPutHerOutOfHerMisery():void
 {
 	outputText("With one decisive strike you stomp on Alvina's chest causing the pendant at her neck to crack and break into so many shards of purple crystals. Alvina's body, as if unable to sustain further damage, simply explodes into a shower of ashes and embers. You prepare to leave the cave feeling like you have rid Mareth of a powerful villain but before you do you grab the shattered remains of Alvina phylactery with you. Someone is bound to know what to do with this.");
-	player.createKeyItem("Alvina's Shattered Phylactery", 0, 0, 0, 0);
-	flags[kFLAGS.ALVINA_FOLLOWER] = 12;
-	doNext(camp.returnToCampUseSixHours);
+	alvinaDies(camp.returnToCampUseSixHours);
 }
 public function alvinaThirdEncounterTakeHer():void
 {
