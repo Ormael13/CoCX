@@ -3835,7 +3835,7 @@ public class Camp extends NPCAwareContent{
 		bd.add("He'Xin'Dao", SceneLib.hexindao.riverislandVillageStuff0)
 				.hint("Visit the village of He'Xin'Dao, a place where all greenhorn soul cultivators come together.")
 				.disableIf(flags[kFLAGS.HEXINDAO_UNLOCKED]<1, "Explore the realm.", null, "???")
-		bd.add("Tel'Adre", SceneLib.telAdre.telAdreMenu)
+		bd.add("Tel'Adre", SceneLib.telAdre.visitTelAdre)
 				.hint("Visit the city of Tel'Adre in desert, easily recognized by the massive tower.")
 				.disableIf(player.statusEffectv1(StatusEffects.TelAdre) < 1, "Search the desert.", null, "???");
 		bd.add("Bazaar", SceneLib.bazaar.enterTheBazaar)
@@ -3998,7 +3998,7 @@ public class Camp extends NPCAwareContent{
 		else addButtonDisabled(2, "???", "Search the lake on the boat.");
 		addButton(4, "Next", placesPage2);
 
-		if (player.statusEffectv1(StatusEffects.TelAdre) >= 1) addButton(5, "Tel'Adre", SceneLib.telAdre.telAdreMenu).hint("Visit the city of Tel'Adre in desert, easily recognized by the massive tower.");
+		if (player.statusEffectv1(StatusEffects.TelAdre) >= 1) addButton(5, "Tel'Adre", SceneLib.telAdre.visitTelAdre).hint("Visit the city of Tel'Adre in desert, easily recognized by the massive tower.");
 		else addButtonDisabled(5, "???", "Search the desert.");
 		if (flags[kFLAGS.BAZAAR_ENTERED] > 0) addButton(6, "Bazaar", SceneLib.bazaar.enterTheBazaar).hint("Visit the Bizarre Bazaar where the demons and corrupted beings hang out.");
 		else addButtonDisabled(6, "???", "Search the plains.");
@@ -4703,4 +4703,4 @@ public function rebirthFromBadEnd():void {
 	}
 
 }
-}
+}
