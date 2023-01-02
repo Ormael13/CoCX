@@ -389,7 +389,7 @@ public class UniqueSexScenes extends BaseContent
 							" No longuer able to wait you plunge your ");
 					if (player.cocks[0].cockLength >= 15) outputText("massive");
 					if ((player.horseCocks() >= 1) || (player.kirinCocks() >= 1)) outputText(" horse");
-					outputText("cock into [monster his] exposed \"+monster.assholeOrPussy()+\" clenching your teeth and foaming at the mouth in pleasure");
+					outputText("cock into [monster his] exposed "+monster.assholeOrPussy()+" clenching your teeth and foaming at the mouth in pleasure");
 					if (player.cocks[0].cockLength >= 15){
 						outputText("as your force inches after inches of your bouncy");
 						if ((player.horseCocks() >= 1) || (player.kirinCocks() >= 1)) outputText(" horse");
