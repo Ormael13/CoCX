@@ -354,9 +354,11 @@ public function loppeGenericMeetings():void {
 	else if (usagiHasReturned && !usagiReacted) usagiReturns();
 	else if (flags[kFLAGS.LOPPE_KIDS] >= flags[kFLAGS.LOPPE_KIDS_LIMIT] && flags[kFLAGS.LOPPE_FERTILE] == 1) noMoreBabies();
 	else if (flags[kFLAGS.LOPPE_KIDS] >= flags[kFLAGS.LOPPE_KIDS_LIMIT] && flags[kFLAGS.LOPPE_FERTILE] == 0 && flags[kFLAGS.LOPPE_KIDS_LIMIT] == 8 && usagiHasReturned) letsHaveMoreKiddies();
-	else if (pregnancy.isPregnant) loppePreggoApproached()
-	else
-		outputText("You decide to approach the bunny-girl.  Loppe smiles and wipes the sweat off her brow with the towel.  \"<i>Hey there, [name], nice seeing you around here.  So... do you want to do something?  Talk, maybe?  Or go to my place for a 'workout'?</i>\" she asks with a smirk.");
+	else if (pregnancy.isPregnant) {
+		loppePreggoApproached();
+		return;
+	}
+	outputText("You decide to approach the bunny-girl.  Loppe smiles and wipes the sweat off her brow with the towel.  \"<i>Hey there, [name], nice seeing you around here.  So... do you want to do something?  Talk, maybe?  Or go to my place for a 'workout'?</i>\" she asks with a smirk.");
 	loppeMenu();
 }
 
@@ -370,7 +372,7 @@ private function loppeMenu():void {
 	addButton(0,"Appearance",appearanceOfLoppe);
 	addButton(1,"Talk",talkWithLoppe);
 	addButton(2,"Sex",loppeSexChoice);
-	if (loppeTalkedAboutKids) addButton(3, "Conrtraception", toggleContraception).hint("Currently: "+(flags[kFLAGS.LOPPE_FERTILE] == 1?"Off":"On"), "Contraceptives");
+	if (loppeTalkedAboutKids) addButton(3, "Contraception", toggleContraception).hint("Currently: "+(flags[kFLAGS.LOPPE_FERTILE] == 1?"Off":"On"), "Contraceptives");
 	addButton(4,"Leave",telAdre.telAdreMenu);
 	//Leave (Return to Tel'Adre menu)
 }
@@ -2331,17 +2333,20 @@ public function loppeKnockupAttempt(isplayer:Boolean = false):void {
 		if (flags[kFLAGS.LOPPE_FERTILE] > 0) {
 			if (rand(5) == 0 || player.cumQ() > rand(1000) || player.virilityQ() >= 0.5) {
 				pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_LOPPE);
+				outputText("<b>Loppe is pregnant!</b>")
 			}
 		}
 	}
 }
 private function get canGetPreg():Boolean {
 	var kids:int = flags[kFLAGS.LOPPE_KIDS];
+	var limit:Number = flags[kFLAGS.LOPPE_KIDS_LIMIT];
 	if (pregnancy.isPregnant) kids += 2;
 	if (player.isPregnant() && player.pregnancyType == PregnancyStore.PREGNANCY_LOPPE) kids += 2;
-	return kids < flags[kFLAGS.LOPPE_KIDS];
+	return kids < flags[kFLAGS.LOPPE_KIDS_LIMIT];
 }
 private function toggleContraception():void {	//TODO
+	if (flags[kFLAGS.LOPPE_KIDS_LIMIT] == 0) flags[kFLAGS.LOPPE_KIDS_LIMIT] = 8;
 	if (flags[kFLAGS.LOPPE_FERTILE] == 0 && flags[kFLAGS.LOPPE_KIDS] >= flags[kFLAGS.LOPPE_KIDS_LIMIT]) contraceptionNope();
 	if (flags[kFLAGS.LOPPE_FERTILE] == 1) contraceptionOn();
 	else contraceptionOff();
@@ -2360,7 +2365,7 @@ private function contraceptionOn():void {
 	outputText("You sadly tell Loppe that you think it’s not a good idea for her to be running around with her fertility restored now.  She needs to put her contraception back on.[pg]");
 	outputText("The laquine looks disappointed, but concedes the wisdom of your words.  She closes her eyes and reluctantly starts chanting, causing a dull light to flare from her womb, cock and pussy.  This promptly dies away and she shakes her head as she opens her eyes.  “<i>Done.  " + (pregnancy.isPregnant? "It wont affect the kits I'm currently carrying, but will be effective when they pop out or if we have a tumble.  ":"")+
 			"So, what else do you want, [name]?</i>”[pg]");
-	flags[kFLAGS.LOPPE_FERTILE] = false;
+	flags[kFLAGS.LOPPE_FERTILE] = 0;
 	loppeMenu();
 }
 

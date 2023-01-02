@@ -2012,6 +2012,7 @@ import classes.Scenes.SceneLib;
 			outputText("Maybe adjust texts of Uma's massages to her showing Loppe how, or even Loppe doing the massage instead[pg]");
 			flags[kFLAGS.LOPPE_TRAINING]++;
 			//set loppe training active
+			doNext(camp.returnToCampUseOneHour);
 		}
 	}
 }
