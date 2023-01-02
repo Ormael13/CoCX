@@ -496,6 +496,10 @@ public function barTelAdre():void {
 		if(!SceneLib.alvinaFollower.MetAlvinaAtBar)
 			button = anotherButton(button, "???", SceneLib.alvinaFollower.alvinaMeetAtBar);
 		else button = anotherButton(button, "Alvina", SceneLib.alvinaFollower.alvinaMeetAtBar);
+	} else if (SceneLib.alvinaFollower.alvinaOnGiftCooldown()) {
+		SceneLib.alvinaFollower.alvinaGiftCooldownDescription();
+	} else if (SceneLib.alvinaFollower.alvinaWaitingAtRavine()) {
+		SceneLib.alvinaFollower.alvinaWaitingAtRavineDescription();
 	}
 	//AMILY!
 	if(flags[kFLAGS.AMILY_VISITING_URTA] == 1) {
