@@ -2932,6 +2932,10 @@ public class Combat extends BaseContent {
 				if (weaponRangePerk == "Bow") {
 					damage += player.spe * 2;
 					damage += scalingBonusSpeed() * 0.4;
+					if (player.hasPerk(PerkLib.PowerShotEx)) {
+						damage += scalingBonusStrength() * 0.4;
+						damage += scalingBonusSpeed() * 0.1;
+					}
 					if (damage < 20) damage = 20;
 				}
 				if (weaponRangePerk == "Crossbow") damage += player.weaponRangeAttack * 20;
@@ -3576,6 +3580,10 @@ public class Combat extends BaseContent {
                     damage += player.inte;
                     damage += scalingBonusIntelligence() * 0.4;
                 }
+				if (player.hasPerk(PerkLib.PowerShotEx)) {
+					damage += scalingBonusSpeed() * 0.4;
+					damage += scalingBonusStrength() * 0.1;
+				}
                 if (damage < 20) damage = 20;
                 if (player.hasPerk(PerkLib.DeadlyThrow)) damage += player.spe;
 				damage *= 1.5;
@@ -3732,6 +3740,10 @@ public class Combat extends BaseContent {
                 damage += player.inte;
                 damage += scalingBonusIntelligence() * 0.4;
             }
+			if (player.hasPerk(PerkLib.PowerShotEx)) {
+				damage += scalingBonusSpeed() * 0.4;
+				damage += scalingBonusStrength() * 0.1;
+			}
             if (player.hasPerk(PerkLib.DeadlyThrow)) damage += player.spe;
             if (damage < 20) damage = 20;
 			damage *= 1.5;
@@ -15243,24 +15255,23 @@ public function rangePhysicalForce():Number {
     if (player.hasPerk(PerkLib.JobRanger)) mod += .1;
     if (player.hasPerk(PerkLib.JobHunter)) mod += .2;
     if (player.hasPerk(PerkLib.JobGunslinger)) mod += .1;
-	if (player.hasPerk(PerkLib.RangeWeaponsAttackMultiplier)) mod += .05;
     if (player.hasPerk(PerkLib.CarefulButRecklessAimAndShooting)) mod += .05;
     if (player.hasPerk(PerkLib.Sharpshooter)) mod += .05;
     if (player.hasPerk(PerkLib.PowerShot)) mod += .05;
-    if (player.hasPerk(PerkLib.AlchemicalCartridge)) mod += .025;
+    if (player.hasPerk(PerkLib.PowerShotEx)) mod += .1;
     if (player.hasPerk(PerkLib.ColdAim)) mod += .1;
     if (player.hasPerk(PerkLib.DeadlyThrow)) mod += .1;
     if (player.hasPerk(PerkLib.PracticedShot)) mod += .1;
-    if (player.hasPerk(PerkLib.ChurchOfTheGun)) mod += .05;
     if (player.hasPerk(PerkLib.ExplosiveCartridge)) mod += .05;
     if (player.hasPerk(PerkLib.TaintedMagazine)) mod += .05;
     if (player.hasPerk(PerkLib.AnatomyExpert)) mod += .15;
     if (player.hasPerk(PerkLib.EagleEye)) mod += .15;
     if (player.hasPerk(PerkLib.SilverForMonsters)) mod += .075;
-    if (player.hasPerk(PerkLib.NamedBullet)) mod += .1;//155% up to here
+    if (player.hasPerk(PerkLib.NamedBullet)) mod += .1;//152,5% up to here
     if (player.hasPerk(PerkLib.PrestigeJobArcaneArcher)) mod += .4;
     if (player.hasPerk(PerkLib.ElementalArrows)) mod += .2;
-    if (player.hasPerk(PerkLib.Cupid)) mod += .2;//235% up to here
+    if (player.hasPerk(PerkLib.Cupid)) mod += .2;//232,5% up to here
+	if (player.hasPerk(PerkLib.RangeWeaponsAttackMultiplier)) mod += .05;
 	if (player.hasPerk(PerkLib.RangeWeaponsAttackMultiplier)) mod *= 1.5;
     if (player.hasPerk(PerkLib.AscensionBloodlust)) mod *= 1 + (player.perkv1(PerkLib.AscensionBloodlust) * 0.1);
     if (player.hasPerk(PerkLib.HistoryScout) || player.hasPerk(PerkLib.PastLifeScout)) mod *= historyScoutBonus();
@@ -15275,12 +15286,12 @@ public function firearmsForce():Number {
 	if (player.hasPerk(PerkLib.AmateurGunslinger)) mod += .05;
 	if (player.hasPerk(PerkLib.ExpertGunslinger)) mod += .1;
 	if (player.hasPerk(PerkLib.MasterGunslinger)) mod += .15;
-    if (player.hasPerk(PerkLib.AlchemicalCartridge)) mod += .025;
-    if (player.hasPerk(PerkLib.ChurchOfTheGun)) mod += .05;
+    if (player.hasPerk(PerkLib.AlchemicalCartridge)) mod += .05;
+    if (player.hasPerk(PerkLib.ChurchOfTheGun)) mod += .1;
     if (player.hasPerk(PerkLib.ExplosiveCartridge)) mod += .05;
     if (player.hasPerk(PerkLib.TaintedMagazine)) mod += .05;
     if (player.hasPerk(PerkLib.SilverForMonsters)) mod += .075;
-    if (player.hasPerk(PerkLib.NamedBullet)) mod += .1;//75% up to here
+    if (player.hasPerk(PerkLib.NamedBullet)) mod += .1;//82,5% up to here
 	if (player.hasPerk(PerkLib.FirearmsAttackMultiplier)) {
 		mod += .05;
 		mod *= 1.5;
