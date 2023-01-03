@@ -1901,6 +1901,11 @@ public class Camp extends NPCAwareContent{
 			if (helspawnFollower()) {
 				buttons.add(flags[kFLAGS.HELSPAWN_NAME], helSpawnScene.helspawnsMainMenu);
 			}
+			//Etna daughter
+			if (followerEtnaKid()) {
+				etnaKidFollower().etnaDaughterCampDescription();
+				buttons.add(EtnaDaughterScene.EtnaDaughterName, etnaKidFollower().etnaDaughterMainMenu);
+			}
 			//Valaria
 			if (flags[kFLAGS.VALERIA_AT_CAMP] == 1 && flags[kFLAGS.TOOK_GOO_ARMOR] == 1) {
 				buttons.add("Valeria", valeria.valeriaFollower).hint("Visit Valeria the goo-girl. You can even take and wear her as goo armor if you like.");
@@ -3526,6 +3531,9 @@ public class Camp extends NPCAwareContent{
 			} else if (flags[kFLAGS.SLEEP_WITH] == "Belisa" && BelisaFollower.BelisaInCamp) {
 				outputText("You decide to sleep with Belisa tonight. You help her close up her shop, packing the bands away, and climb into her hammock/bed, putting a hand on her cheek. Belisa pulls you towards her, resting one of her pillows under each of your heads. She hugs your arm, head on your shoulder, and you can’t help but feel safe as she expertly pulls a light blanket over the two of you. ");
 				outputText("She whispers a sweet \"<i>good night</i>\" to you, and you drift into sleep, a soft, sweet scent of cinnamon in your nostrils.");
+			} else if (flags[kFLAGS.SLEEP_WITH] == "Etna" && flags[kFLAGS.ETNA_FOLLOWER] == 1) {
+				SceneLib.etnaScene.sleepWithEtna();
+				return;
 			} else if (flags[kFLAGS.SLEEP_WITH] == "Tyrantia" && TyrantiaFollower.isLover()) {
 				outputText("You decide to lie down next to Tyrantia, in her hutch. She wraps her muscular, fluffy arms around you, and you rest your head on one of her massive breasts. The soft tit is better than most pillows, and as Tyrantia pulls a massive, crudely made quilt over you both, you quickly warm up, sinking into a deep sleep.");
 			} else if (flags[kFLAGS.SLEEP_WITH] == "Ember" && flags[kFLAGS.EMBER_AFFECTION] >= 75 && followerEmber()) {

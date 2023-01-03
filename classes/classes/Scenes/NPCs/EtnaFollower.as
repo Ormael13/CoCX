@@ -11,12 +11,80 @@ import classes.Scenes.Areas.HighMountains.MinotaurMob;
 import classes.Scenes.Monsters.Manticore;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
+import classes.internals.SaveableState;
 
-public class EtnaFollower extends NPCAwareContent
+public class EtnaFollower extends NPCAwareContent implements TimeAwareInterface, SaveableState
+{
+
+	public static var EtnaHunting:Boolean;
+	public static var EtnaInfidelity:int;	//0 = not yet happened, 1 = pc accept, 2 = pc reject, 3 = pc feeds her
+	public static var EtnaFertile:Boolean;
+	public static var EtnaJumpedToday:Boolean
+
+	public function stateObjectName():String {
+		return "EtnaFollower";
+	}
+
+	public function resetState():void {
+		EtnaHunting = false;
+		EtnaInfidelity = 0;
+		EtnaFertile = false;
+		EtnaJumpedToday = false;
+	}
+
+	public function saveToObject():Object {
+		return {
+			"EtnaHunting": EtnaHunting,
+			"EtnaInfidelity": EtnaInfidelity,
+			"EtnaFertile": EtnaFertile,
+			"EtnaJumpedToday": EtnaJumpedToday
+		};
+	}
+
+	public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
+		if (o) {
+			EtnaHunting = "EtnaHunting" in o ? o["EtnaHunting"]: false;
+			EtnaInfidelity = "EtnaInfidelity" in o ? o["EtnaInfidelity"]: 0;
+			EtnaFertile = "EtnaFertile" in o ? o["EtnaFertile"]: false;
+			EtnaJumpedToday = "EtnaJumpedToday" in o ? o["EtnaJumpedToday"]: false;
+		} else resetState();
+	}
+
+	public var pregnancy:PregnancyStore;
+
+	public function timeChange():Boolean {
+		var needNext:Boolean = false;
+		if (model.time.hours == 6) EtnaJumpedToday = false;
+		pregnancy.pregnancyAdvance();
+		if (pregnancy.isPregnant && etnaPregUpdate()) needNext = true;
+		if (EtnaHunting && (player.hasCock() || player.hasKeyItem("Demonic Strap-On") > 0)) {
+			outputText("\n<b>Having learned that you can produce cum again Etna stopped hunting!</b>\n");
+			EtnaHunting = false;
+			needNext = true;
+		}
+		return needNext;
+	}
+
+	public function timeChangeLarge():Boolean {
+		if (pregnancy.isPregnant && pregnancy.incubation == 0) {
+			etnaGivesBirth();
+			pregnancy.knockUpForce(); //Clear Pregnancy
+			return true;
+		}
+		if (!EtnaJumpedToday && flags[kFLAGS.SLEEP_WITH] != "Etna" && rand(5) == 0) {
+			etnaJumpsPCinCamp();
+			return true;
+		}
+		return false;
+	}
+
+	public function EtnaFollower()
 	{
-		
-		public function EtnaFollower()
-		{}
+		pregnancy = new PregnancyStore(kFLAGS.ETNA_PREGNANCY_TYPE, kFLAGS.ETNA_INCUBATION, 0, 0);
+		pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_PLAYER, 280, 220, 160, 60);
+		EventParser.timeAwareClassAdd(this);
+		Saves.registerSaveableState(this);
+	}
 
 //flag ETNA_TALKED_ABOUT_HER: 0 - not know her name, 1 - know her name, 2 - Etna in Yandere mode
 
@@ -374,7 +442,8 @@ private function etnaRapesYesCome2Camp():void
 	spriteSelect(SpriteDb.s_etna);
 	clearOutput();
     outputText("The girl clearly seems to be in love and after doing it so many times with her, you can’t deny having similar feelings towards the manticore. You express to her your accord to which she responds by kissing you passionately as you both begin to undress.\n\n");
-	flags[kFLAGS.ETNA_FOLLOWER] = 1;
+	if (EtnaInfidelity == 2) EtnaInfidelity = 3;
+	else flags[kFLAGS.ETNA_FOLLOWER] = 1;
 	if (player.hasCock()) {
 		outputText("You proceed to undress with deliberate slowness, presenting your penis to Etna, who is almost shaking out of control as she eyes it.\n\n");
 		outputText("To tease her, you slap her in the face with your dick, to which she responds like a kitty cat, trying to grab it with both paws. You dick slap her a few times, until she finally grabs your cock with her furry hands, trying to hold it still. She reminds you of one of the house cats back home, when you teased them with a cotton stick. She starts by slowly licking your dick with her tongue, carefully lubricating the entire length. She really does lick like a cat, and the hooks on her tongue drag pleasurably along the skin of your dick. Idly, you wonder if Etna likes milk.\n\n");
@@ -412,13 +481,16 @@ private function etnaCome2Camp():void
 		outputText("Etna replies smirking. \"<i>So what, you milfy bird? It’s not like you need more of [name]’s affection after your hundredth kid! Heck, I'm surprised a slut like you hasn’t already taken a permanent mate or maybe, you just don't consider men as such?</i>\"\n\nIt takes everything you have to prevent Sophie and Etna from fighting, but you eventually manage to calm them down and force them to make peace. Sophie begrudgingly shakes hands with Etna but you’re quite aware the odds of them becoming friends is quite slim.\n\n");
 	}
 	outputText("Her examination of your camp done, Etna proceeds to make herself comfortable and settle down.\n\n");
-	outputText("\n\n<b>Before settling in, as if remembering something, Etna pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
-	if (player.hasKeyItem("Radiant shard") >= 0){
-		player.addKeyValue("Radiant shard",1,+1);
+	if (flags[kFLAGS.ETNA_FOLLOWER] < 2) {
+		outputText("\n\n<b>Before settling in, as if remembering something, Etna pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
+		if (player.hasKeyItem("Radiant shard") >= 0){
+			player.addKeyValue("Radiant shard",1,+1);
+		}
+		else player.createKeyItem("Radiant shard", 1,0,0,0);
+		outputText("(<b>Etna has been added to the Lovers menu!</b>)\n\n");
+
+		flags[kFLAGS.ETNA_FOLLOWER] = 2;
 	}
-	else player.createKeyItem("Radiant shard", 1,0,0,0);
-	outputText("(<b>Etna has been added to the Lovers menu!</b>)\n\n");
-	flags[kFLAGS.ETNA_FOLLOWER] = 2;
 	flags[kFLAGS.ETNA_DAILY_VENOM_VIAL] = 0;
 	doNext(playerMenu);
 }
@@ -442,7 +514,7 @@ public function etnaRapeYandere():void
 	outputText("\"<i>Slept well love? I couldn't stand you saying no when your eyes were clearly saying yes so I brought you here in order to help you become more honest with yourself. I know you love me and I will never let you leave me again, <b>we will</b> be together forever. You love me, don’t you? <b>DON’T YOU</b>?</i>\"\n\n");
 	outputText("You see a pair of red cat eyes glowing in the dark to your right... It is obviously Etna. She’s in there with you and she’s clearly going to give you a run for your gems if you don’t escape this deathtrap. You try to stand up and run but to your horror you discover she tied you up to a chair. You’re utterly powerless! Etna resume speaking.\n\n");
 	outputText("\"<i>You led me on and on, having sex with me, repeatedly turning me on");
-	//if () outputText(" and even going so far as to confess your undying love for me");
+	if (EtnaInfidelity == 2) outputText(" and even going so far as to confess your undying love for me");
 	outputText(". Yet... In the end you denied me or should I say us.. Like if our story had never existed. You hurt me [name]... You have no idea how much your words hurted me it was like my whole world was falling apart.  To cement back our bond as lovers I will share with you all the pain you inflicted on my heart so that your heart can understand it too.</i>\"\n\n");
 	outputText("Wait, share what?! Etna doesn’t give you any time to contemplate the things she will do to you as she proceeds to walk out of the shadows, holding one of her spikes like a dagger. It’s dripping with venom and you have an excellent idea of what she plans to do with it.\n\n");
 	outputText("\"<i>You and I are going to play a game [name]. See these flowers on the table there. For each petal I pull and count as you loving me I’m going to stab you once and for each that I pull and count as hating me I’m going to stab you twice! So let us begin, you love me...</i>\"\n\n");
@@ -574,7 +646,13 @@ public function etnaCampMenu():void
 {
 	spriteSelect(SpriteDb.s_etna);
 	clearOutput();
-	outputText("As you approach Etna’s rug, she stretches on all fours, giving you a hopeful expression as she notices you’re walking towards her.\n\n\"<i>Nya, great day lover. Are you here to have some fun with your pet catgirl? Or do you just want to talk to me? I must admit, my tail is itching, you already know how hungry I am.</i>\"\n\nShe gives you a naughty expression that tells everything. Obviously, a manticore is always ready.");
+	if ((EtnaInfidelity == 1 || EtnaInfidelity == 3 ) && !EtnaFertile) {
+		etnaAfterInfidelity();
+		return;
+	}
+	if (pregnancy.isPregnant && etnaPregApproach()) {}
+	else outputText("As you approach Etna’s rug, she stretches on all fours, giving you a hopeful expression as she notices you’re walking towards her.");
+	outputText("\n\n\"<i>Nya, great day lover. Are you here to have some fun with your pet catgirl? Or do you just want to talk to me? I must admit, my tail is itching, you already know how hungry I am.</i>\"\n\nShe gives you a naughty expression that tells everything. Obviously, a manticore is always ready.");
 	menu();
 	addButton(0, "Appearance", etnaAppearance).hint("Examine Etna's detailed appearance.");
 	addButton(1, "Talk", etnaTalkMenu).hint("Ask Etna about something.");
@@ -593,6 +671,9 @@ public function etnaCampMenu():void
 	if (flags[kFLAGS.ETNA_FOLLOWER] < 3) addButton(6, "Marriage", etnaMarriage)
 		.disableIf(player.isGenderless(), "Come on, you're genderless!")
 		.disableIf(flags[kFLAGS.MICHIKO_TALK_MARRIAGE] == 0, "You don't even know if it's possible in Mareth. Try talking to random people in random river towns... maybe you'll find out?");
+	if (flags[kFLAGS.SLEEP_WITH] != "Etna") addButton(7, "Sleep With", etnaSleepToggle).hint("Spend your nights with Etna.");
+	else addButton(7, "Sleep Alone", etnaSleepToggle).hint("Stop sleeping with Etna.");
+
 	addButton(14, "Back", camp.campLoversMenu);
 }
 
@@ -604,6 +685,18 @@ public function etnaAppearance():void
 	outputText("The comparison to a lion ends there, as a pair of large bat-like wings that can stretch up to 13 feet wide rest on her shoulders. From her well-shaped ass surges a scorpion-like tail covered in armor like chitin. At her tail tip is a large bulb covered with venomous spikes from which venom drips off. She can open her tail tip at will which expands into a star-shaped tail pussy of accommodating size that’s always ready to devour a man’s tool and is constantly drooling with moisture.\n\n");
 	outputText("As her nature of a sexual predator would tell, she is endowed with a pair of pert breasts easily reaching E cup and her perfect hourglass shape could make many succubi jealous.\n\n");
 	outputText("Her main pussy, funnily enough, is the only thing about her that doesn’t look perpetually ready for sex. She likely doesn't use it often.");
+	if (pregnancy.isPregnant){
+		switch (pregnancy.event) {
+			case 1: outputText("\nShe’s smiling as she caresses her belly, which bulges slightly.");
+				break;
+			case 2: outputText("\nHer belly is definitely swollen now, forming a round bump which likely means she’s pregnant with a cub.");
+				break;
+			case 3: outputText("\nHer belly is definitely bigger than before which likely means she’s pregnant with a cub.");
+				break;
+			case 4: outputText("\nHer belly has swollen up to the point that she looks nine months pregnant, and will give birth very soon.");
+				break;
+		}
+	}
 	menu();
 	addButton(14, "Back", etnaCampMenu);
 }
@@ -643,6 +736,7 @@ public function etnaTalkManticores():void
 
 public function etnaMarriage():void
 {
+	spriteSelect(SpriteDb.s_etna);
 	clearOutput();
 	outputText("You want to propose to Etna, your love with her is true however you take the time to question yourself. You ");//outputText("");
 	if (!player.hasItem(jewelries.ENDGRNG, 1)) {
@@ -841,6 +935,7 @@ public function etnaPussyOpera2():void
 	if (player.cumQ() < 2000) player.cumMultiplier += 4;
 	if (player.cumQ() < 10000) player.cumMultiplier += 2;
 	player.sexReward("vaginalFluids","Dick");
+	etnaKnockupAttempt();
 	if (flags[kFLAGS.ETNA_TALKED_ABOUT_HER] < 3) flags[kFLAGS.ETNA_TALKED_ABOUT_HER] = 3;
 }
 
@@ -891,6 +986,8 @@ public function mishapsLunaEtna():void {
 	doNext(playerMenu);
 }
 
+
+
 private function tailExploration():void {
 	clearOutput();
 	outputText("Your eyes zero in on Etna's tail pussy. This thing is so juicy and filled with fluids it constantly drools. You lick your lips in anticipation, Etna giving you a worried look. \n"
@@ -906,6 +1003,169 @@ private function tailExploration():void {
 	doNext(camp.returnToCampUseOneHour);
 }
 
+public function etnaSleepToggle():void {
+	clearOutput();
+	if (flags[kFLAGS.SLEEP_WITH] != "Etna") {
+		outputText("“<i>Nyaaaa I thought you would never ask. Sure I will gladly sleep with you [name]. " +(player.hasCock()? "Just don’t be surprised if I feel thirsty in the morning.":"")+ "</i>”");
+		flags[kFLAGS.SLEEP_WITH] = "Etna";
+	} else {
+		outputText("“<i>Oh, well if you dont want to sleep with me anymore, I understand [name]. </i> she says sulkily with her tail hanging low.");
+		flags[kFLAGS.SLEEP_WITH] = "";
+	}
+}
+
+public function sleepWithEtna():void {
+	spriteSelect(SpriteDb.s_etna);
+	clearOutput();
+	outputText("Etna is already waiting for you on the couch and warmly wraps her paws around you as she snuggles up to you. Her fur is warm and silky adding to your comfort like a nice blanket. ");
+	if (player.hasCock()) outputText("She gently unwinds and plugs her tail to [onecock] penis making you gasp in pleasure as she slowly begins to massage you. Well, you won’t have to be afraid of any wet dream soiling the bed with Etna around. ");
+	outputText("You slowly doze off to her slow loving heartbeat.[pg]");
+	outputText("“<i>Good night love. Rest easy, you are with me and I won’t let anything happen to you. I will guard your dreams for you.</i>”[pg]");
+	if (player.hasCock()) {
+		player.sexReward("vaginalFluids", "Dick");
+	}
+	doNext(camp.sleepWrapper, 1.2);
+}
+
+public function etnaInfidelityEncounter():void {
+	spriteSelect(SpriteDb.s_etna);
+	clearOutput();
+	outputText("As you wander in the high mountain/mountain area you spot a few unconscious minotaurs snoring on the floor. You thought having her as your girlfriend would’ve helped her condition but it seems Etna is still busy screwing everything she can when you're not at camp. You find her not far away, busy raping what’s left of a minotaur.[pg]");
+	outputText("“<i>Fill my tail, you brutish idiot! Don’t you see I’m hungry!</i>”[pg]");
+	outputText("The poor bull man’s face is caught between orgasm and pain and you imagine all too well he is forcibly being milked of more than he could possibly carry. You approach Etna, planning on asking her an explanation as to her complete infidelity she quickly acknowledges your presence, looking worried.[pg]");
+	outputText("“<i>Uh, oh… [name] it's not what you think! I was hungry and I… well you see all these walking reservoirs around here and...</i>”[pg]");
+
+	menu();
+	addButton(0, "Accept", acceptInfidelity);
+	addButton(1, "Break off", breakOffInfidelity);
+	addButtonIfTrue(2, "Satisfy her", satisfyHerInfidelity, "You dont have enough cum to satisfy her", player.cumQ() >= 2000);
+
+	function acceptInfidelity():void {
+		clearOutput();
+		outputText("It’s ok, you understand you can’t satisfy this crazy hunger of hers all on your own. Heck, she would be the death of you.[pg]");
+		outputText("“<i>T...Thanks [name] I will try to make it up to you one way or another!</i>”[pg]");
+		outputText("That said you leave Etna to her lunch heading back to camp just in time to see the minotaur explode in her tail again.[pg]");
+		EtnaInfidelity = 1;
+		doNext(camp.returnToCampUseOneHour);
+	}
+	function breakOffInfidelity():void {
+		clearOutput();
+		outputText("You just can’t stand knowing Etna has been cheating all this time with countless partners and tell her not to bother coming back to camp as your relationship is over. Etna seems like she’s about to break in tears but your position is final.[pg]");
+		outputText("“<i>Nooo! [name] please do not abandon me I wouldn’t be able to stand it!</i>”[pg]");
+		outputText("She keeps begging and crying but your decision is final. You leave the heartbroken manticore behind as you head back to camp. Her last words carry in the wind like a sharp knife giving you the chills.[pg]");
+		outputText("“<i>You CANNOT deny our love! I will force you to acknowledge it and stalk you to the end of the world if I have to! [name] you are MINE just as I am yours, our bonds are unbreakable!</i>”[pg]");
+		EtnaInfidelity = 2;
+		doNext(camp.returnToCampUseOneHour);
+	}
+	function satisfyHerInfidelity():void {
+		clearOutput();
+		outputText("You mention to the manticore that if she was so hungry all she had to do was to tell you about it. You have enough cum within you to knock up an army of women if need be.[pg]");
+		outputText("“<i>You.. you’re kidding you had this much yet you never let me know? Fine, fine my days of infidelity are over but I expect you to fulfill your end of the bargain, lover.</i>”[pg]");
+		outputText("On these words, she knocks the minotaur she was raping unconscious and heads back to camp adding.[pg]");
+		outputText("“<i>I will expect my daily share once you’re home.</i>”[pg]");
+		outputText("You really hope you didn't get in over your head.[pg]");
+		EtnaInfidelity = 3;
+		doNext(camp.returnToCampUseOneHour);
+	}
+}
+
+private function etnaJumpsPCinCamp():void {
+	clearOutput();
+	outputText("Etna pounces on you as you enter your camp, she's obviously very hungry.[pg]");
+	outputText("“<i>[name] I’m starved! Give me some food now!</i>”[pg]");
+	if (!player.hasCock() && player.hasKeyItem("Demonic Strap-On") <= 0) {
+		outputText("Etna walks to you and she looks really angry.[pg]");
+		outputText("“<i>Look our deal is that you will feed me the cum I need to survive and there is no way you can with this equipment. Either grow back a dick or find some other way to do it. I don't care how, you need to provide me cum.</i>”[pg]");
+		outputText("Etna flies out of camp likely looking for a meal.[pg]");
+		outputText("“<i>Until you can fulfill your promise I will be hunting outside and only coming back by night time. You know what to do!</i>”[pg]");
+		outputText("Maybe you do need a dick to satisfy her?");
+		EtnaHunting = true;
+		return;
 	}
 
+	menu();
+	addButton(0, "LetHerBeInCharge", etnaLetHerBeInCharge);
+	addButton(1, "KittyTitFuck", etnaKittyTitFuck).disableIf(!player.hasCock(), "Req. a cock!");
+	addButton(2, "Pussy Opera", etnaPussyOpera).disableIf(!player.hasCock(), "Req. a cock!");
+	addButton(3, "Share a Drink", etnaShareDrink).disableIf(player.tailType != Tail.MANTICORE_PUSSYTAIL, "Req. to have a manticore pussytail.");
+	addButton(4, "Fill her up", EtnaFillHerUp).disableIf(!player.isAlraune(), "Req. to be an alraune.");
+	addButton(5, "TailExplor", tailExploration)
+			.hint("Play with her tail using your goo body!", "Tail Exploration")
+			.disableIf(!player.isGoo(), "Req. goo body.");
+}
+
+private function etnaAfterInfidelity():void {
+	clearOutput();
+	spriteSelect(SpriteDb.s_etna);
+	outputText("Etna notices you approaching and moves to you right away.[pg]");
+	outputText("“<i>Hey, uh, about the minotaurs…, sorry you had to witness that, it's just the way I am I can’t hold myself back.</i>”[pg]");
+	outputText("You understand all too well."+(EtnaInfidelity == 1? "":"Considering the insane appetite she has, it would be impossible even for ten men to satisfy her entirely.")+"[pg]");
+	outputText("“<i>Say, I’ve been thinking about this and I’m quite sure now that it’s only you that I want. So if you would accept me, I would like to grant you something all the others won’t get……</i>”[pg]");
+	outputText("Well, can she go ahead and spill it out, you don’t have all day.[pg]");
+	outputText("“<i>I would like us to…</i>”[pg]");
+	outputText("She’s visibly shaking in embarrassment and you're starting to ponder what she's trying to say. Waiting for her to speak up is getting increasingly annoying.[pg]");
+	outputText("“<i>I WOULD LIKE US TO HAVE CHILDREN!!! That's right… I said it… children! I don’t want you to think that just because I eat all of these cocks it means you aren’t the ONE male in my life anymore!</i>”[pg]");
+	outputText("Well, that's a surprise, but then again she did say she would make it up to you. Well, if she’s ready to be a mother then you don’t mind. You tell her that whenever she will be pregnant you will be there for her, then head back to your things still considering the ramification of this decision.[pg]");
+	outputText("<b>Etna is off her contraceptive herbs</b>");
+	EtnaFertile = true;
+	doNext(camp.returnToCampUseOneHour);
+}
+
+public function etnaKnockupAttempt():void {
+	if (pregnancy.isPregnant || !EtnaFertile || EtnaDaughterScene.EtnaDaughterAge > 0) return;
+	if (rand(5) == 0 || player.cumQ() > rand(3000) || player.virilityQ() >= 0.7) {
+		pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_ETNA);
+		outputText("<b>Etna is pregnant!</b>");
+	}
+}
+
+private function etnaPregUpdate():Boolean {
+	switch (pregnancy.eventTriggered()) {
+		case 1: //
+			outputText("\nWhen you come to check on Etna you notice she’s smiling as she caresses her belly, which bulges notably, but not with any real prominence. \n");
+			return true;
+		case 2:
+			outputText("\nEtna's belly is definitely swollen now, forming a round bump which likely means she’s pregnant with a cub.\n");
+			return true;
+		case 3:
+			outputText("\nWhen you come to check on Etna you notice she’s smiling as she caresses her belly. Furthermore, it’s bigger than before which likely means she’s pregnant with a cub. Still, the future mother walks to you with a delighted smile. [pg]" +
+					"“<i>I know when you're near me, as our daughter gets more agitated inside.  I’m sure she loves you already. So how are you doing today [name], have you come to check on the baby?</i>” \n");
+			return true;
+		case 4:
+			outputText("\nYou'd say Etna is going to give birth soon, she has swollen up to the point that she looks nine months pregnant. She has taken to resting frequently, and any form of labor easily leaves her winded. Despite this she often seems to disappear and when confronted she replies with a tone of exasperation \"<i>I couldn't help it, I had to find something to eat.</i>\"\n");
+			return true;
+	}
+	return false; //If there's no update then return false so needNext is not set to true
+}
+private function etnaPregApproach():Boolean {
+	switch (pregnancy.event) {
+		case 1: //
+			outputText("\nWhen you come to check on Etna you notice she’s smiling as she caresses her belly, which bulges notably, but not with any real prominence. \n");
+			return true;
+		case 2:
+			outputText("\nEtna's belly is definitely swollen now, forming a round bump which likely means she’s pregnant with a cub.\n");
+			return true;
+		case 3:
+			outputText("\nWhen you come to check on Etna you notice she’s smiling as she caresses her belly. Furthermore, it’s bigger than before which likely means she’s pregnant with a cub. Still, the future mother walks to you with a delighted smile. [pg]" +
+					"“<i>I know when you're near me, as our daughter gets more agitated inside.  I’m sure she loves you already. So how are you doing today [name], have you come to check on the baby?</i>” \n");
+			return true;
+		case 4:
+			outputText("\nYou'd say Etna is going to give birth soon, she has swollen up to the point that she looks nine months pregnant. She has taken to resting frequently, and any form of labor easily leaves her winded. Despite this she often seems to disappear and when confronted she replies with a tone of exasperation \"<i>I couldn't help it, I had to find something to eat.</i>\"\n");
+			return true;
+	}
+	return  false;
+}
+
+private function etnaGivesBirth():void {
+	spriteSelect(SpriteDb.s_etna);
+	clearOutput();
+	outputText("Etna comes to you this night giving you those big eyes as she announces.[pg]");
+	outputText("“<i>I’m about to give birth! I’m about to give birth to our daughter!</i>”[pg]");
+	outputText("Well, wow, now that you're in the heart of things you can’t back out of your promise. You help the soon to be mother lay down as she starts singing again. Her pussy must be extremely sensitive right now and the birth isn’t helping. She starts pushing with a gleeful expression on her face as the baby stretches her hole wide and begins its way down it. Soon a human-like baby with the features of a cat, bat, and scorpion is out.[pg]");
+	outputText("“<i>P...please let me hold our child… I want to see her.</i>”[pg]");
+	outputText("You let her hold the crying baby against herself. She soothes your newborn girl by singing a melodious lullaby as she does it so well. It could come as strange to see the normally somewhat ferocious or lusty manticore act like a normal, if not, caring mother. You can’t help but be smitten at the picture. She eventually comes to a realization.[pg]");
+	SceneLib.etnaDaughterScene.nameEtnaDaughter();
+}
+
+	}
 }

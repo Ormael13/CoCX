@@ -7,6 +7,7 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.Lake.*;
 import classes.Scenes.NPCs.BelisaFollower;
+import classes.Scenes.NPCs.EtnaFollower;
 import classes.Scenes.Places.Boat.*;
 import classes.Scenes.SceneLib;
 
@@ -36,7 +37,7 @@ public class Boat extends AbstractLakeContent
 				return;
 			}
 			//Etna
-			if (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && !player.hasStatusEffect(StatusEffects.EtnaOff) && rand(5) == 0 && (player.level >= 20)) {
+			if ((flags[kFLAGS.ETNA_FOLLOWER] < 1 || EtnaFollower.EtnaInfidelity == 2) && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && !player.hasStatusEffect(StatusEffects.EtnaOff) && rand(5) == 0 && (player.level >= 20)) {
 				SceneLib.etnaScene.repeatYandereEnc();
 				return;
 			}

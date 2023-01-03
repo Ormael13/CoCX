@@ -246,7 +246,7 @@ public class PatchouliScene extends NPCAwareContent {
 					outputText("You’re about to question him about this location, when you hear a low pitch growl coming from a nearby cave. Patchouli turns toward you, grinning as he vanishes into thin air, yelling.\n\n");
 					outputText("\"<i>The dinner is served, big cat. Enjoy your meal!</i>\"\n\n");
 					outputText("Suddenly, a spike misses your shoulder by an inch. You see something walk out of the cave with a sadistic grin. It looks like another cat person, a girl this time, with the features of a lion, but her scorpion like tail and large bat wings tell you she’s much, much worse than a lion.");
-					if (kFLAGS.ETNA_FOLLOWER != 1) startCombat(new Etna());
+					if (kFLAGS.ETNA_FOLLOWER < 1) startCombat(new Etna());
 					else startCombat(new Manticore());
 					break;
 				//blight ridge 21
