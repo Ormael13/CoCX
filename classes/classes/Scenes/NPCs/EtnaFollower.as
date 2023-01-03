@@ -71,7 +71,7 @@ public class EtnaFollower extends NPCAwareContent implements TimeAwareInterface,
 			pregnancy.knockUpForce(); //Clear Pregnancy
 			return true;
 		}
-		if (!EtnaJumpedToday && flags[kFLAGS.SLEEP_WITH] != "Etna" && rand(5) == 0) {
+		if (!EtnaJumpedToday && flags[kFLAGS.SLEEP_WITH] != "Etna" && EtnaInfidelity == 3 && rand(5) == 0) {
 			etnaJumpsPCinCamp();
 			return true;
 		}
