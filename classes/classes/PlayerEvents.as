@@ -2148,18 +2148,22 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (player.perkv1(IMutationsLib.GorgonEyesIM) >= 1) outputText("\nYou notice that you feel a bit stiff and your skin is a bit harder.  Something clicks in your mind as you finally unlock the potential to protect yourself from the goddamn basilisks! \n\n(<b>Gained Perk: Basilisk Resistance - You are now immune to the basilisk's gaze!</b>)\n");
 				else outputText("\nYou notice that you feel a bit stiff and your skin is a bit harder.  Something clicks in your mind as you finally unlock the potential to protect yourself from the goddamn basilisks! \n\n(<b>Gained Perk: Basilisk Resistance - Your maximum speed is permanently decreased but you are now immune to the basilisk's gaze!</b>)\n");
 				player.createPerk(PerkLib.BasiliskResistance, 0, 0, 0, 0);
+				needNext = true;
 			}
 			if (flags[kFLAGS.TIMES_TRANSFORMED] >= 25 && !player.hasPerk(PerkLib.GeneticMemory)) {
 				outputText("\nYour body behave weirdly as if all the transformation, which you have undergone started to make it unsure about what it truly is. Sometime you even try to move limbs that are no longer there. Suddenly you realise that no mather how many time you change your body remembers it. Your body developed genetic memory! \n\n(<b>Gained Perk: Genetic Memory</b>)\n");
 				player.createPerk(PerkLib.GeneticMemory, 0, 0, 0, 0);
+				needNext = true;
 			}
 			if (flags[kFLAGS.TIMES_TRANSFORMED] >= 100 && !player.hasPerk(PerkLib.TransformationResistance)) {
 				outputText("\nYou feel a strange tingling sensation. It seems as if you've finally adapted to the transformative properties of the food in Mareth and your body has finally built up enough resistance! You suspect that you can still transform but at somewhat diminished rate. \n\n(<b>Gained Perk: Transformation Resistance - Transformative items now have less chance to transform you. In addition, any Bad Ends related to overdose of certain transformative items are now disabled.</b>)\n");
 				player.createPerk(PerkLib.TransformationResistance, 0, 0, 0, 0);
+				needNext = true;
 			}
 			if (flags[kFLAGS.TIMES_TRANSFORMED] >= 200 && !player.hasPerk(PerkLib.TransformationAcclimation)) {
 				outputText("\nDue to you're continued consumption of transformative items, you have discovered a way to draw out more of the transformative properties of the food in Mareth. \n\n(<b>Gained Perk: Transformation Acclimation - Transformative items now have double the chance to transform you.</b>)\n");
 				player.createPerk(PerkLib.TransformationAcclimation, 0, 0, 0, 0);
+				needNext = true;
 			}
 			if (player.hasPerk(PerkLib.EnlightenedNinetails) && player.perkv4(PerkLib.EnlightenedNinetails) == 0 && (player.tailType != Tail.FOX || player.tailCount < 9)) { //Check ninetails perks!
 				outputText("\n<b>Without your tails, the magic power they once granted withers and dies, vanishing completely.</b>\n");

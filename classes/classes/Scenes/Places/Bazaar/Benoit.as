@@ -559,6 +559,7 @@ private function buyBackpackConfirmation(size:int = 2, sizeDesc:String = "Small"
 	}
 	outputText("\"<i>Here you go.  I have no need for zis,</i>\" [benoit name] says.");
 	if (player.hasKeyItem("Backpack") >= 0) {
+		price = (size - player.keyItemvX("Backpack", 1)) * 50;
 		outputText("\n\n<b>(Key Item Upgraded: " + sizeDesc + " Backpack! You now have " + num2Text(size - player.keyItemvX("Backpack", 1)) + " extra inventory slots");
 		player.addKeyValue("Backpack", 1, size - player.keyItemvX("Backpack", 1));
 		outputText(" for a total of " + num2Text(inventory.getMaxSlots()) + " slots.)</b>");

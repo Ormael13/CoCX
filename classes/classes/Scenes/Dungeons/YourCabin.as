@@ -59,7 +59,6 @@ public class YourCabin extends DungeonAbstractContent
 				if (player.hasKeyItem("Hentai Comic") >= 0) books++;
 				if (player.hasKeyItem("Yoga Guide") >= 0) books++;
 				if (player.hasKeyItem("Carpenter's Toolbox") >= 0) books++; //Carpenter's Guide is bundled in your toolbox!
-				if (player.hasKeyItem("Stone Building Guide") >= 0) books++;
 				if (player.hasKeyItem("Izma's Book - Combat Manual") >= 0) books++;
 				if (player.hasKeyItem("Izma's Book - Etiquette Guide") >= 0) books++;
 				if (player.hasKeyItem("Izma's Book - Porn") >= 0) books++;

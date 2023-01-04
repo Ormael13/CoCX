@@ -198,6 +198,9 @@ public class BaseCombatContent extends BaseContent {
 	protected function rangePhysicalForce():Number {
 		return combat.rangePhysicalForce();
 	}
+	protected function firearmsForce():Number {
+		return combat.firearmsForce();
+	}
 	protected function spellCost(mod:Number):Number {
 		return combat.magic.spellCostImpl(mod);
 	}

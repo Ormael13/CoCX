@@ -124,6 +124,11 @@ private function telAdreTour():void {
 	doNext(telAdreMenu);
 }
 
+public function visitTelAdre():void {
+	justRejectedLuna = false; //resetting Luna thingy so she is encounterable again
+	telAdreMenu();
+}
+
 public function telAdreMenu():void {
 	if(flags[kFLAGS.VALENTINES_EVENT_YEAR] < date.fullYear && player.hasBalls() && player.hasCock() && flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] >= 4 && flags[kFLAGS.TIMES_MET_SCYLLA_IN_ADDICTION_GROUP] > 0 && isValentine()) {
 		SceneLib.holidays.crazyVDayShenanigansByVenithil();
@@ -179,7 +184,7 @@ public function telAdreMenu():void {
 		maddie.runAwayMaddieFollowup();
 		return;
 	}
-	if (flags[kFLAGS.LUNA_FOLLOWER] < 2 && !player.hasStatusEffect(StatusEffects.LunaOff) && rand(10) == 0) {
+	if (flags[kFLAGS.LUNA_FOLLOWER] < 2 && !player.hasStatusEffect(StatusEffects.LunaOff) && !justRejectedLuna && rand(10) == 0) {
 		if (flags[kFLAGS.LUNA_FOLLOWER] == 1) meetingLunaRepated();
 		else meetingLunaFirstTime();
 		return;
@@ -443,6 +448,7 @@ private function buyBackpackConfirmation(size:int = 2, sizeDesc:String = "Small"
 	}
 	outputText("\"<i>Here you go.</i>\"");
 	if (player.hasKeyItem("Backpack") >= 0) {
+		price = 100;
 		outputText("\n\n<b>(Key Item Upgraded: " + sizeDesc + " Backpack! You now have " + num2Text(size - player.keyItemvX("Backpack", 1)) + " extra inventory slots");
 		player.addKeyValue("Backpack", 1, size - player.keyItemvX("Backpack", 1));
 		outputText(" for a total of " + num2Text(inventory.getMaxSlots()) + " slots.)</b>");
@@ -496,6 +502,10 @@ public function barTelAdre():void {
 		if(!SceneLib.alvinaFollower.MetAlvinaAtBar)
 			button = anotherButton(button, "???", SceneLib.alvinaFollower.alvinaMeetAtBar);
 		else button = anotherButton(button, "Alvina", SceneLib.alvinaFollower.alvinaMeetAtBar);
+	} else if (SceneLib.alvinaFollower.alvinaOnGiftCooldown()) {
+		SceneLib.alvinaFollower.alvinaGiftCooldownDescription();
+	} else if (SceneLib.alvinaFollower.alvinaWaitingAtRavine()) {
+		SceneLib.alvinaFollower.alvinaWaitingAtRavineDescription();
 	}
 	//AMILY!
 	if(flags[kFLAGS.AMILY_VISITING_URTA] == 1) {
@@ -1092,48 +1102,6 @@ public function carpentryShopBuySet2No():void {
 	doNext(carpentryShopInside);
 }
 
-//Stone Buildings
-public function carpentryShopBuySet3():void {
-	clearOutput();
-	if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 5)
-	{
-		outputText("<b>You already own this guide!</b>");
-		doNext(carpentryShopInside);
-		return;
-	}
-	outputText("You walk around for a while until you see leather-bound book. It's titled 'Stone Building Guide' and briefly looking over contest you notice is about how to use stone along few other materials to make stronger than wooden structures. What is more interesting it even has project instructions for at lest few things that you think will be good to have constructed in camp! Just what you need to upgrade your steady growning settlment to next 'civilization' level. \n\n");
-	outputText("\"<i>One hundred gems and it's all yours,</i>\" as usual the shopkeeper says.\n\n");
-	outputText("Do you buy it?");
-	if (player.gems >= 100)
-	{
-		doYesNo(carpentryShopBuySet3Yes, carpentryShopBuySet3No);
-	}
-	else
-	{
-		outputText("\n\nYou count out your gems and realize it's beyond your price range.");
-		doNext(carpentryShopInside);
-	}
-}
-
-public function carpentryShopBuySet3Yes():void {
-	clearOutput();
-	player.gems -= 100;
-	outputText("You hand over a hundred gems to the shopkeeper. ");
-	outputText("\"<i>Here you go,</i>\" he says. You feel so proud to have guide to building stone structures! \n\n");
-	outputText("<b>Gained Key Item: Stone Building Guide!</b>");
-	player.createKeyItem("Stone Building Guide", 0, 0, 0, 0);
-	flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] += 1;
-	statScreenRefresh();
-	doNext(carpentryShopInside);
-}
-
-public function carpentryShopBuySet3No():void {
-	clearOutput();
-	outputText("\"<i>No thanks,</i>\" you tell him. \n\n");
-	outputText("\"<i>Suit yourself,</i>\" he says as you put the book back where it was.");
-	doNext(carpentryShopInside);
-}
-
 private function urtaIsABadass():void {
 	flags[kFLAGS.PC_SEEN_URTA_BADASS_FIGHT] = 1;
 	clearOutput();
@@ -1340,7 +1308,7 @@ public function tripxiShopMainMenu2a():void {
 	addButton(1, weaponsrange.BLUNDER.shortName, buyItemT1, weaponsrange.BLUNDER);
 	addButton(2, weaponsrange.DUEL_P_.shortName, buyItemT1, weaponsrange.DUEL_P_);
 	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns1) > 0) addButton(4, weaponsrange.DESEAGL.shortName, buyItemT1, weaponsrange.DESEAGL);
-	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1)) addButtonDisabled(4, "???", "Search the Desert. (lvl 6+)");
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1)) addButtonDisabled(4, "???", "Search the Desert(O). (lvl 6+)");
 	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns2) > 0) addButton(5, weaponsrange.M1CERBE.shortName, buyItemT1, weaponsrange.M1CERBE);
 	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns2)) addButtonDisabled(5, "???", "Search the Swamp.");
 	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns3) > 0) addButton(6, weaponsrange.TRFATBI.shortName, buyItemT1, weaponsrange.TRFATBI);
@@ -1369,7 +1337,7 @@ public function tripxiShopMainMenu2b():void {
 	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns3)) addButtonDisabled(6, "???", "Search the Beach.");
 	//7 - Sakuno M2
 	if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns5) > 0) addButton(8, weaponsrange.DERPLAU.shortName, buyItemT2, weaponsrange.DERPLAU);
-	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns5)) addButtonDisabled(8, "???", "Search the Mountains.");
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns5)) addButtonDisabled(8, "???", "Search the Low Mountains.");
 	//9 - Tediore pistol
 	addButton(10, "-1-", tripxiShopMainMenu2a);
 	addButtonDisabled(11, "-2-", "Shelf 2");
@@ -1384,7 +1352,7 @@ public function tripxiShopMainMenu2c():void {
 	if (player.statusEffectv3(StatusEffects.TelAdreTripxiGuns1) > 0) addButton(4, weaponsrange.DBDRAGG.shortName, buyItemT3, weaponsrange.DBDRAGG);
 	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1)) addButtonDisabled(4, "???", "Search the Volcanic Crag.");
 	if (player.statusEffectv3(StatusEffects.TelAdreTripxiGuns2) > 0) addButton(5, weaponsrange.LBLASTR.shortName, buyItemT3, weaponsrange.LBLASTR);
-	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns2)) addButtonDisabled(5, "???", "Search the Mountains.");
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns2)) addButtonDisabled(5, "???", "Search the Hills.");
 	//6 lub 7 - Harkonnen II - BP req. from some dark place/area?
 	//addButton(0, weaponsrange.FLINTLK.shortName, buyItemT3, weaponsrange.);
 	//addButton(1, weaponsrange.FLINTLK.shortName, buyItemT3, weaponsrange.);
@@ -1763,6 +1731,8 @@ public function stopGoingBackEveryHourGymCheck():void{
 	}
 }
 
+private var justRejectedLuna:Boolean = false;
+
 public function meetingLunaFirstTime():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_luna_maid);
@@ -1793,6 +1763,7 @@ public function meetingLunaFirstTime():void {
 	addButton(1, "Can'tHelp", meetingLunaFirstTimeLeave).hint("As nice as it sounds to have a maid, you still think it's a bad idea to get too involved.");
 }
 public function meetingLunaFirstTimeLeave():void {
+	justRejectedLuna = true;
 	outputText("Sadly you see no way you could help her out; but, unwilling to leave the poor girl to offer herself to the brothels or join a gang, you point her in the direction of The Wet Bitch. They always seem busy, so perhaps they might hire her as a waitress? Waitresses and maids are similar, aren't they?\n\n");
 	outputText("The young woman looks up at you in surprise, her eyes widening and her mouth forming a cute little \"o\". You realize she's actually rather cute, with features that lean more toward soft and sweet than sultry and soft-looking, light brown hair and big golden-colored eyes. She doesn't quite smile at you, but her expression does ease a bit and she replies, saying" +
 			" \"<i>Thank you, kind stranger. I'll do that, I guess; it's not like I have any better options. If... if I do get hired there, will you come see me? My name is Luna. I'd... I'd like it if you came to see me again.</i>\"");
@@ -1820,6 +1791,7 @@ public function meetingLunaRepated():void {
 	addButton(1, "No", meetingLunaRepatedNo);
 }
 public function meetingLunaRepatedNo():void {
+	justRejectedLuna = true;
 	outputText("There is nothing you can do for her. You leave her be, for now");
 	if (player.gems >= 200) {
 		outputText(", after dropping a handful of gems in her cup out of sympathy");

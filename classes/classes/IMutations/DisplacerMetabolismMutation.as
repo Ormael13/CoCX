@@ -25,7 +25,7 @@ public class DisplacerMetabolismMutation extends IMutationPerkType
             }
             if (flags[kFLAGS.HUNGER_ENABLED] > 0) descS += ", increases max hunger cap by 50";
             if (descS != ""){
-                descS += (", and increases displacer beast claws attack damage by x" + pTier + 1);
+                descS += (", and increases displacer beast claws attack damage by x" + (pTier + 1));
                 descS += ".";
             }
             return descS;

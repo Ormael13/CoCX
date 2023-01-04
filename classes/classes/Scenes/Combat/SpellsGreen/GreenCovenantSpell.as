@@ -2,6 +2,7 @@ package classes.Scenes.Combat.SpellsGreen
 {
 import classes.Monster;
 import classes.PerkLib;
+import classes.Races;
 import classes.Scenes.Combat.AbstractGreenSpell;
 import classes.StatusEffects;
 
@@ -35,6 +36,9 @@ import classes.StatusEffects;
 		
 		if (!player.hasStatusEffect(StatusEffects.NearbyPlants)) {
 			return "Green Covenant requires having plants nearby.";
+		}
+		if (!player.isRaceCached(Races.PLANT) && !player.isRaceCached(Races.YGGDRASIL) && !player.isRaceCached(Races.ALRAUNE) && !player.isRaceCached(Races.WOODELF)) {
+			return "Green Covenant requires having close enough connection to flora (Wood Elf, Plant race).";
 		}
 		
 		return "";

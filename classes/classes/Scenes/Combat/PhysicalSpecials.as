@@ -852,6 +852,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage += player.spe;
 		damage += scalingBonusSpeed() * 0.2;
 		damage += scalingBonusStrength() * 0.4;
+		if (player.hasPerk(PerkLib.PowerShotEx)) {
+			damage += player.spe * 1.5;
+			damage += scalingBonusSpeed() * 0.3;
+			damage += scalingBonusStrength() * 0.6;
+		}
 		if (damage < 10) damage = 10;
 		if (!player.hasPerk(PerkLib.DeadlyAim)) damage *= (monster.damageRangePercent() / 100);
 		damage = combat.rangeAttackModifier(damage);
@@ -1294,7 +1299,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.ExplosiveCartridge) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
 			if (player.hasPerk(PerkLib.NamedBullet) && monster.hasPerk(PerkLib.EnemyBossType)) damage *= 1.5;
 		}
-		damage *= combat.rangePhysicalForce();
+		if (player.weaponRangePerk == "Bow") damage *= combat.rangePhysicalForce();
+		else damage *= combat.firearmsForce();
 		damage *= SAMulti;
 		var crit:Boolean = false;
 		var critChance:int = 5;

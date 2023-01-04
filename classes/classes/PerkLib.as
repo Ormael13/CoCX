@@ -386,8 +386,8 @@ public class PerkLib
 				"Each elementalist perk learned gives a +10% multi bonus to health, damage and spell power when in an infused state.",
 				"You've chosen the 'Shared power' perk. Each elementalist perk learned gives a +10% multi bonus to health, damage and spell power when in an infused state.");
 		public static const SilverForMonsters:PerkType = mk("Silver for monsters", "Silver for monsters",
-				"Firearms deals 20% extra damage and 50% increased critical damage to demons and their corrupted servants. (+15% range physical attacks multiplier)",
-				"You've chosen the 'Silver for monsters' perk. Firearms deals 20% extra damage and 50% increased critical damage to demons and their corrupted servants. (+15% range physical attacks multiplier)");
+				"Firearms deals 20% extra damage and 50% increased critical damage to demons and their corrupted servants. (+7.5% range physical / firearms attacks multiplier)",
+				"You've chosen the 'Silver for monsters' perk. Firearms deals 20% extra damage and 50% increased critical damage to demons and their corrupted servants. (+7.5% range physical / firearms attacks multiplier)");
 		public static const SkeletonLord:PerkType = mk("Skeleton Lord", "Skeleton Lord",
 				"You may now control up to 10 skeleton of each type. Allows you to levitate all skeletons.",
 				"You've chosen the 'Skeleton Lord' perk. You may now control up to 10 skeleton of each type. Allows you to levitate all skeletons.");
@@ -395,8 +395,8 @@ public class PerkLib
 				"Slows hunger rate by another 20%.",
 				"You've chosen the 'Survivalist 3' perk.  With this perk, your hunger rate is reduced second time by another 20%.");
 		public static const TaintedMagazine:PerkType = mk("Tainted Magazine", "Tainted Magazine",
-				"Increases reload cost by 2 and doubles max ammo (200% of base ammo count). (+10% range physical attacks multiplier)",
-				"You've chosen the 'Tainted Magazine' perk. Increases reload cost by 2 and doubles max ammo (200% of base ammo count). (+10% range physical attacks multiplier)");
+				"Increases reload cost by 2 and doubles max ammo (200% of base ammo count). (+5% range physical / firearms attacks multiplier)",
+				"You've chosen the 'Tainted Magazine' perk. Increases reload cost by 2 and doubles max ammo (200% of base ammo count). (+5% range physical / firearms attacks multiplier)");
 		public static const TooAngryToDie:PerkType = mk("Too Angry to Die", "Too Angry to Die",
 				"When you under berserk-like state it will prevent HP defeat as long it last. Additionaly increase limit of negative HP you can reach by amount of max wrath. (+10% melee physical attacks multiplier, 2x for been under berzerk type state and another 2x when using large or masive weapon(s))",
 				"You've chosen the 'Too Angry to Die' perk. When you under berserk-like state it will prevent HP defeat as long it last. Additionaly increase limit of negative HP you can reach by amount of max wrath. (+10% melee physical attacks multiplier, 2x for been under berzerk type state and another 2x when using large or masive weapon(s))")
@@ -453,8 +453,8 @@ public class PerkLib
 				"Increase venom/web recharge speed based by 100% at cost of 1% of max HP lost per tick. If reached max venom/web cap it will no longer cause HP decay. (if hunger mode is active will instead drain hunger 2x faster)",
 				"You've chosen the 'Axillary Venom Glands' perk. Increase venom/web recharge speed based by 100% at cost of 1% of max HP lost per tick. If reached max venom/web cap it will no longer cause HP decay. (if hunger mode is active will instead drain hunger 2x faster)");
 		public static const VenomousAdiposeTissue:PerkType = mk("Venomous Adipose Tissue", "Venomous Adipose Tissue",
-				"Increase venom/web recharge speed and maximum capacity based on current toughness and thickness. (higher tou/thick value the smaller increases) (will have no effect if max venom/web is at 0) (will have no effect if max venom/web is at 0)",
-				"You've chosen the 'Venomous Adipose Tissue' perk. Increase venom/web recharge speed and maximum capacity based on current toughness and thickness. (higher tou/thick value the smaller increases)");
+				"Increase venom/web recharge speed and maximum capacity based on current toughness and thickness. (higher tou/thick value the smaller increases) (will have no effect if max venom/web is at 0)",
+				"You've chosen the 'Venomous Adipose Tissue' perk. Increase venom/web recharge speed and maximum capacity based on current toughness and thickness. (higher tou/thick value the smaller increases) (will have no effect if max venom/web is at 0)");
 		public static const LiftOff:PerkType = mk("Lift Off", "Lift Off",
 				"Allows you to start combat already flying.",
 				"You've chosen the 'Lift Off' perk, allowing you to start combat already flying.");
@@ -526,6 +526,27 @@ public class PerkLib
 		public static const ArcaneVenom:PerkType = mk("Arcane Venom", "Arcane Venom",
 				"Spells that inflict 'lust poison' add a number of direct applications equal to your intelligence (core + trained parts) divided by 50.",
 				"You've chosen the 'Arcane Venom' perk. Spells that inflict 'lust poison' add a number of direct applications equal to your intelligence (core + trained parts) divided by 50.");
+		public static const MeleeWeaponsAttackMultiplier:PerkType = mk("Melee Weapons Attack Multiplier", "Skilled Fighter",
+				"+5% melee physical attacks multiplier and then adds 50% on top of final result.",
+				"You've chosen the 'Melee Weapons Attack Multiplier' perk. +5% melee physical attacks multiplier and then adds 50% on top of final result.");
+		public static const RangeWeaponsAttackMultiplier:PerkType = mk("Range Weapons Attack Multiplier", "Skilled Ranger",
+				"+5% range physical attacks multiplier and then adds 50% on top of final result.",
+				"You've chosen the 'Range Weapons Attack Multiplier' perk. +5% range physical attacks multiplier and then adds 50% on top of final result.");
+		public static const FirearmsAttackMultiplier:PerkType = mk("Firearms Attack Multiplier", "Skilled Gunslinger",
+				"+5% firearms attacks multiplier bonus and then adds 50% on top of final result.",
+				"You've chosen the 'Firearms Attack Multiplier' perk. +5% firearms attacks multiplier bonus and then adds 50% on top of final result.");
+		public static const PowerShotEx:PerkType = mk("Power Shoot (Ex)", "Power Shoot (Ex)",
+				"Power Shoot p. special damage increased by ~2,5x. Add some of your strength (~40/10% of str / spe scaling value) to normal bow damage / (~40/10% of spe / str scaling value) throwing damage. (+10% range physical attacks multiplier)",
+				"You've chosen the 'Power Shoot (Ex)' perk. Power Shoot p. special damage increased by ~2,5x. Add some of your strength (~40/10% of str / spe scaling value) to normal bow damage / (~40/10% of spe / str scaling value) throwing damage. (+10% range physical attacks multiplier)");
+		public static const SkilledFighterEx:PerkType = mk("Skilled Fighter (Ex)", "Skilled Fighter (Ex)",
+				"When melee atk crit chance exceed 100% crit dmg is x2 and when exceed 200% crit dmg is x3. (+15% melee physical attacks multiplier and then adds another 50% (total of 100%) on top of final result)",
+				"You've chosen the 'Skilled Fighter (Ex)' perk. When melee atk crit chance exceed 100% crit dmg is x2 and when exceed 200% crit dmg is x3. (+15% melee physical attacks multiplier and then adds another 50% (total of 100%) on top of final result)");
+		public static const SkilledRangerEx:PerkType = mk("Skilled Ranger (Ex)", "Skilled Ranger (Ex)",
+				"When range atk crit chance exceed 100% crit dmg is x2 and when exceed 200% crit dmg is x3. (+15% range physical attacks multiplier and then adds another 50% (total of 100%) on top of final result)",
+				"You've chosen the 'Skilled Ranger (Ex)' perk. When range atk crit chance exceed 100% crit dmg is x2 and when exceed 200% crit dmg is x3. (+15% range physical attacks multiplier and then adds another 50% (total of 100%) on top of final result)");
+		public static const SkilledGunslingerEx:PerkType = mk("Skilled Gunslinger (Ex)", "Skilled Gunslinger (Ex)",
+				"When firearms atk crit chance exceed 100% crit dmg is x2 and when exceed 200% crit dmg is x3. (+20% firearms attacks multiplier and then adds another 50% (total of 100%) on top of final result)",
+				"You've chosen the 'Skilled Gunslinger (Ex)' perk. When firearms atk crit chance exceed 100% crit dmg is x2 and when exceed 200% crit dmg is x3. (+20% firearms attacks multiplier and then adds another 50% (total of 100%) on top of final result)");
 
 		public static const ElementsOfMarethBasic:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
@@ -533,6 +554,9 @@ public class PerkLib
 		/*public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk, .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, .");
@@ -608,8 +632,8 @@ public class PerkLib
 				"Boosts armor points by a portion of your speed on light/medium armors.",
 				"You've chosen the 'Agility' perk, increasing the effectiveness of light/medium armor by a portion of your speed.");
 		public static const AlchemicalCartridge:PerkType = mk("Alchemical cartridge", "Alchemical cartridge",
-				"Add your intelligence to gun damage as a modifier. (+5% range physical attacks multiplier)",
-				"You've chosen the 'Alchemical cartridge' perk, adding intelligence scaling to firearms damage. (+5% range physical attacks multiplier)");
+				"Add your intelligence to gun damage as a modifier. (+5% firearms attacks multiplier)",
+				"You've chosen the 'Alchemical cartridge' perk, adding intelligence scaling to firearms damage. (+5% firearms attacks multiplier)");
 		public static const AllSeeing:PerkType = mk("All-Seeing", "All-Seeing",
 				"You see everything... so you should have expected this description, and the 10% soul force gain.",
 				"You've chosen the 'All-Seeing' perk, gaining +10% max Soulforce.")
@@ -621,8 +645,8 @@ public class PerkLib
 				"You've just started out on your sex life. You don't know much, but you can tease well. (+15% tease dmg)",
 				"You've chosen the 'Amateur' perk, gaining +15% tease dmg.");
 		public static const AmateurGunslinger:PerkType = mk("Amateur Gunslinger", "Amateur Gunslinger",
-				"Gain an extra firearm attack per turn (2nd one).",
-				"You've chosen the 'Amateur Gunslinger' perk, gaining an extra firearm attack per turn.");
+				"Gain an extra firearm attack per turn (2nd one). (+5% firearms attacks multiplier bonus)",
+				"You've chosen the 'Amateur Gunslinger' perk, gaining an extra firearm attack per turn. (+5% firearms attacks multiplier bonus)");
 		public static const AnatomyExpert:PerkType = mk("Anatomy expert", "Anatomy expert",
 				"Your continued study of your opponents anatomy granted you insight to their weak point allowing you to strike precisely where it will hurt the most for increased critical chances and damage with thrown weapon. (+10% crit chance, +50% crit dmg and +15% range physical attacks multiplier)",
 				"You've chosen the 'Anatomy expert' perk. Your continued study of your opponents' anatomy has granted you insight into their weak points, allowing you to strike precisely where it will hurt the most for increased critical chances and damage with thrown weapons. (+10% crit chance, +50% crit dmg and +15% range physical attacks multiplier)");
@@ -939,8 +963,8 @@ public class PerkLib
 				"",
 				"You've chosen the 'Chimerical Body:  Stage' perk.").withBuffs({'str.mult':0.05,'int.mult':0.05,'wis.mult':0.05});
 		public static const ChurchOfTheGun:PerkType = mk("Church of the gun", "Church of the gun",
-				"Add your wisdom to gun damage as a modifier. (+10% range physical attacks multiplier)",
-				"You've chosen the 'Church of the gun' perk, adding wisdom scaling to firearms damage. (+10% range physical attacks multiplier)");
+				"Add your wisdom to gun damage as a modifier. (+10% firearms attacks multiplier)",
+				"You've chosen the 'Church of the gun' perk, adding wisdom scaling to firearms damage. (+10% firearms attacks multiplier)");
 		public static const CloseToDeath:PerkType = mk("Close to death", "Close to death",
 				"Increasing healing spells effect by 50% when below 25% max HP.",
 				"You've chosen the 'Close to death' perk, increasing healing spells effect when below 25% max HP.");
@@ -1353,8 +1377,8 @@ public class PerkLib
 				"Gain an extra firearm attack per turn (3rd one).",
 				"You've chosen the 'Expert Gunslinger' perk, gaining an extra firearm attack per turn.");
 		public static const ExplosiveCartridge:PerkType = mk("Explosive cartridge", "Explosive cartridge",
-				"Gunshots deals double damage against groups (of any size) and large enemies (9+ ft. tall). (+10% range physical attacks multiplier)",
-				"You've chosen the 'Explosive cartridge' perk, allowing your gunshots to deal extra damage to groups (of any size) or large enemies (9+ ft. tall). (+10% range physical attacks multiplier)");
+				"Gunshots deals double damage against groups (of any size) and large enemies (9+ ft. tall). (+5% range physical / firearms attacks multiplier)",
+				"You've chosen the 'Explosive cartridge' perk, allowing your gunshots to deal extra damage to groups (of any size) or large enemies (9+ ft. tall). (+5% range physical / firearms attacks multiplier)");
 		public static const ExtremelyLucky:PerkType = mk("Extremely Lucky", "Extremely Lucky",
 				"You're banned from casinos with that luck of yours, but you still find stuff lying around after battles, increasing your gain upon victory. (15% more gems from victories)",
 				"You've chosen the 'Extremely Lucky' perk, increasing gem gains from victories by 15%.");
@@ -2291,8 +2315,8 @@ public class PerkLib
 				"Opponent have a hard time dealing serious damage as the sight of your naked body distracts them (+10% dmg reduction).",
 				"You've chosen the 'Naked Truth' perk, causing opponents to have a hard time dealing serious damage as the sight of your naked body distract them (+10% dmg reduction).");
 		public static const NamedBullet:PerkType = mk("Named Bullet", "Named Bullet",
-				"Bosses fears your guns, add 50% increased damage to bosses. (+20% range physical attacks multiplier)",
-				"You've chosen the 'Named Bullet' perk, allowing your guns to deal extra damage to boss enemies. (+20% range physical attacks multiplier)");
+				"Bosses fears your guns, add 50% increased damage to bosses. (+10% range physical / firearms attacks multiplier)",
+				"You've chosen the 'Named Bullet' perk, allowing your guns to deal extra damage to boss enemies. (+10% range physical / firearms attacks multiplier)");
 		public static const Napping:PerkType = mk("Napping", "Napping",
 				"Sample Text Here/+20% fatigue recovery rate",
 				"You've chosen the 'Napping' perk, gaining +20% fatigue recovery rate.");
@@ -5109,6 +5133,8 @@ public class PerkLib
             QuickStrike.requirePerk(SpeedDemon)
                     .requireSpe(120)
                     .requireLevel(18);
+            PowerShotEx.requirePerk(PowerShot)
+					.requireLevel(18);
             Poisoning.requireLevel(18)
                     .requirePerk(JobRogue)
                     .requireCustomFunction(function (player:Player):Boolean {
@@ -6528,6 +6554,16 @@ public class PerkLib
 					.requireStr(20)
 					.requireTou(20)
 					.requireSpe(20);
+			MeleeWeaponsAttackMultiplier.requirePerk(MeleeWeaponsMastery)
+					.requireLevel(3)
+					.requireStr(25)
+					.requireTou(25)
+					.requireSpe(25);
+			RangeWeaponsAttackMultiplier.requirePerk(RangeWeaponsMastery)
+					.requireLevel(3)
+					.requireStr(25)
+					.requireTou(25)
+					.requireSpe(25);
 			MeleeWeaponsMasterySu.requirePerk(MeleeWeaponsMasteryEx)
 					.requireLevel(4)
 					.requireStr(30)
@@ -6646,6 +6682,11 @@ public class PerkLib
                     .requirePerk(JobLeader)
 					.requireInt(60)
 					.requireWis(60);
+			FirearmsAttackMultiplier.requirePerks(RangeWeaponsAttackMultiplier, JobGunslinger)
+					.requireLevel(6)
+					.requireStr(30)
+					.requireTou(30)
+					.requireSpe(30);
 			Enhancement.requireLevel(6)
 					.requireAnyPerk(HistoryAlchemist, PastLifeAlchemist);
 			Wizened.requireLevel(6)
@@ -6763,6 +6804,16 @@ public class PerkLib
 					.requireSpe(40);
 			HighlyVenomousDiet.requirePerk(VenomousDiet);
 			AxillaryVenomGlands.requirePerk(VenomousAdiposeTissue);
+			SkilledFighterEx.requirePerk(MeleeWeaponsAttackMultiplier)
+					.requireLevel(12)
+					.requireStr(35)
+					.requireTou(35)
+					.requireSpe(35);
+			SkilledRangerEx.requirePerk(RangeWeaponsAttackMultiplier)
+					.requireLevel(12)
+					.requireStr(35)
+					.requireTou(35)
+					.requireSpe(35);
             //Tier 3
             ChimericalBodyBasicStage.requirePerk(ChimericalBodySemiBasicStage)
                     .requireLevel(18)
@@ -6839,6 +6890,11 @@ public class PerkLib
 					.requireInt(80)
 					.requireLib(80)
 					.requireCor(50);
+			SkilledGunslingerEx.requirePerk(FirearmsAttackMultiplier)
+					.requireLevel(15)
+					.requireStr(40)
+					.requireTou(40)
+					.requireSpe(40);
             //Tier 4
 			ChimericalBodySemiImprovedStage.requirePerk(ChimericalBodyBasicStage)
                     .requireLevel(24)

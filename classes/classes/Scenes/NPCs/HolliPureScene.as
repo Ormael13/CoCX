@@ -106,8 +106,8 @@ public function getASprout():void {
 	flags[kFLAGS.FLOWER_LEVEL] = 1;
 	flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] = 0;
 	menu();
-	addButton(0, "Yes", destroyDatTree);
-	addButton(1, "No", letZeSproutLive);
+	addButton(6, "Yes", destroyDatTree);
+	addButton(8, "No", letZeSproutLive);
 }
 private function destroyDatTree():void {
 	clearOutput();

@@ -2932,6 +2932,10 @@ public class Combat extends BaseContent {
 				if (weaponRangePerk == "Bow") {
 					damage += player.spe * 2;
 					damage += scalingBonusSpeed() * 0.4;
+					if (player.hasPerk(PerkLib.PowerShotEx)) {
+						damage += scalingBonusStrength() * 0.4;
+						damage += scalingBonusSpeed() * 0.1;
+					}
 					if (damage < 20) damage = 20;
 				}
 				if (weaponRangePerk == "Crossbow") damage += player.weaponRangeAttack * 20;
@@ -3020,21 +3024,22 @@ public class Combat extends BaseContent {
             if (player.weaponRange is WildHunt && (player.level + playerLevelAdjustment()) > monster.level) damage *= 2;
             if (player.weaponRangeName == "Hodr's bow" && monster.hasStatusEffect(StatusEffects.Blind)) damage *= 1.1;
             damage = elementalArrowDamageMod(damage);
-			damage *= rangePhysicalForce();
-            //Determine if critical hit!
+			//Determine if critical hit!
             var crit:Boolean = false;
-            var critChance:int = 5;
-            critChance += combatPhysicalCritical();
-            if (player.hasPerk(PerkLib.VitalShot) && player.inte >= 50) critChance += 10;
-            if (player.hasPerk(PerkLib.ElvenSense) && player.inte >= 50) critChance += 5;
-            if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "bow") critChance += 20;
-            if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
-            if (rand(100) < critChance) {
-                crit = true;
-                var buffMultiplier:Number = 0;
-                if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "bow") buffMultiplier += 2;
-                damage *= 1.75+buffMultiplier;
-            }
+            var critChance:Number = 0;
+			var critDamage:Number = 0;
+            if (player.isInNonGoblinMech() || player.isInGoblinMech()) {
+				damage *= firearmsForce();
+				critChance += calculateCritFirearms();
+				critDamage += calculateCritDamageFirearms();
+			}
+			else {
+				damage *= rangePhysicalForce();
+				critChance += calculateCritRange();
+				critDamage += calculateCritDamageRange();
+			}
+			crit = rand(100) < critChance;
+            if(crit) damage *= critDamage;
             damage = Math.round(damage);
             if (monster.HP <= monster.minHP()) {
                 if (monster is EncapsulationPod)
@@ -3575,6 +3580,10 @@ public class Combat extends BaseContent {
                     damage += player.inte;
                     damage += scalingBonusIntelligence() * 0.4;
                 }
+				if (player.hasPerk(PerkLib.PowerShotEx)) {
+					damage += scalingBonusSpeed() * 0.4;
+					damage += scalingBonusStrength() * 0.1;
+				}
                 if (damage < 20) damage = 20;
                 if (player.hasPerk(PerkLib.DeadlyThrow)) damage += player.spe;
 				damage *= 1.5;
@@ -3595,18 +3604,10 @@ public class Combat extends BaseContent {
                 damage = archerySkillDamageMod(damage);
                 //Determine if critical hit!
                 var crit:Boolean = false;
-                var critChance:int = 5;
-                critChance += combatPhysicalCritical();
-                if (player.weaponRangeName == "gnoll throwing axes") critChance += 10;
-                if (player.hasPerk(PerkLib.VitalShot) && player.inte >= 50) critChance += 10;
-                if (player.hasPerk(PerkLib.AnatomyExpert)) critChance += 10;
-                if (player.hasPerk(PerkLib.ElvenSense) && player.inte >= 50) critChance += 5;
-                if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
-                if (rand(100) < critChance) {
-                    crit = true;
-                    if (player.hasPerk(PerkLib.AnatomyExpert)) damage *= 2.25;
-                    else damage *= 1.75;
-                }
+                var critChance:Number = calculateCritRange();
+				var critDamage:Number = calculateCritDamageRange();
+				crit = rand(100) < critChance;
+				if(crit) damage *= critDamage;
 				damage *= rangePhysicalForce();
                 damage = Math.round(damage);
                 checkAchievementDamage(damage);
@@ -3731,6 +3732,10 @@ public class Combat extends BaseContent {
                 damage += player.inte;
                 damage += scalingBonusIntelligence() * 0.4;
             }
+			if (player.hasPerk(PerkLib.PowerShotEx)) {
+				damage += scalingBonusSpeed() * 0.4;
+				damage += scalingBonusStrength() * 0.1;
+			}
             if (player.hasPerk(PerkLib.DeadlyThrow)) damage += player.spe;
             if (damage < 20) damage = 20;
 			damage *= 1.5;
@@ -3787,20 +3792,10 @@ public class Combat extends BaseContent {
 
             //Determine if critical hit!
             var crit:Boolean = false;
-            var critChance:int = 5;
-            var critDmg:Number = 1.75;
-            critChance += combatPhysicalCritical();
-            if (player.weaponRangeName == "gnoll throwing axes") critChance += 10;
-            if (player.hasPerk(PerkLib.VitalShot) && player.inte >= 50) critChance += 10;
-            if (player.hasPerk(PerkLib.AnatomyExpert)) critChance += 10;
-            if (player.hasPerk(PerkLib.ElvenSense) && player.inte >= 50) critChance += 5;
-            if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
-            if (rand(100) < critChance) {
-                crit = true;
-                if (player.hasPerk(PerkLib.AnatomyExpert)) critDmg += 0.5;
-                if (player.hasPerk(PerkLib.PrestigeJobStalker)) critDmg += 0.2;
-                damage *= critDmg;
-            }
+            var critChance:Number = calculateCritRange();
+			var critDamage:Number = calculateCritDamageRange();
+			crit = rand(100) < critChance;
+            if(crit) damage *= critDamage;
             damage = Math.round(damage);
 			WeaponRangeStatusProcs();
             checkAchievementDamage(damage);
@@ -4056,19 +4051,13 @@ public class Combat extends BaseContent {
 			if (player.hasPerk(PerkLib.SilverForMonsters) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1.2;
             if (monster.hasStatusEffect(StatusEffects.WoundPoison)) damage*=1+(monster.statusEffectv1(StatusEffects.WoundPoison)/100);
             damage *= player.jewelryRangeModifier();
-            damage *= rangePhysicalForce();
+            damage *= firearmsForce();
             //Determine if critical hit!
-            var crit:Boolean = false;
-            var critChance:int = 5;
-            critChance += combatPhysicalCritical();
-            if (player.hasPerk(PerkLib.VitalShot) && player.inte >= 50) critChance += 10;
-            if (player.hasPerk(PerkLib.ElvenSense) && player.inte >= 50) critChance += 5;
-            if ((monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) || player.weaponRange == weaponsrange.TRFATBI) critChance = 0;
-            if (rand(100) < critChance) {
-                crit = true;
-                if (player.hasPerk(PerkLib.SilverForMonsters) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 2.25;
-				else damage *= 1.75;
-            }
+			var crit:Boolean = false;
+            var critChance:Number = calculateCritFirearms();
+			var critDamage:Number = calculateCritDamageFirearms();
+            crit = rand(100) < critChance;
+            if(crit) damage *= critDamage;
 			damage = Math.round(damage);
             checkAchievementDamage(damage);
 			WeaponRangeStatusProcs();
@@ -5456,9 +5445,7 @@ public class Combat extends BaseContent {
      */
     private function calculateCrit():int{
         var critChance:Number = 5;
-        if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)){
-            critChance = 0;
-        }
+        if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
         else {
             critChance += combatPhysicalCritical();
             if (player.isSwordTypeWeapon()) critChance += 10;
@@ -5472,23 +5459,72 @@ public class Combat extends BaseContent {
             }
             if (player.weapon == weapons.MASAMUN || (player.weapon == weapons.WG_GAXE && monster.cor > 66) || ((player.weapon == weapons.DE_GAXE || player.weapon == weapons.YAMARG) && monster.cor < 33)) critChance += 10;
         }
-
         return critChance;
     }
-
     private function calculateCritDamage():Number{
         var critDamage:Number = 1.75;
         critDamage += bonusCriticalDamageFromMissingHP();
         if ((player.weapon == weapons.WG_GAXE && monster.cor > 66) || (player.weapon == weapons.DE_GAXE && monster.cor < 33)) critDamage += 0.1;
         if (player.hasPerk(PerkLib.OrthodoxDuelist) && player.isDuelingTypeWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) critDamage += 0.2;
         if (player.hasStatusEffect(StatusEffects.AlterBindScroll4)) critDamage += 1;
-
+		if (player.hasPerk(PerkLib.SkilledFighterEx) && calculateCrit() > 1) {
+			if (calculateCrit() > 2) critDamage *= 3;
+			else critDamage *= 2;
+		}
         return critDamage;
     }
-
+	
+    private function calculateCritRange():int{
+        var critChance:Number = 5;
+        if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+        else {
+            critChance += combatPhysicalCritical();
+            if (player.hasPerk(PerkLib.VitalShot) && player.inte >= 50) critChance += 10;
+			if (player.hasPerk(PerkLib.ElvenSense) && player.inte >= 50) critChance += 5;
+			if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "bow") critChance += 20;
+			if (player.weaponRangePerk == "Throwing") {
+				if (player.weaponRangeName == "gnoll throwing axes") critChance += 10;
+				if (player.hasPerk(PerkLib.AnatomyExpert)) critChance += 10;
+			}
+		}
+        return critChance;
+    }
+    private function calculateCritDamageRange():Number{
+        var critDamage:Number = 1.75;
+        if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "Bow") critDamage += 2;
+		if (player.weaponRangePerk == "Throwing") {
+			if (player.hasPerk(PerkLib.AnatomyExpert)) critDamage += 0.5;
+			if (player.hasPerk(PerkLib.PrestigeJobStalker)) critDamage += 0.2;
+		}
+		if (player.hasPerk(PerkLib.SkilledRangerEx) && calculateCrit() > 1) {
+			if (calculateCrit() > 2) critDamage *= 3;
+			else critDamage *= 2;
+		}
+        return critDamage;
+    }
+	
+    private function calculateCritFirearms():int{
+        var critChance:Number = 5;
+        if ((monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) || player.weaponRange == weaponsrange.TRFATBI) critChance = 0;
+        else {
+            critChance += combatPhysicalCritical();
+            if (player.hasPerk(PerkLib.VitalShot) && player.inte >= 50) critChance += 10;
+            if (player.hasPerk(PerkLib.ElvenSense) && player.inte >= 50) critChance += 5;
+        }
+        return critChance;
+    }
+    private function calculateCritDamageFirearms():Number{
+        var critDamage:Number = 1.75;
+        if (player.hasPerk(PerkLib.SilverForMonsters) && monster.hasPerk(PerkLib.EnemyTrueDemon)) critDamage += 0.5;
+		if (player.hasPerk(PerkLib.SkilledGunslingerEx) && calculateCrit() > 1) {
+			if (calculateCrit() > 2) critDamage *= 3;
+			else critDamage *= 2;
+		}
+        return critDamage;
+    }
+	
     private function calculateDamageMultiplier():Number{
         var damageMult:Number = 1;
-
         //Sneak attack checks
         if (player.isDaggerTypeWeapon()){
             if (monster.isIncapacitated()){
@@ -15184,6 +15220,7 @@ public function meleePhysicalForce():Number {
     if (player.hasPerk(PerkLib.JobRogue)) mod += .2;
     if (player.hasPerk(PerkLib.JobMonk)) mod += .2;
     if (player.hasPerk(PerkLib.JobBeastWarrior)) mod += .2;
+	if (player.hasPerk(PerkLib.MeleeWeaponsAttackMultiplier)) mod += .05;
     if (player.hasPerk(PerkLib.ThunderousStrikes)) mod += .05;
     if (player.hasPerk(PerkLib.BrutalBlows)) mod += .05;
     if (player.hasPerk(PerkLib.FuriousStrikes)) mod += .05;
@@ -15209,7 +15246,7 @@ public function meleePhysicalForce():Number {
     if (player.hasPerk(PerkLib.LegendaryBrute)) mod += .25;
     if (player.hasPerk(PerkLib.LegendaryBrawn)) mod += .25;
     if (player.hasPerk(PerkLib.MythicalBrute)) mod += .3;
-    if (player.hasPerk(PerkLib.MythicalBrawn)) mod += .3;//450% up to here
+    if (player.hasPerk(PerkLib.MythicalBrawn)) mod += .3;//455% up to here
     if (player.hasPerk(PerkLib.PrestigeJobBerserker)) {
         mod += .8;
         if (player.hasPerk(PerkLib.FuelForTheFire)) {
@@ -15229,7 +15266,14 @@ public function meleePhysicalForce():Number {
     if (player.hasPerk(PerkLib.WarCaster)) mod += .2;
     if (player.hasPerk(PerkLib.VampiricBlade)) mod += .2;
     if (player.hasPerk(PerkLib.TwinRiposte)) mod += .2;
-    if (player.hasPerk(PerkLib.PerfectStrike)) mod += .2;//780~830~930% up to here
+    if (player.hasPerk(PerkLib.PerfectStrike)) mod += .2;//785~835~925% up to here
+	if (player.hasPerk(PerkLib.MeleeWeaponsAttackMultiplier)) {
+		if (player.hasPerk(PerkLib.SkilledFighterEx)) {
+			mod += .15;
+			mod *= 2;
+		}
+		else mod *= 1.5;
+	}
     if (player.hasPerk(PerkLib.AscensionKillingIntent)) mod *= 1 + (player.perkv1(PerkLib.AscensionKillingIntent) * 0.1);
     mod = Math.round(mod * 100) / 100;
     return mod;
@@ -15239,29 +15283,59 @@ public function rangePhysicalForce():Number {
     var mod:Number = 1;
     if (player.hasPerk(PerkLib.JobRanger)) mod += .1;
     if (player.hasPerk(PerkLib.JobHunter)) mod += .2;
-    if (player.hasPerk(PerkLib.JobGunslinger)) mod += .2;
+    if (player.hasPerk(PerkLib.JobGunslinger)) mod += .1;
     if (player.hasPerk(PerkLib.CarefulButRecklessAimAndShooting)) mod += .05;
     if (player.hasPerk(PerkLib.Sharpshooter)) mod += .05;
     if (player.hasPerk(PerkLib.PowerShot)) mod += .05;
-    if (player.hasPerk(PerkLib.AlchemicalCartridge)) mod += .05;
     if (player.hasPerk(PerkLib.ColdAim)) mod += .1;
     if (player.hasPerk(PerkLib.DeadlyThrow)) mod += .1;
     if (player.hasPerk(PerkLib.PracticedShot)) mod += .1;
-    if (player.hasPerk(PerkLib.ChurchOfTheGun)) mod += .1;
-    if (player.hasPerk(PerkLib.ExplosiveCartridge)) mod += .1;
-    if (player.hasPerk(PerkLib.TaintedMagazine)) mod += .1;
+    if (player.hasPerk(PerkLib.TaintedMagazine)) mod += .05;
     if (player.hasPerk(PerkLib.AnatomyExpert)) mod += .15;
     if (player.hasPerk(PerkLib.EagleEye)) mod += .15;
-    if (player.hasPerk(PerkLib.SilverForMonsters)) mod += .15;
-    if (player.hasPerk(PerkLib.NamedBullet)) mod += .2;//195% up to here
+    if (player.hasPerk(PerkLib.PowerShotEx)) mod += .15;
+    if (player.hasPerk(PerkLib.SilverForMonsters)) mod += .075;
+    if (player.hasPerk(PerkLib.NamedBullet)) mod += .1;//152,5% up to here
     if (player.hasPerk(PerkLib.PrestigeJobArcaneArcher)) mod += .4;
     if (player.hasPerk(PerkLib.ElementalArrows)) mod += .2;
-    if (player.hasPerk(PerkLib.Cupid)) mod += .2;//275% up to here
+    if (player.hasPerk(PerkLib.Cupid)) mod += .2;//232,5% up to here
+	if (player.hasPerk(PerkLib.RangeWeaponsAttackMultiplier)) mod += .05;
+	if (player.hasPerk(PerkLib.RangeWeaponsAttackMultiplier)) {
+		if (player.hasPerk(PerkLib.SkilledRangerEx)) {
+			mod += .15;
+			mod *= 2;
+		}
+		else mod *= 1.5;
+	}
     if (player.hasPerk(PerkLib.AscensionBloodlust)) mod *= 1 + (player.perkv1(PerkLib.AscensionBloodlust) * 0.1);
     if (player.hasPerk(PerkLib.HistoryScout) || player.hasPerk(PerkLib.PastLifeScout)) mod *= historyScoutBonus();
-    if (player.hasPerk(PerkLib.JobRanger)) mod *= 1.05;
     if (monster.hasStatusEffect(StatusEffects.WoundPoison)) mod *= 1+(monster.statusEffectv1(StatusEffects.WoundPoison)/100);
     mod = Math.round(mod * 100) / 100;
+    return mod;
+}
+
+public function firearmsForce():Number {
+	var mod:Number = 0;
+	if (player.hasPerk(PerkLib.JobGunslinger)) mod += .1;
+	if (player.hasPerk(PerkLib.AmateurGunslinger)) mod += .05;
+	if (player.hasPerk(PerkLib.ExpertGunslinger)) mod += .1;
+	if (player.hasPerk(PerkLib.MasterGunslinger)) mod += .15;
+    if (player.hasPerk(PerkLib.AlchemicalCartridge)) mod += .05;
+    if (player.hasPerk(PerkLib.ChurchOfTheGun)) mod += .1;
+    if (player.hasPerk(PerkLib.ExplosiveCartridge)) mod += .1;
+    if (player.hasPerk(PerkLib.TaintedMagazine)) mod += .05;
+    if (player.hasPerk(PerkLib.SilverForMonsters)) mod += .075;
+    if (player.hasPerk(PerkLib.NamedBullet)) mod += .1;//82,5% up to here
+	if (player.hasPerk(PerkLib.FirearmsAttackMultiplier)) {
+		mod += .1;
+		if (player.hasPerk(PerkLib.SkilledGunslingerEx)) {
+			mod += .2;
+			mod *= 2;
+		}
+		else mod *= 1.5;
+	}
+	mod += rangePhysicalForce();
+	mod = Math.round(mod * 100) / 100;
     return mod;
 }
 

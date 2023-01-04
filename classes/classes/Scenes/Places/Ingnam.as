@@ -85,7 +85,7 @@ public class Ingnam extends BaseContent
 				removeButton(4);
                 addButton(9, "Sleep", SceneLib.camp.doSleep);
             }
-			if (player.hasPerk(PerkLib.JobSoulCultivator) || !CoC.instance.lockCheats) addButton(10, "Soulforce", soulforce.accessSoulforceMenu).hint("Spend some time on the cultivation or spend some of the soulforce.");
+			if (player.hasPerk(PerkLib.JobSoulCultivator)) addButton(10, "Soulforce", soulforce.accessSoulforceMenu).hint("Spend some time on the cultivation or spend some of the soulforce.");
 		}
 		
 		//The end of prologue, starts the game.

@@ -6,7 +6,6 @@ import classes.BodyParts.Tongue;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.Desert.CumWitch;
 import classes.Scenes.Dungeons.DesertCave.*;
-import classes.Scenes.NPCs.Exgartuan;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
@@ -2234,14 +2233,15 @@ public class DesertCave extends DungeonAbstractContent
 		}
 
 		public function sexWithFriendlySandMother():void {
+			monster = new SandMother();
 			menu();
 			//friendly cunt fuck:
-			addButtonIfTrue(0, "GetMilkFill", lesboMilkFilling, "Req. a vagina",player.hasVagina(),
-				"Get into female sex with the Sand Mother and get your vagina stuffed with milk!");
-			addButtonIfTrue(1, "Vaginal", friendlySandMotherFuck,
-				"Req. a cock with area smaller than " + monster.vaginalCapacity(),
-				player.cockThatFits(monster.vaginalCapacity()) >= 0,
-				"Penetrate her pussy with your penis.");
+			addButton(0, "GetMilkFill", lesboMilkFilling)
+				.hint("Get into female sex with the Sand Mother and get your vagina stuffed with milk!")
+				.disableIf(player.cockThatFits(monster.vaginalCapacity()) < 0, "Req. a cock with area smaller than " + monster.vaginalCapacity());
+			addButton(1, "Vaginal", friendlySandMotherFuck)
+				.hint("Penetrate her pussy with your penis.")
+				.disableIf(!player.hasVagina(), "Req. a vagina");
 			addButton(4,"Back",sandWitchMotherFriendlyMenu);
 		}
 		
