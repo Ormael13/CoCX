@@ -812,27 +812,40 @@ import coc.xxc.StoryContext;
 		 * @param back Function for the "Back" button (14)
 		 * @param page Currently displayed page
 		 * @param IsSorted If true, the buttons will be sorted by their names
-		 * @param buttonsPerPage How many buttons is displayed per page. By default, 12 (buttons 12-13 reserved for Prev-Next pages, 14 for Back)
-		 * @return this
+		 * @param constButtons Adds constant buttons, aside from Prev/Next page. Arrays ["Name", Function]
 		 */
-		public static function submenu(buttons:ButtonDataList, back:Function=null, page:int=0, IsSorted:Boolean = true, buttonsPerPage:int = 12):void {
+		public static function submenu(buttons:ButtonDataList, back:Function=null, page:int=0, IsSorted:Boolean = true, constButtons:Array = null):void {
+			if (!constButtons) constButtons = [];
 			var list:/*ButtonData*/Array = buttons.list.filter(function(e:ButtonData, i:int, a:Array):Boolean{
 				return e.visible;
 			});
 			if (IsSorted){
 				list.sortOn('text');
 			}
+			// find out how much buttons we can place on each page
+			var total:int = list.length; // total number of menu buttons
+			var totalConst:int = constButtons.length + (back != null ? 1 : 0); // const buttons on each page
+			if (total + totalConst > 15) //can't fit on 1 page!
+				totalConst += 2; // prev/nex
+			var buttonsPerPage:int = 15 - totalConst; // including back, prev/next, other shit
 			menu();
-			var total:int = list.length;
-			var n:int = Math.min(total,(page+1)*buttonsPerPage);
-			for (var bi:int = 0,li:int=page*buttonsPerPage; li<n; li++,bi++) {
+			// menu buttons
+			var n:int = Math.min(total,(page+1)*buttonsPerPage); // max index for this page
+			var bi:int = 0; // button index
+			for (var li:int=page*buttonsPerPage; li<n; li++,bi++) {
 				list[li].applyTo(button(bi%buttonsPerPage));
 			}
+			// const buttons
+			bi = 15 - totalConst;
+			for (var cbi:int = 0; cbi < constButtons.length; ++cbi, ++bi)
+				if (constButtons[cbi][0] && constButtons[cbi][1])
+					button(bi).show(constButtons[cbi][0], constButtons[cbi][1])
+						.hint(constButtons[cbi].length > 2 ? constButtons[cbi][2] : "");
 			if (page!=0 || total>buttonsPerPage) {
-				button(12).show("Prev Page", curry(submenu, buttons, back, page - 1, IsSorted)).disableIf(page == 0);
-				button(13).show("Next Page", curry(submenu, buttons, back, page + 1, IsSorted)).disableIf(n >= total);
+				button(bi++).show("Prev Page", curry(submenu, buttons, back, page - 1, IsSorted, constButtons)).disableIf(page == 0);
+				button(bi++).show("Next Page", curry(submenu, buttons, back, page + 1, IsSorted, constButtons)).disableIf(n >= total);
 			}
-			if (back != null) button(14).show("Back",back);
+			if (back != null) button(bi++).show("Back",back);
 		}
 		
 		/**
