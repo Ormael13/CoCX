@@ -1074,6 +1074,7 @@ private function etnaJumpsPCinCamp():void {
 	clearOutput();
 	outputText("Etna pounces on you as you enter your camp, she's obviously very hungry.[pg]");
 	outputText("“<i>[name] I’m starved! Give me some food now!</i>”[pg]");
+	EtnaJumpedToday = true;
 	if (!player.hasCock() && player.hasKeyItem("Demonic Strap-On") <= 0) {
 		outputText("Etna walks to you and she looks really angry.[pg]");
 		outputText("“<i>Look our deal is that you will feed me the cum I need to survive and there is no way you can with this equipment. Either grow back a dick or find some other way to do it. I don't care how, you need to provide me cum.</i>”[pg]");

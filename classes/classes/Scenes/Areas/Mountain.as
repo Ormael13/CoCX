@@ -94,7 +94,7 @@ public class Mountain extends BaseContent
 						   && !player.hasStatusEffect(StatusEffects.EtnaOff)
 						   && (player.level >= 20);
 				},
-				chance: 0.2,
+				chance: 0.5,
 				call  : function ():void {
 					 SceneLib.etnaScene.etnaInfidelityEncounter();
 				}

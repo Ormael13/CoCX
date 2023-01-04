@@ -107,7 +107,7 @@ private function applyEtnaDaughterName():void {
 	//Easter Egg Names:
 	clearOutput();
 	
-	outputText("“<i>[etnakidname] is such a wonderful name! I’m sure she will live up to you with it! What do you think [etnakidname]?”[pg]");
+	outputText("“<i>[etnakidname] is such a wonderful name! I’m sure she will live up to you with it! What do you think [etnakidname]?</i>”[pg]");
 	outputText("Your daughter is too busy sleeping to listen at the moment, but by the way you see her ears twitching, you're sure she likes it. The three of you doze off to sleep together. When you wake up you're holding a manticore of tender years against you, she has [haircolor] hair, the same as you, and the face of her mother.[pg]");
 	outputText("“<i>"+championRef()+"? Good morning!</i>”[pg]");
 	outputText("Well, that's a disappointment, you expected this phase to last longer but you guess you will have to make do. Still, she didn’t fully mature overnight which, considering Mareth’s ridiculous time skips, is a small miracle in its own. Maybe you will get to enjoy the joys of being a parent a bit longer?[pg]");
@@ -117,7 +117,7 @@ private function applyEtnaDaughterName():void {
 }
 
 public function etnaDaughterCampDescription():void {
-	outputText("\nYou see [etnakidname] playing around the camp, chasing butterflies as she pounces from one rock to another. For a child who belongs to a species of succubus-like cum thirsty creatures, she is surprisingly innocent. It feels so good to be a parent and you hope these days last forever.\n");
+	outputText("\nYou see [etnakidname] playing around the camp, chasing butterflies as she pounces from one rock to another. For a child who belongs to a species of succubus-like cum thirsty creatures, she is surprisingly innocent. It feels so good to be a parent and you hope these days last forever.\n\n");
 }
 
 
@@ -224,7 +224,7 @@ private function incestWithEtnaDaughterToggle():void {
 private function playWithEtnaDaughter():void {
 	clearOutput();
 	outputText("You think about what you will do with your daughter today when you hear a growl that sounds like her stomach.[pg]");
-	outputText("“<i>"+championRef()+", I’m hungry please carry me!”[pg]");
+	outputText("“<i>"+championRef()+", I’m hungry please carry me!</i>”[pg]");
 	outputText("Of course she is. You can see her tail twitch with hunger and you effortlessly figure out what your little cub wants.[pg]");
 	outputText("You [if (hasarmor) \"remove your [armor] and \"]pick up [etnakidname] and position her on your back for a piggyback ride.[pg]");
 	outputText("“<i>Yay I’m going for a ride!</i>”[pg]");
