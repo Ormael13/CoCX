@@ -34,10 +34,10 @@ public class EtnaDaughterScene extends NPCAwareContent implements TimeAwareInter
 
 	public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
 		if (o) {
-			EtnaDaughterName = "EtnaDaughterName" in o ? o["EtnaDaughterName"] : "";
-			EtnaDaughterIncestEnabled = "EtnaDaughterIncestEnabled" in o ? o["EtnaDaughterIncestEnabled"] : false;
-			EtnaDaughterAge = "EtnaDaughterAge" in o ? o["EtnaDaughterAge"] : 0;
-			EtnaDaughterGuardingCamp = "EtnaDaughterGuardingCamp" in o ? o["EtnaDaughterGuardingCamp"] : 0;
+			EtnaDaughterName = o["EtnaDaughterName"];
+			EtnaDaughterIncestEnabled = o["EtnaDaughterIncestEnabled"];
+			EtnaDaughterAge = o["EtnaDaughterAge"];
+			EtnaDaughterGuardingCamp = o["EtnaDaughterGuardingCamp"];
 		} else resetState();
 	}
 

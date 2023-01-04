@@ -43,10 +43,10 @@ public class EtnaFollower extends NPCAwareContent implements TimeAwareInterface,
 
 	public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
 		if (o) {
-			EtnaHunting = "EtnaHunting" in o ? o["EtnaHunting"]: false;
-			EtnaInfidelity = "EtnaInfidelity" in o ? o["EtnaInfidelity"]: 0;
-			EtnaFertile = "EtnaFertile" in o ? o["EtnaFertile"]: false;
-			EtnaJumpedToday = "EtnaJumpedToday" in o ? o["EtnaJumpedToday"]: false;
+			EtnaHunting = o["EtnaHunting"];
+			EtnaInfidelity = o["EtnaInfidelity"];
+			EtnaFertile = o["EtnaFertile"];
+			EtnaJumpedToday = o["EtnaJumpedToday"];
 		} else resetState();
 	}
 
