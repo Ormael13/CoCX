@@ -342,13 +342,15 @@ public class Combat extends BaseContent {
 
     public function maxBowAttacks():int {
         var extraHits:Number = 0;
+        var baseHits:Number;
         if (player.isElf() && player.hasPerk(PerkLib.ELFMasterShot)) extraHits = 1;
-        if (player.hasPerk(PerkLib.Multishot)) return 6+extraHits;
-        else if (player.hasPerk(PerkLib.WildQuiver)) return 5+extraHits;
-        else if (player.hasPerk(PerkLib.Manyshot)) return 4+extraHits;
-        else if (player.hasPerk(PerkLib.WeaponRangeTripleStrike)) return 3+extraHits;
-        else if (player.hasPerk(PerkLib.WeaponRangeDoubleStrike)) return 2+extraHits;
-        else return 1+extraHits;
+        if (player.hasPerk(PerkLib.Multishot)) baseHits = 6;
+        else if (player.hasPerk(PerkLib.WildQuiver)) baseHits = 5;
+        else if (player.hasPerk(PerkLib.Manyshot)) baseHits = 4;
+        else if (player.hasPerk(PerkLib.WeaponRangeTripleStrike)) baseHits = 3;
+        else if (player.hasPerk(PerkLib.WeaponRangeDoubleStrike)) baseHits = 2;
+        else baseHits = 1;
+        return (baseHits+extraHits) * (flags[kFLAGS.ELVEN_TWINSHOT_ENABLED] ? 2 : 1);
     }
 
     public function maxCrossbowAttacks():int {
@@ -773,7 +775,7 @@ public class Combat extends BaseContent {
             ((player.hasPerk(PerkLib.Berzerker) || (player.hasPerk(PerkLib.Lustzerker)) && player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 3)) || player.hasPerk(PerkLib.Poisoning) || player.hasPerk(PerkLib.SwiftCasting) || player.hasStatusEffect(StatusEffects.SoulDrill1) || player.hasStatusEffect(StatusEffects.ThePhalluspear1)) {
             buttons.add("Melee Opt", CoC.instance.perkMenu.meleeOptions, "You can adjust your melee attack settings.");
         }
-        if (player.hasPerk(PerkLib.WeaponRangeDoubleStrike) || player.hasPerk(PerkLib.ElementalArrows) || player.hasPerk(PerkLib.Cupid) || player.hasPerk(PerkLib.EnvenomedBolt) || player.hasPerk(PerkLib.AmateurGunslinger)) {
+        if (player.hasPerk(PerkLib.WeaponRangeDoubleStrike) || player.hasPerk(PerkLib.ELFTwinShot) || player.hasPerk(PerkLib.ElementalArrows) || player.hasPerk(PerkLib.Cupid) || player.hasPerk(PerkLib.EnvenomedBolt) || player.hasPerk(PerkLib.ELFThornShot) || player.hasPerk(PerkLib.AmateurGunslinger)) {
             buttons.add("Range Opt", CoC.instance.perkMenu.rangedOptions, "You can adjust your range strike settings.");
         }
         if (player.hasPerk(PerkLib.JobLeader)) {
@@ -2788,6 +2790,7 @@ public class Combat extends BaseContent {
             if (player.weaponRangePerk == "Crossbow") flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = Math.min((flags[kFLAGS.MULTISHOT_STYLE] || 0) + 1, 3);
             else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = Math.min((flags[kFLAGS.MULTISHOT_STYLE] || 0) + 1, maxBowAttacks());
 			if (player.isElf() && player.hasPerk(PerkLib.ELFMasterShot) && player.weaponRangePerk == "Bow") flags[kFLAGS.MULTIPLE_ARROWS_STYLE] += 1;
+			if (player.isWoodElf() && player.hasPerk(PerkLib.ELFTwinShot) && player.weaponRangePerk == "Bow") flags[kFLAGS.MULTIPLE_ARROWS_STYLE] *= (flags[kFLAGS.ELVEN_TWINSHOT_ENABLED] ? 2 : 1);;
             if (player.weaponRangeName == "Avelynn") flags[kFLAGS.MULTIPLE_ARROWS_STYLE] *= 3;
         }
         else if (player.weaponRangePerk == "Throwing") {
@@ -3025,7 +3028,7 @@ public class Combat extends BaseContent {
             if (player.weaponRangeName == "Hodr's bow" && monster.hasStatusEffect(StatusEffects.Blind)) damage *= 1.1;
             damage = elementalArrowDamageMod(damage);
 			//Determine if critical hit!
-            var crit:Boolean = false;
+            var crit:Boolean;
             var critChance:Number = 0;
 			var critDamage:Number = 0;
             if (player.isInNonGoblinMech() || player.isInGoblinMech()) {
@@ -3072,7 +3075,7 @@ public class Combat extends BaseContent {
                 heroBaneProc(damage);
             }
             cupidArrowsEffect();
-            if (flags[kFLAGS.ENVENOMED_BOLTS] == 1 && player.tailVenom >= player.VenomWebCost()) {
+            if (flags[kFLAGS.ENVENOMED_BOLTS] == 1 && (player.tailVenom >= player.VenomWebCost() || (player.hasPerk(PerkLib.ELFThornShot) && player.isWoodElf()))) {
                 outputText("  ");
                 if (monster.lustVuln == 0) {
                     outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.");
@@ -3144,6 +3147,9 @@ public class Combat extends BaseContent {
                     } else monster.createStatusEffect(StatusEffects.ManticoreVenom, 0, 0, DBPaa, 0);
                     player.tailVenom -= player.VenomWebCost();
 					flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
+                }
+                if (player.hasPerk(PerkLib.ELFThornShot) && player.isWoodElf() ) {
+                    CombatAbilities.Rosethorn.doEffect();
                 }
                 if (player.faceType == Face.SNAKE_FANGS) {
                     outputText("  [monster he] seems to be effected by the poison, its movements slowing down.");
@@ -3791,7 +3797,7 @@ public class Combat extends BaseContent {
             damage *= rangePhysicalForce();
 
             //Determine if critical hit!
-            var crit:Boolean = false;
+            var crit:Boolean;
             var critChance:Number = calculateCritRange();
 			var critDamage:Number = calculateCritDamageRange();
 			crit = rand(100) < critChance;
@@ -4053,7 +4059,7 @@ public class Combat extends BaseContent {
             damage *= player.jewelryRangeModifier();
             damage *= firearmsForce();
             //Determine if critical hit!
-			var crit:Boolean = false;
+			var crit:Boolean;
             var critChance:Number = calculateCritFirearms();
 			var critDamage:Number = calculateCritDamageFirearms();
             crit = rand(100) < critChance;
@@ -15814,4 +15820,4 @@ private function touSpeStrScale(stat:int):Number {
         return damage;
     }
 }
-}
+}

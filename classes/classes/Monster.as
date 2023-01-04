@@ -3140,6 +3140,20 @@ import flash.utils.getQualifiedClassName;
 				SceneLib.combat.CommasForDigits(store16);
 				outputText("[pg]");
 			}
+			if(hasStatusEffect(StatusEffects.Rosethorn)) {
+				store16 = (player.str + player.spe);
+				store16a = statusEffectv1(StatusEffects.Rosethorn);
+				if (game.player.hasPerk(PerkLib.ThirstForBlood)) store16a += .25;
+				if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store16a += .2;
+				store16 *= store16a;
+				store16 += maxHP()*0.02;
+				store16 = Math.round(store16);
+				store16 = SceneLib.combat.doDamage(store16);
+				if(plural) outputText("[Themonster] bleed profusely from the deep wounds your rose thorns left behind. ");
+				else outputText("[Themonster] bleeds profusely from the deep wounds your rose thorns left behind. ");
+				SceneLib.combat.CommasForDigits(store16);
+				outputText("[pg]");
+			}
 			if (hasStatusEffect(StatusEffects.DeathBlossom)) {
 				if (statusEffectv1(StatusEffects.DeathBlossom) <= 0) {
 					removeStatusEffect(StatusEffects.DeathBlossom);

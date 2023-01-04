@@ -3753,6 +3753,10 @@ public class PerkLib
 				"You are currently in elemental form.");
 		public static const ELFArcherCovenant:PerkType = mk("Archer Covenant", "Archer Covenant",
 				"As an elf, gain a 25% increase to bow damage when not wielding a shield or a melee weapon other than a Spear.");
+		public static const ELFThornShot:PerkType = mk("Elven Thorn Shot", "Elven Thorn Shot",
+				"As a wood elf your racial mastery of green magic allows you to transmute the wood of your arrows, growing poisonous thorns on the shaft as it flies toward its target. You may lace your shots with aphrodisiacs as if you had a racial venom and your arrows inflict bleed damage. This power is empowered by all skills and effects that improve green magic.");
+		public static const ELFTwinShot:PerkType = mk("Elven Twin Shot", "Elven Twin Shot",
+				"As a wood elf double the number of shots per round you can fire.");
 		public static const ELFElvenBattleStyle:PerkType = mk("Elven Battle Style", "Elven Battle Style",
 				"As an elf, substitute your strength to your intelligence modifier for spear damage when full attacking.");
 		public static const ELFElvenSpearDancingTechnique:PerkType = mk("Elven Spear Dancing Technique", "Elven Spear Dancing Technique",

@@ -4,18 +4,18 @@ import classes.PerkLib;
 import classes.Scenes.Combat.AbstractGreenSpell;
 import classes.StatusEffects;
 
-public class BriarthornSpell extends AbstractGreenSpell {
-	public function BriarthornSpell() {
-		super("Briarthorn",
-			"While entangling, vines grows sharp thorns that rend the opponent's flesh and deliver a deadly poison that rend vitality. This spell also Inflict heavy bleed and poison damage.",
+public class RosethornShot extends AbstractGreenSpell {
+	public function RosethornShot() {
+		super("Rosethorn",
+			"As a wood elf your racial mastery of green magic allows you to transmute the wood of your arrows, growing poisonous thorns on the shaft as it flies toward its target. You may lace your shots with aphrodisiacs as if you had a racial venom and your arrows inflict bleed damage.",
 			TARGET_ENEMY,
 			TIMING_INSTANT,
 			[TAG_LUSTDMG]);
-		baseManaCost = 20;
+		baseManaCost = 10;
 	}
 	
 	override public function get isKnown():Boolean {
-		return player.hasStatusEffect(StatusEffects.KnowsBriarthorn);
+		return player.hasPerk(PerkLib.ELFThornShot);
 	}
 	
 	override public function describeEffectVs(target:Monster):String {
@@ -27,27 +27,23 @@ public class BriarthornSpell extends AbstractGreenSpell {
 	}
 	
 	override public function isActive():Boolean {
-		return monster.hasStatusEffect(StatusEffects.Briarthorn);
+		return monster.hasStatusEffect(StatusEffects.Rosethorn);
 	}
 	
 	override protected function usabilityCheck():String {
 		var uc:String = super.usabilityCheck();
 		if (uc) return uc;
 		
-		if (!monster.hasStatusEffect(StatusEffects.Entangled)) {
-			return "Briarthorn require to have enemy/ies entangled by the vines.";
-		}
-		
 		return "";
 	}
 	
 	override public function advance(display:Boolean):void {
-		if (player.hasStatusEffect(StatusEffects.Briarthorn)) {
-			if (player.statusEffectv1(StatusEffects.Briarthorn) <= 0) {
-				player.removeStatusEffect(StatusEffects.Briarthorn);
-				if (display) outputText("<b>Briarthorn effect wore off!</b>\n\n");
+		if (player.hasStatusEffect(StatusEffects.Rosethorn)) {
+			if (player.statusEffectv1(StatusEffects.Rosethorn) <= 0) {
+				player.removeStatusEffect(StatusEffects.Rosethorn);
+				if (display) outputText("<b>Rosethorn effect wore off!</b>\n\n");
 			} else {
-				player.addStatusValue(StatusEffects.Briarthorn, 1, -1);
+				player.addStatusValue(StatusEffects.Rosethorn, 1, -1);
 			}
 		}
 	}
@@ -57,22 +53,22 @@ public class BriarthornSpell extends AbstractGreenSpell {
 		if (player.hasPerk(PerkLib.VegetalAffinity)) baseDamage *= 1.5;
 		if (player.hasPerk(PerkLib.GreenMagic)) baseDamage *= 2;
 		if (player.hasStatusEffect(StatusEffects.GreenCovenant)) baseDamage *= 2;
+		if (player.armor == armors.ELFDRES && player.isElf()) baseDamage *= 2;
+		if (player.armor == armors.FMDRESS && player.isWoodElf()) baseDamage *= 2;
 		return adjustLustDamage(baseDamage, monster, CAT_SPELL_GREEN, randomize);
 	}
 	
 	override protected function doSpellEffect(display:Boolean = true):void {
 		if (display) {
-			outputText("You concentrate on the vines causing them to grow vicious thorns that tear through your opponent's flesh delivering a noxious poison.");
+			outputText("You concentrate on the arrow shaft causing it to grow vicious thorns that tear through your opponent's flesh, delivering poison.");
 			if (monster.lustVuln == 0) {
 				if (display) {
 					outputText("\nIt has no effect!  Your foe clearly does not experience lust in the same way as you.\n");
 				}
 				return;
 			}
-			monster.createStatusEffect(StatusEffects.Briarthorn, 1, 0, 0, 0);
-			var arve:Number = 1;
-			if (player.hasPerk(PerkLib.ArcaneVenom)) arve += stackingArcaneVenom();
-			while (arve-->0) doSpellEffect2();
+			monster.createStatusEffect(StatusEffects.Rosethorn, 6, 0, 0, 0);
+			doSpellEffect2();
 			outputText("\n");
 		}
 	}
@@ -96,7 +92,7 @@ public class BriarthornSpell extends AbstractGreenSpell {
 		if (crit) outputText(" <b>Critical!</b>");
 		combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		if (player.hasPerk(PerkLib.VerdantLeech)) {
-			if (monster.lustVuln != 0 && !monster.hasPerk(PerkLib.EnemyTrueAngel)) monster.lustVuln += 0.025;
+			if (monster.lustVuln != 0 && !monster.hasPerk(PerkLib.EnemyTrueAngel)) monster.lustVuln += 0.01;
 			HPChange(Math.round(player.maxHP() * 0.05), false);
 		}
 	}

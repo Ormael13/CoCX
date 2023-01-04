@@ -218,6 +218,7 @@ public class CombatAbilities {
 	public static const Briarthorn:BriarthornSpell       = new BriarthornSpell();
 	public static const DeathBlossom:DeathBlossomSpell   = new DeathBlossomSpell();
 	public static const GreenCovenant:GreenCovenantSpell = new GreenCovenantSpell();
+	public static const Rosethorn:RosethornShot          = new RosethornShot();
 
 	public static const ALL_GREEN_SPELLS:/*CombatAbility*/Array = [
 		PlantGrowth,
