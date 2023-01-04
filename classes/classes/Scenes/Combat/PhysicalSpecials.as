@@ -368,6 +368,13 @@ public class PhysicalSpecials extends BaseCombatContent {
 				bd = buttons.add("Sling Goo", slinggoo).hint("Throw slime at your opponent, lacing it with your aphrodisiac compound and reduce their speed.");
 				if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
+			if (player.isAnyRaceCached([Races.DOG, Races.CERBERUS])) {
+				bd = buttons.add("Terr. Howl", terrifyingHowl).hint("Release a powerful howl, dazing your opponent for 1 round.\n4 round cooldown.", "Terrifying Howl");
+				bd.requireFatigue(physicalCost(40));
+				if(player.hasStatusEffect(StatusEffects.ThroatPunch) || player.hasStatusEffect(StatusEffects.WebSilence)) {
+					bd.disable("You cannot fhowl while you're having so much difficult breathing.");
+				} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+			}
 			if (player.canFly() && !player.hasPerk(PerkLib.ElementalBody)) {
 				bd = buttons.add("Take Flight", takeFlight).hint("Make use of your wings to take flight into the air for up to " + combat.flightDurationNatural() + " turns. \n\nGives bonus to evasion, speed but also giving penalties to accuracy of range attacks or spells. Not to meantion for non spear users to attack in melee range.");
 			}
@@ -2149,6 +2156,33 @@ public class PhysicalSpecials extends BaseCombatContent {
 		monster.statStore.addBuffObject({spe:-15}, "Poison",{text:"Poison"});
 		combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		combat.WrathGenerationPerHit2(5);
+		enemyAI();
+	}
+
+	public function terrifyingHowl():void {
+		clearOutput();
+		if(monster is EncapsulationPod || monster.inte == 0 || monster is LivingStatue) {
+			clearOutput();
+			outputText("You unleash a deafening howl, but [themonster] has no reaction to the sound\n\n");
+			fatigue(10);
+			enemyAI();
+			return;
+		}
+		fatigue(40, USEFATG_PHYSICAL);
+		if(monster.hasPerk(PerkLib.Focused)) {
+			if(!monster.plural) outputText("[Themonster] is too focused for your howl to influence!\n\n");
+			enemyAI();
+			return;
+		}
+		//[Failure]
+		if(rand(10) == 0) {
+			outputText("You unleash a deafening howl, but partway through your voice cracks and you start coughing.\n\n");
+			fatigue(10);
+			enemyAI();
+			return;
+		}
+		outputText("You unleash a deafening howl causing [themonster] to back off in fear momentarily dazed.\n\n");
+		monster.createStatusEffect(StatusEffects.Fear,1,0,0,0);
 		enemyAI();
 	}
 

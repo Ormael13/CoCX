@@ -717,7 +717,7 @@ public class PerkMenu extends BaseContent {
 	}
 
 	//IMutationsDB!
-	public function mutationsDatabase(page:int = 0, review:Boolean = false):void{
+	public function mutationsDatabase(page:int = 0, review:Boolean = false, moreInfoButton:Function = null):void{
 		/*
 		Source: IMutationsLib.as for all mutations.
  		*/
@@ -781,9 +781,7 @@ public class PerkMenu extends BaseContent {
 			//Heart Mutations
 			displayHeader(IMutationPerkType.Slots[slot].name+" Mutations:");
 			mutationsDatabaseVerify(IMutationsLib.mutationsArray(slot));
-			mutationsDatabase(pageAdd);
-			addButton(11, moreInfo ? "LESS INFO" : "MORE INFO", moreInfoSwitch, curry(mutationsDBSlot, slot, pageAdd))
-				.hint(moreInfo ? "Display only the current and next tiers." : "Display all mutation tiers and stat buffs");
+			mutationsDatabase(pageAdd, false, curry(moreInfoSwitch, curry(mutationsDBSlot, slot, pageAdd)));
 		}
 
 		function mutationsDBDragon():void{
@@ -793,9 +791,7 @@ public class PerkMenu extends BaseContent {
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) outputText("\nThere is an extra bonus mutation slot given due to NG+");
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2) outputText("\nThere is another extra bonus mutation slot given due to NG++");
 			mutationsDatabaseVerify([IMutationsLib.DraconicBonesIM, IMutationsLib.DraconicHeartIM, IMutationsLib.DraconicLungIM]);
-			mutationsDatabase(1);
-			addButton(11, moreInfo ? "LESS INFO" : "MORE INFO", moreInfoSwitch, mutationsDBDragon)
-				.hint(moreInfo ? "Display only the current and next tiers." : "Display all mutation tiers and stat buffs");
+			mutationsDatabase(1, false, curry(moreInfoSwitch, mutationsDBDragon));
 		}
 
 		function mutationsDBKitsune():void{
@@ -804,9 +800,7 @@ public class PerkMenu extends BaseContent {
 			displayHeader("Kitsune Mutations");
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) outputText("\nThere is an extra bonus mutation slot given due to NG+");
 			mutationsDatabaseVerify([IMutationsLib.KitsuneThyroidGlandIM, IMutationsLib.KitsuneParathyroidGlandsIM]);
-			mutationsDatabase(1);
-			addButton(11, moreInfo ? "LESS INFO" : "MORE INFO", moreInfoSwitch, mutationsDBKitsune)
-				.hint(moreInfo ? "Display only the current and next tiers." : "Display all mutation tiers and stat buffs");
+			mutationsDatabase(1, false, curry(moreInfoSwitch, mutationsDBKitsune));
 		}
 
 		var bd:ButtonDataList = new ButtonDataList();
@@ -829,7 +823,8 @@ public class PerkMenu extends BaseContent {
 		bd.add("Adaptations", curry(mutationsDBSlot, IMutationPerkType.SLOT_ADAPTATIONS, 1), "Adaptation Mutations");
 		bd.add("Dragons", mutationsDBDragon, "Dragon Mutations");
 		bd.add("Kitsunes", mutationsDBKitsune, "Kitsune Mutations");
-		submenu(bd, displayPerks, page, false, 11); // reserving 11 for the switch
+		submenu(bd, displayPerks, page, false, [[moreInfo ? "LESS INFO" : "MORE INFO", moreInfoButton,
+			moreInfo ? "Display only the current and next tiers." : "Display all mutation tiers and stat buffs"]]); // reserving 11 for the switch
 	}
 
 	private var moreInfo:Boolean = false; //no need to save, so keep it here

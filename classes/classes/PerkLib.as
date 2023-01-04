@@ -3587,6 +3587,7 @@ public class PerkLib
 				"As a harpy or harpy subtype increase toughness speed and libido based on the ammount of harpy children you gave birth to.");
 		public static const HarpyWomb:PerkType = mk("Harpy Womb", "Harpy Womb",
 				"Increases all laid eggs to large size so long as you have harpy legs and a harpy tail.");
+		public static const HellhoundFireBalls:HellHoundFireBalls = new HellHoundFireBalls();
 		public static const HydraAcidBreath:PerkType = mk("Hydra acid breath", "Hydra acid breath",
 				"Allows access to a hydra acid breath attack.");
 		public static const HydraRegeneration:PerkType = mk("Hydra Regeneration", "Hydra Regeneration",
@@ -3747,6 +3748,7 @@ public class PerkLib
 		public static const DemonicLethicite:PerkType = mk("Demonic Lethicite", "Demonic Lethicite",
 				"Improves soulforce and makes you more demonic.");//Effects: maxSoulforce += lib; +1 demonscore; 10 min corruption
 		public static const DemonSlayer:DemonSlayerPerk = new DemonSlayerPerk();
+		public static const DominantAlpha:PerkType = new DominantAlphaPerk();
 		public static const DualMind:PerkType = mk("Dual Mind", "Dual Mind",
 				"Greatly empower the tease ability.");
 		public static const ElementalBody:PerkType = mk("Elemental", "Elemental",
@@ -3792,6 +3794,8 @@ public class PerkLib
 				"Add a small measure of your speed to your tease damage.");
 		public static const Hellfire:PerkType = mk("Hellfire", "Hellfire",
 				"Grants a corrupted fire breath attack, like the hellhounds in the mountains.");
+		public static const HellfireCoat:PerkType = mk("Hellfire Coat", "Hellfire Coat",
+				"Grants a corrupted fire coating to your body, dealing fire damage with all feral attacks.");
 		public static const Immortality:PerkType = mk("Immortality", "Immortality",
 				"Cannot lose combat by damage. Damage taken below 0 instead cause player to take serious lust damage.");
 		public static const IntermediateLeadership:PerkType = mk("Intermediate Leadership", "Intermediate Leadership",

@@ -2745,7 +2745,9 @@ use namespace CoC;
 				mult -= 20;
 			}
 			if (perkv1(IMutationsLib.AlphaHowlIM) >= 2) {
-				mult -= (2*LunaFollower.WerewolfPackMember);
+				var packMembers:Number = LunaFollower.WerewolfPackMember;
+				if (hasMutation(PerkLib.HellhoundFireBalls)) packMembers += perkv3(PerkLib.HellhoundFireBalls);
+				mult -= (2*packMembers);
 			}
 			if (hasPerk(PerkLib.FenrirSpikedCollar)) {
 				mult -= 15;
@@ -4727,6 +4729,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.Soulless)) minCor += 50;
 			if (hasPerk(PerkLib.Phylactery)) minCor = 100;
 			if (hasPerk(PerkLib.BlessingOfTheAncestorTree)) minCor = 50;
+			if (hasPerk(PerkLib.HellfireCoat)) minCor = 50;
 			if (this.hasStatusEffect(StatusEffects.DevilPurificationScar)) {minCor-=50;}
 			if (hasPerk(PerkLib.Phylactery) && hasPerk(PerkLib.SageMedicine)) minCor = 0;
 			if (this.hasPerk(PerkLib.PurityElixir)) minCor -= (this.perkv1(PerkLib.PurityElixir) * 20);
@@ -5495,7 +5498,7 @@ use namespace CoC;
 			}
 		}
 
-		public function killCocks(deadCock:Number):void
+		public function killCocks(deadCock:Number, doOutput:Boolean = true):void
 		{
 			//Count removal for text bits
 			var removed:Number = 0;
@@ -5525,33 +5528,33 @@ use namespace CoC;
 			}
 			//Texts
 			if (removed == 1) {
-				if (cocks.length == 0) {
+				if (cocks.length == 0 && doOutput) {
 					outputText("<b>Your manhood shrinks into your body, disappearing completely.</b>");
 					if (hasStatusEffect(StatusEffects.Infested)) outputText("  Like rats fleeing a sinking ship, a stream of worms squirts free from your withering member, slithering away.");
 				}
-				if (cocks.length == 1) {
+				if (cocks.length == 1 && doOutput) {
 					outputText("<b>Your smallest penis disappears, shrinking into your body and leaving you with just one [cock].</b>");
 				}
-				if (cocks.length > 1) {
+				if (cocks.length > 1 && doOutput) {
 					outputText("<b>Your smallest penis disappears forever, leaving you with just your [cocks].</b>");
 				}
 			}
 			if (removed > 1) {
-				if (cocks.length == 0) {
+				if (cocks.length == 0 && doOutput) {
 					outputText("<b>All your male endowments shrink smaller and smaller, disappearing one at a time.</b>");
 					if (hasStatusEffect(StatusEffects.Infested)) outputText("  Like rats fleeing a sinking ship, a stream of worms squirts free from your withering member, slithering away.");
 				}
-				if (cocks.length == 1) {
+				if (cocks.length == 1 && doOutput) {
 					outputText("<b>You feel " + num2Text(removed) + " cocks disappear into your groin, leaving you with just your [cock].</b>");
 				}
-				if (cocks.length > 1) {
+				if (cocks.length > 1 && doOutput) {
 					outputText("<b>You feel " + num2Text(removed) + " cocks disappear into your groin, leaving you with [cocks].</b>");
 				}
 			}
 			//remove infestation if cockless
 			if (cocks.length == 0) removeStatusEffect(StatusEffects.Infested);
 			if (cocks.length == 0 && balls > 0) {
-				outputText(" <b>Your " + sackDescript() + " and [balls] shrink and disappear, vanishing into your groin.</b>");
+				if (doOutput) outputText(" <b>Your " + sackDescript() + " and [balls] shrink and disappear, vanishing into your groin.</b>");
 				balls = 0;
 				ballSize = 1;
 			}
@@ -5968,7 +5971,7 @@ use namespace CoC;
 		public function blockingBodyTransformations():Boolean {
 			return hasPerk(PerkLib.TransformationImmunity) || hasPerk(PerkLib.TransformationImmunityFairy) || hasPerk(PerkLib.TransformationImmunityAtlach)
 					|| hasPerk(PerkLib.TransformationImmunityBeeHandmaiden) || hasPerk(PerkLib.Undeath) || hasPerk(PerkLib.WendigoCurse)
-					|| hasPerk(PerkLib.BlessingOfTheAncestorTree) || hasEnchantment(EnchantmentLib.TfImmunity);
+					|| hasPerk(PerkLib.BlessingOfTheAncestorTree) || hasPerk(PerkLib.HellfireCoat) || hasEnchantment(EnchantmentLib.TfImmunity);
 		}
 
 		public function manticoreFeed():void {
@@ -6103,6 +6106,7 @@ use namespace CoC;
 			hoursSinceCum = 0;
 			flags[kFLAGS.TIMES_ORGASMED]++;
 			if (finalType == "Dick") {
+				if (CoC.instance.inCombat) if (hasPerk(PerkLib.DominantAlpha)) createOrAddStatusEffect(StatusEffects.DominantAlpha, 1, 3)
                 if (SceneLib.exgartuan.dickPresent()) SceneLib.exgartuan.dickSleep(4 + rand(4)); //give him some sleep
 				if (hasPerk(PerkLib.EasterBunnyBalls) && ballSize > 3)
 					createStatusEffect(StatusEffects.EasterBunnyCame, 0, 0, 0, 0);
@@ -6125,6 +6129,9 @@ use namespace CoC;
 					var bonusGems:int = rand( cocks[randomCock].cockThickness ) + countCockSocks("gilded"); // int so AS rounds to whole numbers
 					EngineCore.outputText("\n\nFeeling some minor discomfort in your " + cockDescript(randomCock) + " you slip it out of your [armor] and examine it. <b>With a little exploratory rubbing and massaging, you manage to squeeze out " + bonusGems + " gems from its cum slit.</b>\n\n");
 					gems += bonusGems;
+				}
+				if (hasPerk(PerkLib.HellhoundFireBalls)) {
+					addPerkValue(PerkLib.HellhoundFireBalls, 2, 1);
 				}
 			}
             if (SceneLib.exgartuan.boobsPresent()) SceneLib.exgartuan.boobsSleep(4 + rand(4)); //consider her touched, lol
@@ -6352,6 +6359,22 @@ use namespace CoC;
 						"that Mareth is filled with idiots doesn't help that." +
 						" Despite draining your victim into something about as smart as a mineral you fail to extract anything noteworthy.");
 			}
+		}
+
+		public function DominantAlphaBonus():void
+		{
+			var bonus:Number = SceneLib.camp.submissivesAtCampCount() * 0.02;
+			if (buff("Dominant Alpha").getValueOfStatBuff("int.mult") < bonus){
+				buff("Dominant Alpha").addStat("str.mult",0.02);
+				buff("Dominant Alpha").addStat("tou.mult",0.02);
+				buff("Dominant Alpha").addStat("spe.mult",0.02);
+				buff("Dominant Alpha").addStat("int.mult",0.02);
+				buff("Dominant Alpha").addStat("wis.mult",0.02);
+				buff("Dominant Alpha").addStat("lib.mult",0.02);
+				CoC.instance.mainView.statsView.refreshStats(CoC.instance);
+			}
+			if (hasStatusEffect(StatusEffects.DominantAlpha) && statusEffectv1(StatusEffects.DominantAlpha) > 1 && buff("Dominant Alpha").getValueOfStatBuff("str") < 200)
+				buff("Dominant Alpha").addStat("str",200);
 		}
 
 		public function VenomWebCost():Number

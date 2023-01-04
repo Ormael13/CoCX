@@ -2,6 +2,7 @@
 import classes.*;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 import classes.internals.ChainedDrop;
@@ -14,12 +15,18 @@ public function minoVictoryRapeChoices():void {
 	if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 1 || player.hasPerk(PerkLib.LactaBovineImmunity) || player.hasPerk(PerkLib.ManticoreCumAddict))
 		outputText("Smiling down at your vanquished foe, you feel a familiar hunger growing within you.  What do you do?");
 	//Not an addict
-	outputText("You smile in satisfaction as the " + monster.short + (monster.lust >= monster.maxOverLust() ? " drops down on all fours and begins masturbating feverishly.  " : " collapses, unable to continue fighting."));
-	if(player.lust >= 33 && player.gender > 0)
-		outputText("\n\nSadly, you realize your own needs have not been met.  Of course, you could always fuck the eager bull...\n\nWhat do you do?");
-	else if(player.hasStatusEffect(StatusEffects.Feeder))
-		outputText("\n\nlthough you're not aroused enough to rape the minotaur, you realize your own need to breastfeed has not been met.  You could always let the poor thing have a drink...\n\nWill you?");
-	else outputText("\n\nYou're not aroused enough to rape him.")
+	if (player.isRaceCached(Races.CERBERUS)) {
+		if (monster.lust >= monster.maxOverLust())
+			outputText("The minotaur shakily jerks himself off, lost in his rut, yet he seems hesitant at the sight of you. Now's the time to put this bull in his place.");
+		else outputText("The minotaur collapses, losing all semblance of defiance as he warily looks up at your throbbing manhood. Now's the time to put this bull in his place.");
+	} else {
+		outputText("You smile in satisfaction as [themonster]" + (monster.lust >= monster.maxOverLust() ? " drops down on all fours and begins masturbating feverishly.  " : " collapses, unable to continue fighting."));
+		if(player.lust >= 33 && player.gender > 0)
+			outputText("\n\nSadly, you realize your own needs have not been met.  Of course, you could always fuck the eager bull...\n\nWhat do you do?");
+		else if(player.hasStatusEffect(StatusEffects.Feeder))
+			outputText("\n\nlthough you're not aroused enough to rape the minotaur, you realize your own need to breastfeed has not been met.  You could always let the poor thing have a drink...\n\nWill you?");
+		else outputText("\n\nYou're not aroused enough to rape him.")
+	}
 	//menu
 	menu();
 	addButton(9, "Kill", killMinotaur);
@@ -59,7 +66,12 @@ public function minoVictoryRapeChoices():void {
 		addButton(12, "SateYourself", slimeSateYourself).disableIf(!player.isGoo(), "Requires goo body.");
 		SceneLib.uniqueSexScene.pcUSSPreChecksV2(minoVictoryRapeChoices); //13
 	}
+	if (player.isAnyRaceCached(Races.CERBERUS)) {
+		addButton(14, "Rape", cerberusRapesMinotaur);
+		addButton(14, "Ignore", ignoreMinotaur);
+	}
 }
+
 
 private function oviRouter():void {
 	menu();
@@ -88,6 +100,11 @@ private function addictRouter():void {
 	addButtonIfTrue(2, "ProstateMilk", AddictNagaOnMinotaur, "Req. naga lower body", player.isNaga());
 	addButton(4, "Back", minoVictoryRapeChoices);
 
+}
+
+private function ignoreMinotaur():void {
+	outputText("There's joy in putting him down, letting him know that he's nothing beneath you. Hardly worth your time anymore. You decide to head back to camp.");
+	cleanupAfterCombat();
 }
 
 private function killMinotaur():void {
@@ -294,6 +311,23 @@ private function minoRapeIntro():void {
 		else outputText("  Glancing back at you with eyes full of despair, the minotaur doubts you'll help relieve the predicament his " + monster.ballsDescriptLight() + " are in.");
 	}
 }
+
+private function cerberusRapesMinotaur():void {
+	spriteSelect(SpriteDb.s_minotaur);
+	clearOutput();
+	outputText("You approach the hulking minotaur without hesitation. His broad, grizzled frame is but a ragdoll in your grasp as you lift him over yourself with ease, tearing off his loincloth.[pg]");
+	outputText("The minotaur moos in distress but you waste no time aligning your erection to his ass. His tail flits against your chest, yet he's completely in submission to you. You press both your dicks together before slathering his hole with your bubbling precum.[pg]");
+	outputText("His swollen balls bounce against you as he shakes against you desperately, but this bitch is about to be shown what a true alpha is like. As you wrap an arm around his strong, taut stomach, you force your dual erections into him as he grunts in desperation. Despite his protests, he seems to be enjoying the sheer size of your [dick] as you push into him with each thrust, pressing against his prostate.[pg]");
+	outputText("The minotaur moans loudly as he immediately cums, spraying the cave walls in waves of seed. You lean closer as your other heads lick his face. Despite his musk, you know that your scent quickly overpowers his musk. You're going to make sure that your scent will stay on him as a reminder of who's in control.[pg]");
+	outputText("His tongue lolls as you continue bucking into him, forcing him up and down your length. You can feel your balls tightening as you clutch onto him tighter with your arms, forcing him deeper against you as once again you feel yourself reaching the verge of your orgasm.[pg]");
+	outputText("Finally, your heads simultaneously give a loud howl, panting eagerly as you cum, forcing your cocks as deep into him as possible as you unload every ounce of hot cum into him. The minotaur moos in desperation as you can feel his stomach swell up slightly from the sheer volume of cum you're pouring into him.[pg]");
+	outputText("Your legs buckle slightly as you lower him down before dropping him to the ground. His ass leaks with seed as your erections slide out of his hole.[pg]");
+	outputText("You smile in satisfaction before wiping your cock in his fur. After all, he's your territory now.[pg]");
+	outputText("You head back to camp now that you're finished with him.[pg]");
+	player.sexReward("no", "Dick");
+	cleanupAfterCombat();
+}
+
 //Man buttrapes a minotaur butt.
 private function bumRapeaMinotaur():void {
 	spriteSelect(SpriteDb.s_minotaur);
@@ -489,6 +523,31 @@ public function minoPheromones():void {
 			return;
 		}
 		getRapedVagAss();
+	}
+
+	public function minotaurEncounterAsCerberus(isMonoLord:Boolean = false):void {
+		clearOutput();
+		spriteSelect(SpriteDb.s_minotaur);
+
+		outputText("As you explore the mountain looking for a new plaything to toy with you run into a cave from which a minotaur ");
+		if (isMonoLord) outputText("carrying a huge axe ");
+		outputText("steps out. The moment he sees your twin hardening infernal cocks the bull slowly backs out. As much as he's used to being on top, your three rows of sharp teeths, towering stature, ripped body and sheer aura of dominance causes him to slowly walk away into the cave looking for an escape route so as not to end up impaled on the tip of your dripping shafts.[pg]");
+		outputText("You could follow him in and force a fight or you could let the coward go. What will you do with him?[pg]");
+		menu();
+		addButton(0, "Fight", fightMino);
+		addButton(1, "Ignore", ignoreMino);
+
+		function ignoreMino():void {
+			outputText("This pathetic excuse for a male isn't worth your time.[pg]");
+			outputText("You decide to skip on him and look for a more defiant toy to break heading back toward your camp.")
+			doNext(camp.returnToCampUseOneHour);
+		}
+		function fightMino():void {
+			outputText("You make a fearsome howl as you charge after him forcing the bull to fight and defend himself as best he can.");
+			if (isMonoLord)
+				startCombat(new MinotaurLord());
+			else startCombat(new Minotaur())
+		}
 	}
 
 

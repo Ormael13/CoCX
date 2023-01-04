@@ -76,14 +76,14 @@ public class Changelog extends BaseContent
 			outputText("-New tier 2 misc lvl-up perk: Skilled Fighter (Ex). Req. Skilled Fighter perk and 35+ str/tou/spe. Effect: When melee atk crit chance exceed 100% crit dmg is x2 and when exceed 200% crit dmg is x3. (+15% melee physical attacks multiplier and then adds another 50% (total of 100%) on top of final result)\n");
 			outputText("-New tier 2 misc lvl-up perk: Skilled Ranger (Ex). Req. Skilled Ranger perk and 35+ str/tou/spe. Effect: When range atk crit chance exceed 100% crit dmg is x2 and when exceed 200% crit dmg is x3. (+15% range physical attacks multiplier and then adds another 50% (total of 100%) on top of final result)\n");
 			outputText("-New tier 3 misc lvl-up perk: Skilled Gunslinger (Ex). Req. Skilled Gunslinger perk, lvl 15+ and 40+ str/tou/spe. Effect: When firearms atk crit chance exceed 100% crit dmg is x2 and when exceed 200% crit dmg is x3. (+20% firearms attacks multiplier and then adds another 50% (total of 100%) on top of final result)\n");
+			outputText("-New Cerberus TF event (sleep in camp while being fully hellhound (black pepper) and have Marae's Lethicite) Has a few unique interactions with corrupted enemies. (EragonX)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
-			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
-			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
-			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
-			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");// (Liadri)
 			outputText("-\n");// (aimozg)
@@ -93,11 +93,11 @@ public class Changelog extends BaseContent
 			outputText("-\n");// (Furrin Gok)
 			outputText("-\n");// (khovel)
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
+			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
+			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
+			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
+			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -107,7 +107,7 @@ public class Changelog extends BaseContent
 			//remove this line when other two lines below get added ingame
 			//outputText("-New perk for enemies: Elite type enemy. Bonuses for are: Diehard effect of 2,5% of max HP + 750 HP * NG tier, OverMax HP effect of 5% magnitude.\n");
 			//outputText("-New perk for enemies: Champion type enemy. Bonuses for are: Diehard effect of 5% of max HP + 1,500 HP * NG tier, OverMax HP effect of 10% magnitude.\n");
-			outputText("-Fixed bugs: Bard not affected by cap of prestige jobs, last one checks for holli's kill/survive moved into less troublesome spot, Benoit/Oswald taking full price for simple backpack size upgade\n");
+			outputText("-Fixed bugs: Bard not affected by cap of prestige jobs, last one checks for holli's kill/survive moved into less troublesome spot, Benoit/Oswald taking full price for simple backpack size upgade, Fasting Pill been unaccessable when hunger mode is active\n");
 			/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
@@ -494,7 +494,7 @@ public class Changelog extends BaseContent
 			outputText("-New Green Spell: Entagle. Learned from lession with Lutien - wood elf village mage teacher when having 100+ int OR from White Book when having Hidden Job: Grey Sage. It have 6 turns cooldown. Would turn present plants into vines that would try to grapple enemy for up to 6 turns. Each turn enemy is entangled it will recieve lust damage.\n");
 			outputText("-New Green Spell: Briarthorn. Learned from lession with Lutien - wood elf village mage teacher when having 100+ int OR from White Book when having Hidden Job: Grey Sage. It have 3 turns cooldown. While entangling, vines grows sharp thorns that rend the opponent's flesh and deliver a deadly poison that rend vitality for 6 rounds. This spell also inflict bleed and poison damage.\n");
 			outputText("-New Green Spell: Death Blossom. Learned from lession with Lutien - wood elf village mage teacher when having 200+ int OR from White Book when having Hidden Job: Grey Sage. Deliver deadly poison and strong aphrodisiac by causing nearby vegetation to bloom corrupted flowers which inflicts their poison each round for 5 rounds. Deals severe tease and poison damage over time intensifying every round by 20%.\n");
-			outputText("-New Green Spell: Green Covenant. Learned from lession with Lutien - wood elf village mage teacher when having 400+ int, been Full Wood Elf, Sex mastery of 30 and having had sex at least once with an alraune of at least level 30+ or Marae OR from White Book when having Hidden Job: Grey Sage. It have 12 turns cooldown. Enforce the full might of your elven pact. ");
+			outputText("-New Green Spell: q. Learned from lession with Lutien - wood elf village mage teacher when having 400+ int, been Full Wood Elf, Sex mastery of 30 and having had sex at least once with an alraune of at least level 30+ or Marae OR from White Book when having Hidden Job: Grey Sage. It have 12 turns cooldown. Enforce the full might of your elven pact. ");
 			outputText("Connect with nearby plants gaining high regeneration (25%), damage reduction (75%), and empowering elven magic (100%) but taking periodic lust damage (5% of max lust) and reducing evade (down to 0).\n");
 			outputText("-New perk for monsters: True Angel-type enemy. They not so common like true demons but they make up for it with better base power and possesing special field powered by soulforce, which could go down if angel not have enough SF to sustain it. Field itself have two effects that have very high synergy: reducing damage recieved form attacks and ");
 			outputText("making angel treated as few lvl higher than it's for purpose of mechanic that reduce dmg based on level difference between PC and enemy. Each of them is considered to constantly flying. (Ok so you thinking... that alot of stuff they get, right? You wrong they still got ace to play if things go west ... or east) They also have special transformation ability to assume their 'true form'. ");

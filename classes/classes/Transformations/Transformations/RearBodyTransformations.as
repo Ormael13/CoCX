@@ -351,6 +351,22 @@ public class RearBodyTransformations extends MutationsHelper {
 			}
 	);
 
+	public const RearBodyHellhoundCollar: Transformation = new SimpleTransformation("Hellhound Collar Rear Body",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				desc += "";
+
+				player.rearBody.type = RearBody.HELLHOUND_COLLAR;
+				if (doOutput) outputText(desc);
+			},
+			// is present
+			function (): Boolean {
+				return player.rearBody.type === RearBody.HELLHOUND_COLLAR;
+			}
+	);
+
 	public const RearBodyFurCoat: Transformation = new SimpleTransformation("Fur Coat Rear Body",
 			// apply effect
 			function (doOutput: Boolean): void {

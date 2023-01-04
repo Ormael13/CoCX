@@ -1192,6 +1192,27 @@ public class Camp extends NPCAwareContent{
 		return counter;
 	}
 
+	public function submissivesAtCampCount():Number {
+		var counter:Number = 0;
+		counter += slavesCount();
+		counter += LunaFollower.WerewolfPackMember;
+		if (player.hasPerk(PerkLib.HellhoundFireBalls)) counter += player.perkv3(PerkLib.HellhoundFireBalls);
+		if (arianScene.arianFollower()) counter++;
+		if (BelisaFollower.BelisaInCamp) counter++;
+		if (CelessScene.instance.isCompanion() && CelessScene.instance.isCorrupt) counter++;
+		if (LilyFollower.LilyFollowerState) counter++;
+		if (flags[kFLAGS.ETNA_FOLLOWER] > 0 && !player.hasStatusEffect(StatusEffects.EtnaOff)) counter++;
+		if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) counter++;
+		if (flags[kFLAGS.ANT_WAIFU] > 0) counter++;
+		if (flags[kFLAGS.AURORA_LVL] >= 1) counter++;
+		if (flags[kFLAGS.AYANE_FOLLOWER] >= 2) counter++;
+		if (flags[kFLAGS.MITZI_RECRUITED] >= 4) counter++;
+		if (flags[kFLAGS.ANEMONE_KID] > 0) counter++;
+		if (flags[kFLAGS.LUNA_FOLLOWER] >= 4 && !player.hasStatusEffect(StatusEffects.LunaOff)) counter++;
+
+		return counter;
+	}
+
 	public function loversHotBathCount():Number {
 		var counter:Number = 0;
 		if (flags[kFLAGS.ALVINA_FOLLOWER] > 12) counter++;

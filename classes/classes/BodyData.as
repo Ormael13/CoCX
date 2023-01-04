@@ -663,6 +663,17 @@ public class BodyData {
 	public function get ballSize():int {
 		return data[SLOT_BALL_SIZE];
 	}
+
+	public static const SLOT_BALL_COUNT:int = _slotid++;
+	EnumValue.add(Slots,SLOT_BALL_COUNT, "BALL_COUNT", {
+		name:"balls count",
+		nameFn: function(value:Number):String {
+			return ""+ value;
+		}
+	});
+	public function get ballCount():int {
+		return data[SLOT_BALL_COUNT];
+	}
 	
 	public static const SLOT_BIGGEST_COCK_LENGTH:int = _slotid++;
 	EnumValue.add(Slots,SLOT_BIGGEST_COCK_LENGTH, "BIGGEST_COCK_LENGTH", {
@@ -674,6 +685,18 @@ public class BodyData {
 	});
 	public function get biggestCockSize():int {
 		return data[SLOT_BIGGEST_COCK_LENGTH];
+	}
+
+	public static const SLOT_COCK_COUNT:int = _slotid++;
+	EnumValue.add(Slots,SLOT_COCK_COUNT, "COCK_COUNT", {
+		name:"cock count",
+		suffix:"cocks",
+		nameFn: function(value:Number):String {
+			return ""+value;
+		}
+	});
+	public function get cockCount():int {
+		return data[SLOT_COCK_COUNT];
 	}
 	
 	public static const SLOT_BIGGEST_TIT_SIZE:int = _slotid++;
@@ -806,6 +829,8 @@ public class BodyData {
 		data[SLOT_BALL_SIZE]           = player.balls ? player.ballSize : 0;
 		data[SLOT_BIGGEST_COCK_LENGTH] = player.biggestCockLength();
 		data[SLOT_BIGGEST_TIT_SIZE]    = player.biggestTitSize();
+		data[SLOT_COCK_COUNT]          = player.cocks.length;
+		data[SLOT_BALL_COUNT]          = player.balls;
 	}
 	
 	public function equals(other:BodyData):Boolean {
