@@ -166,6 +166,11 @@ public class RearBody extends BodyPart {
 		name: "Hypnotic droning aura",
 		appearanceDesc: "Your wingbeat produces a lulling aura that may entrance aggressors into a more pliant disposition the better the chances for you to deliver your eggs."
 	});
+	public static const HELLHOUND_COLLAR: int = 27;
+	EnumValue.add(Types, HELLHOUND_COLLAR, "HELLHOUND_COLLAR", {
+		name: "hellhound furry neck",
+		appearanceDesc: "Around your neck, there is a thick coat of [fur color] fur."
+	});
 
 	public function RearBody(creature:Creature) {
 		super(creature, null);

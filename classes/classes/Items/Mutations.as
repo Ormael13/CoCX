@@ -1725,10 +1725,11 @@ public final class Mutations extends MutationsHelper {
         if (player.blockingBodyTransformations()) changeLimit = 0;
         //Double Pepper!
         //Xforms/grows dicks to make you have two dogcocks
-        if (changes < changeLimit && type == 2) {
+        if (changes < changeLimit && (type == 2 || type == 3)) {
             //If already doubled up, GROWTH
             if (player.dogCocks() >= 2) {
-                type = 1;
+                if (type != 3)
+                    type = 1;
             }
             //If player doesnt have 2 dogdicks
             else {
@@ -1991,6 +1992,10 @@ public final class Mutations extends MutationsHelper {
             player.addCurse("sen", 4, 1);
             changes++;
         }
+        if (player.hasVagina() && player.vaginas.length == 1 && type == 3) {
+            transformations.SecondVagina().applyEffect();
+            changes++;
+        }
         //Go into heat
         if (rand(2) == 0 && changes < changeLimit) {
             if (player.goIntoHeat(true)) {
@@ -2156,6 +2161,75 @@ public final class Mutations extends MutationsHelper {
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
     }
 
+    public function forceCerberus(doOutput:Boolean = false):void {
+        if (player.hairType != Hair.WILD) transformations.HairWild.applyEffect(doOutput);
+        if (player.faceType != Face.DOG) transformations.FaceDog.applyEffect(doOutput);
+        if (player.tongue.type != Tongue.DOG) transformations.TongueDog.applyEffect(doOutput);
+        if (player.eyes.type != Eyes.INFERNAL) transformations.EyesInfernal.applyEffect(doOutput);
+        if (player.hasPerk(PerkLib.FireLord))
+            transformations.EyesChangeColor(["green"]).applyEffect(doOutput);
+        else transformations.EyesChangeColor(["red"]).applyEffect(doOutput);
+        if (player.ears.type != Ears.DOG) transformations.EarsDog.applyEffect(doOutput);
+        if (player.arms.type != Arms.HOUND) transformations.ArmsHound.applyEffect(doOutput);
+        if (player.lowerBody != LowerBody.DOG) transformations.LowerBodyDog(2).applyEffect(doOutput);
+        if (player.tail.type != Tail.DOG) transformations.TailDog.applyEffect(doOutput);
+        if (player.rearBody.type != RearBody.HELLHOUND_COLLAR) transformations.RearBodyHellhoundCollar.applyEffect(doOutput);
+        transformations.SkinColor(["dark"]).applyEffect(doOutput);
+        transformations.SkinFur(Skin.COVERAGE_LOW, {color: "midnight black"}).applyEffect(doOutput);
+        if (player.wings.type != Wings.NONE) transformations.WingsNone.applyEffect(doOutput);
+        var cockBonus:Number = 0;
+        while (player.cocks.length > 2) {
+            cockBonus += 2+rand(3);
+            if (doOutput) outputText("\n");
+            player.killCocks(1, doOutput);
+        }
+        if (doOutput) outputText("\n");
+        transformations.CockDog(0).applyEffect(doOutput);
+        if (doOutput) outputText("\n");
+        transformations.CockDog(1).applyEffect(doOutput);
+        player.growCock(0, cockBonus/2);
+        player.growCock(1, cockBonus/2);
+        if (doOutput) outputText("\n");
+        if (player.hasVagina() && player.vaginas.length < 2)
+            transformations.SecondVagina().applyEffect(doOutput);
+        if (doOutput) outputText("\n");
+        if (player.hasVagina() && player.bRows() < 3)
+            transformations.BreastRowsThree.applyEffect(doOutput);
+        if (doOutput) outputText("\n");
+        transformations.BallsQuad(3, true).applyEffect(doOutput);
+        if (player.tone < 80) player.tone = 90;
+        if (player.thickness > 20) player.thickness = 20;
+        if (doOutput) outputText("\nYou gain "+ Measurements.inchesOrCentimetres(11*12 - player.tallness, 0) +" in height");
+        if (player.tallness < 11*12) player.tallness = 11*12;
+        if (!player.hasPerk(PerkLib.DominantAlpha)) {
+            player.createPerk(PerkLib.DominantAlpha, 0, 0, 0, 0);
+            outputText("\n<b>Gained Perk: Dominant Alpha!</b> "+PerkLib.DominantAlpha.longDesc);
+        }
+        if (!player.hasPerk(PerkLib.TitanicStrength)) {
+            player.createPerk(PerkLib.TitanicStrength, 0, 0, 0, 0);
+            outputText("\n<b>Gained Perk: Titanic Strength!</b> " +PerkLib.TitanicStrength.longDesc);
+        }
+        if (!player.hasPerk(PerkLib.FireAffinity)) {
+            player.createPerk(PerkLib.FireAffinity, 0, 0, 0, 0);
+            outputText("\n<b>Gained Perk: Fire Affinity!</b> " +PerkLib.FireAffinity.longDesc);
+        }
+        if (!player.hasPerk(PerkLib.Hellfire)) {
+            player.createPerk(PerkLib.Hellfire, 0, 0, 0, 0);
+            outputText("\n<b>Gained Ability: Hellfire!</b> "+PerkLib.Hellfire.longDesc);
+        }
+        player.createPerk(PerkLib.HellfireCoat, 0, 0, 0, 0);
+        outputText("\n<b>Gained Ability: Hellfire Coat</b> "+PerkLib.HellfireCoat.longDesc);
+
+
+        outputText("\n<b>Upgraded Ability: Bite -> Tripple Bite</b>");
+        outputText("\n<b>Upgraded Ability: Hellfire -> tripple effect</b>");
+        outputText("\n<b>Gained Ability: Terrifying Howl</b>");
+
+        if (player.cor < 50) player.cor = 50;
+        outputText("\n<b>Gained Mutation: Hellhound Fireballs</b>")
+        PerkLib.HellhoundFireBalls.acquireMutation(player,"none");
+    }
+    
     public function impFood(player:Player):void {
         clearOutput();
 		var changes:Number = 0;
