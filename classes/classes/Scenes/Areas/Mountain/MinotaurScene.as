@@ -14,8 +14,6 @@ public class MinotaurScene extends BaseContent {
 public function minoVictoryRapeChoices():void {
 	spriteSelect(SpriteDb.s_minotaur);
 	clearOutput();
-	if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 1 || player.hasPerk(PerkLib.LactaBovineImmunity) || player.hasPerk(PerkLib.ManticoreCumAddict))
-		outputText("Smiling down at your vanquished foe, you feel a familiar hunger growing within you.  What do you do?");
 	//Not an addict
 	if (player.isRaceCached(Races.CERBERUS)) {
 		if (monster.lust >= monster.maxOverLust())
@@ -27,6 +25,8 @@ public function minoVictoryRapeChoices():void {
 		return;
 	}
 	sceneHunter.print("Check failed: Cerberus race.");
+	if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 1 || player.hasPerk(PerkLib.LactaBovineImmunity) || player.hasPerk(PerkLib.ManticoreCumAddict))
+		outputText("Smiling down at your vanquished foe, you feel a familiar hunger growing within you.  What do you do?");
 	outputText("You smile in satisfaction as [themonster]" + (monster.lust >= monster.maxOverLust() ? " drops down on all fours and begins masturbating feverishly.  " : " collapses, unable to continue fighting."));
 	if(player.lust >= 33 && player.gender > 0)
 		outputText("\n\nSadly, you realize your own needs have not been met.  Of course, you could always fuck the eager bull...\n\nWhat do you do?");
