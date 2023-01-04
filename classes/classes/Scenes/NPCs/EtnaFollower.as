@@ -1012,6 +1012,7 @@ public function etnaSleepToggle():void {
 		outputText("“<i>Oh, well if you dont want to sleep with me anymore, I understand [name]. </i> she says sulkily with her tail hanging low.");
 		flags[kFLAGS.SLEEP_WITH] = "";
 	}
+	doNext(etnaCampMenu);
 }
 
 public function sleepWithEtna():void {

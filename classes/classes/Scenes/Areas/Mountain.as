@@ -90,11 +90,11 @@ public class Mountain extends BaseContent
 			}, {
 				name  : "etna1",
 				when  : function():Boolean {
-					return (flags[kFLAGS.ETNA_FOLLOWER] >= 4 && EtnaFollower.EtnaInfidelity == 0)
+					return (flags[kFLAGS.ETNA_FOLLOWER] >= 2 && EtnaFollower.EtnaInfidelity == 0)
 						   && !player.hasStatusEffect(StatusEffects.EtnaOff)
 						   && (player.level >= 20);
 				},
-				chance: 0.5,
+				chance: 0.2,
 				call  : function ():void {
 					 SceneLib.etnaScene.etnaInfidelityEncounter();
 				}
