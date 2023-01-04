@@ -2906,7 +2906,6 @@ private function radarFucksIzmasAss():void {
 	menu();
 	addButton(0, "Internal", internalIzmaAnalCumShot);
 	addButton(1, "External", backJizzShot);
-	simpleChoices("Internal", null, "External", null, "", null, "", null, "", null);
 }
 
 private function radarTentacleAnal():void {
