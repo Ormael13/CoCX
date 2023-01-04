@@ -570,6 +570,10 @@ public class Mountain extends BaseContent
 				}
 				//Rare Minotaur Lord
 				if (rand(5) == 0 && player.level >= 10) {
+					if (player.isRaceCached(Races.CERBERUS)) {
+						minotaurScene.minotaurEncounterAsCerberus(true);
+						return;
+					}
 					clearOutput();
 					outputText("Minding your own business, you walk along the winding paths.  You take your time to enjoy the view until you see a shadow approaching you.  You turn around to see a minotaur!  However, he is much bigger than the other minotaurs you've seen.  You estimate him to be eleven feet tall and he's wielding a chain-whip.  He's intent on raping you!");
 					startCombat(new MinotaurLord());

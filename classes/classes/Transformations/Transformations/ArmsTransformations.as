@@ -728,6 +728,23 @@ public class ArmsTransformations extends MutationsHelper {
 			}
 	);
 
+	public const ArmsHound: Transformation = new SimpleTransformation("Hound Arms",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				desc += "Your arms and hands start covering in fur at an alarming rate suddenly as you poke at your palms you jolt up as they become extremely sensitive turning into paw pads heck your nails transformed into wolf like claws so no wonder you felt it that much. <b>You now have pawed hands.</b>";
+
+				player.arms.type = Arms.HOUND;
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.HOUND));
+			},
+			// is present
+			function (): Boolean {
+				return player.arms.type === Arms.HOUND;
+			}
+	);
+
 	public const ArmsGoo: Transformation = new SimpleTransformation("Goo Arms",
 			// apply effect
 			function (doOutput: Boolean): void {

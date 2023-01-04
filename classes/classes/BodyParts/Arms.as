@@ -470,6 +470,15 @@ public class Arms extends BodyPart {
 		scales: true
 	});
 
+	public static const HOUND:int = 60;
+	EnumValue.add(Types, HOUND, "HOUND", {
+		name:"hound",
+		appearanceDesc: "Your lower arms are covered by thick fur, ending in clawed hands with paw pads.",
+		claw: true,
+		canPounce: true,
+		fur: true
+	});
+
 	public static function canFly(id: int): Boolean {
 		return Types[id].canFly || false;
 	}

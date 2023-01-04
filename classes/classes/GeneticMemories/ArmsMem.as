@@ -373,6 +373,17 @@ import classes.CoC;
             }
         });
 
+        public static const HOUND:int = _partid++;
+        EnumValue.add(Memories, HOUND, "HOUND", {
+            id: "Hound Arms",
+            name: "Hound Arms",
+            cost: 100,
+            title: "Hound",
+            transformation: function(): Transformation {
+                return CoC.instance.transformations.ArmsHound;
+            }
+        });
+
         public static const MANTIS:int = _partid++;
         EnumValue.add(Memories, MANTIS, "MANTIS", {
             id: "Mantis Arms",

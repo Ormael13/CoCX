@@ -6,6 +6,9 @@ package classes.Scenes.Areas.Mountain
 import classes.*;
 import classes.BodyParts.LowerBody;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.IMutationsLib;
+import classes.Races.CerberusRace;
+import classes.Scenes.NPCs.LunaFollower;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
@@ -100,6 +103,7 @@ public class HellHoundScene extends BaseContent
 				addButton(0, "Get Licked", hellHoundGetsRaped);
 				addButtonIfTrue(1, "Fuck", hellHoundPropahRape, "Req. a vagina and NOT naga lower body.", player.hasVagina() && !player.isNaga());
 				addButtonIfTrue(2, "TakeBothIn", takeBothIn, "Req. to be a liliraune.", player.isLiliraune());
+				addButtonIfTrue(3, "Domoinate", rapeCerberusStyle, "Req. to be a Cerberus.", player.isRaceCached(Races.CERBERUS));
 				addButton(14, "Leave", cleanupAfterCombat);
 				SceneLib.uniqueSexScene.pcUSSPreChecksV2(curry(hellHoundPostFightOptions, hpVictory)); //CALLED AT THE END
 			}
@@ -260,7 +264,7 @@ public class HellHoundScene extends BaseContent
 
 			outputText("After a moment, you notice that something else seems off... the world seems to be slightly tinged red.  Worried that something else might have been done to you, you find some water to look at your reflection.  After a moment of shock, you steady yourself, and slowly tell yourself that you now have visible fires in your eyes and mouth.  This is going to take some getting used to.\n\n");
 
-			outputText("<b>You now have the power to breath hellfire!</b>  (This power remains available to you so long as you maintain a corruption of at least 50.)");
+			outputText("<b>You now have the power to breathe hellfire!</b>  (This power remains available to you so long as you maintain a corruption of at least 50.)");
 			//increase lust by 30, corruption by 6, and libido by 3
 			dynStats("lib", 3, "lus", 30, "cor", 6);
 			player.createPerk(PerkLib.Hellfire, 0, 0, 0, 0);
@@ -457,6 +461,28 @@ public class HellHoundScene extends BaseContent
 			//Preggers chance!
 			if (player.hasUniquePregnancy()) player.impregnationRacialCheck();
 			else player.knockUp(PregnancyStore.PREGNANCY_ALRAUNE, PregnancyStore.INCUBATION_ALRAUNE, 101);
+			cleanupAfterCombat();
+		}
+
+		public function rapeCerberusStyle():void
+		{
+			clearOutput();
+			outputText("You growl at the pitiful mess that the hellhound has become, curling into a ball, quivering at your mighty feet. Hellhound is hardly a fitting name for this thing, perhaps you should simply start calling it your pup. How did such a pathetic thing think he'd come out on top?[pg]");
+			outputText("Your twin erections drip your burning precum in anticipation on the ground beneath you, causing the poor pup to crawl away in fear as it dribbles on his snout, but there's no escaping from you now.  Before it crawls away, you mount your new plaything, completely dwarfing the pup beneath your massive frame as your grab hold of his waist.[pg]");
+			outputText("You waste no time aligning your [cock descript] into his tight hold, panting as your tapered tips grind together within his warm passage.[pg]");
+			outputText("He whines in discomfort, but his whimpering only serves to motivate you. His ass is your property now, and you're going to make sure he'll never forget it.You unceremoniously continue plowing into the little bitch, relishing in the feeling of complete domination over him as your canine erections pulsate in anticipation.Your heavy balls slap against his underside with each thrust as a burning pressure quickly begins building within your loins.[pg]");
+			outputText("You growl loudly as you hilt your erections as deep into him as you can, causing him to give a quick whimper in protest as you finally hit your climax. You practically erupt like a volcano, shooting jet after jet of cum into his abused hole. As your erections slowly deflate, you begin to pull out, satisfied having marked your territory. Your boiling cum dribbles from the head of your length and out of the pup's gaping hole. He'll serve as a reminder to everyone who's the top dog around here.[pg]");
+			if(player.hasMutation(IMutationsLib.AlphaHowlIM) && player.hasMutation(PerkLib.HellhoundFireBalls) && player.perkv1(PerkLib.HellhoundFireBalls) > 1 && (player.perkv3(PerkLib.HellhoundFireBalls) < (player.perkv1(PerkLib.HellhoundFireBalls) > 3 ? (Math.floor(2.5*player.perkv1(IMutationsLib.AlphaHowlIM))) : player.perkv1(IMutationsLib.AlphaHowlIM)))) {
+				outputText("With his ass thoroughly bred the hellhound got two choices right now, either to yield to your overwhelming supremacy and maleness or go back to his old pack in shame. The hellhound hesitates for a moment before ");
+				if (rand(2) == 0) {
+					outputText("following you back to your camp, betraying his old pack to join yours as your subservient new member. Well you didn't expect him to be a subby bitch but so long as he's willing to take you in once in a while you don't mind keeping him around.");
+					player.addPerkValue(PerkLib.HellhoundFireBalls, 3, 1);
+				}
+				else outputText("running off in shame back to his old pack. The poor guy is going to be chastised by his alpha, you would pity him if not for the fact that you don't care in the first place, he will inevitably meet you again and the next time you will make sure to fuck subserviance into his subby ass properly.");
+			}
+			outputText("You head out to camp snarling in satisfaction.[pg]");
+
+			player.sexReward();
 			cleanupAfterCombat();
 		}
 
