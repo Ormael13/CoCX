@@ -1517,12 +1517,12 @@ package classes.Scenes.Places{
 			player.SexXP((5+player.level) * 10);
 
 			player.trainStat("lib", 4, 300);
-			if (player.hasPerk(PerkLib.GracefulBeauty) && !player.hasPerk(PerkLib.SweepDefenses  && !hasTrainedToday) && player.lib >= 200) {
+			if (player.hasPerk(PerkLib.GracefulBeauty) && !player.hasPerk(PerkLib.SweepDefenses) && !hasTrainedToday && player.lib >= 200) {
 				player.createPerk(PerkLib.SweepDefenses,0,0,0,0);
 				outputText("\n\nBetter refining of your charms allowed you to learn a new technique. <b>Gained Perk: Sweep Defenses</b>");
 				hasTrainedToday = true;
 			}
-			else if (player.hasPerk(PerkLib.FueledByDesire) && !player.hasPerk(PerkLib.GracefulBeauty  && !hasTrainedToday) && player.lib >= 150) {
+			else if (player.hasPerk(PerkLib.FueledByDesire) && !player.hasPerk(PerkLib.GracefulBeauty)  && !hasTrainedToday && player.lib >= 150) {
 				player.createPerk(PerkLib.GracefulBeauty,0,0,0,0);
 				outputText("\n\nBetter refining of your charms allowed you to learn a new technique. <b>Gained Perk: Graceful Beauty</b>");
 				hasTrainedToday = true;
