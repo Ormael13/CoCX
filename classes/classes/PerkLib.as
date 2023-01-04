@@ -526,18 +526,27 @@ public class PerkLib
 		public static const ArcaneVenom:PerkType = mk("Arcane Venom", "Arcane Venom",
 				"Spells that inflict 'lust poison' add a number of direct applications equal to your intelligence (core + trained parts) divided by 50.",
 				"You've chosen the 'Arcane Venom' perk. Spells that inflict 'lust poison' add a number of direct applications equal to your intelligence (core + trained parts) divided by 50.");
-		public static const MeleeWeaponsAttackMultiplier:PerkType = mk("Melee Weapons Attack Multiplier", "Melee Weapons Attack Multiplier",
+		public static const MeleeWeaponsAttackMultiplier:PerkType = mk("Melee Weapons Attack Multiplier", "Skilled Fighter",
 				"+5% melee physical attacks multiplier and then adds 50% on top of final result.",
 				"You've chosen the 'Melee Weapons Attack Multiplier' perk. +5% melee physical attacks multiplier and then adds 50% on top of final result.");
-		public static const RangeWeaponsAttackMultiplier:PerkType = mk("Range Weapons Attack Multiplier", "Range Weapons Attack Multiplier",
+		public static const RangeWeaponsAttackMultiplier:PerkType = mk("Range Weapons Attack Multiplier", "Skilled Ranger",
 				"+5% range physical attacks multiplier and then adds 50% on top of final result.",
 				"You've chosen the 'Range Weapons Attack Multiplier' perk. +5% range physical attacks multiplier and then adds 50% on top of final result.");
-		public static const FirearmsAttackMultiplier:PerkType = mk("Firearms Attack Multiplier", "Firearms Attack Multiplier",
+		public static const FirearmsAttackMultiplier:PerkType = mk("Firearms Attack Multiplier", "Skilled Gunslinger",
 				"+5% firearms attacks multiplier bonus and then adds 50% on top of final result.",
 				"You've chosen the 'Firearms Attack Multiplier' perk. +5% firearms attacks multiplier bonus and then adds 50% on top of final result.");
 		public static const PowerShotEx:PerkType = mk("Power Shoot (Ex)", "Power Shoot (Ex)",
 				"Power Shoot p. special damage increased by ~2,5x. Add some of your strength (~40/10% of str / spe scaling value) to normal bow damage / (~40/10% of spe / str scaling value) throwing damage. (+10% range physical attacks multiplier)",
 				"You've chosen the 'Power Shoot (Ex)' perk. Power Shoot p. special damage increased by ~2,5x. Add some of your strength (~40/10% of str / spe scaling value) to normal bow damage / (~40/10% of spe / str scaling value) throwing damage. (+10% range physical attacks multiplier)");
+		public static const SkilledFighterEx:PerkType = mk("Skilled Fighter (Ex)", "Skilled Fighter (Ex)",
+				"When melee atk crit chance exceed 100% crit dmg is x2 and when exceed 200% crit dmg is x3. (+15% melee physical attacks multiplier and then adds another 50% (total of 100%) on top of final result)",
+				"You've chosen the 'Skilled Fighter (Ex)' perk. When melee atk crit chance exceed 100% crit dmg is x2 and when exceed 200% crit dmg is x3. (+15% melee physical attacks multiplier and then adds another 50% (total of 100%) on top of final result)");
+		public static const SkilledRangerEx:PerkType = mk("Skilled Ranger (Ex)", "Skilled Ranger (Ex)",
+				"When range atk crit chance exceed 100% crit dmg is x2 and when exceed 200% crit dmg is x3. (+15% range physical attacks multiplier and then adds another 50% (total of 100%) on top of final result)",
+				"You've chosen the 'Skilled Ranger (Ex)' perk. When range atk crit chance exceed 100% crit dmg is x2 and when exceed 200% crit dmg is x3. (+15% range physical attacks multiplier and then adds another 50% (total of 100%) on top of final result)");
+		public static const SkilledGunslingerEx:PerkType = mk("Skilled Gunslinger (Ex)", "Skilled Gunslinger (Ex)",
+				"When firearms atk crit chance exceed 100% crit dmg is x2 and when exceed 200% crit dmg is x3. (+20% firearms attacks multiplier and then adds another 50% (total of 100%) on top of final result)",
+				"You've chosen the 'Skilled Gunslinger (Ex)' perk. When firearms atk crit chance exceed 100% crit dmg is x2 and when exceed 200% crit dmg is x3. (+20% firearms attacks multiplier and then adds another 50% (total of 100%) on top of final result)");
 
 		public static const ElementsOfMarethBasic:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
@@ -545,6 +554,21 @@ public class PerkLib
 		/*public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk, .");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk, .");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk, .");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk, .");
+		public static const :PerkType = mk("", "",
+				".",
+				"You've chosen the '' perk, .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, .");
@@ -6660,9 +6684,9 @@ public class PerkLib
 					.requireWis(60);
 			FirearmsAttackMultiplier.requirePerks(RangeWeaponsAttackMultiplier, JobGunslinger)
 					.requireLevel(6)
-					.requireStr(35)
-					.requireTou(35)
-					.requireSpe(35);
+					.requireStr(30)
+					.requireTou(30)
+					.requireSpe(30);
 			Enhancement.requireLevel(6)
 					.requireAnyPerk(HistoryAlchemist, PastLifeAlchemist);
 			Wizened.requireLevel(6)
@@ -6780,6 +6804,16 @@ public class PerkLib
 					.requireSpe(40);
 			HighlyVenomousDiet.requirePerk(VenomousDiet);
 			AxillaryVenomGlands.requirePerk(VenomousAdiposeTissue);
+			SkilledFighterEx.requirePerk(MeleeWeaponsAttackMultiplier)
+					.requireLevel(12)
+					.requireStr(35)
+					.requireTou(35)
+					.requireSpe(35);
+			SkilledRangerEx.requirePerk(RangeWeaponsAttackMultiplier)
+					.requireLevel(12)
+					.requireStr(35)
+					.requireTou(35)
+					.requireSpe(35);
             //Tier 3
             ChimericalBodyBasicStage.requirePerk(ChimericalBodySemiBasicStage)
                     .requireLevel(18)
@@ -6856,6 +6890,11 @@ public class PerkLib
 					.requireInt(80)
 					.requireLib(80)
 					.requireCor(50);
+			SkilledGunslingerEx.requirePerk(FirearmsAttackMultiplier)
+					.requireLevel(15)
+					.requireStr(40)
+					.requireTou(40)
+					.requireSpe(40);
             //Tier 4
 			ChimericalBodySemiImprovedStage.requirePerk(ChimericalBodyBasicStage)
                     .requireLevel(24)

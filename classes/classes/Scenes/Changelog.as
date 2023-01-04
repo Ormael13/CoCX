@@ -63,19 +63,19 @@ public class Changelog extends BaseContent
 			//outputText("+55/75/100% top str multi, -20/25/30% to spe multi, +80/130/250% to int multi, +65/100/150% ot wis multi, +90/170/220 to max lust, +15/40/50 to sens\n");
 			//outputText("-1 new achievments.\n");
 			outputText("-Green Covenant spell req. to be Wood Elf or one of Plant races to cast.\n");
-			outputText("-New tier 0 misc lvl-up perk: Melee Weapons Attack Multiplier. Req. Melee Weapons Mastery perk, lvl 3+ and 25+ str/tou/spe. Effect: +5% melee physical attacks multiplier and then adds 50% on top of final result.\n");
-			outputText("-New tier 0 misc lvl-up perk: Range Weapons Attack Multiplier. Req. Range Weapons Mastery perk, lvl 3+ and 25+ str/tou/spe. Effect: +5% range physical attacks multiplier and then adds 50% on top of final result.\n");
-			outputText("-New tier 1 misc lvl-up perk: Firearms Attack Multiplier. Req. Range Weapons Attack Multiplier and Job: Gunslinger perks, 35+ str/tou/spe. Effect: +5% firearms attacks multiplier and then adds 50% on top of final result.\n");
-			outputText("-Job: Gunslinger effect of +20% to range physical attacks multiplier changed into +10% to range physical/firearms attacks multiplier.");
+			outputText("-New tier 0 misc lvl-up perk: Skilled Fighter. Req. Melee Weapons Mastery perk, lvl 3+ and 25+ str/tou/spe. Effect: +5% melee physical attacks multiplier and then adds 50% on top of final result.\n");
+			outputText("-New tier 0 misc lvl-up perk: Skilled Ranger. Req. Range Weapons Mastery perk, lvl 3+ and 25+ str/tou/spe. Effect: +5% range physical attacks multiplier and then adds 50% on top of final result.\n");
+			outputText("-New tier 1 misc lvl-up perk: Skilled Gunslinger. Req. Range Weapons Attack Multiplier and Job: Gunslinger perks, 30+ str/tou/spe. Effect: +10% firearms attacks multiplier and then adds 50% on top of final result.\n");
+			outputText("-Job: Gunslinger effect of +20% to range physical attacks multiplier changed into +10% to range physical/firearms attacks multiplier.\n");
 			outputText("-Firearms dmg would be now multiplied by firearms attacks multiplier which is range physical multiply + seperate bonuses for all firearms only.\n");
-			outputText("-Alchemical Cartridge, Church of the gun, Explosive cartridge, Tainted Magazine, Silver for Monsters, Named Bullet perk effects of +X% to range physical attacks multiplier changed into +X/2% to range physical/firearms attacks multiplier.\n");
+			outputText("-Alchemical Cartridge, Church of the gun, Explosive cartridge, (Tainted Magazine, Silver for Monsters, Named Bullet) perk effects of +X% to range physical attacks multiplier changed into +X/2% to range physical/firearms attacks multiplier.\n");
 			outputText("-Make Siegweird's quest take Alvina's purification into account. (EragonX)\n");
 			outputText("-Fixes: Polygamy toggling with no marriages, Marae prank option, Sandmother vaginal fuck button (Svalkash)\n");
 			outputText("-Fixed being unable to aquire the achievements and duel scythes for beating Alvina if you are level 185. (Aduro)\n");
-			outputText("-New tier 3 speed lvl-up perk: Power Shot (Ex). Req. Power Shot perk. Effect: Power Shoot p. special damage increased by ~2,5x. Add some of your strength (~40/10% of str / spe scaling value) to normal bow damage / (~40/10% of spe / str scaling value) throwing damage. (+10% range physical attacks multiplier)\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New tier 3 speed lvl-up perk: Power Shot (Ex). Req. Power Shot perk. Effect: Power Shoot p. special damage increased by ~2,5x. Add some of your strength (~40/10% of str / spe scaling value) to normal bow damage / (~40/10% of spe / str scaling value) throwing damage. (+15% range physical attacks multiplier)\n");
+			outputText("-New tier 2 misc lvl-up perk: Skilled Fighter (Ex). Req. Skilled Fighter perk and 35+ str/tou/spe. Effect: When melee atk crit chance exceed 100% crit dmg is x2 and when exceed 200% crit dmg is x3. (+15% melee physical attacks multiplier and then adds another 50% (total of 100%) on top of final result)\n");
+			outputText("-New tier 2 misc lvl-up perk: Skilled Ranger (Ex). Req. Skilled Ranger perk and 35+ str/tou/spe. Effect: When range atk crit chance exceed 100% crit dmg is x2 and when exceed 200% crit dmg is x3. (+15% range physical attacks multiplier and then adds another 50% (total of 100%) on top of final result)\n");
+			outputText("-New tier 3 misc lvl-up perk: Skilled Gunslinger (Ex). Req. Skilled Gunslinger perk, lvl 15+ and 40+ str/tou/spe. Effect: When firearms atk crit chance exceed 100% crit dmg is x2 and when exceed 200% crit dmg is x3. (+20% firearms attacks multiplier and then adds another 50% (total of 100%) on top of final result)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -92,6 +92,18 @@ public class Changelog extends BaseContent
 			outputText("-\n");// (Jtecx)
 			outputText("-\n");// (Furrin Gok)
 			outputText("-\n");// (khovel)
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			//remove this line when other two lines below get added ingame
 			//outputText("-New perk for enemies: Elite type enemy. Bonuses for are: Diehard effect of 2,5% of max HP + 750 HP * NG tier, OverMax HP effect of 5% magnitude.\n");
 			//outputText("-New perk for enemies: Champion type enemy. Bonuses for are: Diehard effect of 5% of max HP + 1,500 HP * NG tier, OverMax HP effect of 10% magnitude.\n");
@@ -167,7 +179,9 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -203,20 +217,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
