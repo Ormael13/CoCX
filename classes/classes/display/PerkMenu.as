@@ -364,8 +364,7 @@ public class PerkMenu extends BaseContent {
 		if (player.hasPerk(PerkLib.ELFTwinShot)) {
 			outputText("\n\nThanks to your elven training, you can shoot twice as many arrows as normal (Works only with bows)"
 					+ "\nTwin shot active: <b>" + (flags[kFLAGS.ELVEN_TWINSHOT_ENABLED] ? "Yes" : "No") + "</b>");
-			bd.add("Venom", curry(toggleFlagRanged, kFLAGS.ELVEN_TWINSHOT_ENABLED))
-					.disableIf(!canVenomAttacks(), "You need a source of poison for this.");
+			bd.add("TwinShot", curry(toggleFlagRanged, kFLAGS.ELVEN_TWINSHOT_ENABLED));
 		}
 		if (player.hasPerk(PerkLib.ElementalArrows)) {
 			outputText("\n\nIf you know specific spells, you can add some magical effects to the projectiles. (Works only with bows and crosbows)");
@@ -380,7 +379,7 @@ public class PerkMenu extends BaseContent {
 			bd.add("Arouse", curry(toggleFlagRanged, kFLAGS.CUPID_ARROWS))
 				.disableIf(!player.hasStatusEffect(StatusEffects.KnowsArouse), "You don't know the required spell.");
 		}
-		if (player.hasPerk(PerkLib.EnvenomedBolt) || player.hasPerk(PerkLib.ELFThornShot)) {
+		if (player.hasPerk(PerkLib.EnvenomedBolt) || (player.hasPerk(PerkLib.ELFThornShot) && player.isWoodElf())) {
 			if (player.hasPerk(PerkLib.ELFThornShot)) {
 				outputText("\n\nAs a Wood Elf you can grow Rose thorns on your shafts, inducing a lust poison and bleed effect. (Works only with bows and crosbows)")
 			} else {
@@ -388,7 +387,7 @@ public class PerkMenu extends BaseContent {
 			}
 			outputText("\nVenom effect added: <b>" + (flags[kFLAGS.ENVENOMED_BOLTS] ? "Yes" : "No") + "</b>");
 			bd.add("Venom", curry(toggleFlagRanged, kFLAGS.ENVENOMED_BOLTS))
-				.disableIf(!canVenomAttacks(), "You need a source of poison for this.");
+				.disableIf(!canVenomAttacks() && !(player.hasPerk(PerkLib.ELFThornShot) && player.isWoodElf()), "You need a source of poison for this.");
 		}
 		submenu(bd, CoC.instance.inCombat ? curry(combat.combatMenu, false) : displayPerks, 0, false);
 	}

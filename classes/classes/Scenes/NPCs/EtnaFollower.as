@@ -1069,6 +1069,29 @@ public function etnaInfidelityEncounter():void {
 		doNext(camp.returnToCampUseOneHour);
 	}
 }
+public function etnaInfidelityEncounterRepeat():void {
+	spriteSelect(SpriteDb.s_etna);
+	clearOutput();
+	outputText("As you wander in the high mountain/mountain area you spot a few unconscious minotaurs snoring on the floor. You thought having her as your girlfriend would’ve helped her condition but it seems Etna is still busy screwing everything she can when you're not at camp. You find her not far away, busy raping what’s left of a minotaur.[pg]");
+	outputText("“<i>Fill my tail, you brutish idiot! Don’t you see I’m hungry!</i>”[pg]");
+	outputText("The poor bull man’s face is caught between orgasm and pain and you imagine all too well he is forcibly being milked of more than he could possibly carry. You approach Etna, planning on asking her an explanation as to her complete infidelity she quickly acknowledges your presence, looking worried.[pg]");
+	outputText("“<i>Uh, hello… [name]. I was hungry and I… well you see all these walking reservoirs around here and...</i>”[pg]");
+
+	menu();
+	addButton(0, "Next", camp.returnToCampUseOneHour);
+	addButtonIfTrue(1, "Satisfy her", satisfyHerInfidelity, "You dont have enough cum to satisfy her", player.cumQ() >= 2000);
+
+	function satisfyHerInfidelity():void {
+		clearOutput();
+		outputText("You mention to the manticore that if she was so hungry all she had to do was to tell you about it. You have enough cum within you to knock up an army of women if need be.[pg]");
+		outputText("“<i>You.. you’re kidding you had this much yet you never let me know? Fine, fine my days of infidelity are over but I expect you to fulfill your end of the bargain, lover.</i>”[pg]");
+		outputText("On these words, she knocks the minotaur she was raping unconscious and heads back to camp adding.[pg]");
+		outputText("“<i>I will expect my daily share once you’re home.</i>”[pg]");
+		outputText("You really hope you didn't get in over your head.[pg]");
+		EtnaInfidelity = 3;
+		doNext(camp.returnToCampUseOneHour);
+	}
+}
 
 private function etnaJumpsPCinCamp():void {
 	clearOutput();

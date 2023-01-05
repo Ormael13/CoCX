@@ -687,8 +687,7 @@ package classes.Scenes.Places{
 				.disableIf(hasTrainedToday,"You need a break from your recent training before you can train again.")
 				.disableIf(!player.isElf(),"Alyssa has personal preferences in regards to the people she will train, maybe you should make yourself more elf like.")
 				.disableIf(!player.hasVagina(), "Alyssa has personal preferences in regards to the people she will train with... it's not like the spear is a girl only discipline, but the way she uses it might as well be...");
-			addButton(5, "Lutien", Lutien)
-					.disableIf(hasTrainedToday, "You need a break from your recent training before you can train again.");
+			addButton(5, "Lutien", Lutien);
 			addButton(6, "Chelsea", Chelsea)
 					.disableIf(hasTrainedToday, "You need a break from your recent training before you can train again.");
 			addButton(14, "Leave", camp.returnToCampUseOneHour);
@@ -1047,32 +1046,26 @@ package classes.Scenes.Places{
 				outputText("\n\n\"<i>Unfortunately I wont be able to teach you the ultimate skills of elven archery because you aren't complete or rather… you never made a covenant with the blessed tree. These last skills taps directly in the power of the covenant and thus cannot be learned by someone with no connection.</i>\"")
 				hasTrainedToday = true;
 			}
-			//else if (player.speStat.train.value >= 100 && WoodElfBowTraining == QUEST_STAGE_BOWTRAINING4 && !hasTrainedToday && player.isRace(Races.WOODELF) && player.hasStatusEffect(StatusEffects.KnowsBriarthorn)){
-			//	if (player.speStat.core.value < player.speStat.core.max) {
-			//		outputText("\n\nIt occurs to you that by combining elven green magic with your shot you could to infuse your arrow with life energy, the wooden shaft growing thorns that would surely inflict painful poisoned wounds to your opponents.");
-			//		outputText(" Sadly such a technique will require far more training but you're confident in Elenwen's ability to train you to this point.");
-			//		hasTrainedToday = true;
-			//	} else {
-			//		WoodElfBowTraining = QUEST_STAGE_BOWTRAINING5;
-			//		player.createPerk(PerkLib.ELFThornShot,0,0,0,0);
-			//		flags[kFLAGS.ENVENOMED_BOLTS] = 1;
-			//		outputText("\n\nIt occurs to you that by combining elven green magic with your shot you could to infuse your arrow with life energy, the wooden shaft growing thorns that would surely inflict painful poisoned wounds to your opponents. <b>Gained Perk: Elven Thorn Shot</b>");
-			//		hasTrainedToday = true;
-			//	}
-			//}
-			//else if (player.speStat.core.value >= player.speStat.core.max && WoodElfBowTraining == QUEST_STAGE_BOWTRAINING5 && !hasTrainedToday && player.isRace(Races.WOODELF)){
-			//	if (player.spe100 >= 100) {
-			//		outputText("\n\nBy now you have achieved mastery of every technique Elenwen could touch you… well almost. Elenwen's single most amazing skill is her ability to shoot a salvo of two arrows in quick succession, a skill you have yet to see anyone but her use.");
-			//		outputText(" You're certain if you train and improve your speed to the breaking point you could achieve it too. Guess you will need to increase your speed and dexterity to their utmost limit before you can unlock that skill.");
-			//		hasTrainedToday = true;
-			//	} else {
-			//		WoodElfBowTraining = QUEST_STAGE_BOWTRAINING6;
-			//		player.createPerk(PerkLib.ELFTwinShot,0,0,0,0);
-			//		flags[kFLAGS.ELVEN_TWINSHOT_ENABLED] = 1;
-			//		outputText("\n\nBy now you have achieved mastery of every technique Elenwen could touch you… well almost. Elenwen's single most amazing skill is her ability to shoot a salvo of two arrows in quick succession, a skill you have yet to see anyone but her use. <b>Gained Perk: Elven Twin Shot</b>");
-			//		hasTrainedToday = true;
-			//	}
-			//}
+			else if (player.speStat.train.value >= 100 && WoodElfBowTraining == QUEST_STAGE_BOWTRAINING4 && !hasTrainedToday && player.isRace(Races.WOODELF) && player.hasStatusEffect(StatusEffects.KnowsBriarthorn)){
+				WoodElfBowTraining = QUEST_STAGE_BOWTRAINING5;
+				player.createPerk(PerkLib.ELFThornShot,0,0,0,0);
+				flags[kFLAGS.ENVENOMED_BOLTS] = 1;
+				outputText("\n\nIt occurs to you that by combining elven green magic with your shot you could to infuse your arrow with life energy, the wooden shaft growing thorns that would surely inflict painful poisoned wounds to your opponents. <b>Gained Perk: Elven Thorn Shot</b>");
+				hasTrainedToday = true;
+			}
+			else if (WoodElfBowTraining == QUEST_STAGE_BOWTRAINING5 && !hasTrainedToday && player.isRace(Races.WOODELF)){
+				if (player.spe100 < 100) {
+					outputText("\n\nBy now you have achieved mastery of every technique Elenwen could touch you… well almost. Elenwen's single most amazing skill is her ability to shoot a salvo of two arrows in quick succession, a skill you have yet to see anyone but her use.");
+					outputText(" You're certain if you train and improve your speed to the breaking point you could achieve it too. Guess you will need to increase your speed and dexterity to their utmost limit before you can unlock that skill.");
+					hasTrainedToday = true;
+				} else {
+					WoodElfBowTraining = QUEST_STAGE_BOWTRAINING6;
+					player.createPerk(PerkLib.ELFTwinShot,0,0,0,0);
+					flags[kFLAGS.ELVEN_TWINSHOT_ENABLED] = 1;
+					outputText("\n\nBy now you have achieved mastery of every technique Elenwen could touch you… well almost. Elenwen's single most amazing skill is her ability to shoot a salvo of two arrows in quick succession, a skill you have yet to see anyone but her use. <b>Gained Perk: Elven Twin Shot</b>");
+					hasTrainedToday = true;
+				}
+			}
 			else{
 				hasTrainedToday = true;
 			}
@@ -1233,7 +1226,8 @@ package classes.Scenes.Places{
 			outputText("You visit Lutien at " + LutienMF("his","her") + " tent, " + LutienMF("he","she") + " is currently in the process of reading what looks to be a book while writing notes on a parchment.\n\n");
 			outputText("\"<i>Oh good day sister… how can I help you? Are you here to train your spellcasting or for something else?</i>\"\n\n");
 			menu();
-			addButton(0, "Train", LutienTrain);
+			addButton(0, "Train", LutienTrain)
+					.disableIf(hasTrainedToday, "You need a break from your recent training before you can train again.");
 			if (WoodElfMagicTraining >= QUEST_STAGE_MAGICTRAINING3) addButton(1, "Sex", LutienMainSex);
 			else addButtonDisabled(1, "???", "???");
 		}

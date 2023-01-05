@@ -33,6 +33,7 @@ import classes.Scenes.Areas.Ocean.SeaAnemone;
 import classes.Scenes.Areas.Tundra.YoungFrostGiant;
 import classes.Scenes.Areas.VolcanicCrag.GolemsTrueFire;
 import classes.Scenes.Camp.TrainingDummy;
+import classes.Scenes.Combat.CombatAbility;
 import classes.Scenes.Dungeons.D3.*;
 import classes.Scenes.Dungeons.DeepCave.*;
 import classes.Scenes.Dungeons.DemonLab.DemonDragonGroup;
@@ -2760,8 +2761,10 @@ public class Combat extends BaseContent {
      * 3. Get ammo description and check auto-miss
      * 4. Do the atack
      */
+    private var firstShot:Boolean;
     public function fireBow():void {
         clearOutput();
+        firstShot = false;
         if (monster.hasStatusEffect(StatusEffects.BowDisabled)) {
             outputText("You can't use your range weapon right now!");
             menu();
@@ -2950,29 +2953,31 @@ public class Combat extends BaseContent {
                     outputText("The " + ammoWord + " bounces harmlessly off [themonster].\n\n");
                 }
             }
-            if (monster is EncapsulationPod) {
-                outputText("The " + ammoWord + " lodges deep into the pod's fleshy wall");
-            } else if (monster.plural) {
-                var textChooser1:int = rand(12);
-                if (textChooser1 >= 9) {
-                    outputText("[Themonster] look down at the " + ammoWord + " that now protrudes from one of [monster his] bodies");
-                } else if (textChooser1 >= 6 && textChooser1 < 9) {
-                    outputText("You pull an " + ammoWord + " and fire it at one of [themonster]");
-                } else if (textChooser1 >= 3 && textChooser1 < 6) {
-                    outputText("With one smooth motion you draw, nock, and fire your deadly " + ammoWord + " at one of your opponents");
+            if (!MSGControll) {
+                if (monster is EncapsulationPod) {
+                    outputText("The " + ammoWord + " lodges deep into the pod's fleshy wall");
+                } else if (monster.plural) {
+                    var textChooser1:int = rand(12);
+                    if (textChooser1 >= 9) {
+                        outputText("[Themonster] look down at the " + ammoWord + " that now protrudes from one of [monster his] bodies");
+                    } else if (textChooser1 >= 6 && textChooser1 < 9) {
+                        outputText("You pull an " + ammoWord + " and fire it at one of [themonster]");
+                    } else if (textChooser1 >= 3 && textChooser1 < 6) {
+                        outputText("With one smooth motion you draw, nock, and fire your deadly " + ammoWord + " at one of your opponents");
+                    } else {
+                        outputText("You casually fire an " + ammoWord + " at one of [themonster]");
+                    }
                 } else {
-                    outputText("You casually fire an " + ammoWord + " at one of [themonster]");
-                }
-            } else {
-                var textChooser2:int = rand(12);
-                if (textChooser2 >= 9) {
-                    outputText("[Themonster] looks down at the " + ammoWord + " that now protrudes from [monster his] body");
-                } else if (textChooser2 >= 6) {
-                    outputText("You pull an " + ammoWord + " and fire it at [themonster]");
-                } else if (textChooser2 >= 3) {
-                    outputText("With one smooth motion you draw, nock, and fire your deadly " + ammoWord + " at your opponent");
-                } else {
-                    outputText("You casually fire an " + ammoWord + " at [themonster]");
+                    var textChooser2:int = rand(12);
+                    if (textChooser2 >= 9) {
+                        outputText("[Themonster] looks down at the " + ammoWord + " that now protrudes from [monster his] body");
+                    } else if (textChooser2 >= 6) {
+                        outputText("You pull an " + ammoWord + " and fire it at [themonster]");
+                    } else if (textChooser2 >= 3) {
+                        outputText("With one smooth motion you draw, nock, and fire your deadly " + ammoWord + " at your opponent");
+                    } else {
+                        outputText("You casually fire an " + ammoWord + " at [themonster]");
+                    }
                 }
             }
             //Weapon addition!
@@ -3064,11 +3069,10 @@ public class Combat extends BaseContent {
                     monster.createStatusEffect(StatusEffects.Blind, 3, 0, 0, 0);
                     outputText(",  your radiant shots blinded [monster he]");
                 }
-                if (!MSGControll) {
+                if (!MSGControll)
                     outputText(".  It's clearly very painful. ");
-                    doArcheryDamage(damage);
-					archeryXP(rangeMasteryEXPgained(crit));
-                }
+                doArcheryDamage(damage);
+                archeryXP(rangeMasteryEXPgained(crit));
                 if (crit) outputText(" <b>*Critical Hit!*</b>");
 				WeaponRangeStatusProcs();
 				WrathGenerationPerHit1(5);
@@ -3076,12 +3080,12 @@ public class Combat extends BaseContent {
             }
             cupidArrowsEffect();
             if (flags[kFLAGS.ENVENOMED_BOLTS] == 1 && (player.tailVenom >= player.VenomWebCost() || (player.hasPerk(PerkLib.ELFThornShot) && player.isWoodElf()))) {
-                outputText("  ");
+                if (!MSGControll) outputText("  ");
                 if (monster.lustVuln == 0) {
                     outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.");
                 }
                 if (player.tailType == Tail.BEE_ABDOMEN) {
-                    outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
+                    if (!MSGControll) outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
                     var damage1B:Number = 35 + rand(player.lib / 10);
 					var damage1Ba:Number = 1;
 					if (player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)) damage1B += scalingBonusToughness() * 0.5;
@@ -3105,7 +3109,7 @@ public class Combat extends BaseContent {
 					flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
                 }
                 if (player.tailType == Tail.SCORPION || player.hasKeyItem("Sky Poison Pearl") >= 0) {
-                    outputText("  [monster he] seems to be effected by the poison, its movements slowing rapidly.");
+                    if (!MSGControll) outputText("  [monster he] seems to be effected by the poison, its movements slowing rapidly.");
 					var DBP:Number = 2;
 					var DBPa:Number = 1;
 					if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) {
@@ -3125,7 +3129,7 @@ public class Combat extends BaseContent {
 					flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
                 }
                 if (player.tailType == Tail.MANTICORE_PUSSYTAIL) {
-                    outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
+                    if (!MSGControll) outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
                     var lustdamage:Number = 35 + rand(player.lib / 10);
 					var DBPaa:Number = 1;
                     if (player.level < 10) lustdamage += 20 + (player.level * 3);
@@ -3149,10 +3153,50 @@ public class Combat extends BaseContent {
 					flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
                 }
                 if (player.hasPerk(PerkLib.ELFThornShot) && player.isWoodElf() ) {
-                    CombatAbilities.Rosethorn.doEffect();
+                    if (!MSGControll) outputText("  You concentrate on the arrow shaft causing it to grow vicious thorns that tear through your opponent's flesh, delivering poison.");
+                    monster.createOrAddStatusEffect(StatusEffects.Rosethorn, 1, 1);
+                    if (monster.lustVuln == 0) {
+                        outputText("\nIt has no effect!  Your foe clearly does not experience lust in the same way as you.\n");
+                    } else {
+                        var baseDamage:Number = (combat.teases.teaseBaseLustDamage() * 3 * spellModWhite());
+                        if (player.hasPerk(PerkLib.VegetalAffinity)) baseDamage *= 1.5;
+                        if (player.hasPerk(PerkLib.GreenMagic)) baseDamage *= 2;
+                        if (player.hasStatusEffect(StatusEffects.GreenCovenant)) baseDamage *= 2;
+                        if (player.armor == armors.ELFDRES && player.isElf()) baseDamage *= 2;
+                        if (player.armor == armors.FMDRESS && player.isWoodElf()) baseDamage *= 2;
+                        var lustDmg:Number = baseDamage;
+                        if (monster != null) {
+                            var randomBonus:Number = (monster.lib - monster.inte * 2 + monster.cor)/5;
+                            lustDmg += rand(randomBonus);
+                            lustDmg *= monster.lustVuln;
+                        }
+                        if(player.hasPerk(PerkLib.ArcaneLash)) lustDmg *= 1.5;
+                        if(player.hasStatusEffect(StatusEffects.AlvinaTraining2)) lustDmg *= 1.2;
+
+                        //Determine if critical tease!
+                        crit = false;
+                        critChance = 5;
+                        if (player.hasPerk(PerkLib.CriticalPerformance)) {
+                            if (player.lib <= 100) critChance += player.lib / 5;
+                            if (player.lib > 100) critChance += 20;
+                        }
+                        if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+                        if (rand(100) < critChance) {
+                            crit = true;
+                            lustDmg *= 1.75;
+                        }
+                        lustDmg = Math.round(monster.lustVuln * lustDmg);
+                        monster.teased(lustDmg, false);
+                        if (crit) outputText(" <b>Critical!</b>");
+                        combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
+                        if (player.hasPerk(PerkLib.VerdantLeech)) {
+                            if (monster.lustVuln != 0 && !monster.hasPerk(PerkLib.EnemyTrueAngel)) monster.lustVuln += 0.01;
+                            HPChange(Math.round(player.maxHP() * 0.05), false);
+                        }
+                    }
                 }
                 if (player.faceType == Face.SNAKE_FANGS) {
-                    outputText("  [monster he] seems to be effected by the poison, its movements slowing down.");
+                    if (!MSGControll) outputText("  [monster he] seems to be effected by the poison, its movements slowing down.");
 					var DBPaaa:Number = 1;
 					if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) DBPaaa *= 2;
 					if (player.hasPerk(PerkLib.ToxineMaster)) monster.statStore.addBuffObject({tou:-5, spe:-DBPaaa}, "Poison",{text:"Poison"});
@@ -3172,7 +3216,7 @@ public class Combat extends BaseContent {
                 }
                 if (player.faceType == Face.SPIDER_FANGS) {
                     if (player.lowerBody == LowerBody.ATLACH_NACHA){
-                        outputText("  [monster he] seems to be affected by the poison, showing increasing sign of weakness and arousal.");
+                        if (!MSGControll) outputText("  [monster he] seems to be affected by the poison, showing increasing sign of weakness and arousal.");
                         var damage2B:Number = 35 + rand(player.lib / 10);
                         var poisonScaling:Number = 1;
 						var damage2Ba:Number = 1;
@@ -3204,8 +3248,8 @@ public class Combat extends BaseContent {
 						flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
                     }
                     else{
-                        outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
-                        var lustDmg:int = 6 * monster.lustVuln;
+                        if (!MSGControll) outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
+                        lustDmg = 6 * monster.lustVuln;
 						if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) lustDmg *= 2;
                         if (player.armor == armors.ELFDRES && player.isElf()) lustDmg *= 2;
                         if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDmg *= 2;
@@ -3225,11 +3269,11 @@ public class Combat extends BaseContent {
                     flags[kFLAGS.ARROWS_SHOT]++;
                     doNext(endLustVictory);
                 }
-                outputText("\n");
+                if (!MSGControll) outputText("\n");
             }
             else if (flags[kFLAGS.ENVENOMED_BOLTS] == 1 && player.tailVenom < player.VenomWebCost()) {
 				if (player.hasPerk(PerkLib.ToxineMaster) && player.hasKeyItem("Sky Poison Pearl") >= 0) {
-					outputText("  [monster he] seems to be affected by the poison, showing increasing sign of weakness.\n");
+                    if (!MSGControll) outputText("  [monster he] seems to be affected by the poison, showing increasing sign of weakness.\n");
 					monster.statStore.addBuffObject({tou:-5}, "Poison",{text:"Poison"});
 				}
 				else outputText("  You do not have enough venom to apply on the " + ammoWord + " tip!\n");
@@ -3262,6 +3306,7 @@ public class Combat extends BaseContent {
             doNext(endLustVictory);
             return;
         }
+        MSGControll = true;
         if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] >= 2) {
             flags[kFLAGS.MULTIPLE_ARROWS_STYLE]--;
             flags[kFLAGS.ARROWS_ACCURACY] += arrowsAccuracyPenalty();
@@ -3284,68 +3329,35 @@ public class Combat extends BaseContent {
 
     public function doArcheryDamage(damage:Number):void {
         if (flags[kFLAGS.ELEMENTAL_ARROWS] == 1) {
-			if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
-				doFireDamage(damage, true, true);
-				doMagicDamage(Math.round(damage * 0.2), true, true);
-			}
-			else doFireDamage(damage, true, true);
+			doFireDamage(damage, true, true);
 		}
         else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 2) {
-			if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
-				doIceDamage(damage, true, true);
-				doMagicDamage(Math.round(damage * 0.2), true, true);
-			}
-			else doIceDamage(damage, true, true);
+			doIceDamage(damage, true, true);
 		}
         else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 3) {
-			if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
-				doLightingDamage(damage, true, true);
-				doMagicDamage(Math.round(damage * 0.2), true, true);
-			}
-			else doLightingDamage(damage, true, true);
+			doLightingDamage(damage, true, true);
 		}
         else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) {
-			if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
-				doDarknessDamage(damage, true, true);
-				doMagicDamage(Math.round(damage * 0.2), true, true);
-			}
-			else doDarknessDamage(damage, true, true);
+			doDarknessDamage(damage, true, true);
 		}
         else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 5) {
-			if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
-				doWaterDamage(damage, true, true);
-				doMagicDamage(Math.round(damage * 0.2), true, true);
-			}
-			else doWaterDamage(damage, true, true);
+			doWaterDamage(damage, true, true);
 		}
         else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 6) {
-			if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
-				doWindDamage(damage, true, true);
-				doMagicDamage(Math.round(damage * 0.2), true, true);
-			}
-			else doWindDamage(damage, true, true);
+			doWindDamage(damage, true, true);
 		}
         else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 7) {
-			if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
-				doEarthDamage(damage, true, true);
-				doMagicDamage(Math.round(damage * 0.2), true, true);
-			}
-			else doEarthDamage(damage, true, true);
+			doEarthDamage(damage, true, true);
 		}
         else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 8) {
-			if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
-				doAcidDamage(damage, true, true);
-				doMagicDamage(Math.round(damage * 0.2), true, true);
-			}
-			else doAcidDamage(damage, true, true);
+			doAcidDamage(damage, true, true);
 		}
         else {
-			if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
-				doPhysicalDamage(damage, true, true);
-				doMagicDamage(Math.round(damage * 0.2), true, true);
-			}
-			else doPhysicalDamage(damage, true, true);
+			doPhysicalDamage(damage, true, true);
 		}
+        if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
+            doMagicDamage(Math.round(damage * 0.2), true, true);
+        }
     }
 
     public function elementalArrowDamageMod(damage:Number):Number {
