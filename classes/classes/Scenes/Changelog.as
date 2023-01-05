@@ -52,6 +52,9 @@ public class Changelog extends BaseContent
 			outputText("-Fixes: double negative and harpywomb thunderbird. (liruyo)\n");
 			outputText("-Fixed bugs: MindUp option req. wrong items in Rath menu, Money strike been unusable against groups, Fetish Zealots blocking boat before they intro scene at lake plays\n");
 			outputText("<b>Version 0.8s7:</b>\n\n");// ()
+			outputText("-New tier 0 misc lvl-up perk: Skilled Fighter. Req. Melee Weapons Mastery perk, lvl 3+ and 25+ str/tou/spe. Effect: +5% melee physical attacks multiplier and then adds 50% on top of final result.\n");
+			outputText("-New tier 0 misc lvl-up perk: Skilled Ranger. Req. Range Weapons Mastery perk, lvl 3+ and 25+ str/tou/spe. Effect: +5% range physical attacks multiplier and then adds 50% on top of final result.\n");
+			outputText("-New tier 1 misc lvl-up perk: Skilled Gunslinger. Req. Range Weapons Attack Multiplier and Job: Gunslinger perks, 30+ str/tou/spe. Effect: +10% firearms attacks multiplier and then adds 50% on top of final result.\n");
 			outputText("-Electra now acknowledges that more then just Raiju can volt transfer. Tbird can get supercharged too. More accounting for Kirin existing. Added centaur support to Supercharged scene, Horsecock now become big starting higher then 25 inch seeing as a normal horse cock is 20 inch. (Liadri)\n");
 			outputText("-Loppe can start training at Uma's shop. Loppe can remove her contraceptive spell if training high enough. Can meet Loppe's 'dad' in the plains for a few new scenes. (EragonX)\n");
 			//outputText("-Dam can be upgraded 2 times (up to 3rd tier of wood dam) and Fishery once (to allow 2 npc's working at it - it also gonna increase each worker fish production by 20%)\n");
@@ -63,9 +66,6 @@ public class Changelog extends BaseContent
 			//outputText("+55/75/100% top str multi, -20/25/30% to spe multi, +80/130/250% to int multi, +65/100/150% ot wis multi, +90/170/220 to max lust, +15/40/50 to sens\n");
 			//outputText("-1 new achievments.\n");
 			outputText("-Green Covenant spell req. to be Wood Elf or one of Plant races to cast.\n");
-			outputText("-New tier 0 misc lvl-up perk: Skilled Fighter. Req. Melee Weapons Mastery perk, lvl 3+ and 25+ str/tou/spe. Effect: +5% melee physical attacks multiplier and then adds 50% on top of final result.\n");
-			outputText("-New tier 0 misc lvl-up perk: Skilled Ranger. Req. Range Weapons Mastery perk, lvl 3+ and 25+ str/tou/spe. Effect: +5% range physical attacks multiplier and then adds 50% on top of final result.\n");
-			outputText("-New tier 1 misc lvl-up perk: Skilled Gunslinger. Req. Range Weapons Attack Multiplier and Job: Gunslinger perks, 30+ str/tou/spe. Effect: +10% firearms attacks multiplier and then adds 50% on top of final result.\n");
 			outputText("-Job: Gunslinger effect of +20% to range physical attacks multiplier changed into +10% to range physical/firearms attacks multiplier.\n");
 			outputText("-Firearms dmg would be now multiplied by firearms attacks multiplier which is range physical multiply + seperate bonuses for all firearms only.\n");
 			outputText("-Alchemical Cartridge, Church of the gun, Explosive cartridge, (Tainted Magazine, Silver for Monsters, Named Bullet) perk effects of +X% to range physical attacks multiplier changed into +X/2% to range physical/firearms attacks multiplier.\n");
@@ -77,6 +77,8 @@ public class Changelog extends BaseContent
 			outputText("-New tier 2 misc lvl-up perk: Skilled Ranger (Ex). Req. Skilled Ranger perk and 35+ str/tou/spe. Effect: When range atk crit chance exceed 100% crit dmg is x2 and when exceed 200% crit dmg is x3. (+15% range physical attacks multiplier and then adds another 50% (total of 100%) on top of final result)\n");
 			outputText("-New tier 3 misc lvl-up perk: Skilled Gunslinger (Ex). Req. Skilled Gunslinger perk, lvl 15+ and 40+ str/tou/spe. Effect: When firearms atk crit chance exceed 100% crit dmg is x2 and when exceed 200% crit dmg is x3. (+20% firearms attacks multiplier and then adds another 50% (total of 100%) on top of final result)\n");
 			outputText("-New Cerberus TF event (sleep in camp while being fully hellhound (black pepper) and have Marae's Lethicite) Has a few unique interactions with corrupted enemies. (EragonX)\n");
+			outputText("-After Etna moves into camp she gains a new once-off encounter in the hills that can unlock more content. (EragonX)\n");
+			outputText("-Metamorph aditions - Face: Bunny, Dog, Kangaroo, Ferret mask, Ferret, Rhino, Echidna, Bear, Squirrel; Tail: Azazel, Rabbit, Avian, Griffin, Kangaroo, Thunderbird, Squirrel, Ferret, Bear, Ushi Oni (EragonX)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -85,8 +87,6 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");// (Liadri)
-			outputText("-\n");// (aimozg)
 			outputText("-\n");// (Svalkash)
 			outputText("-\n");// (EragonX)
 			outputText("-\n");// (Jtecx)
@@ -99,8 +99,8 @@ public class Changelog extends BaseContent
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-\n");// (Liadri)
+			outputText("-\n");// (aimozg)
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -4159,7 +4159,7 @@ public class Changelog extends BaseContent
 			outputText("-Changed slightly code for monsters max hp (those with below 20 or 40 stamina should have slight less hp while those with really high stamina scores should gain even more hp than before).\n");
 			outputText("-Incubus Drider, Minotaur King and Lethice hp has been buffed (Lethice 10k+ hp enough to sate all bloodthirsty pc's? xD).\n");
 			outputText("-Removing -morph part form salamanders-morphs. I got convinced that they enough fantasy race different from RL salamanders.\n");
-			outputText("-A quick fix for those who lost ezekiel fruit and can't remove ezekiel curse anymore. A one time offer in camp menu to fix save without restarting anew. Also curse effect now will drain only 10% of mac hp if PC have below 1k hp. Other wise it will always drain 100 hp per combat turn.\n\n");
+			outputText("-A quick fix for those who lost ezekiel fruit and can't remove ezekiel curse anymore. A one time offer in camp menu to fix save without restarting anew. Also curse effect now will drain only 10% of max hp if PC have below 1k hp. Other wise it will always drain 100 hp per combat turn.\n\n");
 			outputText("<b>Version 0.6b (Upgrading base to CoC 1.0.2 aka 3 final bosses of D3 added):</b>\n\n");
 			outputText("-Moved from basing on vanilla CoC 0.9 version to 1.0.2 (which mean IncubusDrider, MinoaurKind, Lethice are all up and ready for fight).\n");
 			outputText("-Ending options after fighting Lethice not yet adjusted but still made so it's possible to keep play as long not picked up option of side with Demon Queen. But if PC picked it still ascending to next NG+ tier will be possible regadless of picked option for dealing with her. This loose end will be tied up in next versions to be more fitting with existance of possibility to play after beating final plot dungeon.\n");

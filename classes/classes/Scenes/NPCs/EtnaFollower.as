@@ -86,7 +86,7 @@ public class EtnaFollower extends NPCAwareContent implements TimeAwareInterface,
 		Saves.registerSaveableState(this);
 	}
 
-//flag ETNA_TALKED_ABOUT_HER: 0 - not know her name, 1 - know her name, 2 - Etna in Yandere mode
+//flag ETNA_TALKED_ABOUT_HER: 0 - not know her name, 1 - know her name, 2 - Etna in Yandere mode, 3 - pussy opera first time scene variant seen
 
 public function etnaAffection(changes:Number = 0):Number
 {
@@ -433,7 +433,8 @@ public function etnaReady2Come2Camp():void
 	outputText("Wait did she literally just ask to be part of your harem or something?\n\n");
 	outputText("\"<i>It's not something I ask lightly, nya, but my nature forces me to bow down to the strong. You have clearly tamed my wild heart, so will you take me back home as your prize?</i>\"\n\n\n\n");
 	menu();
-	addButton(0, "Yes", etnaRapesYesCome2Camp);
+	if (EtnaInfidelity == 2) addButton(0, "Yes", etnaRapesYesCome2Camp).disableIf(player.cumQ() < 2000, "You dont have enough cum to satisfy her.");
+	else addButton(0, "Yes", etnaRapesYesCome2Camp);
 	addButton(1, "No", etnaRapeNoCamp);
 }
 
@@ -487,10 +488,9 @@ private function etnaCome2Camp():void
 			player.addKeyValue("Radiant shard",1,+1);
 		}
 		else player.createKeyItem("Radiant shard", 1,0,0,0);
-		outputText("(<b>Etna has been added to the Lovers menu!</b>)\n\n");
-
 		flags[kFLAGS.ETNA_FOLLOWER] = 2;
 	}
+	outputText("(<b>Etna has been added to the Lovers menu!</b>)\n\n");
 	flags[kFLAGS.ETNA_DAILY_VENOM_VIAL] = 0;
 	doNext(playerMenu);
 }
@@ -1031,11 +1031,10 @@ public function sleepWithEtna():void {
 public function etnaInfidelityEncounter():void {
 	spriteSelect(SpriteDb.s_etna);
 	clearOutput();
-	outputText("As you wander in the high mountain/mountain area you spot a few unconscious minotaurs snoring on the floor. You thought having her as your girlfriend would’ve helped her condition but it seems Etna is still busy screwing everything she can when you're not at camp. You find her not far away, busy raping what’s left of a minotaur.[pg]");
+	outputText("As you wander in the hills area you spot a few unconscious minotaurs snoring on the floor. You thought having her as your girlfriend would’ve helped her condition but it seems Etna is still busy screwing everything she can when you're not at camp. You find her not far away, busy raping what’s left of a minotaur.[pg]");
 	outputText("“<i>Fill my tail, you brutish idiot! Don’t you see I’m hungry!</i>”[pg]");
 	outputText("The poor bull man’s face is caught between orgasm and pain and you imagine all too well he is forcibly being milked of more than he could possibly carry. You approach Etna, planning on asking her an explanation as to her complete infidelity she quickly acknowledges your presence, looking worried.[pg]");
 	outputText("“<i>Uh, oh… [name] it's not what you think! I was hungry and I… well you see all these walking reservoirs around here and...</i>”[pg]");
-
 	menu();
 	addButton(0, "Accept", acceptInfidelity);
 	addButton(1, "Break off", breakOffInfidelity);
@@ -1056,6 +1055,9 @@ public function etnaInfidelityEncounter():void {
 		outputText("She keeps begging and crying but your decision is final. You leave the heartbroken manticore behind as you head back to camp. Her last words carry in the wind like a sharp knife giving you the chills.[pg]");
 		outputText("“<i>You CANNOT deny our love! I will force you to acknowledge it and stalk you to the end of the world if I have to! [name] you are MINE just as I am yours, our bonds are unbreakable!</i>”[pg]");
 		EtnaInfidelity = 2;
+		etnaAffection(-60);
+		if (flags[kFLAGS.SLEEP_WITH] == "Etna") flags[kFLAGS.SLEEP_WITH] = "";
+		if (flags[kFLAGS.ETNA_TALKED_ABOUT_HER] > 2) flags[kFLAGS.ETNA_TALKED_ABOUT_HER] = 2;
 		doNext(camp.returnToCampUseOneHour);
 	}
 	function satisfyHerInfidelity():void {
@@ -1107,7 +1109,6 @@ private function etnaJumpsPCinCamp():void {
 		EtnaHunting = true;
 		return;
 	}
-
 	menu();
 	addButton(0, "LetHerBeInCharge", etnaLetHerBeInCharge);
 	addButton(1, "KittyTitFuck", etnaKittyTitFuck).disableIf(!player.hasCock(), "Req. a cock!");

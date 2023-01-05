@@ -3151,7 +3151,7 @@ public class Combat extends BaseContent {
                     } else monster.createStatusEffect(StatusEffects.ManticoreVenom, 0, 0, DBPaa, 0);
                     player.tailVenom -= player.VenomWebCost();
 					flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
-                }
+                }/*
                 if (player.hasPerk(PerkLib.ELFThornShot) && player.isWoodElf() ) {
                     if (!MSGControll) outputText("  You concentrate on the arrow shaft causing it to grow vicious thorns that tear through your opponent's flesh, delivering poison.");
                     monster.createOrAddStatusEffect(StatusEffects.Rosethorn, 1, 1);
@@ -15878,4 +15878,4 @@ private function touSpeStrScale(stat:int):Number {
         return damage;
     }
 }
-}
+}
