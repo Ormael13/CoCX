@@ -39,6 +39,7 @@ import classes.Scenes.Dungeons.DemonLab.DemonDragonGroup;
 import classes.Scenes.Dungeons.DemonLab.Incels;
 import classes.Scenes.Dungeons.DemonLab.IncubusScientist;
 import classes.Scenes.Dungeons.DemonLab.LabGuard;
+import classes.Scenes.Dungeons.DemonLab.ProjectNightwalker;
 import classes.Scenes.Dungeons.EbonLabyrinth.*;
 import classes.Scenes.Dungeons.HelDungeon.*;
 import classes.Scenes.Monsters.Magnar;
@@ -629,6 +630,7 @@ public class Combat extends BaseContent {
             StatusEffects.Tentagrappled,
             StatusEffects.SiegweirdGrapple,
             StatusEffects.MagnarPinned,
+            StatusEffects.Straddle,
         ];
         var monsterStatuses:Array = [
             StatusEffects.QueenBind,
@@ -638,6 +640,7 @@ public class Combat extends BaseContent {
         if (monster.hasStatusEffect(StatusEffects.MinotaurEntangled)) outputText("\n<b>You're bound up in the minotaur lord's chains!  All you can do is try to struggle free!</b>");
         if (player.hasStatusEffect(StatusEffects.GiantGrabbed)) outputText("\n<b>You're trapped in the giant's hand!  All you can do is try to struggle free!</b>");
         if (player.hasStatusEffect(StatusEffects.Tentagrappled)) outputText("\n<b>The demoness's tentacles are constricting your limbs!</b>");
+        if (player.hasStatusEffect(StatusEffects.Straddle) && monster is ProjectNightwalker) (monster as ProjectNightwalker).faceSittingDescript();
         var status:StatusEffectType;
         for each (status in playerStatuses) if (player.hasStatusEffect(status)) return true;
         for each (status in monsterStatuses) if (monster.hasStatusEffect(status)) return true;
@@ -2157,8 +2160,11 @@ public class Combat extends BaseContent {
         } else if (monster.hasStatusEffect(StatusEffects.QueenBind)) {
             (monster as HarpyQueen).ropeStruggles(true);
             skipMonsterAction = true;
-        } else if (player..hasStatusEffect(StatusEffects.MagnarPinned)) {
+        } else if (player.hasStatusEffect(StatusEffects.MagnarPinned)) {
             (monster as Magnar).magnarPinStruggle(true);
+            skipMonsterAction = true;
+        } else if (player.hasStatusEffect(StatusEffects.Straddle)) {
+            if (monster is ProjectNightwalker)(monster as ProjectNightwalker).struggleFaceSitting(true);
             skipMonsterAction = true;
         } else if (player.hasStatusEffect(StatusEffects.GooBind)) {
             clearOutput();
