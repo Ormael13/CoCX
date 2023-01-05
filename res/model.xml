@@ -6790,7 +6790,7 @@
 		</if>
 		
 		<!-- Cerberus -->
-		<if test="Cerberus">
+		<if test="rearBody.type == RearBody.HELLHOUND_COLLAR">
 			<!-- Hide everything else -->
 			<hide part="*"/>
 			<if test="AkbalFire">
