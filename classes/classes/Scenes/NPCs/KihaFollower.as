@@ -16,6 +16,7 @@ public class KihaFollower extends NPCAwareContent implements TimeAwareInterface,
     public static var FlameSpreaderKillCount:int;
     public static var FlameSpreaderBossKilled:Boolean;
     public static var ProposalStatus:int; // 0 by default, 1 if she wants to propose, 2 if you've disabled her proposal scene and need to propose yourself. 3 for a delayed wedding, and 4 if you're married to Kiha, you lucky bastard. 5 if you've rejected her and the cooldown hasn't finished.
+    public static var MagnarState:int;  //0 by default, 1 for wing sliced off, 2 for eye stabbed out
     public static var TyrantiaRelationshipStatus:int;
     public static var SidonieSeen:Boolean;
     public static var BelisaRelationshipStatus:int;
@@ -2321,21 +2322,15 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
 
     private function KihaTalkKids():void {
         clearOutput();
-        outputText("You ask her about your children, and how they’re faring. \n"
-            + "\n"
-            + "“<i>Why don’t you come and see for yourself?</i>” She asks, walking away without another word. You follow her to a small rocky face just outside the camp. Kiha pushes aside a bush’s branches, motioning for you to follow. \n"
-            + "\n"
-            + "Inside, you see a number of alcoves, carved out of the rock. Apparently, Kiha made some preparations for your future little ones. This puts a small smile on your face, and your dragoness blushes as you look at her. \n"
-            + "\n"
-            + "“<i>What?</i>” She demands. You nudge your dusky lover, saying that you knew she’d make a good mom. Kiha pulls away from you, folding her arms over her chest. \n"
-            + "\n"
+        outputText("You ask her about your children, and how they’re faring. [pg]"
+            + "“<i>Why don’t you come and see for yourself?</i>” She asks, walking away without another word. You follow her to a small rocky face just outside the camp. Kiha pushes aside a bush’s branches, motioning for you to follow. [pg]"
+            + "Inside, you see a number of alcoves, carved out of the rock. Apparently, Kiha made some preparations for your future little ones. This puts a small smile on your face, and your dragoness blushes as you look at her. [pg]"
+            + "“<i>What?</i>” She demands. You nudge your dusky lover, saying that you knew she’d make a good mom. Kiha pulls away from you, folding her arms over her chest. [pg]"
             + "“<i>You thought I’d just ");
         if (flags[kFLAGS.CAMP_BUILT_CABIN] > 0) outputText("leech off you, put them up in your cabin");
         else outputText("raise them without a roof over their heads");
-        outputText("?</i>” Kiha seems insulted at the insinuation.\n"
-            + "\n"
-            + "You shake your head, putting a hand on Kiha’s shoulder. You tell her that you never thought so little of Kiha, and that you just were surprised she found a place so close to your camp. \n"
-            + "\n"
+        outputText("?</i>” Kiha seems insulted at the insinuation.[pg]"
+            + "You shake your head, putting a hand on Kiha’s shoulder. You tell her that you never thought so little of Kiha, and that you just were surprised she found a place so close to your camp. [pg]"
             + "“<i>… I didn’t find this place first.</i>” Kiha says. “<i>I found a group of imps hiding here. They were trying to build an army under your nose.</i>” She sighs. “<i>Be more careful, my idiot.</i>”");
         CanVisitKids = true;
         doNext(playerMenu);
@@ -2418,6 +2413,13 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         outputText("\"<i>It’s an emotional link.</i>\" Kiha shivers, despite herself. \"<i>If you don’t want that, you can turn that part off… Or I could remove it, but… </i>\" You shush your dragoness, holding her close. You tell Kiha that it’s a wonderful gift. The ring floods with warmth, and Kiha lets loose a sound halfway between a squeal of delight and a roar, tackling you with gusto.\n\n");
         outputText("You walk back to camp together, reveling in each other’s company. You can feel her emotional reactions to everything, from her hand in yours (glee) to the cawing of some swamp birds (annoyance and hunger).\n\n");
         ProposalStatus = 3;
+        player.HP = player.maxHP();
+        player.lust = 0;
+        player.wrath = 0;
+        player.fatigue = 0;
+        player.mana = player.maxMana();
+        player.soulforce = player.maxSoulforce();
+        model.time.days += 3;
         inventory.UseItemNow(CoC.instance.jewelries.STARBAND, KihaWedding);
     }
 
@@ -2690,16 +2692,16 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
     public function KihaRescueLeroy():void {
         clearOutput();
         outputText("You run in, making no attempt to be sneaky. As he turns, surprisingly swift for such a big being, you take your [weapon], slamming it as hard as you can into the giant’s face. He staggers back, and you lower your weapon for a rising blow. His armored wing lashes out, ready to intercept your attack, but you anticipated that. You aim your [weapon] at the base of his wing, and with a sickening *crack* it falls limp.\n\n");
-        //startCombat(new Magnar2());
-        outputText("\n\n\n<b>Sorry guys this is as far as it goes for now</b>");
+        MagnarState = 1;
+        startCombat(new Magnar);
         doNext(camp.returnToCampUseOneHour);
     }
 
     public function KihaRescueSneaky():void {
         clearOutput();
         outputText("You rush into the room as he turns back to Kiha, your wedding band sending pure fear coursing through your veins. As he pours a glass of the poisonous alcohol, you run as fast as you can, bearing down on the giant before he knows you’re there. You take your [weapon] and jam it into the brute’s left eye with all your strength. He roars in anger, dropping his glass, which shatters on the floor. Kiha sees you, her face lighting up and your wedding ring pouring relief, love and resolve into you.\n\n");
-        //startCombat(new Magnar2());
-        outputText("\n\n\n<b>Sorry guys this is as far as it goes for now</b>");
+        MagnarState = 2;
+        startCombat(new Magnar);
         doNext(camp.returnToCampUseOneHour);
     }
 

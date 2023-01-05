@@ -724,7 +724,7 @@ public class TailTransformations extends MutationsHelper {
 				player.tailCount = 1;
 
 				if (doOutput) outputText(desc);
-				Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.DEMONIC));
+				Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.AZAZEL));
 			},
 			// is present
 			function (): Boolean {
@@ -834,6 +834,7 @@ public class TailTransformations extends MutationsHelper {
 				player.tailCount = 1;
 
 				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.RABBIT));
 			},
 			// is present
 			function (): Boolean {
@@ -865,6 +866,7 @@ public class TailTransformations extends MutationsHelper {
 				player.tailCount = 1;
 
 				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.AVIAN));
 			},
 			// is present
 			function (): Boolean {
@@ -887,6 +889,7 @@ public class TailTransformations extends MutationsHelper {
 				player.tailCount = 1;
 
 				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.GRIFFIN));
 			},
 			// is present
 			function (): Boolean {
@@ -916,6 +919,7 @@ public class TailTransformations extends MutationsHelper {
 				player.tailCount = 1;
 
 				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.KANGAROO));
 			},
 			// is present
 			function (): Boolean {
@@ -939,6 +943,7 @@ public class TailTransformations extends MutationsHelper {
 				player.tailCount = 1;
 
 				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.THUNDERBIRD));
 			},
 			// is present
 			function (): Boolean {
@@ -962,6 +967,7 @@ public class TailTransformations extends MutationsHelper {
 				player.tailCount = 1;
 
 				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.SQUIRREL));
 			},
 			// is present
 			function (): Boolean {
@@ -1097,6 +1103,7 @@ public class TailTransformations extends MutationsHelper {
 				player.tailCount = 1;
 
 				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.FERRET));
 			},
 			// is present
 			function (): Boolean {
@@ -1122,6 +1129,7 @@ public class TailTransformations extends MutationsHelper {
 				player.tailCount = 1;
 
 				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.BEAR));
 			},
 			// is present
 			function (): Boolean {
@@ -1145,6 +1153,7 @@ public class TailTransformations extends MutationsHelper {
 				player.tailCount = 1;
 
 				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.USHI_ONI));
 			},
 			// is present
 			function (): Boolean {

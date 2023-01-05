@@ -332,14 +332,15 @@ public class HairTransformations extends MutationsHelper {
 			function (doOutput: Boolean): void {
 				var desc: String = "Your hair stands in all directions as though you have just been through a windstorm. <b>You now have wild hair!</b>";
 
-				player.hairLength = 1;
+				player.hairLength = 5;
 
 				if (doOutput) outputText(desc);
-				player.hairType = Hair.WILD;
+				player.hairType = Hair.NORMAL;
+				player.hairStyle = Hair.WILD;
 			},
 			// is present
 			function (): Boolean {
-				return player.hairType === Hair.WILD;
+				return player.hairStyle === Hair.WILD;
 			}
 	);
 

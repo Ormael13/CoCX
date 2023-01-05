@@ -64,6 +64,7 @@ public class FaceTransformations extends MutationsHelper {
 
 				if (doOutput) outputText(desc);
 				player.faceType = Face.DOG;
+				Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.DOG));
 			},
 			// is present
 			function (): Boolean {
@@ -72,6 +73,27 @@ public class FaceTransformations extends MutationsHelper {
 			// is possible
 			function (): Boolean {
 				return player.faceType != Face.DOG && player.hasFullCoatOfType(Skin.FUR) && player.lowerBody == LowerBody.DOG;
+			}
+	);
+
+	public const FaceCerberus: Transformation = new SimpleTransformation("Cerberus Tripple Head",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				desc += "Your face is wracked with pain. You throw back your head and scream in agony as you feel your cheekbones breaking and shifting, reforming into something... different. You find a puddle to view your reflection...<b>your face is now a cross between human and canine features.</b>";
+				desc += "Flanking your main head are two more wich never truly fully agree with one another. You regularly need to put them back into their place and remind them who leads this body lest they start fighting each other.";
+
+				if (doOutput) outputText(desc);
+				player.faceType = Face.CERBERUS;
+			},
+			// is present
+			function (): Boolean {
+				return player.faceType === Face.CERBERUS;
+			},
+			// is possible
+			function (): Boolean {
+				return player.faceType == Face.DOG && player.hasFullCoatOfType(Skin.FUR) && player.lowerBody == LowerBody.DOG;
 			}
 	);
 
@@ -194,6 +216,7 @@ public class FaceTransformations extends MutationsHelper {
 
 				if (doOutput) outputText(desc);
 				player.faceType = Face.BUNNY;
+				Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.BUNNY));
 			},
 			// is present
 			function (): Boolean {
@@ -211,6 +234,7 @@ public class FaceTransformations extends MutationsHelper {
 
 				if (doOutput) outputText(desc);
 				player.faceType = Face.KANGAROO;
+				Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.KANGAROO));
 			},
 			// is present
 			function (): Boolean {
@@ -380,6 +404,7 @@ public class FaceTransformations extends MutationsHelper {
 
 				if (doOutput) outputText(desc);
 				player.faceType = Face.FERRET_MASK;
+				Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.FERRET_MASK));
 			},
 			// is present
 			function (): Boolean {
@@ -396,6 +421,7 @@ public class FaceTransformations extends MutationsHelper {
 
 				if (doOutput) outputText(desc);
 				player.faceType = Face.FERRET;
+				Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.FERRET));
 			},
 			// is present
 			function (): Boolean {
@@ -446,6 +472,7 @@ public class FaceTransformations extends MutationsHelper {
 
 				if (doOutput) outputText(desc);
 				player.faceType = Face.RHINO;
+				Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.RHINO));
 			},
 			// is present
 			function (): Boolean {
@@ -462,6 +489,7 @@ public class FaceTransformations extends MutationsHelper {
 
 				if (doOutput) outputText(desc);
 				player.faceType = Face.ECHIDNA;
+				Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.ECHIDNA));
 			},
 			// is present
 			function (): Boolean {
@@ -478,6 +506,7 @@ public class FaceTransformations extends MutationsHelper {
 
 				if (doOutput) outputText(desc);
 				player.faceType = Face.DEER;
+				Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.DEER));
 			},
 			// is present
 			function (): Boolean {
@@ -849,6 +878,7 @@ public class FaceTransformations extends MutationsHelper {
 
 				if (doOutput) outputText(desc);
 				player.faceType = Face.BEAR;
+				Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.BEAR));
 			},
 			// is present
 			function (): Boolean {
@@ -930,6 +960,7 @@ public class FaceTransformations extends MutationsHelper {
 
 				if (doOutput) outputText(desc);
 				player.faceType = Face.YUKI_ONNA;
+				Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.YUKI_ONNA));
 			},
 			// is present
 			function (): Boolean {
@@ -1028,6 +1059,7 @@ public class FaceTransformations extends MutationsHelper {
 
 				if (doOutput) outputText(desc);
 				player.faceType = Face.SQUIRREL;
+				Metamorph.unlockMetamorph(FaceMem.getMemory(FaceMem.SQUIRREL));
 			},
 			// is present
 			function (): Boolean {

@@ -5,7 +5,6 @@ import classes.CockTypesEnum;
 import classes.IMutations.IMutationsLib;
 import classes.PerkLib;
 import classes.Race;
-import classes.internals.Utils;
 
 public class CerberusRace extends Race {
 	public static const CerberusEyeColors:Array = ["red", "green"];
@@ -43,7 +42,7 @@ public class CerberusRace extends Race {
 	public override function setup():void {
 		addScores()
 				.hairType(Hair.WILD, +1)
-				.faceType(Face.DOG, +1)
+				.faceType(Face.CERBERUS, +1)
 				.tongueType(Tongue.DOG, +1)
 				.eyeType(Eyes.INFERNAL, +1)
 				.eyeColor(ANY(CerberusEyeColors), +1)
@@ -64,11 +63,11 @@ public class CerberusRace extends Race {
 						}, +1)
 				.skinCoatType(Skin.PARTIAL_FUR, +1)
 				.furColor1(ANY(CerberusFurColors), +1)
-				.skinColors(ANY[CerberusSkinColors], +1)
+				.hairColor1("midnight black", +1)
+				.skinColor1("dark", +1)
 				.noWings(+4)
 				.height(AT_LEAST(11*12), +1)
-				.tone(GREATER_THAN(80), +1)
-				.thickness(LESS_THAN(20), +1)
+				.tone(AT_LEAST(80), +1)
 				.corruption(AT_LEAST(50), +1)
 				.hasPerk(PerkLib.Hellfire, +1);
 
