@@ -9,6 +9,7 @@ import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.HighMountains.*;
 import classes.Scenes.Holidays;
 import classes.Scenes.Monsters.DarkElfScene;
+import classes.Scenes.NPCs.EtnaFollower;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
@@ -56,7 +57,7 @@ public class HighMountains extends BaseContent {
         }, {
             name: "etna",
             when: function ():Boolean {
-                return flags[kFLAGS.ETNA_FOLLOWER] < 1
+                return (flags[kFLAGS.ETNA_FOLLOWER] < 1 || EtnaFollower.EtnaInfidelity == 2)
                     && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2
                     && !player.hasStatusEffect(StatusEffects.EtnaOff)
                     && (player.level >= 20);

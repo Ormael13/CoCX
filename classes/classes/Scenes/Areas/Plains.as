@@ -10,6 +10,7 @@ import classes.Scenes.API.Encounters;
 import classes.Scenes.API.FnHelpers;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Plains.*;
+import classes.Scenes.NPCs.EtnaFollower;
 import classes.Scenes.SceneLib;
 
 use namespace CoC;
@@ -58,7 +59,7 @@ use namespace CoC;
 			}, {
 				name: "etna",
 				when: function ():Boolean {
-					return flags[kFLAGS.ETNA_FOLLOWER] < 1
+					return (flags[kFLAGS.ETNA_FOLLOWER] < 1 || EtnaFollower.EtnaInfidelity == 2)
 						   && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2
 						   && !player.hasStatusEffect(StatusEffects.EtnaOff)
 						   && (player.level >= 20);
