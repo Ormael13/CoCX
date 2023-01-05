@@ -647,6 +647,20 @@ public class Face extends SaveableBodyPart {
 		appearanceDesc: "Your face is human in shape and structure. You bear an innocent and almost angelic smile which soothes the soul of those who see you.",
 		humanShaped: true
 	});
+	public static const CERBERUS: int = 60;
+	EnumValue.add(Types, CERBERUS, "CERBERUS", {
+		name: "cerberus",
+		appearanceDescFunc: function(creature: *): String {
+			var desc: String = "";
+
+			desc += "You have a dog's face, complete with wet nose and panting tongue. You've got [skin coat], hiding your [skin base] underneath your furry visage. " +
+					"Flanking your main head are two more wich never truly fully agree with one another. You regularly need to put them back into their place and remind them who leads this body lest they start fighting each other.";
+
+			return desc;
+		},
+		bite: true,
+		hasMuzzle: true
+	});
 
 	public function Face(creature:Creature) {
 		super(creature,"facePart",[]);

@@ -558,6 +558,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
     public var face:FaceTransformations = new FaceTransformations();
     public const FaceHuman: Transformation 				= face.FaceHuman;
     public const FaceHorse: Transformation 				= face.FaceHorse;
+    public const FaceCerberus: Transformation 			= face.FaceCerberus;
     public const FaceDog: Transformation 				= face.FaceDog;
     public const FaceCowMinotaur: Transformation 		= face.FaceCowMinotaur;
     public const FaceSharkTeeth: Transformation 		= face.FaceSharkTeeth;

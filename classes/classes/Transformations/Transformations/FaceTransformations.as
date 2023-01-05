@@ -76,6 +76,27 @@ public class FaceTransformations extends MutationsHelper {
 			}
 	);
 
+	public const FaceCerberus: Transformation = new SimpleTransformation("Cerberus Tripple Head",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				desc += "Your face is wracked with pain. You throw back your head and scream in agony as you feel your cheekbones breaking and shifting, reforming into something... different. You find a puddle to view your reflection...<b>your face is now a cross between human and canine features.</b>";
+				desc += "Flanking your main head are two more wich never truly fully agree with one another. You regularly need to put them back into their place and remind them who leads this body lest they start fighting each other.";
+
+				if (doOutput) outputText(desc);
+				player.faceType = Face.CERBERUS;
+			},
+			// is present
+			function (): Boolean {
+				return player.faceType === Face.CERBERUS;
+			},
+			// is possible
+			function (): Boolean {
+				return player.faceType == Face.DOG && player.hasFullCoatOfType(Skin.FUR) && player.lowerBody == LowerBody.DOG;
+			}
+	);
+
 	public const FaceCowMinotaur: Transformation = new SimpleTransformation("Cow Minotaur Face",
 			// apply effect
 			function (doOutput: Boolean): void {
