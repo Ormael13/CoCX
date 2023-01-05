@@ -1955,6 +1955,7 @@ public class SaveUpdater extends NPCAwareContent {
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.039) {
 				if (flags[kFLAGS.LOPPE_KIDS_LIMIT] == 0) flags[kFLAGS.LOPPE_KIDS_LIMIT] = 8;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.039;
 			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);

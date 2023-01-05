@@ -1171,7 +1171,7 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.CEANI_FOLLOWER] > 0) counter++;
 		if (flags[kFLAGS.DIANA_FOLLOWER] >= 6 && !player.hasStatusEffect(StatusEffects.DianaOff)) counter++;
 		if (flags[kFLAGS.ELECTRA_FOLLOWER] > 1 && !player.hasStatusEffect(StatusEffects.ElectraOff)) counter++;
-		if (flags[kFLAGS.ETNA_FOLLOWER] > 0 && !player.hasStatusEffect(StatusEffects.EtnaOff)) counter++;
+		if (flags[kFLAGS.ETNA_FOLLOWER] > 0 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] != 2 && !player.hasStatusEffect(StatusEffects.EtnaOff)) counter++;
 		if (flags[kFLAGS.EXCELLIA_RECRUITED] >= 33) counter++;
 		if (followerHel()) counter++;
 		//Izma!
@@ -1201,7 +1201,7 @@ public class Camp extends NPCAwareContent{
 		if (BelisaFollower.BelisaInCamp) counter++;
 		if (CelessScene.instance.isCompanion() && CelessScene.instance.isCorrupt) counter++;
 		if (LilyFollower.LilyFollowerState) counter++;
-		if (flags[kFLAGS.ETNA_FOLLOWER] > 0 && !player.hasStatusEffect(StatusEffects.EtnaOff)) counter++;
+		if (flags[kFLAGS.ETNA_FOLLOWER] > 0 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] != 2 && !player.hasStatusEffect(StatusEffects.EtnaOff)) counter++;
 		if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) counter++;
 		if (flags[kFLAGS.ANT_WAIFU] > 0) counter++;
 		if (flags[kFLAGS.AURORA_LVL] >= 1) counter++;
@@ -1226,7 +1226,7 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.CEANI_FOLLOWER] > 0) counter++;
 		if (flags[kFLAGS.DIANA_FOLLOWER] >= 6 && !player.hasStatusEffect(StatusEffects.DianaOff)) counter++;
 		if (flags[kFLAGS.ELECTRA_FOLLOWER] > 1 && !player.hasStatusEffect(StatusEffects.ElectraOff)) counter++;
-		if (flags[kFLAGS.ETNA_FOLLOWER] > 0 && !player.hasStatusEffect(StatusEffects.EtnaOff)) counter++;
+		if (flags[kFLAGS.ETNA_FOLLOWER] > 0 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] != 2 && !player.hasStatusEffect(StatusEffects.EtnaOff)) counter++;
 		if (flags[kFLAGS.LUNA_FOLLOWER] >= 4 && !player.hasStatusEffect(StatusEffects.LunaOff)) counter++;
 		if (followerHel()) counter++;
 		if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) counter++;
@@ -1274,7 +1274,7 @@ public class Camp extends NPCAwareContent{
 		if (helspawnFollower()) counter++;
 		if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2 && flags[kFLAGS.CHI_CHI_FOLLOWER] != 5 && !player.hasStatusEffect(StatusEffects.ChiChiOff)) counter++;
 		if (flags[kFLAGS.CEANI_FOLLOWER] > 0) counter++;
-		if (flags[kFLAGS.ETNA_FOLLOWER] > 0 && !player.hasStatusEffect(StatusEffects.EtnaOff)) counter++;
+		if (flags[kFLAGS.ETNA_FOLLOWER] > 0 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] != 2 && !player.hasStatusEffect(StatusEffects.EtnaOff)) counter++;
 		if (flags[kFLAGS.LUNA_FOLLOWER] > 10 && !player.hasStatusEffect(StatusEffects.LunaOff)) counter++;
 		if (followerHel()) counter++;
 		if (isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) counter++;
@@ -1402,7 +1402,7 @@ public class Camp extends NPCAwareContent{
 				buttons.add("Electra", SceneLib.electraScene.ElectraCampMainMenu).disableIf(player.statusEffectv3(StatusEffects.CampSparingNpcsTimers4) > 0, "Training.");
 			}
 			//Etna
-			if (flags[kFLAGS.ETNA_FOLLOWER] > 0 && !player.hasStatusEffect(StatusEffects.EtnaOff)) {
+			if (flags[kFLAGS.ETNA_FOLLOWER] > 0 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] != 2 && !player.hasStatusEffect(StatusEffects.EtnaOff)) {
 				outputText("Etna is resting lazily on a rug in a very cat-like manner. She’s looking at you always with this adorable expression of hers, her tail wagging expectantly at your approach.\n\n");
 				if (player.statusEffectv1(StatusEffects.CampLunaMishaps2) > 0) buttons.add("Etna", SceneLib.etnaScene.etnaCampMenu2).disableIf(player.statusEffectv1(StatusEffects.CampLunaMishaps2) > 0, "Sleeping.");
 				else buttons.add("Etna", SceneLib.etnaScene.etnaCampMenu2).disableIf(player.statusEffectv4(StatusEffects.CampSparingNpcsTimers1) > 0, "Training.");

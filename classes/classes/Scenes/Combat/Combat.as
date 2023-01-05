@@ -3147,10 +3147,10 @@ public class Combat extends BaseContent {
                     } else monster.createStatusEffect(StatusEffects.ManticoreVenom, 0, 0, DBPaa, 0);
                     player.tailVenom -= player.VenomWebCost();
 					flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
-                }
+                }/*
                 if (player.hasPerk(PerkLib.ELFThornShot) && player.isWoodElf() ) {
                     CombatAbilities.Rosethorn.doEffect();
-                }
+                }*/
                 if (player.faceType == Face.SNAKE_FANGS) {
                     outputText("  [monster he] seems to be effected by the poison, its movements slowing down.");
 					var DBPaaa:Number = 1;
@@ -15866,4 +15866,4 @@ private function touSpeStrScale(stat:int):Number {
         return damage;
     }
 }
-}
+}
