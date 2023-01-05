@@ -2340,7 +2340,6 @@ public function loppeKnockupAttempt(isplayer:Boolean = false):void {
 }
 private function get canGetPreg():Boolean {
 	var kids:int = flags[kFLAGS.LOPPE_KIDS];
-	var limit:Number = flags[kFLAGS.LOPPE_KIDS_LIMIT];
 	if (pregnancy.isPregnant) kids += 2;
 	if (player.isPregnant() && player.pregnancyType == PregnancyStore.PREGNANCY_LOPPE) kids += 2;
 	return kids < flags[kFLAGS.LOPPE_KIDS_LIMIT];
