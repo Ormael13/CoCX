@@ -201,11 +201,13 @@ import classes.Scenes.SceneLib;
 			addButton (14, "Leave", cleanupAfterCombat);
 			if (player.lust>=33 && player.gender > 0) {
 				outputText("\nNow would be the perfect opportunity to taste the fruits of her sex-ready form...[pg]Do you fuck her?");
-				if (player.gender == 1 || player.gender == 3) addButton (0, "M. Fuck", OmnibusGetsRapedByMale);
-				if (player.gender == 2 || player.gender == 3) addButton (1, "F. Fuck", OmnibusGetsRapedByFemale);
+				addButton (0, "M. Fuck", OmnibusGetsRapedByMale)
+					.disableIf(!player.hasCock(), "Req. a cock.");
+				addButton (1, "F. Fuck", OmnibusGetsRapedByFemale)
+					.disableIf(!player.hasVagina(), "Req. a vagina.");
                 LustyMaidensArmor.addTitfuckButton(2);
-				if (player.isRaceCached(Races.CERBERUS))
-					addButton(3, "Use demon", rapeCerberusStyle);
+				addButton(3, "Use demon", rapeCerberusStyle)
+					.disableIf(!player.isRaceCached(Races.CERBERUS), "Req. Cerberus race");
 				SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatOmnibus); // the last!
 			} else {
 				outputText("You aren't aroused enough to rape her.");
@@ -377,8 +379,8 @@ import classes.Scenes.SceneLib;
 				outputText("\nNow would be the perfect opportunity to taste the fruits of her sex-ready form...[pg]Do you fuck her?");
 				addButtonIfTrue(0, "M. Fuck", SuccubusGetsRapedByMale, "Req. a cock.", player.hasCock());
 				addButtonIfTrue(1, "F. Fuck", SuccubusGetsRapedByFemale, "Req. a vagina.", player.hasVagina());
-				if (player.isRaceCached(Races.CERBERUS))
-					addButton(2, "Use demon", rapeCerberusStyle);
+				addButton(2, "Use demon", rapeCerberusStyle)
+					.disableIf(!player.isRaceCached(Races.CERBERUS), "Req. Cerberus race");
 				SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatSuccubus);
 			}
 			else {

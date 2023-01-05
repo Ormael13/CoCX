@@ -1322,8 +1322,8 @@ public static const WHITNEY_ORAL_TRAINING_VAG:int                               
 public static const RATHAZUL_MINDUP_OFFERED:int                                     = 1314;
 public static const LOPPE_INCUBATION:int                                            = 1315;
 public static const LOPPE_PREGNANCY_TYPE:int                                        = 1316;
-public static const UNKNOWN_FLAG_NUMBER_01317:int                                   = 1317;
-public static const UNKNOWN_FLAG_NUMBER_01318:int                                   = 1318;
+public static const ETNA_INCUBATION:int                                             = 1317;
+public static const ETNA_PREGNANCY_TYPE:int                                         = 1318;
 public static const UNKNOWN_FLAG_NUMBER_01319:int                                   = 1319;
 public static const UNKNOWN_FLAG_NUMBER_01320:int                                   = 1320;
 public static const UNKNOWN_FLAG_NUMBER_01321:int                                   = 1321;

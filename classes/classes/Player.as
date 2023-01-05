@@ -31,7 +31,7 @@ import classes.Items.MiscJewelry;
 import classes.Items.Necklace;
 import classes.Items.NecklaceLib;
 import classes.Items.Shield;
-import classes.Items.Undergarment
+import classes.Items.Undergarment;
 import classes.Items.Vehicles;
 import classes.Items.Weapon;
 import classes.Items.WeaponRange;

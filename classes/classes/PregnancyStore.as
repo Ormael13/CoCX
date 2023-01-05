@@ -99,7 +99,7 @@ public class PregnancyStore extends Object
 		public static const INCUBATION_SALAMANDER:int           = 336;
 		public static const INCUBATION_MINERVA:int           	= 216; 
 		public static const INCUBATION_BEHEMOTH:int           	=1440; //Sorry Behemoth, but Isabella wins.
-		public static const INCUBATION_PHOENIX:int           	= 168; 
+		public static const INCUBATION_QUASI_PHOENIX:int       	= 168;
 		public static const INCUBATION_KIHA:int                 = 384;
 		public static const INCUBATION_ISABELLA:int             =2160; //Longest pregnancy ever.
 		public static const INCUBATION_ALRAUNE:int              = 168;
@@ -109,11 +109,11 @@ public class PregnancyStore extends Object
 		public static const INCUBATION_EXCELLIA:int				= 480;
 		public static const INCUBATION_ZENJI:int                = 720;
 		public static const INCUBATION_AYANE:int				= 336;
+		public static const INCUBATION_ETNA:int					= 300;
+		public static const INCUBATION_CHI_CHI:int				= 300;
 		/*public static const INCUBATION_BELISA:int				= 300;
 		public static const INCUBATION_LILY:int					= 300;
-		public static const INCUBATION_TYRANTIA:int				= 300;
-		public static const INCUBATION_ETNA:int					= 300;
-		public static const INCUBATION_CHI_CHI:int				= 300;*/
+		public static const INCUBATION_TYRANTIA:int				= 300;*/
 		public static const INCUBATION_LOPPE:int				= 300;
 
 		private static const MAX_FLAG_VALUE:int                 = 2999;

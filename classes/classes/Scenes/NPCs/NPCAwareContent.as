@@ -52,6 +52,10 @@ import classes.Scenes.SceneLib;
 		{
 			return SceneLib.arianScene.arianFollower();
 		}
+		// Ayayayane
+		protected function get ayaneFollower():AyaneFollower{
+			return SceneLib.ayaneFollower;
+		}
 		// Celess
 		protected function get celessScene():CelessScene
 		{
@@ -83,9 +87,17 @@ import classes.Scenes.SceneLib;
 		{
 			return SceneLib.emberScene.emberMF(man,woman);
 		}
-		// Ayayayane
-		protected function get ayaneFollower():AyaneFollower{
-			return SceneLib.ayaneFollower;
+		public function etnaScene():EtnaFollower
+		{
+			return SceneLib.etnaScene;
+		}
+		public function followerEtnaKid():Boolean
+		{
+			return SceneLib.etnaDaughterScene.etnaDaughterFollower();
+		}
+		public function etnaKidFollower():EtnaDaughterScene
+		{
+			return SceneLib.etnaDaughterScene;
 		}
 		// Exgartuan
 		protected function get exgartuan():Exgartuan
