@@ -1047,32 +1047,32 @@ package classes.Scenes.Places{
 				outputText("\n\n\"<i>Unfortunately I wont be able to teach you the ultimate skills of elven archery because you aren't complete or rather… you never made a covenant with the blessed tree. These last skills taps directly in the power of the covenant and thus cannot be learned by someone with no connection.</i>\"")
 				hasTrainedToday = true;
 			}
-			else if (player.speStat.train.value >= 100 && WoodElfBowTraining == QUEST_STAGE_BOWTRAINING4 && !hasTrainedToday && player.isRace(Races.WOODELF) && player.hasStatusEffect(StatusEffects.KnowsBriarthorn)){
-				if (player.speStat.core.value < player.speStat.core.max) {
-					outputText("\n\nIt occurs to you that by combining elven green magic with your shot you could to infuse your arrow with life energy, the wooden shaft growing thorns that would surely inflict painful poisoned wounds to your opponents.");
-					outputText(" Sadly such a technique will require far more training but you're confident in Elenwen's ability to train you to this point.");
-					hasTrainedToday = true;
-				} else {
-					WoodElfBowTraining = QUEST_STAGE_BOWTRAINING5;
-					player.createPerk(PerkLib.ELFThornShot,0,0,0,0);
-					flags[kFLAGS.ENVENOMED_BOLTS] = 1;
-					outputText("\n\nIt occurs to you that by combining elven green magic with your shot you could to infuse your arrow with life energy, the wooden shaft growing thorns that would surely inflict painful poisoned wounds to your opponents. <b>Gained Perk: Elven Thorn Shot</b>");
-					hasTrainedToday = true;
-				}
-			}
-			else if (player.speStat.core.value >= player.speStat.core.max && WoodElfBowTraining == QUEST_STAGE_BOWTRAINING5 && !hasTrainedToday && player.isRace(Races.WOODELF)){
-				if (player.spe100 >= 100) {
-					outputText("\n\nBy now you have achieved mastery of every technique Elenwen could touch you… well almost. Elenwen's single most amazing skill is her ability to shoot a salvo of two arrows in quick succession, a skill you have yet to see anyone but her use.");
-					outputText(" You're certain if you train and improve your speed to the breaking point you could achieve it too. Guess you will need to increase your speed and dexterity to their utmost limit before you can unlock that skill.");
-					hasTrainedToday = true;
-				} else {
-					WoodElfBowTraining = QUEST_STAGE_BOWTRAINING6;
-					player.createPerk(PerkLib.ELFTwinShot,0,0,0,0);
-					flags[kFLAGS.ELVEN_TWINSHOT_ENABLED] = 1;
-					outputText("\n\nBy now you have achieved mastery of every technique Elenwen could touch you… well almost. Elenwen's single most amazing skill is her ability to shoot a salvo of two arrows in quick succession, a skill you have yet to see anyone but her use. <b>Gained Perk: Elven Twin Shot</b>");
-					hasTrainedToday = true;
-				}
-			}
+			//else if (player.speStat.train.value >= 100 && WoodElfBowTraining == QUEST_STAGE_BOWTRAINING4 && !hasTrainedToday && player.isRace(Races.WOODELF) && player.hasStatusEffect(StatusEffects.KnowsBriarthorn)){
+			//	if (player.speStat.core.value < player.speStat.core.max) {
+			//		outputText("\n\nIt occurs to you that by combining elven green magic with your shot you could to infuse your arrow with life energy, the wooden shaft growing thorns that would surely inflict painful poisoned wounds to your opponents.");
+			//		outputText(" Sadly such a technique will require far more training but you're confident in Elenwen's ability to train you to this point.");
+			//		hasTrainedToday = true;
+			//	} else {
+			//		WoodElfBowTraining = QUEST_STAGE_BOWTRAINING5;
+			//		player.createPerk(PerkLib.ELFThornShot,0,0,0,0);
+			//		flags[kFLAGS.ENVENOMED_BOLTS] = 1;
+			//		outputText("\n\nIt occurs to you that by combining elven green magic with your shot you could to infuse your arrow with life energy, the wooden shaft growing thorns that would surely inflict painful poisoned wounds to your opponents. <b>Gained Perk: Elven Thorn Shot</b>");
+			//		hasTrainedToday = true;
+			//	}
+			//}
+			//else if (player.speStat.core.value >= player.speStat.core.max && WoodElfBowTraining == QUEST_STAGE_BOWTRAINING5 && !hasTrainedToday && player.isRace(Races.WOODELF)){
+			//	if (player.spe100 >= 100) {
+			//		outputText("\n\nBy now you have achieved mastery of every technique Elenwen could touch you… well almost. Elenwen's single most amazing skill is her ability to shoot a salvo of two arrows in quick succession, a skill you have yet to see anyone but her use.");
+			//		outputText(" You're certain if you train and improve your speed to the breaking point you could achieve it too. Guess you will need to increase your speed and dexterity to their utmost limit before you can unlock that skill.");
+			//		hasTrainedToday = true;
+			//	} else {
+			//		WoodElfBowTraining = QUEST_STAGE_BOWTRAINING6;
+			//		player.createPerk(PerkLib.ELFTwinShot,0,0,0,0);
+			//		flags[kFLAGS.ELVEN_TWINSHOT_ENABLED] = 1;
+			//		outputText("\n\nBy now you have achieved mastery of every technique Elenwen could touch you… well almost. Elenwen's single most amazing skill is her ability to shoot a salvo of two arrows in quick succession, a skill you have yet to see anyone but her use. <b>Gained Perk: Elven Twin Shot</b>");
+			//		hasTrainedToday = true;
+			//	}
+			//}
 			else{
 				hasTrainedToday = true;
 			}

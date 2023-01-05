@@ -69,7 +69,7 @@ public class BriarthornSpell extends AbstractGreenSpell {
 				}
 				return;
 			}
-			monster.createStatusEffect(StatusEffects.Briarthorn, 1, 0, 0, 0);
+			monster.createStatusEffect(StatusEffects.Briarthorn, 6, 0, 0, 0);
 			var arve:Number = 1;
 			if (player.hasPerk(PerkLib.ArcaneVenom)) arve += stackingArcaneVenom();
 			while (arve-->0) doSpellEffect2();
