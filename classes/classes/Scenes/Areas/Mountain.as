@@ -17,6 +17,7 @@ import classes.Scenes.Areas.Mountain.*;
 import classes.Scenes.Holidays;
 import classes.Scenes.Monsters.DarkElfScene;
 import classes.Scenes.NPCs.DivaScene;
+import classes.Scenes.NPCs.EtnaFollower;
 import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 import classes.Scenes.SceneLib;
@@ -76,7 +77,7 @@ public class Mountain extends BaseContent
 			}, {
 				name  : "etna",
 				when  : function():Boolean {
-					return flags[kFLAGS.ETNA_FOLLOWER] < 1
+					return (flags[kFLAGS.ETNA_FOLLOWER] < 1 || EtnaFollower.EtnaInfidelity == 2)
 						   && !player.hasStatusEffect(StatusEffects.EtnaOff)
 						   && (player.level >= 20);
 				},
@@ -85,6 +86,17 @@ public class Mountain extends BaseContent
 					if (flags[kFLAGS.ETNA_AFFECTION] < 2) SceneLib.etnaScene.firstEnc();
 					else if (flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2) SceneLib.etnaScene.repeatYandereEnc();
 					else SceneLib.etnaScene.repeatEnc();
+				}
+			}, {
+				name  : "etna1",
+				when  : function():Boolean {
+					return (flags[kFLAGS.ETNA_FOLLOWER] >= 2 && EtnaFollower.EtnaInfidelity == 0)
+						   && !player.hasStatusEffect(StatusEffects.EtnaOff)
+						   && (player.level >= 20);
+				},
+				chance: 0.5,
+				call  : function ():void {
+					 SceneLib.etnaScene.etnaInfidelityEncounter();
 				}
 			}, {
 				name  : "alvina1",
@@ -575,6 +587,7 @@ public class Mountain extends BaseContent
 						return;
 					}
 					clearOutput();
+					sceneHunter.print("Check failed: Cerberus race.");
 					outputText("Minding your own business, you walk along the winding paths.  You take your time to enjoy the view until you see a shadow approaching you.  You turn around to see a minotaur!  However, he is much bigger than the other minotaurs you've seen.  You estimate him to be eleven feet tall and he's wielding a chain-whip.  He's intent on raping you!");
 					startCombat(new MinotaurLord());
 					return;

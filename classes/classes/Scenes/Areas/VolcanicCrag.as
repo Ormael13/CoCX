@@ -11,6 +11,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.HighMountains.PhoenixScene;
 import classes.Scenes.Areas.VolcanicCrag.*;
 import classes.Scenes.Holidays;
+import classes.Scenes.NPCs.EtnaFollower;
 import classes.Scenes.SceneLib;
 
 public class VolcanicCrag extends BaseContent
@@ -56,7 +57,7 @@ public class VolcanicCrag extends BaseContent
 				return;
 			}
 			//Etna
-			if (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && !player.hasStatusEffect(StatusEffects.EtnaOff) && rand(5) == 0 && (player.level >= 20)) {
+			if ((flags[kFLAGS.ETNA_FOLLOWER] < 1 || EtnaFollower.EtnaInfidelity == 2) && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && !player.hasStatusEffect(StatusEffects.EtnaOff) && rand(5) == 0 && (player.level >= 20)) {
 				VolcanicCragConditions();
 				SceneLib.etnaScene.repeatYandereEnc();
 				return;

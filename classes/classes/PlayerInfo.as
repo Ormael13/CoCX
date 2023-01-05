@@ -997,8 +997,8 @@ public class PlayerInfo extends BaseContent {
 		if (DriderTown.LilyKidsPCEggs > 0 || DriderTown.LilyKidsPCEggs1 > 0 || DriderTown.LilyKidsPCEggs2 > 0)
 			pregnancies += "<b>Lily eggs: </b>" +(DriderTown.LilyKidsPCEggs +DriderTown.LilyKidsPCEggs1 +DriderTown.LilyKidsPCEggs2) + "\n";
 
-		//if (SceneLib.telAdre.loppe.pregnancy.isPregnant)	//TODO Loppe preggers
-		//	pregnancies += "<b>Loppe</b>\n";
+		if (SceneLib.loppe.pregnancy.isPregnant)
+			pregnancies += "<b>Loppe</b>\n";
 
 		if (flags[kFLAGS.LYNNETTE_CARRYING_COUNT] != 0)
 			pregnancies += "<b>Lynnette</b> \n";

@@ -2163,7 +2163,7 @@ public final class Mutations extends MutationsHelper {
 
     public function forceCerberus(doOutput:Boolean = false):void {
         if (player.hairType != Hair.WILD) transformations.HairWild.applyEffect(doOutput);
-        if (player.faceType != Face.DOG) transformations.FaceDog.applyEffect(doOutput);
+        if (player.faceType != Face.DOG) transformations.FaceCerberus.applyEffect(doOutput);
         if (player.tongue.type != Tongue.DOG) transformations.TongueDog.applyEffect(doOutput);
         if (player.eyes.type != Eyes.INFERNAL) transformations.EyesInfernal.applyEffect(doOutput);
         if (player.hasPerk(PerkLib.FireLord))

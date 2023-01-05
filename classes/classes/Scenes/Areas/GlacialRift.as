@@ -19,6 +19,7 @@ import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.GlacialRift.*;
 import classes.Scenes.Areas.Tundra.Valkyrie;
 import classes.Scenes.Holidays;
+import classes.Scenes.NPCs.EtnaFollower;
 import classes.Scenes.NPCs.Valeria;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
@@ -62,7 +63,7 @@ use namespace CoC;
 			}, {
 				name  : "etna",
 				when  : function():Boolean {
-					return flags[kFLAGS.ETNA_FOLLOWER] < 1
+					return (flags[kFLAGS.ETNA_FOLLOWER] < 1 || EtnaFollower.EtnaInfidelity == 2)
 							&& flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2
 							&& !player.hasStatusEffect(StatusEffects.EtnaOff)
 							&& (player.level >= 20);

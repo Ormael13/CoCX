@@ -9,6 +9,7 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
 import classes.Scenes.Areas.Battlefield.*;
+import classes.Scenes.NPCs.EtnaFollower;
 import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.SceneLib;
 import classes.Items.Vehicles;
@@ -49,7 +50,7 @@ use namespace CoC;
 				return;
 			}
 			//Etna
-			if (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && !player.hasStatusEffect(StatusEffects.EtnaOff) && rand(5) == 0) {
+			if ((flags[kFLAGS.ETNA_FOLLOWER] < 1 || EtnaFollower.EtnaInfidelity == 2) && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && !player.hasStatusEffect(StatusEffects.EtnaOff) && rand(5) == 0) {
 				SceneLib.etnaScene.repeatYandereEnc();
 				return;
 			}

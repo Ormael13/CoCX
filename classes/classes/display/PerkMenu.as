@@ -81,7 +81,7 @@ public class PerkMenu extends BaseContent {
 			outputText("\n<b>You can adjust your melee attack settings.</b>");
 			addButton(5, "Melee Opt",meleeOptions);
 		}
-		if (player.hasPerk(PerkLib.WeaponRangeDoubleStrike) || player.hasPerk(PerkLib.ElementalArrows) || player.hasPerk(PerkLib.Cupid) || player.hasPerk(PerkLib.EnvenomedBolt) || player.hasPerk(PerkLib.AmateurGunslinger)) {
+		if (player.hasPerk(PerkLib.WeaponRangeDoubleStrike) || player.hasPerk(PerkLib.ELFTwinShot) || player.hasPerk(PerkLib.ElementalArrows) || player.hasPerk(PerkLib.Cupid) || player.hasPerk(PerkLib.EnvenomedBolt) || player.hasPerk(PerkLib.ELFThornShot) || player.hasPerk(PerkLib.AmateurGunslinger)) {
 			outputText("\n<b>You can adjust your range strike settings.</b>");
 			addButton(6, "Range Opt",rangedOptions);
 		}
@@ -355,11 +355,18 @@ public class PerkMenu extends BaseContent {
 		var bd:ButtonDataList = new ButtonDataList();
 		var currentProj:int = flags[kFLAGS.MULTISHOT_STYLE];
 		var toggleFlagRanged:Function = curry(toggleFlag, rangedOptions);
+		currentProj *= (flags[kFLAGS.ELVEN_TWINSHOT_ENABLED] ? 2 : 1);
 
 		clearOutput();
 		outputText("You will always shoot " + NUMBER_WORDS_NORMAL[currentProj + 1] + " projectiles."
 			+ "\nYou can change it to a different amount of projectiles.");
 		bd.add("MultiShot", pickMultishot).hint("Change your amount of projectiles.");
+		if (player.hasPerk(PerkLib.ELFTwinShot)) {
+			outputText("\n\nThanks to your elven training, you can shoot twice as many arrows as normal (Works only with bows)"
+					+ "\nTwin shot active: <b>" + (flags[kFLAGS.ELVEN_TWINSHOT_ENABLED] ? "Yes" : "No") + "</b>");
+			bd.add("Venom", curry(toggleFlagRanged, kFLAGS.ELVEN_TWINSHOT_ENABLED))
+					.disableIf(!canVenomAttacks(), "You need a source of poison for this.");
+		}
 		if (player.hasPerk(PerkLib.ElementalArrows)) {
 			outputText("\n\nIf you know specific spells, you can add some magical effects to the projectiles. (Works only with bows and crosbows)");
 			outputText("\n\nElemental effect added: <b>" + elementalArr[flags[kFLAGS.ELEMENTAL_ARROWS]][0] + "</b>");
@@ -373,9 +380,13 @@ public class PerkMenu extends BaseContent {
 			bd.add("Arouse", curry(toggleFlagRanged, kFLAGS.CUPID_ARROWS))
 				.disableIf(!player.hasStatusEffect(StatusEffects.KnowsArouse), "You don't know the required spell.");
 		}
-		if (player.hasPerk(PerkLib.EnvenomedBolt)) {
-			outputText("\n\nIf you can naturaly produce venom, you can add its effects to the projectiles. (Works only with bows and crosbows)"
-				+ "\nVenom effect added: <b>" + (flags[kFLAGS.ENVENOMED_BOLTS] ? "Yes" : "No") + "</b>");
+		if (player.hasPerk(PerkLib.EnvenomedBolt) || player.hasPerk(PerkLib.ELFThornShot)) {
+			if (player.hasPerk(PerkLib.ELFThornShot)) {
+				outputText("\n\nAs a Wood Elf you can grow Rose thorns on your shafts, inducing a lust poison and bleed effect. (Works only with bows and crosbows)")
+			} else {
+				outputText("\n\nIf you can naturaly produce venom, you can add its effects to the projectiles. (Works only with bows and crosbows)");
+			}
+			outputText("\nVenom effect added: <b>" + (flags[kFLAGS.ENVENOMED_BOLTS] ? "Yes" : "No") + "</b>");
 			bd.add("Venom", curry(toggleFlagRanged, kFLAGS.ENVENOMED_BOLTS))
 				.disableIf(!canVenomAttacks(), "You need a source of poison for this.");
 		}

@@ -5,6 +5,7 @@ import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
 import classes.Measurements;
 import classes.PerkLib;
+import classes.Scenes.NPCs.EtnaDaughterScene;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects;
 import classes.Scenes.NPCs.Forgefather;
@@ -145,6 +146,7 @@ public class ParserTags {
         "latexyname"            : function ():* { return CoC.instance.flags[kFLAGS.GOO_NAME]; },
         "bathgirlname"          : function ():* { return CoC.instance.flags[kFLAGS.MILK_NAME]; },
         "sheilaname"            : function ():* { return SceneLib.sheilaScene.sheilaName(); },
+        "etnakidname"           : function ():* { return EtnaDaughterScene.EtnaDaughterName; },
         "cockplural"            : function ():* { return (CoC.instance.player.cocks.length == 1) ? "cock" : "cocks"; },
         "dickplural"            : function ():* { return (CoC.instance.player.cocks.length == 1) ? "dick" : "dicks"; },
         "headplural"            : function ():* { return (CoC.instance.player.cocks.length == 1) ? "head" : "heads"; },

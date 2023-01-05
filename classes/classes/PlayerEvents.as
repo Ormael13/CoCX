@@ -47,14 +47,18 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		private var campUniqueScene:UniqueCampScenes = new UniqueCampScenes();
 		private var campScenes:CampScenes = new CampScenes();
 		private var checkedTurkey:int; //Make sure we test each of these events just once in timeChangeLarge
+		private var checkedHellhound:int; //Make sure we test each of these events just once in timeChangeLarge
 		private var checkedDream:int;
 		private var dreams:Dreams = new Dreams();
 
 		//Implementation of TimeAwareInterface
 		public function timeChange():Boolean {
 			var needNext:Boolean;
-			checkedTurkey = 0;
-			checkedDream = 0;
+			if (time.hours == 6) {
+				checkedTurkey = 0;
+				checkedHellhound = 0;
+				checkedDream = 0;
+			}
 
 			if (player.cumMultiplier > 19999) player.cumMultiplier = 19999;
 			if (player.ballSize > 400) player.ballSize = 400;
@@ -1615,7 +1619,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.createPerk(PerkLib.FireAffinity, 0, 0, 0, 0);
 				needNext = true;
 			}
-			else if ((player.racialScoreCached(Races.SALAMANDER) < 4 && !player.isRaceCached(Races.PHOENIX) && !player.isRaceCached(Races.HELLCAT) && !player.isRaceCached(Races.FIRESNAILS) && !player.isRaceCached(Races.MOUSE, 2) && !player.isRaceCached(Races.KITSHOO)) && player.hasPerk(PerkLib.FireAffinity)) {
+			else if ((player.racialScoreCached(Races.SALAMANDER) < 4 && !player.isRaceCached(Races.PHOENIX) && !player.isRaceCached(Races.HELLCAT) && !player.isRaceCached(Races.FIRESNAILS) && !player.isRaceCached(Races.MOUSE, 2) && !player.isRaceCached(Races.KITSHOO) && !player.isRaceCached(Races.CERBERUS)) && player.hasPerk(PerkLib.FireAffinity)) {
 				outputText("\nYou suddenly feel chilly as your bodily temperature drop down to human level. You lost your natural warmth reverting to that of a standard human.\n\n<b>(Lost Perk: Fire Affinity)</b>\n");
 				player.removePerk(PerkLib.FireAffinity);
 				needNext = true;
@@ -2897,9 +2901,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					SceneLib.holidays.datTurkeyRumpMeeting(); //TURKEY SURPRISE
                     return true;
                 }
-				if (player.isHellHound() && player.hasPerk(PerkLib.Hellfire) && camp.IsSleeping && player.hasKeyItem("Marae's Lethicite") >= 0
+				if (checkedHellhound++ == 0 && rand(5) == 0 && !player.isRaceCached(Races.CERBERUS) && player.isHellHound() && player.hasPerk(PerkLib.Hellfire) && camp.IsSleeping && player.hasKeyItem("Marae's Lethicite") >= 0
 						&& player.keyItemvX("Marae's Lethicite", 1) > 0 ) { //&& !player.raceCached(Cerberus)
 					SceneLib.camp.campUniqueScenes.hellhoundCapture();
+					return true;
 				}
 
                 if (LunaFullMoonScene){
