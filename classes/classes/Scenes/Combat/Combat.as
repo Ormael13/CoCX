@@ -2761,10 +2761,8 @@ public class Combat extends BaseContent {
      * 3. Get ammo description and check auto-miss
      * 4. Do the atack
      */
-    private var firstShot:Boolean;
     public function fireBow():void {
         clearOutput();
-        firstShot = false;
         if (monster.hasStatusEffect(StatusEffects.BowDisabled)) {
             outputText("You can't use your range weapon right now!");
             menu();
@@ -3158,7 +3156,7 @@ public class Combat extends BaseContent {
                     if (monster.lustVuln == 0) {
                         outputText("\nIt has no effect!  Your foe clearly does not experience lust in the same way as you.\n");
                     } else {
-                        var baseDamage:Number = (combat.teases.teaseBaseLustDamage() * 3 * spellModWhite());
+                        var baseDamage:Number = (combat.teases.teaseBaseLustDamage() * spellModWhite());
                         if (player.hasPerk(PerkLib.VegetalAffinity)) baseDamage *= 1.5;
                         if (player.hasPerk(PerkLib.GreenMagic)) baseDamage *= 2;
                         if (player.hasStatusEffect(StatusEffects.GreenCovenant)) baseDamage *= 2;
@@ -3187,7 +3185,7 @@ public class Combat extends BaseContent {
                         }
                         lustDmg = Math.round(monster.lustVuln * lustDmg);
                         monster.teased(lustDmg, false);
-                        if (crit) outputText(" <b>Critical!</b>");
+                        if (crit) outputText(" <b>Critical!</b> ");
                         combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
                         if (player.hasPerk(PerkLib.VerdantLeech)) {
                             if (monster.lustVuln != 0 && !monster.hasPerk(PerkLib.EnemyTrueAngel)) monster.lustVuln += 0.01;

@@ -1055,15 +1055,11 @@ import classes.internals.SaveableState;
 				for (var i: int = 0; i  < totVag; i++) {
 					addButton(i, "Vagina "+(i+1), accessVaginaMenu, 0, i).hint( player.vaginaDescript(i));
 				}
-				const vaginaUnlocked:Boolean = GeneticMemoryStorage[VaginaCountMem.Memories[totVag].id] && true;
-				addButtonIfTrue(totVag, "New Vagina", curry(accessVaginaMenu, 0, totVag), "You need to get a vagina first", vaginaUnlocked, "Add a vagina");
+				if (totVag < 2) {
+					const vaginaUnlocked:Boolean = GeneticMemoryStorage[VaginaCountMem.Memories[totVag].id] && true;
+					addButtonIfTrue(totVag, "New Vagina", curry(accessVaginaMenu, 0, totVag), "You need to get a vagina first", vaginaUnlocked, "Add a vagina");
+				}
 
-				addButton(14, "Back", accessMetamorphMenu);
-			}
-			else {
-				clearOutput();
-				outputText(title);
-				outputText("You need to unlock a vagina first!");
 				addButton(14, "Back", accessMetamorphMenu);
 			}
 		}
@@ -1074,16 +1070,15 @@ import classes.internals.SaveableState;
 			clearOutput();
 			outputText(title);
 
-			const vaginaDesc: String = CoC.instance.playerAppearance.describePussy(0);
+			const vaginaDesc: String = CoC.instance.playerAppearance.describePussy(vagina);
 			outputText(player.hasVagina() ?  vaginaDesc : "You have no vagina.");
 			outputText("[pg]Perhaps you'd like to change this?");
 
-			openPaginatedMenu(title, accessVaginaMenu, currentPage, VaginaMem.Memories, 0);
+			openPaginatedMenu(title, accessVaginaMenu, currentPage, VaginaMem.Memories, vagina);
 		}
 
 		private function openPaginatedMenu (title: String, thisMenu: *, currentPage: int, memArray:Array, index:int = -9000): void {
 			menu();
-
 
 			memArray = memArray.filter(function(element: *, index: int, array: Array): Boolean {
 				if (element && element.id !== "Taur Lower Body") {

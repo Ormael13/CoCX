@@ -2402,7 +2402,7 @@ import flash.utils.getQualifiedClassName;
 			lustDelta = Math.round(lustDelta * 10)/10;
 			outputText(" <b>([font-lust]" + lustDelta + "</font>)</b>");
 			if (player.armor == armors.ELFDRES && flags[kFLAGS.COMBAT_TEASE_HEALING] == 0) {
-				outputText("\nYou cool down a little bit");
+				outputText(" You cool down a little bit ");
 				player.takeLustDamage(Math.round(-lustDelta)/20);
 			}
 		}
@@ -3133,9 +3133,9 @@ import flash.utils.getQualifiedClassName;
 				if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store16a += .2;
 				store16 *= store16a;
 				store16 += maxHP()*0.05;
-				store16 = Math.round(store16);
+				store16 = boundInt(1, store16, maxHP()/20);
 				store16 = SceneLib.combat.doDamage(store16);
-				if(plural) outputText("[Themonster] bleed profusely from the deep wounds your vine thorns left behind. ");
+				if(plural) outputText("[Themonster] bleeds profusely from the deep wounds your vine thorns left behind. ");
 				else outputText("[Themonster] bleeds profusely from the deep wounds your vine thorns left behind. ");
 				SceneLib.combat.CommasForDigits(store16);
 				outputText("[pg]");
@@ -3147,12 +3147,13 @@ import flash.utils.getQualifiedClassName;
 				if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store16a += .2;
 				store16 *= store16a;
 				store16 += maxHP()*0.02;
-				store16 = Math.round(store16);
+				store16 = boundInt(1, store16, maxHP()/20);
 				store16 = SceneLib.combat.doDamage(store16);
-				if(plural) outputText("[Themonster] bleed profusely from the deep wounds your rose thorns left behind. ");
+				if(plural) outputText("[Themonster] bleeds profusely from the deep wounds your rose thorns left behind. ");
 				else outputText("[Themonster] bleeds profusely from the deep wounds your rose thorns left behind. ");
 				SceneLib.combat.CommasForDigits(store16);
 				outputText("[pg]");
+				removeStatusEffect(StatusEffects.Rosethorn);
 			}
 			if (hasStatusEffect(StatusEffects.DeathBlossom)) {
 				if (statusEffectv1(StatusEffects.DeathBlossom) <= 0) {
