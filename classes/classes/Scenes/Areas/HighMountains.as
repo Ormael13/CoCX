@@ -11,6 +11,7 @@ import classes.Scenes.Dungeons.DemonLab;
 import classes.Scenes.Dungeons.DemonLab.ProjectNightwalker;
 import classes.Scenes.Holidays;
 import classes.Scenes.Monsters.DarkElfScene;
+import classes.Scenes.NPCs.EtnaFollower;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
@@ -35,7 +36,7 @@ public class HighMountains extends BaseContent {
         _highMountainsEncounter = Encounters.group("highmountains", {
             name: "d3",
             when: function ():Boolean {
-                return flags[kFLAGS.D3_DISCOVERED] == 0 && player.hasKeyItem("Zetaz's Map") >= 0 && rand(5) == 0;
+                return flags[kFLAGS.D3_DISCOVERED] == 0 && player.hasKeyItem("Map to the Lethice’s Fortress") >= 0;
             },
             call: SceneLib.d3.discoverD3
         }, {
@@ -58,7 +59,7 @@ public class HighMountains extends BaseContent {
         }, {
             name: "etna",
             when: function ():Boolean {
-                return flags[kFLAGS.ETNA_FOLLOWER] < 1
+                return (flags[kFLAGS.ETNA_FOLLOWER] < 1 || EtnaFollower.EtnaInfidelity == 2)
                     && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2
                     && !player.hasStatusEffect(StatusEffects.EtnaOff)
                     && (player.level >= 20);

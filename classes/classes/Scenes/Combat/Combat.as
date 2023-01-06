@@ -3081,10 +3081,28 @@ public class Combat extends BaseContent {
                 heroBaneProc(damage);
             }
             cupidArrowsEffect();
-            if (flags[kFLAGS.ENVENOMED_BOLTS] == 1 && (player.tailVenom >= player.VenomWebCost() || (player.hasPerk(PerkLib.ELFThornShot) && player.isWoodElf()))) {
+            if ((flags[kFLAGS.ENVENOMED_BOLTS] == 1 && player.tailVenom >= player.VenomWebCost()) || (flags[kFLAGS.ELVEN_THORNSHOT_ENABLED] == 1 && player.isWoodElf() && player.mana >= 10)) {
                 outputText("  ");
                 if (monster.lustVuln == 0) {
                     outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.");
+                }
+                if (flags[kFLAGS.ELVEN_THORNSHOT_ENABLED] == 1 && player.isWoodElf() && player.mana >= 10) {
+                    player.mana -= 10;
+					var lustDMG:Number = 35 + rand(player.lib / 10);
+					if (player.hasPerk(PerkLib.VegetalAffinity)) lustDMG *= 1.5;
+					if (player.hasPerk(PerkLib.GreenMagic)) lustDMG *= 2;
+					if (player.hasStatusEffect(StatusEffects.GreenCovenant)) lustDMG *= 2;
+					if (player.armor == armors.ELFDRES && player.isElf()) lustDMG *= 2;
+					if (player.armor == armors.FMDRESS && player.isWoodElf()) lustDMG *= 2;
+					lustDMG = Math.round(monster.lustVuln * lustDMG);
+					monster.teased(lustDMG, false);
+					combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
+					if (player.hasPerk(PerkLib.VerdantLeech)) {
+						if (monster.lustVuln != 0 && !monster.hasPerk(PerkLib.EnemyTrueAngel)) monster.lustVuln += 0.01;
+						HPChange(Math.round(player.maxHP() * 0.05), false);
+					}
+					if (monster.hasStatusEffect(StatusEffects.Rosethorn) && monster.statusEffectv1(StatusEffects.Rosethorn) < 6) monster.addStatusValue(StatusEffects.Rosethorn, 1, 1)
+					else monster.createStatusEffect(StatusEffects.Rosethorn, 6, 0, 0, 0);
                 }
                 if (player.tailType == Tail.BEE_ABDOMEN) {
                     outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
@@ -3153,9 +3171,6 @@ public class Combat extends BaseContent {
                     } else monster.createStatusEffect(StatusEffects.ManticoreVenom, 0, 0, DBPaa, 0);
                     player.tailVenom -= player.VenomWebCost();
 					flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
-                }
-                if (player.hasPerk(PerkLib.ELFThornShot) && player.isWoodElf() ) {
-                    CombatAbilities.Rosethorn.doEffect();
                 }
                 if (player.faceType == Face.SNAKE_FANGS) {
                     outputText("  [monster he] seems to be effected by the poison, its movements slowing down.");
@@ -3432,6 +3447,62 @@ public class Combat extends BaseContent {
             player.setPerkValue(PerkLib.BowShooting, 1, 80);
         }
     }
+	
+	public function doThrowPierceDamage(damage:Number):void {
+		doThrowDamage(damage);
+		if (player.hasPerk(PerkLib.PenetratingThrow) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType))) {
+			if (rand(4) > 0) {
+				doThrowDamage(Math.round(damage * 0.9));
+				if (rand(4) > 0) {
+					doThrowDamage(Math.round(damage * 0.8));
+					if (rand(4) > 0) {
+						doThrowDamage(Math.round(damage * 0.7));
+						if (rand(4) > 0) {
+							doThrowDamage(Math.round(damage * 0.6));
+							if (monster.hasPerk(PerkLib.EnemyLargeGroupType) && rand(4) > 0) {
+								doThrowDamage(Math.round(damage * 0.5));
+								if (rand(4) > 0) {
+									doThrowDamage(Math.round(damage * 0.4));
+									if (rand(4) > 0) {
+										doThrowDamage(Math.round(damage * 0.3));
+										if (rand(4) > 0) {
+											doThrowDamage(Math.round(damage * 0.2));
+											if (rand(4) > 0) doThrowDamage(Math.round(damage * 0.1));
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	public function doThrowDamage(damage:Number):void {
+		if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
+			if (player.weaponRange == weaponsrange.RTKNIFE) {
+				damage = Math.round(damage * fireDamageBoostedByDao());
+				doFireDamage(damage, true, true);
+			}
+			else if (player.weaponRange == weaponsrange.STKNIFE) {
+				damage = Math.round(damage * iceDamageBoostedByDao());
+				doIceDamage(damage, true, true);
+			}
+			else if (player.weaponRange == weaponsrange.TTKNIFE) {
+				damage = Math.round(damage * lightningDamageBoostedByDao());
+				doLightingDamage(damage, true, true);
+			}
+			else if (player.weaponRange == weaponsrange.ATKNIFE) {
+				damage = Math.round(damage * darknessDamageBoostedByDao());
+				doDarknessDamage(damage, true, true);
+			}
+			else {
+				doPhysicalDamage(damage, true, true);
+				doMagicDamage(Math.round(damage * 0.2), true, true);
+			}
+		}
+		else doPhysicalDamage(damage, true, true);
+	}
 
     /**
      * Elemental range attack from Elemental Body or Moonlight Greatsword
@@ -3541,6 +3612,10 @@ public class Combat extends BaseContent {
 			if (crit) outputText(" <b>*Critical Hit!*</b>");
 			throwingXP(rangeMasteryEXPgained(crit));
 		}
+		if (player.hasPerk(PerkLib.ImpactThrow) && rand(10) == 0) {
+            outputText(" Attack leaves your opponent dazed!");
+            monster.createStatusEffect(StatusEffects.Stunned, 1,0,0,0);
+		}
 		WrathGenerationPerHit1(5);
         heroBaneProc(damage);
         if (monster.HP <= monster.minHP()) {
@@ -3629,28 +3704,8 @@ public class Combat extends BaseContent {
                     else if (monster.plural)
                         outputText(" Your opponents staggers, collapsing onto each other from the wounds you've inflicted on [monster him]. ");
                     else outputText(" Your opponent staggers, collapsing from the wounds you've inflicted on [monster him]. ");
-                    if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
-						if (player.weaponRange == weaponsrange.RTKNIFE) {
-							damage = Math.round(damage * fireDamageBoostedByDao());
-							doFireDamage(damage, true, true);
-						}
-						else if (player.weaponRange == weaponsrange.STKNIFE) {
-							damage = Math.round(damage * iceDamageBoostedByDao());
-							doIceDamage(damage, true, true);
-						}
-						else if (player.weaponRange == weaponsrange.TTKNIFE) {
-							damage = Math.round(damage * lightningDamageBoostedByDao());
-							doLightingDamage(damage, true, true);
-						}
-						else if (player.weaponRange == weaponsrange.ATKNIFE) {
-							damage = Math.round(damage * darknessDamageBoostedByDao());
-							doDarknessDamage(damage, true, true);
-						}
-						else doPhysicalDamage(damage, true, true);
-						doMagicDamage(Math.round(damage * 0.2), true, true);
-					}
-					else doPhysicalDamage(damage, true, true);
-                    if (crit)  outputText(" <b>*One or more of the projectile did a Critical Hit!*</b>");
+                    doThrowPierceDamage(damage);
+                    if (crit) outputText(" <b>*One or more of the projectile did a Critical Hit!*</b>");
                     throwingXP(rangeMasteryEXPgained(crit));
                     outputText("\n\n");
 					WeaponRangeStatusProcs();
@@ -3659,27 +3714,7 @@ public class Combat extends BaseContent {
                 } else {
                     if (!MSGControll) {
                         outputText(" ");
-                        if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
-							if (player.weaponRange == weaponsrange.RTKNIFE) {
-								damage = Math.round(damage * fireDamageBoostedByDao());
-								doFireDamage(damage, true, true);
-							}
-							else if (player.weaponRange == weaponsrange.STKNIFE) {
-								damage = Math.round(damage * iceDamageBoostedByDao());
-								doIceDamage(damage, true, true);
-							}
-							else if (player.weaponRange == weaponsrange.TTKNIFE) {
-								damage = Math.round(damage * lightningDamageBoostedByDao());
-								doLightingDamage(damage, true, true);
-							}
-							else if (player.weaponRange == weaponsrange.ATKNIFE) {
-								damage = Math.round(damage * darknessDamageBoostedByDao());
-								doDarknessDamage(damage, true, true);
-							}
-							else doPhysicalDamage(damage, true, true);
-							doMagicDamage(Math.round(damage * 0.2), true, true);
-						}
-						else doPhysicalDamage(damage, true, true);
+						doThrowPierceDamage(damage);
                         throwingXP(rangeMasteryEXPgained(crit));
                     }
                     if (crit) hasCritAtLeastOnce = true;
@@ -3801,7 +3836,6 @@ public class Combat extends BaseContent {
             damage *= player.jewelryRangeModifier();
             damage = statusEffectBonusDamage(damage);
             damage *= rangePhysicalForce();
-
             //Determine if critical hit!
             var crit:Boolean;
             var critChance:Number = calculateCritRange();
@@ -3817,27 +3851,7 @@ public class Combat extends BaseContent {
                 else if (monster.plural)
                     outputText(" and [monster he] stagger, collapsing onto each other from the wounds you've inflicted on [monster him]. ");
                 else outputText(" and [monster he] staggers, collapsing from the wounds you've inflicted on [monster him]. ");
-                if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
-					if (player.weaponRange == weaponsrange.RTKNIFE) {
-						damage = Math.round(damage * fireDamageBoostedByDao());
-						doFireDamage(damage, true, true);
-					}
-					else if (player.weaponRange == weaponsrange.STKNIFE) {
-						damage = Math.round(damage * iceDamageBoostedByDao());
-						doIceDamage(damage, true, true);
-					}
-					else if (player.weaponRange == weaponsrange.TTKNIFE) {
-						damage = Math.round(damage * lightningDamageBoostedByDao());
-						doLightingDamage(damage, true, true);
-					}
-					else if (player.weaponRange == weaponsrange.ATKNIFE) {
-						damage = Math.round(damage * darknessDamageBoostedByDao());
-						doDarknessDamage(damage, true, true);
-					}
-					else doPhysicalDamage(damage, true, true);
-                    doMagicDamage(Math.round(damage * 0.2), true, true);
-				}
-				else doPhysicalDamage(damage, true, true);
+                doThrowPierceDamage(damage);
                 if (crit) outputText(" <b>*Critical Hit!*</b>");
 				throwingXP(rangeMasteryEXPgained(crit));
                 outputText("\n\n");
@@ -3846,27 +3860,7 @@ public class Combat extends BaseContent {
             } else {
                 if (!MSGControll) {
                     outputText(".  It's clearly very painful. ");
-                    if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
-						if (player.weaponRange == weaponsrange.RTKNIFE) {
-							damage = Math.round(damage * fireDamageBoostedByDao());
-							doFireDamage(damage, true, true);
-						}
-						else if (player.weaponRange == weaponsrange.STKNIFE) {
-							damage = Math.round(damage * iceDamageBoostedByDao());
-							doIceDamage(damage, true, true);
-						}
-						else if (player.weaponRange == weaponsrange.TTKNIFE) {
-							damage = Math.round(damage * lightningDamageBoostedByDao());
-							doLightingDamage(damage, true, true);
-						}
-						else if (player.weaponRange == weaponsrange.ATKNIFE) {
-							damage = Math.round(damage * darknessDamageBoostedByDao());
-							doDarknessDamage(damage, true, true);
-						}
-						else doPhysicalDamage(damage, true, true);
-						doMagicDamage(Math.round(damage * 0.2), true, true);
-					}
-					else doPhysicalDamage(damage, true, true);
+                    doThrowPierceDamage(damage);
 					throwingXP(rangeMasteryEXPgained(crit));
                 }
                 if (crit) outputText(" <b>*Critical Hit!*</b>");
@@ -5440,6 +5434,7 @@ public class Combat extends BaseContent {
         }
         if (player.isSpearTypeWeapon() && player.hasPerk(PerkLib.ElvenRangerArmor)) damage *= 1.5;
         if ((player.weapon == weapons.S_RULER) && (monster.hasPerk(PerkLib.EnemyHugeType) || monster.hasPerk(PerkLib.EnemyGigantType) || monster.hasPerk(PerkLib.EnemyColossalType))) damage *= 1.5;
+		if (monster.hasStatusEffect(StatusEffects.Stunned) && player.isMaceHammerTypeWeapon() && player.hasPerk(PerkLib.Backbreaker)) damage *= 1.5;
         // Mastery bonus damage
 		damage *= MasteryBonusDamageMelee(true);
 		//Thunderous Strikes
@@ -7197,6 +7192,10 @@ public class Combat extends BaseContent {
 
     public function WeaponRangeStatusProcs():void {
 		if (player.hasStatusEffect(StatusEffects.LifestealEnchantment) && !monster.hasPerk(PerkLib.EnemyConstructType)) HPChange(Math.round(player.maxHP() * 0.01), false);
+		if (player.weaponRangePerk == "Throwing" && player.hasPerk(PerkLib.ImpactThrow) && rand(10) == 0) {
+            outputText("Attack leaves your opponent dazed!\n\n");
+            monster.createStatusEffect(StatusEffects.Stunned, 1,0,0,0);
+		}
     }
 
     public function WeaponFlyingSwordsStatusProcs():void {
@@ -9961,6 +9960,14 @@ public class Combat extends BaseContent {
                 player.removeStatusEffect(StatusEffects.CooldownPhoenixFireBreath);
             } else {
                 player.addStatusValue(StatusEffects.CooldownPhoenixFireBreath, 1, -1);
+            }
+        }
+        //Green Covenant
+        if (player.hasStatusEffect(StatusEffects.CooldownGreenCovenant)) {
+            if (player.statusEffectv1(StatusEffects.CooldownGreenCovenant) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownGreenCovenant);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownGreenCovenant, 1, -1);
             }
         }
         //Hydra Acid Breath
@@ -15348,15 +15355,14 @@ public function rangePhysicalForce():Number {
     if (player.hasPerk(PerkLib.ColdAim)) mod += .1;
     if (player.hasPerk(PerkLib.DeadlyThrow)) mod += .1;
     if (player.hasPerk(PerkLib.PracticedShot)) mod += .1;
-    if (player.hasPerk(PerkLib.TaintedMagazine)) mod += .05;
     if (player.hasPerk(PerkLib.AnatomyExpert)) mod += .15;
     if (player.hasPerk(PerkLib.EagleEye)) mod += .15;
     if (player.hasPerk(PerkLib.PowerShotEx)) mod += .15;
-    if (player.hasPerk(PerkLib.SilverForMonsters)) mod += .075;
-    if (player.hasPerk(PerkLib.NamedBullet)) mod += .1;//152,5% up to here
+	if (player.hasPerk(PerkLib.ImpactThrow)) mod += .15;
+	if (player.hasPerk(PerkLib.PenetratingThrow)) mod += .2;//165% up to here
     if (player.hasPerk(PerkLib.PrestigeJobArcaneArcher)) mod += .4;
     if (player.hasPerk(PerkLib.ElementalArrows)) mod += .2;
-    if (player.hasPerk(PerkLib.Cupid)) mod += .2;//232,5% up to here
+    if (player.hasPerk(PerkLib.Cupid)) mod += .2;//245% up to here
 	if (player.hasPerk(PerkLib.RangeWeaponsAttackMultiplier)) mod += .05;
 	if (player.hasPerk(PerkLib.RangeWeaponsAttackMultiplier)) {
 		if (player.hasPerk(PerkLib.SkilledRangerEx)) {
@@ -15381,9 +15387,9 @@ public function firearmsForce():Number {
     if (player.hasPerk(PerkLib.AlchemicalCartridge)) mod += .05;
     if (player.hasPerk(PerkLib.ChurchOfTheGun)) mod += .1;
     if (player.hasPerk(PerkLib.ExplosiveCartridge)) mod += .1;
-    if (player.hasPerk(PerkLib.TaintedMagazine)) mod += .05;
-    if (player.hasPerk(PerkLib.SilverForMonsters)) mod += .075;
-    if (player.hasPerk(PerkLib.NamedBullet)) mod += .1;//82,5% up to here
+    if (player.hasPerk(PerkLib.TaintedMagazine)) mod += .1;
+    if (player.hasPerk(PerkLib.SilverForMonsters)) mod += .15;
+    if (player.hasPerk(PerkLib.NamedBullet)) mod += .2;//100% up to here
 	if (player.hasPerk(PerkLib.FirearmsAttackMultiplier)) {
 		mod += .1;
 		if (player.hasPerk(PerkLib.SkilledGunslingerEx)) {
@@ -15872,4 +15878,4 @@ private function touSpeStrScale(stat:int):Number {
         return damage;
     }
 }
-}
+}

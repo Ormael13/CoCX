@@ -140,6 +140,8 @@ public class SceneLib {
 
     public static var etnaScene:EtnaFollower = new EtnaFollower();
 
+    public static var etnaDaughterScene:EtnaDaughterScene = new EtnaDaughterScene();
+
     public static var evangelineFollower:EvangelineFollower = new EvangelineFollower();
 
     public static var excelliaFollower:ExcelliaFollower = new ExcelliaFollower();

@@ -2341,7 +2341,6 @@ public function loppeKnockupAttempt(isplayer:Boolean = false):void {
 }
 private function get canGetPreg():Boolean {
 	var kids:int = flags[kFLAGS.LOPPE_KIDS];
-	var limit:Number = flags[kFLAGS.LOPPE_KIDS_LIMIT];
 	if (pregnancy.isPregnant) kids += 2;
 	if (player.isPregnant() && player.pregnancyType == PregnancyStore.PREGNANCY_LOPPE) kids += 2;
 	return kids < flags[kFLAGS.LOPPE_KIDS_LIMIT];
@@ -2404,8 +2403,8 @@ private function loppePregMenu():void {
 	addButton(0,"Appearance",appearanceOfLoppe);
 	addButton(1,"Talk",talkWithLoppe);
 	addButton(2,"Sex",loppePreggoSexChoice)
-			.hint("Scenes not yet written but placeholders to give ideas. Please contribute if you can");
-	 addButton(3, "Conrtraception", toggleContraception).hint("Currently: "+(flags[kFLAGS.LOPPE_FERTILE] == 1?"Off":"On"), "Contraceptives");
+			.disable("Scenes not yet written but placeholders to give ideas. Please contribute if you can");
+	 addButton(3, "Contraception", toggleContraception).hint("Currently: "+(flags[kFLAGS.LOPPE_FERTILE] == 1?"Off":"On"), "Contraceptives");
 	addButton(4,"Leave",telAdre.telAdreMenu);
 	//Leave (Return to Tel'Adre menu)
 }
@@ -2524,7 +2523,7 @@ public function pcGivesBirthToLoppeKits():void {
 		outputText("You nod and follow Loppe into the house, and from there to the empty room that has since been converted into a nursery. <b>(Need to add description)</b>  Your "+flags[kFLAGS.LOPPE_KIDS]+" older daughters are already busy playing, despite the early hour of the day, and they look up with childish amazement as you enter, hop-crawling over in a manner that reminds you of real bunnies getting around to get a good look at their new playmates.  They need little instructions to be gentle, and are soon happily playing simple games while their youngest siblings watch on, already absorbing things.  Loppe beams at you with pride, clearly very proud of herself for being responsible for creating such youngsters.  You kiss her lips, whereupon she sneaks a groping caress of your [ass], and politely excuse yourself; you have demons to fight, after all.[pg]");
 	}
 	flags[kFLAGS.LOPPE_KIDS] += 2;
-	outputText("TODO SET TIME TO 7AM");	//TODO
+	camp.cheatSleepUntilMorning();
 	doNext(camp.returnToCampUseOneHour);
 }
 }

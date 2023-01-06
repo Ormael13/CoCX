@@ -29,6 +29,7 @@ public class SaveUpdater extends NPCAwareContent {
 		var dungeonsList:Array = [
 			SceneLib.dungeons.checkFactoryClear(),
 			SceneLib.dungeons.checkDeepCaveClear(),
+			SceneLib.dungeons.checkDemonLaboratoryClear(),
 			SceneLib.dungeons.checkLethiceStrongholdClear(),
 			SceneLib.dungeons.checkSandCaveClear(),
 			SceneLib.dungeons.checkPhoenixTowerClear(),
@@ -98,6 +99,7 @@ public class SaveUpdater extends NPCAwareContent {
 			["Newcomer", kACHIEVEMENTS.STORY_NEWCOMER, true],
 			["Marae's Savior", kACHIEVEMENTS.STORY_MARAE_SAVIOR, flags[kFLAGS.MARAE_QUEST_COMPLETE] > 0],
 			["Revenge at Last", kACHIEVEMENTS.STORY_ZETAZ_REVENGE, player.hasKeyItem("Zetaz's Map") >= 0],
+			["Chimera Squad", kACHIEVEMENTS.STORY_CHIMERA_SQUAD, player.hasKeyItem("Map to the Lethice’s Fortress") >= 0],
 			["Demon Slayer", kACHIEVEMENTS.STORY_FINALBOSS, flags[kFLAGS.LETHICE_DEFEATED] > 0],
 			//Zones
 			["Explorer", kACHIEVEMENTS.ZONE_EXPLORER, player.exploredForest > 0 && player.exploredLake > 0 && player.exploredDesert > 0 && player.exploredMountain > 0 && flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 0 && flags[kFLAGS.TIMES_EXPLORED_SWAMP] > 0 && flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] > 0 && flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] > 0 && flags[kFLAGS.DISCOVERED_CAVES] > 0 && player.hasStatusEffect(StatusEffects.ExploredDeepwoods) && flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] > 0 && flags[kFLAGS.BOG_EXPLORED] > 0 && flags[kFLAGS.DISCOVERED_TUNDRA] > 0 && flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] > 0 && flags[kFLAGS.DISCOVERED_ASHLANDS] > 0 && flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] > 0],
@@ -1953,6 +1955,18 @@ public class SaveUpdater extends NPCAwareContent {
 				if (flags[kFLAGS.MINERVA_LVL_UP] > 1) flags[kFLAGS.MINERVA_LVL_UP] -= 2;
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.038;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.039) {
+				if (flags[kFLAGS.LOPPE_KIDS_LIMIT] == 0) flags[kFLAGS.LOPPE_KIDS_LIMIT] = 8;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.039;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.040) {
+				if (flags[kFLAGS.LETHICE_DEFEATED] == 2) {
+					player.perkPoints += 2;
+					player.statPoints += 10;
+					statScreenRefresh();
+				}
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.040;
+			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
 		}
@@ -2090,4 +2104,4 @@ public class SaveUpdater extends NPCAwareContent {
 		}
 	}
 }
-}
+}

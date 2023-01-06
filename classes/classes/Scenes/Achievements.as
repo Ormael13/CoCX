@@ -43,10 +43,11 @@ public class Achievements extends BaseContent
 			achievementsShadowEarned = 0;
 			achievementsTotalCurrentlyUnlocked = 0;
 			achievementsTotal = 0;
-			titleAchievementSection("Storyline"); //4 achievements
+			titleAchievementSection("Storyline"); //5 achievements
 			addAchievement("Newcomer", kACHIEVEMENTS.STORY_NEWCOMER, "Enter the realm of Mareth.");
 			addAchievement("Marae's Savior", kACHIEVEMENTS.STORY_MARAE_SAVIOR, "Complete Marae's quest.");
 			addAchievement("Revenge at Last", kACHIEVEMENTS.STORY_ZETAZ_REVENGE, "Defeat Zetaz and obtain the map.");
+			addAchievement("Chimera Squad", kACHIEVEMENTS.STORY_CHIMERA_SQUAD, "Clean up demons secret laboratory.");
 			addAchievement("Demon Slayer", kACHIEVEMENTS.STORY_FINALBOSS, "Defeat Lethice.");
 
 			titleAchievementSection("Zones"); //26 achievements
