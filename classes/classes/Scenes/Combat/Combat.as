@@ -3150,14 +3150,14 @@ public class Combat extends BaseContent {
                     player.tailVenom -= player.VenomWebCost();
 					flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
                 }
-                if (flags[kFLAGS.ELVEN_THORNSHOT_ENABLED] == 1 && player.hasPerk(PerkLib.ELFThornShot) && player.isWoodElf() && player.mana >= 10) {
+                if (player.hasPerk(PerkLib.ELFThornShot) && player.isWoodElf() && player.mana >= 10) {
                     player.mana -= 10;
                     if (!MSGControll) outputText("  You concentrate on the arrow shaft causing it to grow vicious thorns that tear through your opponent's flesh, delivering poison.");
                     monster.createOrAddStatusEffect(StatusEffects.Rosethorn, 1, 1);
                     if (monster.lustVuln == 0) {
                         outputText("\nIt has no effect!  Your foe clearly does not experience lust in the same way as you.\n");
                     } else {
-                        var baseDamage:Number = (combat.teases.teaseBaseLustDamage() * spellModWhite());
+                        var baseDamage:Number = (combat.teases.teaseBaseLustDamage() / 10 * spellModWhite());
                         if (player.hasPerk(PerkLib.VegetalAffinity)) baseDamage *= 1.5;
                         if (player.hasPerk(PerkLib.GreenMagic)) baseDamage *= 2;
                         if (player.hasStatusEffect(StatusEffects.GreenCovenant)) baseDamage *= 2;

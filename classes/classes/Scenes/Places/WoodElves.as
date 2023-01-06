@@ -1538,4 +1538,4 @@ package classes.Scenes.Places{
 			doNext(camp.returnToCampUseOneHour);
 		}
 	}
-}
+}

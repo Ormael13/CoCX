@@ -3151,7 +3151,7 @@ import flash.utils.getQualifiedClassName;
 					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store17a += .08;
 					store17 *= store17a;
 					store17 += maxHP()*0.01;
-					store17 = boundInt(1, store17, maxHP()/20);
+					store17 = boundInt(1, store17, maxHP()*.05);
 					store17 = SceneLib.combat.doDamage(store17);
 					if(plural) outputText("[Themonster] bleed profusely from the deep wounds your rose thorns left behind. ");
 					else outputText("[Themonster] bleeds profusely from the deep wounds your rose thorns left behind. ");

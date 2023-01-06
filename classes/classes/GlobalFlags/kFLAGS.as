@@ -2803,7 +2803,7 @@ public static const UNKNOWN_FLAG_NUMBER_02794:int                               
 public static const UNKNOWN_FLAG_NUMBER_02795:int                                   = 2795;
 public static const UNKNOWN_FLAG_NUMBER_02796:int                                   = 2796;
 public static const UNKNOWN_FLAG_NUMBER_02797:int                                   = 2797;
-public static const ELVEN_THORNSHOT_ENABLED:int                                   	= 2798;
+public static const UNKNOWN_FLAG_NUMBER_02798:int                                   = 2798;
 public static const ELVEN_TWINSHOT_ENABLED:int                                   	= 2799;
 public static const LUNA_TRIED_WORKING_AS_BARMAID:int								= 2800; // if the player didn't hire Luna at first, they suggest she try working at the Wet Bitch. If so, the player can ask Aunt Nancy how *that* went to read a funny scene
 public static const SOUL_SENSE_MINOTAUR_SONS:int                                    = 2801;

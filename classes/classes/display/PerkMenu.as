@@ -360,11 +360,6 @@ public class PerkMenu extends BaseContent {
 		outputText("You will always shoot " + NUMBER_WORDS_NORMAL[currentProj + 1] + " projectiles."
 			+ "\nYou can change it to a different amount of projectiles.");
 		bd.add("MultiShot", pickMultishot).hint("Change your amount of projectiles.");
-		if (player.hasPerk(PerkLib.ELFThornShot)) {
-			outputText("\n\nAs a Wood Elf you can grow Rose thorns on your shafts, inducing a lust poison and bleed effect. (Works only with bows and crosbows)"
-				+ "\nThorn shot active: <b>" + (flags[kFLAGS.ELVEN_THORNSHOT_ENABLED] ? "Yes" : "No") + "</b>");
-			bd.add("Thorn shot", curry(toggleFlagRanged, kFLAGS.ELVEN_THORNSHOT_ENABLED));
-		}
 		if (player.hasPerk(PerkLib.ELFTwinShot)) {
 			outputText("\n\nThanks to your elven training, you can shoot twice as many arrows as normal (Works only with bows)"
 					+ "\nTwin shot active: <b>" + (flags[kFLAGS.ELVEN_TWINSHOT_ENABLED] ? "Yes" : "No") + "</b>");
