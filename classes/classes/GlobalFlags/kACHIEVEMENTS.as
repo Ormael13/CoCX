@@ -9,7 +9,7 @@ package classes.GlobalFlags
 		public static const STORY_MARAE_SAVIOR:int				=   1; //Complete Marae’s quest.
 		public static const STORY_ZETAZ_REVENGE:int				=   2; //Defeat Zetaz and obtain the map.
 		public static const STORY_FINALBOSS:int					=   3; //Defeat Lethice.
-		public static const UNKNOWN_ACHIEVEMENT_004:int			=   4;
+		public static const STORY_CHIMERA_SQUAD:int				=   4; //Clean up demons secret laboratory.
 		public static const UNKNOWN_ACHIEVEMENT_005:int			=   5;
 		public static const UNKNOWN_ACHIEVEMENT_006:int			=   6;
 		public static const UNKNOWN_ACHIEVEMENT_007:int			=   7;

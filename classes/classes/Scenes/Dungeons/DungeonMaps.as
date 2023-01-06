@@ -542,7 +542,7 @@ public class DungeonMaps extends DungeonAbstractContent
 					'i': DUNGEON_LAB_PANIC_ROOM
 				},
 				function():Object { return {
-					'K': dungeons.demonLab.hasKeycard() ? "|": "L",
+					'K': dungeons.demonLab.hasKeycard() ? "—": "L",
 					'L': dungeons.demonLab.canEnterPanic() ? "|": "L"
 				}; }
 			),

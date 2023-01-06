@@ -106,15 +106,12 @@ public class TempleOfTheDivine extends BaseContent {
 				else addButtonDisabled(1, "Taoth", "You haven't restored this altair yet.");
 				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FERA] == 1 && !player.hasStatusEffect(StatusEffects.BlessingOfDivineFera)) addButton(2, "Fera", PlayerPrayAtTempleFeraAltair).hint("Pray the fallen goddess Fera for an increase to your innuendo and resilience to desire.");
 				else addButtonDisabled(2, "Fera", "You haven't restored this altair yet.");
-				addButtonDisabled(3, "E.e.ie.", "You haven't restored this altair yet.");
+				//addButtonDisabled(3, "E.e.ie.", "You haven't restored this altair yet.");
 				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FENRIR] == 1 && !player.statStore.hasBuff("FenrirBlessing")) addButton(4, "Fenrir", PlayerPrayAtTempleFenrirAltair).hint("Pray to the god sharing your body for an increase to your might.");
-				else addButtonDisabled(4, "Fenrir", "You haven't restored this altair yet.");
-				//FUCK, STOP WRITING NYI OPTIONS, IT'S MISLEADING
-				/*
-				addButtonDisabled(5, "???", "You not yet restored this altair.");//life godess
+				else addButtonDisabled(4, "Fenrir", "You haven't restored this altair yet.");//FUCK, STOP WRITING NYI OPTIONS, IT'S MISLEADING
+				/*addButtonDisabled(5, "???", "You not yet restored this altair.");//life godess
 				addButtonDisabled(6, "Krat..", "You not yet restored this altair.");
-				addButtonDisabled(7, "???", "You not yet restored this altair.");//magic god
-				*/
+				addButtonDisabled(7, "???", "You not yet restored this altair.");*///magic god
 				//Remove curses
 				if (anyOfAltairsRepaired() && player.gems >= 5000) addButton(13, "Remove Curses", PlayerRemoveCurses).hint("Make a donation to a divinity in order to be freed of all curses or hexes.");
 				else if (!anyOfAltairsRepaired()) addButtonDisabled(13, "Remove Curses", "Without a functionning altar you cannot call upon divine power for deliverence.")
