@@ -34,7 +34,7 @@ public class HighMountains extends BaseContent {
         _highMountainsEncounter = Encounters.group("highmountains", {
             name: "d3",
             when: function ():Boolean {
-                return flags[kFLAGS.D3_DISCOVERED] == 0 && player.hasKeyItem("Zetaz's Map") >= 0 && rand(5) == 0;
+                return flags[kFLAGS.D3_DISCOVERED] == 0 && player.hasKeyItem("Map to the Lethice’s Fortress") >= 0;
             },
             call: SceneLib.d3.discoverD3
         }, {

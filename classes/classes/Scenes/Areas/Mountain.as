@@ -348,7 +348,13 @@ public class Mountain extends BaseContent
 				when: fn.ifLevelMin(3),
 				call: curry(SceneLib.mimicScene.mimicTentacleStart,2)
 			});
-			_mountainEncounter = Encounters.group("mountain", {/*
+			_mountainEncounter = Encounters.group("mountain", {
+				name: "demonlab",
+				when: function ():Boolean {
+					return flags[kFLAGS.DEMON_LABORATORY_DISCOVERED] == 0 && player.hasKeyItem("Zetaz's Map") >= 0;
+				},
+				call: SceneLib.dungeons.demonLab.discoverDemonLab
+			},{/*
 				//General Angels, Golems, Goblin and Imp Encounters
 				name: "common",
 				chance: 0.8,
