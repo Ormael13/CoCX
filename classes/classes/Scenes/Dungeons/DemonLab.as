@@ -144,7 +144,7 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
     }
 
     public function canEnterPanic():Boolean {
-        return FSpreaderState >= 2 && DridersState > 1 && NightwalkerLabstate == 2;
+        return FSpreaderState >= 2 && DridersState > 1 && NightwalkerLabstate >= 2;
     }
 
     //========================================================
@@ -221,7 +221,7 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
                 startCombat(new IncubusScientist());
             }
         } else {
-            dungeons.setDungeonButtons(Ballroom1, null, null, null);
+			dungeons.setDungeonButtons(Ballroom1, null, null, null);
             addButton(11, "Leave", LeaveDungeon);
         }
     }
@@ -355,8 +355,8 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
     }
 
     public function FSpreaderLab():void {
-
         clearOutput();
+		dungeonLoc = DUNGEON_LAB_FSPREADER;
         if (FSpreaderState == 0) {
             outputText("You open the flame-adorned door, a wave of sudden heat washing over you. You shrug off the increase in temperature, the light from the ballroom behind you giving way to a hot, bubbling red light coursing through the ceiling. You hear a click as you move forward, and you jump back as white-hot fire sears through the place you’d just been.\n\n");
             outputText("You cover your eyes with an arm, but even with your eyes half-closed, you can make out a half-dozen forms standing halfway down the narrow corridor. Another few bodies lie on the floor, but the heat-hazed air prevents you from seeing much further. You can make out blurs of motion, the sound of fire and the roars of combat, clashing steel and fangs. Flames course through the hallway behind them, casting dancing shadows through the corridor and the room beyond.\n\n");
@@ -373,7 +373,7 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
         }
         outputText("The smoke has cleared from this large series of rooms. The cages and shackles are now empty, but the entire place still holds heat. Most of the tables, books and other flammables have been reduced to ash, a thin layer of it covering the floor. A few drake’s flowers sit in the only unbroken pots, but they’re thin and warped, violet and black in colour.\n\n");
         dungeons.setDungeonButtons(null, null, null, Ballroom2);
-        if (!flags[kFLAGS.CODEX_ENTRY_FLAMESPREADER]) {
+        if (flags[kFLAGS.CODEX_ENTRY_FLAMESPREADER] == 0) {
             outputText("A single book sits, hardcover singed, but somehow not burnt. It looks like a diary of some kind. Maybe you’ll find some answers in it?\n\n");
             addButton(0, "Book", getFlameEntry);
         }
@@ -381,7 +381,7 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
         //====================
         function getFlameEntry():void {
             camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_FLAMESPREADER);
-            removeButton(0); //remove 'get codex' button
+            doNext(FSpreaderLab);
         }
     }
 
@@ -424,15 +424,15 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
         outputText("This room is small, barely lit by a single covered torch in a sconce along the back wall. Unlike the room you just came from, the walls, floor and ceiling are rough-hewn, like some poor saps had been forced to dig this place out with pickaxes.");
         dungeons.setDungeonButtons(null, null, Ballroom3, null);
         addButton(3, "UpStairs", NightwalkerStairs);
-        if (!flags[kFLAGS.CODEX_ENTRY_NIGHTWALKER]) {
-            outputText("\n\nThe room has a single table in the back, where a single, thick book sits.\n\n");
+        if (flags[kFLAGS.CODEX_ENTRY_NIGHTWALKER] == 0) {
+            outputText("\n\nThe room has a single table in the back, where a single, thick book sits.");
             addButton(0, "Book", getNightEntry);
         }
 
         //====================
         function getNightEntry():void {
             camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_NIGHTWALKER);
-            removeButton(0); //remove 'get codex' button
+            doNext(NightwalkerLab1);
         }
     }
 
@@ -540,10 +540,10 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
 
     public function TyrantLab1():void {
         clearOutput();
+		dungeonLoc = DUNGEON_LAB_TYRANT_1;
         if (TyrantLabEntry == 0) {
             outputText("You quickly see one of the demons who’d run, standing between you and a staircase leading down. A single plaque sits above the stairway, with two words written on it.\n\n");
             outputText("“<i>Project Tyrant.</i>” The lab coat-clad demon says simply. He’s scrawny, with a stained lab coat and crotchless pants that reveal smooth skin, unmarked by any genitals. “<i>Wait there, intruder(s). Or force your way down, it doesn’t matter.</i>”\n\n");
-
             if (TyrantFollower) {
                 TyrantLabEntry = 1;
                 outputText("Your giant spider ally steps forward, her fury obvious. “<i>You...Made more.</i>”\n\n");
@@ -567,7 +567,7 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
                 TyrantLabState = 1;
             }
             dungeons.setDungeonButtons(null, null, null, Ballroom1);
-            if (!flags[kFLAGS.CODEX_ENTRY_TYRANT]) {
+            if (flags[kFLAGS.CODEX_ENTRY_TYRANT] == 0) {
                 outputText("\n\nThere are a few tables, covered in various odds and ends. Some notes written in an oddly childlike scrawl, a few remains of lunches, even a few books that don’t seem to be of a pornographic nature.\n\n");
                 addButton(0, "Books", getTyrantEntry);
             }
@@ -578,7 +578,7 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
         function getTyrantEntry():void {
             camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_TYRANT);
             if (TyrantiaFollower.TyrantiaFollowerStage > 0) flags[kFLAGS.CODEX_ENTRY_TYRANT] = 2; //overriding default behavior, adding info to codex flag.
-            removeButton(0); //remove 'get codex' button
+            doNext(TyrantLab1);
         }
     }
 
@@ -586,7 +586,7 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
         TyrantLabEntry = 1;
         clearOutput();
         outputText("You raise your [weapon]. The demon in front of you takes a step back, eyes widening, but he scowls, pulling a small pistol from his pocket. He points it at you, and you raise your [weapon]. It’s a fight!");
-
+		startCombat(new IncubusScientist());
     }
 
     private function DemonGoPast():void {
@@ -597,7 +597,6 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
             + "The floor has fractured, and shards of stone litter the room. The demon must have set off some kind of explosive trap! Now injured, you stagger upright. That bastard!\n");
         player.takePhysDamage(player.maxHP() * 0.25);
         doNext(TyrantLab1);
-
     }
 
     public function TyrantPrison():void {
@@ -624,9 +623,10 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
         menu();
         addButton(2, "North", TyrantLab2);
         addButton(3, "UpStairs", TyrantLab1);
-        addButtonDisabled(12, "South", "No way South");
         addButtonDisabled(6, "West", "No way West");
         addButtonDisabled(8, "East", "No way East");
+        addButtonDisabled(12, "South", "No way South");
+		addButton(14, "Map", SceneLib.dungeons.map.displayMap).hint("View the map of this dungeon.");
     }
 
     public function TyrantLab2():void {
@@ -662,18 +662,22 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
     }
 
     public function CheckThePanicDoor():void {
-        clearOutput();
         if (FSpreaderState == 0) {
+			clearOutput();
             outputText("You look at the odd interface beside the door. The contraption is well beyond your understanding, but you know some kind of gemstone card unlocks it. Inside, a half-dozen demons of various description cower, guns of various descriptions pointed at the door. The door itself is made of solid black metal, and you see no way in. As you back away from the door, you can hear muffled sighs of relief coming from inside.\n\n");
             doNext(Ballroom3);
         }
         if (FSpreaderState == 1) {
-            outputText("You notice a curl of smoke coming from inside the panic room, and you inspect the blackened steel door. The scent of burning flesh comes from within, and through the thick glass, you can see a single demon, standing on a charred, black...something, hopping from foot to foot. Several other blackened, charred lumps litter the panic room, and as you watch, the floor, glowing cherry-red, sends curls of smoke up from the lumps. Said smoke fills the room, sending the last demon into a blind panic. He flies over to a control panel, typing something in.\n\n");
+            clearOutput();
+			outputText("You notice a curl of smoke coming from inside the panic room, and you inspect the blackened steel door. The scent of burning flesh comes from within, and through the thick glass, you can see a single demon, standing on a charred, black...something, hopping from foot to foot. Several other blackened, charred lumps litter the panic room, and as you watch, the floor, glowing cherry-red, sends curls of smoke up from the lumps. Said smoke fills the room, sending the last demon into a blind panic. He flies over to a control panel, typing something in.\n\n");
             outputText("The door opens, and he flies out, a waft of smoke following him, obscuring him slightly...not enough to avoid you. As he tries to flee, strangely stiff wings trying to flap, you pounce, dragging him down to the floor. Mere contact with the floor causes him to scream in agony, and you bring your [weapon] down, ending the life of the last demon scientist in the safe room. As you finish the job, you hear laughter from below. Apparently the dragons had a little fun with their fire-breathing, at the demon scientists’ expense. For now, however, the panic room is far too hot (and rank) to enter.\n\n");
             FSpreaderState = 2;
-        } else if (canEnterPanic()) PanicRoom();
-        else {
-            outputText("The panic room is still too hot to enter.");
+			doNext(Ballroom3);
+        }
+		else if (canEnterPanic()) PanicRoom();
+		else {
+            clearOutput();
+			outputText("The panic room is still too hot to enter.");
             doNext(Ballroom3);
         }
     }
@@ -683,7 +687,7 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
         clearOutput();
         outputText("You enter the panic room, and it’s relatively plain, almost like a small warehouse. Other than the singed demon corpses, the panic room has only two things of interest: A desk and high-tech panel, similar to the ones on the doors before, but far larger. If you had to guess, you think you’ve found the diseased heart of this lab. Maybe you can open the way out!\n\n");
         dungeons.setDungeonButtons(null, Ballroom3, null, null);
-        if (WayOutBlocked) addButton(0, "Console", Computer); //broken after unlocked
+        addButton(0, "Console", Computer).disableIf(!WayOutBlocked, "You destroyed that cursed thing.");
         addButton(1, "Desk,", Desk);
     }
 
@@ -695,7 +699,7 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
         addButton(0, "Security Folder", Readme);
         addButton(1, "Control Panel", CntrlAltDenied);
         addButton(2, "CAVEMAN!!!", WEHAVETECHNOLOGY);
-        addButton(3, "Leave", Ballroom3);
+        addButton(3, "Leave", PanicRoom);
     }
 
     public function Desk():void {
@@ -706,23 +710,21 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
             + "\n"
             + "<b>You’ve found a map to the Lethice’s Fortress!</b>");
         outputText("\n\n<b>(Key Item Acquired: Map to the Lethice’s Fortress!)</b>");
-        player.createKeyItem("Map to the Lethice’s Fortress",0,0,0,0);
-        addButton(3, "Back", Ballroom3);
+        player.createKeyItem("Map to the Lethice’s Fortress", 0, 0, 0, 0);
+		doNext(PanicRoom);
     }
 
     public function Readme():void {
         clearOutput();
         outputText("Using the odd device by your right hand, you open the folder titled 'Security Protocols'. To your shock, it opens up some kind of...Light Book on the screen. You begin to read...But your eyes quickly begin to glaze over, the dull, long-winded sentences almost putting you to sleep. You recoil from the cursed thing, closing it and returning to the original screen. Was this some kind of magical mental trap?!\n\n");
-        menu();
-        addButton(0, "Back", Computer);
+        doNext(PanicRoom);
     }
 
     public function CntrlAltDenied():void {
         clearOutput();
         outputText("You open the \"settings\" folder, quickly flicking through the options. Some, like \"Brightness\" confuse you, but upon investigation, it just makes the device glow brighter or softer. Another, \"Sound\" would seem useful, but nothing happens when you adjust it. And what on Mareth is this \"BlueTooth\"? What are these demons into?\n\n");
         outputText("Quickly frustrated, you realise you're getting nowhere with this infernal device!\n\n");
-        menu();
-        addButton(0, "Back", Computer);
+        doNext(PanicRoom);
     }
 
     public function WEHAVETECHNOLOGY():void {
@@ -730,8 +732,7 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
         outputText("Roaring in fury at this inane device, you grab the screen in your hands, ripping it away from the wall. You quickly realise it's connected to a black, boxlike structure under the desk, and you rip it from the wall, throwing it against a wall and stomping on the sparking pieces for good measure.\n\n");
         outputText("You don't know if that did anything even remotely productive, but damn, it felt good. At least you don't have to clean the bits up after!\n\n");
         WayOutBlocked = false;
-        menu();
-        addButton(0, "Leave", Ballroom3);
+        doNext(PanicRoom);
     }
 
 
@@ -798,9 +799,7 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
         outputText("Its eyes focus, and it rushes past you, eight legs skittering. Before you realise what’s going on, the creature’s running towards the cages, where the Driders were kept. You kick yourself into high gear, but as the hulking beast sees the first cage, ripping the bars off without any discernible effort, it stops, tilting its head, leaning into the cage.\n\n");
         outputText("The captive inside, an old female, pushes herself back against the wall, six eyes wide with fear. The creature that had been a drider sees the fear, letting out a groaning, confused sound. Tossing the door aside, sending the screech of steel on stone echoing up the corridor, it moves to the next cage, repeating the process. Without exception, the captives avoid its gaze, recoiling in fear.\n\n");
         outputText("As you watch, astounded, the mutated beast rips the doors off one cage after another. After the first few, it makes no move towards the captives. You go back to the lab, and pick up a keycard and ring of keys from the fallen demon.\n\n");
-        if (TyrantFollower) {
-            outputText(" She watches the creature with wide eyes. She drops her Dick, arms shaking. She makes no moves to save her fellow Driders, but instead watches the creature.\n\n");
-        }
+        if (TyrantFollower) outputText(" She watches the creature with wide eyes. She drops her Dick, arms shaking. She makes no moves to save her fellow Driders, but instead watches the creature.\n\n");
         menu();
         addButton(0, "Save", PrTyrantVictorySave);
         if (TyrantFollower) {
@@ -842,8 +841,9 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
     }
 
     public function PrTyrantVictoryNext():void {
+        TyrantLabState = 2;
         DridersState = 2;
-        clearOutput();
+		clearOutput();
         outputText("As the last of the shackles are thrown off, the remaining Driders begin to take stock of themselves. Gathering around the elder you’d released first, they speak in small, hissing voices. As you approach them, the elder woman steps from between her kin, bowing her head respectfully. You note that the other Driders have covered her with a crude blanket, and she shivers, though whether from age or cold, you can’t tell.\n\n");
         outputText("“<i>I cannot thank you enough, traveller. I thought we would all perish in this terrible place.</i>” She draws her hands in, and two of the stronger Driders offer their shoulders to support the frail elder. “<i>But I must ask you...Where are our males? The ones you see here are less than half of our tribe.</i>” You remain silent, but the look on your face is enough. Sobs begin to sound from within the Driders. The cries are weak, but full of emotion.\n\n");
         outputText("One of the few males remaining raises his voice, walking to the front of the line. “<i>Mother Oaklee</i>”, he says nervously. “<i>Our numbers are few, and we have no warriors. What shall we do? Where shall we go?</i>”\n\n");
@@ -961,7 +961,7 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
 
     public function LeaveDungeon():void {
         clearOutput();
-        if (MainAreaComplete == 3 && !WayOutBlocked && DridersState == 1 && FSpreaderState == 2 && NightwalkerLabstate == 2) {
+        if (MainAreaComplete == 3 && !WayOutBlocked && DridersState == 2 && FSpreaderState == 2 && NightwalkerLabstate >= 2) {
             outputText("As you approach the exit to the Lab, you notice the various groups you’ve rescued, all preparing to leave as well.\n\n");
             outputText("“<i>It seems we’re all heading the same way</i>”, Old Miss Oaklee says simply. She looks at the dragons with surprise. “<i>Although I didn’t realise we’d be sharing a path with the dragons.</i>” She gives them a sour look.\n\n");
             outputText("“<i>We didn’t start this way, Drider.</i>” The eldest dragonoid retorts, exhaling a little bit of flame. “<i>You’re looking at the remains of the Lizan village of Dremfell. The demons are to blame for our current appearance.</i>”\n\n");
@@ -987,7 +987,7 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
             menu();
             addButton(0, "Next", TelAdreBring);
         }
-        if (MainAreaComplete < 4) {
+        if (MainAreaComplete < 4 && DridersState < 2 && FSpreaderState < 2 && NightwalkerLabstate < 2) {
             if (WayOutBlocked) {
                 outputText("You can't budge this steel door, no matter how hard you strike it. Perhaps inside the facility, you'll find a a way to unblock the door?\n\n");
             }
@@ -1090,7 +1090,7 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
         outputText("After a few minutes, just watching the guards work, you decide enough’s enough. Today was a good day for Mareth, but your body aches, your brain hurts. Camp sounds really good right now.\n\n");
         MainAreaComplete = 4;
         FSpreaderState = 3;
-        DridersState = 2;
+        DridersState = 3;
         if (SexlessLabState == 2) {
             SexlessLabState = 4;
         }

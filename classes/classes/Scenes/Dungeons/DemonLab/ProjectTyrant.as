@@ -5,6 +5,7 @@ package classes.Scenes.Dungeons.DemonLab {
  */
 
 import classes.*;
+import classes.BodyParts.Horns;
 import classes.Scenes.SceneLib;
 import classes.internals.WeightedDrop;
 
@@ -16,6 +17,9 @@ public class ProjectTyrant extends Monster {
         this.long = "Facing you is a creature vaguely resembling a Drider. Easily seventeen feet tall and thirty feet long, the creature turns to face you, six crimson eyes gleaming. Its naked form is built like a tank, masculine, with no genitals to be seen. Twin horns poke through the chitin covering its forehead. It breathes heavily, and as it takes a step, the spikes on its legs clank against the stone floor below. Corruption oozes from this creature in a sickening aura. It holds no weapons, but the massive muscles sloping down the creature’s arms leave little doubt that this creature doesn’t need a weapon to crush its foes. ";
         this.plural = false;
         this.tallness = 104;
+        initGenderless();
+        createBreastRow(0);
+		this.horns.type = Horns.DEMON;
         this.horns.count = 4;
         initStrTouSpeInte(575, 400, 190, 130);
         initWisLibSensCor(140, 345, 150, 100);

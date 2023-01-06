@@ -3966,8 +3966,7 @@ public class Camp extends NPCAwareContent{
 				.disableIf(flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] <= 0, "???", null, "???");
 		bd.add("Demon Laboratory", SceneLib.dungeons.demonLab.EnteringDungeon)
 				.hint("Visit the demon laboratory in the mountains."
-						+ ((flags[kFLAGS.LETHICE_DEFEATED] > 0) ? "\n\nYou have slain Lethice and put an end to the demonic threats. You've one step closer to defeating Lethice!" : "")
-						+ (SceneLib.dungeons.checkLethiceStrongholdClear() ? "\n\nCLEARED!" : ""))
+						+ (SceneLib.dungeons.checkDemonLaboratoryClear() ? "\n\nYou have destroyed that laboratory and put an end to the demonic experiments. You've one step closer to defeating Lethice!\n\nCLEARED!" : ""))
 				.disableIf(flags[kFLAGS.DEMON_LABORATORY_DISCOVERED] <= 0, "???", null, "???");
 		bd.add("Stronghold", SceneLib.d3.enterD3)
 				.hint("Visit the stronghold in the high mountains that belongs to Lethice, the demon queen."
@@ -4126,7 +4125,7 @@ public class Camp extends NPCAwareContent{
 		else addButtonDisabled(0, "???", "???");
 		if (flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0) addButton(1, "Deep Cave", SceneLib.dungeons.deepcave.enterDungeon).hint("Visit the cave you've found in the Deepwoods." + (flags[kFLAGS.DEFEATED_ZETAZ] > 0 ? "\n\nYou've defeated Zetaz, your old rival." : "") + (SceneLib.dungeons.checkDeepCaveClear() ? "\n\nCLEARED!" : ""));
 		else addButtonDisabled(1, "???", "???");
-		if (flags[kFLAGS.DEMON_LABORATORY_DISCOVERED] > 0) addButton(2, "Demon Laboratory", SceneLib.dungeons.demonLab.EnteringDungeon).hint("Visit the demon laboratory in the mountains." + ((flags[kFLAGS.LETHICE_DEFEATED] > 0) ? "\n\nYou have slain Lethice and put an end to the demonic threats. You've one step closer to defeating Lethice!" : "") + (SceneLib.dungeons.checkLethiceStrongholdClear() ? "\n\nCLEARED!" : ""));
+		if (flags[kFLAGS.DEMON_LABORATORY_DISCOVERED] > 0) addButton(2, "Demon Laboratory", SceneLib.dungeons.demonLab.EnteringDungeon).hint("Visit the demon laboratory in the mountains." + (SceneLib.dungeons.checkDemonLaboratoryClear() ? "\n\nYou have destroyed that laboratory and put an end to the demonic experiments. You've one step closer to defeating Lethice!\n\nCLEARED!" : ""));
 		else addButtonDisabled(2, "???", "???");
 		if (flags[kFLAGS.D3_DISCOVERED] > 0) addButton(3, "Stronghold", SceneLib.d3.enterD3).hint("Visit the stronghold in the high mountains that belongs to Lethice, the demon queen." + ((flags[kFLAGS.LETHICE_DEFEATED] > 0) ? "\n\nYou have slain Lethice and put an end to the demonic threats. Congratulations, you've beaten the main story!" : "") + (SceneLib.dungeons.checkLethiceStrongholdClear() ? "\n\nCLEARED!" : ""));
 		else addButtonDisabled(3, "???", "???");
@@ -4528,7 +4527,8 @@ public function rebirthFromBadEnd():void {
 		//Dungeons
 		if (SceneLib.dungeons.checkFactoryClear()) performancePointsPrediction++;
 		if (SceneLib.dungeons.checkDeepCaveClear()) performancePointsPrediction += 2;
-		if (SceneLib.dungeons.checkLethiceStrongholdClear()) performancePointsPrediction += 3;
+		if (SceneLib.dungeons.checkDemonLaboratoryClear()) performancePointsPrediction += 3;
+		if (SceneLib.dungeons.checkLethiceStrongholdClear()) performancePointsPrediction += 4;
 		if (SceneLib.dungeons.checkSandCaveClear()) performancePointsPrediction++;
 		if (SceneLib.dungeons.checkHiddenCaveClear()) performancePointsPrediction++;
 		if (SceneLib.dungeons.checkHiddenCaveHiddenStageClear()) performancePointsPrediction++;
