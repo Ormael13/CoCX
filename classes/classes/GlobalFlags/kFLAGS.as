@@ -1324,7 +1324,7 @@ public static const LOPPE_INCUBATION:int                                        
 public static const LOPPE_PREGNANCY_TYPE:int                                        = 1316;
 public static const ETNA_INCUBATION:int                                             = 1317;
 public static const ETNA_PREGNANCY_TYPE:int                                         = 1318;
-public static const UNKNOWN_FLAG_NUMBER_01319:int                                   = 1319;
+public static const DEMON_LABORATORY_DISCOVERED:int                                 = 1319;
 public static const UNKNOWN_FLAG_NUMBER_01320:int                                   = 1320;
 public static const UNKNOWN_FLAG_NUMBER_01321:int                                   = 1321;
 public static const UNKNOWN_FLAG_NUMBER_01322:int                                   = 1322;

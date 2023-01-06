@@ -20,6 +20,8 @@ public class Incels extends Monster {
         this.short = "Incels";
         this.long = "This group of monstrous creatures slaver from their mouths, long black claws jutting from their hands. They’re not uniform in most aspects of their appearance…but the glassy eyes, perpetually open mouths and stiff movements give them a terrifying uniformity. They stare, unblinking, not at your eyes, face or [weapon], but at your loins. They seem to instinctively know you’re not one of them. ";
         this.plural = true;
+        initGenderless();
+        createBreastRow(0);
         this.ass.analLooseness = AssClass.LOOSENESS_TIGHT;
         this.ass.analWetness = AssClass.WETNESS_DRY;
         this.createStatusEffect(StatusEffects.BonusACapacity, 30, 0, 0, 0);
@@ -27,7 +29,6 @@ public class Incels extends Monster {
         this.hips.type = Hips.RATING_AMPLE + 2;
         this.butt.type = Butt.RATING_LARGE;
         this.hairLength = 2;
-        this.horns.count = 2;
         initStrTouSpeInte(275, 400, 390, 30);
         initWisLibSensCor(40, 945, 50, 100);
         this.weaponName = "black claws";
@@ -39,7 +40,7 @@ public class Incels extends Monster {
         this.bonusHP = 1400;
         this.bonusLust = 990;
         this.lust = 50;
-        this.lustVuln = 0.44;
+        this.lustVuln = 1;
         this.level = 40;
         this.gems = rand(50) + 75;
         //I don't know how to add regeneration, physical resistance, or the lust to damage special ability I want them to have.
@@ -51,7 +52,6 @@ public class Incels extends Monster {
         this.createPerk(PerkLib.WeaponClawsClawTraining, 0, 0, 0, 0);
         this.createPerk(PerkLib.MonsterRegeneration, 10, 0, 0, 0); //HP regen
         this.createStatusEffect(StatusEffects.DefendMonsterVer, 50, 0.6, 0, 0); //phys resist?
-
         checkMonster();
     }
 

@@ -1305,10 +1305,10 @@ package classes.Scenes.Places{
 			else if (player.inte >= 400 && WoodElfMagicTraining == QUEST_STAGE_MAGICTRAINING6 && !hasTrainedToday && player.isRace(Races.WOODELF) && WoodElfMagicTranerGetLaid){
 				WoodElfMagicTraining = QUEST_STAGE_MAGICTRAINING7;
 				outputText("After a few hours spent directing the discussion and answering your questions, Lutien smile and closes " + LutienMF("his","her") + " book.\n\n");
-				outputText("\"<i>Congratulations, [name]. You have effectively learned everything I could teach you and even mastered that one last spell. I guess this means the end of our lessons. However, if you wish to revise less serious subjects with me… just know I will be available anytime. It's rare to find someone so smart and at the same time… ");
+				outputText("\"<i>Congratulations, [name]. You have effectively learned everything I could teach you and even mastered that one last trick. I guess this means the end of our lessons. However, if you wish to revise less serious subjects with me… just know I will be available anytime. It's rare to find someone so smart and at the same time… ");
 				outputText("so attractive.</i>\" " + LutienMF("He","She") + " blushes but quickly realizes " + LutienMF("he","she") + "'s wide open and moves " + LutienMF("his","her") + " eyes back to " + LutienMF("his","her") + " book dismissing you.\n\n");
 				if (!player.hasStatusEffect(StatusEffects.KnowsGreenCovenant)) {
-					outputText("<b>Gained new green spell: Green Covenant.</b>");
+					outputText("<b>Gained new magic special: Green Covenant.</b>");
 					player.createStatusEffect(StatusEffects.KnowsGreenCovenant, 0, 0, 0, 0);
 				}
 				hasTrainedToday = true;

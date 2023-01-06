@@ -88,7 +88,7 @@ public class MutantIncubus extends Monster {
 
     private function BladeFlurry():void {
         clearOutput();
-        outputText("The mutant Incubus rushes towards you, blades outstretched. \n\n");
+        outputText("The mutant Incubus rushes towards you, blades outstretched.\n\n");
         //Miss:
         //Determine if evaded
         if (player.getEvasionRoll()) {

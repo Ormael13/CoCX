@@ -30,7 +30,6 @@ public class ProjectTyrant extends Monster {
         this.lust = 50;
         this.level = 45;
         this.gems = rand(550) + 175;
-
         this.drop = new WeightedDrop().add(useables.D_SCALE, 5).add(useables.LETHITE, 2).add(jewelries.POWRRNG, 1);
         this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
         this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
@@ -38,7 +37,6 @@ public class ProjectTyrant extends Monster {
         this.createPerk(PerkLib.Brawler, 0, 0, 0, 0);
         this.createPerk(PerkLib.GoliathI, 0, 0, 0, 0);
         this.createPerk(PerkLib.GoliathII, 0, 0, 0, 0);
-
         checkMonster();
     }
 
@@ -67,7 +65,7 @@ public class ProjectTyrant extends Monster {
     }
 
     private function TackleGrapple():void {
-        outputText("The Drider-monster charges again. You ready yourself to dodge the meaty fists, but instead, it charges head-on into you, shoulder first. You’re thrown back by the impact, but as you hit the ground, you feel an immense weight press down on you. You are pinned underneath the Drider-beast’s weight, and it begins to crush you! \n\n");
+        outputText("The Drider-monster charges again. You ready yourself to dodge the meaty fists, but instead, it charges head-on into you, shoulder first. You’re thrown back by the impact, but as you hit the ground, you feel an immense weight press down on you. You are pinned underneath the Drider-beast’s weight, and it begins to crush you!\n\n");
         var damage:Number = ((str + tou) * 1.2) + rand(50);
         player.takePhysDamage(damage * 1.2, true);
         player.createStatusEffect(StatusEffects.Pounced, 5, 0, 0, 0);
@@ -89,8 +87,7 @@ public class ProjectTyrant extends Monster {
         player.addStatusValue(StatusEffects.Pounced, 1, -1);
         if (player.getStatusValue(StatusEffects.Pounced, 1) == 0)
             player.removeStatusEffect(StatusEffects.Pounced);
-        outputText("The Drider-thing’s bulk presses down on you, crushing your body. You can feel your bones beginning to crack! \n\n");
-        outputText(" \n\n");
+        outputText("The Drider-thing’s bulk presses down on you, crushing your body. You can feel your bones beginning to crack!\n\n");
         var damage:Number = ((str + tou) * 1.2) + rand(50);
         player.takePhysDamage(damage * 1.2, true);
         if (HP >= 0.7 * maxHP()) {
@@ -98,7 +95,7 @@ public class ProjectTyrant extends Monster {
             dmg0 += this.spe * 2;
             dmg0 += eBaseSpeedDamage() * 2;
             dmg0 += this.weaponAttack * 1;
-            outputText("As you struggle with the creature, the Incubus on top of it cackles, shooting at your exposed upper body! \n\n");
+            outputText("As you struggle with the creature, the Incubus on top of it cackles, shooting at your exposed upper body!\n\n");
             player.takePhysDamage(dmg0, true);
             player.takePhysDamage(dmg0, true);
             player.takePhysDamage(dmg0, true);
@@ -116,7 +113,7 @@ public class ProjectTyrant extends Monster {
 
     public function BlackMortar():void {
         var dmg1:Number;
-        outputText("The demon on top grins, whistling, and you see the unholy mount tense up. A massive glob of black goop is launched from the Drider’s backside like a mortar shell. \n\n");
+        outputText("The demon on top grins, whistling, and you see the unholy mount tense up. A massive glob of black goop is launched from the Drider’s backside like a mortar shell.\n\n");
         if (player.getEvasionRoll()) {
             outputText("You break into a sweat as you throw yourself to the side. You evade the worst of the acidic goop, but a bit still splashes you.");
             dmg1 = this.inte * 0.2;
@@ -142,7 +139,7 @@ public class ProjectTyrant extends Monster {
         dmg0 += this.spe * 2;
         dmg0 += eBaseSpeedDamage() * 2;
         dmg0 += this.weaponAttack * 1;
-        outputText("The Incubus fires a shot at you! \n\n");
+        outputText("The Incubus fires a shot at you!\n\n");
         player.takePhysDamage(dmg0, true);
         var choice0:Number = rand(3);
         if (choice0 == 1 && player.hasStatusEffect(StatusEffects.Pounced)) SlamTrample();

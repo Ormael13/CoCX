@@ -553,6 +553,9 @@ public class PerkLib
 		public static const PenetratingThrow:PerkType = mk("Penetrating throw", "Penetrating throw",
 				"Thrown weapons have such penetrating power they now have a chance to run through multiple enemies. When attacking groups the projectiles have a 75% percent chance to deal their damage more then once losing 10% after each successful piercing strikes. (+20% range physical attacks multiplier)",
 				"You've chosen the 'Penetrating throw' perk. Thrown weapons have such penetrating power they now have a chance to run through multiple enemies. When attacking groups the projectiles have a 75% percent chance to deal their damage more then once losing 10% after each successful piercing strikes. (+20% range physical attacks multiplier)");
+		public static const Backbreaker:PerkType = mk("Backbreaker", "Backbreaker",
+				"Hammer or mace deals 50% more damage to stunned enemies.",
+				"You've chosen the 'Backbreaker' perk. Hammer or mace deals 50% more damage to stunned enemies.");
 
 		public static const ElementsOfMarethBasic:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
@@ -560,9 +563,6 @@ public class PerkLib
 		/*public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk, .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, .");
@@ -4456,6 +4456,9 @@ public class PerkLib
                     .requireStr(75);
             WayOfTheWarrior.requireLevel(18)
                     .requirePerk(JobWarrior);
+            Backbreaker.requireLevel(18)
+                    .requireStr(110)
+                    .requirePerk(BalanceBreaker);
             UnlimitedRage.requireLevel(18)
                     .requireStr(60)
                     .requirePerk(FuriousStrikes);
@@ -7377,4 +7380,4 @@ public class PerkLib
         }
 	}
 }
-}
+}

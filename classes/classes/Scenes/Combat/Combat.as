@@ -5428,6 +5428,7 @@ public class Combat extends BaseContent {
         }
         if (player.isSpearTypeWeapon() && player.hasPerk(PerkLib.ElvenRangerArmor)) damage *= 1.5;
         if ((player.weapon == weapons.S_RULER) && (monster.hasPerk(PerkLib.EnemyHugeType) || monster.hasPerk(PerkLib.EnemyGigantType) || monster.hasPerk(PerkLib.EnemyColossalType))) damage *= 1.5;
+		if (monster.hasStatusEffect(StatusEffects.Stunned) && player.isMaceHammerTypeWeapon() && player.hasPerk(PerkLib.Backbreaker)) damage *= 1.5;
         // Mastery bonus damage
 		damage *= MasteryBonusDamageMelee(true);
 		//Thunderous Strikes
@@ -9953,6 +9954,14 @@ public class Combat extends BaseContent {
                 player.removeStatusEffect(StatusEffects.CooldownPhoenixFireBreath);
             } else {
                 player.addStatusValue(StatusEffects.CooldownPhoenixFireBreath, 1, -1);
+            }
+        }
+        //Green Covenant
+        if (player.hasStatusEffect(StatusEffects.CooldownGreenCovenant)) {
+            if (player.statusEffectv1(StatusEffects.CooldownGreenCovenant) <= 0) {
+                player.removeStatusEffect(StatusEffects.CooldownGreenCovenant);
+            } else {
+                player.addStatusValue(StatusEffects.CooldownGreenCovenant, 1, -1);
             }
         }
         //Hydra Acid Breath
