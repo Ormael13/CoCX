@@ -62,6 +62,11 @@ package classes.Scenes.Places{
 		public static const QUEST_STAGE_SEDUCTIONTRAINING2:int = 2;
 		public static var hasTrainedToday:Boolean;
 
+		public static var ConvertedSisters:int;
+		public static var ConvertedHerms:int;
+		public static var CapturedSisters:Array;
+		public static var CapturedHerms:Array;
+
 		public function stateObjectName():String {
 			return "WoodElves";
 		}
@@ -76,6 +81,10 @@ package classes.Scenes.Places{
 			WoodElfMagicTraner = false;
 			WoodElfMagicTranerSex = 0;
 			WoodElfMagicTranerGetLaid = false;
+			ConvertedSisters = 0;
+			ConvertedHerms = 0;
+			CapturedSisters = [];
+			CapturedHerms = [];
 		}
 
 		public function saveToObject():Object {
@@ -88,7 +97,11 @@ package classes.Scenes.Places{
 				"stageSeduction": WoodElfSeductionTraining,
 				"WoodElfMagicTraner": WoodElfMagicTraner,
 				"WoodElfMagicTranerSex": WoodElfMagicTranerSex,
-				"WoodElfMagicTranerGetLaid": WoodElfMagicTranerGetLaid
+				"WoodElfMagicTranerGetLaid": WoodElfMagicTranerGetLaid,
+				"ConvertedSisters": ConvertedSisters,
+				"ConvertedHerms": ConvertedHerms,
+				"CapturedSisters": CapturedSisters,
+				"CapturedHerms": CapturedHerms
 			};
 		}
 
@@ -103,6 +116,10 @@ package classes.Scenes.Places{
 				WoodElfMagicTraner = valueOr(o["WoodElfMagicTraner"], false);
 				WoodElfMagicTranerSex = valueOr(o["WoodElfMagicTranerSex"], 0);
 				WoodElfMagicTranerGetLaid = valueOr(o["WoodElfMagicTranerGetLaid"], false);
+				ConvertedSisters = valueOr(o["ConvertedSisters"], 0);
+				ConvertedHerms = valueOr(o["ConvertedHerms"], 0);
+				CapturedSisters = valueOr(o["CapturedSisters"], []);
+				CapturedHerms = valueOr(o["CapturedHerms"], []);
 			} else {
 				// loading from old save
 				resetState();
@@ -687,8 +704,7 @@ package classes.Scenes.Places{
 				.disableIf(hasTrainedToday,"You need a break from your recent training before you can train again.")
 				.disableIf(!player.isElf(),"Alyssa has personal preferences in regards to the people she will train, maybe you should make yourself more elf like.")
 				.disableIf(!player.hasVagina(), "Alyssa has personal preferences in regards to the people she will train with... it's not like the spear is a girl only discipline, but the way she uses it might as well be...");
-			addButton(5, "Lutien", Lutien)
-					.disableIf(hasTrainedToday, "You need a break from your recent training before you can train again.");
+			addButton(5, "Lutien", Lutien);
 			addButton(6, "Chelsea", Chelsea)
 					.disableIf(hasTrainedToday, "You need a break from your recent training before you can train again.");
 			addButton(14, "Leave", camp.returnToCampUseOneHour);
@@ -1047,32 +1063,26 @@ package classes.Scenes.Places{
 				outputText("\n\n\"<i>Unfortunately I wont be able to teach you the ultimate skills of elven archery because you aren't complete or rather… you never made a covenant with the blessed tree. These last skills taps directly in the power of the covenant and thus cannot be learned by someone with no connection.</i>\"")
 				hasTrainedToday = true;
 			}
-			//else if (player.speStat.train.value >= 100 && WoodElfBowTraining == QUEST_STAGE_BOWTRAINING4 && !hasTrainedToday && player.isRace(Races.WOODELF) && player.hasStatusEffect(StatusEffects.KnowsBriarthorn)){
-			//	if (player.speStat.core.value < player.speStat.core.max) {
-			//		outputText("\n\nIt occurs to you that by combining elven green magic with your shot you could to infuse your arrow with life energy, the wooden shaft growing thorns that would surely inflict painful poisoned wounds to your opponents.");
-			//		outputText(" Sadly such a technique will require far more training but you're confident in Elenwen's ability to train you to this point.");
-			//		hasTrainedToday = true;
-			//	} else {
-			//		WoodElfBowTraining = QUEST_STAGE_BOWTRAINING5;
-			//		player.createPerk(PerkLib.ELFThornShot,0,0,0,0);
-			//		flags[kFLAGS.ENVENOMED_BOLTS] = 1;
-			//		outputText("\n\nIt occurs to you that by combining elven green magic with your shot you could to infuse your arrow with life energy, the wooden shaft growing thorns that would surely inflict painful poisoned wounds to your opponents. <b>Gained Perk: Elven Thorn Shot</b>");
-			//		hasTrainedToday = true;
-			//	}
-			//}
-			//else if (player.speStat.core.value >= player.speStat.core.max && WoodElfBowTraining == QUEST_STAGE_BOWTRAINING5 && !hasTrainedToday && player.isRace(Races.WOODELF)){
-			//	if (player.spe100 >= 100) {
-			//		outputText("\n\nBy now you have achieved mastery of every technique Elenwen could touch you… well almost. Elenwen's single most amazing skill is her ability to shoot a salvo of two arrows in quick succession, a skill you have yet to see anyone but her use.");
-			//		outputText(" You're certain if you train and improve your speed to the breaking point you could achieve it too. Guess you will need to increase your speed and dexterity to their utmost limit before you can unlock that skill.");
-			//		hasTrainedToday = true;
-			//	} else {
-			//		WoodElfBowTraining = QUEST_STAGE_BOWTRAINING6;
-			//		player.createPerk(PerkLib.ELFTwinShot,0,0,0,0);
-			//		flags[kFLAGS.ELVEN_TWINSHOT_ENABLED] = 1;
-			//		outputText("\n\nBy now you have achieved mastery of every technique Elenwen could touch you… well almost. Elenwen's single most amazing skill is her ability to shoot a salvo of two arrows in quick succession, a skill you have yet to see anyone but her use. <b>Gained Perk: Elven Twin Shot</b>");
-			//		hasTrainedToday = true;
-			//	}
-			//}
+			else if (player.speStat.train.value >= 100 && WoodElfBowTraining == QUEST_STAGE_BOWTRAINING4 && !hasTrainedToday && player.isRace(Races.WOODELF) && player.hasStatusEffect(StatusEffects.KnowsBriarthorn)){
+				WoodElfBowTraining = QUEST_STAGE_BOWTRAINING5;
+				player.createPerk(PerkLib.ELFThornShot,0,0,0,0);
+				flags[kFLAGS.ENVENOMED_BOLTS] = 1;
+				outputText("\n\nIt occurs to you that by combining elven green magic with your shot you could to infuse your arrow with life energy, the wooden shaft growing thorns that would surely inflict painful poisoned wounds to your opponents. <b>Gained Perk: Elven Thorn Shot</b>");
+				hasTrainedToday = true;
+			}
+			else if (WoodElfBowTraining == QUEST_STAGE_BOWTRAINING5 && !hasTrainedToday && player.isRace(Races.WOODELF)){
+				if (player.spe100 < 100) {
+					outputText("\n\nBy now you have achieved mastery of every technique Elenwen could touch you… well almost. Elenwen's single most amazing skill is her ability to shoot a salvo of two arrows in quick succession, a skill you have yet to see anyone but her use.");
+					outputText(" You're certain if you train and improve your speed to the breaking point you could achieve it too. Guess you will need to increase your speed and dexterity to their utmost limit before you can unlock that skill.");
+					hasTrainedToday = true;
+				} else {
+					WoodElfBowTraining = QUEST_STAGE_BOWTRAINING6;
+					player.createPerk(PerkLib.ELFTwinShot,0,0,0,0);
+					flags[kFLAGS.ELVEN_TWINSHOT_ENABLED] = 1;
+					outputText("\n\nBy now you have achieved mastery of every technique Elenwen could touch you… well almost. Elenwen's single most amazing skill is her ability to shoot a salvo of two arrows in quick succession, a skill you have yet to see anyone but her use. <b>Gained Perk: Elven Twin Shot</b>");
+					hasTrainedToday = true;
+				}
+			}
 			else{
 				hasTrainedToday = true;
 			}
@@ -1233,7 +1243,8 @@ package classes.Scenes.Places{
 			outputText("You visit Lutien at " + LutienMF("his","her") + " tent, " + LutienMF("he","she") + " is currently in the process of reading what looks to be a book while writing notes on a parchment.\n\n");
 			outputText("\"<i>Oh good day sister… how can I help you? Are you here to train your spellcasting or for something else?</i>\"\n\n");
 			menu();
-			addButton(0, "Train", LutienTrain);
+			addButton(0, "Train", LutienTrain)
+					.disableIf(hasTrainedToday, "You need a break from your recent training before you can train again.");
 			if (WoodElfMagicTraining >= QUEST_STAGE_MAGICTRAINING3) addButton(1, "Sex", LutienMainSex);
 			else addButtonDisabled(1, "???", "???");
 		}
@@ -1542,6 +1553,106 @@ package classes.Scenes.Places{
 			//The wearer of this dress desire and pleasure is no longer vexed by the limitations of mortal flesh allowing one to keep control over their lust long enough to claim victory by diluting their own lust within the ambiant natural world for a time. So long as a Green Magic spell was cast within the 5 previous rounds the user of this dress effectively is able to maintain their focus and mind entirely to the task at hand at the cost of potentialy turning into a lecherous sex maniac due to all the dilluted lust merging back with the user at the end of combat. There is a small chance for this to backfire instead causing the ambiant flora to turn on and rape the wearer of the dress.
 
 			doNext(camp.returnToCampUseOneHour);
+		}
+
+		public function CaptureGoblin():void {
+			clearOutput();
+			outputText("You eye down the defeated goblin pondering the question for a moment before a sinister shaded smile makes way on your beautiful elven face.[pg]");
+			outputText("\"<i>Uh girl, why are you looking at me like that? I can feel the bad vibe all the way here!</i>\"[pg]");
+			outputText("She might be a few feet short but that's nothing the sacred tree can't fix if anything she will just make for a smaller one. You grab the nearest blunt object you can find and promptly knock the goblin out before hoisting her on your shoulder. It's a little way from here and you don't want the green pest to struggle.[pg]");
+			outputText("You begin walking all the way to the nearest sacred tree holding the unconscious goblin on your shoulder. You instinctively know which tree is what thanks to their leaf coloration and patterns and it doesn't take you long to find the elven territory border. You grab the goblin by waist and offer it to the nearest tree which hungrily open up, its tentacle like vines seizing the offering just as the goblin finally wakes up in time for a cute panicked scream. You can feel the comforting approval within its groaning bark as the goblin is gobbled up, you are a good daughter.[pg]");
+			outputText("A few seconds later silence reigns again in the forest and you can all too well imagine all the delight your newest sister is experiencing right now behind the bark lid. After all, you did get to experience it firsthand. A little hot from the whole imagery you lie next to the tree bark and begin feverishly masturbating when the new elf is finally expelled from the tree womb through the wooden knot you now know to be the tree vaginal lips, guess your own fun can wait for later. [pg]");
+			outputText("The new girl is barely above 4 feet tall which is altogether within expectation seeing as new elves tend to keep some remaining traces of their original race attributes. You came out average thanks to your very high compatibility for transformation, which is less than can be said for her. With a few reassuring words you gently grab the hands of the new girl and guide her all the way to the village. Merisiel sees you walk around with a new sister in tow and comes over to you.[pg]");
+			outputText("\"<i>Oh my! You actually found a new one, And shes so tiny and cute! Want me to pick her up for you?</i>~♥\"[pg]");
+			outputText("You know her well, she just can't resist a new girl, especially when she's cute. Sure she can have her, though that means she's taking responsibility for taking care of her for the first few weeks until the ceremony.[pg]");
+			outputText("\"<i>Why this is no problem sister. Feel free to bring more like her here, we will take good care of them.</i>\"[pg]");
+			outputText("With a sense of duty accomplished you leave back for your camp. The fruit of your labor will probably come apparent only within a few days when the new sister formally joins the community. For now it's off to adventures with you![pg]");
+			CapturedSisters.push(7);
+			cleanupAfterCombat();
+		}
+		public function CaptureCultist():void {
+			clearOutput();
+			outputText("You eye the defeated cultist, pondering the question for a moment before a sinister shaded smile makes its way on your beautiful elven face. Yep she/he is the ideal size and proportion. The cultist, unsure about your creepy attitude, tries and awkwardly opens the conversation.[pg]");
+			outputText("\"<i>So uh we having sex now or what?</i>\"[pg]");
+			outputText("Sex? Nah… better. Way better! You grab the nearest blunt object you can find and promptly knock the human out before hoisting him/her on your shoulder. It's a little way from here and you don't want the crazy to struggle.[pg]");
+			CaptureANewSisterMerge();
+		}
+		public function CaptureCowgirl():void {
+			clearOutput();
+			outputText("You eye down the defeated cowgirl pondering the question for a moment. She's quite taller than the common morph or human, which may result in something weird happening but you brush off the concern as you do remember that such anomalies do already exist, your big sister Chelsea is an example of it. A sinister shaded smile makes way on your beautiful elven face.[pg]");
+			outputText("Yep she is the ideal size and proportion. The cowgirl, unsure about your creepy attitude, tries and awkwardly opens the conversation.[pg]");
+			outputText("\"<i>So uh, are you planning on milking me or not?</i>\"[pg]");
+			outputText("Milking? Nah… better way better! You grab the nearest blunt object you can find and promptly knock the cow out before hoisting her on your shoulder. It's a little way from here and you don't want the crazy to struggle.[pg]");
+			CaptureANewSisterMerge();
+		}
+		public function CaptureMinotaur():void {
+			clearOutput();
+			outputText("A weird idea comes to your mind. Why not test out if the sacred tree can process a [monster name] and if so would the result be a big dicked elf herm?[pg]");
+			outputText("Licking your lips you knock the defeated [monster name] out and get to moving the massive hunk of a beast toward the woods.[pg]");
+			outputText("Traveling with the [monster name] is a massive pain and sometimes you ponder if riding a horse format elf dong is worth the effort but everytime the oaf wakes up you bring him back unconscious and fantasize about it.[pg]");
+			outputText("Eventually in the forest, you instinctively know which tree is what thanks to their leaf coloration and patterns and it doesn't take you long to find the elven territory border. You pull up the [monster name] and offer it to the nearest tree which hungrily opens up, its tentacle like vines seizing the offering just as the bull finally wakes up in time for a panicked final struggle. You can feel the comforting approval within its groaning bark as the [monster name] is dragged kicking and screaming, you are a good daughter.[pg]");
+			outputText("A few seconds later silence reigns again in the forest and you can all too well imagine all the delight your newest sister is experiencing right now behind the bark lid. After all, you did get to experience it firsthand. A little hot from the whole imagery you lie next to the tree bark and begin feverishly masturbating when the new elf is finally expelled from the tree womb through the wooden knot you now know to be the tree vaginal lips, guess your own fun can wait for later.[pg]");
+			outputText("The new girl comes out eventually and to your absolute disappointment the former minotaur's amazing tool is all but nearly gone. All that's left of it is a 6 inch human shaped penis sitting on a somewhat amazonesque hermaphrodite elven body. She's seven feet tall and could pass for Chelsea's close relative if not for the tiny dong hanging between her legs. With a few reassuring words you gently grab the hands of the new girl and guide her all the way to the village. Merisiel sees you walk around with a new sister in tow, come over to you.[pg]");
+			outputText("\"<i>Well what did you get us this time sis? Sorry to disappoint you but it's not the first time someone tried that idea. Eh better luck next time as they say…</i>\"[pg]");
+			outputText("Despite how the newcomer turned out you want her to be well taken care of. Merisiel sighs at this.[pg]");
+			outputText("\"<i>Sure I will handle the big girl for you but really next time I'd prefer you got someone smaller.</i>\"[pg]");
+			outputText("She takes the hand of the herm elf and heads toward the village tent. A little disappointed by the result you leave back for your camp. The fruit of your labor will probably come apparent only within a few days when the new sister formally joins the community. For now it's off to adventures with you![pg]");
+			CapturedHerms.push(7);
+			cleanupAfterCombat();
+		}
+		public function CaptureANewSister():void {
+			clearOutput();
+			outputText("You eye the defeated [monster name], pondering the question for a moment before a sinister shaded smile makes its way on your beautiful elven face. Yep she/he is the ideal size and proportion. The cultist, unsure about your creepy attitude, tries and awkwardly opens the conversation.[pg]");
+			outputText("\"<i>So uh we having sex now or what?</i>\"[pg]");
+			outputText("Sex? Nah… better. Way better! You grab the nearest blunt object you can find and promptly knock the [monster name] out before hoisting him/her on your shoulder. It's a little way from here and you don't want the crazy to struggle.[pg]");
+			CaptureANewSisterMerge();
+		}
+		public function CaptureANewSisterMerge():void {
+			outputText("You begin walking all the way to the nearest sacred tree holding the unconscious [monster guy] on your shoulder. You instinctively know which tree is what thanks to their leaf coloration and patterns and it doesn't take you long to find the elven territory border. You pull up the human and offer it to the nearest tree which hungrily opens up, its tentacle like vines seizing the offering just as the cultist finally wakes up in time for a panicked scream. You can feel the comforting approval within its groaning bark as the cultist is dragged kicking and screaming, you are a good daughter.[pg]");
+			outputText("A few seconds later silence reigns again in the forest and you can all too well imagine all the delight your newest sister is experiencing right now behind the bark lid. After all, you did get to experience it firsthand. A little hot from the whole imagery you lie next to the tree bark and begin feverishly masturbating when the new elf is finally expelled from the tree womb through the wooden knot you now know to be the tree vaginal lips, guess your own fun can wait for later.[pg]");
+			outputText("The new girl comes out just right heck if not for a few variations she could very well be a copy of you. With a few reassuring words you gently grab the hands of the new girl and guide her all the way to the village. Merisiel sees you walk around with a new sister in tow, come over to you.[pg]");
+			outputText("\"<i>Oh my! You actually found a new one! Want me to pick her up for you?</i>~♥\"[pg]");
+			outputText("You know her well, she just can't resist a new girl, especially when she's cute. Sure she can have her, though that means she's taking responsibility for taking care of her for the first few weeks until the ceremony.[pg]");
+			outputText("\"<i>Why this is no problem sister. Feel free to bring more like her here, we will take good care of them.</i>\"[pg]");
+			outputText("With a sense of duty accomplished you leave back for your camp. The fruit of your labor will probably come apparent only within a few days when the new sister formally joins the community. For now it's off to adventures with you![pg]");
+			CapturedSisters.push(7);
+			cleanupAfterCombat();
+		}
+		public function ConvertNewSisters():Boolean {
+			var needNext:Boolean;
+			for (var sister:int = CapturedSisters.length-1; sister >= 0; sister--) {
+				if (--CapturedSisters[sister] <= 0){
+					ConvertedSisters++;
+					CapturedSisters.removeAt(sister);
+					outputText("\nYou sense one of your new elf sisters has completed the covenant.\n");
+					needNext = true;
+				}
+			}
+			for (var herm:int = CapturedHerms.length-1; herm >= 0; herm--) {
+				if (--CapturedHerms[herm] == 0){
+					ConvertedHerms++;
+					CapturedHerms.removeAt(herm);
+					outputText("\nYou sense one of your new elf sisters has completed the covenant.\n");
+					needNext = true;
+				}
+			}
+			if (needNext) {
+				if (!player.hasPerk(PerkLib.OneWiththeForest)) {
+					outputText("<b>You acquired the Perk One with the forest</b>.");
+					player.createPerk(PerkLib.OneWiththeForest, 1, 0, 0, 0);
+
+					player.statStore.addBuffObject({
+						"str.mult": 0.01,
+						"tou.mult": 0.01,
+						"spe.mult": 0.01,
+						"int.mult": 0.01,
+						"wis.mult": 0.01,
+						"lib.mult": 0.01
+					}, 'Elf Sisters', {text: 'Elf Sisters'});
+				}
+				player.ElfSistersBonus();
+			}
+			return needNext;
 		}
 	}
 }
