@@ -50,7 +50,7 @@ public class Changelog extends BaseContent
 			outputText("-First part of Alvina pure romance path is now available. (Gotta use brain and look for clues to do it no cheat sheet to use ;) ) (EragonX)\n");
 			outputText("-Metamorph: Add Kirin parts (EragonX)\n");
 			outputText("-Fixes: double negative and harpywomb thunderbird. (liruyo)\n");
-			outputText("-Fixed bugs: MindUp option req. wrong items in Rath menu, Money strike been unusable against groups, Fetish Zealots blocking boat before they intro scene at lake plays\n");
+			outputText("-Fixed bugs: MindUp option req. wrong items in Rath menu, Money strike been unusable against groups, Fetish Zealots blocking boat before they intro scene at lake plays\n\n");
 			outputText("<b>Version 0.8s7:</b>\n\n");// ()
 			outputText("-New tier 0 misc lvl-up perk: Skilled Fighter. Req. Melee Weapons Mastery perk, lvl 3+ and 25+ str/tou/spe. Effect: +5% melee physical attacks multiplier and then adds 50% on top of final result.\n");
 			outputText("-New tier 0 misc lvl-up perk: Skilled Ranger. Req. Range Weapons Mastery perk, lvl 3+ and 25+ str/tou/spe. Effect: +5% range physical attacks multiplier and then adds 50% on top of final result.\n");
@@ -79,10 +79,10 @@ public class Changelog extends BaseContent
 			outputText("-New Cerberus TF event (sleep in camp while being fully hellhound (black pepper) and have Marae's Lethicite) Has a few unique interactions with corrupted enemies. (EragonX)\n");
 			outputText("-After Etna moves into camp she gains a new once-off encounter in the hills that can unlock more content. (EragonX)\n");
 			outputText("-Metamorph aditions - Face: Bunny, Dog, Kangaroo, Ferret mask, Ferret, Rhino, Echidna, Bear, Squirrel; Tail: Azazel, Rabbit, Avian, Griffin, Kangaroo, Thunderbird, Squirrel, Ferret, Bear, Ushi Oni (EragonX)\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New event perk: Elven Thorn shot (grow Rosethorns on arow shaft, lust+bleed). Training with Lutien with 100+ speed and knowing Briarthorn spell.\n");
+			outputText("-New event perk: Elven Twin shot (double bow shots after bonusses). Training with Lutien with maxed speed stat (100%)\n");
+			outputText("-New tier 4 spe lvl-up perk: Impact Throw. Req. Deadly Throw perk and 80+ spe. Effect: Thrown weapon impacts are so powerful that they can stop your opponents right in their tracks gaining a 10% chance of stunning them. (+15% range physical attacks multiplier)\n");
+			outputText("-New tier 5 spe lvl-up perk: Penetrating throw. Req. Impact Throw perk and 100+ spe. Effect: Thrown weapons have such penetrating power they now have a chance to run through multiple enemies. When attacking groups the projectiles have a 75% percent chance to deal their damage more then once losing 10% after each successful piercing strikes. (+20% range physical attacks multiplier)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -101,6 +101,9 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");// (Liadri)
 			outputText("-\n");// (aimozg)
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -217,9 +220,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
