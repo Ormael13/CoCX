@@ -3157,7 +3157,7 @@ public class Combat extends BaseContent {
                     if (monster.lustVuln == 0) {
                         outputText("\nIt has no effect!  Your foe clearly does not experience lust in the same way as you.\n");
                     } else {
-                        var baseDamage:Number = (combat.teases.teaseBaseLustDamage() / 10 * spellModWhite());
+                        var baseDamage:Number = (calculateBasicTeaseDamage() / 10 * spellModWhite());
                         if (player.hasPerk(PerkLib.VegetalAffinity)) baseDamage *= 1.5;
                         if (player.hasPerk(PerkLib.GreenMagic)) baseDamage *= 2;
                         if (player.hasStatusEffect(StatusEffects.GreenCovenant)) baseDamage *= 2;

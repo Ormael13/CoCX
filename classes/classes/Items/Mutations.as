@@ -2204,6 +2204,15 @@ public final class Mutations extends MutationsHelper {
         if (!player.hasPerk(PerkLib.DominantAlpha)) {
             player.createPerk(PerkLib.DominantAlpha, 0, 0, 0, 0);
             outputText("\n<b>Gained Perk: Dominant Alpha!</b> "+PerkLib.DominantAlpha.longDesc);
+
+            player.statStore.addBuffObject({
+                "str.mult": 0.02,
+                "tou.mult": 0.02,
+                "spe.mult": 0.02,
+                "int.mult": 0.02,
+                "wis.mult": 0.02,
+                "lib.mult": 0.02
+            }, 'Dominant Alpha', {text: 'Dominant Alpha'});
         }
         if (!player.hasPerk(PerkLib.TitanicStrength)) {
             player.createPerk(PerkLib.TitanicStrength, 0, 0, 0, 0);
