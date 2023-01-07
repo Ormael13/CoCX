@@ -40,6 +40,7 @@ import classes.Scenes.Dungeons.DemonLab.Incels;
 import classes.Scenes.Dungeons.DemonLab.IncubusScientist;
 import classes.Scenes.Dungeons.DemonLab.LabGuard;
 import classes.Scenes.Dungeons.DemonLab.ProjectNightwalker;
+import classes.Scenes.Dungeons.DemonLab.UltimisFlamespreader;
 import classes.Scenes.Dungeons.EbonLabyrinth.*;
 import classes.Scenes.Dungeons.HelDungeon.*;
 import classes.Scenes.Monsters.Magnar;
@@ -631,6 +632,7 @@ public class Combat extends BaseContent {
             StatusEffects.SiegweirdGrapple,
             StatusEffects.MagnarPinned,
             StatusEffects.Straddle,
+            StatusEffects.DragonsNom,
         ];
         var monsterStatuses:Array = [
             StatusEffects.QueenBind,
@@ -641,6 +643,7 @@ public class Combat extends BaseContent {
         if (player.hasStatusEffect(StatusEffects.GiantGrabbed)) outputText("\n<b>You're trapped in the giant's hand!  All you can do is try to struggle free!</b>");
         if (player.hasStatusEffect(StatusEffects.Tentagrappled)) outputText("\n<b>The demoness's tentacles are constricting your limbs!</b>");
         if (player.hasStatusEffect(StatusEffects.Straddle) && monster is ProjectNightwalker) (monster as ProjectNightwalker).faceSittingDescript();
+        if (player.hasStatusEffect(StatusEffects.DragonsNom)) outputText("\n<b>The Dragon has you firmly clamped between its jaws!</b>");
         var status:StatusEffectType;
         for each (status in playerStatuses) if (player.hasStatusEffect(status)) return true;
         for each (status in monsterStatuses) if (monster.hasStatusEffect(status)) return true;
@@ -2166,6 +2169,9 @@ public class Combat extends BaseContent {
         } else if (player.hasStatusEffect(StatusEffects.Straddle)) {
             if (monster is ProjectNightwalker)(monster as ProjectNightwalker).struggleFaceSitting(true);
             skipMonsterAction = true;
+        } else if (player.hasStatusEffect(StatusEffects.DragonsNom)) {
+            if (monster is UltimisFlamespreader)(monster as UltimisFlamespreader).struggleNom(true);
+            skipMonsterAction = true;
         } else if (player.hasStatusEffect(StatusEffects.GooBind)) {
             clearOutput();
             if (monster is HellfireSnail) outputText("Your flesh begins burning as the snail embraces you with her molten body! You scream, but the molten girl doesn't stop!");
@@ -2362,6 +2368,16 @@ public class Combat extends BaseContent {
                 if (rand(3) == 0 || rand(80) < player.str / 2 || player.hasPerk(PerkLib.FluidBody)) {
                     outputText("You grunt in anger, bending your body as quickly as you can. You slam [themonster] into the ground, and you can feel her legs loosen around your neck. With a roar of effort, you get a hold of her ankles, break her grip on your face, and throw [monster him] away from you.\n\n");
                     player.removeStatusEffect(StatusEffects.Straddle);
+                }
+            }
+            skipMonsterAction = true;
+        } else if (player.hasStatusEffect(StatusEffects.DragonsNom)) {
+            if (monster is UltimisFlamespreader)(monster as UltimisFlamespreader).struggleNom(true);
+            else {
+                //33% chance to break free + up to 50% chance for strength
+                if (rand(3) == 0 || rand(80) < player.str / 2 || player.hasPerk(PerkLib.FluidBody)) {
+                    outputText("You grunt in anger, managing to slip out of [themonster]'s jaws and roll away.\n\n");
+                    player.removeStatusEffect(StatusEffects.DragonsNom);
                 }
             }
             skipMonsterAction = true;

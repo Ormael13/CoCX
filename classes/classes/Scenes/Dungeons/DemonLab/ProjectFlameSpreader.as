@@ -48,7 +48,7 @@ public class ProjectFlameSpreader extends Monster {
     }
 
     private function randomiseAction():void {
-        var choice:Number = rand(6);
+        var choice:Number = rand(4);
         switch (choice) {
             case 0: flameAttack();
                 break;
@@ -67,7 +67,7 @@ public class ProjectFlameSpreader extends Monster {
 
     override public function defeated(hpVictory:Boolean):void {
         outputText("While the area around you is scorched by the Flamespreader’s breath, you walk over to the injured creature as it lies on its back. It wiggles its shapely ass, presenting itself to you. It still shoots fire from its mouth, and you take no chances. You bring your [weapon] down onto the Flamespreader’s head, ending its life. As the light fades from its eyes, the malice seems to fade, and the sinister smile becomes something more genuine. [pg]");
-        outputText("“<i>“Thank…” The creature can’t say anything more...But you know what it was going to say.[pg]");
+        outputText("“<i>Thank…</i>” The creature can’t say anything more...But you know what it was going to say.[pg]");
         if (flags[kFLAGS.PLAYER_COMPANION_1] == "Kiha")
             outputText("You turn back to see Kiha looking down at the creature, a mixture of sadness and anger on her face. She hefts her axe, and without a word, she cleaves a small tree in two. Wordlessly, you and your dragoness carry the body back to the village, where she already has a grave marked. Kiha nods in thanks, and you leave her, heading back to camp.");
         else
