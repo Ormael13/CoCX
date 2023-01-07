@@ -40,7 +40,7 @@ public class PregnancyStore extends Object
 																	   //pregnancy from taking hold. Does not respond to ovielixirs.
 		public static const PREGNANCY_MINERVA:int				=  34;
 		public static const PREGNANCY_BEHEMOTH:int				=  35;
-		public static const PREGNANCY_PHOENIX:int				=  36;
+		public static const PREGNANCY_QUASI_PHOENIX:int			=  36;
 		public static const PREGNANCY_ANDY:int                  =  37; //This is functionally the same as Satyr but less corrupt. 10% chance of fauns, if ever implemented.
 		public static const PREGNANCY_ALRAUNE:int				=  38;
 		public static const PREGNANCY_CELESS:int				=  39;
