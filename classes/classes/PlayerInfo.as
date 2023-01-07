@@ -5,6 +5,8 @@ import classes.IMutations.IMutationsLib;
 import classes.Scenes.Combat.CombatAbility;
 import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.NPCs.DriderTown;
+import classes.Scenes.NPCs.EtnaDaughterScene;
+import classes.Scenes.NPCs.EtnaFollower;
 import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.NPCs.Forgefather;
 import classes.Scenes.NPCs.IsabellaScene;
@@ -947,7 +949,7 @@ public class PlayerInfo extends BaseContent {
 
 		if (flags[kFLAGS.FEMOIT_EGGS] != 0)
 			pregnancies += "<b>Benoit</b> \n";
-		if (SceneLib.holliScene)
+		//if (SceneLib.holliScene)
 
 		if (SceneLib.telAdre.cotton.pregnancy.isPregnant)
 			pregnancies += "<b>Cotton</b> \n";
@@ -958,8 +960,8 @@ public class PlayerInfo extends BaseContent {
 		if (SceneLib.emberScene.pregnancy.isPregnant)
 			pregnancies += "<b>Ember</b> \n";
 
-		//if (SceneLib.etnaScene.pregnancy.isPregnant)	//TODO Etna preggers
-		//	pregnancies += "<b>Etna</b> \n";
+		if (SceneLib.etnaScene.pregnancy.isPregnant)
+			pregnancies += "<b>Etna</b> \n";
 
 		if (SceneLib.excelliaFollower.pregnancy.isPregnant)
 			pregnancies += "<b>Excellia</b> \n";
@@ -1090,6 +1092,11 @@ public class PlayerInfo extends BaseContent {
         if (flags[kFLAGS.EMBER_EGGS] > 0)
 			childStats += "<b>Ember Eggs Produced:</b> " + flags[kFLAGS.EMBER_EGGS] + "\n";
 
+		if (EtnaFollower.EtnaDaughters > 0) {
+			childStats += "<b>Children With Etna:</b> " + EtnaDaughterScene.EtnaDaughterName + "\n";
+			childStats += "<b>Children With Etna:</b> " + EtnaFollower.EtnaDaughters + "\n";
+		}
+
 		if (flags[kFLAGS.EXCELLIA_MALE_KIDS] > 0)
 			childStats += "<b>Excellia Offspring (Human Males):</b> " + flags[kFLAGS.EXCELLIA_MALE_KIDS] + "\n";
 		if (flags[kFLAGS.EXCELLIA_FEMALE_KIDS] > 0)
@@ -1141,6 +1148,9 @@ public class PlayerInfo extends BaseContent {
         if (SceneLib.kihaFollower.totalKihaChildren() > 0)
             childStats += "<b>Total Children With Kiha:</b> " + SceneLib.kihaFollower.totalKihaChildren() + "\n";
         
+		if (flags[kFLAGS.LOPPE_KIDS] > 0)
+			childStats += "<b>Loppe Children:</b> " + flags[kFLAGS.LOPPE_KIDS] + " of max " + flags[kFLAGS.LOPPE_KIDS_LIMIT] + "\n";
+
 		if (DriderTown.LilyKidsPC > 0)
 			childStats += "<b>Drider Children With Lily:</b> " + DriderTown.LilyKidsPC + "\n";
 
@@ -1220,7 +1230,7 @@ public class PlayerInfo extends BaseContent {
 		possiblePregs += "Cotton\n";
 		possiblePregs += "Edryn\n";
 		possiblePregs += "Ember\n";
-	//	possiblePregs += "Etna\n";
+		possiblePregs += "Etna\n";
 		possiblePregs += "Excellia\n";
 		possiblePregs += "Female spider\n";
 		possiblePregs += "Helia\n";
@@ -1233,7 +1243,7 @@ public class PlayerInfo extends BaseContent {
 		possiblePregs += "Lily\n";
 	//	possiblePregs += "Lily & Izma\n";
 	//	possiblePregs += "Lily & Sidone\n";
-	//	possiblePregs += "Loppe\n";
+		possiblePregs += "Loppe\n";
 		possiblePregs += "Lynnette\n";
 		possiblePregs += "Marble\n";
 		possiblePregs += "Minerva\n"
@@ -1254,13 +1264,13 @@ public class PlayerInfo extends BaseContent {
 		possibleButtPregs += "Urta\n";
 		outputText("\n<b><u>Possible NPC Butt Pregnancies</u></b>\n" + possibleButtPregs);
 
-		var possiblePCPregs:String = "CELESS unique, IMP, MINOTAUR, COCKATRICE, MOUSE, HELL_HOUND, CENTAUR, MARBLE, BUNNY, ANEMONE, "+
-				"AMILY, IZMA, SPIDER, BASILISK, DRIDER_EGGS, GOO_GIRL, EMBER, BENOIT, SATYR, COTTON, URTA, SAND_WITCH, FROG_GIRL, "+
-				"FAERIE, JOJO, KELT, TAOTH, MINERVA, BEHEMOTH, ZENJI, \n"+
-				"WORM_STUFFED permanent, faux OVIELIXIR_EGGS, faux GOO_STUFFED, \n"+
-				"ALRAUNE racial override,GOBLIN racial override, HARPY_EGGS racial override, HARPY_HATCHING racial override";
+		var possiblePCPregs:String = "Amily, Behemoth, Benoit, Celess *, Cotton, Ember, Izma, Jojo, Loppe, Marble, Minerva, Taoth, Urta, Zenji, \n"+
+				"Anemone, Bunny, Basilisk, Centaur, Cockatrice, Drider eggs, Faerie/Phouka, Frog girl, Goo Girl, Hellhound, Imp, Kelt, Minotaur, Mouse, Sand witch, Satyr, Spider, \n"+
+				"faux preg Goo-stuffed, faux preg OviElixir eggs, Worms semi-permanent, \n"+
+				"Alraune **, Goblin **, Harpy egg **, Harpy egg hatching **\n" +
+				"* = unique pregnancies, ** = racial override";
 		outputText("\n<b><u>Possible PC Pregnancies</u></b>\n" + possiblePCPregs);
-		var possiblePCButtPregs:String = "BEE_EGGS, DRIDER_EGGS, FROG_GIRL, SANDTRAP_FERTILE, SANDTRAP, BUNNY egg transformative"
+		var possiblePCButtPregs:String = "Bee eggs, Drider eggs, Grog girl, Sandtrap Fertile, Sandtrap, Bunny egg transformative"
 		outputText("\n<b><u>Possible PC Butt Pregnancies</u></b>\n" + possiblePCButtPregs);
 
 		statsMenu(8);

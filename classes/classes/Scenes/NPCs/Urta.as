@@ -200,6 +200,7 @@ public function knockUpUrtaChance():void { //Moved here from UrtaPregs since it 
 	if (chance > rand(100)) {
 		pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, 384);
 		flags[kFLAGS.URTA_PREGNANT_DELIVERY_SCENE] = 0;
+		if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Urta is pregnant!</b>");
 	}
 }
 

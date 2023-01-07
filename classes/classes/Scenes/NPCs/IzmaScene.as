@@ -1605,6 +1605,7 @@ private function izmaPreg():void {
 	//PREGGO CHANCES
 	if (flags[kFLAGS.IZMA_PREGNANCY_ENABLED] == 1 && !pregnancy.isPregnant && rand(100) < (10 + Math.round(player.cumQ() / 100))) {
 		pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_IZMA);
+		if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Izma is pregnant!</b>");
 	}
 }
 

@@ -91,6 +91,7 @@ public class MinervaScene extends BaseContent implements TimeAwareInterface {
 			if (rand(100) < chance && !pregnancy.isPregnant) {
 				trace("Minerva got PREGNANT!");
 				pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_MINERVA);
+				if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Minerva is pregnant!</b>");
 			}
 		}
 		
