@@ -56,6 +56,8 @@ public class Changelog extends BaseContent
 			outputText("-New tier 0 misc lvl-up perk: Skilled Ranger. Req. Range Weapons Mastery perk, lvl 3+ and 25+ str/tou/spe. Effect: +5% range physical attacks multiplier and then adds 50% on top of final result.\n");
 			outputText("-New tier 1 misc lvl-up perk: Skilled Gunslinger. Req. Range Weapons Attack Multiplier and Job: Gunslinger perks, 30+ str/tou/spe. Effect: +10% firearms attacks multiplier and then adds 50% on top of final result.\n");
 			outputText("-New tier 3 speed lvl-up perk: Power Shot (Ex). Req. Power Shot perk. Effect: Power Shoot p. special damage increased by ~2,5x. Add some of your strength (~40/10% of str / spe scaling value) to normal bow damage / (~40/10% of spe / str scaling value) throwing damage. (+15% range physical attacks multiplier)\n");
+			outputText("-New tier 4 speed lvl-up perk: Impact Throw. Req. Deadly Throw perk and 80+ spe. Effect: Thrown weapon impacts are so powerful that they can stop your opponents right in their tracks gaining a 10% chance of stunning them. (+15% range physical attacks multiplier)\n");
+			outputText("-New tier 5 speed lvl-up perk: Penetrating throw. Req. Impact Throw perk and 100+ spe. Effect: Thrown weapons have such penetrating power they now have a chance to run through multiple enemies. When attacking groups the projectiles have a 75% (losing 10% after each successful piercing strike) chance to deal their damage more then once. (+20% range physical attacks multiplier)\n");
 			outputText("-New race: Azazel - gained by following new path for Alvina - it's smth akin to purified devil tf with abilites to be not so corrupted and etc. (written by Liadri and coded by EragonX). Azazelkin/Azazel/True Azazel racial bonuses (11/16/29 race points): ");
 			outputText("+55/75/100% top str multi, -20/25/30% to spe multi, +80/130/250% to int multi, +65/100/150% ot wis multi, +90/170/220 to max lust, +15/40/50 to sens\n");
 			outputText("-Green Covenant req. to be Wood Elf or one of Plant races to cast. It also becomes magical special insted of a spell.\n");
@@ -81,8 +83,6 @@ public class Changelog extends BaseContent
 			outputText("-Metamorph aditions - Face: Bunny, Dog, Kangaroo, Ferret mask, Ferret, Rhino, Echidna, Bear, Squirrel; Tail: Azazel, Rabbit, Avian, Griffin, Kangaroo, Thunderbird, Squirrel, Ferret, Bear, Ushi Oni (EragonX)\n");
 			outputText("-New event perk: Elven Thorn shot (grow Rosethorns on arow shaft, lust+bleed). Training with Lutien with 100+ speed and knowing Briarthorn spell.\n");
 			outputText("-New event perk: Elven Twin shot (double bow shots after bonusses). Training with Lutien with maxed speed stat (100%)\n");
-			outputText("-New tier 4 speed lvl-up perk: Impact Throw. Req. Deadly Throw perk and 80+ spe. Effect: Thrown weapon impacts are so powerful that they can stop your opponents right in their tracks gaining a 10% chance of stunning them. (+15% range physical attacks multiplier)\n");
-			outputText("-New tier 5 speed lvl-up perk: Penetrating throw. Req. Impact Throw perk and 100+ spe. Effect: Thrown weapons have such penetrating power they now have a chance to run through multiple enemies. When attacking groups the projectiles have a 75% (losing 10% after each successful piercing strike) chance to deal their damage more then once. (+20% range physical attacks multiplier)\n");
 			outputText("-New tier 3 strength lvl-up perk: Backbreaker. Req. Balance Breaker perk and 110+ str. Effect: Hammer or mace deals 50% more damage to stunned enemies.\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -93,11 +93,11 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
-			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
-			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
-			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
-			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");// (Liadri)
 			outputText("-\n");// (aimozg)
@@ -107,8 +107,11 @@ public class Changelog extends BaseContent
 			outputText("-\n");// (Furrin Gok)
 			outputText("-\n");// (khovel)
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
+			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
+			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
+			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
+			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -186,9 +189,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -223,7 +224,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

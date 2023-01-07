@@ -456,7 +456,7 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
                 + "“<i>...They…Let the blood go…</i>” Her voice echoes off the walls, the flap of leathery wings obscuring her even more. “<i>But…You’ll do.</i>” \n"
                 + "\n"
                 + "You’re now fighting Project Nightwalker!");
-            startCombat(new ProjectNightwalker(true));
+            startCombat(new ProjectNightwalker());
         } else {
             outputText("Despite its enormous volume, the metallic stench of blood fills the air, with just a hint of decay underneath. While there are a few cells still closed, most have swung wide open. The wall has sconces on them, and you walk carefully around the room, lighting each torch as you move along. With every torch lit, you turn to the centre of the cavern. \n"
                 + "\n"
@@ -1101,4 +1101,4 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
         doNext(camp.returnToCampUseTwoHours);
     }
 }
-}
+}
