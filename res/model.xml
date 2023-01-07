@@ -6799,11 +6799,15 @@
 					<show part="fullbody/cerberus"/>
 				</else>
 			</if>
-			<if test="breastRows[0].breastRating lte BreastCup.FLAT">
-				<else>
-					<show part="fullbody/femaleCerberus"/>
-				</else>
-			</if>	
+			<if test="breastRows.length gt 0">
+				<switch>
+					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+					</case>
+					<default>
+						<show part="fullbody/femaleCerberus"/>
+					</default>
+				</switch>
+			</if>
 		</if>
 
 		<!-- Jiangshi -->
