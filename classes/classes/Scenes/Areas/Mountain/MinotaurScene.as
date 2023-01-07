@@ -21,7 +21,7 @@ public function minoVictoryRapeChoices():void {
 		else outputText("The minotaur collapses, losing all semblance of defiance as he warily looks up at your throbbing manhood. Now's the time to put this bull in his place.");
 		menu();
 		addButton(0, "Rape", cerberusRapesMinotaur);
-		addButton(4, "Ignore", ignoreMinotaur);
+		addButton(9, "Ignore", ignoreMinotaur);
 		return;
 	}
 	sceneHunter.print("Check failed: Cerberus race.");
@@ -31,7 +31,7 @@ public function minoVictoryRapeChoices():void {
 	if(player.lust >= 33 && player.gender > 0)
 		outputText("\n\nSadly, you realize your own needs have not been met.  Of course, you could always fuck the eager bull...\n\nWhat do you do?");
 	else if(player.hasStatusEffect(StatusEffects.Feeder))
-		outputText("\n\nlthough you're not aroused enough to rape the minotaur, you realize your own need to breastfeed has not been met.  You could always let the poor thing have a drink...\n\nWill you?");
+		outputText("\n\nAlthough you're not aroused enough to rape the minotaur, you realize your own need to breastfeed has not been met.  You could always let the poor thing have a drink...\n\nWill you?");
 	else outputText("\n\nYou're not aroused enough to rape him.");
 	//menu
 	menu();
