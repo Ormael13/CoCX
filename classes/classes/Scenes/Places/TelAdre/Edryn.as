@@ -981,6 +981,7 @@ private function edrynPregChance():void {
 	else trace("Edryn not knocked up!");
 	if (preg) {
 		pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_CENTAUR + 80);
+		if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Edryn is pregnant! ~Shhhh, youre not supposed to know yet~</b>");
 		flags[kFLAGS.EDRYN_PREGNANT_AND_NOT_TOLD_PC_YET] = 0;
 	}
 }

@@ -684,7 +684,10 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 			else if (player.cumQ() < 500) outputText("gush");
 			else outputText("river");
 			outputText(" of seed rushes out of her gaped anus, pooling on the swamp floor as she slowly loses consciousness.  You give her ass an affectionate slap and get dressed, feeling sated and ready to resume your adventures.");
-			if (y != 1) pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_SPIDER - 200); //Spiders carry for half as long as the player does for some reason
+			if (y != 1) {
+				if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>The spidergirl is pregnant!</b>");
+				pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_SPIDER - 200); //Spiders carry for half as long as the player does for some reason
+			}
 			player.sexReward("vaginalFluids","Dick");
             if (!CoC.instance.inCombat)
                 doNext(camp.returnToCampUseOneHour);

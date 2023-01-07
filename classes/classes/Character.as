@@ -155,6 +155,7 @@ import classes.Scenes.NPCs.Forgefather;
 			{
 				knockUpForce(type, incubation);
 				trace("PC Knocked up with pregnancy type: " + type + " for " + incubation + " incubation.");
+				if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) EngineCore.outputText("\n<b>You are pregnant from "+type+"!</b>");
 			}
 			//Chance for eggs fertilization - ovi elixir and imps excluded!
 			if (type != PregnancyStore.PREGNANCY_IMP && type != PregnancyStore.PREGNANCY_OVIELIXIR_EGGS && type != PregnancyStore.PREGNANCY_ANEMONE)

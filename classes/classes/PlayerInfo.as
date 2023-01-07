@@ -5,6 +5,7 @@ import classes.IMutations.IMutationsLib;
 import classes.Scenes.Combat.CombatAbility;
 import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.NPCs.DriderTown;
+import classes.Scenes.NPCs.EtnaDaughterScene;
 import classes.Scenes.NPCs.EtnaFollower;
 import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.NPCs.Forgefather;
@@ -948,7 +949,7 @@ public class PlayerInfo extends BaseContent {
 
 		if (flags[kFLAGS.FEMOIT_EGGS] != 0)
 			pregnancies += "<b>Benoit</b> \n";
-		if (SceneLib.holliScene)
+		//if (SceneLib.holliScene)
 
 		if (SceneLib.telAdre.cotton.pregnancy.isPregnant)
 			pregnancies += "<b>Cotton</b> \n";
@@ -1091,8 +1092,10 @@ public class PlayerInfo extends BaseContent {
         if (flags[kFLAGS.EMBER_EGGS] > 0)
 			childStats += "<b>Ember Eggs Produced:</b> " + flags[kFLAGS.EMBER_EGGS] + "\n";
 
-		if (EtnaFollower.EtnaDaughters > 0)
+		if (EtnaFollower.EtnaDaughters > 0) {
+			childStats += "<b>Children With Etna:</b> " + EtnaDaughterScene.EtnaDaughterName + "\n";
 			childStats += "<b>Children With Etna:</b> " + EtnaFollower.EtnaDaughters + "\n";
+		}
 
 		if (flags[kFLAGS.EXCELLIA_MALE_KIDS] > 0)
 			childStats += "<b>Excellia Offspring (Human Males):</b> " + flags[kFLAGS.EXCELLIA_MALE_KIDS] + "\n";

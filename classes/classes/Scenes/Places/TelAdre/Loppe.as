@@ -2334,7 +2334,7 @@ public function loppeKnockupAttempt(isplayer:Boolean = false):void {
 		if (flags[kFLAGS.LOPPE_FERTILE] > 0) {
 			if (rand(5) == 0 || player.cumQ() > rand(1000) || player.virilityQ() >= 0.5) {
 				pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_LOPPE);
-				outputText("<b>Loppe is pregnant!</b>")
+				if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Loppe is pregnant!</b>");
 			}
 		}
 	}

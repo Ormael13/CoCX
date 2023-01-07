@@ -708,6 +708,7 @@ public function totalExcelliaChildren():int {
 private function excelliaPreg():void {
 	if (!pregnancy.isPregnant) {// && rand(100) < (10 + Math.round(player.cumQ() / 100))
 		pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_EXCELLIA);
+		if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Excellia is pregnant!</b>");
 	}
 }
 private function ExcelliaPoopsBabies1():void {
