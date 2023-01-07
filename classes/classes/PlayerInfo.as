@@ -1227,7 +1227,7 @@ public class PlayerInfo extends BaseContent {
 		possiblePregs += "Cotton\n";
 		possiblePregs += "Edryn\n";
 		possiblePregs += "Ember\n";
-	//	possiblePregs += "Etna\n";
+		possiblePregs += "Etna\n";
 		possiblePregs += "Excellia\n";
 		possiblePregs += "Female spider\n";
 		possiblePregs += "Helia\n";
@@ -1240,7 +1240,7 @@ public class PlayerInfo extends BaseContent {
 		possiblePregs += "Lily\n";
 	//	possiblePregs += "Lily & Izma\n";
 	//	possiblePregs += "Lily & Sidone\n";
-	//	possiblePregs += "Loppe\n";
+		possiblePregs += "Loppe\n";
 		possiblePregs += "Lynnette\n";
 		possiblePregs += "Marble\n";
 		possiblePregs += "Minerva\n"
@@ -1261,13 +1261,13 @@ public class PlayerInfo extends BaseContent {
 		possibleButtPregs += "Urta\n";
 		outputText("\n<b><u>Possible NPC Butt Pregnancies</u></b>\n" + possibleButtPregs);
 
-		var possiblePCPregs:String = "CELESS unique, IMP, MINOTAUR, COCKATRICE, MOUSE, HELL_HOUND, CENTAUR, MARBLE, BUNNY, ANEMONE, "+
-				"AMILY, IZMA, SPIDER, BASILISK, DRIDER_EGGS, GOO_GIRL, EMBER, BENOIT, SATYR, COTTON, URTA, SAND_WITCH, FROG_GIRL, "+
-				"FAERIE, JOJO, KELT, TAOTH, MINERVA, BEHEMOTH, ZENJI, \n"+
-				"WORM_STUFFED permanent, faux OVIELIXIR_EGGS, faux GOO_STUFFED, \n"+
-				"ALRAUNE racial override,GOBLIN racial override, HARPY_EGGS racial override, HARPY_HATCHING racial override";
+		var possiblePCPregs:String = "Amily, Behemoth, Benoit, Celess *, Cotton, Ember, Izma, Jojo, Loppe, Marble, Minerva, Taoth, Urta, Zenji, \n"+
+				"Anemone, Bunny, Basilisk, Centaur, Cockatrice, Drider eggs, Faerie/Phouka, Frog girl, Goo Girl, Hellhound, Imp, Kelt, Minotaur, Mouse, Sand witch, Satyr, Spider, \n"+
+				"faux preg Goo-stuffed, faux preg OviElixir eggs, Worms semi-permanent, \n"+
+				"Alraune **, Goblin **, Harpy egg **, Harpy egg hatching **\n" +
+				"* = unique pregnancies, ** = racial override";
 		outputText("\n<b><u>Possible PC Pregnancies</u></b>\n" + possiblePCPregs);
-		var possiblePCButtPregs:String = "BEE_EGGS, DRIDER_EGGS, FROG_GIRL, SANDTRAP_FERTILE, SANDTRAP, BUNNY egg transformative"
+		var possiblePCButtPregs:String = "Bee eggs, Drider eggs, Grog girl, Sandtrap Fertile, Sandtrap, Bunny egg transformative"
 		outputText("\n<b><u>Possible PC Butt Pregnancies</u></b>\n" + possiblePCButtPregs);
 
 		statsMenu(8);
