@@ -613,10 +613,6 @@ public class CockatriceScene extends BaseContent {
 
     public function cockatriceBirth():void {
         outputText(images.showImage("birth-cockatrice"));
-        if (player.vaginas.length == 0) {
-            outputText("You feel a terrible pressure in your groin... then a sharp pain accompanied by the rending of flesh. <b>You look down and behold a new vagina</b>.\n\n");
-            player.createVagina();
-        }
         outputText("A sudden shift in the weight of your pregnant belly staggers you, dropping you to your knees. You realize something is about to be birthed, and you shed your " + player.armorName + " before it can be ruined by what's coming. "
             + "A contraction pushes violently through your midsection, stretching your " + player.vaginaDescript() + " painfully, the lips opening wide as something begins sliding down your passage. "
             + "A burst of pink slime soaks the ground below as the birthing begins in earnest, and the white chicken egg peaks between your lips. You push hard and the medium egg pops free at last, making you sigh with relief as it drops into the pool of slime. ");

@@ -26,7 +26,7 @@ import classes.Scenes.NPCs.Forgefather;
 		private var _pregnancyType:int = 0;
 		public function get pregnancyType():int { return _pregnancyType; }
 
-		private var _pregnancyTypeList:Array = ['NONE','PREGNANCY_IMP','PREGNANCY_MINOTAUR','PREGNANCY_COCKATRICE','PREGNANCY_MOUSE','PREGNANCY_OVIELIXIR_EGGS','PREGNANCY_HELL_HOUND','PREGNANCY_CENTAUR','PREGNANCY_MARBLE','PREGNANCY_BUNNY','PREGNANCY_ANEMONE','PREGNANCY_AMILY','PREGNANCY_IZMA','PREGNANCY_SPIDER','PREGNANCY_BASILISK','PREGNANCY_DRIDER_EGGS','PREGNANCY_GOO_GIRL','PREGNANCY_EMBER','PREGNANCY_BENOIT','PREGNANCY_SATYR','PREGNANCY_COTTON','PREGNANCY_URTA','PREGNANCY_SAND_WITCH','PREGNANCY_FROG_GIRL','PREGNANCY_FAERIE','PREGNANCY_PLAYER','PREGNANCY_BEE_EGGS','PREGNANCY_SANDTRAP_FERTILE','PREGNANCY_SANDTRAP','PREGNANCY_JOJO','PREGNANCY_KELT','PREGNANCY_TAOTH','PREGNANCY_GOO_STUFFED','PREGNANCY_WORM_STUFFED','PREGNANCY_MINERVA','PREGNANCY_BEHEMOTH','PREGNANCY_PHOENIX','PREGNANCY_ANDY','PREGNANCY_ALRAUNE','PREGNANCY_CELESS','PREGNANCY_GOBLIN','PREGNANCY_ZENJI','PREGNANCY_AYANE','PREGNANCY_ANT_EGGS','PREGNANCY_MANTIS_EGGS','PREGNANCY_HARPY_EGGS','PREGNANCY_HARPY_HATCHING'];
+		private var _pregnancyTypeList:Array = ['None','Imp','Minotaur','Cockatrice','Mouse','Ovielixer eggs','Hellhound','Centaur','Marble','Bunny','Anemone','Amily','Izma','Spider eggs','Basilisk','Drider eggs','Goo girl','Ember','Benoit Eggs','Satyr','Cotton','Urta','Sand Witch','Frog girl','Faerie','Player','Bee Eggs','Sandtrap Fertilized','Sandtrap','Jojo','Kelt','Taoth','Goo Stuffed','Worm Stuffed','Minerva','Behemoth','Quasi Phoenix','Andy (Satyr)','Alraune','Celess','Goblin','Zenji','Ayane','Ant Eggs','Mantis Eggs','Harpy Eggs','Harpy Egg Hatching','Loppe'];
 		public function get pregnancyTypeText():String { return _pregnancyTypeList[_pregnancyType]; }
 
 		private var _pregnancyIncubation:int = 0;
@@ -155,6 +155,7 @@ import classes.Scenes.NPCs.Forgefather;
 			{
 				knockUpForce(type, incubation);
 				trace("PC Knocked up with pregnancy type: " + type + " for " + incubation + " incubation.");
+				if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) EngineCore.outputText("\n<b>You are pregnant from "+type+"!</b>");
 			}
 			//Chance for eggs fertilization - ovi elixir and imps excluded!
 			if (type != PregnancyStore.PREGNANCY_IMP && type != PregnancyStore.PREGNANCY_OVIELIXIR_EGGS && type != PregnancyStore.PREGNANCY_ANEMONE)

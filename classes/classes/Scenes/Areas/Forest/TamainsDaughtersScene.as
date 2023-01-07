@@ -1053,6 +1053,7 @@ private function loseToDaughtersWithTamaniThere():void {
 private function knockUpDaughters():void {
 	if (pregnancy.isPregnant) return;
 	pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, 216); //Nine day long pregnancy, just like mom
+	if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Tamani's daughters are pregnant!</b>");
 	//Determine how many kids...
 	flags[kFLAGS.TAMANI_DAUGHTERS_PREGNANCY_COUNT] = 2;
 	var cum:Number = player.cumQ();

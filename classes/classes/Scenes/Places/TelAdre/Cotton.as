@@ -44,6 +44,7 @@ private function pregCottonChance(bonusMult:Number = 1):void {
 	if (flags[kFLAGS.COTTON_HERBS_OFF] > 0) {
 		if (rand(5) == 0 || player.cumQ() > rand(1000) || player.virilityQ() >= 0.5) {
 			pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_COTTON);
+			if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Cotton is pregnant!</b>");
 		}
 	}
 	//HERBS ON - LESS CHANCE
@@ -52,11 +53,13 @@ private function pregCottonChance(bonusMult:Number = 1):void {
 		if (flags[kFLAGS.COTTON_KID_COUNT] == 0) {
 			if (rand(5) == 0 || player.cumQ() * player.virilityQ() >= rand(1000)) {
 				pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_COTTON);
+				if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Cotton is pregnant!</b>");
 			}
 		}
 		//NOT FIRST KID - LESS LUCKY!
 		else if (player.cumQ() * player.virilityQ() >= rand(1000)) {
 			pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_COTTON);
+			if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Cotton is pregnant!</b>");
 		}
 	}
 }

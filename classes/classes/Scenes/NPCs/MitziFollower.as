@@ -308,6 +308,7 @@ private function mitziPreg():void {
 	if (!pregnancy.isPregnant && rand(100) < (10 + Math.round(player.cumQ() / 100))) {
 		pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_MITZI);
 		player.createStatusEffect(StatusEffects.MitziPregnant, 0, 0, 0, 0);
+		if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Mitzi is pregnant!</b>");
 	}
 }
 private function MitziPoopsBabies():void {
