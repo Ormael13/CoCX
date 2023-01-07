@@ -31,7 +31,7 @@ public class Questlog extends BaseContent
 			outputText("\n<b>Chimera Squad:</b> ");
 			if (flags[kFLAGS.DEMON_LABORATORY_DISCOVERED] > 1) outputText("Completed (Reward taken)");
 			else if (SceneLib.dungeons.checkDemonLaboratoryClear()) outputText("Completed");
-			else if (flags[kFLAGS.DEMON_LABORATORY_DISCOVERED] > 0) outputText("In Progress");
+			else if (flags[kFLAGS.DEMON_LABORATORY_DISCOVERED] == 1) outputText("In Progress");
 			else outputText("Not Started");
 			outputText("\n<b>End of Reign:</b> ");
 			if (flags[kFLAGS.LETHICE_DEFEATED] > 1) outputText("Completed (Reward taken)");
@@ -134,7 +134,7 @@ public class Questlog extends BaseContent
 			menu();
 			if (SceneLib.dungeons.checkFactoryClear() && flags[kFLAGS.FACTORY_OMNIBUS_DEFEATED] < 2) addButton(0, "Factory", takeRewardForFactory);
 			if (SceneLib.dungeons.checkDeepCaveClear() && flags[kFLAGS.DEFEATED_ZETAZ] < 2) addButton(1, "Deep Cave", takeRewardForDeepCave);
-			if (SceneLib.dungeons.checkDemonLaboratoryClear() && flags[kFLAGS.DEMON_LABORATORY_DISCOVERED] < 2) addButton(2, "Demon Laboratory", takeRewardForDeepCave);
+			if (SceneLib.dungeons.checkDemonLaboratoryClear() && flags[kFLAGS.DEMON_LABORATORY_DISCOVERED] < 2) addButton(2, "Demon Laboratory", takeRewardForDemonLaboratory);
 			//button 4 - ?Demon Mine?
 			if (SceneLib.dungeons.checkLethiceStrongholdClear() && flags[kFLAGS.LETHICE_DEFEATED] < 2) addButton(3, "Stronghold", takeRewardForStronghold);
 			if (SceneLib.dungeons.checkSandCaveClear() && flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] < 2) addButton(5, "Sand Cave", takeRewardForSandCave);

@@ -243,7 +243,7 @@ public class DungeonEngine extends DungeonAbstractContent {
         return (flags[kFLAGS.ZETAZ_IMP_HORDE_DEFEATED] > 0 && flags[kFLAGS.ZETAZ_FUNGUS_ROOM_DEFEATED] > 0 && player.hasKeyItem("Zetaz's Map") >= 0);
     }
     public function checkDemonLaboratoryClear():Boolean {
-        return (DemonLab.MainAreaComplete >= 3 && DemonLab.DridersState == 1 && DemonLab.FSpreaderState == 2 && DemonLab.NightwalkerLabstate == 2 && player.hasKeyItem("Map to the Lethice’s Fortress") >= 0);
+        return (DemonLab.MainAreaComplete >= 3 && DemonLab.DridersState >= 2 && DemonLab.FSpreaderState >= 2 && DemonLab.NightwalkerLabstate >= 2 && player.hasKeyItem("Map to the Lethice’s Fortress") >= 0);
     }
     public function checkLethiceStrongholdClear():Boolean {
         return ((flags[kFLAGS.D3_MIRRORS_SHATTERED] > 0 || flags[kFLAGS.D3_JEAN_CLAUDE_DEFEATED] > 0) && flags[kFLAGS.D3_GARDENER_DEFEATED] > 0 && flags[kFLAGS.D3_CENTAUR_DEFEATED] > 0 && flags[kFLAGS.LETHICE_DEFEATED] > 0);
