@@ -32,6 +32,8 @@ package classes.Scenes.Places{
 		public static const QUEST_STAGE_BOWTRAINING2:int = 2;
 		public static const QUEST_STAGE_BOWTRAINING3:int = 3;
 		public static const QUEST_STAGE_BOWTRAINING4:int = 4;
+		public static const QUEST_STAGE_BOWTRAINING5:int = 5;
+		public static const QUEST_STAGE_BOWTRAINING6:int = 6;
 
 		public static var WoodElfSpearTraining:int;
 		public static const QUEST_STAGE_SPEARTRAININGFIRST:int = 0;
@@ -51,6 +53,7 @@ package classes.Scenes.Places{
 		public static const QUEST_STAGE_MAGICTRAINING6:int = 6;
 		public static const QUEST_STAGE_MAGICTRAINING7:int = 7;
 		public static var WoodElfMagicTraner:Boolean;
+		public static var WoodElfMagicTranerSex:int;
 		public static var WoodElfMagicTranerGetLaid:Boolean;
 
 		public static var WoodElfSeductionTraining:int;
@@ -71,6 +74,7 @@ package classes.Scenes.Places{
 			WoodElfMagicTraining = QUEST_STAGE_MAGICTRAINING0;
 			WoodElfSeductionTraining = QUEST_STAGE_SEDUCTIONTRAINING0;
 			WoodElfMagicTraner = false;
+			WoodElfMagicTranerSex = 0;
 			WoodElfMagicTranerGetLaid = false;
 		}
 
@@ -83,6 +87,7 @@ package classes.Scenes.Places{
 				"stageMagic": WoodElfMagicTraining,
 				"stageSeduction": WoodElfSeductionTraining,
 				"WoodElfMagicTraner": WoodElfMagicTraner,
+				"WoodElfMagicTranerSex": WoodElfMagicTranerSex,
 				"WoodElfMagicTranerGetLaid": WoodElfMagicTranerGetLaid
 			};
 		}
@@ -96,6 +101,7 @@ package classes.Scenes.Places{
 				WoodElfMagicTraining = valueOr(o["stageMagic"], 0);
 				WoodElfSeductionTraining = valueOr(o["stageSeduction"], 0);
 				WoodElfMagicTraner = valueOr(o["WoodElfMagicTraner"], false);
+				WoodElfMagicTranerSex = valueOr(o["WoodElfMagicTranerSex"], 0);
 				WoodElfMagicTranerGetLaid = valueOr(o["WoodElfMagicTranerGetLaid"], false);
 			} else {
 				// loading from old save
@@ -1031,11 +1037,39 @@ package classes.Scenes.Places{
 				outputText("\n\nThanks to your extensive training in elven archery you have unlocked the Master Shot Perk! <b>Gained Perk: Master Shot</b>");
 				hasTrainedToday = true;
 			}
-			else if (player.spe >= 200 && player.statusEffectv1(StatusEffects.Kelt) >= 100 && player.statusEffectv1(StatusEffects.Kindra) >= 50 && WoodElfBowTraining == QUEST_STAGE_BOWTRAINING3 && !hasTrainedToday){
+			else if (player.spe >= 200 && player.statusEffectv1(StatusEffects.Kindra) >= 50 && WoodElfBowTraining == QUEST_STAGE_BOWTRAINING3 && !hasTrainedToday){
 				WoodElfBowTraining = QUEST_STAGE_BOWTRAINING4;
 				player.createPerk(PerkLib.ELFArcherCovenant,0,0,0,0);
 				outputText("\n\nThanks to your extensive training in elven archery you have unlocked the Archer Covenant Perk! <b>Gained Perk: Archer Covenant</b>");
 				hasTrainedToday = true;
+			}
+			else if (player.speStat.train.value >= 100 && WoodElfBowTraining == QUEST_STAGE_BOWTRAINING4 && !hasTrainedToday && !player.isRace(Races.WOODELF)){
+				outputText("\n\n\"<i>Unfortunately I wont be able to teach you the ultimate skills of elven archery because you aren't complete or rather… you never made a covenant with the blessed tree. These last skills taps directly in the power of the covenant and thus cannot be learned by someone with no connection.</i>\"")
+				hasTrainedToday = true;
+			}
+			else if (player.speStat.train.value >= 100 && WoodElfBowTraining == QUEST_STAGE_BOWTRAINING4 && !hasTrainedToday && player.isRace(Races.WOODELF) && player.hasStatusEffect(StatusEffects.KnowsBriarthorn)){
+				if (player.speStat.core.value < player.speStat.core.max) {
+					outputText("\n\nIt occurs to you that by combining elven green magic with your shot you could to infuse your arrow with life energy, the wooden shaft growing thorns that would surely inflict painful poisoned wounds to your opponents.");
+					outputText(" Sadly such a technique will require far more training but you're confident in Elenwen's ability to train you to this point.");
+					hasTrainedToday = true;
+				} else {
+					WoodElfBowTraining = QUEST_STAGE_BOWTRAINING5;
+					player.createPerk(PerkLib.ELFThornShot,0,0,0,0);
+					outputText("\n\nIt occurs to you that by combining elven green magic with your shot you could to infuse your arrow with life energy, the wooden shaft growing thorns that would surely inflict painful poisoned wounds to your opponents. <b>Gained Perk: Elven Thorn Shot</b>");
+					hasTrainedToday = true;
+				}
+			}
+			else if (player.speStat.core.value >= player.speStat.core.max && WoodElfBowTraining == QUEST_STAGE_BOWTRAINING5 && !hasTrainedToday && player.isRace(Races.WOODELF)){
+				if (player.spe100 >= 100) {
+					outputText("\n\nBy now you have achieved mastery of every technique Elenwen could touch you… well almost. Elenwen's single most amazing skill is her ability to shoot a salvo of two arrows in quick succession, a skill you have yet to see anyone but her use.");
+					outputText(" You're certain if you train and improve your speed to the breaking point you could achieve it too. Guess you will need to increase your speed and dexterity to their utmost limit before you can unlock that skill.");
+					hasTrainedToday = true;
+				} else {
+					WoodElfBowTraining = QUEST_STAGE_BOWTRAINING6;
+					player.createPerk(PerkLib.ELFTwinShot,0,0,0,0);
+					outputText("\n\nBy now you have achieved mastery of every technique Elenwen could touch you… well almost. Elenwen's single most amazing skill is her ability to shoot a salvo of two arrows in quick succession, a skill you have yet to see anyone but her use. <b>Gained Perk: Elven Twin Shot</b>");
+					hasTrainedToday = true;
+				}
 			}
 			else{
 				hasTrainedToday = true;
@@ -1217,6 +1251,7 @@ package classes.Scenes.Places{
 					outputText("<b>Gained new green spell: Plant growth.</b>");
 					player.createStatusEffect(StatusEffects.KnowsPlantGrowth, 0, 0, 0, 0);
 				}
+				if (WoodElfMagicTranerSex < 1) WoodElfMagicTranerSex = 1;
 				hasTrainedToday = true;
 			}
 			else if (player.inte >= 100 && WoodElfMagicTraining == QUEST_STAGE_MAGICTRAINING3 && !hasTrainedToday){
@@ -1241,6 +1276,7 @@ package classes.Scenes.Places{
 					outputText("<b>Gained new green spell: Briarthorn.</b>");
 					player.createStatusEffect(StatusEffects.KnowsBriarthorn, 0, 0, 0, 0);
 				}
+				if (WoodElfMagicTranerSex < 2) WoodElfMagicTranerSex = 2;
 				hasTrainedToday = true;
 			}
 			else if (player.inte >= 200 && WoodElfMagicTraining == QUEST_STAGE_MAGICTRAINING5 && !hasTrainedToday){
@@ -1269,10 +1305,10 @@ package classes.Scenes.Places{
 			else if (player.inte >= 400 && WoodElfMagicTraining == QUEST_STAGE_MAGICTRAINING6 && !hasTrainedToday && player.isRace(Races.WOODELF) && WoodElfMagicTranerGetLaid){
 				WoodElfMagicTraining = QUEST_STAGE_MAGICTRAINING7;
 				outputText("After a few hours spent directing the discussion and answering your questions, Lutien smile and closes " + LutienMF("his","her") + " book.\n\n");
-				outputText("\"<i>Congratulations, [name]. You have effectively learned everything I could teach you and even mastered that one last spell. I guess this means the end of our lessons. However, if you wish to revise less serious subjects with me… just know I will be available anytime. It's rare to find someone so smart and at the same time… ");
+				outputText("\"<i>Congratulations, [name]. You have effectively learned everything I could teach you and even mastered that one last trick. I guess this means the end of our lessons. However, if you wish to revise less serious subjects with me… just know I will be available anytime. It's rare to find someone so smart and at the same time… ");
 				outputText("so attractive.</i>\" " + LutienMF("He","She") + " blushes but quickly realizes " + LutienMF("he","she") + "'s wide open and moves " + LutienMF("his","her") + " eyes back to " + LutienMF("his","her") + " book dismissing you.\n\n");
 				if (!player.hasStatusEffect(StatusEffects.KnowsGreenCovenant)) {
-					outputText("<b>Gained new green spell: Green Covenant.</b>");
+					outputText("<b>Gained new magic special: Green Covenant.</b>");
 					player.createStatusEffect(StatusEffects.KnowsGreenCovenant, 0, 0, 0, 0);
 				}
 				hasTrainedToday = true;
@@ -1303,8 +1339,13 @@ package classes.Scenes.Places{
 				WoodElfMagicTraner = true;
 			}
 			menu();
-			//addButton(0, "Train", LutienTrain);
-			//addButton(1, "Sex", );
+			if (WoodElfMagicTranerSex >= 1)
+				addButton(0, "Bondage", LutienBondage)
+						.hint("Something about his presence is enthralling… let him take control");
+			if (WoodElfMagicTranerSex >= 2)
+				addButton(1, "Fuck Bussy", LutienFuckBussy)
+						.hint(silly()? "Fuck it. A hole is a hole.":"Does it matter if he’s not a girl? He’s still as pretty as any other elf.")
+						.disableIf(!player.hasCock(), "You need a penis");
 			addButton(2, "Nevermind", LutienMainSexNevermind);
 		}
 		public function LutienMainSexNevermind():void {
@@ -1313,6 +1354,57 @@ package classes.Scenes.Places{
 			outputText("Yea nevermind you ain't in the mood for that right now.\n\n");
 			outputText("Lutien sigh. \"<i>Yea I figured you must've just been joking. Well either way is there anything else I can help you with?</i>\"\n\n");
 			doNext(LutienMain);
+		}
+		private function LutienBondage():void {
+			clearOutput();
+			outputText("You continue eyeing Lutien's form, something about the soft, gentle feminity wrapped around the form of a male is alluring. His gentle frame continues grasping your attention with a force unwilling to let you go.[pg]");
+			outputText("He seems to give you a faint, yet knowing grin, \"<i>I see you've been taking a little more interest in me lately, have you? I don't suppose that could be the effects of the forest taking a pull at you, is it?</i>\"[pg]");
+			outputText("Before you can collect yourself, you find your legs gently being wrapped by soft, thin vines. You take a small breath, it's far from a disquieting feeling.[pg]");
+			outputText("\"<i>Oh, but it will be more than just the forest, now won't it? After all, if one was so inclined, they can use their magic for... something a tad more salacious.</i>\"[pg]");
+			outputText("Something about being bound by vines and left to submit before the femboy calls to you, you find yourself growing comfortable with the idea.[pg]");
+			outputText("\"<i>I'm sure you've had thoughts about creative ways to use elven magic. There's always a hint of lewdness deep within, even myself, though I tend not to delve into these fantasies.</i>\"[pg]");
+			outputText("He draws himself closer to you, pressing his index finger against the underside of your chin, \"<i>Yet, bondage is such a fun way to abuse your strength as it inhibits your victim's ability to move away.</i>\"[pg]");
+			outputText("[if (hasarmor) \"The vines slowly grasp at your garments, tugging them away until you are left barred from any clothes. \"]The flora moves at his whim, a sweet scent washes over you as the vines steadily wrap around you, cradling you with care, yet firm enough to keep you unable to fight back.[pg]");
+			outputText("His fingers gingerly trace around your form, admiring the shape of your body. \"<i>Could this be a lesson in magic, one might wonder? Possibly, there's a certain amount of control you must have when using magic deliberately in a non-detrimental way. I have been practicing for ages, so I know you are far from being in any danger from my vines.</i>\"[pg]");
+			outputText("The vines continue contorting around you, squeezing at your body gently with loving grasps. Lutien slowly reaches a hand down to stroke your [if (hascock) \"steadily rising erection\"][if (hasvagina && !hascock) \"clit\"][if (!hascock && !hasvagina) \"thigh\"].");
+			outputText("\"<i>Can you feel the warmth? There's so much heat growing between us. Perhaps it's the friction of the vines?</i>\"[pg]");
+			outputText("He leans closer, his breath barely grazing your face, \"<i>Something more?</i>\"[pg]");
+			outputText("The scent of the vines is intoxicating. You can see petals blooming off of them, filling the air with hazy pollen that only further clouds your mind. You're unable to do anything but relax, cradled by the floral embrace as the petals dance around your skin.[pg]");
+			outputText("\"<i>I can't remember the last time I had my magic flourish like this. I'm glad I could share it with you.</i>\"[pg]");
+			outputText("Lutien shifts toward you, gently pressing his soft lips against yours. The peck is fleeting as he pulls away, leaving you breathless. Maybe it's all the pollen in the air, but it's far from irritating. Moreso, the pollen only adds to heighten your senses.[pg]");
+			outputText("He traces his slender digits across your jaw, caressing your face with his soft, feminine hands. \"<i>You know, I don't think I've ever enjoyed myself so much with anyone as much as I am with you right now...</i>\"[pg]");
+			outputText("He pulls himself closer, giving you another gentle peck on the lips, \"<i>Are you enjoying it as much as I am?</i>\"[pg]");
+			if (player.hasCock()) outputText("The vines slowly grope at your erection, causing you to drool precum as they slowly work away at your resistance.[pg]");
+			if (player.hasVagina()) outputText("The vines slowly trace around your labia, prodding at your clit, yet refusing to penetrate you as it works away at your resistance.[pg]");
+			outputText("You can feel a familiar pressure building up within your loins as your body tenses within the loving cradle of vines. Lutien continues gently caressing your face, slowly working down to your torso, admiring your chest before bringing his fingers up to your lips.[pg]");
+			outputText("\"<i>Hold yourself just a little longer, for me...</i>\"[pg]");
+			outputText("He pulls down his finger as he reaches for a final kiss. His presence is soft and delicate. He doesn't give in fully, yet the embrace betrays nothing but passion and genuine interest.[pg]");
+			outputText("Unable to take it any longer, you finally hit your climax.[if (hascock) \" Your throbbing erection shooting several waves of seed before him as the vines prod at your cumslit.\"][if (hasvagina) \" You can feel a trail of girlcum gently leak down your thigh as the vines gently pull back from your clit.\"][if (!hascock && !hasvagina) \"he high still not as intense as it could be, yet the gentle presence of the vines still serves to fulfill your desires.\"][pg]");
+			outputText("Lutien smiles softly as he pulls back, allowing the vines to recede, laying you on the ground as you slowly catch your breath.[pg]");
+			outputText("He reaches a hand toward you to lift you from the earth, \"<i>Was it as good for you as it was for me?</i>\"[pg]");
+			outputText("You can't say it was an unpleasurable experience.[pg]");
+			outputText("He smiles warmly, \"<i>Good, I hope we can try this again later... I'll be seeing you around, then.</i>\"[pg]");
+			player.sexReward();
+			doNext(camp.returnToCampUseOneHour);
+		}
+		private function LutienFuckBussy():void {
+			clearOutput();
+			var x:int = player.longestCock();
+			outputText("You continue eyeing Lutien's form. His soft, boyish hips. His petite figure and silky locks of blonde hair. He's gorgeous, to say the least. His glance moves to meet yours as you continue examining him.[pg]");
+			outputText("\"<i>Enraptured, are you? Perhaps you'd like to get to know me on a more personal level? I wouldn't object, it'd be quite a new experience for me.</i>\"[pg]");
+			outputText("You decide to take up on the offer as you approach him[if (hasarmor) \", discarding your (armor) until there's nothing left to hold you back\"]. Your body is free to take in the open air, to be one with nature, right? Lutien follows your steps, pulling back his hood as he removes the light garments holding back his frame as your bare figure makes contact with him.");
+			outputText("[if (tallness <= 4*12) \" Despite how much taller he is, you're still going to let him know what it means to be topped.\"]"+(player.cocks[x].cockLength >= 7 ?" His tiny manhood pales in comparison to your [penis].":"")+"[pg]");
+			outputText("\"<i>Come on, show me everything you're made of. Take me, hold me tightly as I submit. I want to feel you inside me.</i>\"[pg]");
+			outputText("Without hesitation, you lift him against the bark of a nearby tree as he reflexively wraps his legs around your waist. His small dick erecting in anticipation as you align your girth to his petite underside. His bussy seems to be quite lubricated already. Before you can question it, he gives you a small wink.[pg]");
+			outputText("You pull him in for a kiss, his soft, delicate lips pressing against you as you hold his head, admiring the silkiness of his fine hair before you begin thrusting.[pg]");
+			outputText("His hole tightens around you, gripping eagerly in an attempt to coax more of your rod into him."+(player.cocks[x].cockLength >= 7 ?" His breathing staggers at the intake, clearly not used to something of this magnitude. ":"") + "He pulls back slightly, \"<i>Ahh... a warmth like no other... I... I could get used to this, [name].</i>\"[pg]");
+			outputText("You buck into the elf's ass again[if (hasballs)\", your balls hitting his underside with each forceful thrust\"]. You're going to make sure he remembers you as you pull him in deeper into another kiss, causing him to moan into your embrace.[pg]");
+			outputText("His hole tightens intently as his legs wrap tighter around you. His high-pitched moaning rings through the kiss as he cums, spraying traces of cum around your [chest]. You can feel yourself quickly reaching orgasm as his hole rhythmically clenches around you, desperate for you to fill him with your seed.[pg]");
+			outputText("Moaning back softly, you can feel your cock twitch ardently. You force the elf on the ground as you give him a final thrust, digging your [cock "+x+1+"] as deep into him as possible as you elicit another moan from the elf. You finally cum, unloading every ounce of cum you have into his waiting hole.[pg]");
+			outputText("Lutien breathes softly, exhausted as you pull out your deflating erection. \"<i>Hah... that was... definitely an experience like no other... I wouldn't argue about looking into it again if you were ever to ask...</i>\"[pg]");
+			outputText("He brushes himself off, cum still leaking out of his bussy. \"<i>I'll get us cleaned up, then you can return to other matters.</i>\"[pg]");
+			player.sexReward();
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		public function Chelsea():void {
@@ -1420,20 +1512,26 @@ package classes.Scenes.Places{
 						"you close your eyes and rest in Chelsea's arms using her breast as your pillow. Your big sister caresses your forehead the whole time singing a slow lullaby, guess she doesn't get those moments all that often.[pg]");
 			outputText("Later when you wake up Chelsea comments as you both redress \"<i>Not a bad effort it's definitely better than the last time. Still do come back to me later you definitely could use more empathy training especially if you plan to take the demons down. Don't you worry sis I will train you until your senses are as sharp as the edge of an elven glaive.</i>\"[pg]");
 			outputText("On this you wave goodbye and head back to camp.[pg]");
-			hasTrainedToday = true;
 			player.SexXP((5+player.level) * 10);
+
 			player.trainStat("lib", 4, 300);
-			if (player.hasPerk(PerkLib.GracefulBeauty) && !player.hasPerk(PerkLib.SweepDefenses) && player.lib >= 200) {
+			if (player.hasPerk(PerkLib.GracefulBeauty) && !player.hasPerk(PerkLib.SweepDefenses) && !hasTrainedToday && player.lib >= 200) {
 				player.createPerk(PerkLib.SweepDefenses,0,0,0,0);
 				outputText("\n\nBetter refining of your charms allowed you to learn a new technique. <b>Gained Perk: Sweep Defenses</b>");
+				hasTrainedToday = true;
 			}
-			if (player.hasPerk(PerkLib.FueledByDesire) && !player.hasPerk(PerkLib.GracefulBeauty) && player.lib >= 150) {
+			else if (player.hasPerk(PerkLib.FueledByDesire) && !player.hasPerk(PerkLib.GracefulBeauty)  && !hasTrainedToday && player.lib >= 150) {
 				player.createPerk(PerkLib.GracefulBeauty,0,0,0,0);
 				outputText("\n\nBetter refining of your charms allowed you to learn a new technique. <b>Gained Perk: Graceful Beauty</b>");
+				hasTrainedToday = true;
 			}
-			if (!player.hasPerk(PerkLib.FueledByDesire) && player.lib >= 100) {
+			else if (!player.hasPerk(PerkLib.FueledByDesire) && player.lib >= 100  && !hasTrainedToday) {
 				player.createPerk(PerkLib.FueledByDesire,0,0,0,0);
 				outputText("\n\nBetter refining of your charms allowed you to learn a new technique. <b>Gained Perk: Fueled by Desire</b>");
+				hasTrainedToday = true;
+			}
+			else {
+				hasTrainedToday = true;
 			}
 			//New Legendary Armor: Forest Mage Dress	//TODO special effect with green magic, other effects complete
 			//Type: Light
@@ -1444,4 +1542,4 @@ package classes.Scenes.Places{
 			doNext(camp.returnToCampUseOneHour);
 		}
 	}
-}
+}

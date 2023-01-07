@@ -32,7 +32,6 @@ import classes.Items.Necklace;
 import classes.Items.NecklaceLib;
 import classes.Items.Shield;
 import classes.Items.Undergarment;
-import classes.Items.UndergarmentLib;
 import classes.Items.Vehicles;
 import classes.Items.Weapon;
 import classes.Items.WeaponRange;
@@ -3423,8 +3422,7 @@ use namespace CoC;
 		}
 
 		public function henchmanBasedInvulnerabilityFrame():Boolean {
-			if (statusEffectv3(StatusEffects.CombatFollowerZenji) == 1 || statusEffectv3(StatusEffects.CombatFollowerZenji) == 3) return true;
-			else return false;
+			return statusEffectv3(StatusEffects.CombatFollowerZenji) == 1 || statusEffectv3(StatusEffects.CombatFollowerZenji) == 3;
 		}
 		public function henchmanBasedInvulnerabilityFrameTexts():void {
 			if (statusEffectv3(StatusEffects.CombatFollowerZenji) == 1 || statusEffectv3(StatusEffects.CombatFollowerZenji) == 3) {
@@ -6613,4 +6611,4 @@ use namespace CoC;
 			}
 		}
 	}
-}
+}

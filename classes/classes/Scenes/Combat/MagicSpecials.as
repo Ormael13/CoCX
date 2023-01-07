@@ -747,6 +747,19 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("You already empowered with holy power!");
 			}
 		}
+		if ((player.isRaceCached(Races.PLANT) || player.isRaceCached(Races.YGGDRASIL) || player.isRaceCached(Races.ALRAUNE) || player.isRaceCached(Races.WOODELF)) && player.hasStatusEffect(StatusEffects.KnowsGreenCovenant)) {
+			bd = buttons.add("Green Covenant", greenCovenant).hint("Enforce the full might of your elven pact. Connect with nearby plants gaining high regeneration damage reduction, and empowering elven magic but taking periodic lust damage and reducing evade.");
+			bd.requireMana(spellCostWhite(1250));
+			if(player.hasStatusEffect(StatusEffects.GreenCovenant)) {
+				bd.disable("You already connected with nearby plants!");
+			}
+			else if(!player.hasStatusEffect(StatusEffects.NearbyPlants)) {
+				bd.disable("Green Covenant requires having plants nearby.");
+			}
+			else if(player.hasStatusEffect(StatusEffects.CooldownGreenCovenant)) {
+				bd.disable("You need more time before you can use Green Covenant again.");
+			}
+		}
 		if (player.isRaceCached(Races.CHESHIRE)) {
 			bd = buttons.add("Ever&Nowhere", EverywhereAndNowhere).hint("Periodically phase out of reality increasing your invasion as well as granting you the ability to surprise your opponent denying their defences.  \n\nWould go into cooldown after use for: "+(player.hasPerk(PerkLib.NaturalInstincts) ? "9":"10")+" rounds");
 			bd.requireFatigue(physicalCost(30));
@@ -3465,6 +3478,13 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 	}
 
+	public function greenCovenant():void {
+		outputText("You direct your desire to the nearby plants causing them to surge and wrap around you as a tendril gently wraps itself around your left leg, embracing your form like a lover, before "+(player.hasVagina()?"plunging within your welcoming elven nether lips. A second one ":"it ")+"");
+		outputText("finds the hole to your pucker plugging it perfectly as embery sap flows directly from the plants into your core. Now one with the nearby corrupted vegetation you overflow with magical might as the plants literally pump their power directly into you.\n");
+		player.createStatusEffect(StatusEffects.CooldownGreenCovenant, 12, 0, 0, 0);
+		player.createStatusEffect(StatusEffects.GreenCovenant, 0, 0, 0, 0);
+		enemyAI();
+	}
 
 	public function perfectclarity():void {
 		clearOutput();

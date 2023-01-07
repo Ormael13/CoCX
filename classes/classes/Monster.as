@@ -3140,6 +3140,26 @@ import flash.utils.getQualifiedClassName;
 				SceneLib.combat.CommasForDigits(store16);
 				outputText("[pg]");
 			}
+			if(hasStatusEffect(StatusEffects.Rosethorn)) {
+				if (statusEffectv1(StatusEffects.Rosethorn) <= 0) {
+					removeStatusEffect(StatusEffects.Rosethorn);
+					outputText("<b>Bleeding cause by deep wounds your rose thorns left behind stopped!</b>[pg]");
+				} else {
+					var store17:Number = (player.str + player.spe);
+					var store17a:Number = 0.4;
+					if (game.player.hasPerk(PerkLib.ThirstForBlood)) store17a += .1;
+					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store17a += .08;
+					store17 *= store17a;
+					store17 += maxHP()*0.01;
+					store17 = Math.round(store17);
+					store17 = SceneLib.combat.doDamage(store17);
+					if(plural) outputText("[Themonster] bleed profusely from the deep wounds your rose thorns left behind. ");
+					else outputText("[Themonster] bleeds profusely from the deep wounds your rose thorns left behind. ");
+					SceneLib.combat.CommasForDigits(store17);
+					outputText("[pg]");
+					addStatusValue(StatusEffects.Rosethorn, 1, -1);
+				}
+			}
 			if (hasStatusEffect(StatusEffects.DeathBlossom)) {
 				if (statusEffectv1(StatusEffects.DeathBlossom) <= 0) {
 					removeStatusEffect(StatusEffects.DeathBlossom);

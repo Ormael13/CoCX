@@ -34,6 +34,7 @@ public class AlvinaFollower extends NPCAwareContent implements TimeAwareInterfac
 	public var SecondDateSuccess:Boolean;
 	public var FightForAlvina:Boolean;
 	public var AlvinaFightingToCorruptYou:Boolean;
+	public var AlvinaDied:Boolean;
 	public var AlvinaPurified:Boolean;
 	public var AlvinaInfernalOilAsked:Boolean;
 	public var AlvinaInfernalOilCooldown:int;
@@ -57,6 +58,7 @@ public class AlvinaFollower extends NPCAwareContent implements TimeAwareInterfac
 		SecondDateSuccess = false;
 		FightForAlvina = false;
 		AlvinaFightingToCorruptYou = false;
+		AlvinaDied = false;
 		AlvinaPurified = false;
 		AlvinaInfernalOilAsked = false;
 		AlvinaInfernalOilCooldown = 0;
@@ -79,6 +81,7 @@ public class AlvinaFollower extends NPCAwareContent implements TimeAwareInterfac
 			SecondDateSuccess = "SecondDateSuccess" in o ? o["SecondDateSuccess"] : false;
 			FightForAlvina = "FightForAlvina" in o ? o["FightForAlvina"] : false;
 			AlvinaFightingToCorruptYou = "AlvinaFightingToCorruptYou" in o ? o["AlvinaFightingToCorruptYou"] : false;
+			AlvinaDied = "AlvinaDied" in o ? o["AlvinaDied"] : false;
 			AlvinaPurified = "AlvinaPurified" in o ? o["AlvinaPurified"] : false;
 			AlvinaInfernalOilAsked = "AlvinaInfernalOilAsked" in o ? o["AlvinaInfernalOilAsked"] : false;
 			AlvinaInfernalOilCooldown = "AlvinaInfernalOilCooldown" in o ? o["AlvinaInfernalOilCooldown"] : 0;
@@ -102,6 +105,7 @@ public class AlvinaFollower extends NPCAwareContent implements TimeAwareInterfac
 			"SecondDateSuccess": SecondDateSuccess,
 			"FightForAlvina": FightForAlvina,
 			"AlvinaFightingToCorruptYou": AlvinaFightingToCorruptYou,
+			"AlvinaDied" : AlvinaDied,
 			"AlvinaPurified": AlvinaPurified,
 			"AlvinaInfernalOilAsked": AlvinaInfernalOilAsked,
 			"AlvinaInfernalOilCooldown": AlvinaInfernalOilCooldown
@@ -342,6 +346,7 @@ private function alvinaDies(next:Function):void {
 	outputText("\n<b>Found Alvina's Shattered Phylactery</b>\n\n");
 	player.createKeyItem("Alvina's Shattered Phylactery", 0, 0, 0, 0);
 	flags[kFLAGS.ALVINA_FOLLOWER] = 12;
+	AlvinaDied = true;
 	awardAchievement("The end and the beginning", kACHIEVEMENTS.GENERAL_THE_END_AND_THE_BEGINNING);
 	if (flags[kFLAGS.GAME_DIFFICULTY] >= 4)
 		awardAchievement("Beyond gods and mortals", kACHIEVEMENTS.GENERAL_BEYOND_GODS_AND_MORTALS);
@@ -390,7 +395,7 @@ public function alvinaThirdEncounterTakeHer():void
 
 	//Bar enconuter scenes
 	public function alvinaCanMeetAtBar():Boolean {
-		return GiftCooldown <= 0 && !DateFailed && !SecondDateSuccess && flags[kFLAGS.ALVINA_FOLLOWER] >= 1 && flags[kFLAGS.ALVINA_FOLLOWER] < 12;
+		return GiftCooldown <= 0 && !DateFailed && !SecondDateSuccess && flags[kFLAGS.ALVINA_FOLLOWER] >= 1 && flags[kFLAGS.ALVINA_FOLLOWER] < 13 && !AlvinaDied;
 	}
 	public function alvinaOnGiftCooldown():Boolean {
 		return (GiftCooldown > 0);

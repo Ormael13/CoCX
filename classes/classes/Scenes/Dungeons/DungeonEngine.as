@@ -215,18 +215,18 @@ public class DungeonEngine extends DungeonAbstractContent {
             case DUNGEON_BEE_HIVE_4: return beehive.room3West;
             case DUNGEON_BEE_HIVE_5: return beehive.room5North;
             //Demon Lab
-            case DUNGEON_LAB_ENTRANCE: return demonLab.roomEntrance
-            case DUNGEON_LAB_BALLROOM_1: return demonLab.Ballroom1;
-            case DUNGEON_LAB_TYRANT_1: return demonLab.TyrantLab1;
+            case DUNGEON_LAB_ENTRANCE: 		return demonLab.roomEntrance
+            case DUNGEON_LAB_BALLROOM_1: 	return demonLab.Ballroom1;
+            case DUNGEON_LAB_TYRANT_1: 		return demonLab.TyrantLab1;
             case DUNGEON_LAB_TYRANT_PRISON: return demonLab.TyrantPrison;
-            case DUNGEON_LAB_TYRANT_2: return demonLab.TyrantLab2;
-            case DUNGEON_LAB_BALLROOM_2: return demonLab.Ballroom2;
-            case DUNGEON_LAB_FSPREADER: return demonLab.FSpreaderLab;
-            case DUNGEON_LAB_INCEL: return demonLab.IncelLab;
-            case DUNGEON_LAB_BALLROOM_3: return demonLab.Ballroom3;
+            case DUNGEON_LAB_TYRANT_2: 		return demonLab.TyrantLab2;
+            case DUNGEON_LAB_BALLROOM_2: 	return demonLab.Ballroom2;
+            case DUNGEON_LAB_FSPREADER: 	return demonLab.FSpreaderLab;
+            case DUNGEON_LAB_INCEL: 		return demonLab.IncelLab;
+            case DUNGEON_LAB_BALLROOM_3: 	return demonLab.Ballroom3;
             case DUNGEON_LAB_NIGHTWALKER_1: return demonLab.NightwalkerLab1;
             case DUNGEON_LAB_NIGHTWALKER_2: return demonLab.NightwalkerLab2;
-            case DUNGEON_LAB_PANIC_ROOM: return demonLab.Ballroom3;
+            case DUNGEON_LAB_PANIC_ROOM: 	return demonLab.Ballroom3;
             //error
             default: throw new Error("Illegal dungeon location!")
         }
@@ -241,6 +241,9 @@ public class DungeonEngine extends DungeonAbstractContent {
     }
     public function checkDeepCaveClear():Boolean {
         return (flags[kFLAGS.ZETAZ_IMP_HORDE_DEFEATED] > 0 && flags[kFLAGS.ZETAZ_FUNGUS_ROOM_DEFEATED] > 0 && player.hasKeyItem("Zetaz's Map") >= 0);
+    }
+    public function checkDemonLaboratoryClear():Boolean {
+        return (DemonLab.MainAreaComplete >= 3 && DemonLab.DridersState >= 2 && DemonLab.FSpreaderState >= 2 && DemonLab.NightwalkerLabstate >= 2 && player.hasKeyItem("Map to the Lethice’s Fortress") >= 0);
     }
     public function checkLethiceStrongholdClear():Boolean {
         return ((flags[kFLAGS.D3_MIRRORS_SHATTERED] > 0 || flags[kFLAGS.D3_JEAN_CLAUDE_DEFEATED] > 0) && flags[kFLAGS.D3_GARDENER_DEFEATED] > 0 && flags[kFLAGS.D3_CENTAUR_DEFEATED] > 0 && flags[kFLAGS.LETHICE_DEFEATED] > 0);

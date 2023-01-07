@@ -7,8 +7,6 @@ import classes.*;
 import classes.BodyParts.LowerBody;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.IMutationsLib;
-import classes.Races.CerberusRace;
-import classes.Scenes.NPCs.LunaFollower;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 

@@ -2163,7 +2163,7 @@ public final class Mutations extends MutationsHelper {
 
     public function forceCerberus(doOutput:Boolean = false):void {
         if (player.hairType != Hair.WILD) transformations.HairWild.applyEffect(doOutput);
-        if (player.faceType != Face.DOG) transformations.FaceDog.applyEffect(doOutput);
+        if (player.faceType != Face.DOG) transformations.FaceCerberus.applyEffect(doOutput);
         if (player.tongue.type != Tongue.DOG) transformations.TongueDog.applyEffect(doOutput);
         if (player.eyes.type != Eyes.INFERNAL) transformations.EyesInfernal.applyEffect(doOutput);
         if (player.hasPerk(PerkLib.FireLord))
@@ -3648,12 +3648,6 @@ public final class Mutations extends MutationsHelper {
 			if (player.inte >= 130 && !player.hasStatusEffect(StatusEffects.KnowsDeathBlossom)) {
 				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new green spell: Death Blossom.</b>");
 				player.createStatusEffect(StatusEffects.KnowsDeathBlossom, 0, 0, 0, 0);
-				return;
-			}
-			//Smart enough for Green Covenant and doesnt have it
-			if (player.inte >= 140 && !player.hasStatusEffect(StatusEffects.KnowsGreenCovenant)) {
-				outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new green spell: Green Covenant.</b>");
-				player.createStatusEffect(StatusEffects.KnowsGreenCovenant, 0, 0, 0, 0);
 				return;
 			}
 		}

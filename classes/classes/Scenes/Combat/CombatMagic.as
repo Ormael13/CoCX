@@ -928,7 +928,7 @@ public class CombatMagic extends BaseCombatContent {
 	
 	public function spellGreenCovenantOff():void {
 		clearOutput();
-		outputText("Information Noona Warning:\n\n\<b>Your Green Covenant is deactivated now.</b>");
+		outputText("Information Noona Warning:\n\n<b>Your Green Covenant is deactivated now.</b>");
 		player.removeStatusEffect(StatusEffects.GreenCovenant);
 		enemyAI();
 	}

@@ -14,6 +14,7 @@ import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
+import classes.Scenes.NPCs.EtnaFollower;
 import classes.internals.*;
 
 use namespace CoC;
@@ -116,7 +117,7 @@ use namespace CoC;
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if (flags[kFLAGS.ETNA_FOLLOWER] >= 2) etnaScene.etnaRapeIntro2();
+			if (flags[kFLAGS.ETNA_FOLLOWER] >= 2 && EtnaFollower.EtnaInfidelity != 2) etnaScene.etnaRapeIntro2();
 			else if (flags[kFLAGS.ETNA_AFFECTION] > 75) etnaScene.etnaReady2Come2Camp();
 			else if (flags[kFLAGS.ETNA_TALKED_ABOUT_HER] < 1 && flags[kFLAGS.ETNA_AFFECTION] > 15) etnaScene.etnaRape3rdWin();
 			else etnaScene.etnaRapeIntro();

@@ -13,6 +13,7 @@ import classes.Scenes.Areas.Forest.*;
 import classes.Scenes.Monsters.DarkElfScene;
 import classes.Scenes.NPCs.AikoScene;
 import classes.Scenes.NPCs.CelessScene;
+import classes.Scenes.NPCs.EtnaFollower;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.Places.WoodElves;
@@ -484,7 +485,7 @@ use namespace CoC;
 			}, {
 				name  : "etna",
 				when  : function():Boolean {
-					return flags[kFLAGS.ETNA_FOLLOWER] < 1
+					return (flags[kFLAGS.ETNA_FOLLOWER] < 1 || EtnaFollower.EtnaInfidelity == 2)
 						   && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2
 						   && !player.hasStatusEffect(StatusEffects.EtnaOff)
 						   && (player.level >= 20);

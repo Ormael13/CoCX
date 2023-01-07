@@ -14,6 +14,7 @@ import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Beach.*;
 import classes.Scenes.Areas.Lake.GooGirlScene;
 import classes.Scenes.NPCs.CeaniScene;
+import classes.Scenes.NPCs.EtnaFollower;
 import classes.Scenes.NPCs.Forgefather;
 import classes.Scenes.SceneLib;
 
@@ -60,7 +61,7 @@ import classes.Scenes.SceneLib;
 				},
 				chance: 0.2,
 				when  : function():Boolean {
-					return flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && (player.level >= 20);
+					return (flags[kFLAGS.ETNA_FOLLOWER] < 1 || EtnaFollower.EtnaInfidelity == 2) && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && (player.level >= 20);
 				}
 			}, {
 				// Ceani

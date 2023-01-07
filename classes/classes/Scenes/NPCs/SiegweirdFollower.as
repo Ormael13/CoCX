@@ -431,7 +431,7 @@ public function siegweirdAdvancedStudy_2():void {
 public function siegweirdAdvancedStudy_3():void {
     clearOutput();
 	if (SceneLib.alvinaFollower.AlvinaPurified) {
-		outputText("\"<i>Oh this reminds, me I found a magic tome in some ruins containing a very powerful white magic spell to reward you with for handling a tiny job for me, but seeing as the target mysteriously vanished from the face of Mareth a while ago</i>\" he says, glancing at Alvina, \"<i>I think you would make good use of it. At least better than I do, I barely know how to use paladin magic as is.\n\n");
+		outputText("\"<i>Oh this reminds, me I found a magic tome in some ruins containing a very powerful white magic spell to reward you with for handling a tiny job for me, but seeing as the target mysteriously vanished from the face of Mareth a while ago</i>\" he says, glancing at Alvina, \"<i>I think you would make good use of it. At least better than I do, I barely know how to use paladin magic as is.</i>\"\n\n");
 	} else {
 		player.removeKeyItem("Alvina's Shattered Phylactery");
 		outputText("Siegweird notices that you have the pendant as soon as you come near him, giving you a cheerful smile.\n\n");

@@ -1,6 +1,7 @@
 package classes.Transformations.Transformations {
 import classes.BodyParts.*;
 import classes.GeneticMemories.LowerBodyMem;
+import classes.GeneticMemories.TailMem;
 import classes.Items.MutationsHelper;
 import classes.PerkLib;
 import classes.Scenes.Metamorph;
@@ -66,7 +67,8 @@ public class LowerBodyTransformations extends MutationsHelper {
 				var desc: String = "";
 				if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.HOOFED ){
 					if (toggleTaur && legCount === 2) legCount = 4; 
-					else if (toggleTaur && legCount >= 4) legCount = 2; 
+					else if (toggleTaur && legCount >= 4) legCount = 2;
+					else if (legCount === 1) legCount = 2; 
 				}
 				// Case 1: Morph Taur legs without changing leg count
 				if (player.isTaur() && legCount >= 4) {
@@ -106,7 +108,8 @@ public class LowerBodyTransformations extends MutationsHelper {
 				var desc: String = "";
 				if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.KIRIN ){
 					if (toggleTaur && legCount === 2) legCount = 4; 
-					else if (toggleTaur && legCount >= 4) legCount = 2; 
+					else if (toggleTaur && legCount >= 4) legCount = 2;
+					else if (legCount === 1) legCount = 2; 
 				}
 
 				// Case 1: Morph Taur legs without changing leg count
@@ -146,7 +149,8 @@ public class LowerBodyTransformations extends MutationsHelper {
 				if (!legCount) legCount = player.legCount;
 				if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.CAT ){
 					if (toggleTaur && legCount === 2) legCount = 4; 
-					else if (toggleTaur && legCount >= 4) legCount = 2; 
+					else if (toggleTaur && legCount >= 4) legCount = 2;
+					else if (legCount === 1) legCount = 2; 
 				}
 				var desc: String = "";
 
@@ -204,7 +208,8 @@ public class LowerBodyTransformations extends MutationsHelper {
 				var desc: String = "";
 				if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.LIZARD ){
 					if (toggleTaur && legCount === 2) legCount = 4; 
-					else if (toggleTaur && legCount >= 4) legCount = 2; 
+					else if (toggleTaur && legCount >= 4) legCount = 2;
+					else if (legCount === 1) legCount = 2; 
 				}
 
 				// Case 1: Morph Taur legs without changing leg count
@@ -253,7 +258,8 @@ public class LowerBodyTransformations extends MutationsHelper {
 				var desc: String = "";
 				if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.FOX ){
 					if (toggleTaur && legCount === 2) legCount = 4; 
-					else if (toggleTaur && legCount >= 4) legCount = 2; 
+					else if (toggleTaur && legCount >= 4) legCount = 2;
+					else if (legCount === 1) legCount = 2; 
 				}
 
 				if (legCount == 2 && player.lowerBody !== LowerBody.FOX) {
@@ -308,7 +314,8 @@ public class LowerBodyTransformations extends MutationsHelper {
 				var desc: String = "";
 				if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.DRAGON ){
 					if (toggleTaur && legCount === 2) legCount = 4; 
-					else if (toggleTaur && legCount >= 4) legCount = 2; 
+					else if (toggleTaur && legCount >= 4) legCount = 2;
+					else if (legCount === 1) legCount = 2; 
 				}
 
 				desc += "\n\n";
@@ -452,7 +459,8 @@ public class LowerBodyTransformations extends MutationsHelper {
 				var desc: String = "";
 				if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.CLOVEN_HOOFED ){
 					if (toggleTaur && legCount === 2) legCount = 4; 
-					else if (toggleTaur && legCount >= 4) legCount = 2; 
+					else if (toggleTaur && legCount >= 4) legCount = 2;
+					else if (legCount === 1) legCount = 2; 
 				}
 
 				// Case 1: Morph Taur legs without changing leg count
@@ -503,7 +511,8 @@ public class LowerBodyTransformations extends MutationsHelper {
 				var desc: String = "";
 				if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.SALAMANDER ){
 					if (toggleTaur && legCount === 2) legCount = 4; 
-					else if (toggleTaur && legCount >= 4) legCount = 2; 
+					else if (toggleTaur && legCount >= 4) legCount = 2;
+					else if (legCount === 1) legCount = 2; 
 				}
 
 				// Case 1: Morph Taur legs without changing leg count
@@ -552,7 +561,8 @@ public class LowerBodyTransformations extends MutationsHelper {
 				var desc: String = "";
 				if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.MANTIS ){
 					if (toggleTaur && legCount === 2) legCount = 4; 
-					else if (toggleTaur && legCount >= 4) legCount = 2; 
+					else if (toggleTaur && legCount >= 4) legCount = 2;
+					else if (legCount === 1) legCount = 2; 
 				}
 
 				// Case 1: Morph Taur legs without changing leg count
@@ -593,7 +603,8 @@ public class LowerBodyTransformations extends MutationsHelper {
 				var desc: String = "";
 				if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.SHARK ){
 					if (toggleTaur && legCount === 2) legCount = 4; 
-					else if (toggleTaur && legCount >= 4) legCount = 2; 
+					else if (toggleTaur && legCount >= 4) legCount = 2;
+					else if (legCount === 1) legCount = 2; 
 				}
 
 				// Case 1: Morph Taur legs without changing leg count
@@ -634,7 +645,8 @@ public class LowerBodyTransformations extends MutationsHelper {
 				var desc: String = "";
 				if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.LION ){
 					if (toggleTaur && legCount === 2) legCount = 4; 
-					else if (toggleTaur && legCount >= 4) legCount = 2; 
+					else if (toggleTaur && legCount >= 4) legCount = 2;
+					else if (legCount === 1) legCount = 2; 
 				}
 
 				// Case 1: Morph Taur legs without changing leg count
@@ -675,7 +687,8 @@ public class LowerBodyTransformations extends MutationsHelper {
 				var desc: String = "";
 				if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.ORCA ){
 					if (toggleTaur && legCount === 2) legCount = 4; 
-					else if (toggleTaur && legCount >= 4) legCount = 2; 
+					else if (toggleTaur && legCount >= 4) legCount = 2;
+					else if (legCount === 1) legCount = 2; 
 				}
 
 				// Case 1: Morph Taur legs without changing leg count
@@ -716,7 +729,8 @@ public class LowerBodyTransformations extends MutationsHelper {
 				var desc: String = "";
 				if(Metamorph.checkTaurUnlock() && player.lowerBody == LowerBody.RAIJU ){
 					if (toggleTaur && legCount === 2) legCount = 4; 
-					else if (toggleTaur && legCount >= 4) legCount = 2; 
+					else if (toggleTaur && legCount >= 4) legCount = 2;
+					else if (legCount === 1) legCount = 2;
 				}
 
 				// Case 1: Morph Taur legs without changing leg count
@@ -793,7 +807,7 @@ public class LowerBodyTransformations extends MutationsHelper {
 				if (doOutput) outputText(desc);
 				player.lowerBody = LowerBody.DOG;
 				player.legCount = legCount;
-					Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.DOG));
+				Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.DOG));
 			},
 			// is present
 			function (): Boolean {
@@ -859,7 +873,8 @@ public class LowerBodyTransformations extends MutationsHelper {
 
 				if(player.lowerBody == LowerBody.WEASEL ){
 					if (toggleTaur && legCount === 2) legCount = 4; 
-					else if (toggleTaur && legCount >= 4) legCount = 2; 
+					else if (toggleTaur && legCount >= 4) legCount = 2;
+					else if (legCount === 1) legCount = 2; 
 				}
 				// Case 1: Morph Taur legs without changing leg count
 				if (player.isTaur() && legCount >= 4) {
@@ -903,7 +918,8 @@ public class LowerBodyTransformations extends MutationsHelper {
 
 				if(player.lowerBody == LowerBody.BEAR ){
 					if (toggleTaur && legCount === 2) legCount = 4; 
-					else if (toggleTaur && legCount >= 4) legCount = 2; 
+					else if (toggleTaur && legCount >= 4) legCount = 2;
+					else if (legCount === 1) legCount = 2; 
 				}
 				// Case 1: Morph Taur legs without changing leg count
 				if (player.isTaur() && legCount >= 4) {
@@ -927,8 +943,8 @@ public class LowerBodyTransformations extends MutationsHelper {
 
 				if (doOutput) outputText(desc);
 				player.lowerBody = LowerBody.BEAR;
-				Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.BEAR));
 				player.legCount = legCount;
+				Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.BEAR));
 			},
 			// is present
 			function (): Boolean {
@@ -946,7 +962,8 @@ public class LowerBodyTransformations extends MutationsHelper {
 
 				if(player.lowerBody == LowerBody.SEA_DRAGON ){
 					if (toggleTaur && legCount === 2) legCount = 4; 
-					else if (toggleTaur && legCount >= 4) legCount = 2; 
+					else if (toggleTaur && legCount >= 4) legCount = 2;
+					else if (legCount === 1) legCount = 2; 
 				}
 				// Case 1: Morph Taur legs without changing leg count
 				if (player.isTaur() && legCount >= 4) {
@@ -970,8 +987,8 @@ public class LowerBodyTransformations extends MutationsHelper {
 
 				if (doOutput) outputText(desc);
 				player.lowerBody = LowerBody.SEA_DRAGON;
-				Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.SEA_DRAGON));
 				player.legCount = legCount;
+				Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.SEA_DRAGON));
 			},
 			// is present
 			function (): Boolean {
@@ -988,7 +1005,8 @@ public class LowerBodyTransformations extends MutationsHelper {
 				var desc: String = "";
 				if(player.lowerBody == LowerBody.GRYPHON ){
 					if (toggleTaur && legCount === 2) legCount = 4; 
-					else if (toggleTaur && legCount >= 4) legCount = 2; 
+					else if (toggleTaur && legCount >= 4) legCount = 2;
+					else if (legCount === 1) legCount = 2; 
 				}
 					
 				// Case 1: Morph Taur legs without changing leg count
@@ -1011,8 +1029,8 @@ public class LowerBodyTransformations extends MutationsHelper {
 
 				if (doOutput) outputText(desc);
 				player.lowerBody = LowerBody.GRYPHON;
-				Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.GRYPHON));
 				player.legCount = legCount;
+				Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.GRYPHON));
 			},
 			// is present
 			function (): Boolean {
@@ -1588,6 +1606,7 @@ public class LowerBodyTransformations extends MutationsHelper {
 			player.legCount = 2;
 			player.lowerBody = LowerBody.HYDRA;
 			Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.HYDRA));
+			Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.HYDRA));
 		},
 		// is present
 		function (): Boolean {
@@ -2035,7 +2054,7 @@ public class LowerBodyTransformations extends MutationsHelper {
 			if (doOutput) outputText(desc);
 			player.legCount = 2;
 			player.lowerBody = LowerBody.JABBERWOCKY;
-				Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.JABBERWOCKY));
+			Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.JABBERWOCKY));
 		},
 		// is present
 		function (): Boolean {
@@ -2056,7 +2075,7 @@ public class LowerBodyTransformations extends MutationsHelper {
 			player.coatColor = "reddish-orange";
 			player.legCount = 2;
 			player.lowerBody = LowerBody.CRAB;
-				Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.CRAB));
+			Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.CRAB));
 		},
 		// is present
 		function (): Boolean {
@@ -2074,7 +2093,7 @@ public class LowerBodyTransformations extends MutationsHelper {
 			if (doOutput) outputText(desc);
 			player.legCount = 6;
 			player.lowerBody = LowerBody.CANCER;
-				Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.CANCER));
+			Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.CANCER));
 		},
 		// is present
 		function (): Boolean {
@@ -2107,7 +2126,7 @@ public class LowerBodyTransformations extends MutationsHelper {
 				// No special text outside the event
 			}
 			player.lowerBody = LowerBody.ATLACH_NACHA;
-				Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.ATLACH_NACHA));
+			Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.ATLACH_NACHA));
 		},
 		// is present
 		function (): Boolean {

@@ -383,7 +383,7 @@ public class CombatTeases extends BaseCombatContent {
 			choices[choices.length] = 17;
 		}
 		//18 DOG TEASE
-		if (player.isRace(Races.DOG) && player.hasVagina() && player.isBiped()) {
+		if (player.isAnyRaceCached(Races.DOG, Races.CERBERUS) && player.hasVagina() && player.isBiped()) {
 			choices[choices.length] = 18;
 			choices[choices.length] = 18;
 		}
