@@ -177,7 +177,7 @@ public class ProjectNightwalker extends Monster {
         if (inDungeon) SceneLib.dungeons.demonLab.afterNightwalkerFight();
 		else {
             outputText("The Vampire falls, blood spilling from her fatal wounds. Seemingly entranced by the flowing crimson, the creature licks it, then sinks its fangs deep into its own flesh. You watch, horrified, as it looks at you and laughs, crimson tears dripping from her fangs…and pooling in the injury, pouring out onto the ground. [pg]");
-            outputText("“<i>Blood for me...Blood for me!</i>” It looks at you, as if amused greatly, before biting itself again and again, pulling the fangs out each time. Sickened by the foul creature’s behavior, you walk up to it, taking its head and feeling the sickening pop as you snap its neck. You head back towards your camp, the sickening laughter of the deranged creature still ringing in your ears.")
+            outputText("“<i>Blood for me...Blood for me!</i>” It looks at you, as if amused greatly, before biting itself again and again, pulling the fangs out each time. Sickened by the foul creature’s behavior, you walk up to it, taking its head and feeling the sickening pop as you snap its neck. You head back towards your camp, the sickening laughter of the deranged creature still ringing in your ears.");
             cleanupAfterCombat();
         }
     }
