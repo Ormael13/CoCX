@@ -16,8 +16,8 @@ import classes.internals.SaveableState;
 import classes.internals.WeightedDrop;
 
 public class UltimisFlamespreader extends Monster {
-    var gunner1Alive:Boolean;
-    var gunner2Alive:Boolean;
+    private var gunner1Alive:Boolean;
+    private var gunner2Alive:Boolean;
 
     private function flameAttack():void {
         outputText("Swooping in, the giant Dragon spits blue fire. The area around you erupts into heat and light. ");
@@ -47,7 +47,6 @@ public class UltimisFlamespreader extends Monster {
         }
     }
     public function struggleNom(wait:Boolean):void {
-        var damage:Number = ((str + tou) * 1.5);
         if (!wait || (rand(10) > 0 && player.str100/5 + rand(20) < 23)|| player.hasPerk(PerkLib.FluidBody)) {
             outputText("You jam your [weapon] into a sensitive spot between the creature’s tongue and lower mouth. It roars in pain, throwing you skywards. You see Kiha, her mighty axe keeping two spears at bay, before you realise what just happened.");
             if (player.canFly()) {
@@ -62,7 +61,7 @@ public class UltimisFlamespreader extends Monster {
             if (!wait) outputText("You struggle, slamming your [weapon] into the creature’s snout, but it doesn’t let go. ");
             outputText("It lets out a mighty roar through its still clenching teeth, the intensity of its fire breath solely focused on your body. Your [armor] is breaking, and you can smell your own flesh burning!");
 
-            var damage:Number = ((str + tou) * 1.2);
+            var damage:Number = ((str + tou) * 1.5);
             player.createOrAddStatusEffect(StatusEffects.OnFire, 1, 2);
             player.takeFireDamage(damage, true);
         }

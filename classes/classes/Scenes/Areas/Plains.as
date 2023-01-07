@@ -10,6 +10,7 @@ import classes.Scenes.API.Encounters;
 import classes.Scenes.API.FnHelpers;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Plains.*;
+import classes.Scenes.Dungeons.DemonLab;
 import classes.Scenes.NPCs.EtnaFollower;
 import classes.Scenes.SceneLib;
 
@@ -286,6 +287,15 @@ use namespace CoC;
 					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
 					SceneLib.sheilaScene.sheilaEncounterRouter();
 				}
+			}, {
+				name: "demonProjects",
+				chance: 0.2,
+				when: function ():Boolean {
+					return DemonLab.NightwalkerLabstate >= 2
+							|| DemonLab.FSpreaderState >= 2
+							|| DemonLab.TyrantLabState >= 2;
+				},
+				call: SceneLib.exploration.demonLabProjectEncounters
 			});
 		}
 		public function explorePlains():void {

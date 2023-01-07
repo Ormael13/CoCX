@@ -18,6 +18,7 @@ import classes.Scenes.API.Encounters;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.GlacialRift.*;
 import classes.Scenes.Areas.Tundra.Valkyrie;
+import classes.Scenes.Dungeons.DemonLab;
 import classes.Scenes.Holidays;
 import classes.Scenes.NPCs.EtnaFollower;
 import classes.Scenes.NPCs.Valeria;
@@ -157,7 +158,16 @@ use namespace CoC;
 				//Find nothing!
 				name: "nothing",
 				call: encounterNothing
-			})
+			}, {
+				name: "demonProjects",
+				chance: 0.2,
+				when: function ():Boolean {
+					return DemonLab.NightwalkerLabstate >= 2
+							|| DemonLab.FSpreaderState >= 2
+							|| DemonLab.TyrantLabState >= 2;
+				},
+				call: SceneLib.exploration.demonLabProjectEncounters
+			});
 		}
 		
 		public function exploreGlacialRift():void {

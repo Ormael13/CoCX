@@ -9,6 +9,7 @@ import classes.Scenes.API.Encounters;
 import classes.Scenes.API.FnHelpers;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Desert.*;
+import classes.Scenes.Dungeons.DemonLab;
 import classes.Scenes.SceneLib;
 
 use namespace CoC;
@@ -178,6 +179,15 @@ use namespace CoC;
 						name  : "desertloot",
 						chance: 0.3,
 						call  : findDesertLoot
+					}, {
+						name: "demonProjects",
+						chance: 0.2,
+						when: function ():Boolean {
+							return DemonLab.NightwalkerLabstate >= 2
+									|| DemonLab.FSpreaderState >= 2
+									|| DemonLab.TyrantLabState >= 2;
+						},
+						call: SceneLib.exploration.demonLabProjectEncounters
 					});
 		}
 		//Explore desert

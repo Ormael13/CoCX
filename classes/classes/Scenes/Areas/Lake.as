@@ -6,6 +6,7 @@ package classes.Scenes.Areas
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.Lake.*;
+import classes.Scenes.Dungeons.DemonLab;
 import classes.Scenes.Holidays;
 import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.NPCs.EtnaFollower;
@@ -138,10 +139,6 @@ use namespace CoC;
 			var chance:Number = 10 + (player.longestCockLength() - player.tallness) / 24 * 10;
 			if (chance > 0 && player.longestCockLength() >= player.tallness - 10 && player.totalCockThickness() >= 8)
 				choice[choice.length] = 5;
-
-			//Encounter golems, goblins and imps in NG+
-			if (player.level >= 3 && flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0)
-				choice[choice.length] = 9;
 				
 			//ONE TIME EVENTS
 			//Amily Village discovery
@@ -150,7 +147,17 @@ use namespace CoC;
 			//Pre-emptive chance of finding the boat
 			if (!player.hasStatusEffect(StatusEffects.BoatDiscovery))
 				choice[choice.length] = 8;
-				
+
+			//Encounter golems, goblins and imps in NG+
+			if (player.level >= 3 && flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0)
+				choice[choice.length] = 9;
+
+			//DemonLab Projects
+			if (DemonLab.NightwalkerLabstate >= 2
+					|| DemonLab.FSpreaderState >= 2
+					|| DemonLab.TyrantLabState >= 2)
+				choice[choice.length] = 10;
+
 			//CHOOSE YOUR POISON!
 			select = choice[rand(choice.length)];
 
@@ -303,6 +310,9 @@ use namespace CoC;
 			else if (select == 9) {
 				player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
 				SceneLib.exploration.genericGolGobImpEncounters();
+			}
+			else if (select == 10) {
+				SceneLib.exploration.demonLabProjectEncounters();
 			}
 			else {
 				outputText("OH SHIT! LAKE EXPLORE BE BROKED.  SELECT: " + select + ".  You should probably go to fenoxo.com and click the mod threat link to report a bug and tell Ormael/Aimozg (since they making the mod) about it or come to CoC Mods discord and tell them.");

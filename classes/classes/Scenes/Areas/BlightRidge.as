@@ -10,6 +10,7 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
 import classes.Scenes.Areas.BlightRidge.*;
+import classes.Scenes.Dungeons.DemonLab;
 import classes.Scenes.SceneLib;
 import classes.Scenes.Monsters.ImpLord;
 import classes.Scenes.Monsters.CorruptedFleshGolemBasic;
@@ -102,7 +103,11 @@ use namespace CoC;
 			choice[choice.length] = 1; //Succubi (lvl 26)/Incubu (lvl 26)/Omnicubi enemies (lvl 29)
 			choice[choice.length] = 2; //Corrupted Basic Flesh Golem (lvl 35)/Corrupted Basic Flesh Golems(lvl 36)
 			choice[choice.length] = 3; //Imp Food
-			if (rand(4) == 0) choice[choice.length] = 4; //Find nothing! The rand will be removed from this once the Blight Ridge is populated with more encounters.
+			if (DemonLab.NightwalkerLabstate >= 2
+					|| DemonLab.FSpreaderState >= 2
+					|| DemonLab.TyrantLabState >= 2)
+				choice[choice.length] = 4;
+			if (rand(4) == 0) choice[choice.length] = 10; //Find nothing! The rand will be removed from this once the Blight Ridge is populated with more encounters.
 			
 			select = choice[rand(choice.length)];
 			switch(select) {
@@ -119,6 +124,9 @@ use namespace CoC;
 					clearOutput();
 					outputText("You spot something on the ground. Taking a closer look, it's one of those imps food packages. ");
 					inventory.takeItem(consumables.IMPFOOD, camp.returnToCampUseOneHour);
+					break;
+				case 4:
+					SceneLib.exploration.demonLabProjectEncounters();
 					break;
 				default:
 					clearOutput();

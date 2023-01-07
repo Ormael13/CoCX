@@ -7,6 +7,7 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
 import classes.Scenes.Areas.Swamp.*;
+import classes.Scenes.Dungeons.DemonLab;
 import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.NPCs.EtnaFollower;
 import classes.Scenes.NPCs.LilyFollower;
@@ -84,6 +85,11 @@ use namespace CoC;
 			//Kiha
 			if (!isNightTime)
 			choices[choices.length] = 4;
+			//DemonLab Projects
+			if (DemonLab.NightwalkerLabstate >= 2
+					|| DemonLab.FSpreaderState >= 2
+					|| DemonLab.TyrantLabState >= 2)
+				choices[choices.length] = 5;
 
 			//Pick from the choices and pull the encounter.
 			var choice:Number = choices[rand(choices.length)];
@@ -104,6 +110,9 @@ use namespace CoC;
 					//Kiha follower gets to explore her territory!
 					if (SceneLib.kihaFollower.followerKiha()) SceneLib.kihaScene.kihaExplore();
 					else SceneLib.kihaScene.encounterKiha();
+					break;
+				case 5:
+					SceneLib.exploration.demonLabProjectEncounters();
 					break;
 				default:
 					outputText("New explore code fucked up.  YOU BONED (TELL ORMAEL/AIMOZG)");
