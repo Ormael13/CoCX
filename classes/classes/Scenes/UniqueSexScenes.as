@@ -173,6 +173,7 @@ public class UniqueSexScenes extends BaseContent
 				USSGobMech(),
 				USSBrainMlt(),
 				USSAlrauneSS(),
+				USSWoodElf(),
 				USSEastrBny(),
 				USSTentRape(),
 				USSLiveDildo(),
@@ -331,9 +332,18 @@ public class UniqueSexScenes extends BaseContent
                 }
                 if (player.isAlraune() && player.cor >= 50 && monster.hasVagina() && !monster.hasPerk(PerkLib.UniqueNPC)) btnSet.push("Convert", Convert, "");
                 else btnSet.push("Convert", false, "You need to be a very corrupted alraune against a non unique female character to use this scene.");
-            }
+				}
             else btnSet.push("Alraune", false, "You need to be an Alraune.");
             return btnSet;
+        }
+        //wood elf
+        private function USSWoodElf():Array{
+            var btnSet:Array = ["Convert Elf"];
+			if (player.isWoodElf() && monster.hasVagina() && !monster.hasPerk(PerkLib.UniqueNPC)) btnSet.push(SceneLib.woodElves.CaptureANewSister, "")
+			else if (player.isWoodElf() && monster.hasCock() && monster.cocks[0].cockType === CockTypesEnum.HORSE && !monster.hasPerk(PerkLib.UniqueNPC)) btnSet.push(SceneLib.woodElves.CaptureMinotaur, "")
+			else btnSet.push(false, "Wood elves only!");
+
+			return btnSet;
         }
         //easter bunneh
         private function USSEastrBny():Array{

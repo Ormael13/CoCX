@@ -1171,7 +1171,7 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.CEANI_FOLLOWER] > 0) counter++;
 		if (flags[kFLAGS.DIANA_FOLLOWER] >= 6 && !player.hasStatusEffect(StatusEffects.DianaOff)) counter++;
 		if (flags[kFLAGS.ELECTRA_FOLLOWER] > 1 && !player.hasStatusEffect(StatusEffects.ElectraOff)) counter++;
-		if (flags[kFLAGS.ETNA_FOLLOWER] > 0 && !player.hasStatusEffect(StatusEffects.EtnaOff)) counter++;
+		if (flags[kFLAGS.ETNA_FOLLOWER] > 0 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] != 2 && !player.hasStatusEffect(StatusEffects.EtnaOff)) counter++;
 		if (flags[kFLAGS.EXCELLIA_RECRUITED] >= 33) counter++;
 		if (followerHel()) counter++;
 		//Izma!
@@ -1201,7 +1201,7 @@ public class Camp extends NPCAwareContent{
 		if (BelisaFollower.BelisaInCamp) counter++;
 		if (CelessScene.instance.isCompanion() && CelessScene.instance.isCorrupt) counter++;
 		if (LilyFollower.LilyFollowerState) counter++;
-		if (flags[kFLAGS.ETNA_FOLLOWER] > 0 && !player.hasStatusEffect(StatusEffects.EtnaOff)) counter++;
+		if (flags[kFLAGS.ETNA_FOLLOWER] > 0 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] != 2 && !player.hasStatusEffect(StatusEffects.EtnaOff)) counter++;
 		if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) counter++;
 		if (flags[kFLAGS.ANT_WAIFU] > 0) counter++;
 		if (flags[kFLAGS.AURORA_LVL] >= 1) counter++;
@@ -1226,7 +1226,7 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.CEANI_FOLLOWER] > 0) counter++;
 		if (flags[kFLAGS.DIANA_FOLLOWER] >= 6 && !player.hasStatusEffect(StatusEffects.DianaOff)) counter++;
 		if (flags[kFLAGS.ELECTRA_FOLLOWER] > 1 && !player.hasStatusEffect(StatusEffects.ElectraOff)) counter++;
-		if (flags[kFLAGS.ETNA_FOLLOWER] > 0 && !player.hasStatusEffect(StatusEffects.EtnaOff)) counter++;
+		if (flags[kFLAGS.ETNA_FOLLOWER] > 0 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] != 2 && !player.hasStatusEffect(StatusEffects.EtnaOff)) counter++;
 		if (flags[kFLAGS.LUNA_FOLLOWER] >= 4 && !player.hasStatusEffect(StatusEffects.LunaOff)) counter++;
 		if (followerHel()) counter++;
 		if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) counter++;
@@ -1274,7 +1274,7 @@ public class Camp extends NPCAwareContent{
 		if (helspawnFollower()) counter++;
 		if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2 && flags[kFLAGS.CHI_CHI_FOLLOWER] != 5 && !player.hasStatusEffect(StatusEffects.ChiChiOff)) counter++;
 		if (flags[kFLAGS.CEANI_FOLLOWER] > 0) counter++;
-		if (flags[kFLAGS.ETNA_FOLLOWER] > 0 && !player.hasStatusEffect(StatusEffects.EtnaOff)) counter++;
+		if (flags[kFLAGS.ETNA_FOLLOWER] > 0 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] != 2 && !player.hasStatusEffect(StatusEffects.EtnaOff)) counter++;
 		if (flags[kFLAGS.LUNA_FOLLOWER] > 10 && !player.hasStatusEffect(StatusEffects.LunaOff)) counter++;
 		if (followerHel()) counter++;
 		if (isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) counter++;
@@ -1402,7 +1402,7 @@ public class Camp extends NPCAwareContent{
 				buttons.add("Electra", SceneLib.electraScene.ElectraCampMainMenu).disableIf(player.statusEffectv3(StatusEffects.CampSparingNpcsTimers4) > 0, "Training.");
 			}
 			//Etna
-			if (flags[kFLAGS.ETNA_FOLLOWER] > 0 && !player.hasStatusEffect(StatusEffects.EtnaOff)) {
+			if (flags[kFLAGS.ETNA_FOLLOWER] > 0 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] != 2 && !player.hasStatusEffect(StatusEffects.EtnaOff)) {
 				outputText("Etna is resting lazily on a rug in a very cat-like manner. She’s looking at you always with this adorable expression of hers, her tail wagging expectantly at your approach.\n\n");
 				if (player.statusEffectv1(StatusEffects.CampLunaMishaps2) > 0) buttons.add("Etna", SceneLib.etnaScene.etnaCampMenu2).disableIf(player.statusEffectv1(StatusEffects.CampLunaMishaps2) > 0, "Sleeping.");
 				else buttons.add("Etna", SceneLib.etnaScene.etnaCampMenu2).disableIf(player.statusEffectv4(StatusEffects.CampSparingNpcsTimers1) > 0, "Training.");
@@ -3797,6 +3797,7 @@ public class Camp extends NPCAwareContent{
 	private function dungeonFound():Boolean { //Returns true as soon as any known dungeon is found
 		return flags[kFLAGS.FACTORY_FOUND] > 0
 			|| flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0
+			|| flags[kFLAGS.DEMON_LABORATORY_DISCOVERED] > 0
 			|| flags[kFLAGS.D3_DISCOVERED] > 0
 			|| flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0
 			|| SceneLib.dungeons.checkPhoenixTowerClear()
@@ -3963,6 +3964,10 @@ public class Camp extends NPCAwareContent{
 						+ (flags[kFLAGS.DEFEATED_ZETAZ] > 0 ? "\n\nYou've defeated Zetaz, your old rival." : "")
 						+ (SceneLib.dungeons.checkDeepCaveClear() ? "\n\nCLEARED!" : ""))
 				.disableIf(flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] <= 0, "???", null, "???");
+		bd.add("Demon Laboratory", SceneLib.dungeons.demonLab.EnteringDungeon)
+				.hint("Visit the demon laboratory in the mountains."
+						+ (SceneLib.dungeons.checkDemonLaboratoryClear() ? "\n\nYou have destroyed that laboratory and put an end to the demonic experiments. You've one step closer to defeating Lethice!\n\nCLEARED!" : ""))
+				.disableIf(flags[kFLAGS.DEMON_LABORATORY_DISCOVERED] <= 0, "???", null, "???");
 		bd.add("Stronghold", SceneLib.d3.enterD3)
 				.hint("Visit the stronghold in the high mountains that belongs to Lethice, the demon queen."
 						+ ((flags[kFLAGS.LETHICE_DEFEATED] > 0) ? "\n\nYou have slain Lethice and put an end to the demonic threats. Congratulations, you've beaten the main story!" : "")
@@ -4120,8 +4125,10 @@ public class Camp extends NPCAwareContent{
 		else addButtonDisabled(0, "???", "???");
 		if (flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0) addButton(1, "Deep Cave", SceneLib.dungeons.deepcave.enterDungeon).hint("Visit the cave you've found in the Deepwoods." + (flags[kFLAGS.DEFEATED_ZETAZ] > 0 ? "\n\nYou've defeated Zetaz, your old rival." : "") + (SceneLib.dungeons.checkDeepCaveClear() ? "\n\nCLEARED!" : ""));
 		else addButtonDisabled(1, "???", "???");
-		if (flags[kFLAGS.D3_DISCOVERED] > 0) addButton(2, "Stronghold", SceneLib.d3.enterD3).hint("Visit the stronghold in the high mountains that belongs to Lethice, the demon queen." + ((flags[kFLAGS.LETHICE_DEFEATED] > 0) ? "\n\nYou have slain Lethice and put an end to the demonic threats. Congratulations, you've beaten the main story!" : "") + (SceneLib.dungeons.checkLethiceStrongholdClear() ? "\n\nCLEARED!" : ""));
+		if (flags[kFLAGS.DEMON_LABORATORY_DISCOVERED] > 0) addButton(2, "Demon Laboratory", SceneLib.dungeons.demonLab.EnteringDungeon).hint("Visit the demon laboratory in the mountains." + (SceneLib.dungeons.checkDemonLaboratoryClear() ? "\n\nYou have destroyed that laboratory and put an end to the demonic experiments. You've one step closer to defeating Lethice!\n\nCLEARED!" : ""));
 		else addButtonDisabled(2, "???", "???");
+		if (flags[kFLAGS.D3_DISCOVERED] > 0) addButton(3, "Stronghold", SceneLib.d3.enterD3).hint("Visit the stronghold in the high mountains that belongs to Lethice, the demon queen." + ((flags[kFLAGS.LETHICE_DEFEATED] > 0) ? "\n\nYou have slain Lethice and put an end to the demonic threats. Congratulations, you've beaten the main story!" : "") + (SceneLib.dungeons.checkLethiceStrongholdClear() ? "\n\nCLEARED!" : ""));
+		else addButtonDisabled(3, "???", "???");
 		//Side dungeons
 		if (flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0 && !flags[kFLAGS.DESERT_CAVE_DISABLED]) addButton(5, "Desert Cave", SceneLib.dungeons.desertcave.enterDungeon).hint("Visit the cave you've found in the desert." + (flags[kFLAGS.SAND_WITCHES_COWED] + flags[kFLAGS.SAND_WITCHES_FRIENDLY] > 0 ? "\n\nFrom what you've known, this is the source of the Sand Witches." : "") + (SceneLib.dungeons.checkSandCaveClear() ? "\n\nCLEARED!" : ""));
 		else if (flags[kFLAGS.DESERT_CAVE_DISABLED]) addButtonDisabled(5, "Desert Cave", "You can't find the entrance. Maybe it's hidden. Or locked forever. Who knows?");
@@ -4520,7 +4527,8 @@ public function rebirthFromBadEnd():void {
 		//Dungeons
 		if (SceneLib.dungeons.checkFactoryClear()) performancePointsPrediction++;
 		if (SceneLib.dungeons.checkDeepCaveClear()) performancePointsPrediction += 2;
-		if (SceneLib.dungeons.checkLethiceStrongholdClear()) performancePointsPrediction += 3;
+		if (SceneLib.dungeons.checkDemonLaboratoryClear()) performancePointsPrediction += 3;
+		if (SceneLib.dungeons.checkLethiceStrongholdClear()) performancePointsPrediction += 4;
 		if (SceneLib.dungeons.checkSandCaveClear()) performancePointsPrediction++;
 		if (SceneLib.dungeons.checkHiddenCaveClear()) performancePointsPrediction++;
 		if (SceneLib.dungeons.checkHiddenCaveHiddenStageClear()) performancePointsPrediction++;
