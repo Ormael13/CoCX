@@ -2355,6 +2355,16 @@ public class Combat extends BaseContent {
         } else if (player.hasStatusEffect(StatusEffects.MagnarPinned)) {
             (monster as Magnar).magnarPinStruggle();
             skipMonsterAction = true;
+        } else if (player.hasStatusEffect(StatusEffects.Straddle)) {
+            if (monster is ProjectNightwalker)(monster as ProjectNightwalker).struggleFaceSitting();
+            else {
+                //33% chance to break free + up to 50% chance for strength
+                if (rand(3) == 0 || rand(80) < player.str / 2 || player.hasPerk(PerkLib.FluidBody)) {
+                    outputText("You grunt in anger, bending your body as quickly as you can. You slam [themonster] into the ground, and you can feel her legs loosen around your neck. With a roar of effort, you get a hold of her ankles, break her grip on your face, and throw [monster him] away from you.\n\n");
+                    player.removeStatusEffect(StatusEffects.Straddle);
+                }
+            }
+            skipMonsterAction = true;
         } else if (player.hasStatusEffect(StatusEffects.GooArmorBind)) {
             (monster as Valeria).struggleAtGooBind();
             if (player.statusEffectv1(StatusEffects.GooArmorBind) >= 5) {
