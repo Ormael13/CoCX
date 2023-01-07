@@ -5,6 +5,7 @@ import classes.IMutations.IMutationsLib;
 import classes.Scenes.Combat.CombatAbility;
 import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.NPCs.DriderTown;
+import classes.Scenes.NPCs.EtnaFollower;
 import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.NPCs.Forgefather;
 import classes.Scenes.NPCs.IsabellaScene;
@@ -958,8 +959,8 @@ public class PlayerInfo extends BaseContent {
 		if (SceneLib.emberScene.pregnancy.isPregnant)
 			pregnancies += "<b>Ember</b> \n";
 
-		//if (SceneLib.etnaScene.pregnancy.isPregnant)	//TODO Etna preggers
-		//	pregnancies += "<b>Etna</b> \n";
+		if (SceneLib.etnaScene.pregnancy.isPregnant)
+			pregnancies += "<b>Etna</b> \n";
 
 		if (SceneLib.excelliaFollower.pregnancy.isPregnant)
 			pregnancies += "<b>Excellia</b> \n";
@@ -1090,6 +1091,9 @@ public class PlayerInfo extends BaseContent {
         if (flags[kFLAGS.EMBER_EGGS] > 0)
 			childStats += "<b>Ember Eggs Produced:</b> " + flags[kFLAGS.EMBER_EGGS] + "\n";
 
+		if (EtnaFollower.EtnaDaughters > 0)
+			childStats += "<b>Children With Etna:</b> " + EtnaFollower.EtnaDaughters + "\n";
+
 		if (flags[kFLAGS.EXCELLIA_MALE_KIDS] > 0)
 			childStats += "<b>Excellia Offspring (Human Males):</b> " + flags[kFLAGS.EXCELLIA_MALE_KIDS] + "\n";
 		if (flags[kFLAGS.EXCELLIA_FEMALE_KIDS] > 0)
@@ -1141,6 +1145,9 @@ public class PlayerInfo extends BaseContent {
         if (SceneLib.kihaFollower.totalKihaChildren() > 0)
             childStats += "<b>Total Children With Kiha:</b> " + SceneLib.kihaFollower.totalKihaChildren() + "\n";
         
+		if (flags[kFLAGS.LOPPE_KIDS] > 0)
+			childStats += "<b>Loppe Children:</b> " + flags[kFLAGS.LOPPE_KIDS] + " of max " + flags[kFLAGS.LOPPE_KIDS_LIMIT] + "\n";
+
 		if (DriderTown.LilyKidsPC > 0)
 			childStats += "<b>Drider Children With Lily:</b> " + DriderTown.LilyKidsPC + "\n";
 

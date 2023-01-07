@@ -19,7 +19,8 @@ public class EtnaFollower extends NPCAwareContent implements TimeAwareInterface,
 	public static var EtnaHunting:Boolean;
 	public static var EtnaInfidelity:int;	//0 = not yet happened, 1 = pc accept, 2 = pc reject, 3 = pc feeds her
 	public static var EtnaFertile:Boolean;
-	public static var EtnaJumpedToday:Boolean
+	public static var EtnaDaughters:int;
+	public static var EtnaJumpedToday:Boolean;
 
 	public function stateObjectName():String {
 		return "EtnaFollower";
@@ -29,6 +30,7 @@ public class EtnaFollower extends NPCAwareContent implements TimeAwareInterface,
 		EtnaHunting = false;
 		EtnaInfidelity = 0;
 		EtnaFertile = false;
+		EtnaDaughters = 0;
 		EtnaJumpedToday = false;
 	}
 
@@ -37,6 +39,7 @@ public class EtnaFollower extends NPCAwareContent implements TimeAwareInterface,
 			"EtnaHunting": EtnaHunting,
 			"EtnaInfidelity": EtnaInfidelity,
 			"EtnaFertile": EtnaFertile,
+			"EtnaDaughters" : EtnaDaughters,
 			"EtnaJumpedToday": EtnaJumpedToday
 		};
 	}
@@ -46,6 +49,7 @@ public class EtnaFollower extends NPCAwareContent implements TimeAwareInterface,
 			EtnaHunting = o["EtnaHunting"];
 			EtnaInfidelity = o["EtnaInfidelity"];
 			EtnaFertile = o["EtnaFertile"];
+			EtnaDaughters = valueOr(o["EtnaDaughters"], 0);
 			EtnaJumpedToday = o["EtnaJumpedToday"];
 		} else resetState();
 	}
@@ -1190,6 +1194,7 @@ private function etnaGivesBirth():void {
 	outputText("Well, wow, now that you're in the heart of things you can’t back out of your promise. You help the soon to be mother lay down as she starts singing again. Her pussy must be extremely sensitive right now and the birth isn’t helping. She starts pushing with a gleeful expression on her face as the baby stretches her hole wide and begins its way down it. Soon a human-like baby with the features of a cat, bat, and scorpion is out.[pg]");
 	outputText("“<i>P...please let me hold our child… I want to see her.</i>”[pg]");
 	outputText("You let her hold the crying baby against herself. She soothes your newborn girl by singing a melodious lullaby as she does it so well. It could come as strange to see the normally somewhat ferocious or lusty manticore act like a normal, if not, caring mother. You can’t help but be smitten at the picture. She eventually comes to a realization.[pg]");
+	EtnaDaughters++;
 	SceneLib.etnaDaughterScene.nameEtnaDaughter();
 }
 
