@@ -1,4 +1,4 @@
-﻿package classes
+package classes
 {
 import classes.BodyParts.Arms;
 import classes.BodyParts.Ears;
@@ -48,6 +48,7 @@ import classes.Scenes.NPCs.SophieFollowerScene;
 import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.Places.TelAdre.UmasShop;
+import classes.Scenes.Places.WoodElves;
 import classes.Scenes.Pregnancy;
 import classes.Scenes.SceneLib;
 import classes.Stats.StatUtils;
@@ -6358,6 +6359,26 @@ use namespace CoC;
 				outputText("Sadly as much as you try to extract new knowledge from your victims brain there's only so few to be had… " +
 						"that Mareth is filled with idiots doesn't help that." +
 						" Despite draining your victim into something about as smart as a mineral you fail to extract anything noteworthy.");
+			}
+		}
+
+		public function ElfSistersBonus():void
+		{
+			var ElfSistersBonus:Number = (WoodElves.ConvertedSisters + WoodElves.ConvertedHerms) * 0.01;
+			while (buff("Elf Sisters").getValueOfStatBuff("int.mult") < ElfSistersBonus) {
+				buff("Elf Sisters").addStat("str.mult",0.01);
+				buff("Elf Sisters").addStat("tou.mult",0.01);
+				buff("Elf Sisters").addStat("spe.mult",0.01);
+				buff("Elf Sisters").addStat("int.mult",0.01);
+				buff("Elf Sisters").addStat("wis.mult",0.01);
+				buff("Elf Sisters").addStat("lib.mult",0.01);
+				CoC.instance.mainView.statsView.refreshStats(CoC.instance);
+				CoC.instance.mainView.statsView.showStatUp("str");
+				CoC.instance.mainView.statsView.showStatUp("tou");
+				CoC.instance.mainView.statsView.showStatUp("spe");
+				CoC.instance.mainView.statsView.showStatUp("inte");
+				CoC.instance.mainView.statsView.showStatUp("wis");
+				CoC.instance.mainView.statsView.showStatUp("lib");
 			}
 		}
 

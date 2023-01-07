@@ -7,6 +7,8 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.API.Encounters;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.HighMountains.*;
+import classes.Scenes.Dungeons.DemonLab;
+import classes.Scenes.Dungeons.DemonLab.ProjectNightwalker;
 import classes.Scenes.Holidays;
 import classes.Scenes.Monsters.DarkElfScene;
 import classes.Scenes.NPCs.EtnaFollower;
@@ -34,7 +36,7 @@ public class HighMountains extends BaseContent {
         _highMountainsEncounter = Encounters.group("highmountains", {
             name: "d3",
             when: function ():Boolean {
-                return flags[kFLAGS.D3_DISCOVERED] == 0 && player.hasKeyItem("Zetaz's Map") >= 0 && rand(5) == 0;
+                return flags[kFLAGS.D3_DISCOVERED] == 0 && player.hasKeyItem("Map to the Lethice’s Fortress") >= 0;
             },
             call: SceneLib.d3.discoverD3
         }, {
@@ -103,6 +105,14 @@ public class HighMountains extends BaseContent {
             name: "darkelf",
             chance: 0.5,
             call: darkelfScene.introDarkELfSniper
+        }, {
+            name: "nightwalker",
+            chance: 0.3,
+            when: function ():Boolean {
+                return DemonLab.NightwalkerLabstate >= 2;
+            },
+            night: true,
+            call: nightwalkerEncounter
         });
     }
 
@@ -240,6 +250,14 @@ public class HighMountains extends BaseContent {
         outputText("With nothing useful left to you here, you resume your walk and return to your camp with the peacock idol on your bag.\n\n");
         player.createKeyItem("Peacock Statuette", 0, 0, 0, 0);
         doNext(camp.returnToCampUseOneHour);
+    }
+
+    public function nightwalkerEncounter():void {
+        outputText("You find yourself feeling somewhat nervous. Your [skin] crawls, but as you wheel about, you see nothing. You hear nothing but a faint whisper on the wind.[pg]");
+        outputText("“<i>Blood.</i>” A faint dripping sound comes from behind you. You turn, slowly, to face a corpse-pale woman in a crotchless skintight latex suit that leaves nothing to the imagination. Her eyes shine red, and her fangs stick out well beyond her lips. A spadelike tail flicks back and forth, dripping red, and she smiles, curved black horns and ebony tresses combining to make her seem...well, you assume the intent was to make her beautiful, but unlike the succubi, there’s almost no sex appeal in those eyes, no carnal desire as she glances between your legs, scraping one of her fingernails along her swollen pussy lips, cutting herself and drawing a trickle of blood.[pg]");
+        outputText("“<i>Sweet blood, come... Sate yourself.</i>” Her nails are like black claws, but as she licks the blood off her fingers, part of you recoils in fear. “<i>Sate you...Then you’ll sate...me.</i>” You draw your [weapon], bracing yourself, but as you do, this gets only a smile as the curvy, short woman tilts her head. She launches herself toward you, claws outstretched, the eerie grin still on her face.[pg]");
+        outputText("“<i>Blood! Blood for me!</i>” [pg]");
+        startCombat(new ProjectNightwalker());
     }
 }
 }

@@ -217,15 +217,12 @@ public class CombatAbilities {
 	public static const Entangle:EntangleSpell           = new EntangleSpell();
 	public static const Briarthorn:BriarthornSpell       = new BriarthornSpell();
 	public static const DeathBlossom:DeathBlossomSpell   = new DeathBlossomSpell();
-	public static const GreenCovenant:GreenCovenantSpell = new GreenCovenantSpell();
-	public static const Rosethorn:RosethornShot          = new RosethornShot();
 
 	public static const ALL_GREEN_SPELLS:/*CombatAbility*/Array = [
 		PlantGrowth,
 		Entangle,
 		Briarthorn,
-		DeathBlossom,
-		GreenCovenant
+		DeathBlossom
 	];
 	
 	public static const ALL_SPELLS:/*CombatAbility*/Array = []

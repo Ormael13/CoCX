@@ -14,6 +14,8 @@ import classes.Scenes.API.FnHelpers;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.HighMountains.*;
 import classes.Scenes.Areas.Mountain.*;
+import classes.Scenes.Dungeons.DemonLab;
+import classes.Scenes.Dungeons.DemonLab.ProjectNightwalker;
 import classes.Scenes.Holidays;
 import classes.Scenes.Monsters.DarkElfScene;
 import classes.Scenes.NPCs.DivaScene;
@@ -359,7 +361,13 @@ public class Mountain extends BaseContent
 				when: fn.ifLevelMin(3),
 				call: curry(SceneLib.mimicScene.mimicTentacleStart,2)
 			});
-			_mountainEncounter = Encounters.group("mountain", {/*
+			_mountainEncounter = Encounters.group("mountain", {
+				name: "demonlab",
+				when: function ():Boolean {
+					return flags[kFLAGS.DEMON_LABORATORY_DISCOVERED] == 0 && player.hasKeyItem("Zetaz's Map") >= 0;
+				},
+				call: SceneLib.dungeons.demonLab.discoverDemonLab
+			},{/*
 				//General Angels, Golems, Goblin and Imp Encounters
 				name: "common",
 				chance: 0.8,
@@ -448,7 +456,15 @@ public class Mountain extends BaseContent
 			}, {
 				name: "darkelf",
 				call: darkelfScene.introDarkELfRanger
-			},{/*
+			}, {
+				name: "nightwalker",
+				chance: 0.2,
+				when: function ():Boolean {
+					return DemonLab.NightwalkerLabstate >= 2;
+				},
+				night: true,
+				call: nightwalkerEncounter
+			}, {/*
 				name: "lactoblasters",
 				when: function ():Boolean {
 					return player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns5) && player.statusEffectv3(StatusEffects.TelAdreTripxiGuns2) == 0 && player.hasKeyItem("Lactoblasters") < 0;
@@ -832,6 +848,14 @@ public class Mountain extends BaseContent
 			//Lust!
 			dynStats("lus", 5 + player.lib / 20 + player.racialScore(Races.MINOTAUR, false) + player.racialScore(Races.COW, false), "scale", false);
 			doNext(camp.returnToCampUseOneHour);
+		}
+
+		public function nightwalkerEncounter():void {
+			outputText("You find yourself feeling somewhat nervous. Your [skin] crawls, but as you wheel about, you see nothing. You hear nothing but a faint whisper on the wind.[pg]");
+			outputText("“<i>Blood.</i>” A faint dripping sound comes from behind you. You turn, slowly, to face a corpse-pale woman in a crotchless skintight latex suit that leaves nothing to the imagination. Her eyes shine red, and her fangs stick out well beyond her lips. A spadelike tail flicks back and forth, dripping red, and she smiles, curved black horns and ebony tresses combining to make her seem...well, you assume the intent was to make her beautiful, but unlike the succubi, there’s almost no sex appeal in those eyes, no carnal desire as she glances between your legs, scraping one of her fingernails along her swollen pussy lips, cutting herself and drawing a trickle of blood.[pg]");
+			outputText("“<i>Sweet blood, come... Sate yourself.</i>” Her nails are like black claws, but as she licks the blood off her fingers, part of you recoils in fear. “<i>Sate you...Then you’ll sate...me.</i>” You draw your [weapon], bracing yourself, but as you do, this gets only a smile as the curvy, short woman tilts her head. She launches herself toward you, claws outstretched, the eerie grin still on her face.[pg]");
+			outputText("“<i>Blood! Blood for me!</i>” [pg]");
+			startCombat(new ProjectNightwalker());
 		}
 	}
 }

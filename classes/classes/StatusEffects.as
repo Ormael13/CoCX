@@ -1124,6 +1124,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const CooldownGrandioseHailOfBlades:StatusEffectType      = mkCombat("Cooldown Grandiose Hail of Blades");
 		public static const CooldownGrandioseHailOfMoonBlades:StatusEffectType  = mkCombat("Cooldown Grandiose Hail of Moon Blades");
 		public static const CooldownGravityShots:StatusEffectType   			= mkCombat("Cooldown Gravity shots");
+		public static const CooldownGreenCovenant:StatusEffectType   			= mkCombat("Cooldown Green Covenant");
 		public static const CooldownHeavensDevourer:StatusEffectType     		= mkCombat("Cooldown Heaven's Devourer");
 		public static const CooldownHungeringCold:StatusEffectType           	= mkCombat("Cooldown Hungering cold");
 		public static const CooldownHurricaneDance:StatusEffectType      		= mkCombat("Cooldown Hurricane Dance");

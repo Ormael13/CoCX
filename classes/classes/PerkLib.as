@@ -536,8 +536,8 @@ public class PerkLib
 				"+5% firearms attacks multiplier bonus and then adds 50% on top of final result.",
 				"You've chosen the 'Firearms Attack Multiplier' perk. +5% firearms attacks multiplier bonus and then adds 50% on top of final result.");
 		public static const PowerShotEx:PerkType = mk("Power Shoot (Ex)", "Power Shoot (Ex)",
-				"Power Shoot p. special damage increased by ~2,5x. Add some of your strength (~40/10% of str / spe scaling value) to normal bow damage / (~40/10% of spe / str scaling value) throwing damage. (+10% range physical attacks multiplier)",
-				"You've chosen the 'Power Shoot (Ex)' perk. Power Shoot p. special damage increased by ~2,5x. Add some of your strength (~40/10% of str / spe scaling value) to normal bow damage / (~40/10% of spe / str scaling value) throwing damage. (+10% range physical attacks multiplier)");
+				"Power Shoot p. special damage increased by ~2,5x. Add some of your strength (~40/10% of str / spe scaling value) to normal bow damage / (~40/10% of spe / str scaling value) throwing damage. (+15% range physical attacks multiplier)",
+				"You've chosen the 'Power Shoot (Ex)' perk. Power Shoot p. special damage increased by ~2,5x. Add some of your strength (~40/10% of str / spe scaling value) to normal bow damage / (~40/10% of spe / str scaling value) throwing damage. (+15% range physical attacks multiplier)");
 		public static const SkilledFighterEx:PerkType = mk("Skilled Fighter (Ex)", "Skilled Fighter (Ex)",
 				"When melee atk crit chance exceed 100% crit dmg is x2 and when exceed 200% crit dmg is x3. (+15% melee physical attacks multiplier and then adds another 50% (total of 100%) on top of final result)",
 				"You've chosen the 'Skilled Fighter (Ex)' perk. When melee atk crit chance exceed 100% crit dmg is x2 and when exceed 200% crit dmg is x3. (+15% melee physical attacks multiplier and then adds another 50% (total of 100%) on top of final result)");
@@ -547,6 +547,15 @@ public class PerkLib
 		public static const SkilledGunslingerEx:PerkType = mk("Skilled Gunslinger (Ex)", "Skilled Gunslinger (Ex)",
 				"When firearms atk crit chance exceed 100% crit dmg is x2 and when exceed 200% crit dmg is x3. (+20% firearms attacks multiplier and then adds another 50% (total of 100%) on top of final result)",
 				"You've chosen the 'Skilled Gunslinger (Ex)' perk. When firearms atk crit chance exceed 100% crit dmg is x2 and when exceed 200% crit dmg is x3. (+20% firearms attacks multiplier and then adds another 50% (total of 100%) on top of final result)");
+		public static const ImpactThrow:PerkType = mk("Impact Throw", "Impact Throw",
+				"Thrown weapon impacts are so powerful that they can stop your opponents right in their tracks gaining a 10% chance of stunning them. (+15% range physical attacks multiplier)",
+				"You've chosen the 'Impact Throw' perk. Thrown weapon impacts are so powerful that they can stop your opponents right in their tracks gaining a 10% chance of stunning them. (+15% range physical attacks multiplier)");
+		public static const PenetratingThrow:PerkType = mk("Penetrating throw", "Penetrating throw",
+				"Thrown weapons have such penetrating power they now have a chance to run through multiple enemies. When attacking groups the projectiles have a 75% (losing 10% after each successful piercing strike) chance to deal their damage more then once. (+20% range physical attacks multiplier)",
+				"You've chosen the 'Penetrating throw' perk. Thrown weapons have such penetrating power they now have a chance to run through multiple enemies. When attacking groups the projectiles have a 75% (losing 10% after each successful piercing strike) chance to deal their damage more then once. (+20% range physical attacks multiplier)");
+		public static const Backbreaker:PerkType = mk("Backbreaker", "Backbreaker",
+				"Hammer or mace deals 50% more damage to stunned enemies.",
+				"You've chosen the 'Backbreaker' perk. Hammer or mace deals 50% more damage to stunned enemies.");
 
 		public static const ElementsOfMarethBasic:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
@@ -554,15 +563,6 @@ public class PerkLib
 		/*public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk, .");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk, .");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk, .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, .");
@@ -3655,6 +3655,7 @@ public class PerkLib
 				"Black magic effectiveness is increased by 50%. Soulforce regenerate passively by 2%.");//, Hex and Necromancy		 and recharge 1 round faster
 		public static const NinetailsKitsuneOfBalance:PerkType = mk("Nine-tails Kitsune of Balance", "Nine-tails Kitsune of Balance",
 				"The mystical energy of the nine-tails surges through you, filling you with phenomenal cosmic power!  You tread the narrow path between corruption and true enlightment maintaining a balance that allows you to fuse both sides powers.",null,true);
+		public static const OneWiththeForest:OneWithTheForest = new OneWithTheForest();
 		public static const TrueSeeing:PerkType = mk("True seeing", "True seeing",
 				"Your vision is magical in nature and see the world as it truly is defeating glamors, illusions and spatial displacement. You also have a +20% to your base accuracy from your peerless view.");
 		public static const Omnicaster:PerkType = mk("Omnicaster", "Omnicaster",
@@ -4166,6 +4167,7 @@ public class PerkLib
 			ePerkL.push(EnemyHugeType);
 			ePerkL.push(EnemyLargeGroupType);
 			ePerkL.push(EnemyPlantType);
+			ePerkL.push(EnemyTrueAngel);
 			ePerkL.push(EnemyTrueDemon);
 			ePerkL.push(EnemyResiliance);
 			ePerkL.push(FireNature);
@@ -4455,6 +4457,9 @@ public class PerkLib
                     .requireStr(75);
             WayOfTheWarrior.requireLevel(18)
                     .requirePerk(JobWarrior);
+            Backbreaker.requireLevel(18)
+                    .requireStr(110)
+                    .requirePerk(BalanceBreaker);
             UnlimitedRage.requireLevel(18)
                     .requireStr(60)
                     .requirePerk(FuriousStrikes);
@@ -5165,10 +5170,16 @@ public class PerkLib
                     .requireLevel(24);
 			WoundPoison.requireLevel(24)
 					.requirePerk(JobRogue);
+            ImpactThrow.requirePerk(DeadlyThrow)
+                    .requireSpe(80)
+                    .requireLevel(24);
             //Tier 5 Speed Perks
             Multishot.requirePerk(WildQuiver)
                     .requireSpe(150)
                     .requireLevel(30);
+            PenetratingThrow.requirePerk(ImpactThrow)
+                    .requireSpe(100)
+                    .requireLevel(24);
             UnlockEndurance2ndStage.requirePerk(UnlockEndurance)
                     .requireSpe(125)
                     .requireLevel(30);
@@ -7370,4 +7381,4 @@ public class PerkLib
         }
 	}
 }
-}
+}
