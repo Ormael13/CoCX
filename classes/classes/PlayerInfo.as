@@ -1092,9 +1092,8 @@ public class PlayerInfo extends BaseContent {
         if (flags[kFLAGS.EMBER_EGGS] > 0)
 			childStats += "<b>Ember Eggs Produced:</b> " + flags[kFLAGS.EMBER_EGGS] + "\n";
 
-		if (EtnaFollower.EtnaDaughters > 0) {
-			childStats += "<b>Children With Etna:</b> " + EtnaDaughterScene.EtnaDaughterName + "\n";
-			childStats += "<b>Children With Etna:</b> " + EtnaFollower.EtnaDaughters + "\n";
+		if (EtnaDaughterScene.EtnaDaughterAge > 0) {
+			childStats += "<b>Child With Etna:</b> " + EtnaDaughterScene.EtnaDaughterName + "\n";
 		}
 
 		if (flags[kFLAGS.EXCELLIA_MALE_KIDS] > 0)

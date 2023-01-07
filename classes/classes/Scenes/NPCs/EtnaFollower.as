@@ -19,7 +19,6 @@ public class EtnaFollower extends NPCAwareContent implements TimeAwareInterface,
 	public static var EtnaHunting:Boolean;
 	public static var EtnaInfidelity:int;	//0 = not yet happened, 1 = pc accept, 2 = pc reject, 3 = pc feeds her
 	public static var EtnaFertile:Boolean;
-	public static var EtnaDaughters:int;
 	public static var EtnaJumpedToday:Boolean;
 
 	public function stateObjectName():String {
@@ -30,7 +29,6 @@ public class EtnaFollower extends NPCAwareContent implements TimeAwareInterface,
 		EtnaHunting = false;
 		EtnaInfidelity = 0;
 		EtnaFertile = false;
-		EtnaDaughters = 0;
 		EtnaJumpedToday = false;
 	}
 
@@ -39,7 +37,6 @@ public class EtnaFollower extends NPCAwareContent implements TimeAwareInterface,
 			"EtnaHunting": EtnaHunting,
 			"EtnaInfidelity": EtnaInfidelity,
 			"EtnaFertile": EtnaFertile,
-			"EtnaDaughters" : EtnaDaughters,
 			"EtnaJumpedToday": EtnaJumpedToday
 		};
 	}
@@ -49,7 +46,6 @@ public class EtnaFollower extends NPCAwareContent implements TimeAwareInterface,
 			EtnaHunting = o["EtnaHunting"];
 			EtnaInfidelity = o["EtnaInfidelity"];
 			EtnaFertile = o["EtnaFertile"];
-			EtnaDaughters = valueOr(o["EtnaDaughters"], 0);
 			EtnaJumpedToday = o["EtnaJumpedToday"];
 		} else resetState();
 	}
@@ -1142,7 +1138,7 @@ private function etnaAfterInfidelity():void {
 }
 
 public function etnaKnockupAttempt():void {
-	if (pregnancy.isPregnant || !EtnaFertile) return;
+	if (pregnancy.isPregnant || !EtnaFertile && EtnaDaughterScene.EtnaDaughterAge > 0) return;
 	if (rand(8) == 0 || player.cumQ() > rand(3000) || player.virilityQ() >= 0.7) {
 		pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_ETNA);
 		if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Etna is pregnant!</b>");
@@ -1194,15 +1190,8 @@ private function etnaGivesBirth():void {
 	outputText("Well, wow, now that you're in the heart of things you can’t back out of your promise. You help the soon to be mother lay down as she starts singing again. Her pussy must be extremely sensitive right now and the birth isn’t helping. She starts pushing with a gleeful expression on her face as the baby stretches her hole wide and begins its way down it. Soon a human-like baby with the features of a cat, bat, and scorpion is out.[pg]");
 	outputText("“<i>P...please let me hold our child… I want to see her.</i>”[pg]");
 	outputText("You let her hold the crying baby against herself. She soothes your newborn girl by singing a melodious lullaby as she does it so well. It could come as strange to see the normally somewhat ferocious or lusty manticore act like a normal, if not, caring mother. You can’t help but be smitten at the picture. ");
-	EtnaDaughters++;
-	if (EtnaDaughters == 0) {
-		outputText("She eventually comes to a realization.[pg]");
-		SceneLib.etnaDaughterScene.nameEtnaDaughter();
-	} else {
-		outputText("Etna coos to her as the little cub sleeps, but by the way you see her ears twitching, you're sure she likes it. The three of you doze off to sleep together. When you wake up you're holding a manticore of tender years against you, she has [haircolor] hair, the same as you, and the face of her mother.[pg]");
-		outputText("Well, that's a disappointment, you expected this phase to last longer but you guess you will have to make do. Still, she didn’t fully mature overnight which, considering Mareth’s ridiculous time skips, is a small miracle in its own. Maybe you will get to enjoy the joys of being a parent a bit longer?[pg]");
-		doNext(camp.returnToCampUseOneHour);
-	}
+	outputText("She eventually comes to a realization.[pg]");
+	SceneLib.etnaDaughterScene.nameEtnaDaughter();
 }
 
 	}
