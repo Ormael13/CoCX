@@ -617,6 +617,7 @@
         <cell rect="1340,956,173,156" name="fullbody/malesylph" dx="16" dy="21"/>
 		<cell rect="1514,956,173,156" name="fullbody/cerberus" dx="16" dy="18"/>
 		<cell rect="1514,1114,173,156" name="fullbody/greenfireCerberus" dx="16" dy="18"/>
+		<cell rect="1688,1114,173,156" name="hair_bg/CerberusHair" dx="16" dy="18"/>
 		<cell rect="1688,956,173,156" name="fullbodyBg/imp" dx="16" dy="21"/>
         <cell rect="260,620,21,28" name="neck/darkGooCore" dx="95" dy="67"/>
         <cell rect="162,59,54,31" name="neck/manticore" dx="77" dy="47"/>
@@ -917,6 +918,7 @@
         <cell rect="421,136,59,65" name="hairRight/sylph" dx="98" dy="26"/>
 		<cell rect="721,136,59,65" name="hair/cow" dx="75" dy="21"/>
 		<cell rect="1081,350,87,98" name="hairFront/ribbon" dx="59" dy="3"/>
+		<cell rect="1081,350,87,98" name="hairFrontFullBody/ribbon" dx="59" dy="3"/>
         <cell rect="1,449,28,30" name="hair/hairHood" dx="91" dy="39"/>
         <cell rect="1,482,28,30" name="hair/hairHoodFire" dx="91" dy="39"/>
     </spritemap>
@@ -1573,6 +1575,7 @@
 
 	<!-- LAYER AREA -->
     <layers>
+		<layer name="hairFrontFullBody"/>
 		<layer name="full_pattern"/>
 		<layer name="fullbodyPenisFg"/>
 		<layer name="fullbodyBreast"/>
@@ -6486,63 +6489,60 @@
 					<show part="fullbodyBreast/imp0"/>
                 </else>
 			</if>
-			<if test="hairLength &gt; 0">
-				<switch value="hairType">
-					<default> <!-- covers Hair.NORMAL, Hair.GHOST, Hair.ANEMONE, Hair.QUILL, Hair.LEAF, Hair.FLUFFY, Hair.GRASS, Hair.SILKEN, Hair.STORM --> <!-- TODO  -->
-						<switch>
-							<case test="hairLength lt 16">
-								<show part="hair/0"/>
-								<show part="hair_bg/0"/>
-							</case>
-							<default>
-								<show part="hair/0"/>
-								<show part="hair_bg/02"/>
-							</default>
-						</switch>
-					</default>
-				</switch>
-				<switch value="hairStyle">
-                    <case values="Hair.PONYTAIL">
-                        <show part="hair_bg/ponytail"/>
-                    </case>
-                    <case values="Hair.LONGTRESSES">
-                        <show part="hair_bg/longTresse"/>
-                    </case>
-                    <case values="Hair.TWINTAILS">
-                        <show part="hair_bg/twinPigtail"/>
-                    </case>
-                    <case values="Hair.DWARVEN">
-                        <show part="hair_bg/dwarven"/>
-                    </case>
-					<case values="Hair.SNOWLILY">
-						<hide part="hair/*"/>
-						<hide part="hair_bg/*"/>
-                        <show part="hair/yukionna"/>
-						<show part="hair_bg/yukionna"/>
-                    </case>
-					<case values="Hair.FOURWIND">
-						<hide part="hair/*"/>
-						<hide part="hair_bg/*"/>
-                        <show part="hair/fourWindBraid"/>
-						<show part="hair_bg/fourWindBraid"/>
-                    </case>
-					<case values="Hair.FOURWINDL">
-						<hide part="hair/*"/>
-						<hide part="hair_bg/*"/>
-                        <show part="hair/fourWindBraid"/>
-						<show part="hair_bg/02"/>
-                    </case>
-					<case values="Hair.TAURPONYTAIL">
-						<show part="hair_bg/centaurPonytail"/>
-					</case>
-                    <default>
-                        <hide part="hair/*"/>
-                        <hide part="hair_bg/*"/>
-                        <show part="hair/0"/>
-                        <show part="hair_bg/02"/>
-                    </default>
-                </switch>
-			</if>
+			<if test="hairStyle != Hair.PLAIN">
+                <hide part="hair/0"/>
+                <hide part="hair_bg/02"/>   
+				<show part="hair/feather"/>
+                <show part="hair_bg/feather"/> 
+            </if>
+			<switch value="hairStyle">
+                <case values="Hair.PONYTAIL">
+                    <show part="hair_bg/ponytail"/>
+                </case>
+                <case values="Hair.LONGTRESSES">
+                    <show part="hair_bg/longTresse"/>
+                </case>
+                <case values="Hair.TWINTAILS">
+                    <show part="hair_bg/twinPigtail"/>
+                </case>
+                <case values="Hair.DWARVEN">
+                <show part="hair_bg/dwarven"/>
+                </case>
+				<case values="Hair.SNOWLILY">
+					<hide part="hair/*"/>
+					<hide part="hair_bg/*"/>
+                    <show part="hair/yukionna"/>
+					<show part="hair_bg/yukionna"/>
+                </case>
+				<case values="Hair.FOURWIND">
+					<hide part="hair/*"/>
+					<hide part="hair_bg/*"/>
+                    <show part="hair/fourWindBraid"/>
+					<show part="hair_bg/fourWindBraid"/>
+                </case>
+				<case values="Hair.FOURWINDL">
+					<hide part="hair/*"/>
+					<hide part="hair_bg/*"/>
+                    <show part="hair/fourWindBraid"/>
+					<show part="hair_bg/CerberusHair"/>
+                </case>
+				<case values="Hair.TAURPONYTAIL">
+					<show part="hair_bg/centaurPonytail"/>
+				</case>
+				<case values="Hair.TWINRIBBON">
+					<show part="hairFront/ribbon"/>
+                </case>
+                <default>
+                    <switch>
+						<case test="hairLength lt 16">
+						</case>
+						<default>
+                            <hide part="hair_bg/*"/>
+                            <show part="hair_bg/02"/>
+						</default>
+					</switch>
+                </default>
+            </switch>
 		</if>
 
 
@@ -6808,6 +6808,57 @@
 					</default>
 				</switch>
 			</if>
+			<if test="hairStyle != Hair.PLAIN">
+                <hide part="hair/0"/>
+                <hide part="hair_bg/CerberusHair"/>                   
+            </if>
+			<switch value="hairStyle">
+                <case values="Hair.PONYTAIL">
+                    <show part="hair_bg/ponytail"/>
+                </case>
+                <case values="Hair.LONGTRESSES">
+                    <show part="hair_bg/longTresse"/>
+                </case>
+                <case values="Hair.TWINTAILS">
+                    <show part="hair_bg/twinPigtail"/>
+                </case>
+                <case values="Hair.DWARVEN">
+                <show part="hair_bg/dwarven"/>
+                </case>
+				<case values="Hair.SNOWLILY">
+					<hide part="hair/*"/>
+					<hide part="hair_bg/*"/>
+                    <show part="hair/yukionna"/>
+					<show part="hair_bg/yukionna"/>
+                </case>
+				<case values="Hair.FOURWIND">
+					<hide part="hair/*"/>
+					<hide part="hair_bg/*"/>
+                    <show part="hair/fourWindBraid"/>
+					<show part="hair_bg/fourWindBraid"/>
+                </case>
+				<case values="Hair.FOURWINDL">
+					<hide part="hair/*"/>
+					<hide part="hair_bg/*"/>
+                    <show part="hair/fourWindBraid"/>
+					<show part="hair_bg/CerberusHair"/>
+                </case>
+				<case values="Hair.TAURPONYTAIL">
+					<show part="hair_bg/centaurPonytail"/>
+				</case>
+				<case values="Hair.TWINRIBBON">
+					<show part="hairFrontFullBody/ribbon"/>
+                </case>
+                <default>
+                    <switch>
+						<case test="hairLength lt 16">
+						</case>
+						<default>
+							<show part="hair_bg/CerberusHair"/>
+						</default>
+					</switch>
+                </default>
+            </switch>
 		</if>
 
 		<!-- Jiangshi -->
