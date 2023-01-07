@@ -6804,7 +6804,7 @@
 					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
 					</case>
 					<default>
-						<show part="fullbody/femaleCerberus"/>
+						<show part="fullbodyBreast/cerberus"/>
 					</default>
 				</switch>
 			</if>
