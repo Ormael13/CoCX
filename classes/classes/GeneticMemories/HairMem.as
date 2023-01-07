@@ -119,6 +119,17 @@ package classes.GeneticMemories {
 			}
 		});
 
+		public static const RATATOSKR:int = _partid++;
+		EnumValue.add(Memories, RATATOSKR, "RATATOSKR", {
+			id: "Ratatoskr Hair",
+			name: "Ratatoskr Hair",
+			cost: 100,
+			title: "Ratatoskr",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.HairRatatoskr;
+			}
+		});
+
 		public static const STORM:int = _partid++;
 		EnumValue.add(Memories, STORM, "STORM", {
 			id: "Storm Hair",

@@ -1446,7 +1446,7 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 		outputText("You give Belisa a chaste kiss on the cheek, and as you get dressed, you tell Belisa that you’ll always return. No demon’s going to get the best of you. She shakes her head, but doesn’t say anything. You dress and come back, ruffling her long, black hair roughly. <i>\"Headpats for luck!\"</i> You yell, stopping just short of giving Belisa a noogie.\n\n");
 		outputText("<i>\"H-hey!\"</i> She yells, and you laugh, tossing the door open and leaving back to camp. Belisa sticks her head out the door, then looks down, realizing she’s naked…and she almost joined you outside. <i>\"Eep!\"</i> She slams the door shut, and you head back to camp.\n\n");
 		if (!recalling) {
-			if (preg && DriderTown.BelisaPregnancy == 0 && rand(100) < chanceToFail()) DriderTown.BelisaPregnancy = 72;
+			if (preg) knockUpBelisa();
 			cleanupAfterCombat();
 		} else doNext(recallWakeUp);
 	}
@@ -1459,7 +1459,7 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 		outputText("<i>\"Well...I mean, I wouldn’t mind at all. They’re yours, and more of you is a good thing.\"</i> She blushes, seemingly embarrassed by that declaration. You smile, putting your palms on her cheeks. You remind Belisa that they’d also be half her, which makes her smile.\n\n");
 		outputText("You cuddle in the afterglow with your Drider lover, but after a while, you gently pull yourself from her arms.\n\n");
 		outputText("<i>\"You’ve got to go, huh?\"</i> Belisa asks, somewhat saddened. <i>\"Come back soon, [name].\"</i>\n\n");
-		if (DriderTown.BelisaPregnancy == 0 && rand(100) < chanceToFail()) DriderTown.BelisaPregnancy = 72;
+		knockUpBelisa();
 		cleanupAfterCombat();
 	}
 	
@@ -1468,6 +1468,12 @@ public class BelisaFollower extends NPCAwareContent implements SaveableState
 		chance += Math.min(player.cumQ() / 25,40);
 		chance += Math.min(player.virilityQ() * 100, 50);
 		return chance;
+	}
+	private function knockUpBelisa():void {
+		if (DriderTown.BelisaPregnancy == 0 && rand(100) < chanceToFail()) {
+			DriderTown.BelisaPregnancy = 72;
+			if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Belisa is pregnant!</b>");
+		}
 	}
 }
 }

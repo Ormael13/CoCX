@@ -780,6 +780,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				flags[kFLAGS.KINDRA_DAILY_TRAINING] = 0;
 				//Elf training reset
 				WoodElves.hasTrainedToday = false;
+				if (player.isWoodElf()) if (SceneLib.woodElves.ConvertNewSisters()) needNext = true;
 				//Reset Chi Chi Training daily limit
 				flags[kFLAGS.CHI_CHI_DAILY_TRAINING] = 0;
 				//Reset Luna Meal CD

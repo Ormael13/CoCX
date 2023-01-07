@@ -517,7 +517,7 @@ import classes.display.SpriteDb;
 			outputText("<i>\"[master]! I want your seed, [Master]! Fill me up! Make me your little spider-bitch! I want your eggs, your-Ahhh!\"</i> Her orgasm tightens, even harder than the last, and you finally give out, unable to keep your own lust down as your [cock] twitches, blasting load after suppressed load into your spider lover’s quivering pussy. <i>\"So...Warm…\"</i>\n\n");
 			outputText("Lily orgasms again, shameless as her walls milk your [cock] for all they’re worth. You ride out your high, then pull out. Lily’s stomach is slightly bigger than before, and the way her eyes are rolled back, leave little doubt in your mind that she thoroughly enjoyed this. Your spooge trickles out from Lily’s well-fucked hole, and the insensate Drider’s legs fold, dropping her to the ground.\n\n");
 			outputText("You look at the back of your cabin. The entire back wall is covered with strands of Drider-silk, fresh from Lily’s hole. Deciding that your cabin should be clean, you scrape the silk off the wall before you leave.\n\n");
-			if (LilyFollowerState && DriderTown.LilyKidsPCPregnancy == 0 && rand(100) < chanceToFail()) DriderTown.LilyKidsPCPregnancy = 72;
+			knockUpLily();
 			lilySubmissiveness(5);
 			lilyAffection(5);
 			player.sexReward("vaginalFluids","Dick");
@@ -798,6 +798,12 @@ import classes.display.SpriteDb;
 			chance += Math.min(player.cumQ() / 25,40);
 			chance += Math.min(player.virilityQ() * 100, 50);
 			return chance;
+		}
+		private function knockUpLily():void {
+			if (LilyFollowerState && DriderTown.LilyKidsPCPregnancy == 0 && rand(100) < chanceToFail()) {
+				DriderTown.LilyKidsPCPregnancy = 72;
+				if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Lily is pregnant!</b>");
+			}
 		}
 		
 		public function LilyCampFollower(back:Boolean = false):void {

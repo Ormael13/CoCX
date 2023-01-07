@@ -636,9 +636,9 @@ public function victorySexMenu():void {
 		"Req. at least " + Appearance.breastCup(6), player.biggestTitSize() >= 6);
 	addButtonIfTrue(2, "Nipple-Fuck", victoryBJNippleFuckMinotaurGang,
 		"No nipplecunts.", player.hasFuckableNipples());
-	addButton(3, "Get Licked", curry(forceMinitaurToGiveOral, 0),
+	addButtonIfTrue(3, "Get Licked", curry(forceMinitaurToGiveOral, 0),
 		"Req. a vagina", player.hasVagina());
-	addButton(4, "Get Sucked", curry(forceMinitaurToGiveOral, 1),
+	addButtonIfTrue(4, "Get Sucked", curry(forceMinitaurToGiveOral, 1),
 		"Req. a cock", player.hasCock());
 	addButton(5, "Discipline", disciplineEldestMinotaurSon);
 	addButton(14, "Leave", cleanupAfterCombat);

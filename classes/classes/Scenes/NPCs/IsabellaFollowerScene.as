@@ -33,6 +33,7 @@ public function isabellaKnockUpAttempt():void {
 		if (chance > 90) chance = 90;
 		//Attempt to knock up!
 		if (rand(100) < chance) isabellaScene.pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_ISABELLA);
+		if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Isabella is pregnant!</b>");
 		trace("Isabella got PREGNANT!");
 	}
 }

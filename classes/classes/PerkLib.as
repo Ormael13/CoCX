@@ -1432,8 +1432,8 @@ public class PerkLib
 				"Your time running into disaster to take care of others allows you to take better care of wounds, further increasing your regen.",
 				"You've chosen the 'First Response' perk, increasing HP gains by 20%.");
 		public static const FlurryOfBlows:PerkType = mk("Flurry of Blows", "Flurry of Blows",
-				"Gain two additional attacks when fighting with fists or fist weapons (not using feral stance). All physical soulforce ability now also strike twice!",
-				"You've chosen the 'Flurry of Blows' perk, gaining two additional attacks when fighting with fists or fist weapons (not using feral stance). All physical soulforce ability now also strike twice.");
+				"Gain two additional attacks when fighting with fists or fist weapons (not using feral stance). All physical soulforce ability now also strike thrice!",
+				"You've chosen the 'Flurry of Blows' perk, gaining two additional attacks when fighting with fists or fist weapons (not using feral stance). All physical soulforce ability now also strike thrice.");
 		public static const FuelForTheFire:PerkType = mk("Fuel for the Fire", "Fuel for the Fire",
 				"Increase two times wrath gains from getting hit. +1 attack per turn when wielding any large or massive weapon under berserker/lustzerker state. (+10% melee physical attacks multiplier, 2x for been under berzerk type state and another 2x when using large or masive weapon(s))",
 				"You've chosen the 'Fuel for the Fire' perk, increasing gained wrath after taking damage. Also user under berserker/lustzerker state attack 1 more time per turn with large/massive weapons. (+10% melee physical attacks multiplier, 2x for been under berzerk type state and another 2x when using large or masive weapon(s))")
@@ -3655,6 +3655,7 @@ public class PerkLib
 				"Black magic effectiveness is increased by 50%. Soulforce regenerate passively by 2%.");//, Hex and Necromancy		 and recharge 1 round faster
 		public static const NinetailsKitsuneOfBalance:PerkType = mk("Nine-tails Kitsune of Balance", "Nine-tails Kitsune of Balance",
 				"The mystical energy of the nine-tails surges through you, filling you with phenomenal cosmic power!  You tread the narrow path between corruption and true enlightment maintaining a balance that allows you to fuse both sides powers.",null,true);
+		public static const OneWiththeForest:OneWithTheForest = new OneWithTheForest();
 		public static const TrueSeeing:PerkType = mk("True seeing", "True seeing",
 				"Your vision is magical in nature and see the world as it truly is defeating glamors, illusions and spatial displacement. You also have a +20% to your base accuracy from your peerless view.");
 		public static const Omnicaster:PerkType = mk("Omnicaster", "Omnicaster",
@@ -6023,8 +6024,8 @@ public class PerkLib
                     .requirePerk(EpicWisdom)
                     .requireLevel(66);
             //Tier 12 Wisdom perks
-//            FlurryOfBlows.requireLevel(72)
-//                    .requirePerks(ComboMaster, Backlash);
+            FlurryOfBlows.requireLevel(72)
+                    .requirePerk(Backlash);
             SkeletonLord.requireLevel(72)
                     .requirePerk(BoneSoul);
             GreaterSharedPower.requireLevel(72)

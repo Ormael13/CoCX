@@ -2427,6 +2427,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			//25% + gradually increasing cumQ bonus
 			if (rand(4) == 0 || player.cumQ() > rand(1000)) {
 				pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_MOUSE - 182); //Amily completes her pregnancies much faster than a regular player
+				if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Amily is pregnant!</b>");
 			}
 		}
 

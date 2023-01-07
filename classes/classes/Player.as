@@ -1,4 +1,4 @@
-﻿package classes
+package classes
 {
 import classes.BodyParts.Arms;
 import classes.BodyParts.Ears;
@@ -48,6 +48,7 @@ import classes.Scenes.NPCs.SophieFollowerScene;
 import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.Places.TelAdre.UmasShop;
+import classes.Scenes.Places.WoodElves;
 import classes.Scenes.Pregnancy;
 import classes.Scenes.SceneLib;
 import classes.Stats.StatUtils;
@@ -2978,7 +2979,7 @@ use namespace CoC;
 			if (lowerGarmentName == "HB shorts") mult -= 10;
 			if (hasPerk(PerkLib.FromTheFrozenWaste) || hasPerk(PerkLib.ColdAffinity)) mult += 100;
 			if (hasPerk(PerkLib.FireAffinity)) mult -= 50;
-			if (hasPerk(PerkLib.VegetalAffinity)) mult -= 50;
+			if (hasPerk(PerkLib.VegetalAffinity)) mult += 50;
 			if (hasStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff1) && (statusEffectv2(StatusEffects.ShiraOfTheEastFoodBuff1) > 0)) mult -= statusEffectv2(StatusEffects.ShiraOfTheEastFoodBuff1);
 			if (hasStatusEffect(StatusEffects.DaoOfFire) && (statusEffectv2(StatusEffects.DaoOfFire) > 3)) mult -= (10 * (statusEffectv2(StatusEffects.DaoOfFire) - 3));
 			if (headjewelryEffectId == HeadJewelryLib.MODIFIER_FIRE_R) mult -= headjewelryEffectMagnitude;
@@ -5798,7 +5799,10 @@ use namespace CoC;
 			if(isFeralCombat() && (hasPerk(PerkLib.HistoryFeral) || hasPerk(PerkLib.PastLifeFeral))){
                 rval += 1;
 			}
-
+			// Flurry of Blows gets +1
+			if(isUnarmedCombat() && hasPerk(PerkLib.FlurryOfBlows)){
+                rval += 1;
+			}
 			return rval;
 		}
 
@@ -6361,10 +6365,30 @@ use namespace CoC;
 			}
 		}
 
+		public function ElfSistersBonus():void
+		{
+			var ElfSistersBonus:Number = (WoodElves.ConvertedSisters + WoodElves.ConvertedHerms) * 0.01;
+			while (buff("Elf Sisters").getValueOfStatBuff("int.mult") < ElfSistersBonus) {
+				buff("Elf Sisters").addStat("str.mult",0.01);
+				buff("Elf Sisters").addStat("tou.mult",0.01);
+				buff("Elf Sisters").addStat("spe.mult",0.01);
+				buff("Elf Sisters").addStat("int.mult",0.01);
+				buff("Elf Sisters").addStat("wis.mult",0.01);
+				buff("Elf Sisters").addStat("lib.mult",0.01);
+				CoC.instance.mainView.statsView.refreshStats(CoC.instance);
+				CoC.instance.mainView.statsView.showStatUp("str");
+				CoC.instance.mainView.statsView.showStatUp("tou");
+				CoC.instance.mainView.statsView.showStatUp("spe");
+				CoC.instance.mainView.statsView.showStatUp("inte");
+				CoC.instance.mainView.statsView.showStatUp("wis");
+				CoC.instance.mainView.statsView.showStatUp("lib");
+			}
+		}
+
 		public function DominantAlphaBonus():void
 		{
 			var bonus:Number = SceneLib.camp.submissivesAtCampCount() * 0.02;
-			if (buff("Dominant Alpha").getValueOfStatBuff("int.mult") < bonus){
+			while (buff("Dominant Alpha").getValueOfStatBuff("int.mult") < bonus){
 				buff("Dominant Alpha").addStat("str.mult",0.02);
 				buff("Dominant Alpha").addStat("tou.mult",0.02);
 				buff("Dominant Alpha").addStat("spe.mult",0.02);
@@ -6372,6 +6396,12 @@ use namespace CoC;
 				buff("Dominant Alpha").addStat("wis.mult",0.02);
 				buff("Dominant Alpha").addStat("lib.mult",0.02);
 				CoC.instance.mainView.statsView.refreshStats(CoC.instance);
+				CoC.instance.mainView.statsView.showStatUp("str");
+				CoC.instance.mainView.statsView.showStatUp("tou");
+				CoC.instance.mainView.statsView.showStatUp("spe");
+				CoC.instance.mainView.statsView.showStatUp("inte");
+				CoC.instance.mainView.statsView.showStatUp("wis");
+				CoC.instance.mainView.statsView.showStatUp("lib");
 			}
 			if (hasStatusEffect(StatusEffects.DominantAlpha) && statusEffectv1(StatusEffects.DominantAlpha) > 1 && buff("Dominant Alpha").getValueOfStatBuff("str") < 200)
 				buff("Dominant Alpha").addStat("str",200);

@@ -6,6 +6,7 @@ package classes.Scenes.Areas.Mountain
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
 public class LactaBovinaScene extends BaseContent
@@ -34,7 +35,8 @@ public function lactaBovinaVictoryRapeChoices():void {
 	addButtonIfTrue(2, "Sitting Boobjob", lactaBovinaVictorySittingBoobjob,
 		"Req. to have a cock and be no taller than the cow.",
 		player.hasCock() && player.tallness <= monster.tallness);
-	addButton(4, "Leave", lactaBovinaVictoryLeave);
+	addButton(10, "Convert Elf", SceneLib.woodElves.CaptureCowgirl).hint("Take the milky slut to the Sacred Tree to become a new sister!").disableIf(!player.isWoodElf(), "Wood elves only!");
+	addButton(14, "Leave", lactaBovinaVictoryLeave);
 }
 public function lactaBovinaVictoryLickIt():void {
 	clearOutput();
