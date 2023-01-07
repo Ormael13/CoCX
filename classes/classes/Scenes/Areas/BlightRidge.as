@@ -103,9 +103,7 @@ use namespace CoC;
 			choice[choice.length] = 1; //Succubi (lvl 26)/Incubu (lvl 26)/Omnicubi enemies (lvl 29)
 			choice[choice.length] = 2; //Corrupted Basic Flesh Golem (lvl 35)/Corrupted Basic Flesh Golems(lvl 36)
 			choice[choice.length] = 3; //Imp Food
-			if (DemonLab.NightwalkerLabstate >= 2
-					|| DemonLab.FSpreaderState >= 2
-					|| DemonLab.TyrantLabState >= 2)
+			if (DemonLab.MainAreaComplete >= 4)
 				choice[choice.length] = 4;
 			if (rand(4) == 0) choice[choice.length] = 10; //Find nothing! The rand will be removed from this once the Blight Ridge is populated with more encounters.
 			

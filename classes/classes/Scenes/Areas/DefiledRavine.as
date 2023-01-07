@@ -57,9 +57,7 @@ use namespace CoC;
             if (player.hasKeyItem("Old Pickaxe") > 0 && Forgefather.materialsExplained)
 			    choice[choice.length] = 3; //Marble
 			choice[choice.length] = 4;
-			if (DemonLab.NightwalkerLabstate >= 2
-					|| DemonLab.FSpreaderState >= 2
-					|| DemonLab.TyrantLabState >= 2)
+			if (DemonLab.MainAreaComplete >= 4)
 				choice[choice.length] = 5;
 			if (rand(4) == 0) choice[choice.length] = 10; //Find nothing! The rand will be removed from this once the Defiled Ravine is populated with more encounters.
 

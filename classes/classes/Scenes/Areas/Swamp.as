@@ -86,9 +86,7 @@ use namespace CoC;
 			if (!isNightTime)
 			choices[choices.length] = 4;
 			//DemonLab Projects
-			if (DemonLab.NightwalkerLabstate >= 2
-					|| DemonLab.FSpreaderState >= 2
-					|| DemonLab.TyrantLabState >= 2)
+			if (DemonLab.MainAreaComplete >= 4)
 				choices[choices.length] = 5;
 
 			//Pick from the choices and pull the encounter.

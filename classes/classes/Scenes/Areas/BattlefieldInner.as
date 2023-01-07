@@ -59,9 +59,7 @@ use namespace CoC;
 			choice[choice.length] = 4; //Goblin/Imp group enemies
 			choice[choice.length] = 5; //Goblin/Imp group enemies
 			choice[choice.length] = 6; //Items
-			if (DemonLab.NightwalkerLabstate >= 2
-					|| DemonLab.FSpreaderState >= 2
-					|| DemonLab.TyrantLabState >= 2)
+			if (DemonLab.MainAreaComplete >= 4)
 				choice[choice.length] = 7;
 			choice[choice.length] = 8; //Find nothing!
 			

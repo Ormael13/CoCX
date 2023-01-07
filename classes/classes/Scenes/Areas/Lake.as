@@ -153,9 +153,7 @@ use namespace CoC;
 				choice[choice.length] = 9;
 
 			//DemonLab Projects
-			if (DemonLab.NightwalkerLabstate >= 2
-					|| DemonLab.FSpreaderState >= 2
-					|| DemonLab.TyrantLabState >= 2)
+			if (DemonLab.MainAreaComplete >= 4)
 				choice[choice.length] = 10;
 
 			//CHOOSE YOUR POISON!

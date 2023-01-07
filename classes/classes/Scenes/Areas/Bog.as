@@ -37,9 +37,7 @@ public class Bog extends BaseContent
 			choice[choice.length] = 2; //Chameleon
 			choice[choice.length] = 3; //Lizan
 			choice[choice.length] = 4; //Troll
-			if (DemonLab.NightwalkerLabstate >= 2
-					|| DemonLab.FSpreaderState >= 2
-					|| DemonLab.TyrantLabState >= 2)
+			if (DemonLab.MainAreaComplete >= 4)
 				choice[choice.length] = 5;
 
 			if (rand(4) == 0)

@@ -805,9 +805,9 @@ public class Exploration extends BaseContent
 		}
 		public function demonLabProjectEncounters():void {
 			var choices:Array = [];
-			if (DemonLab.NightwalkerLabstate >= 2 && time.hours <= 8 || time.hours >= 18) choices.push(nightwalkerEncounter());
-			if (DemonLab.TyrantLabState >= 2) choices.push(flamespreaderEncounter());
-			if (DemonLab.FSpreaderState >= 1) choices.push(tyrantEncounter());
+			if (time.hours <= 8 || time.hours >= 18) choices.push(nightwalkerEncounter());
+			choices.push(flamespreaderEncounter());
+			choices.push(tyrantEncounter());
 			if (!KihaFollower.FlameSpreaderBossKilled && KihaFollower.FlameSpreaderKillCount >= 20 && InCollection("Kiha", flags[kFLAGS.PLAYER_COMPANION_0], flags[kFLAGS.PLAYER_COMPANION_1], flags[kFLAGS.PLAYER_COMPANION_2] ,flags[kFLAGS.PLAYER_COMPANION_3]))
 					choices.push(ultimisEcounter());
 			randomChoice(choices);

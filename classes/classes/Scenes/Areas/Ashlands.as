@@ -44,9 +44,7 @@ use namespace CoC;
 			choice[choice.length] = 4; //Fire Golem (lvl 64)
             if (player.hasKeyItem("Old Pickaxe") > 0 && Forgefather.materialsExplained)
 			    choice[choice.length] = 5; //Granite Mine
-			if (DemonLab.NightwalkerLabstate >= 2
-					|| DemonLab.FSpreaderState >= 2
-					|| DemonLab.TyrantLabState >= 2)
+			if (DemonLab.MainAreaComplete >= 4)
 				choice[choice.length] = 6;
             if (rand(4) == 0)
 			    choice[choice.length] = 10; //Find nothing!

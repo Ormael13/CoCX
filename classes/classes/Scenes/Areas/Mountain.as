@@ -202,9 +202,7 @@ public class Mountain extends BaseContent
 				name: "demonProjects",
 						chance: 0.2,
 						when: function ():Boolean {
-					return DemonLab.NightwalkerLabstate >= 2
-							|| DemonLab.FSpreaderState >= 2
-							|| DemonLab.TyrantLabState >= 2;
+					return DemonLab.MainAreaComplete >= 4;
 				},
 				call: SceneLib.exploration.demonLabProjectEncounters
 			});
@@ -374,9 +372,7 @@ public class Mountain extends BaseContent
 				name: "demonProjects",
 				chance: 0.2,
 				when: function ():Boolean {
-					return DemonLab.NightwalkerLabstate >= 2
-							|| DemonLab.FSpreaderState >= 2
-							|| DemonLab.TyrantLabState >= 2;
+					return DemonLab.MainAreaComplete >= 4;
 				},
 				call: SceneLib.exploration.demonLabProjectEncounters
 			});
@@ -499,9 +495,7 @@ public class Mountain extends BaseContent
 				name: "demonProjects",
 				chance: 0.2,
 				when: function ():Boolean {
-					return DemonLab.NightwalkerLabstate >= 2
-							|| DemonLab.FSpreaderState >= 2
-							|| DemonLab.TyrantLabState >= 2;
+					return DemonLab.MainAreaComplete >= 4;
 				},
 				call: SceneLib.exploration.demonLabProjectEncounters
 			});
