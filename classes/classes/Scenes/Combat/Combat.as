@@ -11126,6 +11126,10 @@ public class Combat extends BaseContent {
 		if (player.hasPerk(PerkLib.TaintedMagazine) && player.ammo > 0) player.ammo *= 2;
 		if (player.hasPerk(PerkLib.PrimedClipWarp) && player.ammo > 0) player.ammo *= 3;
         if (player.weaponRange == weaponsrange.GTHRSPE) player.ammo = 20;
+        if (player.weaponRange == weaponsrange.ATKNIFE) player.ammo = 15;
+        if (player.weaponRange == weaponsrange.RTKNIFE) player.ammo = 15;
+        if (player.weaponRange == weaponsrange.STKNIFE) player.ammo = 15;
+        if (player.weaponRange == weaponsrange.TTKNIFE) player.ammo = 15;
         if (player.weaponRange == weaponsrange.GTHRAXE) player.ammo = 10;
         if (player.weaponRange == weaponsrange.O_JAVEL) player.ammo = 10;
         if (player.weaponRange == weaponsrange.TRJAVEL) player.ammo = 10;
