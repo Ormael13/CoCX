@@ -173,21 +173,21 @@ public class Zetaz extends Monster
 			this.bodyColor = "red";
 			this.hairColor = "black";
 			this.hairLength = 5;
-			initStrTouSpeInte(125, 100, 70, 55);
-			initWisLibSensCor(55, 55, 35, 100);
+			initStrTouSpeInte(190, 180, 120, 55);
+			initWisLibSensCor(55, 105, 65, 100);
 			this.weaponName = "claws";
 			this.weaponVerb="claw-slash";
-			this.weaponAttack = 21;
+			this.weaponAttack = 49;
 			this.armorName = "leathery skin";
-			this.armorDef = 14;
-			this.armorMDef = 7;
-			this.bonusHP = 600;
-			this.bonusLust = 120;
-			this.lust = 40;
-			this.lustVuln = .35;
-			this.level = 30;
+			this.armorDef = 28;
+			this.armorMDef = 14;
+			this.bonusHP = 1000;
+			this.bonusLust = 260;
+			this.lust = 30;
+			this.lustVuln = .3;
+			this.level = 40;
 			this.gems = rand(75) + 175;
-			this.additionalXP = 200;
+			this.additionalXP = 400;
 			this.drop = new WeightedDrop(consumables.BIMBOLQ, 1);
 			this.wings.type = Wings.IMP;
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
@@ -196,7 +196,7 @@ public class Zetaz extends Monster
 			this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
-			this.createPerk(PerkLib.OverMaxHP, 30, 0, 0, 0);
+			this.createPerk(PerkLib.OverMaxHP, 40, 0, 0, 0);
 			checkMonster();
 		}
 		
