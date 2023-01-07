@@ -456,7 +456,7 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
                 + "“<i>...They…Let the blood go…</i>” Her voice echoes off the walls, the flap of leathery wings obscuring her even more. “<i>But…You’ll do.</i>” \n"
                 + "\n"
                 + "You’re now fighting Project Nightwalker!");
-            startCombat(new ProjectNightwalker(true));
+            startCombat(new ProjectNightwalker());
         } else {
             outputText("Despite its enormous volume, the metallic stench of blood fills the air, with just a hint of decay underneath. While there are a few cells still closed, most have swung wide open. The wall has sconces on them, and you walk carefully around the room, lighting each torch as you move along. With every torch lit, you turn to the centre of the cavern. \n"
                 + "\n"
@@ -688,7 +688,7 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
         outputText("You enter the panic room, and it’s relatively plain, almost like a small warehouse. Other than the singed demon corpses, the panic room has only two things of interest: A desk and high-tech panel, similar to the ones on the doors before, but far larger. If you had to guess, you think you’ve found the diseased heart of this lab. Maybe you can open the way out!\n\n");
         dungeons.setDungeonButtons(null, Ballroom3, null, null);
         addButton(0, "Console", Computer).disableIf(!WayOutBlocked, "You destroyed that cursed thing.");
-        addButton(1, "Desk,", Desk);
+        if (player.hasKeyItem("Map to the Lethice’s Fortress") < 0) addButton(1, "Desk,", Desk);
     }
 
     public function Computer():void {

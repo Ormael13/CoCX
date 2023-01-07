@@ -3451,24 +3451,21 @@ public class Combat extends BaseContent {
 	public function doThrowPierceDamage(damage:Number):void {
 		doThrowDamage(damage);
 		if (player.hasPerk(PerkLib.PenetratingThrow) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType))) {
-			if (rand(4) > 0) {
-				doThrowDamage(Math.round(damage * 0.9));
-				if (rand(4) > 0) {
-					doThrowDamage(Math.round(damage * 0.8));
-					if (rand(4) > 0) {
-						doThrowDamage(Math.round(damage * 0.7));
-						if (rand(4) > 0) {
-							doThrowDamage(Math.round(damage * 0.6));
-							if (monster.hasPerk(PerkLib.EnemyLargeGroupType) && rand(4) > 0) {
-								doThrowDamage(Math.round(damage * 0.5));
-								if (rand(4) > 0) {
-									doThrowDamage(Math.round(damage * 0.4));
-									if (rand(4) > 0) {
-										doThrowDamage(Math.round(damage * 0.3));
-										if (rand(4) > 0) {
-											doThrowDamage(Math.round(damage * 0.2));
-											if (rand(4) > 0) doThrowDamage(Math.round(damage * 0.1));
-										}
+			if (rand(100) > 74) {
+				doThrowDamage(damage);
+				if (rand(100) > 64) {
+					doThrowDamage(damage);
+					if (rand(100) > 54) {
+						doThrowDamage(damage);
+						if (rand(100) > 44) {
+							doThrowDamage(damage);
+							if (monster.hasPerk(PerkLib.EnemyLargeGroupType) && rand(100) > 34) {
+								doThrowDamage(damage);
+								if (rand(100) > 24) {
+									doThrowDamage(damage);
+									if (rand(100) > 14) {
+										doThrowDamage(damage);
+										if (rand(100) > 4) doThrowDamage(damage);
 									}
 								}
 							}
