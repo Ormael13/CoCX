@@ -169,19 +169,19 @@ public class ImpHorde extends Monster
 			this.bodyColor = "red";
 			this.hairColor = "black";
 			this.hairLength = 1;
-			initStrTouSpeInte(50, 30, 25, 12);
-			initWisLibSensCor(10, 45, 45, 100);
+			initStrTouSpeInte(52, 35, 30, 12);
+			initWisLibSensCor(10, 50, 50, 100);
 			this.weaponName = "fists";
 			this.weaponVerb="punches";
-			this.weaponAttack = 12;
+			this.weaponAttack = 15;
 			this.armorName = "skin";
-			this.armorDef = 6;
-			this.armorMDef = 1;
-			this.bonusHP = 800;
-			this.bonusLust = 114;
+			this.armorDef = 10;
+			this.armorMDef = 3;
+			this.bonusHP = 900;
+			this.bonusLust = 134;
 			this.lust = 10;
 			this.lustVuln = .5;
-			this.level = 24;
+			this.level = 34;
 			this.gems = 30 + rand(30);
 			this.additionalXP = 100;
 			this.drop = new WeightedDrop(armors.NURSECL, 1);
@@ -192,7 +192,7 @@ public class ImpHorde extends Monster
 			this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyLargeGroupType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
-			this.createPerk(PerkLib.OverMaxHP, 24, 0, 0, 0);
+			this.createPerk(PerkLib.OverMaxHP, 34, 0, 0, 0);
 			checkMonster();
 		}
 

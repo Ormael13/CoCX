@@ -1251,6 +1251,7 @@ package classes.Scenes.Places{
 					.disableIf(hasTrainedToday, "You need a break from your recent training before you can train again.");
 			if (WoodElfMagicTraining >= QUEST_STAGE_MAGICTRAINING3) addButton(1, "Sex", LutienMainSex);
 			else addButtonDisabled(1, "???", "???");
+			addButton(4, "Back", GroveLayout);
 		}
 		public function LutienTrain():void {
 			clearOutput();
@@ -1455,11 +1456,10 @@ package classes.Scenes.Places{
 			outputText("Without surprise she goes directly for your weak spot licking your pointy ear tip. You're about to jump her in a lust induced frenzy when she calmly reminds you \"<i>You need to endure and control your lust sister. I can see you're boiling with needs but improving your resistance is the very purpose of this training.</i>\"[pg]");
 			outputText("Begrudgingly you temper your desire her touch however is like a wave crashing down on the sandcastle that is your crumbling countenance and before long you beg her to fuck you one way or another.[pg]");
 			outputText("\"<i>Well sister I see you've done your best and will reward you for it. Go ahead and lose yourself in your big sister's lovely pillows.</i>\"[pg]");
-			outputText("She lay on her back into the grass and opens her arms to you, welcoming you to her bosom and you gladly take on her offer resting your head against her prodigious chest as she pulls her hand toward your aching pussy, a finger expertly exploring your drooling cunny. You moan loudly as your eldest gently massages your hole all the way toward a full peak causing you to cum gracefully on her hand with some of your juice splashing on the nearby grass. "+
-						"You ride this orgasm for a few seconds, losing yourself in the bright green of the eyes of your partner before slowly matching your excited breath back down to the rhythm of the ambient natural world.[pg]");
+			outputText("She lay on her back into the grass and opens her arms to you, welcoming you to her bosom and you gladly take on her offer resting your head against her prodigious chest as she pulls her hand toward your aching pussy, a finger expertly exploring your drooling cunny. You moan loudly as your eldest gently massages your hole all the way toward a full peak causing you to cum gracefully on her hand with some of your juice splashing on the nearby grass. ");
+			outputText("You ride this orgasm for a few seconds, losing yourself in the bright green of the eyes of your partner before slowly matching your excited breath back down to the rhythm of the ambient natural world.[pg]");
 			outputText("Chelsea comments as you both redress \"<i>Not a bad effort for a first time. Still do come back to me later you definitely could use improved self control especially if you plan to take the demons down. Don't you worry sis I will train you into a pillar of willpower and stamina even demons charm won't be able to overcome.</i>\"[pg]");
 			outputText("On this you wave goodbye and head back to camp.[pg]");
-
 			hasTrainedToday = true;
 			player.SexXP((5+player.level) * 10);
 			player.trainStat("lib", 4, 300);
