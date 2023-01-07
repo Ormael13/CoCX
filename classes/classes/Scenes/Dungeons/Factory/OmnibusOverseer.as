@@ -89,21 +89,21 @@ public class OmnibusOverseer extends Monster
 			this.bodyColor = "light purple";
 			this.hairColor = "purple";
 			this.hairLength = 42;
-			initStrTouSpeInte(100, 70, 45, 85);
-			initWisLibSensCor(85, 90, 70, 80);
+			initStrTouSpeInte(100, 73, 49, 85);
+			initWisLibSensCor(85, 95, 70, 80);
 			this.weaponName = "claws";
 			this.weaponVerb="claw";
-			this.weaponAttack = 12;
+			this.weaponAttack = 15;
 			this.weaponPerk = "";
 			this.weaponValue = 150;
 			this.armorName = "demonic skin";
-			this.armorDef = 18;
-			this.armorMDef = 2;
-			this.bonusHP = 400;
-			this.bonusLust = 176;
+			this.armorDef = 22;
+			this.armorMDef = 3;
+			this.bonusHP = 420;
+			this.bonusLust = 185;
 			this.lust = 20;
 			this.lustVuln = 0.75;
-			this.level = 16;
+			this.level = 20;
 			this.gems = rand(35) + 30;
 			this.additionalXP = 200;
 			this.drop = new WeightedDrop(null, 1);
@@ -119,7 +119,7 @@ public class OmnibusOverseer extends Monster
 			this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
-			this.createPerk(PerkLib.OverMaxHP, 16, 0, 0, 0);
+			this.createPerk(PerkLib.OverMaxHP, 20, 0, 0, 0);
 			checkMonster();
 		}
 		
