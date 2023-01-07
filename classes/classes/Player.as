@@ -6385,7 +6385,7 @@ use namespace CoC;
 		public function DominantAlphaBonus():void
 		{
 			var bonus:Number = SceneLib.camp.submissivesAtCampCount() * 0.02;
-			if (buff("Dominant Alpha").getValueOfStatBuff("int.mult") < bonus){
+			while (buff("Dominant Alpha").getValueOfStatBuff("int.mult") < bonus){
 				buff("Dominant Alpha").addStat("str.mult",0.02);
 				buff("Dominant Alpha").addStat("tou.mult",0.02);
 				buff("Dominant Alpha").addStat("spe.mult",0.02);
@@ -6393,6 +6393,12 @@ use namespace CoC;
 				buff("Dominant Alpha").addStat("wis.mult",0.02);
 				buff("Dominant Alpha").addStat("lib.mult",0.02);
 				CoC.instance.mainView.statsView.refreshStats(CoC.instance);
+				CoC.instance.mainView.statsView.showStatUp("str");
+				CoC.instance.mainView.statsView.showStatUp("tou");
+				CoC.instance.mainView.statsView.showStatUp("spe");
+				CoC.instance.mainView.statsView.showStatUp("inte");
+				CoC.instance.mainView.statsView.showStatUp("wis");
+				CoC.instance.mainView.statsView.showStatUp("lib");
 			}
 			if (hasStatusEffect(StatusEffects.DominantAlpha) && statusEffectv1(StatusEffects.DominantAlpha) > 1 && buff("Dominant Alpha").getValueOfStatBuff("str") < 200)
 				buff("Dominant Alpha").addStat("str",200);

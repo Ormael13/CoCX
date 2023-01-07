@@ -368,8 +368,7 @@ public class PerkMenu extends BaseContent {
 		if (player.hasPerk(PerkLib.ELFTwinShot)) {
 			outputText("\n\nThanks to your elven training, you can shoot twice as many arrows as normal (Works only with bows)"
 					+ "\nTwin shot active: <b>" + (flags[kFLAGS.ELVEN_TWINSHOT_ENABLED] ? "Yes" : "No") + "</b>");
-			bd.add("Twin shot", curry(toggleFlagRanged, kFLAGS.ELVEN_TWINSHOT_ENABLED))
-					.disableIf(!canVenomAttacks(), "You need a source of poison for this.");
+			bd.add("Twin shot", curry(toggleFlagRanged, kFLAGS.ELVEN_TWINSHOT_ENABLED));
 		}
 		if (player.hasPerk(PerkLib.ElementalArrows)) {
 			outputText("\n\nIf you know specific spells, you can add some magical effects to the projectiles. (Works only with bows and crosbows)");
