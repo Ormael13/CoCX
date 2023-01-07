@@ -65,6 +65,9 @@ public class Changelog extends BaseContent
 			outputText("-Firearms dmg would be now multiplied by firearms attacks multiplier which is range physical multiply + seperate bonuses for all firearms only.\n");
 			outputText("-Electra now acknowledges that more then just Raiju can volt transfer. Tbird can get supercharged too. More accounting for Kirin existing. Added centaur support to Supercharged scene, Horsecock now become big starting higher then 25 inch seeing as a normal horse cock is 20 inch. (Liadri)\n");
 			outputText("-Loppe can start training at Uma's shop. Loppe can remove her contraceptive spell if training high enough. Can meet Loppe's 'dad' in the plains for a few new scenes. (EragonX)\n");
+			outputText("-Make Siegweird's quest take Alvina's purification into account. (EragonX)\n");
+			outputText("-Fixes: Polygamy toggling with no marriages, Marae prank option, Sandmother vaginal fuck button (Svalkash)\n");
+			outputText("-Fixed being unable to aquire the achievements and duel scythes for beating Alvina if you are level 185. (Aduro)\n");
 			//outputText("-Dam can be upgraded 2 times (up to 3rd tier of wood dam) and Fishery once (to allow 2 npc's working at it - it also gonna increase each worker fish production by 20%)\n");
 			//outputText("-New tier 11 wisdom lvl-up perk: Elemental Conjurer Knowledge (Su). Req. Elemental Conjurer Knowledge (Ex) and Elemental Contract Rank 10 perks, 300+ wis. Effect: .\n");
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
@@ -72,9 +75,6 @@ public class Changelog extends BaseContent
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			outputText("-2 new achievments.\n");
 			outputText("-Alchemical Cartridge, Church of the gun, Explosive cartridge, (Tainted Magazine, Silver for Monsters, Named Bullet) perk effects of +X% to range physical attacks multiplier changed into +X/2% to range physical/firearms attacks multiplier.\n");
-			outputText("-Make Siegweird's quest take Alvina's purification into account. (EragonX)\n");
-			outputText("-Fixes: Polygamy toggling with no marriages, Marae prank option, Sandmother vaginal fuck button (Svalkash)\n");
-			outputText("-Fixed being unable to aquire the achievements and duel scythes for beating Alvina if you are level 185. (Aduro)\n");
 			outputText("-New tier 2 misc lvl-up perk: Skilled Fighter (Ex). Req. Skilled Fighter perk and 35+ str/tou/spe. Effect: When melee atk crit chance exceed 100% crit dmg is x2 and when exceed 200% crit dmg is x3. (+15% melee physical attacks multiplier and then adds another 50% (total of 100%) on top of final result)\n");
 			outputText("-New tier 2 misc lvl-up perk: Skilled Ranger (Ex). Req. Skilled Ranger perk and 35+ str/tou/spe. Effect: When range atk crit chance exceed 100% crit dmg is x2 and when exceed 200% crit dmg is x3. (+15% range physical attacks multiplier and then adds another 50% (total of 100%) on top of final result)\n");
 			outputText("-New tier 3 misc lvl-up perk: Skilled Gunslinger (Ex). Req. Skilled Gunslinger perk, lvl 15+ and 40+ str/tou/spe. Effect: When firearms atk crit chance exceed 100% crit dmg is x2 and when exceed 200% crit dmg is x3. (+20% firearms attacks multiplier and then adds another 50% (total of 100%) on top of final result)\n");
@@ -84,8 +84,8 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Elven Thorn shot (grow Rosethorns on arow shaft, lust+bleed). Training with Lutien with 100+ speed and knowing Briarthorn spell.\n");
 			outputText("-New event perk: Elven Twin shot (double bow shots after bonusses). Training with Lutien with maxed speed stat (100%)\n");
 			outputText("-New tier 3 strength lvl-up perk: Backbreaker. Req. Balance Breaker perk and 110+ str. Effect: Hammer or mace deals 50% more damage to stunned enemies.\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Added option to capture & convert some of the enemies into new wood elfs.\n");
+			outputText("-New event perk: One with the forest. Gained by Wood Elfs. Effects: With each new soul added to the collective bolstering the trees of the sacred forest you become stronger physically and spiritually. Gain a +1% to all stats for each new wood elf created.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -112,6 +112,18 @@ public class Changelog extends BaseContent
 			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -224,13 +236,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
