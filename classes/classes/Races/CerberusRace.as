@@ -41,7 +41,7 @@ public class CerberusRace extends Race {
 
 	public override function setup():void {
 		addScores()
-				.hairType(Hair.WILD, +1)
+				//.hairType(Hair.WILD, +1)
 				.faceType(Face.CERBERUS, +1)
 				.tongueType(Tongue.DOG, +1)
 				.eyeType(Eyes.INFERNAL, +1)
@@ -61,9 +61,9 @@ public class CerberusRace extends Race {
 						function (body:BodyData):Boolean {
 							return body.hasBalls && body.ballCount == 4
 						}, +1)
-				.skinCoatType(Skin.PARTIAL_FUR, +1)
+				.skinCoatType(Skin.FUR, +1)
 				.furColor1(ANY(CerberusFurColors), +1)
-				.hairColor1("midnight black", +1)
+				.hairColor1(ANY(CerberusFurColors), +1)
 				.skinColor1("dark", +1)
 				.noWings(+4)
 				.height(AT_LEAST(11*12), +1)
