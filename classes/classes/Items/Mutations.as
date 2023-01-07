@@ -2162,8 +2162,8 @@ public final class Mutations extends MutationsHelper {
     }
 
     public function forceCerberus(doOutput:Boolean = false):void {
-        if (player.hairType != Hair.WILD) transformations.HairWild.applyEffect(doOutput);
-        if (player.faceType != Face.DOG) transformations.FaceCerberus.applyEffect(doOutput);
+        transformations.HairWild.applyEffect(doOutput);
+        transformations.FaceCerberus.applyEffect(doOutput);
         if (player.tongue.type != Tongue.DOG) transformations.TongueDog.applyEffect(doOutput);
         if (player.eyes.type != Eyes.INFERNAL) transformations.EyesInfernal.applyEffect(doOutput);
         if (player.hasPerk(PerkLib.FireLord))
@@ -2204,6 +2204,14 @@ public final class Mutations extends MutationsHelper {
         if (!player.hasPerk(PerkLib.DominantAlpha)) {
             player.createPerk(PerkLib.DominantAlpha, 0, 0, 0, 0);
             outputText("\n<b>Gained Perk: Dominant Alpha!</b> "+PerkLib.DominantAlpha.longDesc);
+            player.statStore.addBuffObject({
+                "str.mult": 0.02,
+                "tou.mult": 0.02,
+                "spe.mult": 0.02,
+                "int.mult": 0.02,
+                "wis.mult": 0.02,
+                "lib.mult": 0.02
+            }, 'Dominant Alpha', {text: 'Dominant Alpha'});
         }
         if (!player.hasPerk(PerkLib.TitanicStrength)) {
             player.createPerk(PerkLib.TitanicStrength, 0, 0, 0, 0);

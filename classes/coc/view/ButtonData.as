@@ -82,6 +82,7 @@ public class ButtonData {
 			text = "Empty";
 			hint("");
 			labelColor = CoCButton.DEFAULT_COLOR;
+			iconId = null;
 			return this;
 		}
 		forItem(slot.itype);

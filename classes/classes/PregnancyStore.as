@@ -40,7 +40,7 @@ public class PregnancyStore extends Object
 																	   //pregnancy from taking hold. Does not respond to ovielixirs.
 		public static const PREGNANCY_MINERVA:int				=  34;
 		public static const PREGNANCY_BEHEMOTH:int				=  35;
-		public static const PREGNANCY_PHOENIX:int				=  36;
+		public static const PREGNANCY_QUASI_PHOENIX:int			=  36;
 		public static const PREGNANCY_ANDY:int                  =  37; //This is functionally the same as Satyr but less corrupt. 10% chance of fauns, if ever implemented.
 		public static const PREGNANCY_ALRAUNE:int				=  38;
 		public static const PREGNANCY_CELESS:int				=  39;
@@ -99,7 +99,7 @@ public class PregnancyStore extends Object
 		public static const INCUBATION_SALAMANDER:int           = 336;
 		public static const INCUBATION_MINERVA:int           	= 216; 
 		public static const INCUBATION_BEHEMOTH:int           	=1440; //Sorry Behemoth, but Isabella wins.
-		public static const INCUBATION_QUASI_PHOENIX:int       	= 168;
+		public static const INCUBATION_QUASI_PHOENIX:int       	= 192;
 		public static const INCUBATION_KIHA:int                 = 384;
 		public static const INCUBATION_ISABELLA:int             =2160; //Longest pregnancy ever.
 		public static const INCUBATION_ALRAUNE:int              = 168;
@@ -114,7 +114,7 @@ public class PregnancyStore extends Object
 		/*public static const INCUBATION_BELISA:int				= 300;
 		public static const INCUBATION_LILY:int					= 300;
 		public static const INCUBATION_TYRANTIA:int				= 300;*/
-		public static const INCUBATION_LOPPE:int				= 300;
+		public static const INCUBATION_LOPPE:int				= 200;
 
 		private static const MAX_FLAG_VALUE:int                 = 2999;
 		private static const PREG_TYPE_MASK:int                 = 0x0000FFFF; //Should be safe with 65535 different pregnancy types

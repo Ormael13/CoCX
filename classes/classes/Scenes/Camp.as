@@ -8,6 +8,7 @@ import classes.Items.*;
 import classes.Items.Consumables.SimpleConsumable;
 import classes.Scenes.Camp.*;
 import classes.Scenes.NPCs.*;
+import classes.Scenes.NPCs.EtnaDaughterScene;
 import classes.Scenes.NPCs.SophieFollowerScene;
 import classes.Scenes.Places.HeXinDao.AdventurerGuild;
 import classes.Scenes.Places.Mindbreaker;
@@ -1403,9 +1404,13 @@ public class Camp extends NPCAwareContent{
 			}
 			//Etna
 			if (flags[kFLAGS.ETNA_FOLLOWER] > 0 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] != 2 && !player.hasStatusEffect(StatusEffects.EtnaOff)) {
-				outputText("Etna is resting lazily on a rug in a very cat-like manner. She’s looking at you always with this adorable expression of hers, her tail wagging expectantly at your approach.\n\n");
-				if (player.statusEffectv1(StatusEffects.CampLunaMishaps2) > 0) buttons.add("Etna", SceneLib.etnaScene.etnaCampMenu2).disableIf(player.statusEffectv1(StatusEffects.CampLunaMishaps2) > 0, "Sleeping.");
-				else buttons.add("Etna", SceneLib.etnaScene.etnaCampMenu2).disableIf(player.statusEffectv4(StatusEffects.CampSparingNpcsTimers1) > 0, "Training.");
+				if (EtnaFollower.EtnaHunting && time.hours >= 8 && time.hours <= 17)
+					outputText("Etna is out hunting for cock since you dont have enough fluids to sustain her.\n\n");
+				else outputText("Etna is resting lazily on a rug in a very cat-like manner. She’s looking at you always with this adorable expression of hers, her tail wagging expectantly at your approach.\n\n");
+				buttons.add("Etna", SceneLib.etnaScene.etnaCampMenu2)
+						.disableIf(player.statusEffectv1(StatusEffects.CampLunaMishaps2) > 0 && player.statusEffectv1(StatusEffects.CampLunaMishaps2) > 0, "Sleeping.")
+						.disableIf(player.statusEffectv4(StatusEffects.CampSparingNpcsTimers1) > 0, "Training.")
+						.disableIf(EtnaFollower.EtnaHunting && time.hours >= 8 && time.hours <= 17, "Hunting");
 			}
 			//Excellia Lover
 			if (flags[kFLAGS.EXCELLIA_RECRUITED] >= 33) {
@@ -1860,7 +1865,7 @@ public class Camp extends NPCAwareContent{
 					else outputText("Joy herself is nowhere to be found, she's probably out frolicking about or sitting atop the boulder.");
 					outputText("\n\n");
 					buttons.add("Joy", joyScene.approachCampJoy).hint("Go find Joy around the edges of your [camp] and meditate with her or have sex with her.");
-				} if (SceneLib.alvinaFollower.JojoDevilPurification == 1 && !player.hasStatusEffect(StatusEffects.DevilPurificationScar)) {
+				} else if (SceneLib.alvinaFollower.JojoDevilPurification == 1 && !player.hasStatusEffect(StatusEffects.DevilPurificationScar)) {
 					outputText("Jojo is waiting in the forrest, bring him a pure artifact and he will cleanse you of your taint.");
 				} else {
 					outputText("There is a small bedroll for Jojo near your own");

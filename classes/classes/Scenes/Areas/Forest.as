@@ -289,10 +289,10 @@ use namespace CoC;
 						name  : "Jojo",
 						night : false,
 						when  : function ():Boolean {
-							return !player.hasStatusEffect(StatusEffects.PureCampJojo)
+							return (!player.hasStatusEffect(StatusEffects.PureCampJojo)
 								   && !camp.campCorruptJojo()
 								   && flags[kFLAGS.JOJO_DEAD_OR_GONE] <= 0
-								   && (JojoScene.monk < 2 || rand(2) == 0)
+								   && (JojoScene.monk < 2 || rand(2) == 0))
 								   || SceneLib.alvinaFollower.JojoDevilPurification == 1;
 						},
 						mods  : [fn.ifLevelMin(4)],
@@ -443,7 +443,7 @@ use namespace CoC;
 						when: fn.ifLevelMin(3),
 						call: function ():void {
 							player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
-							curry(SceneLib.mimicScene.mimicTentacleStart, 3);
+							SceneLib.mimicScene.mimicTentacleStart(3);
 						},
 						chance: 0.25
 					}, {

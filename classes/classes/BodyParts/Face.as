@@ -654,8 +654,7 @@ public class Face extends SaveableBodyPart {
 			var desc: String = "";
 
 			desc += "You have a dog's face, complete with wet nose and panting tongue. You've got [skin coat], hiding your [skin base] underneath your furry visage. " +
-					"Flanking your main head are two more wich never truly fully agree with one another. You regularly need to put them back into their place and remind them who leads this body lest they start fighting each other.";
-
+					"Flanking your main head are two more wich never truly fully agree with one another. You regularly need to put them back in their place and remind them who leads this body lest they start fighting each other.";
 			return desc;
 		},
 		bite: true,

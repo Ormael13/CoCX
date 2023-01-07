@@ -514,6 +514,7 @@ public class FetishCultistScene extends AbstractLakeContent
 				addButtonIfTrue(2, "B.Feed", fetishCultistHasAMilkFetish,"Req. 'Feeder' perk",
 					player.hasStatusEffect(StatusEffects.Feeder),"Empty your heavy jugs.");
 				addButtonIfTrue(3, "Mindbreak", mindbreakFemaleCultist, "You don't know how and why... yet?", Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_ISMB, "Toy with the cultist's brain.");
+				addButton(4, "Convert Elf", SceneLib.woodElves.CaptureCultist).hint("Take the slut to the Sacred Tree to become a new sister!").disableIf(!player.isWoodElf(), "Wood elves only!");
 				addButton(14, "Leave", cleanupAfterCombat);
 				SceneLib.uniqueSexScene.pcUSSPreChecksV2(cultistDefeated);
 			}
