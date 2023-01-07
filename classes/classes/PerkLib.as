@@ -551,8 +551,8 @@ public class PerkLib
 				"Thrown weapon impacts are so powerful that they can stop your opponents right in their tracks gaining a 10% chance of stunning them. (+15% range physical attacks multiplier)",
 				"You've chosen the 'Impact Throw' perk. Thrown weapon impacts are so powerful that they can stop your opponents right in their tracks gaining a 10% chance of stunning them. (+15% range physical attacks multiplier)");
 		public static const PenetratingThrow:PerkType = mk("Penetrating throw", "Penetrating throw",
-				"Thrown weapons have such penetrating power they now have a chance to run through multiple enemies. When attacking groups the projectiles have a 75% percent chance to deal their damage more then once losing 10% after each successful piercing strikes. (+20% range physical attacks multiplier)",
-				"You've chosen the 'Penetrating throw' perk. Thrown weapons have such penetrating power they now have a chance to run through multiple enemies. When attacking groups the projectiles have a 75% percent chance to deal their damage more then once losing 10% after each successful piercing strikes. (+20% range physical attacks multiplier)");
+				"Thrown weapons have such penetrating power they now have a chance to run through multiple enemies. When attacking groups the projectiles have a 75% (losing 10% after each successful piercing strike) chance to deal their damage more then once. (+20% range physical attacks multiplier)",
+				"You've chosen the 'Penetrating throw' perk. Thrown weapons have such penetrating power they now have a chance to run through multiple enemies. When attacking groups the projectiles have a 75% (losing 10% after each successful piercing strike) chance to deal their damage more then once. (+20% range physical attacks multiplier)");
 		public static const Backbreaker:PerkType = mk("Backbreaker", "Backbreaker",
 				"Hammer or mace deals 50% more damage to stunned enemies.",
 				"You've chosen the 'Backbreaker' perk. Hammer or mace deals 50% more damage to stunned enemies.");

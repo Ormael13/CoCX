@@ -688,7 +688,7 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
         outputText("You enter the panic room, and it’s relatively plain, almost like a small warehouse. Other than the singed demon corpses, the panic room has only two things of interest: A desk and high-tech panel, similar to the ones on the doors before, but far larger. If you had to guess, you think you’ve found the diseased heart of this lab. Maybe you can open the way out!\n\n");
         dungeons.setDungeonButtons(null, Ballroom3, null, null);
         addButton(0, "Console", Computer).disableIf(!WayOutBlocked, "You destroyed that cursed thing.");
-        addButton(1, "Desk,", Desk);
+        if (player.hasKeyItem("Map to the Lethice’s Fortress") < 0) addButton(1, "Desk,", Desk);
     }
 
     public function Computer():void {
@@ -1101,4 +1101,4 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
         doNext(camp.returnToCampUseTwoHours);
     }
 }
-}
+}
