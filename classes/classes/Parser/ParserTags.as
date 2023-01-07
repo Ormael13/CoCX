@@ -610,6 +610,7 @@ public class ParserTags {
         "hasbreasts"    : function ():* { return (CoC.instance.player.biggestTitSize() >= 1); },
         "hasballs"      : function ():* { return (CoC.instance.player.hasBalls()); },
         "hascock"       : function ():* { return CoC.instance.player.hasCock(); },
+        "haswings"       : function ():* { return CoC.instance.player.hasPhysicalWings(); },
         "isbimbo"       : function ():* { return CoC.instance.player.hasPerk(PerkLib.BimboBrains) || CoC.instance.player.hasPerk(PerkLib.FutaFaculties); },
         "isherm"        : function ():* { return (CoC.instance.player.gender == 3); },
         "cumnormal"     : function ():* { return (CoC.instance.player.cumQ() <= 150); },

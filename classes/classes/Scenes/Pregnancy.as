@@ -355,7 +355,7 @@ public class Pregnancy extends NPCAwareContent {
                 }
             }
             //Bunny tf preggoz
-            if (player.pregnancyType == PregnancyStore.PREGNANCY_BUNNY) {
+            if (player.pregnancyType == PregnancyStore.PREGNANCY_BUNNY || player.pregnancyType == PregnancyStore.PREGNANCY_LOPPE) {
                 if(player.pregnancyIncubation == 800) {
                     EngineCore.outputText("\nYour womb gurgles strangely.\n");
                     displayedUpdate = true;
@@ -383,7 +383,8 @@ public class Pregnancy extends NPCAwareContent {
                 }
                 //BREAK - REAL PREGNANCY BELOW THIS:
                 if(player.pregnancyIncubation == 198) {
-                    EngineCore.outputText("\n<b>You realize your belly has gotten slightly larger.  Maybe there's some truth to what the bunny-girl said.</b>\n");
+                    EngineCore.outputText("\n<b>You realize your belly has gotten slightly larger.  " +
+                            (player.pregnancyType == PregnancyStore.PREGNANCY_LOPPE?"":"Maybe there's some truth to what the bunny-girl said.")+"</b>\n");
                     displayedUpdate = true;
                 }
                 if(player.pregnancyIncubation == 178) {
@@ -392,9 +393,11 @@ public class Pregnancy extends NPCAwareContent {
                 }
                 if(player.pregnancyIncubation == 156) {
                     EngineCore.outputText("\n<b>The unmistakable bulge of pregnancy is visible in your tummy.  ");
-                    if(player.cor < 40) EngineCore.outputText("You are distressed by your unwanted pregnancy, and your inability to force this thing out of you.</b>");
-                    if(player.cor >= 40 && player.cor < 75) EngineCore.outputText("You find yourself wondering what giving birth to bunny-girls is like.</b>");
-                    if(player.cor >= 75) EngineCore.outputText("You dreamily wonder if you could find a bunny willing to put more than two eggs inside you at once.</b>");
+                    if (player.pregnancyType != PregnancyStore.PREGNANCY_LOPPE) {
+                        if (player.cor < 40) EngineCore.outputText("You are distressed by your unwanted pregnancy, and your inability to force this thing out of you.</b>");
+                        if (player.cor >= 40 && player.cor < 75) EngineCore.outputText("You find yourself wondering what giving birth to bunny-girls is like.</b>");
+                        if (player.cor >= 75) EngineCore.outputText("You dreamily wonder if you could find a bunny willing to put more than two eggs inside you at once.</b>");
+                    }
                     player.dynStats("spe", -1, "lib", 1, "sen", 1, "lus", 2);
                     EngineCore.outputText("\n");
                     displayedUpdate = true;
@@ -418,9 +421,11 @@ public class Pregnancy extends NPCAwareContent {
                 }
                 if(player.pregnancyIncubation == 48) {
                     EngineCore.outputText("\n<b>You rub your hands over your bulging belly, lost in the sensations of motherhood.  ");
-                    if(player.cor < 40) EngineCore.outputText("Afterwards you feel somewhat disgusted with yourself.</b>\n");
-                    if(player.cor >= 40 && player.cor < 75) EngineCore.outputText("You estimate you'll give birth in the next few days.</b>\n");
-                    if(player.cor >= 75) EngineCore.outputText("You find yourself daydreaming about birthing bunnies repeatedly, each time being re-impregnated with dozens of eggs from your lusty adolescent children.</b>\n");
+                    if (player.pregnancyType != PregnancyStore.PREGNANCY_LOPPE) {
+                        if (player.cor < 40) EngineCore.outputText("Afterwards you feel somewhat disgusted with yourself.</b>\n");
+                        if (player.cor >= 40 && player.cor < 75) EngineCore.outputText("You estimate you'll give birth in the next few days.</b>\n");
+                        if (player.cor >= 75) EngineCore.outputText("You find yourself daydreaming about birthing bunnies repeatedly, each time being re-impregnated with dozens of eggs from your lusty adolescent children.</b>\n");
+                    }
                     displayedUpdate = true;
                 }
             }
@@ -1405,6 +1410,71 @@ public class Pregnancy extends NPCAwareContent {
                     }
                 }
             }
+            //Quasi-Phoenix Pregnancy
+            else if (player.pregnancyType == PregnancyStore.PREGNANCY_QUASI_PHOENIX) {
+                if (player.pregnancyIncubation === 168) {
+                    outputText("\nYour stomach has grown noticeably distended, and feels hard and solid to the touch. A strange warm sensation emanates from within you; you don’t think it’s had any effect on you, but it does feel nice.\n");
+                    displayedUpdate = true;
+                }
+                if (player.pregnancyIncubation === 120) {
+                    outputText("\n<b>You are quite visibly pregnant now, your belly round and firm, easily comparable to a woman exiting her second trimester.</b> The egg in your womb radiates heat, filling your body with its unearthly warmth. You feel tougher, hardier, like the flame in your belly is burning out weakness... But your loins are also full of a far more familiar warmth.\n");
+
+                    player.statStore.addBuffObject({
+                        "tou": 1,
+                        "lib": 2
+                    }, 'Quasi-Phoenix Egg', {text: 'Quasi-Phoenix Egg'});
+                    player.addCurse("spe", 3);
+                    displayedUpdate = true;
+                }
+                if (player.pregnancyIncubation === 72) {
+                    outputText("\nA gut like this on a woman back home would normally signal that she’s about to pop, but you have the feeling that the egg inside you isn’t done growing yet. The heat radiating from it is stronger than ever; you wonder if this is what a pot-bellied stove with a roaring fire feels like. You feel hardened and aroused all at once from the ever-burning flames.\n");
+                    player.statStore.addBuffObject({
+                        "tou": 2,
+                        "lib": 3
+                    }, 'Quasi-Phoenix Egg', {text: 'Quasi-Phoenix Egg'});
+                    displayedUpdate = true;
+                }
+                if (player.pregnancyIncubation === 24) {
+                    outputText("\nSurely this huge egg can’t grow much bigger; you’re already wondering how you’re going to pass the massive thing! Your stomach looks more like you have a small child curled up inside you than a fully grown baby, and you have to move slower because of how it’s weighing you down. Despite your huge size, you feel hornier and hardier than ever, the heat from inside you literally radiating off of your swollen form and heating up everything nearby.\n");
+                    player.statStore.addBuffObject({
+                        "tou": 2,
+                        "lib": 3
+                    }, 'Quasi-Phoenix Egg', {text: 'Quasi-Phoenix Egg'});
+                    displayedUpdate = true;
+                }
+                if (player.pregnancyIncubation === 16 || player.pregnancyIncubation === 48 || player.pregnancyIncubation === 86) {
+                    //Increase lactation!
+                    if (player.biggestTitSize() >= 3 && player.mostBreastsPerRow() > 1 && player.biggestLactation() >= 1 && player.biggestLactation() < 2) {
+                        outputText("\nYour breasts feel swollen with all the extra milk they're accumulating.\n");
+                        player.boostLactation(.5);
+                        displayedUpdate = true;
+                    }
+                    if (player.biggestTitSize() >= 3 && player.mostBreastsPerRow() > 1 && player.biggestLactation() > 0 && player.biggestLactation() < 1) {
+                        outputText("\nDrops of breastmilk escape your nipples as your body prepares for the coming birth.\n");
+                        player.boostLactation(.5);
+
+                        displayedUpdate = true;
+                    }
+                    //Lactate if large && not lactating
+                    if (player.biggestTitSize() >= 3 && player.mostBreastsPerRow() > 1 && player.biggestLactation() === 0) {
+                        outputText("\n<b>You realize your breasts feel full, and occasionally lactate</b>.  It must be due to the pregnancy.\n");
+                        player.boostLactation(1);
+                        displayedUpdate = true;
+                    }
+                    //Enlarge if too small for lactation
+                    if (player.biggestTitSize() === 2 && player.mostBreastsPerRow() > 1) {
+                        outputText("\n<b>Your breasts have swollen to C-cups,</b> in light of your coming pregnancy.\n");
+                        player.growTits(1, 1, false, 3);
+                        displayedUpdate = true;
+                    }
+                    //Enlarge if really small!
+                    if (player.biggestTitSize() === 1 && player.mostBreastsPerRow() > 1) {
+                        outputText("\n<b>Your breasts have grown to B-cups,</b> likely due to the hormonal changes of your pregnancy.\n");
+                        player.growTits(1, 1, false, 3);
+                        displayedUpdate = true;
+                    }
+                }
+            }
         }
         if (player.pregnancyIncubation > 0 && player.pregnancyIncubation < 2) player.knockUpForce(player.pregnancyType, 1);
         if(player.pregnancyIncubation == 1 && player.pregnancyType != PregnancyStore.PREGNANCY_BENOIT) {
@@ -2047,6 +2117,11 @@ public class Pregnancy extends NPCAwareContent {
             }
             if (player.pregnancyType == PregnancyStore.PREGNANCY_LOPPE) {
                 SceneLib.loppe.pcGivesBirthToLoppeKits();
+                player.knockUpForce(); //Clear Pregnancy
+                displayedUpdate = true;
+            }
+            if (player.pregnancyType == PregnancyStore.PREGNANCY_QUASI_PHOENIX) {
+                SceneLib.highMountains.phoenixScene.phoenixBirth();
                 player.knockUpForce(); //Clear Pregnancy
                 displayedUpdate = true;
             }

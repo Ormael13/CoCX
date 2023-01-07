@@ -73,7 +73,7 @@ public class Loppe extends NPCAwareContent implements TimeAwareInterface, Saveab
 
 public function Loppe(){
 	pregnancy = new PregnancyStore(kFLAGS.LOPPE_PREGNANCY_TYPE, kFLAGS.LOPPE_INCUBATION, 0, 0);
-	pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_PLAYER, 270, 240, 210, 180, 150, 120, 90, 48);
+	pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_PLAYER, 180, 160, 140, 120, 100, 80, 60, 35);
 	EventParser.timeAwareClassAdd(this);
 	Saves.registerSaveableState(this);
 }
