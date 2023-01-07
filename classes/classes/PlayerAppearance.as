@@ -846,7 +846,7 @@ public class PlayerAppearance extends BaseContent {
 			if (player.lowerBody == LowerBody.MELKIE){
 				pussyDesc += "You have two sets of vaginal lips, the first"; //set in pairs, one twice as big as the other and hiding the smaller within its folds. Behind your first set of lips, you have a " + vaginaDescript(0) + ", with a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit, and behind your second set of lips, you have a " + vaginaDescript(1) + ", with a " + Measurements.shortSuffix(int(player.clitLength*10)/10) + " clit";
 			} else {
-				pussyDesc += "Your  " + num2Text2(i+1) + vaginaDescript(i);
+				pussyDesc += "Your  " + num2Text2(i+1) +" "+ vaginaDescript(i);
 			}
 		}
 		var clitExists:int = 0;
@@ -863,7 +863,7 @@ public class PlayerAppearance extends BaseContent {
 				clitExists++
 				break;
 			case LowerBody.MELKIE:
-				pussyDesc += " set is twice as big as the other, and the other hidden within its folds. Your outer lips hide a ";
+				pussyDesc += " is twice as big as the other, and the other hidden within its folds. Your outer lips hide a ";
 				break;
 			case VaginaClass.MANTICORE:
 				pussyDesc += " is ultrasensitive, even the slightest touch is enough to make you moan out a melody. Your song-box hides a ";
@@ -882,7 +882,7 @@ public class PlayerAppearance extends BaseContent {
 				break;
 			case VaginaClass.NAGA:
 				pussyDesc += " is deep and wide enough to insert your entire arm length inside and some more. Sometimes you lament that most of your partners are no longer big enough to satisfy you";
-				if (player.isNaga()) pussyDesc += "as your hot spot is now way further inside your deep canal, requiring quite a longer member to reach";
+				if (player.isNaga()) pussyDesc += " as your hot spot is now way further inside your deep canal, requiring quite a longer member to reach";
 				pussyDesc += ". Inside you have a ";
 				break;
 			case VaginaClass.MINDBREAKER:

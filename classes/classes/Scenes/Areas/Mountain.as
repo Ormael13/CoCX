@@ -99,6 +99,17 @@ public class Mountain extends BaseContent
 					 SceneLib.etnaScene.etnaInfidelityEncounter();
 				}
 			}, {
+				name  : "etna2",
+				when  : function():Boolean {
+					return (flags[kFLAGS.ETNA_FOLLOWER] >= 2 && EtnaFollower.EtnaInfidelity == 1)
+						   && !player.hasStatusEffect(StatusEffects.EtnaOff)
+						   && (player.level >= 20);
+				},
+				chance: 0.1,
+				call  : function ():void {
+					 SceneLib.etnaScene.etnaInfidelityEncounterRepeat();
+				}
+			}, {
 				name  : "alvina1",
 				when  : function():Boolean {
 					return flags[kFLAGS.ALVINA_FOLLOWER] == 8;
