@@ -91,7 +91,7 @@ public class Changelog extends BaseContent
 			outputText("-Rebalance bleed damage, max 5% hp per turn. Cleanup archery text spam. Improved pregnancy stats. Quasi-phoenix player pregnancy. (EragonX)\n");
 			outputText("-The great reckoning as arrived all bleed ability now scales of your attack damage instead of a set percentage of monster HP (Liadri)\n");
 			outputText("-Add the Project Nightwalker & Flamespreader encounters after 3rd story dungeon as randomn encouters outside dungeon. (EragonX)\n");
-			outputText("-\n");
+			outputText("-Kiha combat companion! (EragonX)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
