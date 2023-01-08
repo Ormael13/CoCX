@@ -21,6 +21,7 @@ public class HighMountains extends BaseContent {
     public var phoenixScene:PhoenixScene = new PhoenixScene();
     public var darkelfScene:DarkElfScene = new DarkElfScene();
     public var cockatriceScene:CockatriceScene = new CockatriceScene();
+    public var nekobakeInn:NekobakeInn = new NekobakeInn();
 
     public function HighMountains() {
         onGameInit(init);
@@ -105,6 +106,13 @@ public class HighMountains extends BaseContent {
             name: "darkelf",
             chance: 0.5,
             call: darkelfScene.introDarkELfSniper
+        }, {
+            name: "nekobakeInn",
+            chance: 0.2,
+            when: function ():Boolean {
+                return !player.blockingBodyTransformations();
+            },
+            call: nekobakeInn.encounterNekobakeInn
         }, {
             name: "demonProjects",
             chance: 0.2,
