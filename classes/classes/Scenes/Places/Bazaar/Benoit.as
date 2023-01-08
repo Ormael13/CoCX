@@ -138,6 +138,7 @@ public function numEggs():int {
 public function benoitKnockUp():Boolean
 {
 	if (benoitPreggers() || !benoitInClutch()) return false;
+	if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Benoit is pregnant!</b>");
 	flags[kFLAGS.FEMOIT_EGGS] = numEggs();
 	flags[kFLAGS.FEMOIT_INCUBATION] = 168;
 	return true;

@@ -80,14 +80,16 @@ public class Changelog extends BaseContent
 			outputText("-New tier 2 misc lvl-up perk: Skilled Ranger (Ex). Req. Skilled Ranger perk and 35+ str/tou/spe. Effect: When range atk crit chance exceed 100% crit dmg is x2 and when exceed 200% crit dmg is x3. (+15% range physical attacks multiplier and then adds another 50% (total of 100%) on top of final result)\n");
 			outputText("-New tier 3 misc lvl-up perk: Skilled Gunslinger (Ex). Req. Skilled Gunslinger perk, lvl 15+ and 40+ str/tou/spe. Effect: When firearms atk crit chance exceed 100% crit dmg is x2 and when exceed 200% crit dmg is x3. (+20% firearms attacks multiplier and then adds another 50% (total of 100%) on top of final result)\n");
 			outputText("-New Cerberus TF event (sleep in camp while being fully hellhound (black pepper) and have Marae's Lethicite) Has a few unique interactions with corrupted enemies. (EragonX)\n");
-			outputText("-After Etna moves into camp she gains a new once-off encounter in the hills that can unlock more content. (EragonX)\n");
+			outputText("-After Etna moves into camp she gains a new encounter in the hills that can unlock more content. (EragonX)\n");
 			outputText("-Metamorph aditions - Face: Bunny, Dog, Kangaroo, Ferret mask, Ferret, Rhino, Echidna, Bear, Squirrel; Tail: Azazel, Rabbit, Avian, Griffin, Kangaroo, Thunderbird, Squirrel, Ferret, Bear, Ushi Oni; Ratatoskr hair (EragonX)\n");
 			outputText("-New event perk: Elven Thorn shot (grow Rosethorns on arow shaft, lust+bleed). Training with Lutien with 100+ speed and knowing Briarthorn spell.\n");
 			outputText("-New event perk: Elven Twin shot (double bow shots after bonusses). Training with Lutien with maxed speed stat (100%)\n");
 			outputText("-Added option to capture & convert some of the enemies into new wood elfs.\n");
 			outputText("-New event perk: One with the forest. Gained by Wood Elfs. Effects: With each new soul added to the collective bolstering the trees of the sacred forest you become stronger physically and spiritually. Gain a +1% to all stats for each new wood elf created.\n");
-			outputText("-Factory and Deep Cave monsters went to gym and packed bit more punch. They even lvl up when was there by 4 lvl's (factory) or whooping 10 lvl's (deep cave).\n");
+			outputText("-Factory, Deep Cave and Lethice Stronghold monsters went to gym and they are now punch harder. They even lvl up when was there by 4 lvl's (factory), 10 lvl's (deep cave) or whooping 30 lvl's (lethice stronghold).\n");
 			outputText("-Flurry of Blows no longer req. Combo Master perk and physical soulskills hits trice not twice.\n");
+			outputText("-Rebalance bleed damage, max 5% hp per turn. Cleanup archery text spam. Improved pregnancy stats. Quasi-phoenix player pregnancy. (EragonX)\n");
+			outputText("-The great reckoning as arrived all bleed ability now scales of your attack damage instead of a set percentage of monster HP (Liadri)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -98,6 +100,18 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
+			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
+			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
+			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
+			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");
 			outputText("-\n");// (Liadri)
 			outputText("-\n");// (aimozg)
@@ -106,20 +120,6 @@ public class Changelog extends BaseContent
 			outputText("-\n");// (Jtecx)
 			outputText("-\n");// (Furrin Gok)
 			outputText("-\n");// (khovel)
-			outputText("-\n");
-			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
-			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
-			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
-			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
-			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -130,7 +130,7 @@ public class Changelog extends BaseContent
 			//remove this line when other two lines below get added ingame
 			//outputText("-New perk for enemies: Elite type enemy. Bonuses for are: Diehard effect of 2,5% of max HP + 750 HP * NG tier, OverMax HP effect of 5% magnitude.\n");
 			//outputText("-New perk for enemies: Champion type enemy. Bonuses for are: Diehard effect of 5% of max HP + 1,500 HP * NG tier, OverMax HP effect of 10% magnitude.\n");
-			outputText("-Fixed bugs: Bard not affected by cap of prestige jobs, last one checks for holli's kill/survive moved into less troublesome spot, Benoit/Oswald taking full price for simple backpack size upgade, Fasting Pill been unaccessable when hunger mode is active, Vegetal Affinity increasing fire resistance\n");
+			outputText("-Fixed bugs: Bard not affected by cap of prestige jobs, last one checks for holli's kill/survive moved into less troublesome spot, Benoit/Oswald taking full price for simple backpack size upgade, Fasting Pill been unaccessable when hunger mode is active, Vegetal Affinity increasing fire resistance, elemental throwing knives been never usable\n");
 			/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");

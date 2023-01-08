@@ -64,7 +64,6 @@ public class ProjectNightwalker extends Monster {
         var evade:String = player.getEvasionReason();
         if (evade != null) {
             outputText("\n\nYou duck your head under the rush, catching a whiff of blood as she rockets past. “<i>Oh, sweet blood, you’re only making my meal…sweeter.</i>”");
-            return;
         } else {
             outputText("You try to block her kick, but at the last minute, she twists nimbly, her leg missing your head. Too late, your eyes widen as her swollen lips collide with your mouth. She wraps her legs around your head as the impact knocks you to the ground. Dazed, you can hear her muffled, high-pitched giggling as her muff seems to clamp down on your lips. Her surprisingly soft ass-cheeks jiggle as you struggle, blocking you from breathing properly. What air you are getting reeks, like blood and semen.");
             player.createStatusEffect(StatusEffects.Straddle, 0, 0, 0, 0);
@@ -80,7 +79,7 @@ public class ProjectNightwalker extends Monster {
         outputText("<b>All you can do is try to struggle free!</b>");
     }
 
-    public function struggleFaceSitting(wait:Boolean):void {
+    public function struggleFaceSitting(wait:Boolean = false):void {
         if (wait) {
             outputText("She thrusts her crotch into your face, burying your face into her snatch. The scent of blood and semen is overpowering, suffocating you as she clams her legs even tighter around your head.");
             player.takeLustDamage(100, true);
@@ -183,7 +182,12 @@ public class ProjectNightwalker extends Monster {
     }
 
     override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void {
-        SceneLib.dungeons.demonLab.BadEndExperiment();
+        if (inDungeon)SceneLib.dungeons.demonLab.BadEndExperiment();
+        else {
+            if (plantBite || stoneBite || slimeBite) outputText("The vampire strolls up to you, giving you one last harsh kick in the face as you black out. \n");
+            else outputText("The Vampire strolls up to you, grabbing you by your shoulders and sinking her fangs into you, draining you until you pass out.\n");
+            cleanupAfterCombat();
+        }
     }
 
     public function ProjectNightwalker() {

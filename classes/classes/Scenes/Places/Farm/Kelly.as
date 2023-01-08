@@ -1578,6 +1578,7 @@ private function kellyPreggers():void {
 	if (flags[kFLAGS.KELLY_HEAT_TIME] > 0) x += 15;
 	if (x <= 80) {
 		pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_CENTAUR - 84);
+		if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Kelly is pregnant!</b>");
 		trace("Kelly knocked up.");
 	}
 }

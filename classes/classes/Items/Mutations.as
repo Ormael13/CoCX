@@ -2204,7 +2204,6 @@ public final class Mutations extends MutationsHelper {
         if (!player.hasPerk(PerkLib.DominantAlpha)) {
             player.createPerk(PerkLib.DominantAlpha, 0, 0, 0, 0);
             outputText("\n<b>Gained Perk: Dominant Alpha!</b> "+PerkLib.DominantAlpha.longDesc);
-
             player.statStore.addBuffObject({
                 "str.mult": 0.02,
                 "tou.mult": 0.02,

@@ -820,6 +820,7 @@ private function fuckLynnette():void {
 	if(player.cumQ() >= 4000) flags[kFLAGS.LYNNETTE_CARRYING_COUNT] += 2 + rand(3);
 	if(player.cumQ() >= 6000) flags[kFLAGS.LYNNETTE_CARRYING_COUNT] += 2 + rand(3);
 	if(player.cumQ() >= 10000) flags[kFLAGS.LYNNETTE_CARRYING_COUNT] += 2 + rand(3);
+	if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Lynette is pregnant!</b>");
 
 	flags[kFLAGS.LYNNETTE_PREGNANCY_CYCLE] = 0;
 	salonPurchaseMenu();

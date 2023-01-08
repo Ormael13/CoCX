@@ -203,6 +203,7 @@ public class KihaFollower extends NPCAwareContent implements TimeAwareInterface,
             if (debug) outputText("\n\n<b>DEBUG: Kiha is impregnated.</b>");
             trace("Kiha got PREGNANT!");
             pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_KIHA);
+            if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Kiha is pregnant!</b>");
         }
     }
 

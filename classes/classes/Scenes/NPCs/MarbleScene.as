@@ -3377,6 +3377,7 @@ private function marblePreggoChance(preggerMult:Number):void {
 			trace("Marble got PREGNANT!");
 			//SHE IS NAU!
 			pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, 720);
+            if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Marble is pregnant!</b>");
 		}
 	}
 	else

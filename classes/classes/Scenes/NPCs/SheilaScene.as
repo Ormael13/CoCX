@@ -114,8 +114,10 @@ private function sheilaPreg(reducedChance:Boolean = false):void {
 	chance += player.virilityQ() * 100;
 	if (chance > 75) chance = 75;
 	if (reducedChance) chance /= 3.0;
-	if (rand(100) <= chance)
-	pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_SHIELA);
+	if (rand(100) <= chance) {
+		pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_SHIELA);
+		if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Sheila is pregnant!</b>");
+	}
 }
 
 public function sheilaCorruption(arg:Number = 0):Number {

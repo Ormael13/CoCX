@@ -2355,6 +2355,16 @@ public class Combat extends BaseContent {
         } else if (player.hasStatusEffect(StatusEffects.MagnarPinned)) {
             (monster as Magnar).magnarPinStruggle();
             skipMonsterAction = true;
+        } else if (player.hasStatusEffect(StatusEffects.Straddle)) {
+            if (monster is ProjectNightwalker)(monster as ProjectNightwalker).struggleFaceSitting();
+            else {
+                //33% chance to break free + up to 50% chance for strength
+                if (rand(3) == 0 || rand(80) < player.str / 2 || player.hasPerk(PerkLib.FluidBody)) {
+                    outputText("You grunt in anger, bending your body as quickly as you can. You slam [themonster] into the ground, and you can feel her legs loosen around your neck. With a roar of effort, you get a hold of her ankles, break her grip on your face, and throw [monster him] away from you.\n\n");
+                    player.removeStatusEffect(StatusEffects.Straddle);
+                }
+            }
+            skipMonsterAction = true;
         } else if (player.hasStatusEffect(StatusEffects.GooArmorBind)) {
             (monster as Valeria).struggleAtGooBind();
             if (player.statusEffectv1(StatusEffects.GooArmorBind) >= 5) {
@@ -2796,7 +2806,7 @@ public class Combat extends BaseContent {
             if (player.weaponRangePerk == "Crossbow") flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = Math.min((flags[kFLAGS.MULTISHOT_STYLE] || 0) + 1, 3);
             else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = Math.min((flags[kFLAGS.MULTISHOT_STYLE] || 0) + 1, maxBowAttacks());
 			if (player.isElf() && player.hasPerk(PerkLib.ELFMasterShot) && player.weaponRangePerk == "Bow") flags[kFLAGS.MULTIPLE_ARROWS_STYLE] += 1;
-			if (player.isWoodElf() && player.hasPerk(PerkLib.ELFTwinShot) && player.weaponRangePerk == "Bow") flags[kFLAGS.MULTIPLE_ARROWS_STYLE] *= (flags[kFLAGS.ELVEN_TWINSHOT_ENABLED] ? 2 : 1);;
+			if (player.isWoodElf() && player.hasPerk(PerkLib.ELFTwinShot) && player.weaponRangePerk == "Bow") flags[kFLAGS.MULTIPLE_ARROWS_STYLE] *= (flags[kFLAGS.ELVEN_TWINSHOT_ENABLED] ? 2 : 1);
             if (player.weaponRangeName == "Avelynn") flags[kFLAGS.MULTIPLE_ARROWS_STYLE] *= 3;
         }
         else if (player.weaponRangePerk == "Throwing") {
@@ -2956,29 +2966,31 @@ public class Combat extends BaseContent {
                     outputText("The " + ammoWord + " bounces harmlessly off [themonster].\n\n");
                 }
             }
-            if (monster is EncapsulationPod) {
-                outputText("The " + ammoWord + " lodges deep into the pod's fleshy wall");
-            } else if (monster.plural) {
-                var textChooser1:int = rand(12);
-                if (textChooser1 >= 9) {
-                    outputText("[Themonster] look down at the " + ammoWord + " that now protrudes from one of [monster his] bodies");
-                } else if (textChooser1 >= 6 && textChooser1 < 9) {
-                    outputText("You pull an " + ammoWord + " and fire it at one of [themonster]");
-                } else if (textChooser1 >= 3 && textChooser1 < 6) {
-                    outputText("With one smooth motion you draw, nock, and fire your deadly " + ammoWord + " at one of your opponents");
+            if (!MSGControll) {
+                if (monster is EncapsulationPod) {
+                    outputText("The " + ammoWord + " lodges deep into the pod's fleshy wall");
+                } else if (monster.plural) {
+                    var textChooser1:int = rand(12);
+                    if (textChooser1 >= 9) {
+                        outputText("[Themonster] look down at the " + ammoWord + " that now protrudes from one of [monster his] bodies");
+                    } else if (textChooser1 >= 6 && textChooser1 < 9) {
+                        outputText("You pull an " + ammoWord + " and fire it at one of [themonster]");
+                    } else if (textChooser1 >= 3 && textChooser1 < 6) {
+                        outputText("With one smooth motion you draw, nock, and fire your deadly " + ammoWord + " at one of your opponents");
+                    } else {
+                        outputText("You casually fire an " + ammoWord + " at one of [themonster]");
+                    }
                 } else {
-                    outputText("You casually fire an " + ammoWord + " at one of [themonster]");
-                }
-            } else {
-                var textChooser2:int = rand(12);
-                if (textChooser2 >= 9) {
-                    outputText("[Themonster] looks down at the " + ammoWord + " that now protrudes from [monster his] body");
-                } else if (textChooser2 >= 6) {
-                    outputText("You pull an " + ammoWord + " and fire it at [themonster]");
-                } else if (textChooser2 >= 3) {
-                    outputText("With one smooth motion you draw, nock, and fire your deadly " + ammoWord + " at your opponent");
-                } else {
-                    outputText("You casually fire an " + ammoWord + " at [themonster]");
+                    var textChooser2:int = rand(12);
+                    if (textChooser2 >= 9) {
+                        outputText("[Themonster] looks down at the " + ammoWord + " that now protrudes from [monster his] body");
+                    } else if (textChooser2 >= 6) {
+                        outputText("You pull an " + ammoWord + " and fire it at [themonster]");
+                    } else if (textChooser2 >= 3) {
+                        outputText("With one smooth motion you draw, nock, and fire your deadly " + ammoWord + " at your opponent");
+                    } else {
+                        outputText("You casually fire an " + ammoWord + " at [themonster]");
+                    }
                 }
             }
             //Weapon addition!
@@ -3068,13 +3080,12 @@ public class Combat extends BaseContent {
             } else {
                 if (rand(100) < 15 && player.weaponRange is Artemis && !monster.hasStatusEffect(StatusEffects.Blind)) {
                     monster.createStatusEffect(StatusEffects.Blind, 3, 0, 0, 0);
-                    outputText(",  your radiant shots blinded [monster he]");
+                    if (!MSGControll) outputText(",  your radiant shots blinded [monster he]");
+                    else outputText("Your radiant shots blinded [monster he]");
                 }
-                if (!MSGControll) {
-                    outputText(".  It's clearly very painful. ");
-                    doArcheryDamage(damage);
-					archeryXP(rangeMasteryEXPgained(crit));
-                }
+                if (!MSGControll) outputText(".  It's clearly very painful. ");
+                doArcheryDamage(damage);
+                archeryXP(rangeMasteryEXPgained(crit));
                 if (crit) outputText(" <b>*Critical Hit!*</b>");
 				WeaponRangeStatusProcs();
 				WrathGenerationPerHit1(5);
@@ -3082,9 +3093,9 @@ public class Combat extends BaseContent {
             }
             cupidArrowsEffect();
             if ((flags[kFLAGS.ENVENOMED_BOLTS] == 1 && player.tailVenom >= player.VenomWebCost()) || (flags[kFLAGS.ELVEN_THORNSHOT_ENABLED] == 1 && player.isWoodElf() && player.mana >= 10)) {
-                outputText("  ");
+                if (!MSGControll) outputText("  ");
                 if (monster.lustVuln == 0) {
-                    outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.");
+                    if (!MSGControll) outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.");
                 }
                 if (flags[kFLAGS.ELVEN_THORNSHOT_ENABLED] == 1 && player.isWoodElf() && player.mana >= 10) {
                     player.mana -= 10;
@@ -3105,7 +3116,7 @@ public class Combat extends BaseContent {
 					else monster.createStatusEffect(StatusEffects.Rosethorn, 6, 0, 0, 0);
                 }
                 if (player.tailType == Tail.BEE_ABDOMEN) {
-                    outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
+                    if (!MSGControll) outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
                     var damage1B:Number = 35 + rand(player.lib / 10);
 					var damage1Ba:Number = 1;
 					if (player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)) damage1B += scalingBonusToughness() * 0.5;
@@ -3129,7 +3140,7 @@ public class Combat extends BaseContent {
 					flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
                 }
                 if (player.tailType == Tail.SCORPION || player.hasKeyItem("Sky Poison Pearl") >= 0) {
-                    outputText("  [monster he] seems to be effected by the poison, its movements slowing rapidly.");
+                    if (!MSGControll) outputText("  [monster he] seems to be effected by the poison, its movements slowing rapidly.");
 					var DBP:Number = 2;
 					var DBPa:Number = 1;
 					if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) {
@@ -3149,7 +3160,7 @@ public class Combat extends BaseContent {
 					flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
                 }
                 if (player.tailType == Tail.MANTICORE_PUSSYTAIL) {
-                    outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
+                    if (!MSGControll) outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
                     var lustdamage:Number = 35 + rand(player.lib / 10);
 					var DBPaa:Number = 1;
                     if (player.level < 10) lustdamage += 20 + (player.level * 3);
@@ -3173,7 +3184,7 @@ public class Combat extends BaseContent {
 					flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
                 }
                 if (player.faceType == Face.SNAKE_FANGS) {
-                    outputText("  [monster he] seems to be effected by the poison, its movements slowing down.");
+                    if (!MSGControll) outputText("  [monster he] seems to be effected by the poison, its movements slowing down.");
 					var DBPaaa:Number = 1;
 					if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) DBPaaa *= 2;
 					if (player.hasPerk(PerkLib.ToxineMaster)) monster.statStore.addBuffObject({tou:-5, spe:-DBPaaa}, "Poison",{text:"Poison"});
@@ -3193,7 +3204,7 @@ public class Combat extends BaseContent {
                 }
                 if (player.faceType == Face.SPIDER_FANGS) {
                     if (player.lowerBody == LowerBody.ATLACH_NACHA){
-                        outputText("  [monster he] seems to be affected by the poison, showing increasing sign of weakness and arousal.");
+                        if (!MSGControll) outputText("  [monster he] seems to be affected by the poison, showing increasing sign of weakness and arousal.");
                         var damage2B:Number = 35 + rand(player.lib / 10);
                         var poisonScaling:Number = 1;
 						var damage2Ba:Number = 1;
@@ -3225,7 +3236,7 @@ public class Combat extends BaseContent {
 						flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
                     }
                     else{
-                        outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
+                        if (!MSGControll) outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
                         var lustDmg:int = 6 * monster.lustVuln;
 						if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) lustDmg *= 2;
                         if (player.armor == armors.ELFDRES && player.isElf()) lustDmg *= 2;
@@ -3246,17 +3257,17 @@ public class Combat extends BaseContent {
                     flags[kFLAGS.ARROWS_SHOT]++;
                     doNext(endLustVictory);
                 }
-                outputText("\n");
+                if (!MSGControll) outputText("\n");
             }
             else if (flags[kFLAGS.ENVENOMED_BOLTS] == 1 && player.tailVenom < player.VenomWebCost()) {
 				if (player.hasPerk(PerkLib.ToxineMaster) && player.hasKeyItem("Sky Poison Pearl") >= 0) {
-					outputText("  [monster he] seems to be affected by the poison, showing increasing sign of weakness.\n");
+                    if (!MSGControll) outputText("  [monster he] seems to be affected by the poison, showing increasing sign of weakness.\n");
 					monster.statStore.addBuffObject({tou:-5}, "Poison",{text:"Poison"});
 				}
 				else outputText("  You do not have enough venom to apply on the " + ammoWord + " tip!\n");
 			}
             if (player.weaponRangeName == "Hodr's bow" && !monster.hasStatusEffect(StatusEffects.Blind)) monster.createStatusEffect(StatusEffects.Blind, 1, 0, 0, 0);
-            outputText("\n");
+            if (!MSGControll) outputText("\n");
             if (flags[kFLAGS.ARROWS_SHOT] >= 1) EngineCore.awardAchievement("Arrow to the Knee", kACHIEVEMENTS.COMBAT_ARROW_TO_THE_KNEE);
             flags[kFLAGS.ARROWS_SHOT]++;
 			WrathWeaponsProc();
@@ -3273,6 +3284,7 @@ public class Combat extends BaseContent {
                 outputText("\n\n<i>\"Ouch. Such a cowardly weapon,\"</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>\"How will you beat me without your pathetic " + ammoWord + "s?\"</i>\n\n");
                 monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
             }
+            if (MSGControll) outputText("\n\n");
             enemyAI();
         }
         if (monster.HP <= monster.minHP()) {
@@ -3283,6 +3295,7 @@ public class Combat extends BaseContent {
             doNext(endLustVictory);
             return;
         }
+        MSGControll = true;
         if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] >= 2) {
             flags[kFLAGS.MULTIPLE_ARROWS_STYLE]--;
             flags[kFLAGS.ARROWS_ACCURACY] += arrowsAccuracyPenalty();
@@ -3305,68 +3318,34 @@ public class Combat extends BaseContent {
 
     public function doArcheryDamage(damage:Number):void {
         if (flags[kFLAGS.ELEMENTAL_ARROWS] == 1) {
-			if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
-				doFireDamage(damage, true, true);
-				doMagicDamage(Math.round(damage * 0.2), true, true);
-			}
-			else doFireDamage(damage, true, true);
+			doFireDamage(damage, true, true);
 		}
         else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 2) {
-			if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
-				doIceDamage(damage, true, true);
-				doMagicDamage(Math.round(damage * 0.2), true, true);
-			}
-			else doIceDamage(damage, true, true);
+			doIceDamage(damage, true, true);
 		}
         else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 3) {
-			if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
-				doLightingDamage(damage, true, true);
-				doMagicDamage(Math.round(damage * 0.2), true, true);
-			}
-			else doLightingDamage(damage, true, true);
+			doLightingDamage(damage, true, true);
 		}
         else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) {
-			if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
-				doDarknessDamage(damage, true, true);
-				doMagicDamage(Math.round(damage * 0.2), true, true);
-			}
-			else doDarknessDamage(damage, true, true);
+			doDarknessDamage(damage, true, true);
 		}
         else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 5) {
-			if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
-				doWaterDamage(damage, true, true);
-				doMagicDamage(Math.round(damage * 0.2), true, true);
-			}
-			else doWaterDamage(damage, true, true);
+			doWaterDamage(damage, true, true);
 		}
         else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 6) {
-			if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
-				doWindDamage(damage, true, true);
-				doMagicDamage(Math.round(damage * 0.2), true, true);
-			}
-			else doWindDamage(damage, true, true);
+			doWindDamage(damage, true, true);
 		}
         else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 7) {
-			if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
-				doEarthDamage(damage, true, true);
-				doMagicDamage(Math.round(damage * 0.2), true, true);
-			}
-			else doEarthDamage(damage, true, true);
+			doEarthDamage(damage, true, true);
 		}
         else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 8) {
-			if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
-				doAcidDamage(damage, true, true);
-				doMagicDamage(Math.round(damage * 0.2), true, true);
-			}
-			else doAcidDamage(damage, true, true);
+			doAcidDamage(damage, true, true);
 		}
         else {
-			if (player.hasStatusEffect(StatusEffects.ChargeRWeapon)) {
-				doPhysicalDamage(damage, true, true);
-				doMagicDamage(Math.round(damage * 0.2), true, true);
-			}
-			else doPhysicalDamage(damage, true, true);
+			doPhysicalDamage(damage, true, true);
 		}
+        if (player.hasStatusEffect(StatusEffects.ChargeRWeapon))
+            doMagicDamage(Math.round(damage * 0.2), true, true);
     }
 
     public function elementalArrowDamageMod(damage:Number):Number {
@@ -6703,6 +6682,68 @@ public class Combat extends BaseContent {
         return Damage;
     }
 
+    public function CalcBaseDamageUnarmed(damage:Number = 0):Number{
+        //BASIC DAMAGE STUFF
+        if (player.hasPerk(PerkLib.VerdantMight)){
+            damage += player.tou;
+            damage += scalingBonusToughness() * 0.25;
+        }
+        else{
+            damage += player.str;
+            damage += scalingBonusStrength() * 0.25;
+        }
+        if (player.hasPerk(PerkLib.SpeedDemon)) {
+            damage += player.spe;
+            damage += scalingBonusSpeed() * 0.20;
+        }
+        damage += unarmedAttack();
+        damage = harpyDamageBonus(damage);
+        damage = itemsBonusDamageDamage(damage);
+        damage = statusEffectBonusDamage(damage);
+        //PERKS
+        if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
+        if (player.hasPerk(PerkLib.ChiReflowMagic)) damage *= UmasShop.NEEDLEWORK_MAGIC_REGULAR_MULTI;
+        if (player.hasPerk(PerkLib.ChiReflowAttack)) damage *= UmasShop.NEEDLEWORK_ATTACK_REGULAR_MULTI;
+        if (player.hasPerk(PerkLib.GoblinoidBlood)) {
+            if (player.hasKeyItem("Power bracer") >= 0) damage *= 1.1;
+            if (player.hasKeyItem("Powboy") >= 0) damage *= 1.15;
+            if (player.hasKeyItem("M.G.S. bracer") >= 0) damage *= 1.2;
+        }
+        if ((player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet))) damage *= 2;
+        return damage;
+    }
+
+    public function CalcBaseDamageArmed(damage:Number = 0):Number{
+        //BASIC DAMAGE STUFF
+        if (player.hasPerk(PerkLib.VerdantMight)){
+            damage += player.tou;
+            damage += scalingBonusToughness() * 0.25;
+        }
+        else{
+            damage += player.str;
+            damage += scalingBonusStrength() * 0.25;
+        }
+        if (player.hasPerk(PerkLib.SpeedDemon) && player.isNoLargeNoStaffWeapon()) {
+            damage += player.spe;
+            damage += scalingBonusSpeed() * 0.20;
+        }
+        damage = weaponAttackModifier(damage);
+        damage = harpyDamageBonus(damage);
+        damage = itemsBonusDamageDamage(damage);
+        damage = statusEffectBonusDamage(damage);
+        //PERKS
+        if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
+        if (player.hasPerk(PerkLib.ChiReflowMagic)) damage *= UmasShop.NEEDLEWORK_MAGIC_REGULAR_MULTI;
+        if (player.hasPerk(PerkLib.ChiReflowAttack)) damage *= UmasShop.NEEDLEWORK_ATTACK_REGULAR_MULTI;
+        if (player.hasPerk(PerkLib.GoblinoidBlood)) {
+            if (player.hasKeyItem("Power bracer") >= 0) damage *= 1.1;
+            if (player.hasKeyItem("Powboy") >= 0) damage *= 1.15;
+            if (player.hasKeyItem("M.G.S. bracer") >= 0) damage *= 1.2;
+        }
+        if ((player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) && player.isFistOrFistWeapon()) damage *= 2;
+        return damage;
+    }
+
     public function ExtraNaturalWeaponAttack(FeraldamageMultiplier:Number = 1, SpecialEffect:String = ""):void {
         var accMelee:Number = 0;
         accMelee += (meleeAccuracy() / 2);
@@ -6713,26 +6754,8 @@ public class Combat extends BaseContent {
             // DAMAGE
             //------------
             //Determine damage
-            //BASIC DAMAGE STUFF
-            if (player.hasPerk(PerkLib.VerdantMight)){
-                damage += player.tou;
-                damage += scalingBonusToughness() * 0.25;
-            }
-            else if (SpecialEffect == "fire breath"){
-                damage += player.lib;
-                damage += scalingBonusLibido() * 0.25;
-                if (player.hasPerk(PerkLib.FireLord)) damage *= 2;
-            }
-            else{
-                damage += player.str;
-                damage += scalingBonusStrength() * 0.25;
-            }
-            damage = harpyDamageBonus(damage);
-            if ((player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) && player.isFistOrFistWeapon()) damage *= 2;
-            if (player.hasPerk(PerkLib.SpeedDemon) && player.isNoLargeNoStaffWeapon()) {
-                damage += player.spe;
-                damage += scalingBonusSpeed() * 0.20;
-            }
+            damage = CalcBaseDamageUnarmed();
+            //Apply special modifiers
             if (damage < 10) damage = 10;
             //Weapon addition!
             damage = weaponAttackModifier(damage);
@@ -6751,23 +6774,11 @@ public class Combat extends BaseContent {
             }
             //Apply AND DONE!
             damage *= (monster.damagePercent() / 100);
-            //Damage post processing!
-            //Thunderous Strikes
-            if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
-            if (player.hasPerk(PerkLib.ChiReflowMagic)) damage *= UmasShop.NEEDLEWORK_MAGIC_REGULAR_MULTI;
-            if (player.hasPerk(PerkLib.ChiReflowAttack)) damage *= UmasShop.NEEDLEWORK_ATTACK_REGULAR_MULTI;
-            damage = itemsBonusDamageDamage(damage);
-            damage = statusEffectBonusDamage(damage);
-            if (player.hasPerk(PerkLib.GoblinoidBlood)) {
-                if (player.hasKeyItem("Power bracer") >= 0) damage *= 1.1;
-                if (player.hasKeyItem("Powboy") >= 0) damage *= 1.15;
-                if (player.hasKeyItem("M.G.S. bracer") >= 0) damage *= 1.2;
-            }
             //One final round
             damage = Math.round(damage);
             if (SpecialEffect == "KamaitachiScythe"){
-                if (!monster.hasStatusEffect(StatusEffects.KamaitachiBleed)) monster.createStatusEffect(StatusEffects.KamaitachiBleed,0,0,0,0);
-                else monster.addStatusValue(StatusEffects.KamaitachiBleed, 1, player.spe*2);
+                if (!monster.hasStatusEffect(StatusEffects.KamaitachiBleed)) monster.createStatusEffect(StatusEffects.KamaitachiBleed,(CalcBaseDamageUnarmed()/2)*BleedDamageBoost(),0,0,0);
+                else monster.addStatusValue(StatusEffects.KamaitachiBleed, 1, (CalcBaseDamageUnarmed()/2)*BleedDamageBoost());
             }
             if (SpecialEffect == "WendigoClaw"){
                 monster.addCurse("tou.mult",0.05,2);
@@ -11147,6 +11158,10 @@ public class Combat extends BaseContent {
 		if (player.hasPerk(PerkLib.TaintedMagazine) && player.ammo > 0) player.ammo *= 2;
 		if (player.hasPerk(PerkLib.PrimedClipWarp) && player.ammo > 0) player.ammo *= 3;
         if (player.weaponRange == weaponsrange.GTHRSPE) player.ammo = 20;
+        if (player.weaponRange == weaponsrange.ATKNIFE) player.ammo = 15;
+        if (player.weaponRange == weaponsrange.RTKNIFE) player.ammo = 15;
+        if (player.weaponRange == weaponsrange.STKNIFE) player.ammo = 15;
+        if (player.weaponRange == weaponsrange.TTKNIFE) player.ammo = 15;
         if (player.weaponRange == weaponsrange.GTHRAXE) player.ammo = 10;
         if (player.weaponRange == weaponsrange.O_JAVEL) player.ammo = 10;
         if (player.weaponRange == weaponsrange.TRJAVEL) player.ammo = 10;
@@ -15879,4 +15894,4 @@ private function touSpeStrScale(stat:int):Number {
         return damage;
     }
 }
-}
+}
