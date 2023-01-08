@@ -516,6 +516,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 				bd = buttons.add("Buzzing tune", buzzingTone).hint("Sing a buzzing hypnotic tune in battle, causing the opponent to be stunned for 6 rounds with massive lust damage. This move takes 2 rounds of preparation during which pc must do nothing but sing.");
 				bd.requireFatigue(spellCost(50));
 			}
+			if (player.hasStatusEffect(StatusEffects.FieryBand)) {
+				bd = buttons.add("Call Kiha", callKiha).hint("Call out to Kiha using the Starfire band.");
+				bd.requireFatigue(physicalCost(30));
+			}
 		}
 		if (player.isInGoblinMech()) {
 			if (player.hasKeyItem("Dynapunch Glove") >= 0 && player.vehicles != vehicles.GS_MECH) {
@@ -3729,6 +3733,16 @@ public class PhysicalSpecials extends BaseCombatContent {
 			outputText("\n\n");
 			enemyAI();
 		}
+	}
+	
+	public function callKiha():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
+		fatigue(30, USEFATG_PHYSICAL);
+		clearOutput();
+		outputText("You mentally reach for your ring, and you feel a surge of anger, love and fear. You can all but feel Kiha’s wingbeats, the sensation making your own shoulder blades itch. You can’t relax, not with [enemy] in front of you, but you know that help is on the way!")
+		player.createStatusEffect(StatusEffects.CallOutKiha, 0, 0, 0, 0);
+		outputText("\n\n");
+		enemyAI();
 	}
 
 	public function gooEngulf():void {
