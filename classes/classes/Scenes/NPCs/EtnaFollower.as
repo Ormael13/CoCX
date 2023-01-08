@@ -1194,5 +1194,9 @@ private function etnaGivesBirth():void {
 	SceneLib.etnaDaughterScene.nameEtnaDaughter();
 }
 
+public function etnaTotalKids():int {
+	return EtnaDaughterScene.EtnaDaughterAge > 0 ? 1 : 0;
+}
+
 	}
 }
