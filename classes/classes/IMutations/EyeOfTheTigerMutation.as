@@ -2,37 +2,31 @@
  * Original code by aimozg on 27.01.14.
  * Extended for Mutations by Jtecx on 14.03.22.
  */
-package classes.Perks
+package classes.IMutations
 {
 import classes.PerkClass;
-import classes.PerkLib;
 import classes.IMutationPerkType;
 import classes.Creature;
 import classes.Races;
 
-public class HellHoundFireBalls extends IMutationPerkType
+public class EyeOfTheTigerMutation extends IMutationPerkType
     {
-        private static const mName:String = "Hellhound Fire Balls";
+        private static const mName:String = "Eye Of The Tiger";
         //v1 contains the mutation tier
         override public function mDesc(params:PerkClass, pTier:int = -1):String {
             var descS:String = "";
             pTier = (pTier == -1)? currentTier(this, player): pTier;
-            if (pTier >= 1){
-                descS = "Increase Hellfire damage and Cum production by 25%. +"+(5*pTier)+" Lib.  ";
+            if (pTier == 1){
+                descS = " Increase precision of all attacks by 5%. Increase Rake and Claw attack damage by 50%.";
             }
-            if (pTier >= 2){
-                descS += "Increase fire damage by a percentage based on 0.5% of your cum production.  ";
+            if (pTier == 2){
+                descS = "Increase precision of all attacks by 5% and increase critical chance with natural weapons and weapons by 5%. Increase Rake and Claw attack damage by 50%.";
             }
-            if (pTier >= 3){
-                descS += "Double the fire damage percentage bonus from cum production.  ";
+            if (pTier == 3){
+                descS += "Increase precision of all attacks by 5% and increase critical chance with natural weapons and weapons by 5%. Increase Rake and Claw attack damage by 50%. Critical strikes from claw attacks inflict bleed damage.";
             }
-            if (pTier >= 4){
-                descS += "Double your cum production.  ";
-            }
-            if (pTier >= 4){
-                descS += "If you have the Alpha howl perk you may now forcibly recruit hellhounds into your pack equal to the number of werewolves you may control.";
-            } else if (pTier >= 2){
-                descS += "If you have the Alpha howl perk you may now forcibly recruit hellhounds into your pack equal to half the number of werewolves you may control.";
+            if (pTier == 3){
+                descS += "Increase precision of all attacks by 5% and increase critical chance with natural weapons and weapons by 5%. Increase Rake and Claw attack damage by 50%. Increase Natural weapon critical damage by 50%.";
             }
             return descS;
         }
@@ -63,28 +57,37 @@ public class HellHoundFireBalls extends IMutationPerkType
                 //This helps keep the requirements output clean.
                 this.requirements = [];
                 if (pTier == 0){
-                    this.requireBallsMutationSlot()
-                    .requireRace(Races.CERBERUS);
+                    this.requireEyesMutationSlot()
+                        .requireAnyRace(Races.CatlikeRaces);
                 }
                 else{
                     var pLvl:int = pTier * 30;
-
                     this.requireLevel(pLvl);
                 }
             }catch(e:Error){
                 trace(e.getStackTrace());
             }
         }
-
+        
         //Mutations Buffs
         override public function buffsForTier(pTier:int):Object {
             var pBuffs:Object = {};
-            pBuffs['lib.mult'] = 0.05 * currentTier(this, player);
+            if (pTier == 1){
+                pBuffs['int.mult'] = 0.05;
+            }
+            if (pTier == 2){
+                pBuffs['int.mult'] = 0.15;
+                pBuffs['lib.mult'] = 0.05;
+            }
+            if (pTier == 3){
+                pBuffs['int.mult'] = 0.25;
+                pBuffs['lib.mult'] = 0.10;
+            }
             return pBuffs;
         }
 
-        public function HellHoundFireBalls() {
-            super(mName + " IM", mName, SLOT_TESTICLES, 4);
+        public function EyeOfTheTigerMutation() {
+            super(mName + " IM", mName, SLOT_EYES, 4);
         }
 
     }

@@ -41,6 +41,7 @@ public class CheshireRace extends Race{
 				.faceType(Face.CHESHIRE, +2)
 				.faceType(Face.CHESHIRE_SMILE, +2)
 				.eyeType(Eyes.CAT, +1)
+				.eyeColor(ANY("Yellow"), +1)
 				.earType(Ears.CAT, +1)
 				.tongueType(Tongue.CAT, +1)
 				.tailType(Tail.CAT, +1)
@@ -58,6 +59,7 @@ public class CheshireRace extends Race{
 				);
 		
 		addMutation(IMutationsLib.CatLikeNimblenessIM);
+		addMutation(IMutationsLib.EyeOfTheTigerIM);
 		
 		buildTier(11, "cheshire cat")
 				.buffs({

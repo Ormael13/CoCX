@@ -6345,7 +6345,7 @@ use namespace CoC;
 		{
 			var MBCap:Number = 1;
 			if (hasPerk(PerkLib.MindbreakerBrain1toX)) MBCap += 0.50*perkv1(PerkLib.MindbreakerBrain1toX);
-			removeCurse("inte", -3);
+			removeCurse("int", -3);
 			removeCurse("wis", -3);
 			removeCurse("lib", -3);
 			if (buff("Devoured Mind").getValueOfStatBuff("int.mult") < MBCap){
