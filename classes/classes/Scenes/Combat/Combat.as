@@ -6777,8 +6777,8 @@ public class Combat extends BaseContent {
             //One final round
             damage = Math.round(damage);
             if (SpecialEffect == "KamaitachiScythe"){
-                if (!monster.hasStatusEffect(StatusEffects.KamaitachiBleed)) monster.createStatusEffect(StatusEffects.KamaitachiBleed,0,0,0,0);
-                else monster.addStatusValue(StatusEffects.KamaitachiBleed, 1, player.spe*2);
+                if (!monster.hasStatusEffect(StatusEffects.KamaitachiBleed)) monster.createStatusEffect(StatusEffects.KamaitachiBleed,(CalcBaseDamageUnarmed()/2)*BleedDamageBoost(),0,0,0);
+                else monster.addStatusValue(StatusEffects.KamaitachiBleed, 1, (CalcBaseDamageUnarmed()/2)*BleedDamageBoost());
             }
             if (SpecialEffect == "WendigoClaw"){
                 monster.addCurse("tou.mult",0.05,2);
