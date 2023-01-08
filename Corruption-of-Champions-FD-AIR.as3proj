@@ -4,7 +4,7 @@
   <output>
     <movie outputType="Application" />
     <movie input="" />
-    <movie path="..\..\Desktop\CoC_Xianxia_apk_0.8s7" />
+    <movie path="C:\Users\Marcin\Desktop\CoC-Mobile.swf" />
     <movie fps="30" />
     <movie width="800" />
     <movie height="600" />
