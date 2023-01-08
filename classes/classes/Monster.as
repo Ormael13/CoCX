@@ -2880,6 +2880,22 @@ import flash.utils.getQualifiedClassName;
 				}
 				addStatusValue(StatusEffects.Hypermode,1,-1);
 			}
+			if(hasStatusEffect(StatusEffects.CouatlHurricane)) {
+				//Deal severe true damage each round
+				var store14:Number = (player.inte + player.spe) * 2;
+				createStatusEffect(StatusEffects.CouatlHurricane, (player.spe*5)+(player.inte*5), 1, 0, 0);
+				store14 = Math.round(store14);
+				if (statusEffectv2(StatusEffects.CouatlHurricane) > 0) store14 *= statusEffectv2(StatusEffects.CouatlHurricane);
+				store14 += statusEffectv1(StatusEffects.CouatlHurricane); //Stacks on itself growing ever stronger
+				store14 += maxHP()*0.02;
+				store14 = SceneLib.combat.doDamage(store14);
+				if(plural) outputText("[Themonster] is violently struck by the ever intensifying windstorm. ");
+				else outputText("[Themonster] are violently struck by the ever intensifying windstorm. ");
+				SceneLib.combat.CommasForDigits(store14);
+				outputText("[pg]");
+				temp = rand(4);
+				if(temp == 3) createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0); outputText("<b>A random flying object caught in the hurricane rams into your opponent, stunning it!</b>\n\n");
+			}
 			if(hasStatusEffect(StatusEffects.IzmaBleed)) {
 				//Countdown to heal
 				if (hasPerk(PerkLib.EnemyFleshConstructType)) addStatusValue(StatusEffects.IzmaBleed, 1, -2);
@@ -2924,6 +2940,7 @@ import flash.utils.getQualifiedClassName;
 				}
 				//Deal damage if still wounded.
 				else {
+
 					var store3:Number = (player.str + player.spe) * 2;
 					var store3a:Number = 1;
 					if (player.hasPerk(PerkLib.ThirstForBlood)) store3a += .25;
@@ -2945,22 +2962,6 @@ import flash.utils.getQualifiedClassName;
 					outputText("[pg]");
 				}
 			}
-			if(hasStatusEffect(StatusEffects.CouatlHurricane)) {
-				//Deal severe true damage each round
-				var store14:Number = (player.inte + player.spe) * 2;
-				createStatusEffect(StatusEffects.CouatlHurricane, (player.spe*5)+(player.inte*5), 1, 0, 0);
-				store14 = Math.round(store14);
-				if (statusEffectv2(StatusEffects.CouatlHurricane) > 0) store14 *= statusEffectv2(StatusEffects.CouatlHurricane);
-				store14 += statusEffectv1(StatusEffects.CouatlHurricane); //Stacks on itself growing ever stronger
-				store14 += maxHP()*0.02;
-				store14 = SceneLib.combat.doDamage(store14);
-				if(plural) outputText("[Themonster] is violently struck by the ever intensifying windstorm. ");
-				else outputText("[Themonster] are violently struck by the ever intensifying windstorm. ");
-				SceneLib.combat.CommasForDigits(store14);
-				outputText("[pg]");
-				temp = rand(4);
-				if(temp == 3) createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0); outputText("<b>A random flying object caught in the hurricane rams into your opponent, stunning it!</b>\n\n");
-			}
 			if(hasStatusEffect(StatusEffects.KamaitachiBleed)) {
 				//This wounds never heals unless by magic
 				//Deal damage if still wounded.
@@ -2972,7 +2973,6 @@ import flash.utils.getQualifiedClassName;
 				store13 = Math.round(store13);
 				if (statusEffectv2(StatusEffects.KamaitachiBleed) > 0) store13 *= statusEffectv2(StatusEffects.KamaitachiBleed);
 				store13 += statusEffectv1(StatusEffects.KamaitachiBleed); //Kamaitachi bleed stacks on itself growing ever stronger
-				store13 += maxHP()*0.02;
 				store13 = SceneLib.combat.doDamage(store13);
 				if(plural) outputText("[Themonster] bleed profusely from the deep wounds your scythes left behind. ");
 				else outputText("[Themonster] bleeds profusely from the deep wounds your scythes left behind. ");
