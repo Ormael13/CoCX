@@ -2940,8 +2940,7 @@ import flash.utils.getQualifiedClassName;
 				}
 				//Deal damage if still wounded.
 				else {
-
-					var store3:Number = (player.str + player.spe) * 2;
+					var store3:Number = SceneLib.combat.CalcBaseDamageUnarmed()/2;
 					var store3a:Number = 1;
 					if (player.hasPerk(PerkLib.ThirstForBlood)) store3a += .25;
 					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store3a += .2;
@@ -2965,10 +2964,17 @@ import flash.utils.getQualifiedClassName;
 			if(hasStatusEffect(StatusEffects.KamaitachiBleed)) {
 				//This wounds never heals unless by magic
 				//Deal damage if still wounded.
-				var store13:Number = (player.str + player.spe) * 2;
+				var store13:Number = SceneLib.combat.CalcBaseDamageUnarmed()/2;
 				var store13a:Number = 1;
-				if (game.player.hasPerk(PerkLib.ThirstForBlood)) store13a += .25;
+				if (player.hasPerk(PerkLib.ThirstForBlood)) store13a += .25;
 				if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store13a += .2;
+				if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1) store13a += .25;
+				if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2) store13a += .25;
+				if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3) store13a += .25;
+				if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 4) store13a += .25;
+				if (player.hasPerk(PerkLib.RacialParagon)) store13a += .5;
+				if (player.hasPerk(PerkLib.Apex)) store13a += .5;
+				if (player.hasPerk(PerkLib.AlphaAndOmega)) store13a += .5;
 				store13 *= store13a;
 				store13 = Math.round(store13);
 				if (statusEffectv2(StatusEffects.KamaitachiBleed) > 0) store13 *= statusEffectv2(StatusEffects.KamaitachiBleed);
@@ -2993,7 +2999,7 @@ import flash.utils.getQualifiedClassName;
 				}
 				//Deal damage if still wounded.
 				else {
-					var store5:Number = (player.str + player.spe) * 2;
+					var store5:Number = SceneLib.combat.CalcBaseDamageUnarmed()/2;
 					var store5a:Number = 1;
 					if (player.hasPerk(PerkLib.ThirstForBlood)) store5a += .25;
 					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store5a += .2;
@@ -3026,7 +3032,12 @@ import flash.utils.getQualifiedClassName;
 				else {
 					var hemorrhage1:Number = 0;
 					hemorrhage1 += maxHP() * statusEffectv2(StatusEffects.Hemorrhage);
-					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) hemorrhage1 *= 1.2;
+					if (player.hasPerk(PerkLib.ThirstForBlood)) hemorrhage1 += .25;
+					if (player.hasPerk(PerkLib.KingOfTheJungle)) hemorrhage1 *= 1.2;
+					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1) hemorrhage1 += .25;
+					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2) hemorrhage1 += .25;
+					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3) hemorrhage1 += .25;
+					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 4) hemorrhage1 += .25;
 					hemorrhage1 = boundInt(1, hemorrhage1, maxHP()*.05);
 					hemorrhage1 = SceneLib.combat.doDamage(hemorrhage1);
 					if (plural) outputText("[Themonster] bleed profusely from the jagged wounds your attack left behind. ");
@@ -3045,7 +3056,12 @@ import flash.utils.getQualifiedClassName;
 				else {
 					var hemorrhage2:Number = 0;
 					hemorrhage2 += maxHP() * statusEffectv2(StatusEffects.HemorrhageArmor);
-					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) hemorrhage2 *= 1.2;
+					if (player.hasPerk(PerkLib.ThirstForBlood)) hemorrhage2 += .25;
+					if (player.hasPerk(PerkLib.KingOfTheJungle)) hemorrhage2 *= 1.2;
+					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1) hemorrhage2 += .25;
+					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2) hemorrhage2 += .25;
+					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3) hemorrhage2 += .25;
+					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 4) hemorrhage2 += .25;
 					hemorrhage2 = boundInt(1, hemorrhage2, maxHP()*.05);
 					hemorrhage2 = SceneLib.combat.doDamage(hemorrhage2);
 					if (plural) outputText("[Themonster] bleed profusely from the jagged wounds that resulted from contact with your armor. ");
@@ -3064,7 +3080,12 @@ import flash.utils.getQualifiedClassName;
 				else {
 					var hemorrhage3:Number = 0;
 					hemorrhage3 += maxHP() * statusEffectv2(StatusEffects.HemorrhageShield);
-					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) hemorrhage3 *= 1.2;
+					if (player.hasPerk(PerkLib.ThirstForBlood)) hemorrhage3 += .25;
+					if (player.hasPerk(PerkLib.KingOfTheJungle)) hemorrhage1 *= 1.2;
+					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1) hemorrhage3 += .25;
+					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2) hemorrhage3 += .25;
+					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3) hemorrhage3 += .25;
+					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 4) hemorrhage3 += .25;
 					hemorrhage3 = boundInt(1, hemorrhage3, maxHP()*.05);
 					hemorrhage3 = SceneLib.combat.doDamage(hemorrhage3);
 					if (plural) outputText("[Themonster] bleed profusely from the jagged wounds your shield left behind. ");
@@ -3083,7 +3104,6 @@ import flash.utils.getQualifiedClassName;
 				else {
 					var hemorrhage4:Number = 0;
 					hemorrhage4 += maxHP() * statusEffectv2(StatusEffects.Hemorrhage2);
-					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) hemorrhage4 *= 1.2;
 					hemorrhage4 = boundInt(1, hemorrhage4, maxHP()*.05);
 					hemorrhage4 = SceneLib.combat.doDamage(hemorrhage4);
 					if (plural) outputText("[Themonster] bleed profusely from the jagged wounds your companion attack left behind. ");
@@ -3130,8 +3150,12 @@ import flash.utils.getQualifiedClassName;
 			if(hasStatusEffect(StatusEffects.Briarthorn)) {
 				var store16:Number = (player.str + player.spe) * 2;
 				var store16a:Number = 1;
-				if (game.player.hasPerk(PerkLib.ThirstForBlood)) store16a += .25;
-				if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store16a += .2;
+				if (player.hasPerk(PerkLib.ThirstForBlood)) store16a += .25;
+				if (player.hasPerk(PerkLib.KingOfTheJungle)) store16a *= 1.2;
+				if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1) store16a += .25;
+				if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2) store16a += .25;
+				if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3) store16a += .25;
+				if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 4) store16a += .25;
 				store16 *= store16a;
 				store16 += maxHP()*0.05;
 				store16 = boundInt(1, store16, maxHP()*.05);
@@ -3148,8 +3172,12 @@ import flash.utils.getQualifiedClassName;
 				} else {
 					var store17:Number = (player.str + player.spe);
 					var store17a:Number = statusEffectv1(StatusEffects.Rosethorn)*0.1;
-					if (game.player.hasPerk(PerkLib.ThirstForBlood)) store17a += .1;
-					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store17a += .08;
+					if (player.hasPerk(PerkLib.ThirstForBlood)) store17a += .25;
+					if (player.hasPerk(PerkLib.KingOfTheJungle)) store17a *= 1.2;
+					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1) store17a += .25;
+					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2) store17a += .25;
+					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3) store17a += .25;
+					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 4) store17a += .25;
 					store17 *= store17a;
 					store17 += maxHP()*0.01;
 					store17 = boundInt(1, store17, maxHP()*.05);
