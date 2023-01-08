@@ -481,6 +481,37 @@ public class CombatUI extends BaseCombatContent {
 			addButton(4, "Release", combat.BearLeggoMyEggo);
 		}
 		else playerBusy = false;
+		if (player.hasStatusEffect(StatusEffects.CallOutKiha)) {
+			if (!InCollection("Kiha", flags[kFLAGS.PLAYER_COMPANION_0], flags[kFLAGS.PLAYER_COMPANION_1], flags[kFLAGS.PLAYER_COMPANION_2], flags[kFLAGS.PLAYER_COMPANION_3])) {
+				outputText("You hear a roar of rage from the sky. [Themonster] peers skyward, but even though you can feel your wedding band tugging, Kiha passing overhead, even you can barely see your naked wife as she comes screaming in, fire trailing from her maw. Her massive axe comes down like a guillotine, and [themonster] falls back from the sheer force of the blow. Kiha jumps back, placing herself firmly between you and [themonster].[pg]");
+				outputText("“<i>Are you okay?</i>” Kiha gasps, her chest heaving. “<i>I got here as fast as I could...My idiot.</i>”");
+				outputText("You assure Kiha that you’re fine now...and that you should focus on the enemy in front of you. You feel nagging doubt, annoyance, and rage flash up from your ring, but Kiha clamps down on her emotions, letting out a low growl.[pg]");
+				outputText("“<i>This idiot is mine!</i>” She declares. “<i>MY idiot! You don’t get to hurt them!</i>” You feel affection rise in your chest, and you don’t even know whose emotions they are.[pg]");
+				outputText("<b>Kiha will fight beside you!</b>[pg]");
+				player.removeStatusEffect(StatusEffects.CallOutKiha);
+				var nextCompanion:int = flags[kFLAGS.PLAYER_COMPANION_0] == "" ? kFLAGS.PLAYER_COMPANION_0 :
+						flags[kFLAGS.PLAYER_COMPANION_1] == "" ? kFLAGS.PLAYER_COMPANION_1 :
+								flags[kFLAGS.PLAYER_COMPANION_2] == "" ? kFLAGS.PLAYER_COMPANION_2 :
+										kFLAGS.PLAYER_COMPANION_3;
+
+				var strKiha:Number = 85;
+				var meleeAtkKiha:Number = 28
+				if (flags[kFLAGS.KIHA_LVL_UP] >= 1) {
+					strKiha += 25 * flags[kFLAGS.KIHA_LVL_UP];
+					meleeAtkKiha += 10 * flags[kFLAGS.KIHA_LVL_UP];
+				}
+				strKiha *= (1 + (0.2 * player.newGamePlusMod()));
+				strKiha = Math.round(strKiha);
+				meleeAtkKiha += (1 + (int)(meleeAtkKiha / 5)) * player.newGamePlusMod();
+				player.createStatusEffect(StatusEffects.CombatFollowerKiha, strKiha, meleeAtkKiha, 0, 0);
+				flags[nextCompanion] = "Kiha";
+			} else {
+				outputText("As you call out, you can feel the heat rising around you. Kiha breathes fire with each exhale, and you can see steam rising from her body. Your dragon-wife is FURIOUS, and you almost feel a little sorry for your foe as Kiha flaps her wings, her axe a blur of motion. You mentally recoil from your ring, as Kiha’s red-hot fury spreads up your arm.[pg]");
+				outputText("<b>Kiha’s attacks have grown frenzied.</b> [pg]");
+				player.removeStatusEffect(StatusEffects.CallOutKiha);
+				player.createOrAddStatusEffect(StatusEffects.FrenziedKiha, 1, 1);
+			}
+		}
 		//ALLIES - 'stupid' ones (elem & golems). Requires PC to NOT be stunned or channel anything.
 		if (!playerBusy) {
 			if (player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn))
@@ -676,10 +707,11 @@ public class CombatUI extends BaseCombatContent {
 				: companionName == "Aurora" ? combat.comfoll.auroraCombatActions
 					: companionName == "Etna" ? combat.comfoll.etnaCombatActions
 						: companionName == "Excellia" ? combat.comfoll.excelliaCombatActions
-							: companionName == "Mitzi" ? combat.comfoll.mitziCombatActions
-								: companionName == "Neisa" ? combat.comfoll.neisaCombatActions
-									: companionName == "Tyrantia" ? combat.comfoll.tyrantiaCombatActions
-										: companionName == "Zenji" ? combat.comfoll.zenjiCombatActions : null;
+							: companionName == "Kiha" ? combat.comfoll.kihaCombatActions
+								: companionName == "Mitzi" ? combat.comfoll.mitziCombatActions
+									: companionName == "Neisa" ? combat.comfoll.neisaCombatActions
+										: companionName == "Tyrantia" ? combat.comfoll.tyrantiaCombatActions
+											: companionName == "Zenji" ? combat.comfoll.zenjiCombatActions : null;
 		//do action
 		if (clearAndNext) {
 			clearOutput();

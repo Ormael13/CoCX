@@ -942,6 +942,11 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
 				.disableIf(player.isGenderless(), "Not for genderless!"); //avoiding weirdness in defeat scene
         addButton(10, "Talk", TalkWithKiha).hint("Talk to Kiha… but would she want to talk?");
         if (CanVisitKids) addButton(11, "Kids", visitKids);
+        if (player.hasPerk(PerkLib.BasicLeadership)) {
+            if (flags[kFLAGS.PLAYER_COMPANION_1] == "") addButton(12, "Team", kihaHenchmanOption).hint("Ask Kiha to join you in adventures outside camp.");
+            else if (flags[kFLAGS.PLAYER_COMPANION_1] == "Kiha") addButton(12, "Team", kihaHenchmanOption).hint("Ask Kiha to stay in camp.");
+            else addButtonDisabled(12, "Team", "You already have other henchman accompany you. Ask him/her to stay at camp before you talk with Etna about accompaning you.");
+        }
 	} else {
 		if (output) {
 			clearOutput();
@@ -3158,6 +3163,34 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         outputText("As you head over towards (Kiha/Electra)’s part of camp, you see Kiha and Electra, to your surprise, sitting over a series of lines carved into the dirt. They each have some stones, Kiha’s are black, and Electra’s are white, and they appear to be playing some sort of game with the colored rocks. As you draw near, the two pull a blanket over their game, looking at you. ")
         if (fromElectra) outputText("You tell Electra that you came to see her, and she grins, bobbing up and down excitedly. Kiha nods respectfully, leaving without a word, and Electra tilts her head slightly, static filling the air. “<i>What’s up, [name]?</i>” ");
         else outputText("You ask Kiha if she has a moment, and she nods. Electra leaves, and your fiery dragoness smiles slightly. ");
+    }
+
+
+    public function kihaHenchmanOption():void
+    {
+        clearOutput();
+        if (flags[kFLAGS.PLAYER_COMPANION_1] == "") {
+            outputText("\"<i>Hey my idiot. Want me to tarry along and scorch their hides? Why not, give those demons what they deserve!</i>\"\n\n");
+            outputText("Kiha is now following you around.\n\n");
+            var strKiha:Number = 85;
+            var meleeAtkKiha:Number = 28
+            if (flags[kFLAGS.KIHA_LVL_UP] >= 1) {
+                strKiha += 25 * flags[kFLAGS.KIHA_LVL_UP];
+                meleeAtkKiha += 10 * flags[kFLAGS.KIHA_LVL_UP];
+            }
+            strKiha *= (1 + (0.2 * player.newGamePlusMod()));
+            strKiha = Math.round(strKiha);
+            meleeAtkKiha += (1 + (int)(meleeAtkKiha / 5)) * player.newGamePlusMod();
+            player.createStatusEffect(StatusEffects.CombatFollowerKiha, strKiha, meleeAtkKiha, 0, 0);
+            flags[kFLAGS.PLAYER_COMPANION_1] = "Kiha";
+        }
+        else {
+            outputText("Kiha is no longer following you around.\n\n");
+            player.removeStatusEffect(StatusEffects.CombatFollowerKiha);
+            flags[kFLAGS.PLAYER_COMPANION_1] = "";
+        }
+        doNext(warmLoverKihaIntro);
+        cheatTime(1/12);
     }
 }
 }
