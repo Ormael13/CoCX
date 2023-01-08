@@ -13,6 +13,7 @@ import classes.Scenes.API.Encounters;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Beach.*;
 import classes.Scenes.Areas.Lake.GooGirlScene;
+import classes.Scenes.Dungeons.DemonLab;
 import classes.Scenes.NPCs.CeaniScene;
 import classes.Scenes.NPCs.EtnaFollower;
 import classes.Scenes.NPCs.Forgefather;
@@ -165,6 +166,13 @@ import classes.Scenes.SceneLib;
 					return (player.hasKeyItem("Old Pickaxe") > 0 && Forgefather.materialsExplained);
 				},
 				chance: 1
+			}, {
+				name: "demonProjects",
+				chance: 0.2,
+				when: function ():Boolean {
+					return DemonLab.MainAreaComplete >= 4;
+				},
+				call: SceneLib.exploration.demonLabProjectEncounters
 			});
 		}
 

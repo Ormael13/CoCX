@@ -10,6 +10,7 @@ import classes.Scenes.API.Encounters;
 import classes.Scenes.API.FnHelpers;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Forest.*;
+import classes.Scenes.Dungeons.DemonLab;
 import classes.Scenes.Monsters.DarkElfScene;
 import classes.Scenes.NPCs.AikoScene;
 import classes.Scenes.NPCs.CelessScene;
@@ -227,7 +228,14 @@ use namespace CoC;
 							return (flags[kFLAGS.LUNA_FOLLOWER] == 2);
 						},
 						chance: 2
-					});
+					}, {
+				name: "demonProjects",
+				chance: 0.2,
+				when: function ():Boolean {
+					return DemonLab.MainAreaComplete >= 4;
+				},
+				call: SceneLib.exploration.demonLabProjectEncounters
+			});
 			_forestEncounter = Encounters.group("forest", {
 						//General Golems, Goblin and Imp Encounters
 						name: "common",
@@ -459,7 +467,14 @@ use namespace CoC;
 							SceneLib.werewolfFemaleScene.introWerewolfFemale();
 						},
 						chance: 0.50
-					});
+					}, {
+				name: "demonProjects",
+				chance: 0.2,
+				when: function ():Boolean {
+					return DemonLab.MainAreaComplete >= 4;
+				},
+				call: SceneLib.exploration.demonLabProjectEncounters
+			});
 			_deepwoodsEncounter = Encounters.group("deepwoods", /*CoC.instance.commonEncounters,*/ {
 				name: "shrine",
 				when: function():Boolean {
@@ -706,6 +721,13 @@ use namespace CoC;
 				name  : "healpill",
 				call  : findHPill,
 				chance: 0.20
+			}, {
+				name: "demonProjects",
+				chance: 0.2,
+				when: function ():Boolean {
+					return DemonLab.MainAreaComplete >= 4;
+				},
+				call: SceneLib.exploration.demonLabProjectEncounters
 			});
 		}
 

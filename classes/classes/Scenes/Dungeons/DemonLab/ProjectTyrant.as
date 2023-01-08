@@ -161,11 +161,14 @@ public class ProjectTyrant extends Monster {
     }
 
     override public function defeated(hpVictory:Boolean):void {
-        SceneLib.dungeons.demonLab.PrTyrantVictory();
+        if (inDungeon)
+            SceneLib.dungeons.demonLab.PrTyrantVictory();
+        else cleanupAfterCombat();
     }
 
     override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void {
-        SceneLib.dungeons.demonLab.BadEndExperiment();
+        if (inDungeon) SceneLib.dungeons.demonLab.BadEndExperiment();
+        else cleanupAfterCombat();
     }
 }
 

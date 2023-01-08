@@ -926,6 +926,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const DivineShield:StatusEffectType              = mkCombat("Divine shield");
 		public static const Distracted:StatusEffectType                = mkCombat("Distracted");
 		public static const DriderKiss:StatusEffectType                = mkCombat("Drider Kiss");
+		public static const DragonsNom:StatusEffectType                = mkCombat("Dragon Nom");
 		public static const DragonWaterBreath:StatusEffectType         = mkCombat("Dragon Water Breath");
 		public static const EarthStance:StatusEffectType	           = mkCombat("Earth Stance");
 		public static const ElectrifyWeapon:StatusEffectType       	   = mkCombat("ElectrifyWeapon");

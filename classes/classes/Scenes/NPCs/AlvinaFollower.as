@@ -38,6 +38,7 @@ public class AlvinaFollower extends NPCAwareContent implements TimeAwareInterfac
 	public var AlvinaPurified:Boolean;
 	public var AlvinaInfernalOilAsked:Boolean;
 	public var AlvinaInfernalOilCooldown:int;
+	public var AlvinaGaveScroll:Boolean;
 
 	public function stateObjectName():String {
 		return "AlvinaFollower";
@@ -62,29 +63,31 @@ public class AlvinaFollower extends NPCAwareContent implements TimeAwareInterfac
 		AlvinaPurified = false;
 		AlvinaInfernalOilAsked = false;
 		AlvinaInfernalOilCooldown = 0;
+		AlvinaGaveScroll = false;
 	}
 
 	public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
 		if (o) {
-			JojoDevilPurification = "JojoDevilPurification" in o ? o["JojoDevilPurification"] : 0;
-			DefeatedAlvinaFirstStage = "DefeatedAlvinaFirstStage" in o ? o["DefeatedAlvinaFirstStage"] : false;
-			GaveAlvinaFafnirTear = "GaveAlvinaFafnirTear" in o ? o["GaveAlvinaFafnirTear"] : false;
-			GaveAlvinaFlowers = "GaveAlvinaFlowers" in o ? o["GaveAlvinaFlowers"] : false;
-			GaveAlvinaChocolate = "GaveAlvinaChocolate" in o ? o["GaveAlvinaChocolate"] : false;
-			GaveAlvinaMrPaw = "GaveAlvinaMrPaw" in o ? o["GaveAlvinaMrPaw"] : false;
-			GaveAlvinaWand = "GaveAlvinaWand" in o ? o["GaveAlvinaWand"] : false;
-			MetAlvinaAtBar = "MetAlvinaAtBar" in o ? o["MetAlvinaAtBar"] : false;
-			GiftCooldown = "GiftCooldown" in o ? o["GiftCooldown"] : 0;
-			WandCooldown = "WandCooldown" in o ? o["WandCooldown"] : 0;
-			DateFailed = "DateFailed" in o ? o["DateFailed"] : false;
-			FirstDateSuccess = "FirstDateSuccess" in o ? o["FirstDateSuccess"] : false;
-			SecondDateSuccess = "SecondDateSuccess" in o ? o["SecondDateSuccess"] : false;
-			FightForAlvina = "FightForAlvina" in o ? o["FightForAlvina"] : false;
-			AlvinaFightingToCorruptYou = "AlvinaFightingToCorruptYou" in o ? o["AlvinaFightingToCorruptYou"] : false;
-			AlvinaDied = "AlvinaDied" in o ? o["AlvinaDied"] : false;
-			AlvinaPurified = "AlvinaPurified" in o ? o["AlvinaPurified"] : false;
-			AlvinaInfernalOilAsked = "AlvinaInfernalOilAsked" in o ? o["AlvinaInfernalOilAsked"] : false;
-			AlvinaInfernalOilCooldown = "AlvinaInfernalOilCooldown" in o ? o["AlvinaInfernalOilCooldown"] : 0;
+			JojoDevilPurification = valueOr(o["JojoDevilPurification"], 0);
+			DefeatedAlvinaFirstStage = valueOr(o["DefeatedAlvinaFirstStage"], false);
+			GaveAlvinaFafnirTear = valueOr(o["GaveAlvinaFafnirTear"], false);
+			GaveAlvinaFlowers = valueOr(o["GaveAlvinaFlowers"], false);
+			GaveAlvinaChocolate = valueOr(o["GaveAlvinaChocolate"], false);
+			GaveAlvinaMrPaw = valueOr(o["GaveAlvinaMrPaw"], false);
+			GaveAlvinaWand = valueOr(o["GaveAlvinaWand"],false);
+			MetAlvinaAtBar = valueOr(o["MetAlvinaAtBar"], false);
+			GiftCooldown = valueOr(o["GiftCooldown"], 0);
+			WandCooldown = valueOr(o["WandCooldown"], 0);
+			DateFailed = valueOr(o["DateFailed"], false);
+			FirstDateSuccess = valueOr(o["FirstDateSuccess"], false);
+			SecondDateSuccess = valueOr(o["SecondDateSuccess"], false);
+			FightForAlvina = valueOr(o["FightForAlvina"], false);
+			AlvinaFightingToCorruptYou = valueOr(o["AlvinaFightingToCorruptYou"], false);
+			AlvinaDied = valueOr(o["AlvinaDied"], false);
+			AlvinaPurified = valueOr(o["AlvinaPurified"], false);
+			AlvinaInfernalOilAsked = valueOr(o["AlvinaInfernalOilAsked"], false);
+			AlvinaInfernalOilCooldown = valueOr(o["AlvinaInfernalOilCooldown"], 0);
+			AlvinaGaveScroll = valueOr(o["AlvinaGaveScroll"],false);
 		} else resetState();
 	}
 
@@ -108,7 +111,8 @@ public class AlvinaFollower extends NPCAwareContent implements TimeAwareInterfac
 			"AlvinaDied" : AlvinaDied,
 			"AlvinaPurified": AlvinaPurified,
 			"AlvinaInfernalOilAsked": AlvinaInfernalOilAsked,
-			"AlvinaInfernalOilCooldown": AlvinaInfernalOilCooldown
+			"AlvinaInfernalOilCooldown": AlvinaInfernalOilCooldown,
+			"AlvinaGaveScroll": AlvinaGaveScroll
 		}
 	}
 
@@ -1401,6 +1405,7 @@ public function alvinaCampAdvancedStudy():void
 		outputText("<b>You gained a scroll of Polar Midnight.</b>\n\n");
 		player.addStatusValue(StatusEffects.AlvinaTraining2, 1, 1);
 		inventory.takeItem(consumables.POL_MID, camp.campFollowers);
+		AlvinaGaveScroll = true;
 		eachMinuteCount(5);
 	}
 	else if (player.statusEffectv1(StatusEffects.AlvinaTraining2) == 2 && player.hasItem(useables.AMETIST, 1) && player.hasItem(consumables.L_DRAFT, 5) && player.hasItem(useables.SOULGEM, 5) && (player.hasKeyItem("Marae's Lethicite") >= 0 && player.keyItemvX("Marae's Lethicite", 1) > 0 || player.hasKeyItem("Stone Statue Lethicite") >= 0)) {
@@ -1779,15 +1784,20 @@ public function postMarriageSleep():void {
 		spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2Concealed_16bit);
 		outputText("You ask Alvina if there's anything useful she could teach you.[pg]");
 		outputText("Alvina lights up at your question and searches her belongings for something before answering \"<i>While most of my research is on the topic of black magic, something I wish you to use carefully and with restraints, I did devise a few powerful spells, though learning them requires an immense amount of talent.</i>\" [pg]");
-		outputText("She produces a scroll, handing it to you \"This here is Polar Midnight, one of my signature spells. It wasn't made to be handled by common mages and could very well kill you if misused, but seeing as you defeated me in combat, I believe you can handle it just fine. I had another spell scroll called Meteor Storm but a thief stole it from me while I wasn't home. I could make a new scroll seeing as I know the spell but it would take a lot of time to transcribe.</i>\"[pg]");
-		if (player.hasStatusEffect(StatusEffects.KnowsPolarMidnight)) {
-			outputText("You tell her that you already know this spell... \"<i>Oh, ahh I see, yes thats right I gave it to you sometime before our fight... How could I forget?</i>\"[pg]")
-			doNext(camp.campFollowers);
+		if (AlvinaGaveScroll) {
+			outputText("\"<i>Although I have given you the only one I had on hand. I had another spell scroll called Meteor Storm but a thief stole it from me while I wasn't home. I could make a new scroll seeing as I know the spell but it would take a lot of time to transcribe. </i>\"");
+		} else {
+			outputText("She produces a scroll, handing it to you \"This here is Polar Midnight, one of my signature spells. It wasn't made to be handled by common mages and could very well kill you if misused, but seeing as you defeated me in combat, I believe you can handle it just fine. I had another spell scroll called Meteor Storm but a thief stole it from me while I wasn't home. I could make a new scroll seeing as I know the spell but it would take a lot of time to transcribe.</i>\"[pg]");
+			if (player.hasStatusEffect(StatusEffects.KnowsPolarMidnight)) {
+				outputText("You tell her that you already know this spell... \"<i>Oh, ahh I see, yes thats right I gave it to you sometime before our fight... How could I forget?</i>\"[pg]")
+				doNext(camp.campFollowers);
+			} else {
+				outputText("<b>You gained a scroll of Polar Midnight.</b>\n\n");
+				inventory.takeItem(consumables.POL_MID, camp.campFollowers);
+			}
+			AlvinaGaveScroll = true;
 		}
-		else {
-			outputText("<b>You gained a scroll of Polar Midnight.</b>\n\n");
-			inventory.takeItem(consumables.POL_MID, camp.campFollowers);
-		}
+		doNext(alvinaPureMainCampMenu);
 	}
 
 	public function alvinaPureSexMenu():void {

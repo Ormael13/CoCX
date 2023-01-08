@@ -9,6 +9,7 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
 import classes.Scenes.Areas.Battlefield.*;
+import classes.Scenes.Dungeons.DemonLab;
 import classes.Scenes.NPCs.EtnaFollower;
 import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.SceneLib;
@@ -94,7 +95,9 @@ use namespace CoC;
 			choice[choice.length] = 4; //Goblin/Imp group enemies
 			choice[choice.length] = 5; //Goblin/Imp group enemies
 			choice[choice.length] = 6; //Items
-			choice[choice.length] = 7; //Find nothing!
+			if (DemonLab.MainAreaComplete >= 4)
+				choice[choice.length] =76;
+			choice[choice.length] = 10; //Find nothing!
 			
 			select = choice[rand(choice.length)];
 			switch(select) {
@@ -147,6 +150,9 @@ use namespace CoC;
 							doNext(camp.returnToCampUseOneHour);
 						}
 					}
+					break;
+				case 7:
+					SceneLib.exploration.demonLabProjectEncounters();
 					break;
 				default:
 					clearOutput();
