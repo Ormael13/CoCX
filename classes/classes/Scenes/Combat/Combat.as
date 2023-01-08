@@ -6682,9 +6682,8 @@ public class Combat extends BaseContent {
         return Damage;
     }
 
-    public function CalcBaseDamageUnarmed():Number{
+    public function CalcBaseDamageUnarmed(damage:Number = 0):Number{
         //BASIC DAMAGE STUFF
-        var damage:Number = 0;
         if (player.hasPerk(PerkLib.VerdantMight)){
             damage += player.tou;
             damage += scalingBonusToughness() * 0.25;
@@ -6714,9 +6713,8 @@ public class Combat extends BaseContent {
         return damage;
     }
 
-    public function CalcBaseDamageArmed():Number{
+    public function CalcBaseDamageArmed(damage:Number = 0):Number{
         //BASIC DAMAGE STUFF
-        var damage:Number = 0;
         if (player.hasPerk(PerkLib.VerdantMight)){
             damage += player.tou;
             damage += scalingBonusToughness() * 0.25;
