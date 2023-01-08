@@ -27,29 +27,33 @@ public class Lethice extends Monster
 			this.ballSize = 4;
 			this.hips.type = Hips.RATING_SLENDER;
 			this.butt.type = Butt.RATING_TIGHT;
-			initStrTouSpeInte(320, 320, 150, 150);
-			initWisLibSensCor(150, 180, 50, 100);
+			initStrTouSpeInte(330, 400, 200, 400);
+			initWisLibSensCor(250, 220, 100, 100);
 			this.weaponName = "whip";
-			this.weaponAttack = 70;
+			this.weaponAttack = 170;
 			this.weaponVerb = "whip";
 			this.armorName = "wraps";
-			this.armorDef = 36;
-			this.armorMDef = 72;
-			this.bonusHP = 3000;
-			this.bonusLust = 280;
-			this.gems = 200 + rand(100);
-			this.additionalXP = 3000;
-			this.level = 50;
+			this.armorDef = 80;
+			this.armorMDef = 160;
+			this.bonusHP = 5000;
+			this.bonusLust = 400;
+			this.gems = 1200 + rand(100);
+			this.additionalXP = 7000;
+			this.level = 80;
 			this.lustVuln = 0.15;
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
+			this.createPerk(PerkLib.GoliathI, 0, 0, 0, 0);
+			this.createPerk(PerkLib.CheetahI, 0, 0, 0, 0);
+			this.createPerk(PerkLib.Diehard, 0, 0, 0, 0);
+			this.createPerk(PerkLib.ImprovedDiehard, 0, 0, 0, 0);
 			this.createPerk(PerkLib.Regeneration, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);
-			this.createPerk(PerkLib.OverMaxHP, 50, 0, 0, 0);//v1 = enemy lvl
+			this.createPerk(PerkLib.OverMaxHP, 80, 0, 0, 0);//v1 = enemy lvl
 			this.drop = new WeightedDrop(weapons.L_WHIP, 1);
 			this.checkMonster();
 		}
@@ -169,15 +173,14 @@ public class Lethice extends Monster
 		private function demonicArouse():void
 		{
 			outputText("Lethice’s hands blur in a familiar set of arcane motions, similar to the magical gestures you’ve seen from the imps. Hers are a thousand times more intricate. Her slender fingers move with all the precision of a master artist’s brush, wreathed in sparks of black energy.");
-			var l:Number = player.lib / 10 + player.cor / 10 + 25;
+			var l:Number = player.lib + player.cor + 125;
 			if (player.hasStatusEffect(StatusEffects.MinotaurKingsTouch)) l *= 1.25;
-			player.takeLustDamage(l, true);
-	
-			if (player.lust <= 30) outputText("\n\nYou feel strangely warm.");
-			else if (player.lust <= 60) outputText("\n\nBlood rushes to your groin as a surge of arousal hits you, making your knees weak.");
-			else if (player.lust <= 75) outputText("\n\nDespite the dire situation, your mind keeps filling with images of Lethice fully uncovered, her body poised just inches away. You can’t help but want her.");
-			else if (player.lust <= 90) outputText("\n\nThe dark power forces ideas into your mind, thoughts of you on your knees, hands shackled behind you and your mistress’s perfect, pretty pussy in front of you, awaiting your tongue. You barely shake it off.");
-			else if (player.lust <= 100) outputText("\n\nYour mind is filled with visions of lovely pussies, perfect tits, and one overriding emotion - submission. She’s making you want to give up and indulge in her tainted wiles, and the worst part is... you’re having a hard time coming up with a reason not to. You barely pull back from an all-consuming image of her slick, juicy snatch, shaking your head in wonderment. How can you possibly defeat her?");
+			player.takeLustDamage(l, true);	
+			if (player.lust <= (player.lust100 * 0.3)) outputText("\n\nYou feel strangely warm.");
+			else if (player.lust <= (player.lust100 * 0.6)) outputText("\n\nBlood rushes to your groin as a surge of arousal hits you, making your knees weak.");
+			else if (player.lust <= (player.lust100 * 0.75)) outputText("\n\nDespite the dire situation, your mind keeps filling with images of Lethice fully uncovered, her body poised just inches away. You can’t help but want her.");
+			else if (player.lust <= (player.lust100 * 0.9)) outputText("\n\nThe dark power forces ideas into your mind, thoughts of you on your knees, hands shackled behind you and your mistress’s perfect, pretty pussy in front of you, awaiting your tongue. You barely shake it off.");
+			else if (player.lust <= player.lust100) outputText("\n\nYour mind is filled with visions of lovely pussies, perfect tits, and one overriding emotion - submission. She’s making you want to give up and indulge in her tainted wiles, and the worst part is... you’re having a hard time coming up with a reason not to. You barely pull back from an all-consuming image of her slick, juicy snatch, shaking your head in wonderment. How can you possibly defeat her?");
 			else outputText("You give yourself over to the alien imagery invading your mind, wallowing a dozen conflicting fantasies. In one, you’re tied to Lethice’s clit-piercing by a leash, lapping her spilled cunt-juice from the ground. In another, you’re begging her to let you tongue her asshole. Each is more perverse than the last, and they blend together into an endless tableau of submission.");
 		}
 
@@ -185,7 +188,6 @@ public class Lethice extends Monster
 		{
 			//Adds a button - Dispel - Only if PC knows Whitefire
 			outputText("Lethice gestures at the ground underfoot. A pulse of black mist rolls out around you for dozens of feet in every direction. The crowd of watching demons pulls back fearfully, save for a few foolish slaves who blithely step into the magic circle. A second later, hundreds of oily, black tentacles emerge from the floor, unspooling from whatever horrible dimension they were summoned from. They immediately attack every living creature within reach, wrapping around wrists and ankles, violating vaginas and assholes alike. They come at you from every direction!");
-
 			// v1 - remaining duration
 			// v2 - rounds applied
 			// v3 - grappled
@@ -218,7 +220,6 @@ public class Lethice extends Monster
 				outputText("You struggle and manage to raise your arm against the tight grasp of the tentacles, managing to")
 			}
 			outputText(" spray forth a torrent of white flame, burning the shadowy constructs away in the light of your pure, focused fire. In the span of seconds, Lethice’s spell is gone.");
-
 			EngineCore.doNext(SceneLib.combat.combatMenu);
 			if (game.player.hasStatusEffect(StatusEffects.BloodMage)) game.player.HP -= 30;
 			else game.player.mana -= 30;
@@ -233,8 +234,7 @@ public class Lethice extends Monster
 		{
 			//I can’t believe it’s not whitefire. Cannot be avoided/blocked. Medium damage.
 			outputText("Lethice narrows her eyes, focusing her mind with deadly intent. She snaps her fingers and a gout of black, twisting flames engulfs you!");
-
-			var damage:Number = 100 + rand(25);
+			var damage:Number = (this.inte + 100 + rand(25)) * 10;
 			if (player.hasPerk(PerkLib.FromTheFrozenWaste) || player.hasPerk(PerkLib.ColdAffinity)) damage *= 3;
 			if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) damage *= 0.3;
 			player.takeFireDamage(damage,true);
@@ -298,7 +298,7 @@ public class Lethice extends Monster
 			outputText("\n\n<i>\"I tire of this game!\"</i> she shouts, grasping at the arms of her towering throne. Suddenly, her gaze snaps from you, to the horde of demons clamoring in the stands. <i>\"What are you waiting for, fools!? Get [him]!\"</i>");
 			outputText("\n\nOh, shit. You look up in time to see a cavalcade of demonic flesh swooping down from on high, bodies practically tumbling one over the other to get at you. The horde takes every physical form imaginable: towering, hulking brutish males, inhumanly curvaceous succubi, and the reverse of both - not to mention hermaphrodites masculine and feminine - and all with every sort of transformation. Bestial creatures, dragon-like incubi, and succubi whose skins range the colors of the rainbow and so, so much more come piling down the throne hall in a ceaseless barrage of flesh and decadence. They won’t stop until they’ve dragged you to the ground and fucked you into submission!");
 			// 9999 reconfigure for the group
-			HP   = maxHP();
+			HP   = maxOverHP();
 			lust = 10;
 			_fightPhase = 2;
 			a = "the ";
@@ -316,7 +316,6 @@ public class Lethice extends Monster
 		{
 			var atks:Array = [demonLustMagic, dirtyDancing, hornyPoke, crushingBodies];
 			if (rand(10) == 0 && !player.hasStatusEffect(StatusEffects.Blind)) atks.push(bukkakeTime);
-
 			atks[rand(atks.length)]();
 		}
 
@@ -324,29 +323,28 @@ public class Lethice extends Monster
 		{
 			var l:Number = 0;
 			outputText("Though the front rank of demons are compressed so tight against you by their cohorts that they can’t move, the second and third rings have more than ample room to move their arms about, tracing arcane runes in the air. You know you can resist the lust-magics of a mere demon, but so many at once...");
-
 			if (rand(100) >= player.lib / 2)
 			{
 				outputText("\n\nYou close your eyes, focusing the entirety of your will inwards. Though a burn of arousal stings your flesh, you keep your mind centered long enough to resist the brunt of the demon's magic. Taking a deep breath, you let out a raging battle cry and shove the horde back, punishing those who dared try to ensorcell you.");
 			}
-			else if (player.lust <= 33)
+			else if (player.lust <= (player.lust100 * 0.33))
 			{
 				outputText("\n\nYou try your hardest to push back the lustful, submissive thoughts that begin to permeate your mind, but against so many concentrated wills... even you can't hold back. You moan as the first hints of arousal spread through you, burning in your loins. What you wouldn't give for a fuck about now!");
-				l = player.lib / 10 + player.cor / 10 + 10;
+				l = player.lib + player.cor + 100;
 				if (player.hasStatusEffect(StatusEffects.MinotaurKingsTouch)) l *= 1.25;
 				player.takeLustDamage(l, true);
 			}
-			else if (player.lust <= 66)
+			else if (player.lust <= (player.lust100 * 0.66))
 			{
 				outputText("\n\nAt first, you try to think of something else... but in your state, that just ends up being sex: hot, dirty, sweaty fucking surrounded by a sea of bodies. With a gasp, you realize you've left yourself open to the demons, and they're all too happy to flood your mind with images of submission and wanton debauchery, trying to trick you into letting them take you!");
-				l = player.lib / 10 + player.cor / 10 + 10;
+				l = player.lib + player.cor + 100;
 				if (player.hasStatusEffect(StatusEffects.MinotaurKingsTouch)) l *= 1.25;
 				player.takeLustDamage(l, true);
 			}
 			else
 			{
 				outputText("\n\nYou don't even try to resist anymore -- your mind is already a cornucopia of lustful thoughts, mixed together with desire that burns in your veins and swells in your loins, all but crippling your ability to resist. The demons only add to it, fueling your wanton imagination with images of hedonistic submission, of all the wondrous things they could do to you if you only gave them the chance. It's damn hard not to.");
-				l = player.lib / 10 + player.cor / 10 + 10;
+				l = player.lib + player.cor + 100;
 				if (player.hasStatusEffect(StatusEffects.MinotaurKingsTouch)) l *= 1.25;
 				player.takeLustDamage(l, true);
 			}
@@ -361,10 +359,10 @@ public class Lethice extends Monster
 			}
 			else
 			{
-				if (player.lust <= 33) outputText("\n\nYou try and push back, to ignore the lustful bodies and lurid performances going on around you, but the effect they have on you is undeniable -- heat spreads like wildfire through your [skinFurScales], and your [armor] suddenly feels a whole lot less comfortable.");
-				else if (player.lust <= 66) outputText("\n\nTry as you might to resist, the demons are having an effect on you! Your whole body is flushed with unbidden arousal, burning with lust for the demonic sluts pressing against you. The temptresses are almost enough to want to make you lay down your arms and bend one of them double for a good, hard fuck!");
+				if (player.lust <= (player.lust100 * 0.33)) outputText("\n\nYou try and push back, to ignore the lustful bodies and lurid performances going on around you, but the effect they have on you is undeniable -- heat spreads like wildfire through your [skinFurScales], and your [armor] suddenly feels a whole lot less comfortable.");
+				else if (player.lust <= (player.lust100 * 0.66)) outputText("\n\nTry as you might to resist, the demons are having an effect on you! Your whole body is flushed with unbidden arousal, burning with lust for the demonic sluts pressing against you. The temptresses are almost enough to want to make you lay down your arms and bend one of them double for a good, hard fuck!");
 				else outputText("\n\nOh gods! The way their bodies undulate, caressing and cumming, moaning as they're fucked from behind and transfer all of that energy to you, makes your body burn with desire. It's almost too much to bear!");
-				var l:Number = player.lib / 10 + player.cor / 10 + 10;
+				var l:Number = player.lib + player.cor + 100;
 				if (player.hasStatusEffect(StatusEffects.MinotaurKingsTouch)) l *= 1.25;
 				player.takeLustDamage(l, true);
 			}
@@ -392,7 +390,7 @@ public class Lethice extends Monster
 			}
 			else
 			{
-				var damage:Number = 70 - rand(player.tou);
+				var damage:Number = 7000 - rand(player.touStat.core.value);
 				outputText(" Several of the big, stout horns slam into you, given all the more force thanks to the crushing waves of demons pushing them forward. You yelp in pain as they score your flesh!");
 				player.takePhysDamage(damage,true);
 			}
@@ -407,7 +405,7 @@ public class Lethice extends Monster
 			}
 			else
 			{
-				var damage:Number = 70 - rand(player.tou);
+				var damage:Number = 7000 - rand(player.touStat.core.value);
 				outputText(" You squirm out of their crushing embrace, trying to crawl away on the ground, but if they can't squeeze you down the demons seem happy to trample you! You scream in alarm and pain as dozens of feet, hooves, claws, and other appendages come crushing down on you!");
 				player.takePhysDamage(damage,true);
 			}
@@ -428,7 +426,7 @@ public class Lethice extends Monster
 			else if (ev == "Evade")
 			{
 				outputText(" You at least manage to close your eyes before the wave of spooge hits you, splattering all over your [armor].");
-				player.takeLustDamage(5, true);
+				player.takeLustDamage(Math.round(player.maxLust() * 0.05), true);
 			}
 			else if (ev != null)
 			{
@@ -437,7 +435,7 @@ public class Lethice extends Monster
 			else
 			{
 				outputText(" You take a huge, fat, musky glob of spunk right to the eyes! You yelp in alarm, trying to wipe the salty, burning demonic cock-cream out, but it's simply too thick! Yuck!");
-				player.takeLustDamage(5, true);
+				player.takeLustDamage(Math.round(player.maxLust() * 0.05), true);
 				if (!player.hasPerk(PerkLib.BlindImmunity)) player.createStatusEffect(StatusEffects.Blind, 2 + rand(2), 0, 0, 0);
 			}
 		}
@@ -577,7 +575,7 @@ public class Lethice extends Monster
 			// 9999 configure phase 3
 
 			_fightPhase = 3;
-			HP   = maxHP();
+			HP   = maxOverHP();
 			lust = 10;
 			_defMode = 1;
 			
@@ -609,15 +607,15 @@ public class Lethice extends Monster
 			if (_defMode == 1)
 			{
 				outputText("Lethice dabs at her injury, then licks her finger, smiling sensually. She seems excited and invigorated. Scales appear over her skin, and her spaded tail swishes back and forth in a blur, too fast to follow.\n\n");
-				speStat.core.value = 400;
-				armorDef = 400;
+				speStat.core.value = 800;
+				armorDef = 600;
 				lustVuln = 1.125;
 			}
 			else
 			{
 				outputText("Shuddering, the Demon Queen steels herself. Her curves soften visibly as she prepares herself for additional arousing efforts, forgoing physical defense.\n\n");
-				speStat.core.value = 80;
-				armorDef = 14;
+				speStat.core.value = 200;
+				armorDef = 36;
 				lustVuln = 0.0;
 			}
 
@@ -653,11 +651,11 @@ public class Lethice extends Monster
 			}
 			else
 			{
-				var l:Number = player.lib / 10 + player.cor / 10 + 10;
+				var l:Number = player.lib + player.cor + 100;
 				if (player.hasStatusEffect(StatusEffects.MinotaurKingsTouch)) l *= 1.25;
 				player.takeLustDamage(l, true);
 				
-				var damage:Number = str + weaponAttack - rand(player.tou);
+				var damage:Number = str + weaponAttack - rand(player.touStat.core.value);
 				damage = player.takePhysDamage(damage);
 
 				outputText(" You can’t avoid them all! One clips you on its way past, ripping into your [skin] and leaving you feeling... flushed and hot in its wake.");
@@ -698,7 +696,7 @@ public class Lethice extends Monster
 			{
 				outputText("You try to avoid it, but the burning weapon catches your [leg], simultaneously scorching your flesh and attempting to pull you off balance.");
 
-				if (!player.hasPerk(PerkLib.Resolute) && rand(player.tou) <= 25)
+				if (!player.hasPerk(PerkLib.Resolute) && rand(player.touStat.core.value) <= 25)
 				{
 					outputText(" The ground rushes up at you awful fast. Lethice has tripped you, <b>stunning you!</b>");
 					player.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
@@ -712,11 +710,11 @@ public class Lethice extends Monster
 			var damage:Number;
 			if (minDamage)
 			{
-				damage = 25 + weaponAttack - rand(player.tou);
+				damage = (25 + weaponAttack) * 10 - rand(player.touStat.core.value);
 			}
 			else
 			{
-				damage = 100 + weaponAttack + str - rand(player.tou);
+				damage = (100 + weaponAttack + str) * 10 - rand(player.touStat.core.value);
 			}
 
 			player.takeMagicDamage(damage, true);
@@ -726,7 +724,7 @@ public class Lethice extends Monster
 		{
 			outputText("Lethice raises her sizzling, flame-spitting whip high up overhead, then snaps her arm out and back in an instant, cracking the whip so hard that it gives birth to a shockwave of flame and cacophonous thunder. There’s no avoiding the all-encompassing wave of energy. There’s not even time to brace yourself. It slams into you, rattling bones and scorching flesh.");
 
-			var damage:Number = 75 + weaponAttack + str;
+			var damage:Number = (75 + weaponAttack + str) * 10;
 			player.takeMagicDamage(damage,true);
 		}
 
@@ -754,10 +752,8 @@ public class Lethice extends Monster
 			{
 				outputText("\n\nYou gasp when the burning cord encircles your throat, unable to speak and unable to discern why the licking flames haven’t scorched the flesh from your face. Laughing, the queen snaps her end of the whip off like a rotten cord, dropping the burning length to the ground with disdain. The unattached end loops around your neck again and again, binding tight. At the same time, fresh flame boils out of the tightly held handle, revealing a sinuously slithering implement of pain no worse for the wear.");
 				outputText("\n\n<b>You are effectively silenced!</b>");
-
-				var damage:Number = weaponAttack + 25 - rand(player.tou);
+				var damage:Number = weaponAttack + 25 - rand(player.touStat.core.value);
 				player.takePhysDamage(damage,true);
-
 				player.createStatusEffect(StatusEffects.WhipSilence, 3, 0, 0, 0);
 			}
 		}

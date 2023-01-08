@@ -4,15 +4,14 @@
   <output>
     <movie outputType="Application" />
     <movie input="" />
-    <movie path="..\..\Desktop\CoC_Xianxia_0.8r2" />
+    <movie path="..\..\Desktop\CoC_Xianxia_apk_0.8s7" />
     <movie fps="30" />
     <movie width="800" />
     <movie height="600" />
-    <movie version="11" />
+    <movie version="27" />
     <movie minorVersion="0" />
-    <movie platform="Flash Player" />
+    <movie platform="AIR Mobile" />
     <movie background="#000000" />
-    <movie preferredSDK="Flex 4.6.0, AIR 3.1;4.6.0, 3.1;" />
   </output>
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
@@ -88,7 +87,7 @@
   <!-- Other project options -->
   <options>
     <option showHiddenPaths="False" />
-    <option testMovie="ExternalPlayer" />
+    <option testMovie="Unknown" />
     <option testMovieCommand="$(FlexSDK)\bin\adl.exe -profile mobileDevice -screensize 800x600:800x600 $(OutputDir)\application.xml" />
   </options>
   <!-- Plugin storage -->

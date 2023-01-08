@@ -26,6 +26,7 @@ import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.SceneLib;
+import classes.Scenes.SceneLib;
 import classes.StatusEffects.VampireThirstEffect;
 
 import coc.view.ButtonData;
@@ -5231,9 +5232,9 @@ public class MagicSpecials extends BaseCombatContent {
 			damage *= (1.75 * combat.windDamageBoostedByDao());
 			damage = Math.round(damage);
 			doWindDamage(damage, true, true);
-			if (!monster.hasStatusEffect(StatusEffects.KamaitachiBleed)) monster.createStatusEffect(StatusEffects.KamaitachiBleed,player.spe*10*combat.BleedDamageBoost(true),1,0,0);
+			if (!monster.hasStatusEffect(StatusEffects.KamaitachiBleed)) monster.createStatusEffect(StatusEffects.KamaitachiBleed,combat.CalcBaseDamageUnarmed()*5*combat.BleedDamageBoost(true),1,0,0);
 			else{
-				monster.addStatusValue(StatusEffects.KamaitachiBleed, 1, player.spe*10*combat.BleedDamageBoost(true));
+				monster.addStatusValue(StatusEffects.KamaitachiBleed, 1, combat.CalcBaseDamageUnarmed()*5*combat.BleedDamageBoost(true));
 				outputText("\n\nYour attack greatly worsened the bleeding your opponents suffers.");
 			}
 			combatRoundOver();
@@ -5264,9 +5265,9 @@ public class MagicSpecials extends BaseCombatContent {
 				outputText("too resolute to be stunned by your attack.</b> ");
 			}
 			doWindDamage(damage, true, true);
-			if (!monster.hasStatusEffect(StatusEffects.KamaitachiBleed)) monster.createStatusEffect(StatusEffects.KamaitachiBleed,player.spe*10*combat.BleedDamageBoost(true),0,0,0);
+			if (!monster.hasStatusEffect(StatusEffects.KamaitachiBleed)) monster.createStatusEffect(StatusEffects.KamaitachiBleed,combat.CalcBaseDamageUnarmed()*5*combat.BleedDamageBoost(true),0,0,0);
 			else {
-				monster.addStatusValue(StatusEffects.KamaitachiBleed, 1, player.spe*10*combat.BleedDamageBoost(true));
+				monster.addStatusValue(StatusEffects.KamaitachiBleed, 1, combat.CalcBaseDamageUnarmed()*5*combat.BleedDamageBoost(true));
 				outputText("\n\nYour attack greatly worsened the bleeding your opponent suffers.");
 			}
 		}

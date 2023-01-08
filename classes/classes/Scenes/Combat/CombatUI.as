@@ -524,7 +524,8 @@ public class CombatUI extends BaseCombatContent {
 					if (flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] != 0) btnSpecial1.show("Pick (M)", woodelves.pickUpMelee, "Pick up your melee weapon.");
 					if (flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] != 0) btnSpecial2.show("Pick (R)", woodelves.pickUpRange, "Pick up your range weapon.");
 				}
-				if ((player.weaponRange == weaponsrange.GTHRSPE && player.ammo <= 15) || (player.weaponRange == weaponsrange.GTHRAXE && player.ammo <= 10) || ((player.weaponRange == weaponsrange.O_JAVEL || player.weaponRange == weaponsrange.TRJAVEL) && player.ammo <= 10)) {
+				if ((player.weaponRange == weaponsrange.GTHRSPE && player.ammo <= 15) || ((player.weaponRange == weaponsrange.ATKNIFE || player.weaponRange == weaponsrange.RTKNIFE || player.weaponRange == weaponsrange.STKNIFE || player.weaponRange == weaponsrange.TTKNIFE) && player.ammo <= 10)
+				|| ((player.weaponRange == weaponsrange.GTHRAXE || player.weaponRange == weaponsrange.O_JAVEL || player.weaponRange == weaponsrange.TRJAVEL) && player.ammo <= 5)) {
 					btnSpecial3.show("Pick", combat.pickUpThrownWeapons, "Pick up some of the thrown weapons.");
 				}
 			}
