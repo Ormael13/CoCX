@@ -6802,8 +6802,8 @@ public class Combat extends BaseContent {
                         }
                     }
                 }
-                if (player.perkv1(IMutationsLib.EyeOfTheTigerIM) >= 4) crit *= 1.5;
-                if (player.hasPerk(PerkLib.VorpalClaw)) crit *= 2;
+                if (player.perkv1(IMutationsLib.EyeOfTheTigerIM) >= 4) damage *= 1.5;
+                if (player.hasPerk(PerkLib.VorpalClaw)) damage *= 2;
                 damage *= critDamage;
             }
             //Apply AND DONE!
