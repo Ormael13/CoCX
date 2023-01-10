@@ -10,6 +10,7 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.BlightRidge.DemonScene;
 import classes.Scenes.Areas.DefiledRavine.DemonSoldierScene;
+import classes.Scenes.Dungeons.DemonLab;
 import classes.Scenes.NPCs.Forgefather;
 import classes.Scenes.SceneLib;
 
@@ -56,7 +57,10 @@ use namespace CoC;
             if (player.hasKeyItem("Old Pickaxe") > 0 && Forgefather.materialsExplained)
 			    choice[choice.length] = 3; //Marble
 			choice[choice.length] = 4;
-			if (rand(4) == 0) choice[choice.length] = 5; //Find nothing! The rand will be removed from this once the Defiled Ravine is populated with more encounters.
+			if (DemonLab.MainAreaComplete >= 4)
+				choice[choice.length] = 5;
+			if (rand(4) == 0) choice[choice.length] = 10; //Find nothing! The rand will be removed from this once the Defiled Ravine is populated with more encounters.
+
 			select = choice[rand(choice.length)];
 			switch(select) {
 				/*case 0:
@@ -90,6 +94,9 @@ use namespace CoC;
 					break;
 				case 4:
 					demonSoldierScene.encounterTheSoldierz();
+					break;
+				case 5:
+					SceneLib.exploration.demonLabProjectEncounters();
 					break;
 				default:
 					clearOutput();

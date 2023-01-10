@@ -30,31 +30,31 @@ public class Incels extends Monster {
         this.butt.type = Butt.RATING_LARGE;
         this.hairLength = 2;
         initStrTouSpeInte(275, 400, 390, 30);
-        initWisLibSensCor(40, 945, 50, 100);
+        initWisLibSensCor(40, 945, 850, 100);
         this.weaponName = "black claws";
         this.weaponVerb = "slash";
         this.weaponAttack = 100;
         this.armorName = "skin";
         this.armorDef = 81;
         this.armorMDef = 59;
-        this.bonusHP = 1400;
-        this.bonusLust = 990;
+        this.bonusHP = 2000;
+        this.bonusLust = 1847;
         this.lust = 50;
         this.lustVuln = 1;
-        this.level = 40;
+        this.level = 52;
         this.gems = rand(50) + 75;
         //I don't know how to add regeneration, physical resistance, or the lust to damage special ability I want them to have.
         this.drop = new WeightedDrop().add(useables.D_SCALE, 5).add(useables.LETHITE, 2).add(jewelries.POWRRNG, 1);
-        this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
+        this.createPerk(PerkLib.EnemyLargeGroupType, 0, 0, 0, 0);
+        this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
         this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
         this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
         this.createPerk(PerkLib.ToughHide, 0, 0, 0, 0);
-        this.createPerk(PerkLib.WeaponClawsClawTraining, 0, 0, 0, 0);
         this.createPerk(PerkLib.MonsterRegeneration, 10, 0, 0, 0); //HP regen
         this.createStatusEffect(StatusEffects.DefendMonsterVer, 50, 0.6, 0, 0); //phys resist?
         checkMonster();
     }
-
+//they gonna get raiju passive or lust defeat immunity and conversion of % of lust into % bonus damage they deal - rather not having p[hys resistance thou as much as orginaly written above
     //For every 20 Lust damage they take, they gain a 5% bonus to the damage they deal. This is additive, not multiplitive.
     private var damageMult:Number = 1.0;
 
@@ -142,9 +142,9 @@ public class Incels extends Monster {
             player.addStatusValue(StatusEffects.Pounced, 1, -1);
         clearOutput();
         outputText("The horde rips at your body, scratches and bites coming at you from every side. You try to escape, but for every hold you break, another claw comes in to grab you.");
-        eOneAttack(true);
-        eOneAttack(true);
-        eOneAttack(true);
+        for (var i:int = 0; i < 10; ++i) {
+            eOneAttack(true);
+        }
     }
 
     private function RipBreakOut():void {

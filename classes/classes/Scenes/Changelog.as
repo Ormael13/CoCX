@@ -86,12 +86,12 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Elven Twin shot (double bow shots after bonusses). Training with Lutien with maxed speed stat (100%)\n");
 			outputText("-Added option to capture & convert some of the enemies into new wood elfs.\n");
 			outputText("-New event perk: One with the forest. Gained by Wood Elfs. Effects: With each new soul added to the collective bolstering the trees of the sacred forest you become stronger physically and spiritually. Gain a +1% to all stats for each new wood elf created.\n");
-			outputText("-Factory and Deep Cave monsters went to gym and they are now punch harder. They even lvl up when was there by 4 lvl's (factory) or whooping 10 lvl's (deep cave).\n");
+			outputText("-Factory, Deep Cave and Lethice Stronghold monsters went to gym and they are now punch harder. They even lvl up when was there by 4 lvl's (factory), 10 lvl's (deep cave) or whooping 30 lvl's (lethice stronghold).\n");
 			outputText("-Flurry of Blows no longer req. Combo Master perk and physical soulskills hits trice not twice.\n");
 			outputText("-Rebalance bleed damage, max 5% hp per turn. Cleanup archery text spam. Improved pregnancy stats. Quasi-phoenix player pregnancy. (EragonX)\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-The great reckoning as arrived all bleed ability now scales of your attack damage instead of a set percentage of monster HP (Liadri)\n");
+			outputText("-Add the Project Nightwalker & Flamespreader encounters after 3rd story dungeon as randomn encouters outside dungeon. (EragonX)\n");
+			outputText("-Kiha combat companion! (EragonX)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

@@ -12,6 +12,11 @@ import classes.Scenes.Areas.Forest.WapsHuntress;
 import classes.Scenes.Areas.Forest.WaspAssassin;
 import classes.Scenes.Areas.Forest.WaspGirl;
 import classes.Scenes.Areas.Ocean.Scylla;
+import classes.Scenes.Dungeons.DemonLab;
+import classes.Scenes.Dungeons.DemonLab.ProjectFlameSpreader;
+import classes.Scenes.Dungeons.DemonLab.ProjectNightwalker;
+import classes.Scenes.Dungeons.DemonLab.ProjectTyrant;
+import classes.Scenes.Dungeons.DemonLab.UltimisFlamespreader;
 import classes.Scenes.Dungeons.HiddenCave;
 import classes.Scenes.Explore.ExploreDebug;
 import classes.Scenes.Explore.KitsuneAncestor;
@@ -20,6 +25,7 @@ import classes.Scenes.Explore.RNGod;
 import classes.Scenes.Explore.SeabedAlrauneBoss;
 import classes.Scenes.Monsters.*;
 import classes.Scenes.NPCs.EvangelineFollower;
+import classes.Scenes.NPCs.KihaFollower;
 import classes.Scenes.NPCs.RyuBiDragon;
 import classes.Scenes.Places.TrollVillage;
 import classes.display.SpriteDb;
@@ -795,6 +801,32 @@ public class Exploration extends BaseContent
 				player.createStatusEffect(StatusEffects.AngelsChooser,1,0,0,0);
 				startCombat(new Angeloid());
 				return;
+			}
+		}
+		public function demonLabProjectEncounters():void {
+			var choices:Array = [];
+			if (time.hours <= 8 || time.hours >= 18) choices.push(nightwalkerEncounter());
+			choices.push(flamespreaderEncounter());
+			choices.push(tyrantEncounter());
+			if (!KihaFollower.FlameSpreaderBossKilled && KihaFollower.FlameSpreaderKillCount >= 20 && InCollection("Kiha", flags[kFLAGS.PLAYER_COMPANION_0], flags[kFLAGS.PLAYER_COMPANION_1], flags[kFLAGS.PLAYER_COMPANION_2] ,flags[kFLAGS.PLAYER_COMPANION_3]))
+					choices.push(ultimisEcounter());
+			randomChoice(choices);
+
+			function nightwalkerEncounter():void {
+				outputText("You find yourself feeling somewhat nervous. Your [skin] crawls, but as you wheel about, you see nothing. You hear nothing but a faint whisper on the wind.[pg]");
+				outputText("“<i>Blood.</i>” A faint dripping sound comes from behind you. You turn, slowly, to face a corpse-pale woman in a crotchless skintight latex suit that leaves nothing to the imagination. Her eyes shine red, and her fangs stick out well beyond her lips. A spadelike tail flicks back and forth, dripping red, and she smiles, curved black horns and ebony tresses combining to make her seem...well, you assume the intent was to make her beautiful, but unlike the succubi, there’s almost no sex appeal in those eyes, no carnal desire as she glances between your legs, scraping one of her fingernails along her swollen pussy lips, cutting herself and drawing a trickle of blood.[pg]");
+				outputText("“<i>Sweet blood, come... Sate yourself.</i>” Her nails are like black claws, but as she licks the blood off her fingers, part of you recoils in fear. “<i>Sate you...Then you’ll sate...me.</i>” You draw your [weapon], bracing yourself, but as you do, this gets only a smile as the curvy, short woman tilts her head. She launches herself toward you, claws outstretched, the eerie grin still on her face.[pg]");
+				outputText("“<i>Blood! Blood for me!</i>” [pg]");
+				startCombat(new ProjectNightwalker());
+			}
+			function flamespreaderEncounter():void {
+				startCombat(new ProjectFlameSpreader());
+			}
+			function tyrantEncounter():void {
+				startCombat(new ProjectTyrant());
+			}
+			function ultimisEcounter():void {
+				startCombat(new UltimisFlamespreader());
 			}
 		}
 

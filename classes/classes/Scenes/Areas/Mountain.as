@@ -16,6 +16,7 @@ import classes.Scenes.Areas.HighMountains.*;
 import classes.Scenes.Areas.Mountain.*;
 import classes.Scenes.Dungeons.DemonLab;
 import classes.Scenes.Dungeons.DemonLab.ProjectNightwalker;
+import classes.Scenes.Exploration;
 import classes.Scenes.Holidays;
 import classes.Scenes.Monsters.DarkElfScene;
 import classes.Scenes.NPCs.DivaScene;
@@ -197,6 +198,13 @@ public class Mountain extends BaseContent
 				chance:0.25,
 				when: fn.ifLevelMin(3),
 				call: curry(SceneLib.mimicScene.mimicTentacleStart,2)
+			}, {
+				name: "demonProjects",
+						chance: 0.2,
+						when: function ():Boolean {
+					return DemonLab.MainAreaComplete >= 4;
+				},
+				call: SceneLib.exploration.demonLabProjectEncounters
 			});
 			_lowmountainEncounter = Encounters.group("low mountains", {
 				//General Angels, Goblin and Imp Encounters
@@ -360,6 +368,13 @@ public class Mountain extends BaseContent
 				chance:0.25,
 				when: fn.ifLevelMin(3),
 				call: curry(SceneLib.mimicScene.mimicTentacleStart,2)
+			}, {
+				name: "demonProjects",
+				chance: 0.2,
+				when: function ():Boolean {
+					return DemonLab.MainAreaComplete >= 4;
+				},
+				call: SceneLib.exploration.demonLabProjectEncounters
 			});
 			_mountainEncounter = Encounters.group("mountain", {
 				name: "demonlab",
@@ -456,14 +471,6 @@ public class Mountain extends BaseContent
 			}, {
 				name: "darkelf",
 				call: darkelfScene.introDarkELfRanger
-			}, {
-				name: "nightwalker",
-				chance: 0.2,
-				when: function ():Boolean {
-					return DemonLab.NightwalkerLabstate >= 2;
-				},
-				night: true,
-				call: nightwalkerEncounter
 			}, {/*
 				name: "lactoblasters",
 				when: function ():Boolean {
@@ -484,6 +491,13 @@ public class Mountain extends BaseContent
 				chance:0.25,
 				when: fn.ifLevelMin(3),
 				call: curry(SceneLib.mimicScene.mimicTentacleStart,2)
+			}, {
+				name: "demonProjects",
+				chance: 0.2,
+				when: function ():Boolean {
+					return DemonLab.MainAreaComplete >= 4;
+				},
+				call: SceneLib.exploration.demonLabProjectEncounters
 			});
 		}
 		public function findMindbreakerChance():Number {
