@@ -12,6 +12,7 @@ import classes.Scenes.Dungeons.DemonLab.LabGuard;
 import classes.Scenes.Dungeons.DemonLab.MutantIncubus;
 import classes.Scenes.Dungeons.DemonLab.ProjectNightwalker;
 import classes.Scenes.Dungeons.DemonLab.ProjectTyrant;
+import classes.Scenes.Dungeons.DemonLab.ScientistGunner;
 import classes.Scenes.NPCs.DivaScene;
 import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.SceneLib;
@@ -418,7 +419,7 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
                 + "\n"
                 + "“<i>You’re too late. The bats have already been unleashed.</i>” He raises his pistol, aiming at you. “<i>All that remains is to give my comrades enough time to save our research.</i>”");
             if (DivaFollower) outputText("\n\n“<i>Thou Art a coward</i>”, Diva growls, baring her own fangs. “<i>Thine bloodstream will suffer the drought of your mistakes!</i>”");
-            startCombat(new IncubusScientist());
+            startCombat(new ScientistGunner());
             return;
         }
         outputText("This room is small, barely lit by a single covered torch in a sconce along the back wall. Unlike the room you just came from, the walls, floor and ceiling are rough-hewn, like some poor saps had been forced to dig this place out with pickaxes.");
@@ -586,7 +587,7 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
         TyrantLabEntry = 1;
         clearOutput();
         outputText("You raise your [weapon]. The demon in front of you takes a step back, eyes widening, but he scowls, pulling a small pistol from his pocket. He points it at you, and you raise your [weapon]. It’s a fight!");
-		startCombat(new IncubusScientist());
+		startCombat(new ScientistGunner());
     }
 
     private function DemonGoPast():void {

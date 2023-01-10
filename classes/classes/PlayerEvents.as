@@ -251,6 +251,14 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.addStatusValue(StatusEffects.WendigoPsychosis, 1, -1);
 				if (player.statusEffectv1(StatusEffects.WendigoPsychosis) <= 0) player.removeStatusEffect(StatusEffects.WendigoPsychosis);
 			}
+			if (InCollection("Kiha", flags[kFLAGS.PLAYER_COMPANION_0], flags[kFLAGS.PLAYER_COMPANION_2], flags[kFLAGS.PLAYER_COMPANION_3])) {
+				outputText("\nKiha waves to you as she leaves your side. You can call her to battle again next time, or ask her to be your main combat companion.\n");
+				if (flags[kFLAGS.PLAYER_COMPANION_0] == "Kiha") flags[kFLAGS.PLAYER_COMPANION_0] = "";
+				if (flags[kFLAGS.PLAYER_COMPANION_2] == "Kiha") flags[kFLAGS.PLAYER_COMPANION_2] = "";
+				if (flags[kFLAGS.PLAYER_COMPANION_3] == "Kiha") flags[kFLAGS.PLAYER_COMPANION_3] = "";
+				player.removeStatusEffect(StatusEffects.CombatFollowerKiha);
+				needNext = true;
+			}
 			//
 			for each (var clone:StatusEffectType in Soulforce.clones) {
 				if (player.hasStatusEffect(clone)) {

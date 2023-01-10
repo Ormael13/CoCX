@@ -52,11 +52,11 @@ public class LabGuard extends Monster {
         this.armorName = "demonic skin";
         this.armorDef = 85;
         this.armorMDef = 60;
-        this.bonusHP = 1200;
-        this.bonusLust = 575;
+        this.bonusHP = 1700;
+        this.bonusLust = 287;
         this.lust = 20;
-        this.level = 55;
-        this.gems = rand(60) + 20;
+        this.level = 57;
+        this.gems = rand(60) + 200;
         this.randomDropChance = 0.1;
         this.randomDropParams = {
             rarity: DynamicItems.RARITY_CHANCES_LESSER
@@ -72,7 +72,7 @@ public class LabGuard extends Monster {
         this.horns.count = 2;
         this.createPerk(PerkLib.EnemyLargeGroupType, 0, 0, 0, 0);
         this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
-        this.createPerk(PerkLib.OverMaxHP, 55, 0, 0, 0);
+        this.createPerk(PerkLib.OverMaxHP, 57, 0, 0, 0);
         checkMonster();
     }
 
@@ -102,10 +102,10 @@ public class LabGuard extends Monster {
             outputText("The rangers in the middle of the demon’s formation cackle loudly, and you realise, as the warriors in front crouch, that there are a lot of guns aimed at you. ");
             if (player.shield.isNothing) {
                 outputText("The hail of bullets is too much to dodge entirely! You duck and weave, but some find their mark.");
-                player.takePhysDamage(int(spe * 25) - rand(player.tou) - player.armorDef);
+                player.takePhysDamage(int(spe * 25) - rand(player.touStat.core.value) - player.armorDef);
             } else {
                 outputText("You cover yourself with [shield], but some of the bullets find their mark.");
-                player.takePhysDamage(int(spe * 20) - rand(player.tou) - player.armorDef);
+                player.takePhysDamage(int(spe * 20) - rand(player.touStat.core.value) - player.armorDef);
             }
             outputText("\n\n")
         }
@@ -137,15 +137,15 @@ public class LabGuard extends Monster {
     private function SeductionAttack():void {
         outputText("A jeer rises from the horde in front of you, and a thin line of succubi take places beside the heavily armed warriors. You brace yourself for an attack, but it doesn’t come. As one, the line of scantily clad demonesses slide their thongs, bikini bottoms, whatever they happened to be wearing, aside, showing you a smorgasbord of pussy. Some start fingering themselves, dripping cunts drooling their love juices to the ground, while others with more…masculine endowments begin openly stroking themselves. No few get their asses slapped by their fellows, and a few of the armoured incubi find themselves carrying a naked succubus, as the temptresses rub their crotches up and down the cold metal. ");
         outputText("Moans, wet slaps, and the deep purr of male satisfaction fill the air, but underneath, you can hear faint whispers from multiple demons, both male and female, as their smouldering eyes fix on you, and you alone. ");
-        outputText("“<i>Come join us.</i>” they whisper. ");
-        if (player.hasCock()) outputText("  You can all but feel your [cock] jamming into the tight passage of a succubus, her walls pressing around you, milking your rod for all the slut’s worth. You can feel your hands around her neck, forcing the bitch to wail as you ravage her cunt, forcing her lips wide as you spurt your load inside…");
+        outputText("“<i>Come join us.</i>” they whisper.");
+        if (player.hasCock()) outputText(" You can all but feel your [cock] jamming into the tight passage of a succubus, her walls pressing around you, milking your rod for all the slut’s worth. You can feel your hands around her neck, forcing the bitch to wail as you ravage her cunt, forcing her lips wide as you spurt your load inside…");
         if (player.hasVagina()) outputText(" Your labia quivers at the sight, your knees shake as you can all but feel the throbbing rods inside you, veins pulsing. Warmth spreads to your womb as you can feel the twitch, as the demon’s sperm erupts into…");
-        outputText("You shake yourself, [weapon] lashing at the two demons who broke formation, arms wide as if to embrace you. They flee back to the lines, but you can feel your arousal growing, the pink mists of lust magic in the air around you. ");
+        outputText(" You shake yourself, [weapon] lashing at the two demons who broke formation, arms wide as if to embrace you. They flee back to the lines, but you can feel your arousal growing, the pink mists of lust magic in the air around you. ");
         player.takeLustDamage(200 + (player.lib / 8) + (player.cor / 4) + rand(10), true);
     }
 
     private function ThrownWeapons():void {
-        outputText("The demons in the front line duck, and your eyes widen as succubi and incubi alike unleash a barrage of thrown weapons. Spears, axes, throwing knives, rocks, even a dildo or two, thrown from the back. One bounces off your forehead, leaving a sticky splatter.  ");
+        outputText("The demons in the front line duck, and your eyes widen as succubi and incubi alike unleash a barrage of thrown weapons. Spears, axes, throwing knives, rocks, even a dildo or two, thrown from the back. One bounces off your forehead, leaving a sticky splatter. ");
         for (var i:int = 0; i < 10; ++i) {
             if (rand(2) == 0)  eOneAttack(true);
             else player.takeLustDamage(10 + (player.lib / 20) + (player.cor / 20) + rand(10), true);

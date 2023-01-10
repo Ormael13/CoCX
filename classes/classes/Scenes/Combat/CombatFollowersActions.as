@@ -751,7 +751,7 @@ import classes.StatusEffects;
 			dmg11 = Math.round(dmg11 * increasedEfficiencyOfAttacks());
 			outputText("Seeing an opening, Zenji thrusts his spear at [themonster]. ");
 			doDamage(dmg11, true, true);
-			outputText("S\n\n");
+			outputText("\n\n");
 		}
 		public function zenjiCombatActions2():void {
 			var dmg12:Number = player.statusEffectv1(StatusEffects.CombatFollowerZenji);
@@ -906,6 +906,89 @@ import classes.StatusEffects;
 		}
 		public function tyrantiaCombatActions5():void {
 			outputText("Your Drider companion stares at the [enemy], making no movements towards them.\n\n");
+		}
+
+		public function kihaCombatActions():void {
+			if (player.statusEffectv4(StatusEffects.CombatFollowerKiha) > 0) {
+				var choice11:Number = rand(20);
+				if (player.hasPerk(PerkLib.MotivationEx) || player.hasStatusEffect(StatusEffects.FrenziedKiha)) {
+					if (rand(100) == 0) kihaCombatActions0();
+					else {
+						if (choice11 < 9) kihaCombatActions1();
+						if (choice11 >= 9 && choice11 < 14) kihaCombatActions2();
+						if (choice11 >= 14 && choice11 < 17) kihaCombatActions3();
+						if (choice11 >= 17) kihaCombatActions4();
+					}
+				}
+				else if (player.hasPerk(PerkLib.Motivation)) {
+					if (choice11 < 4) kihaCombatActions0();
+					if (choice11 >= 4 && choice11 < 12) kihaCombatActions1();
+					if (choice11 >= 12 && choice11 < 15) kihaCombatActions2();
+					if (choice11 >= 15 && choice11 < 18) kihaCombatActions3();
+					if (choice11 == 18 || choice11 == 19) kihaCombatActions4();
+				}
+				else {
+					if (choice11 < 10) kihaCombatActions0();
+					if (choice11 >= 10 && choice11 < 14) kihaCombatActions1();
+					if (choice11 == 14 || choice11 == 15) kihaCombatActions2();
+					if (choice11 == 16 || choice11 == 17) kihaCombatActions3();
+					if (choice11 == 18 || choice11 == 19) kihaCombatActions4();
+				}
+			}
+			else {
+				outputText("Kiha readies her axe, small spurts of flame escaping her nostrils as she stares down your opponent.\n\n");
+				player.addStatusValue(StatusEffects.CombatFollowerKiha, 4, 1);
+			}
+			if (flags[kFLAGS.PLAYER_COMPANION_0] == "Kiha" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_0_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_0_ACTION] = 1;
+			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Kiha" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] = 1;
+			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Kiha" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] = 1;
+			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Kiha" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] = 1;
+			if (monster.HP <= monster.minHP() || monster.lust >= monster.maxOverLust()) enemyAI();
+		}
+		public function kihaCombatActions0():void {
+			outputText("Kiha remains steady, ready to smash away any blows [themonster] might throw.\n\n");
+		}
+		public function kihaCombatActions1():void {
+			var dmg17:Number = player.statusEffectv1(StatusEffects.CombatFollowerKiha);
+			var weaponKiha:Number = player.statusEffectv2(StatusEffects.CombatFollowerKiha);
+			dmg17 += scalingBonusStrengthCompanion();
+			if (weaponKiha < 51) dmg17 *= (1 + (weaponKiha * 0.03));
+			else if (weaponKiha >= 51 && weaponKiha < 101) dmg17 *= (2.5 + ((weaponKiha - 50) * 0.025));
+			else if (weaponKiha >= 101 && weaponKiha < 151) dmg17 *= (3.75 + ((weaponKiha - 100) * 0.02));
+			else if (weaponKiha >= 151 && weaponKiha < 201) dmg17 *= (4.75 + ((weaponKiha - 150) * 0.015));
+			else dmg17 *= (5.5 + ((weaponKiha - 200) * 0.01));
+			dmg17 = Math.round(dmg17 * increasedEfficiencyOfAttacks());
+			if (player.hasStatusEffect(StatusEffects.FrenziedKiha))
+				dmg17 *= 1+ player.statusEffectv1(StatusEffects.FrenziedKiha)*0.2;
+			outputText("Seeing an opening, Kiha swings her battleaxe, smashing [themonster]. ");
+			doDamage(dmg17, true, true);
+			outputText("\n\n");
+		}
+		public function kihaCombatActions2():void {
+			var dmg18:Number = player.statusEffectv1(StatusEffects.CombatFollowerKiha);
+			dmg18 += scalingBonusStrengthCompanion() * 0.5;
+			dmg18 = Math.round(dmg18 * increasedEfficiencyOfAttacks());
+			if (player.hasStatusEffect(StatusEffects.FrenziedKiha))
+				dmg18 *= 1+ player.statusEffectv1(StatusEffects.FrenziedKiha)*0.2;
+			outputText("Kiha throws her trusty weapon into the sodden ground, building up balls of flame around her fists.  She runs towards [themonster], launching herself into action with a flurry of punches. ");
+			doFireDamage(dmg18, true, true);
+			outputText("\n\n");
+		}
+		public function kihaCombatActions3():void {
+			outputText("Kiha throws her arms back and roars, exhaling a swirling tornado of fire directly at [themonster]!\n");
+			var dmg19:Number = player.statusEffectv1(StatusEffects.CombatFollowerKiha);
+			dmg19 += scalingBonusStrengthCompanion();
+			dmg19 = Math.round(dmg19 * increasedEfficiencyOfAttacks());
+			if (player.hasStatusEffect(StatusEffects.FrenziedKiha))
+				dmg19 *= 1+ player.statusEffectv1(StatusEffects.FrenziedKiha)*0.2;
+			doFireDamage(dmg19, true, true);
+			outputText("\n\n");
+		}
+		public function kihaCombatActions4():void {
+			outputText("She supports the axe on a shoulder, cracking her neck and arching her back to stretch herself, giving [themonster] an unintended show.  ");
+			if (monster.lustVuln > 0)
+				monster.teased(monster.lib/20, true);
+			outputText("\n\n");
 		}/*
 		
 		public function divaCombatActions():void {
@@ -925,7 +1008,7 @@ import classes.StatusEffects;
 		}
 		public function ayaneCombatActions0():void {
 
-		}
+		}/*
 
 		public function divaCombatActions():void {
 			clearOutput();
