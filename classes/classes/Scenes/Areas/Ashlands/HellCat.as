@@ -125,7 +125,8 @@ import classes.internals.*;
 			this.drop = new WeightedDrop().addMany(5,
 					consumables.W_FRUIT,
 					weapons.H_WAND,
-					null);
+					null)
+					.add(weaponsrange.NEKONOM, 1);
 			this.createPerk(PerkLib.FireNature, 0, 0, 0, 0);
 			checkMonster();
 		}

@@ -2910,13 +2910,7 @@ import flash.utils.getQualifiedClassName;
 				//Deal damage if still wounded.
 				else {
 					var procentvalue:Number = (4 + rand(7));
-					var procentvalue1:Number = 1;
-					if (game.player.hasPerk(PerkLib.ThirstForBlood)) procentvalue1 += .25;
-					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) procentvalue1 += .2;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1) procentvalue1 += .25;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2) procentvalue1 += .25;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3) procentvalue1 += .25;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 4) procentvalue1 += .25;
+					var procentvalue1:Number = SceneLib.combat.BleedDamageBoost();
 					if (statusEffectv2(StatusEffects.IzmaBleed) > 0) procentvalue += statusEffectv2(StatusEffects.IzmaBleed);
 					procentvalue *= procentvalue1;
 					procentvalue = Math.round(procentvalue);
@@ -2941,16 +2935,7 @@ import flash.utils.getQualifiedClassName;
 				//Deal damage if still wounded.
 				else {
 					var store3:Number = SceneLib.combat.CalcBaseDamageUnarmed()/2;
-					var store3a:Number = 1;
-					if (player.hasPerk(PerkLib.ThirstForBlood)) store3a += .25;
-					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store3a += .2;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1) store3a += .25;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2) store3a += .25;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3) store3a += .25;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 4) store3a += .25;
-					if (player.hasPerk(PerkLib.RacialParagon)) store3a += .5;
-					if (player.hasPerk(PerkLib.Apex)) store3a += .5;
-					if (player.hasPerk(PerkLib.AlphaAndOmega)) store3a += .5;
+					var store3a:Number = SceneLib.combat.BleedDamageBoost(true);
 					store3 *= store3a;
 					store3 = boundInt(1, store3, maxHP()*.05);
 					if (statusEffectv2(StatusEffects.SharkBiteBleed) > 0) store3 *= statusEffectv2(StatusEffects.SharkBiteBleed);
@@ -2965,13 +2950,7 @@ import flash.utils.getQualifiedClassName;
 				//This wounds never heals unless by magic
 				//Deal damage if still wounded.
 				var store13:Number = SceneLib.combat.CalcBaseDamageUnarmed()/2;
-				var store13a:Number = 1;
-				if (player.hasPerk(PerkLib.ThirstForBlood)) store13a += .25;
-				if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store13a += .2;
-				if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1) store13a += .25;
-				if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2) store13a += .25;
-				if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3) store13a += .25;
-				if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 4) store13a += .25;
+				var store13a:Number = SceneLib.combat.BleedDamageBoost();
 				if (player.hasPerk(PerkLib.RacialParagon)) store13a += .5;
 				if (player.hasPerk(PerkLib.Apex)) store13a += .5;
 				if (player.hasPerk(PerkLib.AlphaAndOmega)) store13a += .5;
@@ -3149,13 +3128,7 @@ import flash.utils.getQualifiedClassName;
 			}
 			if(hasStatusEffect(StatusEffects.Briarthorn)) {
 				var store16:Number = (player.str + player.spe) * 2;
-				var store16a:Number = 1;
-				if (player.hasPerk(PerkLib.ThirstForBlood)) store16a += .25;
-				if (player.hasPerk(PerkLib.KingOfTheJungle)) store16a *= 1.2;
-				if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1) store16a += .25;
-				if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2) store16a += .25;
-				if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3) store16a += .25;
-				if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 4) store16a += .25;
+				var store16a:Number = SceneLib.combat.BleedDamageBoost();
 				store16 *= store16a;
 				store16 += maxHP()*0.05;
 				store16 = boundInt(1, store16, maxHP()*.05);
@@ -3171,13 +3144,8 @@ import flash.utils.getQualifiedClassName;
 					outputText("<b>Bleeding cause by deep wounds your rose thorns left behind stopped!</b>[pg]");
 				} else {
 					var store17:Number = (player.str + player.spe);
-					var store17a:Number = statusEffectv1(StatusEffects.Rosethorn)*0.1;
-					if (player.hasPerk(PerkLib.ThirstForBlood)) store17a += .25;
-					if (player.hasPerk(PerkLib.KingOfTheJungle)) store17a *= 1.2;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1) store17a += .25;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2) store17a += .25;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3) store17a += .25;
-					if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 4) store17a += .25;
+					var store17a:Number = SceneLib.combat.BleedDamageBoost() *
+							statusEffectv1(StatusEffects.Rosethorn)*0.1;
 					store17 *= store17a;
 					store17 += maxHP()*0.01;
 					store17 = boundInt(1, store17, maxHP()*.05);

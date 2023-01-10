@@ -268,6 +268,14 @@ public final class ArmorLib extends ItemConstants
 					'teasedmg': 15
 				})
 				.withPerk(PerkLib.WalpurgisIzaliaRobe,0,0,0,0) as Armor;
+		public const FCLOAK:Armor = new Armor("F.Cloak","F.Cloak","FrancescaCloak","Francesca's Black Cloak",12,12,6000,"A cloak rumored to have been worn by the black cat adventurer Francesca the heavenly black tiger. Not exactly a strong armor per say, its true ability is to conceal its owner body's true location through a mix of glamor and illusion spell improving the users evasiveness by leaps and bound. Francesca was a famous sword mage and as thus the cloak greatly reinforces spells casted through the medium of a weapon.","Light")
+				.withBuffs({
+					'spellcost': -0.40,
+					'evade': 2
+				})
+				.withPerk(PerkLib.Misdirection)
+				.withTag(ItemTags.A_AGILE)
+				.withTag(ItemTags.A_REVEALING) as Armor;
 		public const WKIMONO:Armor = new Armor("W.Kimono","W.Kimono","white kimono","a white kimono",0,1,200,"This lovely white kimono is adorned with a floral pattern. It will likely increase your spiritual power as a kitsune.","Light")
 				.withBuffs({
 					'spellcost': -0.20,

@@ -237,6 +237,7 @@ public class StatUtils {
 		['mdef', 'Magic Resistance'], // armor mdef stat
 		['rangedaccuracy', "Ranged Accuracy"],
 		['teasedmg', "Tease Power"],
+		['evade', "Evasion"],
 		
 		['res_physical', 'Resistance (Physical)'],
 		['res_magic', 'Resistance (Magic)'], // atm works same way as 'mdef'
