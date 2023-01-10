@@ -64,8 +64,8 @@ public class CheshireRace extends Race{
 		
 		buildTier(13, "trickster cat")
 				.buffs({
-					"spe.mult": +0.60,
-					"int.mult": +0.10,
+					"spe.mult": +2.60,
+					"int.mult": +1.00,
 					"sens": +25
 				})
 				.end()
@@ -73,8 +73,8 @@ public class CheshireRace extends Race{
 		buildTier(20, "cheshire cat")
 				.buffs({
 					"spe.mult": +1.30,
-					"int.mult": +0.50,
-					"sens": +40
+					"int.mult": +1.00,
+					"sens": +60
 				})
 				.end()
 	}
