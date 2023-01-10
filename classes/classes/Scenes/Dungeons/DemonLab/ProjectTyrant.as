@@ -21,26 +21,27 @@ public class ProjectTyrant extends Monster {
         createBreastRow(0);
 		this.horns.type = Horns.DEMON;
         this.horns.count = 4;
-        initStrTouSpeInte(575, 400, 190, 130);
+        initStrTouSpeInte(575, 400, 210, 130);
         initWisLibSensCor(140, 345, 150, 100);
         this.weaponName = "fists";
         this.weaponVerb = "punch";
-        this.weaponAttack = 80;
+        this.weaponAttack = 180;
         this.armorName = "chitin";
-        this.armorDef = 101;
-        this.armorMDef = 139;
-        this.bonusHP = 300;
-        this.bonusLust = 200;
+        this.armorDef = 201;
+        this.armorMDef = 239;
+        this.bonusHP = 12000;
+        this.bonusLust = 555;
         this.lust = 50;
-        this.level = 45;
+        this.level = 60;
         this.gems = rand(550) + 175;
-        this.drop = new WeightedDrop().add(useables.D_SCALE, 5).add(useables.LETHITE, 2).add(jewelries.POWRRNG, 1);
+        this.drop = new WeightedDrop().add(useables.T_SSILK, 5).add(useables.LETHITE, 2).add(jewelries.POWRRNG, 1);
         this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
         this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
         this.createPerk(PerkLib.ToughHide, 0, 0, 0, 0);
         this.createPerk(PerkLib.Brawler, 0, 0, 0, 0);
         this.createPerk(PerkLib.GoliathI, 0, 0, 0, 0);
-        this.createPerk(PerkLib.GoliathII, 0, 0, 0, 0);
+        this.createPerk(PerkLib.CheetahI, 0, 0, 0, 0);
+        this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
         checkMonster();
     }
 
@@ -96,9 +97,8 @@ public class ProjectTyrant extends Monster {
         player.takePhysDamage(damage * 1.2, true);
         if (HP >= 0.7 * maxHP()) {
             var dmg0:Number = 0;
-            dmg0 += this.spe * 2;
-            dmg0 += eBaseSpeedDamage() * 2;
-            dmg0 += this.weaponAttack * 1;
+            dmg0 += this.spe + this.weaponAttack + eBaseSpeedDamage();
+			dmg0 *= 2;
             outputText("As you struggle with the creature, the Incubus on top of it cackles, shooting at your exposed upper body!\n\n");
             player.takePhysDamage(dmg0, true);
             player.takePhysDamage(dmg0, true);
@@ -140,9 +140,8 @@ public class ProjectTyrant extends Monster {
         clearOutput();
         CorruptionAura();
         var dmg0:Number = 0;
-        dmg0 += this.spe * 2;
-        dmg0 += eBaseSpeedDamage() * 2;
-        dmg0 += this.weaponAttack * 1;
+        dmg0 += this.spe + this.weaponAttack + eBaseSpeedDamage();
+        dmg0 *= 2;
         outputText("The Incubus fires a shot at you!\n\n");
         player.takePhysDamage(dmg0, true);
         var choice0:Number = rand(3);
@@ -161,8 +160,7 @@ public class ProjectTyrant extends Monster {
     }
 
     override public function defeated(hpVictory:Boolean):void {
-        if (inDungeon)
-            SceneLib.dungeons.demonLab.PrTyrantVictory();
+        if (inDungeon) SceneLib.dungeons.demonLab.PrTyrantVictory();
         else cleanupAfterCombat();
     }
 

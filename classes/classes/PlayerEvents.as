@@ -679,16 +679,14 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.createPerk(PerkLib.Immortality, 0, 0, 0, 0);
 				needNext = true;
 			}
-			if ((player.hasPerk(PerkLib.WhatIsReality) || player.hasPerk(PerkLib.VorpalClaw)) && !player.isRaceCached(Races.CHESHIRE)) {
-				outputText("\nYou lose your sense of invulnerability as you are no longer an Cheshire. <b>Perk lost: What is Reality?</b>\n");
-				outputText("<b>Perk lost: Vorpal Claw</b>");
+			if (player.hasPerk(PerkLib.WhatIsReality) && player.hasPerk(PerkLib.VorpalClaw) && !player.isRaceCached(Races.CHESHIRE)) {
+				outputText("\nYou lose your sense of invulnerability as you are no longer an Cheshire. <b>Perks lost: What is Reality? && Vorpal Claw</b>");
 				player.removePerk(PerkLib.WhatIsReality);
 				player.removePerk(PerkLib.VorpalClaw);
 				needNext = true;
 			}
-			if ((!player.hasPerk(PerkLib.WhatIsReality) || !player.hasPerk(PerkLib.WhatIsReality)) && player.isRaceCached(Races.CHESHIRE)) {
-				outputText("\nYou gain a sence of invulnerability as you are now an Cheshire. <b>Perk gained: What is Reality?</b>\n");
-				outputText("<b>Perk gained: Vorpal Claw</b>");
+			if (!player.hasPerk(PerkLib.WhatIsReality) && !player.hasPerk(PerkLib.WhatIsReality) && player.isRaceCached(Races.CHESHIRE)) {
+				outputText("\nYou gain a sence of invulnerability as you are now an Cheshire. <b>Perk gained: What is Reality? && Vorpal Claw</b>");
 				player.createPerk(PerkLib.WhatIsReality, 0, 0, 0, 0);
 				player.createPerk(PerkLib.VorpalClaw, 0, 0, 0, 0);
 				needNext = true;
