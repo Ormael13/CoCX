@@ -26,7 +26,7 @@ public class EyeOfTheTigerMutation extends IMutationPerkType
                 descS += "Increase precision of all attacks by 5% and increase critical chance with natural weapons and weapons by 5%. Increase Rake and Claw attack damage by 50%. Critical strikes from claw attacks inflict bleed damage.";
             }
             if (pTier == 3){
-                descS += "Increase precision of all attacks by 5% and increase critical chance with natural weapons and weapons by 5%. Increase Rake and Claw attack damage by 50%. Increase Natural weapon critical damage by 50%.";
+                descS += "Increase precision of all attacks by 5% and increase critical chance with natural weapons and weapons by 5%. Increase Rake and Claw attack damage by 50%. Critical strikes from claw attacks inflict bleed damage. Increase Natural weapon critical damage by 50%.";
             }
             return descS;
         }

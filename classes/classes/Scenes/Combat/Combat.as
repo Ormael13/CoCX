@@ -408,7 +408,8 @@ public class Combat extends BaseContent {
 			player.HP = player.minHP() + 1;
             combatMenu(false);
 		}
-        else if (player.hasPerk(PerkLib.Immortality)) {
+        else if (player.hasPerk(PerkLib.Immortality) || player.hasPerk(PerkLib.WhatIsReality)) {
+            player.takeLustDamage( player.HP - player.minHP(), true);
             player.HP = player.minHP() + 1;
             combatMenu(false);
         }
@@ -2556,6 +2557,7 @@ public class Combat extends BaseContent {
 		if (player.hasPerk(PerkLib.TrueSeeing)) accmod += 40;
         if (monster.hasStatusEffect(StatusEffects.EvasiveTeleport) && !player.hasPerk(PerkLib.TrueSeeing)) accmod -= player.statusEffectv1(StatusEffects.EvasiveTeleport);
         if (player.jewelryName == "Ring of Ambidexty") accmod += 30;
+        if (player.hasMutation(IMutationsLib.EyeOfTheTigerIM)) accmod += 5;
 		if (player.isFistOrFistWeapon()) {
 			if (flags[kFLAGS.FERAL_COMBAT_MODE] == 1) accmod += Math.round((masteryFeralCombatLevel() - 1) / 2);
 			else {
@@ -4900,6 +4902,7 @@ public class Combat extends BaseContent {
         //DOING EXTRA CLAW ATTACKS
         if (player.haveNaturalClaws()) {
             var ClawDamageMultiplier:Number = 1;
+            if (player.hasMutation(IMutationsLib.EyeOfTheTigerIM)) ClawDamageMultiplier *= 1.5;
             if (player.arms.type == Arms.FROSTWYRM) ClawDamageMultiplier = 2;
             if (player.arms.type != Arms.MANTIS && player.arms.type != Arms.KAMAITACHI){
                 outputText("You claw viciously at your opponent, tearing away at its body.");
@@ -4913,47 +4916,47 @@ public class Combat extends BaseContent {
                 outputText(".");
             }
             if (player.arms.type == Arms.KAMAITACHI){
-                ExtraNaturalWeaponAttack(ClawDamageMultiplier, "KamaitachiScythe");
-                ExtraNaturalWeaponAttack(ClawDamageMultiplier, "KamaitachiScythe");
+                ExtraNaturalWeaponAttack(ClawDamageMultiplier, "KamaitachiScythe", true);
+                ExtraNaturalWeaponAttack(ClawDamageMultiplier, "KamaitachiScythe", true);
             }
             if (player.arms.type == Arms.WENDIGO){
-                ExtraNaturalWeaponAttack(ClawDamageMultiplier, "WendigoClaw");
-                ExtraNaturalWeaponAttack(ClawDamageMultiplier, "WendigoClaw");
+                ExtraNaturalWeaponAttack(ClawDamageMultiplier, "WendigoClaw", true);
+                ExtraNaturalWeaponAttack(ClawDamageMultiplier, "WendigoClaw", true);
             }
             if (player.arms.type == Arms.GARGOYLE){
 				switch (Forgefather.channelInlay){
 					case "amethyst":
-						ExtraNaturalWeaponAttack(ClawDamageMultiplier, "darkness");
-						ExtraNaturalWeaponAttack(ClawDamageMultiplier, "darkness");
+						ExtraNaturalWeaponAttack(ClawDamageMultiplier, "darkness", true);
+						ExtraNaturalWeaponAttack(ClawDamageMultiplier, "darkness", true);
 						break;
 					case "ruby":
-						ExtraNaturalWeaponAttack(ClawDamageMultiplier, "fire");
-						ExtraNaturalWeaponAttack(ClawDamageMultiplier, "fire");
+						ExtraNaturalWeaponAttack(ClawDamageMultiplier, "fire", true);
+						ExtraNaturalWeaponAttack(ClawDamageMultiplier, "fire", true);
 						break;
 					case "sapphire":
-						ExtraNaturalWeaponAttack(ClawDamageMultiplier, "ice");
-						ExtraNaturalWeaponAttack(ClawDamageMultiplier, "ice");
+						ExtraNaturalWeaponAttack(ClawDamageMultiplier, "ice", true);
+						ExtraNaturalWeaponAttack(ClawDamageMultiplier, "ice", true);
 						break;
 					case "topaz":
-						ExtraNaturalWeaponAttack(ClawDamageMultiplier, "lightning");
-						ExtraNaturalWeaponAttack(ClawDamageMultiplier, "lightning");
+						ExtraNaturalWeaponAttack(ClawDamageMultiplier, "lightning", true);
+						ExtraNaturalWeaponAttack(ClawDamageMultiplier, "lightning", true);
 						break;
 					default:
-						ExtraNaturalWeaponAttack(ClawDamageMultiplier);
-						ExtraNaturalWeaponAttack(ClawDamageMultiplier);
+						ExtraNaturalWeaponAttack(ClawDamageMultiplier, "", true);
+						ExtraNaturalWeaponAttack(ClawDamageMultiplier, "", true);
 						break;
 				}
 			}
 			else{
                 if (player.hasPerk(PerkLib.HellfireCoat)) {
-                    ExtraNaturalWeaponAttack(ClawDamageMultiplier, "fire");
-                    ExtraNaturalWeaponAttack(ClawDamageMultiplier, "fire");
+                    ExtraNaturalWeaponAttack(ClawDamageMultiplier, "fire", true);
+                    ExtraNaturalWeaponAttack(ClawDamageMultiplier, "fire", true);
                 } else {
-                    ExtraNaturalWeaponAttack(ClawDamageMultiplier);
-                    ExtraNaturalWeaponAttack(ClawDamageMultiplier);
+                    ExtraNaturalWeaponAttack(ClawDamageMultiplier, "", true);
+                    ExtraNaturalWeaponAttack(ClawDamageMultiplier, "", true);
                     if (player.weaponName == "CatGlove" && Arms.hasFelineArms(player)) {
-                        ExtraNaturalWeaponAttack(ClawDamageMultiplier);
-                        ExtraNaturalWeaponAttack(ClawDamageMultiplier);
+                        ExtraNaturalWeaponAttack(ClawDamageMultiplier, "", true);
+                        ExtraNaturalWeaponAttack(ClawDamageMultiplier, "", true);
                     }
                 }
             }
@@ -4961,27 +4964,27 @@ public class Combat extends BaseContent {
             if (player.arms.type == Arms.WOLF && player.hasPerk(PerkLib.Lycanthropy)){
                 if (flags[kFLAGS.LUNA_MOON_CYCLE] != 7){
                     outputText("The moon grants you strength as you rend your opponent one more time with your claws.");
-                    ExtraNaturalWeaponAttack();
+                    ExtraNaturalWeaponAttack(1, "", true);
                     outputText("\n");
                 } else  {
                     outputText("The full moon grants you strength as you rend your opponent two more times with your claws.");
-                    ExtraNaturalWeaponAttack();
-                    ExtraNaturalWeaponAttack();
+                    ExtraNaturalWeaponAttack(1, "", true);
+                    ExtraNaturalWeaponAttack(1, "", true);
                     outputText("\n");
                 }
             }
             if (player.arms.type == Arms.DISPLACER)
             {
                 outputText("You use your extra arms to rend your opponent two more times.");
-                ExtraNaturalWeaponAttack();
-                ExtraNaturalWeaponAttack();
+                ExtraNaturalWeaponAttack(1, "", true);
+                ExtraNaturalWeaponAttack(1, "", true);
                 outputText("\n");
             }
             if (player.arms.type == Arms.WENDIGO)
             {
                 outputText("Your maddening hunger gives you strength allowing you to attack two more times, your strike delivering cursed wounds.");
-                ExtraNaturalWeaponAttack(1, "WendigoClaw");
-                ExtraNaturalWeaponAttack(1, "WendigoClaw");
+                ExtraNaturalWeaponAttack(1, "WendigoClaw", true);
+                ExtraNaturalWeaponAttack(1, "WendigoClaw", true);
                 outputText("\n");
             }
         }
@@ -6765,7 +6768,7 @@ public class Combat extends BaseContent {
         return damage;
     }
 
-    public function ExtraNaturalWeaponAttack(FeraldamageMultiplier:Number = 1, SpecialEffect:String = ""):void {
+    public function ExtraNaturalWeaponAttack(FeraldamageMultiplier:Number = 1, SpecialEffect:String = "", isClawAttack:Boolean = false):void {
         var accMelee:Number = 0;
         accMelee += (meleeAccuracy() / 2);
         if (flags[kFLAGS.ATTACKS_ACCURACY] > 0) accMelee -= flags[kFLAGS.ATTACKS_ACCURACY];
@@ -6791,6 +6794,16 @@ public class Combat extends BaseContent {
             if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 			if (rand(100) < critChance) {
                 crit = true;
+                if (player.perkv1(IMutationsLib.EyeOfTheTigerIM) >= 2) {
+                    if (monster.canMonsterBleed()) {
+                        if (!monster.hasStatusEffect(StatusEffects.SharkBiteBleed)) monster.createStatusEffect(StatusEffects.SharkBiteBleed,4,0,0,0);
+                        else {
+                            monster.addStatusValue(StatusEffects.SharkBiteBleed,1, 3);
+                        }
+                    }
+                }
+                if (player.perkv1(IMutationsLib.EyeOfTheTigerIM) >= 4) crit *= 1.5;
+                if (player.hasPerk(PerkLib.VorpalClaw)) crit *= 2;
                 damage *= critDamage;
             }
             //Apply AND DONE!
@@ -7468,6 +7481,7 @@ public class Combat extends BaseContent {
 				else critPChance += 2 * Math.round((player.sens - 25) / 5);
 			}
 		}
+        if (player.perkv1(IMutationsLib.EyeOfTheTigerIM) >= 2) critPChance += 5;
         return critPChance;
     }
 
@@ -7517,6 +7531,7 @@ public class Combat extends BaseContent {
 				else critMChance += 2 * Math.round((player.sens - 25) / 5);
 			}
 		}
+        if (player.perkv1(IMutationsLib.EyeOfTheTigerIM) >= 2) critMChance += 5;
         return critMChance;
     }
 
@@ -15682,6 +15697,7 @@ public function RacialParagonAbilityBoost():Number {
 public function BleedDamageBoost(isARacialAbility:Boolean = false):Number {
     var BleedMod:Number = 1.0;
     if (player.hasPerk(PerkLib.ThirstForBlood)) BleedMod += 0.25;
+    if (player.hasPerk(PerkLib.KingOfTheJungle)) BleedMod += 0.2
     if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1) BleedMod += 0.25;
     if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2) BleedMod += 0.25;
     if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3) BleedMod += 0.25;

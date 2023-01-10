@@ -54,6 +54,7 @@ public class CheshireRace extends Race{
 									body.furColors == "lilac and white"
 						}, +2)
 				.hasPerk(PerkLib.Flexibility, +1)
+				.hasPerk(PerkLib.Insanity, +1)
 				.customRequirement("","more cheshire features than other magical feline",
 						CatRace.isCheshireSubrace,0,-1000
 				);
@@ -61,11 +62,19 @@ public class CheshireRace extends Race{
 		addMutation(IMutationsLib.CatLikeNimblenessIM);
 		addMutation(IMutationsLib.EyeOfTheTigerIM);
 		
-		buildTier(11, "cheshire cat")
+		buildTier(13, "trickster cat")
 				.buffs({
 					"spe.mult": +0.60,
 					"int.mult": +0.10,
 					"sens": +25
+				})
+				.end()
+
+		buildTier(20, "cheshire cat")
+				.buffs({
+					"spe.mult": +1.30,
+					"int.mult": +0.50,
+					"sens": +40
 				})
 				.end()
 	}

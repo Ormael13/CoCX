@@ -675,8 +675,28 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			if (!player.hasPerk(PerkLib.Immortality) && player.isRaceCached(Races.AZAZEL)) {
-				outputText("\nYou regain your sence of invulnerability as you are now an Azazel.\n");
+				outputText("\nYou gain a sence of invulnerability as you are now an Azazel.\n");
 				player.createPerk(PerkLib.Immortality, 0, 0, 0, 0);
+				needNext = true;
+			}
+			if (player.hasPerk(PerkLib.WhatIsReality) && !player.isRaceCached(Races.CHESHIRE)) {
+				outputText("\nYou lose your sence of invulnerability as you are no longer an Cheshire.\n");
+				player.removePerk(PerkLib.WhatIsReality);
+				needNext = true;
+			}
+			if (!player.hasPerk(PerkLib.WhatIsReality) && player.isRaceCached(Races.CHESHIRE)) {
+				outputText("\nYou gain a sence of invulnerability as you are now an Cheshire.\n");
+				player.createPerk(PerkLib.WhatIsReality, 0, 0, 0, 0);
+				needNext = true;
+			}
+			if (player.hasPerk(PerkLib.WhatIsReality) && !player.isRaceCached(Races.CHESHIRE)) {
+				outputText("\nYou lose your sence of invulnerability as you are no longer an Cheshire.\n");
+				player.removePerk(PerkLib.WhatIsReality);
+				needNext = true;
+			}
+			if (!player.hasPerk(PerkLib.WhatIsReality) && player.isRaceCached(Races.CHESHIRE)) {
+				outputText("\nYou gain a sence of invulnerability as you are now an Cheshire.\n");
+				player.createPerk(PerkLib.WhatIsReality, 0, 0, 0, 0);
 				needNext = true;
 			}
 			//No better place for these since the code for the event is part of CoC.as or one of its included files
