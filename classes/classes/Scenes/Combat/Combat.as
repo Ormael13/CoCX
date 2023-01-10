@@ -2087,7 +2087,7 @@ public class Combat extends BaseContent {
         else if ((player.hasPerk(PerkLib.Evade) && rand(100) < 10) || (player.hasPerk(PerkLib.JunglesWanderer) && rand(100) < 35))
             outputText("Using your skills at evading attacks, you anticipate and sidestep [themonster]' attacks.");
         //("Misdirection"
-        else if (player.hasPerk(PerkLib.Misdirection) && rand(100) < 15 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia"))
+        else if (player.hasPerk(PerkLib.Misdirection) && rand(100) < 15 && player.armor.hasTag(ItemTags.A_AGILE))
             outputText("Using Raphael's teachings, you anticipate and sidestep [themonster]' attacks.");
         //Determine if cat'ed
         else if (player.hasPerk(PerkLib.Flexibility) && rand(100) < 6)
@@ -3369,6 +3369,7 @@ public class Combat extends BaseContent {
             damage += Math.round(player.inte * 0.1);
             if (player.inte >= 50) damage += Math.round(player.inte * ((player.inte / 50) * 0.05));
             if (player.weaponRange is Artemis) damage *= 1.5;
+            if (player.armorName == "FrancescaCloak") damage *= 2;
             switch (flags[kFLAGS.ELEMENTAL_ARROWS]) {
                 case 1:
                     damage *= fireDamageBoostedByDao();
@@ -4950,6 +4951,10 @@ public class Combat extends BaseContent {
                 } else {
                     ExtraNaturalWeaponAttack(ClawDamageMultiplier);
                     ExtraNaturalWeaponAttack(ClawDamageMultiplier);
+                    if (player.weaponName == "CatGlove" && Arms.hasFelineArms(player)) {
+                        ExtraNaturalWeaponAttack(ClawDamageMultiplier);
+                        ExtraNaturalWeaponAttack(ClawDamageMultiplier);
+                    }
                 }
             }
             outputText("\n");
@@ -7860,6 +7865,7 @@ public class Combat extends BaseContent {
         if (player.hasStatusEffect(StatusEffects.YukiOnnaKimono)) damage *= 0.2;
         if (player.hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage *= 2;
         if (player.hasPerk(PerkLib.IceQueenGown)) damage = damage / 100;
+        if (player.weaponRangeName == "Nekonomicon") damage *= 2;
 		damage *= EyesOfTheHunterDamageBonus();
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -8021,6 +8027,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage *= 2;
         if (player.hasPerk(PerkLib.VladimirRegalia)) damage *= 2;
         if (player.hasPerk(PerkLib.IceQueenGown)) damage = damage / 100;
+        if (player.weaponRangeName == "Nekonomicon") damage *= 2;
 //	if (player.hasPerk(PerkLib.ColdMastery) || player.hasPerk(PerkLib.ColdAffinity)) damage *= 2;
 		damage *= EyesOfTheHunterDamageBonus();
         if (damage == 0) MSGControllForEvasion = true;

@@ -1195,8 +1195,27 @@ public function kaibaShopMainMenu2():void {
 			addButton(8, "Leaf Amulet", buyItem, necklaces.LEAFAMU).hint("Leaf Amulet - Increase white magic damage and evasion by 10%. (Effect doubled for elves) Decrease spells cooldown by 1 turn if used by elf. This is a temporary sale.");
 		}
 		//addButton(0, "Necklace", buyItem, necklaces.CSNECK);
-		addButton(12, "-1-", kaibaShopMainMenuPage1);
-		addButton(13, "-2-", kaibaShopMainMenuPage2);
+		addButton(12, "-2-", kaibaShopMainMenuPage2);
+		addButton(13, "-4-", kaibaShopMainMenuPage4);
+	}
+	if (flags[kFLAGS.KAIBA_SHELFS] == 3) {
+		if (player.hasStatusEffect(StatusEffects.KaibaDailyLimit)) {
+			addButtonDisabled(0, "Cat Gloves", "You already bought item from Kaiba today.");
+			addButtonDisabled(1, "Cat Collar", "You already bought item from Kaiba today.");
+			addButtonDisabled(2, "Neko Top", "You already bought item from Kaiba today.");
+			addButtonDisabled(3, "NekoBottom", "You already bought item from Kaiba today.");
+			addButtonDisabled(4, "F.Cloak", "You already bought item from Kaiba today.");
+		}
+		else {
+			addButton(0, "Cat Gloves", buyItem, weapons.CATGLOV).hint("Black Cat Gloves - Not quite a weapon as much as they are black gloves with open fingers to let the tips out. These were made and custom enchanted for a cat girl adventurer. This is a temporary sale.");
+			addButton(1, "Cat Collar", buyItem, necklaces.CATBELL).hint("Leather collar with cat bell - Aside from being extra cute on you this necklace not only raises natural evasion but also allows a cat type wearer to deliver tease damage when dodging attacks. A must have when in heat. This is a temporary sale.");
+			addButton(2, "Neko Top", buyItem, undergarments.BN_TOP).hint("Black Neko Leather Top - A bra made of leather black as night. Makes one slimmer than it appears, increasing evasion. Stronger at night. This is a temporary sale.");
+			addButton(3, "NekoBottom", buyItem, undergarments.BN_SKIRT).hint("Black Neko Leather Bottom - A skirt made of leather black as night. Makes one slimmer than it appears, increasing evasion. Stronger at night. This is a temporary sale.");
+			addButton(4, "F.Cloak", buyItem, armors.FCLOAK).hint("Francesca's Black Cloak - A cloak rumored to have been worn by the black cat adventurer Francesca the heavenly black tiger. Not exactly a strong armor per say, its true ability is to conceal its owner body's true location through a mix of glamor and illusion spell improving the users evasiveness by leaps and bound. Francesca was a famous sword mage and as thus the cloak greatly reinforces spells casted through the medium of a weapon. This is a temporary sale.");
+		}
+		//addButton(0, "Necklace", buyItem, necklaces.CSNECK);
+		addButton(12, "-2-", kaibaShopMainMenuPage2);
+		addButton(13, "-3-", kaibaShopMainMenuPage3);
 	}
 	addButton(14, "Leave", telAdreMenu);
 }
@@ -1210,6 +1229,10 @@ private function kaibaShopMainMenuPage2():void {
 }
 private function kaibaShopMainMenuPage3():void {
 	flags[kFLAGS.KAIBA_SHELFS] = 2;
+	kaibaShopMainMenu2();
+}
+private function kaibaShopMainMenuPage4():void {
+	flags[kFLAGS.KAIBA_SHELFS] = 3;
 	kaibaShopMainMenu2();
 }
 

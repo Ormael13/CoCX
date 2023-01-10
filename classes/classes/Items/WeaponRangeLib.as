@@ -92,8 +92,9 @@ public final class WeaponRangeLib extends ItemConstants
 		public const E_TOME_:WeaponRange = new WeaponRange("E. Tome", "E. Tome", "Elementalist’s Tome", "an Elementalist's Tome", "nothing", 0, 500, "This ornate navy blue book is inscribed filled with magical glyphs and complicated diagrams, concealed within a detailed treatise on the nature of the world. The magic within this tome allows you to strengthen your connection with summoned elementals. (+50% to elementals damage)", "Tome");
 		public const G_E_MAN:WeaponRange = new WeaponRange("G.E.Book", "G.E.Book", "Golemancy Evocation Manuscript", "A bundle of pages haphazardly bound together within a worn-out leather book.", "nothing", 0, 200, "This black tome is filled with golemancy knowledge. The magic within this tome allows you to control your manufactured golems with greater control and precision. (+50% to golems damage)", "Tome");
 		public const I_TOME_:InquisitorsTome = new InquisitorsTome();
+		public const NEKONOM:WeaponRange = new WeaponRange("Nekonomicon", "Nekonomicon", "Nekonomicon", "a Nekonomicon", "nothing", 0, 500, "A copy of the unholy texts of the Hellcat sect. Rumor has it their blasphemous lord Abraxas wrote it himself. (+100% power to fire and dark spell)", "Tome");
 		public const SSKETCH:WeaponRange = new WeaponRange("SSketch", "S.Sketchbook", "Sage’s Sketchbook", "a Sage’s Sketchbook", "nothing", 0, 500, "Strangely, this ornate blue book is completely blank.  Yet, as you flip through it, you occasionally see magical glyphs and complicated diagrams out of the corner of your eye, only to disappear as you focus.  Still, the arcane energies within the book could augment your spellcraft.", "Tome").withBuffs({'spellpower': + 0.6}) as WeaponRange;
-		
+
 		/*
 		private static function mk(id:String,shortName:String,name:String,longName:String,verb:String,attack:Number,value:Number,description:String,perk:String=""):Weapon {
 			return new Weapon(id,shortName,name,longName,verb,attack,value,description,perk);

@@ -109,8 +109,7 @@ public class TestMenu extends BaseContent
 		bd.add("Gargoyle", GargoyleMenu, "To Be or Not To Be Gargoyle that is a question.");
 		bd.add("BelisaTest", belisatest3, "Belisa Trigger").disableIf(BelisaFollower.BelisaInGame && BelisaFollower.BelisaFollowerStage < 3);
 		bd.add("Test dynamic stat", TestDynamicStats, "Test Dynamic stats.");
-		bd.add("Kiha Wedding", kihaWedding, "Test Kiha Wedding Content before D4 completed");
-		bd.add("Alvina Pure", alvinaSaveFromHerself, "Test Alvina purification");
+		bd.add("Neko Items", giveNekoItems, "All new neko items from Nekobake Inn doc");
 		submenu(bd, SoulforceCheats, 0, false);
 	}
 
@@ -288,17 +287,25 @@ public class TestMenu extends BaseContent
 		if (BelisaFollower.BelisaEncounternum >= 1) SceneLib.belisa.subsequentEncounters();
 		else SceneLib.belisa.firstEncounter();
 	}
-	public function kihaWedding():void {
-		SceneLib.kihaFollower.KihaProposal();
-	}
-	public function alvinaSaveFromHerself():void {
-		SceneLib.alvinaFollower.alvinaDontFightWon();
-	}
     public function cheatFixShards():void { //wrapper for fixShards to use it in cheat menu
 		clearOutput();
         fixShards();
 		doNext(SoulforceCheats);
     }
+	public function giveNekoItems():void {
+		outputText("\n\n<b>(Gained " + weapons.CATGLOV.longName + "!)</b>\n\n");
+		outputText("\n\n<b>(Gained " + weaponsrange.NEKONOM.longName + "!)</b>\n\n");
+		outputText("\n\n<b>(Gained " + armors.FCLOAK.longName + "!)</b>\n\n");
+		outputText("\n\n<b>(Gained " + undergarments.BN_TOP.longName + "!)</b>\n\n");
+		outputText("\n\n<b>(Gained " + undergarments.BN_SKIRT.longName + "!)</b>\n\n");
+		outputText("\n\n<b>(Gained " + necklaces.CATBELL.longName + "!)</b>\n\n");
+		inventory.takeItem(weapons.CATGLOV, curry(NonEquipmentMenu, 2));
+		inventory.takeItem(weaponsrange.NEKONOM, curry(NonEquipmentMenu, 2));
+		inventory.takeItem(armors.FCLOAK, curry(NonEquipmentMenu, 2));
+		inventory.takeItem(undergarments.BN_TOP, curry(NonEquipmentMenu, 2));
+		inventory.takeItem(undergarments.BN_SKIRT, curry(NonEquipmentMenu, 2));
+		inventory.takeItem(necklaces.CATBELL, curry(NonEquipmentMenu, 2));
+	}
 	public function fixShards():void {
 		var cnt:int = 0;
 		player.removeKeyItem("Radiant shard");
