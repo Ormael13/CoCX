@@ -6,6 +6,7 @@ package classes
 import classes.BodyParts.Face;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
+import classes.IMutations.HellHoundFireBalls;
 import classes.IMutations.IMutationsLib;
 import classes.Perks.*;
 

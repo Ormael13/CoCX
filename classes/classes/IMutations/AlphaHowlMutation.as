@@ -82,7 +82,7 @@ public class AlphaHowlMutation extends IMutationPerkType
             else if (pTier == 2) pBuffs['str.mult'] = 0.15;
             else if (pTier == 3) pBuffs['str.mult'] = 0.30;
             else if (pTier == 4) pBuffs['str.mult'] = 0.45;
-            if (pTier == 4 && (player.isRaceCached(Races.WEREWOLF) || player.isRaceCached(Races.DOG) || player.isRaceCached(Races.WOLF))){
+            if (pTier == 4 && (player.isRaceCached(Races.WEREWOLF) || player.isRaceCached(Races.DOG) || player.isRaceCached(Races.WOLF) || player.isRaceCached(Races.CERBERUS))){
                 pBuffs['str.mult'] += 0.05*LunaFollower.WerewolfPackMember;
                 pBuffs['spe.mult'] = 0.05*LunaFollower.WerewolfPackMember;
                 pBuffs['tou.mult'] = 0.05*LunaFollower.WerewolfPackMember;
