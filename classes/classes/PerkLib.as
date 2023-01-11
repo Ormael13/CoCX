@@ -3866,6 +3866,10 @@ public class PerkLib
 				"You are blessed with the power of a unicorn and while below 20 corruption all white magic spells are 20% stronger and lust resistance increased by 10%.");
 		public static const Venomancy:PerkType = mk("Venomancy", "Venomancy",
 				"Grants the Venomancy ability. While active, apply venom effect to spellcasting the venom benefiting from caster perks multipliers but cost a charge each time.")
+		public static const VorpalClaw:PerkType = mk("Vorpal Claw", "Vorpal Claw",
+				"A cheshire natural weapon distorts space inflicting particularly vicious critical strikes.");
+		public static const WhatIsReality:PerkType = mk("What Is Reality", "What Is Reality?",
+				"When you would take fatal damage, laugh at death and deny it ever happened. Mocking death causes the increase of the arousal of the user which can still cause it to simply give up so to get to lewder games.");
 		public static const Whispered:PerkType = mk("Whispered", "Whispered",
 				"Akbal's blessings grant limited telepathy that can induce fear.");
 
@@ -7381,4 +7385,4 @@ public class PerkLib
         }
 	}
 }
-}
+}

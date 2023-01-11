@@ -67,6 +67,7 @@ public class Changelog extends BaseContent
 			outputText("-Electra now acknowledges that more then just Raiju can volt transfer. Tbird can get supercharged too. More accounting for Kirin existing. Added centaur support to Supercharged scene, Horsecock now become big starting higher then 25 inch seeing as a normal horse cock is 20 inch. (Liadri)\n");
 			outputText("-Loppe can start training at Uma's shop. Loppe can remove her contraceptive spell if training high enough. Can meet Loppe's 'dad' in the plains for a few new scenes. (EragonX)\n");
 			outputText("-Make Siegweird's quest take Alvina's purification into account. (EragonX)\n");
+			outputText("-After Etna moves into camp she gains a new encounter in the hills that can unlock more content. (EragonX)\n");
 			outputText("-Fixes: Polygamy toggling with no marriages, Marae prank option, Sandmother vaginal fuck button (Svalkash)\n");
 			outputText("-Fixed being unable to aquire the achievements and duel scythes for beating Alvina if you are level 185. (Aduro)\n");
 			//outputText("-Dam can be upgraded 2 times (up to 3rd tier of wood dam) and Fishery once (to allow 2 npc's working at it - it also gonna increase each worker fish production by 20%)\n");
@@ -80,7 +81,6 @@ public class Changelog extends BaseContent
 			outputText("-New tier 2 misc lvl-up perk: Skilled Ranger (Ex). Req. Skilled Ranger perk and 35+ str/tou/spe. Effect: When range atk crit chance exceed 100% crit dmg is x2 and when exceed 200% crit dmg is x3. (+15% range physical attacks multiplier and then adds another 50% (total of 100%) on top of final result)\n");
 			outputText("-New tier 3 misc lvl-up perk: Skilled Gunslinger (Ex). Req. Skilled Gunslinger perk, lvl 15+ and 40+ str/tou/spe. Effect: When firearms atk crit chance exceed 100% crit dmg is x2 and when exceed 200% crit dmg is x3. (+20% firearms attacks multiplier and then adds another 50% (total of 100%) on top of final result)\n");
 			outputText("-New Cerberus TF event (sleep in camp while being fully hellhound (black pepper) and have Marae's Lethicite) Has a few unique interactions with corrupted enemies. (EragonX)\n");
-			outputText("-After Etna moves into camp she gains a new encounter in the hills that can unlock more content. (EragonX)\n");
 			outputText("-Metamorph aditions - Face: Bunny, Dog, Kangaroo, Ferret mask, Ferret, Rhino, Echidna, Bear, Squirrel; Tail: Azazel, Rabbit, Avian, Griffin, Kangaroo, Thunderbird, Squirrel, Ferret, Bear, Ushi Oni; Ratatoskr hair (EragonX)\n");
 			outputText("-New event perk: Elven Thorn shot (grow Rosethorns on arow shaft, lust+bleed). Training with Lutien with 100+ speed and knowing Briarthorn spell.\n");
 			outputText("-New event perk: Elven Twin shot (double bow shots after bonusses). Training with Lutien with maxed speed stat (100%)\n");
@@ -92,12 +92,12 @@ public class Changelog extends BaseContent
 			outputText("-The great reckoning as arrived all bleed ability now scales of your attack damage instead of a set percentage of monster HP (Liadri)\n");
 			outputText("-Add the Project Nightwalker & Flamespreader encounters after 3rd story dungeon as randomn encouters outside dungeon. (EragonX)\n");
 			outputText("-Kiha combat companion! (EragonX)\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Bee race req. for vagina replaced for specificaly req. bee vagina.\n");
+			outputText("-New encounter in the High mountains, the Nekobake Inn. (EragonX)\n");
+			outputText("-New Neko gear items have appeared in the show, focused on evasiveness. (EragonX)\n");
+			outputText("-Cheshire cat bonuses now have two tiers trickster/cheshire cat (13/20): +30/100% to int multi, +180/260% to spe multi, +25/60 sens\n");
+			outputText("-New event perk: What Is Reality? - Gained by becoming cheshire cat. Effect: When you would take fatal damage, laugh at death and deny it ever happened. Mocking death causes the increase of the arousal of the user which can still cause it to simply give up so to get to lewder games.\n");
+			outputText("-New event perk: Vorpal Claw - Gained by becoming cheshire cat. Effect: A cheshire natural weapon distorts space inflicting particularly vicious critical strikes. (Natural attacks dmg x2)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
