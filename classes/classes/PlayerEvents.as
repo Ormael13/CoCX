@@ -54,11 +54,9 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		//Implementation of TimeAwareInterface
 		public function timeChange():Boolean {
 			var needNext:Boolean;
-			if (time.hours == 6) {
-				checkedTurkey = 0;
-				checkedHellhound = 0;
-				checkedDream = 0;
-			}
+			checkedTurkey = 0;
+			checkedHellhound = 0;
+			checkedDream = 0;
 
 			if (player.cumMultiplier > 19999) player.cumMultiplier = 19999;
 			if (player.ballSize > 400) player.ballSize = 400;
@@ -661,10 +659,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.Lycanthropy);
 				needNext = true;
 			}
-			if (player.isRaceCached(Races.CERBERUS) && player.hasMutation(IMutationsLib.HellHoundFireBallsIM)) {
-				var pTier:Number = player.perkv1(IMutationsLib.HellHoundFireBallsIM);
-				if (pTier < 4 && player.level >= 30*pTier && player.perkv2(IMutationsLib.HellHoundFireBallsIM) >= 30*2*pTier) {
-					IMutationsLib.HellHoundFireBallsIM.acquireMutation(player, outputText("\nYour balls begin to suddenly feel heavier… warmer. You begin pumping your two penis absentmindedly thinking of all the bitches you recently broke on your twin shaft as the heat rushes all the way to your pair of erect members. You cum a humongous load of smoking warm cum, way to warm for normal seeds. It looks like your balls are progressively continuing their evolution to be more hellhound-like as your seed takes on burning hot property just like that of a hellhound.\n"));
+			if (player.isRaceCached(Races.CERBERUS) && player.hasMutation(IMutationsLib.HellhoundFireBalls)) {
+				var pTier:Number = player.perkv1(IMutationsLib.HellhoundFireBalls);
+				if (pTier < 4 && player.level >= 30*pTier && player.perkv2(IMutationsLib.HellhoundFireBalls) >= 30*2*pTier) {
+					IMutationsLib.HellhoundFireBalls.acquireMutation(player, outputText("\nYour balls begin to suddenly feel heavier… warmer. You begin pumping your two penis absentmindedly thinking of all the bitches you recently broke on your twin shaft as the heat rushes all the way to your pair of erect members. You cum a humongous load of smoking warm cum, way to warm for normal seeds. It looks like your balls are progressively continuing their evolution to be more hellhound-like as your seed takes on burning hot property just like that of a hellhound.\n"));
 					needNext = true;
 				}
 			}
@@ -2922,8 +2920,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					SceneLib.holidays.datTurkeyRumpMeeting(); //TURKEY SURPRISE
                     return true;
                 }
-				if (checkedHellhound++ == 0 && rand(5) == 0 && !player.isRaceCached(Races.CERBERUS) && player.isHellHound() && player.hasPerk(PerkLib.Hellfire) && camp.IsSleeping && player.hasKeyItem("Marae's Lethicite") >= 0
-						&& player.keyItemvX("Marae's Lethicite", 1) > 0 ) { //&& !player.raceCached(Cerberus)
+				if (checkedHellhound++ == 0 && rand(2) == 0 && !player.isRaceCached(Races.CERBERUS) && player.isHellHound() && player.hasPerk(PerkLib.Hellfire) && camp.IsSleeping && player.hasKeyItem("Marae's Lethicite") >= 0
+						&& player.keyItemvX("Marae's Lethicite", 1) > 0 && !player.blockingBodyTransformations()) {
 					SceneLib.camp.campUniqueScenes.hellhoundCapture();
 					return true;
 				}

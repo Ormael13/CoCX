@@ -56,7 +56,7 @@ public class FairyRace extends Race {
 						function (body:BodyData):Boolean {
 							return body.player.skinType == Skin.PLAIN && body.skinBaseAdj == "flawless"
 						}, +1)
-				.hasPerk(PerkLib.TransformationImmunityFairy, +5);
+				.hasPerk(PerkLib.TransformationImmunity2, +5);
 		addScoresAfter(1)
 				.skinPlainOnly(+1)
 				.noCock(+1);
@@ -75,7 +75,7 @@ public class FairyRace extends Race {
 				.end();
 
 		buildTier(23, "Great Fairy")
-                .requirePerk(PerkLib.TransformationImmunityFairy)
+                .requirePerk(PerkLib.TransformationImmunity2)
 				.buffs({
 					"str.mult": -0.20,
 					"tou.mult": -0.10,

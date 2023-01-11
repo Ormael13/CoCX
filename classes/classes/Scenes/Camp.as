@@ -1198,7 +1198,7 @@ public class Camp extends NPCAwareContent{
 		var counter:Number = 0;
 		counter += slavesCount();
 		counter += LunaFollower.WerewolfPackMember;
-		if (player.hasMutation(IMutationsLib.HellHoundFireBallsIM)) counter += player.perkv3(IMutationsLib.HellHoundFireBallsIM);
+		if (player.hasPerk(IMutationsLib.HellhoundFireBalls)) counter += player.perkv3(IMutationsLib.HellhoundFireBalls);
 		if (arianScene.arianFollower()) counter++;
 		if (BelisaFollower.BelisaInCamp) counter++;
 		if (CelessScene.instance.isCompanion() && CelessScene.instance.isCorrupt) counter++;

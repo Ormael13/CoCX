@@ -59,6 +59,7 @@ public class IMutationsLib
 		public static const GazerEyesIM:IMutationPerkType = new GazerEyesMutation();
 		public static const GorgonEyesIM:IMutationPerkType = new GorgonEyesMutation();
 		public static const HarpyHollowBonesIM:IMutationPerkType = new HarpyHollowBonesMutation();
+		public static const HellhoundFireBalls:IMutationPerkType = new HellHoundFireBalls();
 		public static const HeartOfTheStormIM:IMutationPerkType = new HeartOfTheStormMutation();
 		public static const HellHoundFireBallsIM:IMutationPerkType = new HellHoundFireBalls();
 		public static const HinezumiBurningBloodIM:IMutationPerkType = new HinezumiBurningBloodMutation();

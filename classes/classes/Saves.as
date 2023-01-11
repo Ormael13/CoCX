@@ -616,41 +616,11 @@ public function savePermObject(isFile:Boolean):void {
 				saveFile.data.flags[i] = 0;
 			}
 		}
-		saveFile.data.flags[kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM] = flags[kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM];
 
-		saveFile.data.flags[kFLAGS.SHOW_SPRITES_FLAG] = flags[kFLAGS.SHOW_SPRITES_FLAG];
-		saveFile.data.flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] = flags[kFLAGS.SILLY_MODE_ENABLE_FLAG];
-		saveFile.data.flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS] = flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS];
-		saveFile.data.flags[kFLAGS.SCENEHUNTER_OTHER] = flags[kFLAGS.SCENEHUNTER_OTHER];
-		saveFile.data.flags[kFLAGS.SCENEHUNTER_DICK_SELECT] = flags[kFLAGS.SCENEHUNTER_DICK_SELECT];
-		saveFile.data.flags[kFLAGS.SCENEHUNTER_LOSS_SELECT] = flags[kFLAGS.SCENEHUNTER_LOSS_SELECT];
-		saveFile.data.flags[kFLAGS.SCENEHUNTER_MOCK_FIGHTS] = flags[kFLAGS.SCENEHUNTER_MOCK_FIGHTS];
-		saveFile.data.flags[kFLAGS.SCENEHUNTER_UNI_HERMS] = flags[kFLAGS.SCENEHUNTER_UNI_HERMS];
-        saveFile.data.flags[kFLAGS.WATERSPORTS_ENABLED] = flags[kFLAGS.WATERSPORTS_ENABLED];
+		// saving global settings
+		for each (var globalFlag:int in kFLAGS.GLOBAL_FLAGS_ARRAY)
+			saveFile.data.flags[globalFlag] = flags[globalFlag];
 
-		saveFile.data.flags[kFLAGS.LVL_UP_FAST] = flags[kFLAGS.LVL_UP_FAST];
-		saveFile.data.flags[kFLAGS.MUTATIONS_SPOILERS] = flags[kFLAGS.MUTATIONS_SPOILERS];
-		saveFile.data.flags[kFLAGS.NEWPERKSDISPLAY] = flags[kFLAGS.NEWPERKSDISPLAY];
-		saveFile.data.flags[kFLAGS.INVT_MGMT_TYPE] = flags[kFLAGS.INVT_MGMT_TYPE];
-		saveFile.data.flags[kFLAGS.CHARVIEWER_ENABLED] = flags[kFLAGS.CHARVIEWER_ENABLED];
-		saveFile.data.flags[kFLAGS.CHARVIEW_STYLE] = flags[kFLAGS.CHARVIEW_STYLE];
-		saveFile.data.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] = flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN];
-		saveFile.data.flags[kFLAGS.USE_OLD_FONT] = flags[kFLAGS.USE_OLD_FONT];
-		saveFile.data.flags[kFLAGS.BACKGROUND_STYLE] = flags[kFLAGS.BACKGROUND_STYLE];
-		saveFile.data.flags[kFLAGS.IMAGEPACK_OFF] = flags[kFLAGS.IMAGEPACK_OFF];
-		saveFile.data.flags[kFLAGS.SPRITE_STYLE] = flags[kFLAGS.SPRITE_STYLE];
-		saveFile.data.flags[kFLAGS.WATERSPORTS_ENABLED] = flags[kFLAGS.WATERSPORTS_ENABLED];
-		saveFile.data.flags[kFLAGS.USE_12_HOURS] = flags[kFLAGS.USE_12_HOURS];
-		saveFile.data.flags[kFLAGS.USE_METRICS] = flags[kFLAGS.USE_METRICS];
-		saveFile.data.flags[kFLAGS.AUTO_LEVEL] = flags[kFLAGS.AUTO_LEVEL];
-		saveFile.data.flags[kFLAGS.STRENGTH_SCALING] = flags[kFLAGS.STRENGTH_SCALING];
-		saveFile.data.flags[kFLAGS.SPEED_SCALING] = flags[kFLAGS.SPEED_SCALING];
-		saveFile.data.flags[kFLAGS.WISDOM_SCALING] = flags[kFLAGS.WISDOM_SCALING];
-		saveFile.data.flags[kFLAGS.INTELLIGENCE_SCALING] = flags[kFLAGS.INTELLIGENCE_SCALING];
-		saveFile.data.flags[kFLAGS.SECONDARY_STATS_SCALING] = flags[kFLAGS.SECONDARY_STATS_SCALING];
-		saveFile.data.flags[kFLAGS.TOUGHNESS_SCALING] = flags[kFLAGS.TOUGHNESS_SCALING];
-		//saveFile.data.settings = [];
-		//saveFile.data.settings.useMetrics = Measurements.useMetrics;
 		//achievements
 		saveFile.data.achievements = [];
 		for (i = 0; i < achievements.length; i++)
@@ -681,41 +651,10 @@ public function loadPermObject():void {
 	if (saveFile.data.exists)
 	{
 		//Load saved flags.
-		if (saveFile.data.flags) {
-			if (saveFile.data.flags[kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM] != undefined) flags[kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM] = saveFile.data.flags[kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM];
+		if (saveFile.data.flags)
+			for each (var globalFlag:int in kFLAGS.GLOBAL_FLAGS_ARRAY)
+				if (saveFile.data.flags[globalFlag] != undefined) flags[globalFlag] = saveFile.data.flags[globalFlag];
 
-			if (saveFile.data.flags[kFLAGS.SHOW_SPRITES_FLAG] != undefined) flags[kFLAGS.SHOW_SPRITES_FLAG] = saveFile.data.flags[kFLAGS.SHOW_SPRITES_FLAG];
-			if (saveFile.data.flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] != undefined) flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] = saveFile.data.flags[kFLAGS.SILLY_MODE_ENABLE_FLAG];
-            if (saveFile.data.flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS] != undefined) flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS] = saveFile.data.flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS];
-            if (saveFile.data.flags[kFLAGS.SCENEHUNTER_OTHER] != undefined) flags[kFLAGS.SCENEHUNTER_OTHER] = saveFile.data.flags[kFLAGS.SCENEHUNTER_OTHER];
-            if (saveFile.data.flags[kFLAGS.SCENEHUNTER_DICK_SELECT] != undefined) flags[kFLAGS.SCENEHUNTER_DICK_SELECT] = saveFile.data.flags[kFLAGS.SCENEHUNTER_DICK_SELECT];
-            if (saveFile.data.flags[kFLAGS.SCENEHUNTER_UNI_HERMS] != undefined) flags[kFLAGS.SCENEHUNTER_UNI_HERMS] = saveFile.data.flags[kFLAGS.SCENEHUNTER_UNI_HERMS];
-			if (saveFile.data.flags[kFLAGS.SCENEHUNTER_LOSS_SELECT] != undefined) flags[kFLAGS.SCENEHUNTER_LOSS_SELECT] = saveFile.data.flags[kFLAGS.SCENEHUNTER_LOSS_SELECT];
-			if (saveFile.data.flags[kFLAGS.SCENEHUNTER_MOCK_FIGHTS] != undefined) flags[kFLAGS.SCENEHUNTER_MOCK_FIGHTS] = saveFile.data.flags[kFLAGS.SCENEHUNTER_MOCK_FIGHTS];
-
-			if (saveFile.data.flags[kFLAGS.MUTATIONS_SPOILERS] != undefined) flags[kFLAGS.MUTATIONS_SPOILERS] = saveFile.data.flags[kFLAGS.MUTATIONS_SPOILERS];
-			if (saveFile.data.flags[kFLAGS.NEWPERKSDISPLAY] != undefined) flags[kFLAGS.NEWPERKSDISPLAY] = saveFile.data.flags[kFLAGS.NEWPERKSDISPLAY];
-			if (saveFile.data.flags[kFLAGS.LVL_UP_FAST] != undefined) flags[kFLAGS.LVL_UP_FAST] = saveFile.data.flags[kFLAGS.LVL_UP_FAST];
-			if (saveFile.data.flags[kFLAGS.INVT_MGMT_TYPE] != undefined) flags[kFLAGS.INVT_MGMT_TYPE] = saveFile.data.flags[kFLAGS.INVT_MGMT_TYPE];
-			if (saveFile.data.flags[kFLAGS.CHARVIEWER_ENABLED] != undefined) flags[kFLAGS.CHARVIEWER_ENABLED] = saveFile.data.flags[kFLAGS.CHARVIEWER_ENABLED];
-			if (saveFile.data.flags[kFLAGS.CHARVIEW_STYLE] != undefined) flags[kFLAGS.CHARVIEW_STYLE] = saveFile.data.flags[kFLAGS.CHARVIEW_STYLE];
-			if (saveFile.data.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] != undefined) flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] = saveFile.data.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN];
-			if (saveFile.data.flags[kFLAGS.USE_OLD_FONT] != undefined) flags[kFLAGS.USE_OLD_FONT] = saveFile.data.flags[kFLAGS.USE_OLD_FONT];
-			if (saveFile.data.flags[kFLAGS.BACKGROUND_STYLE] != undefined) flags[kFLAGS.BACKGROUND_STYLE] = saveFile.data.flags[kFLAGS.BACKGROUND_STYLE];
-			if (saveFile.data.flags[kFLAGS.IMAGEPACK_OFF] != undefined) flags[kFLAGS.IMAGEPACK_OFF] = saveFile.data.flags[kFLAGS.IMAGEPACK_OFF];
-			if (saveFile.data.flags[kFLAGS.SPRITE_STYLE] != undefined) flags[kFLAGS.SPRITE_STYLE] = saveFile.data.flags[kFLAGS.SPRITE_STYLE];
-			if (saveFile.data.flags[kFLAGS.WATERSPORTS_ENABLED] != undefined) flags[kFLAGS.WATERSPORTS_ENABLED] = saveFile.data.flags[kFLAGS.WATERSPORTS_ENABLED];
-			if (saveFile.data.flags[kFLAGS.USE_12_HOURS] != undefined) flags[kFLAGS.USE_12_HOURS] = saveFile.data.flags[kFLAGS.USE_12_HOURS];
-			if (saveFile.data.flags[kFLAGS.USE_METRICS] != undefined) flags[kFLAGS.USE_METRICS] = saveFile.data.flags[kFLAGS.USE_METRICS];
-			if (saveFile.data.flags[kFLAGS.AUTO_LEVEL] != undefined) flags[kFLAGS.AUTO_LEVEL] = saveFile.data.flags[kFLAGS.AUTO_LEVEL];
-			if (saveFile.data.flags[kFLAGS.STRENGTH_SCALING] != undefined) flags[kFLAGS.STRENGTH_SCALING] = saveFile.data.flags[kFLAGS.STRENGTH_SCALING];
-			if (saveFile.data.flags[kFLAGS.SPEED_SCALING] != undefined) flags[kFLAGS.SPEED_SCALING] = saveFile.data.flags[kFLAGS.SPEED_SCALING];
-			if (saveFile.data.flags[kFLAGS.WISDOM_SCALING] != undefined) flags[kFLAGS.WISDOM_SCALING] = saveFile.data.flags[kFLAGS.WISDOM_SCALING];
-			if (saveFile.data.flags[kFLAGS.INTELLIGENCE_SCALING] != undefined) flags[kFLAGS.INTELLIGENCE_SCALING] = saveFile.data.flags[kFLAGS.INTELLIGENCE_SCALING];
-			if (saveFile.data.flags[kFLAGS.SECONDARY_STATS_SCALING] != undefined) flags[kFLAGS.SECONDARY_STATS_SCALING] = saveFile.data.flags[kFLAGS.SECONDARY_STATS_SCALING];
-			if (saveFile.data.flags[kFLAGS.TOUGHNESS_SCALING] != undefined) flags[kFLAGS.TOUGHNESS_SCALING] = saveFile.data.flags[kFLAGS.TOUGHNESS_SCALING];
-		}
-		//if(saveFile.data.settings){if(saveFile.data.settings.useMetrics != undefined){Measurements.useMetrics = saveFile.data.settings.useMetrics;}}
 		//achievements, will check if achievement exists.
 		if (saveFile.data.achievements) {
 			for (var i:int = 0; i < achievements.length; i++)

@@ -72,15 +72,49 @@ public class CerberusRace extends Race {
 				.hasPerk(PerkLib.Hellfire, +1);
 
 		addMutation(IMutationsLib.AlphaHowlIM);
-		addMutation(IMutationsLib.HellHoundFireBallsIM);
+		addMutation(IMutationsLib.HellhoundFireBalls, +2);
 
-		buildTier(20, "Cerberus")
+		buildTier(24, "Cerberus")
 				.namesMaleFemaleMorphTaur("Hellhound Cerberus", "Barghest Cerberus", "Cerberus", "Cerberus-taur")
 				.buffs({
-					"str.mult": +4.0,
-					"spe.mult": +3.0,
-					"tou.mult": +2.5,
-					"lib.mult": +3.0
+					"str.mult": +3.5,
+					"spe.mult": +2.6,
+					"tou.mult": +2.1,
+					"lib.mult": +2.6
+				})
+				.requirePerk(PerkLib.TransformationImmunity2)
+				.end();
+
+		buildTier(27, "Greater Cerberus")
+                .requirePreviousTier()
+				.namesMaleFemaleMorphTaur("Greater Hellhound Cerberus", "Greater Barghest Cerberus", "Greater Cerberus", "Greater Cerberus-taur")
+				.buffs({
+					"str.mult": +4.1,
+					"spe.mult": +2.9,
+					"tou.mult": +2.25,
+					"lib.mult": +2.9
+				})
+				.end();
+
+		buildTier(30, "Cerberus Lord")
+                .requirePreviousTier()
+				.namesMaleFemaleMorphTaur("Hellhound Cerberus Lord", "Barghest Cerberus Lord", "Cerberus Lord", "Cerberus-taur Lord")
+				.buffs({
+					"str.mult": +4.7,
+					"spe.mult": +3.2,
+					"tou.mult": +2.4,
+					"lib.mult": +3.2
+				})
+				.end();
+
+		buildTier(33, "Alpha Cerberus")
+                .requirePreviousTier()
+				.namesMaleFemaleMorphTaur("Alpha Hellhound Cerberus", "Alpha Barghest Cerberus", "Alpha Cerberus", "Alpha Cerberus-taur")
+				.buffs({
+					"str.mult": +5.3,
+					"spe.mult": +3.5,
+					"tou.mult": +2.55,
+					"lib.mult": +3.5
 				})
 				.end();
 	}

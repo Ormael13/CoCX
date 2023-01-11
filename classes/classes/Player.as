@@ -2747,7 +2747,7 @@ use namespace CoC;
 			}
 			if (perkv1(IMutationsLib.AlphaHowlIM) >= 2) {
 				var packMembers:Number = LunaFollower.WerewolfPackMember;
-				if (hasMutation(IMutationsLib.HellHoundFireBallsIM)) packMembers += perkv3(IMutationsLib.HellHoundFireBallsIM);
+				if (hasMutation(IMutationsLib.HellhoundFireBalls)) packMembers += perkv3(IMutationsLib.HellhoundFireBalls);
 				mult -= (2*packMembers);
 			}
 			if (hasPerk(PerkLib.FenrirSpikedCollar)) {
@@ -5975,9 +5975,9 @@ use namespace CoC;
 		}
 
 		public function blockingBodyTransformations():Boolean {
-			return hasPerk(PerkLib.TransformationImmunity) || hasPerk(PerkLib.TransformationImmunityFairy) || hasPerk(PerkLib.TransformationImmunityAtlach)
+			return hasPerk(PerkLib.TransformationImmunity) || hasPerk(PerkLib.TransformationImmunity2)
 					|| hasPerk(PerkLib.TransformationImmunityBeeHandmaiden) || hasPerk(PerkLib.Undeath) || hasPerk(PerkLib.WendigoCurse)
-					|| hasPerk(PerkLib.BlessingOfTheAncestorTree) || hasPerk(PerkLib.HellfireCoat) || hasEnchantment(EnchantmentLib.TfImmunity);
+					|| hasPerk(PerkLib.BlessingOfTheAncestorTree) || hasEnchantment(EnchantmentLib.TfImmunity);
 		}
 
 		public function manticoreFeed():void {
@@ -6136,8 +6136,8 @@ use namespace CoC;
 					EngineCore.outputText("\n\nFeeling some minor discomfort in your " + cockDescript(randomCock) + " you slip it out of your [armor] and examine it. <b>With a little exploratory rubbing and massaging, you manage to squeeze out " + bonusGems + " gems from its cum slit.</b>\n\n");
 					gems += bonusGems;
 				}
-				if (hasPerk(IMutationsLib.HellHoundFireBallsIM)) {
-					addPerkValue(IMutationsLib.HellHoundFireBallsIM, 2, 1);
+				if (hasPerk(IMutationsLib.HellhoundFireBalls)) {
+					addPerkValue(IMutationsLib.HellhoundFireBalls, 2, 1);
 				}
 			}
             if (SceneLib.exgartuan.boobsPresent()) SceneLib.exgartuan.boobsSleep(4 + rand(4)); //consider her touched, lol
