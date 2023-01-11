@@ -46,19 +46,19 @@ public class MutantIncubus extends Monster {
         this.bodyColor = "red";
         this.hairColor = "black";
         this.hairLength = 15;
-        initStrTouSpeInte(100, 150, 200, 340);
+        initStrTouSpeInte(290, 170, 220, 140);
         initWisLibSensCor(140, 350, 80, 100);
         this.weaponName = "claws";
         this.weaponVerb = "stab";
         this.weaponAttack = 40;
         this.armorName = "demonic skin";
-        this.armorDef = 85;
-        this.armorMDef = 60;
+        this.armorDef = 185;
+        this.armorMDef = 160;
         this.bonusHP = 400;
-        this.bonusLust = 575;
+        this.bonusLust = 485;
         this.lust = 20;
-        this.level = 45;
-        this.gems = rand(60) + 20;
+        this.level = 55;
+        this.gems = rand(60) + 220;
         this.randomDropChance = 0.1;
         this.randomDropParams = {
             rarity: DynamicItems.RARITY_CHANCES_LESSER
@@ -72,9 +72,8 @@ public class MutantIncubus extends Monster {
         this.tailType = Tail.DEMONIC;
         this.horns.type = Horns.DEMON;
         this.horns.count = 2;
-        this.createPerk(PerkLib.EnemyLargeGroupType, 0, 0, 0, 0);
         this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
-        this.createPerk(PerkLib.OverMaxHP, 45, 0, 0, 0);
+        this.createPerk(PerkLib.OverMaxHP, 55, 0, 0, 0);
         checkMonster();
     }
 
@@ -113,9 +112,7 @@ public class MutantIncubus extends Monster {
         else if (player.hasPerk(PerkLib.ShieldWard) && rand(2) == 0) {
             outputText("You intercept the Incubus's blade with your shield.");
         } else if (player.weaponName == "spiked gauntlet" || player.weaponName == "hooked gauntlets" || player.weapon == weapons.AETHERD) {
-            outputText("The rapier hits your ");
-            if (player.weaponName == "spiked gauntlet") outputText("gauntlet, but your armored hand is too tough for the rapier to pierce.\n");
-            else outputText("gauntlet, but your armored hand is too tough for the rapier to pierce\n");
+            outputText("The rapier hits your gauntlet, but your armored hand is too tough for the rapier to pierce.\n");
         } else {
             outputText("You don't react fast enough, the rapier piercing your hand! You let out a cry of pain, dropping your [weapon] to the ground. You can't give this slippery incubus the opening and pick it up, and your hand is bleeding from the attack.");
             player.createStatusEffect(StatusEffects.Disarmed, 50, 0, 0, 0);

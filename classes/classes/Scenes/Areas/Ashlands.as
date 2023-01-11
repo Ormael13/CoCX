@@ -8,6 +8,7 @@ package classes.Scenes.Areas
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.Ashlands.*;
+import classes.Scenes.Dungeons.DemonLab;
 import classes.Scenes.NPCs.Forgefather;
 import classes.Scenes.Areas.Forest.AlrauneScene;
 import classes.Scenes.Areas.HighMountains.PhoenixScene;
@@ -27,8 +28,11 @@ use namespace CoC;
 		
 		public function exploreAshlands():void {
 			flags[kFLAGS.DISCOVERED_ASHLANDS]++;
-			doNext(playerMenu);
-			
+			if (flags[kFLAGS.DISCOVERED_ASHLANDS] == 0){
+				doNext(playerMenu);
+				return;
+			}
+
 			var choice:Array = [];
 			var select:int;
 			
@@ -40,8 +44,10 @@ use namespace CoC;
 			choice[choice.length] = 4; //Fire Golem (lvl 64)
             if (player.hasKeyItem("Old Pickaxe") > 0 && Forgefather.materialsExplained)
 			    choice[choice.length] = 5; //Granite Mine
+			if (DemonLab.MainAreaComplete >= 4)
+				choice[choice.length] = 6;
             if (rand(4) == 0)
-			    choice[choice.length] = 6; //Find nothing!
+			    choice[choice.length] = 10; //Find nothing!
 			
 			//Double barreled dragon gun
 			if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1) && player.statusEffectv3(StatusEffects.TelAdreTripxiGuns1) == 0 && player.hasKeyItem("Double barreled dragon gun") < 0 && rand(2) == 0) {
@@ -98,6 +104,9 @@ use namespace CoC;
                     menu();
                     addButton(0, "Yes", ahslandsSiteMine);
                     addButton(1, "No", camp.returnToCampUseOneHour);
+					break;
+				case 6:
+					SceneLib.exploration.demonLabProjectEncounters();
 					break;
 				default:
 					clearOutput();

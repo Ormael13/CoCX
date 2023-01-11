@@ -40,6 +40,7 @@ import classes.Scenes.Dungeons.DemonLab.Incels;
 import classes.Scenes.Dungeons.DemonLab.IncubusScientist;
 import classes.Scenes.Dungeons.DemonLab.LabGuard;
 import classes.Scenes.Dungeons.DemonLab.ProjectNightwalker;
+import classes.Scenes.Dungeons.DemonLab.UltimisFlamespreader;
 import classes.Scenes.Dungeons.EbonLabyrinth.*;
 import classes.Scenes.Dungeons.HelDungeon.*;
 import classes.Scenes.Monsters.Magnar;
@@ -407,7 +408,8 @@ public class Combat extends BaseContent {
 			player.HP = player.minHP() + 1;
             combatMenu(false);
 		}
-        else if (player.hasPerk(PerkLib.Immortality)) {
+        else if (player.hasPerk(PerkLib.Immortality) || player.hasPerk(PerkLib.WhatIsReality)) {
+            player.takeLustDamage( player.HP - player.minHP(), true);
             player.HP = player.minHP() + 1;
             combatMenu(false);
         }
@@ -631,6 +633,7 @@ public class Combat extends BaseContent {
             StatusEffects.SiegweirdGrapple,
             StatusEffects.MagnarPinned,
             StatusEffects.Straddle,
+            StatusEffects.DragonsNom,
         ];
         var monsterStatuses:Array = [
             StatusEffects.QueenBind,
@@ -641,6 +644,7 @@ public class Combat extends BaseContent {
         if (player.hasStatusEffect(StatusEffects.GiantGrabbed)) outputText("\n<b>You're trapped in the giant's hand!  All you can do is try to struggle free!</b>");
         if (player.hasStatusEffect(StatusEffects.Tentagrappled)) outputText("\n<b>The demoness's tentacles are constricting your limbs!</b>");
         if (player.hasStatusEffect(StatusEffects.Straddle) && monster is ProjectNightwalker) (monster as ProjectNightwalker).faceSittingDescript();
+        if (player.hasStatusEffect(StatusEffects.DragonsNom)) outputText("\n<b>The Dragon has you firmly clamped between its jaws!</b>");
         var status:StatusEffectType;
         for each (status in playerStatuses) if (player.hasStatusEffect(status)) return true;
         for each (status in monsterStatuses) if (monster.hasStatusEffect(status)) return true;
@@ -2084,7 +2088,7 @@ public class Combat extends BaseContent {
         else if ((player.hasPerk(PerkLib.Evade) && rand(100) < 10) || (player.hasPerk(PerkLib.JunglesWanderer) && rand(100) < 35))
             outputText("Using your skills at evading attacks, you anticipate and sidestep [themonster]' attacks.");
         //("Misdirection"
-        else if (player.hasPerk(PerkLib.Misdirection) && rand(100) < 15 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia"))
+        else if (player.hasPerk(PerkLib.Misdirection) && rand(100) < 15 && player.armor.hasTag(ItemTags.A_AGILE))
             outputText("Using Raphael's teachings, you anticipate and sidestep [themonster]' attacks.");
         //Determine if cat'ed
         else if (player.hasPerk(PerkLib.Flexibility) && rand(100) < 6)
@@ -2165,6 +2169,9 @@ public class Combat extends BaseContent {
             skipMonsterAction = true;
         } else if (player.hasStatusEffect(StatusEffects.Straddle)) {
             if (monster is ProjectNightwalker)(monster as ProjectNightwalker).struggleFaceSitting(true);
+            skipMonsterAction = true;
+        } else if (player.hasStatusEffect(StatusEffects.DragonsNom)) {
+            if (monster is UltimisFlamespreader)(monster as UltimisFlamespreader).struggleNom(true);
             skipMonsterAction = true;
         } else if (player.hasStatusEffect(StatusEffects.GooBind)) {
             clearOutput();
@@ -2365,6 +2372,16 @@ public class Combat extends BaseContent {
                 }
             }
             skipMonsterAction = true;
+        } else if (player.hasStatusEffect(StatusEffects.DragonsNom)) {
+            if (monster is UltimisFlamespreader)(monster as UltimisFlamespreader).struggleNom(true);
+            else {
+                //33% chance to break free + up to 50% chance for strength
+                if (rand(3) == 0 || rand(80) < player.str / 2 || player.hasPerk(PerkLib.FluidBody)) {
+                    outputText("You grunt in anger, managing to slip out of [themonster]'s jaws and roll away.\n\n");
+                    player.removeStatusEffect(StatusEffects.DragonsNom);
+                }
+            }
+            skipMonsterAction = true;
         } else if (player.hasStatusEffect(StatusEffects.GooArmorBind)) {
             (monster as Valeria).struggleAtGooBind();
             if (player.statusEffectv1(StatusEffects.GooArmorBind) >= 5) {
@@ -2540,6 +2557,7 @@ public class Combat extends BaseContent {
 		if (player.hasPerk(PerkLib.TrueSeeing)) accmod += 40;
         if (monster.hasStatusEffect(StatusEffects.EvasiveTeleport) && !player.hasPerk(PerkLib.TrueSeeing)) accmod -= player.statusEffectv1(StatusEffects.EvasiveTeleport);
         if (player.jewelryName == "Ring of Ambidexty") accmod += 30;
+        if (player.hasMutation(IMutationsLib.EyeOfTheTigerIM)) accmod += 5;
 		if (player.isFistOrFistWeapon()) {
 			if (flags[kFLAGS.FERAL_COMBAT_MODE] == 1) accmod += Math.round((masteryFeralCombatLevel() - 1) / 2);
 			else {
@@ -3353,6 +3371,7 @@ public class Combat extends BaseContent {
             damage += Math.round(player.inte * 0.1);
             if (player.inte >= 50) damage += Math.round(player.inte * ((player.inte / 50) * 0.05));
             if (player.weaponRange is Artemis) damage *= 1.5;
+            if (player.armorName == "FrancescaCloak") damage *= 2;
             switch (flags[kFLAGS.ELEMENTAL_ARROWS]) {
                 case 1:
                     damage *= fireDamageBoostedByDao();
@@ -4883,6 +4902,7 @@ public class Combat extends BaseContent {
         //DOING EXTRA CLAW ATTACKS
         if (player.haveNaturalClaws()) {
             var ClawDamageMultiplier:Number = 1;
+            if (player.hasMutation(IMutationsLib.EyeOfTheTigerIM)) ClawDamageMultiplier *= 1.5;
             if (player.arms.type == Arms.FROSTWYRM) ClawDamageMultiplier = 2;
             if (player.arms.type != Arms.MANTIS && player.arms.type != Arms.KAMAITACHI){
                 outputText("You claw viciously at your opponent, tearing away at its body.");
@@ -4896,71 +4916,75 @@ public class Combat extends BaseContent {
                 outputText(".");
             }
             if (player.arms.type == Arms.KAMAITACHI){
-                ExtraNaturalWeaponAttack(ClawDamageMultiplier, "KamaitachiScythe");
-                ExtraNaturalWeaponAttack(ClawDamageMultiplier, "KamaitachiScythe");
+                ExtraNaturalWeaponAttack(ClawDamageMultiplier, "KamaitachiScythe", true);
+                ExtraNaturalWeaponAttack(ClawDamageMultiplier, "KamaitachiScythe", true);
             }
             if (player.arms.type == Arms.WENDIGO){
-                ExtraNaturalWeaponAttack(ClawDamageMultiplier, "WendigoClaw");
-                ExtraNaturalWeaponAttack(ClawDamageMultiplier, "WendigoClaw");
+                ExtraNaturalWeaponAttack(ClawDamageMultiplier, "WendigoClaw", true);
+                ExtraNaturalWeaponAttack(ClawDamageMultiplier, "WendigoClaw", true);
             }
             if (player.arms.type == Arms.GARGOYLE){
 				switch (Forgefather.channelInlay){
 					case "amethyst":
-						ExtraNaturalWeaponAttack(ClawDamageMultiplier, "darkness");
-						ExtraNaturalWeaponAttack(ClawDamageMultiplier, "darkness");
+						ExtraNaturalWeaponAttack(ClawDamageMultiplier, "darkness", true);
+						ExtraNaturalWeaponAttack(ClawDamageMultiplier, "darkness", true);
 						break;
 					case "ruby":
-						ExtraNaturalWeaponAttack(ClawDamageMultiplier, "fire");
-						ExtraNaturalWeaponAttack(ClawDamageMultiplier, "fire");
+						ExtraNaturalWeaponAttack(ClawDamageMultiplier, "fire", true);
+						ExtraNaturalWeaponAttack(ClawDamageMultiplier, "fire", true);
 						break;
 					case "sapphire":
-						ExtraNaturalWeaponAttack(ClawDamageMultiplier, "ice");
-						ExtraNaturalWeaponAttack(ClawDamageMultiplier, "ice");
+						ExtraNaturalWeaponAttack(ClawDamageMultiplier, "ice", true);
+						ExtraNaturalWeaponAttack(ClawDamageMultiplier, "ice", true);
 						break;
 					case "topaz":
-						ExtraNaturalWeaponAttack(ClawDamageMultiplier, "lightning");
-						ExtraNaturalWeaponAttack(ClawDamageMultiplier, "lightning");
+						ExtraNaturalWeaponAttack(ClawDamageMultiplier, "lightning", true);
+						ExtraNaturalWeaponAttack(ClawDamageMultiplier, "lightning", true);
 						break;
 					default:
-						ExtraNaturalWeaponAttack(ClawDamageMultiplier);
-						ExtraNaturalWeaponAttack(ClawDamageMultiplier);
+						ExtraNaturalWeaponAttack(ClawDamageMultiplier, "", true);
+						ExtraNaturalWeaponAttack(ClawDamageMultiplier, "", true);
 						break;
 				}
 			}
 			else{
                 if (player.hasPerk(PerkLib.HellfireCoat)) {
-                    ExtraNaturalWeaponAttack(ClawDamageMultiplier, "fire");
-                    ExtraNaturalWeaponAttack(ClawDamageMultiplier, "fire");
+                    ExtraNaturalWeaponAttack(ClawDamageMultiplier, "fire", true);
+                    ExtraNaturalWeaponAttack(ClawDamageMultiplier, "fire", true);
                 } else {
-                    ExtraNaturalWeaponAttack(ClawDamageMultiplier);
-                    ExtraNaturalWeaponAttack(ClawDamageMultiplier);
+                    ExtraNaturalWeaponAttack(ClawDamageMultiplier, "", true);
+                    ExtraNaturalWeaponAttack(ClawDamageMultiplier, "", true);
+                    if (player.weaponName == "CatGlove" && Arms.hasFelineArms(player)) {
+                        ExtraNaturalWeaponAttack(ClawDamageMultiplier, "", true);
+                        ExtraNaturalWeaponAttack(ClawDamageMultiplier, "", true);
+                    }
                 }
             }
             outputText("\n");
             if (player.arms.type == Arms.WOLF && player.hasPerk(PerkLib.Lycanthropy)){
                 if (flags[kFLAGS.LUNA_MOON_CYCLE] != 7){
                     outputText("The moon grants you strength as you rend your opponent one more time with your claws.");
-                    ExtraNaturalWeaponAttack();
+                    ExtraNaturalWeaponAttack(1, "", true);
                     outputText("\n");
                 } else  {
                     outputText("The full moon grants you strength as you rend your opponent two more times with your claws.");
-                    ExtraNaturalWeaponAttack();
-                    ExtraNaturalWeaponAttack();
+                    ExtraNaturalWeaponAttack(1, "", true);
+                    ExtraNaturalWeaponAttack(1, "", true);
                     outputText("\n");
                 }
             }
             if (player.arms.type == Arms.DISPLACER)
             {
                 outputText("You use your extra arms to rend your opponent two more times.");
-                ExtraNaturalWeaponAttack();
-                ExtraNaturalWeaponAttack();
+                ExtraNaturalWeaponAttack(1, "", true);
+                ExtraNaturalWeaponAttack(1, "", true);
                 outputText("\n");
             }
             if (player.arms.type == Arms.WENDIGO)
             {
                 outputText("Your maddening hunger gives you strength allowing you to attack two more times, your strike delivering cursed wounds.");
-                ExtraNaturalWeaponAttack(1, "WendigoClaw");
-                ExtraNaturalWeaponAttack(1, "WendigoClaw");
+                ExtraNaturalWeaponAttack(1, "WendigoClaw", true);
+                ExtraNaturalWeaponAttack(1, "WendigoClaw", true);
                 outputText("\n");
             }
         }
@@ -6682,7 +6706,69 @@ public class Combat extends BaseContent {
         return Damage;
     }
 
-    public function ExtraNaturalWeaponAttack(FeraldamageMultiplier:Number = 1, SpecialEffect:String = ""):void {
+    public function CalcBaseDamageUnarmed(damage:Number = 0):Number{
+        //BASIC DAMAGE STUFF
+        if (player.hasPerk(PerkLib.VerdantMight)){
+            damage += player.tou;
+            damage += scalingBonusToughness() * 0.25;
+        }
+        else{
+            damage += player.str;
+            damage += scalingBonusStrength() * 0.25;
+        }
+        if (player.hasPerk(PerkLib.SpeedDemon)) {
+            damage += player.spe;
+            damage += scalingBonusSpeed() * 0.20;
+        }
+        damage += unarmedAttack();
+        damage = harpyDamageBonus(damage);
+        damage = itemsBonusDamageDamage(damage);
+        damage = statusEffectBonusDamage(damage);
+        //PERKS
+        if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
+        if (player.hasPerk(PerkLib.ChiReflowMagic)) damage *= UmasShop.NEEDLEWORK_MAGIC_REGULAR_MULTI;
+        if (player.hasPerk(PerkLib.ChiReflowAttack)) damage *= UmasShop.NEEDLEWORK_ATTACK_REGULAR_MULTI;
+        if (player.hasPerk(PerkLib.GoblinoidBlood)) {
+            if (player.hasKeyItem("Power bracer") >= 0) damage *= 1.1;
+            if (player.hasKeyItem("Powboy") >= 0) damage *= 1.15;
+            if (player.hasKeyItem("M.G.S. bracer") >= 0) damage *= 1.2;
+        }
+        if ((player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet))) damage *= 2;
+        return damage;
+    }
+
+    public function CalcBaseDamageArmed(damage:Number = 0):Number{
+        //BASIC DAMAGE STUFF
+        if (player.hasPerk(PerkLib.VerdantMight)){
+            damage += player.tou;
+            damage += scalingBonusToughness() * 0.25;
+        }
+        else{
+            damage += player.str;
+            damage += scalingBonusStrength() * 0.25;
+        }
+        if (player.hasPerk(PerkLib.SpeedDemon) && player.isNoLargeNoStaffWeapon()) {
+            damage += player.spe;
+            damage += scalingBonusSpeed() * 0.20;
+        }
+        damage = weaponAttackModifier(damage);
+        damage = harpyDamageBonus(damage);
+        damage = itemsBonusDamageDamage(damage);
+        damage = statusEffectBonusDamage(damage);
+        //PERKS
+        if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
+        if (player.hasPerk(PerkLib.ChiReflowMagic)) damage *= UmasShop.NEEDLEWORK_MAGIC_REGULAR_MULTI;
+        if (player.hasPerk(PerkLib.ChiReflowAttack)) damage *= UmasShop.NEEDLEWORK_ATTACK_REGULAR_MULTI;
+        if (player.hasPerk(PerkLib.GoblinoidBlood)) {
+            if (player.hasKeyItem("Power bracer") >= 0) damage *= 1.1;
+            if (player.hasKeyItem("Powboy") >= 0) damage *= 1.15;
+            if (player.hasKeyItem("M.G.S. bracer") >= 0) damage *= 1.2;
+        }
+        if ((player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) && player.isFistOrFistWeapon()) damage *= 2;
+        return damage;
+    }
+
+    public function ExtraNaturalWeaponAttack(FeraldamageMultiplier:Number = 1, SpecialEffect:String = "", isClawAttack:Boolean = false):void {
         var accMelee:Number = 0;
         accMelee += (meleeAccuracy() / 2);
         if (flags[kFLAGS.ATTACKS_ACCURACY] > 0) accMelee -= flags[kFLAGS.ATTACKS_ACCURACY];
@@ -6692,26 +6778,8 @@ public class Combat extends BaseContent {
             // DAMAGE
             //------------
             //Determine damage
-            //BASIC DAMAGE STUFF
-            if (player.hasPerk(PerkLib.VerdantMight)){
-                damage += player.tou;
-                damage += scalingBonusToughness() * 0.25;
-            }
-            else if (SpecialEffect == "fire breath"){
-                damage += player.lib;
-                damage += scalingBonusLibido() * 0.25;
-                if (player.hasPerk(PerkLib.FireLord)) damage *= 2;
-            }
-            else{
-                damage += player.str;
-                damage += scalingBonusStrength() * 0.25;
-            }
-            damage = harpyDamageBonus(damage);
-            if ((player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) && player.isFistOrFistWeapon()) damage *= 2;
-            if (player.hasPerk(PerkLib.SpeedDemon) && player.isNoLargeNoStaffWeapon()) {
-                damage += player.spe;
-                damage += scalingBonusSpeed() * 0.20;
-            }
+            damage = CalcBaseDamageUnarmed();
+            //Apply special modifiers
             if (damage < 10) damage = 10;
             //Weapon addition!
             damage = weaponAttackModifier(damage);
@@ -6726,27 +6794,25 @@ public class Combat extends BaseContent {
             if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 			if (rand(100) < critChance) {
                 crit = true;
+                if (player.perkv1(IMutationsLib.EyeOfTheTigerIM) >= 2) {
+                    if (monster.canMonsterBleed()) {
+                        if (!monster.hasStatusEffect(StatusEffects.SharkBiteBleed)) monster.createStatusEffect(StatusEffects.SharkBiteBleed,4,0,0,0);
+                        else {
+                            monster.addStatusValue(StatusEffects.SharkBiteBleed,1, 3);
+                        }
+                    }
+                }
+                if (player.perkv1(IMutationsLib.EyeOfTheTigerIM) >= 4) damage *= 1.5;
+                if (player.hasPerk(PerkLib.VorpalClaw)) damage *= 2;
                 damage *= critDamage;
             }
             //Apply AND DONE!
             damage *= (monster.damagePercent() / 100);
-            //Damage post processing!
-            //Thunderous Strikes
-            if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
-            if (player.hasPerk(PerkLib.ChiReflowMagic)) damage *= UmasShop.NEEDLEWORK_MAGIC_REGULAR_MULTI;
-            if (player.hasPerk(PerkLib.ChiReflowAttack)) damage *= UmasShop.NEEDLEWORK_ATTACK_REGULAR_MULTI;
-            damage = itemsBonusDamageDamage(damage);
-            damage = statusEffectBonusDamage(damage);
-            if (player.hasPerk(PerkLib.GoblinoidBlood)) {
-                if (player.hasKeyItem("Power bracer") >= 0) damage *= 1.1;
-                if (player.hasKeyItem("Powboy") >= 0) damage *= 1.15;
-                if (player.hasKeyItem("M.G.S. bracer") >= 0) damage *= 1.2;
-            }
             //One final round
             damage = Math.round(damage);
             if (SpecialEffect == "KamaitachiScythe"){
-                if (!monster.hasStatusEffect(StatusEffects.KamaitachiBleed)) monster.createStatusEffect(StatusEffects.KamaitachiBleed,0,0,0,0);
-                else monster.addStatusValue(StatusEffects.KamaitachiBleed, 1, player.spe*2);
+                if (!monster.hasStatusEffect(StatusEffects.KamaitachiBleed)) monster.createStatusEffect(StatusEffects.KamaitachiBleed,(CalcBaseDamageUnarmed()/2)*BleedDamageBoost(),0,0,0);
+                else monster.addStatusValue(StatusEffects.KamaitachiBleed, 1, (CalcBaseDamageUnarmed()/2)*BleedDamageBoost());
             }
             if (SpecialEffect == "WendigoClaw"){
                 monster.addCurse("tou.mult",0.05,2);
@@ -7415,6 +7481,7 @@ public class Combat extends BaseContent {
 				else critPChance += 2 * Math.round((player.sens - 25) / 5);
 			}
 		}
+        if (player.perkv1(IMutationsLib.EyeOfTheTigerIM) >= 2) critPChance += 5;
         return critPChance;
     }
 
@@ -7464,6 +7531,7 @@ public class Combat extends BaseContent {
 				else critMChance += 2 * Math.round((player.sens - 25) / 5);
 			}
 		}
+        if (player.perkv1(IMutationsLib.EyeOfTheTigerIM) >= 2) critMChance += 5;
         return critMChance;
     }
 
@@ -7812,6 +7880,7 @@ public class Combat extends BaseContent {
         if (player.hasStatusEffect(StatusEffects.YukiOnnaKimono)) damage *= 0.2;
         if (player.hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage *= 2;
         if (player.hasPerk(PerkLib.IceQueenGown)) damage = damage / 100;
+        if (player.weaponRangeName == "Nekonomicon") damage *= 2;
 		damage *= EyesOfTheHunterDamageBonus();
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
@@ -7973,6 +8042,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage *= 2;
         if (player.hasPerk(PerkLib.VladimirRegalia)) damage *= 2;
         if (player.hasPerk(PerkLib.IceQueenGown)) damage = damage / 100;
+        if (player.weaponRangeName == "Nekonomicon") damage *= 2;
 //	if (player.hasPerk(PerkLib.ColdMastery) || player.hasPerk(PerkLib.ColdAffinity)) damage *= 2;
 		damage *= EyesOfTheHunterDamageBonus();
         if (damage == 0) MSGControllForEvasion = true;
@@ -15627,6 +15697,7 @@ public function RacialParagonAbilityBoost():Number {
 public function BleedDamageBoost(isARacialAbility:Boolean = false):Number {
     var BleedMod:Number = 1.0;
     if (player.hasPerk(PerkLib.ThirstForBlood)) BleedMod += 0.25;
+    if (player.hasPerk(PerkLib.KingOfTheJungle)) BleedMod += 0.2
     if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 1) BleedMod += 0.25;
     if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 2) BleedMod += 0.25;
     if (player.perkv1(IMutationsLib.SharkOlfactorySystemIM) >= 3) BleedMod += 0.25;
@@ -15699,6 +15770,10 @@ private function ghostRealStrengthCompanion():Number {
     if (flags[kFLAGS.PLAYER_COMPANION_1] == "Excellia") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerExcellia);
     if (flags[kFLAGS.PLAYER_COMPANION_2] == "Excellia") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerExcellia);
     if (flags[kFLAGS.PLAYER_COMPANION_3] == "Excellia") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerExcellia);
+    if (flags[kFLAGS.PLAYER_COMPANION_0] == "Kiha") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerKiha);
+    if (flags[kFLAGS.PLAYER_COMPANION_1] == "Kiha") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerKiha);
+    if (flags[kFLAGS.PLAYER_COMPANION_2] == "Kiha") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerKiha);
+    if (flags[kFLAGS.PLAYER_COMPANION_3] == "Kiha") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerKiha);
     if (flags[kFLAGS.PLAYER_COMPANION_1] == "Mitzi") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerMitzi);
     if (flags[kFLAGS.PLAYER_COMPANION_2] == "Mitzi") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerMitzi);
     if (flags[kFLAGS.PLAYER_COMPANION_3] == "Mitzi") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerMitzi);

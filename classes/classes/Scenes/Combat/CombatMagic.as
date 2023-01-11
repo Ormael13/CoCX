@@ -868,6 +868,7 @@ public class CombatMagic extends BaseCombatContent {
 			else damage *= (7.5 + ((player.weaponAttack - 200) * 0.02));
 		}
 		if (player.hasPerk(PerkLib.ElementalBolt)) damage *= 1.25;
+		if (player.armorName == "FrancescaCloak") damage *= 2;
 		if (edgy) damage *= 2;
 		//Determine if critical hit!
 		var crit:Boolean = false;

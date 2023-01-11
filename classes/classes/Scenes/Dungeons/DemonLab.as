@@ -12,6 +12,7 @@ import classes.Scenes.Dungeons.DemonLab.LabGuard;
 import classes.Scenes.Dungeons.DemonLab.MutantIncubus;
 import classes.Scenes.Dungeons.DemonLab.ProjectNightwalker;
 import classes.Scenes.Dungeons.DemonLab.ProjectTyrant;
+import classes.Scenes.Dungeons.DemonLab.ScientistGunner;
 import classes.Scenes.NPCs.DivaScene;
 import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.SceneLib;
@@ -418,7 +419,7 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
                 + "\n"
                 + "“<i>You’re too late. The bats have already been unleashed.</i>” He raises his pistol, aiming at you. “<i>All that remains is to give my comrades enough time to save our research.</i>”");
             if (DivaFollower) outputText("\n\n“<i>Thou Art a coward</i>”, Diva growls, baring her own fangs. “<i>Thine bloodstream will suffer the drought of your mistakes!</i>”");
-            startCombat(new IncubusScientist());
+            startCombat(new ScientistGunner());
             return;
         }
         outputText("This room is small, barely lit by a single covered torch in a sconce along the back wall. Unlike the room you just came from, the walls, floor and ceiling are rough-hewn, like some poor saps had been forced to dig this place out with pickaxes.");
@@ -586,7 +587,7 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
         TyrantLabEntry = 1;
         clearOutput();
         outputText("You raise your [weapon]. The demon in front of you takes a step back, eyes widening, but he scowls, pulling a small pistol from his pocket. He points it at you, and you raise your [weapon]. It’s a fight!");
-		startCombat(new IncubusScientist());
+		startCombat(new ScientistGunner());
     }
 
     private function DemonGoPast():void {
@@ -890,11 +891,11 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
             outputText("“<i>[name], they weren’t all gone.</i>” You blink, realising the draconic figures aren’t moving towards you. As the smoke clears, you realise that, while they’re clearly dragon-morphs like Kiha, unlike the ones you just fought, they don’t have demonic features.\n\n");
             outputText("The largest of the draconic beings steps forward, clearing the smoke. He’s a barrel-chested dragon-morph with red scales and black reptilian eyes. He looks at you, blood-dripping claws belying the clear nervousness on his face.\n\n");
             outputText("“<i>Who are you?</i>” He asks. Kiha, however, leaps at you, arms open wide. She grabs you in a bone-creaking hug, but it only lasts a few seconds before she snaps out of it, realising where she is.\n\n");
-            outputText("“<i>Well… [He/She] is a friend, apparently.</i>” A dry voice sounds from near the back. You watch as a few dozen more dragon-morphs slink out from the smoke. Most are injured, but they stand on their own power. “<i>What’s going on?</i>” An older male steps forward, his red scales faded with bits of grey. The scales around his eyes are sunken, and his left leg shakes.\n\n");
+            outputText("“<i>Well… [He] is a friend, apparently.</i>” A dry voice sounds from near the back. You watch as a few dozen more dragon-morphs slink out from the smoke. Most are injured, but they stand on their own power. “<i>What’s going on?</i>” An older male steps forward, his red scales faded with bits of grey. The scales around his eyes are sunken, and his left leg shakes.\n\n");
             outputText("Kiha looks back at the elder. “<i>This is [name]. They’re an otherworlder. We came to…Well…We didn’t think anyone would be left.</i>” Kiha’s leaning heavily on you, and you realise there’s tears in her eyes. “<i>[name]...Some of my people are still…</i>”\n\n");
             outputText("The elder dragon’s eyes widen. “<i>...Kiha, is that you?</i>” He closes his eyes, lowering his head. “<i>Oh young warrior…</i>” He begins laughing merrily, looking back up at you both, his eyes twinkling with merriment. “<i>I knew you were too rambunctious for those filthy demons!</i>” A ragged cheer erupts from the dragon-morphs, and Kiha blushes, looking down and away from you.\n\n");
             outputText("“<i>I-I hardly think this is the time.</i>” She says, cheeks bright red. “<i>W-we’re not out of the woods yet.</i>” This gets a few wolf-whistles, some guffaws, and a few ragged cheers. “<i>I’m being serious! This place isn’t safe for you.</i>”\n\n");
-            outputText("“<i>We’ve survived for now.</i>” The elder replies darkly. “<i>We’re not quite done. Besides, we can’t let your (Boyfriend/Girlfriend) here have all the fun. Those sex-crazed maniacs gave us this power, it’s high time we used it!</i>”\n\n");
+            outputText("“<i>We’ve survived for now.</i>” The elder replies darkly. “<i>We’re not quite done. Besides, we can’t let your [boyfriend] here have all the fun. Those sex-crazed maniacs gave us this power, it’s high time we used it!</i>”\n\n");
         } else {
             outputText("The scientist, realising that his creations are dead, turns tail. Despite your exhaustion, you pick up one of the fallen dragoness’ spears, your [legs] filled with sickening, adrenaline-fueled speed. You run the demon scientist through, and as he falls, you hear wingbeats, leathery and even. You look up, seeing five more draconic beings through the smoke. Dropping the demon, you ready your [weapon] for combat.\n\n");
             outputText("The largest of the draconic beings steps forward, clearing the smoke. He’s a barrel-chested dragon-morph with red scales and black reptilian eyes. He looks at you, blood-dripping claws belying the clear nervousness on his face.\n\n");

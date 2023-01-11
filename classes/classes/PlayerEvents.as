@@ -251,6 +251,14 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.addStatusValue(StatusEffects.WendigoPsychosis, 1, -1);
 				if (player.statusEffectv1(StatusEffects.WendigoPsychosis) <= 0) player.removeStatusEffect(StatusEffects.WendigoPsychosis);
 			}
+			if (InCollection("Kiha", flags[kFLAGS.PLAYER_COMPANION_0], flags[kFLAGS.PLAYER_COMPANION_2], flags[kFLAGS.PLAYER_COMPANION_3])) {
+				outputText("\nKiha waves to you as she leaves your side. You can call her to battle again next time, or ask her to be your main combat companion.\n");
+				if (flags[kFLAGS.PLAYER_COMPANION_0] == "Kiha") flags[kFLAGS.PLAYER_COMPANION_0] = "";
+				if (flags[kFLAGS.PLAYER_COMPANION_2] == "Kiha") flags[kFLAGS.PLAYER_COMPANION_2] = "";
+				if (flags[kFLAGS.PLAYER_COMPANION_3] == "Kiha") flags[kFLAGS.PLAYER_COMPANION_3] = "";
+				player.removeStatusEffect(StatusEffects.CombatFollowerKiha);
+				needNext = true;
+			}
 			//
 			for each (var clone:StatusEffectType in Soulforce.clones) {
 				if (player.hasStatusEffect(clone)) {
@@ -662,13 +670,25 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			if (player.hasPerk(PerkLib.DominantAlpha)) player.DominantAlphaBonus();
 			if (player.hasPerk(PerkLib.Immortality) && !player.isRaceCached(Races.AZAZEL)) {
-				outputText("\nYou lose your sence of invulnerability as you are no longer an Azazel.\n");
+				outputText("\nYou lose your sense of invulnerability as you are no longer an Azazel. <b>Perk lost: Immortality</b>\n");
 				player.removePerk(PerkLib.Immortality);
 				needNext = true;
 			}
 			if (!player.hasPerk(PerkLib.Immortality) && player.isRaceCached(Races.AZAZEL)) {
-				outputText("\nYou regain your sence of invulnerability as you are now an Azazel.\n");
+				outputText("\nYou gain a sense of invulnerability as you are now an Azazel. <b>Perk gained: Immortality</b>\n");
 				player.createPerk(PerkLib.Immortality, 0, 0, 0, 0);
+				needNext = true;
+			}
+			if (player.hasPerk(PerkLib.WhatIsReality) && player.hasPerk(PerkLib.VorpalClaw) && !player.isRaceCached(Races.CHESHIRE)) {
+				outputText("\nYou lose your sense of invulnerability as you are no longer an Cheshire. <b>Perks lost: What is Reality? && Vorpal Claw</b>");
+				player.removePerk(PerkLib.WhatIsReality);
+				player.removePerk(PerkLib.VorpalClaw);
+				needNext = true;
+			}
+			if (!player.hasPerk(PerkLib.WhatIsReality) && !player.hasPerk(PerkLib.WhatIsReality) && player.isRaceCached(Races.CHESHIRE)) {
+				outputText("\nYou gain a sence of invulnerability as you are now an Cheshire. <b>Perk gained: What is Reality? && Vorpal Claw</b>");
+				player.createPerk(PerkLib.WhatIsReality, 0, 0, 0, 0);
+				player.createPerk(PerkLib.VorpalClaw, 0, 0, 0, 0);
 				needNext = true;
 			}
 			//No better place for these since the code for the event is part of CoC.as or one of its included files

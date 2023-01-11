@@ -10,6 +10,7 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.HighMountains.PhoenixScene;
 import classes.Scenes.Areas.VolcanicCrag.*;
+import classes.Scenes.Dungeons.DemonLab;
 import classes.Scenes.Holidays;
 import classes.Scenes.NPCs.EtnaFollower;
 import classes.Scenes.SceneLib;
@@ -38,7 +39,9 @@ public class VolcanicCrag extends BaseContent
 			choice[choice.length] = 3; //??? (lvl ??)
 			choice[choice.length] = 4; //Fire True Golems (lvl 80)
 			choice[choice.length] = 5; //Find Drake's Heart
-			choice[choice.length] = 6; //Find nothing!
+			if (DemonLab.MainAreaComplete >= 4)
+				choice[choice.length] = 6;
+			choice[choice.length] = 10; //Find nothing!
 			
 			//DLC april fools
 			if (isAprilFools() && flags[kFLAGS.DLC_APRIL_FOOLS] == 0) {
@@ -101,6 +104,9 @@ public class VolcanicCrag extends BaseContent
 					clearOutput();
 					outputText("While you're minding your own business, you spot a flower. You walk over to it, pick it up and smell it. By Marae, it smells amazing! It looks like Drake's Heart as the legends foretold. ");
 					inventory.takeItem(consumables.DRAKHRT, camp.returnToCampUseOneHour);
+					break;
+				case 6:
+					SceneLib.exploration.demonLabProjectEncounters();
 					break;
 				default:
 					clearOutput();

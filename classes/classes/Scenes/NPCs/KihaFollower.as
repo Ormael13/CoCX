@@ -943,6 +943,11 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
 				.disableIf(player.isGenderless(), "Not for genderless!"); //avoiding weirdness in defeat scene
         addButton(10, "Talk", TalkWithKiha).hint("Talk to Kiha… but would she want to talk?");
         if (CanVisitKids) addButton(11, "Kids", visitKids);
+        if (player.hasPerk(PerkLib.BasicLeadership)) {
+            if (flags[kFLAGS.PLAYER_COMPANION_1] == "") addButton(12, "Team", kihaHenchmanOption).hint("Ask Kiha to join you in adventures outside camp.");
+            else if (flags[kFLAGS.PLAYER_COMPANION_1] == "Kiha") addButton(12, "Team", kihaHenchmanOption).hint("Ask Kiha to stay in camp.");
+            else addButtonDisabled(12, "Team", "You already have other henchman accompany you. Ask him/her to stay at camp before you talk with Etna about accompaning you.");
+        }
 	} else {
 		if (output) {
 			clearOutput();
@@ -2864,7 +2869,7 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
             addButton(1, "Sex", KihaTownSex);
             addButton(2, "Hug", KihaTownHug);
         }
-        if (DemonLab.MainAreaComplete == 4 && FlameSpreaderKillCount >= 5 && FlameSpreaderBossKilled) {
+        if (DemonLab.MainAreaComplete == 4 && FlameSpreaderKillCount >= 10 && FlameSpreaderBossKilled) {
             outputText("Kiha gives you a small smile, her shoulders loose. “<i>… I’ve been thinking.</i>” She sits down on a log, patting it. You sit down beside her, and she leans in, resting her head against your shoulder. “<i>… We’ve been burying the past for a while now… </i>” She looks down, towards the center of camp. “<i>… Or… should I say… We’ve been burying my past.</i>” Kiha sits back up, and you turn to look at her. Kiha’s hugging herself, gaze fixed on the horizon. “<i>… I’ve been thinking… about everything.</i>” She looks at you, her eyes wet with unshed tears… But for once, a smile crosses her face. Not the usual smirk or half-smile, but a genuine, happy smile. “<i>… You didn’t have to help me, [name]. You could have just killed me, or let me die in the swamps. You didn’t have to help me bury my past… Or let me into your home… But you did.</i>”\n\n");
             outputText("Kiha, despite her heat, shivers. “<i>… You’re an idiot, [name]. I could have been… a demon soldier, or a spy, or… </i>” She looks to the horizon. “<i>When I escaped from the lab, I told myself that this world would devour anyone who showed weakness. So… When you came into my swamp, and just… Talked… </i>” She laughs. “<i>You kicked my ass… and then just… talked. It spit in the face of everything I’d lived by, since my escape.</i>”\n\n");
             outputText("You scootch over, putting a hand on your dragoness’s shoulder. You tell her that to be fair, she didn’t immediately attack, like everything else there. “<i>Well… Yeah… But I wasn’t exactly good to you, [name]. You put up with a lot of shit from me.</i>” She closes her eyes, turning away. “<i>And… You’ve been helping me with everything. I live in your camp, with others again, and… </i>” She exhales a little bit of fire. “<i>And you. Because of you… I have friends, a home, and… </i>”\n\n");
@@ -3159,6 +3164,34 @@ private function warmLoverKihaIntro(output:Boolean = true):void {
         outputText("As you head over towards (Kiha/Electra)’s part of camp, you see Kiha and Electra, to your surprise, sitting over a series of lines carved into the dirt. They each have some stones, Kiha’s are black, and Electra’s are white, and they appear to be playing some sort of game with the colored rocks. As you draw near, the two pull a blanket over their game, looking at you. ")
         if (fromElectra) outputText("You tell Electra that you came to see her, and she grins, bobbing up and down excitedly. Kiha nods respectfully, leaving without a word, and Electra tilts her head slightly, static filling the air. “<i>What’s up, [name]?</i>” ");
         else outputText("You ask Kiha if she has a moment, and she nods. Electra leaves, and your fiery dragoness smiles slightly. ");
+    }
+
+
+    public function kihaHenchmanOption():void
+    {
+        clearOutput();
+        if (flags[kFLAGS.PLAYER_COMPANION_1] == "") {
+            outputText("\"<i>Hey my idiot. Want me to tarry along and scorch their hides? Why not, give those demons what they deserve!</i>\"\n\n");
+            outputText("Kiha is now following you around.\n\n");
+            var strKiha:Number = 85;
+            var meleeAtkKiha:Number = 28
+            if (flags[kFLAGS.KIHA_LVL_UP] >= 1) {
+                strKiha += 25 * flags[kFLAGS.KIHA_LVL_UP];
+                meleeAtkKiha += 10 * flags[kFLAGS.KIHA_LVL_UP];
+            }
+            strKiha *= (1 + (0.2 * player.newGamePlusMod()));
+            strKiha = Math.round(strKiha);
+            meleeAtkKiha += (1 + (int)(meleeAtkKiha / 5)) * player.newGamePlusMod();
+            player.createStatusEffect(StatusEffects.CombatFollowerKiha, strKiha, meleeAtkKiha, 0, 0);
+            flags[kFLAGS.PLAYER_COMPANION_1] = "Kiha";
+        }
+        else {
+            outputText("Kiha is no longer following you around.\n\n");
+            player.removeStatusEffect(StatusEffects.CombatFollowerKiha);
+            flags[kFLAGS.PLAYER_COMPANION_1] = "";
+        }
+        doNext(warmLoverKihaIntro);
+        cheatTime(1/12);
     }
 }
 }
