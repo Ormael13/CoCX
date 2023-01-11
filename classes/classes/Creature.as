@@ -2612,8 +2612,8 @@ public class Creature extends Utils
 				quantity *= 3;
 			if (hasPerk(PerkLib.ProductivityDrugs))
 				quantity += (perkv3(PerkLib.ProductivityDrugs));
-			if (hasMutation(PerkLib.HellhoundFireBalls))
-				switch (perkv1(PerkLib.HellhoundFireBalls)) {
+			if (hasMutation(IMutationsLib.HellhoundFireBalls))
+				switch (perkv1(IMutationsLib.HellhoundFireBalls)) {
 					case 1:
 					case 2:
 					case 3: quantity *= 1.25; break;
@@ -4237,6 +4237,7 @@ public class Creature extends Utils
 				if (!hasPerk(PerkLib.GigantGrip)) chance -= 75;
 				else chance -= 30;
 			}
+			chance += evadeStat.value * (game.time.hours < 7 || game.time.hours > 19? 2:1);
 			if (game.player.hasStatusEffect(StatusEffects.Snow) && game.player.tallness < 84) chance -= 50;
 			if (hasPerk(PerkLib.ElementalBody)) {
 				switch (ElementalRace.getElementAndTier(this)) {
