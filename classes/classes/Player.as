@@ -2747,7 +2747,7 @@ use namespace CoC;
 			}
 			if (perkv1(IMutationsLib.AlphaHowlIM) >= 2) {
 				var packMembers:Number = LunaFollower.WerewolfPackMember;
-				if (hasMutation(IMutationsLib.HellhoundFireBalls)) packMembers += perkv3(IMutationsLib.HellhoundFireBalls);
+				if (hasMutation(IMutationsLib.HellhoundFireBallsIM)) packMembers += perkv3(IMutationsLib.HellhoundFireBallsIM);
 				mult -= (2*packMembers);
 			}
 			if (hasPerk(PerkLib.FenrirSpikedCollar)) {
@@ -6136,8 +6136,8 @@ use namespace CoC;
 					EngineCore.outputText("\n\nFeeling some minor discomfort in your " + cockDescript(randomCock) + " you slip it out of your [armor] and examine it. <b>With a little exploratory rubbing and massaging, you manage to squeeze out " + bonusGems + " gems from its cum slit.</b>\n\n");
 					gems += bonusGems;
 				}
-				if (hasPerk(IMutationsLib.HellhoundFireBalls)) {
-					addPerkValue(IMutationsLib.HellhoundFireBalls, 2, 1);
+				if (hasPerk(IMutationsLib.HellhoundFireBallsIM)) {
+					addPerkValue(IMutationsLib.HellhoundFireBallsIM, 2, 1);
 				}
 			}
             if (SceneLib.exgartuan.boobsPresent()) SceneLib.exgartuan.boobsSleep(4 + rand(4)); //consider her touched, lol

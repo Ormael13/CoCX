@@ -12,6 +12,9 @@ import classes.IMutationPerkType;
 /**
  * The goal of Mutations 3.0 is to allow for everything related to the mutation itself to be hosted within its own file, and to reduce the number of perks being created for the player.
  *
+ * Addendum: The fundamental reason for Mutations3.0 is to clearly define the "perks" that are limited by the organ slots, as well as being obtained by Evangeline only.
+ * This is why Mindbreaker, as well as HellhoundFireBalls, despite acting in a similar fashion, do not qualify for this list.
+ *
  * Mutations 3.0 Handles perk creation slightly differently in a few ways.
  *
  * First, .withBuffs is not used here, instead, buffs are created in a pBuffs function within the mutation file itself, and must return an object.
@@ -59,9 +62,8 @@ public class IMutationsLib
 		public static const GazerEyesIM:IMutationPerkType = new GazerEyesMutation();
 		public static const GorgonEyesIM:IMutationPerkType = new GorgonEyesMutation();
 		public static const HarpyHollowBonesIM:IMutationPerkType = new HarpyHollowBonesMutation();
-		public static const HellhoundFireBalls:IMutationPerkType = new HellHoundFireBalls();
+		public static const HellhoundFireBallsIM:IMutationPerkType = new HellHoundFireBallsMutation();
 		public static const HeartOfTheStormIM:IMutationPerkType = new HeartOfTheStormMutation();
-		public static const HellHoundFireBallsIM:IMutationPerkType = new HellHoundFireBalls();
 		public static const HinezumiBurningBloodIM:IMutationPerkType = new HinezumiBurningBloodMutation();
 		public static const HollowFangsIM:IMutationPerkType = new HollowFangsMutation();
 		public static const KitsuneParathyroidGlandsIM:IMutationPerkType = new KitsuneParathyroidGlandMutation();

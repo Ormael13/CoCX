@@ -470,13 +470,13 @@ public class HellHoundScene extends BaseContent
 			outputText("You waste no time aligning your [cock descript] into his tight hold, panting as your tapered tips grind together within his warm passage.[pg]");
 			outputText("He whines in discomfort, but his whimpering only serves to motivate you. His ass is your property now, and you're going to make sure he'll never forget it.You unceremoniously continue plowing into the little bitch, relishing in the feeling of complete domination over him as your canine erections pulsate in anticipation.Your heavy balls slap against his underside with each thrust as a burning pressure quickly begins building within your loins.[pg]");
 			outputText("You growl loudly as you hilt your erections as deep into him as you can, causing him to give a quick whimper in protest as you finally hit your climax. You practically erupt like a volcano, shooting jet after jet of cum into his abused hole. As your erections slowly deflate, you begin to pull out, satisfied having marked your territory. Your boiling cum dribbles from the head of your length and out of the pup's gaping hole. He'll serve as a reminder to everyone who's the top dog around here.[pg]");
-			if(player.hasMutation(IMutationsLib.AlphaHowlIM) && player.hasMutation(IMutationsLib.HellhoundFireBalls)) {
-				var ptier:Number = player.perkv1(IMutationsLib.HellhoundFireBalls);
-				if (ptier > 1 && (player.perkv3(IMutationsLib.HellhoundFireBalls) < (ptier > 3 ? (Math.floor(2.5*ptier)) : ptier))) {
+			if(player.hasMutation(IMutationsLib.AlphaHowlIM) && player.hasMutation(IMutationsLib.HellhoundFireBallsIM)) {
+				var ptier:Number = player.perkv1(IMutationsLib.HellhoundFireBallsIM);
+				if (ptier > 1 && (player.perkv3(IMutationsLib.HellhoundFireBallsIM) < (ptier > 3 ? (Math.floor(2.5*ptier)) : ptier))) {
 					outputText("With his ass thoroughly bred the hellhound got two choices right now, either to yield to your overwhelming supremacy and maleness or go back to his old pack in shame. The hellhound hesitates for a moment before ");
 					if (rand(2) == 0) {
 						outputText("following you back to your camp, betraying his old pack to join yours as your subservient new member. Well you didn't expect him to be a subby bitch but so long as he's willing to take you in once in a while you don't mind keeping him around.");
-						player.addPerkValue(IMutationsLib.HellhoundFireBalls, 3, 1);
+						player.addPerkValue(IMutationsLib.HellhoundFireBallsIM, 3, 1);
 					} else outputText("running off in shame back to his old pack. The poor guy is going to be chastised by his alpha, you would pity him if not for the fact that you don't care in the first place, he will inevitably meet you again and the next time you will make sure to fuck subserviance into his subby ass properly.");
 				}
 			}
