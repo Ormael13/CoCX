@@ -2612,8 +2612,8 @@ public class Creature extends Utils
 				quantity *= 3;
 			if (hasPerk(PerkLib.ProductivityDrugs))
 				quantity += (perkv3(PerkLib.ProductivityDrugs));
-			if (hasMutation(PerkLib.HellhoundFireBalls))
-				switch (perkv1(PerkLib.HellhoundFireBalls)) {
+			if (hasMutation(IMutationsLib.HellHoundFireBallsIM))
+				switch (perkv1(IMutationsLib.HellHoundFireBallsIM)) {
 					case 1:
 					case 2:
 					case 3: quantity *= 1.25; break;

@@ -2235,7 +2235,7 @@ public final class Mutations extends MutationsHelper {
 
         if (player.cor < 50) player.cor = 50;
         outputText("\n<b>Gained Mutation: Hellhound Fireballs</b>")
-        PerkLib.HellhoundFireBalls.acquireMutation(player,"none");
+        IMutationsLib.HellHoundFireBallsIM.acquireMutation(player,"none");
     }
     
     public function impFood(player:Player):void {

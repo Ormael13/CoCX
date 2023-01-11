@@ -661,10 +661,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.Lycanthropy);
 				needNext = true;
 			}
-			if (player.isRaceCached(Races.CERBERUS) && player.hasMutation(PerkLib.HellhoundFireBalls)) {
-				var pTier:Number = player.perkv1(PerkLib.HellhoundFireBalls);
-				if (pTier < 4 && player.level >= 30*pTier && player.perkv2(PerkLib.HellhoundFireBalls) >= 30*2*pTier) {
-					PerkLib.HellhoundFireBalls.acquireMutation(player, outputText("\nYour balls begin to suddenly feel heavier… warmer. You begin pumping your two penis absentmindedly thinking of all the bitches you recently broke on your twin shaft as the heat rushes all the way to your pair of erect members. You cum a humongous load of smoking warm cum, way to warm for normal seeds. It looks like your balls are progressively continuing their evolution to be more hellhound-like as your seed takes on burning hot property just like that of a hellhound.\n"));
+			if (player.isRaceCached(Races.CERBERUS) && player.hasMutation(IMutationsLib.HellHoundFireBallsIM)) {
+				var pTier:Number = player.perkv1(IMutationsLib.HellHoundFireBallsIM);
+				if (pTier < 4 && player.level >= 30*pTier && player.perkv2(IMutationsLib.HellHoundFireBallsIM) >= 30*2*pTier) {
+					IMutationsLib.HellHoundFireBallsIM.acquireMutation(player, outputText("\nYour balls begin to suddenly feel heavier… warmer. You begin pumping your two penis absentmindedly thinking of all the bitches you recently broke on your twin shaft as the heat rushes all the way to your pair of erect members. You cum a humongous load of smoking warm cum, way to warm for normal seeds. It looks like your balls are progressively continuing their evolution to be more hellhound-like as your seed takes on burning hot property just like that of a hellhound.\n"));
 					needNext = true;
 				}
 			}

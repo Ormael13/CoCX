@@ -72,7 +72,7 @@ public class CerberusRace extends Race {
 				.hasPerk(PerkLib.Hellfire, +1);
 
 		addMutation(IMutationsLib.AlphaHowlIM);
-		addMutation(PerkLib.HellhoundFireBalls);
+		addMutation(IMutationsLib.HellHoundFireBallsIM);
 
 		buildTier(20, "Cerberus")
 				.namesMaleFemaleMorphTaur("Hellhound Cerberus", "Barghest Cerberus", "Cerberus", "Cerberus-taur")
