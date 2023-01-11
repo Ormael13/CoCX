@@ -3587,7 +3587,6 @@ public class PerkLib
 				"As a harpy or harpy subtype increase toughness speed and libido based on the ammount of harpy children you gave birth to.");
 		public static const HarpyWomb:PerkType = mk("Harpy Womb", "Harpy Womb",
 				"Increases all laid eggs to large size so long as you have harpy legs and a harpy tail.");
-		public static const HellhoundFireBalls:HellHoundFireBalls = new HellHoundFireBalls();
 		public static const HydraAcidBreath:PerkType = mk("Hydra acid breath", "Hydra acid breath",
 				"Allows access to a hydra acid breath attack.");
 		public static const HydraRegeneration:PerkType = mk("Hydra Regeneration", "Hydra Regeneration",

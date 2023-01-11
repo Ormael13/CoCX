@@ -5285,13 +5285,13 @@ public class Combat extends BaseContent {
         if ((player.isRaceCached(Races.WEREWOLF) || player.isRaceCached(Races.CERBERUS)) && player.hasMutation(IMutationsLib.AlphaHowlIM)) {
             var WerewolfPackDamageMultiplier:Number = 0.5;
             var packMembers:Number = LunaFollower.WerewolfPackMember;
-            if (player.hasMutation(PerkLib.HellhoundFireBalls)) packMembers += player.perkv3(PerkLib.HellhoundFireBalls);
+            if (player.hasMutation(IMutationsLib.HellhoundFireBalls)) packMembers += player.perkv3(IMutationsLib.HellhoundFireBalls);
             outputText("Your beta, Luna, jumps into the melee");
             if (packMembers >= 1){
                 outputText("your other pack member");
                 if (packMembers >= 2)outputText("s");
                 outputText(" joining in to deliver bites and claw swipes from all sides.");
-                if (player.perkv3(PerkLib.HellhoundFireBalls) > 0)
+                if (player.perkv3(IMutationsLib.HellhoundFireBalls) > 0)
                 WerewolfPackDamageMultiplier += (packMembers/2);
             }
             ExtraNaturalWeaponAttack(WerewolfPackDamageMultiplier);
@@ -7761,7 +7761,7 @@ public class Combat extends BaseContent {
             var packmultiplier:Number = 1.0;
             var PerkMultiplier:Number = 2;
             var packMembers:Number = LunaFollower.WerewolfPackMember;
-            if (player.hasMutation(PerkLib.HellhoundFireBalls)) packMembers += player.perkv3(PerkLib.HellhoundFireBalls);
+            if (player.hasMutation(IMutationsLib.HellhoundFireBalls)) packMembers += player.perkv3(IMutationsLib.HellhoundFireBalls);
             if (player.perkv1(IMutationsLib.AlphaHowlIM) >= 4) PerkMultiplier = 5;
             packmultiplier += (packMembers*PerkMultiplier)/100
             damage *= packmultiplier;
