@@ -2986,7 +2986,7 @@ public static const CHARVIEW_STYLE:int                                          
 public static const CHARVIEWER_ENABLED:int                                          = 2978;
 public static const NEW_GAME_PLUS_LEVEL:int                                         = 2979; // Current intensity of New Game+. Each ascension increments this counter by 1.
 public static const NEW_GAME_PLUS_BONUS_UNLOCKED_HERM:int                           = 2980; // Unlocked hermaphrodite.
-public static const UNKNOWN_FLAG_NUMBER_02981:int                                   = 2981;
+public static const IMDB_DETAILS:int                                   				= 2981; // Internal mutation display switch
 public static const IMAGEPACK_OFF:int                                               = 2982; // 1 if imagepack is disabled.
 public static const SPRITE_STYLE:int                                                = 2983; // 1 if old sprites are used.
 public static const AUTO_LEVEL:int                                                  = 2984; // 1 if automatic leveling is enabled.
@@ -3006,5 +3006,13 @@ public static const LOW_STANDARDS_FOR_ALL:int                                   
 public static const HYPER_HAPPY:int                                                 = 2998;
 public static const UNKNOWN_FLAG_NUMBER_02999:int                                   = 2999;
 
+public static const GLOBAL_FLAGS_ARRAY:Array = [
+	NEW_GAME_PLUS_BONUS_UNLOCKED_HERM, SHOW_SPRITES_FLAG, SILLY_MODE_ENABLE_FLAG, SCENEHUNTER_PRINT_CHECKS,
+	SCENEHUNTER_OTHER, SCENEHUNTER_DICK_SELECT, SCENEHUNTER_LOSS_SELECT, SCENEHUNTER_MOCK_FIGHTS, SCENEHUNTER_UNI_HERMS,
+	WATERSPORTS_ENABLED, LVL_UP_FAST, MUTATIONS_SPOILERS, NEWPERKSDISPLAY, INVT_MGMT_TYPE, CHARVIEWER_ENABLED,
+	CHARVIEW_STYLE, CHARVIEW_ARMOR_HIDDEN, USE_OLD_FONT, BACKGROUND_STYLE, IMAGEPACK_OFF, SPRITE_STYLE, USE_12_HOURS,
+	WATERSPORTS_ENABLED, USE_METRICS, AUTO_LEVEL, STRENGTH_SCALING, SPEED_SCALING, WISDOM_SCALING, INTELLIGENCE_SCALING,
+	TOUGHNESS_SCALING, SECONDARY_STATS_SCALING, USSDISPLAY_STYLE, IMDB_DETAILS
+];
 	}
 }
