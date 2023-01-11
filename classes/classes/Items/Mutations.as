@@ -2226,15 +2226,14 @@ public final class Mutations extends MutationsHelper {
             outputText("\n<b>Gained Ability: Hellfire!</b> "+PerkLib.Hellfire.longDesc);
         }
         player.createPerk(PerkLib.HellfireCoat, 0, 0, 0, 0);
-        outputText("\n<b>Gained Ability: Hellfire Coat</b> "+PerkLib.HellfireCoat.longDesc);
-
-
+        outputText("\n<b>Gained Ability: Hellfire Coat</b> " + PerkLib.HellfireCoat.longDesc);
         outputText("\n<b>Upgraded Ability: Bite -> Tripple Bite</b>");
         outputText("\n<b>Upgraded Ability: Hellfire -> tripple effect</b>");
         outputText("\n<b>Gained Ability: Terrifying Howl</b>");
-
         if (player.cor < 50) player.cor = 50;
-        outputText("\n<b>Gained Mutation: Hellhound Fireballs</b>")
+        outputText("\n<b>Gained Mutation: Hellhound Fireballs</b>");
+		player.createPerk(PerkLib.TransformationImmunity2, 3, 0, 0, 0);
+		outputText("\n<b>Gained Perk: Transformation Immunity!</b> "+PerkLib.TransformationImmunity2.longDesc);
         IMutationsLib.HellhoundFireBalls.acquireMutation(player,"none");
     }
     

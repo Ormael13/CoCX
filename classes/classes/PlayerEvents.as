@@ -2921,7 +2921,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
                     return true;
                 }
 				if (checkedHellhound++ == 0 && rand(2) == 0 && !player.isRaceCached(Races.CERBERUS) && player.isHellHound() && player.hasPerk(PerkLib.Hellfire) && camp.IsSleeping && player.hasKeyItem("Marae's Lethicite") >= 0
-						&& player.keyItemvX("Marae's Lethicite", 1) > 0 ) { //&& !player.raceCached(Cerberus)
+						&& player.keyItemvX("Marae's Lethicite", 1) > 0 && !player.blockingBodyTransformations()) {
 					SceneLib.camp.campUniqueScenes.hellhoundCapture();
 					return true;
 				}
