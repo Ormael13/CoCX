@@ -12,7 +12,7 @@ public class AcidSpraySwiftcastSpell extends AbstractGreySpell {
 	{
 		super(
 			"Acid Spray (S)",
-			"Condense part of the the ambivalent moisture into acid droplets to attack your enemy.",
+			"Condense part of the ambient moisture into acid droplets to attack your enemy.",
 			TARGET_ENEMY,
 			TIMING_INSTANT,
 			[TAG_DAMAGING, TAG_ACID, TAG_TIER1]

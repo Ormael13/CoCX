@@ -12,7 +12,7 @@ public class StalagmiteSwiftcastSpell extends AbstractGreySpell {
 	{
 		super(
 			"Stalagmite (S)",
-			"Harden part of the the ground into earth spike to attack your enemy.",
+			"Harden part of the ground into an earth spike to attack your enemy.",
 			TARGET_ENEMY,
 			TIMING_INSTANT,
 			[TAG_DAMAGING, TAG_EARTH, TAG_TIER1]

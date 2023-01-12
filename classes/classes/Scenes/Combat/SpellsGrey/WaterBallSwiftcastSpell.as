@@ -12,7 +12,7 @@ public class WaterBallSwiftcastSpell extends AbstractGreySpell {
 	{
 		super(
 			"Water Ball (S)",
-			"Condense part of the the ambivalent moisture into sphere water to attack your enemy.",
+			"Condense part of the ambient moisture into sphere water to attack your enemy.",
 			TARGET_ENEMY,
 			TIMING_INSTANT,
 			[TAG_DAMAGING, TAG_WATER, TAG_TIER1]
