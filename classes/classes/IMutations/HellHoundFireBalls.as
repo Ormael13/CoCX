@@ -8,6 +8,7 @@ import classes.PerkClass;
 import classes.PerkLib;
 import classes.IMutationPerkType;
 import classes.Creature;
+import classes.Player;
 import classes.Races;
 
 public class HellHoundFireBalls extends IMutationPerkType
@@ -69,7 +70,10 @@ public class HellHoundFireBalls extends IMutationPerkType
                 else{
                     var pLvl:int = pTier * 30;
 
-                    this.requireLevel(pLvl);
+                    this.requireLevel(pLvl)
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.perkv2(IMutationsLib.HellhoundFireBalls) > pLvl*2
+                    }, "Rapes with dick: "+player.perkv2(this)+"/"+pLvl*2);
                 }
             }catch(e:Error){
                 trace(e.getStackTrace());

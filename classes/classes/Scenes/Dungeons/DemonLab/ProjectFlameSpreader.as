@@ -80,18 +80,11 @@ public class ProjectFlameSpreader extends Monster {
         cleanupAfterCombat();
     }
 
-    public function desc():String {
-        var desc:String = "Hearing the flapping of leathery wings, you look skyward. A reddish figure is already swooping down towards you, and you throw yourself backwards. A massive spear barely misses your head, and a cloud of dust is thrown up by the impact. You draw your [weapon], the dust settling, and you finally get a glimpse of your attacker.[pg]" +
-                "Your attacker has dusky brown skin, red scales from calf to neck, and slender curves. You look at her face, with draconic fangs, demonic horns and reptilian eyes. Flames jet from her nose with every breath, and she shifts her weight from side to side. She’s an odd mix of dragon and demon, with wide, womanly hips. She plants her spear, wings flapping.[pg]" +
-                "You ready yourself for battle, and you hear the cracking of bones as the creature almost violently twists its own neck one way, then the other, laughing as it takes off, flying towards you with malice in its gaze.";
-        return desc;
-    }
-
     public function ProjectFlameSpreader() {
         //_inDungeon = inDungeon;
         this.a = "the";
         this.short = "Flamespreader";
-        this.long = desc();
+        this.long = "[Themonster] has dusky brown skin, red scales from calf to neck, and slender curves. You look at her face, with draconic fangs, demonic horns and reptilian eyes. Flames jet from her nose with every breath, and she shifts her weight from side to side. She’s an odd mix of dragon and demon, with wide, womanly hips. She plants her spear, wings flapping.";
         this.createVagina(false, VaginaClass.WETNESS_NORMAL, VaginaClass.LOOSENESS_NORMAL);
         createBreastRow(Appearance.breastCupInverse("DD"));
         this.ass.analLooseness = AssClass.LOOSENESS_NORMAL;
@@ -117,7 +110,7 @@ public class ProjectFlameSpreader extends Monster {
         this.lustVuln = 0.8;
         this.level = 85;
         this.gems = rand(50) + 75;
-        this.drop = new WeightedDrop().add(consumables.REDVIAL, 5).add(jewelries.POWRRNG, 1);
+        this.drop = new WeightedDrop().add(useables.D_SCALE, 5).add(jewelries.POWRRNG, 1);
         this.createStatusEffect(StatusEffects.Flying, 50, 0, 0, 0);
         this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
         this.createPerk(PerkLib.LegendarySpeed, 0, 0, 0, 0);
