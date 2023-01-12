@@ -72,7 +72,7 @@ public class HellHoundFireBallsMutation extends IMutationPerkType
 
                     this.requireLevel(pLvl)
                     .requireCustomFunction(function (player:Player):Boolean {
-                        return player.perkv2(IMutationsLib.HellhoundFireBalls) > pLvl*2
+                        return player.perkv2(IMutationsLib.HellhoundFireBallsIM) > pLvl*2
                     }, "Rapes with dick: "+player.perkv2(this)+"/"+pLvl*2);
                 }
             }catch(e:Error){
