@@ -13,8 +13,8 @@ public class AcidSpraySpell extends AbstractGreySpell {
 		super(
 			ex ? "Acid Spray (Ex)" : "Acid Spray",
 			ex ?
-				"Condense part of the the ambivalent moisture into wrath-enpowered acid droplets to attack your enemy."
-				: "Condense part of the the ambivalent moisture into acid droplets to attack your enemy.",
+				"Condense part of the ambient moisture into wrath-empowered acid droplets to attack your enemy."
+				: "Condense part of the ambient moisture into acid droplets to attack your enemy.",
 			TARGET_ENEMY,
 			TIMING_INSTANT,
 			[TAG_DAMAGING, TAG_ACID, TAG_TIER1]

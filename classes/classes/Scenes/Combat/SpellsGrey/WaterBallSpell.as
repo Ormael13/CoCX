@@ -13,8 +13,8 @@ public class WaterBallSpell extends AbstractGreySpell {
 		super(
 			ex ? "Water Ball (Ex)" : "Water Ball",
 			ex ?
-				"Condense part of the the ambivalent moisture into wrath-enpowered water sphere to attack your enemy."
-				: "Condense part of the the ambivalent moisture into sphere water to attack your enemy.",
+				"Condense part of the ambient moisture into wrath-empowered water sphere to attack your enemy."
+				: "Condense part of the ambient moisture into sphere water to attack your enemy.",
 			TARGET_ENEMY,
 			TIMING_INSTANT,
 			[TAG_DAMAGING, TAG_WATER, TAG_TIER1]

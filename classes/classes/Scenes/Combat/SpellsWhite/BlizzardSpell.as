@@ -7,7 +7,7 @@ public class BlizzardSpell extends AbstractWhiteSpell {
 	public function BlizzardSpell() {
 		super(
 			"Blizzard",
-			"Blizzard is a potent ice based defense spell that will reduce power of any fire based attack used against the user.",
+			"Blizzard is a potent ice based defense spell that will reduce the power of any fire based attack used against the user.",
 			TARGET_SELF,
 			TIMING_LASTING,
 			[TAG_BUFF, TAG_ICE]

@@ -13,8 +13,8 @@ public class CorrosiveWaveSpell extends AbstractGreySpell {
 		super(
 			ex ? "Corrosive Wave (Ex)" : "Corrosive Wave",
 			ex ?
-				"Condense part of the the ambivalent moisture into wrath-enpowered acid wave to attack your enemy."
-				: "Condense part of the the ambivalent moisture into acid wave to attack your enemy.",
+				"Condense part of the ambient moisture into wrath-empowered acid wave to attack your enemy."
+				: "Condense part of the ambient moisture into acid wave to attack your enemy.",
 			TARGET_ENEMY,
 			TIMING_INSTANT,
 			[TAG_DAMAGING, TAG_ACID, TAG_AOE]

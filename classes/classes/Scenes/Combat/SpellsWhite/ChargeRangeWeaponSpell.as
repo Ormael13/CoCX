@@ -8,7 +8,7 @@ public class ChargeRangeWeaponSpell extends AbstractWhiteSpell {
 	public function ChargeRangeWeaponSpell() {
 		super(
 			"Charge Range Weapon",
-			"The Charge Range Weapon spell will surround your range weapons in magical energy, causing them to do even more damage.  The effect lasts for a few combat turns.",
+			"The Charge Range Weapon spell will surround your ranged weapons in magical energy, causing them to do even more damage.  The effect lasts for a few combat turns.",
 			TARGET_SELF,
 			TIMING_LASTING,
 			[TAG_BUFF]

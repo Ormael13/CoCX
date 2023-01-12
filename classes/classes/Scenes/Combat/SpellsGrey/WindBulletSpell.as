@@ -13,7 +13,7 @@ public class WindBulletSpell extends AbstractGreySpell {
 		super(
 			ex ? "Wind Bullet (Ex)" : "Wind Bullet",
 			ex ?
-				"Devastate the enemy ranks with a barrage of wrath-enpowered wind bullets."
+				"Devastate the enemy ranks with a barrage of wrath-empowered wind bullets."
 				: "Devastate the enemy ranks with a barrage of wind bullets.",
 			TARGET_ENEMY,
 			TIMING_INSTANT,
