@@ -846,7 +846,7 @@ public class Exploration extends BaseContent
 			}
 			function ultimisEcounter():void {
 				outputText("You and your dragoness lover travel through [place], stopping for a moment. The air smells vaguely of sulphur...and it’s getting stronger. Casting your gaze skyward, you see a massive form, bright red, flying low to the ground...and heading right towards you. You barely have any time at all to react, but you manage to leap to the side, narrowly dodging a veritable pillar of flame. Kiha roars her rage, taking to the sky, but as she does, no less than five Flamespreaders fly in, forcing her to evade their deadly spears. Kiha looks back at you for a moment, before banking away, taking all five of the fakers with her. ");
-				if (silly) outputText("[pg]Having seen plenty of Kiha’s ass, child-bearing hips and bountiful breasts, you conclude that they’re not even good enough to be Kiha’s fakes! You just hope she doesn’t eat those words. ");
+				if (silly()) outputText("[pg]Having seen plenty of Kiha’s ass, child-bearing hips and bountiful breasts, you conclude that they’re not even good enough to be Kiha’s fakes! You just hope she doesn’t eat those words. ");
 				outputText("[pg]“You are now fighting the Ultimis Flamespreader.");
 				startCombat(new UltimisFlamespreader);
 			}
