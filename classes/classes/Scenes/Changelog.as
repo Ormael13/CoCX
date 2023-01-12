@@ -98,6 +98,7 @@ public class Changelog extends BaseContent
 			outputText("-Cheshire cat bonuses now have two tiers trickster/cheshire cat (13/20): +30/100% to int multi, +180/260% to spe multi, +25/60 sens\n");
 			outputText("-New event perk: What Is Reality? - Gained by becoming cheshire cat. Effect: When you would take fatal damage, laugh at death and deny it ever happened. Mocking death causes the increase of the arousal of the user which can still cause it to simply give up so to get to lewder games.\n");
 			outputText("-New event perk: Vorpal Claw - Gained by becoming cheshire cat. Effect: A cheshire natural weapon distorts space inflicting particularly vicious critical strikes. (Natural attacks dmg x2)\n");
+			outputText("-Moved IMDB detail switch to QoL info. Fixed USS QoL switch not saving in global data. (Svalkash)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -107,11 +108,10 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
-			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
-			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
-			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
-			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");// (Liadri)
 			outputText("-\n");// (aimozg)
@@ -121,11 +121,11 @@ public class Changelog extends BaseContent
 			outputText("-\n");// (Furrin Gok)
 			outputText("-\n");// (khovel)
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
+			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
+			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
+			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
+			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");
 			//remove this line when other two lines below get added ingame
 			//outputText("-New perk for enemies: Elite type enemy. Bonuses for are: Diehard effect of 2,5% of max HP + 750 HP * NG tier, OverMax HP effect of 5% magnitude.\n");
