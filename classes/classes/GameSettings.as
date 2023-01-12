@@ -42,7 +42,7 @@ public class GameSettings extends BaseContent {
 		menu();
 		addButton(0, "Gameplay(1)", settingsScreenGameSettings);
 		addButton(1, "Interface", settingsScreenInterfaceSettings);
-		addButton(2, "QoL", settingsScreenQoLSettings).hint("Quality of Life Settings by Jtecx.");
+		addButton(2, "QoL", settingsScreenQoLSettings).hint("Quality of Life Settings.");
 		addButton(3, "Font Size", fontSettingsMenu);
 		addButton(4, "Controls", displayControls);
 		addButton(5, "Gameplay(2)", settingsScreenGameSettings2);

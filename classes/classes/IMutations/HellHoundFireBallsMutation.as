@@ -11,7 +11,7 @@ import classes.Creature;
 import classes.Player;
 import classes.Races;
 
-public class HellHoundFireBalls extends IMutationPerkType
+public class HellHoundFireBallsMutation extends IMutationPerkType
     {
         private static const mName:String = "Hellhound Fire Balls";
         //v1 contains the mutation tier
@@ -87,7 +87,7 @@ public class HellHoundFireBalls extends IMutationPerkType
             return pBuffs;
         }
 
-        public function HellHoundFireBalls() {
+        public function HellHoundFireBallsMutation() {
             super(mName + " IM", mName, SLOT_TESTICLES, 4);
         }
 

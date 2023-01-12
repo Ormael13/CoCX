@@ -2235,7 +2235,7 @@ public final class Mutations extends MutationsHelper {
         outputText("\n<b>Gained Mutation: Hellhound Fireballs</b>");
 		player.createPerk(PerkLib.TransformationImmunity2, 3, 0, 0, 0);
 		outputText("\n<b>Gained Perk: Transformation Immunity!</b> "+PerkLib.TransformationImmunity2.longDesc);
-        IMutationsLib.HellhoundFireBalls.acquireMutation(player,"none");
+        IMutationsLib.HellhoundFireBallsIM.acquireMutation(player,"none");
     }
     
     public function impFood(player:Player):void {
