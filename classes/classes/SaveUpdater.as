@@ -1967,6 +1967,16 @@ public class SaveUpdater extends NPCAwareContent {
 				}
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.040;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.041) {
+				if (player.isRace(Races.CERBERUS)) player.createPerk(PerkLib.TransformationImmunity2, 3, 0, 0, 0);
+				if (player.hasPerk(PerkLib.TransformationImmunityAtlach)) {
+					player.removePerk(PerkLib.TransformationImmunityAtlach);
+					if (player.isRace(Races.ATLACH_NACHA)) player.createPerk(PerkLib.TransformationImmunity2, 1, 0, 0, 0);
+					else player.createPerk(PerkLib.TransformationImmunity2, 2, 0, 0, 0);
+				}
+				if (player.hasPerk(PerkLib.TransformationImmunityFairy)) player.createPerk(PerkLib.TransformationImmunity2, 4, 0, 0, 0);
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.041;
+			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
 		}

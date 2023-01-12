@@ -142,7 +142,7 @@ public class MagicSpecials extends BaseCombatContent {
 				bd = buttons.add("Electric Discharge", ElectricDischarge, "Release a deadly discharge of electricity.", "Electric discharge");
 				if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
-			if (player.hasPerk(PerkLib.TransformationImmunityAtlach) && player.lowerBody == LowerBody.ATLACH_NACHA && !monster.hasStatusEffect(StatusEffects.MysticWeb)) {
+			if (player.hasPerk(PerkLib.TransformationImmunity2) && player.lowerBody == LowerBody.ATLACH_NACHA && !monster.hasStatusEffect(StatusEffects.MysticWeb)) {
 				bd = buttons.add("Mystic Web", MysticWeb, "Spin a thread of animated web using your magic to tie up your victim in place. Also reduce opponent speed after each use. \n");
 				bd.requireMana(spellCost(50));
 				if (player.tailVenom < 25) {

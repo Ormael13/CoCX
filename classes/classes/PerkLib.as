@@ -3851,10 +3851,12 @@ public class PerkLib
 				"Critical tease also weakens your opponent's resistance to lust by 5%.");
 		public static const TransformationImmunity:PerkType = mk("Construct Transformation immunity", "Construct Transformation Immunity",
 				"As a magical construct you are immune to all effects that change the body of living beings, including most transformatives on Mareth (work as the regular transformative resistance except it reduce the odds of getting a body part tfed to 0 although stats increasing effects still could be triggered).");
+		public static const TransformationImmunity2:PerkType = mk("Transformation immunity", "Transformation Immunity",
+				"Your body has become warped beyond repair by your current form, losing its ability to change shape forever. (work as the regular transformative resistance except it reduce the odds of getting a body part tfed to 0 although stats increasing effects still could be triggered).");
 		public static const TransformationImmunityAtlach:PerkType = mk("Atlach Nacha Transformation immunity", "Eldritch Transformation Immunity",
 				"Your body is far too warped by eldritch powers to be transformed into anything else (work as the regular transformative resistance except it reduce the odds of getting a body part tfed to 0 although stats increasing effects still could be triggered).");
 		public static const TransformationImmunityBeeHandmaiden:PerkType = mk("Bee Handmaiden Transformation immunity", "Bee Handmaiden Transformation Immunity",
-				" (work as the regular transformative resistance except it reduce the odds of getting a body part tfed to 0 although stats increasing effects still could be triggered).");
+				"Your body has become warped beyond repair by your current form, losing its ability to change shape forever. (work as the regular transformative resistance except it reduce the odds of getting a body part tfed to 0 although stats increasing effects still could be triggered).");
 		public static const TransformationImmunityFairy:PerkType = mk("Fae Transformation immunity", "Fae Transformation Immunity",
 				"Fae magic has turned you into a full fairy, lacking a normal human constitution you have become immune to transformations (work as the regular transformative resistance except it reduce the odds of getting a body part tfed to 0 although stats increasing effects still could be triggered).");
 		public static const TrollResistance:PerkType = mk("Troll Resistance", "Troll Resistance",
