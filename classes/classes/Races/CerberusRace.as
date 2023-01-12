@@ -87,7 +87,7 @@ public class CerberusRace extends Race {
 
 		buildTier(27, "Greater Cerberus")
                 .requirePreviousTier()
-				.namesMaleFemaleMorphTaur("Greater Hellhound Cerberus", "Greater Barghest Cerberus", "Greater Cerberus", "Greater Cerberus-taur")
+				.namesMaleFemale("Greater Hellhound Cerberus", "Greater Barghest Cerberus")
 				.buffs({
 					"str.mult": +4.1,
 					"spe.mult": +2.9,
@@ -98,7 +98,7 @@ public class CerberusRace extends Race {
 
 		buildTier(30, "Cerberus Lord")
                 .requirePreviousTier()
-				.namesMaleFemaleMorphTaur("Hellhound Cerberus Lord", "Barghest Cerberus Lord", "Cerberus Lord", "Cerberus-taur Lord")
+				.namesMaleFemale("Hellhound Cerberus Lord", "Barghest Cerberus Lord")
 				.buffs({
 					"str.mult": +4.7,
 					"spe.mult": +3.2,
@@ -109,7 +109,7 @@ public class CerberusRace extends Race {
 
 		buildTier(33, "Alpha Cerberus")
                 .requirePreviousTier()
-				.namesMaleFemaleMorphTaur("Alpha Hellhound Cerberus", "Alpha Barghest Cerberus", "Alpha Cerberus", "Alpha Cerberus-taur")
+				.namesMaleFemale("Alpha Hellhound Cerberus", "Alpha Barghest Cerberus")
 				.buffs({
 					"str.mult": +5.3,
 					"spe.mult": +3.5,

@@ -3098,8 +3098,8 @@ public class Combat extends BaseContent {
             } else {
                 if (rand(100) < 15 && player.weaponRange is Artemis && !monster.hasStatusEffect(StatusEffects.Blind)) {
                     monster.createStatusEffect(StatusEffects.Blind, 3, 0, 0, 0);
-                    if (!MSGControll) outputText(",  your radiant shots blinded [monster he]");
-                    else outputText("Your radiant shots blinded [monster he]");
+                    if (!MSGControll) outputText(",  your radiant shots blinded [monster him]");
+                    else outputText("Your radiant shots blinded [monster him]");
                 }
                 if (!MSGControll) outputText(".  It's clearly very painful. ");
                 doArcheryDamage(damage);
@@ -3409,19 +3409,19 @@ public class Combat extends BaseContent {
                 if ((MDOCount == maxCurrentRangeAttacks()) && (MSGControll)) outputText("It has no effect!  Your foe clearly does not experience lust in the same way as you.");
             } else {
                 var lustArrowDmg:Number = lustDamageCalc();
-                if (monster.lust < (monster.maxLust() * 0.3)) outputText("[Themonster] squirms as the magic affects [monster him].  ");
-                else if (monster.lust < (monster.maxLust() * 0.6)) {
-                    if (monster.plural) outputText("[Themonster] stagger, suddenly weak and having trouble focusing on staying upright.  ");
-                    else outputText("[Themonster] staggers, suddenly weak and having trouble focusing on staying upright.  ");
-                } else {
-                    outputText("[Themonster]'");
-                    if (!monster.plural) outputText("s");
-                    outputText(" eyes glaze over with desire for a moment.  ");
+                if (!MSGControll) {
+                    if (monster.lust < (monster.maxLust() * 0.3)) outputText("[Themonster] squirm[monster s] as the magic affects [monster him].  ");
+                    else if (monster.lust < (monster.maxLust() * 0.6)) {
+                        outputText("[Themonster] stagger[monster s], suddenly weak and having trouble focusing on staying upright.  ");
+                    } else {
+                        outputText("[Themonster]'[monster s]");
+                        outputText(" eyes glaze over with desire for a moment.  ");
+                    }
                 }
                 lustArrowDmg *= 0.25;
                 lustArrowDmg = Math.round(lustArrowDmg);
                 monster.lust += lustArrowDmg;
-                outputText("<b>([font-lust]" + lustArrowDmg + "[/font])</b>");
+                CommasForDigits(lustArrowDmg, true);
                 if (monster.lust >= monster.maxOverLust()) doNext(endLustVictory);
             }
         }

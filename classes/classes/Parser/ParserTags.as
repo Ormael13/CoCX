@@ -364,7 +364,8 @@ public class ParserTags {
         "guy"                   : function ():* { return CoC.instance.monster.mf("guy", "girl"); },
         "wings"                 : function ():* { return CoC.instance.monster.wingsDescript(); },
         "tail"                  : function ():* { return CoC.instance.monster.tailDescript(); },
-        "onetail"               : function ():* { return CoC.instance.monster.oneTailDescript();}
+        "onetail"               : function ():* { return CoC.instance.monster.oneTailDescript();},
+        "s"                     : function ():* { return CoC.instance.monster.plural?"":"s";}
     };
     /**
      *These tags take a two-word tag with a **numberic** attribute for lookup.

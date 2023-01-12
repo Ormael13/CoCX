@@ -12,7 +12,6 @@ import classes.Scenes.Areas.Forest.WapsHuntress;
 import classes.Scenes.Areas.Forest.WaspAssassin;
 import classes.Scenes.Areas.Forest.WaspGirl;
 import classes.Scenes.Areas.Ocean.Scylla;
-import classes.Scenes.Dungeons.DemonLab;
 import classes.Scenes.Dungeons.DemonLab.ProjectFlameSpreader;
 import classes.Scenes.Dungeons.DemonLab.ProjectNightwalker;
 import classes.Scenes.Dungeons.DemonLab.ProjectTyrant;
@@ -804,28 +803,51 @@ public class Exploration extends BaseContent
 			}
 		}
 		public function demonLabProjectEncounters():void {
+			clearOutput();
 			var choices:Array = [];
-			if (time.hours <= 8 || time.hours >= 18) choices.push(nightwalkerEncounter());
-			choices.push(flamespreaderEncounter());
-			choices.push(tyrantEncounter());
+			if (time.hours <= 8 || time.hours >= 18) choices.push(0);
+			choices.push(1);
+			choices.push(2);
 			if (!KihaFollower.FlameSpreaderBossKilled && KihaFollower.FlameSpreaderKillCount >= 20 && InCollection("Kiha", flags[kFLAGS.PLAYER_COMPANION_0], flags[kFLAGS.PLAYER_COMPANION_1], flags[kFLAGS.PLAYER_COMPANION_2] ,flags[kFLAGS.PLAYER_COMPANION_3]))
-					choices.push(ultimisEcounter());
-			randomChoice(choices);
+					choices.push(3);
+			var select:int = rand(choices.length)
+			switch (choices[select]) {
+				case 0: nightwalkerEncounter();
+					break;
+				case 1: flamespreaderEncounter();
+					break;
+				case 2: tyrantEncounter();
+					break;
+				case 3: ultimisEcounter();
+					break;
+			}
 
 			function nightwalkerEncounter():void {
 				outputText("You find yourself feeling somewhat nervous. Your [skin] crawls, but as you wheel about, you see nothing. You hear nothing but a faint whisper on the wind.[pg]");
 				outputText("“<i>Blood.</i>” A faint dripping sound comes from behind you. You turn, slowly, to face a corpse-pale woman in a crotchless skintight latex suit that leaves nothing to the imagination. Her eyes shine red, and her fangs stick out well beyond her lips. A spadelike tail flicks back and forth, dripping red, and she smiles, curved black horns and ebony tresses combining to make her seem...well, you assume the intent was to make her beautiful, but unlike the succubi, there’s almost no sex appeal in those eyes, no carnal desire as she glances between your legs, scraping one of her fingernails along her swollen pussy lips, cutting herself and drawing a trickle of blood.[pg]");
 				outputText("“<i>Sweet blood, come... Sate yourself.</i>” Her nails are like black claws, but as she licks the blood off her fingers, part of you recoils in fear. “<i>Sate you...Then you’ll sate...me.</i>” You draw your [weapon], bracing yourself, but as you do, this gets only a smile as the curvy, short woman tilts her head. She launches herself toward you, claws outstretched, the eerie grin still on her face.[pg]");
-				outputText("“<i>Blood! Blood for me!</i>” [pg]");
+				outputText("“<i>Blood! Blood for me!</i>”");
+				outputText("[pg]“You are now fighting Project Nightwalker.");
 				startCombat(new ProjectNightwalker);
 			}
 			function flamespreaderEncounter():void {
+				outputText("Hearing the flapping of leathery wings, you look skyward. A reddish figure is already swooping down towards you, and you throw yourself backwards. A massive spear barely misses your head, and a cloud of dust is thrown up by the impact. You draw your [weapon], the dust settling, and you finally get a glimpse of your attacker.[pg]" +
+						"Your attacker has dusky brown skin, red scales from calf to neck, and slender curves. You look at her face, with draconic fangs, demonic horns and reptilian eyes. Flames jet from her nose with every breath, and she shifts her weight from side to side. She’s an odd mix of dragon and demon, with wide, womanly hips. She plants her spear, wings flapping.[pg]" +
+						"You ready yourself for battle, and you hear the cracking of bones as the creature almost violently twists its own neck one way, then the other, laughing as it takes off, flying towards you with malice in its gaze.");
+				outputText("[pg]“You are now fighting Project Flamespreader.");
 				startCombat(new ProjectFlameSpreader);
 			}
 			function tyrantEncounter():void {
+				outputText("Your wanderings bring you in front of a massive form vaguely resembling a Drider. Easily seventeen feet tall and thirty feet long, the creature turns to face you, six crimson eyes gleaming. It wears blackened full plate armor thicker than any you’ve ever seen, with glistening spikes on its shoulders. Twin horns poke through the creature’s helmet. Those, and the eyes, are the only part of its body not covered in metal. It breathes heavily, and as it takes a step, the spikes on its legs sink a half-inch into the ground below. Corruption oozes from this creature in a sickening aura. It holds a massive halberd in each meaty fist, using them like axes.[pg]");
+				outputText("[pg]On the creature’s back sits a heavily muscled Incubus, armored lightly, and holding an odd crossbow in one hand. He looks at you, smirking, and points.");
+				outputText("[pg]“<i>Tyrant? Kill!</i>” ");
+				outputText("[pg]“You are now fighting Project Tyrant.");
 				startCombat(new ProjectTyrant);
 			}
 			function ultimisEcounter():void {
+				outputText("You and your dragoness lover travel through [place], stopping for a moment. The air smells vaguely of sulphur...and it’s getting stronger. Casting your gaze skyward, you see a massive form, bright red, flying low to the ground...and heading right towards you. You barely have any time at all to react, but you manage to leap to the side, narrowly dodging a veritable pillar of flame. Kiha roars her rage, taking to the sky, but as she does, no less than five Flamespreaders fly in, forcing her to evade their deadly spears. Kiha looks back at you for a moment, before banking away, taking all five of the fakers with her. ");
+				if (silly()) outputText("[pg]Having seen plenty of Kiha’s ass, child-bearing hips and bountiful breasts, you conclude that they’re not even good enough to be Kiha’s fakes! You just hope she doesn’t eat those words. ");
+				outputText("[pg]“You are now fighting the Ultimis Flamespreader.");
 				startCombat(new UltimisFlamespreader);
 			}
 		}

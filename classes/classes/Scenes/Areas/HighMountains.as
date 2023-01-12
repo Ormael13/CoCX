@@ -8,8 +8,6 @@ import classes.Scenes.API.Encounters;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.HighMountains.*;
 import classes.Scenes.Dungeons.DemonLab;
-import classes.Scenes.Dungeons.DemonLab.ProjectNightwalker;
-import classes.Scenes.Holidays;
 import classes.Scenes.Monsters.DarkElfScene;
 import classes.Scenes.NPCs.EtnaFollower;
 import classes.Scenes.SceneLib;
@@ -119,7 +117,6 @@ public class HighMountains extends BaseContent {
             when: function ():Boolean {
                 return DemonLab.MainAreaComplete >= 4;
             },
-            night: true,
             call: SceneLib.exploration.demonLabProjectEncounters
         });
     }

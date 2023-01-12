@@ -11,6 +11,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.BlightRidge.DemonScene;
 import classes.Scenes.Areas.DefiledRavine.DemonSoldierScene;
 import classes.Scenes.Dungeons.DemonLab;
+import classes.Scenes.NPCs.AlvinaFollower;
 import classes.Scenes.NPCs.Forgefather;
 import classes.Scenes.SceneLib;
 
@@ -39,7 +40,7 @@ use namespace CoC;
 				SceneLib.alvinaFollower.alvinaThirdEncounter();
 				return;
 			}
-			if (((flags[kFLAGS.ALVINA_FOLLOWER] > 8 && flags[kFLAGS.ALVINA_FOLLOWER] < 12 && player.hasKeyItem("Zetaz's Map") >= 0) || player.statusEffectv1(StatusEffects.SiegweirdTraining2) == 2) && rand(2) == 0) {
+			if (((flags[kFLAGS.ALVINA_FOLLOWER] > 8 && flags[kFLAGS.ALVINA_FOLLOWER] < 12 && player.hasKeyItem("Zetaz's Map") >= 0) || (player.statusEffectv1(StatusEffects.SiegweirdTraining2) == 2) || SceneLib.alvinaFollower.SecondDateSuccess) && !SceneLib.alvinaFollower.AlvinaDied && !SceneLib.alvinaFollower.AlvinaPurified && rand(2) == 0) {
 				SceneLib.alvinaFollower.alvinaThirdEncounter();
 				return;
 			}

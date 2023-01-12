@@ -79,7 +79,6 @@ public class DemonDragonGroup extends Monster {
     }
 
     private function PentaFireBreath():void {
-        clearOutput();
         var damage:Number = (inte + wis) * 3 * player.newGamePlusMod() + 900 + rand(100);
         outputText("The draconic demonesses fan out, spears held in front of them. As you swivel your eyes between them, you notice that one of them is inhaling deeply, nostrils beginning to glow. Your eyes widen as you feel the air around you warm up. The dragoness moans, sending a veritable wall of flames at you.\n");
         if (player.getEvasionRoll()) {
@@ -96,14 +95,12 @@ public class DemonDragonGroup extends Monster {
     }
 
     public function DragonDemonHaremTease():void {
-        clearOutput();
         outputText("The four demonic dragonesses look at each other, flicking their long tongues out. The male steps back, bringing one hand to his tapered draconic cock, while the two closest dragonesses lean in, holding their spears with their flexible tails as they make out in front of him. Their sloppy kisses send drool down their cleavage, and they rub the male’s extended cock with their thighs. Distracted by the lewd display, you notice that the other two are rubbing their ribbed spear shafts across their muffs, moaning as they bite their lips.\n\n")
         outputText("<i>“Wouldn’t you rather join us?”</i> One of the outer women coos. <i>“Put down your weapon. That’s all you’d need to do.”</i> ")
         player.takeLustDamage(Math.round(120 + (player.lib * 2)), true);
     }
 
     public function ComboDragonStrike():void {
-        clearOutput();
         outputText("You realise what they’re trying to do, and before they can trap you, you rush one of the draconic women, narrowly dodging her spear and slamming your [weapon] into her face. Formation broken, the women fly back towards their leader, spears now bristling defensively. ");
         var hit:int = 0;
         for (var i:int = 0; i < 4; ++i) {

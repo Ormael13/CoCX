@@ -190,7 +190,7 @@ public class ProjectNightwalker extends Monster {
 
     public function ProjectNightwalker() {
         //_inDungeon = inDungeon;
-        this.a = "the";
+        this.a = "the ";
         this.short = "Nightwalker";
         this.long = "This pale temptress floats above the ground, black batlike wings silently flapping to keep her aloft. As you get closer, she rises, just out of melee range. You’ll have to find some other way to deal with her, unless you can fly.";
         this.createVagina(false, VaginaClass.WETNESS_NORMAL, VaginaClass.LOOSENESS_NORMAL);
