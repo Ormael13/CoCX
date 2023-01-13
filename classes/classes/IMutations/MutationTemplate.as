@@ -64,7 +64,7 @@ import classes.PerkClass;
 
 
         //Mutations Buffs
-        override public function buffsForTier(pTier:int):Object {
+        override public function buffsForTier(pTier:int, target:Creature):Object {
             var pBuffs:Object = {};
             //if (player.perkv3(this) == 1){} //This checks in player has the "true" mutation.
             /*

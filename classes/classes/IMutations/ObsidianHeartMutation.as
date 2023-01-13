@@ -65,7 +65,7 @@ public class ObsidianHeartMutation extends IMutationPerkType
         }
 
         //Mutations Buffs
-        override public function buffsForTier(pTier:int):Object {
+        override public function buffsForTier(pTier:int, target:Creature):Object {
             var pBuffs:Object = {};
             if (pTier == 3) {
                 pBuffs['str.mult'] = 0.05;

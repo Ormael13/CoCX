@@ -81,7 +81,7 @@ public class HellHoundFireBallsMutation extends IMutationPerkType
         }
 
         //Mutations Buffs
-        override public function buffsForTier(pTier:int):Object {
+        override public function buffsForTier(pTier:int, target:Creature):Object {
             var pBuffs:Object = {};
             pBuffs['lib.mult'] = 0.05 * currentTier(this, player);
             return pBuffs;

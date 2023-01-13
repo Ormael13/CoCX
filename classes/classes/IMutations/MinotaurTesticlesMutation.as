@@ -72,7 +72,7 @@ public class MinotaurTesticlesMutation extends IMutationPerkType
         }
 
         //Mutations Buffs
-        override public function buffsForTier(pTier:int):Object {
+        override public function buffsForTier(pTier:int, target:Creature):Object {
             var pBuffs:Object = {};
             if (pTier == 2) pBuffs['lib.mult'] = 0.1;
             if (pTier == 3){

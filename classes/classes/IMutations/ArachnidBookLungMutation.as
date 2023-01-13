@@ -68,7 +68,7 @@ import classes.Races;
         }
 
         //Mutations Buffs
-        override public function buffsForTier(pTier:int):Object {
+        override public function buffsForTier(pTier:int, target:Creature):Object {
             var pBuffs:Object = {};
             if (pTier == 1) pBuffs['int.mult'] = 0.05;
             else if (pTier == 2) pBuffs['int.mult'] = 0.15;

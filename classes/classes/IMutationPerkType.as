@@ -105,7 +105,7 @@ public class IMutationPerkType extends PerkType
 		public function pReqs(pCheck:int = -1):void{
 		}
 
-		public function buffsForTier(pTier:int):Object {
+		public function buffsForTier(pTier:int, target:Creature):Object {
 			return _pBuffs;
 		}
 
@@ -114,7 +114,7 @@ public class IMutationPerkType extends PerkType
 		}
 
 		public function explainBuffs(pTier:int):String {
-			var tempObj:Object = buffsForTier(pTier);
+			var tempObj:Object = buffsForTier(pTier, player);
 			var res:String = "";
 			for (var key:String in tempObj)
 				res += StatUtils.explainBuff(key, tempObj[key]);
@@ -122,7 +122,8 @@ public class IMutationPerkType extends PerkType
 		}
 
 		public function pBuffs(target:Creature = null):Object{
-			return buffsForTier(currentTier(this, (target == null) ? player : target));
+			var target2:Creature =(target == null) ? player : target;
+			return buffsForTier(currentTier(this, target2), target2);
 		}
 
 		public function trueMutationBuffs(statStr:String, pTier:int, racePoint:int):Object{ //Probably wanna pass "xxx.bonus"
