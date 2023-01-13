@@ -211,6 +211,9 @@ public class CombatMagic extends BaseCombatContent {
 		for each (var e:SimpleRaceEnchantment in player.allEnchantments(EnchantmentLib.RaceSpellPowerBonus)) {
 			mod += 0.02 * e.power * player.racialTier(e.race);
 		}
+		for each (var f:SimpleRaceEnchantment in player.allEnchantments(EnchantmentLib.RaceSpellPowerDoubled)) {
+			mod += f.power * (player.isRaceCached(f.race)? 2:1);
+		}
         return mod;
     }
 

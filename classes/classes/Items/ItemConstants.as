@@ -205,6 +205,7 @@ public class ItemConstants extends Utils {
 	public static const WT_THROWING:String      = "Throwing";
 	public static const WT_WHIP:String          = "Whip";
 	public static const WT_WAND:String         	= "Wand";
+	public static const WT_TOME:String         	= "Tome";
 	// Ranged weapon classes
 	public static const WT_BOW:String           = "Bow";
 	public static const WT_CROSSBOW:String      = "Crossbow";
