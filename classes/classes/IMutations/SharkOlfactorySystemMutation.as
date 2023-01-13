@@ -51,7 +51,7 @@ public class SharkOlfactorySystemMutation extends IMutationPerkType
                 case 3:
                     sufval = "(Evolved)";
                     break;
-                case 3:
+                case 4:
                     sufval = "(Final Form)";
                     break;
                 default:
@@ -61,9 +61,9 @@ public class SharkOlfactorySystemMutation extends IMutationPerkType
         }
 
         //Mutation Requirements
-        override public function pReqs():void{
+        override public function pReqs(pCheck:int = -1):void{
             try{
-                var pTier:int = currentTier(this, player);
+                var pTier:int = (pCheck != -1 ? pCheck : currentTier(this, player));
                 //This helps keep the requirements output clean.
                 this.requirements = [];
                 if (pTier == 0){
