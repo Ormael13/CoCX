@@ -2920,6 +2920,14 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					SceneLib.holidays.datTurkeyRumpMeeting(); //TURKEY SURPRISE
                     return true;
                 }
+				var v1:Boolean = checkedHellhound == 0;
+				var cerbCheck1:Boolean = !player.isRaceCached(Races.CERBERUS);
+				var cerbCheck2:Boolean = player.isHellHound();
+				var cerbCheck3:Boolean = player.hasPerk(PerkLib.Hellfire);
+				var cerbCheck4:Boolean = camp.IsSleeping;
+				var cerbCheck5:Boolean = player.hasKeyItem("Marae's Lethicite") >= 0;
+				var cerbCheck6:Boolean = player.keyItemvX("Marae's Lethicite", 1) > 0;
+				var cerbCheck7:Boolean = !player.blockingBodyTransformations();
 				if (checkedHellhound++ == 0 && rand(2) == 0 && !player.isRaceCached(Races.CERBERUS) && player.isHellHound() && player.hasPerk(PerkLib.Hellfire) && camp.IsSleeping && player.hasKeyItem("Marae's Lethicite") >= 0
 						&& player.keyItemvX("Marae's Lethicite", 1) > 0 && !player.blockingBodyTransformations()) {
 					SceneLib.camp.campUniqueScenes.hellhoundCapture();
