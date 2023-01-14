@@ -860,6 +860,8 @@ public class PerkMenu extends BaseContent {
 				}
 				outputText("\nRequirements for next tier: " + reqs.join(", "));
 
+				if (player.perkv3(mutation) == 1) outputText(" Your Mutation is empowered, and provides you with a much greater buff!\n");
+
 				if (pMutateLvl > 0) {
 					outputText("\nCurrent Tier Description: ");
 					if(mutation.mDesc(player.getPerk(mutation), pMutateLvl).length <= 1) {	//Some desc. contains only "."
