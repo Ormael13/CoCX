@@ -201,10 +201,10 @@ use namespace CoC;
 			this.lustVuln = .8;
 			this.level = 43;
 			this.gems = 65 + rand(30);
-			this.drop = new ChainedDrop().
-					add(consumables.VOLTTOP,1).
-					add(consumables.ALCTHUN,0.75).
-					add(useables.EL_CORE, 0.5);
+			this.drop = new WeightedDrop().
+					add(consumables.VOLTTOP,3).
+					add(consumables.ALCTHUN,2).
+					add(useables.EL_CORE,1);
 			this.wings.type = Wings.THUNDEROUS_AURA;
 			this.rearBody.type = RearBody.RAIJU_MANE;
 			this.arms.type = Arms.RAIJU;

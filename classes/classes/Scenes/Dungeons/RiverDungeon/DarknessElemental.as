@@ -197,12 +197,12 @@ public class DarknessElemental extends Monster
 			this.createPerk(PerkLib.DarknessNature, 0, 0, 0, 0);
 			if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4) {
 				this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);
-				this.drop = new ChainedDrop()
+				this.drop = new WeightedDrop()
 					.add(useables.ELCRYST, 3)
 					.add(useables.LELSHARD, 1);
 			}
 			else {
-				this.drop = new ChainedDrop()
+				this.drop = new WeightedDrop()
 					.add(useables.ELSHARD, 3)
 					.add(useables.LELSHARD, 1);
 			}
