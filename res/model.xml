@@ -6053,7 +6053,7 @@
 			<show part="clothCape/walpurgisClothesBack"/>
         </if>
 		
-		<if test="francescaRegalia">
+		<if test="franRegalia">
 			<hide part="breasts/*"/>
 			<show part="armorNeck/francescaClothes"/>
 			<show part="clothCape/francescaClotheBack"/>
