@@ -31,17 +31,20 @@ public class FoxRace extends Race {
         /*Vagina*/		"Human",
         /*Perks*/		"Elf"];
 	
-	public const TfList:/*Transformation*/Array = [
-		game.transformations.FaceFox,
-		game.transformations.EyesFox,
-		game.transformations.EarsFox,
-		game.transformations.TailFox(1, 1, true),
-		game.transformations.SkinFurGradual(Skin.COVERAGE_HIGH, {colors: FoxHairColors}),
-		game.transformations.ArmsFox,
-		game.transformations.LowerBodyFox(),
-		game.transformations.HairChangeColor(FoxHairColors),
-		game.transformations.CockChangeType(CockTypesEnum.FOX, false)
-	];
+	public function get TfList():/*Transformation*/Array
+	{
+		return [
+			game.transformations.FaceFox,
+			game.transformations.EyesFox,
+			game.transformations.EarsFox,
+			game.transformations.TailFox(1, 1, true),
+			game.transformations.SkinFurGradual(Skin.COVERAGE_HIGH, {colors: FoxHairColors}),
+			game.transformations.ArmsFox,
+			game.transformations.LowerBodyFox(),
+			game.transformations.HairChangeColor(FoxHairColors),
+			game.transformations.CockChangeType(CockTypesEnum.FOX, false)
+		];
+	}
 	
 	
 	public function FoxRace(id:int) {

@@ -225,6 +225,22 @@ public class TongueTransformations extends MutationsHelper {
 				return player.tongue.type === Tongue.MELKIE;
 			}
 	);
+
+	public const TongueImp: Transformation = new SimpleTransformation("Imp Tongue",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				desc += "Your throat starts to ache and your tongue tingles. You try to gasp for air, your eyes opening wide in surprise as the voice that exits your throat is entirely changed. Your voice is far higher pitched than your old human one possibly because it's fit to a small imp body. <b>You now have the squaky voice of the imps.</b>";
+				player.tongue.type = Tongue.IMPISH;
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(TongueMem.getMemory(TongueMem.IMPISH));
+			},
+			// is present
+			function (): Boolean {
+				return player.tongue.type === Tongue.ELF;
+			}
+	);
 	/*
 */
 }

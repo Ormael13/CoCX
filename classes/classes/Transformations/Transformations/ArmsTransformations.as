@@ -1158,6 +1158,25 @@ public class ArmsTransformations extends MutationsHelper {
 				return player.arms.type === Arms.ANT;
 			}
 	);
+
+	public const ArmsTiny: Transformation = new SimpleTransformation("Tiny Arms",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				TransformationUtils.applyTFIfNotPresent(transformations.ArmsHuman, doOutput);
+				desc += " Your arms shrink to almost comical proportions as your hands morph to tiny clawed imp hands.";
+				desc += " You now have <b>tiny arms</b>!";
+
+				player.arms.type = Arms.TINY;
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.TINY));
+			},
+			// is present
+			function (): Boolean {
+				return player.arms.type === Arms.TINY;
+			}
+	);
 	/*
   */
 }

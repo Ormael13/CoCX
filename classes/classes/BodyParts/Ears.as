@@ -269,6 +269,11 @@ public class Ears extends BodyPart {
 		appearanceDesc: "A pair of animal like ears rise up from the top of your head. Well animal like is the proper therm seeing as your kirin ears are covered with scales.",
 		fur: true
 	});
+	public static const BIG: int = 44;
+	EnumValue.add(Types, BIG, "BIG", {
+		name: "big",
+		appearanceDesc: "Your oversized ears almost look comical on your head. They are long and very mobile. They tend to move up and down flapping around when you have a burst of emotion or when you deliver a vengeful spell at the reaction of them being mocked."
+	});
 	
 	public static const HoleEars:/*String*/Array = [LIZARD, DRAGON, ORCA2, AVIAN, INSECT];
 	

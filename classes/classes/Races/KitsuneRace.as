@@ -51,27 +51,29 @@ public class KitsuneRace extends Race {
         /*Vagina*/		"Human",
         /*Perks*/		"Kitsune"];
 	
-	public const TfList:/*Transformation*/Array = [
-		game.transformations.EyesFox,
-		game.transformations.EarsFox,
-		game.transformations.TailFox(2, 1, false),
-		new TransformationGroupAny("SkinOrKitsuneTattoo", [
-					new GradualTransformation("SkinPlainKitsuneTattoed", [
-						game.transformations.SkinPlain,
-						game.transformations.SkinPatternKitsune
-					]),
-					game.transformations.SkinFur(Skin.COVERAGE_LOW, {colors: KitsuneFurColors})
-				]
-		),
-		game.transformations.ArmsHuman,
-		game.transformations.LowerBodyHuman,
-		new TransformationGroupAny("FaceHumanFoxOrAnimal", [
-			game.transformations.FaceHuman,
-			game.transformations.FaceFox,
-			game.transformations.FaceAnimalTeeth
-		]),
-		game.transformations.HairChangeColor(KitsuneHairColors),
-	];
+	public function get TfList():/*Transformation*/Array {
+		return [
+			game.transformations.EyesFox,
+			game.transformations.EarsFox,
+			game.transformations.TailFox(2, 1, false),
+			new TransformationGroupAny("SkinOrKitsuneTattoo", [
+						new GradualTransformation("SkinPlainKitsuneTattoed", [
+							game.transformations.SkinPlain,
+							game.transformations.SkinPatternKitsune
+						]),
+						game.transformations.SkinFur(Skin.COVERAGE_LOW, {colors: KitsuneFurColors})
+					]
+			),
+			game.transformations.ArmsHuman,
+			game.transformations.LowerBodyHuman,
+			new TransformationGroupAny("FaceHumanFoxOrAnimal", [
+				game.transformations.FaceHuman,
+				game.transformations.FaceFox,
+				game.transformations.FaceAnimalTeeth
+			]),
+			game.transformations.HairChangeColor(KitsuneHairColors),
+		];
+	}
 
 	public function KitsuneRace(id:int) {
 		super("Kitsune", id, RaceBody);

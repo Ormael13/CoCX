@@ -129,6 +129,7 @@ public class Races {
 	public static const FAERIEDRAGON:FaerieDragonRace	   = new FaerieDragonRace(106);
 	public static const AZAZEL:AzazelRace	               = new AzazelRace(107);
 	public static const CERBERUS:CerberusRace	           = new CerberusRace(108);
+	public static const IMP:ImpRace                        = new ImpRace(109);
 
 	// Racial groups
 	public static const CatlikeRaces:/*Race*/Array   = [

@@ -465,6 +465,13 @@ package classes.GeneticMemories {
           title: "Squirrel",
           transformation: function(): Transformation {return CoC.instance.transformations.LowerBodySquirrel}});
 
+      public static const TINY: int = _partid++;
+      EnumValue.add(Memories, TINY, "TINY", {
+          id: "Tiny Lower Body",name: "Tiny Legs",
+          cost: 200,
+          title: "Tiny",
+          transformation: function(): Transformation {return CoC.instance.transformations.LowerBodyTiny}});
+
       public static const USHI_ONI: int = _partid++;
       EnumValue.add(Memories, USHI_ONI, "USHI_ONI", {
           id: "UshiOni Lower Body",name: "UshiOni Legs",

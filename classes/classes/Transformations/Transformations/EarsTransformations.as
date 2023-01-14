@@ -758,6 +758,22 @@ public class EarsTransformations extends MutationsHelper {
 				return player.ears.type === Ears.DEER;
 			}
 	);
+
+	public const EarsBig: Transformation = new SimpleTransformation("Big Ears",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				desc += "Whoa, something messed up is going about with your ears. They are elongating and distorting as they grow comically large. When you check on them you discover you now have a pair of oversized pointed ears that tend to move up and down, flapping around when you have a burst of emotion or when you deliver a vengeful spell at the reaction of them being mocked. <b>You now have big ears!</b>";
+				player.ears.type = Ears.BIG;
+				Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.BIG));
+				if (doOutput) outputText(desc);
+			},
+			// is present
+			function (): Boolean {
+				return player.ears.type === Ears.BIG;
+			}
+	);
 	/*
   */
 }

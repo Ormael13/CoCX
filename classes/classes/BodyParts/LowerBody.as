@@ -820,6 +820,12 @@ public class LowerBody extends SaveableBodyPart {
 		scales: true
 	});
 
+	public static const TINY:int = 77;
+	EnumValue.add(Types, TINY, "TINY", {
+		name: "tiny",
+		appearanceDesc: "Your legs look human save for your tiny little imp feet which barely support your frame."
+	});
+
 	override public function set type(value:int):void {
 		super.type = value;
 		// Reset leg count
