@@ -86,7 +86,6 @@ public class MutantIncubus extends Monster {
     }
 
     private function BladeFlurry():void {
-        clearOutput();
         outputText("The mutant Incubus rushes towards you, blades outstretched.\n\n");
         //Miss:
         //Determine if evaded
@@ -104,7 +103,6 @@ public class MutantIncubus extends Monster {
     }
 
     private function HandStab():void {
-        clearOutput();
         outputText(capitalA + short + " steps in, stabbing at your chest with one blade. You move, but it was a feint! His other rapier is headed right towards your [weapon] hand.  ");
         if (player.getEvasionRoll()) {
             outputText("You pull your weapon back and the stab whiffs, hitting nothing but air.");

@@ -41,7 +41,7 @@ public class ProjectTyrant extends Monster {
         this.createPerk(PerkLib.Brawler, 0, 0, 0, 0);
         this.createPerk(PerkLib.GoliathI, 0, 0, 0, 0);
         this.createPerk(PerkLib.CheetahI, 0, 0, 0, 0);
-        this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
+        if (inDungeon) this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
         checkMonster();
     }
 
@@ -83,15 +83,13 @@ public class ProjectTyrant extends Monster {
     }
 
     public function TackleGrappleWait():void {
-        clearOutput();
         TackleGrappleFail();
         SceneLib.combat.enemyAIImpl();
     }
 
     public function TackleGrappleFail():void {
         player.addStatusValue(StatusEffects.Pounced, 1, -1);
-        if (player.getStatusValue(StatusEffects.Pounced, 1) == 0)
-            player.removeStatusEffect(StatusEffects.Pounced);
+        if (player.getStatusValue(StatusEffects.Pounced, 1) == 0) player.removeStatusEffect(StatusEffects.Pounced);
         outputText("The Drider-thing’s bulk presses down on you, crushing your body. You can feel your bones beginning to crack!\n\n");
         var damage:Number = ((str + tou) * 1.2) + rand(50);
         player.takePhysDamage(damage * 1.2, true);
@@ -137,7 +135,6 @@ public class ProjectTyrant extends Monster {
     }
 
     override protected function performCombatAction():void {
-        clearOutput();
         CorruptionAura();
         var dmg0:Number = 0;
         dmg0 += this.spe + this.weaponAttack + eBaseSpeedDamage();

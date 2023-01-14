@@ -63,8 +63,7 @@ public class DemonDragonGroup extends Monster {
         this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
         this.createPerk(PerkLib.LegendaryStrength, 0, 0, 0, 0);
         this.createPerk(PerkLib.MonsterRegeneration, 2, 0, 0, 0);
-        this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
-
+        if (inDungeon) this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
         checkMonster();
     }
 
@@ -133,11 +132,13 @@ public class DemonDragonGroup extends Monster {
     }
 
     override public function defeated(hpVictory:Boolean):void {
-        SceneLib.dungeons.demonLab.FSpreaderVictory();
+        if (inDungeon) SceneLib.dungeons.demonLab.FSpreaderVictory();
+		else cleanupAfterCombat();
     }
 
     override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void {
-        SceneLib.dungeons.demonLab.BadEndExperiment();
+        if (inDungeon) SceneLib.dungeons.demonLab.BadEndExperiment();
+		else cleanupAfterCombat();
     }
 
 }
