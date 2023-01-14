@@ -17,11 +17,7 @@ import classes.Scenes.Dungeons.DemonLab.ProjectNightwalker;
 import classes.Scenes.Dungeons.DemonLab.ProjectTyrant;
 import classes.Scenes.Dungeons.DemonLab.UltimisFlamespreader;
 import classes.Scenes.Dungeons.HiddenCave;
-import classes.Scenes.Explore.ExploreDebug;
-import classes.Scenes.Explore.KitsuneAncestor;
-import classes.Scenes.Explore.KitsuneElder;
-import classes.Scenes.Explore.RNGod;
-import classes.Scenes.Explore.SeabedAlrauneBoss;
+import classes.Scenes.Explore.*;
 import classes.Scenes.Monsters.*;
 import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.NPCs.KihaFollower;
@@ -1235,11 +1231,47 @@ public class Exploration extends BaseContent
 			outputText("While exploring (rest is placeholder atm).\n\n");
 			startCombat(new RyuBiDragon());
 		}
-
 		public function ryubirepenc():void {
 			clearOutput();
 			outputText("While exploring (rest is placeholder atm).\n\n");
 			startCombat(new RyuBiDragon());
+		}
+
+		public function goSearchForPearls():void {
+			clearOutput();
+			outputText("You grab your [weapon] and goes on serching solution to your waning physical constitution.");
+			if (player.hasPerk(PerkLib.ElementalConjurerResolve) && player.perkv1(PerkLib.ElementalConjurerResolve) < 2) player.addPerkValue(PerkLib.ElementalConjurerResolve, 1, 1);
+			if (player.hasPerk(PerkLib.ElementalConjurerDedication) && player.perkv1(PerkLib.ElementalConjurerDedication) < 2) player.addPerkValue(PerkLib.ElementalConjurerDedication, 1, 1);
+			if (player.hasPerk(PerkLib.ElementalConjurerSacrifice) && player.perkv1(PerkLib.ElementalConjurerSacrifice) < 2) player.addPerkValue(PerkLib.ElementalConjurerSacrifice, 1, 1);
+			startCombat(new ElementalGolems());
+		}
+		public function elementalGolemBeaten1():void {
+			clearOutput();
+			outputText("You stops before beaten guardian quasi-gargoyle and reach toward it shoulder mounted shards yanking off each of them.\n\n");
+			inventory.takeItem(useables.LELSHARD, elementalGolemBeaten2);
+		}
+		private function elementalGolemBeaten2():void {
+			outputText("\n");
+			player.addPerkValue(PerkLib.ElementalConjurerResolve, 1, 1);
+			inventory.takeItem(useables.LELSHARD, cleanupAfterCombat);
+		}
+		public function elementalGolemBeaten3():void {
+			clearOutput();
+			outputText("You stops before beaten guardian quasi-gargoyles and reach toward their shoulder mounted shards yanking off each of them.\n\n");
+			inventory.takeItem(useables.LELSHARD, elementalGolemBeaten4);
+		}
+		private function elementalGolemBeaten4():void {
+			outputText("\n");
+			inventory.takeItem(useables.LELSHARD, elementalGolemBeaten5);
+		}
+		private function elementalGolemBeaten5():void {
+			outputText("\n");
+			inventory.takeItem(useables.LELSHARD, elementalGolemBeaten6);
+		}
+		private function elementalGolemBeaten6():void {
+			outputText("\n");
+			player.addPerkValue(PerkLib.ElementalConjurerDedication, 1, 1);
+			inventory.takeItem(useables.LELSHARD, cleanupAfterCombat);
 		}
 
 		public function debugOptions():void

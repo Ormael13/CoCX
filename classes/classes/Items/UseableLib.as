@@ -81,6 +81,15 @@ use namespace CoC;
 		public const ELSHARD:SimpleUseable = new SimpleUseable("ELShard", "Elemental Shard", "an Elemental Shard", 1,
 			"An Elemental Shard.",
 			"You look at the elemental shard. It occasionally glows gently in your hand.  It may be usefull to rank up your summoned elementals.");
+		public const LELSHARD:SimpleUseable = new SimpleUseable("LELShard", "Large Elemental Shard", "a Large Elemental Shard", 3,
+			"A Large Elemental Shard.",
+			"You look at the large elemental shard. It occasionally glows gently in your hand.  It may be usefull to rank up your summoned elementals.");
+		public const ELCRYST:SimpleUseable = new SimpleUseable("ELCryst", "Elemental Crystal", "an Elemental Crystal", 10,
+			"An Elemental Crystal.",
+			"You look at the elemental crystal. It occasionally glows gently in your hand.  It precious material that may be usefull to make your summoned elementals stronger.");
+		public const EL_CORE:SimpleUseable = new SimpleUseable("ELCore", "Elemental Core", "an Elemental Core", 20,
+			"An Elemental Core.",
+			"You look at the elemental core. It occasionally glows gently in your hand.  Rare treasure that have wide range of uses for elementalists.");
 		public const E_ICHOR:SimpleUseable = new SimpleUseable("E.Ichor", "E-Ichor vial", "a vial of E-Ichor", 1,
 			"An vial of E-Ichor.",
 			"You look at the vial of substance called E-Ichor. It occasionally glows gently in your hand.  It may be useful for taking on mutations.");
