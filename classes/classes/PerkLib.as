@@ -386,8 +386,8 @@ public class PerkLib
 				"Each elementalist perk learned gives a +10% multi bonus to health, damage and spell power when in an infused state.",
 				"You've chosen the 'Shared power' perk. Each elementalist perk learned gives a +10% multi bonus to health, damage and spell power when in an infused state.");
 		public static const SilverForMonsters:PerkType = mk("Silver for monsters", "Silver for monsters",
-				"Firearms deals 20% extra damage and 50% increased critical damage to demons and their corrupted servants. (+7.5% range physical / firearms attacks multiplier)",
-				"You've chosen the 'Silver for monsters' perk. Firearms deals 20% extra damage and 50% increased critical damage to demons and their corrupted servants. (+7.5% range physical / firearms attacks multiplier)");
+				"Firearms deals 20% extra damage and 50% increased critical damage to demons and their corrupted servants. (+15% firearms attacks multiplier)",
+				"You've chosen the 'Silver for monsters' perk. Firearms deals 20% extra damage and 50% increased critical damage to demons and their corrupted servants. (+15% firearms attacks multiplier)");
 		public static const SkeletonLord:PerkType = mk("Skeleton Lord", "Skeleton Lord",
 				"You may now control up to 10 skeleton of each type. Allows you to levitate all skeletons.",
 				"You've chosen the 'Skeleton Lord' perk. You may now control up to 10 skeleton of each type. Allows you to levitate all skeletons.");
@@ -395,8 +395,8 @@ public class PerkLib
 				"Slows hunger rate by another 20%.",
 				"You've chosen the 'Survivalist 3' perk.  With this perk, your hunger rate is reduced second time by another 20%.");
 		public static const TaintedMagazine:PerkType = mk("Tainted Magazine", "Tainted Magazine",
-				"Increases reload cost by 2 and doubles max ammo (200% of base ammo count). (+5% range physical / firearms attacks multiplier)",
-				"You've chosen the 'Tainted Magazine' perk. Increases reload cost by 2 and doubles max ammo (200% of base ammo count). (+5% range physical / firearms attacks multiplier)");
+				"Increases reload cost by 2 and doubles max ammo (200% of base ammo count). (+10% firearms attacks multiplier)",
+				"You've chosen the 'Tainted Magazine' perk. Increases reload cost by 2 and doubles max ammo (200% of base ammo count). (+10% firearms attacks multiplier)");
 		public static const TooAngryToDie:PerkType = mk("Too Angry to Die", "Too Angry to Die",
 				"When you under berserk-like state it will prevent HP defeat as long it last. Additionaly increase limit of negative HP you can reach by amount of max wrath. (+10% melee physical attacks multiplier, 2x for been under berzerk type state and another 2x when using large or masive weapon(s))",
 				"You've chosen the 'Too Angry to Die' perk. When you under berserk-like state it will prevent HP defeat as long it last. Additionaly increase limit of negative HP you can reach by amount of max wrath. (+10% melee physical attacks multiplier, 2x for been under berzerk type state and another 2x when using large or masive weapon(s))")
@@ -556,6 +556,9 @@ public class PerkLib
 		public static const Backbreaker:PerkType = mk("Backbreaker", "Backbreaker",
 				"Hammer or mace deals 50% more damage to stunned enemies.",
 				"You've chosen the 'Backbreaker' perk. Hammer or mace deals 50% more damage to stunned enemies.");
+		public static const SaintOfZariman:PerkType = mk("Saint of Zariman", "Saint of Zariman",
+				"Add your speed to gun damage as a modifier, increase scaling of wisdom/intelligence bonus. (+15% firearms attacks multiplier)",
+				"You've chosen the 'Saint of Zariman' perk. Add your speed to gun damage as a modifier, increase scaling of wisdom/intelligence bonus. (+15% firearms attacks multiplier)");
 
 		public static const ElementsOfMarethBasic:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
@@ -1377,8 +1380,8 @@ public class PerkLib
 				"Gain an extra firearm attack per turn (3rd one).",
 				"You've chosen the 'Expert Gunslinger' perk, gaining an extra firearm attack per turn.");
 		public static const ExplosiveCartridge:PerkType = mk("Explosive cartridge", "Explosive cartridge",
-				"Gunshots deals double damage against groups (of any size) and large enemies (9+ ft. tall). (+5% range physical / firearms attacks multiplier)",
-				"You've chosen the 'Explosive cartridge' perk, allowing your gunshots to deal extra damage to groups (of any size) or large enemies (9+ ft. tall). (+5% range physical / firearms attacks multiplier)");
+				"Gunshots deals double damage against groups (of any size) and large enemies (9+ ft. tall). (+10% firearms attacks multiplier)",
+				"You've chosen the 'Explosive cartridge' perk, allowing your gunshots to deal extra damage to groups (of any size) or large enemies (9+ ft. tall). (+10% firearms attacks multiplier)");
 		public static const ExtremelyLucky:PerkType = mk("Extremely Lucky", "Extremely Lucky",
 				"You're banned from casinos with that luck of yours, but you still find stuff lying around after battles, increasing your gain upon victory. (15% more gems from victories)",
 				"You've chosen the 'Extremely Lucky' perk, increasing gem gains from victories by 15%.");
@@ -2315,8 +2318,8 @@ public class PerkLib
 				"Opponent have a hard time dealing serious damage as the sight of your naked body distracts them (+10% dmg reduction).",
 				"You've chosen the 'Naked Truth' perk, causing opponents to have a hard time dealing serious damage as the sight of your naked body distract them (+10% dmg reduction).");
 		public static const NamedBullet:PerkType = mk("Named Bullet", "Named Bullet",
-				"Bosses fears your guns, add 50% increased damage to bosses. (+10% range physical / firearms attacks multiplier)",
-				"You've chosen the 'Named Bullet' perk, allowing your guns to deal extra damage to boss enemies. (+10% range physical / firearms attacks multiplier)");
+				"Bosses fears your guns, add 50% increased damage to bosses. (+20% firearms attacks multiplier)",
+				"You've chosen the 'Named Bullet' perk, allowing your guns to deal extra damage to boss enemies. (+20% firearms attacks multiplier)");
 		public static const Napping:PerkType = mk("Napping", "Napping",
 				"Sample Text Here/+20% fatigue recovery rate",
 				"You've chosen the 'Napping' perk, gaining +20% fatigue recovery rate.");
@@ -3587,7 +3590,6 @@ public class PerkLib
 				"As a harpy or harpy subtype increase toughness speed and libido based on the ammount of harpy children you gave birth to.");
 		public static const HarpyWomb:PerkType = mk("Harpy Womb", "Harpy Womb",
 				"Increases all laid eggs to large size so long as you have harpy legs and a harpy tail.");
-		public static const HellhoundFireBalls:HellHoundFireBalls = new HellHoundFireBalls();
 		public static const HydraAcidBreath:PerkType = mk("Hydra acid breath", "Hydra acid breath",
 				"Allows access to a hydra acid breath attack.");
 		public static const HydraRegeneration:PerkType = mk("Hydra Regeneration", "Hydra Regeneration",
@@ -3852,10 +3854,12 @@ public class PerkLib
 				"Critical tease also weakens your opponent's resistance to lust by 5%.");
 		public static const TransformationImmunity:PerkType = mk("Construct Transformation immunity", "Construct Transformation Immunity",
 				"As a magical construct you are immune to all effects that change the body of living beings, including most transformatives on Mareth (work as the regular transformative resistance except it reduce the odds of getting a body part tfed to 0 although stats increasing effects still could be triggered).");
+		public static const TransformationImmunity2:PerkType = mk("Transformation immunity", "Transformation Immunity",
+				"Your body has become warped beyond repair by your current form, losing its ability to change shape forever. (work as the regular transformative resistance except it reduce the odds of getting a body part tfed to 0 although stats increasing effects still could be triggered).");
 		public static const TransformationImmunityAtlach:PerkType = mk("Atlach Nacha Transformation immunity", "Eldritch Transformation Immunity",
 				"Your body is far too warped by eldritch powers to be transformed into anything else (work as the regular transformative resistance except it reduce the odds of getting a body part tfed to 0 although stats increasing effects still could be triggered).");
-		public static const TransformationImmunityBeeHandmaiden:PerkType = mk("Bee Handmaiden Transformation immunity", "Bee Handmaiden Transformation Immunity",
-				" (work as the regular transformative resistance except it reduce the odds of getting a body part tfed to 0 although stats increasing effects still could be triggered).");
+		public static const TransformationImmunityBeeHandmaiden:PerkType = mk("Bee Handmaiden Transformation immunity", "Transformation Immunity",
+				"Your body has become warped beyond repair by your current form, losing its ability to change shape forever. (work as the regular transformative resistance except it reduce the odds of getting a body part tfed to 0 although stats increasing effects still could be triggered).");
 		public static const TransformationImmunityFairy:PerkType = mk("Fae Transformation immunity", "Fae Transformation Immunity",
 				"Fae magic has turned you into a full fairy, lacking a normal human constitution you have become immune to transformations (work as the regular transformative resistance except it reduce the odds of getting a body part tfed to 0 although stats increasing effects still could be triggered).");
 		public static const TrollResistance:PerkType = mk("Troll Resistance", "Troll Resistance",
@@ -3866,6 +3870,10 @@ public class PerkLib
 				"You are blessed with the power of a unicorn and while below 20 corruption all white magic spells are 20% stronger and lust resistance increased by 10%.");
 		public static const Venomancy:PerkType = mk("Venomancy", "Venomancy",
 				"Grants the Venomancy ability. While active, apply venom effect to spellcasting the venom benefiting from caster perks multipliers but cost a charge each time.")
+		public static const VorpalClaw:PerkType = mk("Vorpal Claw", "Vorpal Claw",
+				"A cheshire natural weapon distorts space inflicting particularly vicious critical strikes.");
+		public static const WhatIsReality:PerkType = mk("What Is Reality", "What Is Reality?",
+				"When you would take fatal damage, laugh at death and deny it ever happened. Mocking death causes the increase of the arousal of the user which can still cause it to simply give up so to get to lewder games.");
 		public static const Whispered:PerkType = mk("Whispered", "Whispered",
 				"Akbal's blessings grant limited telepathy that can induce fear.");
 
@@ -5880,6 +5888,11 @@ public class PerkLib
                     .requireTou(50)
                     .requireSpe(45)
                     .requireLevel(18);
+            SaintOfZariman.requirePerk(ChurchOfTheGun)
+					.requireWis(40)
+                    .requireTou(35)
+                    .requireInt(30)
+                    .requireLevel(18);
             //Tier 4 Wisdom perks
 //            ComboMaster.requirePerk(Combo)
 //                    .requireWis(125)
@@ -5895,7 +5908,7 @@ public class PerkLib
             StrongElementalBondEx.requirePerks(StrongElementalBond, ElementalContractRank5)
                     .requireWis(125)
                     .requireLevel(24);
-            ElementalConjurerDedication.requirePerk(ElementalConjurerResolve)
+            ElementalConjurerDedication.requirePerks(ElementalConjurerResolve, ElementalConjurerMindAndBodyResolve)
                     .requireWis(120)
                     .requireLevel(24);
             FirstAttackElementals.requirePerks(StrongElementalBond, ElementalContractRank4)
@@ -5969,7 +5982,7 @@ public class PerkLib
             ElementalContractRank9.requirePerks(ElementalContractRank8, ElementalConjurerSacrifice)
                     .requireWis(225)
                     .requireLevel(48);
-            ElementalConjurerSacrifice.requirePerk(ElementalConjurerDedication)
+            ElementalConjurerSacrifice.requirePerks(ElementalConjurerDedication, ElementalConjurerMindAndBodyDedication)
                     .requireWis(220)
                     .requireLevel(48);
             //Tier 9 Wisdom perks

@@ -13,8 +13,8 @@ public class DarknessShardSpell extends AbstractBlackSpell {
 		super(
 			ex ? "Darkness Shard (Ex)" : "Darkness Shard",
 			ex ?
-				"Drawing your own lust and wrath to condense part of the the ambivalent darkness into a shard to attack your enemies."
-				: "Drawing your own lust to condense part of the the ambivalent darkness into a shard to attack your enemies.",
+				"Drawing your own lust and wrath to condense part of the ambient darkness into a shard to attack your enemies."
+				: "Drawing your own lust to condense part of the ambient darkness into a shard to attack your enemies.",
 			TARGET_ENEMY,
 			TIMING_INSTANT,
 			[TAG_DAMAGING, TAG_DARKNESS, TAG_TIER1]

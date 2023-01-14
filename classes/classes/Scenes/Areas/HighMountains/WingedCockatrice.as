@@ -1,13 +1,13 @@
+/**
+ * ...
+ * @author Stadler76
+ */
 package classes.Scenes.Areas.HighMountains 
 {
 import classes.StatusEffects;
 import classes.BodyParts.Wings;
 
-/**
-	 * ...
-	 * @author Stadler76
-	 */
-	public class WingedCockatrice extends Cockatrice 
+public class WingedCockatrice extends Cockatrice
 	{
 		public function WingedCockatrice() 
 		{

@@ -13,7 +13,7 @@ public class ArcticGaleSpell extends AbstractBlackSpell {
 		super(
 			ex ? "Arctic Gale (Ex)" : "Arctic Gale",
 			ex ?
-				"Devastate the enemy ranks with a barrage of wrath-enpowered steely ice daggers, driven by the cold northern winds."
+				"Devastate the enemy ranks with a barrage of wrath-empowered steely ice daggers, driven by the cold northern winds."
 				: "Devastate the enemy ranks with a barrage of steely ice daggers, driven by the cold northern winds.",
 			TARGET_ENEMY,
 			TIMING_INSTANT,

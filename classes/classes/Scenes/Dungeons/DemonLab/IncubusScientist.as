@@ -1,3 +1,7 @@
+/**
+ * ...
+ * @author Candian Snas
+ */
 package classes.Scenes.Dungeons.DemonLab {
 import classes.Monster;
 import classes.PerkLib;
@@ -7,10 +11,6 @@ import classes.Scenes.SceneLib;
 import classes.StatusEffects;
 import classes.internals.WeightedDrop;
 
-/**
- * ...
- * @author ...
- */
 public class IncubusScientist extends Monster {
 
     public function IncubusScientist() {
@@ -24,23 +24,23 @@ public class IncubusScientist extends Monster {
         this.cumMultiplier = 3;
         // this.hoursSinceCum = 0;
         createBreastRow(0);
-        initStrTouSpeInte(150, 100, 130, 305);
+        initStrTouSpeInte(150, 100, 130, 300);
         initWisLibSensCor(105, 190, 110, 100);
         this.tallness = 84 + rand(7);
         this.weaponName = "gun";
         this.weaponVerb = "shot";
         this.weaponAttack = 86;
         this.armorName = "skin";
-        this.armorDef = 38;
-        this.armorMDef = 23;
+        this.armorDef = 28;
+        this.armorMDef = 13;
         this.bonusHP = 500;
-        this.bonusLust = 206;
-        this.level = 40;
-        this.additionalXP = 50;
-        this.gems = rand(30) + 15;
-		this.drop = new WeightedDrop().add(useables.LETHITE, 2).add(jewelries.POWRRNG, 1);
+        this.bonusLust = 350;
+        this.level = 50;
+        this.additionalXP = 250;
+        this.gems = rand(30) + 150;
+		this.drop = new WeightedDrop().add(useables.LETHITE, 2).add(jewelries.RPOWRNG, 1);
         this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
-        this.createPerk(PerkLib.OverMaxHP, 40, 0, 0, 0);
+        this.createPerk(PerkLib.OverMaxHP, 50, 0, 0, 0);
         checkMonster();
     }
 
@@ -52,7 +52,8 @@ public class IncubusScientist extends Monster {
             outputText("You dodge the bullets, and they fly past, taking small chunks out of the stone wall behind you.");
         }
         else {
-            var damage:Number = Math.round(90 + rand(10) + (player.newGamePlusMod() * 30));
+            var damage:Number = 0;
+			damage += Math.round((inte + wis + spe + 90 + rand(10) + (player.newGamePlusMod() * 3)) * 10);
             outputText("You can’t even see the projectile as it flies, striking you in the [chest].");
             player.takePhysDamage(damage * 2);
         }
@@ -101,7 +102,6 @@ public class IncubusScientist extends Monster {
     }
 
     private function serum():void {
-        clearOutput();
         outputText("The demon scientist reaches into his lab coat, pulling out a hypodermic needle.\n"
             + "“<i>The side effects are nasty...but I need the power now.</i>” He sticks himself, and he inhales sharply. He doesn’t look any different, but as he cocks his weapon, you notice the vein pulsing on his forehead. He’s way faster now!");
         buff("Serum").addStats({"spe": 200, "str": -100, "int": -100});
@@ -120,7 +120,6 @@ public class IncubusScientist extends Monster {
     }
 
     override protected function performCombatAction():void {
-        clearOutput();
         if (ShieldCooldown > 0) --ShieldCooldown;
 		if (ShieldCooldown == 0 && ShieldHits == 0) ShieldsUp();
         if (HP < maxHP() * 0.6) {

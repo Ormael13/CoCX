@@ -393,7 +393,8 @@ public class Creature extends Utils
 		public var msoulskillPowerStat: BuffableStat; // multiplier (1pt = 100%)
 		public var soulskillcostStat: BuffableStat; // multiplier (1pt = 100%)
 		public var teaseDmgStat: BuffableStat; // raw values (1pt = 2 tease base lust damage)
-		
+		public var evadeStat: BuffableStat; // raw values (1pt = 1 evasion chance)
+
 		public var resPhysicalStat: BuffableStat;
 		public var resMagicStat: BuffableStat;
 		public var resLustStat: BuffableStat;
@@ -1477,7 +1478,8 @@ public class Creature extends Utils
 			msoulskillPowerStat = new BuffableStat(this, 'msoulskillpower', {base:1});
 			soulskillcostStat = new BuffableStat(this, 'soulskillcost', {base:1});
 			teaseDmgStat = new BuffableStat(this, 'teasedmg', {base:0});
-			
+			evadeStat = new BuffableStat(this, 'evade', {base:0});
+
 			resPhysicalStat = new BuffableStat(this, 'res_physical', {base:0});
 			resMagicStat = new BuffableStat(this, 'res_magic', {base:0});
 			resLustStat = new BuffableStat(this, 'res_lust', {base:0});
@@ -1535,6 +1537,7 @@ public class Creature extends Utils
 				msoulskillPowerStat,
 				soulskillcostStat,
 				teaseDmgStat,
+				evadeStat,
 				
 				resPhysicalStat,
 				resMagicStat,
@@ -2609,8 +2612,8 @@ public class Creature extends Utils
 				quantity *= 3;
 			if (hasPerk(PerkLib.ProductivityDrugs))
 				quantity += (perkv3(PerkLib.ProductivityDrugs));
-			if (hasMutation(PerkLib.HellhoundFireBalls))
-				switch (perkv1(PerkLib.HellhoundFireBalls)) {
+			if (hasMutation(IMutationsLib.HellhoundFireBallsIM))
+				switch (perkv1(IMutationsLib.HellhoundFireBallsIM)) {
 					case 1:
 					case 2:
 					case 3: quantity *= 1.25; break;
@@ -4234,6 +4237,7 @@ public class Creature extends Utils
 				if (!hasPerk(PerkLib.GigantGrip)) chance -= 75;
 				else chance -= 30;
 			}
+			chance += evadeStat.value * (game.time.hours < 7 || game.time.hours > 19? 2:1);
 			if (game.player.hasStatusEffect(StatusEffects.Snow) && game.player.tallness < 84) chance -= 50;
 			if (hasPerk(PerkLib.ElementalBody)) {
 				switch (ElementalRace.getElementAndTier(this)) {
@@ -4287,6 +4291,7 @@ public class Creature extends Utils
 	    */
 		public function getEvasionReason(useMonster:Boolean = true, attackSpeed:int = int.MIN_VALUE):String
 		{
+			var evasionReason:String;
 			if (this is Player && Combat.autoHitPlayer()) return null;
 			if (useMonster && game.monster.hasStatusEffect(StatusEffects.Blind) && rand(100) < 66) return "Blind"; //first, handle blind
 			if (useMonster && game.monster != null && attackSpeed == int.MIN_VALUE) attackSpeed = game.monster.spe;
@@ -4312,20 +4317,23 @@ public class Creature extends Utils
 			if (game.player.hasKeyItem("Spring Boots") >= 0 && game.player.tallness < 48 && game.player.isBiped()) generalevasion += 10;
 			if (game.player.hasKeyItem("Rocket Boots") >= 0 && game.player.tallness < 48 && game.player.isBiped()) generalevasion += 20;
 			if (game.player.hasKeyItem("Nitro Boots") >= 0 && game.player.tallness < 48 && game.player.isBiped()) generalevasion += 30;
+			generalevasion += (evadeStat.value * (game.time.hours < 7 || game.time.hours > 19? 2:1));
 			// perks
-			if ((hasPerk(PerkLib.Evade) || hasPerk(PerkLib.ElvenSense) || game.player.necklace == game.necklaces.LEAFAMU || ((game.player.hasKeyItem("Nitro Boots") >= 0 || game.player.hasKeyItem("Rocket Boots") >= 0 || game.player.hasKeyItem("Spring Boots") >= 0) && game.player.tallness < 48 && game.player.isBiped())) && (rand(100) < generalevasion)) return "Evade";
-			if ((hasPerk(PerkLib.Flexibility) || perkv1(IMutationsLib.CatLikeNimblenessIM) >= 1) && (rand(100) < 6)) return "Flexibility";
-			if (hasPerk(PerkLib.Misdirection) && (game.player.armor.hasTag(ItemTags.A_AGILE)) && (rand(100) < 10)) return "Misdirection";
-			if (hasPerk(PerkLib.Unhindered) && game.player.armor.hasTag(ItemTags.A_AGILE) && (rand(100) < 10)) return "Unhindered";
-			if (hasPerk(PerkLib.JunglesWanderer) && (rand(100) < 35)) return "Jungle's Wanderer";
-			if (hasStatusEffect(StatusEffects.Illusion) && rand(100) < (perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 3 ? 30 : 10)) return "Illusion";
-			if (hasStatusEffect(StatusEffects.Flying) && (rand(100) < flyeavsion)) return "Flying";
-			if (hasStatusEffect(StatusEffects.HurricaneDance) && (rand(100) < 25)) return "Hurricane Dance";
-			if (hasStatusEffect(StatusEffects.BladeDance) && (rand(100) < 30)) return "Blade Dance";
-			if (game.player.isRace(Races.CHESHIRE) && ((!hasStatusEffect(StatusEffects.Minimise) && (rand(100) < 30)) || (hasStatusEffect(StatusEffects.EverywhereAndNowhere) && (rand(100) < 80)))) return "Minimise";
-			if (game.player.isRace(Races.CHESHIRE) && ((!hasStatusEffect(StatusEffects.EverywhereAndNowhere) && (rand(100) < 30)) || (hasStatusEffect(StatusEffects.EverywhereAndNowhere) && (rand(100) < 80)))) return "Phasing";
-			if (game.player.isRace(Races.DISPLACERBEAST) && ((!hasStatusEffect(StatusEffects.Displacement) && (rand(100) < 30)) || (hasStatusEffect(StatusEffects.Displacement) && (rand(100) < 80)))) return "Displacing";
-			return null;
+			if ((hasPerk(PerkLib.Evade) || hasPerk(PerkLib.ElvenSense) || game.player.necklace == game.necklaces.LEAFAMU || ((game.player.hasKeyItem("Nitro Boots") >= 0 || game.player.hasKeyItem("Rocket Boots") >= 0 || game.player.hasKeyItem("Spring Boots") >= 0) && game.player.tallness < 48 && game.player.isBiped())) && (rand(100) < generalevasion)) evasionReason = "Evade";
+			if ((hasPerk(PerkLib.Flexibility) || perkv1(IMutationsLib.CatLikeNimblenessIM) >= 1) && (rand(100) < 6)) evasionReason = "Flexibility";
+			if (hasPerk(PerkLib.Misdirection) && (game.player.armor.hasTag(ItemTags.A_AGILE)) && (rand(100) < 10)) evasionReason = "Misdirection";
+			if (hasPerk(PerkLib.Unhindered) && game.player.armor.hasTag(ItemTags.A_AGILE) && (rand(100) < 10)) evasionReason = "Unhindered";
+			if (hasPerk(PerkLib.JunglesWanderer) && (rand(100) < 35)) evasionReason = "Jungle's Wanderer";
+			if (hasStatusEffect(StatusEffects.Illusion) && rand(100) < (perkv1(IMutationsLib.KitsuneParathyroidGlandsIM) >= 3 ? 30 : 10)) evasionReason = "Illusion";
+			if (hasStatusEffect(StatusEffects.Flying) && (rand(100) < flyeavsion)) evasionReason = "Flying";
+			if (hasStatusEffect(StatusEffects.HurricaneDance) && (rand(100) < 25)) evasionReason = "Hurricane Dance";
+			if (hasStatusEffect(StatusEffects.BladeDance) && (rand(100) < 30)) evasionReason = "Blade Dance";
+			if (game.player.isRace(Races.CHESHIRE) && ((!hasStatusEffect(StatusEffects.Minimise) && (rand(100) < 30)) || (hasStatusEffect(StatusEffects.EverywhereAndNowhere) && (rand(100) < 80)))) evasionReason = "Minimise";
+			if (game.player.isRace(Races.CHESHIRE) && ((!hasStatusEffect(StatusEffects.EverywhereAndNowhere) && (rand(100) < 30)) || (hasStatusEffect(StatusEffects.EverywhereAndNowhere) && (rand(100) < 80)))) evasionReason = "Phasing";
+			if (game.player.isRace(Races.DISPLACERBEAST) && ((!hasStatusEffect(StatusEffects.Displacement) && (rand(100) < 30)) || (hasStatusEffect(StatusEffects.Displacement) && (rand(100) < 80)))) evasionReason = "Displacing";
+
+			if (game.player.necklace == game.necklaces.CATBELL && game.player.isAnyRaceCached(Races.CatlikeRaces) && evasionReason) SceneLib.combat.teases.tease();
+			return evasionReason;
 		}
 
 		/**

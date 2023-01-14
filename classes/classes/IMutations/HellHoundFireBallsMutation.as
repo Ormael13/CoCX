@@ -2,15 +2,16 @@
  * Original code by aimozg on 27.01.14.
  * Extended for Mutations by Jtecx on 14.03.22.
  */
-package classes.Perks
+package classes.IMutations
 {
 import classes.PerkClass;
 import classes.PerkLib;
 import classes.IMutationPerkType;
 import classes.Creature;
+import classes.Player;
 import classes.Races;
 
-public class HellHoundFireBalls extends IMutationPerkType
+public class HellHoundFireBallsMutation extends IMutationPerkType
     {
         private static const mName:String = "Hellhound Fire Balls";
         //v1 contains the mutation tier
@@ -57,9 +58,9 @@ public class HellHoundFireBalls extends IMutationPerkType
         }
 
         //Mutation Requirements
-        override public function pReqs():void{
+        override public function pReqs(pCheck:int = -1):void{
             try{
-                var pTier:int = currentTier(this, player);
+                var pTier:int = (pCheck != -1 ? pCheck : currentTier(this, player));
                 //This helps keep the requirements output clean.
                 this.requirements = [];
                 if (pTier == 0){
@@ -69,7 +70,10 @@ public class HellHoundFireBalls extends IMutationPerkType
                 else{
                     var pLvl:int = pTier * 30;
 
-                    this.requireLevel(pLvl);
+                    this.requireLevel(pLvl)
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.perkv2(IMutationsLib.HellhoundFireBallsIM) > pLvl*2
+                    }, "Rapes with dick: "+player.perkv2(this)+"/"+pLvl*2);
                 }
             }catch(e:Error){
                 trace(e.getStackTrace());
@@ -77,14 +81,14 @@ public class HellHoundFireBalls extends IMutationPerkType
         }
 
         //Mutations Buffs
-        override public function buffsForTier(pTier:int):Object {
+        override public function buffsForTier(pTier:int, target:Creature):Object {
             var pBuffs:Object = {};
             pBuffs['lib.mult'] = 0.05 * currentTier(this, player);
             return pBuffs;
         }
 
-        public function HellHoundFireBalls() {
-            super(mName + " IM", mName, SLOT_TESTICLES, 3);
+        public function HellHoundFireBallsMutation() {
+            super(mName + " IM", mName, SLOT_TESTICLES, 4, true);
         }
 
     }

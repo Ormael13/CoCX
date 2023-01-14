@@ -364,7 +364,8 @@ public class ParserTags {
         "guy"                   : function ():* { return CoC.instance.monster.mf("guy", "girl"); },
         "wings"                 : function ():* { return CoC.instance.monster.wingsDescript(); },
         "tail"                  : function ():* { return CoC.instance.monster.tailDescript(); },
-        "onetail"               : function ():* { return CoC.instance.monster.oneTailDescript();}
+        "onetail"               : function ():* { return CoC.instance.monster.oneTailDescript();},
+        "s"                     : function ():* { return CoC.instance.monster.plural?"":"s";}
     };
     /**
      *These tags take a two-word tag with a **numberic** attribute for lookup.
@@ -616,8 +617,8 @@ public class ParserTags {
         "cumnormal"     : function ():* { return (CoC.instance.player.cumQ() <= 150); },
         "cummedium"     : function ():* { return (CoC.instance.player.cumQ() > 150 && CoC.instance.player.cumQ() <= 350); },
         "cumhigh"       : function ():* { return (CoC.instance.player.cumQ() > 350 && CoC.instance.player.cumQ() <= 1000); },
-        "cumveryhigh"   : function ():* { return (CoC.instance.player.cumQ() > 1000 && CoC.instance.player.cumQ() <= 2500); },
-        "cumextreme"    : function ():* { return (CoC.instance.player.cumQ() > 2500); },
+        "cumveryhigh"   : function ():* { return (CoC.instance.player.cumQ() > 1000 && CoC.instance.player.cumQ() <= 2000); },
+        "cumextreme"    : function ():* { return (CoC.instance.player.cumQ() > 2000); },
         "issquirter"    : function ():* { return (CoC.instance.player.wetness() >= 4); },
         "ispregnant"    : function ():* { return (CoC.instance.player.pregnancyIncubation > 0); },
         "isbuttpregnant": function ():* { return (CoC.instance.player.buttPregnancyIncubation > 0); },

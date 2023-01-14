@@ -13,8 +13,8 @@ public class IceSpikeSpell extends AbstractBlackSpell {
 		super(
 			ex ? "Ice Spike (Ex)" : "Ice Spike",
 			ex ?
-				"Drawning your own lust and wrath to concentrate it into chilling spike of ice that will attack your enemies."
-				: "Drawning your own lust to concentrate it into chilling spike of ice that will attack your enemies.",
+				"Drawing your own lust and wrath to concentrate it into chilling spike of ice that will attack your enemies."
+				: "Drawing your own lust to concentrate it into chilling spike of ice that will attack your enemies.",
 			TARGET_ENEMY,
 			TIMING_INSTANT,
 			[TAG_DAMAGING, TAG_ICE, TAG_TIER1]

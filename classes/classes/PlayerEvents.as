@@ -54,11 +54,9 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		//Implementation of TimeAwareInterface
 		public function timeChange():Boolean {
 			var needNext:Boolean;
-			if (time.hours == 6) {
-				checkedTurkey = 0;
-				checkedHellhound = 0;
-				checkedDream = 0;
-			}
+			checkedTurkey = 0;
+			checkedHellhound = 0;
+			checkedDream = 0;
 
 			if (player.cumMultiplier > 19999) player.cumMultiplier = 19999;
 			if (player.ballSize > 400) player.ballSize = 400;
@@ -250,6 +248,14 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			if (player.hasStatusEffect(StatusEffects.WendigoPsychosis)) {
 				player.addStatusValue(StatusEffects.WendigoPsychosis, 1, -1);
 				if (player.statusEffectv1(StatusEffects.WendigoPsychosis) <= 0) player.removeStatusEffect(StatusEffects.WendigoPsychosis);
+			}
+			if (InCollection("Kiha", flags[kFLAGS.PLAYER_COMPANION_0], flags[kFLAGS.PLAYER_COMPANION_2], flags[kFLAGS.PLAYER_COMPANION_3])) {
+				outputText("\nKiha waves to you as she leaves your side. You can call her to battle again next time, or ask her to be your main combat companion.\n");
+				if (flags[kFLAGS.PLAYER_COMPANION_0] == "Kiha") flags[kFLAGS.PLAYER_COMPANION_0] = "";
+				if (flags[kFLAGS.PLAYER_COMPANION_2] == "Kiha") flags[kFLAGS.PLAYER_COMPANION_2] = "";
+				if (flags[kFLAGS.PLAYER_COMPANION_3] == "Kiha") flags[kFLAGS.PLAYER_COMPANION_3] = "";
+				player.removeStatusEffect(StatusEffects.CombatFollowerKiha);
+				needNext = true;
 			}
 			//
 			for each (var clone:StatusEffectType in Soulforce.clones) {
@@ -653,22 +659,34 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.Lycanthropy);
 				needNext = true;
 			}
-			if (player.isRaceCached(Races.CERBERUS) && player.hasMutation(PerkLib.HellhoundFireBalls)) {
-				var pTier:Number = player.perkv1(PerkLib.HellhoundFireBalls);
-				if (pTier < 4 && player.level >= 30*pTier && player.perkv2(PerkLib.HellhoundFireBalls) >= 30*2*pTier) {
-					PerkLib.HellhoundFireBalls.acquireMutation(player, outputText("\nYour balls begin to suddenly feel heavier… warmer. You begin pumping your two penis absentmindedly thinking of all the bitches you recently broke on your twin shaft as the heat rushes all the way to your pair of erect members. You cum a humongous load of smoking warm cum, way to warm for normal seeds. It looks like your balls are progressively continuing their evolution to be more hellhound-like as your seed takes on burning hot property just like that of a hellhound.\n"));
+			if (player.isRaceCached(Races.CERBERUS) && player.hasMutation(IMutationsLib.HellhoundFireBallsIM)) {
+				var pTier:Number = player.perkv1(IMutationsLib.HellhoundFireBallsIM);
+				if (pTier < 4 && player.level >= 30*pTier && player.perkv2(IMutationsLib.HellhoundFireBallsIM) >= 30*2*pTier) {
+					IMutationsLib.HellhoundFireBallsIM.acquireMutation(player, outputText("\nYour balls begin to suddenly feel heavier… warmer. You begin pumping your two penis absentmindedly thinking of all the bitches you recently broke on your twin shaft as the heat rushes all the way to your pair of erect members. You cum a humongous load of smoking warm cum, way to warm for normal seeds. It looks like your balls are progressively continuing their evolution to be more hellhound-like as your seed takes on burning hot property just like that of a hellhound.\n"));
 					needNext = true;
 				}
 			}
 			if (player.hasPerk(PerkLib.DominantAlpha)) player.DominantAlphaBonus();
 			if (player.hasPerk(PerkLib.Immortality) && !player.isRaceCached(Races.AZAZEL)) {
-				outputText("\nYou lose your sence of invulnerability as you are no longer an Azazel.\n");
+				outputText("\nYou lose your sense of invulnerability as you are no longer an Azazel. <b>Perk lost: Immortality</b>\n");
 				player.removePerk(PerkLib.Immortality);
 				needNext = true;
 			}
 			if (!player.hasPerk(PerkLib.Immortality) && player.isRaceCached(Races.AZAZEL)) {
-				outputText("\nYou regain your sence of invulnerability as you are now an Azazel.\n");
+				outputText("\nYou gain a sense of invulnerability as you are now an Azazel. <b>Perk gained: Immortality</b>\n");
 				player.createPerk(PerkLib.Immortality, 0, 0, 0, 0);
+				needNext = true;
+			}
+			if (player.hasPerk(PerkLib.WhatIsReality) && player.hasPerk(PerkLib.VorpalClaw) && !player.isRaceCached(Races.CHESHIRE)) {
+				outputText("\nYou lose your sense of invulnerability as you are no longer an Cheshire. <b>Perks lost: What is Reality? && Vorpal Claw</b>");
+				player.removePerk(PerkLib.WhatIsReality);
+				player.removePerk(PerkLib.VorpalClaw);
+				needNext = true;
+			}
+			if (!player.hasPerk(PerkLib.WhatIsReality) && !player.hasPerk(PerkLib.WhatIsReality) && player.isRaceCached(Races.CHESHIRE)) {
+				outputText("\nYou gain a sence of invulnerability as you are now an Cheshire. <b>Perk gained: What is Reality? && Vorpal Claw</b>");
+				player.createPerk(PerkLib.WhatIsReality, 0, 0, 0, 0);
+				player.createPerk(PerkLib.VorpalClaw, 0, 0, 0, 0);
 				needNext = true;
 			}
 			//No better place for these since the code for the event is part of CoC.as or one of its included files
@@ -2902,8 +2920,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					SceneLib.holidays.datTurkeyRumpMeeting(); //TURKEY SURPRISE
                     return true;
                 }
-				if (checkedHellhound++ == 0 && rand(5) == 0 && !player.isRaceCached(Races.CERBERUS) && player.isHellHound() && player.hasPerk(PerkLib.Hellfire) && camp.IsSleeping && player.hasKeyItem("Marae's Lethicite") >= 0
-						&& player.keyItemvX("Marae's Lethicite", 1) > 0 ) { //&& !player.raceCached(Cerberus)
+				if (checkedHellhound++ == 0 && rand(2) == 0 && !player.isRaceCached(Races.CERBERUS) && player.isHellHound() && player.hasPerk(PerkLib.Hellfire) && camp.IsSleeping && player.hasKeyItem("Marae's Lethicite") >= 0
+						&& player.keyItemvX("Marae's Lethicite", 1) > 0 && !player.blockingBodyTransformations()) {
 					SceneLib.camp.campUniqueScenes.hellhoundCapture();
 					return true;
 				}

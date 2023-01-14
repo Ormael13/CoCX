@@ -1100,21 +1100,27 @@ private function InternalMutations():void {
 		addButton(3, "Yes", IMutationsYN);
 	}
 	else if (EvangelinePeepTalkOnInternalMutations == 2) {
-		outputText("\"<i>Did you bring gems or find a vial of the mutagen?</i>\" she asks.\n\n");
-		outputText("Her eyes briefly graze your form, \"<i>It looks like the only that way we can do anything about that 'unhealthy drive' of yours is with a little mutation.</i>\" She snickers softly as she waits for your response.");
-		menu();
-		addButton(1, "Gems", IMutationsGemsOrMutagen, 1).disableIf(player.gems < 500, "Gotta get that 500 gems first.");
-		addButton(3, "Mutagen", IMutationsGemsOrMutagen, 2).disableIf(!player.hasItem(useables.E_ICHOR, 1), "Gotta get that vial of mutagen first.");
-		addButton(14, "Back", meetEvangeline);
+		if (player.blockingBodyTransformations()){
+			outputText("Evangeline examines you for a moment, before stating \"Uh, hey [name], your body is kind of tightly hard-wired up together, I don't think any Mutagens are going to be able to help you now. \"\n");
+			outputText("It seems, because you're now transformatively immune, she won't be able to help you with your mutations.");
+			doNext(meetEvangeline);
+		}
+		else{
+			outputText("\"<i>Did you bring gems or find a vial of the mutagen?</i>\" she asks.\n\n");
+			outputText("Her eyes briefly graze your form, \"<i>It looks like the only that way we can do anything about that 'unhealthy drive' of yours is with a little mutation.</i>\" She snickers softly as she waits for your response.");
+			menu();
+			addButton(1, "Gems", IMutationsGemsOrMutagen, 1).disableIf(player.gems < 500, "Gotta get that 500 gems first.");
+			addButton(3, "Mutagen", IMutationsGemsOrMutagen, 2).disableIf(!player.hasItem(useables.E_ICHOR, 1), "Gotta get that vial of mutagen first.");
+			addButton(14, "Back", meetEvangeline);
+		}
 	}
 
-	function IMutationsYN(yn:Boolean = true):void{
-		if (yn){
+	function IMutationsYN(yn:Boolean = true):void {
+		if (yn) {
 			outputText("\n\nEvangeline sighs in relief.");
 			outputText("\n\n\"<i>Glad to hear you at least are smarter than a minotaur. Anyways, there are means to reduce the stress on your body from internal mutations. With proper training you can develop the Chimera Corpus Exocell, or in common terms, the chimera body adaptation. This will allow your body to adapt to stress and slowly negate the drawbacks. Of course the lazy route would be to acquire regeneration from a species' inner mutation and thus negate the need to train entirely.</i>\"");
 			EvangelinePeepTalkOnInternalMutations = 2;
-		}
-		else{
+		} else {
 			outputText("\n\nYour confused look annoys Evangeline to no end.");
 			outputText("\n\n\"<i>That's fine, but trust me, you really will want my help on this, eventually.</i>\"");
 			EvangelinePeepTalkOnInternalMutations = 1;
@@ -1161,7 +1167,7 @@ private function IMutationsSelector(page:int = 0):void {
 			bdFunc = null;
 			mutations.pReqs();
 			//trace("" + mutations.name() + ": Checking requirements. v");
-			if (flags[kFLAGS.EVA_MUTATIONS_BYPASS] || (mutations.available(target) && mutations.maxLvl > target.perkv1(mutations))) {
+			if (flags[kFLAGS.EVA_MUTATIONS_BYPASS] || ((mutations.available(target) || GoM == 2 && target.hasMutation(mutations)) && mutations.maxLvl > target.perkv1(mutations))) {
 				//trace("Requirements met, adding in.");
 				bdFunc = curry(mutations.acquireMutation, player, costTaker)
 				bdDesc = mutations.desc();

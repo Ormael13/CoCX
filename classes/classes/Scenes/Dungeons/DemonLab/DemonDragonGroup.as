@@ -43,26 +43,27 @@ public class DemonDragonGroup extends Monster {
         this.horns.count = 2;
         this.tailType = Tail.DRACONIC;
         this.wings.type = Wings.DRACONIC_LARGE;
-        initStrTouSpeInte(375, 280, 220, 112);
+        initStrTouSpeInte(375, 290, 220, 112);
         initWisLibSensCor(100, 445, 105, 100);
         this.weaponName = "spears and claws";
         this.weaponVerb = "slash";
-        this.weaponAttack = 272;
+        this.weaponAttack = 312;
         this.armorName = "scales";
-        this.armorDef = 106;
-        this.armorMDef = 59;
+        this.armorDef = 156;
+        this.armorMDef = 99;
         this.bonusHP = 2400;
-        this.bonusLust = 690;
+        this.bonusLust = 610;
         this.lust = 50;
         this.lustVuln = 0.44;
-        this.level = 50;
+        this.level = 60;
         this.gems = rand(50) + 75;
         this.drop = new WeightedDrop().add(useables.D_SCALE, 5).add(useables.LETHITE, 2).add(jewelries.POWRRNG, 1);
         this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
         this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
         this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
         this.createPerk(PerkLib.LegendaryStrength, 0, 0, 0, 0);
-
+        this.createPerk(PerkLib.MonsterRegeneration, 2, 0, 0, 0);
+        if (inDungeon) this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
         checkMonster();
     }
 
@@ -77,8 +78,7 @@ public class DemonDragonGroup extends Monster {
     }
 
     private function PentaFireBreath():void {
-        clearOutput();
-        var damage:Number = (inte + wis) * 1.2 * player.newGamePlusMod() + 90 + rand(10);
+        var damage:Number = (inte + wis) * 3 * player.newGamePlusMod() + 900 + rand(100);
         outputText("The draconic demonesses fan out, spears held in front of them. As you swivel your eyes between them, you notice that one of them is inhaling deeply, nostrils beginning to glow. Your eyes widen as you feel the air around you warm up. The dragoness moans, sending a veritable wall of flames at you.\n");
         if (player.getEvasionRoll()) {
             outputText("You manage to sidestep the worst of the flames, only to have another burst fly at you a split second later. And another. And another. You cover your eyes, only to see a final, larger burst of blue flame headed your way. ");
@@ -94,14 +94,12 @@ public class DemonDragonGroup extends Monster {
     }
 
     public function DragonDemonHaremTease():void {
-        clearOutput();
         outputText("The four demonic dragonesses look at each other, flicking their long tongues out. The male steps back, bringing one hand to his tapered draconic cock, while the two closest dragonesses lean in, holding their spears with their flexible tails as they make out in front of him. Their sloppy kisses send drool down their cleavage, and they rub the male’s extended cock with their thighs. Distracted by the lewd display, you notice that the other two are rubbing their ribbed spear shafts across their muffs, moaning as they bite their lips.\n\n")
         outputText("<i>“Wouldn’t you rather join us?”</i> One of the outer women coos. <i>“Put down your weapon. That’s all you’d need to do.”</i> ")
-        player.takeLustDamage(Math.round(120 + (player.lib * 1.4)), true);
+        player.takeLustDamage(Math.round(120 + (player.lib * 2)), true);
     }
 
     public function ComboDragonStrike():void {
-        clearOutput();
         outputText("You realise what they’re trying to do, and before they can trap you, you rush one of the draconic women, narrowly dodging her spear and slamming your [weapon] into her face. Formation broken, the women fly back towards their leader, spears now bristling defensively. ");
         var hit:int = 0;
         for (var i:int = 0; i < 4; ++i) {
@@ -134,11 +132,13 @@ public class DemonDragonGroup extends Monster {
     }
 
     override public function defeated(hpVictory:Boolean):void {
-        SceneLib.dungeons.demonLab.FSpreaderVictory();
+        if (inDungeon) SceneLib.dungeons.demonLab.FSpreaderVictory();
+		else cleanupAfterCombat();
     }
 
     override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void {
-        SceneLib.dungeons.demonLab.BadEndExperiment();
+        if (inDungeon) SceneLib.dungeons.demonLab.BadEndExperiment();
+		else cleanupAfterCombat();
     }
 
 }

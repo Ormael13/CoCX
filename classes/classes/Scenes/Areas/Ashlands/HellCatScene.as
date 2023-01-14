@@ -329,7 +329,7 @@ public function reformallcockstokittycocks():void {
 public function reformallcockstokittycocks2():void {
 	//outputText("You moan, feeling overwhelming heat build in your nethers as ");
 	if (!player.hasCock()) {
-		outputText("a sheath forms between your legs. You mewl in pleasure as a brand new fat cat cock slowly slide out of your sheath, inch after inch, going erect within seconds and dripping hot drops of precum on the ground. It’s only as it reaches its full 10 inches that the the throbbing heat builds into a full blown orgasm, your freshly grown cock splattering the volcanic ground with kitty spunk. ");
+		outputText("a sheath forms between your legs. You mewl in pleasure as a brand new fat cat cock slowly slide out of your sheath, inch after inch, going erect within seconds and dripping hot drops of precum on the ground. It’s only as it reaches its full 10 inches that the throbbing heat builds into a full blown orgasm, your freshly grown cock splattering the volcanic ground with kitty spunk. ");
 		transformations.CockCat(0, 10, 2.5).applyEffect(false);
 	}
 	else {

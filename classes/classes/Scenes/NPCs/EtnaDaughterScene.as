@@ -226,7 +226,7 @@ private function playWithEtnaDaughter():void {
 	outputText("You think about what you will do with your daughter today when you hear a growl that sounds like her stomach.[pg]");
 	outputText("“<i>"+championRef()+", I’m hungry please carry me!</i>”[pg]");
 	outputText("Of course she is. You can see her tail twitch with hunger and you effortlessly figure out what your little cub wants.[pg]");
-	outputText("You [if (hasarmor) \"remove your [armor] and \"]pick up [etnakidname] and position her on your back for a piggyback ride.[pg]");
+	outputText("You [if (hasarmor)remove your [armor] and ]pick up [etnakidname] and position her on your back for a piggyback ride.[pg]");
 	outputText("“<i>Yay I’m going for a ride!</i>”[pg]");
 	outputText("She laughs cheerfully as you move around with her on piggyback. She is swift to move her tail pussy to your [cock] making you moan as you walk around. You can feel [etnakidname]’s drool fall on your shoulders as she begins to tease your [cock] with her juvenile, yet already masterful tail-pussy, trying to get her daily share of milk. " +
 			"Her devilish tail-cunt even at this age already pulses with the characteristic suction power of her race, pleasing your [cock] in all the ways it can to force the milk out. " +
@@ -239,9 +239,9 @@ private function playWithEtnaDaughter():void {
 
 public function etnaDaughterNightlyMilkings():void {
 	clearOutput();
-	outputText("You were having a very wet dream, so wet you moaned in your sleep imagining yourself fucking with some lewd creature only to wake up on an orgasm. You are quite surprised to find [etnakidname]’s [if (islactating) \"mouth and paw on your [breasts] and \"]tail on your “Cock descript”. She realizes you're awake and unplugs, caught in the act.[pg]");
+	outputText("You were having a very wet dream, so wet you moaned in your sleep imagining yourself fucking with some lewd creature only to wake up on an orgasm. You are quite surprised to find [etnakidname]’s [if (islactating)mouth and paw on your [breasts] and ]tail on your [cock]. She realizes you're awake and unplugs, caught in the act.[pg]");
 	outputText("“<i>Good morning "+championRef()+"! Please don’t mind me I’m just... taking breakfast...</i>”[pg]");
-	outputText("Well, you guess you can’t refuse her that. You tell her she better finish her breakfast before it goes stale. [etnakidname] smiles wide and resumes [if (islactation) \"suckling on your breast \"]as her tail immediately restarts its pleasurable massage on your [cock].[pg]");
+	outputText("Well, you guess you can’t refuse her that. You tell her she better finish her breakfast before it goes stale. [etnakidname] smiles wide and resumes [if (islactation)suckling on your breast ]as her tail immediately restarts its pleasurable massage on your [cock].[pg]");
 	outputText("“<i>Mmmmm "+championRef()+"’s milk is the best!</i>”[pg]");
 	outputText("You moan with the pleasure of multiple consecutive orgasms as your [cock] shoots a steady flow of cum, [etnakidname]’s tail bulging with the passage of her favored food as she makes a very contented face. You hug your daughter with love as she vacuums your cum out. After a while she purrs in contentment and unplugs her tail, leaving your [cock] clean of any fluid.[pg]");
 	outputText("“<i>Thanks, "+championRef()+" I’m full.</i>”[pg]");

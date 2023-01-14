@@ -654,9 +654,9 @@ use namespace CoC;
                 if (player.str < 80)
                     outputText("holding the creature over your head as ");
                 else
-                    outputText("you guide his [monster cock] to liberally coat your face" + (player.hasBreasts() ? "and [allbreasts]" : ""));
+                    outputText("you guide his [monster cock] to liberally coat your face " + (player.hasBreasts() ? "and [allbreasts] " : ""));
             }
-            outputText("\nYou lick your lips clean of the creamy mess as you put down the now unconscious Imp and give it a look-over for valuables.");
+            outputText("you lick your lips clean of the creamy mess as you put down the now unconscious Imp and give it a look-over for valuables.");
             if (player.cor >= 80)
                 outputText("  As you trot back the way you have come you idly trace a finger through the dangling sperm, hoping someone might see what a slut you have become. Though if you have to clean it off, you can always get more.. perhaps from an even more copious source.");
 			player.sexReward("cum", "Lips");
@@ -1362,7 +1362,7 @@ use namespace CoC;
 		}
 
         public function impRapesAlraune():void {
-            outputText("You sink to the ground, too overcame by lust and desire to fight. The imp smiles, a wicked look glinting in his eyes. He drops his loincloth to reveal a hardening cock. Your eyes bulge a bit as it grows...and grows...and grows! That imp has a twelve-inch cock... and he’s walking towards you.");
+            outputText("You sink to the ground, too overcame by lust and desire to fight. The imp smiles, a wicked look glinting in his eyes. He drops his loincloth to reveal a hardening cock. Your eyes bulge a bit as it grows... and grows... and grows! That imp has a twelve-inch cock... and he’s walking towards you.");
             if (player.isLiliraune()){ outputText(" Your twin sister can’t help but rub her pussy in anticipation the moment she sees this.\n\n" +
 
                     "\"<i>Woah sis, he looks well-equipped. You get fucked or I get fucked?</i>\"\n\n" +
@@ -1466,7 +1466,7 @@ use namespace CoC;
 			//========================================
 			function vaginal():void {
 				outputText(images.showImage("imp-loss-female-fuck"));
-				outputText("You sink to the ground, too overcame by lust and desire to fight.  The imp smiles, a wicked look glinting in his eyes.  He drops his loincloth to reveal a hardening cock.  Your eyes bulge a bit as it grows...and grows...and grows!  That imp has a twelve-inch cock... and he's walking towards you.   Your [vag] practically juices itself in anticipation, and you find yourself spreading your [legs] in preparation.");
+				outputText("You sink to the ground, too overcame by lust and desire to fight.  The imp smiles, a wicked look glinting in his eyes.  He drops his loincloth to reveal a hardening cock.  Your eyes bulge a bit as it grows... and grows... and grows!  That imp has a twelve-inch cock... and he's walking towards you.   Your [vag] practically juices itself in anticipation, and you find yourself spreading your [legs] in preparation.");
 				outputText("\n\nHe smiles and presses his cock against your [vag].  Your lust-driven mind is speechless, leaving you panting and moaning like a whore.");
 				//If too big, only partly penetrate.
 				if(player.vaginalCapacity() < monster.cockArea(0)) {

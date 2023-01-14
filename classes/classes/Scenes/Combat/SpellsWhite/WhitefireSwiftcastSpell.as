@@ -34,6 +34,7 @@ public class WhitefireSwiftcastSpell extends AbstractWhiteSpell {
 	public function calcDamage(monster:Monster, randomize:Boolean = true, casting:Boolean = true):Number {
 		var baseDamage:Number = 0.4 * scalingBonusIntelligence(randomize);
 		if (player.weaponRangeName == "Artemis") baseDamage *= 1.5;
+		if (player.armorName == "FrancescaCloak") baseDamage *= 2;
 		return adjustSpellDamage(baseDamage, DamageType.FIRE, CAT_SPELL_WHITE, monster, true, casting);
 	}
 	

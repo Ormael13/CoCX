@@ -203,8 +203,8 @@ use namespace CoC;
 			this.gems = 65 + rand(30);
 			this.drop = new ChainedDrop().
 					add(consumables.VOLTTOP,1).
-					add(consumables.ALCTHUN,0.7).
-					add(useables.ELSHARD, 0.5);
+					add(consumables.ALCTHUN,0.75).
+					add(useables.EL_CORE, 0.5);
 			this.wings.type = Wings.THUNDEROUS_AURA;
 			this.rearBody.type = RearBody.RAIJU_MANE;
 			this.arms.type = Arms.RAIJU;

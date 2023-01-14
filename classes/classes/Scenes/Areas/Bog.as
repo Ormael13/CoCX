@@ -6,6 +6,7 @@ package classes.Scenes.Areas
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.Bog.*;
+import classes.Scenes.Dungeons.DemonLab;
 import classes.Scenes.NPCs.EtnaFollower;
 import classes.Scenes.SceneLib;
 
@@ -25,6 +26,23 @@ public class Bog extends BaseContent
 			if (chooser == 0) {
 				if (player.buttPregnancyIncubation != 0) chooser++;
 			}
+
+
+			var choice:Array = [];
+			var select:int;
+
+			//Build choice list!
+			if (flags[kFLAGS.TIMES_ENCOUNTERED_FROG] != -1) choice[choice.length] = 0; //Frog girl encounter
+			choice[choice.length] = 1; //Phouka
+			choice[choice.length] = 2; //Chameleon
+			choice[choice.length] = 3; //Lizan
+			choice[choice.length] = 4; //Troll
+			if (DemonLab.MainAreaComplete >= 4)
+				choice[choice.length] = 5;
+
+			if (rand(4) == 0)
+				choice[choice.length] = 10; //Find nothing!
+
 			flags[kFLAGS.BOG_EXPLORED]++;
 			//Helia monogamy fucks
 			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !SceneLib.helFollower.followerHel() && !isNightTime) {
@@ -74,26 +92,26 @@ public class Bog extends BaseContent
 				doNext(camp.returnToCampUseOneHour);
 				return;
 			}
-			if (chooser == 0 && flags[kFLAGS.TIMES_ENCOUNTERED_FROG] != -1) {
-				frogGirlScene.findTheFrogGirl();
-			}
-			else if (chooser == 1) {
-				phoukaScene.phoukaEncounter();
-			}
-			else if (chooser == 2) {
-				chameleonGirlScene.encounterChameleon();
-			}
-			else if (chooser == 3) {
-				lizanScene.lizanIntro();
-			}
-			else if (chooser == 4) {
-				if (rand(2) == 0) SceneLib.trollScene.encounterAdultFemaleTroll();
-				else SceneLib.trollScene.encounterAdultMaleTroll();
-			}
-			else {
-				clearOutput();
-				outputText("You wander around through the humid muck, but you don't run into anything interesting.");
-				doNext(camp.returnToCampUseOneHour);
+
+			select = choice[rand(choice.length)];
+			switch(select) {
+				case 0: frogGirlScene.findTheFrogGirl();
+						break;
+				case 1: phoukaScene.phoukaEncounter();
+						break;
+				case 2: chameleonGirlScene.encounterChameleon();
+						break;
+				case 3: lizanScene.lizanIntro();
+						break;
+				case 4: if (rand(2) == 0) SceneLib.trollScene.encounterAdultFemaleTroll();
+						else SceneLib.trollScene.encounterAdultMaleTroll();
+						break;
+				case 5:
+					SceneLib.exploration.demonLabProjectEncounters();
+					break;
+				default: clearOutput();
+					outputText("You wander around through the humid muck, but you don't run into anything interesting.");
+					doNext(camp.returnToCampUseOneHour);
 			}
 		}
 	}

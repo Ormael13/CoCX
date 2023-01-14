@@ -153,7 +153,8 @@ public class IceElemental extends Monster
 			this.plural = false;
 			this.lustVuln = 0;
 			this.drop = new ChainedDrop()
-					.add(useables.ELSHARD, 1);
+					.add(useables.ELSHARD, 3)
+					.add(useables.LELSHARD, 1);
 			this.createBreastRow(0, 1);
 			initGenderless();
 			this.weaponName = "fists";

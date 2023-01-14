@@ -2226,16 +2226,16 @@ public final class Mutations extends MutationsHelper {
             outputText("\n<b>Gained Ability: Hellfire!</b> "+PerkLib.Hellfire.longDesc);
         }
         player.createPerk(PerkLib.HellfireCoat, 0, 0, 0, 0);
-        outputText("\n<b>Gained Ability: Hellfire Coat</b> "+PerkLib.HellfireCoat.longDesc);
-
-
+        outputText("\n<b>Gained Ability: Hellfire Coat</b> " + PerkLib.HellfireCoat.longDesc);
         outputText("\n<b>Upgraded Ability: Bite -> Tripple Bite</b>");
         outputText("\n<b>Upgraded Ability: Hellfire -> tripple effect</b>");
         outputText("\n<b>Gained Ability: Terrifying Howl</b>");
-
+        player.removeAllRacialMutation();
         if (player.cor < 50) player.cor = 50;
-        outputText("\n<b>Gained Mutation: Hellhound Fireballs</b>")
-        PerkLib.HellhoundFireBalls.acquireMutation(player,"none");
+        outputText("\n<b>Gained Mutation: Hellhound Fireballs</b>");
+		player.createPerk(PerkLib.TransformationImmunity2, 3, 0, 0, 0);
+		outputText("\n<b>Gained Perk: Transformation Immunity!</b> "+PerkLib.TransformationImmunity2.longDesc);
+        IMutationsLib.HellhoundFireBallsIM.acquireMutation(player,"none");
     }
     
     public function impFood(player:Player):void {
@@ -6339,7 +6339,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //DA TAIL (IF ALREADY HAZ URZ)
-        if (player.tailType != Tail.CAT && player.tailType != Tail.BURNING && player.tailType != Tail.TWINKASHA && (player.ears.type == Ears.CAT || player.ears.type == Ears.DISPLACER) && rand(3) == 0 && changes < changeLimit) {
+        if (!Tail.hasFelineTail(player.tailType) && (player.ears.type == Ears.CAT || player.ears.type == Ears.DISPLACER) && rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]");
             transformations.TailCat.applyEffect();
             changes++;
@@ -6357,7 +6357,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //CAT-FACE!
-        changeLimit = 100;
+        if (!player.blockingBodyTransformations()) changeLimit = 100;
         if (rand(3) == 0 && changes < changeLimit && player.faceType != Face.CAT && player.faceType != Face.CAT_CANINES && player.faceType != Face.CHESHIRE && player.faceType != Face.CHESHIRE_SMILE) {
             outputText("[pg]");
             transformations.FaceCatCanines.applyEffect();
@@ -6399,6 +6399,7 @@ public final class Mutations extends MutationsHelper {
         if (rand(3) == 0 && changes < changeLimit && player.tongue.type == Tongue.CAT && player.eyes.type != Eyes.CAT && player.eyes.type != Eyes.INFERNAL) {
             outputText("[pg]");
             transformations.EyesCat.applyEffect();
+            transformations.EyesChangeColor(["yellow"]).applyEffect();
             changes++;
         }
         //cheshire fur color

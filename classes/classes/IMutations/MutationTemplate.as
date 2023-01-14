@@ -45,9 +45,9 @@ import classes.PerkClass;
         }
 
         //Mutation Requirements
-        override public function pReqs():void{
+        override public function pReqs(pCheck:int = -1):void{
             try{
-                var pTier:int = currentTier(this, player);
+                var pTier:int = (pCheck != -1 ? pCheck : currentTier(this, player));
                 //This helps keep the requirements output clean.
                 this.requirements = [];
                 if (pTier == 0){
@@ -64,8 +64,9 @@ import classes.PerkClass;
 
 
         //Mutations Buffs
-        override public function buffsForTier(pTier:int):Object {
+        override public function buffsForTier(pTier:int, target:Creature):Object {
             var pBuffs:Object = {};
+            //if (player.perkv3(this) == 1){} //This checks in player has the "true" mutation.
             /*
             if (pTier == 1) {
                 pBuffs['spe.mult'] = 0;
@@ -81,7 +82,7 @@ import classes.PerkClass;
 
         public function MutationTemplate() {
             // replace SLOT_NONE with other SLOT_XXXX constant
-            super(mName + " IM", mName, SLOT_NONE, 3);
+            super(mName + " IM", mName, SLOT_NONE, 3, true);
         }
 
     }

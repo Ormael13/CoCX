@@ -142,7 +142,7 @@ public class MagicSpecials extends BaseCombatContent {
 				bd = buttons.add("Electric Discharge", ElectricDischarge, "Release a deadly discharge of electricity.", "Electric discharge");
 				if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
-			if (player.hasPerk(PerkLib.TransformationImmunityAtlach) && player.lowerBody == LowerBody.ATLACH_NACHA && !monster.hasStatusEffect(StatusEffects.MysticWeb)) {
+			if (player.hasPerk(PerkLib.TransformationImmunity2) && player.lowerBody == LowerBody.ATLACH_NACHA && !monster.hasStatusEffect(StatusEffects.MysticWeb)) {
 				bd = buttons.add("Mystic Web", MysticWeb, "Spin a thread of animated web using your magic to tie up your victim in place. Also reduce opponent speed after each use. \n");
 				bd.requireMana(spellCost(50));
 				if (player.tailVenom < 25) {
@@ -1245,7 +1245,7 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		outputText("You begin to gather energy within your electrocytes your bodily lights turning bright white as you enter overcharge. Suddenly you deliver the amassed current your energy running throught the air like a bright bolt of white death and roaring thunder.");
 		if (monster.hasStatusEffect(StatusEffects.DragonWaterBreath)){
-			outputText("Electrified Water is blasted all around your wet target as lightning and fluid turn into a booming explosion the force of wich plaster [monster him] to the ground dazed the the violence of the impact!");
+			outputText("Electrified Water is blasted all around your wet target as lightning and fluid turn into a booming explosion the force of wich plaster [monster him] to the ground dazed the violence of the impact!");
 			monster.removeStatusEffect(StatusEffects.DragonWaterBreath);
 			monster.createStatusEffect(StatusEffects.Stunned,3,0,0,0);
 		}
@@ -4724,9 +4724,10 @@ public class MagicSpecials extends BaseCombatContent {
 		else if (player.hasPerk(PerkLib.GiftOfLust)) fatigue(30, USEFATG_MAGIC_NOBM);
 		else fatigue(40, USEFATG_MAGIC_NOBM);
 		var lusttransfered:Number = 0;
-		if (player.hasPerk(PerkLib.GreaterGiftOfLust)) lusttransfered += Math.round(player.lust * 0.4);
-		else if (player.hasPerk(PerkLib.GiftOfLust)) lusttransfered += Math.round(player.lust * 0.25);
-		else lusttransfered += Math.round(player.lust * 0.15);
+		var lusttransfered2:Number = 0.15;
+		if (player.hasPerk(PerkLib.GiftOfLust)) lusttransfered2 += 0.1;
+		if (player.hasPerk(PerkLib.GreaterGiftOfLust)) lusttransfered2 += 0.15;
+		lusttransfered += Math.round(player.lust * lusttransfered2);
 		player.lust -= lusttransfered;
 		outputText("Your eyes glaze over and you feel your mind suddenly becoming more clear after you transfered some blurs of every sexual perversion you could possibly think of to your enemy");
 		if(!monster.plural) outputText(".");

@@ -11,6 +11,7 @@ import classes.Scenes.API.Encounters;
 import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Forest.AlrauneScene;
 import classes.Scenes.Areas.Tundra.*;
+import classes.Scenes.Dungeons.DemonLab;
 import classes.Scenes.NPCs.Forgefather;
 import classes.Scenes.SceneLib;
 
@@ -80,6 +81,13 @@ use namespace CoC;
 				chance: 0.25,
 				name: "nothing",
 				call: nothingEncounter
+			}, {
+				name: "demonProjects",
+				chance: 0.2,
+				when: function ():Boolean {
+					return DemonLab.MainAreaComplete >= 4;
+				},
+				call: SceneLib.exploration.demonLabProjectEncounters
 			});
 		}
 		

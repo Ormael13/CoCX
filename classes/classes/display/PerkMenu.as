@@ -716,7 +716,7 @@ public class PerkMenu extends BaseContent {
 	}
 
 	//IMutationsDB!
-	public function mutationsDatabase(page:int = 0, review:Boolean = false, moreInfoButton:Function = null):void{
+	public function mutationsDatabase(page:int = 0, review:Boolean = false):void{
 		/*
 		Source: IMutationsLib.as for all mutations.
  		*/
@@ -780,7 +780,7 @@ public class PerkMenu extends BaseContent {
 			//Heart Mutations
 			displayHeader(IMutationPerkType.Slots[slot].name+" Mutations:");
 			mutationsDatabaseVerify(IMutationsLib.mutationsArray(slot));
-			mutationsDatabase(pageAdd, false, curry(moreInfoSwitch, curry(mutationsDBSlot, slot, pageAdd)));
+			mutationsDatabase(pageAdd, false);
 		}
 
 		function mutationsDBDragon():void{
@@ -790,7 +790,7 @@ public class PerkMenu extends BaseContent {
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) outputText("\nThere is an extra bonus mutation slot given due to NG+");
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2) outputText("\nThere is another extra bonus mutation slot given due to NG++");
 			mutationsDatabaseVerify([IMutationsLib.DraconicBonesIM, IMutationsLib.DraconicHeartIM, IMutationsLib.DraconicLungIM]);
-			mutationsDatabase(1, false, curry(moreInfoSwitch, mutationsDBDragon));
+			mutationsDatabase(1, false);
 		}
 
 		function mutationsDBKitsune():void{
@@ -799,7 +799,7 @@ public class PerkMenu extends BaseContent {
 			displayHeader("Kitsune Mutations");
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) outputText("\nThere is an extra bonus mutation slot given due to NG+");
 			mutationsDatabaseVerify([IMutationsLib.KitsuneThyroidGlandIM, IMutationsLib.KitsuneParathyroidGlandsIM]);
-			mutationsDatabase(1, false, curry(moreInfoSwitch, mutationsDBKitsune));
+			mutationsDatabase(1, false);
 		}
 
 		var bd:ButtonDataList = new ButtonDataList();
@@ -822,14 +822,7 @@ public class PerkMenu extends BaseContent {
 		bd.add("Adaptations", curry(mutationsDBSlot, IMutationPerkType.SLOT_ADAPTATIONS, 1), "Adaptation Mutations");
 		bd.add("Dragons", mutationsDBDragon, "Dragon Mutations");
 		bd.add("Kitsunes", mutationsDBKitsune, "Kitsune Mutations");
-		submenu(bd, displayPerks, page, false, [[moreInfo ? "LESS INFO" : "MORE INFO", moreInfoButton,
-			moreInfo ? "Display only the current and next tiers." : "Display all mutation tiers and stat buffs"]]); // reserving 11 for the switch
-	}
-
-	private var moreInfo:Boolean = false; //no need to save, so keep it here
-	private function moreInfoSwitch(callAfter:Function):void {
-		moreInfo = !moreInfo;
-		callAfter(); //update text and buttons
+		submenu(bd, displayPerks, page, false);
 	}
 
 	//Mutations check helper. Cloned + stripped requirements logic from PerkMenuDB.
@@ -867,6 +860,8 @@ public class PerkMenu extends BaseContent {
 				}
 				outputText("\nRequirements for next tier: " + reqs.join(", "));
 
+				if (player.perkv3(mutation) == 1) outputText(" Your Mutation is empowered, and provides you with a much greater buff!\n");
+
 				if (pMutateLvl > 0) {
 					outputText("\nCurrent Tier Description: ");
 					if(mutation.mDesc(player.getPerk(mutation), pMutateLvl).length <= 1) {	//Some desc. contains only "."
@@ -876,7 +871,7 @@ public class PerkMenu extends BaseContent {
 					}
 				}
 
-				if (moreInfo) {
+				if (flags[kFLAGS.IMDB_DETAILS]) {
 					outputText("\nAll Tier Descriptions:");
 					for (var tier:int = 1; tier <= mutation.maxLvl; ++tier)
 						outputText("\n" + tier + ": " + mutation.mDesc(player.getPerk(mutation), tier) + "; " + mutation.explainBuffs(tier));

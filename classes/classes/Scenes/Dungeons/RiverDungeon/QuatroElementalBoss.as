@@ -357,7 +357,7 @@ public class QuatroElementalBoss extends Monster
 			this.bonusHP = 875;
 			this.lustVuln = 0;
 			this.drop = new ChainedDrop()
-					.add(useables.ELSHARD, 1);
+					.add(useables.EL_CORE, 1);
 			this.level = 21;
 			this.additionalXP = 250;
 			this.createPerk(PerkLib.EnemyElementalType, 0, 0, 0, 0);

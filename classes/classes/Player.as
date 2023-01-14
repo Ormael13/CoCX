@@ -2747,7 +2747,7 @@ use namespace CoC;
 			}
 			if (perkv1(IMutationsLib.AlphaHowlIM) >= 2) {
 				var packMembers:Number = LunaFollower.WerewolfPackMember;
-				if (hasMutation(PerkLib.HellhoundFireBalls)) packMembers += perkv3(PerkLib.HellhoundFireBalls);
+				if (hasMutation(IMutationsLib.HellhoundFireBallsIM)) packMembers += perkv3(IMutationsLib.HellhoundFireBallsIM);
 				mult -= (2*packMembers);
 			}
 			if (hasPerk(PerkLib.FenrirSpikedCollar)) {
@@ -5056,6 +5056,20 @@ use namespace CoC;
 				removePerk(PerkLib.ChimericalBodySemiEpicStage);
 				perkPoints += 1;
 			}
+			//PermTFTrueMutations();	//Uncomment to unleash armageddon..... or when ready to roll out "true" mutations.
+
+		}
+
+		public function PermTFTrueMutations():void{
+			for each (var pPerks:IMutationPerkType in IMutationsLib.mutationsArray("")){
+				if (pPerks.trueMutation){
+					pPerks.pReqs(0);
+					if (pPerks.available(this)){
+						curry(pPerks.acquireMutation, this, "none", Math.min(this.level%30 + 1), pPerks.maxLvl);
+						this.setPerkValue(pPerks, 3, 1);
+					}
+				}
+			}
 		}
 
 		public function requiredXP():int {
@@ -5193,9 +5207,11 @@ use namespace CoC;
 			if(statusEffectv4(StatusEffects.CombatFollowerExcellia) > 0) addStatusValue(StatusEffects.CombatFollowerExcellia, 4, -1);
 			if(statusEffectv4(StatusEffects.CombatFollowerDiana) > 0) addStatusValue(StatusEffects.CombatFollowerDiana, 4, -1);
 			if(statusEffectv4(StatusEffects.CombatFollowerDiva) > 0) addStatusValue(StatusEffects.CombatFollowerDiva, 4, -1);
+			if(statusEffectv4(StatusEffects.CombatFollowerKiha) > 0) addStatusValue(StatusEffects.CombatFollowerKiha, 4, -1);
 			if(statusEffectv4(StatusEffects.CombatFollowerMitzi) > 0) addStatusValue(StatusEffects.CombatFollowerMitzi, 4, -1);
 			if(statusEffectv4(StatusEffects.CombatFollowerNeisa) > 0) addStatusValue(StatusEffects.CombatFollowerNeisa, 4, -1);
 			if(statusEffectv4(StatusEffects.CombatFollowerSiegweird) > 0) addStatusValue(StatusEffects.CombatFollowerSiegweird, 4, -1);
+			if(statusEffectv4(StatusEffects.CombatFollowerTyrantia) > 0) addStatusValue(StatusEffects.CombatFollowerTyrantia, 4, -1);
 			if(statusEffectv4(StatusEffects.CombatFollowerZenji) > 0) addStatusValue(StatusEffects.CombatFollowerZenji, 4, -1);
 			// All CombatStatusEffects are removed here
 			for (var a:/*StatusEffectClass*/Array=statusEffects.slice(),n:int=a.length,i:int=0;i<n;i++) {
@@ -5973,9 +5989,8 @@ use namespace CoC;
 		}
 
 		public function blockingBodyTransformations():Boolean {
-			return hasPerk(PerkLib.TransformationImmunity) || hasPerk(PerkLib.TransformationImmunityFairy) || hasPerk(PerkLib.TransformationImmunityAtlach)
-					|| hasPerk(PerkLib.TransformationImmunityBeeHandmaiden) || hasPerk(PerkLib.Undeath) || hasPerk(PerkLib.WendigoCurse)
-					|| hasPerk(PerkLib.BlessingOfTheAncestorTree) || hasPerk(PerkLib.HellfireCoat) || hasEnchantment(EnchantmentLib.TfImmunity);
+			return hasPerk(PerkLib.TransformationImmunity) || hasPerk(PerkLib.TransformationImmunity2) || hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)
+					|| hasPerk(PerkLib.Undeath) || hasPerk(PerkLib.WendigoCurse) || hasPerk(PerkLib.BlessingOfTheAncestorTree) || hasEnchantment(EnchantmentLib.TfImmunity);
 		}
 
 		public function manticoreFeed():void {
@@ -6134,8 +6149,8 @@ use namespace CoC;
 					EngineCore.outputText("\n\nFeeling some minor discomfort in your " + cockDescript(randomCock) + " you slip it out of your [armor] and examine it. <b>With a little exploratory rubbing and massaging, you manage to squeeze out " + bonusGems + " gems from its cum slit.</b>\n\n");
 					gems += bonusGems;
 				}
-				if (hasPerk(PerkLib.HellhoundFireBalls)) {
-					addPerkValue(PerkLib.HellhoundFireBalls, 2, 1);
+				if (hasPerk(IMutationsLib.HellhoundFireBallsIM)) {
+					addPerkValue(IMutationsLib.HellhoundFireBallsIM, 2, 1);
 				}
 			}
             if (SceneLib.exgartuan.boobsPresent()) SceneLib.exgartuan.boobsSleep(4 + rand(4)); //consider her touched, lol
@@ -6345,7 +6360,7 @@ use namespace CoC;
 		{
 			var MBCap:Number = 1;
 			if (hasPerk(PerkLib.MindbreakerBrain1toX)) MBCap += 0.50*perkv1(PerkLib.MindbreakerBrain1toX);
-			removeCurse("inte", -3);
+			removeCurse("int", -3);
 			removeCurse("wis", -3);
 			removeCurse("lib", -3);
 			if (buff("Devoured Mind").getValueOfStatBuff("int.mult") < MBCap){

@@ -6,6 +6,7 @@ package classes.Scenes.Camp
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
 
 public class CampMakeWinions extends BaseContent
 	{
@@ -817,7 +818,7 @@ public class CampMakeWinions extends BaseContent
 					outputText("-Normal: " + player.statusEffectv1(StatusEffects.SummonedElementals) + " (" + player.statusEffectv1(StatusEffects.SummonedElementals) + ")\n");
 					outputText("-Epic: " + player.statusEffectv2(StatusEffects.SummonedElementals) + " (" + player.statusEffectv2(StatusEffects.SummonedElementals) * 2 + ")\n");
 				}
-				outputText("-Unique: 0</i>\n\n");
+				outputText("-Unique: ? (?)</i>\n\n");
 			}
 			if (player.hasStatusEffect(StatusEffects.ElementalEnergyConduits)) outputText("Elemental Energy Stored in Conduits: <i>"+player.statusEffectv1(StatusEffects.ElementalEnergyConduits)+" / "+player.statusEffectv2(StatusEffects.ElementalEnergyConduits)+"</i>\n\n");
 			outputText("<b>Currently summoned elementals:</b><i>");
@@ -1355,11 +1356,18 @@ public class CampMakeWinions extends BaseContent
 			else addButtonDisabled(5, "ElementUp", "You don't have any normal elementals, try summoning one!");
 			if (player.statusEffectv2(StatusEffects.SummonedElementals) > 0) addButton(6, "ElementUp(E)", elementaLvlUpEpic);
 			else addButtonDisabled(6, "ElementUp(E)", "You don't have any epic elementals, try summoning one!");
+			if (canSearchForParls()) addButton(10, "Explore", SceneLib.exploration.goSearchForPearls);
 			if (player.statusEffectv3(StatusEffects.ElementalEnergyConduits) >= 1) addButton(12, "E.S.Conv.", elementalShardsConversion).hint("Conversion of Elemental Shards"+(player.hasPerk(PerkLib.ElementalConjurerKnowledgeSu)?" of Soulforce":"")+" into energy stored in arcane circle elemental conduit.");
 			else addButtonDisabled(12, "E.S.Conv.", "You need to have any elemental conduit added to the arcane circle to use this option.");
 			addButton(13, "EvocationTome", evocationTome).hint("Description of various elemental powers.");
 			addButton(14, "Back", camp.campWinionsArmySim);
 		}
+		private function canSearchForParls():Boolean {
+			return (player.hasPerk(PerkLib.ElementalConjurerResolve) && player.perkv1(PerkLib.ElementalConjurerResolve) < 2)/* ||
+				(player.hasPerk(PerkLib.ElementalConjurerDedication) && player.perkv1(PerkLib.ElementalConjurerDedication) < 2) ||
+				(player.hasPerk(PerkLib.ElementalConjurerSacrifice) && player.perkv1(PerkLib.ElementalConjurerSacrifice) < 2)*/;
+		}
+		
 		private function elementaLvlUp():void {
 			var elementalTypes:Array = [];
 			var contractRankI:int = 0;
@@ -1474,17 +1482,63 @@ public class CampMakeWinions extends BaseContent
 			outputText("Elemental Energy Stored in Conduits: <i>"+player.statusEffectv1(StatusEffects.ElementalEnergyConduits)+" / "+player.statusEffectv2(StatusEffects.ElementalEnergyConduits)+"</i>\n\n");
 			outputText("Do you like to convert elemental shard into energy stored in conduit? (Excess energy will be lost)\n\n");
 			menu();
-			if (player.hasItem(useables.ELSHARD, 1)) addButton(1, "Yes", elementalShardsConversionGo);
-			else addButtonDisabled(1, "Yes", "You don't have any Elemental Shards to convert currently.");
-			addButton(3, "Back", accessSummonElementalsMainMenu);
+			if (player.hasItem(useables.ELSHARD, 1)) addButton(0, "Yes", elementalShardsConversionGo, 0).hint("Use 1 Elemental Shard");
+			else addButtonDisabled(0, "Yes", "You don't have any Elemental Shards to convert currently.");
+			if (player.hasItem(useables.LELSHARD, 1)) addButton(1, "Yes", elementalShardsConversionGo, 1).hint("Use 1 Large Elemental Shard");
+			else addButtonDisabled(1, "Yes", "You don't have any Large Elemental Shards to convert currently.");
+			if (player.hasItem(useables.ELCRYST, 1)) addButton(2, "Yes", elementalShardsConversionGo, 2).hint("Use 1 Elemental Crystal");
+			else addButtonDisabled(2, "Yes", "You don't have any Elemental Crystals to convert currently.");
+			if (player.hasItem(useables.EL_CORE, 1)) addButton(3, "Yes", elementalShardsConversionGo, 3).hint("Use 1 Elemental Core");
+			else addButtonDisabled(3, "Yes", "You don't have any Elemental Cores to convert currently.");
+			if (player.hasItem(useables.ELSHARD, 5)) addButton(5, "Yes", elementalShardsConversionGo, 10).hint("Use 5 Elemental Shards");
+			else addButtonDisabled(5, "Yes", "You don't have enough Elemental Shards to convert currently.");
+			if (player.hasItem(useables.LELSHARD, 5)) addButton(6, "Yes", elementalShardsConversionGo, 11).hint("Use 5 Large Elemental Shards");
+			else addButtonDisabled(6, "Yes", "You don't have enough Large Elemental Shards to convert currently.");
+			if (player.hasItem(useables.ELCRYST, 5)) addButton(7, "Yes", elementalShardsConversionGo, 12).hint("Use 5 Elemental Crystals");
+			else addButtonDisabled(7, "Yes", "You don't have enough Elemental Crystals to convert currently.");
+			if (player.hasItem(useables.EL_CORE, 5)) addButton(8, "Yes", elementalShardsConversionGo, 13).hint("Use 5 Elemental Cores");
+			else addButtonDisabled(8, "Yes", "You don't have enough Elemental Cores to convert currently.");
+			addButton(14, "Back", accessSummonElementalsMainMenu);
 		}
-		private function elementalShardsConversionGo():void {
+		private function elementalShardsConversionGo(shardtype:Number):void {
 			clearOutput();
 			outputText("You remove the elemental shard from your pack, taking it in both hands. You sit in the middle of your circle, the shard resting in your palms. You close your eyes, letting your mana spread into the crystal. As you focus your power, the crystal shatters, little pieces floating around your head. You can’t see, but you feel it as the shards liquify, crystal bits becoming globes, shimmering with power. With a thought, you will the globes down, into the leylines you’ve made in the ground, into the engravings of your circle. You feel the power settle, a magical pulse that you feel, ready to be unleashed.\n\n");
-			player.destroyItems(useables.ELSHARD, 1);
 			var convertedShard:Number = 0;
-			if (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) + 400 > player.statusEffectv2(StatusEffects.ElementalEnergyConduits)) convertedShard += (player.statusEffectv2(StatusEffects.ElementalEnergyConduits) - player.statusEffectv1(StatusEffects.ElementalEnergyConduits));
-			else convertedShard += 400;
+			var shardEnergy:Number = 0;
+			if (shardtype == 0) {
+				player.destroyItems(useables.ELSHARD, 1);
+				shardEnergy += 400;
+			}
+			if (shardtype == 1) {
+				player.destroyItems(useables.LELSHARD, 1);
+				shardEnergy += 1200;
+			}
+			if (shardtype == 2) {
+				player.destroyItems(useables.ELCRYST, 1);
+				shardEnergy += 4000;
+			}
+			if (shardtype == 3) {
+				player.destroyItems(useables.EL_CORE, 1);
+				shardEnergy += 8000;
+			}
+			if (shardtype == 10) {
+				player.destroyItems(useables.ELSHARD, 5);
+				shardEnergy += 2000;
+			}
+			if (shardtype == 11) {
+				player.destroyItems(useables.LELSHARD, 5);
+				shardEnergy += 6000;
+			}
+			if (shardtype == 12) {
+				player.destroyItems(useables.ELCRYST, 5);
+				shardEnergy += 20000;
+			}
+			if (shardtype == 13) {
+				player.destroyItems(useables.EL_CORE, 5);
+				shardEnergy += 40000;
+			}
+			if (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) + shardEnergy > player.statusEffectv2(StatusEffects.ElementalEnergyConduits)) convertedShard += (player.statusEffectv2(StatusEffects.ElementalEnergyConduits) - player.statusEffectv1(StatusEffects.ElementalEnergyConduits));
+			else convertedShard += shardEnergy;
 			player.addStatusValue(StatusEffects.ElementalEnergyConduits,1,convertedShard);
 			doNext(elementalShardsConversion);
 		}
