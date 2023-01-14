@@ -684,6 +684,8 @@
 		<cell rect="1427,325,80,108" name="clothe/darkPriest" dx="63" dy="64"/>
 		<cell rect="1427,434,80,108" name="clothe/priest" dx="63" dy="64"/>
 		<cell rect="1427,543,80,108" name="clothe/elfVillager" dx="63" dy="64"/>
+		<cell rect="1509,543,80,108" name="clothe/elfWizard" dx="63" dy="64"/>
+		<cell rect="1837,325,80,108" name="clothe/francescaClothes" dx="66" dy="33"/>
         <cell rect="672,445,45,80" name="clotheLegs/comfortableClothes" dx="79" dy="90"/>
         <cell rect="751,158,40,54" name="clotheLegs/whiteKimonoBottom" dx="85" dy="121"/>
         <cell rect="919,158,40,54" name="clotheLegs/blackKimonoBottom" dx="85" dy="121"/>
@@ -705,6 +707,7 @@
 		<cell rect="1673,325,80,104" name="clotheLegs/darkPriestBoots" dx="66" dy="73"/>
 		<cell rect="1591,434,80,104" name="clotheLegs/priestSkirt" dx="65" dy="64"/>
 		<cell rect="1673,434,80,104" name="clotheLegs/priestBoots" dx="66" dy="73"/>
+		<cell rect="2242,158,40,55" name="clotheLegs/francescaBoots" dx="85" dy="121"/>
         <cell rect="776,12,45,27" name="armorNeck/fullplatetopFemale" dx="80" dy="63"/>
         <cell rect="728,12,45,27" name="armorNeck/fullplatetopFemaleLarge" dx="80" dy="63"/>
         <cell rect="833,12,45,27" name="armorNeck/fullplatetopMale" dx="80" dy="63"/>
@@ -716,6 +719,7 @@
         <cell rect="1446,12,45,27" name="armorNeck/gooplatetopMale" dx="80" dy="63"/>
         <cell rect="644,798,173,156" name="armorNeck/walpurgisClothes" dx="20" dy="12"/>
         <cell rect="992,798,173,156" name="armorNeck/wendigoCloak" dx="20" dy="12"/>
+		<cell rect="1688,798,173,156" name="armorNeck/francescaClothes" dx="20" dy="12"/>
         <cell rect="1013,70,40,28" name="armorNeck/merchantClotheCape_fg" dx="85" dy="59"/>
         <cell rect="1969,158,20,25" name="armorNeck/elfClotheCape_fg" dx="94" dy="62"/>
         <cell rect="579,1550,30,23" name="armorNeck/alraunedress" dx="86" dy="60"/>
@@ -748,6 +752,7 @@
         <cell rect="1780,158,20,55" name="clothLeftArm/elfClothingleftArmLewd" dx="84" dy="63"/>
 		<cell rect="2032,158,20,55" name="clothLeftArm/darkPriestPrayer" dx="82" dy="53"/>
 		<cell rect="2116,158,20,55" name="clothLeftArm/priestPrayer" dx="82" dy="53"/>
+		<cell rect="2200,158,20,55" name="clothLeftArm/francesca" dx="78" dy="70"/>
         <cell rect="804,42,25,55" name="armorRightArm/fullplaterightarm" dx="102" dy="66"/>
         <cell rect="1132,42,25,55" name="armorRightArm/blackFullplaterightarm" dx="102" dy="66"/>
 		<cell rect="1417,42,25,55" name="armorRightArm/gooplaterightarm" dx="102" dy="66"/>
@@ -766,6 +771,7 @@
 		<cell rect="1755,434,80,108" name="clothRightArm/priest" dx="65" dy="52"/>
 		<cell rect="2053,158,20,55" name="clothRightArm/darkPriestPrayer" dx="105" dy="53"/>
 		<cell rect="2137,158,20,55" name="clothRightArm/priestPrayer" dx="105" dy="53"/>
+		<cell rect="2221,158,20,55" name="clothRightArm/francesca" dx="111" dy="70"/>
         <cell rect="818,798,173,156" name="clothCape/walpurgisClothesBack" dx="19" dy="12"/>
         <cell rect="1166,798,173,156" name="clothCape/wendigoCloakBack" dx="19" dy="12"/>
         <cell rect="935,543,150,80" name="clothCape/fairyQueenDressUnder" dx="22" dy="61"/>
@@ -776,6 +782,7 @@
         <cell rect="229,13,40,13" name="clothCape/OniKimonoCollar" dx="85" dy="68"/>
         <cell rect="607,56,40,13" name="clothCape/IceQueenKimonoCollar" dx="85" dy="68"/>
         <cell rect="150,155,49,25" name="clothCape/mindbreaker" dx="79" dy="53"/>
+		<cell rect="1862,798,173,156" name="clothCape/francescaClotheBack" dx="20" dy="29"/>
         <cell rect="1509,216,80,100" name="clothCape_bg/merchantClotheCape_bg" dx="65" dy="64"/>
         <cell rect="1755,216,80,100" name="clothCape_bg/mageClotheCape_bg" dx="65" dy="64"/>
         <cell rect="2083,216,80,100" name="clothCape_bg/elfClotheCape_bg" dx="65" dy="64"/>
@@ -6045,6 +6052,28 @@
 			<show part="armorNeck/walpurgisClothes"/>
 			<show part="clothCape/walpurgisClothesBack"/>
         </if>
+		
+		<if test="francescaRegalia">
+			<hide part="breasts/*"/>
+			<show part="armorNeck/francescaClothes"/>
+			<show part="clothCape/francescaClotheBack"/>
+			<if test="showClothing">
+				<show part="clothe/francescaClothes"/>
+				<if test="showArmClothing">
+					<show part="clothLeftArm/francesca"/>
+					<show part="clothRightArm/francesca"/>
+				</if>
+				<if test="showLegClothing">
+					<if test="isTaur()">
+						<else>
+							<show part="clotheLegs/comfortableClothes"/>
+							<hide part="penis/*"/>
+							<hide part="balls/*"/>
+						</else>
+					</if>
+				</if>
+			</if>
+        </if>
 
         <if test="scandalousSuccubusClothing">
 			<if test="breastRows.length gt 0">
@@ -6149,7 +6178,6 @@
 			<if test="showClothing">
 				<show part="clothe/elfClothing"/>
 				<show part="clothe/elfClothingSkirt"/>
-				<show part="clothcape/elfClotheCape_bg"/>
 				<show part="armorNeck/elfClotheCape_fg"/>
 				<if test="showArmClothing">
 					<if test="(femininity &gt;=40) and (cor &gt;=50) and (skin.coverage==Skin.COVERAGE_NONE)">
@@ -6221,6 +6249,78 @@
 							<show part="bra_fg/elfDressBraLarge"/>
 						</default>
 					</switch>
+				</if>
+			</if>
+		</if>
+		
+		<if test="elfWizardDress">
+			<if test="breastRows.length gt 0">
+				<switch>
+					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+						<show part="bra_fg/elfClothingBraSmall"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+						<show part="bra_fg/elfClothingBraMedium"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+						<show part="bra_fg/elfClothingBraMedium"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+						<show part="bra_fg/elfClothingBraLarge"/>
+					</case>
+					<default>
+						<show part="bra_fg/elfClothingBraLarge"/>
+					</default>
+				</switch>
+			</if>
+			<if test="showClothing">
+				<show part="clothe/elfWizard"/>
+				<show part="clothCape_bg/elfClotheCape_bg"/>
+				<show part="armorNeck/elfClotheCape_fg"/>
+				<if test="showArmClothing">
+					<if test="(femininity &gt;=40) and (cor &gt;=50) and (skin.coverage==Skin.COVERAGE_NONE)">
+						<switch value="arms.type">
+							<case values="Arms.HUMAN,Arms.KITSUNE,Arms.ELF,Arms.RAIJU,Arms.CENTIPEDE">
+								<show part="clothRightArm/elfClothingRightArmLewd"/>
+								<if test="PlayerHasAWeapon">
+									<show part="clothLeftArm/elfClothingleftArm"/>
+									<else>
+										<show part="clothLeftArm/elfClothingleftArmLewd"/>
+									</else>
+								</if>
+								<show part="glove_fg/elfClothingRightArmFront"/>
+							</case>
+							<default>
+								<show part="clothLeftArm/elfClothingleftArm"/>
+								<show part="clothRightArm/elfClothingRightArm"/>
+							</default>
+						</switch>
+						<else>
+							<show part="clothLeftArm/elfClothingleftArm"/>
+							<show part="clothRightArm/elfClothingRightArm"/>
+						</else>
+					</if>
+				</if>
+				<if test="showLegClothing">
+					<if test="(femininity &gt;=40) and (cor &gt;=50) and (skin.coverage==Skin.COVERAGE_NONE)">
+						<switch value="lowerBody">
+							<case values="LowerBody.HUMAN,LowerBody.ELF,LowerBody.DEMONIC_HIGH_HEELS">
+								<switch value="arms.type">
+									<case values="Arms.HUMAN,Arms.ELF,Arms.KITSUNE,Arms.RAIJU,Arms.CENTIPEDE">
+										<show part="clotheLegs/elfClothinglegsLewd"/>
+									</case>
+									<default>
+										<show part="clotheLegs/elfClothinglegs"/>
+									</default>
+								</switch>
+							</case>
+						</switch>
+						<else>
+							<show part="clotheLegs/elfClothinglegs"/>
+						</else>
+					</if>
 				</if>
 			</if>
 		</if>
