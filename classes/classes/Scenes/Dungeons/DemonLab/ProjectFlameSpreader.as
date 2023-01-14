@@ -81,8 +81,7 @@ public class ProjectFlameSpreader extends Monster {
     }
 
     public function ProjectFlameSpreader() {
-        //_inDungeon = inDungeon;
-        this.a = "the";
+        this.a = "the ";
         this.short = "Flamespreader";
         this.long = "[Themonster] has dusky brown skin, red scales from calf to neck, and slender curves. You look at her face, with draconic fangs, demonic horns and reptilian eyes. Flames jet from her nose with every breath, and she shifts her weight from side to side. She’s an odd mix of dragon and demon, with wide, womanly hips. She plants her spear, wings flapping.";
         this.createVagina(false, VaginaClass.WETNESS_NORMAL, VaginaClass.LOOSENESS_NORMAL);

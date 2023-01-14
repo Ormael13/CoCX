@@ -154,7 +154,6 @@ public class LabGuard extends Monster {
 
     override protected function performCombatAction():void {
         if (shieldWall) shieldWall = false;
-        clearOutput();
         CorShields();
         CorVolley();
         CorSupport();

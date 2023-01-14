@@ -141,7 +141,7 @@ public class UltimisFlamespreader extends Monster {
         //_inDungeon = inDungeon;
         gunner1Alive = true;
         gunner2Alive = true;
-        this.a = "the";
+        this.a = "the ";
         this.short = "Ultimis Flamespreader";
         this.long = desc();
         this.createVagina(false, VaginaClass.WETNESS_NORMAL, VaginaClass.LOOSENESS_NORMAL);

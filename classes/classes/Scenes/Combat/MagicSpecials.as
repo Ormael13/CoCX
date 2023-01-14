@@ -4724,9 +4724,10 @@ public class MagicSpecials extends BaseCombatContent {
 		else if (player.hasPerk(PerkLib.GiftOfLust)) fatigue(30, USEFATG_MAGIC_NOBM);
 		else fatigue(40, USEFATG_MAGIC_NOBM);
 		var lusttransfered:Number = 0;
-		if (player.hasPerk(PerkLib.GreaterGiftOfLust)) lusttransfered += Math.round(player.lust * 0.4);
-		else if (player.hasPerk(PerkLib.GiftOfLust)) lusttransfered += Math.round(player.lust * 0.25);
-		else lusttransfered += Math.round(player.lust * 0.15);
+		var lusttransfered2:Number = 0.15;
+		if (player.hasPerk(PerkLib.GiftOfLust)) lusttransfered2 += 0.1;
+		if (player.hasPerk(PerkLib.GreaterGiftOfLust)) lusttransfered2 += 0.15;
+		lusttransfered += Math.round(player.lust * lusttransfered2);
 		player.lust -= lusttransfered;
 		outputText("Your eyes glaze over and you feel your mind suddenly becoming more clear after you transfered some blurs of every sexual perversion you could possibly think of to your enemy");
 		if(!monster.plural) outputText(".");
