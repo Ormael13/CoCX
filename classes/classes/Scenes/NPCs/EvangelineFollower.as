@@ -1100,19 +1100,19 @@ private function InternalMutations():void {
 		addButton(3, "Yes", IMutationsYN);
 	}
 	else if (EvangelinePeepTalkOnInternalMutations == 2) {
-		if (player.blockingBodyTransformations()){
-			outputText("Evangeline examines you for a moment, before stating \"Uh, hey [name], your body is kind of tightly hard-wired up together, I don't think any Mutagens are going to be able to help you now. \"\n");
-			outputText("It seems, because you're now transformatively immune, she won't be able to help you with your mutations.");
-			doNext(meetEvangeline);
-		}
-		else{
-			outputText("\"<i>Did you bring gems or find a vial of the mutagen?</i>\" she asks.\n\n");
-			outputText("Her eyes briefly graze your form, \"<i>It looks like the only that way we can do anything about that 'unhealthy drive' of yours is with a little mutation.</i>\" She snickers softly as she waits for your response.");
-			menu();
-			addButton(1, "Gems", IMutationsGemsOrMutagen, 1).disableIf(player.gems < 500, "Gotta get that 500 gems first.");
-			addButton(3, "Mutagen", IMutationsGemsOrMutagen, 2).disableIf(!player.hasItem(useables.E_ICHOR, 1), "Gotta get that vial of mutagen first.");
-			addButton(14, "Back", meetEvangeline);
-		}
+		//if (player.blockingBodyTransformations()){
+		//	outputText("Evangeline examines you for a moment, before stating \"Uh, hey [name], your body is kind of tightly hard-wired up together, I don't think any Mutagens are going to be able to help you now. \"\n");
+		//	outputText("It seems, because you're now transformatively immune, she won't be able to help you with your mutations.");
+		//	doNext(meetEvangeline);
+		//}
+		//else{
+		outputText("\"<i>Did you bring gems or find a vial of the mutagen?</i>\" she asks.\n\n");
+		outputText("Her eyes briefly graze your form, \"<i>It looks like the only that way we can do anything about that 'unhealthy drive' of yours is with a little mutation.</i>\" She snickers softly as she waits for your response.");
+		menu();
+		addButton(1, "Gems", IMutationsGemsOrMutagen, 1).disableIf(player.gems < 500, "Gotta get that 500 gems first.");
+		addButton(3, "Mutagen", IMutationsGemsOrMutagen, 2).disableIf(!player.hasItem(useables.E_ICHOR, 1), "Gotta get that vial of mutagen first.");
+		addButton(14, "Back", meetEvangeline);
+		//}
 	}
 
 	function IMutationsYN(yn:Boolean = true):void {
