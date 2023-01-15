@@ -108,10 +108,24 @@ public class Changelog extends BaseContent
 			outputText("-Elemental conversion of shards/crystals/cores can now be done using 1 or 5 of them.\n");
 			outputText("-Mutations are now able to bypass Level requirements if given Mutagen instead of Gems for the tf cost. (Jtecx)\n");
 			outputText("-Added Francesca and elf wizard to viewer. Added fran and forest mage to the game sprite. (Liadri)\n");
+			outputText("-Survival Training super perk can be ranked up two more times (up to rank 6).\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
+			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
+			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
+			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
+			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");
 			outputText("-\n");// (Liadri)
 			outputText("-\n");// (aimozg)
@@ -120,20 +134,6 @@ public class Changelog extends BaseContent
 			outputText("-\n");// (Jtecx)
 			outputText("-\n");// (Furrin Gok)
 			outputText("-\n");// (khovel)
-			outputText("-\n");
-			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
-			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
-			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
-			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
-			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -477,7 +477,7 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Equilibrium. Gained by spending 1 super perk point and having Hidden Job: Grey Sage super perk. Effects: Allow to reach OverMax Mana equal to 120% of current max mana. You can cast now any spell you learned even if you missing additional materials or not meet requirements. Slight increase cap on stored bones for necromancers.\n");
 			outputText("-New event perk: Natural Spellcasting. Gained by using elf tf when PC have both elf eyes and ears. Effect: Reduce all spell cooldowns by 1 round (2 if wearing the leaf necklace). (+1 to elf score)\n");
 			outputText("-New event perk: Vegetal Affinity. Gained by been one of plant races or wood elf. Effects: Empower Green Magic by 50% weaken fire resistance by 50%.\n");
-			outputText("-New event perk(s): Survival Training (Rank: 1-4). Gained by spending 1 super perk point. Effects: You have trained to better survive this realm hostile environment. (+1% to MaxOver HP, MaxOver Lust and Diehard each 3 lvl's up to +(10 * rank)%)\n");
+			outputText("-New super perk(s): Survival Training (Rank: 1-4). Gained by spending 1 super perk point. Effects: You have trained to better survive this realm hostile environment. (+1% to MaxOver HP, MaxOver Lust and Diehard each 3 lvl's up to +(10 * rank)%)\n");
 			outputText("-New History Perk (History: Feral - adds extra feral/claw attack) (khovel)\n");
 			outputText("-New Special for Faerie Dragon or Fairy: Pixie Dust - can be used only when flying and it's similar to fae strom but it deal no damage and have higher chance to proc status effects. When used on groups have additionaly increased chance to proc effects.\n");
 			outputText("-New M. Special: Faerie Dragon Breath - only usable by faerie dragon. It would deal magic damage and have chance (~60%) to apply six times radomly choosen one of seven effects (ther same that fae strom can apply).\n");
