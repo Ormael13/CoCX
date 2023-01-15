@@ -581,7 +581,7 @@ public class HornsTransformations extends MutationsHelper {
 
 				if (player.horns.type != Horns.ARCH_IMP) {
 					desc += "You suddenly fall to the floor, clutching at your forehead as a spliting headache hits your with the force of a minotaur charge. Your small demon horns burst forth to form large thick demonic horns before becoming extreamely hot, small runes engraving them into your horns, almost too small to see. You can sense your magic will be more powerful now. <b>You have Arch-Imp horns!</b>";
-					player.horns.count = 4;
+					if (player.horns.count < 4) player.horns.count = 4;
 				}
 				else {
 					desc += "As a skull-splitting headache wracks through you, your horns extend another couple of inches.";

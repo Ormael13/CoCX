@@ -201,19 +201,19 @@ public class DynamicShield extends Shield implements IDynamicItem {
 	public static const Subtypes:Object = {
 		"shield": {
 			chance: 1,
-			name: "shield",
+			name: "Shield",
 			shortName: "Shield",
 			desc: "This is a basic light shield.",
-			defence: 4,
+			block: 4,
 			qattack: 0.25,
 			value: 120
 		},
 		"tome": {
 			chance: 1,
-			name: "tome",
+			name: "Tome",
 			shortName: "Tome",
 			desc: "This is a basic tome of knowledge.",
-			defence: 4,
+			block: 4,
 			qattack: 0.25,
 			value: 120
 		}

@@ -272,7 +272,7 @@ public class Ears extends BodyPart {
 	public static const BIG: int = 44;
 	EnumValue.add(Types, BIG, "BIG", {
 		name: "big",
-		appearanceDesc: "Your oversized ears almost look comical on your head. They are long and very mobile. They tend to move up and down flapping around when you have a burst of emotion or when you deliver a vengeful spell at the reaction of them being mocked."
+		appearanceDesc: "Your oversized ears almost look comical on your head. They are long and very mobile and tend to move up and down, flapping around when you have a burst of emotion or when you deliver a vengeful spell at the reaction of them being mocked."
 	});
 	
 	public static const HoleEars:/*String*/Array = [LIZARD, DRAGON, ORCA2, AVIAN, INSECT];

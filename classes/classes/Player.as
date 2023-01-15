@@ -4951,7 +4951,11 @@ use namespace CoC;
 			if (effectiveTallness>=80 && hasPerk(PerkLib.TitanicStrength)) statStore.replaceBuffObject({'str.mult':(0.01 * Math.round(effectiveTallness/2))}, 'Titanic Strength', { text: 'Titanic Strength' });
 			if (effectiveTallness<80 && statStore.hasBuff('Titanic Strength')) statStore.removeBuffs('Titanic Strength');
 			if (effectiveTallness<=60 && hasPerk(PerkLib.CondensedPower)) statStore.replaceBuffObject({'str.mult':(0.01 * ((120 - Math.round(effectiveTallness))*10))}, 'Condensed Power', { text: 'Condensed Power' });
+			if (effectiveTallness<=60 && hasPerk(PerkLib.SmallCaster)) statStore.replaceBuffObject({'spellpower':(0.01 * ((120 - Math.round(effectiveTallness))*10))}, 'Small Caster', { text: 'Small Caster' });
+			if (effectiveTallness<=60 && hasPerk(PerkLib.SmallFrame)) statStore.replaceBuffObject({'evasion':6}, 'Small frame', { text: 'Small frame' });
 			if (effectiveTallness>60 && statStore.hasBuff('Condensed Power')) statStore.removeBuffs('Condensed Power');
+			if (effectiveTallness>60 && statStore.hasBuff('Small Caster')) statStore.removeBuffs('Small Caster');
+			if (effectiveTallness>60 && statStore.hasBuff('Small frame')) statStore.removeBuffs('Small frame');
 			if (hasPerk(PerkLib.HarpyQueen) && (isRaceCached(Races.HARPY, 1) || isRaceCached(Races.PHOENIX, 1) || isRaceCached(Races.THUNDERBIRD, 1))) statStore.addBuffObject({"tou.mult":SophieFollowerScene.HarpyKids,"spe.mult":SophieFollowerScene.HarpyKids,"lib.mult":SophieFollowerScene.HarpyKids}, "Harpy Queen",{text:"Your motherly love for and from your many harpy childrens grants you incredible strength."});
 			if (!isRaceCached(Races.HARPY, 1) && !isRaceCached(Races.PHOENIX, 1) && !isRaceCached(Races.THUNDERBIRD, 1)) statStore.removeBuffs('Harpy Queen');
 			//if (hasPerk(PerkLib.TitanicStrength)) statStore.replaceBuffObject({'str.mult':(0.01 * Math.round(tallness/2))}, 'Titanic Strength', { text: 'Titanic Strength' });
@@ -6109,6 +6113,7 @@ use namespace CoC;
 			var finalType:String = orgasmFinalType(type);
 			dynStats("lus=", 0, "sca", false);
 			hoursSinceCum = 0;
+			if (hasPerk(PerkLib.DemonEnergyThirst)) addPerkValue(PerkLib.DemonEnergyThirst, 1, 1);
 			flags[kFLAGS.TIMES_ORGASMED]++;
 			if (finalType == "Dick") {
 				if (CoC.instance.inCombat) if (hasPerk(PerkLib.DominantAlpha)) createOrAddStatusEffect(StatusEffects.DominantAlpha, 1, 3)

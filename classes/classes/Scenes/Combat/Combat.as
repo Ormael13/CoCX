@@ -9,6 +9,8 @@ import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.*;
 import classes.ItemType;
+import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
+import classes.Items.EnchantmentLib;
 import classes.Items.ItemTags;
 import classes.Items.Weapon;
 import classes.Items.WeaponLib;
@@ -35,12 +37,7 @@ import classes.Scenes.Areas.VolcanicCrag.GolemsTrueFire;
 import classes.Scenes.Camp.TrainingDummy;
 import classes.Scenes.Dungeons.D3.*;
 import classes.Scenes.Dungeons.DeepCave.*;
-import classes.Scenes.Dungeons.DemonLab.DemonDragonGroup;
-import classes.Scenes.Dungeons.DemonLab.Incels;
-import classes.Scenes.Dungeons.DemonLab.IncubusScientist;
-import classes.Scenes.Dungeons.DemonLab.LabGuard;
-import classes.Scenes.Dungeons.DemonLab.ProjectNightwalker;
-import classes.Scenes.Dungeons.DemonLab.UltimisFlamespreader;
+import classes.Scenes.Dungeons.DemonLab.*;
 import classes.Scenes.Dungeons.EbonLabyrinth.*;
 import classes.Scenes.Dungeons.HelDungeon.*;
 import classes.Scenes.Monsters.Magnar;
@@ -12320,6 +12317,9 @@ public function calculateBasicTeaseDamage(BaseTeaseDamage:Number = 18):Number {
         outputText("\nYou use your own lust against the enemy, cooling off a bit in the process.");
         player.takeLustDamage(Math.round(-damage)/40, true);
         damage *= 1.2;
+    }
+    for each (var f:SimpleRaceEnchantment in player.allEnchantments(EnchantmentLib.RaceSpellPowerDoubled)) {
+        damage *= f.power * (player.isRaceCached(f.race)? 3:2);
     }
     damage = (damage * monster.lustVuln);
     if (SceneLib.urtaQuest.isUrta()) damage *= 2;

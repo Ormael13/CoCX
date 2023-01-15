@@ -3628,6 +3628,17 @@ public class Camp extends NPCAwareContent{
 						}
 					}
 				}
+				else if (player.isRaceCached(Races.IMP, 3)) {
+					outputText("Done with your day you open the tome and dive into the security of your personal sanctuary. ");
+					if (player.perkv1(PerkLib.ImpNobility) < 5) outputText("Nalcanthet quarters include a luxurious bed for your convenience and you are keen on using it.");
+					else outputText("You order your subjects to prepare a throne for you by stacking their tiny bodies on top of one another for you to rest on. They are quick to comply and soon the imp throne is readied. Satisfied with the result you sit down on the impromptu throne.[pg]");
+					if (player.perkv1(PerkLib.ImpNobility) >= 5) {
+						if (player.hasVagina()) outputText(" You tap the imp in charge of the back area then whisper to his ears to harden up and fuck your pussy gently. If for any reason including him thrusting too fast or roughly you have to wake up early, he will suffer punishment. Without need to be told twice the lesser imp's cock hardens on the spot and slides seamlessly into your royal snatch, his corrupt pre tingling your passage most comfortably.[pg]");
+						outputText((player.hasCock()? (player.hasVagina()?"With your wet passage taken good care of you":"You"):""));
+						if (player.hasCock()) outputText(" then call out to the imp underneath you ordering him to offer his ass to sleeve your hardening cock and move on his own so that you can relax. Soon his cheeks wraps around your [cock], massaging you at a slow and steady rhythm.[pg]");
+					}
+					outputText("Satisfied with the current arrangements you head to sleep.");
+				}
 				else{
 					outputText("You curl up, planning to sleep for " + num2Text(timeQ) + " ");
 					if (timeQ == 1) outputText("hour.\n");

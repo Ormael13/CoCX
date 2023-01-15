@@ -74,7 +74,6 @@ public class ImpRace extends Race {
 		addScores()
 				.faceType(ANY(Face.HUMAN, Face.ANIMAL_TOOTHS), +1)
 				.hornTypeAndCount(Horns.DEMON, AT_MOST(2), +1)
-				.hornType(Horns.ARCH_IMP, +2)
 				.hornType(NOT(Horns.GOAT), 0, -10)
 				.wingType(Wings.BAT_LIKE_TINY, +4)
 				.tailType(Tail.DEMONIC, +1)
@@ -89,7 +88,6 @@ public class ImpRace extends Race {
 							return (body.hasCock && body.hasVagina ? Utils.InCollection(body.skinColor1, ImpSkinColors) :
 									body.hasVagina ? body.skinColor1 == "purple" : body.skinColor1 == "red")
 						}, +1, -1000)
-				.skinCoatPattern(Skin.PATTERN_ARCH_IMP_RUNIC_TATTOO, +1)
 				.plainSkinOfAdj(NOT("slippery"), +1)
 				.eyeTypeAndColor(Eyes.HUMAN, ANY(ImpEyeColors), +1)
 				.hairColor1(ANY(ImpHairColors), +1)
@@ -98,44 +96,49 @@ public class ImpRace extends Race {
 				.noRearBody(+1);
 		addConditionedScores(function (body:BodyData):Boolean {
 					return body.player.cor >= 50;
-				}, "cor 50+;", 5)
+				}, "cor 50+;", 5);
+		addScoresAfter(18)
+				.hornType(Horns.ARCH_IMP, +2)
+				.skinBasePattern(Skin.PATTERN_ARCH_IMP_RUNIC_TATTOO, +1)
 				.hasPerk(PerkLib.Soulless, +4);
 
 		addMutation(IMutationsLib.BlackHeartIM);
 
 		buildTier(9, "imp")
 				.buffs({
-					"str.mult": -0.50,
-					"spe.mult": +0.75,
-					"int.mult": +1.00,
-					"lib.mult": +0.25
+					"str.mult": -0.30,
+					"spe.mult": +0.25,
+					"int.mult": +0.60,
+					"lib.mult": +0.55
 				})
 				.end();
 
-		buildTier(9, "imp lord")
+		buildTier(18, "imp lord")
 				.buffs({
 					"str.mult": -0.50,
-					"spe.mult": +0.75,
-					"int.mult": +1.00,
-					"lib.mult": +0.25
+					"spe.mult": +0.45,
+					"int.mult": +1.15,
+					"lib.mult": +1.10
 				})
 				.end();
 
-		buildTier(9, "lesser arch imp")
+		buildTier(25, "lesser arch imp")
+				.requirePerk(PerkLib.ImpNobility)
 				.buffs({
-					"str.mult": -0.50,
-					"spe.mult": +0.75,
-					"int.mult": +1.00,
-					"lib.mult": +0.25
+					"str.mult": -0.80,
+					"spe.mult": +2.00,
+					"int.mult": +5.00,
+					"lib.mult": +4.80
 				})
 				.end();
 
-		buildTier(9, "arch imp")
+		buildTier(28, "arch imp")
+				.requirePerk(PerkLib.ImpNobility)
 				.buffs({
-					"str.mult": -0.50,
-					"spe.mult": +0.75,
-					"int.mult": +1.00,
-					"lib.mult": +0.25
+					"str.mult": -0.80,
+					"spe.mult": +2.25,
+					"int.mult": +5.50,
+					"lib.mult": +5.40
 				})
 				.end();
 	}
