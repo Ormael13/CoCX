@@ -1346,7 +1346,11 @@ public class CampMakeWinions extends BaseContent
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) == 7) outputText(" (Baron Rank)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) == 8) outputText(" (Viscount Rank)");
 			}
-			outputText("</i>");
+			outputText("</i>");/*	usunąć za jakiś czas wykorektorowaną cześć
+			outputText("\n"+player.statusEffectv1(StatusEffects.ElementalPearlGolems)+"");
+			outputText("\n"+player.perkv1(PerkLib.ElementalConjurerResolve)+"");
+			outputText("\n"+player.perkv1(PerkLib.ElementalConjurerDedication)+"");
+			outputText("\n"+player.perkv1(PerkLib.ElementalConjurerSacrifice)+"");*/
 			menu();
 			if (player.hasPerk(PerkLib.JobElementalConjurer) && (currentSizeOfElementalsArmy() < maxSizeOfElementalsArmy())) addButton(0, "Summon(N)", summoningElementalsSubmenu).hint("Summon a Normal-tier Elementals");
 			else addButtonDisabled(0, "Summon(N)", "You either summoned all possible Normal-tier elementals or reached limit of how many elementals you can command at once.");
@@ -1363,9 +1367,9 @@ public class CampMakeWinions extends BaseContent
 			addButton(14, "Back", camp.campWinionsArmySim);
 		}
 		private function canSearchForParls():Boolean {
-			return (player.hasPerk(PerkLib.ElementalConjurerResolve) && player.perkv1(PerkLib.ElementalConjurerResolve) < 2)/* ||
+			return (player.hasPerk(PerkLib.ElementalConjurerResolve) && player.perkv1(PerkLib.ElementalConjurerResolve) < 2) ||
 				(player.hasPerk(PerkLib.ElementalConjurerDedication) && player.perkv1(PerkLib.ElementalConjurerDedication) < 2) ||
-				(player.hasPerk(PerkLib.ElementalConjurerSacrifice) && player.perkv1(PerkLib.ElementalConjurerSacrifice) < 2)*/;
+				(player.hasPerk(PerkLib.ElementalConjurerSacrifice) && player.perkv1(PerkLib.ElementalConjurerSacrifice) < 2);
 		}
 		
 		private function elementaLvlUp():void {
