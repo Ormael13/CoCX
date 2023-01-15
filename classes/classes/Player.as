@@ -2747,7 +2747,7 @@ use namespace CoC;
 			}
 			if (perkv1(IMutationsLib.AlphaHowlIM) >= 2) {
 				var packMembers:Number = LunaFollower.WerewolfPackMember;
-				if (hasMutation(IMutationsLib.HellhoundFireBallsIM)) packMembers += perkv3(IMutationsLib.HellhoundFireBallsIM);
+				if (hasMutation(IMutationsLib.HellhoundFireBallsIM)) packMembers += LunaFollower.HellhoundPackMember;
 				mult -= (2*packMembers);
 			}
 			if (hasPerk(PerkLib.FenrirSpikedCollar)) {
