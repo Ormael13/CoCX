@@ -31,6 +31,9 @@ public class ArouseSpell extends AbstractBlackSpell {
 	override protected function doSpellEffect(display:Boolean = true):void {
 		if (display) {
 			outputText("You make a series of arcane gestures, drawing on your own lust to inflict it upon your foe!\n");
+			if (player.perkv1(PerkLib.ImpNobility) > 0) {
+				outputText("  Your imp cohorts assist you spellcasting adding their diagrams to your own.\n");
+			}
 		}
 		if (monster is WormMass) {
 			if (display) {

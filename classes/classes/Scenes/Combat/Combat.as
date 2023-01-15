@@ -12318,6 +12318,9 @@ public function calculateBasicTeaseDamage(BaseTeaseDamage:Number = 18):Number {
         player.takeLustDamage(Math.round(-damage)/40, true);
         damage *= 1.2;
     }
+    if (player.perkv1(PerkLib.ImpNobility) > 0) {
+        damage *= (100+player.perkv1(PerkLib.ImpNobility))/100;
+    }
     for each (var f:SimpleRaceEnchantment in player.allEnchantments(EnchantmentLib.RaceSpellPowerDoubled)) {
         damage *= f.power * (player.isRaceCached(f.race)? 3:2);
     }

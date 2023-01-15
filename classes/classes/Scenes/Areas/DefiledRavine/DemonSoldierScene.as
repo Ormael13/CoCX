@@ -195,7 +195,7 @@ public class DemonSoldierScene extends BaseContent {
         //Additional loot!
         if (rand(8) == 0) {
             outputText("\n\nAs you're about to " + (player.isNaga() ? "slither" : "walk") + " away in satisfaction, you spot a glowing, pink crystal and a closer examination reveals it to be a lethicite. Why the demon hasn't even eaten it remains a mystery but either way, you're in luck to have recovered it before it gets eaten (and irreversibly absorbed) and you pocket it. ");
-            inventory.takeItem(useables.LETHITE, cleanupAfterCombat);
+            inventory.takeItem(consumables.LETHITE, cleanupAfterCombat);
         }
         cleanupAfterCombat();
     }

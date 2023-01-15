@@ -44,7 +44,7 @@ public class Incels extends Monster {
         this.level = 52;
         this.gems = rand(50) + 75;
         //I don't know how to add regeneration, physical resistance, or the lust to damage special ability I want them to have.
-        this.drop = new WeightedDrop().add(useables.D_SCALE, 5).add(useables.LETHITE, 2).add(jewelries.POWRRNG, 1);
+        this.drop = new WeightedDrop().add(useables.D_SCALE, 5).add(consumables.LETHITE, 2).add(jewelries.POWRRNG, 1);
         this.createPerk(PerkLib.EnemyLargeGroupType, 0, 0, 0, 0);
         this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
         this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);

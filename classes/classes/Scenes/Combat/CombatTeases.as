@@ -1229,6 +1229,9 @@ public class CombatTeases extends BaseCombatContent {
 		//===========================
 		//BUILD BONUSES IF APPLICABLE
 		//===========================
+		if (player.perkv1(PerkLib.ImpNobility) > 0) {
+			outputText("  Your imp cohorts assist in your assault, jerking their dicks off to spray your opponent with their corrupt cum.");
+		}
 		var bonusChance:Number = 0;
 		var bonusDamage:Number = 0;
 		if (auto) {
