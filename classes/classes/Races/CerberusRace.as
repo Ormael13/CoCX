@@ -42,7 +42,7 @@ public class CerberusRace extends Race {
 	public override function setup():void {
 		addScores()
 				//.hairType(Hair.WILD, +1)
-				.faceType(Face.CERBERUS, +1)
+				.faceType(Face.CERBERUS, +1, -1000)
 				.tongueType(Tongue.DOG, +1)
 				.eyeType(Eyes.INFERNAL, +1)
 				.eyeColor(ANY(CerberusEyeColors), +1)

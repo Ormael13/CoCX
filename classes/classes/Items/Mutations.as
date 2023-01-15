@@ -2166,8 +2166,7 @@ public final class Mutations extends MutationsHelper {
         transformations.FaceCerberus.applyEffect(doOutput);
         if (player.tongue.type != Tongue.DOG) transformations.TongueDog.applyEffect(doOutput);
         if (player.eyes.type != Eyes.INFERNAL) transformations.EyesInfernal.applyEffect(doOutput);
-        if (player.hasPerk(PerkLib.FireLord))
-            transformations.EyesChangeColor(["green"]).applyEffect(doOutput);
+        if (player.hasPerk(PerkLib.FireLord)) transformations.EyesChangeColor(["green"]).applyEffect(doOutput);
         else transformations.EyesChangeColor(["red"]).applyEffect(doOutput);
         if (player.ears.type != Ears.DOG) transformations.EarsDog.applyEffect(doOutput);
         if (player.arms.type != Arms.HOUND) transformations.ArmsHound.applyEffect(doOutput);
@@ -2190,11 +2189,9 @@ public final class Mutations extends MutationsHelper {
         player.growCock(0, cockBonus/2);
         player.growCock(1, cockBonus/2);
         if (doOutput) outputText("\n");
-        if (player.hasVagina() && player.vaginas.length < 2)
-            transformations.SecondVagina().applyEffect(doOutput);
+        if (player.hasVagina() && player.vaginas.length < 2) transformations.SecondVagina().applyEffect(doOutput);
         if (doOutput) outputText("\n");
-        if (player.hasVagina() && player.bRows() < 3)
-            transformations.BreastRowsThree.applyEffect(doOutput);
+        if (player.hasVagina() && player.bRows() < 3) transformations.BreastRowsThree.applyEffect(doOutput);
         if (doOutput) outputText("\n");
         transformations.BallsQuad(3, true).applyEffect(doOutput);
         if (player.tone < 80) player.tone = 90;
@@ -16757,4 +16754,4 @@ public final class Mutations extends MutationsHelper {
 		player.herbXP(HE);
     }
 }
-}
+}
