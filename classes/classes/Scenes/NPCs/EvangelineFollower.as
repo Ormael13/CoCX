@@ -1167,9 +1167,11 @@ private function IMutationsSelector(page:int = 0):void {
 			bdFunc = null;
 			mutations.pReqs();
 			//trace("" + mutations.name() + ": Checking requirements. v");
-			if (flags[kFLAGS.EVA_MUTATIONS_BYPASS] || ((mutations.available(target) || GoM == 2 && target.hasMutation(mutations)) && mutations.maxLvl > target.perkv1(mutations))) {
+			//If using Mutagen, and mutation is not available due to race requirements, costs 2 mutagen. otherwise, costs 1.
+			var mutagenBypass:Boolean = (GoM == 2 && (!mutations.available(target))? player.hasItem(useables.E_ICHOR, 2) : true);
+			if ((flags[kFLAGS.EVA_MUTATIONS_BYPASS] || mutations.available(target) || mutagenBypass) && mutations.maxLvl > target.perkv1(mutations)) {	//last bit retains the blocking max mutation level.
 				//trace("Requirements met, adding in.");
-				bdFunc = curry(mutations.acquireMutation, player, costTaker)
+				bdFunc = curry(mutations.acquireMutation, player, curry(costTaker, mutagenBypass))
 				bdDesc = mutations.desc();
 			} else if(mutations.maxLvl == target.perkv1(mutations)) {
 				//trace("MaxTier acquired");
@@ -1195,9 +1197,9 @@ private function IMutationsSelector(page:int = 0):void {
 		submenu(bd,curry(IMutationsSelector, menuButton), 0, false)
 	}
 
-	function costTaker():void{
+	function costTaker(mutagenBypassDoubledCost:Boolean):void{
 		if (GoM == 1) player.gems -= 500
-		else player.destroyItems(useables.E_ICHOR, 1)
+		else player.destroyItems(useables.E_ICHOR, (mutagenBypassDoubledCost)? 2 : 1);
 		menu();
 		clearOutput();
 		outputText("Evangeline gets to brewing the mutagen. An half hour later, the injection is ready. She has you laid down into a makeshift seat.\n\n");
