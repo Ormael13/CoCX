@@ -223,6 +223,7 @@ public final class ConsumableLib extends Utils
 		public const INCOINS:SimpleConsumable = mk("IncOIns", "IncenOfIns", "an incense of Insight", 15, "These sticks, when burned, are rumored to fill an area with an incense that allows for deep meditation and granting greater insight.", m.incenseOfInsight);
 		public const ICICLE_:Consumable       = new IceShard();
 		public const KITGIFT:KitsuneGift	  = new KitsuneGift();
+		public const LETHITE:Lethite	      = new Lethite();
 		public const L_DRAFT:SimpleConsumable = mk("L.Draft", "LustDraft", "a vial of roiling bubble-gum pink fluid", 20, "This vial of bright pink fluid bubbles constantly inside the glass, as if eager to escape.  It smells very sweet, and has \"Lust\" inscribed on the side of the vial.", curry(m.lustDraft, false));
 		public const LACTAID:Consumable       = new Lactaid();
 		public const LUSTSTK:LustStick        = new LustStick();

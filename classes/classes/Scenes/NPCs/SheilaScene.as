@@ -289,7 +289,7 @@ private function sheila1ndEncLookCloserPtII():void {
 	
 	outputText("\n\nCurious and eager to change the subject, you ask her where exactly her aforementioned 'mates' are.  She narrows her eyes at the question.  \"<i>Don't expect that's any of your bizzo, eh stickybeak?  No offense, but I don't know you from Marae an' I'm not about to give info to some dipstick demon dag in disguise.");
 	//[(high demon score)
-	if(player.isRace(Races.DEMON, 1, false)) outputText("  I mean, take a squizz at yourself.  It's like you're not even trying to hide it; I've seen imps that look more like normal people.");
+	if(player.isRace(Races.DEMON, 1, false)||player.isRace(Races.IMP, 1, false)) outputText("  I mean, take a squizz at yourself.  It's like you're not even trying to hide it; I've seen imps that look more like normal people.");
 	outputText("  Forget it.</i>\"  You deny the accusation, but she continues to glare at you.");
 	
 	outputText("\n\n\"<i>No worries,</i>\" she says, her words at odds with her chilly expression.  \"<i>Just be on your way and we'll forget it happened.</i>\"");

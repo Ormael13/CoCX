@@ -481,8 +481,8 @@ public class EarsTransformations extends MutationsHelper {
 
 				desc += "Whoa, something messed up is going about with your ears. They migrate slowly up your head, elongating and distorting as they get covered in [haircolor] fur. When you go check what the hell happened to them you discover instead of human ears you now have a pair of cute animal ears up on your head. Well these sure will give you a cute look. <b>You now have gremlin ears!</b>";
 				player.ears.type = Ears.GREMLIN;
-				Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.GREMLIN));
 				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.GREMLIN));
 			},
 			// is present
 			function (): Boolean {
@@ -563,8 +563,8 @@ public class EarsTransformations extends MutationsHelper {
 
 				desc += "After another session under the statue magic, the lingering effects seem to having taken a toll on you, as your ears buzz. The sound turns worse for a second, and then vanish. You hear for a second a light flapping sound, and then, nothing.\n\nWhen everything seems to have finished, you realize that your hearing range has changed, and while your overall sense of hearing remains the same, pinpointing the source of a sounds is much easier. On a nearby reflection you discover the reason: two triangular ears have sprouted at your head, streamlined to flight and with a gryphon like appearance. A short layer of downy feathers covers them, the tip having a distinctive tuft. Checking that your ears are rightly placed on the new auricles, <b>you smile happily at the sight of your gryphon ears,</b> noting how well they compliment your looks.";
 				player.ears.type = Ears.GRYPHON;
-				Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.GRYPHON));
 				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.GRYPHON));
 			},
 			// is present
 			function (): Boolean {
@@ -581,8 +581,8 @@ public class EarsTransformations extends MutationsHelper {
 				else desc += "Your ears twist painfully as though being yanked upwards and you clap your hands to your head. Feeling them out, you discover them growing!	They stretch upwards, reaching past your fingertips, and then the tugging stops. You cautiously feel along their lengths; they're long and stiff, but pointed outwards now, and they swivel around as you listen. <b>You now have a pair of kangaroo ears!</b>";
 
 				player.ears.type = Ears.KANGAROO;
-				Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.KANGAROO));
 				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.KANGAROO));
 			},
 			// is present
 			function (): Boolean {
@@ -615,8 +615,8 @@ public class EarsTransformations extends MutationsHelper {
 				desc += "Your ears suddenly stretch painfully, making you scream in pain as they move towards the top of your head, growing bigger. Putting your hands to your ears you discover they are now covered with a fair amount of fur. <b>You now have squirrel ears.</b>";
 
 				player.ears.type = Ears.SQUIRREL;
-				Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.SQUIRREL));
 				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.SQUIRREL));
 			},
 			// is present
 			function (): Boolean {
@@ -669,8 +669,8 @@ public class EarsTransformations extends MutationsHelper {
 
 				desc += "You squint as you feel a change in your ears. Inspecting your reflection in a nearby puddle you find that <b>your ears have become small, fuzzy, and rounded, just like a ferret’s!</b>";
 				player.ears.type = Ears.FERRET;
-				Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.FERRET));
 				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.FERRET));
 			},
 			// is present
 			function (): Boolean {
@@ -733,8 +733,8 @@ public class EarsTransformations extends MutationsHelper {
 
 				desc += "Your ears start feeling weird as they get longer and longer, eventually reaching your knees and covering with fur. These look like the ears of some sea rabbit or mammal, namely a Melkie. <b>You now have Melkie ears safeguarding your audition from the cold.</b>";
 				player.ears.type = Ears.MELKIE;
-				Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.MELKIE));
 				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.MELKIE));
 			},
 			// is present
 			function (): Boolean {
@@ -750,12 +750,28 @@ public class EarsTransformations extends MutationsHelper {
 				desc += "";
 
 				player.ears.type = Ears.DEER;
-				Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.DEER));
 				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.DEER));
 			},
 			// is present
 			function (): Boolean {
 				return player.ears.type === Ears.DEER;
+			}
+	);
+
+	public const EarsBig: Transformation = new SimpleTransformation("Big Ears",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				desc += "Whoa, something messed up is going about with your ears. They are elongating and distorting as they grow comically large. When you check on them you discover you now have a pair of oversized pointed ears that tend to move up and down, flapping around when you have a burst of emotion or when you deliver a vengeful spell at the reaction of them being mocked. <b>You now have big ears!</b>";
+				player.ears.type = Ears.BIG;
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.BIG));
+			},
+			// is present
+			function (): Boolean {
+				return player.ears.type === Ears.BIG;
 			}
 	);
 	/*

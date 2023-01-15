@@ -109,9 +109,9 @@ public class Changelog extends BaseContent
 			outputText("-Mutations are now able to bypass Level requirements if given Mutagen instead of Gems for the tf cost. (Jtecx)\n");
 			outputText("-Added Francesca and elf wizard to viewer. Added fran and forest mage to the game sprite. (Liadri)\n");
 			outputText("-Survival Training super perk can be ranked up two more times (up to rank 6).\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Elemental Pearls can be now found fighting enemeis that are encoutered by going to summoning elementals menu and picking option to go on journey there (would only be possible if PC need to find one of three pearls).\n");
+			outputText("-Add the Imp Race. Arch imp is a new PermTF once you progress far enough along the Imp race, and allows you to recruit imps to assist you in combat with their lewdness. (EragonX)\n");
+			outputText("-Add the Tome of Imps - a unique drop from imps (shield slot) (EragonX)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

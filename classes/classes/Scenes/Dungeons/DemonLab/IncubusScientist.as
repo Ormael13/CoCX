@@ -38,7 +38,7 @@ public class IncubusScientist extends Monster {
         this.level = 50;
         this.additionalXP = 250;
         this.gems = rand(30) + 150;
-		this.drop = new WeightedDrop().add(useables.LETHITE, 2).add(jewelries.RPOWRNG, 1);
+		this.drop = new WeightedDrop().add(consumables.LETHITE, 2).add(jewelries.RPOWRNG, 1);
         this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
         this.createPerk(PerkLib.OverMaxHP, 50, 0, 0, 0);
         checkMonster();
