@@ -13,7 +13,8 @@ import classes.IMutationPerkType;
  * The goal of Mutations 3.0 is to allow for everything related to the mutation itself to be hosted within its own file, and to reduce the number of perks being created for the player.
  *
  * Addendum: The fundamental reason for Mutations3.0 is to clearly define the "perks" that are limited by the organ slots, as well as being obtained by Evangeline only.
- * This is why Mindbreaker, as well as HellhoundFireBalls, despite acting in a similar fashion, do not qualify for this list.
+ * PermTF, or PermTF Adjacent races, with mutations such as Mindbreaker/HellhoundFireBalls/FeyArcaneBloodstream, have a "True" Variant, in which their buffs are significantly stronger,
+ * to offset the penalty of not being able to obtain other mutations form other races.
  *
  * Mutations 3.0 Handles perk creation slightly differently in a few ways.
  *
@@ -23,6 +24,8 @@ import classes.IMutationPerkType;
  * These can be checked seperately, or when sent to createDynamicPerks, will handle it as well.
  *
  * Mutations are themselves handling their iterations via v1 checks.
+ * V2 is used for the Mutations to track any special conditions for upgrading, as in cases such as HellHoundFireBalls.
+ * V3 is used to track if the user has the regular (0) or the True (1) variant of the Mutation.
  *
  * Refer to Basecontent's createDynamicPerk function to see how they are used.
  *

@@ -173,23 +173,22 @@ public class ProjectNightwalker extends Monster {
     override public function defeated(hpVictory:Boolean):void {
         if (inDungeon) SceneLib.dungeons.demonLab.afterNightwalkerFight();
 		else {
-            outputText("The Vampire falls, blood spilling from her fatal wounds. Seemingly entranced by the flowing crimson, the creature licks it, then sinks its fangs deep into its own flesh. You watch, horrified, as it looks at you and laughs, crimson tears dripping from her fangs…and pooling in the injury, pouring out onto the ground. [pg]");
+            outputText("The Vampire falls, blood spilling from her fatal wounds. Seemingly entranced by the flowing crimson, the creature licks it, then sinks its fangs deep into its own flesh. You watch, horrified, as it looks at you and laughs, crimson tears dripping from her fangs…and pooling in the injury, pouring out onto the ground.[pg]");
             outputText("“<i>Blood for me...Blood for me!</i>” It looks at you, as if amused greatly, before biting itself again and again, pulling the fangs out each time. Sickened by the foul creature’s behavior, you walk up to it, taking its head and feeling the sickening pop as you snap its neck. You head back towards your camp, the sickening laughter of the deranged creature still ringing in your ears.");
             cleanupAfterCombat();
         }
     }
 
     override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void {
-        if (inDungeon)SceneLib.dungeons.demonLab.BadEndExperiment();
+        if (inDungeon) SceneLib.dungeons.demonLab.BadEndExperiment();
         else {
-            if (plantBite || stoneBite || slimeBite) outputText("The vampire strolls up to you, giving you one last harsh kick in the face as you black out. \n");
+            if (plantBite || stoneBite || slimeBite) outputText("The vampire strolls up to you, giving you one last harsh kick in the face as you black out.\n");
             else outputText("The Vampire strolls up to you, grabbing you by your shoulders and sinking her fangs into you, draining you until you pass out.\n");
             cleanupAfterCombat();
         }
     }
 
     public function ProjectNightwalker() {
-        //_inDungeon = inDungeon;
         this.a = "the ";
         this.short = "Nightwalker";
         this.long = "This pale temptress floats above the ground, black batlike wings silently flapping to keep her aloft. As you get closer, she rises, just out of melee range. You’ll have to find some other way to deal with her, unless you can fly.";
@@ -222,7 +221,7 @@ public class ProjectNightwalker extends Monster {
         this.createStatusEffect(StatusEffects.Flying, 50, 0, 0, 0);
         this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
         this.createPerk(PerkLib.LegendarySpeed, 0, 0, 0, 0);
-        this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
+        if (inDungeon) this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
         checkMonster();
     }
 }

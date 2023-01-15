@@ -102,7 +102,6 @@ public class IncubusScientist extends Monster {
     }
 
     private function serum():void {
-        clearOutput();
         outputText("The demon scientist reaches into his lab coat, pulling out a hypodermic needle.\n"
             + "“<i>The side effects are nasty...but I need the power now.</i>” He sticks himself, and he inhales sharply. He doesn’t look any different, but as he cocks his weapon, you notice the vein pulsing on his forehead. He’s way faster now!");
         buff("Serum").addStats({"spe": 200, "str": -100, "int": -100});
@@ -121,7 +120,6 @@ public class IncubusScientist extends Monster {
     }
 
     override protected function performCombatAction():void {
-        clearOutput();
         if (ShieldCooldown > 0) --ShieldCooldown;
 		if (ShieldCooldown == 0 && ShieldHits == 0) ShieldsUp();
         if (HP < maxHP() * 0.6) {

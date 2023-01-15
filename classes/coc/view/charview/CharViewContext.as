@@ -223,6 +223,8 @@ public class CharViewContext extends ExecContext {
 					elfClothing: player.armor == game.armors.ERA,
 					iceQueenGown: player.armor == game.armors.IQG,
 					gooArmor: player.armor == game.armors.GOOARMR,
+					franRegalia: player.armor == game.armors.FCLOAK,
+					elfWizardDress: player.armor == game.armors.FMDRESS,
 
 					//viewable bra list
 					goblinTechnomancerBra: player.upperGarment == game.undergarments.TECHBRA,

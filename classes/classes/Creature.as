@@ -1839,7 +1839,6 @@ public class Creature extends Utils
 					if (hasMutation(iMutate)) total++;
 				}
 			if (invert) total = IMutationsLib.mutationsArray("").length - total;
-
 			return total;
 		}
 

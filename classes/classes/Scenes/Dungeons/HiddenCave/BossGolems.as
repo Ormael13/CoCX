@@ -76,7 +76,7 @@ public class BossGolems extends AbstractGargoyle
 		public function BossGolems() 
 		{
 			if (player.hasStatusEffect(StatusEffects.SoulArenaGaunlet)) {
-				this.long = "You're currently fighting guardian quasi-gargoyles. They're all around six feet tall without any sexual characteristics, their stone body covered in cracks, with rudimental wins and fully formed mace or axe tails, using bare stone fists to smash you.";
+				this.long = "You're currently fighting guardian quasi-gargoyles. They're all around six feet tall without any sexual characteristics, their stone body covered in cracks, with rudimental wings and fully formed mace or axe tails, using bare stone fists to smash you.";
 				initStrTouSpeInte(70, 90, 70, 30);
 				initWisLibSensCor(30, 10, 10, 50);
 				this.level = 17;
@@ -86,7 +86,7 @@ public class BossGolems extends AbstractGargoyle
 				this.armorMDef = 27;
 			}
 			else {
-				this.long = "You're currently fighting guardian quasi-gargoyles. They're all around six feet tall without any sexual characteristics, their stone body covered in cracks, with rudimental wins and fully formed mace or axe tails, using bare stone fists to smash intruders.";
+				this.long = "You're currently fighting guardian quasi-gargoyles. They're all around six feet tall without any sexual characteristics, their stone body covered in cracks, with rudimental wings and fully formed mace or axe tails, using bare stone fists to smash intruders.";
 				initStrTouSpeInte(30, 40, 30, 20);
 				initWisLibSensCor(20, 10, 10, 50);
 				this.level = 9;
@@ -105,7 +105,7 @@ public class BossGolems extends AbstractGargoyle
 			initGenderless();
 			this.tallness = 72;
 			this.drop = new ChainedDrop()
-					.add(consumables.E3PEARL, 1);
+					.add(useables.ELCRYST, 1);
 			this.weaponName = "stone fists";
 			this.weaponVerb = "smash";
 			this.armorName = "slight cracked stone";
@@ -114,7 +114,5 @@ public class BossGolems extends AbstractGargoyle
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
 			checkMonster();
 		}
-		
 	}
-
 }
