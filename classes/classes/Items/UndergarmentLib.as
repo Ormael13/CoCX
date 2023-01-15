@@ -34,7 +34,7 @@ public final class UndergarmentLib extends ItemConstants
 		public const STSHIRT:Undergarment = new Undergarment("STShirt", "S.T.Shirt", "soul training shirt", "a soul training shirt", UT_TOP, 200, 0, 0, 0, "A shirt made from fabric capable to help train soulforce. \n\nType: Undergarment (Upper)");
 		public const TECHBRA:TechnomancerBra = new TechnomancerBra();
 		//Lower
-		public const BN_SKIRT:Undergarment = new Undergarment("BN. SKIRT", "Neko Bottom", "black Neko bottom", "a black Neko leather skirt", UT_BOTTOM, 500, 0, 0, 2, "A skirt made of leather black as night. Makes one slimmer than it appears, increasing evasion. Stronger at night. \n\nType: Undergarment (Lower)")
+		public const BN_SKIRT:Undergarment = new Undergarment("BN. SKIRT", "Neko Bottom", "black Neko bottom", "a black Neko leather panty", UT_BOTTOM, 500, 0, 0, 2, "A panty made of leather black as night. Makes one slimmer than it appears, increasing evasion. Stronger at night. \n\nType: Undergarment (Lower)")
 				.withBuffs({'evade': +2}) as Undergarment;
 		public const C_LOIN :Undergarment = new Undergarment("C. Loin", "C. Loin", "comfortable loincloth", "a pair of comfortable loincloth", UT_BOTTOM, DEFAULT_VALUE, 0, 0, 0, "A generic pair of loincloth. \n\nType: Undergarment (Lower)", "NagaWearable");
 		public const C_PANTY:Undergarment = new Undergarment("C.Panty", "C. Panties", "comfortable panties", "a pair of comfortable panties", UT_BOTTOM, DEFAULT_VALUE, 0, 0, 0, "A generic pair of panties. \n\nType: Undergarment (Lower)");
