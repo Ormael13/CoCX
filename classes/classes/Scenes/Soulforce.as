@@ -498,7 +498,7 @@ public class Soulforce extends BaseContent
 	}
 
 	//Max possible with ALL items
-	public static var cultivationBonusMaxSF_maxPossible:int = 2330;
+	public static var cultivationBonusMaxSF_maxPossible:int = 2230;
 
 	//Calculates the limit from your items
 	public function cultivationBonusMaxSF_limit():int {

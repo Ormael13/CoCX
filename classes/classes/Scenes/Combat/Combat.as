@@ -2975,7 +2975,10 @@ public class Combat extends BaseContent {
 					}
 					if (damage < 20) damage = 20;
 				}
-				if (weaponRangePerk == "Crossbow") damage += player.weaponRangeAttack * 20;
+				if (weaponRangePerk == "Crossbow") {
+					damage += player.weaponRangeAttack * 20;
+					damage += (player.speStat.core.value + player.speStat.train.value) * 2;
+				}
 			}
             if (damage == 0) {
                 if (monster.inte > 0) {
@@ -3917,9 +3920,15 @@ public class Combat extends BaseContent {
         if (rand(100) < accRange) {
             var damage:Number = 0;
             damage += player.weaponRangeAttack * 2;
-            if (player.hasPerk(PerkLib.JobGunslinger)) damage += player.weaponRangeAttack * 2;
+			damage += player.speStat.core.value + player.intStat.core.value + player.wisStat.core.value;
+            if (player.hasPerk(PerkLib.JobGunslinger)) damage *= 2;
             if (player.hasPerk(PerkLib.ChurchOfTheGun)) damage += scalingBonusWisdom() * 0.5;
             if (player.hasPerk(PerkLib.AlchemicalCartridge)) damage += scalingBonusIntelligence() * 0.25;
+			if (player.hasPerk(PerkLib.SaintOfZariman)) {
+				damage += scalingBonusSpeed() * 0.25;
+				damage += scalingBonusIntelligence() * 0.25;
+				damage += scalingBonusWisdom() * 0.5;
+			}
             //[Describe shot]
             if ((MDOCount == maxCurrentRangeAttacks()) && (MSGControllForEvasion) && (!MSGControll)) {
                 //if ((damage == 0) ){
@@ -10719,6 +10728,7 @@ public class Combat extends BaseContent {
 		if (player.hasPerk(PerkLib.MasterGunslinger)) fatiguecombatrecovery += 1;
 		if (player.hasPerk(PerkLib.AlchemicalCartridge)) fatiguecombatrecovery += 2;
 		if (player.hasPerk(PerkLib.ChurchOfTheGun)) fatiguecombatrecovery += 3;
+		if (player.hasPerk(PerkLib.SaintOfZariman)) fatiguecombatrecovery += 4;
 		fatiguecombatrecovery *= fatigueRecoveryMultiplier();
         fatiguecombatrecovery = Math.round(fatiguecombatrecovery);
         return fatiguecombatrecovery;
@@ -15438,8 +15448,9 @@ public function firearmsForce():Number {
     if (player.hasPerk(PerkLib.ChurchOfTheGun)) mod += .1;
     if (player.hasPerk(PerkLib.ExplosiveCartridge)) mod += .1;
     if (player.hasPerk(PerkLib.TaintedMagazine)) mod += .1;
+    if (player.hasPerk(PerkLib.SaintOfZariman)) mod += .15;
     if (player.hasPerk(PerkLib.SilverForMonsters)) mod += .15;
-    if (player.hasPerk(PerkLib.NamedBullet)) mod += .2;//100% up to here
+    if (player.hasPerk(PerkLib.NamedBullet)) mod += .2;//125% up to here
 	if (player.hasPerk(PerkLib.FirearmsAttackMultiplier)) {
 		mod += .1;
 		if (player.hasPerk(PerkLib.SkilledGunslingerEx)) {

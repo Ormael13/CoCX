@@ -452,13 +452,19 @@ public class HeXinDao extends BaseContent
         outputText("\"<i>Let me look over what you have for sale. I promise I will give you a 'fair' price for them,</i>\" With this said, the merchant calmly awaits what you will take out.");
         menu();
         if (player.hasItem(useables.GOLCORE, 1)) addButton(0, "Sell 1", sellOneGolemCore).hint("Sell 1 golem core.");
-        if (player.hasItem(useables.GOLCORE, 5)) addButton(1, "Sell 5", sellFiveGolemCores).hint("Sell 5 golem cores.");
-        if (player.hasItem(useables.PCSHARD, 1)) addButton(5, "Sell 1", sellOnePurpleCrystalShard).hint("Sell 1 purple crystal shard.");
-        if (player.hasItem(useables.PCSHARD, 5)) addButton(6, "Sell 5", sellFivePurpleCrystalShards).hint("Sell 5 purple crystal shards.");
-        if (player.hasItem(useables.ELSHARD, 1)) addButton(7, "Sell 1", sellOneElementalShard).hint("Sell 1 elemental shard.");
-        if (player.hasItem(useables.ELSHARD, 5)) addButton(8, "Sell 5", sellFiveElementalShards).hint("Sell 5 elemental shards.");
+        if (player.hasItem(useables.ELSHARD, 1)) addButton(1, "Sell 1", sellOneElementalShard).hint("Sell 1 elemental shard.");
+        if (player.hasItem(useables.LELSHARD, 1)) addButton(2, "Sell 1", sellOneLargeElementalShard).hint("Sell 1 large elemental shard.");
+        if (player.hasItem(useables.ELCRYST, 1)) addButton(3, "Sell 1", sellOneElementalCrystal).hint("Sell 1 elemental crystal.");
+        if (player.hasItem(useables.EL_CORE, 1)) addButton(4, "Sell 1", sellOneElementalCore).hint("Sell 1 elemental core.");
+        if (player.hasItem(useables.GOLCORE, 5)) addButton(5, "Sell 5", sellFiveGolemCores).hint("Sell 5 golem cores.");
+        if (player.hasItem(useables.ELSHARD, 5)) addButton(6, "Sell 5", sellFiveElementalShards).hint("Sell 5 elemental shards.");
+        if (player.hasItem(useables.LELSHARD, 5)) addButton(7, "Sell 5", sellFiveLargeElementalShards).hint("Sell 5 large elemental shards.");
+        if (player.hasItem(useables.ELCRYST, 5)) addButton(8, "Sell 5", sellFiveElementalCrystals).hint("Sell 5 elemental crystals.");
+        if (player.hasItem(useables.EL_CORE, 5)) addButton(9, "Sell 5", sellFiveElementalCores).hint("Sell 5 elemental cores.");
         if (player.hasItem(useables.E_ICHOR, 1)) addButton(10, "Sell 1", sellOneEIchorVial).hint("Sell 1 vial of E-Ichor.");
         if (player.hasItem(useables.E_ICHOR, 5)) addButton(11, "Sell 5", sellFiveEIchorVials).hint("Sell 5 vials of E-Ichor.");
+        if (player.hasItem(useables.PCSHARD, 1)) addButton(12, "Sell 1", sellOnePurpleCrystalShard).hint("Sell 1 purple crystal shard.");
+        if (player.hasItem(useables.PCSHARD, 5)) addButton(13, "Sell 5", sellFivePurpleCrystalShards).hint("Sell 5 purple crystal shards.");
         addButton(14, "Back", mogahenmerchant);
     }
 
@@ -469,27 +475,6 @@ public class HeXinDao extends BaseContent
         flags[kFLAGS.SPIRIT_STONES]++;
         doNext(sellItemsForSpiritStones);
     }
-    public function sellFiveGolemCores():void {
-        clearOutput();
-        outputText("\"<i>Golem cores. Let me check...Hm...They seem to be in decent shape,</i>\" after the examination he walks away and return shortly. \"<i> Five stones for them.</i>\"");
-        player.destroyItems(useables.GOLCORE, 5);
-        flags[kFLAGS.SPIRIT_STONES] += 5;
-        doNext(sellItemsForSpiritStones);
-    }
-    public function sellOnePurpleCrystalShard():void {
-        clearOutput();
-        outputText("\"<i>A single purple crystal shard. It's still glowing. Two spirit stones for it,</i>\" he states after examining the shard. Moga takes your crystal shard in back, and returns a second later with your stones.");
-        player.destroyItems(useables.PCSHARD, 1);
-        flags[kFLAGS.SPIRIT_STONES] += 2;
-        doNext(sellItemsForSpiritStones);
-    }
-    public function sellFivePurpleCrystalShards():void {
-        clearOutput();
-        outputText("\"<i>Purple crystal shards. Let me check...yeah, all of them seem to be intact,</i>\" after examination he walks away and return shortly. \"<i>Here you go. Ten spirit stones.</i>\"");
-        player.destroyItems(useables.PCSHARD, 5);
-        flags[kFLAGS.SPIRIT_STONES] += 10;
-        doNext(sellItemsForSpiritStones);
-    }
     public function sellOneElementalShard():void {
         clearOutput();
         outputText("\"<i>A single elemental shard. It still possesses a lot of energy...I can give you three spirit stones for it.</i>\" He takes the shard, going into the back. Moga returns and gives you three stones.");
@@ -497,11 +482,60 @@ public class HeXinDao extends BaseContent
         flags[kFLAGS.SPIRIT_STONES] += 3;
         doNext(sellItemsForSpiritStones);
     }
+    public function sellOneLargeElementalShard():void {
+        clearOutput();
+        outputText("\"<i>A single large elemental shard. It still possesses a lot of energy...I can give you nine spirit stones for it.</i>\" He takes the large shard, going into the back. Moga returns and gives you nine stones.");
+        player.destroyItems(useables.LELSHARD, 1);
+        flags[kFLAGS.SPIRIT_STONES] += 9;
+        doNext(sellItemsForSpiritStones);
+    }
+    public function sellOneElementalCrystal():void {
+        clearOutput();
+        outputText("\"<i>A single elemental crystal. Not so common find...I can give you thirty spirit stones for it.</i>\" He takes the crystal, going into the back. Moga returns and gives you thirty stones.");
+        player.destroyItems(useables.ELCRYST, 1);
+        flags[kFLAGS.SPIRIT_STONES] += 30;
+        doNext(sellItemsForSpiritStones);
+    }
+    public function sellOneElementalCore():void {
+        clearOutput();
+        outputText("\"<i>A single elemental core. Nearly priceless treasure but...I would give you, <b>with great pain of stones that i must part with</b> a whole one hundred of spirit stones.</i>\" He takes the core, going into the back. Moga returns and gives you one hundred stones.");
+        player.destroyItems(useables.EL_CORE, 1);
+        flags[kFLAGS.SPIRIT_STONES] += 100;
+        doNext(sellItemsForSpiritStones);
+    }
+    public function sellFiveGolemCores():void {
+        clearOutput();
+        outputText("\"<i>Golem cores. Let me check...Hm...They seem to be in decent shape,</i>\" after the examination he walks away and return shortly. \"<i>Five stones for them.</i>\"");
+        player.destroyItems(useables.GOLCORE, 5);
+        flags[kFLAGS.SPIRIT_STONES] += 5;
+        doNext(sellItemsForSpiritStones);
+    }
     public function sellFiveElementalShards():void {
         clearOutput();
-        outputText("\"<i>Elemental shards. Let me check...yes all of them seems to be in a decent state,</i>\" after the examination he walks away and returns shortly. \"<i>Twenty five stones for them.</i>\"");
+        outputText("\"<i>Elemental shards. Let me check...yes all of them seems to be in a decent state,</i>\" after the examination he walks away and returns shortly. \"<i>Fifteen stones for them.</i>\"");
         player.destroyItems(useables.ELSHARD, 5);
         flags[kFLAGS.SPIRIT_STONES] += 15;
+        doNext(sellItemsForSpiritStones);
+    }
+    public function sellFiveLargeElementalShards():void {
+        clearOutput();
+        outputText("\"<i>Large elemental shards. Let me check...yes all of them seems to be in a decent state,</i>\" after the examination he walks away and returns shortly. \"<i>Fourty five stones for them.</i>\"");
+        player.destroyItems(useables.LELSHARD, 5);
+        flags[kFLAGS.SPIRIT_STONES] += 45;
+        doNext(sellItemsForSpiritStones);
+    }
+    public function sellFiveElementalCrystals():void {
+        clearOutput();
+        outputText("\"<i>Elemental crystals. Just what luck you have to gather five of them,</i>\" after the examination he walks away and returns shortly. \"<i>One Hundred and fifty stones for them.</i>\"");
+        player.destroyItems(useables.ELCRYST, 5);
+        flags[kFLAGS.SPIRIT_STONES] += 150;
+        doNext(sellItemsForSpiritStones);
+    }
+    public function sellFiveElementalCores():void {
+        clearOutput();
+        outputText("\"<i>Elemental cores? FIVE ELEMENTAL CORES?</i>\" for a moment he's silently breathing until reasuming. \"<i>It's good you came to me. Five hundred stones,</i>\" he exclaims and with haste walks away and returns much sooner than usualy. \"<i>Five hundred stones for them.</i>\"");
+        player.destroyItems(useables.EL_CORE, 5);
+        flags[kFLAGS.SPIRIT_STONES] += 500;
         doNext(sellItemsForSpiritStones);
     }
     public function sellOneEIchorVial():void {
@@ -516,6 +550,20 @@ public class HeXinDao extends BaseContent
         outputText("\"<i>Vials of E-Ichor. Let me check...yes all of them seems to be well-preserved,</i>\" after long examination he walks away and return after even longer time. \"<i>Here are your hun... hundred stones for them...</i>\"");
         player.destroyItems(useables.E_ICHOR, 5);
         flags[kFLAGS.SPIRIT_STONES] += 100;
+        doNext(sellItemsForSpiritStones);
+    }
+    public function sellOnePurpleCrystalShard():void {
+        clearOutput();
+        outputText("\"<i>A single purple crystal shard. It's still glowing. Two spirit stones for it,</i>\" he states after examining the shard. Moga takes your crystal shard in back, and returns a second later with your stones.");
+        player.destroyItems(useables.PCSHARD, 1);
+        flags[kFLAGS.SPIRIT_STONES] += 2;
+        doNext(sellItemsForSpiritStones);
+    }
+    public function sellFivePurpleCrystalShards():void {
+        clearOutput();
+        outputText("\"<i>Purple crystal shards. Let me check...yeah, all of them seem to be intact,</i>\" after examination he walks away and return shortly. \"<i>Here you go. Ten spirit stones.</i>\"");
+        player.destroyItems(useables.PCSHARD, 5);
+        flags[kFLAGS.SPIRIT_STONES] += 10;
         doNext(sellItemsForSpiritStones);
     }
 
@@ -1492,4 +1540,4 @@ public function soularena():void {
         doNext(camp.returnToCampUseOneHour);
     }
 }
-}
+}

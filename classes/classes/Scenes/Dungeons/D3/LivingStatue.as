@@ -40,7 +40,7 @@ import classes.internals.ChainedDrop;
 			this.createBreastRow(0, 1);
 			initGenderless();
 			this.drop = new ChainedDrop()
-					.add(consumables.E7PEARL, 1);
+					.add(useables.EL_CORE, 1);
 			this.level = 72;
 			this.bonusHP = 10000;
 			this.weaponName = "stone greathammer";
@@ -83,7 +83,6 @@ import classes.internals.ChainedDrop;
 		{
 			//Maybe replace this with passive stun? TERRIBLE IDEA
 			outputText("The giant raises his hammer for an obvious downward strike. His marble muscles flex as he swings it downward. You're able to hop out of the way of the clearly telegraphed attack, but nothing could prepare you for the shockwave it emits as it craters the ground. ");
-			
 			//Stun success
 			if (rand(2) == 0 && !player.hasStatusEffect(StatusEffects.Stunned))
 			{
@@ -95,16 +94,14 @@ import classes.internals.ChainedDrop;
 			{
 				outputText("You shake off the vibrations immediately. It'll take more than that to stop you! ");
 			}
-			
 			//Light magic-type damage!
-			var damage:Number = (150 * ((inte/player.inte) / 4));
+			var damage:Number = (200 * ((inte/player.inte) / 3));
 			damage = player.takePhysDamage(damage, true);
 		}
 		
 		private function dirtKick():void
 		{
 			outputText("The animated sculpture brings its right foot around, dragging it through the gardens at a high enough speed to tear a half score of bushes out by the root. A cloud of shrubbery and dirt washes over you!");
-			
 			//blind
 			if (rand(2) == 0 && !player.hasStatusEffect(StatusEffects.Blind) && !player.hasPerk(PerkLib.BlindImmunity))
 			{
@@ -122,8 +119,7 @@ import classes.internals.ChainedDrop;
 		{
 			//Knocks you away and forces you to spend a turn running back to do melee attacks.
 			outputText("The marble golem's visage twists into a grimace of irritation, and it swings its hand at you in a vicious backhand.");
-	
-			var damage:Number = int ((str + weaponAttack) - rand(player.tou) - player.armorDef);
+			var damage:Number = int ((str + weaponAttack) - rand(player.touStat.core.value) - player.armorDef);
 			//Dodge
 			if (damage <= 0 || (player.getEvasionRoll())) outputText(" You slide underneath the surprise swing!");
 			else
@@ -144,8 +140,7 @@ import classes.internals.ChainedDrop;
 		{
 			//High damage, lowish accuracy.
 			outputText("Raising its hammer high overhead, the giant swiftly brings its hammer down in a punishing strike!");
-			
-			var damage:Number = 175 + int((str + weaponAttack) - rand(player.tou) - player.armorDef);
+			var damage:Number = 225 + int((str + weaponAttack) - rand(player.touStat.core.value) - player.armorDef);
 			if (damage <= 0 || rand(100) < 25 || player.getEvasionRoll()) outputText(" You're able to sidestep it just in time.");
 			else
 			{
@@ -159,7 +154,6 @@ import classes.internals.ChainedDrop;
 		private function disarm():void
 		{
 			outputText("The animated statue spins its hammer around, striking at your [weapon] with its haft.");
-	
 			//Avoid
 			if (player.getEvasionRoll() || (player.hasPerk(PerkLib.ShieldWard) && rand (2) == 0)) outputText(" You manage to hold onto your equipment, for now.");
 			//Oh noes!
@@ -179,8 +173,7 @@ import classes.internals.ChainedDrop;
 		{
 			//Difficult to avoid, moderate damage.
 			outputText("Twisting back, the giant abruptly launches into a circular spin. Its hammer stays low enough to the ground that its circular path is tearing a swath of destruction through the once pristine garden, and it's coming in your direction!");
-
-			var damage:Number = (200 + int((str + weaponAttack) - rand(player.tou) - player.armorDef)) / (rand(2) + 2);
+			var damage:Number = (300 + int((str + weaponAttack) - rand(player.touStat.core.value) - player.armorDef)) / (rand(2) + 1);
 			//Avoid
 			if (damage <= 0 || player.getEvasionRoll()) outputText(" By the grace of the gods, you somehow avoid the spinning hammer.");
 			else

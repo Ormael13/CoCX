@@ -5056,6 +5056,20 @@ use namespace CoC;
 				removePerk(PerkLib.ChimericalBodySemiEpicStage);
 				perkPoints += 1;
 			}
+			//PermTFTrueMutations();	//Uncomment to unleash armageddon..... or when ready to roll out "true" mutations.
+
+		}
+
+		public function PermTFTrueMutations():void{
+			for each (var pPerks:IMutationPerkType in IMutationsLib.mutationsArray("")){
+				if (pPerks.trueMutation){
+					pPerks.pReqs(0);
+					if (pPerks.available(this)){
+						curry(pPerks.acquireMutation, this, "none", Math.min(this.level%30 + 1), pPerks.maxLvl);
+						this.setPerkValue(pPerks, 3, 1);
+					}
+				}
+			}
 		}
 
 		public function requiredXP():int {

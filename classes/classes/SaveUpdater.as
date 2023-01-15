@@ -1758,7 +1758,6 @@ public class SaveUpdater extends NPCAwareContent {
 				// - Compute how much total training pc did
 				// - Try to re-allocate training, maintain the ratio between stats
 				var primaryStats:/*PrimaryStat*/Array = [player.strStat,player.touStat,player.speStat,player.intStat,player.wisStat,player.libStat];
-
 				var oldCoreTotal:int = 0;
 				var oldCoreStats:/*int*/Array = [0,0,0,0,0,0];
 				outputText("\n\nStat rework! Training is separated from level-up, <b>but benefits less from multipliers</b>.\nOld core stat values:")
@@ -1770,7 +1769,6 @@ public class SaveUpdater extends NPCAwareContent {
 					stat.core.value = 0;
 				}
 				outputText(" = total "+oldCoreTotal+".");
-
 				// Compute total stat points spent
 				var statPointsPerLevel:int = 5 + (player.perkv1(PerkLib.AscensionAdvTrainingX));
 				var statPoints:int = player.level*statPointsPerLevel;
@@ -1790,7 +1788,6 @@ public class SaveUpdater extends NPCAwareContent {
 				if (player.hasStatusEffect(StatusEffects.RiverDungeonFloorRewards)) statPoints += 5 * player.statusEffectv1(StatusEffects.RiverDungeonFloorRewards);
 				if (flags[kFLAGS.EBON_LABYRINTH] >= 50) statPoints += 5;
 				statPoints += int(flags[kFLAGS.EBON_LABYRINTH]/150) * 5;
-
 				var totalTrainPoints:int = oldCoreTotal - statPoints;
 				var remainingTrainPoints:int = totalTrainPoints;
 				// Re-allocate training stats, maintaining ratio
@@ -1830,7 +1827,6 @@ public class SaveUpdater extends NPCAwareContent {
 				for (i = 0; i < primaryStats.length; i++) {
 					outputText(" "+primaryStats[i].train.value);
 				}
-
 				player.statPoints += statPoints;
 				outputText("\n\n<b>You have " + statPoints + " stat points refunded. Don't forget to allocate them</b>.");
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.025;
@@ -1977,6 +1973,10 @@ public class SaveUpdater extends NPCAwareContent {
 				if (player.hasPerk(PerkLib.TransformationImmunityFairy)) player.createPerk(PerkLib.TransformationImmunity2, 4, 0, 0, 0);
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.041;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.042) {
+				if (player.hasPerk(PerkLib.HellfireCoat) && !player.hasPerk(PerkLib.TransformationImmunity2)) player.createPerk(PerkLib.TransformationImmunity2, 3, 0, 0, 0);
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.042;
+			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
 		}
@@ -2114,4 +2114,4 @@ public class SaveUpdater extends NPCAwareContent {
 		}
 	}
 }
-}
+}

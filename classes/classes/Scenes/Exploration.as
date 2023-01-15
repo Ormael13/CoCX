@@ -17,11 +17,7 @@ import classes.Scenes.Dungeons.DemonLab.ProjectNightwalker;
 import classes.Scenes.Dungeons.DemonLab.ProjectTyrant;
 import classes.Scenes.Dungeons.DemonLab.UltimisFlamespreader;
 import classes.Scenes.Dungeons.HiddenCave;
-import classes.Scenes.Explore.ExploreDebug;
-import classes.Scenes.Explore.KitsuneAncestor;
-import classes.Scenes.Explore.KitsuneElder;
-import classes.Scenes.Explore.RNGod;
-import classes.Scenes.Explore.SeabedAlrauneBoss;
+import classes.Scenes.Explore.*;
 import classes.Scenes.Monsters.*;
 import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.NPCs.KihaFollower;
@@ -1235,11 +1231,57 @@ public class Exploration extends BaseContent
 			outputText("While exploring (rest is placeholder atm).\n\n");
 			startCombat(new RyuBiDragon());
 		}
-
 		public function ryubirepenc():void {
 			clearOutput();
 			outputText("While exploring (rest is placeholder atm).\n\n");
 			startCombat(new RyuBiDragon());
+		}
+
+		public function goSearchForPearls():void {
+			clearOutput();
+			outputText("You grab your [weapon] and goes on serching solution to your waning physical constitution.");
+			if (player.hasPerk(PerkLib.ElementalConjurerSacrifice) && player.perkv1(PerkLib.ElementalConjurerSacrifice) < 2 && player.hasStatusEffect(StatusEffects.ElementalPearlGolems) && player.statusEffectv1(StatusEffects.ElementalPearlGolems) == 2) {
+				player.addStatusValue(StatusEffects.ElementalPearlGolems, 1, 1);
+				player.addPerkValue(PerkLib.ElementalConjurerSacrifice, 1, 1);
+			}
+			if (player.hasPerk(PerkLib.ElementalConjurerDedication) && player.perkv1(PerkLib.ElementalConjurerDedication) < 2 && player.hasStatusEffect(StatusEffects.ElementalPearlGolems)) {
+				player.addStatusValue(StatusEffects.ElementalPearlGolems, 1, 1);
+				player.addPerkValue(PerkLib.ElementalConjurerDedication, 1, 1);
+			}
+			if (player.hasPerk(PerkLib.ElementalConjurerResolve) && player.perkv1(PerkLib.ElementalConjurerResolve) < 2) {
+				player.createStatusEffect(StatusEffects.ElementalPearlGolems, 1, 0, 0, 0);
+				player.addPerkValue(PerkLib.ElementalConjurerResolve, 1, 1);
+			}
+			startCombat(new ElementalGolems());
+		}
+		public function elementalGolemBeaten1():void {
+			clearOutput();
+			outputText("You stops before beaten guardian quasi-gargoyle and reach toward it shoulder mounted shards yanking off each of them.\n\n");
+			inventory.takeItem(useables.LELSHARD, elementalGolemBeaten1a);
+		}
+		private function elementalGolemBeaten1a():void {
+			outputText("\n");
+			player.addPerkValue(PerkLib.ElementalConjurerResolve, 1, 1);
+			inventory.takeItem(useables.LELSHARD, cleanupAfterCombat);
+		}
+		public function elementalGolemBeaten2():void {
+			clearOutput();
+			outputText("You stops before beaten obsidian gargoyle and reach toward it shoulder mounted shards yanking off each of them.\n\n");
+			inventory.takeItem(useables.LELSHARD, elementalGolemBeaten2a);
+		}
+		private function elementalGolemBeaten2a():void {
+			outputText("\n");
+			player.addPerkValue(PerkLib.ElementalConjurerDedication, 1, 1);
+			inventory.takeItem(useables.LELSHARD, cleanupAfterCombat);
+		}
+		public function elementalGolemBeaten3():void {
+			outputText("You stops before beaten living statue golem and reach toward it shoulder mounted crystals yanking off each of them.\n\n");
+			inventory.takeItem(useables.ELCRYST, elementalGolemBeaten3a);
+		}
+		private function elementalGolemBeaten3a():void {
+			outputText("\n");
+			player.addPerkValue(PerkLib.ElementalConjurerSacrifice, 1, 1);
+			inventory.takeItem(useables.ELCRYST, cleanupAfterCombat);
 		}
 
 		public function debugOptions():void

@@ -214,18 +214,7 @@ public class DinahFollower extends NPCAwareContent// implements TimeAwareInterfa
 			clearOutput();
 			outputText("You begin to browse "+(flags[kFLAGS.DINAH_LVL_UP] > 0.5 ?"Dinah":"veiled merchant")+" shop inventory.");
 			menu();
-			addButton(0, consumables.AGILI_E.shortName, buyItem1, 0).hint("Buy an agility elixir.");
-			addButton(1, consumables.W_FRUIT.shortName, buyItem1, 1).hint("Buy a piece of whisker-fruit.");
-			addButton(2, consumables.WOFRUIT.shortName, buyItem2, 2).hint("Buy a Wonder fruit.");
-			addButton(3, consumables.G_FRUIT.shortName, buyItem2, 3).hint("Buy a Ghastly Fruit");
-			addButton(4, consumables.D_FRUIT.shortName, buyItem2, 4).hint("Buy a Displacement Fruit.");
-			addButton(5, consumables.MANTICV.shortName, buyItem3, 5).hint("Buy a vial of manticore venom.");
-			addButton(6, consumables.VOLTTOP.shortName, buyItem3, 6).hint("Buy a Voltage topaz.");
-			addButton(7, consumables.REDVIAL.shortName, buyItem3, 7).hint("Buy a vial of ominous red liquid.");
-			addButton(8, consumables.STRASCA.shortName, buyItem2, 8).hint("Buy a Strawberry shortcake.");
-			addButton(9, consumables.BCHCAKE.shortName, buyItem2, 9).hint("Buy a Big chocolate cake.");
-			if (player.hasPerk(PerkLib.PrestigeJobNecromancer)) addButton(10, consumables.PODBONE.shortName, buyItem1, 10).hint("Buy a pack of demon bones.");
-			else addButtonDisabled(10, "???", "Offers only for Necromancers.");
+			addButton(10, "Misc", DinahShopMainMenu1);
 			if (player.headJewelry == headjewelries.HBHELM && player.armor == armors.HBARMOR) addButton(11, "HB M&U", buyHowlingBansheeMechAndUpgrades);
 			else addButtonDisabled(11, "???", "Offers only for those that are wearing HB Armor & HB Helmet.");
 			if (flags[kFLAGS.DINAH_LVL_UP] > 0.5) {
@@ -237,6 +226,25 @@ public class DinahFollower extends NPCAwareContent// implements TimeAwareInterfa
 				addButtonDisabled(13, "Boss D.", "Maybe if merchant would be more interested in you...");
 			}
 			addButton(14, "Back", DinahMainMenu);
+		}
+		public function DinahShopMainMenu1():void {
+			clearOutput();
+			outputText("You begin to browse " + (flags[kFLAGS.DINAH_LVL_UP] > 0.5 ?"Dinah":"veiled merchant") + " shop inventory.");
+			menu();
+			addButton(0, consumables.AGILI_E.shortName, buyItem1, 0).hint("Buy an agility elixir.");
+			addButton(1, consumables.W_FRUIT.shortName, buyItem1, 1).hint("Buy a piece of whisker-fruit.");
+			addButton(2, consumables.WOFRUIT.shortName, buyItem2, 2).hint("Buy a Wonder fruit.");
+			addButton(3, consumables.G_FRUIT.shortName, buyItem2, 3).hint("Buy a Ghastly Fruit");
+			addButton(4, consumables.D_FRUIT.shortName, buyItem2, 4).hint("Buy a Displacement Fruit.");
+			addButton(5, consumables.MANTICV.shortName, buyItem3, 5).hint("Buy a vial of manticore venom.");
+			addButton(6, consumables.VOLTTOP.shortName, buyItem3, 6).hint("Buy a Voltage topaz.");
+			addButton(7, consumables.REDVIAL.shortName, buyItem3, 7).hint("Buy a vial of ominous red liquid.");
+			addButton(8, consumables.STRASCA.shortName, buyItem2, 8).hint("Buy a Strawberry shortcake.");
+			addButton(9, consumables.BCHCAKE.shortName, buyItem2, 9).hint("Buy a Big chocolate cake.");
+			addButton(10, consumables.MADMENK.shortName, buyItem3, 11).hint("Buy a Madmen knowledge.");
+			if (player.hasPerk(PerkLib.PrestigeJobNecromancer)) addButton(13, consumables.PODBONE.shortName, buyItem1, 10).hint("Buy a pack of demon bones.");
+			else addButtonDisabled(13, "???", "Offers only for Necromancers.");
+			addButton(14, "Back", DinahShopMainMenu);
 		}
 		public function DinahShopMainMenu2():void {
 			clearOutput();
@@ -295,6 +303,7 @@ public class DinahFollower extends NPCAwareContent// implements TimeAwareInterfa
 			if (item == 5) catChimeraBuy3(consumables.MANTICV);
 			if (item == 6) catChimeraBuy3(consumables.VOLTTOP);
 			if (item == 7) catChimeraBuy3(consumables.REDVIAL);
+			if (item == 11) catChimeraBuy1(consumables.MADMENK);
 		}
 		private function buyItem4(item:Number = 0):void {
 			if (item == 20) catChimeraBuy4(consumables.DSLIMEJ);
@@ -324,10 +333,10 @@ public class DinahFollower extends NPCAwareContent// implements TimeAwareInterfa
 			outputText("\"<i>Oh, this one? It costs " + (itype.value * (1 + _extra)) + " gems.</i>\"");
 			if (player.gems < (itype.value * (1 + _extra))) {
 				outputText("\n<b>You don't have enough gems...</b>");
-				doNext(DinahShopMainMenu);
+				doNext(DinahShopMainMenu1);
 				return;
 			}
-			doYesNo(Utils.curry(catChimeraTransact1,itype), DinahShopMainMenu);
+			doYesNo(Utils.curry(catChimeraTransact1,itype), DinahShopMainMenu1);
 		}
 		public function catChimeraBuy2(itype:ItemType):void {
 			clearOutput();
@@ -335,10 +344,10 @@ public class DinahFollower extends NPCAwareContent// implements TimeAwareInterfa
 			outputText("\"<i>Oh this one? It costs " + (itype.value * (2 + _extra)) + " gems.</i>\"");
 			if (player.gems < (itype.value * (2 + _extra))) {
 				outputText("\n<b>You don't have enough gems...</b>");
-				doNext(DinahShopMainMenu);
+				doNext(DinahShopMainMenu1);
 				return;
 			}
-			doYesNo(Utils.curry(catChimeraTransact2,itype), DinahShopMainMenu);
+			doYesNo(Utils.curry(catChimeraTransact2,itype), DinahShopMainMenu1);
 		}
 		public function catChimeraBuy3(itype:ItemType):void {
 			clearOutput();
@@ -346,10 +355,10 @@ public class DinahFollower extends NPCAwareContent// implements TimeAwareInterfa
 			outputText("\"<i>Oh this one? It costs " + (itype.value * (4 + _extra)) + " gems.</i>\"");
 			if (player.gems < (itype.value * (4 + _extra))) {
 				outputText("\n<b>You don't have enough gems...</b>");
-				doNext(DinahShopMainMenu);
+				doNext(DinahShopMainMenu1);
 				return;
 			}
-			doYesNo(Utils.curry(catChimeraTransact3,itype), DinahShopMainMenu);
+			doYesNo(Utils.curry(catChimeraTransact3,itype), DinahShopMainMenu1);
 		}
 		public function catChimeraBuy4(itype:ItemType):void {
 			clearOutput();
@@ -377,19 +386,19 @@ public class DinahFollower extends NPCAwareContent// implements TimeAwareInterfa
 			clearOutput();
 			player.gems -= itype.value * (1 + _extra);
 			statScreenRefresh();
-			inventory.takeItem(itype, DinahShopMainMenu);
+			inventory.takeItem(itype, DinahShopMainMenu1);
 		}
 		public function catChimeraTransact2(itype:ItemType):void {
 			clearOutput();
 			player.gems -= itype.value * (2 + _extra);
 			statScreenRefresh();
-			inventory.takeItem(itype, DinahShopMainMenu);
+			inventory.takeItem(itype, DinahShopMainMenu1);
 		}
 		public function catChimeraTransact3(itype:ItemType):void {
 			clearOutput();
 			player.gems -= itype.value * (4 + _extra);
 			statScreenRefresh();
-			inventory.takeItem(itype, DinahShopMainMenu);
+			inventory.takeItem(itype, DinahShopMainMenu1);
 		}
 		public function catChimeraTransact4(itype:ItemType):void {
 			clearOutput();
