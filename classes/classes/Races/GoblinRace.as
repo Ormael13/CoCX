@@ -39,21 +39,23 @@ public class GoblinRace extends Race {
         /*Vagina*/		"Human",
         /*Perks*/		"Goblin"];
 	
-	public const TfList:/*Transformation*/Array = [
-		new TransformationGroupAny("FaceHumanOrAnimal", [
-			game.transformations.FaceHuman,
-			game.transformations.FaceAnimalTeeth
-		]),
-		game.transformations.EarsElfin,
-		game.transformations.SkinPlain,
-		game.transformations.SkinColor(GoblinSkinColors),
-		game.transformations.EyesHuman,
-		game.transformations.EyesChangeColor(GoblinEyeColors),
-		game.transformations.HairChangeColor(GoblinHairColors),
-		game.transformations.ArmsHuman,
-		game.transformations.LowerBodyHuman,
-		game.transformations.AntennaeNone
-	];
+	public function get TfList():/*Transformation*/Array {
+		return [
+			new TransformationGroupAny("FaceHumanOrAnimal", [
+				game.transformations.FaceHuman,
+				game.transformations.FaceAnimalTeeth
+			]),
+			game.transformations.EarsElfin,
+			game.transformations.SkinPlain,
+			game.transformations.SkinColor(GoblinSkinColors),
+			game.transformations.EyesHuman,
+			game.transformations.EyesChangeColor(GoblinEyeColors),
+			game.transformations.HairChangeColor(GoblinHairColors),
+			game.transformations.ArmsHuman,
+			game.transformations.LowerBodyHuman,
+			game.transformations.AntennaeNone
+		];
+	}
 	
 	public function GoblinRace(id:int) {
 		super("Goblin", id, RaceBody);

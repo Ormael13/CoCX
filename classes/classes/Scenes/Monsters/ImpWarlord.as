@@ -51,7 +51,16 @@ public class ImpWarlord extends Imp
 		override public function defeated(hpVictory:Boolean):void
 		{
 			game.flags[kFLAGS.DEMONS_DEFEATED]++;
-			SceneLib.impScene.defeatImpLord();
+
+			if (rand(2) == 0 && flags[kFLAGS.IMP_TOME_FOUND] == 0) {
+				outputText("\n\nYou spot an odd book lying close by the imp and stook to pick it up. ");
+				SceneLib.inventory.takeItem(shields.IMPTOME, hasTakenBook);
+				function hasTakenBook():void {
+					if (player.hasItem(shields.IMPTOME) || player.shieldName == "Tome of Imp")
+						flags[kFLAGS.IMP_TOME_FOUND] = 1;
+					SceneLib.impScene.defeatImpLord();
+				}
+			} else SceneLib.impScene.defeatImpLord();
 		}
 
 		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void

@@ -672,6 +672,7 @@ public class DebugMenu extends BaseContent
 			consumableArray.push(consumables.WHITEEG);
 			consumableArray.push(consumables.L_WHTEG);
 			consumableArray.push(consumables.AMBROSA);
+			consumableArray.push(consumables.LETHITE);
 
 			//------------
 			// Dyes
@@ -701,7 +702,6 @@ public class DebugMenu extends BaseContent
 			materialArray.push(useables.T_SSILK);
 			materialArray.push(useables.D_SCALE);
 			materialArray.push(useables.IMPSKLL);
-			materialArray.push(useables.LETHITE);
 			materialArray.push(null);
 			materialArray.push(null);
 			materialArray.push(null);

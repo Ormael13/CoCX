@@ -248,7 +248,7 @@ public class CockTransformations extends MutationsHelper {
 
 					if (player.cocks.length > cock){
 
-						desc += "You smile, watching your [cock] grow longer.  Inches of newfound dick-flesh erupt from your crotch in response to omnibus' dark magics.  Before you can play with your transformed tool, a wave of burning desire passes through you.  ";
+						desc += "You smile, watching your [cock] grow longer.  Inches of newfound dick-flesh erupt from your crotch.  Before you can play with your transformed tool, a wave of burning desire passes through you.  ";
 						if(player.cor < 80) desc += "You watch in horror as the skin of your [cock] turns shiny and purplish-black.  ";
 						else desc += "Curious, you watch the skin of your [cock] turn a shiny-dark purple.  ";
 

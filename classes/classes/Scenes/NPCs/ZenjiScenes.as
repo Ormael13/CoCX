@@ -3106,7 +3106,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 								"You take your leave without another word.\n");
 					}
 				}
-				else if (player.isRace(Races.DEMON, 1, false)){
+				else if (player.isRace(Races.DEMON, 1, false)||player.isRace(Races.IMP, 1, false)){
 					outputText("With your mind set, you speak up. \"I do,\" you reply.\n" +
 							"\n" +
 							"Tears begin to stream down his face as you smile at him. You look toward Zenji with faux reassurance as you hold out your hand for him.\n" +

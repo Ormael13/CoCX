@@ -37,27 +37,29 @@ public class BeeRace extends Race {
         /*Perks*/		"Human"];
 
 
-    public const TfList:/*PossibleEffect*/Array = [
-		game.transformations.HairChangeColor(BeeHairColors),
-		game.transformations.BreastRowsRemoveToOne,
-		game.transformations.AntennaeBee,
-		game.transformations.EyesSandTrap,
-		game.transformations.HornsNone,
-		game.transformations.SkinPatternBeeStripes,
-		game.transformations.LowerBodyBee,
-		game.transformations.ArmsBee,
-		game.transformations.NipplesPerBreastOne,
-		game.transformations.OvipositorBee,
-		game.transformations.TailBee,
-		new GradualTransformation("BeeWings", [
+    public function get TfList():/*PossibleEffect*/Array {
+		return [
+			game.transformations.HairChangeColor(BeeHairColors),
+			game.transformations.BreastRowsRemoveToOne,
+			game.transformations.AntennaeBee,
+			game.transformations.EyesSandTrap,
+			game.transformations.HornsNone,
+			game.transformations.SkinPatternBeeStripes,
+			game.transformations.LowerBodyBee,
+			game.transformations.ArmsBee,
+			game.transformations.NipplesPerBreastOne,
+			game.transformations.OvipositorBee,
+			game.transformations.TailBee,
+			new GradualTransformation("BeeWings", [
 				game.transformations.WingsNone,
 				game.transformations.WingsBeeSmall,
 				game.transformations.WingsBeeLarge
-		]),
-		game.transformations.GillsNone,
-		game.transformations.CockChangeType(CockTypesEnum.BEE, false),
-		game.transformations.RearBodyNone
-	];
+			]),
+			game.transformations.GillsNone,
+			game.transformations.CockChangeType(CockTypesEnum.BEE, false),
+			game.transformations.RearBodyNone
+		];
+	}
 	
 	public function BeeRace(id:int) {
 		super("Bee", id, []);//RaceBody);

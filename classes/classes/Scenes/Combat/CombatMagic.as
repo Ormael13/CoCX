@@ -211,6 +211,9 @@ public class CombatMagic extends BaseCombatContent {
 		for each (var e:SimpleRaceEnchantment in player.allEnchantments(EnchantmentLib.RaceSpellPowerBonus)) {
 			mod += 0.02 * e.power * player.racialTier(e.race);
 		}
+		for each (var f:SimpleRaceEnchantment in player.allEnchantments(EnchantmentLib.RaceSpellPowerDoubled)) {
+			mod += f.power * (player.isRaceCached(f.race)? 2:1);
+		}
         return mod;
     }
 
@@ -754,6 +757,9 @@ public class CombatMagic extends BaseCombatContent {
 				outputText("You spread your hands, letting mana flow through you. Your robe all but vanishes, and you thrust your hips forward, [cock] hardening slightly, your bulge standing up straight and tenting the sheer silk. Giving your enemy a cocky grin, you lick your lips, giving them a few thrusts of your hips. ");
 				outputText("[Themonster], stunned by the sudden change in your bearing and…manhood, gives you more than enough time to finish your spell. ");
 			}
+			if (player.perkv1(PerkLib.ImpNobility) > 0) {
+				outputText("  Your imp cohorts assist you spellcasting adding their diagrams to your own.");
+			}
 			var damage:Number = 0;
 			var damagemultiplier:Number = 1;
 			damage += combat.teases.teaseBaseLustDamage();
@@ -791,7 +797,7 @@ public class CombatMagic extends BaseCombatContent {
 		}
 	}
 
-	//THIS FEATURE GOVERS EVERY POST CAST EFFECT YOUR SPELLS MAY CAUSE
+	//THIS FEATURE GOVERNS EVERY POST CAST EFFECT YOUR SPELLS MAY CAUSE
 	public function MagicAddonEffect(numberOfProcs:Number = 1):void {
 		if (player.hasStatusEffect(StatusEffects.Venomancy)) {
 			if (player.tailVenom >= player.VenomWebCost()) {

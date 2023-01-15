@@ -384,6 +384,17 @@ import classes.CoC;
             }
         });
 
+        public static const JIANGSHI:int = _partid++;
+        EnumValue.add(Memories, JIANGSHI, "JIANGSHI", {
+            id: "Jiangshi Arms",
+            name: "Jiangshi Arms",
+            cost: 100,
+            title: "Jiangshi",
+            transformation: function(): Transformation {
+                return CoC.instance.transformations.ArmsJiangshi;
+            }
+        });
+
         public static const MANTIS:int = _partid++;
         EnumValue.add(Memories, MANTIS, "MANTIS", {
             id: "Mantis Arms",
@@ -582,6 +593,17 @@ import classes.CoC;
             }
         });
 
+        public static const TINY:int = _partid++;
+        EnumValue.add(Memories, TINY, "TINY", {
+            id: "Tiny Arms",
+            name: "Tiny Arms",
+            cost: 100,
+            title: "Tiny",
+            transformation: function(): Transformation {
+                return CoC.instance.transformations.ArmsTiny;
+            }
+        });
+
         public static const USHI_ONI:int = _partid++;
         EnumValue.add(Memories, USHI_ONI, "USHI_ONI", {
             id: "UshiOni Arms",
@@ -590,17 +612,6 @@ import classes.CoC;
             title: "UshiOni",
             transformation: function(): Transformation {
                 return CoC.instance.transformations.ArmsUshiOni;
-            }
-        });
-
-        public static const JIANGSHI:int = _partid++;
-        EnumValue.add(Memories, JIANGSHI, "JIANGSHI", {
-            id: "Jiangshi Arms",
-            name: "Jiangshi Arms",
-            cost: 100,
-            title: "Jiangshi",
-            transformation: function(): Transformation {
-                return CoC.instance.transformations.ArmsJiangshi;
             }
         });
 

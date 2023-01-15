@@ -48,6 +48,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		private var campScenes:CampScenes = new CampScenes();
 		private var checkedTurkey:int; //Make sure we test each of these events just once in timeChangeLarge
 		private var checkedHellhound:int; //Make sure we test each of these events just once in timeChangeLarge
+		private var checkedImp:int; //Make sure we test each of these events just once in timeChangeLarge
 		private var checkedDream:int;
 		private var dreams:Dreams = new Dreams();
 
@@ -56,6 +57,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			var needNext:Boolean;
 			checkedTurkey = 0;
 			checkedHellhound = 0;
+			checkedImp = 0;
 			checkedDream = 0;
 
 			if (player.cumMultiplier > 19999) player.cumMultiplier = 19999;
@@ -441,22 +443,6 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					needNext = true;
 				}
 			}
-			//Salamander bullshit
-			if (player.isRaceCached(Races.SALAMANDER,2) && !player.hasPerk(PerkLib.LustingWarrior) && player.hasStatusEffect(StatusEffects.Overheat))
-			{
-
-				outputText("\n\nYour so horny right now... so damn horny, you would beat up someone if only for something to blow up the steam." +
-						" As the thought rush to your mind your body react strangely it would seem your overwelming need as a salamander and your ability to lustzerk has actualy unlocked some form of new power within you." +
-						" You feel newfound strength, the strength required to defeat any adversary if only for a chance to fuck and you are very keen on using it right about now.");
-				player.createPerk(PerkLib.LustingWarrior, 0, 0, 0,0);
-				needNext = true;
-			}
-			if (!player.isRaceCached(Races.SALAMANDER, 2) && player.hasPerk(PerkLib.LustingWarrior))
-			{
-				outputText("\n\nAs you become less of a salamander the prodigious strength granted to you by your incontrollable libido recedes.");
-				player.removePerk(PerkLib.LustingWarrior);
-				needNext = true;
-			}
 
 			if (!player.hasStatusEffect(StatusEffects.Overheat) && (player.isRaceCached(Races.SALAMANDER) || player.isRaceCached(Races.KITSHOO) || player.isRaceCached(Races.HELLCAT) || player.hasStatusEffect(StatusEffects.HinezumiCoat)))
 			{
@@ -567,33 +553,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.changeStatusValue(StatusEffects.SlimeCraving, 2, 0); //Reset stored hp/toughness values
 				needNext = true;
 			}
-			if (!player.hasPerk(PerkLib.FluidBody) && player.isGoo() && (player.isAnyRace(Races.SLIME, Races.MAGMASLIME, Races.DARKSLIME))) {
-				outputText("\nWoa your body is so malleable now attacks running through you can't damage you much anymore. This said the feeling of being penetrated by just anything leaves you with mind melting pleasure.\n(<b>Gained New Perk: Fluid Body.</b>)\n");
-				player.createPerk(PerkLib.FluidBody, 0, 0, 0, 0);
-				needNext = true;
-			}
-			if (player.hasPerk(PerkLib.FluidBody) && !player.isGoo() && (!player.isAnyRace(Races.SLIME, Races.MAGMASLIME, Races.DARKSLIME))) {
-				outputText("\nYour body no longer being slime enough you worry that weapon will draw blood the next time they strike you as you lose your fluidic nature.\n(<b>Lost Perk: Fluid Body.</b>)\n");
-				player.removePerk(PerkLib.FluidBody);
-				needNext = true;
-			}
 			if (player.rearBody.type == RearBody.METAMORPHIC_GOO && !LowerBody.isGoo(player)) {
 				outputText("\n<b>Your body becomes way less malleable due to being less slime like.</b>\n");
 				player.rearBody.type = RearBody.NONE;
 				needNext = true;
-			}
-			if (!player.hasPerk(PerkLib.MorphicWeaponry) && (player.isRace(Races.DARKSLIME, 2) || player.isRace(Races.SLIME,2) || player.isRace(Races.MAGMASLIME, 2)) && player.buff("Fluid Growth").getValueOfStatBuff("tou.mult") > 50){
-				player.createPerk(PerkLib.MorphicWeaponry,0,0,0,0);
-				outputText("\nYour body has become so bloated with fluids and so large that you gain the ability to use your excess mass to form any number of additionnal tendrils wich you can use to attack your opponents.\n(<b>Gained New Perk: Morphic Weaponry.</b>\n>\n");
-			}
-			if (player.hasPerk(PerkLib.MorphicWeaponry) && ((!player.isRace(Races.DARKSLIME, 2) && !player.isRace(Races.SLIME,2) && !player.isRace(Races.MAGMASLIME, 2)) && player.buff("Fluid Growth").getValueOfStatBuff("tou.mult") <= 50)){
-				player.removePerk(PerkLib.MorphicWeaponry);
-				if((!player.isRace(Races.DARKSLIME, 2) && !player.isRace(Races.SLIME,2) && !player.isRace(Races.MAGMASLIME,2))){
-					outputText("\nAs you are mo longer a slime, you can't use the morphic weaponry ability anymore.\n(<b>Lost Perk: Morphic Weaponry.</b>\n>\n");
-				}
-				else{
-					outputText("\nHaving lost fluids, you no longer have enough body mass to produce extra tendril attacks.\n(<b>Lost Perk: Morphic Weaponry.</b>\n>\n");
-				}
 			}
 			if (player.hasStatusEffect(StatusEffects.Fullness)) {
 				player.addStatusValue(StatusEffects.Fullness, 1, -1);
@@ -639,55 +602,6 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					if (flags[kFLAGS.BIKINI_ARMOR_BONUS] > 8) flags[kFLAGS.BIKINI_ARMOR_BONUS] = 8;
 				}
 				else flags[kFLAGS.BIKINI_ARMOR_BONUS] = 0;
-			}
-			if (player.isRaceCached(Races.WEREWOLF) && player.hasPerk(PerkLib.LycanthropyDormant)) {
-				outputText("\nAs you become wolf enough your mind recedes into increasingly animalistic urges. It will only get worse as the moon comes closer to full. <b>Gained Lycanthropy.</b>\n");
-				var bonusStats:Number = 0;
-				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 3 || flags[kFLAGS.LUNA_MOON_CYCLE] == 5) bonusStats += 10;
-				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 2 || flags[kFLAGS.LUNA_MOON_CYCLE] == 6) bonusStats += 20;
-				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 1 || flags[kFLAGS.LUNA_MOON_CYCLE] == 7) bonusStats += 30;
-				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) bonusStats += 40;
-				player.createPerk(PerkLib.Lycanthropy,bonusStats,0,0,0);
-				player.statStore.replaceBuffObject({ 'str': bonusStats,'tou': bonusStats,'spe': bonusStats}, 'Lycanthropy', { text: 'Lycanthropy'});
-				player.removePerk(PerkLib.LycanthropyDormant);
-				needNext = true;
-			}
-			if (!player.isRaceCached(Races.WEREWOLF) && player.hasPerk(PerkLib.Lycanthropy)) {
-				outputText("\nYou feel your animalistic urges go dormant within you as you no longer are the werewolf you once were. <b>Gained Dormant lycanthropy.</b>\n");
-				player.createPerk(PerkLib.LycanthropyDormant,0,0,0,0);
-				player.statStore.removeBuffs("Lycanthropy");
-				player.removePerk(PerkLib.Lycanthropy);
-				needNext = true;
-			}
-			if (player.isRaceCached(Races.CERBERUS) && player.hasMutation(IMutationsLib.HellhoundFireBallsIM)) {
-				var pTier:Number = player.perkv1(IMutationsLib.HellhoundFireBallsIM);
-				if (pTier < 4 && player.level >= 30*pTier && player.perkv2(IMutationsLib.HellhoundFireBallsIM) >= 30*2*pTier) {
-					IMutationsLib.HellhoundFireBallsIM.acquireMutation(player, outputText("\nYour balls begin to suddenly feel heavier… warmer. You begin pumping your two penis absentmindedly thinking of all the bitches you recently broke on your twin shaft as the heat rushes all the way to your pair of erect members. You cum a humongous load of smoking warm cum, way to warm for normal seeds. It looks like your balls are progressively continuing their evolution to be more hellhound-like as your seed takes on burning hot property just like that of a hellhound.\n"));
-					needNext = true;
-				}
-			}
-			if (player.hasPerk(PerkLib.DominantAlpha)) player.DominantAlphaBonus();
-			if (player.hasPerk(PerkLib.Immortality) && !player.isRaceCached(Races.AZAZEL)) {
-				outputText("\nYou lose your sense of invulnerability as you are no longer an Azazel. <b>Perk lost: Immortality</b>\n");
-				player.removePerk(PerkLib.Immortality);
-				needNext = true;
-			}
-			if (!player.hasPerk(PerkLib.Immortality) && player.isRaceCached(Races.AZAZEL)) {
-				outputText("\nYou gain a sense of invulnerability as you are now an Azazel. <b>Perk gained: Immortality</b>\n");
-				player.createPerk(PerkLib.Immortality, 0, 0, 0, 0);
-				needNext = true;
-			}
-			if (player.hasPerk(PerkLib.WhatIsReality) && player.hasPerk(PerkLib.VorpalClaw) && !player.isRaceCached(Races.CHESHIRE)) {
-				outputText("\nYou lose your sense of invulnerability as you are no longer an Cheshire. <b>Perks lost: What is Reality? && Vorpal Claw</b>");
-				player.removePerk(PerkLib.WhatIsReality);
-				player.removePerk(PerkLib.VorpalClaw);
-				needNext = true;
-			}
-			if (!player.hasPerk(PerkLib.WhatIsReality) && !player.hasPerk(PerkLib.WhatIsReality) && player.isRaceCached(Races.CHESHIRE)) {
-				outputText("\nYou gain a sence of invulnerability as you are now an Cheshire. <b>Perk gained: What is Reality? && Vorpal Claw</b>");
-				player.createPerk(PerkLib.WhatIsReality, 0, 0, 0, 0);
-				player.createPerk(PerkLib.VorpalClaw, 0, 0, 0, 0);
-				needNext = true;
 			}
 			//No better place for these since the code for the event is part of CoC.as or one of its included files
 			if (flags[kFLAGS.TIME_SINCE_VALA_ATTEMPTED_RAPE_PC] > 0) flags[kFLAGS.TIME_SINCE_VALA_ATTEMPTED_RAPE_PC]--; //Vala post-rape countdown
@@ -1272,10 +1186,15 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 
 			player.updateRacialCache();
 			//Demonic hunger perk
-			if (player.isRaceCached(Races.DEMON) || player.hasPerk(PerkLib.Phylactery)) { //Check for being a demon enough
+			if (player.isAnyRaceCached(Races.DEMON, Races.IMP) || player.hasPerk(PerkLib.Phylactery)) { //Check for being a demon enough
 				if (!player.hasPerk(PerkLib.DemonEnergyThirst)) {
-					outputText("\nYou begin fantasising about pussies and cocks foaming at the idea of fucking or getting fucked. It would look like you aquired the demons hunger for sex and can now feed from the orgasms of your partners. \n\n(<b>Gained Perk: Demonic Hunger</b>)\n");
+					outputText("\nYou begin fantasising about pussies and cocks, foaming at the idea of fucking or getting fucked. It would look like you aquired the demons hunger for sex and can now feed from the orgasms of your partners. \n(<b>Gained Perk: Demonic Hunger</b>)\n");
 					player.createPerk(PerkLib.DemonEnergyThirst, 0, 0, 0, 0);
+					needNext = true;
+				}
+				if (!player.hasPerk(PerkLib.SoulEater)) {
+					outputText("\nYou begin to hunger after those demonic soul crystals, Lethicite. Perhaps yuo can find some to consume? You acquired the demons ability to consume Lethicite for power! \n(<b>Gained Perk: Soul Eater</b>)\n");
+					player.createPerk(PerkLib.SoulEater, 0, 0, 0, 0);
 					needNext = true;
 				}
 			} else { //Check for being a demon enough
@@ -1445,7 +1364,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (player.tailVenom > player.maxVenom()) player.tailVenom = player.maxVenom();
 			}
 			//DarkCharm
-			if (player.isRaceCached(Races.DEMON)) {
+			if (player.isAnyRaceCached(Races.DEMON, Races.IMP)) {
 				if (!player.hasPerk(PerkLib.DarkCharm)) {
 					outputText("\nYou feel a strange sensation in your body. With you looking like a demon, you have unlocked the potential to use demonic charm attacks!\n\n(<b>Gained Perk: Dark Charm</b>)\n");
 					player.createPerk(PerkLib.DarkCharm, 0, 0, 0, 0);
@@ -1470,36 +1389,37 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.JunglesWanderer);
 				//needNext = true;
 			}
-			//Freezing Breath
-			if (player.faceType == Face.WOLF && !player.hasPerk(PerkLib.FreezingBreath) && player.hasKeyItem("Gleipnir Collar") >= 0) {
-				outputText("\nYou suddenly feel something raging in you wanting to be unleashed as it slowly climbs out of your chest. It rushes through your throat and you scream a titanic primordial roar as the air in front of you ondulate with a massive drop of temperature and everything covers with a thick layer of solid ice. You massage your throat for a moment noticing as thin volume of condensation constantly escape from your maw.\n\n(<b>Gained Perk: Freezing Breath</b>)\n");
-				player.createPerk(PerkLib.FreezingBreath, 0, 0, 0, 0);
-				needNext = true;
-			}
-			else if (player.faceType != Face.WOLF && player.hasPerk(PerkLib.FreezingBreath) && player.hasKeyItem("Gleipnir Collar") >= 0) {
-				outputText("\nAs you no longer are wolf like enough to maintain the form of a full Fenrir your breath no longer freezes the ambient air.\n\n<b>(Lost Perk: Freezing Breath)</b>\n");
-				player.removePerk(PerkLib.FreezingBreath);
-				needNext = true;
-			}
-			//Fenrir Soulbite
-			if (player.faceType == Face.WOLF && !player.hasPerk(PerkLib.FenrirSpiritstrike) && player.hasKeyItem("Gleipnir Collar") >= 0) {
-				outputText("\nLike Fenrir you have aquired the ability to not only see souls but also tear them devouring your opponent very essence with every particularly devastating bite.\n\n(<b>Gained Perk: Spirit strike</b>)\n");
-				player.createPerk(PerkLib.FenrirSpiritstrike, 0, 0, 0, 0);
-				needNext = true;
-			}
-			//Fenrir Eyes
-			if (CoC.instance.transformations.EyesFenrir.isPossible() && player.hasKeyItem("Gleipnir Collar") >= 0) {
-				outputText("\n");
-				CoC.instance.transformations.EyesFenrir.applyEffect();
-				outputText("\n");
-				needNext = true;
-			}
-			//Fenrir Back Ice Shards
-			if (player.rearBody.type != RearBody.FENRIR_ICE_SPIKES && player.hasKeyItem("Gleipnir Collar") >= 0) {
-				outputText("\nYou feel an icy chill run through your body as your divine nature reasserts itself over your body. You won't escape your destiny as the Fenrir so easily, it seems.");
-				outputText("\n\nYou double over as ice once more bursts from your skin down your spine, covering your back in frozen spikes.\"<b>Your back is now covered with sharp ice spike, constantly cooling the air around you. (Gained Frozen Waste and Cold Mastery perks)</b>\"\n");
-				player.rearBody.type = RearBody.FENRIR_ICE_SPIKES;
-				needNext = true;
+			if (player.hasKeyItem("Gleipnir Collar") >= 0) {
+				//Freezing Breath
+				if (player.faceType == Face.WOLF && !player.hasPerk(PerkLib.FreezingBreath)) {
+					outputText("\nYou suddenly feel something raging in you wanting to be unleashed as it slowly climbs out of your chest. It rushes through your throat and you scream a titanic primordial roar as the air in front of you ondulate with a massive drop of temperature and everything covers with a thick layer of solid ice. You massage your throat for a moment noticing as thin volume of condensation constantly escape from your maw.\n\n(<b>Gained Perk: Freezing Breath</b>)\n");
+					player.createPerk(PerkLib.FreezingBreath, 0, 0, 0, 0);
+					needNext = true;
+				} else if (player.faceType != Face.WOLF && player.hasPerk(PerkLib.FreezingBreath)) {
+					outputText("\nAs you no longer are wolf like enough to maintain the form of a full Fenrir your breath no longer freezes the ambient air.\n\n<b>(Lost Perk: Freezing Breath)</b>\n");
+					player.removePerk(PerkLib.FreezingBreath);
+					needNext = true;
+				}
+				//Fenrir Soulbite
+				if (player.faceType == Face.WOLF && !player.hasPerk(PerkLib.FenrirSpiritstrike)) {
+					outputText("\nLike Fenrir you have aquired the ability to not only see souls but also tear them devouring your opponent very essence with every particularly devastating bite.\n\n(<b>Gained Perk: Spirit strike</b>)\n");
+					player.createPerk(PerkLib.FenrirSpiritstrike, 0, 0, 0, 0);
+					needNext = true;
+				}
+				//Fenrir Eyes
+				if (CoC.instance.transformations.EyesFenrir.isPossible()) {
+					outputText("\n");
+					CoC.instance.transformations.EyesFenrir.applyEffect();
+					outputText("\n");
+					needNext = true;
+				}
+				//Fenrir Back Ice Shards
+				if (player.rearBody.type != RearBody.FENRIR_ICE_SPIKES) {
+					outputText("\nYou feel an icy chill run through your body as your divine nature reasserts itself over your body. You won't escape your destiny as the Fenrir so easily, it seems.");
+					outputText("\n\nYou double over as ice once more bursts from your skin down your spine, covering your back in frozen spikes.\"<b>Your back is now covered with sharp ice spike, constantly cooling the air around you. (Gained Frozen Waste and Cold Mastery perks)</b>\"\n");
+					player.rearBody.type = RearBody.FENRIR_ICE_SPIKES;
+					needNext = true;
+				}
 			}
 			//Cold Affinity
 			if (player.perkv1(IMutationsLib.WhaleFatIM) >= 1 && !player.hasPerk(PerkLib.ColdAffinity)) {
@@ -1631,6 +1551,44 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				outputText("\n<b>(Lost Perk: Aquatic Affinity)</b>\n");
 				player.removePerk(PerkLib.AquaticAffinity);
 				needNext = true;
+			}
+			//Salamander bullshit
+			if (player.isRaceCached(Races.SALAMANDER,2) && !player.hasPerk(PerkLib.LustingWarrior) && player.hasStatusEffect(StatusEffects.Overheat))
+			{
+
+				outputText("\n\nYour so horny right now... so damn horny, you would beat up someone if only for something to blow up the steam." +
+						" As the thought rush to your mind your body react strangely it would seem your overwelming need as a salamander and your ability to lustzerk has actualy unlocked some form of new power within you." +
+						" You feel newfound strength, the strength required to defeat any adversary if only for a chance to fuck and you are very keen on using it right about now.");
+				player.createPerk(PerkLib.LustingWarrior, 0, 0, 0,0);
+				needNext = true;
+			}
+			if (!player.isRaceCached(Races.SALAMANDER, 2) && player.hasPerk(PerkLib.LustingWarrior))
+			{
+				outputText("\n\nAs you become less of a salamander the prodigious strength granted to you by your incontrollable libido recedes.");
+				player.removePerk(PerkLib.LustingWarrior);
+				needNext = true;
+			}if (!player.hasPerk(PerkLib.FluidBody) && player.isGoo() && (player.isAnyRace(Races.SLIME, Races.MAGMASLIME, Races.DARKSLIME))) {
+				outputText("\nWoa your body is so malleable now attacks running through you can't damage you much anymore. This said the feeling of being penetrated by just anything leaves you with mind melting pleasure.\n(<b>Gained New Perk: Fluid Body.</b>)\n");
+				player.createPerk(PerkLib.FluidBody, 0, 0, 0, 0);
+				needNext = true;
+			}
+			if (player.hasPerk(PerkLib.FluidBody) && !player.isGoo() && (!player.isAnyRace(Races.SLIME, Races.MAGMASLIME, Races.DARKSLIME))) {
+				outputText("\nYour body no longer being slime enough you worry that weapon will draw blood the next time they strike you as you lose your fluidic nature.\n(<b>Lost Perk: Fluid Body.</b>)\n");
+				player.removePerk(PerkLib.FluidBody);
+				needNext = true;
+			}
+			if (!player.hasPerk(PerkLib.MorphicWeaponry) && (player.isRace(Races.DARKSLIME, 2) || player.isRace(Races.SLIME,2) || player.isRace(Races.MAGMASLIME, 2)) && player.buff("Fluid Growth").getValueOfStatBuff("tou.mult") > 50){
+				player.createPerk(PerkLib.MorphicWeaponry,0,0,0,0);
+				outputText("\nYour body has become so bloated with fluids and so large that you gain the ability to use your excess mass to form any number of additionnal tendrils wich you can use to attack your opponents.\n(<b>Gained New Perk: Morphic Weaponry.</b>\n>\n");
+			}
+			if (player.hasPerk(PerkLib.MorphicWeaponry) && ((!player.isRace(Races.DARKSLIME, 2) && !player.isRace(Races.SLIME,2) && !player.isRace(Races.MAGMASLIME, 2)) && player.buff("Fluid Growth").getValueOfStatBuff("tou.mult") <= 50)){
+				player.removePerk(PerkLib.MorphicWeaponry);
+				if((!player.isRace(Races.DARKSLIME, 2) && !player.isRace(Races.SLIME,2) && !player.isRace(Races.MAGMASLIME,2))){
+					outputText("\nAs you are mo longer a slime, you can't use the morphic weaponry ability anymore.\n(<b>Lost Perk: Morphic Weaponry.</b>\n>\n");
+				}
+				else{
+					outputText("\nHaving lost fluids, you no longer have enough body mass to produce extra tendril attacks.\n(<b>Lost Perk: Morphic Weaponry.</b>\n>\n");
+				}
 			}
 			//Fire Affinity
 			if ((player.racialScoreCached(Races.SALAMANDER) >= 4 || player.isRaceCached(Races.PHOENIX) || player.isRaceCached(Races.HELLCAT) || player.isRaceCached(Races.FIRESNAILS) || (player.isRaceCached(Races.MOUSE, 2)) || player.isRaceCached(Races.KITSHOO) || player.isRaceCached(Races.CERBERUS)) && !player.hasPerk(PerkLib.FireAffinity)) {
@@ -2375,6 +2333,28 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.Venomancy);
 				needNext = true;
 			}
+			//Small Frame perk
+			if (player.isAnyRaceCached(Races.IMP, Races.MOUSE) && player.effectiveTallness <= 60 && !player.hasPerk(PerkLib.SmallFrame)) {
+				outputText("\nDue to your small build you have become harder to hit. <b>Gained perk: Small frame!</b>");
+				player.createPerk(PerkLib.SmallFrame, 0, 0, 0, 0);
+				needNext = true;
+			}
+			if (player.hasPerk(PerkLib.SmallFrame) && (player.effectiveTallness > 60 || !player.isAnyRaceCached(Races.IMP, Races.MOUSE))) {
+				outputText("\nDue to being too tall you no longer qualify. <b>Perk lost: Small frame.</b>");
+				player.removePerk(PerkLib.SmallFrame);
+				needNext = true;
+			}
+			//Small Caster perk
+			if (player.isAnyRaceCached(Races.IMP) && player.effectiveTallness <= 60 && !player.hasPerk(PerkLib.SmallCaster)) {
+				outputText("\nYour magic becomes more concentrated in your smaller body. <b>Gained perk: Small Caster!</b>");
+				player.createPerk(PerkLib.SmallCaster, 0, 0, 0, 0);
+				needNext = true;
+			}
+			if (player.hasPerk(PerkLib.SmallCaster) && (player.effectiveTallness > 60 || !player.isAnyRaceCached(Races.IMP))) {
+				outputText("\nDue to being too tall you no longer qualify. <b>Perk lost: Small Caster.</b>");
+				player.removePerk(PerkLib.SmallCaster);
+				needNext = true;
+			}
 			//Harpy
 			if (LowerBody.canLayEggs(player) && player.hasPerk(PerkLib.HarpyWomb)) { //Make eggs big if harpied!
 				if (player.hasStatusEffect(StatusEffects.Eggs) && player.statusEffectv2(StatusEffects.Eggs) == 0) {
@@ -2602,6 +2582,56 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 						needNext = true;
 					}
 				}
+			}
+
+			if (player.isRaceCached(Races.WEREWOLF) && player.hasPerk(PerkLib.LycanthropyDormant)) {
+				outputText("\nAs you become wolf enough your mind recedes into increasingly animalistic urges. It will only get worse as the moon comes closer to full. <b>Gained Lycanthropy.</b>\n");
+				var bonusStats:Number = 0;
+				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 3 || flags[kFLAGS.LUNA_MOON_CYCLE] == 5) bonusStats += 10;
+				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 2 || flags[kFLAGS.LUNA_MOON_CYCLE] == 6) bonusStats += 20;
+				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 1 || flags[kFLAGS.LUNA_MOON_CYCLE] == 7) bonusStats += 30;
+				if (flags[kFLAGS.LUNA_MOON_CYCLE] == 8) bonusStats += 40;
+				player.createPerk(PerkLib.Lycanthropy,bonusStats,0,0,0);
+				player.statStore.replaceBuffObject({ 'str': bonusStats,'tou': bonusStats,'spe': bonusStats}, 'Lycanthropy', { text: 'Lycanthropy'});
+				player.removePerk(PerkLib.LycanthropyDormant);
+				needNext = true;
+			}
+			if (!player.isRaceCached(Races.WEREWOLF) && player.hasPerk(PerkLib.Lycanthropy)) {
+				outputText("\nYou feel your animalistic urges go dormant within you as you no longer are the werewolf you once were. <b>Gained Dormant lycanthropy.</b>\n");
+				player.createPerk(PerkLib.LycanthropyDormant,0,0,0,0);
+				player.statStore.removeBuffs("Lycanthropy");
+				player.removePerk(PerkLib.Lycanthropy);
+				needNext = true;
+			}
+			if (player.isRaceCached(Races.CERBERUS) && player.hasMutation(IMutationsLib.HellhoundFireBallsIM)) {
+				var pTier:Number = player.perkv1(IMutationsLib.HellhoundFireBallsIM);
+				if (pTier < 4 && player.level >= 30*pTier && player.perkv2(IMutationsLib.HellhoundFireBallsIM) >= 30*2*pTier) {
+					IMutationsLib.HellhoundFireBallsIM.acquireMutation(player, outputText("\nYour balls begin to suddenly feel heavier… warmer. You begin pumping your two penis absentmindedly thinking of all the bitches you recently broke on your twin shaft as the heat rushes all the way to your pair of erect members. You cum a humongous load of smoking warm cum, way to warm for normal seeds. It looks like your balls are progressively continuing their evolution to be more hellhound-like as your seed takes on burning hot property just like that of a hellhound.\n"));
+					needNext = true;
+				}
+			}
+			if (player.hasPerk(PerkLib.DominantAlpha)) player.DominantAlphaBonus();
+			if (player.hasPerk(PerkLib.Immortality) && !player.isRaceCached(Races.AZAZEL)) {
+				outputText("\nYou lose your sense of invulnerability as you are no longer an Azazel. <b>Perk lost: Immortality</b>\n");
+				player.removePerk(PerkLib.Immortality);
+				needNext = true;
+			}
+			if (!player.hasPerk(PerkLib.Immortality) && player.isRaceCached(Races.AZAZEL)) {
+				outputText("\nYou gain a sense of invulnerability as you are now an Azazel. <b>Perk gained: Immortality</b>\n");
+				player.createPerk(PerkLib.Immortality, 0, 0, 0, 0);
+				needNext = true;
+			}
+			if (player.hasPerk(PerkLib.WhatIsReality) && player.hasPerk(PerkLib.VorpalClaw) && !player.isRaceCached(Races.CHESHIRE)) {
+				outputText("\nYou lose your sense of invulnerability as you are no longer an Cheshire. <b>Perks lost: What is Reality? && Vorpal Claw</b>");
+				player.removePerk(PerkLib.WhatIsReality);
+				player.removePerk(PerkLib.VorpalClaw);
+				needNext = true;
+			}
+			if (!player.hasPerk(PerkLib.WhatIsReality) && !player.hasPerk(PerkLib.WhatIsReality) && player.isRaceCached(Races.CHESHIRE)) {
+				outputText("\nYou gain a sence of invulnerability as you are now an Cheshire. <b>Perk gained: What is Reality? && Vorpal Claw</b>");
+				player.createPerk(PerkLib.WhatIsReality, 0, 0, 0, 0);
+				player.createPerk(PerkLib.VorpalClaw, 0, 0, 0, 0);
+				needNext = true;
 			}
 			if (player.inHeat) { //Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
 				if (player.statusEffectv3(StatusEffects.Heat) <= 1 || player.vaginas.length == 0) { //Remove bonus libido from heat
@@ -2844,6 +2874,13 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					needNext = true;
 				}
 			}
+			if (player.shieldName == "Tome of Imp" || player.shieldName == "cursed Tome of Imp") {
+				camp.codex.unlockEntry(kFLAGS.CODEX_ENTRY_IMP_TOME);
+				if (!camp.IsSleeping && !player.isRaceCached(Races.IMP, 3) && rand(3) < 2) {
+					CoC.instance.mutations.impTFgradual(player);
+					needNext = true;
+				}
+			}
 
 			//QUEST AREA
 			//Vala Gathering Quest
@@ -2924,6 +2961,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 						&& player.keyItemvX("Marae's Lethicite", 1) > 0 && !player.blockingBodyTransformations()) {
 					SceneLib.camp.campUniqueScenes.hellhoundCapture();
 					return true;
+				}
+				if (checkedImp++ == 0 && (player.shieldName == "Tome of Imp" || player.shieldName == "cursed Tome of Imp")) {
+					if (!camp.IsSleeping && rand(5) == 0 && player.isRaceCached(Races.IMP, 2) && !player.hasPerk(PerkLib.ImpNobility) && player.perkv1(PerkLib.DemonEnergyThirst) >= 50) {
+						SceneLib.camp.campUniqueScenes.impTomeScene();
+						return true;
+					}
 				}
 
                 if (LunaFullMoonScene){
