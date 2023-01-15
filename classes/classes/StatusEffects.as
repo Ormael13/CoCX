@@ -353,6 +353,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const Eggchest:StatusEffectType                       = mk("eggchest");
 		public static const Eggs:StatusEffectType                           = mk("eggs");
 		public static const ElementalEnergyConduits:StatusEffectType        = mk("Elemental Energy Conduits");
+		public static const ElementalPearlGolems:StatusEffectType        	= mk("Elemental Pearl Golems");
 		public static const EmberFuckCooldown:StatusEffectType              = mk("ember fuck cooldown");
 		public static const EmberNapping:StatusEffectType                   = mk("Ember Napping");
 		public static const EverRapedJojo:StatusEffectType                  = mk("Ever Raped Jojo");
