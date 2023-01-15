@@ -72,7 +72,7 @@ public class CerberusRace extends Race {
 				.hasPerk(PerkLib.Hellfire, +1);
 
 		addMutation(IMutationsLib.AlphaHowlIM);
-		addMutation(IMutationsLib.HellhoundFireBallsIM, +2);
+		addMutation(IMutationsLib.HellhoundFireBallsIM);
 
 		buildTier(24, "Cerberus")
 				.namesMaleFemaleMorphTaur("Hellhound Cerberus", "Barghest Cerberus", "Cerberus", "Cerberus-taur")
@@ -120,7 +120,7 @@ public class CerberusRace extends Race {
 	}
 
 	public static function isCerberus(body:BodyData):Boolean {
-		return body.armType == Arms.HOUND;
+		return body.faceType == Face.CERBERUS;
 	}
 }
 }

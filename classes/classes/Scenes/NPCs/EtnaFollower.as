@@ -1107,6 +1107,7 @@ private function etnaJumpsPCinCamp():void {
 		outputText("“<i>Until you can fulfill your promise I will be hunting outside and only coming back by night time. You know what to do!</i>”[pg]");
 		outputText("Maybe you do need a dick to satisfy her?");
 		EtnaHunting = true;
+		doNext(playerMenu);
 		return;
 	}
 	menu();

@@ -6646,7 +6646,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //DA TAIL (IF ALREADY HAZ URZ)
-        if (!Tail.hasFelineTail(player.tailType) && (player.ears.type == Ears.CAT || player.ears.type == Ears.DISPLACER) && rand(3) == 0 && changes < changeLimit) {
+        if (!Tail.hasFelineTail(player) && (player.ears.type == Ears.CAT || player.ears.type == Ears.DISPLACER) && rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]");
             transformations.TailCat.applyEffect();
             changes++;
