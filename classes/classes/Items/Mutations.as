@@ -24,6 +24,7 @@ public final class Mutations extends MutationsHelper {
     //const BIKINI_ARMOR_BONUS:int = 769;
 
     public var emberTFchanges:EmberTF = new EmberTF();
+	public var saveUpdater:SaveUpdater = new SaveUpdater();
 
     public function DrunkenPowerEmpower():void {
         var bonusempower:Number = 60;
@@ -2599,6 +2600,7 @@ public final class Mutations extends MutationsHelper {
         player.createPerk(PerkLib.TransformationImmunity2, 0, 0, 0, 0);
 
         player.removeAllRacialMutation();
+		saveUpdater.bringBackEncoutersForSouless();
 
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
     }

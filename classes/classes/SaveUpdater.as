@@ -405,6 +405,16 @@ public class SaveUpdater extends NPCAwareContent {
 		if (achStat.achievementsTotalCurrentlyUnlocked >= 300) awardAchievement("Achievements - Going Deeper (3rd layer)", kACHIEVEMENTS.EPIC_ACHIEVEMENTS_GOING_DEEPER_3L);
 		if (achStat.achievementsTotalCurrentlyUnlocked >= 600) awardAchievement("Achievements Limbo", kACHIEVEMENTS.EPIC_ACHIEVEMENTS_LIMBO);
 	}
+	
+	public function bringBackEncoutersForSouless():void {
+		if (flags[kFLAGS.SOUL_SENSE_GIACOMO] >= 3) flags[kFLAGS.SOUL_SENSE_GIACOMO] = 2;
+		if (flags[kFLAGS.SOUL_SENSE_TAMANI] >= 3) flags[kFLAGS.SOUL_SENSE_TAMANI] = 2;
+		if (flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] >= 3) flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] = 2;
+		if (flags[kFLAGS.SOUL_SENSE_PRISCILLA] >= 3) flags[kFLAGS.SOUL_SENSE_PRISCILLA] = 2;
+		if (flags[kFLAGS.SOUL_SENSE_KITSUNE_MANSION] >= 3) flags[kFLAGS.SOUL_SENSE_KITSUNE_MANSION] = 2;
+		if (flags[kFLAGS.SOUL_SENSE_IZUMI] >= 3) flags[kFLAGS.SOUL_SENSE_IZUMI] = 2;
+		if (flags[kFLAGS.SOUL_SENSE_MINOTAUR_SONS] >= 3) flags[kFLAGS.SOUL_SENSE_MINOTAUR_SONS] = 2;
+	}
 
 	public function fixFlags():void {
 		//Marae
@@ -1976,6 +1986,10 @@ public class SaveUpdater extends NPCAwareContent {
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.042) {
 				if (player.hasPerk(PerkLib.HellfireCoat) && !player.hasPerk(PerkLib.TransformationImmunity2)) player.createPerk(PerkLib.TransformationImmunity2, 3, 0, 0, 0);
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.042;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.043) {
+				if (player.hasPerk(PerkLib.Soulless)) bringBackEncoutersForSouless();
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.043;
 			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
