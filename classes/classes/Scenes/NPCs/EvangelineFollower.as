@@ -1127,12 +1127,12 @@ private function InternalMutations():void {
 		}
 		doNext(meetEvangeline);
 	}
-}
 
-private function IMutationsGemsOrMutagen(costType:int = 0):void {
-	outputText("\n\nEvangeline prepares her alchemy lab as she sterilizes a syringe.\n\n\"<i>I can craft a mutagen out of common material or use the one you found to alter one of your organs. The change will be difficult to reverse, though. You'd better make sure this is what you want. Which mutagen would you like me to craft?</i>\"");
-	GoM = costType;
-	IMutationsSelector(0);
+	function IMutationsGemsOrMutagen(costType:int = 0):void {
+		outputText("\n\nEvangeline prepares her alchemy lab as she sterilizes a syringe.\n\n\"<i>I can craft a mutagen out of common material or use the one you found to alter one of your organs. The change will be difficult to reverse, though. You'd better make sure this is what you want. Which mutagen would you like me to craft?</i>\"");
+		GoM = costType;
+		IMutationsSelector(0);
+	}
 }
 
 private function IMutationsSelector(page:int = 0):void {
