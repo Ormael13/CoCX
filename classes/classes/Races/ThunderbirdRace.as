@@ -54,6 +54,7 @@ public class ThunderbirdRace extends Race {
 		addMutation(IMutationsLib.HarpyHollowBonesIM);
 		
 		buildTier(16, "thunderbird")
+				.requireWingType(Wings.FEATHERED_LARGE)
 				.buffs({
 					"tou.mult": -0.20,
 					"spe.mult": +1.20,
@@ -62,6 +63,7 @@ public class ThunderbirdRace extends Race {
 				.end();
 		
 		buildTier(21, "greater thunderbird")
+				.requirePreviousTier()
 				.buffs({
 					"tou.mult": -0.25,
 					"spe.mult": +1.55,

@@ -66,6 +66,7 @@ public class RaijuRace extends Race {
 		addMutation(IMutationsLib.RaijuCathodeIM);
 		
 		buildTier(10, "raiju")
+				.requireWingType(Wings.THUNDEROUS_AURA)
 				.namesTauric("raiju", "raiju-taur")
 				.buffs({
 					"spe.mult": +0.70,
@@ -77,6 +78,7 @@ public class RaijuRace extends Race {
 		
 		buildTier(20, "greater raiju")
 				.namesTauric("greater raiju", "greater raiju-taur")
+				.requirePreviousTier()
 				.buffs({
 					"spe.mult": +1.50,
 					"int.mult": +0.50,
