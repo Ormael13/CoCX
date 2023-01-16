@@ -6532,7 +6532,7 @@
 		<!-- FULL BODY AREA -->
 		
 		<!-- Imp -->
-		<if test="IsImp">
+		<if test="horns.type == Horns.ARCH_IMP">
 			<!-- Hide everything else -->
 			<hide part="*"/>
 			<show part="fullbodyBg/imp"/>

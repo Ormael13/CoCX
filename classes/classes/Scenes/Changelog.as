@@ -112,9 +112,9 @@ public class Changelog extends BaseContent
 			outputText("-Elemental Pearls can be now found fighting enemeis that are encoutered by going to summoning elementals menu and picking option to go on journey there (would only be possible if PC need to find one of three pearls).\n");
 			outputText("-Add the Imp Race. Arch imp is a new PermTF once you progress far enough along the Imp race, and allows you to recruit imps to assist you in combat with their lewdness. (EragonX)\n");
 			outputText("-Add the Tome of Imps - a unique drop from imps (shield slot) (EragonX)\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-3rd tier of wolf race bonuses been increased from 21 to 22 pts and bonuses boosted accordly (and then doubled due to 2 body slots been locked similary to perm tf's). It stronger variant of bite would also deal dmg/leqve bleeding wounds on top of injecting cold energy into enemy body.\n");
+			outputText("-Sprite addition including imp and black nako bottom and top. (Liadri)\n");
+			outputText("-Fixes: Staff with cursed shield bug, etna freakout to female (EragonX)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
