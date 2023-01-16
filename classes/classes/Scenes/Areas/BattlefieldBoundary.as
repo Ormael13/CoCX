@@ -29,7 +29,7 @@ use namespace CoC;
 		}
 
 		private function init():void {
-			_battlefieldBoundaryEncounter = Encounters.group({
+			_battlefieldBoundaryEncounter = Encounters.group("batllefieldboundary", {
 				//Discover Outer Battlefield
 				name: "discoverOuter",
 				chance: 30,

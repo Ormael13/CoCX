@@ -85,8 +85,9 @@ public class ImpRace extends Race {
 				.skinPlainOnly(+1)
 				.customRequirement("", "Male red or Female purple skin",
 						function (body:BodyData):Boolean {
-							return (body.hasCock && body.hasVagina ? Utils.InCollection(body.skinColor1, ImpSkinColors) :
-									body.hasVagina ? body.skinColor1 == "purple" : body.skinColor1 == "red")
+							return (body.hasCock && body.hasVagina ? Utils.InCollection(body.skinColor1, ImpSkinColors):
+									body.hasVagina ? body.skinColor1 == Utils.InCollection(body.skinColor1, ImpSkinColorsFemale):
+											Utils.InCollection(body.skinColor1, ImpSkinColorsMale))
 						}, +1, -1000)
 				.plainSkinOfAdj(NOT("slippery"), +1)
 				.eyeTypeAndColor(Eyes.HUMAN, ANY(ImpEyeColors), +1)

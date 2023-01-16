@@ -2227,6 +2227,8 @@ public final class Mutations extends MutationsHelper {
         outputText("\n<b>Upgraded Ability: Bite -> Tripple Bite</b>");
         outputText("\n<b>Upgraded Ability: Hellfire -> tripple effect</b>");
         outputText("\n<b>Gained Ability: Terrifying Howl</b>");
+        if (player.hasPerk(PerkLib.RacialParagon))
+            flags[kFLAGS.APEX_SELECTED_RACE] = Races.CERBERUS;
         player.removeAllRacialMutation();
         if (player.cor < 50) player.cor = 50;
         outputText("\n<b>Gained Mutation: Hellhound Fireballs</b>");

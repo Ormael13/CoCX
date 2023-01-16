@@ -34,7 +34,7 @@ public class BattlefieldOuter extends BaseContent
 	}
 
 	private function init():void {
-		_battlefieldOuterEncounter = Encounters.group(/*{
+		_battlefieldOuterEncounter = Encounters.group("batllefieldouter", /*{
 			//Discover Inner Battlefield
 			name: "discoverInner",
 			chance: 30,

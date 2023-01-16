@@ -5006,8 +5006,10 @@ use namespace CoC;
 		}
 
 		public function removeAllRacialMutation():void {
+			//PermTFTrueMutations();	//Uncomment to unleash armageddon..... or when ready to roll out "true" mutations.
+
 			for each (var pPerks:IMutationPerkType in IMutationsLib.mutationsArray("")){
-				if (hasPerk(pPerks)){
+				if (hasPerk(pPerks) && !pPerks.trueMutation){
 					removePerk(pPerks);
 					//perkPoints += 1;
 				}
@@ -5060,8 +5062,6 @@ use namespace CoC;
 				removePerk(PerkLib.ChimericalBodySemiEpicStage);
 				perkPoints += 1;
 			}
-			//PermTFTrueMutations();	//Uncomment to unleash armageddon..... or when ready to roll out "true" mutations.
-
 		}
 
 		public function PermTFTrueMutations():void{
