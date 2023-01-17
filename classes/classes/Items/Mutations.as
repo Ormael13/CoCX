@@ -2590,6 +2590,7 @@ public final class Mutations extends MutationsHelper {
         changes++;
 
         transformations.SkinPatternArchImp.applyEffect(false);
+        player.skinColor2 = "midnight black";
 
         outputText("\n<b>Gained Perk: Imp Nobility!</b> "+PerkLib.ImpNobility.desc());
         player.createPerk(PerkLib.ImpNobility, 0, 0, 0, 0);

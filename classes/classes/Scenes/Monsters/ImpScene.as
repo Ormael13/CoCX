@@ -60,7 +60,6 @@ use namespace CoC;
 				if ((player.shieldName == "Tome of Imp" || player.shieldName == "cursed Tome of Imp") && player.isRaceCached(Races.IMP, 3)) {
 					addButtonIfTrue(0, "Male Dom", dominateM, ("Req. dick with area smaller than " + monster.analCapacity()), player.cockThatFits(monster.analCapacity()) >= 0, "Teach the imp a lesson and ram his butt with your dick!");
 					addButtonIfTrue(1, "Female Dom", dominateF, "Req. a vagina", player.hasVagina(), "Dominate and ride the imp's large dick vaginally.");
-
 				}
 				addButton(2, "Oral Give", oralGive);
 				addButton(3, "AnalReceive", analReceive);
@@ -1760,6 +1759,10 @@ use namespace CoC;
                 addButtonIfTrue(0,"FuckHisAss", impLordBumPlug, "Req. cock with area smaller than " + monster.analCapacity(), player.cockThatFits(monster.analCapacity()) >= 0);
                 addButtonIfTrue(1,"Get Blown", getBlownByAnImpLord, "Req. cock", player.hasCock());
                 addButtonIfTrue(2,"Ride Cock", femaleVagRape, "Req. vagina", player.hasVagina());
+				if ((player.shieldName == "Tome of Imp" || player.shieldName == "cursed Tome of Imp") && player.isRaceCached(Races.IMP, 3)) {
+					addButtonIfTrue(6, "Male Dom", dominateM, ("Req. dick with area smaller than " + monster.analCapacity()), player.cockThatFits(monster.analCapacity()) >= 0, "Teach the imp a lesson and ram his butt with your dick!");
+					addButtonIfTrue(7, "Female Dom", dominateF, "Req. a vagina", player.hasVagina(), "Dominate and ride the imp's large dick vaginally.");
+				}
 				if (monster.short != "imp overlord" && monster.short != "imp warlord") addButton(3,"Breastfeed",feederBreastfeedRape)
 					.disableIf(!player.hasPerk(PerkLib.Feeder), "Req. Feeder perk");
 				LustyMaidensArmor.addTitfuckButton(4);
