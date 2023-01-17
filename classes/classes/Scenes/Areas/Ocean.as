@@ -8,6 +8,8 @@ package classes.Scenes.Areas
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.API.Encounters;
+import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Ocean.*;
 import classes.Scenes.NPCs.CeaniScene;
 import classes.Scenes.Places.Boat.SharkGirlScene;
@@ -21,88 +23,106 @@ use namespace CoC;
 		public var sharkGirlScene:SharkGirlScene = new SharkGirlScene();
 		public var scyllaScene:ScyllaScene = new ScyllaScene();
 		
-		public function Ocean() 
-		{
+		public function Ocean() {
+			onGameInit(init);
 		}
-		
-		public function exploreOcean():void {
-			flags[kFLAGS.DISCOVERED_OCEAN]++;
-			
-			var choice:Array = [];
-			var select:int;
-			
-			//Build choice list!
-			choice[choice.length] = 0;	//SeaAnemone
-			choice[choice.length] = 1;	//Scylla
-			choice[choice.length] = 2;	//Shark girl
-			choice[choice.length] = 3;	//Tiger Shark girl
-			choice[choice.length] = 4;	//Shark girls pack + Tiger Shark Alpha
-			if (player.hasKeyItem("Fishing Pole") >= 0) choice[choice.length] = 5;	//Fishing
-			if (rand(4) == 0) choice[choice.length] = 6;	 //Find nothing! The rand will be removed from this once the Ocean is populated with more encounters.
-			
-			//Ceani
-			if ((model.time.hours >= 12 && model.time.hours <= 22) && flags[kFLAGS.CEANI_FOLLOWER] < 1 && flags[kFLAGS.CEANI_ARCHERY_TRAINING] >= 4 && rand(4) == 0) {
-				ceaniScene.oceanInteractionsAfterArcheryTraining();
-				return;
-			}
-			
-			select = choice[rand(choice.length)];
-			switch(select) {
-				case 0:
+
+		private var _oceanEncounter:GroupEncounter = null;
+		public function get oceanEncounter():GroupEncounter {
+			return _oceanEncounter;
+		}
+
+		private function init():void {
+			_oceanEncounter = Encounters.group("ocean", {
+				name: "fishing",
+				when: function ():Boolean {
+					return player.hasKeyItem("Fishing Pole") >= 0
+				},
+				call: fishing
+			}, {
+				name: "nothing",
+				chance:  0.25,
+				call: findNothing
+			}, {
+				name: "ceani",
+				when: function ():Boolean {
+					return (model.time.hours >= 12 && model.time.hours <= 22) && flags[kFLAGS.CEANI_FOLLOWER] < 1 && flags[kFLAGS.CEANI_ARCHERY_TRAINING] >= 4
+				},
+				call: ceaniScene.oceanInteractionsAfterArcheryTraining
+			}, {
+				name: "seaanemone",
+				call: function ():void {
 					flags[kFLAGS.ANEMONE_OR_SEA_ANEMONE] = 2;
 					player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
 					player.createStatusEffect(StatusEffects.InWater,0,0,0,0);
 					SceneLib.boat.anemoneScene.mortalAnemoneeeeee();
-					break;
-				case 1:
+				}
+			}, {
+				name: "scylla",
+				call: function ():void {
 					player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
 					player.createStatusEffect(StatusEffects.InWater,0,0,0,0);
 					scyllaScene.oceanScyllaEncounter();
-					break;
-				case 2:
+				}
+			}, {
+				name: "sharkgirl",
+				call: function ():void {
 					flags[kFLAGS.SHARK_OR_TIGERSHARK_GIRL] = 1;
 					player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
 					player.createStatusEffect(StatusEffects.InWater,0,0,0,0);
 					sharkGirlScene.oceanSharkGirlEncounter();
-					break;
-				case 3:
+				}
+			}, {
+				name: "tigersharkgirl",
+				call: function ():void {
 					flags[kFLAGS.SHARK_OR_TIGERSHARK_GIRL] = 2;
 					player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
 					player.createStatusEffect(StatusEffects.InWater,0,0,0,0);
 					sharkGirlScene.oceanTigersharkGirlEncounter();
-					break;
-				case 4:
+				}
+			}, {
+				name: "sharkgirlpack",
+				call: function ():void {
 					flags[kFLAGS.SHARK_OR_TIGERSHARK_GIRL] = 1;
 					player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
 					player.createStatusEffect(StatusEffects.InWater,0,0,0,0);
 					sharkGirlScene.oceanSharkGirlsPackEncounter();
-					break;
-				case 5:
-					clearOutput();
-					outputText("This is a calm day on the ocean, you managed to hold your boat just a mile or two away from the brewing storm that constantly rage over the area and, while you found nothing of note, couldn’t help yourself but to enjoy a few hour using your newly acquired fishing pole.\n\n");
-					outputText("<b>You got a fish!</b>");
-					inventory.takeItem(consumables.FREFISH, camp.returnToCampUseOneHour);
-					break;
-				default:
-					clearOutput();
-					outputText("You row for over an hour, until your arms practically burn with exhaustion from all the rowing.\n\n");
-					if (rand(2) == 0) {
-						//50/50 strength/speed
-						if (rand(2) == 0 && player.str < 150) {
-							outputText("Despite the exaustion, you feel like you have become stronger.");
-							dynStats("str", .5);
-						}
-						//Toughness
-						else if (player.spe < 150) {
-							outputText("Despite the exaustion, you feel like you have become faster.");
-							dynStats("spe", .5);
-						}
-					}
-					doNext(camp.returnToCampUseTwoHours);
-			}
-			
+				}
+			})
 		}
-		
+
+		public function exploreOcean():void {
+			clearOutput();
+			flags[kFLAGS.DISCOVERED_OCEAN]++;
+			doNext(camp.returnToCampUseOneHour);
+			oceanEncounter.execEncounter();
+			flushOutputTextToGUI();
+		}
+
+		private function findNothing():void {
+			clearOutput();
+			outputText("You row for over an hour, until your arms practically burn with exhaustion from all the rowing.\n\n");
+			if (rand(2) == 0) {
+				//50/50 strength/speed
+				if (rand(2) == 0 && player.str < 150) {
+					outputText("Despite the exaustion, you feel like you have become stronger.");
+					dynStats("str", .5);
+				}
+				//Toughness
+				else if (player.spe < 150) {
+					outputText("Despite the exaustion, you feel like you have become faster.");
+					dynStats("spe", .5);
+				}
+			}
+			doNext(camp.returnToCampUseTwoHours);
+		}
+
+		private function fishing():void {
+			clearOutput();
+			outputText("This is a calm day on the ocean, you managed to hold your boat just a mile or two away from the brewing storm that constantly rage over the area and, while you found nothing of note, couldn’t help yourself but to enjoy a few hour using your newly acquired fishing pole.\n\n");
+			outputText("<b>You got a fish!</b>");
+			inventory.takeItem(consumables.FREFISH, camp.returnToCampUseOneHour);
+		}
 	}
 
 }

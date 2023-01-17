@@ -47,7 +47,7 @@ public class Ashlands extends BaseContent
 			when: function ():Boolean {
 				return flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] <= 0 && (player.level + combat.playerLevelAdjustment()) >= 65
 			},
-			call: discoverCrags()
+			call: discoverCrags
 		}, {
 			name: "phoenix",
 			night : false,

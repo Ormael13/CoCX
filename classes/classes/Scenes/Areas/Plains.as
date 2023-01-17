@@ -299,7 +299,9 @@ use namespace CoC;
 		public function explorePlains():void {
 			clearOutput();
 			flags[kFLAGS.TIMES_EXPLORED_PLAINS]++;
+			doNext(camp.returnToCampUseOneHour);
 			explorationEncounter.execEncounter();
+			flushOutputTextToGUI();
 		}
 		public function partsofSnippler():void {
 			clearOutput();
