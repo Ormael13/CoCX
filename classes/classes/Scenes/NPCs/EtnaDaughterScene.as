@@ -12,7 +12,7 @@ public class EtnaDaughterScene extends NPCAwareContent implements TimeAwareInter
 	private var checkedEtnaDaughter:int;
 
 	public function stateObjectName():String {
-		return "EtnaSpawn";
+		return "EtnaDaughterScene";
 	}
 
 	public function resetState():void {
@@ -55,8 +55,12 @@ public class EtnaDaughterScene extends NPCAwareContent implements TimeAwareInter
 		return false;
 	}
 
+	public function EtnaDaughterScene() {
+		EventParser.timeAwareClassAdd(this);
+		Saves.registerSaveableState(this);
+	}
 
-public function etnaDaughterFollower():Boolean {
+	public function etnaDaughterFollower():Boolean {
 	return EtnaDaughterAge > 0;
 }
 
@@ -71,7 +75,6 @@ private function championRef():String {
 //[NEXT]
 public function nameEtnaDaughter():void {
 	spriteSelect(SpriteDb.s_etna);
-	clearOutput();
 	outputText("“<i>What will we name her? I didn’t have time to think of a suitable name it all happened so fast… as my mate I think the decision goes to you [name]</i>” [pg]");
 	menu();
 	addButton(0,"Next",applyEtnaDaughterName);
@@ -82,7 +85,6 @@ public function nameEtnaDaughter():void {
 	mainView.nameBox.y = mainView.mainText.y + 3 + mainView.mainText.textHeight;
 }
 private function applyEtnaDaughterName():void {
-	helScene.helSprite();
 	//Easter Egg Names Hel WILL NOT ALLOW:
 	if (CoC.instance.testingBlockExiting)
 	{
@@ -93,7 +95,7 @@ private function applyEtnaDaughterName():void {
 	else if(mainView.nameBox.text == "")
 	{
 		clearOutput();
-		if(mainView.nameBox.text == "") outputText("<i>Please give her a name [name].</i>”");
+		if(mainView.nameBox.text == "") outputText("“<i>Please give her a name [name].</i>”");
 		//[Back to the name field you go!]
 		menu();
 		mainView.nameBox.x = mainView.mainText.x + 5;
@@ -161,7 +163,7 @@ private function talkToEtnaDaughter():void {
 	} else if (temp == 1) {
 		outputText("“<i>I went playing by the stream, the fish are so boring. However, an ugly little man in red came by. I milked him dry just like mama told me!</i>”[pg]]" +
 				"Perhaps you should keep watch over her but since Etna doesn't seem to be worried you could also just let her have her fun.\n");
-		if (EtnaDaughterGuardingCamp == 0) EtnaDaughterGuardingCamp = 1;	//TODO guard camp scene
+		if (EtnaDaughterGuardingCamp == 0) EtnaDaughterGuardingCamp = 1;
 		doNext(camp.returnToCampUseOneHour);
 	} else if (temp == 2) {
 		outputText("”<i>I made a friend! Look here she is!</i>”[pg]" +
