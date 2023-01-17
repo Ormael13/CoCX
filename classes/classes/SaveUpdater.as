@@ -1991,6 +1991,10 @@ public class SaveUpdater extends NPCAwareContent {
 				if (player.hasPerk(PerkLib.Soulless)) bringBackEncoutersForSouless();
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.043;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.044) {
+				if (player.hasPerk(PerkLib.Soulless)) player.skinColor2 = "midnight black";
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.044;
+			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
 		}
