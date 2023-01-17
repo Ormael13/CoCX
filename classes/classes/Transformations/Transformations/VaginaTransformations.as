@@ -144,7 +144,7 @@ public class VaginaTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return player.hasVagina() && player.vaginaType(-1, vagina) == VaginaClass.HUMAN;
+					return vagina < player.vaginas.length && player.vaginas[vagina].type == VaginaClass.HUMAN;
 				}
 		);
 	}
@@ -175,7 +175,7 @@ public class VaginaTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return player.hasVagina() && player.vaginaType(-1, vagina) == VaginaClass.EQUINE;
+					return vagina < player.vaginas.length && player.vaginas[vagina].type == VaginaClass.EQUINE;
 				}
 		);
 	}
@@ -218,7 +218,7 @@ public class VaginaTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return player.hasVagina() && player.vaginaType(-1, vagina) == VaginaClass.KIRIN;
+					return vagina < player.vaginas.length && player.vaginas[vagina].type == VaginaClass.KIRIN;
 				}
 		);
 	}
@@ -252,7 +252,7 @@ public class VaginaTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return player.hasVagina() && player.vaginaType(-1, vagina) == VaginaClass.BLACK_SAND_TRAP;
+					return vagina < player.vaginas.length && player.vaginas[vagina].type == VaginaClass.BLACK_SAND_TRAP;
 				}
 		);
 	}
@@ -279,7 +279,7 @@ public class VaginaTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return player.hasVagina() && player.vaginaType(-1, vagina) == VaginaClass.CAVE_WYRM;
+					return vagina < player.vaginas.length && player.vaginas[vagina].type == VaginaClass.CAVE_WYRM;
 				}
 		);
 	}
@@ -316,7 +316,7 @@ public class VaginaTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return player.hasVagina() && player.vaginaType(-1, vagina) == VaginaClass.VENOM_DRIPPING;
+					return vagina < player.vaginas.length && player.vaginas[vagina].type == VaginaClass.VENOM_DRIPPING;
 				}
 		);
 	}
@@ -347,7 +347,7 @@ public class VaginaTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return player.hasVagina() && player.vaginaType(-1, vagina) == VaginaClass.MANTICORE;
+					return vagina < player.vaginas.length && player.vaginas[vagina].type == VaginaClass.MANTICORE;
 				}
 		);
 	}
@@ -380,7 +380,7 @@ public class VaginaTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return player.hasVagina() && player.vaginaType(-1, vagina) == VaginaClass.CANCER;
+					return vagina < player.vaginas.length && player.vaginas[vagina].type == VaginaClass.CANCER;
 				}
 		);
 	}
@@ -407,7 +407,7 @@ public class VaginaTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return player.hasVagina() && player.vaginaType(-1, vagina) == VaginaClass.DEMONIC;
+					return vagina < player.vaginas.length && player.vaginas[vagina].type == VaginaClass.DEMONIC;
 				}
 		);
 	}
@@ -438,7 +438,7 @@ public class VaginaTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return player.hasVagina() && player.vaginaType(-1, vagina) == VaginaClass.SCYLLA;
+					return vagina < player.vaginas.length && player.vaginas[vagina].type == VaginaClass.SCYLLA;
 				},
 				function ():Boolean {
 					return player.lowerBody == LowerBody.SCYLLA;
@@ -472,7 +472,7 @@ public class VaginaTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return player.hasVagina() && player.vaginaType(-1, vagina) == VaginaClass.NAGA;
+					return vagina < player.vaginas.length && player.vaginas[vagina].type == VaginaClass.NAGA;
 				},
 				// is possible
 				function ():Boolean {
@@ -507,7 +507,7 @@ public class VaginaTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return player.hasVagina() && player.vaginaType(-1, vagina) == VaginaClass.SHARK;
+					return vagina < player.vaginas.length && player.vaginas[vagina].type == VaginaClass.SHARK;
 				}
 		);
 	}
@@ -535,7 +535,7 @@ public class VaginaTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return player.hasVagina() && player.vaginaType(-1, vagina) == VaginaClass.RAIJU;
+					return vagina < player.vaginas.length && player.vaginas[vagina].type == VaginaClass.RAIJU;
 				}
 		);
 	}
@@ -561,7 +561,7 @@ public class VaginaTransformations extends MutationsHelper {
 				},
 				// is present
 				function ():Boolean {
-					return player.hasVagina() && player.vaginaType(-1, vagina) == VaginaClass.ALRAUNE;
+					return vagina < player.vaginas.length && player.vaginas[vagina].type == VaginaClass.ALRAUNE;
 				}
 		);
 	}

@@ -32,7 +32,7 @@ public class BattlefieldInner extends BaseContent
 	}
 
 	private function init():void {
-		_battlefieldInnerEncounter = Encounters.group( {
+		_battlefieldInnerEncounter = Encounters.group("batllefieldinner",  {
 			name: "items",
 			call: findItems
 		}, {

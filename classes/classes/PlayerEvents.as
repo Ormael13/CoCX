@@ -1192,7 +1192,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					player.createPerk(PerkLib.DemonEnergyThirst, 0, 0, 0, 0);
 					needNext = true;
 				}
-				if (!player.hasPerk(PerkLib.SoulEater)) {
+				if (player.hasPerk(PerkLib.Soulless) && !player.hasPerk(PerkLib.SoulEater)) {
 					outputText("\nYou begin to hunger after those demonic soul crystals, Lethicite. Perhaps yuo can find some to consume? You acquired the demons ability to consume Lethicite for power! \n(<b>Gained Perk: Soul Eater</b>)\n");
 					player.createPerk(PerkLib.SoulEater, 0, 0, 0, 0);
 					needNext = true;
@@ -2605,7 +2605,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			if (player.isRaceCached(Races.CERBERUS) && player.hasMutation(IMutationsLib.HellhoundFireBallsIM)) {
 				var pTier:Number = player.perkv1(IMutationsLib.HellhoundFireBallsIM);
-				if (pTier < 4 && player.level >= 30*pTier && player.perkv2(IMutationsLib.HellhoundFireBallsIM) >= 30*2*pTier) {
+				if (pTier < 4 && player.level >= 30*pTier && player.perkv2(IMutationsLib.HellhoundFireBallsIM) >= 30*pTier) {
 					IMutationsLib.HellhoundFireBallsIM.acquireMutation(player, outputText("\nYour balls begin to suddenly feel heavier… warmer. You begin pumping your two penis absentmindedly thinking of all the bitches you recently broke on your twin shaft as the heat rushes all the way to your pair of erect members. You cum a humongous load of smoking warm cum, way to warm for normal seeds. It looks like your balls are progressively continuing their evolution to be more hellhound-like as your seed takes on burning hot property just like that of a hellhound.\n"));
 					needNext = true;
 				}
@@ -2963,7 +2963,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					return true;
 				}
 				if (checkedImp++ == 0 && (player.shieldName == "Tome of Imp" || player.shieldName == "cursed Tome of Imp")) {
-					if (!camp.IsSleeping && rand(5) == 0 && player.isRaceCached(Races.IMP, 2) && !player.hasPerk(PerkLib.ImpNobility) && player.perkv1(PerkLib.DemonEnergyThirst) >= 50) {
+					if (!camp.IsSleeping && rand(2) == 0 && player.isRaceCached(Races.IMP, 2) && !player.hasPerk(PerkLib.ImpNobility) && player.perkv1(PerkLib.DemonEnergyThirst) > 25) {
 						SceneLib.camp.campUniqueScenes.impTomeScene();
 						return true;
 					}

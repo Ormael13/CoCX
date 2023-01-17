@@ -398,6 +398,7 @@ public class Pregnancy extends NPCAwareContent {
                         if (player.cor >= 40 && player.cor < 75) EngineCore.outputText("You find yourself wondering what giving birth to bunny-girls is like.</b>");
                         if (player.cor >= 75) EngineCore.outputText("You dreamily wonder if you could find a bunny willing to put more than two eggs inside you at once.</b>");
                     }
+                    else outputText("You find yourself wondering what giving birth to bunny-girls is like.</b>");
                     player.dynStats("spe", -1, "lib", 1, "sen", 1, "lus", 2);
                     EngineCore.outputText("\n");
                     displayedUpdate = true;
@@ -425,7 +426,8 @@ public class Pregnancy extends NPCAwareContent {
                         if (player.cor < 40) EngineCore.outputText("Afterwards you feel somewhat disgusted with yourself.</b>\n");
                         if (player.cor >= 40 && player.cor < 75) EngineCore.outputText("You estimate you'll give birth in the next few days.</b>\n");
                         if (player.cor >= 75) EngineCore.outputText("You find yourself daydreaming about birthing bunnies repeatedly, each time being re-impregnated with dozens of eggs from your lusty adolescent children.</b>\n");
-                    }
+                    } else
+                        EngineCore.outputText("You estimate you'll give birth in the next few days.</b>\n");
                     displayedUpdate = true;
                 }
             }

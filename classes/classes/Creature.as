@@ -2835,6 +2835,10 @@ public class Creature extends Utils
 		{
 			return (cocks.length);
 		}
+		public function vagTotal():Number
+		{
+			return (vaginas.length);
+		}
 
 		//Boolean alternate
 		public function hasCock():Boolean
