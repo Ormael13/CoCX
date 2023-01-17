@@ -1995,6 +1995,14 @@ public class SaveUpdater extends NPCAwareContent {
 				if (player.hasPerk(PerkLib.Soulless)) player.skinColor2 = "midnight black";
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.044;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.045) {
+				if (flags[kFLAGS.FACTORY_OMNIBUS_DEFEATED] == 2) player.superPerkPoints++;
+				if (flags[kFLAGS.DEFEATED_ZETAZ] == 2) player.superPerkPoints++;
+				if (flags[kFLAGS.DEMON_LABORATORY_DISCOVERED] == 2) player.superPerkPoints++;
+				if (flags[kFLAGS.LETHICE_DEFEATED] == 2) player.superPerkPoints++;
+				outputText("\n\nAdditional smol really smol bonus reward for those that not forget to progress main quest - 1 super perk per each finished main story dungeon ^^");
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.045;
+			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
 		}
