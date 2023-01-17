@@ -1993,7 +1993,7 @@ public final class Mutations extends MutationsHelper {
             player.addCurse("sen", 4, 1);
             changes++;
         }
-        if (player.hasVagina() && player.vaginas.length == 1 && type == 3) {
+        if (player.hasVagina() && player.vaginas.length == 1 && type == 3 && rand(8) == 0 && changes < changeLimit) {
             transformations.SecondVagina().applyEffect();
             changes++;
         }
@@ -2374,7 +2374,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
 
-        if (rand(4) == 0 && changes < changeLimit) {
+        if (rand(10) == 0 && changes < changeLimit) {
             outputText("[pg]");
             if (rand(2) == 0 && player.ears.type != Ears.ELFIN) transformations.EarsElfin.applyEffect();
             else transformations.EarsBig.applyEffect();
@@ -2411,7 +2411,7 @@ public final class Mutations extends MutationsHelper {
         }
 
         //Red skin!
-        if ((!InCollection(player.skinColor1, ImpRace.ImpSkinColors) &&  rand(3) == 0) || rand(10) == 0 && changes < changeLimit) {
+        if ((!InCollection(player.skinColor1, ImpRace.ImpSkinColors) &&  rand(3) == 0) && changes < changeLimit) {
             if (player.isFurCovered()) outputText("[pg]Underneath your fur, your skin ");
             else outputText("[pg]Your [skin.type] ");
             var colors:Array = [];
@@ -2428,10 +2428,11 @@ public final class Mutations extends MutationsHelper {
             outputText("[pg]");
             if (player.faceType != Face.ANIMAL_TOOTHS) {
                 transformations.FaceAnimalTeeth.applyEffect();
-            } else {
+                changes++;
+            } else if (rand(3) == 0) {
                 transformations.FaceHuman.applyEffect();
+                changes++;
             }
-            changes++;
         }
 
         if (!player.hasPlainSkinOnly() && changes < changeLimit && rand(3) == 0) {
@@ -2446,7 +2447,7 @@ public final class Mutations extends MutationsHelper {
             transformations.EyesHuman.applyEffect();
             changes++;
         }
-        if ((!InCollection(player.eyes.colour, ImpRace.ImpEyeColors) && rand(3) == 0) || rand(8) == 0 && changes < changeLimit) {
+        if ((!InCollection(player.eyes.colour, ImpRace.ImpEyeColors) && rand(3) == 0) || rand(20) == 0 && changes < changeLimit) {
             outputText("[pg]");
             transformations.EyesChangeColor(ImpRace.ImpEyeColors).applyEffect();
             changes++;
@@ -16758,4 +16759,4 @@ public final class Mutations extends MutationsHelper {
 		player.herbXP(HE);
     }
 }
-}
+}

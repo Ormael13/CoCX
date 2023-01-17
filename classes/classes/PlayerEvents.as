@@ -1192,7 +1192,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					player.createPerk(PerkLib.DemonEnergyThirst, 0, 0, 0, 0);
 					needNext = true;
 				}
-				if (!player.hasPerk(PerkLib.SoulEater)) {
+				if (player.hasPerk(PerkLib.Soulless) && !player.hasPerk(PerkLib.SoulEater)) {
 					outputText("\nYou begin to hunger after those demonic soul crystals, Lethicite. Perhaps yuo can find some to consume? You acquired the demons ability to consume Lethicite for power! \n(<b>Gained Perk: Soul Eater</b>)\n");
 					player.createPerk(PerkLib.SoulEater, 0, 0, 0, 0);
 					needNext = true;
@@ -2963,7 +2963,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					return true;
 				}
 				if (checkedImp++ == 0 && (player.shieldName == "Tome of Imp" || player.shieldName == "cursed Tome of Imp")) {
-					if (!camp.IsSleeping && rand(5) == 0 && player.isRaceCached(Races.IMP, 2) && !player.hasPerk(PerkLib.ImpNobility) && player.perkv1(PerkLib.DemonEnergyThirst) >= 50) {
+					if (!camp.IsSleeping && rand(2) == 0 && player.isRaceCached(Races.IMP, 2) && !player.hasPerk(PerkLib.ImpNobility) && player.perkv1(PerkLib.DemonEnergyThirst) > 25) {
 						SceneLib.camp.campUniqueScenes.impTomeScene();
 						return true;
 					}

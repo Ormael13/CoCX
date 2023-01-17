@@ -1046,10 +1046,9 @@ import classes.internals.SaveableState;
 			outputText("[pg]Perhaps you'd like to change this?");
 
 			var totVag:int = player.vaginas.length;
-			if ((totVag == 0 && GeneticMemoryStorage[VaginaCountMem.Memories[0].id]) ||
-				(totVag == 1 && !GeneticMemoryStorage[VaginaCountMem.Memories[1].id])) {
+			if (totVag == 0 && GeneticMemoryStorage[VaginaCountMem.Memories[0].id]) {
 				openPaginatedMenu(title, accessVaginaMenu, currentPage, VaginaMem.Memories, 0);
-			} else if (totVag > 1 || GeneticMemoryStorage[VaginaCountMem.Memories[1].id]) {
+			} else {
 				menu();
 
 				for (var i: int = 0; i  < totVag; i++) {
@@ -1070,8 +1069,8 @@ import classes.internals.SaveableState;
 			clearOutput();
 			outputText(title);
 
-			const vaginaDesc: String = CoC.instance.playerAppearance.describePussy(vagina);
-			outputText(player.hasVagina() ?  vaginaDesc : "You have no vagina.");
+			const vaginaDesc: String = (vagina == player.vagTotal() ? "Add a new vagina.":CoC.instance.playerAppearance.describePussy(vagina));
+			outputText(vaginaDesc);
 			outputText("[pg]Perhaps you'd like to change this?");
 
 			openPaginatedMenu(title, accessVaginaMenu, currentPage, VaginaMem.Memories, vagina);
@@ -1081,10 +1080,7 @@ import classes.internals.SaveableState;
 			menu();
 
 			memArray = memArray.filter(function(element: *, index: int, array: Array): Boolean {
-				if (element && element.id !== "Taur Lower Body") {
-					return true;
-				}
-				return false;
+				return !!(element && element.id !== "Taur Lower Body");
 			});
 
 			const memsPerPage: int = memArray.length > 14 ? 12 : 14;
@@ -1119,7 +1115,7 @@ import classes.internals.SaveableState;
 		}
 
 		public static function checkTaurUnlock():Boolean{
-			return GeneticMemoryStorage["Taur Lower Body"] ? true : false;
+			return !!GeneticMemoryStorage["Taur Lower Body"];
 		}
 		
 		private function doMetamorph (title: String, genMem: *, index:int = -1): void {
