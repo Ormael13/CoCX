@@ -811,7 +811,7 @@ use namespace CoC;
 		}
 		//[FOREST]
 //[RANDOM SCENE IF CHARACTER HAS AT LEAST ONE COCK LARGER THAN THEIR HEIGHT, AND THE TOTAL COMBINED WIDTH OF ALL THEIR COCKS IS TWELVE INCHES OR GREATER]
-		internal function bigJunkForestScene(lake:Boolean = false):void
+		public function bigJunkForestScene(lake:Boolean = false):void
 		{
 			clearOutput();
 			var x:Number = player.longestCock();

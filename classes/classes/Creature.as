@@ -4326,7 +4326,7 @@ public class Creature extends Utils
 			// perks
 			if ((hasPerk(PerkLib.Evade) || hasPerk(PerkLib.ElvenSense) || game.player.necklace == game.necklaces.LEAFAMU || ((game.player.hasKeyItem("Nitro Boots") >= 0 || game.player.hasKeyItem("Rocket Boots") >= 0 || game.player.hasKeyItem("Spring Boots") >= 0) && game.player.tallness < 48 && game.player.isBiped())) && (rand(100) < generalevasion)) evasionReason = "Evade";
 			if ((hasPerk(PerkLib.Flexibility) || perkv1(IMutationsLib.CatLikeNimblenessIM) >= 1) && (rand(100) < 6)) evasionReason = "Flexibility";
-			if ((hasPerk(PerkLib.Flexibility) && (rand(100) < 6)) evasionReason = "Small frame";
+			if ((hasPerk(PerkLib.SmallFrame) && (rand(100) < 6))) evasionReason = "Small frame";
 			if (hasPerk(PerkLib.Misdirection) && (game.player.armor.hasTag(ItemTags.A_AGILE)) && (rand(100) < 10)) evasionReason = "Misdirection";
 			if (hasPerk(PerkLib.Unhindered) && game.player.armor.hasTag(ItemTags.A_AGILE) && (rand(100) < 10)) evasionReason = "Unhindered";
 			if (hasPerk(PerkLib.JunglesWanderer) && (rand(100) < 35)) evasionReason = "Jungle's Wanderer";
