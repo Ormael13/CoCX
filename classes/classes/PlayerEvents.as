@@ -1193,7 +1193,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					needNext = true;
 				}
 				if (player.hasPerk(PerkLib.Soulless) && !player.hasPerk(PerkLib.SoulEater)) {
-					outputText("\nYou begin to hunger after those demonic soul crystals, Lethicite. Perhaps yuo can find some to consume? You acquired the demons ability to consume Lethicite for power! \n(<b>Gained Perk: Soul Eater</b>)\n");
+					outputText("\nYou begin to hunger after those demonic soul crystals, Lethicite. Perhaps you can find some to consume? You acquired the demons ability to consume Lethicite for power! \n(<b>Gained Perk: Soul Eater</b>)\n");
 					player.createPerk(PerkLib.SoulEater, 0, 0, 0, 0);
 					needNext = true;
 				}

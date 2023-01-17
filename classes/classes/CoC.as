@@ -67,10 +67,10 @@ public class CoC extends MovieClip
         return _instance;
     }
     //Game Version
-    public var debugGameVer:String = "v0.8s7.30";
+    public var debugGameVer:String = "v0.8s7.31";
 
     //Mod save version.
-    public var modSaveVersion:Number = 36.043;
+    public var modSaveVersion:Number = 36.044;
     public var levelCap:Number = 185;
 
     //Lock cheats menus from public
