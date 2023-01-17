@@ -2192,16 +2192,17 @@ use namespace CoC;
 			clearOutput();
 			outputText("As you approach the defeated imp, towering over his penis with your threatening but somewhat tiny stature, you give the new plaything an impish smirk. He backs away sweating profusely.[pg]");
 			outputText("\"<i>Hey what's with that face?! If you're going to rape me get down to it!</i>\"[pg]");
-			outputText("Oh, sure, you're going to rape him. Just not in the way he thought. [if(hasarmor) You nonchalantly toss your gear to the side before you align his erection to your labia, sliding inch after inch of his meaty rod down your snatch.| With nothing in the way between the two of you, you align his erection to your labia, sliding inch after inch of his meaty rod down your snatch] ");
+			outputText("Oh, sure, you're going to rape him. Just not in the way he thought. [if(hasarmor) You nonchalantly toss your gear to the side before| With nothing in the way between the two of you,] you align his erection to your labia, sliding inch after inch of his meaty rod down your snatch. ");
 			outputText("It would be comical how his member, at least a foot in length, somehow manages to slide in your body if not for the fact that it was made for it. You're the female counterpart of this midget after all. Your equally tiny body managing to accommodate his freakishly large prick is a simple matter of biology mixed with a tinge of black magic.[pg]");
-			outputText("You gasp in delight as the tip finally bottoms in and begins forcefully humping up and down, the sound of your shapely ass slamming against his churning balls filling the air. Pressure quickly builds up within you as you clench tighter against his dick before. You're on the verge of an orgasm when you notice the dimwit cock begin to tense up. ");
-			outputText("No way is he cumming before you let alone without your permission. You grab his balls with your hands and unleash a spell closing the valve just as he's about to ejaculate. The imp now looks at you with stupor mixed with terror.[pg]");
+			outputText("You gasp in delight as the tip finally bottoms in and begins forcefully humping up and down, the sound of your shapely ass slamming against his churning balls filling the air. Pressure quickly builds up within you as you clench tighter against his dick. You're on the verge of an orgasm when you notice the dimwit's cock begin to tense up. ");
+			outputText("No way, is this idiot cumming before you, let alone without your permission? You grab his balls with your hands and unleash a spell closing the valve just as he's about to ejaculate. The imp now looks at you with stupor mixed with terror.[pg]");
 			outputText("\"<i>Nooo! Please, anything but this!</i>\"[pg]");
 			outputText("Pets don't get to argue or plead, just who does he think he is?! He should be grateful to be allowed to taste your pussy with his unworthy dick.");
-			if (player.hasKeyItem("Dildo") < 0 && player.hasKeyItem("Deluxe Dildo") < 0) outputText(" Annoyed, you cut short his pitiful cry by forcing a dildo into his mouth.")
-			outputText(" You resume your ride, the imp’s balls increasing in volume after each trust as a buildup of cum is sealed within. You reach your first orgasm and keep on raping him until his balls are big enough to act as pillows for you to rest on.");
-			if (player.hasKeyItem("Dildo") < 0 && player.hasKeyItem("Deluxe Dildo") < 0) outputText(" You remove the toy from his mouth to toy with him another way.");
-			outputText("Thoroughly satisfied, you unplug from the tormented imp, his cock sliding out of your cunt with a wet pop before you take several steps as he seems on the verge of eruption, yet still bound by your magic. The tormented imp gives you a pleading stare, his mouth foaming from the accumulated pleasure.[pg]");
+			if (player.hasKeyItem("Dildo") < 0 && player.hasKeyItem("Deluxe Dildo") < 0) outputText(" Annoyed, you fetch your backpack grab a dildo and cut short his pitiful cry by forcing the toy into his mouth. With the moron now properly gaged, you") else outputText(" You");
+			outputText(" resume your ride, the imp’s balls increasing in volume after each trust as a buildup of cum is sealed within. You reach your first orgasm and keep on raping him until his balls are big enough to act as pillows for you to rest on.");
+			outputText("Thoroughly satisfied, you unplug from the tormented imp, his cock sliding out of your cunt with a wet pop before you take several steps as he seems on the verge of eruption, yet still bound by your magic. ");
+			if (player.hasKeyItem("Dildo") < 0 && player.hasKeyItem("Deluxe Dildo") < 0) outputText(" You remove the toy from his mouth only when your sure he won't protest further. ");
+			outputText("The tormented imp gives you a pleading stare, his mouth foaming from the accumulated pleasure.[pg]");
 			outputText("Well, he did fulfill his purpose but keeping him around as a lackey to do your bidding wouldn't be so bad. You tell him that if he pledges fealty to you and the book, you will allow him the right to cum. Otherwise, you're not beyond leaving him here to agonize forever.[pg]");
 			outputText("\"<i>Please "+player.mf("master", "mistress")+", don't leave me like this! Please let me cum I can't..I can't keep up like this! Make it stop!</i>\"[pg]");
 			outputText("Staring at your book you confirm that the imp indeed willingly surrendered his being to your care as a new inky note appears in the tome of imp. Satisfied with this you undo the spell, his cock unleashing a lovely fountain of white cream all around him. You almost get painted yourself but flap your tiny wings to evade the jet moving out of reach.[pg]");
@@ -2439,7 +2440,7 @@ use namespace CoC;
 
 		private function recruitImp():void {
 			player.addPerkValue(PerkLib.ImpNobility, 1, 1);
-			outputText("Done here you open your book which promptly pulls the spent imp form inside for reeducation and your later perusage. Satisfied you head back to camp. <b>You now have "+player.perkv1(PerkLib.ImpNobility)+" imp cohorts.</b>");
+			outputText("Done here you open your book which promptly pulls the spent imp form inside for reeducation and your later perusage. Satisfied with the result, you head back to camp. <b>You now have "+player.perkv1(PerkLib.ImpNobility)+" imp cohorts.</b>");
 			cleanupAfterCombat();
 		}
 	}
