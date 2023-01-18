@@ -20,28 +20,28 @@ public class ElementalRace extends Race {
 		buildTier(6, "lesser elemental")
 				.customNamingFunction(nameFn)
 				.require("Elemental Body (lesser)", function (body:BodyData):Boolean {
-					return body.player.perkv1(PerkLib.ElementalBody) == 1
+					return body.player.perkv2(PerkLib.ElementalBody) == 1
 				})
 				.withDynamicBuffs("Element-dependent bonuses", calcBuffs)
 				.end();
 		buildTier(7, "adept elemental")
 				.customNamingFunction(nameFn)
 				.require("Elemental Body (adept)", function (body:BodyData):Boolean {
-					return body.player.perkv1(PerkLib.ElementalBody) == 2
+					return body.player.perkv2(PerkLib.ElementalBody) == 2
 				})
 				.withDynamicBuffs("Element-dependent bonuses", calcBuffs)
 				.end();
 		buildTier(8, "greater elemental")
 				.customNamingFunction(nameFn)
 				.require("Elemental Body (greater)", function (body:BodyData):Boolean {
-					return body.player.perkv1(PerkLib.ElementalBody) == 3
+					return body.player.perkv2(PerkLib.ElementalBody) == 3
 				})
 				.withDynamicBuffs("Element-dependent bonuses", calcBuffs)
 				.end();
 		buildTier(9, "primordial elemental")
 				.customNamingFunction(nameFn)
 				.require("Elemental Body (primordial)", function (body:BodyData):Boolean {
-					return body.player.perkv1(PerkLib.ElementalBody) == 4
+					return body.player.perkv2(PerkLib.ElementalBody) == 4
 				})
 				.withDynamicBuffs("Element-dependent bonuses", calcBuffs)
 				.end();
