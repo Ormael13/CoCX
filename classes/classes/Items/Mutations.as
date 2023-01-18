@@ -2362,7 +2362,7 @@ public final class Mutations extends MutationsHelper {
         }
 
         //grow horns!
-        if (player.horns.count == 0 && !InCollection(player.horns.type, Horns.ORCHID, Horns.DEMON, Horns.ARCH_IMP) && rand(4) == 0 && changes < changeLimit) {
+        if (!InCollection(player.horns.type, Horns.ORCHID, Horns.DEMON, Horns.ARCH_IMP) && rand(4) == 0 && changes < changeLimit) {
             outputText("[pg]");
             transformations.HornsDemonic.applyEffect();
             changes++;
