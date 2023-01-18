@@ -2381,13 +2381,13 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
 
-        if (player.wings.type != Wings.BAT_LIKE_TINY && rand(4) == 0 && changes < changeLimit) {
+        if ((player.wings.type != Wings.BAT_LIKE_TINY && rand(4) == 0) && changes < changeLimit) {
             outputText("[pg]");
             transformations.WingsDemonicTiny.applyEffect();
             changes++;
         }
 
-        if ((!InCollection(player.hairColor1, ImpRace.ImpHairColors) && rand(3) == 0) || rand(10) == 0 && changes < changeLimit) {
+        if (((!InCollection(player.hairColor1, ImpRace.ImpHairColors) && rand(3) == 0) || rand(10) == 0) && changes < changeLimit) {
             outputText("[pg]");
             transformations.HairChangeColor(ImpRace.ImpHairColors).applyEffect();
         }
@@ -2424,7 +2424,7 @@ public final class Mutations extends MutationsHelper {
         }
 
         //Face!
-        if (((player.faceType != Face.HUMAN || player.faceType != Face.ANIMAL_TOOTHS) && rand(4) == 0) || rand(10) == 0 && changes < changeLimit) {
+        if ((((player.faceType != Face.HUMAN || player.faceType != Face.ANIMAL_TOOTHS) && rand(4) == 0) || rand(10) == 0) && changes < changeLimit) {
             outputText("[pg]");
             if (player.faceType != Face.ANIMAL_TOOTHS) {
                 transformations.FaceAnimalTeeth.applyEffect();

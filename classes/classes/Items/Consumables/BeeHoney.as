@@ -218,7 +218,7 @@ public class BeeHoney extends Consumable
 				changes++;
 			}
 			//Melt demon wings!
-			if (changes < changeLimit && player.wings.type != Wings.BEE_SMALL && player.wings.type != Wings.BEE_LARGE) {
+			if (changes < changeLimit && player.wings.type == Wings.NONE && player.wings.type != Wings.BEE_SMALL && player.wings.type != Wings.BEE_LARGE) {
 				changes++;
 				outputText("\n\nYour wings ripple, jelly-like.  Worried, you crane back to look, and to your horror, they're melting away!  Runnels of amber honey trail down the wings' edges, building into a steady flow.  <b>In a moment, the only remnant of your wings is a puddle of honey in the dirt</b>.  Even that is gone in seconds, wicked into the dry soil.");
 				outputText("\n\n");

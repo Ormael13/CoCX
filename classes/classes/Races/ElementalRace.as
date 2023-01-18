@@ -14,30 +14,31 @@ public class ElementalRace extends Race {
 	
 	override public function setup():void {
 		
-		addScores().hasPerk(PerkLib.ElementalBody, +5);
+		addScores().hasPerk(PerkLib.ElementalBody, +5)
+				.givePerkV2(PerkLib.ElementalBody);
 		
-		buildTier(5, "lesser elemental")
+		buildTier(6, "lesser elemental")
 				.customNamingFunction(nameFn)
 				.require("Elemental Body (lesser)", function (body:BodyData):Boolean {
 					return body.player.perkv1(PerkLib.ElementalBody) == 1
 				})
 				.withDynamicBuffs("Element-dependent bonuses", calcBuffs)
 				.end();
-		buildTier(5, "adept elemental")
+		buildTier(7, "adept elemental")
 				.customNamingFunction(nameFn)
 				.require("Elemental Body (adept)", function (body:BodyData):Boolean {
 					return body.player.perkv1(PerkLib.ElementalBody) == 2
 				})
 				.withDynamicBuffs("Element-dependent bonuses", calcBuffs)
 				.end();
-		buildTier(5, "greater elemental")
+		buildTier(8, "greater elemental")
 				.customNamingFunction(nameFn)
 				.require("Elemental Body (greater)", function (body:BodyData):Boolean {
 					return body.player.perkv1(PerkLib.ElementalBody) == 3
 				})
 				.withDynamicBuffs("Element-dependent bonuses", calcBuffs)
 				.end();
-		buildTier(5, "primordial elemental")
+		buildTier(9, "primordial elemental")
 				.customNamingFunction(nameFn)
 				.require("Elemental Body (primordial)", function (body:BodyData):Boolean {
 					return body.player.perkv1(PerkLib.ElementalBody) == 4

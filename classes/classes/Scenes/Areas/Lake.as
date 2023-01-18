@@ -77,13 +77,13 @@ use namespace CoC;
 				when: function ():Boolean {
 					return player.level < 3 || player.canTrain('spe',50)
 				},
-				chance: 0.2,
 				call: walkAroundLake
 			}, {
 				name: "finditems",
 				call: findLakeLoot
 			}, {
 				name: "nothing",
+				chance: 0.4,
 				call: findNothing
 			}, {
 				name: "holystuff",
@@ -134,14 +134,14 @@ use namespace CoC;
 					return !player.hasStatusEffect(StatusEffects.CalluOff)
 				},
 				night: false,
-				chance: 1/16,
+				chance: 1/8,
 				call: calluScene.ottahGirl
 			}, {
 				name: "latexgirl",
 				when: function ():Boolean {
 					return flags[kFLAGS.GOO_TFED_MEAN] + flags[kFLAGS.GOO_TFED_NICE] > 0 && flags[kFLAGS.GOO_SLAVE_RECRUITED] == 0
 				},
-				chance: 1/30,
+				chance: 1/15,
 				call: SceneLib.latexGirl.encounterLeftBehindGooSlave
 			}, {
 				name: "rathazul",
@@ -168,7 +168,7 @@ use namespace CoC;
 				name: "helcommon",
 				night : false,
 				call: SceneLib.helScene.helSexualAmbush,
-				chance: 0.2,
+				chance: 0.4,
 				when: SceneLib.helScene.helSexualAmbushCondition
 			}, {
 				name: "etna",
@@ -184,7 +184,7 @@ use namespace CoC;
 				name: "diana",
 				night : false,
 				when: function():Boolean {
-					return flags[kFLAGS.DIANA_FOLLOWER] < 6 && !(flags[kFLAGS.DIANA_FOLLOWER] != 3 && flags[kFLAGS.DIANA_LVL_UP] >= 8) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff);
+					return player.level >= 3 && flags[kFLAGS.DIANA_FOLLOWER] < 6 && !(flags[kFLAGS.DIANA_FOLLOWER] != 3 && flags[kFLAGS.DIANA_LVL_UP] >= 8) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff);
 				},
 				chance: 0.5,
 				call: SceneLib.dianaScene.repeatEnc
