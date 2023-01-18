@@ -23,12 +23,12 @@ public class Imp extends Monster
 				SceneLib.evangelineFollower.winEvangelineImpFight();
 			}
 			else {
-				if (rand(2) == 0 && flags[kFLAGS.IMP_TOME_FOUND] == 0) {
+				if (rand(20) == 0 && !player.hasStatusEffect(StatusEffects.TookImpTome)) {
 					outputText("\n\nYou spot an odd book lying close by the imp and stook to pick it up. ");
 					SceneLib.inventory.takeItem(shields.IMPTOME, hasTakenBook);
 					function hasTakenBook():void {
-						if (player.hasItem(shields.IMPTOME) || player.shieldName == "Tome of Imp")
-							flags[kFLAGS.IMP_TOME_FOUND] = 1;
+						if (player.hasItem(shields.IMPTOME) || player.shieldName == "cursed Tome of Imp")
+							player.createStatusEffect(StatusEffects.TookImpTome,  0, 0, 0, 0);
 						SceneLib.impScene.impVictory();
 					}
 				} else SceneLib.impScene.impVictory();

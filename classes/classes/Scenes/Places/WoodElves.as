@@ -284,7 +284,9 @@ package classes.Scenes.Places{
 			if (!player.hasPerk(PerkLib.ElvenSense)) player.createPerk(PerkLib.ElvenSense,0,0,0,0);
 
 			WoodElvesQuest = QUEST_STAGE_LOSTTOELF;
-			inventory.UseItemNow(CoC.instance.armors.ELFDRES, YouAreAlreadyElf2);
+			doNext(function ():void {
+				inventory.UseItemNow(CoC.instance.armors.ELFDRES, YouAreAlreadyElf2);
+			});
 		}
 
 		public function YouAreAlreadyElf2():void {
