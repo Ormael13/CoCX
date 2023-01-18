@@ -120,8 +120,8 @@ public class Changelog extends BaseContent
 			outputText("-Added to main story dungeons clean reward additonal thing - 1 super perk point ;)\n");
 			outputText("-All area encounter tables now converted to new style. (EragonX)\n");
 			outputText("-minor color addition to elf and viewer fix. Imp now favors Royal Purple instead of ligbt. (Liadri)\n");
-			outputText("-bugfixes for Enigmanium, bee honey without wings, imp tome with TFimmunity, Elemental race hopefully?, mino scene as Cerb, werewolf pounce text, Wood Elf dress force equip, make Imp Tome unique again (EragonX)\n");
-			outputText("-\n");
+			outputText("-bugfixes for Enigmanium, bee honey without wings, imp tome with TFimmunity, mino scene as Cerb, werewolf pounce text, Wood Elf dress force equip, make Imp Tome unique again (EragonX)\n");
+			outputText("-Hidden Job perks can't be accuired now before lvl 20 (first one is possible to pick at lvl 20 and then each 10 lvl's)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -154,7 +154,8 @@ public class Changelog extends BaseContent
 			//remove this line when other two lines below get added ingame
 			//outputText("-New perk for enemies: Elite type enemy. Bonuses for are: Diehard effect of 2,5% of max HP + 750 HP * NG tier, OverMax HP effect of 5% magnitude.\n");
 			//outputText("-New perk for enemies: Champion type enemy. Bonuses for are: Diehard effect of 5% of max HP + 1,500 HP * NG tier, OverMax HP effect of 10% magnitude.\n");
-			outputText("-Fixed bugs: Bard not affected by cap of prestige jobs, last one checks for holli's kill/survive moved into less troublesome spot, Benoit/Oswald taking full price for simple backpack size upgade, Fasting Pill been unaccessable when hunger mode is active, Vegetal Affinity increasing fire resistance, elemental throwing knives been never usable\n");
+			outputText("-Fixed bugs: Bard not affected by cap of prestige jobs, last one checks for holli's kill/survive moved into less troublesome spot, Benoit/Oswald taking full price for simple backpack size upgade, Fasting Pill been unaccessable when hunger mode is active, Vegetal Affinity increasing fire resistance, elemental throwing knives been never usable, Elemental race tier bonuses & display on race page, ");
+			outputText("\n");
 			/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
