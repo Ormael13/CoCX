@@ -176,6 +176,7 @@
 			<color name="immaculate white">#fdfdfc</color>
             <color name="reddish-orange">#df8453</color>
             <color name="rough gray">#525252</color>
+			<color name="royal purple">#524496</color>
             <color name="sandy blonde">#ebd69e</color>
             <color name="sandy brown">#a28d57</color>
             <color name="sandy-blonde">#e0cd9f</color>
@@ -5865,6 +5866,43 @@
 				</if>
 			</if>
 		</if>
+		
+		<!--Black cat Undergarment-->
+		<if test="blackCatBra">
+			<if test="breastRows.length gt 0">
+				<switch>
+					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+						<show part="bra/sexyBlackBikiniBraSmall"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+						<show part="bra/sexyBlackBikiniBraSmall"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+						<show part="bra/sexyBlackBikiniBraMedium"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+						<show part="bra/sexyBlackBikiniBraMedium"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+						<show part="bra/sexyBlackBikiniBraLarge"/>
+					</case>
+					<default>
+						<show part="bra/sexyBlackBikiniBraLarge"/>						
+					</default>
+				</switch>
+			</if>
+		</if>
+		<if test="blackCatPanty">
+			<if test="showClothing">
+				<if test="showPanty">
+					<if test="isTaur()==false">
+						<show part="panty/sexyBlackBikiniPanty"/>
+						<hide part="penis/*"/>
+						<hide part="balls/*"/>
+					</if>
+				</if>
+			</if>
+		</if>
 
 		<!--Comfortable clothing set -->
         <if test="ComfyCLothes">
@@ -6066,7 +6104,7 @@
 				<if test="showLegClothing">
 					<if test="isTaur()">
 						<else>
-							<show part="clotheLegs/comfortableClothes"/>
+							<show part="clotheLegs/francescaBoots"/>
 							<hide part="penis/*"/>
 							<hide part="balls/*"/>
 						</else>

@@ -7,7 +7,7 @@ import classes.PerkLib;
 import classes.Race;
 public class ElfRace extends Race {
 	public static const ElfHairColors:/*String*/Array = ["black", "leaf green", "golden blonde", "silver"];
-	public static const ElfSkinColors:/*String*/Array = ["dark", "light","tan"];
+	public static const ElfSkinColors:/*String*/Array = ["dark", "light","tan","olive"];
     public static const RaceBody:/*String*/Array = [
         /*Antenna*/		"Human",
         /*Arms*/		"Elf",

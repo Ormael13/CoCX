@@ -115,6 +115,12 @@ public class Changelog extends BaseContent
 			outputText("-3rd tier of wolf race bonuses been increased from 21 to 22 pts and bonuses boosted accordly (and then doubled due to 2 body slots been locked similary to perm tf's). It stronger variant of bite would also deal dmg/leqve bleeding wounds on top of injecting cold energy into enemy body.\n");
 			outputText("-Sprite addition including imp and black nako bottom and top. (Liadri)\n");
 			outputText("-Fixes: Staff with cursed shield bug, etna freakout to female (EragonX)\n");
+			outputText("-Add more requirements to Kirin/Raiju/Thunderbird to prevent being all 3 (EragonX)\n");
+			outputText("-Bugfixes for Brooke anal, Loppe preg, Atlach race, vagina MM, Wonder fruit (EragonX)\n");
+			outputText("-Added to main story dungeons clean reward additonal thing - 1 super perk point ;)\n");
+			outputText("-All area encounter tables now converted to new style. (EragonX)\n");
+			outputText("-minor color addition to elf and viewer fix. Imp now favors Royal Purple instead of ligbt. (Liadri)\n");
+			outputText("-bugfixes for Enigmanium, bee honey without wings, imp tome with TFimmunity, Elemental race hopefully?, mino scene as Cerb, werewolf pounce text, Wood Elf dress force equip, make Imp Tome unique again (EragonX)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -126,6 +132,14 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
+			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
+			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
+			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
+			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");
 			outputText("-\n");// (Liadri)
 			outputText("-\n");// (aimozg)
@@ -135,11 +149,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");// (Furrin Gok)
 			outputText("-\n");// (khovel)
 			outputText("-\n");
-			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
-			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
-			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
-			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
-			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-\n");
 			outputText("-\n");
 			//remove this line when other two lines below get added ingame
 			//outputText("-New perk for enemies: Elite type enemy. Bonuses for are: Diehard effect of 2,5% of max HP + 750 HP * NG tier, OverMax HP effect of 5% magnitude.\n");
@@ -213,7 +223,11 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

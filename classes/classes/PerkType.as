@@ -666,6 +666,21 @@ public class PerkType extends BaseContent
 			});
 			return this;
 		}
+		public function requireOrPerks(perk1:PerkType, perk2:PerkType, v1:Number):PerkType {
+			requirements.push({
+				fn  : function (player:Player):Boolean {
+					return (player.hasPerk(perk1) || (player.hasPerk(perk2) && player.perkv1(perk2) >= v1));
+				},
+				text: perk1.name(),
+				type: "perk",
+				perk: perk1,
+				// distance is computed in PerkTree
+				distanceFor: function(player:Player):Number {
+					return perk1.distanceFor(player);
+				}
+			});
+			return this;
+		}
 		public function requirePerks(...perks:Array):PerkType {	//As opposed to requirePerk or requireAnyPerk, this checks for if player has all required perks instead of any of them or just the one.
 			if (perks.length == 0) throw ("Incorrect call of requirePerks() - should NOT be empty");
 			var text:Array = [];
