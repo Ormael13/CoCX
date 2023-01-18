@@ -449,7 +449,7 @@ private function sexMenu():void {
 	var nofitMsg:String = "Req. a cock with area fitting " + brookeCapacity();
 	menu();
 	addButton(0,"Penetrate",penetrateBrooke).disableIf(cockFits == 0, nofitMsg);
-	addButton(1,"Anal",brookeAnal);
+	addButton(1,"Anal",brookeAnal).disableIf(cockFits == 0, nofitMsg);
 	addButton(2,"Tribadism",tribadism).disableIf(!player.hasVagina(), "Req. a vagina");
 	addButton(3,"Go Down On",goDownOnBrooke);
 	addButton(4,"Get Laid", curry(sceneHunter.selectGender, //SPAGHETTIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII

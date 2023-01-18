@@ -42,7 +42,7 @@ public class CerberusRace extends Race {
 	public override function setup():void {
 		addScores()
 				//.hairType(Hair.WILD, +1)
-				.faceType(Face.CERBERUS, +1)
+				.faceType(Face.CERBERUS, +1, -1000)
 				.tongueType(Tongue.DOG, +1)
 				.eyeType(Eyes.INFERNAL, +1)
 				.eyeColor(ANY(CerberusEyeColors), +1)
@@ -72,7 +72,7 @@ public class CerberusRace extends Race {
 				.hasPerk(PerkLib.Hellfire, +1);
 
 		addMutation(IMutationsLib.AlphaHowlIM);
-		addMutation(IMutationsLib.HellhoundFireBallsIM, +2);
+		addMutation(IMutationsLib.HellhoundFireBallsIM);
 
 		buildTier(24, "Cerberus")
 				.namesMaleFemaleMorphTaur("Hellhound Cerberus", "Barghest Cerberus", "Cerberus", "Cerberus-taur")
@@ -120,7 +120,7 @@ public class CerberusRace extends Race {
 	}
 
 	public static function isCerberus(body:BodyData):Boolean {
-		return body.armType == Arms.HOUND;
+		return body.faceType == Face.CERBERUS;
 	}
 }
 }

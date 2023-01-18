@@ -189,6 +189,10 @@ public class RaceTierBuilder {
 		addSlotRequirement(BodyData.SLOT_HORN_TYPE, type);
 		return this;
 	}
+	public function requireWingType(type:*):RaceTierBuilder {
+		addSlotRequirement(BodyData.SLOT_WING_TYPE, type);
+		return this;
+	}
 	public function requireEyeType(type:*):RaceTierBuilder {
 		addSlotRequirement(BodyData.SLOT_EYE_TYPE, type);
 		return this;

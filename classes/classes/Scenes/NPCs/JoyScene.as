@@ -554,6 +554,7 @@ import classes.lists.Gender;
 					outputText("\"<i>Well, you're a shark. You should be splashing around in the lake; what are you doing on dry land? Always want to be a fish out of water?</i>\"");
 					break;
 				case Races.DEMON:
+				case Races.IMP:
 					outputText("\"<i>Well, to be honest, you look like a demon... And that's terrible! Demons are nasty! People will be scared of you if you look like that.</i>\"");
 					break;
 				case Races.SIREN:

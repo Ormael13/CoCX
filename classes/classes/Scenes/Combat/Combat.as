@@ -9,6 +9,8 @@ import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.IMutations.*;
 import classes.ItemType;
+import classes.Items.Dynamic.Effects.SimpleRaceEnchantment;
+import classes.Items.EnchantmentLib;
 import classes.Items.ItemTags;
 import classes.Items.Weapon;
 import classes.Items.WeaponLib;
@@ -35,12 +37,7 @@ import classes.Scenes.Areas.VolcanicCrag.GolemsTrueFire;
 import classes.Scenes.Camp.TrainingDummy;
 import classes.Scenes.Dungeons.D3.*;
 import classes.Scenes.Dungeons.DeepCave.*;
-import classes.Scenes.Dungeons.DemonLab.DemonDragonGroup;
-import classes.Scenes.Dungeons.DemonLab.Incels;
-import classes.Scenes.Dungeons.DemonLab.IncubusScientist;
-import classes.Scenes.Dungeons.DemonLab.LabGuard;
-import classes.Scenes.Dungeons.DemonLab.ProjectNightwalker;
-import classes.Scenes.Dungeons.DemonLab.UltimisFlamespreader;
+import classes.Scenes.Dungeons.DemonLab.*;
 import classes.Scenes.Dungeons.EbonLabyrinth.*;
 import classes.Scenes.Dungeons.HelDungeon.*;
 import classes.Scenes.Monsters.Magnar;
@@ -4872,7 +4869,7 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.HellfireCoat))
                 ExtraNaturalWeaponAttack(biteMultiplier, "fire");
             ExtraNaturalWeaponAttack(biteMultiplier);
-            if (player.isRaceCached(Races.CERBERUS)) {
+            if (player.faceType == Face.CERBERUS) {
                 if (player.hasPerk(PerkLib.HellfireCoat)) {
                     ExtraNaturalWeaponAttack(biteMultiplier, "fire");
                     ExtraNaturalWeaponAttack(biteMultiplier, "fire");
@@ -5253,7 +5250,7 @@ public class Combat extends BaseContent {
             }
         }
         //Unique attack Cerberus fire breath
-        if (player.isRaceCached(Races.CERBERUS) && player.hasPerk(PerkLib.Hellfire)) {
+        if (player.faceType == Face.CERBERUS && player.hasPerk(PerkLib.Hellfire)) {
             outputText("You unleash a tripple blast of fire from your heads, engulfing [themonster] in Hellfire.");
             ExtraNaturalWeaponAttack(1, "fire breath");
             ExtraNaturalWeaponAttack(1, "fire breath");
@@ -5294,7 +5291,7 @@ public class Combat extends BaseContent {
         if ((player.isRaceCached(Races.WEREWOLF) || player.isRaceCached(Races.CERBERUS)) && player.hasMutation(IMutationsLib.AlphaHowlIM)) {
             var WerewolfPackDamageMultiplier:Number = 0.5;
             var packMembers:Number = LunaFollower.WerewolfPackMember;
-            if (player.hasMutation(IMutationsLib.HellhoundFireBallsIM)) packMembers += player.perkv3(IMutationsLib.HellhoundFireBallsIM);
+            if (player.hasMutation(IMutationsLib.HellhoundFireBallsIM)) packMembers += LunaFollower.HellhoundPackMember;
             outputText("Your beta, Luna, jumps into the melee");
             if (packMembers >= 1){
                 outputText("your other pack member");
@@ -7770,7 +7767,7 @@ public class Combat extends BaseContent {
             var packmultiplier:Number = 1.0;
             var PerkMultiplier:Number = 2;
             var packMembers:Number = LunaFollower.WerewolfPackMember;
-            if (player.hasMutation(IMutationsLib.HellhoundFireBallsIM)) packMembers += player.perkv3(IMutationsLib.HellhoundFireBallsIM);
+            if (player.hasMutation(IMutationsLib.HellhoundFireBallsIM)) packMembers += LunaFollower.HellhoundPackMember;
             if (player.perkv1(IMutationsLib.AlphaHowlIM) >= 4) PerkMultiplier = 5;
             packmultiplier += (packMembers*PerkMultiplier)/100
             damage *= packmultiplier;
@@ -12330,6 +12327,12 @@ public function calculateBasicTeaseDamage(BaseTeaseDamage:Number = 18):Number {
         outputText("\nYou use your own lust against the enemy, cooling off a bit in the process.");
         player.takeLustDamage(Math.round(-damage)/40, true);
         damage *= 1.2;
+    }
+    if (player.perkv1(PerkLib.ImpNobility) > 0) {
+        damage *= (100+player.perkv1(PerkLib.ImpNobility))/100;
+    }
+    for each (var f:SimpleRaceEnchantment in player.allEnchantments(EnchantmentLib.RaceSpellPowerDoubled)) {
+        damage *= f.power * (player.isRaceCached(f.race)? 3:2);
     }
     damage = (damage * monster.lustVuln);
     if (SceneLib.urtaQuest.isUrta()) damage *= 2;

@@ -38,7 +38,6 @@ import classes.Scenes.SceneLib;
 
 		private var _beachEncounters:GroupEncounter = null;
 		private function init():void {
-			const game:CoC = CoC.instance;
 			_beachEncounters = Encounters.group("beach",{
 				name: "harpoonGun",
 				when: function():Boolean {
@@ -177,8 +176,11 @@ import classes.Scenes.SceneLib;
 		}
 
 		public function exploreBeach():void {
+			clearOutput();
 			flags[kFLAGS.DISCOVERED_BEACH]++;
+			doNext(camp.returnToCampUseOneHour);
 			_beachEncounters.execEncounter();
+			flushOutputTextToGUI();
 		}
 
 		public function orcaSunscreenFound():void {

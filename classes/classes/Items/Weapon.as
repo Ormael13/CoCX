@@ -86,15 +86,23 @@ public class Weapon extends Equipable
 		}
 		
 		override public function canEquip(doOutput:Boolean):Boolean {
-			if ((perk == WP_LARGE && !game.player.shield.isNothing && !game.player.hasPerk(PerkLib.GigantGrip)) || (perk == WP_MASSIVE && !game.player.shield.isNothing)) {
-				if (doOutput) {
+			if ((InCollection(WP_LARGE, _perks ) && !game.player.shield.isNothing && !game.player.hasPerk(PerkLib.GigantGrip)) || (perk == WP_MASSIVE && !game.player.shield.isNothing)) {
+				if (!game.player.shield.canUnequip(doOutput)) {
+					if (doOutput) {
+						outputText("Y ou currently cannot remove your [shield].");
+					}
+				} else if (doOutput) {
 					outputText("Because this weapon requires the use of two hands, you have unequipped your shield. ");
 					SceneLib.inventory.unequipShield();
 				}
 				return false;
 			}
 			if ((perk == WP_DUAL_LARGE || perk == WP_DUAL || perk == WP_DUAL_SMALL) && !game.player.shield.isNothing) {
-				if (doOutput) {
+				if (!game.player.shield.canUnequip(doOutput)) {
+					if (doOutput) {
+						outputText(" You currently cannot remove your [shield].");
+					}
+				} else if (doOutput) {
 					outputText("Because those weapons requires the use of two hands, you have unequipped your shield. ");
 					SceneLib.inventory.unequipShield();
 				}

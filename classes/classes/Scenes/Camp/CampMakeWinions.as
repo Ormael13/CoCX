@@ -1346,7 +1346,11 @@ public class CampMakeWinions extends BaseContent
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) == 7) outputText(" (Baron Rank)");
 				if (player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) == 8) outputText(" (Viscount Rank)");
 			}
-			outputText("</i>");
+			outputText("</i>");/*	usunąć za jakiś czas wykorektorowaną cześć
+			outputText("\n"+player.statusEffectv1(StatusEffects.ElementalPearlGolems)+"");
+			outputText("\n"+player.perkv1(PerkLib.ElementalConjurerResolve)+"");
+			outputText("\n"+player.perkv1(PerkLib.ElementalConjurerDedication)+"");
+			outputText("\n"+player.perkv1(PerkLib.ElementalConjurerSacrifice)+"");*/
 			menu();
 			if (player.hasPerk(PerkLib.JobElementalConjurer) && (currentSizeOfElementalsArmy() < maxSizeOfElementalsArmy())) addButton(0, "Summon(N)", summoningElementalsSubmenu).hint("Summon a Normal-tier Elementals");
 			else addButtonDisabled(0, "Summon(N)", "You either summoned all possible Normal-tier elementals or reached limit of how many elementals you can command at once.");
@@ -1363,9 +1367,9 @@ public class CampMakeWinions extends BaseContent
 			addButton(14, "Back", camp.campWinionsArmySim);
 		}
 		private function canSearchForParls():Boolean {
-			return (player.hasPerk(PerkLib.ElementalConjurerResolve) && player.perkv1(PerkLib.ElementalConjurerResolve) < 2)/* ||
+			return (player.hasPerk(PerkLib.ElementalConjurerResolve) && player.perkv1(PerkLib.ElementalConjurerResolve) < 2) ||
 				(player.hasPerk(PerkLib.ElementalConjurerDedication) && player.perkv1(PerkLib.ElementalConjurerDedication) < 2) ||
-				(player.hasPerk(PerkLib.ElementalConjurerSacrifice) && player.perkv1(PerkLib.ElementalConjurerSacrifice) < 2)*/;
+				(player.hasPerk(PerkLib.ElementalConjurerSacrifice) && player.perkv1(PerkLib.ElementalConjurerSacrifice) < 2);
 		}
 		
 		private function elementaLvlUp():void {
@@ -1447,34 +1451,38 @@ public class CampMakeWinions extends BaseContent
 		}
 		private function elementaLvlUpEpic():void {
 			menu();
-			if (player.statusEffectv2(StatusEffects.SummonedElementalsAirE) < 8) {
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsAirE) && player.statusEffectv2(StatusEffects.SummonedElementalsAirE) < 8) {
 				if (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= (player.statusEffectv2(StatusEffects.SummonedElementalsAirE) * rankUpElementalElementalEnergyCost())) {
 					if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] > player.statusEffectv2(StatusEffects.SummonedElementalsAirE)) addButton(0, "Air", rankUpElementalAirEpic);
 					else addButtonDisabled(0, "Air", "Your Arcane Circle can't handle the epic elemental level up safely!");
 				}
 				else addButtonDisabled(0, "Air", "Your stored elemental energy is too low. Missing: "+((player.statusEffectv2(StatusEffects.SummonedElementalsAirE) * rankUpElementalElementalEnergyCost())-player.statusEffectv1(StatusEffects.ElementalEnergyConduits))+"");
 			}
-			if (player.statusEffectv2(StatusEffects.SummonedElementalsEarthE) < 8) {
+			else addButtonDisabled(0, "Air", "You don't have this epic elemental yet!");
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarthE) && player.statusEffectv2(StatusEffects.SummonedElementalsEarthE) < 8) {
 				if (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= (player.statusEffectv2(StatusEffects.SummonedElementalsEarthE) * rankUpElementalElementalEnergyCost())) {
 					if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] > player.statusEffectv2(StatusEffects.SummonedElementalsEarthE)) addButton(1, "Earth", rankUpElementalEarthEpic);
 					else addButtonDisabled(1, "Earth", "Your Arcane Circle can't handle the epic elemental level up safely!");
 				}
 				else addButtonDisabled(1, "Earth", "Your stored elemental energy is too low. Missing: "+((player.statusEffectv2(StatusEffects.SummonedElementalsEarthE) * rankUpElementalElementalEnergyCost())-player.statusEffectv1(StatusEffects.ElementalEnergyConduits))+"");
 			}
-			if (player.statusEffectv2(StatusEffects.SummonedElementalsFireE) < 8) {
+			else addButtonDisabled(1, "Earth", "You don't have this epic elemental yet!");
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsFireE) && player.statusEffectv2(StatusEffects.SummonedElementalsFireE) < 8) {
 				if (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= (player.statusEffectv2(StatusEffects.SummonedElementalsFireE) * rankUpElementalElementalEnergyCost())) {
 					if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] > player.statusEffectv2(StatusEffects.SummonedElementalsFireE)) addButton(2, "Fire", rankUpElementalFireEpic);
 					else addButtonDisabled(2, "Fire", "Your Arcane Circle can't handle the epic elemental level up safely!");
 				}
 				else addButtonDisabled(2, "Fire", "Your stored elemental energy is too low. Missing: "+((player.statusEffectv2(StatusEffects.SummonedElementalsFireE) * rankUpElementalElementalEnergyCost())-player.statusEffectv1(StatusEffects.ElementalEnergyConduits))+"");
 			}
-			if (player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) < 8) {
+			else addButtonDisabled(2, "Fire", "You don't have this epic elemental yet!");
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsWaterE) && player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) < 8) {
 				if (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= (player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) * rankUpElementalElementalEnergyCost())) {
 					if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] > player.statusEffectv2(StatusEffects.SummonedElementalsWaterE)) addButton(3, "Water", rankUpElementalWaterEpic);
 					else addButtonDisabled(3, "Water", "Your Arcane Circle can't handle the epic elemental level up safely!");
 				}
 				else addButtonDisabled(3, "Water", "Your stored elemental energy is too low. Missing: "+((player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) * rankUpElementalElementalEnergyCost())-player.statusEffectv1(StatusEffects.ElementalEnergyConduits))+"");
 			}
+			else addButtonDisabled(3, "Water", "You don't have this epic elemental yet!");
 			addButton(14, "Back", accessSummonElementalsMainMenu)
 		}
 		private function elementalShardsConversion():void {

@@ -1314,7 +1314,7 @@ public static const TALKED_TO_JOJO_ABOUT_JOY:int                                
 public static const CODEX_ENTRY_TYRANT:int                                  		= 1306;
 public static const CODEX_ENTRY_FLAMESPREADER:int                           		= 1307;
 public static const CODEX_ENTRY_NIGHTWALKER:int                             		= 1308;
-public static const UNKNOWN_FLAG_NUMBER_01309:int                                   = 1309;
+public static const CODEX_ENTRY_IMP_TOME:int                                        = 1309;
 public static const COCKATRICES_UNLOCKED:int                                   		= 1310;
 public static const TIMES_ENCOUNTERED_COCKATRICES:int                               = 1311;
 public static const CODEX_ENTRY_COCKATRICES:int                                   	= 1312;
@@ -1325,7 +1325,7 @@ public static const LOPPE_PREGNANCY_TYPE:int                                    
 public static const ETNA_INCUBATION:int                                             = 1317;
 public static const ETNA_PREGNANCY_TYPE:int                                         = 1318;
 public static const DEMON_LABORATORY_DISCOVERED:int                                 = 1319;
-public static const UNKNOWN_FLAG_NUMBER_01320:int                                   = 1320;
+public static const IMP_TOME_FOUND:int                                              = 1320;
 public static const UNKNOWN_FLAG_NUMBER_01321:int                                   = 1321;
 public static const UNKNOWN_FLAG_NUMBER_01322:int                                   = 1322;
 public static const UNKNOWN_FLAG_NUMBER_01323:int                                   = 1323;

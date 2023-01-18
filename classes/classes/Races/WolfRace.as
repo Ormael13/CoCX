@@ -60,6 +60,7 @@ public class WolfRace extends Race {
 				.rearType(RearBody.FENRIR_ICE_SPIKES, +6)
 				.hasPerk(PerkLib.FreezingBreath, +3)
 				.hasCockOfType(CockTypesEnum.WOLF, +1);
+		
 		buildTier(8, "wolf")
 				.namesMaleFemaleTaur("wolf-boy", "wolf-girl", "wolf-taur")
 				.buffs({
@@ -80,12 +81,12 @@ public class WolfRace extends Race {
 					"int.mult": -0.10
 				})
 				.end();
-		buildTier(21, "Fenrir")
+		buildTier(22, "Fenrir")
 				.buffs({
-					"str.mult": +1.45,
-					"tou.mult": +0.70,
-					"spe.mult": +1.00,
-					"int.mult": -0.10
+					"str.mult": +3.00,
+					"tou.mult": +1.60,
+					"spe.mult": +2.20,
+					"int.mult": -0.20
 				})
 				.end();
 	}

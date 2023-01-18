@@ -3596,6 +3596,8 @@ public class PerkLib
 				"(Amount of hydra heads)% health and (Amount of hydra heads) points of fatigue regeneration but double hunger decaying speed. Stops for 5 rounds when damaged by fire.");
 		public static const IcyFlesh:PerkType = mk("Icy flesh", "Icy flesh",
 				"You are about as frigid and dead as a corpse however your mastery of ice magic grants you the ability to harden your flesh to the durability of diamonds. Gain an intelligence modifier as a bonus to health calculation equal to that of toughness as well as 1% regeneration. Gain an extra 40% resistance to cold.");
+		public static const ImpNobility:PerkType = mk("Imp Nobility", "Imp Nobility",
+				"Can recruit other imps to form a swarm. All Tease and spellcasting are reinforced by a percentage equal to the number of imps under your command.");
 		public static const ImprovedVenomGland:PerkType = mk("Improved venom gland", "Improved venom gland",
 				"Increase slightly your venom max capacity and refill speed.");
 		public static const ImprovedVenomGlandEx:PerkType = mk("Improved venom gland (Ex)", "Improved venom gland (Ex)",
@@ -3683,6 +3685,12 @@ public class PerkLib
 				"Your cadaverous rigidity prevents any form of escape in battle.");
 		public static const SlimeCore:PerkType = mk("Slime Core", "Slime Core",
 				"Grants more control over your slimy body, allowing you to go twice as long without fluids.");
+		public static const SmallCaster:PerkType = mk("Small Caster", "Small Caster",
+				"Spells are more potent based on inverted size.");
+		public static const SmallFrame:PerkType = mk("Small frame", "Small frame",
+				"Naturally small species have better evasion");
+		public static const SoulEater:PerkType = mk("Soul Eater", "Soul eater",
+				"You have the ability to consume souls for power.");
 		public static const SpiderOvipositor:PerkType = mk("Spider Ovipositor", "Spider Ovipositor",
 				"Allows you to lay eggs through a special organ on your arachnid abdomen, though you need at least 10 eggs to lay.");
 		public static const StrengthOfStone:PerkType = mk("Strenght of stone", "Strenght of stone",
@@ -7394,4 +7402,4 @@ public class PerkLib
         }
 	}
 }
-}
+}

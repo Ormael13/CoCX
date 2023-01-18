@@ -191,12 +191,12 @@ public class EarthElemental extends Monster
 			if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4) {
 				this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);
 				this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
-				this.drop = new ChainedDrop()
+				this.drop = new WeightedDrop()
 					.add(useables.LELSHARD, 3)
 					.add(useables.ELCRYST, 1);
 			}
 			else {
-				this.drop = new ChainedDrop()
+				this.drop = new WeightedDrop()
 					.add(useables.ELSHARD, 3)
 					.add(useables.LELSHARD, 1);
 			}

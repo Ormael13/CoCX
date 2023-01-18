@@ -96,6 +96,7 @@ public class AtlachNachaRace extends Race{
 					"wis.mult": -0.50,
 					"sens": +90
 				})
+				.requireLegType(LowerBody.ATLACH_NACHA)
 				.requirePerk(PerkLib.Insanity)
 				.requirePerk(PerkLib.TransformationImmunity2)
 				.end()

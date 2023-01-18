@@ -2153,6 +2153,26 @@ public class LowerBodyTransformations extends MutationsHelper {
 			return player.lowerBody === LowerBody.ANT && player.legCount === 2;
 		}
 	);
+
+	public const LowerBodyTiny: Transformation = new SimpleTransformation("Tiny Lower Body",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				TransformationUtils.applyTFIfNotPresent(transformations.LowerBodyHuman, doOutput);
+
+				desc += "Your legs and feet shrink till they are almost comically small and can barely support your frame";
+
+				if (doOutput) outputText(desc);
+				player.legCount = 2;
+				player.lowerBody = LowerBody.TINY;
+				Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.TINY));
+			},
+			// is present
+			function (): Boolean {
+				return player.lowerBody === LowerBody.TINY && player.legCount === 2;
+			}
+	);
 	
 	/*
   */

@@ -59,6 +59,10 @@ public class Changelog extends BaseContent
 			outputText("-New tier 3 speed lvl-up perk: Power Shot (Ex). Req. Power Shot perk. Effect: Power Shoot p. special damage increased by ~2,5x. Add some of your strength (~40/10% of str / spe scaling value) to normal bow damage / (~40/10% of spe / str scaling value) throwing damage. (+15% range physical attacks multiplier)\n");
 			outputText("-New tier 4 speed lvl-up perk: Impact Throw. Req. Deadly Throw perk and 80+ spe. Effect: Thrown weapon impacts are so powerful that they can stop your opponents right in their tracks gaining a 10% chance of stunning them. (+15% range physical attacks multiplier)\n");
 			outputText("-New tier 5 speed lvl-up perk: Penetrating throw. Req. Impact Throw perk and 100+ spe. Effect: Thrown weapons have such penetrating power they now have a chance to run through multiple enemies. When attacking groups the projectiles have a 75% (losing 10% after each successful piercing strike) chance to deal their damage more then once. (+20% range physical attacks multiplier)\n");
+			outputText("-New event perk: Elven Thorn shot (grow Rosethorns on arow shaft, lust+bleed). Training with Lutien with 100+ speed and knowing Briarthorn spell.\n");
+			outputText("-New event perk: Elven Twin shot (double bow shots after bonusses). Training with Lutien with maxed speed stat (100%)\n");
+			outputText("-New event perk: What Is Reality? - Gained by becoming cheshire cat. Effect: When you would take fatal damage, laugh at death and deny it ever happened. Mocking death causes the increase of the arousal of the user which can still cause it to simply give up so to get to lewder games.\n");
+			outputText("-New event perk: Vorpal Claw - Gained by becoming cheshire cat. Effect: A cheshire natural weapon distorts space inflicting particularly vicious critical strikes. (Natural attacks dmg x2)\n");
 			outputText("-New race: Azazel - gained by following new path for Alvina - it's smth akin to purified devil tf with abilites to be not so corrupted and etc. (written by Liadri and coded by EragonX). Azazelkin/Azazel/True Azazel racial bonuses (11/16/29 race points): ");
 			outputText("+55/75/100% top str multi, -20/25/30% to spe multi, +80/130/250% to int multi, +65/100/150% ot wis multi, +90/170/220 to max lust, +15/40/50 to sens\n");
 			outputText("-Green Covenant req. to be Wood Elf or one of Plant races to cast. It also becomes magical special insted of a spell.\n");
@@ -82,8 +86,6 @@ public class Changelog extends BaseContent
 			outputText("-New tier 3 misc lvl-up perk: Skilled Gunslinger (Ex). Req. Skilled Gunslinger perk, lvl 15+ and 40+ str/tou/spe. Effect: When firearms atk crit chance exceed 100% crit dmg is x2 and when exceed 200% crit dmg is x3. (+20% firearms attacks multiplier and then adds another 50% (total of 100%) on top of final result)\n");
 			outputText("-New Cerberus TF event (sleep in camp while being fully hellhound (black pepper) and have Marae's Lethicite) Has a few unique interactions with corrupted enemies. (EragonX)\n");
 			outputText("-Metamorph aditions - Face: Bunny, Dog, Kangaroo, Ferret mask, Ferret, Rhino, Echidna, Bear, Squirrel; Tail: Azazel, Rabbit, Avian, Griffin, Kangaroo, Thunderbird, Squirrel, Ferret, Bear, Ushi Oni; Ratatoskr hair (EragonX)\n");
-			outputText("-New event perk: Elven Thorn shot (grow Rosethorns on arow shaft, lust+bleed). Training with Lutien with 100+ speed and knowing Briarthorn spell.\n");
-			outputText("-New event perk: Elven Twin shot (double bow shots after bonusses). Training with Lutien with maxed speed stat (100%)\n");
 			outputText("-Added option to capture & convert some of the enemies into new wood elfs.\n");
 			outputText("-New event perk: One with the forest. Gained by Wood Elfs. Effects: With each new soul added to the collective bolstering the trees of the sacred forest you become stronger physically and spiritually. Gain a +1% to all stats for each new wood elf created.\n");
 			outputText("-Factory, Deep Cave and Lethice Stronghold monsters went to gym and they are now punch harder. They even lvl up when was there by 4 lvl's (factory), 10 lvl's (deep cave) or whooping 30 lvl's (lethice stronghold).\n");
@@ -96,8 +98,6 @@ public class Changelog extends BaseContent
 			outputText("-New encounter in the High mountains, the Nekobake Inn. (EragonX)\n");
 			outputText("-New Neko gear items have appeared in the show, focused on evasiveness. (EragonX)\n");
 			outputText("-Cheshire cat bonuses now have two tiers trickster/cheshire cat (13/20): +30/100% to int multi, +180/260% to spe multi, +25/60 sens\n");
-			outputText("-New event perk: What Is Reality? - Gained by becoming cheshire cat. Effect: When you would take fatal damage, laugh at death and deny it ever happened. Mocking death causes the increase of the arousal of the user which can still cause it to simply give up so to get to lewder games.\n");
-			outputText("-New event perk: Vorpal Claw - Gained by becoming cheshire cat. Effect: A cheshire natural weapon distorts space inflicting particularly vicious critical strikes. (Natural attacks dmg x2)\n");
 			outputText("-Moved IMDB detail switch to QoL info. Fixed USS QoL switch not saving in global data. (Svalkash)\n");
 			outputText("-Madmen knowledge can be bought in Dinah shop too now under 'Misc' tab but be warned it's not the cheapest item in her offer....even insanity have it price a BIG price that amkes merchant selling bit of it happy ;) And items she had on main shop display been all moved to subtab named 'Misc'.\n");
 			outputText("-Base dmg of crossbow/firearms atk get very rudimentary scaling of stats. Crossbows getting added speed core/trained value parts * 2 added and firearms spe/int/wis core/trained values added. Job: Gunslinger would multiply base dmg not add 2x weapon atk.\n");
@@ -106,6 +106,20 @@ public class Changelog extends BaseContent
 			outputText("-New material: Elemental Crystal. Cost 10 gems. Could drop from defeated elementals of higher rank ((sub)bosses, named ones). It can be used to rank up summoned elemental. (Store 10 times more elemental energy than normal Elemental Shard)\n");
 			outputText("-New material: Elemental Core. Cost 20 gems. Could drop from defeated elementals of higher rank ((sub)bosses, named ones). It can be used to rank up summoned elemental. (Store 2 times more elemental energy than Elemental Crystal)\n");
 			outputText("-Elemental conversion of shards/crystals/cores can now be done using 1 or 5 of them.\n");
+			outputText("-Mutations are now able to bypass Level requirements if given Mutagen instead of Gems for the tf cost. (Jtecx)\n");
+			outputText("-Added Francesca and elf wizard to viewer. Added fran and forest mage to the game sprite. (Liadri)\n");
+			outputText("-Survival Training super perk can be ranked up two more times (up to rank 6).\n");
+			outputText("-Elemental Pearls can be now found fighting enemeis that are encoutered by going to summoning elementals menu and picking option to go on journey there (would only be possible if PC need to find one of three pearls).\n");
+			outputText("-Add the Imp Race. Arch imp is a new PermTF once you progress far enough along the Imp race, and allows you to recruit imps to assist you in combat with their lewdness. (EragonX)\n");
+			outputText("-Add the Tome of Imps - a unique drop from imps (shield slot) (EragonX)\n");
+			outputText("-3rd tier of wolf race bonuses been increased from 21 to 22 pts and bonuses boosted accordly (and then doubled due to 2 body slots been locked similary to perm tf's). It stronger variant of bite would also deal dmg/leqve bleeding wounds on top of injecting cold energy into enemy body.\n");
+			outputText("-Sprite addition including imp and black nako bottom and top. (Liadri)\n");
+			outputText("-Fixes: Staff with cursed shield bug, etna freakout to female (EragonX)\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -126,11 +140,6 @@ public class Changelog extends BaseContent
 			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			//remove this line when other two lines below get added ingame
 			//outputText("-New perk for enemies: Elite type enemy. Bonuses for are: Diehard effect of 2,5% of max HP + 750 HP * NG tier, OverMax HP effect of 5% magnitude.\n");
@@ -204,9 +213,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -239,7 +246,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -471,7 +477,7 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Equilibrium. Gained by spending 1 super perk point and having Hidden Job: Grey Sage super perk. Effects: Allow to reach OverMax Mana equal to 120% of current max mana. You can cast now any spell you learned even if you missing additional materials or not meet requirements. Slight increase cap on stored bones for necromancers.\n");
 			outputText("-New event perk: Natural Spellcasting. Gained by using elf tf when PC have both elf eyes and ears. Effect: Reduce all spell cooldowns by 1 round (2 if wearing the leaf necklace). (+1 to elf score)\n");
 			outputText("-New event perk: Vegetal Affinity. Gained by been one of plant races or wood elf. Effects: Empower Green Magic by 50% weaken fire resistance by 50%.\n");
-			outputText("-New event perk(s): Survival Training (Rank: 1-4). Gained by spending 1 super perk point. Effects: You have trained to better survive this realm hostile environment. (+1% to MaxOver HP, MaxOver Lust and Diehard each 3 lvl's up to +(10 * rank)%)\n");
+			outputText("-New super perk(s): Survival Training (Rank: 1-4). Gained by spending 1 super perk point. Effects: You have trained to better survive this realm hostile environment. (+1% to MaxOver HP, MaxOver Lust and Diehard each 3 lvl's up to +(10 * rank)%)\n");
 			outputText("-New History Perk (History: Feral - adds extra feral/claw attack) (khovel)\n");
 			outputText("-New Special for Faerie Dragon or Fairy: Pixie Dust - can be used only when flying and it's similar to fae strom but it deal no damage and have higher chance to proc status effects. When used on groups have additionaly increased chance to proc effects.\n");
 			outputText("-New M. Special: Faerie Dragon Breath - only usable by faerie dragon. It would deal magic damage and have chance (~60%) to apply six times radomly choosen one of seven effects (ther same that fae strom can apply).\n");

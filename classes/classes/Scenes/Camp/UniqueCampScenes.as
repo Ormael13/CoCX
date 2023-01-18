@@ -191,6 +191,42 @@ private function hellhoundCaptureFuckEveryone():void {
 	doNext(camp.returnToCampUseFourHours);
 }
 
+public function impTomeScene():void {
+	clearOutput();
+	outputText("You moan as you spontanously cum. Your impish body has absorbed so much energy from the many victims you violated that it’s ready to be expunged. [pg]");
+	outputText("Thanks to the tome your tiny body feels almost bathed in unholy power but as a result of it your arousal has reached inhuman levels. An idea comes to you out of nowhere. Fuck… the book? You should just fuck the book! It would be so simple to give in to your deviant urges but who's to tell what might happen if you use the cursed tome to pleasure yourself?![pg]");
+	menu();
+	addButton(0, "Give In", impTomeGiveIn);
+	addButton(1, "Resist", impTomeResist);
+}
+private function impTomeResist():void {
+	outputText("You resist the strange urge, and wonder how such a strange though came to be, how would you even fuck a book?")
+	doNext(playerMenu);
+}
+private function impTomeGiveIn():void {
+	clearOutput();
+	outputText("You give in to your urges, letting the unholy power of the book wash over you for better or worse. The black inked text suddenly animates, turning into black tentacles that wrap around your limbs, pulling you toward the pages. Before you can issue a word of protest a single tendril");
+	if (player.hasCock()) outputText(" wraps around your [cocks] jerking you off vigorously");
+	outputText((player.hasCock() && player.hasVagina()?" while another":""));
+	if (player.hasVagina())outputText(" inserts itself into your welcoming pussy, rushing past your cervix as it causes your stomach to bulge with the shape of the foreign flesh ravaging your insides");
+	outputText(".[pg]You feel your orgasm coming through like a tidal wave breaching through the barriers of rational thought you erected in your mind and turning everything to mush as you cum out your essence in the form of purple fluids unto the pages the letter of your name now forming as the newly versed ink dries up. As if on cue, your body is suddenly pulled in further, you're being dragged right into the pages! First your feet, then your legs and before you know it you're in up to your torso. The tome is eating you up! You try a final time to pull yourself out of the book as a third orgasm rocks you by causing you to release your hold and being dragged right into the tome![pg]");
+	outputText("Surrounded by darkness, you have no idea where you are. You try moving, but you are firmly stuck in a caged prison, of which the only exit seems to be currently closed. You don't even have enough space to masturbate, talk about inconvenience! Just as you're about to go back to sleep you're suddenly pulled down by the hair into a very tight fleshy passage.[pg]");
+	outputText("Seeing your way to freedom, you go onward wiggling your way toward the light and fresh air. As your head finally forces its way out you see a scene you weren't expecting. A luxurious room filled with blankets and cushions awaits you. It looks like a comfortable, well-lit living space save for the fact it lacks any windows. You look around noticing several additional features including magical research tools and a lectern with an open book. Last but not least above your head on the ceiling floats a swirling vortex of purple magic at the center of which floats the shape of a disjoined pussy, gaping wide and still drooling from your recent passage. Did you just fall through a cunt portal?[pg]");
+	outputText("With not much else to do, you walk over to the lectern and check on the book. As you approach, ink forms onto the paper and takes on the shape of distincts letters.[pg]");
+	outputText("\"<i>Dear [name], congratulations! I am the librarian demon Nalcanthet[if (silly)Herma Moira] and the creator of the Tome of Imps. By signing your name into my book and trading off your soul you have formally entered a contract with me. As the contractor you are now the official owner of this book I created (Take care of it, your life depends on that!).[pg]");
+	outputText("With the deal sealed and through the unholy power of my womb you were reborn as an Arch Imp (Yes I have a fetish for shortstacks). I created this item as a device so that I could enjoy the pleasure of my body being used for eternity, call it a weird kink of mine. As a reward you may now use this extradimensional space and its 'gate' for the storage and displacement of imps. Please use this book to your hearts content. Absorbing new souls and imps into these pages may grow the power of the contract.</i>\"[pg]");
+	outputText("Looks like you got cursed, although come to think of it, is that really a curse? You're now possibly the most powerful imp in the world and you still own the tome. The depraved image of legions of lesser imps");
+	if (player.hasCock()) outputText(" servicing your cock as you order them to bring the next bitch to break");
+	outputText((player.hasCock() && player.hasVagina()?", while a tied up manslut serves as your personnal throne":""));
+	if (player.hasVagina())outputText(" fucking your fertile imp cunt to birth the new legion of servants obediant to your royal will");
+	outputText(" comes to your mind and makes you smirk wickedly.[pg]");
+	outputText("Yea the idea of taking over the world by storm as the strongest imp gives you chills of pleasure,");
+	outputText("[if (hasock) your cock hardening][if (hascock && hasvagina) and][if (hasvagina) your snatch drooling] at the prospect, the thought nearly bringing you to a spontaneous orgasm.[pg]");
+	outputText("Done examining your new personal abode, you exit by the way you came parting the vaginal gate and leaving the book more or less the same way you got in.[pg]");
+	outputText("Back in your camp you prepare your battle plans for world domination. First, you will need more imps.[pg]");
+	CoC.instance.mutations.archImpTFforce(player);
+	doNext(camp.returnToCampUseFourHours);
+}
 	}
 
 }

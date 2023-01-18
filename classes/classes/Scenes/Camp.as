@@ -1026,9 +1026,13 @@ public class Camp extends NPCAwareContent{
 		if (slavesCount() > 0) addButton(7, "Slaves", campSlavesMenu).hint("Check up on any slaves you have received and interact with them.");
 		addButton(8, "Camp Actions", campActions).hint("Read your codex, questlog or interact with the [camp] surroundings.");
 		if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 10 || flags[kFLAGS.CAMP_BUILT_CABIN] >= 1) addButton(9, "Enter Cabin", cabinProgress.initiateCabin).hint("Enter your cabin."); //Enter cabin for furnish.
-		if (player.hasPerk(PerkLib.JobSoulCultivator)) addButton(10, "Soulforce", soulforce.accessSoulforceMenu).hint("Spend some time on the cultivation, or spend some of the soulforce.");
+		if (player.hasPerk(PerkLib.JobSoulCultivator)) {
+			if (player.hasPerk(PerkLib.Soulless)) addButtonDisabled(10, "Soulforce", "You no longer have soul that allow you to use cultivation options.");
+			else addButton(10, "Soulforce", soulforce.accessSoulforceMenu).hint("Spend some time on the cultivation, or spend some of the soulforce.");
+		}
 		else if (!player.hasPerk(PerkLib.JobSoulCultivator) && player.hasPerk(PerkLib.Metamorph)) {
 			if (player.blockingBodyTransformations()) addButtonDisabled(10, "Metamorph", "Your current body state prevents you from using Metamorph. (Either cure it or ascend to gain access to metamorph menu again)");
+			else if (player.hasPerk(PerkLib.Soulless)) addButtonDisabled(10, "Metamorph", "Your current soul state prevents you from using Metamorph. (If you could somehow fix it you would gain access to metamorph menu again)");
 			else addButton(10, "Metamorph", SceneLib.metamorph.openMetamorph).hint("Use your soulforce to mold your body.");
 		}
 		SceneLib.masturbation.masturButton(11);
@@ -1198,7 +1202,7 @@ public class Camp extends NPCAwareContent{
 		var counter:Number = 0;
 		counter += slavesCount();
 		counter += LunaFollower.WerewolfPackMember;
-		if (player.hasPerk(IMutationsLib.HellhoundFireBallsIM)) counter += player.perkv3(IMutationsLib.HellhoundFireBallsIM);
+		if (player.hasPerk(IMutationsLib.HellhoundFireBallsIM)) counter += LunaFollower.HellhoundPackMember;
 		if (arianScene.arianFollower()) counter++;
 		if (BelisaFollower.BelisaInCamp) counter++;
 		if (CelessScene.instance.isCompanion() && CelessScene.instance.isCorrupt) counter++;
@@ -3627,6 +3631,17 @@ public class Camp extends NPCAwareContent{
 							SophieFollowerScene.HarpyEggReady = true;
 						}
 					}
+				}
+				else if (player.isRaceCached(Races.IMP, 3)) {
+					outputText("Done with your day you open the tome and dive into the security of your personal sanctuary. ");
+					if (player.perkv1(PerkLib.ImpNobility) < 5) outputText("Nalcanthet quarters include a luxurious bed for your convenience and you are keen on using it.");
+					else outputText("You order your subjects to prepare a throne for you by stacking their tiny bodies on top of one another for you to rest on. They are quick to comply and soon the imp throne is readied. Satisfied with the result you sit down on the impromptu throne.[pg]");
+					if (player.perkv1(PerkLib.ImpNobility) >= 5) {
+						if (player.hasVagina()) outputText(" You tap the imp in charge of the back area then whisper to his ears to harden up and fuck your pussy gently. If for any reason including him thrusting too fast or roughly you have to wake up early, he will suffer punishment. Without need to be told twice the lesser imp's cock hardens on the spot and slides seamlessly into your royal snatch, his corrupt pre tingling your passage most comfortably.[pg]");
+						outputText((player.hasCock()? (player.hasVagina()?"With your wet passage taken good care of you":"You"):""));
+						if (player.hasCock()) outputText(" then call out to the imp underneath you ordering him to offer his ass to sleeve your hardening cock and move on his own so that you can relax. Soon his cheeks wraps around your [cock], massaging you at a slow and steady rhythm.[pg]");
+					}
+					outputText("Satisfied with the current arrangements you head to sleep.");
 				}
 				else{
 					outputText("You curl up, planning to sleep for " + num2Text(timeQ) + " ");

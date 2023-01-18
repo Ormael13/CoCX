@@ -290,6 +290,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const ArmsHound: Transformation 				= arms.ArmsHound;
 	public const ArmsYeti: Transformation 				= arms.ArmsYeti;
 	public const ArmsYukiOnna: Transformation 			= arms.ArmsYukiOnna;
+	public const ArmsTiny: Transformation 			    = arms.ArmsTiny;
 
 
 //ASS
@@ -468,6 +469,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const EarsPanda: Transformation 		= ears.EarsPanda;
 	public const EarsMelkie: Transformation 	= ears.EarsMelkie;
 	public const EarsDeer: Transformation 		= ears.EarsDeer;
+	public const EarsBig: Transformation        = ears.EarsBig;
 
 
 //EYES
@@ -705,6 +707,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
     public const HornsJabberwocky: Transformation 			= horns.HornsJabberwocky;
     public const HornsUshiOni: Transformation 				= horns.HornsUshiOni;
     public const HornsJiangshi: Transformation 				= horns.HornsJiangshi;
+    public const HornsArchImp: Transformation 				= horns.HornsArchImp;
 
 
 //LOWER BODY ( LEGS )
@@ -807,6 +810,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
     public const LowerBodyCrab: Transformation 				= lowerBody.LowerBodyCrab;
     public const LowerBodyCancer: Transformation 			= lowerBody.LowerBodyCancer;
     public const LowerBodySnake: Transformation 			= lowerBody.LowerBodySnake;
+    public const LowerBodyTiny: Transformation 			    = lowerBody.LowerBodyTiny;
 
 
 
@@ -920,6 +924,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
     public const SkinPatternTigerSharkStripes:Transformation 	= skin.SkinPatternTigerSharkStripes;
     public const SkinPatternOrca:Transformation 				= skin.SkinPatternOrca;
     public const SkinPatternSeaDragon:Transformation 			= skin.SkinPatternSeaDragon;
+    public const SkinPatternArchImp:Transformation 			    = skin.SkinPatternArchImp;
 
 
 //TAIL
@@ -1013,6 +1018,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const TongueGhost: Transformation 		= tongue.TongueGhost;
 	public const TongueRatatoskr: Transformation 	= tongue.TongueRatatoskr;
 	public const TongueMelkie: Transformation 		= tongue.TongueMelkie;
+	public const TongueImp: Transformation 			= tongue.TongueImp;
 
 
 //VAGINA

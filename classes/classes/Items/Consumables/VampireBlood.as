@@ -102,13 +102,13 @@ public class VampireBlood extends Consumable {
                 changes++;
             }
 
-            if (rand(3) == 0 && changes < changeLimit && player.horns.type == Horns.NONE) {
+            if (rand(3) == 0 && changes < changeLimit && player.horns.type != Horns.NONE) {
                 outputText("\n\n");
                 CoC.instance.transformations.HornsNone.applyEffect();
                 changes++;
             }
 
-            if (rand(3) == 0 && changes < changeLimit && player.antennae.type == Antennae.NONE) {
+            if (rand(3) == 0 && changes < changeLimit && player.antennae.type != Antennae.NONE) {
                 outputText("\n\n");
                 CoC.instance.transformations.AntennaeNone.applyEffect();
                 changes++;

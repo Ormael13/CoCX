@@ -44,7 +44,7 @@ import classes.StatusEffects;
 			outputText("You breathe deep, steel yourself");
 			if (player.hasKeyItem("Laybans") >= 0) outputText(", put your shades on");
 			outputText(" and stride out onto the gantry. The plan is simple. You’ll keep your eyes up and march across as if you belong there, as if you are on official business.");
-			if (player.isRace(Races.DEMON, 1, false)) outputText("  You can’t be mistaken for anything but a demon, after all.");
+			if (player.isRace(Races.DEMON, 1, false)||player.isRace(Races.IMP, 1, false)) outputText("  You can’t be mistaken for anything but a demon, after all.");
 			outputText("  If or when the lizards realize who you are, you’ll make a break for it, and hopefully by then you’ll be in reach of the exit. It’s straight-forward, it’s elegant, it will work, whatever your hammering pulse has to say on the matter.");
 
 			outputText("\n\nYou try and not look down as you proceed, back straight and as aloof as you can.");

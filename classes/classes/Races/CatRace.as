@@ -40,22 +40,24 @@ public class CatRace extends Race {
 		super("Cat", id, []);//RaceBody);
 	}
 	
-	public const TfList:/*PossibleEffect*/Array = [
-		new TransformationGroupAny("FaceHumanOrCat", [
-			game.transformations.FaceCat,
-			game.transformations.FaceCatCanines
-		]),
-		game.transformations.EyesCat,
-		game.transformations.EarsCat,
-		game.transformations.TongueCat,
-		game.transformations.TailCat,
-		game.transformations.ArmsCat,
-		game.transformations.LowerBodyCat(),
-		game.transformations.SkinFurGradual(Skin.COVERAGE_HIGH, {colors: catFurColors}),
-		game.transformations.HornsNone,
-		game.transformations.WingsNone,
-		game.transformations.CockChangeType(CockTypesEnum.CAT, false)
-	];
+	public function get TfList():/*PossibleEffect*/Array {
+		return [
+			new TransformationGroupAny("FaceHumanOrCat", [
+				game.transformations.FaceCat,
+				game.transformations.FaceCatCanines
+			]),
+			game.transformations.EyesCat,
+			game.transformations.EarsCat,
+			game.transformations.TongueCat,
+			game.transformations.TailCat,
+			game.transformations.ArmsCat,
+			game.transformations.LowerBodyCat(),
+			game.transformations.SkinFurGradual(Skin.COVERAGE_HIGH, {colors: catFurColors}),
+			game.transformations.HornsNone,
+			game.transformations.WingsNone,
+			game.transformations.CockChangeType(CockTypesEnum.CAT, false)
+		];
+	}
 	
 	public override function setup():void {
 		

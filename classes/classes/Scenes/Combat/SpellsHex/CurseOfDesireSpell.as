@@ -1,5 +1,6 @@
 package classes.Scenes.Combat.SpellsHex {
 import classes.Monster;
+import classes.PerkLib;
 import classes.Scenes.Combat.AbstractHexSpell;
 import classes.Scenes.Combat.Combat;
 import classes.StatusEffects;
@@ -65,6 +66,9 @@ public class CurseOfDesireSpell extends AbstractHexSpell {
 			else lustDmg3 = Math.round(lustDmg3);
 			if (display) {
 				outputText("The curse of desire slowly sap at your victim's resolve and countenance. ");
+				if (player.perkv1(PerkLib.ImpNobility) > 0) {
+					outputText("Your imp cohorts assist you spellcasting adding their diagrams to your own. ");
+				}
 			}
 			monster.teased(Math.round(monster.lustVuln * lustDmg3), false);
 			if (display) {
@@ -98,12 +102,18 @@ public class CurseOfDesireSpell extends AbstractHexSpell {
 	override protected function doSpellEffect(display:Boolean = true):void {
 		if (display) {
 			outputText("You focus on your magic, trying to draw on it without enhancing your own arousal.\n");
+			if (player.perkv1(PerkLib.ImpNobility) > 0) {
+				outputText("  Your imp cohorts assist you spellcasting adding their diagrams to your own.\n");
+			}
 		}
 		if (!backfired(display)) {
 			var llr:Number = calcLustResReduction(monster);
 			monster.lustVuln += llr;
 			if (display) {
 				outputText("You moan in pleasure as you curse your target with lewd thoughts. [Themonster] pants in arousal, unable to stop the encroaching fantasies you forced on [monster him] from having their desired effect. ");
+				if (player.perkv1(PerkLib.ImpNobility) > 0) {
+					outputText("Your imp cohorts assist you spellcasting adding their diagrams to your own.");
+				}
 			}
 			var lustDmg:Number = calcLustDamage(monster);
 			monster.createStatusEffect(StatusEffects.CurseOfDesire, calcDuration(), lustDmg, llr, 0);

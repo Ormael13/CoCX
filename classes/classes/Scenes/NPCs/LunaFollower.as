@@ -30,6 +30,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 		public static var Sated:Boolean;
 		public static var SatedCooldown:int;
 		public static var WerewolfPackMember:int;
+		public static var HellhoundPackMember:int;
 
 		public static var mooning:Boolean = false; //no need to save it
 
@@ -42,6 +43,8 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			NursedCooldown = 0;
 			Sated = false;
 			SatedCooldown = 0;
+			WerewolfPackMember = 0;
+			HellhoundPackMember = 0;
 		}
 
 		public function saveToObject():Object {
@@ -50,7 +53,8 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 				"LunaNursedCooldown": NursedCooldown,
 				"LunaSated": Sated,
 				"LunaSatedCooldown": SatedCooldown,
-				"LunaWerewolfPackMember": WerewolfPackMember
+				"LunaWerewolfPackMember": WerewolfPackMember,
+				"LunaHellhoundPackMember": HellhoundPackMember
 			};
 		}
 
@@ -58,12 +62,10 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			if (o) {
 				Nursed = o["LunaNursed"];
 				Sated = o["LunaSated"];
-				if ("LunaNursedCooldown" in o) NursedCooldown = o["LunaNursedCooldown"];
-				else NursedCooldown = 0;
-				if ("LunaSatedCooldown" in o) SatedCooldown = o["LunaSatedCooldown"];
-				else SatedCooldown = 0;
-				if ("LunaWerewolfPackMember" in o) WerewolfPackMember = o["LunaWerewolfPackMember"];
-				else WerewolfPackMember = 0;
+				NursedCooldown = valueOr(o["LunaNursedCooldown"], 0);
+				SatedCooldown = valueOr(o["LunaSatedCooldown"], 0);
+				WerewolfPackMember = valueOr(o["LunaWerewolfPackMember"], 0);
+				HellhoundPackMember = valueOr(o["HellhoundPackMember"], 0);
 			} else resetState();
 		}
 

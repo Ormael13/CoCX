@@ -550,7 +550,7 @@ public class Tail extends SaveableBodyPart {
 	}
 
 	public static function hasFelineTail(creature: *):Boolean {
-		const id: int = creature.tailType;
+		const id: int = creature.tail.type;
 
 		return Types[id].feline || false;
 	}

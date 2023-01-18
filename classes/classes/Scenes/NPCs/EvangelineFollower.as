@@ -1100,19 +1100,19 @@ private function InternalMutations():void {
 		addButton(3, "Yes", IMutationsYN);
 	}
 	else if (EvangelinePeepTalkOnInternalMutations == 2) {
-		if (player.blockingBodyTransformations()){
-			outputText("Evangeline examines you for a moment, before stating \"Uh, hey [name], your body is kind of tightly hard-wired up together, I don't think any Mutagens are going to be able to help you now. \"\n");
-			outputText("It seems, because you're now transformatively immune, she won't be able to help you with your mutations.");
-			doNext(meetEvangeline);
-		}
-		else{
-			outputText("\"<i>Did you bring gems or find a vial of the mutagen?</i>\" she asks.\n\n");
-			outputText("Her eyes briefly graze your form, \"<i>It looks like the only that way we can do anything about that 'unhealthy drive' of yours is with a little mutation.</i>\" She snickers softly as she waits for your response.");
-			menu();
-			addButton(1, "Gems", IMutationsGemsOrMutagen, 1).disableIf(player.gems < 500, "Gotta get that 500 gems first.");
-			addButton(3, "Mutagen", IMutationsGemsOrMutagen, 2).disableIf(!player.hasItem(useables.E_ICHOR, 1), "Gotta get that vial of mutagen first.");
-			addButton(14, "Back", meetEvangeline);
-		}
+		//if (player.blockingBodyTransformations()){
+		//	outputText("Evangeline examines you for a moment, before stating \"Uh, hey [name], your body is kind of tightly hard-wired up together, I don't think any Mutagens are going to be able to help you now. \"\n");
+		//	outputText("It seems, because you're now transformatively immune, she won't be able to help you with your mutations.");
+		//	doNext(meetEvangeline);
+		//}
+		//else{
+		outputText("\"<i>Did you bring gems or find a vial of the mutagen?</i>\" she asks.\n\n");
+		outputText("Her eyes briefly graze your form, \"<i>It looks like the only that way we can do anything about that 'unhealthy drive' of yours is with a little mutation.</i>\" She snickers softly as she waits for your response.");
+		menu();
+		addButton(1, "Gems", IMutationsGemsOrMutagen, 1).disableIf(player.gems < 500, "Gotta get that 500 gems first.");
+		addButton(3, "Mutagen", IMutationsGemsOrMutagen, 2).disableIf(!player.hasItem(useables.E_ICHOR, 1), "Gotta get that vial of mutagen first.");
+		addButton(14, "Back", meetEvangeline);
+		//}
 	}
 
 	function IMutationsYN(yn:Boolean = true):void {
@@ -1127,12 +1127,12 @@ private function InternalMutations():void {
 		}
 		doNext(meetEvangeline);
 	}
-}
 
-private function IMutationsGemsOrMutagen(costType:int = 0):void {
-	outputText("\n\nEvangeline prepares her alchemy lab as she sterilizes a syringe.\n\n\"<i>I can craft a mutagen out of common material or use the one you found to alter one of your organs. The change will be difficult to reverse, though. You'd better make sure this is what you want. Which mutagen would you like me to craft?</i>\"");
-	GoM = costType;
-	IMutationsSelector(0);
+	function IMutationsGemsOrMutagen(costType:int = 0):void {
+		outputText("\n\nEvangeline prepares her alchemy lab as she sterilizes a syringe.\n\n\"<i>I can craft a mutagen out of common material or use the one you found to alter one of your organs. The change will be difficult to reverse, though. You'd better make sure this is what you want. Which mutagen would you like me to craft?</i>\"");
+		GoM = costType;
+		IMutationsSelector(0);
+	}
 }
 
 private function IMutationsSelector(page:int = 0):void {
@@ -1167,9 +1167,11 @@ private function IMutationsSelector(page:int = 0):void {
 			bdFunc = null;
 			mutations.pReqs();
 			//trace("" + mutations.name() + ": Checking requirements. v");
-			if (flags[kFLAGS.EVA_MUTATIONS_BYPASS] || ((mutations.available(target) || GoM == 2 && target.hasMutation(mutations)) && mutations.maxLvl > target.perkv1(mutations))) {
+							  //If using Mutagen, and mutation is not available due to race/lvl reqirements, costs 2 mutagen, otherwise 1, and player has enough slots.
+			var mutagenBypass:Boolean = (GoM == 2 && ((!mutations.available(target))? player.hasItem(useables.E_ICHOR, 2) : true) && (target.hasMutation(mutations)? true:player.maxCurrentMutationsInSlot(mutations.slot)));
+			if ((flags[kFLAGS.EVA_MUTATIONS_BYPASS] || mutations.available(target) || mutagenBypass) && mutations.maxLvl > target.perkv1(mutations)) {	//last bit retains the blocking max mutation level.
 				//trace("Requirements met, adding in.");
-				bdFunc = curry(mutations.acquireMutation, player, costTaker)
+				bdFunc = curry(mutations.acquireMutation, player, curry(costTaker, mutagenBypass))
 				bdDesc = mutations.desc();
 			} else if(mutations.maxLvl == target.perkv1(mutations)) {
 				//trace("MaxTier acquired");
@@ -1195,9 +1197,9 @@ private function IMutationsSelector(page:int = 0):void {
 		submenu(bd,curry(IMutationsSelector, menuButton), 0, false)
 	}
 
-	function costTaker():void{
+	function costTaker(mutagenBypassDoubledCost:Boolean):void{
 		if (GoM == 1) player.gems -= 500
-		else player.destroyItems(useables.E_ICHOR, 1)
+		else player.destroyItems(useables.E_ICHOR, (mutagenBypassDoubledCost)? 2 : 1);
 		menu();
 		clearOutput();
 		outputText("Evangeline gets to brewing the mutagen. An half hour later, the injection is ready. She has you laid down into a makeshift seat.\n\n");

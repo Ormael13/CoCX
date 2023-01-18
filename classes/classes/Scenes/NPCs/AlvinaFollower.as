@@ -1439,18 +1439,22 @@ public function alvinaCampAdvancedStudy():void
 		doNext(camp.returnToCampUseSixHours);
 	}
 	else if (player.statusEffectv1(StatusEffects.AlvinaTraining2) == 1) {
-		if (player.isRace(Races.DEVIL, 1, false) || (player.isRace(Races.DEMON, 1, false) && player.gender > 0)) {
+		if (player.isRace(Races.DEVIL, 1, false) || ((player.isRace(Races.DEMON, 1, false)||player.isRace(Races.IMP, 1, false)) && player.gender > 0)) {
 			if (player.isRace(Races.DEVIL, 1, false)) {
 				outputText("You ask Alvina if this form will work, and she looks at you, amused.\n\n");
 				outputText("\"<i>Well, I didn't expect you to like my form that much. How flattering. I guess you didn’t want to be part of the common rabble, did you? You just had to go a special path? Oh well, like apprentice like master I guess?</i>\"\n\n");
 			}
-			else if (player.isRace(Races.DEMON, 1, false) && player.gender == 1) {
+			else if ((player.isRace(Races.DEMON, 1, false)) && player.gender == 1) {
 				outputText("You ask Alvina if this form will work, swinging your [cock] for her to admire.\n\n");
 				outputText("\"<i>A slavering incubus fits you perfectly.</i>\"\n\n");
 			}
 			else if (player.isRace(Races.DEMON, 1, false) && player.gender == 2) {
 				outputText("You ask Alvina if this form will work, giving her a nice view, putting your [chest] and your [pussy] on display.\n\n");
 				outputText("\"<i>A slutty succubus fits you perfectly.</i>\"\n\n");
+			}
+			else if (player.isRace(Races.IMP, 1, false) ) {
+				outputText("You ask Alvina if this form will work, giving her a nice view of your impish body.\n\n");
+				outputText("\"<i>Not my first choice, though I suppose an imp qualifies.</i>\"\n\n");
 			}
 			else {
 				outputText("You ask Alvina if this form will work, giving her a nice look, putting your [chest] on display and swinging your [cock] above your [pussy] around so she can admire both.\n\n");

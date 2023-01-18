@@ -57,7 +57,7 @@ public class DemonDragonGroup extends Monster {
         this.lustVuln = 0.44;
         this.level = 60;
         this.gems = rand(50) + 75;
-        this.drop = new WeightedDrop().add(useables.D_SCALE, 5).add(useables.LETHITE, 2).add(jewelries.POWRRNG, 1);
+        this.drop = new WeightedDrop().add(useables.D_SCALE, 5).add(consumables.LETHITE, 2).add(jewelries.POWRRNG, 1);
         this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
         this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
         this.createPerk(PerkLib.TankI, 0, 0, 0, 0);

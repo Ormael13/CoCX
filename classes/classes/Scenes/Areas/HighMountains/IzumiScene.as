@@ -210,7 +210,7 @@ import classes.Stats.Buff;
 				if (player.racialScore(Races.MINOTAUR, false) > 3) outputText("plus it looks like you're thinking with the head on top of your neck, rather than the head between your legs, unlike the stupid brutes who usually wander around these parts.  ");
 				else if (player.isRace(Races.DOG, 1, false)) outputText("plus it looks like you'd actually be able to resist chasing down a stick, if I threw one outta' the cave.  ");
 				else if (player.isGoblinoid()) outputText("plus you don't seem to be as insufferable as the rest of those little green whores trolloping around these parts, hunting their next lay.  ");
-				else if (player.isRace(Races.DEMON, 1, false)) outputText("plus you're not forever going on about corruption this, enslavement that, demonic taint the other, unlike the insufferable clods who usually wander around these parts.  ");
+				else if (player.isRace(Races.DEMON, 1, false) || player.isRace(Races.IMP, 1, false)) outputText("plus you're not forever going on about corruption this, enslavement that, demonic taint the other, unlike the insufferable clods who usually wander around these parts.  ");
 				else if (player.isRace(Races.HARPY, 1, false)) outputText("plus you're not screeching incessantly, like the feathery sluts who usually flap their way around these parts.  They're lucky they </i>can<i> fly, 'cause I'd give them something to really squawk about if I could get my hands on them.  ");
 				else if (player.isRace(Races.LIZARD, 1, false)) outputText("plus, you don't have the same creepy eyes that the scaley idiots from around these parts keep trying to use on me.  ");
 				else outputText("plus you don’t look like the troglodytes who usually wander around these parts.  ");

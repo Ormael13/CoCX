@@ -3,7 +3,9 @@ import classes.ItemTemplate;
 import classes.Items.Consumables.HairDye;
 import classes.Items.Dynamic.DynamicArmor;
 import classes.Items.Dynamic.DynamicRing;
+import classes.Items.Dynamic.DynamicShield;
 import classes.Items.Dynamic.DynamicWeapon;
+import classes.Items.Dynamic.DynamicWeaponRange;
 
 public class ItemTemplateLib {
 	public static var instance:ItemTemplateLib;
@@ -37,8 +39,23 @@ public class ItemTemplateLib {
 	public function createWeapon(subtype:String, rarity:int, quality:int, curseStatus:int, effects:/*Enchantment*/Array):DynamicWeapon {
 		return DynamicItems.createItem(TDynamicWeapon, subtype, rarity, quality, curseStatus, effects) as DynamicWeapon;
 	}
+
+	public const TDynamicWeaponRange:ItemTemplate = mk("DynamicWeaponRange", "Enchanted Weapon Ranged", DynamicWeapon, {
+		category: "weaponRange",
+		params: [
+			{name: "t", label:"Subtype", type:"text", value:"sword"},
+			{name: "r", label:"Rarity", type:"number", value:0, min:0, max: 4},
+			{name: "q", label:"Quality", type:"number", value:0, min:-15, max:15},
+			{name: "c", label:"Curse", type:"number", value:0, min:0, max:3},
+			{name: "e", label:"Effects", type:"enchantments", value:[]}
+		]
+	});
+
+	public function createWeaponRange(subtype:String, rarity:int, quality:int, curseStatus:int, effects:/*Enchantment*/Array):DynamicWeaponRange {
+		return DynamicItems.createItem(TDynamicWeaponRange, subtype, rarity, quality, curseStatus, effects) as DynamicWeaponRange;
+	}
 	
-	public const TDynamicArmor:ItemTemplate = mk("DynamicArmo"/* id, don't fix the typo */, "Enchanted Armor", DynamicArmor, {
+	public const TDynamicShield:ItemTemplate = mk("DynamicShield"/* id, don't fix the typo */, "Enchanted Shield", DynamicShield, {
 		category: "armor",
 		params: [
 			{name: "t", label:"Subtype", type:"text", value:"sword"},
@@ -49,6 +66,21 @@ public class ItemTemplateLib {
 		]
 	});
 	
+	public function createShield(subtype:String, rarity:int, quality:int, curseStatus:int, effects:/*Enchantment*/Array):DynamicShield {
+		return DynamicItems.createItem(TDynamicShield, subtype, rarity, quality, curseStatus, effects) as DynamicShield;
+	}
+
+	public const TDynamicArmor:ItemTemplate = mk("DynamicArmo"/* id, don't fix the typo */, "Enchanted Armor", DynamicArmor, {
+		category: "armor",
+		params: [
+			{name: "t", label:"Subtype", type:"text", value:"sword"},
+			{name: "r", label:"Rarity", type:"number", value:0, min:0, max: 4},
+			{name: "q", label:"Quality", type:"number", value:0, min:-15, max:15},
+			{name: "c", label:"Curse", type:"number", value:0, min:0, max:3},
+			{name: "e", label:"Effects", type:"enchantments", value:[]}
+		]
+	});
+
 	public function createArmor(subtype:String, rarity:int, quality:int, curseStatus:int, effects:/*Enchantment*/Array):DynamicArmor {
 		return DynamicItems.createItem(TDynamicArmor, subtype, rarity, quality, curseStatus, effects) as DynamicArmor;
 	}

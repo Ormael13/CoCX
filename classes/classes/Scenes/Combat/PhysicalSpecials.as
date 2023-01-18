@@ -4328,7 +4328,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
 		//FATIIIIGUE
-		if(player.fatigue + physicalCost(10) > player.maxFatigue()) {
+		if(player.fatigue + physicalCost(100) > player.maxFatigue()) {
 			clearOutput();
 			outputText("You just don't have the energy to bite something right now...");
 //Pass false to combatMenu instead:		menuLoc = 1;
@@ -4337,7 +4337,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			addButton(0, "Next", combatMenu, false);
 			return;
 		}
-		fatigue(10, USEFATG_PHYSICAL);
+		fatigue(100, USEFATG_PHYSICAL);
 		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
@@ -4352,15 +4352,37 @@ public class PhysicalSpecials extends BaseCombatContent {
 			//(Otherwise)
 			else outputText("You lunge at the foe headfirst, maw open for a bite. You manage to catch the [themonster] off guard, biting it viciously. The merciless cold of your bite transfer to your foe weakening it as you retreat before [monster he] manages to react.");
 			//The following is how the enemy reacts over time to poison. It is displayed after the description paragraph,instead of lust
-			monster.statStore.addBuffObject({str:-10,spe:-10}, "Poison",{text:"Poison"});
+			monster.statStore.addBuffObject({str:-50,spe:-50}, "Poison",{text:"Poison"});
 			if (monster.hasStatusEffect(StatusEffects.Frostbite)) monster.addStatusValue(StatusEffects.Frostbite,1,1);
-			else monster.createStatusEffect(StatusEffects.Frostbite,1,0,0,0);
+			else monster.createStatusEffect(StatusEffects.Frostbite, 1, 0, 0, 0);
+			var damage:Number = 0;
+			//Determine damage - str modified by enemy toughness!
+			damage = int((player.str + player.spe) * 5 * (monster.damagePercent() / 100));
+			if (!monster.isImmuneToBleed()) {
+				if (!monster.hasStatusEffect(StatusEffects.SharkBiteBleed)) monster.createStatusEffect(StatusEffects.SharkBiteBleed,15,0,0,0);
+				else {
+					monster.removeStatusEffect(StatusEffects.SharkBiteBleed);
+					monster.createStatusEffect(StatusEffects.SharkBiteBleed,15,0,0,0);
+				}
+			}
+			//Deal damage and update based on perks
+			if(damage > 0) {
+				if (player.hasPerk(PerkLib.ZenjisInfluence3)) damage *= 1.5;
+				damage = combat.itemsBonusDamageDamage(damage);
+				if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
+				if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+				damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
+				damage = Math.round(damage);
+				doDamage(damage);
+			}
 		}
 		else {
 			outputText("You lunge headfirst, maw open for a bite. Your attempt fails horrendously, as [themonster] manages to counter your lunge, knocking your head away with enough force to make your ears ring.");
 		}
 		outputText("\n\n");
 		combat.WrathGenerationPerHit2(5);
+		checkAchievementDamage(damage);
+		combat.heroBaneProc(damage);
 		if (!combatIsOver()) enemyAI();
 	}
 
