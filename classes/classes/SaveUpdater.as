@@ -17,6 +17,7 @@ import classes.Scenes.Places.HeXinDao.AdventurerGuild;
 import classes.Scenes.Places.HeXinDao.JourneyToTheEast;
 import classes.Stats.Buff;
 import classes.Stats.PrimaryStat;
+import classes.StatusEffects;
 
 use namespace CoC;
 
@@ -1994,6 +1995,15 @@ public class SaveUpdater extends NPCAwareContent {
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.044) {
 				if (player.hasPerk(PerkLib.Soulless)) player.skinColor2 = "midnight black";
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.044;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.045) {
+				if (flags[1320] > 0) {
+					player.createStatusEffect(StatusEffects.TookImpTome, 0, 0, 0, 0);
+					flags[1320] = 0;
+				}
+				if (!player.hasStatusEffect(StatusEffects.TookImpTome) && (player.hasItem(shields.IMPTOME) || player.shieldName == "cursed Tome of Imp"))
+					player.createStatusEffect(StatusEffects.TookImpTome,  0, 0, 0, 0);
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.045;
 			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);

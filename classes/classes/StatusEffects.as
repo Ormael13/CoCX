@@ -672,7 +672,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const TensionReleased:StatusEffectType                = mk("TensionReleased");
 		public static const TribulationCountdown:StatusEffectType           = mk("TribulationCountdown");
 		public static const TrollDefeatsCounter:StatusEffectType            = mk("Troll Defeats Counter");
-		public static const TFWarning:StatusEffectType                     = mk("TF badend warning"); //1 - race ID to distinguish, 2 - counter, 3 - timer until removed
+		public static const TFWarning:StatusEffectType                      = mk("TF badend warning"); //1 - race ID to distinguish, 2 - counter, 3 - timer until removed
 		public static const TF2:StatusEffectType                            = mk("TF2");
 		public static const TFDealer1:StatusEffectType                      = mk("TF Dealer 1");
 		public static const TFDealer2:StatusEffectType                      = mk("TF Dealer 2");
@@ -681,6 +681,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const TookBlessedShield:StatusEffectType              = mk("Took Blessed Shield");
 		public static const TookBlessedStaff:StatusEffectType               = mk("Took Blessed Staff");
 		public static const TookBlessedSword:StatusEffectType               = mk("Took Blessed Sword");
+		public static const TookImpTome:StatusEffectType                    = mk("Took Imp Tome");
 		public static const TrainingNPCsTimersReduction:StatusEffectType    = mk("TrainingNPCsTimersReduction");
 		public static const UshiOnnaVariant:StatusEffectType             	= mk("Ushi Onna Variant");
 		public static const WildMalikore:StatusEffectType                   = mk("Wild Malikore");
