@@ -15159,9 +15159,9 @@ public final class Mutations extends MutationsHelper {
         var changes:Number = 0;
         var changeLimit:Number = 0;
         player.refillHunger(10);
-        if (player.racialScore(Races.DRAGON, false) > 9 || player.racialScore(Races.DRAGONNE, false) > 9) {
+        if (player.racialScore(Races.DRAGON, false) > 15) {
             outputText("You eat the scale expecting some kind of spectacular change and for a moment pretty much nothing happen. You begin to feel weird… like very weird. For some reason your situation as a whole is so funny you can’t help but laugh. Are you seriously eating some otherworldly dragon scale just so you can turn into a messed up rabbit dragon yourself? Aha yes you are and that's way to funny.");
-            changeLimit += 3;
+            changeLimit += 15;
         } else {
             outputText("You eat the scale expecting some kind of spectacular change strangely nothing happened. Maybe you should stop eating everything you find.");
         }
@@ -15258,7 +15258,7 @@ public final class Mutations extends MutationsHelper {
             outputText(player.skinColor + " colored.</b>");
         }
 
-        if (!player.hasPerk(PerkLib.DragonLustPoisonBreath)){
+        if (!player.hasPerk(PerkLib.DragonLustPoisonBreath) && changes < changeLimit){
             outputText("\n\nYou feel something awakening within you... then a sudden sensation of choking grabs hold of your throat, sending you to your knees as you clutch and gasp for breath.  It feels like there's something trapped inside your windpipe, clawing and crawling its way up.  You retch and splutter and then, with a feeling of almost painful relief, you expel a bellowing roar from deep inside of yourself... covering the whole area in front of you with pinkish sweet smelling smoke.");
             outputText("\n\nIt seems the scale has awaked some kind of power within you...  (<b>Gained Perk: Dragon lust poison breath!</b>)");
             player.createPerk(PerkLib.DragonLustPoisonBreath, 0, 0, 0, 0);

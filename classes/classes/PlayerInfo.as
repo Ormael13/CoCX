@@ -1980,94 +1980,62 @@ public class PlayerInfo extends BaseContent {
 		menu();
 		if (page == 1) {
 			if (player.superPerkPoints > 0) {
-				if (player.level >= 90) {
-					if (player.hasPerk(PerkLib.DeityJobMunchkin)) addButtonDisabled(0, "DJ:M", "You already have this perk.");
-					else {
-						if (player.str >= 150 && player.tou >= 150 && player.spe >= 150 && player.inte >= 150 && player.wis >= 150 && player.lib >= 150 && player.sens >= 100 && player.currentBasicJobs() >= 9 && player.currentAdvancedJobs() >= 6 && player.currentPrestigeJobs() >= 2 && player.currentHiddenJobs() >= 1) {
-							addButton(0, "DJ:M", perkDeityJobMunchkin).hint("Choose the 'Deity Job: Munchkin' super munchkin perk. You're Munchkin, an ultimate being that possess a god-like body and powers. (+20% max HP/Lust/Wrath, +10% max SF/Mana/Fatigue, increase limit of negative HP equal to all stats (aside of corruption) added up)");
-						}
-						else addButtonDisabled(0, "DJ:M", "You do not have one/all of them yet: 150+ in str/tou/spe/inte/wis/lib, 100+ in sens, 9 basic jobs, 6 advanced jobs, 2 prestige jobs, 1 hidden job.");
-					}
-				}
-				else addButtonDisabled(0, "DJ:M", "You need to reach level 90 first.");
-				if (player.level >= 105) {
-					if (player.hasPerk(PerkLib.MunchkinAtGym)) addButtonDisabled(1, "M(at)G", "You already have this perk.");
-					else {
-						if (player.hasPerk(PerkLib.DeityJobMunchkin)) addButton(1, "M(at)G", perkMunchkinAtGym).hint("Choose the 'Munchkin @Gym' super munchkin perk. (+25% to Str/Tou/Spe/Inte/Wis/Lib multi, +100 to Sens, increase by 5% caps for mutagen, alchemic, knowledge multi)");
-						else addButtonDisabled(1, "M(at)G", "You do not have yet 'Deity Job: Munchkin' super munchkin perk.");
-					}
-				}
-				else addButtonDisabled(1, "M(at)G", "You need to reach level 105 first.");
-				if (player.level >= 120) {
-					if (player.hasPerk(PerkLib.MunchkinAtWork)) addButtonDisabled(2, "M(at)W", "You already have this perk.");
-					else {
-						if (player.hasPerk(PerkLib.MunchkinAtGym)) addButton(2, "M(at)W", perkMunchkinAtWork).hint("Choose the 'Munchkin @Work' super munchkin perk. (+25% to Str/Tou/Spe/Inte/Wis/Lib multi, +100 to Sens, increase by 5% caps for mutagen, alchemic, knowledge multi)");
-						else addButtonDisabled(2, "M(at)W", "You do not have yet 'Munchkin @Gym' super munchkin perk.");
-					}
-				}
-				else addButtonDisabled(2, "M(at)W", "You need to reach level 120 first.");
-				if (player.hasPerk(PerkLib.SPSurvivalTrainingX)) addButtonDisabled(5, "SP:ST(R1)", "You already have this super perk.");
-				else addButton(5, "SP:ST(R1)", perkSurvivalTrainingRank1).hint("Choose the 'Survival Training (Rank: 1)' super perk. You have trained to better survive this realm hostile environment. (+1% to MaxOver HP, MaxOver Lust and Diehard each 3 lvl's up to +10%)");
+				if (player.hasPerk(PerkLib.SPSurvivalTrainingX)) addButtonDisabled(0, "SP:ST(R1)", "You already have this super perk.");
+				else addButton(0, "SP:ST(R1)", perkSurvivalTrainingRank1).hint("Choose the 'Survival Training (Rank: 1)' super perk. You have trained to better survive this realm hostile environment. (+1% to MaxOver HP, MaxOver Lust and Diehard each 3 lvl's up to +10%)");
 				if (player.level >= 30) {
-					if (player.hasPerk(PerkLib.SPSurvivalTrainingX) && player.perkv1(PerkLib.SPSurvivalTrainingX) >= 2) addButtonDisabled(6, "SP:ST(R2)", "You already have this super perk.");
+					if (player.hasPerk(PerkLib.SPSurvivalTrainingX) && player.perkv1(PerkLib.SPSurvivalTrainingX) >= 2) addButtonDisabled(1, "SP:ST(R2)", "You already have this super perk.");
 					else {
-						if (player.hasPerk(PerkLib.SPSurvivalTrainingX) && player.perkv1(PerkLib.SPSurvivalTrainingX) >= 1) addButton(6, "SP:ST(R2)", perkSurvivalTrainingRank2).hint("Choose the 'Survival Training (Rank: 2)' super perk. You have trained to better survive this realm hostile environment. (+1% to MaxOver HP, MaxOver Lust and Diehard each 3 lvl's up to +20%)");
-						else addButtonDisabled(6, "SP:ST(R2)", "You need to first have 'Survival Training (Rank: 1)' super perk.");
+						if (player.hasPerk(PerkLib.SPSurvivalTrainingX) && player.perkv1(PerkLib.SPSurvivalTrainingX) >= 1) addButton(1, "SP:ST(R2)", perkSurvivalTrainingRank2).hint("Choose the 'Survival Training (Rank: 2)' super perk. You have trained to better survive this realm hostile environment. (+1% to MaxOver HP, MaxOver Lust and Diehard each 3 lvl's up to +20%)");
+						else addButtonDisabled(1, "SP:ST(R2)", "You need to first have 'Survival Training (Rank: 1)' super perk.");
 					}
 				}
-				else addButtonDisabled(6, "SP:ST(R2)", "You need to reach level 30 first.");
+				else addButtonDisabled(1, "SP:ST(R2)", "You need to reach level 30 first.");
 				if (player.level >= 60) {
-					if (player.hasPerk(PerkLib.SPSurvivalTrainingX) && player.perkv1(PerkLib.SPSurvivalTrainingX) >= 3) addButtonDisabled(7, "SP:ST(R3)", "You already have this super perk.");
+					if (player.hasPerk(PerkLib.SPSurvivalTrainingX) && player.perkv1(PerkLib.SPSurvivalTrainingX) >= 3) addButtonDisabled(2, "SP:ST(R3)", "You already have this super perk.");
 					else {
-						if (player.hasPerk(PerkLib.SPSurvivalTrainingX) && player.perkv1(PerkLib.SPSurvivalTrainingX) >= 2) addButton(7, "SP:ST(R3)", perkSurvivalTrainingRank3).hint("Choose the 'Survival Training (Rank: 3)' super perk. You have trained to better survive this realm hostile environment. (+1% to MaxOver HP, MaxOver Lust and Diehard each 3 lvl's up to +30%)");
-						else addButtonDisabled(7, "SP:ST(R3)", "You need to first have 'Survival Training (Rank: 2)' super perk.");
+						if (player.hasPerk(PerkLib.SPSurvivalTrainingX) && player.perkv1(PerkLib.SPSurvivalTrainingX) >= 2) addButton(2, "SP:ST(R3)", perkSurvivalTrainingRank3).hint("Choose the 'Survival Training (Rank: 3)' super perk. You have trained to better survive this realm hostile environment. (+1% to MaxOver HP, MaxOver Lust and Diehard each 3 lvl's up to +30%)");
+						else addButtonDisabled(2, "SP:ST(R3)", "You need to first have 'Survival Training (Rank: 2)' super perk.");
 					}
 				}
-				else addButtonDisabled(7, "SP:ST(R3)", "You need to reach level 60 first.");
+				else addButtonDisabled(2, "SP:ST(R3)", "You need to reach level 60 first.");
 				if (player.level >= 90) {
-					if (player.hasPerk(PerkLib.SPSurvivalTrainingX) && player.perkv1(PerkLib.SPSurvivalTrainingX) >= 4) addButtonDisabled(8, "SP:ST(R4)", "You already have this super perk.");
+					if (player.hasPerk(PerkLib.SPSurvivalTrainingX) && player.perkv1(PerkLib.SPSurvivalTrainingX) >= 4) addButtonDisabled(3, "SP:ST(R4)", "You already have this super perk.");
 					else {
-						if (player.hasPerk(PerkLib.SPSurvivalTrainingX) && player.perkv1(PerkLib.SPSurvivalTrainingX) >= 3) addButton(8, "SP:ST(R4)", perkSurvivalTrainingRank4).hint("Choose the 'Survival Training (Rank: 4)' super perk. You have trained to better survive this realm hostile environment. (+1% to MaxOver HP, MaxOver Lust and Diehard each 3 lvl's up to +40%)");
-						else addButtonDisabled(8, "SP:ST(R4)", "You need to first have 'Survival Training (Rank: 3)' super perk.");
+						if (player.hasPerk(PerkLib.SPSurvivalTrainingX) && player.perkv1(PerkLib.SPSurvivalTrainingX) >= 3) addButton(3, "SP:ST(R4)", perkSurvivalTrainingRank4).hint("Choose the 'Survival Training (Rank: 4)' super perk. You have trained to better survive this realm hostile environment. (+1% to MaxOver HP, MaxOver Lust and Diehard each 3 lvl's up to +40%)");
+						else addButtonDisabled(3, "SP:ST(R4)", "You need to first have 'Survival Training (Rank: 3)' super perk.");
 					}
 				}
-				else addButtonDisabled(8, "SP:ST(R4)", "You need to reach level 90 first.");
+				else addButtonDisabled(3, "SP:ST(R4)", "You need to reach level 90 first.");
 				if (player.level >= 120) {
-					if (player.hasPerk(PerkLib.SPSurvivalTrainingX) && player.perkv1(PerkLib.SPSurvivalTrainingX) >= 5) addButtonDisabled(9, "SP:ST(R5)", "You already have this super perk.");
+					if (player.hasPerk(PerkLib.SPSurvivalTrainingX) && player.perkv1(PerkLib.SPSurvivalTrainingX) >= 5) addButtonDisabled(4, "SP:ST(R5)", "You already have this super perk.");
 					else {
-						if (player.hasPerk(PerkLib.SPSurvivalTrainingX) && player.perkv1(PerkLib.SPSurvivalTrainingX) >= 4) addButton(9, "SP:ST(R5)", perkSurvivalTrainingRank5).hint("Choose the 'Survival Training (Rank: 5)' super perk. You have trained to better survive this realm hostile environment. (+1% to MaxOver HP, MaxOver Lust and Diehard each 3 lvl's up to +50%)");
-						else addButtonDisabled(9, "SP:ST(R5)", "You need to first have 'Survival Training (Rank: 4)' super perk.");
+						if (player.hasPerk(PerkLib.SPSurvivalTrainingX) && player.perkv1(PerkLib.SPSurvivalTrainingX) >= 4) addButton(4, "SP:ST(R5)", perkSurvivalTrainingRank5).hint("Choose the 'Survival Training (Rank: 5)' super perk. You have trained to better survive this realm hostile environment. (+1% to MaxOver HP, MaxOver Lust and Diehard each 3 lvl's up to +50%)");
+						else addButtonDisabled(4, "SP:ST(R5)", "You need to first have 'Survival Training (Rank: 4)' super perk.");
 					}
 				}
-				else addButtonDisabled(9, "SP:ST(R5)", "You need to reach level 120 first.");
+				else addButtonDisabled(4, "SP:ST(R5)", "You need to reach level 120 first.");
 				if (player.level >= 150) {
-					if (player.hasPerk(PerkLib.SPSurvivalTrainingX) && player.perkv1(PerkLib.SPSurvivalTrainingX) >= 6) addButtonDisabled(10, "SP:ST(R6)", "You already have this super perk.");
+					if (player.hasPerk(PerkLib.SPSurvivalTrainingX) && player.perkv1(PerkLib.SPSurvivalTrainingX) >= 6) addButtonDisabled(5, "SP:ST(R6)", "You already have this super perk.");
 					else {
-						if (player.hasPerk(PerkLib.SPSurvivalTrainingX) && player.perkv1(PerkLib.SPSurvivalTrainingX) >= 5) addButton(10, "SP:ST(R6)", perkSurvivalTrainingRank6).hint("Choose the 'Survival Training (Rank: 6)' super perk. You have trained to better survive this realm hostile environment. (+1% to MaxOver HP, MaxOver Lust and Diehard each 3 lvl's up to +60%)");
-						else addButtonDisabled(10, "SP:ST(R6)", "You need to first have 'Survival Training (Rank: 5)' super perk.");
+						if (player.hasPerk(PerkLib.SPSurvivalTrainingX) && player.perkv1(PerkLib.SPSurvivalTrainingX) >= 5) addButton(5, "SP:ST(R6)", perkSurvivalTrainingRank6).hint("Choose the 'Survival Training (Rank: 6)' super perk. You have trained to better survive this realm hostile environment. (+1% to MaxOver HP, MaxOver Lust and Diehard each 3 lvl's up to +60%)");
+						else addButtonDisabled(5, "SP:ST(R6)", "You need to first have 'Survival Training (Rank: 5)' super perk.");
 					}
 				}
-				else addButtonDisabled(10, "SP:ST(R6)", "You need to reach level 150 first.");
+				else addButtonDisabled(5, "SP:ST(R6)", "You need to reach level 150 first.");
 			}
 			else {
-				if (player.hasPerk(PerkLib.DeityJobMunchkin)) addButtonDisabled(0, "DJ:M", "You already have this perk.");
-				else addButtonDisabled(0, "DJ:M", "You do not have enough super perk points to obtain this perk.");
-				if (player.hasPerk(PerkLib.MunchkinAtGym)) addButtonDisabled(1, "M(at)G", "You already have this perk.");
-				else addButtonDisabled(1, "M(at)G", "You do not have enough super perk points to obtain this perk.");
-				if (player.hasPerk(PerkLib.MunchkinAtWork)) addButtonDisabled(2, "M(at)W", "You already have this perk.");
-				else addButtonDisabled(2, "M(at)W", "You do not have enough super perk points to obtain this perk.");
-				if (player.hasPerk(PerkLib.SPSurvivalTrainingX)) addButtonDisabled(5, "SP:ST(R1)", "You already have this perk.");
-				else addButtonDisabled(5, "SP:ST(R1)", "You do not have enough super perk points to obtain this perk.");
-				if (player.hasPerk(PerkLib.SPSurvivalTrainingX) && player.perkv1(PerkLib.SPSurvivalTrainingX) >= 2) addButtonDisabled(6, "SP:ST(R2)", "You already have this perk.");
-				else addButtonDisabled(6, "SP:ST(R2)", "You do not have enough super perk points to obtain this perk.");
-				if (player.hasPerk(PerkLib.SPSurvivalTrainingX) && player.perkv1(PerkLib.SPSurvivalTrainingX) >= 3) addButtonDisabled(7, "SP:ST(R3)", "You already have this perk.");
-				else addButtonDisabled(7, "SP:ST(R3)", "You do not have enough super perk points to obtain this perk.");
-				if (player.hasPerk(PerkLib.SPSurvivalTrainingX) && player.perkv1(PerkLib.SPSurvivalTrainingX) >= 4) addButtonDisabled(8, "SP:ST(R4)", "You already have this perk.");
-				else addButtonDisabled(8, "SP:ST(R4)", "You do not have enough super perk points to obtain this perk.");
-				if (player.hasPerk(PerkLib.SPSurvivalTrainingX) && player.perkv1(PerkLib.SPSurvivalTrainingX) >= 5) addButtonDisabled(9, "SP:ST(R5)", "You already have this perk.");
-				else addButtonDisabled(9, "SP:ST(R5)", "You do not have enough super perk points to obtain this perk.");
-				if (player.hasPerk(PerkLib.SPSurvivalTrainingX) && player.perkv1(PerkLib.SPSurvivalTrainingX) >= 6) addButtonDisabled(10, "SP:ST(R6)", "You already have this perk.");
-				else addButtonDisabled(10, "SP:ST(R6)", "You do not have enough super perk points to obtain this perk.");
+				if (player.hasPerk(PerkLib.SPSurvivalTrainingX)) addButtonDisabled(0, "SP:ST(R1)", "You already have this perk.");
+				else addButtonDisabled(0, "SP:ST(R1)", "You do not have enough super perk points to obtain this perk.");
+				if (player.hasPerk(PerkLib.SPSurvivalTrainingX) && player.perkv1(PerkLib.SPSurvivalTrainingX) >= 2) addButtonDisabled(1, "SP:ST(R2)", "You already have this perk.");
+				else addButtonDisabled(1, "SP:ST(R2)", "You do not have enough super perk points to obtain this perk.");
+				if (player.hasPerk(PerkLib.SPSurvivalTrainingX) && player.perkv1(PerkLib.SPSurvivalTrainingX) >= 3) addButtonDisabled(2, "SP:ST(R3)", "You already have this perk.");
+				else addButtonDisabled(2, "SP:ST(R3)", "You do not have enough super perk points to obtain this perk.");
+				if (player.hasPerk(PerkLib.SPSurvivalTrainingX) && player.perkv1(PerkLib.SPSurvivalTrainingX) >= 4) addButtonDisabled(3, "SP:ST(R4)", "You already have this perk.");
+				else addButtonDisabled(3, "SP:ST(R4)", "You do not have enough super perk points to obtain this perk.");
+				if (player.hasPerk(PerkLib.SPSurvivalTrainingX) && player.perkv1(PerkLib.SPSurvivalTrainingX) >= 5) addButtonDisabled(4, "SP:ST(R5)", "You already have this perk.");
+				else addButtonDisabled(4, "SP:ST(R5)", "You do not have enough super perk points to obtain this perk.");
+				if (player.hasPerk(PerkLib.SPSurvivalTrainingX) && player.perkv1(PerkLib.SPSurvivalTrainingX) >= 6) addButtonDisabled(5, "SP:ST(R6)", "You already have this perk.");
+				else addButtonDisabled(5, "SP:ST(R6)", "You do not have enough super perk points to obtain this perk.");
 			}
 			addButton(12, "Next", superPerkBuyMenu, page + 1);
 			if (player.perkPoints > 2) addButton(13, "Convert", superPerkConvertMenu);
@@ -2227,10 +2195,52 @@ public class PlayerInfo extends BaseContent {
 				if (player.hasPerk(PerkLib.HyperCasting)) addButtonDisabled(2, "HC", "You already have this perk.");
 				else addButtonDisabled(2, "HC", "You do not have enough super perk points to obtain this perk.");
 			}
+			addButton(12, "Next", superPerkBuyMenu, page + 1);
 			addButton(13, "Previous", superPerkBuyMenu, page - 1);
 			addButton(14, "Back", playerMenu);
 		}
 		if (page == 5) {
+			if (player.superPerkPoints > 0) {
+				if (player.level >= 90) {
+					if (player.hasPerk(PerkLib.DeityJobMunchkin)) addButtonDisabled(0, "DJ:M", "You already have this perk.");
+					else {
+						if (player.str >= 150 && player.tou >= 150 && player.spe >= 150 && player.inte >= 150 && player.wis >= 150 && player.lib >= 150 && player.sens >= 100 && player.currentBasicJobs() >= 9 && player.currentAdvancedJobs() >= 6 && player.currentPrestigeJobs() >= 2 && player.currentHiddenJobs() >= 1) {
+							addButton(0, "DJ:M", perkDeityJobMunchkin).hint("Choose the 'Deity Job: Munchkin' super munchkin perk. You're Munchkin, an ultimate being that possess a god-like body and powers. (+20% max HP/Lust/Wrath, +10% max SF/Mana/Fatigue, increase limit of negative HP equal to all stats (aside of corruption) added up)");
+						}
+						else addButtonDisabled(0, "DJ:M", "You do not have one/all of them yet: 150+ in str/tou/spe/inte/wis/lib, 100+ in sens, 9 basic jobs, 6 advanced jobs, 2 prestige jobs, 1 hidden job.");
+					}
+				}
+				else addButtonDisabled(0, "DJ:M", "You need to reach level 90 first.");
+				if (player.level >= 105) {
+					if (player.hasPerk(PerkLib.MunchkinAtGym)) addButtonDisabled(1, "M(at)G", "You already have this perk.");
+					else {
+						if (player.hasPerk(PerkLib.DeityJobMunchkin)) addButton(1, "M(at)G", perkMunchkinAtGym).hint("Choose the 'Munchkin @Gym' super munchkin perk. (+25% to Str/Tou/Spe/Inte/Wis/Lib multi, +100 to Sens, increase by 5% caps for mutagen, alchemic, knowledge multi)");
+						else addButtonDisabled(1, "M(at)G", "You do not have yet 'Deity Job: Munchkin' super munchkin perk.");
+					}
+				}
+				else addButtonDisabled(1, "M(at)G", "You need to reach level 105 first.");
+				if (player.level >= 120) {
+					if (player.hasPerk(PerkLib.MunchkinAtWork)) addButtonDisabled(2, "M(at)W", "You already have this perk.");
+					else {
+						if (player.hasPerk(PerkLib.MunchkinAtGym)) addButton(2, "M(at)W", perkMunchkinAtWork).hint("Choose the 'Munchkin @Work' super munchkin perk. (+25% to Str/Tou/Spe/Inte/Wis/Lib multi, +100 to Sens, increase by 5% caps for mutagen, alchemic, knowledge multi)");
+						else addButtonDisabled(2, "M(at)W", "You do not have yet 'Munchkin @Gym' super munchkin perk.");
+					}
+				}
+				else addButtonDisabled(2, "M(at)W", "You need to reach level 120 first.");
+			}
+			else {
+				if (player.hasPerk(PerkLib.DeityJobMunchkin)) addButtonDisabled(0, "DJ:M", "You already have this perk.");
+				else addButtonDisabled(0, "DJ:M", "You do not have enough super perk points to obtain this perk.");
+				if (player.hasPerk(PerkLib.MunchkinAtGym)) addButtonDisabled(1, "M(at)G", "You already have this perk.");
+				else addButtonDisabled(1, "M(at)G", "You do not have enough super perk points to obtain this perk.");
+				if (player.hasPerk(PerkLib.MunchkinAtWork)) addButtonDisabled(2, "M(at)W", "You already have this perk.");
+				else addButtonDisabled(2, "M(at)W", "You do not have enough super perk points to obtain this perk.");
+			}
+			//12 -> page + 1 button
+			addButton(13, "Previous", superPerkBuyMenu, page - 1);
+			addButton(14, "Back", playerMenu);
+		}
+		if (page == 6) {
 			if (player.superPerkPoints > 0) {
 				
 			}
@@ -2289,27 +2299,6 @@ public class PlayerInfo extends BaseContent {
 		player.addPerkValue(PerkLib.SPSurvivalTrainingX,1,1);
 		clearOutput();
 		outputText("Your 'Survival Training (Rank: 5)' super perk become 'Survival Training (Rank: 6)'.");
-		doNext(superPerkBuyMenu, 1);
-	}
-	private function perkDeityJobMunchkin():void {
-		player.superPerkPoints--;
-		player.createPerk(PerkLib.DeityJobMunchkin,0,0,0,0);
-		clearOutput();
-		outputText("You gained 'Deity Job: Munchkin' super munchkin perk. (Because it's too cool to merely be a super perk, right?)");
-		doNext(superPerkBuyMenu, 1);
-	}
-	private function perkMunchkinAtGym():void {
-		player.superPerkPoints--;
-		player.createPerk(PerkLib.MunchkinAtGym,0,0,0,0);
-		clearOutput();
-		outputText("You gained 'Munchkin @ Gym' super munchkin perk. (Because it's too cool to merely be a super perk, right?)");
-		doNext(superPerkBuyMenu, 1);
-	}
-	private function perkMunchkinAtWork():void {
-		player.superPerkPoints--;
-		player.createPerk(PerkLib.MunchkinAtWork,0,0,0,0);
-		clearOutput();
-		outputText("You gained 'Munchkin @ Work' super munchkin perk. (Because it's too cool to merely be a super perk, right?)");
 		doNext(superPerkBuyMenu, 1);
 	}
 	private function perkHiddenJobBloodDemon():void {
@@ -2402,6 +2391,27 @@ public class PlayerInfo extends BaseContent {
 		clearOutput();
 		outputText("You gained 'Hyper Casting' super perk.");
 		doNext(superPerkBuyMenu, 4);
+	}
+	private function perkDeityJobMunchkin():void {
+		player.superPerkPoints--;
+		player.createPerk(PerkLib.DeityJobMunchkin,0,0,0,0);
+		clearOutput();
+		outputText("You gained 'Deity Job: Munchkin' super munchkin perk. (Because it's too cool to merely be a super perk, right?)");
+		doNext(superPerkBuyMenu, 5);
+	}
+	private function perkMunchkinAtGym():void {
+		player.superPerkPoints--;
+		player.createPerk(PerkLib.MunchkinAtGym,0,0,0,0);
+		clearOutput();
+		outputText("You gained 'Munchkin @ Gym' super munchkin perk. (Because it's too cool to merely be a super perk, right?)");
+		doNext(superPerkBuyMenu, 5);
+	}
+	private function perkMunchkinAtWork():void {
+		player.superPerkPoints--;
+		player.createPerk(PerkLib.MunchkinAtWork,0,0,0,0);
+		clearOutput();
+		outputText("You gained 'Munchkin @ Work' super munchkin perk. (Because it's too cool to merely be a super perk, right?)");
+		doNext(superPerkBuyMenu, 5);
 	}
 }
 }
