@@ -15792,6 +15792,10 @@ private function ghostRealStrengthCompanion():Number {
     if (flags[kFLAGS.PLAYER_COMPANION_1] == "Kiha") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerKiha);
     if (flags[kFLAGS.PLAYER_COMPANION_2] == "Kiha") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerKiha);
     if (flags[kFLAGS.PLAYER_COMPANION_3] == "Kiha") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerKiha);
+    if (flags[kFLAGS.PLAYER_COMPANION_0] == "Midoka") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerMidoka);
+    if (flags[kFLAGS.PLAYER_COMPANION_1] == "Midoka") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerMidoka);
+    if (flags[kFLAGS.PLAYER_COMPANION_2] == "Midoka") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerMidoka);
+    if (flags[kFLAGS.PLAYER_COMPANION_3] == "Midoka") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerMidoka);
     if (flags[kFLAGS.PLAYER_COMPANION_1] == "Mitzi") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerMitzi);
     if (flags[kFLAGS.PLAYER_COMPANION_2] == "Mitzi") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerMitzi);
     if (flags[kFLAGS.PLAYER_COMPANION_3] == "Mitzi") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerMitzi);

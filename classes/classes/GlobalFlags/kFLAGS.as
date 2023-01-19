@@ -1325,8 +1325,8 @@ public static const LOPPE_PREGNANCY_TYPE:int                                    
 public static const ETNA_INCUBATION:int                                             = 1317;
 public static const ETNA_PREGNANCY_TYPE:int                                         = 1318;
 public static const DEMON_LABORATORY_DISCOVERED:int                                 = 1319;
-public static const UNKNOWN_FLAG_NUMBER_01320:int                                   = 1320;
-public static const UNKNOWN_FLAG_NUMBER_01321:int                                   = 1321;
+public static const CHICHI_INCUBATION:int                                           = 1320;
+public static const CHICHI_PREGNANCY_TYPE:int                                       = 1321;
 public static const UNKNOWN_FLAG_NUMBER_01322:int                                   = 1322;
 public static const UNKNOWN_FLAG_NUMBER_01323:int                                   = 1323;
 public static const UNKNOWN_FLAG_NUMBER_01324:int                                   = 1324;

@@ -989,6 +989,83 @@ import classes.StatusEffects;
 			if (monster.lustVuln > 0)
 				monster.teased(monster.lib/20, true);
 			outputText("\n\n");
+		}
+
+		public function midokaCombatActions():void {
+			if (player.statusEffectv4(StatusEffects.CombatFollowerMidoka) > 0) {
+				var choice11:Number = rand(20);
+				if (player.hasPerk(PerkLib.MotivationEx)) {
+					if (rand(100) == 0) midokaCombatActions0();
+					else {
+						if (choice11 < 9) midokaCombatActions1();
+						if (choice11 >= 9 && choice11 < 14) midokaCombatActions2();
+						if (choice11 >= 14 && choice11 < 17) midokaCombatActions3();
+						if (choice11 >= 17) midokaCombatActions4();
+					}
+				}
+				else if (player.hasPerk(PerkLib.Motivation)) {
+					if (choice11 < 4) midokaCombatActions0();
+					if (choice11 >= 4 && choice11 < 12) midokaCombatActions1();
+					if (choice11 >= 12 && choice11 < 15) midokaCombatActions2();
+					if (choice11 >= 15 && choice11 < 18) midokaCombatActions3();
+					if (choice11 == 18 || choice11 == 19) midokaCombatActions4();
+				}
+				else {
+					if (choice11 < 10) midokaCombatActions0();
+					if (choice11 >= 10 && choice11 < 14) midokaCombatActions1();
+					if (choice11 == 14 || choice11 == 15) midokaCombatActions2();
+					if (choice11 == 16 || choice11 == 17) midokaCombatActions3();
+					if (choice11 == 18 || choice11 == 19) midokaCombatActions4();
+				}
+			}
+			else {
+				outputText("Midoka her fists as she stares down your opponent.\n\n");
+				player.addStatusValue(StatusEffects.CombatFollowerMidoka, 4, 1);
+			}
+			if (flags[kFLAGS.PLAYER_COMPANION_0] == "Midoka" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_0_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_0_ACTION] = 1;
+			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Midoka" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] = 1;
+			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Midoka" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] = 1;
+			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Midoka" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] = 1;
+			if (monster.HP <= monster.minHP() || monster.lust >= monster.maxOverLust()) enemyAI();
+		}
+		public function midokaCombatActions0():void {
+			outputText("Midoka remains steady, ready to deflect away any blows [themonster] might throw.\n\n");
+		}
+		public function midokaCombatActions1():void {
+			var dmg17:Number = player.statusEffectv1(StatusEffects.CombatFollowerMidoka);
+			var weaponMidoka:Number = player.statusEffectv2(StatusEffects.CombatFollowerMidoka);
+			dmg17 += scalingBonusStrengthCompanion();
+			if (weaponMidoka < 51) dmg17 *= (1 + (weaponMidoka * 0.03));
+			else if (weaponMidoka >= 51 && weaponMidoka < 101) dmg17 *= (2.5 + ((weaponMidoka - 50) * 0.025));
+			else if (weaponMidoka >= 101 && weaponMidoka < 151) dmg17 *= (3.75 + ((weaponMidoka - 100) * 0.02));
+			else if (weaponMidoka >= 151 && weaponMidoka < 201) dmg17 *= (4.75 + ((weaponMidoka - 150) * 0.015));
+			else dmg17 *= (5.5 + ((weaponMidoka - 200) * 0.01));
+			dmg17 = Math.round(dmg17 * increasedEfficiencyOfAttacks());
+			outputText("[midokaname] attack 1 ");
+			doDamage(dmg17, true, true);
+			outputText("\n\n");
+		}
+		public function midokaCombatActions2():void {
+			var dmg18:Number = player.statusEffectv1(StatusEffects.CombatFollowerMidoka);
+			dmg18 += scalingBonusStrengthCompanion() * 0.5;
+			dmg18 = Math.round(dmg18 * increasedEfficiencyOfAttacks());
+			outputText("[midokaname] attack 2 ");
+			doDamage(dmg18, true, true);
+			outputText("\n\n");
+		}
+		public function midokaCombatActions3():void {
+			outputText("[midokaname] attack 3\n");
+			var dmg19:Number = player.statusEffectv1(StatusEffects.CombatFollowerMidoka);
+			dmg19 += scalingBonusStrengthCompanion();
+			dmg19 = Math.round(dmg19 * increasedEfficiencyOfAttacks());
+			doDamage(dmg19, true, true);
+			outputText("\n\n");
+		}
+		public function midokaCombatActions4():void {
+			outputText("[midokaname] tease ");
+			if (monster.lustVuln > 0)
+				monster.teased(monster.lib/20, true);
+			outputText("\n\n");
 		}/*
 		
 		public function divaCombatActions():void {

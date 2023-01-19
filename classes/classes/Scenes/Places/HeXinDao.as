@@ -23,7 +23,6 @@ import classes.Scenes.SceneLib;
 public class HeXinDao extends BaseContent
 {
     public var ignisarenaseer:IgnisArenaSeerScene = new IgnisArenaSeerScene();
-    public var chichiScene:ChiChiFollower = new ChiChiFollower();
     public var riverdungeon:RiverDungeon = new RiverDungeon();
 	public var eraendirorsbulg:EraendirAndOrsbulg = new EraendirAndOrsbulg();
 
@@ -175,7 +174,7 @@ public class HeXinDao extends BaseContent
 		addButton(10, "Eraendir", eraendirorsbulg.EraendirMainMenu);
 		addButton(11, "Orsbulg", eraendirorsbulg.OrsbulgMainMenu);
 		addButton(12, "Golemancer", golemancershop);
-        if (flags[kFLAGS.CHI_CHI_AFFECTION] >= 20 && flags[kFLAGS.CHI_CHI_FOLLOWER] < 2 && !player.hasStatusEffect(StatusEffects.ChiChiOff)) addButton(13, "Chi Chi", chichiScene.MeetingChiChiInHeXinDao);
+        if (flags[kFLAGS.CHI_CHI_AFFECTION] >= 20 && flags[kFLAGS.CHI_CHI_FOLLOWER] < 2 && !player.hasStatusEffect(StatusEffects.ChiChiOff)) addButton(13, "Chi Chi", SceneLib.chichiScene.MeetingChiChiInHeXinDao);
         addButton(14, "Leave", camp.returnToCampUseOneHour);
     }
     public function golemmerchant():void {
@@ -916,7 +915,7 @@ public class HeXinDao extends BaseContent
 
 public function soularena():void {
 	clearOutput();//arena do walk z przeciwnikami na exp tylko - zadnych sex scenes tylko walk do wygranej niewazne czy przez hp czy lust - przeciwnicy: ?weak deviant golem?, niskopoziomowi przeciwnicy uzywajacy soul skills (moze po prostu wesje zwyklych przeciwnikow ale z dodanymi soul attakami?)
-	if (flags[kFLAGS.CHI_CHI_AFFECTION] >= 10 && flags[kFLAGS.CHI_CHI_AFFECTION] < 15 && !player.hasStatusEffect(StatusEffects.ChiChiOff)) chichiScene.EnterOfTheChiChi();
+	if (flags[kFLAGS.CHI_CHI_AFFECTION] >= 10 && flags[kFLAGS.CHI_CHI_AFFECTION] < 15 && !player.hasStatusEffect(StatusEffects.ChiChiOff)) SceneLib.chichiScene.EnterOfTheChiChi();
 	else {
 		outputText("Coming closer to the arena you see two muscular tigersharks standing on each side of the entrance, they only briefly glance at you the moment you pass by. Moments after you enter, a tall, slightly muscular cat-morph approaches you. Most of his body is covered by armor, yet two long tails wave behind him.");//osoba zarządzająca areną bedzie male nekomanta npc
 		outputText("\n\n\"<i>Welcome to the Soul Arena. Don't start fights outside of the proper place or you will be thrown out. We have training facilities, and fights you can enter. Fights cost spirit stones. Make sure you have enough of them. We aren't a charity.</i>\"");
@@ -1540,4 +1539,4 @@ public function soularena():void {
         doNext(camp.returnToCampUseOneHour);
     }
 }
-}
+}
