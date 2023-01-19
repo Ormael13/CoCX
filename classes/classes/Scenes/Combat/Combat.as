@@ -1266,7 +1266,8 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.NaturalHerbalism)) power *= 2;
         Math.round(power);
         HPChange(power,false);
-        outputText("You apply the poultice, your wounds closing at high speed. Healed for "+power+"");
+        outputText("You apply the poultice, your wounds closing at high speed. Healed for ");
+        CommasForDigits(power*-1);
     }
 
     public function EnergyDrink():void {

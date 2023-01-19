@@ -82,8 +82,9 @@ public class EngineCore {
 				if (CoC.instance.player.hasPerk(PerkLib.Surgeon)) healingFromHealer += 0.2;
 				if (CoC.instance.player.hasPerk(PerkLib.Medic)) healingFromHealer += 0.2;
 				changeNum *= healingFromHealer;
+                changeNum = Math.min(changeNum, int.MAX_VALUE)
 			}
-            if (CoC.instance.player.HP + int(changeNum) > maxOverHP()) {
+            if (Math.min(CoC.instance.player.HP + changeNum, int.MAX_VALUE) > maxOverHP()) {
                 if (CoC.instance.player.HP >= maxOverHP()) {
                     if (display) HPChangeNotify(changeNum);
                     return CoC.instance.player.HP - before;

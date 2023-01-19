@@ -1117,7 +1117,7 @@ public final class Mutations extends MutationsHelper {
         var temp2:Number = 0;
         var temp3:Number = 0;
         var rando:Number = Math.random() * 100;
-        rando += (10 * player.additionalTransformationChances);
+        var randomod:Number = (5 * player.additionalTransformationChances);
         if (rando >= 90 && !tainted) rando -= 10;
         if (player.cor < 35) {
             clearOutput();
@@ -1162,7 +1162,7 @@ public final class Mutations extends MutationsHelper {
         }
         if (!player.blockingBodyTransformations()) {
             //Breast growth (maybe cock reduction!)
-            if (rando <= 75) {
+            if (rando <= 75-randomod) {
                 var growth:int = 1 + rand(3);
                 if (player.breastRows.length > 0) {
                     if (player.breastRows[0].breastRating < 2 && rand(3) == 0) growth++;
@@ -1204,13 +1204,13 @@ public final class Mutations extends MutationsHelper {
                     }
                 }
             }
-            if (player.vaginas.length == 0 && (rand(3) == 0 || (rando > 75 && rando < 90))) {
+            if (player.vaginas.length == 0 && (rand(3) == 0 || (rando > 75-randomod && rando < 90))) {
                 transformations.VaginaHuman().applyEffect(false);
                 if (player.fertility <= 5) player.fertility = 6;
                 outputText("[pg]An itching starts in your crotch and spreads vertically.  You reach down and discover an opening.  You have grown a <b>new [vagina]</b>!");
             }
             //Increase pussy wetness or grow one!!
-            else if (rando > 75 && rando < 90) {
+            else if (rando > 75-randomod && rando < 90) {
                 //Shrink cawk
                 if (player.cocks.length > 0 && !flags[kFLAGS.HYPER_HAPPY]) {
                     outputText("[pg]");
@@ -1271,7 +1271,7 @@ public final class Mutations extends MutationsHelper {
                     }
                 }
             }
-            if (rando >= 90 && changeLimit != 0) {
+            if (rando >= 90-randomod && changeLimit != 0) {
                 if (InCollection(player.skinColor, DemonRace.DemonSkinColors)) {
                     if (player.hasVagina()) {
                         outputText("[pg]Your heart begins beating harder and harder as heat floods to your groin.  You feel your clit peeking out from under its hood, growing larger and longer as it takes in more and more blood.");
