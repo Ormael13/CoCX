@@ -367,7 +367,8 @@ public class Wings extends SaveableBodyPart {
 		appearanceDesc: "A pair of large, feathery wings sprout from your back. The feathers are colorful with shades combining those of your hairs, scales and even their own unique feather colors. Though you usually keep the your wings folded close, they can unfurl to allow you to soar as gracefully as a couatl.",
 		wingSlap: true,
 		canFly: true,
-		feathers: true
+		feathers: true,
+		physical: true
 	});
 	public static const PUREDEVILFEATHER: int = 44;
 	EnumValue.add(Types, PUREDEVILFEATHER, "PUREDEVILFEATHER", {

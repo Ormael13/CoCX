@@ -1113,7 +1113,9 @@ public class Holidays extends BaseContent {
             if (player.cockTotal() > 1) outputText("s");
             outputText(" as she cums and cums, pleading, \"<i>Gobble!</i>\" at the top of her lungs.  You switch your grip to her bountiful bosom, roughly squeezing her tits as you hump your cock");
             if (player.cockTotal() > 1) outputText("s");
-            outputText(" in and out of her slick slit{and quivering behind}, pinching her nipples to give the squealing turkey just a little more pleasure."
+            outputText(" in and out of her slick slit" );
+            if (player.cockTotal() > 1)outputText(" and quivering behind");
+            outputText(", pinching her nipples to give the squealing turkey just a little more pleasure."
                 + "\n\nGobbles' feathered arms reach up, hooking around your neck and bringing you down, pulling you into a startlingly passionate kiss.  You lose yourself in her warm embrace, hips pistoning on automatic as you caress and kiss the lusty bird, tongue playing across her full red lips as you cup a breast just hard enough to make it lactate, so that your fingers are coated in thick gravy.  You bring them up to her cheek, smearing a bit over her lower lip before she eagerly swallows it up, suckling her own lactic lust from your digit like a little teat; you join in, half-kissing her and half licking up the gravy from your fingers, tongue tying with hers more than once, playing across each other.  Your sexy moans turn to gasps and cries as you continue to pound her puss");
             if (player.cockTotal() > 1) outputText(" and ass");
             outputText(", her legs spurring you on every time you withdraw, muscles clenching when you pause, never letting you rest.  Needy slut! But she's more than willing to do her part, thrusting her hips up to meet you, squeezing and milking your cock");

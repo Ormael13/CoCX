@@ -1,4 +1,8 @@
-﻿package classes.Scenes.NPCs{
+﻿/**
+ * ...
+ * @author Liadri
+ */
+package classes.Scenes.NPCs{
 import classes.*;
 import classes.display.SpriteDb;
 import classes.internals.SaveableState;
@@ -157,7 +161,7 @@ private function talkToEtnaDaughter():void {
 	outputText("So, what did your adorable daughter do today?")
 	var temp:int = rand((incestEnabled() && EtnaDaughterIncestEnabled)?5:4);
 	if (temp == 0) {
-		outputText("“<i>I caught a butterfly dad/mom, look!</i>”\n" +
+		outputText("“<i>I caught a butterfly "+championRef()+", look!</i>”\n" +
 				"She opens her paws and indeed a butterfly flies out as she laughs cheerfully. Considering the nature of the other games she sometimes gets involved in this is a welcome sight.\n");
 		doNext(camp.returnToCampUseOneHour);
 	} else if (temp == 1) {
@@ -172,7 +176,7 @@ private function talkToEtnaDaughter():void {
 				"The goblin looks at you with pleading eyes then adds “<i>Someone kill me please...</i>” as [etnakidname] shoves her back in the hole where she stashes her toys.")
 		doNext(camp.returnToCampUseOneHour);
 	} else if (temp == 3) {
-		outputText("“I caught a fish by the lake!”[pg]" +
+		outputText("“<i>I caught a fish by the lake!</i>”[pg]" +
 				"She goes to her stash and comes back with a shark girl, still tied up in a fillet, bondage-style. Furthermore, she is clearly high on manticore lust venom, trying to pleasure herself but unable to reach her cunt with her hands.[pg]" +
 				"“<i>Can I keep it?</i>”[pg]");
 		menu();
@@ -201,7 +205,7 @@ private function toggleEtnaDaughterGuardingCamp():void {
 		EtnaDaughterGuardingCamp = 2;
 	} else {
 		outputText("You tell your daughter to stop guarding the camp at night.[pg]");
-		outputText("“<i>Aww but "+championRef()+ ", Its so FUN! But if you say so then okay</i>” she says walking away somewhat dejectedly.");
+		outputText("“<i>Aww but "+championRef()+ ", Its so FUN! But if you say so then okay</i>” she says while walking away somewhat dejectedly.");
 		EtnaDaughterGuardingCamp = 1;
 	}
 	doNext(playerMenu);

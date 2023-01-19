@@ -51,14 +51,20 @@ The player (both regular and debug versions) can be downloaded from Xianxia disc
 
 Extract it to your location of choice.
 Create a new environment variable `FLEX_HOME` and point it to the SDK folder e.g. 'C:\\files\apache-flex-sdk-4.16.1-bin'.
-Edit the Path variable and add an entry to `%FLEX_HOME%\bin`
+Edit the 'Path' variable and add an entry to `%FLEX_HOME%\bin`
 Get the SWFObject Source code zip from [here](https://github.com/swfobject/swfobject/releases/tag/2.2) and place it as is in the SDK folder.
 look for the `installer.xml` file and remove the 4 lines for swfobject.url (search for them) and replace with `<property file="${FLEX_HOME}/swfobject-2.2.zip"/>`
 
 For mobile builds get the Harman AIR SDK for Flex Developers v 33.1 from [Harman](https://airsdk.harman.com/download) and extract it into the Flex SDK directory.
 Create a new environment variable `AIR_HOME` and point it to the SDK folder e.g. 'C:\\files\apache-flex-sdk-4.16.1-bin'.
 Edit the Path variable and add an entry to `%AIR_HOME%\bin`
-
+####Adding new environment variables to windows:
+```1. On the Windows taskbar, right-click the Windows icon and select System.
+2. In the Settings window, under Related Settings, click Advanced system settings. 
+3. On the Advanced tab, click Environment Variables. 
+4. Click New to create a new environment variable. Click Edit to modify an existing environment variable. 
+5. After creating or modifying the environment variable, click Apply and then OK to have the change take effect. 
+```
 #### IDEA configuration
 
 >Important: if you encounter any errors with memory allocation during the build, use the above advice for FlashDevelop to increase max memory for SDK. 
