@@ -1861,10 +1861,11 @@ import coc.view.MainView;
 			addButton(5, "Perm Perks", ascensionPermeryMenu).hint("Spend Ascension Perk Points to make certain perks permanent (5/10 points).", "Perk Selection");
 			genMemPatch();
 			if (player.hasStatusEffect(StatusEffects.TranscendentalGeneticMemory)) {
+				var permMemtext:String = "You have permed <b>"+player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory)+"/"+player.statusEffectv1(StatusEffects.TranscendentalGeneticMemory)+"</b> from TranscendentalGeneticMemory tier "+player.perkv1(PerkLib.AscensionTrancendentalGeneticMemoryStageX);
 				if (player.statusEffectv2(StatusEffects.TranscendentalGeneticMemory) < player.statusEffectv1(StatusEffects.TranscendentalGeneticMemory)) {
-					addButton(6, "Perm Met.", ascensionMetamorphPermMenu).hint("Spend Ascension Perk Points to make certain Metamorphs permanent.", "Permanent Metamorphs");
+					addButton(6, "Perm Met.", ascensionMetamorphPermMenu).hint("Spend Ascension Perk Points to make certain Metamorphs permanent.\n"+permMemtext, "Permanent Metamorphs");
 				} else {
-					addButtonDisabled(6, "Perm Met.", "Spend Ascension Perk Points to make certain Metamorphs permanent.\n\n<b>You already bought the maximum amount of Permanent Metamorphs allowed by your stage of Transcedental Genetic Memory!</b>");
+					addButtonDisabled(6, "Perm Met.", "Spend Ascension Perk Points to make certain Metamorphs permanent.\n\n<b>You already bought the maximum amount of Permanent Metamorphs allowed by your stage of Transcedental Genetic Memory!</b>\n"+permMemtext);
 				}
 
 			} else addButtonDisabled(6, "Perm Met.", "Spend Ascension Perk Points to make certain Metamorphs permanent.\n\n<b>In order to be able to select Metamorphs to make permanent, you need to buy Transcendental Genetic Memory from Rare Perks 2 first!</b>");

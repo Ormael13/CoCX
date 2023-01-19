@@ -226,7 +226,7 @@ public class PerkMenu extends BaseContent {
 			outputText("\n\nYou can choose between fighting feral or normaly with your fists. (Req. to have natural attacks or a gaunlet type weapon with claws to enable feral mode)");
 			outputText("\nFighting Style: <b>" + (flags[kFLAGS.FERAL_COMBAT_MODE] ? "Feral" : "Normal") + "</b>");
 			bd.add("Normal/Feral", curry(toggleFlagMelee, kFLAGS.FERAL_COMBAT_MODE))
-				.disableIf(!(player.weaponName == "fists" && player.hasNaturalWeapons() || player.haveNaturalClawsTypeWeapon()), "You need to be unarmed and possess a natural weapon OR to have equipped gaunlets with any type of artifical claws.");
+				.disableIf(!((player.weaponName == "fists" || player.haveWeaponAllowingClaws()) && player.hasNaturalWeapons() || player.haveNaturalClawsTypeWeapon()), "You need to be unarmed and possess a natural weapon OR to have equipped gaunlets with any type of artifical claws.");
 		}
 		if ((player.hasPerk(PerkLib.Berzerker) || player.hasPerk(PerkLib.Lustzerker)) && player.perkv1(IMutationsLib.SalamanderAdrenalGlandsIM) >= 3) {
 			outputText("\n\nYou can choose between starting fight with berserker, lustzerker, both or none.");
