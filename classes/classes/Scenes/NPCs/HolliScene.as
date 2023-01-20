@@ -14,9 +14,9 @@ public function treeMenu(output:Boolean = true):void {
 		outputText("The demon tree is still here, and the face peeking from it still stares daggers at you even from a distance.  It looks like forgiveness won't be forthcoming.");
 		//Call Jojo goes to above scene, others go to fight or camp directly
 		menu();
-		addButton(0,"Fight",fightHolli);
-		if(player.hasKeyItem("Jojo's Talisman") >= 0) addButton(1,"Call Jojo",callDatJojo);
-		addButton(4, "Back", inventory.inventoryMenu);
+		addButton(1,"Fight",fightHolli);
+		if(player.hasKeyItem("Jojo's Talisman") >= 0) addButton(2,"Call Jojo",callDatJojo);
+		addButton(3, "Back", inventory.inventoryMenu);
 	}
 	else if(flags[kFLAGS.FUCK_FLOWER_LEVEL] == 1) flowerStage1Menu(output);
 	else if(flags[kFLAGS.FUCK_FLOWER_LEVEL] == 2) flowerStage2Menu(output);
@@ -1569,3 +1569,4 @@ public function amilyComesBack():void {
 }
 }
 }
+
