@@ -179,14 +179,14 @@ use namespace CoC;
 						name  : "desertloot",
 						chance: 0.3,
 						call  : findDesertLoot
-					}, {
+					}/*, {
 						name: "demonProjects",
 						chance: 0.2,
 						when: function ():Boolean {
 							return DemonLab.MainAreaComplete >= 4;
 						},
 						call: SceneLib.exploration.demonLabProjectEncounters
-					});
+					}*/);
 		}
 		//Explore desert
 		public function exploreDesert():void

@@ -123,8 +123,8 @@ public class Changelog extends BaseContent
 			outputText("-bugfixes for Enigmanium, bee honey without wings, imp tome with TFimmunity, mino scene as Cerb, werewolf pounce text, Wood Elf dress force equip, make Imp Tome unique again (EragonX)\n");
 			outputText("-Hidden Job perks can't be accuired now before lvl 20 (first one is possible to pick at lvl 20 and then each 10 lvl's)\n");
 			outputText("-Add better tooltip to GenMem Perm button during ascension (EragonX)\n");
-			outputText("-Jabberwocky scale won't affect dragonne pc's (it get almsot non functional race atm) and dragon score req. increased form 10+ to 16+ points (new lowest race score for bonuses in dragon score). And after more jabby unique bodyparts/perks item would once again make change into jabberwocky in one use of the item.\n");
-			outputText("-\n");
+			outputText("-Jabberwocky scale won't affect dragonne pc's (it get almost non functional race atm) and dragon score req. increased from 10+ to 16+ points (new lowest race score for bonuses in dragon score). And after more jabby unique bodyparts/perks item would once again make change into jabberwocky in one use of the item.\n");
+			outputText("-Added more stat and perk gains for early game - doubled stats/perk points period extended by 3 lvlv's and first lvl up (0 > 1) grant trice more free stat/perk points than before.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

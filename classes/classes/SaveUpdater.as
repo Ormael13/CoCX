@@ -1783,7 +1783,8 @@ public class SaveUpdater extends NPCAwareContent {
 				// Compute total stat points spent
 				var statPointsPerLevel:int = 5 + (player.perkv1(PerkLib.AscensionAdvTrainingX));
 				var statPoints:int = player.level*statPointsPerLevel;
-				if (player.level <= 6) statPoints += player.level*statPointsPerLevel; else statPoints += 6*statPointsPerLevel;
+				if (player.level <= 6) statPoints += player.level * statPointsPerLevel;
+				else statPoints += 6*statPointsPerLevel;
 				statPoints -= player.statPoints;
 				statPoints -= JourneyToTheEast.AhriStatsToPerksConvertCounter*5;
 				statPoints += JourneyToTheEast.EvelynnPerksToStatsConvertCounter * 5;
@@ -2012,6 +2013,24 @@ public class SaveUpdater extends NPCAwareContent {
 				if (!player.hasStatusEffect(StatusEffects.TookImpTome) && (player.hasItem(shields.IMPTOME) || player.shieldName == "cursed Tome of Imp"))
 					player.createStatusEffect(StatusEffects.TookImpTome,  0, 0, 0, 0);
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.046;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.047) {
+				if (player.level > 0) {
+					player.statPoints += 20;
+					player.perkPoints += 4;
+				}
+				if (player.level > 6) {
+					if (player.level < 9) {
+						player.statPoints += (player.level - 6) * 5;
+						player.perkPoints += (player.level - 6);
+					}
+					else {
+						player.statPoints += 15;
+						player.perkPoints += 3;
+					}
+				}
+				outputText("\n\nAnother really smol bonus to spare stat/perk points for the starting phase of the adventure ^^");
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.047;
 			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);

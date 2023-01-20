@@ -158,14 +158,14 @@ use namespace CoC;
 				//Find nothing!
 				name: "nothing",
 				call: encounterNothing
-			}, {
+			}/*, {
 				name: "demonProjects",
 				chance: 0.2,
 				when: function ():Boolean {
 					return DemonLab.MainAreaComplete >= 4;
 				},
 				call: SceneLib.exploration.demonLabProjectEncounters
-			});
+			}*/);
 		}
 		
 		public function exploreGlacialRift():void {
