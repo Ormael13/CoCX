@@ -165,14 +165,14 @@ import classes.Scenes.SceneLib;
 					return (player.hasKeyItem("Old Pickaxe") > 0 && Forgefather.materialsExplained);
 				},
 				chance: 1
-			}, {
+			}/*, {
 				name: "demonProjects",
 				chance: 0.2,
 				when: function ():Boolean {
 					return DemonLab.MainAreaComplete >= 4;
 				},
 				call: SceneLib.exploration.demonLabProjectEncounters
-			});
+			}*/);
 		}
 
 		public function exploreBeach():void {

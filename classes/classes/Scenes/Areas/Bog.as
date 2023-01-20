@@ -93,14 +93,14 @@ public class Bog extends BaseContent
 					return flags[kFLAGS.ZENJI_PROGRESS] != -1 && (flags[kFLAGS.ZENJI_PROGRESS] < 8 || flags[kFLAGS.ZENJI_PROGRESS] == 10)
 				},
 				call: zenjiEncounterFn
-			}, {
+			}/*, {
 				name: "demonProjects",
 				chance: 0.2,
 				when: function ():Boolean {
 					return DemonLab.MainAreaComplete >= 4;
 				},
 				call: SceneLib.exploration.demonLabProjectEncounters
-			});
+			}*/);
 		}
 
 		public function isDiscovered():Boolean {
