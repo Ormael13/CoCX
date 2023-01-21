@@ -4963,7 +4963,7 @@ public class Combat extends BaseContent {
                 } else {
                     ExtraNaturalWeaponAttack(ClawDamageMultiplier, "", true);
                     ExtraNaturalWeaponAttack(ClawDamageMultiplier, "", true);
-                    if (player.weaponName == "CatGlove" && Arms.hasFelineArms(player)) {
+                    if (player.weaponName == "black cat glove" && Arms.hasFelineArms(player)) {
                         ExtraNaturalWeaponAttack(ClawDamageMultiplier, "", true);
                         ExtraNaturalWeaponAttack(ClawDamageMultiplier, "", true);
                     }
