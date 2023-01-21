@@ -1164,7 +1164,7 @@ public class DebugMenu extends BaseContent
 			"leaf green", "light blonde", "light blue", "light gray", "light green", "light grey", "light purple", "lime green",
 			"mediterranean-toned", "metallic golden", "metallic silver", "midnight black", "milky white",
 			"pale white", "pale yellow", "platinum blonde", "platinum crimson", "platinum-blonde", "purplish-black",
-			"quartz white", "reddish-orange", "rough gray", "immaculate white",
+			"quartz white", "reddish-orange", "rough gray", "immaculate white", "royal purple",
 			"sandy blonde", "sandy brown", "sandy-blonde", "shiny black", "silver blonde", "silver-white", "snow white", "blazing red",
 			"yellowish-green", "black and yellow", "white and black", "pure blue", "neon blue", "pale purple", "eldritch green"
 		];
