@@ -4288,12 +4288,12 @@ public class PerkLib
 			[TitanicStrength],
 			[TransformationResistance,TransformationAcclimation],
 			[WarMageNovice, WarMageApprentice, WarMageAdept, WarMageExpert, WarMageMaster],
-			[WeaponClawsClawTraining, WeaponClawsExtraClawAttack, WeaponClawsMultiClawAttack, WeaponClawsClawingFlurry, WeaponClawsSavageRend],
-			[WeaponLargeDoubleAttack, WeaponLargeTripleAttack],
-			[WeaponNormalDoubleAttack, WeaponNormalTripleAttack, WeaponNormalQuadrupleAttack, WeaponNormalPentaAttack, WeaponNormalHexaAttack],
-			[WeaponRangeDoubleStrike, WeaponRangeTripleStrike],
-			[WeaponSmallDoubleAttack, WeaponSmallTripleAttack, WeaponSmallQuadrupleAttack, WeaponSmallPentaAttack, WeaponSmallHexaAttack,
-				WeaponSmallHectaAttack, WeaponSmallOctaAttack, WeaponSmallNonaAttack, WeaponSmallDecaAttack],
+			//[WeaponClawsClawTraining, WeaponClawsExtraClawAttack, WeaponClawsMultiClawAttack, WeaponClawsClawingFlurry, WeaponClawsSavageRend],
+			//[WeaponLargeDoubleAttack, WeaponLargeTripleAttack],
+			//[WeaponNormalDoubleAttack, WeaponNormalTripleAttack, WeaponNormalQuadrupleAttack, WeaponNormalPentaAttack, WeaponNormalHexaAttack],
+			//[WeaponRangeDoubleStrike, WeaponRangeTripleStrike],
+			//[WeaponSmallDoubleAttack, WeaponSmallTripleAttack, WeaponSmallQuadrupleAttack, WeaponSmallPentaAttack, WeaponSmallHexaAttack,
+			//	WeaponSmallHectaAttack, WeaponSmallOctaAttack, WeaponSmallNonaAttack, WeaponSmallDecaAttack],
 			[WispLieutenant, WispCaptain, WispMajor, WispColonel],
 			// special sections
 			[EpicIntelligence, LegendaryIntelligence, MythicalIntelligence],
@@ -7345,6 +7345,7 @@ public class PerkLib
             //Tier 30
 			Perfection.requireLevel(180)
 					.requirePerk(Saturation);
+			Creationism.requirePerk(Perfection);
 			SoulPowered.requireLevel(180)
 					.requirePerk(Metamorphable);
 			SoulOfSteel.requireLevel(180)
@@ -7366,6 +7367,7 @@ public class PerkLib
 					.requirePerk(Anvil);
 			SexChampion.requireLevel(180)
 					.requirePerk(Pornstar);
+			TransformationAcclimation.requirePerk(TransformationResistance);
 			// ChimericalBodyUltimateStage.requirePerk(ChimericalBodyInitialStage)
             //        .requireLevel(1)
             //        .requireCustomFunction(function (player:Player):Boolean {
