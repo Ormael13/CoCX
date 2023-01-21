@@ -1354,10 +1354,10 @@ public class CampMakeWinions extends BaseContent
 			menu();
 			if (player.hasPerk(PerkLib.JobElementalConjurer) && (currentSizeOfElementalsArmy() < maxSizeOfElementalsArmy())) addButton(0, "Summon(N)", summoningElementalsSubmenu).hint("Summon a Normal-tier Elementals");
 			else addButtonDisabled(0, "Summon(N)", "You either summoned all possible Normal-tier elementals or reached limit of how many elementals you can command at once.");
-			if (player.hasPerk(PerkLib.JobElementalConjurer) && ((currentSizeOfElementalsArmy() + 1) < maxSizeOfElementalsArmy())) addButton(1, "Summon(E)", summoningEpicElementalsSubmenu).hint("Summon an Epic-tier Elementals");
-			else addButtonDisabled(1, "Summon(E)", "You either summoned all possible Epic-tier elementals or reached limit of how many elementals you can command at once.");
-			if (currentSizeOfElementalsArmy() > 0) addButton(5, "ElementUp", elementaLvlUp,-9000,-9000,-9000,"Level up your Normal Elementals!")
-			else addButtonDisabled(5, "ElementUp", "You don't have any normal elementals, try summoning one!");
+			if (currentSizeOfElementalsArmy() > 0) addButton(1, "ElementUp", elementaLvlUp,-9000,-9000,-9000,"Level up your Normal Elementals!")
+			else addButtonDisabled(1, "ElementUp", "You don't have any normal elementals, try summoning one!");
+			if (player.hasPerk(PerkLib.JobElementalConjurer) && ((currentSizeOfElementalsArmy() + 1) < maxSizeOfElementalsArmy())) addButton(5, "Summon(E)", summoningEpicElementalsSubmenu).hint("Summon an Epic-tier Elementals");
+			else addButtonDisabled(5, "Summon(E)", "You either summoned all possible Epic-tier elementals or reached limit of how many elementals you can command at once.");
 			if (player.statusEffectv2(StatusEffects.SummonedElementals) > 0) addButton(6, "ElementUp(E)", elementaLvlUpEpic);
 			else addButtonDisabled(6, "ElementUp(E)", "You don't have any epic elementals, try summoning one!");
 			if (canSearchForParls()) addButton(10, "Explore", SceneLib.exploration.goSearchForPearls);

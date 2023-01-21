@@ -125,6 +125,9 @@ public class Changelog extends BaseContent
 			outputText("-Add better tooltip to GenMem Perm button during ascension (EragonX)\n");
 			outputText("-Jabberwocky scale won't affect dragonne pc's (it get almost non functional race atm) and dragon score req. increased from 10+ to 16+ points (new lowest race score for bonuses in dragon score). And after more jabby unique bodyparts/perks item would once again make change into jabberwocky in one use of the item.\n");
 			outputText("-Added more stat and perk gains for early game - doubled stats/perk points period extended by 3 lvlv's and first lvl up (0 > 1) grant trice more free stat/perk points than before.\n");
+			outputText("-Normal weapons will now multi-attack the correct number of times when a ranged weapon is equipped. (Chibizs)\n");
+			outputText("-Fix feral on load, fix catgloves feral attack (EragonX)\n");
+			outputText("-MInor rearrangment of elementalist summon menu. Totaly not preparing for another summon/upgrade section totaly not that...\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -140,9 +143,6 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");// (Liadri)
-			outputText("-\n");// (aimozg)
 			outputText("-\n");// (Svalkash)
 			outputText("-\n");// (EragonX)
 			outputText("-\n");// (Jtecx)
@@ -155,8 +155,8 @@ public class Changelog extends BaseContent
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-\n");// (Liadri)
+			outputText("-\n");// (aimozg)
 			//remove this line when other two lines below get added ingame
 			//outputText("-New perk for enemies: Elite type enemy. Bonuses for are: Diehard effect of 2,5% of max HP + 750 HP * NG tier, OverMax HP effect of 5% magnitude.\n");
 			//outputText("-New perk for enemies: Champion type enemy. Bonuses for are: Diehard effect of 5% of max HP + 1,500 HP * NG tier, OverMax HP effect of 10% magnitude.\n");
