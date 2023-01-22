@@ -4972,14 +4972,11 @@ use namespace CoC;
 			if (!hasPerk(PerkLib.StrengthOfStone) && statStore.hasBuff('Strength of stone')) statStore.removeBuffs('Strength of stone');
 			if (hasPerk(PerkLib.PsionicEmpowerment)) statStore.replaceBuffObject({'int.mult':(0.01 * Mindbreaker.MindBreakerFullConvert)}, 'Psionic Empowerment', { text: 'Psionic Empowerment' });
 			var power:Number = 0;
-			var newPower:String = "Rounding String";
 			if (hasPerk(PerkLib.BullStrength)){
 				if (isRaceCached(Races.COW, 2)) power = lactationQ()*0.001;
 				if (isRaceCached(Races.MINOTAUR, 2) >= 15) power = cumCapacity()*0.001;
-				//Below now rounds the number to the tenths and hundreths decimal. Check discord for usage if needed elsewhere. ~Chibizs
-				if (power > 0.5) newPower = "0.5";
-				else newPower = ("0." + ((power.toString().charAt(2)) + (power.toString().charAt(3))));
-				statStore.replaceBuffObject({'str.mult':(newPower.valueOf())}, 'Bull Strength', { text: 'Bull Strength' });
+				if (power > 0.5) power = 0.5;
+				statStore.replaceBuffObject({'str.mult':(Math.round(power*100))/100}, 'Bull Strength', { text: 'Bull Strength' });
 			}
 			if (!hasPerk(PerkLib.BullStrength) && statStore.hasBuff('Bull Strength')) statStore.removeBuffs('Bull Strength');
 			if (hasPerk(PerkLib.UnnaturalStrength)){
