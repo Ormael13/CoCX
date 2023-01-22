@@ -11,10 +11,10 @@ import classes.internals.SaveableState;
 
 public class MidokaScene extends NPCAwareContent implements TimeAwareInterface, SaveableState {
 
-	public static var MidokaName:String;
-	public static var MidokaAge:int;
+	public var MidokaName:String;
+	public var MidokaAge:int;
 	public var GrowUpTime:int;
-	public static var MidokaGuardingCamp:int;	//0 = locked, 1 = not guarding, 2 = guarding;
+	public var MidokaGuardingCamp:int;	//0 = locked, 1 = not guarding, 2 = guarding;
 
 	public function stateObjectName():String {
 		return "MidokaScene";

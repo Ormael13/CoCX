@@ -680,6 +680,10 @@ public class Camp extends NPCAwareContent{
 			SceneLib.excelliaFollower.ExcelliaPathChoice();
 			return;
 		}
+		if (SceneLib.chichiScene.ChiChiCorruption >= 90 && !SceneLib.chichiScene.ChiChiKickedOut) {
+			SceneLib.chichiScene.corruptionOverflowing();
+			return;
+		}
 		//Go through Helia's first time move in interactions if  you haven't yet.
 		if (flags[kFLAGS.HEL_FOLLOWER_LEVEL] == 2 && SceneLib.helScene.followerHel() && flags[kFLAGS.HEL_INTROS_LEVEL] == 0) {
 			helFollower.helFollowersIntro();
@@ -1936,7 +1940,7 @@ public class Camp extends NPCAwareContent{
 			//Midoka, Chi-Chi's daughter
 			if (followerMidoka()) {
 				midokaScene.midokaCampDescription();
-				buttons.add(MidokaScene.MidokaName, midokaScene.midokaMainMenu);
+				buttons.add(SceneLib.midokaScene.MidokaName, midokaScene.midokaMainMenu);
 			}
 			//Valaria
 			if (flags[kFLAGS.VALERIA_AT_CAMP] == 1 && flags[kFLAGS.TOOK_GOO_ARMOR] == 1) {
@@ -4849,4 +4853,4 @@ public function rebirthFromBadEnd():void {
 	}
 
 }
-}
+}

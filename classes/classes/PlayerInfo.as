@@ -943,8 +943,8 @@ public class PlayerInfo extends BaseContent {
 		//if (SceneLib.ceaniScene.pregnancy.isPregnant)	//TODO Ceani preggers
 		//	pregnancies += "<b>Ceani</b> \n";
 
-		//if (SceneLib.chichiScene.pregnancy.isPregnant)	//TODO ChiChi preggers
-		//	pregnancies += "<b>ChiChi</b> \n";
+		if (SceneLib.chichiScene.pregnancy.isPregnant)
+			pregnancies += "<b>ChiChi</b> \n";
 
 		//if (SceneLib.dianaScene.pregnancy.isPregnant)	//TODO Diana preggers
 		//	pregnancies += "<b>Diana</b> \n";
@@ -1076,6 +1076,10 @@ public class PlayerInfo extends BaseContent {
 			childStats += "<b>Benoit Eggs Laid:</b> " + flags[kFLAGS.BENOIT_EGGS] + "\n";
 		if (flags[kFLAGS.FEMOIT_EGGS_LAID] > 0)
 			childStats += "<b>Benoite Eggs Produced:</b> " + flags[kFLAGS.FEMOIT_EGGS_LAID] + "\n";
+
+		if (SceneLib.midokaScene.MidokaAge > 0) {
+			childStats += "<b>Child With Chi CHi:</b> " + SceneLib.midokaScene.MidokaName + "\n";
+		}
 
 		if (flags[kFLAGS.COTTON_KID_COUNT] > 0)
 			childStats += "<b>Children With Cotton:</b> " + flags[kFLAGS.COTTON_KID_COUNT] + "\n";

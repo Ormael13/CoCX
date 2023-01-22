@@ -148,7 +148,7 @@ public class ParserTags {
         "bathgirlname"          : function ():* { return CoC.instance.flags[kFLAGS.MILK_NAME]; },
         "sheilaname"            : function ():* { return SceneLib.sheilaScene.sheilaName(); },
         "etnakidname"           : function ():* { return EtnaDaughterScene.EtnaDaughterName; },
-        "midokaname"            : function ():* { return MidokaScene.MidokaName; },
+        "midokaname"            : function ():* { return SceneLib.midokaScene.MidokaName; },
         "cockplural"            : function ():* { return (CoC.instance.player.cocks.length == 1) ? "cock" : "cocks"; },
         "dickplural"            : function ():* { return (CoC.instance.player.cocks.length == 1) ? "dick" : "dicks"; },
         "headplural"            : function ():* { return (CoC.instance.player.cocks.length == 1) ? "head" : "heads"; },

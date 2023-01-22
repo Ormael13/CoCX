@@ -9,19 +9,10 @@ import classes.BodyParts.Arms;
 import classes.BodyParts.Eyes;
 import classes.BodyParts.Horns;
 import classes.BodyParts.LowerBody;
-import classes.BodyParts.Tail;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
-import classes.Items.ArmorLib;
-import classes.Items.HeadJewelryLib;
-import classes.Items.ShieldLib;
-import classes.Items.UndergarmentLib;
-import classes.Items.WeaponLib;
-import classes.Items.WeaponRangeLib;
 import classes.Scenes.Dungeons.RiverDungeon;
 import classes.Scenes.SceneLib;
-import classes.Scenes.SceneLib;
-import classes.display.SpriteDb;
 import classes.internals.SaveableState;
 
 public class JourneyToTheEast extends HeXinDaoAbstractContent implements SaveableState
@@ -76,7 +67,7 @@ public class JourneyToTheEast extends HeXinDaoAbstractContent implements Saveabl
 				outputText("You enter the town local Inn ‘Journey to the East’ and look around. ");
 			}
 			outputText("You can see many people enjoying a meal or drink in the dining hall. Behind his counter, a barman moves to and fro, serving drinks or polishing a glass in front of him with a rag.");
-			if (flags[kFLAGS.CHI_CHI_FOLLOWER] != 2 && flags[kFLAGS.CHI_CHI_FOLLOWER] != 5 && !player.hasStatusEffect(StatusEffects.ChiChiOff) && model.time.hours >= 18 && rand(4) == 0) {
+			if (flags[kFLAGS.CHI_CHI_FOLLOWER] != 2 && flags[kFLAGS.CHI_CHI_FOLLOWER] != 5 && !player.hasStatusEffect(StatusEffects.ChiChiOff) && !SceneLib.chichiScene.ChiChiKickedOut && model.time.hours >= 18 && rand(4) == 0) {
 				SceneLib.chichiScene.ChiChiDrunkSex();
 				return;
 			}
