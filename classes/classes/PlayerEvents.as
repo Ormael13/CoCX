@@ -1193,7 +1193,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					player.createPerk(PerkLib.DemonEnergyThirst, 0, 0, 0, 0);
 					needNext = true;
 				}
-				if (player.hasPerk(PerkLib.Soulless) && !player.hasPerk(PerkLib.SoulEater)) {
+				if ((player.hasPerk(PerkLib.Soulless) || player.hasPerk(PerkLib.Phylactery)) && !player.hasPerk(PerkLib.SoulEater)) {
 					outputText("\nYou begin to hunger after those demonic soul crystals, Lethicite. Perhaps you can find some to consume? You acquired the demons ability to consume Lethicite for power! \n(<b>Gained Perk: Soul Eater</b>)\n");
 					player.createPerk(PerkLib.SoulEater, 0, 0, 0, 0);
 					needNext = true;
@@ -1204,6 +1204,15 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					player.removePerk(PerkLib.DemonEnergyThirst);
 					needNext = true;
 				}
+			}
+			if ((player.hasPerk(PerkLib.Soulless) || player.hasPerk(PerkLib.Phylactery)) && !player.hasPerk(PerkLib.SoulEater)) {
+				outputText("\nYou begin to hunger after those demonic soul crystals, Lethicite. Perhaps you can find some to consume? You acquired the demons ability to consume Lethicite for power! \n(<b>Gained Perk: Soul Eater</b>)\n");
+				player.createPerk(PerkLib.SoulEater, 0, 0, 0, 0);
+				needNext = true;
+			}
+			if (player.hasPerk(PerkLib.SoulEater) && !(player.hasPerk(PerkLib.Soulless) || player.hasPerk(PerkLib.Phylactery))) {
+				outputText("\nDue to your miraculous soul recovery you have lost the ability to consume souls! \n(<b>Lost Perk: Soul Eater</b>)\n");
+				player.removePerk(PerkLib.SoulEater);
 			}
 			//Demonic energy thirst
 			if (player.hasStatusEffect(StatusEffects.DemonEnergyThirstFeed)) {
@@ -2346,12 +2355,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Small Caster perk
-			if (player.isAnyRaceCached(Races.IMP) && player.effectiveTallness <= 60 && !player.hasPerk(PerkLib.SmallCaster)) {
+			if (player.isAnyRaceCached(Races.IMP, Races.DEVIL, Races.AZAZEL) && player.effectiveTallness <= 60 && !player.hasPerk(PerkLib.SmallCaster)) {
 				outputText("\nYour magic becomes more concentrated in your smaller body. <b>Gained perk: Small Caster!</b>");
 				player.createPerk(PerkLib.SmallCaster, 0, 0, 0, 0);
 				needNext = true;
 			}
-			if (player.hasPerk(PerkLib.SmallCaster) && (player.effectiveTallness > 60 || !player.isAnyRaceCached(Races.IMP))) {
+			if (player.hasPerk(PerkLib.SmallCaster) && (player.effectiveTallness > 60 || !player.isAnyRaceCached(Races.IMP, Races.DEVIL, Races.AZAZEL))) {
 				outputText("\nDue to being too tall you no longer qualify. <b>Perk lost: Small Caster.</b>");
 				player.removePerk(PerkLib.SmallCaster);
 				needNext = true;
