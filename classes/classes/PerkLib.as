@@ -560,7 +560,7 @@ public class PerkLib
 				"Add your speed to gun damage as a modifier, increase scaling of wisdom/intelligence bonus. (+15% firearms attacks multiplier)",
 				"You've chosen the 'Saint of Zariman' perk. Add your speed to gun damage as a modifier, increase scaling of wisdom/intelligence bonus. (+15% firearms attacks multiplier)");
 
-		public static const ElementsOfMarethBasic:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
+		public static const ElementsOfMarethBasic1:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
 				"You've chosen the 'Elements of Mareth: ' perk, your time spent in Mareth allowing you to get basic understanding of native elements that aren't classified as one of the traditional four.");
 		/*public static const :PerkType = mk("", "",
@@ -5766,7 +5766,7 @@ public class PerkLib
 					.requirePerk(JobLeader)
                     .requireWis(10);
             ElementalConjurerResolve.requirePerk(JobElementalConjurer)
-					.requireNotThosePerks(ElementalConjurerMindAndBodyResolveEx, ElementalConjurerMindAndBodyDedicationEx)
+					.requireNotThosePerks(ElementalConjurerMindAndBodyResolveEx, ElementalConjurerMindAndBodyDedicationEx, ElementalConjurerMindAndBodySacrificeEx)
                     .requireWis(20);
             ElementalContractRank1.requireAnyPerk(ElementalConjurerResolve, ElementalConjurerMindAndBodyResolveEx)
 					.requireNotThosePerks(DaoOfTheElements, ElementalConjurerMindAndBodyDedicationEx)
@@ -5794,7 +5794,8 @@ public class PerkLib
                     .requireWis(90)
                     .requireLevel(10)
                     .requireNGPlus(2);
-            ElementalContractRank2.requirePerk(ElementalContractRank1)
+            ElementalContractRank2.requireStatusEffect(StatusEffects.ArcaneCircle, "Built Arcane Circle")
+					.requirePerk(ElementalContractRank1)
                     .requireWis(50)
                     .requireLevel(6);
             ElementalBondFlesh.requireOrPerks(ElementalContractRank1, DaoOfTheElements, 1)

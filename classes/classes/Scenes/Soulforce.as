@@ -51,6 +51,8 @@ public class Soulforce extends BaseContent
 			else if (player.perkv1(PerkLib.Dantain) == 1) outputText("Foundation Establishment");
 			else outputText("Qi Condensation");
 			outputText("\n");
+			outputText("Flag: "+flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE]+"\n");
+			outputText("Status effect: "+player.statusEffectv1(StatusEffects.ArcaneCircle)+"\n");
 		}
 		/*	outputText("<b>Progress toward clearing next meridian: </b>");
 			if (flags[kFLAGS.UNLOCKED_MERIDIANS] == 2)

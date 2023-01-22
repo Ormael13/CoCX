@@ -129,13 +129,13 @@ public class Changelog extends BaseContent
 			outputText("-Fix feral on load, fix catgloves feral attack (EragonX)\n");
 			outputText("-Minor rearrangment of elementalist summon menu. Totaly not preparing for another summon/upgrade section totaly not that...\n");
 			outputText("-When exploring at lvl 9+ can found some weird pocket watch. Taking it would req. some 'super' sacrifice but will in turn allow to make something back. After picking it's accessable in one of camp actions submenu.\n");
-			outputText("-New event perk: Dao of the Elements. Gained by use of the Pocket Watch when req. are meet.\n");// Have 2 layers.
+			outputText("-New event perk: Dao of the Elements. Gained by use of the Pocket Watch when req. are meet. Have 2 layers.\n");
 			outputText("-New event perk: Elemental Conjurer Mind and Body Resolve (Ex). Gained by use of the Pocket Watch when req. are meet. Effects of both combined perks + 5% bonus to tou multi.\n");
-			//outputText("-New event perk: Elemental Conjurer Mind and Body Dedication (Ex). Gained by use of the Pocket Watch when req. are meet. Effects of all three combined perks + 5% bonus to spe/wis multi.\n");
-			//outputText("-New event perk: Elemental Conjurer Mind and Body Sacrifice (Ex). Gained by use of the Pocket Watch when req. are meet. Effects of all three combined perks + 5% bonus to str multi, +10% bonus to int multi, +15% bonus to wis multi.\n");
+			outputText("-New event perk: Elemental Conjurer Mind and Body Dedication (Ex). Gained by use of the Pocket Watch when req. are meet. Effects of all three combined perks + 5% bonus to spe/wis multi.\n");
+			outputText("-New event perk: Elemental Conjurer Mind and Body Sacrifice (Ex). Gained by use of the Pocket Watch when req. are meet. Effects of all three combined perks + 5% bonus to str multi, +10% bonus to int multi, +15% bonus to wis multi.\n");
 			outputText("-Multi-preg enabled for dual vaginas (EragonX)\n");
 			outputText("-Fixed the small error in the nightwalker dialogue. Fixed the issue of bull strength not properly giving its buff if the player would receive less than a 50% buff from the perk. (Chibizs)\n");
-			outputText("-\n");
+			outputText("-Elemental Contract Rank 2 perk got additional req. of actualy having arcane circle.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
