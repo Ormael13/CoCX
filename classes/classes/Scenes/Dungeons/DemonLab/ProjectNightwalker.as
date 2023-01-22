@@ -50,7 +50,7 @@ public class ProjectNightwalker extends Monster {
             }
             _biteCounter++;
             outputText("Suddenly, you feel crimson pain in the back of your neck. You snap out of… whatever that was, and hear her voice behind you.[pg]");
-            outputText("“<i>Shh… Sate me, little bloodbag, and I will sate you…mmm…</i<”[pg]");
+            outputText("“<i>Shh… Sate me, little bloodbag, and I will sate you…mmm…</i>”[pg]");
             outputText("Like hell! You struggle, throwing her off. She giggles, letting go of you and flying back to her original position. As her fangs leave your skin, you can feel the warm pulse of your heartbeat in your neck, your own blood trickling down. Despite yourself, you can feel the warmth spreading to your groin.");
             dam = Math.round(dam);
             player.takePhysDamage(dam);
