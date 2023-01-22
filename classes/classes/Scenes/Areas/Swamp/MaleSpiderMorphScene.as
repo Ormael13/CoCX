@@ -403,18 +403,18 @@ public class MaleSpiderMorphScene extends BaseContent
 			cleanupAfterCombat();
 		}
 
-		public function spiderPregVagBirth():void
+		public function spiderPregVagBirth(womb:int = 0):void
 		{
 			outputText("\n");
 			spriteSelect(SpriteDb.s_spiderguy);
-			outputText("You shudder violently, your stomach growling fiercely at you. It feels as if something is moving around in your womb, and you bend over on all fours, raising your ass into the air as if it is the most natural thing in the world. A slimy green fluid starts leaking out of your " + vaginaDescript(0) + ", making a small puddle on the ground. The sensation is extremely pleasurable as you feel it running down your thighs. Groaning, you start to push out a small, smooth green ball, and the action makes your " + vaginaDescript(0) + " so much wetter.  You push out another, and another, each ball rubbing against your inner walls before dropping into the slimy pool of goo. After the sixth, you orgasm, ");
+			outputText("You shudder violently, your stomach growling fiercely at you. It feels as if something is moving around in your womb, and you bend over on all fours, raising your ass into the air as if it is the most natural thing in the world. A slimy green fluid starts leaking out of your " + vaginaDescript(womb) + ", making a small puddle on the ground. The sensation is extremely pleasurable as you feel it running down your thighs. Groaning, you start to push out a small, smooth green ball, and the action makes your " + vaginaDescript(womb) + " so much wetter.  You push out another, and another, each ball rubbing against your inner walls before dropping into the slimy pool of goo. After the sixth, you orgasm, ");
 			//[if male/herm]
 			if (player.gender != 2) outputText("spraying your cum all over the ground underneath you, each egg squeezing out and prolonging the intense feeling.\n\n");
 			//[if female/genderless]
 			else outputText("spraying your juices all over the ground and mixing in with the green slime, soaking your legs, each egg you squeeze out only prolonging the intense feeling.\n\n");
 
 			outputText("After what seems like hours, you have lost count of the eggs pushed out, and you collapse from sexual exhaustion.\n\n");
-			CoC.instance.timeQ += 2;
+			cheatTime(2);
 			outputText("You awaken later on, a sticky feeling between your legs to go with your wet pussy");
 			if (player.hasCock()) outputText(" and raging hard on");
 			outputText(". Looking around, you notice the slimy pool appears to have dried up, but the broken eggshells show that you weren't just dreaming. Tiny dots in the dirt form a trail leading to the swamp, and you can only guess where your offspring went.\n");

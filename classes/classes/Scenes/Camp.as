@@ -163,10 +163,6 @@ public class Camp extends NPCAwareContent{
 		if (player.hasStatusEffect(StatusEffects.ChargeArmor)) {
 			player.removeStatusEffect(StatusEffects.ChargeArmor);
 		}
-		if (player.hasStatusEffect(StatusEffects.PCDaughters)) {
-			campScenes.goblinsBirthScene();
-			return;
-		}
 		if (player.hasItem(useables.SOULGEM, 1) && player.hasStatusEffect(StatusEffects.CampRathazul) && flags[kFLAGS.DEN_OF_DESIRE_QUEST] < 1) {
 			campUniqueScenes.playsRathazulAndSoulgemScene();
 			return;
@@ -585,7 +581,7 @@ public class Camp extends NPCAwareContent{
             return;
         }
 		//Cotton preg freakout
-		if (player.pregnancyIncubation <= 280 && player.pregnancyType == PregnancyStore.PREGNANCY_COTTON &&
+		if (((player.pregnancyIncubation <= 280 && player.pregnancyType == PregnancyStore.PREGNANCY_COTTON)||(player.pregnancy2Incubation <= 280 && player.pregnancy2Type == PregnancyStore.PREGNANCY_COTTON)) &&
 				flags[kFLAGS.COTTON_KNOCKED_UP_PC_AND_TALK_HAPPENED] == 0 && (model.time.hours == 6 || model.time.hours == 7)) {
 			SceneLib.telAdre.cotton.goTellCottonShesAMomDad();
 			hideMenus();
@@ -2203,6 +2199,7 @@ public class Camp extends NPCAwareContent{
 		}
 		if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) addButton(10, "Clone", VisitClone).hint("Check on your clone(s).");
 		else addButtonDisabled(10, "Clone", "Would you kindly go face F class Heaven Tribulation first?");
+		addButtonIfTrue(11, "Pocket Watch", mainPagePocketWatch, "Req. having Pocket Watch key item.", player.hasKeyItem("Pocket Watch") >= 0);
 		if (player.hasItem(useables.ENECORE, 1) && flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] < 200) addButton(12, "E.Core", convertingEnergyCoreIntoFlagValue).hint("Convert Energy Core item into flag value.");
 		if (player.hasItem(useables.MECHANI, 1) && flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] < 200) addButton(13, "C.Mechan", convertingMechanismIntoFlagValue).hint("Convert Mechanism item into flag value.");
 		addButton(14, "Back", campActions);
@@ -2221,6 +2218,45 @@ public class Camp extends NPCAwareContent{
 		flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] += 1;
 		doNext(campMiscActions);
 	}
+	
+	public function mainPagePocketWatch():void {
+		clearOutput();
+		outputText("Which perks would you like to combine using the watch?");
+		menu();
+		addButtonIfTrue(0, "DotE (layer 1)", mainPagePocketWatchDaoOfTheElementsPerkLayer1, "Req. Elemental Contract Rank 4 & Elements of the orthodox Path perks", player.hasPerk(PerkLib.ElementalContractRank4) && player.hasPerk(PerkLib.ElementsOfTheOrtodoxPath));
+		//addButtonIfTrue(1, );
+		addButtonIfTrue(5, "E C M & B R (Ex)", mainPagePocketWatchElementalConjurerMindAndBodyResolveEx, "Req. Elemental Conjurer Resolve & Elemental Conjurer Mind and Body Resolve perks", player.hasPerk(PerkLib.ElementalConjurerResolve) && player.hasPerk(PerkLib.ElementalConjurerMindAndBodyResolve));
+		//addButtonIfTrue(6, );
+		//addButtonIfTrue(7, );
+		addButton(14, "Back", campMiscActions);
+	}
+	private function mainPagePocketWatchDaoOfTheElementsPerkLayer1():void {
+		clearOutput();
+		outputText("Perks combined: Dao of the Elements (layer 1) perk attained.");
+		player.removePerk(PerkLib.ElementalContractRank1);
+		player.removePerk(PerkLib.ElementalContractRank2);
+		player.removePerk(PerkLib.ElementalContractRank3);
+		player.removePerk(PerkLib.ElementalContractRank4);
+		player.removePerk(PerkLib.ElementsOfTheOrtodoxPath);
+		player.createPerk(PerkLib.DaoOfTheElements, 1, 9, 0, 0);
+		player.perkPoints += 3;
+		doNext(mainPagePocketWatch);
+	}
+	private function mainPagePocketWatchElementalConjurerMindAndBodyResolveEx():void {
+		clearOutput();
+		outputText("Perks combined:Elemental Conjurer Mind and Body Resolve (Ex) perk attained.");
+		player.removePerk(PerkLib.ElementalConjurerResolve);
+		player.removePerk(PerkLib.ElementalConjurerMindAndBodyResolve);
+		player.createPerk(PerkLib.ElementalConjurerMindAndBodyResolveEx, 0, 0, 0, 0);
+		player.perkPoints++;
+		doNext(mainPagePocketWatch);
+	}/*
+	private function mainPagePocketWatch():void {
+		clearOutput();
+		outputText(".");
+		//player.createPerk();
+		doNext(mainPagePocketWatch);
+	}*/
 
 	public function campWinionsArmySim():void {
 		clearOutput();
@@ -2432,6 +2468,11 @@ public class Camp extends NPCAwareContent{
 		if (player.hasPerk(PerkLib.ElementalContractRank29)) dmSPPC += 1;
 		if (player.hasPerk(PerkLib.ElementalContractRank30)) dmSPPC += 1;
 		if (player.hasPerk(PerkLib.ElementalContractRank31)) dmSPPC += 1;
+		if (player.hasPerk(PerkLib.ElementalConjurerMindAndBodySacrificeEx)) dmSPPC += 4;
+		if (player.hasPerk(PerkLib.DaoOfTheElements)) {
+			dmSPPC += 5;
+			if (player.perkv1(PerkLib.DaoOfTheElements) > 1) dmSPPC += 5;
+		}
 		if (player.hasPerk(PerkLib.GreaterSharedPower)) dmSPPC *= 2;
 		return dmSPPC;
 	}
@@ -4520,6 +4561,7 @@ public function rebirthFromBadEnd():void {
 		performancePoints += possibleToGainAscensionPoints();
 		player.ascensionPerkPoints += performancePoints;
 		player.knockUpForce(); //Clear pregnancy
+		player.knockUpForce(0, 0, 1); //Clear pregnancy
 		player.buttKnockUpForce(); //Clear Butt preggos.
 		//Scene GO!
 		clearOutput();
@@ -4761,4 +4803,4 @@ public function rebirthFromBadEnd():void {
 	}
 
 }
-}
+}

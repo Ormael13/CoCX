@@ -8005,12 +8005,12 @@ public final class Mutations extends MutationsHelper {
         //If pregnancy, warning!
         if (pregnantChange) {
             outputText("\n<b>Your egg-stuffed ");
-            if (player.pregnancyType == PregnancyStore.PREGNANCY_BUNNY) {
+            if (player.pregnancyType == PregnancyStore.PREGNANCY_BUNNY || player.pregnancy2Type == PregnancyStore.PREGNANCY_BUNNY) {
                 outputText("womb ");
                 if (player.buttPregnancyType == PregnancyStore.PREGNANCY_BUNNY) outputText("and ");
             }
             if (player.buttPregnancyType == PregnancyStore.PREGNANCY_BUNNY) outputText("backdoor ");
-            if (player.buttPregnancyType == PregnancyStore.PREGNANCY_BUNNY && player.pregnancyType == PregnancyStore.PREGNANCY_BUNNY) outputText("rumble");
+            if (player.buttPregnancyType == PregnancyStore.PREGNANCY_BUNNY && (player.pregnancyType == PregnancyStore.PREGNANCY_BUNNY || player.pregnancy2Type == PregnancyStore.PREGNANCY_BUNNY)) outputText("rumble");
             else outputText("rumbles");
             outputText(" oddly, and you have a hunch that something's about to change</b>.");
         }

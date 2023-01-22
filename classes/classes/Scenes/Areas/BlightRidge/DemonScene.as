@@ -327,7 +327,7 @@ import classes.Scenes.SceneLib;
 			outputText(" feel wonderful as they're pressed between you, sliding back and forth in time with your body's urgent grinding.[pg]");
 			outputText("The omnibus' facade of feigned innocence drops under the force of the hot, wet fuck.  Her mouth opens into an 'o' of pleasure, and you feel her rod thicken as it begins pumping the proof of her ecstasy inside you.  The nodules that cover omnibus's demonic erection wildly vibrate as she orgasms, throwing you over the edge and into the midst of a body-shaking orgasm.  Demon-seed floods your womb, squeezed inside it by your body's orgasmic contractions.  You shudder with the demon as you both begin calming down.[pg]");
 			outputText("She groans, \"<i>Ooooh... Champion why did you make me despoil your womb?  ");
-			if (player.pregnancyIncubation == 0) outputText("You're only feeding the swarms of imps that are despoiling this land.");
+			if (!player.isPregnant()) outputText("You're only feeding the swarms of imps that are despoiling this land.");
 			else outputText("I'm sure whatever baby you have in there won't enjoy being so soaked in corruption.");
 			outputText("</i>\"[pg]");
 			if (player.cor < 33) outputText("You groan, just wishing she would stop reminding you of the consequences of this little tryst.  In a hurry to leave the demon behind, you get dressed and take off for camp.[pg]");

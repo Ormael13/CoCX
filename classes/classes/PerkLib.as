@@ -3529,10 +3529,16 @@ public class PerkLib
 				"Masturbating only makes you hornier. Furthermore, your ability to entice, tease and zap things is enhanced the more horny you are.");
 		public static const ElementalConjurerMindAndBodyDedication:PerkType = mk("Elemental Conjurer Mind and Body Dedication", "Elemental Conjurer Mind and Body Dedication",
 				"Removes all negative modifiers to PC max Str/Tou/Spe caused by picking perk Elemental Conjurer Dedication.").withBuffs({'str.mult':0.30,'tou.mult':0.30,'spe.mult':0.30});
+		public static const ElementalConjurerMindAndBodyDedicationEx:PerkType = mk("Elemental Conjurer Mind and Body Dedication (Ex)", "Elemental Conjurer Mind and Body Dedication (Ex)",
+				"Your elementals attack power is greatly enhanced.").withBuffs({'tou.mult':0.05,'spe.mult':0.05,'int.mult':0.60,'wis.mult':0.95});
 		public static const ElementalConjurerMindAndBodyResolve:PerkType = mk("Elemental Conjurer Mind and Body Resolve", "Elemental Conjurer Mind and Body Resolve",
 				"Removes all negative modifiers to PC max Str/Tou/Spe caused by picking perk Elemental Conjurer Resolve.").withBuffs({'str.mult':0.15,'tou.mult':0.15,'spe.mult':0.15});
+		public static const ElementalConjurerMindAndBodyResolveEx:PerkType = mk("Elemental Conjurer Mind and Body Resolve (Ex)", "Elemental Conjurer Mind and Body Resolve (Ex)",
+				"Your elementals attack power is enhanced.").withBuffs({'tou.mult':0.05,'int.mult':0.20,'wis.mult':0.30});
 		public static const ElementalConjurerMindAndBodySacrifice:PerkType = mk("Elemental Conjurer Mind and Body Sacrifice", "Elemental Conjurer Mind and Body Sacrifice",
 				"Removes all negative modifiers to PC max Str/Tou/Spe caused by picking perk Elemental Conjurer Sacrifice.").withBuffs({'str.mult':0.45,'tou.mult':0.45,'spe.mult':0.45});
+		public static const ElementalConjurerMindAndBodySacrificeEx:PerkType = mk("Elemental Conjurer Mind and Body Sacrifice (Ex)", "Elemental Conjurer Mind and Body Sacrifice (Ex)",
+				"Your elementals attack power is enhanced beyond limits.").withBuffs({'str.mult':0.05,'tou.mult':0.05,'spe.mult':0.05,'int.mult':1.3,'wis.mult':1.9});
 		public static const ElvenSense:PerkType = mk("Elven Sense", "Elven Sense",
 				"Gain a chance to dodge attacks and an increased chance to score critical hits.");
 		public static const EndlessHunger:PerkType = mk("Endless Hunger", "Endless Hunger",
@@ -3756,6 +3762,7 @@ public class PerkLib
 				"Vaginal and Anal capacities increased by 30.");
 		public static const CraftedArrows:PerkType = mk("Crafted Arrows", "Crafted Arrows",
 				"You have personaly crafted arrows in your quiver. Depending on their type it will increase bow attack from 10% to 40%");
+		public static const DaoOfTheElements:DaoOfTheElementsPerk = new DaoOfTheElementsPerk();
 		public static const DemonicLethicite:PerkType = mk("Demonic Lethicite", "Demonic Lethicite",
 				"Improves soulforce and makes you more demonic.");//Effects: maxSoulforce += lib; +1 demonscore; 10 min corruption
 		public static const DemonSlayer:DemonSlayerPerk = new DemonSlayerPerk();
@@ -5764,7 +5771,7 @@ public class PerkLib
                     .requireWis(25);
             ElementsOfTheOrtodoxPath.requirePerk(ElementalContractRank1)
                     .requireWis(30);
-            ElementsOfMarethBasics.requirePerk(ElementsOfTheOrtodoxPath)
+            ElementsOfMarethBasics.requireOrPerks(ElementsOfTheOrtodoxPath, DaoOfTheElements, 1)
                     .requireWis(35);
             UnlockSpirit.requireWis(20);
             JobGunslinger.requireAdvancedJobSlot()
@@ -5788,10 +5795,10 @@ public class PerkLib
             ElementalContractRank2.requirePerk(ElementalContractRank1)
                     .requireWis(50)
                     .requireLevel(6);
-            ElementalBondFlesh.requirePerk(ElementalContractRank1)
+            ElementalBondFlesh.requireOrPerks(ElementalContractRank1, DaoOfTheElements, 1)
                     .requireWis(50)
                     .requireLevel(6);
-            ElementsOfMarethAdvanced.requirePerk(ElementsOfMarethBasics)
+            ElementsOfMarethAdvanced.requireOrPerks(ElementsOfMarethBasics, DaoOfTheElements, 2)
 					.requireWis(50)
 					.requireLevel(6);
             MagiculesTheory.requireWis(50)
@@ -5846,10 +5853,10 @@ public class PerkLib
             ElementalContractRank3.requirePerk(ElementalContractRank2)
                     .requireWis(75)
                     .requireLevel(12);
-            ElementalBondUrges.requirePerk(ElementalContractRank2)
+            ElementalBondUrges.requireOrPerks(ElementalContractRank2, DaoOfTheElements, 1)
                     .requireWis(75)
                     .requireLevel(12);
-            StrongElementalBond.requirePerk(ElementalContractRank3)
+            StrongElementalBond.requireOrPerks(ElementalContractRank3, DaoOfTheElements, 1)
                     .requireWis(75)
                     .requireLevel(12);
             AmateurGunslinger.requirePerk(JobGunslinger)
@@ -5871,7 +5878,7 @@ public class PerkLib
             ElementalContractRank4.requirePerk(ElementalContractRank3)
                     .requireWis(100)
                     .requireLevel(18);
-			ElementalConjurerKnowledge.requirePerk(ElementalContractRank2)
+			ElementalConjurerKnowledge.requireOrPerks(ElementalContractRank2, DaoOfTheElements, 1)
 					.requireWis(100)
                     .requireLevel(18);
             CatchTheBlade.requirePerk(JobMonk)
@@ -5910,16 +5917,19 @@ public class PerkLib
 					.requireWis(105)
 					.requireSpe(65)
 					.requireLevel(24);
-            ElementalContractRank5.requirePerks(ElementalContractRank4, ElementalConjurerDedication)
+            ElementalContractRank5.requireOrPerks(ElementalContractRank4, DaoOfTheElements, 1)
+					.requirePerk(ElementalConjurerDedication)
                     .requireWis(125)
                     .requireLevel(24);
-            StrongElementalBondEx.requirePerks(StrongElementalBond, ElementalContractRank5)
+            StrongElementalBondEx.requireOrPerks(ElementalContractRank5, DaoOfTheElements, 2)
+					.requirePerk(StrongElementalBond)
                     .requireWis(125)
                     .requireLevel(24);
-            ElementalConjurerDedication.requirePerks(ElementalConjurerResolve, ElementalConjurerMindAndBodyResolve)
+            ElementalConjurerDedication.requireAnyPerk(ElementalConjurerMindAndBodyResolve, ElementalConjurerMindAndBodyResolveEx)
                     .requireWis(120)
                     .requireLevel(24);
-            FirstAttackElementals.requirePerks(StrongElementalBond, ElementalContractRank4)
+            FirstAttackElementals.requireOrPerks(ElementalContractRank4, DaoOfTheElements, 1)
+					.requirePerk(StrongElementalBond)
                     .requireLevel(24);
             ExpertGunslinger.requirePerk(AmateurGunslinger)
 					.requireWis(65)
@@ -5943,9 +5953,11 @@ public class PerkLib
             ElementalContractRank6.requirePerk(ElementalContractRank5)
                     .requireWis(150)
                     .requireLevel(30);
-            FirstAttackElementalsEx.requirePerks(FirstAttackElementals, ElementalContractRank5)
+            FirstAttackElementalsEx.requireOrPerks(ElementalContractRank5, DaoOfTheElements, 2)
+					.requirePerk(FirstAttackElementals)
                     .requireLevel(30);
-			ElementalConjurerKnowledgeEx.requirePerks(ElementalConjurerKnowledge, ElementalContractRank4)
+			ElementalConjurerKnowledgeEx.requireOrPerks(ElementalContractRank4, DaoOfTheElements, 1)
+					.requirePerk(ElementalConjurerKnowledge)
 					.requireWis(150)
                     .requireLevel(30);
 			NamedBullet.requirePerk(ExpertGunslinger)
@@ -5962,10 +5974,12 @@ public class PerkLib
             ElementalContractRank7.requirePerk(ElementalContractRank6)
                     .requireWis(175)
                     .requireLevel(36);
-            StrongElementalBondSu.requirePerks(StrongElementalBondEx, ElementalContractRank7)
+            StrongElementalBondSu.requireOrPerks(ElementalContractRank7, DaoOfTheElements, 2)
+					.requirePerks(StrongElementalBondEx)
                     .requireWis(175)
                     .requireLevel(36);
-            FirstAttackElementalsSu.requirePerks(FirstAttackElementalsEx, ElementalContractRank6)
+            FirstAttackElementalsSu.requireOrPerks(ElementalContractRank6, DaoOfTheElements, 2)
+					.requirePerks(FirstAttackElementalsEx)
                     .requireLevel(36);
             EpicWisdom.requireWis(10)
                     .requireLevel(36);
@@ -5987,10 +6001,11 @@ public class PerkLib
                     .requireWis(200)
                     .requireLevel(42);
             //Tier 8 Wisdom perks
-            ElementalContractRank9.requirePerks(ElementalContractRank8, ElementalConjurerSacrifice)
+            ElementalContractRank9.requireOrPerks(ElementalContractRank8, DaoOfTheElements, 2)
+					.requirePerk(ElementalConjurerSacrifice)
                     .requireWis(225)
                     .requireLevel(48);
-            ElementalConjurerSacrifice.requirePerks(ElementalConjurerDedication, ElementalConjurerMindAndBodyDedication)
+            ElementalConjurerSacrifice.requireAnyPerk(ElementalConjurerMindAndBodyDedication, ElementalConjurerMindAndBodyDedicationEx)
                     .requireWis(220)
                     .requireLevel(48);
             //Tier 9 Wisdom perks
@@ -6005,7 +6020,7 @@ public class PerkLib
                     .requireLevel(54);
 			PrestigeJobDruid.requirePrestigeJobSlot()
                     .requirePerk(Archmage)
-                    .requirePerk(ElementalContractRank7)
+                    .requireOrPerks(ElementalContractRank7, DaoOfTheElements, 2)
                     .requireWis(200)
                     .requireLevel(54);
             ElementalContractRank10.requirePerk(ElementalContractRank9)

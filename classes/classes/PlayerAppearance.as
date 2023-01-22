@@ -516,13 +516,28 @@ public class PlayerAppearance extends BaseContent {
 	public function describePregnancy(): String {
 		var temp:Number = 0;
 		var pregnancyDesc: String = "";
+		var womb:Object;
+		if (player.isPregnant()) {
+			if (player.pregnancyIncubation > 1) {
+				womb = {};
+				womb["womb"] = 0
+				womb["type"] = player.pregnancyType;
+				womb["incubation"] = player.pregnancyIncubation;
+			}
+			if (player.pregnancy2Incubation > 1 && (player.pregnancyIncubation > 1 && player.pregnancy2Incubation < player.pregnancyIncubation)) {
+				womb = {};
+				womb["womb"] = 1
+				womb["type"] = player.pregnancy2Type;
+				womb["incubation"] = player.pregnancy2Incubation;
+			}
+		}
 
-		if((player.buttPregnancyType == PregnancyStore.PREGNANCY_FROG_GIRL) || (player.buttPregnancyType == PregnancyStore.PREGNANCY_SATYR) || player.isPregnant()) {
-			if (player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS) {
+		if (player.isButtPregnant() || player.isPregnant()) {
+			if (womb["type"] == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS) {
 				pregnancyDesc += "<b>";
 				//Compute size
 				temp = player.statusEffectv3(StatusEffects.Eggs) + player.statusEffectv2(StatusEffects.Eggs) * 10;
-				if(player.pregnancyIncubation <= 50 && player.pregnancyIncubation > 20) {
+				if(womb["incubation"] <= 50 && womb["incubation"] > 20) {
 					pregnancyDesc += "Your swollen pregnant belly is as large as a ";
 					if(temp < 10)
 						pregnancyDesc += "basketball.";
@@ -531,7 +546,7 @@ public class PlayerAppearance extends BaseContent {
 					if(temp >= 20)
 						pregnancyDesc += "beach ball.";
 				}
-				if(player.pregnancyIncubation <= 20) {
+				if(womb["incubation"] <= 20) {
 					pregnancyDesc += "Your swollen pregnant belly is as large as a ";
 					if(temp < 10)
 						pregnancyDesc += "watermelon.";
@@ -543,7 +558,7 @@ public class PlayerAppearance extends BaseContent {
 				pregnancyDesc += "</b>";
 			}
 			//Satur preggos - only shows if bigger than regular pregnancy or not pregnancy
-			else if (player.buttPregnancyType == PregnancyStore.PREGNANCY_SATYR && player.buttPregnancyIncubation > player.pregnancyIncubation) {
+			else if (player.buttPregnancyType == PregnancyStore.PREGNANCY_SATYR && (!player.isPregnant() || player.buttPregnancyIncubation < womb["incubation"])) {
 				if(player.buttPregnancyIncubation < 125 && player.buttPregnancyIncubation >= 75) {
 					pregnancyDesc += "<b>You've got the beginnings of a small pot-belly.</b>";
 				}
@@ -553,74 +568,72 @@ public class PlayerAppearance extends BaseContent {
 				else if(player.buttPregnancyIncubation >= 30) {
 					pregnancyDesc += "<b>Your stomach is painfully distended by your pregnancy, making it difficult to walk normally.</b>";
 				} else { //Surely Benoit and Cotton deserve their place in this list
-					if (player.pregnancyType == PregnancyStore.PREGNANCY_IZMA || player.pregnancyType == PregnancyStore.PREGNANCY_MOUSE || player.pregnancyType == PregnancyStore.PREGNANCY_AMILY || (player.pregnancyType == PregnancyStore.PREGNANCY_JOJO && (JojoScene.monk <= 0 || flags[kFLAGS.JOJO_BIMBO_STATE] == 3)) || player.pregnancyType == PregnancyStore.PREGNANCY_EMBER || player.pregnancyType == PregnancyStore.PREGNANCY_BENOIT || player.pregnancyType == PregnancyStore.PREGNANCY_COTTON
-					|| player.pregnancyType == PregnancyStore.PREGNANCY_URTA || player.pregnancyType == PregnancyStore.PREGNANCY_BEHEMOTH || player.pregnancyType == PregnancyStore.PREGNANCY_ZENJI)
+					if (womb["type"] == PregnancyStore.PREGNANCY_MARBLE)
+						pregnancyDesc += "<b>Your belly protrudes unnaturally far forward, bulging outwards with Marble's precious child.</b>";
+					else if (InCollection(womb["type"], PregnancyStore.PREGNANCY_IZMA, PregnancyStore.PREGNANCY_MOUSE, PregnancyStore.PREGNANCY_AMILY, PregnancyStore.PREGNANCY_EMBER, PregnancyStore.PREGNANCY_BENOIT, PregnancyStore.PREGNANCY_COTTON, PregnancyStore.PREGNANCY_URTA, PregnancyStore.PREGNANCY_BEHEMOTH, PregnancyStore.PREGNANCY_ZENJI) || (womb["type"] == PregnancyStore.PREGNANCY_JOJO && (JojoScene.monk <= 0 || flags[kFLAGS.JOJO_BIMBO_STATE] == 3)))
 						pregnancyDesc += "<b>Your belly protrudes unnaturally far forward, bulging with the spawn of one of this land's natives.</b>";
-					else if(player.pregnancyType != PregnancyStore.PREGNANCY_MARBLE)
-						pregnancyDesc += "<b>Your belly protrudes unnaturally far forward, bulging with the unclean spawn of some monster or beast.</b>";
-					else pregnancyDesc += "<b>Your belly protrudes unnaturally far forward, bulging outwards with Marble's precious child.</b>";
+					else pregnancyDesc += "<b>Your belly protrudes unnaturally far forward, bulging with the unclean spawn of some monster or beast.</b>";
 				}
+			} else if (player.isButtPregnant()) {
+				if(player.buttPregnancyIncubation <= 8 && player.buttPregnancyType == PregnancyStore.PREGNANCY_FROG_GIRL)
+					pregnancyDesc += "<b>Your stomach is so full of frog eggs that you look about to birth at any moment, your belly wobbling and shaking with every step you take, packed with frog ovum.</b>";
+				else if (player.buttPregnancyType != PregnancyStore.PREGNANCY_GOO_STUFFED) pregnancyDesc += "<b>You're stuffed so full with eggs that your belly looks obscenely distended, huge and weighted with the gargantuan eggs crowding your gut. They make your gait a waddle and your gravid tummy wobble obscenely.</b>";
 			}
 			//URTA PREG
-			else if (player.pregnancyType == PregnancyStore.PREGNANCY_URTA) {
-				if(player.pregnancyIncubation <= 432 && player.pregnancyIncubation > 360) {
+			else if ((womb["type"] == PregnancyStore.PREGNANCY_URTA)) {
+				if (womb["incubation"] <= 432 && womb["incubation"] > 360) {
 					pregnancyDesc += "<b>Your belly is larger than it used to be.</b>\n";
 				}
-				if(player.pregnancyIncubation <= 360 && player.pregnancyIncubation > 288) {
+				else if (womb["incubation"] > 288) {
 					pregnancyDesc += "<b>Your belly is more noticeably distended. You're pretty sure it's Urta's.</b>";
 				}
-				if(player.pregnancyIncubation <= 288 && player.pregnancyIncubation > 216) {
+				else if (womb["incubation"] > 216) {
 					pregnancyDesc += "<b>The unmistakable bulge of pregnancy is visible in your tummy, and the baby within is kicking nowadays.</b>";
 				}
-				if(player.pregnancyIncubation <= 216 && player.pregnancyIncubation > 144) {
+				else if (womb["incubation"] > 144) {
 					pregnancyDesc += "<b>Your belly is large and very obviously pregnant to anyone who looks at you. It's gotten heavy enough to be a pain to carry around all the time.</b>";
 				}
-				if(player.pregnancyIncubation <= 144 && player.pregnancyIncubation > 72) {
+				else if (womb["incubation"] > 72) {
 					pregnancyDesc += "<b>It would be impossible to conceal your growing pregnancy from anyone who glanced your way. It's large and round, frequently moving.</b>";
 				}
-				if(player.pregnancyIncubation <= 72 && player.pregnancyIncubation > 48) {
+				else if (womb["incubation"] > 48) {
 					pregnancyDesc += "<b>Your stomach is painfully distended by your pregnancy, making it difficult to walk normally.</b>";
 				}
-				if(player.pregnancyIncubation <= 48) {
-					pregnancyDesc += "<b>Your belly protrudes unnaturally far forward, bulging with the spawn of one of this land's natives.</b>";
+				else {
+					pregnancyDesc += "<b>Your belly protrudes unnaturally far forward, bulging with the Urta's Kits.</b>";
 				}
-			} else if (player.buttPregnancyType == PregnancyStore.PREGNANCY_FROG_GIRL) {
-				if(player.buttPregnancyIncubation >= 8)
-					pregnancyDesc += "<b>Your stomach is so full of frog eggs that you look about to birth at any moment, your belly wobbling and shaking with every step you take, packed with frog ovum.</b>";
-				else pregnancyDesc += "<b>You're stuffed so full with eggs that your belly looks obscenely distended, huge and weighted with the gargantuan eggs crowding your gut. They make your gait a waddle and your gravid tummy wobble obscenely.</b>";
-			} else if (player.pregnancyType == PregnancyStore.PREGNANCY_FAERIE) { //Belly size remains constant throughout the pregnancy
+			} else if (womb["type"] == PregnancyStore.PREGNANCY_FAERIE) { //Belly size remains constant throughout the pregnancy
 				pregnancyDesc += "<b>Your belly remains swollen like a watermelon. ";
-				if (player.pregnancyIncubation <= 100)
+				if (womb["incubation"] <= 100)
 					pregnancyDesc += "It's full of liquid, though unlike a normal pregnancy the passenger you’re carrying is tiny.</b>";
-				else if (player.pregnancyIncubation <= 140)
+				else if (womb["incubation"] <= 140)
 					pregnancyDesc += "It feels like it’s full of thick syrup or jelly.</b>";
 				else pregnancyDesc += "It still feels like there’s a solid ball inside your womb.</b>";
 			} else {
-				if(player.pregnancyIncubation <= 336 && player.pregnancyIncubation > 280) {
+				if (womb["incubation"] <= 336 && womb["incubation"] > 280) {
 					pregnancyDesc += "<b>Your belly is larger than it used to be.</b>";
 				}
-				if(player.pregnancyIncubation <= 280 && player.pregnancyIncubation > 216) {
+				else if(womb["incubation"] > 216) {
 					pregnancyDesc += "<b>Your belly is more noticeably distended. You are probably pregnant.</b>";
 				}
-				if(player.pregnancyIncubation <= 216 && player.pregnancyIncubation > 180) {
+				else if(womb["incubation"] > 180) {
 					pregnancyDesc += "<b>The unmistakable bulge of pregnancy is visible in your tummy.</b>";
 				}
-				if(player.pregnancyIncubation <= 180 && player.pregnancyIncubation > 120) {
+				else if(womb["incubation"] > 120) {
 					pregnancyDesc += "<b>Your belly is very obviously pregnant to anyone who looks at you.</b>";
 				}
-				if(player.pregnancyIncubation <= 120 && player.pregnancyIncubation > 72) {
+				else if(womb["incubation"] > 72) {
 					pregnancyDesc += "<b>It would be impossible to conceal your growing pregnancy from anyone who glanced your way.</b>";
 				}
-				if(player.pregnancyIncubation <= 72 && player.pregnancyIncubation > 48) {
+				else if(womb["incubation"] > 48) {
 					pregnancyDesc += "<b>Your stomach is painfully distended by your pregnancy, making it difficult to walk normally.</b>";
 				}
-				if (player.pregnancyIncubation <= 48) { //Surely Benoit and Cotton deserve their place in this list
-					if (player.pregnancyType == PregnancyStore.PREGNANCY_IZMA || player.pregnancyType == PregnancyStore.PREGNANCY_MOUSE || player.pregnancyType == PregnancyStore.PREGNANCY_AMILY || (player.pregnancyType == PregnancyStore.PREGNANCY_JOJO && JojoScene.monk <= 0) || player.pregnancyType == PregnancyStore.PREGNANCY_EMBER || player.pregnancyType == PregnancyStore.PREGNANCY_BENOIT || player.pregnancyType == PregnancyStore.PREGNANCY_COTTON
-					|| player.pregnancyType == PregnancyStore.PREGNANCY_URTA || player.pregnancyType == PregnancyStore.PREGNANCY_MINERVA || player.pregnancyType == PregnancyStore.PREGNANCY_BEHEMOTH || player.pregnancyType == PregnancyStore.PREGNANCY_ZENJI)
+				else { //Surely Benoit and Cotton deserve their place in this list
+					if (womb["type"] == PregnancyStore.PREGNANCY_MARBLE)
+						pregnancyDesc += "<b>Your belly protrudes unnaturally far forward, bulging outwards with Marble's precious child.</b>";
+					else if (InCollection(womb["type"], PregnancyStore.PREGNANCY_IZMA, PregnancyStore.PREGNANCY_MOUSE, PregnancyStore.PREGNANCY_AMILY, PregnancyStore.PREGNANCY_EMBER, PregnancyStore.PREGNANCY_BENOIT, PregnancyStore.PREGNANCY_COTTON, PregnancyStore.PREGNANCY_URTA, PregnancyStore.PREGNANCY_BEHEMOTH, PregnancyStore.PREGNANCY_ZENJI) || (player.pregnancyType == PregnancyStore.PREGNANCY_JOJO && (JojoScene.monk <= 0 || flags[kFLAGS.JOJO_BIMBO_STATE] == 3)))
 						pregnancyDesc += "<b>Your belly protrudes unnaturally far forward, bulging with the spawn of one of this land's natives.</b>";
-					else if (player.pregnancyType != PregnancyStore.PREGNANCY_MARBLE)
-						pregnancyDesc += "<b>Your belly protrudes unnaturally far forward, bulging with the unclean spawn of some monster or beast.</b>";
-					else pregnancyDesc += "<b>Your belly protrudes unnaturally far forward, bulging outwards with Marble's precious child.</b>";
+					else pregnancyDesc += "<b>Your belly protrudes unnaturally far forward, bulging with the unclean spawn of some monster or beast.</b>";
 				}
 			}
 		}

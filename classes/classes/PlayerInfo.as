@@ -915,8 +915,10 @@ public class PlayerInfo extends BaseContent {
 		displayHeader("Children Stats");
 
 		var pregnancies:String = "";
-		if (player.isPregnant())
-			pregnancies += "<b>Player: </b>"+ player.pregnancyTypeText +"\n";
+		if (player.isPregnant()) {
+			if (player.pregnancyIncubation > 0) pregnancies += "<b>Player: </b>" + player.pregnancyTypeText + "\n";
+			if (player.pregnancy2Incubation > 0) pregnancies += "<b>Player 2: </b>" + player.pregnancy2TypeText + "\n";
+		}
 		if (player.isButtPregnant())
 			pregnancies += "<b>Player incubation: </b>" + player.buttPregnancyTypeText +"\n";
 

@@ -547,8 +547,8 @@ public function useTentacleJojo():void {
 	outputText("Jojo unleashes a howl of bestial pleasure, and you feel the ");
 	if(player.hasVagina()) {
 		outputText("tentacles in your " + assholeOrDP() + " thicken perceptibly.  Bulges of cum work their way down the tentacles, spreading your " + assholeOrDP() + " wide before stuffing you full of mouse cream.  You can feel your bowels and uterus filling, expanding you until you look ");
-		if(player.pregnancyIncubation == 0) outputText("mildly pregnant");
-		else outputText("even more pregnant");
+		if(player.isPregnant()) outputText("even more pregnant");
+		else outputText("mildly pregnant");
 		outputText(".  Your body spasms around them, locked in the throes of orgasm");
 		if(player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING) outputText(", and soaks him with a wave of puss juice.  ");
 		else if(player.vaginas[0].vaginalWetness >= VaginaClass.WETNESS_SLICK) outputText(", as your drooling cunt forms a slick puddle.  ");
@@ -622,7 +622,7 @@ public function useTentacleJojo():void {
 	}
 	if(mouthFucking) {
 		outputText("A wide bulge forces your jaw apart, distends your throat, and finally empties into your gut, filling you with warmth.  The action repeats until you feel bloated and full, far worse than before as you're now filled from BOTH ends.  You look more like ");
-		if(player.pregnancyIncubation == 0 && player.buttPregnancyIncubation == 0) outputText("an eight month pregnant woman");
+		if(player.canGetPregnant() && player.buttPregnancyIncubation == 0) outputText("an eight month pregnant woman");
 		else outputText("a brood-mother immobilized by her growing offspring");
 		outputText(" than your old self at this point, and Jojo wastes no time in pulling out to paint your " + faceMuzzle() + " with his baby batter.\n\n");
 		cumPuddle = true;

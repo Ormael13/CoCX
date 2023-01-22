@@ -335,20 +335,20 @@ public class CombatTeases extends BaseCombatContent {
 			if (player.vaginalCapacity() >= 30) choices[choices.length] = 12;
 		}
 		//13 Pregnant
-		if (player.pregnancyIncubation <= 216 && player.pregnancyIncubation > 0) {
+		if (player.hasVisiblePregnancy()) {
 			choices[choices.length] = 13;
 			if (player.biggestLactation() >= 1) choices[choices.length] = 13;
-			if (player.pregnancyIncubation <= 180) choices[choices.length] = 13;
-			if (player.pregnancyIncubation <= 120) choices[choices.length] = 13;
-			if (player.pregnancyIncubation <= 100) choices[choices.length] = 13;
-			if (player.pregnancyIncubation <= 50) choices[choices.length] = 13;
-			if (player.pregnancyIncubation <= 24) choices[choices.length] = 13;
-			if (player.pregnancyIncubation <= 24) choices[choices.length] = 13;
-			if (player.pregnancyIncubation <= 24) choices[choices.length] = 13;
-			if (player.pregnancyIncubation <= 24) choices[choices.length] = 13;
+			if ((player.pregnancyIncubation <= 180) || (player.pregnancy2Incubation <= 180)) choices[choices.length] = 13;
+			if ((player.pregnancyIncubation <= 120) || (player.pregnancy2Incubation <= 120)) choices[choices.length] = 13;
+			if ((player.pregnancyIncubation <= 100) || (player.pregnancy2Incubation <= 100)) choices[choices.length] = 13;
+			if ((player.pregnancyIncubation <= 50)  || (player.pregnancy2Incubation <= 50))  choices[choices.length] = 13;
+			if ((player.pregnancyIncubation <= 24)  || (player.pregnancy2Incubation <= 24))  choices[choices.length] = 13;
+			if ((player.pregnancyIncubation <= 24)  || (player.pregnancy2Incubation <= 24))  choices[choices.length] = 13;
+			if ((player.pregnancyIncubation <= 24)  || (player.pregnancy2Incubation <= 24))  choices[choices.length] = 13;
+			if ((player.pregnancyIncubation <= 24)  || (player.pregnancy2Incubation <= 24))  choices[choices.length] = 13;
 		}
 		//14 Brood Mother
-		if (monster.hasCock() && player.hasVagina() && player.hasPerk(PerkLib.BroodMother) && (player.pregnancyIncubation <= 0 || player.pregnancyIncubation > 216)) {
+		if (monster.hasCock() && player.hasVagina() && player.hasPerk(PerkLib.BroodMother) && (!player.isPregnant() || player.hasNonVisiblePregnancy())) {
 			choices[choices.length] = 14;
 			choices[choices.length] = 14;
 			choices[choices.length] = 14;
@@ -838,11 +838,11 @@ public class CombatTeases extends BaseCombatContent {
 					chance += 6;
 					damage += 12;
 				}
-				if (player.pregnancyIncubation < 100) {
+				if ((player.pregnancyIncubation < 100) || (player.pregnancy2Incubation < 100)) {
 					chance += 3;
 					damage += 6;
 				}
-				if (player.pregnancyIncubation < 50) {
+				if ((player.pregnancyIncubation < 50) || (player.pregnancy2Incubation < 50)) {
 					chance += 3;
 					damage += 6;
 				}

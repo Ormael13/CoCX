@@ -59,7 +59,7 @@ use namespace CoC;
 			}, {
 				name: "eggchoose",
 				when: function ():Boolean {
-					return player.pregnancyIncubation > 1 && player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS
+					return player.isPregnant() && (player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.pregnancy2Type == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS)
 				},
 				chance: 0.25,
 				call: eggChooseFn

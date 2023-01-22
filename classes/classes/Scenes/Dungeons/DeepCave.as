@@ -397,7 +397,7 @@ use namespace CoC;
 			outputText("The two of you lie together, trembling happily as you're filled to the brim with tainted fluids.\n\n");
 
 			outputText("Sated for now, you rise up, your body dripping gooey whiteness.  Though in retrospect it isn't nearly as much as was pumped into your womb.");
-			if (player.pregnancyIncubation == 0) outputText("  You'll probably get pregnant.");
+			if (player.canGetPregnant()) outputText("  You'll probably get pregnant.");
             if (!recalling) {
                 player.sexReward("cum","Vaginal");
                 if (!player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 14, 50);

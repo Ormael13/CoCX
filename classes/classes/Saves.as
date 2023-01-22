@@ -948,6 +948,8 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		//Preggo stuff
 		saveFile.data.pregnancyIncubation = player.pregnancyIncubation;
 		saveFile.data.pregnancyType = player.pregnancyType;
+		saveFile.data.pregnancy2Incubation = player.pregnancy2Incubation;
+		saveFile.data.pregnancy2Type = player.pregnancy2Type;
 		saveFile.data.buttPregnancyIncubation = player.buttPregnancyIncubation;
 		saveFile.data.buttPregnancyType = player.buttPregnancyType;
 
@@ -1849,6 +1851,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 
 		//Preggo stuff
 		player.knockUpForce(saveFile.data.pregnancyType, saveFile.data.pregnancyIncubation);
+		player.knockUpForce(saveFile.data.pregnancy2Type, saveFile.data.pregnancy2Incubation, 1);
 		player.buttKnockUpForce(saveFile.data.buttPregnancyType, saveFile.data.buttPregnancyIncubation);
 
 		var hasViridianCockSock:Boolean = false;
