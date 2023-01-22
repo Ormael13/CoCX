@@ -32,7 +32,7 @@ public class PerkMenu extends BaseContent {
 	}
 	public function displayPerks():void {
 		clearOutput();
-		displayHeader("Perks (Total: " + player.perks.length + ")");
+		displayHeader("Perks (Total: " + (player.perks.length + player.perksCountForMergedOnes()) + " / Merged: " + player.perksCountForMergedOnes() + ")");
 		if (flags[kFLAGS.NEWPERKSDISPLAY] >= 1){
 			playerPerksList();
 		}

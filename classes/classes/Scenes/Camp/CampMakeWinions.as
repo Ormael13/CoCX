@@ -1559,7 +1559,7 @@ public class CampMakeWinions extends BaseContent
 			addButton(1, "Earth", evocationTomeEarth).hint(" Information about the Earth Elements.");
 			addButton(2, "Fire", evocationTomeFire).hint(" Information about the Fire Elements.");
 			addButton(3, "Water", evocationTomeWater).hint(" Information about the Water Elements.");
-			if (player.hasPerk(PerkLib.ElementsOfTheOrtodoxPath)) {
+			if (player.hasPerk(PerkLib.ElementsOfTheOrtodoxPath) || player.hasPerk(PerkLib.DaoOfTheElements)) {
 				addButton(4, "Ether", evocationTomeEther).hint(" Information about the Ether Elements.");
 				addButton(5, "Wood", evocationTomeWood).hint(" Information about the Wood Elements.");
 				addButton(6, "Metal", evocationTomeMetal).hint(" Information about the Metal Elements.");
@@ -1569,7 +1569,7 @@ public class CampMakeWinions extends BaseContent
 				addButtonDisabled(5, "Wood", "Req. Elements of the orthodox Path perk.");
 				addButtonDisabled(6, "Metal", "Req. Elements of the orthodox Path perk.");
 			}
-			if (player.hasPerk(PerkLib.ElementsOfMarethBasics)) {
+			if (player.hasPerk(PerkLib.ElementsOfMarethBasics) || (player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) > 1)) {
 				addButton(7, "Ice", evocationTomeIce).hint(" Information about the Ice Elements.");
 				addButton(8, "Lightning", evocationTomeLightning).hint(" Information about the Lightning Elements.");
 				addButton(9, "Darkness", evocationTomeDarkness).hint(" Information about the Darkness Elements.");
@@ -1724,12 +1724,12 @@ public class CampMakeWinions extends BaseContent
 				if (player.statusEffectv1(StatusEffects.SummonedElementalsEarth) < 1) addButton(1, "Earth", summonElementalEarth);
 				if (player.statusEffectv1(StatusEffects.SummonedElementalsFire) < 1) addButton(2, "Fire", summonElementalFire);
 				if (player.statusEffectv1(StatusEffects.SummonedElementalsWater) < 1) addButton(3, "Water", summonElementalWater);
-				if (player.hasPerk(PerkLib.ElementsOfTheOrtodoxPath)) {
+				if (player.hasPerk(PerkLib.ElementsOfTheOrtodoxPath) || player.hasPerk(PerkLib.DaoOfTheElements)) {
 					if (player.statusEffectv1(StatusEffects.SummonedElementalsEther) < 1) addButton(4, "Ether", summonElementalEther);
 					if (player.statusEffectv1(StatusEffects.SummonedElementalsWood) < 1) addButton(5, "Wood", summonElementalWood);
 					if (player.statusEffectv1(StatusEffects.SummonedElementalsMetal) < 1) addButton(6, "Metal", summonElementalMetal);
 				}
-				if (player.hasPerk(PerkLib.ElementsOfMarethBasics)) {
+				if (player.hasPerk(PerkLib.ElementsOfMarethBasics) || (player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) > 1)) {
 					if (player.statusEffectv1(StatusEffects.SummonedElementalsIce) < 1) addButton(7, "Ice", summonElementalIce);
 					if (player.statusEffectv1(StatusEffects.SummonedElementalsLightning) < 1) addButton(8, "Lightning", summonElementalLightning);
 					if (player.statusEffectv1(StatusEffects.SummonedElementalsDarkness) < 1) addButton(9, "Darkness", summonElementalDarkness);

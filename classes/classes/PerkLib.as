@@ -560,7 +560,7 @@ public class PerkLib
 				"Add your speed to gun damage as a modifier, increase scaling of wisdom/intelligence bonus. (+15% firearms attacks multiplier)",
 				"You've chosen the 'Saint of Zariman' perk. Add your speed to gun damage as a modifier, increase scaling of wisdom/intelligence bonus. (+15% firearms attacks multiplier)");
 
-		public static const ElementsOfMarethBasic:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
+		public static const ElementsOfMarethBasic1:PerkType = mk("Elements of Mareth: ", "Elements of Mareth: ",
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
 				"You've chosen the 'Elements of Mareth: ' perk, your time spent in Mareth allowing you to get basic understanding of native elements that aren't classified as one of the traditional four.");
 		/*public static const :PerkType = mk("", "",
@@ -5766,8 +5766,10 @@ public class PerkLib
 					.requirePerk(JobLeader)
                     .requireWis(10);
             ElementalConjurerResolve.requirePerk(JobElementalConjurer)
+					.requireNotThosePerks(ElementalConjurerMindAndBodyResolveEx, ElementalConjurerMindAndBodyDedicationEx, ElementalConjurerMindAndBodySacrificeEx)
                     .requireWis(20);
-            ElementalContractRank1.requirePerk(ElementalConjurerResolve)
+            ElementalContractRank1.requireAnyPerk(ElementalConjurerResolve, ElementalConjurerMindAndBodyResolveEx)
+					.requireNotThosePerks(DaoOfTheElements, ElementalConjurerMindAndBodyDedicationEx)
                     .requireWis(25);
             ElementsOfTheOrtodoxPath.requirePerk(ElementalContractRank1)
                     .requireWis(30);
@@ -5792,7 +5794,8 @@ public class PerkLib
                     .requireWis(90)
                     .requireLevel(10)
                     .requireNGPlus(2);
-            ElementalContractRank2.requirePerk(ElementalContractRank1)
+            ElementalContractRank2.requireStatusEffect(StatusEffects.ArcaneCircle, "Built Arcane Circle")
+					.requirePerk(ElementalContractRank1)
                     .requireWis(50)
                     .requireLevel(6);
             ElementalBondFlesh.requireOrPerks(ElementalContractRank1, DaoOfTheElements, 1)
@@ -5918,7 +5921,7 @@ public class PerkLib
 					.requireSpe(65)
 					.requireLevel(24);
             ElementalContractRank5.requireOrPerks(ElementalContractRank4, DaoOfTheElements, 1)
-					.requirePerk(ElementalConjurerDedication)
+					.requireAnyPerk(ElementalConjurerDedication, ElementalConjurerMindAndBodyDedicationEx)
                     .requireWis(125)
                     .requireLevel(24);
             StrongElementalBondEx.requireOrPerks(ElementalContractRank5, DaoOfTheElements, 2)
@@ -5926,6 +5929,8 @@ public class PerkLib
                     .requireWis(125)
                     .requireLevel(24);
             ElementalConjurerDedication.requireAnyPerk(ElementalConjurerMindAndBodyResolve, ElementalConjurerMindAndBodyResolveEx)
+					.requireNotThosePerks(ElementalConjurerMindAndBodyDedicationEx, ElementalConjurerMindAndBodySacrificeEx)
+					.requireOrPerks(ElementalContractRank4, DaoOfTheElements, 1)
                     .requireWis(120)
                     .requireLevel(24);
             FirstAttackElementals.requireOrPerks(ElementalContractRank4, DaoOfTheElements, 1)
@@ -6006,6 +6011,8 @@ public class PerkLib
                     .requireWis(225)
                     .requireLevel(48);
             ElementalConjurerSacrifice.requireAnyPerk(ElementalConjurerMindAndBodyDedication, ElementalConjurerMindAndBodyDedicationEx)
+					.requireNotThosePerks(ElementalConjurerMindAndBodyResolveEx, ElementalConjurerMindAndBodySacrificeEx)
+					.requireOrPerks(ElementalContractRank8, DaoOfTheElements, 2)
                     .requireWis(220)
                     .requireLevel(48);
             //Tier 9 Wisdom perks

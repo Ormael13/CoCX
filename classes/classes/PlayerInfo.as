@@ -1974,6 +1974,7 @@ public class PlayerInfo extends BaseContent {
 		if (perk.ptype == PerkLib.StaffChanneling) {
 			flags[kFLAGS.STAFF_CHANNELING_MODE] = 1;
 		}
+		if (perk.ptype == PerkLib.ElementalContractRank4 || perk.ptype == PerkLib.ElementalContractRank8 || perk.ptype == PerkLib.ElementalContractRank12 || perk.ptype == PerkLib.ElementalContractRank16 || perk.ptype == PerkLib.ElementalContractRank20 || perk.ptype == PerkLib.ElementalContractRank24 || perk.ptype == PerkLib.ElementalContractRank28) player.addStatusValue(StatusEffects.ArcaneCircle, 1, 1);
 		if (player.perkPoints > 0) {
 			doNext(perkBuyMenu);
 		} else {

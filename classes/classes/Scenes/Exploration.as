@@ -1240,6 +1240,7 @@ public class Exploration extends BaseContent
 			outputText("Determined you grab the watch. Feeling of pain piercing your soul makes you momentaly blank out. After returning to your senses you see the watch already handing on your waist. Feeling of mising some piece of yourself naggs you but you couldn't find what it's. Well guess it won't kill you for now... you hope as you return to camp.\n\n");
 			player.superPerkPoints--;
 			player.createKeyItem("Pocket Watch", 0, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.MergedPerksCount, 0, 0, 0, 0);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		private function pocketwatchdiscoveryNo():void {

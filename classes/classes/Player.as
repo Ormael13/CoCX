@@ -6446,6 +6446,12 @@ use namespace CoC;
 			}
 		}
 
+		public function perksCountForMergedOnes():Number {
+			var pCFM:Number = 0;
+			if (hasStatusEffect(StatusEffects.MergedPerksCount)) pCFM += statusEffectv1(StatusEffects.MergedPerksCount);
+			return pCFM;
+		}
+
 		override public function modStats(dstr:Number, dtou:Number, dspe:Number, dinte:Number, dwis:Number, dlib:Number, dsens:Number, dlust:Number, dcor:Number, scale:Boolean):void {
 			//Easy mode cuts lust gains!
 			if (flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 && dlust > 0 && scale) dlust /= 10;
