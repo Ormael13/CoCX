@@ -863,7 +863,7 @@ public class Exploration extends BaseContent
 				SceneLib.evangelineFollower.alternativEvangelineRecruit();
 				return;
 			}
-			if (player.level > 2 && player.hasKeyItem("Sky Poison Pearl") < 0 && flags[kFLAGS.SKY_POISON_PEARL] < 1 && rand(10) == 0) {
+			if (player.level > 2 && player.hasKeyItem("Sky Poison Pearl") < 0 && flags[kFLAGS.SKY_POISON_PEARL] < 1 && rand(5) == 0) {
 				pearldiscovery();
 				return;
 			}
@@ -871,8 +871,12 @@ public class Exploration extends BaseContent
 				hiddencavediscovery();
 				return;
 			}
-			if (flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && TrollVillage.ZenjiVillageStage == 0 && rand(10) == 0) {
+			if (flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && TrollVillage.ZenjiVillageStage == 0 && rand(5) == 0) {
 				SceneLib.trollVillage.FirstEncountersoftheTrollKind();
+				return;
+			}
+			if (player.level > 9 && player.hasKeyItem("Pocket Watch") < 0 && rand(5) == 0) {
+				pocketwatchdiscovery();
 				return;
 			}
 /*			if (player.level > 5 && flags[kFLAGS.RYUBI_LVL_UP] < 1 && rand(4) == 0) {
@@ -883,7 +887,7 @@ public class Exploration extends BaseContent
 				ryubirepenc();
 				return;
 			}
-*/			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !SceneLib.helFollower.followerHel()) {
+*/			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(5) == 0 && player.gender > 0 && !SceneLib.helFollower.followerHel()) {
 				SceneLib.helScene.helSexualAmbush();
 				return;
 			}
@@ -896,7 +900,7 @@ public class Exploration extends BaseContent
 				outputText("Against your better judgment, curiosity gets the better of you, and you find yourself walking into a strange area.");
 				outputText("\n\nNot long into your journey, you see a hooded figure looming across the landscape, moving at the same speed as it goes across the terrain. The odd creature captures your interest, and you start to follow it. You glance around, there's still no one else nearby, so you continue to tail the mysterious being.");
 				outputText("\n\nHalf an hour or so later, still following the cloaked figure, you begin to hear the sound of running water. Moving on, you eventually come across the source: a decently sized river flows across the land, populated by variously sized islands. Stopping for a second to take a look around, the hooded person seems to be moving towards one of the several islands. He? She? It is still oblivious to your presence.");
-				outputText("\n\nA voice rings from behind you, \"<i>Come to visit He'Xin'Dao, stranger? </i>\"");
+				outputText("\n\nA voice rings from behind you, \"<i>Come to visit He'Xin'Dao, stranger?</i>\"");
 				outputText("\n\nTurning around, you see a few hooded figures similar to the one you have been following. You curse at the thought that someone could've ambushed you so easily without you noticing them sooner. You state that you've been exploring and found this place. The figure peers at you through the veiled hood.\n\n"
 					+ "\"<i>You seem lacking in soulforce, but luckily your soul is enough intact to allow future cultivation. So, since you are already here, what do you think about visiting our village? Maybe you would come more often to it in the future?</i>\"");
 				outputText("\n\nYou ponder for a moment over the offer. The hooded beings don't seem to carry any malice, given they haven't attacked you nor attempted rape. Perhaps it would be of interest to explore this place?  You decide to accept their offer as they lead you over the wide bridge to one of the islands.  Several heavily armored guards peer at you searchingly, to which one of your new companions state that you are a new guest.  The guard gives a stoic nod as they step aside, no longer barring you from entry.  Your hooded friends guide you to a small island to properly register you as a guest. They give you a small guide on a piece of parchment, telling you places of interest and instructions on how to find this place again.");
@@ -1223,6 +1227,24 @@ public class Exploration extends BaseContent
 			if (silly()) outputText(" and a sparkling arrow shaped sign post tell 'please come in adventurer, I'm in need of more bony decoration'");
 			outputText(".\n\n");
 			doNext(hiddencave.enterDungeon);
+		}
+
+		public function pocketwatchdiscovery():void {
+			clearOutput();
+			outputText("While exploring, you feel something is off.  Wary of meeting new things in this world after your previous experiences, you decide to cautiously locate the source of this feeling.  Soon the object comes into view and you can see that it is an ordinary looking pocket watch.  Knowing that it may be more then it looks to be you check the suroundings next to it for a while before deciding to touch it. \"<i>Only thou that shall sacrifice would be rewarded.</i>\" Voice in your head speaks.\n\n");
+			menu();
+			addButtonIfTrue(6, "Sacrifice", pocketwatchdiscoveryYes, "Req. something 'super'.", player.superPerkPoints > 0);
+			addButton(8, "Leave", pocketwatchdiscoveryNo);
+		}
+		private function pocketwatchdiscoveryYes():void {
+			outputText("Determined you grab the watch. Feeling of pain piercing your soul makes you momentaly blank out. After returning to your senses you see the watch already handing on your waist. Feeling of mising some piece of yourself naggs you but you couldn't find what it's. Well guess it won't kill you for now... you hope as you return to camp.\n\n");
+			player.superPerkPoints--;
+			player.createKeyItem("Pocket Watch", 0, 0, 0, 0);
+			doNext(camp.returnToCampUseOneHour);
+		}
+		private function pocketwatchdiscoveryNo():void {
+			outputText("No you not wanna sacrifice anything. LEaving watch behind you return to the camp.\n\n");
+			doNext(camp.returnToCampUseOneHour);
 		}
 
 		public function ryubifirstenc():void {
