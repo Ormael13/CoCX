@@ -159,7 +159,7 @@ public class PhoenixScene extends BaseContent
 			outputText("\n\n\"<i>Heeeey,</i>\" the quasi-phoenix whines squirming to get out of your grip.");
 			outputText("\n\nYou maintain your grasp on her long, purple lizard dick and tell her that you’re doing her a favor: you’re going to let her fuck your " + vaginaDescript() + ". She stops struggling at the invitation.");
 			outputText("\n\n\"<i>Oh. Well,</i>\" she says, smirking slightly. \"<i>If you want a bit of phoenix seed... I guess I wouldn’t mind a chance at being a daddy.</i>\"\n\n");
-			if (player.hasPerk(PerkLib.BroodMother) && player.pregnancyType > 0) outputText("You assure her she will be soon");
+			if (player.hasPerk(PerkLib.BroodMother) && player.canGetPregnant()) outputText("You assure her she will be soon");
 			else outputText("You grin at her");
 			outputText(" and strip out of your [armor]. The quasi-phoenix, a bit more dominant than you might have liked, roughly grabs your [chest], pinching your nipples as she takes over wringing her cock from you. Oh well. You decide to roll with it and slide a hand down to your [vagina], stroking your pussy as your lover warms up.");
 			outputText("\n\nWhen she’s nice and hard, you give the quasi-phoenix a little push onto her back and clamber into her lap, lining her lizard prick up with your [vagina]. Before you can get properly situated, though, the girl pulls you down onto her cock, impaling you up to her hilt in one massive thrust. You roll your head back and scream, a mix of pleasure and burning pain shooting through you as her white-hot rod slams into your innermost depths.");
@@ -307,7 +307,7 @@ public class PhoenixScene extends BaseContent
 			EventParser.gameOver();
 		}
 
-		public function phoenixBirth():void {
+		public function phoenixBirth(womb:int = 0):void {
 			clearOutput();
 			outputText("A sudden intense spike of pressure from inside you jolts you from your slumber. The sensations make you thrash your way clear of your bedding, awkward and clumsy with your massively gravid womb. Stumbling out of your tent, you hastily pull off your clothes, casting them aside; it’s time to lay your egg.[pg]");
 			outputText("Pain grips you, followed by a wave of heat that weakens the pain and sears your muscles clean. Your distended abdominal muscles flex and writhe under your skin, straining to move the heavy thing, impaired by the sheer size of it. You grit your teeth and wrap your hands around your midriff, forcibly trying to push the egg down so it can leave your body at last.[pg]");
@@ -324,7 +324,7 @@ public class PhoenixScene extends BaseContent
 				player.hips.type++;
 				EngineCore.outputText("\n\nAfter the birth your [armor] fits a bit more snugly about your [hips].");
 			}
-			player.cuntChange(20, true);
+			player.cuntChange(20, true, false, true, womb);
 
 			player.removeCurse("spe", 3, 2);
 

@@ -1492,12 +1492,12 @@ use namespace CoC;
 				if(player.gender == 3) outputText("\n\nThe rough fucking becomes more and more pleasurable as time passes, until you cannot help but stroke your [cock] along with each plunge he takes in your [vag].  You feel yourself clench around him as your sexual organs release, erupting spurts of cum and milking the demon's cock like your life depended on it.");
 				if(player.gender == 2) outputText("\n\nThe rough fucking becomes more and more pleasurable as time passes.  You moan loudly and lewdly with each thrust, hips squeezing around the demon-cock, relishing the feeling of fullness.  Before long you cannot help but cum all over him, [vag] locking around his cock like a vice, muscles rippling, milking him for his cum.");
 				outputText("  The imp's [monster cockshort] explodes inside you, pumping huge loads of hot demon-seed inside you with each eruption.  You swoon, feeling it fill your womb and distend your belly as the imp's orgasm fills you with an unnatural quantity of corrupted semen.\n\nWith a sigh, he pulls his dick free, and you flop back on your back, cum surging out onto the ground from your well-fucked hole.  ");
-				if(player.pregnancyIncubation > 0 && player.pregnancyIncubation <= 216) {
+				if(player.hasVisiblePregnancy()) {
 					outputText("You wonder what this will do to whatever is growing in your womb...  ");
 				}
 				else {
 					if(player.inHeat) outputText("You find yourself hoping you're pregnant as you swiftly lose consciousness.");
-					else if(player.pregnancyIncubation <= 0) {
+					else if(player.canGetPregnant()) {
 						if(player.cor > 75) outputText("With an appreciative moan, you bury your fingers in its slimy warmth, hoping you are pregnant with some fiendish offspring, and lose consciousness.");
 						else outputText("You hope you don't become pregnant, but promptly lose consciousness before you can contemplate the prospect any further.");
 					}
@@ -2315,7 +2315,7 @@ use namespace CoC;
 			outputText("The two of you lie together, trembling happily as you're filled to the brim with tainted fluids.\n\n");
 
 			outputText("Sated for now, you rise up, your body dripping gooey whiteness.  Though in retrospect it isn't nearly as much as was pumped into your womb.");
-			if(player.pregnancyIncubation == 0) outputText("  You'll probably get pregnant.");
+			if(player.canGetPregnant()) outputText("  You'll probably get pregnant.");
 			player.sexReward("cum","Vaginal");
 			if (!player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 14, 50);
 			cleanupAfterCombat();

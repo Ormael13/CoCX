@@ -42,14 +42,14 @@ package classes.Items.Consumables
 				outputText("\n\nFor a moment you feel even more bloated than you already are.  That feeling is soon replaced by a dull throbbing pain.  It seems that with the worms filling your womb the ovielixir is unable to work its magic on you.");
 				return false;
 			}
-			if (game.player.pregnancyIncubation == 0) { //If the player is not pregnant, get preggers with eggs!
+			if (!game.player.isPregnant()) { //If the player is not pregnant, get preggers with eggs!
 				outputText("\n\nThe elixir has an immediate effect on your belly, causing it to swell out slightly as if pregnant.  You guess you'll be laying eggs sometime soon!");
 				game.player.knockUp(PregnancyStore.PREGNANCY_OVIELIXIR_EGGS, PregnancyStore.INCUBATION_OVIELIXIR_EGGS, 1, 1);
 				game.player.createStatusEffect(StatusEffects.Eggs, Utils.rand(6), 0, Utils.rand(3) + 5, 0);
 				return false;
 			}
 			var changeOccurred:Boolean = false;
-			if (game.player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS) { //If player already has eggs, chance of size increase!
+			if (game.player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || game.player.pregnancy2Type == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS) { //If player already has eggs, chance of size increase!
 				if (game.player.hasStatusEffect(StatusEffects.Eggs)) {
 					//If eggs are small, chance of increase!
 					if (game.player.statusEffectv2(StatusEffects.Eggs) == 0) {
@@ -74,6 +74,13 @@ package classes.Items.Consumables
 				if (newIncubation < 2) newIncubation = 2;
 				game.player.knockUpForce(game.player.pregnancyType, newIncubation);
 				trace("Pregger Count New total:" + game.player.pregnancyIncubation);
+			}
+			if (!changeOccurred && game.player.pregnancy2Incubation > 20 && game.player.pregnancy2Type != PregnancyStore.PREGNANCY_BUNNY) { //If no changes, speed up pregnancy.
+				outputText("\n\nYou gasp as your pregnancy suddenly leaps forwards, your belly bulging outward a few inches as it gets closer to time for birthing.");
+				var newIncubation2:int = game.player.pregnancy2Incubation - int(game.player.pregnancy2Incubation * 0.3 + 10);
+				if (newIncubation2 < 2) newIncubation2 = 2;
+				game.player.knockUpForce(game.player.pregnancy2Type, newIncubation2,1);
+				trace("Pregger Count New total:" + game.player.pregnancy2Incubation);
 			}
 			return false;
 		}

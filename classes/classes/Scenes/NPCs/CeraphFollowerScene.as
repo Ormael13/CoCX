@@ -764,7 +764,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			player.sexReward("cum","Vaginal");
 			dynStats("sen", -2, "cor", 2);
 			//Preggers chance!
-			if (player.hasVagina() && player.totalFertility() >= rand(45) && player.pregnancyIncubation == 0 && !player.isGoblinoid()) {
+			if (player.hasVagina() && player.totalFertility() >= rand(45) && player.canGetPregnant() && !player.impregnationRacialCheck()) {
 				player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 32, 61); //Ceraph causes faster pregnancies
 				trace("PC KNOCKED UP WITH CERAPH IMPS");
 			}

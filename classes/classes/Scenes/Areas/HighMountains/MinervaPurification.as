@@ -399,7 +399,7 @@ public class MinervaPurification extends BaseContent
 			}
 			//Female PCs
 			else if (player.gender == 2) {
-				if (!player.isPregnant()) {
+				if (player.canGetPregnant()) {
 					outputText("You don't have to think very hard to know your answer. With such a voluptuous and, judging from what she is packing between her legs, potently virile herm asking you to be the mother of her children, you couldn't possibly say no. You slide your arms down and give her bulging package a playful squeeze, only to feel it start to harden right away under your fingers. At your touch Minerva grins and lets out a long coo, before kissing you deeply and pushing you down onto the soft moss covered ground \"<i>I'm so glad you want to start right now.</i>\" she says as she pushes her hips against you, pressing the heavy growing bulge of her erection against your body, letting you know just how happy she is.");
 					dynStats("lus", 20, "scale", false);
 				}
@@ -413,7 +413,7 @@ public class MinervaPurification extends BaseContent
 			//Hermaphrodite PCs
 			else if (player.gender == 3) {
 				outputText("Grinning, you playfully ask who is going to be doing the fathering and the mothering. Since you're both herms either of you could do the job");
-				if (!player.isPregnant()) {
+				if (player.canGetPregnant()) {
 					outputText("\n\nOr you could do both, since you're both herms and can get each other pregnant. It's a good question despite the joking. Minerva looks at you before pouting in thought. \"<i>Well... you know.... we don't have to choose, we could take turns. you could take me, and I could take you, and we could have our children together, my love,</i>\" she suggests as her finger draws circles around one of your breasts teasingly, before grinning and pulling you down onto the soft moss by the clear waters, enfolding you into her warm soft embrace again. \"<i>I want you to start though. I want you to be the one I willingly give myself to like this. You will be the first one ever I willingly let into my pussy.</i>\"");
 				}
 				else {
@@ -587,7 +587,7 @@ public class MinervaPurification extends BaseContent
 		private function minervaPregnancyMeet():void {
 			outputText("\n\n");
 			if (minervaScene.pregnancy.isPregnant) { //Minerva is pregnant.
-				if (player.pregnancyType == PregnancyStore.PREGNANCY_MINERVA) { //Pregnant with sirens.
+				if (player.pregnancyType == PregnancyStore.PREGNANCY_MINERVA || player.pregnancy2Type == PregnancyStore.PREGNANCY_MINERVA) { //Pregnant with sirens.
 					outputText("Smiling you stroke your swollen pregnant belly as you approach the spring. You know that you're carrying Minerva's babies, the twins inside you a true sign of your bond with the redheaded siren. You don't have to wait long to find your golden lover. Her very tall, very curvy form can be seen relaxing ");
 					if (flags[kFLAGS.MINERVA_TOWER_TREE] > 0) outputText("against the huge beautiful oak tree that sits in the center of the spring, the beautiful hermaphrodite gently singing to herself and the tree as she lays against its shaded trunk.");
 					else outputText("against one of her sweet smelling fruit trees that surround the purifying spring. The beautiful hermaphrodite is gently singing to herself as she lies against its shaded trunk.");
@@ -609,7 +609,7 @@ public class MinervaPurification extends BaseContent
 				}
 			}
 			else { //Minerva is not pregnant.
-				if (player.pregnancyType == PregnancyStore.PREGNANCY_MINERVA) { //Pregnant with sirens.
+				if (player.pregnancyType == PregnancyStore.PREGNANCY_MINERVA || player.pregnancy2Type == PregnancyStore.PREGNANCY_MINERVA) { //Pregnant with sirens.
 					outputText("Smiling, you stroke your swollen pregnant belly as you approach the spring. You know that you're carrying Minerva's babies inside you, the twins a true sign of your bond with the redheaded siren. You don't have to wait long to find your golden lover. Her very tall, very curvy form can be seen picking a few of the bright round peaches from one of the ever-productive trees. A gentle humming can be heard coming from her as she sways her broodmotherly hips back and forth, picking fruit without a care in the world.");
 					outputText("\n\nYour smile turns into a grin, and you quietly whisper to your unborn sirens that you're going to play a little trick on their father-mother. Creeping as quietly as you can up to Minerva, you suddenly reach around her and hug her, your hands wrapping around her as you press your pregnant tummy against her back. The sudden contact makes her gasp in surprise and drop the basket of peaches she was holding. The gold and white woman's surprise soon fades, and she relaxes against your body. Minerva looks behind herself at you and smiles. \"<i>Well, hello there, darling, I'm so glad you came to visit.</i>\" She grins and turns in your arms, wrapping her arms around you before starting to stroke your pregnant belly. \"<i>And you brought some guests with you,</i>\" She says before gently rubbing your bulging tummy tenderly, the tall siren kneeling down to plant kisses on you. \"<i>My sweet lover and our babies,</i>\" She says dreamily, seemingly able to clearly tell that they are hers.");
 					outputText("\n\nThe tender motherly woman nuzzle your stomach gently as she caresses you with her hands; it's clear to you she will be a most loving mother-father for your siren daughters. Smiling brightly and seemingly full of maternal feelings she hugs you tightly before looking at you with a gentle expression \"<i>So, my darling pregnant beauty, did you come just so show off our beautiful babies, or have you come to spend some time with your faithful siren?</i>\"");
@@ -668,7 +668,7 @@ public class MinervaPurification extends BaseContent
 			addButton(5, "Spar", minervaScene.fightMinerva);
 			if (minervaScene.minervaRomanced() && model.time.hours >= 20) addButton(6, "Sleep With", sleepWithMinerva);
 			//if (flags[kFLAGS.MINERVA_CHILDREN] > 0) addButton(7, "Children", checkUpOnMinervaChildren);
-			if (minervaScene.pregnancy.isPregnant || player.pregnancyType == PregnancyStore.PREGNANCY_MINERVA) addButton(7, "Pregnancy", checkPregnancy);
+			if (minervaScene.pregnancy.isPregnant || player.pregnancyType == PregnancyStore.PREGNANCY_MINERVA|| player.pregnancy2Type == PregnancyStore.PREGNANCY_MINERVA) addButton(7, "Pregnancy", checkPregnancy);
 			if (player.hasKeyItem("Marae's Seed") >= 0) addButton(8, "Plant Seed", growTreePostPurification);
 			if (debug) addButton(10, "ROLLBACK", fixHer).hint("Rollback Minerva to pre-purified state.");
 			addButton(14, "Leave", camp.returnToCampUseOneHour);
@@ -686,6 +686,8 @@ public class MinervaPurification extends BaseContent
 			minervaScene.pregnancy.knockUpForce();
 			if (player.pregnancyType == PregnancyStore.PREGNANCY_MINERVA)
 				player.knockUpForce();
+			if (player.pregnancy2Type == PregnancyStore.PREGNANCY_MINERVA)
+				player.knockUpForce(0, 0, 1);
 			playerMenu();
 		}
 		
@@ -1220,8 +1222,8 @@ public class MinervaPurification extends BaseContent
 			}
 			//Romanced:
 			else outputText("\n\nThe lovestruck siren sighs and sits up, looking up at you with affection clearly written on her face. \"<i>I hope you'll come back soon, I always feel so much happier when you're around,</i>\" she says as she brings a hand to her chest, holding it over her heart.");
-			if (rand(100) <= player.totalFertility() && player.pregnancyIncubation == 0) {
-				player.knockUpForce(PregnancyStore.PREGNANCY_MINERVA, PregnancyStore.INCUBATION_MINERVA);
+			if (rand(100) <= player.totalFertility() && player.canGetPregnant()) {
+				player.knockUp(PregnancyStore.PREGNANCY_MINERVA, PregnancyStore.INCUBATION_MINERVA);
 			}
 			flags[kFLAGS.TIMES_MINERVA_LAPSEXED]++;
 			player.sexReward("cum","Vaginal");
@@ -1473,7 +1475,7 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 		//  PREGNANCY
 		//------------------
 		public function checkPregnancy():void {
-			if (minervaScene.pregnancy.isPregnant && (player.pregnancyType != PregnancyStore.PREGNANCY_MINERVA || rand(3) > 0)) {
+			if (minervaScene.pregnancy.isPregnant && ((player.pregnancyType != PregnancyStore.PREGNANCY_MINERVA && player.pregnancy2Type != PregnancyStore.PREGNANCY_MINERVA) || rand(3) > 0)) {
 				if (minervaScene.pregnancy.incubation >= 168) pregnancyStage1(flags[kFLAGS.MINERVA_CHILDREN] > 0);
 				else if (minervaScene.pregnancy.incubation >= 144) pregnancyStage2(flags[kFLAGS.MINERVA_CHILDREN] > 0);
 				else if (minervaScene.pregnancy.incubation >= 72) pregnancyStage3(flags[kFLAGS.MINERVA_CHILDREN] > 0);
@@ -1664,7 +1666,7 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 		}
 		
 		//Player gives birth!
-		public function playerGivesBirth():void {
+		public function playerGivesBirth(womb:int = 1):void {
 			minervaScene.minervaSprite();
 			if (flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] >= 10) outputText("<b>No scene for corrupted Minerva yet, so just take this one for now.</b>");
 			outputText("A pain develops in your abdomen. You realize it's time to give birth to the sirens! You set foot on the high mountains path and hurry to the tower.");
@@ -1674,11 +1676,11 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 			if (player.hasCock()) {
 				outputText("She lifts your cock ");
 				if (player.hasBalls()) outputText("and balls ");
-				outputText("to reveal your " + vaginaDescript() + ".");
+				outputText("to reveal your " + vaginaDescript(womb) + ".");
 			}
 			outputText("\n\nYou wait. Time goes by, and you talk about various topics with her. Finally, the water breaks. She gasps. \"<i>Just push. I'll catch whatever's coming out,</i>\" she assures. ");
 			outputText("\n\nYou push as hard as you can, remembering to take deep breath between pushings. The head of a siren crowns. \"<i>You're doing great! You'll be giving birth to two daughters,</i>\" she says, encouraging you to push again. You keep pushing until finally, the baby becomes loose enough. Minerva picks up the baby. \"<i>Just one more,</i>\" she says.");
-			player.cuntChange(40, true, false, true);
+			player.cuntChange(40, true, false, true, womb);
 			outputText("\n\nYou struggle to push the last of the sirens out. Eventually, you manage to push the last out. \"<i>Great! You just gave birth to two beautiful sirens. I couldn't be happier,</i>\" she says excitedly.");
 			outputText("\n\n\"<i>Just rest. I'll take care of them");
 			if (flags[kFLAGS.MINERVA_CHILDREN] > 0) outputText(". My daughters are already excited to see their new addition to our family");

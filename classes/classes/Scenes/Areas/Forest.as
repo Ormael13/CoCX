@@ -544,7 +544,7 @@ use namespace CoC;
 					nightmareScene.nightmareIntro();
 				},
 				when: function():Boolean {
-					return player.hasStatusEffect(StatusEffects.CanMeetNightmare) && player.statusEffectv1(StatusEffects.CanMeetNightmare) < 1 && player.pregnancyIncubation == 0;
+					return player.hasStatusEffect(StatusEffects.CanMeetNightmare) && player.statusEffectv1(StatusEffects.CanMeetNightmare) < 1 && (player.canGetPregnant());
 				}
 			},/*{ // [INTERMOD:8chan]
 			 name: "dullahan",

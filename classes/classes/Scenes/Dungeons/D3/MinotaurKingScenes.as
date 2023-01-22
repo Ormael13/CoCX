@@ -303,7 +303,7 @@ public class MinotaurKingScenes extends BaseContent
 			else outputText(", denying you even the chance to climb off");
 			outputText(". Your body has given itself over to this hedonistic relief. So long as the minotaur’s hips saw in and out of your soaked delta, you’re going to keep cumming.");
 			outputText("\n\nThen you feel it. The swollen crown of the King’s equine phallus palpably expands inside you, arresting your motions. Somehow it doesn’t");
-			if (player.pregnancyIncubation != 0) outputText(" force its way past your cervix");
+			if (player.canGetPregnant()) outputText(" force its way past your cervix");
 			else outputText(" tear open your womb");
 			outputText(". Your insides stretch like they’re made of rubber");
 			if (player.averageVaginalLooseness() >= 5) outputText(", which isn’t far from the truth,");

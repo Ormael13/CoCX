@@ -558,7 +558,7 @@ private function valeriaGooRapeII():void {
 	//{Butt-change: full anal size}
 	player.buttChange(player.analCapacity() * .75,true,true,false);
 	//Lay pipes in cooch! {reqiores non pregnant}
-	if(!player.isPregnant() && player.hasVagina()) {
+	if(player.canGetPregnant() && player.hasVagina()) {
 		if(silly()) outputText("\n\n\"<i>But wait, there's more!</i>\" Billy Mays announces.");
 		outputText("\n\nShortly after, a similar sized blob of semi-liquid matter rubs over your [vagina], brushing aside Valeria's feathery teases to spread your lips around the slick bubble, shooting tingles of pleasure through your body. You try to shift, to grind against the messy intruder, but all restrained as you are, all you can do is quiver against your bindings, vibrating in pleasures that would be plain to any watchers. The penetration doesn't stop Valeria's teases either. The talented woman continues to roll feathery caresses over the exterior of your genitalia while opening you open as wide as any dick you've ever taken, burrowing a tunnel straight to your cervix.");
 		//{cuntChange: MAXIMUM}
@@ -680,9 +680,10 @@ private function valeriaGooRapeII():void {
 	//v4 = tit fill?
 	player.createStatusEffect(StatusEffects.GooStuffed, 10 + rand(300), 0, 0, 0);
 	player.buttKnockUpForce(PregnancyStore.PREGNANCY_GOO_STUFFED, 500); //Blocks other pregnancies - Way higher than GooStuffed status can last. Cleared when GooStuffed removed
-	if (player.hasVagina() && player.pregnancyIncubation == 0) {
+	if (player.hasVagina() && !player.isPregnant()) {
 		player.changeStatusValue(StatusEffects.GooStuffed, 3, 1);
-		player.knockUpForce(PregnancyStore.PREGNANCY_GOO_STUFFED, 500); //Blocks other pregnancies - Way higher than GooStuffed status can last. Cleared when GooStuffed removed
+		player.knockUp(PregnancyStore.PREGNANCY_GOO_STUFFED, 500, 1, 1); //Blocks other pregnancies - Way higher than GooStuffed status can last. Cleared when GooStuffed removed
+		player.knockUp(PregnancyStore.PREGNANCY_GOO_STUFFED, 500,1, 1); //Blocks other pregnancies - Way higher than GooStuffed status can last. Cleared when GooStuffed removed
 	}
 	if (player.hasCock()) {
 		if(player.hasBalls()) player.changeStatusValue(StatusEffects.GooStuffed,2,2);
@@ -721,6 +722,7 @@ public function birthOutDatGooSlut():void {
 	outputText("\n\nYou pant to try and catch your breath as the fluid gathers up beside you and grows a friendly, smiling face. It gives you a simple smile and a kiss on your brow before leaving you to recover, heading in the direction of the lake.\n");
 	player.removeStatusEffect(StatusEffects.GooStuffed);
 	player.knockUpForce(); //Clear the false pregnancy
+	player.knockUpForce(0, 0, 1);
 	player.buttKnockUpForce(); //Clear the false pregnancy
 }
 

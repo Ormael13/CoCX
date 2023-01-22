@@ -131,7 +131,7 @@ public function cottonGreeting():void {
 }
 
 private function cottonGreetingCommonEnd():void {
-	if (player.pregnancyIncubation <= 225 && player.pregnancyType == PregnancyStore.PREGNANCY_COTTON)
+	if (player.hasVisiblePregnancy() && (player.pregnancyType == PregnancyStore.PREGNANCY_COTTON || player.pregnancy2Type == PregnancyStore.PREGNANCY_COTTON))
 	{
 		outputText("As you approach Cotton, she smiles and looks at your round belly.  \"<i>Hey there my pet, I'm afraid in your condition, yoga is out of the question... but we can do some special stretches and lamaze, just get dressed as usual.</i>\"");
 		outputText("Do you want to engage in yoga lamaze with her?");
@@ -228,7 +228,7 @@ private function acceptYoga():void {
 		outputText("The centauress collects ten gems for gym fees before the two of you can get into it.\n\n");
 	}
 	//(Yes) LAMAZE
-	if (player.pregnancyIncubation <= 225 && player.pregnancyType == PregnancyStore.PREGNANCY_COTTON)
+	if (player.hasVisiblePregnancy() && (player.pregnancyType == PregnancyStore.PREGNANCY_COTTON || player.pregnancy2Type == PregnancyStore.PREGNANCY_COTTON))
 	{
 		outputText("You change into your yoga clothes and approach Cotton, saying you'd love a lamaze class. Cotton smiles and sets up a mat for you, then sits down, urging you to sit in front of her.  You do so, feeling the bulge in her pants pressing against your rump, and her breasts at your back.  You spend the next fifteen minutes doing breathing exercises like this, and another fifteen minutes doing stretches on an exercise ball.  As you're working out, Cotton presses her body against yours, running her hands around your swollen belly at every opportunity.\n\n");
 		cottonChat();
@@ -1382,7 +1382,6 @@ public function birthingCottonsKids():void {
 	outputText("\n");
 	flags[kFLAGS.COTTON_KID_COUNT]++;
 	if(flags[kFLAGS.COTTON_KID_COUNT] == 1) flags[kFLAGS.COTTON_OLDEST_KID_AGE] = 1;
-	player.knockUpForce(); //Clear Pregnancy
 }
 
 

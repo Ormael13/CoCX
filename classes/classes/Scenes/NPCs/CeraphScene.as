@@ -236,7 +236,7 @@ public class CeraphScene extends NPCAwareContent
 			outputText("The omnibus' facade of feigned innocence drops under the force of the hot, wet fuck.  Her mouth opens into an 'o' of pleasure, and you feel her rod thicken as it begins pumping the proof of her ecstasy inside you.  The nodules that cover Ceraph's demonic erection wildly vibrate as she orgasms, throwing you over the edge and into the midst of a body-shaking orgasm.  Demon-seed floods your womb, squeezed inside it by your body's orgasmic contractions.  You shudder with the demon as you both begin calming down.\n\n");
 
 			outputText("She groans, \"<i>Ooooh... Champion why did you make me despoil your womb?  ");
-			if (player.pregnancyIncubation == 0) outputText("You're only feeding the swarms of imps that are despoiling this land.");
+			if (!player.isPregnant()) outputText("You're only feeding the swarms of imps that are despoiling this land.");
 			else outputText("I'm sure whatever baby you have in there won't enjoy being so soaked in corruption.");
 			outputText("</i>\"\n\n");
 

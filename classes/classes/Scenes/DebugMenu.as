@@ -1570,6 +1570,7 @@ public class DebugMenu extends BaseContent
 			clearOutput();
 			outputText("You feel as if something's dissolving inside your womb. Liquid flows out of your [vagina] and your womb feels empty now. <b>You are no longer pregnant!</b>");
 			player.knockUpForce();
+			player.knockUpForce(0, 0, 1);
 			doNext(accessDebugMenu);
 		}
 

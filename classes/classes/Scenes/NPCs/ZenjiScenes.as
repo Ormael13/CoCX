@@ -1157,7 +1157,7 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 					outputText("He playfully sticks his tongue out at you in response, giving you a good look at his long, grey tongue.\n\n");
 				}
 				else {
-					if (player.pregnancyType == PregnancyStore.PREGNANCY_ZENJI) {
+					if (player.pregnancyType == PregnancyStore.PREGNANCY_ZENJI || player.pregnancy2Type == PregnancyStore.PREGNANCY_ZENJI) {
 						outputText("You approach Zenji and he eyes your form. He seems almost mesmerized by your figure.\n\n");
 						outputText("You ask Zenji if he’s alright.\n\n");
 						outputText("Zenji blinks softly as he reaches a hand out to your form, \"<i>[name]... you’re… you’re just so beautiful… You’re everyting to me, [name]. I’m yours forever, don’ you forget it.</i>\" He finally breaks away from his trance, looking you in the eyes, \"<i>But… is der someting you wanted?</i>\"\n\n");
@@ -1889,10 +1889,8 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			outputText("Zenji releases you, helping you clean up from the mess of his huge orgasm and get dressed. Finally, you are ready to continue your day.\n\n");
 			player.addStatusValue(StatusEffects.ZenjiZList, 3, 1);
 			player.sexReward("cum", "Vaginal");
-			if (player.pregnancyIncubation == 0) {
-				if (player.isGoblinoid()) player.knockUpForce(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
-				else player.knockUpForce(PregnancyStore.PREGNANCY_ZENJI, PregnancyStore.INCUBATION_ZENJI);
-			}
+			if (player.hasUniquePregnancy()) player.impregnationRacialCheck();
+			else player.knockUp(PregnancyStore.PREGNANCY_ZENJI, PregnancyStore.INCUBATION_ZENJI);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -2027,13 +2025,14 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 		public function loverZenjiPregnantSex():void {
 			spriteSelect(SpriteDb.s_zenji);
 			clearOutput();
-			if (player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.pregnancyType == PregnancyStore.PREGNANCY_SPIDER || player.pregnancyType == PregnancyStore.PREGNANCY_DRIDER_EGGS || player.pregnancyType == PregnancyStore.PREGNANCY_FROG_GIRL) {
-				outputText("You tell Zenji that you want him to be gentle, you may be pregnant, but you still crave the touch of your lover.\n\n");
-				outputText("Zenji gives you a gentle smile, \"<i>You are still beautiful to me, no matta what,</i>\" he reassures, stroking your pregnancy bulge. His cheeks blush slightly as he strokes his hand over you. \"<i>Someting about you like dis though… It’s making me want you even more…</i>\" he says, growing even more flushed.\n\n");
-			}
-			else if (player.pregnancyType == PregnancyStore.PREGNANCY_ZENJI) {
+			if (player.pregnancyType == PregnancyStore.PREGNANCY_ZENJI ||player.pregnancyType == PregnancyStore.PREGNANCY_ZENJI) {
 				outputText("Before you can consider what you want to do, Zenji cuts you off, \"<i>You are very beautiful, have I told you dis, [name]?</i>\" he says, giving you a toothy grin, his tone almost predatory.\n\n");
 				outputText("\"<i>If you don’ mind, I know exactly what I wanna do,</i>\" he says, leaning in, giving you a loving lick across the cheek.\n\n");
+			}
+			else if (InCollection(player.pregnancyType, PregnancyStore.PREGNANCY_OVIELIXIR_EGGS, PregnancyStore.PREGNANCY_SPIDER, PregnancyStore.PREGNANCY_DRIDER_EGGS, PregnancyStore.PREGNANCY_FROG_GIRL) ||
+				InCollection(player.pregnancy2Type, PregnancyStore.PREGNANCY_OVIELIXIR_EGGS, PregnancyStore.PREGNANCY_SPIDER, PregnancyStore.PREGNANCY_DRIDER_EGGS, PregnancyStore.PREGNANCY_FROG_GIRL)) {
+				outputText("You tell Zenji that you want him to be gentle, you may be pregnant, but you still crave the touch of your lover.\n\n");
+				outputText("Zenji gives you a gentle smile, \"<i>You are still beautiful to me, no matta what,</i>\" he reassures, stroking your pregnancy bulge. His cheeks blush slightly as he strokes his hand over you. \"<i>Someting about you like dis though… It’s making me want you even more…</i>\" he says, growing even more flushed.\n\n");
 			}
 			else {
 				outputText("You tell Zenji that you want him to be gentle with you this time, despite your pregnancy, you still want him as much as you did before.\n\n");
@@ -2170,10 +2169,8 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			outputText("Zenji looks down at his soaked loincloth, \"<i>Ugh… I did not tink dis through, I need ta get another piece of cloth.</i>\"\n\n");
 			player.addStatusValue(StatusEffects.ZenjiZList, 3, 1);
 			player.sexReward("cum", "Vaginal");
-			if (player.pregnancyIncubation == 0) {
-				if (player.isGoblinoid()) player.knockUpForce(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
-				else player.knockUpForce(PregnancyStore.PREGNANCY_ZENJI, PregnancyStore.INCUBATION_ZENJI);
-			}
+			if (player.hasUniquePregnancy()) player.impregnationRacialCheck();
+			else player.knockUp(PregnancyStore.PREGNANCY_ZENJI, PregnancyStore.INCUBATION_ZENJI);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -2420,10 +2417,8 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 			outputText("Zenji gently strokes your back as he curls up with you.\n\n");
 			outputText("You plan on sleeping for " + num2Text(timeQ) + " hours.\n\n");
 			player.sexReward("cum", "Vaginal");
-			if (player.pregnancyIncubation == 0) {
-				if (player.isGoblinoid()) player.knockUpForce(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
-				else player.knockUpForce(PregnancyStore.PREGNANCY_ZENJI, PregnancyStore.INCUBATION_ZENJI);
-			}
+			if (player.hasUniquePregnancy()) player.impregnationRacialCheck();
+			else player.knockUp(PregnancyStore.PREGNANCY_ZENJI, PregnancyStore.INCUBATION_ZENJI);
 			player.addStatusValue(StatusEffects.ZenjiZList, 2, 1);
 			ZenjiSleepCount += 1;
 			menu();
@@ -3426,10 +3421,8 @@ public class ZenjiScenes extends NPCAwareContent implements SaveableState
 						"\"<i>Sleep tight, [name]</i>\"\n" +
 						"\n" +
 						"You plan on sleeping for the rest of the night, wrapped within the warmth of your husband’s embrace.\n");
-				if (player.pregnancyIncubation == 0) {
-					if (player.isGoblinoid()) player.knockUpForce(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
-					else player.knockUpForce(PregnancyStore.PREGNANCY_ZENJI, PregnancyStore.INCUBATION_ZENJI);
-				}
+				if (player.hasUniquePregnancy()) player.impregnationRacialCheck();
+				else player.knockUp(PregnancyStore.PREGNANCY_ZENJI, PregnancyStore.INCUBATION_ZENJI);
 			}
 			else if (options == 3){
 				var pCockSize:int = player.cocks[player.cockThatFits(45)].cockLength
