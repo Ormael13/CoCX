@@ -799,6 +799,7 @@ public class CampMakeWinions extends BaseContent
 			if (player.hasPerk(PerkLib.ElementsOfTheOrtodoxPath)) maxSizeOfElementalsArmyCounter += 2;
 			if (player.hasPerk(PerkLib.ElementsOfMarethBasics)) maxSizeOfElementalsArmyCounter += 2;
 			if (player.hasPerk(PerkLib.ElementsOfMarethAdvanced)) maxSizeOfElementalsArmyCounter += 2;
+			if (player.hasPerk(PerkLib.DaoOfTheElements)) maxSizeOfElementalsArmyCounter += player.perkv2(PerkLib.DaoOfTheElements);
 			return maxSizeOfElementalsArmyCounter;
 		}
 		private function currentSizeOfElementalsArmy():Number {
