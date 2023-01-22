@@ -134,6 +134,7 @@ public class Changelog extends BaseContent
 			//outputText("-New event perk: Elemental Conjurer Mind and Body Dedication (Ex). Gained by use of the Pocket Watch when req. are meet. Effects of all three combined perks + 5% bonus to spe/wis multi.\n");
 			//outputText("-New event perk: Elemental Conjurer Mind and Body Sacrifice (Ex). Gained by use of the Pocket Watch when req. are meet. Effects of all three combined perks + 5% bonus to str multi, +10% bonus to int multi, +15% bonus to wis multi.\n");
 			outputText("-Multi-preg enabled for dual vaginas (EragonX)\n");
+			outputText("-Fixed the small error in the nightwalker dialogue. Fixed the issue of bull strength not properly giving its buff if the player would receive less than a 50% buff from the perk. (Chibizs)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -143,11 +144,10 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");// (Svalkash)
-			outputText("-\n");// (EragonX)
-			outputText("-\n");// (Jtecx)
-			outputText("-\n");// (Furrin Gok)
-			outputText("-\n");// (khovel)
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
 			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
@@ -157,6 +157,12 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");// (Liadri)
 			outputText("-\n");// (aimozg)
+			outputText("-\n");// (Svalkash)
+			outputText("-\n");// (EragonX)
+			outputText("-\n");// (Jtecx)
+			outputText("-\n");// (Furrin Gok)
+			outputText("-\n");// (khovel)
+			outputText("-\n");// (Chibizs)
 			//remove this line when other two lines below get added ingame
 			//outputText("-New perk for enemies: Elite type enemy. Bonuses for are: Diehard effect of 2,5% of max HP + 750 HP * NG tier, OverMax HP effect of 5% magnitude.\n");
 			//outputText("-New perk for enemies: Champion type enemy. Bonuses for are: Diehard effect of 5% of max HP + 1,500 HP * NG tier, OverMax HP effect of 10% magnitude.\n");
@@ -229,9 +235,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -263,7 +267,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

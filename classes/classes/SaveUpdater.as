@@ -2032,6 +2032,22 @@ public class SaveUpdater extends NPCAwareContent {
 				outputText("\n\nAnother really smol bonus to spare stat/perk points for the starting phase of the adventure ^^");
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.047;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.048) {
+				if (player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)) player.vaginaType(VaginaClass.BEE);
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.048;
+			}/*
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.049) {
+				
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.049;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.050) {
+				
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.050;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.051) {
+				
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.052;
+			}*/
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
 		}
