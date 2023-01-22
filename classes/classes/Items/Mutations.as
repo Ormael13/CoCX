@@ -2230,6 +2230,9 @@ public final class Mutations extends MutationsHelper {
         outputText("\n<b>Gained Ability: Terrifying Howl</b>");
         if (player.hasPerk(PerkLib.RacialParagon))
             flags[kFLAGS.APEX_SELECTED_RACE] = Races.CERBERUS;
+        IMutationsLib.HellhoundFireBallsIM.trueMutation = true;
+        IMutationsLib.AlphaHowlIM.trueMutation = true;
+
         player.removeAllRacialMutation();
         if (player.cor < 50) player.cor = 50;
         outputText("\n<b>Gained Mutation: Hellhound Fireballs</b>");
@@ -2600,6 +2603,11 @@ public final class Mutations extends MutationsHelper {
 
         outputText("\n<b>Gained Perk: Transformation Immunity!</b> "+ PerkLib.TransformationImmunity2.desc());
         player.createPerk(PerkLib.TransformationImmunity2, 0, 0, 0, 0);
+
+        if (player.hasPerk(PerkLib.RacialParagon))
+            flags[kFLAGS.APEX_SELECTED_RACE] = Races.IMP;
+
+        IMutationsLib.BlackHeartIM.trueMutation = true;
 
         player.removeAllRacialMutation();
 		saveUpdater.bringBackEncoutersForSouless();
@@ -15097,22 +15105,32 @@ public final class Mutations extends MutationsHelper {
             player.createPerk(IMutationsLib.DiamondHeartIM, player.perkv1(IMutationsLib.ObsidianHeartIM),0,0,0);
             player.removePerk(IMutationsLib.ObsidianHeartIM);
         }
+        IMutationsLib.DiamondHeartIM.trueMutation = true;
 
         //TODO add Azazel perks effects
-        outputText("<b>Obtained ability: JudgementFlare</b>  The counterpart to infernal flare.\n");
+        outputText("\n<b>Obtained ability: JudgementFlare</b>  The counterpart to infernal flare.");
 
-        outputText("<b>Obtained ability: Exorcism</b>  Damage any creature above 25% corruption for 50% of its hit point total. Can be used only once per battle.\n");
+        outputText("\n<b>Obtained ability: Exorcism</b>  Damage any creature above 25% corruption for 50% of its hit point total. Can be used only once per battle.");
 
         player.createPerk(PerkLib.Immortality, 0,0,0,0);
-        outputText("<b>Obtained perk: Immortality</b>  "+PerkLib.Immortality.longDesc+"\n");
+        outputText("\n<b>Obtained perk: Immortality</b>  "+PerkLib.Immortality.desc());
 
         player.createPerk(PerkLib.SealSin, 0,0,0,0); //TODO add Azazel perks effects
-        outputText("<b>Obtained perk: SealSin</b>  "+PerkLib.SealSin.longDesc+"\n");
+        outputText("\n<b>Obtained perk: SealSin</b>  "+PerkLib.SealSin.desc());
 
-        outputText("<b>Obtained ability: PerfectClarity</b>  Deal increased magic damage but take more physical damage, increase evasion slightly.\n");
+        outputText("\n<b>Obtained ability: PerfectClarity</b>  Deal increased magic damage but take more physical damage, increase evasion slightly.");
 
         player.createPerk(PerkLib.ConvictionOfPurpose, 0,0,0,0); //TODO add Azazel perks effects
-        outputText("<b>Obtained perk: ConvictionOfPurpose</b>  "+PerkLib.ConvictionOfPurpose.longDesc+"\n");
+        outputText("\n<b>Obtained perk: ConvictionOfPurpose</b>  "+PerkLib.ConvictionOfPurpose.desc());
+
+        outputText("\n<b>Gained Perk: Transformation Immunity!</b> "+ PerkLib.TransformationImmunity2.desc());
+        player.createPerk(PerkLib.TransformationImmunity2, 0, 0, 0, 0);
+
+
+        if (player.hasPerk(PerkLib.RacialParagon))
+            flags[kFLAGS.APEX_SELECTED_RACE] = Races.AZAZEL;
+
+        player.removeAllRacialMutation();
 
         player.refillHunger(10);
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;

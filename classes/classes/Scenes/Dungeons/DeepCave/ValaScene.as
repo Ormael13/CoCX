@@ -10,6 +10,7 @@ import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.IMutationsLib;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 import classes.internals.SaveableState;
@@ -849,6 +850,7 @@ public class ValaScene extends BaseContent implements SaveableState
 			player.createPerk(PerkLib.TransformationImmunity2, 4, 0, 0, 0);
 			if (player.hasPerk(PerkLib.RacialParagon))
 				flags[kFLAGS.APEX_SELECTED_RACE] = Races.FAIRY;
+			IMutationsLib.FeyArcaneBloodstreamIM.trueMutation = true;
 			player.removeAllRacialMutation();
 			outputText("\n\n");
 			CoC.instance.mainViewManager.updateCharviewIfNeeded();

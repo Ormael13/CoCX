@@ -45,6 +45,11 @@ public class DiamondHeartMutation extends IMutationPerkType
             return mName + sufval;
         }
 
+        override public function evolveText():String {
+            var descS:String = "\nFeel feel radiant today as if some of the weight of the world dropped from your shoulder. It feels right to fight against corruption and you feel twice as gratified for doing so. Your heart feels in the right place or maybe it's the pure powers flooding through it that makes it feel so?";
+            return descS;
+        }
+
         //Mutation Requirements
         override public function pReqs(pCheck:int = -1):void{
             try{

@@ -69,7 +69,8 @@ public class CerberusRace extends Race {
 				.height(AT_LEAST(11*12), +1)
 				.tone(AT_LEAST(80), +1)
 				.corruption(AT_LEAST(50), +1)
-				.hasPerk(PerkLib.Hellfire, +1);
+				.hasPerk(PerkLib.Hellfire, +1)
+				.hasPerk(PerkLib.TransformationImmunity2, +3);
 
 		addMutation(IMutationsLib.AlphaHowlIM);
 		addMutation(IMutationsLib.HellhoundFireBallsIM);

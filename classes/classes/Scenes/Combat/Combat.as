@@ -7543,6 +7543,7 @@ public class Combat extends BaseContent {
 			}
 		}
         if (player.perkv1(IMutationsLib.EyeOfTheTigerIM) >= 2) critMChance += 5;
+        if (player.perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 4) critMChance += 10;
         return critMChance;
     }
 

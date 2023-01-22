@@ -112,6 +112,13 @@ public class IMutationPerkType extends PerkType
 		public function get trueMutation():Boolean{
 			return _trueVariant;
 		}
+		public function set trueMutation(isTrue:Boolean):void{
+			_trueVariant = isTrue;
+		}
+		public function evolveText():String {
+			var descS:String = "";
+			return descS;
+		}
 
 		public function explainBuffs(pTier:int):String {
 			var tempObj:Object = buffsForTier(pTier, player);
@@ -179,6 +186,8 @@ public class IMutationPerkType extends PerkType
 					target.setPerkValue(mutations, 1, pTier);
 				} else {							//Perk is incremented by 1.
 					target.setPerkValue(mutations,1,target.perkv1(mutations) + 1);
+					if (mutations.trueMutation) EngineCore.outputText(mutations.evolveText());
+					EngineCore.outputText(" <b>Acquired "+mutations.name+"!</b>");
 				}
 				setBuffs();
 				//trace("Perk applied.");

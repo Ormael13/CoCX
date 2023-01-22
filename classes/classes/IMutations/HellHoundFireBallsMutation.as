@@ -57,6 +57,11 @@ public class HellHoundFireBallsMutation extends IMutationPerkType
             return mName + sufval;
         }
 
+        override public function evolveText():String {
+            var descS:String = "\nYour balls begin to suddenly feel heavier… warmer. You begin pumping your two penis absentmindedly thinking of all the bitches you recently broke on your twin shaft as the heat rushes all the way to your pair of erect members. You cum a humongous load of smoking warm cum, way to warm for normal seeds. It looks like your balls are progressively continuing their evolution to be more hellhound-like as your seed takes on burning hot property just like that of a hellhound.";
+            return descS;
+        }
+
         //Mutation Requirements
         override public function pReqs(pCheck:int = -1):void{
             try{
