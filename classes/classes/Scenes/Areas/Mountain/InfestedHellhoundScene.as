@@ -145,10 +145,11 @@ public class InfestedHellhoundScene extends BaseContent
 				//random chance of big lust boost as worms evacuate
 				//your body.  When worms leave they take with them up
 				//to 5 fertility, to a minimum of 10.
-				if (player.pregnancyIncubation == 0) {
+				if (!player.isPregnant()) {
 					if (player.hasStatusEffect(StatusEffects.WormPlugged)) player.addStatusValue(StatusEffects.WormPlugged, 1, 1 + rand(5));
 					else player.createStatusEffect(StatusEffects.WormPlugged, 1 + rand(5), 0, 0, 0);
 					player.knockUpForce(PregnancyStore.PREGNANCY_WORM_STUFFED, 100 + player.statusEffectv1(StatusEffects.WormPlugged)); //Will be cleared when the WormPlugged effect ends
+					player.knockUpForce(PregnancyStore.PREGNANCY_WORM_STUFFED, 100 + player.statusEffectv1(StatusEffects.WormPlugged),1); //Will be cleared when the WormPlugged effect ends
 				}
 				player.sexReward("cum","Vaginal");
 				player.sexReward("cum","Anal");

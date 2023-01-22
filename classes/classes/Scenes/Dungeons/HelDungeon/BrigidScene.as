@@ -62,7 +62,7 @@ public class BrigidScene extends BaseContent
 					addButton(1, "No", vagF);
 				}
 				else {
-					if (player.gender <= 1 || player.pregnancyIncubation > 0) dickF();
+					if (player.gender <= 1 || !player.canGetPregnant()) dickF();
 					else vagF();
 				}
 				//=================================
@@ -82,7 +82,7 @@ public class BrigidScene extends BaseContent
 					//[(if F or U)
 					if (!player.hasCock()) {
 						outputText("\n\nYour eyes widen in shock at the sensation, and Kiri flinches at your expression.  \"<i>What,</i>\" Brigid asks, glowering at you, \"<i>did you think we'd let you go after what you did, just because we couldn't breed you?");
-						if (player.pregnancyIncubation > 0) outputText("  Once this disgusting thing you're carrying falls out of you, we'll use you more traditionally, but...</i>\"  She pauses to press uncomfortably on your pregnant belly, then resumes speaking.  \"<i>I have no intention of letting you sit idle for however long that takes.");
+						if (player.isPregnant()) outputText("  Once this disgusting thing you're carrying falls out of you, we'll use you more traditionally, but...</i>\"  She pauses to press uncomfortably on your pregnant belly, then resumes speaking.  \"<i>I have no intention of letting you sit idle for however long that takes.");
 						outputText("  For now, I've given you the most obvious modification - I can think of something else later.</i>\"");
 						outputText("\n\nShe squeezes Kiri's ass firmly with one hand, and lifts the girl partway out of your lap.  A smooth, hot sensation separates from your crotch and glides along nerves you hadn't noticed until now as Kiri's pussy slides upward, partially revealing the erect, [color] flesh of a brand-new cock!  Brigid gloats at your confusion, laughing her delight to the roof of the chamber, then shoves Kiri's ass downward again, spearing her pussy on your new flesh and making the girl wince and grit her teeth.");
 						player.createCock();

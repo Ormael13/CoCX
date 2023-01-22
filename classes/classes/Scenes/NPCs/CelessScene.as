@@ -312,6 +312,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			outputText("You suddenly lose all strength from the waist down, forcing you to lay down on the moss as you go into labor. Unlike what you know of pregnancy, you don’t feel any pain from this, your daughter leaves your womb without trouble and, somehow, you even get an orgasm out of the deal. \n" +
 				" It starts with the head, then the torso. So far one would think you are giving birth to a human baby, but you know it’s otherwise. A horse body indeed follows suit right after, causing you to orgasm again as white fluids gush out of your happy love canal in a steady flow. She is finally out and starts her life as any and all babies do… with a lengthy and healthy cry!\n" +
 				"You cradle your newborn daughter and bring her to your [breasts], feeling like taking a nap next to your child. First, however, comes an important question.. what will you name her?");
+			player.orgasm("Vaginal");
 			doNext(nameScene);
 		}
 	}
@@ -542,7 +543,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				if (player.hasKeyItem("Nightmare Horns") >= 0) player.removeKeyItem("Nightmare Horns");
 				player.createPerk(PerkLib.UnicornBlessing, 0, 0, 0, 0);
 				player.cor = 0;
-				player.knockUpForce(PregnancyStore.PREGNANCY_CELESS, PregnancyStore.INCUBATION_CELESS);
+				player.knockUp(PregnancyStore.PREGNANCY_CELESS, PregnancyStore.INCUBATION_CELESS, 1, 1);
 				inventory.takeItem(shields.SANCTYN, camp.returnToCampUseOneHour);
 				_age = _ageDidPregnancy;
 				_questFinished = _finishedUnicorn;
@@ -591,7 +592,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 					if (player.hasKeyItem("Nightmare Horns") >= 0) player.removeKeyItem("Nightmare Horns");
 					player.createPerk(PerkLib.UnicornBlessing, 0, 0, 0, 0);
 					player.cor = 0;
-					if (player.pregnancyIncubation == 0) player.knockUpForce(PregnancyStore.PREGNANCY_CELESS, PregnancyStore.INCUBATION_CELESS);
+					if (player.canGetPregnant()) player.knockUp(PregnancyStore.PREGNANCY_CELESS, PregnancyStore.INCUBATION_CELESS, 1, 1);
 					inventory.takeItem(shields.SANCTYN, camp.returnToCampUseOneHour);
 					_age = _ageDidPregnancy;
 					_questFinished = _finishedUnicorn;
@@ -768,7 +769,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		player.createPerk(PerkLib.BicornBlessing, 0, 0, 0, 0);
 		player.cor = 100;
 		player.sexReward("cum", "Vaginal");
-		player.knockUpForce(PregnancyStore.PREGNANCY_CELESS, PregnancyStore.INCUBATION_CELESS);
+		player.knockUp(PregnancyStore.PREGNANCY_CELESS, PregnancyStore.INCUBATION_CELESS, 1, 1);
 		player.addStatusValue(StatusEffects.CanMeetNightmare, 1, 1);
 		cleanupAfterCombat();
 	}

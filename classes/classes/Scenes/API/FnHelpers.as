@@ -185,7 +185,7 @@ public class FnHelpers extends BaseContent {
 
 	public function ifPregnantWith(pregnancyType:int,iftrue:*=1,iffalse:*=0):Function {
 		return function():* {
-			return player.pregnancyIncubation > 1 && player.pregnancyType == pregnancyType ? iftrue : iffalse
+			return ((player.pregnancyIncubation > 1 && player.pregnancyType == pregnancyType) || (player.pregnancy2Incubation > 1 && player.pregnancy2Type == pregnancyType)) ? iftrue : iffalse
 		}
 	}
 }

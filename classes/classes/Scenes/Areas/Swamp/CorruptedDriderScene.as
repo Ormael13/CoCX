@@ -691,7 +691,7 @@ use namespace CoC;
 			//(+ corruption and set lust to 100, slimefeed)
 			//GET KNOCKED UP
 			//Pregnancy Goes Here
-			player.knockUp(PregnancyStore.PREGNANCY_DRIDER_EGGS, PregnancyStore.INCUBATION_DRIDER, 151);
+			player.knockUp(PregnancyStore.PREGNANCY_DRIDER_EGGS, PregnancyStore.INCUBATION_DRIDER, 1, 1);
 			dynStats("lib", 1, "lus=", 100, "cor", 1);
 			player.sexReward("cum","Vaginal");
 			cleanupAfterCombat();

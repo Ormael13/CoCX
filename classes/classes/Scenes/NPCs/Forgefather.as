@@ -264,6 +264,7 @@ public class Forgefather extends NPCAwareContent implements SaveableState	{
 		
 		public function createGargoyleState(): void {
 			player.knockUpForce(); //reset any pregnancies
+			player.knockUpForce(0, 0, 1); //reset any pregnancies
 			player.skin.setBaseOnly({type:Skin.STONE});
 			player.skinColor = "dark gray";
 			player.hairColor = "dark gray";

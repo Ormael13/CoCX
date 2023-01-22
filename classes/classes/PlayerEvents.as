@@ -350,13 +350,14 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 						if (player.statusEffectv1(StatusEffects.WormPlugged) <= 0) { //Remove if too low
 							player.removeStatusEffect(StatusEffects.WormPlugged);
 							player.knockUpForce(); //Clear worm 'pregnancy'
+							player.knockUpForce(0,0,1); //Clear worm 'pregnancy'
 						}
 						needNext = true;
 					}
 				}
 				else { //Non cunts lose worm plugged
 					player.removeStatusEffect(StatusEffects.WormPlugged);
-					player.knockUpForce(); //Clear worm 'pregnancy'
+					player.buttKnockUpForce(); //Clear worm 'pregnancy'
 				}
 			}
 			if (player.hasStatusEffect(StatusEffects.Milked)) { //"Milked"
@@ -382,7 +383,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				else player.addStatusValue(StatusEffects.Dysfunction, 1, -1);
 			}
             //Lactation reduction
-            if (player.biggestLactation() > 0 && !player.hasStatusEffect(StatusEffects.Feeder) && !player.hasPerk(PerkLib.MilkMaid) && player.pregnancyIncubation == 0) {
+            if (player.biggestLactation() > 0 && !player.hasStatusEffect(StatusEffects.Feeder) && !player.hasPerk(PerkLib.MilkMaid) && !player.isPregnant()) {
                 if (!player.hasStatusEffect(StatusEffects.LactationReduction))
                     player.createStatusEffect(StatusEffects.LactationReduction, 0, 0, 0, 0);
                 else {//reduction effect
@@ -2438,6 +2439,9 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			if (player.pregnancyIncubation <= 0 && player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS) { //Fixing Egg Preg Preglocked Glitch
 				player.knockUpForce(); //Clear Pregnancy
 			}
+			if (player.pregnancy2Incubation <= 0 && player.pregnancy2Type == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS) { //Fixing Egg Preg Preglocked Glitch
+				player.knockUpForce(0, 0 ,1); //Clear Pregnancy
+			}
 			if (player.hasStatusEffect(StatusEffects.Uniball) && player.ballSize > 1 && player.hasBalls()) { //Testicles Normalise:
 				outputText("\nYou feel a deep sensation of release around your genitals.  You sigh with relief and contentment as your testicles drop downwards and bloom outwards, heat throbbing within them as they split and form a proper ballsack.\n");
 				player.removeStatusEffect(StatusEffects.Uniball);
@@ -2573,7 +2577,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					player.removePerk(PerkLib.BunnyEggs);
 					needNext = true;
 				}
-                else if (player.pregnancyIncubation < 1 && player.hasVagina() && CoC.instance.model.time.hours == 1) { //Otherwise pregger check, once every morning
+                else if (!player.isPregnant() && player.hasVagina() && CoC.instance.model.time.hours == 1) { //Otherwise pregger check, once every morning
                     if ((player.totalFertility() > 50 && CoC.instance.model.time.days % 15 == 0) || CoC.instance.model.time.days % 30 == 0) { //every 15 days if high fertility get egg preg
                         outputText("\n<b>Somehow you know that eggs have begun to form inside you. You wonder how long it will be before they start to show?</b>\n");
 						player.knockUp(PregnancyStore.PREGNANCY_OVIELIXIR_EGGS, PregnancyStore.INCUBATION_OVIELIXIR_EGGS, 1, 1);

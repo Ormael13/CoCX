@@ -561,7 +561,6 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const PCClone2nd:StatusEffectType            			= mk("PC Clone 2nd");
 		public static const PCClone3rd:StatusEffectType            			= mk("PC Clone 3rd");
 		public static const PCClone4th:StatusEffectType            			= mk("PC Clone 4th");
-		public static const PCDaughters:StatusEffectType            		= mk("PC Daughters");
 		public static const PCDaughtersWorkshop:StatusEffectType            = mk("PC Daughters Workshop");
 		public static const PCDaughtersWorkshopSpareParts:StatusEffectType  = mk("PC Daughters Workshop Spare parts");
 		public static const PlainOnaholeUsed:StatusEffectType               = mk("plain onahole used");
