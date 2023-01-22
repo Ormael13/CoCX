@@ -704,10 +704,10 @@ private function barBeerOrgyTits():void {
 	outputText("\n\nA few more hollers go up from the crowd that's drunk themselves silly on the booze from your tits.  Hands and paws begin grabbing your limbs and tits and carry you aloft.  ");
 	if(player.biggestTitSize() >= 20) outputText("Your giant boobs are large enough to temporarily hang off the sides of your body as you're carried.");
 	outputText("  Your [butt] hits the table first as the crowd puts you down.  Some patrons begin sucking on your nipples directly.");
-	// [IF player has four or more giant tits, but not hugely pregnant]
-	if((player.pregnancyIncubation == 0 || player.pregnancyIncubation > 100) && player.bRows() > 1) outputText("  You are essentially a pile of " + boozeBoobsType() + " filled tits.");
 	// [IF player is hugely pregnant with four or more tits]
-	else if(player.bRows() > 1) outputText("  You are essentially a giant pregnant belly surrounded by your [chest] on the table, helpless to the sexual advances of the bar goers and you can't get enough of it.");
+	if((!player.hasVeryVisiblePregnancy()) && player.bRows() > 1) outputText("  You are essentially a giant pregnant belly surrounded by your [chest] on the table, helpless to the sexual advances of the bar goers and you can't get enough of it.");
+	// [IF player has four or more giant tits, but not hugely pregnant]
+	else if(player.bRows() > 1) outputText("  You are essentially a pile of " + boozeBoobsType() + " filled tits.");
 
 	//===============
 	//Third Paragraph
@@ -715,7 +715,7 @@ private function barBeerOrgyTits():void {
 	//IF player has pussy and Urta is in the bar and sex with her is unlocked.
 	if(model.time.hours < 15 && flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] > 0 && player.hasVagina()) {
 		outputText("\n\nA pair of familiar paws grab your ankles and spread your legs wide.  Your labia practically spurt out girl cum in anticipation of what's about to happen.  \"<i>Oh, looks like someone's overly eager.</i>\"  You struggle to look over the mounds of your own tits to see who's standing between your legs.  The familiar sight of an oversized horse-cock waving in the air catches your attention shortly before the grinning smile of Urta comes into view.  \"<i>My, aren't you going to get reamed, lover.</i>\"  No sooner than she says that does the flared head of her cock plunges with a wet squish between your nether lips.  You feel her stretching your entrance apart as her massive horse meat bores into your body.  Blissful screams of pleasure are heard and it isn't until the head of Urta's cock breaks into your womb that you realize it's you that's screaming in ecstasy.");
-		if(player.pregnancyIncubation == 0) outputText("  Some folks give yelps and cheers when they see the bulge that repeatedly forms in your abdomen each time Urta thrusts herself inside you.");
+		if(player.canGetPregnant()) outputText("  Some folks give yelps and cheers when they see the bulge that repeatedly forms in your abdomen each time Urta thrusts herself inside you.");
 		player.cuntChange(60,true,true,false);
 	}
 	//ELSE IF player has pussy and Urta is not in the bar.
@@ -733,7 +733,7 @@ private function barBeerOrgyTits():void {
 	================*/
 	outputText("\n\nNiamh crawls up and on to the table, moving to position her hips over your head while leaning over the rest of your torso.  It's obvious that she either removed her undergarments, or wasn't wearing any in the first place.  Her bare pussy is now hovering just inches from your face.");
 	// IF [Player has a large pregnancy]
-	if(player.pregnancyIncubation > 0 && player.pregnancyIncubation < 100) outputText("  \"<i>Oi!  Careful folks, this babe could blow at any time!</i>\"  Niamh pats your belly with chiding affection.");
+	if(player.hasVeryVisiblePregnancy()) outputText("  \"<i>Oi!  Careful folks, this babe could blow at any time!</i>\"  Niamh pats your belly with chiding affection.");
 	// IF [Player has a single cock]
 	if(player.cockTotal() == 1) outputText("\n\n\"<i>Mmmmm, now that be what me wants.</i>\"  Niamh settles down, pressing her womanhood over your mouth.  Through some lustful instinct your tongue begins licking her folds, seeking for an entrance into the busty cat girl's depths.  Her own rough tongue begins slurping up the sides of your erection.");
 	// ELSE IF [Player has multiple cocks]
@@ -766,7 +766,7 @@ private function barBeerOrgyTits():void {
 		else outputText("their ");
 		outputText("jizz.  Niamh swallows it down her throat but not without some of it getting plastered across her face.");
 		//IF [character is pregnant]
-		if(player.pregnancyIncubation > 0 && player.pregnancyIncubation < 200) outputText("  Globs of cum splatter across your gravid belly.");
+		if(player.hasVisiblePregnancy()) outputText("  Globs of cum splatter across your gravid belly.");
 	}
 
 	//================
@@ -783,7 +783,7 @@ private function barBeerOrgyTits():void {
 		else if(player.cockTotal() > 1) outputText("  The heads of your cocks press in between Edryn's labia causing her to cry out, \"<i>Oh gawd!  How many dicks are y-you f-f-fucking meeee with???</i>\"  Edryn's orgasm cuts her voice off and every muscle in her cunt contracts around your [cocks].");
 		outputText("\n\nAs Edryn's cunt literally sucks you in deeper you feel Urta move up behind you.  As her horse-cock pokes against your pussy lips you realize just before the first thrust what is about to happen.  Tel'Adre's finest guard rams her massive member inside you, making you the center of a fuck sandwich.");
 		// IF[player is pregnant]
-		if(player.pregnancyIncubation > 0 && player.pregnancyIncubation < 200) outputText("  Your pregnant belly presses up against Edryn's ass as both Urta's cock and Edryn's pussy keeps you pinned in place between them.");
+		if(player.hasVisiblePregnancy()) outputText("  Your pregnant belly presses up against Edryn's ass as both Urta's cock and Edryn's pussy keeps you pinned in place between them.");
 		// IF[player is not pregnant]
 		else outputText("  Urta's cock and Edryn's pussy pin you in place between them, and as Urta fucks you deeper her cock head forces your belly to bulge outwards until it presses against Edryn's ass.");
 
@@ -811,7 +811,7 @@ private function barBeerOrgyTits():void {
 	else if(player.hasVagina() && model.time.hours < 15 && flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] > 0) {
 		outputText("\n\nYou hear passionate cries of lustful need from Urta as her horse-cock reams you with greater ferocity.  Her orgasm nearly knocks her off her feet as her shaft swells wider, stretching you apart as the cum surges up through it.");
 		// IF [player is not pregnant]
-		if(player.pregnancyIncubation == 0) outputText("  The eruption of cum from her horsecock out does every other ejaculating dick in the room.  Your belly button pops outward as your stomach swells from the surging torrent of sperm pumping directly into your womb.  The hands of strangers grab your legs to keep you pinned in place while Urta struggles to keep her gushing cock inside your cunt despite the building pressure.  A couple voices call out, \"<i>She's gonna pop!  Is she gonna pop?  I think she is!</i>\"  Niamh is forced to sit up higher as your cum bloated belly pushes up against her.  Urta looks as if she's having a seizure from the sheer effort of unloading herself into you.  You scream out loud from the ecstasy of swelling but your cries of pleasure are lost within Niamh's pussy folds, urging her to come again.  Her girl cum squirts down your throat, making your belly feel all the more tight and fit to burst.");
+		if(player.canGetPregnant()) outputText("  The eruption of cum from her horsecock out does every other ejaculating dick in the room.  Your belly button pops outward as your stomach swells from the surging torrent of sperm pumping directly into your womb.  The hands of strangers grab your legs to keep you pinned in place while Urta struggles to keep her gushing cock inside your cunt despite the building pressure.  A couple voices call out, \"<i>She's gonna pop!  Is she gonna pop?  I think she is!</i>\"  Niamh is forced to sit up higher as your cum bloated belly pushes up against her.  Urta looks as if she's having a seizure from the sheer effort of unloading herself into you.  You scream out loud from the ecstasy of swelling but your cries of pleasure are lost within Niamh's pussy folds, urging her to come again.  Her girl cum squirts down your throat, making your belly feel all the more tight and fit to burst.");
 		// ELSE IF [player is pregnant]
 		else outputText("  Urta feels as if she's going to tear you apart as the surging torrent of her horse cum shoots through the shaft of her cock.  She pulls it out just in time to plaster your abused pussy and the underside of your pregnant belly with her seed.  Ropes of cum spray across your thighs, belly, the undersides of your tits, and all over Niamh's chest and face.  \"<i>Oi!  Oh yes!</i>\"  Niamh calls out happily as Urta drowns the two of you in sperm.  Squirts of pussy juice pour down your throat and Niamh climaxes just from the sensation of being coated in Urta's hot jizz.");
 
@@ -819,7 +819,7 @@ private function barBeerOrgyTits():void {
 		//IF [Player has four or more breasts]
 		if(player.bRows() > 1) outputText("  Your rows of breasts shift around as your posture changes, making squelching sounds as they slide around.");
 		//If [player not pregnant]
-		if(player.pregnancyIncubation == 0) outputText("  Urta's small ocean of sperm streams out from your pussy like a river down your legs as you try to stand.");
+		if(player.canGetPregnant()) outputText("  Urta's small ocean of sperm streams out from your pussy like a river down your legs as you try to stand.");
 
 		outputText("\n\nWhen you're finally on your feet all the cum covering your body and filling your cleavage begins dripping down and pooling around your feet.  Milk is dripping from your nipples, signaling that the effects of Niamh's beer have finally worn off.  \"<i>Oi lass, I think ye be needin' a dip in a river.  Pity ye in a desert eh?</i>\"  She grins.  Still half drunk off booze and sex you haphazardly gather your things.  Urta graciously helps you out of the bar and through the streets of Tel'Adre until you've gathered your senses enough to find your way back to camp.  Your breasts ache from the pleasant ordeal, each one feeling fuller and larger than it was before this all began.");
 		player.growTits(2, player.bRows(), false, 2);
@@ -861,7 +861,7 @@ private function barBeerOrgyTits():void {
 			player.sexReward("cum","Vaginal");
 			outputText("  You walk slightly bow legged out of the bar.  Cum is still dripping from your snatch and will likely continue to do so for a while.");
 			//IF [player is not pregnant]
-			if(player.pregnancyType == 0) outputText("  You can't help but wonder how virile those dog morphs might have been as their cum and the cum of other customers sloshes around inside your uterus.");
+			if(player.canGetPregnant()) outputText("  You can't help but wonder how virile those dog morphs might have been as their cum and the cum of other customers sloshes around inside your uterus.");
 			switch(rand(6)) {
 				case 0:
 					if (player.hasUniquePregnancy()) player.impregnationRacialCheck();

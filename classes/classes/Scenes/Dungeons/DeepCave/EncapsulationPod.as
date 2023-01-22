@@ -69,7 +69,7 @@ import classes.internals.*;
 				outputText("One 'lucky' stalk manages to find your " + Appearance.assholeDescript(player) + ".  As soon as it touches your rear 'entrance', it lunges forward to penetrate you.  The fluids coating the tentacle make your muscles relax, allowing it to slide inside you with ease.\n\n");
 				
 				outputText("The rest of the mass continues to crawl up you.  They tickle at your ");
-				if(player.pregnancyIncubation > 0 && player.pregnancyIncubation < 120) outputText("pregnant ");
+				if(player.hasVeryVisiblePregnancy()) outputText("pregnant ");
 				outputText("belly as they get closer and closer to ");
 				if(player.biggestTitSize() < 1) outputText("your chest");
 				else outputText("the underside of your " + allBreastsDescript());

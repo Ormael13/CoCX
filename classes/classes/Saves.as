@@ -948,6 +948,8 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		//Preggo stuff
 		saveFile.data.pregnancyIncubation = player.pregnancyIncubation;
 		saveFile.data.pregnancyType = player.pregnancyType;
+		saveFile.data.pregnancy2Incubation = player.pregnancy2Incubation;
+		saveFile.data.pregnancy2Type = player.pregnancy2Type;
 		saveFile.data.buttPregnancyIncubation = player.buttPregnancyIncubation;
 		saveFile.data.buttPregnancyType = player.buttPregnancyType;
 
@@ -1621,64 +1623,6 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		player.soulforce = saveFile.data.soulforce;
 		player.wrath = saveFile.data.wrath;
 
-		//CLOTHING/ARMOR
-		
-		function loadEquipment(slot:int, clazz:Class, savedId:String, savedName:String, defaultValue:Equipable):Boolean {
-			var itype:ItemType;
-			if (savedId) {
-				itype = ItemType.lookupItem(savedId);
-				if (itype && itype is clazz) {
-					player.internalEquipItem(slot, itype as Equipable, false, true);
-					return true;
-				}
-			}
-			if (savedName) {
-				for each (itype in ItemType.getItemLibrary()) {
-					if (itype is clazz && (itype as Equipable).name == savedName) {
-						player.internalEquipItem(slot, itype as Equipable, false, true);
-						return true;
-					}
-				}
-			}
-			player.internalEquipItem(slot, defaultValue, false, true);
-			return false;
-		}
-		
-		var found:Boolean;
-		var itype:ItemType;
-		loadEquipment(ItemConstants.SLOT_WEAPON_MELEE, Weapon, saveFile.data.weaponId, saveFile.data.weaponName, WeaponLib.FISTS);
-		loadEquipment(ItemConstants.SLOT_WEAPON_RANGED, WeaponRange, saveFile.data.weaponRangeId, saveFile.data.weaponRangeName, WeaponRangeLib.NOTHING);
-		loadEquipment(ItemConstants.SLOT_FLYING_SWORD, FlyingSwords, saveFile.data.weaponFlyingSwordsId, saveFile.data.weaponFlyingSwordsName, FlyingSwordsLib.NOTHING);
-		loadEquipment(ItemConstants.SLOT_SHIELD, Shield, saveFile.data.shieldId,  saveFile.data.shieldName, ShieldLib.NOTHING);
-		loadEquipment(ItemConstants.SLOT_JEWELRY_MISC_1, MiscJewelry, saveFile.data.miscJewelryId,  saveFile.data.miscjewelryName, MiscJewelryLib.NOTHING);
-		loadEquipment(ItemConstants.SLOT_JEWELRY_MISC_2, MiscJewelry, saveFile.data.miscJewelryId2,  saveFile.data.miscjewelryName2, MiscJewelryLib.NOTHING);
-		loadEquipment(ItemConstants.SLOT_HEAD, HeadJewelry, saveFile.data.headJewelryId, saveFile.data.headjewelryName, HeadJewelryLib.NOTHING);
-		loadEquipment(ItemConstants.SLOT_NECK, Necklace, saveFile.data.necklaceId, saveFile.data.necklaceName, NecklaceLib.NOTHING);
-		loadEquipment(ItemConstants.SLOT_RING_1, Jewelry, saveFile.data.jewelryId, saveFile.data.jewelryName, JewelryLib.NOTHING);
-		loadEquipment(ItemConstants.SLOT_RING_2, Jewelry, saveFile.data.jewelryId2, saveFile.data.jewelryName2, JewelryLib.NOTHING);
-		loadEquipment(ItemConstants.SLOT_RING_3, Jewelry, saveFile.data.jewelryId3, saveFile.data.jewelryName3, JewelryLib.NOTHING);
-		loadEquipment(ItemConstants.SLOT_RING_4, Jewelry, saveFile.data.jewelryId4, saveFile.data.jewelryName4, JewelryLib.NOTHING);
-		loadEquipment(ItemConstants.SLOT_VEHICLE, Vehicles, saveFile.data.vehiclesId, saveFile.data.vehiclesName, VehiclesLib.NOTHING);
-		loadEquipment(ItemConstants.SLOT_UNDER_TOP, Undergarment, saveFile.data.upperGarmentId, saveFile.data.upperGarmentName,UndergarmentLib.NOTHING);
-		loadEquipment(ItemConstants.SLOT_UNDER_BOTTOM, Undergarment, saveFile.data.lowerGarmentId, saveFile.data.lowerGarmentName, UndergarmentLib.NOTHING);
-		found = loadEquipment(ItemConstants.SLOT_ARMOR, Armor, saveFile.data.armorId, saveFile.data.armorName, ArmorLib.COMFORTABLE_UNDERCLOTHES);
-		if (!found){
-			for each (itype in ItemType.getItemLibrary()){
-				if (itype is Armor){
-					var a:Armor = itype as Armor;
-					if (a.value == saveFile.data.armorValue &&
-							a.def == saveFile.data.armorDef &&
-							a.perk == saveFile.data.armorPerk){
-						player.setArmor(a,false,true);
-						//player.armor = a;
-						player.modArmorName = saveFile.data.armorName;
-						found = true;
-						break;
-					}
-				}
-			}
-		}
-
 		//Combat STATS
 		player.HP = saveFile.data.HP;
 		player.lust = saveFile.data.lust;
@@ -1907,6 +1851,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 
 		//Preggo stuff
 		player.knockUpForce(saveFile.data.pregnancyType, saveFile.data.pregnancyIncubation);
+		player.knockUpForce(saveFile.data.pregnancy2Type, saveFile.data.pregnancy2Incubation, 1);
 		player.buttKnockUpForce(saveFile.data.buttPregnancyType, saveFile.data.buttPregnancyIncubation);
 
 		var hasViridianCockSock:Boolean = false;
@@ -2033,6 +1978,64 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 
 		// Force the creation of the default breast row onto the player if it's no longer present
 		if (player.breastRows.length == 0) player.createBreastRow();
+
+		//CLOTHING/ARMOR
+
+		function loadEquipment(slot:int, clazz:Class, savedId:String, savedName:String, defaultValue:Equipable):Boolean {
+			var itype:ItemType;
+			if (savedId) {
+				itype = ItemType.lookupItem(savedId);
+				if (itype && itype is clazz) {
+					player.internalEquipItem(slot, itype as Equipable, false, true);
+					return true;
+				}
+			}
+			if (savedName) {
+				for each (itype in ItemType.getItemLibrary()) {
+					if (itype is clazz && (itype as Equipable).name == savedName) {
+						player.internalEquipItem(slot, itype as Equipable, false, true);
+						return true;
+					}
+				}
+			}
+			player.internalEquipItem(slot, defaultValue, false, true);
+			return false;
+		}
+
+		var found:Boolean;
+		var itype:ItemType;
+		loadEquipment(ItemConstants.SLOT_WEAPON_MELEE, Weapon, saveFile.data.weaponId, saveFile.data.weaponName, WeaponLib.FISTS);
+		loadEquipment(ItemConstants.SLOT_WEAPON_RANGED, WeaponRange, saveFile.data.weaponRangeId, saveFile.data.weaponRangeName, WeaponRangeLib.NOTHING);
+		loadEquipment(ItemConstants.SLOT_FLYING_SWORD, FlyingSwords, saveFile.data.weaponFlyingSwordsId, saveFile.data.weaponFlyingSwordsName, FlyingSwordsLib.NOTHING);
+		loadEquipment(ItemConstants.SLOT_SHIELD, Shield, saveFile.data.shieldId,  saveFile.data.shieldName, ShieldLib.NOTHING);
+		loadEquipment(ItemConstants.SLOT_JEWELRY_MISC_1, MiscJewelry, saveFile.data.miscJewelryId,  saveFile.data.miscjewelryName, MiscJewelryLib.NOTHING);
+		loadEquipment(ItemConstants.SLOT_JEWELRY_MISC_2, MiscJewelry, saveFile.data.miscJewelryId2,  saveFile.data.miscjewelryName2, MiscJewelryLib.NOTHING);
+		loadEquipment(ItemConstants.SLOT_HEAD, HeadJewelry, saveFile.data.headJewelryId, saveFile.data.headjewelryName, HeadJewelryLib.NOTHING);
+		loadEquipment(ItemConstants.SLOT_NECK, Necklace, saveFile.data.necklaceId, saveFile.data.necklaceName, NecklaceLib.NOTHING);
+		loadEquipment(ItemConstants.SLOT_RING_1, Jewelry, saveFile.data.jewelryId, saveFile.data.jewelryName, JewelryLib.NOTHING);
+		loadEquipment(ItemConstants.SLOT_RING_2, Jewelry, saveFile.data.jewelryId2, saveFile.data.jewelryName2, JewelryLib.NOTHING);
+		loadEquipment(ItemConstants.SLOT_RING_3, Jewelry, saveFile.data.jewelryId3, saveFile.data.jewelryName3, JewelryLib.NOTHING);
+		loadEquipment(ItemConstants.SLOT_RING_4, Jewelry, saveFile.data.jewelryId4, saveFile.data.jewelryName4, JewelryLib.NOTHING);
+		loadEquipment(ItemConstants.SLOT_VEHICLE, Vehicles, saveFile.data.vehiclesId, saveFile.data.vehiclesName, VehiclesLib.NOTHING);
+		loadEquipment(ItemConstants.SLOT_UNDER_TOP, Undergarment, saveFile.data.upperGarmentId, saveFile.data.upperGarmentName,UndergarmentLib.NOTHING);
+		loadEquipment(ItemConstants.SLOT_UNDER_BOTTOM, Undergarment, saveFile.data.lowerGarmentId, saveFile.data.lowerGarmentName, UndergarmentLib.NOTHING);
+		found = loadEquipment(ItemConstants.SLOT_ARMOR, Armor, saveFile.data.armorId, saveFile.data.armorName, ArmorLib.COMFORTABLE_UNDERCLOTHES);
+		if (!found){
+			for each (itype in ItemType.getItemLibrary()){
+				if (itype is Armor){
+					var a:Armor = itype as Armor;
+					if (a.value == saveFile.data.armorValue &&
+							a.def == saveFile.data.armorDef &&
+							a.perk == saveFile.data.armorPerk){
+						player.setArmor(a,false,true);
+						//player.armor = a;
+						player.modArmorName = saveFile.data.armorName;
+						found = true;
+						break;
+					}
+				}
+			}
+		}
 
 		var hasHistoryPerk:Boolean = false;
 		var hasLustyRegenPerk:Boolean = false;

@@ -261,6 +261,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const AndysSmoke:StatusEffectType                     = mk("Andy's Smoke"); //v1: Hours; v2: Speed; v3: Intelligence
 		public static const AteEgg:StatusEffectType                         = mk("ateEgg");
 		public static const AnemoneArousal:StatusEffectType                 = mk("Anemone Arousal");
+		public static const ArcaneCircle:StatusEffectType               	= mk("Arcane Circle");
 		public static const BimboChampagne:StatusEffectType                 = mk("Bimbo Champagne");
 		public static const Birthed:StatusEffectType                        = mk("Birthed");
 		public static const BirthedImps:StatusEffectType                    = mk("Birthed Imps");
@@ -539,9 +540,10 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const MarblesMilk:StatusEffectType                    = mk("Marbles Milk");
 		public static const MarbleSpecials:StatusEffectType                 = mk("MarbleSpecials");
 		public static const MarbleWithdrawl:StatusEffectType                = mk("MarbleWithdrawl");
-		public static const Meditated:StatusEffectType                      = mk("Meditated"); // DEPRECATED
 		public static const MeanToNaga:StatusEffectType                     = mk("MeanToNaga");
+		public static const Meditated:StatusEffectType                      = mk("Meditated"); // DEPRECATED
 		public static const MeetWanderer:StatusEffectType                   = mk("meet wanderer");
+		public static const MergedPerksCount:StatusEffectType               = mk("MergedPerksCount");
 		public static const MetRathazul:StatusEffectType                    = mk("metRathazul");
 		public static const MetWorms:StatusEffectType                       = mk("metWorms");
 		public static const MetWhitney:StatusEffectType                     = mk("Met Whitney");
@@ -562,7 +564,6 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const PCClone2nd:StatusEffectType            			= mk("PC Clone 2nd");
 		public static const PCClone3rd:StatusEffectType            			= mk("PC Clone 3rd");
 		public static const PCClone4th:StatusEffectType            			= mk("PC Clone 4th");
-		public static const PCDaughters:StatusEffectType            		= mk("PC Daughters");
 		public static const PCDaughtersWorkshop:StatusEffectType            = mk("PC Daughters Workshop");
 		public static const PCDaughtersWorkshopSpareParts:StatusEffectType  = mk("PC Daughters Workshop Spare parts");
 		public static const PlainOnaholeUsed:StatusEffectType               = mk("plain onahole used");
@@ -1244,4 +1245,4 @@ import classes.StatusEffects.VampireThirstEffect;
 			return new StatusEffectType(id,CombatStatusEffect,1);
 		}
 	}
-}
+}

@@ -316,7 +316,7 @@ only corrupt siren daughters that the PC themselves father or birth stay at the 
             + "It doesn’t take you long to spot Minerva’s harpies, though it seems she has captured more and added them to her harem since you were last here. The half-bird females have been chained to the floor, with their wings bound together so they can’t fly away, even if they do escape their chains. From the looks on their faces they are drugged out of their minds, It’s most likely that being corrupted has further enhanced the drug-like effects of Minerva’s new cum.\n"
             + "\n");
         //preg talks override everything
-        if (player.pregnancyType == PregnancyStore.PREGNANCY_MINERVA) encTextBothPreg();
+        if (player.pregnancyType == PregnancyStore.PREGNANCY_MINERVA || player.pregnancy2Type == PregnancyStore.PREGNANCY_MINERVA) encTextBothPreg();
         else if (player.isPregnant()) encTextPlayerPreg();
         else if (minervaScene.pregnancy.isPregnant) encTextMinervaPreg();
         else if (kidsCount > 0) randomChoice(encTextHarpySex, encTextBath, encTextBabies)();
@@ -388,13 +388,13 @@ only corrupt siren daughters that the PC themselves father or birth stay at the 
                 + "“<i>Well, well, my strong fertile lover has returned to me. Your new daughter is growing well inside me. Won't be long until it's time for me to give birth.</i>“ she notes before getting up. She makes a show of stretching to her full height so you can clearly see the heavy bulge in her tummy, the sign of your offspring growing inside her. Approaching her, you stroke her belly and even plant a kiss on it, Looking at the corrupted & pregnant woman’s reaction you see her looking a little surprised, but soon a jagged grin slides onto her face. “<i>She is going to grow up quickly when she is born. I'm sure she will enjoy ‘getting to know’ her father.</i>“ The siren broodmother says with a perverted snicker, before stroking your cheek and licking her lips.\n"
                 + "\n"
                 + "“<i>Now, did you just come to visit me or was there something you're after?");
-            if (player.hasVagina() && !player.isPregnant())  outputText(" Perhaps you want a belly to match mine? Is that it? You want your Minerva to knock you up with a beautiful siren baby?");
+            if (player.hasVagina() && player.canGetPregnant())  outputText(" Perhaps you want a belly to match mine? Is that it? You want your Minerva to knock you up with a beautiful siren baby?");
             outputText("</i>“");
         }
 
         //PC pregnant with Minerva’s baby
         function encTextPlayerPreg():void {
-            if (player.pregnancyType == PregnancyStore.PREGNANCY_MINERVA) outputText("As you enter the tower, you scan around, looking for the corrupted siren. One of your hands stroking your swollen belly gently, you know you're carrying Minerva’s corrupted progeny inside you. You don't have to wait long, The proud-looking siren quickly spots you and approaches eagerly, sweeping up to you and placing a hand on your belly, stroking it tenderly. Despite being so corrupted, Minerva is still, in her way, a loving mother... or loving father, in this case.\n"
+            if (player.pregnancyType == PregnancyStore.PREGNANCY_MINERVA || player.pregnancy2Type == PregnancyStore.PREGNANCY_MINERVA) outputText("As you enter the tower, you scan around, looking for the corrupted siren. One of your hands stroking your swollen belly gently, you know you're carrying Minerva’s corrupted progeny inside you. You don't have to wait long, The proud-looking siren quickly spots you and approaches eagerly, sweeping up to you and placing a hand on your belly, stroking it tenderly. Despite being so corrupted, Minerva is still, in her way, a loving mother... or loving father, in this case.\n"
                 + "\n"
                 + "“<i>You know you look so good with a bellyful of my babies. How does it feel, to know you’re going to birth such a corrupted daughter, sired by such a fertile and powerful being.</i>“ she says as she strokes your stomach. “<i>Make sure you come back after she is born. I would be eager to knock you up with another.</i>“ she says. Her tone is playful, but you know she is completely serious.\n"
                 + "\n"
@@ -463,6 +463,8 @@ only corrupt siren daughters that the PC themselves father or birth stay at the 
         minervaScene.pregnancy.knockUpForce();
         if (player.pregnancyType == PregnancyStore.PREGNANCY_MINERVA)
             player.knockUpForce();
+        if (player.pregnancy2Type == PregnancyStore.PREGNANCY_MINERVA)
+            player.knockUpForce(0, 0, 1);
         playerMenu();
     }
 
@@ -1088,7 +1090,7 @@ only corrupt siren daughters that the PC themselves father or birth stay at the 
             doNext(corruptWinFuckHer);
         }
         else if (player.isFemale()) {
-            if (!player.isPregnant()) outputText("Spreading her thick fertile thighs apart Minerva’s reaches down  and takes hold of her fat twin shafts, slowly stroking them as she looks up at you. “<i>Do you like them? the finest of siren cocks so hard and ready for you. Would my lover grant me the honor of fertilizing you with my strong siren seed. Our daughters would be so strong, so beautiful and virile.</i>“ the corrupted herm says as she strokes herself and puts her body on display for you, as she strokes thick syrupy blobs of thick musky precum drip from her tips, a testament to her potent fertility. The siren broodmother is strong, her seed very potent, she would make a fine breeding partner for you. “<i>Just imagine how wonderful our daughters would be, how much fun it will be to play with them or even bless them with the honor of getting to have sex with you, their strong fierce mother.</i>“ With such a potent breeder so ready for you and telling you about your future daughters how can you say no to such an invitation?");
+            if (!player.canGetPregnant()) outputText("Spreading her thick fertile thighs apart Minerva’s reaches down  and takes hold of her fat twin shafts, slowly stroking them as she looks up at you. “<i>Do you like them? the finest of siren cocks so hard and ready for you. Would my lover grant me the honor of fertilizing you with my strong siren seed. Our daughters would be so strong, so beautiful and virile.</i>“ the corrupted herm says as she strokes herself and puts her body on display for you, as she strokes thick syrupy blobs of thick musky precum drip from her tips, a testament to her potent fertility. The siren broodmother is strong, her seed very potent, she would make a fine breeding partner for you. “<i>Just imagine how wonderful our daughters would be, how much fun it will be to play with them or even bless them with the honor of getting to have sex with you, their strong fierce mother.</i>“ With such a potent breeder so ready for you and telling you about your future daughters how can you say no to such an invitation?");
             else outputText("Spreading her thick fertile thighs apart Minerva’s reaches down  and takes hold of her fat twin shafts, slowly stroking them as she looks up at you. “<i>Do you like them? The finest of siren cocks so hard and ready for you.  I know you have blessed another with the honor of fertilizing you, I will pleasure you like no other can, I’ll fill your body with such arousal and give you all the pleasure you could ask for.</i>“ the needy siren says as she strokes her twin spires of iron hard breeding flesh, as she strokes thick syrupy blombs of thick musky precum drip from her tips, a testament to her potent fertility. The siren broodmother is strong, her seed very potent, she would make a fine breeding partner for you. “<i>Perhaps next time, you will allow me the honor of fertilizing you and giving you a beautiful siren daughter to play with as well.</i>“ With such a ready and eager lover so on display for you, how could you say no? Even if she can't knock you up this time you could still get the ride of a lifetime from her.");
             doNext(corruptWinRideHer);
         } else if (player.isHerm()) {
@@ -1168,7 +1170,7 @@ only corrupt siren daughters that the PC themselves father or birth stay at the 
         outputText("Smirking, you stride over to the posing siren, her huge twin shafts standing proudly on display for you, her hands stroking the thick pillars of breeding meat to tempt you. Standing before the horny herm you reach down and grab ahold of one of her throbbing dicks, drawing a moan from Minerva as you squeeze the bloated head. Looking down at her, you grin and tease your broodmother with your touches, your hand slowly stroking before you decide to rub your victory in a little. “<i>now why would I let you stick those in me if I’m the one who beat you? now if lost I can see you doing whatever you wanted to me, but you didn't, so why don't you give me a reason to give you the honor of stuffing those big pre-slicked dicks up into my body.</i>“ you ask playfully just to egg the herm on a little.\n"
             + "\n"
             + "Looking up at you with eyes full of want she pushes her hips up, her hands stroking her twin dicks slowly and forcing thick globs of musky pre from their tips for you to smell. “<i>For one so strong, I'll give you all the pleasure you want, I'll stuff both your holes so full, I'll fill your body with my aphrodisiac and give you the ride of your life.</i>“ she says before licking her lips, you can feel the dicks throb with every beat of her powerful heart, the thick tentacles that line the bloated purple heads curling around your fingers, though not yet stinging you. “<i>I will show you pleasure that only a siren can show, and I am the greatest siren.");
-        if (!player.isPregnant()) outputText(" My seed is strong, so virile and potent we would have very strong daughters, so beautiful and fierce, just like their mother.");
+        if (player.canGetPregnant()) outputText(" My seed is strong, so virile and potent we would have very strong daughters, so beautiful and fierce, just like their mother.");
         outputText("</i>“\n"
             + "\n"
             + "Looking down at the siren you chuckle, the siren is a strong opponent, and judging from how the harpies are almost constantly pregnant with her sirens that her seed is indeed as powerful as she totes. The offer of mind-blowing pleasure and arousal does sound tempting as well. Giving her twin spires a squeeze you let go, your hands soaked with her musky pre, the heady scent of her cock nectar, stirring a deep heat in your loins, clearly the fluid is packed with pheromones as well, truly only a being meant to breed and impregnate many mates would be so equipped.\n"
@@ -1310,11 +1312,11 @@ only corrupt siren daughters that the PC themselves father or birth stay at the 
             + "Gripping your body harder, pining your chest against the ground so that each hard pistoning violation of your body grinds your rock hard nipples against the ground, the sensation only increasing the deep pleasure coursing through you and fueling the continuous aching orgasm. Though you're too dazed and consumed by your lusts to notice Minerva’s grunting and moans grows louder, her own climatic detonation growing closer and closer, the constant spasming and squeezing of your orgasming holes. The corrupted broodmother’s sloshing sack so swollen with the prospect of filling a female in hopes of impregnating you making her churn out more and more seed, the heavy swinging scrotum swollen even larger than their normal soccerball size\n"
             + "\n"
             + "Finally after a long hard fucking Minerva’s climax has come, her hands keeping you pinned under her as she grips you tightly just to make sure you can't escape her. The sirens powerful thighs ramming her twin breeding spires right to the hilt inside your body, embedding themselves so deep in your bowles and right up into your womb. Her eyes rolling up into her head as she long prehensile tongue lolls out of her mouth when her climax finally hits her, that massive pair of seed swollen balls pulling up against Minerva’s body as she blows a truly enormous load into your poor abused body. Her cocks bulging and swelling with each huge gush of copiously thick cream of pumped into your womb and ass, your belly being forced to swell almost instantly under the flow.");
-        if (!player.isPregnant()) outputText(" With so much being crammed into your womb you’re sure this much corrupted seed could knock up even the most infertile of women.");
+        if (player.canGetPregnant()) outputText(" With so much being crammed into your womb you’re sure this much corrupted seed could knock up even the most infertile of women.");
         outputText("\n"
             + "\n"
             + "More and more floods your body, bloating your stomach until you look ready to birth triplets, Minerva’s unstoppable orgasm seeming to last forever as more and more pours from her swollen nuts till you swear you could taste it in your mouth before it finally slows and stops. keeping you pinned under her for a moment longer before gently petting your sweat dampened hair. “<i>There we go... good and stuffed full of siren cum just as a fertile female should be.");
-        if (!player.isPregnant()) outputText("Be sure to get good and pregnant for me now, give Minerva a beautiful seductive siren daughter to add to my family.");
+        if (player.canGetPregnant()) outputText("Be sure to get good and pregnant for me now, give Minerva a beautiful seductive siren daughter to add to my family.");
         outputText("</i>“ She says as she pets you, treating you little better than as if you were one of her harpies.\n"
             + "\n"
             + "After a further moment of staying together, Minerva pulls up and off you, pulling her twin dicks from your body and letting her seed gush out in thick globules, your cunt and ass so thoroughly stuffed you're going to be leaking her seed for hours.\n"
@@ -1411,9 +1413,9 @@ only corrupt siren daughters that the PC themselves father or birth stay at the 
         doNext(camp.returnToCampUseOneHour);
     }
 
-    public function corruptPlayerBirth():void {
+    public function corruptPlayerBirth(womb:int = 0):void {
         minervaScene.minervaSprite();
-        player.cuntChange(40, true, false, true);
+        player.cuntChange(40, true, false, true, womb);
         outputText("<b>You're birthing Minerva's siren kid! No scene written for you, sorry.</b>");
         ++flags[kFLAGS.MINERVA_CHILDREN];
         ++flags[kFLAGS.TIMES_BIRTHED_SHARPIES];

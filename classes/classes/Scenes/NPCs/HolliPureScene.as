@@ -141,8 +141,8 @@ public function plantGrowsToLevel2():void {
 	if(silly()) outputText("\n\n<b>What do?</b>");
 	else outputText("\n\n<b>What do you do?</b>");
 	menu();
-	addButton(0, "Destroy It", destroyDatFuckingPlantAtP2);
-	addButton(1, "Do Nothing", playerMenu);
+	addButton(6, "Destroy It", destroyDatFuckingPlantAtP2);
+	addButton(8, "Do Nothing", playerMenu);
 }
 private function waterIt():void {
 	clearOutput();

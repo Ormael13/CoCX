@@ -475,12 +475,12 @@ private function drinkSomeUrtaPostBirthTitMilk():void {
 
 //PC Pregnancy Stages
 //PC takes 3 days to progress from one pregnancy stage to the next
-public function urtaPregooUpdates():Boolean {
-	if(player.pregnancyIncubation == 504) {
+public function urtaPregooUpdates(womb:Object):Boolean {
+	if(womb["incubation"] == 504) {
 		outputText("\n<b>You're feeling a bit nauseated.  Your mind floats to Urta and you wonder if maybe this means her seed took...</b>\n");
 		return true;
 	}
-	else if(player.pregnancyIncubation == 432) {
+	else if(womb["incubation"] == 432) {
 		outputText("\n<b>You notice your belly has developed into a small bump.  Now you have zero doubts; you're pregnant with Urta's child.  You smile to yourself and decide to pay the vixen a visit.</b>");
 		outputText("\n\nOnce you're past Tel'Adre's gates you ask around and finally spot Urta walking down a street.  She sees you approaching her and smiles, giving you a friendly wave.  \"<i>[name]!  What brings you here?</i>\"  You greet her with a short kiss, not able to contain your smile of happiness. \"<i>You're affectionate today; what's up?  Something good happen?</i>\"  Urta laughs, happy to see someone who is so happy to see her.");
 		
@@ -490,7 +490,7 @@ public function urtaPregooUpdates():Boolean {
 		return true;
 	}
 	//3:
-	else if(player.pregnancyIncubation == 360) {
+	else if(womb["incubation"] == 360) {
 		outputText("\n\"<i>[name]?  [name], are you here?  Oh, please tell me I haven't come out here all the way for nothing...</i>\"");
 		outputText("\n\nYou go to the edge of the camp to greet Urta.  She smiles when she sees you, looking at your expanding belly with pride, and then holds up a woven-cane basket.  \"<i>I thought you might appreciate some fresh supplies - food, drinkables, medicine, that sort of thing - so I brought some along with me on my patrol today.</i>\" She explains.");
 		outputText("\n\nYou thank her for the supplies, and tell her those will help you with your latest cravings... except for one.");
@@ -503,7 +503,7 @@ public function urtaPregooUpdates():Boolean {
 		return true;
 	}
 	//4: 
-	else if(player.pregnancyIncubation == 288) {
+	else if(womb["incubation"] == 288) {
 		outputText("\nYou sit down near your " + camp.homeDesc() + " to get some rest.  You're getting pretty heavy... and lugging this little guy around is starting to affect your performance while adventuring.  You decide to sit back and enjoy the cool breeze on this sunny day, when you spot the visage of a familiar vixen in the distance.");
 		
 		outputText("\n\nUrta smiles at you and gives you a friendly wave as she walks up.  \"<i>Hi, lover; how's the baby?</i>\"  She asks, already looking at your swollen stomach.  You take a deep breath and begin telling Urta about the burdens you're facing. The vixen gives you a sympathetic expression as you complain, timidly advancing closer to you as you speak, then gently reaching out with one hand, stopping before she fully touches your belly, looking at you with an obvious nonverbal request for permission.  You simply smile and nod your head.");
@@ -522,7 +522,7 @@ public function urtaPregooUpdates():Boolean {
 		return true;
 	}
 	//5
-	else if(player.pregnancyIncubation == 216) {
+	else if(womb["incubation"] == 216) {
 		outputText("\nYou fetch a waterskin to quench your thirst, then sit down on the outskirts of the camp to get some rest.  \"<i>Hey there, beautiful.</i>\"  A familiar voice echoes from behind you as Urta emerges from the wilderness.  She walks right up to you and reaches around to pat your distended belly.  \"<i>And how's the baby treating you, sexy?  You carry that bump well, you know?</i>\"");
 		outputText("\n\nYou smile at her compliment and tell her that the baby's finally kicking now, asking her if she wants to feel it...");
 		outputText("\n\nUrta squeals in glee and immediately glomps onto your bloated belly, rubbing her hands and her cheek excitedly across its " + player.skinFurScales() + " surface in hopes of feeling her child moving around inside you.  You groan at Urta's tight hug, she throws you slightly off-balance, but you manage to remain steady.  From inside you, you feel the baby shifting in your increasingly tight womb, and Urta looks up at you in shock, glee dancing in her eyes.  \"<i>I felt it!  It's moving in there!");
@@ -537,7 +537,7 @@ public function urtaPregooUpdates():Boolean {
 		return true;
 	}
 	//6:
-	else if(player.pregnancyIncubation == 144) {
+	else if(womb["incubation"] == 144) {
 		outputText("\nYou sigh.  You hope this baby will be born soon, your back is starting to ache after carrying the little guy everywhere.  \"<i>Hello, lover... oh, why the long face?</i>\"  Urta asks.  You're not surprised that she's here, now.  You explain to her about how tired you've been feeling lately, since you got this big.  Urta pats your shoulder, looking sympathetic.  \"<i>Really, you should take a break, lover.  I'm on an extended patrol right now, so you and I could stay here and rest together for the day - I'll handle the foraging and defending and stuff for you.</i>\"  She offers.");
 		menu();
 		addButton(0,"Accept",acceptUrtaLevelSixPreggoHelps);
@@ -545,7 +545,7 @@ public function urtaPregooUpdates():Boolean {
 		flags[kFLAGS.EVENT_PARSER_ESCAPE] = 1;
 		return true;
 	}
-	else if(player.pregnancyIncubation == 72) {
+	else if(womb["incubation"] == 72) {
 		outputText("\nYou lay down on your " + camp.homeDesc() + " to take a short nap, but when you're nearly dozing off, you spot a shadow on the outside of your " + camp.homeDesc() + ".  Recognizing its vulpine form, you greet Urta as she approaches.");
 		outputText("\n\n\"<i>Are you feeling okay, [name]?</i>\"  Urta suddenly blurts out with no preamble.  You nod your head, explaining that you're just tired, and you hope this baby will be out of you soon, you can't stand carrying it around anymore.  \"<i>Well, I don't think you'll have long to worry... I mean, have you taken a look at yourself recently, lover?  I don't mean to be rude, but you're huge!  You're going to pop any day now!</i>\"  She replies, staring anxiously at your midriff.");
 		outputText("\n\nYeah... you're pretty big, you admit.  \"<i>You really should come to Tel'adre, you know, [name].  I don't know any doctors who'll make housecalls all the way out here, not in the state the world is in.</i>\"  Urta tells you, blatant worry in her eyes.");
@@ -628,11 +628,11 @@ private function acceptUrtaLevelSixPreggoHelps():void {
 }
 	
 //PC Gives Birth
-public function PCGivesBirf():void {
+public function PCGivesBirf(womb:int = 0):void {
 	outputText("\n");
 	flags[kFLAGS.URTA_PREGNANT_DELIVERY_SCENE] = 0;
 	flags[kFLAGS.NEW_BABY_ANNOUNCED] = 0;
-	outputText("You double over in pain as you feel a rush of fluids escape your [pussy].  Looks like your water broke.  You recall promising Urta that you'd go to the hospital before actually going into labor, but right now there's nothing you can do.  It hurts and you know you won't make it there in time, so you rush to your " + camp.homeDesc() + " and lay down on your " + camp.bedDesc() + ", silently praying that Urta will swing by to assist you.");
+	outputText("You double over in pain as you feel a rush of fluids escape your "+player.vaginaDescript(womb)+".  Looks like your water broke.  You recall promising Urta that you'd go to the hospital before actually going into labor, but right now there's nothing you can do.  It hurts and you know you won't make it there in time, so you rush to your " + camp.homeDesc() + " and lay down on your " + camp.bedDesc() + ", silently praying that Urta will swing by to assist you.");
 	//1st Time:
 	if(flags[kFLAGS.URTA_TIMES_PC_BIRTHED] == 0) {
 		outputText("\n\n\"<i>[name]?  Oh, I just knew this would happen!</i>\"  Urta cries as she suddenly emerges from the undergrowth, racing over to your side.  Well, it looks like her little stalking habit is going to pay off for the two of you... well, for the three of you, rather: you, her and the baby.");
@@ -1686,7 +1686,7 @@ private function pickKidSceneHere():void {
 	clearOutput();
 	//ANNOUNCE BEHBIES
 	//Once per pregnancy?
-	if ((pregnancy.type == PregnancyStore.PREGNANCY_PLAYER || (player.pregnancyIncubation < 300 && player.pregnancyType == PregnancyStore.PREGNANCY_URTA)) && flags[kFLAGS.NEW_BABY_ANNOUNCED] == 0) {
+	if ((pregnancy.type == PregnancyStore.PREGNANCY_PLAYER || ((player.pregnancyIncubation < 300 && player.pregnancyType == PregnancyStore.PREGNANCY_URTA) || (player.pregnancy2Incubation < 300 && player.pregnancy2Type == PregnancyStore.PREGNANCY_URTA))) && flags[kFLAGS.NEW_BABY_ANNOUNCED] == 0) {
 		newBabyComing();
 	}
 	//Only possible between 12-14 hours.
@@ -1730,11 +1730,11 @@ private function newBabyComing():void {
 		outputText(" a loving smile.");
 		
 		//Both Preg:
-		if (pregnancy.type == PregnancyStore.PREGNANCY_PLAYER && player.pregnancyType == PregnancyStore.PREGNANCY_URTA) {
+		if (pregnancy.type == PregnancyStore.PREGNANCY_PLAYER && (player.pregnancyType == PregnancyStore.PREGNANCY_URTA || player.pregnancy2Type == PregnancyStore.PREGNANCY_URTA)) {
 			outputText("\n\n\"<i>Your mommies are both going to give you a little brother or a little sister soon,</i>\" Urta says, giving you a comforting hug whilst still managing to pat your belly, even as she gently drums her fingers on her own.");
 		}
 		//One person preg:
-		else if (pregnancy.type == PregnancyStore.PREGNANCY_PLAYER || (player.pregnancyType == PregnancyStore.PREGNANCY_URTA))
+		else if (pregnancy.type == PregnancyStore.PREGNANCY_PLAYER || (player.pregnancyType == PregnancyStore.PREGNANCY_URTA || player.pregnancy2Type == PregnancyStore.PREGNANCY_URTA))
 		{
 			outputText("\n\n\"<i>You're going to have a little brother or sister soon!</i>\" she says, beaming with delight as she pats ");
 			if (pregnancy.type == PregnancyStore.PREGNANCY_PLAYER) outputText("her");
@@ -2484,7 +2484,7 @@ private function sexWithLianna():void {
 	//(Display sex options)
 	menu();
 	if(player.hasVagina()) {
-		if(player.pregnancyIncubation == 0) addButton(0,"HarvestGirly",getEggsHarvested);
+		if(!player.isPregnant()) addButton(0,"HarvestGirly",getEggsHarvested);
 		else outputText("\n\n<b>She's not willing to have sex with you until your womb is unfilled.</b>");
 	}
 	if(player.hasCock()) addButton(1,"HarvestManly",liannaHandjobbies);

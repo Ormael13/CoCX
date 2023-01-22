@@ -2343,6 +2343,7 @@ private function get canGetPreg():Boolean {
 	var kids:int = flags[kFLAGS.LOPPE_KIDS];
 	if (pregnancy.isPregnant) kids += 2;
 	if (player.isPregnant() && player.pregnancyType == PregnancyStore.PREGNANCY_LOPPE) kids += 2;
+	if (player.isPregnant() && player.pregnancy2Type == PregnancyStore.PREGNANCY_LOPPE) kids += 2;
 	return kids < flags[kFLAGS.LOPPE_KIDS_LIMIT];
 }
 private function toggleContraception():void {	//TODO
@@ -2491,7 +2492,7 @@ private function loppePreggoFuckPC():void {
 	doNext(camp.returnToCampUseOneHour);
 }
 
-public function pcGivesBirthToLoppeKits():void {
+public function pcGivesBirthToLoppeKits(womb:int = 0):void {
 	clearOutput();
 	var kidType:int = rand(3);	//0 = both horse, 1 = split, 2 = both bunny
 	outputText("A sudden painful lurch wakes you in the night.  At first, you think your unborn children are simply acting up inside you again, but the painful sensation increases to an intensity that leaves you in no doubt that you’ve gone into labor.  Awkwardly heaving yourself around your swollen midriff and the feeling that your children are wriggling around inside you like fish on a hook, you manage to strip off your clothes and get ready to push.[pg]");
@@ -2523,6 +2524,13 @@ public function pcGivesBirthToLoppeKits():void {
 		outputText("You nod and follow Loppe into the house, and from there to the empty room that has since been converted into a nursery. <b>(Need to add description)</b>  Your "+flags[kFLAGS.LOPPE_KIDS]+" older daughters are already busy playing, despite the early hour of the day, and they look up with childish amazement as you enter, hop-crawling over in a manner that reminds you of real bunnies getting around to get a good look at their new playmates.  They need little instructions to be gentle, and are soon happily playing simple games while their youngest siblings watch on, already absorbing things.  Loppe beams at you with pride, clearly very proud of herself for being responsible for creating such youngsters.  You kiss her lips, whereupon she sneaks a groping caress of your [ass], and politely excuse yourself; you have demons to fight, after all.[pg]");
 	}
 	flags[kFLAGS.LOPPE_KIDS] += 2;
+	player.cuntChange(60,true,true,false, womb);
+	player.boostLactation(.01);
+	//Boost capacity
+	if(player.vaginalCapacity(womb) < 300) {
+		if(!player.hasStatusEffect(StatusEffects.BonusVCapacity)) player.createStatusEffect(StatusEffects.BonusVCapacity,0,0,0,0);
+		player.addStatusValue(StatusEffects.BonusVCapacity, 1, 10);
+	}
 	camp.cheatSleepUntilMorning();
 	doNext(camp.returnToCampUseOneHour);
 }

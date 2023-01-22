@@ -1266,7 +1266,8 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.NaturalHerbalism)) power *= 2;
         Math.round(power);
         HPChange(power,false);
-        outputText("You apply the poultice, your wounds closing at high speed. Healed for "+power+"");
+        outputText("You apply the poultice, your wounds closing at high speed. Healed for ");
+        CommasForDigits(power*-1);
     }
 
     public function EnergyDrink():void {
@@ -4962,7 +4963,7 @@ public class Combat extends BaseContent {
                 } else {
                     ExtraNaturalWeaponAttack(ClawDamageMultiplier, "", true);
                     ExtraNaturalWeaponAttack(ClawDamageMultiplier, "", true);
-                    if (player.weaponName == "CatGlove" && Arms.hasFelineArms(player)) {
+                    if (player.weaponName == "black cat glove" && Arms.hasFelineArms(player)) {
                         ExtraNaturalWeaponAttack(ClawDamageMultiplier, "", true);
                         ExtraNaturalWeaponAttack(ClawDamageMultiplier, "", true);
                     }

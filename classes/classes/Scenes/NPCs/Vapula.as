@@ -205,6 +205,7 @@ public class Vapula extends NPCAwareContent implements TimeAwareInterface
 					flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 0;
 					//Change to plain mouse birth!
 					if (player.pregnancyType == PregnancyStore.PREGNANCY_AMILY) player.knockUpForce(PregnancyStore.PREGNANCY_MOUSE, player.pregnancyIncubation);
+					if (player.pregnancy2Type == PregnancyStore.PREGNANCY_AMILY) player.knockUpForce(PregnancyStore.PREGNANCY_MOUSE, player.pregnancyIncubation, 1);
 					//FLAG THAT THIS SHIT WENT DOWN
 					flags[kFLAGS.AMILY_CORRUPT_FLIPOUT] = 1;
 					//Make sure the camp warning thing is off so she never moves back in.  Bitch be mad.

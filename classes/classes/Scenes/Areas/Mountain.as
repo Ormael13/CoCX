@@ -195,14 +195,14 @@ public class Mountain extends BaseContent
 				chance:0.25,
 				when: fn.ifLevelMin(3),
 				call: curry(SceneLib.mimicScene.mimicTentacleStart,2)
-			}, {
+			}/*, {
 				name: "demonProjects",
 						chance: 0.2,
 						when: function ():Boolean {
 					return DemonLab.MainAreaComplete >= 4;
 				},
 				call: SceneLib.exploration.demonLabProjectEncounters
-			});
+			}*/);
 			_lowmountainEncounter = Encounters.group("low mountains", {
 				//General Angels, Goblin and Imp Encounters
 				name: "common",
@@ -286,7 +286,7 @@ public class Mountain extends BaseContent
 					//Requires canine face, [either two dog dicks, or a vag and pregnant with a hellhound], at least two other hellhound features (black fur, dog legs, dog tail), and corruption >=60.
 					var check1:Boolean = player.faceType == Face.DOG && player.cor >= 60;
 					var check2:Boolean = player.dogCocks() >= 2
-										 || (player.hasVagina() && player.pregnancyType == PregnancyStore.PREGNANCY_HELL_HOUND);
+										 || (player.hasVagina() && (player.pregnancyType == PregnancyStore.PREGNANCY_HELL_HOUND || player.pregnancy2Type == PregnancyStore.PREGNANCY_HELL_HOUND));
 					var check3:int = (player.tail.type == Tail.DOG ? 1 : 0) +
 									 (player.lowerBody == LowerBody.DOG ? 1 : 0) +
 									 (player.hairColor == "midnight black" ? 1 : 0);
@@ -365,14 +365,14 @@ public class Mountain extends BaseContent
 				chance:0.25,
 				when: fn.ifLevelMin(3),
 				call: curry(SceneLib.mimicScene.mimicTentacleStart,2)
-			}, {
+			}/*, {
 				name: "demonProjects",
 				chance: 0.2,
 				when: function ():Boolean {
 					return DemonLab.MainAreaComplete >= 4;
 				},
 				call: SceneLib.exploration.demonLabProjectEncounters
-			});
+			}*/);
 			_mountainEncounter = Encounters.group("mountain", {
 				name: "demonlab",
 				when: function ():Boolean {
@@ -488,14 +488,14 @@ public class Mountain extends BaseContent
 				chance:0.25,
 				when: fn.ifLevelMin(3),
 				call: curry(SceneLib.mimicScene.mimicTentacleStart,2)
-			}, {
+			}/*, {
 				name: "demonProjects",
 				chance: 0.2,
 				when: function ():Boolean {
 					return DemonLab.MainAreaComplete >= 4;
 				},
 				call: SceneLib.exploration.demonLabProjectEncounters
-			});
+			}*/);
 		}
 		public function findMindbreakerChance():Number {
 			var fMC:Number = 5;

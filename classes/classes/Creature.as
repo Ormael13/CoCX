@@ -2280,11 +2280,11 @@ public class Creature extends Utils
 			return Appearance.cockAdjective(cocks[index].cockType, cocks[index].cockLength, cocks[index].cockThickness, lust, cumQ(), isPierced, hasSock, isGooey, isGhastly);
 		}
 
-		public function wetness():Number {
+		public function wetness(vagNum:int = 0):Number {
 			if (vaginas.length == 0)
 				return 0;
 			else
-				return vaginas[0].vaginalWetness;
+				return vaginas[vagNum].vaginalWetness;
 		}
 
 		public function vaginaType(newType:int = -1, vagNum:int = 0):int {
@@ -2297,13 +2297,13 @@ public class Creature extends Utils
 			return vaginas[vagNum].type;
 		}
 
-		public function looseness(vag:Boolean = true):Number {
-			if (vag)
+		public function looseness(isVag:Boolean = true, vagNum:int = 0):Number {
+			if (isVag)
 			{
 				if (vaginas.length == 0)
 					return 0;
 				else
-					return vaginas[0].vaginalLooseness;
+					return vaginas[vagNum].vaginalLooseness;
 			}
 			else
 			{
@@ -2311,7 +2311,7 @@ public class Creature extends Utils
 			}
 		}
 
-		public function vaginalCapacity():int {
+		public function vaginalCapacity(vagNum:int = 0):int {
 			//If the player has no vaginas
 			if (vaginas.length == 0)
 				return 0;
@@ -2342,7 +2342,7 @@ public class Creature extends Utils
 				bonus += 25;
 			if(hasPerk(PerkLib.FerasBoonMilkingTwat))
 				bonus += 40;
-			return Math.floor((bonus + statusEffectv1(StatusEffects.BonusVCapacity) + 8 * vaginas[0].vaginalLooseness * vaginas[0].vaginalLooseness) * (1 + vaginas[0].vaginalWetness / 10));
+			return Math.floor((bonus + statusEffectv1(StatusEffects.BonusVCapacity) + 8 * vaginas[vagNum].vaginalLooseness * vaginas[vagNum].vaginalLooseness) * (1 + vaginas[vagNum].vaginalWetness / 10));
 		}
 
 		public function analCapacity():int {
@@ -3863,7 +3863,7 @@ public class Creature extends Utils
 
 		public function vaginaDescript(idx:int = 0):String
 		{
-			return Appearance.vaginaDescript(this, 0);
+			return Appearance.vaginaDescript(this, idx);
 		}
 		public function assholeDescript():String{
 			return Appearance.assholeDescript(this);

@@ -52,14 +52,15 @@ public function benoitAffection(changes:Number = 0):Number {
 private function benoitKnocksUpPCCheck():void {
 	//Convert old basi's to real basi's!
 	if (player.pregnancyType == PregnancyStore.PREGNANCY_BASILISK && player.hasPerk(PerkLib.BasiliskWomb)) player.knockUpForce(PregnancyStore.PREGNANCY_BENOIT, player.pregnancyIncubation);
+	if (player.pregnancy2Type == PregnancyStore.PREGNANCY_BASILISK && player.hasPerk(PerkLib.BasiliskWomb)) player.knockUpForce(PregnancyStore.PREGNANCY_BENOIT, player.pregnancy2Incubation, 1);
 	//Knock up chances:
-	if ((player.inHeat || player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.hasPerk(PerkLib.HarpyWomb) || player.hasPerk(PerkLib.Oviposition) || player.hasPerk(PerkLib.BasiliskWomb)) && (player.pregnancyIncubation == 0 || player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS)) {
+	if ((player.inHeat || player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.pregnancy2Type == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.hasPerk(PerkLib.HarpyWomb) || player.hasPerk(PerkLib.Oviposition) || player.hasPerk(PerkLib.BasiliskWomb)) && ((player.canGetPregnant() || player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.pregnancy2Type == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS))) {
 		if (player.hasPerk(PerkLib.BasiliskWomb) && flags[kFLAGS.BENOIT_TESTED_BASILISK_WOMB] == 1) {
-			if (player.pregnancyType != PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.pregnancyIncubation == 0) {
-				if (player.hasUniquePregnancy()) player.impregnationRacialCheck();
-				else player.knockUp(PregnancyStore.PREGNANCY_BENOIT, PregnancyStore.INCUBATION_BASILISK);
+			if (player.canGetPregnant() || ((player.pregnancyType != PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.pregnancy2Type != PregnancyStore.PREGNANCY_OVIELIXIR_EGGS) && !player.hasUniquePregnancy())) {
+				player.knockUp(PregnancyStore.PREGNANCY_BENOIT, PregnancyStore.INCUBATION_BASILISK);
 			}
-			if (player.pregnancyIncubation > 0) player.knockUpForce(PregnancyStore.PREGNANCY_BENOIT, player.pregnancyIncubation);
+			if (player.pregnancyIncubation > 0 && player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS) player.knockUpForce(PregnancyStore.PREGNANCY_BENOIT, player.pregnancyIncubation);
+			if (player.pregnancy2Incubation > 0 && player.pregnancy2Type == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS) player.knockUpForce(PregnancyStore.PREGNANCY_BENOIT, player.pregnancyIncubation, 1);
 		}
 		else {
 			if (player.hasUniquePregnancy()) player.impregnationRacialCheck();
@@ -197,7 +198,7 @@ public function benoitIntro():void {
 
 		outputText("\n\nYou wonder how a blind anything can make it in such a rough and ready place as the Bazaar, but then Benoit curls [benoit eir] claws protectively into what appears to be a pile of robes sitting next to [benoit em], which opens dark brown eyes and sets its muzzle on the counter, looking at you plaintively.  The Alsatian buried within the cloth looks to you like a big softy, but you're willing to concede the point as made.");
 	}
-	else if(flags[kFLAGS.BENOIT_SUGGEST_UNLOCKED] == 0 && player.hasVagina() && (player.inHeat || player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.hasPerk(PerkLib.HarpyWomb) || player.hasPerk(PerkLib.Oviposition)) && (player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.pregnancyIncubation == 0) && (flags[kFLAGS.BENOIT_STATUS] == 0 || flags[kFLAGS.BENOIT_STATUS] == 3)) {
+	else if(flags[kFLAGS.BENOIT_SUGGEST_UNLOCKED] == 0 && player.hasVagina() && (player.inHeat || (player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.pregnancy2Type == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS) || player.hasPerk(PerkLib.HarpyWomb) || player.hasPerk(PerkLib.Oviposition)) && (player.canGetPregnant() || (player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.pregnancy2Type == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS)) && (flags[kFLAGS.BENOIT_STATUS] == 0 || flags[kFLAGS.BENOIT_STATUS] == 3)) {
 		benoitAndFemPCTalkAboutEggings();
 	}
     else if (flags[kFLAGS.FEMOIT_NEXTDAY_EVENT_DONE] == 1 && flags[kFLAGS.FEMOIT_NEXTDAY_EVENT] <= CoC.instance.model.time.days && flags[kFLAGS.BENOIT_STATUS] == 0) {
@@ -946,7 +947,7 @@ public function eggySuggest():void {
 	outputText("[benoit Ey] brushes your shoulder as [benoit ey] walks past you, feeling around the stockroom until [benoit ey] finds a chest of drawers.  [benoit Ey] opens a compartment and withdraws a small woollen bag, stuffed with pungent green leaves.");
 	outputText("\n\n\"<i>Ze shark ladies are always coming up from ze lake to sell me zis,</i>\" [benoit ey] says. \"<i>It is a very effective, 'ow you say, 'counter septic'?");
 	player.sexReward("cum", "Vaginal");
-	if ((player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.hasPerk(PerkLib.HarpyWomb) || player.hasPerk(PerkLib.Oviposition) >= 0) && (player.pregnancyIncubation == 0 || player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS)) {
+	if ((player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.hasPerk(PerkLib.HarpyWomb) || player.hasPerk(PerkLib.Oviposition) >= 0) && (player.canGetPregnant() || (player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.pregnancy2Type == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS) && !player.hasUniquePregnancy())) {
 		outputText("  I would not inflict my children upon you.  Ere, take as much as you like.</i>\"");
 		simpleChoices("Take It", takeBenoitsContraceptives, "", null, "", null, "", null, "Leave", dontTakeEggtraceptives);
 	}
@@ -1235,6 +1236,7 @@ private function suggestSexAfterBasiWombed(later:Boolean = true):void {
 			outputText("\n(<b>Perk Unlocked: Oviposition - You will now regularly lay unfertilized eggs.</b>)");
 		}
 		if (player.pregnancyType == PregnancyStore.PREGNANCY_BASILISK) player.knockUpForce(PregnancyStore.PREGNANCY_BENOIT, player.pregnancyIncubation);
+		if (player.pregnancy2Type == PregnancyStore.PREGNANCY_BASILISK) player.knockUpForce(PregnancyStore.PREGNANCY_BENOIT, player.pregnancy2Incubation, 1);
 		player.sexReward("cum", "Vaginal");
 		doNext(camp.returnToCampUseOneHour);
 		dynStats("sen", -2);
@@ -1290,7 +1292,6 @@ public function popOutBenoitEggs():void {
 		outputText("\n\nBenoit smiles proudly.  \"<i>I cannot zank you enough for zis.  Do not worry, I shall keep zem as safe as I ave ze ozzeir clutches.</i>\"\n");
 	}
 	player.orgasm();
-	player.knockUpForce(); //Clear Pregnancy
 	flags[kFLAGS.BENOIT_EGGS] += Math.floor(player.totalFertility() / 10);
 	//doNext(1);
 }

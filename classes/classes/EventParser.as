@@ -444,7 +444,7 @@ public class EventParser {
         var flags:DefaultDict = CoC.instance.flags;
 
         if (player.hasPerk(PerkLib.Diapause)) {
-            if (flags[kFLAGS.DIAPAUSE_FLUID_STORE] <= 0 || player.pregnancyIncubation <= 0 && player.buttPregnancyIncubation <= 0) //no pregnancy, I guess?
+            if (flags[kFLAGS.DIAPAUSE_FLUID_STORE] <= 0 || !player.isPregnant() && !player.isButtPregnant()) //no pregnancy, I guess?
                 return 0;
             //unique checks for diapause
             if (flags[kFLAGS.DIAPAUSE_DISPLAYED] == 1) {

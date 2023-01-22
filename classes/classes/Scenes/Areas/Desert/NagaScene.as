@@ -780,7 +780,7 @@ public function nagaFUCKSJOOOOOO():void {
             outputText(", sharing with you some of your delicious milk");
         }
         outputText(".");//(If pregnant)
-        if(player.pregnancyIncubation > 0) {
+        if(!player.canGetPregnant()) {
             outputText("  As you finally reach your next climax, the " + gorgonOrNaga);
             outputText(" pokes her tongue a little bit deeper inside your mouth, reaching to the back of your throat.");
             //(If you have been a bad girl in past encounters)

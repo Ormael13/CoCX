@@ -287,14 +287,14 @@ use namespace CoC;
 					player.createStatusEffect(StatusEffects.NearbyPlants, 0, 0, 0, 0);
 					SceneLib.sheilaScene.sheilaEncounterRouter();
 				}
-			}, {
+			}/*, {
 				name: "demonProjects",
 				chance: 0.2,
 				when: function ():Boolean {
 					return DemonLab.MainAreaComplete >= 4;
 				},
 				call: SceneLib.exploration.demonLabProjectEncounters
-			});
+			}*/);
 		}
 		public function explorePlains():void {
 			clearOutput();

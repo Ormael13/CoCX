@@ -1275,10 +1275,10 @@ private function submitToLakeIzma():void {
 		if (voluntary) {
 			outputText("Leaning down, she gives you a small peck on the lips, then flops down beside you.  She reaches over and pulls you over, letting you rest your head against her pillow-like DD-cup breasts. When you are recovered, she helps you up.  \"<i>You're too good to your inferior, [name]... but that's what I love about you so much.</i>\"  She smirks, giving you a decidedly unchaste kiss and a smack on the ass before opening her locker.\n\n");
 			//180 for "not visible", I assume. -SH
-			if (player.pregnancyIncubation == 00 || player.pregnancyIncubation > 180) outputText("Hauling out a plant, she gingerly removes a leaf and offers it to you.  \"<i>Could you take this please?  It's an anti-pregnancy herb.  I'd be happy to have babies with you someday... but I want to earn your acknowledgment as a mate first.</i>\"  Smiling a bit at how old-fashioned she seems, you take the leaf out of her hands and eat it.");
+			if (!player.isPregnant() || player.hasNonVisiblePregnancy()) outputText("Hauling out a plant, she gingerly removes a leaf and offers it to you.  \"<i>Could you take this please?  It's an anti-pregnancy herb.  I'd be happy to have babies with you someday... but I want to earn your acknowledgment as a mate first.</i>\"  Smiling a bit at how old-fashioned she seems, you take the leaf out of her hands and eat it.");
 		} else {
 			outputText("\"<i>That's how shark people have sex,</i>\" she tells you.  \"<i>Of course, it's different if you're the one who won... but you'll need to come back again and beat me if you want to see what that's like.</i>\"  She leans down and gives you a small peck on the lips, then drops the tigershark tooth beside you.");
-			if(player.pregnancyIncubation == 0 || player.pregnancyIncubation > 180) outputText("  From her oak chest she fetches an odd leaf, which she pushes past your lips.  \"<i>Birth control herbs.  No way I'm giving kids to someone who's not my mate,</i>\" Izma says, making sure you swallow the plant before diving into the water, most likely to clean herself off.\n\n");
+			if(!player.isPregnant() || player.hasNonVisiblePregnancy()) outputText("  From her oak chest she fetches an odd leaf, which she pushes past your lips.  \"<i>Birth control herbs.  No way I'm giving kids to someone who's not my mate,</i>\" Izma says, making sure you swallow the plant before diving into the water, most likely to clean herself off.\n\n");
 
 			outputText("You remain where you are, waiting for the strength to flow into your limbs and for some of the abundance of sexual fluids to vacate your " + vaginaDescript(0) + " before you dress yourself and leave.  You had no idea that Izma could take charge in such a fierce manner... but, at the same time, you find yourself actually liking it.  A part of you wonders if you could see her that way again...");
 			sharedSubmissionEnding();
@@ -1320,7 +1320,7 @@ private function submitToLakeIzma():void {
 		outputText("Within minutes, Izma gives one final, powerful thrust and roars loudly, cum pumping into your womb and spraying out onto the sands.  " + SMultiCockDesc() + " twitches and pulses, ready to blow.  Izma quickly takes hold and points " + (player.cockTotal() == 1 ? "it" : "them") + " toward your face, stroking you to your own climax.  Jets of your own cum splatter across your face and body as you writhe, protesting. \"<i>Tch, you really thought I'd let you cum on ME?  Maybe if you actually managed to beat me I'd give you the honor,</i>\" Izma says, pulling free with a loud *SCHLICK* sound.  ");
 		player.sexReward("cum","Vaginal");
 		if (voluntary) {
-			if(player.pregnancyIncubation == 0 || player.pregnancyIncubation > 150) {
+			if(!player.isPregnant() || player.hasNonVisiblePregnancy()) {
 				outputText("She releases your [feet], allowing your [butt] to hit the sand with a plop, and gets to work redressing while you lie still.  She returns with an anti-pregnancy herb in her hands, and then flips a leaf into her mouth. Before you can wonder why she did that, she bends down and kisses you fiercely, her tongue pushing it past your lips and down your throat.");
 
 				outputText("\"<i>I'd be happy to make some babies with you... but <b>after</b> you accept me as a mate.\"</i>  She smirks, giving you a second, decidedly unchaste kiss before she helps you up.  You dress yourself and head back to camp feeling very sated.");
@@ -1329,7 +1329,7 @@ private function submitToLakeIzma():void {
 			doNext(camp.returnToCampUseOneHour);
 		} else {
 			outputText("She releases your [feet], allowing your [butt] to hit the sand with a plop, and gets to work redressing while you lie still.");
-			if(player.pregnancyIncubation == 0 || player.pregnancyIncubation > 150) {
+			if(!player.isPregnant() || player.hasNonVisiblePregnancy()) {
 				outputText("  Moving over to her oak chest, she returns with a strange leaf in her hands, which she pushes past your lips.\n\n");
 
 				outputText("\"<i>Anti-pregnancy herb.  Can't have someone bearing my litter if they're not my mate, can I?</i>\"  Izma explains, moving over to the shoreline.  ");
@@ -2253,7 +2253,7 @@ private function IzmaPoopsBabies():void {
 }
 
 //PC gives birth (alone): used if PC gets pregnant from vaginal and refusing herbs before recruiting Izma or possibly later if a way to force her out is written
-public function pcPopsOutASharkTot():void {
+public function pcPopsOutASharkTot(womb:int = 0):void {
 	outputText("\n");
 	//If Izma is NOT a follower
 	if(flags[kFLAGS.IZMA_FOLLOWER_STATUS] != 1) {
@@ -2294,7 +2294,7 @@ public function pcPopsOutASharkTot():void {
 
 		outputText("You point out it's the least she can do, seeing as how she's the one who put this thing in you in the first place, then turn your attention back fully to the task of bringing your offspring into the world.\n\n");
 
-		outputText("Time slips away; you're too overwhelmed by the pain of your womb contracting and the pleasure as Izma ministers to your " + vaginaDescript());
+		outputText("Time slips away; you're too overwhelmed by the pain of your womb contracting and the pleasure as Izma ministers to your " + vaginaDescript(womb));
 		if(player.hasCock()) outputText(" and " + multiCockDescriptLight());
 		outputText(", which makes the birth pangs become less painful and more orgasmic. You lose yourself in the haze to the point you're barely aware when the birth finally comes to an end; you feel a great pressure welling up inside you, an overwhelming urge to push, and then, the next thing you know, relief washes over you as your stomach deflates.");
 		player.cuntChange(100,true,true,false);

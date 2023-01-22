@@ -119,7 +119,7 @@ public class VolcanicCrag extends BaseContent
 					VolcanicCragConditions();
 					SceneLib.etnaScene.repeatYandereEnc();
 				}
-			}, {
+			}/*, {
 				name: "demonProjects",
 				chance: 0.2,
 				when: function ():Boolean {
@@ -129,7 +129,7 @@ public class VolcanicCrag extends BaseContent
 					VolcanicCragConditions();
 					SceneLib.exploration.demonLabProjectEncounters()
 				}
-			});
+			}*/);
 		}
 		
 		public function exploreVolcanicCrag():void {

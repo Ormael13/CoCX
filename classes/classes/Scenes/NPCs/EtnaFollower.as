@@ -1148,17 +1148,17 @@ public function etnaKnockupAttempt():void {
 
 private function etnaPregUpdate():Boolean {
 	switch (pregnancy.eventTriggered()) {
-		case 1: //
+		case 2: //
 			outputText("\nWhen you come to check on Etna you notice she’s smiling as she caresses her belly, which bulges notably, but not with any real prominence. \n");
 			return true;
-		case 2:
+		case 3:
 			outputText("\nEtna's belly is definitely swollen now, forming a round bump which likely means she’s pregnant with a cub.\n");
 			return true;
-		case 3:
+		case 4:
 			outputText("\nWhen you come to check on Etna you notice she’s smiling as she caresses her belly. Furthermore, it’s bigger than before which likely means she’s pregnant with a cub. Still, the future mother walks to you with a delighted smile. [pg]" +
 					"“<i>I know when you're near me, as our daughter gets more agitated inside.  I’m sure she loves you already. So how are you doing today [name], have you come to check on the baby?</i>” \n");
 			return true;
-		case 4:
+		case 5:
 			outputText("\nYou'd say Etna is going to give birth soon, she has swollen up to the point that she looks nine months pregnant. She has taken to resting frequently, and any form of labor easily leaves her winded. Despite this she often seems to disappear and when confronted she replies with a tone of exasperation \"<i>I couldn't help it, I had to find something to eat.</i>\"\n");
 			return true;
 	}
