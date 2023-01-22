@@ -517,7 +517,7 @@ public class PlayerAppearance extends BaseContent {
 		var temp:Number = 0;
 		var pregnancyDesc: String = "";
 		var womb:Object;
-		if (player.isPregnant) {
+		if (player.isPregnant()) {
 			if (player.pregnancyIncubation > 1) {
 				womb = {};
 				womb["womb"] = 0
@@ -558,7 +558,7 @@ public class PlayerAppearance extends BaseContent {
 				pregnancyDesc += "</b>";
 			}
 			//Satur preggos - only shows if bigger than regular pregnancy or not pregnancy
-			else if (player.buttPregnancyType == PregnancyStore.PREGNANCY_SATYR && (!player.isPregnant || player.buttPregnancyIncubation < womb["incubation"])) {
+			else if (player.buttPregnancyType == PregnancyStore.PREGNANCY_SATYR && (!player.isPregnant() || player.buttPregnancyIncubation < womb["incubation"])) {
 				if(player.buttPregnancyIncubation < 125 && player.buttPregnancyIncubation >= 75) {
 					pregnancyDesc += "<b>You've got the beginnings of a small pot-belly.</b>";
 				}

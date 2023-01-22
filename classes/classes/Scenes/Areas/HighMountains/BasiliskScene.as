@@ -256,7 +256,7 @@ public class BasiliskScene extends BaseContent
 			if(player.inHeat) outputText("  You are more aware than ever of an invisible scent simmering off you, of your wet vagina clenching and wetting itself in anticipation, your body begging this male creature to fulfil its genetic objective upon you.  Your eyes have betrayed you, your body is betraying you, and whatever else you are is a tiny, ignored voice screaming in between.");
 			outputText("  The basilisk suddenly breaks away and kneels down in front of you.  Out of sight of your petrified eyes you cannot see what it is doing; however a moment later, you can feel, as a warm, sticky sensation slavers over your abdomen.");
 			//(egg preg:
-			if(player.isPregnant && (player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.pregnancy2Type == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS)) outputText("  The basilisk licks your bulging belly hungrily, pushing against and testing for the eggs you are carrying.  Your sensitive cargo shifts around under its hungry attention; you'd squirm, but that is, of course, impossible.");
+			if(player.isPregnant() && (player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.pregnancy2Type == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS)) outputText("  The basilisk licks your bulging belly hungrily, pushing against and testing for the eggs you are carrying.  Your sensitive cargo shifts around under its hungry attention; you'd squirm, but that is, of course, impossible.");
 			//(heat or perk:
 			if(player.inHeat || player.hasPerk(PerkLib.Oviposition) || player.hasPerk(PerkLib.BasiliskWomb)) outputText("  The basilisk licks your belly hungrily, its sticky tongue crawling like a warm tentacle across your sensitive underside.  You'd squirm, but that is impossible.  The creature is making you feel everything it is forcing upon you.");
 			outputText("\n\n");
@@ -715,4 +715,4 @@ public class BasiliskScene extends BaseContent
 			}
 		}
 	}
-}
+}

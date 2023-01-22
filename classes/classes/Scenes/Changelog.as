@@ -133,7 +133,7 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Elemental Conjurer Mind and Body Resolve (Ex). Gained by use of the Pocket Watch when req. are meet. Effects of both combined perks + 5% bonus to tou multi.\n");
 			//outputText("-New event perk: Elemental Conjurer Mind and Body Dedication (Ex). Gained by use of the Pocket Watch when req. are meet. Effects of all three combined perks + 5% bonus to spe/wis multi.\n");
 			//outputText("-New event perk: Elemental Conjurer Mind and Body Sacrifice (Ex). Gained by use of the Pocket Watch when req. are meet. Effects of all three combined perks + 5% bonus to str multi, +10% bonus to int multi, +15% bonus to wis multi.\n");
-			outputText("-\n");
+			outputText("-Multi-preg enabled for dual vaginas (EragonX)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

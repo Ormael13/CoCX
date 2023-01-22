@@ -56,7 +56,7 @@ private function benoitKnocksUpPCCheck():void {
 	//Knock up chances:
 	if ((player.inHeat || player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.pregnancy2Type == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.hasPerk(PerkLib.HarpyWomb) || player.hasPerk(PerkLib.Oviposition) || player.hasPerk(PerkLib.BasiliskWomb)) && ((player.canGetPregnant() || player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.pregnancy2Type == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS))) {
 		if (player.hasPerk(PerkLib.BasiliskWomb) && flags[kFLAGS.BENOIT_TESTED_BASILISK_WOMB] == 1) {
-			if (player.canGetPregnant || ((player.pregnancyType != PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.pregnancy2Type != PregnancyStore.PREGNANCY_OVIELIXIR_EGGS) && !player.hasUniquePregnancy())) {
+			if (player.canGetPregnant() || ((player.pregnancyType != PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.pregnancy2Type != PregnancyStore.PREGNANCY_OVIELIXIR_EGGS) && !player.hasUniquePregnancy())) {
 				player.knockUp(PregnancyStore.PREGNANCY_BENOIT, PregnancyStore.INCUBATION_BASILISK);
 			}
 			if (player.pregnancyIncubation > 0 && player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS) player.knockUpForce(PregnancyStore.PREGNANCY_BENOIT, player.pregnancyIncubation);
