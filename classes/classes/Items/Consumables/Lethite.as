@@ -29,7 +29,7 @@ public class Lethite extends Consumable {
 
     public function eatIt():void {
         clearOutput();
-        outputText("You grab the crystal and gulp it down smiling contently as you feel it dissolve into your core and suffuse your body with new raw power.");
+        outputText("You grab the crystal and gulp it down, smiling contently as you feel it dissolve into your core and suffuse your body with raw power.");
         player.buff("Soul Eater").addStat("int.mult",0.01);
         player.buff("Soul Eater").addStat("lib.mult",0.01);
         SceneLib.inventory.itemGoNext();

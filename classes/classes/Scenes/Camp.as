@@ -3763,8 +3763,14 @@ public class Camp extends NPCAwareContent{
 
 	public function cheatSleepUntilMorning(multiplier:Number = 1.0):void {
 		var timeToSleep:int = (model.time.hours < 6 ? 6 : 24 + 6) - model.time.hours;
+		var manaTime:int = 0
 		CoC.instance.timeQ = timeToSleep;
 		camp.sleepRecovery(true, multiplier);
+		if (CoC.instance.player.hasPerk(PerkLib.JobSorcerer) || CoC.instance.player.hasPerk(PerkLib.JobElementalConjurer))
+		{
+			manaTime = timeToSleep * 60;
+			combat.manaregeneration(manaTime);
+		}
 		CoC.instance.timeQ = 0;
 		cheatTime(timeToSleep);
 		outputText("<b>" + NUMBER_WORDS_CAPITAL[timeToSleep] + " hours pass...</b>\n\n");
