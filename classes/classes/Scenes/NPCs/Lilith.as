@@ -144,7 +144,9 @@ import classes.internals.*;
 			this.armorName = "skin";
 			this.lustVuln = .75;
 			this.lust = 30;
-			this.drop = NO_DROP;
+			this.drop = new WeightedDrop()
+					.add(null, 2)
+					.add(useables.SRESIDUE, 1);
 			this.horns.type = Horns.DEMON;
 			this.horns.count = 12;
 			this.wings.type = Wings.BAT_LIKE_TINY;

@@ -136,12 +136,12 @@ public class Changelog extends BaseContent
 			outputText("-Multi-preg enabled for dual vaginas (EragonX)\n");
 			outputText("-Fixed the small error in the nightwalker dialogue. Fixed the issue of bull strength not properly giving its buff if the player would receive less than a 50% buff from the perk. (Chibizs)\n");
 			outputText("-Elemental Contract Rank 2 perk got additional req. of actualy having arcane circle.\n");
+			outputText("-Ebon Labyrinth mana regen fix for sleeping. (Chibizs)\n");
+			outputText("-New material: a Soul Residue. Cost 1 gem. Could drop after beating angel type enemies.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");//for changelog of next version - chocolate box price at bakery increased 5x
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -168,7 +168,7 @@ public class Changelog extends BaseContent
 			//outputText("-New perk for enemies: Elite type enemy. Bonuses for are: Diehard effect of 2,5% of max HP + 750 HP * NG tier, OverMax HP effect of 5% magnitude.\n");
 			//outputText("-New perk for enemies: Champion type enemy. Bonuses for are: Diehard effect of 5% of max HP + 1,500 HP * NG tier, OverMax HP effect of 10% magnitude.\n");
 			outputText("-Fixed bugs: Bard not affected by cap of prestige jobs, last one checks for holli's kill/survive moved into less troublesome spot, Benoit/Oswald taking full price for simple backpack size upgade, Fasting Pill been unaccessable when hunger mode is active, Vegetal Affinity increasing fire resistance, elemental throwing knives been never usable, Elemental race tier bonuses & display on race page, ");
-			outputText("\n");
+			outputText("Buy button for Francisca throwing axe at basilsik shop been corectly labeled\n");
 			/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");

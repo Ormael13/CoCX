@@ -355,7 +355,7 @@ public function benoitsBuyMenu():void {
 	}
 	if (player.keyItemvX("Backpack", 1) < 12) addButton(5, "Backpack", buyBackpack).hint("This backpack will allow you to carry more items.");
 	if (flags[kFLAGS.BENOIT_CLOCK_BOUGHT] <= 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_NIGHTSTAND] > 0) addButton(6, "Alarm Clock", buyAlarmClock).hint("This mechanical clock looks like it was originally constructed by the Goblins before the corruption spreaded throughout Mareth.");
-	if (flags[kFLAGS.BENOIT_PISTOL_BOUGHT] < 2 && flags[kFLAGS.BENOIT_AFFECTION] == 100) addButton(7, "Zweihander", buyZweihander);
+	if (flags[kFLAGS.BENOIT_PISTOL_BOUGHT] < 2 && flags[kFLAGS.BENOIT_AFFECTION] == 100) addButton(7, "Francisca t a", buyFranciscaThrowingAxe).hint("Francisca throwing axe");
 	addButton(14, "Back", benoitIntro);
 }
 
@@ -576,16 +576,16 @@ private function buyBackpackConfirmation(size:int = 2, sizeDesc:String = "Small"
 	doNext(benoitsBuyMenu);
 }
 
-private function buyZweihander():void {
+private function buyFranciscaThrowingAxe():void {
 	clearOutput();
 	outputText("You look around the things that [benoit name] has to sell and a strange axe catches your attention. It’s big, and it’s head has a very unusual shape. Odd runes cover its handle. Curious, you pick it up, and take it to [benoit name].");
 	outputText("\n\n[benoit Ey] examines it for a bit, mumbling something about harpies.");
 	outputText("\n\n\"<i>Huh, zis is a very old ax. Still in good shape, but I’m not using zat kind of stuff anytime soon. You can have it for, let me zink, 2000 gems.</i>\" [benoit name] says.");
 	menu();
-	addButton(0, "Yes", buyZweihanderConfirmation);
+	addButton(0, "Yes", buyFranciscaThrowingAxeConfirmation);
 	addButton(1, "No", benoitsBuyMenu);
 }
-private function buyZweihanderConfirmation():void {
+private function buyFranciscaThrowingAxeConfirmation():void {
 	clearOutput();
 	if (player.gems < 2000) {
 		outputText("You count out your gems and realize it's beyond your price range.");
