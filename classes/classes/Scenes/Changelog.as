@@ -2533,7 +2533,7 @@ public class Changelog extends BaseContent
 			outputText("-New tier 17 misc lvl-up perk: Hoarder. Req. Collector perk. Effect: 15% more gems from victories.\n");
 			outputText("-New tier 17 misc lvl-up perk: Surgeon's Aide. Req. Paramedic perk. Effect: increases HP gains by 20%.\n");
 			outputText("-New tier 17 misc lvl-up perk: Saint. Req. Pastor perk. Effect: -2 min libido and +5% to lust resistance.\n");
-			outputText("-New tier 17 misc lvl-up perk: Dean. Req. Principle perk. Effect: +10% max mana.\n");
+			outputText("-New tier 17 misc lvl-up perk: Dean. Req. Principal perk. Effect: +10% max mana.\n");
 			outputText("-New tier 17 misc lvl-up perk: Sniper's Friend. Req. Engineer's Friend perk. Effect: +10% range phys dmg.\n");
 			outputText("-New tier 17 misc lvl-up perk: Napping. Req. Skipping Work perk. Effect: +20% to fatigue recovery.\n");
 			outputText("-New tier 17 misc lvl-up perk: Anvil. Req. Hammer perk. Effect: increasing armor proficiency. (+5% phys/mag resistance)\n");
@@ -2740,7 +2740,7 @@ public class Changelog extends BaseContent
 			outputText("-New tier 12 misc lvl-up perk: Body of Steel. Req. Heart of Steel perk. Effect: +10% melee phys dmg.\n");
 			outputText("-New tier 12 misc lvl-up perk: Collector. Req. Money Finder perk. Effect: 15% more gems from victories.\n");
 			outputText("-New tier 12 misc lvl-up perk: Paramedic. Req. First Response perk. Effect: increases HP gains by 20%.\n");
-			outputText("-New tier 12 misc lvl-up perk: Principle. Req. Professor perk. Effect: +10% max mana.\n");
+			outputText("-New tier 12 misc lvl-up perk: Principal. Req. Professor perk. Effect: +10% max mana.\n");
 			outputText("-New tier 12 misc lvl-up perk: Engineer's Friend. Req. Heavy's Friend perk. Effect: +10% range phys dmg.\n");
 			outputText("-New tier 12 misc lvl-up perk: Skipping Work. Req. Taking a Break perk. Effect: +20% to fatigue recovery.\n");
 			outputText("-New tier 12 misc lvl-up perk: Hammer. Req. Furnace perk. Effect: increasing armor proficiency. (+5% phys/mag resistance)\n");
