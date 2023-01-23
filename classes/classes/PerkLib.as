@@ -2481,9 +2481,9 @@ public class PerkLib
 				"Raises max Wrath by 5%, generates 2 point of Wrath out of combat and double this amount during fight.",
 				"You've chosen the 'Primal Fury VI' perk, increasing max Wrath by 5%, generates 2 point of Wrath out of combat and double this amount during fight.")
 				.withBuffs({'maxwrath_mult':+0.05});
-		public static const Principal:PerkType = mk("Principal", "Principal",
+		public static const Principle:PerkType = mk("Principle", "Principle",
 				"You oversee the day to day actions inside the school, your studious nature increasing max mana by 10%.",
-				"You've chosen the 'Principal' perk, gaining +10% max Mana.")
+				"You've chosen the 'Principle' perk, gaining +10% max Mana.")
 				.withBuffs({'maxmana_mult':+0.1});
 		public static const Professor:PerkType = mk("Professor", "Professor",
 				"You're more important than the standard teacher, and your paycheck reflects that. You're hired for your knowledge which increases max mana by 10%.",
@@ -7257,7 +7257,7 @@ public class PerkLib
 					.requirePerk(FirstResponse);
 			Pastor.requireLevel(72)
 					.requirePerk(Priest);
-			Principal.requireLevel(72)
+			Principle.requireLevel(72)
 					.requirePerk(Professor);
 			EngineersFriend.requireLevel(72)
 					.requirePerk(HeavysFriend);
@@ -7330,7 +7330,7 @@ public class PerkLib
 			Saint.requireLevel(102)
 					.requirePerk(Pastor);
 			Dean.requireLevel(102)
-					.requirePerk(Principal);
+					.requirePerk(Principle);
 			SnipersFriend.requireLevel(102)
 					.requirePerk(EngineersFriend);
 			Napping.requireLevel(102)
