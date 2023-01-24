@@ -130,7 +130,7 @@ public class Changelog extends BaseContent
 			outputText("-Jabberwocky scale won't affect dragonne pc's (it get almost non functional race atm) and dragon score req. increased from 10+ to 16+ points (new lowest race score for bonuses in dragon score). And after more jabby unique bodyparts/perks item would once again make change into jabberwocky in one use of the item.\n");
 			outputText("-Added more stat and perk gains for early game - doubled stats/perk points period extended by 3 lvlv's and first lvl up (0 > 1) grant trice more free stat/perk points than before.\n");
 			outputText("-Normal weapons will now multi-attack the correct number of times when a ranged weapon is equipped. (Chibizs)\n");
-			outputText("-Fix feral on load, fix catgloves feral attack (EragonX)\n");
+			outputText("-Fix feral on load, fix catgloves feral attack, Bee cock masturbation fix, Fix Sheila 69 (EragonX)\n");
 			outputText("-Minor rearrangment of elementalist summon menu. Totaly not preparing for another summon/upgrade section totaly not that...\n");
 			outputText("-When exploring at lvl 9+ can found some weird pocket watch. Taking it would req. some 'super' sacrifice but will in turn allow to make something back. After picking it's accessable in one of camp actions submenu.\n");
 			outputText("-Multi-preg enabled for dual vaginas (EragonX)\n");
