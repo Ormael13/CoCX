@@ -1231,19 +1231,20 @@ public class Exploration extends BaseContent
 
 		public function pocketwatchdiscovery():void {
 			clearOutput();
-			outputText("While exploring, you feel something is off.  Wary of meeting new things in this world after your previous experiences, you decide to cautiously locate the source of this feeling.  Soon the object comes into view and you can see that it is an ordinary looking pocket watch.  Knowing that it may be more then it looks to be you check the suroundings next to it for a while before deciding to touch it. \"<i>Only thou that shall sacrifice would be rewarded.</i>\" Voice in your head speaks.\n\n");
+			outputText("While exploring, you feel something is off.  Wary of finding new things in this world after your previous experiences, you decide to cautiously locate the source of this feeling.  Soon the object comes into view and you can see that it is an ordinary looking pocket watch.  Knowing that it may be more than it looks, you inspect the adjacent surroundings for a while before deciding to touch it. A faint voice echoes in your mind.\n\n \"<i>Only thou that shall sacrifice shall be rewarded.</i>\" \n\n");
 			menu();
 			addButtonIfTrue(6, "Sacrifice", pocketwatchdiscoveryYes, "Req. something 'super'.", player.superPerkPoints > 0);
 			addButton(8, "Leave", pocketwatchdiscoveryNo);
 		}
 		private function pocketwatchdiscoveryYes():void {
-			outputText("Determined you grab the watch. Feeling of pain piercing your soul makes you momentaly blank out. After returning to your senses you see the watch already handing on your waist. Feeling of mising some piece of yourself naggs you but you couldn't find what it's. Well guess it won't kill you for now... you hope as you return to camp.\n\n");
+			outputText("Determined you grab the watch. A feeling of pain pierces your soul making you momentarily black out. After returning to your senses, you see the watch is already hanging on your waist. A feeling of missing some piece of yourself nags at you but there doesn't appear to be anything missing at first glance. Well guess it won't kill you for now...	 you hope as you return to camp.\n\n");
 			player.superPerkPoints--;
 			player.createKeyItem("Pocket Watch", 0, 0, 0, 0);
+			player.createStatusEffect(StatusEffects.MergedPerksCount, 0, 0, 0, 0);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		private function pocketwatchdiscoveryNo():void {
-			outputText("No you not wanna sacrifice anything. LEaving watch behind you return to the camp.\n\n");
+			outputText("No you do not want to sacrifice anything. Leaving the watch behind, you return to the camp.\n\n");
 			doNext(camp.returnToCampUseOneHour);
 		}
 

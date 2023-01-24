@@ -2223,11 +2223,24 @@ public class Camp extends NPCAwareContent{
 		clearOutput();
 		outputText("Which perks would you like to combine using the watch?");
 		menu();
-		addButtonIfTrue(0, "DotE (layer 1)", mainPagePocketWatchDaoOfTheElementsPerkLayer1, "Req. Elemental Contract Rank 4 & Elements of the orthodox Path perks", player.hasPerk(PerkLib.ElementalContractRank4) && player.hasPerk(PerkLib.ElementsOfTheOrtodoxPath));
-		//addButtonIfTrue(1, );
-		addButtonIfTrue(5, "E C M & B R (Ex)", mainPagePocketWatchElementalConjurerMindAndBodyResolveEx, "Req. Elemental Conjurer Resolve & Elemental Conjurer Mind and Body Resolve perks", player.hasPerk(PerkLib.ElementalConjurerResolve) && player.hasPerk(PerkLib.ElementalConjurerMindAndBodyResolve));
-		//addButtonIfTrue(6, );
-		//addButtonIfTrue(7, );
+		if (player.hasPerk(PerkLib.DaoOfTheElements)) {
+			addButtonDisabled(0, "DotE (layer 1)", "You already have this merged perk.");
+			if (player.hasPerk(PerkLib.ElementalContractRank9) && player.hasPerk(PerkLib.ElementsOfMarethBasics) && player.hasPerk(PerkLib.DaoOfTheElements)) {
+				if (player.perkv1(PerkLib.DaoOfTheElements) > 1) addButtonDisabled(1, "DotE (layer 2)", "You already have this merged perk.");
+				else addButton(1, "DotE (layer 2)", mainPagePocketWatchDaoOfTheElementsPerkLayer2);
+			}
+			addButtonDisabled(1, "DotE (layer 2)", "Req. Elemental Contract Rank 9 & Elements of Mareth: Basics & Dao of the Elements perks.");
+		}
+		else {
+			addButtonIfTrue(0, "DotE (layer 1)", mainPagePocketWatchDaoOfTheElementsPerkLayer1, "Req. Elemental Contract Rank 5 & Elements of the orthodox Path perks", player.hasPerk(PerkLib.ElementalContractRank5) && player.hasPerk(PerkLib.ElementsOfTheOrtodoxPath));
+			addButtonDisabled(1, "DotE (layer 2)", "Req. Elemental Contract Rank 9 & Elements of Mareth: Basics & Dao of the Elements perks.");
+			//addButtonDisabled(2, );
+			//addButtonDisabled(3, );
+			//addButtonDisabled(4, );
+		}
+		addButtonIfTrue(5, "E C M & B R (Ex)", mainPagePocketWatchElementalConjurerMindAndBodyResolveEx, "Req. Elemental Conjurer Mind and Body Resolve perks / Or you already got this merged perk.", player.hasPerk(PerkLib.ElementalConjurerMindAndBodyResolve));
+		addButtonIfTrue(6, "E C M & B D (Ex)", mainPagePocketWatchElementalConjurerMindAndBodyDedicationEx, "Req. Elemental Conjurer Mind and Body Resolve (Ex) & Elemental Conjurer Mind and Body Dedication perks / Or you already got this merged perk.", player.hasPerk(PerkLib.ElementalConjurerMindAndBodyResolveEx) && player.hasPerk(PerkLib.ElementalConjurerMindAndBodyDedication));
+		addButtonIfTrue(7, "E C M & B S (Ex)", mainPagePocketWatchElementalConjurerMindAndBodySacrificeEx, "Req. Elemental Conjurer Mind and Body Dedication (Ex) & Elemental Conjurer Mind and Body Sacrifice perks / Or you already got this merged perk.", player.hasPerk(PerkLib.ElementalConjurerMindAndBodyDedicationEx) && player.hasPerk(PerkLib.ElementalConjurerMindAndBodySacrifice));
 		addButton(14, "Back", campMiscActions);
 	}
 	private function mainPagePocketWatchDaoOfTheElementsPerkLayer1():void {
@@ -2239,6 +2252,21 @@ public class Camp extends NPCAwareContent{
 		player.removePerk(PerkLib.ElementalContractRank4);
 		player.removePerk(PerkLib.ElementsOfTheOrtodoxPath);
 		player.createPerk(PerkLib.DaoOfTheElements, 1, 9, 0, 0);
+		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 4);
+		player.perkPoints += 3;
+		doNext(mainPagePocketWatch);
+	}
+	private function mainPagePocketWatchDaoOfTheElementsPerkLayer2():void {
+		clearOutput();
+		outputText("Perks combined: Dao of the Elements (layer 2) attained.");
+		player.removePerk(PerkLib.ElementalContractRank5);
+		player.removePerk(PerkLib.ElementalContractRank6);
+		player.removePerk(PerkLib.ElementalContractRank7);
+		player.removePerk(PerkLib.ElementalContractRank8);
+		player.removePerk(PerkLib.ElementsOfMarethBasics);
+		player.addPerkValue(PerkLib.DaoOfTheElements, 1, 1);
+		player.addPerkValue(PerkLib.DaoOfTheElements, 2, 9);
+		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 5);
 		player.perkPoints += 3;
 		doNext(mainPagePocketWatch);
 	}
@@ -2248,6 +2276,29 @@ public class Camp extends NPCAwareContent{
 		player.removePerk(PerkLib.ElementalConjurerResolve);
 		player.removePerk(PerkLib.ElementalConjurerMindAndBodyResolve);
 		player.createPerk(PerkLib.ElementalConjurerMindAndBodyResolveEx, 0, 0, 0, 0);
+		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 1);
+		player.perkPoints++;
+		doNext(mainPagePocketWatch);
+	}
+	private function mainPagePocketWatchElementalConjurerMindAndBodyDedicationEx():void {
+		clearOutput();
+		outputText("Perks combined:Elemental Conjurer Mind and Body Dedication (Ex) perk attained.");
+		player.removePerk(PerkLib.ElementalConjurerMindAndBodyResolveEx);
+		player.removePerk(PerkLib.ElementalConjurerDedication);
+		player.removePerk(PerkLib.ElementalConjurerMindAndBodyDedication);
+		player.createPerk(PerkLib.ElementalConjurerMindAndBodyDedicationEx, 0, 0, 0, 0);
+		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 2);
+		player.perkPoints++;
+		doNext(mainPagePocketWatch);
+	}
+	private function mainPagePocketWatchElementalConjurerMindAndBodySacrificeEx():void {
+		clearOutput();
+		outputText("Perks combined:Elemental Conjurer Mind and Body Sacrifice (Ex) perk attained.");
+		player.removePerk(PerkLib.ElementalConjurerMindAndBodyDedicationEx);
+		player.removePerk(PerkLib.ElementalConjurerSacrifice);
+		player.removePerk(PerkLib.ElementalConjurerMindAndBodySacrifice);
+		player.createPerk(PerkLib.ElementalConjurerMindAndBodySacrificeEx, 0, 0, 0, 0);
+		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 2);
 		player.perkPoints++;
 		doNext(mainPagePocketWatch);
 	}/*
@@ -3713,8 +3764,14 @@ public class Camp extends NPCAwareContent{
 
 	public function cheatSleepUntilMorning(multiplier:Number = 1.0):void {
 		var timeToSleep:int = (model.time.hours < 6 ? 6 : 24 + 6) - model.time.hours;
+		var manaTime:int = 0
 		CoC.instance.timeQ = timeToSleep;
 		camp.sleepRecovery(true, multiplier);
+		if (CoC.instance.player.hasPerk(PerkLib.JobSorcerer) || CoC.instance.player.hasPerk(PerkLib.JobElementalConjurer))
+		{
+			manaTime = timeToSleep * 60;
+			combat.manaregeneration(manaTime);
+		}
 		CoC.instance.timeQ = 0;
 		cheatTime(timeToSleep);
 		outputText("<b>" + NUMBER_WORDS_CAPITAL[timeToSleep] + " hours pass...</b>\n\n");

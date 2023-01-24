@@ -310,7 +310,9 @@ import classes.internals.*;
 			this.armorName = "skin";
 			this.lustVuln = .75;
 			this.lust = 30;
-			this.drop = new WeightedDrop(consumables.ME_DROP, 1);
+			this.drop = new WeightedDrop()
+					.add(useables.SRESIDUE, 1)
+					.add(consumables.ME_DROP, 1);
 			this.createStatusEffect(StatusEffects.TranscendentSoulField, 10, 10, 0, 0);//X times less dmg, +X lvl diff bonus
 			this.createPerk(PerkLib.EpicWisdom, 0, 0, 0, 0);
 			//this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);

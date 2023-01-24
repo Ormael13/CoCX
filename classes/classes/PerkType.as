@@ -669,7 +669,7 @@ public class PerkType extends BaseContent
 		public function requireOrPerks(perk1:PerkType, perk2:PerkType, v1:Number):PerkType {
 			requirements.push({
 				fn  : function (player:Player):Boolean {
-					return (player.hasPerk(perk1) || (player.hasPerk(perk2) && player.perkv1(perk2) >= v1));
+					return (player.hasPerk(perk1) || (player.hasPerk(perk2) && player.perkv1(perk2) == v1));
 				},
 				text: perk1.name(),
 				type: "perk",
@@ -709,6 +709,29 @@ public class PerkType extends BaseContent
 					}
 					return DISTANCE_PER_PERK*perks.length + (isFinite(maxdist) ? maxdist : 0);
 				}
+			});
+			return this;
+		}
+		public function requireNotThosePerks(...perks:Array):PerkType {
+			if (perks.length == 0) throw ("Incorrect call of requireNotThosePerk() - should NOT be empty");
+			var text:Array = [];
+			for each (var perk:PerkType in perks) {
+				text.push(perk.name());
+			}
+			requirements.push({
+				fn  : function (player:Player):Boolean {
+                    var allPerksYes:Boolean = true;
+                    for each (var perk:PerkType in perks) {
+                        if (player.hasPerk(perk)) {
+                            allPerksYes = false;
+                            break;
+                        }
+                    }
+                    return allPerksYes;
+                },
+				text: text.join(" or "),
+				type: "noperks",
+				perks: perks
 			});
 			return this;
 		}

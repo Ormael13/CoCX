@@ -31,7 +31,6 @@ use namespace CoC;
 			}
 			else outputText((flags[kFLAGS.TED_LVL_UP] >= 3 ?"Ted":"Dragon-boy")+" easily hits you with a wide, difficult to avoid swing.  ");//Ted
 			if(damage > 0) player.takePhysDamage(damage, true);
-			statScreenRefresh();
 		}
 		private function tedSpecialAttackTwo():void {
 			var damage:Number = 0;
@@ -48,19 +47,15 @@ use namespace CoC;
 				outputText("You are struck by a two-handed overhead swing from the enraged dragon-boy.  ");//Ted
 				damage = player.takePhysDamage(damage, true);
 			}
-			statScreenRefresh();
 		}//poniżej ataki jakie bedzie używać w dodatku do 2 powyżej w czasie spotkań po Hidden Cave
 		private function tedSpecialAttack1():void {
 			var damage:Number = 0;
-			statScreenRefresh();
 		}
 		private function tedSpecialAttack2():void {
 			var damage:Number = 0;
-			statScreenRefresh();
 		}
 		private function tedSpecialAttack3():void {
 			var damage:Number = 0;
-			statScreenRefresh();
 		}
 		
 		override protected function performCombatAction():void

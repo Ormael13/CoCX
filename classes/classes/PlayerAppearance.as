@@ -518,13 +518,13 @@ public class PlayerAppearance extends BaseContent {
 		var pregnancyDesc: String = "";
 		var womb:Object;
 		if (player.isPregnant()) {
-			if (player.pregnancyIncubation > 1) {
+			if (player.pregnancyIncubation > 0) {
 				womb = {};
 				womb["womb"] = 0
 				womb["type"] = player.pregnancyType;
 				womb["incubation"] = player.pregnancyIncubation;
 			}
-			if (player.pregnancy2Incubation > 1 && (player.pregnancyIncubation > 1 && player.pregnancy2Incubation < player.pregnancyIncubation)) {
+			if (player.pregnancy2Incubation > 0 && (player.pregnancyIncubation == 0 || (player.pregnancyIncubation > 0 && player.pregnancy2Incubation < player.pregnancyIncubation))) {
 				womb = {};
 				womb["womb"] = 1
 				womb["type"] = player.pregnancy2Type;

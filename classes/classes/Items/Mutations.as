@@ -15025,7 +15025,7 @@ public final class Mutations extends MutationsHelper {
 
         //physical changes
         //legs
-        if (player.lowerBody != LowerBody.HOOFED) {
+        if (player.lowerBody != LowerBody.HOOFED || !player.lowerBodyPart.isBiped()) {
             CoC.instance.transformations.LowerBodyHoofed(2).applyEffect(false);
             changes++;
         }
@@ -15181,7 +15181,7 @@ public final class Mutations extends MutationsHelper {
             outputText("You eat the scale expecting some kind of spectacular change and for a moment pretty much nothing happen. You begin to feel weird… like very weird. For some reason your situation as a whole is so funny you can’t help but laugh. Are you seriously eating some otherworldly dragon scale just so you can turn into a messed up rabbit dragon yourself? Aha yes you are and that's way to funny.");
             changeLimit += 15;
         } else {
-            outputText("You eat the scale expecting some kind of spectacular change strangely nothing happened. Maybe you should stop eating everything you find.");
+            outputText("You eat the scale expecting some kind of spectacular change, but strangely nothing happened. Maybe you should stop eating everything you find.");
         }
         if (player.blockingBodyTransformations()) changeLimit = 0;
         //-Jabberwocky face/bucktooth
@@ -15219,7 +15219,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Make sure pc is at least partialscaled
-        if (!player.hasCoatOfType(Skin.SCALES) && changes < changeLimit) {
+        if (!player.hasCoatOfType(Skin.DRAGON_SCALES) && changes < changeLimit) {
             outputText("[pg]");
             transformations.SkinDragonScales(Skin.COVERAGE_LOW, {color: "magenta"}).applyEffect();
             player.scaleColor2 = "purplish black";
@@ -15227,7 +15227,6 @@ public final class Mutations extends MutationsHelper {
         }
         // Scale color
         if ((!InCollection(player.furColor1, ("magenta")) || !InCollection(player.scaleColor1, ("magenta")) || !InCollection(player.furColor2, ("purplish black")) || !InCollection(player.scaleColor2, ("purplish black"))) && changes < changeLimit) {
-            outputText("[pg]");
             player.furColor1 = "magenta";
             player.furColor2 = "purplish black";
             player.scaleColor1 = "magenta";

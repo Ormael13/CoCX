@@ -146,7 +146,7 @@ public function tifaMainMenuTalkBecomeHerHandmaidenYes():void {
 	player.rearBody.type = RearBody.BEE_HANDMAIDEN;
 	player.skin.setBaseOnly({type:Skin.CHITIN, pattern: Skin.PATTERN_BEE_STRIPES});
 	player.killCocks( -1);
-	player.vaginaType(VaginaClass.BLACK_SAND_TRAP);
+	player.vaginaType(VaginaClass.BEE);
 	player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_DROOLING;
 	if (!player.hasStatusEffect(StatusEffects.BlackNipples)) player.createStatusEffect(StatusEffects.BlackNipples, 0, 0, 0, 0);
 	player.createPerk(PerkLib.TransformationImmunityBeeHandmaiden, 0, 0, 0, 0);

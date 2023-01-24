@@ -3606,15 +3606,17 @@ use namespace CoC;
 		 * Array of [race:Race, score:int, tier:int], indexed by race id
 		 */
 		public var racialScores:Array = [];
+		private var bodyDataChaced:BodyData;
 		public function needToUpdateRacialCache():Boolean {
 			// TODO @aimozg caching
-			return true;
+
+			return !(bodyDataChaced && bodyDataChaced.equals(bodyData()));
 		}
 		public function updateRacialCache():void {
-			var body:BodyData = bodyData();
+			bodyDataChaced = bodyData();
 			for each (var race:Race in Races.AllEnabledRaces) {
-				var score:int = race.totalScore(body);
-				var tier:int = race.getTierNumber(body, score);
+				var score:int = race.totalScore(bodyDataChaced);
+				var tier:int = race.getTierNumber(bodyDataChaced, score);
 				racialScores[race.id] = [race, score, tier];
 			}
 		}
@@ -4948,7 +4950,8 @@ use namespace CoC;
 		}
 
 		public function updateRacialAndPerkBuffs():void{
-			updateRacialCache();
+			if (needToUpdateRacialCache())
+				updateRacialCache();
 			if (effectiveTallness>=80 && hasPerk(PerkLib.TitanicStrength)) statStore.replaceBuffObject({'str.mult':(0.01 * Math.round(effectiveTallness/2))}, 'Titanic Strength', { text: 'Titanic Strength' });
 			if (effectiveTallness<80 && statStore.hasBuff('Titanic Strength')) statStore.removeBuffs('Titanic Strength');
 			if (effectiveTallness<=60 && hasPerk(PerkLib.CondensedPower)) statStore.replaceBuffObject({'str.mult':(0.01 * ((120 - Math.round(effectiveTallness))*10))}, 'Condensed Power', { text: 'Condensed Power' });
@@ -4972,14 +4975,11 @@ use namespace CoC;
 			if (!hasPerk(PerkLib.StrengthOfStone) && statStore.hasBuff('Strength of stone')) statStore.removeBuffs('Strength of stone');
 			if (hasPerk(PerkLib.PsionicEmpowerment)) statStore.replaceBuffObject({'int.mult':(0.01 * Mindbreaker.MindBreakerFullConvert)}, 'Psionic Empowerment', { text: 'Psionic Empowerment' });
 			var power:Number = 0;
-			var newPower:String = "Rounding String";
 			if (hasPerk(PerkLib.BullStrength)){
 				if (isRaceCached(Races.COW, 2)) power = lactationQ()*0.001;
 				if (isRaceCached(Races.MINOTAUR, 2) >= 15) power = cumCapacity()*0.001;
-				//Below now rounds the number to the tenths and hundreths decimal. Check discord for usage if needed elsewhere. ~Chibizs
-				if (power > 0.5) newPower = "0.5";
-				else newPower = ("0." + ((power.toString().charAt(2)) + (power.toString().charAt(3))));
-				statStore.replaceBuffObject({'str.mult':(newPower.valueOf())}, 'Bull Strength', { text: 'Bull Strength' });
+				if (power > 0.5) power = 0.5;
+				statStore.replaceBuffObject({'str.mult':(Math.round(power*100))/100}, 'Bull Strength', { text: 'Bull Strength' });
 			}
 			if (!hasPerk(PerkLib.BullStrength) && statStore.hasBuff('Bull Strength')) statStore.removeBuffs('Bull Strength');
 			if (hasPerk(PerkLib.UnnaturalStrength)){
@@ -6444,6 +6444,12 @@ use namespace CoC;
 				case 2: return true;
 				default: return super.looksFemale();
 			}
+		}
+
+		public function perksCountForMergedOnes():Number {
+			var pCFM:Number = 0;
+			if (hasStatusEffect(StatusEffects.MergedPerksCount)) pCFM += statusEffectv1(StatusEffects.MergedPerksCount);
+			return pCFM;
 		}
 
 		override public function modStats(dstr:Number, dtou:Number, dspe:Number, dinte:Number, dwis:Number, dlib:Number, dsens:Number, dlust:Number, dcor:Number, scale:Boolean):void {

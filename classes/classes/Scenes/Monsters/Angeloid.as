@@ -8,6 +8,7 @@ package classes.Scenes.Monsters
 	import classes.*;
 	import classes.BodyParts.Wings;
 	import classes.Scenes.SceneLib;
+	import classes.internals.ChainedDrop;
 	
 	public class Angeloid extends AbstractAngel
 	{
@@ -203,7 +204,8 @@ package classes.Scenes.Monsters
 				this.createPerk(PerkLib.DieHardHP, 9, 0, 0, 0);
 			}
 			this.tallness = 30;
-			this.drop = NO_DROP;
+			this.drop = new ChainedDrop()
+					.add(useables.SRESIDUE, 1);
 			this.weaponName = "energy blast";
 			this.weaponVerb = "shoot";
 			this.armorName = "skin";
