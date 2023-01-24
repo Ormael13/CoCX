@@ -93,7 +93,7 @@ public class HellHoundFireBallsMutation extends IMutationPerkType
         }
 
         public function HellHoundFireBallsMutation() {
-            super(mName + " IM", mName, SLOT_TESTICLES, 4, true);
+            super(mName + " IM", mName, SLOT_TESTICLES, 4);
         }
 
     }

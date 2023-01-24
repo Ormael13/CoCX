@@ -1168,7 +1168,7 @@ private function IMutationsSelector(page:int = 0):void {
 			mutations.pReqs();
 			//trace("" + mutations.name() + ": Checking requirements. v");
 							  //If using Mutagen, and mutation is not available due to race/lvl reqirements, costs 2 mutagen, otherwise 1, and player has enough slots.
-			var mutagenBypass:Boolean = (GoM == 2 && ((!mutations.available(target))? player.hasItem(useables.E_ICHOR, 2) : true) && (target.hasMutation(mutations)? true:player.maxCurrentMutationsInSlot(mutations.slot)));
+			var mutagenBypass:Boolean = (GoM == 2 && ((!mutations.available(target))? player.hasItem(useables.E_ICHOR, 2) : true) && (!player.blockingBodyTransformations()) && (target.hasMutation(mutations)? true:player.maxCurrentMutationsInSlot(mutations.slot)));
 			if ((flags[kFLAGS.EVA_MUTATIONS_BYPASS] || mutations.available(target) || mutagenBypass) && mutations.maxLvl > target.perkv1(mutations)) {	//last bit retains the blocking max mutation level.
 				//trace("Requirements met, adding in.");
 				bdFunc = curry(mutations.acquireMutation, player, curry(costTaker, mutagenBypass))

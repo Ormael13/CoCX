@@ -85,7 +85,7 @@ public class FeyArcaneBloodstreamMutation extends IMutationPerkType
         }
 
         public function FeyArcaneBloodstreamMutation() {
-            super(mName + " IM", mName, SLOT_BLOODSTREAM, 3);
+            super(mName + " IM", mName, SLOT_BLOODSTREAM, 4);
         }
 
     }

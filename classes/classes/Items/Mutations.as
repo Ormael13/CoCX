@@ -15016,6 +15016,25 @@ public final class Mutations extends MutationsHelper {
         //Randomly choose affects limit
         //clear screen
         clearOutput();
+        outputText("[pg]You feel smarter and clearer of mind then before, however as you finish the Sage medecine the legendary gear in your inventory begins to radiate along with your "+
+                (player.hasPerk(PerkLib.Phylactery) ? "Phylactery":"chest") + " as your very soul begin shining.\n\n");
+
+        if (player.hasPerk(PerkLib.Phylactery) && !player.hasPerk(PerkLib.InnerPhylactery)) {
+            outputText("You begin crying torrent as emotions overflow your mind again, no longer dimmed by the phylactery and all encompassing. Like a beating heart the pendant press against your chest, the gem slowly going through like if your body was fluid until it rest at your core where it has always belonged, the gem fusing with the flesh of your torso as body and soul are reunited.\n\n");
+            player.createPerk(PerkLib.InnerPhylactery, 0,0,0,0);
+        }
+        outputText("As the holy item within your hand is turned to purifying energies, the black of any remaining corruption is washed away from you like night by the morning sun, your body surging with raw magic. Your powers feel boundless, only restricted by your imagination and how you plan to use them. Overcome by the torrent of swirling emotions, flowing power, and the pleasure brought on by the change, you achieve what may be the greatest orgasm in your life, cumming without reserve or shame. Is this what they call true fulfillment?\n\n");
+
+        //transformation texts
+        if (player.hasPhysicalWings()) outputText("Your wings change color and shape, turning into large feathery white wings larger then your old wings. ");
+        else outputText("A knot of pain forms in your shoulders as they tense up. With a surprising force, a pair of immaculate white feathered wings sprout from your back, ripping a pair of holes in the back of your [armor].");
+        player.hairColor = "immaculate white";
+        player.featherColor = "immaculate white";
+        player.furColor = "immaculate white";
+        player.scaleColor = "immaculate white";
+        outputText("Your hair also changes color to match this becoming immaculate white, wich is the color of purity come to think of it. Your fangs retract, your mouth becoming more human and you can't help but smile serenely at the idea of your body being purged of all that nasty stuff leaving space for the perfect you.");
+        if (player.tail.type == Tail.DEMONIC)
+            outputText(" Finally your tail covers with fur and scales taking on a noble draconic appearance, gone is the last remnant of the demonic you. [pg]");
 
         //int change
         if (MutagenBonus("int", 3) || MutagenBonus("wis", 3)) {
@@ -15066,34 +15085,14 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
 
-        outputText("You feel smarter and clearer of mind then before however as you finish the Sage medecine the legendary gear in your inventory begins to radiate along with your "+
-                (player.hasPerk(PerkLib.Phylactery) ? "Phylactery":"chest") + " as your very soul begin shining.\n\n");
-
-        if (player.hasPerk(PerkLib.Phylactery) && !player.hasPerk(PerkLib.InnerPhylactery)) {
-            outputText("You begin crying torrent as emotions overflow your mind again, no longer dimmed by the phylactery and all encompassing. Like a beating heart the pendant press against your chest, the gem slowly going through like if your body was fluid until it rest at your core where it has always belonged, the gem fusing with the flesh of your torso as body and soul are reunited.\n\n");
-            player.createPerk(PerkLib.InnerPhylactery, 0,0,0,0);
-        }
-        outputText("As the holy item within your hand is turned to purifying energies the black of any remaining corruption is washed away from you like night by the morning sun, your body surging with raw magic. Your powers feels boundless only restricted by your imagination and how you plan to use them. Overcome by the torrent of swirling emotions, flowing power and the pleasure of the change you achieve what may be the greatest orgasm in your life cuming witheout reserve or shame is this what they call true fulfillment?\n\n");
-
-        //transformation texts
-        if (player.wings.type != Wings.NONE) outputText("Your wings change color and shape turning into large feathery white wings larger then your old pair. ");
-        else outputText("A knot of pain forms in your shoulders as they tense up. With a surprising force, a pair of immaculate white feathered wings sprout from your back, ripping a pair of holes in the back of your [armor].");
-        player.hairColor = "immaculate white";
-        player.featherColor = "immaculate white";
-        player.furColor = "immaculate white";
-        player.scaleColor = "immaculate white";
-        outputText("Your hair also changes color to match this becoming immaculate white, wich is the color of purity come to think of it. Your fangs retract, your mouth becoming more human and you can't help but smile serenely at the idea of your body being purged of all that nasty stuff leaving space for the perfect you.");
-        if (player.tail.type == Tail.DEMONIC)
-            outputText(" Finally your tail covers with fur and scales taking on a noble draconic appearance, gone is the last remnant of the demonic you. ");
-
-        if (rand(3) == 0) transformations.EyesChangeColor(["gold"]).applyEffect();
-        else transformations.EyesChangeColor(["pure blue"]).applyEffect();
+        if (rand(3) == 0) transformations.EyesChangeColor(["gold"]).applyEffect(false);
+        else transformations.EyesChangeColor(["pure blue"]).applyEffect(false);
 
         if (!player.hasPerk(PerkLib.Phylactery)) {
-            outputText(" Finaly your soul begins to resonate with your next form, its power concentrating into a large gem that manifests on your torso. Well you didn't have a phylactery before but I guess that's a thing now? It reminds you of Alvina owns gem come to think of it.\n\n");
+            outputText("Finaly your soul begins to resonate with your next form, its power coalescing into a large gem that manifests on your toso. Well you didn't have a phylactery before but I guess that's a thing now? It reminds you of Alvina's own gem come to think of it.\n\n");
             player.createPerk(PerkLib.InnerPhylactery, 0,0,0,0);
         }
-        outputText("[pg]As Alvina herself declared, Want becomes so much more when used not for oneself but others.");
+        outputText("As Alvina herself declared, Want becomes so much more when used not for oneself but others.");
         if (silly()) outputText("Well friendship is magic as they say and love is the ultimate weapon. The ponies at the lake would applaud your statement.");
         outputText("Nothing can compare to the sheer joy of being delivered from your corrupt self, this time you hope for good.[pg]");
 
@@ -15108,7 +15107,7 @@ public final class Mutations extends MutationsHelper {
         IMutationsLib.DiamondHeartIM.trueMutation = true;
 
         //TODO add Azazel perks effects
-        outputText("\n<b>Obtained ability: JudgementFlare</b>  The counterpart to infernal flare.");
+        outputText("\n<b>Obtained ability: Judgement Flare</b>  The counterpart to infernal flare.");
 
         outputText("\n<b>Obtained ability: Exorcism</b>  Damage any creature above 25% corruption for 50% of its hit point total. Can be used only once per battle.");
 
@@ -15116,12 +15115,14 @@ public final class Mutations extends MutationsHelper {
         outputText("\n<b>Obtained perk: Immortality</b>  "+PerkLib.Immortality.desc());
 
         player.createPerk(PerkLib.SealSin, 0,0,0,0); //TODO add Azazel perks effects
-        outputText("\n<b>Obtained perk: SealSin</b>  "+PerkLib.SealSin.desc());
+        outputText("\n<b>Obtained perk: Seal Sin</b>  "+PerkLib.SealSin.desc());
+
+        outputText("\n<b>Obtained ability: Perfect Clarity</b>  Deal increased magic damage but take more physical damage, increase evasion slightly.");
 
         outputText("\n<b>Obtained ability: PerfectClarity</b>  Deal increased magic damage but take more physical damage, increase evasion slightly.");
 
         player.createPerk(PerkLib.ConvictionOfPurpose, 0,0,0,0); //TODO add Azazel perks effects
-        outputText("\n<b>Obtained perk: ConvictionOfPurpose</b>  "+PerkLib.ConvictionOfPurpose.desc());
+        outputText("\n<b>Obtained perk: Conviction Of Purpose</b>  "+PerkLib.ConvictionOfPurpose.desc());
 
         outputText("\n<b>Gained Perk: Transformation Immunity!</b> "+ PerkLib.TransformationImmunity2.desc());
         player.createPerk(PerkLib.TransformationImmunity2, 0, 0, 0, 0);

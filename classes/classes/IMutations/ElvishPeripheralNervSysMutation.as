@@ -86,7 +86,7 @@ public class ElvishPeripheralNervSysMutation extends IMutationPerkType
         }
 
         public function ElvishPeripheralNervSysMutation() {
-            super(mName + " IM", mName, SLOT_NERVSYS, 3);
+            super(mName + " IM", mName, SLOT_NERVSYS, 4);
         }
 
     }

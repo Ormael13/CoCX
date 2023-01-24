@@ -1052,6 +1052,23 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					if (player.statusEffectv2(StatusEffects.ZenjiZList) == 3) SceneLib.zenjiScene.loverZenjiSleepWithNoSexMorning();
 					needNext = true;
 				}
+				//if (player.isRaceCached(Races.CERBERUS) && player.hasMutation(IMutationsLib.HellhoundFireBallsIM)) {
+				//	var pTier:Number = player.perkv1(IMutationsLib.HellhoundFireBallsIM);
+				//	if (pTier < 4 && player.level >= 30*pTier && player.perkv2(IMutationsLib.HellhoundFireBallsIM) >= 30*pTier) {
+				//		IMutationsLib.HellhoundFireBallsIM.acquireMutation(player, outputText("\nYour balls begin to suddenly feel heavier… warmer. You begin pumping your two penis absentmindedly thinking of all the bitches you recently broke on your twin shaft as the heat rushes all the way to your pair of erect members. You cum a humongous load of smoking warm cum, way to warm for normal seeds. It looks like your balls are progressively continuing their evolution to be more hellhound-like as your seed takes on burning hot property just like that of a hellhound.\n"));
+				//		needNext = true;
+				//	}
+				//}
+				for each (var pPerks:IMutationPerkType in IMutationsLib.mutationsArray("")){
+					if (pPerks.trueMutation){
+						pPerks.pReqs();
+						if (pPerks.available(player) && (pPerks.maxLvl > player.perkv1(pPerks))){
+							pPerks.acquireMutation(player, "none", 1);
+							player.setPerkValue(pPerks, 3, 1);
+							needNext = true;
+						}
+					}
+				}
 			}
 			//Heaven Tribulations
 			if (player.hasStatusEffect(StatusEffects.TribulationCountdown)) {
@@ -1188,7 +1205,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 
 			player.updateRacialCache();
 			//Demonic hunger perk
-			if (player.isAnyRaceCached(Races.DEMON, Races.IMP) || player.hasPerk(PerkLib.Phylactery)) { //Check for being a demon enough
+			if (player.isAnyRaceCached(Races.DEMON, Races.IMP, Races.DEVIL) || player.hasPerk(PerkLib.Phylactery)) { //Check for being a demon enough
 				if (!player.hasPerk(PerkLib.DemonEnergyThirst)) {
 					outputText("\nYou begin fantasising about pussies and cocks, foaming at the idea of fucking or getting fucked. It would look like you aquired the demons hunger for sex and can now feed from the orgasms of your partners. \n(<b>Gained Perk: Demonic Hunger</b>)\n");
 					player.createPerk(PerkLib.DemonEnergyThirst, 0, 0, 0, 0);
@@ -2617,33 +2634,19 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.Lycanthropy);
 				needNext = true;
 			}
-			//if (player.isRaceCached(Races.CERBERUS) && player.hasMutation(IMutationsLib.HellhoundFireBallsIM)) {
-			//	var pTier:Number = player.perkv1(IMutationsLib.HellhoundFireBallsIM);
-			//	if (pTier < 4 && player.level >= 30*pTier && player.perkv2(IMutationsLib.HellhoundFireBallsIM) >= 30*pTier) {
-			//		IMutationsLib.HellhoundFireBallsIM.acquireMutation(player, outputText("\nYour balls begin to suddenly feel heavier… warmer. You begin pumping your two penis absentmindedly thinking of all the bitches you recently broke on your twin shaft as the heat rushes all the way to your pair of erect members. You cum a humongous load of smoking warm cum, way to warm for normal seeds. It looks like your balls are progressively continuing their evolution to be more hellhound-like as your seed takes on burning hot property just like that of a hellhound.\n"));
-			//		needNext = true;
-			//	}
-			//}
-			for each (var pPerks:IMutationPerkType in IMutationsLib.mutationsArray("")){
-				if (pPerks.trueMutation){
-					pPerks.pReqs();
-					if (pPerks.available(player)){
-						curry(pPerks.acquireMutation, this, "none", Math.min((int)(player.level/30) + 1), pPerks.maxLvl);
-						player.setPerkValue(pPerks, 3, 1);
-						needNext = true;
-					}
-				}
-			}
+
 			if (player.hasPerk(PerkLib.DominantAlpha)) player.DominantAlphaBonus();
-			if (player.hasPerk(PerkLib.Immortality) && !player.isRaceCached(Races.AZAZEL)) {
+			if (!player.isRaceCached(Races.AZAZEL) && player.hasPerk(PerkLib.Immortality)) {
 				outputText("\nYou lose your sense of invulnerability as you are no longer an Azazel. <b>Perk lost: Immortality</b>\n");
 				player.removePerk(PerkLib.Immortality);
 				needNext = true;
 			}
-			if (!player.hasPerk(PerkLib.Immortality) && player.isRaceCached(Races.AZAZEL)) {
-				outputText("\nYou gain a sense of invulnerability as you are now an Azazel. <b>Perk gained: Immortality</b>\n");
-				player.createPerk(PerkLib.Immortality, 0, 0, 0, 0);
-				needNext = true;
+			if (player.isRaceCached(Races.AZAZEL)) {
+				if (!player.hasPerk(PerkLib.Immortality)) {
+					outputText("\nYou gain a sense of invulnerability as you are now an Azazel. <b>Perk gained: Immortality</b>\n");
+					player.createPerk(PerkLib.Immortality, 0, 0, 0, 0);
+					needNext = true;
+				}
 			}
 			if (player.hasPerk(PerkLib.WhatIsReality) && player.hasPerk(PerkLib.VorpalClaw) && !player.isRaceCached(Races.CHESHIRE)) {
 				outputText("\nYou lose your sense of invulnerability as you are no longer an Cheshire. <b>Perks lost: What is Reality? && Vorpal Claw</b>");

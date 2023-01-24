@@ -94,7 +94,7 @@ public class AlphaHowlMutation extends IMutationPerkType
         }
 
         public function AlphaHowlMutation() {
-            super(mName + " IM", mName, SLOT_LUNGS, 4, true);
+            super(mName + " IM", mName, SLOT_LUNGS, 4, false);
         }
     }
 }

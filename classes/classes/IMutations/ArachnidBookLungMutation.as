@@ -82,7 +82,7 @@ import classes.Races;
         }
 
         public function ArachnidBookLungMutation() {
-            super(mName + " IM", mName, SLOT_ADAPTATIONS, 3, true);
+            super(mName + " IM", mName, SLOT_ADAPTATIONS, 3);
         }
         
     }
