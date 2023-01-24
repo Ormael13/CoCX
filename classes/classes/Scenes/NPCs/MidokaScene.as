@@ -115,9 +115,8 @@ public class MidokaScene extends NPCAwareContent implements TimeAwareInterface, 
 	}
 
 	public function midokaGrowsUp():void {
-		clearOutput();
 		if (MidokaAge == 1) {
-			outputText("[midokaname]: Your daughter is sitting in her cradle looking at you with a bright smile. She doesn't talk yet and is barely the size of a human baby but when you get close she makes great efforts trying to stand to have a better look at you. You chuckle and proceed to carry her up, giving a kiss or two on her forehead which makes her laugh. Chi Chi smiles at this display of parental affection.[pg]");
+			outputText("Your daughter is sitting in her cradle looking at you with a bright smile. She doesn't talk yet and is barely the size of a human baby but when you get close she makes great efforts trying to stand to have a better look at you. You chuckle and proceed to carry her up, giving a kiss or two on her forehead which makes her laugh. Chi Chi smiles at this display of parental affection.[pg]");
 			outputText("“<i>She always brightens up when you are in camp. I wish you were there more often for her but duty first right?</i>”[pg]");
 		}
 		if (MidokaAge == 2) {
@@ -143,7 +142,7 @@ public class MidokaScene extends NPCAwareContent implements TimeAwareInterface, 
 	}
 
 	public function midokaCampDescription():void {
-		outputText("\nMidoka is a young Hinezumi of about "+(MidokaAge == 1?"1 month":MidokaAge == 2?"1 year":MidokaAge == 3?"3 years":MidokaAge == 4?"6 years":MidokaAge == 5?"10 years":"15 years")+" old or so, you would give him/her around this age at least.\n\n");
+		outputText("\nMidoka is a young Hinezumi of about "+(MidokaAge == 1?"1 month":MidokaAge == 2?"1 year":MidokaAge == 3?"3 years":MidokaAge == 4?"6 years":MidokaAge == 5?"10 years":"15 years")+" old or so, you would give her around this age at least.\n\n");
 	}
 
 
@@ -152,7 +151,6 @@ public class MidokaScene extends NPCAwareContent implements TimeAwareInterface, 
 		clearOutput();
 		if (GrowUpTime <= 0) {
 			midokaGrowsUp();
-			return;
 		}
 		else {
 			outputText("[midokaname] notices you coming towards her and ");
@@ -161,7 +159,7 @@ public class MidokaScene extends NPCAwareContent implements TimeAwareInterface, 
 			else if (MidokaAge == 3) outputText("stands up, gripping the edge of her basket with one tiny hand and waving the other at you to pick her up.");
 			else if (MidokaAge == 4) outputText("calls to you, “<i>"+championRef()+"!</i>”, clambering out of her basket and running over to you.");
 			else if (MidokaAge == 5) outputText("waves to you, “<i> Hi "+championRef()+", did you come to watch me train today?</i>”");
-			else if (MidokaAge == 6) outputText("waves to you, “<i> Hi "+championRef()+", did you come to train with me today?</i>” while giving you a light jab to teh shoulder");
+			else if (MidokaAge == 6) outputText("waves to you, “<i> Hi "+championRef()+", did you come to train with me today?</i>” while giving you a light jab to the shoulder");
 			if (MidokaGuardingCamp == 2) outputText("She is currently guarding the camp at night.");
 		}
 

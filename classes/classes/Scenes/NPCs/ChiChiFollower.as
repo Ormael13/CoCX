@@ -587,7 +587,7 @@ public function ChiChiCampMainMenu():void {
 	else outputText("You go over to Chi Chi who pauses her training to head to you once you are close.\n\n");
 	if (flags[kFLAGS.CHI_CHI_FOLLOWER] < 4) outputText("\"<i>Oh how are you doing, [name]? I just finished a new set of kicks and punches. Did you want us to train together or did you have something else in mind?</i>\" She’s arm crossed waiting on your reply.");
 	else outputText("\"<i>So glad to see you [name], you are a sunshine in my life, you know that. So? What did you visit your lovely wife for today?</i>\"");
-	if (SceneLib.midokaScene.MidokaAge > 0 && SceneLib.midokaScene.MidokaAge < 4) outputText("\n\n[midokaname] Is sleeping in a basket not so far from Chi Chi, such a sweet child.");
+	if (SceneLib.midokaScene.MidokaAge > 0 && SceneLib.midokaScene.MidokaAge < 4) outputText("\n\n[midokaname] is sleeping in a basket not so far from Chi Chi, such a sweet child.");
 
 	switch (pregnancy.event) {
 		case 2:
@@ -1174,7 +1174,7 @@ public function mishapsLunaChiChi():void {
 		//Get out if already pregged.
 		if (pregnancy.isPregnant) return;
 		if (flags[kFLAGS.CHI_CHI_FOLLOWER] < 2) return;
-		//return;//TODO Midoka is not complete enough yet to include, also need ChiChi preg update and appearance texts
+		return;//TODO Midoka is not complete enough yet to include, also need ChiChi preg update and appearance texts
 
 		//See if any of the scenarios get her preg
 		var preg:Boolean = false;
@@ -1199,7 +1199,7 @@ public function mishapsLunaChiChi():void {
 		spriteSelect(SpriteDb.s_chichi);
 		clearOutput();
 		outputText("Chi-Chi walks over to you, a very serious expression in her eyes. She looks frustrated and with due cause, the proud warrior’s belly has inflated to the size of a balloon.[pg]");
-		outputText("“<i>Look, [pg], I would have been angry had you abused me in my drunken state in the evenings to fuck me, but to think you would steep so low as to impregnate me?! I don’t know if I should pulverize your head or hug you tightly. Regardless, for the sake of OUR child I ask that as of now you assume full responsibility as a father.</i>”[pg]");
+		outputText("“<i>Look, [name], I would have been angry had you abused me in my drunken state in the evenings to fuck me, but to think you would steep so low as to impregnate me?! I don’t know if I should pulverize your head or hug you tightly. Regardless, for the sake of OUR child I ask that as of now you assume full responsibility as a father.</i>”[pg]");
 		outputText("Does that mean the both of you are a couple now?[pg]");
 		outputText("“<i>Of course it does, I just wish you married me first, you moron!</i>”[pg]");
 		outputText("She slams her closed fist against your head to make the point clear. Owch! Well this went better than you thought it would, guess the two of you are together for the best and the worst now.[pg]");
