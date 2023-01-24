@@ -709,10 +709,11 @@ public class CombatUI extends BaseCombatContent {
 					: companionName == "Etna" ? combat.comfoll.etnaCombatActions
 						: companionName == "Excellia" ? combat.comfoll.excelliaCombatActions
 							: companionName == "Kiha" ? combat.comfoll.kihaCombatActions
-								: companionName == "Mitzi" ? combat.comfoll.mitziCombatActions
-									: companionName == "Neisa" ? combat.comfoll.neisaCombatActions
-										: companionName == "Tyrantia" ? combat.comfoll.tyrantiaCombatActions
-											: companionName == "Zenji" ? combat.comfoll.zenjiCombatActions : null;
+								: companionName == "Midoka" ? combat.comfoll.midokaCombatActions
+									: companionName == "Mitzi" ? combat.comfoll.mitziCombatActions
+										: companionName == "Neisa" ? combat.comfoll.neisaCombatActions
+											: companionName == "Tyrantia" ? combat.comfoll.tyrantiaCombatActions
+												: companionName == "Zenji" ? combat.comfoll.zenjiCombatActions : null;
 		//do action
 		if (clearAndNext) {
 			clearOutput();
