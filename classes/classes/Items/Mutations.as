@@ -15119,7 +15119,8 @@ public final class Mutations extends MutationsHelper {
 
         outputText("\n<b>Obtained ability: Perfect Clarity</b>  Deal increased magic damage but take more physical damage, increase evasion slightly.");
 
-        outputText("\n<b>Obtained ability: PerfectClarity</b>  Deal increased magic damage but take more physical damage, increase evasion slightly.");
+        player.createPerk(PerkLib.Purifier, 0,0,0,0);
+        outputText("\n<b>Obtained perk: Purifier</b>  "+PerkLib.Purifier.desc());
 
         player.createPerk(PerkLib.ConvictionOfPurpose, 0,0,0,0); //TODO add Azazel perks effects
         outputText("\n<b>Obtained perk: Conviction Of Purpose</b>  "+PerkLib.ConvictionOfPurpose.desc());

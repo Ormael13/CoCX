@@ -2405,6 +2405,8 @@ use namespace CoC;
 			clearOutput();
 			flags[kFLAGS.IMPS_KILLED]++;
 			outputText("You make a quick work of the imp before dragging the corpse away. That's one less foul creature prowling the realms. ");
+			if (player.hasPerk(PerkLib.Purifier)) player.purifyDemonBonus();
+
 			if (player.cor < 25) dynStats("cor", -0.5);
 			menu();
 			addButton(1, "Leave", cleanupAfterCombat);
@@ -2416,6 +2418,8 @@ use namespace CoC;
 			clearOutput();
 			flags[kFLAGS.IMPS_KILLED]++;
 			outputText("You make a quick work of the feral imp before dragging the corpse away. That's one less foul creature prowling the realms. ");
+			if (player.hasPerk(PerkLib.Purifier)) player.purifyDemonBonus();
+
 			if (player.cor < 25) dynStats("cor", -0.5);
 			menu();
 			addButton(1, "Leave", cleanupAfterCombat);

@@ -2639,12 +2639,19 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			if (!player.isRaceCached(Races.AZAZEL) && player.hasPerk(PerkLib.Immortality)) {
 				outputText("\nYou lose your sense of invulnerability as you are no longer an Azazel. <b>Perk lost: Immortality</b>\n");
 				player.removePerk(PerkLib.Immortality);
+				outputText("\nYou lose your sense of conviction as you are no longer an Azazel. <b>Perk lost: Purifier</b>\n");
+				player.removePerk(PerkLib.Purifier);
 				needNext = true;
 			}
 			if (player.isRaceCached(Races.AZAZEL)) {
 				if (!player.hasPerk(PerkLib.Immortality)) {
 					outputText("\nYou gain a sense of invulnerability as you are now an Azazel. <b>Perk gained: Immortality</b>\n");
 					player.createPerk(PerkLib.Immortality, 0, 0, 0, 0);
+					needNext = true;
+				}
+				if (!player.hasPerk(PerkLib.Purifier)) {
+					outputText("\nYou gain a sense of conviction as you are now an Azazel. <b>Perk gained: Purifier</b>\n"+PerkLib.Purifier.desc());
+					player.createPerk(PerkLib.Purifier, 0, 0, 0, 0);
 					needNext = true;
 				}
 			}

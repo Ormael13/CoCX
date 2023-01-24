@@ -2493,6 +2493,8 @@ public class PerkLib
 				"It's official, everyone knows to go to you for sex. You're still new to the business, but you learned some new tricks. (+15% tease dmg)",
 				"You've chosen the 'Prostitute' perk, gaining +15% tease dmg.");
 		public static const PurityElixir:PurityElixirPerk = new PurityElixirPerk();
+		public static const Purifier:PerkType = mk("Purifier", "Purifier",
+				"When slaying or purifying demons their corrupted power is purified and sent back to you.");
 		public static const PyrosFriend:PerkType = mk("Pyro's Friend", "Pyro's Friend",
 				"Mmmphmm! (No idea what he? is trying to say... but same rules apply... +10% ranged damage buff)",
 				"You've chosen the 'Pyro's Friend' perk, gaining +10% range phys dmg.");
