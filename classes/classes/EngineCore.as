@@ -13,6 +13,7 @@ import flash.net.navigateToURL;
 import flash.utils.ByteArray;
 import flash.utils.Dictionary;
 import flash.utils.describeType;
+import flash.utils.setTimeout;
 
 public class EngineCore {
     private static var funcLookups:Dictionary = null;
@@ -627,7 +628,9 @@ public class EngineCore {
     /**
      * Used to update the display of statistics
      */
-    public static function statScreenRefresh():void {
+    private static var statScreenRefreshScheduled:Boolean = false;
+    public static function doStatScreenRefresh():void {
+        statScreenRefreshScheduled = false;
         Utils.Begin("engineCore", "statScreenRefresh");
         CoC.instance.mainView.statsView.show(); // show() method refreshes.
         CoC.instance.mainViewManager.refreshStats();
@@ -638,6 +641,12 @@ public class EngineCore {
             CoC.instance.mainView.monsterStatsView.hide();
         }
         Utils.End("engineCore", "statScreenRefresh");
+    }
+    public static function statScreenRefresh():void {
+        if (statScreenRefreshScheduled) return;
+        statScreenRefreshScheduled = true;
+        // call doStatScreenRefresh ASAP after all other code is executed
+        setTimeout(doStatScreenRefresh, 0);
     }
 
     /**

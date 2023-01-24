@@ -3606,15 +3606,20 @@ use namespace CoC;
 		 * Array of [race:Race, score:int, tier:int], indexed by race id
 		 */
 		public var racialScores:Array = [];
+		private var bodyDataChaced:BodyData;
 		public function needToUpdateRacialCache():Boolean {
 			// TODO @aimozg caching
-			return true;
+			var b1 = bodyDataChaced;
+			var b2 = bodyDataChaced.equals(bodyData());
+			var b3 = !(bodyDataChaced && bodyDataChaced.equals(bodyData()));
+
+			return !(bodyDataChaced && bodyDataChaced.equals(bodyData()));
 		}
 		public function updateRacialCache():void {
-			var body:BodyData = bodyData();
+			bodyDataChaced = bodyData();
 			for each (var race:Race in Races.AllEnabledRaces) {
-				var score:int = race.totalScore(body);
-				var tier:int = race.getTierNumber(body, score);
+				var score:int = race.totalScore(bodyDataChaced);
+				var tier:int = race.getTierNumber(bodyDataChaced, score);
 				racialScores[race.id] = [race, score, tier];
 			}
 		}
