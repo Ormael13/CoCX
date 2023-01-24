@@ -77,11 +77,6 @@ public class MidokaScene extends NPCAwareContent implements TimeAwareInterface, 
 		outputText("“<i>She needs a name I thought about <b>Midoka</b>, but the choice is yours.</i>”[pg]");
 		menu();
 		addButton(0,"Next",applyMidokaName);
-		mainView.nameBox.text = "Midoka";
-		mainView.nameBox.visible = true;
-		mainView.nameBox.width = 165;
-		mainView.nameBox.x = mainView.mainText.x + 5;
-		mainView.nameBox.y = mainView.mainText.y + 3 + mainView.mainText.textHeight;
 	}
 	private function applyMidokaName():void {
 		//Easter Egg Names Hel WILL NOT ALLOW:
@@ -97,6 +92,9 @@ public class MidokaScene extends NPCAwareContent implements TimeAwareInterface, 
 			if(mainView.nameBox.text == "") outputText("“<i>Please give her a name [name].</i>”");
 			//[Back to the name field you go!]
 			menu();
+			mainView.nameBox.text = "Midoka";
+			mainView.nameBox.visible = true;
+			mainView.nameBox.width = 165;
 			mainView.nameBox.x = mainView.mainText.x + 5;
 			mainView.nameBox.y = mainView.mainText.y + 3 + mainView.mainText.textHeight;
 			addButton(0,"Next",applyMidokaName);
@@ -164,7 +162,6 @@ public class MidokaScene extends NPCAwareContent implements TimeAwareInterface, 
 			else if (MidokaAge == 4) outputText("calls to you, “<i>"+championRef()+"!</i>”, clambering out of her basket and running over to you.");
 			else if (MidokaAge == 5) outputText("waves to you, “<i> Hi "+championRef()+", did you come to watch me train today?</i>”");
 			else if (MidokaAge == 6) outputText("waves to you, “<i> Hi "+championRef()+", did you come to train with me today?</i>” while giving you a light jab to teh shoulder");
-			outputText("\"<i>" + championRef() + "!</i>\"[pg]");
 			if (MidokaGuardingCamp == 2) outputText("She is currently guarding the camp at night.");
 		}
 
