@@ -24,13 +24,15 @@ public class MidokaScene extends NPCAwareContent implements TimeAwareInterface, 
 		MidokaName = "";
 		MidokaAge = 0;
 		GrowUpTime = -1;
+		MidokaGuardingCamp = 0;
 	}
 
 	public function saveToObject():Object {
 		return {
 			"MidokaName": MidokaName,
 			"MidokaAge": MidokaAge,
-			"GrowUpTime": GrowUpTime
+			"GrowUpTime": GrowUpTime,
+			"MidokaGuardingCamp": MidokaGuardingCamp
 		};
 	}
 
@@ -39,6 +41,7 @@ public class MidokaScene extends NPCAwareContent implements TimeAwareInterface, 
 			MidokaName = o["MidokaName"];
 			MidokaAge = o["MidokaAge"];
 			GrowUpTime = o["GrowUpTime"];
+			MidokaGuardingCamp = o["MidokaGuardingCamp"];
 		} else resetState();
 	}
 
@@ -134,6 +137,9 @@ public class MidokaScene extends NPCAwareContent implements TimeAwareInterface, 
 		if (MidokaAge == 5) {
 			outputText("[midokaname] age 10 texts[pg]");
 		}
+		if (MidokaAge == 6) {
+			outputText("[midokaname] age 16 texts[pg]");
+		}
 		MidokaAge++
 		GrowUpTime = 7*24;
 	}
@@ -146,12 +152,18 @@ public class MidokaScene extends NPCAwareContent implements TimeAwareInterface, 
 	//Etna’s daughter Main Menu @ Camp [Followers Tab]
 	public function midokaMainMenu():void {
 		clearOutput();
-		if (GrowUpTime == 0) {
+		if (GrowUpTime <= 0) {
 			midokaGrowsUp();
 			return;
 		}
 		else {
-			outputText("[etnakidname] notices you coming towards her and pounces on you, smiling widely as she jumps into your arms.[pg]");
+			outputText("[midokaname] notices you coming towards her and ");
+			if (MidokaAge == 1) outputText("coos at you, waving her arms at you to pick her up.");
+			else if (MidokaAge == 2) outputText("sits up, crawlnig to the edge of her basket and waving her arms at you to pick her up.");
+			else if (MidokaAge == 3) outputText("stands up, gripping the edge of her basket with one tiny hand and waving the other at you to pick her up.");
+			else if (MidokaAge == 4) outputText("calls to you, “<i>"+championRef()+"!</i>”, clambering out of her basket and running over to you.");
+			else if (MidokaAge == 5) outputText("waves to you, “<i> Hi "+championRef()+", did you come to watch me train today?</i>”");
+			else if (MidokaAge == 6) outputText("waves to you, “<i> Hi "+championRef()+", did you come to train with me today?</i>” while giving you a light jab to teh shoulder");
 			outputText("\"<i>" + championRef() + "!</i>\"[pg]");
 			if (MidokaGuardingCamp == 2) outputText("She is currently guarding the camp at night.");
 		}

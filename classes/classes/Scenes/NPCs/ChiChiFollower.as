@@ -94,16 +94,16 @@ public class ChiChiFollower extends NPCAwareContent implements TimeAwareInterfac
 		pregnancy.pregnancyAdvance();
 		if (pregnancy.isPregnant) {
 			if (chichiPregUpdate()) needNext = true;
-			if (pregnancy.incubation == 0) {
-				chichiGivesBirth();
-				pregnancy.knockUpForce(); //Clear Pregnancy
-				needNext = true;
-			}
 		}
 		return needNext;
 	}
 
 	public function timeChangeLarge():Boolean {
+		if (pregnancy.isPregnant && pregnancy.incubation == 0) {
+			chichiGivesBirth();
+			pregnancy.knockUpForce(); //Clear Pregnancy
+			return true;
+		}
 		return false;
 	}
 
@@ -1184,7 +1184,7 @@ public function mishapsLunaChiChi():void {
 		if (flags[kFLAGS.CHI_CHI_FOLLOWER] >= 4) score *= 1.5;
 
 		trace("ChiChi Preg Check Virility Score: " + score);
-		if((player.cumQ() > (flags[kFLAGS.CHI_CHI_FOLLOWER] >= 4? 150 : 250) && score >= rand(100))) {
+		if((player.cumQ() > (flags[kFLAGS.CHI_CHI_FOLLOWER] < 4? 150 : 250) && score >= rand(100))) {
 			preg = true;
 			trace("ChiChi knocked up!");
 		}
