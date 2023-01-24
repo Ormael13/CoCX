@@ -143,7 +143,7 @@ public function etnaDaughterMainMenu():void {
 	if (incestEnabled()) {
 		//[Sex]; bipeds only, lust must be high, incest must be flagged active, and player must have a dick.
 		if (EtnaDaughterIncestEnabled) {
-			addButton(2, "Play: Carry", playWithEtnaDaughter)
+			addButton(3, "Play: Carry", playWithEtnaDaughter)
 					.disableIf(player.lust < 33, "Not aroused enough.")
 					.disableIf(!player.isBiped(), "You have to be biped, sorry.")
 					.disableIf(!player.hasCock(), "Req. a cock.");
@@ -161,11 +161,11 @@ private function talkToEtnaDaughter():void {
 	outputText("So, what did your adorable daughter do today?")
 	var temp:int = rand((incestEnabled() && EtnaDaughterIncestEnabled)?5:4);
 	if (temp == 0) {
-		outputText("“<i>I caught a butterfly "+championRef()+", look!</i>”\n" +
+		outputText("“<i>I caught a butterfly "+championRef()+", look!</i>”[pg]" +
 				"She opens her paws and indeed a butterfly flies out as she laughs cheerfully. Considering the nature of the other games she sometimes gets involved in this is a welcome sight.\n");
 		doNext(camp.returnToCampUseOneHour);
 	} else if (temp == 1) {
-		outputText("“<i>I went playing by the stream, the fish are so boring. However, an ugly little man in red came by. I milked him dry just like mama told me!</i>”[pg]]" +
+		outputText("“<i>I went playing by the stream, the fish are so boring. However, an ugly little man in red came by. I milked him dry just like mama told me!</i>”[pg]" +
 				"Perhaps you should keep watch over her but since Etna doesn't seem to be worried you could also just let her have her fun.\n");
 		if (EtnaDaughterGuardingCamp == 0) EtnaDaughterGuardingCamp = 1;
 		doNext(camp.returnToCampUseOneHour);

@@ -680,6 +680,10 @@ public class Camp extends NPCAwareContent{
 			SceneLib.excelliaFollower.ExcelliaPathChoice();
 			return;
 		}
+		if (SceneLib.chichiScene.ChiChiCorruption >= 90 && !SceneLib.chichiScene.ChiChiKickedOut) {
+			SceneLib.chichiScene.corruptionOverflowing();
+			return;
+		}
 		//Go through Helia's first time move in interactions if  you haven't yet.
 		if (flags[kFLAGS.HEL_FOLLOWER_LEVEL] == 2 && SceneLib.helScene.followerHel() && flags[kFLAGS.HEL_INTROS_LEVEL] == 0) {
 			helFollower.helFollowersIntro();
@@ -1930,8 +1934,13 @@ public class Camp extends NPCAwareContent{
 			}
 			//Etna daughter
 			if (followerEtnaKid()) {
-				etnaKidFollower().etnaDaughterCampDescription();
-				buttons.add(EtnaDaughterScene.EtnaDaughterName, etnaKidFollower().etnaDaughterMainMenu);
+				etnaKidFollower.etnaDaughterCampDescription();
+				buttons.add(EtnaDaughterScene.EtnaDaughterName, etnaKidFollower.etnaDaughterMainMenu);
+			}
+			//Midoka, Chi-Chi's daughter
+			if (followerMidoka()) {
+				midokaScene.midokaCampDescription();
+				buttons.add(SceneLib.midokaScene.MidokaName, midokaScene.midokaMainMenu);
 			}
 			//Valaria
 			if (flags[kFLAGS.VALERIA_AT_CAMP] == 1 && flags[kFLAGS.TOOK_GOO_ARMOR] == 1) {
@@ -2025,7 +2034,7 @@ public class Camp extends NPCAwareContent{
 				buttons.add("Ayane", SceneLib.ayaneFollower.ayaneCampMenu).hint("Visit Ayane a kitsune priestess of Taoth.");
 			}
 			if (SceneLib.ayaneFollower.ayaneChildren() == 1){
-				outputText("You can see Ayane's child are playing around in the grass.\n\n");
+				outputText("You can see Ayane's child is playing around in the grass.\n\n");
 			}
 			if (SceneLib.ayaneFollower.ayaneChildren() >= 2){
 				outputText("You can see Ayane's children are playing around in the grass.\n\n");
@@ -4860,4 +4869,4 @@ public function rebirthFromBadEnd():void {
 	}
 
 }
-}
+}

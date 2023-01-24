@@ -192,6 +192,8 @@ public class SceneLib {
 
     public static var michikoFollower:Michiko = new Michiko();
 
+    public static var midokaScene:MidokaScene = new MidokaScene();
+
     public static var milkWaifu:MilkWaifu = new MilkWaifu();
 
     public static var neisaFollower:NeisaFollower = new NeisaFollower();
