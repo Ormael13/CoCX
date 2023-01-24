@@ -1628,9 +1628,9 @@ private function sheilaXP4Sex(display:Boolean = false):void {
 		outputText("\n\n\"<i>I didn't say that...</i>\"");
 	}
 	menu();
-	addButton(0,"69WithWang",consensualSheila69,true)
+	addButton(0,"69WithWang",curry(sceneHunter.callFitNofit,consensualSheila69, 32))
 		.disableIf(!player.hasCock(), "Req. a cock!");
-	addButton(1,"69WithCooch",consensualSheila69,false)
+	addButton(1,"69WithCooch",consensualSheila69,-1)
 		.disableIf(!player.hasVagina(), "Req. a vagina!");
 	addButton(2,"Fuck Her",consentacleVagSexForKangarooSlutBitches)
 		.disableIf(player.cockThatFits(32) < 0, "Req. a cock fitting 32 area.");
@@ -1647,7 +1647,7 @@ private function consensualSheila69(x:int):void {
 	var x1:int = x + 1;
 	clearOutput();
 	outputText("As you lean into the woman and buzz her ear, her skin flushes.  \"<i>[name], you're incorrigible.  Don't taunt me so much this time, just get into it.</i>\"  Smiling and humming, you sit up and begin unfastening your armor; [sheilaname] takes the opportunity to do the same, and finishes denuding herself before you do.");
-	
+
 	outputText("\n\nA raised eyebrow from you greets her exposed flesh.  She turns up a red face in response, staring close-mouthed with quiet embarrassment as she waits for you to finish disrobing.");
 	if(cock) {
 		if(fits) {
@@ -1668,7 +1668,7 @@ private function consensualSheila69(x:int):void {
 		if(player.clitLength > 8) outputText(" and bring your " + clitDescript() + " to its erect state.  \"<i>... And quite a stem,</i>\" your lover concludes.  \"<i>You sure that's not a dick?</i>\"");
 		else outputText(", producing a slight sigh and a wet finger.  \"<i>And I'm the eager one, right?</i>\" your lover asks, wryly - though her finger is just as wet.");
 	}
-	
+
 	outputText("\n\nSmiling still, you draw close to [sheilaname] and slip a hand under her butt, coaxing it forward until she's lying down on the grass.  She seems to take your inscrutable silence in stride, kissing you softly, until you spread her thighs.");
 	if(cock && !fits) outputText("  \"<i>[name], I'm telling you it won't fit!</i>\"");
 	else outputText("  \"<i>Not talking, then?  Please yourself.</i>\"");
@@ -1678,7 +1678,7 @@ private function consensualSheila69(x:int):void {
 	if(cock) outputText("pre-seeping shaft");
 	else outputText("wet pussy");
 	outputText(" over her head, waggling it provocatively as you slip your fingers into her.");
-	
+
 	outputText("\n\n\"<i>Ah... ah... you could have just told me,</i>\" [sheilaname] gasps, ");
 	//[(cox)
 	if(cock) {
@@ -1690,7 +1690,7 @@ private function consensualSheila69(x:int):void {
 	//(vag)
 	else outputText("returning the favor and plunging into your " + vaginaDescript(0) + " with her hand.");
 	outputText("  She pumps you once, eliciting a trickle of fluid, and then speaks once more.  \"<i>Bring it lower...</i>\"");
-	
+
 	outputText("\n\nYou oblige, ");
 	if(!player.isTaur()) outputText("flattening your back");
 	else outputText("squatting lower");
@@ -1712,7 +1712,7 @@ private function consensualSheila69(x:int):void {
 	if(!player.isTaur()) outputText("lean down and bury your own tongue all the way inside [sheilaname], forcing her labia open with your mouth");
 	else outputText("reach as far as you can to bring both hands into play, stroking and pulling [sheilaname]'s labia apart with one as you tease her exposed clitoris or slip inside her vagina with the other");
 	outputText("; your lover stops licking and you can feel her mouth slip away from your sensitive skin as her head rolls back.");
-	
+
 	outputText("\n\n\"<i>Gods, yes!</i>\" she cries.  Her pussy squeezes, trying to wring its invader for semen that won't come.  You let her body spasm and suck at you for a bit before recalling her to her duty with a soft clearing of your throat.  \"<i>Shit!  Sorry, mate... k-keep going!</i>\" [sheilaname] says, ");
 	//[(ladyparts)
 	if(!cock) {
@@ -1724,7 +1724,7 @@ private function consensualSheila69(x:int):void {
 	//(smallcox)
 	else if(fits) outputText("taking you into her mouth once again and licking away a neglected drop of pre-cum.");
 	else outputText("stroking your cock with one hand as she pushes an erect nipple against its side to trace a line.");
-	
+
 	//[(no horse)
 	if(!player.isTaur()) {
 		outputText("\n\nHaving ensured that embarrassment, if nothing else, will keep her working away on your orgasm, you prepare to torment [sheilaname] with an all-out siege of her pussy.  Your fingers join your busy mouth, taking up slack by stroking and pulling open the woman's small labia and allowing your lips to begin brushing her clitoris as you tongue-fuck her.  You can feel her shivering along your length as you force her steadily toward her pleasure threshold, which vibrations are transferred unintentionally to you through her ");
@@ -1766,12 +1766,20 @@ private function consensualSheila69(x:int):void {
 	//[(big cox)
 	if(cock && !fits) outputText("pressing her lips and tongue to the base of your shaft as she masturbates it vigorously.");
 	///(small cox)
-	else if(cock) outputText("sinking your [cockhead "+x1+"] into the warm recesses of her throat where her muscles caress and coax it.");
-	else outputText("penetrating you deeply with her tongue as her hands reach up to stroke your clit furiously.");
+	else if(!cock) outputText("penetrating you deeply with her tongue as her hands reach up to stroke your clit furiously.");
+	else outputText("sinking your [cockhead "+x1+"] into the warm recesses of her throat where her muscles caress and coax it.");
 	outputText("  Your body gives up under her frenzied assault, laying your crotch onto the woman's face as muscle control abandons you.");
-	
+
 	//[(if cock-focus)]
-	if(cock) {
+	if(!cock) {
+		outputText("\n\nYour pussy quakes and latches onto her tongue as your orgasm takes over, caressing the wet muscle.  [sheilaname] waggles and stretches it, trying to score your convulsing insides with the tip even as she torments your sensitized clit in revenge for her own.  Your juices ");
+		if(player.wetness() <= 2) outputText("trickle out, and are quickly sucked up by her greedy mouth");
+		else if(player.wetness() <= 4) outputText("gush freely, leaving her face slick");
+		else outputText("overflow, soaking her hair even as she shuts her eyes tight against the cataract");
+		outputText(".  As you climax, you wrap around her head, squeezing so hard that you flatten her ears against her skull.  Her hands latch onto your butt, trying to pull you off, but having already spent herself on her throes of passion, she's no match for yours, still ongoing, and you hold tight until your body relaxes.");
+	}
+	//(else if vag-focus)
+	else {
 		outputText("\n\nStroke after stroke of semen passes down " + sMultiCockDesc() + ", ");
 		//[(cock fits)
 		if(fits) {
@@ -1797,15 +1805,7 @@ private function consensualSheila69(x:int):void {
 			}
 		}
 	}
-	//(else if vag-focus)
-	else {
-		outputText("\n\nYour pussy quakes and latches onto her tongue as your orgasm takes over, caressing the wet muscle.  [sheilaname] waggles and stretches it, trying to score your convulsing insides with the tip even as she torments your sensitized clit in revenge for her own.  Your juices ");
-		if(player.wetness() <= 2) outputText("trickle out, and are quickly sucked up by her greedy mouth");
-		else if(player.wetness() <= 4) outputText("gush freely, leaving her face slick");
-		else outputText("overflow, soaking her hair even as she shuts her eyes tight against the cataract");
-		outputText(".  As you climax, you wrap around her head, squeezing so hard that you flatten her ears against her skull.  Her hands latch onto your butt, trying to pull you off, but having already spent herself on her throes of passion, she's no match for yours, still ongoing, and you hold tight until your body relaxes.");
-	}
-	
+
 	outputText("\n\nSpent, you roll off of [sheilaname]");
 	//[(smallcox)
 	if(fits) outputText(", pulling free of her throat.  She immediately turns over as well and forces herself to her hands and knees, then gags and coughs up a large amount of your jism.  When she's dumped enough to clear her passageway, she collapses forward, smearing the mess onto her chest as she spends a few minutes to catch her breath.  Once she's got it, she turns back over and sits up, strands of your slime linking her breasts to the grass.");
@@ -1874,7 +1874,7 @@ private function consentacleVagSexForKangarooSlutBitches():void {
 	var x:int = player.cockThatFits(48);
 	if(x < 0) x = player.smallestCockIndex();
 	outputText("[sheilaname] doffs her hat and lowers her light eyes shyly as you lean in, then looks up and puts her arms around your neck as you slip your own about her waist.  She blushes a bit, then leans in as well; you quickly capture her lips with a small kiss, then another.  The tiniest murmur escapes as you break away from this second kiss, and then she's diving in again, locking her mouth together with yours and exploring it with her tongue.  You return her passionate kiss with one of your own as your hand drifts up from her waist, under her shirt. It reaches her semi-erect nipple quickly and you begin pinching and rubbing it between your fingers; her mouth quivers on yours as you tease, then eventually breaks away as she tilts her head back and lets out a low moan.  Taking the opportunity to escape from her kisses, you move your mouth down her long neck as your fingers trace the outline of her teat.");
-	
+
 	outputText("\n\n\"<i>Ahh, god...</i>\" she sighs, as you continue tickling her neck with your lips.  She breaks her embrace and hurriedly pulls her vest and shirt over her head, revealing her " + sheilaCup() + " breasts; both her nipples are fully erect, sticking up like little 'touch me' signs.  You oblige them and caress her ");
 	if(sheilaCorruption() <= 30) outputText("pert");
 	else outputText("jiggly");
@@ -1882,18 +1882,18 @@ private function consentacleVagSexForKangarooSlutBitches():void {
 	if(!player.hasFuckableNipples()) outputText("squeezing and fondling");
 	else outputText("plunging two fingers into");
 	outputText(" your own " + nippleDescript(0) + "s.  You shiver as she paws at the sensitive nubs on your chest, but don't let up your assault, moving your mouth down to tickle one of hers with your teeth and tongue.  Soon she's quaking and twitching beneath your ministrations; rubbing at her crotch with one hand as she half-heartedly tries to tease you back with the other.");
-	
+
 	outputText("\n\n\"<i>Please... I can't take any more,</i>\" she whines.  \"<i>Stop pashing on my nips and put it in, mate.</i>\"  The hand at her crotch begins trying to unfasten her belt while the other grabs and fondles her breast; you smirk and complete your own undressing quickly with both hands.  As " + sMultiCockDesc() + " emerges, engorged with blood, from your clothing, she switches from undressing back to rubbing, breathing heavily and stroking herself through the fabric as she stares at your ");
 	//[(if wangaroo)
 	if(player.cocks[player.cockThatFits(32)].cockType == CockTypesEnum.KANGAROO) outputText("tapered, fleshy penis.  \"<i>Wow... you never see those.</i>\"");
 	else outputText(multiCockDescriptLight() + ".");
-	
+
 	outputText("\n\n\"<i>What's wrong?</i>\" you tease.  \"<i>I thought you wanted it in, but your pants are still in the way?</i>\"");
-	
+
 	outputText("\n\nHer cheeks blush furiously as she puts both her hands back to work on unfastening her belt; as soon as she loosens it, you reach down and pull her shorts off of her.  A long string of fluid stretches from her smooth pussy as you pull her damp panties away from it; she's wetter than a goblin boarding school on Father's Day!  You rub two fingers along her desperate slit, feeling it twitch under them and leak more lubrication.");
-	
+
 	outputText("\n\n\"<i>S-stop teasing me, you drongo!</i>\" she gasps as you stimulate her eager vagina.  \"<i>Just... just fuck me already!</i>\"");
-	
+
 	outputText("\n\nYou grin.  ");
 	//[(no centaur)
 	if(!player.isTaur()) outputText("Taking hold of your " + cockDescript(x));
@@ -1908,7 +1908,7 @@ private function consentacleVagSexForKangarooSlutBitches():void {
 	if(sheilaCorruption() <= 30) outputText("her perky breasts rock back and forth");
 	else outputText("her jiggling breasts flatten into perfect domes and undulate on her chest");
 	outputText(" as you draw in and out of her warm, moist pussy.");
-	
+
 	outputText("\n\nShe rubs and squeezes her breasts vigorously as you thrust, and the sight of her sensitive tit-flesh being shaped and massaged gives an extra impetus to your lust.  ");
 	//[(non-cent)]
 	if(!player.isTaur()) {
@@ -1930,7 +1930,7 @@ private function consentacleVagSexForKangarooSlutBitches():void {
 	if(sheilaCorruption() < 30) outputText("perky, erect nipples trace long arcs against your skin");
 	else outputText("jiggly tits nearly slap into her face");
 	outputText(".  \"<i>Ohhh,</i>\" she moans, \"<i>YES!</i>\"  At that moment you feel her vagina clamp around your [cockFit 32], wringing it frantically as she reaches her climax.  You continue pumping as best you're able, but you can't stand up to the siege of her spasming pussy for long; ");
-	
+
 	//[(pc corr >= 90 or > sheila corruption)
 	if(player.cor >= 90 || player.cor > flags[kFLAGS.SHEILA_CORRUPTION]) {
 		outputText("something builds to a painful intensity in your crotch.  It feels like two mind-blowing orgasms arriving together and fighting over which one gets to come out first.  You rise toward climax quickly and then are drawn back in moments of maddening frustration, over and over.  In response, you intensify your thrusts even more, sawing in and out of the girl at a pace that would be blistering if the two of you weren't leaking enough pre-cum and pussy juice to put out a brushfire.  Eventually the pleasure overwhelms the strange reticence of your orgasm; you cry out loudly as you peak, and squeeze a tiny trickle of cum into her grasping vagina.");
@@ -1956,7 +1956,7 @@ private function consentacleVagSexForKangarooSlutBitches():void {
 		if(player.cockTotal() > 1) outputText(" or onto her thighs and belly");
 		outputText(".");
 	}
-	
+
 	outputText("\n\n\"<i>Oh god!</i>\" she yells.  \"<i>Pull out, before you get me pregnant!</i>\"  ");
 	//[(non-dog cock)
 	if(!player.hasKnot(x)) {

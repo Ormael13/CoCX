@@ -314,7 +314,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.buff("RealisticMode").remove();
 			}
 			Begin("PlayerEvents","hourlyCheckRacialPerks");
-			if (!needNext) needNext = hourlyCheckRacialPerks();
+			if (player.needToUpdateRacialCache())
+				if (!needNext) needNext = hourlyCheckRacialPerks();
 			End("PlayerEvents","hourlyCheckRacialPerks");
 			if (player.hasStatusEffect(StatusEffects.Feeder)) { //Feeder checks
 				if (player.cor <= (20-player.corruptionTolerance)) { //Go away if pure

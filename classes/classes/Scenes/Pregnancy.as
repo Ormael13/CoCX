@@ -19,8 +19,8 @@ public class Pregnancy extends NPCAwareContent {
     public function updatePregnancy():Boolean {
         var displayedUpdate:Boolean = false;
         var pregText:String = "";
-        if((player.pregnancyIncubation <= 0 && player.buttPregnancyIncubation <= 0) ||
-                (player.pregnancyType == 0 && player.buttPregnancyType == 0)) {
+        if((player.pregnancyIncubation <= 0 && player.pregnancy2Incubation <= 0 && player.buttPregnancyIncubation <= 0) ||
+                (player.pregnancyType == 0 && player.pregnancy2Type == 0 && player.buttPregnancyType == 0)) {
             return false;
         }
         //Cancel Heat
@@ -1605,7 +1605,7 @@ public class Pregnancy extends NPCAwareContent {
 
                 EngineCore.outputText("Hurriedly you strip off your gear and sit down with your back against a rock.  Focusing yourself, you attempt to prepare for labor; you try to remember your recent partners and worry about what kind of monstrous infant you might have to force out of your " + vaginaDescript(0) + ".  The first contraction comes and you push as hard as you can, to be rewarded with the feeling of something sliding out between your labia.  You attempt a few more pushes but nothing further seems forthcoming; curious, you look down at your crotch only to discover a blue stalk sticking proudly out of your vagina!\n\n");
 
-                if(flags[kFLAGS.ANEMONE_KID] > 0) {
+                if(flags[kFLAGS.ANEMONE_KID] > 0 && flags[kFLAGS.DONT_TAKE_ANEMONES_PLEZ] == 0) {
                     EngineCore.outputText("As you take in the sight, small nodules around the tip begin to form and lengthen, until the little anemone is capped by a mop of wriggling blue-green tentacles.  Horrified, you grasp it at the base and give it a sharp pull.  The pain makes you lock up and nearly takes away your consciousness as its sticky surface releases its grip on your labia and " + clitDescript() + "!   It writhes and slips out of your pain-wracked hands, leaving them tingling.  As you lie there, stunned, it begins to inch back toward your " + vaginaDescript(0)+ ".  Footfalls sound next to you, and a blue hand picks up the squirming, cilliated creature.  Kid A gives you a shy smile, then turns to her barrel.  A quick splash and a filled waterskin later, she heads toward the stream, toting your grub-like offspring.");
                     player.cuntChange(20,true,true,false);
                     EngineCore.outputText("\n\nExhausted by the birth but with a burden lifted from your mind, you slip into a grateful doze.");
@@ -1652,7 +1652,7 @@ public class Pregnancy extends NPCAwareContent {
                     if(player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_SLICK) EngineCore.outputText("a trickle");
                     else if(player.vaginas[0].vaginalWetness < VaginaClass.WETNESS_SLAVERING) EngineCore.outputText("a squirt");
                     else EngineCore.outputText("nearly a cupful of fluid");
-                    EngineCore.outputText(" from your female orgasm to the puddle on the ground below your ass.\n\n");
+                    EngineCore.outputText(" from your female orgasm to the puddle on the ground below your ass.");
                     Metamorph.unlockMetamorphEx(CockMem.getMemory(CockMem.ANEMONE));
                     //(gain 1 nemo-dick, reduce lust to min)]
                     player.orgasm();
@@ -1669,7 +1669,7 @@ public class Pregnancy extends NPCAwareContent {
                     if(!player.hasStatusEffect(StatusEffects.AnemoneArousal)) player.createStatusEffect(StatusEffects.AnemoneArousal,0,0,0,0);
                 }
                 player.knockUpForce(); //Clear Pregnancy
-                EngineCore.outputText("Exhausted by the 'birth' and the climax, you slip into a doze.\n");
+                EngineCore.outputText("[pg]Exhausted by the 'birth' and the climax, you slip into a doze.\n");
             }
             //Give birth to Celess
             if (player.pregnancyType == PregnancyStore.PREGNANCY_CELESS){
@@ -2255,7 +2255,7 @@ public class Pregnancy extends NPCAwareContent {
 
                 EngineCore.outputText("Hurriedly you strip off your gear and sit down with your back against a rock.  Focusing yourself, you attempt to prepare for labor; you try to remember your recent partners and worry about what kind of monstrous infant you might have to force out of your " + vaginaDescript(1) + ".  The first contraction comes and you push as hard as you can, to be rewarded with the feeling of something sliding out between your labia.  You attempt a few more pushes but nothing further seems forthcoming; curious, you look down at your crotch only to discover a blue stalk sticking proudly out of your vagina!\n\n");
 
-                if(flags[kFLAGS.ANEMONE_KID] > 0) {
+                if(flags[kFLAGS.ANEMONE_KID] > 0 && flags[kFLAGS.DONT_TAKE_ANEMONES_PLEZ] == 0) {
                     EngineCore.outputText("As you take in the sight, small nodules around the tip begin to form and lengthen, until the little anemone is capped by a mop of wriggling blue-green tentacles.  Horrified, you grasp it at the base and give it a sharp pull.  The pain makes you lock up and nearly takes away your consciousness as its sticky surface releases its grip on your labia and " + clitDescript() + "!   It writhes and slips out of your pain-wracked hands, leaving them tingling.  As you lie there, stunned, it begins to inch back toward your " + vaginaDescript(1)+ ".  Footfalls sound next to you, and a blue hand picks up the squirming, cilliated creature.  Kid A gives you a shy smile, then turns to her barrel.  A quick splash and a filled waterskin later, she heads toward the stream, toting your grub-like offspring.");
                     player.cuntChange(20,true,true,false, 1);
                     EngineCore.outputText("\n\nExhausted by the birth but with a burden lifted from your mind, you slip into a grateful doze.");

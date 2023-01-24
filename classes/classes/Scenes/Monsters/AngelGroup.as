@@ -4,6 +4,7 @@ package classes.Scenes.Monsters
 	import classes.*;
 	import classes.BodyParts.Wings;
 	import classes.Scenes.SceneLib;
+	import classes.internals.ChainedDrop;
 	
 	public class AngelGroup extends AbstractAngel
 	{
@@ -119,7 +120,8 @@ package classes.Scenes.Monsters
 			initStrTouSpeInte(10, 100, 45, 25);
 			initWisLibSensCor(180, 4, 30, 0);
 			this.tallness = 30;
-			this.drop = NO_DROP;
+			this.drop = new ChainedDrop()
+					.add(useables.SRESIDUE, 1);
 			this.level = 15;
 			this.bonusHP = 700;
             this.bonusLust = 49;
