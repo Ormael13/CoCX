@@ -91,9 +91,9 @@ public class NekobakeInn extends BaseContent implements TimeAwareInterface {
 		outputText("They escort you to a side room with a comfy carpet and seats. You spend some time admiring the various artworks in the room which represent cats, a recurring theme in this building.[pg]");
 		outputText("\"<i>"+player.mf("Sir","Miss")+", your meal is ready.</i>\"[pg]");
 		outputText("You had almost forgotten about it but they indeed brought a platter filled with various delicious foods. \"<i>Call for us at any time you want something, anything.</i>\" Without further ado, you dig in. Each bite is like a dream, you missed such enjoyment so much. Your pawed hands claw at an egg roll mixing it with the sweet sauce and the smell of the combination has your whiskers shaking in excitement. " +
-				"The rice and fish are exquisite too. Your tail calmly reflects your contentment as you purr in bliss. This said after such a good meal you sense a familiar warmth build up in your loins, your ");
-
+				"The rice and fish are exquisite too. Your tail calmly reflects your contentment as you purr in bliss. [pg]");
 		player.refillHunger(player.maxHunger() - player.hunger);
+		outputText("This said after such a good meal you sense a familiar warmth build up in your loins, your ");
 		if (player.hasCock()) male2();
 		else female2();
 	}
