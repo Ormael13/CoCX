@@ -28,7 +28,6 @@ public class Asuka extends Monster
 				}
 				else player.takePhysDamage(damage, true);
 			}
-			statScreenRefresh();
 			outputText("\n");
 		}
 		

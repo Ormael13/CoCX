@@ -138,7 +138,7 @@ import classes.Scenes.NPCs.Forgefather;
 	public function faceDescArticle():String { return facePart.describeMF(true); }
 	public function hasLongTail():Boolean { return tail.isLong(); }
 
-		public function isPregnant():Boolean { return _pregnancyType != 0 || _pregnancy2Type != 0; }
+		public function isPregnant():Boolean { return _pregnancyType > 0 || _pregnancy2Type > 0; }
 		public function canGetPregnant():Boolean { return (vaginas.length > 0 && _pregnancyType == 0) || (vaginas.length > 1 && _pregnancy2Type == 0); }
 		public function hasVisiblePregnancy():Boolean { return ((pregnancyIncubation > 0 && pregnancyIncubation <= 180) || (pregnancy2Incubation > 0 && pregnancy2Incubation <= 180))}
 		public function hasVeryVisiblePregnancy():Boolean { return ((pregnancyIncubation > 0 && pregnancyIncubation <= 100) || (pregnancy2Incubation > 0 && pregnancy2Incubation <= 100))}
