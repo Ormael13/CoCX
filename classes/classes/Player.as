@@ -3609,9 +3609,6 @@ use namespace CoC;
 		private var bodyDataChaced:BodyData;
 		public function needToUpdateRacialCache():Boolean {
 			// TODO @aimozg caching
-			var b1 = bodyDataChaced;
-			var b2 = bodyDataChaced.equals(bodyData());
-			var b3 = !(bodyDataChaced && bodyDataChaced.equals(bodyData()));
 
 			return !(bodyDataChaced && bodyDataChaced.equals(bodyData()));
 		}
@@ -4953,7 +4950,8 @@ use namespace CoC;
 		}
 
 		public function updateRacialAndPerkBuffs():void{
-			updateRacialCache();
+			if (needToUpdateRacialCache())
+				updateRacialCache();
 			if (effectiveTallness>=80 && hasPerk(PerkLib.TitanicStrength)) statStore.replaceBuffObject({'str.mult':(0.01 * Math.round(effectiveTallness/2))}, 'Titanic Strength', { text: 'Titanic Strength' });
 			if (effectiveTallness<80 && statStore.hasBuff('Titanic Strength')) statStore.removeBuffs('Titanic Strength');
 			if (effectiveTallness<=60 && hasPerk(PerkLib.CondensedPower)) statStore.replaceBuffObject({'str.mult':(0.01 * ((120 - Math.round(effectiveTallness))*10))}, 'Condensed Power', { text: 'Condensed Power' });
