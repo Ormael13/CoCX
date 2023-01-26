@@ -2655,6 +2655,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					needNext = true;
 				}
 			}
+			if (player.isRaceCached(Races.FAIRY) && !player.hasPerk(PerkLib.QueenOfTheFairies)) {
+				player.createPerk(PerkLib.QueenOfTheFairies, 0, 0, 0, 0);
+				outputText("\nYou sense a change in yourself, a faint calling from the forrest: <b>Gained Perk: Queen of the Fairies!</b> "+PerkLib.QueenOfTheFairies.desc()+"\n");
+			}
 			if (player.hasPerk(PerkLib.WhatIsReality) && player.hasPerk(PerkLib.VorpalClaw) && !player.isRaceCached(Races.CHESHIRE)) {
 				outputText("\nYou lose your sense of invulnerability as you are no longer an Cheshire. <b>Perks lost: What is Reality? && Vorpal Claw</b>");
 				player.removePerk(PerkLib.WhatIsReality);

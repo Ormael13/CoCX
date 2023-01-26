@@ -460,6 +460,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
         if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] == 50) outputText("\n\nYou have a feeling you'll see the glades less often.");
         if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] == 75) outputText("\n\nYou have a feeling you'll see the glades much less often.");
         if (flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] == 100) outputText("\n\nThat should be the last of the glades! <b>Corrupted Glades are now extinct.</b>");
+        if (player.hasPerk(PerkLib.QueenOfTheFairies)) player.QueenOfTheForestGladeBonus();
         doNext(camp.returnToCampUseOneHour);
     }
 }

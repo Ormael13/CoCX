@@ -6395,6 +6395,16 @@ use namespace CoC;
 			buff("Purifier").addStat("wis.mult", 0.02);
 		}
 
+		public function QueenOfTheForestDemonBonus():void {
+			outputText("As the demon corpse falls down onto the ground you lift your hand and begin to disintegrate the body so as not to leave any lingering trace of its corruption onto the world. While you pack the ability to restore the souls it has consumed you can consume the fiends own body as nourishment and growth for your own power. Thus the demon shall still serve the cycle. As the creature power is converted to newfound strength you sigh in relief thinking this one won't corrupt the order any longer.[pg]");
+			buff("Purifier").addStat("spellpower", 0.01);
+		}
+
+		public function QueenOfTheForestGladeBonus():void {
+			outputText("As the demon corpse falls down onto the ground you lift your hand and begin to disintegrate the body so as not to leave any lingering trace of its corruption onto the world. While you pack the ability to restore the souls it has consumed you can consume the fiends own body as nourishment and growth for your own power. Thus the demon shall still serve the cycle. As the creature power is converted to newfound strength you sigh in relief thinking this one won't corrupt the order any longer.[pg]");
+			buff("Purifier").addStat("spellpower", 0.1);
+		}
+
 		public function ElfSistersBonus():void
 		{
 			var ElfSistersBonus:Number = (WoodElves.ConvertedSisters + WoodElves.ConvertedHerms) * 0.01;

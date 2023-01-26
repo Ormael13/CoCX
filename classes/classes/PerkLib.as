@@ -2498,6 +2498,8 @@ public class PerkLib
 		public static const PyrosFriend:PerkType = mk("Pyro's Friend", "Pyro's Friend",
 				"Mmmphmm! (No idea what he? is trying to say... but same rules apply... +10% ranged damage buff)",
 				"You've chosen the 'Pyro's Friend' perk, gaining +10% range phys dmg.");
+		public static const QueenOfTheFairies:PerkType = mk("Queen of the Fairies", "Queen of the Fairies",
+				"Each destroyed corrupted glade and slain demon in the woodlands area allows your people to further regain control of the forest. As your kingdom grows so does your power. Increase the potency of all spells by 10% per destroyed glade and 1% per destroyed demon.");
 		public static const QuickStrike:PerkType = mk("Quick Strike", "Quick Strike",
 				"Add speed based scaling of melee attacks when using small weapon(s). It effect is added on top of Speed Demon perk boost.",
 				"You've chosen the 'Quick Strike' perk, allowing you to use your speed when attacking with small melee weapons.");
