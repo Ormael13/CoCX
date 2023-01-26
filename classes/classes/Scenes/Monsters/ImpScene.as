@@ -706,8 +706,8 @@ use namespace CoC;
 
         public function nipFuckBig():void {
             clearOutput();
-            outputText("As the imp falls to the ground, furiously masturbating his [monster cock] you smile in delight, your [nipples] already beginning to grow wet" + (player.biggestLactation() > 2) ? " with the massive flow of milk pouring out of them" : ".");
-            outputText("\nYou approach the little Imp at an eager trot, lowering yourself down and encasing his [monster cock] in your [breasts].  His eyes fly open and stare in wicked delight at what it sees, quickly reaching out and beginning to fondle and finger your [nipples].  Unable to resist anymore, you press the opening of one of your [breasts] against the tip of the [monster cock].  If the creature is confused it does not show it, shoving his dick quickly and hard into your tit.");
+            outputText("As the imp falls to the ground, furiously masturbating his [monster cock] you smile in delight, your [nipples] already beginning to grow wet" + ((player.biggestLactation() > 2) ? " with the massive flow of milk pouring out of them." : "."));
+            outputText("\n\nYou approach the little Imp at an eager trot, lowering yourself down and encasing his [monster cock] in your [breasts].  His eyes fly open and stare in wicked delight at what it sees, quickly reaching out and beginning to fondle and finger your [nipples].  Unable to resist anymore, you press the opening of one of your [breasts] against the tip of the [monster cock].  If the creature is confused it does not show it, shoving his dick quickly and hard into your tit.");
             outputText("\n\nPain shoots through you as you feel the [nipples] being forced to widen by the imp's massive tool, and you let out a slight scream.");
             outputText("  Without missing a beat the creature wraps his hands around your [breasts] and begins thrusting liberally into it as if your tit was nothing more than a giant and perverted fuck-toy.  Seeing no point in arguing with the perception, you reach over and start shoving your own finger into your other [nipples], crying out as you urge the imp to use your [breasts].  Part of you longs to feel the imp's thick and corrupted cream filling your tit-hole, ");
             //cor check
@@ -721,7 +721,8 @@ use namespace CoC;
                 outputText("leaving you frustrated.");
                 player.slimeFeed();
                 dynStats("cor", 3);
-                return;
+				cleanupAfterCombat();
+				return;
                 //no lust reduction
             }
             else if (player.cor < 50) {

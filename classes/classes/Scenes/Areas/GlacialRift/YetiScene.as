@@ -15,7 +15,7 @@ public class YetiScene extends BaseContent
 
 		public function FemalePCMeetYeti():void {
 			outputText(". A massive hulking creature barrels around the corner and sets its gaze on you, its clawed hands and feet launching its body over the iced caverns with ease as you stare the beast down. The white blur of an ice yeti heads for you but stops his charge midway, curious.");
-			if (flags[kFLAGS.MET_YETI_FIRST_TIME] == 1) outputText(" Looks like this tought male mistook you for something else and aware of his mistake has already started softening his stance.\n\n");
+			if (flags[kFLAGS.MET_YETI_FIRST_TIME] == 1) outputText(" Looks like this tough male mistook you for something else and aware of his mistake has already started softening his stance.\n\n");
 			else{
 				outputText(" To your surprise the thing you at first identified as a stupid beast speaks up.\n\n");
 				flags[kFLAGS.MET_YETI_FIRST_TIME] = 1;

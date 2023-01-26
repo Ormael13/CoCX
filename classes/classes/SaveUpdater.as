@@ -1277,7 +1277,7 @@ public class SaveUpdater extends NPCAwareContent {
 				AdventurerGuild.Slot04Cap = 10;
 			}
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] < 2 && player.hasPerk(PerkLib.NinetailsKitsuneOfBalance) && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) > 0) {
-				outputText(" Opps seems your PC get Nine-tails Kitsune of Balance ahead of time... no worry you will get points back and perk pernamency will be nullified.");
+				outputText(" Oops seems your PC get Nine-tails Kitsune of Balance ahead of time... no worry you will get points back and perk permanency will be nullified.");
 				player.setPerkValue(PerkLib.NinetailsKitsuneOfBalance, 4, 0);
 				player.ascensionPerkPoints += 5;
 			}

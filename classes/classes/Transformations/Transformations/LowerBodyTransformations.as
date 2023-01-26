@@ -1721,8 +1721,6 @@ public class LowerBodyTransformations extends MutationsHelper {
 
 			TransformationUtils.applyTFIfNotPresent(transformations.LowerBodyMouse, doOutput);
 
-			TransformationUtils.applyTFIfNotPresent(transformations.TailHinezumi, doOutput);
-
 			desc += "Your legs grow increasingly hot until suddenly they light up and start blazing, just like your tail. Well wow! Kicking with these is sure to pack an extra punch. The fur under your fiery coat doesn’t seem to burn either, but you're pretty sure anything that gets a kick from your legs is in for a painful experience. <b>You now have blazing mouse legs!</b>";
 
 			if (doOutput) outputText(desc);
