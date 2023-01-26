@@ -95,7 +95,7 @@ import classes.Scenes.SceneLib;
 		{
 			return SceneLib.etnaDaughterScene.etnaDaughterFollower();
 		}
-		public function etnaKidFollower():EtnaDaughterScene
+		public function get etnaKidFollower():EtnaDaughterScene
 		{
 			return SceneLib.etnaDaughterScene;
 		}
@@ -218,6 +218,14 @@ import classes.Scenes.SceneLib;
 		public function marbleFollower():Boolean
 		{
 			return SceneLib.marbleScene.marbleFollower();
+		}
+		public function followerMidoka():Boolean
+		{
+			return SceneLib.midokaScene.midokaFollower();
+		}
+		public function get midokaScene():MidokaScene
+		{
+			return SceneLib.midokaScene;
 		}
 		// Milk slave
 		public function milkSlave():Boolean
