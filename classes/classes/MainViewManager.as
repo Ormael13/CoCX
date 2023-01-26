@@ -61,9 +61,9 @@ public class MainViewManager extends BaseContent {
 	// REFRESH
 	//------------
 	public function refreshStats():void {
-		if (!mainView.statsView.hungerBarIsVisible() && flags[kFLAGS.HUNGER_ENABLED] > 0 && flags[kFLAGS.URTA_QUEST_STATUS] != 0.75) {
+		if (flags[kFLAGS.HUNGER_ENABLED] > 0 && flags[kFLAGS.URTA_QUEST_STATUS] != 0.75) {
 			mainView.statsView.toggleHungerBar(true);
-		} else if (mainView.statsView.hungerBarIsVisible()) {
+		} else {
 			mainView.statsView.toggleHungerBar(false);
 		}
 		//Set theme!

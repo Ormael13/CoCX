@@ -314,8 +314,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.buff("RealisticMode").remove();
 			}
 			Begin("PlayerEvents","hourlyCheckRacialPerks");
-			if (player.needToUpdateRacialCache())
-				if (!needNext) needNext = hourlyCheckRacialPerks();
+			if (!needNext) needNext = hourlyCheckRacialPerks();
 			End("PlayerEvents","hourlyCheckRacialPerks");
 			if (player.hasStatusEffect(StatusEffects.Feeder)) { //Feeder checks
 				if (player.cor <= (20-player.corruptionTolerance)) { //Go away if pure
@@ -1185,8 +1184,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				SceneLib.inventory.takeItem(player.unequipArmor(false, true), playerMenu);
 				needNext = true;
 			}
-
-			player.updateRacialCache();
+			if (player.needToUpdateRacialCache())
+				player.updateRacialCache();
 			//Demonic hunger perk
 			if (player.isAnyRaceCached(Races.DEMON, Races.IMP) || player.hasPerk(PerkLib.Phylactery)) { //Check for being a demon enough
 				if (!player.hasPerk(PerkLib.DemonEnergyThirst)) {
@@ -1536,7 +1535,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			if (player.isRaceCached(Races.KAMAITACHI) && !player.hasPerk(PerkLib.NaturalHerbalism)){
-				outputText("\nGreat knowledges flows throught you mind as you become more Kamaitachi like. " +
+				outputText("\nGreat knowledges flows through your mind as you become more Kamaitachi like. " +
 						"It dawns on you that you have aquired a natural affinity for medicine and herbalism, " +
 						"something your species is famous for, heck you can identify every single plant near your camp by name and species now. " +
 						"<b>Gained Perk: Natural Herbalism</b>\n");
