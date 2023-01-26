@@ -138,9 +138,9 @@ public class Changelog extends BaseContent
 			outputText("-Elemental Contract Rank 2 perk got additional req. of actualy having arcane circle.\n");
 			outputText("-Ebon Labyrinth mana regen fix for sleeping. (Chibizs)\n");
 			outputText("-New material: a Soul Residue. Cost 1 gem. Could drop after beating angel type enemies.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Chichi gets some new scenes (try and get her in JTTE while corrupt and having some succubus milk a few times) Groundwork for further expansion on ChiChi that still needs some writing to unleash to the world (EragonX)\n");
+			outputText("-Remove tail from Hinezumi Leg Metamorph. Fix hourly updates and hunger bar toggling. (EragonX)\n");
+			outputText("-Regeneration cap increase based on which NG+ PC is has been removed.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

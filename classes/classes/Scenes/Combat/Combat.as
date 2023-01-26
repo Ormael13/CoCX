@@ -10655,11 +10655,6 @@ public class Combat extends BaseContent {
 
     public function maximumRegeneration():Number {
         var maxRegen:Number = 2;
-        if (player.newGamePlusMod() >= 1) maxRegen += 1;
-        if (player.newGamePlusMod() >= 2) maxRegen += 1;
-        if (player.newGamePlusMod() >= 3) maxRegen += 1;
-        if (player.newGamePlusMod() >= 4) maxRegen += 1;
-        if (player.newGamePlusMod() >= 5) maxRegen += 1;
         if (player.hasPerk(PerkLib.LizanRegeneration)) maxRegen += 1.5;
         if (player.perkv1(IMutationsLib.LizanMarrowIM) >= 1) maxRegen += 0.5;
         if (player.perkv1(IMutationsLib.LizanMarrowIM) >= 2) maxRegen += 1;

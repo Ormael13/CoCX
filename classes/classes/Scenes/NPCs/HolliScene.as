@@ -1088,9 +1088,9 @@ private function slapDatHo():void {
 	//[Cut Her Down][Call Jojo(requires talisman)][Ignore Her]
 	//ignore returns to previous menu and is default spacebar option
 	menu();
-	addButton(0,"CutHerDown",cutHerDown);
-	if(player.hasKeyItem("Jojo's Talisman") >= 0) addButton(1,"Call Jojo",callDatJojo);
-	addButton(4,"Ignore",treeMenu,true);
+	addButton(6,"CutHerDown",cutHerDown);
+	if(player.hasKeyItem("Jojo's Talisman") >= 0) addButton(7,"Call Jojo",callDatJojo);
+	addButton(8,"Ignore",treeMenu,true);
 }
 
 //[Cut Her Down]

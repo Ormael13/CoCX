@@ -1174,15 +1174,13 @@ public function mishapsLunaChiChi():void {
 		//Get out if already pregged.
 		if (pregnancy.isPregnant) return;
 		if (flags[kFLAGS.CHI_CHI_FOLLOWER] < 2) return;
-		return;//TODO Midoka is not complete enough yet to include, also need ChiChi preg update and appearance texts
-
+		return;// <- remove this line when midoka is ready to be born			TO-DO Midoka is not complete enough yet to include, also need ChiChi preg update and appearance texts
 		//See if any of the scenarios get her preg
 		var preg:Boolean = false;
 		//1% chance per 500mLs of cum, max 5%
 		var score:Number = Math.min(player.cumQ()/500,5);
 		score += player.virilityQ() * 200;
 		if (flags[kFLAGS.CHI_CHI_FOLLOWER] >= 4) score *= 1.5;
-
 		trace("ChiChi Preg Check Virility Score: " + score);
 		if((player.cumQ() > (flags[kFLAGS.CHI_CHI_FOLLOWER] < 4? 150 : 250) && score >= rand(100))) {
 			preg = true;
