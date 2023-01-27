@@ -601,18 +601,9 @@ public class CampUpgrades extends BaseContent {
     public function arcaneCircle():void {
         clearOutput();
         if (player.fatigue <= player.maxFatigue() - 50) {
-            var perkReq:Array = [ //perks required for each tier
-                PerkLib.ElementalContractRank4,
-                PerkLib.ElementalContractRank8,
-                PerkLib.ElementalContractRank12,
-                PerkLib.ElementalContractRank16,
-                PerkLib.ElementalContractRank20,
-                PerkLib.ElementalContractRank24,
-                PerkLib.ElementalContractRank28
-            ];
             if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] < 1)
                 buildArcaneCircle(1);
-            else if (player.hasPerk(perkReq[flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] - 1]))
+            else if (player.statusEffectv1(StatusEffects.ArcaneCircle) > (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] - 1))
                 buildArcaneCircle(flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] + 1);
             else {
                 outputText("You lack the proper knowledge and skill to work on the new ritual circle yet!");
@@ -640,8 +631,10 @@ public class CampUpgrades extends BaseContent {
 
     private function doBuildArcaneCircle(newTier:int):void {
         clearOutput();
-        if (newTier == 1)
+        if (newTier == 1) {
+			player.createStatusEffect(StatusEffects.ArcaneCircle, 0, 0, 0, 0);
             outputText("You get to building your arcane circle. You set a stone at each of the four cardinal points and draw a perfect circle with the blood. That done, you inscribe the runes meant to facilitate the chosen entity passage to Mareth, punctuating each scribing with a word of power. After several hours of hard work, your arcane circle is finally done, ready to be used to summon various entities to Mareth.");
+		}
         else
             outputText("You decide to upgrade your circle in order to contain a stronger being should the binding ritual fail. You draw the " + NUMBER_WORDS_POSITIONAL[newTier] + " larger circle, inscribing additional protections and wards. As you finish, you look them over, checking for any imperfections in the writing. Satisfied. you nod at the result."
                 + "\n\n<b>You can now perform the rituals to release more of your minions powers!</b>");

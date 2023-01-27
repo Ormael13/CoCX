@@ -120,7 +120,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
     public function timeChangeLarge():Boolean {
         if (!player.hasStatusEffect(StatusEffects.EmberNapping) && followerEmber() && !player.hasStatusEffect(StatusEffects.EmberFuckCooldown)) {
             //Ember get's a whiff of fuckscent and knocks up PC!
-            if (hasCock() && player.hasVagina() && player.inHeat && player.pregnancyIncubation == 0 && rand(10) == 0
+            if (hasCock() && player.hasVagina() && player.inHeat && player.canGetPregnant() && rand(10) == 0
                 || hasVagina() && player.hasCock() && player.inRut && !pregnancy.isPregnant && rand(10) == 0) {
                 emberRapesYourHeatness();
                 return true;
@@ -962,18 +962,18 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
         //Checks for special scenes go here!
         //If the PC fulfills one of the requirements for the Special Scenes, they occur the moment the player picks the talk option.
         if (player.isPregnant() && hasCock()) { //Extra check might protect against inappropriate Ember complaints
-            if (flags[kFLAGS.EMBER_OVI_BITCHED_YET] == 0 && player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS) {
+            if (flags[kFLAGS.EMBER_OVI_BITCHED_YET] == 0 && (player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS || player.pregnancy2Type == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS)) {
                 emberBitchesAboutPCBeingFullOfEggs();
                 doNext(camp.returnToCampUseOneHour);
                 return;
             }
-            if (player.pregnancyIncubation < 200 && player.pregnancyType != PregnancyStore.PREGNANCY_EMBER && flags[kFLAGS.EMBER_BITCHES_ABOUT_PREGNANT_PC] == 0) {
-                manEmberBitchesAboutPCPregnancy();
+            if ((player.pregnancyType == PregnancyStore.PREGNANCY_EMBER || player.pregnancy2Type == PregnancyStore.PREGNANCY_EMBER) && player.pregnancyType < 300 && flags[kFLAGS.EMBER_TALKS_TO_PC_ABOUT_PC_MOTHERING_DRAGONS] == 0) {
+                emberTalksToPCAboutPCDragoNPregnancy();
                 doNext(camp.returnToCampUseOneHour);
                 return;
             }
-            if (player.pregnancyType == PregnancyStore.PREGNANCY_EMBER && player.pregnancyType < 300 && flags[kFLAGS.EMBER_TALKS_TO_PC_ABOUT_PC_MOTHERING_DRAGONS] == 0) {
-                emberTalksToPCAboutPCDragoNPregnancy();
+            if (player.pregnancyIncubation < 200 && (player.pregnancyType != PregnancyStore.PREGNANCY_EMBER || player.pregnancy2Type != PregnancyStore.PREGNANCY_EMBER) && flags[kFLAGS.EMBER_BITCHES_ABOUT_PREGNANT_PC] == 0) {
+                manEmberBitchesAboutPCPregnancy();
                 doNext(camp.returnToCampUseOneHour);
                 return;
             }
@@ -3051,10 +3051,10 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
         outputText("\n\nSomehow you manage to avoid [ember eir] clinging claws and strip off to your undergarments, which Ember promptly bites into, nearly ripping them off your [legs].  Ember flops down on your " + camp.bedDesc() + ", chewing on your undies.  [ember Ey] spreads her legs invitingly and spits out your - now soaked - underpants.  \"<i>Let's do it on your bed!  It smells so much like you...  Did I say how good you smell?  C'mon, [name]; fuck me dammit!</i>\"");
         outputText("\n\nYou can't take it anymore and throw yourself at [ember em]; [ember ey] wants you so bad?  Well, you want [ember em] just as bad; let's see what [ember ey]'ll do with you!");
         //(if PC and Ember are herms AND not pregnant){
-        if (player.pregnancyIncubation == 0 && !pregnancy.isPregnant && flags[kFLAGS.EMBER_GENDER] == 3 && player.gender == 3) {
+        if (player.canGetPregnant() && !pregnancy.isPregnant && flags[kFLAGS.EMBER_GENDER] == 3 && player.gender == 3) {
             outputText("\n\n(Who should bear the kids?)");
             simpleChoices("Ember", breedEmberPregnantAsIfThereWasAnyOtherKindOfBreeding, "You", getKnockedUpByEmbrahBroBaby, "", null, "", null, "", null);
-        } else if (player.pregnancyIncubation == 0 && hasCock() && player.inHeat) {
+        } else if (player.canGetPregnant() && hasCock() && player.inHeat) {
             getKnockedUpByEmbrahBroBaby();
         } else {
             breedEmberPregnantAsIfThereWasAnyOtherKindOfBreeding();
@@ -3500,7 +3500,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
     }
 
 
-    public function giveBirthToEmberKids():void {
+    public function giveBirthToEmberKids(womb:int = 0):void {
         var roll:int = rand(100);
         outputText("\n");
         //PC Gives Live Birth
@@ -3513,7 +3513,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
             outputText("\n\nYou grit out between your teeth that you are feeling very sore, and what you want is for [ember em] to help you somewhere comfortable so you can get this slithering snake of a baby out of your guts - preferably before he or she kicks his-her way out straight through your belly rather than coming down the birth canal!");
             outputText("\n\n\"<i>Okay!  Right!</i>\" Ember hurries off to fetch a bunch of clean cloths, then spreads them all over the leafy grass of [ember eir] den.  [ember Ey] carefully helps you onto them and spreads your legs, kneeling between them.  \"<i>I'm going to try something... tell me how you're feeling.</i>\"");
 
-            outputText("\n\nEmber lowers [ember eir] head towards your quivering vagina, ");
+            outputText("\n\nEmber lowers [ember eir] head towards your quivering "+player.vaginaDescript(womb)+", ");
             if (player.hasBalls()) outputText("slowly pushing your [balls]");
             else if (player.hasCock()) outputText("slowly pushing your " + multiCockDescriptLight());
             if (player.hasBalls() || player.hasCock()) outputText(" out of [ember eir] way, ");
@@ -3522,7 +3522,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface {
             outputText("\n\nYou moan in equal parts pleasure and pain, telling [ember em] that [ember eir] treatment feels good and is soothing.  \"<i>Please, keep going,</i>\" you plead.  You ask if [ember ey] can try to massage your stomach as well, to help relax the tension in your muscles.");
 
             outputText("\n\nEmber complies, digging deeper into your searing hot canal.  One of [ember eir] clawed hands gently reaches out to touch the slithering bulge within your belly, massaging you as best as [ember ey] can.  Slowly but steadily, the baby dragon within you starts making its way down your birth canal, stretching you out as it seeks freedom.");
-            player.cuntChange(80, true, true, false);
+            player.cuntChange(80, true, true, false, womb);
 
             outputText("\n\nYou strain with all your might, drawing on wells of inner strength you weren't even sure you had, hovering ");
             if (player.hasPerk(PerkLib.Masochist)) outputText("deliciously ");

@@ -41,6 +41,8 @@ import classes.Scenes.Dungeons.DemonLab.*;
 import classes.Scenes.Dungeons.EbonLabyrinth.*;
 import classes.Scenes.Dungeons.HelDungeon.*;
 import classes.Scenes.Monsters.Magnar;
+import classes.Scenes.Monsters.WerewolfFemale;
+import classes.Scenes.Monsters.WerewolfHuntress;
 import classes.Scenes.NPCs.*;
 import classes.Scenes.Places.Boat.*;
 import classes.Scenes.Places.Farm.Kelt;
@@ -1264,7 +1266,8 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.NaturalHerbalism)) power *= 2;
         Math.round(power);
         HPChange(power,false);
-        outputText("You apply the poultice, your wounds closing at high speed. Healed for "+power+"");
+        outputText("You apply the poultice, your wounds closing at high speed. Healed for ");
+        CommasForDigits(power*-1);
     }
 
     public function EnergyDrink():void {
@@ -2425,16 +2428,16 @@ public class Combat extends BaseContent {
             clearOutput();
             if (rand(3) == 0 || rand(80) < player.str / 1.5 || player.hasPerk(PerkLib.FluidBody)) {
                 if (monster is WinterWolf) outputText("You slam your forehead in the wolf's sensitive muzzle. It recoils, whining in pain. Its focus shattered, you push the winter wolf off you, allowing you to stand up.");
-                if (monster is Luna) outputText("You shove Luna off of you, standing back up; Luna growls at you, licking her lips hungrily.");
+                if (monster is Luna || monster is WerewolfFemale || monster is WerewolfHuntress) outputText("You shove [themonster] off of you, standing back up; she growls at you, licking her lips hungrily.");
                 player.removeStatusEffect(StatusEffects.WolfHold);
             } else {
                 if (monster is WinterWolf) {
                     outputText("The wolf growls, bringing its maw down and biting deep into you. It growls through your flesh, trying to rip a giant hunk off of you. This creature is trying to eat you alive!");
                     player.takePhysDamage(7 + rand(5));
                 }
-                if (monster is Luna) {
-                    outputText("You try and shove Luna off but she anticipates the attempt, countering you and pinning you down again.\n");
-                    outputText("Luna rends you twice with her claws.");
+                if (monster is Luna || monster is WerewolfFemale || monster is WerewolfHuntress) {
+                    outputText("You try and shove [themonster] off but she anticipates the attempt, countering you and pinning you down again.\n");
+                    outputText("[Themonster] rends you twice with her claws.");
                     var RavageDmg:Number = monster.eBaseStrengthDamage();
                     if (flags[kFLAGS.LUNA_LVL_UP] >= 3) RavageDmg += monster.eBaseStrengthDamage() * 0.2;
                     if (flags[kFLAGS.LUNA_LVL_UP] >= 6) RavageDmg += monster.eBaseStrengthDamage() * 0.3;
@@ -4960,7 +4963,7 @@ public class Combat extends BaseContent {
                 } else {
                     ExtraNaturalWeaponAttack(ClawDamageMultiplier, "", true);
                     ExtraNaturalWeaponAttack(ClawDamageMultiplier, "", true);
-                    if (player.weaponName == "CatGlove" && Arms.hasFelineArms(player)) {
+                    if (player.weaponName == "black cat glove" && Arms.hasFelineArms(player)) {
                         ExtraNaturalWeaponAttack(ClawDamageMultiplier, "", true);
                         ExtraNaturalWeaponAttack(ClawDamageMultiplier, "", true);
                     }
@@ -6680,6 +6683,8 @@ public class Combat extends BaseContent {
         var damage:Number = (player.inte / 5 * spellMod() + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
         if (player.armor == armors.ELFDRES && player.isElf()) damage *= 2;
         if (player.armor == armors.FMDRESS && player.isWoodElf()) damage *= 2;
+        if (player.hasMutation(IMutationsLib.HellhoundFireBallsIM) && player.perkv1(IMutationsLib.HellhoundFireBallsIM) >= 2) damage *= (0.05* player.cumQ());
+        if (player.hasMutation(IMutationsLib.HellhoundFireBallsIM) && player.perkv1(IMutationsLib.HellhoundFireBallsIM) >= 3) damage *= (0.05* player.cumQ());
         if (player.hasPerk(PerkLib.FueledByDesire) && player.lust100 >= 50 && flags[kFLAGS.COMBAT_TEASE_HEALING] == 0) {
             outputText("\nYou use your own lust against the enemy, cooling off a bit in the process.");
             player.takeLustDamage(Math.round(-damage)/40, true);
@@ -10650,11 +10655,6 @@ public class Combat extends BaseContent {
 
     public function maximumRegeneration():Number {
         var maxRegen:Number = 2;
-        if (player.newGamePlusMod() >= 1) maxRegen += 1;
-        if (player.newGamePlusMod() >= 2) maxRegen += 1;
-        if (player.newGamePlusMod() >= 3) maxRegen += 1;
-        if (player.newGamePlusMod() >= 4) maxRegen += 1;
-        if (player.newGamePlusMod() >= 5) maxRegen += 1;
         if (player.hasPerk(PerkLib.LizanRegeneration)) maxRegen += 1.5;
         if (player.perkv1(IMutationsLib.LizanMarrowIM) >= 1) maxRegen += 0.5;
         if (player.perkv1(IMutationsLib.LizanMarrowIM) >= 2) maxRegen += 1;
@@ -15788,6 +15788,10 @@ private function ghostRealStrengthCompanion():Number {
     if (flags[kFLAGS.PLAYER_COMPANION_1] == "Kiha") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerKiha);
     if (flags[kFLAGS.PLAYER_COMPANION_2] == "Kiha") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerKiha);
     if (flags[kFLAGS.PLAYER_COMPANION_3] == "Kiha") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerKiha);
+    if (flags[kFLAGS.PLAYER_COMPANION_0] == "Midoka") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerMidoka);
+    if (flags[kFLAGS.PLAYER_COMPANION_1] == "Midoka") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerMidoka);
+    if (flags[kFLAGS.PLAYER_COMPANION_2] == "Midoka") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerMidoka);
+    if (flags[kFLAGS.PLAYER_COMPANION_3] == "Midoka") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerMidoka);
     if (flags[kFLAGS.PLAYER_COMPANION_1] == "Mitzi") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerMitzi);
     if (flags[kFLAGS.PLAYER_COMPANION_2] == "Mitzi") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerMitzi);
     if (flags[kFLAGS.PLAYER_COMPANION_3] == "Mitzi") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerMitzi);

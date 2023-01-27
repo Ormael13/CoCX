@@ -235,7 +235,7 @@ public class KatherineThreesome extends TelAdreAbstractContent
 					outputText("knot squeezes past your sphincter and pops into your rectum.  It quickly expands to full size, sealing up your colon");
 				}
 			}
-			outputText(" for her coming deposit" + (player.hasVagina() && !player.isPregnant() ? " and ensuring your uterus will be awash with her seed" : "") + ".\n\n");
+			outputText(" for her coming deposit" + (player.hasVagina() && player.canGetPregnant() ? " and ensuring your uterus will be awash with her seed" : "") + ".\n\n");
 			if (player.hasVagina()) if (player.cuntChange(katherine.cockArea(), true)) outputText("\n\n");
 			if (wasButtStretched) {
 				player.buttChangeDisplay();
@@ -376,17 +376,17 @@ public class KatherineThreesome extends TelAdreAbstractContent
 
 		private function pinAndFuckMountUrta():void { //Plays for anyone without a cock and for herms who select this option
 			clearOutput();
-			outputText("You roll Kath and Urta over so you can get access to Urta’s equine cock.  It’s a little soft but a couple of strokes along its cum slicked length start to change that.  Urta opens her eyes and tries to focus on you but you’re already " + (player.hasVagina() ? "sliding your pussy against her shaft" : "rubbing her horsecock against your anus") + ".  Underneath you both Kath lets out a happy \"<i>Oh!</i>\"  You’re guessing Urta’s muscles are clamping down on Kath’s cock" + katherine.cockMultiple("", "s") + ".\n\n");
+			outputText("You roll Kath and Urta over so you can get access to Urta’s equine cock.  It’s a little soft but a couple of strokes along its cum slicked length start to change that.  Urta opens her eyes and tries to focus on you but you’re already " + (player.hasVagina() ? "sliding your pussy against her shaft" : "rubbing her horsecock against your anus") + ".  Underneath you both, Kath lets out a happy \"<i>Oh!</i>\"  You’re guessing Urta’s muscles are clamping down on Kath’s cock" + katherine.cockMultiple("", "s") + ".\n\n");
 
 			outputText("As you sink onto Urta’s cock ");
 			if (!player.hasVagina())
 				outputText("you enjoy the sensation of your colon stretching and straightening to take Urta’s enormous girth and length.  You feel a pulse of hot pre soaking into your deepest depths.");
 			else {
-				outputText("and it grinds against your cervix you ");
+				outputText("and it grinds against your cervix, you ");
 				if (player.isPregnant()) {
 					if (player.pregnancyType == PregnancyStore.PREGNANCY_GOO_STUFFED)
 						outputText("stroke your goo stuffed belly and hope your passenger enjoys the ride.");
-					else if (player.pregnancyType == PregnancyStore.PREGNANCY_URTA) //Carrying Urta’s baby
+					else if (player.pregnancyType == PregnancyStore.PREGNANCY_URTA || player.pregnancyType == PregnancyStore.PREGNANCY_URTA) //Carrying Urta’s baby
 						outputText("put a hand on your belly and think about the child she’s already planted in your belly.");
 					else if (flags[kFLAGS.URTA_FERTILE] > 0)
 						outputText("think about the baby inside your belly.  When it’s born you really need to do this again so Urta can knock you up.");
@@ -407,11 +407,11 @@ public class KatherineThreesome extends TelAdreAbstractContent
 			if (!player.hasVagina())
 				outputText(", filling your colon like a balloon,");
 			else if (player.pregnancyType == PregnancyStore.PREGNANCY_GOO_STUFFED)
-				outputText("it forces its way inside your womb.  You hope the goo in you enjoys the bath.  As more of Urta’s seed fills your pussy");
-			else if (player.isPregnant())
+				outputText(" it forces its way inside your womb.  You hope the goo in you enjoys the bath.  As more of Urta’s seed fills your pussy");
+			else if (!player.canGetPregnant())
 				outputText(", spattering against your cervix,");
 			else
-				outputText("it forces its way inside your womb.  The feeling is exquisite as your belly expands outward into a pregnant looking dome.  As more of Urta’s seed fills your pussy");
+				outputText(" it forces its way inside your womb.  The feeling is exquisite as your belly expands outward into a pregnant looking dome.  As more of Urta’s seed fills your pussy");
 			outputText(" you kiss her and give in to your long overdue orgasm.");
 
 			outputText("\n\nUrta puts one hand on your stretched stomach and places your hand on her own bloated belly.  She just smiles contentedly, her cock buried in your pussy and Katherine’s dick" + katherine.cockMultiple(" knotted inside her pussy", "s knotted inside her pussy and ass") + ".  She doesn’t seem to have a care in the world.  Then Kath rocks her hips.  Urta looks over her shoulder and you both see that Kath has a determined look in her eyes.\n\n");
@@ -422,6 +422,13 @@ public class KatherineThreesome extends TelAdreAbstractContent
 			player.sexReward("vaginalFluids","Dick");
 			flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
 			urta.hoursUntilHorny(8 + rand(2));
+
+			flags[kFLAGS.TIMES_FUCKED_URTA]++;
+			if (flags[kFLAGS.URTA_FERTILE] == 1) {
+				if (player.hasUniquePregnancy()) player.impregnationRacialCheck();
+				else player.knockUp(PregnancyStore.PREGNANCY_URTA, PregnancyStore.INCUBATION_URTA, 25);
+				if(player.hasCock())player.sexReward("cum","Vaginal");
+			}
 			if (model.time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
 			doNext(camp.returnToCampUseOneHour);
 		}

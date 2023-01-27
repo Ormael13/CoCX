@@ -6,6 +6,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Measurements;
 import classes.PerkLib;
 import classes.Scenes.NPCs.EtnaDaughterScene;
+import classes.Scenes.NPCs.MidokaScene;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects;
 import classes.Scenes.NPCs.Forgefather;
@@ -147,6 +148,7 @@ public class ParserTags {
         "bathgirlname"          : function ():* { return CoC.instance.flags[kFLAGS.MILK_NAME]; },
         "sheilaname"            : function ():* { return SceneLib.sheilaScene.sheilaName(); },
         "etnakidname"           : function ():* { return EtnaDaughterScene.EtnaDaughterName; },
+        "midokaname"            : function ():* { return SceneLib.midokaScene.MidokaName; },
         "cockplural"            : function ():* { return (CoC.instance.player.cocks.length == 1) ? "cock" : "cocks"; },
         "dickplural"            : function ():* { return (CoC.instance.player.cocks.length == 1) ? "dick" : "dicks"; },
         "headplural"            : function ():* { return (CoC.instance.player.cocks.length == 1) ? "head" : "heads"; },
@@ -612,6 +614,7 @@ public class ParserTags {
         "hasballs"      : function ():* { return (CoC.instance.player.hasBalls()); },
         "hascock"       : function ():* { return CoC.instance.player.hasCock(); },
         "haswings"       : function ():* { return CoC.instance.player.hasPhysicalWings(); },
+        "hasTail"       : function ():* { return CoC.instance.player.hasPhysicalWings(); },
         "isbimbo"       : function ():* { return CoC.instance.player.hasPerk(PerkLib.BimboBrains) || CoC.instance.player.hasPerk(PerkLib.FutaFaculties); },
         "isherm"        : function ():* { return (CoC.instance.player.gender == 3); },
         "cumnormal"     : function ():* { return (CoC.instance.player.cumQ() <= 150); },
@@ -620,8 +623,8 @@ public class ParserTags {
         "cumveryhigh"   : function ():* { return (CoC.instance.player.cumQ() > 1000 && CoC.instance.player.cumQ() <= 2000); },
         "cumextreme"    : function ():* { return (CoC.instance.player.cumQ() > 2000); },
         "issquirter"    : function ():* { return (CoC.instance.player.wetness() >= 4); },
-        "ispregnant"    : function ():* { return (CoC.instance.player.pregnancyIncubation > 0); },
-        "isbuttpregnant": function ():* { return (CoC.instance.player.buttPregnancyIncubation > 0); },
+        "ispregnant"    : function ():* { return (CoC.instance.player.isPregnant()); },
+        "isbuttpregnant": function ():* { return (CoC.instance.player.isButtPregnant()); },
         "hasnipplecunts": function ():* { return CoC.instance.player.hasFuckableNipples(); },
         "canfly"        : function ():* { return CoC.instance.player.canFly(); },
         "islactating"   : function ():* { return (CoC.instance.player.lactationQ() > 0); },

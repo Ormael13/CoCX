@@ -1726,7 +1726,7 @@ public function postMarriageSleep():void {
 		if (flags[kFLAGS.ALVINA_FOLLOWER] < 19) outputText(" I have little time for games as you know all too well.");
 		outputText("</i>\"\n\n");
 		menu();
-		addButton(14, "Back", alvinaMainCampMenu);
+		addButton(14, "Back", alvinaPureMainCampMenu);
 	}
 
 	public function alvinaPureMainCampMenu():void {

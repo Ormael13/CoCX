@@ -154,7 +154,7 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
     public function EnteringDungeon():void {
         clearOutput();
         Followercount = 0; //reset it first, right?
-        if (TyrantiaFollower.TyrantiaFollowerStage == 4) {
+        if (TyrantiaFollower.TyrantiaFollowerStage >= 4) {
             outputText("You look at your map, and as you do so, your giantess lover walks towards you, armour on and Dick over one shoulder. “<i>Are you going there?</i>” Tyrantia asks, anger in her gaze. You nod, and she shakes her head. “<i>Then I’m going with you.</i>” Her gaze brooks no dissent, and you nod. She falls in behind you.\n\n");
             //Tyrantia will fight beside you for the Dungeon Crawl
             TyrantFollower = true;

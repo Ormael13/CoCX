@@ -12,6 +12,7 @@ import classes.Items.WeaponLib;
 import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.Scenes.Metamorph;
 import classes.Scenes.NPCs.EtnaDaughterScene;
+import classes.Scenes.NPCs.MidokaScene;
 import classes.Scenes.NPCs.ZenjiScenes;
 import classes.Scenes.SceneLib;
 import classes.Stats.Buff;
@@ -443,7 +444,7 @@ public class EventParser {
         var flags:DefaultDict = CoC.instance.flags;
 
         if (player.hasPerk(PerkLib.Diapause)) {
-            if (flags[kFLAGS.DIAPAUSE_FLUID_STORE] <= 0 || player.pregnancyIncubation <= 0 && player.buttPregnancyIncubation <= 0) //no pregnancy, I guess?
+            if (flags[kFLAGS.DIAPAUSE_FLUID_STORE] <= 0 || !player.isPregnant() && !player.isButtPregnant()) //no pregnancy, I guess?
                 return 0;
             //unique checks for diapause
             if (flags[kFLAGS.DIAPAUSE_DISPLAYED] == 1) {
@@ -501,7 +502,7 @@ public class EventParser {
                 SceneLib.kidAScene.goblinNightAnemone();
                 return 1;
             } else if (chance > Utils.rand(100) && !player.hasStatusEffect(StatusEffects.DefenseCanopy)) {
-                if (player.gender > 0 && (!player.hasStatusEffect(StatusEffects.JojoNightWatch) || !player.hasStatusEffect(StatusEffects.PureCampJojo)) && (flags[kFLAGS.HEL_GUARDING] == 0 || !SceneLib.helFollower.followerHel()) && flags[kFLAGS.ANEMONE_WATCH] == 0 && (flags[kFLAGS.HOLLI_DEFENSE_ON] == 0 || flags[kFLAGS.FUCK_FLOWER_KILLED] > 0) && (flags[kFLAGS.KIHA_CAMP_WATCH] == 0 || !SceneLib.kihaFollower.followerKiha()) && EtnaDaughterScene.EtnaDaughterGuardingCamp != 2 && !(SceneLib.camp.sleepInCabin() && (player.inte / 5 >= Utils.rand(15) || player.lust < 0.8 * player.maxLust() || CoC.instance.gameSettings.sceneHunter_inst.other)) &&
+                if (player.gender > 0 && (!player.hasStatusEffect(StatusEffects.JojoNightWatch) || !player.hasStatusEffect(StatusEffects.PureCampJojo)) && (flags[kFLAGS.HEL_GUARDING] == 0 || !SceneLib.helFollower.followerHel()) && flags[kFLAGS.ANEMONE_WATCH] == 0 && (flags[kFLAGS.HOLLI_DEFENSE_ON] == 0 || flags[kFLAGS.FUCK_FLOWER_KILLED] > 0) && (flags[kFLAGS.KIHA_CAMP_WATCH] == 0 || !SceneLib.kihaFollower.followerKiha()) && EtnaDaughterScene.EtnaDaughterGuardingCamp != 2 && SceneLib.midokaScene.MidokaGuardingCamp != 2 && !(SceneLib.camp.sleepInCabin() && (player.inte / 5 >= Utils.rand(15) || player.lust < 0.8 * player.maxLust() || CoC.instance.gameSettings.sceneHunter_inst.other)) &&
                         !flags[kFLAGS.IN_INGNAM] || flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] == 2) {
                     SceneLib.impScene.impGangabangaEXPLOSIONS();
                     EngineCore.doNext(playerMenu);

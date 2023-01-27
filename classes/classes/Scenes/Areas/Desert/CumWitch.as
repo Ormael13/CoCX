@@ -87,7 +87,7 @@ public class CumWitch extends Monster
 		//*Used on vagoozles, spell that causes womb to literally thirst for sperm.  Unavoidable moderate lust gain.  Pregnant character's are immune.
 		public function cumHungerAttack():void {
 			outputText("Moaning luridly, the Cum Witch swivels her staff and opens her hand to spread her fingers wide.  At the same time, you feel her magic slam into your midsection, burrowing into your womb.  ");
-			if(player.pregnancyIncubation > 0) {
+			if(!player.canGetPregnant()) {
 				outputText("Yet, whatever she tries to do fails, as her otherworldly conjuration falls apart as soon as soon as it reaches you.");
 				return;
 			}

@@ -163,10 +163,6 @@ public class Camp extends NPCAwareContent{
 		if (player.hasStatusEffect(StatusEffects.ChargeArmor)) {
 			player.removeStatusEffect(StatusEffects.ChargeArmor);
 		}
-		if (player.hasStatusEffect(StatusEffects.PCDaughters)) {
-			campScenes.goblinsBirthScene();
-			return;
-		}
 		if (player.hasItem(useables.SOULGEM, 1) && player.hasStatusEffect(StatusEffects.CampRathazul) && flags[kFLAGS.DEN_OF_DESIRE_QUEST] < 1) {
 			campUniqueScenes.playsRathazulAndSoulgemScene();
 			return;
@@ -585,7 +581,7 @@ public class Camp extends NPCAwareContent{
             return;
         }
 		//Cotton preg freakout
-		if (player.pregnancyIncubation <= 280 && player.pregnancyType == PregnancyStore.PREGNANCY_COTTON &&
+		if (((player.pregnancyIncubation <= 280 && player.pregnancyType == PregnancyStore.PREGNANCY_COTTON)||(player.pregnancy2Incubation <= 280 && player.pregnancy2Type == PregnancyStore.PREGNANCY_COTTON)) &&
 				flags[kFLAGS.COTTON_KNOCKED_UP_PC_AND_TALK_HAPPENED] == 0 && (model.time.hours == 6 || model.time.hours == 7)) {
 			SceneLib.telAdre.cotton.goTellCottonShesAMomDad();
 			hideMenus();
@@ -682,6 +678,10 @@ public class Camp extends NPCAwareContent{
 		}
 		if (flags[kFLAGS.EXCELLIA_RECRUITED] == 1) {
 			SceneLib.excelliaFollower.ExcelliaPathChoice();
+			return;
+		}
+		if (SceneLib.chichiScene.ChiChiCorruption >= 90 && !SceneLib.chichiScene.ChiChiKickedOut) {
+			SceneLib.chichiScene.corruptionOverflowing();
 			return;
 		}
 		//Go through Helia's first time move in interactions if  you haven't yet.
@@ -1934,8 +1934,13 @@ public class Camp extends NPCAwareContent{
 			}
 			//Etna daughter
 			if (followerEtnaKid()) {
-				etnaKidFollower().etnaDaughterCampDescription();
-				buttons.add(EtnaDaughterScene.EtnaDaughterName, etnaKidFollower().etnaDaughterMainMenu);
+				etnaKidFollower.etnaDaughterCampDescription();
+				buttons.add(EtnaDaughterScene.EtnaDaughterName, etnaKidFollower.etnaDaughterMainMenu);
+			}
+			//Midoka, Chi-Chi's daughter
+			if (followerMidoka()) {
+				midokaScene.midokaCampDescription();
+				buttons.add(SceneLib.midokaScene.MidokaName, midokaScene.midokaMainMenu);
 			}
 			//Valaria
 			if (flags[kFLAGS.VALERIA_AT_CAMP] == 1 && flags[kFLAGS.TOOK_GOO_ARMOR] == 1) {
@@ -2029,7 +2034,7 @@ public class Camp extends NPCAwareContent{
 				buttons.add("Ayane", SceneLib.ayaneFollower.ayaneCampMenu).hint("Visit Ayane a kitsune priestess of Taoth.");
 			}
 			if (SceneLib.ayaneFollower.ayaneChildren() == 1){
-				outputText("You can see Ayane's child are playing around in the grass.\n\n");
+				outputText("You can see Ayane's child is playing around in the grass.\n\n");
 			}
 			if (SceneLib.ayaneFollower.ayaneChildren() >= 2){
 				outputText("You can see Ayane's children are playing around in the grass.\n\n");
@@ -2203,6 +2208,7 @@ public class Camp extends NPCAwareContent{
 		}
 		if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) addButton(10, "Clone", VisitClone).hint("Check on your clone(s).");
 		else addButtonDisabled(10, "Clone", "Would you kindly go face F class Heaven Tribulation first?");
+		addButtonIfTrue(11, "Pocket Watch", mainPagePocketWatch, "Req. having Pocket Watch key item.", player.hasKeyItem("Pocket Watch") >= 0);
 		if (player.hasItem(useables.ENECORE, 1) && flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] < 200) addButton(12, "E.Core", convertingEnergyCoreIntoFlagValue).hint("Convert Energy Core item into flag value.");
 		if (player.hasItem(useables.MECHANI, 1) && flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] < 200) addButton(13, "C.Mechan", convertingMechanismIntoFlagValue).hint("Convert Mechanism item into flag value.");
 		addButton(14, "Back", campActions);
@@ -2221,6 +2227,96 @@ public class Camp extends NPCAwareContent{
 		flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] += 1;
 		doNext(campMiscActions);
 	}
+	
+	public function mainPagePocketWatch():void {
+		clearOutput();
+		outputText("Which perks would you like to combine using the watch?");
+		menu();
+		if (player.hasPerk(PerkLib.DaoOfTheElements)) {
+			addButtonDisabled(0, "DotE (layer 1)", "You already have this merged perk.");
+			if (player.hasPerk(PerkLib.ElementalContractRank9) && player.hasPerk(PerkLib.ElementsOfMarethBasics) && player.hasPerk(PerkLib.DaoOfTheElements)) {
+				if (player.perkv1(PerkLib.DaoOfTheElements) > 1) addButtonDisabled(1, "DotE (layer 2)", "You already have this merged perk.");
+				else addButton(1, "DotE (layer 2)", mainPagePocketWatchDaoOfTheElementsPerkLayer2);
+			}
+			addButtonDisabled(1, "DotE (layer 2)", "Req. Elemental Contract Rank 9 & Elements of Mareth: Basics & Dao of the Elements perks.");
+		}
+		else {
+			addButtonIfTrue(0, "DotE (layer 1)", mainPagePocketWatchDaoOfTheElementsPerkLayer1, "Req. Elemental Contract Rank 5 & Elements of the orthodox Path perks", player.hasPerk(PerkLib.ElementalContractRank5) && player.hasPerk(PerkLib.ElementsOfTheOrtodoxPath));
+			addButtonDisabled(1, "DotE (layer 2)", "Req. Elemental Contract Rank 9 & Elements of Mareth: Basics & Dao of the Elements perks.");
+			//addButtonDisabled(2, );
+			//addButtonDisabled(3, );
+			//addButtonDisabled(4, );
+		}
+		addButtonIfTrue(5, "E C M & B R (Ex)", mainPagePocketWatchElementalConjurerMindAndBodyResolveEx, "Req. Elemental Conjurer Mind and Body Resolve perks / Or you already got this merged perk.", player.hasPerk(PerkLib.ElementalConjurerMindAndBodyResolve));
+		addButtonIfTrue(6, "E C M & B D (Ex)", mainPagePocketWatchElementalConjurerMindAndBodyDedicationEx, "Req. Elemental Conjurer Mind and Body Resolve (Ex) & Elemental Conjurer Mind and Body Dedication perks / Or you already got this merged perk.", player.hasPerk(PerkLib.ElementalConjurerMindAndBodyResolveEx) && player.hasPerk(PerkLib.ElementalConjurerMindAndBodyDedication));
+		addButtonIfTrue(7, "E C M & B S (Ex)", mainPagePocketWatchElementalConjurerMindAndBodySacrificeEx, "Req. Elemental Conjurer Mind and Body Dedication (Ex) & Elemental Conjurer Mind and Body Sacrifice perks / Or you already got this merged perk.", player.hasPerk(PerkLib.ElementalConjurerMindAndBodyDedicationEx) && player.hasPerk(PerkLib.ElementalConjurerMindAndBodySacrifice));
+		addButton(14, "Back", campMiscActions);
+	}
+	private function mainPagePocketWatchDaoOfTheElementsPerkLayer1():void {
+		clearOutput();
+		outputText("Perks combined: Dao of the Elements (layer 1) perk attained.");
+		player.removePerk(PerkLib.ElementalContractRank1);
+		player.removePerk(PerkLib.ElementalContractRank2);
+		player.removePerk(PerkLib.ElementalContractRank3);
+		player.removePerk(PerkLib.ElementalContractRank4);
+		player.removePerk(PerkLib.ElementsOfTheOrtodoxPath);
+		player.createPerk(PerkLib.DaoOfTheElements, 1, 9, 0, 0);
+		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 4);
+		player.perkPoints += 3;
+		doNext(mainPagePocketWatch);
+	}
+	private function mainPagePocketWatchDaoOfTheElementsPerkLayer2():void {
+		clearOutput();
+		outputText("Perks combined: Dao of the Elements (layer 2) attained.");
+		player.removePerk(PerkLib.ElementalContractRank5);
+		player.removePerk(PerkLib.ElementalContractRank6);
+		player.removePerk(PerkLib.ElementalContractRank7);
+		player.removePerk(PerkLib.ElementalContractRank8);
+		player.removePerk(PerkLib.ElementsOfMarethBasics);
+		player.addPerkValue(PerkLib.DaoOfTheElements, 1, 1);
+		player.addPerkValue(PerkLib.DaoOfTheElements, 2, 9);
+		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 5);
+		player.perkPoints += 3;
+		doNext(mainPagePocketWatch);
+	}
+	private function mainPagePocketWatchElementalConjurerMindAndBodyResolveEx():void {
+		clearOutput();
+		outputText("Perks combined:Elemental Conjurer Mind and Body Resolve (Ex) perk attained.");
+		player.removePerk(PerkLib.ElementalConjurerResolve);
+		player.removePerk(PerkLib.ElementalConjurerMindAndBodyResolve);
+		player.createPerk(PerkLib.ElementalConjurerMindAndBodyResolveEx, 0, 0, 0, 0);
+		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 1);
+		player.perkPoints++;
+		doNext(mainPagePocketWatch);
+	}
+	private function mainPagePocketWatchElementalConjurerMindAndBodyDedicationEx():void {
+		clearOutput();
+		outputText("Perks combined:Elemental Conjurer Mind and Body Dedication (Ex) perk attained.");
+		player.removePerk(PerkLib.ElementalConjurerMindAndBodyResolveEx);
+		player.removePerk(PerkLib.ElementalConjurerDedication);
+		player.removePerk(PerkLib.ElementalConjurerMindAndBodyDedication);
+		player.createPerk(PerkLib.ElementalConjurerMindAndBodyDedicationEx, 0, 0, 0, 0);
+		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 2);
+		player.perkPoints++;
+		doNext(mainPagePocketWatch);
+	}
+	private function mainPagePocketWatchElementalConjurerMindAndBodySacrificeEx():void {
+		clearOutput();
+		outputText("Perks combined:Elemental Conjurer Mind and Body Sacrifice (Ex) perk attained.");
+		player.removePerk(PerkLib.ElementalConjurerMindAndBodyDedicationEx);
+		player.removePerk(PerkLib.ElementalConjurerSacrifice);
+		player.removePerk(PerkLib.ElementalConjurerMindAndBodySacrifice);
+		player.createPerk(PerkLib.ElementalConjurerMindAndBodySacrificeEx, 0, 0, 0, 0);
+		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 2);
+		player.perkPoints++;
+		doNext(mainPagePocketWatch);
+	}/*
+	private function mainPagePocketWatch():void {
+		clearOutput();
+		outputText(".");
+		//player.createPerk();
+		doNext(mainPagePocketWatch);
+	}*/
 
 	public function campWinionsArmySim():void {
 		clearOutput();
@@ -2432,6 +2528,11 @@ public class Camp extends NPCAwareContent{
 		if (player.hasPerk(PerkLib.ElementalContractRank29)) dmSPPC += 1;
 		if (player.hasPerk(PerkLib.ElementalContractRank30)) dmSPPC += 1;
 		if (player.hasPerk(PerkLib.ElementalContractRank31)) dmSPPC += 1;
+		if (player.hasPerk(PerkLib.ElementalConjurerMindAndBodySacrificeEx)) dmSPPC += 4;
+		if (player.hasPerk(PerkLib.DaoOfTheElements)) {
+			dmSPPC += 5;
+			if (player.perkv1(PerkLib.DaoOfTheElements) > 1) dmSPPC += 5;
+		}
 		if (player.hasPerk(PerkLib.GreaterSharedPower)) dmSPPC *= 2;
 		return dmSPPC;
 	}
@@ -3672,8 +3773,14 @@ public class Camp extends NPCAwareContent{
 
 	public function cheatSleepUntilMorning(multiplier:Number = 1.0):void {
 		var timeToSleep:int = (model.time.hours < 6 ? 6 : 24 + 6) - model.time.hours;
+		var manaTime:int = 0
 		CoC.instance.timeQ = timeToSleep;
 		camp.sleepRecovery(true, multiplier);
+		if (CoC.instance.player.hasPerk(PerkLib.JobSorcerer) || CoC.instance.player.hasPerk(PerkLib.JobElementalConjurer))
+		{
+			manaTime = timeToSleep * 60;
+			combat.manaregeneration(manaTime);
+		}
 		CoC.instance.timeQ = 0;
 		cheatTime(timeToSleep);
 		outputText("<b>" + NUMBER_WORDS_CAPITAL[timeToSleep] + " hours pass...</b>\n\n");
@@ -4520,6 +4627,7 @@ public function rebirthFromBadEnd():void {
 		performancePoints += possibleToGainAscensionPoints();
 		player.ascensionPerkPoints += performancePoints;
 		player.knockUpForce(); //Clear pregnancy
+		player.knockUpForce(0, 0, 1); //Clear pregnancy
 		player.buttKnockUpForce(); //Clear Butt preggos.
 		//Scene GO!
 		clearOutput();

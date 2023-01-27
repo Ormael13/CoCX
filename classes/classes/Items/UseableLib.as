@@ -93,6 +93,9 @@ use namespace CoC;
 		public const BTSOLUTION:SimpleUseable = new SimpleUseable("BTSolution", "Body Tempering Solution vial", "a vial of Body Tempering solution", 100,
 			"An vial of Body Tempering solution.",
 			"You look at the vial of substance called Body Tempering solution. It's only usefull for Body Cultivators and probably harmfull for anyone else.");
+		public const SRESIDUE:SimpleUseable = new SimpleUseable("SoulResidue", "Soul Residue", "a Soul Residue", 1,
+			"A Soul Residue.",
+			"You look at the soul residue. It looks to be incredibly fine powder and may have some uses. If you find anyone that could work with this.");
 		public const SKYMETA:SimpleUseable = new SimpleUseable("Skymetal", "Skymetal" , "a Skymetal", 900,
 			"A Skymetal ore.",
 			"You gaze at the skymetal ore. Likely usefull to making some weapons.");

@@ -141,8 +141,8 @@ public function plantGrowsToLevel2():void {
 	if(silly()) outputText("\n\n<b>What do?</b>");
 	else outputText("\n\n<b>What do you do?</b>");
 	menu();
-	addButton(0, "Destroy It", destroyDatFuckingPlantAtP2);
-	addButton(1, "Do Nothing", playerMenu);
+	addButton(6, "Destroy It", destroyDatFuckingPlantAtP2);
+	addButton(8, "Do Nothing", playerMenu);
 }
 private function waterIt():void {
 	clearOutput();
@@ -197,8 +197,8 @@ public function flowerGrowsToP3():void {
 	flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] = 0;
 	outputText(".\n\n<b>What do you do?</b>");
 	menu();
-	if(player.hasPerk(PerkLib.DragonFireBreath) || player.hasPerk(PerkLib.FireLord) || player.hasPerk(PerkLib.Hellfire) || player.hasStatusEffect(StatusEffects.KnowsWhitefire)) addButton(0, "Torch It", torchP3Tree);
-	addButton(1, "Leave It", playerMenu);
+	if(player.hasPerk(PerkLib.DragonFireBreath) || player.hasPerk(PerkLib.FireLord) || player.hasPerk(PerkLib.Hellfire) || player.hasStatusEffect(StatusEffects.KnowsWhitefire)) addButton(6, "Torch It", torchP3Tree);
+	addButton(8, "Leave It", playerMenu);
 }
 private function drinkThePlantGirlsSap():void {
 	clearOutput();

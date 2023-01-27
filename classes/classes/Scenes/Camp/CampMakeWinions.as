@@ -799,6 +799,7 @@ public class CampMakeWinions extends BaseContent
 			if (player.hasPerk(PerkLib.ElementsOfTheOrtodoxPath)) maxSizeOfElementalsArmyCounter += 2;
 			if (player.hasPerk(PerkLib.ElementsOfMarethBasics)) maxSizeOfElementalsArmyCounter += 2;
 			if (player.hasPerk(PerkLib.ElementsOfMarethAdvanced)) maxSizeOfElementalsArmyCounter += 2;
+			if (player.hasPerk(PerkLib.DaoOfTheElements)) maxSizeOfElementalsArmyCounter += player.perkv2(PerkLib.DaoOfTheElements);
 			return maxSizeOfElementalsArmyCounter;
 		}
 		private function currentSizeOfElementalsArmy():Number {
@@ -1354,10 +1355,10 @@ public class CampMakeWinions extends BaseContent
 			menu();
 			if (player.hasPerk(PerkLib.JobElementalConjurer) && (currentSizeOfElementalsArmy() < maxSizeOfElementalsArmy())) addButton(0, "Summon(N)", summoningElementalsSubmenu).hint("Summon a Normal-tier Elementals");
 			else addButtonDisabled(0, "Summon(N)", "You either summoned all possible Normal-tier elementals or reached limit of how many elementals you can command at once.");
-			if (player.hasPerk(PerkLib.JobElementalConjurer) && ((currentSizeOfElementalsArmy() + 1) < maxSizeOfElementalsArmy())) addButton(1, "Summon(E)", summoningEpicElementalsSubmenu).hint("Summon an Epic-tier Elementals");
-			else addButtonDisabled(1, "Summon(E)", "You either summoned all possible Epic-tier elementals or reached limit of how many elementals you can command at once.");
-			if (currentSizeOfElementalsArmy() > 0) addButton(5, "ElementUp", elementaLvlUp,-9000,-9000,-9000,"Level up your Normal Elementals!")
-			else addButtonDisabled(5, "ElementUp", "You don't have any normal elementals, try summoning one!");
+			if (currentSizeOfElementalsArmy() > 0) addButton(1, "ElementUp", elementaLvlUp,-9000,-9000,-9000,"Level up your Normal Elementals!")
+			else addButtonDisabled(1, "ElementUp", "You don't have any normal elementals, try summoning one!");
+			if (player.hasPerk(PerkLib.JobElementalConjurer) && ((currentSizeOfElementalsArmy() + 1) < maxSizeOfElementalsArmy())) addButton(5, "Summon(E)", summoningEpicElementalsSubmenu).hint("Summon an Epic-tier Elementals");
+			else addButtonDisabled(5, "Summon(E)", "You either summoned all possible Epic-tier elementals or reached limit of how many elementals you can command at once.");
 			if (player.statusEffectv2(StatusEffects.SummonedElementals) > 0) addButton(6, "ElementUp(E)", elementaLvlUpEpic);
 			else addButtonDisabled(6, "ElementUp(E)", "You don't have any epic elementals, try summoning one!");
 			if (canSearchForParls()) addButton(10, "Explore", SceneLib.exploration.goSearchForPearls);
@@ -1558,7 +1559,7 @@ public class CampMakeWinions extends BaseContent
 			addButton(1, "Earth", evocationTomeEarth).hint(" Information about the Earth Elements.");
 			addButton(2, "Fire", evocationTomeFire).hint(" Information about the Fire Elements.");
 			addButton(3, "Water", evocationTomeWater).hint(" Information about the Water Elements.");
-			if (player.hasPerk(PerkLib.ElementsOfTheOrtodoxPath)) {
+			if (player.hasPerk(PerkLib.ElementsOfTheOrtodoxPath) || player.hasPerk(PerkLib.DaoOfTheElements)) {
 				addButton(4, "Ether", evocationTomeEther).hint(" Information about the Ether Elements.");
 				addButton(5, "Wood", evocationTomeWood).hint(" Information about the Wood Elements.");
 				addButton(6, "Metal", evocationTomeMetal).hint(" Information about the Metal Elements.");
@@ -1568,7 +1569,7 @@ public class CampMakeWinions extends BaseContent
 				addButtonDisabled(5, "Wood", "Req. Elements of the orthodox Path perk.");
 				addButtonDisabled(6, "Metal", "Req. Elements of the orthodox Path perk.");
 			}
-			if (player.hasPerk(PerkLib.ElementsOfMarethBasics)) {
+			if (player.hasPerk(PerkLib.ElementsOfMarethBasics) || (player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) > 1)) {
 				addButton(7, "Ice", evocationTomeIce).hint(" Information about the Ice Elements.");
 				addButton(8, "Lightning", evocationTomeLightning).hint(" Information about the Lightning Elements.");
 				addButton(9, "Darkness", evocationTomeDarkness).hint(" Information about the Darkness Elements.");
@@ -1723,12 +1724,12 @@ public class CampMakeWinions extends BaseContent
 				if (player.statusEffectv1(StatusEffects.SummonedElementalsEarth) < 1) addButton(1, "Earth", summonElementalEarth);
 				if (player.statusEffectv1(StatusEffects.SummonedElementalsFire) < 1) addButton(2, "Fire", summonElementalFire);
 				if (player.statusEffectv1(StatusEffects.SummonedElementalsWater) < 1) addButton(3, "Water", summonElementalWater);
-				if (player.hasPerk(PerkLib.ElementsOfTheOrtodoxPath)) {
+				if (player.hasPerk(PerkLib.ElementsOfTheOrtodoxPath) || player.hasPerk(PerkLib.DaoOfTheElements)) {
 					if (player.statusEffectv1(StatusEffects.SummonedElementalsEther) < 1) addButton(4, "Ether", summonElementalEther);
 					if (player.statusEffectv1(StatusEffects.SummonedElementalsWood) < 1) addButton(5, "Wood", summonElementalWood);
 					if (player.statusEffectv1(StatusEffects.SummonedElementalsMetal) < 1) addButton(6, "Metal", summonElementalMetal);
 				}
-				if (player.hasPerk(PerkLib.ElementsOfMarethBasics)) {
+				if (player.hasPerk(PerkLib.ElementsOfMarethBasics) || (player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) > 1)) {
 					if (player.statusEffectv1(StatusEffects.SummonedElementalsIce) < 1) addButton(7, "Ice", summonElementalIce);
 					if (player.statusEffectv1(StatusEffects.SummonedElementalsLightning) < 1) addButton(8, "Lightning", summonElementalLightning);
 					if (player.statusEffectv1(StatusEffects.SummonedElementalsDarkness) < 1) addButton(9, "Darkness", summonElementalDarkness);
@@ -1993,7 +1994,7 @@ public class CampMakeWinions extends BaseContent
 			else summmast += player.wis / player.statusEffectv2(StatusEffects.SummonedElementalsAir);
 			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeEx)) summmast += 25;
 			if (rand(summmast) > 5) {
-				outputText("The outraged elemental start by struggling but unable to defeat its binding let go and stand still awaiting your commands. Their duty fulfilled, the binding runes fades disappearing into the elemental until you call upon them again. \"<b>The ritual is complete and your elemental empowered as such!</b>\"");
+				outputText("The outraged elemental starts by struggling but is unable to defeat its binding, letting go and standing still, awaiting your commands. Their duty fulfilled, the binding runes fades disappearing into the elemental until you call upon them again. \"<b>The ritual is complete and your elemental empowered as such!</b>\"");
 				player.addStatusValue(StatusEffects.SummonedElementalsAir, 2, 1);
 			}
 			else failToRankUpElemental();
@@ -2268,14 +2269,14 @@ public class CampMakeWinions extends BaseContent
 		}
 		private function rankUpElementalPart1():void {
 			outputText("It has been a while and your mastery of summoning has increased as a consequence. Now confident that you can contain it you head to the arcane circle and set up the ritual to release some of your servant restraints. You order your pet to stand still as you release the binding rune containing it. ");
-			outputText("At first it trash in its prison with the clear intention to break free, kill and consume you but the ward holds. You write an additional arcane circle ");
+			outputText("At first it thrashes in its prison with the clear intention to break free, kill and consume you but the ward holds. You write an additional arcane circle ");
 			if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 2) outputText("around the first ");
 			if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 3) outputText("around the previous one ");
 			if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 4) outputText("around the previous two ");
 			outputText("and add new directive and containment runes to the formula. Satisfied with the result you incant a final word of power.");
 		}
 		private function failToRankUpElemental():void {
-			outputText("The enraged elemental struggle against its containment and to your horror find a breach beginning to grow to its full power and striking you in the process with a powerful barrage of energy.\n\n");
+			outputText(" The enraged elemental struggle against its containment and to your horror find a breach beginning to grow to its full power and striking you in the process with a powerful barrage of energy.\n\n");
 			outputText("\"<i>You pitiful mortal... you though you could contain me forever! I’m going to make you regret ever summoning me by...</i>\"");
 			outputText("The elemental screams in dismay as your larger arcane circle unleash the full might of its last resort rune. Powerful discharge of energy strikes the wayward servants buying you enough time to rewrite its seal and force it back into servitude.\n\n");
 			outputText("\"<i>Someday you will attempt this ritual again and when you do I will..</i>\"");

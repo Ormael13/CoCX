@@ -56,6 +56,7 @@ public class Changelog extends BaseContent
 			outputText("-New tier 0 misc lvl-up perk: Skilled Ranger. Req. Range Weapons Mastery perk, lvl 3+ and 25+ str/tou/spe. Effect: +5% range physical attacks multiplier and then adds 50% on top of final result.\n");
 			outputText("-New tier 1 misc lvl-up perk: Skilled Gunslinger. Req. Range Weapons Attack Multiplier and Job: Gunslinger perks, 30+ str/tou/spe. Effect: +10% firearms attacks multiplier and then adds 50% on top of final result.\n");
 			outputText("-New tier 3 strength lvl-up perk: Backbreaker. Req. Balance Breaker perk and 110+ str. Effect: Hammer or mace deals 50% more damage to stunned enemies.\n");
+			outputText("-New tier 3 wisdom lvl-up perk: Saint of Zariman. Req. Church of the gun perk, 40+ wis, 35+ tou and 30+ int. Effect: Add your speed to gun damage as a modifier, increase scaling of wisdom/intelligence bonus. (+15% firearms attacks multiplier)\n");
 			outputText("-New tier 3 speed lvl-up perk: Power Shot (Ex). Req. Power Shot perk. Effect: Power Shoot p. special damage increased by ~2,5x. Add some of your strength (~40/10% of str / spe scaling value) to normal bow damage / (~40/10% of spe / str scaling value) throwing damage. (+15% range physical attacks multiplier)\n");
 			outputText("-New tier 4 speed lvl-up perk: Impact Throw. Req. Deadly Throw perk and 80+ spe. Effect: Thrown weapon impacts are so powerful that they can stop your opponents right in their tracks gaining a 10% chance of stunning them. (+15% range physical attacks multiplier)\n");
 			outputText("-New tier 5 speed lvl-up perk: Penetrating throw. Req. Impact Throw perk and 100+ spe. Effect: Thrown weapons have such penetrating power they now have a chance to run through multiple enemies. When attacking groups the projectiles have a 75% (losing 10% after each successful piercing strike) chance to deal their damage more then once. (+20% range physical attacks multiplier)\n");
@@ -63,6 +64,14 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Elven Twin shot (double bow shots after bonusses). Training with Lutien with maxed speed stat (100%)\n");
 			outputText("-New event perk: What Is Reality? - Gained by becoming cheshire cat. Effect: When you would take fatal damage, laugh at death and deny it ever happened. Mocking death causes the increase of the arousal of the user which can still cause it to simply give up so to get to lewder games.\n");
 			outputText("-New event perk: Vorpal Claw - Gained by becoming cheshire cat. Effect: A cheshire natural weapon distorts space inflicting particularly vicious critical strikes. (Natural attacks dmg x2)\n");
+			outputText("-New event perk: One with the forest. Gained by Wood Elfs. Effects: With each new soul added to the collective bolstering the trees of the sacred forest you become stronger physically and spiritually. Gain a +1% to all stats for each new wood elf created.\n");
+			outputText("-New event perk: Dao of the Elements. Gained by use of the Pocket Watch when req. are meet. Have 2 layers.\n");
+			outputText("-New event perk: Elemental Conjurer Mind and Body Resolve (Ex). Gained by use of the Pocket Watch when req. are meet. Effects of both combined perks + 5% bonus to tou multi.\n");
+			outputText("-New event perk: Elemental Conjurer Mind and Body Dedication (Ex). Gained by use of the Pocket Watch when req. are meet. Effects of all three combined perks + 5% bonus to spe/wis multi.\n");
+			outputText("-New event perk: Elemental Conjurer Mind and Body Sacrifice (Ex). Gained by use of the Pocket Watch when req. are meet. Effects of all three combined perks + 5% bonus to str multi, +10% bonus to int multi, +15% bonus to wis multi.\n");
+			outputText("-New material: Large Elemental Shard. Cost 3 gems. Could drop from defeated elementals. It can be used to rank up summoned elemental. (Store 3 times more elemental energy than normal Elemental Shard)\n");
+			outputText("-New material: Elemental Crystal. Cost 10 gems. Could drop from defeated elementals of higher rank ((sub)bosses, named ones). It can be used to rank up summoned elemental. (Store 10 times more elemental energy than normal Elemental Shard)\n");
+			outputText("-New material: Elemental Core. Cost 20 gems. Could drop from defeated elementals of higher rank ((sub)bosses, named ones). It can be used to rank up summoned elemental. (Store 2 times more elemental energy than Elemental Crystal)\n");
 			outputText("-New race: Azazel - gained by following new path for Alvina - it's smth akin to purified devil tf with abilites to be not so corrupted and etc. (written by Liadri and coded by EragonX). Azazelkin/Azazel/True Azazel racial bonuses (11/16/29 race points): ");
 			outputText("+55/75/100% top str multi, -20/25/30% to spe multi, +80/130/250% to int multi, +65/100/150% ot wis multi, +90/170/220 to max lust, +15/40/50 to sens\n");
 			outputText("-Green Covenant req. to be Wood Elf or one of Plant races to cast. It also becomes magical special insted of a spell.\n");
@@ -73,6 +82,7 @@ public class Changelog extends BaseContent
 			outputText("-Make Siegweird's quest take Alvina's purification into account. (EragonX)\n");
 			outputText("-After Etna moves into camp she gains a new encounter in the hills that can unlock more content. (EragonX)\n");
 			outputText("-Fixes: Polygamy toggling with no marriages, Marae prank option, Sandmother vaginal fuck button (Svalkash)\n");
+			outputText("-Moved IMDB detail switch to QoL info. Fixed USS QoL switch not saving in global data. (Svalkash)\n");
 			outputText("-Fixed being unable to aquire the achievements and duel scythes for beating Alvina if you are level 185. (Aduro)\n");
 			//outputText("-Dam can be upgraded 2 times (up to 3rd tier of wood dam) and Fishery once (to allow 2 npc's working at it - it also gonna increase each worker fish production by 20%)\n");
 			//outputText("-New tier 11 wisdom lvl-up perk: Elemental Conjurer Knowledge (Su). Req. Elemental Conjurer Knowledge (Ex) and Elemental Contract Rank 10 perks, 300+ wis. Effect: .\n");
@@ -87,7 +97,6 @@ public class Changelog extends BaseContent
 			outputText("-New Cerberus TF event (sleep in camp while being fully hellhound (black pepper) and have Marae's Lethicite) Has a few unique interactions with corrupted enemies. (EragonX)\n");
 			outputText("-Metamorph aditions - Face: Bunny, Dog, Kangaroo, Ferret mask, Ferret, Rhino, Echidna, Bear, Squirrel; Tail: Azazel, Rabbit, Avian, Griffin, Kangaroo, Thunderbird, Squirrel, Ferret, Bear, Ushi Oni; Ratatoskr hair (EragonX)\n");
 			outputText("-Added option to capture & convert some of the enemies into new wood elfs.\n");
-			outputText("-New event perk: One with the forest. Gained by Wood Elfs. Effects: With each new soul added to the collective bolstering the trees of the sacred forest you become stronger physically and spiritually. Gain a +1% to all stats for each new wood elf created.\n");
 			outputText("-Factory, Deep Cave and Lethice Stronghold monsters went to gym and they are now punch harder. They even lvl up when was there by 4 lvl's (factory), 10 lvl's (deep cave) or whooping 30 lvl's (lethice stronghold).\n");
 			outputText("-Flurry of Blows no longer req. Combo Master perk and physical soulskills hits trice not twice.\n");
 			outputText("-Rebalance bleed damage, max 5% hp per turn. Cleanup archery text spam. Improved pregnancy stats. Quasi-phoenix player pregnancy. (EragonX)\n");
@@ -98,13 +107,8 @@ public class Changelog extends BaseContent
 			outputText("-New encounter in the High mountains, the Nekobake Inn. (EragonX)\n");
 			outputText("-New Neko gear items have appeared in the show, focused on evasiveness. (EragonX)\n");
 			outputText("-Cheshire cat bonuses now have two tiers trickster/cheshire cat (13/20): +30/100% to int multi, +180/260% to spe multi, +25/60 sens\n");
-			outputText("-Moved IMDB detail switch to QoL info. Fixed USS QoL switch not saving in global data. (Svalkash)\n");
 			outputText("-Madmen knowledge can be bought in Dinah shop too now under 'Misc' tab but be warned it's not the cheapest item in her offer....even insanity have it price a BIG price that amkes merchant selling bit of it happy ;) And items she had on main shop display been all moved to subtab named 'Misc'.\n");
 			outputText("-Base dmg of crossbow/firearms atk get very rudimentary scaling of stats. Crossbows getting added speed core/trained value parts * 2 added and firearms spe/int/wis core/trained values added. Job: Gunslinger would multiply base dmg not add 2x weapon atk.\n");
-			outputText("-New tier 3 wisdom lvl-up perk: Saint of Zariman. Req. Church of the gun perk, 40+ wis, 35+ tou and 30+ int. Effect: Add your speed to gun damage as a modifier, increase scaling of wisdom/intelligence bonus. (+15% firearms attacks multiplier)\n");
-			outputText("-New material: Large Elemental Shard. Cost 3 gems. Could drop from defeated elementals. It can be used to rank up summoned elemental. (Store 3 times more elemental energy than normal Elemental Shard)\n");
-			outputText("-New material: Elemental Crystal. Cost 10 gems. Could drop from defeated elementals of higher rank ((sub)bosses, named ones). It can be used to rank up summoned elemental. (Store 10 times more elemental energy than normal Elemental Shard)\n");
-			outputText("-New material: Elemental Core. Cost 20 gems. Could drop from defeated elementals of higher rank ((sub)bosses, named ones). It can be used to rank up summoned elemental. (Store 2 times more elemental energy than Elemental Crystal)\n");
 			outputText("-Elemental conversion of shards/crystals/cores can now be done using 1 or 5 of them.\n");
 			outputText("-Mutations are now able to bypass Level requirements if given Mutagen instead of Gems for the tf cost. (Jtecx)\n");
 			outputText("-Added Francesca and elf wizard to viewer. Added fran and forest mage to the game sprite. (Liadri)\n");
@@ -115,6 +119,28 @@ public class Changelog extends BaseContent
 			outputText("-3rd tier of wolf race bonuses been increased from 21 to 22 pts and bonuses boosted accordly (and then doubled due to 2 body slots been locked similary to perm tf's). It stronger variant of bite would also deal dmg/leqve bleeding wounds on top of injecting cold energy into enemy body.\n");
 			outputText("-Sprite addition including imp and black nako bottom and top. (Liadri)\n");
 			outputText("-Fixes: Staff with cursed shield bug, etna freakout to female (EragonX)\n");
+			outputText("-Add more requirements to Kirin/Raiju/Thunderbird to prevent being all 3 (EragonX)\n");
+			outputText("-Bugfixes for Brooke anal, Loppe preg, Atlach race, vagina MM, Wonder fruit, Succubi draft rando fix, Fix poultice healing overflow (EragonX)\n");
+			outputText("-Added to main story dungeons clean reward additonal thing - 1 super perk point ;)\n");
+			outputText("-All area encounter tables now converted to new style. (EragonX)\n");
+			outputText("-minor color addition to elf and viewer fix. Imp now favors Royal Purple instead of ligbt. (Liadri)\n");
+			outputText("-bugfixes for Enigmanium, bee honey without wings, imp tome with TFimmunity, mino scene as Cerb, werewolf pounce text, Wood Elf dress force equip, make Imp Tome unique again (EragonX)\n");
+			outputText("-Hidden Job perks can't be accuired now before lvl 10 (first one is possible to pick at lvl 20 and then each 10 lvl's)\n");
+			outputText("-Add better tooltip to GenMem Perm button during ascension (EragonX)\n");
+			outputText("-Jabberwocky scale won't affect dragonne pc's (it get almost non functional race atm) and dragon score req. increased from 10+ to 16+ points (new lowest race score for bonuses in dragon score). And after more jabby unique bodyparts/perks item would once again make change into jabberwocky in one use of the item.\n");
+			outputText("-Added more stat and perk gains for early game - doubled stats/perk points period extended by 3 lvlv's and first lvl up (0 > 1) grant trice more free stat/perk points than before.\n");
+			outputText("-Normal weapons will now multi-attack the correct number of times when a ranged weapon is equipped. (Chibizs)\n");
+			outputText("-Fix feral on load, fix catgloves feral attack, Bee cock masturbation fix, Fix Sheila 69 (EragonX)\n");
+			outputText("-Minor rearrangment of elementalist summon menu. Totaly not preparing for another summon/upgrade section totaly not that...\n");
+			outputText("-When exploring at lvl 9+ can found some weird pocket watch. Taking it would req. some 'super' sacrifice but will in turn allow to make something back. After picking it's accessable in one of camp actions submenu.\n");
+			outputText("-Multi-preg enabled for dual vaginas (EragonX)\n");
+			outputText("-Fixed the small error in the nightwalker dialogue. Fixed the issue of bull strength not properly giving its buff if the player would receive less than a 50% buff from the perk. (Chibizs)\n");
+			outputText("-Elemental Contract Rank 2 perk got additional req. of actualy having arcane circle.\n");
+			outputText("-Ebon Labyrinth mana regen fix for sleeping. (Chibizs)\n");
+			outputText("-New material: a Soul Residue. Cost 1 gem. Could drop after beating angel type enemies.\n");
+			outputText("-Chichi gets some new scenes (try and get her in JTTE while corrupt and having some succubus milk a few times) Groundwork for further expansion on ChiChi that still needs some writing to unleash to the world (EragonX)\n");
+			outputText("-Remove tail from Hinezumi Leg Metamorph. Fix hourly updates and hunger bar toggling. (EragonX)\n");
+			outputText("-Regeneration cap increase based on which NG+ PC is has been removed.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -123,9 +149,11 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
+			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
+			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
+			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
+			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");
 			outputText("-\n");// (Liadri)
 			outputText("-\n");// (aimozg)
@@ -134,17 +162,13 @@ public class Changelog extends BaseContent
 			outputText("-\n");// (Jtecx)
 			outputText("-\n");// (Furrin Gok)
 			outputText("-\n");// (khovel)
-			outputText("-\n");
-			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
-			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
-			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
-			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
-			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-\n");// (Chibizs)
 			outputText("-\n");
 			//remove this line when other two lines below get added ingame
 			//outputText("-New perk for enemies: Elite type enemy. Bonuses for are: Diehard effect of 2,5% of max HP + 750 HP * NG tier, OverMax HP effect of 5% magnitude.\n");
 			//outputText("-New perk for enemies: Champion type enemy. Bonuses for are: Diehard effect of 5% of max HP + 1,500 HP * NG tier, OverMax HP effect of 10% magnitude.\n");
-			outputText("-Fixed bugs: Bard not affected by cap of prestige jobs, last one checks for holli's kill/survive moved into less troublesome spot, Benoit/Oswald taking full price for simple backpack size upgade, Fasting Pill been unaccessable when hunger mode is active, Vegetal Affinity increasing fire resistance, elemental throwing knives been never usable\n");
+			outputText("-Fixed bugs: Bard not affected by cap of prestige jobs, last one checks for holli's kill/survive moved into less troublesome spot, Benoit/Oswald taking full price for simple backpack size upgade, Fasting Pill been unaccessable when hunger mode is active, Vegetal Affinity increasing fire resistance, elemental throwing knives been never usable, Elemental race tier bonuses & display on race page, ");
+			outputText("Buy button for Francisca throwing axe at basilsik shop been corectly labeled\n");
 			/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
@@ -246,8 +270,6 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -506,7 +528,7 @@ public class Changelog extends BaseContent
 			outputText("-New enemy: Werewolf (female) - lvl 15. Encounterable in forest (outskirts) during the evening/night - between 18 and 6.\n");
 			outputText("-New White Spell: Charge Range Weapon. Learned from White Book. Works like Charge Weapon but affects range weapons. Range weapon atk won't be now boosted as before by Charge Weapon spell.\n");
 			outputText("-New Necromancy spell: Corpse Explosion. It can be learned by using black book after picking Prestige Job: Necromancer perk or Hidden Job: Grey Sage super perk. Effect: Execute one of the many defeated opponents on the opposite team causing it to explode in a shower of gore and piercing bones. Only work on group type enemies with less than 80% of their HP left. ");
-			outputText("Cooldown of 6 turns (tier 2 black spells cd reduction effects can shorten it). Fun fact No 1: Each use lower monster max HP pool and dmg they deal by 1/5 of base value. Fun fact No 2: Unless some monster get ressurection ability that penalty on max hp/dmg output on enemies will be pernament until end of the combat.\n");
+			outputText("Cooldown of 6 turns (tier 2 black spells cd reduction effects can shorten it). Fun fact No 1: Each use lower monster max HP pool and dmg they deal by 1/5 of base value. Fun fact No 2: Unless some monster get ressurection ability that penalty on max hp/dmg output on enemies will be permanent until end of the combat.\n");
 			outputText("-New Necromancy spell: Blood Shower. It can be learned by using black book after picking Prestige Job: Necromancer perk or Hidden Job: Grey Sage super perk. Effect: Force some of the blood out of one of the many defeated opponents on the opposite team leaving them on the brink of death as the stolen blood rains on the opponents, greatly damaging their morale and reducing their damage dealt by 80%. ");
 			outputText("Has a chance to strike fear in the heart of your foes. Only work on group type enemies with less than 80% of their HP left.\n");
 			outputText("-New Necromancy spell: Necrotic Rot. It can be learned by using black book after picking Prestige Job: Necromancer perk or Hidden Job: Grey Sage super perk. Effect: Deals damage and cause the opponent wounds to fester and worsen increasing damage taken from physical attacks by 25%. This effect stacks. Cooldown of 3 turns (tier 1 black spells cd reduction effects can shorten it).\n");

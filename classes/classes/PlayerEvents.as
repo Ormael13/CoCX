@@ -350,13 +350,14 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 						if (player.statusEffectv1(StatusEffects.WormPlugged) <= 0) { //Remove if too low
 							player.removeStatusEffect(StatusEffects.WormPlugged);
 							player.knockUpForce(); //Clear worm 'pregnancy'
+							player.knockUpForce(0,0,1); //Clear worm 'pregnancy'
 						}
 						needNext = true;
 					}
 				}
 				else { //Non cunts lose worm plugged
 					player.removeStatusEffect(StatusEffects.WormPlugged);
-					player.knockUpForce(); //Clear worm 'pregnancy'
+					player.buttKnockUpForce(); //Clear worm 'pregnancy'
 				}
 			}
 			if (player.hasStatusEffect(StatusEffects.Milked)) { //"Milked"
@@ -382,7 +383,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				else player.addStatusValue(StatusEffects.Dysfunction, 1, -1);
 			}
             //Lactation reduction
-            if (player.biggestLactation() > 0 && !player.hasStatusEffect(StatusEffects.Feeder) && !player.hasPerk(PerkLib.MilkMaid) && player.pregnancyIncubation == 0) {
+            if (player.biggestLactation() > 0 && !player.hasStatusEffect(StatusEffects.Feeder) && !player.hasPerk(PerkLib.MilkMaid) && !player.isPregnant()) {
                 if (!player.hasStatusEffect(StatusEffects.LactationReduction))
                     player.createStatusEffect(StatusEffects.LactationReduction, 0, 0, 0, 0);
                 else {//reduction effect
@@ -1183,8 +1184,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				SceneLib.inventory.takeItem(player.unequipArmor(false, true), playerMenu);
 				needNext = true;
 			}
-
-			player.updateRacialCache();
+			if (player.needToUpdateRacialCache())
+				player.updateRacialCache();
 			//Demonic hunger perk
 			if (player.isAnyRaceCached(Races.DEMON, Races.IMP) || player.hasPerk(PerkLib.Phylactery)) { //Check for being a demon enough
 				if (!player.hasPerk(PerkLib.DemonEnergyThirst)) {
@@ -1192,7 +1193,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					player.createPerk(PerkLib.DemonEnergyThirst, 0, 0, 0, 0);
 					needNext = true;
 				}
-				if (player.hasPerk(PerkLib.Soulless) && !player.hasPerk(PerkLib.SoulEater)) {
+				if ((player.hasPerk(PerkLib.Soulless) || player.hasPerk(PerkLib.Phylactery)) && !player.hasPerk(PerkLib.SoulEater)) {
 					outputText("\nYou begin to hunger after those demonic soul crystals, Lethicite. Perhaps you can find some to consume? You acquired the demons ability to consume Lethicite for power! \n(<b>Gained Perk: Soul Eater</b>)\n");
 					player.createPerk(PerkLib.SoulEater, 0, 0, 0, 0);
 					needNext = true;
@@ -1203,6 +1204,15 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					player.removePerk(PerkLib.DemonEnergyThirst);
 					needNext = true;
 				}
+			}
+			if ((player.hasPerk(PerkLib.Soulless) || player.hasPerk(PerkLib.Phylactery)) && !player.hasPerk(PerkLib.SoulEater)) {
+				outputText("\nYou begin to hunger after those demonic soul crystals, Lethicite. Perhaps you can find some to consume? You acquired the demons ability to consume Lethicite for power! \n(<b>Gained Perk: Soul Eater</b>)\n");
+				player.createPerk(PerkLib.SoulEater, 0, 0, 0, 0);
+				needNext = true;
+			}
+			if (player.hasPerk(PerkLib.SoulEater) && !(player.hasPerk(PerkLib.Soulless) || player.hasPerk(PerkLib.Phylactery))) {
+				outputText("\nDue to your miraculous soul recovery you have lost the ability to consume souls! \n(<b>Lost Perk: Soul Eater</b>)\n");
+				player.removePerk(PerkLib.SoulEater);
 			}
 			//Demonic energy thirst
 			if (player.hasStatusEffect(StatusEffects.DemonEnergyThirstFeed)) {
@@ -1525,7 +1535,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			if (player.isRaceCached(Races.KAMAITACHI) && !player.hasPerk(PerkLib.NaturalHerbalism)){
-				outputText("\nGreat knowledges flows throught you mind as you become more Kamaitachi like. " +
+				outputText("\nGreat knowledges flows through your mind as you become more Kamaitachi like. " +
 						"It dawns on you that you have aquired a natural affinity for medicine and herbalism, " +
 						"something your species is famous for, heck you can identify every single plant near your camp by name and species now. " +
 						"<b>Gained Perk: Natural Herbalism</b>\n");
@@ -2345,12 +2355,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Small Caster perk
-			if (player.isAnyRaceCached(Races.IMP) && player.effectiveTallness <= 60 && !player.hasPerk(PerkLib.SmallCaster)) {
+			if (player.isAnyRaceCached(Races.IMP, Races.DEVIL, Races.AZAZEL) && player.effectiveTallness <= 60 && !player.hasPerk(PerkLib.SmallCaster)) {
 				outputText("\nYour magic becomes more concentrated in your smaller body. <b>Gained perk: Small Caster!</b>");
 				player.createPerk(PerkLib.SmallCaster, 0, 0, 0, 0);
 				needNext = true;
 			}
-			if (player.hasPerk(PerkLib.SmallCaster) && (player.effectiveTallness > 60 || !player.isAnyRaceCached(Races.IMP))) {
+			if (player.hasPerk(PerkLib.SmallCaster) && (player.effectiveTallness > 60 || !player.isAnyRaceCached(Races.IMP, Races.DEVIL, Races.AZAZEL))) {
 				outputText("\nDue to being too tall you no longer qualify. <b>Perk lost: Small Caster.</b>");
 				player.removePerk(PerkLib.SmallCaster);
 				needNext = true;
@@ -2437,6 +2447,9 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			if (player.pregnancyIncubation <= 0 && player.pregnancyType == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS) { //Fixing Egg Preg Preglocked Glitch
 				player.knockUpForce(); //Clear Pregnancy
+			}
+			if (player.pregnancy2Incubation <= 0 && player.pregnancy2Type == PregnancyStore.PREGNANCY_OVIELIXIR_EGGS) { //Fixing Egg Preg Preglocked Glitch
+				player.knockUpForce(0, 0 ,1); //Clear Pregnancy
 			}
 			if (player.hasStatusEffect(StatusEffects.Uniball) && player.ballSize > 1 && player.hasBalls()) { //Testicles Normalise:
 				outputText("\nYou feel a deep sensation of release around your genitals.  You sigh with relief and contentment as your testicles drop downwards and bloom outwards, heat throbbing within them as they split and form a proper ballsack.\n");
@@ -2573,7 +2586,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					player.removePerk(PerkLib.BunnyEggs);
 					needNext = true;
 				}
-                else if (player.pregnancyIncubation < 1 && player.hasVagina() && CoC.instance.model.time.hours == 1) { //Otherwise pregger check, once every morning
+                else if (!player.isPregnant() && player.hasVagina() && CoC.instance.model.time.hours == 1) { //Otherwise pregger check, once every morning
                     if ((player.totalFertility() > 50 && CoC.instance.model.time.days % 15 == 0) || CoC.instance.model.time.days % 30 == 0) { //every 15 days if high fertility get egg preg
                         outputText("\n<b>Somehow you know that eggs have begun to form inside you. You wonder how long it will be before they start to show?</b>\n");
 						player.knockUp(PregnancyStore.PREGNANCY_OVIELIXIR_EGGS, PregnancyStore.INCUBATION_OVIELIXIR_EGGS, 1, 1);

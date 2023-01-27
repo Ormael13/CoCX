@@ -323,7 +323,7 @@ public class Masturbation extends BaseContent {
 				doNext(playerMenu);
 				return;
 			}
-			if (player.hasCock() && (player.cocks[0].cockType == CockTypesEnum.BEE) && !inDungeon) {
+			if (player.hasCock() && (player.cocks[0].cockType == CockTypesEnum.BEE) && !inDungeon && !(player.hasItem(consumables.BEEHONY) || player.hasItem(consumables.PURHONY) || player.hasItem(consumables.SPHONEY))) {
 				outputText("Although your bee cock aches you know that there's no way for you to get relief on your own.  When you touch your shaft or think about cumming images of the bee girl and the sound of her hypnotic buzzing fill your mind.");
 				doNext(playerMenu);
 				return;

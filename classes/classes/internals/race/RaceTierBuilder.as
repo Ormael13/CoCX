@@ -177,6 +177,10 @@ public class RaceTierBuilder {
 		addSlotRequirement(BodyData.SLOT_TAIL_COUNT, count);
 		return this;
 	}
+	public function requireFaceType(type:*):RaceTierBuilder {
+		addSlotRequirement(BodyData.SLOT_FACE_TYPE, type);
+		return this;
+	}
 	public function requireArmType(type:*):RaceTierBuilder {
 		addSlotRequirement(BodyData.SLOT_ARM_TYPE, type);
 		return this;

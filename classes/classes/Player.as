@@ -998,7 +998,8 @@ use namespace CoC;
 		//Natural Claws (arm types and weapons that can substitude them)
 		public function haveNaturalClaws():Boolean { return Arms.Types[arms.type].claw || Arms.Types[arms.type].armSlam || Arms.Types[arms.type].scythe || LowerBody.hasClaws(this);}
 		public function haveNaturalClawsTypeWeapon():Boolean {return weaponName == "gauntlet with claws" || weaponName == "gauntlet with an aphrodisiac-coated claws" || weaponName == "Venoclaw" || weaponName == "hooked gauntlets" || (hasAetherTwinsTier1() || hasAetherTwinsTier2() || weaponName == "moonlight claws");}
-        public function isFeralCombat():Boolean { return flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && ( (weaponName == "fists" && haveNaturalClaws()) || haveNaturalClawsTypeWeapon() ) ;}
+		public function haveWeaponAllowingClaws():Boolean {return weaponName == "black cat glove" ;}
+        public function isFeralCombat():Boolean { return flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && ( ((weaponName == "fists"|| haveWeaponAllowingClaws()) && haveNaturalClaws()) || haveNaturalClawsTypeWeapon() ) ;}
         public function isUnarmedCombat():Boolean { return flags[kFLAGS.FERAL_COMBAT_MODE] != 1 && isFistOrFistWeapon() ;}
         //Other natural weapon checks
 		public function hasABiteAttack():Boolean { return (lowerBody == LowerBody.HYDRA || Face.Types[faceType].bite);}
@@ -3605,15 +3606,17 @@ use namespace CoC;
 		 * Array of [race:Race, score:int, tier:int], indexed by race id
 		 */
 		public var racialScores:Array = [];
+		private var bodyDataChaced:BodyData;
 		public function needToUpdateRacialCache():Boolean {
 			// TODO @aimozg caching
-			return true;
+
+			return !(bodyDataChaced && bodyDataChaced.equals(bodyData()));
 		}
 		public function updateRacialCache():void {
-			var body:BodyData = bodyData();
+			bodyDataChaced = bodyData();
 			for each (var race:Race in Races.AllEnabledRaces) {
-				var score:int = race.totalScore(body);
-				var tier:int = race.getTierNumber(body, score);
+				var score:int = race.totalScore(bodyDataChaced);
+				var tier:int = race.getTierNumber(bodyDataChaced, score);
 				racialScores[race.id] = [race, score, tier];
 			}
 		}
@@ -4141,11 +4144,11 @@ use namespace CoC;
 
 		}
 
-		public function cuntChange(cArea:Number, display:Boolean, spacingsF:Boolean = false, spacingsB:Boolean = true):Boolean {
+		public function cuntChange(cArea:Number, display:Boolean, spacingsF:Boolean = false, spacingsB:Boolean = true, vag:int = 0):Boolean {
 			if (vaginas.length==0) return false;
-			var wasVirgin:Boolean = vaginas[0].virgin;
+			var wasVirgin:Boolean = vaginas[vag].virgin;
 			var stretched:Boolean = cuntChangeNoDisplay(cArea);
-			var devirgined:Boolean = wasVirgin && !vaginas[0].virgin;
+			var devirgined:Boolean = wasVirgin && !vaginas[vag].virgin;
 			if (devirgined){
 				if(spacingsF) outputText("  ");
 				outputText("<b>Your hymen is torn, robbing you of your virginity.</b>");
@@ -4160,12 +4163,12 @@ use namespace CoC;
 				}
 				//Non virgins as usual
 				else if(spacingsF) outputText("  ");
-				if(vaginas[0].vaginalLooseness == VaginaClass.LOOSENESS_LEVEL_CLOWN_CAR) outputText("<b>Your " + Appearance.vaginaDescript(this,0)+ " is stretched painfully wide, large enough to accommodate most beasts and demons.</b>");
-				if(vaginas[0].vaginalLooseness == VaginaClass.LOOSENESS_GAPING_WIDE) outputText("<b>Your " + Appearance.vaginaDescript(this,0) + " is stretched so wide that it gapes continually.</b>");
-				if(vaginas[0].vaginalLooseness == VaginaClass.LOOSENESS_GAPING) outputText("<b>Your " + Appearance.vaginaDescript(this,0) + " painfully stretches, the lips now wide enough to gape slightly.</b>");
-				if(vaginas[0].vaginalLooseness == VaginaClass.LOOSENESS_LOOSE) outputText("<b>Your " + Appearance.vaginaDescript(this,0) + " is now very loose.</b>");
-				if(vaginas[0].vaginalLooseness == VaginaClass.LOOSENESS_NORMAL) outputText("<b>Your " + Appearance.vaginaDescript(this,0) + " is now a little loose.</b>");
-				if(vaginas[0].vaginalLooseness == VaginaClass.LOOSENESS_TIGHT) outputText("<b>Your " + Appearance.vaginaDescript(this,0) + " is stretched out to a more normal size.</b>");
+				if(vaginas[vag].vaginalLooseness == VaginaClass.LOOSENESS_LEVEL_CLOWN_CAR) outputText("<b>Your " + Appearance.vaginaDescript(this,vag)+ " is stretched painfully wide, large enough to accommodate most beasts and demons.</b>");
+				if(vaginas[vag].vaginalLooseness == VaginaClass.LOOSENESS_GAPING_WIDE) outputText("<b>Your " + Appearance.vaginaDescript(this,vag) + " is stretched so wide that it gapes continually.</b>");
+				if(vaginas[vag].vaginalLooseness == VaginaClass.LOOSENESS_GAPING) outputText("<b>Your " + Appearance.vaginaDescript(this,vag) + " painfully stretches, the lips now wide enough to gape slightly.</b>");
+				if(vaginas[vag].vaginalLooseness == VaginaClass.LOOSENESS_LOOSE) outputText("<b>Your " + Appearance.vaginaDescript(this,vag) + " is now very loose.</b>");
+				if(vaginas[vag].vaginalLooseness == VaginaClass.LOOSENESS_NORMAL) outputText("<b>Your " + Appearance.vaginaDescript(this,vag) + " is now a little loose.</b>");
+				if(vaginas[vag].vaginalLooseness == VaginaClass.LOOSENESS_TIGHT) outputText("<b>Your " + Appearance.vaginaDescript(this,vag) + " is stretched out to a more normal size.</b>");
 				if(spacingsB) outputText("  ");
 			}
 			return stretched;
@@ -4947,7 +4950,8 @@ use namespace CoC;
 		}
 
 		public function updateRacialAndPerkBuffs():void{
-			updateRacialCache();
+			if (needToUpdateRacialCache())
+				updateRacialCache();
 			if (effectiveTallness>=80 && hasPerk(PerkLib.TitanicStrength)) statStore.replaceBuffObject({'str.mult':(0.01 * Math.round(effectiveTallness/2))}, 'Titanic Strength', { text: 'Titanic Strength' });
 			if (effectiveTallness<80 && statStore.hasBuff('Titanic Strength')) statStore.removeBuffs('Titanic Strength');
 			if (effectiveTallness<=60 && hasPerk(PerkLib.CondensedPower)) statStore.replaceBuffObject({'str.mult':(0.01 * ((120 - Math.round(effectiveTallness))*10))}, 'Condensed Power', { text: 'Condensed Power' });
@@ -4975,7 +4979,7 @@ use namespace CoC;
 				if (isRaceCached(Races.COW, 2)) power = lactationQ()*0.001;
 				if (isRaceCached(Races.MINOTAUR, 2) >= 15) power = cumCapacity()*0.001;
 				if (power > 0.5) power = 0.5;
-				statStore.replaceBuffObject({'str.mult':(Math.round(power))}, 'Bull Strength', { text: 'Bull Strength' });
+				statStore.replaceBuffObject({'str.mult':(Math.round(power*100))/100}, 'Bull Strength', { text: 'Bull Strength' });
 			}
 			if (!hasPerk(PerkLib.BullStrength) && statStore.hasBuff('Bull Strength')) statStore.removeBuffs('Bull Strength');
 			if (hasPerk(PerkLib.UnnaturalStrength)){
@@ -5211,6 +5215,7 @@ use namespace CoC;
 			if(statusEffectv4(StatusEffects.CombatFollowerDiana) > 0) addStatusValue(StatusEffects.CombatFollowerDiana, 4, -1);
 			if(statusEffectv4(StatusEffects.CombatFollowerDiva) > 0) addStatusValue(StatusEffects.CombatFollowerDiva, 4, -1);
 			if(statusEffectv4(StatusEffects.CombatFollowerKiha) > 0) addStatusValue(StatusEffects.CombatFollowerKiha, 4, -1);
+			if(statusEffectv4(StatusEffects.CombatFollowerMidoka) > 0) addStatusValue(StatusEffects.CombatFollowerMidoka, 4, -1);
 			if(statusEffectv4(StatusEffects.CombatFollowerMitzi) > 0) addStatusValue(StatusEffects.CombatFollowerMitzi, 4, -1);
 			if(statusEffectv4(StatusEffects.CombatFollowerNeisa) > 0) addStatusValue(StatusEffects.CombatFollowerNeisa, 4, -1);
 			if(statusEffectv4(StatusEffects.CombatFollowerSiegweird) > 0) addStatusValue(StatusEffects.CombatFollowerSiegweird, 4, -1);
@@ -5779,7 +5784,7 @@ use namespace CoC;
 				[Combat.MASTERY_SMALL, weaponSpecials("Small") || weaponSpecials("Dual Small"), [10, 20, 30, 40]],
 				[Combat.MASTERY_LARGE, weaponSpecials("Large") || weaponSpecials("Dual Large"), [15, 30]],
 				[Combat.MASTERY_MASSIVE, weaponSpecials("Massive") || weaponSpecials("Dual Massive"), [30]],
-				[Combat.MASTERY_RANGED, isBowTypeWeapon() || isThrownTypeWeapon(), []],
+				//[Combat.MASTERY_RANGED, isBowTypeWeapon() || isThrownTypeWeapon(), []],
 				[Combat.MASTERY_NORMAL, true, [10, 25, 40]] //the last one for "everything else"
 			];
 		}
@@ -6440,6 +6445,12 @@ use namespace CoC;
 				case 2: return true;
 				default: return super.looksFemale();
 			}
+		}
+
+		public function perksCountForMergedOnes():Number {
+			var pCFM:Number = 0;
+			if (hasStatusEffect(StatusEffects.MergedPerksCount)) pCFM += statusEffectv1(StatusEffects.MergedPerksCount);
+			return pCFM;
 		}
 
 		override public function modStats(dstr:Number, dtou:Number, dspe:Number, dinte:Number, dwis:Number, dlib:Number, dsens:Number, dlust:Number, dcor:Number, scale:Boolean):void {

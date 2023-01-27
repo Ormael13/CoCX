@@ -5,16 +5,114 @@
 package classes.Scenes.NPCs
 {
 import classes.*;
+import classes.BodyParts.Hair;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Monsters.OniIncubus;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
+import classes.internals.SaveableState;
 
 use namespace CoC;
 	
-	public class ChiChiFollower extends NPCAwareContent
-	{
+public class ChiChiFollower extends NPCAwareContent implements TimeAwareInterface, SaveableState
+{
+	public var ChiChiCorruption:int;	//scale from 0-10	//9+ come to camp
+	public var ChiChiFertile:Boolean;
+	public var ChiChiKickedOut:Boolean;
+	public var ChiChiDefurred:Boolean;
+	public var kihaInteractionHappened:Boolean;
+	public var jojoInteractionHappened:Boolean;
+	public var joyInteractionHappened:Boolean;
+	public var ayaneInteractionHappened:Boolean;
+	public var ceaniInteractionHappened:Boolean;
+	public var lunaInteractionHappened:Boolean;
+	public var bimboPatchInteractionHappened:Boolean;
+	public var amilyInteractionHappened:Boolean;
+	public var heliaInteractionHappened:Boolean;
+
+	public function stateObjectName():String {
+		return "ChiChiFollower";
+	}
+
+	public function resetState():void {
+		ChiChiCorruption = 0;
+		ChiChiFertile = false;
+		ChiChiKickedOut = false;
+		ChiChiDefurred = false;
+		kihaInteractionHappened = false;
+		jojoInteractionHappened = false;
+		joyInteractionHappened = false;
+		ayaneInteractionHappened = false;
+		ceaniInteractionHappened = false;
+		lunaInteractionHappened = false;
+		bimboPatchInteractionHappened = false;
+		amilyInteractionHappened = false;
+		heliaInteractionHappened = false;
+	}
+
+	public function saveToObject():Object {
+		return {
+			"ChiChiCorruption": ChiChiCorruption,
+			"ChiChiFertile": ChiChiFertile,
+			"ChiChiKickedOut": ChiChiKickedOut,
+			"ChiChiDefurred": ChiChiKickedOut,
+			"kihaInteractionHappened": kihaInteractionHappened,
+			"jojoInteractionHappened": jojoInteractionHappened,
+			"joyInteractionHappened": joyInteractionHappened,
+			"ayaneInteractionHappened": ayaneInteractionHappened,
+			"ceaniInteractionHappened": ceaniInteractionHappened,
+			"lunaInteractionHappened": lunaInteractionHappened,
+			"bimboPatchInteractionHappened": bimboPatchInteractionHappened,
+			"amilyInteractionHappened": amilyInteractionHappened,
+			"heliaInteractionHappened": heliaInteractionHappened
+		};
+	}
+
+	public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
+		if (o) {
+			ChiChiCorruption = o["ChiChiCorruption"];
+			ChiChiFertile = o["ChiChiFertile"];
+			ChiChiKickedOut = o["ChiChiKickedOut"];
+			ChiChiDefurred = o["ChiChiDefurred"];
+			kihaInteractionHappened = o["kihaInteractionHappened"];
+			jojoInteractionHappened = o["jojoInteractionHappened"];
+			joyInteractionHappened = o["joyInteractionHappened"];
+			ayaneInteractionHappened = o["ayaneInteractionHappened"];
+			ceaniInteractionHappened = o["ceaniInteractionHappened"];
+			lunaInteractionHappened = o["lunaInteractionHappened"];
+			bimboPatchInteractionHappened = o["bimboPatchInteractionHappened"];
+			amilyInteractionHappened = o["amilyInteractionHappened"];
+			heliaInteractionHappened = o["heliaInteractionHappened"];
+		} else resetState();
+	}
+
+	public var pregnancy:PregnancyStore;
+
+	public function timeChange():Boolean {
+		var needNext:Boolean = false;
+		pregnancy.pregnancyAdvance();
+		if (pregnancy.isPregnant) {
+			if (chichiPregUpdate()) needNext = true;
+		}
+		return needNext;
+	}
+
+	public function timeChangeLarge():Boolean {
+		if (pregnancy.isPregnant && pregnancy.incubation == 0) {
+			chichiGivesBirth();
+			pregnancy.knockUpForce(); //Clear Pregnancy
+			return true;
+		}
+		return false;
+	}
+
+	public function ChiChiFollower() {
+		pregnancy = new PregnancyStore(kFLAGS.CHICHI_PREGNANCY_TYPE, kFLAGS.CHICHI_INCUBATION, 0, 0);
+		pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_PLAYER, 300, 250, 200, 150, 100, 72, 48);
+		EventParser.timeAwareClassAdd(this);
+		Saves.registerSaveableState(this);
+	}
 
 public function EnterOfTheChiChi():void {
 	spriteSelect(SpriteDb.s_chichi);
@@ -93,7 +191,7 @@ public function WonSecondFightYes():void {
 	if (player.hasCock()) {
 		outputText("You ");
 		if (!player.isNaked()) outputText(" slowly remove your [armor] to");
-		outputText(" expose your [cock]. Chi Chi smiles tenderly as she slowly begins to stroke your shaft.\n\n");
+		outputText(" expose your [cock]. Chi Chi smiles tenderly as she slowly begins to stroke your shaft. Well, she sure seems to recover fast if she can already move her arms however,  despite this, Chi Chi clearly is in pain. Either she is used to it from constant use of Overlimit or she simply put is the biggest sadomasochist ever.\n\n");
 		outputText("\"<i>I didn’t get to appreciate it during your training, I hope you will allow me to see what I was missing out on.</i>\"\n\n");
 		outputText("You return the feeling by slowly fingering her pussy, her wetness soon coating your fingers. Once both of you are suitably aroused, you begin to align your cock with her mouse pussy. Still remembering Jojo’s vow of chastity, you ask her if this really what she wants.\n\n");
 		outputText("\"<i>I’m a monk only by name and trade, not by philosophy. It’s a part of me I’m willing to give up to you... if you would accept to take responsibility.</i>\"\n\n");
@@ -105,13 +203,13 @@ public function WonSecondFightYes():void {
 	else {
 		outputText("You give her a good view of your [breasts] and [pussy] as you lie down next to her. The mouse weakly moves her arms to hug you, wincing in the act, pushing her breast against yours as she begins to kiss you and seek your tongue. You play with hers for a few minutes, savoring the cinnamony taste of her lips before slowly moving your hand to her breast in order to massage her. Chi Chi gasps through her clenched teeth at first as she clearly hasn’t fully recovered yet, but when you attempt to remove your hand, she stops you right away, her glare enough to make you pause.\n\n");
 		outputText("\"<i>Please.. do not let my injuries hinder you... I will be all right... if you are here with me, all will be well.</i>\"\n\n");
-		outputText("You comply and resume the slow massaging of her breast, making her moan in delight as you feel her tail entwining with your leg. She weakly moves her hand towards your pussy,eliciting a moan from you as she begins to slowly finger you. You go for hers with your other hand and massage her inner folds, both of you pleasuring each other for a while. It is a relaxing experience which allows you to truly connect with her for the first time, as you gently bring each other toward the edge. ");
+		outputText("You comply and resume the slow massaging of her breast, making her moan in delight as you feel her tail entwining with your leg. She weakly moves her hand towards your pussy, eliciting a moan from you as she begins to slowly finger you. Well, she sure seems to recover fast if she can already move her arms however,  despite this, Chi Chi clearly is in pain. Either she is used to it from constant use of Overlimit or she simply put is the biggest sadomasochist ever. You go for her pussy with your other hand and massage her inner folds, both of you pleasuring each other for a while. It is a relaxing experience which allows you to truly connect with her for the first time, as you gently bring each other toward the edge. ");
 		outputText("The sex is calm and soothing, unlike most that you have experienced so far with the denizens of Mareth, who tend to prefer different trends or wilder kinks, making this slow and vanilla experience something you cherish, as both of you eventually cum next to each other, Chi Chi tensing then relaxing against you. She is so strong and yet so fragile right now; you take great care not to hurt her further.\n\n ");
 	}
 	outputText("\"<i>Thank you for staying by my side. I think I am done teaching... it might be a little late to say this but if you would let me stay with you, I want you to know I love...</i>\"\n\n");
 	outputText("You cut her short... these feelings are shared. If she wants to have you, then you see no reason to refuse her staying in your camp.\n\n");
-	outputText("\"<i>Please take care of my fragile body and heart [name]. I’m not as tough as I look on the inside.</i>\"\n\n");
-	outputText("Chi Chi rests her head on your shoulder. You think she is smiling in happiness but it would be difficult for you to see without removing the pair of arms weakly hugging you.\n\n");
+	outputText("\"<i>Please take care of my fragile body and heart [name]. I’m not as tough as I look on the inside. I would like you to have my gloves. I will no longer need them now that my long quest is finally over.</i>\"\n\n");
+	outputText("She is offering you her gloves, the weapon she has used to defeat so many foes. You carefully remove them from her so not to hurt her as Chi Chi rests her head on your shoulder. You think she is smiling in happiness but it would be difficult for you to see without removing the pair of arms weakly hugging you.\n\n");
 	outputText("(<b>Chi Chi has been added to the Lovers menu!</b>)\n\n");
 	if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard",1,+1);
 	else player.createKeyItem("Radiant shard", 1,0,0,0);
@@ -468,9 +566,44 @@ public function ChiChiCampMainMenu2():void {
 public function ChiChiCampMainMenu():void {
 	spriteSelect(SpriteDb.s_chichi);
 	clearOutput();
-	outputText("You go over to Chi Chi who pauses her training to head to you once you are close.\n\n");
+	if (rand(4) == 0 && !kihaInteractionHappened && SceneLib.kihaFollower.followerKiha() ) kihaInteraction();
+	else if (rand(4) == 0 && !jojoInteractionHappened && player.hasStatusEffect(StatusEffects.PureCampJojo)) jojoInteraction();
+	else if (rand(4) == 0 && !joyInteractionHappened && flags[kFLAGS.JOJO_BIMBO_STATE] == 3) joyInteraction();
+	else if (rand(4) == 0 && !ayaneInteractionHappened && flags[kFLAGS.AYANE_FOLLOWER] >= 2) ayaneInteraction();
+	else if (rand(4) == 0 && !ceaniInteractionHappened && flags[kFLAGS.CEANI_FOLLOWER] > 0) {
+		ceaniInteraction();
+		return;
+	}
+	else if (rand(4) == 0 && !lunaInteractionHappened && flags[kFLAGS.LUNA_FOLLOWER] >= 4 && !player.hasStatusEffect(StatusEffects.LunaOff)) lunaInteraction();
+	else if (rand(4) == 0 && !bimboPatchInteractionHappened && flags[kFLAGS.PATCHOULI_FOLLOWER] >= 6) bimboPatchInteraction();
+	else if (rand(4) == 0 && !amilyInteractionHappened && amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) {
+		amilyInteraction();
+		return;
+	}
+	else if (rand(4) == 0 && !heliaInteractionHappened && SceneLib.helScene.followerHel()) {
+		heliaInteraction();
+		return;
+	}
+	else outputText("You go over to Chi Chi who pauses her training to head to you once you are close.\n\n");
 	if (flags[kFLAGS.CHI_CHI_FOLLOWER] < 4) outputText("\"<i>Oh how are you doing, [name]? I just finished a new set of kicks and punches. Did you want us to train together or did you have something else in mind?</i>\" She’s arm crossed waiting on your reply.");
-	else outputText("\"<i>So glad to see you [name] you are a sunshine in my life you know that. So? What did you visit your lovely wife for today?</i>\"");
+	else outputText("\"<i>So glad to see you [name], you are a sunshine in my life, you know that. So? What did you visit your lovely wife for today?</i>\"");
+	if (SceneLib.midokaScene.MidokaAge > 0 && SceneLib.midokaScene.MidokaAge < 4) outputText("\n\n[midokaname] is sleeping in a basket not so far from Chi Chi, such a sweet child.");
+
+	switch (pregnancy.event) {
+		case 2:
+			outputText("[pg]You notice that Chi-Chi seems to be ill. Of course, you at once go to her and ask her what's wrong, but she only smiles at you and says that it's all right. Your incomprehension must show on your face, since Chi Chi giggles, puts her arms around you and kisses you. \"<i>Silly " + player.mf("boy", "girl") + "... You're going to be a father</i>\"\n\n");
+			break;
+		case 3:
+		case 4: outputText("[pg]Chi-Chi's belly is starting to protrude a little. She's unquestionably pregnant.\n\n");
+			break;
+		case 5:
+		case 6: outputText("[pg]Chi-Chi's belly has gotten very big.\n\n");
+			break;
+		case 7: outputText("[pg]Chi-Chi's swollen stomach moves on occasion, warranting an unthinking pat from her to calm the restless child within.\n\n");
+			break;
+		case 8: outputText("[pg]Chi-Chi's bulge frequently wriggles and squirms, though this doesn't seem to bother her. She smiles with glee, the child mustn't have too much longer until it is born.\n\n");
+	}
+	
 	menu();
 	addButton(0, "Appearance", chichiAppearance).hint("Examine Chi Chi's detailed appearance.");
 	addButton(1, "Talk", chichiTalksMenu);
@@ -485,9 +618,10 @@ public function chichiAppearance():void {
 	spriteSelect(SpriteDb.s_chichi);
 	clearOutput();
 	outputText("Chi Chi is a hinezumi, a subspecies of mouse morph with fiery affinities. Hair are fiery red, the strands turning pink at the tip the same color as the rest of her fur. Her face is that of a mouse with the characteristic buck teeths and twitching nose and her embery eyes have a serious expression to them which, unlike Jojo" + (flags[kFLAGS.JOJO_BIMBO_STATE] == 3 ? " who is now Joy,":"") + " do warn those she teaches to that she will be merciless.");
-	if (flags[kFLAGS.CHI_CHI_FOLLOWER] >= 6) outputText(" That said Chi Chi tend to soften around you thanks to the feelings you both share. She wears the ruby ring you gave her at all time, symbol and reminder of your love.");
-	outputText("\n\nHer body is well toned and battle trained from years of martial training. She wears a qipao from her homeland at all time. Chi Chi has the standard mouse morph small frame, albeit her shapely D cup breasts, with a mouse tail and pawed hands and feet but what makes her special is her natural ability to ignite herself. ");
-	outputText("Her leg and arms are constantly covered with flamelike fireballs and her tail glow like smoldering ember its tip ending with a strand of fire. You sometime ponder how come the simple act of touching her does not burn you to death, likely it's because she can control these flames like extension of her body.\n\n");
+	if (ChiChiCorruption >= 90) outputText(" She has grown twin embery horns up her forehead.");
+	if (flags[kFLAGS.CHI_CHI_FOLLOWER] >= 6) outputText(" That said Chi Chi tends to soften around you thanks to the feelings you both share. She wears the ruby ring you gave her at all time, symbol and reminder of your love.");
+	outputText("\n\nHer body is well toned and battle trained from years of martial training. She wears a qipao from her homeland at all time. Chi Chi has the standard mouse morph small frame, albeit her shapely D cup breasts, with a "+(ChiChiCorruption >= 90?"spaded tail":"mouse tail") + " and pawed hands and feet but what makes her special is her natural ability to ignite herself. ");
+	outputText("Her leg and arms are constantly covered with flamelike fireballs and her tail glow like smoldering ember its tip ending with a strand of fire."+(ChiChiCorruption >= 90?" Her her fire has blazing trails of purple instead of its usual color palette, showing further signs of her corruption.":"")+" You sometime ponder how come the simple act of touching her does not burn you to death, likely it's because she can control these flames like extension of her body.\n\n");
 	if (flags[kFLAGS.CHI_CHI_FOLLOWER] < 4) {
 		outputText("She gives you an annoyed glance as she notices that you are examining her.\n\n");
 		outputText("\"<i>What are you looking at Baka? I can’t concentrate on my training if you're undressing me with your perverted gaze!</i>\"\n\n");
@@ -511,6 +645,8 @@ public function chichiTalksMenu():void {
 	menu();
 	addButton(0, "M. Arts", chichiTalksMartialArts);
 	addButton(1, "F. Students", chichiTalksFormerStudents);
+	addButton(2, "Fiery Hair", chichiTalksFieryFairTrouble).disableIf(player.hairType != Hair.BURNING, "You need flaming hair for this topic to be relatable...");
+	addButton(3, "Her Fur", talkAboutFur).disableIf(ChiChiDefurred, "She doesnt have fur anymore...");
 	addButton(14, "Back", ChiChiCampMainMenu);
 	
 }
@@ -557,6 +693,15 @@ public function chichiTalksFormerStudents():void {
 	doNext(chichiTalksMenu);
 	cheatTime(1/4);
 }
+private function chichiTalksFieryFairTrouble():void {
+	spriteSelect(SpriteDb.s_chichi);
+	clearOutput();
+	outputText("Okay seriously you need to know. She's an hinezumi yet her hairs don't just end up with burning tips that set everything on fire… how?[pg]");
+	outputText("\"<i>Oh that? It's simple, I just don't let them grow enough that the tips starts to smoke or turn to smoldering embers. My hairs are as hot as yours and would burn on the tip too but if I keep them short enough they simply stop to just being hot and that's it.</i>\"[pg]");
+	outputText("Well now. You didn't think her exotic haircut was for more than just looking fancy. That's practical indeed.[pg]");
+	doNext(chichiTalksMenu);
+	cheatTime(1/4);
+}
 
 public function chichiSparring():void {
 	spriteSelect(SpriteDb.s_chichi);
@@ -568,6 +713,80 @@ public function chichiSparring():void {
 	outputText("\"<i>Don’t worry about me, I won’t need to go all out this time.</i>\"");
 	startCombat(new ChiChi());
 }
+
+
+	public function ChiChiDrunkSex():void {
+		clearOutput();
+		spriteSelect(SpriteDb.s_chichi);
+		outputText("As you enter the bar you hear a feminine laughter swiftly spotting what seems to be ");
+		if (flags[kFLAGS.CHI_CHI_FOLLOWER] >= 1 && flags[kFLAGS.CHI_CHI_AFFECTION] >= 20) outputText("Chi Chi");
+		else if (flags[kFLAGS.CHI_CHI_FOLLOWER] >= 1 && flags[kFLAGS.CHI_CHI_AFFECTION] < 20) outputText("Chi Chi the waitress from the exotic food restaurant");
+		else outputText("a blazing mouse girl");
+		outputText(" sitting on one of the stool drinking sake.\n\n");
+		outputText("\"<i>Yeah, and after I told it I was the top girl here I punched it in the face, Woooooooo!</i>\"\n\n");
+		outputText("The barman sighs, pretending not to notice the drunken mouse, acknowledging her just to pass her another drink. Just as you are about to order something she realises you are there and engages in conversation.\n\n");
+		if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2) outputText("\"<i>Gaaaaah, [name], why do you hang around all those girls. Worse why do you fuck with them and not me?! Its like you are a " + player.mf("go-go boy","cheap whore") + " selling your body to everyone and thish drives me mad! Yeaaa, I’m going to prove them all I’m the top shlut!</i>\"");
+		else if (flags[kFLAGS.CHI_CHI_FOLLOWER] == 1) outputText("\"<i>Hey... you’re that so-called champ who lost in the arena?! Well I like you. I like you so much I’d want you as my " + player.mf("boy","girl") + "friend... but waaaah I’m way too shy to tell you that right! Well don’t go tell [name] I like " + player.mf("him","her") + " got it? Yeah, who cares about that! Barman, a round for [name] the best person I've ever met, woooo. Now let’s have sex!</i>\"\n\n");
+		else outputText("\"<i>Hey you... yesh you, the tall person over there! Think you can fight?! Well I’m pretty sure nobody in this village hash the guts to anyway. If you show up in the arena, I'sh gonna beat the crap outta you... \"</i> She grins drunkenly, grabbing at your crotch with one hand. \" <i>Now that I think of it...Fightin' and fuckin'... I can beat anyone in both! I'sh Bet you're the kind who fucks every demon you meet. Well not tonight, letsh bang!</i>\"");
+		outputText("Wait, what? You barely have the time to mutter a reply before the red cheeked mousette pushes you on the nearest table and climbs over you. The barman pulls a curtain around your table, he must be used to this.\n\n");
+		outputText("\"<i>Yeshh you heard me you big idiot. I’m going to fuck you here and now! So don’t you dare try to run! You'sh wouldn't get far, and that would make...Momma...Mad.</i>\"\n\n");
+		outputText("Do you let her?\n\n");
+		menu();
+		addButton(0, "Let Her", drunksex,true);
+		addButton(1, "Refuse", drunksex,false);
+		addButton(2, "SpikeDrink", spikeDrink).disableIf(player.corAdjustedDown < 60 || !player.hasItem(consumables.SUCMILK), "Be corrupt and have Succubus Milk");
+	}
+	private function drunksex(selected:Boolean):void {
+		clearOutput();
+		if (!selected) {
+			outputText("" + (flags[kFLAGS.CHI_CHI_FOLLOWER] > 0 ? "Chi Chi" : "The mouse") + " is clearly out of it. Better stop her now before she does something she will regret later. You shove her to the side and run for the exit of the bar. She swears profusely, but falls over when she tries to chase you. Once outside, you duck behind the side of the bar, taking a roundabout way out of He'Din Xiao and back to camp.");
+			doNext(camp.returnToCampUseOneHour);
+		}
+		else {
+			outputText("You would have to be an idiot indeed to refuse this free fuck. The drunken mouse girl licks her lips in anticipation, grabbing your clothes and begins to removing them one-by-one. Unsurprisingly, her own clothes barely take a second to remove. She is so close now you can feel her breath on your neck.");
+			if (flags[kFLAGS.CHI_CHI_FOLLOWER] < 1) {
+				outputText(" The mousette introduces herself.\n\n");
+				outputText("\"<i>My name’s Chi Chi by the way, but... oh why does it matter? We are about to have a lot of fun.</i>\"");
+			} else if (flags[kFLAGS.CHI_CHI_FOLLOWER] >= 6) {
+				outputText("Chi Chi makes a blissful smile before whispering sweetly to you.[pg]");
+				outputText("“<i>I’ve got you exactly just where I want you now, [name]... and I will never let go.</i>”[pg]");
+			}
+			sceneHunter.selectGender(dickF, vagF);
+
+			//===============================
+			function dickF():void {
+				outputText(" Chi Chi initiates with a wet but warm kiss, her tongue dancing a tango with yours. While small in stature, she displays an uncommon level of strength rarely seen even among animal morphs. What’s more concerning is that you aren't sure how her burning tail and fur isn't actually setting everything on fire around her, especially you. You inquire on this matter.\n\n");
+				outputText("\"<i>That’sh because I’m burning with passion for you big idiot! My flamesh won’t burn anything I wish not to. Or maybe they will. I never recalled how that one inn caught fire. Just you wait, I'll set both of our body aflame with desire. Your cock will be as hot as my embers.</i>\"\n\n");
+				outputText("Well it's too late to back down anyway and, even if you did, the drunken megamouse is clearly going to keep you pinned down. Not to make your partner wait anymore, you slowly tease the entrance of her warm canal with your [cock]. If anything, despite being wet you can already feel how hot her oven is from the outside and can’t help but hope you won’t end up burned. Chi Chi however has no such concern and out of impatience starts stroking your dick with her embery tail.\n\n");
+				outputText("\"<i>Come on, I know you want to put it in. What are you waiting for dumbassh?! I’m positively burning here.</i>\"\n\n");
+				outputText("You're surprised by the direct contact with her fiery tail, even more so by the fact that it didn’t leave your dick with a third degree burn. Deciding to give the hot mouse what she wants, you put it in. Her vagina immediately starts milking you as if it was a thirsty mouth seeking water, and the frantic moving of her hips up down doesn’t help it.\n\n");
+				outputText("\"<i>Gah doushe me! Don’t you shee how much I’m burning! Put that fire out with your manwater!</i>\"\n\n");
+				outputText("Her pussy starts heating even more, transfering to your shaft rapidly. Your shaft warms, then begins to burn, each movement sending the heat down your legs and into your stomach. It's so hot you can’t think straight anymore, only the cool passage of cum can free you from this heat! You begin to piston in and out of Chi Chi desperate for a cooling release.\n\n");
+				outputText("Both desperate for a way to get rid of the heat, the two of you manage to cum together, your jizz filling Chi Chi to the brim before slowly dripping on the ground. Chi Chi sighs in relief, falling limp on the table.\n\n");
+				outputText("\"<i>" + (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2 ? "You're the besht [name] you know that? Let'sh do thish again sometimes, I jusht can’t get enough of it." : "You're a good [boyfriend] you know that? Let'sh do thish again sometimes.") + "</i>\"\n\n");
+				outputText("Her eyes close, and you breathe a sigh of relief as her breathing slows. Groaning through your own exhaustion, you force yourself up, gently placing her back on the table. You wince, aching groin sending shivers through you, but you stagger up,  leaving the bar. You consider it wise to leave before Chi-Chi wakes up." + (flags[kFLAGS.CHI_CHI_FOLLOWER] == 3 ? " Especially because you're pretty sure she will beat you to death if she discovers the two of you had sex while she was drunk" : "") + ". You exit the bar, and as you leave, the barkeep sighs in relief. He motions to a bouncer, and the two men gingerly wrap Chi-Chi in the curtain and carry her out of the bar. From the extremely worried looks on their faces, Chi-Chi is likely to punch them if she wakes up now.\n\n");
+				player.sexReward("vaginalFluids", "Dick");
+				chichiPregChance();
+				if (flags[kFLAGS.CHI_CHI_FOLLOWER] < 1) flags[kFLAGS.CHI_CHI_FOLLOWER] = 1;
+				doNext(camp.returnToCampUseOneHour);
+			}
+			function vagF():void {
+				outputText("Chi Chi initiates with a wet but warm kiss, her tongue dancing a tango with yours. While small in stature she displays an uncommon level of strength rarely seen even among animal morphs. What’s more concerning is that you aren't sure how come her burning tail and fur isn't actually setting on fire everything around her starting with you. You inquire on this matter.\n\n");
+				outputText("\"<i>Thatsh because I’m burning with passion for you, big idiot! My flamesh won’t burn anything I wish not to. Or maybe they will. I never recalled how that one inn caught fire. Just you wait I'll set both of our body aflame with desire. Your pussy will be as hot as my embers.</i>\"\n\n");
+				outputText("Well it's too late to back down anyway and, even if you did, the drunken megamouse is clearly going to keep you pinned down. Not to make your partner wait any more, you begin to grind your pussy lips against hers making her gasp in surprise at your initiative.\n\n");
+				outputText("\"<i>Oh?! Finally fighting back? Good I love a girl that tries.</i>\"\n\n");
+				outputText("Chi Chi begins to grind herself in response, making you both moan. For a drunk she clearly knows what she’s doing. You’re swiftly forced back to reality as your blazing partner accelerates the tempo, causing you to moan in pleasure. There's no way you're going to lose this! You take her mouse ears into your hands and start caressing them. Chi Chi gasps, squirming, her cheeks bright red. You keep it up, scratching her ears, bringing your lips to her neck. She shivers, goosebumps spreading across her nape. You're clearly getting to her. ");
+				outputText("The flaming mouse-girl moans, but her tail is still free. It lashes out like a whip and slides between you, aiming for your cunt. Before you can stop it you already have 15 inch of hot mouse tail in your [pussy] and Chi Chi uses it to fuck your brains out. You wriggle, her coiled tail pumping your folds as her heat spreads. Your cunt warms rapidly, heat spreading to your stomach and thighs, but it's not enough. Your cunt is on fire!");
+				outputText("only the cool passage of your girl-juices can free you from this heat! She grinds against her own tail bump, but you grit your teeth over the wave of pleasure. This bitch isn't getting her way entirely! You swiftly slide " + (player.tailType > Tail.NONE ? "your tail" : "a pair of fingers") + " into her smoking hot hinezumi cunt. She gasps, and you finger her harder, tweaking her bright-red button.\n\n");
+				outputText("Both desperate for a way to get rid of the heat and unable to fully outpace her, the two of you cum at the same time, your girl juices dripping down your cunts, pooling on the table before dripping onto the ground below. Chi Chi sighs in relief, steam rising from her as she falls limp on the table.\n\n");
+				outputText("\"<i>" + (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2 ? "You're the besht [name] you know that? Let'sh do thish again sometimes, I jusht can’t get enough of it." : "You're a good [boyfriend] you know that? Let'sh do thish again sometimes.") + "</i>\"\n\n");
+				outputText("Her eyes close, and you breathe a sigh of relief as her breathing slows. Groaning through your own exhaustion, you force yourself up, gently placing her back on the table. You wince, aching groin sending shivers through you, but you stagger up,  leaving the bar. You consider it wise to leave before Chi-Chi wakes up." + (flags[kFLAGS.CHI_CHI_FOLLOWER] == 3 ? " Especially because you're pretty sure she will beat you to death if she discovers the two of you had sex while she was drunk" : "") + ". You exit the bar, and as you leave, the barkeep sighs in relief. He motions to a bouncer, and the two men gingerly wrap Chi-Chi in the curtain and carry her out of the bar. From the extremely worried looks on their faces, Chi-Chi is likely to punch them if she wakes up now.\n\n");
+				player.sexReward("no", "Vaginal");
+				if (flags[kFLAGS.CHI_CHI_FOLLOWER] < 1) flags[kFLAGS.CHI_CHI_FOLLOWER] = 1;
+				doNext(camp.returnToCampUseOneHour);
+			}
+		}
+	}
 
 public function chichiSex():void {
 	spriteSelect(SpriteDb.s_chichi);
@@ -593,6 +812,7 @@ public function chichiSex():void {
 		else addButtonDisabled(1, "Gentle fuck", "Get a dick, bro.");
 		if (player.hasVagina()) addButton(2, "HinezumiYuri", chichiSexHinezumiYuri);
 		else addButtonDisabled(2, "HinezumiYuri", "Be a pussy or have one, sis.");
+		if (ChiChiCorruption >= 9) addButton(3, "Corrupt", corruptSexRouter);
 		addButton(4, "Back", ChiChiCampMainMenu);
 	}
 }
@@ -715,7 +935,8 @@ public function chichiSexUntilDawn():void {
 	if (player.hasCock()) {
 		outputText("The two of you slowly begin to take turns undressing, starting with her qipao, something she purposely makes a show out of, even going so far as to dance for you. You resume playing with her tongue for a few minutes, savoring the cinnamon taste of her lips before slowly moving your hand to her breasts in order to massage her. Chi Chi gasps at first, as she clearly hasn’t fully recovered yet, but when you attempt to remove your hand, she stops you right away. Done with the preliminaries, Chi Chi sighs in relief as you slowly insert your [cock] inside her waiting pussy. ");
 		outputText("She hugs you tight, as you gently start to piston in and out of her. Chi Chi seems to enjoy herself and makes it obvious as she kisses you and draws her tongue in. The sex is calm and soothing, unlike most experiences you’ve had so far with the denizens of Mareth, who tend to prefer different trends or wilder kinks,  making this slow and vanilla experience something you cherish. Chi Chi only breaks the kiss in order to whisper a sweet nothing to you.\n\n");
-		outputText("\"<i>When I’m close to you, I feel safe and warm… like a relaxing bath in the hot springs of my homeland. I wish we could stay together like this forever, out of this crazy world reach. The only thing that matters here is you and me, and it fills me with joy.</i>\"\n\n");
+		if (ChiChiCorruption > 90) outputText("“<i>I don’t care about the rest of Mareth right now. The world could be on fire I would still be fucking with you, the here and now is all that matter. So let’s consume ourselves in this blaze of pleasure we started.</i>”[pg]");
+		else outputText("\"<i>When I’m close to you, I feel safe and warm… like a relaxing bath in the hot springs of my homeland. I wish we could stay together like this forever, out of this crazy world reach. The only thing that matters here is you and me, and it fills me with joy.</i>\"\n\n");
 		outputText("This is something you can agree with, there are few things you can enjoy better than being here with her. You slowly keep working her hole, hitting every single spot. Chi Chi is moaning every now and then, panting in delight as her body prepares for climax, fiercely clinging to yours. You are not so far from yours either as you feel your cock twitching and soon you cum in Chi Chi’s pussy, the mouse reaching her peak about the same time with a cute, delighted squeak.\n\n");
 	}
 	else {
@@ -725,14 +946,22 @@ public function chichiSexUntilDawn():void {
 			outputText(" Chi Chi gasps at first as she clearly hasn’t fully recovered yet but when you attempt to remove your hand she stops you right away.\n\n");
 			outputText("\"<i>Please.. continue I can take more. Do not mind me.</i>\"");
 		}
+		if (ChiChiCorruption > 90) {
+			outputText("You tease her by pulling out and slowing down for a few seconds leaving her in partial denial.[pg]");
+			outputText("“<i>Please.. do not stop. I need more, much more… give me all of you.</i>”[pg]");
+		}
 		outputText("\n\nYou comply and resume by slowly massaging her breasts, making her moan in delight, as you feel her tail entwining on your leg. She moves her hand toward your pussy, eliciting a moan from you as she begins to insert her finger in your [pussy]. You go for hers with your other hand and massage her inner folds, both of you pleasuring each other for a while. Chi Chi’s technique, despite her recent experience to sex, is exemplary. ");
 		outputText("You think you might not have been her first time, but, on Mareth such things are commonplace, especially for an adventurer or a warrior and you suspect she somehow refined her skill without losing her virginity by defeating common enemies or simply had a good time with another girl. It is a relaxing experience and Chi Chi only breaks the kiss in order to whisper a sweet nothing to you.\n\n");
-		outputText("\"<i>When I’m close to you, I feel safe and warm… like a relaxing bath in the hot springs of my homeland. I wish we could stay together like this forever, out of this crazy world reach. The only thing that matters here is you and me, and it fills me with joy.</i>\"\n\n");
+		if (ChiChiCorruption > 90) outputText("“<i>I don’t care about the rest of Mareth right now. The world could be on fire I would still be fucking with you, the here and now is all that matter. So let’s consume ourselves in this blaze of pleasure we started.</i>”[pg]");
+		else outputText("\"<i>When I’m close to you, I feel safe and warm… like a relaxing bath in the hot springs of my homeland. I wish we could stay together like this forever, out of this crazy world reach. The only thing that matters here is you and me, and it fills me with joy.</i>\"\n\n");
 		outputText("Chi Chi and you begin to lose focus on the world around, only able to see each other’s happy face, as both of you eventually cum together. Of course, you resume a few minutes after, but she is so strong yet, so fragile right now. You take great care not to hurt or exhaust her, as she has not yet fully recovered from her battle with you.\n\n");
 	}
 	outputText("The two of you bask in the afterglow of your orgasms for a good moment as you stay locked with Chi Chi kissing and whispering sweet nothings for several minutes. You make love to Chi Chi like this until dawn, both of you finally falling asleep from exhaustion.\n\n");
 	outputText("Waking up in the morning you give Chi Chi a parting kiss and head out to resume your champion duties.\n\n");
-	player.sexReward("vaginalFluids");
+	if (player.hasCock()) {
+		player.sexReward("vaginalFluids", "Dick");
+		chichiPregChance();
+	} else player.sexReward("no", "Vaginal");
 	model.time.days++;
 	model.time.hours = 6;
 	doNext(camp.returnToCampUseOneHour);
@@ -745,9 +974,11 @@ public function chichiSexGentleFuck():void {
 	outputText("Well, life can’t always be fair, and this time around she gets wet way before she manages to pull any precum out of you. You slowly push her down, holding her with your hand, as you proceed to insert your [cock] between her waiting folds. Chi Chi giggles at you as she helps your cock in with her tail, guiding it in just the right place. Once you're inside, you slowly fuck the fragile mouse’s delicate body, ever worried of hurting her. Your hands are kept busy, as you use one of them to massage her breast while the other one is holding her tail, as you nib on the tip not ignoring any important spot. ");
 	outputText("Chi Chi moans slowly, her eyes sparkling with delight as the two of you make love slowly and passionately, unconcerned by the surrounding mayhem in Mareth. A small spark of happiness in the bleak land that is the current Mareth. Chi Chi’s about to reach her climax moans your name as you do hers and both of you cum, your sperm painting her warm spasming vaginal walls white. Chi Chi stays locked with you, her heaving chest against yours as both of you drift to sleep.\n\n");
 	outputText("You wake up later and prepare to re-equip your gear. Chi Chi is still against you, but you almost regretfully break the embrace as she lifts to dress back up.\n\n");
-	outputText("\"<i>Go save the world, [name]. I will be keeping that bed warm for you when you come back.</i>\"\n\n");
+	if (ChiChiCorruption > 90) outputText("“<i>Go fuck some other demon into submission [name]. I will be keeping that bed warm for you when you come back ready for another round.</i>”[pg]");
+	else outputText("\"<i>Go save the world, [name]. I will be keeping that bed warm for you when you come back.</i>\"\n\n");
 	outputText("She gives you a playful wink as she heads back to her training ground, her tail still swishing in happiness. She’s right, you didn’t get this far in life just to let the demons destroy it. You finish redressing then head back to the fight.\n\n");
 	player.sexReward("vaginalFluids","Dick");
+	chichiPregChance();
 	doNext(camp.returnToCampUseOneHour);
 }
 public function chichiSexHinezumiYuri():void {
@@ -783,5 +1014,216 @@ public function mishapsLunaChiChi():void {
 	doNext(playerMenu);
 }
 
+	public function spikeDrink():void {
+		outputText("While Chi Chi is distracted trying to get you to fuck with her you grab a flask of succubi milk and pour it into her drink. That done you point her glass.[pg]");
+		outputText("Before this goes any further she should at least finish her drink...[pg]");
+		outputText("Chi Chi jolts up and grabs the glass without further questioning herself.[pg]");
+		outputText("“<i>Gosh I almosht forgot that!</i>”[pg]");
+		outputText("She swiftly grab the glass of spiked sake and chug it up before pinning you back to the table her body changing slightly as her hip and breast barely expand. Chi Chi moans in confusion at the change but seem to forget right away as her lust lidded eye focus back on you.[pg]");
+		outputText("“<i>What are you waiting for you idiot? letsh fuck!</i>”[pg]");
+		player.consumeItem(consumables.SUCMILK);
+		ChiChiCorruption++;
+		doNext(drunksex, true);
 	}
+
+	public function corruptionOverflowing():void {
+		spriteSelect(SpriteDb.s_chichi);
+		clearOutput();
+		outputText("As you head back to camp you spot Chi Chi in the far distance heading toward you. There's something off about her though. You only realise what when you spot the twin embery horns up her forehead and the spaded end of her tail, guess the succubi milk you stacked in her drink finally had an effect. If it wasn’t enough of a tell, her fire has blazing trails of purple instead of its usual color palette. She’s corrupted to the brim and looks like she doesn’t even care anymore. You can see her intentions before she even asks but to avoid taking a kick or punch to the face you think you might as well pretend you know nothing and let her explain herself.[pg]");
+		outputText("“<i>Hey, you won’t believe what happened to me! Turns out I was kicked out of town for publicly raping people while drunk. What's so wrong about that?! I should be able to get sex from whoever I want whenever I please!");
+		if (flags[kFLAGS.CHI_CHI_FOLLOWER] <= 3) outputText(" Regardless I ended up with no place to go and remembered you had a camp in the wasteland so I'm moving in.")
+		outputText("</i>[pg]");
+		outputText("She moves her hips from side to side, her blazing tail swishing hypnotically behind her as she adds.[pg]");
+		outputText("“<i>Since you were this open to fucking with me I thought you would fit the bill better than the imps and goblins as a [boyfriend]. I need someone to keep that smoldering need of mine satisfied and I could not think of anyone else.</i>”[pg]");
+		outputText("Well now she’s speaking your language. How about she makes a proper display of her talent to you first.[pg]");
+		if (flags[kFLAGS.CHI_CHI_FOLLOWER] < 3) flags[kFLAGS.CHI_CHI_FOLLOWER] = 4;
+		ChiChiKickedOut = true;
+		sceneHunter.selectGender(corruptM, corruptF);
+	}
+	private function corruptSexRouter():void {
+		clearOutput();
+		outputText("”<i>Since you were this open to fucking with me I thought you would fit the bill better than the imps and goblins as a [boyfriend]. I need someone to keep that smoldering need of mine satisfied and I could not think of anyone else.</i>”[pg]");
+		outputText("Well now she’s speaking your language. How about she makes a proper display of her talent to you first.[pg]");
+		sceneHunter.selectGender(corruptM, corruptF);
+	}
+	private function corruptF():void {
+		outputText("Chi Chi initiates with a wet but warm kiss her tongue dancing a tango with yours. While small in stature she displays an uncommon level of strength rarely seen even among animal morphs. What’s more concerning is that you aren't sure how come her burning tail and fur isn't actually setting everything on fire around her, starting with you. You inquire on this matter.[pg]");
+		outputText("“<i>That’s because I’m burning with passion for you, big idiot! My flames won’t burn anything I wish not to. Just you wait, I'll set bothof our bodies aflame with desire. Your pussy will be as hot as my embers.</i>“[pg]");
+		outputText("Well it's too late to back down anyway and, even if you did, the corrupt megamouse is clearly going to keep you pinned down. Not to make your partner wait anymore you begin to grind your pussy lips against hers making her gasp in surprise at your initiative.[pg]");
+		outputText("“<i>Oh?! Finally fighting back? Good, I love a girl that tries.</i>”[pg]");
+		outputText("Chi Chi begins to grind herself in response, making you both coo. She clearly knows what she’s doing and with her newfound corruption sex is as easy for her as breathing. You’re swiftly forced out back to reality as your blazing partner accelerates the tempo, causing you to moan in pleasure. Well now there's no way you are going to simply lose this! You get the mouse ears with your hands and start caressing them. Chi Chi has a positive reaction and you are clearly getting to her however that's counting without her hidden weapon. Her burning tail lashes out like a whip and slides between you, aiming for your cunt. Before you can stop it you already have 15 inch of hot mouse tail in your [vagina] and Chi Chi uses it to fuck your brain out. The fuck isn't all that happens it seems her very heat start to spread on to you. Wow your cunt is indeed as if possessed by some kind of angry efreeti. It's so hot you can’t think straight anymore, only the cool passage of your girl-juices can free you from this heat! Meanwhile she grinds against her own tail bump but you have decided not to let her get off at her own pace. You swiftly slide [if (hasTail = true)your tail tip|a pair of fingers] in the smoking hot hinezumi cunt and retaliate with a flurry of rapid movements of your own.[pg]");
+		outputText("Both desperate for a way to get rid of the heat and unable to fully outpace her, the two of you still manage to cum together your girl juices melding together and staining the ground. Chi Chi sighs in relief and exhaustion, falling limp on the ground.[pg]");
+		outputText("”<i>You're the best [name], you know that? Let's keep doing this every day! I just can’t get enough of it.</i>”[pg]");
+		outputText("You both rest for a while before the pair of you dress back up. You could fuck with the corrupt inferno moussette the whole day long but you got other things to do.[pg]");
+		player.sexReward("no", "Vaginal");
+		doNext(camp.returnToCampUseOneHour);
+	}
+	private function corruptM():void {
+		outputText("Chi Chi initiates with a wet but warm kiss; Her tongue dancing a tango with yours. While small in stature, she displays an uncommon level of strength rarely seen even among animal morphs. What’s more concerning is that you aren't sure how her burning tail and fur isn't actually setting everything on fire around her, especially you. You inquire on this matter.[pg]");
+		outputText("“<i>That’s because I’m burning with passion for you big idiot! My flames won’t burn anything I wish not to. Just you wait, I'll set both of our body aflame with desire. Your cock will be as hot as my embers.</i>“[pg]");
+		outputText("Well it's too late to back down anyway and, even if you did, the corrupt megamouse is clearly going to keep you pinned down. Not to make your partner wait anymore, you slowly tease the entrance of her warm canal with your [cock]. If anything, despite being wet you can already feel how hot her oven is from the outside and can’t help but hope you won’t end up burned. Chi Chi however has no such concern and out of impatience starts stroking your dick with her embery tail.[pg]");
+		outputText("“<i>Come on, I know you want to put it in. What are you waiting for dumbass?! I’m positively burning here.</i>”[pg]");
+		outputText("You're surprised by the direct contact with her fiery tail, even more so by the fact that it didn’t leave your dick with a third degree burn. Deciding to give the hot mouse what she wants, you put it in. Her vagina immediately starts milking you as if it was a thirsty mouth seeking water, and the frantic moving of her hips up and down doesn’t help it.[pg]");
+		outputText("“<i>Gah douse me! Don’t you see how much I’m burning! Put that fire out with your man water!</i>”[pg]");
+		outputText("Her pussy starts heating even more and before you know it, it actually transfers to you. Wow, your urethra is indeed as if possessed by some kind of angry efreeti. It's so hot you can’t think straight anymore, only the cool passage of cum can free you from this heat! You begin to piston in and out of Chi Chi desperate for a cooling release.[pg]");
+		outputText("Both desperate for a way to get rid of the heat, the two of you manage to cum together, your jizz filling Chi Chi to the brim before slowly dripping down. Chi Chi sighs in relief and exhaustion, falling limp on the ground[if (cumhigh) her pussy slowly drooling from the messy bukake you left her with].[pg]");
+		outputText("”<i>You're the best [name] you know that? Let's keep doing this everyday, my thirsty cunt just can’t get enough of it.</i>” [pg]");
+		outputText("You both rest for a while before the pair of you dress back up. You could fuck with the corrupt inferno moussette the whole day long but you got other things to do.[pg]");
+		player.sexReward("vaginalFluids", "Dick");
+		doNext(camp.returnToCampUseOneHour);
+	}
+
+	public function newLoverComesToCamp():void {	//TODO check for new lovers
+		outputText("You’ve barely entered the camp with your new conquest before you hear a raging scream. The sudden cry only has a split second to echo before Chi Chi’s foot literally crashes into your face, her air kick sending you flying a few meters away. As you get up from the ground, brushing off the dirt you ask her what the hell that was for.[pg]");
+		outputText("“<i>You jerk! You ignore me entirely for days and suddenly you come home with another person, sharing the intimacy of a long loving couple!  What does OUR love even mean to you? I hate you!</i>”[pg]");
+		outputText(", confused, looks at Chi Chi scolding you like the jealous girlfriend she is for your utter lack of fidelity. You apologize and explain yourself to Chi Chi, saying that you will take better care of her from now on, just that she's not alone in your life.[pg]");
+		outputText("“<i>You better! I was here before that newcomer, and you, the charmer, you may have found a place in my [boyfriend]’s heart but know this, I WAS HERE FIRST! If you hurt [name] in any way I will beat you, break your bones and throw you down in the stream half alive for the fishes to eat!</i>”[pg]");
+		outputText("She moves back to her side of camp to cool down her raging flames. You can still feel her footprint on your face... OUCH that hurt![pg]");
+		outputText("[pg]");
+	}
+	public function kihaInteraction():void {
+		outputText("As you walk around camp you're greeted to an unusual sight.[pg]");
+		outputText("Kiha happens to be sparring with Chi Chi. While the dragoness definitely has height as an advantage, the mouse definitively outmaneuvers her slow axe attacks in every way, punishing Kiha’s every mistakes. Kiha finally land a blow on the mouse, smashing her off with her tail and sending her flying to a nearby tree before the Hinezumi land on the trunk with her legs and projects herself back into the fray with a punch to the face. You’re about to interject before either gets hurt when they actually break the fight, Chi Chi talking first.[pg]");
+		outputText("”<i>Great job Kiha, you’re improving that style of yours. However you need to use your legs and tail just as much as you do your greataxe. Your body was engineered like a weapon, it only makes sense that you waste none of its potential. Keep at it and you'll be way more likely to kick those demon asses.</i>” [pg]");
+		outputText("Oh gods… if Kiha is training with Chi Chi now you will have to be careful around her next time you exchange blows. You may have won your last spar with her but there's no telling how strong she’ll get if she keeps on improving.[pg]");
+		if (flags[kFLAGS.KIHA_LVL_UP] < 13) flags[kFLAGS.KIHA_LVL_UP]++;
+		kihaInteractionHappened = true;
+	}
+	public function jojoInteraction():void {
+		outputText("As you head back to camp you catch the two monks in the middle of a philosophical debate. Chi Chi keeps repeating perfection is achieved through constant martial training and the honing of one's mind whereas Jojo insists meditation and harmony of the inner self is key to enlightenment. They chatter for a few seconds then both stop as they notice you watching, heading back to their respective training.[pg]");
+		jojoInteractionHappened = true;
+	}
+	public function joyInteraction():void {
+		outputText("As you head back to camp you catch Joy and Chi Chi in the middle of a somewhat awkward discussion. Chi Chi keeps repeating that Joy is a dimwit while Joy keeps telling her that self perfection is achieved through sexual release and equilibrium is reached when you have at least six different partners, one for each holes, and members. Chi Chi is about to send Joy flying when she takes notice of you and restrains herself.[pg]");
+		joyInteractionHappened = true;
+	}
+	public function ayaneInteraction():void {
+		outputText("You notice Ayane and Chi Chi talking together. Seems to be a discussion about the responsible uses of Ki. While Chi Chi is a martial artist Ayane seems to focus her ki into spellcasting. Is it really going to be the warrior versus wizard argument again? The shrine maiden however has the wisdom not to fully deny the point of view of the hinezumi who seems determined to defend her way of life to the end. They exchange a pair of respectful bows then break out, Ayane heading out to resume her tasks as Chi Chi head toward the training dummies.[pg]");
+		ayaneInteractionHappened = true;
+	}
+	public function ceaniInteraction():void {
+		outputText("As you come back to camp you notice the smell of smoke in the distance. When you close in to see what's going on you see Chi Chi apologizing profusely to Ceani who seems stuck between rage and tears next to a barrel of burnt fish.[pg]");
+		outputText("“<i>Look I swear all I wanted was to grill a fish for my dinner! I didn’t mean to set fire to the entire barrel!</i>”[pg]");
+		outputText("Ceani answer by showing her massive pointy teeth, a sight that would scare just about anyone used to her kind merry going attitude. This is a facet of her you didn’t get to see often.[pg]");
+		outputText("“<i>An entire months worth of food, you clumsy idiot! all gone to ashes within seconds! Do you realise how hard it is to accumulate this many fish?! I would switch you over with the barrel I just lost but [name] would not like it. Hope you got a way to compensate me back, this isn't the high sea.</i>”[pg]");
+		outputText("You decide to let Chi Chi solve her issues, she’ll likely catch fishes between her training to compensate.[pg]");
+		ceaniInteractionHappened = true;
+		doNext(playerMenu);
+	}
+	public function lunaInteraction():void {
+		outputText("You spot Luna and Chi Chi working together, Luna is pilling trash and Chi Chi is incinerating it. Luna finally grab the ashes with a container and goes to spread it to the flowers. Now that's what you call teamwork![pg]");
+		lunaInteractionHappened = true;
+	}
+	public function bimboPatchInteraction():void {
+		outputText("You hear a commotion in your camp and spot Chi Chi in battle stance fighting off something. Out of nowhere Patchoulie appear behind Chi Chi and grabs her tail, giggling. The mouse’s lightning fast response with a kick that sends the cheshire trickster flying, though she disappears and appears laidback on a tree branch before she get into a collision with a nearby obstacle. Chi Chi look back at you somewhat pissed.[pg]");
+		outputText("“<i>Look [name], I can’t exactly stop you from inviting people to the camp but have the decency to tell them to behave, because if that cat girl jumps me  one more time, I swear I will make her head explode.</i>”[pg]");
+		outputText("Patchoulie makes one of her most aggravating smile and replies back.[pg]");
+		outputText("“<i>You can’t hurt me nya… don’t you know I am everything and nothing, everywhere and nowhere, neither alive nor dead? You can’t exactly end my existence if I have never existed right? Or is it that I have always existed? Even I sometimes forget about that.</i>”[pg]");
+		outputText("Chi Chi mutters something about messed up crazed felines before heading back to her training. Not much you can do about Patchoulie, she's bound by rules so abstract it’s difficult to even figure the smallest thing about how she actually functions, even if you tried to kill her she’d likely reply to you that she can only die during teatime on a winter solstice if impaled with a spear made of mistletoe.[pg]");
+		bimboPatchInteractionHappened = true;
+	}
+	public function heliaInteraction():void {
+		outputText("As you head to camp you are greeted by an interesting sight. Seems like Chi Chi and Helia are sharing drinks. They both boast about heroics and sing tavern songs out loud. Seems those two won’t be available for a few hours but at least they are getting along.[pg]");
+		heliaInteractionHappened = true;
+		doNext(playerMenu);
+	}
+	public function amilyInteraction():void {
+		outputText("You spot both Amily and Chi Chi chatting to the side of the camp. They seem to be exchanging information about the various hostile denizens of mareth as well as survival tricks.");
+		amilyInteractionHappened = true;
+		doNext(playerMenu);
+	}
+
+	public function talkAboutFur():void {
+		outputText("You mention the topic of her fur to Chi Chi and she eyes you, intrigued.[pg]");
+		outputText("\"<i>What’s with my fur [name] you ain't seriously going to tell me it puts you off when we already got this far in our relationship. Thats…</i>\"[pg]");
+
+		menu();
+		addButton(0, "Like it", likeIt);
+		addButton(1, "Defur", defur);
+
+		function defur():void {
+			outputText("Truth be told you would like to feel some skin every now and then when the two of you share a bed. Beside this is one of your fetishes so if she desires to appeal to it she could take a step forward.[pg]");
+			outputText("Chi Chi is obviously torn between her love for you and her principes but decides to humor your fantasies regardless.[pg]");
+			outputText("\"<i>Fine wait for me while I go gather the ingredients, you're lucky I thought of this way before you dared to mention it.</i>\"[pg]");
+			outputText("She heads to her backpack and retrieves a potion.[pg]");
+			outputText("\"<i>I had a skilled alchemist brew this out of Hummus and Fiery saké, it should allow me to take on a more human like form while preserving my normal assets. Tsk… down the hatch.</i>\"[pg]");
+			outputText("She chugs the thing down before you can say anything, cutting down any potential protest. Her transformation is swift and efficient as most of the fur covering her torso falls off, stopping at the elbows and the tights. Her face kept that defiant scolding look you know her for but took on a human shape fully. Hell, if she didn't look angry half the time she'd pass for more gorgeous than any girl you ever met in Ingnam. The only telltale sign of her origins are the ember like eyes and the obvious bucktooths in her mouth. She spins for you to get a full glance of her new improved her. Just as you’re about to comment that you love her new appearance, her tail suddenly whips about and ties to your hand, pulling you in her arms.[pg]");
+			outputText("\"<i>Like what you saw hun? I hope so because you’re going to try the material first hand now. I’m smoldering hot and ready.</i>\"[pg]");
+			outputText("Oh god she's in the mood and her expression clearly tell she won't accept no for an answer.[pg]");
+			ChiChiDefurred = true;
+			cheatTime(1/4);
+
+			menu();
+			if (model.time.hours > 18) addButton(0, "Until Dawn", chichiSexUntilDawn);
+			else addButtonDisabled(0, "Until dawn", "It's too early for this. Wait till 7 pm.");
+			if (player.hasCock()) addButton(1, "Gentle Fuck", chichiSexGentleFuck);
+			else addButtonDisabled(1, "Gentle fuck", "Get a dick, bro.");
+			if (player.hasVagina()) addButton(2, "HinezumiYuri", chichiSexHinezumiYuri);
+			else addButtonDisabled(2, "HinezumiYuri", "Be a pussy or have one, sis.");
+			if (ChiChiCorruption >= 9) addButton(3, "Corrupt", corruptSexRouter);
+		}
+		function likeIt():void {
+			outputText("You were just commenting on her beautiful luster. You’re fine with her staying as she is, no change whatsoever. Chi Chi nods in appreciation.[pg]");
+			outputText("\"<i>Well great I prefer it that way too.</i>\"[pg]");
+			doNext(chichiTalksMenu);
+			cheatTime(1/4);
+		}
+	}
+
+	private function chichiPregChance():void {
+		//Get out if already pregged.
+		if (pregnancy.isPregnant) return;
+		if (flags[kFLAGS.CHI_CHI_FOLLOWER] < 2) return;
+		return;// <- remove this line when midoka is ready to be born			TO-DO Midoka is not complete enough yet to include, also need ChiChi preg update and appearance texts
+		//See if any of the scenarios get her preg
+		var preg:Boolean = false;
+		//1% chance per 500mLs of cum, max 5%
+		var score:Number = Math.min(player.cumQ()/500,5);
+		score += player.virilityQ() * 200;
+		if (flags[kFLAGS.CHI_CHI_FOLLOWER] >= 4) score *= 1.5;
+		trace("ChiChi Preg Check Virility Score: " + score);
+		if((player.cumQ() > (flags[kFLAGS.CHI_CHI_FOLLOWER] < 4? 150 : 250) && score >= rand(100))) {
+			preg = true;
+			trace("ChiChi knocked up!");
+		}
+		else trace("ChiChi not knocked up!");
+		if (preg) {
+			pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_MOUSE);
+			sceneHunter.print("\n<b>ChiChi is pregnant!</b>");
+		}
+	}
+
+	public function unplannedPregnancy():void {
+		spriteSelect(SpriteDb.s_chichi);
+		clearOutput();
+		outputText("Chi-Chi walks over to you, a very serious expression in her eyes. She looks frustrated and with due cause, the proud warrior’s belly has inflated to the size of a balloon.[pg]");
+		outputText("“<i>Look, [name], I would have been angry had you abused me in my drunken state in the evenings to fuck me, but to think you would steep so low as to impregnate me?! I don’t know if I should pulverize your head or hug you tightly. Regardless, for the sake of OUR child I ask that as of now you assume full responsibility as a father.</i>”[pg]");
+		outputText("Does that mean the both of you are a couple now?[pg]");
+		outputText("“<i>Of course it does, I just wish you married me first, you moron!</i>”[pg]");
+		outputText("She slams her closed fist against your head to make the point clear. Owch! Well this went better than you thought it would, guess the two of you are together for the best and the worst now.[pg]");
+		flags[kFLAGS.CHI_CHI_FOLLOWER] = 4;
+	}
+
+	public function chichiGivesBirth():void {
+		spriteSelect(SpriteDb.s_chichi);
+		clearOutput();
+		outputText("You hear Chi Chi calling for you and run to her.[pg]");
+		outputText("“[name]! You are just in time. I was worried I would give birth to our child without you around.”[pg]");
+		if (flags[kFLAGS.CHI_CHI_FOLLOWER] < 6) outputText("You can’t help but be amazed at the absence of a spiky reply or aggressiveness in her tone. This is likely how she is once she stops pretending she’s not in deep love with you. Makes you ponder what marrying her would be like. ");
+		outputText("You hold Chi Chi’s hand as she goes into labor and give her your full moral support through the whole process. The mouse baby finally comes out, inch by inch and to your surprise it is not actually covered in fire. Once outside it begins crying and you swiftly hand your kid over to Chi Chi.[pg]");
+		//(Add this part when coding gender if we do more than just female)		//TODO
+		//outputText("While you were handling the baby you got to get a close look at its gender, it’s definitely a .[pg]"); //[Boy] [Girl]
+		outputText("Chi Chi tenderly nurses the newly born mouse, smiling in clear happiness. That said, Chi Chi looks at you expectantly.[pg]");
+		SceneLib.midokaScene.nameMidoka();
+	}
+
+	private function chichiPregUpdate():Boolean {
+		switch (pregnancy.eventTriggered()) {
+			case 2: if (flags[kFLAGS.CHI_CHI_FOLLOWER] < 4) unplannedPregnancy();
+				else outputText("\nWhen you come to check on Chi-Chi you notice she’s smiling as she caresses her belly, which bulges notably, but not with any real prominence. “<i>It seems that our exploits have born fruit, [name]</i>”[pg]");
+				return true;
+		}
+		return false; //If there's no update then return false so needNext is not set to true
+	}
+}
 }

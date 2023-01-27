@@ -680,7 +680,7 @@ public class DriderIncubusScenes extends BaseContent
 			{
 				outputText("\n\nThe best part is the way your [clit] is smashed up against the upper half of his dick, rubbing against the thick, veiny shaft in the most delicious way. You can barely stand the avalanche of sensations coming from your oversized button while you frot it against the needy demon, but isn’t that what you wanted? To get off so powerfully that Lethice would have nothing left to tempt you with?");
 				outputText("\n\nThe mounting hunger in your channel for some kind of penetration jars you from your surprisingly heterosexual frottage. You want him inside you. He can always manage your cock-sized clitty with one of his hands while you mount him again and again, trading a little corruption for the kind of");
-				if (player.pregnancyType != 0) outputText(" cunt");
+				if (!player.canGetPregnant()) outputText(" cunt");
 				else outputText(" womb");
 				outputText("-stuffing satisfaction that you can only get from real sex.");
 			}
@@ -694,7 +694,7 @@ public class DriderIncubusScenes extends BaseContent
 				if (player.cocks.length == 1) outputText(" your");
 				else outputText(" a");
 				outputText(" dick against his. You want him inside you. He can always manage [oneCock] with a hand while you’re riding him again and again, trading a little corruption for the kind of");
-				if (player.pregnancyType != 0) outputText(" cunt");
+				if (!player.canGetPregnant()) outputText(" cunt");
 				else outputText(" womb");
 				outputText("-stuffing satisfaction that you can only get from real sex.");
 			}

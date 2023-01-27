@@ -33,10 +33,21 @@ use namespace CoC;
 		public function get desertEncounter():GroupEncounter {
 			return _desertEncounter;
 		}
+		private var _innerdesertEncounter:GroupEncounter = null;
+		public function get innerdesertEncounter():GroupEncounter {
+			return _innerdesertEncounter;
+		}
 		private function init():void {
             const fn:FnHelpers = Encounters.fn;
 			_desertEncounter = Encounters.group("desert",
-					{
+					{/*
+						name: "discoverinnerdesert",
+						when: function ():Boolean {
+							return (player.level + combat.playerLevelAdjustment()) >= 10 && flags[kFLAGS.DISCOVERED_INNER_DESERT] == 0
+						},
+						chance: 30,
+						call: discoverInnerDesert
+					}, {*/
 						name: "walk",
 						call: walkingDesertStatBoost
 					}, {
@@ -179,14 +190,57 @@ use namespace CoC;
 						name  : "desertloot",
 						chance: 0.3,
 						call  : findDesertLoot
-					}, {
+					}/*, {
 						name: "demonProjects",
 						chance: 0.2,
 						when: function ():Boolean {
 							return DemonLab.MainAreaComplete >= 4;
 						},
 						call: SceneLib.exploration.demonLabProjectEncounters
-					});
+					}*/);
+					_innerdesertEncounter = Encounters.group("inner desert", {
+						//Helia monogamy fucks
+						name  : "helcommon",
+						night : false,
+						call  : SceneLib.helScene.helSexualAmbush,
+						chance: 0.2,
+						when  : SceneLib.helScene.helSexualAmbushCondition
+					},{
+						name: "electra",
+						night : false,
+						when: function ():Boolean {
+							return flags[kFLAGS.ELECTRA_FOLLOWER] < 2 && !player.hasStatusEffect(StatusEffects.ElectraOff);
+						},
+						chance:0.5,
+						call: function ():void {
+							if (flags[kFLAGS.ELECTRA_AFFECTION] < 2) SceneLib.electraScene.firstEnc();
+							else {
+								if (flags[kFLAGS.ELECTRA_AFFECTION] == 100) {
+									if (flags[kFLAGS.ELECTRA_FOLLOWER] == 1) SceneLib.electraScene.ElectraRecruitingAgain();
+									else SceneLib.electraScene.ElectraRecruiting();
+								}
+								else SceneLib.electraScene.repeatMountainEnc();
+							}
+						}
+					}, {/*
+						name: "lactoblasters",
+						when: function ():Boolean {
+							return player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns5) && player.statusEffectv3(StatusEffects.TelAdreTripxiGuns2) == 0 && player.hasKeyItem("Lactoblasters") < 0;
+						},
+						chance: 30,
+						call: partsofLactoBlasters
+					}, {*/
+						name: "ted",
+						call: SceneLib.tedScene.introPostHiddenCave,
+						when: SceneLib.tedScene.canEncounterTed
+					}/*, {
+						name: "demonProjects",
+						chance: 0.2,
+						when: function ():Boolean {
+							return DemonLab.MainAreaComplete >= 4;
+						},
+						call: SceneLib.exploration.demonLabProjectEncounters
+					}*/);
 		}
 		//Explore desert
 		public function exploreDesert():void
@@ -194,8 +248,25 @@ use namespace CoC;
 			clearOutput();
 			doNext(camp.returnToCampUseOneHour);
 			player.exploredDesert++;
-			(desertEncounter as GroupEncounter).execEncounter();
+			desertEncounter.execEncounter();
 			flushOutputTextToGUI();
+		}
+		
+		public function exploreInnerDesert():void
+		{
+			clearOutput();
+			doNext(camp.returnToCampUseOneHour);
+			flags[kFLAGS.DISCOVERED_INNER_DESERT]++;
+			innerdesertEncounter.execEncounter();
+			flushOutputTextToGUI();
+		}
+
+		private function discoverInnerDesert():void {
+			clearOutput();
+			outputText("While exploring the desert you notice that the sandy dunes begins to grow larger and more intimidating. The heat has also ramped up you will have to carry some waterskins on you. ");
+			outputText("<b>It would seem you found the inner desert area!</b>");
+			flags[kFLAGS.DISCOVERED_INNER_DESERT]++;
+			doNext(camp.returnToCampUseTwoHours);
 		}
 
 		public function sandWitchPregnancyEvent():void {

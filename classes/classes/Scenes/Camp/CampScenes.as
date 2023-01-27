@@ -539,10 +539,10 @@ public function EclassHTsurvived():void {
 	cleanupAfterCombat();
 }
 
-public function goblinsBirthScene():void {
+public function goblinsBirthScene(womb:int = 0):void {
 	daughtersCount += 1 + rand(5);
 	outputText("\n");
-	if(player.vaginas.length == 0) {
+	if(player.vaginas.length == (womb+1)) {
 		outputText("You feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  <b>You look down and behold a new vagina</b>.  ");
 		player.createVagina();
 	}
@@ -557,9 +557,9 @@ public function goblinsBirthScene():void {
 		menu();
 		addButton(0, "Next", nameEldestGobo);
 	}
-	else goblinsBirthScene2();
+	else goblinsBirthScene2(womb);
 }
-private function nameEldestGobo():void {
+private function nameEldestGobo(womb:int):void {
 	if (mainView.nameBox.text == "") {
 		clearOutput();
 		outputText("<b>You must name her.</b>");
@@ -568,7 +568,7 @@ private function nameEldestGobo():void {
 		mainView.nameBox.width = 165;
 		mainView.nameBox.x = mainView.mainText.x + 5;
 		mainView.nameBox.y = mainView.mainText.y + 3 + mainView.mainText.textHeight;
-		doNext(nameEldestGobo);
+		doNext(nameEldestGobo, womb);
 		return;
 	}
 	flags[kFLAGS.ELDEST_GOBLIN_DAUGHTER] = mainView.nameBox.text;
@@ -576,9 +576,9 @@ private function nameEldestGobo():void {
 	mainView.nameBox.visible = false;
 	clearOutput();
 	outputText("" + flags[kFLAGS.ELDEST_GOBLIN_DAUGHTER] + " now that's a name worthy of a future genius! ");
-	goblinsBirthScene2();
+	goblinsBirthScene2(womb);
 }
-private function goblinsBirthScene2():void {
+private function goblinsBirthScene2(womb:int):void {
 	outputText("That solved, you doze off with your daughter against you, supremely happy.");
 	player.cuntChange(60, true, true, false);
 	outputText("\n\nWhen you wake up you are no longer holding a baby but what looks like a teenage goblin.\n\n");
@@ -596,7 +596,7 @@ private function goblinsBirthScene2():void {
 		outputText("\"<i>Morning Mom. Hey, say I might as well stay around the camp with everyone. Big sister " + flags[kFLAGS.ELDEST_GOBLIN_DAUGHTER] + " is here too. Pretty sure I'm better off staying close to you"+((camp.maleNpcsHotBathCount() > 0 && !player.hasStatusEffect(StatusEffects.PureCampJojo)) ? ". Not to mention the "+(camp.maleNpcsHotBathCount() > 1 ? "many studs":"stud")+" available around the place":"")+".</i>\"\n\n");
 	}
 	outputText("Aw... She’s fully grown up now but hey, that's another pair of hands around the workshop, right?\n\n");
-	if (player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DRY) player.vaginas[0].vaginalWetness++;
+	if (player.vaginas[womb].vaginalWetness == VaginaClass.WETNESS_DRY) player.vaginas[womb].vaginalWetness++;
 	if (player.breastRows.length == 0) {
 		player.createBreastRow(1);
 		transformations.UnlockBreasts();
@@ -608,7 +608,6 @@ private function goblinsBirthScene2():void {
 	player.dynStats("tou", -2, "spe", 3, "lib", 1, "sen", .5);
 	player.addCurse("str", 1, 2);
 	daughtersCount = 0;
-	player.removeStatusEffect(StatusEffects.PCDaughters);
 	doNext(camp.returnToCampUseOneHour);
 }
 

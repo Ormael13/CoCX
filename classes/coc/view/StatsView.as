@@ -291,6 +291,9 @@ public class StatsView extends Block {
 		if (stat) stat.isDown      = true;
 		else trace("[ERROR] Cannot showStatDown "+statName);
 	}
+	public function hungerBarIsVisible():Boolean {
+		return hungerBar.visible;
+	}
 	public function toggleHungerBar(show:Boolean):void {
 		hungerBar.visible = show;
 		invalidateLayout();

@@ -8,6 +8,7 @@ package classes.Scenes.Monsters
 	import classes.*;
 	import classes.BodyParts.Wings;
 	import classes.Scenes.SceneLib;
+	import classes.internals.ChainedDrop;
 	
 	public class ArchAngeloid extends AbstractAngel
 	{
@@ -160,7 +161,8 @@ package classes.Scenes.Monsters
 				this.short = "high-rank archangeloid";
 			}
 			this.tallness = 30;
-			this.drop = NO_DROP;
+			this.drop = new ChainedDrop()
+					.add(useables.SRESIDUE, 1);
 			this.level = 12;
 			this.weaponName = "energy blast";
 			this.weaponVerb = "shoot";

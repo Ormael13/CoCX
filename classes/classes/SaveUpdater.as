@@ -17,6 +17,7 @@ import classes.Scenes.Places.HeXinDao.AdventurerGuild;
 import classes.Scenes.Places.HeXinDao.JourneyToTheEast;
 import classes.Stats.Buff;
 import classes.Stats.PrimaryStat;
+import classes.StatusEffects;
 
 use namespace CoC;
 
@@ -322,16 +323,16 @@ public class SaveUpdater extends NPCAwareContent {
 			["All Your People are Belong to Me (2)", kACHIEVEMENTS.GENERAL_ALL_UR_PPLZ_R_BLNG_2_ME_2, camp.followersCount() + camp.loversCount() + camp.slavesCount() >= 38],
 			["All Your People are Belong to Me (3)", kACHIEVEMENTS.GENERAL_ALL_UR_PPLZ_R_BLNG_2_ME_3, camp.followersCount() + camp.loversCount() + camp.slavesCount() >= 57],
 			["Freeloader", kACHIEVEMENTS.GENERAL_FREELOADER, flags[kFLAGS.MANSION_VISITED] >= 3],
-			["Perky", kACHIEVEMENTS.GENERAL_PERKY, player.perks.length - player.hasMutationCount(true) >= 25],
-			["Super Perky", kACHIEVEMENTS.GENERAL_SUPER_PERKY, player.perks.length - player.hasMutationCount(true) >= 50],
-			["Mega Perky", kACHIEVEMENTS.GENERAL_MEGA_PERKY, player.perks.length - player.hasMutationCount(true) >= 75],
-			["Ultra Perky", kACHIEVEMENTS.GENERAL_ULTRA_PERKY, player.perks.length - player.hasMutationCount(true) >= 100],
-			["Hyper Perky", kACHIEVEMENTS.GENERAL_HYPER_PERKY, player.perks.length - player.hasMutationCount(true) >= 200],
-			["Umber Perky", kACHIEVEMENTS.GENERAL_UMBER_PERKY, player.perks.length - player.hasMutationCount(true) >= 300],
-			["Perky Beast of Death", kACHIEVEMENTS.GENERAL_PERKY_BEAST_OF_DEATH, player.perks.length - player.hasMutationCount(true) >= 444],
-			["Perky King", kACHIEVEMENTS.GENERAL_PERKY_KING, player.perks.length - player.hasMutationCount(true) >= 600],
-			["Ridiculous Perky King", kACHIEVEMENTS.GENERAL_RIDICULOUS_PERKY_KING, player.perks.length - player.hasMutationCount(true) >= 800],
-			["Ludicrous Perky King", kACHIEVEMENTS.GENERAL_LUDICROUS_PERKY_KING, player.perks.length >= 1000],
+			["Perky", kACHIEVEMENTS.GENERAL_PERKY, player.perks.length + player.perksCountForMergedOnes() - player.hasMutationCount(true) >= 25],
+			["Super Perky", kACHIEVEMENTS.GENERAL_SUPER_PERKY, player.perks.length + player.perksCountForMergedOnes() - player.hasMutationCount(true) >= 50],
+			["Mega Perky", kACHIEVEMENTS.GENERAL_MEGA_PERKY, player.perks.length + player.perksCountForMergedOnes() - player.hasMutationCount(true) >= 75],
+			["Ultra Perky", kACHIEVEMENTS.GENERAL_ULTRA_PERKY, player.perks.length + player.perksCountForMergedOnes() - player.hasMutationCount(true) >= 100],
+			["Hyper Perky", kACHIEVEMENTS.GENERAL_HYPER_PERKY, player.perks.length + player.perksCountForMergedOnes() - player.hasMutationCount(true) >= 200],
+			["Umber Perky", kACHIEVEMENTS.GENERAL_UMBER_PERKY, player.perks.length + player.perksCountForMergedOnes() - player.hasMutationCount(true) >= 300],
+			["Perky Beast of Death", kACHIEVEMENTS.GENERAL_PERKY_BEAST_OF_DEATH, player.perks.length + player.perksCountForMergedOnes() - player.hasMutationCount(true) >= 444],
+			["Perky King", kACHIEVEMENTS.GENERAL_PERKY_KING, player.perks.length + player.perksCountForMergedOnes() - player.hasMutationCount(true) >= 600],
+			["Ridiculous Perky King", kACHIEVEMENTS.GENERAL_RIDICULOUS_PERKY_KING, player.perks.length + player.perksCountForMergedOnes() - player.hasMutationCount(true) >= 800],
+			["Ludicrous Perky King", kACHIEVEMENTS.GENERAL_LUDICROUS_PERKY_KING, player.perks.length + player.perksCountForMergedOnes() - player.hasMutationCount(true) >= 1000],
 			["Lesser Chimera", kACHIEVEMENTS.GENERAL_LESSER_CHIMERA, player.internalChimeraScore() >= 4],
 			["Normal Chimera", kACHIEVEMENTS.GENERAL_NORMAL_CHIMERA, player.internalChimeraScore() >= 8],
 			["Greater Chimera", kACHIEVEMENTS.GENERAL_GREATER_CHIMERA, player.internalChimeraScore() >= 16],
@@ -1276,7 +1277,7 @@ public class SaveUpdater extends NPCAwareContent {
 				AdventurerGuild.Slot04Cap = 10;
 			}
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] < 2 && player.hasPerk(PerkLib.NinetailsKitsuneOfBalance) && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) > 0) {
-				outputText(" Opps seems your PC get Nine-tails Kitsune of Balance ahead of time... no worry you will get points back and perk pernamency will be nullified.");
+				outputText(" Oops seems your PC get Nine-tails Kitsune of Balance ahead of time... no worry you will get points back and perk permanency will be nullified.");
 				player.setPerkValue(PerkLib.NinetailsKitsuneOfBalance, 4, 0);
 				player.ascensionPerkPoints += 5;
 			}
@@ -1782,7 +1783,8 @@ public class SaveUpdater extends NPCAwareContent {
 				// Compute total stat points spent
 				var statPointsPerLevel:int = 5 + (player.perkv1(PerkLib.AscensionAdvTrainingX));
 				var statPoints:int = player.level*statPointsPerLevel;
-				if (player.level <= 6) statPoints += player.level*statPointsPerLevel; else statPoints += 6*statPointsPerLevel;
+				if (player.level <= 6) statPoints += player.level * statPointsPerLevel;
+				else statPoints += 6*statPointsPerLevel;
 				statPoints -= player.statPoints;
 				statPoints -= JourneyToTheEast.AhriStatsToPerksConvertCounter*5;
 				statPoints += JourneyToTheEast.EvelynnPerksToStatsConvertCounter * 5;
@@ -1995,6 +1997,79 @@ public class SaveUpdater extends NPCAwareContent {
 				if (player.hasPerk(PerkLib.Soulless)) player.skinColor2 = "midnight black";
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.044;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.045) {
+				if (flags[kFLAGS.FACTORY_OMNIBUS_DEFEATED] == 2) player.superPerkPoints++;
+				if (flags[kFLAGS.DEFEATED_ZETAZ] == 2) player.superPerkPoints++;
+				if (flags[kFLAGS.DEMON_LABORATORY_DISCOVERED] == 2) player.superPerkPoints++;
+				if (flags[kFLAGS.LETHICE_DEFEATED] == 2) player.superPerkPoints++;
+				outputText("\n\nAdditional smol really smol bonus reward for those that not forget to progress main quest - 1 super perk per each finished main story dungeon ^^");
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.045;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.046) {
+				if (flags[1320] > 0) {
+					player.createStatusEffect(StatusEffects.TookImpTome, 0, 0, 0, 0);
+					flags[1320] = 0;
+				}
+				if (!player.hasStatusEffect(StatusEffects.TookImpTome) && (player.hasItem(shields.IMPTOME) || player.shieldName == "cursed Tome of Imp"))
+					player.createStatusEffect(StatusEffects.TookImpTome,  0, 0, 0, 0);
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.046;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.047) {
+				if (player.level > 0) {
+					player.statPoints += 20;
+					player.perkPoints += 4;
+				}
+				if (player.level > 6) {
+					if (player.level < 9) {
+						player.statPoints += (player.level - 6) * 5;
+						player.perkPoints += (player.level - 6);
+					}
+					else {
+						player.statPoints += 15;
+						player.perkPoints += 3;
+					}
+				}
+				outputText("\n\nAnother really smol bonus to spare stat/perk points for the starting phase of the adventure ^^");
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.047;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.048) {
+				if (player.hasPerk(PerkLib.TransformationImmunityBeeHandmaiden)) player.vaginaType(VaginaClass.BEE);
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.048;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.049) {
+				if (player.hasKeyItem("Pocket Watch") >= 0) {
+					player.createStatusEffect(StatusEffects.MergedPerksCount, 0, 0, 0, 0);
+					if (player.hasPerk(PerkLib.DaoOfTheElements)) player.addStatusValue(StatusEffects.MergedPerksCount, 1, 4);
+					if (player.hasPerk(PerkLib.ElementalConjurerMindAndBodyResolveEx)) player.addStatusValue(StatusEffects.MergedPerksCount, 1, 1);
+				}
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.049;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.050) {
+				if (player.hasPerk(PerkLib.ElementalContractRank2) || flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] > 0) {
+					var acv:Number = 0;
+					if (player.hasPerk(PerkLib.ElementalContractRank4) || (player.hasPerk(PerkLib.DaoOfTheElements))) acv += 1;
+					if (player.hasPerk(PerkLib.ElementalContractRank8) || (player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) == 2)) acv += 1;
+					if (player.hasPerk(PerkLib.ElementalContractRank12)) acv += 1;
+					if (player.hasPerk(PerkLib.ElementalContractRank16)) acv += 1;
+					if (player.hasPerk(PerkLib.ElementalContractRank20)) acv += 1;
+					if (player.hasPerk(PerkLib.ElementalContractRank24)) acv += 1;
+					if (player.hasPerk(PerkLib.ElementalContractRank28)) acv += 1;
+					player.createStatusEffect(StatusEffects.ArcaneCircle, acv, 0, 0, 0);
+				}
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.050;
+			}/*
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.051) {
+				
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.051;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.052) {
+				
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.052;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.053) {
+				
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.053;
+			}*/
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
 		}

@@ -1325,9 +1325,9 @@ public static const LOPPE_PREGNANCY_TYPE:int                                    
 public static const ETNA_INCUBATION:int                                             = 1317;
 public static const ETNA_PREGNANCY_TYPE:int                                         = 1318;
 public static const DEMON_LABORATORY_DISCOVERED:int                                 = 1319;
-public static const IMP_TOME_FOUND:int                                              = 1320;
-public static const UNKNOWN_FLAG_NUMBER_01321:int                                   = 1321;
-public static const UNKNOWN_FLAG_NUMBER_01322:int                                   = 1322;
+public static const DONT_TAKE_ANEMONES_PLEZ:int                                     = 1320;
+public static const CHICHI_INCUBATION:int                                           = 1321;
+public static const CHICHI_PREGNANCY_TYPE:int                                       = 1322;
 public static const UNKNOWN_FLAG_NUMBER_01323:int                                   = 1323;
 public static const UNKNOWN_FLAG_NUMBER_01324:int                                   = 1324;
 public static const UNKNOWN_FLAG_NUMBER_01325:int                                   = 1325;
@@ -2802,7 +2802,7 @@ public static const UNKNOWN_FLAG_NUMBER_02793:int                               
 public static const UNKNOWN_FLAG_NUMBER_02794:int                                   = 2794;
 public static const UNKNOWN_FLAG_NUMBER_02795:int                                   = 2795;
 public static const UNKNOWN_FLAG_NUMBER_02796:int                                   = 2796;
-public static const UNKNOWN_FLAG_NUMBER_02797:int                                   = 2797;
+public static const DISCOVERED_INNER_DESERT:int                                   	= 2797;
 public static const ELVEN_THORNSHOT_ENABLED:int                                   	= 2798;
 public static const ELVEN_TWINSHOT_ENABLED:int                                   	= 2799;
 public static const LUNA_TRIED_WORKING_AS_BARMAID:int								= 2800; // if the player didn't hire Luna at first, they suggest she try working at the Wet Bitch. If so, the player can ask Aunt Nancy how *that* went to read a funny scene

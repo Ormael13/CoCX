@@ -208,12 +208,12 @@ public class BehemothScene extends BaseContent
 			doNext(analCatchBehemoth);
 		}
 		
-		public function giveBirthToBehemoth():void {
+		public function giveBirthToBehemoth(womb:int = 0):void {
 			clearOutput();
 			outputText("The pain in your womb is getting unbearable. You realize it's time for you to give birth to the behemoth! You make your way to the behemoth's tent in the volcanic crag to see the behemoth smiling at you.");
 			outputText("\n\n\"<i>I'll help you. Lay on my bed,</i>\" the behemoth says" + player.clothedOrNaked(" as he assists you in removing your [armor]") + ". You lay on the bed and spread your [legs]. The labour is getting intense, but you know the behemoth is already excited.");
 			outputText("\n\n\"<i>Push,</i>\" the behemoth instructs. That's your encouragement as you start pushing, taking deep breath between pushes. Eventually, your ordeal is over as the newborn behemoth finally comes out of your womb. \"<i>You've done great!</i>\" the behemoth says, smilingly.");
-			player.cuntChange(48, true);
+			player.cuntChange(48, true, false, false, womb);
 			flags[kFLAGS.BEHEMOTH_CHILDREN]++;
 			if (flags[kFLAGS.BEHEMOTH_CHILDREN] == 1) {
 				outputText("\n\n\"<i>Look at that. Our first child. I'm finally happy to finally have a family! You're now a mother,</i>\" the behemoth says. You smile at him, and you spend some time breastfeeding your newborn.");
@@ -228,7 +228,6 @@ public class BehemothScene extends BaseContent
 				flags[kFLAGS.BEHEMOTH_CHILD_3_BIRTH_DAY] = model.time.days;
 			}
 			outputText("\n\nYou rest for a while and breastfeed your newborn. Eventually, you know you should return to your camp. \"<i>I'll take good care of him,</i>\" the behemoth says. You give him a goodbye and walk back to your camp.");
-			player.knockUpForce(); //Clear!
 			doNext(camp.returnToCampUseOneHour);
 		}
 		

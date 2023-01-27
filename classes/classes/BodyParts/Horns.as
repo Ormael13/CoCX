@@ -313,7 +313,7 @@ public class Horns extends BodyPart {
 
 	public static const KIRIN: int = 23;
 	EnumValue.add(Types, KIRIN, "KIRIN", {
-		name:"unicorn",
+		name:"kirin",
 		appearanceDescFunc: function(player: *): String {
 			var desc: String = "";
 

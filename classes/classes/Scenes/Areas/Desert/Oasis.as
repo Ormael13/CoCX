@@ -137,7 +137,8 @@ internal function oasisSexing():void {
 		//IZ OVER! NEWLINE BITCH
 		outputText("\n\n");
 		//Preggers chance!
-		if (!player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP, 90);
+		if (player.hasUniquePregnancy()) player.impregnationRacialCheck();
+		else player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP, 90);
 		player.sexReward("cum","Vaginal");
 	}
 	//Buttbutt buuuuuttt
@@ -159,7 +160,7 @@ internal function oasisSexing():void {
 	outputText("\n\nSoon even your mouth is taken by a demoness lowering her slick honeypot down onto your lips. You lick and suck as she moans like a whore atop your head. It's impossible to count how many times she comes and so you just relax into a rhythm of licking and sucking, interrupted only by your own bone-creaking orgasms as the demonic attentions to the rest of your body drive you over the edge time and time again.");
 	player.sexReward("cum","Lips");
 	//Non-preggers text!
-	if(player.pregnancyIncubation == 0 && player.gender > 1) {
+	if(player.canGetPregnant() && player.gender > 1) {
 		//Newline for potential preggers?
 		outputText("\n\n");
 		outputText("You do your best to keep a vague mental catalogue of what has been in where, but eventually it becomes impossible to remember the type or number of demonic dicks that have filled you with their cum. The sand below your ass is wet with seed that has spilled out of your overflowing " + vaginaDescript(0) + " and there is every indication of more to come.\n\n");
