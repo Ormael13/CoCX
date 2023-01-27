@@ -6627,6 +6627,8 @@
 					<show part="fullbodyBreast/imp0"/>
                 </else>
 			</if>
+			<show part="hair/0"/>
+			<show part="hair_bg/02"/>   
 			<if test="hairStyle != Hair.PLAIN">
                 <hide part="hair/0"/>
                 <hide part="hair_bg/02"/>   

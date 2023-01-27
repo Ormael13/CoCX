@@ -2174,7 +2174,7 @@ public final class Mutations extends MutationsHelper {
         if (player.lowerBody != LowerBody.DOG) transformations.LowerBodyDog(2).applyEffect(doOutput);
         if (player.tail.type != Tail.DOG) transformations.TailDog.applyEffect(doOutput);
         if (player.rearBody.type != RearBody.HELLHOUND_COLLAR) transformations.RearBodyHellhoundCollar.applyEffect(doOutput);
-        transformations.SkinColor(["dark"]).applyEffect(doOutput);
+        transformations.SkinColor(["grayish-blue"]).applyEffect(doOutput);
         transformations.SkinFur(Skin.COVERAGE_LOW, {color: "midnight black"}).applyEffect(doOutput);
         if (player.wings.type != Wings.NONE) transformations.WingsNone.applyEffect(doOutput);
         var cockBonus:Number = 0;
