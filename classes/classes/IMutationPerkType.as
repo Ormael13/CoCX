@@ -182,13 +182,13 @@ public class IMutationPerkType extends PerkType
 				}
 				if (!target.hasPerk(mutations)) {	//No Perk, set to 1 or pTier.
 					target.createPerk(mutations, pTier,0,0,0);
-					if (mutations.trueMutation) EngineCore.outputText(mutations.evolveText());
+					if (target == player && mutations.trueMutation) EngineCore.outputText(mutations.evolveText());
 					EngineCore.outputText(" <b>Acquired "+mutations.name()+"!</b>");
 				} else if (pTier > 1) {				//Perk exists, but pTier is > 1.
 					target.setPerkValue(mutations, 1, pTier);
 				} else {							//Perk is incremented by 1.
 					target.setPerkValue(mutations,1,target.perkv1(mutations) + 1);
-					if (mutations.trueMutation) EngineCore.outputText(mutations.evolveText());
+					if (target == player && mutations.trueMutation) EngineCore.outputText(mutations.evolveText());
 					EngineCore.outputText(" <b>Acquired "+mutations.name()+"!</b>");
 				}
 				setBuffs();
