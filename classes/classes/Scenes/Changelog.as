@@ -141,11 +141,11 @@ public class Changelog extends BaseContent
 			outputText("-Chichi gets some new scenes (try and get her in JTTE while corrupt and having some succubus milk a few times) Groundwork for further expansion on ChiChi that still needs some writing to unleash to the world (EragonX)\n");
 			outputText("-Remove tail from Hinezumi Leg Metamorph. Fix hourly updates and hunger bar toggling. (EragonX)\n");
 			outputText("-Regeneration cap increase based on which NG+ PC is has been removed.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Unleash perm tf true mutations to the wild! Perm tf races can no longer buy mutations from Evangeline apart from their race, but will get bonus stats from the race specific mutaions and auto acquire them depending on the prerequisites. (EragonX)\n");
+			outputText("-Azazel Purifier perk. Counterpart to the Imp/Demon Soul Eater perk, kill demons to absorb their power as your own. (EragonX)\n");
+			outputText("-QueenOfTheFairies perk: Gain spellpower as a fairy for every corrupted glade destroyed or demon killed in the forest. (EragonX)\n");
+			outputText("-Fae Arcane Bloodstream (Final Form) effect: When using an ability with random effects the spell now attempts to activate each effect twice. (EragonX)\n");
+			outputText("-Ant race stat bonuses and min score req. been increased slightly.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
