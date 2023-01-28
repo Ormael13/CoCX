@@ -2493,9 +2493,13 @@ public class PerkLib
 				"It's official, everyone knows to go to you for sex. You're still new to the business, but you learned some new tricks. (+15% tease dmg)",
 				"You've chosen the 'Prostitute' perk, gaining +15% tease dmg.");
 		public static const PurityElixir:PurityElixirPerk = new PurityElixirPerk();
+		public static const Purifier:PerkType = mk("Purifier", "Purifier",
+				"When slaying or purifying demons their corrupted power is purified and sent back to you.");
 		public static const PyrosFriend:PerkType = mk("Pyro's Friend", "Pyro's Friend",
 				"Mmmphmm! (No idea what he? is trying to say... but same rules apply... +10% ranged damage buff)",
 				"You've chosen the 'Pyro's Friend' perk, gaining +10% range phys dmg.");
+		public static const QueenOfTheFairies:PerkType = mk("Queen of the Fairies", "Queen of the Fairies",
+				"Each destroyed corrupted glade and slain demon in the woodlands area allows your people to further regain control of the forest. As your kingdom grows so does your power. Increase the potency of all spells by 10% per destroyed glade and 1% per destroyed demon.");
 		public static const QuickStrike:PerkType = mk("Quick Strike", "Quick Strike",
 				"Add speed based scaling of melee attacks when using small weapon(s). It effect is added on top of Speed Demon perk boost.",
 				"You've chosen the 'Quick Strike' perk, allowing you to use your speed when attacking with small melee weapons.");

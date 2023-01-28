@@ -4574,7 +4574,8 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 2) ProcChance -= 10;
 		if (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 3) ProcChance -= 10;
 		var procCount:int = 0;
-		for (var i:int = 0; i < 6; i++) {
+		var procChecks:int = (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 4 ? 12:6)
+		for (var i:int = 0; i < procChecks; i++) {
 			if (rand(100) >= ProcChance) {
 				procCount++;
 			} else {
@@ -4630,7 +4631,8 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 3) ProcChance -= 10;
 		//if (ProcChance < 0) ProcChance = 0;
 		var procCount:int = 0;
-		for (var i:int = 0; i < 5; i++) {
+		var procChecks:int = (player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM) >= 4 ? 10:5)
+		for (var i:int = 0; i < procChecks; i++) {
 			if (rand(100) >= ProcChance) {
 				procCount++;
 			} else {

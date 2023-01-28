@@ -5,6 +5,7 @@ import classes.BaseContent;
 import classes.GeneticMemories.LowerBodyMem;
 import classes.GeneticMemories.TailMem;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.IMutationsLib;
 import classes.Player;
 import classes.Races;
 import classes.Races.AtlachNachaRace;
@@ -90,6 +91,9 @@ public class AtlachNachaScene extends BaseContent {
 		outputText("\n\nEverything makes so much sense now. You were blind to the truth but thanks to the voice of the master in your head your eyes are now open. You have access to knowledge you thought you didn't possess about your reality and the reality between the reality. ");
 		outputText("Such knowledge is not for your mind alone though you want to share it with the world. Their blindness and mind untouched by him is a disease and you just happen to have the cure.  (<b>Gained Perk: Insanity!</b>)");
         player.createPerk(PerkLib.Insanity,0,0,0,0);
+        IMutationsLib.TrachealSystemIM.trueMutation = true;
+        IMutationsLib.ArachnidBookLungIM.trueMutation = true;
+        IMutationsLib.VenomGlandsIM.trueMutation = true;
         player.removeAllRacialMutation();
         doNext(playerMenu);
     }

@@ -5,6 +5,7 @@ import classes.CoC;
 import classes.EventParser;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
+import classes.PerkLib;
 import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects;
@@ -825,6 +826,7 @@ public class LethiceScenes extends BaseContent
 			flags[kFLAGS.LETHICE_KILLED] = 1;
 
 			outputText("Lethice probably deserves the worst sorts of torture imaginable, but you don’t have time to dawdle. You snap her neck and drop her twitching body to the ground. The assembled demons scatter at the sight, fearful they’ll fall next - and rightly so. So long as they remain, there’s always the chance another will take her place.");
+			if (player.hasPerk(PerkLib.Purifier)) player.purifyDemonBonus();
 
 			postTheChoice();
 		}

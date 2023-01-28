@@ -4,6 +4,7 @@
  */
 package classes.Scenes.Dungeons {
 import classes.EventParser;
+import classes.PerkLib;
 import classes.Saves;
 import classes.Scenes.Dungeons.DemonLab.DemonDragonGroup;
 import classes.Scenes.Dungeons.DemonLab.Incels;
@@ -957,6 +958,7 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
         outputText("“<i>R-really?</i>” She asks, disbelieving. You give her a disarming smile, putting a hand on her shoulder. You tell her that yes, you know that there are good demons. After all, there’s one trait that all good demons share, that you saw within her.\n\n");
         outputText("The succubus seems relieved at this, letting you guide her towards one of the cages. “<i>Oh? What trait is that?</i>”\n\n");
         outputText("You take her head in both of your [hands], forcing the demoness to her knees. Coldly, you tell the succubus that the only good demon is a dead demon. She barely gets a squeak out before you wrench her horns, snapping her neck. You let go of the body, adding her to the pile of dead demons littering the floor.\n\n");
+        if (player.hasPerk(PerkLib.Purifier)) player.purifyDemonBonus();
         afterSucc();
     }
 

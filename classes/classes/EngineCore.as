@@ -1,5 +1,6 @@
 package classes {
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.IMutationsLib;
 import classes.Parser.Parser;
 import classes.Scenes.SceneLib;
 import classes.internals.Utils;
@@ -161,6 +162,7 @@ public class EngineCore {
         } else {
             if (CoC.instance.player.mana + changeNum <= 0) CoC.instance.player.mana = 0;
             else CoC.instance.player.mana += changeNum;
+            if (CoC.instance.player.perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 3) HPChange(-changeNum, false);
         }
         CoC.instance.player.dynStats("lust", 0, "scale", false) //Workaround to showing the arrow.
         statScreenRefresh();

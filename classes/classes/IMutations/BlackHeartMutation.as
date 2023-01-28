@@ -46,6 +46,12 @@ public class BlackHeartMutation extends IMutationPerkType
             return mName + sufval;
         }
 
+        override public function evolveText():String {
+            var descS:String = "\nAs you acclimate further to your new life as a fiend you find your thought and morality slowly sinking deeper and deeper into the abyss of corruption. Betraying someone who trusted and loved you would be so easy now if it could further your growing ambitions.";
+            return descS;
+        }
+
+
         //Mutation Requirements
         override public function pReqs(pCheck:int = -1):void{
             try{

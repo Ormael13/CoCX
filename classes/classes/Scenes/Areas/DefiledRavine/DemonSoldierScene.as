@@ -6,6 +6,7 @@ package classes.Scenes.Areas.DefiledRavine {
 import classes.BaseContent;
 import classes.BodyParts.*;
 import classes.GlobalFlags.*;
+import classes.PerkLib;
 import classes.PregnancyStore;
 import classes.Races;
 
@@ -189,6 +190,8 @@ public class DemonSoldierScene extends BaseContent {
     private function killTheSoldier():void {
         clearOutput();
         outputText("You make quick work of the demon before hauling the now-lifeless corpse away.");
+        if (player.hasPerk(PerkLib.Purifier)) player.purifyDemonBonus();
+
         flags[kFLAGS.DEMON_SOLDIERS_KILLED]++;
         monster.additionalXP += 100; //YOU WON! You earned 20 EXP. Your LOVE increased.
         player.dynStats("cor", -1);

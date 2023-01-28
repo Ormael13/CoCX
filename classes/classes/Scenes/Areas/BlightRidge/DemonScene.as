@@ -561,6 +561,8 @@ import classes.Scenes.SceneLib;
 			if (monster.short == "cow succubus") outputText("cow succubus");
 			if (monster.short == "mino incubus") outputText("mino incubus");
 			outputText(" before dragging the corpse away. That's one less foul creature prowling the realms. ");
+			if (player.hasPerk(PerkLib.Purifier)) player.purifyDemonBonus();
+
 			if (player.cor < 25) dynStats("cor", -0.5);
 			menu();
 			addButton(1, "Leave", cleanupAfterCombat);

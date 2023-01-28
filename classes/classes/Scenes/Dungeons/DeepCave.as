@@ -640,7 +640,10 @@ use namespace CoC;
 			clearOutput();
 			outputText("You shake your head, grabbing the oversized imps by the horns. Ignoring his pleas for mercy, you throw Zetaz against the wall. He cowers as you bring your [weapon] down, ending his life.\n\n");
 			outputText("You rummage through his room, until you find a small, hidden compartment in the back wall. It’s a map, with a place halfway up the mountain marked off. This is probably the lab he’d spoken of.\n\n");
-			if (!recalling) flags[kFLAGS.ZETAZ_DEFEATED_AND_KILLED]++;
+			if (!recalling) {
+				if (player.hasPerk(PerkLib.Purifier)) player.purifyDemonBonus();
+				flags[kFLAGS.ZETAZ_DEFEATED_AND_KILLED]++;
+			}
             zetazRecallFork();
 		}
 

@@ -211,9 +211,12 @@ doNext(SceneLib.d3.exitD3);
 		{
 			if (!recalling) flags[kFLAGS.D3_MECHANIC_FIGHT_RESULT] = MECHANIC_KILLED;
 			clearOutput();
-			outputText("He proves blessedly easy to kill, and you roll the body off the cliffs to avoid alerting any of Lethice's other ilk.");
+			outputText("He proves blessedly easy to kill, and you roll the body off the cliffs to avoid alerting any of Lethice's other ilk.[pg]");
 
-			if (!recalling) cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+			if (!recalling) {
+				if (player.hasPerk(PerkLib.Purifier)) player.purifyDemonBonus();
+				cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+			}
 			else doNext(recallWakeUp);
         }
 

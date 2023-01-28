@@ -5009,7 +5009,7 @@ use namespace CoC;
 		}
 
 		public function removeAllRacialMutation():void {
-			//PermTFTrueMutations();	//Uncomment to unleash armageddon..... or when ready to roll out "true" mutations.
+			PermTFTrueMutations();	//Uncomment to unleash armageddon..... or when ready to roll out "true" mutations.
 
 			for each (var pPerks:IMutationPerkType in IMutationsLib.mutationsArray("")){
 				if (hasPerk(pPerks) && !pPerks.trueMutation){
@@ -5072,7 +5072,7 @@ use namespace CoC;
 				if (pPerks.trueMutation){
 					pPerks.pReqs(0);
 					if (pPerks.available(this)){
-						curry(pPerks.acquireMutation, this, "none", Math.min(this.level%30 + 1), pPerks.maxLvl);
+						curry(pPerks.acquireMutation, this, "none", Math.min((int)(this.level/30) + 1), pPerks.maxLvl);
 						this.setPerkValue(pPerks, 3, 1);
 					}
 				}
@@ -6387,6 +6387,22 @@ use namespace CoC;
 						"that Mareth is filled with idiots doesn't help that." +
 						" Despite draining your victim into something about as smart as a mineral you fail to extract anything noteworthy.");
 			}
+		}
+
+		public function purifyDemonBonus():void {
+			outputText("As the demon corpse falls down onto the ground you lift your hand and begin to disintegrate the body so as not to leave any lingering trace of its corruption onto the world. While you pack the ability to restore the souls it has consumed you can consume the fiends own body as nourishment and growth for your own power. Thus the demon shall still serve the cycle. As the creature power is converted to newfound strength you sigh in relief thinking this one won't corrupt the order any longer.[pg]");
+			buff("Purifier").addStat("int.mult", 0.02);
+			buff("Purifier").addStat("wis.mult", 0.02);
+		}
+
+		public function QueenOfTheForestDemonBonus():void {
+			outputText("As the demon corpse falls down onto the ground you lift your hand and begin to disintegrate the body so as not to leave any lingering trace of its corruption onto the world. While you pack the ability to restore the souls it has consumed you can consume the fiends own body as nourishment and growth for your own power. Thus the demon shall still serve the cycle. As the creature power is converted to newfound strength you sigh in relief thinking this one won't corrupt the order any longer.[pg]");
+			buff("Purifier").addStat("spellpower", 0.01);
+		}
+
+		public function QueenOfTheForestGladeBonus():void {
+			outputText("As the demon corpse falls down onto the ground you lift your hand and begin to disintegrate the body so as not to leave any lingering trace of its corruption onto the world. While you pack the ability to restore the souls it has consumed you can consume the fiends own body as nourishment and growth for your own power. Thus the demon shall still serve the cycle. As the creature power is converted to newfound strength you sigh in relief thinking this one won't corrupt the order any longer.[pg]");
+			buff("Purifier").addStat("spellpower", 0.1);
 		}
 
 		public function ElfSistersBonus():void

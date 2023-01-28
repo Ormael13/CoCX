@@ -7,7 +7,8 @@ package classes.Scenes.Places{
 	import classes.BodyParts.Tail;
 	import classes.BodyParts.Wings;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.Scenes.Crafting;
+import classes.IMutations.IMutationsLib;
+import classes.Scenes.Crafting;
 	import classes.Scenes.Areas.Forest.WoodElvesHuntingParty;
     import classes.display.SpriteDb;
 	import classes.internals.SaveableState;
@@ -649,6 +650,7 @@ package classes.Scenes.Places{
 			player.createPerk(PerkLib.BlessingOfTheAncestorTree,0,0,0,0);
 			if (player.hasPerk(PerkLib.RacialParagon))
 				flags[kFLAGS.APEX_SELECTED_RACE] = Races.WOODELF;
+			IMutationsLib.ElvishPeripheralNervSysIM.trueMutation = true;
 			player.removeAllRacialMutation();
 			doNext(camp.returnToCamp, 16);
 		}
