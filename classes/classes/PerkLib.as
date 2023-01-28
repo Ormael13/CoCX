@@ -5810,6 +5810,9 @@ public class PerkLib
             ElementsOfMarethAdvanced.requireOrPerks(ElementsOfMarethBasics, DaoOfTheElements, 2)
 					.requireWis(50)
 					.requireLevel(6);
+            /*.requireOrPerks(ElementsOfMarethAdvanced, DaoOfTheElements, 3)
+					.requireWis(55)
+					.requireLevel(6);*/
             MagiculesTheory.requireWis(50)
                     .requireLevel(6);
             JobMonk.requireAdvancedJobSlot()
@@ -6040,7 +6043,8 @@ public class PerkLib
                     .requireWis(250)
                     .requireLevel(54);
 			//This perk below (with others as well) for some reason stack overflows when using requirePerks.
-            StrongerElementalBond.requirePerks(StrongElementalBondSu, ElementalContractRank10)
+            StrongerElementalBond.requireOrPerks(ElementalContractRank10, DaoOfTheElements, 3)
+					.requirePerk(StrongElementalBondSu)
                     .requireWis(250)
                     .requireLevel(54);
             //Tier 10 Wisdom perks
@@ -6066,7 +6070,8 @@ public class PerkLib
             ElementalContractRank12.requirePerk(ElementalContractRank11)
                     .requireWis(300)
                     .requireLevel(66);
-			/*ElementalConjurerKnowledgeSu.requirePerks(ElementalConjurerKnowledgeEx, ElementalContractRank10)
+			/*ElementalConjurerKnowledgeSu.requireOrPerks(ElementalContractRank10, DaoOfTheElements, 3)
+					.requirePerk(ElementalConjurerKnowledgeEx)
 					.requireWis(300)
                     .requireLevel(66);*/
             LegendaryWisdom.requireWis(15)
@@ -6079,7 +6084,7 @@ public class PerkLib
                     .requirePerk(BoneSoul);
             GreaterSharedPower.requireLevel(72)
                     .requirePerk(ElementalTouch);
-            ElementalContractRank13.requirePerk(ElementalContractRank12)
+            ElementalContractRank13.requireOrPerks(ElementalContractRank12, DaoOfTheElements, 3)
                     .requireWis(325)
                     .requireLevel(72);
             StrongerElementalBondEx.requirePerks(StrongerElementalBond, ElementalContractRank13)

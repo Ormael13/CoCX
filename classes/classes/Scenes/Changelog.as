@@ -65,7 +65,7 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: What Is Reality? - Gained by becoming cheshire cat. Effect: When you would take fatal damage, laugh at death and deny it ever happened. Mocking death causes the increase of the arousal of the user which can still cause it to simply give up so to get to lewder games.\n");
 			outputText("-New event perk: Vorpal Claw - Gained by becoming cheshire cat. Effect: A cheshire natural weapon distorts space inflicting particularly vicious critical strikes. (Natural attacks dmg x2)\n");
 			outputText("-New event perk: One with the forest. Gained by Wood Elfs. Effects: With each new soul added to the collective bolstering the trees of the sacred forest you become stronger physically and spiritually. Gain a +1% to all stats for each new wood elf created.\n");
-			outputText("-New event perk: Dao of the Elements. Gained by use of the Pocket Watch when req. are meet. Have 2 layers.\n");
+			outputText("-New event perk: Dao of the Elements. Gained by use of the Pocket Watch when req. are meet. Have 3 layers.\n");
 			outputText("-New event perk: Elemental Conjurer Mind and Body Resolve (Ex). Gained by use of the Pocket Watch when req. are meet. Effects of both combined perks + 5% bonus to tou multi.\n");
 			outputText("-New event perk: Elemental Conjurer Mind and Body Dedication (Ex). Gained by use of the Pocket Watch when req. are meet. Effects of all three combined perks + 5% bonus to spe/wis multi.\n");
 			outputText("-New event perk: Elemental Conjurer Mind and Body Sacrifice (Ex). Gained by use of the Pocket Watch when req. are meet. Effects of all three combined perks + 5% bonus to str multi, +10% bonus to int multi, +15% bonus to wis multi.\n");
@@ -147,7 +147,7 @@ public class Changelog extends BaseContent
 			outputText("-Fae Arcane Bloodstream (Final Form) effect: When using an ability with random effects the spell now attempts to activate each effect twice. (EragonX)\n");
 			outputText("-Ant race stat bonuses and min score req. been increased slightly.\n");
 			outputText("-During ascension choice for keeping NG difficulty or increase it was moved to happen before PC get to spend ascension perk points not right after. It would also lock some option on ascension menu if pc decided to spend 50 asc points to keep diff the same.\n");
-			outputText("-\n");
+			outputText("-Dragon Faerie Breath, Dragon Poison Breath, Dragon Water Breath perks can be permed during ascension.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

@@ -2232,21 +2232,18 @@ public class Camp extends NPCAwareContent{
 		clearOutput();
 		outputText("Which perks would you like to combine using the watch?");
 		menu();
+		if (player.hasPerk(PerkLib.DaoOfTheElements)) addButtonDisabled(0, "DotE (layer 1)", "You already have this merged perk.");
+		else addButtonIfTrue(0, "DotE (layer 1)", mainPagePocketWatchDaoOfTheElementsPerkLayer1, "Req. Elemental Contract Rank 5 & Elements of the orthodox Path perks", player.hasPerk(PerkLib.ElementalContractRank5) && player.hasPerk(PerkLib.ElementsOfTheOrtodoxPath));
 		if (player.hasPerk(PerkLib.DaoOfTheElements)) {
-			addButtonDisabled(0, "DotE (layer 1)", "You already have this merged perk.");
-			if (player.hasPerk(PerkLib.ElementalContractRank9) && player.hasPerk(PerkLib.ElementsOfMarethBasics) && player.hasPerk(PerkLib.DaoOfTheElements)) {
-				if (player.perkv1(PerkLib.DaoOfTheElements) > 1) addButtonDisabled(1, "DotE (layer 2)", "You already have this merged perk.");
-				else addButton(1, "DotE (layer 2)", mainPagePocketWatchDaoOfTheElementsPerkLayer2);
-			}
-			addButtonDisabled(1, "DotE (layer 2)", "Req. Elemental Contract Rank 9 & Elements of Mareth: Basics & Dao of the Elements perks.");
+			if (player.hasPerk(PerkLib.ElementalContractRank9) && player.hasPerk(PerkLib.ElementsOfMarethBasics) && player.perkv1(PerkLib.DaoOfTheElements) < 2) addButton(1, "DotE (layer 2)", mainPagePocketWatchDaoOfTheElementsPerkLayer2);
+			else addButtonDisabled(1, "DotE (layer 2)", "You already have this merged perk.");
 		}
-		else {
-			addButtonIfTrue(0, "DotE (layer 1)", mainPagePocketWatchDaoOfTheElementsPerkLayer1, "Req. Elemental Contract Rank 5 & Elements of the orthodox Path perks", player.hasPerk(PerkLib.ElementalContractRank5) && player.hasPerk(PerkLib.ElementsOfTheOrtodoxPath));
-			addButtonDisabled(1, "DotE (layer 2)", "Req. Elemental Contract Rank 9 & Elements of Mareth: Basics & Dao of the Elements perks.");
-			//addButtonDisabled(2, );
-			//addButtonDisabled(3, );
-			//addButtonDisabled(4, );
+		else addButtonDisabled(1, "DotE (layer 2)", "Req. Elemental Contract Rank 9 & Elements of Mareth: Basics & Dao of the Elements perks.");
+		if (player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) > 1) {
+			if (player.hasPerk(PerkLib.ElementalContractRank13) && player.hasPerk(PerkLib.ElementsOfMarethAdvanced) && player.perkv1(PerkLib.DaoOfTheElements) < 3) addButton(2, "DotE (layer 3)", mainPagePocketWatchDaoOfTheElementsPerkLayer3);
+			else addButtonDisabled(2, "DotE (layer 3)", "You already have this merged perk.");
 		}
+		else addButtonDisabled(2, "DotE (layer 3)", "Req. Elemental Contract Rank 13 & Elements of Mareth: Advanced & Dao of the Elements (layer 2) perks.");
 		addButtonIfTrue(5, "E C M & B R (Ex)", mainPagePocketWatchElementalConjurerMindAndBodyResolveEx, "Req. Elemental Conjurer Mind and Body Resolve perks / Or you already got this merged perk.", player.hasPerk(PerkLib.ElementalConjurerMindAndBodyResolve));
 		addButtonIfTrue(6, "E C M & B D (Ex)", mainPagePocketWatchElementalConjurerMindAndBodyDedicationEx, "Req. Elemental Conjurer Mind and Body Resolve (Ex) & Elemental Conjurer Mind and Body Dedication perks / Or you already got this merged perk.", player.hasPerk(PerkLib.ElementalConjurerMindAndBodyResolveEx) && player.hasPerk(PerkLib.ElementalConjurerMindAndBodyDedication));
 		addButtonIfTrue(7, "E C M & B S (Ex)", mainPagePocketWatchElementalConjurerMindAndBodySacrificeEx, "Req. Elemental Conjurer Mind and Body Dedication (Ex) & Elemental Conjurer Mind and Body Sacrifice perks / Or you already got this merged perk.", player.hasPerk(PerkLib.ElementalConjurerMindAndBodyDedicationEx) && player.hasPerk(PerkLib.ElementalConjurerMindAndBodySacrifice));
@@ -2273,6 +2270,20 @@ public class Camp extends NPCAwareContent{
 		player.removePerk(PerkLib.ElementalContractRank7);
 		player.removePerk(PerkLib.ElementalContractRank8);
 		player.removePerk(PerkLib.ElementsOfMarethBasics);
+		player.addPerkValue(PerkLib.DaoOfTheElements, 1, 1);
+		player.addPerkValue(PerkLib.DaoOfTheElements, 2, 9);
+		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 5);
+		player.perkPoints += 3;
+		doNext(mainPagePocketWatch);
+	}
+	private function mainPagePocketWatchDaoOfTheElementsPerkLayer3():void {
+		clearOutput();
+		outputText("Perks combined: Dao of the Elements (layer 3) attained.");
+		player.removePerk(PerkLib.ElementalContractRank9);
+		player.removePerk(PerkLib.ElementalContractRank10);
+		player.removePerk(PerkLib.ElementalContractRank11);
+		player.removePerk(PerkLib.ElementalContractRank12);
+		player.removePerk(PerkLib.ElementsOfMarethAdvanced);
 		player.addPerkValue(PerkLib.DaoOfTheElements, 1, 1);
 		player.addPerkValue(PerkLib.DaoOfTheElements, 2, 9);
 		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 5);
@@ -2531,7 +2542,7 @@ public class Camp extends NPCAwareContent{
 		if (player.hasPerk(PerkLib.ElementalConjurerMindAndBodySacrificeEx)) dmSPPC += 4;
 		if (player.hasPerk(PerkLib.DaoOfTheElements)) {
 			dmSPPC += 5;
-			if (player.perkv1(PerkLib.DaoOfTheElements) > 1) dmSPPC += 5;
+			if (player.perkv1(PerkLib.DaoOfTheElements) > 1) dmSPPC += (5 * (player.perkv1(PerkLib.DaoOfTheElements) - 1));
 		}
 		if (player.hasPerk(PerkLib.GreaterSharedPower)) dmSPPC *= 2;
 		return dmSPPC;
