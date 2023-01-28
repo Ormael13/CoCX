@@ -4637,7 +4637,7 @@ public function rebirthFromBadEnd():void {
 		outputText("\n\nYou begin to glow; you can already feel yourself leaving your body and you announce your departure.");
 		if (marbleFollower()) outputText("\n\n\"<i>Sweetie, I'm going to miss you. See you in the next playthrough,</i>\" Marble says, tears leaking from her eyes.");
 		outputText("\n\nThe world around you slowly fades to black and stars dot the endless void. <b>You have ascended.</b>");
-		doNext(CoC.instance.charCreation.ascensionMenu);
+		doNext(CoC.instance.charCreation.ascensionMenuChoice);
 	}
 
 	public function possibleToGainAscensionPoints():Number {

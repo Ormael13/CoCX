@@ -1111,12 +1111,12 @@ private function etnaJumpsPCinCamp():void {
 		return;
 	}
 	menu();
-	addButton(0, "LetHerBeInCharge", etnaLetHerBeInCharge);
-	addButton(1, "KittyTitFuck", etnaKittyTitFuck).disableIf(!player.hasCock(), "Req. a cock!");
-	addButton(2, "Pussy Opera", etnaPussyOpera).disableIf(!player.hasCock(), "Req. a cock!");
-	addButton(3, "Share a Drink", etnaShareDrink).disableIf(player.tailType != Tail.MANTICORE_PUSSYTAIL, "Req. to have a manticore pussytail.");
-	addButton(4, "Fill her up", EtnaFillHerUp).disableIf(!player.isAlraune(), "Req. to be an alraune.");
-	addButton(5, "TailExplor", tailExploration)
+	addButton(1, "LetHerBeInCharge", etnaLetHerBeInCharge);
+	addButton(2, "KittyTitFuck", etnaKittyTitFuck).disableIf(!player.hasCock(), "Req. a cock!");
+	addButton(3, "Pussy Opera", etnaPussyOpera).disableIf(!player.hasCock(), "Req. a cock!");
+	addButton(6, "Share a Drink", etnaShareDrink).disableIf(player.tailType != Tail.MANTICORE_PUSSYTAIL, "Req. to have a manticore pussytail.");
+	addButton(7, "Fill her up", EtnaFillHerUp).disableIf(!player.isAlraune(), "Req. to be an alraune.");
+	addButton(8, "TailExplor", tailExploration)
 			.hint("Play with her tail using your goo body!", "Tail Exploration")
 			.disableIf(!player.isGoo(), "Req. goo body.");
 }
