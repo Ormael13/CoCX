@@ -12,7 +12,7 @@ public class IceSpikeSwiftcastSpell extends AbstractBlackSpell {
 	{
 		super(
 			"Ice Spike (S)",
-			"This spell causes a radical change in your surroundings. You can call forth an Ice Rain that will strike enemies in a wide area. Fueled by your own desires, this spell can backfire, making the user wet instead.",
+			"Drawing your own lust to concentrate it into chilling spike of ice that will attack your enemies.",
 			TARGET_ENEMY,
 			TIMING_INSTANT,
 			[TAG_DAMAGING, TAG_ICE, TAG_TIER1]

@@ -532,12 +532,12 @@ public class MagicSpecials extends BaseCombatContent {
 				else bd.disable("Your throat is incredibly sore and hoarse. You aren’t sure you can talk let alone try that attack for more than a day.");
 			} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 		}
-			if (player.hasPerk(PerkLib.DragonLustPoisonBreath)) {
-				bd = buttons.add("Poison Breath", DragonLustPoisonBreath).hint("Unleash a cloud of aphrodisiac poison. Particularly powerful against groups");
-				if (player.tailVenom < player.VenomWebCost() * 5) {
-					bd.disable("You do not have enough poison in your glands to breath a cloud right now! (Req. "+player.VenomWebCost()*5+"+)");
-				} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
-			}
+		if (player.hasPerk(PerkLib.DragonLustPoisonBreath)) {
+			bd = buttons.add("Poison Breath", DragonLustPoisonBreath).hint("Unleash a cloud of aphrodisiac poison. Particularly powerful against groups");
+			if (player.tailVenom < player.VenomWebCost() * 5) {
+				bd.disable("You do not have enough poison in your glands to breath a cloud right now! (Req. "+player.VenomWebCost()*5+"+)");
+			} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+		}
 		if (player.faceType == Face.WOLF && player.hasKeyItem("Gleipnir Collar") >= 0) {
 			bd = buttons.add("FreezingBreath", fenrirFreezingBreath,"Freeze your foe solid with a powerful breath attack. \n\nWould go into cooldown after use for: "+(player.hasPerk(PerkLib.NaturalInstincts) ? "9":"10")+" rounds  \n<b>AoE attack.</b>");
 			bd.requireFatigue(spellCost(150));

@@ -13,7 +13,7 @@ public class WhitefireSwiftcastSpell extends AbstractWhiteSpell {
 	public function WhitefireSwiftcastSpell() 
 	{
 		super(
-			"Ice Spike (S)",
+			"Whitefire (S)",
 			"Whitefire is a potent fire based attack that will burn your foe with flickering white flames, ignoring their physical toughness and most armors.",
 			TARGET_ENEMY,
 			TIMING_INSTANT,

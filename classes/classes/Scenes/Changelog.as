@@ -147,7 +147,7 @@ public class Changelog extends BaseContent
 			outputText("-Fae Arcane Bloodstream (Final Form) effect: When using an ability with random effects the spell now attempts to activate each effect twice. (EragonX)\n");
 			outputText("-Ant race stat bonuses and min score req. been increased slightly.\n");
 			outputText("-During ascension choice for keeping NG difficulty or increase it was moved to happen before PC get to spend ascension perk points not right after. It would also lock some option on ascension menu if pc decided to spend 50 asc points to keep diff the same.\n");
-			outputText("-Dragon Faerie Breath, Dragon Poison Breath, Dragon Water Breath perks can be permed during ascension.\n");
+			outputText("-Dragon Faerie Breath, Dragon Poison Breath, Dragon Water Breath, Dragon Lust Poison Breath perks can be permed during ascension.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -180,7 +180,7 @@ public class Changelog extends BaseContent
 			//outputText("-New perk for enemies: Elite type enemy. Bonuses for are: Diehard effect of 2,5% of max HP + 750 HP * NG tier, OverMax HP effect of 5% magnitude.\n");
 			//outputText("-New perk for enemies: Champion type enemy. Bonuses for are: Diehard effect of 5% of max HP + 1,500 HP * NG tier, OverMax HP effect of 10% magnitude.\n");
 			outputText("-Fixed bugs: Bard not affected by cap of prestige jobs, last one checks for holli's kill/survive moved into less troublesome spot, Benoit/Oswald taking full price for simple backpack size upgade, Fasting Pill been unaccessable when hunger mode is active, Vegetal Affinity increasing fire resistance, elemental throwing knives been never usable, Elemental race tier bonuses & display on race page, ");
-			outputText("Buy button for Francisca throwing axe at basilsik shop been corectly labeled\n");
+			outputText("Buy button for Francisca throwing axe at basilisk shop been corectly labeled, Lily name revealed before she actualy tell her name in scene, incorrectly labeled Whitefire swiftcast button\n");
 			/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
