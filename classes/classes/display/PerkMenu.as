@@ -348,7 +348,7 @@ public class PerkMenu extends BaseContent {
 				.disableIf(currentProj == atk, "Already selected");
 			atk++;
 		}
-		addButton(14, "Back", meleeOptions);
+		addButton(14, "Back", rangedOptions);
 	}
 
 	public function rangedOptions():void {

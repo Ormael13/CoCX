@@ -1970,6 +1970,7 @@ import coc.view.MainView;
 		}
 		private function maxRankValue():Number {
 			var maxV:Number = 0;
+			if (!player.hasPerk(PerkLib.AscensionMenuChoiceMaybe)) maxV += 5;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1) maxV += 5;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2) maxV += 5;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3) maxV += 5;
