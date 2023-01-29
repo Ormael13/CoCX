@@ -103,7 +103,7 @@ public class DemonDragonGroup extends Monster {
         outputText("You realise what they’re trying to do, and before they can trap you, you rush one of the draconic women, narrowly dodging her spear and slamming your [weapon] into her face. Formation broken, the women fly back towards their leader, spears now bristling defensively. ");
         var hit:int = 0;
         for (var i:int = 0; i < 4; ++i) {
-            if (player.getEvasionRoll()) {
+            if (!player.getEvasionRoll()) {
                 eOneAttack(true);
                 ++hit;
             }

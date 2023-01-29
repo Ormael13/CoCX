@@ -118,9 +118,7 @@ public function callForFollowerIsabella():void {
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0)
 	{
 		outputText("You get Isabella's attention and call the busty cow-girl your way.  She seems a bit consterned as she breaks away from her previous task, but as she closes in towards you, she's all smiles.  You're given plenty of time to appreciate the curvaceous beauty's body while she ambles over.\n\n");
-
 		outputText("The cow-girl is about seven and a half feet tall.  Instead of feet, she has hooves, complete with fur that grows part-way up her legs.  Her olive skirt only covers the upper portion of her dusky, spotted thighs, and it flares out deliciously from her swaying hips.  Isabella's top is sheer, white silk that barely hides anything from you, least of all her exotic, quad-tipped nipples.  Unlike most of the rest of her, her face is not spotted with dark and white patches.  Instead it is pure, unbroken chocolate in color.  Two small, bovine horns sprout from her head, emerging from the tangle of her unruly, red curls.  She even has a pair of cow ears that flick back and forth from time to time.\n\n");
-
 		outputText("Isabella ");
 		if(player.tallness < 72) outputText("picks you up in her arms and embraces you with a crushing hug, nearly burying you in her boobflesh before she lets you go.");
 		else outputText("gives you a crushing hug, smashing her tits flat against your body.");
@@ -130,7 +128,7 @@ public function callForFollowerIsabella():void {
 		outputText("</i>\"");
 		if (player.hasCock()) {
 			if (player.shortestCockLength() > 9)
-				outputText("\n\nSadly, you're too big for Isabella to be interested in providing you with morning blowjobs.");
+				outputText("\n\nSadly, you're too big for Isabella to be interested in providing you with morning blowjobs. (less than 9' length)");
 			else if (flags[kFLAGS.ISABELLA_BLOWJOBS_DISABLED] == 0)
 				outputText("\n\nYou could ask Isabella not to suck you off in the morning. (In Sex Menu)");
 			else
@@ -140,11 +138,9 @@ public function callForFollowerIsabella():void {
 	else
 	{
 		outputText("Isabella puts down the milk canister she’s carrying and wipes her brow at your approach.");
-
 		if (isabellaAccent()) outputText("\n\n\"<i>Guten tag, [name]. What can Isabella help you with?</i>\"");
 		else outputText("\n\n\"<i>Hello [name]. What can Isabella help you with?</i>\"");
 	}
-
 	menu();
 	addButton(0, "Appearance", isabellasAppearance).hint("Examine Isabella's detailed appearance.");
 	addButton(1, "Talk", isabellaTalkMenu).hint("Ask Isabella about something.");
@@ -1558,3 +1554,4 @@ public function isabellaGivesBirth():void {
 }
 }
 }
+
