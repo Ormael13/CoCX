@@ -26,6 +26,9 @@ public class ElvishPeripheralNervSysMutation extends IMutationPerkType
             if (pTier >= 3){
                 descS += ", increases your natural evasion, and decrease melee/range accuracy penalty when using multiattack options. Elven signature abilities will keep working regardless if you are a full blooded elf or not";
             }
+            if (pTier >= 4){
+                descS += ". Heal for an amount of hit points equal to the mana cost when spending mana. Spells have a 10% increased critical chance";
+            }
             if (descS != "")descS += ".";
             return descS;
         }
@@ -40,10 +43,18 @@ public class ElvishPeripheralNervSysMutation extends IMutationPerkType
                 case 3:
                     sufval = "(Evolved)";
                     break;
+                case 4:
+                    sufval = "(Final Form)";
+                    break;
                 default:
                     sufval = "";
             }
             return mName + sufval;
+        }
+
+        override public function evolveText():String {
+            var descS:String = "\nYou feel way more attuned to your surroundings than before. Your ability to sense and control magic has improved just as much as your reflexes. You feel as if you are one with the world and your elven sisters.";
+            return descS;
         }
 
         //Mutation Requirements
@@ -75,7 +86,7 @@ public class ElvishPeripheralNervSysMutation extends IMutationPerkType
         }
 
         public function ElvishPeripheralNervSysMutation() {
-            super(mName + " IM", mName, SLOT_NERVSYS, 3);
+            super(mName + " IM", mName, SLOT_NERVSYS, 4);
         }
 
     }

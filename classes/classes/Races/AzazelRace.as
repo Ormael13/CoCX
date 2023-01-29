@@ -53,20 +53,21 @@ public class AzazelRace extends Race {
 				.customRequirement("","not Devil",
 						function (body:BodyData):Boolean {
 							return !(DevilRace.isDevilLike(body));
-						}, 0, -1000);
-		addScoresAfter(8)
+						}, 0, -1000)
 				.eyeColor(ANY(AzazelEyeColors), +1)
 				.hairTypeAndColor1(ANY(Hair.NORMAL),ANY("immaculate white"), +2)
 				.featherColor1(ANY("immaculate white"), +1)
 				.furColor1(ANY("immaculate white"), +1)
 				.height(LESS_THAN(48), +1)
-				//.cockOrVaginaOfType(CockTypesEnum.HORSE, VaginaClass.DEMONIC, +1)
 				.corruption(0, +3)
-				.hasPerk(PerkLib.InnerPhylactery, +5);
+				.hasPerk(PerkLib.InnerPhylactery, +5)
+				.hasPerk(PerkLib.TransformationImmunity2, +3);
 
 		addMutation(IMutationsLib.DiamondHeartIM);
 		
 		buildTier(11, "azazelkin")
+				.requireWingType(Wings.PUREDEVILFEATHER)
+				.requireFaceType(Face.INNOCENT)
 				.namesTauric("azazelkin", "azazelkin-taur")
 				.buffs({
 					"str.mult": +0.55,
@@ -80,6 +81,7 @@ public class AzazelRace extends Race {
 		
 		buildTier(16, "azazel")
 				.namesTauric("azazel", "azazel-taur")
+				.requirePreviousTier()
 				.requirePerk(PerkLib.InnerPhylactery)
 				.buffs({
 					"str.mult": +0.75,

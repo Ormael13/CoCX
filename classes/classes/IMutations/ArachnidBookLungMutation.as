@@ -46,6 +46,11 @@ import classes.Races;
             return mName + sufval;
         }
 
+        override public function evolveText():String {
+            var descS:String = "\nYou feel change overcoming your body. It would seem your symbiotic relationship with your err… was it your upper or lower half… has improved? Your webs are more voluminous while your venom is thicker and more potent. You could bite and weave for days right now.";
+            return descS;
+        }
+
         //Mutation Requirements
         override public function pReqs(pCheck:int = -1):void{
             try{
@@ -77,7 +82,7 @@ import classes.Races;
         }
 
         public function ArachnidBookLungMutation() {
-            super(mName + " IM", mName, SLOT_ADAPTATIONS, 3, true);
+            super(mName + " IM", mName, SLOT_ADAPTATIONS, 3);
         }
         
     }

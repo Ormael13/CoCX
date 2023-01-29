@@ -308,6 +308,7 @@ public class DriderIncubusScenes extends BaseContent
 			if (player.lowerBody == 5) outputText(" heel");
 			else outputText(" [foot]");
 			outputText(" down on the corrupted drider’s neck until you hear a sickening ‘pop’. He doesn’t move after that.");
+			if (player.hasPerk(PerkLib.Purifier)) player.purifyDemonBonus();
 
 			flags[kFLAGS.DRIDERINCUBUS_KILLED] = 1;
 

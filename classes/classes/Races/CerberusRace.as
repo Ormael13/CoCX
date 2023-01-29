@@ -64,12 +64,13 @@ public class CerberusRace extends Race {
 				.skinCoatType(Skin.FUR, +1)
 				.furColor1(ANY(CerberusFurColors), +1)
 				.hairColor1(ANY(CerberusFurColors), +1)
-				.skinColor1("dark", +1)
+				.skinColor1("grayish-blue", +1)
 				.noWings(+4)
 				.height(AT_LEAST(11*12), +1)
 				.tone(AT_LEAST(80), +1)
 				.corruption(AT_LEAST(50), +1)
-				.hasPerk(PerkLib.Hellfire, +1);
+				.hasPerk(PerkLib.Hellfire, +1)
+				.hasPerk(PerkLib.TransformationImmunity2, +3);
 
 		addMutation(IMutationsLib.AlphaHowlIM);
 		addMutation(IMutationsLib.HellhoundFireBallsIM);

@@ -101,7 +101,7 @@ import classes.display.SpriteDb;
 				else outputText("hair ");
 				outputText("pulls you back halfway, but as you open your mouth to yell, the ground gives a quiet thump.  Just barely in your periphery, you see a white apparition with a yawning mouth stretching out to bite, and your reflexes take over, dropping your weight and rolling you away from it.\n\n");
 				outputText("\"<i>Clever little pet,</i>\" the phantom spits, resolving into the shape of a drider as your eyes focus and your adrenaline haze clears.  Raising a cupped hand to her ghoulishly grinning mouth, she laughs into it; a minute shivering in the air reveals the taut threads of silk attached to her finger.  The vibrations travel down them, shaking several silk-tied leaves and producing the raspy, laughing audience from before.  \"<i>It'd be so much easier on you if you'd just walked into the trap, sweetness.</i>\"\n\n");
-				outputText("You've yet to meet a wild drider that let you walk away without some sadistic display of power, and Lily looks to be no different.");
+				outputText("You've yet to meet a wild drider that let you walk away without some sadistic display of power, and "+(LilyTalked > 0 ? "Lily":"this one")+" looks to be no different.");
 			}
 			else {
 				LilyHairColor = randomChoice("red", "orange", "green");

@@ -65,7 +65,7 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: What Is Reality? - Gained by becoming cheshire cat. Effect: When you would take fatal damage, laugh at death and deny it ever happened. Mocking death causes the increase of the arousal of the user which can still cause it to simply give up so to get to lewder games.\n");
 			outputText("-New event perk: Vorpal Claw - Gained by becoming cheshire cat. Effect: A cheshire natural weapon distorts space inflicting particularly vicious critical strikes. (Natural attacks dmg x2)\n");
 			outputText("-New event perk: One with the forest. Gained by Wood Elfs. Effects: With each new soul added to the collective bolstering the trees of the sacred forest you become stronger physically and spiritually. Gain a +1% to all stats for each new wood elf created.\n");
-			outputText("-New event perk: Dao of the Elements. Gained by use of the Pocket Watch when req. are meet. Have 2 layers.\n");
+			outputText("-New event perk: Dao of the Elements. Gained by use of the Pocket Watch when req. are meet. Have 3 layers.\n");
 			outputText("-New event perk: Elemental Conjurer Mind and Body Resolve (Ex). Gained by use of the Pocket Watch when req. are meet. Effects of both combined perks + 5% bonus to tou multi.\n");
 			outputText("-New event perk: Elemental Conjurer Mind and Body Dedication (Ex). Gained by use of the Pocket Watch when req. are meet. Effects of all three combined perks + 5% bonus to spe/wis multi.\n");
 			outputText("-New event perk: Elemental Conjurer Mind and Body Sacrifice (Ex). Gained by use of the Pocket Watch when req. are meet. Effects of all three combined perks + 5% bonus to str multi, +10% bonus to int multi, +15% bonus to wis multi.\n");
@@ -138,22 +138,22 @@ public class Changelog extends BaseContent
 			outputText("-Elemental Contract Rank 2 perk got additional req. of actualy having arcane circle.\n");
 			outputText("-Ebon Labyrinth mana regen fix for sleeping. (Chibizs)\n");
 			outputText("-New material: a Soul Residue. Cost 1 gem. Could drop after beating angel type enemies.\n");
+			outputText("-Chichi gets some new scenes (try and get her in JTTE while corrupt and having some succubus milk a few times) Groundwork for further expansion on ChiChi that still needs some writing to unleash to the world (EragonX)\n");
+			outputText("-Remove tail from Hinezumi Leg Metamorph. Fix hourly updates and hunger bar toggling. (EragonX)\n");
+			outputText("-Regeneration cap increase based on which NG+ PC is has been removed.\n");
+			outputText("-Unleash perm tf true mutations to the wild! Perm tf races can no longer buy mutations from Evangeline apart from their race, but will get bonus stats from the race specific mutaions and auto acquire them depending on the prerequisites. (EragonX)\n");
+			outputText("-Azazel Purifier perk. Counterpart to the Imp/Demon Soul Eater perk, kill demons to absorb their power as your own. (EragonX)\n");
+			outputText("-QueenOfTheFairies perk: Gain spellpower as a fairy for every corrupted glade destroyed or demon killed in the forest. (EragonX)\n");
+			outputText("-Fae Arcane Bloodstream (Final Form) effect: When using an ability with random effects the spell now attempts to activate each effect twice. (EragonX)\n");
+			outputText("-Ant race stat bonuses and min score req. been increased slightly.\n");
+			outputText("-During ascension choice for keeping NG difficulty or increase it was moved to happen before PC get to spend ascension perk points not right after. It would also lock some option on ascension menu if pc decided to spend 50 asc points to keep diff the same.\n");
+			outputText("-Dragon Faerie Breath, Dragon Poison Breath, Dragon Water Breath, Dragon Lust Poison Breath perks can be permed during ascension.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
-			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
-			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
-			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
-			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");
 			outputText("-\n");// (Liadri)
 			outputText("-\n");// (aimozg)
@@ -164,11 +164,23 @@ public class Changelog extends BaseContent
 			outputText("-\n");// (khovel)
 			outputText("-\n");// (Chibizs)
 			outputText("-\n");
+			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
+			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
+			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
+			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
+			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			//remove this line when other two lines below get added ingame
 			//outputText("-New perk for enemies: Elite type enemy. Bonuses for are: Diehard effect of 2,5% of max HP + 750 HP * NG tier, OverMax HP effect of 5% magnitude.\n");
 			//outputText("-New perk for enemies: Champion type enemy. Bonuses for are: Diehard effect of 5% of max HP + 1,500 HP * NG tier, OverMax HP effect of 10% magnitude.\n");
 			outputText("-Fixed bugs: Bard not affected by cap of prestige jobs, last one checks for holli's kill/survive moved into less troublesome spot, Benoit/Oswald taking full price for simple backpack size upgade, Fasting Pill been unaccessable when hunger mode is active, Vegetal Affinity increasing fire resistance, elemental throwing knives been never usable, Elemental race tier bonuses & display on race page, ");
-			outputText("Buy button for Francisca throwing axe at basilsik shop been corectly labeled\n");
+			outputText("Buy button for Francisca throwing axe at basilisk shop been corectly labeled, Lily name revealed before she actualy tell her name in scene, incorrectly labeled Whitefire swiftcast button, returning from multishot menu leading to melee options instead of range ones\n");
 			/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
@@ -253,7 +265,6 @@ public class Changelog extends BaseContent
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
-			outputText("\n");
 			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
 			outputText("\n");
 			outputText("\n");full stats bonuses not added yet to: Dragonne, Echidna, Ferret-morph, Kitshoo-morph, Scorpion-morph
@@ -270,6 +281,8 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

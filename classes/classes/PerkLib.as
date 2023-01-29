@@ -2493,9 +2493,13 @@ public class PerkLib
 				"It's official, everyone knows to go to you for sex. You're still new to the business, but you learned some new tricks. (+15% tease dmg)",
 				"You've chosen the 'Prostitute' perk, gaining +15% tease dmg.");
 		public static const PurityElixir:PurityElixirPerk = new PurityElixirPerk();
+		public static const Purifier:PerkType = mk("Purifier", "Purifier",
+				"When slaying or purifying demons their corrupted power is purified and sent back to you.");
 		public static const PyrosFriend:PerkType = mk("Pyro's Friend", "Pyro's Friend",
 				"Mmmphmm! (No idea what he? is trying to say... but same rules apply... +10% ranged damage buff)",
 				"You've chosen the 'Pyro's Friend' perk, gaining +10% range phys dmg.");
+		public static const QueenOfTheFairies:PerkType = mk("Queen of the Fairies", "Queen of the Fairies",
+				"Each destroyed corrupted glade and slain demon in the woodlands area allows your people to further regain control of the forest. As your kingdom grows so does your power. Increase the potency of all spells by 10% per destroyed glade and 1% per destroyed demon.");
 		public static const QuickStrike:PerkType = mk("Quick Strike", "Quick Strike",
 				"Add speed based scaling of melee attacks when using small weapon(s). It effect is added on top of Speed Demon perk boost.",
 				"You've chosen the 'Quick Strike' perk, allowing you to use your speed when attacking with small melee weapons.");
@@ -3736,6 +3740,8 @@ public class PerkLib
 				"Reduces physical special cost by 20%. Increase physical special damage by 50% and spellpower by 30%.");
 
 		// Quest, Event & NPC perks
+		public static const AdvancedLeadership:PerkType = mk("Advanced Leadership", "Advanced Leadership",
+				"Allows to form 4 people party.");
 		public static const AffinityGnome:PerkType = mk("Affinity (Gnome)", "Affinity (Gnome)",
 				"Gain a boon based on the terrain, abundance of plants grants regeneration 15% while rocky ground gives +20% Damage reduction. Aquatic or snowy terrain gives nothing.");
 		public static const AffinityIgnis:PerkType = mk("Affinity (Ignis)", "Affinity (Ignis)",
@@ -3744,8 +3750,8 @@ public class PerkLib
 				"When outdoors you are considered to be permanently flying, allowing you to use great dive and flying skills at will. Useless underwater.");
 		public static const AffinityUndine:PerkType = mk("Affinity (Undine)", "Affinity (Undine)",
 				"Can breath underwater and gain +50 to speed and spell power while underwater. Weak to electricity (-100% resistance).");
-		public static const AdvancedLeadership:PerkType = mk("Advanced Leadership", "Advanced Leadership",
-				"Allows to form 4 people party.");
+		public static const AscensionMenuChoiceMaybe:PerkType = mk("AscensionMenuChoiceMaybe", "AscensionMenuChoiceMaybe",
+				"You shouldn't be here to see that description so *puts on black sunglasses and prepare erase devide* please look at the red light.");
 		public static const AuraOfCorruption:PerkType = mk("Aura of Corruption", "Aura of Corruption",
 				"You radiate corruption, tainting everything near you with uncontrollable lust.");
 		public static const AuraOfPurity:PerkType = mk("Aura of Purity", "Aura of Purity",
@@ -5804,6 +5810,9 @@ public class PerkLib
             ElementsOfMarethAdvanced.requireOrPerks(ElementsOfMarethBasics, DaoOfTheElements, 2)
 					.requireWis(50)
 					.requireLevel(6);
+            /*.requireOrPerks(ElementsOfMarethAdvanced, DaoOfTheElements, 3)
+					.requireWis(55)
+					.requireLevel(6);*/
             MagiculesTheory.requireWis(50)
                     .requireLevel(6);
             JobMonk.requireAdvancedJobSlot()
@@ -6034,7 +6043,8 @@ public class PerkLib
                     .requireWis(250)
                     .requireLevel(54);
 			//This perk below (with others as well) for some reason stack overflows when using requirePerks.
-            StrongerElementalBond.requirePerks(StrongElementalBondSu, ElementalContractRank10)
+            StrongerElementalBond.requireOrPerks(ElementalContractRank10, DaoOfTheElements, 3)
+					.requirePerk(StrongElementalBondSu)
                     .requireWis(250)
                     .requireLevel(54);
             //Tier 10 Wisdom perks
@@ -6060,7 +6070,8 @@ public class PerkLib
             ElementalContractRank12.requirePerk(ElementalContractRank11)
                     .requireWis(300)
                     .requireLevel(66);
-			/*ElementalConjurerKnowledgeSu.requirePerks(ElementalConjurerKnowledgeEx, ElementalContractRank10)
+			/*ElementalConjurerKnowledgeSu.requireOrPerks(ElementalContractRank10, DaoOfTheElements, 3)
+					.requirePerk(ElementalConjurerKnowledgeEx)
 					.requireWis(300)
                     .requireLevel(66);*/
             LegendaryWisdom.requireWis(15)
@@ -6073,7 +6084,7 @@ public class PerkLib
                     .requirePerk(BoneSoul);
             GreaterSharedPower.requireLevel(72)
                     .requirePerk(ElementalTouch);
-            ElementalContractRank13.requirePerk(ElementalContractRank12)
+            ElementalContractRank13.requireOrPerks(ElementalContractRank12, DaoOfTheElements, 3)
                     .requireWis(325)
                     .requireLevel(72);
             StrongerElementalBondEx.requirePerks(StrongerElementalBond, ElementalContractRank13)

@@ -1579,7 +1579,7 @@ public class CampMakeWinions extends BaseContent
 				addButtonDisabled(8, "Lightning", "Req. Elements of Mareth: Basics perk.");
 				addButtonDisabled(9, "Darkness", "Req. Elements of Mareth: Basics perk.");
 			}
-			if (player.hasPerk(PerkLib.ElementsOfMarethAdvanced)) {
+			if (player.hasPerk(PerkLib.ElementsOfMarethAdvanced) || (player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) > 2)) {
 				addButton(10, "Poison", evocationTomePoison).hint(" Information about the Poison Elements.");
 				addButton(11, "Purity", evocationTomePurity).hint(" Information about the Purity Elements.");
 				addButton(12, "Corruption", evocationTomeCorruption).hint(" Information about the Corruption Elements.");
@@ -1734,7 +1734,7 @@ public class CampMakeWinions extends BaseContent
 					if (player.statusEffectv1(StatusEffects.SummonedElementalsLightning) < 1) addButton(8, "Lightning", summonElementalLightning);
 					if (player.statusEffectv1(StatusEffects.SummonedElementalsDarkness) < 1) addButton(9, "Darkness", summonElementalDarkness);
 				}
-				if (player.hasPerk(PerkLib.ElementsOfMarethAdvanced)) {
+				if (player.hasPerk(PerkLib.ElementsOfMarethAdvanced) || (player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) > 2)) {
 					if (player.statusEffectv1(StatusEffects.SummonedElementalsPoison) < 1) addButton(10, "Poison", summonElementalPoison);
 					if (player.statusEffectv1(StatusEffects.SummonedElementalsPurity) < 1) addButton(11, "Purity", summonElementalPurity);
 					if (player.statusEffectv1(StatusEffects.SummonedElementalsCorruption) < 1) addButton(12, "Corruption", summonElementalCorruption);
