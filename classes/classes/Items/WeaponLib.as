@@ -72,17 +72,17 @@ public final class WeaponLib extends ItemConstants
 		public const ASCENSU:Weapon = new Weapon("Ascensus", "Ascensus", "Ascensus", "Ascensus, Element of Ascension", "smack", 15, 2400, "This staff is made from sacred wood and holy bark. Vines and tentacles run along the staff, grown out of the wood itself. The top has an odd zigzag shape, with pulsing crystals adorning the recesses. This staff radiates power, neither pure nor corrupt.", "Large, Staff", WT_STAFF).withBuff('spellpower',+1.5) as Weapon;
 		public const ASTERIUS:AsteriusRage = new AsteriusRage();
 		public const AWL_   :Weapon = new Weapon("Awl    ","Awl","awl","an awl","pierce",3,240,"A typical awl used to pierce magic hides when making magic armors or... to pierce organic object ;)", "Small, Bleed45", "Exotic");
-		public const NRSABER:Weapon = new Weapon("NRSaber","NineRingedSaber","Nine-ringed Saber","a nine-ringed saber","slash",14,1120,"This saber, with added nine rings is capable of delivering deep, jagged wounds.", "Bleed10", "Sword");
 		public const B_STAFF:BeautifulStaff = new BeautifulStaff();
 		public const B_SWORD:BeautifulSword = new BeautifulSword();
-		public const CATGLOV:Weapon = new Weapon("CatGlove", "CatGlove", "black cat glove", "a pair of black cat gloves", "punch", 0, 480, "Not quite a weapon as much as they are black gloves with open fingers to let the tips out. These were made and custom enchanted for a cat girl adventurer. While worn by someone with cat pawed hands in feral stance, allow to perform two more claw attacks per turn. Feral Attack also counts as a light weapon for the purpose of sneak attacks.", "Small", WT_GAUNTLET);
 		public const B_SCARB:Weapon = new Weapon("B.ScarB", "B.ScarBlade", "broken scarred blade", "a broken scarred blade", "slash", 12, 480, "This saber, made from lethicite-imbued metal, seems to no longer seek flesh; whatever demonic properties in this weapon is gone now but it's still an effective weapon.", "", WT_SWORD);
 		public const B_WIDOW:BlackWidow = new BlackWidow();
+		public const BCLAWS:BlizzardClaws = new BlizzardClaws();
 		public const BFGAUNT:Weapon = new Weapon("BFGaunt", "B.F.Gauntlets", "big fucking gauntlets", "a big fucking gauntlets", "smash", 0, 1600, "Big Fucking Gauntlets - the best solution for a tiny e-pen complex at this side of the Mareth!  This huge gauntlets signed by mysterious 'Vi' requires 150 strength to fully unleash it power.\nIncreases unarmed damage by 4x.\nIncreases stun chance by 40.", "Large, LGWrath, Stun40", WT_GAUNTLET);
 		public const BFTHSWORD:BFTHSword = new BFTHSword();
 		public const BFSWORD:BFSword = new BFSword();
 		public const BFWHIP :BFWhip = new BFWhip();
 		public const BLETTER:BloodLetter = new BloodLetter();
+		public const CATGLOV:Weapon = new Weapon("CatGlove", "CatGlove", "black cat glove", "a pair of black cat gloves", "punch", 0, 480, "Not quite a weapon as much as they are black gloves with open fingers to let the tips out. These were made and custom enchanted for a cat girl adventurer. While worn by someone with cat pawed hands in feral stance, allow to perform two more claw attacks per turn. Feral Attack also counts as a light weapon for the purpose of sneak attacks.", "Small", WT_GAUNTLET);
 		public const CHAOSEA:Chaoseater = new Chaoseater();
 		public const CLAWS  :Weapon = new Weapon("Claws","Claws","gauntlet with claws","a gauntlet with claws","rend",0,100,"Those metal gauntlets have tips of the fingers shaped like sharp natural claws.  Though they lacks the damaging potential of other weapons, they have a chance to leave bleeding wounds.", "Bleed10", WT_GAUNTLET);
 		public const CLAYMOR:LargeClaymore = new LargeClaymore();
@@ -154,6 +154,7 @@ public final class WeaponLib extends ItemConstants
 		public const MGSWORD:MoonlightGreatsword = new MoonlightGreatsword();
 		public const MOONLIT:MoonlitSnow = new MoonlitSnow();
 		public const N_STAFF:NocturnusStaff = new NocturnusStaff();
+		public const NRSABER:Weapon = new Weapon("NRSaber","NineRingedSaber","Nine-ringed Saber","a nine-ringed saber","slash",14,1120,"This saber, with added nine rings is capable of delivering deep, jagged wounds.", "Bleed10", "Sword");
 		public const NTWHIP :NineTailWhip = new NineTailWhip();
 		public const NODACHI:Nodachi = new Nodachi();
 		public const NORTHIP:NorthernerIcePicks = new NorthernerIcePicks();

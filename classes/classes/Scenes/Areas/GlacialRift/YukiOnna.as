@@ -110,6 +110,7 @@ public class YukiOnna extends Monster
 			this.gems = 115 + rand(20);
 			this.drop = new WeightedDrop()
 					.add(armors.BLIZZ_K, 1)
+					.add(weapons.BCLAWS, 1)
 					.add(headjewelries.SNOWFH, 1)
 					.add(consumables.QWHITED, 1)
 					.add(consumables.SNOWW_D, 5)

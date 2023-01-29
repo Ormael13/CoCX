@@ -148,6 +148,9 @@ public class Changelog extends BaseContent
 			outputText("-Ant race stat bonuses and min score req. been increased slightly.\n");
 			outputText("-During ascension choice for keeping NG difficulty or increase it was moved to happen before PC get to spend ascension perk points not right after. It would also lock some option on ascension menu if pc decided to spend 50 asc points to keep diff the same.\n");
 			outputText("-Dragon Faerie Breath, Dragon Poison Breath, Dragon Water Breath, Dragon Lust Poison Breath perks can be permed during ascension.\n");
+			outputText("-Offering of Chilli Peepers would now have... 'pity system' to make sure ~10% chance to get e.ichor is kept true.\n");
+			outputText("-New melee weapon (by Ormael): Blizzard Claws - one of possible Yuki Onna drops OR from Yu shop. Cost 4000 gems. Base atk is 0, 10% to cause bleed and deals ice damage. Causes constant health degeneration 2% to anyone without Cold Affinity wearing it. A yuki onna also gains a periodic 1% health regeneration.\n");
+			outputText("-Hooked Gauntlets could be bought now at Sean shop.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -155,10 +158,7 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");// (Liadri)
-			outputText("-\n");// (aimozg)
-			outputText("-\n");// (Svalkash)
-			outputText("-\n");// (EragonX)
+			outputText("-\n");
 			outputText("-\n");// (Jtecx)
 			outputText("-\n");// (Furrin Gok)
 			outputText("-\n");// (khovel)
@@ -170,10 +170,10 @@ public class Changelog extends BaseContent
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-\n");// (Liadri)
+			outputText("-\n");// (aimozg)
+			outputText("-\n");// (Svalkash)
+			outputText("-\n");// (EragonX)
 			outputText("-\n");
 			outputText("-\n");
 			//remove this line when other two lines below get added ingame
