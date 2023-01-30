@@ -88,7 +88,7 @@ public class Changelog extends BaseContent
 			outputText("-Moved IMDB detail switch to QoL info. Fixed USS QoL switch not saving in global data. (Svalkash)\n");
 			outputText("-Fixed being unable to aquire the achievements and duel scythes for beating Alvina if you are level 185. (Aduro)\n");
 			//outputText("-Dam can be upgraded 2 times (up to 3rd tier of wood dam) and Fishery once (to allow 2 npc's working at it - it also gonna increase each worker fish production by 20%)\n");
-			//outputText("-New tier 11 wisdom lvl-up perk: Elemental Conjurer Knowledge (Su). Req. Elemental Conjurer Knowledge (Ex) and Elemental Contract Rank 10 perks, 300+ wis. Effect: .\n");
+			outputText("-New tier 7 wisdom lvl-up perk: Elemental Conjurer Knowledge (Su). Req. Elemental Conjurer Knowledge (Ex) and Elemental Contract Rank 6 perks, 300+ wis. Effect: Allows you to convert soulforce into elemental energy. When ranking up an elemental fail only 50% of used elemental energy is lost.\n");
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");

@@ -762,6 +762,8 @@ public class CampMakeWinions extends BaseContent
 		//
 		//--------------
 		
+		private var elecost:Number = 0;
+		private var elecostr:Boolean = false;
 		private function maxSizeOfElementalsArmy():Number {
 			var maxSizeOfElementalsArmyCounter:Number = 0;
 			if (player.hasPerk(PerkLib.JobElementalConjurer)) maxSizeOfElementalsArmyCounter += 3;
@@ -1507,6 +1509,16 @@ public class CampMakeWinions extends BaseContent
 			else addButtonDisabled(7, "Yes", "You don't have enough Elemental Crystals to convert currently.");
 			if (player.hasItem(useables.EL_CORE, 5)) addButton(8, "Yes", elementalShardsConversionGo, 13).hint("Use 5 Elemental Cores");
 			else addButtonDisabled(8, "Yes", "You don't have enough Elemental Cores to convert currently.");
+			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeSu)) {
+				if (player.soulforce >= 10000) addButton(10, "1K", soulforceConversionGo, 1000).hint("Convert 10,000 SF into 1,000 EE");
+				else addButtonDisabled(10, "1K", "You not have enough (10,000) SF for conversion.");
+				if (player.soulforce >= 20000) addButton(11, "2K", soulforceConversionGo, 2000).hint("Convert 20,000 SF into 2,000 EE");
+				else addButtonDisabled(11, "2K", "You not have enough (20,000) SF for conversion.");
+				if (player.soulforce >= 10000) addButton(12, "5K", soulforceConversionGo, 5000).hint("Convert 50,000 SF into 5,000 EE");
+				else addButtonDisabled(12, "5K", "You not have enough (50,000) SF for conversion.");
+				if (player.soulforce >= 20000) addButton(13, "10K", soulforceConversionGo, 10000).hint("Convert 100,000 SF into 10,000 EE");
+				else addButtonDisabled(13, "10K", "You not have enough (100,000) SF for conversion.");
+			}
 			addButton(14, "Back", accessSummonElementalsMainMenu);
 		}
 		private function elementalShardsConversionGo(shardtype:Number):void {
@@ -1549,6 +1561,16 @@ public class CampMakeWinions extends BaseContent
 			if (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) + shardEnergy > player.statusEffectv2(StatusEffects.ElementalEnergyConduits)) convertedShard += (player.statusEffectv2(StatusEffects.ElementalEnergyConduits) - player.statusEffectv1(StatusEffects.ElementalEnergyConduits));
 			else convertedShard += shardEnergy;
 			player.addStatusValue(StatusEffects.ElementalEnergyConduits,1,convertedShard);
+			doNext(elementalShardsConversion);
+		}
+		private function soulforceConversionGo(amount:Number):void {
+			clearOutput();
+			outputText("Information Noona informing your on exchanging some soulforce into elemental energy.\n\n");
+			var converted:Number = 0;
+			if (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) + amount > player.statusEffectv2(StatusEffects.ElementalEnergyConduits)) converted += (player.statusEffectv2(StatusEffects.ElementalEnergyConduits) - player.statusEffectv1(StatusEffects.ElementalEnergyConduits));
+			else converted += amount;
+			EngineCore.SoulforceChange(-(amount * 10));
+			player.addStatusValue(StatusEffects.ElementalEnergyConduits,1,converted);
 			doNext(elementalShardsConversion);
 		}
 		private function evocationTome():void {
@@ -1982,7 +2004,11 @@ public class CampMakeWinions extends BaseContent
 		
 		private function rankUpElementalAir():void {
 			clearOutput();
-			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeEx) && (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= ((rankUpElementalElementalEnergyCost()*player.statusEffectv2(StatusEffects.SummonedElementalsAir))/4))) player.addStatusValue(StatusEffects.ElementalEnergyConduits,1,-((rankUpElementalElementalEnergyCost()*player.statusEffectv2(StatusEffects.SummonedElementalsAir))/4));
+			elecost += ((rankUpElementalElementalEnergyCost() * player.statusEffectv2(StatusEffects.SummonedElementalsAir)) / 4);
+			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeEx) && (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= elecost)) {
+				player.addStatusValue(StatusEffects.ElementalEnergyConduits, 1, -elecost);
+				elecostr = true;
+			}
 			else {
 				useMana(rankUpElementalManaCost() * player.statusEffectv2(StatusEffects.SummonedElementalsAir));
 				fatigue(rankUpElementalFatigueCost() * player.statusEffectv2(StatusEffects.SummonedElementalsAir));
@@ -1997,13 +2023,17 @@ public class CampMakeWinions extends BaseContent
 				outputText("The outraged elemental starts by struggling but is unable to defeat its binding, letting go and standing still, awaiting your commands. Their duty fulfilled, the binding runes fades disappearing into the elemental until you call upon them again. \"<b>The ritual is complete and your elemental empowered as such!</b>\"");
 				player.addStatusValue(StatusEffects.SummonedElementalsAir, 2, 1);
 			}
-			else failToRankUpElemental();
+			else failToRankUpElemental(elecost, elecostr);
 			doNext(elementaLvlUp);
 			eachMinuteCount(30);
 		}
 		private function rankUpElementalEarth():void {
 			clearOutput();
-			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeEx) && (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= ((rankUpElementalElementalEnergyCost()*player.statusEffectv2(StatusEffects.SummonedElementalsEarth))/4))) player.addStatusValue(StatusEffects.ElementalEnergyConduits,1,-((rankUpElementalElementalEnergyCost()*player.statusEffectv2(StatusEffects.SummonedElementalsEarth))/4));
+			elecost += ((rankUpElementalElementalEnergyCost() * player.statusEffectv2(StatusEffects.SummonedElementalsEarth)) / 4);
+			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeEx) && (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= elecost)) {
+				player.addStatusValue(StatusEffects.ElementalEnergyConduits, 1, -elecost);
+				elecostr = true;
+			}
 			else {
 				useMana(rankUpElementalManaCost() * player.statusEffectv2(StatusEffects.SummonedElementalsEarth));
 				fatigue(rankUpElementalFatigueCost() * player.statusEffectv2(StatusEffects.SummonedElementalsEarth));
@@ -2018,13 +2048,17 @@ public class CampMakeWinions extends BaseContent
 				outputText("The outraged elemental start by struggling but unable to defeat its binding let go and stand still awaiting your commands. Their duty fulfilled, the binding runes fades disappearing into the elemental until you call upon them again. \"<b>The ritual is complete and your elemental empowered as such!</b>\"");
 				player.addStatusValue(StatusEffects.SummonedElementalsEarth, 2, 1);
 			}
-			else failToRankUpElemental();
+			else failToRankUpElemental(elecost, elecostr);
 			doNext(elementaLvlUp);
 			eachMinuteCount(30);
 		}
 		private function rankUpElementalFire():void {
 			clearOutput();
-			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeEx) && (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= ((rankUpElementalElementalEnergyCost()*player.statusEffectv2(StatusEffects.SummonedElementalsFire))/4))) player.addStatusValue(StatusEffects.ElementalEnergyConduits,1,-((rankUpElementalElementalEnergyCost()*player.statusEffectv2(StatusEffects.SummonedElementalsFire))/4));
+			elecost += ((rankUpElementalElementalEnergyCost() * player.statusEffectv2(StatusEffects.SummonedElementalsFire)) / 4);
+			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeEx) && (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= elecost)) {
+				player.addStatusValue(StatusEffects.ElementalEnergyConduits, 1, -elecost);
+				elecostr = true;
+			}
 			else {
 				useMana(rankUpElementalManaCost() * player.statusEffectv2(StatusEffects.SummonedElementalsFire));
 				fatigue(rankUpElementalFatigueCost() * player.statusEffectv2(StatusEffects.SummonedElementalsFire));
@@ -2039,13 +2073,17 @@ public class CampMakeWinions extends BaseContent
 				outputText("The outraged elemental start by struggling but unable to defeat its binding let go and stand still awaiting your commands. Their duty fulfilled, the binding runes fades disappearing into the elemental until you call upon them again. \"<b>The ritual is complete and your elemental empowered as such!</b>\"");
 				player.addStatusValue(StatusEffects.SummonedElementalsFire, 2, 1);
 			}
-			else failToRankUpElemental();
+			else failToRankUpElemental(elecost, elecostr);
 			doNext(elementaLvlUp);
 			eachMinuteCount(30);
 		}
 		private function rankUpElementalWater():void {
 			clearOutput();
-			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeEx) && (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= ((rankUpElementalElementalEnergyCost()*player.statusEffectv2(StatusEffects.SummonedElementalsWater))/4))) player.addStatusValue(StatusEffects.ElementalEnergyConduits,1,-((rankUpElementalElementalEnergyCost()*player.statusEffectv2(StatusEffects.SummonedElementalsWater))/4));
+			elecost += ((rankUpElementalElementalEnergyCost() * player.statusEffectv2(StatusEffects.SummonedElementalsWater)) / 4);
+			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeEx) && (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= elecost)) {
+				player.addStatusValue(StatusEffects.ElementalEnergyConduits, 1, -elecost);
+				elecostr = true;
+			}
 			else {
 				useMana(rankUpElementalManaCost() * player.statusEffectv2(StatusEffects.SummonedElementalsWater));
 				fatigue(rankUpElementalFatigueCost() * player.statusEffectv2(StatusEffects.SummonedElementalsWater));
@@ -2060,13 +2098,17 @@ public class CampMakeWinions extends BaseContent
 				outputText("The outraged elemental start by struggling but unable to defeat its binding let go and stand still awaiting your commands. Their duty fulfilled, the binding runes fades disappearing into the elemental until you call upon them again. \"<b>The ritual is complete and your elemental empowered as such!</b>\"");
 				player.addStatusValue(StatusEffects.SummonedElementalsWater, 2, 1);
 			}
-			else failToRankUpElemental();
+			else failToRankUpElemental(elecost, elecostr);
 			doNext(elementaLvlUp);
 			eachMinuteCount(30);
 		}
 		private function rankUpElementalIce():void {
 			clearOutput();
-			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeEx) && (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= ((rankUpElementalElementalEnergyCost()*player.statusEffectv2(StatusEffects.SummonedElementalsIce))/4))) player.addStatusValue(StatusEffects.ElementalEnergyConduits,1,-((rankUpElementalElementalEnergyCost()*player.statusEffectv2(StatusEffects.SummonedElementalsIce))/4));
+			elecost += ((rankUpElementalElementalEnergyCost() * player.statusEffectv2(StatusEffects.SummonedElementalsIce)) / 4);
+			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeEx) && (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= elecost)) {
+				player.addStatusValue(StatusEffects.ElementalEnergyConduits, 1, -elecost);
+				elecostr = true;
+			}
 			else {
 				useMana(rankUpElementalManaCost() * player.statusEffectv2(StatusEffects.SummonedElementalsIce));
 				fatigue(rankUpElementalFatigueCost() * player.statusEffectv2(StatusEffects.SummonedElementalsIce));
@@ -2081,13 +2123,17 @@ public class CampMakeWinions extends BaseContent
 				outputText("The outraged elemental start by struggling but unable to defeat its binding let go and stand still awaiting your commands. Their duty fulfilled, the binding runes fades disappearing into the elemental until you call upon them again. \"<b>The ritual is complete and your elemental empowered as such!</b>\"");
 				player.addStatusValue(StatusEffects.SummonedElementalsIce, 2, 1);
 			}
-			else failToRankUpElemental();
+			else failToRankUpElemental(elecost, elecostr);
 			doNext(elementaLvlUp);
 			eachMinuteCount(30);
 		}
 		private function rankUpElementalLightning():void {
 			clearOutput();
-			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeEx) && (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= ((rankUpElementalElementalEnergyCost()*player.statusEffectv2(StatusEffects.SummonedElementalsLightning))/4))) player.addStatusValue(StatusEffects.ElementalEnergyConduits,1,-((rankUpElementalElementalEnergyCost()*player.statusEffectv2(StatusEffects.SummonedElementalsLightning))/4));
+			elecost += ((rankUpElementalElementalEnergyCost() * player.statusEffectv2(StatusEffects.SummonedElementalsLightning)) / 4);
+			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeEx) && (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= elecost)) {
+				player.addStatusValue(StatusEffects.ElementalEnergyConduits, 1, -elecost);
+				elecostr = true;
+			}
 			else {
 				useMana(rankUpElementalManaCost() * player.statusEffectv2(StatusEffects.SummonedElementalsLightning));
 				fatigue(rankUpElementalFatigueCost() * player.statusEffectv2(StatusEffects.SummonedElementalsLightning));
@@ -2102,13 +2148,17 @@ public class CampMakeWinions extends BaseContent
 				outputText("The outraged elemental start by struggling but unable to defeat its binding let go and stand still awaiting your commands. Their duty fulfilled, the binding runes fades disappearing into the elemental until you call upon them again. \"<b>The ritual is complete and your elemental empowered as such!</b>\"");
 				player.addStatusValue(StatusEffects.SummonedElementalsLightning, 2, 1);
 			}
-			else failToRankUpElemental();
+			else failToRankUpElemental(elecost, elecostr);
 			doNext(elementaLvlUp);
 			eachMinuteCount(30);
 		}
 		private function rankUpElementalDarkness():void {
 			clearOutput();
-			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeEx) && (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= ((rankUpElementalElementalEnergyCost()*player.statusEffectv2(StatusEffects.SummonedElementalsDarkness))/4))) player.addStatusValue(StatusEffects.ElementalEnergyConduits,1,-((rankUpElementalElementalEnergyCost()*player.statusEffectv2(StatusEffects.SummonedElementalsDarkness))/4));
+			elecost += ((rankUpElementalElementalEnergyCost() * player.statusEffectv2(StatusEffects.SummonedElementalsDarkness)) / 4);
+			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeEx) && (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= elecost)) {
+				player.addStatusValue(StatusEffects.ElementalEnergyConduits, 1, -elecost);
+				elecostr = true;
+			}
 			else {
 				useMana(rankUpElementalManaCost() * player.statusEffectv2(StatusEffects.SummonedElementalsDarkness));
 				fatigue(rankUpElementalFatigueCost() * player.statusEffectv2(StatusEffects.SummonedElementalsDarkness));
@@ -2123,13 +2173,17 @@ public class CampMakeWinions extends BaseContent
 				outputText("The outraged elemental start by struggling but unable to defeat its binding let go and stand still awaiting your commands. Their duty fulfilled, the binding runes fades disappearing into the elemental until you call upon them again. \"<b>The ritual is complete and your elemental empowered as such!</b>\"");
 				player.addStatusValue(StatusEffects.SummonedElementalsDarkness, 2, 1);
 			}
-			else failToRankUpElemental();
+			else failToRankUpElemental(elecost, elecostr);
 			doNext(elementaLvlUp);
 			eachMinuteCount(30);
 		}
 		private function rankUpElementalWood():void {
 			clearOutput();
-			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeEx) && (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= ((rankUpElementalElementalEnergyCost()*player.statusEffectv2(StatusEffects.SummonedElementalsWood))/4))) player.addStatusValue(StatusEffects.ElementalEnergyConduits,1,-((rankUpElementalElementalEnergyCost()*player.statusEffectv2(StatusEffects.SummonedElementalsWood))/4));
+			elecost += ((rankUpElementalElementalEnergyCost() * player.statusEffectv2(StatusEffects.SummonedElementalsWood)) / 4);
+			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeEx) && (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= elecost)) {
+				player.addStatusValue(StatusEffects.ElementalEnergyConduits, 1, -elecost);
+				elecostr = true;
+			}
 			else {
 				useMana(rankUpElementalManaCost() * player.statusEffectv2(StatusEffects.SummonedElementalsWood));
 				fatigue(rankUpElementalFatigueCost() * player.statusEffectv2(StatusEffects.SummonedElementalsWood));
@@ -2144,13 +2198,17 @@ public class CampMakeWinions extends BaseContent
 				outputText("The outraged elemental start by struggling but unable to defeat its binding let go and stand still awaiting your commands. Their duty fulfilled, the binding runes fades disappearing into the elemental until you call upon them again. \"<b>The ritual is complete and your elemental empowered as such!</b>\"");
 				player.addStatusValue(StatusEffects.SummonedElementalsWood, 2, 1);
 			}
-			else failToRankUpElemental();
+			else failToRankUpElemental(elecost, elecostr);
 			doNext(elementaLvlUp);
 			eachMinuteCount(30);
 		}
 		private function rankUpElementalMetal():void {
 			clearOutput();
-			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeEx) && (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= ((rankUpElementalElementalEnergyCost()*player.statusEffectv2(StatusEffects.SummonedElementalsMetal))/4))) player.addStatusValue(StatusEffects.ElementalEnergyConduits,1,-((rankUpElementalElementalEnergyCost()*player.statusEffectv2(StatusEffects.SummonedElementalsMetal))/4));
+			elecost += ((rankUpElementalElementalEnergyCost() * player.statusEffectv2(StatusEffects.SummonedElementalsMetal)) / 4);
+			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeEx) && (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= elecost)) {
+				player.addStatusValue(StatusEffects.ElementalEnergyConduits, 1, -elecost);
+				elecostr = true;
+			}
 			else {
 				useMana(rankUpElementalManaCost() * player.statusEffectv2(StatusEffects.SummonedElementalsMetal));
 				fatigue(rankUpElementalFatigueCost() * player.statusEffectv2(StatusEffects.SummonedElementalsMetal));
@@ -2165,13 +2223,17 @@ public class CampMakeWinions extends BaseContent
 				outputText("The outraged elemental start by struggling but unable to defeat its binding let go and stand still awaiting your commands. Their duty fulfilled, the binding runes fades disappearing into the elemental until you call upon them again. \"<b>The ritual is complete and your elemental empowered as such!</b>\"");
 				player.addStatusValue(StatusEffects.SummonedElementalsMetal, 2, 1);
 			}
-			else failToRankUpElemental();
+			else failToRankUpElemental(elecost, elecostr);
 			doNext(elementaLvlUp);
 			eachMinuteCount(30);
 		}
 		private function rankUpElementalEther():void {
 			clearOutput();
-			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeEx) && (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= ((rankUpElementalElementalEnergyCost()*player.statusEffectv2(StatusEffects.SummonedElementalsEther))/4))) player.addStatusValue(StatusEffects.ElementalEnergyConduits,1,-((rankUpElementalElementalEnergyCost()*player.statusEffectv2(StatusEffects.SummonedElementalsEther))/4));
+			elecost += ((rankUpElementalElementalEnergyCost() * player.statusEffectv2(StatusEffects.SummonedElementalsEther)) / 4);
+			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeEx) && (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= elecost)) {
+				player.addStatusValue(StatusEffects.ElementalEnergyConduits, 1, -elecost);
+				elecostr = true;
+			}
 			else {
 				useMana(rankUpElementalManaCost() * player.statusEffectv2(StatusEffects.SummonedElementalsEther));
 				fatigue(rankUpElementalFatigueCost() * player.statusEffectv2(StatusEffects.SummonedElementalsEther));
@@ -2186,13 +2248,17 @@ public class CampMakeWinions extends BaseContent
 				outputText("The outraged elemental start by struggling but unable to defeat its binding let go and stand still awaiting your commands. Their duty fulfilled, the binding runes fades disappearing into the elemental until you call upon them again. \"<b>The ritual is complete and your elemental empowered as such!</b>\"");
 				player.addStatusValue(StatusEffects.SummonedElementalsEther, 2, 1);
 			}
-			else failToRankUpElemental();
+			else failToRankUpElemental(elecost, elecostr);
 			doNext(elementaLvlUp);
 			eachMinuteCount(30);
 		}
 		private function rankUpElementalPoison():void {
 			clearOutput();
-			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeEx) && (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= ((rankUpElementalElementalEnergyCost()*player.statusEffectv2(StatusEffects.SummonedElementalsPoison))/4))) player.addStatusValue(StatusEffects.ElementalEnergyConduits,1,-((rankUpElementalElementalEnergyCost()*player.statusEffectv2(StatusEffects.SummonedElementalsPoison))/4));
+			elecost += ((rankUpElementalElementalEnergyCost() * player.statusEffectv2(StatusEffects.SummonedElementalsPoison)) / 4);
+			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeEx) && (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= elecost)) {
+				player.addStatusValue(StatusEffects.ElementalEnergyConduits, 1, -elecost);
+				elecostr = true;
+			}
 			else {
 				useMana(rankUpElementalManaCost() * player.statusEffectv2(StatusEffects.SummonedElementalsPoison));
 				fatigue(rankUpElementalFatigueCost() * player.statusEffectv2(StatusEffects.SummonedElementalsPoison));
@@ -2207,13 +2273,17 @@ public class CampMakeWinions extends BaseContent
 				outputText("The outraged elemental start by struggling but unable to defeat its binding let go and stand still awaiting your commands. Their duty fulfilled, the binding runes fades disappearing into the elemental until you call upon them again. \"<b>The ritual is complete and your elemental empowered as such!</b>\"");
 				player.addStatusValue(StatusEffects.SummonedElementalsPoison, 2, 1);
 			}
-			else failToRankUpElemental();
+			else failToRankUpElemental(elecost, elecostr);
 			doNext(elementaLvlUp);
 			eachMinuteCount(30);
 		}
 		private function rankUpElementalPurity():void {
 			clearOutput();
-			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeEx) && (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= ((rankUpElementalElementalEnergyCost()*player.statusEffectv2(StatusEffects.SummonedElementalsPurity))/4))) player.addStatusValue(StatusEffects.ElementalEnergyConduits,1,-((rankUpElementalElementalEnergyCost()*player.statusEffectv2(StatusEffects.SummonedElementalsPurity))/4));
+			elecost += ((rankUpElementalElementalEnergyCost() * player.statusEffectv2(StatusEffects.SummonedElementalsPurity)) / 4);
+			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeEx) && (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= elecost)) {
+				player.addStatusValue(StatusEffects.ElementalEnergyConduits, 1, -elecost);
+				elecostr = true;
+			}
 			else {
 				useMana(rankUpElementalManaCost() * player.statusEffectv2(StatusEffects.SummonedElementalsPurity));
 				fatigue(rankUpElementalFatigueCost() * player.statusEffectv2(StatusEffects.SummonedElementalsPurity));
@@ -2228,13 +2298,17 @@ public class CampMakeWinions extends BaseContent
 				outputText("The outraged elemental start by struggling but unable to defeat its binding let go and stand still awaiting your commands. Their duty fulfilled, the binding runes fades disappearing into the elemental until you call upon them again. \"<b>The ritual is complete and your elemental empowered as such!</b>\"");
 				player.addStatusValue(StatusEffects.SummonedElementalsPurity, 2, 1);
 			}
-			else failToRankUpElemental();
+			else failToRankUpElemental(elecost, elecostr);
 			doNext(elementaLvlUp);
 			eachMinuteCount(30);
 		}
 		private function rankUpElementalCorruption():void {
 			clearOutput();
-			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeEx) && (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= ((rankUpElementalElementalEnergyCost()*player.statusEffectv2(StatusEffects.SummonedElementalsCorruption))/4))) player.addStatusValue(StatusEffects.ElementalEnergyConduits,1,-((rankUpElementalElementalEnergyCost()*player.statusEffectv2(StatusEffects.SummonedElementalsCorruption))/4));
+			elecost += ((rankUpElementalElementalEnergyCost() * player.statusEffectv2(StatusEffects.SummonedElementalsCorruption)) / 4);
+			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeEx) && (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= elecost)) {
+				player.addStatusValue(StatusEffects.ElementalEnergyConduits, 1, -elecost);
+				elecostr = true;
+			}
 			else {
 				useMana(rankUpElementalManaCost() * player.statusEffectv2(StatusEffects.SummonedElementalsCorruption));
 				fatigue(rankUpElementalFatigueCost() * player.statusEffectv2(StatusEffects.SummonedElementalsCorruption));
@@ -2249,7 +2323,7 @@ public class CampMakeWinions extends BaseContent
 				outputText("The outraged elemental start by struggling but unable to defeat its binding let go and stand still awaiting your commands. Their duty fulfilled, the binding runes fades disappearing into the elemental until you call upon them again. \"<b>The ritual is complete and your elemental empowered as such!</b>\"");
 				player.addStatusValue(StatusEffects.SummonedElementalsCorruption, 2, 1);
 			}
-			else failToRankUpElemental();
+			else failToRankUpElemental(elecost, elecostr);
 			doNext(elementaLvlUp);
 			eachMinuteCount(30);
 		}
@@ -2275,12 +2349,13 @@ public class CampMakeWinions extends BaseContent
 			if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 4) outputText("around the previous two ");
 			outputText("and add new directive and containment runes to the formula. Satisfied with the result you incant a final word of power.");
 		}
-		private function failToRankUpElemental():void {
+		private function failToRankUpElemental(elecost:Number, elecostr:Boolean):void {
 			outputText(" The enraged elemental struggle against its containment and to your horror find a breach beginning to grow to its full power and striking you in the process with a powerful barrage of energy.\n\n");
 			outputText("\"<i>You pitiful mortal... you though you could contain me forever! I’m going to make you regret ever summoning me by...</i>\"");
 			outputText("The elemental screams in dismay as your larger arcane circle unleash the full might of its last resort rune. Powerful discharge of energy strikes the wayward servants buying you enough time to rewrite its seal and force it back into servitude.\n\n");
 			outputText("\"<i>Someday you will attempt this ritual again and when you do I will..</i>\"");
 			outputText("Its final curse is silenced as its power are sealed again reducing it back to its former size. \"<b>Well this ritual is a failure you will have to try again when you achieved better control.</b>\"");
+			if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeSu) && elecostr) player.addStatusValue(StatusEffects.ElementalEnergyConduits,1,+(elecost*0.5));
 			HPChange(-(Math.round(player.HP * failToRankUpHPCost())), true);
 		}
 		private function failToRankUpHPCost():Number {
@@ -2314,6 +2389,7 @@ public class CampMakeWinions extends BaseContent
 				outputText("Your magic circle groans, your control runes warping. You watch in horror as one of your runes is pulled in between two of the three swirling vortexes...and is promptly torn to shreds. As if a switch had been pulled, the winds explode in a howling, screaming force, throwing you away from the circle. ");
 				outputText("You hit a rock back-first, and as you sit there, dazed, the figure of your epic air elemental lowers itself in front of you.\n\n");
 				outputText("\"<i>The storm seems to have failed to claim you. Good. Call upon the winds once more, once you have recovered.</i>\" Your epic air elemental fades from view, a light warm breeze blowing past your face.\n\n");
+				if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeSu)) player.addStatusValue(StatusEffects.ElementalEnergyConduits,1,+(player.statusEffectv2(StatusEffects.SummonedElementalsAirE) * 0.5 * rankUpElementalElementalEnergyCost()));
 				HPChange(-(Math.round(player.HP * failToRankUpHPCost())), true);
 			}
 			doNext(elementaLvlUpEpic);
@@ -2344,6 +2420,7 @@ public class CampMakeWinions extends BaseContent
 			else {
 				outputText("\"<i>Some sooner than most.</i>\" Your mountain caves inward, spikes of stone forming on the inside. You charge one side of your magic circle, and the thin spire of stone explodes outwards. Finally disrupted, the gemstones shatter, pelting you in painful shards. ");
 				outputText("As the dust settles, cuts on your [skin] gushing blood, your elemental frowns, shaking its head. \"<i>A disappointment, to be sure.</i>\"\n\n");
+				if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeSu)) player.addStatusValue(StatusEffects.ElementalEnergyConduits,1,+(player.statusEffectv2(StatusEffects.SummonedElementalsEarthE) * 0.5 * rankUpElementalElementalEnergyCost()));
 				HPChange(-(Math.round(player.HP * failToRankUpHPCost())), true);
 			}
 			doNext(elementaLvlUpEpic);
@@ -2375,6 +2452,7 @@ public class CampMakeWinions extends BaseContent
 			else {
 				outputText("The flames roar, and your elemental winces, vanishing from the circle. You watch in horror as the flames roar out of control, consuming your runes, turning them black before they vanish. The lines of your magic circle whine, barely containing the raging inferno. You wince, enduring the flames as best you can, but before it dies down, you’ve taken a lot of damage.\n\n");
 				outputText("\"<i>...And it will consume those who underestimate its power. Perhaps another time, [master].</i>\"\n\n");
+				if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeSu)) player.addStatusValue(StatusEffects.ElementalEnergyConduits,1,+(player.statusEffectv2(StatusEffects.SummonedElementalsFireE) * 0.5 * rankUpElementalElementalEnergyCost()));
 				HPChange(-(Math.round(player.HP * failToRankUpHPCost())), true);
 			}
 			doNext(elementaLvlUpEpic);
@@ -2404,6 +2482,7 @@ public class CampMakeWinions extends BaseContent
 				outputText("The moon-runes underneath you warp and groan, the white-whipped waters thrash harder. A single rune in the thrashing waves shudders...and shatters. This unleashes a wave of power that shatters your control runes. Stuck in the magic circle, you hunker down as the roaring water strikes you from every side. ");
 				outputText("For what feels like hours, you sit in your circle, enduring the waves you unleashed until your power runes are spent.\n\n");
 				outputText("\"<i>...and wash away those foolish enough to think they can weather the storm.</i>\" Your epic water elemental stands. \"<i>A pity, that more of my power cannot be unleashed in this realm.</i>\"\n\n");
+				if (player.hasPerk(PerkLib.ElementalConjurerKnowledgeSu)) player.addStatusValue(StatusEffects.ElementalEnergyConduits,1,+(player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) * 0.5 * rankUpElementalElementalEnergyCost()));
 				HPChange(-(Math.round(player.HP * failToRankUpHPCost())), true);
 			}
 			doNext(elementaLvlUpEpic);
