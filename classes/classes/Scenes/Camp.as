@@ -2244,9 +2244,10 @@ public class Camp extends NPCAwareContent{
 			else addButtonDisabled(2, "DotE (layer 3)", "You already have this merged perk.");
 		}
 		else addButtonDisabled(2, "DotE (layer 3)", "Req. Elemental Contract Rank 13 & Elements of Mareth: Advanced & Dao of the Elements (layer 2) perks.");
-		addButtonIfTrue(5, "E C M & B R (Ex)", mainPagePocketWatchElementalConjurerMindAndBodyResolveEx, "Req. Elemental Conjurer Mind and Body Resolve perks / Or you already got this merged perk.", player.hasPerk(PerkLib.ElementalConjurerMindAndBodyResolve));
-		addButtonIfTrue(6, "E C M & B D (Ex)", mainPagePocketWatchElementalConjurerMindAndBodyDedicationEx, "Req. Elemental Conjurer Mind and Body Resolve (Ex) & Elemental Conjurer Mind and Body Dedication perks / Or you already got this merged perk.", player.hasPerk(PerkLib.ElementalConjurerMindAndBodyResolveEx) && player.hasPerk(PerkLib.ElementalConjurerMindAndBodyDedication));
-		addButtonIfTrue(7, "E C M & B S (Ex)", mainPagePocketWatchElementalConjurerMindAndBodySacrificeEx, "Req. Elemental Conjurer Mind and Body Dedication (Ex) & Elemental Conjurer Mind and Body Sacrifice perks / Or you already got this merged perk.", player.hasPerk(PerkLib.ElementalConjurerMindAndBodyDedicationEx) && player.hasPerk(PerkLib.ElementalConjurerMindAndBodySacrifice));
+		addButtonIfTrue(5, "E C M & B R (Ex)", mainPagePocketWatchElementalConjurerMindAndBodyResolveEx, "Req. Elemental Conjurer Mind and Body Resolve perks / Or you already got this merged perk", player.hasPerk(PerkLib.ElementalConjurerMindAndBodyResolve));
+		addButtonIfTrue(6, "E C M & B D (Ex)", mainPagePocketWatchElementalConjurerMindAndBodyDedicationEx, "Req. Elemental Conjurer Mind and Body Resolve (Ex) & Elemental Conjurer Mind and Body Dedication perks / Or you already got this merged perk", player.hasPerk(PerkLib.ElementalConjurerMindAndBodyResolveEx) && player.hasPerk(PerkLib.ElementalConjurerMindAndBodyDedication));
+		addButtonIfTrue(7, "E C M & B S (Ex)", mainPagePocketWatchElementalConjurerMindAndBodySacrificeEx, "Req. Elemental Conjurer Mind and Body Dedication (Ex) & Elemental Conjurer Mind and Body Sacrifice perks / Or you already got this merged perk", player.hasPerk(PerkLib.ElementalConjurerMindAndBodyDedicationEx) && player.hasPerk(PerkLib.ElementalConjurerMindAndBodySacrifice));
+		addButtonIfTrue(10, "ChBSI (Ex)", mainPagePocketWatchChimericalBodySemiImprovedStageEx, "Req. Chimerical Body: Semi-Improved Stage perk / Or you already got this merged perk", player.hasPerk(PerkLib.ChimericalBodySemiImprovedStage));
 		addButton(14, "Back", campMiscActions);
 	}
 	private function mainPagePocketWatchDaoOfTheElementsPerkLayer1():void {
@@ -2292,7 +2293,7 @@ public class Camp extends NPCAwareContent{
 	}
 	private function mainPagePocketWatchElementalConjurerMindAndBodyResolveEx():void {
 		clearOutput();
-		outputText("Perks combined:Elemental Conjurer Mind and Body Resolve (Ex) perk attained.");
+		outputText("Perks combined: 'Elemental Conjurer Mind and Body Resolve (Ex)' perk attained.");
 		player.removePerk(PerkLib.ElementalConjurerResolve);
 		player.removePerk(PerkLib.ElementalConjurerMindAndBodyResolve);
 		player.createPerk(PerkLib.ElementalConjurerMindAndBodyResolveEx, 0, 0, 0, 0);
@@ -2302,7 +2303,7 @@ public class Camp extends NPCAwareContent{
 	}
 	private function mainPagePocketWatchElementalConjurerMindAndBodyDedicationEx():void {
 		clearOutput();
-		outputText("Perks combined:Elemental Conjurer Mind and Body Dedication (Ex) perk attained.");
+		outputText("Perks combined: 'Elemental Conjurer Mind and Body Dedication (Ex)' perk attained.");
 		player.removePerk(PerkLib.ElementalConjurerMindAndBodyResolveEx);
 		player.removePerk(PerkLib.ElementalConjurerDedication);
 		player.removePerk(PerkLib.ElementalConjurerMindAndBodyDedication);
@@ -2313,7 +2314,7 @@ public class Camp extends NPCAwareContent{
 	}
 	private function mainPagePocketWatchElementalConjurerMindAndBodySacrificeEx():void {
 		clearOutput();
-		outputText("Perks combined:Elemental Conjurer Mind and Body Sacrifice (Ex) perk attained.");
+		outputText("Perks combined: 'Elemental Conjurer Mind and Body Sacrifice (Ex)' perk attained.");
 		player.removePerk(PerkLib.ElementalConjurerMindAndBodyDedicationEx);
 		player.removePerk(PerkLib.ElementalConjurerSacrifice);
 		player.removePerk(PerkLib.ElementalConjurerMindAndBodySacrifice);
@@ -2321,11 +2322,38 @@ public class Camp extends NPCAwareContent{
 		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 2);
 		player.perkPoints++;
 		doNext(mainPagePocketWatch);
+	}
+	private function mainPagePocketWatchChimericalBodySemiImprovedStageEx():void {
+		clearOutput();
+		outputText("Perks combined: 'Chimerical Body: Semi-Improved (Ex) Stage' perk attained.");
+		player.removePerk(PerkLib.ChimericalBodyInitialStage);
+		player.removePerk(PerkLib.ChimericalBodySemiBasicStage);
+		player.removePerk(PerkLib.ChimericalBodyBasicStage);
+		player.removePerk(PerkLib.ChimericalBodySemiImprovedStage);
+		player.createPerk(PerkLib.ChimericalBodySemiImprovedStageEx, 0, 0, 0, 0);
+		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 3);
+		player.perkPoints += 2;
+		doNext(mainPagePocketWatch);
 	}/*
 	private function mainPagePocketWatch():void {
 		clearOutput();
-		outputText(".");
-		//player.createPerk();
+		outputText("Perks combined: .");
+		player.removePerk(PerkLib.);
+		player.createPerk(PerkLib.);
+		doNext(mainPagePocketWatch);
+	}
+	private function mainPagePocketWatch():void {
+		clearOutput();
+		outputText("Perks combined: .");
+		player.removePerk(PerkLib.);
+		player.createPerk(PerkLib.);
+		doNext(mainPagePocketWatch);
+	}
+	private function mainPagePocketWatch():void {
+		clearOutput();
+		outputText("Perks combined: .");
+		player.removePerk(PerkLib.);
+		player.createPerk(PerkLib.);
 		doNext(mainPagePocketWatch);
 	}*/
 

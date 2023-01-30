@@ -951,7 +951,7 @@ public class PerkLib
 				"Your chimerical body attained Semi-Peerless Stage. (negate up to 13 racial perk points negative effects // +1 to racial score when PC have third racial specific mutation perk)",
 				"You've chosen the 'Chimerical Body: Semi-Epic Stage' perk. Constant mutations raised your body adaptiveness beyond peerless level.");
 		public static const ChimericalBodySemiImprovedStage:PerkType = mk("Chimerical Body: Semi-Improved Stage", "Chimerical Body: Semi-Improved Stage",
-				"Your chimerical body attained Semi-Basic Stage. (negate up to 5 racial perk points negative effects // +1 to racial score when PC have first racial specific mutation perk)",
+				"Your chimerical body attained Semi-Improved Stage. (negate up to 5 racial perk points negative effects // +1 to racial score when PC have first racial specific mutation perk)",
 				"You've chosen the 'Chimerical Body: Semi-Improved Stage' perk. Constant mutations raised your body adaptiveness beyond basic level.");
 		public static const ChimericalBodySemiPeerlessStage:PerkType = mk("Chimerical Body: Semi-Peerless Stage", "Chimerical Body: Semi-Peerless Stage",
 				"Your chimerical body attained Semi-Peerless Stage. (negate up to 11 racial perk points negative effects)",
@@ -3483,6 +3483,8 @@ public class PerkLib
 				"Increase strength by a percentage based on milk or cum production up to 50% of total value.");
 		public static const BunnyEggs:PerkType = mk("Bunny Eggs", "Bunny Eggs",
 				"Laying eggs has become a normal part of your bunny-body's routine.");
+		public static const ChimericalBodySemiImprovedStageEx:PerkType = mk("Chimerical Body: Semi-Improved (Ex) Stage", "Chimerical Body: Semi-Improved (Ex) Stage",
+				"Your chimerical body attained Semi-Improved (Ex) Stage. (negate up to 18 racial perk points negative effects // +1 to racial score when PC have first racial specific mutation perk)").withBuffs({'str.mult':0.15,'tou.mult':0.15,'spe.mult':0.15,'int.mult':0.10,'wis.mult':0.10,'lib.mult':0.10,'sens':10});
 		public static const ColdAffinity:PerkType = mk("Cold Affinity", "Cold Affinity",
 				"You have high resistance to cold effects, immunity to the frozen condition, and mastery over ice abilities and magic. However, you are highly susceptible to fire.");
 		public static const ColdMastery:PerkType = mk("Cold Mastery", "Cold Mastery",
@@ -5868,9 +5870,11 @@ public class PerkLib
             ElementalBondUrges.requireOrPerks(ElementalContractRank2, DaoOfTheElements, 1)
                     .requireWis(75)
                     .requireLevel(12);
-            StrongElementalBond.requireOrPerks(ElementalContractRank3, DaoOfTheElements, 1)
-                    .requireWis(75)
-                    .requireLevel(12);
+            StrongElementalBond.requireWis(75)
+                    .requireLevel(12)
+					.requireCustomFunction(function (player:Player):Boolean {
+                        return (player.hasPerk(PerkLib.ElementalContractRank3) || (player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) >= 1)) && !player.hasPerk(PerkLib.StrongElementalBond);
+                    }, "Having Elemental Contract Rank 3 or Dao of the Elements (layer 1 or higher) perks");
             AmateurGunslinger.requirePerk(JobGunslinger)
 					.requireWis(35)
 					.requireTou(30)
@@ -5933,10 +5937,12 @@ public class PerkLib
 					.requireAnyPerk(ElementalConjurerDedication, ElementalConjurerMindAndBodyDedicationEx)
                     .requireWis(125)
                     .requireLevel(24);
-            StrongElementalBondEx.requireOrPerks(ElementalContractRank5, DaoOfTheElements, 2)
-					.requirePerk(StrongElementalBond)
+            StrongElementalBondEx.requirePerk(StrongElementalBond)
                     .requireWis(125)
-                    .requireLevel(24);
+                    .requireLevel(24)
+					.requireCustomFunction(function (player:Player):Boolean {
+                        return player.hasPerk(PerkLib.ElementalContractRank5) || (player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) >= 2);
+                    }, "Having Elemental Contract Rank 5 or Dao of the Elements (layer 2 or higher) perks");
             ElementalConjurerDedication.requireAnyPerk(ElementalConjurerMindAndBodyResolve, ElementalConjurerMindAndBodyResolveEx)
 					.requireNotThosePerks(ElementalConjurerMindAndBodyDedicationEx, ElementalConjurerMindAndBodySacrificeEx)
 					.requireOrPerks(ElementalContractRank4, DaoOfTheElements, 1)
@@ -5988,10 +5994,12 @@ public class PerkLib
             ElementalContractRank7.requirePerk(ElementalContractRank6)
                     .requireWis(175)
                     .requireLevel(36);
-            StrongElementalBondSu.requireOrPerks(ElementalContractRank7, DaoOfTheElements, 2)
-					.requirePerks(StrongElementalBondEx)
+            StrongElementalBondSu.requirePerks(StrongElementalBondEx)
                     .requireWis(175)
-                    .requireLevel(36);
+                    .requireLevel(36)
+					.requireCustomFunction(function (player:Player):Boolean {
+                        return player.hasPerk(PerkLib.ElementalContractRank7) || (player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) >= 2);
+                    }, "Having Elemental Contract Rank 7 or Dao of the Elements (layer 2 or higher) perks");
             FirstAttackElementalsSu.requireOrPerks(ElementalContractRank6, DaoOfTheElements, 2)
 					.requirePerks(FirstAttackElementalsEx)
                     .requireLevel(36);
@@ -6045,10 +6053,12 @@ public class PerkLib
                     .requireWis(250)
                     .requireLevel(54);
 			//This perk below (with others as well) for some reason stack overflows when using requirePerks.
-            StrongerElementalBond.requireOrPerks(ElementalContractRank10, DaoOfTheElements, 3)
-					.requirePerk(StrongElementalBondSu)
+            StrongerElementalBond.requirePerk(StrongElementalBondSu)
                     .requireWis(250)
-                    .requireLevel(54);
+                    .requireLevel(54)
+					.requireCustomFunction(function (player:Player):Boolean {
+                        return player.hasPerk(PerkLib.ElementalContractRank10) || (player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) >= 3);
+                    }, "Having Elemental Contract Rank 10 or Dao of the Elements (layer 3 or higher) perks");
             //Tier 10 Wisdom perks
             PerfectStrike.requireLevel(60)
                     .requirePerk(PrestigeJobSoulArtMaster);
@@ -7066,7 +7076,7 @@ public class PerkLib
 					return player.playerMinionsCount() >= 6;
 					}, "6+ pets/minions");
             //Tier 5
-            ChimericalBodyImprovedStage.requirePerk(ChimericalBodySemiImprovedStage)
+            ChimericalBodyImprovedStage.requireAnyPerk(ChimericalBodySemiImprovedStage, ChimericalBodySemiImprovedStageEx)
                     .requireLevel(30)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.internalChimeraScore() >= 18;

@@ -138,6 +138,11 @@ public class Race {
 				if (outputText != null) outputText("Chimerical Body: Semi-Improved Stage", bonus);
 				score += bonus;
 			}
+			if (body.player.hasPerk(PerkLib.ChimericalBodySemiImprovedStageEx)) {
+				bonus = score >= mutationThreshold && maxStage >= 1 ? +1 : 0;
+				if (outputText != null) outputText("Chimerical Body: Semi-Improved Stage (Ex)", bonus);
+				score += bonus;
+			}
 			if (body.player.hasPerk(PerkLib.ChimericalBodySemiSuperiorStage)) {
 				bonus = score >= mutationThreshold && maxStage >= 2 ? +1 : 0;
 				if (outputText != null) outputText("Chimerical Body: Semi-Superior Stage", bonus);

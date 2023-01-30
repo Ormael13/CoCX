@@ -735,17 +735,6 @@ public class PerkType extends BaseContent
 			});
 			return this;
 		}
-		public function requireNotThisPerk(perk:PerkType):PerkType {
-			requirements.push({
-				fn  : function (player:Player):Boolean {
-					return player.hasPerk(perk);
-				},
-				text: perk.name(),
-				type: "noperk",
-				perk: perk
-			});
-			return this;
-		}
 
 		public function withBuffs(buffs:Object, showText:Boolean = true):PerkType {
 			this.buffs = buffs;

@@ -69,11 +69,14 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Elemental Conjurer Mind and Body Resolve (Ex). Gained by use of the Pocket Watch when req. are meet. Effects of both combined perks + 5% bonus to tou multi.\n");
 			outputText("-New event perk: Elemental Conjurer Mind and Body Dedication (Ex). Gained by use of the Pocket Watch when req. are meet. Effects of all three combined perks + 5% bonus to spe/wis multi.\n");
 			outputText("-New event perk: Elemental Conjurer Mind and Body Sacrifice (Ex). Gained by use of the Pocket Watch when req. are meet. Effects of all three combined perks + 5% bonus to str multi, +10% bonus to int multi, +15% bonus to wis multi.\n");
+			outputText("-New perk: Azazel Purifier. Counterpart to the Imp/Demon Soul Eater perk, kill demons to absorb their power as your own. (EragonX)\n");
+			outputText("-New Neko gear items have appeared in the show, focused on evasiveness. (EragonX)\n");
 			outputText("-New material: Large Elemental Shard. Cost 3 gems. Could drop from defeated elementals. It can be used to rank up summoned elemental. (Store 3 times more elemental energy than normal Elemental Shard)\n");
 			outputText("-New material: Elemental Crystal. Cost 10 gems. Could drop from defeated elementals of higher rank ((sub)bosses, named ones). It can be used to rank up summoned elemental. (Store 10 times more elemental energy than normal Elemental Shard)\n");
 			outputText("-New material: Elemental Core. Cost 20 gems. Could drop from defeated elementals of higher rank ((sub)bosses, named ones). It can be used to rank up summoned elemental. (Store 2 times more elemental energy than Elemental Crystal)\n");
 			outputText("-New race: Azazel - gained by following new path for Alvina - it's smth akin to purified devil tf with abilites to be not so corrupted and etc. (written by Liadri and coded by EragonX). Azazelkin/Azazel/True Azazel racial bonuses (11/16/29 race points): ");
 			outputText("+55/75/100% top str multi, -20/25/30% to spe multi, +80/130/250% to int multi, +65/100/150% ot wis multi, +90/170/220 to max lust, +15/40/50 to sens\n");
+			outputText("-New encounter in the High mountains, the Nekobake Inn. (EragonX)\n");
 			outputText("-Green Covenant req. to be Wood Elf or one of Plant races to cast. It also becomes magical special insted of a spell.\n");
 			outputText("-Job: Gunslinger effect of +20% to range physical attacks multiplier changed into +10% to range physical/firearms attacks multiplier.\n");
 			outputText("-Firearms dmg would be now multiplied by firearms attacks multiplier which is range physical multiply + seperate bonuses for all firearms only.\n");
@@ -104,8 +107,6 @@ public class Changelog extends BaseContent
 			outputText("-Add the Project Nightwalker & Flamespreader encounters after 3rd story dungeon as randomn encouters outside dungeon. (EragonX)\n");
 			outputText("-Kiha combat companion! (EragonX)\n");
 			outputText("-Bee race req. for vagina replaced for specificaly req. bee vagina.\n");
-			outputText("-New encounter in the High mountains, the Nekobake Inn. (EragonX)\n");
-			outputText("-New Neko gear items have appeared in the show, focused on evasiveness. (EragonX)\n");
 			outputText("-Cheshire cat bonuses now have two tiers trickster/cheshire cat (13/20): +30/100% to int multi, +180/260% to spe multi, +25/60 sens\n");
 			outputText("-Madmen knowledge can be bought in Dinah shop too now under 'Misc' tab but be warned it's not the cheapest item in her offer....even insanity have it price a BIG price that amkes merchant selling bit of it happy ;) And items she had on main shop display been all moved to subtab named 'Misc'.\n");
 			outputText("-Base dmg of crossbow/firearms atk get very rudimentary scaling of stats. Crossbows getting added speed core/trained value parts * 2 added and firearms spe/int/wis core/trained values added. Job: Gunslinger would multiply base dmg not add 2x weapon atk.\n");
@@ -142,7 +143,6 @@ public class Changelog extends BaseContent
 			outputText("-Remove tail from Hinezumi Leg Metamorph. Fix hourly updates and hunger bar toggling. (EragonX)\n");
 			outputText("-Regeneration cap increase based on which NG+ PC is has been removed.\n");
 			outputText("-Unleash perm tf true mutations to the wild! Perm tf races can no longer buy mutations from Evangeline apart from their race, but will get bonus stats from the race specific mutaions and auto acquire them depending on the prerequisites. (EragonX)\n");
-			outputText("-Azazel Purifier perk. Counterpart to the Imp/Demon Soul Eater perk, kill demons to absorb their power as your own. (EragonX)\n");
 			outputText("-QueenOfTheFairies perk: Gain spellpower as a fairy for every corrupted glade destroyed or demon killed in the forest. (EragonX)\n");
 			outputText("-Fae Arcane Bloodstream (Final Form) effect: When using an ability with random effects the spell now attempts to activate each effect twice. (EragonX)\n");
 			outputText("-Ant race stat bonuses and min score req. been increased slightly.\n");
@@ -151,7 +151,7 @@ public class Changelog extends BaseContent
 			outputText("-Offering of Chilli Peepers would now have... 'pity system' to make sure ~10% chance to get e.ichor is kept true.\n");
 			outputText("-New melee weapon (by Ormael): Blizzard Claws - one of possible Yuki Onna drops OR from Yu shop. Cost 4000 gems. Base atk is 0, 10% to cause bleed and deals ice damage. Causes constant health degeneration 2% to anyone without Cold Affinity wearing it. A yuki onna also gains a periodic 1% health regeneration.\n");
 			outputText("-Hooked Gauntlets could be bought now at Sean shop.\n");
-			outputText("-\n");
+			outputText("-New event perk: Chimerical Body: Semi-Improved (Ex) Stage. Gained by use of the Pocket Watch when req. are meet. Effects of all four combined perks + 5% bonus to str/tou/spe/lib multi, +5 bonus to sens, negate up to 4 racial perk points negative effects.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -180,7 +180,7 @@ public class Changelog extends BaseContent
 			//outputText("-New perk for enemies: Elite type enemy. Bonuses for are: Diehard effect of 2,5% of max HP + 750 HP * NG tier, OverMax HP effect of 5% magnitude.\n");
 			//outputText("-New perk for enemies: Champion type enemy. Bonuses for are: Diehard effect of 5% of max HP + 1,500 HP * NG tier, OverMax HP effect of 10% magnitude.\n");
 			outputText("-Fixed bugs: Bard not affected by cap of prestige jobs, last one checks for holli's kill/survive moved into less troublesome spot, Benoit/Oswald taking full price for simple backpack size upgade, Fasting Pill been unaccessable when hunger mode is active, Vegetal Affinity increasing fire resistance, elemental throwing knives been never usable, Elemental race tier bonuses & display on race page, ");
-			outputText("Buy button for Francisca throwing axe at basilisk shop been corectly labeled, Lily name revealed before she actualy tell her name in scene, incorrectly labeled Whitefire swiftcast button, returning from multishot menu leading to melee options instead of range ones\n");
+			outputText("Buy button for Francisca throwing axe at basilisk shop been corectly labeled, Lily name revealed before she actualy tell her name in scene, incorrectly labeled Whitefire swiftcast button, returning from multishot menu leading to melee options instead of range ones, Sky Poison Pearl not allowing to poison/venom options for weapons\n");
 			/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");

@@ -3751,6 +3751,8 @@ use namespace CoC;
 				internalChimeraRatingCounter -= 14;//	104-r99	119	135	152	180	199	219(potem legendary/mythical stages?)
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				internalChimeraRatingCounter -= 20;
+			if (hasPerk(PerkLib.ChimericalBodySemiImprovedStageEx))//+1 racials
+				internalChimeraRatingCounter -= 18;
 			if (jewelryName == "Ezekiel's Signet") internalChimeraRatingCounter -= 1;
 			if (jewelryName2 == "Ezekiel's Signet") internalChimeraRatingCounter -= 1;
 			if (jewelryName3 == "Ezekiel's Signet") internalChimeraRatingCounter -= 1;
