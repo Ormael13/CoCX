@@ -80,6 +80,7 @@ public class Changelog extends BaseContent
 			outputText("-Green Covenant req. to be Wood Elf or one of Plant races to cast. It also becomes magical special insted of a spell.\n");
 			outputText("-Job: Gunslinger effect of +20% to range physical attacks multiplier changed into +10% to range physical/firearms attacks multiplier.\n");
 			outputText("-Firearms dmg would be now multiplied by firearms attacks multiplier which is range physical multiply + seperate bonuses for all firearms only.\n");
+			outputText("-Alchemical Cartridge, Church of the gun, Explosive cartridge, Tainted Magazine, Silver for Monsters, Named Bullet perk effects of +X% to range physical attacks multiplier changed into +X% to firearms attacks multiplier.\n");
 			outputText("-Electra now acknowledges that more then just Raiju can volt transfer. Tbird can get supercharged too. More accounting for Kirin existing. Added centaur support to Supercharged scene, Horsecock now become big starting higher then 25 inch seeing as a normal horse cock is 20 inch. (Liadri)\n");
 			outputText("-Loppe can start training at Uma's shop. Loppe can remove her contraceptive spell if training high enough. Can meet Loppe's 'dad' in the plains for a few new scenes. (EragonX)\n");
 			outputText("-Make Siegweird's quest take Alvina's purification into account. (EragonX)\n");
@@ -88,12 +89,11 @@ public class Changelog extends BaseContent
 			outputText("-Moved IMDB detail switch to QoL info. Fixed USS QoL switch not saving in global data. (Svalkash)\n");
 			outputText("-Fixed being unable to aquire the achievements and duel scythes for beating Alvina if you are level 185. (Aduro)\n");
 			//outputText("-Dam can be upgraded 2 times (up to 3rd tier of wood dam) and Fishery once (to allow 2 npc's working at it - it also gonna increase each worker fish production by 20%)\n");
-			outputText("-New tier 7 wisdom lvl-up perk: Elemental Conjurer Knowledge (Su). Req. Elemental Conjurer Knowledge (Ex) and Elemental Contract Rank 6 perks, 300+ wis. Effect: Allows you to convert soulforce into elemental energy. When ranking up an elemental fail only 50% of used elemental energy is lost.\n");
+			outputText("-New tier 7 wisdom lvl-up perk: Elemental Conjurer Knowledge (Su). Req. Elemental Conjurer Knowledge (Ex) and Elemental Contract Rank 6 perks, 200+ wis. Effect: Allows you to convert soulforce into elemental energy. Amount of lost elemental energy when ranking up an elemental fails would by decreased by 50%.\n");
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			outputText("-2 new achievments.\n");
-			outputText("-Alchemical Cartridge, Church of the gun, Explosive cartridge, Tainted Magazine, Silver for Monsters, Named Bullet perk effects of +X% to range physical attacks multiplier changed into +X% to firearms attacks multiplier.\n");
 			outputText("-New tier 2 misc lvl-up perk: Skilled Fighter (Ex). Req. Skilled Fighter perk and 35+ str/tou/spe. Effect: When melee atk crit chance exceed 100% crit dmg is x2 and when exceed 200% crit dmg is x3. (+15% melee physical attacks multiplier and then adds another 50% (total of 100%) on top of final result)\n");
 			outputText("-New tier 2 misc lvl-up perk: Skilled Ranger (Ex). Req. Skilled Ranger perk and 35+ str/tou/spe. Effect: When range atk crit chance exceed 100% crit dmg is x2 and when exceed 200% crit dmg is x3. (+15% range physical attacks multiplier and then adds another 50% (total of 100%) on top of final result)\n");
 			outputText("-New tier 3 misc lvl-up perk: Skilled Gunslinger (Ex). Req. Skilled Gunslinger perk, lvl 15+ and 40+ str/tou/spe. Effect: When firearms atk crit chance exceed 100% crit dmg is x2 and when exceed 200% crit dmg is x3. (+20% firearms attacks multiplier and then adds another 50% (total of 100%) on top of final result)\n");
@@ -104,7 +104,7 @@ public class Changelog extends BaseContent
 			outputText("-Flurry of Blows no longer req. Combo Master perk and physical soulskills hits trice not twice.\n");
 			outputText("-Rebalance bleed damage, max 5% hp per turn. Cleanup archery text spam. Improved pregnancy stats. Quasi-phoenix player pregnancy. (EragonX)\n");
 			outputText("-The great reckoning as arrived all bleed ability now scales of your attack damage instead of a set percentage of monster HP (Liadri)\n");
-			outputText("-Add the Project Nightwalker & Flamespreader encounters after 3rd story dungeon as randomn encouters outside dungeon. (EragonX)\n");
+			//outputText("-Add the Project Nightwalker & Flamespreader encounters after 3rd story dungeon as randomn encouters outside dungeon. (EragonX)\n");
 			outputText("-Kiha combat companion! (EragonX)\n");
 			outputText("-Bee race req. for vagina replaced for specificaly req. bee vagina.\n");
 			outputText("-Cheshire cat bonuses now have two tiers trickster/cheshire cat (13/20): +30/100% to int multi, +180/260% to spe multi, +25/60 sens\n");
@@ -124,8 +124,8 @@ public class Changelog extends BaseContent
 			outputText("-Bugfixes for Brooke anal, Loppe preg, Atlach race, vagina MM, Wonder fruit, Succubi draft rando fix, Fix poultice healing overflow (EragonX)\n");
 			outputText("-Added to main story dungeons clean reward additonal thing - 1 super perk point ;)\n");
 			outputText("-All area encounter tables now converted to new style. (EragonX)\n");
-			outputText("-minor color addition to elf and viewer fix. Imp now favors Royal Purple instead of ligbt. (Liadri)\n");
-			outputText("-bugfixes for Enigmanium, bee honey without wings, imp tome with TFimmunity, mino scene as Cerb, werewolf pounce text, Wood Elf dress force equip, make Imp Tome unique again (EragonX)\n");
+			outputText("-Minor color addition to elf and viewer fix. Imp now favors Royal Purple instead of ligbt. (Liadri)\n");
+			outputText("-Bugfixes for Enigmanium, bee honey without wings, imp tome with TFimmunity, mino scene as Cerb, werewolf pounce text, Wood Elf dress force equip, make Imp Tome unique again (EragonX)\n");
 			outputText("-Hidden Job perks can't be accuired now before lvl 10 (first one is possible to pick at lvl 20 and then each 10 lvl's)\n");
 			outputText("-Add better tooltip to GenMem Perm button during ascension (EragonX)\n");
 			outputText("-Jabberwocky scale won't affect dragonne pc's (it get almost non functional race atm) and dragon score req. increased from 10+ to 16+ points (new lowest race score for bonuses in dragon score). And after more jabby unique bodyparts/perks item would once again make change into jabberwocky in one use of the item.\n");
@@ -152,8 +152,8 @@ public class Changelog extends BaseContent
 			outputText("-New melee weapon (by Ormael): Blizzard Claws - one of possible Yuki Onna drops OR from Yu shop. Cost 4000 gems. Base atk is 0, 10% to cause bleed and deals ice damage. Causes constant health degeneration 2% to anyone without Cold Affinity wearing it. A yuki onna also gains a periodic 1% health regeneration.\n");
 			outputText("-Hooked Gauntlets could be bought now at Sean shop.\n");
 			outputText("-New event perk: Chimerical Body: Semi-Improved (Ex) Stage. Gained by use of the Pocket Watch when req. are meet. Effects of all four combined perks + 5% bonus to str/tou/spe/lib multi, +5 bonus to sens, negate up to 4 racial perk points negative effects.\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Moga Hen have two more exchange options for gems > spirit stones and spirit stones > gems.\n");
+			outputText("-Mana cost of arcane circuits upgrades doubled. Amount of possible to store elemental energy increased by 50%.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

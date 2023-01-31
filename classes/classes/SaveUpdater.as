@@ -2057,11 +2057,14 @@ public class SaveUpdater extends NPCAwareContent {
 					player.createStatusEffect(StatusEffects.ArcaneCircle, acv, 0, 0, 0);
 				}
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.050;
-			}/*
-			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.051) {
-				
-				flags[kFLAGS.MOD_SAVE_VERSION] = 36.051;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.051) {
+				if (player.hasStatusEffect(StatusEffects.ElementalEnergyConduits)) {
+					var capacityIncrease:Number = player.statusEffectv2(StatusEffects.ElementalEnergyConduits) * 0.5;
+					player.addStatusValue(StatusEffects.ElementalEnergyConduits, 2, capacityIncrease);
+				}
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.051;
+			}/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.052) {
 				
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.052;

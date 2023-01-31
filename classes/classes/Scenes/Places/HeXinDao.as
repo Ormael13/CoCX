@@ -409,13 +409,17 @@ public class HeXinDao extends BaseContent
         if (player.gems >= 20) addButton(0, "20 Gems", exchange,1).hint("Exchange 20 gems for 1 spirit stone.");
         if (player.gems >= 100) addButton(1, "100 Gems", exchange,5).hint("Exchange 100 gems for 5 spirit stones.");
         if (player.gems >= 200) addButton(2, "200 Gems", exchange,10).hint("Exchange 200 gems for 10 spirit stones.");
-        if (player.gems >= 1000) addButton(3, "1000 Gems", exchange,50).hint("Exchange 1000 gems for 50 spirit stones.");
-        if (player.gems >= 2000) addButton(4, "2000 Gems", exchange, 100).hint("Exchange 2000 gems for 100 spirit stones.");
+        if (player.gems >= 1000) addButton(3, "1000 Gems", exchange,50).hint("Exchange 1,000 gems for 50 spirit stones.");
+        if (player.gems >= 2000) addButton(4, "2000 Gems", exchange,100).hint("Exchange 2,000 gems for 100 spirit stones.");
         if (flags[kFLAGS.SPIRIT_STONES] >= 1) addButton(5, "1 SS", exchange,1,false).hint("Exchange 1 spirit stone for 5 gems.");
         if (flags[kFLAGS.SPIRIT_STONES] >= 5) addButton(6, "5 SS", exchange,5,false).hint("Exchange 5 spirit stones for 25 gems.");
         if (flags[kFLAGS.SPIRIT_STONES] >= 10) addButton(7, "10 SS", exchange,10,false).hint("Exchange 10 spirit stones for 50 gems.");
         if (flags[kFLAGS.SPIRIT_STONES] >= 50) addButton(8, "50 SS", exchange,50,false).hint("Exchange 50 spirit stones for 250 gems.");
         if (flags[kFLAGS.SPIRIT_STONES] >= 100) addButton(9, "100 SS", exchange,100,false).hint("Exchange 100 spirit stones for 500 gems.");
+        if (player.gems >= 10000) addButton(10, "10000 Gems", exchange,500).hint("Exchange 10,000 gems for 500 spirit stones.");
+        if (player.gems >= 20000) addButton(11, "20000 Gems", exchange,1000).hint("Exchange 20,000 gems for 1,000 spirit stones.");
+        if (flags[kFLAGS.SPIRIT_STONES] >= 500) addButton(12, "500 SS", exchange,500,false).hint("Exchange 500 spirit stones for 2,500 gems.");
+        if (flags[kFLAGS.SPIRIT_STONES] >= 1000) addButton(13, "1000 SS", exchange,1000,false).hint("Exchange 1,000 spirit stones for 5,000 gems.");
         addButton(14, "Back", mogahenmerchant);
     }
     private function exchange(value:int,toStones:Boolean=true):void{
@@ -427,6 +431,8 @@ public class HeXinDao extends BaseContent
                 case 10:outputText("He finishes the transaction, giving you ten spirit stones.");break;
                 case 50:outputText("With slight haste he finishes the transaction, giving you fifty spirit stones.");break;
                 case 100:outputText("With haste, he finishes the transaction, giving you a hundred spirit stones.");break;
+                case 500:outputText("With great haste, he finishes the transaction, giving you five hundred spirit stones.");break;
+                case 1000:outputText("With utter haste, he finishes the transaction, giving you a thousand spirit stones.");break;
             }
             player.gems -= 20*value;
             flags[kFLAGS.SPIRIT_STONES]+=value;
@@ -436,7 +442,9 @@ public class HeXinDao extends BaseContent
                 case 5:outputText("You hand over five stones to the merchant. With barely noticable mumbling about the customer being stingy he slowly counts out and hands over your gems.");break;
                 case 10:outputText("You hand over ten stones to the merchant. He finishes the transaction without fuss, giving you your gems.");break;
                 case 50:outputText("You hand over fifty stones to the merchant. He finishes the transaction a bit faster than normal, giving you your gems.");break;
-                case 100:outputText("You hand over a hundred stones to the merchant. With a smile on his face, he swiftly counts up your gems, handing them over.");break;
+                case 100:outputText("You hand over a hundred stones to the merchant. He finishes the transaction faster than normal, giving you your gems.");break;
+                case 500:outputText("You hand over five hundred stones to the merchant. With a smile on his face, he swiftly counts up your gems, handing them over.");break;
+                case 1000:outputText("You hand over a thousand stones to the merchant. With a large smile on his face, he swiftly counts up your gems, handing them over.");break;
             }
             player.gems += 5*value;
             flags[kFLAGS.SPIRIT_STONES]-=value;
@@ -1539,4 +1547,4 @@ public function soularena():void {
         doNext(camp.returnToCampUseOneHour);
     }
 }
-}
+}
