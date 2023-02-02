@@ -2805,17 +2805,28 @@ public class MagicSpecials extends BaseCombatContent {
 		else enemyAI();
 	}
 
-	//player gains hellfire perk.
+//player gains hellfire perk.
 //Hellfire deals physical damage to completely pure foes,
 //lust damage to completely corrupt foes, and a mix for those in between.  Its power is based on the PC's corruption and level.  Appearance is slightly changed to mention that the PC's eyes and mouth occasionally show flicks of fire from within them, text could possibly vary based on corruption.
-	public function hellFire():void {
+	public function hellFire():void
+	{
 		if (monster.cor < 50) flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		else flags[kFLAGS.LAST_ATTACK_TYPE] = 3;
 		clearOutput();
 		fatigue(20, USEFATG_MAGIC_NOBM);
-		var damage:Number = (player.level * 8 + rand(10) + player.inte / 2 + player.wis / 2 + player.cor / 5);
+		/* var damage:Number = (player.level * 8 + rand(10) + player.inte / 2 + player.wis / 2 + player.cor / 5);
 		damage = calcInfernoMod(damage, true);
 		damage *= 4;
+		 */
+		var damage:Number = combat.scalingBonusStrength(true) + combat.scalingBonusLibido(true);
+		var lustDamagePercent:Number = monster.cor / 100;
+		var lustDamage:Number;
+		var fireDamage:Number;
+		damage *= combat.pcScalingBonusCorruption(player.cor);
+		damage *= spellModBlack();
+		lustDamage = combat.calculateBasicTeaseDamage(damage * lustDamagePercent);
+		fireDamage = calcInfernoMod(damage * (1 - lustDamagePercent), true);
+
 		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
@@ -2829,11 +2840,14 @@ public class MagicSpecials extends BaseCombatContent {
 			//Attack gains burn DoT for 2-3 turns.
 			outputText("You let loose a roiling cone of flames that wash over the horde of demons like a tidal wave, scorching at their tainted flesh with vigor unlike anything you've seen before. Screams of terror as much as, maybe more than, pain fill the air as the mass of corrupted bodies try desperately to escape from you! Though more demons pile in over the affected front ranks, you've certainly put the fear of your magic into them!");
 			monster.createStatusEffect(StatusEffects.OnFire, 2 + rand(2), 0, 0, 0);
-			damage = int(player.level * 8 + rand(10) + player.cor / 5);
+			/*damage = int(player.level * 8 + rand(10) + player.cor / 5);
 			damage *= 4;
 			damage *= 1.75;
-			outputText(" (" + damage + ")");
-			monster.HP -= damage;
+			 */
+			doFireDamage(1, true, true);
+			monster.takeLustDamage(1, true);
+			//outputText(" (" + damage + ")");
+			//monster.HP -= damage;
 			if(monster.HP <= monster.minHP()) {
 				doNext(endHpVictory);
 			}
@@ -2863,15 +2877,43 @@ public class MagicSpecials extends BaseCombatContent {
 			return;
 		}
 		else if (valaReflect(damage, "hellfire", player.takeLustDamage, true)) {}
-		else {
-			if(monster.inte < 10) {
+		else
+		{
+			if(monster.lustVuln > 0)
+			{
+				if(monster.cor >= 90)
+				{
+					outputText("  Your foe cries out in surprise and then gives a sensual moan as the flames of your passion surround them and scorches their body with unnatural lust.");
+					doFireDamage(fireDamage, true, true);
+					monster.takeLustDamage(lustDamage, true);
+				}
+				else if(monster.cor <= 10)
+				{
+					outputText("  Your foe lets out a shriek as their form is engulfed in the blistering flames, leaving them slightly aroused.");
+					doFireDamage(fireDamage, true, true);
+					monster.takeLustDamage(lustDamage, true);
+				}
+				else
+				{
+					outputText("  Your foe lets out a shriek as their form is engulfed in the blistering flames searing their body while filling it with an unnatural lust.");
+					doFireDamage(fireDamage, true, true);
+					monster.takeLustDamage(lustDamage, true);
+				}
+			}
+			else
+			{
+				outputText("  Your foe lets out a shriek as their form is engulfed in the blistering flames, charring their body");
+				doFireDamage(fireDamage, true, true);
+			}
+			/* if(monster.inte < 10) {
 				outputText("  Your foe lets out a shriek as their form is engulfed in the blistering flames.");
 				damage = Math.round(damage * combat.fireDamageBoostedByDao());
 				damage = int(damage);
 				doFireDamage(damage, true, true);
 				outputText("<b>(<font color=\"#800000\">+" + damage + "</font>)</b>\n");
 			}
-			else {
+			else
+			{
 				if(monster.lustVuln > 0) {
 					outputText("  Your foe cries out in surprise and then gives a sensual moan as the flames of your passion surround them and fill their body with unnatural lust.");
 					if (player.hasPerk(PerkLib.EromancyExpert)) damage *= 1.5;
@@ -2885,6 +2927,7 @@ public class MagicSpecials extends BaseCombatContent {
 					outputText("  The corrupted fire doesn't seem to have effect on [themonster]!\n");
 				}
 			}
+		*/
 		}
 		outputText("\n");
 		combat.heroBaneProc(damage);
