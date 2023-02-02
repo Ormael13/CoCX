@@ -15331,6 +15331,21 @@ public function corruptionScalingDA():Number {
     else corruptionScalingDA *= 3;
     return corruptionScalingDA;
 }
+/* Can provide a scaling or additive bonus to damage depending on usage. Uses player.cor in function to assign scaling.
+Uses Damage *= pcScalingBonusCorruption(player.cor); for scaling.
+ */
+public function pcScalingBonusCorruption(corStat:int):Number
+{
+    var scalingNum:Number;
+    if (corStat == 100) scalingNum = 1.5;
+    else if (corStat >= 85) scalingNum = 1.35;
+    else if (corStat >= 70) scalingNum = 1.2;
+    else if (corStat >= 55) scalingNum = 1;
+    else if (corStat >= 40) scalingNum = 0.75;
+    else if (corStat >= 25) scalingNum = 0.5;
+    else scalingNum = 0.1;
+    return scalingNum;
+}
 
 public function oniRampagePowerMulti():Number {
     var oniRampagePowerMulti:Number = 3;
