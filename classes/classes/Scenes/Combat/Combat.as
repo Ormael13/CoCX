@@ -4868,7 +4868,6 @@ public class Combat extends BaseContent {
                 }
             }
             outputText(".");
-
             if (player.hasPerk(PerkLib.HellfireCoat))
                 ExtraNaturalWeaponAttack(biteMultiplier, "fire");
             ExtraNaturalWeaponAttack(biteMultiplier);
@@ -5005,7 +5004,6 @@ public class Combat extends BaseContent {
             else{
                 outputText("You rear up and claw at your opponent with your forepaws.");
             }
-
             if (player.hasPerk(PerkLib.HellfireCoat)) {
                 ExtraNaturalWeaponAttack(1, "fire");
                 ExtraNaturalWeaponAttack(1, "fire");
@@ -5018,7 +5016,6 @@ public class Combat extends BaseContent {
         //POUNCING FOR THE KILL
         if (player.canPounce()) {
             outputText("You leap up at [themonster] raking [monster him] with your hind claws twice.");
-
             if (player.hasPerk(PerkLib.HellfireCoat)) {
                 ExtraNaturalWeaponAttack(1, "fire");
                 ExtraNaturalWeaponAttack(1, "fire");
@@ -15323,7 +15320,7 @@ public function purityScalingDA():Number {
     return purityScalingDA;
 }
 public function corruptionScalingDA():Number {
-    var corruptionScalingDA:Number = 1;
+	var corruptionScalingDA:Number = 1;
     if (monster.cor >= 66) corruptionScalingDA *= 0.6;
     else if (monster.cor >= 50) corruptionScalingDA *= 1.2;
     else if (monster.cor >= 25) corruptionScalingDA *= 1.8;
@@ -15334,8 +15331,7 @@ public function corruptionScalingDA():Number {
 /* Can provide a scaling or additive bonus to damage depending on usage. Uses player.cor in function to assign scaling.
 Uses Damage *= pcScalingBonusCorruption(player.cor); for scaling.
  */
-public function pcScalingBonusCorruption(corStat:int):Number
-{
+public function pcScalingBonusCorruption(corStat:int):Number{
     var scalingNum:Number;
     if (corStat == 100) scalingNum = 1.5;
     else if (corStat >= 85) scalingNum = 1.35;

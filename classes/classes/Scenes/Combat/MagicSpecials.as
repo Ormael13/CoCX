@@ -2816,8 +2816,7 @@ public class MagicSpecials extends BaseCombatContent {
 		fatigue(20, USEFATG_MAGIC_NOBM);
 		/* var damage:Number = (player.level * 8 + rand(10) + player.inte / 2 + player.wis / 2 + player.cor / 5);
 		damage = calcInfernoMod(damage, true);
-		damage *= 4;
-		 */
+		damage *= 4;*/
 		var damage:Number = combat.scalingBonusStrength(true) + combat.scalingBonusLibido(true);
 		var lustDamagePercent:Number = monster.cor / 100;
 		var lustDamage:Number;
@@ -2826,7 +2825,6 @@ public class MagicSpecials extends BaseCombatContent {
 		damage *= spellModBlack();
 		lustDamage = combat.calculateBasicTeaseDamage(damage * lustDamagePercent);
 		fireDamage = calcInfernoMod(damage * (1 - lustDamagePercent), true);
-
 		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
 		{
@@ -2834,7 +2832,6 @@ public class MagicSpecials extends BaseCombatContent {
 			enemyAI();
 			return;
 		}
-
 		else if (monster is Lethice && (monster as Lethice).fightPhase == 2)
 		{
 			//Attack gains burn DoT for 2-3 turns.
@@ -2842,8 +2839,7 @@ public class MagicSpecials extends BaseCombatContent {
 			monster.createStatusEffect(StatusEffects.OnFire, 2 + rand(2), 0, 0, 0);
 			/*damage = int(player.level * 8 + rand(10) + player.cor / 5);
 			damage *= 4;
-			damage *= 1.75;
-			 */
+			damage *= 1.75;*/
 			doFireDamage(1, true, true);
 			monster.takeLustDamage(1, true);
 			//outputText(" (" + damage + ")");
@@ -2857,9 +2853,7 @@ public class MagicSpecials extends BaseCombatContent {
 			else enemyAI();
 			return;
 		}
-
 		if(!player.hasStatusEffect(StatusEffects.GooArmorSilence)) outputText("You take in a deep breath and unleash a wave of corrupt red flames from deep within.");
-
 		if(player.hasStatusEffect(StatusEffects.WebSilence)) {
 			outputText("  <b>The fire burns through the webs blocking your mouth!</b>");
 			player.removeStatusEffect(StatusEffects.WebSilence);

@@ -89,7 +89,7 @@ public class Changelog extends BaseContent
 			outputText("-Moved IMDB detail switch to QoL info. Fixed USS QoL switch not saving in global data. (Svalkash)\n");
 			outputText("-Fixed being unable to aquire the achievements and duel scythes for beating Alvina if you are level 185. (Aduro)\n");
 			//outputText("-Dam can be upgraded 2 times (up to 3rd tier of wood dam) and Fishery once (to allow 2 npc's working at it - it also gonna increase each worker fish production by 20%)\n");
-			outputText("-New tier 7 wisdom lvl-up perk: Elemental Conjurer Knowledge (Su). Req. Elemental Conjurer Knowledge (Ex) and Elemental Contract Rank 6 perks, 200+ wis. Effect: Allows you to convert soulforce into elemental energy. Amount of lost elemental energy when ranking up an elemental fails would by decreased by 50%.\n");
+			outputText("-New tier 7 wisdom lvl-up perk: Elemental Conjurer Knowledge (Su). Req. Elemental Conjurer Knowledge (Ex) and Elemental Contract Rank 6 perks, 200+ wis. Effect: Allows you to convert soulforce into elemental energy. The amount of elemental energy lost from failing an elemental rank up is decreased by 50%.\n");
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
@@ -154,7 +154,7 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Chimerical Body: Semi-Improved (Ex) Stage. Gained by use of the Pocket Watch when req. are meet. Effects of all four combined perks + 5% bonus to str/tou/spe/lib multi, +5 bonus to sens, negate up to 4 racial perk points negative effects.\n");
 			outputText("-Moga Hen have two more exchange options for gems > spirit stones and spirit stones > gems.\n");
 			outputText("-Mana cost of arcane circuits upgrades doubled. Amount of possible to store elemental energy increased by 50%.\n");
-			outputText("-\n");
+			outputText("-Touched up hellfire Damage and Scaling to bring it better in line with other abilities. Now Scales off of Lib and Str. It splits the damage between fire and lust depending on monsters corruption. It also scales off of PC corruption. (Chibizs)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
