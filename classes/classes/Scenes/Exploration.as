@@ -875,7 +875,7 @@ public class Exploration extends BaseContent
 				SceneLib.trollVillage.FirstEncountersoftheTrollKind();
 				return;
 			}
-			if (player.level > 9 && player.hasKeyItem("Pocket Watch") < 0 && rand(5) == 0) {
+			if (player.level >= 9 && player.hasKeyItem("Pocket Watch") < 0 && rand(5) == 0) {
 				pocketwatchdiscovery();
 				return;
 			}

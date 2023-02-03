@@ -6677,6 +6677,7 @@ public class PerkLib
 					.requireSpe(30);
             //Tier 1
 			ChimericalBodyInitialStage.requireLevel(6)
+					.requireNotThosePerks(ChimericalBodySemiImprovedStageEx)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.internalChimeraScore() >= 2;
                     }, "Two racial perks");

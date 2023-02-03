@@ -118,7 +118,7 @@ public class ProjectTyrant extends Monster {
         outputText("The demon on top grins, whistling, and you see the unholy mount tense up. A massive glob of black goop is launched from the Drider’s backside like a mortar shell.\n\n");
         if (player.getEvasionRoll()) {
             outputText("You break into a sweat as you throw yourself to the side. You evade the worst of the acidic goop, but a bit still splashes you.");
-            dmg1 = this.inte * 0.2;
+            dmg1 = this.inte * 0.1;
             dmg1 += eBaseIntelligenceDamage() * 0.1;
             dmg1 = Math.round(dmg1);
             player.takeAcidDamage(dmg1, true);

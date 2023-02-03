@@ -5252,9 +5252,9 @@ public class Combat extends BaseContent {
         //Unique attack Cerberus fire breath
         if (player.faceType == Face.CERBERUS && player.hasPerk(PerkLib.Hellfire)) {
             outputText("You unleash a tripple blast of fire from your heads, engulfing [themonster] in Hellfire.");
-            ExtraNaturalWeaponAttack(1, "fire breath");
-            ExtraNaturalWeaponAttack(1, "fire breath");
-            ExtraNaturalWeaponAttack(1, "fire breath");
+            ExtraNaturalWeaponAttack(1, "fire");
+            ExtraNaturalWeaponAttack(1, "fire");
+            ExtraNaturalWeaponAttack(1, "fire");
             outputText("\n");
         }
         //Unique attack Slime
@@ -6863,7 +6863,6 @@ public class Combat extends BaseContent {
                 damage *= FeraldamageMultiplier;
 				if (BelisaFollower.HolyBand6 > 0) damage *= 1.25;
 				if (SpecialEffect == "fire") doFireDamage(damage, true, true);
-                if (SpecialEffect == "fire breath") doFireDamage(damage, true, true);
 				else if (SpecialEffect == "ice") doIceDamage(damage, true, true);
 				else if (SpecialEffect == "lightning") doLightingDamage(damage, true, true);
 				else if (SpecialEffect == "darkness") doDarknessDamage(damage, true, true);
