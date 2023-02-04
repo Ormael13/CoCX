@@ -2250,6 +2250,7 @@ public class Camp extends NPCAwareContent{
 		addButtonIfTrue(6, "E C M & B D (Ex)", mainPagePocketWatchElementalConjurerMindAndBodyDedicationEx, "Req. Elemental Conjurer Mind and Body Resolve (Ex) & Elemental Conjurer Mind and Body Dedication perks / Or you already got this merged perk", player.hasPerk(PerkLib.ElementalConjurerMindAndBodyResolveEx) && player.hasPerk(PerkLib.ElementalConjurerMindAndBodyDedication));
 		addButtonIfTrue(7, "E C M & B S (Ex)", mainPagePocketWatchElementalConjurerMindAndBodySacrificeEx, "Req. Elemental Conjurer Mind and Body Dedication (Ex) & Elemental Conjurer Mind and Body Sacrifice perks / Or you already got this merged perk", player.hasPerk(PerkLib.ElementalConjurerMindAndBodyDedicationEx) && player.hasPerk(PerkLib.ElementalConjurerMindAndBodySacrifice));
 		addButtonIfTrue(10, "ChBS-I (Ex)", mainPagePocketWatchChimericalBodySemiImprovedStageEx, "Req. Chimerical Body: Semi-Improved Stage perk / Or you already got this merged perk", player.hasPerk(PerkLib.ChimericalBodySemiImprovedStage));
+		addButtonIfTrue(11, "ChBS-S (Ex)", mainPagePocketWatchChimericalBodySemiSuperiorStageEx, "Req. Chimerical Body: Semi-Superior Stage & Chimerical Body: Semi-Improved (Ex) Stage perks / Or you already got this merged perk", player.hasPerk(PerkLib.ChimericalBodySemiSuperiorStage) && player.hasPerk(PerkLib.ChimericalBodySemiImprovedStageEx));
 		addButton(14, "Back", campMiscActions);
 	}
 	private function mainPagePocketWatchDaoOfTheElementsPerkLayer1():void {
@@ -2336,12 +2337,27 @@ public class Camp extends NPCAwareContent{
 		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 3);
 		player.perkPoints += 2;
 		doNext(mainPagePocketWatch);
+	}
+	private function mainPagePocketWatchChimericalBodySemiSuperiorStageEx():void {
+		clearOutput();
+		outputText("Perks combined: 'Chimerical Body: Semi-Superior (Ex) Stage' perk attained.");
+		player.removePerk(PerkLib.ChimericalBodyImprovedStage);
+		player.removePerk(PerkLib.ChimericalBodySemiAdvancedStage);
+		player.removePerk(PerkLib.ChimericalBodyAdvancedStage);
+		player.removePerk(PerkLib.ChimericalBodySemiSuperiorStage);
+		player.removePerk(PerkLib.ChimericalBodySemiImprovedStageEx);
+		player.createPerk(PerkLib.ChimericalBodySemiSuperiorStageEx, 0, 0, 0, 0);
+		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 4);
+		player.perkPoints += 2;
+		doNext(mainPagePocketWatch);
 	}/*
 	private function mainPagePocketWatch():void {
 		clearOutput();
 		outputText("Perks combined: .");
 		player.removePerk(PerkLib.);
 		player.createPerk(PerkLib.);
+		player.addStatusValue(StatusEffects.MergedPerksCount, 1, );
+		player.perkPoints++;
 		doNext(mainPagePocketWatch);
 	}
 	private function mainPagePocketWatch():void {
@@ -2349,6 +2365,8 @@ public class Camp extends NPCAwareContent{
 		outputText("Perks combined: .");
 		player.removePerk(PerkLib.);
 		player.createPerk(PerkLib.);
+		player.addStatusValue(StatusEffects.MergedPerksCount, 1, );
+		player.perkPoints++;
 		doNext(mainPagePocketWatch);
 	}
 	private function mainPagePocketWatch():void {
@@ -2356,6 +2374,17 @@ public class Camp extends NPCAwareContent{
 		outputText("Perks combined: .");
 		player.removePerk(PerkLib.);
 		player.createPerk(PerkLib.);
+		player.addStatusValue(StatusEffects.MergedPerksCount, 1, );
+		player.perkPoints++;
+		doNext(mainPagePocketWatch);
+	}
+	private function mainPagePocketWatch():void {
+		clearOutput();
+		outputText("Perks combined: .");
+		player.removePerk(PerkLib.);
+		player.createPerk(PerkLib.);
+		player.addStatusValue(StatusEffects.MergedPerksCount, 1, );
+		player.perkPoints++;
 		doNext(mainPagePocketWatch);
 	}*/
 

@@ -155,10 +155,25 @@ public class Changelog extends BaseContent
 			outputText("-Moga Hen have two more exchange options for gems > spirit stones and spirit stones > gems.\n");
 			outputText("-Mana cost of arcane circuits upgrades doubled. Amount of possible to store elemental energy increased by 50%.\n");
 			outputText("-Touched up hellfire Damage and Scaling to bring it better in line with other abilities. Now Scales off of Lib and Str. It splits the damage between fire and lust depending on monsters corruption. It also scales off of PC corruption. (Chibizs)\n");
+			outputText("-Two new stats on general subpage (including Radiant Shards counter)\n");
 			outputText("-Alternative option to recruit Evangeline can trigger even if pc lost first fight against imp.\n");
-			outputText("-Ascension: Trancendental Genetic Memory perk can attain 1 more rank for even more slots to perm metmaorph options.\n");
+			outputText("-Ascension: Trancendental Genetic Memory perk can attain 1 more rank for even more slots to perm metamorph options.\n");
+			outputText("-New event perk: Chimerical Body: Semi-Superior (Ex) Stage. Gained by use of the Pocket Watch when req. are meet. Effects of all five combined perks + 15% bonus to str/tou/spe, + 10% int/wis/lib multi, +10 bonus to sens, negate up to 8 racial perk points negative effects.\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");// (Liadri)
+			outputText("-\n");// (aimozg)
+			outputText("-\n");// (Svalkash)
+			outputText("-\n");// (EragonX)
 			outputText("-\n");// (Jtecx)
 			outputText("-\n");// (Furrin Gok)
 			outputText("-\n");// (khovel)
@@ -170,27 +185,12 @@ public class Changelog extends BaseContent
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");
-			outputText("-\n");// (Liadri)
-			outputText("-\n");// (aimozg)
-			outputText("-\n");// (Svalkash)
-			outputText("-\n");// (EragonX)
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			//remove this line when other two lines below get added ingame
 			//outputText("-New perk for enemies: Elite type enemy. Bonuses for are: Diehard effect of 2,5% of max HP + 750 HP * NG tier, OverMax HP effect of 5% magnitude.\n");
 			//outputText("-New perk for enemies: Champion type enemy. Bonuses for are: Diehard effect of 5% of max HP + 1,500 HP * NG tier, OverMax HP effect of 10% magnitude.\n");
 			outputText("-Fixed bugs: Bard not affected by cap of prestige jobs, last one checks for holli's kill/survive moved into less troublesome spot, Benoit/Oswald taking full price for simple backpack size upgade, Fasting Pill been unaccessable when hunger mode is active, Vegetal Affinity increasing fire resistance, elemental throwing knives been never usable, Elemental race tier bonuses & display on race page, ");
 			outputText("Buy button for Francisca throwing axe at basilisk shop been corectly labeled, Lily name revealed before she actualy tell her name in scene, incorrectly labeled Whitefire swiftcast button, returning from multishot menu leading to melee options instead of range ones, Sky Poison Pearl not allowing to poison/venom options for weapons, missing Radiant Shard fpr recruiting Isabella, Golemancer ");
-			outputText("manual for upgrades been possible to bought multiple times\n");
+			outputText("manual for upgrades been possible to bought multiple times, Priscilla lvl up after enough defeats\n");
 			/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");

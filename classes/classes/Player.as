@@ -3753,6 +3753,8 @@ use namespace CoC;
 				internalChimeraRatingCounter -= 20;
 			if (hasPerk(PerkLib.ChimericalBodySemiImprovedStageEx))//+1 racials
 				internalChimeraRatingCounter -= 18;
+			if (hasPerk(PerkLib.ChimericalBodySemiSuperiorStageEx))//+2 racials
+				internalChimeraRatingCounter -= 56;
 			if (jewelryName == "Ezekiel's Signet") internalChimeraRatingCounter -= 1;
 			if (jewelryName2 == "Ezekiel's Signet") internalChimeraRatingCounter -= 1;
 			if (jewelryName3 == "Ezekiel's Signet") internalChimeraRatingCounter -= 1;
