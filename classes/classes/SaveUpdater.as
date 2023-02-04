@@ -2064,14 +2064,25 @@ public class SaveUpdater extends NPCAwareContent {
 					player.addStatusValue(StatusEffects.ElementalEnergyConduits, 2, capacityIncrease);
 				}
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.051;
-			}/*
-			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.052) {
-				
-				flags[kFLAGS.MOD_SAVE_VERSION] = 36.052;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.052) {
+				if (flags[kFLAGS.ISABELLA_FOLLOWER_ACCEPTED] == 1) {
+					if (player.hasKeyItem("Radiant shard") >= 0) player.addKeyValue("Radiant shard",1,+1);
+					else player.createKeyItem("Radiant shard", 1,0,0,0);
+				}
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.052;
+			}/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.053) {
 				
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.053;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.054) {
+				
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.054;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.055) {
+				
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.055;
 			}*/
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);

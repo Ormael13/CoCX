@@ -2336,7 +2336,7 @@ import coc.view.MainView;
 					else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] < tier){
 						addButtonDisabled(btn, "Gen. Memory", "You have not ascended enough times yet.");
 					}
-					else if (tier > 7){
+					else if (tier > 8){
 						addButtonDisabled(btn, "Gen. Memory", "You have acquired the highest tier available.");
 					}
 					else {

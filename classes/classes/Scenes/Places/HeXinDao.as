@@ -1369,7 +1369,7 @@ public function soularena():void {
 		addButton(6, "G.E.Man", buyItem, weaponsrange.G_E_MAN).hint("Golemancy Evocation Manuscript");
 		addButton(7, "Y.U.Panel", buyItem, shields.Y_U_PAN).hint("Yogi Uh Panel");
 		if (player.hasPerk(PerkLib.MasterGolemMaker)) {
-			if (player.hasKeyItem("Golems, Animation and You") >= 0) addButtonDisabled(12, "G,A&Y Man.", "You already bought 'Golems, Animation and You' manual.");
+			if (player.hasKeyItem("Golems, Animations and You") >= 0) addButtonDisabled(12, "G,A&Y Man.", "You already bought 'Golems, Animation and You' manual.");
 			else addButton(12, "G,A&Y Man.", golemancershopPermGolemsUpgradesGuide).hint("Buy 'Golems, Animation and You' manual to make golems great again.");
 		}
 		else addButtonDisabled(12, "???", "Req. Master Golem Maker perk.");
