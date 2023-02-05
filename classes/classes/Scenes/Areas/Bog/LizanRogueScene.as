@@ -88,7 +88,7 @@ public class LizanRogueScene extends BaseContent
 		
 		public function winAgainstLizan():void {
 			clearOutput();
-			if (player.cor > 30) {
+			if (player.corAdjustedDown > 30) {
 				outputText("The lizan raises his hands in defeat and you celebrate with a victory dance. ");
 				if (player.lust >= 33) {
 					outputText("You wonder what you should do to the lizan.");

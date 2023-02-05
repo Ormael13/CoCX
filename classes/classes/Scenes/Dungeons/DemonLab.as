@@ -990,7 +990,7 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
             menu();
             addButton(0, "Next", TelAdreBring);
         }
-        if (MainAreaComplete < 4 && DridersState < 2 && FSpreaderState < 2 && NightwalkerLabstate < 2) {
+        if (MainAreaComplete < 4) {
             if (WayOutBlocked) {
                 outputText("You can't budge this steel door, no matter how hard you strike it. Perhaps inside the facility, you'll find a a way to unblock the door?\n\n");
             }
@@ -999,6 +999,9 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
             }
             if (FSpreaderState < 2) {
                 outputText("The Firespreader Project is still untouched. You shudder to think what the demons could do if you leave that intact.\n\n");
+            }
+            if (DridersState < 2) {
+                outputText("The Tyrant Project is still untouched. You shudder to think what the demons could do if you leave that intact.\n\n");
             }
             outputText("You walk back into the Ballroom, intent on seeing this through to the end.\n\n");
             doNext(Ballroom1);

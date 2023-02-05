@@ -163,7 +163,7 @@ import classes.Scenes.NPCs.Forgefather;
 			if (arg <= -1)
 				bonus = -9000;
 			//If unpregnant and fertility wins out:
-			if ((pregnancyIncubation == 0 || (vaginas.length > 1 && pregnancy2Incubation == 0)) && totalFertility() + bonus > Math.floor(Math.random() * beat) && hasVagina())
+			if (canGetPregnant() && totalFertility() + bonus > Math.floor(Math.random() * beat) && hasVagina())
 			{
 				var womb:int = (pregnancyIncubation == 0 ? 0:1);
 				knockUpForce(type, incubation, womb);
