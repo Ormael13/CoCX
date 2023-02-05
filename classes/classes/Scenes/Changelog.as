@@ -162,7 +162,7 @@ public class Changelog extends BaseContent
 			outputText("-Fixed a few tags and an error on bull strength that didnt allow minotaurs to get the buff. (Chibizs)\n");
 			outputText("-New event perk: Greater Diehard (Ex). Gained by use of the Pocket Watch when req. are meet. Effects: You can't lose by HP until your health drops into the negatives any more than 18% of max HP + 5400(scalable). HP limit cumulative with other Diehard perks.\n");
 			outputText("-New Sand worm encounter and opening previously hidden Inner Desert area for exploration! (EragonX)\n");
-			outputText("-\n");
+			outputText("-Pregnancy fix for Minerva. Fix for snake-like races be not quite so strict. Finally fix Siegweird's encounter flags. Fix Jabberwocky breath combat loop. Fix nipple fuckable/quad mutual exclusivity. (EragonX)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

@@ -33,7 +33,7 @@ public class SandWormRace extends Race {
         /*Perks*/		"Human"];
 	
 	public function SandWormRace(id:int) {
-		super("Spider", id, []);//RaceBody);
+		super("Sand Worm", id, []);//RaceBody);
 	}
 	
 	public override function setup():void {
