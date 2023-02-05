@@ -4981,7 +4981,7 @@ use namespace CoC;
 			var power:Number = 0;
 			if (hasPerk(PerkLib.BullStrength)){
 				if (isRaceCached(Races.COW, 2)) power = lactationQ()*0.001;
-				if (isRaceCached(Races.MINOTAUR, 2) >= 15) power = cumCapacity()*0.001;
+				if (isRaceCached(Races.MINOTAUR, 2)) power = cumCapacity()*0.001;
 				if (power > 0.5) power = 0.5;
 				statStore.replaceBuffObject({'str.mult':(Math.round(power*100))/100}, 'Bull Strength', { text: 'Bull Strength' });
 			}
