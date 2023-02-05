@@ -2228,29 +2228,36 @@ public class Camp extends NPCAwareContent{
 		doNext(campMiscActions);
 	}
 	
-	public function mainPagePocketWatch():void {
+	public function mainPagePocketWatch(page:int = 1):void {
 		clearOutput();
 		outputText("Which perks would you like to combine using the watch?");
 		menu();
-		if (player.hasPerk(PerkLib.DaoOfTheElements)) addButtonDisabled(0, "DotE (layer 1)", "You already have this merged perk.");
-		else addButtonIfTrue(0, "DotE (layer 1)", mainPagePocketWatchDaoOfTheElementsPerkLayer1, "Req. Elemental Contract Rank 5 & Elements of the orthodox Path perks", player.hasPerk(PerkLib.ElementalContractRank5) && player.hasPerk(PerkLib.ElementsOfTheOrtodoxPath));
-		if (player.hasPerk(PerkLib.DaoOfTheElements)) {
-			if (player.hasPerk(PerkLib.ElementalContractRank9) && player.hasPerk(PerkLib.ElementsOfMarethBasics) && player.perkv1(PerkLib.DaoOfTheElements) < 2) addButton(1, "DotE (layer 2)", mainPagePocketWatchDaoOfTheElementsPerkLayer2);
-			else if (player.perkv1(PerkLib.DaoOfTheElements) >= 2) addButtonDisabled(1, "DotE (layer 2)", "You already have this merged perk.");
+		if (page == 1) {
+			if (player.hasPerk(PerkLib.DaoOfTheElements)) addButtonDisabled(0, "DotE (layer 1)", "You already have this merged perk.");
+			else addButtonIfTrue(0, "DotE (layer 1)", mainPagePocketWatchDaoOfTheElementsPerkLayer1, "Req. Elemental Contract Rank 5 & Elements of the orthodox Path perks", player.hasPerk(PerkLib.ElementalContractRank5) && player.hasPerk(PerkLib.ElementsOfTheOrtodoxPath));
+			if (player.hasPerk(PerkLib.DaoOfTheElements)) {
+				if (player.hasPerk(PerkLib.ElementalContractRank9) && player.hasPerk(PerkLib.ElementsOfMarethBasics) && player.perkv1(PerkLib.DaoOfTheElements) < 2) addButton(1, "DotE (layer 2)", mainPagePocketWatchDaoOfTheElementsPerkLayer2);
+				else if (player.perkv1(PerkLib.DaoOfTheElements) >= 2) addButtonDisabled(1, "DotE (layer 2)", "You already have this merged perk.");
+				else addButtonDisabled(1, "DotE (layer 2)", "Req. Elemental Contract Rank 9 & Elements of Mareth: Basics & Dao of the Elements perks.");
+			}
 			else addButtonDisabled(1, "DotE (layer 2)", "Req. Elemental Contract Rank 9 & Elements of Mareth: Basics & Dao of the Elements perks.");
-		}
-		else addButtonDisabled(1, "DotE (layer 2)", "Req. Elemental Contract Rank 9 & Elements of Mareth: Basics & Dao of the Elements perks.");
-		if (player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) > 1) {
-			if (player.hasPerk(PerkLib.ElementalContractRank13) && player.hasPerk(PerkLib.ElementsOfMarethAdvanced) && player.perkv1(PerkLib.DaoOfTheElements) < 3) addButton(2, "DotE (layer 3)", mainPagePocketWatchDaoOfTheElementsPerkLayer3);
-			else if (player.perkv1(PerkLib.DaoOfTheElements) >= 3) addButtonDisabled(2, "DotE (layer 3)", "You already have this merged perk.");
+			if (player.hasPerk(PerkLib.DaoOfTheElements) && player.perkv1(PerkLib.DaoOfTheElements) > 1) {
+				if (player.hasPerk(PerkLib.ElementalContractRank13) && player.hasPerk(PerkLib.ElementsOfMarethAdvanced) && player.perkv1(PerkLib.DaoOfTheElements) < 3) addButton(2, "DotE (layer 3)", mainPagePocketWatchDaoOfTheElementsPerkLayer3);
+				else if (player.perkv1(PerkLib.DaoOfTheElements) >= 3) addButtonDisabled(2, "DotE (layer 3)", "You already have this merged perk.");
+				else addButtonDisabled(2, "DotE (layer 3)", "Req. Elemental Contract Rank 13 & Elements of Mareth: Advanced & Dao of the Elements (layer 2) perks.");
+			}
 			else addButtonDisabled(2, "DotE (layer 3)", "Req. Elemental Contract Rank 13 & Elements of Mareth: Advanced & Dao of the Elements (layer 2) perks.");
+			addButton(4, "Next", mainPagePocketWatch, page + 1);
+			addButtonIfTrue(5, "E C M & B R (Ex)", mainPagePocketWatchElementalConjurerMindAndBodyResolveEx, "Req. Elemental Conjurer Mind and Body Resolve perks / Or you already got this merged perk", player.hasPerk(PerkLib.ElementalConjurerMindAndBodyResolve));
+			addButtonIfTrue(6, "E C M & B D (Ex)", mainPagePocketWatchElementalConjurerMindAndBodyDedicationEx, "Req. Elemental Conjurer Mind and Body Resolve (Ex) & Elemental Conjurer Mind and Body Dedication perks / Or you already got this merged perk", player.hasPerk(PerkLib.ElementalConjurerMindAndBodyResolveEx) && player.hasPerk(PerkLib.ElementalConjurerMindAndBodyDedication));
+			addButtonIfTrue(7, "E C M & B S (Ex)", mainPagePocketWatchElementalConjurerMindAndBodySacrificeEx, "Req. Elemental Conjurer Mind and Body Dedication (Ex) & Elemental Conjurer Mind and Body Sacrifice perks / Or you already got this merged perk", player.hasPerk(PerkLib.ElementalConjurerMindAndBodyDedicationEx) && player.hasPerk(PerkLib.ElementalConjurerMindAndBodySacrifice));
+			addButtonIfTrue(10, "ChBS-I (Ex)", mainPagePocketWatchChimericalBodySemiImprovedStageEx, "Req. Chimerical Body: Semi-Improved Stage perk / Or you already got this merged perk", player.hasPerk(PerkLib.ChimericalBodySemiImprovedStage));
+			addButtonIfTrue(11, "ChBS-S (Ex)", mainPagePocketWatchChimericalBodySemiSuperiorStageEx, "Req. Chimerical Body: Semi-Superior Stage & Chimerical Body: Semi-Improved (Ex) Stage perks / Or you already got this merged perk", player.hasPerk(PerkLib.ChimericalBodySemiSuperiorStage) && player.hasPerk(PerkLib.ChimericalBodySemiImprovedStageEx));
 		}
-		else addButtonDisabled(2, "DotE (layer 3)", "Req. Elemental Contract Rank 13 & Elements of Mareth: Advanced & Dao of the Elements (layer 2) perks.");
-		addButtonIfTrue(5, "E C M & B R (Ex)", mainPagePocketWatchElementalConjurerMindAndBodyResolveEx, "Req. Elemental Conjurer Mind and Body Resolve perks / Or you already got this merged perk", player.hasPerk(PerkLib.ElementalConjurerMindAndBodyResolve));
-		addButtonIfTrue(6, "E C M & B D (Ex)", mainPagePocketWatchElementalConjurerMindAndBodyDedicationEx, "Req. Elemental Conjurer Mind and Body Resolve (Ex) & Elemental Conjurer Mind and Body Dedication perks / Or you already got this merged perk", player.hasPerk(PerkLib.ElementalConjurerMindAndBodyResolveEx) && player.hasPerk(PerkLib.ElementalConjurerMindAndBodyDedication));
-		addButtonIfTrue(7, "E C M & B S (Ex)", mainPagePocketWatchElementalConjurerMindAndBodySacrificeEx, "Req. Elemental Conjurer Mind and Body Dedication (Ex) & Elemental Conjurer Mind and Body Sacrifice perks / Or you already got this merged perk", player.hasPerk(PerkLib.ElementalConjurerMindAndBodyDedicationEx) && player.hasPerk(PerkLib.ElementalConjurerMindAndBodySacrifice));
-		addButtonIfTrue(10, "ChBS-I (Ex)", mainPagePocketWatchChimericalBodySemiImprovedStageEx, "Req. Chimerical Body: Semi-Improved Stage perk / Or you already got this merged perk", player.hasPerk(PerkLib.ChimericalBodySemiImprovedStage));
-		addButtonIfTrue(11, "ChBS-S (Ex)", mainPagePocketWatchChimericalBodySemiSuperiorStageEx, "Req. Chimerical Body: Semi-Superior Stage & Chimerical Body: Semi-Improved (Ex) Stage perks / Or you already got this merged perk", player.hasPerk(PerkLib.ChimericalBodySemiSuperiorStage) && player.hasPerk(PerkLib.ChimericalBodySemiImprovedStageEx));
+		if (page == 2) {
+			addButtonIfTrue(10, "G.Diehard (Ex)", mainPagePocketWatchGreaterDiehardEx, "Req. Greater Diehard perk / Or you already got this merged perk", player.hasPerk(PerkLib.GreaterDiehard));
+			addButton(9, "Previous", mainPagePocketWatch, page - 1);
+		}
 		addButton(14, "Back", campMiscActions);
 	}
 	private function mainPagePocketWatchDaoOfTheElementsPerkLayer1():void {
@@ -2264,7 +2271,7 @@ public class Camp extends NPCAwareContent{
 		player.createPerk(PerkLib.DaoOfTheElements, 1, 9, 0, 0);
 		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 4);
 		player.perkPoints += 3;
-		doNext(mainPagePocketWatch);
+		doNext(mainPagePocketWatch, 1);
 	}
 	private function mainPagePocketWatchDaoOfTheElementsPerkLayer2():void {
 		clearOutput();
@@ -2278,7 +2285,7 @@ public class Camp extends NPCAwareContent{
 		player.addPerkValue(PerkLib.DaoOfTheElements, 2, 9);
 		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 5);
 		player.perkPoints += 3;
-		doNext(mainPagePocketWatch);
+		doNext(mainPagePocketWatch, 1);
 	}
 	private function mainPagePocketWatchDaoOfTheElementsPerkLayer3():void {
 		clearOutput();
@@ -2292,7 +2299,7 @@ public class Camp extends NPCAwareContent{
 		player.addPerkValue(PerkLib.DaoOfTheElements, 2, 9);
 		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 5);
 		player.perkPoints += 3;
-		doNext(mainPagePocketWatch);
+		doNext(mainPagePocketWatch, 1);
 	}
 	private function mainPagePocketWatchElementalConjurerMindAndBodyResolveEx():void {
 		clearOutput();
@@ -2302,7 +2309,7 @@ public class Camp extends NPCAwareContent{
 		player.createPerk(PerkLib.ElementalConjurerMindAndBodyResolveEx, 0, 0, 0, 0);
 		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 1);
 		player.perkPoints++;
-		doNext(mainPagePocketWatch);
+		doNext(mainPagePocketWatch, 1);
 	}
 	private function mainPagePocketWatchElementalConjurerMindAndBodyDedicationEx():void {
 		clearOutput();
@@ -2313,7 +2320,7 @@ public class Camp extends NPCAwareContent{
 		player.createPerk(PerkLib.ElementalConjurerMindAndBodyDedicationEx, 0, 0, 0, 0);
 		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 2);
 		player.perkPoints++;
-		doNext(mainPagePocketWatch);
+		doNext(mainPagePocketWatch, 1);
 	}
 	private function mainPagePocketWatchElementalConjurerMindAndBodySacrificeEx():void {
 		clearOutput();
@@ -2324,7 +2331,7 @@ public class Camp extends NPCAwareContent{
 		player.createPerk(PerkLib.ElementalConjurerMindAndBodySacrificeEx, 0, 0, 0, 0);
 		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 2);
 		player.perkPoints++;
-		doNext(mainPagePocketWatch);
+		doNext(mainPagePocketWatch, 1);
 	}
 	private function mainPagePocketWatchChimericalBodySemiImprovedStageEx():void {
 		clearOutput();
@@ -2336,7 +2343,7 @@ public class Camp extends NPCAwareContent{
 		player.createPerk(PerkLib.ChimericalBodySemiImprovedStageEx, 0, 0, 0, 0);
 		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 3);
 		player.perkPoints += 2;
-		doNext(mainPagePocketWatch);
+		doNext(mainPagePocketWatch, 1);
 	}
 	private function mainPagePocketWatchChimericalBodySemiSuperiorStageEx():void {
 		clearOutput();
@@ -2349,43 +2356,45 @@ public class Camp extends NPCAwareContent{
 		player.createPerk(PerkLib.ChimericalBodySemiSuperiorStageEx, 0, 0, 0, 0);
 		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 4);
 		player.perkPoints += 2;
-		doNext(mainPagePocketWatch);
+		doNext(mainPagePocketWatch, 1);
+	}
+	private function mainPagePocketWatchGreaterDiehardEx():void {
+		clearOutput();
+		outputText("Perks combined: 'Greater Diehard (Ex)' perk attained.");
+		player.removePerk(PerkLib.Diehard);
+		player.removePerk(PerkLib.ImprovedDiehard);
+		player.removePerk(PerkLib.GreaterDiehard);
+		player.createPerk(PerkLib.GreaterDiehardEx, 0, 0, 0, 0);
+		player.addStatusValue(StatusEffects.MergedPerksCount, 1, 2);
+		player.perkPoints += 2;
+		doNext(mainPagePocketWatch, 2);
 	}/*
 	private function mainPagePocketWatch():void {
 		clearOutput();
-		outputText("Perks combined: .");
+		outputText("Perks combined: '' perk attained.");
 		player.removePerk(PerkLib.);
 		player.createPerk(PerkLib.);
 		player.addStatusValue(StatusEffects.MergedPerksCount, 1, );
 		player.perkPoints++;
-		doNext(mainPagePocketWatch);
+		doNext(mainPagePocketWatch, 1);
 	}
 	private function mainPagePocketWatch():void {
 		clearOutput();
-		outputText("Perks combined: .");
+		outputText("Perks combined: '' perk attained.");
 		player.removePerk(PerkLib.);
 		player.createPerk(PerkLib.);
 		player.addStatusValue(StatusEffects.MergedPerksCount, 1, );
 		player.perkPoints++;
-		doNext(mainPagePocketWatch);
+		doNext(mainPagePocketWatch, 1);
 	}
 	private function mainPagePocketWatch():void {
 		clearOutput();
-		outputText("Perks combined: .");
+		outputText("Perks combined: '' perk attained.");
 		player.removePerk(PerkLib.);
 		player.createPerk(PerkLib.);
 		player.addStatusValue(StatusEffects.MergedPerksCount, 1, );
 		player.perkPoints++;
-		doNext(mainPagePocketWatch);
-	}
-	private function mainPagePocketWatch():void {
-		clearOutput();
-		outputText("Perks combined: .");
-		player.removePerk(PerkLib.);
-		player.createPerk(PerkLib.);
-		player.addStatusValue(StatusEffects.MergedPerksCount, 1, );
-		player.perkPoints++;
-		doNext(mainPagePocketWatch);
+		doNext(mainPagePocketWatch, 1);
 	}*/
 
 	public function campWinionsArmySim():void {

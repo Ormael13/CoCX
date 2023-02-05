@@ -3594,6 +3594,8 @@ public class PerkLib
 				"You count as five times taller than your effective base size for the purpose of perk effects.");
 		public static const GoblinoidBlood:PerkType = mk("Goblinoid blood", "Goblinoid blood",
 				"Your blood is highly susceptible to chemical drugs, stimulants and poisons.");
+		public static const GreaterDiehardEx:PerkType = mk("Greater Diehard (Ex)", "Greater Diehard (Ex)",
+				"You can't lose by HP until your health drops into the negatives any more than 18% of max HP + 5400(scalable). HP limit cumulative with other Diehard perks.");
 		public static const Greedy:PerkType = mk("Greedy", "Greedy",
 				"Double all gems gained!");
 		public static const HaltedVitals:PerkType = mk("Halted vitals", "Halted vitals",
@@ -6689,7 +6691,8 @@ public class PerkLib
             ResistanceI.requireLevel(6);
             Heroism.requireLevel(6);
             DualWield.requireLevel(6);
-            Diehard.requireLevel(6);
+            Diehard.requireNotThosePerks(GreaterDiehardEx)
+					.requireLevel(6);
             Survivalist.requireLevel(6)
                     .requireHungerEnabled();
             ResistanceII.requirePerk(ResistanceI)
@@ -7182,7 +7185,8 @@ public class PerkLib
                     .requireWis(140)
                     .requirePerk(GrandMasterGolemMaker);
             EpicDiehard.requireLevel(42)
-                    .requirePerks(EpicToughness, GreaterDiehard);
+                    .requirePerk(EpicToughness)
+					.requireAnyPerk(GreaterDiehard, GreaterDiehardEx);
 			Enchantment.requireLevel(42)
 					.requirePerk(Fusion);
 			Embodiment.requireLevel(42)

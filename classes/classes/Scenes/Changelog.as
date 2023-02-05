@@ -160,8 +160,8 @@ public class Changelog extends BaseContent
 			outputText("-Ascension: Trancendental Genetic Memory perk can attain 1 more rank for even more slots to perm metamorph options.\n");
 			outputText("-New event perk: Chimerical Body: Semi-Superior (Ex) Stage. Gained by use of the Pocket Watch when req. are meet. Effects of all five combined perks + 15% bonus to str/tou/spe, + 10% int/wis/lib multi, +10 bonus to sens, negate up to 8 racial perk points negative effects.\n");
 			outputText("-Fixed a few tags and an error on bull strength that didnt allow minotaurs to get the buff. (Chibizs)\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New event perk: Greater Diehard (Ex). Gained by use of the Pocket Watch when req. are meet. Effects: You can't lose by HP until your health drops into the negatives any more than 18% of max HP + 5400(scalable). HP limit cumulative with other Diehard perks.\n");
+			outputText("-New Sand worm encounter and opening previously hidden Inner Desert area for exploration! (EragonX)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
