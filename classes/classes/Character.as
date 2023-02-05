@@ -485,6 +485,10 @@ import classes.Scenes.NPCs.Forgefather;
 				min -= maxHP() * 0.06;
 				min -= (1800 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}
+			if (hasPerk(PerkLib.GreaterDiehardEx)) {
+				min -= maxHP() * 0.18;
+				min -= (5400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			}
 			if (hasPerk(PerkLib.EpicDiehard)) {
 				min -= maxHP() * 0.08;
 				min -= (2400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
