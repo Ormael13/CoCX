@@ -197,6 +197,13 @@ public class Hair extends BodyPart {
 		appearanceDesc: "Your {hairInfo} looks about normal except that they have darker spot reminding of cow fur."
 	});
 
+	public static const DRIPPING:int = 22;
+	EnumValue.add(Types, DRIPPING, "DRIPPING", {
+		name:"dripping",
+		shortDesc: "dripping {hair}",
+		appearanceDesc: "Your {hairInfo} hair looks human at a first glance, but are, in fact, fine tendrils of flesh imitating human hairs, after all this body of yours is but a fleshy tongue mimicking human shape."
+	});
+
 	// Additional modifiers for hair descriptions
 	public static var Styles:/*EnumValue*/Array = [];
 

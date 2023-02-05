@@ -670,6 +670,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
     public const HairQuill: Transformation 		= hair.HairQuill;
     public const HairFairy: Transformation 		= hair.HairFairy;
     public const HairCow: Transformation 		= hair.HairCow;
+    public const HairDripping: Transformation 	= hair.HairDripping;
     public function HairChangeColor(colors: /*String*/ Array): Transformation { return hair.HairChangeColor(colors); }
 
 
@@ -811,6 +812,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
     public const LowerBodyCancer: Transformation 			= lowerBody.LowerBodyCancer;
     public const LowerBodySnake: Transformation 			= lowerBody.LowerBodySnake;
     public const LowerBodyTiny: Transformation 			    = lowerBody.LowerBodyTiny;
+    public const LowerBodyWorm: Transformation 			    = lowerBody.LowerBodyWorm;
 
 
 

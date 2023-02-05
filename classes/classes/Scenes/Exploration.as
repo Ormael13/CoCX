@@ -122,7 +122,10 @@ public class Exploration extends BaseContent
 					.hint("Visit the dry desert (outer part). "
 							+ (debug ? "\n\nTimes explored: " + player.exploredDesert : ""))
 					.disableIf(player.exploredDesert == 0, "You need to 'Explore' Mareth more.");
-			bd.add(""); // Desert(I)
+			bd.add("Desert (I)", SceneLib.desert.exploreInnerDesert)
+					.hint("Visit the dry desert (inner part). "
+							+ (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_INNER_DESERT] : ""))
+					.disableIf(flags[kFLAGS.DISCOVERED_INNER_DESERT] == 0, "Discovered when exploring Desert (Outer).");
 			bd.add("");
 			bd.add("");
 			bd.add("");
@@ -290,6 +293,10 @@ public class Exploration extends BaseContent
 				explorePageIV();
 				return;
 			}
+			if (flags[kFLAGS.EXPLORATION_PAGE] == 5) {
+				explorePageV();
+				return;
+			}
 			hideMenus();
 			menu();
 			addButton(0, "Explore", tryDiscover).hint("Explore to find new regions and visit any discovered regions.");
@@ -298,7 +305,7 @@ public class Exploration extends BaseContent
 			else addButtonDisabled(2, "Lake", "You need to 'Explore' Mareth more.");
 			if (player.exploredDesert > 0) addButton(3, "Desert (O)", SceneLib.desert.exploreDesert).hint("Visit the dry desert (outer part). " + (debug ? "\n\nTimes explored: " + player.exploredDesert : ""));
 			else addButtonDisabled(3, "Desert", "You need to 'Explore' Mareth more.");
-			
+
 			if (flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] > 0) addButton(5, "Battlefield (B)", SceneLib.battlefiledboundary.exploreBattlefieldBoundary).hint("Visit the battlefield boundary. " + (player.level < 16 ? "\n\nIt's still too dangerous place to visit lightly!" : "") + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] : ""));
 			else addButtonDisabled(5, "Battlefield (B)", "Discovered when using 'Explore' after finding Desert (Outer).");
 			if (flags[kFLAGS.DISCOVERED_HILLS] > 0) addButton(6, "Hills", SceneLib.mountain.exploreHills).hint("Visit the hills. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_HILLS] : ""));
@@ -333,19 +340,21 @@ public class Exploration extends BaseContent
 			if (player.hasStatusEffect(StatusEffects.BoatDiscovery)) addButton(2, "Boat", SceneLib.boat.boatExplore).hint("Get on the boat and explore the lake. \n\nRecommended level: 12");
 			else addButtonDisabled(2, "???", "Search the lake.");
 			//2 - desert inner part
-			//addButtonDisabled(2, "Desert(I)", "Discovered when exploring Desert.");
-			if (flags[kFLAGS.DISCOVERED_LOW_MOUNTAIN] > 0) addButton(3, "Low Mountain", SceneLib.mountain.exploreLowMountain).hint("Visit the low mountains. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_LOW_MOUNTAIN] : ""));
-			else addButtonDisabled(3, "Low Mountain", "Discovered when exploring Hills.");
+			if (flags[kFLAGS.DISCOVERED_INNER_DESERT] > 0) addButton(3, "Desert (I)", SceneLib.desert.exploreInnerDesert).hint("Visit the dry desert (inner part). " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_INNER_DESERT] : ""));
+			else addButtonDisabled(3, "Desert (I)", "Discovered when exploring Desert (Outer).");
+
+			if (flags[kFLAGS.DISCOVERED_LOW_MOUNTAIN] > 0) addButton(6, "Low Mountain", SceneLib.mountain.exploreLowMountain).hint("Visit the low mountains. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_LOW_MOUNTAIN] : ""));
+			else addButtonDisabled(6, "Low Mountain", "Discovered when exploring Hills.");
 			
 			if (flags[kFLAGS.DISCOVERED_DEFILED_RAVINE] > 0) addButton(5, "Defiled Ravine", SceneLib.defiledravine.exploreDefiledRavine).hint("Visit the defiled ravine. \n\nRecommended level: 41" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_DEFILED_RAVINE] : ""));
 			else addButtonDisabled(5, "Defiled Ravine", "Discovered when exploring Blight Ridge.");
-			if (flags[kFLAGS.BOG_EXPLORED] > 0) addButton(6, "Bog", SceneLib.bog.exploreBog).hint("Visit the dark bog. \n\nRecommended level: 28" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.BOG_EXPLORED] : ""));
-			else addButtonDisabled(6, "Bog", "Discovered when exploring Swamp.");
+			if (flags[kFLAGS.BOG_EXPLORED] > 0) addButton(8, "Bog", SceneLib.bog.exploreBog).hint("Visit the dark bog. \n\nRecommended level: 28" + (debug ? "\n\nTimes explored: " + flags[kFLAGS.BOG_EXPLORED] : ""));
+			else addButtonDisabled(8, "Bog", "Discovered when exploring Swamp.");
 			// 7 - plains inner part
 			if (flags[kFLAGS.DISCOVERED_BEACH] > 0) {
-				if (flags[kFLAGS.DISCOVERED_OCEAN] > 0) addButton(8, "Ocean", SceneLib.ocean.exploreOcean).hint("Explore the ocean surface. But beware of... sharks. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_OCEAN] : ""));
-				else addButtonDisabled(8, "Ocean", "You need to find first some way to sail over the water surface to explore this area.");
-			} else addButtonDisabled(8, "Ocean", "Need to find Beach first and then finding some way to sail on the water.");
+				if (flags[kFLAGS.DISCOVERED_OCEAN] > 0) addButton(9, "Ocean", SceneLib.ocean.exploreOcean).hint("Explore the ocean surface. But beware of... sharks. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_OCEAN] : ""));
+				else addButtonDisabled(9, "Ocean", "You need to find first some way to sail over the water surface to explore this area.");
+			} else addButtonDisabled(9, "Ocean", "Need to find Beach first and then finding some way to sail on the water.");
 			
 			if (flags[kFLAGS.DISCOVERED_TUNDRA] > 0) addButton(10, "Tundra", SceneLib.tundra.exploreTundra).hint("Visit the tundra. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_TUNDRA] : ""));
 			else addButtonDisabled(10, "Tundra", "Discovered when exploring Caves.");
@@ -370,8 +379,8 @@ public class Exploration extends BaseContent
 			else addButtonDisabled(0, "Deepwoods", "Discovered when exploring Forest (I).");
 			//addButtonDisabled(1, "Shore", "TBA");//Discovered when exploring using Lake Boat.
 			//if (flags[kFLAGS.DISCOVERED_DEEP_SEA] > 0 && player.canSwimUnderwater()) addButton(2, "Deep Sea", SceneLib.deepsea.exploreDeepSea).hint("Visit the 'almost virgin' deep sea. But beware of... krakens. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_DEEP_SEA] : ""));
-			if (player.exploredMountain > 0) addButton(3, "Mountain", SceneLib.mountain.exploreMountain).hint("Visit the mountain. " + (debug ? "\n\nTimes explored: " + player.exploredMountain : ""));
-			else addButtonDisabled(3, "Mountain", "Discovered when exploring Low .");
+			if (player.exploredMountain > 0) addButton(6, "Mountain", SceneLib.mountain.exploreMountain).hint("Visit the mountain. " + (debug ? "\n\nTimes explored: " + player.exploredMountain : ""));
+			else addButtonDisabled(6, "Mountain", "Discovered when exploring Low .");
 			
 			if (flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] > 0) addButton(10, "Glacial Rift(O)", SceneLib.glacialRift.exploreGlacialRift).hint("Visit the chilly glacial rift (outer part). " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] : ""));
 			else addButtonDisabled(10, "Glacial Rift(O)", "Discovered when exploring Tundra.");
@@ -388,8 +397,8 @@ public class Exploration extends BaseContent
 			flags[kFLAGS.EXPLORATION_PAGE] = 4;
 			hideMenus();
 			menu();
-			if (flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] > 0) addButton(3, "High Mountain", SceneLib.highMountains.exploreHighMountain).hint("Visit the high mountains where basilisks and harpies are found. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] : ""));
-			else addButtonDisabled(3, "High Mountain", "Discovered when exploring Mountain.");
+			if (flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] > 0) addButton(6, "High Mountain", SceneLib.highMountains.exploreHighMountain).hint("Visit the high mountains where basilisks and harpies are found. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] : ""));
+			else addButtonDisabled(6, "High Mountain", "Discovered when exploring Mountain.");
 			
 			addButton(4, "Next", goBackToPageV);
 			addButton(9, "Previous", goBackToPageIII);

@@ -142,13 +142,17 @@ public class PhysicalSpecials extends BaseCombatContent {
 						bd.disable("You do not have enough venom to use spider bite right now!");
 					} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 				}
-			//Ant Bite
-			  if ((player.faceType == Face.ANT || player.perkv1(IMutationsLib.VenomGlandsIM) >= 1)) {
-          bd = buttons.add("Ant Bite", antBiteAttack).hint("Attempt to bite your opponent and inject formic acid. (deal acid dmg and lower toughness)  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
-          if (player.tailVenom < player.VenomWebCost() * 5) {
-            bd.disable("You do not have enough venom to use ant bite right now!");
-          } else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
-        }
+				//Ant Bite
+				if ((player.faceType == Face.ANT || player.perkv1(IMutationsLib.VenomGlandsIM) >= 1)) {
+					bd = buttons.add("Ant Bite", antBiteAttack).hint("Attempt to bite your opponent and inject formic acid. (deal acid dmg and lower toughness)  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
+					if (player.tailVenom < player.VenomWebCost() * 5) {
+						bd.disable("You do not have enough venom to use ant bite right now!");
+					} else if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+				}
+				if (player.isSandWorm()) {
+					bd = buttons.add("Devastating Bite", devastatingBiteAttack).hint("Attempt to bite your opponent with your giant sandworm maw. (deal acid dmg)");
+					if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+				}
 				//Constrict
 				if (player.isNaga()) {
 					bd = buttons.add("Constrict", SceneLib.desert.nagaScene.nagaPlayerConstrict).hint("Attempt to bind an enemy in your long snake-tail.");
@@ -160,7 +164,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 				}
 				//Dig
-				if ((player.lowerBody == LowerBody.CANCER || player.lowerBody == LowerBody.CENTIPEDE || player.lowerBody == LowerBody.FROSTWYRM)) {
+				if (InCollection(player.lowerBody, LowerBody.CANCER, LowerBody.CENTIPEDE, LowerBody.FROSTWYRM, LowerBody.SANDWORM)) {
 					bd = buttons.add("Dig", Dig).hint("Dig underground to escape your opponent attack for a while.");
 					if (player.hasStatusEffect(StatusEffects.UnderwaterCombatBoost)) {
 						bd.disable("<b>You can't dig in open water!</b>\n\n");
@@ -274,14 +278,17 @@ public class PhysicalSpecials extends BaseCombatContent {
 				}
 			    if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
-			if (player.tail.isAny(Tail.BEE_ABDOMEN, Tail.SCORPION) && !player.hasPerk(PerkLib.ElementalBody)) {
+			if ((player.tail.isAny(Tail.BEE_ABDOMEN, Tail.SCORPION) || player.isSandWorm()) && !player.hasPerk(PerkLib.ElementalBody)) {
 				bd = buttons.add("Sting", playerStinger);
 				var stingername:String,period:String;
 				if (player.tailType == Tail.BEE_ABDOMEN) {
 					stingername = "venomous bee stinger";
 					period = "your abdomen's refractory period";
-				} else if (player.tailType == Tail.SCORPION){
+				} else if (player.tailType == Tail.SCORPION) {
 					stingername = "venomous scorpion stinger";
+					period = "your refractory period";
+				} else if (player.isSandWorm()) {
+					stingername = "venomous sandworm stinger";
 					period = "your refractory period";
 				}
 				bd.hint("Attempt to use your " + stingername + " on an enemy.  Be aware it takes quite a while for your venom to build up, so depending on " + period + ", you may have to wait quite a while between stings.  \n\nVenom: " + Math.floor(player.tailVenom) + "/" + player.maxVenom());
@@ -4324,6 +4331,36 @@ public class PhysicalSpecials extends BaseCombatContent {
 		flags[kFLAGS.VENOM_TIMES_USED] += 1;
 		if (!combatIsOver()) enemyAI();
 	}
+	public function devastatingBiteAttack():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
+		clearOutput();
+		if (combat.checkConcentration()) return; //Amily concentration
+		if (monster is LivingStatue)
+		{
+			outputText("Your razor sharp teeth cannot penetrate the stone of a statue");
+			enemyAI();
+			return;
+		}
+		//Works similar to bee stinger, must be regenerated over time. Shares the same poison-meter
+		if(rand(player.spe/2 + 40) + 20 > monster.spe/1.5) {
+			//(if monster = demons)
+			if(monster.short == "demons") outputText("You look at the crowd for a moment, wondering which of their number you should bite. Your glance lands upon the leader of the group, easily spotted due to his snakeskin cloak. You quickly dart through the demon crowd as it closes in around you and lunge towards the broad form of the leader. You catch the demon off guard and sink your fangs into his flesh. You quickly release your formic acid and retreat before he, or the rest of the group manage to react. ");
+			//(Otherwise)
+			else outputText("You lunge at the foe, intending to bite [monster him] with your circular set of razor-sharp teeth. You manage to catch [themonster] off guard, your fangs, penetrating into [monster his] body. Your acidic spit coating [monster him] before [monster he] manages to react. ");
+			//The following is how the enemy reacts over time to acid. It is displayed after the description paragraph
+			monster.statStore.addBuffObject({tou:-2,spe:-2}, "Sandworm Spit",{text:"Sandworm Spit"});
+			combat.ExtraNaturalWeaponAttack(10, "acid");
+			if (!monster.hasStatusEffect(StatusEffects.SandWormAcid))
+				monster.createStatusEffect(StatusEffects.SandWormAcid, 2, 0, 0, 0);
+			monster.addStatusValue(StatusEffects.SandWormAcid, 2, 2);
+		}
+		else {
+			outputText("You lunge headfirst, maw agape and your ring of teeth glistening. Your attempt fails horrendously as [themonster] manages to leap out of the away, and you impact the ground with enough force to make your ears ring.");
+		}
+		outputText("\n\n");
+		combat.WrathGenerationPerHit2(5);
+		if (!combatIsOver()) enemyAI();
+	}
 	public function fenrirFrostbite():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
@@ -4907,8 +4944,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (combat.checkConcentration()) return; //Amily concentration
 		if(monster.spe - player.spe > 0 && int(Math.random()*(((monster.spe-player.spe)/4)+80)) > 80) {
 			if(monster.spe - player.spe < 8) outputText("[Themonster] narrowly avoids your stinger!\n\n");
-			if(monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText("[Themonster] dodges your stinger with superior quickness!\n\n");
-			if(monster.spe - player.spe >= 20) outputText("[Themonster] deftly avoids your slow attempts to sting [monster him].\n\n");
+			else if(monster.spe-player.spe < 20) outputText("[Themonster] dodges your stinger with superior quickness!\n\n");
+			else outputText("[Themonster] deftly avoids your slow attempts to sting [monster him].\n\n");
 			enemyAI();
 			return;
 		}
@@ -4939,28 +4976,36 @@ public class PhysicalSpecials extends BaseCombatContent {
 			damage *= dBd3c;
 			monster.teased(Math.round(monster.lustVuln * damage));
 		}
-		if (player.tailType == 20) {
-			monster.statStore.addBuffObject({spe:-(dBd3c*10)}, "Poison",{text:"Poison"});
+		if (player.isSandWorm()) {
+			monster.statStore.addBuffObject({str: -20}, "Sandworm Sting", {text: "Sandworm Sting"});
+			if (!monster.hasStatusEffect(StatusEffects.LustDoT))
+				monster.createStatusEffect(StatusEffects.LustDoT, 3, 0.05, 0, 0);
+			else {
+				monster.addStatusValue(StatusEffects.LustDoT, 1, 2);
+				monster.addStatusValue(StatusEffects.LustDoT, 2, 0.1);
+			}
+		} else {
+			if (player.tailType == Tail.SCORPION) {
+				monster.statStore.addBuffObject({spe: -(dBd3c * 10)}, "Poison", {text: "Poison"});
+			}
+			if (monster.hasStatusEffect(StatusEffects.BeeVenom)) {
+				monster.addStatusValue(StatusEffects.BeeVenom, 3, (dBd3c * 5));
+			} else monster.createStatusEffect(StatusEffects.BeeVenom, 0, 0, (dBd3c * 5), 0);
+			/*	if(!monster.hasStatusEffect(StatusEffects.lustvenom)) monster.createStatusEffect(StatusEffects.lustvenom, 0, 0, 0, 0);
+             IT used to paralyze 50% of the time, this is no longer the case!
+             Paralise the other 50%!
+             else {
+             outputText("Searing pain lances through [themonster] as you manage to sting [monster him]!  ");
+             if(monster.short == "demons") outputText("You watch as [monster he] stagger back a step and nearly trip, finding it hard to move as [monster he] are afflicted with your paralytic venom.  ");
+             else outputText("You watch as [monster he] staggers back a step and nearly trips, finding it hard to move as [monster he] is afflicted with your paralytic venom.  ");
+             if(monster.short == "demons") outputText("It appears that [themonster] are weaker and slower.");
+             else outputText("It appears that [themonster] is weaker and slower.");
+             monster.str -= (5+rand(player.lib/5))
+             monster.spe -= (5+rand(player.lib/5))
+             if(monster.str < 1) monster.str = 1;
+             if(monster.spe < 1) monster.spe = 1;
+             }*/
 		}
-		if(monster.hasStatusEffect(StatusEffects.BeeVenom))
-		{
-			monster.addStatusValue(StatusEffects.BeeVenom,3,(dBd3c*5));
-		}
-		else monster.createStatusEffect(StatusEffects.BeeVenom, 0, 0, (dBd3c*5), 0);
-		/*	if(!monster.hasStatusEffect(StatusEffects.lustvenom)) monster.createStatusEffect(StatusEffects.lustvenom, 0, 0, 0, 0);
-		 IT used to paralyze 50% of the time, this is no longer the case!
-		 Paralise the other 50%!
-		 else {
-		 outputText("Searing pain lances through [themonster] as you manage to sting [monster him]!  ");
-		 if(monster.short == "demons") outputText("You watch as [monster he] stagger back a step and nearly trip, finding it hard to move as [monster he] are afflicted with your paralytic venom.  ");
-		 else outputText("You watch as [monster he] staggers back a step and nearly trips, finding it hard to move as [monster he] is afflicted with your paralytic venom.  ");
-		 if(monster.short == "demons") outputText("It appears that [themonster] are weaker and slower.");
-		 else outputText("It appears that [themonster] is weaker and slower.");
-		 monster.str -= (5+rand(player.lib/5))
-		 monster.spe -= (5+rand(player.lib/5))
-		 if(monster.str < 1) monster.str = 1;
-		 if(monster.spe < 1) monster.spe = 1;
-		 }*/
 		//New line before monster attack
 		outputText("\n\n");
 		combat.WrathGenerationPerHit2(5);

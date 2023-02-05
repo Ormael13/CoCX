@@ -1896,6 +1896,7 @@ import flash.utils.getQualifiedClassName;
 				StatusEffects.CancerGrab,
 				StatusEffects.MysticWeb,
 				StatusEffects.Entangled,
+				StatusEffects.Swallowed,
 			]
 			for each (var effect:StatusEffectType in effects) if (hasStatusEffect(effect)) return true;
 			return false;
@@ -2077,15 +2078,15 @@ import flash.utils.getQualifiedClassName;
 				return false;
 			}
 			else if (LowerBody.hasTentacles(player)) {
-			EngineCore.outputText("Your prey pushes at your tentacles, twisting and writhing in an effort to escape from your tentacle's tight bonds.");
-			if (statusEffectv1(StatusEffects.ConstrictedScylla) <= 0) {
-				EngineCore.outputText("  [Themonster] proves to be too much for your tentacles to handle, breaking free of your tightly bound coils.");
-				if (player.hasStatusEffect(StatusEffects.ControlFreak)) removeStatusEffect(StatusEffects.ControlFreak);
-				removeStatusEffect(StatusEffects.ConstrictedScylla);
-			}
-			addStatusValue(StatusEffects.ConstrictedScylla, 1, -1);
-			if (player.hasPerk(PerkLib.ControlFreak)) ControlFreakStacking();
-			return false;
+				EngineCore.outputText("Your prey pushes at your tentacles, twisting and writhing in an effort to escape from your tentacle's tight bonds.");
+				if (statusEffectv1(StatusEffects.ConstrictedScylla) <= 0) {
+					EngineCore.outputText("  [Themonster] proves to be too much for your tentacles to handle, breaking free of your tightly bound coils.");
+					if (player.hasStatusEffect(StatusEffects.ControlFreak)) removeStatusEffect(StatusEffects.ControlFreak);
+					removeStatusEffect(StatusEffects.ConstrictedScylla);
+				}
+				addStatusValue(StatusEffects.ConstrictedScylla, 1, -1);
+				if (player.hasPerk(PerkLib.ControlFreak)) ControlFreakStacking();
+				return false;
 			}
 			else if (LowerBody.hasPincers(player)) {
 				EngineCore.outputText("Your prey pushes at your pincer, twisting and writhing in an effort to escape from your iron grip.");
@@ -2097,55 +2098,66 @@ import flash.utils.getQualifiedClassName;
 				return false;
 			}
 			else if (LowerBody.isGoo(player)) {
-			EngineCore.outputText("[Themonster] struggle in your fluid form kicking and screaming to try and get out.");
-			if (statusEffectv1(StatusEffects.GooEngulf) <= 0) {
-				EngineCore.outputText("  [Themonster] proves to be too much for your slimy body to handle, breaking free of your fluids.");
-				if (player.hasStatusEffect(StatusEffects.ControlFreak)) removeStatusEffect(StatusEffects.ControlFreak);
-				removeStatusEffect(StatusEffects.GooEngulf);
-			}
-			addStatusValue(StatusEffects.GooEngulf, 1, -1);
-			if (player.hasPerk(PerkLib.ControlFreak)) ControlFreakStacking();
-			return false;
+				EngineCore.outputText("[Themonster] struggle in your fluid form kicking and screaming to try and get out.");
+				if (statusEffectv1(StatusEffects.GooEngulf) <= 0) {
+					EngineCore.outputText("  [Themonster] proves to be too much for your slimy body to handle, breaking free of your fluids.");
+					if (player.hasStatusEffect(StatusEffects.ControlFreak)) removeStatusEffect(StatusEffects.ControlFreak);
+					removeStatusEffect(StatusEffects.GooEngulf);
+				}
+				addStatusValue(StatusEffects.GooEngulf, 1, -1);
+				if (player.hasPerk(PerkLib.ControlFreak)) ControlFreakStacking();
+				return false;
 			}
 			else if (hasStatusEffect(StatusEffects.ConstrictedWhip)) {
-			EngineCore.outputText("[Themonster] pushes, twisting and writhing in an effort to escape from your whip's tight bonds.");
-			if (statusEffectv1(StatusEffects.ConstrictedWhip) <= 0) {
-				EngineCore.outputText("  [Themonster] proves to be too much for your whip to handle, breaking free of your tightly bound whip coils.");
-				if (player.hasStatusEffect(StatusEffects.ControlFreak)) removeStatusEffect(StatusEffects.ControlFreak);
-				removeStatusEffect(StatusEffects.ConstrictedWhip);
-			}
-			addStatusValue(StatusEffects.ConstrictedWhip, 1, -1);
-			if (player.hasPerk(PerkLib.ControlFreak)) ControlFreakStacking();
-			return false;
+				EngineCore.outputText("[Themonster] pushes, twisting and writhing in an effort to escape from your whip's tight bonds.");
+				if (statusEffectv1(StatusEffects.ConstrictedWhip) <= 0) {
+					EngineCore.outputText("  [Themonster] proves to be too much for your whip to handle, breaking free of your tightly bound whip coils.");
+					if (player.hasStatusEffect(StatusEffects.ControlFreak)) removeStatusEffect(StatusEffects.ControlFreak);
+					removeStatusEffect(StatusEffects.ConstrictedWhip);
+				}
+				addStatusValue(StatusEffects.ConstrictedWhip, 1, -1);
+				if (player.hasPerk(PerkLib.ControlFreak)) ControlFreakStacking();
+				return false;
 			}
 			else if (hasStatusEffect(StatusEffects.EmbraceVampire)) {
-			if (statusEffectv1(StatusEffects.EmbraceVampire) <= 0) {
-				EngineCore.outputText("You try to maintain your grip but [themonster] shove you off escaping your embrace!");
-				removeStatusEffect(StatusEffects.EmbraceVampire);
-			}
-			else EngineCore.outputText("[Themonster] struggle but you manage to maintain the embrace.");
-			addStatusValue(StatusEffects.EmbraceVampire, 1, -1);
-			return false;
+				if (statusEffectv1(StatusEffects.EmbraceVampire) <= 0) {
+					EngineCore.outputText("You try to maintain your grip but [themonster] shove you off escaping your embrace!");
+					removeStatusEffect(StatusEffects.EmbraceVampire);
+				}
+				else EngineCore.outputText("[Themonster] struggle but you manage to maintain the embrace.");
+				addStatusValue(StatusEffects.EmbraceVampire, 1, -1);
+				return false;
 			}
 			else if (hasStatusEffect(StatusEffects.GrabBear)) {
-			if (statusEffectv1(StatusEffects.GrabBear) <= 0) {
-				EngineCore.outputText("You try to maintain your grip but [themonster] shove you off escaping your grab!");
-				removeStatusEffect(StatusEffects.GrabBear);
-			}
-			else EngineCore.outputText("[Themonster] struggle but you manage to maintain the grab.");
-			addStatusValue(StatusEffects.GrabBear, 1, -1);
-			return false;
-			}
-			else {
-			EngineCore.outputText("Your prey pushes at your tail, twisting and writhing in an effort to escape from your tail's tight bonds.");
-			if (statusEffectv1(StatusEffects.Constricted) <= 0) {
-				EngineCore.outputText("  [Themonster] proves to be too much for your tail to handle, breaking free of your tightly bound coils.");
-				if (player.hasStatusEffect(StatusEffects.ControlFreak)) removeStatusEffect(StatusEffects.ControlFreak);
-				removeStatusEffect(StatusEffects.Constricted);
-			}
-			addStatusValue(StatusEffects.Constricted, 1, -1);
-			if (player.hasPerk(PerkLib.ControlFreak)) ControlFreakStacking();
-			return false;
+				if (statusEffectv1(StatusEffects.GrabBear) <= 0) {
+					EngineCore.outputText("You try to maintain your grip but [themonster] shove you off escaping your grab!");
+					removeStatusEffect(StatusEffects.GrabBear);
+				}
+				else EngineCore.outputText("[Themonster] struggle but you manage to maintain the grab.");
+				addStatusValue(StatusEffects.GrabBear, 1, -1);
+				return false;
+			} if (hasStatusEffect(StatusEffects.Swallowed)) {
+				if (statusEffectv1(StatusEffects.Swallowed) <= 0) {
+					EngineCore.outputText("Desperately punching around to get free from the fleshy tentacle hell that is your insides your opponent finally strikes a weak spot forcing you to spit [monster him] out as you contort yourself.");
+					if (player.hasStatusEffect(StatusEffects.ControlFreak)) removeStatusEffect(StatusEffects.ControlFreak);
+					removeStatusEffect(StatusEffects.Swallowed);
+					removeStatusEffect(StatusEffects.Dig);
+				} else {
+					EngineCore.outputText("Your newest unwilling mate tries really hard to get free but simply fails to inflict any lasting damage to you.");
+				}
+				addStatusValue(StatusEffects.Swallowed, 1, -1);
+				if (player.hasPerk(PerkLib.ControlFreak)) ControlFreakStacking();
+				return false;
+			} else {
+				EngineCore.outputText("Your prey pushes at your tail, twisting and writhing in an effort to escape from your tail's tight bonds.");
+				if (statusEffectv1(StatusEffects.Constricted) <= 0) {
+					EngineCore.outputText("  [Themonster] proves to be too much for your tail to handle, breaking free of your tightly bound coils.");
+					if (player.hasStatusEffect(StatusEffects.ControlFreak)) removeStatusEffect(StatusEffects.ControlFreak);
+					removeStatusEffect(StatusEffects.Constricted);
+				}
+				addStatusValue(StatusEffects.Constricted, 1, -1);
+				if (player.hasPerk(PerkLib.ControlFreak)) ControlFreakStacking();
+				return false;
 			}
 		}
 		private function ControlFreakStacking():void {
@@ -3200,6 +3212,15 @@ import flash.utils.getQualifiedClassName;
 				//Reduced by lust vuln of course
 				lust += Math.round(lustVuln * (5 + statusEffectv2(StatusEffects.LustStick)));
 			}
+			if (hasStatusEffect(StatusEffects.Swallowed)) {
+				if (rand(3)) {
+					outputText("The many fleshy tentacles lining your inner walls slither around [themonster], seeking out and caressing [monster his] vulnerable endowments as you insidiously try to draw [monster him] closer to cumming.\n\n");
+					if (!lustVuln <= 0) teased(SceneLib.combat.calculateBasicTeaseDamage(9 + rand(7)));
+				}
+				if (!hasStatusEffect(StatusEffects.SandWormAcid))
+					createStatusEffect(StatusEffects.SandWormAcid, 1, 0, 0, 0);
+				addStatusValue(StatusEffects.SandWormAcid, 1, 1);
+			}
 			if(hasStatusEffect(StatusEffects.PCTailTangle)) {
 				//when Entwined
 				outputText("You are bound tightly in the kitsune's tails.  <b>The only thing you can do is try to struggle free!</b>\n\n");
@@ -3297,9 +3318,30 @@ import flash.utils.getQualifiedClassName;
 					store15 = Math.round(store15 * SceneLib.combat.poisonDamageBoostedByDao());
 					store15 += maxHP() * statusEffectv2(StatusEffects.AntAcid);
 					store15 = SceneLib.combat.fixPercentDamage(store15);
-					store15 = SceneLib.combat.doAcidDamage(store15);
-					if(plural) outputText(capitalA + short + " burn from lingering formic acid. <b>([font-red]" + store15 + "[/font])</b>\n\n");
-					else outputText(capitalA + short + " burns from lingering formic acid. <b>([font-red]" + store15 + "[/font])</b>\n\n");
+					if(plural) outputText(capitalA + short + " burn from lingering formic acid.");
+					else outputText(capitalA + short + " burns from lingering formic acid.");
+					store15 = SceneLib.combat.doAcidDamage(store15, true, true);
+					outputText("\n\n");
+				}
+			}
+			//Sandworm Acid DoT
+			if (hasStatusEffect(StatusEffects.SandWormAcid)) {
+				//Countdown to heal
+				addStatusValue(StatusEffects.SandWormAcid,1,-1);
+				//Heal wounds
+				if(statusEffectv1(StatusEffects.SandWormAcid) <= 0) {
+					outputText("The acid burning [themonster] finally wore out.\n\n");
+					removeStatusEffect(StatusEffects.SandWormAcid);
+				}
+				//Deal damage if still wounded.
+				else {
+					outputText("Your lewd dissolving acid causes [themonster] to flush hotly with arousal.");
+					var store18:Number = (player.str + player.spe + player.tou) * 0.5;
+					if (game.player.hasPerk(PerkLib.KingOfTheJungle)) store18 *= 1.2;
+					store18 = SceneLib.combat.fixPercentDamage(store18);
+					store18 = SceneLib.combat.doAcidDamage(store18, true, true);
+					if (!lustVuln <= 0) teased(SceneLib.combat.calculateBasicTeaseDamage(9 + rand(3)));
+					outputText("\n\n");
 				}
 			}
 			//Burn DoT

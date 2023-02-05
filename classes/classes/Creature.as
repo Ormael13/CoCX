@@ -3448,6 +3448,7 @@ public class Creature extends Utils
 		public function isTaur():Boolean { return lowerBodyPart.isTaur(); }
 		public function canTaur():Boolean { return lowerBodyPart.canTaur(); }
 		public function isScylla():Boolean { return lowerBodyPart.isScylla(); }
+		public function isSandWorm():Boolean { return lowerBodyPart.type == LowerBody.SANDWORM; }
 		public function isKraken():Boolean { return lowerBodyPart.isKraken(); }
 		public function isAlraune():Boolean { return lowerBodyPart.isAlraune(); }
 		public function isLiliraune():Boolean { return lowerBodyPart.isLiliraune(); }

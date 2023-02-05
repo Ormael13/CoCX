@@ -835,6 +835,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const StunCooldown:StatusEffectType       	= mk("Stun Cooldown");
 		public static const Straddle:StatusEffectType  				= mk("Straddling your opponent");
 		public static const StraddleRoundLeft:StatusEffectType  	= mk("Straddling your opponent Round left");
+		public static const Swallowed:StatusEffectType				= mk("Swallowed yuor opponent");
 		public static const TailSlamWhip:StatusEffectType       	= mk("Tail Slam Whip");
 		public static const TentacleCoolDown:StatusEffectType   	= mk("TentacleCoolDown");
 		public static const Timer:StatusEffectType              	= mk("Timer");
@@ -926,6 +927,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const Defend:StatusEffectType                    = mkCombat("Defend");
 		public static const DefendMonsterVer:StatusEffectType          = mkCombat("Defend Monster Ver");
 		public static const DemonSeed:StatusEffectType                 = mkCombat("DemonSeed");
+		public static const Devoured:StatusEffectType     	  		   = mkCombat("Devoured");
 		public static const Dig:StatusEffectType     	  			   = mkCombat("Dig");
 		public static const Disarmed:StatusEffectType                  = mkCombat("Disarmed");
 		public static const Displacement:StatusEffectType      		   = mkCombat("Displacer beast displacement");
@@ -1044,6 +1046,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const ResonanceVolley:StatusEffectType           = mkCombat("Resonance Volley");
 		public static const Rosethorn:StatusEffectType                 = mkCombat("Rosethorn Poison");
 		public static const Sandstorm:StatusEffectType                 = mkCombat("sandstorm");
+		public static const SandWormAcid:StatusEffectType              = mkCombat("Sand Worm Acid");
 		public static const ScyllaBind:StatusEffectType                = mkCombat("Scylla Bind");
 		public static const Sealed:StatusEffectType                    = mkCombat("Sealed");
 		public static const Sealed2:StatusEffectType                   = mkCombat("Sealed2");
@@ -1245,4 +1248,4 @@ import classes.StatusEffects.VampireThirstEffect;
 			return new StatusEffectType(id,CombatStatusEffect,1);
 		}
 	}
-}
+}

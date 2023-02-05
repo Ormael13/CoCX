@@ -2171,6 +2171,26 @@ public class LowerBodyTransformations extends MutationsHelper {
 				return player.lowerBody === LowerBody.TINY && player.legCount === 2;
 			}
 	);
+
+	public const LowerBodyWorm: Transformation = new SimpleTransformation("Worm Lower Body",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				// Doesn't support tails
+				TransformationUtils.applyTFIfNotPresent(transformations.TailNone, doOutput);
+
+				player.chitinColor = "pink";
+
+				if (doOutput) outputText(desc);
+				player.legCount = 1;
+				player.lowerBody = LowerBody.SANDWORM;
+			},
+			// is present
+			function (): Boolean {
+				return player.lowerBody === LowerBody.SANDWORM;
+			}
+	);
 	
 	/*
   */
