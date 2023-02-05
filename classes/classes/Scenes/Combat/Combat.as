@@ -11417,7 +11417,7 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) {
                 damage1B *= 2;
             }
-            monster.teased(Math.round(monster.lustVuln * damage1B));
+            monster.teased(damage1B);
             combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
             monster.statStore.addBuffObject({str:-monster.statusEffectv1(StatusEffects.ApophisVenom)*2, spe:-monster.statusEffectv1(StatusEffects.ApophisVenom)*2, tou:-monster.statusEffectv1(StatusEffects.ApophisVenom)*2}, "Poison",{text:"Poison"});
             if (monster.statusEffectv3(StatusEffects.ApophisVenom) >= 1 && monster.lustVuln > 0) monster.lust += monster.statusEffectv3(StatusEffects.ApophisVenom);
@@ -11444,7 +11444,7 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) {
                 damage1B *= 2;
             }
-            monster.teased(Math.round(monster.lustVuln * damage1B));
+            monster.teased(damage1B);
             combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
             monster.lustVuln += 0.05;
             monster.statStore.addBuffObject({tou:-monster.statusEffectv1(StatusEffects.ManticoreVenom)*2}, "Poison",{text:"Poison"});
@@ -11473,7 +11473,7 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) {
                 damage1B *= 2;
             }
-            monster.teased(Math.round(monster.lustVuln * damage1B));
+            monster.teased(damage1B);
             combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
             monster.lustVuln += 0.05;
             monster.statStore.addBuffObject({tou:-monster.statusEffectv1(StatusEffects.JabberwockyVenom)*2}, "Poison",{text:"Poison"});
@@ -11502,7 +11502,7 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) {
                 damage1B *= 2;
             }
-            monster.teased(Math.round(monster.lustVuln * damage1B));
+            monster.teased(damage1B);
             combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
             monster.statStore.addBuffObject({tou:-monster.statusEffectv1(StatusEffects.ManticoreVenom)*2}, "Poison",{text:"Poison"});
             if (monster.statusEffectv3(StatusEffects.ManticoreVenom) >= 1 && monster.lustVuln > 0) monster.lust += monster.statusEffectv3(StatusEffects.ManticoreVenom);
