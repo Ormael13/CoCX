@@ -340,6 +340,8 @@ public class BreastsTransformations extends MutationsHelper {
 			// apply effect
 			function (doOutput:Boolean):void {
 				var desc: String = "";
+				TransformationUtils.applyTFIfNotPresent(transformations.NipplesPerBreastOne, doOutput);
+
 				if (player.nippleLength < 2) {
 					desc += "[pg]Your nipples engorge, prodding hard against the inside of your [armor].  Abruptly you realize they've grown rapidly to 2 inches."
 					player.nippleLength = 2;

@@ -63,14 +63,23 @@ use namespace CoC;
 			}, {
 				name: "sieg1",
 				when: function ():Boolean {
-					return flags[kFLAGS.SIEGWEIRD_FOLLOWER] < 2 || (player.statusEffectv1(StatusEffects.AlvinaTraining2) == 3 && !SceneLib.alvinaFollower.AlvinaPurified && flags[kFLAGS.SIEGWEIRD_FOLLOWER] < 3)
+					var v1: Number = flags[kFLAGS.SIEGWEIRD_FOLLOWER];
+					var proc1a:Boolean = flags[kFLAGS.SIEGWEIRD_FOLLOWER] < 2;
+					var proc1b:Boolean = !(player.statusEffectv1(StatusEffects.AlvinaTraining2) == 3 && !SceneLib.alvinaFollower.AlvinaPurified);
+					var v2: Number = player.statusEffectv1(StatusEffects.AlvinaTraining2);
+					var proc2a:Boolean = flags[kFLAGS.SIEGWEIRD_FOLLOWER] == 2.5;
+					var proc2b:Boolean = (player.statusEffectv1(StatusEffects.AlvinaTraining2) == 3 && flags[kFLAGS.SIEGWEIRD_FOLLOWER] >= 3);
+					var proc2c:Boolean = (flags[kFLAGS.SIEGWEIRD_FOLLOWER] > 2 && flags[kFLAGS.SIEGWEIRD_FOLLOWER] < 4 && SceneLib.alvinaFollower.AlvinaPurified);
+					return flags[kFLAGS.SIEGWEIRD_FOLLOWER] < 2 && !(player.statusEffectv1(StatusEffects.AlvinaTraining2) == 3 && !SceneLib.alvinaFollower.AlvinaPurified)
 				},
 				night: false,
 				call: SceneLib.siegweirdFollower.siegweirdFirstEncounter
 			}, {
 				name: "sieg2",
 				when: function ():Boolean {
-					return flags[kFLAGS.SIEGWEIRD_FOLLOWER] == 2.5 || (player.statusEffectv1(StatusEffects.AlvinaTraining2) == 3 && !SceneLib.alvinaFollower.AlvinaPurified && flags[kFLAGS.SIEGWEIRD_FOLLOWER] >= 3)
+					return flags[kFLAGS.SIEGWEIRD_FOLLOWER] == 2.5
+							|| (player.statusEffectv1(StatusEffects.AlvinaTraining2) == 3 && flags[kFLAGS.SIEGWEIRD_FOLLOWER] >= 3)
+							|| (flags[kFLAGS.SIEGWEIRD_FOLLOWER] > 2 && flags[kFLAGS.SIEGWEIRD_FOLLOWER] < 4 && SceneLib.alvinaFollower.AlvinaPurified)
 				},
 				night: false,
 				call: SceneLib.siegweirdFollower.siegweirdRepeatEncounterPostFight

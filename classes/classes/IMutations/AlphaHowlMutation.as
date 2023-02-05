@@ -78,17 +78,20 @@ public class AlphaHowlMutation extends IMutationPerkType
         //Mutations Buffs
         override public function buffsForTier(pTier:int, target:Creature):Object {
             var pBuffs:Object = {};
+            var packMembers:Number = LunaFollower.WerewolfPackMember;
+            if (target.hasMutation(IMutationsLib.HellhoundFireBallsIM)) packMembers += LunaFollower.HellhoundPackMember;
+
             if (pTier == 1) pBuffs['str.mult'] = 0.05;
             else if (pTier == 2) pBuffs['str.mult'] = 0.15;
             else if (pTier == 3) pBuffs['str.mult'] = 0.30;
             else if (pTier == 4) pBuffs['str.mult'] = 0.45;
             if (pTier == 4 && (player.isRaceCached(Races.WEREWOLF) || player.isRaceCached(Races.DOG) || player.isRaceCached(Races.WOLF) || player.isRaceCached(Races.CERBERUS))){
-                pBuffs['str.mult'] += 0.05*LunaFollower.WerewolfPackMember;
-                pBuffs['spe.mult'] = 0.05*LunaFollower.WerewolfPackMember;
-                pBuffs['tou.mult'] = 0.05*LunaFollower.WerewolfPackMember;
-                pBuffs['int.mult'] = 0.05*LunaFollower.WerewolfPackMember;
-                pBuffs['wis.mult'] = 0.05*LunaFollower.WerewolfPackMember;
-                pBuffs['lib.mult'] = 0.05*LunaFollower.WerewolfPackMember;
+                pBuffs['str.mult'] += 0.05*packMembers;
+                pBuffs['spe.mult'] = 0.05*packMembers;
+                pBuffs['tou.mult'] = 0.05*packMembers;
+                pBuffs['int.mult'] = 0.05*packMembers;
+                pBuffs['wis.mult'] = 0.05*packMembers;
+                pBuffs['lib.mult'] = 0.05*packMembers;
             }
             return pBuffs
         }

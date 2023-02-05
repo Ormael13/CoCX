@@ -2638,13 +2638,7 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("\n\n");
 			checkAchievementDamage(damage);
 			combat.heroBaneProc(damage);
-			if (monster is Lethice && (monster as Lethice).fightPhase == 3)
-			{
-				outputText("\n\n<i>\"Ouch. Such arcane skills for one so uncouth,\"</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>\"How will you beat me without your magics?\"</i>\n\n");
-				monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
-				enemyAI();
-			}
-			else combatRoundOver();
+			checkLethiceAndCombatRoundOver();
 		}
 		else {
 			fatigue(200, USEFATG_MAGIC_NOBM);
@@ -2707,7 +2701,7 @@ public class MagicSpecials extends BaseCombatContent {
 		outputText("\n\n");
 		player.tailVenom -= player.VenomWebCost() * 5;
 		flags[kFLAGS.VENOM_TIMES_USED] += 1;
-		if (!combatIsOver()) enemyAI();
+		checkLethiceAndCombatRoundOver();
 	}
 //* Terrestrial Fire
 	public function fireballuuuuu():void {
