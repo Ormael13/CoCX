@@ -684,8 +684,8 @@ public class CampUpgrades extends BaseContent {
 
     private function doBuildElementalEnergyConduit(currentTier:int):void {
         var stoneShardCost:int = 3 + currentTier;
-        var manaCost:int = 150 + currentTier * 50;
-        var capacityIncrease:int = 600 + currentTier * 200;
+        var manaCost:int = 300 + currentTier * 100;
+        var capacityIncrease:int = 900 + currentTier * 300;
         clearOutput();
         if (currentTier == 0) {
             outputText("You decide to upgrade your first arcane circle in order to better utilise elemental shards. You reach to the shards, enfusing them with your mana and changing them from the inside. You liquify the crystals, pouring them into a stone bowl. You then engrave an intricate series of runes onto three flat stones, carefully pouring the liquid crystal into the engravings, making them shine with power. All three stones are then placed in a triangular formation inside your circle, runes lining up to form veins of magic, conduits pulsing with elemental energy. Each stone is now an elemental node! You can feel that the power is now directly stored in the arcane circle, ready to use.");
@@ -706,8 +706,8 @@ public class CampUpgrades extends BaseContent {
 
     private function doUpgradeElementalEnergyConduit(currentTier:int):void {
         var stoneShardCost:int = 3 + currentTier;
-        var manaCost:int = 150 + currentTier * 50;
-        var capacityIncrease:int = 600 + currentTier * 200;
+        var manaCost:int = 300 + currentTier * 100;
+        var capacityIncrease:int = 900 + currentTier * 300;
         clearOutput();
         if (currentTier == 0)
             outputText("You decide that you need more elemental energy on hand, and for that, you need to expand your first energy conduit. You reach to the shards, enfusing them with your mana and changing them from the inside. You liquify the crystals, pouring them into a stone bowl. You then engrave an intricate series of runes onto " + NUMBER_WORDS_NORMAL[stoneShardCost] + " flat stones, carefully pouring the liquid crystal into the engravings, making them shine with power. All " + NUMBER_WORDS_NORMAL[stoneShardCost] + " stones are then placed around one of your pre-existing nodes, runes lining up to form veins of magic, conduits pulsing with elemental energy. One of your basic nodes has been enhanced, and can now store more power.");

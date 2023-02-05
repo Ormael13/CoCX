@@ -4869,7 +4869,6 @@ public class Combat extends BaseContent {
                 }
             }
             outputText(".");
-
             if (player.hasPerk(PerkLib.HellfireCoat))
                 ExtraNaturalWeaponAttack(biteMultiplier, "fire");
             ExtraNaturalWeaponAttack(biteMultiplier);
@@ -5006,7 +5005,6 @@ public class Combat extends BaseContent {
             else{
                 outputText("You rear up and claw at your opponent with your forepaws.");
             }
-
             if (player.hasPerk(PerkLib.HellfireCoat)) {
                 ExtraNaturalWeaponAttack(1, "fire");
                 ExtraNaturalWeaponAttack(1, "fire");
@@ -5019,7 +5017,6 @@ public class Combat extends BaseContent {
         //POUNCING FOR THE KILL
         if (player.canPounce()) {
             outputText("You leap up at [themonster] raking [monster him] with your hind claws twice.");
-
             if (player.hasPerk(PerkLib.HellfireCoat)) {
                 ExtraNaturalWeaponAttack(1, "fire");
                 ExtraNaturalWeaponAttack(1, "fire");
@@ -5256,9 +5253,9 @@ public class Combat extends BaseContent {
         //Unique attack Cerberus fire breath
         if (player.faceType == Face.CERBERUS && player.hasPerk(PerkLib.Hellfire)) {
             outputText("You unleash a tripple blast of fire from your heads, engulfing [themonster] in Hellfire.");
-            ExtraNaturalWeaponAttack(1, "fire breath");
-            ExtraNaturalWeaponAttack(1, "fire breath");
-            ExtraNaturalWeaponAttack(1, "fire breath");
+            ExtraNaturalWeaponAttack(1, "fire");
+            ExtraNaturalWeaponAttack(1, "fire");
+            ExtraNaturalWeaponAttack(1, "fire");
             outputText("\n");
         }
         //Unique attack Slime
@@ -6615,7 +6612,7 @@ public class Combat extends BaseContent {
     }
 
     public function isIceTypeWeapon():Boolean {
-        return ((player.weapon == weapons.SCLAYMO || player.weapon == weapons.SDAGGER) && (player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "sapphire")) || (flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon()) && player.hasStatusEffect(StatusEffects.WinterClaw));
+        return ((player.weapon == weapons.SCLAYMO || player.weapon == weapons.SDAGGER) && (player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "sapphire")) || player.weapon == weapons.BCLAWS || (flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon()) && player.hasStatusEffect(StatusEffects.WinterClaw));
     }
 
     public function isLightningTypeWeapon():Boolean {
@@ -6867,7 +6864,6 @@ public class Combat extends BaseContent {
                 damage *= FeraldamageMultiplier;
 				if (BelisaFollower.HolyBand6 > 0) damage *= 1.25;
 				if (SpecialEffect == "fire") doFireDamage(damage, true, true);
-                if (SpecialEffect == "fire breath") doFireDamage(damage, true, true);
 				else if (SpecialEffect == "ice") doIceDamage(damage, true, true);
 				else if (SpecialEffect == "lightning") doLightingDamage(damage, true, true);
 				else if (SpecialEffect == "darkness") doDarknessDamage(damage, true, true);
@@ -10617,6 +10613,10 @@ public class Combat extends BaseContent {
             if (!player.hasPerk(PerkLib.ColdAffinity)) maxPercentRegen -= 10;
             if (player.isRaceCached(Races.YUKIONNA)) maxPercentRegen += 5;
         }
+		if (player.weapon == weapons.BCLAWS) {
+            if (!player.hasPerk(PerkLib.ColdAffinity)) maxPercentRegen -= 2;
+            if (player.isRaceCached(Races.YUKIONNA)) maxPercentRegen += 1;
+        }
         if (player.weapon == weapons.SESPEAR) maxPercentRegen += 2;
         if (player.hasPerk(PerkLib.LustyRegeneration)) maxPercentRegen += 0.5;
         if (player.hasPerk(PerkLib.LizanRegeneration)) maxPercentRegen += 1.5;
@@ -10684,6 +10684,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.FFclassHeavenTribulationSurvivor)) maxRegen += 0.5;
         if (player.hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) maxRegen += 0.5;
         if (player.armor == armors.BLIZZ_K && player.isRaceCached(Races.YUKIONNA)) maxRegen += 5;
+        if (player.weapon == weapons.BCLAWS && player.isRaceCached(Races.YUKIONNA)) maxRegen += 1;
         if (combat && player.headJewelry == headjewelries.CUNDKIN && player.HP < 1) maxRegen += 1;
         if (player.hasKeyItem("M.G.S. bracer") >= 0) maxRegen += 2;
         return maxRegen;
@@ -15438,13 +15439,27 @@ public function purityScalingDA():Number {
     return purityScalingDA;
 }
 public function corruptionScalingDA():Number {
-    var corruptionScalingDA:Number = 1;
+	var corruptionScalingDA:Number = 1;
     if (monster.cor >= 66) corruptionScalingDA *= 0.6;
     else if (monster.cor >= 50) corruptionScalingDA *= 1.2;
     else if (monster.cor >= 25) corruptionScalingDA *= 1.8;
     else if (monster.cor >= 10) corruptionScalingDA *= 2.4;
     else corruptionScalingDA *= 3;
     return corruptionScalingDA;
+}
+/* Can provide a scaling or additive bonus to damage depending on usage. Uses player.cor in function to assign scaling.
+Uses Damage *= pcScalingBonusCorruption(player.cor); for scaling.
+ */
+public function pcScalingBonusCorruption(corStat:int):Number{
+    var scalingNum:Number;
+    if (corStat == 100) scalingNum = 1.5;
+    else if (corStat >= 85) scalingNum = 1.35;
+    else if (corStat >= 70) scalingNum = 1.2;
+    else if (corStat >= 55) scalingNum = 1;
+    else if (corStat >= 40) scalingNum = 0.75;
+    else if (corStat >= 25) scalingNum = 0.5;
+    else scalingNum = 0.1;
+    return scalingNum;
 }
 
 public function oniRampagePowerMulti():Number {

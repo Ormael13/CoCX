@@ -101,30 +101,43 @@ public class DilapidatedShrine extends BaseContent
 			clearOutput();
 			player.destroyItems(consumables.CHILLYP, 3);
 			outputText("You place the peppers in one of the bowls, and wait for a bit. You hear a rasping sound, like steel on stone, and you turn to face the noise. When you turn back, the peppers are gone, ");
-			switch(rand(10)) {
-				case 1:
-					outputText("and in the other bowl sits a small, glowing syringe.");
-					inventory.takeItem(useables.E_ICHOR, westSection);
-					break;
-				case 3:
-					outputText("replaced by a bottle of Nocello sitting in front of the statue.");
-					inventory.takeItem(consumables.NOCELIQ, westSection);
-					break;
-				case 5:
-					outputText("and a single Storm Seed rests in the other bowl.");
-					inventory.takeItem(consumables.SRMSEED, westSection);
-					break;
-				case 7:
-					outputText("replaced by a familiar looking bottle of Enigmanium.");
-					inventory.takeItem(consumables.ENIGMANIUM, westSection);
-					break;
-				case 9:
-					outputText("instead, a bottle of Infernal Wine sits before the statue.");
-					inventory.takeItem(consumables.INFWINE, westSection);
-					break;
-				default:
-					outputText("and the other bowl is empty. Disappointing.");
-					break;
+			if (flags[kFLAGS.E_ICHOR_PITY_SYSTEM] > 9) {
+				flags[kFLAGS.E_ICHOR_PITY_SYSTEM] = 0;
+				outputText("and in the other bowl sits a small, glowing syringe.");
+				inventory.takeItem(useables.E_ICHOR, westSection);
+			}
+			else {
+				switch(rand(10)) {
+					case 1:
+						flags[kFLAGS.E_ICHOR_PITY_SYSTEM] = 0;
+						outputText("and in the other bowl sits a small, glowing syringe.");
+						inventory.takeItem(useables.E_ICHOR, westSection);
+						break;
+					case 3:
+						flags[kFLAGS.E_ICHOR_PITY_SYSTEM]++;
+						outputText("replaced by a bottle of Nocello sitting in front of the statue.");
+						inventory.takeItem(consumables.NOCELIQ, westSection);
+						break;
+					case 5:
+						flags[kFLAGS.E_ICHOR_PITY_SYSTEM]++;
+						outputText("and a single Storm Seed rests in the other bowl.");
+						inventory.takeItem(consumables.SRMSEED, westSection);
+						break;
+					case 7:
+						flags[kFLAGS.E_ICHOR_PITY_SYSTEM]++;
+						outputText("replaced by a familiar looking bottle of Enigmanium.");
+						inventory.takeItem(consumables.ENIGMANIUM, westSection);
+						break;
+					case 9:
+						flags[kFLAGS.E_ICHOR_PITY_SYSTEM]++;
+						outputText("instead, a bottle of Infernal Wine sits before the statue.");
+						inventory.takeItem(consumables.INFWINE, westSection);
+						break;
+					default:
+						flags[kFLAGS.E_ICHOR_PITY_SYSTEM]++;
+						outputText("and the other bowl is empty. Disappointing.");
+						break;
+				}
 			}
 			outputText("\n\n")
 			doNext(westSection);

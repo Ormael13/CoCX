@@ -4,7 +4,7 @@ import classes.PerkClass;
 import classes.PerkType;
 import classes.PerkLib;
 
-public class SurvivalTrainingX extends PerkType
+public class SurvivalTrainingXPerk extends PerkType
 {
 	
 	override public function desc(params:PerkClass = null):String
@@ -15,11 +15,11 @@ public class SurvivalTrainingX extends PerkType
 
 	override public function name(params:PerkClass=null):String {
         if (!player || !params) return _name;
-        var sufval:String = player.perkv1(PerkLib.AscensionBuildingPrestigeX).toString();
+        var sufval:String = player.perkv1(PerkLib.SPSurvivalTrainingX).toString();
         return "Survival Training (Rank: " + sufval + ")";
     }
 
-    public function SurvivalTrainingX() 
+    public function SurvivalTrainingXPerk() 
 	{
 		super("Survival Training","Survival Training", ".");
 	}

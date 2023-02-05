@@ -66,7 +66,7 @@ public class PriscillaScene extends BaseContent
 			if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) {
 				if (flags[kFLAGS.PRISCILLA_DEFEATS_COUNTER] >= 1) flags[kFLAGS.PRISCILLA_DEFEATS_COUNTER]++;
 				else flags[kFLAGS.PRISCILLA_DEFEATS_COUNTER] = 1;
-				if (flags[kFLAGS.PRISCILLA_LVL_UP] < 11 && flags[kFLAGS.PRISCILLA_DEFEATS_COUNTER] == 1 && flags[kFLAGS.PRISCILLA_LVL_UP] < 1) {
+				if (flags[kFLAGS.PRISCILLA_LVL_UP] < 11 && flags[kFLAGS.PRISCILLA_DEFEATS_COUNTER] > flags[kFLAGS.PRISCILLA_LVL_UP]) {
 					flags[kFLAGS.PRISCILLA_DEFEATS_COUNTER] = 0;
 					++flags[kFLAGS.PRISCILLA_LVL_UP];
 				}

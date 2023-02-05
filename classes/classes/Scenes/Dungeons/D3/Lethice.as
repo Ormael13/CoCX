@@ -91,14 +91,14 @@ public class Lethice extends Monster
 
 			if (player.hasStatusEffect(StatusEffects.LethicesRapeTentacles))
 			{
-				str += "\n\n<b>A forest of black tentacles sprout from the floor, snaring any demons unlucky enough to venture close - or any champions unlucky enough to be in the center of it all.";
-				if (player.statusEffectv3(StatusEffects.LethicesRapeTentacles) != 0) outputText(" Unfortunately, they’ve grabbed you. You need to break free to do anything!");
+				str += "\n\nA forest of black tentacles sprout from the floor, snaring any demons unlucky enough to venture close - or any champions unlucky enough to be in the center of it all.";
+				if (player.statusEffectv3(StatusEffects.LethicesRapeTentacles) != 0) outputText("<b> Unfortunately, they’ve grabbed you. You need to break free to do anything! </b>");
 				if (player.hasStatusEffect(StatusEffects.KnowsWhitefire))
 				{
 					str += " A blast of white-fire could probably dispel them, or you could rely on your";
 					if (player.canFly()) str += " flight";
 					else str += " quickness";
-					str += " to stay safe. Either way, you’re free for now.</b>";
+					str += " to stay safe. Either way, you’re free for now.";
 				}
 			}
 

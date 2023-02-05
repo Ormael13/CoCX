@@ -72,7 +72,8 @@ public class YuWinterGearShop extends BaseContent
 			addButton(5, headjewelries.SKIGOGG.shortName, buyItem, 4).hint("Ski goggles");
 			addButton(6, headjewelries.SNOWFH.shortName, buyItem, 5).hint("Snowflake hairpin");
 			addButton(7, armors.BLIZZ_K.shortName, buyItem, 6).hint("Blizzard Kimono");
-			addButton(8, miscjewelries.SNOWBOA.shortName, buyItem, 7).hint("Snowboard");
+			addButton(8, weapons.BCLAWS.shortName, buyItem, 7).hint("Blizzard Claws");
+			addButton(10, miscjewelries.SNOWBOA.shortName, buyItem, 9).hint("Snowboard");
 			addButton(12, consumables.SKELP__.shortName, buyItem, 11).hint("Skelp");
 			addButton(13, consumables.F_TEAR.shortName, buyItem, 12).hint("Fafnir Tear");
 			addButton(14, "Back", YuMenuMain2);
@@ -85,7 +86,8 @@ public class YuWinterGearShop extends BaseContent
 			if (item == 4) yetiBuy(headjewelries.SKIGOGG);
 			if (item == 5) yetiBuy(headjewelries.SNOWFH);
 			if (item == 6) yetiBuy(armors.BLIZZ_K);
-			if (item == 7) yetiBuy(miscjewelries.SNOWBOA);
+			if (item == 7) yetiBuy(weapons.BCLAWS);
+			if (item == 9) yetiBuy(miscjewelries.SNOWBOA);
 			if (item == 11) yetiBuy(consumables.SKELP__);
 			if (item == 12) yetiBuy(consumables.F_TEAR);
 		}

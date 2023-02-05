@@ -579,9 +579,16 @@ public class MagicSpecials extends BaseCombatContent {
 			if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 		}
 		if (player.hasPerk(PerkLib.Hellfire)) {
-			bd = buttons.add("Hellfire",hellFire).hint("Unleash fire from your mouth. \n");
-			bd.requireFatigue(spellCost(20));
-			if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+			if (player.faceType == Face.CERBERUS) {
+				bd = buttons.add("Hellfire",hellFire).hint("Unleash fire from your mouths.\n");
+				bd.requireFatigue(spellCost(150));
+				if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+			}
+			else {
+				bd = buttons.add("Hellfire",hellFire).hint("Unleash fire from your mouth.\n");
+				bd.requireFatigue(spellCost(50));
+				if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+			}
 		}
 		if (player.hasPerk(PerkLib.PhoenixFireBreath)) {
 			bd = buttons.add("PhoenixFire", phoenixfireBreath).hint("Unleash fire from your mouth. \n\nWould go into cooldown after use for: "+(player.hasPerk(PerkLib.NaturalInstincts) ? "4":"5")+" rounds", "Phoenix Fire Breath");
@@ -2805,35 +2812,44 @@ public class MagicSpecials extends BaseCombatContent {
 		else enemyAI();
 	}
 
-	//player gains hellfire perk.
+//player gains hellfire perk.
 //Hellfire deals physical damage to completely pure foes,
 //lust damage to completely corrupt foes, and a mix for those in between.  Its power is based on the PC's corruption and level.  Appearance is slightly changed to mention that the PC's eyes and mouth occasionally show flicks of fire from within them, text could possibly vary based on corruption.
-	public function hellFire():void {
+	public function hellFire():void
+	{
 		if (monster.cor < 50) flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		else flags[kFLAGS.LAST_ATTACK_TYPE] = 3;
 		clearOutput();
-		fatigue(20, USEFATG_MAGIC_NOBM);
-		var damage:Number = (player.level * 8 + rand(10) + player.inte / 2 + player.wis / 2 + player.cor / 5);
+		if (player.faceType == Face.CERBERUS) fatigue(150, USEFATG_MAGIC_NOBM);
+		else fatigue(50, USEFATG_MAGIC_NOBM);
+		/* var damage:Number = (player.level * 8 + rand(10) + player.inte / 2 + player.wis / 2 + player.cor / 5);
 		damage = calcInfernoMod(damage, true);
-		damage *= 4;
+		damage *= 4;*/
+		var damage:Number = combat.scalingBonusStrength(true) + combat.scalingBonusLibido(true);
+		var lustDamagePercent:Number = monster.cor / 100;
+		var lustDamage:Number;
+		var fireDamage:Number;
+		damage *= combat.pcScalingBonusCorruption(player.cor);
+		damage *= spellModBlack();
+		lustDamage = combat.calculateBasicTeaseDamage(damage * lustDamagePercent);
+		fireDamage = calcInfernoMod(damage * (1 - lustDamagePercent), true);
 		if (combat.checkConcentration()) return; //Amily concentration
-		if (monster is LivingStatue)
-		{
+		if (monster is LivingStatue) {
 			outputText("The fire courses over the stone behemoths skin harmlessly. It does leave the surface of the statue glossier in its wake.");
 			enemyAI();
 			return;
 		}
-
-		else if (monster is Lethice && (monster as Lethice).fightPhase == 2)
-		{
+		else if (monster is Lethice && (monster as Lethice).fightPhase == 2) {
 			//Attack gains burn DoT for 2-3 turns.
 			outputText("You let loose a roiling cone of flames that wash over the horde of demons like a tidal wave, scorching at their tainted flesh with vigor unlike anything you've seen before. Screams of terror as much as, maybe more than, pain fill the air as the mass of corrupted bodies try desperately to escape from you! Though more demons pile in over the affected front ranks, you've certainly put the fear of your magic into them!");
 			monster.createStatusEffect(StatusEffects.OnFire, 2 + rand(2), 0, 0, 0);
-			damage = int(player.level * 8 + rand(10) + player.cor / 5);
+			doFireDamage(1, true, true);
+			monster.takeLustDamage(1, true);
+			/*damage = int(player.level * 8 + rand(10) + player.cor / 5);
 			damage *= 4;
 			damage *= 1.75;
 			outputText(" (" + damage + ")");
-			monster.HP -= damage;
+			monster.HP -= damage;*/
 			if(monster.HP <= monster.minHP()) {
 				doNext(endHpVictory);
 			}
@@ -2843,19 +2859,7 @@ public class MagicSpecials extends BaseCombatContent {
 			else enemyAI();
 			return;
 		}
-
-		if(!player.hasStatusEffect(StatusEffects.GooArmorSilence)) outputText("You take in a deep breath and unleash a wave of corrupt red flames from deep within.");
-
-		if(player.hasStatusEffect(StatusEffects.WebSilence)) {
-			outputText("  <b>The fire burns through the webs blocking your mouth!</b>");
-			player.removeStatusEffect(StatusEffects.WebSilence);
-		}
-		if(player.hasStatusEffect(StatusEffects.GooArmorSilence)) {
-			outputText("  <b>A growl rumbles from deep within as you charge the terrestrial fire, and you force it from your chest and into the slime.  The goop bubbles and steams as it evaporates, drawing a curious look from your foe, who pauses in her onslaught to lean in and watch.  While the tension around your mouth lessens and your opponent forgets herself more and more, you bide your time.  When you can finally work your jaw enough to open your mouth, you expel the lion's - or jaguar's? share of the flame, inflating an enormous bubble of fire and evaporated slime that thins and finally pops to release a superheated cloud.  The armored girl screams and recoils as she's enveloped, flailing her arms.</b>");
-			player.removeStatusEffect(StatusEffects.GooArmorSilence);
-			damage += 25;
-		}
-		if(monster.short == "Isabella" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
+		else if(monster.short == "Isabella" && !monster.hasStatusEffect(StatusEffects.Stunned)) {
 			outputText("  Isabella shoulders her shield into the path of the crimson flames.  They burst over the wall of steel, splitting around the impenetrable obstruction and washing out harmlessly to the sides.\n\n");
 			if (SceneLib.isabellaFollowerScene.isabellaAccent()) outputText("\"<i>Is zat all you've got?  It'll take more than a flashy magic trick to beat Izabella!</i>\" taunts the cow-girl.\n\n");
 			else outputText("\"<i>Is that all you've got?  It'll take more than a flashy magic trick to beat Isabella!</i>\" taunts the cow-girl.\n\n");
@@ -2863,15 +2867,45 @@ public class MagicSpecials extends BaseCombatContent {
 			return;
 		}
 		else if (valaReflect(damage, "hellfire", player.takeLustDamage, true)) {}
+		if(!player.hasStatusEffect(StatusEffects.GooArmorSilence)) outputText("You take in a deep breath and unleash a wave of corrupt red flames from deep within.");
+		if(player.hasStatusEffect(StatusEffects.WebSilence)) {
+			outputText("  <b>The fire burns through the webs blocking your mouth!</b>");
+			player.removeStatusEffect(StatusEffects.WebSilence);
+		}
+		if(player.hasStatusEffect(StatusEffects.GooArmorSilence)) {
+			outputText("  <b>A growl rumbles from deep within as you charge the terrestrial fire, and you force it from your chest and into the slime.  The goop bubbles and steams as it evaporates, drawing a curious look from your foe, who pauses in her onslaught to lean in and watch.  While the tension around your mouth lessens and your opponent forgets herself more and more, you bide your time.  ");
+			outputText("When you can finally work your jaw"+(player.faceType == Face.CERBERUS?"s":"")+" enough to open your mouth"+(player.faceType == Face.CERBERUS?"s":"")+", you expel the lion's - or jaguar's? share of the flame, inflating an enormous bubble of fire and evaporated slime that thins and finally pops to release a superheated cloud.  The armored girl screams and recoils as she's enveloped, flailing her arms.</b>");
+			player.removeStatusEffect(StatusEffects.GooArmorSilence);
+			damage *= 2;
+		}
 		else {
-			if(monster.inte < 10) {
+			if(monster.lustVuln > 0) {
+				if(monster.cor >= 90) outputText("  Your foe cries out in surprise and then gives a sensual moan as the flames of your passion surround them and scorches their body with unnatural lust.");
+				else if(monster.cor <= 10) outputText("  Your foe lets out a shriek as their form is engulfed in the blistering flames, leaving them slightly aroused.");
+				else outputText("  Your foe lets out a shriek as their form is engulfed in the blistering flames searing their body while filling it with an unnatural lust.");
+				doFireDamage(fireDamage, true, true);
+				monster.takeLustDamage(lustDamage, true);
+				if (player.faceType == Face.CERBERUS) {
+					doFireDamage(fireDamage, true, true);
+					monster.takeLustDamage(lustDamage, true);
+					doFireDamage(fireDamage, true, true);
+					monster.takeLustDamage(lustDamage, true);
+					fireDamage *= 3;
+				}
+			}
+			else {
+				outputText("  Your foe lets out a shriek as their form is engulfed in the blistering flames, charring their body");
+				doFireDamage(fireDamage, true, true);
+			}
+			/* if(monster.inte < 10) {
 				outputText("  Your foe lets out a shriek as their form is engulfed in the blistering flames.");
 				damage = Math.round(damage * combat.fireDamageBoostedByDao());
 				damage = int(damage);
 				doFireDamage(damage, true, true);
 				outputText("<b>(<font color=\"#800000\">+" + damage + "</font>)</b>\n");
 			}
-			else {
+			else
+			{
 				if(monster.lustVuln > 0) {
 					outputText("  Your foe cries out in surprise and then gives a sensual moan as the flames of your passion surround them and fill their body with unnatural lust.");
 					if (player.hasPerk(PerkLib.EromancyExpert)) damage *= 1.5;
@@ -2885,9 +2919,10 @@ public class MagicSpecials extends BaseCombatContent {
 					outputText("  The corrupted fire doesn't seem to have effect on [themonster]!\n");
 				}
 			}
+		*/
 		}
 		outputText("\n");
-		combat.heroBaneProc(damage);
+		combat.heroBaneProc(fireDamage);
 		if(monster.short == "Holli" && !monster.hasStatusEffect(StatusEffects.HolliBurning)) (monster as Holli).lightHolliOnFireMagically();
 		if(monster.HP <= monster.minHP()) {
 			doNext(endHpVictory);

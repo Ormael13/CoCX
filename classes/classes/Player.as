@@ -3751,6 +3751,10 @@ use namespace CoC;
 				internalChimeraRatingCounter -= 14;//	104-r99	119	135	152	180	199	219(potem legendary/mythical stages?)
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				internalChimeraRatingCounter -= 20;
+			if (hasPerk(PerkLib.ChimericalBodySemiImprovedStageEx))//+1 racials
+				internalChimeraRatingCounter -= 18;
+			if (hasPerk(PerkLib.ChimericalBodySemiSuperiorStageEx))//+2 racials
+				internalChimeraRatingCounter -= 56;
 			if (jewelryName == "Ezekiel's Signet") internalChimeraRatingCounter -= 1;
 			if (jewelryName2 == "Ezekiel's Signet") internalChimeraRatingCounter -= 1;
 			if (jewelryName3 == "Ezekiel's Signet") internalChimeraRatingCounter -= 1;
@@ -4977,7 +4981,7 @@ use namespace CoC;
 			var power:Number = 0;
 			if (hasPerk(PerkLib.BullStrength)){
 				if (isRaceCached(Races.COW, 2)) power = lactationQ()*0.001;
-				if (isRaceCached(Races.MINOTAUR, 2) >= 15) power = cumCapacity()*0.001;
+				if (isRaceCached(Races.MINOTAUR, 2)) power = cumCapacity()*0.001;
 				if (power > 0.5) power = 0.5;
 				statStore.replaceBuffObject({'str.mult':(Math.round(power*100))/100}, 'Bull Strength', { text: 'Bull Strength' });
 			}
