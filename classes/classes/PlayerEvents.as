@@ -2391,12 +2391,12 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 			}
 			//Pregomania
-			if(player.isPregnant() && (player.isHarpy() || player.isGoblinoid() || player.isAlraune()) && !player.statStore.hasBuff("Pregomania")){
+			if(player.isPregnant() && (player.isHarpy() || player.isGoblinoid() || player.isAlraune() || player.isSandWorm()) && !player.statStore.hasBuff("Pregomania")){
 				player.statStore.removeBuffs("Impregnate me!!!");
 				player.statStore.addBuffObject({"tou.mult":0.20,"lib.mult":0.20}, "Pregomania",{text:"Your motherly instincs gives you increased resiliance and resolve."});
 				outputText("\nYou pat your belly in motherly delight instinctively knowing that you have been impregnated. Your body seldom radiates motherly wellbeing making you hardyer in order to protect your beloved children to be.\n");
 			}
-			if(!player.isPregnant() && (player.isHarpy() || player.isGoblinoid() || player.isAlraune()) && player.statStore.hasBuff("Pregomania")){
+			if(!player.isPregnant() && (player.isHarpy() || player.isGoblinoid() || player.isAlraune() || player.isSandWorm()) && player.statStore.hasBuff("Pregomania")){
 				player.statStore.removeBuffs("Pregomania");
 				outputText("\nNo longer pregnant, you feel a void in your belly as the need to be impregnated again claw at your mind.\n");
 				player.statStore.addBuffObject({"lib.mult":0.50}, "Impregnate me!!!",{text:"You strongly desire to be impregnated."});

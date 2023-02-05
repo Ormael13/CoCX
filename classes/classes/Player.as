@@ -5013,6 +5013,7 @@ use namespace CoC;
 		}
 
 		public function removeAllRacialMutation():void {
+			updateRacialCacheIfNeeded();
 			PermTFTrueMutations();	//Uncomment to unleash armageddon..... or when ready to roll out "true" mutations.
 
 			for each (var pPerks:IMutationPerkType in IMutationsLib.mutationsArray("")){

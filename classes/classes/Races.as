@@ -130,6 +130,7 @@ public class Races {
 	public static const AZAZEL:AzazelRace	               = new AzazelRace(107);
 	public static const CERBERUS:CerberusRace	           = new CerberusRace(108);
 	public static const IMP:ImpRace                        = new ImpRace(109);
+	public static const SANDWORM:SandWormRace              = new SandWormRace(110);
 
 	// Racial groups
 	public static const CatlikeRaces:/*Race*/Array   = [
@@ -139,7 +140,7 @@ public class Races {
 			NAGA, GORGON, VOUIVRE, COUATL, HYDRA, APOPHIS
 	];
 	public static const InsectRaces:/*Race*/Array = [
-			BEE, MANTIS, SCORPION, SPIDER, CANCER, ATLACH_NACHA, ANT
+			BEE, MANTIS, SCORPION, SPIDER, CANCER, ATLACH_NACHA, ANT, SANDWORM
 	];
 	public static const GoblinoidRaces:/*Race*/Array = [
 			GOBLIN, GREMLIN

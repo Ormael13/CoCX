@@ -826,6 +826,22 @@ public class LowerBody extends SaveableBodyPart {
 		appearanceDesc: "Your legs look human save for your tiny little imp feet which barely support your frame."
 	});
 
+	public static const SANDWORM:int = 78;
+	EnumValue.add(Types, SANDWORM, "SANDWORM", {
+		name: "worm",
+		appearanceDesc: "Below your waist your flesh vanishes into a swarm of coiling tentacles, after all this is just a tiny part of your true body. From the outside of the tentacle laced walls that constitute your insides, your body is that of a colossal sand worm. " +
+				"Your massive mouth can gobble next to anything for you to aggressively mate with and is laced with a circular set of sharp teeth for a strong bite if you ever tire of playing. The six massive eyes that line the sides of your circular mouth stare at the outside world looking for prey though you can just as well sense them though surface pressure alone and dig underneath them to swallow them in. " +
+				"Your entire body length up to the tip is covered with thick plating to protect the soft flesh beneath from abrasion as you freely dig through sand and bedrocks. With a body so large it's no wonder your passage underground can cause tremors.",
+		legCount: 1,
+		legs: "worm",
+		leg: "worm-tail",
+		feet: "coils",
+		foot: "coiled tail",
+		tail: true,
+		chitin: true,
+		isNaga: true
+	});
+
 	override public function set type(value:int):void {
 		super.type = value;
 		// Reset leg count

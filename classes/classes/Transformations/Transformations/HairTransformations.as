@@ -442,7 +442,7 @@ public class HairTransformations extends MutationsHelper {
 			}
 	);
 
-	public const HairCow: Transformation = new SimpleTransformation("Fairy Hair",
+	public const HairCow: Transformation = new SimpleTransformation("Cow Hair",
 			// apply effect
 			function (doOutput: Boolean): void {
 				var desc: String = "You feel an itch in your hair and frustratedly go check on what is going on. To your surprise your hair took on a striped pattern" + " <b>like those of a cow.</b>";
@@ -453,6 +453,20 @@ public class HairTransformations extends MutationsHelper {
 			// is present
 			function (): Boolean {
 				return player.hairType === Hair.COW;
+			}
+	);
+
+	public const HairDripping: Transformation = new SimpleTransformation("Driping Hair",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				if (doOutput) outputText(desc);
+				player.hairType = Hair.DRIPPING;
+			},
+			// is present
+			function (): Boolean {
+				return player.hairType === Hair.DRIPPING;
 			}
 	);
 

@@ -18,6 +18,7 @@ import classes.PerkLib;
 import classes.Races;
 import classes.Scenes.Areas.Beach.CancerAttack;
 import classes.Scenes.Areas.Desert.SandTrap;
+import classes.Scenes.Areas.Desert.SandWorm;
 import classes.Scenes.Areas.Forest.Alraune;
 import classes.Scenes.Areas.Forest.WoodElvesHuntingParty;
 import classes.Scenes.Areas.HighMountains.Izumi;
@@ -387,6 +388,11 @@ public class CombatUI extends BaseCombatContent {
 		} else if (monster.hasStatusEffect(StatusEffects.SlimeInsert)) {
 			menu();
 			addButton(0, "Rape", combat.SlimeRapeFeed).hint("Violate your opponent from the inside!");
+		} else if (monster.hasStatusEffect(StatusEffects.Swallowed)) {
+			menu();
+			addButton(0, "Tease", combat.SwallowTease).hint("Use a powerful teasing attack").icon("I_tease id");
+			if (monster.lustVuln != 0 && player.hasPerk(PerkLib.Straddle) && monster.hasStatusEffect(StatusEffects.Stunned)) addButton(1, "Straddle", combat.Straddle).hint("Change position and initiate a straddling stance").icon("I_tease id");
+			addButton(4, "Release", combat.SwallowLeggoMyEggo).hint("Release your opponent.");
 		} else if (monster.hasStatusEffect(StatusEffects.Dig)) {
 			menu();
 			if (monster.statusEffectv1(StatusEffects.Dig) > 0){
@@ -394,6 +400,10 @@ public class CombatUI extends BaseCombatContent {
 				if (player.arms.type == Arms.FROSTWYRM) {
 					if (!player.hasStatusEffect(StatusEffects.CooldownTremor)) addButton(1, "Tremor", combat.Tremor).hint("Cause seismic activity beneath your foes in an attempt to stun them");
 					if (player.lowerBody == LowerBody.FROSTWYRM) addButton(0, "Grab", SceneLib.desert.nagaScene.nagaPlayerConstrict).hint("Surge out of the ground and coil around your opponent!");
+				}
+				if (player.lowerBody == LowerBody.SANDWORM) {
+					if (!player.hasStatusEffect(StatusEffects.CooldownTremor)) addButton(1, "Tremor", combat.Tremor).hint("Cause seismic activity beneath your foes in an attempt to stun them");
+					addButton(0, "Swallow", combat.SwallowWhole).hint("Leap out of the ground and attempt to swallow your enemy whole for sticky pleasure time.");
 				}
 				addButton(4, "Wait", combat.wait);
 				if (spellBookButtons.length > 0) btnMagic.show("Spells", submenuSpells, "Opens your spells menu, where you can cast any spells you have learned.", "Spells").icon("I_bookid")
@@ -835,6 +845,10 @@ public class CombatUI extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.Chokeslam)) {
 			btnStruggle.call((monster as Izumi).chokeSlamStruggle);
 			btnBoundWait.call((monster as Izumi).chokeSlamWait);
+		}
+		if (player.hasStatusEffect(StatusEffects.Devoured)) {
+			btnStruggle.call((monster as SandWorm).sandWormDevourStruggle);
+			btnBoundWait.call((monster as SandWorm).sandWormDevourWait);
 		}
 		if (player.hasStatusEffect(StatusEffects.Titsmother)) {
 			btnStruggle.call((monster as Izumi).titSmotherStruggle);
