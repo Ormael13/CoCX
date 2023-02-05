@@ -7224,7 +7224,7 @@ public class PerkLib
             MasterAllRounderEducation.requireLevel(48)
                     .requirePerk(ExpertAllRounderEducation);
             //Tier 9
-            ChimericalBodySuperiorStage.requirePerk(ChimericalBodySemiSuperiorStage)
+            ChimericalBodySuperiorStage.requireAnyPerk(ChimericalBodySemiSuperiorStage, ChimericalBodySemiSuperiorStageEx)
                     .requireLevel(48)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.internalChimeraScore() >= 50;
