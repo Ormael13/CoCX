@@ -113,12 +113,16 @@ public class PhysicalSpecials extends BaseCombatContent {
 					if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 				}
 				if (player.faceType == Face.ORCA) {
-					bd = buttons.add("OrcaBite", bite).hint("Bite in your opponent with your sharp teeths causing bleed.");
+					bd = buttons.add("OrcaBite", bite).hint("Bite your opponent with your sharp teeths causing bleed.");
 					if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 				}
 				if (player.faceType == Face.WOLF) {
-					bd = buttons.add("ViciousBite", bite).hint("Vicious bite your opponent with your sharp teeths causing bleed.");
+					bd = buttons.add("ViciousBite", bite).hint("Viciously bite your opponent with your sharp teeths causing bleed.");
 					if (player.hasPerk(PerkLib.FreezingBreath)) buttons.add("Frostbite", fenrirFrostbite).hint("You bite in your foe slowly infecting it with cold chill weakening its strength and resolve.");
+					if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+				}
+				if (player.faceType == Face.CERBERUS) {
+					bd = buttons.add("TripleBite", bite).hint("Viciously bite your opponent with your sharp teeths causing bleed.");
 					if (isEnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 				}
 				//hydra bite - variant of snake bite
@@ -5256,6 +5260,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.faceType == Face.SHARK_TEETH) outputText("You're too fatigued to use your shark-like jaws!");
 			if (player.faceType == Face.ORCA) outputText("You're too fatigued to use your orca-like jaws!");
 			if (player.faceType == Face.WOLF) outputText("You're too fatigued to use your wolf jaws!");
+			if (player.faceType == Face.CERBERUS) outputText("You're too fatigued to use your canine jaws!");
 			menu();
 			addButton(0, "Next", combatMenu, false);
 			return;
@@ -5274,6 +5279,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.faceType == Face.SHARK_TEETH) outputText("shark teeth extending out");
 		if (player.faceType == Face.ORCA) outputText("sharp orca teeth shining briefly");
 		if (player.faceType == Face.WOLF) outputText("sharp wolf teeth shining briefly");
+		if (player.faceType == Face.CERBERUS) outputText("sharp canine teeth shining briefly while your companion heads follow suit");
 		clearOutput();
 		outputText(". Snarling with hunger, you lunge at your opponent, set to bite right into them!  ");
 		if (player.playerIsBlinded()) outputText("In hindsight, trying to bite someone while blind was probably a bad idea... ");
@@ -5304,26 +5310,43 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 			damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 			damage = Math.round(damage);
-			doDamage(damage);
+			var totalDamage:Number;
+			if (player.hasPerk(PerkLib.HellfireCoat))
+				totalDamage = doFireDamage(damage);
+			else totalDamage = doDamage(damage);
+			if (player.faceType == Face.CERBERUS) {
+				if (player.hasPerk(PerkLib.HellfireCoat)) {
+					totalDamage += doFireDamage(damage);
+					totalDamage += doFireDamage(damage);
+				} else {
+					totalDamage += doDamage(damage);
+					totalDamage += doDamage(damage);
+				}
+			}
 		}
-		if(damage <= 0) {
-			damage = 0;
+		if(totalDamage <= 0) {
+			totalDamage = 0;
 			outputText("Your bite is deflected or blocked by [themonster]. ");
 		}
-		if(damage > 0 && damage < 10) {
+		else if (totalDamage < 10) {
 			outputText("You bite doesn't do much damage to [themonster]! ");
 		}
-		if(damage >= 10 && damage < 20) {
+		else if (totalDamage < 20) {
 			outputText("You seriously wound [themonster] with your bite! ");
 		}
-		if(damage >= 20 && damage < 30) {
+		else if (totalDamage < 30) {
 			outputText("Your bite staggers [themonster] with its force. ");
 		}
-		if(damage >= 30) {
+		else {
 			outputText("Your powerful bite <b>mutilates</b> [themonster]! ");
 		}
-		if (damage > 0) outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
-		else outputText("<b>([font-miss]" + damage + "</font>)</b>");
+		if (totalDamage > 0) {
+			if (player.hasPerk(PerkLib.HellfireCoat))
+				combat.CommasForDigits(totalDamage, false, "", "fire");
+			else
+				combat.CommasForDigits(totalDamage);
+		}
+		else outputText("<b>([font-miss]" + 0 + "</font>)</b>");
 		if (monster.hasStatusEffect(StatusEffects.SharkBiteBleed)) outputText(" [Themonster] bleeds profusely from the many bloody bite marks you leave behind.");
 		outputText("\n\n");
 		combat.WrathGenerationPerHit2(5);
