@@ -1450,6 +1450,28 @@ public class TailTransformations extends MutationsHelper {
 				return player.tailType === Tail.ANT_ABDOMEN;
 			}
 	);
+
+	public const TailDeer: Transformation = new SimpleTransformation("Deer Tail",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				TransformationUtils.removeLowerBodyIfIncompatible(player, doOutput);
+
+				TransformationUtils.applyTFIfNotPresent(transformations.TailNone, doOutput);
+
+				desc += "You feel a tightening just above your ass, as if a massive hand was pinching you.  It releases with a curious \"pomf\"-ing noise.  You turn this way and that, finally managing to crane your neck to see your <b>fluffy, flicking deer tail.</b>";
+				player.tailType = Tail.DEER;
+				player.tailCount = 1;
+
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(TailMem.getMemory(TailMem.DEER));
+			},
+			// is present
+			function (): Boolean {
+				return player.tailType === Tail.ANT_ABDOMEN;
+			}
+	);
 	/*
   */
 }

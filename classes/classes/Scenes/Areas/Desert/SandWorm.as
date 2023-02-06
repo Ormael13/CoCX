@@ -187,24 +187,22 @@ public class SandWorm extends Monster
 			this.hairColor = "pink";
 			this.hairLength = 15;
 			this.lowerBody = LowerBody.SANDWORM;
-			initStrTouSpeInte(150, 120, 60, 40);
-			initWisLibSensCor(50, 200, 45, 50);
+			initStrTouSpeInte(120, 90, 30, 20);
+			initWisLibSensCor(30, 120, 45, 50);
 			this.weaponName = "body";
 			this.weaponVerb="slam";
-			this.weaponAttack = 200;
+			this.weaponAttack = 25;
 			this.armorName = "chitin";
 			this.armorDef = 20;
 			this.armorMDef = 2;
-			this.bonusHP = 300;
-			this.bonusLust = 400;
-			this.lust = 200;
-			this.lustVuln = .60;
-			this.level = 40;
+			this.bonusHP = 200;
+			this.bonusLust = 150;
+			this.lust = 80;
+			this.lustVuln = .70;
+			this.level = 20;
 			this.gems = 5 + rand(5);
 			this.drop = new ChainedDrop(consumables.OVIELIX);
 			checkMonster();
 		}
-		
 	}
-
 }

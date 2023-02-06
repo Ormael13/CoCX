@@ -748,6 +748,11 @@ public class EarsTransformations extends MutationsHelper {
 				var desc: String = "";
 
 				desc += "";
+				if (player.ears.type == -1) desc += "Two painful lumps sprout on the top of your head, forming into teardrop shaped ears, covered with short fur.  ";
+				if (player.ears.type == Ears.HUMAN) desc += "Your ears tug painfully on your face as they begin shifting, moving upwards to the top of your head and transforming into upright animalistic ears.  ";
+				if (player.ears.type == Ears.DOG) desc += "Your ears change shape, morphing into from their doglike shape into deer-like ears!  ";
+				if (player.ears.type > Ears.DOG) desc += "Your ears change shape, morphing into teardrop-shaped deer ears!  ";
+				desc += "<b>You now have deer ears.</b>";
 
 				player.ears.type = Ears.DEER;
 				if (doOutput) outputText(desc);

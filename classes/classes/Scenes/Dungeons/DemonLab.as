@@ -425,7 +425,7 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
         }
         outputText("This room is small, barely lit by a single covered torch in a sconce along the back wall. Unlike the room you just came from, the walls, floor and ceiling are rough-hewn, like some poor saps had been forced to dig this place out with pickaxes.");
         dungeons.setDungeonButtons(null, null, Ballroom3, null);
-        addButton(3, "UpStairs", NightwalkerStairs);
+        addButton(5, "UpStairs", NightwalkerStairs);
         if (flags[kFLAGS.CODEX_ENTRY_NIGHTWALKER] == 0) {
             outputText("\n\nThe room has a single table in the back, where a single, thick book sits.");
             addButton(0, "Book", getNightEntry);
@@ -622,13 +622,8 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
         if (DridersState > 0) {
             outputText("The cage doors, broken and scattered across the room, reflect the light from the scarlet lanterns. Each cage is like an empty hole, a wound yet to heal... You shudder at the reminder of what had happened here. And yet, knowing you were responsible for breaking those chains... It’s enough.\n\n");
         }
-        menu();
-        addButton(2, "North", TyrantLab2);
-        addButton(3, "UpStairs", TyrantLab1);
-        addButtonDisabled(6, "West", "No way West");
-        addButtonDisabled(8, "East", "No way East");
-        addButtonDisabled(12, "South", "No way South");
-		addButton(14, "Map", SceneLib.dungeons.map.displayMap).hint("View the map of this dungeon.");
+        dungeons.setDungeonButtons(TyrantLab2, null, null, null);
+        addButton(5, "UpStairs", TyrantLab1);
     }
 
     public function TyrantLab2():void {
@@ -690,7 +685,7 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
         outputText("You enter the panic room, and it’s relatively plain, almost like a small warehouse. Other than the singed demon corpses, the panic room has only two things of interest: A desk and high-tech panel, similar to the ones on the doors before, but far larger. If you had to guess, you think you’ve found the diseased heart of this lab. Maybe you can open the way out!\n\n");
         dungeons.setDungeonButtons(null, Ballroom3, null, null);
         addButton(0, "Console", Computer).disableIf(!WayOutBlocked, "You destroyed that cursed thing.");
-        if (player.hasKeyItem("Map to the Lethice’s Fortress") < 0) addButton(1, "Desk,", Desk);
+        if (player.hasKeyItem("Map to the Lethice’s Fortress") < 0) addButton(1, "Desk", Desk);
     }
 
     public function Computer():void {
@@ -868,7 +863,7 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
     public function PrTyrantVictoryNextSpeak():void {
         clearOutput();
         outputText("You break the silence, standing between the Driders and your giantess lover. You loudly declare that Tyrantia is not the same as the ones you both fought together. You remind them that she was one of the people who just freed them all. He opens his mouth, but you loudly declare that the demons never broke her, even after they warped her body. You scoff at the male who started the cry, calling him a broken coward, turning on his rescuers, even his own kin.\n\n");
-        outputText("For a few stunned moments, the Driders are silent. The elder pushes through the pack, slapping the instigator on the head. “<i>... Well spoken, traveller.</i>” She steps forward on failing legs, holding her hands up. Tyrantia leans down, and the old woman wraps her twig-thin arms around her neck. “<i>My daughter... How much you’ve grown.</i>” She smiles, letting go and walking back to what remains of her tribe. “<i>Go, Tyrantia. Look after your mate. We will make our way to the desert’s sands. Perhaps there, the demons won’t have as much power.</i>”You mention that there are already people living there, free from the demons. You tell them that life in Tel’adre would be hard, but livable. They have rooms and houses vacant... If they can find the city.\n\n");
+        outputText("For a few stunned moments, the Driders are silent. The elder pushes through the pack, slapping the instigator on the head. “<i>... Well spoken, traveller.</i>” She steps forward on failing legs, holding her hands up. Tyrantia leans down, and the old woman wraps her twig-thin arms around her neck. “<i>My daughter... How much you’ve grown.</i>” She smiles, letting go and walking back to what remains of her tribe. “<i>Go, Tyrantia. Look after your mate. We will make our way to the desert’s sands. Perhaps there, the demons won’t have as much power.</i>” You mention that there are already people living there, free from the demons. You tell them that life in Tel’adre would be hard, but livable. They have rooms and houses vacant... If they can find the city.\n\n");
         outputText("“<i>Thank you, Traveller.</i>” You introduce yourself, and she nods respectfully. “<i>Thank you, [name]. So long as you live, you are a friend to our tribe.</i>” She bows, and the Drider tribe follows suit. “<i>We will be out in the main hall, until it is safe to leave this wretched place.</i>”\n\n");
         cleanupAfterCombat();
     }
@@ -990,14 +985,12 @@ public class DemonLab extends DungeonAbstractContent implements SaveableState {
             menu();
             addButton(0, "Next", TelAdreBring);
         }
-        if (MainAreaComplete < 4) {
-            if (WayOutBlocked) {
-                outputText("You can't budge this steel door, no matter how hard you strike it. Perhaps inside the facility, you'll find a a way to unblock the door?\n\n");
-            }
+        if (WayOutBlocked) {
+            outputText("You can't budge this steel door, no matter how hard you strike it. Perhaps inside the facility, you'll find a a way to unblock the door?\n\n");
             if (NightwalkerLabstate < 2) {
                 outputText("You haven't rid this place of the Nightwalker's influence. You feel you shouldn't let such a dangerous project remain.\n\n");
             }
-            if (FSpreaderState < 2) {
+            if (FSpreaderState < 1) {
                 outputText("The Firespreader Project is still untouched. You shudder to think what the demons could do if you leave that intact.\n\n");
             }
             if (DridersState < 2) {

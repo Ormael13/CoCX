@@ -184,6 +184,17 @@ import classes.CoC;
 			}
 		});
 
+		public static const DEER:int = _partid++;
+		EnumValue.add(Memories, DEER, "DEER", {
+			id: "Deer Tail",
+			name: "Deer Tail",
+			cost: function():Number { return getTailCost(player.tailCount, 1);},
+			title: "Deer",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.TailDeer;
+			}
+		});
+
 		public static const DOG:int = _partid++;
 		EnumValue.add(Memories, DOG, "DOG", {
 			id: "Dog Tail",

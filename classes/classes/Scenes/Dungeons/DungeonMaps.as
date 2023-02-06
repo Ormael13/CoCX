@@ -522,23 +522,23 @@ public class DungeonMaps extends DungeonAbstractContent
 			new DungeonMap("Demon Lab", [
 					"    [i]    ",
 					"     L     ",
-					"    [g]K[h]",
+					"    [g]K[S]",
 					"     |     ",
 					"[e]K[d]—[f]",
 					"     |     ",
-					"[c]K[b]    ",
+					"[s]K[b]    ",
 					"     |     ",
 					"    [a]    ",
 				],
 				{
 					'a': DUNGEON_LAB_ENTRANCE,
 					'b': DUNGEON_LAB_BALLROOM_1,
-					'c': DUNGEON_LAB_TYRANT_1,
+					's': DUNGEON_LAB_TYRANT_1,
 					'd': DUNGEON_LAB_BALLROOM_2,
 					'e': DUNGEON_LAB_FSPREADER,
 					'f': DUNGEON_LAB_INCEL,
 					'g': DUNGEON_LAB_BALLROOM_3,
-					'h': DUNGEON_LAB_NIGHTWALKER_1,
+					'S': DUNGEON_LAB_NIGHTWALKER_1,
 					'i': DUNGEON_LAB_PANIC_ROOM
 				},
 				function():Object { return {
@@ -549,10 +549,10 @@ public class DungeonMaps extends DungeonAbstractContent
 			new DungeonMap("Demon Lab, drider prison", [
 					"    [b]    ",
 					"     |     ",
-					"    [a]    ",
+					"    [s]    ",
 				],
 				{
-					'a': DUNGEON_LAB_TYRANT_PRISON,
+					's': DUNGEON_LAB_TYRANT_PRISON,
 					'b': DUNGEON_LAB_TYRANT_2
 				}
 			),
