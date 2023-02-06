@@ -977,31 +977,26 @@ public class ErlKingScene extends BaseContent
 			// Main TFs
 			//------------
 			//Gain deer ears
-			if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && player.ears.type != Ears.DEER) {
-				if (player.ears.type == -1) outputText("\n\nTwo painful lumps sprout on the top of your head, forming into teardrop shaped ears, covered with short fur.  ");
-				if (player.ears.type == Ears.HUMAN) outputText("\n\nYour ears tug painfully on your face as they begin shifting, moving upwards to the top of your head and transforming into upright animalistic ears.  ");
-				if (player.ears.type == Ears.DOG) outputText("\n\nYour ears change shape, morphing into from their doglike shape into deer-like ears!  ");
-				if (player.ears.type > Ears.DOG) outputText("\n\nYour ears change shape, morphing into teardrop-shaped deer ears!  ");
-				outputText("<b>You now have deer ears.</b>");
-				player.ears.type = Ears.DEER;
+			if (rand(3) == 0 && changes < changeLimit && player.ears.type != Ears.DEER) {
+				outputText("[pg]")
+				transformations.EarsDeer.applyEffect();
 				changes++;
 			}
 			//Gain deer tail
 			if (rand(3) == 0 && changes < changeLimit && player.ears.type == Ears.DEER && player.tailType != Tail.DEER) {
-				outputText("\n\nYou feel a tightening just above your ass, as if a massive hand was pinching you.  It releases with a curious \"pomf\"-ing noise.  You turn this way and that, finally managing to crane your neck to see your <b>fluffy, flicking deer tail.</b>");
-				player.tailType = Tail.DEER;
+				transformations.TailDeer.applyEffect();
 				changes++;
 			}
 			//Gain deer horns AKA antlers
-			if (rand(3) == 0 && changes < changeLimit && player.lowerBody != LowerBody.GARGOYLE && player.horns.type == Horns.NONE) {
+			if (rand(3) == 0 && changes < changeLimit && player.horns.type == Horns.NONE) {
 				outputText("\n\nYou feel an immense pressure from your forehead, and you reach up, feeling the nubs of two new horns.");
-				player.horns.type = Horns.ANTLERS;
+				transformations.HornsAntlers.applyEffect(false);
 				player.horns.count = 1;
 				changes++;
 			}
-			if (rand(3) == 0 && changes < changeLimit && player.horns.count > 0 && player.horns.type != Horns.ANTLERS && player.lowerBody != LowerBody.GARGOYLE && player.horns.type != Horns.ORCHID) {
+			if (rand(3) == 0 && changes < changeLimit && player.horns.count > 0 && player.horns.type != Horns.ANTLERS && player.horns.type != Horns.ORCHID) {
 				outputText("\n\nYou feel a strange twisting sensation from your horns as they extend outwards.  You reach up to feel them and realize that you’ve now got <b>pronged, stag-like horns.</b>");
-				player.horns.type = Horns.ANTLERS;
+				transformations.HornsAntlers.applyEffect(false);
 				player.horns.count = 4;
 				changes++;
 			}
@@ -1017,19 +1012,19 @@ public class ErlKingScene extends BaseContent
 			//Gain fur
 			if (rand(4) == 0 && changes < changeLimit && player.horns.count > 0 && player.lowerBody != LowerBody.GARGOYLE && !player.hasFullCoatOfType(Skin.FUR)) {
 				outputText("\n\nFor a moment, it looks like a ray of sunlight has shimmered through the canopy. You blink and realize that your fur has become dappled, with lighter, sun-speckled spots highlighting it.");
-				CoC.instance.transformations.SkinFur(Skin.COVERAGE_COMPLETE, {color:"brown"}).applyEffect(false);
+				transformations.SkinFur(Skin.COVERAGE_COMPLETE, {color:"brown"}).applyEffect(false);
 				changes++;
 			}
 			//Change face to normal
 			if (rand(3) == 0 && changes < changeLimit && player.ears.type == Ears.DEER && (player.faceType != Face.HUMAN && player.faceType != Face.DEER)) {
 				outputText("\n\nYour face grows warm as suddenly your vision is engulfed in smoke, coughing and beating the smoke back you noticed a marked change in your features. Touching yourself you confirm you have a <b>normal human shaped face once again</b>.");
-				CoC.instance.transformations.FaceHuman.applyEffect(false);
+				transformations.FaceHuman.applyEffect(false);
 				changes++;
 			}
 			//Gain deer face
 			if (rand(4) == 0 && changes < changeLimit && player.isFurCovered() && player.ears.type == Ears.DEER && player.tailType == Tail.DEER && player.faceType != Face.DEER) {
 				outputText("\n\n");
-				CoC.instance.transformations.FaceDeer.applyEffect();
+				transformations.FaceDeer.applyEffect();
 				changes++;
 			}
 			//Change legs to cloven hooves
@@ -1041,7 +1036,7 @@ public class ErlKingScene extends BaseContent
 					outputText("\n\nYou feel a strange tightness from your feet and nearly topple over as your balance shifts.  You’re balancing on your toes for some reason.  You look down in amazement as your legs slim and lengthen, your feet elongating and darkening at the ends until you’re balancing on <b>two, graceful deer legs</b>.");
 				}
 				if (player.isTaur()) player.lowerBody = LowerBody.DEERTAUR;
-				else player.lowerBody = LowerBody.CLOVEN_HOOFED;
+				else transformations.LowerBodyClovenHoofed(2).applyEffect(false);
 				changes++;
 			}
 			// Genital Changes

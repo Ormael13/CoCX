@@ -987,6 +987,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const TailWendigo: Transformation 					= tail.TailWendigo;
 	public const TailHydra: Transformation 						= tail.TailHydra;
 	public const TailSpinneretAtlach: Transformation 			= tail.TailSpinneretAtlach;
+	public const TailDeer: Transformation 						= tail.TailDeer;
 	/**
 	 * @param tailCount target tail count
 	 * @param magnitude max. number of added/removed tails

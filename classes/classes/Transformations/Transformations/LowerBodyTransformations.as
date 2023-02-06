@@ -466,6 +466,7 @@ public class LowerBodyTransformations extends MutationsHelper {
 				// Case 1: Morph Taur legs without changing leg count
 				if (player.isTaur() && legCount >= 4) {
 					desc += "You feel an odd sensation in your lower region. Your [feet] shift and you hear bones cracking as they reform. Fur grows on your legs and soon you're looking at a <b>new pair of cloven hoofed legs</b>.";
+					legCount = 4
 				}
 				// Case 2: Bipedal TF
 				else if (legCount === 2) {

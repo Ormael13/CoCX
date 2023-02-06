@@ -199,7 +199,7 @@ public function etnaRapesPlayer2():void
 		if (player.cor < 75) dynStats("cor", 25);
 		if (player.hasStatusEffect(StatusEffects.WildManticore)) player.removeStatusEffect(StatusEffects.WildManticore);
 		player.sexReward("vaginalFluids","Dick");
-		cleanupAfterCombat();
+		cleanupAfterCombatTFEvent();
 	}
 	//Females
 	function vagF():void {
