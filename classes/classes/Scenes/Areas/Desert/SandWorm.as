@@ -196,13 +196,21 @@ public class SandWorm extends Monster
 			this.armorDef = 20;
 			this.armorMDef = 2;
 			this.bonusHP = 200;
-			this.bonusLust = 150;
+			this.bonusLust = 185;
 			this.lust = 80;
 			this.lustVuln = .70;
 			this.level = 20;
 			this.gems = 5 + rand(5);
 			this.drop = new ChainedDrop(consumables.OVIELIX);
-			checkMonster();
+			checkMonster();/*
+			initStrTouSpeInte(150, 120, 60, 40);
+			initWisLibSensCor(50, 200, 45, 50);
+			this.weaponAttack = 200;
+			this.bonusHP = 300;
+			this.bonusLust = 400;
+			this.lust = 285;
+			this.lustVuln = .60;
+			this.level = 40;*/
 		}
 	}
 }

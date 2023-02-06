@@ -163,6 +163,8 @@ public class Changelog extends BaseContent
 			outputText("-New event perk: Greater Diehard (Ex). Gained by use of the Pocket Watch when req. are meet. Effects: You can't lose by HP until your health drops into the negatives any more than 18% of max HP + 5400(scalable). HP limit cumulative with other Diehard perks.\n");
 			outputText("-New Sand worm encounter and opening previously hidden Inner Desert area for exploration! (EragonX)\n");
 			outputText("-Pregnancy fix for Minerva. Fix for snake-like races be not quite so strict. Finally fix Siegweird's encounter flags. Fix Jabberwocky breath combat loop. Fix nipple fuckable/quad mutual exclusivity. (EragonX)\n");
+			outputText("-Plasma blast special would deal 'plasma' type of dmg not Lightning. It's mix of fire and lightning dmg and would be displayed as dealing two types of dmg.\n");
+			outputText("-Add Golden Rind tfs to MM (EragonX)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -170,14 +172,12 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");// (Liadri)
-			outputText("-\n");// (aimozg)
-			outputText("-\n");// (Svalkash)
-			outputText("-\n");// (EragonX)
-			outputText("-\n");// (Jtecx)
-			outputText("-\n");// (Furrin Gok)
-			outputText("-\n");// (khovel)
-			outputText("-\n");// (Chibizs)
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
 			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
@@ -185,8 +185,8 @@ public class Changelog extends BaseContent
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX)
+			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -199,7 +199,7 @@ public class Changelog extends BaseContent
 			//outputText("-New perk for enemies: Champion type enemy. Bonuses for are: Diehard effect of 5% of max HP + 1,500 HP * NG tier, OverMax HP effect of 10% magnitude.\n");
 			outputText("-Fixed bugs: Bard not affected by cap of prestige jobs, last one checks for holli's kill/survive moved into less troublesome spot, Benoit/Oswald taking full price for simple backpack size upgade, Fasting Pill been unaccessable when hunger mode is active, Vegetal Affinity increasing fire resistance, elemental throwing knives been never usable, Elemental race tier bonuses & display on race page, ");
 			outputText("Buy button for Francisca throwing axe at basilisk shop been corectly labeled, Lily name revealed before she actualy tell her name in scene, incorrectly labeled Whitefire swiftcast button, returning from multishot menu leading to melee options instead of range ones, Sky Poison Pearl not allowing to poison/venom options for weapons, missing Radiant Shard fpr recruiting Isabella, Golemancer ");
-			outputText("manual for upgrades been possible to bought multiple times, Priscilla lvl up after enough defeats\n");
+			outputText("manual for upgrades been possible to bought multiple times, Priscilla lvl up after enough defeats, Sphinx race req. both cat cock and pussy for race point\n");
 			/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");

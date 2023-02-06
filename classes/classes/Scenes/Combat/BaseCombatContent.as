@@ -75,6 +75,9 @@ public class BaseCombatContent extends BaseContent {
 	protected function doAcidDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
 		return combat.doAcidDamage(damage, apply, display);
 	}
+	protected function doPlasmaDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
+		return combat.doPlasmaDamage(damage, apply, display);
+	}
 	protected function doTrueDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
 		return combat.doTrueDamage(damage, apply, display);
 	}
