@@ -228,12 +228,16 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.JobSorcerer) && player.inte >= 25) mod += .1;
 		if (player.hasPerk(PerkLib.Mage) && player.inte >= 50) mod += .1;
 		if (player.hasPerk(PerkLib.Spellpower) && player.inte >= 50) mod += .1;
-		if (player.hasPerk(PerkLib.TraditionalMageI) && (player.isUsingStaff() || (player.isUsingWand() && player.isUsingTome()))) mod += 1;
-		if (player.hasPerk(PerkLib.TraditionalMageII) && (player.isUsingStaff() || (player.isUsingWand() && player.isUsingTome()))) mod += 1;
-		if (player.hasPerk(PerkLib.TraditionalMageIII) && (player.isUsingStaff() || (player.isUsingWand() && player.isUsingTome()))) mod += 1;
-		if (player.hasPerk(PerkLib.TraditionalMageIV) && (player.isUsingStaff() || (player.isUsingWand() && player.isUsingTome()))) mod += 1;
-		if (player.hasPerk(PerkLib.TraditionalMageV) && (player.isUsingStaff() || (player.isUsingWand() && player.isUsingTome()))) mod += 1;
-		if (player.hasPerk(PerkLib.TraditionalMageVI) && (player.isUsingStaff() || (player.isUsingWand() && player.isUsingTome()))) mod += 1;
+		if (player.hasPerk(PerkLib.TraditionalMageI) && ((player.isUsingStaff() || player.isPartiallyStaffTypeWeapon() || player.isUsingWand()) && player.isUsingTome())) {
+			var tmb:Number = 1;
+			if (player.hasPerk(PerkLib.TraditionalMageII)) tmb += 1;
+			if (player.hasPerk(PerkLib.TraditionalMageIII)) tmb += 1;
+			if (player.hasPerk(PerkLib.TraditionalMageIV)) tmb += 1;
+			if (player.hasPerk(PerkLib.TraditionalMageV)) tmb += 1;
+			if (player.hasPerk(PerkLib.TraditionalMageVI)) tmb += 1;
+			if (player.isPartiallyStaffTypeWeapon()) tmb *= 0.5;
+			mod += tmb;
+		}
         if (player.hasPerk(PerkLib.Ambition)) {
 			mod += player.perkv2(PerkLib.Ambition);
 		}

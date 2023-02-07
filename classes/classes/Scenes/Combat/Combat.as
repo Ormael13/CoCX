@@ -22,7 +22,7 @@ import classes.PerkLib;
 import classes.PotionType;
 import classes.Races;
 import classes.Races.ElementalRace;
-import classes.Scenes.Areas.Beach.Gorgon;
+import classes.Scenes.Areas.Desert.Gorgon;
 import classes.Scenes.Areas.Bog.*;
 import classes.Scenes.Areas.Caves.DisplacerBeast;
 import classes.Scenes.Areas.Desert.*;

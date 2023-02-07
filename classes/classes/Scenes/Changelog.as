@@ -93,7 +93,7 @@ public class Changelog extends BaseContent
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
-			outputText("-2 new achievments.\n");
+			outputText("-3 new achievments.\n");
 			outputText("-New tier 2 misc lvl-up perk: Skilled Fighter (Ex). Req. Skilled Fighter perk and 35+ str/tou/spe. Effect: When melee atk crit chance exceed 100% crit dmg is x2 and when exceed 200% crit dmg is x3. (+15% melee physical attacks multiplier and then adds another 50% (total of 100%) on top of final result)\n");
 			outputText("-New tier 2 misc lvl-up perk: Skilled Ranger (Ex). Req. Skilled Ranger perk and 35+ str/tou/spe. Effect: When range atk crit chance exceed 100% crit dmg is x2 and when exceed 200% crit dmg is x3. (+15% range physical attacks multiplier and then adds another 50% (total of 100%) on top of final result)\n");
 			outputText("-New tier 3 misc lvl-up perk: Skilled Gunslinger (Ex). Req. Skilled Gunslinger perk, lvl 15+ and 40+ str/tou/spe. Effect: When firearms atk crit chance exceed 100% crit dmg is x2 and when exceed 200% crit dmg is x3. (+20% firearms attacks multiplier and then adds another 50% (total of 100%) on top of final result)\n");
@@ -165,10 +165,10 @@ public class Changelog extends BaseContent
 			outputText("-Pregnancy fix for Minerva. Fix for snake-like races be not quite so strict. Finally fix Siegweird's encounter flags. Fix Jabberwocky breath combat loop. Fix nipple fuckable/quad mutual exclusivity. (EragonX)\n");
 			outputText("-Plasma blast special would deal 'plasma' type of dmg not Lightning. It's mix of fire and lightning dmg and would be displayed as dealing two types of dmg.\n");
 			outputText("-Add Golden Rind tfs to MM (EragonX)\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Add Cerberus Triple Bite special (EragonX)\n");
+			outputText("-When exploring outer desert at lvl 10+ can discover inner desert.\n");
+			outputText("-Traditional Mage perk effect can be activated by using partial staff type melee weapons but spell bonus is halved.\n");
+			outputText("-New enemy: Gorgon - lvl 24. Encounterable in inner desert from lvl 14+.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

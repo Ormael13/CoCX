@@ -18,6 +18,7 @@ use namespace CoC;
 	{
 		public var antsScene:AntsScene = new AntsScene();
 		public var nagaScene:NagaScene = new NagaScene();
+		public var gorgonScene:GorgonScene = new GorgonScene();
 		public var oasis:Oasis = new Oasis();
 		public var sandTrapScene:SandTrapScene = new SandTrapScene();
 		public var sandWormScene:SandWormScene = new SandWormScene();
@@ -201,9 +202,21 @@ use namespace CoC;
 				}*/);
 			_innerdesertEncounter = Encounters.group("inner desert",
 				{
+					name: "gorgon",
+					when: fn.ifLevelMin(14),
+					call: gorgonScene.gorgonEncounter
+				}, {
 					name: "sandworm",
 					night: false,
 					call: sandWormScene.SandWormEncounter
+				}, {
+					name: "Etna",
+					chance: 0.2,
+					when: function ():Boolean
+					{
+						return (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && !player.hasStatusEffect(StatusEffects.EtnaOff)&& (player.level >= 20));
+					},
+					call: SceneLib.etnaScene.repeatYandereEnc
 				}, {
 					//Helia monogamy fucks
 					name  : "helcommon",

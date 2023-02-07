@@ -110,6 +110,7 @@ public class SaveUpdater extends NPCAwareContent {
 			["We Need to Go Deeper", kACHIEVEMENTS.ZONE_WE_NEED_TO_GO_DEEPER, player.statusEffectv1(StatusEffects.ExploredDeepwoods) >= 100],
 			["Vacationer", kACHIEVEMENTS.ZONE_VACATIONER, player.exploredLake >= 100],
 			["Dehydrated", kACHIEVEMENTS.ZONE_DEHYDRATED, player.exploredDesert >= 100],
+			["Bedouin", kACHIEVEMENTS.ZONE_BEDOUIN, flags[kFLAGS.DISCOVERED_INNER_DESERT] >= 100],
 			["Rookie", kACHIEVEMENTS.ZONE_ROOKIE, flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] >= 100],
 			["Friggin' Golems!", kACHIEVEMENTS.ZONE_FRIGGIN_GOLEMS, flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] >= 100],
 			["Hiking", kACHIEVEMENTS.ZONE_HIKING, flags[kFLAGS.DISCOVERED_HILLS] >= 100],
