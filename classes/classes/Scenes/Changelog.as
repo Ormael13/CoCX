@@ -169,7 +169,7 @@ public class Changelog extends BaseContent
 			outputText("-When exploring outer desert at lvl 10+ can discover inner desert.\n");
 			outputText("-Traditional Mage perk effect can be activated by using partial staff type melee weapons but spell bonus is halved.\n");
 			outputText("-New enemy: Gorgon - lvl 24. Encounterable in inner desert from lvl 14+.\n");
-			outputText("-\n");
+			outputText("-New enemies (by Liadri with slight modification for been group enemy by Ormael): Zombies - lvl 25. Encounterable in Boundary/Outer Battlefield.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

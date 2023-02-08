@@ -119,10 +119,13 @@ public class BattlefieldOuter extends BaseContent
 			chance: 0.4,
 			call: SceneLib.exploration.genericGolGobImpEncounters
 		}, {
-			//General Golems, Goblin and Imp Encounters
 			name: "vengefulAparitions",
 			chance: 0.4,
 			call: battlefieldEnemiesScene.encounterVengefulApparitions
+		}, {
+			name: "zombies",
+			chance: 0.4,
+			call: battlefieldEnemiesScene.encounterZombies
 		}/*, {
 			name: "demonProjects",
 			chance: 0.2,
