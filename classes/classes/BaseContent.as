@@ -41,9 +41,9 @@ import coc.xxc.StoryContext;
 		{
 			EventParser.eachMinuteCount(time, needNext);
 		}
-		protected function get timeQ():Number
+		protected static function get timeQ():Number
 		{
-			return CoC.instance.timeQ;
+			return CoC.instance.timeQ + (CoC.instance.timeQmin%60);
 		}
 		
 		/**
@@ -54,7 +54,7 @@ import coc.xxc.StoryContext;
 		}
 
 		public static function get isNightTime():Boolean {
-			return (model.time.hours <= 5 || model.time.hours >= 22);
+			return (model.time.hours + timeQ <= 5 || model.time.hours + timeQ >= 22);
 		}
 		
 		/**
@@ -64,7 +64,7 @@ import coc.xxc.StoryContext;
 		 * - isTimeBetween(18, 24) - 18:00..23:59
 		 * */
 		public static function isTimeBetween(startHour:Number, endHour:Number):Boolean {
-			return (model.time.hours >= startHour && model.time.hours < endHour)
+			return (model.time.hours +timeQ >= startHour && model.time.hours +timeQ < endHour)
 		}
 
 		protected function get camp():Camp {

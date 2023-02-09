@@ -101,6 +101,10 @@ public class Urta extends NPCAwareContent implements TimeAwareInterface {
 		}
 
 		public function timeChangeLarge():Boolean {
+			if (pregnancy.isPregnant && pregnancy.incubation == 0 && pregnancy.type == PregnancyStore.PREGNANCY_PLAYER && model.time.hours >= 20 && model.time.hours < 2) {
+				urtaPregs.preggoUrtaGivingBirth();
+				return true;
+			}
 			return false;
 		}
 		//End of Interface Implementation

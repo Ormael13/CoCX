@@ -1737,6 +1737,21 @@ public class Creature extends Utils
 		}
 
 		//Functions
+		public function gainOrLosePerk(ptype:PerkType, qualifies:Boolean, gainText:String = "", loseText:String = "", gainFunct:Function = null, loseFunct:Function = null, doOutput:Boolean = true, value1:Number = 0, value2:Number = 0, value3:Number = 0, value4:Number = 0):Boolean {
+			if (!hasPerk(ptype) && qualifies) {
+				createPerk(ptype, value1, value2, value3, value4);
+				if (doOutput) EngineCore.outputText("\n" + gainText + "\n\n(<b>Gained Perk: "+ptype.name()+"</b> - " + ptype.desc() + ")\n");
+				if (gainFunct != null) gainFunct();
+				return true;
+			}
+			if (hasPerk(ptype) && !qualifies) {
+				removePerk(ptype);
+				if (doOutput) EngineCore.outputText("\n" + loseText + "\n\n(<b>Lost Perk: "+ptype.name()+"</b>)\n");
+				if (loseFunct != null) loseFunct();
+				return true;
+			}
+			return false;
+		}
 
 		//Create a perk
 		public function createPerk(ptype:PerkType, value1:Number, value2:Number, value3:Number, value4:Number):void

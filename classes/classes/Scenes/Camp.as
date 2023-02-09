@@ -3616,17 +3616,16 @@ public class Camp extends NPCAwareContent{
 
 	public function doSleep(clrScreen:Boolean = true):void {
 		IsSleeping = true;
-		if (SceneLib.urta.pregnancy.incubation == 0 && SceneLib.urta.pregnancy.type == PregnancyStore.PREGNANCY_PLAYER && model.time.hours >= 20 && model.time.hours < 2) {
-			urtaPregs.preggoUrtaGivingBirth();
-			return;
-		}
 		campQ = true;
-		if (timeQ == 0) {
+		if (CoC.instance.timeQ == 0) {
 			CanDream = true;
 			model.time.minutes = 0;
-			timeQ = 9;
+			if (model.time.hours >= 21)
+				CoC.instance.timeQ += 24-model.time.hours +6;
+			if (model.time.hours < 6)
+				CoC.instance.timeQ += 6-model.time.hours;
 			if (flags[kFLAGS.BENOIT_CLOCK_ALARM] > 0) {
-				timeQ += (flags[kFLAGS.BENOIT_CLOCK_ALARM] - 6);
+				CoC.instance.timeQ += (flags[kFLAGS.BENOIT_CLOCK_ALARM] - 6);
 			}
 			//Autosave stuff
 			if (player.slotName != "VOID" && player.autoSave && mainView.getButtonText(0) != "Game Over") {
@@ -3842,7 +3841,7 @@ public class Camp extends NPCAwareContent{
 //For shit that breaks normal sleep processing.
 	public function sleepWrapper(multiplier:Number = 1.0):void {
 		timeQ = (model.time.hours < 6 ? 6 : 24 + 6) - model.time.hours;
-		if (flags[kFLAGS.BENOIT_CLOCK_ALARM] > 0 && (flags[kFLAGS.SLEEP_WITH] == "Ember" || flags[kFLAGS.SLEEP_WITH] == 0)) timeQ += (flags[kFLAGS.BENOIT_CLOCK_ALARM] - 6);
+		if (flags[kFLAGS.BENOIT_CLOCK_ALARM] > 0 && (flags[kFLAGS.SLEEP_WITH] == "Ember" || flags[kFLAGS.SLEEP_WITH] == 0)) CoC.instance.timeQ += (flags[kFLAGS.BENOIT_CLOCK_ALARM] - 6);
 		clearOutput();
 		if (timeQ != 1) outputText("You lie down to resume sleeping for the remaining " + num2Text(timeQ) + " hours.\n");
 		else outputText("You lie down to resume sleeping for the remaining hour.\n");
@@ -3852,16 +3851,8 @@ public class Camp extends NPCAwareContent{
 
 	public function cheatSleepUntilMorning(multiplier:Number = 1.0):void {
 		var timeToSleep:int = (model.time.hours < 6 ? 6 : 24 + 6) - model.time.hours;
-		var manaTime:int = 0
 		CoC.instance.timeQ = timeToSleep;
 		camp.sleepRecovery(true, multiplier);
-		if (CoC.instance.player.hasPerk(PerkLib.JobSorcerer) || CoC.instance.player.hasPerk(PerkLib.JobElementalConjurer))
-		{
-			manaTime = timeToSleep * 60;
-			combat.manaregeneration(manaTime);
-		}
-		CoC.instance.timeQ = 0;
-		cheatTime(timeToSleep);
 		outputText("<b>" + NUMBER_WORDS_CAPITAL[timeToSleep] + " hours pass...</b>\n\n");
 	}
 
