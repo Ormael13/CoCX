@@ -149,7 +149,7 @@ public class EbonLabyrinth extends DungeonAbstractContent {
             addButton(13, "Down", navigateToRoomEL, DIR_DOWN).hint("Descend even deeper. The monsters will be tougher, but you'll always be able to climb back.");
         }
         addButtonIfTrue(0, "Sleep", doSleepEL, "It's still too early to go to sleep.",
-            model.time.hours >= 21 || model.time.hours < 6,  "Turn yourself in for the night. May result in monster ambush!");
+                isNightTime,  "Turn yourself in for the night. May result in monster ambush!");
         SceneLib.masturbation.masturButton(5);
         addButton(9, "Inventory", inventory.inventoryMenu);
         addButton(14, "Exit", confirmExit);
@@ -217,6 +217,7 @@ public class EbonLabyrinth extends DungeonAbstractContent {
         }
         //static otherwise
         roomStatic(true, newDir);
+        goNext(false);
     }
 
     //if a new highscore is set, checks achievements

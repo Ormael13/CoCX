@@ -5241,8 +5241,8 @@ public class Combat extends BaseContent {
         if (player.antennae.type == Antennae.SEA_DRAGON && player.hasPerk(PerkLib.LightningAffinity)) {
             outputText("You lash out with your whiskers delivering a pair of deadly electrical discharges.");
             var ThunderDamageMultiplier:Number = Math.round(player.inte/100);
-            ExtraNaturalWeaponAttack(ThunderDamageMultiplier);
-            ExtraNaturalWeaponAttack(ThunderDamageMultiplier);
+            ExtraNaturalWeaponAttack(ThunderDamageMultiplier, "lightning");
+            ExtraNaturalWeaponAttack(ThunderDamageMultiplier, "lightning");
             if (rand(100)>95 && !monster.hasPerk(PerkLib.LightningNature) && !monster.hasPerk(PerkLib.LightningAffinity)){
                 if (!monster.hasStatusEffect(StatusEffects.Stunned)) {
                     if (!monster.hasPerk(PerkLib.Resolute)) monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);

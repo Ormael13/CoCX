@@ -127,7 +127,7 @@ public class EventParser {
     private static function goNextWrapped(needNext:Boolean):Boolean {
         var player:Player = CoC.instance.player;
         //clearOutput();
-        if (timeAwareLargeLastEntry >= 0) { //Finish calling timeChangeLarge before advancing the hour again
+        if (timeAwareLargeLastEntry >= 0 && !DungeonAbstractContent.inDungeon) { //Finish calling timeChangeLarge before advancing the hour again
             for (; timeAwareLargeLastEntry < _timeAwareClassList.length; timeAwareLargeLastEntry++) {
                 var item:TimeAwareInterface = _timeAwareClassList[timeAwareLargeLastEntry];
                 var classname:String = getQualifiedClassName(item);
@@ -224,7 +224,7 @@ public class EventParser {
             /* Inform all time aware classes that it's time for large events to trigger. Note that timeChangeLarge could be called multiple times in a single tick
                of the clock, so any updates should happen in timeChange and any timeChangeLarge events need to make sure they cannot repeat within the same hour.
                In effect these are the same rules the existing code acted under. */
-            for (timeAwareLargeLastEntry = 0; timeAwareLargeLastEntry < _timeAwareClassList.length; timeAwareLargeLastEntry++) {
+            for (timeAwareLargeLastEntry = 0; timeAwareLargeLastEntry < _timeAwareClassList.length && !DungeonAbstractContent.inDungeon; timeAwareLargeLastEntry++) {
                 item = _timeAwareClassList[timeAwareLargeLastEntry];
                 classname = getQualifiedClassName(item);
                 Utils.Begin("TimeAwareInterface", classname + ".timeChangeLarge");
@@ -236,23 +236,25 @@ public class EventParser {
             }
             timeAwareLargeLastEntry = -1; //If this var is -1 then this function has called timeChangeLarge for all entries in the _timeAwareClassList
 
-            Utils.Begin("eventParser", "impGangBangProgress");
-            var igb:int = impGangBangProgress();
-            Utils.End("eventParser", "impGangBangProgress");
-            if (igb == 1) needNext = true;
-            if (igb == 2) return true;
+            if (!DungeonAbstractContent.inDungeon) {
+                Utils.Begin("eventParser", "impGangBangProgress");
+                var igb:int = impGangBangProgress();
+                Utils.End("eventParser", "impGangBangProgress");
+                if (igb == 1) needNext = true;
+                if (igb == 2) return true;
 
-            Utils.Begin("eventParser", "pregnancyProgress");
-            igb = pregnancyProgress();
-            Utils.End("eventParser", "pregnancyProgress");
-            if (igb == 1) needNext = true;
-            if (igb == 2) return true;
+                Utils.Begin("eventParser", "pregnancyProgress");
+                igb = pregnancyProgress();
+                Utils.End("eventParser", "pregnancyProgress");
+                if (igb == 1) needNext = true;
+                if (igb == 2) return true;
 
-            Utils.Begin("eventParser", "eggLoot");
-            igb = eggLootProgress();
-            Utils.End("eventParser", "eggLoot");
-            if (igb == 1) needNext = true;
-            if (igb == 2) return true;
+                Utils.Begin("eventParser", "eggLoot");
+                igb = eggLootProgress();
+                Utils.End("eventParser", "eggLoot");
+                if (igb == 1) needNext = true;
+                if (igb == 2) return true;
+            }
         }
 
         // Hanging the Uma massage update here, I think it should work...
@@ -281,10 +283,12 @@ public class EventParser {
         if (player.miscJewelry1 == CoC.instance.miscjewelries.DMAGETO && player.tailType != Tail.DEMONIC) {
             EngineCore.outputText("<b>\nSince you don't have a demonic tail anymore, your beautiful ornament becomes useless.</b>\n");
             SceneLib.inventory.takeItem(player.unequipMiscJewelry1(false,true), playerMenu);
+            return true;
         }
         if (player.miscJewelry2 == CoC.instance.miscjewelries.DMAGETO && player.tailType != Tail.DEMONIC) {
             EngineCore.outputText("<b>\nSince you don't have a demonic tail anymore, your beautiful ornament becomes useless.</b>\n");
             SceneLib.inventory.takeItem(player.unequipMiscJewelry2(false,true), playerMenu);
+            return true;
         }
         //Drop Excalibur / beautiful sword / beautiful staff if corrupted!
         if ((player.weapon == CoC.instance.weapons.EXCALIB || player.weapon == CoC.instance.weapons.B_SWORD || player.weapon == CoC.instance.weapons.B_STAFF) && player.cor >= 33 + player.corruptionTolerance) {

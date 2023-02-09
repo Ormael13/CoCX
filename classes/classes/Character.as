@@ -841,6 +841,7 @@ import classes.Scenes.NPCs.Forgefather;
 			if (game.player.tailType == Tail.SCORPION) maxven += 300;
 			if (game.player.tailType == Tail.MANTICORE_PUSSYTAIL) maxven += 400;
 			if (game.player.lowerBody == LowerBody.HYDRA) maxven += 400;
+			if (game.player.lowerBody == LowerBody.SANDWORM) maxven += 400;
 			if (game.player.lowerBody == LowerBody.ATLACH_NACHA) maxven += 1200;
 			if (hasPerk(PerkLib.ImprovedVenomGland)) maxven += 100;
 			if (hasPerk(PerkLib.ImprovedVenomGlandEx)) maxven += 200;
