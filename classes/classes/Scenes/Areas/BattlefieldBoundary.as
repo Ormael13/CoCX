@@ -10,6 +10,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
 import classes.Scenes.API.Encounters;
 import classes.Scenes.API.GroupEncounter;
+import classes.Scenes.Areas.Battlefield.*;
 import classes.Scenes.Dungeons.DemonLab;
 import classes.Scenes.NPCs.EtnaFollower;
 import classes.Scenes.SceneLib;
@@ -18,7 +19,8 @@ use namespace CoC;
 	
 	public class BattlefieldBoundary extends BaseContent
 	{
-		
+		public var battlefieldEnemiesScene:BattlefieldEnemiesScenes = new BattlefieldEnemiesScenes();
+
 		public function BattlefieldBoundary() {
 			onGameInit(init);
 		}
@@ -101,6 +103,10 @@ use namespace CoC;
 				name: "common",
 				chance: 0.4,
 				call: SceneLib.exploration.genericGolGobImpEncounters
+			}, {
+				name: "zombies",
+				chance: 0.4,
+				call: battlefieldEnemiesScene.encounterZombies
 			}/*, {
 				name: "demonProjects",
 				chance: 0.2,

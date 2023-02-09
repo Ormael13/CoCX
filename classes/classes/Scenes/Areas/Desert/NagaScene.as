@@ -9,14 +9,12 @@ import classes.display.SpriteDb;
 
 public class NagaScene extends BaseContent{
         private var gorgonOrNaga:String = "naga";
-        private var location:String = "desert";
 		private var isGorgon:Boolean=false;
 
     public function NagaScene(gorgon:Boolean = false) {
             if (gorgon) {
 				isGorgon=gorgon;
                 gorgonOrNaga = "gorgon";
-                location = "beach";
             }
 	}
 //NAGA STATUS
@@ -237,9 +235,9 @@ private function victoryMale_taur():void {
     else outputText("you explode with huge fountains of cum spurting from your [cock], gushing out from where the two of you are joined to rain on the sands below, ");
     outputText("as she squeezes you tightly in a climax of her own that steals your breath away.\n\n");
     outputText("Exhausted from her gymnastics, the " + gorgonOrNaga);
-    outputText(" slowly unwinds from you and lies on the sand, cum dripping from her pussy onto the dry " + location);
+    outputText(" slowly unwinds from you and lies on the sand, cum dripping from her pussy onto the dry desert");
     outputText(" beneath her.\n\n");
-    outputText("You think it would be a very good idea to come to the " + location);
+    outputText("You think it would be a very good idea to come to the desert");
 	outputText(" more often.");
 	player.sexReward("vaginalFluids","Dick");
 	cleanupAfterCombat();
@@ -292,7 +290,7 @@ private function victoryMale():void {
         }
         outputText("\n\nYou slowly untangle yourself from the panting " + gorgonOrNaga);
         outputText(" and leave her lying in the sand, basking in the warmth of sex and sun. You return to your camp, completely satisfied with your work.\n\n");
-        outputText("You think it would be a very good idea to come to the " + location);
+        outputText("You think it would be a very good idea to come to the desert");
         outputText(" more often.");
         player.sexReward("vaginalFluids","Dick");
         cleanupAfterCombat();
@@ -317,7 +315,7 @@ private function victoryMale_rough():void {
     //[lots of jizz OR more]
     if (player.cumQ() > 250) {
         outputText("  Your spooge explodes from the " + gorgonOrNaga);
-        outputText("'s abused cunt, flooding the " + location);
+        outputText("'s abused cunt, flooding the desert");
         outputText(" sands as you black out.\n\n");
     }
     else outputText("\n\n");
@@ -331,7 +329,7 @@ private function victoryMale_rough():void {
     outputText("As you retrieve your clothes, you notice red marks around your chest and arms. It seems that while the " + gorgonOrNaga);
     outputText(" did have the opportunity to kill you while you were unconscious, she preferred to keep you alive.\n\n");
     //common
-    outputText("You think it would be a very good idea to come to the " + location);
+    outputText("You think it would be a very good idea to come to the desert");
 	outputText(" more often, but you're confident that <i>she</i> will remember this. You'd better not lose to her next time...");
     if(!player.hasStatusEffect(StatusEffects.MeanToNaga)) player.createStatusEffect(StatusEffects.MeanToNaga,0,0,0,0);
 	player.sexReward("vaginalFluids","Dick");
@@ -368,7 +366,7 @@ private function victoryFemale_taur():void {
         sceneHunter.print("Try to win by lust, you brute :)");
     }
     //
-    outputText("You think it would be a very good idea to come to the " + location);
+    outputText("You think it would be a very good idea to come to the desert");
 	outputText(" more often.");
 	player.sexReward("Default","Default",true,false);
 	cleanupAfterCombat();
@@ -381,10 +379,10 @@ private function victoryFemale():void {
     outputText(" lying slumped on the ground in front of you, her coils twitching and tailtip marking the sand. Stepping forward, yougather her human half into your arms, and she moans weakly as your breasts rub against hers. Smiling, you languidly lick her neck, her skin smooth and dry beneath your tongue. Reaching down, you grab the end of her tail and bring it to your dripping pussy, rubbing it back and forth across your entrance. Reviving under your caresses, the beautiful snake-lady rises, slowly circling you, windingherself around you again and again as you continue to use her tailtip to stimulate yourself. She comes to a stop, her coils now looselyaroundhalf your body, as she once again faces you, her tail twitchinghungrily in your grasp. You lean forward to kiss her, caught up in the moment, not caring of her fangs, as her tail twitches out of your grasp and suddenly spears upwards; you gasp and moan inpleasure as it dives into your moist pussy.  ");
     player.cuntChange(20,true,false,true);
     outputText("Once again grinding your body against hers, your stiff nipples rub against one another, eliciting more moans from both of you. Her coils tighten slowly, squeezing your body in a tight hug as her tail thrashes wildly inside you, driving you closer and closer to your limit. With a scream of ecstasy, you climax, your juices spurting out and coating her tail, your arms squeeze her tightly as you continue to cum. The " + gorgonOrNaga);
-    outputText(" slowly unwinds herself, smiling somewhat shyly at you as you stand there, panting, before slithering off into the sands, your moisture on her scales quickly drying in the arid " + location);
+    outputText(" slowly unwinds herself, smiling somewhat shyly at you as you stand there, panting, before slithering off into the sands, your moisture on her scales quickly drying in the arid desert");
     outputText(" heat.\n\n");
     //
-    outputText("You think it would be a very good idea to come to the " + location);
+    outputText("You think it would be a very good idea to come to the desert");
 	outputText(" more often.");
 	player.sexReward("Default","Default",true,false);
 	cleanupAfterCombat();
@@ -394,7 +392,7 @@ private function victoryFemale_rough():void {
     //
     outputText("As you watch the writhing form of the defeated " + gorgonOrNaga);
     outputText(", you cannot help but feel turned on by it. You step forward, grabbing the " + gorgonOrNaga);
-    outputText(" by the shoulders and forcing her down against the sand, face up. Then, pinning her arms under your knees, you straddle her chest, crushing her modest breasts against her constricted ribcage. You can already see the panic in her face as you " + (player.armorDescript() != "gear" ? "begin to unfasten the lower part of your " + player.armorDescript() : "present your naked body to the snake-woman.") + ". Once your dripping-wet pussy is exposed to the dry " + location);
+    outputText(" by the shoulders and forcing her down against the sand, face up. Then, pinning her arms under your knees, you straddle her chest, crushing her modest breasts against her constricted ribcage. You can already see the panic in her face as you " + (player.armorDescript() != "gear" ? "begin to unfasten the lower part of your " + player.armorDescript() : "present your naked body to the snake-woman.") + ". Once your dripping-wet pussy is exposed to the dry desert");
     outputText(" air, you pull up the " + gorgonOrNaga);
     outputText("'s head by her hair and pull it close to your hot snatch. \"<i>C'mon, you horny little snake-tailed slut, what are you waiting for?</i>\" The " + gorgonOrNaga);
     outputText(" remains frozen in a panic, not sure what to do. As encouragement you tug at her hair, pulling her head even closer to your " + vaginaDescript(0) + ". \"<i>I said LICK IT!</i>\" you shout, rubbing your " + vaginaDescript(0) + " into her face. Finally, the " + gorgonOrNaga);
@@ -430,7 +428,7 @@ private function victoryFemale_rough():void {
     else sceneHunter.print("Failed str check");
     outputText("\n\nYou return to camp, satisfied with your actions.\n\n");
     //
-    outputText("You think it would be a very good idea to come to the " + location);
+    outputText("You think it would be a very good idea to come to the desert");
 	outputText(" more often, but you're confident that <i>she</i> will remember this. You'd better not lose to her next time...");
     if(!player.hasStatusEffect(StatusEffects.MeanToNaga)) player.createStatusEffect(StatusEffects.MeanToNaga,0,0,0,0);
 	player.sexReward("Default","Default",true,false);
@@ -452,7 +450,7 @@ private function victoryGless_taur():void {
     outputText(" slides more of her tail into you, twitching the tip of it deep inside of you.\n\n");
     outputText("You speed up your licking and thrust your tongue deeper into her, her walls now slick. She presses your face deep into her pussy as her hips buck in orgasm.\n\n");
     outputText("The tail of the " + gorgonOrNaga);
-    outputText(" slides out of you as she lies back in the sand of the " + location);
+    outputText(" slides out of you as she lies back in the sand of the desert");
     outputText(", exhausted from her orgasm. You stand up and gather your things, thinking that maybe it wouldn't be too bad of an idea to come back.\n\n");
     //
 	player.sexReward("Default","Default",true,false);
@@ -478,7 +476,7 @@ private function victoryGless():void {
     outputText("You stand up over her, your crotch now wet from " + (player.gender == 0 ? "her" : "your mixed") + " girl cum. You pick up your things and put your clothes back on, leaving the " + gorgonOrNaga);
     outputText(" lying there in bliss.\n\n");
     //
-    outputText("You think it would be a very good idea to come to the " + location);
+    outputText("You think it would be a very good idea to come to the desert");
 	outputText(" more often.");
 	player.sexReward("Default","Default",true,false);
 	cleanupAfterCombat();
@@ -509,7 +507,7 @@ if(player.faceType != Face.SNAKE_FANGS) {
         outputText(" love-juice. You return to camp, your sick fist-rape fantasy fulfilled.\n\n");
     }
     //
-    outputText("You think it would be a very good idea to come to the " + location);
+    outputText("You think it would be a very good idea to come to the desert");
 	outputText(" more often, but you're confident that <i>she</i> will remember this. You'd better not lose to her next time...");
     if(!player.hasStatusEffect(StatusEffects.MeanToNaga)) player.createStatusEffect(StatusEffects.MeanToNaga,0,0,0,0);
 	player.sexReward("Default","Default",true,false);
@@ -1193,8 +1191,8 @@ private function eggUpANagaSpiderLike():void {
         outputText(" raining down on the prone " + gorgonOrNaga);
 	}
 	outputText(".  You crumple into a heap on top of your reptilian lover, unconscious before you hit the sand.  Her eyes drift closed as well, as she coils around you, settling in for a well-deserved rest.");
-    outputText("\n\nA while later, you awaken alone in the " + location);
-    outputText(" sand.  Getting your shaky legs under you and stifling a yawn, you head back to camp.  You should come to the " + location);
+    outputText("\n\nA while later, you awaken alone in the desert");
+    outputText(" sand.  Getting your shaky legs under you and stifling a yawn, you head back to camp.  You should come to the  desert");
 	outputText(" more often.");
 	player.dumpEggs();
 	player.sexReward("Default","Default",true,false);
@@ -1247,7 +1245,7 @@ private function beePositANagaPlease():void {
 	if(player.fertilizedEggs() == 0) outputText("egg-bearer");
 	else outputText("mother");
 	outputText(" a parting sting.  Her moans of excitement jump an octave, and you listen to them with a happy, almost gloating smile while you get dressed.");
-    outputText("\n\nYou should definitely come to the " + location);
+    outputText("\n\nYou should definitely come to the desert");
 	outputText(" more often.");
 	player.dumpEggs();
 	player.sexReward("Default","Default",true,false);

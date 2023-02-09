@@ -22,7 +22,7 @@ import classes.PerkLib;
 import classes.PotionType;
 import classes.Races;
 import classes.Races.ElementalRace;
-import classes.Scenes.Areas.Beach.Gorgon;
+import classes.Scenes.Areas.Desert.Gorgon;
 import classes.Scenes.Areas.Bog.*;
 import classes.Scenes.Areas.Caves.DisplacerBeast;
 import classes.Scenes.Areas.Desert.*;
@@ -8266,6 +8266,15 @@ public class Combat extends BaseContent {
         if (monster.HP < monster.minHP()) monster.HP = monster.minHP();
         return damage;
     }
+	
+	public function doPlasmaDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
+		var split:Number = (damage * 0.5);
+		var fdamage:Number = Math.round(split * fireDamageBoostedByDao());
+		var ldamage:Number = Math.round(split * lightningDamageBoostedByDao());
+		doFireDamage(fdamage, apply, display);
+		doLightingDamage(ldamage, apply, display);
+		return split;
+	}
 
 	public function doTrueDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
