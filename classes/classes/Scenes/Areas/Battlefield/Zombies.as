@@ -116,9 +116,10 @@ import classes.internals.*;
 			this.bonusHP = 150;
 			this.bonusLust = 305;
 			this.level = 25;
-			this.gems = 0;
+			this.gems = 10 + rand(5);
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyUndeadType, 0, 0, 0, 0);
 			createStatusEffect(StatusEffects.LowtierMagicImmunity, 0, 0, 0, 0);
 			checkMonster();
 		}

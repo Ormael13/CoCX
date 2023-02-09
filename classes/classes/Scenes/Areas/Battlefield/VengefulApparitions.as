@@ -110,7 +110,7 @@ import classes.internals.*;
 				this.bonusLust = 131;
 				this.level = 24;
 			}
-			this.gems = 0;
+			this.gems = 10 + rand(5);
 			this.drop = NO_DROP;
 			if (rand(2) == 0) this.createPerk(PerkLib.EnemyLargeGroupType, 0, 0, 0, 0);
 			else this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);

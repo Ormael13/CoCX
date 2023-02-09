@@ -125,7 +125,8 @@ public class BattlefieldOuter extends BaseContent
 		}, {
 			name: "zombies",
 			chance: 0.4,
-			call: battlefieldEnemiesScene.encounterZombies
+			call: battlefieldEnemiesScene.encounterZombies,
+			when: battlefieldEnemiesScene.canEncounterZombies
 		}/*, {
 			name: "demonProjects",
 			chance: 0.2,
