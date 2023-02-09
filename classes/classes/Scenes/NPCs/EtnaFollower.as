@@ -1139,7 +1139,7 @@ private function etnaAfterInfidelity():void {
 }
 
 public function etnaKnockupAttempt():void {
-	if (pregnancy.isPregnant || !EtnaFertile && EtnaDaughterScene.EtnaDaughterAge > 0) return;
+	if (pregnancy.isPregnant || !EtnaFertile || EtnaDaughterScene.EtnaDaughterAge > 0) return;
 	if (rand(8) == 0 || player.cumQ() > rand(3000) || player.virilityQ() >= 0.7) {
 		pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_ETNA);
 		if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) outputText("\n<b>Etna is pregnant!</b>");
