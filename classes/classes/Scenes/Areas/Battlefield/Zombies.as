@@ -72,12 +72,12 @@ import classes.internals.*;
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			Jiangshi.defeatVengefulApparitions();
+			Jiangshi.defeatZombies();
 		}
 		
 		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
 		{
-			Jiangshi.loseToAVengefulApparitions();
+			Jiangshi.loseToZombies();
 		}
 		
 		public function Zombies() 
