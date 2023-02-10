@@ -1737,14 +1737,34 @@ public class Creature extends Utils
 		}
 
 		//Functions
-		public function gainOrLosePerk(ptype:PerkType, qualifies:Boolean, gainText:String = "", loseText:String = "", gainFunct:Function = null, loseFunct:Function = null, doOutput:Boolean = true, value1:Number = 0, value2:Number = 0, value3:Number = 0, value4:Number = 0):Boolean {
-			if (!hasPerk(ptype) && qualifies) {
+		public function gainOrLosePerk(ptype:PerkType, condition:Boolean, gainText:String = "", loseText:String = "", addLossCondition:Boolean = false, gainFunct:Function = null, loseFunct:Function = null, doOutput:Boolean = true, value1:Number = 0, value2:Number = 0, value3:Number = 0, value4:Number = 0):Boolean {
+			if (!hasPerk(ptype) && condition) {
 				createPerk(ptype, value1, value2, value3, value4);
 				if (doOutput) EngineCore.outputText("\n" + gainText + "\n\n(<b>Gained Perk: "+ptype.name()+"</b> - " + ptype.desc() + ")\n");
 				if (gainFunct != null) gainFunct();
 				return true;
 			}
-			if (hasPerk(ptype) && !qualifies) {
+			if (hasPerk(ptype) && !condition && addLossCondition) {
+				removePerk(ptype);
+				if (doOutput) EngineCore.outputText("\n" + loseText + "\n\n(<b>Lost Perk: "+ptype.name()+"</b>)\n");
+				if (loseFunct != null) loseFunct();
+				return true;
+			}
+			return false;
+		}
+
+		public function gainPerk(ptype:PerkType, condition:Boolean, gainText:String = "", gainFunct:Function = null, doOutput:Boolean = true, value1:Number = 0, value2:Number = 0, value3:Number = 0, value4:Number = 0):Boolean {
+			if (!hasPerk(ptype) && condition) {
+				createPerk(ptype, value1, value2, value3, value4);
+				if (doOutput) EngineCore.outputText("\n" + gainText + "\n\n(<b>Gained Perk: "+ptype.name()+"</b> - " + ptype.desc() + ")\n");
+				if (gainFunct != null) gainFunct();
+				return true;
+			}
+			return false;
+		}
+
+		public function losePerk(ptype:PerkType, losecondition:Boolean,loseText:String = "", loseFunct:Function = null, doOutput:Boolean = true):Boolean {
+			if (hasPerk(ptype) && losecondition) {
 				removePerk(ptype);
 				if (doOutput) EngineCore.outputText("\n" + loseText + "\n\n(<b>Lost Perk: "+ptype.name()+"</b>)\n");
 				if (loseFunct != null) loseFunct();
