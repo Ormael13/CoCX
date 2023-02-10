@@ -771,7 +771,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 
 			//Recharge venom/web pool
 			if (player.tailType == Tail.BEE_ABDOMEN || player.tailType == Tail.SPIDER_ADBOMEN || player.tailType == Tail.SCORPION || player.tailType == Tail.MANTICORE_PUSSYTAIL || player.faceType == Face.SNAKE_FANGS || player.faceType == Face.SPIDER_FANGS || player.lowerBody == LowerBody.HYDRA || player.lowerBody == LowerBody.ATLACH_NACHA || player.lowerBody == LowerBody.SANDWORM
-					|| player.hasPerk(PerkLib.ImprovedVenomGland) || player.perkv1(IMutationsLib.VenomGlandsIM) >= 2 || player.hasPerk(PerkLib.VenomousDiet) || player.hasPerk(PerkLib.HighlyVenomousDiet) || player.hasPerk(PerkLib.AxillaryVenomGlands) || player.hasPerk(PerkLib.VenomousAdiposeTissue)) { //Spider, Bee, Scorpion, Manticore, Naga and Altach Nacha Venom Recharge
+					|| player.hasPerk(PerkLib.ImprovedVenomGland) || player.perkv1(IMutationsLib.VenomGlandsIM) >= 2 || player.hasPerk(PerkLib.VenomousDiet) || player.hasPerk(PerkLib.HighlyVenomousDiet) || player.hasPerk(PerkLib.AxillaryVenomGlands) || player.hasPerk(PerkLib.VenomousAdiposeTissue) || (player.hasKeyItem("Sky Poison Pearl") >= 0)) { //Spider, Bee, Scorpion, Manticore, Naga and Altach Nacha Venom Recharge
 				var venomHRecharge:Number = 0;
 				venomHRecharge += combat.venomCombatRecharge2();
 				if (player.hasPerk(PerkLib.HighlyVenomousDiet)) {
