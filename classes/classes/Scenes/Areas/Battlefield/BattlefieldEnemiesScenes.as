@@ -36,6 +36,10 @@ import classes.Scenes.Areas.Battlefield.*;
 			cleanupAfterCombat();
 		}
 		
+		public function canEncounterZombies():Boolean {
+			return !player.isRaceCached(Races.JIANGSHI);
+		}
+		
 		public function encounterZombies():void {
 			clearOutput();
 			outputText("As you explore the battlefield you hear what sounds like a pleading moans. Confused, you head toward the sound and find what appears to be a beautiful naked human men and women with pale blue skin. They slowly turns toward you revealing what appears to be a strange paper tag stuck to their foreheads.\n\n");
@@ -49,7 +53,7 @@ import classes.Scenes.Areas.Battlefield.*;
 		public function defeatZombies():void {
 			clearOutput();
 			outputText("The undead falls to the ground, clearly in need of rest after taking so much punishment. You know better than to try and fuck something that might drain you dry and leave with whatever spoil this thing dropped.");
-			inventory.takeItem(consumables.ECTOPLS, cleanupAfterCombat);
+			inventory.takeItem(consumables.L_DRAFT, cleanupAfterCombat);
 		}
 		
 		public function loseToZombies():void {

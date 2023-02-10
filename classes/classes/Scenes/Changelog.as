@@ -169,7 +169,9 @@ public class Changelog extends BaseContent
 			outputText("-When exploring outer desert at lvl 10+ can discover inner desert.\n");
 			outputText("-Traditional Mage perk effect can be activated by using partial staff type melee weapons but spell bonus is halved.\n");
 			outputText("-New enemy: Gorgon - lvl 24. Encounterable in inner desert from lvl 14+.\n");
-			outputText("-New enemies (by Liadri with slight modification for been group enemy by Ormael): Zombies - lvl 25. Encounterable in Boundary/Outer Battlefield.\n");
+			outputText("-New enemies (by Liadri with slight modification to be group enemy): Zombies - lvl 25. Encounterable in Boundary/Outer Battlefield as long PC isn't Jiangshi. They have Undead enemy type perk.\n");
+			outputText("-Fix time changes outside of camp for sleeping and allow time to flow again inside dungeons as a result also fixed a lot of broken cases for adding/removing racial perks and triggering events, fix sea dragon lightning (EragonX)\n");
+			outputText("-New enemy perk: Undead enemy type. It would give enemy similar passive effects top goo type (bleed/critical dmg resistance) but with higher than even goo phys dmg reduction (max up to 95% not 80%).\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -178,21 +180,19 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX)
+			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
 			outputText("-\n");
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
 			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
 			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-\n");
-			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX)
-			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			//remove this line when other two lines below get added ingame
 			//outputText("-New perk for enemies: Elite type enemy. Bonuses for are: Diehard effect of 2,5% of max HP + 750 HP * NG tier, OverMax HP effect of 5% magnitude.\n");

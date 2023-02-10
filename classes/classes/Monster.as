@@ -883,6 +883,12 @@ import flash.utils.getQualifiedClassName;
 			return temp;
 		}
 
+		private function capForDmgReduction():Number {
+			var cFDR:Number = 20;
+			if (hasPerk(PerkLib.EnemyUndeadType)) cFDR -= 15;
+			return cFDR;
+		}
+
 		public override function damagePercent():Number {
 			var mult:Number = 100;
 			var armorMod:Number = armorDef;
@@ -911,7 +917,7 @@ import flash.utils.getQualifiedClassName;
 			mult -= damagePercentShared();
 			//Caps damage reduction at 80/99%.
 			//if (monster.hasStatusEffect(StatusEffects.DefendMonsterVer)) cap down to max 99%
-			if (mult < 20) mult = 20;
+			if (mult < capForDmgReduction()) mult = capForDmgReduction();
 			return mult;
 		}
 		public override function damageRangePercent():Number {
@@ -926,7 +932,7 @@ import flash.utils.getQualifiedClassName;
 			mult -= damagePercentShared();
 			//Caps damage reduction at 80/99%.
 			//if (monster.hasStatusEffect(StatusEffects.DefendMonsterVer)) cap down to max 99%
-			if (mult < 20) mult = 20;
+			if (mult < capForDmgReduction()) mult = capForDmgReduction();
 			return mult;
 		}
 		private function damagePercentShared():Number {
@@ -971,6 +977,7 @@ import flash.utils.getQualifiedClassName;
 			}
 			//Misc
 			if (hasPerk(PerkLib.EnemyGooType)) multShared += 80;
+			if (hasPerk(PerkLib.EnemyUndeadType)) multShared += 95;
 			return multShared;
 		}
 
@@ -992,7 +999,7 @@ import flash.utils.getQualifiedClassName;
 
 		public function canMonsterBleed():Boolean
 		{
-			return !hasPerk(PerkLib.EnemyConstructType) || !hasPerk(PerkLib.EnemyPlantType) || !hasPerk(PerkLib.EnemyGooType) || !hasPerk(PerkLib.EnemyGhostType);
+			return !hasPerk(PerkLib.EnemyConstructType) || !hasPerk(PerkLib.EnemyPlantType) || !hasPerk(PerkLib.EnemyGooType) || !hasPerk(PerkLib.EnemyGhostType) || !hasPerk(PerkLib.EnemyUndeadType);
 		}
 
 		/**
@@ -3784,4 +3791,4 @@ import flash.utils.getQualifiedClassName;
 			}
 		}
 	}
-}
+}
