@@ -532,13 +532,13 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 
 			//Improved venom gland
-			needNext ||= player.gainOrLosePerk(PerkLib.ImprovedVenomGland, flags[kFLAGS.VENOM_TIMES_USED] >= 50, "You feel wonderfully healthy. After using your venom so many times your body finally got acclimated to the presence of your venom gland allowing for increased capacity and production.");
-			needNext ||= player.gainOrLosePerk(PerkLib.ImprovedVenomGlandEx, flags[kFLAGS.VENOM_TIMES_USED] >= 125, "You feel wonderfully healthy. After using your venom so many times your venom gland development reached it next stage. Allowing for increased capacity, production and lowering usage of venom.");
-			needNext ||= player.gainOrLosePerk(PerkLib.ImprovedVenomGlandSu, flags[kFLAGS.VENOM_TIMES_USED] >= 375, "You feel wonderfully healthy. After using your venom so many times your venom gland started to produce more potent venom. Allowing for increased capacity, production and increased effects of venom.");
+			needNext ||= player.gainPerk(PerkLib.ImprovedVenomGland, flags[kFLAGS.VENOM_TIMES_USED] >= 50, "You feel wonderfully healthy. After using your venom so many times your body finally got acclimated to the presence of your venom gland allowing for increased capacity and production.");
+			needNext ||= player.gainPerk(PerkLib.ImprovedVenomGlandEx, flags[kFLAGS.VENOM_TIMES_USED] >= 125, "You feel wonderfully healthy. After using your venom so many times your venom gland development reached it next stage. Allowing for increased capacity, production and lowering usage of venom.");
+			needNext ||= player.gainPerk(PerkLib.ImprovedVenomGlandSu, flags[kFLAGS.VENOM_TIMES_USED] >= 375, "You feel wonderfully healthy. After using your venom so many times your venom gland started to produce more potent venom. Allowing for increased capacity, production and increased effects of venom.");
 
-			needNext ||= player.gainOrLosePerk(PerkLib.GeneticMemory, flags[kFLAGS.TIMES_TRANSFORMED] >= 25, "Your body behave weirdly as if all the transformation, which you have undergone started to make it unsure about what it truly is. Sometime you even try to move limbs that are no longer there. Suddenly you realise that no mather how many time you change your body remembers it. Your body developed genetic memory!");
-			needNext ||= player.gainOrLosePerk(PerkLib.TransformationResistance, flags[kFLAGS.TIMES_TRANSFORMED] >= 100, "You feel a strange tingling sensation. It seems as if you've finally adapted to the transformative properties of the food in Mareth and your body has finally built up enough resistance! You suspect that you can still transform but at somewhat diminished rate.");
-			needNext ||= player.gainOrLosePerk(PerkLib.TransformationAcclimation, flags[kFLAGS.TIMES_TRANSFORMED] >= 200, "Due to you're continued consumption of transformative items, you have discovered a way to draw out more of the transformative properties of the food in Mareth.");
+			needNext ||= player.gainPerk(PerkLib.GeneticMemory, flags[kFLAGS.TIMES_TRANSFORMED] >= 25, "Your body behave weirdly as if all the transformation, which you have undergone started to make it unsure about what it truly is. Sometime you even try to move limbs that are no longer there. Suddenly you realise that no mather how many time you change your body remembers it. Your body developed genetic memory!");
+			needNext ||= player.gainPerk(PerkLib.TransformationResistance, flags[kFLAGS.TIMES_TRANSFORMED] >= 100, "You feel a strange tingling sensation. It seems as if you've finally adapted to the transformative properties of the food in Mareth and your body has finally built up enough resistance! You suspect that you can still transform but at somewhat diminished rate.");
+			needNext ||= player.gainPerk(PerkLib.TransformationAcclimation, flags[kFLAGS.TIMES_TRANSFORMED] >= 200, "Due to you're continued consumption of transformative items, you have discovered a way to draw out more of the transformative properties of the food in Mareth.");
 			if (player.hasPerk(PerkLib.DominantAlpha)) player.DominantAlphaBonus();
 			if (player.inHeat) { //Heats v1 is bonus fertility, v2 is bonus libido, v3 is hours till it's gone
 				if (player.statusEffectv3(StatusEffects.Heat) <= 1 || player.vaginas.length == 0) { //Remove bonus libido from heat
@@ -1415,9 +1415,9 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removeStatusEffect(StatusEffects.DemonEnergyThirstFeed)
 			}
 			//DarkCharm
-			needNext ||= player.gainOrLosePerk(PerkLib.DarkCharm, player.isAnyRaceCached(Races.DEMON, Races.IMP) || player.hasMutation(IMutationsLib.BlackHeartIM), "You feel a strange sensation in your body. With you looking like a demon, you have unlocked the potential to use demonic charm attacks!", "With some of your demon-like traits gone, so does your ability to use charm attacks.");
+			needNext ||= player.gainOrLosePerk(PerkLib.DarkCharm, player.isAnyRaceCached(Races.DEMON, Races.IMP) || player.hasMutation(IMutationsLib.BlackHeartIM), "You feel a strange sensation in your body. With you looking like a demon, you have unlocked the potential to use demonic charm attacks!", "With some of your demon-like traits gone, so does your ability to use charm attacks.", player.perkv4(PerkLib.DarkCharm) == 0);
 			//Flexibility perk
-			needNext ||= player.gainOrLosePerk(PerkLib.Flexibility, (Tail.hasFelineTail(player) && LowerBody.hasFelineLegs(player) && Arms.hasFelineArms(player)) || player.perkv1(IMutationsLib.CatLikeNimblenessIM) >= 1, "While stretching, you notice that you're much more flexible than you were before.  Perhaps this will make it a bit easier to dodge attacks in battle?", "You notice that you aren't as flexible as you were when you had a more feline body.  It'll probably be harder to avoid your enemies' attacks now.");
+			needNext ||= player.gainOrLosePerk(PerkLib.Flexibility, (Tail.hasFelineTail(player) && LowerBody.hasFelineLegs(player) && Arms.hasFelineArms(player)) || player.perkv1(IMutationsLib.CatLikeNimblenessIM) >= 1, "While stretching, you notice that you're much more flexible than you were before.  Perhaps this will make it a bit easier to dodge attacks in battle?", "You notice that you aren't as flexible as you were when you had a more feline body.  It'll probably be harder to avoid your enemies' attacks now.", player.perkv4(PerkLib.Flexibility) == 0);
 
 			//Ghost-slinger perk
 			needNext ||= player.gainOrLosePerk(PerkLib.Ghostslinger, player.isRaceCached(Races.POLTERGEIST, 2), "Your head is suddenly filled with strange otherworldly knowledge. Things you didn't think possible before could become a reality now thanks to your supernatural intellect and abilities. You could even apply these newfound abilities to your equipment.", "Your supernatural knowledge fades along with the abilities that came with it as you become more corporeal.");
@@ -1583,9 +1583,9 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Lizan Regeneration perk
-			needNext ||= player.gainOrLosePerk(PerkLib.LizanRegeneration, player.perkv1(IMutationsLib.LizanMarrowIM) >= 1 || (player.tailType == Tail.LIZARD && player.lowerBody == LowerBody.LIZARD && player.arms.type == Arms.LIZARD), "You start to feel an unusual feeling somewhere within your body. Like tiny ripples moving inside your veins, making you feel so much more refreshed than a moment ago. Considering the fact that lizans are so much like lizards and that they usually possess a natural talent to regenerate from even severe injuries, you wonder if it could be that.", "All of a sudden, something changes inside your body. You think about it for a long time until it dawns on you. You can't feel that refreshing feeling inside your body anymore, meaning your recovery rate has reverted back to normal.");
+			needNext ||= player.gainOrLosePerk(PerkLib.LizanRegeneration, player.perkv1(IMutationsLib.LizanMarrowIM) >= 1 || (player.tailType == Tail.LIZARD && player.lowerBody == LowerBody.LIZARD && player.arms.type == Arms.LIZARD), "You start to feel an unusual feeling somewhere within your body. Like tiny ripples moving inside your veins, making you feel so much more refreshed than a moment ago. Considering the fact that lizans are so much like lizards and that they usually possess a natural talent to regenerate from even severe injuries, you wonder if it could be that.", "All of a sudden, something changes inside your body. You think about it for a long time until it dawns on you. You can't feel that refreshing feeling inside your body anymore, meaning your recovery rate has reverted back to normal.", player.perkv4(PerkLib.LizanRegeneration) == 0);
 			//Lustzerker perk
-			needNext ||= player.gainOrLosePerk(PerkLib.Lustzerker, player.isAnyRaceCached(Races.SALAMANDER, Races.PHOENIX, Races.KITSHOO), "You start to feel a weird, slightly unpleasant feeling inside your body. Like many tiny flames coursing through your veins, making you ponder what is happening with your body. Remembering about salamanders' natural talent for entering a berserk-like state, you guess that should be it.", "All of a sudden, something changes inside your body. You think about it for a long time until it dawns on you. You can't feel that fire in your veins anymore, meaning for now, no more lustzerking.");
+			needNext ||= player.gainOrLosePerk(PerkLib.Lustzerker, player.isAnyRaceCached(Races.SALAMANDER, Races.PHOENIX, Races.KITSHOO), "You start to feel a weird, slightly unpleasant feeling inside your body. Like many tiny flames coursing through your veins, making you ponder what is happening with your body. Remembering about salamanders' natural talent for entering a berserk-like state, you guess that should be it.", "All of a sudden, something changes inside your body. You think about it for a long time until it dawns on you. You can't feel that fire in your veins anymore, meaning for now, no more lustzerking.", player.perkv4(PerkLib.Lustzerker) == 0);
 			//Jungle’s Wanderer
 			needNext ||= player.gainOrLosePerk(PerkLib.JunglesWanderer, player.isRaceCached(Races.REDPANDA), "Your nimble body has adapted to moving through jungles and forests, evading enemy attacks with ease and making yourself harder to catch.", "You notice that you aren't as adept at manuevering through the jungle anymore.");
 
@@ -1808,7 +1808,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Necromancy perk
-			needNext ||= player.gainOrLosePerk(PerkLib.Necromancy, (player.tailType == Tail.CAT && player.tailCount == 2) || player.tailType == Tail.NEKOMATA_FORKED_2_3 || player.tailType == Tail.NEKOMATA_FORKED_1_3, "You feel tremendous fell powers investing your being. You blink and almost jump as you realise you can literally can see the souls of the dead as well as those of the living now. Your powers over life and death have grown as you seem to have acquired a natural talents for the darker arts.", "Having lost the source of your nekomata powers the fell energy in your body seems to recede and vanish completely.");
+			needNext ||= player.gainOrLosePerk(PerkLib.Necromancy, (player.tailType == Tail.CAT && player.tailCount == 2) || player.tailType == Tail.NEKOMATA_FORKED_2_3 || player.tailType == Tail.NEKOMATA_FORKED_1_3, "You feel tremendous fell powers investing your being. You blink and almost jump as you realise you can literally can see the souls of the dead as well as those of the living now. Your powers over life and death have grown as you seem to have acquired a natural talents for the darker arts.", "Having lost the source of your nekomata powers the fell energy in your body seems to recede and vanish completely.", player.perkv4(PerkLib.Necromancy) == 0);
 			//Cancer stance
 			if (player.arms.type == Arms.HUMAN && player.lowerBody == LowerBody.CANCER && !player.hasStatusEffect(StatusEffects.CancerCrabStance)) {
 				outputText("\n\nEver since your lower body became that of a crab you began instinctively folding your arms and hands like those of a mantis or rather, the pincers of a crab. " +
@@ -1823,7 +1823,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Elven Sense
-			needNext ||= player.gainOrLosePerk(PerkLib.ElvenSense, (player.eyes.type != Eyes.ELF || player.ears.type != Ears.ELVEN) || player.hasMutation(IMutationsLib.ElvishPeripheralNervSysIM) || player.hasPerk(PerkLib.BlessingOfTheAncestorTree), "Your acute hearing warns you of imminent danger and you dodge as a branch falls from a nearby tree missing your head by mere inches. You realise your newly sharpened senses granted you increased agility and precision.", "You feels yourself less aware of your surroundings. Heck your vision seems less keen then it used to be. Most likely because you no longer possess the senses of an elf.");
+			needNext ||= player.losePerk(PerkLib.ElvenSense, (player.eyes.type != Eyes.ELF || player.ears.type != Ears.ELVEN) && player.hasPerk(PerkLib.ElvenSense) && !player.perkv1(IMutationsLib.ElvishPeripheralNervSysIM) >= 1 && !player.hasPerk(PerkLib.BlessingOfTheAncestorTree), "You feels yourself less aware of your surroundings. Heck your vision seems less keen then it used to be. Most likely because you no longer possess the senses of an elf.");
 			//Wood elf fixed by blessing of the ancestor tree
 			if (player.hasPerk(PerkLib.BlessingOfTheAncestorTree)) {
 				if (!player.hasPerk(PerkLib.ElvenSense)) {
@@ -2082,38 +2082,15 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//ABOBA
-			if (flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] >= 100 && !player.hasPerk(PerkLib.BasiliskResistance)) {
-				if (player.perkv1(IMutationsLib.GorgonEyesIM) >= 1) outputText("\nYou notice that you feel a bit stiff and your skin is a bit harder.  Something clicks in your mind as you finally unlock the potential to protect yourself from the goddamn basilisks! \n\n(<b>Gained Perk: Basilisk Resistance - You are now immune to the basilisk's gaze!</b>)\n");
-				else outputText("\nYou notice that you feel a bit stiff and your skin is a bit harder.  Something clicks in your mind as you finally unlock the potential to protect yourself from the goddamn basilisks! \n\n(<b>Gained Perk: Basilisk Resistance - Your maximum speed is permanently decreased but you are now immune to the basilisk's gaze!</b>)\n");
-				player.createPerk(PerkLib.BasiliskResistance, 0, 0, 0, 0);
-				needNext = true;
-			}
-			if (player.hasPerk(PerkLib.EnlightenedNinetails) && player.perkv4(PerkLib.EnlightenedNinetails) == 0 && (player.tailType != Tail.FOX || player.tailCount < 9)) { //Check ninetails perks!
-				outputText("\n<b>Without your tails, the magic power they once granted withers and dies, vanishing completely.</b>\n");
-				player.removePerk(PerkLib.EnlightenedNinetails);
-				needNext = true;
-			}
-			if (player.hasPerk(PerkLib.CorruptedNinetails) && player.perkv4(PerkLib.CorruptedNinetails) == 0 && (player.tailType != Tail.FOX || player.tailCount < 9)) { //Check ninetails perks!
-				outputText("\n<b>Without your tails, the magic power they once granted withers and dies, vanishing completely.</b>\n");
-				player.removePerk(PerkLib.CorruptedNinetails);
-				needNext = true;
-			}
-			if (!player.hasPerk(PerkLib.NinetailsKitsuneOfBalance) && player.hasPerk(PerkLib.EnlightenedNinetails) && player.perkv4(PerkLib.EnlightenedNinetails) > 0 && player.hasPerk(PerkLib.CorruptedNinetails) && player.perkv4(PerkLib.CorruptedNinetails) > 0 && player.tailType == Tail.FOX && player.tailCount == 9) {
-				outputText("\n<b>With your nine tails you suddenly feel something beyond merely two paths of corruption and true enlightenment. A third way, the way of treading a fragile path of balance between other two paths. \n\n(Gained Perk: Nine-tails Kitsune of Balance)</b>\n");
-				player.createPerk(PerkLib.NinetailsKitsuneOfBalance, 0, 0, 0, 0);
-			}
-			if (player.hasPerk(PerkLib.NinetailsKitsuneOfBalance) && player.perkv4(PerkLib.NinetailsKitsuneOfBalance) == 0 && (player.tailType != Tail.FOX || player.tailCount < 9)) {
-				outputText("\n<b>Without your tails, the balance is disturbed and you lose your insights into the third path.</b>\n");
-				player.removePerk(PerkLib.NinetailsKitsuneOfBalance);
-				needNext = true;
-			}
-			if (!player.hasVagina() && player.hasPerk(PerkLib.Diapause)) { //Lose diapause
-				outputText("\n<b>With the loss of your womb, you lose your kangaroo-like diapause ability.</b>\n");
-				player.removePerk(PerkLib.Diapause);
-				needNext = true;
-			}
+			needNext ||= player.gainPerk(PerkLib.BasiliskResistance, flags[kFLAGS.BASILISK_RESISTANCE_TRACKER] >= 100, (player.perkv1(IMutationsLib.GorgonEyesIM) >= 1)? "You notice that you feel a bit stiff and your skin is a bit harder.  Something clicks in your mind as you finally unlock the potential to protect yourself from the goddamn basilisks! ":"You notice that you feel a bit stiff and your skin is a bit harder.  Something clicks in your mind as you finally unlock the potential to protect yourself from the goddamn basilisks!");
+			needNext ||= player.losePerk(PerkLib.EnlightenedNinetails, player.perkv4(PerkLib.EnlightenedNinetails) == 0 && (player.tailType != Tail.FOX || player.tailCount < 9), "Without your tails, the magic power they once granted withers and dies, vanishing completely.");
+			needNext ||= player.losePerk(PerkLib.CorruptedNinetails, player.perkv4(PerkLib.CorruptedNinetails) == 0 && (player.tailType != Tail.FOX || player.tailCount < 9), "Without your tails, the magic power they once granted withers and dies, vanishing completely.");
+			needNext ||= player.gainOrLosePerk(PerkLib.NinetailsKitsuneOfBalance, player.hasPerk(PerkLib.EnlightenedNinetails) && player.perkv4(PerkLib.EnlightenedNinetails) > 0 && player.hasPerk(PerkLib.CorruptedNinetails) && player.perkv4(PerkLib.CorruptedNinetails) > 0 && player.tailType == Tail.FOX && player.tailCount == 9,
+					"With your nine tails you suddenly feel something beyond merely two paths of corruption and true enlightenment. A third way, the way of treading a fragile path of balance between other two paths.",
+					"Without your tails, the balance is disturbed and you lose your insights into the third path.", player.perkv4(PerkLib.NinetailsKitsuneOfBalance) == 0);
+			needNext ||= player.losePerk(PerkLib.Diapause, !player.hasVagina(), "With the loss of your womb, you lose your kangaroo-like diapause ability.");
 			//Small Frame perk
-			needNext ||= player.gainOrLosePerk(PerkLib.SmallFrame, player.isAnyRaceCached(Races.IMP, Races.MOUSE, Races.DEVIL, Races.AZAZEL), "Due to your small build you have become harder to hit.", "Due to being too tall you no longer qualify.");
+			needNext ||= player.gainOrLosePerk(PerkLib.SmallFrame, player.isAnyRaceCached(Races.IMP, Races.MOUSE, Races.DEVIL, Races.AZAZEL) && player.effectiveTallness <= 60, "Due to your small build you have become harder to hit.", "Due to being too tall you no longer qualify.");
 			//Small Caster perk
 			needNext ||= player.gainOrLosePerk(PerkLib.SmallCaster, player.isAnyRaceCached(Races.IMP, Races.DEVIL, Races.AZAZEL) && player.effectiveTallness <= 60, "Your magic becomes more concentrated in your smaller body.", "Your racial alignment does not meet the conditions and as such, the high concentration of mana in your body disperses.");
 			needNext ||= player.gainOrLosePerk(PerkLib.Immortality, player.isRaceCached(Races.AZAZEL), "You gain a sense of invulnerability as you are now an Azazel.", "You lose your sense of invulnerability as you are no longer an Azazel.");
@@ -2121,6 +2098,9 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			needNext ||= player.gainOrLosePerk(PerkLib.QueenOfTheFairies, player.isRaceCached(Races.FAIRY, 2), "You sense a change in yourself, a faint calling from the forrest. "+PerkLib.QueenOfTheFairies.desc());
 			needNext ||= player.gainOrLosePerk(PerkLib.WhatIsReality, player.isRaceCached(Races.CHESHIRE), "You gain a sence of invulnerability as you are now an Cheshire.", "You lose your sense of invulnerability as you are no longer an Cheshire.");
 			needNext ||= player.gainOrLosePerk(PerkLib.VorpalClaw, player.isRaceCached(Races.CHESHIRE));
+			//Gain venomancy if utherly toxic
+			needNext ||= player.gainPerk(PerkLib.Venomancy, player.isRaceCached(Races.APOPHIS) && player.cor > 50, "Your inborn toxicity has reached such a peak that even your spells are now charged with venom.");
+			needNext ||= player.losePerk(PerkLib.Venomancy, !player.isRaceCached(Races.APOPHIS) && player.cor < 89, "Your mystical powers over poison and toxins have waned.");
 
 			//Pregomania
 			if(player.isPregnant() && (player.isHarpy() || player.isGoblinoid() || player.isAlraune() || player.isSandWorm()) && !player.statStore.hasBuff("Pregomania")){
@@ -2302,18 +2282,6 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				outputText("\nNo idea how you got this weird aura about you but whatever the reason why you had it its gone now.\n");
 				player.removePerk(PerkLib.AuraOfPurity);
 				player.removePerk(PerkLib.AuraOfCorruption);
-				needNext = true;
-			}
-			//Gain venomancy if utherly toxic
-			if ((player.isRaceCached(Races.APOPHIS)) && player.cor > 50 && !player.hasPerk(PerkLib.Venomancy)) {
-				outputText("\nYour inborn toxicity has reached such a peak that even your spells are now charged with venom. \n\n(<b>Gained Perk: Venomancy</b>)\"");
-				player.createPerk(PerkLib.Venomancy, 0, 0, 0, 0);
-				needNext = true;
-			}
-			//Lose venomancy if not toxic
-			if (!player.isRaceCached(Races.APOPHIS) && player.cor < 89 && player.hasPerk(PerkLib.Venomancy)) {
-				outputText("\nYour mystical powers over poison and toxins have waned. \n\n(<b>Lost Perk: Venomancy</b>)\"");
-				player.removePerk(PerkLib.Venomancy);
 				needNext = true;
 			}
 			if (player.hasCock() && player.cocks[0].cockType == CockTypesEnum.BEE) { //All the hourly bee cock checks except the 'seek out the bee girl' check. That's in timeChangeLarge
