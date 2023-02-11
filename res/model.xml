@@ -4910,7 +4910,7 @@
 						<if test="skin.coverage==Skin.COVERAGE_NONE">
 							<switch value="arms.type">
 								<case values="Arms.HUMAN,Arms.ELF,Arms.KITSUNE">
-									<switch value="lowerBody.type">
+									<switch value="lowerBody">
 										<case values="LowerBody.HUMAN,LowerBody.ELF,LowerBody.KITSUNE,LowerBody.DEMONIC_HIGH_HEELS">
 											<hide part="arms_pattern/*"/>
 											<hide part="arms_bg_pattern/*"/>
@@ -6686,7 +6686,7 @@
 		</if>
 		
 				<!-- Sand Worm -->
-		<if test="lowerBody.type == LowerBody.SANDWORM">
+		<if test="lowerBody == LowerBody.SANDWORM">
 			<!-- Hide everything else -->
 			<hide part="*"/>
 			<show part="legs_fg/sandWorm"/>
@@ -6694,10 +6694,15 @@
 			<show part="legs_bg/sandWorm"/>
 			<show part="hands/sandWorm"/>
 			<show part="hands_bg/sandWorm"/>
+			<show part="head/human"/>
+			<show part="eyes/human"/>
+			<show part="face/fairySmile"/>
 			<show part="torso/human"/>
 			<show part="arms/human"/>
 			<show part="arms_bg/human"/>
-			<show part="face/fairySmile"/>
+			<if test="cor &gt;=100">
+				<show part="forehead/SpecialForeheadShadow"/>
+			</if>	
 			<if test="hasCock()">
 				<if test="big">
                     <show part="penis/humanbig"/>
