@@ -103,6 +103,7 @@ public class SandWitch extends Monster
 			//this.special1 = lustMagicAttack;
 			//this.special2 = special2;
 			//this.special3 = special3;
+			this.createPerk(PerkLib.EnemyForBeginnersType, 0, 0, 0, 0);
 			checkMonster();
 		}
 

@@ -172,6 +172,7 @@ package classes.Scenes.Monsters
 				this.armorDef = 6;
 				this.armorMDef = 6;
 				this.createPerk(PerkLib.DieHardHP, 3, 0, 0, 0);
+				this.createPerk(PerkLib.EnemyForBeginnersType, 0, 0, 0, 0);
 			}
 			if (player.statusEffectv1(StatusEffects.AngelsChooser) == 2) {
 				this.short = "mid-rank angeloid";

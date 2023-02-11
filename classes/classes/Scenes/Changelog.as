@@ -172,7 +172,7 @@ public class Changelog extends BaseContent
 			outputText("-New enemies (by Liadri with slight modification to be group enemy): Zombies - lvl 25. Encounterable in Boundary/Outer Battlefield as long PC isn't Jiangshi. They have Undead enemy type perk.\n");
 			outputText("-Fix time changes outside of camp for sleeping and allow time to flow again inside dungeons as a result also fixed a lot of broken cases for adding/removing racial perks and triggering events, fix sea dragon lightning (EragonX)\n");
 			outputText("-New enemy perk: Undead enemy type. It would give enemy similar passive effects top goo type (bleed/critical dmg resistance) but with higher than even goo phys dmg reduction (max up to 95% not 80%).\n");
-			outputText("-\n");
+			outputText("-Perk for Beginners-type enemy was added to: green slime (lvl 4), sand trap (lvl 5), bee-girl (lvl 6), dummy golem(s) (lvl 6), angeloid (lvl 6), sand witch (lvl 7)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

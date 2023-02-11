@@ -71,6 +71,7 @@ public class GolemsDummy extends AbstractGolem
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyForBeginnersType, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

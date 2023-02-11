@@ -93,7 +93,7 @@ use namespace CoC;
 					{
 						return (!player.hasStatusEffect(StatusEffects.TelAdre)) && (player.exploredDesert >= 3);
 					},
-					chance: 3,
+					chance: 30,
 					call: SceneLib.telAdre.discoverTelAdre
 				}, {
 					name: "teladreEncounter",
@@ -101,7 +101,7 @@ use namespace CoC;
 					{
 						return player.statusEffectv1(StatusEffects.TelAdre) == 0;
 					},
-					chance: 0.5,
+					chance: 5,
 					call: SceneLib.telAdre.discoverTelAdre
 				}, {
 					name  : "ants",

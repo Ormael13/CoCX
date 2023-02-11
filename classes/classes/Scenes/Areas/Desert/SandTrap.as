@@ -148,7 +148,8 @@ public class SandTrap extends Monster
 			this.gems = 5 + rand(5);
 			this.drop = new ChainedDrop(consumables.TRAPOIL).add(consumables.OVIELIX,1/3);
 			this.tailType = Tail.DEMONIC;
-			createStatusEffect(StatusEffects.Level,4,0,0,0);
+			createStatusEffect(StatusEffects.Level, 4, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyForBeginnersType, 0, 0, 0, 0);
 			checkMonster();
 		}
 		

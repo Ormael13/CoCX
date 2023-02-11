@@ -58,7 +58,7 @@ import classes.Scenes.Areas.Battlefield.*;
 		
 		public function loseToZombies():void {
 			clearOutput();
-			outputText("Suprisingly it's not your flesh but somethign more etheral but before you can think more on this you losoe consciousness");
+			outputText("You try to crawl away but, despite its innate slowness, the zombie moves at about the same speed you do. Inevitably, the thing grabs your leg and reels you back so it can have its way with you. With a dim-witted moan, the zombie shoves your defeated form to the ground and begins to pull your gear out of the way. Before you know it "+(rand(2)==0?"s":"")+"he's aggressively ");
 			if (player.hasVagina()) {
 				if (player.hasCock()) outputText("grabbing and sucking your cock");
 				outputText("lapping at your exposed slit");

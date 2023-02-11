@@ -308,7 +308,7 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.EnemyLargeGroupType)) temp *= 10;
 			if (hasPerk(PerkLib.Enemy300Type)) temp *= 15;
 			temp *= stats_multi_based_on_misc();
-			if (this.level < 6) {
+			if (this.level < 9) {
 				if (hasPerk(PerkLib.EnemyForBeginnersType)) temp *= 0.1;
 				else temp *= 0.6;
 			}
@@ -500,7 +500,7 @@ import flash.utils.getQualifiedClassName;
 			if (statusEffectv3(StatusEffects.SaiyanNumber3a) > 0) multimax += statusEffectv3(StatusEffects.SaiyanNumber3a);
 			temp *= multimax;
 			temp *= stats_multi_based_on_misc();
-			if (this.level < 6) {
+			if (this.level < 9) {
 				if (hasPerk(PerkLib.EnemyForBeginnersType)) temp *= 0.1;
 				else temp *= 0.6;
 			}
@@ -3784,11 +3784,11 @@ import flash.utils.getQualifiedClassName;
 				armorDef += Math.round(armorDef * 0.5);
 				armorMDef += Math.round(armorMDef * 0.5);
 			}
-			if (level < 6) {
+			if (level < 9) {
 				if (hasPerk(PerkLib.EnemyForBeginnersType)) this.lust *= 0.1;
 				else this.lust *= 0.6;
 				this.lust = Math.round(this.lust);
 			}
 		}
 	}
-}
+}
