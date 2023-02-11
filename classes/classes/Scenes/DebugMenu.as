@@ -1155,7 +1155,7 @@ public class DebugMenu extends BaseContent
 		private static const COLOR_CONSTANTS:Array = [
 			"albino", "aqua", "ashen", "auburn", "black", "blond", "blonde", "blood-red", "blue", "bronzed", "brown", "caramel",
 			"cerulean", "chocolate", "crimson", "crystal", "dark", "dusky", "ebony", "emerald", "fair",
-			"golden", "gray", "green", "indigo", "light", "mahogany", "metallic", "midnight", "olive", "orange",
+			"golden", "gray", "green", "indigo", "light", "light pink", "mahogany", "metallic", "midnight", "olive", "orange",
 			"peach", "pink", "purple", "red", "russet", "sable", "sanguine", "silky", "silver",
 			"tan", "tawny", "turquoise", "white", "yellow",
 			"aphotic blue-black", "ashen grayish-blue", "creamy-white", "crimson platinum",
