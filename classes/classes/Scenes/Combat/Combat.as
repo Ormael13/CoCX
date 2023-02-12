@@ -150,6 +150,7 @@ public class Combat extends BaseContent {
     public function weaponSizeMassive():Number {return player.combatMastery[21].level;}
     //public function weaponSizeRange():Number {return player.combatMastery[22].level;}
     public function masteryUnarmedCombatLevel():Number {return player.combatMastery[23].level;}
+    public function dualWMLevel():Number {return player.combatMastery[24].level;}
 
     public function bonusExpAfterSuccesfullTease():Number {
         return teases.bonusExpAfterSuccesfullTease();
@@ -1425,7 +1426,7 @@ public class Combat extends BaseContent {
             flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
         }
         var dualWeapon:Boolean = false;
-        if( player.weaponSpecials("Dual Large") || player.weaponSpecials("Dual Small") || player.weaponSpecials("Dual")){
+        if (player.weaponSpecials("Dual Massive") || player.weaponSpecials("Dual Large") || player.weaponSpecials("Dual Small") || player.weaponSpecials("Dual")){
             dualWeapon = true;
         }
         if (flags[kFLAGS.MULTIATTACK_STYLE] >= 0) {
@@ -2582,7 +2583,8 @@ public class Combat extends BaseContent {
 		if (player.weaponSpecials("Dual Small")) accmod += Math.round((dualWSLevel() - 1) / 2);
 		if (player.weaponSpecials("Dual")) accmod += Math.round((dualWNLevel() - 1) / 2);
 		if (player.weaponSpecials("Dual Large")) accmod += Math.round((dualWLLevel() - 1) / 2);
-		if (player.weaponSpecials("Dual Small") || player.weaponSpecials("Dual") || player.weaponSpecials("Dual Large")) accmod += meleeDualWieldAccuracyPenalty();
+		if (player.weaponSpecials("Dual Massive")) accmod += Math.round((dualWMLevel() - 1) / 2);
+		if (player.weaponSpecials("Dual Small") || player.weaponSpecials("Dual") || player.weaponSpecials("Dual Large") || player.weaponSpecials("Dual Massive")) accmod += meleeDualWieldAccuracyPenalty();
 
         var weaponSize:Number = 1;
         if( player.weaponSpecials("Small") ) weaponSize = 0;
@@ -2612,6 +2614,9 @@ public class Combat extends BaseContent {
         if (player.weaponSpecials("Dual")) {
 			if (player.hasPerk(PerkLib.DualWieldNormal)) accmdwmodpenalty += 10;
 		}
+        if (player.weaponSpecials("Dual Massive")) {
+			if (player.hasPerk(PerkLib.DualWieldMassive)) accmdwmodpenalty += 10;
+		}
         if (player.weaponSpecials("Dual Large")) {
 			if (player.hasPerk(PerkLib.DualWieldLarge)) accmdwmodpenalty += 10;
 		}
@@ -2628,6 +2633,10 @@ public class Combat extends BaseContent {
 		var dmgmdwmodpenalty:Number = 1;
         if (player.weaponSpecials("Dual")) {
 			if (player.hasPerk(PerkLib.DualWieldNormal)) dmgmdwmodpenalty -= 0.3;
+			else dmgmdwmodpenalty -= 0.5;
+		}
+        if (player.weaponSpecials("Dual Massive")) {
+			if (player.hasPerk(PerkLib.DualWieldMassive)) dmgmdwmodpenalty -= 0.3;
 			else dmgmdwmodpenalty -= 0.5;
 		}
         if (player.weaponSpecials("Dual Large")) {
@@ -5405,7 +5414,7 @@ public class Combat extends BaseContent {
 		}
 		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 1.2;
 		if (player.hasPerk(PerkLib.DivineArmament) && (player.isUsingStaff() || player.isUsingWand() || player.isPartiallyStaffTypeWeapon()) && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 3;
-		if (player.weaponSpecials("Dual Small") || player.weaponSpecials("Dual") || player.weaponSpecials("Dual Large")) damage *= meleeDualWieldDamagePenalty();
+		if (player.weaponSpecials("Dual Small") || player.weaponSpecials("Dual") || player.weaponSpecials("Dual Large") || player.weaponSpecials("Dual Massive")) damage *= meleeDualWieldDamagePenalty();
         //Weapon addition!
         damage = weaponAttackModifier(damage);
 		//All special weapon effects like...fire/ice
@@ -5492,6 +5501,7 @@ public class Combat extends BaseContent {
 		if (player.weaponSpecials("Dual Small")) Mastery_bonus_damage += 0.01 * dualWSLevel();
 		if (player.weaponSpecials("Dual")) Mastery_bonus_damage += 0.01 * dualWNLevel();
 		if (player.weaponSpecials("Dual Large")) Mastery_bonus_damage += 0.01 * dualWLLevel();
+		if (player.weaponSpecials("Dual Massive")) Mastery_bonus_damage += 0.01 * dualWMLevel();
         var weaponSize:Number = 1;
         if( player.weaponSpecials("Small") || player.weaponSpecials("Dual Small") ) weaponSize = 0;
         if( player.weaponSpecials("Large") || player.weaponSpecials("Dual Large") ) weaponSize = 2;
@@ -5516,7 +5526,7 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.JobDervish) && (!player.weaponSpecials("Large") || !player.weaponSpecials("Staff"))) critChance += 10;
             if (player.hasPerk(PerkLib.WeaponMastery) && player.weaponSpecials("Large") && player.str >= 100) critChance += 10;
             if (player.hasPerk(PerkLib.WeaponGrandMastery) && player.weaponSpecials("Dual Large") && player.str >= 140) critChance += 10;
-            if (player.hasPerk(PerkLib.GigantGripEx) && player.weaponSpecials("Massive")) {
+            if (player.hasPerk(PerkLib.GigantGripEx) && (player.weaponSpecials("Massive") || player.weaponSpecials("Dual Massive"))) {
                 if (player.hasPerk(PerkLib.WeaponMastery) && player.str >= 100) critChance += 10;
                 if (player.hasPerk(PerkLib.WeaponGrandMastery) && player.str >= 140) critChance += 10;
             }
@@ -5530,8 +5540,8 @@ public class Combat extends BaseContent {
         if ((player.weapon == weapons.WG_GAXE && monster.cor > 66) || (player.weapon == weapons.DE_GAXE && monster.cor < 33)) critDamage += 0.1;
         if (player.hasPerk(PerkLib.OrthodoxDuelist) && player.isDuelingTypeWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) critDamage += 0.2;
         if (player.hasStatusEffect(StatusEffects.AlterBindScroll4)) critDamage += 1;
-		if (player.hasPerk(PerkLib.SkilledFighterEx) && calculateCrit() > 1) {
-			if (calculateCrit() > 2) critDamage *= 3;
+		if (player.hasPerk(PerkLib.SkilledFighterEx) && calculateCrit() > 100) {
+			if (calculateCrit() > 200) critDamage *= 3;
 			else critDamage *= 2;
 		}
         return critDamage;
@@ -5559,8 +5569,8 @@ public class Combat extends BaseContent {
 			if (player.hasPerk(PerkLib.AnatomyExpert)) critDamage += 0.5;
 			if (player.hasPerk(PerkLib.PrestigeJobStalker)) critDamage += 0.2;
 		}
-		if (player.hasPerk(PerkLib.SkilledRangerEx) && calculateCrit() > 1) {
-			if (calculateCrit() > 2) critDamage *= 3;
+		if (player.hasPerk(PerkLib.SkilledRangerEx) && calculateCrit() > 100) {
+			if (calculateCrit() > 200) critDamage *= 3;
 			else critDamage *= 2;
 		}
         return critDamage;
@@ -5655,6 +5665,7 @@ public class Combat extends BaseContent {
         if (player.weaponSpecials("Dual Small")) dualWieldSmallXP(meleeMasteryEXPgains);
         if (player.weaponSpecials("Dual")) dualWieldNormalXP(meleeMasteryEXPgains);
         if (player.weaponSpecials("Dual Large")) dualWieldLargeXP(meleeMasteryEXPgains);
+        if (player.weaponSpecials("Dual Massive")) dualWieldMassiveXP(meleeMasteryEXPgains);
 
         if (player.isFeralCombat()) feralCombatXP(meleeMasteryEXPgains);
         else if (flags[kFLAGS.FERAL_COMBAT_MODE] != 1 && player.weaponName == "fists") unarmedCombatXP(meleeMasteryEXPgains);
@@ -11692,6 +11703,7 @@ public static const MASTERY_LARGE:int = 20;
 public static const MASTERY_MASSIVE:int = 21;
 public static const MASTERY_RANGED:int = 22;
 public static const MASTERY_UNARMED:int = 23;
+public static const MASTERY_DUAL_MASSIVE:int = 24;
 
 public static const bonusAttackMasteries:Array = [
     MASTERY_FERAL,
@@ -11721,6 +11733,7 @@ public function firearmsXP(XP:Number = 0):void          {player.gainCombatXP(MAS
 public function dualWieldSmallXP(XP:Number = 0):void    {player.gainCombatXP(MASTERY_DUAL_SMALL, XP * weaponmasteryXPMulti());}
 public function dualWieldNormalXP(XP:Number = 0):void   {player.gainCombatXP(MASTERY_DUAL_NORMAL, XP * weaponmasteryXPMulti());}
 public function dualWieldLargeXP(XP:Number = 0):void    {player.gainCombatXP(MASTERY_DUAL_LARGE, XP * weaponmasteryXPMulti());}
+public function dualWieldMassiveXP(XP:Number = 0):void  {player.gainCombatXP(MASTERY_DUAL_MASSIVE, XP * weaponmasteryXPMulti());}
 public function dualWieldFirearmsXP(XP:Number = 0):void {player.gainCombatXP(MASTERY_DUAL_FIREARMS, XP * weaponmasteryXPMulti());}
 public function weaponSmallMastery(XP:Number = 0):void  {player.gainCombatXP(MASTERY_SMALL, XP * weaponmasteryXPMulti());}
 public function weaponNormalMastery(XP:Number = 0):void {player.gainCombatXP(MASTERY_NORMAL, XP * weaponmasteryXPMulti());}
@@ -14782,7 +14795,7 @@ public function greatDive():void {
     if (player.hasPerk(PerkLib.DeathPlunge)) {
         if (player.hasPerk(PerkLib.WeaponMastery) && player.weaponSpecials("Large") && player.str >= 100) critChance += 10;
         if (player.hasPerk(PerkLib.WeaponGrandMastery) && player.weaponSpecials("Dual Large") && player.str >= 140) critChance += 10;
-        if (player.hasPerk(PerkLib.GigantGripEx) && player.weaponSpecials("Massive")) {
+        if (player.hasPerk(PerkLib.GigantGripEx) && (player.weaponSpecials("Massive") || player.weaponSpecials("Dual Massive"))) {
             if (player.str >= 100) critChance += 10;
             if (player.str >= 140) critChance += 10;
         }
@@ -15543,7 +15556,7 @@ public function meleePhysicalForce():Number {
             if (player.hasPerk(PerkLib.TooAngryToDie)) berzerkermulti += .1;
             if (player.hasPerk(PerkLib.EndlessRage)) berzerkermulti += .1;
             if (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking)) berzerkermulti *= 2;
-            if (player.weaponSpecials("Large") || player.weaponSpecials("Dual Large") || player.weaponSpecials("Massive")) berzerkermulti *= 2;
+            if (player.weaponSpecials("Large") || player.weaponSpecials("Dual Large") || player.weaponSpecials("Massive") || player.weaponSpecials("Dual Massive")) berzerkermulti *= 2;
             mod += berzerkermulti;
         }
     }

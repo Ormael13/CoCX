@@ -1466,8 +1466,8 @@ public class PerkLib
 				"Allows you to apply all perks boosting Large weapon performance (increased atk and etc.) to Massive weapons. (+15% melee physical attacks multiplier)",
 				"You've chosen the 'Gigant's Grip (Ex)' perk, allowing you to apply all perks boosting Large weapon performance (increased atk and etc.) to Massive weapons. (+15% melee physical attacks multiplier)").withBuffs({'str.mult':0.5,'tou.mult':0.5});
 		public static const GigantGripSu:PerkType = mk("Gigant's Grip (Su)", "Gigant's Grip (Su)",
-				"Gain an ability to wield two massive as long you have four arms. (+20% melee physical attacks multiplier)",
-				"You've chosen the 'Gigant's Grip (Su)' perk, gaining an ability to wield two massive as long you have four arms. (+20% melee physical attacks multiplier)").withBuffs({'str.mult':0.5,'tou.mult':0.5,'spe.mult':0.5});
+				"Gain an ability to wield two massive weapons as long you have four arms. (+20% melee physical attacks multiplier)",
+				"You've chosen the 'Gigant's Grip (Su)' perk, gaining an ability to wield two massive weapons as long you have four arms. (+20% melee physical attacks multiplier)").withBuffs({'str.mult':0.5,'tou.mult':0.5,'spe.mult':0.5});
 		public static const GiantsReach:PerkType = mk("Giant's Reach", "Giant's Reach",
 				"When fighting groups of enemies with Large weapons it creates small shockwaves increasing range (and damage) of AoE attacks.",
 				"You've chosen the 'Giant's Reach' perk. Increases the range of attacks with large weapons in fights against group enemies.");
@@ -4544,13 +4544,16 @@ public class PerkLib
                     .requireLevel(30);
             UnlockId2ndStage.requirePerk(UnlockId)
                     .requireStr(125)
-                    .requireLevel(30);/*
+                    .requireLevel(30);
             DualWieldMassive.requirePerks(DualWield, GigantGripEx)
                     .requireStr(150)
                     .requireLevel(30);
             GigantGripSu.requireLevel(30)
                     .requireStr(140)
-                    .requirePerk(GigantGripEx);*/
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.playerHasFourArms();
+                    }, "Four arms")
+                    .requirePerk(GigantGripEx);
             HalfStepToSuperiorTranquilness.requireStr(180)
                     .requireTou(60)
                     .requireSpe(60)

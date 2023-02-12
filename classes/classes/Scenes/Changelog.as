@@ -176,10 +176,10 @@ public class Changelog extends BaseContent
 			outputText("-Enemies stasts weakening was extended from lvl 5 and lower to lvl 8 and lower.\n");
 			outputText("-Added sand worm sprite added to the game in full. (Liadri)\n");
 			outputText("-Air elementals dmg dealt changed to wind type.\n");
-			//outputText("-New tier 5 strength lvl-up perk: . Req. Gigant's Grip (Ex) and Dual Wield perks, 150+ str. Effect: \n");
-			//outputText("-New tier 5 strength lvl-up perk: Gigant's Grip (Su). Req. Gigant's Grip (Ex) and  perks, 150+ str. Effect: Gain an ability to wield two massive as long you have four arms. (+20% melee physical attacks multiplier) (+50% to str/tou/spe multi)\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Druid fusion specials/range attacks could use now cumulative elemental damage perks effects (due to epic elementals choice it's only for fire fusion only).\n");
+			outputText("-New tier 5 strength lvl-up perk: Dual Wield (Massive). Req. Gigant's Grip (Ex) and Dual Wield perks, 150+ str. Effect: Allows you to wield two massive sized melee weapons more effectively. (damage and accuracy penalties decreased by 20% and 10%)\n");
+			outputText("-New tier 5 strength lvl-up perk: Gigant's Grip (Su). Req. Gigant's Grip (Ex) perk, having 4 arms, 150+ str. Effect: Gain an ability to wield two massive weapons as long you have four arms. (+20% melee physical attacks multiplier) (+50% to str/tou/spe multi)\n");
+			outputText("-Asterius Rage max atk value increased from 110 to 176. Their classification is now Dual Massive instead of Dual Large weapons.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
