@@ -156,7 +156,7 @@ public class Changelog extends BaseContent
 			outputText("-Mana cost of arcane circuits upgrades doubled. Amount of possible to store elemental energy increased by 50%.\n");
 			outputText("-Touched up hellfire Damage and Scaling to bring it better in line with other abilities. Now Scales off of Lib and Str. It splits the damage between fire and lust depending on monsters corruption. It also scales off of PC corruption. (Chibizs)\n");
 			outputText("-Two new stats on general subpage (including Radiant Shards counter)\n");
-			outputText("-Alternative option to recruit Evangeline can trigger even if pc lost first fight against imp.\n");
+			outputText("-Alternative option to recruit Evangeline can trigger even if pc lost first fight against imp. Also it would non longer req. PC been lvl 3+ with lower than first meeting proc chance.\n");
 			outputText("-Ascension: Trancendental Genetic Memory perk can attain 1 more rank for even more slots to perm metamorph options.\n");
 			outputText("-New event perk: Chimerical Body: Semi-Superior (Ex) Stage. Gained by use of the Pocket Watch when req. are meet. Effects of all five combined perks + 15% bonus to str/tou/spe, + 10% int/wis/lib multi, +10 bonus to sens, negate up to 8 racial perk points negative effects.\n");
 			outputText("-Fixed a few tags and an error on bull strength that didnt allow minotaurs to get the buff. (Chibizs)\n");
@@ -175,6 +175,9 @@ public class Changelog extends BaseContent
 			outputText("-Perk for Beginners-type enemy was added to: green slime (lvl 4), sand trap (lvl 5), bee-girl (lvl 6), dummy golem(s) (lvl 6), angeloid (lvl 6), sand witch (lvl 7)\n");
 			outputText("-Enemies stasts weakening was extended from lvl 5 and lower to lvl 8 and lower.\n");
 			outputText("-Added sand worm sprite added to the game in full. (Liadri)\n");
+			outputText("-Air elementals dmg dealt changed to wind type.\n");
+			//outputText("-New tier 5 strength lvl-up perk: . Req. Gigant's Grip (Ex) and Dual Wield perks, 150+ str. Effect: \n");
+			//outputText("-New tier 5 strength lvl-up perk: Gigant's Grip (Su). Req. Gigant's Grip (Ex) and  perks, 150+ str. Effect: Gain an ability to wield two massive as long you have four arms. (+20% melee physical attacks multiplier) (+50% to str/tou/spe multi)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -184,9 +187,6 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX)
-			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
 			outputText("-\n");
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
 			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
@@ -194,8 +194,8 @@ public class Changelog extends BaseContent
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX)
+			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
 			outputText("-\n");
 			outputText("-\n");
 			//remove this line when other two lines below get added ingame
@@ -203,7 +203,7 @@ public class Changelog extends BaseContent
 			//outputText("-New perk for enemies: Champion type enemy. Bonuses for are: Diehard effect of 5% of max HP + 1,500 HP * NG tier, OverMax HP effect of 10% magnitude.\n");
 			outputText("-Fixed bugs: Bard not affected by cap of prestige jobs, last one checks for holli's kill/survive moved into less troublesome spot, Benoit/Oswald taking full price for simple backpack size upgade, Fasting Pill been unaccessable when hunger mode is active, Vegetal Affinity increasing fire resistance, elemental throwing knives been never usable, Elemental race tier bonuses & display on race page, ");
 			outputText("Buy button for Francisca throwing axe at basilisk shop been corectly labeled, Lily name revealed before she actualy tell her name in scene, incorrectly labeled Whitefire swiftcast button, returning from multishot menu leading to melee options instead of range ones, Sky Poison Pearl not allowing to poison/venom options for weapons, missing Radiant Shard fpr recruiting Isabella, Golemancer ");
-			outputText("manual for upgrades been possible to bought multiple times, Priscilla lvl up after enough defeats, Sphinx race req. both cat cock and pussy for race point\n");
+			outputText("manual for upgrades been possible to bought multiple times, Priscilla lvl up after enough defeats, Sphinx race req. both cat cock and pussy for race point, Hinezumi Coat disabling double unarmed not feral attacks\n");
 			/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");

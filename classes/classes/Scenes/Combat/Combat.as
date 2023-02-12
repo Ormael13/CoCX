@@ -1785,6 +1785,10 @@ public class Combat extends BaseContent {
                 elementalDamage *= 1.3;
                 doMinionPhysDamage(elementalDamage, true, true);
                 break;
+            case AIR:
+            case AIR_E:
+                doWindDamage(elementalDamage, true, true);
+                break;
             case FIRE:
             case FIRE_E:
                 doFireDamage(elementalDamage, true, true);
@@ -3578,6 +3582,7 @@ public class Combat extends BaseContent {
                 break;
             case ElementalRace.ELEMENT_IGNIS:
                 outputText("You charge and toss a fireball. ");
+				damage = magic.calcInfernoModImpl(damage, true);
                 damage *= fireDamageBoostedByDao();
 				doFireDamage(damage, true, true);
                 break;
@@ -5858,6 +5863,10 @@ public class Combat extends BaseContent {
                     if (isFireTypeWeapon()) {
                         damage = Math.round(damage * fireDamage);
                         doFireDamage(damage, true, true);
+						if (isUnarmedCombatButDealFireDamage()) {
+							damage = Math.round(damage * fireDamage);
+							doFireDamage(damage, true, true);
+						}
                     }
                     else if (isIceTypeWeapon()) {
                         damage = Math.round(damage * iceDamage);
@@ -6622,6 +6631,10 @@ public class Combat extends BaseContent {
     public function isDarknessTypeWeapon():Boolean {
         return ((player.weapon == weapons.ACLAYMO || player.weapon == weapons.ADAGGER) && (player.hasStatusEffect(StatusEffects.ChargeWeapon) || Forgefather.channelInlay == "amethyst"));
     }
+	
+	public function isUnarmedCombatButDealFireDamage():Boolean {
+		return (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat));
+	}
 
     public function monsterPureDamageBonus(damage:Number):Number {
         if (monster.cor < 33) damage = Math.round(damage * 1.0);
@@ -15514,13 +15527,13 @@ public function meleePhysicalForce():Number {
     if (player.hasPerk(PerkLib.GigantGripEx)) mod += .15;
     if (player.hasPerk(PerkLib.GreaterBrute)) mod += .15;
     if (player.hasPerk(PerkLib.GreaterBrawn)) mod += .15;
-    //if (player.hasPerk(PerkLib.GigantGripSu)) mod += .2; - not included in calculations yet
+    if (player.hasPerk(PerkLib.GigantGripSu)) mod += .2;
     if (player.hasPerk(PerkLib.EpicBrute)) mod += .2;
     if (player.hasPerk(PerkLib.EpicBrawn)) mod += .2;
     if (player.hasPerk(PerkLib.LegendaryBrute)) mod += .25;
     if (player.hasPerk(PerkLib.LegendaryBrawn)) mod += .25;
     if (player.hasPerk(PerkLib.MythicalBrute)) mod += .3;
-    if (player.hasPerk(PerkLib.MythicalBrawn)) mod += .3;//455% up to here
+    if (player.hasPerk(PerkLib.MythicalBrawn)) mod += .3;//475% up to here
     if (player.hasPerk(PerkLib.PrestigeJobBerserker)) {
         mod += .8;
         if (player.hasPerk(PerkLib.FuelForTheFire)) {
@@ -15540,7 +15553,7 @@ public function meleePhysicalForce():Number {
     if (player.hasPerk(PerkLib.WarCaster)) mod += .2;
     if (player.hasPerk(PerkLib.VampiricBlade)) mod += .2;
     if (player.hasPerk(PerkLib.TwinRiposte)) mod += .2;
-    if (player.hasPerk(PerkLib.PerfectStrike)) mod += .2;//785~835~925% up to here
+    if (player.hasPerk(PerkLib.PerfectStrike)) mod += .2;//805~855~945% up to here
 	if (player.hasPerk(PerkLib.MeleeWeaponsAttackMultiplier)) {
 		if (player.hasPerk(PerkLib.SkilledFighterEx)) {
 			mod += .15;

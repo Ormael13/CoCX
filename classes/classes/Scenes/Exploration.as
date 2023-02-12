@@ -870,7 +870,7 @@ public class Exploration extends BaseContent
 				SceneLib.evangelineFollower.enterTheEvangeline();
 				return;
 			}
-			if (player.level > 2 && (EvangelineFollower.EvangelineAffectionMeter == 1 || EvangelineFollower.EvangelineAffectionMeter == 2) && player.statusEffectv1(StatusEffects.TelAdre) >= 1 && flags[kFLAGS.HEXINDAO_UNLOCKED] >= 1 && rand(10) == 0) {
+			if (player.level > 0 && (EvangelineFollower.EvangelineAffectionMeter == 1 || EvangelineFollower.EvangelineAffectionMeter == 2) && player.statusEffectv1(StatusEffects.TelAdre) >= 1 && flags[kFLAGS.HEXINDAO_UNLOCKED] >= 1 && rand(2) == 0) {
 				SceneLib.evangelineFollower.alternativEvangelineRecruit();
 				return;
 			}

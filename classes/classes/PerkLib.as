@@ -1125,6 +1125,9 @@ public class PerkLib
 		public static const DualWieldLarge:PerkType = mk("Dual Wield (Large)", "Dual Wield (Large)",
 				"Allows you to wield two large sized melee weapons more effectively. (damage and accuracy penalties decreased by 20% and 10%)",
 				"You've chosen the 'Dual Wield (Large)' perk, training the skill of using two large melee weapons. (damage and accuracy penalties decreased by 20% and 10%)");
+		public static const DualWieldMassive:PerkType = mk("Dual Wield (Massive)", "Dual Wield (Massive)",
+				"Allows you to wield two massive sized melee weapons more effectively. (damage and accuracy penalties decreased by 20% and 10%)",
+				"You've chosen the 'Dual Wield (Massive)' perk, training the skill of using two massive melee weapons. (damage and accuracy penalties decreased by 20% and 10%)");
 		public static const DualWieldNormal:PerkType = mk("Dual Wield (Normal)", "Dual Wield (Normal)",
 				"Allows you to wield two normal sized melee weapons more effectively. (damage and accuracy penalties decreased by 20% and 10%)",
 				"You've chosen the 'Dual Wield (Normal)' perk, training the skill of using two normal sized melee weapons. (damage and accuracy penalties decreased by 20% and 10%)");
@@ -1460,11 +1463,11 @@ public class PerkLib
 				"Gain an ability to wield large weapons and massive shields in one hand. (+10% melee physical attacks multiplier)",
 				"You've chosen the 'Gigant's Grip' perk, gaining an ability to wield large weapons and massive shields in one hand. (+10% melee physical attacks multiplier)").withBuffs({'str.mult':0.5});
 		public static const GigantGripEx:PerkType = mk("Gigant's Grip (Ex)", "Gigant's Grip (Ex)",
-				"Allows you to apply all perks boosting Large weapon performance (increased atk and etc.) to Massive weapons. Exception are perks that allow for multi attacks of large weapons. (+15% melee physical attacks multiplier)",
-				"You've chosen the 'Gigant's Grip (Ex)' perk, allowing you to apply all perks boosting Large weapon performance (increased atk and etc.) to Massive weapons. Exception are perks that allow for multi attacks of large weapons. (+15% melee physical attacks multiplier)").withBuffs({'str.mult':0.5,'tou.mult':0.5});
+				"Allows you to apply all perks boosting Large weapon performance (increased atk and etc.) to Massive weapons. (+15% melee physical attacks multiplier)",
+				"You've chosen the 'Gigant's Grip (Ex)' perk, allowing you to apply all perks boosting Large weapon performance (increased atk and etc.) to Massive weapons. (+15% melee physical attacks multiplier)").withBuffs({'str.mult':0.5,'tou.mult':0.5});
 		public static const GigantGripSu:PerkType = mk("Gigant's Grip (Su)", "Gigant's Grip (Su)",
-				"Gain an ability to wield four large weapons as long you have four arms. (+20% melee physical attacks multiplier)",
-				"You've chosen the 'Gigant's Grip (Su)' perk, gaining an ability to wield four large weapons as long you have four arms. (+20% melee physical attacks multiplier)").withBuffs({'str.mult':0.5,'tou.mult':0.5,'spe.mult':0.5});
+				"Gain an ability to wield two massive as long you have four arms. (+20% melee physical attacks multiplier)",
+				"You've chosen the 'Gigant's Grip (Su)' perk, gaining an ability to wield two massive as long you have four arms. (+20% melee physical attacks multiplier)").withBuffs({'str.mult':0.5,'tou.mult':0.5,'spe.mult':0.5});
 		public static const GiantsReach:PerkType = mk("Giant's Reach", "Giant's Reach",
 				"When fighting groups of enemies with Large weapons it creates small shockwaves increasing range (and damage) of AoE attacks.",
 				"You've chosen the 'Giant's Reach' perk. Increases the range of attacks with large weapons in fights against group enemies.");
@@ -2889,8 +2892,8 @@ public class PerkLib
 				"Gain an ability to wield massive weapons in one hand. (+5 to max Str)",
 				"You've chosen the 'Titan's Grip' perk, gaining an ability to wield large weapons in one hand. (+5 to max Str)").withBuffs({'str.mult':0.5});
 		public static const TitanGripEx:PerkType = mk("Titan's Grip (Ex)", "Titan's Grip (Ex)",
-				"Gain an ability to wield large weapons in one hand. (+5 to max Str/Tou)",
-				"You've chosen the 'Titan's Grip (Ex)' perk, gaining an ability to wield large weapons in one hand. (+5 to max Str/Tou)").withBuffs({'str.mult':0.5,'tou.mult':0.5});
+				"Gain an ability to wield four large weapons as long you have four arms. (+5 to max Str/Tou)",
+				"You've chosen the 'Titan's Grip (Ex)' perk, gaining an ability to wield four large weapons as long you have four arms. (+5 to max Str/Tou)").withBuffs({'str.mult':0.5,'tou.mult':0.5});
 		public static const TitanGripSu:PerkType = mk("Titan's Grip (Su)", "Titan's Grip (Su)",
 				"Gain an ability to wield large weapons in one hand. (+5 to max Str/Tou/Spe)",
 				"You've chosen the 'Titan's Grip (Su)' perk, gaining an ability to wield large weapons in one hand. (+5 to max Str/Tou/Spe)").withBuffs({'str.mult':0.5,'tou.mult':0.5,'spe.mult':0.5});
@@ -4541,7 +4544,13 @@ public class PerkLib
                     .requireLevel(30);
             UnlockId2ndStage.requirePerk(UnlockId)
                     .requireStr(125)
+                    .requireLevel(30);/*
+            DualWieldMassive.requirePerks(DualWield, GigantGripEx)
+                    .requireStr(150)
                     .requireLevel(30);
+            GigantGripSu.requireLevel(30)
+                    .requireStr(140)
+                    .requirePerk(GigantGripEx);*/
             HalfStepToSuperiorTranquilness.requireStr(180)
                     .requireTou(60)
                     .requireSpe(60)

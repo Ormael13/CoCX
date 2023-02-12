@@ -1620,6 +1620,7 @@ public class CampMakeWinions extends BaseContent
 			outputText("-When attacking, it has an increased critical damage chance by 10%.\n");
 			outputText("-When attacking, it has an increased critical damage multiplied from 150% to 175%.\n");
 			outputText("-When attacking, it will ignore enemy damage reduction.\n");
+			outputText("-When attacking, it will deal Wind type damage.\n");
 			outputText("-M. Special: Creates a Wind Wall that deflects incoming projectiles for few turns. Duration depends on elemental rank.\n");
 			doNext(evocationTome);
 		}
