@@ -16,44 +16,41 @@ import classes.Scenes.Areas.Battlefield.*;
 		
 		public function encounterVengefulApparitions():void {
 			clearOutput();
-			outputText("As you wander in the battlefield, from behind some debrises you hear rattling sound. Then another from other pile direction. Then you see a partialy ghastly shapes emerging and soon enough you're surrounded.  \"<i>Liiivinnng....</i>\" one of apparitions finaly speaks and that seems to become a trigger, as rest of them start rushing toward you.");
+			outputText("As you wander in the battlefield, you find yourself passing through an area riddled with with debris. Ancient tents rot, wooden structures decay... you flinch at a sudden rattling, coming from behind a nearby pile of wood. You turn to face it, but another from behind, another rattle sounds. You watch as a half-rotten skeleton rises from the debris, a vague purple shadow flickering around it. From the corner of your eyes, you see more of the ghastly creatures rising, mismatched bones held together by a barely visible force.  \"<i>Liiivinnng....</i>\" The hissing, dry voice seems to echo, and the bones rattle, misshapen jaws opening wide as the malevolent spirits rush in.");
 			startCombat(new VengefulApparitions());
 			doNext(playerMenu);
 		}
 		
 		public function defeatVengefulApparitions():void {
 			clearOutput();
-			outputText("Finaly it's over. With the last of apparitions defeated you can catch your breath. But your victory seems to looks empty as they all starts to disperse nearly the same way they appeared before. Only thing that was left behind is a bottle with some green-tinded substance.");
+			outputText("Finally, it's over. As the last violet aura fades, the final skeleton down, you stop to catch your breath. With a hissing screech, the bones begin to crumble. A cold wind picks up, carrying the remains away...After a few moments, the only thing that's left of the vengeful spirits is a bottle with some bubbling, green-tinted substance.");
 			inventory.takeItem(consumables.ECTOPLS, cleanupAfterCombat);
 		}
 		
 		public function loseToAVengefulApparitions():void {
 			clearOutput();
-			outputText("You fall to your knees out of steam to keep fighting your adversaries. Without delay they all pounce at you starting to ripping pieces of you. Suprisingly it's not your flesh but something more etheral but before you can think more on this you loose consciousness...");
+			outputText("You fall, [legs] giving way and dropping your face to the dusty ground. Without delay they all pounce, rattling bones steaming as they rip into you. With each gash, each rip in your body, you can feel less and less, blackness overtaking your vision...");
+			outputText("...You wake, still in the debris of the ancient battlefield...but you're not the same. Your flesh is gone, and in its place is pale, translucent...ectoplasm?");
 			player.fatigue = player.maxFatigue();
 			player.mana = 0;
 			player.soulforce = 0;
 			cleanupAfterCombat();
 		}
 		
-		public function canEncounterZombies():Boolean {
-			return !player.isRaceCached(Races.JIANGSHI);
-		}
-		
 		public function encounterZombies():void {
 			clearOutput();
-			outputText("As you explore the battlefield you hear what sounds like a pleading moans. Confused, you head toward the sound and find what appears to be a beautiful naked human men and women with pale blue skin. They slowly turns toward you revealing what appears to be a strange paper tag stuck to their foreheads.\n\n");
-			if (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] > 3) outputText("Crap it's zombies just like you used to be and they noticed you!");
-			else outputText("At first you ask one of them if it needs help but the way it's salivating at you now puts you on your guard.");
-			outputText("\n\nWith a dim-witted moan and a look of yearning and hunger that shakes you to your core with fear, they slowly begins to hop toward you with its glowing purple nails pointing in your direction.");
+			outputText("As you explore the battlefield you hear what sounds like pleading moans. Confused, you head toward the sound and find what appears to be several beautiful naked human men and women with pale blue skin. They slowly turn toward you revealing a strange paper tag stuck to their foreheads.\n\n");
+			if (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] > 3) outputText("You recognize these creatures...You used to be one of them, after all. But they've noticed you now.");
+			else outputText("At first you ask one of them if it needs help, but the way it's salivating...You look into their eyes, and know they're not going to listen. You ready your [weapon]");
+			outputText("\n\nWith a dim-witted moan, their eyes shining with a disturbing hunger, they slowly begin to hop toward you. They hold their hands out as if to embrace you, glowing purple nails shimmering with an odd, sinister light.");
 			startCombat(new Zombies());
 			doNext(playerMenu);
 		}
 		
 		public function defeatZombies():void {
 			clearOutput();
-			outputText("The undead falls to the ground, clearly in need of rest after taking so much punishment. You know better than to try and fuck something that might drain you dry and leave with whatever spoil this thing dropped.");
-			inventory.takeItem(consumables.L_DRAFT, cleanupAfterCombat);
+			outputText("The last of the undead creatures fall, unable to stand. Looking back, you see a variety of bodies...That still move faintly. You haven't killed them, they're just down for now. You decide to grab what loot you can and get out before they get back up");
+			inventory.takeItem(consumables.ECTOPLS, cleanupAfterCombat);
 		}
 		
 		public function loseToZombies():void {
