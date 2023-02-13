@@ -36,7 +36,9 @@ import classes.Scenes.Areas.Battlefield.*;
 			player.soulforce = 0;
 			cleanupAfterCombat();
 		}
-		
+			public function canEncounterZombies():Boolean {
+			return !player.isRaceCached(Races.JIANGSHI);
+		}
 		public function encounterZombies():void {
 			clearOutput();
 			outputText("As you explore the battlefield you hear what sounds like pleading moans. Confused, you head toward the sound and find what appears to be several beautiful naked human men and women with pale blue skin. They slowly turn toward you revealing a strange paper tag stuck to their foreheads.\n\n");
