@@ -562,7 +562,6 @@ import classes.Scenes.SceneLib;
 			if (monster.short == "mino incubus") outputText("mino incubus");
 			outputText(" before dragging the corpse away. That's one less foul creature prowling the realms. ");
 			if (player.hasPerk(PerkLib.Purifier)) player.purifyDemonBonus();
-
 			if (player.cor < 25) dynStats("cor", -0.5);
 			menu();
 			addButton(1, "Leave", cleanupAfterCombat);
@@ -574,12 +573,15 @@ import classes.Scenes.SceneLib;
 			inventory.takeItem(useables.DEMSKLL, cleanupAfterCombat);
 		}
 		private function harvestBones():void {
+			harvestDemonBones();
+			cleanupAfterCombat();
+		}
+		public function harvestDemonBones():void {
 			var harv:Number = 1 + rand(5);
 			if (player.hasPerk(PerkLib.GreaterHarvest)) harv += 4 + rand(12);
 			if (harv + player.perkv1(PerkLib.PrestigeJobNecromancer) > SceneLib.camp.campMake.maxDemonBonesStored()) harv = SceneLib.camp.campMake.maxDemonBonesStored() - player.perkv1(PerkLib.PrestigeJobNecromancer);
 			outputText("You take your time to harvest material. You acquired " + harv + " bones!");
 			player.addPerkValue(PerkLib.PrestigeJobNecromancer, 1, harv);
-			cleanupAfterCombat();
 		}
 	}
 }

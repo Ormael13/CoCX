@@ -2878,7 +2878,7 @@ public class PerkLib
 				"You've chosen the 'Temporal Golems Restructuration' perk, adding the option to make faster and more temporary golems at once and have the option to send more of them at once to attack. (+5 to max limit of stored temporary stone golems)");
 		public static const TemporalGolemsRestructurationEx:PerkType = mk("Temporal Golems Restructuration (Ex)", "Temporal Golems Restructuration (Ex)",
 				"Allows you to use option of send all temporary golems to attack in one turn. Adding the option to make 20 temporary golems at once and shorten a bit time to make 1 temporary golem. (+10 to max limit of stored temporary stone golems)",
-				"You've chosen the 'Temporal Golems Restructuration' perk, adding the option to make faster and more temporary golems at once and have the option to send them all at once to attack. (+10 to max limit of stored temporary stone golems)");
+				"You've chosen the 'Temporal Golems Restructuration (Ex)' perk, adding the option to make faster and more temporary golems at once and have the option to send them all at once to attack. (+10 to max limit of stored temporary stone golems)");
 		public static const ThirdRing:PerkType = mk("Third Ring", "Third Ring",
 				"Your advanced understanding of magic pools allows you to equip third ring.",
 				"You've chosen the 'Third Ring' perk, reaching advanced understanding of magic pools to allow you equip third ring.");
@@ -4545,7 +4545,7 @@ public class PerkLib
             UnlockId2ndStage.requirePerk(UnlockId)
                     .requireStr(125)
                     .requireLevel(30);
-            DualWieldMassive.requirePerks(DualWield, GigantGripEx)
+            DualWieldMassive.requirePerks(DualWield, GigantGripSu)
                     .requireStr(150)
                     .requireLevel(30);
             GigantGripSu.requireLevel(30)

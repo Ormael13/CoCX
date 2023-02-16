@@ -2513,6 +2513,7 @@ public class CampMakeWinions extends BaseContent
 			if (player.weapon == weapons.NECROWA) maxSkeletonWarriorsCounter += 1;
 			if (player.shield == shields.NECROSH) maxSkeletonWarriorsCounter += 1;
 			if (player.necklace == necklaces.NECRONE) maxSkeletonWarriorsCounter += 1;
+			if (player.hasStatusEffect(StatusEffects.BonusEffectsNecroSet)) maxSkeletonWarriorsCounter += player.statusEffectv1(StatusEffects.BonusEffectsNecroSet);
 			return maxSkeletonWarriorsCounter;
 		}
 		public function maxSkeletonArchers():Number {
@@ -2523,6 +2524,7 @@ public class CampMakeWinions extends BaseContent
 			if (player.weapon == weapons.NECROWA) maxSkeletonArchersCounter += 1;
 			if (player.shield == shields.NECROSH) maxSkeletonArchersCounter += 1;
 			if (player.necklace == necklaces.NECRONE) maxSkeletonArchersCounter += 1;
+			if (player.hasStatusEffect(StatusEffects.BonusEffectsNecroSet)) maxSkeletonArchersCounter += player.statusEffectv1(StatusEffects.BonusEffectsNecroSet);
 			return maxSkeletonArchersCounter;
 		}
 		public function maxSkeletonMages():Number {
@@ -2533,6 +2535,7 @@ public class CampMakeWinions extends BaseContent
 			if (player.weapon == weapons.NECROWA) maxSkeletonMagesCounter += 1;
 			if (player.shield == shields.NECROSH) maxSkeletonMagesCounter += 1;
 			if (player.necklace == necklaces.NECRONE) maxSkeletonMagesCounter += 1;
+			if (player.hasStatusEffect(StatusEffects.BonusEffectsNecroSet)) maxSkeletonMagesCounter += player.statusEffectv1(StatusEffects.BonusEffectsNecroSet);
 			return maxSkeletonMagesCounter;
 		}
 		

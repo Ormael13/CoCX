@@ -276,6 +276,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const BlowjobOn:StatusEffectType                      = mk("BlowjobOn");
 		public static const BoatDiscovery:StatusEffectType                  = mk("Boat Discovery");
 		public static const BonusACapacity:StatusEffectType                 = mk("Bonus aCapacity");
+		public static const BonusEffectsNecroSet:StatusEffectType           = mk("Bonus Effects: Necro Set");
 		public static const BonusVCapacity:StatusEffectType                 = mk("Bonus vCapacity");
 		public static const BottledMilk:StatusEffectType                    = mk("Bottled Milk");
 		public static const BreastsMilked:StatusEffectType                  = mk("Breasts Milked");

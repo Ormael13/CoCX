@@ -2072,11 +2072,11 @@ public class SaveUpdater extends NPCAwareContent {
 					else player.createKeyItem("Radiant shard", 1,0,0,0);
 				}
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.052;
-			}/*
-			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.053) {
-				
-				flags[kFLAGS.MOD_SAVE_VERSION] = 36.053;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.053) {
+				SceneLib.setItemsChecks.equipNecroItemsSet();
+				flags[kFLAGS.MOD_SAVE_VERSION] = 36.053;
+			}/*
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 36.054) {
 				
 				flags[kFLAGS.MOD_SAVE_VERSION] = 36.054;

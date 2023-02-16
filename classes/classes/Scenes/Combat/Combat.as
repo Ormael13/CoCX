@@ -5589,8 +5589,8 @@ public class Combat extends BaseContent {
     private function calculateCritDamageFirearms():Number{
         var critDamage:Number = 1.75;
         if (player.hasPerk(PerkLib.SilverForMonsters) && monster.hasPerk(PerkLib.EnemyTrueDemon)) critDamage += 0.5;
-		if (player.hasPerk(PerkLib.SkilledGunslingerEx) && calculateCrit() > 1) {
-			if (calculateCrit() > 2) critDamage *= 3;
+		if (player.hasPerk(PerkLib.SkilledGunslingerEx) && calculateCrit() > 100) {
+			if (calculateCrit() > 200) critDamage *= 3;
 			else critDamage *= 2;
 		}
         return critDamage;
@@ -15281,6 +15281,7 @@ public function sendSkeletonToFight():void {
         if (player.hasPerk(PerkLib.WispColonel)) dmgamp += 0.5;
     }
     damage *= dmgamp;
+	if (player.hasStatusEffect(StatusEffects.BonusEffectsNecroSet)) damage *= (1 + (0.1 * player.statusEffectv2(StatusEffects.BonusEffectsNecroSet)));
     //Determine if critical hit!
     var critChance:int = 5;
     critChance += combatPhysicalCritical();
@@ -15288,40 +15289,16 @@ public function sendSkeletonToFight():void {
     if (rand(100) < critChance)
         damage *= 1.75;
     damage = Math.round(damage);
-    doMinionPhysDamage(damage, true, true);
-    if (player.perkv2(PerkLib.PrestigeJobNecromancer) > 1) doMinionPhysDamage(damage, true, true);
-    if (player.perkv2(PerkLib.PrestigeJobNecromancer) > 2) doMinionPhysDamage(damage, true, true);
-    if (player.perkv2(PerkLib.PrestigeJobNecromancer) > 3) doMinionPhysDamage(damage, true, true);
-    if (player.perkv2(PerkLib.PrestigeJobNecromancer) > 4) doMinionPhysDamage(damage, true, true);
-    if (player.perkv2(PerkLib.PrestigeJobNecromancer) > 5) doMinionPhysDamage(damage, true, true);
-    if (player.perkv2(PerkLib.PrestigeJobNecromancer) > 6) doMinionPhysDamage(damage, true, true);
-    if (player.perkv2(PerkLib.PrestigeJobNecromancer) > 7) doMinionPhysDamage(damage, true, true);
-    if (player.perkv2(PerkLib.PrestigeJobNecromancer) > 8) doMinionPhysDamage(damage, true, true);
-    if (player.perkv2(PerkLib.PrestigeJobNecromancer) > 9) doMinionPhysDamage(damage, true, true);
+	var sSWTF:Number = player.perkv2(PerkLib.PrestigeJobNecromancer);
+	while (sSWTF-->0) doMinionPhysDamage(damage, true, true);
     if (player.hasPerk(PerkLib.GreaterHarvest) && player.perkv1(PerkLib.GreaterHarvest) > 0) {
         outputText("Your archer"+(player.perkv1(PerkLib.GreaterHarvest) > 1 ? "s":"")+" fellow suit unleashing a volley of arrows. ");
-        doMinionPhysDamage(damage, true, true);
-        if (player.perkv1(PerkLib.GreaterHarvest) > 1) doMinionPhysDamage(damage, true, true);
-        if (player.perkv1(PerkLib.GreaterHarvest) > 2) doMinionPhysDamage(damage, true, true);
-        if (player.perkv1(PerkLib.GreaterHarvest) > 3) doMinionPhysDamage(damage, true, true);
-        if (player.perkv1(PerkLib.GreaterHarvest) > 4) doMinionPhysDamage(damage, true, true);
-        if (player.perkv1(PerkLib.GreaterHarvest) > 5) doMinionPhysDamage(damage, true, true);
-        if (player.perkv1(PerkLib.GreaterHarvest) > 6) doMinionPhysDamage(damage, true, true);
-        if (player.perkv1(PerkLib.GreaterHarvest) > 7) doMinionPhysDamage(damage, true, true);
-        if (player.perkv1(PerkLib.GreaterHarvest) > 8) doMinionPhysDamage(damage, true, true);
-        if (player.perkv1(PerkLib.GreaterHarvest) > 9) doMinionPhysDamage(damage, true, true);
+        var sSATF:Number = player.perkv1(PerkLib.GreaterHarvest);
+		while (sSATF-->0) doMinionPhysDamage(damage, true, true);
         if (player.perkv2(PerkLib.GreaterHarvest) > 0) {
             outputText("Finally the skeletal mage"+(player.perkv2(PerkLib.GreaterHarvest) > 1 ? "s":"")+" unleash a barrage of magic missles. ");
-            doMagicDamage(damage, true, true);
-            if (player.perkv2(PerkLib.GreaterHarvest) > 1) doMinionPhysDamage(damage, true, true);
-            if (player.perkv2(PerkLib.GreaterHarvest) > 2) doMinionPhysDamage(damage, true, true);
-            if (player.perkv2(PerkLib.GreaterHarvest) > 3) doMinionPhysDamage(damage, true, true);
-            if (player.perkv2(PerkLib.GreaterHarvest) > 4) doMinionPhysDamage(damage, true, true);
-            if (player.perkv2(PerkLib.GreaterHarvest) > 5) doMinionPhysDamage(damage, true, true);
-            if (player.perkv2(PerkLib.GreaterHarvest) > 6) doMinionPhysDamage(damage, true, true);
-            if (player.perkv2(PerkLib.GreaterHarvest) > 7) doMinionPhysDamage(damage, true, true);
-            if (player.perkv2(PerkLib.GreaterHarvest) > 8) doMinionPhysDamage(damage, true, true);
-            if (player.perkv2(PerkLib.GreaterHarvest) > 9) doMinionPhysDamage(damage, true, true);
+            var sSMTF:Number = player.perkv2(PerkLib.GreaterHarvest);
+			while (sSMTF-->0) doMinionPhysDamage(damage, true, true);
         }
     }
     outputText("\n\n");
@@ -15350,6 +15327,7 @@ public function skeletonSmash():void {
         if (player.hasPerk(PerkLib.WispColonel)) dmgamp += 0.5;
     }
     damage *= dmgamp;
+	if (player.hasStatusEffect(StatusEffects.BonusEffectsNecroSet)) damage *= (1 + (0.1 * player.statusEffectv2(StatusEffects.BonusEffectsNecroSet)));
     if (player.perkv2(PerkLib.PrestigeJobNecromancer) > 0) damage *= player.perkv2(PerkLib.PrestigeJobNecromancer);
     //Determine if critical hit!
     var critChance:int = 5;

@@ -177,11 +177,11 @@ public class Changelog extends BaseContent
 			outputText("-Added sand worm sprite added to the game in full. (Liadri)\n");
 			outputText("-Air elementals dmg dealt changed to wind type.\n");
 			outputText("-Druid fusion specials/range attacks could use now cumulative elemental damage perks effects (due to epic elementals choice it's only for fire fusion only).\n");
-			outputText("-New tier 5 strength lvl-up perk: Dual Wield (Massive). Req. Gigant's Grip (Ex) and Dual Wield perks, 150+ str. Effect: Allows you to wield two massive sized melee weapons more effectively. (damage and accuracy penalties decreased by 20% and 10%)\n");
+			outputText("-New tier 5 strength lvl-up perk: Dual Wield (Massive). Req. Gigant's Grip (Su) and Dual Wield perks, 150+ str. Effect: Allows you to wield two massive sized melee weapons more effectively. (damage and accuracy penalties decreased by 20% and 10%)\n");
 			outputText("-New tier 5 strength lvl-up perk: Gigant's Grip (Su). Req. Gigant's Grip (Ex) perk, having 4 arms, 150+ str. Effect: Gain an ability to wield two massive weapons as long you have four arms. (+20% melee physical attacks multiplier) (+50% to str/tou/spe multi)\n");
 			outputText("-Asterius Rage max atk value increased from 110 to 176. Their classification is now Dual Massive instead of Dual Large weapons.\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Having equipped more than one of three Necro items (wand/shield/necklace) would give PC set items bonuses: 2/3 items - control 2/7 more skeletons of each type, 10/40% higher dmg of them and for 3 set items additionally lower demon bopnes cost of necro spells by 20% of base cost.\n");
+			outputText("-Demon Soldier enemies could be now harvested to get demon bones for necromancers.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -196,6 +196,18 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");// (Liadri) (aimozg) (Svalkash) (EragonX)
 			outputText("-\n");// (Jtecx) (Furrin Gok) (khovel) (Chibizs)
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			//remove this line when other two lines below get added ingame
@@ -274,7 +286,9 @@ public class Changelog extends BaseContent
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -306,6 +320,14 @@ public class Changelog extends BaseContent
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
